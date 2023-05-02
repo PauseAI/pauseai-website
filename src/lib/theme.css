@@ -1,0 +1,35 @@
+:root {
+	--t-color-main: hsl(32, 100%, 54%); /* Default main color */
+	--t-color-main-dark: hsl(137, 17%, 24%);
+	--t-color-main-text: white;
+	--t-text-heading: var(--gray-7);
+	--t-bg-body: var(--gray-1);
+	--t-bg: white;
+	--t-text: black;
+	--t-bg-light: var(--gray-2);
+	--t-radius: var(--radius-2);
+	--t-font-family: 'Slabo 27px', serif;
+	--t-font-family-heading: 'Saira Condensed', sans-serif;
+	--t-containing-width-large: 1200px;
+	--t-header-height: 3rem;
+}
+
+body {
+	background-color: var(--t-bg-body);
+	color: var(--t-text);
+	font-family: var(--t-font-family);
+	color-scheme: light;
+}
+
+a {
+	color: currentColor;
+	text-decoration: none;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	font-family: var(--t-font-family-heading);
+}
