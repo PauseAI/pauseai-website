@@ -1,17 +1,18 @@
-import { marked } from 'marked';
-import type { PageServerLoad } from './$types';
+import { posts } from '$lib/data/posts';
 import { error } from '@sveltejs/kit';
 
-export const load: PageServerLoad = async ({ params }) => {
-	const slug = params['slug'];
-	// const post = await import(`$lib/posts/${slug}.md`);
-	const post = await import(`$lib/posts/kindness.md`);
-	console.log('post', post);
+export async function load({ params }) {
+	const { slug } = params;
 
-	if (!post) throw error(404, 'Not found');
+	// get post with metadata
+	const post = posts.find((post) => slug === post.slug);
+	console.log('posts!', posts);
+
+	if (!post) {
+		throw error(404, 'Post not found');
+	}
 
 	return {
-		slug,
-		post: marked.parse(post)
+		post
 	};
-};
+}

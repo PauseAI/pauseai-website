@@ -1,10 +1,7 @@
-<!--
-    Title: Random Acts of Kindness
-    Author: ChatGPT
-    Published: 2023-01-01 19:43
-    Categories: kindness,random
-    Thumbnail: https://placekitten.com/720/500
--->
+---
+title: Lorem Ipsum
+date: 2022-01-02
+---
 
 It's no secret that the world can be a tough place at times. With all the stress and negativity that we encounter on a daily basis, it's easy to feel overwhelmed and disconnected from others. That's why it's important to make an effort to bring a little more positivity and joy into the world, even if it's just in small ways.
 

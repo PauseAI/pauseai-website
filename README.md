@@ -9,3 +9,9 @@ Currently under early development.
 pnpm i
 pnpm dev
 ```
+
+## Deploying
+
+```
+netlify deploy --build
+```
