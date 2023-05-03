@@ -1,31 +1,17 @@
-# SvelteKit Markdown Blog
+# PauseAI.info website
 
-Learn how to build a blazingly fast and extendable SvelteKit Markdown blog for poets.
+SvelteKit website for [PauseAI.info](https://pauseai.info/).
+Currently under early development.
 
-## Post
+## Running locally
 
-✍️ https://joyofcode.xyz/sveltekit-markdown-blog
-
-## Remote Development
-
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/joysofcode/sveltekit-markdown-blog)
-
-## Local Development
-
-### 🧑‍🤝‍🧑 Clone the project
-
-```sh
-https://github.com/joysofcode/sveltekit-markdown-blog.git
 ```
-
-### 📦️ Install dependencies
-
-```sh
 pnpm i
+pnpm dev
 ```
 
-### 💿️ Run the development server
+## Deploying
 
-```sh
-pnpm run dev
+```
+netlify deploy --build
 ```
