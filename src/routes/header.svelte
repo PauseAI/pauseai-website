@@ -10,6 +10,7 @@
 	<div class="nav-links">
 		<a href="/xrisk">Extinction risk</a>
 		<a href="/proposal">Proposal</a>
+		<a href="/learn">Learn</a>
 		<a href="/faq">FAQ</a>
 		<!-- <a href="/about">About</a> -->
 		<a class="c2a" href="/action">Get in action</a>

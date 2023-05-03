@@ -11,7 +11,7 @@
 	</Block>
 	<Block linkText="Get in action" href="/action">
 		<span slot="title">WE NEED TO ACT <Mark>RIGHT NOW</Mark></span>
-		In 2020, experts thought we had more than 35 years until AGI. It took us less than three. Superintelligent
+		In 2020, experts thought we had more than 35 years until AGI. We're almost there. Superintelligent
 		systems might be one innovation away, and could happen in months.</Block
 	>
 	<Block linkText="Read the proposal" href="/proposal">

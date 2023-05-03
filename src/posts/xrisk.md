@@ -12,7 +12,7 @@ The [letter for pausing AI development](https://futureoflife.org/open-letter/pau
 
 - **Stuart Russel**, writer of the #1 textbook on Artificial Intelligence
 - **Geoffrey Hinton**, the "Godfather of AI" and inventor of neural network, [left Google](https://fortune.com/2023/05/01/godfather-ai-geoffrey-hinton-quit-google-regrets-lifes-work-bad-actors/) to warn people of AI.
-- **Elon Musk**, co-founder of OpenAI, SpaceX and **Tesla**
+- **Elon Musk**, co-founder of OpenAI, SpaceX and Tesla
 - **Stephen Hawking**, theoretical physicist
 - **Eliezer Yudkowski**, founder of MIRI and conceptual father of the AI safety field
 
