@@ -3,12 +3,21 @@ title: The existential risk of superintelligent AI
 description: Why we all might die
 published: true
 ---
+
+## AI is getting smarter
+
+The field of AI has been making huge progress in the last years.
+We went from awkward next-word prediction mistakes in our smartphone keyboards to [GPT-4 beating 90% of lawyers at the bar exam](https://www.forbes.com/sites/johnkoetsier/2023/03/14/gpt-4-beats-90-of-lawyers-trying-to-pass-the-bar/?sh=5747c29f3027).
+Powerful articifial intelligence brings amazing opportunities, but also huge risks.
+
 ## Experts are sounding the alarm
 
 Over half of AI researchers think there’s a [larger than 10% risk](https://aiimpacts.org/2022-expert-survey-on-progress-in-ai/) that once we build a superintelligent AI, it will **destroy all life on earth**.
 When you ask AI safety researchers, this number [grows to 30%](https://forum.effectivealtruism.org/posts/8CM9vZ2nnQsWJNsHx/existential-risk-from-ai-survey-results).
 
 The [letter for pausing AI development](https://futureoflife.org/open-letter/pause-giant-ai-experiments/), launched in april 2023, has been signed over 27.000 times, mostly by AI researchers and tech leaders.
+
+## We've been warned - and it's time to listen
 
 - **Stuart Russel**, writer of the #1 textbook on Artificial Intelligence
 - **Geoffrey Hinton**, the "Godfather of AI" and inventor of neural network, [left Google](https://fortune.com/2023/05/01/godfather-ai-geoffrey-hinton-quit-google-regrets-lifes-work-bad-actors/) to warn people of AI.

@@ -12,6 +12,7 @@ Here are some resources to get you started.
 - [Robert Miles' YouTube videos](https://www.youtube.com/watch?v=nKJlF-olKmglist=PLqL14ZxTTA4fyhYg6xD6Fz05WcuxLGseL) are a great place to start understanding most of the fundamentals of AI alignment. If you want to really learn how AI aligment works, start here!
 - [Max Tegmark with Lex interview](https://youtu.be/VcVfceTsD0A?t=1547) (2 hrs). Interview that dives into the details of our current dangerous situation. _"It's like 'Don't look up', but we are building the asteroid ourselves."_
 - [The AI Dilemma](https://www.youtube.com/watch?v=xoVJKj8lcNQ&t=1903s) (1hr). Presentation about the dangers of AI and the race which AI companies are stuck in.
+- [How not to destroy the world with AI](https://www.youtube.com/watch?v=ISkAkiAkK7A) (1hr). Presentation by Stuart Russell.
 
 ## Websites
 
@@ -21,6 +22,11 @@ Here are some resources to get you started.
 - [AI X-Risk Research podcast](https://axrp.net/). In-depth interviews with experts in the field of AI alignment.
 - [Future of Life podcast](https://soundcloud.com/futureoflife)
 
+
+## Articles
+
+- [The 'Don't Look Up' Thinking That Could Doom Us With AI](https://time.com/6273743/thinking-that-could-doom-us-with-ai/)
+- [Pausing AI Developments Isn't Enough. We Need to Shut it All Down](https://time.com/6266923/ai-eliezer-yudkowsky-open-letter-not-enough/)
 ## Courses
 
 - [AGI safety fundamentals](https://www.agisafetyfundamentals.com/) (30hrs)

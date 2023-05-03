@@ -3,23 +3,30 @@ title: Get in action
 description: Ways to help out with pausing AGI development.
 ---
 
+The group of people who are aware of AI risks is still small.
+You are now one of them.
+**Your actions matter more than ever.**
+
 - **[Join our Discord](https://discord.gg/2XXWXvErfA)** or [other](https://coda.io/@alignmentdev/alignmentecosystemdevelopment) AI safety communities.
-- **Learn** more about the [basics](https://www.agisafetyfundamentals.com/) of AGI x-risk and safety (the linked AGISF course is ~20-40 hours reading).
-- **Talk** to people about this - friends, family, neighbours, coworkers.
-- **Answer people's questions** (there are a lot).
-- Post about this on **social media** (Twitter, TikTok, YouTube, Instagram, Facebook etc);
-- Make and share [**memes**](https://twitter.com/AISafetyMemes) ([example](https://twitter.com/gcolbourn/status/1651870389985849346));
-- Write and share **articles** ([example](https://time.com/6273743/thinking-that-could-doom-us-with-ai/)), or ask your journalists to write on the topic; 
-- Fill out [this form](https://docs.google.com/forms/d/1Qrsxu5gEEAMA5imkvjk1Be7lBMgBS-zG_UNDwZfZcq0/edit) if you are interested in getting involved.
-- Ask the management at your current organisation to take an institutional position on this.
+- **[Learn](/learn)** more about the [basics](https://www.agisafetyfundamentals.com/) of AGI x-risk and safety (the linked AGISF course is ~20-40 hours reading).
+- **Talk** to people about this - friends, family, etc. Answer their questions, get them to act.
+- **Share** about this on social media
+- **Create** [articles](/learn#articles), [videos](/learn#videos) or [memes](https://twitter.com/AISafetyMemes)
+- Organise/join **demonstrations**.
+- **Lobby** politicians/industry. Talk to any relevant contacts you might have, the higher up, the better
+
+
+## And
+
 - Improve this website ([source code](https://github.com/joepio/pauseai))
+- Convince journalists to write about AI safety
+- Donate to the [Campaign for AI Safety](https://www.campaignforaisafety.org/donate/)
+- Ask the management at your current organisation to take an institutional position on this.
 - Organise and share petitions ([example](https://www.change.org/p/artificial-intelligence-time-is-running-out-for-responsible-ai-development-91f0a02c-130a-46e1-9e55-70d6b274f4df)); fund advertising for them;
 - [Write to your political representatives](https://www.campaignforaisafety.org/politician/);
-- Lobby politicians/industry. Talk to any relevant contacts you might have, the higher up, the better;
 - Ask politicians to invite (or subpoena) AI lab leaders to parliamentary/congressional hearings to give their predictions and timelines of AI disasters;
 - Make submissions to government requests for comment on AI policy ([example](https://ntia.gov/issues/artificial-intelligence/request-for-comments));
 - Help draft policy ([some](https://futureoflife.org/wp-content/uploads/2023/04/FLI_Policymaking_In_The_Pause.pdf)  [frameworks](https://www.openphilanthropy.org/research/12-tentative-ideas-for-us-ai-policy/)).
-- Organise/join **demonstrations**.
 - Consider [civil disobedience](https://forum.effectivealtruism.org/posts/JMb37qrCYCeKqFxtp/?commentId=xBxZEB3tx698fnsuB) / direct action.
 - Consider ballot initiatives or referendums if they are achievable in your state or country
 - **Donate** to advocacy orgs (there is already [Campaign for AI Safety](https://www.campaignforaisafety.org/), and more are spinning up).

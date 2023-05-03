@@ -15,8 +15,8 @@
 		systems might be one innovation away, and could happen in months.</Block
 	>
 	<Block linkText="Read the proposal" href="/proposal">
-		<span slot="title">Our proposal</span>
+		<span slot="title">We need a <Mark>pause</Mark></span>
 		Stop the development of AI systems more powerful than GPT-4. This needs to happen on an international
-		level.
+		level, and it needs to happen soon.
 	</Block>
 </section>
