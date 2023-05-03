@@ -16,7 +16,7 @@
 	<hgroup>
 		<h1>{title}</h1>
 		{#if data.meta.date}
-			<p>Published at {formatDate(data.meta.date)}</p>
+			<!-- <p>Published at {formatDate(data.meta.date)}</p> -->
 		{/if}
 	</hgroup>
 

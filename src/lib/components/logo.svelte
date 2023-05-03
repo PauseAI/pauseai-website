@@ -33,7 +33,7 @@
 		width: 180px;
 		margin-left: -1.5rem;
 	}
-	@media (max-width: var(--page-width)) {
+	@media (max-width: 50rem) {
 		.logo {
 			width: 140px;
 			margin-left: 1rem;
