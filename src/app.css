@@ -4,11 +4,11 @@ body {
 
 html {
 	/* font */
-	--font-sans: 'Slabo 27px', serif;
+	--font-sans: 'Roboto Slab', serif;
 	--font-heading: 'Saira Condensed', sans-serif;
 
 	/* Major theme stuff */
-	--page-width: 1000px;
+	--page-width: 50rem;
 
 	/* Colors */
 	--t-color-main: hsl(32, 100%, 54%); /* Default main color */
@@ -88,20 +88,20 @@ h5 {
 h1 {
 	font-size: 3rem;
 }
-
+/*
 .prose {
 	line-height: 1.5rem;
 	max-width: 40rem;
 	margin: auto;
-}
+} */
 
 .prose :is(h2, h3, h4, h5, h6) {
-	margin-top: var(--size-8);
-	margin-bottom: var(--size-3);
+	margin-top: var(1rem);
+	margin-bottom: var(1rem);
 }
 
 .prose p:not(:is(h2, h3, h4, h5, h6) + p) {
-	margin-top: var(--size-7);
+	margin-top: var(1rem);
 }
 
 .prose :is(ul, ol) {
@@ -111,13 +111,13 @@ h1 {
 }
 
 .prose :is(ul, ol) li {
-	margin-block: var(--size-2);
-	padding-inline-start: var(--size-2);
+	margin-block: var(2rem);
+	padding-inline-start: var(2rem);
 }
 
 .prose pre {
 	max-inline-size: 100%;
-	padding: var(--size-3);
+	padding: var(1rem);
 	border-radius: 8px;
 	tab-size: 2;
 }

@@ -8,9 +8,8 @@
 	</a>
 
 	<div class="nav-links">
-		<a href="/proposal">Proposal</a>
 		<a href="/xrisk">X-risk</a>
-		<a href="/urgency">Urgency</a>
+		<a href="/proposal">Proposal</a>
 		<a href="/faq">FAQ</a>
 		<a href="/about">About</a>
 		<a class="c2a" href="/action">Get in action</a>
@@ -24,9 +23,6 @@
 		align-items: center;
 		padding: 2rem 0;
 		margin-left: -1rem;
-	}
-
-	nav svg {
 	}
 
 	.nav-links {

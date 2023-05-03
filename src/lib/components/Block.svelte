@@ -36,7 +36,7 @@
 		grid-area: text;
 	}
 
-	.text :global(a) {
+	.text :global(a:hover) {
 		color: var(--brand);
 		text-decoration: underline;
 	}

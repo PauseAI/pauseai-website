@@ -15,7 +15,7 @@
 	<link rel="preconnect" href="https://fonts.googleapis.com" />
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="true" />
 	<link
-		href="https://fonts.googleapis.com/css2?family=Saira+Condensed:wght@700&family=Slabo+27px&display=swap"
+		href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@300;700&family=Saira+Condensed:wght@700&display=swap"
 		rel="stylesheet"
 	/>
 </svelte:head>
@@ -29,7 +29,7 @@
 		</PageTransition>
 	</main>
 
-	<Footer />
+	<!-- <Footer /> -->
 </div>
 
 <style>
@@ -47,7 +47,7 @@
 		display: grid;
 		grid-template-rows: auto 1fr auto;
 		margin-inline: auto;
-		padding: var(--size-7);
+		padding: 1rem;
 	}
 
 	main {
