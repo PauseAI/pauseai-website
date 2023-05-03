@@ -66,6 +66,12 @@ html {
 	font-size: 1.2rem;
 }
 
+@media (max-width: 768px) {
+	html {
+		font-size: 1rem;
+	}
+}
+
 img {
 	border-radius: var(--radius-3);
 }
@@ -91,6 +97,12 @@ h5 {
 
 h1 {
 	font-size: 3rem;
+}
+
+@media (max-width: 768px) {
+	h1 {
+		font-size: 2rem;
+	}
 }
 /*
 .prose {
