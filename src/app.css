@@ -4,11 +4,11 @@ body {
 
 html {
 	/* font */
-	--font-sans: 'Roboto Slab', serif;
-	--font-heading: 'Saira Condensed', sans-serif;
+	--font-body: 'Roboto Slab', serif;
+	--font-heading: 'Saira Condensed', Impact, sans-serif;
 
 	/* Major theme stuff */
-	--page-width: 50rem;
+	--page-width: 40rem;
 
 	/* Colors */
 	--t-color-main: hsl(32, 100%, 54%); /* Default main color */
@@ -23,7 +23,9 @@ html {
 :root {
 	color-scheme: dark;
 
-	--brand: var(--brand-dark);
+	--brand: var(--brand-light);
+	--brand-subtle: hsl(32, 100%, 30%);
+	--text: black;
 }
 
 @media (prefers-color-scheme: light) {
@@ -38,6 +40,7 @@ html {
 	color-scheme: dark;
 
 	--brand: var(--brand-dark);
+	--brand-subtle: hsl(32, 100%, 75%);
 	--text: white;
 }
 
@@ -45,13 +48,14 @@ html {
 	color-scheme: light;
 
 	--brand: var(--brand-light);
+	--brand-subtle: hsl(32, 100%, 30%);
 	--text: black;
 }
 
 html,
 body {
 	height: 100%;
-	font-family: var(--font-sans);
+	font-family: var(--font-body);
 }
 
 html {
@@ -113,6 +117,15 @@ h1 {
 .prose :is(ul, ol) li {
 	margin-block: var(2rem);
 	padding-inline-start: var(2rem);
+}
+
+.prose a {
+	color: var(--brand-subtle);
+	text-decoration: underline;
+}
+
+.prose a:hover {
+	color: var(--brand);
 }
 
 .prose pre {

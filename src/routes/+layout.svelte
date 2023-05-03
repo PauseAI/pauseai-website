@@ -29,7 +29,7 @@
 		</PageTransition>
 	</main>
 
-	<!-- <Footer /> -->
+	<Footer />
 </div>
 
 <style>
@@ -51,7 +51,8 @@
 	}
 
 	main {
-		padding-block: var(--size-9);
+		padding-block: 1rem;
+		margin-bottom: 5rem;
 	}
 
 	@media (min-width: --page-width) {

@@ -5,7 +5,7 @@ published: true
 ---
 ## Experts are sounding the alarm
 
-Over half of AI researchers think there’s a [larger than 10% risk](https://aiimpacts.org/2022-expert-survey-on-progress-in-ai/) that a when we build a superintelligent AI, it will **destroy all life on earth**.
+Over half of AI researchers think there’s a [larger than 10% risk](https://aiimpacts.org/2022-expert-survey-on-progress-in-ai/) that once we build a superintelligent AI, it will **destroy all life on earth**.
 When you ask AI safety researchers, this number [grows to 30%](https://forum.effectivealtruism.org/posts/8CM9vZ2nnQsWJNsHx/existential-risk-from-ai-survey-results).
 
 The [letter for pausing AI development](https://futureoflife.org/open-letter/pause-giant-ai-experiments/), launched in april 2023, has been signed over 27.000 times, mostly by AI researchers and tech leaders.
@@ -15,14 +15,6 @@ The [letter for pausing AI development](https://futureoflife.org/open-letter/pau
 - **Elon Musk**, co-founder of OpenAI, SpaceX and **Tesla**
 - **Stephen Hawking**, theoretical physicist
 - **Eliezer Yudkowski**, founder of MIRI and conceptual father of the AI safety field
-
-## We may not have much time left
-
-In 2020, [the average AI researcher thought](https://www.metaculus.com/questions/3479/date-weakly-general-ai-is-publicly-known/) that it would take until 2057 before an AI could pass SAT exams. It took us less than 3 years.
-
-It's hard to predict how long it will take to build a superintelligent AI, but we know that there are more people than ever working on it.
-The pace of progress is accelerating, and we are getting close to the point where AI might be smarter than an AI researcher.
-At that point, there is a real risk of an intelligence explosion, where the AI can improve itself faster and faster, until it becomes superintelligent.
 
 ## Why superintelligence is dangerous
 
@@ -52,5 +44,14 @@ We need to pause AI development, so AI safety researchers can solve this problem
 
 A superintelligent AI would be much better at achieving its goals than humans are.
 It would be able to outsmart us, and get what it wants.
+
+
+## We may not have much time left
+
+In 2020, [the average AI researcher thought](https://www.metaculus.com/questions/3479/date-weakly-general-ai-is-publicly-known/) that it would take until 2057 before an AI could pass SAT exams. It took us less than 3 years.
+
+It's hard to predict how long it will take to build a superintelligent AI, but we know that there are more people than ever working on it.
+The pace of progress is accelerating, and we are getting close to the point where AI might be smarter than an AI researcher.
+At that point, there is a real risk of an intelligence explosion, where the AI can improve itself faster and faster, until it becomes superintelligent.
 
 > It's like "Don't look up", but we are building the comet.

@@ -16,11 +16,10 @@
 
 <style>
 	.block {
-		margin-bottom: 2rem;
+		margin-bottom: 5rem;
 	}
 
 	.c2a {
-		margin-top: 1rem;
 		color: var(--brand);
 		text-transform: uppercase;
 		text-decoration: none;
