@@ -9,14 +9,14 @@
 		A recent survey of AI researchers shows that over half of them think there’s at least a 1 in 10 chance
 		that AI could end all life on earth. And that number is growing.
 	</Block>
-	<Block linkText="Get in action" href="/action">
-		<span slot="title">WE NEED TO ACT <Mark>RIGHT NOW</Mark></span>
-		In 2020, experts thought we had more than 35 years until AGI. We're almost there. Superintelligent
-		systems might be one innovation away, and could happen in months.</Block
-	>
 	<Block linkText="Read the proposal" href="/proposal">
 		<span slot="title">We need a <Mark>pause</Mark></span>
 		Stop the development of AI systems more powerful than GPT-4. This needs to happen on an international
 		level, and it needs to happen soon.
 	</Block>
+	<Block linkText="Get in action" href="/action">
+		<span slot="title">WE NEED TO ACT <Mark>RIGHT NOW</Mark></span>
+		In 2020, experts thought we had more than 35 years until AGI. We're almost there. Superintelligent
+		systems might be one innovation away, and could happen in months.</Block
+	>
 </section>

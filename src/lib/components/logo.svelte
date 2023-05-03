@@ -30,12 +30,13 @@
 		fill: var(--text);
 	}
 	.logo {
-		width: 180px;
-		margin-left: -1.5rem;
+		width: 11rem;
+		margin-left: -2.7rem;
 	}
-	@media (max-width: 65rem) {
+	@media (max-width: 850px) {
 		.logo {
-			width: 140px;
+			margin-bottom: 1rem;
+			width: 10rem;
 			margin-left: 1rem;
 		}
 	}

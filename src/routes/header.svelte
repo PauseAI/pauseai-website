@@ -22,6 +22,7 @@
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
+		flex-direction: column;
 		padding: 2rem 0;
 		margin-left: -1rem;
 		flex-wrap: wrap;
@@ -38,6 +39,7 @@
 		font-family: var(--font-heading);
 		color: var(--text);
 		text-decoration: none;
+		font-size: 1.1rem;
 	}
 
 	.nav-links a.c2a {
@@ -50,5 +52,16 @@
 
 	.nav-links a:hover {
 		text-decoration: underline;
+	}
+
+	@media (min-width: 850px) {
+		nav {
+			flex-direction: row;
+			margin-left: 1rem;
+		}
+
+		.nav-links {
+			margin-left: 2rem;
+		}
 	}
 </style>
