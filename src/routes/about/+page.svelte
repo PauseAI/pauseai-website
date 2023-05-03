@@ -1,2 +1,5 @@
-<h1>About</h1>
-<p>I like long walks on the beach.</p>
+<h1>About PauseAI</h1>
+<p>
+	We are volunteers who are united by a desire to prevent the absolutely worst thing that has ever
+	happened.
+</p>

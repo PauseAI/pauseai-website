@@ -1,9 +1,15 @@
 <script lang="ts">
-	import * as config from '$lib/config'
+	import Toggle from '$lib/components/Toggle.svelte'
 </script>
 
 <footer>
-	<p>{config.title} &copy {new Date().getFullYear()}</p>
+	<p>
+		All contents are CC-BY. Source code is available on <a href="https://github.com/joepio/pauseai"
+			>Github</a
+		>.
+	</p>
+	<a href="/rss.xml" target="_blank">RSS</a>
+	<Toggle />
 </footer>
 
 <style>

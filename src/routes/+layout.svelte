@@ -3,13 +3,22 @@
 	import Header from './header.svelte'
 	import PageTransition from './transition.svelte'
 
-	import 'open-props/style'
-	import 'open-props/normalize'
-	import 'open-props/buttons'
+	// import 'open-props/style'
+	// import 'open-props/normalize'
+	// import 'open-props/buttons'
 	import '../app.css'
 
 	export let data
 </script>
+
+<svelte:head>
+	<link rel="preconnect" href="https://fonts.googleapis.com" />
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="true" />
+	<link
+		href="https://fonts.googleapis.com/css2?family=Saira+Condensed:wght@700&family=Slabo+27px&display=swap"
+		rel="stylesheet"
+	/>
+</svelte:head>
 
 <div class="layout">
 	<Header />
@@ -24,22 +33,30 @@
 </div>
 
 <style>
+	/* @import url('$lib/reset.css');
+	@import url('$lib/theme.css'); */
+
+	/* .wrapper {
+		color: var(--t-text);
+		max-width: 50rem;
+		margin: auto;
+	} */
 	.layout {
 		height: 100%;
-		max-inline-size: 1440px;
+		max-inline-size: var(--page-width);
 		display: grid;
 		grid-template-rows: auto 1fr auto;
 		margin-inline: auto;
-		padding-inline: var(--size-7);
+		padding: var(--size-7);
 	}
 
 	main {
 		padding-block: var(--size-9);
 	}
 
-	@media (min-width: 1440px) {
+	@media (min-width: --page-width) {
 		.layout {
-			padding-inline: 0;
+			/* padding: 0; */
 		}
 	}
 </style>

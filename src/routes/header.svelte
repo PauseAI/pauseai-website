@@ -1,52 +1,55 @@
 <script lang="ts">
-	import Toggle from './toggle.svelte'
-	import * as config from '$lib/config'
+	import Logo from '$lib/components/logo.svelte'
 </script>
 
 <nav>
-	<a href="/" class="title">
-		<b>{config.title}</b>
+	<a href="/">
+		<Logo />
 	</a>
 
-	<ul class="links">
-		<li>
-			<a href="/about">About</a>
-		</li>
-		<li>
-			<a href="/contact">Contact</a>
-		</li>
-		<li>
-			<a href="/rss.xml" target="_blank">RSS</a>
-		</li>
-	</ul>
-
-	<Toggle />
+	<div class="nav-links">
+		<a href="/proposal">Proposal</a>
+		<a href="/xrisk">X-risk</a>
+		<a href="/urgency">Urgency</a>
+		<a href="/faq">FAQ</a>
+		<a href="/about">About</a>
+		<a class="c2a" href="/action">Get in action</a>
+	</div>
 </nav>
 
 <style>
 	nav {
-		padding-block: var(--size-7);
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		padding: 2rem 0;
+		margin-left: -1rem;
 	}
 
-	.links {
-		margin-block: var(--size-7);
+	nav svg {
 	}
 
-	a {
-		color: inherit;
+	.nav-links {
+		display: flex;
+		text-transform: uppercase;
+	}
+
+	.nav-links a {
+		margin-left: 1rem;
+		font-family: var(--font-heading);
+		color: var(--text);
 		text-decoration: none;
 	}
 
-	@media (min-width: 768px) {
-		nav {
-			display: flex;
-			justify-content: space-between;
-		}
+	.nav-links a.c2a {
+		color: var(--brand);
+	}
 
-		.links {
-			display: flex;
-			gap: var(--size-7);
-			margin-block: 0;
-		}
+	.nav-links a:hover {
+		color: var(--t-color-main);
+	}
+
+	.nav-links a:hover {
+		text-decoration: underline;
 	}
 </style>

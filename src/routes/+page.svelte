@@ -1,51 +1,22 @@
 <script lang="ts">
-	import { formatDate } from '$lib/utils'
-	import * as config from '$lib/config'
-
-	export let data
+	import Block from '$lib/components/Block.svelte'
+	import Mark from '$lib/components/Mark.svelte'
 </script>
 
-<svelte:head>
-	<title>{config.title}</title>
-</svelte:head>
-
 <section>
-	<ul class="posts">
-		{#each data.posts as post}
-			<li class="post">
-				<a href={post.slug} class="title">{post.title}</a>
-				<p class="date">{formatDate(post.date)}</p>
-				<p class="description">{post.description}</p>
-			</li>
-		{/each}
-	</ul>
+	<Block linkText="Read why" href="/xrisk">
+		<span slot="title">WE ARE RISKING <Mark>HUMAN EXTINCTION</Mark></span>
+		A recent survey of AI researchers shows that over half of them think there’s at least a 1 in 10 chance
+		that AI could end all life on earth. And that number is growing.
+	</Block>
+	<Block linkText="Get in action" href="/action">
+		<span slot="title">WE NEED TO ACT <Mark>RIGHT NOW</Mark></span>
+		In 2020, experts thought we had more than 35 years until AGI. It took us less than three. Superintelligent
+		systems might be one innovation away, and could happen in months.</Block
+	>
+	<Block linkText="Read the proposal" href="/proposal">
+		<span slot="title">Our proposal</span>
+		Stop the development of AI systems more powerful than GPT-4. This needs to happen on an international
+		level.
+	</Block>
 </section>
-
-<style>
-	.posts {
-		display: grid;
-		gap: var(--size-7);
-	}
-
-	.post {
-		max-inline-size: var(--size-content-3);
-	}
-
-	.post:not(:last-child) {
-		border-bottom: 1px solid var(--border);
-		padding-bottom: var(--size-7);
-	}
-
-	.title {
-		font-size: var(--font-size-fluid-3);
-		text-transform: capitalize;
-	}
-
-	.date {
-		color: var(--text-2);
-	}
-
-	.description {
-		margin-top: var(--size-3);
-	}
-</style>
