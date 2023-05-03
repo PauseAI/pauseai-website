@@ -47,13 +47,11 @@ it could have absolutely disastrous consequences.
 
 Consider, for example, an AI that is given the goal to make as many paperclips as possible.
 
-
 Solving this problem, before we build a superintelligent AI, is essential to our survival.
 We need to pause AI development, so AI safety researchers can solve this problem, b
 
 A superintelligent AI would be much better at achieving its goals than humans are.
 It would be able to outsmart us, and get what it wants.
-
 
 ## We may not have much time left
 
@@ -63,4 +61,6 @@ It's hard to predict how long it will take to build a superintelligent AI, but w
 The pace of progress is accelerating, and we are getting close to the point where AI might be smarter than an AI researcher.
 At that point, there is a real risk of an intelligence explosion, where the AI can improve itself faster and faster, until it becomes superintelligent.
 
-> It's like "Don't look up", but we are building the comet.
+## Even an aligned superintelligence is dangerous
+
+Imagine that we have a superintelligent AI, and it does exaa

@@ -8,21 +8,21 @@ You are now one of them.
 **Your actions matter more than ever.**
 
 - **[Join our Discord](https://discord.gg/2XXWXvErfA)** or [other](https://coda.io/@alignmentdev/alignmentecosystemdevelopment) AI safety communities.
-- **[Learn](/learn)** more about the [basics](https://www.agisafetyfundamentals.com/) of AGI x-risk and safety (the linked AGISF course is ~20-40 hours reading).
+- **[Learn](/learn)** more about AI alignment and the risks we are facing.
+- **Sign petitions**: [pause giant AI experiments](https://futureoflife.org/open-letter/pause-giant-ai-experiments/), [demand responsible AI](https://www.change.org/p/artificial-intelligence-time-is-running-out-for-responsible-ai-development-91f0a02c-130a-46e1-9e55-70d6b274f4df).
 - **Talk** to people about this - friends, family, etc. Answer their questions, get them to act.
-- **Share** about this on social media
+- **Share** about this on social media.
 - **Create** [articles](/learn#articles), [videos](/learn#videos) or [memes](https://twitter.com/AISafetyMemes)
 - Organise/join **demonstrations**.
-- **Lobby** politicians/industry. Talk to any relevant contacts you might have, the higher up, the better
-
+- **Lobby** politicians/industry. Talk to any relevant contacts you might have, the higher up, the better.
 
 ## And
 
-- Improve this website ([source code](https://github.com/joepio/pauseai))
-- Convince journalists to write about AI safety
-- Donate to the [Campaign for AI Safety](https://www.campaignforaisafety.org/donate/)
+- Improve this website ([source code](https://github.com/joepio/pauseai)).
+- Convince journalists to write about AI safety.
+- Donate to the [Campaign for AI Safety](https://www.campaignforaisafety.org/donate/).
 - Ask the management at your current organisation to take an institutional position on this.
-- Organise and share petitions ([example](https://www.change.org/p/artificial-intelligence-time-is-running-out-for-responsible-ai-development-91f0a02c-130a-46e1-9e55-70d6b274f4df)); fund advertising for them;
+- Organise and share petitions ([example](https://www.change.org/p/artificial-intelligence-time-is-running-out-for-responsible-ai-development-91f0a02c-130a-46e1-9e55-70d6b274f4df)) or fund advertising for them.
 - [Write to your political representatives](https://www.campaignforaisafety.org/politician/);
 - Ask politicians to invite (or subpoena) AI lab leaders to parliamentary/congressional hearings to give their predictions and timelines of AI disasters;
 - Make submissions to government requests for comment on AI policy ([example](https://ntia.gov/issues/artificial-intelligence/request-for-comments));

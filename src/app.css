@@ -26,6 +26,7 @@ html {
 	--brand: var(--brand-light);
 	--brand-subtle: hsl(32, 100%, 30%);
 	--text: black;
+	--bg: white;
 }
 
 @media (prefers-color-scheme: light) {
@@ -42,6 +43,7 @@ html {
 	--brand: var(--brand-dark);
 	--brand-subtle: hsl(32, 100%, 75%);
 	--text: white;
+	--bg: black;
 }
 
 [color-scheme='light'] {
@@ -56,6 +58,7 @@ html,
 body {
 	height: 100%;
 	font-family: var(--font-body);
+	background-color: var(--bg);
 }
 
 html {
@@ -87,6 +90,7 @@ h4,
 h5 {
 	font-family: var(--font-heading);
 	font-weight: 700;
+	line-height: 1em;
 }
 
 h1 {
