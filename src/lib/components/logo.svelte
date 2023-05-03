@@ -31,7 +31,7 @@
 	}
 	.logo {
 		width: 11rem;
-		margin-left: -2.7rem;
+		margin-left: -3.4rem;
 	}
 	@media (max-width: 850px) {
 		.logo {
