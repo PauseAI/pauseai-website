@@ -50,7 +50,7 @@ html {
 	color-scheme: light;
 
 	--brand: var(--brand-light);
-	--brand-subtle: hsl(32, 100%, 30%);
+	--brand-subtle: hsl(32, 100%, 35%);
 	--text: black;
 }
 

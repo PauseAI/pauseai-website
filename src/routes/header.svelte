@@ -1,4 +1,5 @@
 <script lang="ts">
+	import NavLink from '$lib/components/Navlink.svelte'
 	import Logo from '$lib/components/logo.svelte'
 </script>
 
@@ -8,12 +9,13 @@
 	</a>
 
 	<div class="nav-links">
-		<a href="/xrisk">Extinction risk</a>
-		<a href="/proposal">Proposal</a>
-		<a href="/learn">Learn</a>
-		<a href="/faq">FAQ</a>
-		<!-- <a href="/about">About</a> -->
-		<a class="c2a" href="/action">Get in action</a>
+		<NavLink href="/about">About</NavLink>
+		<NavLink href="/xrisk">Extinction risk</NavLink>
+		<NavLink href="/proposal">Proposal</NavLink>
+		<NavLink href="/learn">Learn</NavLink>
+		<NavLink href="/faq">FAQ</NavLink>
+		<!-- <NavLink href="/about">About</NavLink> -->
+		<NavLink c2a href="/action">Get in action</NavLink>
 	</div>
 </nav>
 
@@ -32,30 +34,6 @@
 		display: flex;
 		text-transform: uppercase;
 		flex-wrap: wrap;
-	}
-
-	.nav-links a {
-		margin-left: 1rem;
-		font-family: var(--font-heading);
-		color: var(--text);
-		text-decoration: none;
-		font-size: 1.1rem;
-	}
-
-	.nav-links a.c2a {
-		color: var(--brand);
-	}
-
-	.nav-links a:hover {
-		color: var(--brand);
-	}
-
-	.nav-links a:active {
-		color: var(--brand-subtle);
-	}
-
-	.nav-links a:hover {
-		text-decoration: underline;
 	}
 
 	@media (min-width: 850px) {
