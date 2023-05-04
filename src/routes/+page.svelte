@@ -6,7 +6,7 @@
 <section>
 	<Block linkText="Read why" href="/xrisk">
 		<span slot="title">WE ARE RISKING <Mark>HUMAN EXTINCTION</Mark></span>
-		A recent survey of AI researchers shows that over half of them think there’s at least a 1 in 10 chance
+		A recent survey of AI researchers shows that half of them think there’s at least a 1 in 10 chance
 		that AI could end all life on earth. And that number is growing.
 	</Block>
 	<Block linkText="Read the proposal" href="/proposal">

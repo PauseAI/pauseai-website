@@ -3,7 +3,7 @@ title: Learn about AI alignment
 description: Educational resources (videos, articles, books) about AI alignment
 ---
 
-One of the most important things you can do to help with AI alignment and the existential risk that is poses, is to learn about it.
+One of the most important things you can do to help with AI alignment and the existential risk that superintelligence poses, is to learn about it.
 Here are some resources to get you started.
 
 ## Videos
@@ -16,7 +16,7 @@ Here are some resources to get you started.
 
 ## Websites
 
-- [AISafety.net](https://aisafety.info/) is an absolutely amazing database of questions and answers.
+- [AISafety.net](https://aisafety.net/) is an absolutely amazing database of questions and answers.
 
 ## Podcasts
 - [AI X-Risk Research podcast](https://axrp.net/). In-depth interviews with experts in the field of AI alignment.

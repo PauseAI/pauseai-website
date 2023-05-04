@@ -12,22 +12,23 @@ Powerful articifial intelligence brings amazing opportunities, but also huge ris
 
 ## Experts are sounding the alarm
 
-Over half of AI researchers think there’s a [larger than 10% risk](https://aiimpacts.org/2022-expert-survey-on-progress-in-ai/) that once we build a superintelligent AI, it will **destroy all life on earth**.
+[Over half of AI researchers surveyed think there’s a larger than 10% risk](https://aiimpacts.org/2022-expert-survey-on-progress-in-ai/) that once we build a superintelligent AI, it will **destroy all life on earth**.
 When you ask AI safety researchers, this number [grows to 30%](https://forum.effectivealtruism.org/posts/8CM9vZ2nnQsWJNsHx/existential-risk-from-ai-survey-results).
 
-The [letter for pausing AI development](https://futureoflife.org/open-letter/pause-giant-ai-experiments/), launched in april 2023, has been signed over 27.000 times, mostly by AI researchers and tech leaders.
+The [letter for pausing AI development](https://futureoflife.org/open-letter/pause-giant-ai-experiments/), launched in april 2023, has been signed over 27,000 times, mostly by AI researchers and tech leaders.
 
 The list includes people like:
 
-- **Stuart Russel**, writer of the #1 textbook on Artificial Intelligence used in most AI studies
-- **Geoffrey Hinton**, the "Godfather of AI" and inventor of neural network, [left Google](https://fortune.com/2023/05/01/godfather-ai-geoffrey-hinton-quit-google-regrets-lifes-work-bad-actors/) to warn people of AI.
+- **Stuart Russell**, writer of the #1 textbook on Artificial Intelligence used in most AI studies
+- **Geoffrey Hinton**, the "Godfather of AI", [left Google](https://fortune.com/2023/05/01/godfather-ai-geoffrey-hinton-quit-google-regrets-lifes-work-bad-actors/) to warn people of AI.
 - **Yoshua Bengio**, deep learning pioneer and winner of the Turing Award.
 - **Elon Musk**, co-founder of OpenAI, SpaceX and Tesla: ["AI has the potential of civilizational destruction"](https://www.inc.com/ben-sherry/elon-musk-ai-has-the-potential-of-civilizational-destruction.html)
 
-But this is not the first time that experts have warned us about the dangers of AI:
+But this is not the only time that experts have warned us about the dangers of AI:
 
 - **Stephen Hawking**, theoretical physicist & cosmologist: ["The development of full artificial intelligence could spell the end of the human race"](https://nypost.com/2023/05/01/stephen-hawking-warned-ai-could-mean-the-end-of-the-human-race/).
-- **Eliezer Yudkowski**, founder of MIRI and conceptual father of the AI safety field: ["If we go ahead on this everyone will die"](https://time.com/6266923/ai-eliezer-yudkowsky-open-letter-not-enough/)
+- **Eliezer Yudkowsky**, founder of MIRI and conceptual father of the AI safety field: ["If we go ahead on this everyone will die"](https://time.com/6266923/ai-eliezer-yudkowsky-open-letter-not-enough/)
+- **Bill Gates** warned that ["AI could decide that humans are a threat"](https://www.denisonforum.org/daily-article/bill-gates-ai-humans-threat/).
 
 ## Why superintelligence is dangerous
 
@@ -54,7 +55,7 @@ it could have absolutely disastrous consequences.
 ## Why most goals are bad news for humans
 
 We can't predict _what_ the AI will want (it depends on how it is programmed, how it is trained).
-However, we can mathematically prove what a rational machine will want for _virtually any goal_:
+However, we can [mathematically prove](https://arxiv.org/pdf/1912.01683.pdf) what a rational machine will need for _virtually any goal_:
 
 - **Maximizing its resources**. Think about energy, computers to run on or materials.
 - **Ensuring its own survival**. This includes humans not turning the AI off.
@@ -73,7 +74,7 @@ We already have [real examples](https://www.pcmag.com/news/gpt-4-was-able-to-hir
 A superintelligent AI would be a master of deception.
 
 A superintelligence will also be a very competent hacker.
-It might be able to hack into every device connected to the internet in a matter of seconds.
+It could analyze the source code of most operating systems, find new zero day exploits, and use them to take over computers.
 GPT-4 can already write the code for a website by [looking at a sketch in a notebook](https://twitter.com/mckaywrigley/status/1635740909383061504?ref_src=twsrc%5Etfw%7Ctwcamp%5Etweetembed%7Ctwterm%5E1635740909383061504%7Ctwgr%5E30ea318cb9561a8a388b0fb2ff06ffddb7c9865e%7Ctwcon%5Es1_c10&ref_url=https%3A%2F%2Fwww.nytimes.com%2F2023%2F03%2F15%2Ftechnology%2Fgpt-4-artificial-intelligence-openai.html).
 
 ## Even a perfectly aligned superintelligence is dangerous in the wrong hands
