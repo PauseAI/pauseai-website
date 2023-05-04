@@ -16,7 +16,7 @@ Here are some resources to get you started.
 
 ## Websites
 
-- [AISafety.net](https://aisafety.net/) is an absolutely amazing database of questions and answers.
+- [AISafety.info](https://aisafety.info/) is an absolutely amazing database of questions and answers.
 
 ## Podcasts
 - [AI X-Risk Research podcast](https://axrp.net/). In-depth interviews with experts in the field of AI alignment.
