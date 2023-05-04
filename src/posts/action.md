@@ -29,10 +29,6 @@ You are now one of them.
 - [Write to your political representatives](https://www.campaignforaisafety.org/politician/);
 - Ask politicians to invite (or subpoena) AI lab leaders to parliamentary/congressional hearings to give their predictions and timelines of AI disasters;
 
-### If you are technical
-
-- Improve this website ([source code](https://github.com/joepio/pauseai)).
-
 ### If you know law
 
 - Help draft policy ([some](https://futureoflife.org/wp-content/uploads/2023/04/FLI_Policymaking_In_The_Pause.pdf)  [frameworks](https://www.openphilanthropy.org/research/12-tentative-ideas-for-us-ai-policy/)).
@@ -41,6 +37,10 @@ You are now one of them.
 ### If you have money to spare
 
 - **Donate** to the [Campaign for AI Safety](https://www.campaignforaisafety.org/donate/).
+
+### If you can write web content
+
+- [Improve this website](https://github.com/joepio/pauseai).
 
 ### If you work in AI
 
