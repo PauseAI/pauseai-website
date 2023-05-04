@@ -1,7 +1,6 @@
 ---
 title: The existential risk of superintelligent AI
 description: Why we all might die
-published: true
 ---
 
 ## AI is getting smarter
@@ -101,3 +100,5 @@ We won't know for certain when this happens or even _if_ it happens, but it is a
 Building artificial intelligence used to be mostly a research / university thing.
 In just a couple of months, it became a multi-billion dollar industry.
 And the companies involved are rushing to build the most powerful AI they can.
+They are pressured by investors to focus on capabilities, not safety.
+No wonder _even these companies are asking for regulators to step in_.
