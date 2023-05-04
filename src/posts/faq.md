@@ -13,14 +13,13 @@ You can [find us on discord](https://discord.gg/2XXWXvErfA).
 Yes, at least for very large models.
 Tracking and monitoring the sales of GPUs (used for training AIs) is [actually very doable](https://arxiv.org/abs/2304.04123).
 
-### How about banning AGI capabilities research?
-
-Also possible, although harder.
-Any research that is actually published can be detected and banned.
-
 ### Will AI companies oppose regulation?
 
 [They are asking for regulation!](https://twitter.com/sama/status/1635136281952026625?lang=en-GB)
+
+### I have a different / AI related question
+
+Try [AIsafety.info](https://aisafety.info/), an awesome database of questions and answers about AI safety.
 
 ### Some other person says there is no risk of extinction from AI
 
