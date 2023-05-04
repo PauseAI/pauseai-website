@@ -26,13 +26,13 @@ You are now one of them.
 
 - Convince journalists to write about AI safety. Point them to [educational materials](/learn).
 - Ask the management at your current organisation to take an institutional position on this.
-- [Write to your political representatives](https://www.campaignforaisafety.org/politician/);
-- Ask politicians to invite (or subpoena) AI lab leaders to parliamentary/congressional hearings to give their predictions and timelines of AI disasters;
+- [Write to your political representatives](https://www.campaignforaisafety.org/politician/).
+- Ask politicians to invite (or subpoena) AI lab leaders to parliamentary/congressional hearings to give their predictions and timelines of AI disasters.
 
 ### If you know law
 
 - Help draft policy ([some](https://futureoflife.org/wp-content/uploads/2023/04/FLI_Policymaking_In_The_Pause.pdf)  [frameworks](https://www.openphilanthropy.org/research/12-tentative-ideas-for-us-ai-policy/)).
-- Make submissions to government requests for comment on AI policy ([example](https://ntia.gov/issues/artificial-intelligence/request-for-comments));
+- Make submissions to government requests for comment on AI policy ([example](https://ntia.gov/issues/artificial-intelligence/request-for-comments)).
 
 ### If you have money to spare
 
