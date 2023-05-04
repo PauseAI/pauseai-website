@@ -4,18 +4,21 @@
 	export let linkText: string
 </script>
 
-<div class="block" class:fade-in={visible}>
+<a {href} class="block" class:fade-in={visible}>
 	<div class="text">
 		<h2><slot name="title" /></h2>
 		<p>
 			<slot />
 		</p>
-		<a class="c2a" {href}>{linkText} ></a>
+		<span class="c2a">{linkText} ></span>
 	</div>
-</div>
+</a>
 
 <style>
 	.block {
+		display: block;
+		text-decoration: none;
+		color: var(--text);
 		margin-bottom: 5rem;
 	}
 
