@@ -12,7 +12,7 @@ Powerful articifial intelligence brings amazing opportunities, but also huge ris
 ## Experts are sounding the alarm
 
 [Over half of AI researchers surveyed think there’s a larger than 10% risk](https://aiimpacts.org/2022-expert-survey-on-progress-in-ai/) that once we build a superintelligent AI, it will **destroy all life on earth**.
-When you ask AI safety researchers, this number [grows to 30%](https://forum.effectivealtruism.org/posts/8CM9vZ2nnQsWJNsHx/existential-risk-from-ai-survey-results).
+When you ask AI safety researchers (the people who actually research the safety risks of AI), this number [grows to 30%](https://forum.effectivealtruism.org/posts/8CM9vZ2nnQsWJNsHx/existential-risk-from-ai-survey-results).
 
 The [letter for pausing AI development](https://futureoflife.org/open-letter/pause-giant-ai-experiments/), launched in april 2023, has been signed over 27,000 times, mostly by AI researchers and tech leaders.
 

@@ -32,6 +32,17 @@
 	.logo {
 		width: 11rem;
 		margin-left: -3.4rem;
+		overflow: visible;
+	}
+	.logo-circle {
+		transition: transform 0.1s ease-in-out;
+		transform-origin: center;
+	}
+	.logo:hover .logo-circle {
+		transform: scale(1.1);
+	}
+	.logo:active .logo-circle {
+		fill: var(--brand-subtle);
 	}
 	@media (max-width: 850px) {
 		.logo {

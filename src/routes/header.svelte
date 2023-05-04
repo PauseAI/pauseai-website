@@ -47,7 +47,11 @@
 	}
 
 	.nav-links a:hover {
-		color: var(--t-color-main);
+		color: var(--brand);
+	}
+
+	.nav-links a:active {
+		color: var(--brand-subtle);
 	}
 
 	.nav-links a:hover {

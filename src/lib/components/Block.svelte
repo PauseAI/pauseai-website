@@ -27,17 +27,20 @@
 		font-family: var(--font-heading);
 	}
 
+	.c2a:hover {
+		text-decoration: underline;
+	}
+
+	.c2a:active {
+		color: var(--brand-subtle);
+	}
+
 	.text {
 		max-width: 30rem;
 		display: flex;
 		flex-direction: column;
 		justify-content: center;
 		grid-area: text;
-	}
-
-	.text :global(a:hover) {
-		color: var(--brand);
-		text-decoration: underline;
 	}
 
 	p {
