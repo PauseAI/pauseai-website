@@ -19,6 +19,7 @@
 	button {
 		font-family: var(--font-body);
 		padding: 0;
+		color: var(--text);
 		font-weight: inherit;
 		background: none;
 		border: none;

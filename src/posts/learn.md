@@ -30,6 +30,7 @@ Here are some resources to get you started.
 ## Courses
 
 - [AGI safety fundamentals](https://www.agisafetyfundamentals.com/) (30hrs)
+- [A simple explanation of why advanced AI could be incredibly dangerous](https://muddyclothes.substack.com/p/a-simple-explanation-of-why-advanced)
 
 ## Organisations
 
