@@ -1,6 +1,6 @@
 ---
 title: The existential risk of superintelligent AI
-description: Why we all might die
+description: Why AI is a risk for the future of our existence, and why we need to pause development.
 ---
 
 ## AI is getting smarter
