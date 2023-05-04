@@ -24,11 +24,12 @@ The list includes people like:
 - **Yoshua Bengio**, deep learning pioneer and winner of the Turing Award.
 - **Elon Musk**, co-founder of OpenAI, SpaceX and Tesla: ["AI has the potential of civilizational destruction"](https://www.inc.com/ben-sherry/elon-musk-ai-has-the-potential-of-civilizational-destruction.html)
 
-But this is not the only time that experts have warned us about the dangers of AI:
+But this is not the only time that experts have warned us about the existential dangers of AI:
 
 - **Stephen Hawking**, theoretical physicist & cosmologist: ["The development of full artificial intelligence could spell the end of the human race"](https://nypost.com/2023/05/01/stephen-hawking-warned-ai-could-mean-the-end-of-the-human-race/).
 - **Eliezer Yudkowsky**, founder of MIRI and conceptual father of the AI safety field: ["If we go ahead on this everyone will die"](https://time.com/6266923/ai-eliezer-yudkowsky-open-letter-not-enough/)
 - **Bill Gates** warned that ["AI could decide that humans are a threat"](https://www.denisonforum.org/daily-article/bill-gates-ai-humans-threat/).
+- **Sam Altman** (yes, the CEO of OpenAI who builds ChatGPT): ["Why you should fear machine intelligence"](https://blog.samaltman.com/machine-intelligence-part-1)
 
 ## Why superintelligence is dangerous
 
@@ -93,3 +94,10 @@ In 2020, [the average AI researcher thought](https://www.metaculus.com/questions
 It's hard to predict how long it will take to build a superintelligent AI, but we know that there are more people than ever working on it.
 The pace of progress is accelerating, and we are getting close to the point where AI might be smarter than an AI researcher.
 At that point, there is a real risk of an intelligence explosion, where the AI can improve itself faster and faster, until it becomes superintelligent.
+We won't know for certain when this happens or even _if_ it happens, but it is a possibility that many experts are worried about.
+
+## AI companies are locked in a race to the bottom
+
+Building artificial intelligence used to be mostly a research / university thing.
+In just a couple of months, it became a multi-billion dollar industry.
+And the companies involved are rushing to build the most powerful AI they can.
