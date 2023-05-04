@@ -55,11 +55,11 @@ it could have absolutely disastrous consequences.
 ## Why most goals are bad news for humans
 
 We can't predict _what_ the AI will want (it depends on how it is programmed, how it is trained).
-However, we can [mathematically prove](https://arxiv.org/pdf/1912.01683.pdf) what a rational machine will need for _virtually any goal_:
+However, we can [mathematically prove](https://arxiv.org/pdf/1912.01683.pdf) what a rational machine will pursue for _virtually any goal_:
 
-- **Maximizing its resources**. Think about energy, computers to run on or materials.
-- **Ensuring its own survival**. This includes humans not turning the AI off.
-- **Preserving its goals**. This includes humans not making changes to the AI.
+- **Maximizing its resources**. Think about more energy, more computers to run on or access to more materials. If a rational AI can use all energy of the planet to get a little bit closer to its goal, it will prefer that to using only a little bit of energy.
+- **Ensuring its own survival**. This means the AI will not want humans to turn it off, as it could no longer achieve its goals. This means the AI might conclude that humans are a threat to its existence if we can turn it off.
+- **Preserving its goals**. This means the AI will not want humans to modify its code, because that could change its goals.
 
 This is called [instrumental convergence](https://www.youtube.com/watch?v=ZeecOKBus3Q), and it is at the core of what AI safety researchers are worried about.
 A superintelligent thing that wants to take over all materials it can get, and wants to ensure its own existence is a very dangerous combination.
@@ -94,6 +94,8 @@ It's hard to predict how long it will take to build a superintelligent AI, but w
 The pace of progress is accelerating, and we are getting close to the point where AI might be smarter than an AI researcher.
 At that point, there is a real risk of an intelligence explosion, where the AI can improve itself faster and faster, until it becomes superintelligent.
 We won't know for certain when this happens or even _if_ it happens, but it is a possibility that many experts are worried about.
+
+[Read more about urgency](/urgency).
 
 ## AI companies are locked in a race to the bottom
 

@@ -24,15 +24,20 @@ You are now one of them.
 
 ### If you are convincing
 
-- Convince journalists to write about AI safety. Point them to [educational materials](/learn).
-- Ask the management at your current organisation to take an institutional position on this.
+- **Convince journalists** to write about AI safety. Point them to [educational materials](/learn).
+- **Ask the management** at your current organisation to take an institutional position on this.
 - [Write to your political representatives](https://www.campaignforaisafety.org/politician/).
-- Ask politicians to invite (or subpoena) AI lab leaders to parliamentary/congressional hearings to give their predictions and timelines of AI disasters.
 
 ### If you know law
 
-- Help draft policy ([some](https://futureoflife.org/wp-content/uploads/2023/04/FLI_Policymaking_In_The_Pause.pdf)  [frameworks](https://www.openphilanthropy.org/research/12-tentative-ideas-for-us-ai-policy/)).
-- Make submissions to government requests for comment on AI policy ([example](https://ntia.gov/issues/artificial-intelligence/request-for-comments)).
+- **Help draft policy** ([some](https://futureoflife.org/wp-content/uploads/2023/04/FLI_Policymaking_In_The_Pause.pdf)  [frameworks](https://www.openphilanthropy.org/research/12-tentative-ideas-for-us-ai-policy/)).
+- **Make submissions to government requests for comment** on AI policy ([example](https://ntia.gov/issues/artificial-intelligence/request-for-comments)).
+
+### If you are a politician
+
+- **Invite (or subpoena) AI lab leaders** to parliamentary/congressional hearings to give their predictions and timelines of AI disasters.
+- **Esteblish a committee** to investigate the risks of AI.
+- **Work towards a summit**. Host one yourself, or get your country to host one.
 
 ### If you have money to spare
 
@@ -44,7 +49,8 @@ You are now one of them.
 
 ### If you work in AI
 
-- **Talk** to your colleagues and managers about these risks.
+- **Talk to your management and colleagues** about the risks. Get them to take an institutional position on this.
+- **Hold a seminar** on AI safety at your workplace. Check out the [videos](/learn#videos) for inspiration.
 - **Sign** the [open letter](https://futureoflife.org/open-letter/pause-giant-ai-experiments/).
 
 ### If you work on AI safety
