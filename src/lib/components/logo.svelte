@@ -10,8 +10,10 @@
 	height="66"
 	viewBox="0 0 243 66"
 	fill="none"
+	role="img"
 	xmlns="http://www.w3.org/2000/svg"
 >
+	<title>PauseAI logo</title>
 	<path
 		class="logo-circle"
 		fill-rule="evenodd"
