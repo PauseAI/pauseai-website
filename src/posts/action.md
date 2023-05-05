@@ -55,7 +55,7 @@ You are now one of them.
 
 ### If you work on AI safety
 
-If you are just starting out in AI Alignment, unless you are a genius and/or have had significant new flashes of insight on the problem, **consider switching to advocacy for the Pause**. Without the Pause in place first, there just isn't time to spin up a career in Alignment to the point of making useful contributions.
+If you are just starting out in AI Alignment, unless you are a extremely skilled and/or have had significant new flashes of insight on the problem, **consider switching to advocacy for the Pause**. Without the Pause in place first, there just isn't time to spin up a career in Alignment to the point of making useful contributions.
 
 
 If you are already established in Alignment, consider more [public communication](https://twitter.com/TrustlessState/status/1651538022360285187), and adding your name to calls for the Pause and regulation of the AI industry.
@@ -63,8 +63,8 @@ If you are already established in Alignment, consider more [public communication
 ## Tips for being effective
 
 - **Be bold in your public communication of the danger**. Don't use hedging language or caveats by default; mention them when questioned, or in footnotes, but don't make it sound like you aren't that concerned if you are.
-- **Be less exacting in your work**. [80/20](https://en.wikipedia.org/wiki/Pareto_principle) more. Don't do the classic EA/LW thing and spend months agonising and iterating on your Google doc over endless rounds of feedback. Get your project out into the world and iterate as you go. Time is of the essence.
+- **Be less exacting in your work**. [80/20](https://en.wikipedia.org/wiki/Pareto_principle) more. Don't do the classic geek thing and spend months agonising and iterating on your Google doc over endless rounds of feedback. Get your project out into the world and iterate as you go. Time is of the essence.
 
-Right now all other work is just rearranging deckchairs on the Titanic. We need to be running to the bridge, grabbing the wheel, and steering away from the iceberg. We may not have much time, but by [Good](https://en.wikipedia.org/wiki/I._J._Good) we can try. We can do this!
+Right now all other work is just rearranging deckchairs on the Titanic. We need to be running to the bridge, grabbing the wheel, and steering away from the iceberg. We may not have much time, but we can try. We can do this!
 
 _Acknowledgements: Written by Greg Colbourn, [originally posted on the EA forum](https://forum.effectivealtruism.org/posts/8YXFaM9yHbhiJTPqp/agi-rising-why-we-are-in-a-new-era-of-acute-risk-and). Edited by Joep Meindertsma. For helpful comments and suggestions that have improved the post, and for the encouragement to write, I thank Akash Wasil, Johan de Kock, Jaeson Booker, Greg Kiss, Peter S. Park, Nik Samolyov, Yanni Kyriacos, Chris Leong, Alex M, Amritanshu Prasad, Dušan D. Nešić, and the rest of the [AGI Moratorium HQ Slack](https://join.slack.com/t/agi-moratorium-hq/shared_invite/zt-1u6s1opls-~_l_Ynrr~8ay~SiA2yEqAQ) and AI Notkilleveryoneism Twitter._

@@ -9,8 +9,6 @@ const userThemeKey = 'user-theme'
 const prefersDark =
 	typeof matchMedia === 'undefined' ? false : matchMedia('(prefers-color-scheme: dark)').matches
 
-console.log('prefersDark', prefersDark)
-
 if (typeof matchMedia !== 'undefined') {
 	matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (event) => {
 		const newColorScheme = event.matches ? 'dark' : 'light'
@@ -43,7 +41,6 @@ export function toggleTheme() {
 		} else {
 			newTheme = 'auto'
 		}
-		console.log('toggle from', current, 'to', newTheme)
 		localStorage.setItem(userThemeKey, newTheme)
 		return newTheme
 	})
