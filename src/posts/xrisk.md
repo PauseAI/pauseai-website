@@ -22,16 +22,16 @@ When you ask AI safety researchers (the people who actually research the safety 
 The list includes people like:
 
 - **Stuart Russell**, writer of the #1 textbook on Artificial Intelligence used in most AI studies
-- **Geoffrey Hinton**, the "Godfather of AI", [left Google](https://fortune.com/2023/05/01/godfather-ai-geoffrey-hinton-quit-google-regrets-lifes-work-bad-actors/) to warn people of AI.
 - **Yoshua Bengio**, deep learning pioneer and winner of the Turing Award.
 - **Elon Musk**, co-founder of OpenAI, SpaceX and Tesla: ["AI has the potential of civilizational destruction"](https://www.inc.com/ben-sherry/elon-musk-ai-has-the-potential-of-civilizational-destruction.html)
 
 But this is not the only time that we've been warned about the existential dangers of AI:
 
 - **Stephen Hawking**, theoretical physicist & cosmologist: ["The development of full artificial intelligence could spell the end of the human race"](https://nypost.com/2023/05/01/stephen-hawking-warned-ai-could-mean-the-end-of-the-human-race/).
+- **Geoffrey Hinton**, the "Godfather of AI", [left Google](https://fortune.com/2023/05/01/godfather-ai-geoffrey-hinton-quit-google-regrets-lifes-work-bad-actors/) to warn people of AI: ["this is an existential risk"](https://www.reuters.com/technology/ai-pioneer-says-its-threat-world-may-be-more-urgent-than-climate-change-2023-05-05/)
 - **Eliezer Yudkowsky**, founder of MIRI and conceptual father of the AI safety field: ["If we go ahead on this everyone will die"](https://time.com/6266923/ai-eliezer-yudkowsky-open-letter-not-enough/).
 - **Bill Gates** warned that ["AI could decide that humans are a threat"](https://www.denisonforum.org/daily-article/bill-gates-ai-humans-threat/).
-- **Sam Altman** (yes, the CEO of OpenAI who builds ChatGPT): ["Why you should fear machine intelligence"](https://blog.samaltman.com/machine-intelligence-part-1).
+- **Sam Altman** (yes, the CEO of OpenAI who builds ChatGPT): ["Development of superhuman machine intelligence is probably the greatest threat to the continued existence of humanity. "](https://blog.samaltman.com/machine-intelligence-part-1).
 
 ## Why superintelligence is dangerous
 
@@ -106,4 +106,5 @@ In just a couple of months, it became a multi-billion dollar industry.
 And the companies involved are rushing to build the most powerful AI they can.
 They are pressured by investors to focus on capabilities, not safety.
 We need to give these AI companies a reason to focus on safety.
-An international treaty to pause development could do that.
+
+[An international treaty to pause development could do that.](/proposal)
