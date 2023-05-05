@@ -1,5 +1,5 @@
 ---
-title: May 3rd, PauseAI protest @ OpenAI
+title: PauseAI protest @ OpenAI - May 20th, 2023
 ---
 
 - May 20th, 2023, 1PM
