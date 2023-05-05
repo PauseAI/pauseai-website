@@ -14,7 +14,7 @@
 		<NavLink href="/learn">Learn</NavLink>
 		<NavLink href="/faq">FAQ</NavLink>
 		<!-- <NavLink href="/about">About</NavLink> -->
-		<NavLink c2a href="/action">Get in action</NavLink>
+		<NavLink c2a href="/action">Take action</NavLink>
 	</div>
 </nav>
 

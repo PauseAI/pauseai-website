@@ -1,5 +1,5 @@
 ---
-title: Get in action
+title: Take action
 description: Ways to help out with pausing AGI development.
 ---
 

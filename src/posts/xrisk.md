@@ -11,10 +11,13 @@ Powerful articifial intelligence brings amazing opportunities, but also huge ris
 
 ## Experts are sounding the alarm
 
-[Over half of AI researchers surveyed think there’s a larger than 10% risk](https://aiimpacts.org/2022-expert-survey-on-progress-in-ai/) that once we build a superintelligent AI, it will **destroy all life on earth**.
+Over half of AI researchers [surveyed](https://aiimpacts.org/2022-expert-survey-on-progress-in-ai/) think there’s a larger than 10% risk that once we build a superintelligent AI, it will **destroy all life on earth**.
+
+Would you choose to be a passenger on a testflight of a new plane where over half of the airplane engineers think there’s a larger than 10% chance that it will crash?
+
 When you ask AI safety researchers (the people who actually research the safety risks of AI), this number [grows to 30%](https://forum.effectivealtruism.org/posts/8CM9vZ2nnQsWJNsHx/existential-risk-from-ai-survey-results).
 
-The [letter for pausing AI development](https://futureoflife.org/open-letter/pause-giant-ai-experiments/), launched in april 2023, has been signed over 27,000 times, mostly by AI researchers and tech leaders.
+[A letter for calling for pausing AI development](https://futureoflife.org/open-letter/pause-giant-ai-experiments/) launched in april 2023, and has been signed over 27,000 times, mostly by AI researchers and tech leaders.
 
 The list includes people like:
 
@@ -43,11 +46,12 @@ It's not that humans hate the animals, it's just that we can use their habitats 
 Our goals are things like comfort, status, love, tasty food, and more.
 We are destroying the habitats of other animals as side effects of pursuing our goals.
 
-An AI would also have some goals.
+An AI also has a goal.
+This depends on how it is trained.
 Of course we _want_ an AI to have all these delicate goals and values that humans have.
 But we don't know how to do that.
 We know how to train machines to be intelligent, but **we don't know how to get them to want what we want**.
-This problem is called the _AI alignment problem_.
+This problem is called the _alignment problem_.
 
 If a superintelligent system is built, and it will have a goal that is even _a little_ different from what we want it to have,
 it could have absolutely disastrous consequences.
@@ -64,11 +68,11 @@ However, we can [mathematically prove](https://arxiv.org/pdf/1912.01683.pdf) wha
 This is called [instrumental convergence](https://www.youtube.com/watch?v=ZeecOKBus3Q), and it is at the core of what AI safety researchers are worried about.
 A superintelligent thing that wants to take over all materials it can get, and wants to ensure its own existence is a very dangerous combination.
 
-## Why a superintelligence is dangerous
+## Why can't we just turn it off if it's dangerous?
 
-Why can't we just turn it off if it does something we don't like?
 The core problem is that _it will be much smarter than us_.
-If the AI knows you can turn it off, it might behave well until it can get rid of you.
+A superintelligence will be able to predict how humans respond, especially ones that are trained on all written human knowledge.
+If the AI knows you can turn it off, it might behave nicely until it is certain that it can get rid of you.
 
 We already have [real examples](https://www.pcmag.com/news/gpt-4-was-able-to-hire-and-deceive-a-human-worker-into-completing-a-task) of AI systems deceiving humans to achieve their goal.
 A superintelligent AI would be a master of deception.
@@ -81,19 +85,17 @@ GPT-4 can already write the code for a website by [looking at a sketch in a note
 
 Imagine that a superintelligent AI is built, and it does exactly what the operator wants it to do.
 In that case, the operator would have unimaginable power.
-A superintelligence could be used to create new weapons, hack all computers, design diseases or control humanity.
-They could use the AI to take over the world.
+A superintelligence could be used to control create new weapons, hack all computers and manipulate humanity.
 We might live in a utopic world where all diseases are cured, or we might end up in an Orwellian nightmare where one human controls the world.
-This, we believe, is one of the reasons why so many AI labs are racing to build a superintelligent AI.
 
 ## We may not have much time left
 
 In 2020, [the average AI researcher thought](https://www.metaculus.com/questions/3479/date-weakly-general-ai-is-publicly-known/) that it would take until 2057 before an AI could pass SAT exams. It took us less than 3 years.
 
-It's hard to predict how long it will take to build a superintelligent AI, but we know that there are more people than ever working on it.
-The pace of progress is accelerating, and we are getting close to the point where AI might be smarter than an AI researcher.
-At that point, there is a real risk of an intelligence explosion, where the AI can improve itself faster and faster, until it becomes superintelligent.
-We won't know for certain when this happens or even _if_ it happens, but it is a possibility that many experts are worried about.
+It's hard to predict how long it will take to build a superintelligent AI, but we know that there are more people than ever working on it, and that the field is moving at a frantic pace.
+It may take many years or just a few months.
+We don't know.
+We should err on the side of caution, and act now.
 
 [Read more about urgency](/urgency).
 
