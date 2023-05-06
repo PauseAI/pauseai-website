@@ -28,16 +28,16 @@ You are now one of them.
 - **Ask the management** at your current organisation to take an institutional position on this.
 - [Write to your political representatives](https://www.campaignforaisafety.org/politician/).
 
+### If you are a politician / work in government
+
+- **Work towards an [AI safety summit](/proposal)**. Get your country to host one. We need to tackle this problem internationally.
+- **Invite (or subpoena) AI lab leaders** to parliamentary/congressional hearings to give their predictions and timelines of AI disasters.
+- **Establish a committee** to investigate the risks of AI.
+
 ### If you know law
 
 - **Help draft policy** ([some](https://futureoflife.org/wp-content/uploads/2023/04/FLI_Policymaking_In_The_Pause.pdf)  [frameworks](https://www.openphilanthropy.org/research/12-tentative-ideas-for-us-ai-policy/)).
 - **Make submissions to government requests for comment** on AI policy ([example](https://ntia.gov/issues/artificial-intelligence/request-for-comments)).
-
-### If you are a politician
-
-- **Invite (or subpoena) AI lab leaders** to parliamentary/congressional hearings to give their predictions and timelines of AI disasters.
-- **Establish a committee** to investigate the risks of AI.
-- **Work towards a summit**. Host one yourself, or get your country to host one.
 
 ### If you have money to spare
 
