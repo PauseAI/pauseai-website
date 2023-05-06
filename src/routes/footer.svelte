@@ -1,12 +1,18 @@
 <script lang="ts">
 	import Toggle from '$lib/components/Toggle.svelte'
+	import { page } from '$app/stores'
+
+	$: editUrl = `https://github.com/joepio/pauseai/edit/main/src/posts${$page.url.pathname}.md`
+	$: if ($page.url.pathname == '/') {
+		editUrl = `https://github.com/joepio/pauseai/edit/main/src/routes/%2Bpage.svelte`
+	}
 </script>
 
 <a class="c2a" href="/action">Act now ></a>
 
 <footer>
 	<Toggle />
-	<a href="https://github.com/joepio/pauseai">Source code on Github</a>
+	<a href={editUrl}>Edit this page on Github</a>
 	<a href="/rss.xml" target="_blank">RSS</a>
 	<p>CC-BY</p>
 </footer>

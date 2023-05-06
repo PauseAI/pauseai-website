@@ -17,7 +17,7 @@ You are now one of them.
 - **Talk** to people in your life about this. Answer their questions, get them to act.
 - **Share** about AI risk on social media. This website might be a good start.
 - **Create** [articles](/learn#articles), [videos](/learn#videos) or [memes](https://twitter.com/AISafetyMemes)
-- **Protest**. Even if it's just you with a sign.
+- **Protest**. Even if it's just you with a sign. Keep in mind the [Code of Conduct](/protesters-code-of-conduct).
 - **Lobby** politicians/industry. Talk to any relevant contacts you might have, the higher up, the better.
 
 ## If you ...
