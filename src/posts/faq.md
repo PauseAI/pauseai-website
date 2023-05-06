@@ -23,5 +23,5 @@ Try [AIsafety.info](https://aisafety.info/), an awesome database of questions an
 
 ### Some other person says there is no risk of extinction from AI
 
-There is disagreement on this topic, and it's hard to be completely certain about this, but the *majority of AI safety researchers believe that there is a serious (>10%) risk that everybody dies.*
+There is disagreement on this topic, and it's hard to be completely certain about this, but the *majority of AI researchers believe that there is a serious (>10%) risk that everybody dies.*
 Would you enter an airplane if over half of airplane engineers told you there's a larger than 10% chance it will crash?

@@ -15,7 +15,7 @@ You are now one of them.
 - **[Learn](/learn)** more about AI alignment and the risks we are facing.
 - **Sign petitions**: [pause giant AI experiments](https://futureoflife.org/open-letter/pause-giant-ai-experiments/), [demand responsible AI](https://www.change.org/p/artificial-intelligence-time-is-running-out-for-responsible-ai-development-91f0a02c-130a-46e1-9e55-70d6b274f4df).
 - **Talk** to people in your life about this. Answer their questions, get them to act.
-- **Share** about AI on social media. This website might be a good start.
+- **Share** about AI risk on social media. This website might be a good start.
 - **Create** [articles](/learn#articles), [videos](/learn#videos) or [memes](https://twitter.com/AISafetyMemes)
 - **Protest**. Even if it's just you with a sign.
 - **Lobby** politicians/industry. Talk to any relevant contacts you might have, the higher up, the better.
@@ -36,7 +36,7 @@ You are now one of them.
 ### If you are a politician
 
 - **Invite (or subpoena) AI lab leaders** to parliamentary/congressional hearings to give their predictions and timelines of AI disasters.
-- **Esteblish a committee** to investigate the risks of AI.
+- **Establish a committee** to investigate the risks of AI.
 - **Work towards a summit**. Host one yourself, or get your country to host one.
 
 ### If you have money to spare
@@ -65,6 +65,6 @@ If you are already established in Alignment, consider more [public communication
 - **Be bold in your public communication of the danger**. Don't use hedging language or caveats by default; mention them when questioned, or in footnotes, but don't make it sound like you aren't that concerned if you are.
 - **Be less exacting in your work**. [80/20](https://en.wikipedia.org/wiki/Pareto_principle) more. Don't do the classic geek thing and spend months agonising and iterating on your Google doc over endless rounds of feedback. Get your project out into the world and iterate as you go. Time is of the essence.
 
-Right now all other work is just rearranging deckchairs on the Titanic. We need to be running to the bridge, grabbing the wheel, and steering away from the iceberg. We may not have much time, but we can try. We can do this!
+Consider this: all our other work may just be the equivalent of rearranging deckchairs on the Titanic. We need to be running to the bridge, grabbing the wheel, and steering away from the iceberg. We may not have much time, but we can try. We can do this!
 
 _Acknowledgements: Written by Greg Colbourn, [originally posted on the EA forum](https://forum.effectivealtruism.org/posts/8YXFaM9yHbhiJTPqp/agi-rising-why-we-are-in-a-new-era-of-acute-risk-and). Edited by Joep Meindertsma. For helpful comments and suggestions that have improved the post, and for the encouragement to write, I thank Akash Wasil, Johan de Kock, Jaeson Booker, Greg Kiss, Peter S. Park, Nik Samolyov, Yanni Kyriacos, Chris Leong, Alex M, Amritanshu Prasad, Dušan D. Nešić, and the rest of the [AGI Moratorium HQ Slack](https://join.slack.com/t/agi-moratorium-hq/shared_invite/zt-1u6s1opls-~_l_Ynrr~8ay~SiA2yEqAQ) and AI Notkilleveryoneism Twitter._

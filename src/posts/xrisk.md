@@ -85,7 +85,7 @@ GPT-4 can already write the code for a website by [looking at a sketch in a note
 
 Imagine that a superintelligent AI is built, and it does exactly what the operator wants it to do.
 In that case, the operator would have unimaginable power.
-A superintelligence could be used to control create new weapons, hack all computers and manipulate humanity.
+A superintelligence could be used to create new weapons, hack all computers and manipulate humanity.
 We might live in a utopic world where all diseases are cured, or we might end up in an Orwellian nightmare where one human controls the world.
 
 ## We may not have much time left
