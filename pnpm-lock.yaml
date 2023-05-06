@@ -10,9 +10,6 @@ dependencies:
   lucide-svelte:
     specifier: ^0.162.0
     version: 0.162.0(svelte@3.58.0)
-  open-props:
-    specifier: ^1.5.7
-    version: 1.5.7
   rehype-slug:
     specifier: ^5.1.0
     version: 5.1.0
@@ -25,6 +22,9 @@ dependencies:
   shiki:
     specifier: ^0.14.1
     version: 0.14.1
+  swetrix:
+    specifier: ^2.2.1
+    version: 2.2.1
 
 devDependencies:
   '@sveltejs/adapter-netlify':
@@ -645,6 +645,10 @@ packages:
     resolution: {integrity: sha512-Y/uImid8aAwrEA24/1tcRZwpxX3pIFTSilcNDKSPn+Y2iDywSEachzRuvgAYYLR3wpGXAsMbv5lvKLDZLeYPAw==}
     dependencies:
       '@types/unist': 2.0.6
+    dev: false
+
+  /@types/node@18.16.5:
+    resolution: {integrity: sha512-seOA34WMo9KB+UA78qaJoCO20RJzZGVXQ5Sh6FWu0g/hfT44nKXnej3/tCQl7FL97idFpBhisLYCTB50S0EirA==}
     dev: false
 
   /@types/pug@2.0.6:
@@ -1639,10 +1643,6 @@ packages:
       wrappy: 1.0.2
     dev: true
 
-  /open-props@1.5.7:
-    resolution: {integrity: sha512-Xu7AlCaT2XPcDv8u0Ym5oFQZSurxNxnOawwyRb5I1PsF4n4nhpMpSwjqKo7TgznhMyBNi98vpI2PPZSVAZt+lA==}
-    dev: false
-
   /optionator@0.9.1:
     resolution: {integrity: sha512-74RlY5FCnhq4jRxVUPKDaRwrVNXMqsGsiW6AJw4XK8hmtm10wC0ypZBLw5IIp85NZMr91+qd1RvvENwg7jjRFw==}
     engines: {node: '>= 0.8.0'}
@@ -2046,6 +2046,13 @@ packages:
     resolution: {integrity: sha512-brIBNNB76mXFmU/Kerm4wFnkskBbluBDCjx/8TcpYRb298Yh2dztS2kQ6bhtjMcvUhd5ynClfwpz5h2gnzdQ1A==}
     engines: {node: '>= 8'}
 
+  /swetrix@2.2.1:
+    resolution: {integrity: sha512-S3ZR2Q8KxtxH0ciKJB7rPvsp8cNYgNJVwelEBzCA4z1OmiV5mwZn2mIzzAZ0n/KdAMk0/q3RZX7odymt0bzYxg==}
+    dependencies:
+      '@types/node': 18.16.5
+      tslib: 2.5.0
+    dev: false
+
   /text-table@0.2.0:
     resolution: {integrity: sha512-N+8UisAXDGk8PFXP4HAzVR9nbfmVJ3zYLAWiTIoqC5v5isinhr+r5uaO8+7r3BMfuNIufIsA7RdpVgacC2cSpw==}
     dev: true
@@ -2080,6 +2087,10 @@ packages:
   /tslib@2.4.1:
     resolution: {integrity: sha512-tGyy4dAjRIEwI7BzsB0lynWgOpfqjUdq91XXAlIWD2OwKBH7oCl/GZG/HT4BOHrTlPMOASlMQ7veyTqpmRcrNA==}
     dev: true
+
+  /tslib@2.5.0:
+    resolution: {integrity: sha512-336iVw3rtn2BUK7ORdIAHTyxHGRIHVReokCR3XjbckJMK7ms8FysBfhLR8IXnAgy7T0PTPNBWKiH514FOW/WSg==}
+    dev: false
 
   /tsutils@3.21.0(typescript@5.0.2):
     resolution: {integrity: sha512-mHKK3iUXL+3UF6xL5k0PEhKRUBKPBCv/+RkEOpjRWxxx27KKRBmmA60A9pgOUvMi8GKhRMPEmjBRPzs2W7O1OA==}

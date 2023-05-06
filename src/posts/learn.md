@@ -19,14 +19,15 @@ Here are some resources to get you started.
 - [AISafety.info](https://aisafety.info/) is an absolutely amazing database of questions and answers.
 
 ## Podcasts
+
 - [AI X-Risk Research podcast](https://axrp.net/). In-depth interviews with experts in the field of AI alignment.
 - [Future of Life podcast](https://soundcloud.com/futureoflife)
-
 
 ## Articles
 
 - [The 'Don't Look Up' Thinking That Could Doom Us With AI](https://time.com/6273743/thinking-that-could-doom-us-with-ai/)
 - [Pausing AI Developments Isn't Enough. We Need to Shut it All Down](https://time.com/6266923/ai-eliezer-yudkowsky-open-letter-not-enough/)
+
 ## Courses
 
 - [AGI safety fundamentals](https://www.agisafetyfundamentals.com/) (30hrs)
@@ -36,3 +37,10 @@ Here are some resources to get you started.
 
 - [Future of Life Institute](https://futureoflife.org/cause-area/artificial-intelligence/) started the [open letter](https://futureoflife.org/open-letter/pause-giant-ai-experiments/)
 - [Effective Altruism](https://www.effectivealtruism.org/). A community of people, many of which are highly concerned about AI safety. They also have a great [post on pursuing a career](https://forum.effectivealtruism.org/posts/7WXPkpqKGKewAymJf/how-to-pursue-a-career-in-technical-ai-alignment) in AI alignment.
+
+## Books
+
+- [Superintelligence: Paths, Dangers, Strategies (Nick Bostrom)](https://www.goodreads.com/en/book/show/20527133)
+- [The Alignment Problem (Brian Christian)](https://www.goodreads.com/book/show/50489349-the-alignment-problem)
+- [Human Compatible: Artificial Intelligence and the Problem of Control (Stuart Russell)](https://www.goodreads.com/en/book/show/44767248)
+- [Our Final Invention: Artificial Intelligence and the End of the Human Era (James Barrat)](https://www.goodreads.com/en/book/show/17286699)

@@ -39,7 +39,7 @@ I think the crucial point that we should consider, is the point at which an AI i
 An AI that can make meaningful contributions to AI algorithms and architectures is likely to be able to improve itself.
 Let's call this point of potential self-improvement the Ilya threshold.
 When it reaches this, an AI might improve itself because it was explicitly being instructed to do so, or because having more capabilities is instrumental to most goals.
-These iterations might take weeks (training GPT-3 took 34 days), but it is also possible that some type of runtime improvement is implemented that makes significant progress in a matter of minutes.
+These iterations might take weeks (training GPT-3 took 34 days), but it is also possible that some type of runtime improvement is implemented that makes significant progress in a matter of minutes: an [Intelligence Explosion](https://www.youtube.com/watch?v=5qfIgCiYlfY).
 
 So how far off are we to the Ilya threshold?
 It's fundamentally difficult to predict [when certain capabilities emerge](https://arxiv.org/abs/2206.07682) as LLMs scale, but so far we've seen many capabilities emerge that were previously thought to be far off.
