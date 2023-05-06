@@ -1,6 +1,6 @@
 ---
-title: Learn about AI alignment
-description: Educational resources (videos, articles, books) about AI alignment
+title: Learn why AI safety matters alignment
+description: Educational resources (videos, articles, books) about AI risks and AI alignment
 ---
 
 One of the most important things you can do to help with AI alignment and the existential risk that superintelligence poses, is to learn about it.
@@ -25,8 +25,10 @@ Here are some resources to get you started.
 
 ## Articles
 
-- [The 'Don't Look Up' Thinking That Could Doom Us With AI](https://time.com/6273743/thinking-that-could-doom-us-with-ai/)
-- [Pausing AI Developments Isn't Enough. We Need to Shut it All Down](https://time.com/6266923/ai-eliezer-yudkowsky-open-letter-not-enough/)
+- [The 'Don't Look Up' Thinking That Could Doom Us With AI](https://time.com/6273743/thinking-that-could-doom-us-with-ai/) (by Max Tegmark)
+- [Pausing AI Developments Isn't Enough. We Need to Shut it All Down](https://time.com/6266923/ai-eliezer-yudkowsky-open-letter-not-enough/) (by Eliezer Yudkowski)
+- [Preventing an AI-related catastrophe](https://80000hours.org/problem-profiles/artificial-intelligence/) (by 80,000 hours)
+- [The AI Revolution: The Road to Superintelligence](https://waitbutwhy.com/2015/01/artificial-intelligence-revolution-1.html) (by WaitButWhy)
 
 ## Courses
 
