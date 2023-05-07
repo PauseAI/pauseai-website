@@ -13,12 +13,12 @@ You are now one of them.
 
 - **[Join our Discord](https://discord.gg/2XXWXvErfA)** or [other](https://coda.io/@alignmentdev/alignmentecosystemdevelopment) AI safety communities.
 - **[Learn](/learn)** more about AI alignment and the risks we are facing.
+- [**Lobby**](/lobby-tips) politicians, convince your government to organize a summit.
 - **Sign petitions**: [pause giant AI experiments](https://futureoflife.org/open-letter/pause-giant-ai-experiments/), [demand responsible AI](https://www.change.org/p/artificial-intelligence-time-is-running-out-for-responsible-ai-development-91f0a02c-130a-46e1-9e55-70d6b274f4df).
 - **Talk** to people in your life about this. Answer their questions, get them to act.
 - **Share** about AI risk on social media. This website might be a good start.
 - **Create** [articles](/learn#articles), [videos](/learn#videos) or [memes](https://twitter.com/AISafetyMemes)
 - **Protest**. Even if it's just you with a sign. Keep in mind the [Code of Conduct](/protesters-code-of-conduct).
-- **Lobby** politicians/industry. Talk to any relevant contacts you might have, the higher up, the better.
 
 ## If you ...
 

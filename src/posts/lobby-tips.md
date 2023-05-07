@@ -28,7 +28,7 @@ When you reach out to people, tell them about what the scientists are saying. Th
 ## Write a letter
 
 - It needs to be good, but it does not have to be perfect. Don't work on this for months! We don't have that time.
-- I have a dutch one, translate it if you want.
+- We already have some documents (join the [discord](https://discord.gg/2XXWXvErfA)!)
 - It should be short and to the point. Be clear about your advice: organize a summit about AI (existential risk) with the goal of discussing a pause.
 - Be clear about urgency. This is an emergency.
 
