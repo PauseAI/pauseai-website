@@ -44,8 +44,10 @@ When you reach out to people, tell them about what the scientists are saying. Th
 ## Get to it!
 
 This all probably feels pretty intimidating.
-And besides, you've probably never dome something like this before.
-But you can do it! And you don't have to do it alone.
+You've probably never done something like this before.
+But you can do it!
+It's not that hard, it just takes some time, effort and a little courage.
+And you don't have to do it alone.
 We already have a couple of initiatives running in different countries.
 We're here to help each other out and fix this problem together.
 Join the [discord](https://discord.gg/2XXWXvErfA) and get started.
