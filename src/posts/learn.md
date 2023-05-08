@@ -1,9 +1,9 @@
 ---
-title: Learn why AI safety matters alignment
+title: Learn why AI safety matters
 description: Educational resources (videos, articles, books) about AI risks and AI alignment
 ---
 
-One of the most important things you can do to help with AI alignment and the existential risk that superintelligence poses, is to learn about it.
+One of the most important things you can do to help with AI alignment and the existential risk (x-risk) that superintelligence poses, is to learn about it.
 Here are some resources to get you started.
 
 ## Videos
