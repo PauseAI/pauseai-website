@@ -26,6 +26,7 @@ html {
 	--brand: var(--brand-light);
 	--brand-subtle: hsl(32, 100%, 30%);
 	--text: black;
+	--text-subtle: hsl(0, 0%, 50%);
 	--bg: white;
 }
 

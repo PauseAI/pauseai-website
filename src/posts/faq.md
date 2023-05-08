@@ -17,11 +17,17 @@ Tracking and monitoring the sales of GPUs (used for training AIs) is [actually v
 
 [They are asking for regulation!](https://twitter.com/sama/status/1635136281952026625?lang=en-GB)
 
-### I have a different / AI related question
-
-Try [AIsafety.info](https://aisafety.info/), an awesome database of questions and answers about AI safety.
-
 ### Some other person says there is no risk of extinction from AI
 
 There is disagreement on this topic, and it's hard to be completely certain about this, but the *majority of AI researchers believe that there is a serious (>10%) risk that everybody dies.*
 Would you enter an airplane if over half of airplane engineers told you there's a larger than 10% chance it will crash?
+
+### I have a different / AI related question
+
+There's a database of AI safety related questions and answers at [AIsafety.info](https://aisafety.info/).
+
+<script lang="ts">
+	import QuestionSearch from '$lib/components/QuestionSearch.svelte'
+</script>
+
+<QuestionSearch />
