@@ -42,7 +42,8 @@ Here are some resources to get you started.
 
 ## Books
 
-- [Superintelligence: Paths, Dangers, Strategies (Nick Bostrom)](https://www.goodreads.com/en/book/show/20527133)
-- [The Alignment Problem (Brian Christian)](https://www.goodreads.com/book/show/50489349-the-alignment-problem)
-- [Human Compatible: Artificial Intelligence and the Problem of Control (Stuart Russell)](https://www.goodreads.com/en/book/show/44767248)
-- [Our Final Invention: Artificial Intelligence and the End of the Human Era (James Barrat)](https://www.goodreads.com/en/book/show/17286699)
+- [Superintelligence: Paths, Dangers, Strategies](https://www.goodreads.com/en/book/show/20527133) (Nick Bostrom)
+- [The Alignment Problem](https://www.goodreads.com/book/show/50489349-the-alignment-problem) (Brian Christian)
+- [Human Compatible: Artificial Intelligence and the Problem of Control](https://www.goodreads.com/en/book/show/44767248) (Stuart Russell)
+- [Our Final Invention: Artificial Intelligence and the End of the Human Era](https://www.goodreads.com/en/book/show/17286699) (James Barrat)
+- [The Precipice: Existential Risk and the Future of Humanity](https://www.goodreads.com/en/book/show/50963653) (Toby Ord)
