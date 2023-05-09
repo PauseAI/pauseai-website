@@ -35,7 +35,7 @@ The next question is, when will we have a superintelligence?
 When will an AI be vastly superior to all humans in virtually all tasks?
 
 ## The Ilya threshold
-I think the crucial point that we should consider, is the point at which an AI is more capable at doing AI research then someone like Ilya Sutskever (chief scientist at OpenAI).
+I think the crucial point that we should consider, is the point at which an AI is more capable at doing AI research than someone like Ilya Sutskever (chief scientist at OpenAI).
 An AI that can make meaningful contributions to AI algorithms and architectures is likely to be able to improve itself.
 Let's call this point of potential self-improvement the Ilya threshold.
 When it reaches this, an AI might improve itself because it was explicitly being instructed to do so, or because having more capabilities is instrumental to most goals.
@@ -47,7 +47,7 @@ GPT-4 is already an impressive programmer, and combined with AutoGPT [it can do 
 Being able to autonomously do AI research and making meaningful improvements to a codebase does not seem impossible in the near future.
 Having said that, I think there are multiple paths to Ilya's level of capabilities:
 
-1. **A bigger model**. This is likely to be a combination of more data, more parameters, more compute. So far scaling has proven very successful. The training costs are becoming astronomical (100 million for GPT-4), but there's a lot at stake, and there are many billions of dollars being invested in either staying ahead of the curve, or catching up. New hardware is being developed that make training larger models more feasible. A 10x size increase on its own might be enough to get us past the Ilya threshold. However, Sam Altman has stated that there are serious diminishing returns to scaling, and that we might be close to the limit of what is achieveable by scaling current architectures.
+1. **A bigger model**. This is likely to be a combination of more data, more parameters, more compute. So far scaling has proven very successful. The training costs are becoming astronomical ($100 million for GPT-4), but there's a lot at stake, and there are many billions of dollars being invested in either staying ahead of the curve, or catching up. New hardware is being developed that make training larger models more feasible. A 10x size increase on its own might be enough to get us past the Ilya threshold. However, Sam Altman has stated that there are serious diminishing returns to scaling, and that we might be close to the limit of what is achieveable by scaling current architectures.
 2. **Runtime improvements**. Tools like MemoryGPT and AutoGPT have shown that simply putting an existing LLM in a new context unlocks radically new types of capabilities. Some have argued that LLMs right now have only access to something akin to "System 1" type thinking (fast, intuitive), and not "Sytem 2" (slow, critical). It might be possible that a runtime improvement would unlock such capabilities.
 3. **Algorithmic improvements**. The Transformer model made models perform far better at less hardware. It is highly likely that far more optimal algorithms for learning will be possible. For example, a human can read one textbook about JavaScript and could then write some code. An LLM needs to read many hundreds (or more) of these books to reach the same level. AIs need _a lot_ of data to learn, but humans don't, so there is probably a lot to gain (or actually lose) from finding a more efficient way of learning.
 
