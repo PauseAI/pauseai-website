@@ -1,4 +1,4 @@
-**Implement a temporary pause on the develpoment of AI systems more powerful than GPT-4**.
+**Implement a temporary pause on the development of AI systems more powerful than GPT-4**.
 
 This moratorium needs to be implemented on an international level, because we cannot expect countries or companies to risk their competitive advantage by pausing AI development on their own.
 
