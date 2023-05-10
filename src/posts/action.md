@@ -35,7 +35,7 @@ You are now one of them.
 - **Invite (or subpoena) AI lab leaders** to parliamentary/congressional hearings to give their predictions and timelines of AI disasters.
 - **Establish a committee** to investigate the risks of AI.
 
-### If you know law
+### If you know (international) law
 
 - **Help draft policy**. [You can win $4000 if you write a good draft!](https://www.campaignforaisafety.org/law-competition/). ([some](https://futureoflife.org/wp-content/uploads/2023/04/FLI_Policymaking_In_The_Pause.pdf)  [frameworks](https://www.openphilanthropy.org/research/12-tentative-ideas-for-us-ai-policy/))
 - **Make submissions to government requests for comment** on AI policy ([example](https://ntia.gov/issues/artificial-intelligence/request-for-comments)).
