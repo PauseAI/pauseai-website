@@ -29,6 +29,7 @@ Here are some resources to get you started.
 - [Pausing AI Developments Isn't Enough. We Need to Shut it All Down](https://time.com/6266923/ai-eliezer-yudkowsky-open-letter-not-enough/) (by Eliezer Yudkowski)
 - [Preventing an AI-related catastrophe](https://80000hours.org/problem-profiles/artificial-intelligence/) (by 80,000 hours)
 - [The AI Revolution: The Road to Superintelligence](https://waitbutwhy.com/2015/01/artificial-intelligence-revolution-1.html) (by WaitButWhy)
+- [AI Alignment, Explained in 5 Points](https://medium.com/@daniel_eth/ai-alignment-explained-in-5-points-95e7207300e3)
 
 ## Courses
 
