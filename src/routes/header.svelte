@@ -13,6 +13,7 @@
 		<NavLink href="/proposal">Proposal</NavLink>
 		<NavLink href="/learn">Learn</NavLink>
 		<NavLink href="/faq">FAQ</NavLink>
+		<NavLink href="/chat">ChatBot</NavLink>
 		<!-- <NavLink href="/about">About</NavLink> -->
 		<NavLink c2a href="/action">Take action</NavLink>
 	</div>
