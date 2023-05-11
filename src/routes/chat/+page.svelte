@@ -32,6 +32,12 @@
 		const footer = document.querySelector('footer')
 		footer?.scrollIntoView({ behavior: 'smooth' })
 	})
+
+	function handleKeyDown(event: KeyboardEvent) {
+		if (event.key === 'Enter') {
+			sendMessage()
+		}
+	}
 </script>
 
 <main>
@@ -55,7 +61,7 @@
 
 <footer>
 	<form on:submit|preventDefault={sendMessage}>
-		<textarea placeholder="Talk to PauseBot" bind:value={input} />
+		<textarea placeholder="Talk to PauseBot" bind:value={input} on:keydown={handleKeyDown} />
 		<button type="submit" disabled={loading}>
 			{#if loading}
 				Loading...
