@@ -8,6 +8,10 @@ We are a group of volunteers, AI (safety) researchers and engineers who are worr
 We are not affiliated with any company or organization.
 You can [find us on discord](https://discord.gg/2XXWXvErfA).
 
+### How likely is it that AI will cause human extinction?
+
+https://80000hours.org/problem-profiles/artificial-intelligence/#how-likely-is-an-AI-related-catastrophe
+
 ### Is a ban on AGI training enforceable?
 
 Yes, at least for very large models.
@@ -24,4 +28,4 @@ Try [AIsafety.info](https://aisafety.info/), an awesome database of questions an
 ### Some other person says there is no risk of extinction from AI
 
 There is disagreement on this topic, and it's hard to be completely certain about this, but the *majority of AI researchers believe that there is a serious (>10%) risk that everybody dies.*
-Would you enter an airplane if over half of airplane engineers told you there's a larger than 10% chance it will crash?
+Would you enter an airplane if half of airplane engineers told you there's a larger than 10% chance it will crash?
