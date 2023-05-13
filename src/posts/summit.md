@@ -1,4 +1,7 @@
-# AI Safety Summit
+---
+title: AI Safety Summit
+description: What it would take to organize a summit on AI safety.
+---
 
 The primary goal of PauseAI is to **convince one government to organize a summit where a treaty can be established to pause AI development**.
 See the [proposal](/proposal) page for more information.

@@ -1,6 +1,6 @@
 **Implement a temporary pause on the development of AI systems more powerful than GPT-4**.
 
-This moratorium needs to be implemented on an international level, because we cannot expect countries or companies to risk their competitive advantage by pausing AI development on their own.
+This moratorium needs to be implemented on an international level because we cannot expect countries or companies to risk their competitive advantage by pausing AI development on their own.
 
 An international agreement is typically established through a summit, where leaders of countries meet to discuss the issue and make a decision.
 
