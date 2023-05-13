@@ -29,6 +29,8 @@ As AI capabilities grow, so will the capabilities of the exploits they can creat
 Highly potent computer viruses have always been extremely hard to create, but AI could change that.
 Instead of having to hire a team of highly skilled security experts/hackers to find zero-day exploits, you could just use a far cheaper AI to do it for you.
 
+[Read more about AI and cybersecurity risks](/cybersecurity-risks)
+
 ## Existential Risk
 
 Things that are very intelligent, are very powerful.

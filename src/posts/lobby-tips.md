@@ -5,7 +5,7 @@ description: How to convince your government that they need to organize an AI su
 
 ## Be clear about the goal
 
-Your country needs to organize an international summit on existential AI risks. You need to convince the government to organise this.
+Your country needs to organize an international [summit](/summit) on existential AI risks. You need to convince the government to organise this.
 
 ## Find people to help you
 
