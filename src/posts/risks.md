@@ -4,7 +4,7 @@ description: AI threatens our democracy, our technology, and our species.
 ---
 
 AI is a powerful technology that is increasingly transforming our world.
-It comes with amazing potential, but also with serious risks.
+It comes with amazing potential, but also with serious risks, including [existential catastrophe](/xrisk).
 
 ## Fake media
 

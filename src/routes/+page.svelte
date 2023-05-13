@@ -15,10 +15,10 @@
 </svelte:head>
 
 <section>
-	<Block linkText="Read why" href="/xrisk">
-		<span slot="title">WE ARE RISKING <Mark>HUMAN EXTINCTION</Mark></span>
-		A recent survey of AI researchers shows that half of them think there’s at least a 1 in 10 chance
-		that AI could end all life on earth. And that number is growing.
+	<Block linkText="Read why" href="/risks">
+		<span slot="title">We risk <Mark>losing control</Mark></span>
+		AI could erode our democracy, could be used to create powerful computerviruses, and could even cause
+		human extinction.
 	</Block>
 	<Block linkText="Read the proposal" href="/proposal">
 		<span slot="title">We need a <Mark>pause</Mark></span>
