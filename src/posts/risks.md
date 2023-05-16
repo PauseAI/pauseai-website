@@ -13,7 +13,10 @@ Much of our society is based on trust. We trust that the money in our bank accou
 AI systems are exceptionally good at creating fake media. They can create fake videos, fake audio, fake text, and fake images.
 These capabilities are improving rapidly.
 Just two years ago, we laughed at the horribly unrealistic dall-e images, but now we have [deepfake images winning photography contests](https://www.theguardian.com/technology/2023/apr/17/photographer-admits-prize-winning-image-was-ai-generated).
+GPT-4 can write in a way that is indistinguishable from humans.
 
+Creating fake media is not new, but AI makes it much cheaper and much more realistic.
+We might soon see social media be flooded with fake discussions and opinions, and fake news articles that are indistinguishable from real ones.
 This could erode the trust we have in our society.
 It could threaten the fundamentals of our democracy even more than social media did.
 
