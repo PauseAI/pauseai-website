@@ -10,13 +10,13 @@ description: We are organizing a protest at Microsoft to demand a summit to paus
 ## What do we want?
 
 We want our governments (and the EU, specifically) to organize a [summit](/summit) about the risks of AI.
-We want them to [pause AI development](/proposal) until we have a better understanding of [the risks](/risks).
+We want them to [pause AI development](/proposal) until we are sufficiently prepared for [the risks](/risks).
 
 ## Why at Microsoft?
 
 Microsoft invested $13 billion in OpenAI, which is currently building the most powerful AI models.
 Microsoft is locked in a race with other AI companies (like Google and Anthropic) to build the most powerful AI systems as fast as possible.
 This market dynamic is dangerous because it incentivizes companies to focus on capabilities and minimize safety efforts.
-This could lead to [serious risks](/risks) including [existential risk](/xrisk).
+This dynamic poses [various risks](/risks) including [existential risk](/xrisk).
 
 We believe Microsoft is in a good position to take responsibility and support a pause on giant AI experiments.
