@@ -1,5 +1,5 @@
 ---
-title: PauseAI protest @ OpenAI - May 20th, 2023
+title: PauseAI protest @ Microsoft Brussels - May 23rd, 2023
 description: We are organizing a protest at Microsoft to demand a summit to pause AI development.
 ---
 
