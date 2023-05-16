@@ -40,6 +40,6 @@ Things that are very intelligent, are very powerful.
 If we build a machine that is far more intelligent than humans, we need to be sure that it wants the same thing as we want.
 However, this turns out to be very difficult.
 This is called the _alignment problem_.
-And if we fail to solve it in time, we are likely to end up with a machine that wants to convert all things on our planet into something else.
+If we fail to solve it in time, we are likely to end up with an unstoppable machine making decisions for us that is not considering our well-being.
 
 [Read more about x-risk](/xrisk)
