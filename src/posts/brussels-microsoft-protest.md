@@ -5,8 +5,7 @@ description: We are organizing a protest at Microsoft to demand a summit to paus
 
 - May 23rd, 2023, 12:00 - 14:00
 - [Microsoft Innovation Center, Rue Montoyer 51, Bruxelles, Belgium](https://goo.gl/maps/bvLbHDt61eSfpZV28?coh=178571&entry=tt)
-- [Sign up here](https://discord.gg/Epg6AsmQ?event=1103338741906550844)
-- [Join the Discord channel](https://discord.gg/anXWYCCdH5)
+- [Sign up on Discord](https://discord.gg/2XXWXvErfA?event=1105793166927470592)
 
 ## What do we want?
 
@@ -15,7 +14,9 @@ We want them to [pause AI development](/proposal) until we have a better underst
 
 ## Why at Microsoft?
 
-Microsoft and its subsidiary OpenAI are currently building the most powerful AI models.
-They are in the lead with the capacities of GPT-4.
-Their decision to open up their GPT APIs to plugins has accelerated the development of AI drastically.
+Microsoft invested $13 billion in OpenAI, which is currently building the most powerful AI models.
+Microsoft is locked in a race with other AI companies (like Google and Anthropic) to build the most powerful AI systems as fast as possible.
+This market dynamic is dangerous because it incentivizes companies to focus on capabilities and minimize safety efforts.
+This could lead to [serious risks](/risks) including [existential risk](/xrisk).
+
 We believe Microsoft is in a good position to take responsibility and support a pause on giant AI experiments.
