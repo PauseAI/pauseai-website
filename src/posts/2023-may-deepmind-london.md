@@ -118,3 +118,7 @@ Flyers
 Stickers and pin badges
 
 - Alistair will try to print PauseAI stickers and pin badges
+
+## Contact
+
+Alistair Steward ([email](mailto:achoto@protonmail.com), [twitter](https://twitter.com/alistair___s))
