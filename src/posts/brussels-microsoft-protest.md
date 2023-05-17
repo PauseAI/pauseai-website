@@ -9,9 +9,8 @@ description: We are organizing a protest at Microsoft to demand a summit to paus
 
 ## What do we want?
 
-We want our governments (and the EU, specifically) to organize a [summit](/summit) about the risks of AI.
-We want them to [pause AI development](/proposal) until we are sufficiently prepared for [the risks](/risks).
-
+We want our governments (and the EU, specifically) to organize a [summit](/summit) about the [risks](/risks) of AI.
+We want them to [pause AI development](/proposal) until we are sufficiently prepared for the risks.
 ## Why at Microsoft?
 
 Microsoft invested $13 billion in OpenAI, which is currently building the most powerful AI models.

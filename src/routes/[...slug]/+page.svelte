@@ -1,9 +1,8 @@
 <script lang="ts">
-	import { formatDate } from '$lib/utils'
-
 	export let data
 
 	let title = data.meta.title || data.slug
+	let parent = data.slug.split('/').slice(0, -1).join('/')
 </script>
 
 <svelte:head>
@@ -14,6 +13,9 @@
 </svelte:head>
 
 <article>
+	{#if parent}
+		<a href={`/${parent}`}>View all {parent}</a>
+	{/if}
 	<hgroup>
 		<h1>{title}</h1>
 		{#if data.meta.date}

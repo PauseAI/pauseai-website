@@ -1,6 +1,6 @@
 {
 	"type": "module",
-	"name": "sveltekit-markdown-blog",
+	"name": "pause-ai",
 	"private": true,
 	"scripts": {
 		"dev": "vite dev",

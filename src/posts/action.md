@@ -33,7 +33,7 @@ You are now one of them.
 
 - **Work towards an [AI safety summit](/proposal)**. Get your country to host one. We need to tackle this problem internationally.
 - **Invite (or subpoena) AI lab leaders** to parliamentary/congressional hearings to give their predictions and timelines of AI disasters.
-- **Establish a committee** to investigate the risks of AI.
+- **Establish a committee** to investigate the [risks of AI](/risks).
 
 ### If you know (international) law
 

@@ -20,6 +20,19 @@ We might soon see social media be flooded with fake discussions and opinions, an
 This could erode the trust we have in our society.
 It could threaten the fundamentals of our democracy even more than social media did.
 
+## Economic inequality and job loss
+
+During the industrial revolution, many people lost their jobs to machines.
+However, new (often better) jobs were created, and the economy grew.
+This time, things might be different.
+
+AI does not just replaces our muscles as the steam engine did, it replaces our brains.
+Regular humans may not have anything left to offer the economy.
+Image generation models are already impacting the creative industry.
+GPT-4 has passed the bar exam, can write excellent written content, and can even write code.
+The people who own these AI systems will be able to capitalize on them, but the people who lose their jobs to them will not.
+The way we distribute wealth in our society is not prepared for this.
+
 ## Computer viruses and hacks
 
 Virtually everything we do nowadays is in some way dependent on computers.
@@ -36,7 +49,10 @@ Instead of having to hire a team of highly skilled security experts/hackers to f
 
 ## Existential Risk
 
-Things that are very intelligent, are very powerful.
+Over half of AI researchers believe there is a >10% chance that AI will cause human extinction.
+Would you enter a plane if half of the plane engineers believed there was a >10% chance that it would crash?
+
+Very intelligent things are very powerful.
 If we build a machine that is far more intelligent than humans, we need to be sure that it wants the same thing as we want.
 However, this turns out to be very difficult.
 This is called the _alignment problem_.
