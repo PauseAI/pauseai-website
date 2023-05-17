@@ -10,7 +10,8 @@ description: We are organizing a protest at Microsoft to demand a summit to paus
 ## What do we want?
 
 We want our governments (and the EU, specifically) to organize a [summit](/summit) about the [risks](/risks) of AI.
-We want them to [pause AI development](/proposal) until we are sufficiently prepared for the risks.
+We want them to [pause AI development](/proposal) until we are sufficiently prepared.
+
 ## Why at Microsoft?
 
 Microsoft invested $13 billion in OpenAI, which is currently building the most powerful AI models.
@@ -19,3 +20,12 @@ This market dynamic is dangerous because it incentivizes companies to focus on c
 This dynamic poses [various risks](/risks) including [existential risk](/xrisk).
 
 We believe Microsoft is in a good position to take responsibility and support a pause on giant AI experiments.
+
+## Join
+
+- Join us on [Discord](https://discord.gg/2XXWXvErfA?event=1105793166927470592) to sign up and discuss the protest.
+- Read the Protester's [code of conduct](/protesters-code-of-conduct).
+
+## Contact
+
+- Joep Meindertsma ([email](mailto:joep@ontola.io), [phone](tel:+31636020942), [twitter](https://twitter.com/joepmeindertsma))
