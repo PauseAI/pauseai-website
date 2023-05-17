@@ -5,9 +5,9 @@ description: When and where we will be protesting.
 
 ## Coming up
 
+- [19th - 22nd of May, Google DeepMind, London](/2023-may-deepmind-london)
 - [20th of May, OpenAI, San Francisco](/openai-protest)
 - [23rd of May, Microsoft, Brussels](/brussels-microsoft-protest)
-- [19th - 23rd of May, Google DeepMind, London](/protests/2023-may-deepmind-london)
 
 ## Organizing a protest
 

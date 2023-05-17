@@ -3,8 +3,7 @@ import { error } from '@sveltejs/kit'
 export async function load({ params }) {
 	try {
 		let slug = params.slug
-		let path = `../../posts/${slug}.md`
-		const post = await import(path)
+		const post = await import(`../../posts/${slug}.md`)
 
 		return {
 			content: post.default,
