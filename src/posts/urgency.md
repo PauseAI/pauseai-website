@@ -44,7 +44,7 @@ There are many reasons why people underestimate the progress of AI.
 - **We keep moving the goalpost**. In the 90s, people thought the holy grail of AI was something that could play chess. When AI beat Kasparov, its next challenge was Go. Now, we have machines that score in the [99.9th percentile in IQ tests](https://bgr.com/tech/chatgpt-took-an-iq-test-and-its-score-was-sky-high/), can [translate 26 languages](https://bgr.com/tech/chatgpt-took-an-iq-test-and-its-score-was-sky-high/) and [win photography contests](https://www.scientificamerican.com/article/how-my-ai-image-won-a-major-photography-competition/), yet we're still asking questions like "When will AI reach human level?".
 
 But there are still some things that an AI can't do yet, luckily.
-It cannot [hack better than the best hackers](/xrisk) and it cannot do AI research as well as the best AI researchers.
+It cannot [hack better than the best hackers](/cybersecurity-risks) and it cannot do AI research as well as the best AI researchers.
 When we reach these thresholds, we will be in danger.
 
 So when will we reach the point when an AI can do all these things at a superhuman level?
