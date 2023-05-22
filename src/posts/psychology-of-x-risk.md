@@ -88,7 +88,7 @@ Understanding the actual difficulty of it takes a lot of time and effort.
 
 We see faces in clouds, and we see human-like qualities in AI systems.
 Millions of years of evolution have made us highly social creatures, but these instincts are not always helpful.
-We tend think of AIs as having human-like goals and motivations, being able to feel emotions, and having a sense of morality.
+We tend to think of AIs as having human-like goals and motivations, being able to feel emotions, and having a sense of morality.
 This is one of the reasons why people think that AI alignment is easy, and the [Orthogonality thesis](https://www.youtube.com/watch?v=hEUO6pjwFOo) can be so counter-intuitive.
 
 ### Jargon
