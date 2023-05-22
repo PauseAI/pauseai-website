@@ -11,7 +11,12 @@ description: When and where we will be protesting.
 
 ## Organizing a protest
 
-[Join our discord](https://discord.gg/2XXWXvErfA)!
+- [Join our discord](https://discord.gg/2XXWXvErfA) to discuss organizing a protest.
+- Make sure you write a press release and send it to the media.
+- Find coalition partners, and get as many people to join as possible.
+- Pick a fitting location and date.
+- Have something to hand out, like [our flyer](/PauseAI_flyer.pdf).
+- Carefully consider the signs and how your pictures will look - they will lead a life of their own on social media.
 
 ## Code of conduct
 

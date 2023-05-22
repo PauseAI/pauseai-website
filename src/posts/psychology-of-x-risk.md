@@ -64,12 +64,16 @@ These people have always been wrong.
 
 ### Coping mechanisms
 
-The human mind does not like receiving bad news.
-It will try to find ways to cope with it.
-Coping mechanisms include denial, anger, and bargaining.
-These are all ways to avoid having to internalize the bad news.
+The human mind does not like receiving bad news, and it has various coping mechanisms to deal with it.
+The most important ones when talking about x-risk are [denial](https://en.wikipedia.org/wiki/Cognitive_dissonance) and [compartmentalization](https://en.wikipedia.org/wiki/Compartmentalization_(psychology)).
+Both of these are ways to avoid having to internalize the bad news.
 
-The end of the world is the worst possible news, so it is not surprising that the human mind will throw every coping mechanism it has at it.
+These coping mechanisms protect us from the pain of having to accept that the world is not as we thought it was.
+However, they can also prevent us from adequately responding to a threat.
+
+When you notice someone using these coping mechanisms, try to be empathetic.
+They are not doing it on purpose, and they are not stupid.
+It is a natural reaction to bad news, and we all do it to some extent.
 
 ## Difficult to understand
 
@@ -110,10 +114,24 @@ If someone feels like the end of the world isn't that big of a deal (you would b
 Humananity isn't just some abstract concept, they are your friends, your family, and yourself.
 All the people you care about will die.
 
+### Coping mechanisms (preventing action)
+
+The same coping mechanisms that prevent people from _believing_ in existential risk also prevent them from _acting_ on it.
+If you're in denial or compartmentalizing, you won't feel the need to do anything about it.
+
+### Stress and anxiety
+
+As I'm writing this, I'm feeling stressed and anxious.
+It's not just because I fear the end of the world, but also because I feel like I have to do something about it.
+There's a lot of pressure to act, and it can be overwhelming.
+This stress can be a good motivator, but it can also be paralyzing.
+Keep in mind
+
 ### Hopelessness and powerlessness
 
-When people do take the topic seriously, and the full gravity of the situation sinks in, they will often feel like all hope is lost.
-The problem is too big, and they are too small.
+When people do take the topic seriously, and the full gravity of the situation sinks in, they often feel like all hope is lost.
+It can feel like a cancer diagnosis: you are going to die sooner than you wanted, and there is nothing you can do about it.
+The problem is too big to tackle, and the person is too small.
 Most people are no AI safety experts or lobbyists, so how can they possibly do anything about it?
 
 This is where you can help.
