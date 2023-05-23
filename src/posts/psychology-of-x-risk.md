@@ -13,7 +13,7 @@ Having a better understanding of _why_ these things are so difficult can help us
 ## Difficult to bring up
 
 X-risk is a difficult topic to bring up in conversation, especially if you are a politician.
-People may think you are crazy, and you may not fully understand the topic yourself.
+People may think you are crazy, and you may not feal comfortable talking about this complex topic yourself.
 
 ### Fear of being ridiculed
 
@@ -62,7 +62,7 @@ We have cured diseases, increased our life expectancy, and made our lives more c
 And every time we have done so, there have been people who opposed these innovations and warned about the dangers.
 These people have always been wrong.
 
-### Coping mechanisms
+### Our brains block out bad news
 
 The human mind does not like receiving bad news, and it has various coping mechanisms to deal with it.
 The most important ones when talking about x-risk are [denial](https://en.wikipedia.org/wiki/Cognitive_dissonance) and [compartmentalization](https://en.wikipedia.org/wiki/Compartmentalization_(psychology)).
@@ -84,14 +84,14 @@ Why not add a stop button? Why not raise the AI like a child? Why not make it va
 Contrary to most types of technical problems, people will have an opinion on how to solve it, and reliably underestimate the difficulty of the problem.
 Understanding the actual difficulty of it takes a lot of time and effort.
 
-### Anthropomorphism
+### We anthropomorphize
 
 We see faces in clouds, and we see human-like qualities in AI systems.
 Millions of years of evolution have made us highly social creatures, but these instincts are not always helpful.
 We tend to think of AIs as having human-like goals and motivations, being able to feel emotions, and having a sense of morality.
-This is one of the reasons why people think that AI alignment is easy, and the [Orthogonality thesis](https://www.youtube.com/watch?v=hEUO6pjwFOo) can be so counter-intuitive.
+This is one of the reasons why people intuitively think that AI alignment is easy, and why the [Orthogonality thesis](https://www.youtube.com/watch?v=hEUO6pjwFOo) can be so counter-intuitive.
 
-### Jargon
+### We use complex language
 
 The AI safety field consists mostly of a small group of (smart) people who have developed their own jargon.
 Reading LessWrong posts can feel like reading a foreign language.
@@ -111,7 +111,7 @@ Even if there is a 1% chance of this happening, it is still a very big deal.
 Rationally, we should consider this 1% chance of 8 billion deaths just as important as the certain death of 80 million people.
 
 If someone feels like the end of the world isn't that big of a deal (you would be surprised by how often this happens), you can try to make things more personal.
-Humananity isn't just some abstract concept, they are your friends, your family, and yourself.
+Humanity isn't just some abstract concept, they are your friends, your family, and yourself.
 All the people you care about will die.
 
 ### Coping mechanisms (preventing action)
@@ -125,7 +125,6 @@ As I'm writing this, I'm feeling stressed and anxious.
 It's not just because I fear the end of the world, but also because I feel like I have to do something about it.
 There's a lot of pressure to act, and it can be overwhelming.
 This stress can be a good motivator, but it can also be paralyzing.
-Keep in mind
 
 ### Hopelessness and powerlessness
 
@@ -136,6 +135,6 @@ Most people are no AI safety experts or lobbyists, so how can they possibly do a
 
 This is where you can help.
 You can show them that there are [things they can do](/action).
-Writing a letter, going to a protest, donating some money or joining a community are not that hard!
-And they have a real impact.
+Writing a letter, going to a protest, donating some money or joining a community is not that hard!
+And these actions have a real impact.
 Even when facing the end of the world, there can still be hope and very rewarding work to do.

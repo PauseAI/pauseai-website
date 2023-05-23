@@ -15,7 +15,7 @@
 </svelte:head>
 
 <section>
-	<Block linkText="Read why" href="/risks">
+	<Block linkText="Read about the risks" href="/risks">
 		<span slot="title">We risk <Mark>losing control</Mark></span>
 		AI could erode our democracy, could be used to create powerful computerviruses, and could even cause
 		human extinction.
