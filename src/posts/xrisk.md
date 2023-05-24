@@ -15,13 +15,13 @@ When you ask AI safety researchers (the people who actually research the safety 
 
 The list includes people like:
 
-- **Stuart Russell**, writer of the #1 textbook on Artificial Intelligence used in most AI studies
-- **Yoshua Bengio**, deep learning pioneer and winner of the Turing Award.
+- **Stuart Russell**, writer of the #1 textbook on Artificial Intelligence used in most AI studies: ["If we pursue [our current approach], then we will eventually lose control over the machines"](https://news.berkeley.edu/2023/04/07/stuart-russell-calls-for-new-approach-for-ai-a-civilization-ending-technology/)
+- **Yoshua Bengio**, deep learning pioneer and winner of the Turing Award: ["rogue AI may be dangerous for the whole of humanity [...] banning powerful AI systems (say beyond the abilities of GPT-4) that are given autonomy and agency would be a good start"](https://yoshuabengio.org/2023/05/22/how-rogue-ais-may-arise/)
 
 But this is not the only time that we've been warned about the existential dangers of AI:
 
 - **Stephen Hawking**, theoretical physicist & cosmologist: ["The development of full artificial intelligence could spell the end of the human race"](https://nypost.com/2023/05/01/stephen-hawking-warned-ai-could-mean-the-end-of-the-human-race/).
-- **Geoffrey Hinton**, the "Godfather of AI", [left Google](https://fortune.com/2023/05/01/godfather-ai-geoffrey-hinton-quit-google-regrets-lifes-work-bad-actors/) to warn people of AI: ["This is an existential risk"](https://www.reuters.com/technology/ai-pioneer-says-its-threat-world-may-be-more-urgent-than-climate-change-2023-05-05/)
+- **Geoffrey Hinton**, the "Godfather of AI" and Turing Award winner, [left Google](https://fortune.com/2023/05/01/godfather-ai-geoffrey-hinton-quit-google-regrets-lifes-work-bad-actors/) to warn people of AI: ["This is an existential risk"](https://www.reuters.com/technology/ai-pioneer-says-its-threat-world-may-be-more-urgent-than-climate-change-2023-05-05/)
 - **Eliezer Yudkowsky**, founder of MIRI and conceptual father of the AI safety field: ["If we go ahead on this everyone will die"](https://time.com/6266923/ai-eliezer-yudkowsky-open-letter-not-enough/).
 
 Even the leaders and investors of the AI companies themselves are warning us:
@@ -37,22 +37,26 @@ Intelligence can be defined as _how good something is at achieving its goals_.
 Right now, humans are the most intelligent thing on earth.
 Because of our intelligence, we are dominating our planet.
 We might not have claws or scaled skin, but we have big brains.
+Intelligence is our weapon: it's what gave us spears, guns and pesticides.
 Our intelligence helped us to transform most of the earth into how we like it: cities, buildings, and roads.
 
 From the perspective of less intelligent animals, this has been a disaster.
 It's not that humans hate the animals, it's just that we can use their habitats for our own goals.
 Our goals are things like comfort, status, love, tasty food, and more.
-We are destroying the habitats of other animals as a side effect of pursuing our goals.
+We are destroying the habitats of other animals as a **side effect of pursuing our goals**.
 
-An AI also has a goal.
-This depends on how it is trained.
-We _want_ an AI to have all these delicate goals and values that humans have.
-But we don't know how to do that.
+An AI can also have a goal.
+We _want_ an AI to value these delicate goals that humans have, but we don't know how to do that.
 We know how to train machines to be intelligent, but **we don't know how to get them to want what we want**.
 This problem is called the _alignment problem_.
 
 If a superintelligent system is built, and it will have a goal that is even _a little_ different from what we want it to have,
-it could have absolutely disastrous consequences.
+it could have disastrous consequences.
+
+## What can an AI do?
+
+You might think that an AI is locked inside a computer, and can't do anything.
+
 
 ## Why most goals are bad news for humans
 

@@ -5,12 +5,14 @@ description: When and where we will be protesting.
 
 ## Coming up
 
-- [23rd of May, Microsoft, Brussels](/brussels-microsoft-protest)
+- 4th of June, NYC, UN Building
 
 ## Past Protests
 
-- [19th - 22nd of May, Google DeepMind, London](/2023-may-deepmind-london)
+- [24th of May, London, UCL](https://twitter.com/GFuterman/status/1660648998863028230?s=20)
+- [23rd of May, Microsoft, Brussels](/brussels-microsoft-protest)
 - [20th of May, OpenAI, San Francisco](/openai-protest)
+- [19th - 22nd of May, Google DeepMind, London](/2023-may-deepmind-london)
 
 ## Organizing a protest
 

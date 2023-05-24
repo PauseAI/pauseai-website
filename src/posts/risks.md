@@ -16,11 +16,20 @@ Just two years ago, we laughed at the horribly unrealistic dall-e images, but no
 GPT-4 can write in a way that is indistinguishable from humans.
 
 Creating fake media is not new, but AI makes it much cheaper and much more realistic.
+An AI-generated image of an explosion caused [panic sells in wall street](https://www.euronews.com/next/2023/05/23/fake-news-about-an-explosion-at-the-pentagon-spreads-on-verified-accounts-on-twitter).
 We might soon see social media be flooded with fake discussions and opinions, and fake news articles that are indistinguishable from real ones.
 This could erode the trust we have in our society.
 It could threaten the fundamentals of our democracy even more than social media did.
 
-## Economic inequality and job loss
+## Biases and discrimination
+
+AI systems are trained on data, and much of the data we have is in some way biased.
+This means that AI systems will inherit the biases of our society.
+An automated recruitment system at Amazon [inherited a bias against women](https://www.reuters.com/article/us-amazon-com-jobs-automation-insight-idUSKCN1MK08G).
+Black patients were [less likely to be referred to a medical specialist](https://www.science.org/doi/full/10.1126/science.aax2342).
+These biases often appear without the creators of the AI system being aware of them.
+
+## Economic inequality, instability and job loss
 
 During the industrial revolution, many people lost their jobs to machines.
 However, new (often better) jobs were created, and the economy grew.
@@ -28,7 +37,8 @@ This time, things might be different.
 
 AI does not just replaces our muscles as the steam engine did, it replaces our brains.
 Regular humans may not have anything left to offer the economy.
-Image generation models are already impacting the creative industry.
+Image generation models are already [impacting the creative industry](https://cointelegraph.com/news/artists-face-a-choice-with-ai-adapt-or-become-obsolete).
+Writers are [striking](https://www.newscientist.com/article/2373382-why-use-of-ai-is-a-major-sticking-point-in-the-ongoing-writers-strike/).
 GPT-4 has passed the bar exam, can write excellent written content, and can even write code.
 The people who own these AI systems will be able to capitalize on them, but the people who lose their jobs to them will not.
 The way we distribute wealth in our society is not prepared for this.
