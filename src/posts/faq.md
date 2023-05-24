@@ -15,15 +15,13 @@ Note that no (surveyed) AI safety researchers believe that there's a 0% chance.
 However, there might be selection bias here: people who work in the AI safety field are likely to do so because they believe preventing bad AI outcomes is important.
 
 If you ask AI researchers in general (not safety specialists), this number drops to a [mean value of around 14%](https://aiimpacts.org/2022-expert-survey-on-progress-in-ai/).
-Note that there might be a selection bias here as well: people who work in AI are likely to do so because they believe AI will be beneficial.
-
-There are also some AI scientists who believe that there is no risk at all.
-We have yet to see a single person who has read about AI alignment in depth, who still believes that there is no risk.
+A small minority, about 4% of them, believe that the alignment problem is not a real problem.
+Note that there might be a selection bias here in the opposite direction: people who work in AI are likely to do so because they believe AI will be beneficial.
 
 **Imagine you're invited to take a test flight on a new airplane**.
 The airplane safety experts on average think there's a 30% chance it would crash.
 The plane engineers think there's a 14% chance of crashing.
-Some engineers are saying that there's no chance of crashing, the plane is perfectly safe.
+About 4% of engineers are saying that there's no chance of crashing, it is uncrashable.
 
 Would you enter that plane? Because right now, we're all boarding the AI plane.
 
