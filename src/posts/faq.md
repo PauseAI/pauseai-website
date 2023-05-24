@@ -25,6 +25,16 @@ About 4% of engineers are saying that there's no chance of crashing, it is uncra
 
 Would you enter that plane? Because right now, we're all boarding the AI plane.
 
+### How long do we have until superintelligent AI?
+
+It might take months, it might take decades, nobody knows for sure.
+However, we do know that the pace of AI progress is often grossly underestimated.
+Just three years ago we thought we'd have SAT-passing AI systems in 2055.
+We got there in april 2023.
+We should act as if we have very little time left, because we don't want to be caught off guard.
+
+[Read more about urgency](/urgency).
+
 ### OpenAI and Google are saying they want to be regulated. Why are you protesting them?
 
 We applaud [OpenAI](https://openai.com/blog/governance-of-superintelligence) and [Google](https://www.ft.com/content/8be1a975-e5e0-417d-af51-78af17ef4b79) for their calls for international regulation of AI.
@@ -37,15 +47,10 @@ We need governments to step in and organize a summit to discuss the risks of AI,
 
 ### Aren't you just scared of changes and new technology?
 
-You might be surprised that most people in PauseAI can be considered techno-optimists.
-Many of them are deeply involved in AI research and development, are gadget lovers, and have mostly been very excited about the future.
+You might be surprised that most people in PauseAI consider themselves techno-optimists.
+Many of them are involved in AI development, are gadget lovers, and have mostly been very excited about the future.
 Particularly many of them have been excited about the potential of AI to help humanity.
 That's why for many of us the sad realization that AI might be an existential risk was a very difficult one to internalize.
-
-### Is a ban on AGI training enforceable?
-
-Yes, at least for very large models.
-Tracking and monitoring the sales of GPUs (used for training AIs) is [actually very doable](https://arxiv.org/abs/2304.04123).
 
 ### I have a different / AI related question
 
