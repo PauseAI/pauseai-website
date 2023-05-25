@@ -12,7 +12,7 @@ On Saturday, June 3rd, at sunset, a candlelit vigil will take place in front of 
 
 Half of AI researchers [believe](https://aiimpacts.org/2022-expert-survey-on-progress-in-ai/) that there is a 10% or greater chance that the invention of superhuman AI will mean the end of humanity. Would you board an airplane if half of the aircraft engineers thought there was a 10% chance of it crashing?
 
-Prominent examples of people warning about the dangers of AI include Prof. [Geoffrey Hinton](https://www.reuters.com/technology/ai-pioneer-says-its-threat-world-may-be-more-urgent-than-climate-change-2023-05-05/) and Prof. Yoshua Bengio, both Turing Award winners and pioneers of the most successful AI methods today. Not only scientists but also leaders of AI companies themselves are concerned about this danger:
+Prominent examples of people warning about the dangers of AI include Prof. [Geoffrey Hinton](https://www.reuters.com/technology/ai-pioneer-says-its-threat-world-may-be-more-urgent-than-climate-change-2023-05-05/) and Prof. [Yoshua Bengio](https://yoshuabengio.org/2023/05/22/how-rogue-ais-may-arise/), both Turing Award winners and pioneers of the most successful AI methods today. Not only scientists but also leaders of AI companies themselves are concerned about this danger:
 
 - Sam Altman (CEO of OpenAI, the company behind ChatGPT): ["Development of superhuman machine intelligence is probably the greatest threat to the continued existence of humanity."](https://blog.samaltman.com/machine-intelligence-part-1)
 - Elon Musk (co-founder of OpenAI): ["AI has the potential of civilizational destruction."](https://www.inc.com/ben-sherry/elon-musk-ai-has-the-potential-of-civilizational-destruction.html)

@@ -41,6 +41,9 @@ Here are some resources to get you started.
 
 - [Future of Life Institute](https://futureoflife.org/cause-area/artificial-intelligence/) started the [open letter](https://futureoflife.org/open-letter/pause-giant-ai-experiments/)
 - [Effective Altruism](https://www.effectivealtruism.org/). A community of people, many of which are highly concerned about AI safety. They also have a great [post on pursuing a career](https://forum.effectivealtruism.org/posts/7WXPkpqKGKewAymJf/how-to-pursue-a-career-in-technical-ai-alignment) in AI alignment.
+- [FutureSociety](https://thefuturesociety.org/about-us/)
+- [Conjecture](https://www.conjecture.dev/). Start-up that is working on AI alignment and AI policy.
+- [Existential Risk Observatory](https://existentialriskobservatory.org/). Dutch organization that is informing the public on x-risks and studying communication strategies.
 
 ## Books
 
