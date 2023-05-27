@@ -3,9 +3,13 @@ title: Why we might have superintelligence sooner than most think
 description: We're underestimating the progress of AI, and there is a small but realistic chance that we are very close to a superintelligence.
 date: '2023-05-04'
 ---
-Having an estimated range of when we could have superintelligence is essential to making sure we don't get caught off guard.
+Superintelligent AI has the potential to be the best or the worst thing that has ever happened to humanity.
+If we solve the AI alignment problem before we get to superhuman capabilities, we can have a future where AI helps us solve all of our problems.
+If we reach superintelligence before we solve the alignment problem, [we're facing extinction](/xrisk).
+
+So having an estimated range of when we could have superintelligence is essential to making sure we don't get caught off guard.
 If our predictions are too far off, we may not be able to prepare in time.
-And boy have we been wrong.
+And boy have we been wrong in the past.
 
 ## We reached human-level performance in 2023
 

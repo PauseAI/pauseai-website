@@ -56,7 +56,12 @@ it could have disastrous consequences.
 ## What can an AI do?
 
 You might think that an AI is locked inside a computer, and can't do anything.
+However, it could use the internet do things like:
 
+- Hack into other computers, possibly even [all devices on the internet](/cybersecurity-risks).
+- Manipulate people through messages, e-mails, fake videos or phone calls.
+- Control devices connected to the internet, like cars, planes, or even nuclear weapons.
+- Design a novel bioweapon using protein folding and order it to be printed in a lab.
 
 ## Why most goals are bad news for humans
 
@@ -64,7 +69,7 @@ We can't predict _what_ the AI will want (it depends on how it is programmed, an
 However, we can [mathematically prove](https://arxiv.org/pdf/1912.01683.pdf) what a rational machine will pursue in _virtually any goal_:
 
 - **Maximizing its resources**. Think about more energy, more computers to run on or access to more materials. If a rational AI can use all energy of the planet to get a little bit closer to its goal, it will do that.
-- **Ensuring its own survival**. This means the AI will not want humans to turn it off, as it could no longer achieve its goals. This means the AI might conclude that humans are a threat to its existence if we can turn it off.
+- **Ensuring its own survival**. This means the AI will not want to be turned off, as it could no longer achieve its goals. AI might conclude that humans are a threat to its existence, as humans could turn it off.
 - **Preserving its goals**. This means the AI will not want humans to modify its code, because that could change its goals.
 
 This is called [instrumental convergence](https://www.youtube.com/watch?v=ZeecOKBus3Q), and it is at the core of what AI safety researchers are worried about.
@@ -94,7 +99,7 @@ We might live in a utopic world where all diseases are cured, or we might end up
 
 In 2020, [the average AI researcher thought](https://www.metaculus.com/questions/3479/date-weakly-general-ai-is-publicly-known/) that it would take until 2057 before an AI could pass SAT exams. It took us less than 3 years.
 
-It's hard to predict how long it will take to build a superintelligent AI, but we know that there are more people than ever working on it, and that the field is moving at a frantic pace.
+It's hard to predict how long it will take to build a superintelligent AI, but we know that there are more people than ever working on it and that the field is moving at a frantic pace.
 It may take many years or just a few months.
 We don't know.
 We should err on the side of caution, and act now.

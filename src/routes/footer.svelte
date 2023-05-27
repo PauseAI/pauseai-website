@@ -14,7 +14,8 @@
 	<Toggle />
 	<a href={editUrl}>Edit this page on Github</a>
 	<a href="/rss.xml" target="_blank">RSS</a>
-	<p>CC-BY</p>
+	<a href="/posts">All pages</a>
+	<p>CC-BY (share alike)</p>
 </footer>
 
 <style>

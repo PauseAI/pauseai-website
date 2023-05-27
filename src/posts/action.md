@@ -24,7 +24,7 @@ You are now one of them.
 
 ### If you are convincing
 
-- **Convince one person in your government to organize the summit**. This is the most important thing you can do. See [lobby tips](/lobby-tips).
+- **Convince one person in your government to organize the [summit](/summit)**. This is the most important thing you can do. See [lobby tips](/lobby-tips).
 - **Convince journalists** to write about AI safety. Point them to [educational materials](/learn).
 - **Ask the management** at your current organisation to take an institutional position on this.
 - [Write to your political representatives](https://www.campaignforaisafety.org/politician/).
@@ -42,7 +42,7 @@ You are now one of them.
 
 ### If you have money to spare
 
-- **Donate** to the [Campaign for AI Safety](https://www.campaignforaisafety.org/donate/).
+- **Donate** to the [Campaign for AI Safety](https://www.campaignforaisafety.org/donate/), [Future of Life Institute](https://futureoflife.org/donate/), the [Machine Intelligence Research Institute](https://intelligence.org/donate/) or [NonLinearNetwork](https://nonlinearnetwork.org/)
 
 ### If you can write web content
 
@@ -50,6 +50,7 @@ You are now one of them.
 
 ### If you work in AI
 
+- **Don't work towards superintelligence**. If you have some cool idea on how we can make AI systems 10x faster, please don't build it / spread it / talk about it. We need to slow down AI development, not speed it up.
 - **Talk to your management and colleagues** about the risks. Get them to take an institutional position on this.
 - **Hold a seminar** on AI safety at your workplace. Check out the [videos](/learn#videos) for inspiration.
 - **Sign** the [open letter](https://futureoflife.org/open-letter/pause-giant-ai-experiments/).

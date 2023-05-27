@@ -15,7 +15,9 @@
 			<li class="post">
 				<a href={post.slug} class="title">{post.title}</a>
 				<!-- <p class="date">{formatDate(post.date)}</p> -->
-				<p class="description">{post.description}</p>
+				{#if post.description}
+					<p class="description">{post.description}</p>
+				{/if}
 			</li>
 		{/each}
 	</ul>
@@ -24,21 +26,20 @@
 <style>
 	.posts {
 		display: grid;
-		gap: var(--size-7);
-	}
-
-	.post {
-		max-inline-size: var(--size-content-3);
-	}
-
-	.post:not(:last-child) {
-		border-bottom: 1px solid var(--border);
-		padding-bottom: var(--size-7);
+		gap: 1rem;
 	}
 
 	.title {
-		font-size: var(--font-size-fluid-3);
+		color: var(--text);
+		font-family: var(--font-heading);
+		font-weight: bold;
+		text-decoration: none;
+		font-size: 1.3rem;
 		text-transform: capitalize;
+	}
+
+	.title:hover {
+		text-decoration: underline;
 	}
 
 	.date {

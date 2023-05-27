@@ -80,7 +80,7 @@ It is a natural reaction to bad news, and we all do it to some extent.
 ### AI alignment is surprisingly hard
 
 People may intuitively feel like they could solve the AI alignment problem.
-Why not add a stop button? Why not raise the AI like a child? Why not make it value human life? Why not Asimov's laws?
+Why not add a [stop button](https://www.youtube.com/watch?v=3TYT1QfdfsM&list=PLfHsskCxi_g-c62a_dmsNuHynaXsRQm40&index=10)? Why not [raise the AI like a child](https://www.youtube.com/watch?v=eaYIU6YXr3w)? Why not [Asimov's three laws](https://www.youtube.com/watch?v=7PKx3kS7f4A)?
 Contrary to most types of technical problems, people will have an opinion on how to solve it, and reliably underestimate the difficulty of the problem.
 Understanding the actual difficulty of it takes a lot of time and effort.
 

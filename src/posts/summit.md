@@ -3,8 +3,14 @@ title: AI Safety Summit
 description: What it would take to organize a summit on AI safety.
 ---
 
-The primary goal of PauseAI is to **convince one government to organize a summit where a treaty can be established to pause AI development**.
-See the [proposal](/proposal) page for more information.
+AI presents very real risks to humanity, including the [risk of extinction](/xrisk).
+Progress in AI capabilities is accelerating at a [frantic pace](/urgency), and we are not prepared for the consequences.
+AI companies are locked in a race to the bottom, where safety is not the highest priority.
+We need governments to step in and regulate AI development.
+This needs to happen on an international level.
+**The only way to achieve this is through a summit.**
+The primary goal of PauseAI is to convince one government to organize such a summit.
+
 But what does such a summit look like?
 Well, it will be a meeting of national governments, hosted by one of them.
 A summit can take many days and will be attended by many people.
@@ -26,12 +32,20 @@ They need to find a suitable date and location, arrange the catering, draft the 
 
 ## Treaty
 
-The treaty is the most important part of the summit.
+The treaty is the most important outcome of the summit.
 It is the document that will be signed by the participating states and will be the basis for future negotiations.
 
-- A temporary ban on the development of AI systems more powerful than GPT-4, until the risks are better understood.
+We propose that the treaty should contain the following:
+
+- Set up an international AI safety agency, similar to the IAEA.
+- Ban on the development of AI systems more powerful than GPT-4, until the risks are better understood.
+  - Require approval to conduct any new training run above a certain size (e.g. 1 billion parameters).
 - Periodic meetings to discuss the progress of AI safety research.
 - Agreements on increasing national investments in AI safety research.
+
+You can take inspiration from:
+
+- [stop.ai/proposals](https://www.stop.ai/proposals)
 
 ## Suggested agenda
 
@@ -49,6 +63,7 @@ The following is a suggested agenda for the summit:
   - The alignment problem
   - Instrumental convergence
 - AI safety policy
-  - Restricting AI research publications
+  - International level
   - Funding AI safety research
-  - Restricting open source models
+  - Risks of AI research publications
+  - Governance of open source models
