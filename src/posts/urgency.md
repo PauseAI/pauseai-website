@@ -28,7 +28,8 @@ It hasn't passed the Turing test, but probably not because of a lack of capabili
 It's because GPT-4 has been fine-tuned to not mislead people. It's not good for business if your AI is telling people it's actually a person.
 That only leaves Montezuma's Revenge.
 It is not unthinkable that it can be finished by a clever setup of GPT-4, using something like AutoGPT to analyze the screen and generate the correct inputs.
-We got 2/4 criteria with certainty, and likely 4/4 if we tried.
+In May 2023, [GPT-4 was able to write code to get diamond gear in Minecraft](https://the-decoder.com/minecraft-bot-voyager-programs-itself-using-gpt-4/).
+In short: GPT-4 got 2/4 criteria with certainty, and likely 4/4 if we tried.
 
 **We're there, folks.
 We already have (weak) AGI.**

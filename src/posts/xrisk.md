@@ -58,9 +58,9 @@ it could have disastrous consequences.
 You might think that an AI is locked inside a computer, and can't do anything.
 However, it could use the internet do things like:
 
-- Hack into other computers, possibly even [all devices on the internet](/cybersecurity-risks).
 - Manipulate people through messages, e-mails, fake videos or phone calls.
-- Control devices connected to the internet, like cars, planes, or even nuclear weapons.
+- Hack into other computers, possibly even [all devices on the internet](/cybersecurity-risks).
+- Control devices connected to the internet, like cars, planes, robotized (autonomous) weapons or even nuclear weapons.
 - Design a novel bioweapon using protein folding and order it to be printed in a lab.
 
 ## Why most goals are bad news for humans
@@ -80,13 +80,9 @@ A superintelligent thing that wants to take over all materials it can get, and w
 The core problem is that _it will be much smarter than us_.
 A superintelligence will be able to predict how humans respond, especially ones that are trained on all written human knowledge.
 If the AI knows you can turn it off, it might behave nicely until it is certain that it can get rid of you.
-
 We already have [real examples](https://www.pcmag.com/news/gpt-4-was-able-to-hire-and-deceive-a-human-worker-into-completing-a-task) of AI systems deceiving humans to achieve their goals.
 A superintelligent AI would be a master of deception.
-
-A superintelligence will also be a very competent hacker.
-It could analyze the source code of most operating systems, find new zero-day exploits, and use them to take over computers.
-GPT-4 can already write the code for a website by [looking at a sketch in a notebook](https://twitter.com/mckaywrigley/status/1635740909383061504?ref_src=twsrc%5Etfw%7Ctwcamp%5Etweetembed%7Ctwterm%5E1635740909383061504%7Ctwgr%5E30ea318cb9561a8a388b0fb2ff06ffddb7c9865e%7Ctwcon%5Es1_c10&ref_url=https%3A%2F%2Fwww.nytimes.com%2F2023%2F03%2F15%2Ftechnology%2Fgpt-4-artificial-intelligence-openai.html).
+You might think: well, can't we build an AI that _wants_ to be turned off?
 
 ## Even a perfectly aligned superintelligence is dangerous in the wrong hands
 
