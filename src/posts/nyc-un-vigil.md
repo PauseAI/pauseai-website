@@ -5,6 +5,7 @@ title: PauseAI candlelit vigil @ UN HQ NYC, 3rd of June
 - Candlelit vigil to raise awareness about the existential risk of AI.
 - 3rd of June, 7:30PM to 9PM. Sun sets at 8:15 here.
 - United Nations Headquarters in New York City.
+- [Sign up](https://forms.gle/hsVetUDx3R1w6yj59) 
 
 ## Press Release
 
