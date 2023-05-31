@@ -31,10 +31,14 @@ Even the leaders and investors of the AI companies themselves are warning us:
 - **Bill Gates** (co-founder of Microsoft, which owns 50% of OpenAI) warned that ["AI could decide that humans are a threat"](https://www.denisonforum.org/daily-article/bill-gates-ai-humans-threat/).
 - **Jaan Tallinn** (lead investor of Antrhopic): ["I've not met anyone in AI labs who says the risk [from training a next-gen model] is less than 1% of blowing up the planet. It's important that people know lives are being risked."](https://twitter.com/liron/status/1656929936639430657)
 
+Virtually all AI labs and hundreds of AI scientists have [signed the following statement](https://www.safe.ai/statement-on-ai-risk) in May 2023:
+
+> "Mitigating the risk of extinction from AI should be a global priority alongside other societal-scale risks such as pandemics and nuclear war."
+
 ## Why superintelligence is dangerous
 
 Intelligence can be defined as _how good something is at achieving its goals_.
-Right now, humans are the most intelligent thing on earth.
+Right now, humans are the most intelligent thing on earth, although that could change soon.
 Because of our intelligence, we are dominating our planet.
 We might not have claws or scaled skin, but we have big brains.
 Intelligence is our weapon: it's what gave us spears, guns and pesticides.
@@ -82,14 +86,15 @@ A superintelligence will be able to predict how humans respond, especially ones 
 If the AI knows you can turn it off, it might behave nicely until it is certain that it can get rid of you.
 We already have [real examples](https://www.pcmag.com/news/gpt-4-was-able-to-hire-and-deceive-a-human-worker-into-completing-a-task) of AI systems deceiving humans to achieve their goals.
 A superintelligent AI would be a master of deception.
-You might think: well, can't we build an AI that _wants_ to be turned off?
 
 ## Even a perfectly aligned superintelligence is dangerous in the wrong hands
 
+So we haven't solved the alignment problem, but let's play with the thought that we did.
 Imagine that a superintelligent AI is built, and it does exactly what the operator wants it to do.
 In that case, the operator would have unimaginable power.
 A superintelligence could be used to create new weapons, hack all computers and manipulate humanity.
-We might live in a utopic world where all diseases are cured, or we might end up in an Orwellian nightmare where one human controls the world.
+Should we trust a single entity with that much power?
+We might end up in a utopic world where all diseases are cured and everybody is happy, or in an Orwellian nightmare.
 
 ## We may not have much time left
 

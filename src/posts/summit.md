@@ -47,10 +47,11 @@ You can take inspiration from:
 
 - [stop.ai/proposals](https://www.stop.ai/proposals)
 
-## Suggested agenda
+## Suggested educational agenda
 
 Many people will be attending the summit, and not all of them will be deeply familiar with AI safety.
 They must be able to follow the discussions and make informed decisions.
+Therefore, we believe it is paramount to make education on x-risk a part of the Summit.
 
 The following is a suggested agenda for the summit:
 

@@ -33,7 +33,7 @@ It could then have full control over these machines.
 It could steal data, spread itself, use the hardware for computations, or simply make the machine unusable.
 
 If creating these types of viruses becomes technically feasible, someone will likely do it eventually.
-It could happen by accident (e.g. by a [misaligned AI](/xrisk)), or it could happen on purpose.
+It could happen by accident (e.g. by a [misaligned AI](/xrisk)), or it could happen on purpose (e.g. as a cyber weapon by a nation or terrorist).
 And when that happens, the effects could be devastating.
 
 If effectively all computers are disabled, society breaks down.
@@ -41,6 +41,7 @@ People will not be able to buy food with their credit cards or phones.
 Truck drivers would not know which supermarkets to drive to.
 Farmers would not be able to sell their produce or restock supplies.
 The economy would grind to a halt, all supply chains would break down, and people will start to go hungry.
+Societal collapse has happened often before
 
 This is a very real threat, and we should start preparing for it now.
 But more importantly: we need to prevent it from happening in the first place.

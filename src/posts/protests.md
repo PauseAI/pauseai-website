@@ -17,7 +17,7 @@ description: When and where we will be protesting.
 ## Organizing a protest
 
 - [Join our discord](https://discord.gg/2XXWXvErfA) to discuss organizing a protest. We're happy to help you with advice and resources!
-- Make sure you write a press release and send it to the media. Give sufficient background and sources for your claims.
+- Make sure you write a press release and send it to the media. Read more about [how to write a press release](/writing-press-releases).
 - Find coalition partners, and get as many people to join as possible.
 - Pick a fitting location and date.
 - Have something to hand out, like <a href="/PauseAI_flyer.pdf" target="_blank">our flyer</a>.

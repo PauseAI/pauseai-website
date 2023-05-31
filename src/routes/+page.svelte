@@ -17,8 +17,12 @@
 <section>
 	<Block linkText="Read about the risks" href="/risks">
 		<span slot="title">We risk <Mark>losing control</Mark></span>
-		AI could erode our democracy, could be used to create powerful computerviruses, and could even cause
-		human extinction.
+		AI could erode our democracy, could destabilize our economy and could be used to create powerful
+		cyberweapons.
+	</Block>
+	<Block linkText="Why and how AI can kill us" href="/xrisk">
+		<span slot="title">We risk <Mark>human extinction</Mark></span>
+		Virtually all AI labs and experts agree: AI could end humanity.
 	</Block>
 	<Block linkText="Read the proposal" href="/proposal">
 		<span slot="title">We need a <Mark>pause</Mark></span>
