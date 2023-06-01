@@ -8,6 +8,7 @@ Here are some resources to get you started.
 
 ## Videos
 
+- [Don't look up - The Documentary: The Case For AI As An Existential Threat](https://www.youtube.com/watch?v=U1eyUjVRir4) (17 mins). Powerful and nicely edited documentary about the dangers of AI, with many expert quotes from interviews.
 - [How to get Empowered, not overpowered by AI](https://www.youtube.com/watch?v=2LRwvU6gEbA) (15 mins). A brief introduction to the importance of getting AI alignment right.
 - [Robert Miles' YouTube videos](https://www.youtube.com/watch?v=tlS5Y2vm02c&list=PLfHsskCxi_g-c62a_dmsNuHynaXsRQm40) are a great place to start understanding most of the fundamentals of AI alignment.
 - [Max Tegmark with Lex interview](https://youtu.be/VcVfceTsD0A?t=1547) (2 hrs). Interview that dives into the details of our current dangerous situation. _"It's like 'Don't look up', but we are building the asteroid ourselves."_
