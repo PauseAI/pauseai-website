@@ -98,7 +98,7 @@ We might end up in a utopic world where all diseases are cured and everybody is 
 
 ## We may not have much time left
 
-In 2020, [the average AI researcher thought](https://www.metaculus.com/questions/3479/date-weakly-general-ai-is-publicly-known/) that it would take until 2057 before an AI could pass SAT exams. It took us less than 3 years.
+In 2020, [the average prediction](https://www.metaculus.com/questions/3479/date-weakly-general-ai-is-publicly-known/) for an AI to pass SAT exams was 2055. It took us less than 3 years.
 
 It's hard to predict how long it will take to build a superintelligent AI, but we know that there are more people than ever working on it and that the field is moving at a frantic pace.
 It may take many years or just a few months.

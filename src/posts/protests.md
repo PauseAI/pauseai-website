@@ -28,3 +28,11 @@ description: When and where we will be protesting.
 ## Code of conduct
 
 [Read our code of conduct on protesting](/protesters-code-of-conduct)
+
+## Media coverage
+
+- [Politico](https://www.politico.eu/article/microsoft-brussels-elon-musk-anti-ai-protesters-well-five-of-them-descend-on-brussels/)
+- [The Verge](https://www.theverge.com/2023/5/24/23735982/sam-altman-openai-superintelligent-benefits-talk-london-ucl-protests)
+- [Wired](https://www.wired.co.uk/article/sam-altman-world-tour-ai-doomers)
+- [Express](https://www.express.co.uk/news/uk/1775620/artificial-intelligence-extinction-google-chat-gpt)
+- [Camden New Journal](https://www.camdennewjournal.co.uk/article/protesters-tell-tech-quarter-companies-to-press-pause-on-artificial-intelligence-research)
