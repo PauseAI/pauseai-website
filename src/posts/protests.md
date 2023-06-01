@@ -5,7 +5,7 @@ description: When and where we will be protesting.
 
 ## Coming up
 
-- [4th of June, NYC, UN Building](/nyc-un-vigil)
+- [3rd of June, NYC, UN Building](/nyc-un-vigil)
 
 ## Past Protests
 
