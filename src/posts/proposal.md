@@ -16,11 +16,11 @@ We need our leaders to understand the urgency of the situation, and to take acti
 
 ## Suggested contents of the treaty
 
-- Ban the development of AI systems more powerful than GPT-4, until the alignment problem is solved.
+- Ban the development and training of AI systems more powerful than GPT-4, at least until the alignment problem is solved and the safety of such systems can be guaranteed.
+- [Track the sales of GPUs](https://arxiv.org/abs/2303.11341) and other hardware that can be used for AI training. This helps to enforce the ban on training.
+- Ban training of AI systems on copyrighted material. This helps copyright issues, slows growing inequality and slows down progress towards superintelligence.
 - Set up an international AI safety agency, similar to the IAEA. This agency will be responsible for:
   - Periodic meetings to discuss the progress of AI safety research.
   - Granting approval to conduct any new training run above a certain size (e.g. 1 billion parameters).
 - Increase national investments in AI safety research. Right now, there exist only a few hundred AI safety researchers. This should become thousands.
-- Hold AI companies accountable for criminal acts committed using their AI systems.
-- Ban training of AI systems on copyrighted material.
-- Track the sales of GPUs and other hardware that can be used for AI training.
+- Hold AI model creators liable for criminal acts committed using their AI systems. This gives model creators more incentives to make sure their models are safe.
