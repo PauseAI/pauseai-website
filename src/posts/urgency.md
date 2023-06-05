@@ -43,14 +43,14 @@ If we do this as a community, we could lack a sense of urgency to take action.
 
 There are many reasons why people underestimate the progress of AI.
 
-- **We like to think that we're special**. Especially smart people tend to believe that their intellect is what makes them special. If an AI can do what they can do, they're not special anymore. This is a hard pill to swallow, and the [brain has many defense mechanisms to avoid this](https://www.verywellmind.com/defense-mechanisms-2795960).
+- **It's hard to keep up**. Almost daily we see new breakthroughs in AI. It's almost impossible to keep up with the pace of progress. You're not alone if you feel like you're falling behind.
+- **We keep moving the goalpost**. In the 90s, people thought the holy grail of AI was something that could play chess. When AI beat Kasparov, its next challenge was Go. Now, we have machines that score in the [99.9th percentile in IQ tests](https://bgr.com/tech/chatgpt-took-an-iq-test-and-its-score-was-sky-high/), can [translate 26 languages](https://bgr.com/tech/chatgpt-took-an-iq-test-and-its-score-was-sky-high/) and [win photography contests](https://www.scientificamerican.com/article/how-my-ai-image-won-a-major-photography-competition/), yet we're still asking questions like "When will AI reach human level?". It already surpasses us in most areas, but we always focus on the increasingly smaller number of things we can still do better.
+- **We like to think that we're special**. Especially smart people tend to believe that their intellect is what makes them special. If an AI can do what they can do, they're not special anymore. This is a hard pill to swallow, and the [brain has many defense mechanisms to avoid this](psychology-of-x-risk).
 - **We're really bad at exponential growth**. We tend to structurally and predictably underestimate how exponential growth cumulates over time. This has been shown in [scientific studies](https://www.researchgate.net/figure/Underestimation-of-exponential-growth-a-shows-the-participants-prediction-of-the_fig4_351171143).
-- **The progress pace is frantic**. Almost daily we see new breakthroughs in AI. It's hard to keep up with the pace of progress. You're not alone if you feel like you're falling behind.
-- **We keep moving the goalpost**. In the 90s, people thought the holy grail of AI was something that could play chess. When AI beat Kasparov, its next challenge was Go. Now, we have machines that score in the [99.9th percentile in IQ tests](https://bgr.com/tech/chatgpt-took-an-iq-test-and-its-score-was-sky-high/), can [translate 26 languages](https://bgr.com/tech/chatgpt-took-an-iq-test-and-its-score-was-sky-high/) and [win photography contests](https://www.scientificamerican.com/article/how-my-ai-image-won-a-major-photography-competition/), yet we're still asking questions like "When will AI reach human level?".
 
 But there are still some things that an AI can't do yet, luckily.
 It cannot [hack better than the best hackers](/cybersecurity-risks) and it cannot do AI research as well as the best AI researchers.
-When we reach these thresholds, we will be in danger.
+**When we reach either of these thresholds, we will be in danger**.
 
 So when will we reach the point when an AI can do all these things at a superhuman level?
 When will have a _superintelligence_?

@@ -31,11 +31,12 @@
 	</Block>
 	<Block linkText="How long do we have?" href="/urgency">
 		<span slot="title">WE NEED TO ACT <Mark>RIGHT NOW</Mark></span>
-		In 2020, experts thought we had more than 35 years until AGI. We're almost there. Superintelligent
-		systems might be one innovation away, and could happen in months.</Block
+		In 2020, experts thought we had more than 35 years until AGI. Recent breakthroughs show we're almost
+		there. Superintelligence might be one innovation away, and could happen in months.</Block
 	>
 	<Block linkText="Take action" href="/action">
 		<span slot="title"><Mark>YOU</Mark> CAN HELP</span>
-		Too few people are aware of AI risks. Get informed, inform others, and help slow this train down.</Block
+		Too few people are knowledgeable of AI risks and what needs to happen to prevent them. Get informed,
+		inform others, and help slow this suicide race down.</Block
 	>
 </section>

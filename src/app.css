@@ -136,3 +136,9 @@ h1 {
 	border-radius: 8px;
 	tab-size: 2;
 }
+
+.prose blockquote {
+	border-left: 4px solid var(--brand);
+	padding-left: 1rem;
+	font-style: italic;
+}

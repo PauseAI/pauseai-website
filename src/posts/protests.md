@@ -5,10 +5,11 @@ description: When and where we will be protesting.
 
 ## Coming up
 
-- [3rd of June, NYC, UN Building](/nyc-un-vigil)
+- [8th of June, London, Google DeepMind](/2023-june-deepmind-london)
 
 ## Past Protests
 
+- [3rd of June, NYC, UN Building](/nyc-un-vigil)
 - [24th of May, London, UCL](https://twitter.com/GFuterman/status/1660648998863028230?s=20)
 - [23rd of May, Microsoft, Brussels](/brussels-microsoft-protest)
 - [20th of May, OpenAI, San Francisco](/openai-protest)
@@ -20,9 +21,9 @@ description: When and where we will be protesting.
 - Make sure you write a press release and send it to the media. Read more about [how to write a press release](/writing-press-releases).
 - Find coalition partners, and get as many people to join as possible.
 - Pick a fitting location and date.
-- You can ask for a permit for your protest at your government.
+- You can ask for a permit for your protest at your local government.
 - Have something to hand out, like <a href="/PauseAI_flyer.pdf" target="_blank">our flyer</a>.
-- Use our [design figma file](https://www.figma.com/community/file/1233064002969152026) to make your own flyers / banners / posters.
+- Use our [figma design template](https://www.figma.com/community/file/1233064002969152026) to make your own flyers / banners / posters.
 - Carefully consider the text on your signs and how your pictures will look to others - they will lead a life of their own on social media.
 
 ## Code of conduct

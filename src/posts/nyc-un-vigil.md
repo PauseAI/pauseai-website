@@ -9,7 +9,9 @@ title: PauseAI candlelit vigil @ UN HQ NYC, 3rd of June
 
 ## Press Release
 
-On Saturday, June 3rd, at sunset, a candlelit vigil will take place in front of the United Nations. Volunteers from the new [PauseAI](http://pauseai.info) movement will gather there to urge governments to discuss the dangers of AI at a summit conference.
+On Saturday, June 3rd, at sunset, a candlelit vigil will take place in front of the United Nations.
+The vigil is one of hope, so humans can come together to act in the face of a growing existential threat.
+Volunteers from the new [PauseAI](http://pauseai.info) movement will gather there to urge governments to organize a summit to halt the development of this dangerous technology.
 
 Half of AI researchers [believe](https://aiimpacts.org/2022-expert-survey-on-progress-in-ai/) that there is a 10% or greater chance that the invention of superhuman AI will mean the end of humanity. Would you board an airplane if half of the aircraft engineers thought there was a 10% chance of it crashing?
 
