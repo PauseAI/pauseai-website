@@ -5,7 +5,7 @@ description: When and where we will be protesting.
 
 ## Coming up
 
-- [8th of June, London, Google DeepMind](/2023-june-deepmind-london)
+- [8th of June, Parliament Square, London](/2023-june-london)
 
 ## Past Protests
 
