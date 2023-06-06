@@ -5,7 +5,7 @@ description: We are organizing a protest at Parliament Square to demand a summit
 
 - PauseAI protest, calling Rishi Sunak to organise a summit to create an international treaty to implement a pause on AI development.
 - Where: Parliament Square, London
-- When: 8th of June, 6 PM - 8 PM
+- When: 8th of June, 4 PM - 6 PM
 - [Sign up form](https://forms.gle/bjWZzJtSnAKqdumh6)
 
 ## Press Release
@@ -39,3 +39,7 @@ The protesters believe an international summit to create a treaty to halt the de
 > "We cannot expect nations or companies to halt development, or even to prioritize safety over capabilities, without a global agreement. Both nations and companies are incentivized to develop the most capable AI systems, and they will not stop unless a treaty is in place. One country needs to step up and take the lead in organizing this. Let it be the UK" - PauseAI protesters
 
 For more information, please visit [PauseAI.info](http://pauseai.info).
+
+## Contact
+
+- Gideon Futerman ([Twitter](https://twitter.com/GFuterman))
