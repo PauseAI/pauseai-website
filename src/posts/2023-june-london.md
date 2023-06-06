@@ -10,6 +10,10 @@ description: We are organizing a protest at Parliament Square to demand a summit
 
 ## Press Release
 
+Will be published after the protest.
+For questions, send an email to joep@ontola.io.
+
+<!--
 On Thursday, June 8th, volunteers from the new [PauseAI](http://pauseai.info) movement will gather in Parliament Square, London to urge the UK government to take the lead on AI safety.
 They are asking Rishi Sunak to [organize a summit](https://pauseai.info/summit) to create an international treaty to halt the development of the most capable AI systems.
 
@@ -38,7 +42,7 @@ The protesters believe an international summit to create a treaty to halt the de
 
 > "We cannot expect nations or companies to halt development, or even to prioritize safety over capabilities, without a global agreement. Both nations and companies are incentivized to develop the most capable AI systems, and they will not stop unless a treaty is in place. One country needs to step up and take the lead in organizing this. Let it be the UK" - PauseAI protesters
 
-For more information, please visit [PauseAI.info](http://pauseai.info).
+For more information, please visit [PauseAI.info](http://pauseai.info). -->
 
 ## Contact
 
