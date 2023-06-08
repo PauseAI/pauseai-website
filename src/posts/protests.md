@@ -5,10 +5,11 @@ description: When and where we will be protesting.
 
 ## Coming up
 
-- [8th of June, Parliament Square, London](/2023-june-london)
+- 12th of July, Netherlands
 
 ## Past Protests
 
+- [8th of June, Parliament Square, London](/2023-june-london)
 - [3rd of June, NYC, UN Building](/nyc-un-vigil)
 - [24th of May, London, UCL](https://twitter.com/GFuterman/status/1660648998863028230?s=20)
 - [23rd of May, Microsoft, Brussels](/brussels-microsoft-protest)
