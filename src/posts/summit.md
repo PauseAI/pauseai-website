@@ -3,6 +3,8 @@ title: AI Safety Summit
 description: What it would take to organize a summit on AI safety.
 ---
 
+_Update June 7th, 2023: UK is hosting an AI safety summit in autumn 2023._
+
 AI presents very real risks to humanity, including the [risk of extinction](/xrisk).
 Progress in AI capabilities is accelerating at a [frantic pace](/urgency), and we are not prepared for the consequences.
 AI companies are locked in a race to the bottom, where safety is not the highest priority.
