@@ -27,7 +27,7 @@ Here are some resources to get you started.
 ## Articles
 
 - [The 'Don't Look Up' Thinking That Could Doom Us With AI](https://time.com/6273743/thinking-that-could-doom-us-with-ai/) (by Max Tegmark)
-- [Pausing AI Developments Isn't Enough. We Need to Shut it All Down](https://time.com/6266923/ai-eliezer-yudkowsky-open-letter-not-enough/) (by Eliezer Yudkowski)
+- [Pausing AI Developments Isn't Enough. We Need to Shut it All Down](https://time.com/6266923/ai-eliezer-yudkowsky-open-letter-not-enough/) (by Eliezer Yudkowsky)
 - [Preventing an AI-related catastrophe](https://80000hours.org/problem-profiles/artificial-intelligence/) (by 80,000 hours)
 - [The AI Revolution: The Road to Superintelligence](https://waitbutwhy.com/2015/01/artificial-intelligence-revolution-1.html) (by WaitButWhy)
 - [AI Alignment, Explained in 5 Points](https://medium.com/@daniel_eth/ai-alignment-explained-in-5-points-95e7207300e3)
