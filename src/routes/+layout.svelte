@@ -2,12 +2,9 @@
 	import Footer from './footer.svelte'
 	import Header from './header.svelte'
 	import PageTransition from './transition.svelte'
-	import * as Swetrix from 'swetrix'
 
 	import '../app.css'
 
-	Swetrix.init('jb8GUFcAq8OK')
-	Swetrix.trackViews()
 	export let data
 </script>
 
