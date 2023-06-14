@@ -30,9 +30,13 @@ We need our leaders to understand the urgency of the situation, and to take acti
 ## Long term policy
 
 At the time of writing, training a GPT-3 sized model costs millions of dollars.
+This makes it very difficult for individuals to train such models, and this makes it easier to enforce the ban on training.
 However, the cost of training a model is decreasing exponentially.
-New dedicated hardware, and more efficient training algorithms rapidly decrease the cost of training.
+Hardware improvements and more efficient training algorithms rapidly decrease the cost of training.
 
-There will come a point where potentially superintelligent AI models can be trained for a few thousand dollars or less.
+There will come a point where potentially superintelligent AI models can be trained for a few thousand dollars or less, perhaps even on consumer hardware.
+We need to be prepared for this.
+We should consider the following policies:
 
-This
+- **Limit publication of training algorithms**. Sometimes a new algorithm is published that makes training much more efficient. The Transformer method, for example, has been the revolutionary algorithm that made virtually all recent progress in AI possible. These types of capability jumps mean that existential risks
+- **Limit compute**. If hardware becomes available that can be easily used to train a superintelligence, we should treat that technology as a potential weapon of mass destruction.
