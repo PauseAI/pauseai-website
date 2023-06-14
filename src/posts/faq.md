@@ -48,6 +48,44 @@ The AI companies are locked in a race to the bottom, where AI safety is sacrific
 This is simply the result of market dynamics.
 We need governments to step in and organize a summit to discuss the risks of AI, and to create a regulatory framework that will prevent the worst outcomes.
 
+### Are AI companies pushing the existential risk narrative to manipulate us?
+
+Perhaps they think they will benefit in some way by acknowledging existential risk, or perhaps they acknowledge it because they simply believe it and think it deserves attention.
+We can't know for certain, but we do know that **x-risk was not initially pushed by AI companies - it was scientists, activists and NGOs**.
+Let's look at the timeline.
+
+There have been many people who have warned about x-risk since the early 2000s.
+Eliezer Yudkowski, Nick Bostrom, Stuart Russell, Max Tegmark, and many others.
+They had no AI tech to push - they were simply concerned about the future of humanity.
+
+The AI companies never mentioned x-risk until very recently.
+
+Sam Altman is an interesting exception.
+He wrote about existential AI risk [back in 2015, on his private blog](https://blog.samaltman.com/machine-intelligence-part-1), before founding OpenAI.
+In the years since he made virtually no explicit mention of x-risk again.
+During the Senate hearing, when asked about his x-risk blog post, he only answered by talking about jobs and the economy.
+He was not pushing the x-risk narrative here, he was actively avoiding it.
+
+In May 2023, everything changed:
+
+* On May 1st, 'Godfather of AI' Geoffrey Hinton [quits his job at Google](https://fortune.com/2023/05/01/godfather-ai-geoffrey-hinton-quit-google-regrets-lifes-work-bad-actors/) to warn about x-risk.
+* On May 5th, the [first PauseAI protest is announced](https://twitter.com/Radlib4/status/1654262421794717696), right at OpenAI's doorstep.
+* On May 22nd, OpenAI published [a blog post about the governance of superintelligence](https://openai.com/blog/governance-of-superintelligence), and mentioned x-risk for the first time.
+* On May 24th, ex-Google CEO Eric Schmit acknowledges x-risk.
+* On May 30th, the [Safe.ai statement (acknowledging x-risk)](https://www.safe.ai/statement-on-ai-risk) was published. This time, including people from OpenAI, Google and Microsoft.
+
+Signing the statement.
+That's all the AI companies (or some of their directors / employees) have done to push the x-risk narrative.
+
+These companies have been very slow to acknowledge x-risk, considering that many of their employees have been aware of it for years.
+So in our view, the AI companies are not pushing the x-risk narrative, they have been reactive to others pushing it, and have waited with their response until it was absolutely necessary.
+
+Here's our interpretation: the AI companies know that x-risk is a real problem, and they are scared of it.
+They are all asking to be regulated, which is kind of unheard of for pretty much any industry.
+
+The reason people still don't want to believe that x-risk is a real concern?
+Because acknowledging that _we are in fact in danger_ is a very, very scary thing.
+
 ### Aren't you just scared of changes and new technology?
 
 You might be surprised that most people in PauseAI consider themselves techno-optimists.

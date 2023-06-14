@@ -5,13 +5,15 @@ description: We want our governments to organize a summit to pause the developme
 
 **Implement a temporary pause on the development of AI systems more powerful than GPT-4**.
 
-This moratorium needs to be implemented on an international level because we cannot expect countries or companies to risk their competitive advantage by pausing AI development on their own.
+Individual countries can implement this measure _right now_.
+However, we cannot expect countries or companies to risk their competitive advantage by pausing AI development for too long.
+This is why we need a global pause.
 
 An international agreement is typically established through a summit, where leaders of countries meet to discuss the issue and make a decision.
 
 We need our leaders to understand the urgency of the situation, and to take action **right now**:
 
-- A country needs to step up and **host a [summit](/summit)**. Pick a date and a location, then invite all UN member states.
+- A country needs to step up and **host a [summit](/summit)**. Pick a date and a location, then invite all UN member states. _Update: The [UK will host](https://www.gov.uk/government/news/uk-to-host-first-global-summit-on-artificial-intelligence) an AI safety summit autumn 2023_
 - A **treaty** needs to be created. This treaty should specify what types of AI development are illegal, and which consequences there are to not abiding. This treaty needs to be signed by all UN member states.
 
 ## Policy
@@ -24,3 +26,13 @@ We need our leaders to understand the urgency of the situation, and to take acti
   - Granting approval to conduct any new training run above a certain size (e.g. 1 billion parameters).
 - **Increase national investments in AI safety research**. Right now, there exist only a few hundred AI safety researchers. This should become thousands.
 - **Hold AI model creators liable** for criminal acts committed using their AI systems. This gives model creators more incentives to make sure their models are safe.
+
+## Long term policy
+
+At the time of writing, training a GPT-3 sized model costs millions of dollars.
+However, the cost of training a model is decreasing exponentially.
+New dedicated hardware, and more efficient training algorithms rapidly decrease the cost of training.
+
+There will come a point where potentially superintelligent AI models can be trained for a few thousand dollars or less.
+
+This
