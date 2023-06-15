@@ -38,5 +38,5 @@ There will come a point where potentially superintelligent AI models can be trai
 We need to be prepared for this.
 We should consider the following policies:
 
-- **Limit publication of training algorithms**. Sometimes a new algorithm is published that makes training much more efficient. The Transformer method, for example, has been the revolutionary algorithm that made virtually all recent progress in AI possible. These types of capability jumps mean that existential risks
-- **Limit compute**. If hardware becomes available that can be easily used to train a superintelligence, we should treat that technology as a potential weapon of mass destruction.
+- **Limit publication of training algorithms**. Sometimes a new algorithm is published that makes training much more efficient. The Transformer architecture, for example, enabled virtually all recent progress in AI. These types of capability jumps can happen at any time, and we should consider limiting the publication of such algorithms to minimize the risk of a sudden capability jump.
+- **Limit access to computational resources**. If training a superintelligence becomes possible on consumer hardware, we should consider limiting access to such hardware.

@@ -5,6 +5,7 @@ description: When and where we will be protesting.
 
 ## Coming up
 
+- [16th of June, Melbourne, Australia](/2023-june-melbourne)
 - 12th of July, Netherlands
 
 ## Past Protests

@@ -16,7 +16,7 @@ When you ask AI safety researchers (the people who actually research the safety 
 The list includes people like:
 
 - **Stuart Russell**, writer of the #1 textbook on Artificial Intelligence used in most AI studies: ["If we pursue [our current approach], then we will eventually lose control over the machines"](https://news.berkeley.edu/2023/04/07/stuart-russell-calls-for-new-approach-for-ai-a-civilization-ending-technology/)
-- **Yoshua Bengio**, deep learning pioneer and winner of the Turing Award: ["rogue AI may be dangerous for the whole of humanity [...] banning powerful AI systems (say beyond the abilities of GPT-4) that are given autonomy and agency would be a good start"](https://yoshuabengio.org/2023/05/22/how-rogue-ais-may-arise/)
+- **Yoshua Bengio**, deep learning pioneer and winner of the Turing Award: ["... rogue AI may be dangerous for the whole of humanity [...] banning powerful AI systems (say beyond the abilities of GPT-4) that are given autonomy and agency would be a good start"](https://yoshuabengio.org/2023/05/22/how-rogue-ais-may-arise/)
 
 But this is not the only time that we've been warned about the existential dangers of AI:
 
@@ -29,7 +29,7 @@ Even the leaders and investors of the AI companies themselves are warning us:
 - **Sam Altman** (yes, the CEO of OpenAI who builds ChatGPT): ["Development of superhuman machine intelligence is probably the greatest threat to the continued existence of humanity."](https://blog.samaltman.com/machine-intelligence-part-1).
 - **Elon Musk**, co-founder of OpenAI, SpaceX and Tesla: ["AI has the potential of civilizational destruction"](https://www.inc.com/ben-sherry/elon-musk-ai-has-the-potential-of-civilizational-destruction.html)
 - **Bill Gates** (co-founder of Microsoft, which owns 50% of OpenAI) warned that ["AI could decide that humans are a threat"](https://www.denisonforum.org/daily-article/bill-gates-ai-humans-threat/).
-- **Jaan Tallinn** (lead investor of Antrhopic): ["I've not met anyone in AI labs who says the risk [from training a next-gen model] is less than 1% of blowing up the planet. It's important that people know lives are being risked."](https://twitter.com/liron/status/1656929936639430657)
+- **Jaan Tallinn** (lead investor of Anthropic): ["I've not met anyone in AI labs who says the risk [from training a next-gen model] is less than 1% of blowing up the planet. It's important that people know lives are being risked."](https://twitter.com/liron/status/1656929936639430657)
 
 Virtually all AI labs and hundreds of AI scientists have [signed the following statement](https://www.safe.ai/statement-on-ai-risk) in May 2023:
 
@@ -57,15 +57,15 @@ This problem is called the _alignment problem_.
 If a superintelligent system is built, and it will have a goal that is even _a little_ different from what we want it to have,
 it could have disastrous consequences.
 
-## What can an AI do?
+## What can a superintelligent AI do?
 
-You might think that an AI is locked inside a computer, and can't do anything.
-However, it could use the internet do things like:
+You might think that an AI is locked inside a computer, and therefore can't do anything.
+However, we tend to give AI systems access to the internet, which
 
 - Manipulate people through messages, e-mails, fake videos or phone calls.
-- Hack into other computers, possibly even [all devices on the internet](/cybersecurity-risks).
+- Design a novel bioweapon using protein folding (which AI is also [already very good at](https://alphafold.ebi.ac.uk/)) and order it to be printed in a lab.
+- Hack into other computers, possibly even [all devices on the internet](/cybersecurity-risks) (including all smartphones, laptops, server parks, etc.). It could use all these devices as its eyes and ears, having digital senses everywhere.
 - Control devices connected to the internet, like cars, planes, robotized (autonomous) weapons or even nuclear weapons.
-- Design a novel bioweapon using protein folding and order it to be printed in a lab.
 
 ## Why most goals are bad news for humans
 

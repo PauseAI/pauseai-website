@@ -3,6 +3,9 @@ title: The difficult psychology of existential risk
 description: Thinking about the end of the world is hard.
 ---
 
+Most people initially respond to the topic of AI existential risk with a mix of ridicule, denial and disbelief.
+The fear often only sets in after a long time of thinking about it.
+
 The psychology of existential risk is a topic that is not often discussed, compared to the technical aspects of AI safety.
 However, one might argue that it is perhaps just as important.
 After all, if we can't get people to take the topic seriously and act on it, we won't be able to do anything about it.
