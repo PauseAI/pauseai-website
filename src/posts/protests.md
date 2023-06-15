@@ -39,3 +39,4 @@ description: When and where we will be protesting.
 - [Wired](https://www.wired.co.uk/article/sam-altman-world-tour-ai-doomers)
 - [Express](https://www.express.co.uk/news/uk/1775620/artificial-intelligence-extinction-google-chat-gpt)
 - [Camden New Journal](https://www.camdennewjournal.co.uk/article/protesters-tell-tech-quarter-companies-to-press-pause-on-artificial-intelligence-research)
+- [Euronews](https://www.euronews.com/next/2023/06/14/could-ai-lead-us-to-extinction-this-brussels-based-group-believes-so)

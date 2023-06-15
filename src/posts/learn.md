@@ -17,7 +17,8 @@ Here are some resources to get you started.
 
 ## Websites
 
-- [AISafety.info](https://aisafety.info/) is an absolutely amazing database of questions and answers.
+- [AISafety.info](https://aisafety.info/). Very complete database of questions and answers.
+- [NavigatingAIRisks.ai](https://www.navigatingrisks.ai/). A blog with various interesting articles.
 
 ## Podcasts
 
@@ -44,6 +45,7 @@ Here are some resources to get you started.
 - [FutureSociety](https://thefuturesociety.org/about-us/)
 - [Conjecture](https://www.conjecture.dev/). Start-up that is working on AI alignment and AI policy.
 - [Existential Risk Observatory](https://existentialriskobservatory.org/). Dutch organization that is informing the public on x-risks and studying communication strategies.
+- [Center for AI Safety](https://www.safe.ai/) (CAIS) is a research center at the Czech Technical University in Prague.
 
 ## Books
 

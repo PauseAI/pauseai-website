@@ -57,20 +57,26 @@ This problem is called the _alignment problem_.
 If a superintelligent system is built, and it will have a goal that is even _a little_ different from what we want it to have,
 it could have disastrous consequences.
 
-## What can a superintelligent AI do?
+## What a superintelligent AI can do
 
 You might think that an AI is locked inside a computer, and therefore can't do anything.
-However, we tend to give AI systems access to the internet, which
+However, we tend to give AI systems access to the internet, which means that they can do a lot of things:
 
-- Manipulate people through messages, e-mails, fake videos or phone calls.
+- [Hack into other computers](/cybersecurity-risks), including all smartphones, laptops, server parks, etc. It could use the sensors of these devices as its eyes and ears, having digital senses everywhere.
+- Manipulate people through fake messages, e-mails, bank transfers, videos or phone calls. Humans could become the AI's limbs, without even knowing it.
+- Directly control devices connected to the internet, like cars, planes, robotized (autonomous) weapons or even nuclear weapons.
 - Design a novel bioweapon using protein folding (which AI is also [already very good at](https://alphafold.ebi.ac.uk/)) and order it to be printed in a lab.
-- Hack into other computers, possibly even [all devices on the internet](/cybersecurity-risks) (including all smartphones, laptops, server parks, etc.). It could use all these devices as its eyes and ears, having digital senses everywhere.
-- Control devices connected to the internet, like cars, planes, robotized (autonomous) weapons or even nuclear weapons.
+
+Okay, so a very smart AI could do a lot of damage.
+But why would it _want to_?
 
 ## Why most goals are bad news for humans
 
-We can't predict _what_ the AI will want (it depends on how it is programmed, and how it is trained).
-However, we can [mathematically prove](https://arxiv.org/pdf/1912.01683.pdf) what a rational machine will pursue in _virtually any goal_:
+An AI could have any goal.
+Maybe it wants to calculate pi, maybe it wants to cure cancer, maybe it wants to self-improve.
+This depends on how it is trained and how it is instructed.
+But even though we cannot tell what a superintelligence will want to achieve, we can make predictions about its sub-goals.
+We can [mathematically prove](https://arxiv.org/pdf/1912.01683.pdf) what a rational machine will pursue in _virtually any goal_:
 
 - **Maximizing its resources**. Think about more energy, more computers to run on or access to more materials. If a rational AI can use all energy of the planet to get a little bit closer to its goal, it will do that.
 - **Ensuring its own survival**. This means the AI will not want to be turned off, as it could no longer achieve its goals. AI might conclude that humans are a threat to its existence, as humans could turn it off.
