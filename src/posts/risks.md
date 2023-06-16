@@ -27,6 +27,7 @@ AI systems are trained on data, and much of the data we have is in some way bias
 This means that AI systems will inherit the biases of our society.
 An automated recruitment system at Amazon [inherited a bias against women](https://www.reuters.com/article/us-amazon-com-jobs-automation-insight-idUSKCN1MK08G).
 Black patients were [less likely to be referred to a medical specialist](https://www.science.org/doi/full/10.1126/science.aax2342).
+Generative AI models do not just copy the biases from their training data, [they amplify them](https://www.bloomberg.com/graphics/2023-generative-ai-bias/).
 These biases often appear without the creators of the AI system being aware of them.
 
 ## Economic inequality, instability and job loss
@@ -42,6 +43,18 @@ Writers are [striking](https://www.newscientist.com/article/2373382-why-use-of-a
 GPT-4 has passed the bar exam, can write excellent written content, and can write code (again, trained on often copyrighted materials).
 The people who own these AI systems will be able to capitalize on them, but the people who lose their jobs to them will not.
 The way we distribute wealth in our society is not prepared for this.
+
+## Biological weapons
+
+AI can make knowledge more accessible, which also includes knowledge about how to create biological weapons. [This paper](https://arxiv.org/abs/2306.03809) shows how GPT-4 can help non-scientist students to create a pandemic pathogen:
+
+> In one hour, the chatbots suggested four potential pandemic pathogens, explained how they can be generated from synthetic DNA using reverse genetics, supplied the names of DNA synthesis companies unlikely to screen orders, identified detailed protocols and how to troubleshoot them, and recommended that anyone lacking the skills to perform reverse genetics engage a core facility or contract research organization.
+
+This type of knowledge has never been so accessible, and we do not have the safeguards in place to deal with the potential consequences.
+
+Additionally, AI can be used to design completely new hazardous pathogens.
+The revolutionary AlphaFold model can predict the structure of proteins, which is a key step in designing new medicine.
+However, this same technology can be used to design new pathogens.
 
 ## Computer viruses and hacks
 
