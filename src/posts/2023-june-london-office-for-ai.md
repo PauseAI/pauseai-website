@@ -1,6 +1,5 @@
 ---
-title: PauseAI protest @ Parliament Square - June 8th
-description: We are organizing a protest at Parliament Square to demand a summit to pause AI development.
+title: PauseAI protest @ Parliament Square - June 29th
 ---
 
 - PauseAI protest, urging Rishi Sunak to implement a pause on AI development.
