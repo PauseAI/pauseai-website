@@ -52,9 +52,13 @@ AI can make knowledge more accessible, which also includes knowledge about how t
 
 This type of knowledge has never been so accessible, and we do not have the safeguards in place to deal with the potential consequences.
 
-Additionally, AI can be used to design completely new hazardous pathogens.
-The revolutionary AlphaFold model can predict the structure of proteins, which is a key step in designing new medicine.
-However, this same technology can be used to design new pathogens.
+Additionally, some AI models can be used to design completely new hazardous pathogens.
+A model called MegaSyn designed [60.000 new chemical weapons / toxic molecules in one hour](https://www.theverge.com/2022/3/17/22983197/ai-new-possible-chemical-weapons-generative-models-vx).
+The revolutionary AlphaFold model can predict the structure of proteins, which is also a [dual-use technology](https://unicri.it/sites/default/files/2021-12/21_dual_use.pdf).
+Predicting protein structures can be used to "discover disease-causing mutations using one individual’s genome sequence".
+Scientists are now even creating [fully autonomous chemical labs, where AI systems can synthesize new chemicals on their own](https://twitter.com/andrewwhite01/status/1670794000398184451).
+
+The fundamental danger is that the cost of designing and applying biological weapons is being lowered by orders of magnitude because of AI.
 
 ## Computer viruses and hacks
 

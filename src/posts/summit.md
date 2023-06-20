@@ -3,20 +3,23 @@ title: AI Safety Summit
 description: What it would take to organize a summit on AI safety.
 ---
 
-_Update June 7th, 2023: UK is hosting an AI safety summit in autumn 2023._
-
 AI presents very real risks to humanity, including the [risk of extinction](/xrisk).
 Progress in AI capabilities is accelerating at a [frantic pace](/urgency), and we are not prepared for the consequences.
 AI companies are locked in a race to the bottom, where safety is not the highest priority.
 We need governments to step in and regulate AI development.
 This needs to happen on an international level.
 **The only way to achieve this is through a summit.**
-The primary goal of PauseAI is to convince one government to organize such a summit.
 
-But what does such a summit look like?
-Well, it will be a meeting of national governments, hosted by one of them.
+The primary goal of PauseAI was to convince one government to organize such a summit.
+Just 5 weeks after the first PauseAI protest, the UK government has announced that they will host an AI safety summit in autumn 2023.
+This is amazing news, and we are very grateful to the UK government for taking this step.
+However, this does not mean that we're done.
+
+## What is a summit?
+
+A summit is a meeting of national governments, hosted by one of them.
 A summit can take many days and will be attended by many people.
-Organizing it is a monumental task, and we are not experts in this field.
+Organizing it is a monumental task, and few people have the experience to do it as summits are not very common.
 
 The goal of the Summit itself is a _treaty_, which is a formal agreement between two or more states in reference to peace, alliance, commerce, or other international relations.
 In our case, the AI Safety Treaty should be an agreement between the participating states to pause AI development until the risks are better understood.
@@ -34,7 +37,7 @@ They need to find a suitable date and location, arrange the catering, draft the 
 
 ## Suggested educational agenda
 
-Many people will be attending the summit, and not all of them will be deeply familiar with AI safety.
+Many people will be attending the AI safety summit, and not all of them will be deeply familiar with AI safety.
 They must be able to follow the discussions and make informed decisions.
 Therefore, we believe it is paramount to make education on x-risk a part of the Summit.
 
@@ -58,23 +61,3 @@ The following is a suggested agenda for the summit:
   - Risks of AI research publications
   - Governance of open source models
 - **Negotiation of the treaty**. See [our proposal](/proposal) for concrete suggestions on the contents of the treaty.
-
-## Who should organize the summit?
-
-The most important thing is that _any government_ organizes the summit as fast as possible.
-[We may not have much time left](/urgency).
-However, some countries are better suited than others.
-
-One likely candidate is the **United Kingdom**.
-The UK has a long history of leading the world in international cooperation.
-They are also a member of the UN Security Council, which gives them a lot of influence.
-The UK is also a world leader in AI research, and AI safety research specifically.
-Even more importantly, Prime Minister Rishi Sunak has already discussed and acknowledged existential risk of AI systems and has stated that [the UK is in a well-placed position to lead the global collaboration on safe AI development](https://twitter.com/RishiSunak/status/1662369922234679297).
-He will also [talk about this at the G7](https://twitter.com/RishiSunak/status/1663838958558539776).
-
-A different candidate is the **United States**.
-As the world's largest economy and military power, the US has a lot of influence.
-They are also the home to most of the leading AI companies.
-
-The **European Union** is another candidate.
-They have already written AI legislation (the AI ACT), although this document does not yet address the existential risks of AI.
