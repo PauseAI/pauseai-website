@@ -33,19 +33,23 @@ Here are some resources to get you started.
 - [The AI Revolution: The Road to Superintelligence](https://waitbutwhy.com/2015/01/artificial-intelligence-revolution-1.html) (by WaitButWhy)
 - [AI Alignment, Explained in 5 Points](https://medium.com/@daniel_eth/ai-alignment-explained-in-5-points-95e7207300e3)
 - [How rogue AIs may arise](https://yoshuabengio.org/2023/05/22/how-rogue-ais-may-arise/) (by Joshua Bengio)
+- [A simple explanation of why advanced AI could be incredibly dangerous](https://muddyclothes.substack.com/p/a-simple-explanation-of-why-advanced)
 
 ## Courses
 
 - [AGI safety fundamentals](https://www.agisafetyfundamentals.com/) (30hrs)
-- [A simple explanation of why advanced AI could be incredibly dangerous](https://muddyclothes.substack.com/p/a-simple-explanation-of-why-advanced)
+- [CHAI Bibliography of Recommended Materials](https://humancompatible.ai/bibliography) (50hrs+)
+- [AIsafety.training](https://aisafety.training/): Overview of training programs, conferences, and other events
 
 ## Organisations
 
-- [Future of Life Institute](https://futureoflife.org/cause-area/artificial-intelligence/) started the [open letter](https://futureoflife.org/open-letter/pause-giant-ai-experiments/)
+- [Future of Life Institute](https://futureoflife.org/cause-area/artificial-intelligence/) started the [open letter](https://futureoflife.org/open-letter/pause-giant-ai-experiments/), led by Max Tegmark.
 - [FutureSociety](https://thefuturesociety.org/about-us/)
-- [Conjecture](https://www.conjecture.dev/). Start-up that is working on AI alignment and AI policy.
+- [Conjecture](https://www.conjecture.dev/). Start-up that is working on AI alignment and AI policy, led by Connor Leahy.
 - [Existential Risk Observatory](https://existentialriskobservatory.org/). Dutch organization that is informing the public on x-risks and studying communication strategies.
-- [Center for AI Safety](https://www.safe.ai/) (CAIS) is a research center at the Czech Technical University in Prague.
+- [Center for AI Safety](https://www.safe.ai/) (CAIS) is a research center at the Czech Technical University in Prague, led by
+- [Center for Human-Compatible Artificial Intelligence](https://humancompatible.ai/about/) (CHAI), led by Stuart Russell.
+- [Machine Intelligence Research Institute](https://intelligence.org/) (MIRI), doing mathematical research on AI safety, led by Eliezer Yudkowski.
 
 ## Books
 
