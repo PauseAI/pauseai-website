@@ -1,5 +1,6 @@
 import { json } from '@sveltejs/kit'
-import { openaiKey } from '$lib/config'
+import { env } from '$env/dynamic/private'
+const openaiKey = env.OPENAI_KEY
 
 export type ChatResponse = {
 	response: string
