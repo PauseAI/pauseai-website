@@ -3,9 +3,16 @@
 	import type { ChatResponse, Message } from '../api/chat/+server'
 	import { onMount } from 'svelte'
 
-	let messages: Message[] = []
+	let messages: Message[] =
+		typeof localStorage !== 'undefined' ? JSON.parse(localStorage.getItem('messages') || '[]') : []
+
 	let input = ''
 	let loading = false
+
+	function clear() {
+		messages = []
+		localStorage.setItem('messages', JSON.stringify(messages))
+	}
 
 	async function sendMessage() {
 		if (input.trim() === '') return
@@ -35,18 +42,23 @@
 
 	function handleKeyDown(event: KeyboardEvent) {
 		if (event.key === 'Enter') {
+			event.preventDefault()
 			sendMessage()
+			input = ''
+			// set the messages in local storage
+			localStorage.setItem('messages', JSON.stringify(messages))
 		}
+	}
+
+	const personality = {
+		intro: 'Talk to DoomBot, ask them anything!'
 	}
 </script>
 
 <main>
-	<div class="message assistant">
-		<p>
-			Hi there! I'm PauseBot, your personal assistant to talk about AI safety. What would you like
-			to talk about?
-		</p>
-	</div>
+	{#if messages.length === 0}
+		<p>{personality.intro}</p>
+	{/if}
 	{#each messages as message}
 		<div class="message {message.role}">
 			<p>{message.content}</p>
@@ -54,26 +66,36 @@
 	{/each}
 	{#if loading}
 		<div class="message assistant">
-			<p>One moment please...</p>
+			<p>Loading reply... (can take a while)</p>
 		</div>
 	{/if}
 </main>
 
 <footer>
 	<form on:submit|preventDefault={sendMessage}>
-		<textarea placeholder="Talk to PauseBot" bind:value={input} on:keydown={handleKeyDown} />
-		<button type="submit" disabled={loading}>
-			{#if loading}
-				Loading...
-			{:else}
-				Send
-			{/if}
-		</button>
+		<textarea placeholder="Type here" bind:value={input} on:keydown={handleKeyDown} />
+		<div class="buttons">
+			<button on:click={clear} class="button button--alt">Clear chat</button>
+			<button type="submit" disabled={loading}>
+				{#if loading}
+					Loading...
+				{:else}
+					Send
+				{/if}
+			</button>
+		</div>
 	</form>
 </footer>
 
 <style>
 	main {
+		display: flex;
+		flex-direction: column;
+		gap: 1rem;
+		width: 100%;
+	}
+
+	form {
 		display: flex;
 		flex-direction: column;
 		gap: 1rem;
@@ -89,6 +111,15 @@
 		box-sizing: border-box;
 		font-family: var(--font-body);
 		margin-top: 1rem;
+		max-width: 24rem;
+		margin-left: auto;
+	}
+
+	.buttons {
+		display: flex;
+		gap: 1rem;
+		align-items: end;
+		align-self: flex-end;
 	}
 
 	button {
@@ -100,6 +131,13 @@
 		font-size: var(--font-size);
 		font-family: var(--font-body);
 		cursor: pointer;
+		display: flex;
+		align-self: flex-end;
+	}
+
+	.button--alt {
+		background-color: var(--background);
+		color: var(--text);
 	}
 
 	button:hover {
@@ -114,17 +152,25 @@
 		border-radius: 10px;
 		border: solid 1px var(--text);
 		justify-content: flex-start;
+		white-space: pre-wrap;
+		max-width: 24rem;
+	}
+
+	.message p {
+		margin: 0;
 	}
 
 	.user {
 		flex-direction: row-reverse;
 		justify-content: flex-end;
+		margin-left: auto;
 	}
 
 	.assistant {
 		border-color: var(--brand);
 		flex-direction: row;
 		justify-content: flex-start;
+		margin-right: auto;
 	}
 
 	.message p {
