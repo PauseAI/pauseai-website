@@ -19,6 +19,7 @@ Here are some resources to get you started.
 
 - [AISafety.info](https://aisafety.info/). Very complete database of questions and answers.
 - [NavigatingAIRisks.ai](https://www.navigatingrisks.ai/). A blog with various interesting articles.
+- [IncidentDatabase.ai](https://incidentdatabase.ai/). Database of incidents where AI systems caused harm.
 
 ## Podcasts
 
