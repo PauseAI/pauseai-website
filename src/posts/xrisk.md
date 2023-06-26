@@ -46,15 +46,16 @@ Our intelligence helped us to transform most of the earth into how we like it: c
 
 From the perspective of less intelligent animals, this has been a disaster.
 It's not that humans hate the animals, it's just that we can use their habitats for our own goals.
-Our goals are things like comfort, status, love, tasty food, and more.
+Our goals are shaped by evolution and include things like comfort, status, love and tasty food.
 We are destroying the habitats of other animals as a **side effect of pursuing our goals**.
 
-An AI can also have a goal.
-We _want_ an AI to value these delicate goals that humans have, but we don't know how to do that.
+An AI can also have goals.
 We know how to train machines to be intelligent, but **we don't know how to get them to want what we want**.
-This problem is called the _alignment problem_.
+We don't even know what goals the machines will pursue after we train them.
+The problem of getting an AI to want what we want is called the _alignment problem_.
+This is not a hypothetical problem - there are [many examples](https://www.youtube.com/watch?v=nKJlF-olKmg) of AI systems learning to want the wrong thing.
 
-If a superintelligent system is built, and it will have a goal that is even _a little_ different from what we want it to have,
+The examples from the video linked above can be funny or cute, but if a superintelligent system is built, and it will have a goal that is even _a little_ different from what we want it to have,
 it could have disastrous consequences.
 
 ## What a superintelligent AI can do
@@ -67,14 +68,24 @@ However, we tend to give AI systems access to the internet, which means that the
 - Directly control devices connected to the internet, like cars, planes, robotized (autonomous) weapons or even nuclear weapons.
 - Design a novel bioweapon using protein folding (which AI is also [already very good at](https://alphafold.ebi.ac.uk/)) and order it to be printed in a lab.
 
-Okay, so a very smart AI could do a lot of damage.
+## From an evolutionary perspective
+
+An AI might be able to replicate, as it is just a piece of data.
+We should consider the advantages that a smart piece of software may have over us:
+
+- **Speed**: Computers operate at extremely high speed, compared to brains.
+- **Location**: An intelligence is effectively a piece of software, a bunch of information, and is not limited to one location. It can replicate itself, it can be in many locations at once. We have built the infrastructure for it: the internet.
+- **Physical limits**: We cannot add more brains into our skull and become smarter. An AI could dramatically improve its capabilities by adding hardware, like more memory, more processing power, more sensors (cameras, microphones).
+- **Materials**: Humans are made of organic materials. Our bodies no longer work if they are too warm or cold, they need food, they need oxygen. Machines can be built from more robust materials, like metals, and can operate in a much wider range of environments.
+
+A superintelligent AI will have many advantages to outcompete us.
 But why would it _want to_?
 
 ## Why most goals are bad news for humans
 
 An AI could have any goal.
 Maybe it wants to calculate pi, maybe it wants to cure cancer, maybe it wants to self-improve.
-This depends on how it is trained and how it is instructed.
+This depends on how it is trained.
 But even though we cannot tell what a superintelligence will want to achieve, we can make predictions about its sub-goals.
 We can [mathematically prove](https://arxiv.org/pdf/1912.01683.pdf) what a rational machine will pursue in _virtually any goal_:
 
@@ -88,7 +99,7 @@ A superintelligent thing that wants to take over all materials it can get, and w
 ## Why can't we just turn it off if it's dangerous?
 
 The core problem is that _it will be much smarter than us_.
-A superintelligence will be able to predict how humans respond, especially ones that are trained on all written human knowledge.
+A superintelligence will understand the world around it and will be able to predict how humans respond, especially the ones that are trained on all written human knowledge.
 If the AI knows you can turn it off, it might behave nicely until it is certain that it can get rid of you.
 We already have [real examples](https://www.pcmag.com/news/gpt-4-was-able-to-hire-and-deceive-a-human-worker-into-completing-a-task) of AI systems deceiving humans to achieve their goals.
 A superintelligent AI would be a master of deception.
