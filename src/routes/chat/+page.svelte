@@ -8,10 +8,18 @@
 
 	let input = ''
 	let loading = false
+	let maxMessages = 20
 
 	function clear() {
 		messages = []
 		localStorage.setItem('messages', JSON.stringify(messages))
+	}
+
+	function copy() {
+		const role = (message: Message) => (message.role === 'user' ? 'You' : 'DoomBot')
+		const text = messages.map((message) => `${role(message)}:\n${message.content}`).join('\n\n')
+		navigator.clipboard.writeText(text)
+		window.alert('Copied to clipboard!')
 	}
 
 	async function sendMessage() {
@@ -32,6 +40,9 @@
 		const data = (await response.json()) as ChatResponse
 
 		messages = [...messages, { content: data.response, role: 'assistant' }]
+		// set the messages in local storage
+		localStorage.setItem('messages', JSON.stringify(messages))
+
 		loading = false
 	}
 
@@ -45,8 +56,6 @@
 			event.preventDefault()
 			sendMessage()
 			input = ''
-			// set the messages in local storage
-			localStorage.setItem('messages', JSON.stringify(messages))
 		}
 	}
 
@@ -65,27 +74,28 @@
 		</div>
 	{/each}
 	{#if loading}
-		<div class="message assistant">
-			<p>Loading reply... (can take a while)</p>
+		<div class="message assistant loading">
+			<p>Thinking...</p>
 		</div>
 	{/if}
 </main>
 
-<footer>
-	<form on:submit|preventDefault={sendMessage}>
-		<textarea placeholder="Type here" bind:value={input} on:keydown={handleKeyDown} />
-		<div class="buttons">
-			<button on:click={clear} class="button button--alt">Clear chat</button>
-			<button type="submit" disabled={loading}>
-				{#if loading}
-					Loading...
-				{:else}
-					Send
-				{/if}
-			</button>
-		</div>
-	</form>
-</footer>
+{#if messages.length > maxMessages}
+	<p>You reached the maximum amount of messages, you can clear the chat</p>
+	<button class="button" on:click={clear}>Clear chat</button>
+	<button class="button" on:click={copy}>Copy chat</button>
+{:else}
+	<footer>
+		<form on:submit|preventDefault={sendMessage}>
+			<textarea placeholder="Type here" bind:value={input} on:keydown={handleKeyDown} />
+			<div class="buttons">
+				<button on:click={clear} class="button button--alt">Clear chat</button>
+				<button on:click={copy} class="button button--alt">Copy chat</button>
+				<button type="submit" disabled={loading || input == ''}> Send </button>
+			</div>
+		</form>
+	</footer>
+{/if}
 
 <style>
 	main {
@@ -133,6 +143,7 @@
 		cursor: pointer;
 		display: flex;
 		align-self: flex-end;
+		color: var(--bg);
 	}
 
 	.button--alt {
@@ -141,10 +152,14 @@
 	}
 
 	button:hover {
-		background-color: var(--brand-light);
+		background-color: var(--brand-subtle);
 	}
 	button:active {
-		background-color: var(--brand-dark);
+		background-color: var(--brand);
+	}
+
+	.button--alt:hover {
+		background-color: var(--bg-subtle);
 	}
 
 	.message {
@@ -171,6 +186,22 @@
 		flex-direction: row;
 		justify-content: flex-start;
 		margin-right: auto;
+	}
+
+	.loading {
+		/* message loading bg animated */
+		background-image: linear-gradient(90deg, var(--bg) 0%, var(--bg-subtle) 50%, var(--bg) 100%);
+		background-size: 200% 100%;
+		animation: loading 3s linear infinite;
+	}
+
+	@keyframes loading {
+		0% {
+			background-position: 100% 0;
+		}
+		100% {
+			background-position: -100% 0;
+		}
 	}
 
 	.message p {

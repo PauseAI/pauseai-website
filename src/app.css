@@ -24,9 +24,10 @@ html {
 	color-scheme: dark;
 
 	--brand: var(--brand-light);
-	--brand-subtle: hsl(32, 100%, 30%);
+	--brand-subtle: hsl(32, 20%, 30%);
 	--text: black;
 	--bg: white;
+	--bg-subtle: hsl(32, 100%, 90%);
 }
 
 @media (prefers-color-scheme: light) {
@@ -44,6 +45,7 @@ html {
 	--brand-subtle: hsl(32, 100%, 75%);
 	--text: white;
 	--bg: black;
+	--bg-subtle: hsl(32, 100%, 20%);
 }
 
 [color-scheme='light'] {
