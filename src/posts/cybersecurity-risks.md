@@ -41,9 +41,17 @@ People will not be able to buy food with their credit cards or phones.
 Truck drivers would not know which supermarkets to drive to.
 Farmers would not be able to sell their produce or restock supplies.
 The economy would grind to a halt, all supply chains would break down, and people will start to go hungry.
-Societal collapse has happened often before
 
-This is a very real threat, and we should start preparing for it now.
-But more importantly: we need to prevent it from happening in the first place.
-We need to make sure that AI simply is not capable of creating such a virus.
-[So let's Pause AI](/proposal).
+## Mitigating AI Cybersecurity Risks
+
+The story above can only happens if:
+
+1. The capability of finding zero-day exploits emerges
+1. The model gets in the hand of bad actors
+1. The security vulnerabilities are not patched before such a cyberweapon is deployed
+
+There are various measures we can implement to tackle these:
+
+- Only allow models to be deployed after extensive testing. If they have dangerous abilities, do not release them.
+- If a model is trained that can find novel security vulnerabilities, use this to contact software maintainers to patch these vulnerabilities. Give the patching process sufficient time before the model is released.
+- [Pause the dangerous training runs](/proposal).
