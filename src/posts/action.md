@@ -24,14 +24,14 @@ You are now one of them.
 
 ### If you are convincing
 
-- **Convince one person in your government to organize the [summit](/summit)**. This is the most important thing you can do. See [lobby tips](/lobby-tips).
+- **Convince one person in your government to prepare for the [summit](/summit) and work towards a global pause**. This is the most important thing you can do. See [lobby tips](/lobby-tips).
 - **Convince journalists** to write about AI safety. Point them to [educational materials](/learn).
 - **Ask the management** at your current organization to take an institutional position on this.
 - [Write to your political representatives](https://www.campaignforaisafety.org/politician/).
 
 ### If you are a politician / work in government
 
-- **Work towards an [AI safety summit](/proposal)**. Get your country to host one. We need to tackle this problem internationally.
+- **Prepare for the [AI safety summit](/summit)**. Form coalitions with other countries. Get informed about the [problem](/learn) and [solutions](/proposal).
 - **Invite (or subpoena) AI lab leaders** to parliamentary/congressional hearings to give their predictions and timelines of AI disasters.
 - **Establish a committee** to investigate the [risks of AI](/risks).
 
