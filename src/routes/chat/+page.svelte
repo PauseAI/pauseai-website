@@ -63,9 +63,16 @@
 	const personality = {
 		intro: `Meet ${botName}! You can chat with them about AI safety, the dangers of AI, how it wants to take over the world or how we can stop this from happening!`
 	}
+
+	const title = `Chat with ${botName}`
 </script>
 
-<title>Chat with {botName}</title>
+<svelte:head>
+	<title>{title}</title>
+	<meta property="og:title" content={title} />
+	<meta property="og:description" content={personality.intro} />
+</svelte:head>
+
 <main>
 	{#if messages.length === 0}
 		<p>{personality.intro}</p>
@@ -148,6 +155,7 @@
 		cursor: pointer;
 		display: flex;
 		align-self: flex-end;
+		font-weight: bold;
 		color: var(--bg);
 	}
 
