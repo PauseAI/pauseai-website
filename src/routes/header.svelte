@@ -1,6 +1,7 @@
 <script lang="ts">
 	import NavLink from '$lib/components/Navlink.svelte'
 	import Logo from '$lib/components/logo.svelte'
+	import { bot_name } from '$lib/config'
 </script>
 
 <nav>
@@ -13,7 +14,7 @@
 		<NavLink href="/proposal">Proposal</NavLink>
 		<NavLink href="/learn">Learn</NavLink>
 		<NavLink href="/faq">FAQ</NavLink>
-		<NavLink href="/chat">DoomBot</NavLink>
+		<NavLink href="/chat">{bot_name}</NavLink>
 		<!-- <NavLink href="/about">About</NavLink> -->
 		<NavLink c2a href="/action">Take action</NavLink>
 	</div>

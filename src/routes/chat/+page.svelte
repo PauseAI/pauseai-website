@@ -1,5 +1,6 @@
 <!-- FILEPATH: /Users/joep/dev/github/joepio/pauseai/src/routes/chat/+page.svelte -->
 <script lang="ts">
+	import { bot_name as botName } from '$lib/config'
 	import type { ChatResponse, Message } from '../api/chat/+server'
 	import { onMount } from 'svelte'
 
@@ -16,7 +17,7 @@
 	}
 
 	function copy() {
-		const role = (message: Message) => (message.role === 'user' ? 'You' : 'DoomBot')
+		const role = (message: Message) => (message.role === 'user' ? 'You' : { botName })
 		const text = messages.map((message) => `${role(message)}:\n${message.content}`).join('\n\n')
 		navigator.clipboard.writeText(text)
 		window.alert('Copied to clipboard!')
@@ -60,10 +61,11 @@
 	}
 
 	const personality = {
-		intro: 'Talk to DoomBot, ask them anything!'
+		intro: `Meet ${botName}! You can chat with them about AI safety, the dangers of AI, how it wants to take over the world or how we can stop this from happening!`
 	}
 </script>
 
+<title>Chat with {botName}</title>
 <main>
 	{#if messages.length === 0}
 		<p>{personality.intro}</p>
@@ -80,12 +82,12 @@
 	{/if}
 </main>
 
-{#if messages.length > maxMessages}
-	<p>You reached the maximum amount of messages, you can clear the chat</p>
-	<button class="button" on:click={clear}>Clear chat</button>
-	<button class="button" on:click={copy}>Copy chat</button>
-{:else}
-	<footer>
+<footer>
+	{#if messages.length > maxMessages}
+		<p>You reached the maximum amount of messages, you can clear the chat</p>
+		<button class="button" on:click={clear}>Clear chat</button>
+		<button class="button" on:click={copy}>Copy chat</button>
+	{:else}
 		<form on:submit|preventDefault={sendMessage}>
 			<textarea placeholder="Type here" bind:value={input} on:keydown={handleKeyDown} />
 			<div class="buttons">
@@ -94,8 +96,11 @@
 				<button type="submit" disabled={loading || input == ''}> Send </button>
 			</div>
 		</form>
-	</footer>
-{/if}
+	{/if}
+	<div class="disclaimer">
+		Disclaimer: {botName} is just a cheeky chatbot, don't take it too seriously.
+	</div>
+</footer>
 
 <style>
 	main {
@@ -160,6 +165,12 @@
 
 	.button--alt:hover {
 		background-color: var(--bg-subtle);
+	}
+
+	.disclaimer {
+		font-size: 0.8rem;
+		color: var(--text-subtle);
+		margin-top: 1rem;
 	}
 
 	.message {
