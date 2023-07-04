@@ -144,3 +144,20 @@ h1 {
 	padding-left: 1rem;
 	font-style: italic;
 }
+
+form {
+	display: flex;
+	flex-direction: column;
+	max-width: 20rem;
+}
+
+form label {
+	margin-bottom: 0.5rem;
+	display: flex;
+	flex-direction: column;
+}
+
+input:focus,
+textarea:focus {
+	outline: var(--brand) auto 1px;
+}

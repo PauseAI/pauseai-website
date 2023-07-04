@@ -15,7 +15,7 @@ You are now one of them.
 - **[Learn](/learn)** more about AI alignment and the risks we are facing.
 - [**Lobby**](/lobby-tips): convince your government to organize a [summit](/summit).
 - [**Protest**](/protests): join [one of the protests](/protests) or organize one yourself.
-- **Sign petitions**: [pause giant AI experiments](https://futureoflife.org/open-letter/pause-giant-ai-experiments/), [demand responsible AI](https://www.change.org/p/artificial-intelligence-time-is-running-out-for-responsible-ai-development-91f0a02c-130a-46e1-9e55-70d6b274f4df), [statement on AI risk](https://www.safe.ai/statement-on-ai-risk).
+- **Sign petitions**: [pause giant AI experiments](https://futureoflife.org/open-letter/pause-giant-ai-experiments/), [demand responsible AI](https://www.change.org/p/artificial-intelligence-time-is-running-out-for-responsible-ai-development-91f0a02c-130a-46e1-9e55-70d6b274f4df), [statement on AI risk](https://www.safe.ai/statement-on-ai-risk), or one of the **national petitions**: [UK](https://petition.parliament.uk/petitions/639956), [AUS](https://www.aph.gov.au/e-petitions/petition/EN5163), [NL](https://aipetitie.nl).
 - **Talk** to people in your life about this. Answer their questions, and get them to act.
 - **Share** about AI risk on social media. This website might be a good start.
 - **Create** [articles](/learn#articles), [videos](/learn#videos) or [memes](https://twitter.com/AISafetyMemes)

@@ -70,13 +70,15 @@ However, we tend to give AI systems access to the internet, which means that the
 
 ## From an evolutionary perspective
 
-An AI might be able to replicate, as it is just a piece of data.
+DNA and an AI might feel different, but both are pieces of information that could be copied and replicated.
+When an AI for any reason does care about its existence in the real world, it will be competing for existence just like all living things.
 We should consider the advantages that a smart piece of software may have over us:
 
-- **Speed**: Computers operate at extremely high speed, compared to brains.
-- **Location**: An intelligence is effectively a piece of software, a bunch of information, and is not limited to one location. It can replicate itself, it can be in many locations at once. We have built the infrastructure for it: the internet.
-- **Physical limits**: We cannot add more brains into our skull and become smarter. An AI could dramatically improve its capabilities by adding hardware, like more memory, more processing power, more sensors (cameras, microphones).
+- **Speed**: Computers operate at extremely high speed, compared to brains. Human neurons operate at a clock speed of about 100hz, while computers can operate at millions of times that speed.
+- **Location**: An AI is not constrained to one body - it can be in many locations at once. We have built the infrastructure for it: the internet.
+- **Physical limits**: We cannot add more brains into our skull and become smarter. An AI could dramatically improve its capabilities by adding hardware, like more memory, more processing power, more sensors (cameras, microphones). An AI could also extend its 'body' by controlling connected devices.
 - **Materials**: Humans are made of organic materials. Our bodies no longer work if they are too warm or cold, they need food, they need oxygen. Machines can be built from more robust materials, like metals, and can operate in a much wider range of environments.
+- **Collaboration**: Humans can collaborate, but it is difficult and time-consuming, so we often fail to coordinate well. An AI could collaborate complex information with replicas of itself at high speed.
 
 A superintelligent AI will have many advantages to outcompete us.
 But why would it _want to_?
@@ -112,6 +114,19 @@ In that case, the operator would have unimaginable power.
 A superintelligence could be used to create new weapons, hack all computers and manipulate humanity.
 Should we trust a single entity with that much power?
 We might end up in a utopic world where all diseases are cured and everybody is happy, or in an Orwellian nightmare.
+
+## Even a chatbot can be dangerous, if it is smart enough
+
+LLMs, like GPT, are trained to predict or mimic virtually any type of written content and line of thought.
+You might wonder: how can a statistical model that predicts the next word in a chat interface pose any danger?
+With the usage of tools like [AutoGPT](https://github.com/Significant-Gravitas/Auto-GPT), a chatbot could be turned into an autonomous agent that pursues any goal it is given.
+
+Take [ChaosGPT](https://www.youtube.com/watch?v=g7YJIpkk7KM), for example.
+This is an AI, using the aforementioned AutoGPT + GPT-4, that is instructed to "Destroy humanity".
+After being run, it searched the internet for the most destructive weapon and found the [Tsar Bomba](https://en.wikipedia.org/wiki/Tsar_Bomba), a 50 megaton nuclear bomb.
+It then posted a tweet about it.
+It didn't get very far, because it wasn't that smart.
+But what would happen if it was extremely intelligent?
 
 ## We may not have much time left
 

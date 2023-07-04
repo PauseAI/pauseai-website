@@ -5,11 +5,11 @@ description: When and where we will be protesting.
 
 ## Coming up
 
-- [29th of June, London](/2023-june-london-office-for-ai)
 - 12th of July, Netherlands
 
 ## Past Protests
 
+- [29th of June, London](/2023-june-london-office-for-ai)
 - [16th of June, Melbourne, Australia](/2023-june-melbourne)
 - [8th of June, Parliament Square, London](/2023-june-london)
 - [3rd of June, NYC, UN Building](/nyc-un-vigil)
@@ -26,7 +26,7 @@ description: When and where we will be protesting.
 - Pick a fitting location and date.
 - You can ask for a permit for your protest at your local government.
 - Have something to hand out, like <a href="/PauseAI_flyer.pdf" target="_blank">our flyer</a>.
-- Use our [figma design template](https://www.figma.com/community/file/1233064002969152026) to make your own flyers / banners / posters.
+- Use our [figma design template](https://www.figma.com/community/file/1233064002969152026) or check the [media folder](https://drive.google.com/drive/folders/1bQ_MZ8giK-Mee4ABkO0BgcFInaXruNpa?usp=sharing) to make your own flyers / banners / posters.
 - Carefully consider the text on your signs and how your pictures will look to others - they will lead a life of their own on social media.
 
 ## Code of conduct
