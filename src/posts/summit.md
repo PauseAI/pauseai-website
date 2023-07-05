@@ -1,6 +1,6 @@
 ---
 title: AI Safety Summit
-description: What it would take to organize a summit on AI safety.
+description: What it would take to organize a succesful summit on AI safety.
 ---
 
 AI presents very real risks to humanity, including the [risk of extinction](/xrisk).

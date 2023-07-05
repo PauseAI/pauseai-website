@@ -49,7 +49,7 @@ However, their strategy is quite explicit: a Pause is impossible, we need to get
 The problem with this, however, is that they [do not believe they have solved the alignment problem](https://youtu.be/L_Guz73e6fw?t=1478).
 The AI companies are locked in a race to the bottom, where AI safety is sacrificed for competitive advantage.
 This is simply the result of market dynamics.
-We need governments to step in and organize a summit to discuss the risks of AI, and to create a regulatory framework that will prevent the worst outcomes.
+We need governments to step in and implement policies (at an international level) that [prevent the worst outcomes](/proposal).
 
 ### Are AI companies pushing the existential risk narrative to manipulate us?
 
