@@ -66,7 +66,7 @@ However, we tend to give AI systems access to the internet, which means that the
 - [Hack into other computers](/cybersecurity-risks), including all smartphones, laptops, server parks, etc. It could use the sensors of these devices as its eyes and ears, having digital senses everywhere.
 - Manipulate people through fake messages, e-mails, bank transfers, videos or phone calls. Humans could become the AI's limbs, without even knowing it.
 - Directly control devices connected to the internet, like cars, planes, robotized (autonomous) weapons or even nuclear weapons.
-- Design a novel bioweapon using protein folding (which AI is also [already very good at](https://alphafold.ebi.ac.uk/)) and order it to be printed in a lab.
+- Design a novel bioweapon, e.g. by combining viral strands or by using [protein folding](https://alphafold.ebi.ac.uk) and order it to be printed in a lab.
 
 ## From an evolutionary perspective
 
@@ -115,18 +115,27 @@ A superintelligence could be used to create new weapons, hack all computers and 
 Should we trust a single entity with that much power?
 We might end up in a utopic world where all diseases are cured and everybody is happy, or in an Orwellian nightmare.
 
-## Even a chatbot can be dangerous, if it is smart enough
+## Even a chatbot can be dangerous if it is smart enough
 
-LLMs, like GPT, are trained to predict or mimic virtually any type of written content and line of thought.
 You might wonder: how can a statistical model that predicts the next word in a chat interface pose any danger?
-With the usage of tools like [AutoGPT](https://github.com/Significant-Gravitas/Auto-GPT), a chatbot could be turned into an autonomous agent that pursues any goal it is given.
+LLMs, like GPT, are trained to predict or mimic virtually any line of thought.
+It could mimic a helpful mentor, but also someone with bad intentions, a ruthless dictator or a psychopath.
+With the usage of tools like [AutoGPT](https://github.com/Significant-Gravitas/Auto-GPT), a chatbot could be turned into an *autonomous agent*: an AI that pursues any goal it is given, without any human intervention.
 
 Take [ChaosGPT](https://www.youtube.com/watch?v=g7YJIpkk7KM), for example.
 This is an AI, using the aforementioned AutoGPT + GPT-4, that is instructed to "Destroy humanity".
-After being run, it searched the internet for the most destructive weapon and found the [Tsar Bomba](https://en.wikipedia.org/wiki/Tsar_Bomba), a 50 megaton nuclear bomb.
+When it was turned on, it autonomously searched the internet for the most destructive weapon and found the [Tsar Bomba](https://en.wikipedia.org/wiki/Tsar_Bomba), a 50 megaton nuclear bomb.
 It then posted a tweet about it.
-It didn't get very far, because it wasn't that smart.
+Seeing an AI reason about how it will end humanity is both a little funny and terrifying.
+ChaotGPT luckily didn't get very far in its quest for dominance.
+The only reason it didn't get very far: it wasn't that smart.
 But what would happen if it was extremely intelligent?
+What could have happened if it was smart enough to [hack into nuclear silos](https://t.co/UNPERx9NdL)?
+
+The dangerous capacity is intelligence.
+There is no need for consciousness, a body, or any underlying motivation.
+It does not matter if it is just a chatbot - it can still be an existential threat with the wrong prompt, a tool like AutoGPT and sufficient intelligence.
+If an AI is smart enough to take over, at some point in time it will try to do this, simply because people will try all sorts of things.
 
 ## We may not have much time left
 
