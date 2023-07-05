@@ -8,7 +8,7 @@ description: Frequently asked questions about PauseAI and the risks of superinte
 We are a group of volunteers, AI (safety) researchers and engineers who are worried about the risks of AI.
 We are not affiliated with any company or organization.
 We're a movement that aims to [pause AI development](/proposal) that poses very serious [risks](/risks) to humanity, including the [risk of human extinction](/xrisk).
-You can [find us on Discord](https://discord.gg/2XXWXvErfA).
+You can [find us on Discord](https://discord.gg/2XXWXvErfA), [Twitter](https://twitter.com/PauseAI), [facebook](https://www.facebook.com/PauseAI), [TikTok](https://www.tiktok.com/@pauseai) and [LinkedIn](https://www.linkedin.com/uas/login?session_redirect=/company/97035448/).
 
 ### How likely is it that superintelligent AI will cause very bad outcomes, like human extinction?
 
