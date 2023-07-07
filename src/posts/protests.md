@@ -5,7 +5,7 @@ description: When and where we will be protesting.
 
 ## Coming up
 
-- 12th of July, Netherlands
+- July (TBD), Netherlands
 
 ## Past Protests
 

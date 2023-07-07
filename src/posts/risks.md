@@ -76,8 +76,8 @@ Instead of having to hire a team of highly skilled security experts/hackers to f
 
 ## Existential Risk
 
-Over half of AI researchers believe there is a >10% chance that AI will cause human extinction.
-Would you enter a plane if half of the plane engineers believed there was a >10% chance that it would crash?
+AI researchers on average believe there is a 14% chance that AI will cause human extinction.
+Would you enter a plane if plane engineers believed there was a 14% chance that it would crash?
 
 Very intelligent things are very powerful.
 If we build a machine that is far more intelligent than humans, we need to be sure that it wants the same thing as we want.

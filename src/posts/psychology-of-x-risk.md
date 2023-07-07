@@ -21,7 +21,9 @@ People may think you are crazy, and you may not feal comfortable talking about t
 ### Fear of being ridiculed
 
 The first reaction to existential risk is often just laughing it off.
-We've seen this happen on camera in the White House, for example.
+> “It was almost dangerous from a career perspective to admit you were worried,” - [Jeff Clune said](https://www.theglobeandmail.com/business/article-i-hope-im-wrong-why-some-experts-see-doom-in-ai/)
+
+We've also seen this happen on camera in the White House, the first time x-risk was brought up.
 This has the effect of making the one bringing up the topic feel like a fool.
 This in turn makes it harder to bring up the topic again, as others will fear being ridiculed for bringing it up.
 
@@ -108,7 +110,7 @@ Many posts assume the reader is already familiar with mathematical concepts, var
 
 Scope insensitivity is the human tendency to underestimate the impact of large numbers.
 We do not care 10x as much about 1000 people dying as we do about 100 people dying.
-Existential risk is about the death of all 8 billion people on earth (not counting their descendants).
+Existential risk means the death of all 8 billion people on Earth (not counting their descendants).
 
 Even if there is a 1% chance of this happening, it is still a very big deal.
 Rationally, we should consider this 1% chance of 8 billion deaths just as important as the certain death of 80 million people.

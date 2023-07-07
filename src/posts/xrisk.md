@@ -5,9 +5,9 @@ description: Why AI is a risk for the future of our existence, and why we need t
 
 ## Experts are sounding the alarm
 
-Half of the AI researchers [surveyed](https://aiimpacts.org/2022-expert-survey-on-progress-in-ai/) think there’s a 10% or higher risk that once we build a superintelligent AI, it will lead to "very bad outcomes (e.g. human extinction)".
+AI researchers on average [believe](https://aiimpacts.org/2022-expert-survey-on-progress-in-ai/) there's a 14% chance that once we build a superintelligent AI, it will lead to "very bad outcomes (e.g. human extinction)".
 
-Would you choose to be a passenger on a test flight of a new plane where half of the airplane engineers think there’s a larger than 10% chance that it will crash?
+Would you choose to be a passenger on a test flight of a new plane when airplane engineers think there’s a 14% chance that it will crash?
 
 When you ask AI safety researchers (the people who actually research the safety risks of AI), the average estimate for bad outcomes [grows to 30%](https://forum.effectivealtruism.org/posts/8CM9vZ2nnQsWJNsHx/existential-risk-from-ai-survey-results).
 

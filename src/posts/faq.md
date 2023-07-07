@@ -53,8 +53,7 @@ We need governments to step in and implement policies (at an international level
 
 ### Are AI companies pushing the existential risk narrative to manipulate us?
 
-Perhaps they think they will benefit in some way by acknowledging existential risk, or perhaps they acknowledge it because they simply believe it and think it deserves attention.
-We can't know for certain, but we do know that **x-risk was not initially pushed by AI companies - it was scientists, activists and NGOs**.
+We can't know for certain what motivations these companies have, but we do know that **x-risk was not initially pushed by AI companies - it was scientists, activists and NGOs**.
 Let's look at the timeline.
 
 There have been many people who have warned about x-risk since the early 2000s.
@@ -83,11 +82,17 @@ That's all the AI companies (or some of their directors / employees) have done t
 These companies have been very slow to acknowledge x-risk, considering that many of their employees have been aware of it for years.
 So in our view, the AI companies are not pushing the x-risk narrative, they have been reactive to others pushing it, and have waited with their response until it was absolutely necessary.
 
-Here's our interpretation: the AI companies know that x-risk is a real problem, and they are scared of it.
-They are all asking to be regulated, which is kind of unheard of for pretty much any industry.
+The business incentives point in the other direction: companies would rather not have people worry about the risks of their products.
+Virtually all companies downplay risks to attract customers and investments (remember the Oceangate submarine?), not exaggerate them.
+How much strict regulation and negative attention are the companies inviting due to admitting these dangers?
+And would a company like OpenAI [dedicate 20% of its compute resources](https://openai.com/blog/introducing-superalignment) to AI safety if it wouldn't believe in the risks?
 
-The reason people still don't want to believe that x-risk is a real concern?
+Here's our interpretation: the AI companies signed the statement because _they know that x-risk is a problem that needs to be taken very seriously_.
+
+The main reason many other people still don't want to believe that x-risk is a real concern?
 Because acknowledging that _we are in fact in danger_ is a very, very scary thing.
+
+[Read more about the psychology of x-risk](/psychology-of-x-risk).
 
 ### Aren't you just scared of changes and new technology?
 
