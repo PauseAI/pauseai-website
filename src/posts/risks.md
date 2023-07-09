@@ -44,6 +44,23 @@ GPT-4 has passed the bar exam, can write excellent written content, and can writ
 The people who own these AI systems will be able to capitalize on them, but the people who lose their jobs to them will not.
 The way we distribute wealth in our society is not prepared for this.
 
+## Autonomous weapons
+
+Companies are already selling AI-powered weapons to governments.
+Lanius builds [flying suicide drones](https://www.youtube.com/watch?v%253DG7yIzY1BxuI%2526t%253D1s) that autonomously identify foes.
+Palantir's [AIP system](https://elbitsystems.com/product/lanius/) uses large language models to analyze battlefield data and come up with optimal strategies.
+
+Nations and weapon companies have realized that AI will have a huge impact on besting your enemies.
+We've entered a new arms race.
+This dynamic rewards speeding up and cutting corners.
+
+Right now, we still have humans in the loop for these weapons.
+But as the capabilities of these AI systems improve, there will be more and more pressure to give the machines the power to decide.
+When we delegate control of weapons to AI, errors and bugs could have horrible consequences.
+The speed at which AI can process information and make decisions may cause conflicts to escalate in minutes.
+
+Read more at [stopkillerrobots.org](https://www.stopkillerrobots.org/military-and-killer-robots/)
+
 ## Biological weapons
 
 AI can make knowledge more accessible, which also includes knowledge about how to create biological weapons. [This paper](https://arxiv.org/abs/2306.03809) shows how GPT-4 can help non-scientist students to create a pandemic pathogen:
