@@ -93,13 +93,21 @@ Instead of having to hire a team of highly skilled security experts/hackers to f
 
 ## Existential Risk
 
-AI researchers on average believe there is a 14% chance that AI will cause human extinction.
-Would you enter a plane if plane engineers believed there was a 14% chance that it would crash?
+Many AI researchers are warning that AI could lead to the end of humanity.
 
 Very intelligent things are very powerful.
 If we build a machine that is far more intelligent than humans, we need to be sure that it wants the same thing as we want.
 However, this turns out to be very difficult.
 This is called the _alignment problem_.
 If we fail to solve it in time, we are likely to end up with an unstoppable machine making decisions for us that is not considering our well-being.
+We'd be introducing a new species to the planet that could outsmart us and outcompete us.
 
 [Read more about x-risk](/xrisk)
+
+## What can we do?
+
+For virtually every risk discussed above, they get worse as AI capabilities improve.
+This means that the safest thing to do now, is to slow down.
+We need to pause the development of more powerful AI systems until we have figured out how to deal with the risks.
+
+See [our proposal](/proposal) for more details.
