@@ -1,13 +1,13 @@
 ---
-title: PauseAI protest @ Microsoft Schiphol, Amsterdam, Netherlands - August 11th
+title: PauseAI protest @ The Hague, Netherlands - August 11th
 description: We are organizing a protest to demand a pause on dangerous AI development.
 ---
 
-- PauseAI protest, urging
-- Where: Microsoft Schiphol, Amsterdam
+- PauseAI protest
+- Where: The Hague (TBD)
 - When: 11th of August, 16:00 - 17:00
-- [Sign up here](https://forms.gle/t1FvzqaEBmZuBuXS7)
+- [Sign up here]([https://forms.gle/t1FvzqaEBmZuBuXS7](https://docs.google.com/forms/d/e/1FAIpQLScGoe6jY7VmhYCx3XuoxCX-dCnUdHa53Z_tVMY0gn0I0Kf3Ag/viewform?usp%253Dsf_link))
 
 ## Contact
 
-- Joep Meindertsma ([Twitter](https://twitter.com/joepmeindertsma))
+- Joep Meindertsma ([twitter](https://twitter.com/joepmeindertsma), [email](joep@ontola.io))
