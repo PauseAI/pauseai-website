@@ -9,4 +9,4 @@ title: PauseAI protest @ FCDO, London, July 13th
 
 ## Contact
 
-- Joseph Miller ([email](mailto:josephmiller101@gmail.com))
+- Alistair Steward ([twitter](https://twitter.com/alistair___s))
