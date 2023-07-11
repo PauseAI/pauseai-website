@@ -10,4 +10,4 @@ description: We are organizing a protest to demand a pause on dangerous AI devel
 
 ## Contact
 
-- Joep Meindertsma ([twitter](https://twitter.com/joepmeindertsma), [email](joep@ontola.io))
+- Joep Meindertsma ([twitter](https://twitter.com/joepmeindertsma), [email](mailto:joep@ontola.io))
