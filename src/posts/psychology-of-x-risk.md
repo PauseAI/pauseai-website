@@ -10,7 +10,7 @@ The psychology of existential risk is a topic that is not often discussed, compa
 However, one might argue that it is perhaps just as important.
 After all, if we can't get people to take the topic seriously and act on it, we won't be able to do anything about it.
 
-It's hard to bring up, hard to believe, hard to understand, and hard to act on.
+It's hard to **bring up**, hard to **believe**, hard to **understand**, and hard to **act on**.
 Having a better understanding of _why_ these things are so difficult can help us be more convincing, effective and empathetic.
 
 ## Difficult to bring up
