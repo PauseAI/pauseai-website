@@ -16,7 +16,7 @@ Having a better understanding of _why_ these things are so difficult can help us
 ## Difficult to bring up
 
 X-risk is a difficult topic to bring up in conversation, especially if you are a politician.
-People may think you are crazy, and you may not feal comfortable talking about this complex topic yourself.
+People may think you are crazy, and you may not feel comfortable talking about this complex topic yourself.
 
 ### Fear of being ridiculed
 
@@ -94,11 +94,13 @@ In an [interview](https://youtu.be/0RknkWgd6Ck?t%25253D949), he gave the followi
 
 ## Difficult to understand
 
+The arguments for AI existential risk are often very technical, and we are very prone to anthropomorphizing AI systems.
+
 ### AI alignment is surprisingly hard
 
 People may intuitively feel like they could solve the AI alignment problem.
 Why not add a [stop button](https://www.youtube.com/watch?v=3TYT1QfdfsM&list=PLfHsskCxi_g-c62a_dmsNuHynaXsRQm40&index=10)? Why not [raise the AI like a child](https://www.youtube.com/watch?v=eaYIU6YXr3w)? Why not [Asimov's three laws](https://www.youtube.com/watch?v=7PKx3kS7f4A)?
-Contrary to most types of technical problems, people will have an opinion on how to solve it, and reliably underestimate the difficulty of the problem.
+Contrary to most types of technical problems, people will have an opinion on how to solve AI alignment and underestimate the difficulty of the problem.
 Understanding the actual difficulty of it takes a lot of time and effort.
 
 ### We anthropomorphize
@@ -106,6 +108,7 @@ Understanding the actual difficulty of it takes a lot of time and effort.
 We see faces in clouds, and we see human-like qualities in AI systems.
 Millions of years of evolution have made us highly social creatures, but these instincts are not always helpful.
 We tend to think of AIs as having human-like goals and motivations, being able to feel emotions, and having a sense of morality.
+We tend to expect a very intelligent AI to also be very wise and kind.
 This is one of the reasons why people intuitively think that AI alignment is easy, and why the [Orthogonality thesis](https://www.youtube.com/watch?v=hEUO6pjwFOo) can be so counter-intuitive.
 
 ### AI safety uses complex language
@@ -115,6 +118,9 @@ Reading LessWrong posts can feel like reading a foreign language.
 Many posts assume the reader is already familiar with mathematical concepts, various technical concepts, and the jargon of the field.
 
 ## Difficult to act on
+
+Even if people do understand the arguments, it is still difficult to act on them.
+The impact is too large, we have coping mechanisms that downplay the risks, and if we do feel the gravity of the situation, we can feel powerless.
 
 ### Scope insensitivity
 
@@ -150,7 +156,8 @@ It can feel like a cancer diagnosis: you are going to die sooner than you wanted
 The problem is too big to tackle, and you are too small.
 Most people are no AI safety experts or experienced lobbyists, so how can they possibly do anything about it?
 
-This is where **you can help**.
+## But you can help!
+
 There are many [things that you can do](/action).
 Writing a letter, going to a protest, donating some money or joining a community is not that hard!
 And these actions have a real impact.
