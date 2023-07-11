@@ -62,12 +62,15 @@ In more realistic AI doom scenarios, there is no hero, no conflict, no hope, and
 
 ### Progress has always been (mostly) good
 
-Many of the technologies introduced in our society have been beneficial.
+Many of the technologies introduced in our society have been mostly beneficial for humanity.
 We have cured diseases, increased our life expectancy, and made our lives more comfortable.
 And every time we have done so, there have been people who opposed these innovations and warned about the dangers.
+The Luddites destroyed the machines that were taking their jobs, and people were afraid of the first trains and cars.
 These people have always been wrong.
 
-### Our brains block out bad news
+### We don't like to think about bad things
+
+This one is the biggest problem.
 
 The human mind does not like receiving bad news, and it has various coping mechanisms to deal with it.
 The most important ones when talking about x-risk are [denial](https://en.wikipedia.org/wiki/Cognitive_dissonance) and [compartmentalization](https://en.wikipedia.org/wiki/Compartmentalization_(psychology)).
@@ -79,6 +82,13 @@ However, they can also prevent us from adequately responding to a threat.
 When you notice someone using these coping mechanisms, try to be empathetic.
 They are not doing it on purpose, and they are not stupid.
 It is a natural reaction to bad news, and we all do it to some extent.
+
+Take Yoshua Bengio for example.
+Yoshua Bengio has a brilliant mind and is one of the pioneers in AI.
+AI safety experts have been warning about the potential dangers for AI for years, but it still took him a long time to take their warnings seriously.
+In an [interview](https://youtu.be/0RknkWgd6Ck?t%25253D949), he gave the following explanation:
+
+> "Why didn't I think about it before? Why didn't Geoffrey Hinton think about it before? [...] I believe there's a psychological effect that still may be at play for a lot of people. [...] It's very hard, in terms of your ego and feeling good about what you do, to accept the idea that the thing you've been working on for decades might be actually be very dangerous to humanity. [...] I think that I didn't want to think too much about it, and that's probably the case for others."
 
 ## Difficult to understand
 
@@ -96,7 +106,7 @@ Millions of years of evolution have made us highly social creatures, but these i
 We tend to think of AIs as having human-like goals and motivations, being able to feel emotions, and having a sense of morality.
 This is one of the reasons why people intuitively think that AI alignment is easy, and why the [Orthogonality thesis](https://www.youtube.com/watch?v=hEUO6pjwFOo) can be so counter-intuitive.
 
-### We use complex language
+### AI safety uses complex language
 
 The AI safety field consists mostly of a small group of (smart) people who have developed their own jargon.
 Reading LessWrong posts can feel like reading a foreign language.
@@ -133,13 +143,13 @@ This stress can be a good motivator, but it can also be paralyzing.
 
 ### Hopelessness and powerlessness
 
-When people do take the topic seriously, and the full gravity of the situation sinks in, they often feel like all hope is lost.
+When people do take the topic seriously, and the full gravity of the situation sinks in, they can feel like all hope is lost.
 It can feel like a cancer diagnosis: you are going to die sooner than you wanted, and there is nothing you can do about it.
-The problem is too big to tackle, and the person is too small.
-Most people are no AI safety experts or lobbyists, so how can they possibly do anything about it?
+The problem is too big to tackle, and you are too small.
+Most people are no AI safety experts or experienced lobbyists, so how can they possibly do anything about it?
 
-This is where you can help.
-You can show them that there are [things they can do](/action).
+This is where **you can help**.
+There are many [things that you can do](/action).
 Writing a letter, going to a protest, donating some money or joining a community is not that hard!
 And these actions have a real impact.
 Even when facing the end of the world, there can still be hope and very rewarding work to do.

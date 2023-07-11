@@ -33,7 +33,7 @@ Here are some resources to get you started.
 - [Preventing an AI-related catastrophe](https://80000hours.org/problem-profiles/artificial-intelligence/) (by 80,000 hours)
 - [The AI Revolution: The Road to Superintelligence](https://waitbutwhy.com/2015/01/artificial-intelligence-revolution-1.html) (by WaitButWhy)
 - [AI Alignment, Explained in 5 Points](https://medium.com/@daniel_eth/ai-alignment-explained-in-5-points-95e7207300e3)
-- [How rogue AIs may arise](https://yoshuabengio.org/2023/05/22/how-rogue-ais-may-arise/) (by Joshua Bengio)
+- [How rogue AIs may arise](https://yoshuabengio.org/2023/05/22/how-rogue-ais-may-arise/) (by Yoshua Bengio)
 - [A simple explanation of why advanced AI could be incredibly dangerous](https://muddyclothes.substack.com/p/a-simple-explanation-of-why-advanced)
 
 ## Courses
