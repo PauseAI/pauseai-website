@@ -70,8 +70,6 @@ These people have always been wrong.
 
 ### We don't like to think about bad things
 
-This one is the biggest problem.
-
 The human mind does not like receiving bad news, and it has various coping mechanisms to deal with it.
 The most important ones when talking about x-risk are [denial](https://en.wikipedia.org/wiki/Cognitive_dissonance) and [compartmentalization](https://en.wikipedia.org/wiki/Compartmentalization_(psychology)).
 Both of these are ways to avoid having to internalize the bad news.
@@ -83,9 +81,13 @@ When you notice someone using these coping mechanisms, try to be empathetic.
 They are not doing it on purpose, and they are not stupid.
 It is a natural reaction to bad news, and we all do it to some extent.
 
+### Admitting your work is dangerous is hard
+
+For those who have been working on AI capabilities, accepting its dangers is even harder.
+
 Take Yoshua Bengio for example.
 Yoshua Bengio has a brilliant mind and is one of the pioneers in AI.
-AI safety experts have been warning about the potential dangers for AI for years, but it still took him a long time to take their warnings seriously.
+AI safety experts have been warning about the potential dangers of AI for years, but it still took him a long time to take their warnings seriously.
 In an [interview](https://youtu.be/0RknkWgd6Ck?t%25253D949), he gave the following explanation:
 
 > "Why didn't I think about it before? Why didn't Geoffrey Hinton think about it before? [...] I believe there's a psychological effect that still may be at play for a lot of people. [...] It's very hard, in terms of your ego and feeling good about what you do, to accept the idea that the thing you've been working on for decades might be actually be very dangerous to humanity. [...] I think that I didn't want to think too much about it, and that's probably the case for others."
