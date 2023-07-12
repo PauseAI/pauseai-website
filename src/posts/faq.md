@@ -99,7 +99,7 @@ Because acknowledging that _we are in fact in danger_ is a very, very scary thin
 You might be surprised that most people in PauseAI consider themselves techno-optimists.
 Many of them are involved in AI development, are gadget lovers, and have mostly been very excited about the future.
 Particularly many of them have been excited about the potential of AI to help humanity.
-That's why for many of them the sad realization that AI might be an existential risk was a very difficult one to internalize.
+That's why for many of them the sad realization that AI might be an existential risk was a very [difficult one to internalize](/psychology-of-x-risk).
 
 ### I have a different / AI related question
 

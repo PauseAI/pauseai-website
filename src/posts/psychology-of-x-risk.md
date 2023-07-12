@@ -16,7 +16,7 @@ Having a better understanding of _why_ these things are so difficult can help us
 ## Difficult to bring up
 
 X-risk is a difficult topic to bring up in conversation, especially if you are a politician.
-People may think you are crazy, and you may not feel comfortable talking about this complex topic yourself.
+People may think you are crazy, and you may not feel comfortable talking about this technically complex topic.
 
 ### Fear of being ridiculed
 
@@ -27,11 +27,22 @@ We've also seen this happen on camera in the White House, the first time x-risk 
 This has the effect of making the one bringing up the topic feel like a fool.
 This in turn makes it harder to bring up the topic again, as others will fear being ridiculed for bringing it up.
 
+### Fear of being called racist / cultist / part of a conspiracy
+
+In recent months, various conspiracy theories have risen.
+Some individuals have stated that [all AI safety people are racist](https://medium.com/%2540emilymenonbender/talking-about-a-schism-is-ahistorical-3c454a77220f) and that [AI safety is a cult](https://www.cnbc.com/2023/06/06/ai-doomers-are-a-cult-heres-the-real-threat-says-marc-andreessen.html).
+Some have stated that AI 'doomers' are part of a [conspiracy by big tech to "hype up" AI](https://www.latimes.com/business/technology/story/2023-03-31/column-afraid-of-ai-the-startups-selling-it-want-you-to-be).
+These ridiculous accusations can make concerned people hesitant to share their concerns.
+
+However, before getting angry at the people making these accusations, keep in mind that they can be the result of fear and denial (see below).
+Acknowledging the dangers of AI is scary, and it can be easier to dismiss the messenger than to internalize the message.
+
 ### A complex topic to argue about
 
+People like talking about things they are knowledgeable about.
 The technical difficulty of AI safety makes it a daunting topic for most people.
-It takes time and effort to understand the arguments, and if you don't feel like you deeply understand them, it's hard to argue about them.
-As a politician, you don't want to be caught saying something that is wrong, so you might avoid the topic altogether.
+It takes time and effort to understand the arguments.
+As a politician, you don't want to be caught saying something that is wrong, so you might just avoid the topic altogether.
 
 ## Difficult to believe
 
@@ -41,7 +52,7 @@ There are various reasons why most will instantly dismiss the idea.
 ### The end of the world has never happened
 
 Seeing is believing.
-That's a problem for existential risk, because we will never be able to see it before it is too late.
+That's a problem for extinction risk because we will never be able to see it before it is too late.
 
 On the other hand, we have tons of evidence for the contrary.
 The end of times has been predicted by many people, and every single one of them has been wrong so far.
@@ -68,11 +79,12 @@ And every time we have done so, there have been people who opposed these innovat
 The Luddites destroyed the machines that were taking their jobs, and people were afraid of the first trains and cars.
 These people have always been wrong.
 
-### We don't like to think about bad things
+### We don't like to think about our death
 
 The human mind does not like receiving bad news, and it has various coping mechanisms to deal with it.
 The most important ones when talking about x-risk are [denial](https://en.wikipedia.org/wiki/Cognitive_dissonance) and [compartmentalization](https://en.wikipedia.org/wiki/Compartmentalization_(psychology)).
-Both of these are ways to avoid having to internalize the bad news.
+When it comes to our own death, specifically, we are very prone to denial.
+Books have been written about the [Denial of Death](https://en.wikipedia.org/wiki/The_Denial_of_Death).
 
 These coping mechanisms protect us from the pain of having to accept that the world is not as we thought it was.
 However, they can also prevent us from adequately responding to a threat.
