@@ -20,16 +20,11 @@ description: When and where we will be protesting.
 - [20th of May, OpenAI, San Francisco](/openai-protest)
 - [19th - 22nd of May, Google DeepMind, London](/2023-may-deepmind-london)
 
-## Organizing a protest
+## Organize a protest
 
-- [Join our discord](https://discord.gg/2XXWXvErfA) to discuss organizing a protest. We're happy to help you with advice and resources!
-- Make sure you write a press release and send it to the media. Read more about [how to write a press release](/writing-press-releases).
-- Find coalition partners, and get as many people to join as possible.
-- Pick a fitting location and date.
-- You can ask for a permit for your protest at your local government.
-- Have something to hand out, like <a href="/PauseAI_flyer.pdf" target="_blank">our flyer</a>.
-- Use our [figma design template](https://www.figma.com/community/file/1233064002969152026) or check the [media folder](https://drive.google.com/drive/folders/1bQ_MZ8giK-Mee4ABkO0BgcFInaXruNpa?usp=sharing) to make your own flyers / banners / posters.
-- Carefully consider the text on your signs and how your pictures will look to others - they will lead a life of their own on social media.
+Take ownership of a protest and organize it yourself!
+We're here to help.
+Read more about [organizing a protest](/organizing-a-protest).
 
 ## Code of conduct
 

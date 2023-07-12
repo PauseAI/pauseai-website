@@ -13,7 +13,7 @@ You are now one of them.
 
 - **[Join our Discord](https://discord.gg/2XXWXvErfA)** or [other](https://coda.io/@alignmentdev/alignmentecosystemdevelopment) AI safety communities.
 - **[Learn](/learn)** more about AI alignment and the risks we are facing.
-- [**Protest**](/protests): join [one of the protests](/protests) or organize one yourself.
+- [**Protest**](/protests): join [one of the protests](/protests) or [organize one yourself](/organizing-a-protest).
 - [**Lobby**](/lobby-tips): convince your government to organize a [summit](/summit).
 - **Talk** to people in your life about this. Answer their questions, and get them to act.
 - **Share** about AI risk on social media. This website might be a good start.
