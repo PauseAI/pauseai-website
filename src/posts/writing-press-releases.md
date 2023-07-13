@@ -16,7 +16,7 @@ Pick up a newspaper as it is the clearest way to see the structure of news stor
 
 ## The ideal structure of a press release  
 
-Date: Always put the date of release on it, in bold, at the top. Some people  say "for immediate release." Don't. If your press release is not for immediate  release, don't send it until the item is ready for release. It's a news release, not a forward planner.
+Date: Always put the date of release on it, in bold, at the top. Some people  say "for immediate release." Don't. If your press release is not for immediate release, don't send it until the item is ready for release. It's a news release, not a forward planner.
 
 Headline: On one line, in bold. Ideally no more than 10 words. This is the hook for your story, and it should make total sense what the story is about from this headline. Think how many times you don't even click through from a headline online, but still know the news. This is what you want.  
 
@@ -40,9 +40,9 @@ Put the headline, or a similar story descriptor in the subject line. The journal
 
 Copy and paste your release into the body text of the email. It is more easily accessible and does not use as much data to send.
 
-Make a follow-up phone call. You would be surprised how many people spend a long time crafting the perfect release, send it and then just leave it here. Call. Start by asking if your release arrived OK? I cannot count the  number of times the journalist has not, at that point, opened it yet, and the  pens it whilst we are on the phone, prompted by the call. We can then ensure they have all the info they need.  
+Make a follow-up phone call. You would be surprised how many people spend a long time crafting the perfect release, send it and then just leave it here. Call. Start by asking if your release arrived OK? I cannot count the  number of times the journalist has not, at that point, opened it yet, and the pens it whilst we are on the phone, prompted by the call. We can then ensure they have all the info they need.  
 
-Only send news releases if you're sure there's a likelihood the target outlet will think it is a good story. Don't send weak stories. Don't send lots of releases. Think of all the emails from "certain people" or organisations that  you just don't open anymore because they kept sending stuff you weren't actually that interested in. Don't be that person.  
+Only send news releases if you're sure there's a likelihood the target outlet will think it is a good story. Don't send weak stories. Don't send lots of releases. Think of all the emails from "certain people" or organisations that you just don't open anymore because they kept sending stuff you weren't actually that interested in. Don't be that person.  
 
 If you have sent two or three news releases to the media outlet you really want to get coverage in, and none of them result in a story, then call to ask why. There may be something simple you could do to get the stories right for that journalist. Don't keep churning out releases and forgetting about them as soon as you hit send.
 

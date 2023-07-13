@@ -5,12 +5,13 @@ description: When and where we will be protesting.
 
 ## Coming up
 
-- [13th of July, London](/2023-july-london-13th)
 - [18th of July, London](/2023-july-london-18th)
+- [18th of July, NYC, UN building](/2023-july-nyc)
 - [11th of August, Netherlands](/2023-august-nl)
 
 ## Past Protests
 
+- [13th of July, London](/2023-july-london-13th)
 - [29th of June, London](/2023-june-london-office-for-ai)
 - [16th of June, Melbourne, Australia](/2023-june-melbourne)
 - [8th of June, Parliament Square, London](/2023-june-london)
