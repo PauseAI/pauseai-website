@@ -6,6 +6,7 @@ title: PauseAI protest @ FCDO, London, July 18th
 - Where: outside the Foreign, Commonwealth and Development Office (FCDO), King Charles Street, Westminster, London, SW1A 2AH
 - When: 18th of July, 4.30 - 5.30 pm
 - [Sign up](https://docs.google.com/forms/d/e/1FAIpQLSfLoAUfPEhp3bZyUbDnc8HigL_rYC7ykUmmPZvVWas-m2y5bQ/viewform?usp%253Dsf_link)
+- [Facebook event](https://fb.me/e/1bawf1ZH1)
 
 ## Contact
 
