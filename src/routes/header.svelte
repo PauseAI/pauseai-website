@@ -13,7 +13,7 @@
 	<div class="nav-links">
 		<NavLink href="/risks">Risks</NavLink>
 		<NavLink href="/proposal">Proposal</NavLink>
-		<NavLink href="/learn">Learn</NavLink>
+		<NavLink href="/protests">Protests</NavLink>
 		<NavLink href="/faq">FAQ</NavLink>
 		{#if enableBot}
 			<NavLink href="/chat">{botName}</NavLink>
