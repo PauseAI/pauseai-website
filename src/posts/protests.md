@@ -6,7 +6,6 @@ description: When and where we will be protesting.
 ## Coming up
 
 - [18th of July, London](/2023-july-london-18th)
-- [18th of July, NYC, UN building](/2023-july-nyc)
 - [11th of August, Netherlands](/2023-august-nl)
 
 ## Past Protests
