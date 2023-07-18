@@ -67,6 +67,7 @@ However, we tend to give AI systems access to the internet, which means that the
 - Manipulate people through fake messages, e-mails, bank transfers, videos or phone calls. Humans could become the AI's limbs, without even knowing it.
 - Directly control devices connected to the internet, like cars, planes, robotized (autonomous) weapons or even nuclear weapons.
 - Design a novel bioweapon, e.g. by combining viral strands or by using [protein folding](https://alphafold.ebi.ac.uk) and order it to be printed in a lab.
+- Trigger a nuclear war by convincing humans that another country is (about to) launch a nuclear attack.
 
 ## From an evolutionary perspective
 

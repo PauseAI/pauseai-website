@@ -5,16 +5,18 @@ description: Implement a temporary pause on the development of AI systems more p
 
 **Implement a temporary pause on the development of AI systems more powerful than GPT-4**.
 
-Individual countries can implement this measure _right now_.
-However, we cannot expect countries or companies to risk their competitive advantage by pausing AI development for too long.
-This is why we need a global pause.
+Individual countries can and should implement this measure _right now_.
+Especially the US should implement a Pause, since it is home to virtually all leading AI companies.
+Many scientists and industry leaders [agree that a Pause is necessary](https://futureoflife.org/open-letter/pause-giant-ai-experiments/), and the [(US) public also strongly supports (64%) this](https://www.campaignforaisafety.org/usa-ai-x-risk-perception-tracker/).
 
+However, we cannot expect countries or companies to risk their competitive advantage by pausing AI development for a long time.
+This is why we need a **global Pause**.
 An international agreement is typically established through a summit, where leaders of countries meet to discuss the issue and make a decision.
+The UK has stepped up and is [hosting an AI safety summit](/summit) in autumn 2023.
 
-We need our leaders to understand the urgency of the situation, and to take action **right now**:
-
-- A country needs to step up and **host a [summit](/summit)**. Pick a date and a location, then invite all UN member states. _Update: The [UK will host](https://www.gov.uk/government/news/uk-to-host-first-global-summit-on-artificial-intelligence) an AI safety summit autumn 2023_
-- A **treaty** needs to be created. This treaty should specify what types of AI development are illegal, and which consequences there are to not abiding. This treaty needs to be signed by all UN member states.
+The primary goal of the summit is a **treaty**.
+This treaty should specify what types of AI development are illegal, and which consequences there are to not abiding.
+This treaty needs to be signed by all UN member states.
 
 ## Policy
 
@@ -25,7 +27,7 @@ We need our leaders to understand the urgency of the situation, and to take acti
 - **Set up an international AI safety agency**, similar to the IAEA. This agency will be responsible for:
   - Periodic meetings to discuss the progress of AI safety research.
   - Granting approval to conduct any new training run above a certain size (e.g. 1 billion parameters).
-- **Increase national investments in AI safety research**. Right now, there exist only a few hundred AI safety researchers. This should become thousands.
+- **Increase investments in AI safety research**. Right now, there exist only a few hundred AI safety researchers. This should become thousands.
 
 ## Long term policy
 
