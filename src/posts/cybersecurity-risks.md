@@ -5,6 +5,7 @@ description: How AI could be used to hack all devices.
 
 Virtually everything we do nowadays is in some way dependent on computers.
 We pay for our groceries, plan our days, contact our loved ones and even drive our cars with computers.
+And virtually all of these computers are connected to each other.
 This makes all of us vulnerable to cyberattacks.
 
 Highly potent cyber weapons (such as [Stuxnet](https://www.youtube.com/watch?v=nd1x0csO3hU)) have always been extremely costly to create.

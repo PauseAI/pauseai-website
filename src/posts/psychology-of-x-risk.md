@@ -21,11 +21,12 @@ People may think you are crazy, and you may not feel comfortable talking about t
 ### Fear of being ridiculed
 
 The first reaction to existential risk is often just laughing it off.
-> “It was almost dangerous from a career perspective to admit you were worried,” - [Jeff Clune said](https://www.theglobeandmail.com/business/article-i-hope-im-wrong-why-some-experts-see-doom-in-ai/)
-
 We've also seen this happen on camera in the White House, the first time x-risk was brought up.
-This has the effect of making the one bringing up the topic feel like a fool.
 This in turn makes it harder to bring up the topic again, as others will fear being ridiculed for bringing it up.
+
+Professionals can fear that their reputation will be damaged if they share their concerns.
+
+> “It was almost dangerous from a career perspective to admit you were worried,” - [Jeff Clune said](https://www.theglobeandmail.com/business/article-i-hope-im-wrong-why-some-experts-see-doom-in-ai/)
 
 ### Fear of being called racist / cultist / part of a conspiracy
 
