@@ -142,3 +142,10 @@ h1 {
 	padding-left: 1rem;
 	font-style: italic;
 }
+
+/* For the dropdown with start and stop indexes in learnbyheart, set to same font */
+.dropdowns {
+	font-family: 'Roboto Slab', serif;
+	/* this does not work: the font stays small. Joep how to fix? */
+	/* font-size: 1.2rem; */
+	}
