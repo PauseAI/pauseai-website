@@ -41,25 +41,10 @@
 	const newQuestionsMessage = 'Now asking ' + nrOfNewQuestions.toString() +  ' or less new questions'
 	let datasetsHaveLoaded = false;
 	// The file is at /static/learn.. but in svelte the static folder contents are available without having to start with /static
+	// For the capitals, 
 	// Files obtained using a combination of https://www.enchantedlearning.com/geography/capitals/bycontinent.shtml
 	// And cleaning it up with ChatGPT. 
-	// let pathToData = '/learnbyheart_Data/southamerica.txt';
-	// let pathToData = '/learnbyheart_Data/asiameast.txt';
-	// let pathToData = '/learnbyheart_Data/europe.txt';
-	// let pathToData = '/learnbyheart_Data/afrika.txt';
-	// let pathToData = '/learnbyheart_Data/northcentralamerikacaribean.txt';
 	let pathToData = 'learnbyheart_Data/aifacts.txt'
-	// let pathToData = '/learnbyheart_Data/oceaniaaustralia.txt';
-
-
-	// const landlist = [
-	// 	{question: 'What is the capital of East Timor?', answer:'Dili', weight: -1},
-	// 	{question: 'What is the capital of the Maldives?', answer:'Male', weight: -1},
-	// 	{question: 'What is the capital of UlaanShort?', answer:'Ulaan', weight: -1},
-	// 	{question: 'What is the capital of Bangladesh?', answer:'Dhaka', weight: -1},
-	// 	{question: 'What is the capital of Qatar?', answer:'Doha', weight: -1},
-	// 	{question: 'What is the capital of Kazagstan?', answer:'Astana', weight: -1}
-	// ];
 
 	let endMessage = 'You are at the end, the only option now is to hit restart or refresh the page for the same effect'
 
@@ -104,19 +89,8 @@
 			}
 		}
 		// Add the list of subset names as the last position in the datasets list of lists. 
-		datasets.push(datasetNames);
-		console.log(datasets);
-
-		// // Now populate the select element that chooses the dataset.
-		// // Get the select element by its ID
-		// const selectElement = document.getElementById("dataset-selector");
-		// // Loop through the dataset list and create options dynamically
-		// for (let i = 0; i < datasetNames.length; i++) {
-		// const option = document.createElement("option");
-		// option.text = datasetNames[i];
-		// option.value = i.toString();
-		// selectElement.appendChild(option);
-		// }
+		// datasets.push(datasetNames);
+		// console.log(datasets);
 
 	} catch (error) {
 		console.error('Error:', error);
