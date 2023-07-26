@@ -62,20 +62,25 @@ Some dictators came close, but they never had control over everything.
 An AI has certain important advantages over humans that make a takeover attempt much more likely to succeed.
 
 1. **Intelligence**. A superintelligence is by definition much smarter than a human, so it will be able to outsmart all people.
-2. **Speed**. The human brain runs at 1-100hz, whereas computerchips can run at clockspeeds in the Ghz range.
+2. **Speed**. The human brain runs at 1-100hz, whereas computer chips can run at clock speeds in the GHz range.
 3. **Parallelism**. A human can only do one thing at a time, whereas an AI can create new instances of itself and run them in parallel.
 4. **Memory**. A human can only remember a limited amount of information, whereas an AI can store virtually unlimited amounts of information.
-5. **Collaboration**. Humans can work together, but are limited in the speed at which they communicate. They also have different, conflicting goals that make collaboration less effective. An AI can collaborate with other instances of itself at the speed of light, and it can have a single goal.
+5. **Collaboration**. Humans can work together but are limited in the speed at which they communicate. They also have different, conflicting goals that make collaboration less effective. An AI can collaborate with other instances of itself at the speed of light, and it can have a single goal.
 6. **Self-improvement**. An AI can improve itself, whereas humans cannot.
 7. **Physical limitations**. An AI can run on any computer, whereas humans are limited by their own physical bodies that require specific temperatures, food, water, and oxygen. Humans need to sleep and are vulnerable to diseases.
 
 These various advantages will make it very unlikely that humans will be able to stop a takeover attempt.
 
+One might suggest that having **safeguards** in place could prevent a takeover.
+However, since the ASI will be more intelligent than humans, it is likely to come up with strategies to circumvent these safeguards.
+For example, if the ASI is not connected to the internet, it might manipulate humans into connecting it to the internet, for example by promising to solve a difficult problem and by behaving in a way that makes it seem trustworthy, or by convincing humans that it is a moral agent.
+It's worth noting that even this obvious safeguard is not being used as of now, as tools like ChatGPT are already connected to the internet and thousands of APIs.
+
 ## Humans are unlikely to survive a takeover
 
 Note that a takeover does not necessarily mean that the ASI will kill all humans.
 However, for most random goals that can be considered, humans do not have value, and death will eventually be the default outcome as we ultimately compete for the same limited resources.
-And even if a goal does involve keeping humans alive, it is possible that human wellbeing is not part of the same goal.
+And even if a goal does involve keeping humans alive, it is possible that human well-being is not part of the same goal.
 
 ## Conclusion
 

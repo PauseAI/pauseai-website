@@ -34,6 +34,7 @@ Read more about [organizing a protest](/organizing-a-protest).
 
 - [Wired](https://www.wired.com/story/pause-ai-existential-risk/): Article on PauseAI and the protests.
 - [Politico](https://www.politico.eu/article/microsoft-brussels-elon-musk-anti-ai-protesters-well-five-of-them-descend-on-brussels/): Covers the Bruxels protest.
+- [Time](https://time.com/6295879/ai-pause-is-humanitys-best-bet-for-preventing-extinction/): Article we wrote about why a Pause is necessary.
 - [The Verge](https://www.theverge.com/2023/5/24/23735982/sam-altman-openai-superintelligent-benefits-talk-london-ucl-protests)
 - [Express](https://www.express.co.uk/news/uk/1775620/artificial-intelligence-extinction-google-chat-gpt)
 - [Camden New Journal](https://www.camdennewjournal.co.uk/article/protesters-tell-tech-quarter-companies-to-press-pause-on-artificial-intelligence-research)
