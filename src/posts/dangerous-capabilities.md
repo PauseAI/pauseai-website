@@ -19,4 +19,4 @@ Some of these capabilities can be extremely dangerous.
 ## How can we prevent dangerous capabilities?
 
 - **Test for dangerous capabilities**. Require that AI systems are tested for dangerous capabilities before they are deployed. External audits with standardized tests could be used to verify that the AI is safe to some extent. However, this is far from a perfect solution for two reasons. Firstly, **some capabilities are hidden** and are only discovered after a long time. Secondly, highly dangerous capabilities are also **dangerous when they are only available to AI labs**.
-- **Don't train dangerous AIs**. The safest option is to not build these powerful AI systems in the first place. That's why we're [calling for a Pause](/proposals)!
+- **Don't train dangerous AIs**. The safest option is to not build these powerful AI systems in the first place. That's why we're [calling for a Pause](/proposal)!
