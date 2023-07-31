@@ -10,11 +10,4 @@ You are now one of them.
 Get involved with the PauseAI movement by signing up below.
 You will receive periodic updates on the movement and how you can help.
 
-<form name="contact" method="POST" netlify>
-  <label>Name<input type="text" name="name" /></label>
-  <label>Email<input type="email" name="email" /></label>
-  <label>Country<input type="country" name="country" /></label>
-  <label>City<input type="city" name="city" /></label>
-  <label>How you want to help<textarea name="message"></textarea></label>
-  <button type="submit">Send</button>
-</form>
+[join here](https://docs.google.com/forms/d/e/1FAIpQLSc5P8xYB6l_KraUOyHSI--wGJnvMMMp4zAG6EjNGJIeG5MIFA/viewform?usp=sf_link)
