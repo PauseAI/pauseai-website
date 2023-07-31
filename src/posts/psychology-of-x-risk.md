@@ -24,7 +24,7 @@ The first reaction to existential risk is often just laughing it off.
 We've also seen this happen on camera in the White House, the first time x-risk was brought up.
 This in turn makes it harder to bring up the topic again, as others will fear being ridiculed for bringing it up.
 
-Professionals can fear that their reputation will be damaged if they share their concerns.
+Professionals can fear that their reputations will be damaged if they share their concerns.
 
 > “It was almost dangerous from a career perspective to admit you were worried,” - [Jeff Clune said](https://www.theglobeandmail.com/business/article-i-hope-im-wrong-why-some-experts-see-doom-in-ai/)
 
@@ -62,15 +62,33 @@ So when people hear about existential risk, they will think it is just another o
 Try to have an understanding of this point of view, and don't be too hard on people who think this way.
 They probably haven't been shown the same information as you have.
 
+### We like to think that we are special
+
+Both at a species and at an individual level, we want to believe that we are special.
+
+On a collective level, we like to think of humans as something very different from animals - Darwin's idea that we evolved from apes was almost unthinkable for most.
+The idea that one day humanity may no longer exist is very jarring, and difficult to internalize.
+People may rationally consider it, but they will not _feel_ it.
+A video by Robert Miles titled ["There's no rule which says we will make it"](https://www.youtube.com/watch?v=JD_iA7imAPs) explains this very well.
+
+On an individual level, we take pride in the unique intellectual abilities that we have.
+Many never wanted to believe that an AI one day might be able to create art, write books, or even beat us at chess.
+The thought that our own intelligence is just a product of evolution and that it can be replicated by a machine is something that many people find hard to accept.
+This makes it difficult to accept that an AI could be more intelligent than us.
+
 ### Fiction has conditioned us to expect a happy ending
 
 Most of what we know about existential risk comes from fiction.
 This probably does not help, because fictional stories are not written to be realistic: they are written to be entertaining.
 
 In fiction there is often a hero, conflict, hope, and finally a happy ending.
-We are conditioned to expect a struggle that we can fight and win.
-Very intelligent AI systems are often portrayed as evil, and we are conditioned to expect that we can defeat them.
-In more realistic AI doom scenarios, there is no hero, no conflict, no hope, and no happy ending.
+We are conditioned to expect a struggle where we can fight and win.
+In sci-fi, AIs are often portrayed very anthropomorphically - as evil, as wanting to be human, as changing their goals.
+All of these do not match up with what AI safety experts are worried about.
+
+And in most stories, the hero wins.
+The AI makes some mistake, or the hero finds a way to outsmart it.
+In more realistic AI doom scenarios, there is no hero, no struggle, no humans-outsmarting-a-superintelligence, and no happy ending.
 
 ### Progress has always been (mostly) good
 
