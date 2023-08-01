@@ -10,4 +10,4 @@ You are now one of them.
 Get involved with the PauseAI movement by signing up below.
 You will receive periodic updates on the movement and how you can help.
 
-[join here](https://docs.google.com/forms/d/e/1FAIpQLSc5P8xYB6l_KraUOyHSI--wGJnvMMMp4zAG6EjNGJIeG5MIFA/viewform?usp=sf_link)
+[Join here](https://docs.google.com/forms/d/e/1FAIpQLSc5P8xYB6l_KraUOyHSI--wGJnvMMMp4zAG6EjNGJIeG5MIFA/viewform?usp=sf_link)

@@ -16,6 +16,7 @@
 		overflow: hidden;
 		cursor: pointer;
 		text-transform: capitalize;
+		text-align: left;
 	}
 
 	button:hover {

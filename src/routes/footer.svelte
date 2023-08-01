@@ -1,6 +1,7 @@
 <script lang="ts">
 	import Toggle from '$lib/components/Toggle.svelte'
 	import { page } from '$app/stores'
+	import Logo from '$lib/components/logo.svelte'
 
 	$: editUrl = `https://github.com/joepio/pauseai/edit/main/src/posts${$page.url.pathname}.md`
 	$: if ($page.url.pathname == '/') {
@@ -8,38 +9,95 @@
 	}
 </script>
 
-<a class="c2a" href="/action">Act now ></a>
-
+<a class="c2a" href="/join">Join PauseAI ></a>
+<div class="bar" />
 <footer>
-	<Toggle />
-	<a href={editUrl}>Edit this page on Github</a>
-	<a href="/rss.xml" target="_blank">RSS</a>
-	<a href="/posts">All pages</a>
-	<p>CC-BY (share alike)</p>
+	<div class="column">
+		<h2>PauseAI</h2>
+		<a href="/faq">FAQ</a>
+		<a href="/risks">Risks</a>
+		<a href="/xrisk">Existential risk</a>
+		<a href="/learn">Learn</a>
+		<a href="/psychology-of-x-risk">Psychology of x-risk</a>
+	</div>
+	<div class="column">
+		<h2>Socials</h2>
+		<a href="https://discord.gg/2XXWXvErfA" target="_blank">Discord</a>
+		<a href="https://twitter.com/PauseAI" target="_blank">Twitter</a>
+		<a href="https://www.linkedin.com/company/pauseai" target="_blank">LinkedIn</a>
+		<a href="https://www.facebook.com/PauseAI/" target="_blank">Facebook</a>
+		<a href="https://www.tiktok.com/@pauseai" target="_blank">TikTok</a>
+		<a href="https://www.instagram.com/pause_ai/" target="_blank">Instagram</a>
+	</div>
+	<div class="column">
+		<h2>Take Action</h2>
+		<a href="/join">Join PauseAI</a>
+		<a href="/action">How you can help</a>
+		<a href="/protests">Protests</a>
+		<a href="/organizing-a-protest">Organize a protest</a>
+		<a href="/writing-a-letter">Write a letter</a>
+		<a href="/lobby-tips">Lobby tips</a>
+	</div>
+	<div class="column">
+		<h2>Other</h2>
+		<Toggle />
+		<a href={editUrl}>Edit this page</a>
+		<a href="/posts">All pages</a>
+		<a href="/rss.xml" target="_blank">RSS</a>
+		<a href="https://creativecommons.org/licenses/by/2.0/" target="_blank">Shared under CC-BY</a>
+	</div>
 </footer>
 
 <style>
+	.bar {
+		height: 3px;
+		width: 100%;
+		background-color: var(--brand);
+		margin-bottom: 1rem;
+		margin-top: 0.5rem;
+	}
+
 	footer {
-		display: flex;
-		flex-direction: row;
+		display: grid;
+		grid-template-columns: repeat(4, 1fr);
 		gap: 1rem;
 		font-size: 0.7rem;
 		padding-bottom: 1rem;
 		margin-bottom: 1rem;
-		align-items: center;
+	}
+
+	@media (max-width: 750px) {
+		footer {
+			grid-template-columns: repeat(2, 1fr);
+		}
+	}
+
+	.column {
+		/* All equal width */
+		display: flex;
+		flex-direction: column;
+		gap: 0.4rem;
+		flex: 1;
+	}
+
+	footer h2 {
+		font-size: 0.9rem;
+		font-family: var(--font-heading);
+		margin-bottom: 0rem;
+		margin-top: 0;
 	}
 
 	.c2a {
-		color: var(--brand);
+		color: var(--text);
 		text-transform: uppercase;
 		text-decoration: none;
 		font-size: 1rem;
 		font-family: var(--font-heading);
+		text-align: left;
 	}
 
 	a {
 		color: var(--text-2);
-		font-size: var(--text-xs);
 		text-decoration: none;
 	}
 

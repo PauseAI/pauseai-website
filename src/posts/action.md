@@ -11,6 +11,7 @@ You are now one of them.
 
 ## You can do this
 
+- **[Join PauseAI](/join)** and help us grow.
 - **[Join our Discord](https://discord.gg/2XXWXvErfA)** or [other](https://coda.io/@alignmentdev/alignmentecosystemdevelopment) AI safety communities.
 - **[Learn](/learn)** more about AI alignment and the risks we are facing.
 - [**Protest**](/protests): join [one of the protests](/protests) or [organize one yourself](/organizing-a-protest).
