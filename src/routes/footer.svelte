@@ -18,6 +18,8 @@
 		<a href="/risks">Risks</a>
 		<a href="/xrisk">Existential risk</a>
 		<a href="/learn">Learn</a>
+		<a href="/ai-takeover">AI takeover</a>
+		<a href="/sota">State of AI</a>
 		<a href="/psychology-of-x-risk">Psychology of x-risk</a>
 	</div>
 	<div class="column">

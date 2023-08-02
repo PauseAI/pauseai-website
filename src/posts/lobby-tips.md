@@ -5,7 +5,7 @@ description: How to convince your government that they need to organize an AI su
 
 ## Be clear about the goal
 
-Your country needs to organize an international [summit](/summit) on existential AI risks. You need to convince the government to organise this.
+Your country needs to work towards the [summit](/summit) end of 2023, to pause AI training runs.
 
 ## Find people to help you
 

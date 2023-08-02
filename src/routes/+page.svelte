@@ -36,7 +36,7 @@
 	>
 	<Block linkText="Take action" href="/action">
 		<span slot="title"><Mark>YOU</Mark> CAN HELP</span>
-		Too few people are knowledgeable of AI risks and what needs to happen to prevent them. Get informed,
-		inform others, and help slow this suicide race down.</Block
+		Too few people are well-informed about the potential risks of AI. Inform others, and help stop this
+		race to the bottom.</Block
 	>
 </section>
