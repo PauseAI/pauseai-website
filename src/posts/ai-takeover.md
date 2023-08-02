@@ -1,6 +1,6 @@
 ---
-title: As AI surpasses human capabilities, the likelihood of an AI takeover approaches 100 percent
-description: Why
+title: Why an AI takeover is extremely likely
+description: As AI surpasses human capabilities, the likelihood of an AI takeover approaches 100 percent
 ---
 
 One of the concerns of AI scientists is that a superintelligence could take over the world and kill all humans.
@@ -27,6 +27,9 @@ However, runtime environments can easily turn a non-agentic AI into an agentic A
 An example of this is AutoGPT, which recursively lets a language model generate its next input.
 If an SI pursues an objective in the real world, we call it an Agentic SuperIntelligence (ASI).
 Since we can already turn non-agentic AI into agentic AI, we can expect that an ASI will exist shortly after an SI exists.
+
+Regarding timelines, it is virtually impossible to predict when ASI will exist.
+However, current AI models already
 
 ## Some instance of the ASI will attempt a takeover
 
@@ -61,7 +64,7 @@ Some dictators came close, but they never had control over everything.
 
 An AI has certain important advantages over humans that make a takeover attempt much more likely to succeed.
 
-1. **Intelligence**. A superintelligence is by definition much smarter than a human, so it will be able to outsmart all people.
+1. **Intelligence**. A superintelligence is much smarter than a human, so it will be able to come up with better strategies to achieve its goals.
 2. **Speed**. The human brain runs at 1-100hz, whereas computer chips can run at clock speeds in the GHz range.
 3. **Parallelism**. A human can only do one thing at a time, whereas an AI can create new instances of itself and run them in parallel.
 4. **Memory**. A human can only remember a limited amount of information, whereas an AI can store virtually unlimited amounts of information.
