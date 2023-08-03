@@ -6,7 +6,7 @@ description: We are organizing a protest to demand a pause on dangerous AI devel
 - PauseAI protest
 - Where: Wijnhaven, The Hague
 - When: 11th of August, 16:00 - 17:00
-- [Sign up here](https://docs.google.com/forms/d/e/1FAIpQLScGoe6jY7VmhYCx3XuoxCX-dCnUdHa53Z_tVMY0gn0I0Kf3Ag/viewform?usp%253Dsf_link)
+- [Sign up here](https://docs.google.com/forms/d/e/1FAIpQLScGoe6jY7VmhYCx3XuoxCX-dCnUdHa53Z_tVMY0gn0I0Kf3Ag/viewform?usp%253Dsf_link) (or at [Facebook](https://www.facebook.com/events/950508269582831))
 
 ## Why we protest
 
