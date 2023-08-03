@@ -21,14 +21,20 @@ As AI capabilities grow, so will the vulnerabilities they can detect and the exp
 They are not yet as good at this as the best humans are, but they are getting closer quickly.
 
 There will most likely come a point where an AI is better at hacking than the best human hackers.
-This will make it possible to create computer viruses / cyber weapons that are far more potent than anything we have seen before.
+This can go wrong in many ways.
+
+- **Nuclear**: Cyberweapons can be used to gain access to nuclear materials, meltdown a reactor, convince humans they need to fire nuclear missiles, or even fire them automatically.
+- **Infrastructure**: Cyberweapons can be used to gain access or disable critical infrastructure, such as power plants, water treatment facilities, or the internet.
+- **Financial**: Cyberweapons can be used to steal money from banks, or to manipulate the stock market.
+
+But extremely capable AI systems could also be used to create a virus that infects virtually all computers:
 
 ## A Super Virus
 
 Imagine a virus that can infect any computer, regardless of the operating system.
 This is theoretically possible, but it would be extremely hard to create.
 It would require analyzing the source code of all operating systems and finding (new) vulnerabilities in all of them.
-No single person could do this, but a very capable AI could.
+No single person could do this, but a sufficiently capable AI could.
 This type of Super Virus could spread to effectively all machines that have some sort of connection to other computers (through WiFi, Bluetooth, UTP, etc.).
 It could then have full control over these machines.
 It could steal data, spread itself, use the hardware for computations, or simply make the machine unusable.

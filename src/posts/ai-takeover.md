@@ -3,8 +3,10 @@ title: Why an AI takeover is extremely likely
 description: As AI surpasses human capabilities, the likelihood of an AI takeover approaches 100 percent
 ---
 
-One of the concerns of AI scientists is that a superintelligence could take over the world and kill all humans.
-In this article, I will argue that this risk is not only real but that it is almost certain to happen _if we build a superintelligence_.
+One of the concerns of AI scientists is that a superintelligence could take over control of our planet.
+This does not necessarily mean that everyone dies, but it does mean that (almost) all humans will lose control over our future.
+
+In this article, I will argue that this takeover risk is not only real but that it is almost certain to happen _if we build a superintelligence_.
 
 ## The argument
 
@@ -83,7 +85,13 @@ It's worth noting that even this obvious safeguard is not being used as of now, 
 
 Note that a takeover does not necessarily mean that the ASI will kill all humans.
 However, for most random goals that can be considered, humans do not have value, and death will eventually be the default outcome as we ultimately compete for the same limited resources.
-And even if a goal does involve keeping humans alive, it is possible that human well-being is not part of the same goal.
+This is why the risk of accidental human extinction is so high with AI.
+For a random goal, such as calculating pi, humans are not part of the optimal world state.
+The default outcome of a takeover attempt is therefore that all humans die.
+
+But even in the outcomes where humans do survive, we are still at risk of being worse off.
+If a goal does involve keeping humans alive, it is possible that human well-being is not part of the same goal.
+And even if the AI is under human control, we don't know that the one controlling the AI will have everyone's best interests in mind.
 
 ## Conclusion
 
