@@ -27,6 +27,12 @@ We want the Dutch government to:
 - Prioritize preparations for the AI safety summit later this year, and take a leading role in working toward effective policy
 - Collaborate internationally to orchestrate sufficient safety measures on a global scale
 
+## Agenda
+
+- 12:00 - 16:00 Prepare signage in workshop (only for the real enthusiasts, contact us if you want to be there!)
+- 16:00 Speeches + protest + flyering
+- 17:00 Drinks @ nearby pub / bar De Paraplu
+
 ## Contact
 
 - Joep Meindertsma ([twitter](https://twitter.com/joepmeindertsma), [email](mailto:joep@ontola.io))
