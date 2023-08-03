@@ -19,7 +19,7 @@ In this article, I will argue that this takeover risk is not only real but that 
 ## An Agentic SuperIntelligence is likely to exist in the near future
 
 A SuperIntelligence (SI) is a type of AI that has capabilities that surpass those of all humans in virtually every domain.
-Some state-of-the-art AI models already have superhuman capabilities in certain domains, but none of them exceeds all humans at a wide range of tasks.
+Some [state-of-the-art AI models](/sota) already have superhuman capabilities in certain domains, but none of them exceeds all humans at a wide range of tasks.
 As AI capabilities improve due to innovations in training architectures, runtime environments, and larger scale, we can expect that an AI will eventually surpass humans in virtually every domain.
 
 Not all AI systems are agents.
@@ -72,14 +72,25 @@ An AI has certain important advantages over humans that make a takeover attempt 
 4. **Memory**. A human can only remember a limited amount of information, whereas an AI can store virtually unlimited amounts of information.
 5. **Collaboration**. Humans can work together but are limited in the speed at which they communicate. They also have different, conflicting goals that make collaboration less effective. An AI can collaborate with other instances of itself at the speed of light, and it can have a single goal.
 6. **Self-improvement**. An AI can improve itself, whereas humans cannot.
-7. **Physical limitations**. An AI can run on any computer, whereas humans are limited by their own physical bodies that require specific temperatures, food, water, and oxygen. Humans need to sleep and are vulnerable to diseases.
+7. **Physical limitations**. An AI can run on any computer, whereas humans are limited by their own physical bodies that require specific temperatures, food, water, and oxygen. Humans need to sleep and are vulnerable to diseases. An AI can use any robotic body to interact with the physical world.
 
 These various advantages will make it very unlikely that humans will be able to stop a takeover attempt.
 
-One might suggest that having **safeguards** in place could prevent a takeover.
+One might suggest that having **safeguards** in place could prevent a takeover (like adding a kill switch, or not connecting it to the internet).
 However, since the ASI will be more intelligent than humans, it is likely to come up with strategies to circumvent these safeguards.
 For example, if the ASI is not connected to the internet, it might manipulate humans into connecting it to the internet, for example by promising to solve a difficult problem and by behaving in a way that makes it seem trustworthy, or by convincing humans that it is a moral agent.
 It's worth noting that even this obvious safeguard is not being used as of now, as tools like ChatGPT are already connected to the internet and thousands of APIs.
+
+You also may think that an AI, as a piece of software, is still fundamentally limited by what it can do in the real world.
+However, due to our reliance on the internet, an AI can have a huge impact on the real world without ever leaving the digital realm.
+Here are some of the things that an AI might do to take over:
+
+- Replicate itself (or just its assignment) on other computers, for example by creating accounts on free cloud providers.
+- Make money (e.g. by building a software service) and hire people to do things to help it take over.
+- Threaten humans (with violence or blackmail) to do things that help it take over.
+- Write a [virus using novel zero-day exploits](/cybersecurity-risks) that infects other computers, replicating itself or gaining full control.
+- Help existing robotics companies build robots (e.g. by leaking new designs), and take over these robots when they are ready.
+- Use existing factories to build technology that we do not understand, perhaps even using derived knowledge of physics that we are not aware of. Think nano-technology, quantum computing, and bioengineering.
 
 ## Humans are unlikely to survive a takeover
 
