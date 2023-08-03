@@ -76,21 +76,21 @@ An AI has certain important advantages over humans that make a takeover attempt 
 
 These various advantages will make it very unlikely that humans will be able to stop a takeover attempt.
 
+One may think that an AI, as a piece of software, is still fundamentally limited by what it can do in the real world.
+However, due to our reliance on the internet, AI can have a huge impact on the real world without ever leaving the digital realm.
+Here are some of the things that an AI might do to take over:
+
+- **Replicate itself** (or just its assignment) on other computers, for example by creating accounts on free cloud providers.
+- **Make money** (e.g. by building a software service) and hire people to do things to help it take over.
+- **Threaten humans** (with violence or blackmail) to do things that help it take over.
+- **Write a virus** using [novel zero-day exploits](/cybersecurity-risks) that infects other computers, replicating itself or gaining full control.
+- Help existing robotics companies **build robots** (e.g. by leaking new designs), and take over these robots when they are ready.
+- Use existing factories to **build technology that we do not understand**, perhaps even using derived knowledge of physics that we are not aware of. Think nano-technology, quantum computing, and bioengineering.
+
 One might suggest that having **safeguards** in place could prevent a takeover (like adding a kill switch, or not connecting it to the internet).
 However, since the ASI will be more intelligent than humans, it is likely to come up with strategies to circumvent these safeguards.
 For example, if the ASI is not connected to the internet, it might manipulate humans into connecting it to the internet, for example by promising to solve a difficult problem and by behaving in a way that makes it seem trustworthy, or by convincing humans that it is a moral agent.
 It's worth noting that even this obvious safeguard is not being used as of now, as tools like ChatGPT are already connected to the internet and thousands of APIs.
-
-You also may think that an AI, as a piece of software, is still fundamentally limited by what it can do in the real world.
-However, due to our reliance on the internet, an AI can have a huge impact on the real world without ever leaving the digital realm.
-Here are some of the things that an AI might do to take over:
-
-- Replicate itself (or just its assignment) on other computers, for example by creating accounts on free cloud providers.
-- Make money (e.g. by building a software service) and hire people to do things to help it take over.
-- Threaten humans (with violence or blackmail) to do things that help it take over.
-- Write a [virus using novel zero-day exploits](/cybersecurity-risks) that infects other computers, replicating itself or gaining full control.
-- Help existing robotics companies build robots (e.g. by leaking new designs), and take over these robots when they are ready.
-- Use existing factories to build technology that we do not understand, perhaps even using derived knowledge of physics that we are not aware of. Think nano-technology, quantum computing, and bioengineering.
 
 ## Humans are unlikely to survive a takeover
 
