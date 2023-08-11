@@ -31,11 +31,32 @@ We want the Dutch government to:
 
 - 12:00 - 16:00 Prepare signage in workshop (only for the real enthusiasts, contact us if you want to be there!)
 - 16:00 Speeches + protest + flyering
-- 17:00 Drinks @ nearby pub / bar De Paraplu
+- 17:00 Drinks @ nearby pub
 
 ## Contact
 
 - Joep Meindertsma ([twitter](https://twitter.com/joepmeindertsma), [email](mailto:joep@ontola.io))
+
+## Press Release (EN): PauseAI Calls on Dutch Government to Prevent Human-Threatening, AI-Related Disasters
+
+On Friday, August 11th, at 4:00 PM, a group of concerned individuals will gather at the Ministry of the Interior under the name [PauseAI](http://pauseai.info) to address the developments in the field of (generative) AI. They are urging the government to take action in pausing the development of powerful and potentially dangerous artificial intelligence.
+
+So far, the Dutch government has not taken any steps to address the existential threat posed by AI. There has been no response to warnings and statements from entities such as the [UN](https://www.linkedin.com/feed/update/urn:li:activity:7075767810336923648), the Prime Minister of the [United Kingdom](https://www.theguardian.com/technology/2023/may/25/no-10-acknowledges-existential-risk-ai-first-time-rishi-sunak?) (where a summit on this topic is planned for the fall), and [AI experts](https://nos.nl/op3/artikel/2012979-wetenschappers-waarschuwen-voor-kunstmatige-intelligentie), even after a [motion](https://www.parlementairemonitor.nl/9353000/1/j9vvij5epmj1ey0/vm1rshv2ulz5) in the House of Representatives prompted such action earlier this year.
+
+"[Scientists](https://www.safe.ai/statement-on-ai-risk) are sounding the alarm: AI could spell the end of humanity. Experts even estimate a [30% likelihood](https://forum.effectivealtruism.org/posts/8CM9vZ2nnQsWJNsHx/existential-risk-from-ai-survey-results) of this. AI companies are charging ahead, risking all of our lives, while regulation lags hopelessly behind." - Joep Meindertsma, CEO of software company Ontola and founder of PauseAI.
+
+Concerns about the risks associated with AI are rapidly growing globally. Just this week, research firm Axios published the results of a public opinion poll conducted among residents of the United States, revealing that 86% of respondents are concerned about catastrophic AI risks.
+
+"The US holds Senate hearings where AI experts discuss how AI could bring about the end of humanity. Why is this topic being ignored in Dutch politics? Especially considering that the Netherlands plays a key role in the chip supply chain, thanks to ASML. This is why it can also play a pivotal role in AI compute governance. All lives are at stake!" - Joep Meindertsma
+
+PauseAI calls on the Dutch government to:
+
+- Invite AI safety experts to inform the parliament about these risks
+- Schedule a parliamentary debate on the existential risks of advanced artificial intelligence
+- Give priority to preparations for the proposed AI summit in the United Kingdom later this year and take a leading role in effective policy. The activists have concrete [proposals](https://pauseai.info/summit) and [policy ideas](https://pauseai.info/proposal) for the upcoming AI summit.
+- Collaborate internationally to implement an adequate set of measures on a global scale, including a so-called AI pause.
+
+For more information, visit [PauseAI.info](http://pauseai.info). Contact: Joep Meindertsma ([twitter](https://twitter.com/joepmeindertsma), [email](mailto:joep@ontola.io), 0636020942) & Ruben Dieleman ([email](mailto:ruben@existentialriskobservatory.org), 0634192819)
 
 ## Press Release (NL): PauseAI roept overheid op tot het voorkomen van mensbedreigende, AI-gerelateerde rampen
 
