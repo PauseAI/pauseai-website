@@ -36,3 +36,24 @@ We want the Dutch government to:
 ## Contact
 
 - Joep Meindertsma ([twitter](https://twitter.com/joepmeindertsma), [email](mailto:joep@ontola.io))
+
+## Press Release (NL): PauseAI roept overheid op tot het voorkomen van mensbedreigende, AI-gerelateerde rampen
+
+Op vrijdag 11 augustus om 16.00 komt een groep mensen samen die zich zorgen maken over de ontwikkelingen op het gebied van (generatieve) AI bij het Ministerie van Binnenlandse Zaken onder de naam [PauseAI](http://pauseai.info). Zij roepen de regering op zich in te spannen voor een pauze van de ontwikkeling van krachtige en mogelijk gevaarlijke kunstmatige intelligentie.
+
+Tot nu toe heeft de Nederlandse regering echter geen actie ondernomen tegen de existentiële bedreiging van AI . Er is nog niet [gereageerd](https://www.linkedin.com/feed/update/urn:li:activity:7075767810336923648) op waarschuwingen en uitspraken van onder meer de [VN](https://www.linkedin.com/feed/update/urn:li:activity:7075088560508284928), de premier van het [Verenigd Koninkrijk](https://www.theguardian.com/technology/2023/may/25/no-10-acknowledges-existential-risk-ai-first-time-rishi-sunak?) (waar in het najaar een top wordt georganiseerd over dit onderwerp) en [experts op het gebied van AI](https://nos.nl/op3/artikel/2012979-wetenschappers-waarschuwen-voor-kunstmatige-intelligentie). Ook niet nadat eerder dit jaar een [motie](https://www.parlementairemonitor.nl/9353000/1/j9vvij5epmj1ey0/vm1rshv2ulz5) in de Tweede Kamer daartoe aanspoorde.
+
+"[Wetenschappers](https://www.safe.ai/statement-on-ai-risk) trekken aan de bel: AI kan het einde betekenen van de mensheid. Experts geven dit gemiddeld zelfs [30% kans](https://forum.effectivealtruism.org/posts/8CM9vZ2nnQsWJNsHx/existential-risk-from-ai-survey-results). AI bedrijven racen vooruit en gokken met al onze levens, terwijl regulering hopeloos achter blijft." - Joep Meindertsma, directeur van softwarebedrijf Ontola en oprichter van PauseAI.
+
+De zorgen over de risico's die kleven aan AI zijn mondiaal snel aan het groeien. Deze week nog publiceerde onderzoeksbureau Axios de resultaten van een opiniepeiling onder inwoners van de Verenigde Staten, waaruit [bleek](https://www.axios.com/2023/08/09/ai-voters-trust-government-regulation) dat 86% zich zorgen maakt over catastrofale risico's van AI.
+
+"De VS heeft senaatshoorzittingen waarbij AI experts vertellen over hoe AI het einde kan vormen van de mensheid. Waarom wordt dit onderwerp genegeerd in de Nederlandse politiek? En dat terwijl Nederland een sleutelrol speelt in de chip supply chain, dankzij ASML. Hierom kan het óók een sleutelrol spelen in AI compute governance. Alle levens staan op het spel!" - Joep Meindertsma
+
+PauseAI wil dat de Nederlandse regering:
+
+- AI safety-experts uitnodigt om het parlement te informeren over deze risico's 
+- Een parlementair debat inroostert over de existentiële risico's van geavanceerde kunstmatige intelligentie  
+- Voorbereidingen op de voorgestelde AI-top in het Verenigd Koninkrijk van later dit jaar voorrang geeft en een leidende rol neemt inzake effectief beleid. De actievoerders hebben concrete [voorstellen](https://pauseai.info/summit) en [beleidsideeën](https://pauseai.info/proposal) voor de te houden AI-top.
+- Internationaal samenwerkt om een toereikende set maatregelen op mondiale schaal toegepast te krijgen, waaronder een zogenoemde AI-pauze.
+
+Voor meer info, bezoek [PauseAI.info](http://pauseai.info). Contact: Joep Meindertsma ([twitter](https://twitter.com/joepmeindertsma), [email](mailto:joep@ontola.io), 0636020942) & Ruben Dieleman ([email](mailto:ruben@existentialriskobservatory.org), 0634192819)
