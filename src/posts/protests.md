@@ -7,6 +7,8 @@ description: When and where we will be protesting.
 
 We're working on an international protest later this year, before the [Summit](/summit).
 
+Want to receive an invite when a protest is organized near you? [Join PauseAI](/join)!
+
 ## Past Protests
 
 - [11th of August, Netherlands](/2023-august-nl)
@@ -34,7 +36,7 @@ Read more about [organizing a protest](/organizing-a-protest).
 ## Media coverage
 
 - [Wired](https://www.wired.com/story/pause-ai-existential-risk/): Article on PauseAI and the protests.
-- [Politico](https://www.politico.eu/article/microsoft-brussels-elon-musk-anti-ai-protesters-well-five-of-them-descend-on-brussels/): Covers the Bruxels protest.
+- [Politico](https://www.politico.eu/article/microsoft-brussels-elon-musk-anti-ai-protesters-well-five-of-them-descend-on-brussels/): Covers the Brussels protest.
 - [Time](https://time.com/6295879/ai-pause-is-humanitys-best-bet-for-preventing-extinction/): Article we wrote about why a Pause is necessary.
 - [The Verge](https://www.theverge.com/2023/5/24/23735982/sam-altman-openai-superintelligent-benefits-talk-london-ucl-protests)
 - [Express](https://www.express.co.uk/news/uk/1775620/artificial-intelligence-extinction-google-chat-gpt)
