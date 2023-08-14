@@ -55,7 +55,7 @@ PauseAI calls on the Dutch government to:
 - Give priority to preparations for the proposed AI summit in the United Kingdom later this year and take a leading role in effective policy. The activists have concrete [proposals](https://pauseai.info/summit) and [policy ideas](https://pauseai.info/proposal) for the upcoming AI summit.
 - Collaborate internationally to implement an adequate set of measures on a global scale, including a so-called AI pause.
 
-For more information, visit [PauseAI.info](http://pauseai.info). Contact: Joep Meindertsma ([twitter](https://twitter.com/joepmeindertsma), [email](mailto:joep@ontola.io), 0636020942) & Ruben Dieleman ([email](mailto:ruben@existentialriskobservatory.org), 0634192819)
+For more information, visit [PauseAI.info](http://pauseai.info). Contact: Joep Meindertsma ([twitter](https://twitter.com/joepmeindertsma), [email](mailto:joep@ontola.io)) & Ruben Dieleman ([email](mailto:ruben@existentialriskobservatory.org))
 
 ## Press Release (NL): PauseAI roept overheid op tot het voorkomen van mensbedreigende, AI-gerelateerde rampen
 
@@ -76,4 +76,4 @@ PauseAI wil dat de Nederlandse regering:
 - Voorbereidingen op de voorgestelde AI-top in het Verenigd Koninkrijk van later dit jaar voorrang geeft en een leidende rol neemt inzake effectief beleid. De actievoerders hebben concrete [voorstellen](https://pauseai.info/summit) en [beleidsideeën](https://pauseai.info/proposal) voor de te houden AI-top.
 - Internationaal samenwerkt om een toereikende set maatregelen op mondiale schaal toegepast te krijgen, waaronder een zogenoemde AI-pauze.
 
-Voor meer info, bezoek [PauseAI.info](http://pauseai.info). Contact: Joep Meindertsma ([twitter](https://twitter.com/joepmeindertsma), [email](mailto:joep@ontola.io), 0636020942) & Ruben Dieleman ([email](mailto:ruben@existentialriskobservatory.org), 0634192819)
+Voor meer info, bezoek [PauseAI.info](http://pauseai.info). Contact: Joep Meindertsma ([twitter](https://twitter.com/joepmeindertsma), [email](mailto:joep@ontola.io)) & Ruben Dieleman ([email](mailto:ruben@existentialriskobservatory.org))

@@ -28,7 +28,7 @@ There will most likely come a point where an AI is better at hacking than the be
 This can go wrong in many ways.
 
 - **Nuclear**: Cyberweapons can be used to gain access to nuclear materials, meltdown a reactor, convince humans they need to fire nuclear missiles, or even fire them automatically.
-- **Infrastructure**: Cyberweapons can be used to gain access or disable critical infrastructure, such as power plants, water treatment facilities, or the internet.
+- **Infrastructure**: Cyberweapons can be used to gain access to or disable critical infrastructure, such as power plants, water treatment facilities, or the internet.
 - **Financial**: Cyberweapons can be used to steal money from banks, or to manipulate the stock market.
 
 But extremely capable AI systems could also be used to create a virus that infects virtually all computers:
@@ -57,12 +57,12 @@ The economy would grind to a halt, all supply chains would break down, and peopl
 
 The story above can only happens if:
 
-1. The capability of finding zero-day exploits emerges
-2. The model gets into the hand of bad actors (e.g. if the model weights are leaked, if the model is open-sourced, or if it's developed by a malicious actor)
-3. The security vulnerabilities are not patched before such a cyberweapon is deployed (which is the default outcome even if the model is widely distributed since patching + deploying takes far longer than attacking)
+1. The **capability of finding zero-day exploits** emerges
+2. The **model gets into the hand of bad actors**. This can happen if the model weights are leaked, if the model is open-sourced, or if it's developed by a malicious actor.
+3. The **security vulnerabilities are not patched** before such a cyberweapon is deployed. Unfortunately, the defenders are at a disadvantage if the model is widely distributed since patching + deploying takes far longer than attacking.
 
 There are various measures we can implement to tackle these:
 
 - Only allow models to be deployed after extensive testing. If they have dangerous abilities, do not release them.
-- If a model is trained that can find novel security vulnerabilities, use this to contact software maintainers to patch these vulnerabilities. Give the patching process sufficient time before the model is released.
+- If a model is trained that can find novel security vulnerabilities, use this to contact software maintainers to patch these vulnerabilities. Give the patching process sufficient time before the model is released. Make sure the weights are not leaked, and protect the model as if it's the launch code for a nuclear strike.
 - [Pause the dangerous training runs](/proposal).
