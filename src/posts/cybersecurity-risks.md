@@ -8,7 +8,7 @@ We pay for our groceries, plan our days, contact our loved ones and even drive o
 And virtually all of these computers are connected to each other.
 This makes all of us vulnerable to cyberattacks.
 
-Highly potent cyber weapons (such as [Stuxnet](https://www.youtube.com/watch?v=nd1x0csO3hU)) have always been extremely costly to create.
+Highly potent cyber weapons, malware and botnets (such as [Stuxnet](https://www.youtube.com/watch?v=nd1x0csO3hU), [Mirai](https://en.wikipedia.org/wiki/Mirai_(malware)) and [EMOTET](https://en.wikipedia.org/wiki/Emotet)) have always been costly to create.
 The [Pegasus cybersecurity weapon](https://en.wikipedia.org/wiki/Pegasus_(spyware)), for example, cost hundreds of millions of dollars to develop.
 Finding so-called zero-day exploits (vulnerabilities that have not yet been discovered) is a very hard task.
 It requires a lot of skill and a lot of time to find these exploits - only highly specialized hackers can do it.
@@ -19,6 +19,10 @@ The latest AI systems can already analyze and write software.
 They [can find vulnerabilities](https://betterprogramming.pub/i-used-gpt-3-to-find-213-security-vulnerabilities-in-a-single-codebase-cc3870ba9411) in software, and [they could be used to exploit them](https://blog.checkpoint.com/2023/03/15/check-point-research-conducts-initial-security-analysis-of-chatgpt4-highlighting-potential-scenarios-for-accelerated-cybercrime/).
 As AI capabilities grow, so will the vulnerabilities they can detect and the exploits they can create.
 They are not yet as good at this as the best humans are, but they are getting closer quickly.
+
+Note that AI also enables completely novel types of attacks.
+For example, AI can be used to [hear the password you typed from an online call](https://beebom.com/ai-crack-password-listening-keyboard-sounds/)
+or use [WiFi to see humans through walls](https://www.marktechpost.com/2023/02/15/cmu-researchers-create-an-ai-model-that-can-detect-the-pose-of-multiple-humans-in-a-room-using-only-the-signals-from-wifi/).
 
 There will most likely come a point where an AI is better at hacking than the best human hackers.
 This can go wrong in many ways.
@@ -54,8 +58,8 @@ The economy would grind to a halt, all supply chains would break down, and peopl
 The story above can only happens if:
 
 1. The capability of finding zero-day exploits emerges
-1. The model gets in the hand of bad actors
-1. The security vulnerabilities are not patched before such a cyberweapon is deployed
+2. The model gets into the hand of bad actors (e.g. if the model weights are leaked, if the model is open-sourced, or if it's developed by a malicious actor)
+3. The security vulnerabilities are not patched before such a cyberweapon is deployed (which is the default outcome even if the model is widely distributed since patching + deploying takes far longer than attacking)
 
 There are various measures we can implement to tackle these:
 
