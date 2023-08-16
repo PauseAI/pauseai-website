@@ -2,6 +2,10 @@
 title: PauseAI protest @ FCDO, London, July 18th
 ---
 
+<div>
+<blockquote class="twitter-tweet"><p lang="en" dir="ltr">We&#39;re not letting up in London! Today&#39;s protest took place during the first ever UN Security Council meeting on the threat from AI, chaired by UK Foreign Secretary <a href="https://twitter.com/JamesCleverly?ref_src=twsrc%5Etfw">@JamesCleverly</a>. A global pause is the only safe way forward.<br><br>More on UNSC meeting below: <a href="https://t.co/L9hONXogUl">https://t.co/L9hONXogUl</a> <a href="https://t.co/qp4A2fSSvb">pic.twitter.com/qp4A2fSSvb</a></p>&mdash; PauseAI ⏸🤖 (@PauseAI) <a href="https://twitter.com/PauseAI/status/1681403296693534725?ref_src=twsrc%5Etfw">July 18, 2023</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+</div>
+
 - PauseAI protest, urging the United Nations Security Council to implement a global pause on the largest AI training runs.
 - Where: outside the Foreign, Commonwealth and Development Office (FCDO), King Charles Street, Westminster, London, SW1A 2AH
 - When: 18th of July, 4.30 - 5.30 pm
@@ -25,9 +29,3 @@ The United Nations Security Council will have an unprecedented meeting to discus
 The UK is currently taking the international lead on AI Safety regulations, as the government [announced on June 7th](https://www.gov.uk/government/news/uk-to-host-first-global-summit-on-artificial-intelligence) that it will be hosting the first AI Safety Summit this autumn. However, the protestors worry that there will be too little action, too late:
 
 > "Predicting how fast AI will progress is incredibly difficult. We need to err on the side of caution and prepare for a scenario where we get dangerous levels of intelligence in months - not years. The UNSC meeting is the first moment where a global Pause could be decided upon." - PauseAI members
-
-## Media
-
-<div>
-<blockquote class="twitter-tweet"><p lang="en" dir="ltr">We&#39;re not letting up in London! Today&#39;s protest took place during the first ever UN Security Council meeting on the threat from AI, chaired by UK Foreign Secretary <a href="https://twitter.com/JamesCleverly?ref_src=twsrc%5Etfw">@JamesCleverly</a>. A global pause is the only safe way forward.<br><br>More on UNSC meeting below: <a href="https://t.co/L9hONXogUl">https://t.co/L9hONXogUl</a> <a href="https://t.co/qp4A2fSSvb">pic.twitter.com/qp4A2fSSvb</a></p>&mdash; PauseAI ⏸🤖 (@PauseAI) <a href="https://twitter.com/PauseAI/status/1681403296693534725?ref_src=twsrc%5Etfw">July 18, 2023</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
-</div>
