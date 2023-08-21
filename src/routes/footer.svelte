@@ -21,15 +21,7 @@
 		<a href="/ai-takeover">AI takeover</a>
 		<a href="/sota">State of AI</a>
 		<a href="/psychology-of-x-risk">Psychology of x-risk</a>
-	</div>
-	<div class="column">
-		<h2>Socials</h2>
-		<a href="https://discord.gg/2XXWXvErfA" target="_blank">Discord</a>
-		<a href="https://twitter.com/PauseAI" target="_blank">Twitter</a>
-		<a href="https://www.linkedin.com/company/pauseai" target="_blank">LinkedIn</a>
-		<a href="https://www.facebook.com/PauseAI/" target="_blank">Facebook</a>
-		<a href="https://www.tiktok.com/@pauseai" target="_blank">TikTok</a>
-		<a href="https://www.instagram.com/pause_ai/" target="_blank">Instagram</a>
+		<a href="/urgency">Urgency</a>
 	</div>
 	<div class="column">
 		<h2>Take Action</h2>
@@ -39,6 +31,15 @@
 		<a href="/organizing-a-protest">Organize a protest</a>
 		<a href="/writing-a-letter">Write a letter</a>
 		<a href="/lobby-tips">Lobby tips</a>
+	</div>
+	<div class="column">
+		<h2>Socials</h2>
+		<a href="https://discord.gg/2XXWXvErfA" target="_blank">Discord</a>
+		<a href="https://twitter.com/PauseAI" target="_blank">Twitter</a>
+		<a href="https://www.linkedin.com/company/pauseai" target="_blank">LinkedIn</a>
+		<a href="https://www.facebook.com/PauseAI/" target="_blank">Facebook</a>
+		<a href="https://www.tiktok.com/@pauseai" target="_blank">TikTok</a>
+		<a href="https://www.instagram.com/pause_ai/" target="_blank">Instagram</a>
 	</div>
 	<div class="column">
 		<h2>Other</h2>

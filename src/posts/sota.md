@@ -10,7 +10,7 @@ When some specific [dangerous capabilities](/dangerous-capabilities) will be ach
 At some point, AI will outcompete every human in every metric imaginable.
 When we have built this superintelligence, [we will probably soon be dead](/ai-takeover).
 
-_Last update: 2023-10_
+_Last update: 2023-08_
 
 ## Superhuman (Better than all humans)
 
@@ -30,5 +30,5 @@ _Last update: 2023-10_
 
 ## Worse than most humans
 
-- **Saying "I don't know"**. Virtually all Large Language Models have this problem of 'hallucination', making up information instead of saying it does not know.
+- **Saying "I don't know"**. Virtually all Large Language Models have this problem of 'hallucination', making up information instead of saying it does not know. This
 - **Movement**. The [Atlas robot can walk, throw objects and do somersaults](https://www.youtube.com/watch?v=-e1_QhJ1EhQ), but it is still limited in its movements. Google's [RT-2](https://www.deepmind.com/blog/rt-2-new-model-translates-vision-and-language-into-action) can turn objectives into actions in the real world, like "move the cup to the wine bottle".
