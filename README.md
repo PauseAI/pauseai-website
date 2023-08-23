@@ -29,4 +29,5 @@ git clone git@github.com:joepio/pauseai.git
 # Instead of pnpm you could use npm or yarn
 pnpm install
 pnpm run dev
+# Open http://localhost:37572
 ```

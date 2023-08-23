@@ -59,7 +59,9 @@ The story above can only happens if:
 
 1. The **capability of finding zero-day exploits** emerges
 2. The **model gets into the hand of bad actors**. This can happen if the model weights are leaked, if the model is open-sourced, or if it's developed by a malicious actor.
-3. The **security vulnerabilities are not patched** before such a cyberweapon is deployed. Unfortunately, the defenders are at a disadvantage if the model is widely distributed since patching + deploying takes far longer than attacking.
+3. The **security vulnerabilities are not patched** before such a cyberweapon is deployed. Unfortunately, the defenders are at a disadvantage if the model is widely distributed for two reasons:
+   1. Patching + releasing + deploying takes far longer than attacking.
+   2. The attackers only need to find one vulnerability, while the defenders need to find all of them.
 
 There are various measures we can implement to tackle these:
 
