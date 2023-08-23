@@ -1,7 +1,8 @@
 <script lang="ts">
+	export let subtle = false
 </script>
 
-<button on:click>
+<button on:click class:subtle>
 	<slot />
 </button>
 
@@ -20,6 +21,14 @@
 		font-weight: bold;
 		color: var(--bg);
 		position: relative;
+	}
+	button.subtle {
+		background-color: var(--background);
+		color: var(--brand);
+	}
+	button.subtle:hover {
+		background-color: var(--background);
+		text-decoration: underline;
 	}
 	button:hover {
 		background-color: var(--brand-subtle);

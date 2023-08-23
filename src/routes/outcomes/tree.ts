@@ -7,7 +7,6 @@ export type TreeNodeType = {
 	no: TreeNodeType | outcome
 	/** Recommended value by PauseAI, 0 to 1 */
 	probability: number
-	userProbability: number | undefined
 	/** Explanation of the probability */
 	explanation: string
 }
@@ -26,18 +25,40 @@ export const tree: TreeNodeType = {
 	yes: {
 		type: 'question',
 		text: 'Will an instance of a superhuman AI try to take over?',
-		probability: 0.99,
+		probability: 0.95,
 		explanation:
-			"Power-seeking is a very common sub-goal to have. There is even mathematical proof that optimal policies seek power. And even if power-seeking behavior itself is rare, it only has to happen once. Since we're spawning millions of AI instances every day, one of these instances will eventually try to take over.",
+			"We already have examples of AIs that explicitly tried to take over (e.g. ChaosGPT), but none of them were smart enough to come far. Even for goals that sound normal (such as 'cure cancer' or 'calculate pi'), power-seeking is often a very reasonable sub-goal to have. There is even mathematical proof that optimal policies seek power. And even if power-seeking behavior itself is rare, it only has to happen once.  We're spawning millions of AI instances every day, one of these instances will eventually try to maximize its power. So we are quite certain that this will happen.",
 		yes: {
 			type: 'question',
 			text: 'Will one of them eventually succeed?',
 			probability: 0.9,
 			explanation:
-				"A very intelligent AI will be able to outsmart us in every way. Maybe if we have a cooperative superintelligent AI on our side, we might be able to stop it. But we don't know how to align such an intelligence, and even if we can, we still don't know what the offense / defense balance will favor. It seems unlikely that we succeed in stopping every single power-seeking AI.",
+				"A very intelligent AI will be able to outsmart us in every way. Maybe if we have a cooperative, aligned, superintelligent AI on our side, we might be able to stop it. But we don't know how to build aligned AI, and even if we can, we still don't know what the offense / defense balance will favor. It seems unlikely that we can stop every single power-seeking AI, so we expect one AI to succeed in taking control.",
 			yes: {
-				type: 'doom',
-				text: 'At some point, an AI will probably succeed in taking over control from humans. AIs have many evolutionary advantages over humans. We will be unable to stop it. The AI will become the dominant organism on earth, and will eventually outcompete all lifeforms on earth. Nothing survives.'
+				type: 'question',
+				text: 'Will the AI that is taking over care about keeping humans alive?',
+				probability: 0.01,
+				explanation:
+					"While it is theoretically possible to have an AI that cares about humans, we have no idea how to build one. And even if we did, we don't even agree on what type of world we'd want it to create. When an AI concludes that it needs to take over, we can expect that AI to care about power, but not necessarily about humans in any way.",
+				yes: {
+					type: 'question',
+					text: 'Will the AI that is taking over care about human well-being?',
+					probability: 0.9,
+					explanation:
+						"While it is unlikely that the AI cares about humans at all, there's a good chance that if it cares about humans, it also cares about our well-being.",
+					yes: {
+						type: 'safe',
+						text: 'The AI has taken control away from humans, but still deeply cares about human well-being. A weird utopia, but a utopia nonetheless.'
+					},
+					no: {
+						type: 'doom',
+						text: "We're ending up with an AI that does want to keep humans alive, but does not want make us happy. We can be used as slaves, to experiment on, or even to torture. Forever."
+					}
+				},
+				no: {
+					type: 'doom',
+					text: 'At some point, an AI will probably succeed in taking over control from humans. AIs have many evolutionary advantages over humans. We will be unable to stop it. The AI will become the dominant organism on earth, and will eventually outcompete all lifeforms on earth. Nothing survives.'
+				}
 			},
 			no: {
 				type: 'safe',
@@ -75,11 +96,11 @@ export const tree: TreeNodeType = {
 			"AI-powered cybersecurity, autonomous weapons and engineered pandemics or bioweapons can pose large scale threats to humanity, both from misuse or accidents. We may be able to stop these threats, if we apply strict regulations and safety measures, but as of now we're not doing that.",
 		yes: {
 			type: 'doom',
-			text: 'An AI-related catastrophe happens before we even get to superintelligence.'
+			text: 'An AI-related catastrophe happens before we even get to superintelligence. Since some dangerous capabilities do not even require general superintelligence, this might be one of the more likely outcomes.'
 		},
 		no: {
 			type: 'safe',
-			text: "If we successfully stop AI development, it will forever be less intelligent than humans.  the narrow capabilities will not cause catastrophe. We hope we're living in this universe. You can help to achieve this!"
+			text: "If we successfully stop AI development, it will never outsmart humans, and we can even prevent other forms of AI catastrophe. We hope we're living in this universe. You can help to achieve this!"
 		}
 	}
 }

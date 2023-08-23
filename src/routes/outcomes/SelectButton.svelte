@@ -2,11 +2,18 @@
 	import Button from '$lib/components/Button.svelte'
 	export let selected: 'yes' | 'no' | undefined
 	export let yes = false
+	export let onClick: () => void
 	$: current = selected == (yes ? 'yes' : 'no')
 </script>
 
 <div class="wrapper {current ? 'selected' : ''}">
-	<Button on:click={() => (selected = yes ? 'yes' : 'no')}>{yes ? 'yes' : 'no'}</Button>
+	<Button
+		subtle={selected && !current}
+		on:click={() => {
+			selected = yes ? 'yes' : 'no'
+			onClick()
+		}}>{yes ? 'Yes' : 'No'}</Button
+	>
 </div>
 
 <style>
