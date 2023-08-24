@@ -9,14 +9,12 @@
 	// very likely, etc.
 	$: label = () => {
 		if (probability == 0) return 'impossible'
-		if (probability < 0.05) return 'very unlikely'
-		if (probability < 0.2) return 'unlikely'
-		if (probability < 0.4) return 'somewhat unlikely'
-		if (probability < 0.6) return 'about even'
-		if (probability < 0.8) return 'somewhat likely'
+		if (probability < 0.1) return 'unlikely'
+		if (probability < 0.4) return 'maybe'
+		if (probability < 0.6) return 'possibly'
 		if (probability < 0.9) return 'likely'
+		if (probability < 1) return 'probably'
 		if (probability == 1) return 'certain'
-		if (probability >= 0.9) return 'very likely'
 		return 'very likely'
 	}
 </script>
@@ -40,6 +38,9 @@
 		align-items: center;
 	}
 	input {
+		cursor: pointer;
 		width: 100%;
+		/* remove border */
+		border: none;
 	}
 </style>

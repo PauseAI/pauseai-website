@@ -7,17 +7,24 @@
 	import { fade } from 'svelte/transition'
 
 	export let node: TreeNodeType
-	let probability: number = node.probability
 	export let parentProbability: number = 1
-	let showInfo = true
-	let selected: 'yes' | 'no' | undefined
 	export let showProbabilities = false
+	export let top: HTMLElement
+	export let intro: boolean
+	let probability: number = node.probability
+	let showInfo = false
+	let selected: 'yes' | 'no' | undefined
 	$: selectedNode = selected == 'yes' ? node.yes : node.no
 	$: selectedProbability = selected == 'yes' ? probability : 1 - probability
 
-	let child: HTMLElement
+	$: scrollToTop = () => {
+		setTimeout(() => {
+			top.scrollIntoView({ behavior: 'smooth' })
+		}, 10)
+	}
 
-	function scrollToNextChild() {
+	let child: HTMLElement
+	$: scrollToNextChild = () => {
 		setTimeout(() => {
 			if (child) {
 				child.scrollIntoView({ behavior: 'smooth' })
@@ -41,15 +48,18 @@
 
 	<div class="options">
 		<SelectButton yes={false} bind:selected onClick={scrollToNextChild} />
+		<SelectButton yes={true} bind:selected onClick={scrollToNextChild} />
 		{#if showProbabilities}
 			<Slider bind:probability />
 		{/if}
-		<SelectButton yes={true} bind:selected onClick={scrollToNextChild} />
 		{#if showProbabilities}
 			{#if probability !== node.probability && showInfo}
 				<Button subtle on:click={() => (probability = node.probability)}>Reset</Button>
 			{/if}
 		{/if}
+		<Button subtle on:click={() => (showInfo = !showInfo)}>
+			{showInfo ? 'Hide' : 'Explain'}
+		</Button>
 	</div>
 
 	{#if selected !== undefined}
@@ -60,6 +70,8 @@
 						node={selectedNode}
 						parentProbability={parentProbability * selectedProbability}
 						bind:showProbabilities
+						bind:top
+						bind:intro
 					/>
 				{:else}
 					<h2>
@@ -77,9 +89,23 @@
 							/>
 						</b>
 					</p>
-					<Button on:click={() => (showProbabilities = !showProbabilities)}>
-						{showProbabilities ? 'Hide' : 'Show and edit'} probabilities
-					</Button>
+					<div class="buttons">
+						<Button
+							on:click={() => {
+								showProbabilities = !showProbabilities
+								scrollToTop()
+							}}
+						>
+							{showProbabilities ? 'Hide' : 'Show and edit'} probabilities
+						</Button>
+						<Button
+							subtle
+							on:click={() => {
+								intro = true
+								scrollToTop()
+							}}>Restart</Button
+						>
+					</div>
 				{/if}
 			</div>
 		{/key}
@@ -97,6 +123,11 @@
 		flex-wrap: wrap;
 		flex-direction: row;
 		/* justify-content: space-between; */
+		gap: 1rem;
+	}
+	.buttons {
+		display: flex;
+		flex-direction: row;
 		gap: 1rem;
 	}
 </style>

@@ -18,16 +18,16 @@ type outcome = {
 
 export const tree: TreeNodeType = {
 	type: 'question',
-	text: 'Will AI at some point surpass human intelligence?',
+	text: "Will we continue to build AI until it's smarter than humans?",
 	probability: 0.5,
 	explanation:
-		"AI systems are already surpassing humans in many tasks. We can collectively decide not to build this technology and pause indefinitely, but that requires strong political efforts. Right now AI companies are doing everything in their power to advance capabilities, so we're currently on track to achieving superhuman intelligence.",
+		"AI systems are already surpassing most humans in many tasks. We can collectively decide to stop building this technology, but AI companies are doing everything in their power to advance capabilities. \n\n We're currently on track to achieving superhuman intelligence.",
 	yes: {
 		type: 'question',
-		text: 'Will an instance of a superhuman AI try to take over?',
+		text: 'Will one of these AIs try to take control?',
 		probability: 0.95,
 		explanation:
-			"We already have examples of AIs that explicitly tried to take over (e.g. ChaosGPT), but none of them were smart enough to come far. Even for goals that sound normal (such as 'cure cancer' or 'calculate pi'), power-seeking is often a very reasonable sub-goal to have. There is even mathematical proof that optimal policies seek power. And even if power-seeking behavior itself is rare, it only has to happen once.  We're spawning millions of AI instances every day, one of these instances will eventually try to maximize its power. So we are quite certain that this will happen.",
+			"We already have examples of AIs that explicitly tried to take over (e.g. ChaosGPT), but none of them were smart enough to get far. Even for goals that sound normal (such as 'cure cancer' or 'calculate pi'), power-seeking is often a very reasonable sub-goal to have. There is even mathematical proof that optimal policies seek power. And even if power-seeking behavior itself is rare, it only has to happen once.  We're spawning millions of AI instances every day, one of these instances will eventually try to maximize its power. So we are quite certain that this will happen.",
 		yes: {
 			type: 'question',
 			text: 'Will one of them eventually succeed?',
@@ -39,7 +39,7 @@ export const tree: TreeNodeType = {
 				text: 'Will the AI that is taking over care about keeping humans alive?',
 				probability: 0.01,
 				explanation:
-					"While it is theoretically possible to have an AI that cares about humans, we have no idea how to build one. And even if we did, we don't even agree on what type of world we'd want it to create. When an AI concludes that it needs to take over, we can expect that AI to care about power, but not necessarily about humans in any way.",
+					"While it is theoretically possible to have an AI that cares about humans, we have no idea how to build one. And even if we did, we don't even agree on what type of world we'd want it to create. When an AI concludes that it needs to take over, we can expect that AI to care about self-preservation, power, and acquiring resources, but not necessarily about humans in any way.",
 				yes: {
 					type: 'question',
 					text: 'Will the AI that is taking over care about human well-being?',
@@ -62,7 +62,7 @@ export const tree: TreeNodeType = {
 			},
 			no: {
 				type: 'safe',
-				text: 'We will stop any Rogue AI that tries to take over. This can happen if we have highly succesful defenses against AI takeovers.'
+				text: "We'll get rogue AIs, but succeed in stopping every single one of them. This requires that we have strong defenses against AI takeovers, like an aligned superintelligent AI."
 			}
 		},
 		no: {
@@ -80,7 +80,10 @@ export const tree: TreeNodeType = {
 					type: 'safe',
 					text: 'We live in a world where people have a controllable superintelligence, and the people who control it have the same goals as you do. This may just be the utopia we were promised by the AI labs!'
 				},
-				no: { type: 'doom', text: 'Those in power will forever be in power.' }
+				no: {
+					type: 'doom',
+					text: 'Although we did not get rogue AI, a group of humans used AI to take over. Using this superhuman AI, they can forever be in power. Unfortunately, this group does not share your values. Your nightmare dystopia becomes reality.'
+				}
 			},
 			no: {
 				type: 'safe',
