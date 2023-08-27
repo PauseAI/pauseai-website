@@ -1,16 +1,14 @@
 <script lang="ts">
+	import PostMeta from '$lib/components/PostMeta.svelte'
+
 	export let data
 
 	let title = data.meta.title || data.slug
 	let parent = data.slug.split('/').slice(0, -1).join('/')
+	let date = data.meta.date
 </script>
 
-<svelte:head>
-	<title>{title}</title>
-	<meta property="og:type" content="article" />
-	<meta property="og:title" content={title} />
-	<meta property="og:description" content={data.meta.description} />
-</svelte:head>
+<PostMeta {title} description={data.meta.description} {date} />
 
 <article>
 	{#if parent}
@@ -18,7 +16,7 @@
 	{/if}
 	<hgroup>
 		<h1>{title}</h1>
-		{#if data.meta.date}
+		{#if date}
 			<!-- <p>Published at {formatDate(data.meta.date)}</p> -->
 		{/if}
 	</hgroup>

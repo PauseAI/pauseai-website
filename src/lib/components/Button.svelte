@@ -17,7 +17,6 @@
 		font-family: var(--font-body);
 		cursor: pointer;
 		display: flex;
-		align-self: flex-end;
 		font-weight: bold;
 		color: var(--bg);
 		position: relative;

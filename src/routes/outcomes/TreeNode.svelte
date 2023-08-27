@@ -34,32 +34,48 @@
 </script>
 
 <div class="node">
-	<h2>
-		{node.text}
-	</h2>
+	<div class="headerWrapper">
+		<h2>
+			{node.text}
+		</h2>
+		<Button subtle on:click={() => (showInfo = !showInfo)}>Info</Button>
+	</div>
 
 	{#if showInfo}
 		<div>
 			<p>
-				{node.explanation} We estimate this probability at roughly <b>{node.probability * 100}%</b>.
+				{node.explanation} PauseAI estimates this probability at roughly
+				<b>{node.probability * 100}%</b>.
 			</p>
 		</div>
 	{/if}
 
 	<div class="options">
-		<SelectButton yes={false} bind:selected onClick={scrollToNextChild} />
-		<SelectButton yes={true} bind:selected onClick={scrollToNextChild} />
 		{#if showProbabilities}
 			<Slider bind:probability />
-		{/if}
-		{#if showProbabilities}
-			{#if probability !== node.probability && showInfo}
+			<!-- {#if probability !== node.probability && showInfo}
 				<Button subtle on:click={() => (probability = node.probability)}>Reset</Button>
-			{/if}
+			{/if} -->
+		{:else}
+			<!-- <Button subtle on:click={() => (showProbabilities = !showProbabilities)}>
+				<Propability {probability} /> chance
+			</Button> -->
 		{/if}
-		<Button subtle on:click={() => (showInfo = !showInfo)}>
-			{showInfo ? 'Hide' : 'Explain'}
-		</Button>
+
+		<SelectButton
+			yes={false}
+			bind:selected
+			onClick={scrollToNextChild}
+			{probability}
+			{showProbabilities}
+		/>
+		<SelectButton
+			yes={true}
+			bind:selected
+			onClick={scrollToNextChild}
+			{probability}
+			{showProbabilities}
+		/>
 	</div>
 
 	{#if selected !== undefined}
@@ -84,7 +100,7 @@
 					<p>{selectedNode.text}</p>
 					<p>
 						<b>
-							Probability of this outcome: <Propability
+							Probability of this specific outcome path: <Propability
 								probability={parentProbability * selectedProbability}
 							/>
 						</b>
@@ -117,6 +133,15 @@
 	.child {
 		margin-top: 20px;
 		border-top: solid 3px var(--brand);
+	}
+
+	.headerWrapper {
+		display: flex;
+		flex-direction: row;
+		gap: 1rem;
+		/* Center */
+		align-items: center;
+		justify-content: space-between;
 	}
 	.options {
 		display: flex;

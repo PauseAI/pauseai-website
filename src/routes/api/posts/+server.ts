@@ -1,5 +1,8 @@
 import { json } from '@sveltejs/kit'
 import type { Post } from '$lib/types'
+import { outcomesMeta } from '../../outcomes/meta'
+
+const hardCodedPages: Post[] = [outcomesMeta]
 
 async function getPosts() {
 	let posts: Post[] = []
@@ -16,6 +19,8 @@ async function getPosts() {
 			posts.push(post)
 		}
 	}
+
+	posts.push(...hardCodedPages)
 
 	posts = posts.sort(
 		(first, second) => new Date(second.date).getTime() - new Date(first.date).getTime()

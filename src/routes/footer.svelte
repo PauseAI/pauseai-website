@@ -1,7 +1,6 @@
 <script lang="ts">
 	import Toggle from '$lib/components/Toggle.svelte'
 	import { page } from '$app/stores'
-	import Logo from '$lib/components/logo.svelte'
 
 	$: editUrl = `https://github.com/joepio/pauseai/edit/main/src/posts${$page.url.pathname}.md`
 	$: if ($page.url.pathname == '/') {
@@ -15,13 +14,18 @@
 	<div class="column">
 		<h2>PauseAI</h2>
 		<a href="/faq">FAQ</a>
-		<a href="/risks">Risks</a>
-		<a href="/xrisk">Existential risk</a>
 		<a href="/learn">Learn</a>
-		<a href="/ai-takeover">AI takeover</a>
 		<a href="/sota">State of AI</a>
 		<a href="/psychology-of-x-risk">Psychology of x-risk</a>
 		<a href="/urgency">Urgency</a>
+	</div>
+	<div class="column">
+		<h2>Risks</h2>
+		<a href="/outcomes">AI Outcomes</a>
+		<a href="/risks">Risks overview</a>
+		<a href="/xrisk">Existential risk</a>
+		<a href="/ai-takeover">AI takeover</a>
+		<a href="/cybersecurity-risks">Cybersecurity risks</a>
 	</div>
 	<div class="column">
 		<h2>Take Action</h2>
@@ -62,7 +66,7 @@
 
 	footer {
 		display: grid;
-		grid-template-columns: repeat(4, 1fr);
+		grid-template-columns: repeat(5, 1fr);
 		gap: 1rem;
 		font-size: 0.7rem;
 		padding-bottom: 1rem;

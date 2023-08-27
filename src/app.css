@@ -99,6 +99,15 @@ h1 {
 	font-size: 3rem;
 }
 
+@media (max-width: 40rem) {
+	h1 {
+		font-size: 2rem;
+	}
+	h2 {
+		font-size: 1.5rem;
+	}
+}
+
 .prose {
 	line-height: 1.5em;
 }
