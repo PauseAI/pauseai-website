@@ -73,13 +73,13 @@ export const tree: TreeNodeType = {
 				"A very intelligent AI will be able to outsmart us in every way. Maybe if we have a cooperative, aligned, superintelligent AI on our side, we might be able to stop it. But we don't know how to build aligned AI, and even if we can, we still don't know what the offense / defense balance will favor. It seems unlikely that we can stop every single power-seeking AI, so we expect one AI to succeed in taking control.",
 			yes: {
 				type: 'question',
-				text: 'Will the AI that is taking over care about keeping humans alive?',
+				text: 'Will the AI care about keeping humans alive?',
 				probability: 0.01,
 				explanation:
 					"While it is theoretically possible to have an AI that cares about humans, we have no idea how to build one. And even if we did, we don't even agree on what type of world we'd want it to create. When an AI concludes that it needs to take over, we can expect that AI to care about self-preservation, power, and acquiring resources, but not necessarily about humans in any way.",
 				yes: {
 					type: 'question',
-					text: 'Will the AI that is taking over care about human well-being?',
+					text: 'Will the AI care about human well-being?',
 					probability: 0.9,
 					explanation:
 						"While it is unlikely that the AI cares about humans at all, there's a good chance that if it cares about humans, it also cares about our well-being.",
