@@ -102,8 +102,9 @@
 						<b>
 							Probability of this specific outcome path: <Propability
 								probability={parentProbability * selectedProbability}
-							/>
+							/>.
 						</b>
+						This is calculated by multiplying all the probabilities of the values above.
 					</p>
 					<div class="buttons">
 						<Button

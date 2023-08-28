@@ -38,13 +38,6 @@
 				showProbabilities = false
 			}}>Start</Button
 		>
-		<Button
-			subtle
-			on:click={() => {
-				intro = false
-				showProbabilities = true
-			}}>Start with probabilities</Button
-		>
 	</div>
 {:else}
 	<TreeNode node={tree} bind:showProbabilities bind:top bind:intro />
