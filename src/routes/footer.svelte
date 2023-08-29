@@ -12,12 +12,12 @@
 <div class="bar" />
 <footer>
 	<div class="column">
-		<h2>PauseAI</h2>
+		<h2>Info</h2>
 		<a href="/faq">FAQ</a>
+		<a href="/proposal">Proposal</a>
 		<a href="/learn">Learn</a>
 		<a href="/sota">State of AI</a>
 		<a href="/psychology-of-x-risk">Psychology of x-risk</a>
-		<a href="/urgency">Urgency</a>
 		<a href="/5-levels-of-ai-regulation">5 Levels of regulation</a>
 	</div>
 	<div class="column">
@@ -26,7 +26,9 @@
 		<a href="/risks">Risks overview</a>
 		<a href="/xrisk">Existential risk</a>
 		<a href="/ai-takeover">AI takeover</a>
-		<a href="/cybersecurity-risks">Cybersecurity risks</a>
+		<a href="/cybersecurity-risks">Cybersecurity</a>
+		<a href="/urgency">Urgency</a>
+		<a href="/dangerous-capabilities">Capabilities</a>
 	</div>
 	<div class="column">
 		<h2>Take Action</h2>
