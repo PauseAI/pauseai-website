@@ -1,13 +1,13 @@
 ---
-title: 5 Levels of AI safety regulation
+title: 4 Levels of AI safety regulation
 description: A framework for thinking about how to mitigate the risks from powerful AI systems
-image: /5levels.png
+image: /4levels.png
 ---
 
 As AI capabilities increase, the [risks](/risks) these systems pose to humanity increase as well.
 Many scientists have already warned about the [risk of human extinction](/xrisk).
 
-In this article, we'll look at our 5-levels framework for thinking about how AI safety can be regulated.
+In this article, we'll look at our 4-levels framework for thinking about how AI safety can be regulated.
 
 ## AI pipeline as a framework for safety governance
 
@@ -21,17 +21,11 @@ This pipeline consists of:
 
 The later in the pipeline we regulate, the higher the risks we face.
 If we want a high level of safety, we'll need to regulate earlier in the pipeline.
-That's why when we climb up the 5 levels of AI regulation, we walk back the AI creation pipeline.
+That's why when we climb up the 4 levels of AI regulation, we walk back the AI creation pipeline.
 
-![5 Levels of AI safety regulation](/5levels.png)
+![4 Levels of AI safety regulation](/4levels.png)
 
-## Level 1: No regulation
-
-This is the current situation in most countries.
-AI creators and users can do whatever they want.
-This offers no protection against any of the risks posed by AI.
-
-## Level 2: Regulate usage
+## Level 1: Regulate usage
 
 Examples:
 
@@ -43,7 +37,7 @@ At this level, the responsibility lies with the users of the models, not the cre
 We're depending on all the (potentially millions) of users to abide by the regulations.
 This only provides a very low level of protection against AI dangers.
 
-## Level 3: Regulate deployment
+## Level 2: Regulate deployment
 
 Examples:
 
@@ -56,7 +50,7 @@ This is a safer situation than level 2, because we're now depending on a much sm
 
 However, we're still allowing dangerous training runs to happen, so accidents at AI labs (including the leaks of dangerous AI models, or rogue AI being created) can still happen.
 
-## Level 4: Regulate training runs
+## Level 3: Regulate training runs
 
 Examples:
 
@@ -71,7 +65,7 @@ This will prevent accidents at AI labs that comply with the regulations.
 
 However, we're still allowing the distribution of hardware and algorithms that can be used for training dangerous models, so we're still relying on the creators of these models to act responsibly.
 
-## Level 5: Regulate hardware & algorithms
+## Level 4: Regulate hardware & algorithms
 
 Examples:
 
@@ -88,7 +82,7 @@ For example, legal liability for model creators can be classified as a Level 2 "
 
 ## Conclusions
 
-In this article, we've looked at our 5-levels framework for thinking about how AI safety can be regulated.
+In this article, we've looked at our 4-levels framework for thinking about how AI safety can be regulated.
 Using this model, we can more easily reason about the effectiveness of AI regulation at different steps in the AI creation pipeline.
 We can also see that the first three levels do not offer much protection against the (existential) risks from AI.
 Preventing dangerous training runs and regulating hardware and algorithms are far more reliable ways to ensure safety.
