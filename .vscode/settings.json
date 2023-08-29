@@ -1,8 +1,8 @@
 {
-  "grammarly.selectors": [
-    {
-      "language": "markdown",
-      "scheme": "file"
-    }
-  ]
+	"grammarly.selectors": [
+		{
+			"language": "markdown",
+			"scheme": "file"
+		}
+	]
 }

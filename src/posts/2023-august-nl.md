@@ -75,8 +75,8 @@ De zorgen over de risico's die kleven aan AI zijn mondiaal snel aan het groeien.
 
 PauseAI wil dat de Nederlandse regering:
 
-- AI safety-experts uitnodigt om het parlement te informeren over deze risico's 
-- Een parlementair debat inroostert over de existentiële risico's van geavanceerde kunstmatige intelligentie  
+- AI safety-experts uitnodigt om het parlement te informeren over deze risico's
+- Een parlementair debat inroostert over de existentiële risico's van geavanceerde kunstmatige intelligentie
 - Voorbereidingen op de voorgestelde AI-top in het Verenigd Koninkrijk van later dit jaar voorrang geeft en een leidende rol neemt inzake effectief beleid. De actievoerders hebben concrete [voorstellen](https://pauseai.info/summit) en [beleidsideeën](https://pauseai.info/proposal) voor de te houden AI-top.
 - Internationaal samenwerkt om een toereikende set maatregelen op mondiale schaal toegepast te krijgen, waaronder een zogenoemde AI-pauze.
 

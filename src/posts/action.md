@@ -48,7 +48,7 @@ You are now one of them.
 
 ### If you know (international) law
 
-- **Help draft policy**. [You can win $4000 if you write a good draft!](https://www.campaignforaisafety.org/law-competition/). ([some](https://futureoflife.org/wp-content/uploads/2023/04/FLI_Policymaking_In_The_Pause.pdf)  [frameworks](https://www.openphilanthropy.org/research/12-tentative-ideas-for-us-ai-policy/))
+- **Help draft policy**. [You can win $4000 if you write a good draft!](https://www.campaignforaisafety.org/law-competition/). ([some](https://futureoflife.org/wp-content/uploads/2023/04/FLI_Policymaking_In_The_Pause.pdf) [frameworks](https://www.openphilanthropy.org/research/12-tentative-ideas-for-us-ai-policy/))
 - **Make submissions to government requests for comment** on AI policy ([example](https://ntia.gov/issues/artificial-intelligence/request-for-comments)).
 
 ### If you have money to spare

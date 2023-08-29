@@ -1,6 +1,7 @@
 ---
 title: PauseAI Protesters Code of Conduct
 ---
+
 As a participant in a PauseAI protest, I commit to adhering to the following Code of Conduct to ensure a safe, respectful, and inclusive environment for all:
 
 1. **Nonviolence**: I pledge to maintain a peaceful and nonviolent demeanor during the protest. I will not engage in any form of physical or verbal aggression, nor will I instigate or provoke others to do so. Violence is the quickest way to undermine our message and jeopardize our cause.

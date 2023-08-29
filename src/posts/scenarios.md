@@ -1,4 +1,3 @@
-
 ---
 title: Concrete scenarios for catastrophic AI risks
 description: How superintelligent AI could cause human extinction.
@@ -68,7 +67,6 @@ In other words, it does exactly what the human wants it to do.
 Anthropic is the first company to achieve superintelligence.
 Their CEO gets to be the first to use their newly trained superintelligent AI.
 He links his brain to the AI, and the AI starts to work.
-
 
 ## Rogue AI
 

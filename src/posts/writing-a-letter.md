@@ -2,6 +2,7 @@
 title: How to write a letter or email to someone in power
 description: A guide on how to write a lobby letter
 ---
+
 Ultimately, we lobby to influence the decisions of people in power.
 Sending an e-mail or writing a letter can be one of the most direct and effective ways of getting the attention of someone in power.
 However, it's important to do it right.

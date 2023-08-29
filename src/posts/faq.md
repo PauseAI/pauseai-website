@@ -70,11 +70,11 @@ He was not pushing the x-risk narrative here, he was actively avoiding it.
 
 In May 2023, everything changed:
 
-* On May 1st, 'Godfather of AI' Geoffrey Hinton [quits his job at Google](https://fortune.com/2023/05/01/godfather-ai-geoffrey-hinton-quit-google-regrets-lifes-work-bad-actors/) to warn about x-risk.
-* On May 5th, the [first PauseAI protest is announced](https://twitter.com/Radlib4/status/1654262421794717696), right at OpenAI's doorstep.
-* On May 22nd, OpenAI published [a blog post about the governance of superintelligence](https://openai.com/blog/governance-of-superintelligence), and mentioned x-risk for the first time.
-* On May 24th, ex-Google CEO Eric Schmit acknowledges x-risk.
-* On May 30th, the [Safe.ai statement (acknowledging x-risk)](https://www.safe.ai/statement-on-ai-risk) was published. This time, including people from OpenAI, Google and Microsoft.
+- On May 1st, 'Godfather of AI' Geoffrey Hinton [quits his job at Google](https://fortune.com/2023/05/01/godfather-ai-geoffrey-hinton-quit-google-regrets-lifes-work-bad-actors/) to warn about x-risk.
+- On May 5th, the [first PauseAI protest is announced](https://twitter.com/Radlib4/status/1654262421794717696), right at OpenAI's doorstep.
+- On May 22nd, OpenAI published [a blog post about the governance of superintelligence](https://openai.com/blog/governance-of-superintelligence), and mentioned x-risk for the first time.
+- On May 24th, ex-Google CEO Eric Schmit acknowledges x-risk.
+- On May 30th, the [Safe.ai statement (acknowledging x-risk)](https://www.safe.ai/statement-on-ai-risk) was published. This time, including people from OpenAI, Google and Microsoft.
 
 Signing the statement.
 That's all the AI companies (or some of their directors / employees) have done to push the x-risk narrative.

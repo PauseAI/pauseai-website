@@ -121,7 +121,7 @@ We might end up in a utopic world where all diseases are cured and everybody is 
 You might wonder: how can a statistical model that predicts the next word in a chat interface pose any danger?
 LLMs, like GPT, are trained to predict or mimic virtually any line of thought.
 It could mimic a helpful mentor, but also someone with bad intentions, a ruthless dictator or a psychopath.
-With the usage of tools like [AutoGPT](https://github.com/Significant-Gravitas/Auto-GPT), a chatbot could be turned into an *autonomous agent*: an AI that pursues any goal it is given, without any human intervention.
+With the usage of tools like [AutoGPT](https://github.com/Significant-Gravitas/Auto-GPT), a chatbot could be turned into an _autonomous agent_: an AI that pursues any goal it is given, without any human intervention.
 
 Take [ChaosGPT](https://www.youtube.com/watch?v=g7YJIpkk7KM), for example.
 This is an AI, using the aforementioned AutoGPT + GPT-4, that is instructed to "Destroy humanity".

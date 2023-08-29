@@ -8,8 +8,8 @@ We pay for our groceries, plan our days, contact our loved ones and even drive o
 And virtually all of these computers are connected to each other.
 This makes all of us vulnerable to cyberattacks.
 
-Highly potent cyber weapons, malware and botnets (such as [Stuxnet](https://www.youtube.com/watch?v=nd1x0csO3hU), [Mirai](https://en.wikipedia.org/wiki/Mirai_(malware)) and [EMOTET](https://en.wikipedia.org/wiki/Emotet)) have always been costly to create.
-The [Pegasus cybersecurity weapon](https://en.wikipedia.org/wiki/Pegasus_(spyware)), for example, cost hundreds of millions of dollars to develop.
+Highly potent cyber weapons, malware and botnets (such as [Stuxnet](https://www.youtube.com/watch?v=nd1x0csO3hU), [Mirai](<https://en.wikipedia.org/wiki/Mirai_(malware)>) and [EMOTET](https://en.wikipedia.org/wiki/Emotet)) have always been costly to create.
+The [Pegasus cybersecurity weapon](<https://en.wikipedia.org/wiki/Pegasus_(spyware)>), for example, cost hundreds of millions of dollars to develop.
 Finding so-called zero-day exploits (vulnerabilities that have not yet been discovered) is a very hard task.
 It requires a lot of skill and a lot of time to find these exploits - only highly specialized hackers can do it.
 However, when AI becomes more advanced, this will no longer be the case.

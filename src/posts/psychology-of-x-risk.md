@@ -101,7 +101,7 @@ These people have always been wrong.
 ### We don't like to think about our death
 
 The human mind does not like receiving bad news, and it has various coping mechanisms to deal with it.
-The most important ones when talking about x-risk are [denial](https://en.wikipedia.org/wiki/Cognitive_dissonance) and [compartmentalization](https://en.wikipedia.org/wiki/Compartmentalization_(psychology)).
+The most important ones when talking about x-risk are [denial](https://en.wikipedia.org/wiki/Cognitive_dissonance) and [compartmentalization](<https://en.wikipedia.org/wiki/Compartmentalization_(psychology)>).
 When it comes to our own death, specifically, we are very prone to denial.
 Books have been written about the [Denial of Death](https://en.wikipedia.org/wiki/The_Denial_of_Death).
 
