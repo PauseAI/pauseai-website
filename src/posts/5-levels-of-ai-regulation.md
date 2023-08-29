@@ -76,9 +76,10 @@ This gives us the best protection against the risks from AI.
 
 ## Conclusions
 
-The first three levels do not offer much protection against the (existentiaL) risks from AI.
+In this article, we've looked at our 5-levels framework for thinking about how AI safety can be regulated.
+Using this model, we can more easily reason about the effectiveness of AI regulation at different steps in the AI creation pipeline.
+We can also see that the first three levels do not offer much protection against the (existential) risks from AI.
 Preventing dangerous training runs and regulating hardware and algorithms are far more reliable ways to ensure safety.
-The earlier in the pipeline we regulate, the better.
 
 ## Limitations
 
