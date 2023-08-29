@@ -1,13 +1,13 @@
 ---
 title: 5 Levels of AI safety regulation
-description: A framework for thinking about how dangerous AI can be regulated
+description: A framework for thinking about how to mitigate the risks from powerful AI systems
 image: /5levels.png
 ---
 
 As AI capabilities increase, the [risks](/risks) these systems pose to humanity increase as well.
 Many scientists have already warned about the [risk of human extinction](/xrisk).
 
-In this article, we'll look at our 5-levels framework for thinking about how dangerous AI can be regulated.
+In this article, we'll look at our 5-levels framework for thinking about how AI safety can be regulated.
 
 ## AI pipeline as a framework for safety governance
 
@@ -35,8 +35,8 @@ This offers no protection against any of the risks posed by AI.
 
 Examples:
 
-- **Banning autonomous agent runtimes** (like AutoGPT)
-- **Banning dangerous instructions**
+- **Ban autonomous agent runtimes** (like AutoGPT)
+- **Ban dangerous instructions**
 
 These measures are aimed to prevent users from doing dangerous or harmful actions with AI models.
 At this level, the responsibility lies with the users of the models, not the creators.
@@ -45,8 +45,10 @@ This only provides a very low level of protection against AI dangers.
 
 ## Level 3: Regulate deployment
 
+Examples:
+
 - **Red-teaming requirements**. This means that before an AI model is deployed, it is tested by a red team to see if it can be hacked (jailbreaked) or abused.
-- **Disallowing deployment and open-sourcing** of models with [dangerous capabilities](/dangerous-capabilities).
+- **Disallow deployment and open-sourcing** of models with [dangerous capabilities](/dangerous-capabilities).
 
 When regulating deployments, we are preventing dangerous models from being available.
 This means the responsibility lies with the creators of the models.
@@ -56,10 +58,13 @@ However, we're still allowing dangerous training runs to happen, so accidents at
 
 ## Level 4: Regulate training runs
 
-- **Requiring proof of safety** before granting permission to train a certain model. This may include formal proof of alignment. [This post details some of the current safety problems](https://www.lesswrong.com/posts/mnoc3cKY3gXMrTybs/a-list-of-core-ai-safety-problems-and-how-i-hope-to-solve).
+Examples:
+
+- **Require proof of safety** before granting permission to train a certain model. This may include formal proof of alignment. [This post details some of the current safety problems](https://www.lesswrong.com/posts/mnoc3cKY3gXMrTybs/a-list-of-core-ai-safety-problems-and-how-i-hope-to-solve).
 - Setting a **scale ceiling for training new models** (e.g. a maximum count of flops used)
-- **Requiring a license** to train a certain model.
-- **Ban training on certain types of data**. Some types of training data can lead to [dangerous capabilities](/dangerous-capabilities), such as hacking or the creation of bio weapons. We could ban training on data that contains this type of knowledge.
+- **Require a license** to train AI models (above a certain size / with certain capabilities).
+- **Ban training on dangerous types of data**. Some types of training data can lead to [dangerous capabilities](/dangerous-capabilities), such as hacking or the creation of bio weapons. We could ban training on data that contains this type of knowledge.
+- **Ban training on copyrighted data**. This does not directly target unsafe data, but it does limit the amount of data that can be used, which means it buys us time to figure out to build safe AI models.
 
 When we regulate training runs, we prevent dangerous models from being created in the first place.
 This will prevent accidents at AI labs that comply with the regulations.
@@ -68,8 +73,10 @@ However, we're still allowing the distribution of hardware and algorithms that c
 
 ## Level 5: Regulate hardware & algorithms
 
-- **Limiting distribution of training hardware**. Specialized hardware for training AI models is rapidly becoming the most important product of chip manufacturers. The supply chain for this hardware is very centralized, and the hardware is very expensive. This means that it's [relatively easy to regulate](https://arxiv.org/abs/2303.11341) the distribution of this hardware.
-- **Disallowing the publication of novel training architectures**. New AI training architectures can lead to dramatic increases in capabilities. The Transformer model, for example, enabled virtually all recent progress in AI. We could limit the publication of such architectures to prevent sudden capability jumps.
+Examples:
+
+- **Limit distribution of training hardware**. Specialized hardware for training AI models is rapidly becoming the most important product of chip manufacturers. The supply chain for this hardware is very centralized, and the hardware is very expensive. This means that it's [relatively easy to regulate](https://arxiv.org/abs/2303.11341) the distribution of this hardware.
+- **Disallow the publication of novel training architectures**. New AI training architectures can lead to dramatic increases in capabilities. The Transformer model, for example, enabled virtually all recent progress in AI. We could limit the publication of such architectures to prevent sudden capability jumps.
 
 When we also regulate hardware and algorithms, we're making it not just illegal, but also very difficult to train dangerous models.
 This gives us the best protection against the risks from AI.
