@@ -5,7 +5,7 @@ image: /5levels.png
 ---
 
 As AI capabilities increase, the [risks](/risks) these systems pose to humanity increase as well.
-Many scientists have already warned about the [risk of human extinction](/x-risk).
+Many scientists have already warned about the [risk of human extinction](/xrisk).
 
 In this article, we'll look at our 5-levels framework for thinking about how dangerous AI can be regulated.
 
