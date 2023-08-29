@@ -18,6 +18,7 @@
 		<a href="/sota">State of AI</a>
 		<a href="/psychology-of-x-risk">Psychology of x-risk</a>
 		<a href="/urgency">Urgency</a>
+		<a href="/5-levels-of-ai-regulation">5 Levels of regulation</a>
 	</div>
 	<div class="column">
 		<h2>Risks</h2>

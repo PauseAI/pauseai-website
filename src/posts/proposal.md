@@ -51,4 +51,4 @@ We need to be prepared for this.
 We should consider the following policies:
 
 - **Limit publication of training algorithms**. Sometimes a new algorithm is published that makes training much more efficient. The Transformer architecture, for example, enabled virtually all recent progress in AI. These types of capability jumps can happen at any time, and we should consider limiting the publication of such algorithms to minimize the risk of a sudden capability jump.
-- **Limit access to computational resources**. If training a superintelligence becomes possible on consumer hardware, we should consider limiting access to such hardware.
+- **Further limit access to computational resources**. If training a superintelligence becomes possible on consumer hardware, we should consider limiting access to such hardware.

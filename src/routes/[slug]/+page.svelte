@@ -6,9 +6,10 @@
 	let title = data.meta.title || data.slug
 	let parent = data.slug.split('/').slice(0, -1).join('/')
 	let date = data.meta.date
+	let image = data.meta.image
 </script>
 
-<PostMeta {title} description={data.meta.description} {date} />
+<PostMeta {title} description={data.meta.description} {date} {image} />
 
 <article>
 	{#if parent}

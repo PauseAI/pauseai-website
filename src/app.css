@@ -154,6 +154,10 @@ h1 {
 	font-style: italic;
 }
 
+.prose img {
+	max-inline-size: 100%;
+}
+
 form {
 	display: flex;
 	flex-direction: column;
