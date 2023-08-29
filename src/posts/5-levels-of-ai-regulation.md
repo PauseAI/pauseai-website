@@ -61,7 +61,7 @@ However, we're still allowing dangerous training runs to happen, so accidents at
 Examples:
 
 - **Require proof of safety** before granting permission to train a certain model. This may include formal proof of alignment. [This post details some of the current safety problems](https://www.lesswrong.com/posts/mnoc3cKY3gXMrTybs/a-list-of-core-ai-safety-problems-and-how-i-hope-to-solve).
-- Setting a **scale ceiling for training new models** (e.g. a maximum count of flops used)
+- Setting a **scale ceiling for training new models** (e.g. a maximum count of flops used). This could also include the process of fine-tuning.
 - **Require a license** to train AI models (above a certain size / with certain capabilities).
 - **Ban training on dangerous types of data**. Some types of training data can lead to [dangerous capabilities](/dangerous-capabilities), such as hacking or the creation of bio weapons. We could ban training on data that contains this type of knowledge.
 - **Ban training on copyrighted data**. This does not directly target unsafe data, but it does limit the amount of data that can be used, which means it buys us time to figure out to build safe AI models.

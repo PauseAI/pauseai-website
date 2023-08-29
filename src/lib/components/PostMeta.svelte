@@ -2,7 +2,8 @@
 	export let title: string
 	export let description: string
 	export let date: string
-	export let image: string
+	/** URL or relative path to cover / preview image */
+	export let image: string = '/cover.png'
 </script>
 
 <svelte:head>
