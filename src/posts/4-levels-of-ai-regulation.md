@@ -78,11 +78,11 @@ This gives us the best protection against the risks from AI.
 ## Limitations
 
 Note that this framework is not perfect, and not all possible types of AI regulation neatly fit in one of the mentioned levels.
-For example, legal liability for model creators can be classified as a Level 2 "usage" type of regulation, but since it does hold creators responsible, it could also be classified as a Level 3 "deployment" type of regulation.
+For example, legal liability for model creators can be classified as a Level 1 "usage" type of regulation as it is enforced post-deployment, but it could also be classified as a Level 2 or 3 type of regulation as it can help creators reconsider if a certain model should be deployed or trained in the first place.
 
 ## Conclusions
 
 In this article, we've looked at our 4-levels framework for thinking about how AI safety can be regulated.
 Using this model, we can more easily reason about the effectiveness of AI regulation at different steps in the AI creation pipeline.
-We can also see that the first three levels do not offer much protection against the (existential) risks from AI.
+We can also see that the first two levels do not offer much protection against the (existential) risks from AI.
 Preventing dangerous training runs and regulating hardware and algorithms are far more reliable ways to ensure safety.
