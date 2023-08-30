@@ -5,9 +5,7 @@ description: When and where we will be protesting.
 
 ## Coming up
 
-We're working on an international protest later this year, before the [Summit](/summit).
-
-Want to receive an invite when a protest is organized near you? [Join PauseAI](/join)!
+- [21st of October, International protest](/2023-oct)
 
 ## Past Protests
 
