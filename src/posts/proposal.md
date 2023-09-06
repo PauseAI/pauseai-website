@@ -27,11 +27,12 @@ This treaty needs to be signed by all UN member states.
   - Periodic meetings to discuss the progress of AI safety research.
 - **Only allow training of general AI systems more powerful than GPT-4 if their safety can be guaranteed**.
   - Note that this does not target _narrow_ AI systems, like image recognition used for diagnosing cancer.
-  - Safety can be guaranteed if there is strong scientific consensus that the _alignment problem has been solved_. Right now, this is not the case, so right now we should not allow training of such systems.
+  - Require [oversight during training runs](https://www.alignmentforum.org/posts/Zfk6faYvcf5Ht7xDx/compute-thresholds-proposed-rules-to-mitigate-risk-of-a-lab).
+  - Safety can be guaranteed if there is strong scientific consensus and [proof](https://arxiv.org/abs/2309.01933) that the _alignment problem has been solved_. Right now, this is not the case, so right now we should not allow training of such systems.
   - It may be possible that the AI alignment problem is _never solved_ - it may be unsolvable. In that case, we should never allow training of such systems.
   - Even if we can build controllable, safe AI, only build and deploy such technology with strong _democratic control_. A superintelligence is too powerful to be controlled by a single company or country.
   - [**Track the sales of GPUs**](https://arxiv.org/abs/2303.11341) and other hardware that can be used for AI training.
-- **Only allow deployment after no [dangerous capabilities](/dangerous-capabilities) are present**.
+- **Only allow deployment of models after no [dangerous capabilities](/dangerous-capabilities) are present**.
   - We will need standards and independent red-teaming to determine whether a model has dangerous capabilities.
   - The list of dangerous capabilities may change over time as AI capabilities grow.
 

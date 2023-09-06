@@ -52,7 +52,7 @@ There are various reasons why most will instantly dismiss the idea.
 
 ### The end of the world has never happened
 
-Seeing is believing.
+Seeing is believing (see: [_Availability Heuristic_](https://en.wikipedia.org/wiki/Availability_heuristic)).
 That's a problem for extinction risk because we will never be able to see it before it is too late.
 
 On the other hand, we have tons of evidence for the contrary.
@@ -111,6 +111,8 @@ However, they can also prevent us from adequately responding to a threat.
 When you notice someone using these coping mechanisms, try to be empathetic.
 They are not doing it on purpose, and they are not stupid.
 It is a natural reaction to bad news, and we all do it to some extent.
+
+<!-- We avert thinking about negative, hopeless situations. No quick option for most people to engage in. No fear-release response. Sustained hopelessness. -->
 
 ### Admitting your work is dangerous is hard
 
