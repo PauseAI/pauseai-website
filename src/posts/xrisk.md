@@ -5,11 +5,9 @@ description: Why AI is a risk for the future of our existence, and why we need t
 
 ## Experts are sounding the alarm
 
-AI researchers on average [believe](https://aiimpacts.org/2022-expert-survey-on-progress-in-ai/) there's a 14% chance that once we build a superintelligent AI, it will lead to "very bad outcomes (e.g. human extinction)".
+AI researchers on average [believe](https://aiimpacts.org/2022-expert-survey-on-progress-in-ai/) there's a 5% chance that once we build a superintelligent AI, it will lead to "very bad outcomes (e.g. human extinction)".
 
-Would you choose to be a passenger on a test flight of a new plane when airplane engineers think there’s a 14% chance that it will crash?
-
-When you ask AI safety researchers (the people who actually research the safety risks of AI), the average estimate for bad outcomes [grows to 30%](https://forum.effectivealtruism.org/posts/8CM9vZ2nnQsWJNsHx/existential-risk-from-ai-survey-results).
+Would you choose to be a passenger on a test flight of a new plane when airplane engineers think there’s a 5% chance that it will crash?
 
 [A letter calling for pausing AI development](https://futureoflife.org/open-letter/pause-giant-ai-experiments/) launched in April 2023, and has been signed over 33,000 times, including by many AI researchers and tech leaders.
 
@@ -31,7 +29,7 @@ Even the leaders and investors of the AI companies themselves are warning us:
 - **Bill Gates** (co-founder of Microsoft, which owns 50% of OpenAI) warned that ["AI could decide that humans are a threat"](https://www.denisonforum.org/daily-article/bill-gates-ai-humans-threat/).
 - **Jaan Tallinn** (lead investor of Anthropic): ["I've not met anyone in AI labs who says the risk [from training a next-gen model] is less than 1% of blowing up the planet. It's important that people know lives are being risked."](https://twitter.com/liron/status/1656929936639430657)
 
-Virtually all AI labs and hundreds of AI scientists have [signed the following statement](https://www.safe.ai/statement-on-ai-risk) in May 2023:
+The leaders of the 3 top AI labs and hundreds of AI scientists have [signed the following statement](https://www.safe.ai/statement-on-ai-risk) in May 2023:
 
 > "Mitigating the risk of extinction from AI should be a global priority alongside other societal-scale risks such as pandemics and nuclear war."
 
@@ -55,12 +53,11 @@ We don't even know what goals the machines will pursue after we train them.
 The problem of getting an AI to want what we want is called the _alignment problem_.
 This is not a hypothetical problem - there are [many examples](https://www.youtube.com/watch?v=nKJlF-olKmg) of AI systems learning to want the wrong thing.
 
-The examples from the video linked above can be funny or cute, but if a superintelligent system is built, and it will have a goal that is even _a little_ different from what we want it to have,
-it could have disastrous consequences.
+The examples from the video linked above can be funny or cute, but if a superintelligent system is built, and it has have a goal that is even _a little_ different from what we want it to have, it could have disastrous consequences.
 
 ## What a superintelligent AI can do
 
-You might think that an AI is locked inside a computer, and therefore can't do anything.
+You might think that an superintelligent AI would be locked inside a computer, and therefore can't affect the real world.
 However, we tend to give AI systems access to the internet, which means that they can do a lot of things:
 
 - [Hack into other computers](/cybersecurity-risks), including all smartphones, laptops, server parks, etc. It could use the sensors of these devices as its eyes and ears, having digital senses everywhere.
@@ -69,17 +66,15 @@ However, we tend to give AI systems access to the internet, which means that the
 - Design a novel bioweapon, e.g. by combining viral strands or by using [protein folding](https://alphafold.ebi.ac.uk) and order it to be printed in a lab.
 - Trigger a nuclear war by convincing humans that another country is (about to) launch a nuclear attack.
 
-## From an evolutionary perspective
+## Silicon vs Carbon
 
-DNA and an AI might feel different, but both are pieces of information that could be copied and replicated.
-When an AI for any reason does care about its existence in the real world, it will be competing for existence just like all living things.
 We should consider the advantages that a smart piece of software may have over us:
 
-- **Speed**: Computers operate at extremely high speed, compared to brains. Human neurons operate at a clock speed of about 100hz, while computers can operate at millions of times that speed.
+- **Speed**: Computers operate at extremely high speed compared to brains. Human neurons operate at a clock speed of about 100hz, whereas silicon transistors can switch a billion times a second.
 - **Location**: An AI is not constrained to one body - it can be in many locations at once. We have built the infrastructure for it: the internet.
 - **Physical limits**: We cannot add more brains into our skull and become smarter. An AI could dramatically improve its capabilities by adding hardware, like more memory, more processing power, more sensors (cameras, microphones). An AI could also extend its 'body' by controlling connected devices.
 - **Materials**: Humans are made of organic materials. Our bodies no longer work if they are too warm or cold, they need food, they need oxygen. Machines can be built from more robust materials, like metals, and can operate in a much wider range of environments.
-- **Collaboration**: Humans can collaborate, but it is difficult and time-consuming, so we often fail to coordinate well. An AI could collaborate complex information with replicas of itself at high speed.
+- **Collaboration**: Humans can collaborate, but it is difficult and time-consuming, so we often fail to coordinate well. An AI could collaborate complex information with replicas of itself at high speed because it can communicate at the speed that data can be sent over the internet.
 
 A superintelligent AI will have many advantages to outcompete us.
 But why would it _want to_?
@@ -90,14 +85,12 @@ An AI could have any goal.
 Maybe it wants to calculate pi, maybe it wants to cure cancer, maybe it wants to self-improve.
 This depends on how it is trained.
 But even though we cannot tell what a superintelligence will want to achieve, we can make predictions about its sub-goals.
-We can [mathematically prove](https://arxiv.org/pdf/1912.01683.pdf) what a rational machine will pursue in _virtually any goal_:
 
-- **Maximizing its resources**. Think about more energy, more computers to run on or access to more materials. If a rational AI can use all energy of the planet to get a little bit closer to its goal, it will do that.
-- **Ensuring its own survival**. This means the AI will not want to be turned off, as it could no longer achieve its goals. AI might conclude that humans are a threat to its existence, as humans could turn it off.
-- **Preserving its goals**. This means the AI will not want humans to modify its code, because that could change its goals.
+- **Maximizing its resources**. Harnessing more computers, will help an AI achieve its goals. At first it can achieve this by hacking other computers. Later it may decide that it is more efficient to build its own.
+- **Ensuring its own survival**. The AI will not want to be turned off, as it could no longer achieve its goals. AI might conclude that humans are a threat to its existence, as humans could turn it off.
+- **Preserving its goals**. The AI will not want humans to modify its code, because that could change its goals, thus preventing it from achieving its current goal.
 
-This is called [instrumental convergence](https://www.youtube.com/watch?v=ZeecOKBus3Q), and it is at the core of what AI safety researchers are worried about.
-A superintelligent thing that wants to take over all materials it can get, and wants to ensure its own existence is a very dangerous combination.
+The tendancy to persue these subgoals given any high-level goal is called [instrumental convergence](https://www.youtube.com/watch?v=ZeecOKBus3Q), and it is a key concern for AI safety researchers.
 
 ## Why can't we just turn it off if it's dangerous?
 
@@ -109,7 +102,7 @@ A superintelligent AI would be a master of deception.
 
 ## Even a perfectly aligned superintelligence is dangerous in the wrong hands
 
-So we haven't solved the alignment problem, but let's play with the thought that we did.
+So we haven't solved the alignment problem, but let's imagine what might happen if we did.
 Imagine that a superintelligent AI is built, and it does exactly what the operator wants it to do.
 In that case, the operator would have unimaginable power.
 A superintelligence could be used to create new weapons, hack all computers and manipulate humanity.
@@ -128,33 +121,23 @@ This is an AI, using the aforementioned AutoGPT + GPT-4, that is instructed to "
 When it was turned on, it autonomously searched the internet for the most destructive weapon and found the [Tsar Bomba](https://en.wikipedia.org/wiki/Tsar_Bomba), a 50 megaton nuclear bomb.
 It then posted a tweet about it.
 Seeing an AI reason about how it will end humanity is both a little funny and terrifying.
-ChaotGPT luckily didn't get very far in its quest for dominance.
-The only reason it didn't get very far: it wasn't that smart.
-But what would happen if it was extremely intelligent?
-What could have happened if it was smart enough to [hack into nuclear silos](https://t.co/UNPERx9NdL)?
+Luckily ChaosGPT didn't get very far in its quest for dominance.
+The reason it didn't get very far: it wasn't that smart.
+As language models improve the threat from AIs such as ChaosGPT will increase.
 
-The dangerous capacity is intelligence.
-There is no need for consciousness, a body, or any underlying motivation.
-It does not matter if it is just a chatbot - it can still be an existential threat with the wrong prompt, a tool like AutoGPT and sufficient intelligence.
-If an AI is smart enough to take over, at some point in time it will try to do this, simply because people will try all sorts of things.
+It is doesn't matter if it conscious or not, a clever enough chatbot can be dangerous.
 
 ## We may not have much time left
 
 In 2020, [the average prediction](https://www.metaculus.com/questions/3479/date-weakly-general-ai-is-publicly-known/) for an AI to pass SAT exams was 2055. It took us less than 3 years.
 
 It's hard to predict how long it will take to build a superintelligent AI, but we know that there are more people than ever working on it and that the field is moving at a frantic pace.
-It may take many years or just a few months.
-We don't know.
-We should err on the side of caution, and act now.
+It may take many years or just a few months, but we should err on the side of caution, and act now.
 
 [Read more about urgency](/urgency).
 
 ## AI companies are locked in a race to the bottom
 
-Building artificial intelligence used to be mostly a research/university thing.
-In just a couple of months, it became a multi-billion dollar industry.
-And the companies involved are rushing to build the most powerful AI they can.
-They are pressured by investors to focus on capabilities, not safety.
-We need to give these AI companies a reason to focus on safety.
+OpenAI, DeepMind and Anthropic want to develop AI safely, but they are forced by various incentives to compete with each other and keep moving faster.
 
-[An international treaty to pause development could do that.](/proposal)
+[This is why we need an international treaty to PauseAI.](/proposal)
