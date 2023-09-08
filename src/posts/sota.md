@@ -30,5 +30,5 @@ _Last update: 2023-08_
 
 ## Worse than most humans
 
-- **Saying "I don't know"**. Virtually all Large Language Models have this problem of 'hallucination', making up information instead of saying it does not know. This
+- **Saying "I don't know"**. Virtually all Large Language Models have this problem of 'hallucination', making up information instead of saying it does not know. This might seem like a relatively minor shortcoming, but it's actually a very important one. It makes LLMs unreliable and strongly limits their applicability.
 - **Movement**. The [Atlas robot can walk, throw objects and do somersaults](https://www.youtube.com/watch?v=-e1_QhJ1EhQ), but it is still limited in its movements. Google's [RT-2](https://www.deepmind.com/blog/rt-2-new-model-translates-vision-and-language-into-action) can turn objectives into actions in the real world, like "move the cup to the wine bottle".

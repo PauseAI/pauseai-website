@@ -17,7 +17,7 @@
 	</Block>
 	<Block linkText="Why and how AI can kill us" href="/xrisk">
 		<span slot="title">We risk <Mark>human extinction</Mark></span>
-		Virtually all AI labs and experts agree: AI could end humanity.
+		Many AI labs and experts agree: AI could end humanity.
 	</Block>
 	<Block linkText="Read the proposal" href="/proposal">
 		<span slot="title">We need a <Mark>pause</Mark></span>

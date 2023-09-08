@@ -11,7 +11,7 @@ Would you choose to be a passenger on a test flight of a new plane when airplane
 
 When you ask AI safety researchers (the people who actually research the safety risks of AI), the average estimate for bad outcomes [grows to 30%](https://forum.effectivealtruism.org/posts/8CM9vZ2nnQsWJNsHx/existential-risk-from-ai-survey-results).
 
-[A letter calling for pausing AI development](https://futureoflife.org/open-letter/pause-giant-ai-experiments/) launched in April 2023, and has been signed over 27,000 times, mostly by AI researchers and tech leaders.
+[A letter calling for pausing AI development](https://futureoflife.org/open-letter/pause-giant-ai-experiments/) launched in April 2023, and has been signed over 33,000 times, including by many AI researchers and tech leaders.
 
 The list includes people like:
 
