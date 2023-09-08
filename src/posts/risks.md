@@ -50,7 +50,7 @@ Companies are already selling AI-powered weapons to governments.
 Lanius builds [flying suicide drones](https://www.youtube.com/watch?v%253DG7yIzY1BxuI%2526t%253D1s) that autonomously identify foes.
 Palantir's [AIP system](https://elbitsystems.com/product/lanius/) uses large language models to analyze battlefield data and come up with optimal strategies.
 
-Nations and weapon companies have realized that AI will have a huge impact on besting your enemies.
+Nations and weapon companies have realized that AI will have a huge impact on besting their enemies.
 We've entered a new arms race.
 This dynamic rewards speeding up and cutting corners.
 
@@ -70,7 +70,7 @@ AI can make knowledge more accessible, which also includes knowledge about how t
 This type of knowledge has never been so accessible, and we do not have the safeguards in place to deal with the potential consequences.
 
 Additionally, some AI models can be used to design completely new hazardous pathogens.
-A model called MegaSyn designed [60.000 new chemical weapons / toxic molecules in one hour](https://www.theverge.com/2022/3/17/22983197/ai-new-possible-chemical-weapons-generative-models-vx).
+A model called MegaSyn designed [40,000 new chemical weapons / toxic molecules in one hour](https://www.theverge.com/2022/3/17/22983197/ai-new-possible-chemical-weapons-generative-models-vx).
 The revolutionary AlphaFold model can predict the structure of proteins, which is also a [dual-use technology](https://unicri.it/sites/default/files/2021-12/21_dual_use.pdf).
 Predicting protein structures can be used to "discover disease-causing mutations using one individual’s genome sequence".
 Scientists are now even creating [fully autonomous chemical labs, where AI systems can synthesize new chemicals on their own](https://twitter.com/andrewwhite01/status/1670794000398184451).
@@ -87,7 +87,7 @@ They [can find vulnerabilities](https://betterprogramming.pub/i-used-gpt-3-to-fi
 As AI capabilities grow, so will the capabilities of the exploits they can create.
 
 Highly potent computer viruses have always been extremely hard to create, but AI could change that.
-Instead of having to hire a team of highly skilled security experts/hackers to find zero-day exploits, you could just use a far cheaper AI to do it for you.
+Instead of having to hire a team of skilled security experts/hackers to find zero-day exploits, you could just use a far cheaper AI to do it for you. Of course, AI could also help with cyberdefense and it is unclear on which side the advantage lies.
 
 [Read more about AI and cybersecurity risks](/cybersecurity-risks)
 
@@ -99,15 +99,15 @@ Very intelligent things are very powerful.
 If we build a machine that is far more intelligent than humans, we need to be sure that it wants the same thing as we want.
 However, this turns out to be very difficult.
 This is called the _alignment problem_.
-If we fail to solve it in time, we are likely to end up with an unstoppable machine making decisions for us that is not considering our well-being.
+If we fail to solve it in time, we may end up with superintelligent machines that do not care about our wellbeing.
 We'd be introducing a new species to the planet that could outsmart us and outcompete us.
 
 [Read more about x-risk](/xrisk)
 
 ## What can we do?
 
-For virtually every risk discussed above, they get worse as AI capabilities improve.
-This means that the safest thing to do now, is to slow down.
+For all the problems discussed above, the risk increases as AI capabilities improve.
+This means that the safest thing to do now is to slow down.
 We need to pause the development of more powerful AI systems until we have figured out how to deal with the risks.
 
 See [our proposal](/proposal) for more details.
