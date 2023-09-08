@@ -12,23 +12,13 @@ This needs to happen on an international level.
 
 The primary goal of PauseAI was to convince one government to organize such a summit.
 Just 5 weeks after the first PauseAI protest, the UK government has [announced](https://www.gov.uk/government/news/uk-to-host-first-global-summit-on-artificial-intelligence) that they will host an AI safety summit in on November 1-2 in London.
-This is amazing news, and we are very grateful to the UK government for taking this step.
+This is amazing news, and we are very grateful to the UK government for taking this step (we are not claiming we are solely responsible for this summit :).
 However, this does not mean that we're done.
 
 ## What is a summit?
 
-A summit is a meeting of national governments, hosted by one of them.
-A summit can take many days and will be attended by many people.
-Organizing it is a monumental task, and few people have the experience to do it as summits are not very common.
-
 The goal of the Summit itself is a _treaty_, which is a formal agreement between two or more states in reference to peace, alliance, commerce, or other international relations.
 In our case, the AI Safety Treaty should be an agreement between the participating states to pause AI development until the risks are better understood.
-
-## Organizing a summit
-
-One government will have to take the lead in organizing the summit.
-This government will be the host of the summit and will be responsible for the logistics.
-They need to find a suitable date and location, arrange the catering, draft the agenda, and invite the other governments.
 
 ## Examples of Summits and resulting treaties
 
