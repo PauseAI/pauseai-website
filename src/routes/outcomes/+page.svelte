@@ -14,7 +14,7 @@
 <PostMeta {title} {description} {date} />
 
 <div class="header">
-	<h1 bind:this={top}>AI outcomes</h1>
+	<h1 bind:this={top} on:click={() => (intro = true)}>AI outcomes</h1>
 	{#if !intro}
 		<div class="headerbuttons">
 			<Button subtle on:click={() => (intro = true)}>Restart</Button>

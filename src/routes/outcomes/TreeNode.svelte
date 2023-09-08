@@ -97,15 +97,17 @@
 							👍 Safety!
 						{/if}
 					</h2>
+					{#if showProbabilities}
+						<p>
+							<b>
+								Probability of this specific outcome path: <Propability
+									probability={parentProbability * selectedProbability}
+								/>.
+							</b>
+							This is calculated by multiplying all the probabilities of the values above.
+						</p>
+					{/if}
 					<p>{selectedNode.text}</p>
-					<p>
-						<b>
-							Probability of this specific outcome path: <Propability
-								probability={parentProbability * selectedProbability}
-							/>.
-						</b>
-						This is calculated by multiplying all the probabilities of the values above.
-					</p>
 					<div class="buttons">
 						<Button
 							on:click={() => {
@@ -113,7 +115,7 @@
 								scrollToTop()
 							}}
 						>
-							{showProbabilities ? 'Hide' : 'Show and edit'} probabilities
+							{showProbabilities ? 'Hide' : 'Show'} probabilities
 						</Button>
 						<Button
 							subtle
