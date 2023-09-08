@@ -27,31 +27,8 @@ or use [WiFi to see humans through walls](https://www.marktechpost.com/2023/02/1
 There will most likely come a point where an AI is better at hacking than the best human hackers.
 This can go wrong in many ways.
 
-- **Nuclear**: Cyberweapons can be used to gain access to nuclear materials, meltdown a reactor, convince humans they need to fire nuclear missiles, or even fire them automatically.
-- **Infrastructure**: Cyberweapons can be used to gain access to or disable critical infrastructure, such as power plants, water treatment facilities, or the internet.
-- **Financial**: Cyberweapons can be used to steal money from banks, or to manipulate the stock market.
-
-But extremely capable AI systems could also be used to create a virus that infects virtually all computers:
-
-## A Super Virus
-
-Imagine a virus that can infect any computer, regardless of the operating system.
-This is theoretically possible, but it would be extremely hard to create.
-It would require analyzing the source code of all operating systems and finding (new) vulnerabilities in all of them.
-No single person could do this, but a sufficiently capable AI could.
-This type of Super Virus could spread to effectively all machines that have some sort of connection to other computers (through WiFi, Bluetooth, UTP, etc.).
-It could then have full control over these machines.
-It could steal data, spread itself, use the hardware for computations, or simply make the machine unusable.
-
-If creating these types of viruses becomes technically feasible, someone will likely do it eventually.
-It could happen by accident (e.g. by a [misaligned AI](/xrisk)), or it could happen on purpose (e.g. as a cyber weapon by a nation or terrorist).
-And when that happens, the effects could be devastating.
-
-If effectively all computers are disabled, society breaks down.
-People will not be able to buy food with their credit cards or phones.
-Truck drivers would not know which supermarkets to drive to.
-Farmers would not be able to sell their produce or restock supplies.
-The economy would grind to a halt, all supply chains would break down, and people will start to go hungry.
+- **Infrastructure**: Cyberweapons can be used to gain access to or disable critical infrastructure, such as [oil pipelines](https://en.wikipedia.org/wiki/Colonial_Pipeline_ransomware_attack).
+- **Financial**: Cyberweapons can be used to [steal money from banks](https://en.wikipedia.org/wiki/2015%E2%80%932016_SWIFT_banking_hack), or to [manipulate the stock market](https://en.wikipedia.org/wiki/2010_flash_crash).
 
 ## Mitigating AI Cybersecurity Risks
 
