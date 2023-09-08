@@ -18,15 +18,12 @@ AI safety researchers (who are the experts on this topic) are divided on this qu
 Note that no (surveyed) AI safety researchers believe that there's a 0% chance.
 However, there might be selection bias here: people who work in the AI safety field are likely to do so because they believe preventing bad AI outcomes is important.
 
-If you ask AI researchers in general (not safety specialists), this number drops to a [mean value of around 14%](https://aiimpacts.org/2022-expert-survey-on-progress-in-ai/).
+If you ask AI researchers in general (not safety specialists), this number drops to a [mean value of around 14%](https://aiimpacts.org/2022-expert-survey-on-progress-in-ai/), with a median of 5%.
 A small minority, about 4% of them, believe that the alignment problem is not a real problem.
 Note that there might be a selection bias here in the opposite direction: people who work in AI are likely to do so because they believe AI will be beneficial.
 
 _Imagine you're invited to take a test flight on a new airplane_.
-The airplane safety experts on average think there's a 30% chance it would crash.
-The plane engineers think there's a 14% chance of crashing.
-About 4% of engineers are saying that there's no chance of crashing, it is uncrashable.
-
+The plane engineers think there's a 5% chance of crashing.
 Would you enter that plane? Because right now, we're all boarding the AI plane.
 
 ### How long do we have until superintelligent AI?
@@ -83,7 +80,7 @@ These companies have been very slow to acknowledge x-risk, considering that many
 So in our view, the AI companies are not pushing the x-risk narrative, they have been reactive to others pushing it, and have waited with their response until it was absolutely necessary.
 
 The business incentives point in the other direction: companies would rather not have people worry about the risks of their products.
-Virtually all companies downplay risks to attract customers and investments (remember the Oceangate submarine?), not exaggerate them.
+Virtually all companies downplay risks to attract customers and investments, rather than exaggerating them.
 How much strict regulation and negative attention are the companies inviting due to admitting these dangers?
 And would a company like OpenAI [dedicate 20% of its compute resources](https://openai.com/blog/introducing-superalignment) to AI safety if it wouldn't believe in the risks?
 
