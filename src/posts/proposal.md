@@ -17,7 +17,7 @@ This is why we need a **global Pause**.
 An international agreement is typically established through a summit, where leaders of countries meet to discuss the issue and make a decision.
 The UK has stepped up and is [hosting an AI safety summit](/summit) in the autumn of 2023.
 
-The primary goal of the summit is a **treaty**.
+The primary goal of the summit should be a **treaty**.
 This treaty should specify the policy measures that protect us from the [risks of AI](/risks).
 This treaty needs to be signed by all UN member states.
 
