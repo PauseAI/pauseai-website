@@ -23,7 +23,7 @@ A small minority, about 4% of them, believe that the alignment problem is not a 
 Note that there might be a selection bias here in the opposite direction: people who work in AI are likely to do so because they believe AI will be beneficial.
 
 _Imagine you're invited to take a test flight on a new airplane_.
-The plane engineers think there's a 5% chance of crashing.
+The average plane engineers thinks there's a 5% chance of crashing.
 Would you enter that plane? Because right now, we're all boarding the AI plane.
 
 ### How long do we have until superintelligent AI?
