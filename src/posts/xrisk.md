@@ -57,7 +57,7 @@ The examples from the video linked above can be funny or cute, but if a superint
 
 ## What a superintelligent AI can do
 
-You might think that an superintelligent AI would be locked inside a computer, and therefore can't affect the real world.
+You might think that a superintelligent AI would be locked inside a computer, and therefore can't affect the real world.
 However, we tend to give AI systems access to the internet, which means that they can do a lot of things:
 
 - [Hack into other computers](/cybersecurity-risks), including all smartphones, laptops, server parks, etc. It could use the sensors of these devices as its eyes and ears, having digital senses everywhere.
