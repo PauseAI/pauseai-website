@@ -15,10 +15,10 @@ Just 5 weeks after the first PauseAI protest, the UK government has [announced](
 This is amazing news, and we commend the UK government for taking this step.
 However, this does not mean that we're done.
 
-## What is a summit?
+## What is aim of a summit?
 
-The goal of the Summit itself is a _treaty_, which is a formal agreement between two or more states in reference to peace, alliance, commerce, or other international relations.
-In our case, the AI Safety Treaty should be an agreement between the participating states to pause AI development until the risks are better understood.
+The goal of a Summit is often a _treaty_, which is a formal agreement between two or more states in reference to peace, alliance, commerce, or other international relations.
+In our case, we are hoping for AI Safety Treaty which would be an agreement between the participating states to pause AI development until the risks are better understood.
 
 ## Examples of Summits and resulting treaties
 
