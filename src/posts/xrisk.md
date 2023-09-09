@@ -70,7 +70,7 @@ However, we tend to give AI systems access to the internet, which means that the
 
 We should consider the advantages that a smart piece of software may have over us:
 
-- **Speed**: Computers operate at extremely high speed compared to brains. Human neurons operate at a clock speed of about 100hz, whereas silicon transistors can switch a billion times a second.
+- **Speed**: Computers operate at extremely high speed compared to brains. Human neurons fire about 100 times a second, whereas silicon transistors can switch a billion times a second.
 - **Location**: An AI is not constrained to one body - it can be in many locations at once. We have built the infrastructure for it: the internet.
 - **Physical limits**: We cannot add more brains into our skull and become smarter. An AI could dramatically improve its capabilities by adding hardware, like more memory, more processing power, more sensors (cameras, microphones). An AI could also extend its 'body' by controlling connected devices.
 - **Materials**: Humans are made of organic materials. Our bodies no longer work if they are too warm or cold, they need food, they need oxygen. Machines can be built from more robust materials, like metals, and can operate in a much wider range of environments.
