@@ -12,7 +12,7 @@ This needs to happen on an international level.
 
 The primary goal of PauseAI was to convince one government to organize such a summit.
 Just 5 weeks after the first PauseAI protest, the UK government has [announced](https://www.gov.uk/government/news/uk-to-host-first-global-summit-on-artificial-intelligence) that they will host an AI safety summit in on November 1-2 in London.
-This is amazing news, and we are very grateful to the UK government for taking this step (we are not claiming we are solely responsible for this summit :).
+This is amazing news, and we commend the UK government for taking this step.
 However, this does not mean that we're done.
 
 ## What is a summit?
