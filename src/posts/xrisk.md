@@ -138,6 +138,9 @@ It may take many years or just a few months, but we should err on the side of ca
 
 ## AI companies are locked in a race to the bottom
 
-OpenAI, DeepMind and Anthropic want to develop AI safely, but they are forced by various incentives to compete with each other and keep moving faster.
+OpenAI, DeepMind and Anthropic want to develop AI safely. Unfortunately they do not know how to do this and they are forced by various incentives to keep racing faster to get to AGI first.
+OpenAI's [plan](https://openai.com/blog/introducing-superalignment) is to use future AI systems to align AI. The problem with this is that we have no guarantee that we will create an AI that solves alignment before we have an AI that is catastrophically dangerous.
+Anthropic [openly admits](https://www.anthropic.com/index/core-views-on-ai-safety) that it has no idea yet how to solve the alignment problem.
+DeepMind has not publicly stated any plan to solve the Alignment problem.
 
 [This is why we need an international treaty to PauseAI.](/proposal)
