@@ -42,7 +42,7 @@ There are many reasons why people underestimate the progress of AI.
 
 Luckily there are still some things that an AI can't do yet.
 It cannot [hack better than the best hackers](/cybersecurity-risks) and it cannot do AI research as well as the best AI researchers.
-**When we reach either of these thresholds, we will in a new regime of increased risk**.
+**When we reach either of these thresholds, we will be in a new regime of increased risk**.
 
 So when will we reach the point when an AI can do all these things at a superhuman level?
 When will have a _superintelligence_?
