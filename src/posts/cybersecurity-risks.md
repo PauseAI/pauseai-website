@@ -30,6 +30,13 @@ This can go wrong in many ways.
 - **Infrastructure**: Cyberweapons can be used to gain access to or disable critical infrastructure, such as [oil pipelines](https://en.wikipedia.org/wiki/Colonial_Pipeline_ransomware_attack).
 - **Financial**: Cyberweapons can be used to [steal money from banks](https://en.wikipedia.org/wiki/2015%E2%80%932016_SWIFT_banking_hack), or to [manipulate the stock market](https://en.wikipedia.org/wiki/2010_flash_crash).
 
+## A Super Virus
+
+It may be possible to create a virus that can infect any computer, regardless of the operating system.
+A sufficiently capable AI could analyze and find vulnerabilities in the source code of all operating systems. This could give the AI full control over these machines and allow it to steal data, replicate itself, use the hardware for its own computations, or encrypt the contents for ransom.
+
+This could happen by accident (e.g. by creating a [misaligned AI](/xrisk)), or it could happen on purpose (e.g. as a cyber weapon by a nation or terrorist organization). It would cause a severe shock to society at large beacuse we depend on computers for so many aspects of life.
+
 ## Mitigating AI Cybersecurity Risks
 
 The story above can only happens if:
