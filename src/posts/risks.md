@@ -40,7 +40,7 @@ AI does not just replaces our muscles as the steam engine did, it replaces our b
 Regular humans may not have anything left to offer the economy.
 Image generation models (which are heavily trained on copyrighted material from professional artists) are already [impacting the creative industry](https://cointelegraph.com/news/artists-face-a-choice-with-ai-adapt-or-become-obsolete).
 Writers are [striking](https://www.newscientist.com/article/2373382-why-use-of-ai-is-a-major-sticking-point-in-the-ongoing-writers-strike/).
-GPT-4 has passed the bar exam, can write excellent written content, and can write code (again, trained on often copyrighted materials).
+GPT-4 has [passed the bar exam](https://law.stanford.edu/2023/04/19/gpt-4-passes-the-bar-exam-what-that-means-for-artificial-intelligence-tools-in-the-legal-industry/), can write excellent written content, and can write code (again, partially trained on [copyrighted materials](https://www.ischool.berkeley.edu/news/2023/new-research-prof-david-bamman-reveals-chatgpt-seems-be-trained-copyrighted-books)).
 The people who own these AI systems will be able to capitalize on them, but the people who lose their jobs to them will not.
 The way we distribute wealth in our society is not prepared for this.
 
