@@ -24,6 +24,7 @@ However, capabilities are rapidly increasing.
 Note that AI also enables completely novel types of attacks.
 For example, AI can be used to [hear the password you typed from an online call](https://beebom.com/ai-crack-password-listening-keyboard-sounds/)
 or use [WiFi to see humans through walls](https://www.marktechpost.com/2023/02/15/cmu-researchers-create-an-ai-model-that-can-detect-the-pose-of-multiple-humans-in-a-room-using-only-the-signals-from-wifi/).
+AI can also be used to make [self-modifying malware](https://www.hyas.com/blog/blackmamba-using-ai-to-generate-polymorphic-malware), which makes it far harder to detect.
 
 There will most likely come a point where an AI is better at hacking than the best human hackers.
 This can go wrong in many ways.
@@ -60,6 +61,7 @@ The story above can only happens if:
 
 There are various measures we can implement to tackle these:
 
-- Only allow models to be deployed after extensive testing. If they have dangerous abilities, do not release them.
-- If a model is trained that can find novel security vulnerabilities, use this to contact software maintainers to patch these vulnerabilities. Give the patching process sufficient time before the model is released. Make sure the weights are not leaked, and protect the model as if it's the launch code for a nuclear strike.
-- [Pause the dangerous training runs](/proposal).
+- **Do not allow the training of models that can find zero-day exploits**. This is the most effective way to prevent this from happening. It's the safest path and it's what we're [proposing](/proposal).
+- **Only allow models to be deployed or open-sourced after extensive testing**. If they have dangerous abilities, do not release them.
+- **Impose strict cybersecurity regulations to prevent model weights from being leaked**. If you allow dangerous models to exist, make sure they do not fall in the wrong hands.
+- **Require AI companies to use the AI to fix vulnerabilities**. If a model is trained that can find novel security vulnerabilities, use this to contact software maintainers to patch these vulnerabilities. Give the patching process sufficient time before the model is released. Make sure the weights are not leaked, and protect the model as if it's the launch code for a nuclear strike. If this is done properly, AI can dramatically improve cybersecurity everywhere.

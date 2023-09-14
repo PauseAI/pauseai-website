@@ -3,7 +3,11 @@ title: Dangerous capabilities in AI
 description: The more powerful AI becomes in specific domains, the larger the risks become.
 ---
 
-There's a lot of debate about what Artificial General Intelligence (AGI) exactly means and when we'll get there.
+As AI models become more powerful, they become more dangerous.
+So at which point should we proceed with caution?
+
+One particular threshold that is often mentioned, is AGI - or Artificial General Intelligence.
+There's a lot of debate about what AGI exactly means.
 Some say it's when AI can do all the cognitive tasks that humans can.
 Some say GPT-4 already is AGI.
 Steve Wozniak defines AGI as the first system that can enter a kitchen and make a cup of coffee.
@@ -12,6 +16,8 @@ From a safety perspective, the definition of AGI is not that important.
 In fact, it can give us a false impression of safety, because we could think that we're safe until we reach AGI.
 Even if an AI can not make a cup of coffee, it could still be dangerous.
 What matters is _which capabilities an AI has_.
+
+In this article, we'll dive into various dangerous capabilities, and what we can do to prevent them from actually harming us.
 
 ## Which capabilities can be dangerous?
 
@@ -90,9 +96,18 @@ Even if we stop training new AI models right now, we'll probably see important i
 
 ## Policy implications
 
+Right now, there is a lot happening in the AI regulation space.
+Prominent figures in AI are writing articles on governance, and governments are drafting proposals.
+
+A lot of these proposals are relying on pre-deployment testing.
+This means that an AI model will be tested by a so-called red team after it is trained, to see if it has any dangerous capabilities.
+And it if does, it should not be deployed.
+We refer to this as [level 2 regulation](/4-levels-of-ai-regulation).
+
+However, as we've discussed above, this is not enough to keep us safe.
 Dangerous capabilities can appear in many ways, and it's hard to predict which capabilities will appear.
 Even if we test models before they are deployed, there are still ways in which they can get dangerous capabilities after deployment.
-This means that pre-deployment tests will not be sufficient to keep us safe.
+This means that pre-deployment tests will not be sufficient.
 
 The only safe option is to not build these powerful AI systems in the first place.
 We should not allow the creation of these unpredictable, potentially highly dangerous AI systems.
