@@ -25,7 +25,7 @@ In this article, we'll dive into various dangerous capabilities, and what we can
 - **Biological**. Design novel biological agents, or help in the process of engineering a pandemic. A group of students were able to use a chatbot to [produce all the steps needed to create a new pandemic](https://arxiv.org/abs/2306.03809). An AI designed to find safe medicine was used to discover [40,000 new chemical weapons in six hours](https://www.theverge.com/2022/3/17/22983197/ai-new-possible-chemical-weapons-generative-models-vx).
 - **Algorithmic improvements**. An AI that can find efficient algorithms for a given problem, could lead to a recursive loop of self-improvement, spinning rapidly out of control. This is called an _intelligence explosion_. The resulting AI would be incredibly powerful and could have all sorts of other dangerous capabilities. Luckily, no AI can self-improve yet. However, there are AIs that can find new, very efficient algorithms (like [AlphaDev](https://www.deepmind.com/blog/alphadev-discovers-faster-sorting-algorithms)).
 - **Deception**. The ability to manipulate people, which includes social engineering. Various forms of deception are [already present](https://twitter.com/DanHendrycks/status/1699437800301752332) in current AI systems. For example, Meta's CICERO AI (which was trained to lead to "Better, more natural AI-human cooperation") turned out to an expert liar, deceiving other agents in the game. An AI that can deceive humans, may deceive humans during training runs. It could hide its capabilities or intentions.
-- **Self-replication**. If an AI can create new instances on other machines, there is a risk of it spreading uncontrollably, leading to an [_AI takeover_](/ai-takeover). A sufficiently capable AI could outcompete humans and lead to [human extinction](/xrisk). This could even happen before an AI model is deployed.
+- **Self-replication**. If an AI can create new instances on other machines, there is a risk of it spreading uncontrollably, leading to an [_AI takeover_](/ai-takeover). A sufficiently capable AI could outcompete humans and lead to [human extinction](/xrisk). Note that this could even happen before an AI model is deployed.
 
 This list is not exhaustive, so there are other dangerous capabilities that an AI could have.
 
@@ -73,10 +73,15 @@ Now, fine-tuning is not as powerful as doing a full training run, but it can sti
 ### Jailbreaking
 
 The largest AIs are trained on absolutely vast amounts of data.
-Most of the books, scientific articles, and websites.
+Most of the books, scientific articles, and websites on the internet.
 There's a lot of nasty stuff in these datasets.
 AIs are often fine-tuned using a technique called RLHF (Reinforcement Learning from Human Feedback) to get them to be helpful and nice.
-In this process the AI has to un-learn some of the things that it was tought, like making racist remarks, explaining how to
+In this process the AI has to learn not to say certain things, like making racist remarks, explaining how to make a bomb or how to create a new bioweapon.
+
+But these safeguards are not perfect.
+So-called "jailbreaking" is a technique where you try to get the AI to ignore these safeguards.
+This can be done by [appending some specific words or characters to your chat message](https://twitter.com/AIPanicLive/status/1678942758872989696), or by [creatively rephrasing your message](https://twitter.com/_annieversary/status/1647865782741749760).
+It is [unclear](https://llm-attacks.org/) whether such behavior can ever be fully patched.
 
 ### Runtime improvements
 
