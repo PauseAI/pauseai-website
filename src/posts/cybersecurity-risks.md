@@ -8,12 +8,11 @@ We pay for our groceries, plan our days, contact our loved ones and even drive o
 And virtually all of these computers are connected to each other.
 This makes all of us vulnerable to cyberattacks.
 
-Highly potent cyber weapons, malware and botnets (such as [Stuxnet](https://www.youtube.com/watch?v=nd1x0csO3hU), [Mirai](<https://en.wikipedia.org/wiki/Mirai_(malware)>) and [EMOTET](https://en.wikipedia.org/wiki/Emotet)) have always been costly to create.
+Highly potent cyber weapons, malware and botnets (such as [Stuxnet](https://www.youtube.com/watch?v=nd1x0csO3hU), [Mirai](<https://en.wikipedia.org/wiki/Mirai_(malware)>) and [EMOTET](https://en.wikipedia.org/wiki/Emotet)) have always been difficult to create.
 The [Pegasus cybersecurity weapon](<https://en.wikipedia.org/wiki/Pegasus_(spyware)>), for example, cost hundreds of millions of dollars to develop.
-Finding so-called zero-day exploits (vulnerabilities that have not yet been discovered) is a very hard task.
-It requires a lot of skill and a lot of time to find these exploits - only highly specialized hackers can do it.
-However, when AI becomes more advanced, this will no longer be the case.
-Instead of having to hire a team of highly skilled security experts/hackers to find zero-day exploits, you could just use a far cheaper AI to do it for you.
+Finding so-called zero-day exploits (vulnerabilities that have not yet been discovered) requires a lot of skill and a lot of time - only highly specialized hackers can do it.
+However, when AI becomes sufficiently advanced, this will no longer be the case.
+Instead of having to hire a team of highly skilled security experts/hackers to find zero-day exploits, anyone could just use a far cheaper AI.
 
 The latest AI systems can already analyze and write software.
 They [can find vulnerabilities](https://betterprogramming.pub/i-used-gpt-3-to-find-213-security-vulnerabilities-in-a-single-codebase-cc3870ba9411) in software, and [they could be used to exploit them](https://blog.checkpoint.com/2023/03/15/check-point-research-conducts-initial-security-analysis-of-chatgpt4-highlighting-potential-scenarios-for-accelerated-cybercrime/).
