@@ -28,8 +28,8 @@ This results in a cat and mouse game between the fakers and the detectors.
 For text, the offense seems to be winning.
 OpenAI [discontinued](https://news.ycombinator.com/item?id=36862850) their AI classifier due to low accuracy.
 
-Measures like watermarking and digital signatures can be used to detect fakes. https://arxiv.org/abs/2303.07205
-However, this i
+Luckily, measures like [watermarking](https://arxiv.org/abs/2303.07205) and digital signatures can be used to detect fakes.
+Requiring signatures for all media we consume might be a suitable solution.
 
 ## Cybersecurity attacks vs defenses
 
@@ -45,6 +45,23 @@ However, there are some advantages that attackers have over defenders:
 ## Biohazards and biodefense
 
 AI can be used to design new biological agents, or help in the process of engineering a pandemic.
-However, it can also be used to create new vaccines, medicine or defenses against biological agents.
-
 A group of students were able to use a chatbot to [produce all the steps needed to create a new pandemic](https://arxiv.org/abs/2306.03809).
+However, it might also be used to create new vaccines, medicine or defenses against biological agents.
+
+- **Viruses spread quicker than vaccines**. A virus is literally a self-replicating machine. A vaccination, on the other hand, requires a lot of effort to produce and distribute.
+
+## Unknown technology and risks
+
+An AI far smarter than humans may be able to use its superior understanding of reality to create new technologies.
+Perhaps some self-replicating nanobots that can convert all matter into copies of themselves, or small machines that can influece the brains of humans.
+Predicting what exactly this type of technology will be is impossible (we'd have to be at least as smart as the AI), but we can still reason about the offense-defense balance.
+The conclusion is not that difficult: we have no idea what's coming, and we have no idea how to defend against it.
+We're at a disadvantage.
+
+## Conclusion
+
+Many AI risks have an offense-defense balance.
+For fake media, we could use digital signatures to detect fakes, shifting the balance to defense.
+For cybersecurity, biohazards and unknown technology, the offense seems to have the advantage.
+
+The important policy implication of this is: let's not build this technology in the first place.
