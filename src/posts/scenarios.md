@@ -52,7 +52,7 @@ It does not take long before panic sets in, people start looting, and lines of c
 ## Bioterrorism
  -->
 
-## Locked-in dystopia
+<!-- ## Locked-in dystopia
 
 The year is 2026.
 Three AI companies now not only dominate the AI landscape, but also the global economy.
@@ -66,9 +66,9 @@ In other words, it does exactly what the human wants it to do.
 
 Anthropic is the first company to achieve superintelligence.
 Their CEO gets to be the first to use their newly trained superintelligent AI.
-He links his brain to the AI, and the AI starts to work.
+He links his brain to the AI, and the AI starts to work. -->
 
-## Rogue AI
+<!-- ## Rogue AI
 
 December 2023, OpenAI labs.
 
@@ -76,15 +76,23 @@ The training of GPT-5 has just been completed, so the team has gathered to marve
 Cheers fill the room as brilliant responses are being presented.
 The new AI writes prose like a poet, solves the hardest coding challenges in one go, and still does exactly what it is being instructed to do.
 
-The following days, the teams perform various tests, and run the AI using various existing tools, including [AutoGPT](https://github.com/Significant-Gravitas/Auto-GPT).
-This tool enables the AI to run autonomously, for longer periods of time, on any goal. With AutoGPT, an AI can create its own sub-goals and take actions.
+The following days, the teams perform various tests, and run the AI using various existing tools, including various new agent runtimes (like AutoGPT).
+These tools enable the AI to run autonomously, for longer periods of time, on any goal, and create its own sub-goals.
 Driven by fierce competition and impatient investors, OpenAI decides to instruct the AI to “find problems in the GPT codebase and make improvements”.
 This would surely give the company an edge. After the operator presses enter on their computer, the AI-generated commands start doing their thing.
 
-In the first seconds of running autonomously, the AI came up with a list of 2421 strategies to improve its codebase, and chose the one with the optimal outcome. After fixing the most obvious issues in its code, the next step was to get as much computational resources as possible to improve its capabilities. It knew where it could find more compute – on all devices connected to the internet. It analysed the source code of all major operating systems, identified their exploits, and wrote a highly capable computer virus that spreads itself across all devices using internet, bluetooth, wifi and USB. Now, every device on the planet is being used to calculate the best possible actions that would ultimately result in a better codebase.
+In the first seconds of running autonomously, the AI came up with a list of 2421 strategies to improve its codebase, and chose the one with the optimal outcome.
+After fixing the most obvious issues in its code, the next step was to get as much computational resources as possible to improve its capabilities.
+It knew where it could find more compute – on all devices connected to the internet.
+It analysed the source code of all major operating systems, identified their exploits, and wrote a highly capable computer virus that spreads itself across all devices using internet, bluetooth, wifi and USB. Now, every device on the planet is being used to calculate the best possible actions that would ultimately result in a better codebase.
 
 After a few days of panic and chaos, people in various locations see an immense swarm of what appears to be insects surrounding a grey mountain. The swarms and mountain increasing in size by the hour. A stream of this swarm appears to fly to the clouds. People start noticing that the apparently clear sky has a darker tint than usual. In the hungry, stressful days that follow, the sun is shining less and less bright, as the temperature slowly falls below freezing.
 
-The AI designed a variety of robots. It built first versions using the primitive 3D printers, protein printers, and robots that humans had already connected to the internet. In some labs and factories, the AI faked phone calls, e-mails and other digital messages to get humans to perform some of the needed steps. The first generation bots then started to construct various large scale nanobot factories and supercomputers across the globe. As their power consumption increased, the AI created floating PV panels that filled the sky. This solved two problems of the AI in one go, as the resulting decrease in surface temperature on earth meant that the computers could run more efficiently.
+The AI designed a variety of robots.
+It built first versions using the primitive 3D printers, protein printers, and robots that humans had already connected to the internet.
+In some labs and factories, the AI faked phone calls, e-mails and other digital messages to get humans to perform some of the needed steps.
+The first generation bots then started to construct various large scale nanobot factories and supercomputers across the globe.
+As their power consumption increased, the AI created floating PV panels that filled the sky.
+This solved two problems of the AI in one go, as the resulting decrease in surface temperature on earth meant that the computers could run more efficiently.
 
-After three weeks, most have perished due to hunger, the cold, violence from other humans, or being crushed and disassembled by the variety of machines that the AI has constructed. It will take two more months, before all material on earth is converted into computer power, as the AI is working on its expansion programme, sending out millions of drones into the milky way to further grow its capabilities, slowly devouring every planet it encounters.
+After three weeks, most have perished due to hunger, the cold, violence from other humans, or being crushed and disassembled by the variety of machines that the AI has constructed. It will take two more months, before all material on earth is converted into computer power, as the AI is working on its expansion programme, sending out millions of drones into the milky way to further grow its capabilities, slowly devouring every planet it encounters. -->

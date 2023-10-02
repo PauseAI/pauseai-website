@@ -3,9 +3,14 @@ title: Dangerous capabilities in AI
 description: The more powerful AI becomes in specific domains, the larger the risks become.
 ---
 
-As AI models become more powerful, they become more dangerous.
-So at which point should we proceed with caution?
+In this article, we'll discuss:
 
+- Which AI capabilities can be dangerous
+- How we can prevent these capabilities from appearing or spreading
+- What the policy implications are
+
+As AI models become more powerful and useful, they also become more dangerous.
+So at which point should we proceed with caution?
 One particular threshold that is often mentioned, is AGI - or Artificial General Intelligence.
 There's a lot of debate about what AGI exactly means.
 Some say it's when AI can do all the cognitive tasks that humans can.
@@ -47,7 +52,6 @@ This unpredictability makes it hard to say whether a training run will result in
 
 We obviously don't want these dangerous capabilities to fall in the hands of bad actors or irresponsible people.
 One often proposed way of preventing this, is by _testing AIs_ before they are deployed.
-The US is talking about a license requirement for AI systems, which includes red-teaming and testing for dangerous capabilities.
 
 This is a start, but it's far from enough to keep us safe:
 
@@ -105,6 +109,7 @@ Right now, there is a lot happening in the AI regulation space.
 Prominent figures in AI are writing articles on governance, and governments are drafting proposals.
 
 A lot of these proposals are relying on pre-deployment testing.
+[Not a single draft proposal right now actually prevents or delays superintelligent AI.](https://twitter.com/PauseAI/status/1704998018322141496)
 This means that an AI model will be tested by a so-called red team after it is trained, to see if it has any dangerous capabilities.
 And it if does, it should not be deployed.
 We refer to this as [level 2 regulation](/4-levels-of-ai-regulation).

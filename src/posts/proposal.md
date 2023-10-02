@@ -1,15 +1,15 @@
 ---
 title: PauseAI Proposal
-description: Implement a temporary pause on the development of AI systems more powerful than GPT-4, ban training on copyrighted material, hold model creators liable.
+description: Implement a temporary pause on the training of AI systems more powerful than GPT-4, ban training on copyrighted material, hold model creators liable.
 ---
 
-**Implement a temporary pause on the development of AI systems more powerful than GPT-4**.
+**Implement a temporary pause on the training of AI systems more powerful than GPT-4**.
 
 Individual countries can and should implement this measure _right now_.
 Especially the US (or California, specifically) should implement a Pause, since it is home to virtually all leading AI companies.
 Many scientists and industry leaders [agree that a Pause is necessary](https://futureoflife.org/open-letter/pause-giant-ai-experiments/), and the (US) public also strongly supports this ([64%](https://www.campaignforaisafety.org/usa-ai-x-risk-perception-tracker/) - [69%](https://today.yougov.com/topics/technology/survey-results/daily/2023/04/03/ad825/2)).
 
-However, we cannot expect countries or companies to risk their competitive advantage by pausing AI development for a long time.
+However, we cannot expect countries or companies to risk their competitive advantage by pausing AI training runs for a long time.
 This is why we need a **global Pause**.
 
 ## Implementing a global Pause
