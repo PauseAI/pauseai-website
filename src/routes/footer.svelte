@@ -47,6 +47,7 @@
 		<a href="https://www.facebook.com/PauseAI/" target="_blank">Facebook</a>
 		<a href="https://www.tiktok.com/@pauseai" target="_blank">TikTok</a>
 		<a href="https://www.instagram.com/pause_ai/" target="_blank">Instagram</a>
+		<a href="https://www.youtube.com/@PauseAI" target="_blank">YouTube</a>
 	</div>
 	<div class="column">
 		<h2>Other</h2>

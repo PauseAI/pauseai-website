@@ -10,7 +10,7 @@ We aim to convince our governments to step in and [pause AI development](/propos
 We do this by informing the public, talking to decision-makers, and organizing protests.
 We are not affiliated with any company or organization.
 
-You can find us on [Discord](https://discord.gg/2XXWXvErfA), [Twitter](https://twitter.com/PauseAI), [facebook](https://www.facebook.com/PauseAI), [TikTok](https://www.tiktok.com/@pauseai) and [LinkedIn](https://www.linkedin.com/uas/login?session_redirect=/company/97035448/).
+You can find us on [Discord](https://discord.gg/2XXWXvErfA), [Twitter](https://twitter.com/PauseAI), [facebook](https://www.facebook.com/PauseAI), [TikTok](https://www.tiktok.com/@pauseai), [LinkedIn](https://www.linkedin.com/uas/login?session_redirect=/company/97035448/), [YouTube](https://www.youtube.com/@PauseAI) and [Instagram](https://www.instagram.com/pause_ai).
 
 ### How likely is it that superintelligent AI will cause very bad outcomes, like human extinction?
 
