@@ -96,10 +96,23 @@ And again, make sure someone is filming it.
 If journalists are present, speak to them.
 Prepare some quotes in advance, consider the message you want to get across.
 
-### Take pictures and film
+### Make an amazing picture (and videos!)
 
 Make sure you have pictures and videos of the protest.
 Ideally, this is done by someone who is not actively participating in the protest.
+
+Some tips for taking a great photo:
+
+- Make it feel high energy: hold up signs, chant, etc.
+- Don't spread too thin
+- Get it cropped: close-ups are better, make it feel more crowded
+- Relevant background is good: e.g. a government building, a company logo, etc.
+
+A great video:
+
+- Is short: 30 seconds is enough
+- Has someone speaking: a speech, a chant, etc.
+- Has people walking, holding up signs, etc.
 
 ### Speak to people
 
