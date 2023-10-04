@@ -43,7 +43,7 @@ Because of this, they are often called _Emergent Capabilities_.
 
 <!-- Example about theory of mind, graph -->
 
-Our current paradigm of large langue models is almost inherently unpredictable.
+Our current paradigm of large language models is almost inherently unpredictable.
 AI models are not written like software - they are trained.
 They are black boxes consisting of billions of numerical parameters.
 No-one really knows what's going on inside.
