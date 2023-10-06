@@ -6,7 +6,7 @@ description: When and where we will be protesting.
 ## Coming up
 
 - [21st of October, International protest](/2023-oct)
-- 1st of November, Bletchley Park, UK
+- [1st of November, Bletchley Park, UK](/2023-november-uk)
 
 ## Past Protests
 
