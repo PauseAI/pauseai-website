@@ -10,6 +10,7 @@ How much do regular people and experts worry about AI risks?
 - **[AI researchers, AIImpacts](https://aiimpacts.org/2022-expert-survey-on-progress-in-ai/)**: give "really bad outcomes (such as human extinction)" a 14% probability, with a median of 5%. Only 18% believe the control problem is not important.
 - **[AI safety researchers, AlignmentForum](https://web.archive.org/web/20221013014859/https://www.alignmentforum.org/posts/QvwSr5LsxyDeaPK5s/existential-risk-from-ai-survey-results)**: respondents assigned a median probability of 20% to x-risk caused due to a lack of enough technical research, and 30% to x-risk caused due to a failure of AI systems to do what the people deploying them intended, with huge variation (for example, there are data points at both ~1% and ~99%).
 - **[UK citizens, PublicFirst](https://publicfirst.co.uk/ai/)**: think there's a 9% probability humans will go extinct because of AI. About 50% of say they're very or somewhat worried about this.
+- **[German citizens, Kira](https://www.zeit.de/digital/2023-04/ki-risiken-angst-umfrage-forschung-kira)**: Only 14% believe AI will have a positive influence on the world, 40% mixed, 40% negative.
 
 ## Regulations & governance
 

@@ -1,13 +1,13 @@
 ---
-title: Dangerous capabilities in AI
-description: The more powerful AI becomes in specific domains, the larger the risks become.
+title: Regulating dangerous capabilities in AI
+description: The more powerful AI becomes in specific domains, the larger the risks become. How do we prevent these dangerous capabilities from appearing or spreading?
 ---
 
 In this article, we'll discuss:
 
 - Which AI capabilities can be dangerous
 - How we can prevent these capabilities from appearing or spreading
-- What the policy implications are
+- Why it is dangerous to rely on evaluations as a policy measure
 
 As AI models become more powerful and useful, they also become more dangerous.
 So at which point should we proceed with caution?
@@ -47,25 +47,36 @@ AI models are not written like software - they are trained.
 They are black boxes consisting of billions of numerical parameters.
 No-one really knows what's going on inside.
 This unpredictability makes it hard to say whether a training run will result in a dangerous AI.
+Interpretability research may change this in the future, but as of now, we can't really explain why AI does what it does.
+
+So preventing the creation of dangerous capabilities can practically only be done in one way:
+don't build increasingly powerful AI systems in the first place.
+This would be the safest way forward, but that's not what AI labs are proposing.
 
 ## Preventing proliferation of dangerous capabilities
 
-We obviously don't want these dangerous capabilities to fall in the hands of bad actors or irresponsible people.
-One often proposed way of preventing this, is by _testing AIs_ before they are deployed.
+Right now, there is a lot happening in the AI regulation space.
+A lot of these proposals (including all the ones coming from AI labs) are relying on safety **evaluations** (or _evals_): pre-deployment testing of AI models.
+An example of these eval-based approaches is the [RSP approach by Anthropic](https://evals.alignment.org/blog/2023-09-26-rsp/#:~:text=An%20RSP%20specifies%20what%20level,capabilities%20until%20protective%20measures%20improve.) or the [Coordinated Pausing](https://www.governance.ai/research-paper/coordinated-pausing-evaluation-based-scheme) approach by GovAI.
+We refer to these as [level 2 regulation](/4-levels-of-ai-regulation).
+These do not prevent dangerous AIs from being created, but they do prevent them from being deployed.
+This type of policy is relatively cheap, and it still allows AI labs to continue their research.
+However, we believe this approach is very dangerous:
 
-This is a start, but it's far from enough to keep us safe:
-
-- **Models can be leaked**. We saw this happen with Meta's LLAMA model. Once it's out there, there is no going back.
+- **Models can be leaked**.
+We saw this happen with Meta's LLAMA model. Once it's out there, there is no going back.
 - **Some capabilities are even dangerous inside AI labs**.
 A self-replicating AI, for example, could escape from the lab before deployment.
-- **Capabilities can be added or discovered after training**. This includes fine-tuning, jailbreaking, and runtime improvements.
+- **Testing for dangerous capabilities is difficult**.
+We don't know how we can (safetly) test if an AI can self-replicate, for example. Or how to test if it deceives humans
+- **Bad actors can still build dangerous AIs**.
+Evaluations are a _post-training_ measure. By relying on them, we
+- **Capabilities can be added or discovered after training**.
+This includes fine-tuning, jailbreaking, and runtime improvements.
+
+We'll dive into this last point in more detail.
 
 ## Capabilities can be added after training
-
-But it actually gets worse.
-There are still two ways in which an AI can get dangerous capabilities, even after training: **fine-tuning** and **runtime improvements**.
-Say we thoroughly test an AI for dangerous capabilities, and find out that the AI's capabilities are not at a level where it can be dangerous.
-So the AI is deployed, or shared as an open source model.
 
 ### Fine-tuning
 
@@ -103,22 +114,16 @@ Or consider [Voyager](https://arxiv.org/abs/2305.16291), a tool that enabled GPT
 We don't know how how far a base model can be stretched.
 Even if we stop training new AI models right now, we'll probably see important innovations that add new capabilities to existing models.
 
-## Policy implications
+## In conclusion
 
-Right now, there is a lot happening in the AI regulation space.
-Prominent figures in AI are writing articles on governance, and governments are drafting proposals.
+Dangerous capabilities from AI can lead to all sorts of problems: large scale cyberattacks, engineered pandemics, and rogue AI that [takes over](/ai-takeover).
+It is tempting to rely on evaluations to prevent these dangerous capabilities from appearing or spreading, but this is a dangerous approach:
 
-A lot of these proposals are relying on pre-deployment testing.
-[Not a single draft proposal right now actually prevents or delays superintelligent AI.](https://twitter.com/PauseAI/status/1704998018322141496)
-This means that an AI model will be tested by a so-called red team after it is trained, to see if it has any dangerous capabilities.
-And it if does, it should not be deployed.
-We refer to this as [level 2 regulation](/4-levels-of-ai-regulation).
-
-However, as we've discussed above, this is not enough to keep us safe.
-Dangerous capabilities can appear in many ways, and it's hard to predict which capabilities will appear.
-Even if we test models before they are deployed, there are still ways in which they can get dangerous capabilities after deployment.
-This means that pre-deployment tests will not be sufficient.
+- Even if we test models before they are deployed, there are still ways in which they can get dangerous capabilities after deployment (fine-tuning, jailbreaking, runtime improvements).
+- Models can be leaked.
+- Some capabilities are even dangerous inside AI labs.
 
 The only safe option is to not build these powerful AI systems in the first place.
 We should not allow the creation of these unpredictable, potentially highly dangerous AI systems.
+[Unfortunately, not a single draft proposal right now actually prevents or delays superintelligent AI.](https://twitter.com/PauseAI/status/1704998018322141496)
 That's why we're [calling for a Pause](/proposal)!
