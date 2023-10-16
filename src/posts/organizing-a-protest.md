@@ -34,6 +34,11 @@ This is a short document that announces the protest and explains why it's import
 See [writing press releases](/writing-press-releases) for more information.
 We can help you with this!
 
+### Make the protest visible locally
+
+Stickers, posters, chack stencils, etc.
+Make sure people know that the protest is happening.
+
 ### Reach out to (local) media
 
 Journalists like protests, and you want to get as much media attention as possible.
@@ -60,11 +65,11 @@ Or a local AI safety group?
 Reach out to them, get them to spread your invitation.
 Keep them informed of the protest, make them part of the process.
 
-### Make signs / flyers / banners
-
-We have a <a href="/PauseAI_flyer.pdf" target="_blank">flyer</a>. that you can print out and hand out to people.
+### Make signs / flyers / banners / props
 
 Use our [figma design template](https://www.figma.com/community/file/1233064002969152026) or check the [media folder](https://drive.google.com/drive/folders/1bQ_MZ8giK-Mee4ABkO0BgcFInaXruNpa?usp=sharing) to make your own flyers / banners / posters.
+We have a <a href="/PauseAI_flyer.pdf" target="_blank">flyer</a>. that you can print out and hand out to people.
+Also check out the [Discord thread](https://discord.com/channels/1100491867675709580/1138484822117974191) where we discuss protest materials.
 
 Make **signs** that people can hold up during the protest.
 You can make a sign using a piece of cardboard or do something fancier.
@@ -116,9 +121,14 @@ A great video:
 
 ### Speak to people
 
-Hand out your flyers have conversations.
+Hand out your flyers, have conversations.
 You want to get people to think about the issue, and you want to get them to join your cause.
 So be friendly, be open, and be prepared to answer questions.
+
+### Interview each other
+
+Use your smartphone to record each other talking about why you're protesting.
+Make sure the audio quality is decent, use an external mic if possible (they are cheap!).
 
 ### Be cool
 
@@ -129,9 +139,15 @@ Some people already think we're crazy, so we need to be extra careful not to con
 
 ## After the protest
 
+### Have some drinks
+
+Protests are not just about sending a message, it's also about building a community.
+Having drinks afterwards really solidifies the bonding experience, and it's a fun way to celebrate!
+
 ### Gather pictures and videos
 
 Ask all participants to send you their pictures and videos.
+Create a nicely edited video of the protst
 
 ### Share your story
 

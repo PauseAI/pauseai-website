@@ -52,6 +52,9 @@ Here are some resources to get you started.
 - [Center for AI Safety](https://www.safe.ai/) (CAIS) is a research center at the Czech Technical University in Prague, led by
 - [Center for Human-Compatible Artificial Intelligence](https://humancompatible.ai/about/) (CHAI), led by Stuart Russell.
 - [Machine Intelligence Research Institute](https://intelligence.org/) (MIRI), doing mathematical research on AI safety, led by Eliezer Yudkowsky.
+- [Centre for the Governance of AI](https://www.governance.ai/)
+- [Institute for AI Policy and Strategy](https://www.iaps.ai/) (IAPS)
+- [The AI Policy Institute](https://theaipi.org/)
 
 ## Books
 

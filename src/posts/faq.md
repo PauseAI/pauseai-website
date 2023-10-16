@@ -12,6 +12,16 @@ We are not affiliated with any company or organization.
 
 You can find us on [Discord](https://discord.gg/2XXWXvErfA), [Twitter](https://twitter.com/PauseAI), [facebook](https://www.facebook.com/PauseAI), [TikTok](https://www.tiktok.com/@pauseai), [LinkedIn](https://www.linkedin.com/uas/login?session_redirect=/company/97035448/), [YouTube](https://www.youtube.com/@PauseAI) and [Instagram](https://www.instagram.com/pause_ai).
 
+### Do you want to ban all AI?
+
+No, only the development of the largest general-purpose AI systems, often called "Frontier models".
+All existing AI would be legal under our proposal, and many future AI models will remain legal, too.
+
+### Who is paying you?
+
+We have not received funding so far.
+Everyone contributing to PauseAI is doing so voluntarily.
+
 ### How likely is it that superintelligent AI will cause very bad outcomes, like human extinction?
 
 AI safety researchers (who are the experts on this topic) are divided on this question, and estimates [range from 2% to 97% with an average of 30%](https://web.archive.org/web/20221013014859/https://www.alignmentforum.org/posts/QvwSr5LsxyDeaPK5s/existential-risk-from-ai-survey-results).

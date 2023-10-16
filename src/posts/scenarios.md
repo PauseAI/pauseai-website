@@ -10,7 +10,7 @@ Note that these scenarios may read like science fiction, because they are scienc
 These scenario's are open source, which means you are free to use them in your own work, and you are free to contribute to them.
 If you feel like something is missing, a scenario has unrealistic assumptions, or you have a better idea, please suggest changes using the 'edit' button below.
 
-## Cyberterrorism
+## CyberterrorismInstagram
 
 A team of scientists introduces a new AI training paradigm, designed for cybersecurity.
 This adversarial architecture creates pieces of code and then tries to exploit security vulnerabilities in them.
