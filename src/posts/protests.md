@@ -5,11 +5,11 @@ description: When and where we will be protesting.
 
 ## Coming up
 
-- [21st of October, International protest](/2023-oct)
 - [1st of November, Bletchley Park, UK](/2023-november-uk)
 
 ## Past Protests
 
+- [21st of October, International protest](/2023-oct)
 - [29th of September, San Francisco](https://metaprotest.org/) (not officially PauseAI)
 - [11th of August, Netherlands](/2023-august-nl)
 - [18th of July, London](/2023-july-london-18th)
@@ -42,7 +42,8 @@ Read more about [organizing a protest](/organizing-a-protest).
 - [Euronews](https://www.euronews.com/next/2023/06/14/could-ai-lead-us-to-extinction-this-brussels-based-group-believes-so)
 - [Cryptorank](https://cryptorank.io/news/feed/cbfc5-pause-ai-protest-ai-development)
 - [Fortune](https://fortune.com/2023/05/24/openai-ceo-sam-altman-credits-elon-musk-with-teaching-him-the-importance-of-deep-tech-investing-but-he-has-no-interest-in-living-on-mars/)
-- [Creatives with AI podcast](https://www.youtube.com/watch?v=LNtGUHTdH6k)
+- [Creatives with AI podcast](https://www.youtube.com/watch?v=LNtGUHTdH6k): Interview with PauseAI founder Joep Meindertsma.
+- [Art of AI podcast](https://spotify.link/AggzYfcj8Db): Interview with Joep Meindertsma, about protesting, psychology of x-risk, AI policy.
 
 ## Local Media coverage
 
@@ -51,6 +52,6 @@ Read more about [organizing a protest](/organizing-a-protest).
 - [Camden New Journal (UK)](https://www.camdennewjournal.co.uk/article/protesters-tell-tech-quarter-companies-to-press-pause-on-artificial-intelligence-research)
 - [AD (NL)](https://www.ad.nl/tech/ai-rel-in-nieuw-zeeland-kook-app-prijst-dodelijk-chloorgas-aan-als-verfrissend-gerecht~a1aa3705/)
 - [NRC (NL)](https://www.nrc.nl/nieuws/2023/06/24/sterft-de-mensheid-uit-door-ai-dat-is-sciencefiction-a4168053)
-<!-- - [AI Coalitie (NL)](https://nlaic.com/agenda/communitydag-invloed-van-ai-op-cultuur-en-media/)
+- [AI Coalitie (NL)](https://nlaic.com/agenda/communitydag-invloed-van-ai-op-cultuur-en-media/)
 - [Pakhuis de Zwijger (NL)](https://dezwijger.nl/programma/ai-existential-risk-and-what-to-do-about-it)
-- [RUW Den Bosh (NL)](https://ruwdenbosch.nl/paranoide-over-ai/) -->
+- [RUW Den Bosh (NL)](https://ruwdenbosch.nl/paranoide-over-ai/)
