@@ -22,6 +22,18 @@ All existing AI would be legal under our proposal, and many future AI models wil
 We have not received funding so far.
 Everyone contributing to PauseAI is doing so voluntarily.
 
+### If we Pause, how about China?
+
+For starters, at this point China has stricter AI regulations than virtually any other country.
+They [don't allow chatbots](https://www.reuters.com/technology/chinas-slow-ai-roll-out-points-its-tech-sectors-new-regulatory-reality-2023-07-12/) and [disallow training on internet data](https://cointelegraph.com/news/china-sets-stricter-rules-training-generative-ai-models).
+China is far more controlling than the US is, for example, and has even more reason to fear the uncontrollable and unpredictable impacts of AI.
+During the UNSC meeting on AI safety, China was the only country that mentioned the possibility of implementing a pause.
+
+And besides, we are primarily asking for an _international_ pause, enforced by a treaty.
+Such a treaty also needs to be signed by China.
+If the treaty will guarantee that other nations will stop as well, and there are sufficient enforcement mechanisms in place,
+this should be something that China will want to see as well.
+
 ### How likely is it that superintelligent AI will cause very bad outcomes, like human extinction?
 
 AI safety researchers (who are the experts on this topic) are divided on this question, and estimates [range from 2% to 97% with an average of 30%](https://web.archive.org/web/20221013014859/https://www.alignmentforum.org/posts/QvwSr5LsxyDeaPK5s/existential-risk-from-ai-survey-results).
