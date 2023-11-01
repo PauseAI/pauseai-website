@@ -55,6 +55,8 @@ Here are some resources to get you started.
 - [Centre for the Governance of AI](https://www.governance.ai/)
 - [Institute for AI Policy and Strategy](https://www.iaps.ai/) (IAPS)
 - [The AI Policy Institute](https://theaipi.org/)
+- [AI Safety Communications Centre](https://aiscc.org/2023/11/01/yougov-poll-83-of-brits-demand-companies-prove-ai-systems-are-safe-before-release/)
+
 
 ## Books
 
