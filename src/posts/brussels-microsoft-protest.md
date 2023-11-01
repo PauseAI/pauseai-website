@@ -12,10 +12,6 @@ description: We are organizing a protest at Microsoft to demand a summit to paus
 - Join us on [Discord](https://discord.gg/2XXWXvErfA?event=1105793166927470592) to sign up and discuss the protest.
 - Read the Protester's [code of conduct](/protesters-code-of-conduct).
 
-## Contact
-
-- Joep Meindertsma ([email](mailto:joep@ontola.io), [phone](tel:+31636020942), [twitter](https://twitter.com/joepmeindertsma))
-
 ## What do we want?
 
 We want our governments (and the EU, specifically) to organize a [summit](/summit) about the [risks](/risks) of AI.

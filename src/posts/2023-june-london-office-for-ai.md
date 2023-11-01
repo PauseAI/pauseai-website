@@ -7,10 +7,6 @@ title: PauseAI protest @ Office for AI - June 29th
 - When: 29th of June, 4 PM - 6 PM
 - [Sign up here](https://forms.gle/t1FvzqaEBmZuBuXS7)
 
-## Contact
-
-- Joseph Miller ([email](mailto:josephmiller101@gmail.com))
-
 ## Press Release
 
 On Thursday, June 29th, volunteers from the new [PauseAI](http://pauseai.info) movement will gather at the Office for AI, Parliament Square, London to urge the UK government to take the lead on pausing the development of more powerful and dangerous AI systems.
