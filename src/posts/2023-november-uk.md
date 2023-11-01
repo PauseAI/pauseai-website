@@ -30,7 +30,7 @@ On Metaculus, the prediction of the date of the first AGI [dropped](https://meta
 - **Summit invitees**: Prioritize safety over economic growth. We know AI can make our countries richer, but that's not why you're summoned here. Be the adult in the room.
 
 For our entire proposal, see [here](/proposal).
-<!--
+
 ## Press Release
 
 _FOR RELEASE ON NOVEMBER 1ST 2023_
@@ -56,4 +56,4 @@ The organiser and PM's Representative for the AI Safety Summit, Matt Clifford, h
 - Global, NL: Joep Meindertsma, [joep@ontola.io](mailto:joep@ontola.io), +31636020942
 - UK: Joseph Miller, [josephmiller101@gmail.com](mailto:josephmiller101@gmail.com), +44 7943937122
 
-More information about the protest: [pauseai.info/2023-oct](https://pauseai.info/2023-oct) -->
+More information about the protest: [pauseai.info/2023-oct](https://pauseai.info/2023-oct)
