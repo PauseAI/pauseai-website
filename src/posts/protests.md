@@ -5,10 +5,11 @@ description: When and where we will be protesting.
 
 ## Coming up
 
-- [1st of November, Bletchley Park, UK](/2023-november-uk)
+- [Join PauseAI](/join) to receive updates on upcoming protests.
 
 ## Past Protests
 
+- [1st of November, Bletchley Park, UK](/2023-november-uk)
 - [21st of October, International protest](/2023-oct)
 - [29th of September, San Francisco](https://metaprotest.org/) (not officially PauseAI)
 - [11th of August, Netherlands](/2023-august-nl)

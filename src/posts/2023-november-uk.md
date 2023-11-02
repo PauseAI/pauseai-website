@@ -51,9 +51,8 @@ The organiser and PM's Representative for the AI Safety Summit, Matt Clifford, h
 
 “We’re glad the UK is spearheading AI safety and showing international leadership”, says Joep Meindertsma, director of PauseAI. ”But we’re not seeing the level of urgency that it deserves. In 2020, forecasters [predicted](https://www.metaculus.com/questions/3479/date-weakly-general-ai-is-publicly-known/) the arrival of human-level AI in 2055. Today the [average prediction](https://www.metaculus.com/questions/3479/date-weakly-general-ai-is-publicly-known/) is 2026. We cannot risk disaster by underestimating the rate of progress. We need our politicians to err on the side of caution. Every single life is in danger. No company should be allowed to build a superintelligence.”
 
-### Contacts
+### Media
 
-- Global, NL: Joep Meindertsma, [joep@ontola.io](mailto:joep@ontola.io), +31636020942
-- UK: Joseph Miller, [josephmiller101@gmail.com](mailto:josephmiller101@gmail.com), +44 7943937122
+<div><blockquote class="twitter-tweet"><p lang="en" dir="ltr">We protested during the AI Safety Summit at Bletchley Park to demand that our leaders halt the development of superintelligent AI. <br><br>🧵 <a href="https://t.co/WbH1GuKqAS">pic.twitter.com/WbH1GuKqAS</a></p>&mdash; PauseAI ⏸ (@PauseAI) <a href="https://twitter.com/PauseAI/status/1719740149905400128?ref_src=twsrc%5Etfw">November 1, 2023</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script></div>
 
-More information about the protest: [pauseai.info/2023-oct](https://pauseai.info/2023-oct)
+[The protest was covered in NewScientist:](https://www.newscientist.com/article/2400626-uk-ai-summit-is-a-photo-opportunity-not-an-open-debate-critics-say/)
