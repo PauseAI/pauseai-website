@@ -24,6 +24,7 @@ All currently existing AI would be legal under our proposal, and most future AI 
 
 We have not received funding so far.
 Everyone contributing to PauseAI is doing so voluntarily.
+We expect to receive a grant through the LightSpeed network soon, and people have approached us that they are willing to donate.
 
 ### If we Pause, how about China?
 
