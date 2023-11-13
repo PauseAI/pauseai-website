@@ -7,7 +7,7 @@ AI presents numerous [risks](/risks) to humanity, including the [risk of extinct
 Progress in AI capabilities is accelerating at a [frantic pace](/urgency), and we are not prepared for the consequences.
 AI companies are locked in a race to the bottom, where safety is not the highest priority.
 We need governments to step in and prevent AI from reaching superhuman levels before we know how to make it safely.
-This pause needs to happen on an international level, because countries are locked in a race similar to the companies.
+This pause needs to happen on an international level because countries are locked in a race similar to the companies.
 
 **The only way to achieve a true pause is through a summit.**
 
