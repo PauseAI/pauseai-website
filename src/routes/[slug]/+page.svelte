@@ -3,13 +3,12 @@
 
 	export let data
 
-	let title = data.meta.title || data.slug
-	let parent = data.slug.split('/').slice(0, -1).join('/')
-	let date = data.meta.date
-	let image = data.meta.image
+	const { meta, slug, content } = data
+	const { title = slug, date, categories, description, image } = meta
+	const parent = slug.split('/').slice(0, -1).join('/')
 </script>
 
-<PostMeta {title} description={data.meta.description} {date} {image} />
+<PostMeta {title} {description} {date} {image} />
 
 <article>
 	{#if parent}
@@ -18,14 +17,14 @@
 	<hgroup>
 		<h1>{title}</h1>
 		{#if date}
-			<!-- <p>Published at {formatDate(data.meta.date)}</p> -->
+			<!-- <p>Published at {formatDate(date)}</p> -->
 		{/if}
 	</hgroup>
 
 	<div class="tags">
-		{#if data.meta.categories && data.meta.categories.length > 0}
+		{#if categories && categories.length > 0}
 			<div class="categories">
-				{#each data.meta.categories as category}
+				{#each categories as category}
 					<span class="surface-4">&num;{category}</span>
 				{/each}
 			</div>
@@ -33,7 +32,7 @@
 	</div>
 
 	<div class="prose">
-		<svelte:component this={data.content} />
+		<svelte:component this={content} />
 	</div>
 </article>
 

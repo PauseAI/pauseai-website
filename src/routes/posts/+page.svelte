@@ -1,22 +1,23 @@
 <script lang="ts">
 	// import { formatDate } from '$lib/utils'
-	import * as config from '$lib/config'
+	import { title } from '$lib/config'
 
 	export let data
+	const { posts } = data
 </script>
 
 <svelte:head>
-	<title>{config.title}</title>
+	<title>{title}</title>
 </svelte:head>
 
 <section>
 	<ul class="posts">
-		{#each data.posts as post}
+		{#each posts as { slug, title, description, date }}
 			<li class="post">
-				<a href={post.slug} class="title">{post.title}</a>
-				<!-- <p class="date">{formatDate(post.date)}</p> -->
-				{#if post.description}
-					<p class="description">{post.description}</p>
+				<a href={slug} class="title">{title}</a>
+				<!-- <p class="date">{formatDate(date)}</p> -->
+				{#if description}
+					<p class="description">{description}</p>
 				{/if}
 			</li>
 		{/each}

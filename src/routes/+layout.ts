@@ -1,11 +1,9 @@
 export const prerender = true
 import { redirect } from '@sveltejs/kit'
 
-export async function load({ url }) {
-	if (url.host === 'pauseai.org') {
-		return redirect(301, 'https://pauseai.info' + url.pathname)
+export async function load({ url: { host, pathname: url } }) {
+	if (host === 'pauseai.org') {
+		return redirect(301, 'https://pauseai.info' + url)
 	}
-	return {
-		url: url.pathname
-	}
+	return { url }
 }

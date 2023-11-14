@@ -1,11 +1,18 @@
 <script lang="ts">
 	import { page } from '$app/stores'
+
+	export let width = 243
+	export let height = (width * 22) / 81
+	export let animate = false
+
+	$: logo_animate = $page.url.pathname != '/' && animate
 </script>
 
 <svg
-	class={`logo ${$page.url.pathname == '/' ? '' : 'logo-animate'}`}
-	width="243"
-	height="66"
+	class="logo"
+	class:logo-animate={logo_animate}
+	{width}
+	{height}
 	viewBox="0 0 243 66"
 	fill="none"
 	role="img"
@@ -37,7 +44,6 @@
 	}
 	.logo {
 		width: 11rem;
-		margin-left: -3.4rem;
 		overflow: visible;
 	}
 	.logo-circle {
@@ -53,9 +59,7 @@
 	}
 	@media (max-width: 850px) {
 		.logo {
-			margin-bottom: 1rem;
 			width: 10rem;
-			margin-left: 1rem;
 		}
 	}
 </style>

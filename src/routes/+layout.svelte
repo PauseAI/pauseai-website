@@ -9,7 +9,7 @@
 
 	import '../app.css'
 
-	export let data
+	export const data = { url: '' }
 </script>
 
 <div class="layout">
@@ -38,6 +38,7 @@
 		max-inline-size: var(--page-width);
 		display: grid;
 		grid-template-rows: auto 1fr auto;
+		grid-auto-columns: 100%;
 		margin-inline: auto;
 		padding: 1rem;
 	}

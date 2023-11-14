@@ -12,6 +12,7 @@
 	a {
 		margin-left: 1rem;
 		font-family: var(--font-heading);
+		font-weight: 700;
 		color: var(--text);
 		text-decoration: none;
 		font-size: 1.1rem;

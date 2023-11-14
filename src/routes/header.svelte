@@ -6,8 +6,8 @@
 </script>
 
 <nav>
-	<a href="/">
-		<Logo />
+	<a href="/" class="logo">
+		<Logo animate />
 	</a>
 
 	<div class="nav-links">
@@ -35,6 +35,11 @@
 		flex-wrap: wrap;
 	}
 
+	.logo {
+		margin-bottom: 1rem;
+		margin-left: 1rem;
+	}
+
 	.nav-links {
 		display: flex;
 		text-transform: uppercase;
@@ -46,6 +51,11 @@
 		nav {
 			flex-direction: row;
 			margin-left: 1rem;
+		}
+
+		.logo {
+			margin-left: -3.4rem;
+			margin-bottom: 0;
 		}
 
 		.nav-links {
