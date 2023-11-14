@@ -3,10 +3,10 @@
 	import Toggle from '$lib/components/Toggle.svelte'
 	import { page } from '$app/stores'
 
-	$: editUrl = `https://github.com/joepio/pauseai/edit/main/src/posts${$page.url.pathname}.md`
-	$: if ($page.url.pathname == '/') {
-		editUrl = `https://github.com/joepio/pauseai/edit/main/src/routes/%2Bpage.svelte`
-	}
+	const { url: { pathname } } = $page
+
+	$: editPath = pathname === '/' ? 'routes/%2Bpage.svelte' : `posts${pathname}.md`
+	$: editUrl = `https://github.com/joepio/pauseai/edit/main/src/${editPath}`
 </script>
 
 <a class="c2a" href="/join">Join PauseAI ></a>
@@ -97,6 +97,7 @@
 	footer h2 {
 		font-size: 0.9rem;
 		font-family: var(--font-heading);
+		font-weight: 700;
 		margin-bottom: 0rem;
 		margin-top: 0;
 	}
@@ -107,6 +108,7 @@
 		text-decoration: none;
 		font-size: 1rem;
 		font-family: var(--font-heading);
+		font-weight: 700;
 		text-align: left;
 	}
 

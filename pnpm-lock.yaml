@@ -20,6 +20,9 @@ dependencies:
   '@types/mapbox-gl':
     specifier: ^2.7.19
     version: 2.7.19
+  escape-html:
+    specifier: ^1.0.3
+    version: 1.0.3
   lucide-svelte:
     specifier: ^0.298.0
     version: 0.298.0(svelte@4.2.8)
@@ -1098,6 +1101,10 @@ packages:
       '@esbuild/win32-ia32': 0.19.9
       '@esbuild/win32-x64': 0.19.9
     dev: true
+
+  /escape-html@1.0.3:
+    resolution: {integrity: sha512-NiSupZ4OeuGwr68lGIeym/ksIZMJodUGOSCZ/FSnTxcrekbvqrgdUxlJOMpijaKZVjAJrWrGs/6Jy8OMuyj9ow==}
+    dev: false
 
   /escape-string-regexp@4.0.0:
     resolution: {integrity: sha512-TtpcNJ3XAzx3Gq8sWRzJaVajRs0uVxA2YAkdb1jm2YkPz4G6egUFAyA3n5vtEIZefPk5Wa4UXbKuS5fKkJWdgA==}

@@ -1,4 +1,4 @@
-import * as config from '$lib/config'
+import { url } from '$lib/config'
 import type { Post } from '$lib/types'
 
 export const prerender = true
@@ -6,12 +6,12 @@ export const prerender = true
 export async function GET({ fetch }) {
 	const response = await fetch('api/posts')
 	const posts: Post[] = await response.json()
-	const website = config.url
+	const website = url
 
 	const headers = { 'Content-Type': 'text/plain' }
 
 	const sitemap = posts
-		.map((post) => `${website}/${post.slug}\n`)
+		.map(({ slug }) => `${website}/${slug}\n`)
 		.join('')
 		.trim()
 

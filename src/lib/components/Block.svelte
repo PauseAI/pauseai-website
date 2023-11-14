@@ -28,6 +28,7 @@
 		text-decoration: none;
 		font-size: 1.2rem;
 		font-family: var(--font-heading);
+		font-weight: 700;
 	}
 
 	.c2a:hover {
