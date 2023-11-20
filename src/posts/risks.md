@@ -47,8 +47,8 @@ The way we distribute wealth in our society is not prepared for this.
 ## Autonomous weapons
 
 Companies are already selling AI-powered weapons to governments.
-Lanius builds [flying suicide drones](https://www.youtube.com/watch?v%253DG7yIzY1BxuI%2526t%253D1s) that autonomously identify foes.
-Palantir's [AIP system](https://elbitsystems.com/product/lanius/) uses large language models to analyze battlefield data and come up with optimal strategies.
+Lanius builds [flying suicide drones](https://www.youtube.com/watch?v=G7yIzY1BxuI) that autonomously identify foes.
+Palantir's [AIP system](https://www.youtube.com/watch?v=XEM5qz__HOU) uses large language models to analyze battlefield data and come up with optimal strategies.
 
 Nations and weapon companies have realized that AI will have a huge impact on besting their enemies.
 We've entered a new arms race.
