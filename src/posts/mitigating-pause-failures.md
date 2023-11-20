@@ -15,6 +15,7 @@ If an AI pause happens before the risks are large enough, we might miss out on t
 Ultimately, we need to balance the risks with the costs of pausing.
 
 In our view, the chance that AI will cause catastrophic risks [soon](/urgency) is already large enough to warrant a pause at this moment.
+As stated by Stuart Russell, when faced with an uncertain deadline, one should take the action that would be optimal given the shortest time constraint.
 
 ## Pausing for too long
 
@@ -22,13 +23,13 @@ Nick Bostrom, one of the first AI alarmists, worries that [at some point we migh
 If concern about AI keeps rising and we get a Pause, it might lead to a situation where the entirety of AI development becomes taboo or illegal.
 If that happens, we will never reap the benefits of AI, and in the meantime, we might encounter other existential risks that we could have avoided with the help of AI.
 
-We can address this risk by clearly stating when AI development should resume.
+We can address this risk by clearly stating under what conditions AI development should resume.
 In our proposal, we suggest that AI development should resume when building provably safe AI becomes possible.
 Additionally, we only propose to ban the development of very specific kinds of models: only the largest, general models.
 
 ## Centralization of AI might make takeover risks worse
 
-Some proposals (although not a PauseAI proposal), like Magic, suggest that we should centralize AI development in a single organization.
+Some proposals (although not a PauseAI proposal), like "[MAGIC](https://arxiv.org/abs/2310.09217)", suggest that we should centralize AI development in a single organization.
 This makes AI development more controllable, but it also creates a single point of failure.
 
 ## National/local pauses might fail
@@ -46,6 +47,9 @@ The potential benefits are so large that a rogue (state) actor might decide to d
 That means the first to achieve superintelligence would be a non-cooperative actor, which is likely to be a bad outcome.
 
 By tracking GPU sales, we can detect at least some underground AI development.
+
+Western powers (US, Netherlands and Taiwan), control the GPU supply chain strongly enough to prevent uncooperative states from obtaining GPUs.
+Non-state actors are unlikely to be able to gather sufficient resources in secret to train an AGI for at least a decade after AGI becomes possible by Big Tech companies.
 Also, the fact that there no longer is a _business incentive_ would help to reduce the amount of underground AI development.
 
 ## Hardware overhang could cause a fast takeoff
@@ -56,3 +60,7 @@ Also, the fact that there no longer is a _business incentive_ would help to redu
 > This would cause a rapid and fairly discontinuous increase in AI capabilities, potentially leading to a fast takeoff scenario and all of the risks it entails.
 
 [_By Nora Belrose_](https://bounded-regret.ghost.io/ai-pause-will-likely-backfire-by-nora/)
+
+This is a serious concern. This is why PauseAI also supports a pause on GPU improvements.
+
+However, we still think a pause in AI scaling would probably be sensible even if there is no pause in GPU improvements because there is a serious possibility that we will achieve AGI in the next 5 years mostly by spending more money on GPUs, rather than by having better hardware.
