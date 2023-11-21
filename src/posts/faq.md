@@ -12,7 +12,7 @@ We are not affiliated with any company or organization.
 
 You can find us on [Discord](https://discord.gg/2XXWXvErfA), [Twitter](https://twitter.com/PauseAI), [facebook](https://www.facebook.com/PauseAI), [TikTok](https://www.tiktok.com/@pauseai), [LinkedIn](https://www.linkedin.com/uas/login?session_redirect=/company/97035448/), [YouTube](https://www.youtube.com/@PauseAI) and [Instagram](https://www.instagram.com/pause_ai).
 
-You can mail us at [pauseai@proton.me](mailto:pauseai@proton.me).
+You can mail us at [joep@pauseai.info](mailto:joep@pauseai.info).
 
 ### Do you want to ban all AI?
 
