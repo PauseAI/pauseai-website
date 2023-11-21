@@ -12,6 +12,7 @@ Here are some resources to get you started.
 - [How to get Empowered, not overpowered by AI](https://www.youtube.com/watch?v=2LRwvU6gEbA) (15 mins). A brief introduction to the importance of getting AI alignment right.
 - [Robert Miles' YouTube videos](https://www.youtube.com/watch?v=tlS5Y2vm02c&list=PLfHsskCxi_g-c62a_dmsNuHynaXsRQm40) are a great place to start understanding most of the fundamentals of AI alignment.
 - [Max Tegmark with Lex interview](https://youtu.be/VcVfceTsD0A?t=1547) (2 hrs). Interview that dives into the details of our current dangerous situation. _"It's like 'Don't look up', but we are building the asteroid ourselves."_
+- [Max Tegmark Ted Talk (2023)](https://www.youtube.com/watch?v=xUNx_PxNHrY) (15 mins). AI capabilities are improving quicker than expected.
 - [The AI Dilemma](https://www.youtube.com/watch?v=xoVJKj8lcNQ&t=1903s) (1hr). Presentation about the dangers of AI and the race which AI companies are stuck in.
 - [How not to destroy the world with AI](https://www.youtube.com/watch?v=ISkAkiAkK7A) (1hr). Presentation by Stuart Russell.
 - [Exploring the dangers from Artificial Intelligence](https://www.youtube.com/watch?v=sPyu_dTSma0&t=1328s) (25mins). Summary of cybersecurity, biohazard and power-seeking AI risks.
