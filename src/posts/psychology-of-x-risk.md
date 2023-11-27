@@ -125,6 +125,20 @@ In an [interview](https://youtu.be/0RknkWgd6Ck?t%25253D949), he gave the followi
 
 > "Why didn't I think about it before? Why didn't Geoffrey Hinton think about it before? [...] I believe there's a psychological effect that still may be at play for a lot of people. [...] It's very hard, in terms of your ego and feeling good about what you do, to accept the idea that the thing you've been working on for decades might be actually be very dangerous to humanity. [...] I think that I didn't want to think too much about it, and that's probably the case for others."
 
+### Easy to dismiss as conspiracy or cult
+
+In the past year, the majority of the population was introduced to the concept of existential risk from AI.
+When hearing about this, people will look for an explanation.
+The correct explanation is that AI is in fact dangerous, but believing this is difficult and scary: it will lead to a lot of cognitive friction.
+So people will almost directly look for a different way to explain their observations.
+There are two alternative explanations that are much easier to believe:
+
+1) **It's all a big conspiracy**. AI companies are hyping up AI to get more funding, and AI safety people are just part of this hype machine. This narrative matches with various observations: companies often lie, many AI safety folk are employed by AI companies, and there are a bunch of billionaires who are financing AI safety research. However, we can also point out why this conspiracy story is simply not true. Many of the alarmists are scientists who have nothing to gain. The companies might benefit in some way, but up until very recently (May 2023), they have been almost completely silent about AI risks. This makes sense, as companies mostly do not benefit from people fearing for their product or service. We've been protesting outside of Microsoft and OpenAI partly _because_ we wanted them to acknowledge the risks.
+2) **It's a cult**. The group that believes in AI safety is just a bunch of crazy religious extremists who believe in the end of the world. This seems to fit, too, since people in the AI safety community are often very passionate about the topic and use all sorts of in-group jargon. However, it falls apart when you point out that people who warn of AI risks are not a single organization. It's a large, diverse group of people, there is no single leader, there are no rituals, and there is no dogma.
+
+What makes these explanations so compelling is not just that they are easy to comprehend, or that they explain all observations perfectly - the primary reason is that they are comforting.
+Believing that people are warning about AI _because there is a real threat_ is scary and difficult to accept.
+
 ## Difficult to understand
 
 The arguments for AI existential risk are often very technical, and we are very prone to anthropomorphizing AI systems.
