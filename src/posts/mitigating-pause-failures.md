@@ -35,6 +35,7 @@ This makes AI development more controllable, but it also creates a single point 
 ## National/local pauses might fail
 
 If one country pauses AI development, other countries will continue to develop AI.
+We might end up in a world where the first AGI is developed by a non-cooperative actor, which is likely to be a bad outcome.
 The incentives to pause individually are weak, because the benefits of AI development are large, and the risks of AI development are global.
 This is a classic [tragedy of the commons](https://en.wikipedia.org/wiki/Tragedy_of_the_commons) situation.
 
@@ -61,6 +62,38 @@ Also, the fact that there no longer is a _business incentive_ would help to redu
 
 [_By Nora Belrose_](https://bounded-regret.ghost.io/ai-pause-will-likely-backfire-by-nora/)
 
-This is a serious concern. This is why PauseAI also supports a pause on GPU improvements.
+This is a serious concern. This is why PauseAI also supports a pause on relevant compute improvements.
 
 However, we still think a pause in AI scaling would probably be sensible even if there is no pause in GPU improvements because there is a serious possibility that we will achieve AGI in the next 5 years mostly by spending more money on GPUs, rather than by having better hardware.
+<!--
+## Policital capital is limited, Pause might fail
+
+AI safety people will be taken less seriously -->
+
+## Algorithmic or runtime improvements may make smaller models dangerous, too
+
+We're [proposing](/proposal) to pause the development of large, general AI models above a certain threshold (10^25 FLOPS).
+However, we cannot be certain that this threshold is safe.
+We've seen that changes in training data, training algorithms, or runtime usage can lead to large improvements in model performance.
+
+## If we only ban general AI models, we might still get AGI through narrow models
+
+We want to restrict dangerous models that can do things like manipulate humans, plan strategically and write code.
+We don't want to restrict very narrow models, like image classifiers used in self-driving cars or medical diagnosis.
+However, this leads to a difficult situation where there are _strong incentives_ to stretch the definition of "narrow" AI.
+
+Therefore we haven't defined "narrow" AI in our proposal, but instead, we've defined a threshold for model size.
+
+## If a pause is implemented, we should expect a political compromise
+
+We have a specific proposal that we think is optimal.
+However, we should not expect to have our proposal implemented exactly as we want it.
+Politics is messy and unpredictable, so we should expect our lobbying efforts to have vaguely directional effects, rather than precise effects.
+If we get some form of a Pause, but it's not exactly what we want, this might end up being worse than having no pause at all.
+For example:
+
+- A national pause that would let potentially worse actors get to AGI first
+- An international pause that is not enforced properly, leading to a similar outcome
+
+We can mitigate this by being consistent and clear in our communications about what we want.
+And even if we get a partial pause that is not exactly what we want, it might still be better than no pause at all.
