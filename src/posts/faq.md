@@ -38,6 +38,10 @@ Such a treaty also needs to be signed by China.
 If the treaty will guarantee that other nations will stop as well, and there are sufficient enforcement mechanisms in place,
 this should be something that China will want to see as well.
 
+## Can a Pause backfire and make things worse?
+
+We've addressed these concerns in [this article](/mitigating-pause-failures).
+
 ### How likely is it that superintelligent AI will cause very bad outcomes, like human extinction?
 
 AI safety researchers (who are the experts on this topic) are divided on this question, and estimates [range from 2% to 97% with an average of 30%](https://web.archive.org/web/20221013014859/https://www.alignmentforum.org/posts/QvwSr5LsxyDeaPK5s/existential-risk-from-ai-survey-results).
