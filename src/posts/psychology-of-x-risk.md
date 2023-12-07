@@ -28,6 +28,8 @@ Professionals can fear that their reputations will be damaged if they share thei
 
 > “It was almost dangerous from a career perspective to admit you were worried,” - [Jeff Clune said](https://www.theglobeandmail.com/business/article-i-hope-im-wrong-why-some-experts-see-doom-in-ai/)
 
+Pushing for sensible policy measures (like pausing) can be considered "extremist" or "alarmist", both of which can lower your credibility or reputation.
+
 ### Fear of being called racist / cultist / part of a conspiracy
 
 In recent months, various conspiracy theories have risen.
