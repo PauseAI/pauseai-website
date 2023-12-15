@@ -20,6 +20,12 @@ No, only the development of the largest general-purpose AI systems, often called
 We're calling for a ban on AI systems more powerful than GPT-4.
 All currently existing AI would be legal under our proposal, and most future AI models will remain legal, too.
 
+### Do you believe GPT-4 is going to kill us?
+
+No, we don't think current AI models are an existential threat.
+It seems likely that most next AI models won't be as well.
+But if we keep building more and more powerful AI systems, eventually we will reach a point where one will become an existential threat.
+
 ### Who is paying you?
 
 We have not received funding so far.
@@ -38,9 +44,17 @@ Such a treaty also needs to be signed by China.
 If the treaty will guarantee that other nations will stop as well, and there are sufficient enforcement mechanisms in place,
 this should be something that China will want to see as well.
 
-## Can a Pause backfire and make things worse?
+### Can a Pause backfire and make things worse?
 
 We've addressed these concerns in [this article](/mitigating-pause-failures).
+
+### Why do you protest?
+
+- Protesting shows the world that we care about this issue. By protesting, we show that we are willing to spend our time and energy to get people to listen.
+- By far [most people are supportive](https://today.yougov.com/politics/articles/31718-do-protesters-want-help-or-hurt-america) of peaceful/non-violent protests
+- There is [no "backfire" effect](https://journals.sagepub.com/doi/full/10.1177/2378023120925949)
+- It's a social bonding experience. You meet other people who share your concerns and willingness to take action.
+- Check out [this amazing article](https://forum.effectivealtruism.org/posts/4ez3nvEmozwPwARr9/a-case-for-the-effectiveness-of-protest) for more insights on why protesting works
 
 ### How likely is it that superintelligent AI will cause very bad outcomes, like human extinction?
 
