@@ -23,8 +23,6 @@
 		lat = map.getCenter().lat
 	}
 
-	console.log(lng, lat)
-
 	onMount(() => {
 		const initialState = { lng: lng, lat: lat, zoom: zoom }
 
@@ -61,7 +59,9 @@
 				})
 					.setPopup(
 						new Popup({ offset: [0, -15] }).setHTML(
-							`<h3><a href="${community.link}">${community.name}</a></h3>`
+							`<h3><a href="${community.link || 'https://discord.gg/HWcPt5ccJN'}">${
+								community.name
+							}</a></h3>`
 						)
 					)
 					.setLngLat([community.lon, community.lat])

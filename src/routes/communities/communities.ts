@@ -2,11 +2,11 @@ import type { Post } from '$lib/types'
 
 export type Community = {
 	name: string
-	// EPSG:3857
 	lat: number
-	// EPSG:3857
 	lon: number
-	link: string
+	/** Will default to PauseAI discord */
+	link?: string
+	/** Non-PauseAI org */
 	adjacent?: boolean
 }
 
@@ -62,7 +62,7 @@ const AdjacentCommunities: Community[] = [
 	{
 		name: 'OxAI Safety & Governance Team',
 		lat: 51.752,
-		lon: 1.2577,
+		lon: -1.2577,
 		link: 'https://www.oxai.org/ai-safety'
 	},
 	{
@@ -154,9 +154,46 @@ const AdjacentCommunities: Community[] = [
 		lat: 43.0731,
 		lon: -89.4012,
 		link: 'https://waisi.org/'
+	},
+	{
+		name: 'AI Safety Gothenburg',
+		lat: 57.7089,
+		lon: 11.9746,
+		link: 'https://www.linkedin.com/company/ai-safety-gothenburg/'
+	},
+	{
+		name: 'AI Safety Tokyo benkyokai',
+		lat: 35.6895,
+		lon: 139.6917,
+		link: 'https://aisafety.tokyo/benkyoukai'
+	},
+	{
+		name: 'Munich Artificial Intelligence Alignment (MAIA)',
+		lat: 48.1351,
+		lon: 11.582,
+		link: 'https://www.munich-ai-alignment.org/'
+	},
+	{
+		name: 'AI Safety Melbourne',
+		lat: -37.8136,
+		lon: 144.9631,
+		link: 'https://www.facebook.com/groups/503645528219169'
+	},
+	{
+		name: 'AIGS Canada Toronto',
+		lat: 43.6532,
+		lon: -79.3832,
+		link: 'https://aigs.ca/events/'
+	},
+	{
+		name: 'AI Safety Amsterdam',
+		lat: 52.3702,
+		lon: 4.8952,
+		link: 'https://aisafetyamsterdam.com/'
 	}
 ]
 
+/** All communities, PauseAI communities last to render them on top */
 export const communities: Community[] = [
 	...AdjacentCommunities.map((a) => {
 		a.adjacent = true
