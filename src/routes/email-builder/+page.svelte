@@ -60,8 +60,15 @@
 
 <h2>Who to send to</h2>
 <ul>
-	<li>awdaw</li>
-	<li />
+	<li>
+		<b>Someone who might visit the next Summit. </b> The next AI Safety Summit will be attended by many
+		countries. Who is likely to represent your country? Maybe a minister of foreign affairs or science?
+	</li>
+	<li>
+		<b>Someone who is likely to listen</b>. Is there a politician who's often at the forefront of
+		discussing new digital / science topics? Perhaps even someone who's already shared concerns
+		about AI?
+	</li>
 </ul>
 
 <div class="actionBar">
