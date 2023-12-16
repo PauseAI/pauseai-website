@@ -190,6 +190,18 @@ const AdjacentCommunities: Community[] = [
 		lat: 52.3702,
 		lon: 4.8952,
 		link: 'https://aisafetyamsterdam.com/'
+	},
+	{
+		name: 'Vienna AI Safety Group',
+		lat: 48.2082,
+		lon: 16.3738,
+		link: 'https://github.com/ViennaAI/info'
+	},
+	{
+		name: 'AI Safety Denmark',
+		lat: 55.6761,
+		lon: 12.5683,
+		link: 'https://www.facebook.com/groups/AISafetyDanmark'
 	}
 ]
 
