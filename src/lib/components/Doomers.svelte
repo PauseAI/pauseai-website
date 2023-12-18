@@ -20,6 +20,7 @@
 		},
 		{
 			name: 'Vitalik Buterin',
+			title: 'Ethereum founder',
 			probability: '10%',
 			number: 0.1,
 			source: 'https://x.com/liron/status/1729740226594258982?s=20'
@@ -33,10 +34,10 @@
 			source: 'https://twitter.com/geoffreyhinton/status/1719447980753719543'
 		},
 		{
-			name: 'Machine learning researcher in 2022',
+			name: 'Machine learning researchers',
 			probability: '14%',
 			number: 0.14,
-			note: 'median value is 5%',
+			note: 'From 2022, median value is 5%',
 			source: 'https://aiimpacts.org/2022-expert-survey-on-progress-in-ai/'
 		},
 		{
@@ -52,7 +53,7 @@
 			description: 'former alignment lead at OpenAI, current researcher at ARC',
 			probability: '10-20%',
 			number: 0.15,
-			note: 'chance of AI takeover, many/most humans dead. Cumulative risks go to 50% when you get to human-level AI',
+			note: 'Cumulative risks go to 50% when you get to human-level AI',
 			source: 'https://www.youtube.com/watch?v=GyFkWb903aU&t=560s'
 		},
 		{
@@ -63,19 +64,30 @@
 			source: 'https://twitter.com/liron/status/1710520914444718459'
 		},
 		{
+			name: 'Yoshua Bengio',
+			title: 'one of three godfathers of AI',
+			probability: '20%',
+			number: 0.2,
+			source:
+				'https://www.abc.net.au/news/2023-07-15/whats-your-pdoom-ai-researchers-worry-catastrophe/102591340'
+		},
+		{
 			name: 'Elon Musk',
+			title: 'CEO of Tesla, SpaceX, X',
 			probability: '20-30%',
 			number: 0.25,
 			source: 'https://www.youtube.com/watch?v=57y7DxWfOS0&t=50s'
 		},
 		{
 			name: 'Emmet Shear',
+			title: 'CEO of Twitch, short term CEO of OpenAI',
 			probability: '5-50%',
 			number: 0.275,
 			source: 'https://www.youtube.com/watch?v=9oUbauum4uI'
 		},
 		{
 			name: 'AI Safety Researchers',
+			note: 'Average from 44 AI safety researchers in 2021',
 			probability: '30%',
 			number: 0.3,
 			source:
@@ -84,6 +96,7 @@
 		{
 			name: 'Scott Alexander',
 			probability: '33%',
+			title: 'Popular Internet blogger at Astral Codex Ten',
 			number: 0.33,
 			source: 'https://astralcodexten.substack.com/p/why-i-am-not-as-much-of-a-doomer'
 		},
@@ -104,6 +117,7 @@
 		},
 		{
 			name: 'Holden Karnofsky',
+			title: 'Executive Director of Open Philanthropy',
 			probability: '50%',
 			number: 0.5,
 			source: 'https://www.cold-takes.com/where-ai-forecasting-stands-today/'
@@ -118,18 +132,21 @@
 		},
 		{
 			name: 'Zvi Mowshowitz',
+			title: 'AI researcher',
 			probability: '60%',
 			number: 0.6,
 			source: 'https://x.com/liron/status/1729274710670893262?s=20'
 		},
 		{
 			name: 'Dan Hendrycks',
+			title: 'Head of Center for AI Safety',
 			probability: '>80%',
 			number: 0.8,
 			source: 'https://twitter.com/DanHendrycks/status/1642394635657162753'
 		},
 		{
 			name: 'Eliezer Yudkowski',
+			title: 'Founder of MIRI',
 			probability: '>80%',
 			number: 0.8,
 			source: 'https://twitter.com/ESYudkowsky/status/1662247373014286337'
@@ -148,16 +165,20 @@
 				</a>
 			</div>
 			<div class="details">
-				<div class="bar" style={`width: calc(${doomer.number * 100}%`} />
-				<h3>
+				<h3 class="name">
+					<div class="bar" style={`width: calc(${doomer.number * 100}%`} />
 					{doomer.name}
 					{#if doomer.title}
-						({doomer.title})
+						<div class="title">
+							{doomer.title}
+						</div>
 					{/if}
 				</h3>
-				{#if doomer.note}
-					({doomer.note})
-				{/if}
+				<div class="note">
+					{#if doomer.note}
+						({doomer.note})
+					{/if}
+				</div>
 			</div>
 		</li>
 	{/each}
@@ -168,18 +189,36 @@
 	.bar {
 		position: absolute;
 		background-color: var(--brand);
-		/* opacity: 0.5; */
+		opacity: 0.7;
 		/* height: 100%; */
 		height: 3px;
 		bottom: 0;
 		z-index: 2;
 	}
 
+	.note {
+		font-size: 0.8rem;
+	}
+
+	.title {
+		margin-left: 0.4rem;
+		opacity: 0.5;
+		font-family: var(--font-body);
+		font-weight: normal;
+		font-size: 0.8rem;
+	}
+
 	.doomer {
-		margin-bottom: 0.5rem;
+		margin-bottom: 1rem;
 		position: relative;
 		display: flex;
 		flex-direction: row;
+	}
+
+	.name {
+		display: flex;
+		position: relative;
+		padding-bottom: 0.3rem;
 	}
 
 	.pdoom {

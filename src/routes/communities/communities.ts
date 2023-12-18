@@ -86,7 +86,7 @@ const AdjacentCommunities: Community[] = [
 	{
 		name: 'AI Safety Hub Edinburgh (AISHED)',
 		lat: 55.9533,
-		lon: 3.1883,
+		lon: -3.1883,
 		link: 'https://www.aished.org/'
 	},
 	{
