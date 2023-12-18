@@ -12,6 +12,7 @@
 		{
 			name: 'Yann LeCun',
 			title: 'Meta Chief Scientist',
+			note: 'less likely than an asteroid',
 			probability: '<0.01%',
 			source: 'https://twitter.com/liron/status/1736555643384025428'
 		},
