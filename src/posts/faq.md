@@ -98,7 +98,7 @@ We can't know for certain what motivations these companies have, but we do know 
 Let's look at the timeline.
 
 There have been many people who have warned about x-risk since the early 2000s.
-Eliezer Yudkowski, Nick Bostrom, Stuart Russell, Max Tegmark, and many others.
+Eliezer Yudkowsky, Nick Bostrom, Stuart Russell, Max Tegmark, and many others.
 They had no AI tech to push - they were simply concerned about the future of humanity.
 
 The AI companies never mentioned x-risk until very recently.

@@ -12,7 +12,7 @@
 	const doomers: Doomer[] = [
 		{
 			name: 'Yann LeCun',
-			title: 'Meta Chief Scientist',
+			title: 'one of three godfathers of AI, works at Meta',
 			note: 'less likely than an asteroid',
 			number: 0.0001,
 			probability: '<0.01%',
@@ -146,7 +146,7 @@
 			source: 'https://twitter.com/DanHendrycks/status/1642394635657162753'
 		},
 		{
-			name: 'Eliezer Yudkowski',
+			name: 'Eliezer Yudkowsky',
 			title: 'Founder of MIRI',
 			probability: '>80%',
 			number: 0.8,
