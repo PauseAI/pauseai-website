@@ -22,3 +22,10 @@
 	the time horizon is often not specified, which makes comparing a bit difficult.
 </p>
 <Doomers />
+
+<h2>What about yours?</h2>
+<p>
+	We've built the AI Outcomes App to help you think about how probable the various outcomes from AI
+	are.
+</p>
+<a href="/outcomes">Try it out</a>

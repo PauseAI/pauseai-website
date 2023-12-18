@@ -22,6 +22,7 @@
 			name: 'Vitalik Buterin',
 			title: 'Ethereum founder',
 			probability: '10%',
+			note: 'Specifically means AI takeover',
 			number: 0.1,
 			source: 'https://x.com/liron/status/1729740226594258982?s=20'
 		},
