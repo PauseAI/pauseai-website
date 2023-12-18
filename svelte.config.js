@@ -1,5 +1,5 @@
 import adapter from '@sveltejs/adapter-netlify'
-import { vitePreprocess } from '@sveltejs/kit/vite'
+import { vitePreprocess } from '@sveltejs/vite-plugin-svelte'
 
 import { mdsvex, escapeSvelte } from 'mdsvex'
 import shiki from 'shiki'

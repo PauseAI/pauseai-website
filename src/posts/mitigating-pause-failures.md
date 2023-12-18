@@ -65,6 +65,7 @@ Also, the fact that there no longer is a _business incentive_ would help to redu
 This is a serious concern. This is why PauseAI also supports a pause on relevant compute improvements.
 
 However, we still think a pause in AI scaling would probably be sensible even if there is no pause in GPU improvements because there is a serious possibility that we will achieve AGI in the next 5 years mostly by spending more money on GPUs, rather than by having better hardware.
+
 <!--
 ## Policital capital is limited, Pause might fail
 

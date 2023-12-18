@@ -40,6 +40,7 @@ Can we prevent these dangerous capabilities from appearing?
 As AIs become larger and are trained on more data, they attain new abilities.
 It turns out to be very hard to predict which abilities will appear, and how well an AI will perform.
 Because of this, they are often called _Emergent Capabilities_.
+
 <!-- Example about theory of mind, graph -->
 
 Our current paradigm of large langue models is almost inherently unpredictable.
@@ -64,15 +65,15 @@ This type of policy is relatively cheap, and it still allows AI labs to continue
 However, we believe this approach is very dangerous:
 
 - **Models can be leaked**.
-We saw this happen with Meta's LLAMA model. Once it's out there, there is no going back.
+  We saw this happen with Meta's LLAMA model. Once it's out there, there is no going back.
 - **Some capabilities are even dangerous inside AI labs**.
-A self-replicating AI, for example, could escape from the lab before deployment.
+  A self-replicating AI, for example, could escape from the lab before deployment.
 - **Testing for dangerous capabilities is difficult**.
-We don't know how we can (safetly) test if an AI can self-replicate, for example. Or how to test if it deceives humans
+  We don't know how we can (safetly) test if an AI can self-replicate, for example. Or how to test if it deceives humans
 - **Bad actors can still build dangerous AIs**.
-Evaluations are a _post-training_ measure. By relying on them, we
+  Evaluations are a _post-training_ measure. By relying on them, we
 - **Capabilities can be added or discovered after training**.
-This includes fine-tuning, jailbreaking, and runtime improvements.
+  This includes fine-tuning, jailbreaking, and runtime improvements.
 
 We'll dive into this last point in more detail.
 

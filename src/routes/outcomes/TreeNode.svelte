@@ -7,7 +7,7 @@
 	import { fade } from 'svelte/transition'
 
 	export let node: TreeNodeType
-	export let parentProbability: number = 1
+	export let parentProbability = 1
 	export let showProbabilities = false
 	export let top: HTMLElement
 	export let intro: boolean

@@ -4,7 +4,7 @@
 	export let description: string
 	export let date: string | undefined = undefined
 	/** URL or relative path to cover / preview image */
-	export let image: string = '/Cover.png'
+	export let image = '/Cover.png'
 	const imageUrl = image.startsWith('/') ? `${url}${image}` : image
 </script>
 

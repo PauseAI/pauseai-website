@@ -13,6 +13,7 @@ And that means we need to address some hard questions.
 
 <!-- The largest AI models that have been trained are roughly 100 billion to 1 trillion parameters. -->
 <!-- For reference, the human brain has about 100 trillion synapses. -->
+
 To train a model like GPT-4, you need a lot of highly specialized and costly hardware (25,000 Nvidia A100 GPUs, cost of $10.000 each).
 At this point only one company is able to create these graphics cards: Nvidia.
 Only one company is able to manufacture the chips: TSMC.

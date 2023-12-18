@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { onMount } from 'svelte'
 	import Propability from './Propability.svelte'
-	export let probability: number = 0.5
+	export let probability = 0.5
 	import { fade } from 'svelte/transition'
 
 	onMount(() => console.log(`Initial percentage: ${probability}%`))

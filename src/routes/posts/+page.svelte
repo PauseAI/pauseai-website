@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { formatDate } from '$lib/utils'
+	// import { formatDate } from '$lib/utils'
 	import * as config from '$lib/config'
 
 	export let data
@@ -42,9 +42,9 @@
 		text-decoration: underline;
 	}
 
-	.date {
+	/* .date {
 		color: var(--text-2);
-	}
+	} */
 
 	.description {
 		margin-top: var(--size-3);
