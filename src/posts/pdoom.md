@@ -5,10 +5,12 @@ description: How likely do AI various researchers believe AI will cause human ex
 
 What is p(doom)?
 The probability of very bad outcomes (e.g. human extinction) as a result of AI.
+This most often refers mainly to the chance that [AI takes over](/ai-takeover) from humanity, but there are different scenarios that also constitute as "doom".
+For example, a large portion of the population dying due to a novel biological weapon created by AI, social callapse due to a large-scale cyberattack, or AI causing a nuclear war.
 
 ### p(doom) numbers, from low to high
 
-- Yann LeCun (Meta Chief Scientist): [<0.01%](https://twitter.com/liron/status/1736555643384025428)
+- Yann LeCun (Meta Chief Scientist): [less than 0.01%](https://twitter.com/liron/status/1736555643384025428)
 - Vitalik Buterin: [10%](https://x.com/liron/status/1729740226594258982?s=20)
 - Geoff Hinton (one of three godfathers of AI): [10%](https://twitter.com/geoffreyhinton/status/1719447980753719543) chance of extinction in next 30 years if unregulated
 - Dario Amodei (CEO of Anthropic): [10-25%](https://twitter.com/liron/status/1710520914444718459) combining something wrong with model plus human misuse
