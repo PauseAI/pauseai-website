@@ -41,6 +41,7 @@
 		overflow: visible;
 	}
 	.logo-circle {
+		transform: translateX(-2px);
 		transition: transform 0.1s ease-in-out;
 		transform-origin: center;
 	}
