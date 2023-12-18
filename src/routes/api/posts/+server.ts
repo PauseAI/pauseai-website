@@ -2,9 +2,10 @@ import { json } from '@sveltejs/kit'
 import type { Post } from '$lib/types'
 import { outcomesMeta } from '../../outcomes/meta'
 import { communitiesMeta } from '../../communities/communities'
+import { meta as pdoomMeta } from '../../pdoom/meta'
 
 /** When adding an extra route, make sure to add the metadata here for SEO purposes */
-const hardCodedPages: Post[] = [outcomesMeta, communitiesMeta]
+const hardCodedPages: Post[] = [outcomesMeta, communitiesMeta, pdoomMeta]
 
 async function getPosts() {
 	let posts: Post[] = []

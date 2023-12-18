@@ -1,12 +1,9 @@
 <script lang="ts">
 	import PostMeta from '$lib/components/PostMeta.svelte'
 	import Doomers from '$lib/components/Doomers.svelte'
+	import { meta } from './meta'
 
-	let { title, description, date } = {
-		title: 'List of p(doom) values',
-		description: 'How likely do AI various researchers believe AI will cause human extinction?',
-		date: '2023-12-18'
-	}
+	let { title, description, date } = meta
 </script>
 
 <PostMeta {title} {description} {date} />
