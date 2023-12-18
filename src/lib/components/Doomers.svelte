@@ -87,7 +87,7 @@
 		},
 		{
 			name: 'AI Safety Researchers',
-			note: 'Average from 44 AI safety researchers in 2021',
+			note: 'Mean from 44 AI safety researchers in 2021',
 			probability: '30%',
 			number: 0.3,
 			source:
@@ -109,8 +109,8 @@
 				'https://forum.effectivealtruism.org/posts/QeLE22fefLqKfYTW6/eli-lifland-on-navigating-the-ai-alignment-landscape'
 		},
 		{
-			name: 'Average AI engineer',
-			note: 'Survey methodology may be flawed',
+			name: 'AI engineer',
+			note: 'Estimate mean value, survey methodology may be flawed',
 			probability: '40%',
 			number: 0.4,
 			source: 'https://twitter.com/AISafetyMemes/status/1713515843194077583'
