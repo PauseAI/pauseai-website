@@ -56,6 +56,9 @@
 		<b>No social pressure.</b> If you post something publicly, a politician might be hesitant to respond
 		to a topic they haven't made up their mind on.
 	</li>
+	<li>
+		<b>Not many people actually do it.</b> That means that your email will stand out.
+	</li>
 </ul>
 
 <h2>Who to send to</h2>
@@ -115,11 +118,11 @@
 		/* Edit mouse cursor, indicate editable */
 		cursor: text;
 		/* make it lookt like a letter! */
-		background-color: #fff;
+		background-color: var(--bg);
 		padding: 1rem;
 		margin: 1rem;
 		/* shadow */
-		box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+		box-shadow: 0 0 10px var(--text);
 		font-family: 'Times New Roman', Times, serif;
 	}
 
