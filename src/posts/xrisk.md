@@ -90,7 +90,7 @@ But even though we cannot tell what a superintelligence will want to achieve, we
 - **Ensuring its own survival**. The AI will not want to be turned off, as it could no longer achieve its goals. AI might conclude that humans are a threat to its existence, as humans could turn it off.
 - **Preserving its goals**. The AI will not want humans to modify its code, because that could change its goals, thus preventing it from achieving its current goal.
 
-The tendancy to persue these subgoals given any high-level goal is called [instrumental convergence](https://www.youtube.com/watch?v=ZeecOKBus3Q), and it is a key concern for AI safety researchers.
+The tendency to persue these subgoals given any high-level goal is called [instrumental convergence](https://www.youtube.com/watch?v=ZeecOKBus3Q), and it is a key concern for AI safety researchers.
 
 ## Why can't we just turn it off if it's dangerous?
 
