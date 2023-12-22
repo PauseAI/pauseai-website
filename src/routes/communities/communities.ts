@@ -19,12 +19,68 @@ export const communitiesMeta: Post = {
 	categories: []
 }
 
+const discordInvite = 'https://discord.gg/CR5u5BTBwy'
+
 const PauseAICommunities: Community[] = [
 	{
 		name: 'PauseAI Utrecht',
 		lat: 52.09073739999999,
 		lon: 5.081420100000023,
-		link: 'https://discord.gg/PsvZwpmvYE'
+		link: discordInvite
+	},
+	{
+		name: 'PauseAI Washington DC',
+		lat: 38.9072,
+		lon: -77.0369,
+		link: discordInvite
+	},
+	{
+		name: 'PauseAI Nottingham',
+		lat: 52.9548,
+		lon: -1.1581,
+		link: discordInvite
+	},
+	{
+		name: 'PauseAI Phoenix',
+		lat: 33.4484,
+		lon: -112.074,
+		link: discordInvite
+	},
+	{
+		name: 'PauseAI Orlando',
+		lat: 28.5383,
+		lon: -81.3792,
+		link: discordInvite
+	},
+	{
+		name: 'PauseAI Oldenburg',
+		lat: 53.1412,
+		lon: 8.2146,
+		link: discordInvite
+	},
+	{
+		name: 'PauseAI Seattle',
+		lat: 47.6062,
+		lon: -122.3321,
+		link: discordInvite
+	},
+	{
+		name: 'PauseAI Edinburgh',
+		lat: 55.9533,
+		lon: -3.1883,
+		link: discordInvite
+	},
+	{
+		name: 'PauseAI Manchester',
+		lat: 53.4808,
+		lon: -2.2426,
+		link: discordInvite
+	},
+	{
+		name: 'PauseAI Copenhagen',
+		lat: 55.6761,
+		lon: 12.5683,
+		link: discordInvite
 	},
 	{
 		name: 'PauseAI SF',
