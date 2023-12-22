@@ -35,20 +35,23 @@ But if we keep building more and more powerful AI systems, eventually we will re
 
 ### Who is paying you?
 
-We have not received funding so far.
+We have not received significant funding so far.
 Everyone contributing to PauseAI is doing so voluntarily.
-We expect to receive a grant through the LightSpeed network soon, and people have approached us that they are willing to donate.
+We expect to receive a grant through the LightSpeed network soon.
+
+You can also [donate](https://pauseai-shop.fourthwall.com/en-eur/) to PauseAI if you support our cause!
+We use most of the money to enable local communities to organize events.
 
 ### If we Pause, what about China?
 
 For starters, at this point China has stricter AI regulations than virtually any other country.
 They [don't allow chatbots](https://www.reuters.com/technology/chinas-slow-ai-roll-out-points-its-tech-sectors-new-regulatory-reality-2023-07-12/) and [disallow training on internet data](https://cointelegraph.com/news/china-sets-stricter-rules-training-generative-ai-models).
-China has a more controlling government, and thus has even more reason to fear the uncontrollable and unpredictable impacts of AI.
+China has a more controlling government and thus has even more reason to fear the uncontrollable and unpredictable impacts of AI.
 During the UNSC meeting on AI safety, China was the only country that mentioned the possibility of implementing a pause.
 
 Also note that we are primarily asking for an _international_ pause, enforced by a treaty.
 Such a treaty also needs to be signed by China.
-If the treaty will guarantee that other nations will stop as well, and there are sufficient enforcement mechanisms in place,
+If the treaty guarantees that other nations will stop as well, and there are sufficient enforcement mechanisms in place,
 this should be something that China will want to see as well.
 
 ### Can a Pause backfire and make things worse?
@@ -125,7 +128,7 @@ In May 2023, everything changed:
 - On May 30th, the [Safe.ai statement (acknowledging x-risk)](https://www.safe.ai/statement-on-ai-risk) was published. This time, including people from OpenAI, Google and Microsoft.
 
 Signing the statement.
-That's all the AI companies (or some of their directors / employees) have done to push the x-risk narrative.
+That's all the AI companies (or some of their directors/employees) have done to push the x-risk narrative.
 
 These companies have been very slow to acknowledge x-risk, considering that many of their employees have been aware of it for years.
 So in our view, the AI companies are not pushing the x-risk narrative, they have been reactive to others pushing it, and have waited with their response until it was absolutely necessary.

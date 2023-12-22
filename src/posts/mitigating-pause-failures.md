@@ -65,9 +65,12 @@ Also, the fact that there no longer is a _business incentive_ would help to redu
 
 [_By Nora Belrose_](https://bounded-regret.ghost.io/ai-pause-will-likely-backfire-by-nora/)
 
-This is a serious concern. This is why PauseAI also supports a pause on relevant compute improvements.
+This is a serious concern, although there are strong arguments to be made that [overhang is unlikely to occur](https://blog.aiimpacts.org/p/are-there-examples-of-overhang-for).
 
-However, we still think a pause in AI scaling would probably be sensible even if there is no pause in GPU improvements because there is a serious possibility that we will achieve AGI in the next 5 years mostly by spending more money on GPUs, rather than by having better hardware.
+PauseAI supports a pause on relevant compute improvements as well.
+Also, the 'play' button should not be pressed if we still don't know how to build safe AI.
+
+We still think a pause in AI scaling would probably be sensible even if there is no pause in GPU improvements because there is a serious possibility that we will achieve AGI in the next 5 years mostly by spending more money on GPUs, rather than by having better hardware.
 
 <!--
 ## Policital capital is limited, Pause might fail
@@ -87,6 +90,15 @@ We don't want to restrict very narrow models, like image classifiers used in sel
 However, this leads to a difficult situation where there are _strong incentives_ to stretch the definition of "narrow" AI.
 
 Therefore we haven't defined "narrow" AI in our proposal, but instead, we've defined a threshold for model size.
+
+## We will end up with less safety-minded organizations if we pause
+
+If you dive into the history of OpenAI, DeepMind and Anthropic, you will find that all of them have been founded by people who are quite worried about AI risks.
+In a way, we are very lucky that the biggest AI companies right now have this as part of their culture.
+Maybe a pause gives a large number of companies the time to catch up, which could lead to a large group of companies that are less safety-minded.
+
+If we were asking for a time-based pause, that would be a fair concern.
+But what we're asking for is a pause _until we can prove AI can be built safely_, so we should not end up with organizations building unsafe AI after the pause is lifted.
 
 ## If a pause is implemented, we should expect a political compromise
 
