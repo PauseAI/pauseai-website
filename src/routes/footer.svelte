@@ -34,7 +34,7 @@
 	<div class="column">
 		<h2>Take Action</h2>
 		<a href="/join">Join PauseAI</a>
-		<a href="/communities">Find local communities</a>
+		<a href="/communities">Local communities</a>
 		<a href="/action">How you can help</a>
 		<a href="/protests">Protests</a>
 		<a href="/organizing-a-protest">Organize a protest</a>

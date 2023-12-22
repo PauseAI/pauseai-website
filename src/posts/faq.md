@@ -11,8 +11,7 @@ We do this by informing the public, talking to decision-makers, and organizing p
 We are not affiliated with any company or organization.
 
 You can find us on [Discord](https://discord.gg/2XXWXvErfA), [Twitter](https://twitter.com/PauseAI), [facebook](https://www.facebook.com/PauseAI), [TikTok](https://www.tiktok.com/@pauseai), [LinkedIn](https://www.linkedin.com/uas/login?session_redirect=/company/97035448/), [YouTube](https://www.youtube.com/@PauseAI) and [Instagram](https://www.instagram.com/pause_ai).
-
-You can mail us at [joep@pauseai.info](mailto:joep@pauseai.info).
+You can mail/contact us at [joep@pauseai.info](mailto:joep@pauseai.info).
 
 ### Aren't you just scared of changes and new technology?
 
@@ -33,6 +32,10 @@ No, we don't think current AI models are an existential threat.
 It seems likely that most next AI models won't be as well.
 But if we keep building more and more powerful AI systems, eventually we will reach a point where one will become an existential threat.
 
+### Can a Pause backfire and make things worse?
+
+We've addressed these concerns in [this article](/mitigating-pause-failures).
+
 ### Who is paying you?
 
 We have not received significant funding so far.
@@ -42,42 +45,29 @@ We expect to receive a grant through the LightSpeed network soon.
 You can also [donate](https://pauseai-shop.fourthwall.com/en-eur/) to PauseAI if you support our cause!
 We use most of the money to enable local communities to organize events.
 
-### If we Pause, what about China?
-
-For starters, at this point China has stricter AI regulations than virtually any other country.
-They [don't allow chatbots](https://www.reuters.com/technology/chinas-slow-ai-roll-out-points-its-tech-sectors-new-regulatory-reality-2023-07-12/) and [disallow training on internet data](https://cointelegraph.com/news/china-sets-stricter-rules-training-generative-ai-models).
-China has a more controlling government and thus has even more reason to fear the uncontrollable and unpredictable impacts of AI.
-During the UNSC meeting on AI safety, China was the only country that mentioned the possibility of implementing a pause.
-
-Also note that we are primarily asking for an _international_ pause, enforced by a treaty.
-Such a treaty also needs to be signed by China.
-If the treaty guarantees that other nations will stop as well, and there are sufficient enforcement mechanisms in place,
-this should be something that China will want to see as well.
-
-### Can a Pause backfire and make things worse?
-
-We've addressed these concerns in [this article](/mitigating-pause-failures).
-
 ### Why do you protest?
 
 - Protesting shows the world that we care about this issue. By protesting, we show that we are willing to spend our time and energy to get people to listen.
+- Protests can and often will [positively influence](https://www.socialchangelab.org/_files/ugd/503ba4_052959e2ee8d4924934b7efe3916981e.pdf) public opinion, voting behavior, corporate behavior and policy.
 - By far [most people are supportive](https://today.yougov.com/politics/articles/31718-do-protesters-want-help-or-hurt-america) of peaceful/non-violent protests
-- There is [no "backfire" effect](https://journals.sagepub.com/doi/full/10.1177/2378023120925949)
+- There is [no "backfire" effect](https://journals.sagepub.com/doi/full/10.1177/2378023120925949) ([unless the protest is violent](https://news.stanford.edu/2018/10/12/how-violent-protest-can-backfire/))
 - It's a social bonding experience. You meet other people who share your concerns and willingness to take action.
 - Check out [this amazing article](https://forum.effectivealtruism.org/posts/4ez3nvEmozwPwARr9/a-case-for-the-effectiveness-of-protest) for more insights on why protesting works
 
 ### How likely is it that superintelligent AI will cause very bad outcomes, like human extinction?
+
+We have composed [a list of 'p(doom)' values](/pdoom) (probability of bad outcomes) from various notable experts in the field.
 
 AI safety researchers (who are the experts on this topic) are divided on this question, and estimates [range from 2% to 97% with an average of 30%](https://web.archive.org/web/20221013014859/https://www.alignmentforum.org/posts/QvwSr5LsxyDeaPK5s/existential-risk-from-ai-survey-results).
 Note that no (surveyed) AI safety researchers believe that there's a 0% chance.
 However, there might be selection bias here: people who work in the AI safety field are likely to do so because they believe preventing bad AI outcomes is important.
 
 If you ask AI researchers in general (not safety specialists), this number drops to a [mean value of around 14%](https://aiimpacts.org/2022-expert-survey-on-progress-in-ai/), with a median of 5%.
-A small minority, about 4% of them, believe that the alignment problem is not a real problem.
+A minority, about 20% of them, believe that the alignment problem is not a real or important problem.
 Note that there might be a selection bias here in the opposite direction: people who work in AI are likely to do so because they believe AI will be beneficial.
 
 _Imagine you're invited to take a test flight on a new airplane_.
-The plane engineers thinks there's a 14% chance of crashing.
+The plane engineers think there's a 14% chance of crashing.
 Would you enter that plane? Because right now, we're all boarding the AI plane.
 
 ### How long do we have until superintelligent AI?
@@ -89,6 +79,18 @@ We got there in April 2023.
 We should act as if we have very little time left because we don't want to be caught off guard.
 
 [Read more about urgency](/urgency).
+
+### If we Pause, what about China?
+
+For starters, at this point, China has stricter AI regulations than virtually any other country.
+They [didn't even allow chatbots](https://www.reuters.com/technology/chinas-slow-ai-roll-out-points-its-tech-sectors-new-regulatory-reality-2023-07-12/) and [disallow training on internet data](https://cointelegraph.com/news/china-sets-stricter-rules-training-generative-ai-models) up [until september 2023](https://asia.nikkei.com/Business/Technology/China-approves-AI-chatbot-releases-but-will-it-unleash-innovation).
+China has a more controlling government and thus has even more reason to fear the uncontrollable and unpredictable impacts of AI.
+During the UNSC meeting on AI safety, China was the only country that mentioned the possibility of implementing a pause.
+
+Also note that we are primarily asking for an _international_ pause, enforced by a treaty.
+Such a treaty also needs to be signed by China.
+If the treaty guarantees that other nations will stop as well, and there are sufficient enforcement mechanisms in place,
+this should be something that China will want to see as well.
 
 ### OpenAI and Google are saying they want to be regulated. Why are you protesting them?
 

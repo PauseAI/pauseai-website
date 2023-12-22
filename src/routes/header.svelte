@@ -19,7 +19,7 @@
 			<NavLink href="/chat">{botName}</NavLink>
 		{/if}
 		<!-- <NavLink href="/about">About</NavLink> -->
-		<NavLink c2a href="/action">Take action</NavLink>
+		<NavLink c2a href="/join">Join</NavLink>
 	</div>
 </nav>
 
