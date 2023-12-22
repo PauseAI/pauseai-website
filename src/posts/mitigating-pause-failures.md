@@ -39,7 +39,10 @@ We might end up in a world where the first AGI is developed by a non-cooperative
 The incentives to pause individually are weak, because the benefits of AI development are large, and the risks of AI development are global.
 This is a classic [tragedy of the commons](https://en.wikipedia.org/wiki/Tragedy_of_the_commons) situation.
 
-The obvious solution to this is to make the pause international through a treaty, which is what we're proposing.
+The solution to this is to make the pause international through a treaty, which is what we're proposing.
+This also requires a strong enforcement mechanism.
+Countries that don't comply with the treaty should be punished.
+Economic sanctions may be sufficient, but military intervention might be necessary in extreme cases.
 
 ## AI development might go underground
 
@@ -87,7 +90,7 @@ Therefore we haven't defined "narrow" AI in our proposal, but instead, we've def
 
 ## If a pause is implemented, we should expect a political compromise
 
-We have a specific proposal that we think is optimal.
+We have a [specific proposal](/proposal) that we think is optimal.
 However, we should not expect to have our proposal implemented exactly as we want it.
 Politics is messy and unpredictable, so we should expect our lobbying efforts to have vaguely directional effects, rather than precise effects.
 If we get some form of a Pause, but it's not exactly what we want, this might end up being worse than having no pause at all.
@@ -97,4 +100,7 @@ For example:
 - An international pause that is not enforced properly, leading to a similar outcome
 
 We can mitigate this by being consistent and clear in our communications about what we want.
-And even if we get a partial pause that is not exactly what we want, it might still be better than no pause at all.
+
+## Pausing too late
+
+This is the most obvious and most likely failure risk: if we pause too late, we are likely to encounter catastrophic risks.

@@ -6,7 +6,7 @@ description: Frequently asked questions about PauseAI and the risks of superinte
 ### Who are you?
 
 We are a community of volunteers and [local communities](/communities) who work together to mitigate the [risks of AI](/risks) (including the [risk of human extinction](/xrisk)).
-We aim to convince our governments to step in and [pause AI development](/proposal).
+We aim to convince our governments to step in and [pause the development of superhuman AI](/proposal).
 We do this by informing the public, talking to decision-makers, and organizing protests.
 We are not affiliated with any company or organization.
 
@@ -14,11 +14,18 @@ You can find us on [Discord](https://discord.gg/2XXWXvErfA), [Twitter](https://t
 
 You can mail us at [joep@pauseai.info](mailto:joep@pauseai.info).
 
+### Aren't you just scared of changes and new technology?
+
+You might be surprised that most people in PauseAI consider themselves techno-optimists.
+Many of them are involved in AI development, are gadget lovers, and have mostly been very excited about the future.
+Particularly many of them have been excited about the potential of AI to help humanity.
+That's why for many of them the sad realization that AI might be an existential risk was a very [difficult one to internalize](/psychology-of-x-risk).
+
 ### Do you want to ban all AI?
 
 No, only the development of the largest general-purpose AI systems, often called "Frontier models".
-We're calling for a ban on AI systems more powerful than GPT-4.
-All currently existing AI would be legal under our proposal, and most future AI models will remain legal, too.
+Almost all currently existing AI would be legal under [our proposal](/proposal), and most future AI models will remain legal, too.
+We're calling for a ban on AI systems more powerful than GPT-4, until we know how to build provably safe AI and we have them under democratic control.
 
 ### Do you believe GPT-4 is going to kill us?
 
@@ -32,14 +39,14 @@ We have not received funding so far.
 Everyone contributing to PauseAI is doing so voluntarily.
 We expect to receive a grant through the LightSpeed network soon, and people have approached us that they are willing to donate.
 
-### If we Pause, how about China?
+### If we Pause, what about China?
 
 For starters, at this point China has stricter AI regulations than virtually any other country.
 They [don't allow chatbots](https://www.reuters.com/technology/chinas-slow-ai-roll-out-points-its-tech-sectors-new-regulatory-reality-2023-07-12/) and [disallow training on internet data](https://cointelegraph.com/news/china-sets-stricter-rules-training-generative-ai-models).
-China is far more controlling than the US is, for example, and has even more reason to fear the uncontrollable and unpredictable impacts of AI.
+China has a more controlling government, and thus has even more reason to fear the uncontrollable and unpredictable impacts of AI.
 During the UNSC meeting on AI safety, China was the only country that mentioned the possibility of implementing a pause.
 
-And besides, we are primarily asking for an _international_ pause, enforced by a treaty.
+Also note that we are primarily asking for an _international_ pause, enforced by a treaty.
 Such a treaty also needs to be signed by China.
 If the treaty will guarantee that other nations will stop as well, and there are sufficient enforcement mechanisms in place,
 this should be something that China will want to see as well.
@@ -134,13 +141,6 @@ The main reason many other people still don't want to believe that x-risk is a r
 Because acknowledging that _we are in fact in danger_ is a very, very scary thing.
 
 [Read more about the psychology of x-risk](/psychology-of-x-risk).
-
-### Aren't you just scared of changes and new technology?
-
-You might be surprised that most people in PauseAI consider themselves techno-optimists.
-Many of them are involved in AI development, are gadget lovers, and have mostly been very excited about the future.
-Particularly many of them have been excited about the potential of AI to help humanity.
-That's why for many of them the sad realization that AI might be an existential risk was a very [difficult one to internalize](/psychology-of-x-risk).
 
 ### I have a different / AI related question
 
