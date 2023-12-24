@@ -12,8 +12,8 @@
 <section>
 	<Block linkText="Read about the risks" href="/risks">
 		<span slot="title">We risk <Mark>losing control</Mark></span>
-		AI can have amazing benefits, but it could also could erode our democracy, could destabilize our
-		economy and could be used to create powerful cyber weapons.
+		AI can have amazing benefits, but it could also erode our democracy, destabilize our economy and
+		could be used to create powerful cyber weapons.
 	</Block>
 	<Block linkText="Why and how AI can kill us" href="/xrisk">
 		<span slot="title">We risk <Mark>human extinction</Mark></span>
