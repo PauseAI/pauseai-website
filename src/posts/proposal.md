@@ -3,7 +3,7 @@ title: PauseAI Proposal
 description: Implement a temporary pause on the training of AI systems more powerful than GPT-4, ban training on copyrighted material, hold model creators liable.
 ---
 
-**Implement a temporary pause on the training of AI systems more powerful than GPT-4**.
+**Implement a temporary pause on the training of AI systems more powerful than GPT-4**, at least until we know how to build them safely and keep them under democratic control.
 
 Individual countries can and should implement this measure _right now_.
 Especially the US (or California, specifically) should implement a Pause, since it is home to virtually all leading AI companies.
@@ -22,11 +22,11 @@ This treaty should specify the policy measures that protect us from the [risks o
 This treaty needs to be signed by all UN member states.
 
 - **Set up an international AI safety agency**, similar to the IAEA. This agency will be responsible for:
-  - Granting approval for _deployments_. This will include red-teaming.
+  - Granting approval for _deployments_. This will include red-teaming / model evaluations.
   - Granting approval for _new training runs_ of AI models above a certain size (e.g. 1 billion parameters).
   - Periodic meetings to discuss the progress of AI safety research.
 - **Only allow training of general AI systems more powerful than GPT-4 if their safety can be guaranteed**.
-  - By more powerful than GPT-4, we mean all AI models that are either larger than 10^12 parameters or having more than 10^25 FLOPs used for training.
+  - By more powerful than GPT-4, we mean all AI models that are either larger than 10^12 parameters or have more than 10^25 FLOPs used for training.
   - Note that this does not target _narrow_ AI systems, like image recognition used for diagnosing cancer.
   - Require [oversight during training runs](https://www.alignmentforum.org/posts/Zfk6faYvcf5Ht7xDx/compute-thresholds-proposed-rules-to-mitigate-risk-of-a-lab).
   - Safety can be guaranteed if there is strong scientific consensus and [proof](https://arxiv.org/abs/2309.01933) that the _alignment problem has been solved_. Right now, this is not the case, so right now we should not allow training of such systems.
@@ -36,6 +36,10 @@ This treaty needs to be signed by all UN member states.
 - **Only allow deployment of models after no [dangerous capabilities](/dangerous-capabilities) are present**.
   - We will need standards and independent red-teaming to determine whether a model has dangerous capabilities.
   - The list of dangerous capabilities may change over time as AI capabilities grow.
+  - Note that fully relying on model evaluations [is not enough](/4-levels-of-ai-regulation).
+
+Implementing a pause _can_ backfire if it is not done properly.
+Read more about [how these risks can be mitigated](/mitigating-pause-failures).
 
 ## Other measures to effectively Pause
 
@@ -52,5 +56,5 @@ There will come a point where potentially superintelligent AI models can be trai
 We need to be prepared for this.
 We should consider the following policies:
 
-- **Limit publication of training algorithms**. Sometimes a new algorithm is published that makes training much more efficient. The Transformer architecture, for example, enabled virtually all recent progress in AI. These types of capability jumps can happen at any time, and we should consider limiting the publication of such algorithms to minimize the risk of a sudden capability jump.
-- **Further limit access to computational resources**. If training a superintelligence becomes possible on consumer hardware, we should consider limiting access to such hardware.
+- **Limit publication of training algorithms / runtime improvements**. Sometimes a new algorithm is published that makes training much more efficient. The Transformer architecture, for example, enabled virtually all recent progress in AI. These types of capability jumps can happen at any time, and we should consider limiting the publication of such algorithms to minimize the risk of a sudden capability jump. Similarly, some runtime innovations could drastically change what can be done with existing models. These advancements may need to be regulated as well.
+- **Limit capability advancements of computational resources**. If training a superintelligence becomes possible on consumer hardware, we are in trouble. We should consider limiting capability advances of hardware.

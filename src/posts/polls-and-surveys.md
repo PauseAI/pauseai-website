@@ -17,7 +17,7 @@ How much do regular people and experts worry about AI risks?
 ## Regulations & governance
 
 - [**US citizens, RethinkPriorities**](https://forum.effectivealtruism.org/posts/ConFiY9cRmg37fs2p/us-public-opinion-of-ai-policy-and-risk): 50% support a pause, 25% oppose a pause.
-- [**US citizens, YouGov**](https://www.vox.com/future-perfect/2023/8/18/23836362/ai-slow-down-poll-regulation): 72% want AI to slow down, 8% want to to speed up.
+- [**US citizens, YouGov**](https://www.vox.com/future-perfect/2023/8/18/23836362/ai-slow-down-poll-regulation): 72% want AI to slow down, 8% want to to speed up. 83% of voters believe AI could accidentally cause a catastrophic event
 - [**US citizens, YouGov**](https://theaipi.org/poll-shows-voters-oppose-open-sourcing-ai-models-support-regulatory-representation-on-boards-and-say-ai-risks-outweigh-benefits-2/): 73% believe AI companies should be held liable for harms from technology they create, 67% think the AI models’ power should be restricted, and 65% believe keeping AI out of the hands of bad actors is more important than providing AI’s benefits to everyone.
 - [**US citizens, TheAIPI**](https://www.politico.com/newsletters/digital-future-daily/2023/11/29/exclusive-what-people-actually-think-about-ai-00129147): 49:20 support "an international treaty to ban any ‘smarter-than-human’ artificial intelligence (AI)?", 70:14 support "Preventing AI from quickly reaching superhuman capabilities"
 - [**US CS professors, Axios Generation Lab**](https://www.axios.com/2023/09/05/ai-regulations-expert-survey): About 1 in 5 predicted AI will "definitely" stay in human control. The rest were split between those saying AI will "probably" or "definitely" get out of human control and those saying "probably not".
