@@ -46,7 +46,7 @@ Examples:
 
 When regulating deployments, we are preventing dangerous models from being available.
 This means the responsibility lies with the creators of the models.
-This is a safer situation than level 2, because we're now depending on a much smaller group of people to act responsibly.
+This is a safer situation than level 1, because we're now depending on a much smaller group of people to act responsibly.
 
 However, we're still allowing dangerous training runs to happen, so accidents at AI labs (including the leaks of dangerous AI models, or rogue AI being created) can still happen.
 
