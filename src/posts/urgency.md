@@ -4,7 +4,7 @@ description: We're underestimating the progress of AI, and there is a small but 
 date: '2023-05-04'
 ---
 
-If we reach superintelligence before we solve the alignment problem, [we're face a risk of extinction](/xrisk). So having an estimated range of when we could have superintelligence is essential to making sure we don't get caught off guard.
+If we reach superintelligence before we solve the alignment problem, [we face a risk of extinction](/xrisk). So having an estimated range of when we could have superintelligence is essential to making sure we don't get caught off guard.
 If our predictions are too far off, we may not be able to prepare in time.
 
 ## We reached human-level performance in many domains in 2023
