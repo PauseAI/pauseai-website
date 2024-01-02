@@ -174,3 +174,16 @@ input:focus,
 textarea:focus {
 	outline: var(--brand) auto 1px;
 }
+
+@font-face {
+    font-family: 'Icomoon';
+    src: url('icomoon.woff') format('woff');
+}
+
+a[href^='http://']::after,
+a[href^='https://']::after {
+    /* thin space, icon */
+    content: '\2009\e900';
+    font-family: 'Icomoon';
+    font-size: 0.5em;
+}
