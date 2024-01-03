@@ -21,7 +21,7 @@
 	</Block>
 	<Block linkText="Read the proposal" href="/proposal">
 		<span slot="title">We need a <Mark>pause</Mark></span>
-		Stop the development of AI systems more powerful than GPT-4, until we know how to make it safety.
+		Stop the development of AI systems more powerful than GPT-4, until we know how to make them safe.
 		This needs to happen on an international level, and it needs to happen soon.
 	</Block>
 	<Block linkText="How long do we have?" href="/urgency">
