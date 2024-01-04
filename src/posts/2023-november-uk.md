@@ -1,6 +1,6 @@
 ---
 title: PauseAI protest @ Bletchley Park - November 1st
-description: We are organizing a protest at Bletchley Park, during the AI Safety Summit
+description: We are organising a protest at Bletchley Park, during the AI Safety Summit
 ---
 
 - [Facebook event](https://www.facebook.com/events/347499967619516/347499967619516)
@@ -8,7 +8,7 @@ description: We are organizing a protest at Bletchley Park, during the AI Safety
 
 ![AI-Safety-Summit-Logo](https://github.com/joepio/pauseai/assets/47218308/4b8fe05f-3f8f-4f71-87a6-d273d67ae599)
 
-The UK is on a roll. Acknowledging virtually every risk from AI, investing £100M in AI safety, organizing a summit, announcing an AI Safety Institute.
+The UK is on a roll. Acknowledging virtually every risk from AI, investing £100M in AI safety, organising a summit, announcing an AI Safety Institute.
 
 But good is not good enough. Top AI experts like Geoffrey Hinton and Yoshua Bengio have made it very clear: we do not know how to control a superhuman AI. If we get this wrong, human extinction is a very real possibility. Therefore, we are calling for an immediate and indefinite pause on frontier AI research and development.
 
