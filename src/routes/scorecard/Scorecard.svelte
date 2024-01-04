@@ -26,15 +26,17 @@
 			<tr class="company">
 				<td class="name">{company.name}</td>
 				{#each categories as category (category.name)}
-					<Cell
-						score={company[category.key].score}
-						explanation={company[category.key].explanation}
-						{showExplanation}
-					/>
+					{#if company[category.key] === undefined}
+						<td />
+					{:else}
+						<Cell
+							score={company[category.key].score}
+							explanation={company[category.key].explanation}
+							{showExplanation}
+						/>
+					{/if}
 				{/each}
-				<td class="score"
-					>{company.lobby.score + company.acknowledge.score + company.deployment.score}</td
-				>
+				<td class="total">{company.totalScore}</td>
 			</tr>
 		{/each}
 	</tbody>
@@ -50,6 +52,12 @@
 		padding: 0.5rem;
 		text-align: left;
 		vertical-align: top;
+	}
+
+	.total {
+		font-weight: bold;
+		color: var(--brand);
+		font-size: 1.2rem;
 	}
 
 	.name {

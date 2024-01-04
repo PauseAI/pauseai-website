@@ -1,6 +1,6 @@
 import type { Company } from './types'
 
-export const companies: Company[] = [
+const companiesSource: Company[] = [
 	{
 		name: 'OpenAI',
 		acknowledge: {
@@ -14,8 +14,14 @@ export const companies: Company[] = [
 			score: 4
 		},
 		deployment: {
-			explanation: 'GPT-4 was released 7 months after it finished training.',
-			score: 5
+			explanation:
+				'GPT-4 was released 7 months after it finished training, during which they did a lot of safety work like red-teaming by ARC.',
+			score: 8
+		},
+		research: {
+			explanation:
+				'OpenAI has published a lot of impactful AI safety research and has dedicated a substantial amount of resources to their "superalignement" project.',
+			score: 8
 		}
 	},
 	{
@@ -33,8 +39,12 @@ export const companies: Company[] = [
 		},
 		deployment: {
 			explanation:
-				'When releasing Palm 2 in 2023, Google skipped any mention of safety in their release paper. However, with the release of Gemini in december 2023, they have written more extensively on this.',
-			score: 3
+				'Google used to be very careful with releasing models, but that changed in 2023. When releasing Palm 2 in 2023, Google skipped any mention of safety in their release paper. However, with the release of Gemini in december 2023, they have written more extensively on this.',
+			score: 5
+		},
+		research: {
+			explanation: 'Google DeepMind has published quite a few impactful AI safety papers',
+			score: 5
 		}
 	},
 	{
@@ -55,6 +65,12 @@ export const companies: Company[] = [
 			explanation:
 				"Microsoft released an unfinished, sometimes even unhinged Bing (based on OpenAI's GPT-4) in April 2023. It was embarrassing and dangerous. OpenAI urged Microsoft not to do this - they did it anyway.",
 			score: 0
+		},
+		research: {
+			explanation:
+				// https://www.theverge.com/2023/3/13/23638823/microsoft-ethics-society-team-responsible-ai-layoffs
+				"Microsoft has published almost no safety research and recently laid off their 'ethics and society' team.",
+			score: 1
 		}
 	},
 	{
@@ -73,6 +89,50 @@ export const companies: Company[] = [
 			explanation:
 				'Meta has leaked and released the weights of powerful AI models. They get some points for improving how much they worked on safety in their latest LLAMA 2 release.',
 			score: 2
+		},
+		research: {
+			explanation:
+				'Meta has published almost no safety research. They have a few papers on adversarial examples, but nothing on existential risk.',
+			score: 1
+		}
+	},
+	{
+		name: 'Anthropic',
+		acknowledge: {
+			explanation:
+				'Anthropic has publicly acknowledged and brought attention to many AI risks, including the existential risk. Their CEO Dario Amodei has been one of the most vocal proponents of AI safety.',
+			score: 9
+		},
+		lobby: {
+			// https://pitchbook.com/news/articles/generative-AI-Capitol-Hill-VC
+			explanation:
+				"Anthropic has spent (a little) money lobbying, but it's unclear what they are pushing for.",
+			score: 7
+		},
+		deployment: {
+			explanation:
+				'Anthropic was very optimistic about Claude 2 being "unjailbreakable", which was disproved in minutes after releasing the model.',
+			score: 5
+		},
+		research: {
+			explanation:
+				'Anthropic has published very important advancements in AI safety research, especially in the field of interpretability.',
+			score: 9
 		}
 	}
 ]
+
+export const companies: Company[] = companiesSource
+	.map((company) => {
+		const { name, acknowledge, lobby, deployment, research } = company
+		const totalScore = acknowledge.score + lobby.score + deployment.score + research.score
+		return {
+			name,
+			acknowledge,
+			lobby,
+			deployment,
+			research,
+			totalScore
+		}
+	})
+	.sort((a, b) => b.totalScore - a.totalScore)

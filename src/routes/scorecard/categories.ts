@@ -18,5 +18,11 @@ export const categories: Category[] = [
 		key: 'deployment',
 		explanation:
 			'How long does the company wait before deploying a new model? Do they wait until they have a good understanding of the risks of the model? Are their models tested thoroughly?'
+	},
+	{
+		name: 'Research',
+		key: 'research',
+		explanation:
+			'Is the company doing research on AI safety? Are they doing research on how to mitigate the risks of AI?'
 	}
 ]

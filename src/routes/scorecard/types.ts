@@ -4,6 +4,8 @@ export type Company = {
 	acknowledge: Score
 	lobby: Score
 	deployment: Score
+	research: Score
+	totalScore?: number
 }
 
 export type Score = {
@@ -12,7 +14,7 @@ export type Score = {
 	score: number
 }
 
-export type catagoryTypes = 'acknowledge' | 'lobby' | 'deployment'
+export type catagoryTypes = 'acknowledge' | 'lobby' | 'deployment' | 'research'
 
 export type Category = {
 	name: string

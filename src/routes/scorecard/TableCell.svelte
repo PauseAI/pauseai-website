@@ -1,9 +1,25 @@
 <script lang="ts">
 	export let score: number | undefined = undefined
-	export let explanation: string
+	export let explanation: string = undefined
 	export let showExplanation: boolean
 	export let title: string | undefined = undefined
 	let showTooltip = false
+	let color: string | undefined
+
+	$: {
+		if (score !== undefined) {
+			if (score >= 9) {
+				color = 'green'
+			} else if (score <= 1) {
+				color = 'red'
+			} else {
+				const percentage = (score - 1) / 8
+				const red = Math.round(255 * (1 - percentage))
+				const green = Math.round(255 * percentage)
+				color = `rgb(${red}, ${green}, 0)`
+			}
+		}
+	}
 </script>
 
 <td on:mouseover={() => (showTooltip = true)} on:mouseout={() => (showTooltip = false)}>
@@ -13,7 +29,7 @@
 		</div>
 	{/if}
 	{#if score !== undefined}
-		<div class="score">
+		<div class="score" style="color: {color}">
 			{score}
 		</div>
 	{/if}
@@ -34,7 +50,6 @@
 		font-weight: bold;
 	}
 	.score {
-		color: var(--brand);
 		font-size: 1.2rem;
 		font-weight: bold;
 	}
