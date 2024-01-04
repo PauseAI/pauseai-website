@@ -41,7 +41,7 @@ Read more about [organizing a protest](/organizing-a-protest).
 - [Politico](https://www.politico.eu/article/microsoft-brussels-elon-musk-anti-ai-protesters-well-five-of-them-descend-on-brussels/): Covers the Brussels protest.
 - [The Verge](https://www.theverge.com/2023/5/24/23735982/sam-altman-openai-superintelligent-benefits-talk-london-ucl-protests)
 - [Euronews](https://www.euronews.com/next/2023/06/14/could-ai-lead-us-to-extinction-this-brussels-based-group-believes-so)
-- [Cryptorank](https://cryptorank.io/news/feed/cbfc5-pause-ai-protest-ai-development)
+- [CryptoRank](https://cryptorank.io/news/feed/cbfc5-pause-ai-protest-ai-development)
 - [Fortune](https://fortune.com/2023/05/24/openai-ceo-sam-altman-credits-elon-musk-with-teaching-him-the-importance-of-deep-tech-investing-but-he-has-no-interest-in-living-on-mars/)
 - [Creatives with AI podcast](https://www.youtube.com/watch?v=LNtGUHTdH6k): Interview with PauseAI founder Joep Meindertsma.
 - [Art of AI podcast](https://spotify.link/AggzYfcj8Db): Interview with Joep Meindertsma, about protesting, psychology of x-risk, AI policy.
@@ -52,7 +52,7 @@ Read more about [organizing a protest](/organizing-a-protest).
 - [Express (UK)](https://www.express.co.uk/news/uk/1775620/artificial-intelligence-extinction-google-chat-gpt)
 - [Islington Tribune (UK)](https://www.islingtontribune.co.uk/article/watch-out-the-robots-are-coming)
 - [Camden New Journal (UK)](https://www.camdennewjournal.co.uk/article/protesters-tell-tech-quarter-companies-to-press-pause-on-artificial-intelligence-research)
-- [Inslington Tribune (UK)](https://www.islingtontribune.co.uk/article/what-happens-in-bletchley-stays-in)
+- [Islington Tribune (UK)](https://www.islingtontribune.co.uk/article/what-happens-in-bletchley-stays-in)
 - [AD (NL)](https://www.ad.nl/tech/ai-rel-in-nieuw-zeeland-kook-app-prijst-dodelijk-chloorgas-aan-als-verfrissend-gerecht~a1aa3705/)
 - [NRC (NL)](https://www.nrc.nl/nieuws/2023/06/24/sterft-de-mensheid-uit-door-ai-dat-is-sciencefiction-a4168053)
 - [AI Coalitie (NL)](https://nlaic.com/agenda/communitydag-invloed-van-ai-op-cultuur-en-media/)

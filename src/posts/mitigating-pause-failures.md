@@ -20,7 +20,7 @@ As stated by Stuart Russell, when faced with an uncertain deadline, one should t
 ## Pausing for too long
 
 Nick Bostrom, one of the first AI alarmists, worries that [at some point we might worry _too much_ about AI risks](https://twitter.com/jachaseyoung/status/1723325057056010680), although that moment is not yet here.
-If concern about AI keeps rising and we get a Pause, it might lead to a situation where the entirety of AI development becomes taboo or illegal.
+If concern about AI keeps rising, and we get a Pause, it might lead to a situation where the entirety of AI development becomes taboo or illegal.
 If that happens, we will never reap the benefits of AI, and in the meantime, we might encounter other existential risks that we could have avoided with the help of AI.
 
 We can address this risk by clearly stating under what conditions AI development should resume.
@@ -61,7 +61,7 @@ Also, the fact that there no longer is a _business incentive_ would help to redu
 > If we don’t include hardware R&D in the pause, the price-performance of GPUs will continue to double every 2.5 years, as it did between 2006 and 2021.
 > This means AI systems will get at least 16x faster after ten years and 256x faster after twenty years, simply due to better hardware.
 > If the pause is lifted all at once, these hardware improvements would immediately become available for training more powerful models more cheaply—a hardware overhang.
-> This would cause a rapid and fairly discontinuous increase in AI capabilities, potentially leading to a fast takeoff scenario and all of the risks it entails.
+> This would cause a rapid and fairly discontinuous increase in AI capabilities, potentially leading to a fast takeoff scenario and all the risks it entails.
 
 [_By Nora Belrose_](https://bounded-regret.ghost.io/ai-pause-will-likely-backfire-by-nora/)
 
@@ -89,7 +89,7 @@ We want to restrict dangerous models that can do things like manipulate humans, 
 We don't want to restrict very narrow models, like image classifiers used in self-driving cars or medical diagnosis.
 However, this leads to a difficult situation where there are _strong incentives_ to stretch the definition of "narrow" AI.
 
-Therefore we haven't defined "narrow" AI in our proposal, but instead, we've defined a threshold for model size.
+Therefore, we haven't defined "narrow" AI in our proposal, but instead, we've defined a threshold for model size.
 
 ## We will end up with less safety-minded organizations if we pause
 

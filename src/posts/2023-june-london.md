@@ -15,7 +15,7 @@ A rapidly increasing number of AI experts [signed a statement](https://www.safe.
 
 > "Mitigating the risk of extinction from AI should be a global priority alongside other societal-scale risks such as pandemics and nuclear war."
 
-This has been signed by virtually all AI labs (OpenAI, Google Deepmind, Ahthropic) and hundreds of AI scientists including Geoffrey Hinton, the "Godfather of AI".
+This has been signed by virtually all AI labs (OpenAI, Google DeepMind, Anthropic) and hundreds of AI scientists including Geoffrey Hinton, the "Godfather of AI".
 
 AI safety researchers have not reached on consensus on how large the risk of human extinction will be.
 Results from the ["Existential risk from AI survey"](https://forum.effectivealtruism.org/posts/8CM9vZ2nnQsWJNsHx/existential-risk-from-ai-survey-results) show that estimates range from 2% to 98%, with an average of 30%.
@@ -33,7 +33,7 @@ OpenAI believes that ["it would be unintuitively risky and difficult to stop the
 
 > "AI companies are putting everything at risk; we're already seeing the damage, and it will get far worse. Technology development is not inevitable, and pausing should be considered a feasible option. We can't cede the future to a few CEOs who acknowledge they are willing to risk humanity for their dreams. We all deserve a say on our future, and a global pause gives us that chance."
 
-> "Despite acknowledging the dangers of continued AI development, these companies are merely using it as an excuse to carry on, and seem to refuse to voluntarily give up this dangerous power. In such situations, global collaboration in reigning in this dangerous development is key so that we make sure technology development works for all. The UK is well placed to take a lead on this, by organising a global summit to pause AI and bring AI development under democratic control."
+> "Despite acknowledging the dangers of continued AI development, these companies are merely using it as an excuse to carry on, and seem to refuse to voluntarily give up this dangerous power. In such situations, global collaboration in reigning in this dangerous development is key so that we make sure technology development works for all. The UK is well-placed to take a lead on this, by organizing a global summit to pause AI and bring AI development under democratic control."
 
 > "We may not have the luxury of time. AI developments are happening at a frantic pace, and we need to act now to prevent the worst-case scenarios. The summit in autumn could be even too late to prevent the worst. We urge Rishi Sunak to halt AI developments before the summit. Even if only the UK and the US agree to pause until the summit, we will have made a huge step towards preventing the worst-case scenarios."
 

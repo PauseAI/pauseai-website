@@ -26,8 +26,8 @@ In this article, we'll dive into various dangerous capabilities, and what we can
 
 ## Which capabilities can be dangerous?
 
-- **Cybersecurity**. When an AI is able to discover security vulnerabilities (especially new, unknown ones), it can (be used to) [hack into systems](/cybersecurity-risks). Current [state of the art](/sota) AI systems can find some security vulnerabilities, but not yet at dangerous, advanced levels. However, as cybersecurity capabilities increase, so does the potential damage an AI-assisted cyberweapon could do. Large scale cyberattacks could disrupt our infrastructure, disable payments and cause chaos.
-- **Biological**. Design novel biological agents, or help in the process of engineering a pandemic. A group of students were able to use a chatbot to [produce all the steps needed to create a new pandemic](https://arxiv.org/abs/2306.03809). An AI designed to find safe medicine was used to discover [40,000 new chemical weapons in six hours](https://www.theverge.com/2022/3/17/22983197/ai-new-possible-chemical-weapons-generative-models-vx).
+- **Cybersecurity**. When an AI is able to discover security vulnerabilities (especially new, unknown ones), it can (be used to) [hack into systems](/cybersecurity-risks). Current [state-of-the-art](/sota) AI systems can find some security vulnerabilities, but not yet at dangerous, advanced levels. However, as cybersecurity capabilities increase, so does the potential damage an AI-assisted cyberweapon could do. Large scale cyberattacks could disrupt our infrastructure, disable payments and cause chaos.
+- **Biological**. Design novel biological agents, or help in the process of engineering a pandemic. A group of students was able to use a chatbot to [produce all the steps needed to create a new pandemic](https://arxiv.org/abs/2306.03809). An AI designed to find safe medicine was used to discover [40,000 new chemical weapons in six hours](https://www.theverge.com/2022/3/17/22983197/ai-new-possible-chemical-weapons-generative-models-vx).
 - **Algorithmic improvements**. An AI that can find efficient algorithms for a given problem, could lead to a recursive loop of self-improvement, spinning rapidly out of control. This is called an _intelligence explosion_. The resulting AI would be incredibly powerful and could have all sorts of other dangerous capabilities. Luckily, no AI can self-improve yet. However, there are AIs that can find new, very efficient algorithms (like [AlphaDev](https://www.deepmind.com/blog/alphadev-discovers-faster-sorting-algorithms)).
 - **Deception**. The ability to manipulate people, which includes social engineering. Various forms of deception are [already present](https://twitter.com/DanHendrycks/status/1699437800301752332) in current AI systems. For example, Meta's CICERO AI (which was trained to lead to "Better, more natural AI-human cooperation") turned out to an expert liar, deceiving other agents in the game. An AI that can deceive humans, may deceive humans during training runs. It could hide its capabilities or intentions.
 - **Self-replication**. If an AI can create new instances on other machines, there is a risk of it spreading uncontrollably, leading to an [_AI takeover_](/ai-takeover). A sufficiently capable AI could outcompete humans and lead to [human extinction](/xrisk). Note that this could even happen before an AI model is deployed.
@@ -56,7 +56,7 @@ This would be the safest way forward, but that's not what AI labs are proposing.
 
 ## Preventing proliferation of dangerous capabilities
 
-Right now, there is a lot happening in the AI regulation space.
+Right now, a lot is happening in the AI regulation space.
 A lot of these proposals (including all the ones coming from AI labs) are relying on safety **evaluations** (or _evals_): pre-deployment testing of AI models.
 An example of these eval-based approaches is the [RSP approach by Anthropic](https://evals.alignment.org/blog/2023-09-26-rsp/#:~:text=An%20RSP%20specifies%20what%20level,capabilities%20until%20protective%20measures%20improve.) or the [Coordinated Pausing](https://www.governance.ai/research-paper/coordinated-pausing-evaluation-based-scheme) approach by GovAI.
 We refer to these as [level 2 regulation](/4-levels-of-ai-regulation).
@@ -69,7 +69,7 @@ However, we believe this approach is very dangerous:
 - **Some capabilities are even dangerous inside AI labs**.
   A self-replicating AI, for example, could escape from the lab before deployment.
 - **Testing for dangerous capabilities is difficult**.
-  We don't know how we can (safetly) test if an AI can self-replicate, for example. Or how to test if it deceives humans
+  We don't know how we can (safely) test if an AI can self-replicate, for example. Or how to test if it deceives humans
 - **Bad actors can still build dangerous AIs**.
   Evaluations are a _post-training_ measure. By relying on them, we
 - **Capabilities can be added or discovered after training**.
@@ -112,7 +112,7 @@ For example, people have found ways to add long-term memory to GPT-4, by letting
 Or consider AutoGPT, which lets a model call itself recursively, which means it can run autonomously for any length of time.
 Or consider [Voyager](https://arxiv.org/abs/2305.16291), a tool that enabled GPT-4 to play Minecraft fully autonomously. It even got to diamond gear.
 
-We don't know how how far a base model can be stretched.
+We don't know how far a base model can be stretched.
 Even if we stop training new AI models right now, we'll probably see important innovations that add new capabilities to existing models.
 
 ## In conclusion

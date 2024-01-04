@@ -10,6 +10,9 @@ Here are some resources to get you started.
 
 - [Could AI wipe out humanity?](https://youtu.be/qzyEgZwfkKY?si=ief1l2PpkZ7_s6sq) (10 mins). The best shortest and simple introduction to the problem, from a down-to-earth perspective.
 - [Don't look up - The Documentary: The Case For AI As An Existential Threat](https://www.youtube.com/watch?v=U1eyUjVRir4) (17 mins). Powerful and nicely edited documentary about the dangers of AI, with many expert quotes from interviews.
+- [How to get Empowered, not overpowered by AI](https://www.youtube.com/watch?v=2LRwvU6gEbA) (15 mins). A brief introduction to the importance of getting AI alignment right.
+- [Robert Miles' YouTube videos](https://www.youtube.com/watch?v=tlS5Y2vm02c&list=PLfHsskCxi_g-c62a_dmsNuHynaXsRQm40) are a great place to start understanding most of the fundamentals of AI alignment.
+- [Max Tegmark with Lex Fridman interview](https://youtu.be/VcVfceTsD0A?t=1547) (2 hrs). Interview that dives into the details of our current dangerous situation. _"It's like 'Don't look up', but we are building the asteroid ourselves."_
 - [Max Tegmark Ted Talk (2023)](https://www.youtube.com/watch?v=xUNx_PxNHrY) (15 mins). AI capabilities are improving quicker than expected.
 - [Sam Harris | Can we build AI without losing control over it?](https://www.youtube.com/watch?v=8nt3edWLgIg) (15 mins). Ted talk about the crazy situation we're in.
 - [Exploring the dangers from Artificial Intelligence](https://www.youtube.com/watch?v=sPyu_dTSma0&t=1328s) (25mins). Summary of cybersecurity, biohazard and power-seeking AI risks.
@@ -49,14 +52,14 @@ Here are some resources to get you started.
 
 - [AGI safety fundamentals](https://www.agisafetyfundamentals.com/) (30hrs)
 - [CHAI Bibliography of Recommended Materials](https://humancompatible.ai/bibliography) (50hrs+)
-- [AIsafety.training](https://aisafety.training/): Overview of training programs, conferences, and other events
+- [AISafety.training](https://aisafety.training/): Overview of training programs, conferences, and other events
 
 ## Organisations
 
 - [Future of Life Institute](https://futureoflife.org/cause-area/artificial-intelligence/) started the [open letter](https://futureoflife.org/open-letter/pause-giant-ai-experiments/), led by Max Tegmark.
 - [FutureSociety](https://thefuturesociety.org/about-us/)
 - [Conjecture](https://www.conjecture.dev/). Start-up that is working on AI alignment and AI policy, led by Connor Leahy.
-- [Existential Risk Observatory](https://existentialriskobservatory.org/). Dutch organization that is informing the public on x-risks and studying communication strategies.
+- [Existential Risk Observatory](https://existentialriskobservatory.org/). Dutch organisation that is informing the public on x-risks and studying communication strategies.
 - [Center for AI Safety](https://www.safe.ai/) (CAIS) is a research center at the Czech Technical University in Prague, led by
 - [Center for Human-Compatible Artificial Intelligence](https://humancompatible.ai/about/) (CHAI), led by Stuart Russell.
 - [Machine Intelligence Research Institute](https://intelligence.org/) (MIRI), doing mathematical research on AI safety, led by Eliezer Yudkowsky.

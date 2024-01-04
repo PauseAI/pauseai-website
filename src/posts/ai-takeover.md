@@ -85,7 +85,7 @@ Here are some of the things that an AI might do to take over:
 - **Threaten humans** (with violence or blackmail) to do things that help it take over.
 - **Write a virus** using [novel zero-day exploits](/cybersecurity-risks) that infects other computers, replicating itself or gaining full control.
 - Help existing robotics companies **build robots** (e.g. by leaking new designs), and take over these robots when they are ready.
-- Use existing factories to **build technology that we do not understand**, perhaps even using derived knowledge of physics that we are not aware of. Think nano-technology, quantum computing, and bioengineering.
+- Use existing factories to **build technology that we do not understand**, perhaps even using derived knowledge of physics that we are not aware of. Think nanotechnology, quantum computing, and bioengineering.
 
 One might suggest that having **safeguards** in place could prevent a takeover (like adding a kill switch, or not connecting it to the internet).
 However, since the ASI will be more intelligent than humans, it is likely to come up with strategies to circumvent these safeguards.

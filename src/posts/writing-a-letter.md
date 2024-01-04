@@ -25,10 +25,10 @@ In this guide, we'll dive into what you can do to make your message stand out.
 - **Greeting**. Can be formal or informal. If you're not sure, go with formal.
 - **Fitting compliment**. Make it personal, make it specific, make it relevant.
 - **Introduce yourself**. Again, make it personal. Why are you writing this? Why should they listen to you?
-- **Discuss the problem**. Give a lot of links to sources. Use authoritative sources and names (e.g. Turing award winners Hinton, Bengio) and statistics (14% average risk of extinction from AI).
-- **Discuss the solution**. The pause. What does it mean? What does it impact? Discuss why we need a pause, and why the open letter failed to achieve it (market dynamics, we need international regulation). Address some of the common complaints (e.g. )
-- **Discuss urgency**. Why do they need to act _now_. Discuss how virtually all AI researchers were surprised by speed of recent advancements, the amount of money and researchers being added now. The pause cannot wait until the summit, we can't take the chance of being off in our predictions again. We need to err on the side of caution.
-- **Ask**. What do you want them to do? Make your ask very concrete. E.g.: bring up the pause in the next meeting, and discuss it with other people in power. Ask them to reply to you, and ask them to keep you updated on their progress. Or even better: ask them to meet with you. Give a concrete timeslot that you're available.
+- **Discuss the problem**. Give a lot of links to sources. Use authoritative sources and names (e.g. Turing Award winners Hinton, Bengio) and statistics (14% average risk of extinction from AI).
+- **Discuss the solution**. The pause. What does it mean? What does it impact? Discuss why we need a pause, and why the open letter failed to achieve it (market dynamics, we need international regulation). Address some of the common complaints (e.g.)
+- **Discuss urgency**. Why do they need to act _now_? Discuss how virtually all AI researchers were surprised by speed of recent advancements, the amount of money and researchers being added now. The pause cannot wait until the summit, we can't take the chance of being off in our predictions again. We need to err on the side of caution.
+- **Ask**. What do you want them to do? Make your ask very concrete. E.g.: bring up the pause in the next meeting, and discuss it with other people in power. Ask them to reply to you, and ask them to keep you updated on their progress. Or even better: ask them to meet with you. Give a concrete time slot that you're available.
 
 ## Tips
 

@@ -24,7 +24,7 @@ A rapidly increasing number of AI experts [signed a statement](https://www.safe.
 
 > "Mitigating the risk of extinction from AI should be a global priority alongside other societal-scale risks such as pandemics and nuclear war."
 
-This has been signed by virtually all AI labs (OpenAI, Google Deepmind, Ahthropic) and hundreds of AI scientists including Geoffrey Hinton, the "Godfather of AI".
+This has been signed by virtually all AI labs (OpenAI, Google DeepMind, Anthropic) and hundreds of AI scientists including Geoffrey Hinton, the "Godfather of AI".
 
 AI safety researchers have not reached on consensus on how large the risk of human extinction will be.
 Results from the ["Existential risk from AI survey"](https://forum.effectivealtruism.org/posts/8CM9vZ2nnQsWJNsHx/existential-risk-from-ai-survey-results) show that estimates range from 2% to 98%, with an average of 30%.
