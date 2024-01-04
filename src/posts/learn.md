@@ -47,6 +47,7 @@ Here are some resources to get you started.
 - [Human Compatible: Artificial Intelligence and the Problem of Control](https://www.goodreads.com/en/book/show/44767248) (Stuart Russell)
 - [Our Final Invention: Artificial Intelligence and the End of the Human Era](https://www.goodreads.com/en/book/show/17286699) (James Barrat)
 - [The Precipice: Existential Risk and the Future of Humanity](https://www.goodreads.com/en/book/show/50963653) (Toby Ord)
+- [Uncontrollable](https://www.goodreads.com/book/show/202416160-uncontrollable) (Darren McKee)
 
 ## Courses
 
