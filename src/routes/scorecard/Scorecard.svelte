@@ -11,7 +11,7 @@
 	Show explanations
 </label>
 
-<table>
+<table class={showExplanation ? 'table--big' : ''}>
 	<thead>
 		<tr>
 			<th />
@@ -45,7 +45,15 @@
 <style>
 	table {
 		max-width: var(--page-width);
-		overflow-x: auto; /* Add horizontal scrollbar if needed */
+		overflow-x: auto;
+		overflow: visible;
+		display: block;
+		/* Too much margin  */
+		/* margin-left: calc(50% - var(--page-width) / 2); */
+	}
+
+	.table--big {
+		margin-left: max(calc(50% - 50vw), -10rem);
 	}
 	:global(td),
 	:global(th) {
