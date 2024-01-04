@@ -1,6 +1,6 @@
 ---
 title: PauseAI protest @ Google DeepMind - May 19th - 22nd
-description: We are organizing a protest at Google DeepMind to demand a summit to pause AI development.
+description: We are organising a protest at Google DeepMind to demand a summit to pause AI development.
 ---
 
 <div>

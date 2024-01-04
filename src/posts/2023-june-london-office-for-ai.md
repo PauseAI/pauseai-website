@@ -32,7 +32,7 @@ The protesters are urging Rishi Sunak to take the lead on global AI safety and p
 
 > "Accelerating right now is a dangerous strategy, and the wrong message to the nations at the AI safety summit. Rishi Sunak should lead by example and implement the Pause!" - PauseAI protesters
 
-> "The UK is organizing an AI safety summit at the end of this year, but that might be too late. We need to slow down right now." - PauseAI protesters
+> "The UK is organising an AI safety summit at the end of this year, but that might be too late. We need to slow down right now." - PauseAI protesters
 
 > "The UK is in a fantastic place to develop the concrete safety requirements that would set the precedent for the AI safety summit later this year. There is no other country that has this concentration of AI safety experts." - PauseAI protesters
 

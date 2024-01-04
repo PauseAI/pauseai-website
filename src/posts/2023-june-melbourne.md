@@ -30,7 +30,7 @@ AI safety researchers have not reached on consensus on how large the risk of hum
 Results from the ["Existential risk from AI survey"](https://forum.effectivealtruism.org/posts/8CM9vZ2nnQsWJNsHx/existential-risk-from-ai-survey-results) show that estimates range from 2% to 98%, with an average of 30%.
 
 The protesters are urging the Australian government to take the lead on global AI safety and pause the development of more dangerous AI systems.
-They are also asking them to prioritize the Pause on the [AI Safety Summit](https://pauseai.info/summit), which is being organized by the UK and will be held later in 2023.
+They are also asking them to prioritize the Pause on the [AI Safety Summit](https://pauseai.info/summit), which is being organised by the UK and will be held later in 2023.
 
 Pausing AI development is a radically different approach to safety from what the AI lab CEOs like Sam Altman are proposing.
 OpenAI believes that ["it would be unintuitively risky and difficult to stop the creation of superintelligence"](https://openai.com/blog/governance-of-superintelligence), so they are pursuing further development toward superintelligence.
