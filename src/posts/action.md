@@ -28,7 +28,7 @@ You are now one of them.
 - **Follow** our social media channels and stay updated:
   - [Discord](https://discord.gg/2XXWXvErfA)
   - [Twitter](https://twitter.com/PauseAI)
-  - [facebook](https://www.facebook.com/PauseAI)
+  - [Facebook](https://www.facebook.com/PauseAI)
   - [TikTok](https://www.tiktok.com/@pauseai)
   - [LinkedIn](https://www.linkedin.com/uas/login?session_redirect=/company/97035448/).
 

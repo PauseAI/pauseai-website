@@ -32,7 +32,7 @@ _This page is a summary of the [AI Risk Skepticism](https://arxiv.org/ftp/arxiv/
 
 ## Regulation will prevent AI risks
 
-- Skeptics say regulatory oversight and ethical guidelines will restrain harmful AI applications so we need not worry.
+- Skeptics say regulatory oversight and ethical guidelines will restrain harmful AI applications, so we need not worry.
 - But regulatory policy often lags behind technological developments, especially exponential advances. Self-regulation in a competitive environment is also insufficient. Technical AI safety research is still crucial.
 
 ## Conclusion

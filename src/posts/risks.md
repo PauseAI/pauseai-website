@@ -12,11 +12,11 @@ Much of our society is based on trust. We trust that the money in our bank accou
 
 AI systems are exceptionally good at creating fake media. They can create fake videos, fake audio, fake text, and fake images.
 These capabilities are improving rapidly.
-Just two years ago, we laughed at the horribly unrealistic dall-e images, but now we have [deepfake images winning photography contests](https://www.theguardian.com/technology/2023/apr/17/photographer-admits-prize-winning-image-was-ai-generated).
+Just two years ago, we laughed at the horribly unrealistic Dall-E images, but now we have [deepfake images winning photography contests](https://www.theguardian.com/technology/2023/apr/17/photographer-admits-prize-winning-image-was-ai-generated).
 GPT-4 can write in a way that is indistinguishable from humans.
 
 Creating fake media is not new, but AI makes it much cheaper and much more realistic.
-An AI-generated image of an explosion caused [panic sells in wall street](https://www.euronews.com/next/2023/05/23/fake-news-about-an-explosion-at-the-pentagon-spreads-on-verified-accounts-on-twitter).
+An AI-generated image of an explosion caused [panic sells in Wall Street](https://www.euronews.com/next/2023/05/23/fake-news-about-an-explosion-at-the-pentagon-spreads-on-verified-accounts-on-twitter).
 We might soon see social media be flooded with fake discussions and opinions, and fake news articles that are indistinguishable from real ones.
 This could erode the trust we have in our society.
 It could threaten the fundamentals of our democracy even more than social media did.
@@ -36,7 +36,7 @@ During the industrial revolution, many people lost their jobs to machines.
 However, new (often better) jobs were created, and the economy grew.
 This time, things might be different.
 
-AI does not just replaces our muscles as the steam engine did, it replaces our brains.
+AI does not just replace our muscles as the steam engine did, it replaces our brains.
 Regular humans may not have anything left to offer the economy.
 Image generation models (which are heavily trained on copyrighted material from professional artists) are already [impacting the creative industry](https://cointelegraph.com/news/artists-face-a-choice-with-ai-adapt-or-become-obsolete).
 Writers are [striking](https://www.newscientist.com/article/2373382-why-use-of-ai-is-a-major-sticking-point-in-the-ongoing-writers-strike/).
@@ -87,7 +87,7 @@ They [can find vulnerabilities](https://betterprogramming.pub/i-used-gpt-3-to-fi
 As AI capabilities grow, so will the capabilities of the exploits they can create.
 
 Highly potent computer viruses have always been extremely hard to create, but AI could change that.
-Instead of having to hire a team of skilled security experts/hackers to find zero-day exploits, you could just use a far cheaper AI to do it for you. Of course, AI could also help with cyberdefense and it is unclear on which side the advantage lies.
+Instead of having to hire a team of skilled security experts/hackers to find zero-day exploits, you could just use a far cheaper AI to do it for you. Of course, AI could also help with cyberdefense, and it is unclear on which side the advantage lies.
 
 [Read more about AI and cybersecurity risks](/cybersecurity-risks)
 

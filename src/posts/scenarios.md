@@ -7,10 +7,10 @@ Scientists are warning for the risks of superintelligent AI, but their arguments
 In this article, we will look at some concrete scenarios for how superintelligent AI could cause catastrophic risks.
 Note that these scenarios may read like science fiction, because they are science fiction.
 
-These scenario's are open source, which means you are free to use them in your own work, and you are free to contribute to them.
+These scenarios are open source, which means you are free to use them in your own work, and you are free to contribute to them.
 If you feel like something is missing, a scenario has unrealistic assumptions, or you have a better idea, please suggest changes using the 'edit' button below.
 
-## CyberterrorismInstagram
+## Cyberterrorism
 
 A team of scientists introduces a new AI training paradigm, designed for cybersecurity.
 This adversarial architecture creates pieces of code and then tries to exploit security vulnerabilities in them.
@@ -35,9 +35,9 @@ They run the AI on their computer and scan all open-source kernels, operating sy
 This results in the most capable computer virus that has ever existed.
 
 It uses over 1000 different zero-day exploits to infect virtually every device on the planet.
-It spreads over Wi-fi, Bluetooth, USB, and TCP-IP.
+It spreads over Wi-Fi, Bluetooth, USB, and TCP-IP.
 The virus is designed to be as stealthy as possible, before activating.
-In minutes it has infected 80% of all devices on the planet.
+In minutes, it has infected 80% of all devices on the planet.
 When it is activated, it bricks every device it has infected.
 
 Meanwhile, in grocery stores all over the world, people suddenly can no longer pay using their cards and phones - all screens are black.

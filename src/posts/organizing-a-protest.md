@@ -36,7 +36,7 @@ We can help you with this!
 
 ### Make the protest visible locally
 
-Stickers, posters, chack stencils, etc.
+Stickers, posters, chalk stencils, etc.
 Make sure people know that the protest is happening.
 
 ### Reach out to (local) media
@@ -67,8 +67,8 @@ Keep them informed of the protest, make them part of the process.
 
 ### Make signs / flyers / banners / props
 
-Use our [figma design template](https://www.figma.com/community/file/1233064002969152026) or check the [media folder](https://drive.google.com/drive/folders/1bQ_MZ8giK-Mee4ABkO0BgcFInaXruNpa?usp=sharing) to make your own flyers / banners / posters.
-We have a <a href="/PauseAI_flyer.pdf" target="_blank">flyer</a>. that you can print out and hand out to people.
+Use our [Figma design template](https://www.figma.com/community/file/1233064002969152026) or check the [media folder](https://drive.google.com/drive/folders/1bQ_MZ8giK-Mee4ABkO0BgcFInaXruNpa?usp=sharing) to make your own flyers / banners / posters.
+We have a <a href="/PauseAI_flyer.pdf" target="_blank">flyer</a> that you can print out and hand out to people.
 Also check out the [Discord thread](https://discord.com/channels/1100491867675709580/1138484822117974191) where we discuss protest materials.
 
 Make **signs** that people can hold up during the protest.
@@ -147,7 +147,7 @@ Having drinks afterwards really solidifies the bonding experience, and it's a fu
 ### Gather pictures and videos
 
 Ask all participants to send you their pictures and videos.
-Create a nicely edited video of the protst
+Create a nicely edited video of the protest.
 
 ### Share your story
 

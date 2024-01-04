@@ -127,7 +127,7 @@ Some person or company would end up controlling this AI and could use this to th
 A superintelligence could be used to create radically new weapons, hack all computers, overthrow governments and manipulate humanity.
 The operator would have _unimaginable_ power.
 Should we trust a single entity with that much power?
-We might end up in a utopic world where all diseases are cured and everybody is happy, or in an Orwellian nightmare.
+We might end up in a utopian world where all diseases are cured and everybody is happy, or in an Orwellian nightmare.
 This is why we're not just [proposing](/proposal) superhuman AI to be provably safe but also to be controlled by a democratic process.
 
 ## Silicon vs Carbon
@@ -172,7 +172,7 @@ Read more about the [psychology of x-risk](/psychology-of-x-risk).
 ## AI companies are locked in a race to the bottom
 
 OpenAI, DeepMind and Anthropic want to develop AI safely.
-Unfortunately, they do not know how to do this and they are forced by various incentives to keep racing faster to get to AGI first.
+Unfortunately, they do not know how to do this, and they are forced by various incentives to keep racing faster to get to AGI first.
 OpenAI's [plan](https://openai.com/blog/introducing-superalignment) is to use future AI systems to align AI. The problem with this is that we have no guarantee that we will create an AI that solves alignment before we have an AI that is catastrophically dangerous.
 Anthropic [openly admits](https://www.anthropic.com/index/core-views-on-ai-safety) that it has no idea yet how to solve the alignment problem.
 DeepMind has not publicly stated any plan to solve the Alignment problem.
