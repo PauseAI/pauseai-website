@@ -44,3 +44,14 @@ Here are some resources to get you started.
 - [Human Compatible: Artificial Intelligence and the Problem of Control](https://www.goodreads.com/en/book/show/44767248) (Stuart Russell)
 - [Our Final Invention: Artificial Intelligence and the End of the Human Era](https://www.goodreads.com/en/book/show/17286699) (James Barrat)
 - [The Precipice: Existential Risk and the Future of Humanity](https://www.goodreads.com/en/book/show/50963653) (Toby Ord)
+
+# If you are convinced and want to take action
+
+There are many [things that you can do](/action).
+Writing a letter, going to a protest, donating some money or joining a community is not that hard!
+And these actions have a real impact.
+Even when facing the end of the world, there can still be hope and very rewarding work to do.
+
+# If you still don't feel quite sure of it
+
+Learning about the [psychology of x-risk](/psychology-of-x-risk) could help you.
