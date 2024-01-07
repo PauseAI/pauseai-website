@@ -17,6 +17,8 @@ Ultimately, we need to balance the risks with the costs of pausing.
 In our view, the chance that AI will cause catastrophic risks [soon](/urgency) is already large enough to warrant a pause at this moment.
 As stated by Stuart Russell, when faced with an uncertain deadline, one should take the action that would be optimal given the shortest time constraint.
 
+Also, pausing early give us breathing room for the enforcement of the pause to not be perfect and to other improvements hard to regulate, like algorithmic breakthroughs, to not make us all fall into the precipice.
+
 ## Pausing for too short / only 6 months
 
 The pause we propose is of indeterminate length. We shouldn't unpause until there is a good enough consensus that we know how to develop aligned AIs, not matter how powerful they are, and that we have the systems in place to do it carefully and democratically. 
