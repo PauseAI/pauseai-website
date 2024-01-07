@@ -17,6 +17,11 @@ Ultimately, we need to balance the risks with the costs of pausing.
 In our view, the chance that AI will cause catastrophic risks [soon](/urgency) is already large enough to warrant a pause at this moment.
 As stated by Stuart Russell, when faced with an uncertain deadline, one should take the action that would be optimal given the shortest time constraint.
 
+## Pausing for too short / only 6 months
+
+The pause we propose is of indeterminate length. We shouldn't unpause until there is a good enough consensus that we know how to develop aligned AIs, not matter how powerful they are, and that we have the systems in place to do it carefully and democratically. 
+It is NOT like the [six-month pause asked by the open letter published by the Future of Life Institute](https://futureoflife.org/open-letter/pause-giant-ai-experiments/).
+
 ## Pausing for too long
 
 Nick Bostrom, one of the first AI alarmists, worries that [at some point we might worry _too much_ about AI risks](https://twitter.com/jachaseyoung/status/1723325057056010680), although that moment is not yet here.
@@ -24,7 +29,7 @@ If concern about AI keeps rising and we get a Pause, it might lead to a situatio
 If that happens, we will never reap the benefits of AI, and in the meantime, we might encounter other existential risks that we could have avoided with the help of AI.
 
 We can address this risk by clearly stating under what conditions AI development should resume.
-In our proposal, we suggest that AI development should resume when building provably safe AI becomes possible.
+As we said, we suggest that AI development should resume when building provably safe AI becomes possible.
 Additionally, we only propose to ban the development of very specific kinds of models: only the largest, general models.
 
 ## Centralization of AI might make takeover risks worse
@@ -68,7 +73,7 @@ Also, the fact that there no longer is a _business incentive_ would help to redu
 This is a serious concern, although there are strong arguments to be made that [overhang is unlikely to occur](https://blog.aiimpacts.org/p/are-there-examples-of-overhang-for).
 
 PauseAI supports a pause on relevant compute improvements as well.
-Also, the 'play' button should not be pressed if we still don't know how to build safe AI.
+Also, as we said, the 'play' button should not be pressed if we still don't know how to build safe AI.
 
 We still think a pause in AI scaling would probably be sensible even if there is no pause in GPU improvements because there is a serious possibility that we will achieve AGI in the next 5 years mostly by spending more money on GPUs, rather than by having better hardware.
 
