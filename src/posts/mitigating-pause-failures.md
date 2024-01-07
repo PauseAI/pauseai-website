@@ -34,8 +34,8 @@ Additionally, we only propose to ban the development of very specific kinds of m
 
 ## Centralization of AI might make takeover risks worse
 
-Some proposals (although not a PauseAI proposal), like "[MAGIC](https://arxiv.org/abs/2310.09217)", suggest that we should centralize AI development in a single organization.
-This makes AI development more controllable, but it also creates a single point of failure.
+Some proposals, like "[MAGIC](https://arxiv.org/abs/2310.09217)", suggest that we should centralize AI development in a single organization. This makes AI development more controllable, but it also creates a single point of failure.
+But this is not a PauseAI proposal.
 
 ## National/local pauses might fail
 
@@ -73,9 +73,13 @@ Also, the fact that there no longer is a _business incentive_ would help to redu
 This is a serious concern, although there are strong arguments to be made that [overhang is unlikely to occur](https://blog.aiimpacts.org/p/are-there-examples-of-overhang-for).
 
 PauseAI supports a pause on relevant compute improvements as well.
-Also, as we said, the 'play' button should not be pressed if we still don't know how to build safe AI.
+Also, as we said, the 'play' button should not be pressed if we still don't know how to build safe AI. And that includes the training and deployment of models with more advanced hardware.
 
-We still think a pause in AI scaling would probably be sensible even if there is no pause in GPU improvements because there is a serious possibility that we will achieve AGI in the next 5 years mostly by spending more money on GPUs, rather than by having better hardware.
+And, in the case we actually need to train bigger models to learn how to make them safe (as people who believe in an incremental/ prosaic strategy to alignment believe), we could:
+a) If it seems necessary and possible, do really controlled and monitored exceptions of AI Safety research over bigger models. Or,
+b) Avoid the alignment problem and eventually augmenting our intelligence via other technologies.
+
+For hardware overhang to cause a pause on AI to be net negative, ALL of the previous points should go against PauseAI proposals in conjunction.
 
 <!--
 ## Policital capital is limited, Pause might fail
