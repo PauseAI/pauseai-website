@@ -64,4 +64,4 @@ Many AI risks have an offense-defense balance.
 For fake media, we could use digital signatures to detect fakes, shifting the balance to defense.
 For cybersecurity, biohazards and unknown technology, the offense seems to have the advantage.
 
-The important policy implication of this is: let's not build this technology in the first place.
+The important policy implication of this is: [let's not build this technology in the first place](/proposal).

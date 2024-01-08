@@ -58,3 +58,7 @@ We should consider the following policies:
 
 - **Limit publication of training algorithms / runtime improvements**. Sometimes a new algorithm is published that makes training much more efficient. The Transformer architecture, for example, enabled virtually all recent progress in AI. These types of capability jumps can happen at any time, and we should consider limiting the publication of such algorithms to minimize the risk of a sudden capability jump. Similarly, some runtime innovations could drastically change what can be done with existing models. These advancements may need to be regulated as well.
 - **Limit capability advancements of computational resources**. If training a superintelligence becomes possible on consumer hardware, we are in trouble. We should consider limiting capability advances of hardware.
+
+## Help to achieve this
+
+[Join](/join) the movement to help achieve this, or [take action](/action) on your own!
