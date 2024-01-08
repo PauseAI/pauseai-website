@@ -93,7 +93,19 @@ const PauseAICommunities: Community[] = [
 		lat: 51.5073509,
 		lon: -0.12775829999998223,
 		link: 'https://chat.whatsapp.com/CkkycjLr6H96lEzJs2ezox'
-	}
+	},
+	{
+		name: 'PauseAI Los Angeles',
+		lat: 34.0522,
+		lon: -118.2437,
+		link: discordInvite
+	},
+	{
+		name: 'PauseAI Rosario',
+		lat: -32.9442,
+		lon: -60.6505,
+		link: discordInvite
+	},
 ]
 
 const AdjacentCommunities: Community[] = [
