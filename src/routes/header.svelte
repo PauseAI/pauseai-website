@@ -15,6 +15,7 @@
 		<NavLink href="/proposal">Proposal</NavLink>
 		<NavLink href="/protests">Protests</NavLink>
 		<NavLink href="/faq">FAQ</NavLink>
+		<NavLink href="/action">Take Action</NavLink>
 		{#if enableBot}
 			<NavLink href="/chat">{botName}</NavLink>
 		{/if}

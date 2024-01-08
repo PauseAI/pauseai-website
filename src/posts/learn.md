@@ -66,6 +66,7 @@ Here are some resources to get you started.
 - [AI Safety Communications Centre](https://aiscc.org/2023/11/01/yougov-poll-83-of-brits-demand-companies-prove-ai-systems-are-safe-before-release/)
 - [The Midas Project](https://www.themidasproject.com/) Corporate pressure campaigns for AI safety.
 - [The Human Survival Project](https://thehumansurvivalproject.org/)
+- [AI Safety World](https://aisafety.world/) Here's an overview of the AI Safety landscape.
 
 ## If you are convinced and want to take action
 
