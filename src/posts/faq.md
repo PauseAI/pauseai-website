@@ -149,4 +149,5 @@ Because acknowledging that _we are in fact in danger_ is a very, very scary thin
 
 ### I have a different / AI related question
 
-Try [AISafety.info](https://aisafety.info/), an awesome database of questions and answers about AI safety.
+You can learn about AI Safety in other [videos, other media and articles here](/learn).
+Or learn about it more interactively and see the whole AI Safety landscape in [AISafety.com](https://www.aisafety.com).

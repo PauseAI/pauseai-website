@@ -148,9 +148,9 @@
 		{
 			name: 'Eliezer Yudkowsky',
 			title: 'Founder of MIRI',
-			probability: '>80%',
-			number: 0.8,
-			source: 'https://twitter.com/ESYudkowsky/status/1662247373014286337'
+			probability: '>99%',
+			number: 0.99,
+			source: 'https://www.lesswrong.com/posts/j9Q8bRmwCgXRYAgcJ/miri-announces-new-death-with-dignity-strategy'
 		}
 	]
 </script>
