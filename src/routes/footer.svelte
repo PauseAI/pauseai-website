@@ -19,7 +19,7 @@
 		<a href="/sota">State of AI</a>
 		<a href="/psychology-of-x-risk">Psychology of x-risk</a>
 		<a href="/4-levels-of-ai-regulation">4 Levels of regulation</a>
-		<a href="https://pauseai-shop.fourthwall.com" target="_blank">Merchandise</a>
+		<a href="https://pauseai-shop.fourthwall.com" target="_blank">Merchandise / Donate</a>
 	</div>
 	<div class="column">
 		<h2>Risks</h2>
