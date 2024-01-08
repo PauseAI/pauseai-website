@@ -119,6 +119,27 @@ const companiesSource: Company[] = [
 				'Anthropic has published very important advancements in AI safety research, especially in the field of interpretability.',
 			score: 9
 		}
+	},
+	{
+		name: 'Inflection',
+		acknowledge: {
+			// https://forum.effectivealtruism.org/posts/JsjQRqvRc5pFmeSoj/what-do-we-know-about-mustafa-suleyman-s-position-on-ai
+			explanation:
+				'Their CEO Mustafa Suleyman has written extensively about catastrophic AI risks in his book.',
+			score: 8
+		},
+		lobby: {
+			explanation: 'No lobbying as far as we know of yet.',
+			score: 7
+		},
+		deployment: {
+			explanation: 'Not sure tbd',
+			score: 4
+		},
+		research: {
+			explanation: 'No AI safety research published by Inflection.',
+			score: 0
+		}
 	}
 ]
 

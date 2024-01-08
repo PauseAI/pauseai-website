@@ -1,6 +1,6 @@
 <script lang="ts">
 	export let score: number | undefined = undefined
-	export let explanation: string = undefined
+	export let explanation: string | undefined = undefined
 	export let showExplanation: boolean
 	export let title: string | undefined = undefined
 	let showTooltip = false
@@ -22,7 +22,14 @@
 	}
 </script>
 
-<td on:mouseover={() => (showTooltip = true)} on:mouseout={() => (showTooltip = false)}>
+<td
+	on:mouseover={() => (showTooltip = true)}
+	on:mouseout={() => (showTooltip = false)}
+	on:focus={() => (showTooltip = true)}
+	on:blur={() => (showTooltip = false)}
+	on:click={() => (showExplanation = !showExplanation)}
+	class={showExplanation ? '' : 'enable-tooltips'}
+>
 	{#if title !== undefined}
 		<div class="title">
 			{title}
@@ -46,6 +53,10 @@
 </td>
 
 <style>
+	td.enable-tooltips:hover {
+		cursor: help;
+		background-color: var(--bg-subtle);
+	}
 	.title {
 		font-weight: bold;
 	}
