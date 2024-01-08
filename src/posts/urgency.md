@@ -72,7 +72,7 @@ We have no idea how to align such an AI (even [OpenAI admits this](https://youtu
 
 ## Policy implications
 
-We could have a [superintelligence in months](/urgency).
+We could have a superintelligence in months.
 A 1% risk is unacceptably large.
 We can only conclude that we need to slow down AI development right now.
 [Read our proposal](/proposal).
