@@ -8,7 +8,7 @@ Here are some resources to get you started.
 
 ## Videos
 
-- [Could AI wipe out humanity?](https://youtu.be/qzyEgZwfkKY?si=ief1l2PpkZ7_s6sq) (10 mins). The best shortest and simple introduction to the problem, from a down-to-earth perspective. 
+- [Could AI wipe out humanity?](https://youtu.be/qzyEgZwfkKY?si=ief1l2PpkZ7_s6sq) (10 mins). The best shortest and simple introduction to the problem, from a down-to-earth perspective.
 - [Don't look up - The Documentary: The Case For AI As An Existential Threat](https://www.youtube.com/watch?v=U1eyUjVRir4) (17 mins). Powerful and nicely edited documentary about the dangers of AI, with many expert quotes from interviews.
 - [Max Tegmark Ted Talk (2023)](https://www.youtube.com/watch?v=xUNx_PxNHrY) (15 mins). AI capabilities are improving quicker than expected.
 - [Sam Harris | Can we build AI without losing control over it?](https://www.youtube.com/watch?v=8nt3edWLgIg) (15 mins). Ted talk about the crazy situation we're in.
@@ -45,13 +45,35 @@ Here are some resources to get you started.
 - [Our Final Invention: Artificial Intelligence and the End of the Human Era](https://www.goodreads.com/en/book/show/17286699) (James Barrat)
 - [The Precipice: Existential Risk and the Future of Humanity](https://www.goodreads.com/en/book/show/50963653) (Toby Ord)
 
-# If you are convinced and want to take action
+## Courses
+
+- [AGI safety fundamentals](https://www.agisafetyfundamentals.com/) (30hrs)
+- [CHAI Bibliography of Recommended Materials](https://humancompatible.ai/bibliography) (50hrs+)
+- [AIsafety.training](https://aisafety.training/): Overview of training programs, conferences, and other events
+
+## Organisations
+
+- [Future of Life Institute](https://futureoflife.org/cause-area/artificial-intelligence/) started the [open letter](https://futureoflife.org/open-letter/pause-giant-ai-experiments/), led by Max Tegmark.
+- [FutureSociety](https://thefuturesociety.org/about-us/)
+- [Conjecture](https://www.conjecture.dev/). Start-up that is working on AI alignment and AI policy, led by Connor Leahy.
+- [Existential Risk Observatory](https://existentialriskobservatory.org/). Dutch organization that is informing the public on x-risks and studying communication strategies.
+- [Center for AI Safety](https://www.safe.ai/) (CAIS) is a research center at the Czech Technical University in Prague, led by
+- [Center for Human-Compatible Artificial Intelligence](https://humancompatible.ai/about/) (CHAI), led by Stuart Russell.
+- [Machine Intelligence Research Institute](https://intelligence.org/) (MIRI), doing mathematical research on AI safety, led by Eliezer Yudkowsky.
+- [Centre for the Governance of AI](https://www.governance.ai/)
+- [Institute for AI Policy and Strategy](https://www.iaps.ai/) (IAPS)
+- [The AI Policy Institute](https://theaipi.org/)
+- [AI Safety Communications Centre](https://aiscc.org/2023/11/01/yougov-poll-83-of-brits-demand-companies-prove-ai-systems-are-safe-before-release/)
+- [The Midas Project](https://www.themidasproject.com/) Corporate pressure campaigns for AI safety.
+- [The Human Survival Project](https://thehumansurvivalproject.org/)
+
+## If you are convinced and want to take action
 
 There are many [things that you can do](/action).
 Writing a letter, going to a protest, donating some money or joining a community is not that hard!
 And these actions have a real impact.
 Even when facing the end of the world, there can still be hope and very rewarding work to do.
 
-# If you still don't feel quite sure of it
+## If you still don't feel quite sure of it
 
 Learning about the [psychology of x-risk](/psychology-of-x-risk) could help you.
