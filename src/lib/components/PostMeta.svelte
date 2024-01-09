@@ -8,14 +8,14 @@
 	const imageUrl = image.startsWith('/') ? `${url}${image}` : image
 
 	const schemaOrgMarkup = {
-		"@context": "https://schema.org/",
-		"@type": "BlogPosting",
-		"headline": title,
-		"abstract": description,
-		"datePublished": date,
-		"image": {
-			"@type": "ImageObject",
-			"contentUrl": imageUrl
+		'@context': 'https://schema.org/',
+		'@type': 'BlogPosting',
+		headline: title,
+		abstract: description,
+		datePublished: date,
+		image: {
+			'@type': 'ImageObject',
+			contentUrl: imageUrl
 		}
 	}
 </script>
