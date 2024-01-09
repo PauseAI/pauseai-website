@@ -146,6 +146,13 @@
 			source: 'https://twitter.com/DanHendrycks/status/1642394635657162753'
 		},
 		{
+			name: 'Roman Yampolskiy',
+			title: 'AI Safety Researcher',
+			probability: '98%',
+			number: 0.02,
+			source: 'https://www.scientificamerican.com/article/ai-safety-research-only-enables-the-dangers-of-runaway-superintelligence/#:~:text=1%20percent%20chance%20to%20maybe%202%20percent.'
+		},
+		{
 			name: 'Eliezer Yudkowsky',
 			title: 'Founder of MIRI',
 			probability: '>99%',
