@@ -15,7 +15,7 @@
 		datePublished: date,
 		image: {
 			'@type': 'ImageObject',
-			contentUrl: imageUrl
+			url: imageUrl
 		}
 	}
 </script>
