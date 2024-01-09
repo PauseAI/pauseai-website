@@ -6,10 +6,23 @@
 	/** URL or relative path to cover / preview image */
 	export let image = '/Cover.png'
 	const imageUrl = image.startsWith('/') ? `${url}${image}` : image
+
+	const schemaOrgMarkup = {
+		"@context": "https://schema.org/",
+		"@type": "BlogPosting",
+		"headline": title,
+		"abstract": description,
+		"datePublished": date,
+		"thumbnail": {
+			"@type": "ImageObject",
+			"contentUrl": imageUrl
+		}
+	}
 </script>
 
 <svelte:head>
 	<title>{title}</title>
+	<meta property="description" content={description} />
 	<meta property="og:type" content="article" />
 	<meta property="og:title" content={title} />
 	<meta property="og:description" content={description} />
@@ -23,4 +36,7 @@
 	<meta property="twitter:description" content={description} />
 	<meta property="twitter:site" content="@PauseAI" />
 	<meta property="twitter:creator" content="@PauseAI" />
+	{@html `<script type="application/ld+json">
+        ${JSON.stringify(schemaOrgMarkup)}
+    </script>`}
 </svelte:head>
