@@ -13,7 +13,7 @@
 		"headline": title,
 		"abstract": description,
 		"datePublished": date,
-		"thumbnail": {
+		"image": {
 			"@type": "ImageObject",
 			"contentUrl": imageUrl
 		}
