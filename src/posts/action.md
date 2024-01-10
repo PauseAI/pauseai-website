@@ -54,7 +54,7 @@ You are now one of them.
 
 ### If you have money to spare
 
-- **Donate** to the [Campaign for AI Safety](https://www.campaignforaisafety.org/donate/), [Future of Life Institute](https://futureoflife.org/donate/), the [Machine Intelligence Research Institute](https://intelligence.org/donate/) or [NonLinearNetwork](https://nonlinearnetwork.org/)
+- **Donate** to PauseAI in our [store](https://pauseai-shop.fourthwall.com/) or buy some merchandise! If you don't like what PauseAI does, but you still want to donate to AIsafety, consider donating to the [Campaign for AI Safety](https://www.campaignforaisafety.org/donate/), [Future of Life Institute](https://futureoflife.org/donate/), the [Machine Intelligence Research Institute](https://intelligence.org/donate/) or [NonLinearNetwork](https://nonlinearnetwork.org/)
 
 ### If you can write web content
 
