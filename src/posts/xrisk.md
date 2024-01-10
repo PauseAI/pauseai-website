@@ -33,7 +33,7 @@ The leaders of the 3 top AI labs and hundreds of AI scientists have [signed the 
 
 > "Mitigating the risk of extinction from AI should be a global priority alongside other societal-scale risks such as pandemics and nuclear war."
 
-## What a superintelligent AI can be (used to) do
+## What a superintelligent AI can (be used to) do
 
 You might think that a superintelligent AI would be locked inside a computer, and therefore can't affect the real world.
 However, we tend to give AI systems access to the internet, which means that they can do a lot of things:
