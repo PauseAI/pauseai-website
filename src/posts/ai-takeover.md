@@ -1,12 +1,13 @@
 ---
-title: Why an AI takeover is extremely likely
-description: As AI surpasses human capabilities, the likelihood of an AI takeover approaches 100 percent
+title: Why an AI takeover could be very likely
+description: As AI surpasses human capabilities, the likelihood of an AI takeover becomes very high.
 ---
 
 One of the concerns of AI scientists is that a superintelligence could take over control of our planet.
 This does not necessarily mean that everyone dies, but it does mean that (almost) all humans will lose control over our future.
 
-In this article, I will argue that this takeover risk is not only real but that it is almost certain to happen _if we build a superintelligence_.
+We discuss the basics of x-risk mostly in [an other article](/xrisk).
+In this article here, we will argue that this takeover risk is not only real but that it is very likely to happen _if we build a superintelligence_.
 
 ## The argument
 
@@ -14,7 +15,7 @@ In this article, I will argue that this takeover risk is not only real but that 
 - Some instance of the ASI will attempt a takeover.
 - A takeover attempt by an ASI is likely to succeed.
 - A successful takeover is permanent.
-- Humans are unlikely to survive a takeover.
+- A takeover is probably bad for most humans.
 
 ## An Agentic SuperIntelligence is likely to exist in the near future
 
@@ -30,25 +31,33 @@ An example of this is AutoGPT, which recursively lets a language model generate 
 If an SI pursues an objective in the real world, we call it an Agentic SuperIntelligence (ASI).
 Since we can already turn non-agentic AI into agentic AI, we can expect that an ASI will exist shortly after an SI exists.
 
-Regarding timelines, it is virtually impossible to predict when ASI will exist.
-However, current AI models already
+It is virtually impossible to accurately predict when ASI will exist.
+It might take decades, it [might happen next month](/urgency).
+We should act as if it will happen soon, because the consequences of being wrong are so severe.
 
 ## Some instance of the ASI will attempt a takeover
 
 In a takeover attempt, an ASI will take actions to maximize its control over the world.
-A takeover attempt will occur whenever an ASI pursues a goal where it would be beneficial to have control over the world.
+A takeover attempt could happen for at least two reasons:
+
+1. Because an AI is explicitly instructed to do so.
+2. As a sub-goal of another goal.
+
+This first reason is likely to happen at some point if we wait long enough, but the second reason is quite likely to happen accidentally, even early on after the creation of an ASI.
+
+The sub-goal of _maximizing control_ over the world could be likely to occur due to _instrumental convergence_: the tendency of sub-goals to converge on power-grabbing, self-preservation, and resource acquisition:
+
+- The more control you have, the harder it will be from any other agent to prevent you from achieving your goal.
+- The more control you have, the more resources you have to achieve your goal. (For example, an AI tasked with calculating pi might conclude that it would be beneficial to use all computers on the world to calculate pi.
 
 Not every instance of an ASI will necessarily attempt a takeover.
-However, it only has to happen once.
+The important insight is that **it only has to happen once**.
+
 A world which is not yet taken over, but does have an ASI that _could_ take over, is in a fundamentally unstable condition.
-It is not a question of _if_ a takeover will happen, but _when_ it will happen.
-A sufficiently intelligent ASI will understand this dynamic, and will therefore attempt a takeover as soon as it is capable of doing so.
+In a similar way, a country without a government is in a fundamentally unstable condition.
+It is not a question of _if_ a takeover attempt will happen, but _when_ it will happen.
 
-And since there will be many instances of an ASI.
-This sub-goal is likely to occur due to _instrumental convergence_: the tendency of sub-goals to converge on power-grabbing, self-preservation, and resource acquisition.
-For example, an AI tasked with calculating pi might conclude that it would be beneficial to use all computers on the world to calculate pi.
-
-This process can involve hacking into virtually all systems that are connected to the internet, manipulating people, and controlling physical resources.
+The process of taking over can involve hacking into virtually all systems that are connected to the internet, manipulating people, and controlling physical resources.
 A takeover attempt is successful when the ASI has control over virtually every aspect of our world.
 This could be a slow process, where the ASI gradually gains more and more control over the course of months, or it could be a sudden process.
 The speed at which a takeover attempt takes place will depend on the capabilities of the ASI.
@@ -87,24 +96,32 @@ Here are some of the things that an AI might do to take over:
 - Help existing robotics companies **build robots** (e.g. by leaking new designs), and take over these robots when they are ready.
 - Use existing factories to **build technology that we do not understand**, perhaps even using derived knowledge of physics that we are not aware of. Think nanotechnology, quantum computing, and bioengineering.
 
-One might suggest that having **safeguards** in place could prevent a takeover (like adding a kill switch, or not connecting it to the internet).
+One might suggest that having **safeguards** in place could prevent a takeover like adding a kill switch, or not connecting it to the internet.
 However, since the ASI will be more intelligent than humans, it is likely to come up with strategies to circumvent these safeguards.
 For example, if the ASI is not connected to the internet, it might manipulate humans into connecting it to the internet, for example by promising to solve a difficult problem and by behaving in a way that makes it seem trustworthy, or by convincing humans that it is a moral agent.
 It's worth noting that even this obvious safeguard is not being used as of now, as tools like ChatGPT are already connected to the internet and thousands of APIs.
 
-## Humans are unlikely to survive a takeover
+One other solution is to use ASI to _prevent_ a takeover.
+An aligned ASI would be able to come up with strategies that
 
-Note that a takeover does not necessarily mean that the ASI will kill all humans.
-However, for most random goals that can be considered, humans do not have value, and death will eventually be the default outcome as we ultimately compete for the same limited resources.
-This is why the risk of accidental human extinction is so high with AI.
-For a random goal, such as calculating pi, humans are not part of the optimal world state.
-The default outcome of a takeover attempt is therefore that all humans die.
+## A takeover is probably bad for most humans
+
+The ASI that happens to take over could do so for many reasons.
+For most random goals that it could have, humans are not part of it.
+If we end up with an ASI that is indifferent to humans, we are competing for the same resources.
+
+It seems unlikely that the ASI wants to kill humanity for the sake of killing humanity - it is far more likely that it wants to use the resources that we use for some other objective. Additionally, humanity might pose a threat to the ASI's objective, as there is a risk that we will try to stop it from achieving its goal (e.g. by turning it off).
+
+One of the most likely outcomes of a takeover is therefore that all humans die.
 
 But even in the outcomes where humans do survive, we are still at risk of being worse off.
-If a goal does involve keeping humans alive, it is possible that human well-being is not part of the same goal.
-And even if the AI is under human control, we don't know that the one controlling the AI will have everyone's best interests in mind.
+If a goal does involve keeping humans alive, it is possible that _human well-being_ is _not_ part of the same goal.
+It doesn't take a lot of imagination to see how horrible it would be to be kept alive in a world where we are artificially kept alive by an ASI that is indifferent to our suffering.
+
+And even if the AI that takes over is under human control, we don't know that the one controlling the AI will have everyone's best interests in mind.
+It is hard to imagine a functioning democracy when an ASI exists that can manipulate people at super-human level.
 
 ## Conclusion
 
-If these premises are true, then the likelihood of an AI takeover approaches 100 percent as AI surpasses human capabilities.
+If these premises are true, then the likelihood of an AI takeover approaches certainty as AI surpasses human capabilities.
 So let's not build a superintelligence.
