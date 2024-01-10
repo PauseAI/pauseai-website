@@ -7,9 +7,9 @@ description: Implement a temporary pause on the training of AI systems more powe
 
 Individual countries can and should implement this measure _right now_.
 Especially the US (or California, specifically) should implement a Pause, since it is home to virtually all leading AI companies.
-Many scientists and industry leaders [agree that a Pause is necessary](https://futureoflife.org/open-letter/pause-giant-ai-experiments/), and the (US) public also strongly supports this ([64%](https://www.campaignforaisafety.org/usa-ai-x-risk-perception-tracker/) - [69%](https://today.yougov.com/topics/technology/survey-results/daily/2023/04/03/ad825/2)).
+Many scientists and industry leaders [agree that a Pause is necessary](https://futureoflife.org/open-letter/pause-giant-ai-experiments/), and the (US) public also strongly supports a pause ([64%](https://www.campaignforaisafety.org/usa-ai-x-risk-perception-tracker/) - [69%](https://today.yougov.com/topics/technology/survey-results/daily/2023/04/03/ad825/2)).
 
-However, we cannot expect countries or companies to risk their competitive advantage by pausing AI training runs for a long time.
+However, we cannot expect countries or companies to risk their competitive advantage by pausing AI training runs for a long time if other countries or companies do not do the same.
 This is why we need a **global Pause**.
 
 ## Implementing a global Pause
@@ -26,7 +26,7 @@ This treaty needs to be signed by all UN member states.
   - Granting approval for _new training runs_ of AI models above a certain size (e.g. 1 billion parameters).
   - Periodic meetings to discuss the progress of AI safety research.
 - **Only allow training of general AI systems more powerful than GPT-4 if their safety can be guaranteed**.
-  - By more powerful than GPT-4, we mean all AI models that are either larger than 10^12 parameters or have more than 10^25 FLOPs used for training.
+  - By more powerful than GPT-4, we mean all AI models that are either 1) larger than 10^12 parameters, 2) have more than 10^25 FLOPs used for training or 3) capabilities that are expected to exceed GPT-4.
   - Note that this does not target _narrow_ AI systems, like image recognition used for diagnosing cancer.
   - Require [oversight during training runs](https://www.alignmentforum.org/posts/Zfk6faYvcf5Ht7xDx/compute-thresholds-proposed-rules-to-mitigate-risk-of-a-lab).
   - Safety can be guaranteed if there is strong scientific consensus and [proof](https://arxiv.org/abs/2309.01933) that the _alignment problem has been solved_. Right now, this is not the case, so right now we should not allow training of such systems.
@@ -61,4 +61,4 @@ We should consider the following policies:
 
 ## Help to achieve this
 
-[Join](/join) the movement to help achieve this, or [take action](/action) on your own!
+[Join](/join) the movement to collaborate towards a Pause, or [take action](/action) on your own!
