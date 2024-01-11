@@ -12,7 +12,7 @@ However, you can have more impact by scaling up and doing more things, and we're
 
 ### Ask for help
 
-[Join our discord](https://discord.gg/2XXWXvErfA) to discuss organizing a protest.
+[Join our Discord](https://discord.gg/2XXWXvErfA) to discuss organizing a protest.
 There are different channels for a lot of countries there.
 We're happy to help you with advice and resources!
 
