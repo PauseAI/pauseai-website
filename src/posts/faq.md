@@ -149,5 +149,5 @@ Because acknowledging that _we are in fact in danger_ is a very, very scary thin
 
 ### I have a different / AI related question
 
-You can learn about AI Safety in other [videos, other media and articles here](/learn).
-Or learn about it more interactively and see the whole AI Safety landscape in [AISafety.com](https://www.aisafety.com).
+You can try [AISafety.com](https://www.aisafety.com), that also gives you a better view of the whole AI Safety landscape.
+Or learn from other sources and media like [videos, articles and books here](/learn).
