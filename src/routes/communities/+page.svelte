@@ -82,7 +82,7 @@
 <p>
 	Are you missing a community in your location? <a href="https://discord.gg/HWcPt5ccJN"
 		>Create a Post</a
-	> on our Discord!
+	> on our Discord server!
 </p>
 <div>
 	<div class="map-wrap">

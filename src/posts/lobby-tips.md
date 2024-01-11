@@ -28,7 +28,7 @@ When you reach out to people, tell them about what the scientists are saying. Th
 ## Write a letter
 
 - It needs to be good, but it does not have to be perfect. Don't work on this for months! We don't have that time.
-- We already have some documents (join the [Discord](https://discord.gg/2XXWXvErfA)!)
+- We already have some documents (join the [Discord server](https://discord.gg/2XXWXvErfA)!)
 - It should be short and to the point. Be clear about your advice: [implement our proposals](/proposal), attend the [summit](/summit), form coalitions with other nations to achieve this.
 - Be clear about urgency. This is an emergency.
 
@@ -50,4 +50,4 @@ It's not that hard, it just takes some time, effort and a little courage.
 And you don't have to do it alone.
 We already have a couple of initiatives running in different countries.
 We're here to help each other out and fix this problem together.
-Join the [Discord](https://discord.gg/2XXWXvErfA) and get started.
+Join the [Discord server](https://discord.gg/2XXWXvErfA) and get started.

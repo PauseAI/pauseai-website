@@ -14,7 +14,7 @@ Join #PauseAI for an upcoming peaceful protest at the Melbourne Convention and E
 - Protest Times: 1.30 pm to 3 pm (arrival time) & 4:30 pm onwards (departure time)
 - Logistics: Bring signs and flyers, no fee is required to participate, Startup Victoria membership ticket is currently free
 
-Join us to raise your voice for AI safety and make a difference. Please join #PauseAI's [Discord](https://www.campaignforaisafety.org/r/00904dc7?m=4045bfdd-2b52-4fa2-b4c5-0d8adb4aac63), the #australia channel and AGI Moratorium's Slack, [#λ-australia](https://www.campaignforaisafety.org/r/2b0991d9?m=4045bfdd-2b52-4fa2-b4c5-0d8adb4aac63) for more discussions.
+Join us to raise your voice for AI safety and make a difference. Please join #PauseAI's [Discord server](https://www.campaignforaisafety.org/r/00904dc7?m=4045bfdd-2b52-4fa2-b4c5-0d8adb4aac63), the #australia channel and AGI Moratorium's Slack, [#λ-australia](https://www.campaignforaisafety.org/r/2b0991d9?m=4045bfdd-2b52-4fa2-b4c5-0d8adb4aac63) for more discussions.
 
 ## Press Release
 

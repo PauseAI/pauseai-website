@@ -12,7 +12,7 @@ You are now one of them.
 ## You can do this
 
 - **[Join PauseAI](/join)** and help us grow.
-- **[Join our Discord](https://discord.gg/2XXWXvErfA)**, where our community is most active. We have a **#projects** channel where people are working on campaigns, videos, images, apps and more.
+- **[Join our Discord server](https://discord.gg/2XXWXvErfA)**, where our community is most active. We have a **#projects** channel where people are working on campaigns, videos, images, apps and more.
 - **[Meet](/communities)** other people in a PauseAI community near you. If there is no community near you, consider starting one.
 - **[Learn](/learn)** more about AI alignment and the risks we are facing.
 - [**Protest**](/protests): join [one of the protests](/protests) or [organize one yourself](/organizing-a-protest).
