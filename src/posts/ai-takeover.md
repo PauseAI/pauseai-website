@@ -124,4 +124,4 @@ It is hard to imagine a functioning democracy when an ASI exists that can manipu
 ## Conclusion
 
 If these premises are true, then the likelihood of an AI takeover approaches certainty as AI surpasses human capabilities.
-So let's not build a superintelligence.
+So [let's not build a superintelligence](/action).
