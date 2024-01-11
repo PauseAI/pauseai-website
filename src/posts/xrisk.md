@@ -46,7 +46,7 @@ However, we tend to give AI systems access to the internet, which means that the
 
 ## The alignment problem: why an AI might lead to human extinction
 
-Intelligence can be defined as _how good something is at achieving its goals_.
+The type of intelligence we are concerned about can be defined as _how good something is at achieving its goals_.
 Right now, humans are the most intelligent thing on earth, although that could change soon.
 Because of our intelligence, we are dominating our planet.
 We might not have claws or scaled skin, but we have big brains.
