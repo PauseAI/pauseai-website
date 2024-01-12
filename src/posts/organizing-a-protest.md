@@ -12,8 +12,8 @@ However, you can have more impact by scaling up and doing more things, and we're
 
 ### Ask for help
 
-[Join our Discord server](https://discord.gg/2XXWXvErfA) to discuss organizing a protest.
-There are different channels for a lot of countries there.
+Check if there's not already a [local community near you](/communities).
+And [join our Discord server](https://discord.gg/2XXWXvErfA) to discuss organizing a protest.
 We're happy to help you with advice and resources!
 
 ### Pick a location and a date

@@ -3,7 +3,7 @@ title: PauseAI Proposal
 description: Implement a temporary pause on the training of AI systems more powerful than GPT-4, ban training on copyrighted material, hold model creators liable.
 ---
 
-**Implement a temporary pause on the training of AI systems more powerful than GPT-4**, at least until we know how to build them safely and keep them under democratic control.
+**Implement a pause on the training of AI systems more powerful than GPT-4**, until we know how to build them safely and keep them under democratic control.
 
 Individual countries can and should implement this measure _right now_.
 Especially the US (or California, specifically) should implement a Pause, since it is home to virtually all leading AI companies.
@@ -15,7 +15,9 @@ This is why we need a **global Pause**.
 ## Implementing a global Pause
 
 An international agreement is typically established through a summit, where leaders of countries meet to discuss the issue and make a decision.
-The UK has stepped up and is [hosting an AI safety summit](/summit) in the autumn of 2023.
+The UK has stepped up and is has hosted an AI safety summit in the autumn of 2023. 
+And two more summits have been announced.
+[More about the summits](/summit)
 
 The primary goal of the summit should be a **treaty**.
 This treaty should specify the policy measures that protect us from the [risks of AI](/risks).
@@ -41,7 +43,7 @@ This treaty needs to be signed by all UN member states.
 Implementing a pause _can_ backfire if it is not done properly.
 Read more about [how these risks can be mitigated](/mitigating-pause-failures).
 
-## Other measures to effectively Pause
+## Other measures that effectively slow down
 
 - **Ban training of AI systems on copyrighted material**. This helps with copyright issues, slows growing inequality and slows down progress towards superintelligence.
 - **Hold AI model creators liable** for criminal acts committed using their AI systems. This gives model creators more incentives to make sure their models are safe.
