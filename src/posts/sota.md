@@ -5,10 +5,6 @@ description: How smart are the latest AI models compared to humans?
 
 Let's take a look at how the most competent AI systems compare with humans in various domains.
 The list below is regularly updated to reflect the latest developments.
-As time progresses and capabilities improve, we move items from lower sections to the top section.
-When some specific [dangerous capabilities](/dangerous-capabilities) are achieved, AI will pose new risks.
-At some point, AI will outcompete every human in every metric imaginable.
-When we have built this superintelligence, [we will probably soon be dead](/ai-takeover).
 
 _Last update: 2023-12_
 
@@ -33,3 +29,11 @@ _Last update: 2023-12_
 
 - **Saying "I don't know"**. Virtually all Large Language Models have this problem of 'hallucination', making up information instead of saying it does not know. This might seem like a relatively minor shortcoming, but it's a very important one. It makes LLMs unreliable and strongly limits their applicability.
 - **Movement**. The [Atlas robot can walk, throw objects and do somersaults](https://www.youtube.com/watch?v=-e1_QhJ1EhQ), but it is still limited in its movements. Google's [RT-2](https://www.deepmind.com/blog/rt-2-new-model-translates-vision-and-language-into-action) can turn objectives into actions in the real world, like "move the cup to the wine bottle".
+
+
+## The endpoint
+
+As time progresses and capabilities improve, we move items from lower sections to the top section.
+When some specific [dangerous capabilities](/dangerous-capabilities) are achieved, AI will pose new risks.
+At some point, AI will outcompete every human in every metric imaginable.
+When we have built this superintelligence, [we will probably soon be dead](/ai-takeover).
