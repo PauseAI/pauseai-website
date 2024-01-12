@@ -46,3 +46,7 @@ In this guide, we'll dive into what you can do to make your message stand out.
 ## Example letter
 
 [Example letter](https://docs.google.com/document/d/1M3Wc7JMNn8UUZmOfuxOW7a6GtTCckY7fkpd-pmv3Fr8/edit)
+
+## Need more help / feedback?
+
+[Join the Discord](https://discord.gg/2XXWXvErfA) to ask any question about sending an e-mail or to share your draft for feedback!
