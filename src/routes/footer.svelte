@@ -58,7 +58,7 @@
 		<ExternalLink href={editUrl}>Edit this page</ExternalLink>
 		<a href="/posts">All pages</a>
 		<a href="/rss.xml" target="_blank">RSS</a>
-		<ExternalLink href="https://creativecommons.org/licenses/by/2.0/" target="_blank">License: CC-BY 2.0</ExternalLink>
+		<ExternalLink href="https://creativecommons.org/licenses/by/4.0/" target="_blank">License: CC-BY 4.0</ExternalLink>
 	</div>
 </footer>
 
