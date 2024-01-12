@@ -1,4 +1,5 @@
 <script lang="ts">
+	import ExternalLink from '$lib/components/custom/a.svelte'
 	import Toggle from '$lib/components/Toggle.svelte'
 	import { page } from '$app/stores'
 
@@ -19,7 +20,7 @@
 		<a href="/sota">State of AI</a>
 		<a href="/psychology-of-x-risk">Psychology of x-risk</a>
 		<a href="/4-levels-of-ai-regulation">4 Levels of regulation</a>
-		<a href="https://pauseai-shop.fourthwall.com" target="_blank">Merchandise</a>
+		<ExternalLink href="https://pauseai-shop.fourthwall.com" target="_blank">Merchandise</ExternalLink>
 	</div>
 	<div class="column">
 		<h2>Risks</h2>
@@ -43,21 +44,21 @@
 	</div>
 	<div class="column">
 		<h2>Socials</h2>
-		<a href="https://discord.gg/2XXWXvErfA" target="_blank">Discord</a>
-		<a href="https://twitter.com/PauseAI" target="_blank">Twitter</a>
-		<a href="https://www.linkedin.com/company/pauseai" target="_blank">LinkedIn</a>
-		<a href="https://www.facebook.com/PauseAI/" target="_blank">Facebook</a>
-		<a href="https://www.tiktok.com/@pauseai" target="_blank">TikTok</a>
-		<a href="https://www.instagram.com/pause_ai/" target="_blank">Instagram</a>
-		<a href="https://www.youtube.com/@PauseAI" target="_blank">YouTube</a>
+		<ExternalLink href="https://discord.gg/2XXWXvErfA" target="_blank">Discord</ExternalLink>
+		<ExternalLink href="https://twitter.com/PauseAI" target="_blank">Twitter</ExternalLink>
+		<ExternalLink href="https://www.linkedin.com/company/pauseai" target="_blank">LinkedIn</ExternalLink>
+		<ExternalLink href="https://www.facebook.com/PauseAI/" target="_blank">Facebook</ExternalLink>
+		<ExternalLink href="https://www.tiktok.com/@pauseai" target="_blank">TikTok</ExternalLink>
+		<ExternalLink href="https://www.instagram.com/pause_ai/" target="_blank">Instagram</ExternalLink>
+		<ExternalLink href="https://www.youtube.com/@PauseAI" target="_blank">YouTube</ExternalLink>
 	</div>
 	<div class="column">
 		<h2>Other</h2>
 		<Toggle />
-		<a href={editUrl}>Edit this page</a>
+		<ExternalLink href={editUrl}>Edit this page</ExternalLink>
 		<a href="/posts">All pages</a>
 		<a href="/rss.xml" target="_blank">RSS</a>
-		<a href="https://creativecommons.org/licenses/by/2.0/" target="_blank">Shared under CC-BY</a>
+		<ExternalLink href="https://creativecommons.org/licenses/by/2.0/" target="_blank">License: CC-BY 2.0</ExternalLink>
 	</div>
 </footer>
 
@@ -109,12 +110,12 @@
 		text-align: left;
 	}
 
-	a {
+	footer :global(a) {
 		color: var(--text-2);
 		text-decoration: none;
 	}
 
-	a:hover {
+	footer :global(a:hover) {
 		text-decoration: underline;
 	}
 </style>
