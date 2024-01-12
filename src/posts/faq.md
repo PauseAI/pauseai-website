@@ -83,7 +83,7 @@ We should act as if we have very little time left because we don't want to be ca
 ### If we Pause, what about China?
 
 For starters, at this point, China has stricter AI regulations than virtually any other country.
-They [didn't even allow chatbots](https://www.reuters.com/technology/chinas-slow-ai-roll-out-points-its-tech-sectors-new-regulatory-reality-2023-07-12/) and [disallow training on internet data](https://cointelegraph.com/news/china-sets-stricter-rules-training-generative-ai-models) up [until September 2023](https://asia.nikkei.com/Business/Technology/China-approves-AI-chatbot-releases-but-will-it-unleash-innovation).
+They [didn't even allow chatbots](https://www.reuters.com/technology/chinas-slow-ai-roll-out-points-its-tech-sectors-new-regulatory-reality-2023-07-12/) and [disallowed training on internet data](https://cointelegraph.com/news/china-sets-stricter-rules-training-generative-ai-models) up [until September 2023](https://asia.nikkei.com/Business/Technology/China-approves-AI-chatbot-releases-but-will-it-unleash-innovation).
 China has a more controlling government and thus has even more reason to fear the uncontrollable and unpredictable impacts of AI.
 During the UNSC meeting on AI safety, China was the only country that mentioned the possibility of implementing a pause.
 
@@ -118,7 +118,7 @@ The AI companies never mentioned x-risk until very recently.
 Sam Altman is an interesting exception.
 He wrote about existential AI risk [back in 2015, on his private blog](https://blog.samaltman.com/machine-intelligence-part-1), before founding OpenAI.
 In the years since he made virtually no explicit mention of x-risk again.
-During the Senate hearing, when asked about his x-risk blog post, he only answered by talking about jobs and the economy.
+During the Senate hearing on May 16, 2023, when asked about his x-risk blog post, he only answered by talking about jobs and the economy.
 He was not pushing the x-risk narrative here, he was actively avoiding it.
 
 In May 2023, everything changed:
@@ -128,9 +128,6 @@ In May 2023, everything changed:
 - On May 22nd, OpenAI published [a blog post about the governance of superintelligence](https://openai.com/blog/governance-of-superintelligence), and mentioned x-risk for the first time.
 - On May 24th, ex-Google CEO Eric Schmidt acknowledges x-risk.
 - On May 30th, the [Safe.ai statement (acknowledging x-risk)](https://www.safe.ai/statement-on-ai-risk) was published. This time, including people from OpenAI, Google and Microsoft.
-
-Signing the statement.
-That's all the AI companies (or some of their directors/employees) have done to push the x-risk narrative.
 
 These companies have been very slow to acknowledge x-risk, considering that many of their employees have been aware of it for years.
 So in our view, the AI companies are not pushing the x-risk narrative, they have been reactive to others pushing it, and have waited with their response until it was absolutely necessary.
@@ -142,7 +139,7 @@ And would a company like OpenAI [dedicate 20% of its compute resources](https://
 
 Here's our interpretation: the AI companies signed the statement because _they know that x-risk is a problem that needs to be taken very seriously_.
 
-The main reason many other people still don't want to believe that x-risk is a real concern?
+A big reason many other people still don't want to believe that x-risk is a real concern?
 Because acknowledging that _we are in fact in danger_ is a very, very scary thing.
 
 [Read more about the psychology of x-risk](/psychology-of-x-risk).
