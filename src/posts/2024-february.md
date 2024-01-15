@@ -1,5 +1,5 @@
 ---
-title: PauseAI protest @ OpenAI - January 24th
+title: PauseAI protest @ OpenAI - February 12th 2024
 description: We are organizing a protest to demand a pause on dangerous AI development.
 ---
 
