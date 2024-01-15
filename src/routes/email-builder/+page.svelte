@@ -17,7 +17,7 @@
 		categories: []
 	}
 
-	let name = 'Minister of Foreign Affairs'
+	let name = ''
 
 	const letterId = 'letter'
 
@@ -55,11 +55,11 @@
 
 	const actions: Section[] = [
 		{
-			name: 'Have a 30 minute meeting with you',
+			name: 'Have a meeting with you',
 			section: Meeting
 		},
 		{
-			name: 'Organize a debate in parliament',
+			name: 'Organize a debate',
 			section: Debate
 		}
 	]
@@ -112,22 +112,23 @@
 		about AI?
 	</li>
 	<li>
-		Who will you reach out to? <input value={name} />
+		<b>Enter their name:</b> <input value={name} placeholder="Name of person" />
 	</li>
 </ul>
 
 <h2>Pick a concern</h2>
 <ul>
 	<li>What are you concerned about, and what do you want your reader to focus on?</li>
-</ul>
-<p>
-	Select a concern template:
-	<select bind:value={selectedConcern}>
+	<li>
+		<b>Select one:</b>
 		{#each concerns as section}
-			<option value={section}>{section.name}</option>
+			<button
+				class={selectedConcern == section ? 'tag tag--selected' : 'tag'}
+				on:click={() => (selectedConcern = section)}>{section.name}</button
+			>{' '}
 		{/each}
-	</select>
-</p>
+	</li>
+</ul>
 
 <h2>Pick an action</h2>
 <ul>
@@ -135,15 +136,16 @@
 		What do you want the recipient to do after receiving your mail? Prepare for the summit, organize
 		a debate, have a meeting?
 	</li>
-</ul>
-<p>
-	Select an action template:
-	<select bind:value={selectedAction}>
+	<li>
+		<b>Select one:</b>
 		{#each actions as section}
-			<option value={section}>{section.name}</option>
+			<button
+				class={selectedAction == section ? 'tag tag--selected' : 'tag'}
+				on:click={() => (selectedAction = section)}>{section.name}</button
+			>{' '}
 		{/each}
-	</select>
-</p>
+	</li>
+</ul>
 
 <div class="actionBar">
 	<Button on:click={() => copyHTMLWithoutStyles()}>Copy</Button>
@@ -258,11 +260,37 @@
 		justify-content: end;
 	}
 
+	.tag {
+		padding: 0.3rem 0.5rem;
+		border-radius: 10px;
+		border: var(--brand) 2px solid;
+		background-color: var(--bg);
+
+		color: var(--brand);
+		cursor: pointer;
+		font-size: 0.8rem;
+	}
+	.tag:hover {
+		color: var(--brand-dark);
+		border-color: var(--brand-dark);
+	}
+
+	.tag--selected {
+		color: var(--bg);
+		background-color: var(--brand);
+	}
+
+	.tag--selected:hover {
+		background-color: var(--brand-dark);
+		color: var(--bg);
+	}
+
 	select,
 	input {
-		padding: 0.6rem;
+		padding: 0.3rem 0.5rem;
 		border: var(--brand) 2px solid;
 		min-width: 8rem;
 		border-radius: 10px;
+		font-size: 0.8rem;
 	}
 </style>
