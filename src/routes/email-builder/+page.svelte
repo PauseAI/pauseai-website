@@ -1,8 +1,12 @@
 <script lang="ts">
 	import PostMeta from '$lib/components/PostMeta.svelte'
 	import type { Post } from '$lib/types'
-	import { countries, type Country } from './countries'
 	import Button from '$lib/components/Button.svelte'
+	import Xrisk from './concerns/xrisk.svelte'
+	import Bio from './concerns/bio.svelte'
+	import Cyber from './concerns/cyber.svelte'
+	import Meeting from './actions/meeting.svelte'
+	import Debate from './actions/debate.svelte'
 
 	let top: HTMLHeadingElement
 	let { title, description, date }: Post = {
@@ -13,8 +17,9 @@
 		categories: []
 	}
 
+	let name = 'Minister of Foreign Affairs'
+
 	const letterId = 'letter'
-	let selectedCountry: Country = countries[0]
 
 	function copyHTMLWithoutStyles() {
 		var element = document.getElementById(letterId)
@@ -31,6 +36,40 @@
 			.catch((err) => {
 				window.alert(`Failed to copy: ${err}`)
 			})
+	}
+
+	const concerns: Section[] = [
+		{
+			name: 'Existential risk',
+			section: Xrisk
+		},
+		{
+			name: 'Bio risk',
+			section: Bio
+		},
+		{
+			name: 'Cybersecurity risk',
+			section: Cyber
+		}
+	]
+
+	const actions: Section[] = [
+		{
+			name: 'Have a 30 minute meeting with you',
+			section: Meeting
+		},
+		{
+			name: 'Organize a debate in parliament',
+			section: Debate
+		}
+	]
+
+	$: selectedAction = actions[0]
+	$: selectedConcern = concerns[0]
+
+	type Section = {
+		name: string
+		section: any
 	}
 </script>
 
@@ -72,19 +111,104 @@
 		discussing new digital / science topics? Perhaps even someone who's already shared concerns
 		about AI?
 	</li>
+	<li>
+		Who will you reach out to? <input value={name} />
+	</li>
 </ul>
 
-<div class="actionBar">
-	<select bind:value={selectedCountry}>
-		{#each countries as country}
-			<option value={country}>{country.name}</option>
+<h2>Pick a concern</h2>
+<ul>
+	<li>What are you concerned about, and what do you want your reader to focus on?</li>
+</ul>
+<p>
+	Select a concern template:
+	<select bind:value={selectedConcern}>
+		{#each concerns as section}
+			<option value={section}>{section.name}</option>
 		{/each}
 	</select>
+</p>
+
+<h2>Pick an action</h2>
+<ul>
+	<li>
+		What do you want the recipient to do after receiving your mail? Prepare for the summit, organize
+		a debate, have a meeting?
+	</li>
+</ul>
+<p>
+	Select an action template:
+	<select bind:value={selectedAction}>
+		{#each actions as section}
+			<option value={section}>{section.name}</option>
+		{/each}
+	</select>
+</p>
+
+<div class="actionBar">
 	<Button on:click={() => copyHTMLWithoutStyles()}>Copy</Button>
 </div>
 
 <div class="letter" id={letterId} contenteditable="true">
-	<svelte:component this={selectedCountry.mail} />
+	<p>Dear {name},</p>
+	<p>
+		First of all, thank you very much for everything you have done for __THING__. I am emailing you
+		today to bring an issue to your attention, in which I believe the Netherlands and you in
+		particular can play a very important role. The issue is the existential threat of artificial
+		intelligence.
+	</p>
+
+	<svelte:component this={selectedConcern.section} />
+
+	<p>
+		The advancements in the AI landscape have progressed much faster than anticipated. In 2020, it
+		was
+		<a href="https://www.metaculus.com/questions/3479/date-weakly-general-ai-is-publicly-known"
+			>estimated</a
+		>
+		that an AI would pass university entrance exams by 2050. This goal was achieved in March 2023 by
+		the system GPT-4 from OpenAI. These massive, unexpected leaps have prompted many experts to request
+		a pause in AI development through an open letter to major AI companies. The
+		<a href="https://futureoflife.org/open-letter/pause-giant-ai-experiments/">letter</a>
+		has been signed over 33,000 times so far, including many AI researchers and tech figures.
+	</p>
+
+	<p>
+		Unfortunately, it seems that companies are not willing to jeopardise their competitive position
+		by voluntarily halting development. A pause would need to be imposed by a government. Luckily,
+		there seems to be broad support for slowing down AI development. A recent
+		<a
+			href="https://www.vox.com/future-perfect/2023/9/19/23879648/americans-artificial-general-intelligence-ai-policy-poll"
+			>poll</a
+		>
+		indicates that 63% of American support regulations to prevent AI companies from building superintelligent
+		AI. At the national level, a pause is also challenging because countries have incentives to not fall
+		behind in AI capabilities. That's why we need an international solution.
+	</p>
+
+	<p>
+		The UK organised an AI Safety Summit on November 1st and 2nd at Bletchley Park. We hoped that
+		during this summit, leaders will work towards sensible solutions that prevent the very worst of
+		the risks that AI poses. The Summit did not lead to any international agreement or policy. We
+		have seen proposals being written by the
+		<a href="https://twitter.com/SenBlumenthal/status/1700147410880569475">US Senate</a>, and even
+		among AI company CEOs there is
+		<a
+			href="https://www.pbs.org/newshour/politics/watch-overwhelming-consensus-for-artificial-intelligence-regulation-musk-says-after-senate-tech-meeting"
+			>“overwhelming consensus”</a
+		>
+		that regulation is needed. Unfortunately,
+		<a href="https://twitter.com/DanielColson6/status/1704976418596352342">none</a>
+		of the existing proposals would do anything to slow down or prevent a superintelligent AI from being
+		created. I am afraid that lobbying efforts by AI companies to keep regulation at a minimum are turning
+		out to be highly effective.
+	</p>
+
+	<svelte:component this={selectedAction.section} />
+
+	<p>Best regards,</p>
+
+	<p>__YOUR NAME__</p>
 </div>
 
 <h2>Tips for adjusting the letter</h2>
@@ -103,7 +227,7 @@
 	</li>
 	<li>
 		<b>Have a clear ask.</b> What do you want the reader to do? Make this something concrete, something
-		achieveable. Maybe a face to face meeting to discuss the issue. Maybe ask for a debate to be organized
+		achievable. Maybe a face to face meeting to discuss the issue. Maybe ask for a debate to be organized
 		in parliament.
 	</li>
 </ul>
@@ -134,8 +258,11 @@
 		justify-content: end;
 	}
 
-	select {
+	select,
+	input {
 		padding: 0.6rem;
+		border: var(--brand) 2px solid;
+		min-width: 8rem;
 		border-radius: 10px;
 	}
 </style>
