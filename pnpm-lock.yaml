@@ -11,6 +11,12 @@ dependencies:
   '@fontsource/manrope':
     specifier: ^4.5.13
     version: 4.5.13
+  '@fontsource/roboto-slab':
+    specifier: ^5.0.18
+    version: 5.0.18
+  '@fontsource/saira-condensed':
+    specifier: ^5.0.8
+    version: 5.0.8
   '@types/mapbox-gl':
     specifier: ^2.7.19
     version: 2.7.19
@@ -323,6 +329,14 @@ packages:
 
   /@fontsource/manrope@4.5.13:
     resolution: {integrity: sha512-UFN5DMGBp8nFpwhPQXfpSbsEm4OVISqUKQy+rA+pb1zYGoH+OGN1woKEND8VLx+pC7rY3nrPRCJvSuuOaNdW7Q==}
+    dev: false
+
+  /@fontsource/roboto-slab@5.0.18:
+    resolution: {integrity: sha512-cUVdfzeSasu0p3kR+n5soK3jhaMfbt/Nbh1nwNn/THP1ZPfzwOnN2LuF93x1K4zggPdl6u7gSPopP1wPSMEKqg==}
+    dev: false
+
+  /@fontsource/saira-condensed@5.0.8:
+    resolution: {integrity: sha512-UpWWRL02CbLJMEyPNz6spHFldBFecMZP/IQXKf4UiZJxgbrwHIXzojGQLnRsRx2Dcwag5+zEFv7t2wtHBCIB9Q==}
     dev: false
 
   /@humanwhocodes/config-array@0.11.8:
