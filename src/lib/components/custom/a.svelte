@@ -13,7 +13,7 @@
 
 	onMount(() => {
 		iconSize = parseFloat(getComputedStyle(anchor).fontSize) * RELATIVE_ICON_SIZE
-		isExternal = href.startsWith('http') || href.startsWith('https')
+		isExternal = href.startsWith('http:') || href.startsWith('https:') || href.startsWith('mailto:')
 	})
 </script>
 
