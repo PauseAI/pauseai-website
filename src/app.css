@@ -14,7 +14,7 @@ html {
 	--t-color-main: hsl(32, 100%, 54%); /* Default main color */
 
 	/* dark */
-	--brand-dark: var(--t-color-main);
+	--brand-dark: hsl(32, 100%, 44%);
 
 	/* light */
 	--brand-light: var(--t-color-main);
