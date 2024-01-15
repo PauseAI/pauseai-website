@@ -5,6 +5,7 @@ description: When and where we will be protesting.
 
 ## Coming up
 
+- [12th of February, OpenAI, SF](/2023-november-uk)
 - [Join PauseAI](/join) to receive updates on upcoming protests.
 
 ## Past Protests
