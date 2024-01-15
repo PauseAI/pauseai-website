@@ -15,7 +15,7 @@ This is why we need a **global Pause**.
 ## Implementing a global Pause
 
 An international agreement is typically established through a summit, where leaders of countries meet to discuss the issue and make a decision.
-The UK has stepped up and is has hosted an AI safety summit in the autumn of 2023. 
+The UK has stepped up and is has hosted an AI safety summit in the autumn of 2023.
 And two more summits have been announced.
 [More about the summits](/summit)
 
@@ -47,6 +47,8 @@ Read more about [how these risks can be mitigated](/mitigating-pause-failures).
 
 - **Ban training of AI systems on copyrighted material**. This helps with copyright issues, slows growing inequality and slows down progress towards superintelligence.
 - **Hold AI model creators liable** for criminal acts committed using their AI systems. This gives model creators more incentives to make sure their models are safe.
+- **Renegotiate work contracts** to prevent corporations from forcing employees to automate their work with AI.
+- **Support the climate movement** to investigate (and sue against) the pollution at data centers, fab labs, and mines.
 
 ## Long term policy
 
