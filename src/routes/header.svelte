@@ -39,6 +39,7 @@
 		display: flex;
 		text-transform: uppercase;
 		flex-wrap: wrap;
+		justify-content: center;
 	}
 
 	@media (min-width: 850px) {
