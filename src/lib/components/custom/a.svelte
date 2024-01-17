@@ -30,7 +30,7 @@
 <style>
 	.icon {
 		display: inline-block;
-		vertical-align: middle;
+		vertical-align: text-top;
 		margin-left: 0.1em;
 	}
 </style>
