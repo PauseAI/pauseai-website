@@ -11,13 +11,12 @@
 	to be an average of 30%. Notable examples of individuals sounding the alarm are Prof.
 	<a href="https://www.youtube.com/watch?v=Y6Sgp7y178k">Geoffrey Hinton</a>
 	and Prof.
-	<a href="https://yoshuabengio.org/2023/05/22/how-rogue-ais-may-arise/">Yoshua Bengio</a>
-	, both Turing-award winners and pioneers of the deep learning methods that are currently achieving
-	the most success. The existential risk of AI has been acknowledged by
+	<a href="https://yoshuabengio.org/2023/05/22/how-rogue-ais-may-arise/">Yoshua Bengio</a>, both
+	Turing-award winners and pioneers of the deep learning methods that are currently achieving the
+	most success. The existential risk of AI has been acknowledged by
 	<a href="https://www.safe.ai/statement-on-ai-risk">hundreds of scientists</a>, the
 	<a href="https://twitter.com/gcolbourn/status/1669104216307015680">UN</a>, the US and recently the
-	<a href="https://twitter.com/EU_Commission/status/1702295053668946148">EU</a>. The latest report
-	on “Generatieve AI” by Rathenau also highlights these risks.
+	<a href="https://twitter.com/EU_Commission/status/1702295053668946148">EU</a>.
 </p>
 
 <p>

@@ -2,11 +2,15 @@
 	import PostMeta from '$lib/components/PostMeta.svelte'
 	import type { Post } from '$lib/types'
 	import Button from '$lib/components/Button.svelte'
+	// Risks
 	import Xrisk from './concerns/xrisk.svelte'
 	import Bio from './concerns/bio.svelte'
 	import Cyber from './concerns/cyber.svelte'
+	// Actions
 	import Meeting from './actions/meeting.svelte'
 	import Debate from './actions/debate.svelte'
+	import Treaty from './actions/treaty.svelte'
+	import Acknowledge from './actions/acknowledge.svelte'
 
 	let top: HTMLHeadingElement
 	let { title, description, date }: Post = {
@@ -17,7 +21,7 @@
 		categories: []
 	}
 
-	let name = ''
+	$: name = ''
 
 	const letterId = 'letter'
 
@@ -43,10 +47,10 @@
 			name: 'Existential risk',
 			section: Xrisk
 		},
-		{
-			name: 'Bio risk',
-			section: Bio
-		},
+		// {
+		// 	name: 'Bio risk',
+		// 	section: Bio
+		// },
 		{
 			name: 'Cybersecurity risk',
 			section: Cyber
@@ -54,6 +58,14 @@
 	]
 
 	const actions: Section[] = [
+		{
+			name: 'Prepare treaty for summit',
+			section: Treaty
+		},
+		{
+			name: 'Acknowledge x-risk',
+			section: Acknowledge
+		},
 		{
 			name: 'Have a meeting with you',
 			section: Meeting
@@ -103,22 +115,36 @@
 <h2>Who to send to</h2>
 <ul>
 	<li>
-		<b>Someone who might visit the next Summit. </b> The next AI Safety Summit will be attended by many
-		countries. Who is likely to represent your country? Maybe a minister of foreign affairs or science?
+		<b>Ideally, someone who might visit the next Summit. </b> The next AI Safety Summit will be attended
+		by many countries. Who is likely to represent your country? Maybe a minister of foreign affairs or
+		science?
 	</li>
 	<li>
-		<b>Someone who is likely to listen</b>. Is there a politician who's often at the forefront of
-		discussing new digital / science topics? Perhaps even someone who's already shared concerns
-		about AI?
+		<b>Someone who is likely to act.</b> Is there a politician who's often at the forefront of discussing
+		new digital / science topics? Perhaps even someone who's already shared concerns about AI? Or someone
+		who's just good at pitching new, controversial topics and convincing others?
 	</li>
 	<li>
-		<b>Enter their name:</b> <input value={name} placeholder="Name of person" />
+		<b>Someone who politically represents you.</b> Maybe a politician in parliament from the party that
+		you voted for.
+	</li>
+	<li>
+		<b>Enter their name:</b> <input bind:value={name} placeholder="Name of person" />
 	</li>
 </ul>
 
 <h2>Pick a concern</h2>
 <ul>
-	<li>What are you concerned about, and what do you want your reader to focus on?</li>
+	<li>
+		<b>What are you most concerned about?</b> Don't be afraid of being judged for your concerns. It's
+		the job of politicians to represent you - including the things that you worry about.
+	</li>
+	<li>
+		<b>Consider the person</b> who you're writing to, and what they may already believe. If you're writing
+		to someone who's already worked on IT and cybersecurity issues before, consider focsing on that particular
+		issue.
+	</li>
+	<li></li>
 	<li>
 		<b>Select one:</b>
 		{#each concerns as section}
@@ -152,7 +178,7 @@
 </div>
 
 <div class="letter" id={letterId} contenteditable="true">
-	<p>Dear {name},</p>
+	<p>Dear {name || '__ENTER_NAME__'},</p>
 	<p>
 		First of all, thank you very much for everything you have done for __THING__. I am emailing you
 		today to bring an issue to your attention, in which I believe the Netherlands and you in
@@ -269,6 +295,7 @@
 		color: var(--brand);
 		cursor: pointer;
 		font-size: 0.8rem;
+		margin-bottom: 0.3rem;
 	}
 	.tag:hover {
 		color: var(--brand-dark);
