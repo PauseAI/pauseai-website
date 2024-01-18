@@ -18,7 +18,7 @@
 			{#each categories as category (category.name)}
 				<Cell title={category.name} explanation={category.explanation} {showExplanation} />
 			{/each}
-			<Cell title="Total" explanation="Sum of the scores" {showExplanation} />
+			<Cell title="Total" explanation="Average of the scores" {showExplanation} />
 		</tr>
 	</thead>
 	<tbody>
@@ -36,7 +36,8 @@
 						/>
 					{/if}
 				{/each}
-				<td class="total">{company.totalScore}</td>
+				<Cell score={company.totalScore} explanation="Average of all scores." {showExplanation} />
+				<!-- <td class="total">{company.totalScore}</td> -->
 			</tr>
 		{/each}
 	</tbody>

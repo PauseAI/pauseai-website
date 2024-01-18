@@ -10,25 +10,26 @@ const companiesSource: Company[] = [
 		},
 		lobby: {
 			explanation:
-				'OpenAI has publicly called for stricter regulation, but also tried to severely weaken how the EU AI Act regulates frontier models.',
+				'OpenAI has publicly called for stricter regulation, but also tried to severely weaken how the EU AI Act regulates frontier models. Sam Altman went on a world tour where he emphasized the need for an international agency to regulate large training runs.',
 			score: 4
 		},
 		deployment: {
 			explanation:
-				'GPT-4 was released 7 months after it finished training, during which they did a lot of safety work like red-teaming by ARC.',
-			score: 8
+				'OpenAI releasing ChatGPT to the public was an absolute shockwave. However, GPT-4 was released 7 months after it finished training, during which they did a lot of safety work like red-teaming by ARC.',
+			score: 6
 		},
 		research: {
 			explanation:
 				'OpenAI has published a lot of impactful AI safety research and has dedicated a substantial amount of resources to their "superalignement" project.',
-			score: 8
+			score: 7
 		}
 	},
 	{
 		name: 'Google DeepMind',
 		acknowledge: {
 			explanation:
-				"Hassabis has now publicly acknowledged the existential risk from AI. They weren't as quick with this as OpenAI",
+				// Hassabis calls for "Cern for AI Safety" https://www.theguardian.com/technology/2023/oct/24/ai-risk-climate-crisis-google-deepmind-chief-demis-hassabis-regulation
+				"Hassabis has publicly acknowledged the existential risk from AI. They weren't as explicit about this as OpenAI.",
 			score: 6
 		},
 		lobby: {
@@ -51,8 +52,10 @@ const companiesSource: Company[] = [
 		name: 'Microsoft',
 		acknowledge: {
 			explanation:
-				// https://www.euronews.com/my-europe/2023/06/29/microsoft-chief-says-ai-is-not-an-existential-risk-to-mankind-but-human-oversight-needed
-				'Microsoft does not acknowledge the existential risk from AI.',
+				// Satya isn't that worried about election interference: https://www.verdict.co.uk/microsoft-ceo-satya-nadella-is-sanguine-about-ai-risk-to-elections/?cf-view
+				// Xrisk not true: https://www.euronews.com/my-europe/2023/06/29/microsoft-chief-says-ai-is-not-an-existential-risk-to-mankind-but-human-oversight-needed
+				// Does acknowledge biases, job displacement: https://www.verdict.co.uk/microsoft-ceo-satya-nadella-is-sanguine-about-ai-risk-to-elections/?cf-view
+				'Satya Nadella does not acknowledge the existential risk from AI, nor does he seem worried about election interference.',
 			score: 2
 		},
 		lobby: {
@@ -77,7 +80,7 @@ const companiesSource: Company[] = [
 		name: 'Meta',
 		acknowledge: {
 			explanation:
-				"Meta's chief scientist Yann LeCun is one of the most notories AI risk deniers, one of the loudest voices in the field. On Twitter he often resorts to ad hominem attacks and refuses to engage honestly.",
+				"Meta's chief scientist Yann LeCun is one of the most notorious AI risk deniers, one of the loudest voices in the field. On Twitter he often resorts to ad hominem attacks and refuses to engage honestly.",
 			score: 0
 		},
 		lobby: {
@@ -111,8 +114,8 @@ const companiesSource: Company[] = [
 		},
 		deployment: {
 			explanation:
-				'Anthropic was very optimistic about Claude 2 being "unjailbreakable", which was disproved in minutes after releasing the model.',
-			score: 5
+				'Anthropic seems to have a policy of not deploying SOTA models. Anthropic sat on Claude - and waited with deploying it until ChatGPT came out. However, Anthropic was very optimistic about Claude 2 being "unjailbreakable", which was disproved in minutes after releasing the model.',
+			score: 7
 		},
 		research: {
 			explanation:
@@ -124,9 +127,10 @@ const companiesSource: Company[] = [
 		name: 'Inflection',
 		acknowledge: {
 			// https://forum.effectivealtruism.org/posts/JsjQRqvRc5pFmeSoj/what-do-we-know-about-mustafa-suleyman-s-position-on-ai
+			// Calls existential risk a "completely bonkers distraction"
 			explanation:
-				'Their CEO Mustafa Suleyman has written extensively about catastrophic AI risks in his book.',
-			score: 8
+				'Their CEO Mustafa Suleyman has written extensively about many AI risks in his book. However, he calls existential risks a "completely bonkers distraction".',
+			score: 5
 		},
 		lobby: {
 			explanation: 'No lobbying as far as we know of yet.',
@@ -140,13 +144,37 @@ const companiesSource: Company[] = [
 			explanation: 'No AI safety research published by Inflection.',
 			score: 0
 		}
+	},
+	{
+		name: 'Mistral',
+		acknowledge: {
+			// Thinks bio risks are hypothetical, not to be concerned about : https://youtu.be/EMOFRDOMIiU?si=yN2xDshaaEMfr9mQ&t=1186
+			// Say guardrails on both output and input side are needed.
+			// Says users should be responsible for safety.
+			// Says x-risk is "philosophical", we're not at that stage, it's very abstract. https://youtu.be/EMOFRDOMIiU?si=Zk0EUuRv90iIaFeX&t=1572
+			explanation: 'They have not yet publicly acknowledged any AI risks. ',
+			score: 3
+		},
+		lobby: {
+			explanation:
+				'They actively lobbied against the EU AI Act, almost causing it to not include frontier model regulations.',
+			score: 2
+		},
+		deployment: {
+			explanation: 'They released their models without any safety work as torrents.',
+			score: 0
+		},
+		research: {
+			explanation: 'No AI safety research published by Mystral.',
+			score: 0
+		}
 	}
 ]
 
 export const companies: Company[] = companiesSource
 	.map((company) => {
 		const { name, acknowledge, lobby, deployment, research } = company
-		const totalScore = acknowledge.score + lobby.score + deployment.score + research.score
+		const totalScore = (acknowledge.score + lobby.score + deployment.score + research.score) / 4
 		return {
 			name,
 			acknowledge,
