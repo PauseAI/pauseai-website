@@ -9,7 +9,7 @@
 
 	import '../app.css'
 
-	export const data = { url: '' }
+	export let data
 </script>
 
 <div class="layout">
