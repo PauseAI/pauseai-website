@@ -8,7 +8,7 @@ It comes with amazing potential, but also with serious risks, including [existen
 
 ## Present dangers
 
-### Fake media
+### Fake news, polarization and democracy
 
 Much of our society is based on trust. We trust that the money in our bank account is real, that the news we read is true, and that the people who post reviews online exist.
 
@@ -22,6 +22,11 @@ An AI-generated image of an explosion caused [panic sells in Wall Street](https:
 We might soon see social media be flooded with fake discussions and opinions, and fake news articles that are indistinguishable from real ones.
 This could erode the trust we have in our society.
 It could threaten the fundamentals of our democracy even more than social media did.
+
+### Deepfakes and impersonification
+
+Deepafakes not only can steal famous people identities and create disinformation, but can impersonate you too. 
+Anyone with photos, videos, or audios of someone and enough knowledge, can create deepfakes of them (soon in real time and with high quality) and use them to commit fraud, harass them, or create sexually nonconsensual material (which it's already common).
 
 ### Job loss, economic inequality and instability
 
