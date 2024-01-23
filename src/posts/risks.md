@@ -21,16 +21,7 @@ We might soon see social media be flooded with fake discussions and opinions, an
 This could erode the trust we have in our society.
 It could threaten the fundamentals of our democracy even more than social media did.
 
-## Biases and discrimination
-
-AI systems are trained on data, and much of the data we have is in some way biased.
-This means that AI systems will inherit the biases of our society.
-An automated recruitment system at Amazon [inherited a bias against women](https://www.reuters.com/article/us-amazon-com-jobs-automation-insight-idUSKCN1MK08G).
-Black patients were [less likely to be referred to a medical specialist](https://www.science.org/doi/full/10.1126/science.aax2342).
-Generative AI models do not just copy the biases from their training data, [they amplify them](https://www.bloomberg.com/graphics/2023-generative-ai-bias/).
-These biases often appear without the creators of the AI system being aware of them.
-
-## Economic inequality, instability and job loss
+## Job loss, economic inequality and instability
 
 During the industrial revolution, many people lost their jobs to machines.
 However, new (often better) jobs were created, and the economy grew.
@@ -42,7 +33,17 @@ Image generation models (which are heavily trained on copyrighted material from 
 Writers are [striking](https://www.newscientist.com/article/2373382-why-use-of-ai-is-a-major-sticking-point-in-the-ongoing-writers-strike/).
 GPT-4 has [passed the bar exam](https://law.stanford.edu/2023/04/19/gpt-4-passes-the-bar-exam-what-that-means-for-artificial-intelligence-tools-in-the-legal-industry/), can write excellent written content, and can write code (again, partially trained on [copyrighted materials](https://www.ischool.berkeley.edu/news/2023/new-research-prof-david-bamman-reveals-chatgpt-seems-be-trained-copyrighted-books)).
 The people who own these AI systems will be able to capitalize on them, but the people who lose their jobs to them will not.
+And is difficult to predict what jobs are going to be the ones replaced first. They could leave you unemployed and without an income no matter how much time, money and energy you spent on getting the experience and knowledge that you have, and how valuable they were a moment ago.
 The way we distribute wealth in our society is not prepared for this.
+
+## Biases and discrimination
+
+AI systems are trained on data, and much of the data we have is in some way biased.
+This means that AI systems will inherit the biases of our society.
+An automated recruitment system at Amazon [inherited a bias against women](https://www.reuters.com/article/us-amazon-com-jobs-automation-insight-idUSKCN1MK08G).
+Black patients were [less likely to be referred to a medical specialist](https://www.science.org/doi/full/10.1126/science.aax2342).
+Generative AI models do not just copy the biases from their training data, [they amplify them](https://www.bloomberg.com/graphics/2023-generative-ai-bias/).
+These biases often appear without the creators of the AI system being aware of them.
 
 ## Autonomous weapons
 
