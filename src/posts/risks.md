@@ -6,7 +6,9 @@ description: AI threatens our democracy, our technology, and our species.
 AI is a powerful technology that is increasingly transforming our world.
 It comes with amazing potential, but also with serious risks, including [existential catastrophe](/xrisk).
 
-## Fake media
+## Present dangers
+
+### Fake media
 
 Much of our society is based on trust. We trust that the money in our bank account is real, that the news we read is true, and that the people who post reviews online exist.
 
@@ -21,7 +23,7 @@ We might soon see social media be flooded with fake discussions and opinions, an
 This could erode the trust we have in our society.
 It could threaten the fundamentals of our democracy even more than social media did.
 
-## Job loss, economic inequality and instability
+### Job loss, economic inequality and instability
 
 During the industrial revolution, many people lost their jobs to machines.
 However, new (often better) jobs were created, and the economy grew.
@@ -36,7 +38,7 @@ The people who own these AI systems will be able to capitalize on them, but the 
 And is difficult to predict what jobs are going to be the ones replaced first. They could leave you unemployed and without an income no matter how much time, money and energy you spent on getting the experience and knowledge that you have, and how valuable they were a moment ago.
 The way we distribute wealth in our society is not prepared for this.
 
-## Biases and discrimination
+### Biases and discrimination
 
 AI systems are trained on data, and much of the data we have is in some way biased.
 This means that AI systems will inherit the biases of our society.
@@ -45,7 +47,7 @@ Black patients were [less likely to be referred to a medical specialist](https:/
 Generative AI models do not just copy the biases from their training data, [they amplify them](https://www.bloomberg.com/graphics/2023-generative-ai-bias/).
 These biases often appear without the creators of the AI system being aware of them.
 
-## Autonomous weapons
+### Autonomous weapons
 
 Companies are already selling AI-powered weapons to governments.
 Lanius builds [flying suicide drones](https://www.youtube.com/watch?v=G7yIzY1BxuI) that autonomously identify foes.
@@ -62,7 +64,9 @@ The speed at which AI can process information and make decisions may cause confl
 
 Read more at [stopkillerrobots.org](https://www.stopkillerrobots.org/military-and-killer-robots/)
 
-## Biological weapons
+## Near future dangers
+
+### Biological weapons
 
 AI can make knowledge more accessible, which also includes knowledge about how to create biological weapons. [This paper](https://arxiv.org/abs/2306.03809) shows how GPT-4 can help non-scientist students to create a pandemic pathogen:
 
@@ -78,7 +82,7 @@ Scientists are now even creating [fully autonomous chemical labs, where AI syste
 
 The fundamental danger is that the cost of designing and applying biological weapons is being lowered by orders of magnitude because of AI.
 
-## Computer viruses and hacks
+### Computer viruses and hacks
 
 Virtually everything we do nowadays is in some way dependent on computers.
 We pay for our groceries, plan our days, contact our loved ones and even drive our cars with computers.
@@ -92,7 +96,7 @@ Instead of having to hire a team of skilled security experts/hackers to find zer
 
 [Read more about AI and cybersecurity risks](/cybersecurity-risks)
 
-## Existential Risk
+### Existential Risk
 
 Many AI researchers are warning that AI could lead to the end of humanity.
 
@@ -107,7 +111,7 @@ We'd be introducing a new species to the planet that could outsmart us and outco
 
 ## What can we do?
 
-For all the problems discussed above, the risk increases as AI capabilities improve.
+For **all** the problems discussed above, the risk increases as AI capabilities improve.
 This means that the safest thing to do now is to slow down.
 We need to pause the development of more powerful AI systems until we have figured out how to deal with the risks.
 
