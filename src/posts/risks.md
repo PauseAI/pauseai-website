@@ -109,6 +109,11 @@ We'd be introducing a new species to the planet that could outsmart us and outco
 
 [Read more about x-risk](/xrisk)
 
+### AI suffering
+
+As AI continues to advance, future systems may become incredibly sophisticated, replicating neural structures and functions that are more akin to the human brain. This increased complexity might lead to emergent properties like subjectivity and/or consciousness, and so those AIs would be deserving of moral considerations and being treat well.
+The thing is that, given our present lack of knowledge about consciousness and the nature of neural networks, we won't have a way to determine whether some AIs would have any type of experience and what does the quality of those experiences would depend on. If the AIs continue to be produced with only their capabilities on mind, through a process we don't fully understand, people would keep on using them as tools ignoring what their desires could be, and that they could be actually enslaving sensitive beings.
+
 ## What can we do?
 
 For **all** the problems discussed above, the risk increases as AI capabilities improve.
