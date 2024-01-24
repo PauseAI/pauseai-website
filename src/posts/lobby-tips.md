@@ -1,11 +1,11 @@
 ---
 title: Tips for effective lobbying
-description: How to convince your government that they need to organize an AI summit
+description: How to convince your government that it needs to work towards a pause on AI training runs
 ---
 
 ## Be clear about the goal
 
-Your country needs to work towards the [summit](/summit) end of 2023, to pause AI training runs.
+Your country needs to work towards the next [summit](/summit), to pause AI training runs.
 
 ## Find people to help you
 
