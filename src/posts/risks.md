@@ -43,6 +43,12 @@ The people who own these AI systems will be able to capitalize on them, but the 
 And is difficult to predict what jobs are going to be the ones replaced first. They could leave you unemployed and without an income no matter how much time, money and energy you spent on getting the experience and knowledge that you have, and how valuable they were a moment ago.
 The way we distribute wealth in our society is not prepared for this.
 
+### Mental health, addiction and disconnection between people
+
+Social media, videogames and other software have been using AI systems to maximize their profit while taking advantage of our primate minds for some time already, damaging our mental health in the proccess. Addictions to social media isolate us from each other, not only in political bubbles but also in cultural and social one-person bubbles, making us lonelier.
+
+They're the first proof of the unintended, unprevisted global consequences that these technologies can bring and how complicated aligning AI systems with "human values" can be. Also the addiction to products and services that profit from personal data and separate people while creating network effects play on a viscious cycle with the accumulation of economical power of these companies and the division between people that leave us as powerless individuals whether it's their purpose or not.
+
 ### Biases and discrimination
 
 AI systems are trained on data, and much of the data we have is in some way biased.
