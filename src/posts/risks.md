@@ -120,6 +120,15 @@ Instead of having to hire a team of skilled security experts/hackers to find zer
 
 [Read more about AI and cybersecurity risks](/cybersecurity-risks)
 
+### Human disempowerment
+
+Whether AIs centralize power around certain actors or not, and even if single systems don't optimize strongly for any particular measure that we cannot steer or fix, we could lose our power to take decisions incrementally with each AI system that gets implemented inside institutions or gets popular on everyday life.
+
+Those systems would have more input from other systems than from humans, and, if we cannot coordinate quick enough or we lack crucial knowledge about the functioning of these systems, we could end up inside a civilization in which each system is optimizing for different things, there is not a clear direction for where everything is heading, and there is not any way of changing it.
+The technical knowledge to change these systems could be lacking in the first place, or it could be lost in time, as we become more and more dependent on technology, and the technology becomes more complex.
+
+It could even happen that the measurements that the systems care about get increased, but they would not be fully encompassing the actual values that they tried to encapture. This problem, to a certain extent, is already happenning today, but AIs could highly amplify it.
+
 ### Existential Risk
 
 Many AI researchers are warning that AI could lead to the end of humanity.
