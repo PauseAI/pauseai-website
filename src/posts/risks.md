@@ -34,7 +34,8 @@ AI systems are trained on data, and much of the data we have is in some way bias
 This means that AI systems will inherit the biases of our society.
 An automated recruitment system at Amazon [inherited a bias against women](https://www.reuters.com/article/us-amazon-com-jobs-automation-insight-idUSKCN1MK08G).
 Black patients were [less likely to be referred to a medical specialist](https://www.science.org/doi/full/10.1126/science.aax2342).
-Generative AI models do not just copy the biases from their training data, [they amplify them](https://www.bloomberg.com/graphics/2023-generative-ai-bias/).
+Biased systems used in law enforcement, such as predictive policing algorithms, could lead to unfair targeting of specific groups.
+Generative AI models do not just copy the biases from their training data, [they amplify them](https://www.bloomberg.com/graphics/2023-generative-ai-bias/)..
 These biases often appear without the creators of the AI system being aware of them.
 
 ### Job loss, economic inequality and instability
