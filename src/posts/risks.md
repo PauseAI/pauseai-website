@@ -116,8 +116,16 @@ We'd be introducing a new species to the planet that could outsmart us and outco
 
 ### AI suffering
 
-As AI continues to advance, future systems may become incredibly sophisticated, replicating neural structures and functions that are more akin to the human brain. This increased complexity might lead to emergent properties like subjectivity and/or consciousness, and so those AIs would be deserving of moral considerations and being treat well.
-The thing is that, given our present lack of knowledge about consciousness and the nature of neural networks, we won't have a way to determine whether some AIs would have any type of experience and what does the quality of those experiences would depend on. If the AIs continue to be produced with only their capabilities on mind, through a process we don't fully understand, people would keep on using them as tools ignoring what their desires could be, and that they could be actually enslaving sensitive beings.
+As AI continues to advance, future systems may become incredibly sophisticated, replicating neural structures and functions that are more akin to the human brain. This increased complexity might lead to emergent properties like subjectivity and/or consciousness, and so those AIs would be deserving of moral considerations and be treated well. Would be like "digital people".
+The thing is that, given our present lack of knowledge about consciousness and the nature of neural networks, we won't have a way to determine whether some AIs would have any type of experience and what does the quality of those experiences would depend on. If the AIs continue to be produced with only their capabilities on mind, through a process we don't fully understand, people would keep on using them as tools ignoring what their desires could be, and that they could be actually enslaving digital people.
+
+### Suffering lock-in risks
+
+It is possible that once automation at higher degrees start happenning, regardless if there is just one or multiple powerful AIs, the values of those systems would not be able to be changed, and the automation would continue until the end of the universe, through out the reachable galaxies.
+Arguably, the worst scenarios that those AIs could create would not be human extinction, but unescapable dystopias that would extend throught all that spacetime. 
+
+Possible locked-in dystopias with lots of suffering are called S-risks, and include worlds in which sentient beings are enslaved and forced to do horrible things. 
+Those beings could be humans or animals or digital people or any other alien species that the system could find in the cosmos. Given how difficult we think solving alignment completely is, how bad we humans treat each other sometimes, how bad we treat most animals, and how we treat present AIs, a future like that is maybe not as unlikely as we'd like.
 
 ## What can we do?
 
