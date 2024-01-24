@@ -66,6 +66,10 @@ The accumulation of power side of that equation had and will continue incentiviz
 Such scenario would not just disempower every other person and nation in the world, but also serve as a catalyst for global powers to enter into conflict.
 So it's crucial to act as soon as possible, before the race dynamics extend further, before the already most powerful governments and corporations consolidate their positions, and before a war is triggered in response. To not let the short term incentives lead the world to a catastrophe, we need international cooperation.
 
+### Authoritarian governments
+
+Authoritarian and totalitarian governments can also use AI technologies to exercise power over *their* territories and population. They can control the communication channels or mantain social credit and mass surveillance systems that ensure them to continue on power while violating human rights.
+
 ### Autonomous weapons
 
 Companies are already selling AI-powered weapons to governments.
