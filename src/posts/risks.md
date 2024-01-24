@@ -28,6 +28,15 @@ It could threaten the fundamentals of our democracy even more than social media 
 Deepafakes not only can steal famous people identities and create disinformation, but can impersonate you too. 
 Anyone with photos, videos, or audios of someone and enough knowledge, can create deepfakes of them (soon in real time and with high quality) and use them to commit fraud, harass them, or create sexually nonconsensual material (which it's already common).
 
+### Biases and discrimination
+
+AI systems are trained on data, and much of the data we have is in some way biased.
+This means that AI systems will inherit the biases of our society.
+An automated recruitment system at Amazon [inherited a bias against women](https://www.reuters.com/article/us-amazon-com-jobs-automation-insight-idUSKCN1MK08G).
+Black patients were [less likely to be referred to a medical specialist](https://www.science.org/doi/full/10.1126/science.aax2342).
+Generative AI models do not just copy the biases from their training data, [they amplify them](https://www.bloomberg.com/graphics/2023-generative-ai-bias/).
+These biases often appear without the creators of the AI system being aware of them.
+
 ### Job loss, economic inequality and instability
 
 During the industrial revolution, many people lost their jobs to machines.
@@ -47,16 +56,15 @@ The way we distribute wealth in our society is not prepared for this.
 
 Social media, videogames and other software have been using AI systems to maximize their profit while taking advantage of our primate minds for some time already, damaging our mental health in the proccess. Addictions to social media isolate us from each other, not only in political bubbles but also in cultural and social one-person bubbles, making us lonelier.
 
-They're the first proof of the unintended, unprevisted global consequences that these technologies can bring and how complicated aligning AI systems with "human values" can be. Also the addiction to products and services that profit from personal data and separate people while creating network effects play on a viscious cycle with the accumulation of economical power of these companies and the division between people that leave us as powerless individuals whether it's their purpose or not.
+They're the first proof of the unintended, unprevisted global consequences that these technologies can bring and how complicated aligning AI systems with "human values" can be. Also the addiction to products and services that profit from personal data and separate people while creating network effects play on a viscious cycle with the accumulation of economical power of these companies and the division between people that leave us as powerless individuals whether it's intended or not.
 
-### Biases and discrimination
+### Power accumulation, war and the race to the precipice
 
-AI systems are trained on data, and much of the data we have is in some way biased.
-This means that AI systems will inherit the biases of our society.
-An automated recruitment system at Amazon [inherited a bias against women](https://www.reuters.com/article/us-amazon-com-jobs-automation-insight-idUSKCN1MK08G).
-Black patients were [less likely to be referred to a medical specialist](https://www.science.org/doi/full/10.1126/science.aax2342).
-Generative AI models do not just copy the biases from their training data, [they amplify them](https://www.bloomberg.com/graphics/2023-generative-ai-bias/).
-These biases often appear without the creators of the AI system being aware of them.
+If this economic and technological inequality stems from a handful of public and private entities producing multiple single-purpose AIs or a few multipurpose AI, it could lead to a short accumulation of power that will probably result on a catastrophe for all. 
+The accumulation of power side of that equation had and will continue incentivizing more actors to join the race to the bottom, and accelerating the development of larger AI systems. This, in return, introduces more points of failure and downplays the associated risks by endorsing the idea that they can be handled unilaterally, by a company or a government.
+
+Such scenario would not just disempower every other person and nation in the world, but also serve as a catalyst for global powers to enter into conflict.
+So it's crucial to act as soon as possible, before the race dynamics extend further, before the already most powerful governments and corporations consolidate their positions, and before a war is triggered in response. To not let the short term incentives lead the world to a catastrophe, we need international cooperation.
 
 ### Autonomous weapons
 
