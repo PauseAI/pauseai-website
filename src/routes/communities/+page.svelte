@@ -80,7 +80,7 @@
 <h1>{title}</h1>
 <p>{description}</p>
 <p>
-	Are you missing a community in your location? <a href="https://discord.gg/HWcPt5ccJN"
+	Do you want to add your location or a community? <a href="https://discord.gg/HWcPt5ccJN"
 		>Create a Post</a
 	> on our discord!
 </p>
