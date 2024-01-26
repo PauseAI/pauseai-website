@@ -21,13 +21,13 @@
 		const target = e.target as HTMLAnchorElement
 		const quote = target.parentElement?.querySelector('.quote') as HTMLDivElement
 		const ratio = quote.scrollWidth / quote.scrollHeight
-		const jpeg = await toPng(quote, {
+		const png = await toPng(quote, {
 			canvasWidth: DOWNLOAD_WIDTH,
 			canvasHeight: DOWNLOAD_WIDTH / ratio
 		})
 		const author = quote.querySelector('.quote-author')?.children[0].textContent;
-		const fileName = `${author} on AI risks.jpg`
-		download(jpeg, fileName)
+		const fileName = `${author} on AI risks.png`
+		download(png, fileName)
 	}
 
 	function download(url: string, fileName: string) {
