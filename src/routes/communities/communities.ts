@@ -15,7 +15,7 @@ export const communitiesMeta: Post = {
 	description:
 		'A map of all the local PauseAI communities and people around the world. Also shows adjacent AI Safety communities.',
 	date: '2023-12-15',
-	slug: 'outcomes',
+	slug: 'communities',
 	categories: []
 }
 

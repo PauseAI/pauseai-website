@@ -11,15 +11,10 @@
 	import Debate from './actions/debate.svelte'
 	import Treaty from './actions/treaty.svelte'
 	import Acknowledge from './actions/acknowledge.svelte'
+	import { meta } from './meta'
 
 	let top: HTMLHeadingElement
-	let { title, description, date }: Post = {
-		title: 'Email Builder',
-		slug: 'email-builder',
-		description: 'A web app to help you write an email to a politician. Convince them to Pause AI!',
-		date: '2023-12-08',
-		categories: []
-	}
+	const { title, description, date } = meta
 
 	$: name = ''
 
