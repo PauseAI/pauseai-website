@@ -2,12 +2,15 @@
 	import NavLink from '$lib/components/Navlink.svelte'
 	import Logo from '$lib/components/logo.svelte'
 	import { botName } from '$lib/config'
+	import { page } from '$app/stores'
 	const enableBot = false
+
+	$: logo_animate = $page.url.pathname != '/'
 </script>
 
 <nav>
 	<a href="/" class="logo">
-		<Logo animate />
+		<Logo animate={logo_animate} />
 	</a>
 
 	<div class="nav-links">

@@ -3,9 +3,10 @@ import type { Post } from '$lib/types'
 import { outcomesMeta } from '../../outcomes/meta'
 import { communitiesMeta } from '../../communities/communities'
 import { meta as pdoomMeta } from '../../pdoom/meta'
+import {meta as quotesMeta} from '../../quotes/meta'
 
 /** When adding an extra route, make sure to add the metadata here for SEO purposes */
-const hardCodedPages: Post[] = [outcomesMeta, communitiesMeta, pdoomMeta]
+const hardCodedPages: Post[] = [outcomesMeta, communitiesMeta, pdoomMeta, quotesMeta]
 
 async function getPosts() {
 	let posts: Post[] = []

@@ -23,6 +23,9 @@ dependencies:
   escape-html:
     specifier: ^1.0.3
     version: 1.0.3
+  html-to-image:
+    specifier: ^1.11.11
+    version: 1.11.11
   lucide-svelte:
     specifier: ^0.298.0
     version: 0.298.0(svelte@4.2.8)
@@ -1472,6 +1475,10 @@ packages:
 
   /hast-util-whitespace@2.0.1:
     resolution: {integrity: sha512-nAxA0v8+vXSBDt3AnRUNjyRIQ0rD+ntpbAp4LnPkumc5M9yUbSMa4XDU9Q6etY4f1Wp4bNgvc1yjiZtsTTrSng==}
+    dev: false
+
+  /html-to-image@1.11.11:
+    resolution: {integrity: sha512-9gux8QhvjRO/erSnDPv28noDZcPZmYE7e1vFsBLKLlRlKDSqNJYebj6Qz1TGd5lsRV+X+xYyjCKjuZdABinWjA==}
     dev: false
 
   /ieee754@1.2.1:
