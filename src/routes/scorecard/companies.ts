@@ -66,8 +66,9 @@ const companiesSource: Company[] = [
 		},
 		deployment: {
 			explanation:
+				// Never released open source models.
 				"Microsoft released an unfinished, sometimes even unhinged Bing (based on OpenAI's GPT-4) in April 2023. It was embarrassing and dangerous. OpenAI urged Microsoft not to do this - they did it anyway.",
-			score: 0
+			score: 4
 		},
 		research: {
 			explanation:
@@ -157,8 +158,8 @@ const companiesSource: Company[] = [
 		},
 		lobby: {
 			explanation:
-				'They actively lobbied against the EU AI Act, almost causing it to not include frontier model regulations.',
-			score: 2
+				'Used an ex-minister to actively lobby against the EU AI Act, almost causing it to not include frontier model regulations.',
+			score: 0
 		},
 		deployment: {
 			explanation: 'They released their models without any safety work as torrents.',
