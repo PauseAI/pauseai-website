@@ -17,15 +17,15 @@
 	$: color_style = color ? `color: ${color}` : ''
 	$: content_style = padding ? `padding: ${padding} 0 0 ${padding};` : ''
 
+	let quoteElement: HTMLDivElement;
+
 	async function downloadQuote(e: MouseEvent) {
 		const target = e.target as HTMLAnchorElement
-		const quote = target.parentElement?.querySelector('.quote') as HTMLDivElement
-		const ratio = quote.scrollWidth / quote.scrollHeight
-		const png = await toPng(quote, {
+		const ratio = quoteElement.scrollWidth / quoteElement.scrollHeight
+		const png = await toPng(quoteElement, {
 			canvasWidth: DOWNLOAD_WIDTH,
 			canvasHeight: DOWNLOAD_WIDTH / ratio
 		})
-		const author = quote.querySelector('.quote-author')?.children[0].textContent;
 		const fileName = `${author} on AI risks.png`
 		download(png, fileName)
 	}
@@ -39,7 +39,7 @@
 </script>
 
 <div class="quote-container">
-	<div class="quote" style="background-image:url({bg_url}); {color_style}">
+	<div class="quote" style="background-image:url({bg_url}); {color_style}" bind:this={quoteElement}>
 		<div class="quote-content" style={content_style}>
 			<div class="quote-text-container">
 				<div class="quote-text">{@html text}</div>
