@@ -21,16 +21,15 @@ You are now one of them.
 - **Share** about AI risk on social media. This website might be a good start.
 - **Create** [articles](/learn#articles), [videos](/learn#videos) or [memes](https://twitter.com/AISafetyMemes). Collaborate with others in the [Discord server](https://discord.gg/2XXWXvErfA) (in the #projects channel).
 - **Sign petitions**:
-  - [pause giant AI experiments](https://futureoflife.org/open-letter/pause-giant-ai-experiments/),
-  - [demand responsible AI](https://www.change.org/p/artificial-intelligence-time-is-running-out-for-responsible-ai-development-91f0a02c-130a-46e1-9e55-70d6b274f4df)
-  - [statement on AI risk](https://www.safe.ai/statement-on-ai-risk)
-  - or one of the **national petitions**: [UK](https://petition.parliament.uk/petitions/639956), [AUS](https://www.aph.gov.au/e-petitions/petition/EN5163), [NL](https://aipetitie.nl).
+  - [International AI Treaty](https://aitreaty.org)
+  - [Demand responsible AI](https://www.change.org/p/artificial-intelligence-time-is-running-out-for-responsible-ai-development-91f0a02c-130a-46e1-9e55-70d6b274f4df)
+  - Or one of the **national petitions**: [UK](https://petition.parliament.uk/petitions/639956), [AUS](https://www.aph.gov.au/e-petitions/petition/EN5163), [NL](https://aipetitie.nl)
 - **Follow** our social media channels and stay updated:
   - [Discord](https://discord.gg/2XXWXvErfA)
   - [Twitter](https://twitter.com/PauseAI)
   - [Facebook](https://www.facebook.com/PauseAI)
   - [TikTok](https://www.tiktok.com/@pauseai)
-  - [LinkedIn](https://www.linkedin.com/uas/login?session_redirect=/company/97035448/).
+  - [LinkedIn](https://www.linkedin.com/uas/login?session_redirect=/company/97035448/)
 
 ## If you ...
 
@@ -65,7 +64,7 @@ You are now one of them.
 - **Don't work towards superintelligence**. If you have some cool idea on how we can make AI systems 10x faster, please don't build it / spread it / talk about it. We need to slow down AI development, not speed it up.
 - **Talk to your management and colleagues** about the risks. Get them to take an institutional position on this.
 - **Hold a seminar** on AI safety at your workplace. Check out the [videos](/learn#videos) for inspiration.
-- **Sign** the [open letter](https://futureoflife.org/open-letter/pause-giant-ai-experiments/).
+- **Sign** the [Statement on AI Risk](https://www.safe.ai/statement-on-ai-risk).
 
 ### If you work on AI safety
 
