@@ -25,12 +25,14 @@ When you reach out to people, tell them about what the scientists are saying. Th
 - Prime minister? A different minister? Ask the experienced people who the right target is.
 - Consider their goals and ambitions. Do they like organizing things? Do they get a kick out of being a thought leader? Do they shy away from controversy? All these things matter.
 
-## Write a letter
+## Write a letter or email
 
 - It needs to be good, but it does not have to be perfect. Don't work on this for months! We don't have that time.
 - We already have some documents (join the [discord](https://discord.gg/2XXWXvErfA)!)
 - It should be short and to the point. Be clear about your advice: [implement our proposals](/proposal), attend the [summit](/summit), form coalitions with other nations to achieve this.
 - Be clear about urgency. This is an emergency.
+
+If you need more inspiration check out our page on [how to write a letter or email](/writing-a-letter) or try our [Email Builder](/email-builder).
 
 ## Get signatures
 
