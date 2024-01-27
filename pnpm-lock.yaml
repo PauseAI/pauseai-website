@@ -20,6 +20,9 @@ dependencies:
   '@types/mapbox-gl':
     specifier: ^2.7.19
     version: 2.7.19
+  clipboard-polyfill:
+    specifier: ^4.0.2
+    version: 4.0.2
   escape-html:
     specifier: ^1.0.3
     version: 1.0.3
@@ -963,6 +966,10 @@ packages:
     optionalDependencies:
       fsevents: 2.3.3
     dev: true
+
+  /clipboard-polyfill@4.0.2:
+    resolution: {integrity: sha512-AkdRB9bWwdrfb4U9vLxC1zrzp1dzV5+AZinGv8gFtrH5hWTnGUXWHIyo+alenqr+hfNFY5p7HJ+khxs2YSpxww==}
+    dev: false
 
   /code-red@1.0.4:
     resolution: {integrity: sha512-7qJWqItLA8/VPVlKJlFXU+NBlo/qyfs39aJcuMT/2ere32ZqvF5OSxgdM5xOfJJ7O429gg2HM47y8v9P+9wrNw==}

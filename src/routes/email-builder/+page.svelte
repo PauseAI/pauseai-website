@@ -11,6 +11,7 @@
 	import Treaty from './actions/treaty.svelte'
 	import Acknowledge from './actions/acknowledge.svelte'
 	import { meta } from './meta'
+	import * as clipboard from 'clipboard-polyfill'
 
 	let top: HTMLHeadingElement
 	const { title, description, date } = meta
@@ -22,9 +23,9 @@
 	function copyHTMLWithoutStyles() {
 		var element = document.getElementById(letterId)
 		var clonedElement = element?.cloneNode(true)
-		navigator.clipboard
+		clipboard
 			.write([
-				new ClipboardItem({
+				new clipboard.ClipboardItem({
 					'text/html': new Blob([clonedElement?.outerHTML], { type: 'text/html' })
 				})
 			])
