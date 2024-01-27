@@ -1,13 +1,15 @@
 <script lang="ts">
 	import { onMount, onDestroy } from 'svelte'
-	import { Map, GeolocateControl, Popup, Marker } from 'mapbox-gl'
+	import mapboxgl from 'mapbox-gl'
+	const { Map, GeolocateControl, Popup, Marker } = mapboxgl
 	import '../../../node_modules/mapbox-gl/dist/mapbox-gl.css'
 	import { communities, communitiesMeta } from './communities'
 	import PostMeta from '$lib/components/PostMeta.svelte'
+	import ExternalLink from '$lib/components/custom/a.svelte'
 
 	let { title, description, date } = communitiesMeta
 
-	let map: Map
+	let map: mapboxgl.Map
 	let mapContainer: HTMLDivElement
 	let lng: number
 	let lat: number
@@ -80,8 +82,8 @@
 <h1>{title}</h1>
 <p>{description}</p>
 <p>
-	Do you want to add your location or a community? <a href="https://discord.gg/HWcPt5ccJN"
-		>Create a Post</a
+	Do you want to add your location or a community? <ExternalLink
+		href="https://discord.gg/HWcPt5ccJN">Create a post</ExternalLink
 	> on our discord!
 </p>
 <div>
