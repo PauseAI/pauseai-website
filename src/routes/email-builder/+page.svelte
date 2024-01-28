@@ -177,7 +177,7 @@
 		on? How do they think about AI? What has happened in their professional life the last weeks?
 	</li>
 	<li>
-		<b>Share something about yourself.</b> Why you care about AI safety? Why did you take the time to
+		<b>Share something about yourself.</b> Why do you care about AI safety? Why did you take the time to
 		send this letter?
 	</li>
 	<li>
