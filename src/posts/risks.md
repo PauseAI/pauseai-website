@@ -20,13 +20,14 @@ GPT-4 can write in a way that is indistinguishable from humans.
 Creating fake media is not new, but AI makes it much cheaper and much more realistic.
 An AI-generated image of an explosion caused [panic sells in Wall Street](https://www.euronews.com/next/2023/05/23/fake-news-about-an-explosion-at-the-pentagon-spreads-on-verified-accounts-on-twitter).
 We might soon see social media be flooded with fake discussions and opinions, and fake news articles that are indistinguishable from real ones.
-This could erode the trust we have in our society.
-It could threaten the fundamentals of our democracy even more than social media did.
+
+This leads to polarization between various groups of people, who believe in different sources of information and narratives, and through consuming distorted representations of what's happening escalate their differences until culminating on violent and anti-democratic responses.
 
 ### Deepfakes and impersonification
 
-Deepafakes not only can steal famous people identities and create disinformation, but can impersonate you too. 
-Anyone with photos, videos, or audios of someone and enough knowledge, can create deepfakes of them (soon in real time and with high quality) and use them to commit fraud, harass them, or create sexually nonconsensual material (which it's already common).
+Fake content created with AI, also called deepfakes, not only can steal famous people identities and [create disinformation](https://time.com/6565446/biden-deepfake-audio/), but they can also impersonate you. 
+Anyone with photos, videos, or audios of someone and enough knowledge, can create deepfakes of them and use them to commit fraud, harass them, or create sexually nonconsensual material (which it's already common). 
+If AI capabilities keep increasing, deepfakes will be easier to create, and of better quality. Even in real time. 
 
 ### Biases and discrimination
 
@@ -35,7 +36,7 @@ This means that AI systems will inherit the biases of our society.
 An automated recruitment system at Amazon [inherited a bias against women](https://www.reuters.com/article/us-amazon-com-jobs-automation-insight-idUSKCN1MK08G).
 Black patients were [less likely to be referred to a medical specialist](https://www.science.org/doi/full/10.1126/science.aax2342).
 Biased systems used in law enforcement, such as predictive policing algorithms, could lead to unfair targeting of specific groups.
-Generative AI models do not just copy the biases from their training data, [they amplify them](https://www.bloomberg.com/graphics/2023-generative-ai-bias/)..
+Generative AI models do not just copy the biases from their training data, [they amplify them](https://www.bloomberg.com/graphics/2023-generative-ai-bias/).
 These biases often appear without the creators of the AI system being aware of them.
 
 ### Job loss, economic inequality and instability
@@ -49,8 +50,9 @@ Regular humans may not have anything left to offer the economy.
 Image generation models (which are heavily trained on copyrighted material from professional artists) are already [impacting the creative industry](https://cointelegraph.com/news/artists-face-a-choice-with-ai-adapt-or-become-obsolete).
 Writers are [striking](https://www.newscientist.com/article/2373382-why-use-of-ai-is-a-major-sticking-point-in-the-ongoing-writers-strike/).
 GPT-4 has [passed the bar exam](https://law.stanford.edu/2023/04/19/gpt-4-passes-the-bar-exam-what-that-means-for-artificial-intelligence-tools-in-the-legal-industry/), can write excellent written content, and can write code (again, partially trained on [copyrighted materials](https://www.ischool.berkeley.edu/news/2023/new-research-prof-david-bamman-reveals-chatgpt-seems-be-trained-copyrighted-books)).
+
 The people who own these AI systems will be able to capitalize on them, but the people who lose their jobs to them will not.
-And is difficult to predict what jobs are going to be the ones replaced first. They could leave you unemployed and without an income no matter how much time, money and energy you spent on getting the experience and knowledge that you have, and how valuable they were a moment ago.
+It is difficult to predict which jobs are going to be the ones replaced first. They could leave you unemployed and without an income no matter how much time, money and energy you spent on getting the experience and knowledge that you have, and how valuable they were a moment ago.
 The way we distribute wealth in our society is not prepared for this.
 
 ### Mental health, addiction and disconnection between people
@@ -120,15 +122,6 @@ Instead of having to hire a team of skilled security experts/hackers to find zer
 
 [Read more about AI and cybersecurity risks](/cybersecurity-risks)
 
-### Human disempowerment
-
-Whether AIs centralize power around certain actors or not, and even if single systems don't optimize strongly for any particular measure that we cannot steer or fix, we could lose our power to take decisions incrementally with each AI system that gets implemented inside institutions or gets popular on everyday life.
-
-Those systems would have more input from other systems than from humans, and, if we cannot coordinate quick enough or we lack crucial knowledge about the functioning of these systems, we could end up inside a civilization in which each system is optimizing for different things, there is not a clear direction for where everything is heading, and there is not any way of changing it.
-The technical knowledge to change these systems could be lacking in the first place, or it could be lost in time, as we become more and more dependent on technology, and the technology becomes more complex.
-
-It could even happen that the measurements that the systems care about get increased, but they would not be fully encompassing the actual values that they tried to encapture. This problem, to a certain extent, is already happenning today, but AIs could highly amplify it.
-
 ### Existential Risk
 
 Many AI researchers are warning that AI could lead to the end of humanity.
@@ -141,6 +134,16 @@ If we fail to solve it in time, we may end up with superintelligent machines tha
 We'd be introducing a new species to the planet that could outsmart us and outcompete us.
 
 [Read more about x-risk](/xrisk)
+
+### Human disempowerment
+
+Even if we manage to create only AI systems that we can control individually, we could lose our power to take important decisions incrementally each time one becomes implemented inside institutions or popularized on everyday life.
+Those systems would end up having more input from other systems than from humans, and, if we cannot coordinate quick enough or we lack crucial knowledge about the functioning of these systems, we could end up without control over our future.
+
+It would be a civilization in which each system is optimizing for different objectives, there is not a clear direction for where everything is heading, and there is not any way of changing it.
+The technical knowledge required to modify these systems could be lacking in the first place or lost over time, as we become more and more dependent on technology, and the technology becomes more complex.
+
+The systems may achieve their goals, but those goals might not entirely encapsulate the values they were expected to. This problem is, to a certain extent, already happenning today, but AIs could significantly amplify it.
 
 ### AI suffering
 
