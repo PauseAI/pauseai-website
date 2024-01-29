@@ -27,7 +27,7 @@ This leads to polarization between various groups of people, who believe in diff
 
 Fake content created with AI, also called deepfakes, not only can steal famous people identities and [create disinformation](https://time.com/6565446/biden-deepfake-audio/), but they can also impersonate you. 
 Anyone with photos, videos, or audios of someone and enough knowledge, can create deepfakes of them and use them to commit fraud, harass them, or create sexually nonconsensual material (which it's already common). 
-If AI capabilities keep increasing, deepfakes will be easier to create, and of better quality. Even in real time. 
+If AI capabilities keep increasing, deepfakes will be easier to create, and of better quality. If we don't regulate them, it's a matter of time until it will be possible to impersonate people in real-time with their faces and voices.
 
 ### Biases and discrimination
 
