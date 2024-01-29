@@ -8,7 +8,7 @@ It comes with amazing potential, but also with serious risks, including [existen
 
 ## Present dangers
 
-### Fake news, polarization and democracy
+### Fake news, polarization and threating democracy
 
 Much of our society is based on trust. We trust that the money in our bank account is real, that the news we read is true, and that the people who post reviews online exist.
 
