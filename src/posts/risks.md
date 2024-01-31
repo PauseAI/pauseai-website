@@ -7,6 +7,8 @@ AI is a powerful technology that is increasingly transforming our world.
 It comes with amazing potential, but also with serious risks, including [existential catastrophe](/xrisk).
 
 ## Present dangers
+<!-- Clarify how (if it is the case) a pause would actually help fake media.
+Ideas: long realistic videos, multimodal models (which becomes the most popular and would increase the deepfakes the most), different regulation on AI help each other?
 
 ## Fake news, polarization and threating democracy
 
@@ -28,7 +30,7 @@ This leads to polarization between various groups of people who believe in diffe
 Fake content created with AI, also called deepfakes, not only can steal famous people identities and [create disinformation](https://time.com/6565446/biden-deepfake-audio/), but they can also impersonate you. 
 Anyone with photos, videos, or audios of someone and enough knowledge, can create deepfakes of them and use them to commit fraud, harass them, or create sexually nonconsensual material (which it's already common). 
 If AI capabilities keep increasing, deepfakes will be easier to create, and of better quality. If we don't regulate them, it's a matter of time until it will be possible to impersonate people in real-time with their faces and voices.
-
+-->
 ## Biases and discrimination
 
 AI systems are trained on data, and much of the data we have is in some way biased.
@@ -54,13 +56,14 @@ GPT-4 has [passed the bar exam](https://law.stanford.edu/2023/04/19/gpt-4-passes
 The people who own these AI systems will be able to capitalize on them, but the people who lose their jobs to them will not.
 It is difficult to predict which jobs are going to be the ones replaced first. They could leave you unemployed and without an income no matter how much time, money and energy you spent on getting the experience and knowledge that you have, and how valuable they were a moment ago.
 The way we distribute wealth in our society is not prepared for this.
-
+<!-- Clarify how (if it is the case) a pause would actually help mental health.
+Ideas: Relationships with chatbots, indirectly reducing the rest of the risks
 ## Mental health, addiction and disconnection between people
 
 Social media, videogames and other software have been using AI systems to maximize their profit while taking advantage of our primate minds for some time already, damaging our mental health in the proccess. Addictions to social media isolate us from each other, not only in political bubbles but also in cultural and social one-person bubbles, making us lonelier.
 
 They're the first proof of the unintended, unprevisted global consequences that these technologies can bring and how complicated aligning AI systems with "human values" can be. Also the addiction to products and services that profit from personal data and separate people while creating network effects play on a viscious cycle with the accumulation of economical power of these companies and the division between people that leave us as powerless individuals whether it's intended or not.
-
+-->
 ## Power accumulation, war and the race to the precipice
 
 If this economic and technological inequality stems from a handful of public and private entities producing multiple single-purpose AIs or a few multipurpose AI, it could lead to a short accumulation of power that will probably result on a catastrophe for all. 
