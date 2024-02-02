@@ -8,9 +8,9 @@ It comes with amazing potential, but also with serious risks, including [existen
 
 ## Present dangers
 <!-- Clarify how (if it is the case) a pause would actually help fake media.
-Ideas: long realistic videos, multimodal models (which becomes the most popular and would increase the deepfakes the most), different regulation on AI help each other?
+Ideas: long realistic videos, multimodal models (which becomes the most popular and would increase the deepfakes the most), different regulations on AI help each other?
 
-## Fake news, polarization and threating democracy
+## Fake news, polarization and threatening democracy
 
 Much of our society is based on trust. We trust that the money in our bank account is real, that the news we read is true, and that the people who post reviews online exist.
 
@@ -27,11 +27,11 @@ This leads to polarization between various groups of people who believe in diffe
 
 ## Deepfakes and impersonification
 
-Fake content created with AI, also called deepfakes, not only can steal famous people identities and [create disinformation](https://time.com/6565446/biden-deepfake-audio/), but they can also impersonate you. 
-Anyone with photos, videos, or audios of someone and enough knowledge, can create deepfakes of them and use them to commit fraud, harass them, or create sexually nonconsensual material (which it's already common). 
+Fake content created with AI, also called deepfakes, not only can steal famous people identities and [create disinformation](https://time.com/6565446/biden-deepfake-audio/), but they can also impersonate you.
+Anyone with photos, videos, or audios of someone and enough knowledge, can create deepfakes of them and use them to commit fraud, harass them, or create sexually nonconsensual material (which it's already common).
 If AI capabilities keep increasing, deepfakes will be easier to create, and of better quality. If we don't regulate them, it's a matter of time until it will be possible to impersonate people in real-time with their faces and voices.
 -->
-## Biases and discrimination
+### Biases and discrimination
 
 AI systems are trained on data, and much of the data we have is in some way biased.
 This means that AI systems will inherit the biases of our society.
@@ -41,7 +41,7 @@ Biased systems used in law enforcement, such as predictive policing algorithms, 
 Generative AI models do not just copy the biases from their training data, [they amplify them](https://www.bloomberg.com/graphics/2023-generative-ai-bias/).
 These biases often appear without the creators of the AI system being aware of them.
 
-## Job loss, economic inequality and instability
+### Job loss, economic inequality and instability
 
 During the industrial revolution, many people lost their jobs to machines.
 However, new (often better) jobs were created, and the economy grew.
@@ -64,19 +64,21 @@ Social media, videogames and other software have been using AI systems to maximi
 
 They're the first proof of the unintended, unprevisted global consequences that these technologies can bring and how complicated aligning AI systems with "human values" can be. Also the addiction to products and services that profit from personal data and separate people while creating network effects play on a viscious cycle with the accumulation of economical power of these companies and the division between people that leave us as powerless individuals whether it's intended or not.
 -->
-## Power accumulation, war and the race to the precipice
+### Power accumulation, war and the race to the precipice
 
-If this economic and technological inequality stems from a handful of public and private entities producing multiple single-purpose AIs or a few multipurpose AI, it could lead to a short accumulation of power that will probably result on a catastrophe for all. 
-The accumulation of power side of that equation had and will continue incentivizing more actors to join the race to the bottom, and accelerating the development of larger AI systems. This, in return, introduces more points of failure and downplays the associated risks by endorsing the idea that they can be handled unilaterally, by a company or a government.
+If this economic and technological inequality stems from a handful of public and private entities producing multiple single-purpose AIs or a few multipurpose AI, it could lead to a short accumulation of power that will probably result on a catastrophe for all.
+The accumulation of power side of that equation had and will continue to incentivize more actors to join the race to the bottom and accelerate the development of larger AI systems.
+This, in return, introduces more points of failure and downplays the associated risks by endorsing the idea that they can be handled unilaterally, by a company or a government.
+Such a scenario would not just disempower every other person and nation in the world, but also catalyze global powers to enter into conflict.
+So it's crucial to act as soon as possible, before the race dynamics extend further, before the already most powerful governments and corporations consolidate their positions, and before a war is triggered in response.
+To not let the short-term incentives lead the world to a catastrophe, we need international cooperation.
 
-Such scenario would not just disempower every other person and nation in the world, but also serve as a catalyst for global powers to enter into conflict.
-So it's crucial to act as soon as possible, before the race dynamics extend further, before the already most powerful governments and corporations consolidate their positions, and before a war is triggered in response. To not let the short term incentives lead the world to a catastrophe, we need international cooperation.
+### Authoritarian governments
 
-## Authoritarian governments
+Authoritarian and totalitarian governments can also use AI technologies to exercise power over *their* territories and populations.
+They can control the communication channels or maintain social credit and mass surveillance systems that ensure they maintain their power while violating human rights.
 
-Authoritarian and totalitarian governments can also use AI technologies to exercise power over *their* territories and population. They can control the communication channels or mantain social credit and mass surveillance systems that ensure them to continue on power while violating human rights.
-
-## Autonomous weapons
+### Autonomous weapons
 
 Companies are already selling AI-powered weapons to governments.
 Lanius builds [flying suicide drones](https://www.youtube.com/watch?v=G7yIzY1BxuI) that autonomously identify foes.
@@ -95,7 +97,7 @@ Read more at [stopkillerrobots.org](https://www.stopkillerrobots.org/military-an
 
 ## Near future dangers
 
-## Biological weapons
+### Biological weapons
 
 AI can make knowledge more accessible, which also includes knowledge about how to create biological weapons. [This paper](https://arxiv.org/abs/2306.03809) shows how GPT-4 can help non-scientist students to create a pandemic pathogen:
 
@@ -111,7 +113,7 @@ Scientists are now even creating [fully autonomous chemical labs, where AI syste
 
 The fundamental danger is that the cost of designing and applying biological weapons is being lowered by orders of magnitude because of AI.
 
-## Computer viruses and hacks
+### Computer viruses and hacks
 
 Virtually everything we do nowadays is in some way dependent on computers.
 We pay for our groceries, plan our days, contact our loved ones and even drive our cars with computers.
@@ -125,7 +127,7 @@ Instead of having to hire a team of skilled security experts/hackers to find zer
 
 [Read more about AI and cybersecurity risks](/cybersecurity-risks)
 
-## Existential Risk
+### Existential Risk
 
 Many AI researchers are warning that AI could lead to the end of humanity.
 
@@ -133,38 +135,41 @@ Very intelligent things are very powerful.
 If we build a machine that is far more intelligent than humans, we need to be sure that it wants the same thing as we want.
 However, this turns out to be very difficult.
 This is called the _alignment problem_.
-If we fail to solve it in time, we may end up with superintelligent machines that do not care about our wellbeing.
+If we fail to solve it in time, we may end up with superintelligent machines that do not care about our well-being.
 We'd be introducing a new species to the planet that could outsmart us and outcompete us.
 
 [Read more about x-risk](/xrisk)
 
-## Human disempowerment
+### Human disempowerment
 
-Even if we manage to create only AI systems that we can control individually, we could lose our power to take important decisions incrementally each time one becomes implemented inside institutions or popularized on everyday life.
+Even if we manage to create only AI systems that we can control individually, we could lose our power to make important decisions incrementally each time one becomes implemented inside institutions or popularized in everyday life.
 Those systems would end up having more input from other systems than from humans, and, if we cannot coordinate quick enough or we lack crucial knowledge about the functioning of these systems, we could end up without control over our future.
 
-It would be a civilization in which each system is optimizing for different objectives, there is not a clear direction for where everything is heading, and there is not any way of changing it.
+It would be a civilization in which each system is optimizing for different objectives, there is not a clear direction for where everything is heading, and there is no way of changing it.
 The technical knowledge required to modify these systems could be lacking in the first place or lost over time, as we become more and more dependent on technology, and the technology becomes more complex.
 
-The systems may achieve their goals, but those goals might not entirely encapsulate the values they were expected to. This problem is, to a certain extent, already happenning today, but AIs could significantly amplify it.
+The systems may achieve their goals, but those goals might not entirely encapsulate the values they were expected to. This problem is, to a certain extent, already happening today, but AIs could significantly amplify it.
 
-## AI suffering
+### AI suffering
 
-As AI continues to advance, future systems may become incredibly sophisticated, replicating neural structures and functions that are more akin to the human brain. This increased complexity might lead to emergent properties like subjectivity and/or consciousness, and so those AIs would be deserving of moral considerations and be treated well. Would be like "digital people".
-The thing is that, given our present lack of knowledge about consciousness and the nature of neural networks, we won't have a way to determine whether some AIs would have any type of experience and what does the quality of those experiences would depend on. If the AIs continue to be produced with only their capabilities on mind, through a process we don't fully understand, people would keep on using them as tools ignoring what their desires could be, and that they could be actually enslaving digital people.
+As AI continues to advance, future systems may become incredibly sophisticated, replicating neural structures and functions that are more akin to the human brain.
+This increased complexity might lead to emergent properties like subjectivity and/or consciousness, so those AIs would be deserving of moral considerations and be treated well.
+Would be like "digital people".
+The thing is that, given our present lack of knowledge about consciousness and the nature of neural networks, we won't have a way to determine whether some AIs would have any type of experience and what does the quality of those experiences would depend on.
+If the AIs continue to be produced with only their capabilities in mind, through a process we don't fully understand, people will keep on using them as tools ignoring what their desires could be, and that they could be actually enslaving digital people.
 
-## Suffering lock-in risks
+### Suffering lock-in risks
 
-It is possible that once automation at higher degrees start happenning, regardless if there is just one or multiple powerful AIs, the values of those systems would not be able to be changed, and the automation would continue until the end of the universe, through out the reachable galaxies.
-Arguably, the worst scenarios that those AIs could create would not be human extinction, but unescapable dystopias that would extend throught all that spacetime. 
+It is possible that once automation at higher degrees starts happening, regardless if there is just one or multiple powerful AIs, the values of those systems would not be able to be changed, and the automation would continue until the end of the universe, throughout the reachable galaxies.
+Arguably, the worst scenarios that those AIs could create would not be human extinction, but unescapable dystopias that would extend through all that spacetime.
 
-Possible locked-in dystopias with lots of suffering are called S-risks, and include worlds in which sentient beings are enslaved and forced to do horrible things. 
-Those beings could be humans or animals or digital people or any other alien species that the system could find in the cosmos. Given how difficult we think solving alignment completely is, how bad we humans treat each other sometimes, how bad we treat most animals, and how we treat present AIs, a future like that is maybe not as unlikely as we'd like.
+Possible locked-in dystopias with lots of suffering are called _S-risks_ and include worlds in which sentient beings are enslaved and forced to do horrible things.
+Those beings could be humans, animals, digital people or any other alien species that the system could find in the cosmos. Given how difficult we think solving alignment completely is, how bad we humans treat each other sometimes, how bad we treat most animals, and how we treat present AIs, a future like that is maybe not as unlikely as we'd like.
 
 ## What can we do?
 
 For **all** the problems discussed above, the risk increases as AI capabilities improve.
-This means that the safest thing to do now is to slow down.
+This means that the safest thing to do now is to **slow down**.
 We need to pause the development of more powerful AI systems until we have figured out how to deal with the risks.
 
 See [our proposal](/proposal) for more details.
