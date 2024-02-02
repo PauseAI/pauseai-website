@@ -8,7 +8,6 @@ It comes with amazing potential, but also with serious risks, including [existen
 
 ## Present dangers
 
-Ideas: long realistic videos, multimodal models (which becomes the most popular and would increase the deepfakes the most), different regulations on AI help each other?
 ### Fake news, polarization and threatening democracy
 
 Much of our society is based on trust. We trust that the money in our bank account is real, that the news we read is true, and that the people who post reviews online exist.
