@@ -20,14 +20,24 @@
 			}
 		}
 	}
+
+	function maybeShowTooltip() {
+		if (!showExplanation) {
+			showTooltip = true
+		}
+	}
+
+	function handleClick() {
+		!showExplanation && (showExplanation = !showExplanation)
+	}
 </script>
 
 <td
-	on:mouseover={() => (showTooltip = true)}
+	on:mouseover={maybeShowTooltip}
 	on:mouseout={() => (showTooltip = false)}
-	on:focus={() => (showTooltip = true)}
+	on:focus={maybeShowTooltip}
 	on:blur={() => (showTooltip = false)}
-	on:click={() => (showExplanation = !showExplanation)}
+	on:click={handleClick}
 	class={showExplanation ? '' : 'enable-tooltips'}
 >
 	{#if title !== undefined}

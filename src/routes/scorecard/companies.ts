@@ -62,7 +62,7 @@ const companiesSource: Company[] = [
 			explanation:
 				// https://corporateeurope.org/en/2023/11/byte-byte
 				'Microsoft has lobbied to shift the burden of responsibility onto users of AI instead of the ones building the AI.',
-			score: 3
+			score: 2
 		},
 		deployment: {
 			explanation:
@@ -111,7 +111,7 @@ const companiesSource: Company[] = [
 			// https://pitchbook.com/news/articles/generative-AI-Capitol-Hill-VC
 			explanation:
 				"Anthropic has spent (a little) money lobbying, but it's unclear what they are pushing for.",
-			score: 7
+			score: 5
 		},
 		deployment: {
 			explanation:
@@ -135,7 +135,7 @@ const companiesSource: Company[] = [
 		},
 		lobby: {
 			explanation: 'No lobbying as far as we know of yet.',
-			score: 7
+			score: 5
 		},
 		deployment: {
 			explanation: 'Not sure tbd',

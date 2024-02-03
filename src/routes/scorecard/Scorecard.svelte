@@ -1,4 +1,5 @@
 <script lang="ts">
+	import Button from '$lib/components/Button.svelte'
 	import Cell from './TableCell.svelte'
 	import { categories } from './categories'
 	import { companies } from './companies'
@@ -6,10 +7,7 @@
 	let showExplanation = false
 </script>
 
-<label>
-	<input type="checkbox" bind:checked={showExplanation} />
-	Show explanations
-</label>
+<Button on:click={() => (showExplanation = !showExplanation)}>Toggle explanations</Button>
 
 <table class={showExplanation ? 'table--big' : ''}>
 	<thead>
