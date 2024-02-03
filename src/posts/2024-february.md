@@ -6,7 +6,12 @@ description: We are organizing a protest to demand a pause on dangerous AI devel
 - PauseAI protest
 - Where: San Francisco, OpenAI HQ
 - When: 12th of February 2024, 16:00 - 18:00
-- Join: [sign up here]((https://t.co/jvUjQaapzH))
+- Join: [sign up here](https://fb.me/e/78BzWmaaj)
+
+Other International Locations / Times:
+UK (exact location TBD) / 4:00 pm GMT
+
+It would be great if people outside San Fransico could protest in front of Microsoft offices on the day of the protest.
 
 ## Why we are protesting OpenAI
 
