@@ -47,7 +47,7 @@
 					enableHighAccuracy: true
 				},
 				// When active the map will receive updates to the device's location as it changes.
-				trackUserLocation: true,
+				trackUserLocation: true
 			})
 		)
 
