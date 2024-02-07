@@ -23,7 +23,7 @@ We might soon see social media be flooded with fake discussions and opinions, an
 
 This leads to polarization between various groups of people who believe in different sources of information and narratives and, through consuming distorted representations of what's happening, escalate their differences until culminating on violent and anti-democratic responses.
 
-A halt on the frontier models would not stop the models that are used nowadays to create fake media, but it's possible that the creation of fullly-synthetic realistic long videos would only be possible with future cutting edge models which our proposal would prevent. 
+A halt on the frontier models would not stop the models that are used nowadays to create fake media, but it's possible that the creation of fullly-synthetic realistic long videos would only be possible with future cutting edge models which our proposal would prevent.
 
 Also, it would lay the groundwork for future regulation aimed to mitigate more effectively fake media and any other specific problem caused by AI. Not to mention increasing public attention and awareness to these dangers and proof that they can be addressed.
 
@@ -32,7 +32,7 @@ Also, it would lay the groundwork for future regulation aimed to mitigate more e
 Fake content created with AI, also called deepfakes, not only can steal famous people identities and [create disinformation](https://time.com/6565446/biden-deepfake-audio/), but they can also impersonate you.
 Anyone with photos, videos, or audios of someone and enough knowledge, can create deepfakes of them and use them to commit fraud, harass them, or create sexually nonconsensual material (which it's already common).
 
-As the section on fake news says, fake media wouldn't be prevented altogether by our proposal, but they could be reduced to a certain extent. A not so small extent when you take into account that the AI multipurpose systems like chatbots have become really popular and we would be stopping them from being more capable and popular, which could include systems designed with less filters and trainable with new faces. 
+As the section on fake news says, fake media wouldn't be prevented altogether by our proposal, but they could be reduced to a certain extent. A not so small extent when you take into account that the AI multipurpose systems like chatbots have become really popular and we would be stopping them from being more capable and popular, which could include systems designed with less filters and trainable with new faces.
 
 ### Biases and discrimination
 
@@ -98,6 +98,7 @@ Right now, we still have humans in the loop for these weapons.
 But as the capabilities of these AI systems improve, there will be more and more pressure to give the machines the power to decide.
 When we delegate control of weapons to AI, errors and bugs could have horrible consequences.
 The speed at which AI can process information and make decisions may cause conflicts to escalate in minutes.
+A [recent paper](https://arxiv.org/pdf/2401.03408.pdf) concludes that "models tend to develop arms-race dynamics, leading to greater conflict, and in rare cases, even to the deployment of nuclear weapons".
 
 Read more at [stopkillerrobots.org](https://www.stopkillerrobots.org/military-and-killer-robots/)
 

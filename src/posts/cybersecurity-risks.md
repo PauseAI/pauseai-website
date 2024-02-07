@@ -28,7 +28,7 @@ AI can also be used to make [self-modifying malware](https://www.hyas.com/blog/b
 There will most likely come a point where an AI is better at hacking than the best human hackers.
 This can go wrong in many ways.
 
-- **Infrastructure**: Cyberweapons can be used to gain access to or disable critical infrastructure, such as [oil pipelines](https://en.wikipedia.org/wiki/Colonial_Pipeline_ransomware_attack).
+- **Infrastructure**: Cyberweapons can be used to gain access to or disable critical infrastructure, such as [oil pipelines](https://en.wikipedia.org/wiki/Colonial_Pipeline_ransomware_attack) or [power grids](https://obr.uk/box/cyber-attacks-during-the-russian-invasion-of-ukraine/).
 - **Financial**: Cyberweapons can be used to [steal money from banks](https://en.wikipedia.org/wiki/2015%E2%80%932016_SWIFT_banking_hack), or to [manipulate the stock market](https://en.wikipedia.org/wiki/2010_flash_crash).
 - **Military**: Equipment such as weapons and sensors are increasingly dependent on wireless connectivity and complex software.
 
@@ -47,6 +47,8 @@ If the goal of a cyberattack was to disable devices and infrastructure, the dama
 Our society is increasingly dependent on computers and the internet.
 Payments, transportation, communication, planning, supply chains, power grids...
 If our devices no longer function properly, many parts of our society fail to function, too.
+
+Over [93% of cybersecurity experts](https://www.weforum.org/publications/global-cybersecurity-outlook-2023/) believe “a far-reaching, catastrophic cyber event is likely in the next two years”.
 
 ## Mitigating AI Cybersecurity Risks
 
