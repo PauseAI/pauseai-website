@@ -12,6 +12,7 @@
 	import Acknowledge from './actions/acknowledge.svelte'
 	import { meta } from './meta'
 	import * as clipboard from 'clipboard-polyfill'
+	import toast from 'svelte-french-toast'
 
 	let top: HTMLHeadingElement
 	const { title, description, date } = meta
@@ -30,10 +31,10 @@
 				})
 			])
 			.then(() => {
-				window.alert('Letter copied to clipboard!')
+				toast.success('Letter copied to clipboard!')
 			})
 			.catch((err) => {
-				window.alert(`Failed to copy: ${err}`)
+				toast.error(`Failed to copy: ${err}`)
 			})
 	}
 

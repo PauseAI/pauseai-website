@@ -1,11 +1,13 @@
 <script lang="ts">
+	import { Toaster } from 'svelte-french-toast'
+
 	import Footer from './footer.svelte'
 	import Header from './header.svelte'
 	import PageTransition from './transition.svelte'
 
-	import '@fontsource/roboto-slab/300.css';
-	import '@fontsource/roboto-slab/700.css';
-	import '@fontsource/saira-condensed/700.css';
+	import '@fontsource/roboto-slab/300.css'
+	import '@fontsource/roboto-slab/700.css'
+	import '@fontsource/saira-condensed/700.css'
 
 	import '../app.css'
 
@@ -23,6 +25,16 @@
 
 	<Footer />
 </div>
+
+<Toaster
+	toastOptions={{
+		style: 'background-color: var(--bg-subtle); color: var(--text)',
+		iconTheme: {
+			primary: 'var(--brand)',
+			secondary: 'white'
+		}
+	}}
+/>
 
 <style>
 	/* @import url('$lib/reset.css');
