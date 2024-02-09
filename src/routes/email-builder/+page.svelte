@@ -34,7 +34,7 @@
 				toast.success('Letter copied to clipboard!')
 			})
 			.catch((err) => {
-				toast.error(`Failed to copy: ${err}`)
+				window.alert(`Failed to copy: ${err}`)
 			})
 	}
 
