@@ -3,8 +3,7 @@
 	import Toggle from '$lib/components/Toggle.svelte'
 	import { page } from '$app/stores'
 
-	const { url: { pathname } } = $page
-
+	$: pathname = $page.url.pathname
 	$: editPath = pathname === '/' ? 'routes/%2Bpage.svelte' : `posts${pathname}.md`
 	$: editUrl = `https://github.com/joepio/pauseai/edit/main/src/${editPath}`
 </script>

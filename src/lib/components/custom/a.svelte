@@ -5,23 +5,18 @@
 	export let href: string
 	export let target: string | null = null
 
-	const RELATIVE_ICON_SIZE = 0.8
-
 	let isExternal = false
-	let anchor: HTMLAnchorElement
-	let iconSize: number;
 
 	onMount(() => {
-		iconSize = parseFloat(getComputedStyle(anchor).fontSize) * RELATIVE_ICON_SIZE
 		isExternal = href.startsWith('http:') || href.startsWith('https:') || href.startsWith('mailto:')
 	})
 </script>
 
-<a bind:this={anchor} {href} {target}>
+<a {href} {target}>
 	<slot />{#if isExternal}
-		<span style='white-space: nowrap'>
+		<span style="white-space: nowrap">
 			<div class="icon">
-				<ExternalLink size={iconSize} />
+				<ExternalLink size="0.8em" />
 			</div>
 		</span>
 	{/if}
