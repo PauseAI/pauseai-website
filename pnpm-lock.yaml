@@ -30,8 +30,8 @@ dependencies:
     specifier: ^1.11.11
     version: 1.11.11
   lucide-svelte:
-    specifier: ^0.298.0
-    version: 0.298.0(svelte@4.2.8)
+    specifier: ^0.325.0
+    version: 0.325.0(svelte@4.2.8)
   mapbox-gl:
     specifier: ^3.0.1
     version: 3.0.1
@@ -1642,10 +1642,10 @@ packages:
       yallist: 4.0.0
     dev: true
 
-  /lucide-svelte@0.298.0(svelte@4.2.8):
-    resolution: {integrity: sha512-7xYNSMY1z1QMjLe8GWToFtFh0lvTsrxdgEAXMite/Urn9tPD16Xk3597ibpgt9Ff7IBb/ArMc3y3ZKofZhs8fQ==}
+  /lucide-svelte@0.325.0(svelte@4.2.8):
+    resolution: {integrity: sha512-SbbbQpaiVoMBuRWmCtmaP+RyN/Bt/TIA51SVJGt0wydzxlhqOAuzNSpPBm0yRNbRNDsKeQGwjcDxdZgFPxxmCA==}
     peerDependencies:
-      svelte: '>=3 <5'
+      svelte: ^3 || ^4 || ^5.0.0-next.42
     dependencies:
       svelte: 4.2.8
     dev: false

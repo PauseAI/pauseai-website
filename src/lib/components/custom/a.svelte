@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { onMount } from 'svelte'
-	import { ExternalLink } from 'lucide-svelte'
+	import ExternalLink from 'lucide-svelte/icons/external-link'
 
 	export let href: string
 	export let target: string | null = null
