@@ -1,17 +1,10 @@
 import { sveltekit } from '@sveltejs/kit/vite'
-import type { UserConfig } from 'vite'
 
-const config: UserConfig = {
+const config = {
 	server: {
 		port: 37572
 	},
-	plugins: [sveltekit()],
-	build: {
-		rollupOptions: {
-			external: ['/pagefind/pagefind.js']
-		}
-	},
-	assetsInclude: '**/pagefind.js'
+	plugins: [sveltekit()]
 }
 
 export default config
