@@ -38,7 +38,7 @@
 		"clipboard-polyfill": "^4.0.2",
 		"escape-html": "^1.0.3",
 		"html-to-image": "^1.11.11",
-		"lucide-svelte": "^0.298.0",
+		"lucide-svelte": "^0.325.0",
 		"mapbox-gl": "^3.0.1",
 		"rehype-slug": "^5.1.0",
 		"remark-toc": "^9.0.0",

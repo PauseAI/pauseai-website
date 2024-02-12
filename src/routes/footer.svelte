@@ -1,12 +1,7 @@
 <script lang="ts">
 	import ExternalLink from '$lib/components/custom/a.svelte'
 	import Toggle from '$lib/components/Toggle.svelte'
-	import { page } from '$app/stores'
-
-	const { url: { pathname } } = $page
-
-	$: editPath = pathname === '/' ? 'routes/%2Bpage.svelte' : `posts${pathname}.md`
-	$: editUrl = `https://github.com/joepio/pauseai/edit/main/src/${editPath}`
+	import Edit from '$lib/components/Edit.svelte'
 </script>
 
 <a class="c2a" href="/join">Join PauseAI ></a>
@@ -55,7 +50,7 @@
 	<div class="column">
 		<h2>Other</h2>
 		<Toggle />
-		<ExternalLink href={editUrl}>Edit this page</ExternalLink>
+		<Edit />
 		<a href="/posts">All pages</a>
 		<a href="/rss.xml" target="_blank">RSS</a>
 		<ExternalLink href="https://creativecommons.org/licenses/by/4.0/" target="_blank">License: CC-BY 4.0</ExternalLink>
