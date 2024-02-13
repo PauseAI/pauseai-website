@@ -81,7 +81,7 @@
 		},
 		{
 			name: 'Emmet Shear',
-			title: 'ex-CEO of Twitch, ex-short term CEO of OpenAI',
+			title: 'Co-founder of Twitch, former short-term CEO of OpenAI',
 			probability: '5-50%',
 			number: 0.275,
 			source: 'https://www.youtube.com/watch?v=9oUbauum4uI'
