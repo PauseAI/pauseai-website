@@ -14,9 +14,8 @@
 			<a href="/proposal">Proposal</a>
 			<a href="/learn">Learn</a>
 			<a href="/press">Press</a>
-			<a href="/sota">State of AI</a>
 			<a href="/psychology-of-x-risk">Psychology of x-risk</a>
-			<a href="/4-levels-of-ai-regulation">4 Levels of regulation</a>
+			<a href="/legal">Legal info</a>
 			<ExternalLink href="https://pauseai-shop.fourthwall.com" target="_blank"
 				>Merchandise</ExternalLink
 			>
