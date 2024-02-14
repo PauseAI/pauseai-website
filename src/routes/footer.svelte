@@ -13,10 +13,13 @@
 			<a href="/faq">FAQ</a>
 			<a href="/proposal">Proposal</a>
 			<a href="/learn">Learn</a>
+			<a href="/press">Press</a>
 			<a href="/sota">State of AI</a>
 			<a href="/psychology-of-x-risk">Psychology of x-risk</a>
 			<a href="/4-levels-of-ai-regulation">4 Levels of regulation</a>
-			<ExternalLink href="https://pauseai-shop.fourthwall.com" target="_blank">Merchandise</ExternalLink>
+			<ExternalLink href="https://pauseai-shop.fourthwall.com" target="_blank"
+				>Merchandise</ExternalLink
+			>
 		</div>
 		<div class="column">
 			<h2>Risks</h2>
@@ -42,10 +45,14 @@
 			<h2>Socials</h2>
 			<ExternalLink href="https://discord.gg/2XXWXvErfA" target="_blank">Discord</ExternalLink>
 			<ExternalLink href="https://twitter.com/PauseAI" target="_blank">Twitter</ExternalLink>
-			<ExternalLink href="https://www.linkedin.com/company/pauseai" target="_blank">LinkedIn</ExternalLink>
+			<ExternalLink href="https://www.linkedin.com/company/pauseai" target="_blank"
+				>LinkedIn</ExternalLink
+			>
 			<ExternalLink href="https://www.facebook.com/PauseAI/" target="_blank">Facebook</ExternalLink>
 			<ExternalLink href="https://www.tiktok.com/@pauseai" target="_blank">TikTok</ExternalLink>
-			<ExternalLink href="https://www.instagram.com/pause_ai/" target="_blank">Instagram</ExternalLink>
+			<ExternalLink href="https://www.instagram.com/pause_ai/" target="_blank"
+				>Instagram</ExternalLink
+			>
 			<ExternalLink href="https://www.youtube.com/@PauseAI" target="_blank">YouTube</ExternalLink>
 		</div>
 		<div class="column">
@@ -54,7 +61,9 @@
 			<Edit />
 			<a href="/posts">All pages</a>
 			<a href="/rss.xml" target="_blank">RSS</a>
-			<ExternalLink href="https://creativecommons.org/licenses/by/4.0/" target="_blank">License: CC-BY 4.0</ExternalLink>
+			<ExternalLink href="https://creativecommons.org/licenses/by/4.0/" target="_blank"
+				>License: CC-BY 4.0</ExternalLink
+			>
 		</div>
 	</div>
 </footer>
