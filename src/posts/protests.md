@@ -5,11 +5,11 @@ description: When and where we will be protesting.
 
 ## Coming up
 
-- [12th of February, OpenAI, SF](/2024-february)
 - [Join PauseAI](/join) to receive updates on upcoming protests.
 
 ## Past Protests
 
+- [12th of February, OpenAI, SF](/2024-february)
 - [1st of November, Bletchley Park, UK](/2023-november-uk)
 - [21st of October, International protest](/2023-oct)
 - [29th of September, San Francisco](https://metaprotest.org/) (not officially PauseAI)
@@ -39,14 +39,17 @@ Read more about [organizing a protest](/organizing-a-protest).
 
 - [Time](https://time.com/6295879/ai-pause-is-humanitys-best-bet-for-preventing-extinction/): Article we wrote about why a Pause is necessary.
 - [Wired](https://www.wired.com/story/pause-ai-existential-risk/): Article on PauseAI and the protests.
-- [Politico](https://www.politico.eu/article/microsoft-brussels-elon-musk-anti-ai-protesters-well-five-of-them-descend-on-brussels/): Covers the Brussels protest.
+- [Politico](https://www.politico.eu/article/microsoft-brussels-elon-musk-anti-ai-protesters-well-five-of-them-descend-on-brussels/): Covers the Brussels 2023 protest.
+- [Euronews](https://www.euronews.com/next/2023/06/14/could-ai-lead-us-to-extinction-this-brussels-based-group-believes-so): Covers the Brussels 2023 protest.
 - [The Verge](https://www.theverge.com/2023/5/24/23735982/sam-altman-openai-superintelligent-benefits-talk-london-ucl-protests)
-- [Euronews](https://www.euronews.com/next/2023/06/14/could-ai-lead-us-to-extinction-this-brussels-based-group-believes-so)
 - [CryptoRank](https://cryptorank.io/news/feed/cbfc5-pause-ai-protest-ai-development)
 - [Fortune](https://fortune.com/2023/05/24/openai-ceo-sam-altman-credits-elon-musk-with-teaching-him-the-importance-of-deep-tech-investing-but-he-has-no-interest-in-living-on-mars/)
 - [Creatives with AI podcast](https://www.youtube.com/watch?v=LNtGUHTdH6k): Interview with PauseAI founder Joep Meindertsma.
 - [Art of AI podcast](https://spotify.link/AggzYfcj8Db): Interview with Joep Meindertsma, about protesting, psychology of x-risk, AI policy.
-- [InfoSecurity Magazine](https://www.infosecurity-magazine.com/news/uk-ai-safety-institute-blueprint/)
+- [InfoSecurity Magazine](https://www.infosecurity-magazine.com/news/uk-ai-safety-institute-blueprint/): Why relying on evals is dangerous.
+- [Bloomberg](https://www.bloomberg.com/news/newsletters/2024-02-13/ai-protest-at-openai-hq-in-san-francisco-focuses-on-military-work): Coverage of February 2024 OpenAI protest
+- [ReadWrite](https://readwrite.com/stop-working-with-pentagon-openai-staff-face-protests/): Coverage of February 2024 OpenAI protest
+- [VentureBeat](https://venturebeat.com/ai/protesters-gather-outside-openai-office-opposing-military-ai-and-agi/): Coverage of February 2024 OpenAI protest
 
 ## Local Media coverage
 

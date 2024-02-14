@@ -6,13 +6,11 @@ description: We are organizing a protest to demand a pause on dangerous AI devel
 - PauseAI protest
 - Where: San Francisco, OpenAI HQ
 - When: 12th of February 2024, 16:30 - 18:00
-- Join: [sign up here](https://fb.me/e/78BzWmaaj)
+- [Facebook event](https://fb.me/e/78BzWmaaj)
 - [Website](https://openaiprotest.com/)
 
 Other International Locations / Times:
 UK (exact location TBD) / 4:00 pm GMT
-
-It would be great if people outside San Fransico could protest in front of Microsoft offices on the day of the protest.
 
 ## Why we are protesting OpenAI
 
@@ -32,13 +30,17 @@ AI is rapidly becoming more powerful, far faster than virtually any AI scientist
 
 According to their charter, “OpenAI’s mission is to ensure that artificial general intelligence (AGI)—by which we mean highly autonomous systems that outperform humans at all economically valuable work—benefits all of humanity.” But many humans value their work and find meaning in it, and hence do not want their jobs to be done by an AGI instead. What protest co-organizer Sam Kirchner of No AGI calls “the Psychological Threat” applies even if AGI doesn't kill us.
 
-***Come early for a free t-shirt!***
-
-Bring your own sign or make one with us! There will be a signmaking party beforehand. RSVP "Going" or "Interested" to be added to a chat where the time and location will announced.
-Join us for drinks after the protest.
-*an earlier version of this description incorrectly referred to the usage policy as a “charter”
-
 ## Contact
 
 - Holly Elmore ([Twitter](https://twitter.com/ilex_ulmus))
 - Sam Kirchner ([Twitter](https://twitter.com/No_AGI_))
+
+## Media Coverage
+
+- [Bloomberg](https://www.bloomberg.com/news/newsletters/2024-02-13/ai-protest-at-openai-hq-in-san-francisco-focuses-on-military-work)
+- [ReadWrite](https://readwrite.com/stop-working-with-pentagon-openai-staff-face-protests/)
+- [VentureBeat](https://venturebeat.com/ai/protesters-gather-outside-openai-office-opposing-military-ai-and-agi/)
+
+<div>
+<blockquote class="twitter-tweet"><p lang="en" dir="ltr">From the protest yesterday at OpenAI HQ, covered in Bloomberg: <a href="https://t.co/sgp1KFoFPs">https://t.co/sgp1KFoFPs</a> <a href="https://t.co/N6fHGIlOYm">pic.twitter.com/N6fHGIlOYm</a></p>&mdash; PauseAI US ⏸️ (@pauseaius) <a href="https://twitter.com/pauseaius/status/1757604719047114786?ref_src=twsrc%5Etfw">February 14, 2024</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+</div>
