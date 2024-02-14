@@ -9,7 +9,7 @@ If our predictions are too far off, we may not be able to prepare in time.
 
 ## We reached human-level performance in many domains in 2023
 
-On Metaculus, [the community prediction for (weak) AGI](https://www.metaculus.com/questions/3479/date-weakly-general-ai-is-publicly-known/) was 2057 just three years ago, and now it's 2027.
+On Metaculus, [the community prediction for (weak) AGI](https://www.metaculus.com/questions/3479/date-weakly-general-ai-is-publicly-known/) was 2057 just three years ago, and now it's ~~2027~~ 2026.
 
 Now, let's dive into the definition of AGI used in that survey:
 
