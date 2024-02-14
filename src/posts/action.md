@@ -14,6 +14,7 @@ You are now one of them.
 - **[Join PauseAI](/join)** and help us grow.
 - **[Join our Discord](https://discord.gg/2XXWXvErfA)**, where our community is most active. We have a **#projects** channel where people are working on campaigns, videos, images, apps and more.
 - **[Meet](/communities)** other people in a PauseAI community near you. If there is no community near you, consider starting one.
+- [**Send an email to a politician**](/email-builder): emails are completely overpowered. Do it.
 - **[Learn](/learn)** more about AI alignment and the risks we are facing.
 - [**Protest**](/protests): join [one of the protests](/protests) or [organize one yourself](/organizing-a-protest).
 - [**Lobby**](/lobby-tips): convince your government to work towards a pause and prepare for the [summit](/summit).
@@ -35,12 +36,13 @@ You are now one of them.
 
 ### If you are convincing
 
-- **Convince one person in your government to prepare for the [summit](/summit) and work towards a global pause**. This is the most important thing you can do. See [lobby tips](/lobby-tips).
+- **Convince one person in your government to prepare for the [summit](/summit) and work towards a global pause**. This is the most important thing you can do. See [lobby tips](/lobby-tips) and the [Email Builder](/email-builder).
 - **Convince journalists** to write about AI safety. Point them to [educational materials](/learn).
+- **Convince influencers** to talk and make videos about AI safety.
 - **Ask the management** at your current organization to take an institutional position on this.
 - [Write to your political representatives](https://www.campaignforaisafety.org/politician/).
 
-### If you are a politician / work in government
+### If you are a politician or work in government
 
 - **Prepare for the [AI safety summit](/summit)**. Form coalitions with other countries. Get informed about the [problem](/learn) and [solutions](/proposal).
 - **Invite (or subpoena) AI lab leaders** to parliamentary/congressional hearings to give their predictions and timelines of AI disasters.

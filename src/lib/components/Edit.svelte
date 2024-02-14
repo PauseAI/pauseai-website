@@ -27,5 +27,5 @@
 </script>
 
 {#if editUrl}
-	<ExternalLink href={editUrl}>Edit this page</ExternalLink>
+	<ExternalLink href={editUrl}>Edit on Github</ExternalLink>
 {/if}
