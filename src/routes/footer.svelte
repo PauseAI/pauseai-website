@@ -78,7 +78,7 @@
 	}
 
 	@media (max-width: 750px) {
-		footer {
+		.footer-links {
 			grid-template-columns: repeat(2, 1fr);
 		}
 	}
