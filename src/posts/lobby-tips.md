@@ -24,7 +24,7 @@ So don't be afraid to reach out to them.
 For many people, It's easy to dismiss AI risk as some sort of science fiction nonsense.
 This is why it's important to communicate clearly about what experts are saying.
 Note that the [top three most published AI researchers](https://twitter.com/PauseAI/status/1734641804245455017) are all warning about [x-risk](/xrisk).
-Check out the [surveys](/surveys) and the [quotes](/quotes) pages for examples.
+Check out the [surveys](/polls-and-surveys) and the [quotes](/quotes) pages for examples.
 
 ## Find your ultimate target
 
