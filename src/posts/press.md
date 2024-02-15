@@ -23,6 +23,8 @@ Export from [this Figma template](https://www.figma.com/community/file/123306400
 - [Bloomberg](https://www.bloomberg.com/news/newsletters/2024-02-13/ai-protest-at-openai-hq-in-san-francisco-focuses-on-military-work): Coverage of February 2024 OpenAI protest
 - [ReadWrite](https://readwrite.com/stop-working-with-pentagon-openai-staff-face-protests/): Coverage of February 2024 OpenAI protest
 - [VentureBeat](https://venturebeat.com/ai/protesters-gather-outside-openai-office-opposing-military-ai-and-agi/): Coverage of February 2024 OpenAI protest
+- [NewsBytes](https://www.newsbytesapp.com/news/science/protestors-surround-openai-office-calling-for-ai-boycott/story): Coverage of February 2024 OpenAI protest
+- [BNN](https://bnnbreaking.com/tech/openai-faces-protests-over-military-collaboration-and-agi-concerns): Coverage of February 2024 OpenAI protest
 
 ## Podcasts
 
