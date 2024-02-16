@@ -12,7 +12,6 @@ The following contains information about the Dutch legal entity behind PauseAI:
 - RSIN: 866227696
 - Goal: "Mitigate the most catastrophic risks of AI."
 - Contact: [joep@pauseai.info](mailto:joep@pauseai.info)
-- Address: Skopjestraat 26, 3541ES, Utrecht, The Netherlands
 
 ### Policy Plan 2024-2025 (Beleidsplan)
 
