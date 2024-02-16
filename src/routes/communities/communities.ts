@@ -162,8 +162,8 @@ const PauseAICommunities: Community[] = [
 	},
 	{
 		name: 'PauseAI Raleigh',
-		lat: 35.7796,
-		lon: -78.6382,
+		lat: 35.7877,
+		lon: -78.6443,
 		link: discordInvite
 	}
 ]
