@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { url } from '$lib/config'
+	import { url, title as siteName } from '$lib/config'
 	export let title: string
 	export let description: string
 	export let date: string | undefined = undefined
@@ -27,6 +27,7 @@
 	<meta property="og:title" content={title} />
 	<meta property="og:description" content={description} />
 	<meta property="og:image" content={imageUrl} />
+	<meta property="og:site_name" content={siteName} />
 	{#if date}
 		<meta property="article:published_time" content={date} />
 	{/if}
