@@ -25,6 +25,8 @@ Our logo and other material can be exported from [this Figma template](https://w
 - [VentureBeat](https://venturebeat.com/ai/protesters-gather-outside-openai-office-opposing-military-ai-and-agi/): Coverage of February 2024 OpenAI protest
 - [NewsBytes](https://www.newsbytesapp.com/news/science/protestors-surround-openai-office-calling-for-ai-boycott/story): Coverage of February 2024 OpenAI protest
 - [BNN](https://bnnbreaking.com/tech/openai-faces-protests-over-military-collaboration-and-agi-concerns): Coverage of February 2024 OpenAI protest
+- [NHK World Japan](https://www3.nhk.or.jp/nhkworld/en/news/backstories/3047/): Coverage of February 2024 OpenAI protest
+- [Futurism](https://futurism.com/protesters-swarm-openai): Coverage of February 2024 OpenAI protest
 
 ## Podcasts
 
