@@ -8,7 +8,7 @@ Joep Meindertsma ([joep@pauseai.info](mailto:joep@pauseai.info))
 
 ## Logo, materials
 
-Export from [this Figma template](https://www.figma.com/community/file/1233064002969152026).
+Our logo and other material can be exported from [this Figma template](https://www.figma.com/community/file/1233064002969152026) and [this Google Drive folder](https://drive.google.com/drive/folders/1bQ_MZ8giK-Mee4ABkO0BgcFInaXruNpa?usp=sharing).
 
 ## International Media coverage
 
@@ -45,7 +45,8 @@ Export from [this Figma template](https://www.figma.com/community/file/123306400
 ### NL
 
 - [AD](https://www.ad.nl/tech/ai-rel-in-nieuw-zeeland-kook-app-prijst-dodelijk-chloorgas-aan-als-verfrissend-gerecht~a1aa3705/)
-- [NRC](https://www.nrc.nl/nieuws/2023/06/24/sterft-de-mensheid-uit-door-ai-dat-is-sciencefiction-a4168053)
+- [NRC](https://www.nrc.nl/nieuws/2023/06/24/sterft-de-mensheid-uit-door-ai-dat-is-sciencefiction-a4168053), 2023
+- [NRC](https://www.nrc.nl/nieuws/2024/02/16/ai-doomers-zijn-doodsbang-voor-de-computer-ai-zal-proberen-de-macht-over-te-nemen-a4190130), 2024
 - [Groene Amsterdammer](https://www.groene.nl/artikel/losgeslagen-superintelligentie)
 - [Pakhuis de Zwijger](https://dezwijger.nl/programma/ai-existential-risk-and-what-to-do-about-it)
 - [AI Coalitie](https://nlaic.com/agenda/communitydag-invloed-van-ai-op-cultuur-en-media/)

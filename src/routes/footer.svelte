@@ -13,7 +13,7 @@
 			<a href="/faq">FAQ</a>
 			<a href="/proposal">Proposal</a>
 			<a href="/learn">Learn</a>
-			<a href="/press">Press</a>
+			<a href="/press">Press / Media</a>
 			<a href="/psychology-of-x-risk">Psychology of x-risk</a>
 			<a href="/legal">Legal info</a>
 			<ExternalLink href="https://pauseai-shop.fourthwall.com" target="_blank"
