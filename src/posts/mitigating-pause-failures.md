@@ -21,7 +21,7 @@ Also, pausing early give us breathing room for the enforcement of the pause to n
 
 ## Pausing for too short / only 6 months
 
-The pause we propose is of indeterminate length. We shouldn't unpause until there is a good enough consensus that we know how to develop aligned AIs, not matter how powerful they are, and that we have the systems in place to do it carefully and democratically. 
+The pause we propose is of indeterminate length. We shouldn't unpause until there is a good enough consensus that we know how to develop aligned AIs, not matter how powerful they are, and that we have the systems in place to do it carefully and democratically.
 It is NOT like the [six-month pause asked by the open letter published by the Future of Life Institute](https://futureoflife.org/open-letter/pause-giant-ai-experiments/).
 
 ## Pausing for too long
@@ -91,9 +91,14 @@ AI safety people will be taken less seriously -->
 
 ## Algorithmic or runtime improvements may make smaller models dangerous, too
 
-We're [proposing](/proposal) to pause the development of large, general AI models above a certain threshold (10^25 FLOPS).
-However, we cannot be certain that this threshold is safe.
 We've seen that changes in training data, training algorithms, or runtime usage can lead to large improvements in model performance.
+That's why we're not just focusing on model size.
+We're [proposing](/proposal) to pause the development of large, general AI models that are either 1) larger than 10^12 parameters, 2) have more than 10^25 FLOPs used for training or 3) capabilities that are expected to exceed GPT-4.
+This third condition is added to also include smaller models that can be dangerous.
+Enforcing a cap on capabilities is tricky, as it is hard to predict the capabilities of a model before it is trained.
+
+Since the stakes are so high, we should be cautious, so we also support a pause on relevant algorithmic and runtime improvements.
+However, enforcing this will be more difficult than enforcing compute regulations, because hardware is easier to trace than software.
 
 ## If we only ban general AI models, we might still get AGI through narrow models
 
@@ -101,15 +106,15 @@ We want to restrict dangerous models that can do things like manipulate humans, 
 We don't want to restrict very narrow models, like image classifiers used in self-driving cars or medical diagnosis.
 However, this leads to a difficult situation where there are _strong incentives_ to stretch the definition of "narrow" AI.
 
-Therefore, we haven't defined "narrow" AI in our proposal, but instead, we've defined a threshold for model size.
+Therefore, we haven't defined "narrow" AI in our proposal, but instead, we use the three conditions mentioned above.
 
 ## We will end up with less safety-minded organizations if we pause
 
 If you dive into the history of OpenAI, DeepMind and Anthropic, you will find that all of them have been founded by people who are quite worried about AI risks.
-In a way, we are very lucky that the biggest AI companies right now have this as part of their culture.
+In a way, we are lucky that the biggest AI companies right now have AI safety as part of their culture.
 Maybe a pause gives a large number of companies the time to catch up, which could lead to a large group of companies that are less safety-minded.
 
-If we were asking for a time-based pause, that would be a fair concern.
+If we were asking for a time-based pause, this would be a fair concern.
 But what we're asking for is a pause _until we can prove AI can be built safely_, so we should not end up with organizations building unsafe AI after the pause is lifted.
 
 ## If a pause is implemented, we should expect a political compromise
@@ -128,3 +133,6 @@ We can mitigate this by being consistent and clear in our communications about w
 ## Pausing too late
 
 This is the most obvious and most likely failure risk: if we pause too late, we are likely to encounter catastrophic risks.
+And that could happen soon, as we explain in our [urgency](/urgency) page.
+
+This is why we need your help pushing for a [pause right now](/action).
