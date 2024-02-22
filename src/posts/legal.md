@@ -27,7 +27,7 @@ It is our goal to prevent catastrophic risks from AI. We aim to achieve this by 
 - Organize protests and other forms of activism to raise awareness about the risks of AI.
 - Educate volunteers on how to become more effective advocates.
 - Research policy measures and update our proposal accordingly.
-- Raise funds to support our activities through donations, selling merchandise (through [the store](https://pauseai-shop.fourthwall.com/platform/creators/users/auth/verify)) and applying for grants.
+- Raise funds to support our activities through donations, selling merchandise (through [the store](https://pauseai-shop.fourthwall.com/)) and applying for grants.
 - All funds will be used to support the above activities.
 
 ### Report of activities
