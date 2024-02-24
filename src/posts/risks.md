@@ -12,27 +12,30 @@ It comes with amazing potential, but also with serious risks, including [existen
 
 Much of our society is based on trust. We trust that the money in our bank account is real, that the news we read is true, and that the people who post reviews online exist.
 
-AI systems are exceptionally good at creating fake media. They can create fake videos, fake audio, fake text, and fake images.
+AI systems are exceptionally good at creating fake media.
+They can create fake videos, fake audio, fake text, and fake images.
 These capabilities are improving rapidly.
 Just two years ago, we laughed at the horribly unrealistic Dall-E images, but now we have [deepfake images winning photography contests](https://www.theguardian.com/technology/2023/apr/17/photographer-admits-prize-winning-image-was-ai-generated).
-GPT-4 can write in a way that is indistinguishable from humans.
+A 10-second audio clip or a single picture can be enough to create a convincing deepfake.
 
 Creating fake media is not new, but AI makes it much cheaper and much more realistic.
 An AI-generated image of an explosion caused [panic sells in Wall Street](https://www.euronews.com/next/2023/05/23/fake-news-about-an-explosion-at-the-pentagon-spreads-on-verified-accounts-on-twitter).
+GPT-4 can write in a way that is indistinguishable from humans but at a much faster pace and a fraction of the cost.
 We might soon see social media be flooded with fake discussions and opinions, and fake news articles that are indistinguishable from real ones.
 
-This leads to polarization between various groups of people who believe in different sources of information and narratives and, through consuming distorted representations of what's happening, escalate their differences until culminating on violent and anti-democratic responses.
+This leads to polarization between various groups of people who believe in different sources of information and narratives and, through consuming distorted representations of what's happening, escalate their differences until culminating in violent and anti-democratic responses.
 
-A halt on the frontier models would not stop the models that are used nowadays to create fake media, but it's possible that the creation of fullly-synthetic realistic long videos would only be possible with future cutting edge models which our proposal would prevent.
-
-Also, it would lay the groundwork for future regulation aimed to mitigate more effectively fake media and any other specific problem caused by AI. Not to mention increasing public attention and awareness to these dangers and proof that they can be addressed.
+A halt on the frontier models (our [proposal](/proposal)) would not stop the models that are used nowadays to create fake media, but it might help to prevent future cutting-edge models.
+Also, it would lay the groundwork for future regulation aimed at mitigating fake media and any other specific problem caused by AI. Not to mention increasing public attention and awareness of these dangers and proof that they can be addressed.
 
 ### Deepfakes and impersonification
 
-Fake content created with AI, also called deepfakes, not only can steal famous people identities and [create disinformation](https://time.com/6565446/biden-deepfake-audio/), but they can also impersonate you.
-Anyone with photos, videos, or audios of someone and enough knowledge, can create deepfakes of them and use them to commit fraud, harass them, or create sexually nonconsensual material (which it's already common).
+Fake content created with AI, also called deepfakes, not only can steal famous people's identities and [create disinformation](https://time.com/6565446/biden-deepfake-audio/), but they can also impersonate you.
+Anyone with photos, videos, or audios of someone and enough knowledge, can create deepfakes of them and use them to commit fraud, harass them, or create sexually nonconsensual material.
+About 96% of all deepfake content is sexual material.
 
-As the section on fake news says, fake media wouldn't be prevented altogether by our proposal, but they could be reduced to a certain extent. A not so small extent when you take into account that the AI multipurpose systems like chatbots have become really popular and we would be stopping them from being more capable and popular, which could include systems designed with less filters and trainable with new faces.
+As the section on fake news says, fake media wouldn't be prevented altogether by our proposal, but they could be reduced to a certain extent.
+A not so small extent when you take into account that AI multipurpose systems like chatbots have become really popular and we would be stopping them from being more capable and popular, which could include systems designed with less filters and trainable with new faces.
 
 ### Biases and discrimination
 

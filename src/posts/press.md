@@ -35,6 +35,7 @@ Our logo and other material can be exported from [this Figma template](https://w
 - [Art of AI podcast](https://spotify.link/AggzYfcj8Db): Interview with Joep Meindertsma, about protesting, psychology of x-risk, AI policy.
 - [For Humanity podcast](https://www.youtube.com/watch?v=BryJy9aL_LQ): Interview with Joep Meindertsma, about starting PauseAI, dealing with existential risk, and why we can make this.
 - [The Inside View podcast](https://www.youtube.com/watch?v=5RyttfXTKfs): Interview with Holly Elmore, about starting PauseAI, dealing with existential risk, and why we can make this.
+- [Consistently Candid](https://www.buzzsprout.com/2319950/share): Interview with Joep Meindertsma, about what we can all do to prevent disaster.
 
 ## National Media coverage
 
