@@ -31,7 +31,7 @@ const config = {
 	kit: {
 		adapter: adapter({
 			edge: true,
-			excludePathsFromEdge: ['/pagefind/*']
+			excludePatternsFromEdge: ['/pagefind/.*']
 		})
 	}
 }
