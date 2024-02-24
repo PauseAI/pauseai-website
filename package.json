@@ -4,7 +4,7 @@
 	"private": true,
 	"scripts": {
 		"dev": "vite dev",
-		"build": "vite build && pagefind --site build --output-path static/pagefind && shx cp -r static/pagefind build/pagefind",
+		"build": "vite build && node create-pagefind-index.js",
 		"preview": "vite preview",
 		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
 		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
@@ -24,7 +24,6 @@
 		"mdsvex": "^0.11.0",
 		"prettier": "^3.1.1",
 		"prettier-plugin-svelte": "^3.1.2",
-		"shx": "^0.3.4",
 		"svelte": "^4.2.8",
 		"svelte-check": "^3.6.2",
 		"tslib": "^2.4.1",

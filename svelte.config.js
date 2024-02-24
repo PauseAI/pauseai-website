@@ -1,4 +1,4 @@
-import adapter from './src/lib/adapter-netlify-exclude-paths.js'
+import adapter from '@sveltejs/adapter-netlify'
 import { vitePreprocess } from '@sveltejs/vite-plugin-svelte'
 
 import { mdsvex, escapeSvelte } from 'mdsvex'
@@ -30,8 +30,7 @@ const config = {
 	preprocess: [vitePreprocess(), mdsvex(mdsvexOptions)],
 	kit: {
 		adapter: adapter({
-			edge: true,
-			excludePatternsFromEdge: ['/pagefind/.*']
+			edge: true
 		})
 	}
 }
