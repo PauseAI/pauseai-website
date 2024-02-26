@@ -24,7 +24,7 @@ We can get there in two ways:
 ## What do we do to get there?
 
 1. **Grow the movement**. The larger our group is, the more we can do. We grow our movement through radical transparency, online community building, and fostering local groups. We empower our volunteers to take action, and we make it easy for them to do so.
-2. **Protests**. [Protests](/protests) increase public awareness and support. They are also a great way to recruit new members and improve community feeling. Because our subject is relatively new, even small protests can get very good [media coverage](/press). We encourage our members to [organize protests](/organize-a-protest) in their own cities.
+2. **Protests**. [Protests](/protests) increase public awareness and support. They are also a great way to recruit new members and improve community feeling. Because our subject is relatively new, even small protests can get very good [media coverage](/press). We encourage our members to [organize protests](/organizing-a-protest) in their own cities.
 3. **Lobbying**. _Every volunteer can become an amateur lobbyist_. We send [emails to politicians](/email-builder), we meet with them, and we stay in touch. We ask them to put AI risks on the agenda, draft a treaty. The core issue that we're trying to solve is a lack of information and insight in the political sphere.
 4. **Inform the public**. We make people aware of the [risks](/risks) we're facing and what we can do to prevent them. We write articles, make videos, design images, join debates, give talks, and organize events.
 
