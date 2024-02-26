@@ -4,6 +4,7 @@
 	import Footer from './footer.svelte'
 	import Header from './header.svelte'
 	import PageTransition from './transition.svelte'
+	import Toc from '$lib/components/Toc.svelte'
 
 	import '@fontsource/roboto-slab/300.css'
 	import '@fontsource/roboto-slab/700.css'
@@ -13,6 +14,8 @@
 
 	export let data
 </script>
+
+<h2 style="width: 0; height: 0; margin: 0; padding: 0; visibility: hidden;">(Top)</h2>
 
 <div class="layout">
 	<Header />
@@ -35,6 +38,10 @@
 		}
 	}}
 />
+
+{#if !['/', '/outcomes', '/pdoom'].includes(data.url)}
+    <Toc />
+{/if}
 
 <style>
 	/* @import url('$lib/reset.css');

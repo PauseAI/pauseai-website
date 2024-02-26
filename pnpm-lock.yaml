@@ -56,6 +56,9 @@ dependencies:
   svelte-french-toast:
     specifier: ^1.2.0
     version: 1.2.0(svelte@4.2.8)
+  svelte-toc:
+    specifier: ^0.5.7
+    version: 0.5.7
 
 devDependencies:
   '@sveltejs/adapter-netlify':
@@ -965,6 +968,12 @@ packages:
     resolution: {integrity: sha512-jsyHu61e6N4Vbz/v18DHwWYKK0bSWLqn47eeDSKPB7m8tqMHF9YJ+mhIk2lVteyZrY8tnSj/jHOv4YiTCuCJgg==}
     dependencies:
       dequal: 2.0.3
+
+  /axobject-query@4.0.0:
+    resolution: {integrity: sha512-+60uv1hiVFhHZeO+Lz0RYzsVHy5Wr1ayX0mwda9KPDVLNJgZ1T9Ny7VmFbLDzxsH0D87I86vgj3gFrjTJUYznw==}
+    dependencies:
+      dequal: 2.0.3
+    dev: false
 
   /bail@2.0.2:
     resolution: {integrity: sha512-0xO6mYd7JB2YesxDKplafRpsiOzPt9V02ddPCLbY1xYGPOX24NTyN50qnUxgCPcSoYMhKpAuBTjQoRZCAkUDRw==}
@@ -2377,12 +2386,38 @@ packages:
       typescript: 5.3.3
     dev: true
 
+  /svelte-toc@0.5.7:
+    resolution: {integrity: sha512-+n8lwy/KTkMdvCXZJQ+kLae6XkN1/TiDnpTqev+UAIulCvbbpYJy/8pcq/zn0Jjyoec2PiIb6gENeNkXxwMNYw==}
+    dependencies:
+      svelte: 4.2.12
+    dev: false
+
   /svelte-writable-derived@3.1.0(svelte@4.2.8):
     resolution: {integrity: sha512-cTvaVFNIJ036vSDIyPxJYivKC7ZLtcFOPm1Iq6qWBDo1fOHzfk6ZSbwaKrxhjgy52Rbl5IHzRcWgos6Zqn9/rg==}
     peerDependencies:
       svelte: ^3.2.1 || ^4.0.0-next.1
     dependencies:
       svelte: 4.2.8
+    dev: false
+
+  /svelte@4.2.12:
+    resolution: {integrity: sha512-d8+wsh5TfPwqVzbm4/HCXC783/KPHV60NvwitJnyTA5lWn1elhXMNWhXGCJ7PwPa8qFUnyJNIyuIRt2mT0WMug==}
+    engines: {node: '>=16'}
+    dependencies:
+      '@ampproject/remapping': 2.2.1
+      '@jridgewell/sourcemap-codec': 1.4.15
+      '@jridgewell/trace-mapping': 0.3.18
+      '@types/estree': 1.0.5
+      acorn: 8.11.2
+      aria-query: 5.3.0
+      axobject-query: 4.0.0
+      code-red: 1.0.4
+      css-tree: 2.3.1
+      estree-walker: 3.0.3
+      is-reference: 3.0.2
+      locate-character: 3.0.0
+      magic-string: 0.30.5
+      periscopic: 3.1.0
     dev: false
 
   /svelte@4.2.8:
