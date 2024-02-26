@@ -61,10 +61,6 @@
 		max-width: 90vw;
 	}
 
-	.toc-wrapper :global(aside.toc > nav > ol > li:hover) {
-		text-decoration-line: underline;
-	}
-
 	#toc-close {
 		background-color: transparent;
 		border: none;
@@ -75,7 +71,18 @@
 		padding: inherit;
 	}
 
-	#toc-close:hover {
-		color: var(--brand);
+	@media (hover: none) {
+		:root {
+			--toc-li-hover-color: var(--toc-li-color);
+		}
+	}
+
+	@media (hover: hover) {
+		.toc-wrapper :global(aside.toc > nav > ol > li:hover) {
+			text-decoration-line: underline;
+		}
+		#toc-close:hover {
+			color: var(--brand);
+		}
 	}
 </style>
