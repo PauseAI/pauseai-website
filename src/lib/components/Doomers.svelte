@@ -139,6 +139,14 @@
 			source: 'https://x.com/liron/status/1729274710670893262?s=20'
 		},
 		{
+			name: 'Daniel Kokotajlo',
+			title: 'OpenAI researcher & forecaster',
+			probability: '70%',
+			number: 0.7,
+			source:
+				'https://www.lesswrong.com/posts/xDkdR6JcQsCdnFpaQ/adumbrations-on-agi-from-an-outsider?commentId=sHnfPe5pHJhjJuCWW'
+		},
+		{
 			name: 'Dan Hendrycks',
 			title: 'Head of Center for AI Safety',
 			probability: '>80%',
@@ -150,7 +158,8 @@
 			title: 'Founder of MIRI',
 			probability: '>99%',
 			number: 0.99,
-			source: 'https://www.lesswrong.com/posts/j9Q8bRmwCgXRYAgcJ/miri-announces-new-death-with-dignity-strategy'
+			source:
+				'https://www.lesswrong.com/posts/j9Q8bRmwCgXRYAgcJ/miri-announces-new-death-with-dignity-strategy'
 		}
 	]
 </script>

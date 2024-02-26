@@ -14,6 +14,7 @@ You are now one of them.
 - **[Join PauseAI](/join)** and help us grow.
 - **[Join our Discord](https://discord.gg/2XXWXvErfA)**, where our community is most active. We have a **#projects** channel where people are working on campaigns, videos, images, apps and more.
 - **[Meet](/communities)** other people in a PauseAI community near you. If there is no community near you, consider starting one.
+- [**Donate**](/donate) to PauseAI or buy some merchandise in our [store](https://pauseai-shop.fourthwall.com/).
 - [**Send an email to a politician**](/email-builder): emails are completely overpowered. Do it.
 - **[Learn](/learn)** more about AI alignment and the risks we are facing.
 - [**Protest**](/protests): join [one of the protests](/protests) or [organize one yourself](/organizing-a-protest).
@@ -23,6 +24,7 @@ You are now one of them.
 - **Create** [articles](/learn#articles), [videos](/learn#videos) or [memes](https://twitter.com/AISafetyMemes). Collaborate with others in the [Discord server](https://discord.gg/2XXWXvErfA) (in the #projects channel).
 - **Sign petitions**:
   - [International AI Treaty](https://aitreaty.org)
+  - [Ban Superintelligence](https://chng.it/Djjfj2Gmpk)
   - [Demand responsible AI](https://www.change.org/p/artificial-intelligence-time-is-running-out-for-responsible-ai-development-91f0a02c-130a-46e1-9e55-70d6b274f4df)
   - Or one of the **national petitions**: [UK](https://petition.parliament.uk/petitions/639956), [AUS](https://www.aph.gov.au/e-petitions/petition/EN5163), [NL](https://aipetitie.nl)
 - **Follow** our social media channels and stay updated:
@@ -52,10 +54,6 @@ You are now one of them.
 
 - **Help draft policy**. [Draft examples](https://www.campaignforaisafety.org/celebrating-the-winners-law-student-moratorium-treaty-competition/). ([some](https://futureoflife.org/wp-content/uploads/2023/04/FLI_Policymaking_In_The_Pause.pdf) [frameworks](https://www.openphilanthropy.org/research/12-tentative-ideas-for-us-ai-policy/))
 - **Make submissions to government requests for comment** on AI policy ([example](https://ntia.gov/issues/artificial-intelligence/request-for-comments)).
-
-### If you have money to spare
-
-- **Donate** to PauseAI in our [store](https://pauseai-shop.fourthwall.com/) or buy some merchandise! If you don't like what PauseAI does, but you still want to donate to AIsafety, consider donating to the [Campaign for AI Safety](https://www.campaignforaisafety.org/donate/), [Future of Life Institute](https://futureoflife.org/donate/), the [Machine Intelligence Research Institute](https://intelligence.org/donate/) or [NonLinearNetwork](https://nonlinearnetwork.org/)
 
 ### If you can write web content
 
