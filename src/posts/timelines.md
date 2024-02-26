@@ -5,6 +5,7 @@ description: How long do people expect it will take for AGI or superintelligent 
 
 How long do people expect it will take for AGI or superintelligent AI to be developed?
 
+- **Daniel Kokotajlo**: [15% chance in 2024](https://www.lesswrong.com/posts/cxuzALcmucCndYv4a/?commentId=LKThjEJ6W8eQEJiXG)
 - **Metaculus 25% Weak AGI estimate**: [February 2025](https://www.metaculus.com/questions/3479/date-weakly-general-ai-is-publicly-known/)
 - **David Shapiro**: [2026](https://www.youtube.com/watch?v=YXQ6OKSvzfc)
 - **Elon Musk** (X.ai, Tesla): [before 2026](https://www.theverge.com/2023/11/29/23980877/new-york-times-dealbook-summit-elon-musk-bob-iger-david-zaslav) ("discover new physics or invent new technology")
