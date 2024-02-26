@@ -15,7 +15,7 @@
 	export let data
 </script>
 
-<h2 style="width: 0; height: 0; margin: 0; padding: 0; visibility: hidden;">(Top)</h2>
+<h2 style="width: 0; height: 0; margin: 0; padding: 0; visibility: hidden;" data-pagefind-ignore>(Top)</h2>
 
 <div class="layout">
 	<Header />
