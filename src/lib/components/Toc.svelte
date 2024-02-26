@@ -4,9 +4,10 @@
 	import X from 'lucide-svelte/icons/x'
 
 	let closeButton: HTMLElement
-	let desktop: boolean
-	let open: boolean
+	let desktop: boolean | undefined
+	let open: boolean | undefined
 	let nav: HTMLElement | undefined
+	let headings: HTMLHeadingElement[] | undefined
 
 	$: {
 		nav?.appendChild(closeButton)
@@ -23,6 +24,8 @@
 		bind:open
 		bind:nav
 		bind:desktop
+		bind:headings
+		hide={(headings?.length ?? 0) <= 1}
 	/>
 </div>
 
