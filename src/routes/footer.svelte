@@ -33,11 +33,12 @@
 		<div class="column">
 			<h2>Take Action</h2>
 			<a href="/join">Join PauseAI</a>
-			<a href="/communities">Local communities</a>
 			<a href="/action">How you can help</a>
+			<a href="/communities">Local communities</a>
+			<a href="donate">Donate</a>
 			<a href="/protests">Protests</a>
 			<a href="/organizing-a-protest">Organize a protest</a>
-			<a href="/writing-a-letter">Write a letter</a>
+			<a href="/email-builder">Email builder</a>
 			<a href="/lobby-tips">Lobby tips</a>
 		</div>
 		<div class="column">
