@@ -16,6 +16,7 @@ The following contains information about the Dutch legal entity behind PauseAI:
 - Goal: "Mitigate the most catastrophic risks of AI."
 - Contact: [Joep Meindertsma](mailto:joep@pauseai.info)
 - Address: Skopjestraat 26, 3541ES Utrecht, The Netherlands
+- ANBI Status: in progress, requested at the Dutch tax authorities.
 
 ### Policy Plan 2024-2025 (Beleidsplan)
 
