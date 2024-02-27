@@ -2,6 +2,7 @@
 	import { fade } from 'svelte/transition'
 	import Toc from 'svelte-toc'
 	import X from 'lucide-svelte/icons/x'
+	import List from 'lucide-svelte/icons/list'
 
 	let closeButton: HTMLElement
 	let desktop: boolean | undefined
@@ -26,7 +27,11 @@
 		bind:desktop
 		bind:headings
 		hide={(headings?.length ?? 0) <= 1}
-	/>
+	>
+		<svelte:fragment slot="open-toc-icon">
+			<List size="2rem"/>
+		</svelte:fragment>
+	</Toc>
 </div>
 
 <button
