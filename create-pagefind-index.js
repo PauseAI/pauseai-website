@@ -2,7 +2,7 @@ import { promises as fs } from 'fs'
 import * as pagefind from 'pagefind'
 
 const MANIFEST_PATH = '.netlify/edge-functions/manifest.json'
-const EXCLUDE_PATHS = ['/pagefind/.*']
+const EXCLUDE_PATHS = ['^/pagefind/.*$']
 
 const { index } = await pagefind.createIndex();
 await index.addDirectory({ path: 'build' })
