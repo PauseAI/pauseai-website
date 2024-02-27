@@ -26,7 +26,7 @@
 		</svelte:fragment>
 		<svelte:fragment slot="title">
 			<div class="toc-head">
-				<h2 class="toc-title-heading">Contents</h2>
+				<h2 class="toc-title-heading toc-exclude">Contents</h2>
 				<button
 					class="toc-close"
 					on:click={() => (open = false)}
