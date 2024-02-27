@@ -9,6 +9,7 @@ Joep Meindertsma ([joep@pauseai.info](mailto:joep@pauseai.info))
 ## Logo, materials
 
 Our logo and other material can be exported from [this Figma template](https://www.figma.com/community/file/1233064002969152026) and [this Google Drive folder](https://drive.google.com/drive/folders/1bQ_MZ8giK-Mee4ABkO0BgcFInaXruNpa?usp=sharing).
+If you want to create PauseAI-related material yourself, you can use our brand color *#FF9214* and the fonts *Saira Condensed* (700) and *Roboto Slab* (300, 700).
 
 ## International Media coverage
 
@@ -42,8 +43,8 @@ Our logo and other material can be exported from [this Figma template](https://w
 ### UK
 
 - [Express](https://www.express.co.uk/news/uk/1775620/artificial-intelligence-extinction-google-chat-gpt): First London protest (not officially PauseAI)
-- [Islington Tribune](https://www.islingtontribune.co.uk/article/watch-out-the-robots-are-coming): Deepmind protest
-- [Camden New Journal](https://www.camdennewjournal.co.uk/article/:protesters-tell-tech-quarter-companies-to-press-pause-on-artificial-intelligence-research): Deepmind protest
+- [Islington Tribune](https://www.islingtontribune.co.uk/article/watch-out-the-robots-are-coming): DeepMind protest
+- [Camden New Journal](https://www.camdennewjournal.co.uk/article/:protesters-tell-tech-quarter-companies-to-press-pause-on-artificial-intelligence-research): DeepMind protest
 - [Islington Tribune](https://www.islingtontribune.co.uk/article/what-happens-in-bletchley-stays-in): Bletchley Park protest
 
 ### NL
