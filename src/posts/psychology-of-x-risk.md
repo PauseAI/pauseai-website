@@ -186,6 +186,14 @@ If someone feels like the end of the world isn't that big of a deal (you would b
 Humanity isn't just some abstract concept, they are your friends, your family, and yourself.
 All the people you care about will die.
 
+### Our behaviour is shaped by our environment and primitive minds
+
+Our actions are really conditioned by what is seen as normal and good and reasonable. No matter how much we would want to act doing something, a lot of the time we fear consciously or unconsciously to be excluded by society for taking uncommon actions. Add to that the fact that people just talking about and doing other stuff unrelated to what you want to do will override what is in your mind and will motivate you to do other stuff on a daily basis, and you have as a result a recipe for only caring for what is normal on your close circles and online feeds.
+
+Sure, extinction risks deserve a **lot** more of our time, energy and attention. Our reactions to them should be more like life-or-death situations that fill us with adrenaline. But, because of the abstract nature of the problems, most people who learn about them just end up carrying on with their days as if they have learned nothing.
+
+Because of that, if you care about the risks of AI, a way to use your monkey brain in our favor is to be active on a [local community](/communities) or the [Discord of PauseAI](https://discord.gg/2XXWXvErfA).
+
 ### Coping mechanisms (preventing action)
 
 The same coping mechanisms that prevent people from _believing_ in existential risk also prevent them from _acting_ on it.
