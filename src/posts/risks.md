@@ -80,7 +80,7 @@ The accumulation of power side of that equation had and will continue to incenti
 This, in return, introduces more points of failure and downplays the associated risks by endorsing the idea that they can be handled unilaterally, by a company or a government.
 Such a scenario would not just disempower every other person and nation in the world, but also catalyze global powers to enter into conflict.
 So it's crucial to act as soon as possible, before the race dynamics extend further, before the already most powerful governments and corporations consolidate their positions, and before a war is triggered in response.
-To not let the short-term incentives lead the world to a catastrophe, we need international cooperation.
+We need international cooperation because the only winning move on this strange game is not to play, but to pause.
 
 ### Authoritarian governments
 
