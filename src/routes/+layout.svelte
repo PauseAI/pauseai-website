@@ -1,16 +1,21 @@
 <script lang="ts">
+	import { Toaster } from 'svelte-french-toast'
+
 	import Footer from './footer.svelte'
 	import Header from './header.svelte'
 	import PageTransition from './transition.svelte'
+	import Toc from '$lib/components/Toc.svelte'
 
-	import '@fontsource/roboto-slab/300.css';
-	import '@fontsource/roboto-slab/700.css';
-	import '@fontsource/saira-condensed/700.css';
+	import '@fontsource/roboto-slab/300.css'
+	import '@fontsource/roboto-slab/700.css'
+	import '@fontsource/saira-condensed/700.css'
 
 	import '../app.css'
 
 	export let data
 </script>
+
+<h2 style="width: 0; height: 0; margin: 0; padding: 0; visibility: hidden;" data-pagefind-ignore>(Top)</h2>
 
 <div class="layout">
 	<Header />
@@ -23,6 +28,20 @@
 
 	<Footer />
 </div>
+
+<Toaster
+	toastOptions={{
+		style: 'background-color: var(--bg-subtle); color: var(--text)',
+		iconTheme: {
+			primary: 'var(--brand)',
+			secondary: 'white'
+		}
+	}}
+/>
+
+{#if !['/', '/outcomes', '/pdoom'].includes(data.url)}
+    <Toc />
+{/if}
 
 <style>
 	/* @import url('$lib/reset.css');

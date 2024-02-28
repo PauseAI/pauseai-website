@@ -10,10 +10,13 @@ Here are some resources to get you started.
 
 - [Could AI wipe out humanity?](https://youtu.be/qzyEgZwfkKY?si=ief1l2PpkZ7_s6sq) (10 mins). The best shortest and simple introduction to the problem, from a down-to-earth perspective. 
 - [Don't look up - The Documentary: The Case For AI As An Existential Threat](https://www.youtube.com/watch?v=U1eyUjVRir4) (17 mins). Powerful and nicely edited documentary about the dangers of AI, with many expert quotes from interviews.
+- [Countries create AI for reasons](https://youtu.be/-9V9cIixPbM?si=L9q6PF2D6h_EBEwF) (10 mins). Caricature of the race to a superintelligence and its dangers.
 - [Max Tegmark | Ted Talk (2023)](https://www.youtube.com/watch?v=xUNx_PxNHrY) (15 mins). AI capabilities are improving quicker than expected.
 - [Tristan Harris | Nobel Prize Summit 2023](https://www.youtube.com/watch?v=6lVBp2XjWsg) (15 mins). Talk in why we need to "Embrace our paleolithic brains, upgrade our medieval institutions and bind god-like technology".
 - [Sam Harris | Can we build AI without losing control over it?](https://www.youtube.com/watch?v=8nt3edWLgIg) (15 mins). Ted talk about the crazy situation we're in.
+- [Ilya: the AI scientist shaping the world](https://youtu.be/9iqn1HhFJ6c?si=WnzvpdsPtgCvqAZg) (12 mins). Co-founder and former Chief Scientist at OpenAI explains how AGI will take control over everything and that's why we must teach them to care for humans.
 - [Exploring the dangers from Artificial Intelligence](https://www.youtube.com/watch?v=sPyu_dTSma0&t=1328s) (25 mins). Summary of cybersecurity, biohazard and power-seeking AI risks.
+- [Why this top AI guru thinks we might be in extinction level trouble | The InnerView](https://youtu.be/YZjmZFDx-pA?si=Y7QUxTaJcuC6LVji) (26 mins). Interview with Connor Leahy on AI X-risks on television.
 - [The AI Dilemma](https://www.youtube.com/watch?v=xoVJKj8lcNQ&t=1903s) (1hr). Presentation about the dangers of AI and the race which AI companies are stuck in.
 - [Robert Miles' YouTube videos](https://www.youtube.com/watch?v=tlS5Y2vm02c&list=PLfHsskCxi_g-c62a_dmsNuHynaXsRQm40) are a great place to start understanding most of the fundamentals of AI alignment.
 
@@ -37,16 +40,21 @@ Here are some resources to get you started.
 
 - [The 'Don't Look Up' Thinking That Could Doom Us With AI](https://time.com/6273743/thinking-that-could-doom-us-with-ai/) (by Max Tegmark)
 - [Pausing AI Developments Isn't Enough. We Need to Shut it All Down](https://time.com/6266923/ai-eliezer-yudkowsky-open-letter-not-enough/) (by Eliezer Yudkowsky)
+- [The Case for Slowing Down AI](https://www.vox.com/the-highlight/23621198/artificial-intelligence-chatgpt-openai-existential-risk-china-ai-safety-technology) (by Sigal Samuel)
 - [The AI Revolution: The Road to Superintelligence](https://waitbutwhy.com/2015/01/artificial-intelligence-revolution-1.html) (by WaitButWhy)
 - [How rogue AIs may arise](https://yoshuabengio.org/2023/05/22/how-rogue-ais-may-arise/) (by Yoshua Bengio)
+<!-- - [a casual intro to AI doom and alignment](https://carado.moe/ai-doom.html) 
+I like it and the fact that is a more light reading, but I'm not sure if I want to put it because it defines alignment as just the technical stuff and redirects people to just do technical work -->
 
 ## Books
 
-- [Superintelligence: Paths, Dangers, Strategies](https://www.goodreads.com/en/book/show/20527133) (Nick Bostrom)
-- [The Alignment Problem](https://www.goodreads.com/book/show/50489349-the-alignment-problem) (Brian Christian)
-- [Human Compatible: Artificial Intelligence and the Problem of Control](https://www.goodreads.com/en/book/show/44767248) (Stuart Russell)
-- [Our Final Invention: Artificial Intelligence and the End of the Human Era](https://www.goodreads.com/en/book/show/17286699) (James Barrat)
-- [The Precipice: Existential Risk and the Future of Humanity](https://www.goodreads.com/en/book/show/50963653) (Toby Ord)
+- [AI: Unexplainable, Unpredictable, Uncontrollable](https://www.goodreads.com/book/show/197554072-ai) (Roman Yampolskiy, 2024)
+- [Uncontrollable: The Threat of Artificial Superintelligence and the Race to Save the World](https://www.goodreads.com/book/show/202416160-uncontrollable) (Darren McKee, 2023). Get it for [free](https://impactbooks.store/cart/47288196366640:1?discount=UNCON-P3SFRS)!
+- [The Precipice: Existential Risk and the Future of Humanity](https://www.goodreads.com/en/book/show/50963653) (Toby Ord, 2020)
+- [The Alignment Problem](https://www.goodreads.com/book/show/50489349-the-alignment-problem) (Brian Christian, 2020)
+- [Human Compatible: Artificial Intelligence and the Problem of Control](https://www.goodreads.com/en/book/show/44767248) (Stuart Russell, 2019)
+- [Superintelligence: Paths, Dangers, Strategies](https://www.goodreads.com/en/book/show/20527133) (Nick Bostrom, 2014)
+- [Our Final Invention: Artificial Intelligence and the End of the Human Era](https://www.goodreads.com/en/book/show/17286699) (James Barrat, 2013)
 
 ## Courses
 
@@ -54,12 +62,12 @@ Here are some resources to get you started.
 - [CHAI Bibliography of Recommended Materials](https://humancompatible.ai/bibliography) (50hrs+)
 - [AISafety.training](https://aisafety.training/): Overview of training programs, conferences, and other events
 
-## Organisations
+## Organizations
 
 - [Future of Life Institute](https://futureoflife.org/cause-area/artificial-intelligence/) started the [open letter](https://futureoflife.org/open-letter/pause-giant-ai-experiments/), led by Max Tegmark.
 - [FutureSociety](https://thefuturesociety.org/about-us/)
 - [Conjecture](https://www.conjecture.dev/). Start-up that is working on AI alignment and AI policy, led by Connor Leahy.
-- [Existential Risk Observatory](https://existentialriskobservatory.org/). Dutch organisation that is informing the public on x-risks and studying communication strategies.
+- [Existential Risk Observatory](https://existentialriskobservatory.org/). Dutch organization that is informing the public on x-risks and studying communication strategies.
 - [Center for AI Safety](https://www.safe.ai/) (CAIS) is a research center at the Czech Technical University in Prague, led by
 - [Center for Human-Compatible Artificial Intelligence](https://humancompatible.ai/about/) (CHAI), led by Stuart Russell.
 - [Machine Intelligence Research Institute](https://intelligence.org/) (MIRI), doing mathematical research on AI safety, led by Eliezer Yudkowsky.

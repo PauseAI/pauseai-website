@@ -3,8 +3,8 @@
 	"name": "pause-ai",
 	"private": true,
 	"scripts": {
-		"dev": "vite dev",
-		"build": "vite build",
+		"dev": "vite dev --host 0.0.0.0",
+		"build": "vite build && node create-pagefind-index.js",
 		"preview": "vite preview",
 		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
 		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
@@ -15,6 +15,7 @@
 		"@sveltejs/adapter-netlify": "^3.0.0",
 		"@sveltejs/kit": "^2.0.2",
 		"@sveltejs/vite-plugin-svelte": "^3.0.1",
+		"@types/node": "^20.11.20",
 		"@typescript-eslint/eslint-plugin": "^5.45.0",
 		"@typescript-eslint/parser": "^5.45.0",
 		"eslint": "^8.28.0",
@@ -34,13 +35,19 @@
 		"@fontsource/manrope": "^4.5.13",
 		"@fontsource/roboto-slab": "^5.0.18",
 		"@fontsource/saira-condensed": "^5.0.8",
+		"@pagefind/default-ui": "^1.0.4",
 		"@types/mapbox-gl": "^2.7.19",
+		"clipboard-polyfill": "^4.0.2",
 		"escape-html": "^1.0.3",
-		"lucide-svelte": "^0.298.0",
+		"html-to-image": "^1.11.11",
+		"lucide-svelte": "^0.325.0",
 		"mapbox-gl": "^3.0.1",
+		"pagefind": "^1.0.4",
 		"rehype-slug": "^5.1.0",
 		"remark-toc": "^9.0.0",
 		"remark-unwrap-images": "^3.0.1",
-		"shiki": "^0.14.1"
+		"shiki": "^0.14.1",
+		"svelte-french-toast": "^1.2.0",
+		"svelte-toc": "^0.5.7"
 	}
 }
