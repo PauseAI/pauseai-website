@@ -36,6 +36,8 @@ Here are some resources to get you started.
 - [The 80,000 Hours Podcast recommended episodes on AI](https://80000hours.org/podcast/on-artificial-intelligence/). Not 80k hours long, but a compilation of episodes of The 80,000 Hours Podcast about AI Safety.
 - [Future of Life Institute Podcast episodes on AI](https://futureoflife.org/podcast/?_category_browser=ai). All of the episodes of the FLI Podcast on the future of Artificial Intelligence.
 
+Podcasts featuring PauseAI members can be found in the [media coverage](/press) list.
+
 ## Articles
 
 - [The 'Don't Look Up' Thinking That Could Doom Us With AI](https://time.com/6273743/thinking-that-could-doom-us-with-ai/) (by Max Tegmark)
@@ -45,6 +47,8 @@ Here are some resources to get you started.
 - [How rogue AIs may arise](https://yoshuabengio.org/2023/05/22/how-rogue-ais-may-arise/) (by Yoshua Bengio)
 <!-- - [a casual intro to AI doom and alignment](https://carado.moe/ai-doom.html) 
 I like it and the fact that is a more light reading, but I'm not sure if I want to put it because it defines alignment as just the technical stuff and redirects people to just do technical work -->
+
+If you want to read what journalists have written about PauseAI, check out the list of [media coverage](/press).
 
 ## Books
 
