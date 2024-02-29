@@ -117,6 +117,15 @@
 			source: 'https://twitter.com/AISafetyMemes/status/1713515843194077583'
 		},
 		{
+			name: 'Joep Meindertsma',
+			title: 'Founder of PauseAI',
+			probability: '40%',
+			note: 'The remaining 60% consists largely of "we can pause".',
+			number: 0.4,
+			source:
+				'https://www.nrc.nl/nieuws/2024/02/16/ai-doomers-zijn-doodsbang-voor-de-computer-ai-zal-proberen-de-macht-over-te-nemen-a4190130'
+		},
+		{
 			name: 'Holden Karnofsky',
 			title: 'Executive Director of Open Philanthropy',
 			probability: '50%',
