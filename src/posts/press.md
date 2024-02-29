@@ -37,6 +37,7 @@ If you want to create PauseAI-related material yourself, you can use our brand c
 - [For Humanity podcast](https://www.youtube.com/watch?v=BryJy9aL_LQ): Interview with Joep Meindertsma, about starting PauseAI, dealing with existential risk, and why we can make this.
 - [The Inside View podcast](https://www.youtube.com/watch?v=5RyttfXTKfs): Interview with Holly Elmore, about starting PauseAI, dealing with existential risk, and why we can make this.
 - [Consistently Candid](https://www.buzzsprout.com/2319950/share): Interview with Joep Meindertsma, about what we can all do to prevent disaster.
+- [Future of Life Institute podcast](https://youtu.be/Q3eRy4t2oPQ?si=U9VxBs2D46oDUYJm): Interview with Holly Elmore on Pausing AI, Hardware Overhang, Safety Research, and Protesting.
 
 ## National Media coverage
 
