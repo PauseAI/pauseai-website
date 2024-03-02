@@ -49,7 +49,7 @@ We have not received significant funding so far.
 Everyone contributing to PauseAI is doing so voluntarily.
 We expect to receive a grant through the LightSpeed network soon.
 
-You can also [donate](https://pauseai-shop.fourthwall.com/en-eur/) to PauseAI if you support our cause!
+You can also [donate](/donate) to PauseAI if you support our cause!
 We use most of the money to enable local communities to organize events.
 
 ## Why do you protest?
