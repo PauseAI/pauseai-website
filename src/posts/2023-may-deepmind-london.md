@@ -3,9 +3,15 @@ title: PauseAI protest @ Google DeepMind - May 19th - 22nd
 description: We are organising a protest at Google DeepMind to demand a summit to pause AI development.
 ---
 
+<script>
+    import WidgetConsent from '$lib/components/WidgetConsent.svelte'
+</script>
+
+<WidgetConsent>
 <div>
 <blockquote class="twitter-tweet"><p lang="en" dir="ltr">Proud to be part of the first ever protest calling for a global moratorium on the development of AI systems more powerful than GPT-4! See you at 5pm Monday for more of the same. <a href="https://twitter.com/hashtag/PauseAI?src=hash&amp;ref_src=twsrc%5Etfw">#PauseAI</a> <a href="https://t.co/ZM1d49tsIc">pic.twitter.com/ZM1d49tsIc</a></p>&mdash; Alistair Stewart (@alistair___s) <a href="https://twitter.com/alistair___s/status/1659559271351058433?ref_src=twsrc%5Etfw">May 19, 2023</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 </div>
+</WidgetConsent>
 
 Please read the PauseAI Protestors' Code of Conduct [here](https://pauseai.info/protesters-code-of-conduct) before attending this protest.
 

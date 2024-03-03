@@ -2,6 +2,10 @@
 title: "San Francisco's 3-Day Picket: Demanding Pause on Advanced AI Development Near OpenAI"
 ---
 
+<script>
+    import WidgetConsent from '$lib/components/WidgetConsent.svelte'
+</script>
+
 - May 20th, 2023, starting at 1 PM. Duration: 3 days.
 - [OpenAI Headquarters, 3180 18th St, San Francisco, CA 94110, United States](https://goo.gl/maps/8mEdEwRhp1UyoTJi8?coh=178571&entry=tt)
 - [Sign up here](https://discord.gg/Epg6AsmQ?event=1103338741906550844)
@@ -37,6 +41,8 @@ We believe OpenAI is in the perfect position to take responsibility and support 
 
 ## Media
 
+<WidgetConsent>
 <div>
 <blockquote class="twitter-tweet"><p lang="en" dir="ltr"><a href="https://twitter.com/hashtag/pauseai?src=hash&amp;ref_src=twsrc%5Etfw">#pauseai</a> Second day of picket! <a href="https://t.co/HZqthItVUH">pic.twitter.com/HZqthItVUH</a></p>&mdash; Percy Otebay (@Radlib4) <a href="https://twitter.com/Radlib4/status/1660027527753236481?ref_src=twsrc%5Etfw">May 20, 2023</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 </div>
+</WidgetConsent>

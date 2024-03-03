@@ -2,9 +2,15 @@
 title: PauseAI protest @ FCDO, London, July 18th
 ---
 
+<script>
+    import WidgetConsent from '$lib/components/WidgetConsent.svelte'
+</script>
+
+<WidgetConsent>
 <div>
 <blockquote class="twitter-tweet"><p lang="en" dir="ltr">We&#39;re not letting up in London! Today&#39;s protest took place during the first ever UN Security Council meeting on the threat from AI, chaired by UK Foreign Secretary <a href="https://twitter.com/JamesCleverly?ref_src=twsrc%5Etfw">@JamesCleverly</a>. A global pause is the only safe way forward.<br><br>More on UNSC meeting below: <a href="https://t.co/L9hONXogUl">https://t.co/L9hONXogUl</a> <a href="https://t.co/qp4A2fSSvb">pic.twitter.com/qp4A2fSSvb</a></p>&mdash; PauseAI ⏸🤖 (@PauseAI) <a href="https://twitter.com/PauseAI/status/1681403296693534725?ref_src=twsrc%5Etfw">July 18, 2023</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 </div>
+</WidgetConsent>
 
 - PauseAI protest, urging the United Nations Security Council to implement a global pause on the largest AI training runs.
 - Where: outside the Foreign, Commonwealth and Development Office (FCDO), King Charles Street, Westminster, London, SW1A 2AH

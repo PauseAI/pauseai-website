@@ -3,6 +3,10 @@ title: PauseAI / No AGI Protest @ OpenAI San Francisco - February 12th, 2024
 description: We are organizing a protest to demand a pause on dangerous AI development.
 ---
 
+<script>
+    import WidgetConsent from '$lib/components/WidgetConsent.svelte'
+</script>
+
 - PauseAI protest
 - Where: San Francisco, OpenAI HQ
 - When: 12th of February 2024, 16:30 - 18:00
@@ -41,6 +45,8 @@ According to their charter, “OpenAI’s mission is to ensure that artificial g
 - [ReadWrite](https://readwrite.com/stop-working-with-pentagon-openai-staff-face-protests/)
 - [VentureBeat](https://venturebeat.com/ai/protesters-gather-outside-openai-office-opposing-military-ai-and-agi/)
 
+<WidgetConsent>
 <div>
 <blockquote class="twitter-tweet"><p lang="en" dir="ltr">From the protest yesterday at OpenAI HQ, covered in Bloomberg: <a href="https://t.co/sgp1KFoFPs">https://t.co/sgp1KFoFPs</a> <a href="https://t.co/N6fHGIlOYm">pic.twitter.com/N6fHGIlOYm</a></p>&mdash; PauseAI US ⏸️ (@pauseaius) <a href="https://twitter.com/pauseaius/status/1757604719047114786?ref_src=twsrc%5Etfw">February 14, 2024</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 </div>
+</WidgetConsent>

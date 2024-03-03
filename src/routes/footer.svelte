@@ -2,6 +2,7 @@
 	import ExternalLink from '$lib/components/custom/a.svelte'
 	import Toggle from '$lib/components/Toggle.svelte'
 	import Edit from '$lib/components/Edit.svelte'
+	import WithdrawWidgetConsent from '$lib/components/WithdrawWidgetConsent.svelte'
 </script>
 
 <footer>
@@ -58,6 +59,7 @@
 		<div class="column">
 			<h2>Other</h2>
 			<Toggle />
+			<WithdrawWidgetConsent />
 			<Edit />
 			<a href="/posts">All pages</a>
 			<a href="/rss.xml" target="_blank">RSS</a>
