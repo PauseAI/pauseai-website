@@ -3,15 +3,9 @@ title: PauseAI protest @ The Hague, Netherlands - August 11th
 description: We are organizing a protest to demand a pause on dangerous AI development.
 ---
 
-<script>
-    import WidgetConsent from '$lib/components/WidgetConsent.svelte'
-</script>
-
-<WidgetConsent>
 <div>
 <blockquote class="twitter-tweet"><p lang="en" dir="ltr">We protested in The Hague, Netherlands to ask our government to prioritise mitigation of AI risks. We had a few speeches, talked to people on the streets, handed out flyers and had a good time!<br><br>Check out the press release (EN + NL) for more information: <a href="https://t.co/Dd7CXHlajc">https://t.co/Dd7CXHlajc</a> <a href="https://t.co/T306vZD974">pic.twitter.com/T306vZD974</a></p>&mdash; PauseAI ⏸🤖 (@PauseAI) <a href="https://twitter.com/PauseAI/status/1690290512643719168?ref_src=twsrc%5Etfw">August 12, 2023</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 </div>
-</WidgetConsent>
 
 - PauseAI protest
 - Where: Wijnhaven, The Hague
