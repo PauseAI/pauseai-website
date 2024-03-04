@@ -61,6 +61,8 @@ We use most of the money to enable local communities to organize events.
 - It's a social bonding experience. You meet other people who share your concerns and willingness to take action.
 - Check out [this amazing article](https://forum.effectivealtruism.org/posts/4ez3nvEmozwPwARr9/a-case-for-the-effectiveness-of-protest) for more insights on why protesting works
 
+If you want to [organize a protest](/organizing-a-protest), we can help you with advice and resources.
+
 ## How likely is it that superintelligent AI will cause very bad outcomes, like human extinction?
 
 We have composed [a list of 'p(doom)' values](/pdoom) (probability of bad outcomes) from various notable experts in the field.

@@ -57,7 +57,7 @@ If you want to create PauseAI-related material yourself, you can use our brand c
 - [AI Coalitie](https://nlaic.com/agenda/communitydag-invloed-van-ai-op-cultuur-en-media/)
 - [RUW Den Bosh](https://ruwdenbosch.nl/paranoide-over-ai/): Debate night
 - [Leidsch Dagblad](https://www.leidschdagblad.nl/cnt/dmf20231228_53324374): Interview with Joep Meindertsma
-- [Daniel's Talkshow](https://www.twitch.tv/videos/2066712293?t=01h48m38s): Twitch stream with Joep Meindertsma
+- [Daniel's Talkshow](https://www.youtube.com/watch?v=mGzwtSqmDsU): Discussion with Joep Meindertsma and Otto Barten
 
 ### DE
 
