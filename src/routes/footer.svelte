@@ -2,7 +2,7 @@
 	import ExternalLink from '$lib/components/custom/a.svelte'
 	import Toggle from '$lib/components/Toggle.svelte'
 	import Edit from '$lib/components/Edit.svelte'
-	import WithdrawWidgetConsent from '$lib/components/WithdrawWidgetConsent.svelte'
+	import WithdrawWidgetConsent from '$lib/components/widget-consent/WithdrawWidgetConsent.svelte'
 </script>
 
 <footer>

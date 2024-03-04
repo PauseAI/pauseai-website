@@ -3,7 +3,7 @@ title: "San Francisco's 3-Day Picket: Demanding Pause on Advanced AI Development
 ---
 
 <script>
-    import WidgetConsent from '$lib/components/WidgetConsent.svelte'
+    import WidgetConsent from '$lib/components/widget-consent/WidgetConsent.svelte'
 </script>
 
 - May 20th, 2023, starting at 1 PM. Duration: 3 days.

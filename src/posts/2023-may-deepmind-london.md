@@ -4,7 +4,7 @@ description: We are organising a protest at Google DeepMind to demand a summit t
 ---
 
 <script>
-    import WidgetConsent from '$lib/components/WidgetConsent.svelte'
+    import WidgetConsent from '$lib/components/widget-consent/WidgetConsent.svelte'
 </script>
 
 <WidgetConsent>

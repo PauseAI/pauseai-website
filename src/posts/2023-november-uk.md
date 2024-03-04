@@ -4,7 +4,7 @@ description: We are organising a protest at Bletchley Park, during the AI Safety
 ---
 
 <script>
-    import WidgetConsent from '$lib/components/WidgetConsent.svelte'
+    import WidgetConsent from '$lib/components/widget-consent/WidgetConsent.svelte'
 </script>
 
 - [Facebook event](https://www.facebook.com/events/347499967619516/347499967619516)
