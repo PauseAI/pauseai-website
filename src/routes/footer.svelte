@@ -59,7 +59,7 @@
 		<div class="column">
 			<h2>Other</h2>
 			<Toggle />
-			<WithdrawWidgetConsent />
+      <WithdrawWidgetConsent />
 			<Edit />
 			<a href="/posts">All pages</a>
 			<a href="/rss.xml" target="_blank">RSS</a>
