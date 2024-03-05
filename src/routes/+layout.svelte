@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { Toaster } from 'svelte-french-toast'
+	import { ProgressBar } from '@prgm/sveltekit-progress-bar'
 
 	import Footer from './footer.svelte'
 	import Header from './header.svelte'
@@ -42,6 +43,8 @@
 {#if !['/', '/outcomes', '/pdoom'].includes(data.url)}
     <Toc />
 {/if}
+
+<ProgressBar color="var(--brand)" />
 
 <style>
 	/* @import url('$lib/reset.css');
