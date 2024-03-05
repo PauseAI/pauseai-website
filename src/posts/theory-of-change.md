@@ -19,7 +19,7 @@ This means - we need an _international pause_.
 We can get there in two ways:
 
 1. **An international treaty**. We [banned blinding laser weapons](https://en.wikipedia.org/wiki/Protocol_on_Blinding_Laser_Weapons) and [CFCs](https://en.wikipedia.org/wiki/Montreal_Protocol) through a treaty, so we can also ban superhuman AI through a treaty. These treaties are often initiated by a small group of countries, and then other countries join in. A [summit](/summit) is often the event where such a treaty is initiated and signed.
-2. **A unilateral supply-chain pause**. The AI supply chain is highly centralized. Virtually all AI chips used in training runs are created by NVidia,
+2. **A unilateral supply-chain pause**. The AI supply chain is highly centralized. Virtually all AI chips used in training runs are designed by NVidia, produced by TSMC, which uses lithography machines by ASML. If any of these monopolies were to pause, the entire AI industry would pause. We can achieve this by lobbying these companies, and by lobbying the governments that have leverage over these companies.
 
 ## What do we do to get there?
 
