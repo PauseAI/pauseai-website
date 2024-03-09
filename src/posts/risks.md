@@ -31,11 +31,11 @@ Also, it would lay the groundwork for future regulation aimed at mitigating fake
 ### Deepfakes and impersonification
 
 Fake content created with AI, also called deepfakes, not only can steal famous people's identities and [create disinformation](https://time.com/6565446/biden-deepfake-audio/), but they can also impersonate you.
-Anyone with photos, videos, or audios of someone and enough knowledge, can create deepfakes of them and use them to commit fraud, harass them, or create sexually nonconsensual material.
+Anyone with photos, videos, or audios of someone and enough knowledge, can create deepfakes of them and use them to commit fraud, harass them, or create sexually non-consensual material.
 About 96% of all deepfake content is sexual material.
 
 As the section on fake news says, fake media wouldn't be prevented altogether by our proposal, but they could be reduced to a certain extent.
-A not so small extent when you take into account that AI multipurpose systems like chatbots have become really popular and we would be stopping them from being more capable and popular, which could include systems designed with less filters and trainable with new faces.
+A not so small extent when you take into account that AI multipurpose systems like chatbots have become really popular, and we would be stopping them from being more capable and popular, which could include systems designed with fewer filters and trainable with new faces.
 
 ### Biases and discrimination
 
@@ -67,15 +67,15 @@ The way we distribute wealth in our society is not prepared for this.
 
 ### Mental health, addiction and disconnection between people
 
-Social media, videogames and other software have been using AI systems to maximize their profit while taking advantage of our primate minds for some time already, damaging our mental health in the proccess. Addictions to social media, between other things, isolate us from each other, not only in political bubbles but also in cultural and social one-person bubbles, making us lonelier.
+Social media, video games and other software have been using AI systems to maximize their profit while taking advantage of our primate minds for some time already, damaging our mental health in the process. Addictions to social media, between other things, isolate us from each other, not only in political bubbles but also in cultural and social one-person bubbles, making us lonelier.
 
-They're the first proof of the unintended, unprevisted global consequences that these technologies can bring and how complicated aligning AI systems with "human values" can be. Also the addiction to products and services that profit from personal data and separate people while creating network effects play on a viscious cycle with the accumulation of economical power of these companies and the division between people that leave us as powerless individuals whether it's intended or not.
+They're the first proof of the unintended and unexpected global consequences that these technologies can bring and how complicated aligning AI systems with "human values" can be. Also, the addiction to products and services that profit from personal data and separate people while creating network effects play on a vicious cycle with the accumulation of economic power of these companies and the division between people that leave us as powerless individuals whether it's intended or not.
 
-A pause in the biggest models could help preventing chatbots for becoming so good, multimodal and multipurpose, to the point it would be common to be addicted and substitute full relationships (be romantic, sexual or platonic) with them. Also, if those apps are easy to access, they could shape the understading, personality and view of the world of children that could prefer talking with it over family and friends.
+A pause in the biggest models could help to prevent chatbots for becoming so good, multimodal and multipurpose, to the point it would be common to be addicted and substitute full relationships (be romantic, sexual or platonic) with them. Also, if those apps are easy to access, they could shape the understanding, personality and view of the world of children that could prefer talking with it over family and friends.
 
 ### Power accumulation, war and the race to the precipice
 
-If this economic and technological inequality stems from a handful of public and private entities producing multiple single-purpose AIs or a few multipurpose AI, it could lead to a short accumulation of power that will probably result on a catastrophe for all.
+If this economic and technological inequality stems from a handful of public and private entities producing multiple single-purpose AIs or a few multipurpose AIs, it could lead to a short accumulation of power that will probably result on a catastrophe for all.
 The accumulation of power side of that equation had and will continue to incentivize more actors to join the race to the bottom and accelerate the development of larger AI systems.
 This, in return, introduces more points of failure and downplays the associated risks by endorsing the idea that they can be handled unilaterally, by a company or a government.
 Such a scenario would not just disempower every other person and nation in the world, but also catalyze global powers to enter into conflict.
@@ -153,7 +153,7 @@ We'd be introducing a new species to the planet that could outsmart us and outco
 ### Human disempowerment
 
 Even if we manage to create only AI systems that we can control individually, we could lose our power to make important decisions incrementally each time one becomes implemented inside institutions or popularized in everyday life.
-Those systems would end up having more input from other systems than from humans, and, if we cannot coordinate quick enough or we lack crucial knowledge about the functioning of these systems, we could end up without control over our future.
+Those systems would end up having more input from other systems than from humans, and, if we cannot coordinate quick enough, or we lack crucial knowledge about the functioning of these systems, we could end up without control over our future.
 
 It would be a civilization in which each system is optimizing for different objectives, there is not a clear direction for where everything is heading, and there is no way of changing it.
 The technical knowledge required to modify these systems could be lacking in the first place or lost over time, as we become more and more dependent on technology, and the technology becomes more complex.
@@ -165,7 +165,7 @@ The systems may achieve their goals, but those goals might not entirely encapsul
 As AI continues to advance, future systems may become incredibly sophisticated, replicating neural structures and functions that are more akin to the human brain.
 This increased complexity might lead to emergent properties like subjectivity and/or consciousness, so those AIs would be deserving of moral considerations and be treated well.
 Would be like "digital people".
-The thing is that, given our present lack of knowledge about consciousness and the nature of neural networks, we won't have a way to determine whether some AIs would have any type of experience and what does the quality of those experiences would depend on.
+The thing is that, given our present lack of knowledge about consciousness and the nature of neural networks, we won't have a way to determine whether some AIs would have any type of experience and what the quality of those experiences would depend on.
 If the AIs continue to be produced with only their capabilities in mind, through a process we don't fully understand, people will keep on using them as tools ignoring what their desires could be, and that they could be actually enslaving digital people.
 
 ### Suffering lock-in risks
