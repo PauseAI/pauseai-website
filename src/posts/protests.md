@@ -9,7 +9,12 @@ description: When and where we will be protesting.
 
 ## Past Protests
 
+### 2024
+
 - [12th of February, OpenAI, SF](/2024-february)
+
+### 2023
+
 - [1st of November, Bletchley Park, UK](/2023-november-uk)
 - [21st of October, International protest](/2023-oct)
 - [29th of September, San Francisco](https://metaprotest.org/) (not officially PauseAI)
