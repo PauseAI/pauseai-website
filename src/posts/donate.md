@@ -19,7 +19,7 @@ With your financial support, we can professionalize and have a bigger impact.
 ## What have we already achieved
 
 - 1000+ people who have [joined](/join) PauseAI, many of whom are actively working on various projects (lobbying, protesting, making media, being active on social media, etc.)
-- Organized 15+ [protests](/protests) in 10+ countries.
+- Organized 15+ [protests](/protests) in 7 countries.
 - [Media appearances](/press) on major news outlets, podcasts, documentaries, TV and more.
 - Meetings with politicians and other stakeholders.
 
