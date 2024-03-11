@@ -29,6 +29,7 @@ If you want to create PauseAI-related material yourself, you can use our brand c
 - [NHK World Japan](https://www3.nhk.or.jp/nhkworld/en/news/backstories/3047/): Coverage of February 2024 OpenAI protest
 - [Futurism](https://futurism.com/protesters-swarm-openai): Coverage of February 2024 OpenAI protest
 - [Le Monde](https://www.lemonde.fr/en/economy/article/2023/11/27/openai-the-beginnings-of-the-sam-altman-drama_6291282_19.html)
+- [ComputerWorld](https://www.computerworld.com/article/3714261/sam-altmans-pledges-about-ai-responsibility-dont-mean-much-experts.html): Interview with Joep Meindertsma about OpenAI vs Musk.
 
 ## Podcasts
 

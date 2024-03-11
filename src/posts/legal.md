@@ -14,23 +14,31 @@ The following contains information about the Dutch legal entity behind PauseAI:
 - RSIN: 866227696
 - Bank Account: NL31BUNQ2109903155 ([donate](/donate))
 - Goal: "Mitigate the most catastrophic risks of AI."
+- Founding date: 13-02-2024
 - Contact: [Joep Meindertsma](mailto:joep@pauseai.info)
 - Address: Skopjestraat 26, 3541ES Utrecht, The Netherlands
 - ANBI Status: in progress, requested at the Dutch tax authorities.
 
-### Policy Plan 2024-2025 (Beleidsplan)
+### Policy Plan 2024-2025 ("Beleidsplan")
 
 It is our goal to prevent catastrophic risks from AI. We aim to achieve this by taking the following actions:
 
 - Grow a community of volunteers to advocate for AI safety.
-- Inform the public by writing articles, participating in interviews/podcasts, and organizing events.
-- Facilitate community growth by organizing social events.
-- Distribute donations to projects that align with our goals.
-- Organize protests and other forms of activism to raise awareness about the risks of AI.
-- Educate volunteers on how to become more effective advocates.
-- Research policy measures and update our proposal accordingly.
-- Raise funds to support our activities through donations, selling merchandise (through [the store](https://pauseai-shop.fourthwall.com/)) and applying for grants.
-- All funds will be used to support the above activities.
+- Inform the public through social media, writing articles, participating in [interviews/podcasts](/press), and organizing events.
+- Facilitate community [growth](/growth-strategy) by organizing social events.
+- Distribute [donations](/donate) to projects that align with our goals.
+- Organize [protests](/protests) and other forms of activism to raise awareness about the risks of AI.
+- Educate [volunteers](/join) on how to become more effective advocates.
+- Research policy measures and update [our proposal](/proposal) accordingly.
+
+#### Financial accountability ("Financieele paragraaf")
+
+We raise funds to support our activities through [donations](/donate), selling merchandise (through [the store](https://pauseai-shop.fourthwall.com/)) and applying for grants.
+The funds will be used to cover the costs of our activities, such as hiring people, travel expenses, materials for events, marketing expenses, and other costs related to our mission.
+We also expect to provide grants ("PauseAI MicroGrants") to volunteers who want to organize events, create content or otherwise contribute to our mission.
+Our first bookkeeping year is longer than one year - it starts from our founding date (13-02-2024) year ends on 31-12-2025, after which we will publish an annual report.
+Received funds are managed by the board and are used to cover the costs of our activities.
+If we receive more funds than we can spend, we will save the excess funds for future activities.
 
 ### Report of activities
 
