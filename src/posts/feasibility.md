@@ -13,27 +13,27 @@ It requires all of us to allow these companies to gamble with our future.
 We understand where these beliefs come from and that it will not be easy to get a pause on the development of the biggest models. 
 But it is also not easy to make an accurate assessment on how likely it is to happen, and this page seeks to argue that a pause is not as unlikely as some people seem to believe.
 
-Those beliefs are not only overly confident, but they also work as a defeating self-fullfilling prophecy. 
+Those beliefs are not only overly confident, but they also work as a defeating self-fulfilling prophecy. 
 We shouldn't give up without even trying it. 
 Quite the contrary, given that this could be the best chance for regular people to have an impact in the world and the future of the human race. 
 
 ## Power over companies and governments
 
-Although each proof of incomptence or malice of our governments, companies and systems can lure us into a defeatist thinking, where coordination is too hard, the interests of the people are not well represented, and/or are represented but are stupid, we fail to recognize the victories through out history.
+Although each proof of incompetence or malice of our governments, companies and systems can lure us into a defeatist thinking, where coordination is too hard, the interests of the people are not well represented, and/or are represented but are stupid, we fail to recognize the victories throughout history.
 
-As problem solvers, conflict stay on our minds, it eat us alive, stories without it don't drive our attention, there is a reason why they only continue after the happy ending if another conflict appears. 
+As problem solvers, conflict stays in our minds, it eats us alive, stories without it don't drive our attention, there is a reason why they only continue after the happy ending if another conflict appears. 
 The same happens in news and real life. 
 Good events don't drive our curiosity as much as bad ones, and that can lead us to have bad models of the world. 
 
 If what you fear mainly companies or organizations, there's mainly two ways we can control them:
 - Laws, regulations and treaties.
-- Public opinion that force them to autoregulate themselves.
+- Public opinion that forces them to autoregulate themselves.
 Of course the first method is the better one, but reputation which affects customers, investors, employee morale and recruitment, is a reason why we organize protests in front of some AI labs.
 Also, it's important to remember that regulations can benefit companies in the long-term, because of regulatory capture, not losing consumers if the dangers actualize, and to disadvantage competitors.
-So we must be wary that we not only get a pause, but that it is not lift up until it's actually safe to keep developing frontier AI.
+So we must be wary that we not only get a pause, but that it is not lifted until it's actually safe to keep developing frontier AI.
 
-If you fear of governments not taking your safety seriously, that's a more complicated issue. 
-But generally, politicians care of not losing political support to certain degree. 
+If you fear governments not taking your safety seriously, that's a more complicated issue. 
+But generally, politicians care about not losing political support to a certain degree. 
 And, more importantly, they can also be concerned about the risks without the huge bias and legal obligations that some individuals from companies have to maximize profits.
 <!--Also, foreign states can pressure governments... follow up?-->
 
@@ -45,19 +45,19 @@ China and the rest of the world seem pretty far behind, and it's fine if their a
 ### Similar historical cases
 
 For empiric evidence of why a treaty like this is possible, we should look at past global agreements.
-Whether informal or formal, they have been quite common through out history, mainly to resolve disputes and progress human rights.
+Whether informal or formal, they have been quite common throughout history, mainly to resolve disputes and progress human rights.
 A lot of them, whether informal or formal, had against them strong short-term economic incentives such as those provided by AI.
 Including the abolition of slavery, which was argued to be impossible due to short-term economic interests.
 
 But, what about more modern examples of global agreements against new technologies? Some of the most important ones are:
-- The Montreal Protocol, which banned CFCs production in all 197 countries and as a result caused global emissions of ozone-depleting substances decline by more than 99% since 1986. This agreement is the reason why the ozone layer hole is healing now, and we don't hear about it anymore.
+- The Montreal Protocol, which banned CFCs production in all 197 countries and as a result caused global emissions of ozone-depleting substances to decline by more than 99% since 1986. This agreement is the reason why the ozone layer hole is healing now, and we don't hear about it anymore.
 - The Biological Weapons Convention, which bans biological and toxin weapons and was signed by 185 states.
 - The Chemical Weapons Convention, which bans chemical weapons and was signed by 193 states.
 - The Environmental Modification Convention, which bans weather warfare and was signed by 78 states.
 - The Outer Space Treaty, which bans the stationing of weapons of mass destruction in outer space, prohibits military activities on celestial bodies, details legally binding rules governing the peaceful exploration and use of space, and was signed by 114 countries.
-- Nuclear warfare, although previously expected to proliferate uncontrollably, have not been developed my many countries. Some international agreements, such as the Non-Proliferation Treaty, have been key preventing the spread of nuclear weapons and furthering the goal of achieving nuclear disarmament. It is a meaningful achievement to have dissuaded many countries from pursuing nuclear weapons programs, reduced the amount of nuclear arsenals since the 90s, and avoided nuclear war for many decades now.
-- The International Atomic Energy Agency (IAEA) is an intergovernmental organization that seeks to promote the peaceful use of nuclear energy and to inhibit its use for any military purpose, including nuclear weapons. It implements nuclear safety standards and is composed by 178 member states. Independently of whether you think nuclear power is overregulated or not, it is thought as a good example of what we could have to evaluate the safety of big AI models.
-- Although preferable, a _formal agreement_ may not be neccessary. In 2005, the United Nations called on member states to ban Human Cloning, which more than 60 countries did either fully or partially. Those multiple unilateral regulations have been enough to not have a single (verified) case of a human being cloned almost 20 years later.
+- Nuclear warfare, although previously expected to proliferate uncontrollably, has not been developed by many countries. Some international agreements, such as the Non-Proliferation Treaty, have been key in preventing the spread of nuclear weapons and furthering the goal of achieving nuclear disarmament. It is a meaningful achievement to have dissuaded many countries from pursuing nuclear weapons programs, reduced the amount of nuclear arsenals since the 90s, and avoided nuclear war for many decades now.
+- The International Atomic Energy Agency (IAEA) is an intergovernmental organization that seeks to promote the peaceful use of nuclear energy and to inhibit its use for any military purpose, including nuclear weapons. It implements nuclear safety standards and is composed of 178 member states. Regardless of whether you think nuclear power is overregulated or not, it is thought as a good example of what we could have to evaluate the safety of big AI models.
+- Although preferable, a _formal agreement_ may not be necessary. In 2005, the United Nations called on member states to ban Human Cloning, which more than 60 countries did either fully or partially. Those multiple unilateral regulations have been enough to not have a single (verified) case of a human being cloned almost 20 years later.
 <!-- Geneva Conventions? They're not really about tech-->
 
 If you think AI is actually similar to other cases in which we failed to make any good treaties internationally: everything that ever happened had a first time ;').
@@ -70,26 +70,26 @@ Of course, there are many cases where demonstrations don't yield any results, bu
 Where [the protests are likely to have influenced those outcomes](https://www.socialchangelab.org/_files/ugd/503ba4_052959e2ee8d4924934b7efe3916981e.pdf).
 And [there are reasons to believe that AI activism could achieve similar results](https://forum.effectivealtruism.org/posts/WfodoyjePTTuaTjLe/efficacy-of-ai-activism-have-we-ever-said-no).
 
-In any case, if for some reason you don't believe on the impact of protests, you can read about the other things that [PauseAI does](/action), and you can try to [contact governments directly](/lobby-tips).
+In any case, if for some reason you don't believe in the impact of protests, you can read about the other things that [PauseAI does](/action), and you can try to [contact governments directly](/lobby-tips).
 
 ## AI particular case
 
 If you think AI is different enough to these cases (or even if you don't), it's useful to analyze its particular situation.
 The things that make AI different may not necessarily make it less regulatable.
-For example, we are not trying to regulate existing products and services that people already enjoy and use regularly, and we are not going against a lot of companies that can lobby or workers who would lose their jobs if we are succesful. Pretty much the opposite.
-Also, the public is not partisan or politically divided, but united [in support of regulation](/)<!--I think there was at least a poll about it-->, and we must mantain that union.
-Still, a lot of people haven't make their minds about it yet. 
+For example, we are not trying to regulate existing products and services that people already enjoy and use regularly, and we are not going against a lot of companies that can lobby or workers who would lose their jobs if we are successful. Pretty much the opposite.
+Also, the public is not partisan or politically divided, but united [in support of regulation](/)<!--I think there was at least a poll about it-->, and we must maintain that union.
+Still, a lot of people haven't made their minds about it yet. 
 We must be careful to not put them off, hear their perspectives, and see in which particular ways they can be helped by a pause based on what they care about.
 
-When it comes to AI risks, the public and the experts seem [worried about the risks and interested on regulation](/polls-and-surveys). 
+When it comes to AI risks, the public and the experts seem [worried about the risks and interested in regulation](/polls-and-surveys). 
 The politicians, based on the [policies that are passing and working on]()<!--some good link here-->, the [summits that they are organizing](/summit), and the [statements that they are giving](/quotes)<!--we have to finish that page-->, seem pretty worried too.
 
 All of this is happening while PauseAI is still pretty young and most people haven't heard about most of the risks. 
 If we were to raise awareness and consensus about existential risks for example, we would have the potential to become more mainstream given that virtually nobody wants to die or the world to end. 
 That is not something which is even in the best interest of the most selfish of companies, governments, and people.
 
-Even if takes time, the manifestation of the problems that AIs will bring the next years will potentiate the awareness to them and eventually trigger more and more regulation. 
-In the case we don't get a pause as soon as we'd like, massive unemployment and all kind of incidents could put most people on the same page, either progressively or suddenly, and make the people who wouldn't have seriously consider a pause, to actually do it.
+Even if it takes time, the manifestation of the problems that AIs will bring the next years will potentiate the awareness to them and eventually trigger more and more regulation. 
+In the case we don't get a pause as soon as we'd like, massive unemployment and all kind of incidents could put most people on the same page, either progressively or suddenly, and make the people who wouldn't have seriously considered a pause, to actually do it.
 That's why it's important to not base our potential to succeed on short term results, but to be always prepared for new adherents and allies, and be ready to guide politicians to implement our proposals in case a warning shot happens.
 
 ### Enforceability
