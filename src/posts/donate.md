@@ -25,7 +25,7 @@ With your financial support, we can professionalize and have a bigger impact.
 
 ## How to donate to PauseAI
 
-- By bank transfer: NL31BUNQ2109903155 (Stichting PauseAI).
-- [PayPal](https://www.paypal.com/donate/?hosted_button_id=4TWZXY62EM5VE)
-- Through our [merchandise store](https://pauseai-shop.fourthwall.com/).
+- By bank transfer. IBAN: NL31BUNQ2109903155 BIC/SWIFT: BUNQNL2AXXX (Stichting PauseAI). This is probably the cheapest way to transfer money to us.
+<!-- - [PayPal](https://www.paypal.com/donate/?hosted_button_id=4TWZXY62EM5VE). -->
+- Through our [merchandise store](https://pauseai-shop.fourthwall.com/). All US-based credit card transactions have an added 2.9% + $0.30 payment processing fee. Non-US credit cards have a 3.9% +$0.30 payment processing fee.
 - Through [this link](https://bunq.me/pauseai) (Select Sofort - most banks and PayPal are supported)

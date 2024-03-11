@@ -12,6 +12,7 @@ The following contains information about the Dutch legal entity behind PauseAI:
 - Name: "Stichting PauseAI"
 - KVK number: 92951031
 - RSIN: 866227696
+- Tax/VAT number: NL866227696B01
 - Bank Account: NL31BUNQ2109903155 ([donate](/donate))
 - Goal: "Mitigate the most catastrophic risks of AI."
 - Founding date: 13-02-2024
