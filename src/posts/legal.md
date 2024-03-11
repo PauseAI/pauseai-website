@@ -17,7 +17,19 @@ The following contains information about the Dutch legal entity behind PauseAI:
 - Founding date: 13-02-2024
 - Contact: [Joep Meindertsma](mailto:joep@pauseai.info)
 - Address: Skopjestraat 26, 3541ES Utrecht, The Netherlands
-- ANBI Status: in progress, requested at the Dutch tax authorities.
+
+### ANBI status
+
+The ANBI status is a Dutch tax status for charities.
+It allows tax-free and tax-deductible donations and other benefits for the charity and its donors.
+
+To qualify for ANBI status, the charity must meet certain [requirements](https://www.belastingdienst.nl/wps/wcm/connect/bldcontenten/belastingdienst/business/business-public-benefit-organisations/public_benefit_organisations/conditions_pbos/which_conditions_must_be_met_by_pbo):
+
+- Needs to serve the public interest.
+- No profit motive, money must be used for the goal of the charity.
+- Various publication requirements (such as this page).
+
+We have requested this status and are currently waiting for approval.
 
 ### Policy Plan 2024-2025 ("Beleidsplan")
 
