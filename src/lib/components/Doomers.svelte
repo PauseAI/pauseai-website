@@ -169,6 +169,13 @@
 			number: 0.99,
 			source:
 				'https://www.lesswrong.com/posts/j9Q8bRmwCgXRYAgcJ/miri-announces-new-death-with-dignity-strategy'
+		},
+		{
+			name: 'Roman Yampolskiy',
+			title: 'AI safety scientist',
+			probability: '99.999999%',
+			number: 0.99999999,
+			source: 'https://twitter.com/romanyam/status/1767575356155027503'
 		}
 	]
 </script>
