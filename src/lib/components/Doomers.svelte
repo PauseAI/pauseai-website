@@ -31,8 +31,8 @@
 			title: 'one of three godfathers of AI',
 			probability: '10%',
 			number: 0.1,
-			note: 'chance of extinction in the next 30 years if unregulated',
-			source: 'https://twitter.com/geoffreyhinton/status/1719447980753719543'
+			note: 'wipe out humanity in the next 20 years',
+			source: 'https://archive.ph/Q8obS#selection-2291.167-2291.183'
 		},
 		{
 			name: 'Machine learning researchers',
