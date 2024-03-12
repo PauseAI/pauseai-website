@@ -3,6 +3,7 @@ title: State-of-the-art AI capabilities vs humans
 description: How smart are the latest AI models compared to humans?
 ---
 
+How smart are the latest AI models compared to humans?
 Let's take a look at how the most competent AI systems compare with humans in various domains.
 The list below is regularly updated to reflect the latest developments.
 
@@ -41,3 +42,4 @@ As time progresses and capabilities improve, we move items from lower sections t
 When some specific [dangerous capabilities](/dangerous-capabilities) are achieved, AI will pose new risks.
 At some point, AI will outcompete every human in every metric imaginable.
 When we have built this superintelligence, [we will probably soon be dead](/ai-takeover).
+Let's [implement a pause](/proposal) to make sure we don't get there.
