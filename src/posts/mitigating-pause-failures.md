@@ -43,8 +43,9 @@ Those paths to a greater intelligence could bring us the benefits that AGI promi
 
 Some proposals, like "[MAGIC](https://arxiv.org/abs/2310.09217)", suggest that we should centralize AI development in a single organization. This makes AI development more controllable, but it also creates a single point of failure.
 But this is not a PauseAI proposal.
+
 The decision if something like that would be good or not could be decided multilaterally in a pause.
-Maybe a Apollo/ CERN type project is necessary, maybe not.
+Maybe a CERN/ Apollo/ Manhattan type project is necessary, maybe not.
 
 ## Descentralization will cause less safety-minded organizations to be in the race
 
