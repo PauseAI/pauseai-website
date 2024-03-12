@@ -16,6 +16,7 @@ The following contains information about the Dutch legal entity behind PauseAI:
 - Bank Account: NL31BUNQ2109903155 ([donate](/donate))
 - Goal: "Mitigate the most catastrophic risks of AI."
 - Founding date: 13-02-2024
+- ANBI status: Yes, since 13-02-2024
 - Contact: [Joep Meindertsma](mailto:joep@pauseai.info)
 - Address: Skopjestraat 26, 3541ES Utrecht, The Netherlands
 
@@ -23,14 +24,13 @@ The following contains information about the Dutch legal entity behind PauseAI:
 
 The ANBI status is a Dutch tax status for charities.
 It allows tax-free and tax-deductible donations and other benefits for the charity and its donors.
+Stichting PauseAI is a registered ANBI since 13-02-2024. Check the status [here](https://www.belastingdienst.nl/wps/wcm/connect/nl/aftrek-en-kortingen/content/anbi-status-controleren) (page in Dutch).
 
 To qualify for ANBI status, the charity must meet certain [requirements](https://www.belastingdienst.nl/wps/wcm/connect/bldcontenten/belastingdienst/business/business-public-benefit-organisations/public_benefit_organisations/conditions_pbos/which_conditions_must_be_met_by_pbo):
 
 - Needs to serve the public interest.
 - No profit motive, money must be used for the goal of the charity.
 - Various publication requirements (such as this page).
-
-We have requested this status and are currently waiting for approval.
 
 ### Policy Plan 2024-2025 ("Beleidsplan")
 
