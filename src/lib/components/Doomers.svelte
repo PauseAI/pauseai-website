@@ -247,6 +247,16 @@
 		padding-bottom: 0.3rem;
 	}
 
+	@media (max-width: 700px) {
+		.name {
+			flex-direction: column;
+		}
+
+		.title {
+			margin-left: 0;
+		}
+	}
+
 	.pdoom {
 		text-align: center;
 		flex-basis: 5rem;
