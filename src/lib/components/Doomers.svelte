@@ -80,7 +80,7 @@
 			source: 'https://www.youtube.com/watch?v=57y7DxWfOS0&t=50s'
 		},
 		{
-			name: 'Emmet Shear',
+			name: 'Emmett Shear',
 			title: 'Co-founder of Twitch, former short-term CEO of OpenAI',
 			probability: '5-50%',
 			number: 0.275,
