@@ -153,6 +153,10 @@ Because acknowledging that _we are in fact in danger_ is a very, very scary thin
 
 [Read more about the psychology of x-risk](/psychology-of-x-risk).
 
+## Ok, I want to help! What can I do?
+
+There are many [things that you can do](/action). Writing a letter, going to a protest, donating some money or joining a community is not that hard! And these actions have a real impact. Even when facing the end of the world, there can still be hope and very rewarding work to do.
+
 ## I have a different / AI related question
 
 You can try [AISafety.com](https://www.aisafety.com), that also gives you a better view of the whole AI Safety landscape.
