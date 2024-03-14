@@ -15,21 +15,19 @@
 			<a href="/proposal">Proposal</a>
 			<a href="/learn">Learn</a>
 			<a href="/press">Press / Media</a>
-			<a href="/psychology-of-x-risk">Psychology of x-risk</a>
-			<a href="/legal">Legal info</a>
-			<ExternalLink href="https://pauseai-shop.fourthwall.com" target="_blank"
-				>Merchandise</ExternalLink
-			>
+			<a href="/legal">Legal Info <br /> Stichting PauseAI <br /> (kvk 92951031)</a>
 		</div>
 		<div class="column">
 			<h2>Risks</h2>
-			<a href="/outcomes">AI Outcomes</a>
 			<a href="/risks">Risks overview</a>
+			<a href="/outcomes">AI Outcomes</a>
 			<a href="/xrisk">Existential risk</a>
+			<a href="/psychology-of-x-risk">Psychology of x-risk</a>
 			<a href="/ai-takeover">AI takeover</a>
 			<a href="/cybersecurity-risks">Cybersecurity</a>
+			<a href="/dangerous-capabilities">Dangerous capabilities</a>
+			<a href="/sota">State of the art</a>
 			<a href="/urgency">Urgency</a>
-			<a href="/dangerous-capabilities">Capabilities</a>
 		</div>
 		<div class="column">
 			<h2>Take Action</h2>
@@ -37,6 +35,9 @@
 			<a href="/action">How you can help</a>
 			<a href="/communities">Local communities</a>
 			<a href="donate">Donate</a>
+			<ExternalLink href="https://pauseai-shop.fourthwall.com" target="_blank"
+				>Merchandise</ExternalLink
+			>
 			<a href="/protests">Protests</a>
 			<a href="/organizing-a-protest">Organize a protest</a>
 			<a href="/email-builder">Email builder</a>
@@ -82,8 +83,8 @@
 	.footer-links {
 		display: grid;
 		grid-template-columns: repeat(5, 1fr);
-		gap: 1rem;
-		font-size: 0.7rem;
+		gap: 1.2rem;
+		font-size: 0.6rem;
 		padding-bottom: 1rem;
 		margin-bottom: 1rem;
 	}

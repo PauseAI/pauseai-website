@@ -173,15 +173,15 @@ const PauseAICommunities: Community[] = [
 		link: discordInvite
 	},
 	{
-		name: 'PauseAI West Palm Beach Florida',
+		name: 'PauseAI Florida',
 		lat: 26.7153,
 		lon: -80.0534,
 		link: discordInvite
 	},
 	{
 		name: 'PauseAI Chicago',
-		lat: 41.8818,
-		lon: -87.6232,
+		lat: 41.8781,
+		lon: -87.6298,
 		link: discordInvite
 	}
 ]

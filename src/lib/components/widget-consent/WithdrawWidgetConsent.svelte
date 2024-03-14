@@ -5,6 +5,7 @@
 
 <button
 	class="button-to-link"
+	title="Withdraw consent for social widgets"
 	on:click={() => {
 		if ($consent) {
 			$consent = false
