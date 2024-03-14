@@ -356,6 +356,6 @@ export const communities: Community[] = [
 	...AdjacentCommunities.map((a) => {
 		a.adjacent = true
 		return a
-	}),
-	...PauseAICommunities
+	}).sort((a, b) => b.lat - a.lat),
+	...PauseAICommunities.sort((a, b) => b.lat - a.lat)
 ]
