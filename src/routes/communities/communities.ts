@@ -173,7 +173,7 @@ const PauseAICommunities: Community[] = [
 		link: discordInvite
 	},
 	{
-		name: 'PauseAI Florida',
+		name: 'PauseAI West Palm Beach',
 		lat: 26.7153,
 		lon: -80.0534,
 		link: discordInvite
@@ -356,6 +356,6 @@ export const communities: Community[] = [
 	...AdjacentCommunities.map((a) => {
 		a.adjacent = true
 		return a
-	}).sort((a, b) => b.lat - a.lat),
-	...PauseAICommunities.sort((a, b) => b.lat - a.lat)
+	}),
+	...PauseAICommunities
 ]

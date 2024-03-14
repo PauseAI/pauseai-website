@@ -84,7 +84,7 @@
 		display: grid;
 		grid-template-columns: repeat(5, 1fr);
 		gap: 1.2rem;
-		font-size: 0.6rem;
+		font-size: 0.8rem;
 		padding-bottom: 1rem;
 		margin-bottom: 1rem;
 	}
