@@ -84,6 +84,9 @@
 		top: 0;
 		right: 0;
 		padding: inherit;
+		padding-left: 1rem;
+		padding-right: 1rem;
+		margin-right: -1rem;
 	}
 
 	@media (hover: none) {
