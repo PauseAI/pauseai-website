@@ -2,20 +2,20 @@
 title: The feasibility of a Pause
 description: Is a pause actually possible?
 ---
-
-<!-- does feasibility alludes to some amount of resources being enough for the objective or not? I was going to go with "possibility" for a while but it sounded worse -->
 <!-- I almost didn't put sources at all, ideally that should change -->
 
-AGI is not inevitable. It requires hordes of engineers with million dollar paychecks. 
-It requires a fully functional and unrestricted supply chain of the most complex hardware. 
-It requires all of us to allow these companies to gamble with our future.
+AGI is not inevitable. 
+One of the most common counterarguments for a pause is not that it would be bad, but that there's no way we'll achieve it. 
+And that is just not true. 
 
-We understand where these beliefs come from and that it will not be easy to get a pause on the development of the biggest models. 
-But it is also not easy to make an accurate assessment on how likely it is to happen, and this page seeks to argue that a pause is not as unlikely as some people seem to believe.
+We understand where these beliefs come from and that it will not be easy. 
+But it's not easy to predict the future either, and this article seeks to argue against the overconfidence of our powerlessness.
+Because the problem with defeatist beliefs is that they work as a self-fulfilling prophecy.
 
-Those beliefs are not only overly confident, but they also work as a defeating self-fulfilling prophecy. 
-We shouldn't give up without even trying it. 
-Quite the contrary, given that this could be the best chance for regular people to have an impact in the world and the future of the human race. 
+The only easy thing to do is giving up, [it's the easy way out](/psychology-of-x-risk#difficult-to-act-on). 
+Because if there is nothing that we can do, there is nothing that we should do. 
+But we shouldn't give up without even trying it. 
+This is actually our best chance to have an impact in the world and the future of our civilization. 
 
 ## Power over companies and governments
 
@@ -77,12 +77,12 @@ In any case, if for some reason you don't believe in the impact of protests, you
 If you think AI is different enough to these cases (or even if you don't), it's useful to analyze its particular situation.
 The things that make AI different may not necessarily make it less regulatable.
 For example, we are not trying to regulate existing products and services that people already enjoy and use regularly, and we are not going against a lot of companies that can lobby or workers who would lose their jobs if we are successful. Pretty much the opposite.
-Also, the public is not partisan or politically divided, but united [in support of regulation](/)<!--I think there was at least a poll about it-->, and we must maintain that union.
+Also, the public is not partisan or politically divided, but [united in support of regulation](https://drive.google.com/file/d/1n0pXDBuIcb01tW4TQdP1Mb5aAiFDvWk0/view).
 Still, a lot of people haven't made their minds about it yet. 
 We must be careful to not put them off, hear their perspectives, and see in which particular ways they can be helped by a pause based on what they care about.
 
 When it comes to AI risks, the public and the experts seem [worried about the risks and interested in regulation](/polls-and-surveys). 
-The politicians, based on the [policies that are passing and working on]()<!--some good link here-->, the [summits that they are organizing](/summit), and the [statements that they are giving](/quotes)<!--we have to finish that page-->, seem pretty worried too.
+The politicians, based on the [policies that are passing and working on](https://www.bloomberg.com/news/articles/2024-03-13/regulate-ai-how-us-eu-and-china-are-going-about-it), the [summits that they are organizing](/summit), and the [statements that they are giving](/quotes)<!--we have to finish that page-->, seem pretty worried too.
 
 All of this is happening while PauseAI is still pretty young and most people haven't heard about most of the risks. 
 If we were to raise awareness and consensus about existential risks for example, we would have the potential to become more mainstream given that virtually nobody wants to die or the world to end. 
