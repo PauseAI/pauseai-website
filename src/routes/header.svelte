@@ -26,7 +26,7 @@
 		{/if}
 		<!-- <NavLink href="/about">About</NavLink> -->
 		<NavLink c2a href="/join">Join</NavLink>
-		<NavLink href="/search"><Search size="0.8em" /></NavLink>
+		<NavLink href="/search" ariaLabel="Search"><Search size="0.8em" /></NavLink>
 	</div>
 </nav>
 

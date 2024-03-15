@@ -2,9 +2,14 @@
 	import { page } from '$app/stores'
 	export let href: string
 	export let c2a = false
+	export let ariaLabel: string | undefined = undefined
 </script>
 
-<a {href} class={`${c2a ? 'c2a' : ''} ${$page.url.pathname == href ? 'active' : ''}`}>
+<a
+	{href}
+	class={`${c2a ? 'c2a' : ''} ${$page.url.pathname == href ? 'active' : ''}`}
+	aria-label={ariaLabel}
+>
 	<slot />
 </a>
 

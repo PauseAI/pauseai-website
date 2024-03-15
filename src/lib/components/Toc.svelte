@@ -30,6 +30,7 @@
 				<button
 					class="toc-close"
 					on:click={() => (open = false)}
+					aria-label="Close table of contents"
 				>
 					<X size="1.2rem" />
 				</button>
