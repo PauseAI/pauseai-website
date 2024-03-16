@@ -109,6 +109,7 @@
 					{/if}
 					<p>{selectedNode.text}</p>
 					<div class="buttons">
+						<!--
 						<Button
 							on:click={() => {
 								showProbabilities = !showProbabilities
@@ -116,7 +117,7 @@
 							}}
 						>
 							{showProbabilities ? 'Hide' : 'Show'} probabilities
-						</Button>
+						</Button>-->
 						<Button
 							subtle
 							on:click={() => {
