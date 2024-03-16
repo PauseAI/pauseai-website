@@ -16,8 +16,8 @@ type outcome = {
 	text: string
 }
 
-const doomer_hope_str = "\nLuckily, you've just learn this, as if it were a message from the future! And you are still on time to [make a Pause happen](/action). Good luck John Connor, the future is not set."
-const optimist_help_str = "\nEven if you think we'll probably not experience an AI catastrophe, it would be better to have more time, [help us](/action) make sure of it."
+const doomer_hope_str = "Luckily, you've just learn this, as if it were a message from the future! And you are still on time to make a Pause happen. Good luck John Connor, the future is not set."
+const optimist_help_str = "Even if you think we'll probably not experience an AI catastrophe, it would be better to have more time, help us make sure of it."
 
 const humanTakeOver: TreeNodeType = {
 	type: 'question',
@@ -106,6 +106,6 @@ export const tree: TreeNodeType = {
 	},
 	no: {
 		type: 'safe',
-		text: "If we successfully prevent dangerous AI from being developed we can prevent AI catastrophes. We hope we're living in this universe. \nYou [can help](/action) achieve this!"
+		text: "If we successfully prevent dangerous AI from being developed we can prevent AI catastrophes. We hope we're living in this universe. You can help achieve this!"
 	}
 }
