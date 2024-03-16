@@ -6,7 +6,7 @@ description: AI's environmental impact is a problem not just because of the imme
 > ❝ The rise of the robots is a problem not just because of the immediate human cost, but
 > because robots are fantastically energy-hungry and thus accelerate the unsustainable,
 > insupportable damage we are doing to Earth.
-> [Rupert Read](https://www.theguardian.com/theobserver/2016/mar/27/leters-robots-energy-consuming), past spokesperson of Extinction Rebellion
+> – [Rupert Read](https://www.theguardian.com/theobserver/2016/mar/27/leters-robots-energy-consuming), past spokesperson of Extinction Rebellion
 
 Immediate harms are turning intense.
 
@@ -16,8 +16,7 @@ It’s easy to miss AI’s most diffuse harm—to our environment.
 
 ## Burning energy
 
-Training just one AI model uses up to [50GWh of energy](https://www.ri.se/en/news/blog/generative-ai-does-not-run-on-thin-air), about
-one AI model can gobble up more electricity than [100 US homes](https://www.bloomberg.com/news/articles/2023-03-09/how-much-energy-do-ai-and-chatgpt-use-no-one-knows-for-sure?sref=ixwpc5OO#xj4y7vzkg) use in one year – just to learn how to predict the next sentences from our online conversations.
+Training just one AI model can gobble up more electricity than [100 US homes](https://www.bloomberg.com/news/articles/2023-03-09/how-much-energy-do-ai-and-chatgpt-use-no-one-knows-for-sure?sref=ixwpc5OO#xj4y7vzkg) use in one year – just to learn how to predict the next sentences from our online conversations.
 To generate those next sentences in replies to users, ChatGPT burns as much electricity as [a small city](https://archive.ph/20230917070741/https://kaspergroesludvigsen.medium.com/chatgpts-electricity-consumption-pt-ii-225e7e43f22b).
 
 By 2027, all AI may burn as much energy as [a nation](https://www.nytimes.com/2023/10/10/climate/ai-could-soon-need-as-much-electricity-as-an-entire-country.html), just to process our data in data centers.
@@ -76,7 +75,7 @@ This is a vicious cycle.
 After two centuries of competition for scaling resource-intensive machines, society is already nearing [collapse](https://youtu.be/vi166hJv6Qk).
 To protect society, why don’t we ease up on excessive corporate tech?
 
-AI corporations accelerate our climate crisis. They scale machine models to predict human behavior. They gradually automate the work needed to autonomously re-produce [machines](https://www.euronews.com/green/2020/05/06/a-robot-takeover-is-possible-so-what-about-the-planet).
+AI corporations accelerate our climate crisis. They scale machine models to predict human behavior. They gradually automate the work needed to re-produce resource-intensive [machines](https://www.euronews.com/green/2020/05/06/a-robot-takeover-is-possible-so-what-about-the-planet).
 
 ## Act
 
