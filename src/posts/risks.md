@@ -65,19 +65,31 @@ The people who own these AI systems will be able to capitalize on them, but the 
 It is difficult to predict which jobs are going to be the ones replaced first. They could leave you unemployed and without an income no matter how much time, money and energy you spent on getting the experience and knowledge that you have, and how valuable they were a moment ago.
 The way we distribute wealth in our society is not prepared for this.
 
+## Lack of meaning and existential crises
+
+As AI becomes increasingly integrated into various aspects of society, there's a concern that it may lead to the displacement of human labor, potentially rendering individuals redundant in certain professions. This can result in a loss of purpose and identity for those whose livelihoods are tied to their work. Moreover, the automation of tasks that were once exclusively performed by humans may lead individuals to question the significance of their contributions and the value they bring to society.
+
+Additionally, AI-driven technologies have the capacity to alter fundamental aspects of human interaction and decision-making processes. With the rise of algorithmic decision-making systems, there's a risk of diminishing human agency and autonomy. Individuals may feel alienated or disconnected from their own choices and experiences when decisions are predominantly dictated by AI algorithms. Furthermore, the proliferation of AI in areas such as social media and personalized content recommendation systems can create echo chambers and filter bubbles, limiting exposure to diverse perspectives and diminishing the richness of human discourse. As a result, people may struggle to find meaning in their interactions and relationships, feeling increasingly isolated in a world mediated by algorithms.
+
 ### Mental health, addiction and disconnection between people
 
-Social media, video games and other software have been using AI systems to maximize their profit while taking advantage of our primate minds for some time already, damaging our mental health in the process. Addictions to social media, between other things, isolate us from each other, not only in political bubbles but also in cultural and social one-person bubbles, making us lonelier.
+Social media, video games and other software have been using AI systems to maximize their profit while taking advantage of our primate minds for some time already, damaging our mental health in the process. 
+Addiction to social media, among other things, isolates us from each other, not only in political bubbles but also in cultural and social one-person bubbles, making us lonelier.
+They're the first proof of the unintended and unexpected global consequences that these technologies can bring and how complicated aligning AI systems with "human values" can be.
 
-They're the first proof of the unintended and unexpected global consequences that these technologies can bring and how complicated aligning AI systems with "human values" can be. Also, the addiction to products and services that profit from personal data and separate people while creating network effects play on a vicious cycle with the accumulation of economic power of these companies and the division between people that leave us as powerless individuals whether it's intended or not.
-
-A pause in the biggest models could help to prevent chatbots for becoming so good, multimodal and multipurpose, to the point it would be common to be addicted and substitute full relationships (be romantic, sexual or platonic) with them. Also, if those apps are easy to access, they could shape the understanding, personality and view of the world of children that could prefer talking with it over family and friends.
+If today's chatbots keep getting better, it could become quite common to be addicted to them and substitute whole relationships (be romantic, sexual or platonic) with them. 
+Also, if those apps are easy to access, they could shape the understanding, personality and view of the world of children that could prefer talking with AIs over family and friends.
+A pause in the biggest models could prevent them from becoming multipurpose chatbots that fit our needs perfectly without people understanding the long-term ramifications of them.
 
 ### Power accumulation, war and the race to the precipice
 
-If this economic and technological inequality stems from a handful of public and private entities producing multiple single-purpose AIs or a few multipurpose AIs, it could lead to a short accumulation of power that will probably result on a catastrophe for all.
-The accumulation of power side of that equation had and will continue to incentivize more actors to join the race to the bottom and accelerate the development of larger AI systems.
+The addiction to products and services that learn from personal data leaves us as powerless separated individuals whether it's intended or not. 
+And it plays on a vicious cycle with the accumulation of economic power and intelligence of the companies which create them.
+
+If this economic and technological inequality stems from a handful of public and private entities producing multiple single-purpose AIs or a few multipurpose AIs, it could lead to a short accumulation of power that will probably result in a catastrophe for all.
+The accumulation of power side of that story has and will continue to incentivize more actors to join the race to the bottom and accelerate the development of larger AI systems.
 This, in return, introduces more points of failure and downplays the associated risks by endorsing the idea that they can be handled unilaterally, by a company or a government.
+
 Such a scenario would not just disempower every other person and nation in the world, but also catalyze global powers to enter into conflict.
 So it's crucial to act as soon as possible, before the race dynamics extend further, before the already most powerful governments and corporations consolidate their positions, and before a war is triggered in response.
 We need international cooperation because the only winning move on this strange game is not to play, but to pause.
@@ -153,7 +165,7 @@ We'd be introducing a new species to the planet that could outsmart us and outco
 ### Human disempowerment
 
 Even if we manage to create only AI systems that we can control individually, we could lose our power to make important decisions incrementally each time one becomes implemented inside institutions or popularized in everyday life.
-Those systems would end up having more input from other systems than from humans, and, if we cannot coordinate quick enough, or we lack crucial knowledge about the functioning of these systems, we could end up without control over our future.
+Those systems would end up having more input from other systems than from humans, and, if we cannot coordinate quickly enough, or we lack crucial knowledge about the functioning of these systems, we could end up without control over our future.
 
 It would be a civilization in which each system is optimizing for different objectives, there is not a clear direction for where everything is heading, and there is no way of changing it.
 The technical knowledge required to modify these systems could be lacking in the first place or lost over time, as we become more and more dependent on technology, and the technology becomes more complex.
@@ -171,7 +183,7 @@ If the AIs continue to be produced with only their capabilities in mind, through
 ### Suffering lock-in risks
 
 It is possible that once automation at higher degrees starts happening, regardless if there is just one or multiple powerful AIs, the values of those systems would not be able to be changed, and the automation would continue until the end of the universe, throughout the reachable galaxies.
-Arguably, the worst scenarios that those AIs could create would not be human extinction, but unescapable dystopias that would extend through all that spacetime.
+Arguably, the worst scenarios that those AIs could create would not be human extinction, but inescapable dystopias that would extend through all that spacetime.
 
 Possible locked-in dystopias with lots of suffering are called _S-risks_ and include worlds in which sentient beings are enslaved and forced to do horrible things.
 Those beings could be humans, animals, digital people or any other alien species that the system could find in the cosmos. Given how difficult we think solving alignment completely is, how bad we humans treat each other sometimes, how bad we treat most animals, and how we treat present AIs, a future like that is maybe not as unlikely as we'd like.
