@@ -65,12 +65,6 @@ The people who own these AI systems will be able to capitalize on them, but the 
 It is difficult to predict which jobs are going to be the ones replaced first. They could leave you unemployed and without an income no matter how much time, money and energy you spent on getting the experience and knowledge that you have, and how valuable they were a moment ago.
 The way we distribute wealth in our society is not prepared for this.
 
-## Lack of meaning and existential crises
-
-As AI becomes increasingly integrated into various aspects of society, there's a concern that it may lead to the displacement of human labor, potentially rendering individuals redundant in certain professions. This can result in a loss of purpose and identity for those whose livelihoods are tied to their work. Moreover, the automation of tasks that were once exclusively performed by humans may lead individuals to question the significance of their contributions and the value they bring to society.
-
-Additionally, AI-driven technologies have the capacity to alter fundamental aspects of human interaction and decision-making processes. With the rise of algorithmic decision-making systems, there's a risk of diminishing human agency and autonomy. Individuals may feel alienated or disconnected from their own choices and experiences when decisions are predominantly dictated by AI algorithms. Furthermore, the proliferation of AI in areas such as social media and personalized content recommendation systems can create echo chambers and filter bubbles, limiting exposure to diverse perspectives and diminishing the richness of human discourse. As a result, people may struggle to find meaning in their interactions and relationships, feeling increasingly isolated in a world mediated by algorithms.
-
 ### Mental health, addiction and disconnection between people
 
 Social media, video games and other software have been using AI systems to maximize their profit while taking advantage of our primate minds for some time already, damaging our mental health in the process. 
