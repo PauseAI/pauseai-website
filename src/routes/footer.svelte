@@ -99,12 +99,12 @@
 		/* All equal width */
 		display: flex;
 		flex-direction: column;
-		gap: 0.4rem;
+		gap: 0.5rem;
 		flex: 1;
 	}
 
 	.footer-links h2 {
-		font-size: 0.9rem;
+		font-size: 1rem;
 		font-family: var(--font-heading);
 		font-weight: 700;
 		margin-bottom: 0rem;
@@ -115,7 +115,7 @@
 		color: var(--text);
 		text-transform: uppercase;
 		text-decoration: none;
-		font-size: 1rem;
+		font-size: 1.1rem;
 		font-family: var(--font-heading);
 		font-weight: 700;
 		text-align: left;
