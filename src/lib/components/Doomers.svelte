@@ -36,10 +36,10 @@
 		},
 		{
 			name: 'Machine learning researchers',
-			probability: '14%',
-			number: 0.14,
-			note: 'From 2022, median value is 5%',
-			source: 'https://aiimpacts.org/2022-expert-survey-on-progress-in-ai/'
+			probability: '9-19.4%',
+			number: 0.142,
+			note: 'From 2023, depending on the question design, median values: 5-10%',
+			source: 'https://wiki.aiimpacts.org/ai_timelines/predictions_of_human-level_ai_timelines/ai_timeline_surveys/2023_expert_survey_on_progress_in_ai'
 		},
 		{
 			name: 'Lina Khan',
