@@ -83,6 +83,7 @@ We must be careful to not put them off, hear their perspectives, and see in whic
 
 When it comes to AI risks, the public and the experts seem [worried about the risks and interested in regulation](/polls-and-surveys). 
 The politicians, based on the [policies that are passing and working on](https://www.bloomberg.com/news/articles/2024-03-13/regulate-ai-how-us-eu-and-china-are-going-about-it), the [summits that they are organizing](/summit), and the [statements that they are giving](/quotes)<!--we have to finish that page-->, seem pretty worried too.
+Even a recent [US government commissioned report](https://time.com/6898967/ai-extinction-national-security-risks-report/) recommends, among multiple proposals, different types of pauses on AI development to avert risks to national security and humanity as a whole.
 
 All of this is happening while PauseAI is still pretty young and most people haven't heard about most of the risks. 
 If we were to raise awareness and consensus about existential risks for example, we would have the potential to become more mainstream given that virtually nobody wants to die or the world to end. 
@@ -100,8 +101,9 @@ And we can [track GPUs](https://arxiv.org/abs/2303.11341) as we track elements u
 
 ### Impact of PauseAI protests
 
-Even at our small size, we managed to get important [press coverage](/press) and 
+Even at our relatively small size, we managed to get important [press coverage](/press#international-media-coverage) and 
 <!--add summit stuff. idk how to express our protests as possible causes on the summit mainly because i didn't know about pauseai back then--> 
+<!-- Joep mentioned to me that we could talk about that we have lots of projects and people and stuff, and I guess that would make sense if we wanted to argue against a claim that movements/ PAI will not grow or have people involved in important actions, but don't really seem important now-->
 
 ## Collateral benefits
 
