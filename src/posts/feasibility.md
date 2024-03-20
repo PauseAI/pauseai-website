@@ -101,22 +101,20 @@ And we can [track GPUs](https://arxiv.org/abs/2303.11341) as we track elements u
 
 ### Impact of PauseAI protests
 
-Even at our relatively small size, we managed to get important [press coverage](/press#international-media-coverage) and 
-<!--add summit stuff. idk how to express our protests as possible causes on the summit mainly because i didn't know about pauseai back then--> 
+Even at our relatively small size, we managed to get important [press coverage](/press#international-media-coverage), and it's possible (althought difficult to determine) that we were influential in the organization of the [UK AI Safety Summit](/summit), because we were asking for a summit from the very start.
+<!--is this accurate? idk how much PAI asked for a summit--> 
 <!-- Joep mentioned to me that we could talk about that we have lots of projects and people and stuff, and I guess that would make sense if we wanted to argue against a claim that movements/ PAI will not grow or have people involved in important actions, but don't really seem important now-->
 
 ## Collateral benefits
 
 Advocating for a pause has other positive impacts outside achieving it. 
 Informing the public, tech people and politicians of the risks helps other interventions that aim to make safe AIs and AIs safe.
-It causes people to give more importance to the technical, political and communicational work that goes into AI Safety and AI ethics, which ultimately means more funding and jobs going into them, and expecting better solutions.
+It causes people to give more importance to the technical, political and communicational work that goes into AI Safety and AI ethics, which ultimately means more funding and jobs going into them, expecting better results.
 
-It would not only bring new people and resources to new interventions, but it would also help moderate technical and policy proposals to look more "reasonable" and increase their chances of being approved.
-<!--is "proposals" the right term?-->
- 
+It would not only bring new people and resources to new interventions, but it would also help moderate technical and policy initiatives to look more "reasonable" and increase their chances of being supported.
+
 Additionally, it could somewhat prepare people for the dangers, teach them how to use AI more ethically, and even convince them to not invest or work on frontier and unsafe projects.
 
 ## Decision theory says: try it anyways
 
-Even if you believe a pause is quite improbable and you don't care about the other benefits, unless you don't believe on the biggest risks or have better strategies on mind, we recommend you to [join](/join) instead of just burying your head in the sand and wait to die or be saved.
-<!--inspirational thing? something that ends up in a "we could us your help"?-->
+Even if you believe a pause is quite improbable and you don't care about the other benefits, unless you don't believe on the biggest risks or have better strategies on mind, we recommend you to [join](/join). Don't bury your head in the sand and wait to die or be saved, you can help us achieve this!
