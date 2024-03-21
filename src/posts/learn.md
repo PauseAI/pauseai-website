@@ -26,6 +26,7 @@ Here are some resources to get you started.
 - [AISafety.world](https://aisafety.world/tiles/). The whole AI Safety landscape with all the organizations, media outlets, forums, blogs, and other actors and resources.
 - [IncidentDatabase.ai](https://incidentdatabase.ai/). Database of incidents where AI systems caused harm.
 - [NavigatingAIRisks.ai](https://www.navigatingrisks.ai/). A blog with various interesting articles.
+- [PauseAI.info](https://pauseai.info). Check out the rest of the PauseAI site here for loads of related infomation and [resources](/learn), useful [actions](/action), expert [quotes](/quotes), short one-pager [flyers](PauseAI_flyer.pdf), related [faqs](/faq), etc.
 
 ## Podcasts
 
