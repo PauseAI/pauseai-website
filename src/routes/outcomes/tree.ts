@@ -106,6 +106,6 @@ export const tree: TreeNodeType = {
 	},
 	no: {
 		type: 'safe',
-		text: "If we successfully prevent dangerous AI from being developed we can prevent AI catastrophes. We hope we're living in this universe. You can help achieve this!"
+		text: "If we successfully prevent dangerous AI from being developed we could prevent AI catastrophes. We hope we're living in this universe. You can help achieve this!"
 	}
 }
