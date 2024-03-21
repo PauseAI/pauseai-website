@@ -38,11 +38,12 @@ The US (DARPA) is now collaborating with OpenAI.
 
 ## The Solution: International Coordination
 
-To keep future large AI models safe and controllable, we will likely need large, comprehensive international organizations to help ensure that all countries and companies adhere to internationally agreed-upon quality and safety standards. For exmaple, international organizations like:
+To keep future large AI models safe and controllable, we will likely need large, comprehensive International Organizations to help ensure that all countries and companies adhere to internationally agreed-upon quality and safety standards. 
+For example, international organizations like:
 - UN (United Nations)
 - IAEA (International Atomic Energy Agency)
 - And perhaps even a new organization modeled after the "Manhattan Project"
 
 We may also need binding treaties signed by all countries capable of training very large AI models. These treaties would ensure that no country cuts safety requirements in an effort to release a large, potentially dangerous AI model onto the public internet ahead of others.
 
-Fortunately, the computer hardware required to train these large LLM/AI models is (currently) very specialized and expensive. With proper organization and tracking, we could prevent rogue or unsafe actors from training and deploying such a model, similar to how we limit the acquisition of unsafe bio-weapons or nuclear materials.
+Fortunately, the computer hardware required to train these large LLM/AI models is (currently) very specialized and expensive. With proper organization and tracking, we could prevent rogue or unsafe actors from training and deploying such a model, similar to how we track and limit access to unsafe biological pathogens or nuclear materials.
