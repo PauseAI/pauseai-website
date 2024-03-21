@@ -125,7 +125,7 @@ Yoshua Bengio has a brilliant mind and is one of the pioneers in AI.
 AI safety experts have been warning about the potential dangers of AI for years, but it still took him a long time to take their warnings seriously.
 In an [interview](https://youtu.be/0RknkWgd6Ck?t%25253D949), he gave the following explanation:
 
-> "Why didn't I think about it before? Why didn't Geoffrey Hinton think about it before? [...] I believe there's a psychological effect that still may be at play for a lot of people. [...] It's very hard, in terms of your ego and feeling good about what you do, to accept the idea that the thing you've been working on for decades might be actually be very dangerous to humanity. [...] I think that I didn't want to think too much about it, and that's probably the case for others."
+> "Why didn't I think about it before? Why didn't Geoffrey Hinton think about it before? [...] I believe there's a psychological effect that still may be at play for a lot of people. [...] It's very hard, in terms of your ego and feeling good about what you do, to accept the idea that the thing you've been working on for decades might actually be very dangerous to humanity. [...] I think that I didn't want to think too much about it, and that's probably the case for others."
 
 ### Easy to dismiss as conspiracy or cult
 
