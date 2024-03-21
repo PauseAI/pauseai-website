@@ -155,7 +155,9 @@ Because acknowledging that _we are in fact in danger_ is a very, very scary thin
 
 ## Ok, I want to help! What can I do?
 
-There are many [things that you can do](/action). Writing a letter, posting flyers, informing others, going to a protest, donating some money or joining a community is not that hard! And these actions have a real impact. Even when facing the end of the world, there can still be hope and very rewarding work to do.
+There are many [things that you can do](/action). Writing a [letter](/writing-a-letter), posting [flyers]("/PauseAI_flyer.pdf"), informing [others](/action#you-can-do-this), going to a [protest](/protests), [donating](/donate) some money or [joining](/join) a community is not that hard! And these actions have a real impact. 
+
+Even when facing the end of the world, there can still be hope and very rewarding work to do. 💪
 
 ## I have a different / AI related question
 
