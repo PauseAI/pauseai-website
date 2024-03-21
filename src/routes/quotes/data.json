@@ -31,7 +31,7 @@
   },
   {
     "background": "bengio",
-    "text": "It's very hard, in terms of your ego and feeling good about what you do, to accept the idea that the thing you've been working on for decades might be actually be very dangerous to humanity... **I think that I didn't want to think too much about it, and that's probably the case for others.**",
+    "text": "It's very hard, in terms of your ego and feeling good about what you do, to accept the idea that the thing you've been working on for decades might actually be very dangerous to humanity... **I think that I didn't want to think too much about it, and that's probably the case for others.**",
     "author": "Yoshua Bengio",
     "author_description": "2018 Turing Award Recipient, Father of Deep Learning",
     "color": "white",
@@ -45,9 +45,17 @@
     "color": "white",
     "padding": "3.6rem"
   },
+    {
+    "background": "christiano",
+    "text": "Everyone should be very unhappy if you built a bunch of AIS who are like, 'I really hate these humans but they will murder me if I don't do what they want'. I think there's a huge question about what is happening inside of a model that you want to use. **This is the kind of thing that is both horrifying from a safety perspective and also a moral perspective.**",
+    "author": "Paul Christiano",
+    "author_description": "Founder, Alignment Research Center and Former Head of the Alignment Team, OpenAI",
+    "color": "white",
+    "padding": "3.6rem"
+  },
   {
     "background": "tallin",
-    "text": "LLMs, how they work is that you summoned this mind from the Mind space, using your data and a lot of compute, a lot of money. Then you try to tame it using things like reinforcement learning from Human feedback, etc.  And, very importantly the Insiders do think that they are taking some existential risk of the planet. **One thing that a pause achieves is that we will not push the Frontier, in terms of risky pre-training experiments.**",
+    "text": "How [LLMs] work is that you summon this \"mind\" from the \"mind space\" using your data, a lot of compute and a lot of money. Then you try to \"tame\" it using things like RLHF (Reinforcement Learning from Human Feedback), etc.  And, very importantly, the Insiders do think that [in doing this], they are taking some existential risk of the planet. **One thing that a pause achieves is that we will not push the Frontier, in terms of risky pre-training experiments.**",
     "author": "Jaan Tallinn",
     "author_description": "Founder, Future of Life Institute, Centre for the Study of Existential Risk, Skype, Kazaa",
     "color": "white",
