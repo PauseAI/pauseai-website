@@ -4,13 +4,11 @@ description: Is a pause actually possible?
 ---
 <!-- I almost didn't put sources at all, ideally that should change -->
 
-AGI is not inevitable. 
-One of the most common counterarguments for a pause is not that it would be bad, but that there's no way we'll achieve it. 
-And that is just not true. 
+Pausing AI is not impossible.
+Establishing a red line which determines what type of technologies and actions can be developed and done is something we do all the time.
 
-We understand where these beliefs come from and that it will not be easy. 
-But it's not easy to predict the future either, and this article seeks to argue against the overconfidence of our powerlessness.
-Because the problem with defeatist beliefs is that they work as a self-fulfilling prophecy.
+We understand where the pessimistic beliefs about strong regulation come from and that it will not be easy. 
+But it's not easy to predict the future either, and this article seeks to argue against the overconfidence of our powerlessness, since the only thing that can do is to act as a self-fulfilling prophecy.
 
 The only easy thing to do is giving up, [it's the easy way out](/psychology-of-x-risk#difficult-to-act-on). 
 Because if there is nothing that we can do, there is nothing that we should do. 
