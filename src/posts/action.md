@@ -20,7 +20,7 @@ You are now one of them.
 - [**Protest**](/protests): join [one of the protests](/protests) or [organize one yourself](/organizing-a-protest).
 - [**Lobby**](/lobby-tips): convince your government to work towards a pause and prepare for the [summit](/summit).
 - **Talk** to people in your life about this. Answer their questions, and get them to act.
-- [**Flyers**](https://drive.google.com/drive/folders/1MAU_bq31bEuylhzkt2NkZ_XRY6TlKaqZ?usp=drive_link) print, share and post flyers.
+- [**Flyers**](/PauseAI_flyer.pdf) print, share and post flyers.
   - Having some printed one-page flyers on hand, or easily available to show and share from your phone, can be a quick and useful resource for faqs, talking points, expert quotes and opinions, online resources, etc.
 - **Share** about AI risk on social media. This website might be a good start.
 - **Create** [articles](/learn#articles), [videos](/learn#videos) or [memes](https://twitter.com/AISafetyMemes). Collaborate with others in the [Discord server](https://discord.gg/2XXWXvErfA) (in the #projects channel).
