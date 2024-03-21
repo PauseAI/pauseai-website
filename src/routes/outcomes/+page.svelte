@@ -18,9 +18,10 @@
 	{#if !intro}
 		<div class="headerbuttons">
 			<Button subtle on:click={() => (intro = true)}>Restart</Button>
+			<!--
 			<Button subtle on:click={() => (showProbabilities = !showProbabilities)}
-				>{showProbabilities ? 'Hide' : 'Show'} probabilities</Button
-			>
+				>{showProbabilities ? 'Hide' : 'Show'} probabilities</Button> 
+			-->
 		</div>
 	{/if}
 </div>

@@ -16,6 +16,9 @@ type outcome = {
 	text: string
 }
 
+const doomer_hope_str = " Luckily, you've just learn this, as if it were a message from the future! And you are still on time to make a Pause happen. Good luck John Connor, the future is not set."
+const optimist_help_str = " Even if you think we'll probably not experience an AI catastrophe, it would be better to have more time, so help us make sure of it!"
+
 const humanTakeOver: TreeNodeType = {
 	type: 'question',
 	text: 'Will some human, or group of humans use AI to take over?',
@@ -29,11 +32,11 @@ const humanTakeOver: TreeNodeType = {
 		explanation: "Many people have similar values, but it's not guaranteed.",
 		yes: {
 			type: 'safe',
-			text: 'In this world, AI is used to take over and the people who control it have the same goals as you do. This may just be the utopia we were promised by the AI labs!'
+			text: 'In this world, AI is used to take over and the people who control it have the same goals as you do. This may just be the utopia we were promised by the AI labs!' + optimist_help_str
 		},
 		no: {
 			type: 'doom',
-			text: 'A group of humans successfully used AI to take over and can remain in power indefinitely. This group does not share your values, so some inescapable dystopia becomes reality.'
+			text: 'A group of humans successfully used AI to take over and can remain in power indefinitely. This group does not share your values, so some inescapable dystopia becomes reality.' + doomer_hope_str
 		}
 	},
 	no: {
@@ -44,18 +47,18 @@ const humanTakeOver: TreeNodeType = {
 			"AI-powered cybersecurity, autonomous weapons and engineered pandemics or bioweapons can pose large scale threats to humanity, both from misuse or accidents. We may be able to stop these threats, if we apply strict regulations and safety measures, but as of now we're not doing that.",
 		yes: {
 			type: 'doom',
-			text: 'Even though we managed to escape AI doom by takeovers, we got an AI-related catastrophe.'
+			text: 'Even though we managed to escape AI doom by takeovers, we got an AI-related catastrophe.' + doomer_hope_str
 		},
 		no: {
 			type: 'safe',
-			text: 'Even though extremely powerful AI systems exist, AIs never go rogue, nobody succeeds in using AI to take over control and AI never causes large-scale catastrophes. We hope this is the universe we live in, but it seems like wishful thinking.'
+			text: 'Even though extremely powerful AI systems exist, AIs never go rogue, nobody succeeds in using AI to take over control and AI never causes large-scale catastrophes. We hope this is the universe we live in, but it seems like wishful thinking.' + optimist_help_str
 		}
 	}
 }
 
 export const tree: TreeNodeType = {
 	type: 'question',
-	text: "Will we continue to build AI until it's smarter than humans?",
+	text: "Will we continue to build AI without pausing?",
 	probability: 0.5,
 	explanation:
 		"AI systems are already surpassing most humans in many tasks. We can collectively decide to stop building this technology, but AI companies are doing everything in their power to advance capabilities. \n\n We're currently on track to achieving superhuman intelligence.",
@@ -85,16 +88,16 @@ export const tree: TreeNodeType = {
 						"While it is unlikely that the AI cares about humans at all, there's a good chance that if it cares about humans, it also cares about our well-being.",
 					yes: {
 						type: 'safe',
-						text: 'The AI has taken control away from humans, but still deeply cares about human well-being. A weird utopia, but a utopia nonetheless.'
+						text: 'The AI has taken control away from humans, but still deeply cares about human well-being. A weird utopia, but a utopia nonetheless.' + optimist_help_str
 					},
 					no: {
 						type: 'doom',
-						text: "We're ending up with an AI that does want to keep humans alive, but does not want make us happy. We can be used as slaves, to experiment on, or even to torture. Forever."
+						text: "We're ending up with an AI that does want to keep humans alive, but does not want make us happy. We can be used as slaves, to experiment on, or even to torture. Forever." + doomer_hope_str
 					}
 				},
 				no: {
 					type: 'doom',
-					text: 'At some point, an AI will probably succeed in taking over control from humans. AIs have many evolutionary advantages over humans. We will be unable to stop it. The AI will become the dominant organism on earth, and will eventually outcompete all lifeforms on earth. Nothing survives.'
+					text: 'At some point, an AI will probably succeed in taking over control from humans. AIs have many evolutionary advantages over humans. We will be unable to stop it. The AI will become the dominant organism on earth, and will eventually outcompete all lifeforms on earth. Nothing survives.' + doomer_hope_str
 				}
 			},
 			no: humanTakeOver
@@ -102,18 +105,7 @@ export const tree: TreeNodeType = {
 		no: humanTakeOver
 	},
 	no: {
-		type: 'question',
-		text: 'Will non-superhuman AI cause a global catastrophe?',
-		probability: 0.5,
-		explanation:
-			"AI-powered cybersecurity, autonomous weapons and engineered pandemics or bioweapons can pose large scale threats to humanity, both from misuse or accidents. We may be able to stop these threats, if we apply strict regulations and safety measures, but as of now we're not doing that.",
-		yes: {
-			type: 'doom',
-			text: 'An AI-related catastrophe happens before we even get to superintelligence. Since some dangerous capabilities do not even require general superintelligence, this might be one of the more likely outcomes.'
-		},
-		no: {
-			type: 'safe',
-			text: "If we successfully prevent dangerous AI from being developed, it can never outsmart humans, and we can even prevent other forms of AI catastrophe. We hope we're living in this universe. You can help to achieve this!"
-		}
+		type: 'safe',
+		text: "If we successfully prevent dangerous AI from being developed we could prevent AI catastrophes. We hope we're living in this universe. You can help achieve this!"
 	}
 }
