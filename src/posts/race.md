@@ -47,3 +47,5 @@ For example, international organizations like:
 We may also need binding treaties signed by all countries capable of training very large AI models. These treaties would ensure that no country cuts safety requirements in an effort to release a large, potentially dangerous AI model onto the public internet ahead of others.
 
 Fortunately, the computer hardware required to train these large LLM/AI models is (currently) very specialized and expensive. With proper organization and tracking, we could prevent rogue or unsafe actors from training and deploying such a model, similar to how we track and limit access to unsafe biological pathogens or nuclear materials.
+
+"Giving people time to come to grips with this technology, to understand it, to find its limitations, its benefits, the regulations we need around it, what it takes to make it safe that's really important. Going off to build a super powerful AI system in secret and then dropping it on the world all at once I think would not go well." -- Sam Altman, US Congressional Testimony 2024
