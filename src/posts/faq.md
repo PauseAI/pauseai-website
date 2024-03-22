@@ -43,6 +43,11 @@ But if we keep building more and more powerful AI systems, eventually we will re
 
 We've addressed these concerns in [this article](/mitigating-pause-failures).
 
+## Is a Pause even possible?
+
+Yes! AGI is not inevitable: it requires a lot of resources and effort, and most people are in favor of a Pause.
+[Read more about the feasibility of a Pause](/feasibility).
+
 ## Who is paying you?
 
 We have not received significant funding so far.
