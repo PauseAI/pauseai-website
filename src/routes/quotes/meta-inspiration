@@ -1,0 +1,9 @@
+import type { Post } from "$lib/types";
+
+export const meta-inspiration: Post = {
+  title: 'Inspiration:',
+  description: 'Quotes of inspiration about fighting back agaists the risks from artificial intelligence',
+  date: '2024-03-22',
+  slug: 'quotes-inspiration',
+  categories: []
+}
