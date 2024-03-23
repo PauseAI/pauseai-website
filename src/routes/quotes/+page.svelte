@@ -2,6 +2,7 @@
 	import { title } from '$lib/config'
 	import Quote from './Quote.svelte'
 	import { meta-expectation } from './meta-expectation'
+	import { meta-inspiration } from './meta-inspiration'
 	import PostMeta from '$lib/components/PostMeta.svelte';
 
 	export let data
