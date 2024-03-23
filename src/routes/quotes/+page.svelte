@@ -17,6 +17,13 @@
 <h1>{meta-expectation.title}</h1>
 <PostMeta {...meta-expectation} />
 
-{#each quotes as quote}
+{#each quotes-expectation as quote}
+	<Quote {...quote} />
+{/each}
+
+<h1>{meta-inspiration.title}</h1>
+<PostMeta {...meta-inspiration} />
+
+{#each quotes-inspiration as quote}
 	<Quote {...quote} />
 {/each}
