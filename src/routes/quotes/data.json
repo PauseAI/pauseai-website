@@ -59,14 +59,14 @@
     "background": "leyen",
     "text": "[We] should not underestimate the real threats coming from AI. [Fully quoted the above statement on the risk of extinction.] [...] It is moving faster than even its developers anticipated. [...] We have a narrowing window of opportunity to guide this technology responsibly.",
     "author": "Ursula von der Leyen",
-    "author_description": "Head of the European Commission, the executive branch of the European Union",
+    "author_description": "Head of the executive branch of the European Union",
     "color": "white"
   },
   {
     "background": "guterres",
     "text": "AI poses a long-term global risk. Even its own designers have no idea where their breakthrough may lead. I urge [the UN Security Council] to approach this technology with a sense of urgency. Unforeseen consequences of some AI-enabled systems could create security risks by accident. Generative AI has enormous potential for good and evil at scale. Its creators themselves have warned that much bigger, potentially catastrophic and existential risks lie ahead. Without action to address these risks, we are derelict in our responsibilities to present and future generations.",
     "author:": "António Guterres",
-    "author_description": "Secretary-General of the United Nations",
+    "author_description": "Chief Executive Officer of the United Nations",
     "color": "white"
   },
   {
