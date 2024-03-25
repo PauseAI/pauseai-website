@@ -45,7 +45,11 @@ We've addressed these concerns in [this article](/mitigating-pause-failures).
 
 ## Is a Pause even possible?
 
-Yes! AGI is not inevitable: it requires a lot of resources and effort, and most people are in favor of a Pause.
+AGI is not inevitable.
+It requires hordes of engineers with million-dollar paychecks.
+It requires a fully functional and unrestricted supply chain of the most complex hardware.
+It requires all of us to allow these companies to gamble with our future.
+
 [Read more about the feasibility of a Pause](/feasibility).
 
 ## Who is paying you?
