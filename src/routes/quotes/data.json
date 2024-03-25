@@ -51,7 +51,8 @@
     "author": "Paul Christiano",
     "author_description": "Founder, Alignment Research Center and Former Head of the Alignment Team, OpenAI",
     "color": "white",
-    "padding": "3.6rem"
+    "padding": "3.6rem",
+      "notice": "© Paul Christiano, https://paulfchristiano.com"
   },
   {
     "background": "tallin",
