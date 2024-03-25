@@ -45,27 +45,11 @@
     "color": "white"
   },
   {
-    "background": "kamala",
-    "text": "[...] just as AI has the potential to do profound good, it also has the potential to cause profound harm. From AI-enabled cyberattacks at a scale beyond anything we have seen before to AI-formulated bio-weapons that could endanger the lives of millions, these threats are often referred to as the “existential threats of AI” because, of course, they could endanger the very existence of humanity. These threats, without question, are profound, and they demand global action.",
-    "author": "Kamala Harris",
-    "author_description": "Vice President of the United States",
-    "color": "black",
-    "padding": "0rem"
-  },
-  {
     "background": "qiang",
     "text":"AI must be guided in a direction that is conducive to the progress of humanity. So there should be a red line in AI development, a red line that must not be crossed. [...] It should not just benefit only a small group of people, but benefit the overwhelming majority of mankind. [...] It is essential that we work together and coordinate with each other.",
     "author": "Li Qiang",
     "author_description": "China's Head of Government",
     "color": "black"
-  },
-  {
-    "background": "jun",
-    "text": "The potential impact of AI might exceed human cognitive boundaries. To ensure that this technology always benefits humanity, we must regulate the development of AI and prevent this technology from turning into a runaway wild horse. [...] We need to strengthen the detection and evaluation of the entire lifecycle of AI, ensuring that mankind has the ability to press the pause button at critical moments",
-    "author": "Zhang Jun",
-    "author_description": "China's Ambassador of the United Nations",
-    "color": "black",
-    "padding": "0rem"
   },
   {
     "background": "leyen",
@@ -88,6 +72,22 @@
     "author": "Pope Francis",
     "author_description": "Head of the Catholic Church",
     "color": "white",
+    "padding": "0rem"
+  },
+  {
+    "background": "kamala",
+    "text": "[...] just as AI has the potential to do profound good, it also has the potential to cause profound harm. From AI-enabled cyberattacks at a scale beyond anything we have seen before to AI-formulated bio-weapons that could endanger the lives of millions, these threats are often referred to as the “existential threats of AI” because, of course, they could endanger the very existence of humanity. These threats, without question, are profound, and they demand global action.",
+    "author": "Kamala Harris",
+    "author_description": "Vice President of the United States",
+    "color": "black",
+    "padding": "0rem"
+  },
+  {
+    "background": "jun",
+    "text": "The potential impact of AI might exceed human cognitive boundaries. To ensure that this technology always benefits humanity, we must regulate the development of AI and prevent this technology from turning into a runaway wild horse. [...] We need to strengthen the detection and evaluation of the entire lifecycle of AI, ensuring that mankind has the ability to press the pause button at critical moments",
+    "author": "Zhang Jun",
+    "author_description": "China's Ambassador of the United Nations",
+    "color": "black",
     "padding": "0rem"
   },
   {
