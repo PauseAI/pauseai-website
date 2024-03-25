@@ -30,6 +30,9 @@ It is entirely possible that _simply scaling up_ will get us to [dangerous capab
 
 ## We reached human-level performance in many domains in 2023
 
+In 2022, AI researchers thought it would take [17 years](https://aiimpacts.org/2022-expert-survey-on-progress-in-ai/) until AI would be able to write a New York Times bestseller.
+A year later, a Chinese professor [won a writing contest](https://www.scmp.com/news/china/science/article/3245725/chinese-professor-used-ai-write-science-fiction-novel-then-it-won-national-award) with an AI-written book.
+
 On Metaculus, [the community prediction for (weak) AGI](https://www.metaculus.com/questions/3479/date-weakly-general-ai-is-publicly-known/) was 2057 just three years ago, and now it's ~~2027~~ 2026.
 
 Now, let's dive into the definition of AGI used in that survey:
