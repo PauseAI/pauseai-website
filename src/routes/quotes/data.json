@@ -63,7 +63,7 @@
     "text": "AI poses a long-term global risk. Even its own designers have no idea where their breakthrough may lead. I urge [the UN Security Council] to approach this technology with a sense of urgency. Unforeseen consequences of some AI-enabled systems could create security risks by accident. Generative AI has enormous potential for good and evil at scale. Its creators themselves have warned that much bigger, potentially catastrophic and existential risks lie ahead. Without action to address these risks, we are derelict in our responsibilities to present and future generations.",
     "author:": "António Guterres",
     "author_description": "Chief Executive Officer of the United Nations",
-    "color": "black",
+    "color": "white",
     "padding": "0rem"
   },
   {
@@ -79,7 +79,7 @@
     "text": "[...] just as AI has the potential to do profound good, it also has the potential to cause profound harm. From AI-enabled cyberattacks at a scale beyond anything we have seen before to AI-formulated bio-weapons that could endanger the lives of millions, these threats are often referred to as the “existential threats of AI” because, of course, they could endanger the very existence of humanity. These threats, without question, are profound, and they demand global action.",
     "author": "Kamala Harris",
     "author_description": "Vice President of the United States",
-    "color": "black",
+    "color": "white",
     "padding": "0rem"
   },
   {
@@ -87,7 +87,7 @@
     "text": "The potential impact of AI might exceed human cognitive boundaries. To ensure that this technology always benefits humanity, we must regulate the development of AI and prevent this technology from turning into a runaway wild horse. [...] We need to strengthen the detection and evaluation of the entire lifecycle of AI, ensuring that mankind has the ability to press the pause button at critical moments",
     "author": "Zhang Jun",
     "author_description": "China's Ambassador of the United Nations",
-    "color": "black",
+    "color": "white",
     "padding": "0rem"
   },
   {
