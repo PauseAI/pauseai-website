@@ -16,11 +16,11 @@
   },
   {
     "background": "sunak",
-    "text": "Get this wrong, and AI could make it easier to build chemical or biological weapons. Terrorist groups could use AI to spread fear and destruction on an even greater scale. Criminals could exploit AI for cyber-attacks, disinformation, fraud, or even child sexual abuse. And in the most unlikely but extreme cases, there is even the risk that humanity could lose control of AI completely through the kind of AI sometimes referred to as ‘super intelligence’. Indeed, to quote the statement made earlier this year by hundreds of the world’s leading AI experts: “Mitigating the risk of extinction from AI should be a global priority alongside other societal-scale risks such as pandemics and nuclear war”.",
+    "text": "Get this wrong, and AI could make it easier to build chemical or biological weapons. Terrorist groups could use AI to spread fear and destruction on an even greater scale. [...] And in the most unlikely but extreme cases, there is even the risk that humanity could lose control of AI completely through the kind of AI sometimes referred to as ‘super intelligence’. Indeed, to quote the statement made earlier this year by hundreds of the world’s leading AI experts: “Mitigating the risk of extinction from AI should be a global priority alongside other societal-scale risks such as pandemics and nuclear war”.",
     "author": "Rishi Sunak",
     "author_description": "United Kingdom's Prime Minister",
     "color":"black",
-    "padding": "0rem"
+    "padding": "0.3rem"
   },
   {
     "background": "trump",
@@ -28,7 +28,7 @@
     "author": "Donald Trump",
     "author_description": "45th President of the United States",
     "color": "white",
-    "padding": "0rem"
+    "padding": "4rem"
   },
   {
     "background": "biden",
@@ -42,6 +42,7 @@
     "text": "Artificial intelligence is the future, not only for Russia, but for all humankind. It comes with colossal opportunities, but also threats that are difficult to predict. Whoever becomes the leader in this sphere will become the ruler of the world.[...] If we become leaders in this area, we will share this know-how with [the] entire world, the same way we share our nuclear technologies today.",
     "author": "Vladimir Putin",
     "author_description": "President of Russia",
+    "padding": "3rem",
     "color": "white"
   },
   {
@@ -49,7 +50,8 @@
     "text":"AI must be guided in a direction that is conducive to the progress of humanity. So there should be a red line in AI development, a red line that must not be crossed. [...] It should not just benefit only a small group of people, but benefit the overwhelming majority of mankind. [...] It is essential that we work together and coordinate with each other.",
     "author": "Li Qiang",
     "author_description": "China's Head of Government",
-    "color": "black"
+    "padding": "3rem",
+    "color": "white"
   },
   {
     "background": "leyen",
@@ -63,8 +65,8 @@
     "text": "AI poses a long-term global risk. Even its own designers have no idea where their breakthrough may lead. I urge [the UN Security Council] to approach this technology with a sense of urgency. Unforeseen consequences of some AI-enabled systems could create security risks by accident. Generative AI has enormous potential for good and evil at scale. Its creators themselves have warned that much bigger, potentially catastrophic and existential risks lie ahead. Without action to address these risks, we are derelict in our responsibilities to present and future generations.",
     "author:": "António Guterres",
     "author_description": "Chief Executive Officer of the United Nations",
-    "color": "white",
-    "padding": "0rem"
+    "color": "black",
+    "padding": "1rem"
   },
   {
     "background": "pope",
@@ -72,7 +74,7 @@
     "author": "Pope Francis",
     "author_description": "Head of the Catholic Church",
     "color": "white",
-    "padding": "0rem"
+    "padding": "2rem"
   },
   {
     "background": "kamala",
@@ -80,7 +82,7 @@
     "author": "Kamala Harris",
     "author_description": "Vice President of the United States",
     "color": "white",
-    "padding": "0rem"
+    "padding": "2.4rem"
   },
   {
     "background": "jun",
@@ -88,7 +90,7 @@
     "author": "Zhang Jun",
     "author_description": "China's Ambassador of the United Nations",
     "color": "white",
-    "padding": "0rem"
+    "padding": "3.5rem"
   },
   {
     "background": "turing",
@@ -103,7 +105,7 @@
     "author": "Elon Musk",
     "author_description": "Founder/ Co-Founder of OpenAI, Neuralink, SpaceX, xAI, PayPal, CEO of Tesla, CTO of X",
     "color": "white",
-    "padding": "0rem"
+    "padding": "0.1rem"
   },
   {
     "background": "gates",
@@ -114,10 +116,10 @@
   },
   {
     "background": "hinton",
-    "text": "If you want a system to be effective, you need to give it the ability to create its own subgoals. Now, the problem is, there’s a very general subgoal that helps with almost all goals: get more control. The research question is: how do you prevent them from ever wanting to take control? And nobody knows the answer. [...] The alarm bell I’m ringing has to do with the existential threat of them taking control [...] If you take the existential risk seriously, as I now do, **it might be quite sensible to just stop developing these things any further.**",
+    "text": "If you want a system to be effective, you need to give it the ability to create its own subgoals. Now, the problem is, there’s a very general subgoal that helps with almost all goals: get more control. The research question is: how do you prevent them from ever wanting to take control? And nobody knows the answer. [...] If you take the existential risk seriously, as I now do, **it might be quite sensible to just stop developing these things any further.**",
     "author": "Geoffrey Hinton",
     "author_description": "2018 Turing Award Recipient, Godfather of Deep Learning, 1st/3rd most cited scientist ever, resigned from Google in 2023 due to ethical concerns",
-    "padding": "0rem"
+    "padding": "1rem"
   },
   {
     "background": "bengio",
