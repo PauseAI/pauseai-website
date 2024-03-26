@@ -28,54 +28,46 @@ There are multiple monopolies in the supply chain for AI training hardware:
 - TSMC is the only company that can manufacture the most advanced chips
 - NVidia is the only company that designs the most advanced GPUs
 
-## Power over companies and governments
+## Power over companies
 
-Although each proof of incompetence or malice of our governments,
-companies and systems can lure us into defeatist thinking,
-where coordination is too hard, the interests of the people are not well represented,
-and/or are represented but are stupid,
-we fail to recognize the victories throughout history.
-
-As problem solvers, conflict stays in our minds, it eats us alive, stories without it don't drive our attention, there is a reason why they only continue after the happy ending if another conflict appears.
-The same happens in news and real life.
-Good events don't drive our curiosity as much as bad ones, and that can lead us to have bad models of the world.
-
-If what you fear is mainly companies or organizations, there are two ways we can control them:
-
-1. Laws, regulations and treaties.
-2. Public opinion forces them to autoregulate themselves.
+If what you fear is mainly companies or organizations, we can control them via 1) laws, regulations and treaties, or 2) public opinion that forces them to self-regulate.
 
 Of course, the first method is the better one, but reputation which affects customers, investors, employee morale and recruitment, is a reason why we organize protests in front of some AI labs.
 Also, it's important to remember that regulations can benefit companies in the long-term, because of regulatory capture, not losing consumers if the dangers actualize, and disadvantage competitors.
 So we must be wary that we not only get a pause but that it is not lifted until it's actually safe to keep developing frontier AI.
+
+## Power over governments
 
 If you fear governments not taking your safety seriously, that's a more complicated issue.
 But generally, politicians care about not losing political support to a certain degree.
 And, more importantly, they can also be concerned about the risks without the huge bias and legal obligations that some individuals from companies have to maximize profits.
 <!--Also, foreign states can pressure governments... follow up?-->
 
-If you think we could get regulation of a single government, but not a multilateral treaty, one thing you must realize is that if a government can recognize that some uncontrollable technologies that can originate from other nations are a danger for its nation, they become a national security problem, and the government becomes invested in other countries stopping their development too.
-Also, we don't really need many countries agreeing to a pause in the first place.
-In reality, the urgent thing is to get a ban just in the US.
-China and the rest of the world seem pretty far behind, and it's fine if their accession to a treaty happens afterward.
+If you think we could get regulation of a single government, but not a multilateral treaty, you have to realize that if governments can recognize that some uncontrollable technologies are a danger for its population and can originate from other nations, the new technologies become a national security problem, and the governments become invested in stopping other countries from developing it too.
+Additionally, it's important to realize that we don't really need many countries to agree to a pause in the first place.
+In reality, you can get a pause in the development of cutting-edge models by banning it just in the US (and even just in California).
+China and the rest of the world seem pretty far behind, and we shouldn't worry if their accession to a treaty happens somewhat later.
 
-### Similar historical cases
+## Similar historical cases
+
+Although each proof of incompetence or malice of our governments, companies and systems can lure us into defeatist thinking, where coordination is too hard, the interests of the people are not well represented,
+and/or are represented but are stupid, we sometimes fail to recognize victories that we had as a civilization throughout history.
 
 For empiric evidence of why a treaty like this is possible, we should look at past global agreements.
 Whether informal or formal, they have been quite common throughout history, mainly to resolve disputes and progress human rights.
-A lot of them, whether informal or formal, had against them strong short-term economic incentives such as those provided by AI.
-Including the abolition of slavery, which was argued to be impossible due to short-term economic interests.
+A lot of past victories, like the abolition of slavery, _also_ had strong, short-term economic incentives against them.
+But that didn't stop them.
 
-But, what about more modern examples of global agreements against new technologies? Some of the most important ones are:
+If we look for similar modern examples of global agreements against new technologies, we can find a lot. Some of the most important ones were:
 
-- The Montreal Protocol banned CFCs production in all 197 countries and as a result caused global emissions of ozone-depleting substances to decline by more than 99% since 1986. This agreement is the reason why the ozone layer hole is healing now, and we don't hear about it anymore.
-- The Biological Weapons Convention bans biological and toxin weapons and was signed by 185 states.
-- The Chemical Weapons Convention bans chemical weapons and was signed by 193 states.
-- The Environmental Modification Convention bans weather warfare and was signed by 78 states.
-- The Outer Space Treaty bans the stationing of weapons of mass destruction in outer space, prohibits military activities on celestial bodies, details legally binding rules governing the peaceful exploration and use of space, and was signed by 114 countries.
-- Nuclear warfare, although previously expected to proliferate uncontrollably, has not been developed by many countries. Some international agreements, such as the Non-Proliferation Treaty, have been key in preventing the spread of nuclear weapons and furthering the goal of achieving nuclear disarmament. It is a meaningful achievement to have dissuaded many countries from pursuing nuclear weapons programs, reduced the amount of nuclear arsenals since the 90s, and avoided nuclear war for many decades now.
-- The International Atomic Energy Agency (IAEA) is an intergovernmental organization that seeks to promote the peaceful use of nuclear energy and to inhibit its use for any military purpose, including nuclear weapons. It implements nuclear safety standards and is composed of 178 member states. Regardless of whether you think nuclear power is overregulated or not, it is thought of as a good example of what we could have to evaluate the safety of big AI models.
-- Although preferable, a _formal agreement_ may not be necessary. In 2005, the United Nations called on member states to ban Human Cloning, which more than 60 countries did either fully or partially. Those multiple unilateral regulations have been enough to not have a single (verified) case of a human being cloned almost 20 years later.
+- The [Montreal Protocol](https://en.wikipedia.org/wiki/Montreal_Protocol), which banned CFCs production in all 197 countries and as a result caused global emissions of ozone-depleting substances to decline by more than 99% since 1986. Thanks to the protocol, the ozone layer hole is healing now, and that's why we no longer hear about it.
+- The [Biological Weapons Convention](https://en.wikipedia.org/wiki/Biological_Weapons_Convention), which banned biological and toxin weapons and was signed by 185 states.
+- The [Chemical Weapons Convention](https://en.wikipedia.org/wiki/Chemical_Weapons_Convention), which banned chemical weapons and was signed by 193 states.
+- The [Environmental Modification Convention](https://en.wikipedia.org/wiki/Environmental_Modification_Convention), which banned weather warfare and was signed by 78 states.
+- The [Outer Space Treaty](https://en.wikipedia.org/wiki/Outer_Space_Treaty), which banned the stationing of weapons of mass destruction in outer space, prohibited military activities on celestial bodies, legally binded the peaceful exploration and use of space, and was signed by 114 countries.
+- The [Non-Proliferation Treaty](https://en.wikipedia.org/wiki/Treaty_on_the_Non-Proliferation_of_Nuclear_Weapons) and a bunch of other international agreements, which have been key in preventing the spread of nuclear weapons and furthering the goal of achieving nuclear disarmament. Thanks to them we have dissuaded many countries from pursuing nuclear weapons programs, reduced the amount of nuclear arsenals since the 90s, and avoided nuclear war for many decades. All incredible achievements.
+- The [International Atomic Energy Agency](https://en.wikipedia.org/wiki/International_Atomic_Energy_Agency), which is an intergovernmental organization composed of 178 member states that seeks to promote the peaceful use of nuclear energy and to inhibit its use for any military purpose. Regardless of whether you think nuclear power is overregulated or not, the IAEA is thought of as a good example of an international tool that we could have to evaluate the safety of the largest AI models.
+- And the [United Nations Declaration on Human Cloning](https://en.wikipedia.org/wiki/United_Nations_Declaration_on_Human_Cloning), which called member states to ban Human Cloning in 2005 and led a lot of them to do it. It's an interesting case because now, almost 20 years later and without a _formal agreement_, 60 countries have banned it either fully or partially and there hasn't been a single (verified) case of a human being cloned. So in a way it suggests the possibility of many unilateral regulations being enough to prevent other dangerous technologies from also being developed. 
 <!-- Geneva Conventions? They're not really about tech-->
 
 If you think AI is actually similar to other cases in which we failed to make any good treaties internationally: everything that ever happened had a first time.
@@ -84,20 +76,19 @@ There were particularities that made them the first time and that's a reason to 
 ### Impact of protests
 
 It's quite common for people to question the effectiveness of protests and social movements in general.
-Of course, there are many cases where demonstrations don't yield any results, but there are also situations where the protesters' demands are met.
-Where [the protests are likely to have influenced those outcomes](https://www.socialchangelab.org/_files/ugd/503ba4_052959e2ee8d4924934b7efe3916981e.pdf).
+Of course, there are many cases where demonstrations don't yield any results, but there are also situations where the protesters' demands are met and it seems likely that those outcomes [where caused by the protests](https://www.socialchangelab.org/_files/ugd/503ba4_052959e2ee8d4924934b7efe3916981e.pdf).
 And [there are reasons to believe that AI activism could achieve similar results](https://forum.effectivealtruism.org/posts/WfodoyjePTTuaTjLe/efficacy-of-ai-activism-have-we-ever-said-no).
 
-In any case, if for some reason you don't believe in the impact of protests, you can read about the other things that [PauseAI does](/action), and you can try to [contact governments directly](/lobby-tips).
+If you don't like the idea of protesting anyways, we also [take other actions](/action), like contacting [governments directly](/lobby-tips).
 
 ## AI particular case
 
 If you think AI is different enough to these cases (or even if you don't), it's useful to analyze its particular situation.
 The things that make AI different may not necessarily make it less regulatable.
-For example, we are not trying to regulate existing products and services that people already enjoy and use regularly, and we are not going against a lot of companies that can lobby or workers who would lose their jobs if we are successful. Pretty much the opposite.
-Also, the public is not partisan or politically divided but [united in support of regulation](https://drive.google.com/file/d/1n0pXDBuIcb01tW4TQdP1Mb5aAiFDvWk0/view).
-Still, a lot of people haven't made their minds about it yet.
-We must be careful to not put them off, hear their perspectives, and see in which particular ways they can be helped by a pause based on what they care about.
+For example, we are [not trying to regulate existing products and services that people already enjoy and use regularly](/proposal), and we are not going against a lot of companies that can lobby or workers who would lose their jobs if we are successful. Pretty much the opposite.
+
+Another point in favor is that the public is not partisan or politically divided, but [united in support of regulation](https://drive.google.com/file/d/1n0pXDBuIcb01tW4TQdP1Mb5aAiFDvWk0/view).
+Nevertheless we must be careful to not put them off, hear their perspectives, and see in which particular ways they can be helped by a pause based on what they care about. Since a lot of people haven't yet made up their minds about what type of regulation they support.
 
 When it comes to AI risks, the public and the experts seem [worried about the risks and interested in regulation](/polls-and-surveys).
 The politicians, based on the [policies that are passing and working on](https://www.bloomberg.com/news/articles/2024-03-13/regulate-ai-how-us-eu-and-china-are-going-about-it), the [summits that they are organizing](/summit), and the [statements that they are giving](/quotes)<!--we have to finish that page-->, seem pretty worried too.
