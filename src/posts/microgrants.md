@@ -33,4 +33,4 @@ Here's a list of examples:
 ## Who will fund
 
 - PauseAI will fund 10,000 EUR
-- Greg Colborn will fund an additional 10,000 EUR
+- Greg Colbourn will fund an additional 10,000 EUR
