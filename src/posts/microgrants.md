@@ -9,7 +9,7 @@ And sometimes we need funds to be more effective.
 But getting funding can be a hassle - especially if you've never applied to a grant.
 
 This is where PauseAI MicroGrants come in handy!
-Small amounts of money (typically < 2000 EUR) for working on a project.
+Small amounts of money (typically under 2000 EUR) for working on a project.
 We're pretty open about what types of projects could apply.
 Here's a list of examples:
 
