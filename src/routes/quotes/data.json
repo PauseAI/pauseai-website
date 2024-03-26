@@ -43,7 +43,8 @@
     "author": "Eliezer Yudkowsky",
     "author_description": "Co-Founder, Machine Intelligence Research Institute",
     "color": "white",
-    "padding": "3.6rem"
+    "padding": "3.6rem",
+    "notice": "© Roland Dobbins, https://en.wikipedia.org/wiki/Eliezer_Yudkowsky"
   },
     {
     "background": "christiano",
