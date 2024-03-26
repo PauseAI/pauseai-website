@@ -1,15 +1,15 @@
 [
   {
     "background": "",
-    "text": "***Mitigating the risk of extinction from AI should be a global priority alongside other societal-scale risks such as pandemics and nuclear war.***",
+    "text": "**Mitigating the risk of extinction from AI should be a global priority alongside other societal-scale risks such as pandemics and nuclear war**.",
     "author": "Statement on AI risk,",
-    "author_description": "signed by hundreds of AI experts and other notable figures. Including 3 of the most cited scientists ever: Bengio, Hinton & Sutskever, and the 3 CEOs of the top 3 AI companies: Altman, Hassabis & Amodei. Endorsed by Rishi Sunak and Ursula von der Leyen.",
+    "author_description": "signed by hundreds of AI experts and other notable figures. Including 3 of the most cited scientists ever: J. Bengio, G. Hinton & I. Sutskever, and the CEOs of the top AI companies: S. Altman, D. Hassabis & D. Amodei. Endorsed by Rishi Sunak and Ursula von der Leyen.",
     "color": "white",
     "padding": "1rem"
   },
   {
     "background": "white",
-    "text": "***The development of full artificial intelligence could spell the end of the human race.***",
+    "text": "**The development of full artificial intelligence could spell the end of the human race**.",
     "author": "Stephen Hawking",
     "author_description": "Theoretical Physicist and Cosmologist",
     "color": "",
@@ -17,7 +17,7 @@
   },
   {
     "background": "",
-    "text": "Get this wrong, and AI could make it easier to build chemical or biological weapons. Terrorist groups could use AI to spread fear and destruction on an even greater scale. Criminals could exploit AI for cyber-attacks, disinformation, fraud, or even child sexual abuse. And in the most unlikely but extreme cases, there is **even the risk that humanity could lose control of AI completely** through the kind of AI sometimes referred to as ‘super intelligence’.",
+    "text": "Get this wrong, and AI could make it easier to build chemical or biological weapons. Terrorist groups could use AI to spread fear and destruction on an even greater scale. Criminals could exploit AI for cyber-attacks, disinformation, fraud, or even child sexual abuse. And in the most unlikely but extreme cases, there is even the risk that **humanity could lose control of AI completely** through the kind of AI sometimes referred to as ‘super intelligence’.",
     "author": "Rishi Sunak",
     "author_description": "United Kingdom's Prime Minister",
     "color": "white"
@@ -31,14 +31,14 @@
   },
   {
     "background": "black",
-    "text": "Social media has shown us the harm that powerful technology can do without the right safeguards in place [...] we must be clear-eyed and vigilant about the threats emerging — of emerging technologies that can pose — don’t have to, but can pose — to our democracy and our values [...] **Realizing the promise of AI by managing the risk is going to require some new laws, regulations, and oversight.**",
+    "text": "Artificial Intelligence is one of the most powerful tools of our time, but to seize its opportunities, **we must first mitigate its risks**. [...] Social media has shown us the harm that powerful technology can do without the right safeguards in place [...] we must be clear-eyed and vigilant about the threats emerging — of emerging technologies that can pose — don’t have to, but can pose — to our democracy and our values",
     "author": "Joe Biden",
     "author_description": "46th President of the United States",
     "color": "white"
   },
   {
     "background": "white",
-    "text": "**Artificial intelligence is the future, not only for Russia, but for all humankind.** It comes with colossal opportunities, but also threats that are difficult to predict. Whoever becomes the leader in this sphere will become the ruler of the world [...] If we become leaders in this area, we will share this know-how with entire world, the same way we share our nuclear technologies today.",
+    "text": "Artificial intelligence is the future, not only for Russia, but for all humankind. It comes with colossal opportunities, but also threats that are difficult to predict. **Whoever becomes the leader in this sphere will become the ruler of the world** [...] If we become leaders in this area, we will share this know-how with entire world, the same way we share our nuclear technologies today.",
     "author": "Vladimir Putin",
     "author_description": "President of Russia"
   },
@@ -51,7 +51,7 @@
   },
   {
     "background": "white",
-    "text": "**[We] should not underestimate the real threats coming from AI** [...] It is moving faster than even its developers anticipated [...] We have a narrowing window of opportunity to guide this technology responsibly.",
+    "text": "[We] **should not underestimate the real threats coming from AI** [...] It is moving faster than even its developers anticipated [...] We have a narrowing window of opportunity to guide this technology responsibly.",
     "author": "Ursula von der Leyen",
     "author_description": "Head of the executive branch of the European Union"
   },
@@ -107,10 +107,10 @@
   },
   {
     "background": "hinton",
-    "text": "If you want a system to be effective, you need to give it the ability to create its own subgoals. Now, the problem is, there’s a very general subgoal that helps with almost all goals: get more control. The research question is: how do you prevent them from ever wanting to take control? And nobody knows the answer [...] The alarm bell I’m ringing has to do with the existential threat of them taking control [...] If you take the existential risk seriously, as I now do, **it might be quite sensible to just stop developing these things any further.**",
+    "text": "The research question is: how do you prevent them from ever wanting to take control? And nobody knows the answer [...] The alarm bell I’m ringing has to do with the existential threat of them taking control [...] If you take the existential risk seriously, as I now do, **it might be quite sensible to just stop developing these things any further.**",
     "author": "Geoffrey Hinton",
     "author_description": "1st/3rd most cited scientist ever, Godfather of modern AI, Turing Award Recipient, resigned from Google due to ethical concerns",
-    "padding": "1rem"
+    "padding": "3.6rem"
   },
   {
     "background": "bengio",
