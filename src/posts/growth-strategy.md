@@ -19,3 +19,7 @@ This is why we are a _movement_, a _community_ something bigger than ourselves.
 - **Be a teacher**. Nobody is born an activist or a lobbyist, but we can learn to become one. Share your lessons and experiences, and help others to grow.
 - **Be personal**. We share our personal stories and emotions. People connect with people, not with abstract ideas.
 - **Build alliances**. We are not alone. We need to work with other groups and movements. We can learn from them and they can learn from us.
+
+## Help out
+
+[Join](/join) our discord server and see what you can do to help us grow.
