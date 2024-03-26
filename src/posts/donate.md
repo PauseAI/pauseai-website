@@ -8,7 +8,7 @@ Since February 2024, PauseAI is a [registered non-profit foundation](/legal).
 We do not yet have sufficient funds to hire people to work full-time on PauseAI, so we still run on volunteer work.
 With your financial support, we can professionalize and have a bigger impact.
 
-[![Donate now](/PayPal.svg)](https://www.paypal.com/donate/?hosted_button_id=4TWZXY62EM5VE)
+<div style="display: flex; justify-content: center;" ><a href="https://www.paypal.com/donate/?hosted_button_id=4TWZXY62EM5VE"><img src="/PayPal.svg" alt="Donate now"/></a></div>
 
 ## How we use your donations
 
