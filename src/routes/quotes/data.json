@@ -5,7 +5,7 @@
     "author": "Statement on AI risk,",
     "author_description": "signed by hundreds of AI experts and other notable figures. Including 3 of the most cited scientists ever: Bengio, Hinton & Illya, and the 3 CEOs of the top 3 AI companies: Altman, Hassabis & Amodei. Endorsed by Rishi Sunak and Ursula von der Leyen.",
     "color": "white",
-    "padding": "8rem"
+    "padding": "1rem"
   },
   {
     "background": "white",
@@ -13,76 +13,68 @@
     "author": "Stephen Hawking",
     "author_description": "Theoretical Physicist and Cosmologist",
     "color": "",
-    "padding": "8.5rem"
+    "padding": "7rem"
   },
   {
     "background": "",
     "text": "Get this wrong, and AI could make it easier to build chemical or biological weapons. Terrorist groups could use AI to spread fear and destruction on an even greater scale. Criminals could exploit AI for cyber-attacks, disinformation, fraud, or even child sexual abuse. And in the most unlikely but extreme cases, there is even the risk that humanity could lose control of AI completely through the kind of AI sometimes referred to as ‘super intelligence’.",
     "author": "Rishi Sunak",
     "author_description": "United Kingdom's Prime Minister",
-    "color": "white",
-    "padding": "9rem"
+    "color": "white"
   },
   {
     "background": "white",
     "text": "[...] the other thing that I think is **maybe the most dangerous thing out there** of anything, because there’s no real solution — the AI, as they call it.",
     "author": "Donald Trump",
     "author_description": "45th President of the United States",
-    "padding": "9.5rem"
+    "padding": "6rem"
   },
   {
     "background": "black",
     "text": "Social media has shown us the harm that powerful technology can do without the right safeguards in place [...] we must be clear-eyed and vigilant about the threats emerging — of emerging technologies that can pose — don’t have to, but can pose — to our democracy and our values [...] Realizing the promise of AI by managing the risk is going to require some new laws, regulations, and oversight.",
     "author": "Joe Biden",
     "author_description": "46th President of the United States",
-    "color": "white",
-    "padding": "10rem"
+    "color": "white"
   },
   {
     "background": "white",
     "text": "Artificial intelligence is the future, not only for Russia, but for all humankind. It comes with colossal opportunities, but also threats that are difficult to predict. Whoever becomes the leader in this sphere will become the ruler of the world [...] If we become leaders in this area, we will share this know-how with entire world, the same way we share our nuclear technologies today.",
     "author": "Vladimir Putin",
-    "author_description": "President of Russia",
-    "padding": "10.5rem"
+    "author_description": "President of Russia"
   },
   {
     "background": "",
     "text":"AI must be guided in a direction that is conducive to the progress of humanity. So there should be a red line in AI development, a red line that must not be crossed [...] It should not just benefit only a small group of people, but benefit the overwhelming majority of mankind [...] It is essential that we work together and coordinate with each other.",
     "author": "Li Qiang",
     "author_description": "China's Head of Government",
-    "color": "white",
-    "padding": "11rem"
+    "color": "white"
   },
   {
     "background": "white",
     "text": "[We] should not underestimate the real threats coming from AI [...] It is moving faster than even its developers anticipated [...] We have a narrowing window of opportunity to guide this technology responsibly.",
     "author": "Ursula von der Leyen",
-    "author_description": "Head of the executive branch of the European Union",
-    "padding": "11.5rem"
+    "author_description": "Head of the executive branch of the European Union"
   },
   {
     "background": "",
     "text": "AI poses a long-term global risk. Even its own designers have no idea where their breakthrough may lead. I urge [the UN Security Council] to approach this technology with a sense of urgency [...] Its creators themselves have warned that much bigger, potentially catastrophic and existential risks lie ahead.",
     "author:": "António Guterres",
     "author_description": "Chief Executive Officer of the United Nations",
-    "color": "white",
-    "padding": "12rem"
+    "color": "white"
   },
   {
     "background": "white",
     "text": "I urge the global community of nations to work together in order to adopt a binding international treaty that regulates the development and use of artificial intelligence in its many forms [...] [AI] may pose a risk to our survival and endanger our common home",
     "author": "Pope Francis",
     "author_description": "Head of the Catholic Church",
-    "color": "black",
-    "padding": "12.5rem"
+    "color": "black"
   },
   {
     "background": "",
     "text": "[...] just as AI has the potential to do profound good, it also has the potential to cause profound harm. From AI-enabled cyberattacks at a scale beyond anything we have seen before to AI-formulated bio-weapons that could endanger the lives of millions, these threats are often referred to as the “existential threats of AI” because, of course, they could endanger the very existence of humanity. These threats, without question, are profound, and they demand global action.",
     "author": "Kamala Harris",
     "author_description": "Vice President of the United States",
-    "color": "white",
-    "padding": "13rem"
+    "color": "white"
   },
   {
     "background": "white",
@@ -102,7 +94,7 @@
     "background": "musk",
     "text": "AI is a rare case where I think we need to be proactive in regulation than be reactive [...] I think that [digital super intelligence] is the single biggest existential crisis that we face and the most pressing one. It needs to be a public body that has insight and then oversight to confirm that everyone is developing AI safely. This is extremely important [...] And mark my words, AI is far more dangerous than nukes. Far. So why do we have no regulatory oversight? This is insane.",
     "author": "Elon Musk",
-    "author_description": "Founder/ Co-Founder of OpenAI, Neuralink, SpaceX, xAI, PayPal, CEO of Tesla,         CTO of X",
+    "author_description": "Founder/ Co-Founder of OpenAI, Neuralink, SpaceX, xAI, PayPal,\nCEO of Tesla, CTO of X",
     "color": "white",
     "padding": "2rem"
   },
@@ -117,14 +109,14 @@
     "background": "hinton",
     "text": "If you want a system to be effective, you need to give it the ability to create its own subgoals. Now, the problem is, there’s a very general subgoal that helps with almost all goals: get more control. The research question is: how do you prevent them from ever wanting to take control? And nobody knows the answer [...] The alarm bell I’m ringing has to do with the existential threat of them taking control [...] If you take the existential risk seriously, as I now do, **it might be quite sensible to just stop developing these things any further.**",
     "author": "Geoffrey Hinton",
-    "author_description": "2018 Turing Award Recipient, Godfather of Deep Learning, 1st/3rd most cited scientist ever, resigned from Google in 2023 due to ethical concerns",
-    "padding": "0rem"
+    "author_description": "2018 Turing Award Recipient, Godfather of modern AI,\n1st/3rd most cited scientist ever, resigned from Google due to ethical concerns",
+    "padding": "1rem"
   },
   {
     "background": "bengio",
     "text": "It's very hard, in terms of your ego and feeling good about what you do, to accept the idea that the thing you've been working on for decades **might actually be very dangerous to humanity**... I think that I didn't want to think too much about it, and that's probably the case for others.",
     "author": "Yoshua Bengio",
-    "author_description": "2018 Turing Award Recipient, Godfather of Deep Learning, 2nd/3rd most cited scientist ever",
+    "author_description": "2018 Turing Award Recipient, Godfather of modern AI,\n2nd/3rd most cited scientist ever",
     "color": "white",
     "padding": "3.6rem"
   },
