@@ -36,7 +36,7 @@ All funding that we receive will be used to accelerate our growth and increase o
 - Spend our remaining budget on PauseAI community projects through our MicroGrants program.
 - Build alliances with other organizations and overlapping cause areas to amplify our impact.
 
-### Scenario 2: 100k funding
+### Scenario 2: 100k to 200k funding
 
 - All of the above, plus:
 - Hire a **social media director**. This will help us improve our presence on social media and reach more people.
