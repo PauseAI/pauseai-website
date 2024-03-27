@@ -90,3 +90,24 @@ Our first annual report will be published after the first fiscal year ends on 31
 - Incorporation date: 28th December 2023
 - Company number: 15373608
 - Director: [William Baird](mailto:willb32764@gmail.com)
+
+## Relationship between entities
+
+PauseAI Global is responsible for:
+
+- Facilitating the growth of the movement.
+- Helping local PauseAI entities.
+- This website and the managing the online Discord community.
+- Volunteer management and growth.
+- Global social media.
+- Organizing digital events.
+- The global strategy and theory of change.
+- The global financials and fundraising.
+- [Microgrants](/microgrants).
+
+The national/local entities are responsible for:
+
+- Physical events and protests.
+- Getting local media coverage.
+- Local lobbying and policy work.
+- National-level policy work & feedback.
