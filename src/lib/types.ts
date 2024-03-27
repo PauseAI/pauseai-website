@@ -12,3 +12,9 @@ export type Post = {
 	date: string
 	categories: Categories[]
 }
+
+/** Individual volunteer */
+export type Person = {
+	id: string
+	name: string
+}
