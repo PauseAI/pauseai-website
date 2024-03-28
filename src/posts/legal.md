@@ -108,6 +108,6 @@ PauseAI Global is responsible for:
 The national/local entities are responsible for:
 
 - Physical events and protests.
-- Getting local media coverage.
-- Local lobbying and policy work.
+- Getting local [media coverage](/).
+- Local social media channels (e.g. [PauseAI UK](https://twitter.com/PauseAI_UK) and [PauseAI US](https://twitter.com/PauseAIus) twitter)
 - National-level policy work & feedback.
