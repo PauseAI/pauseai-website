@@ -92,7 +92,7 @@ export const tree: TreeNodeType = {
 					},
 					no: {
 						type: 'doom',
-						text: "We're ending up with an AI that does want to keep humans alive, but does not want make us happy. We can be used as slaves, to experiment on, or even to torture. Forever." + doomer_hope_str
+						text: "We're ending up with an AI that does want to keep humans alive, but does not want to make us happy. We can be used as slaves, to experiment on, or even to torture. Forever." + doomer_hope_str
 					}
 				},
 				no: {
