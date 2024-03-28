@@ -25,6 +25,7 @@ That said, here are some numbers, similarities and other analogies to help you t
 **As of early 2024...**
 
 ### Size
+
 - **Human Brains:** Human brains are estimated to have around [100 trillian synaptic connections](https://medicine.yale.edu/lab/colon_ramos/overview).
 - **Digital Brains:**
     - Current "frontier" AI powered LLMs (e.g. GPT4, Claude3, Gemini, etc.) have [100s of billions or trillians of "parameters"](https://en.wikipedia.org/wiki/Large_language_model#List).  These "parameters" are thought to be some what analogous to "synapses" in the human brain.  So, GPT4-sized models are expected to be 1% the size of a human brain.
@@ -33,6 +34,7 @@ That said, here are some numbers, similarities and other analogies to help you t
     - And, future multi-modal LLMs Systems will be trained using images, video, audio, 3D worlds, geometry, simulations, robotics training data, etc... on top of all the quality books and text on the internet.  This will give them a much better ability to create imagery, video, sounds, voices, music, 3D worlds and spaces and more.  And, these 3D world simulations will also allow them to be able to directly and autonomously control robots and other machines in the physical world.
 
 ### Speed
+
 - **Human Brains:** It is estimated that a human brain can perform between [1-20 Exaflops](https://www.nist.gov/blogs/taking-measure/brain-inspired-computing-can-help-us-create-faster-more-energy-efficient) (which is 1,000,000,000,000,000,000 floating point operations per second).
 - **Digital Brains:**
   - Current "frontier" AI powered LLMs are generally "run" on hundreds or thousands of current generation GPUs. (e.g. Nvidia A100s, H100s, etc.). And, Nvidia just recently announced their latest "next generation" GPU "server racks", the  [DGX BG200 NVL72](https://www.nvidia.com/en-us/data-center/gb200-nvl72/). One single instance/rack of this system is reported to be able to perform 1.44 ExaFlops of AI "Inference".   So, one single [DGX BG200 NVL72](https://www.nvidia.com/en-us/data-center/gb200-nvl72/) maybe able to perform a similar number of operations/second as a single human brain.
@@ -51,7 +53,6 @@ And, they are also expected to surpass the size, speed and capabilities of "all 
 ](https://youtu.be/Tr-VgjtUZLM?t=19)
 
 > "If the rate of change continues, I think 2029, or maybe 2030, is where digital intelligence will probably exceed all human intelligence combined."  -- Elon Musk [AGI by 2029? Elon Musk on AI's Future](https://youtu.be/DSKxmvq9t04?t=106)
-
 
 ## Uncontrollable scaling
 
