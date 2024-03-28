@@ -3,10 +3,12 @@ import type { Person } from '$lib/types.js'
 import { json } from '@sveltejs/kit'
 
 function recordToPerson(record: any): Person {
-	console.log('record', record.fields)
 	return {
 		id: record.id || 'noId',
-		name: record.fields.Name
+		name: record.fields.Name,
+		bio: record.fields.Bio,
+		title: record.fields.Title,
+		image: record.fields.Image && record.fields.Image[0].thumbnails.large.url
 	}
 }
 
@@ -25,6 +27,6 @@ export async function GET({ fetch }) {
 		throw new Error('Failed to fetch data from Airtable')
 	}
 	const data = await response.json()
-	const out = data.records.map(recordToPerson)
+	const out: Person[] = data.records.map(recordToPerson).filter((p: Person) => p.image)
 	return json(out)
 }

@@ -17,4 +17,8 @@ export type Post = {
 export type Person = {
 	id: string
 	name: string
+	/** URL to image file */
+	image: string
+	bio: string
+	title?: string
 }
