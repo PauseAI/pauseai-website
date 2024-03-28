@@ -2,12 +2,11 @@
 	import { title } from '$lib/config'
 	import Quote from './Quote.svelte'
 	import { meta } from './meta'
-	import PostMeta from '$lib/components/PostMeta.svelte';
+	import PostMeta from '$lib/components/PostMeta.svelte'
 
 	export let data
 
 	const { quotes } = data
-	// console.log(data)
 </script>
 
 <svelte:head>
