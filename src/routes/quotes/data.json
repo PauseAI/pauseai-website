@@ -16,7 +16,7 @@
     "padding": "1rem"
   },
   {
-    "background": "sunak",
+    "background": "sunak2",
     "color": "black",
     "text": "Get this wrong, and AI could make it easier to build chemical or biological weapons. Terrorist groups could use AI to spread fear and destruction on an even greater scale. Criminals could exploit AI for cyber-attacks, disinformation, fraud, or even child sexual abuse. And in the most unlikely but extreme cases, there is even the risk that **humanity could lose control of AI completely** through the kind of AI sometimes referred to as ‘super intelligence’.",
     "author": "Rishi Sunak",
@@ -27,22 +27,23 @@
     "color": "white",
     "text": "[...] the other thing that I think is **maybe the most dangerous thing out there** of anything, because there’s no real solution — the AI, as they call it.",
     "author": "Donald Trump",
-    "author_description": "45th President of the United States",
-    "padding": "6rem"
+    "author_description": "45th President of the United States"
   },
   {
     "background": "biden",
     "color": "white",
     "text": "Artificial Intelligence is one of the most powerful tools of our time, but to seize its opportunities, **we must first mitigate its risks.** [...] Social media has shown us the harm that powerful technology can do without the right safeguards in place [...] we must be clear-eyed and vigilant about the threats emerging — of emerging technologies that can pose — don’t have to, but can pose — to our democracy and our values",
     "author": "Joe Biden",
-    "author_description": "46th President of the United States"
+    "author_description": "46th President of the United States",
+    "padding": "2rem"
   },
   {
     "background": "putin",
-    "color": "white",
+    "color": "black",
     "text": "Artificial intelligence is the future, not only for Russia, but for all humankind. It comes with colossal opportunities, but also threats that are difficult to predict. **Whoever becomes the leader in this sphere will become the ruler of the world** [...] If we become leaders in this area, we will share this know-how with entire world, the same way we share our nuclear technologies today.",
     "author": "Vladimir Putin",
-    "author_description": "President of Russia"
+    "author_description": "President of Russia",
+    "padding": "2rem"
   },
   {
     "background": "black",
@@ -96,7 +97,7 @@
   {
     "background": "musk",
     "color": "white",
-    "text": "AI is a rare case where I think **we need to be proactive in regulation than be reactive** [...] I think that [digital super intelligence] is the single biggest existential crisis that we face and the most pressing one. It needs to be a **public body that has insight and then oversight to confirm that everyone is developing AI safely**. This is extremely important [...] And mark my words, AI is far more dangerous than nukes. Far. So why do we have no regulatory oversight? **This is insane.**",
+    "text": "AI is a rare case where I think **we need to be proactive in regulation than be reactive** [...] I think that [digital super intelligence] is the single biggest existential crisis that we face and the most pressing one. It needs to be a **public body that has insight and then oversight to confirm that everyone is developing AI safely** [...] And mark my words, AI is far more dangerous than nukes. Far. So why do we have no regulatory oversight? **This is insane.**",
     "author": "Elon Musk",
     "author_description": "Founder of OpenAI, Neuralink, SpaceX, xAI, PayPal, CEO of Tesla, CTO of X",
     "padding": "2rem"
