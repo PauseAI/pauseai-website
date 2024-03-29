@@ -63,12 +63,11 @@
     "padding": "1rem"
   },
   {
-    "background": "leahy",
+    "background": "black",
     "text": "Could we solve this problem? Create AI that empowers us rather than disempowering? [...] **Yes! It is possible! But, it is not what happens by default!**",
     "author": "Connor Leahy",
     "author_description": "Hacker, CEO ConjectureAI, Ex-Head of AiEleuther",
     "color": "white",
-    "padding": "3rem",
-    "notice": "© Cambridge Union, https://cus.org"
+    "padding": "2.8rem",
   }
 ]
