@@ -16,11 +16,12 @@
     "padding": "1rem"
   },
   {
-    "background": "sunak2",
+    "background": "sunak",
     "color": "black",
     "text": "Get this wrong, and AI could make it easier to build chemical or biological weapons. Terrorist groups could use AI to spread fear and destruction on an even greater scale. Criminals could exploit AI for cyber-attacks, disinformation, fraud, or even child sexual abuse. And in the most unlikely but extreme cases, there is even the risk that **humanity could lose control of AI completely** through the kind of AI sometimes referred to as ‘super intelligence’.",
     "author": "Rishi Sunak",
-    "author_description": "United Kingdom's Prime Minister"
+    "author_description": "United Kingdom's Prime Minister",
+    "padding":"1.5rem"
   },
   {
     "background": "trump",
@@ -32,7 +33,7 @@
   {
     "background": "biden",
     "color": "white",
-    "text": "Artificial Intelligence is one of the most powerful tools of our time, but to seize its opportunities, **we must first mitigate its risks.** [...] Social media has shown us the harm that powerful technology can do without the right safeguards in place [...] we must be clear-eyed and vigilant about the threats emerging — of emerging technologies that can pose — don’t have to, but can pose — to our democracy and our values",
+    "text": "Artificial Intelligence is one of the most powerful tools of our time, but to seize its opportunities, **we must first mitigate its risks.** [...] Social media has shown us the harm that powerful technology can do without the right safeguards in place [...] we must be clear-eyed and vigilant about the threats emerging — of emerging technologies that can pose — don’t have to, but can pose — to our democracy and our values.",
     "author": "Joe Biden",
     "author_description": "46th President of the United States",
     "padding": "2rem"
@@ -99,8 +100,8 @@
     "color": "white",
     "text": "AI is a rare case where I think **we need to be proactive in regulation than be reactive** [...] I think that [digital super intelligence] is the single biggest existential crisis that we face and the most pressing one. It needs to be a **public body that has insight and then oversight to confirm that everyone is developing AI safely** [...] And mark my words, AI is far more dangerous than nukes. Far. So why do we have no regulatory oversight? **This is insane.**",
     "author": "Elon Musk",
-    "author_description": "Founder of OpenAI, Neuralink, SpaceX, xAI, PayPal, CEO of Tesla, CTO of X",
-    "padding": "2rem"
+    "author_description": "Founder of OpenAI, Neuralink, SpaceX, xAI, PayPal, Tesla's CEO, X's CTO",
+    "padding": "1.5rem"
   },
   {
     "background": "black",
