@@ -13,9 +13,9 @@ export type Community = {
 export const communitiesMeta: Post = {
 	title: 'PauseAI Local Communities',
 	description:
-		'A map of all the local PauseAI communities around the world. Also shows adjacent AI Safety communities.',
+		'A map of all the local PauseAI communities and people around the world. Also shows adjacent AI Safety communities.',
 	date: '2023-12-15',
-	slug: 'outcomes',
+	slug: 'communities',
 	categories: []
 }
 
@@ -106,6 +106,84 @@ const PauseAICommunities: Community[] = [
 		lon: -60.6505,
 		link: discordInvite
 	},
+	{
+		name: 'PauseAI Baltimore',
+		lat: 39.2904,
+		lon: -76.6122,
+		link: discordInvite
+	},
+	{
+		name: 'PauseAI Ausburg',
+		lat: 48.3705,
+		lon: 10.8978,
+		link: discordInvite
+	},
+	{
+		name: 'PauseAI Paris',
+		lat: 48.8647,
+		lon: 2.349,
+		link: discordInvite
+	},
+	{
+		name: 'PauseAI Miami',
+		lat: 25.7616,
+		lon: -80.1917,
+		link: discordInvite
+	},
+	{
+		name: 'PauseAI Montreal',
+		lat: 45.5088,
+		lon: -73.5616,
+		link: discordInvite
+	},
+	{
+		name: 'PauseAI Nairobi',
+		lat: -1.286389,
+		lon: 36.817223,
+		link: discordInvite
+	},
+	{
+		name: 'PauseAI Stockholm',
+		lat: 59.3293,
+		lon: 18.0686,
+		link: discordInvite
+	},
+	{
+		name: 'PauseAI Marseille',
+		lat: 43.2963,
+		lon: 5.37,
+		link: discordInvite
+	},
+	{
+		name: 'PauseAI Portland',
+		lat: 45.5231,
+		lon: -122.6765,
+		link: discordInvite
+	},
+	{
+		name: 'PauseAI Raleigh',
+		lat: 35.7877,
+		lon: -78.6443,
+		link: discordInvite
+	},
+	{
+		name: 'PauseAI Austin',
+		lat: 30.2667,
+		lon: -97.7333,
+		link: discordInvite
+	},
+	{
+		name: 'PauseAI West Palm Beach',
+		lat: 26.7153,
+		lon: -80.0534,
+		link: discordInvite
+	},
+	{
+		name: 'PauseAI Chicago',
+		lat: 41.8781,
+		lon: -87.6298,
+		link: discordInvite
+	}
 ]
 
 const AdjacentCommunities: Community[] = [
@@ -278,6 +356,6 @@ export const communities: Community[] = [
 	...AdjacentCommunities.map((a) => {
 		a.adjacent = true
 		return a
-	}),
-	...PauseAICommunities
+	}).sort((a, b) => b.lat - a.lat),
+	...PauseAICommunities.sort((a, b) => b.lat - a.lat)
 ]

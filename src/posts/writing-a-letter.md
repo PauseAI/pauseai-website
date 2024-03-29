@@ -11,6 +11,8 @@ However, it's important to do it right.
 Important people get a lot of mail, and they don't have the time to read or respond to every single message they get.
 In this guide, we'll dive into what you can do to make your message stand out.
 
+Crafting a highly personalised message from scratch following the tips below can be extremely effective, but you can also try our [Email Builder](/email-builder).
+
 ## Finding the right person
 
 - Who is the right person to contact? Who has the power? Who prepares the meetings? Who is the most likely to read your message?

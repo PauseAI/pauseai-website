@@ -1,13 +1,15 @@
 <script lang="ts">
 	import { onMount, onDestroy } from 'svelte'
-	import { Map, GeolocateControl, Popup, Marker } from 'mapbox-gl'
+	import mapboxgl from 'mapbox-gl'
+	const { Map, GeolocateControl, Popup, Marker } = mapboxgl
 	import '../../../node_modules/mapbox-gl/dist/mapbox-gl.css'
 	import { communities, communitiesMeta } from './communities'
 	import PostMeta from '$lib/components/PostMeta.svelte'
+	import ExternalLink from '$lib/components/custom/a.svelte'
 
 	let { title, description, date } = communitiesMeta
 
-	let map: Map
+	let map: mapboxgl.Map
 	let mapContainer: HTMLDivElement
 	let lng: number
 	let lat: number
@@ -38,13 +40,14 @@
 
 		map.addControl(
 			new GeolocateControl({
+				fitBoundsOptions: {
+					maxZoom: 4
+				},
 				positionOptions: {
 					enableHighAccuracy: true
 				},
 				// When active the map will receive updates to the device's location as it changes.
-				trackUserLocation: true,
-				// Draw an arrow next to the location dot to indicate which direction the device is heading.
-				showUserHeading: true
+				trackUserLocation: true
 			})
 		)
 
@@ -80,9 +83,10 @@
 <h1>{title}</h1>
 <p>{description}</p>
 <p>
-	Are you missing a community in your location? <a href="https://discord.gg/HWcPt5ccJN"
-		>Create a Post</a
-	> on our Discord server!
+	Do you want to add your location or a community? <ExternalLink
+		href="https://discord.gg/HWcPt5ccJN">Create a post</ExternalLink
+	> on our Discord!
+
 </p>
 <div>
 	<div class="map-wrap">

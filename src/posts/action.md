@@ -14,34 +14,39 @@ You are now one of them.
 - **[Join PauseAI](/join)** and help us grow.
 - **[Join our Discord server](https://discord.gg/2XXWXvErfA)**, where our community is most active. We have a **#projects** channel where people are working on campaigns, videos, images, apps and more.
 - **[Meet](/communities)** other people in a PauseAI community near you. If there is no community near you, consider starting one.
+- [**Donate**](/donate) to PauseAI or buy some merchandise in our [store](https://pauseai-shop.fourthwall.com/).
+- [**Send an email to a politician**](/email-builder): emails are completely overpowered. Do it.
 - **[Learn](/learn)** more about AI alignment and the risks we are facing.
 - [**Protest**](/protests): join [one of the protests](/protests) or [organize one yourself](/organizing-a-protest).
 - [**Lobby**](/lobby-tips): convince your government to work towards a pause and prepare for the [summit](/summit).
 - **Talk** to people in your life about this. Answer their questions, and get them to act.
+- [**Flyers**](/flyering) print, share and post flyers.
+  - Having some printed one-page flyers on hand, or easily available to show and share from your phone, can be a quick and useful resource for faqs, talking points, expert quotes and opinions, online resources, etc.
 - **Share** about AI risk on social media. This website might be a good start.
 - **Create** [articles](/learn#articles), [videos](/learn#videos) or [memes](https://twitter.com/AISafetyMemes). Collaborate with others in the [Discord server](https://discord.gg/2XXWXvErfA) (in the #projects channel).
 - **Sign petitions**:
-  - [pause giant AI experiments](https://futureoflife.org/open-letter/pause-giant-ai-experiments/),
-  - [demand responsible AI](https://www.change.org/p/artificial-intelligence-time-is-running-out-for-responsible-ai-development-91f0a02c-130a-46e1-9e55-70d6b274f4df)
-  - [statement on AI risk](https://www.safe.ai/statement-on-ai-risk)
-  - or one of the **national petitions**: [UK](https://petition.parliament.uk/petitions/639956), [AUS](https://www.aph.gov.au/e-petitions/petition/EN5163), [NL](https://aipetitie.nl).
+  - [International AI Treaty](https://aitreaty.org)
+  - [Ban Superintelligence](https://chng.it/Djjfj2Gmpk)
+  - [Demand responsible AI](https://www.change.org/p/artificial-intelligence-time-is-running-out-for-responsible-ai-development-91f0a02c-130a-46e1-9e55-70d6b274f4df)
+  - Or one of the **national petitions**: [UK](https://petition.parliament.uk/petitions/639956), [AUS](https://www.aph.gov.au/e-petitions/petition/EN5163), [NL](https://aipetitie.nl)
 - **Follow** our social media channels and stay updated:
   - [Discord](https://discord.gg/2XXWXvErfA)
   - [Twitter](https://twitter.com/PauseAI)
   - [Facebook](https://www.facebook.com/PauseAI)
   - [TikTok](https://www.tiktok.com/@pauseai)
-  - [LinkedIn](https://www.linkedin.com/uas/login?session_redirect=/company/97035448/).
+  - [LinkedIn](https://www.linkedin.com/uas/login?session_redirect=/company/97035448/)
 
 ## If you ...
 
 ### If you are convincing
 
-- **Convince one person in your government to prepare for the [summit](/summit) and work towards a global pause**. This is the most important thing you can do. See [lobby tips](/lobby-tips).
+- **Convince one person in your government to prepare for the [summit](/summit) and work towards a global pause**. This is the most important thing you can do. See [lobby tips](/lobby-tips) and the [Email Builder](/email-builder).
 - **Convince journalists** to write about AI safety. Point them to [educational materials](/learn).
+- **Convince influencers** to talk and make videos about AI safety.
 - **Ask the management** at your current organization to take an institutional position on this.
 - [Write to your political representatives](https://www.campaignforaisafety.org/politician/).
 
-### If you are a politician / work in government
+### If you are a politician or work in government
 
 - **Prepare for the [AI safety summit](/summit)**. Form coalitions with other countries. Get informed about the [problem](/learn) and [solutions](/proposal).
 - **Invite (or subpoena) AI lab leaders** to parliamentary/congressional hearings to give their predictions and timelines of AI disasters.
@@ -52,10 +57,6 @@ You are now one of them.
 - **Help draft policy**. [Draft examples](https://www.campaignforaisafety.org/celebrating-the-winners-law-student-moratorium-treaty-competition/). ([some](https://futureoflife.org/wp-content/uploads/2023/04/FLI_Policymaking_In_The_Pause.pdf) [frameworks](https://www.openphilanthropy.org/research/12-tentative-ideas-for-us-ai-policy/))
 - **Make submissions to government requests for comment** on AI policy ([example](https://ntia.gov/issues/artificial-intelligence/request-for-comments)).
 
-### If you have money to spare
-
-- **Donate** to PauseAI in our [store](https://pauseai-shop.fourthwall.com/) or buy some merchandise! If you don't like what PauseAI does, but you still want to donate to AIsafety, consider donating to the [Campaign for AI Safety](https://www.campaignforaisafety.org/donate/), [Future of Life Institute](https://futureoflife.org/donate/), the [Machine Intelligence Research Institute](https://intelligence.org/donate/) or [NonLinearNetwork](https://nonlinearnetwork.org/)
-
 ### If you can write web content
 
 - [Improve this website](https://github.com/joepio/pauseai).
@@ -65,7 +66,7 @@ You are now one of them.
 - **Don't work towards superintelligence**. If you have some cool idea on how we can make AI systems 10x faster, please don't build it / spread it / talk about it. We need to slow down AI development, not speed it up.
 - **Talk to your management and colleagues** about the risks. Get them to take an institutional position on this.
 - **Hold a seminar** on AI safety at your workplace. Check out the [videos](/learn#videos) for inspiration.
-- **Sign** the [open letter](https://futureoflife.org/open-letter/pause-giant-ai-experiments/).
+- **Sign** the [Statement on AI Risk](https://www.safe.ai/statement-on-ai-risk).
 
 ### If you work on AI safety
 

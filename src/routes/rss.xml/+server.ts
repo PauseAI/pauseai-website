@@ -20,11 +20,11 @@ export async function GET({ fetch }) {
 					.map(
 						(post) => `
 						<item>
-							<title>${post.title}</title>
-							<description>${post.description}</description>
+							<title>${escapeXml(post.title)}</title>
+							<description>${post.description ? escapeXml(post.description) : ''}</description>
 							<link>${config.url}/${post.slug}</link>
 							<guid isPermaLink="true">${config.url}/${post.slug}</guid>
-							<pubDate>${new Date(post.date).toUTCString()}</pubDate>
+							${post.date ? `<pubDate>${new Date(post.date).toUTCString()}</pubDate>` : ''}
 						</item>
 					`
 					)
@@ -34,4 +34,17 @@ export async function GET({ fetch }) {
 	`.trim()
 
 	return new Response(xml, { headers })
+}
+
+function escapeXml(unsafe: string) {
+	return unsafe.replace(/[<>&'"]/g, (c) => {
+		switch (c) {
+			case '<': return '&lt;'
+			case '>': return '&gt;'
+			case '&': return '&amp;'
+			case '\'': return '&apos;'
+			case '"': return '&quot;'
+			default: return c
+		}
+	})
 }

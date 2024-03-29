@@ -7,12 +7,14 @@ How much do regular people and experts worry about AI risks?
 
 ## Catastrophic risks from AI
 
-- **[AI researchers, AIImpacts](https://aiimpacts.org/2022-expert-survey-on-progress-in-ai/)**: give "really bad outcomes (such as human extinction)" a 14% probability, with a median of 5%. Only 18% believe the control problem is not important.
+- **[AI researchers, AIImpacts 2022](https://aiimpacts.org/2022-expert-survey-on-progress-in-ai/)**: give "really bad outcomes (such as human extinction)" a 14% probability, with a median of 5%. 82% believe the control problem is important.
+- **[AI researchers, AIImpacts 2023](https://wiki.aiimpacts.org/ai_timelines/predictions_of_human-level_ai_timelines/ai_timeline_surveys/2023_expert_survey_on_progress_in_ai)**: Average p(doom) between 14 and 19.4%, depending on how the question of phrased. 86% believe the control problem is important.
 - **[AI engineers / startup founders, State of AI Engineering](https://elemental-croissant-32a.notion.site/State-of-AI-Engineering-2023-20c09dc1767f45988ee1f479b4a84135#694f89e86f9148cb855220ec05e9c631)**: over 60% have a [p(doom)](/pdoom) > 25%. Only 12% have a p(doom) = 0.
 - **[AI safety researchers, AlignmentForum](https://web.archive.org/web/20221013014859/https://www.alignmentforum.org/posts/QvwSr5LsxyDeaPK5s/existential-risk-from-ai-survey-results)**: respondents assigned a median probability of 20% to x-risk caused due to a lack of enough technical research, and 30% to x-risk caused due to a failure of AI systems to do what the people deploying them intended, with huge variation (for example, there are data points at both ~1% and ~99%).
 - **[UK citizens, PublicFirst](https://publicfirst.co.uk/ai/)**: think there's a 9% probability humans will go extinct because of AI. About 50% of say they're very or somewhat worried about this.
 - **[German citizens, Kira](https://www.zeit.de/digital/2023-04/ki-risiken-angst-umfrage-forschung-kira)**: Only 14% believe AI will have a positive influence on the world, 40% mixed, 40% negative.
 - **[US citizens, RethinkPriorities](https://rethinkpriorities.org/publications/us-public-perception-of-cais-statement-and-the-risk-of-extinction)**: agrees with (59%) and supports (58%) the x-risk statement. Disagreement (26%) and opposition (22%) were relatively low, and sizable proportions of people remained neutral (12% and 18% for agreement and support formats, respectively).
+- **[Australian citizens, Ready Research](https://theconversation.com/80-of-australians-think-ai-risk-is-a-global-priority-the-government-needs-to-step-up-225175): 80% think AI risk is a global priority, 64% want the government to focus on catastrophic outcomes (compared to only 25% on job loss, or 5% on bias).
 
 ## Regulations & governance
 

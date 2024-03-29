@@ -9,7 +9,7 @@
 
 	let input = ''
 	let loading = false
-	let maxMessages = 20
+	const maxMessages = 20
 
 	function clear() {
 		messages = []
@@ -77,9 +77,9 @@
 	{#if messages.length === 0}
 		<p>{personality.intro}</p>
 	{/if}
-	{#each messages as message}
-		<div class="message {message.role}">
-			<p>{message.content}</p>
+	{#each messages as { role, content }}
+		<div class="message {role}">
+			<p>{content}</p>
 		</div>
 	{/each}
 	{#if loading}

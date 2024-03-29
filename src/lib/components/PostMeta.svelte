@@ -1,10 +1,10 @@
 <script lang="ts">
-	import { url } from '$lib/config'
+	import { url, title as siteName } from '$lib/config'
 	export let title: string
 	export let description: string
 	export let date: string | undefined = undefined
 	/** URL or relative path to cover / preview image */
-	export let image = '/Cover.png'
+	export let image = '/Cover.jpg'
 	const imageUrl = image.startsWith('/') ? `${url}${image}` : image
 
 	const schemaOrgMarkup = {
@@ -22,11 +22,12 @@
 
 <svelte:head>
 	<title>{title}</title>
-	<meta property="description" content={description} />
+	<meta name="description" content={description} />
 	<meta property="og:type" content="article" />
 	<meta property="og:title" content={title} />
 	<meta property="og:description" content={description} />
 	<meta property="og:image" content={imageUrl} />
+	<meta property="og:site_name" content={siteName} />
 	{#if date}
 		<meta property="article:published_time" content={date} />
 	{/if}

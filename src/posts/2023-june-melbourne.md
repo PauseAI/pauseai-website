@@ -3,9 +3,15 @@ title: PauseAI protest @ Melbourne - June 16th
 description: Join PauseAI for an upcoming peaceful protest at the Melbourne Convention and Exhibition Centre (MCEC) where Sam Altman will be having a talk in Melbourne.
 ---
 
+<script>
+    import WidgetConsent from '$lib/components/widget-consent/WidgetConsent.svelte'
+</script>
+
+<WidgetConsent>
 <div>
 <blockquote class="twitter-tweet"><p lang="en" dir="ltr">Today we protested in Melbourne, where OpenAI&#39;s Sam Altman was speaking. OpenAI aims to build a superintelligence, which has a serious chance to kill everyone on earth. We&#39;re demanding our governments to step in and <a href="https://twitter.com/hashtag/PauseAI?src=hash&amp;ref_src=twsrc%5Etfw">#PauseAI</a>.<br><br>Press release: <a href="https://t.co/xu7XXTUUyT">https://t.co/xu7XXTUUyT</a> <a href="https://t.co/HtYymXpqjf">https://t.co/HtYymXpqjf</a></p>&mdash; PauseAI (@pause_ai_info) <a href="https://twitter.com/pause_ai_info/status/1669809871867240451?ref_src=twsrc%5Etfw">June 16, 2023</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 </div>
+</WidgetConsent>
 
 Join #PauseAI for an upcoming peaceful protest at the Melbourne Convention and Exhibition Centre (MCEC) where Sam Altman will be having a talk.
 

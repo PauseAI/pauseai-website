@@ -44,8 +44,8 @@
 	{#if showInfo}
 		<div>
 			<p>
-				{node.explanation} PauseAI estimates this probability at roughly
-				<b>{node.probability * 100}%</b>.
+				{node.explanation} <!--PauseAI estimates this probability at roughly
+				<b>{node.probability * 100}%</b>.-->
 			</p>
 		</div>
 	{/if}
@@ -109,6 +109,7 @@
 					{/if}
 					<p>{selectedNode.text}</p>
 					<div class="buttons">
+						<!--
 						<Button
 							on:click={() => {
 								showProbabilities = !showProbabilities
@@ -116,7 +117,7 @@
 							}}
 						>
 							{showProbabilities ? 'Hide' : 'Show'} probabilities
-						</Button>
+						</Button>-->
 						<Button
 							subtle
 							on:click={() => {

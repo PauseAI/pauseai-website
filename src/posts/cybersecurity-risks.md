@@ -16,6 +16,8 @@ Instead of having to hire a team of highly skilled security experts/hackers to f
 
 The latest AI systems can already analyze and write software.
 They [can find vulnerabilities](https://betterprogramming.pub/i-used-gpt-3-to-find-213-security-vulnerabilities-in-a-single-codebase-cc3870ba9411) in software, and [they could be used to exploit them](https://blog.checkpoint.com/2023/03/15/check-point-research-conducts-initial-security-analysis-of-chatgpt4-highlighting-potential-scenarios-for-accelerated-cybercrime/).
+GPT-4 can already [autonomously hack websites](https://arxiv.org/html/2402.06664v1), performing tasks as complex as blind database schema extraction and SQL injections without human feedback, which was discovered 18 months after GPT-4 finished training.
+GPT-4 already [outperforms 88%](https://arxiv.org/pdf/2402.11814.pdf) of human hackers in a CTF competition.
 As AI capabilities grow, so will the vulnerabilities they can detect and the exploits they can create.
 They are not yet as good at this as the best humans are, so right now the danger is limited.
 However, capabilities are rapidly increasing.
@@ -28,7 +30,7 @@ AI can also be used to make [self-modifying malware](https://www.hyas.com/blog/b
 There will most likely come a point where an AI is better at hacking than the best human hackers.
 This can go wrong in many ways.
 
-- **Infrastructure**: Cyberweapons can be used to gain access to or disable critical infrastructure, such as [oil pipelines](https://en.wikipedia.org/wiki/Colonial_Pipeline_ransomware_attack).
+- **Infrastructure**: Cyberweapons can be used to gain access to or disable critical infrastructure, such as [oil pipelines](https://en.wikipedia.org/wiki/Colonial_Pipeline_ransomware_attack) or [power grids](https://obr.uk/box/cyber-attacks-during-the-russian-invasion-of-ukraine/).
 - **Financial**: Cyberweapons can be used to [steal money from banks](https://en.wikipedia.org/wiki/2015%E2%80%932016_SWIFT_banking_hack), or to [manipulate the stock market](https://en.wikipedia.org/wiki/2010_flash_crash).
 - **Military**: Equipment such as weapons and sensors are increasingly dependent on wireless connectivity and complex software.
 
@@ -47,6 +49,8 @@ If the goal of a cyberattack was to disable devices and infrastructure, the dama
 Our society is increasingly dependent on computers and the internet.
 Payments, transportation, communication, planning, supply chains, power grids...
 If our devices no longer function properly, many parts of our society fail to function, too.
+
+Over [93% of cybersecurity experts](https://www.weforum.org/publications/global-cybersecurity-outlook-2023/) believe “a far-reaching, catastrophic cyber event is likely in the next two years”.
 
 ## Mitigating AI Cybersecurity Risks
 

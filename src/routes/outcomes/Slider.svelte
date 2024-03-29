@@ -3,8 +3,6 @@
 	import Propability from './Propability.svelte'
 	export let probability = 0.5
 	import { fade } from 'svelte/transition'
-
-	onMount(() => console.log(`Initial percentage: ${probability}%`))
 </script>
 
 <div class="percentage-slider" in:fade={{ duration: 200 }}>

@@ -29,7 +29,7 @@
 		In 2020, experts thought we had more than 35 years until AGI. Recent breakthroughs show we might
 		be almost there. Superintelligence could be one innovation away, so we should tread carefully.</Block
 	>
-	<Block linkText="Take action" href="/join">
+	<Block linkText="Take action" href="/action">
 		<span slot="title"><Mark>YOU</Mark> CAN HELP</span>
 		Too few people are well-informed about the potential risks of AI. Inform others, and help stop this
 		race to the bottom.</Block

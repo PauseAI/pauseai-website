@@ -7,14 +7,14 @@ AI presents numerous [risks](/risks) to humanity, including the [risk of extinct
 Progress in AI capabilities is accelerating at a [frantic pace](/urgency), and we are not prepared for the consequences.
 AI companies are locked in a race to the bottom, where safety is not the highest priority.
 We need governments to step in and prevent AI from reaching superhuman levels before we know how to make it safely.
-This pause needs to happen on an international level because countries are locked in a race similar to the companies.
+This [pause](/proposal) needs to happen on an international level because countries are locked in a race similar to the companies.
 
 **The only way to achieve a true pause is through a summit.**
 
-## What should an AI summit achieve?
+## What should the next AI safety summit achieve?
 
 The goal of a Summit is often a _treaty_, which is a formal agreement between two or more states in reference to peace, alliance, commerce, or other international relations.
-In our case, we are hoping for AI Safety Treaty which would be an agreement between the participating states to pause AI development until the risks are better understood.
+In our case, we are hoping for AI Safety Treaty which would be an agreement between the participating states to [pause AI development](/proposal) until the risks are better understood.
 
 ## 2023 UK AI Safety Summit
 

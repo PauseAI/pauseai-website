@@ -3,6 +3,10 @@ title: PauseAI protest @ Microsoft Brussels - May 23rd, 2023
 description: We are organizing a protest at Microsoft to demand a summit to pause AI development.
 ---
 
+<script>
+    import WidgetConsent from '$lib/components/widget-consent/WidgetConsent.svelte'
+</script>
+
 - May 23rd, 2023, 11:45 - 13:00
 - [Microsoft Innovation Center, Rue Montoyer 51, Brussels, Belgium](https://goo.gl/maps/bvLbHDt61eSfpZV28?coh=178571&entry=tt)
 - [Sign up on Discord](https://discord.gg/2XXWXvErfA?event=1105793166927470592)
@@ -66,6 +70,8 @@ For more information, please visit [PauseAI.info](http://pauseai.info).
 
 ## Media
 
+<WidgetConsent>
 <div>
 <blockquote class="twitter-tweet"><p lang="en" dir="ltr">Today we gathered in Bruxelles. We&#39;re asking our governments to organize a summit to discuss AI risks and to prevent the development of superintelligent AI. <a href="https://twitter.com/hashtag/pauseai?src=hash&amp;ref_src=twsrc%5Etfw">#pauseai</a> (1/5) <a href="https://t.co/tXdeftTNAp">pic.twitter.com/tXdeftTNAp</a></p>&mdash; Joep Meindertsma (@joepmeindertsma) <a href="https://twitter.com/joepmeindertsma/status/1661047436905725953?ref_src=twsrc%5Etfw">May 23, 2023</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 </div>
+</WidgetConsent>

@@ -31,3 +31,6 @@ pnpm install
 pnpm run dev
 # Open http://localhost:37572
 ```
+
+## Deployment
+The contents of the repository are continuously deployed to Netlify. You can track the deployment status [here](https://app.netlify.com/sites/pauseai/deploys).

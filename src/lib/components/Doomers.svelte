@@ -22,24 +22,24 @@
 			name: 'Vitalik Buterin',
 			title: 'Ethereum founder',
 			probability: '10%',
-			note: 'Specifically means AI takeover',
 			number: 0.1,
-			source: 'https://x.com/liron/status/1729740226594258982?s=20'
+			source: 'https://twitter.com/VitalikButerin/status/1729251822391447904'
 		},
 		{
 			name: 'Geoff Hinton',
 			title: 'one of three godfathers of AI',
 			probability: '10%',
 			number: 0.1,
-			note: 'chance of extinction in the next 30 years if unregulated',
-			source: 'https://twitter.com/geoffreyhinton/status/1719447980753719543'
+			note: 'wipe out humanity in the next 20 years',
+			source: 'https://archive.ph/Q8obS#selection-2291.167-2291.183'
 		},
 		{
 			name: 'Machine learning researchers',
-			probability: '14%',
-			number: 0.14,
-			note: 'From 2022, median value is 5%',
-			source: 'https://aiimpacts.org/2022-expert-survey-on-progress-in-ai/'
+			probability: '9-19.4%',
+			number: 0.142,
+			note: 'From 2023, depending on the question design, median values: 5-10%',
+			source:
+				'https://wiki.aiimpacts.org/ai_timelines/predictions_of_human-level_ai_timelines/ai_timeline_surveys/2023_expert_survey_on_progress_in_ai'
 		},
 		{
 			name: 'Lina Khan',
@@ -80,8 +80,8 @@
 			source: 'https://www.youtube.com/watch?v=57y7DxWfOS0&t=50s'
 		},
 		{
-			name: 'Emmet Shear',
-			title: 'ex-CEO of Twitch, ex-short term CEO of OpenAI',
+			name: 'Emmett Shear',
+			title: 'Co-founder of Twitch, former short-term CEO of OpenAI',
 			probability: '5-50%',
 			number: 0.275,
 			source: 'https://www.youtube.com/watch?v=9oUbauum4uI'
@@ -117,6 +117,15 @@
 			source: 'https://twitter.com/AISafetyMemes/status/1713515843194077583'
 		},
 		{
+			name: 'Joep Meindertsma',
+			title: 'Founder of PauseAI',
+			probability: '40%',
+			note: 'The remaining 60% consists largely of "we can pause".',
+			number: 0.4,
+			source:
+				'https://www.nrc.nl/nieuws/2024/02/16/ai-doomers-zijn-doodsbang-voor-de-computer-ai-zal-proberen-de-macht-over-te-nemen-a4190130'
+		},
+		{
 			name: 'Holden Karnofsky',
 			title: 'Executive Director of Open Philanthropy',
 			probability: '50%',
@@ -139,6 +148,14 @@
 			source: 'https://x.com/liron/status/1729274710670893262?s=20'
 		},
 		{
+			name: 'Daniel Kokotajlo',
+			title: 'OpenAI researcher & forecaster',
+			probability: '70%',
+			number: 0.7,
+			source:
+				'https://www.lesswrong.com/posts/xDkdR6JcQsCdnFpaQ/adumbrations-on-agi-from-an-outsider?commentId=sHnfPe5pHJhjJuCWW'
+		},
+		{
 			name: 'Dan Hendrycks',
 			title: 'Head of Center for AI Safety',
 			probability: '>80%',
@@ -150,7 +167,15 @@
 			title: 'Founder of MIRI',
 			probability: '>99%',
 			number: 0.99,
-			source: 'https://www.lesswrong.com/posts/j9Q8bRmwCgXRYAgcJ/miri-announces-new-death-with-dignity-strategy'
+			source:
+				'https://www.lesswrong.com/posts/j9Q8bRmwCgXRYAgcJ/miri-announces-new-death-with-dignity-strategy'
+		},
+		{
+			name: 'Roman Yampolskiy',
+			title: 'AI safety scientist',
+			probability: '99.999999%',
+			number: 0.99999999,
+			source: 'https://twitter.com/romanyam/status/1767575356155027503'
 		}
 	]
 </script>
@@ -220,6 +245,16 @@
 		display: flex;
 		position: relative;
 		padding-bottom: 0.3rem;
+	}
+
+	@media (max-width: 700px) {
+		.name {
+			flex-direction: column;
+		}
+
+		.title {
+			margin-left: 0;
+		}
 	}
 
 	.pdoom {

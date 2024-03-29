@@ -39,7 +39,6 @@ function getInstruction(name: names) {
 export async function POST({ fetch, request }) {
 	const messages = await request.json()
 
-	console.log('messages', messages)
 	const apiUrl = 'https://api.openai.com/v1/chat/completions'
 	if (!openaiKey) throw new Error('OPENAI_KEY env not found')
 
@@ -64,7 +63,6 @@ export async function POST({ fetch, request }) {
 	})
 
 	const data = await response.json()
-	console.log('data', data)
 	const text = data.choices[0].message.content
 
 	return json({ response: text } as ChatResponse)
