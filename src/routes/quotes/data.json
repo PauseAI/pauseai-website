@@ -10,14 +10,15 @@
     "text": "If you want a system to be effective, you need to give it the ability to create its own subgoals. Now, the problem is, there’s a very general subgoal that helps with almost all goals: get more control. **The research question is: how do you prevent them from ever wanting to take control? And nobody knows the answer.**",
     "author": "Geoffrey Hinton",
     "author_description": "2018 Turing Award Recipient, Father of Deep Learning",
-    "padding": "3rem"
+    "padding": "3rem",
+    "color": "white"
   },
   {
     "background": "butler",
     "text": "Day by day, however, the machines are gaining ground upon us; day by day we are becoming more subservient to them... That the **time will come when the machines will hold the real supremacy over the world and its inhabitants** is what no person of a truly philosophic mind can for a moment question.",
     "author": "Samuel Butler",
     "author_description": "Novelist, \"Darwin among the Machines\", 1863",
-    "padding": "5rem",
+    "padding": "3.8rem",
     "color": "white"
   },
   {
@@ -25,7 +26,7 @@
     "text": "An ultraintelligent machine could design even better machines; there would then unquestionably be an 'intelligence explosion', and the intelligence of man would be left far behind. **Thus the first ultraintelligent machine is the last invention that man need ever make, provided that the machine is docile enough to tell us how to keep it under control**.",
     "author": "I. J. Good",
     "author_description": "Cryptologist at Bletchley Park with Alan Turing",
-    "padding": "5rem",
+    "padding": "2.8rem",
     "color": "white"
   },
   {
@@ -42,7 +43,7 @@
     "author": "Eliezer Yudkowsky",
     "author_description": "Co-Founder, Machine Intelligence Research Institute",
     "color": "white",
-    "padding": "5rem"
+    "padding": "3.6rem"
   },
     {
     "background": "christiano",
@@ -50,7 +51,7 @@
     "author": "Paul Christiano",
     "author_description": "Founder, Alignment Research Center and Former Head of the Alignment Team, OpenAI",
     "color": "white",
-    "padding": "5rem"
+    "padding": "2rem"
   },
   {
     "background": "tallinn",
@@ -58,6 +59,6 @@
     "author": "Jaan Tallinn",
     "author_description": "Founder, Future of Life Institute, Centre for the Study of Existential Risk, Skype, Kazaa",
     "color": "white",
-    "padding": "5rem"
+    "padding": "1rem"
   }
 ]
