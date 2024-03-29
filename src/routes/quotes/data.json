@@ -1,65 +1,65 @@
 [
   {
     "background": "turing",
+    "color": "",
     "text": "It seems probable that once the machine thinking method had started, it would not take long to outstrip our feeble powers… They would be able to converse with each other to sharpen their wits. **At some stage therefore, we should have to expect the machines to take control.**",
     "author": "Alan Turing",
-    "author_description": "Father of Computer Science and Artificial Intelligence",
-    "notice": "© National Portrait Gallery, London"
+    "author_description": "Father of Computer Science and Artificial Intelligence"
   },
   {
-    "background": "hinton",
+    "background": "white",
+    "color": "black",
     "text": "If you want a system to be effective, you need to give it the ability to create its own subgoals. Now, the problem is, there’s a very general subgoal that helps with almost all goals: get more control. **The research question is: how do you prevent them from ever wanting to take control? And nobody knows the answer.**",
     "author": "Geoffrey Hinton",
     "author_description": "2018 Turing Award Recipient, Father of Deep Learning",
-    "padding": "3rem"
+    "padding": "2.8rem"
   },
   {
-    "background": "butler",
-    "text": "Day by day, however, the machines are gaining ground upon us; day by day we are becoming more subservient to them... That the **time will come when the machines will hold the real supremacy over the world and its inhabitants** is what no person of a truly philosophic mind can for a moment question.",
-    "author": "Samuel Butler",
-    "author_description": "Novelist, \"Darwin among the Machines\", 1863",
-    "padding": "3.8rem",
-    "color": "white"
-  },
-  {
-    "background": "good",
-    "text": "An ultraintelligent machine could design even better machines; there would then unquestionably be an 'intelligence explosion', and the intelligence of man would be left far behind. **Thus the first ultraintelligent machine is the last invention that man need ever make, provided that the machine is docile enough to tell us how to keep it under control**.",
-    "author": "I. J. Good",
-    "author_description": "Cryptologist at Bletchley Park with Alan Turing",
-    "padding": "2.8rem",
-    "color": "white"
-  },
-  {
-    "background": "bengio",
+    "background": "black",
+    "color": "white",
     "text": "It's very hard, in terms of your ego and feeling good about what you do, to accept the idea that the thing you've been working on for decades might actually be very dangerous to humanity... **I think that I didn't want to think too much about it, and that's probably the case for others.**",
     "author": "Yoshua Bengio",
     "author_description": "2018 Turing Award Recipient, Father of Deep Learning",
-    "color": "white",
-    "padding": "3.6rem"
+    "padding": "2.8rem"
   },
   {
-    "background": "yudkowsky",
+    "background": "old",
+    "color": "",
+    "text": "An ultraintelligent machine could design even better machines; there would then unquestionably be an 'intelligence explosion', and the intelligence of man would be left far behind. **Thus the first ultraintelligent machine is the last invention that man need ever make, provided that the machine is docile enough to tell us how to keep it under control**.",
+    "author": "I. J. Good",
+    "author_description": "Cryptologist at Bletchley Park with Alan Turing",
+    "padding": "2.8rem"
+  },
+  {
+    "background": "old",
+    "color": "",
+    "text": "Day by day, however, the machines are gaining ground upon us; day by day we are becoming more subservient to them... That the **time will come when the machines will hold the real supremacy over the world and its inhabitants** is what no person of a truly philosophic mind can for a moment question.",
+    "author": "Samuel Butler",
+    "author_description": "Novelist, \"Darwin among the Machines\", 1863",
+    "padding": "2.8rem"
+  },
+  {
+    "background": "black",
+    "color": "white",
     "text": "I do not expect something actually smart to attack us with marching robot armies with glowing red eyes where there could be a fun movie about us fighting them. **I expect an actually smarter and uncaring entity will figure out strategies and technologies that can kill us quickly and reliably and then kill us.**",
     "author": "Eliezer Yudkowsky",
     "author_description": "Co-Founder, Machine Intelligence Research Institute",
-    "color": "white",
-    "padding": "3.6rem",
-    "notice": "© Roland Dobbins, https://en.wikipedia.org/wiki/Eliezer_Yudkowsky"
+    "padding": "2.8rem"
   },
-    {
-    "background": "christiano",
+  {
+    "background": "white",
+    "color": "black",
     "text": "Everyone should be very unhappy if you built a bunch of AIS who are like, 'I really hate these humans but they will murder me if I don't do what they want'. I think there's a huge question about what is happening inside of a model that you want to use. **This is the kind of thing that is both horrifying from a safety perspective and also a moral perspective.**",
     "author": "Paul Christiano",
     "author_description": "Founder, Alignment Research Center and Former Head of the Alignment Team, OpenAI",
-    "color": "white",
-    "padding": "3.6rem"
+    "padding": "2.8rem"
   },
   {
-    "background": "tallinn",
+    "background": "black",
+    "color": "white",
     "text": "How [LLMs] work is that you summon this \"mind\" from the \"mind space\" using your data, a lot of compute and a lot of money. Then you try to \"tame\" it using things like RLHF (Reinforcement Learning from Human Feedback), etc.  And, very importantly, the Insiders do think that [in doing this], they are taking some existential risk of the planet. **One thing that a pause achieves is that we will not push the Frontier, in terms of risky pre-training experiments.**",
     "author": "Jaan Tallinn",
     "author_description": "Founder, Future of Life Institute, Centre for the Study of Existential Risk, Skype, Kazaa",
-    "color": "black",
     "padding": "1rem"
   }
 ]
