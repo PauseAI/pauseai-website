@@ -3,8 +3,7 @@
     "background": "turing",
     "text": "It seems probable that once the machine thinking method had started, it would not take long to outstrip our feeble powers… They would be able to converse with each other to sharpen their wits. **At some stage therefore, we should have to expect the machines to take control.**",
     "author": "Alan Turing",
-    "author_description": "Father of Computer Science and Artificial Intelligence",
-    "notice": "© National Portrait Gallery, London"
+    "author_description": "Father of Computer Science and Artificial Intelligence"
   },
   {
     "background": "hinton",
@@ -18,7 +17,7 @@
     "text": "Day by day, however, the machines are gaining ground upon us; day by day we are becoming more subservient to them... That the **time will come when the machines will hold the real supremacy over the world and its inhabitants** is what no person of a truly philosophic mind can for a moment question.",
     "author": "Samuel Butler",
     "author_description": "Novelist, \"Darwin among the Machines\", 1863",
-    "padding": "3.8rem",
+    "padding": "5rem",
     "color": "white"
   },
   {
@@ -26,7 +25,7 @@
     "text": "An ultraintelligent machine could design even better machines; there would then unquestionably be an 'intelligence explosion', and the intelligence of man would be left far behind. **Thus the first ultraintelligent machine is the last invention that man need ever make, provided that the machine is docile enough to tell us how to keep it under control**.",
     "author": "I. J. Good",
     "author_description": "Cryptologist at Bletchley Park with Alan Turing",
-    "padding": "2.8rem",
+    "padding": "5rem",
     "color": "white"
   },
   {
@@ -43,8 +42,7 @@
     "author": "Eliezer Yudkowsky",
     "author_description": "Co-Founder, Machine Intelligence Research Institute",
     "color": "white",
-    "padding": "3.6rem",
-    "notice": "© Roland Dobbins, https://en.wikipedia.org/wiki/Eliezer_Yudkowsky"
+    "padding": "5rem"
   },
     {
     "background": "christiano",
@@ -52,14 +50,14 @@
     "author": "Paul Christiano",
     "author_description": "Founder, Alignment Research Center and Former Head of the Alignment Team, OpenAI",
     "color": "white",
-    "padding": "3.6rem"
+    "padding": "5rem"
   },
   {
     "background": "tallinn",
     "text": "How [LLMs] work is that you summon this \"mind\" from the \"mind space\" using your data, a lot of compute and a lot of money. Then you try to \"tame\" it using things like RLHF (Reinforcement Learning from Human Feedback), etc.  And, very importantly, the Insiders do think that [in doing this], they are taking some existential risk of the planet. **One thing that a pause achieves is that we will not push the Frontier, in terms of risky pre-training experiments.**",
     "author": "Jaan Tallinn",
     "author_description": "Founder, Future of Life Institute, Centre for the Study of Existential Risk, Skype, Kazaa",
-    "color": "black",
-    "padding": "1rem"
+    "color": "white",
+    "padding": "5rem"
   }
 ]
