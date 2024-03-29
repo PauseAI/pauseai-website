@@ -8,7 +8,7 @@ Joep Meindertsma ([joep@pauseai.info](mailto:joep@pauseai.info))
 
 ## Logo, materials
 
-Our logo and other material can be exported from [this Figma template](https://www.figma.com/community/file/1233064002969152026) and [this Google Drive folder](https://drive.google.com/drive/folders/1bQ_MZ8giK-Mee4ABkO0BgcFInaXruNpa?usp=sharing).
+Our logo and other material can be exported from [this Figma template](https://www.figma.com/file/kHaEUR2lC0J4wm1poEF30K/PauseAI-designs---not-editable---28%2F03?type=design&node-id=0%3A1&mode=design&t=KBs4IbB48BpEmong-1) and [this Google Drive folder](https://drive.google.com/drive/folders/1bQ_MZ8giK-Mee4ABkO0BgcFInaXruNpa?usp=sharing).
 If you want to create PauseAI-related material yourself, you can use our brand color *#FF9214* and the fonts *Saira Condensed* (700) and *Roboto Slab* (300, 700).
 
 ## International Media coverage
