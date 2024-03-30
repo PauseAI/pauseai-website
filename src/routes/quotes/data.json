@@ -66,7 +66,8 @@
     "color": "white",
     "text": "**AI poses a long-term global risk. Even its own designers have no idea where their breakthrough may lead.** I urge [the UN Security Council] to approach this technology with a sense of urgency [...] Its creators themselves have warned that much bigger, potentially catastrophic and existential risks lie ahead.",
     "author": "António Guterres",
-    "author_description": "Chief Executive Officer of the United Nations"
+    "author_description": "Chief Executive Officer of the United Nations",
+    "padding": "2.8rem"
   },
   {
     "background": "pope",
@@ -76,7 +77,7 @@
     "author_description": "Head of the Catholic Church"
   },
   {
-    "background": "black",
+    "background": "harris",
     "color": "white",
     "text": "[...] just as AI has the potential to do profound good, it also has the potential to cause profound harm. From AI-enabled cyberattacks at a scale beyond anything we have seen before to AI-formulated bio-weapons that could endanger the lives of millions, these threats are often referred to as the “existential threats of AI” because, of course, they **could endanger the very existence of humanity. These threats, without question, are profound, and they demand global action.**",
     "author": "Kamala Harris",
@@ -101,14 +102,15 @@
     "text": "AI is a rare case where I think **we need to be proactive in regulation than be reactive** [...] I think that [digital super intelligence] is the single biggest existential crisis that we face and the most pressing one. It needs to be a **public body that has insight and then oversight to confirm that everyone is developing AI safely** [...] And mark my words, AI is far more dangerous than nukes. Far. So why do we have no regulatory oversight? **This is insane.**",
     "author": "Elon Musk",
     "author_description": "Founder of OpenAI, Neuralink, SpaceX, xAI, PayPal, Tesla's CEO, X's CTO",
-    "padding": "1.5rem"
+    "padding": "2rem"
   },
   {
     "background": "gates",
     "color": "white",
     "text": "Superintelligent AIs are in our future. [...] **There’s the possibility that AIs will run out of control.** [Possibly,] a machine could decide that humans are a threat, conclude that its interests are different from ours, or simply stop caring about us.",
     "author": "Bill Gates",
-    "author_description": "Founder of Microsoft"
+    "author_description": "Founder of Microsoft",
+    "padding":"2rem"
   },
   {
     "background": "hinton",
