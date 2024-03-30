@@ -4,10 +4,34 @@ description: We're underestimating the progress of AI, and there is a small but 
 date: '2023-05-04'
 ---
 
-If we reach superintelligence before we solve the alignment problem, [we face a risk of extinction](/xrisk). So having an estimated range of when we could have superintelligence is essential to making sure we don't get caught off guard.
+Current [State-of-the-Art](/sota) AI models are already superhuman in many domains, but luckily not in all.
+If we reach superintelligence before we solve the alignment problem, [we face a risk of extinction](/xrisk).
+So having an estimated range of when we could have superintelligence is essential to making sure we don't get caught off guard.
 If our predictions are too far off, we may not be able to prepare in time.
 
+But how far off are we?
+When will we have superintelligence?
+It could be sooner than most think.
+
+## Compounding exponential growth
+
+AI models require algorithms, data, and chips.
+Each of these components is rapidly improving due to huge investments in AI - .
+The improvements in each of these components are _compounding_, leading to exponential growth in AI capabilities.
+
+- **More chips**. ChatGPT was trained on [10.000](https://www.fierceelectronics.com/sensors/chatgpt-runs-10k-nvidia-training-gpus-potential-thousands-more) specialized chips. Meta has [announced](https://www.datacenterdynamics.com/en/news/meta-to-operate-600000-gpus-by-year-end/) that they will have 600.000 next-gen chips to train their next AI models this year.
+- **Faster chips**. Every year chips get faster due to new architectures and lithography innovations. The chips that Meta is using are 10x faster than the chips used for ChatGPT. We're also seeing highly specialized hardware like the Groq chips, which are [13x faster](https://mezha.media/en/2024/02/22/groq-s-new-ai-chip-offers-to-increase-chatgpt-speed-by-13-times/) than the competition. On a longer timeline, [ternary architectures](https://arxiv.org/pdf/2402.17764.pdf) or [photonic chips](https://www.nature.com/articles/s41566-024-01394-2) could make chips even faster.
+- **More data**. GPT3 was trained on [45TB](https://community.openai.com/t/what-is-the-size-of-the-training-set-for-gpt-3/360896) of text, GPT4 used about 20x as much. AI companies are starting to use video data, audio data and even generating synthetic data to train these models.
+- **Better data**. The "Textbooks are all you need" paper [showed](https://arxiv.org/abs/2306.11644) that using high-quality synthetic data can drastically improve model performance, even if far less data and compute is used.
+- **Better algorithms**. The Transformer architecture enabled the current LLM revolution. New architectures can enable similar capability jumps. The Mamba model, for example, is [showing](https://arxiv.org/abs/2312.00752) 5x faster throughput.
+- **Better runtimes**. Agentic runtimes, Retrieval Augmented Generation or even simply clever prompting (through [Graph of Thought](https://arxiv.org/abs/2305.16582), for example) can have a huge impact on the capabilities of these models.
+
+It is entirely possible that _simply scaling up_ will get us to [dangerous capabilities](/dangerous-capabilities) in a year or two, but with all these compounding factors, it could be even sooner.
+
 ## We reached human-level performance in many domains in 2023
+
+In 2022, AI researchers thought it would take [17 years](https://aiimpacts.org/2022-expert-survey-on-progress-in-ai/) until AI would be able to write a New York Times bestseller.
+A year later, a Chinese professor [won a writing contest](https://www.scmp.com/news/china/science/article/3245725/chinese-professor-used-ai-write-science-fiction-novel-then-it-won-national-award) with an AI-written book.
 
 On Metaculus, [the community prediction for (weak) AGI](https://www.metaculus.com/questions/3479/date-weakly-general-ai-is-publicly-known/) was 2057 just three years ago, and now it's ~~2027~~ 2026.
 
@@ -59,20 +83,13 @@ So how far off are we from the Ilya threshold?
 It's fundamentally difficult to predict [when certain capabilities emerge](https://arxiv.org/abs/2206.07682) as LLMs scale, but so far we've seen many capabilities emerge that were previously thought to be far off.
 GPT-4 is already an impressive programmer, and combined with AutoGPT [it can do autonomous research on the internet](https://twitter.com/SullyOmarr/status/1645205292756418562).
 Being able to autonomously do AI research and making meaningful improvements to a codebase does not seem impossible in the near future.
-There are multiple potential paths to Ilya's level of capabilities:
 
-1. **A bigger model**. This is likely to be a combination of more data, more parameters, more compute. So far scaling has proven very successful. The training costs are becoming astronomical ($100 million for GPT-4), but there's a lot at stake, and there are many billions of dollars being invested in either staying ahead of the curve or catching up. [New hardware](https://www.tomshardware.com/news/nvidia-publishes-mlperf-30-performance-of-h100-l4) is being developed that makes training larger models more feasible. A 10x size increase on its own might be enough to get us past the Ilya threshold. However, Sam Altman has stated that there are serious diminishing returns to scaling and that we might be close to the limit of what is achievable by scaling current architectures.
-2. **Runtime improvements**. Tools like MemoryGPT and AutoGPT have shown that simply putting an existing LLM in a new context unlocks radically new types of capabilities. Some have [argued](https://bdtechtalks.com/2022/01/24/ai-thinking-fast-and-slow/) that LLMs right now have only access to something akin to "System 1" type thinking (fast, intuitive), and not "System 2" (slow, critical). It might be possible that a runtime improvement would unlock such capabilities.
-3. **Algorithmic improvements**. The Transformer architecture made models perform far better with less hardware. These types of 10x algorithmic breakthroughs are rare, but they happen. It is highly likely that far more optimal algorithms for learning are possible, and we have not reached the theoretical limit for efficient learning algorithms. For example, a human can read one textbook about JavaScript and could then write some code. GPT-4 needed to read many thousands (or more) of these books to reach the same level. AIs need _a lot_ of data to learn, but humans don't, so there is probably a lot to gain (or actually lose) from finding a more efficient way of learning.
-
-So we have at least these three paths to reaching the Ilya threshold.
-We have no guarantee that any of these, or all of these, would bring us past the Ilya threshold, but it seems probable.
-It's hard to quantify these, but **there are now countless people working on all three of these - far more than just a few months ago**.
+Better chips, more data, and better algorithms will all contribute to reaching the Ilya threshold.
 We have no idea how to align such an AI (even [OpenAI admits this](https://youtu.be/L_Guz73e6fw?t=1477)), and the consequences of having a misaligned superintelligence are likely to be [catastrophic](/xrisk).
 
 ## Policy implications
 
 We could have a superintelligence in months.
 A 1% risk is unacceptably large.
-We can only conclude that we need to slow down AI development right now.
-[Read our proposal](/proposal).
+We can only conclude that we need to [slow down AI development](/proposal) right now.
+It's up to each of us to [take action](/action) and make sure that we don't get caught off guard.

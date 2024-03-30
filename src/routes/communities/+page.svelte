@@ -85,7 +85,8 @@
 <p>
 	Do you want to add your location or a community? <ExternalLink
 		href="https://discord.gg/HWcPt5ccJN">Create a post</ExternalLink
-	> on our discord!
+	> on our Discord!
+
 </p>
 <div>
 	<div class="map-wrap">

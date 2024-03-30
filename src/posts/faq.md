@@ -35,9 +35,9 @@ We're calling for a ban on AI systems more powerful than GPT-4, until we know ho
 
 ## Do you believe GPT-4 is going to kill us?
 
-No, we don't think current AI models are an existential threat.
+No, we don't think [current AI models](/sota) are an existential threat.
 It seems likely that most next AI models won't be as well.
-But if we keep building more and more powerful AI systems, eventually we will reach a point where one will become an existential threat.
+But if we keep building more and more powerful AI systems, eventually we will reach a point where one will become an [existential threat](/xrisk).
 
 ## Can a Pause backfire and make things worse?
 
@@ -45,17 +45,31 @@ We've addressed these concerns in [this article](/mitigating-pause-failures).
 
 ## Is a Pause even possible?
 
-Yes! AGI is not inevitable: it requires a lot of resources and effort, and most people are in favor of a Pause.
+AGI is not inevitable.
+It requires hordes of engineers with million-dollar paychecks.
+It requires a fully functional and unrestricted supply chain of the most complex hardware.
+It requires all of us to allow these companies to gamble with our future.
+
 [Read more about the feasibility of a Pause](/feasibility).
 
 ## Who is paying you?
 
-We have not received significant funding so far.
-Everyone contributing to PauseAI is doing so voluntarily.
-We expect to receive a grant through the LightSpeed network soon.
+Virtually all of our actions so far have been done by volunteers.
+However, since February 2024, PauseAI is a [registered non-profit foundation](/legal), and we have received multiple donations from individuals.
+We've also received 20k funding from the LightSpeed network.
 
 You can also [donate](/donate) to PauseAI if you support our cause!
 We use most of the money to enable local communities to organize events.
+
+## What are your plans?
+
+Focus on [growing the movement](/growth-strategy), organizing protests, lobbying politicians, and informing the public.
+
+Check out our [roadmap](/roadmap) for a detailed overview of our plans and what we could do with more funding.
+
+## How do you think you can convince governments to pause AI?
+
+Check out our [theory of change](/theory-of-change) for a detailed overview of our strategy.
 
 ## Why do you protest?
 
