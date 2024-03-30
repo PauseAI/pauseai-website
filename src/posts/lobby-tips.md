@@ -58,4 +58,4 @@ It's not that hard, it just takes some time, effort and a little courage.
 And you don't have to do it alone.
 We already have a couple of initiatives running in different countries.
 We're here to help each other out and fix this problem together.
-Join the [discord](https://discord.gg/2XXWXvErfA) and get started.
+Join the [Discord server](https://discord.gg/2XXWXvErfA) and get started.

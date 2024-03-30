@@ -4,7 +4,7 @@ export type Community = {
 	name: string
 	lat: number
 	lon: number
-	/** Will default to PauseAI discord */
+	/** Will default to PauseAI Discord */
 	link?: string
 	/** Non-PauseAI org */
 	adjacent?: boolean

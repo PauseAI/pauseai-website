@@ -57,7 +57,7 @@ If we receive more funds than we can spend, we will save the excess funds for fu
 
 A list of [media appearances](/press) and [organized protests](/protests) can be found on their respective pages.
 Social media posts can primarily be found on [X](https://x.com/PauseAI).
-Our [Discord server](https://discord.gg/2XXWXvErfA) is by far our most active community, averaging 100 messages per day.
+Our [Discord server](https://discord.gg/T3YrWUJsJ5) is by far our most active community, averaging 100 messages per day.
 
 ### Board
 
@@ -90,3 +90,24 @@ Our first annual report will be published after the first fiscal year ends on 31
 - Incorporation date: 28th December 2023
 - Company number: 15373608
 - Director: [William Baird](mailto:willb32764@gmail.com)
+
+## Relationship between entities
+
+PauseAI Global is responsible for:
+
+- Facilitating the growth of the movement.
+- Helping local PauseAI entities.
+- This website and the managing the online Discord community.
+- Volunteer management and growth.
+- Global social media.
+- Organizing digital events.
+- The global strategy and theory of change.
+- The global financials and fundraising.
+- [Microgrants](/microgrants).
+
+The national/local entities are responsible for:
+
+- Physical events and protests.
+- Getting local [media coverage](/).
+- Local social media channels (e.g. [PauseAI UK](https://twitter.com/PauseAI_UK) and [PauseAI US](https://twitter.com/PauseAIus) twitter)
+- National-level policy work & feedback.

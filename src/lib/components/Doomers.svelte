@@ -22,9 +22,8 @@
 			name: 'Vitalik Buterin',
 			title: 'Ethereum founder',
 			probability: '10%',
-			note: 'Specifically means AI takeover',
 			number: 0.1,
-			source: 'https://x.com/liron/status/1729740226594258982?s=20'
+			source: 'https://twitter.com/VitalikButerin/status/1729251822391447904'
 		},
 		{
 			name: 'Geoff Hinton',
@@ -39,7 +38,8 @@
 			probability: '9-19.4%',
 			number: 0.142,
 			note: 'From 2023, depending on the question design, median values: 5-10%',
-			source: 'https://wiki.aiimpacts.org/ai_timelines/predictions_of_human-level_ai_timelines/ai_timeline_surveys/2023_expert_survey_on_progress_in_ai'
+			source:
+				'https://wiki.aiimpacts.org/ai_timelines/predictions_of_human-level_ai_timelines/ai_timeline_surveys/2023_expert_survey_on_progress_in_ai'
 		},
 		{
 			name: 'Lina Khan',

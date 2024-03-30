@@ -5,7 +5,7 @@
 {"rule":"MORFOLOGIK_RULE_EN_US","sentence":"^\\QOpenAI believes that \"it would be unintuitively risky and difficult to stop the creation of superintelligence\", so they are pursuing further development toward superintelligence.\\E$"}
 {"rule":"MORFOLOGIK_RULE_EN_US","sentence":"^\\QOpenAI believes that \"it would be unintuitively risky and difficult to stop the creation of superintelligence\", so they are pursuing further development toward superintelligence.\\E$"}
 {"rule":"MORFOLOGIK_RULE_EN_US","sentence":"^\\QPause AI\n#pauseAI\n#justlookup\nDon't build AGI\nStop building AGI\nMoratorium on AGI development, now\nGlobal AI summit, now\nGlobal AI treaty, now\nGlobal AI referendum, now more controversial\\E$"}
-{"rule":"MORFOLOGIK_RULE_EN_US","sentence":"^\\QPlease join #PauseAI's Discord, the #australia channel and AGI Moratorium's Slack, #λ-australia for more discussions.\\E$"}
+{"rule":"MORFOLOGIK_RULE_EN_US","sentence":"^\\QPlease join #PauseAI's Discord server, the #australia channel and AGI Moratorium's Slack, #λ-australia for more discussions.\\E$"}
 {"rule":"POSSESSIVE_APOSTROPHE","sentence":"^\\QThis is a classic tragedy of the commons situation.\\E$"}
 {"rule":"RELATIVE_CLAUSE_AGREEMENT","sentence":"^\\QJaan Tallinn (lead investor at Anthropic, builders of Claude): \"I've not met anyone in AI labs who says the risk [from training a next-gen model] is less than 1% of blowing up the planet.\\E$"}
 {"rule":"RELATIVE_CLAUSE_AGREEMENT","sentence":"^\\QJaan Tallinn (lead investor of Anthropic): \"I've not met anyone in AI labs who says the risk [from training a next-gen model] is less than 1% of blowing up the planet.\\E$"}
