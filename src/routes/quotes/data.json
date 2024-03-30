@@ -41,7 +41,7 @@
   {
     "background": "putin",
     "color": "black",
-    "text": "Artificial intelligence is the future, not only for Russia, but for all humankind. It comes with colossal opportunities, but also threats that are difficult to predict. **Whoever becomes the leader in this sphere will become the ruler of the world** [...] If we become leaders in this area, we will share this know-how with entire world, the same way we share our nuclear technologies today.",
+    "text": "Artificial intelligence is the future, not only for Russia, but for all humankind. It comes with colossal opportunities, but also threats that are difficult to predict. **Whoever becomes the leader in this sphere will become the ruler of the world** [...] If we become leaders in this area, we will share this know-how with [the] entire world, the same way we share our nuclear technologies today.",
     "author": "Vladimir Putin",
     "author_description": "President of Russia",
     "padding": "2rem"
@@ -145,8 +145,8 @@
     "padding": "2.8rem"
   },
   {
-    "background": "black",
-    "color": "white",
+    "background": "white",
+    "color": "black",
     "text": "How [LLMs] work is that you summon this \"mind\" from the \"mind space\" using your data, a lot of compute and a lot of money. Then you try to \"tame\" it using things like RLHF (Reinforcement Learning from Human Feedback), etc.  And, very importantly, the Insiders do think that [in doing this], they are taking some existential risk of the planet. **One thing that a pause achieves is that we will not push the Frontier, in terms of risky pre-training experiments.**",
     "author": "Jaan Tallinn",
     "author_description": "Co-Founder of Skype, Kazaa, Future of Life Institute",
