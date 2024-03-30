@@ -47,7 +47,7 @@
     "padding": "2rem"
   },
   {
-    "background": "black",
+    "background": "chinese_flag",
     "color": "white",
     "text":"AI must be guided in a direction that is conducive to the progress of humanity. So **there should be a red line in AI development, a red line that must not be crossed** [...] It should not just benefit only a small group of people, but benefit the overwhelming majority of mankind [...] It is essential that we work together and coordinate with each other.",
     "author": "Li Qiang",
@@ -83,7 +83,7 @@
     "author_description": "Vice President of the United States"
   },
   {
-    "background": "white",
+    "background": "light_blue",
     "color": "white",
     "text": "The potential impact of AI might exceed human cognitive boundaries. To ensure that this technology always benefits humanity, we must regulate the development of AI and prevent this technology from turning into a runaway wild horse [...] We need to strengthen the detection and evaluation of the entire lifecycle of AI, **ensuring that mankind has the ability to press the pause button at critical moments.**",
     "author": "Zhang Jun",
@@ -104,7 +104,7 @@
     "padding": "1.5rem"
   },
   {
-    "background": "black",
+    "background": "gates",
     "color": "white",
     "text": "Superintelligent AIs are in our future. [...] **There’s the possibility that AIs will run out of control.** [Possibly,] a machine could decide that humans are a threat, conclude that its interests are different from ours, or simply stop caring about us.",
     "author": "Bill Gates",
