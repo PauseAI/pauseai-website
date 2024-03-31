@@ -16,12 +16,12 @@
     "padding": "2rem"
   },
   {
-    "background": "black",
+    "background": "cais_statement",
     "color": "white",
     "text": "**Mitigating the risk of extinction from AI should be a global priority alongside other societal-scale risks such as pandemics and nuclear war.**",
     "author": "Statement on AI risk,",
-    "author_description": "signed by hundreds of AI experts and other notable figures. Including 3 of the most cited scientists ever and all the CEOs of the top AI companies. Endorsed by the UK Prime Minister and the EU President.",
-    "padding": "1rem"
+    "author_description": "signed by hundreds of AI experts and other notable figures. Including 3 of the most cited scientists ever and top people from all the top AI labs. Endorsed by the UK Prime Minister and the EU President.",
+    "padding": "2rem"
   },
   {
     "background": "sunak",
@@ -181,7 +181,7 @@
     "color": "white",
     "text": "Could we solve this problem? Create AI that empowers us rather than disempowering? [...] **Yes! It is possible! But, it is not what happens by default!**",
     "author": "Connor Leahy",
-    "author_description": "Hacker, CEO ConjectureAI, Ex-Head of AiEleuther",
+    "author_description": "Hacker, CEO ConjectureAI, Ex-Head of EleutherAI",
     "padding": "2.8rem"
   }
 ]
