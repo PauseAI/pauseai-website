@@ -9,11 +9,11 @@
   },
   {
     "background": "cais_statement",
-    "color": "black",
+    "color": "white",
     "text": "**Mitigating the risk of extinction from AI should be a global priority alongside other societal-scale risks such as pandemics and nuclear war.**",
     "author": "Statement on AI risk,",
     "author_description": "signed by hundreds of AI experts and other notable figures. Including three of the most cited scientists ever and top people from all the top AI labs. Endorsed by the UK Prime Minister and the EU President.",
-    "padding": "3"
+    "padding": "3rem"
   },
   {
     "background": "hawking",
@@ -91,7 +91,7 @@
     "author_description": "Vice President of the United States"
   },
   {
-    "background": "light_blue",
+    "background": "light_grey",
     "color": "white",
     "text": "The potential impact of AI might exceed human cognitive boundaries. To ensure that this technology always benefits humanity, we must regulate the development of AI and prevent this technology from turning into a runaway wild horse [...] We need to strengthen the detection and evaluation of the entire lifecycle of AI, **ensuring that mankind has the ability to press the pause button at critical moments.**",
     "author": "Zhang Jun",
@@ -114,14 +114,14 @@
   },
   {
     "background": "gates",
-    "color": "white",
+    "color": "black",
     "text": "Superintelligent AIs are in our future. [...] **There’s the possibility that AIs will run out of control.** [Possibly,] a machine could decide that humans are a threat, conclude that its interests are different from ours, or simply stop caring about us.",
     "author": "Bill Gates",
     "author_description": "Co-Founder of Microsoft",
     "padding":"2rem"
   },
   {
-    "background": "black",
+    "background": "dark_grey",
     "color": "white",
     "text": "[Suggesting about how to ask for a global regulatory body:] “any compute cluster above a certain extremely high-power threshold – and given the cost here, we’re talking maybe five in the world, something like that – any cluster like that **has to submit to the equivalent of international weapons inspectors**” […] I did a big trip around the world this year, and talked to heads of state in many of the countries that would need to participate in this, and **there was almost universal support for it.**",
     "author": "Sam Altman",
@@ -129,23 +129,23 @@
     "padding":"1rem"
   },
   {
-    "background": "white",
-    "color": "black",
+    "background": "light_grey",
+    "color": "white",
     "text": "I would advocate **not moving fast and breaking things** [...] When it comes to very powerful technologies—and obviously AI is going to be one of the most powerful ever—we need to be careful.",
     "author": "Demis Hassabis",
     "author_description": "Co-Founder and CEO of DeepMind",
     "padding":""
   },
   {
-    "background": "dark",
+    "background": "dark_grey",
     "color": "white",
-    "text": "",
+    "text": "When I think of why I'm scared, a few things come to mind. One is, look, the thing that's really hard to argue with is that there will be powerful, agentic models. We're getting closer to them. If such a model wanted to wreak havoc and destroy humanity or whatever, I think **we have basically no ability to stop it.**",
     "author": "Dario Amodei",
     "author_description": "Co-Founder and CEO of Anthropic, Former Head of AI Safety at OpenAI",
     "padding":""
   },
   {
-    "background": "bright",
+    "background": "light_grey",
     "color": "white",
     "text": "[About a Pause] I don’t rule it out. And I think that **at some point over the next five years or so, we’re going to have to consider that question very seriously.**",
     "author": "Mustafa Suleyman", 
@@ -153,23 +153,23 @@
     "padding":""
   },
   {
-    "background": "black",
-    "color": "black",
+    "background": "dark_grey",
+    "color": "white",
     "text": "",
     "author": "Ilya Sutskever",
     "author_description": "One of the most cited scientists ever because his contributions to the field of modern AI, Co-Founder and Chief Scientist at OpenAI", 
     "padding":""
   },
   {
-    "background": "bright",
-    "color": "black",
+    "background": "light_grey",
+    "color": "white",
     "text": "The research question is: how do you prevent them from ever wanting to take control? And nobody knows the answer [...] The alarm bell I’m ringing has to do with the existential threat of them taking control [...] If you take the existential risk seriously, as I now do, **it might be quite sensible to just stop developing these things any further.**",
     "author": "Geoffrey Hinton",
     "author_description": "1st/3rd most cited scientist ever, Godfather of modern AI, Turing Award Recipient, resigned from Google due to ethical concerns",
     "padding": "2.8rem"
   },
   {
-    "background": "dark",
+    "background": "dark_grey",
     "color": "white",
     "text": "It's very hard, in terms of your ego and feeling good about what you do, to accept the idea that the thing you've been working on for decades might actually be very dangerous to humanity... I think that I didn't want to think too much about it, and that's probably the case for others [...] Rogue AI may be dangerous for the whole of humanity. **Banning powerful AI systems (say beyond the abilities of GPT-4) that are given autonomy and agency would be a good start.**",
     "author": "Yoshua Bengio",
@@ -177,8 +177,8 @@
     "padding": "2.8rem"
   },
   {
-    "background": "white",
-    "color": "black",
+    "background": "light_grey",
+    "color": "white",
     "text": "If we pursue [our current approach], then **we will eventually lose control over the machines.**",
     "author": "Stuart Russell",
     "author_description": "Co-Author of the most popular AI textbook, Co-Founder of the Center for Human-Compatible AI.",
@@ -201,15 +201,15 @@
     "padding": "2.8rem"
   },
   {
-    "background": "white",
-    "color": "black",
+    "background": "light_grey",
+    "color": "white",
     "text": "How [LLMs] work is that you summon this \"mind\" from the \"mind space\" using your data, a lot of compute and a lot of money. Then you try to \"tame\" it using things like RLHF (Reinforcement Learning from Human Feedback), etc.  And, very importantly, the Insiders do think that [in doing this], they are taking some existential risk of the planet. **One thing that a pause achieves is that we will not push the Frontier, in terms of risky pre-training experiments.**",
     "author": "Jaan Tallinn",
     "author_description": "Co-Founder of Skype, Kazaa, Future of Life Institute",
     "padding": "1rem"
   },
   {
-    "background": "black",
+    "background": "dark_grey",
     "color": "white",
     "text": "I do not expect something actually smart to attack us with marching robot armies with glowing red eyes where there could be a fun movie about us fighting them. **I expect an actually smarter and uncaring entity will figure out strategies and technologies that can kill us quickly and reliably and then kill us.**",
     "author": "Eliezer Yudkowsky",
@@ -217,15 +217,15 @@
     "padding": "2.8rem"
   },
   {
-    "background": "white",
-    "color": "black",
+    "background": "light_grey",
+    "color": "white",
     "text": "Everyone should be very unhappy if you built a bunch of AIS who are like, 'I really hate these humans but they will murder me if I don't do what they want'. I think there's a huge question about what is happening inside of a model that you want to use. **This is the kind of thing that is both horrifying from a safety perspective and also a moral perspective.**",
     "author": "Paul Christiano",
     "author_description": "Founder of the Alignment Research Center and Former Head of the Alignment Team at OpenAI",
     "padding": "2.8rem"
   },
   {
-    "background": "black",
+    "background": "dark_grey",
     "color": "white",
     "text": "Could we solve this problem? Create AI that empowers us rather than disempowering? [...] **Yes! It is possible! But, it is not what happens by default!**",
     "author": "Connor Leahy",
