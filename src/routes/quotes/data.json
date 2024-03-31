@@ -5,15 +5,15 @@
     "text": "[About frontier AI:] Substantial risks may arise from potential intentional misuse or unintended issues of control relating to alignment with human intent. These issues are in part because those capabilities are not fully understood [...] There is potential for **serious, even catastrophic, harm, either deliberate or unintentional**, stemming from the most significant capabilities of these AI models.",
     "author": "The Bletchley Declaration,",
     "author_description": "signed by 28 countries, including all the leaders on AI, and the EU.",
-    "padding": "2rem"
+    "padding": ""
   },
   {
     "background": "cais_statement",
     "color": "white",
     "text": "**Mitigating the risk of extinction from AI should be a global priority alongside other societal-scale risks such as pandemics and nuclear war.**",
     "author": "Statement on AI risk,",
-    "author_description": "signed by hundreds of AI experts and other notable figures. Including 3 of the most cited scientists ever and top people from all the top AI labs. Endorsed by the UK Prime Minister and the EU President.",
-    "padding": "2rem"
+    "author_description": "signed by hundreds of AI experts and other notable figures. Including three of the most cited scientists ever and top people from all the top AI labs. Endorsed by the UK Prime Minister and the EU President.",
+    "padding": ""
   },
   {
     "background": "hawking",
