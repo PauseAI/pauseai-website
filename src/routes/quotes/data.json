@@ -18,7 +18,7 @@
   {
     "background": "hawking",
     "color": "",
-    "text": "**The development of full artificial intelligence could spell the end of the human race.**",
+    "text": "**The development of full artificial intelligence could spell the end of the human race** [...] It would take off on its own, and re-design itself at an ever increasing rate.",
     "author": "Stephen Hawking",
     "author_description": "Theoretical Physicist and Cosmologist",
     "padding": ""
@@ -131,7 +131,7 @@
   {
     "background": "light_grey",
     "color": "white",
-    "text": "I would advocate **not moving fast and breaking things** [...] When it comes to very powerful technologies—and obviously AI is going to be one of the most powerful ever—we need to be careful.",
+    "text": "**We must take the risks of AI as seriously as other major global challenges**, like climate change. It took the international community too long to coordinate an effective global response to this, and we’re living with the consequences of that now. We can’t afford the same delay with AI [...] then maybe there’s some kind of equivalent one day of the IAEA, which actually audits these things.",
     "author": "Demis Hassabis",
     "author_description": "Co-Founder and CEO of DeepMind",
     "padding":""
@@ -155,7 +155,7 @@
   {
     "background": "dark_grey",
     "color": "white",
-    "text": "",
+    "text": "The future is going to be good for the AIs regardless; it would be nice if it would be good for humans as well [...] It’s not that it’s going to actively hate humans and want to harm them, but it’s just going to be too powerful, and I think **a good analogy would be the way humans treat animals [...] And I think by default that’s the kind of relationship that’s going to be between us and AGIs** which are truly autonomous and operating on their own behalf.",
     "author": "Ilya Sutskever",
     "author_description": "One of the most cited scientists ever because his contributions to the field of modern AI, Co-Founder and Chief Scientist at OpenAI", 
     "padding":""
@@ -163,7 +163,23 @@
   {
     "background": "light_grey",
     "color": "white",
-    "text": "The research question is: how do you prevent them from ever wanting to take control? And nobody knows the answer [...] The alarm bell I’m ringing has to do with the existential threat of them taking control [...] If you take the existential risk seriously, as I now do, **it might be quite sensible to just stop developing these things any further.**",
+    "text": "The exact way the post-AGI world will look is hard to predict — that world will likely be more different from today’s world than today’s is from the 1500s [...] **We do not yet know how hard it will be to make sure AGIs act according to the values of their operators.** Some people believe it will be easy; some people believe it’ll be unimaginably difficult; but no one knows for sure",
+    "author": "Greg Brockman",
+    "author_description": "Co-Founder and Former CTO of OpenAI", 
+    "padding":""
+  },
+  {
+    "background": "dark_grey",
+    "color": "white",
+    "text": "Do possible risks from AI outweigh **other possible existential risks…? It's my number 1 risk for this century** [...] A lack of concrete AGI projects is not what worries me, it's the lack of concrete plans on how to keep these safe that worries me.",
+    "author": "Shane Legg",
+    "author_description": "Co-Founder and Chief AGI Scientist at DeepMind", 
+    "padding":""
+  },
+  {
+    "background": "light_grey",
+    "color": "white",
+    "text": "The research question is: how do you prevent them from ever wanting to take control? And nobody knows the answer [...] The alarm bell I’m ringing has to do with the existential threat of them taking control [...] If you take the existential risk seriously, as I now do, **it might be quite sensible to just stop developing these things any further** [...] it’s as if aliens had landed and people haven’t realized because they speak very good English",
     "author": "Geoffrey Hinton",
     "author_description": "1st/3rd most cited scientist ever, Godfather of modern AI, Turing Award Recipient, resigned from Google due to ethical concerns",
     "padding": "2.8rem"
@@ -178,6 +194,14 @@
   },
   {
     "background": "light_grey",
+    "color": "white",
+    "text": "**There is no question that machines will become smarter than humans—in all domains** in which humans are smart—in the future. It’s a question of when and how, not a question of if.",
+    "author": "Yann LeCun",
+    "author_description": "Godfather of modern AI, Turing Award Recipient, Chief AI Scientist at Meta",
+    "padding": "2.8rem"
+  },
+  {
+    "background": "dark_grey",
     "color": "white",
     "text": "If we pursue [our current approach], then **we will eventually lose control over the machines.**",
     "author": "Stuart Russell",
