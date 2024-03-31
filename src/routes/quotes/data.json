@@ -121,6 +121,46 @@
     "padding":"2rem"
   },
   {
+    "background": "black",
+    "color": "white",
+    "text": "",
+    "author": "Sam Altman",
+    "author_description": "Co-Founder and CEO of OpenAI, Former President of Y Combinator",
+    "padding":""
+  },
+  {
+    "background": "white",
+    "color": "black",
+    "text": "",
+    "author": "Demis Hassabis",
+    "author_description": "Co-Founder and CEO of DeepMind",
+    "padding":""
+  },
+  {
+    "background": "black",
+    "color": "white",
+    "text": "",
+    "author": "Dario Amodei",
+    "author_description": "Co-Founder and CEO of Anthropic, Former Head of AI Safety at OpenAI",
+    "padding":""
+  },
+  {
+    "background": "white",
+    "color": "black",
+    "text": "",
+    "author": "Ilya Sutskever",
+    "author_description": "One of the most cited scientists ever because his contributions to the field of modern AI, Co-Founder and Chief Scientist at OpenAI", 
+    "padding":""
+  },
+  {
+    "background": "black",
+    "color": "white",
+    "text": "",
+    "author": "Mustafa Suleyman", 
+    "author_description": "CEO of Microsoft AI, Co-Founder of DeepMind",
+    "padding":""
+  },
+  {
     "background": "white",
     "color": "black",
     "text": "The research question is: how do you prevent them from ever wanting to take control? And nobody knows the answer [...] The alarm bell I’m ringing has to do with the existential threat of them taking control [...] If you take the existential risk seriously, as I now do, **it might be quite sensible to just stop developing these things any further.**",
