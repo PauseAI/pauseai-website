@@ -58,6 +58,13 @@
 			source: 'https://www.youtube.com/watch?v=GyFkWb903aU&t=560s'
 		},
 		{
+			name: 'Elon Musk',
+			title: 'CEO of Tesla, SpaceX, X',
+			probability: '10-20%',
+			number: 0.15,
+			source: 'https://www.youtube.com/watch?v=akXMYvKjUxM'
+		},
+		{
 			name: 'Dario Amodei',
 			title: 'CEO of Anthropic',
 			probability: '10-25%',
@@ -71,13 +78,6 @@
 			number: 0.2,
 			source:
 				'https://www.abc.net.au/news/2023-07-15/whats-your-pdoom-ai-researchers-worry-catastrophe/102591340'
-		},
-		{
-			name: 'Elon Musk',
-			title: 'CEO of Tesla, SpaceX, X',
-			probability: '20-30%',
-			number: 0.25,
-			source: 'https://www.youtube.com/watch?v=57y7DxWfOS0&t=50s'
 		},
 		{
 			name: 'Emmett Shear',
