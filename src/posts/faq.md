@@ -180,6 +180,6 @@ Even when facing the end of the world, there can still be hope and very rewardin
 
 ## I have a different / AI related question
 
-You can try [AISafety.com](https://www.aisafety.com), that also gives you a better view of the whole AI Safety landscape.
+You can try [AISafety.info](https://aisafety.info) or [AISafety.com](https://www.aisafety.com).
 Or learn from other sources and media like [videos, articles and books here](/learn).
-We also have a channel for asking questions on our [Discord server](https://discord.gg/2XXWXvErfA).
+We also have a channel for asking questions on our [Discord server](https://discord.gg/X9TYc3vs7j).
