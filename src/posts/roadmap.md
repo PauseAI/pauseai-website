@@ -45,16 +45,17 @@ All funding that we receive will be used to accelerate our growth and increase o
 
 - All of the above, plus:
 - Hire a **social media director**. This will help us improve our presence on social media and reach more people. Getting more people to join our protests and community is an effective multiplier for our impact.
+- Hire a **project director** who will help us organize our projects and campaigns. Our 100+ projects in the Discord server need more structure and guidance.
 - Increase our spending on Ads on various social media platforms.
 - Increase our MicroGrants budget, allowing us to fund more community projects.
 
 ### Scenario 3: 200k to 500k funding
 
 - All of the above, plus:
-- Hire a **project director** who will help us organize our projects and campaigns. Our 100+ projects in the Discord server need more structure and guidance.
 - Hire a **video creator** who specializes in making audiovisual content. They can help us professionalize our videos and reach a wider audience.
+- Hire a **marketing director** who will help us improve our marketing strategy, our copywriting, and our branding.
 - Hire a **press director** who will help us get more media coverage. This person should have experience in PR and media relations.
-- Hire a **policy director** who will help us strategize and execute our policy goals. This person should help us educate volunteers on how to lobby effectively and help us with our policy proposals. This person needs to have international legal expertise and preferably knowledge in AI or technology policy/governance.
+- Hire a **software engineer** who focuses on improving our website and CRM system. This person will help add gamification elements to our website, improve our onboarding process, and make our website more user-friendly.
 - Drastically increased ads & MicroGrants budgets, leading to more growth and impactful community projects.
 
 ### Scenario 4: 500k to 1M funding
@@ -62,6 +63,7 @@ All funding that we receive will be used to accelerate our growth and increase o
 - All of the above, plus:
 - Organize an online summit on AI risks and governance.
 - Hire a **summit organizer** who will help us organize the summit, invite speakers and guests, and make sure everything runs smoothly.
+- Hire a **policy director** who will help us strategize and execute our policy goals. This person should help us educate volunteers on how to lobby effectively and help us with our policy proposals. This person needs to have international legal expertise and preferably knowledge in AI or technology policy/governance.
 - Finance local PauseAI chapters. Find talented and motivated individuals who can lead these. We already have [local communities](/communities) and [two legal entities](/legal) (US & UK) for local chapters.
 
 ### Scenario 5: 1M+ funding

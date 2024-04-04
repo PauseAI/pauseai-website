@@ -11,7 +11,7 @@ This is why we are a _movement_, a _community_ something bigger than ourselves.
 ## Growth strategy
 
 - **Be visible**. We cannot grow if we are not seen. We need to be present in the places where people are. We need to be visible in the media, in the streets, and in the halls of power.
-- **Be transparent**. Do as much in public as possible. Prefer public channels over DMs. That way, people can chime in and help out. It also makes it easier to trust us.
+- **Be transparent**. Do as much in public as possible. Prefer public channels over DMs. Make digital meetings public. That way, people can chime in and help out. It also makes it easier to trust us.
 - **Be courageous**. We don't just speak up, we act. Protesting is scary and costly, but it's necessary. We need to be brave and take risks. Courage inspires courage.
 - **Be welcoming**. We want to be a group that people like to be part of. Allow people to join, even if your opinions differ from theirs. We're united by our goal.
 - **Be recognizable**. We have a clear, visual brand with a recognizable logo and color scheme. Our name says what we want: PauseAI. Our assets are free to use and can be easily found.
