@@ -138,7 +138,7 @@ There are two alternative explanations that are much easier to believe:
 1. **It's all a big conspiracy**. AI companies are hyping up AI to get more funding, and AI safety people are just part of this hype machine. This narrative matches with various observations: companies often lie, many AI safety folk are employed by AI companies, and there are a bunch of billionaires who are financing AI safety research. However, we can also point out why this conspiracy story is simply not true. Many of the alarmists are scientists who have nothing to gain. The companies might benefit in some way, but up until very recently (May 2023), they have been almost completely silent about AI risks. This makes sense, as companies mostly do not benefit from people fearing for their product or service. We've been protesting outside of Microsoft and OpenAI partly _because_ we wanted them to acknowledge the risks.
 2. **It's a cult**. The group that believes in AI safety is just a bunch of crazy religious extremists who believe in the end of the world. This seems to fit, too, since people in the AI safety community are often very passionate about the topic and use all sorts of in-group jargon. However, it falls apart when you point out that people who warn of AI risks are not a single organization. It's a large, diverse group of people, there is no single leader, there are no rituals, and there is no dogma.
 
-What makes these explanations, so compelling is not just that they are easy to comprehend, or that they explain all observations perfectly - the primary reason is that they are comforting.
+What makes these explanations so compelling is not just that they are easy to comprehend, or that they explain all observations perfectly - the primary reason is that they are comforting.
 Believing that people are warning about AI _because there is a real threat_ is scary and difficult to accept.
 
 ## Difficult to understand
@@ -188,11 +188,11 @@ All the people you care about will die.
 
 ### Our behaviour is shaped by our environment and primitive minds
 
-Our actions are really conditioned by what is seen as normal and good and reasonable. No matter how much we would want to act doing something, a lot of the time we fear consciously or unconsciously to be excluded by society for taking uncommon actions. Add to that the fact that people just talking about and doing other stuff unrelated to what you want to do will override what is in your mind and will motivate you to do other stuff on a daily basis, and you have as a result a recipe for only caring for what is normal on your close circles and online feeds.
+Our actions are really conditioned by what is seen as normal, good and reasonable. No matter how much we may want to act in a situation that calls for it, if those actions are uncommon, a lot of the time we consciously or unconsciously fear being excluded by society for doing them. And what's normal is pushed into our minds by being surrounded by it in our close social circles and online feeds. People just doing and talking about stuff unrelated to what we actually care about will override what's in our minds and motivate us to do other stuff on a daily basis.
 
-Sure, extinction risks deserve a **lot** more of our time, energy and attention. Our reactions to them should be more like life-or-death situations that fill us with adrenaline. But, because of the abstract nature of the problems, most people who learn about them just end up carrying on with their days as if they have learned nothing.
+Extinction risks deserve a **lot** more of our time, energy and attention. Our reactions to them should be more like life-or-death situations that fill us with adrenaline. But, because of the abstract nature of the problems and our maladapted minds, most people who learn about them just end up carrying on with their days as if they have learned nothing.
 
-Because of that, if you care about the risks of AI, a way to use your monkey brain in our favor is to be active on a [local community](/communities) or the [Discord of PauseAI](https://discord.gg/2XXWXvErfA).
+So, if you care about the risks of AI, a way to use your monkey brain in your favor is to be active on a [local](/communities) or [online](https://discord.gg/2XXWXvErfA) community.
 
 ### Coping mechanisms (preventing action)
 
