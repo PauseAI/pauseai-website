@@ -67,6 +67,9 @@
 			<ExternalLink href="https://creativecommons.org/licenses/by/4.0/" target="_blank"
 				>License: CC-BY 4.0</ExternalLink
 			>
+			<ExternalLink href="https://forms.gle/PbiTDKbU7CSsZ48C9" target="_blank"
+				>Submit feedback</ExternalLink
+			>
 		</div>
 	</div>
 </footer>
