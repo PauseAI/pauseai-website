@@ -1,4 +1,4 @@
-import { env } from '$env/dynamic/private'
+import { AIRTABLE_API_KEY } from '$env/static/private'
 import type { Person } from '$lib/types.js'
 import { json } from '@sveltejs/kit'
 
@@ -17,7 +17,7 @@ export async function GET({ fetch }) {
 	const options = {
 		method: 'GET',
 		headers: {
-			Authorization: `Bearer ${env.AIRTABLE_API_KEY}`,
+			Authorization: `Bearer ${AIRTABLE_API_KEY}`,
 			'Content-Type': 'application/json'
 		}
 	}
