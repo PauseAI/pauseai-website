@@ -33,13 +33,13 @@ This summit also led to two follow-up summits to be announced for 2024, in Seoul
 
 > Korea agreed to host a mini virtual summit on AI in May 2024, where follow-up actions for the declaration will be raised. ([Pulse, 2023](https://m.pulsenews.co.kr/view.php?sc=30800019&year=2023&no=845955))
 
-We still do not have a date, nor will there be a location to protest.
+We still do not officially have a date, but our sources say that the summit will be a physical ministerial meeting in Seoul on May 22nd.
 
 ## ~~2024~~ 2025 France AI ~~Safety~~ Action Summit
 
-France opted to host an AI Safety Summit in Novermber 2024, but has postponed it to February 2025.
+France opted to host an AI Safety Summit in November 2024, but has postponed it to February 2025.
 It was also renamed to "AI Action Summit", dropping the all-important "safety" focus.
-In their announcement, france
+We've been told that safety will be just one of five tracks at the summit.
 It is led by AI-sceptic Anne Bouverot, who is [dismissive](https://legrandcontinent-eu.translate.goog/es/2023/12/08/la-ia-no-nos-sustituira-una-conversacion-con-anne-bouverot-yann-le-cun-y-alexandre-viros/?_x_tr_sl=es&_x_tr_tl=en&_x_tr_hl=en&_x_tr_pto=sc) of "alarmist discourse", comparing AI with calculators and comparing AI safety concerns with Y2K concerns, being certain that "AI is not going to replace us, but rather help us".
 It seems increasingly unlikely that this summit will lead to the types of international regulations that we are calling for.
 
