@@ -31,14 +31,12 @@
 <style>
 	.social {
 		display: flex;
-		align-self: flex-end;
-		justify-content: flex-end;
 		gap: 1rem;
 	}
 
 	.social a {
 		width: 1rem;
-		display: inline-block;
+		display: flex;
 		fill: var(--text);
 	}
 

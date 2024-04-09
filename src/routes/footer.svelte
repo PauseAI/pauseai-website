@@ -8,8 +8,10 @@
 
 <footer>
 	<div class="joinbar">
-		<a class="c2a" href="/join">Join PauseAI ></a>
-		<Socials />
+		<a class="c2a" href="/join">Join PauseAI &gt;</a>
+		<div class="socials">
+			<Socials />
+		</div>
 	</div>
 	<div class="bar" />
 	<div class="footer-links">
@@ -68,7 +70,16 @@
 <style>
 	.joinbar {
 		display: flex;
+		flex-wrap: wrap;
 		justify-content: space-between;
+		align-items: center;
+	}
+
+	@media(max-width: 500px) {
+		.socials {
+			width: 100%;
+			margin: 0.5rem 0 0.5rem;
+		}
 	}
 
 	.bar {
@@ -118,6 +129,10 @@
 		font-family: var(--font-heading);
 		font-weight: 700;
 		text-align: left;
+	}
+
+	.c2a:hover {
+		color: var(--brand);
 	}
 
 	.footer-links :global(a) {
