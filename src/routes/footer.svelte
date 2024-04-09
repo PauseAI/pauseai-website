@@ -78,7 +78,6 @@
 	@media(max-width: 500px) {
 		.socials {
 			width: 100%;
-			margin: 0.5rem 0 0.5rem;
 		}
 	}
 

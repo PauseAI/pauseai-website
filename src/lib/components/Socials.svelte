@@ -31,10 +31,12 @@
 <style>
 	.social {
 		display: flex;
-		gap: 1rem;
+		margin-left: -0.5rem;
+		margin-right: -0.5rem;
 	}
 
 	.social a {
+		padding: 0.5rem;
 		width: 1rem;
 		display: flex;
 		fill: var(--text);
