@@ -47,4 +47,11 @@ Team lead: Chris Gerrby
 
 - Use surveys and data analysis to understand what people think about AI risks and how they can be convinced.
 
-Team lead: Joseph Miller
+Team lead: Joseph Miller.
+
+## Lobby Team
+
+- Send emails to politicians.
+- Meet with politicians.
+
+Team lead: Joep Meindertsma

@@ -44,7 +44,7 @@ All funding that we receive will be used to accelerate our growth and increase o
 ### Scenario 2: 100k to 200k funding
 
 - All of the above, plus:
-- Hire a **social media director**. This will help us improve our presence on social media and reach more people. Getting more people to join our protests and community is an effective multiplier for our impact.
+- Hire a **social media director**. This will help us improve our presence on social media and reach more people. Getting more people to join our protests and community is an effective multiplier for our impact. They will help improve our [communication strategy](/communication-strategy).
 - Hire a **project director** who will help us organize our projects and campaigns. Our 100+ projects in the Discord server need more structure and guidance.
 - Increase our spending on Ads on various social media platforms.
 - Increase our MicroGrants budget, allowing us to fund more community projects.
