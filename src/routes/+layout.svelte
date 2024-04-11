@@ -40,7 +40,7 @@
 	}}
 />
 
-{#if !['/', '/outcomes', '/pdoom'].includes(data.url)}
+{#if !['/', '/outcomes', '/pdoom', '/quotes'].includes(data.url)}
     <Toc />
 {/if}
 
