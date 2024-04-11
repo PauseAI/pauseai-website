@@ -211,7 +211,7 @@ const PauseAICommunities: Community[] = [
 	{
 		name: 'PauseAI Leicestershire',
 		lat: 52.656,
-		lon: 1.19,
+		lon: -1.19,
 		link: discordInvite
 	}
 ]
