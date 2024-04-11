@@ -33,8 +33,9 @@ You are now one of them.
   - [Discord](https://discord.gg/2XXWXvErfA)
   - [Twitter](https://twitter.com/PauseAI)
   - [Facebook](https://www.facebook.com/PauseAI)
+  - [LinkedIn](https://www.linkedin.com/company/pauseai/)
+    - Adding PauseAI to your resume and enabling "Notify network" is an easy way to let many people know about our efforts.
   - [TikTok](https://www.tiktok.com/@pauseai)
-  - [LinkedIn](https://www.linkedin.com/uas/login?session_redirect=/company/97035448/)
 
 ## If you ...
 
