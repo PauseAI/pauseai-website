@@ -55,11 +55,13 @@
     "padding": "2rem"
   },
   {
-    "background": "chinese_flag",
+    "background": "qiang",
     "color": "white",
     "text":"AI must be guided in a direction that is conducive to the progress of humanity. So **there should be a red line in AI development, a red line that must not be crossed** [...] It should not just benefit only a small group of people, but benefit the overwhelming majority of mankind [...] It is essential that we work together and coordinate with each other.",
     "author": "Li Qiang",
-    "author_description": "China's Head of Government"
+    "author_description": "China's Head of Government",
+    "padding": "2rem",
+    "notice": "“李强 Li Qiang 20230313 02” by China News Service. Modified and licensed under CC BY 3.0."
   },
   {
     "background": "leyen",
@@ -91,11 +93,13 @@
     "author_description": "Vice President of the United States"
   },
   {
-    "background": "light_grey",
+    "background": "jun",
     "color": "white",
     "text": "The potential impact of AI might exceed human cognitive boundaries. To ensure that this technology always benefits humanity, we must regulate the development of AI and prevent this technology from turning into a runaway wild horse [...] We need to strengthen the detection and evaluation of the entire lifecycle of AI, **ensuring that mankind has the ability to press the pause button at critical moments.**",
     "author": "Zhang Jun",
-    "author_description": "China's Ambassador of the United Nations"
+    "author_description": "China's Ambassador of the United Nations",
+    "padding": "2rem",
+    "notice": "“Zhang Jun (2022-06-08)” by 中国新闻社. Modified and licensed under CC BY 3.0."
   },
   {
     "background": "turing",
@@ -126,31 +130,35 @@
     "text": "[Suggesting about how to ask for a global regulatory body:] “any compute cluster above a certain extremely high-power threshold – and given the cost here, we’re talking maybe five in the world, something like that – any cluster like that **has to submit to the equivalent of international weapons inspectors**” […] I did a big trip around the world this year, and talked to heads of state in many of the countries that would need to participate in this, and **there was almost universal support for it.**",
     "author": "Sam Altman",
     "author_description": "Co-Founder and CEO of OpenAI, Former President of Y Combinator",
-    "padding":"1rem"
+    "padding":"1rem",
+    "notice": "“Disrupt SF TechCrunch Disrupt San Francisco 2019 - Day 2 (48838377432)” by TechCrunch. Modified and licensed under CC BY 2.0."
   },
   {
-    "background": "light_grey",
+    "background": "hassabis",
     "color": "white",
     "text": "**We must take the risks of AI as seriously as other major global challenges**, like climate change. It took the international community too long to coordinate an effective global response to this, and we’re living with the consequences of that now. We can’t afford the same delay with AI [...] then maybe there’s some kind of equivalent one day of the IAEA, which actually audits these things.",
     "author": "Demis Hassabis",
     "author_description": "Co-Founder and CEO of DeepMind",
-    "padding":""
+    "padding":"",
+    "notice": "“File:PhotonQ-Demis Hassabis on Artificial Playful Intelligence (15366514658) (2)” by PhOtOnQuAnTiQuE from Earth France. Modified and licensed under CC BY-SA 2.0."
   },
   {
-    "background": "dark_grey",
+    "background": "amodei",
     "color": "white",
     "text": "When I think of why am I scared [...] I think the thing that's really hard to argue with is like, there will be powerful models; they will be agentic; we're getting towards them. If such a model wanted to wreak havoc and destroy humanity or whatever, I think **we have basically no ability to stop it.**",
     "author": "Dario Amodei",
     "author_description": "Co-Founder and CEO of Anthropic, Former Head of AI Safety at OpenAI",
-    "padding":""
+    "padding":"",
+    "notice": "“TechCrunch Disrupt 2023 - Day 2” by TechCrunch. Modified and licensed under CC BY 2.0."
   },
   {
-    "background": "light_grey",
+    "background": "suleyman",
     "color": "white",
     "text": "[About a Pause] I don’t rule it out. And I think that **at some point over the next five years or so, we’re going to have to consider that question very seriously.**",
     "author": "Mustafa Suleyman", 
     "author_description": "CEO of Microsoft AI, Co-Founder of DeepMind",
-    "padding":""
+    "padding":"",
+    "notice": "test"
   },
   {
     "background": "dark_grey",
@@ -177,36 +185,40 @@
     "padding":""
   },
   {
-    "background": "light_grey",
+    "background": "hinton",
     "color": "white",
     "text": "The research question is: how do you prevent them from ever wanting to take control? And nobody knows the answer [...] The alarm bell I’m ringing has to do with the existential threat of them taking control [...] If you take the existential risk seriously, as I now do, **it might be quite sensible to just stop developing these things any further** [...] it’s as if aliens had landed and people haven’t realized because they speak very good English",
     "author": "Geoffrey Hinton",
     "author_description": "1st/3rd most cited scientist ever, Godfather of modern AI, Turing Award Recipient, resigned from Google due to ethical concerns",
-    "padding": "2.8rem"
+    "padding": "2.8rem",
+    "notice": "“RCZ_1437” by collision.conf. Modified and licensed under CC BY 2.0."
   },
   {
-    "background": "dark_grey",
+    "background": "bengio",
     "color": "white",
     "text": "It's very hard, in terms of your ego and feeling good about what you do, to accept the idea that the thing you've been working on for decades might actually be very dangerous to humanity... I think that I didn't want to think too much about it, and that's probably the case for others [...] Rogue AI may be dangerous for the whole of humanity. **Banning powerful AI systems (say beyond the abilities of GPT-4) that are given autonomy and agency would be a good start.**",
     "author": "Yoshua Bengio",
     "author_description": "2nd/3rd most cited scientist ever, Godfather of modern AI, Turing Award Recipient",
-    "padding": "2.8rem"
+    "padding": "2.8rem",
+    "notice": "“File:Yoshua Bengio (36468299790)” by Jérémy Barande. Modified and licensed under CC BY-SA 2.0."
   },
   {
-    "background": "light_grey",
+    "background": "lecun",
     "color": "white",
     "text": "**There is no question that machines will become smarter than humans—in all domains** in which humans are smart—in the future. It’s a question of when and how, not a question of if.",
     "author": "Yann LeCun",
     "author_description": "Godfather of modern AI, Turing Award Recipient, Chief AI Scientist at Meta",
-    "padding": "2.8rem"
+    "padding": "2.8rem",
+    "notice": "“Yann Lecun during a conference at EPFL, Lausanne, 5 october 2018” by Alain Herzog. Modified and licensed under CC BY 4.0."
   },
   {
-    "background": "dark_grey",
+    "background": "russell",
     "color": "white",
     "text": "If we pursue [our current approach], then **we will eventually lose control over the machines.**",
     "author": "Stuart Russell",
     "author_description": "Co-Author of the most popular AI textbook, Co-Founder of the Center for Human-Compatible AI.",
-    "padding":""
+    "padding":"",
+    "notice": "“Stuart Russell Professor of Computer Science, University of California, Berkeley” by Chatham House, London. Modified and licensed under CC BY 2.0."
   },
   {
     "background": "old",
@@ -217,7 +229,7 @@
     "padding": "2.8rem"
   },
   {
-    "background": "old",
+    "background": "butler",
     "color": "",
     "text": "Day by day, however, the machines are gaining ground upon us; day by day we are becoming more subservient to them... That the **time will come when the machines will hold the real supremacy over the world and its inhabitants** is what no person of a truly philosophic mind can for a moment question.",
     "author": "Samuel Butler",
@@ -225,7 +237,7 @@
     "padding": "2.8rem"
   },
   {
-    "background": "light_grey",
+    "background": "tallinn",
     "color": "white",
     "text": "How [LLMs] work is that you summon this \"mind\" from the \"mind space\" using your data, a lot of compute and a lot of money. Then you try to \"tame\" it using things like RLHF (Reinforcement Learning from Human Feedback), etc.  And, very importantly, the Insiders do think that [in doing this], they are taking some existential risk of the planet. **One thing that a pause achieves is that we will not push the Frontier, in terms of risky pre-training experiments.**",
     "author": "Jaan Tallinn",
@@ -233,12 +245,13 @@
     "padding": "1rem"
   },
   {
-    "background": "dark_grey",
+    "background": "yudkowsky",
     "color": "white",
     "text": "I do not expect something actually smart to attack us with marching robot armies with glowing red eyes where there could be a fun movie about us fighting them. **I expect an actually smarter and uncaring entity will figure out strategies and technologies that can kill us quickly and reliably and then kill us.**",
     "author": "Eliezer Yudkowsky",
     "author_description": "Co-Founder of the Machine Intelligence Research Institute",
-    "padding": "2.8rem"
+    "padding": "2.8rem",
+    "notice": "“Eliezer Yudkowsky, Stanford 2006 (square crop)” by Roland Dobbins. Modified and licensed under CC BY-SA 2.0."
   },
   {
     "background": "light_grey",
