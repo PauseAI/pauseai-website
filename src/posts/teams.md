@@ -34,7 +34,7 @@ Team lead: Sevatar
 - Welcome new members who join through Discord, newsletter or fill in the [join](/join) form.
 - Help new members find their way around and help them find a team or project to join.
 
-Team lead: Maxime Fournier
+Team lead: Maxime F
 
 ## Project Management Team
 
