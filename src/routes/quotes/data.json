@@ -94,7 +94,7 @@
   },
   {
     "background": "jun",
-    "color": "white",
+    "color": "black",
     "text": "The potential impact of AI might exceed human cognitive boundaries. To ensure that this technology always benefits humanity, we must regulate the development of AI and prevent this technology from turning into a runaway wild horse [...] We need to strengthen the detection and evaluation of the entire lifecycle of AI, **ensuring that mankind has the ability to press the pause button at critical moments.**",
     "author": "Zhang Jun",
     "author_description": "China's Ambassador of the United Nations",
@@ -125,7 +125,7 @@
     "padding":"2rem"
   },
   {
-    "background": "dark_grey",
+    "background": "altman",
     "color": "white",
     "text": "[Suggesting about how to ask for a global regulatory body:] “any compute cluster above a certain extremely high-power threshold – and given the cost here, we’re talking maybe five in the world, something like that – any cluster like that **has to submit to the equivalent of international weapons inspectors**” […] I did a big trip around the world this year, and talked to heads of state in many of the countries that would need to participate in this, and **there was almost universal support for it.**",
     "author": "Sam Altman",
@@ -135,7 +135,7 @@
   },
   {
     "background": "hassabis",
-    "color": "white",
+    "color": "black",
     "text": "**We must take the risks of AI as seriously as other major global challenges**, like climate change. It took the international community too long to coordinate an effective global response to this, and we’re living with the consequences of that now. We can’t afford the same delay with AI [...] then maybe there’s some kind of equivalent one day of the IAEA, which actually audits these things.",
     "author": "Demis Hassabis",
     "author_description": "Co-Founder and CEO of DeepMind",
@@ -152,7 +152,7 @@
     "notice": "“TechCrunch Disrupt 2023 - Day 2” by TechCrunch. Modified and licensed under CC BY 2.0."
   },
   {
-    "background": "suleyman",
+    "background": "suleyman2",
     "color": "white",
     "text": "[About a Pause] I don’t rule it out. And I think that **at some point over the next five years or so, we’re going to have to consider that question very seriously.**",
     "author": "Mustafa Suleyman", 
@@ -174,7 +174,8 @@
     "text": "The exact way the post-AGI world will look is hard to predict — that world will likely be more different from today’s world than today’s is from the 1500s [...] **We do not yet know how hard it will be to make sure AGIs act according to the values of their operators.** Some people believe it will be easy; some people believe it’ll be unimaginably difficult; but no one knows for sure",
     "author": "Greg Brockman",
     "author_description": "Co-Founder and Former CTO of OpenAI", 
-    "padding":""
+    "padding":"",
+    "notice": "“TechCrunch Disrupt San Francisco 2019 - Day 2” by TechCrunch. Modified and licensed under CC BY 2.0."
   },
   {
     "background": "dark_grey",
@@ -195,11 +196,11 @@
   },
   {
     "background": "bengio",
-    "color": "white",
+    "color": "black",
     "text": "It's very hard, in terms of your ego and feeling good about what you do, to accept the idea that the thing you've been working on for decades might actually be very dangerous to humanity... I think that I didn't want to think too much about it, and that's probably the case for others [...] Rogue AI may be dangerous for the whole of humanity. **Banning powerful AI systems (say beyond the abilities of GPT-4) that are given autonomy and agency would be a good start.**",
     "author": "Yoshua Bengio",
     "author_description": "2nd/3rd most cited scientist ever, Godfather of modern AI, Turing Award Recipient",
-    "padding": "2.8rem",
+    "padding": "1rem",
     "notice": "“File:Yoshua Bengio (36468299790)” by Jérémy Barande. Modified and licensed under CC BY-SA 2.0."
   },
   {
@@ -213,7 +214,7 @@
   },
   {
     "background": "russell",
-    "color": "white",
+    "color": "black",
     "text": "If we pursue [our current approach], then **we will eventually lose control over the machines.**",
     "author": "Stuart Russell",
     "author_description": "Co-Author of the most popular AI textbook, Co-Founder of the Center for Human-Compatible AI.",
@@ -230,7 +231,7 @@
   },
   {
     "background": "butler",
-    "color": "",
+    "color": "white",
     "text": "Day by day, however, the machines are gaining ground upon us; day by day we are becoming more subservient to them... That the **time will come when the machines will hold the real supremacy over the world and its inhabitants** is what no person of a truly philosophic mind can for a moment question.",
     "author": "Samuel Butler",
     "author_description": "Novelist, \"Darwin among the Machines\", 1863",
