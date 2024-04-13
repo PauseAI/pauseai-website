@@ -3,10 +3,16 @@
 	import Toggle from '$lib/components/Toggle.svelte'
 	import Edit from '$lib/components/Edit.svelte'
 	import WithdrawWidgetConsent from '$lib/components/widget-consent/WithdrawWidgetConsent.svelte'
+	import Socials from '$lib/components/Socials.svelte'
 </script>
 
 <footer>
-	<a class="c2a" href="/join">Join PauseAI ></a>
+	<div class="joinbar">
+		<a class="c2a" href="/join">Join PauseAI &gt;</a>
+		<div class="socials">
+			<Socials />
+		</div>
+	</div>
 	<div class="bar" />
 	<div class="footer-links">
 		<div class="column">
@@ -44,20 +50,6 @@
 			<a href="/lobby-tips">Lobby tips</a>
 		</div>
 		<div class="column">
-			<h2>Socials</h2>
-			<ExternalLink href="https://discord.gg/2XXWXvErfA" target="_blank">Discord</ExternalLink>
-			<ExternalLink href="https://twitter.com/PauseAI" target="_blank">Twitter</ExternalLink>
-			<ExternalLink href="https://www.linkedin.com/company/pauseai" target="_blank"
-				>LinkedIn</ExternalLink
-			>
-			<ExternalLink href="https://www.facebook.com/PauseAI/" target="_blank">Facebook</ExternalLink>
-			<ExternalLink href="https://www.tiktok.com/@pauseai" target="_blank">TikTok</ExternalLink>
-			<ExternalLink href="https://www.instagram.com/pause_ai/" target="_blank"
-				>Instagram</ExternalLink
-			>
-			<ExternalLink href="https://www.youtube.com/@PauseAI" target="_blank">YouTube</ExternalLink>
-		</div>
-		<div class="column">
 			<h2>Other</h2>
 			<Toggle />
 			<WithdrawWidgetConsent />
@@ -67,11 +59,28 @@
 			<ExternalLink href="https://creativecommons.org/licenses/by/4.0/" target="_blank"
 				>License: CC-BY 4.0</ExternalLink
 			>
+			<ExternalLink
+				href="https://airtable.com/appWPTGqZmUcs3NWu/pagIvo9Sv6IDHaolu/form"
+				target="_blank">Submit feedback</ExternalLink
+			>
 		</div>
 	</div>
 </footer>
 
 <style>
+	.joinbar {
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: space-between;
+		align-items: center;
+	}
+
+	@media(max-width: 500px) {
+		.socials {
+			width: 100%;
+		}
+	}
+
 	.bar {
 		height: 3px;
 		width: 100%;
@@ -82,7 +91,7 @@
 
 	.footer-links {
 		display: grid;
-		grid-template-columns: repeat(5, 1fr);
+		grid-template-columns: repeat(4, 1fr);
 		gap: 1.2rem;
 		font-size: 0.8rem;
 		padding-bottom: 1rem;
@@ -119,6 +128,10 @@
 		font-family: var(--font-heading);
 		font-weight: 700;
 		text-align: left;
+	}
+
+	.c2a:hover {
+		color: var(--brand);
 	}
 
 	.footer-links :global(a) {

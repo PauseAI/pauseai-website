@@ -22,7 +22,7 @@ Here are some resources to get you started.
 
 ## Websites
 
-- [AISafety.com](https://www.aisafety.com). The new landing page for AI Safety. Learn about the risks, the communities, the events, the jobs, the courses, the ideas for mitigating the risks and more!
+- [AISafety.com](https://www.aisafety.com) & [AISafety.info](https://aisafety.info). The landing pages for AI Safety. Learn about the risks, the communities, the events, the jobs, the courses, the ideas for mitigating the risks and more!
 - [AISafety.world](https://aisafety.world/tiles/). The whole AI Safety landscape with all the organizations, media outlets, forums, blogs, and other actors and resources.
 - [IncidentDatabase.ai](https://incidentdatabase.ai/). Database of incidents where AI systems caused harm.
 - [NavigatingAIRisks.ai](https://www.navigatingrisks.ai/). A blog with various interesting articles.

@@ -40,7 +40,7 @@
 
 <style>
 	.icon {
-		display: inline-block;
+		display: inline;
 		vertical-align: text-top;
 		margin-left: 0.1em;
 	}

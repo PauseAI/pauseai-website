@@ -12,7 +12,7 @@ You are now one of them.
 ## You can do this
 
 - **[Join PauseAI](/join)** and help us grow.
-- **[Join our Discord server](https://discord.gg/2XXWXvErfA)**, where our community is most active. We have a **#projects** channel where people are working on campaigns, videos, images, apps and more.
+- **[Join our Discord server](https://discord.gg/T3YrWUJsJ5)**, where our community is most active. We have a **#projects** channel where people are working on campaigns, videos, images, apps and more.
 - **[Meet](/communities)** other people in a PauseAI community near you. If there is no community near you, consider starting one.
 - [**Donate**](/donate) to PauseAI or buy some merchandise in our [store](https://pauseai-shop.fourthwall.com/).
 - [**Send an email to a politician**](/email-builder): emails are completely overpowered. Do it.
@@ -33,8 +33,9 @@ You are now one of them.
   - [Discord](https://discord.gg/2XXWXvErfA)
   - [Twitter](https://twitter.com/PauseAI)
   - [Facebook](https://www.facebook.com/PauseAI)
+  - [LinkedIn](https://www.linkedin.com/company/pauseai/)
+    - Adding PauseAI to your resume and enabling "Notify network" is an easy way to let many people know about our efforts.
   - [TikTok](https://www.tiktok.com/@pauseai)
-  - [LinkedIn](https://www.linkedin.com/uas/login?session_redirect=/company/97035448/)
 
 ## If you ...
 

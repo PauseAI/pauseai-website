@@ -1,7 +1,9 @@
 <script lang="ts">
 	import Button from '$lib/components/Button.svelte'
 	import Logo from '$lib/components/logo.svelte'
+	import Link from '$lib/components/custom/a.svelte'
 	import { toPng } from 'html-to-image'
+	import GithubSlugger from 'github-slugger'
 
 	const DOWNLOAD_WIDTH = 2000
 
@@ -17,7 +19,7 @@
 	$: color_style = color ? `color: ${color}` : ''
 	$: content_style = padding ? `padding: ${padding} 0 0 ${padding};` : ''
 
-	let quoteElement: HTMLDivElement;
+	let quoteElement: HTMLDivElement
 
 	async function downloadQuote(e: MouseEvent) {
 		const target = e.target as HTMLAnchorElement
@@ -52,11 +54,17 @@
 		<div class="quote-logo">
 			<Logo width={100} fill={color ? color : 'black'} />
 		</div>
+	</div>
+	<div class="quote-below">
+		<Button subtle on:click={downloadQuote}>Download</Button>
 		{#if notice}
-			<div class="quote-notice">{notice}</div>
+			<div class="quote-notice-button">
+				<Button subtle>
+					<Link href={'#credits-' + new GithubSlugger().slug(author)}>Credits</Link>
+				</Button>
+			</div>
 		{/if}
 	</div>
-	<Button subtle on:click={downloadQuote}>Download</Button>
 </div>
 
 <style>
@@ -129,16 +137,12 @@
 		margin: 1rem;
 	}
 
-	.quote-notice {
-		font-size: 12px;
+	.quote-below {
 		display: flex;
-		grid-row: 2;
-		justify-self: flex-end;
-		align-self: flex-end;
-		color: white;
-		text-shadow:
-			1px 1px 1.5px black,
-			-1px -1px 1.5px black;
-		margin: 6px 10px;
+	}
+
+	.quote-notice-button :global(a) {
+		color: inherit;
+		text-decoration: inherit;
 	}
 </style>
