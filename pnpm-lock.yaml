@@ -32,6 +32,9 @@ dependencies:
   escape-html:
     specifier: ^1.0.3
     version: 1.0.3
+  github-slugger:
+    specifier: ^2.0.0
+    version: 2.0.0
   html-to-image:
     specifier: ^1.11.11
     version: 1.11.11
@@ -73,6 +76,9 @@ devDependencies:
   '@sveltejs/vite-plugin-svelte':
     specifier: ^3.0.2
     version: 3.0.2(svelte@4.2.12)(vite@5.2.2)
+  '@types/escape-html':
+    specifier: ^1.0.4
+    version: 1.0.4
   '@types/node':
     specifier: ^20.11.30
     version: 20.11.30
@@ -906,6 +912,10 @@ packages:
 
   /@types/cookie@0.6.0:
     resolution: {integrity: sha512-4Kh9a6B2bQciAhf7FSuMRRkUWecJgJu9nPnx3yzpsfXX/c50REIqpHY4C82bXP90qrLtXtkDxTZosYO3UpOwlA==}
+
+  /@types/escape-html@1.0.4:
+    resolution: {integrity: sha512-qZ72SFTgUAZ5a7Tj6kf2SHLetiH5S6f8G5frB2SPQ3EyF02kxdyBFf4Tz4banE3xCgGnKgWLt//a6VuYHKYJTg==}
+    dev: true
 
   /@types/estree@1.0.5:
     resolution: {integrity: sha512-/kYRxGDLWzHOB7q+wtSUQlFrtcdUccpfy+X+9iMBpHK8QLLhx2wIPYuS5DYtR9Wa/YlZAbIovy7qVdB1Aq6Lyw==}

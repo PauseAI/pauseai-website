@@ -17,7 +17,7 @@ We aim to convince our governments to step in and [pause the development of supe
 We do this by informing the public, talking to decision-makers, and organizing protests.
 We are not affiliated with any company or organization.
 
-You can find us on [Discord](https://discord.gg/2XXWXvErfA), [Twitter](https://twitter.com/PauseAI), [Facebook](https://www.facebook.com/PauseAI), [TikTok](https://www.tiktok.com/@pauseai), [LinkedIn](https://www.linkedin.com/uas/login?session_redirect=/company/97035448/), [YouTube](https://www.youtube.com/@PauseAI) and [Instagram](https://www.instagram.com/pause_ai).
+You can find us on [Discord](https://discord.gg/2XXWXvErfA), [Twitter](https://twitter.com/PauseAI), [Substack](https://substack.com/@pauseai), [Facebook](https://www.facebook.com/PauseAI), [TikTok](https://www.tiktok.com/@pauseai), [LinkedIn](https://www.linkedin.com/uas/login?session_redirect=/company/97035448/), [YouTube](https://www.youtube.com/@PauseAI) and [Instagram](https://www.instagram.com/pause_ai).
 You can mail/contact us at [joep@pauseai.info](mailto:joep@pauseai.info).
 
 ## Aren't you just scared of changes and new technology?
@@ -180,6 +180,6 @@ Even when facing the end of the world, there can still be hope and very rewardin
 
 ## I have a different / AI related question
 
-You can try [AISafety.com](https://www.aisafety.com), that also gives you a better view of the whole AI Safety landscape.
+You can try [AISafety.info](https://aisafety.info) or [AISafety.com](https://www.aisafety.com).
 Or learn from other sources and media like [videos, articles and books here](/learn).
-We also have a channel for asking questions on our [Discord server](https://discord.gg/2XXWXvErfA).
+We also have a channel for asking questions on our [Discord server](https://discord.gg/X9TYc3vs7j).
