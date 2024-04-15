@@ -15,7 +15,6 @@ description: Frequently asked questions about PauseAI and the risks of superinte
 We are a community of volunteers and [local communities](/communities) coordinated by a [non-profit](/legal) that aims to mitigate the [risks of AI](/risks) (including the [risk of human extinction](/xrisk)).
 We aim to convince our governments to step in and [pause the development of superhuman AI](/proposal).
 We do this by informing the public, talking to decision-makers, and organizing protests.
-We are not affiliated with any company or organization.
 
 You can find us on [Discord](https://discord.gg/2XXWXvErfA), [Twitter](https://twitter.com/PauseAI), [Substack](https://substack.com/@pauseai), [Facebook](https://www.facebook.com/PauseAI), [TikTok](https://www.tiktok.com/@pauseai), [LinkedIn](https://www.linkedin.com/uas/login?session_redirect=/company/97035448/), [YouTube](https://www.youtube.com/@PauseAI) and [Instagram](https://www.instagram.com/pause_ai).
 You can mail/contact us at [joep@pauseai.info](mailto:joep@pauseai.info).
@@ -174,12 +173,9 @@ Because acknowledging that _we are in fact in danger_ is a very, very scary thin
 
 ## Ok, I want to help! What can I do?
 
-There are many [things that you can do](/action). Writing a [letter](/writing-a-letter), posting [flyers](/flyering), informing [others](/action#you-can-do-this), going to a [protest](/protests), [donating](/donate) some money or [joining](/join) a community is not that hard! And these actions have a real impact.
+There are many [things that you can do](/action).
+On your own, you can write a [letter](/writing-a-letter), post [flyers](/flyering), inform [others](/action#you-can-do-this), join to a [protest](/protests), ir [donating](/donate) some money!
+But even more important: you can [join PauseAI](/join) and coordinate with others who are taking action.
+If you want to contribute more, you can become a volunteer and join one of our [teams](/teams).
 
 Even when facing the end of the world, there can still be hope and very rewarding work to do. 💪
-
-## I have a different / AI related question
-
-You can try [AISafety.info](https://aisafety.info) or [AISafety.com](https://www.aisafety.com).
-Or learn from other sources and media like [videos, articles and books here](/learn).
-We also have a channel for asking questions on our [Discord server](https://discord.gg/X9TYc3vs7j).

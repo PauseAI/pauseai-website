@@ -3,7 +3,7 @@ title: PauseAI Teams
 description: Our volunteers are organized in groups to work on different aspects of our movement.
 ---
 
-PauseAI consists almost exclusively of volunteers.
+PauseAI consists almost exclusively of volunteers ([sign up here](https://airtable.com/appWPTGqZmUcs3NWu/pag7ztLh27Omj5s2n/form)).
 We are organized in teams, each working on a different aspect of our movement.
 
 ## Mass Mobilization Team
@@ -34,7 +34,7 @@ Team lead: Sevatar
 - Welcome new members who join through Discord, newsletter or fill in the [join](/join) form.
 - Help new members find their way around and help them find a team or project to join.
 
-Team lead: Maxime F
+Team lead: RationalHippy
 
 ## Project Management Team
 
@@ -55,3 +55,7 @@ Team lead: Joseph Miller.
 - Meet with politicians.
 
 Team lead: Joep Meindertsma
+
+## Become a volunteer
+
+If you want to join one of the teams, please [sign up as a volunteer](https://airtable.com/appWPTGqZmUcs3NWu/pag7ztLh27Omj5s2n/form)!
