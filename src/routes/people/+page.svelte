@@ -1,8 +1,15 @@
 <script lang="ts">
+	import PostMeta from '$lib/components/PostMeta.svelte'
+	import { meta } from './meta'
 	import Person from './person.svelte'
 	export let data
 	const { props } = data
+	const { title, description, date } = meta
 </script>
+
+<PostMeta {title} {description} {date} />
+
+<h1>{title}</h1>
 
 <section data-pagefind-ignore>
 	{#if props.length === 0}
