@@ -27,6 +27,10 @@ export async function GET({ fetch }) {
 		throw new Error('Failed to fetch data from Airtable')
 	}
 	const data = await response.json()
-	const out: Person[] = data.records.map(recordToPerson).filter((p: Person) => p.image)
+	const out: Person[] = data.records
+		.map(recordToPerson)
+		.filter((p: Person) => p.image)
+		// Shuffle the array, although not truly random
+		.sort(() => 0.5 - Math.random())
 	return json(out)
 }
