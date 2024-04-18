@@ -5,7 +5,7 @@ description: When and where we will be protesting.
 
 ## Coming up
 
-<!-- - [12th of May, San Francisco + Berlin](/2024-may) -->
+- [12th of May, San Francisco, London, Stockholm, Berlin, Den Haag, Rome, Paris...](/2024-may)
 - [Join PauseAI](/join) to receive updates on upcoming protests.
 
 ## Past Protests
