@@ -6,6 +6,13 @@ description: Our volunteers are organized in groups to work on different aspects
 PauseAI consists almost exclusively of volunteers ([sign up here](https://airtable.com/appWPTGqZmUcs3NWu/pag7ztLh27Omj5s2n/form)).
 We are organized in teams, each working on a different aspect of our movement.
 
+## Oversight team
+
+- Keep track of the progress of the various teams.
+- Make sure that the teams are functioning well (have a leader, have regular meetings, etc.).
+
+Team lead: Felix de Simone
+
 ## Mass Mobilization Team
 
 - Facilitate the formation of local groups.
@@ -27,7 +34,7 @@ Team lead: Joep Meindertsma
 - Writing press releases.
 - Contacting journalists and getting articles published about AI risks and PauseAI.
 
-Team lead: Sevatar
+Team lead: Hugo Guzman
 
 ## Onboarding Team
 
@@ -36,10 +43,11 @@ Team lead: Sevatar
 
 Team lead: RationalHippy
 
-## Project Management Team
+## Action Portfolio Team
 
-- Make it easy for members to find and contribute to projects.
+- Make it easy for members to take meaningful actions.
 - Have a portfolio of a select few projects that PauseAI can officially endorse and support.
+- Host the public Action meetings, where members share their activities and progress.
 
 Team lead: Chris Gerrby
 
@@ -55,6 +63,14 @@ Team lead: Joseph Miller.
 - Meet with politicians.
 
 Team lead: Joep Meindertsma
+
+## ECI team
+
+- Set up a treaty draft.
+- Set up a European Citizen's Initiative petition
+- Get 1.000.000 signatures through a large-scale EU-wide campaign.
+
+Team lead: Giulia Consonni
 
 ## Become a volunteer
 
