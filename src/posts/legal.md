@@ -82,14 +82,14 @@ Our first annual report will be published after the first fiscal year ends on 31
 - Registration date: 01/24/2024
 - Formed in: California
 - Status: Active
-- Contact: [Holly Elmore](mailto:m.holly.elmore@gmail.com)
+- Contact: [Holly Elmore](mailto:holly@pauseai.info)
 
 ## PauseAI UK
 
 - Name: PauseAI UK Ltd
 - Incorporation date: 28th December 2023
 - Company number: 15373608
-- Director: [William Baird](mailto:willb32764@gmail.com)
+- Director: [William Baird](mailto:william@pauseai.info)
 
 ## Relationship between entities
 
