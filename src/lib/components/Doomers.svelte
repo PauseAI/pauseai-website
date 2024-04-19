@@ -149,7 +149,7 @@
 		},
 		{
 			name: 'Daniel Kokotajlo',
-			title: 'OpenAI researcher & forecaster',
+			title: 'Forecaster & former OpenAI researcher',
 			probability: '70%',
 			number: 0.7,
 			source:
