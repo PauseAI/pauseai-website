@@ -80,10 +80,11 @@
   },
   {
     "background": "pope",
-    "color": "white",
+    "color": "black",
     "text": "**I urge the global community of nations to work together in order to adopt a binding international treaty that regulates the development and use of artificial intelligence in its many forms** [...] [AI] may pose a risk to our survival and endanger our common home.",
     "author": "Pope Francis",
-    "author_description": "Head of the Catholic Church"
+    "author_description": "Head of the Catholic Church",
+    "notice": "“pope-francis-1a” by ThiênLong. Modified and licensed under CC BY-SA 2.0."
   },
   {
     "background": "harris",
