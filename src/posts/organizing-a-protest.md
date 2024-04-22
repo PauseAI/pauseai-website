@@ -43,10 +43,15 @@ This is a short document that announces the protest and explains why it's import
 See [writing press releases](/writing-press-releases) for more information.
 We can help you with this!
 
+### Share the event on social media
+
+Create a Facebook event, share it on Twitter, LinkedIn, etc.
+
 ### Make the protest visible locally
 
 Stickers, posters, chalk stencils, etc.
 Make sure people know that the protest is happening.
+With a [QR code](https://qrplanet.com/qr-code-generator-svg) linking to wherever you're gathering people in social media.
 
 ### Reach out to (local) media
 
@@ -62,10 +67,6 @@ We can do this for you.
 If you know GitHub and rather do it yourself, simply create a new file (e.g. `2023-10-23-nyc-protest.md`) in the `src/posts` folder.
 Feel free to copy an earlier protest file for inspiration.
 Also, update the `protests.md` file.
-
-### Share the event on social media
-
-Create a Facebook event, and share it on Twitter, LinkedIn, etc.
 
 ### Reach out to people and organizations
 
