@@ -26,6 +26,8 @@ The article will be published automatically when the pull request is merged.
 
 ```sh
 git clone git@github.com:joepio/pauseai.git
+# Copy the envs and set the variables if needed
+cp template.env .env
 # Instead of pnpm you could use npm or yarn
 pnpm install
 pnpm run dev
