@@ -47,7 +47,7 @@ Team lead: Hugo Guzman
 - Welcome new members who join through Discord, newsletter or fill in the [join](/join) form.
 - Help new members find their way around and help them find a team or project to join.
 
-Team lead: RationalHippy
+Team lead: Maxime Fournes
 
 ## Action Portfolio Team
 
@@ -61,7 +61,7 @@ Team lead: Chris Gerrby
 
 - Use surveys and data analysis to understand what people think about AI risks and how they can be convinced.
 
-Team lead: Joseph Miller.
+Team lead: Joseph Miller
 
 ## Lobby Team
 
@@ -82,7 +82,7 @@ Team lead: Giulia Consonni
 
 - Maintain the website, the Discord bot, the CRM and other software tools.
 
-Team lead: RationalHippy
+Team lead: Maxime Fournes
 
 ## Discord Moderator team
 

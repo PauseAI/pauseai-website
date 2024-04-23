@@ -12,7 +12,7 @@ description: Frequently asked questions about PauseAI and the risks of superinte
 
 ## Who are you?
 
-We are a community of volunteers and [local communities](/communities) coordinated by a [non-profit](/legal) that aims to mitigate the [risks of AI](/risks) (including the [risk of human extinction](/xrisk)).
+We are a community of [volunteers](/people) and [local communities](/communities) coordinated by a [non-profit](/legal) that aims to mitigate the [risks of AI](/risks) (including the [risk of human extinction](/xrisk)).
 We aim to convince our governments to step in and [pause the development of superhuman AI](/proposal).
 We do this by informing the public, talking to decision-makers, and organizing protests.
 

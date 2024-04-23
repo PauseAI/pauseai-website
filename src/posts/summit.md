@@ -29,11 +29,11 @@ We need an actual binding treaty that pauses frontier AI development.
 
 This summit also led to two follow-up summits to be announced for 2024, in Seoul and Paris.
 
-## 2024 South Korea AI Safety Summit (May)
+## 2024 South Korea AI Safety Summit (May 21st, 22nd)
 
-> Korea agreed to host a mini virtual summit on AI in May 2024, where follow-up actions for the declaration will be raised. ([Pulse, 2023](https://m.pulsenews.co.kr/view.php?sc=30800019&year=2023&no=845955))
-
-We still do not officially have a date, but our sources say that the summit will be a physical ministerial meeting in Seoul on May 22nd.
+The second AI safety summit was [officially announced](https://www.gov.uk/government/news/uk-and-republic-of-korea-to-build-on-legacy-of-bletchley-park) in April 2023.
+The first day is a virtual event, the second day is an in-person event in Seoul for ministers.
+We are [organizing a protest on May 13th](/2024-may) to ask the attending ministers to initialize treaty negotiations.
 
 ## ~~2024~~ 2025 France AI ~~Safety~~ Action Summit
 
