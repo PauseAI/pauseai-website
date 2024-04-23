@@ -96,7 +96,7 @@ Team lead: Joep Meindertsma
 
 - Write grant requests
 - Make sure donations are working
-- Manage communications surrounding grants & donations (including the pages for `/`)
+- Manage communications surrounding grants & donations (including the pages for [theory of change](/theory-of-change) and [roadmap](https://pauseai.info/roadmap))
 
 Team lead: Chris Gerrby
 
