@@ -22,3 +22,10 @@ export type Person = {
 	bio: string
 	title?: string
 }
+
+export type Team = {
+	id: string
+	name: string
+	description: string
+	lead: string
+}
