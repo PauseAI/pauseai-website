@@ -92,6 +92,14 @@ Team lead: Maxime Fournes
 
 Team lead: Joep Meindertsma
 
+## Funding & Strategy team
+
+- Write grant requests
+- Make sure donations are working
+- Manage communications surrounding grants & donations (including the pages for `/`)
+
+Team lead: Chris Gerrby
+
 ## Become a volunteer
 
 If you want to join one of the teams, please [sign up as a volunteer](https://airtable.com/appWPTGqZmUcs3NWu/pag7ztLh27Omj5s2n/form)!
