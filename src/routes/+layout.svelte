@@ -21,6 +21,7 @@
 </h2>
 
 <div class="layout">
+	<slot name="head" />
 	<Header />
 
 	<main>
