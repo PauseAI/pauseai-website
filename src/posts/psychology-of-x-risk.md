@@ -30,7 +30,7 @@ Professionals can fear that their reputations will be damaged if they share thei
 
 Pushing for sensible policy measures (like pausing) can be considered "extremist" or "alarmist", both of which can lower your credibility or reputation.
 
-### Fear of being called racist / cultist / part of a conspiracy
+### Fear of being called racist/cultist/conspiracy-theorist
 
 In recent months, various conspiracy theories have risen.
 Some individuals have stated that [all AI safety people are racist](https://medium.com/%2540emilymenonbender/talking-about-a-schism-is-ahistorical-3c454a77220f) and that [AI safety is a cult](https://www.cnbc.com/2023/06/06/ai-doomers-are-a-cult-heres-the-real-threat-says-marc-andreessen.html).
@@ -52,6 +52,50 @@ As a politician, you don't want to be caught saying something that is wrong, so 
 Even if there is a discussion on existential risk, it is difficult to convince people that it is a real problem.
 There are various reasons why most will instantly dismiss the idea.
 
+### Normalcy Bias
+
+We all know the images of disasters in movies, right? People shouting and running in panic.
+Turns out the opposite is often true: about 80% of people show symptoms of [_normalcy bias_](https://en.wikipedia.org/wiki/Normalcy_bias) during disasters: not seeking shelter during a tornado, disregarding government warnings, keep shaking hands in early COVID days.
+The normalcy bias describes our tendency to underestimate the possibility of disaster and believe that life will continue as normal, even in the face of significant threats or crises.
+
+> People mill, asking for opinions, because they _want_ to be told that everything is fine. They will keep asking, and delaying, until they get the answer they want.
+
+> During 9/11, for example, the average wait time among survivors to evacuate the towers was 6 minutes, with some waiting up to half an hour to leave. Around 1000 people even took the time to shut down their computers and complete other office activities, a strategy to continue engaging in normal activities during an unknown situation.
+
+_From ["The frozen calm of normalcy bias"](https://gizmodo.com/the-frozen-calm-of-normalcy-bias-486764924)_
+
+Another example of this, is the Challenger spaceshuttle disaster in 1986.
+Roger Boisjoly was an engineer who predicted it would blow up, but nobody of his managers wanted to believe that it was possible:
+
+> We all knew if the seals failed the shuttle would blow up.
+> I fought like Hell to stop that launch. I'm so torn up inside I can hardly talk about it, even now.
+> We were talking to the right people, we were talking to the people who had the power to stop that launch.
+
+_From ["Remembering Roger Boisjoly"](https://www.npr.org/sections/thetwo-way/2012/02/06/146490064/remembering-roger-boisjoly-he-tried-to-stop-shuttle-challenger-launch)_
+
+One explanation for why our brain refuses to believe that danger could be upon us, is cognitive dissonance.
+
+### Cognitive dissonance
+
+When confronted with new information, the brain will try to make it fit with what it already knows.
+Ideas that already match existing beliefs are easily added to our model of the world.
+Ideas that are too different from what we already believe will cause _cognitive dissonance_ - we will feel uncomfortable and try to reject the ideas or find alternative explanations for what we hear.
+
+A lot of beliefs that most people have will be challenged by the idea of existential risk:
+
+- Technology is there to serve us and can be easily controlled
+- There are smart people in charge who will make sure everything will be okay
+- I will probably grow old, and so will my children
+
+Many of these thoughts will be challenged by the idea that AI poses an existential risk.
+Our brains will look for alternative explanations for why they hear scientists are warning about this:
+
+- They are paid by big tech
+- They are part of some conspiracy or cult
+- They just want attention or power
+
+Internalizing that _scientists are warning us because they believe we're in danger_ conflicts with our existing beliefs, it causes too much cognitive dissonance.
+
 ### The end of the world has never happened
 
 Seeing is believing (see: [_Availability Heuristic_](https://en.wikipedia.org/wiki/Availability_heuristic)).
@@ -66,10 +110,12 @@ They probably haven't been shown the same information as you have.
 
 ### We like to think that we are special
 
-Both at a species and at an individual level, we want to believe that we are special.
+Both at a _collective_ and at an _individual_ level, we want to believe that we are special.
 
 On a collective level, we like to think of humans as something very different from animals - Darwin's idea that we evolved from apes was almost unthinkable for most.
+Most religions have stories in them about heaven or reincarnation, where humans (or at least the believers) will in some way live forever.
 The idea that one day humanity may no longer exist is very jarring, and difficult to internalize.
+We like to believe we have _plot armor_ - that we are the main characters in a story, and that the story will have a happy ending.
 People may rationally consider it, but they will not _feel_ it.
 A video by Robert Miles titled ["There's no rule which says we will make it"](https://www.youtube.com/watch?v=JD_iA7imAPs) explains this very well.
 
@@ -89,8 +135,9 @@ In sci-fi, AIs are often portrayed very anthropomorphically - as evil, as wantin
 All of these do not match up with what AI safety experts are worried about.
 
 And in most stories, the hero wins.
-The AI makes some mistake, or the hero finds a way to outsmart it.
-In more realistic AI doom scenarios, there is no hero, no struggle, no humans-outsmarting-a-superintelligence, and no happy ending.
+The AI makes some foolish mistake and the hero finds a way to outsmart the thing that's supposed to be way smarter.
+The hero is protected by plot armor.
+In more realistic AI doom scenarios, there is no hero, no plot armor, struggle, no humans-outsmarting-a-superintelligence, and no happy ending.
 
 ### Progress has always been (mostly) good
 
@@ -126,6 +173,8 @@ AI safety experts have been warning about the potential dangers of AI for years,
 In an [interview](https://youtu.be/0RknkWgd6Ck?t%25253D949), he gave the following explanation:
 
 > "Why didn't I think about it before? Why didn't Geoffrey Hinton think about it before? [...] I believe there's a psychological effect that still may be at play for a lot of people. [...] It's very hard, in terms of your ego and feeling good about what you do, to accept the idea that the thing you've been working on for decades might actually be very dangerous to humanity. [...] I think that I didn't want to think too much about it, and that's probably the case for others."
+
+It should surprise no-one that some of the most fierce AI risk deniers are AI researchers themselves.
 
 ### Easy to dismiss as conspiracy or cult
 
@@ -182,17 +231,19 @@ Existential risk means the death of all 8 billion people on Earth (not counting 
 Even if there is a 1% chance of this happening, it is still a very big deal.
 Rationally, we should consider this 1% chance of 8 billion deaths just as important as the certain death of 80 million people.
 
-If someone feels like the end of the world isn't that big of a deal (you would be surprised by how often this happens), you can try to make things more personal.
+If someone feels like the end of the world isn't that big of a deal (you would be sur€prised by how often this happens), you can try to make things more personal.
 Humanity isn't just some abstract concept, they are your friends, your family, and yourself.
 All the people you care about will die.
 
-### Our behaviour is shaped by our environment and primitive minds
+### Our behavior is shaped by our environment and primitive minds
 
-Our actions are really conditioned by what is seen as normal, good and reasonable. No matter how much we may want to act in a situation that calls for it, if those actions are uncommon, a lot of the time we consciously or unconsciously fear being excluded by society for doing them. And what's normal is pushed into our minds by being surrounded by it in our close social circles and online feeds. People just doing and talking about stuff unrelated to what we actually care about will override what's in our minds and motivate us to do other stuff on a daily basis.
+Our actions are conditioned by what is seen as normal, good and reasonable.
+No matter how much we may want to act in a situation that calls for it, if those actions are uncommon, a lot of the time we consciously or unconsciously fear being excluded by society for doing them. And what's normal is pushed into our minds by being surrounded by it in our close social circles and online feeds.
+People just doing and talking about stuff unrelated to what we actually care about will override what's in our minds and motivate us to do other stuff on a daily basis.
 
 Extinction risks deserve a **lot** more of our time, energy and attention. Our reactions to them should be more like life-or-death situations that fill us with adrenaline. But, because of the abstract nature of the problems and our maladapted minds, most people who learn about them just end up carrying on with their days as if they have learned nothing.
 
-So, if you care about the risks of AI, a way to use your monkey brain in your favor is to be active on a [local](/communities) or [online](https://discord.gg/2XXWXvErfA) community.
+So, if you care about the risks of AI, a way to use your monkey brain in your favor is to be active in a [local](/communities) or [online](https://discord.gg/2XXWXvErfA) community.
 
 ### Coping mechanisms (preventing action)
 
