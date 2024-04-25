@@ -18,9 +18,10 @@ The latest AI systems can already analyze and write software.
 They [can find vulnerabilities](https://betterprogramming.pub/i-used-gpt-3-to-find-213-security-vulnerabilities-in-a-single-codebase-cc3870ba9411) in software, and [they could be used to exploit them](https://blog.checkpoint.com/2023/03/15/check-point-research-conducts-initial-security-analysis-of-chatgpt4-highlighting-potential-scenarios-for-accelerated-cybercrime/).
 GPT-4 can already [autonomously hack websites](https://arxiv.org/html/2402.06664v1), performing tasks as complex as blind database schema extraction and SQL injections without human feedback, which was discovered 18 months after GPT-4 finished training.
 GPT-4 already [outperforms 88%](https://arxiv.org/pdf/2402.11814.pdf) of human hackers in a CTF competition.
+It can also [autonomously exploit 87% of tested vulnerabilities](https://arxiv.org/abs/2404.08144), which is a huge step up from GPT-3.5 or open-source models, which all got 0%.
 As AI capabilities grow, so will the vulnerabilities they can detect and the exploits they can create.
 They are not yet as good at this as the best humans are, so right now the danger is limited.
-However, capabilities are rapidly increasing.
+However, capabilities are rapidly increasing, and can jump quite suddenly.
 
 Note that AI also enables completely novel types of attacks.
 For example, AI can be used to [hear the password you typed from an online call](https://beebom.com/ai-crack-password-listening-keyboard-sounds/)
