@@ -9,18 +9,6 @@ How does PauseAI plan to achieve its mission?
 
 Our [proposal](/proposal) describes what we want: Globally halt frontier AI development **until we know how to do it safely** and **under democratic control**.
 
-## How do we pause?
-
-Pausing is costly because there are many incentives to develop increasingly powerful AI.
-Companies can make a lot of money by being the first to develop a new AI, and countries can gain a lot of power by being the first to develop a new AI.
-This is why we do not expect any single company to pause, and why we do not expect any single country to pause.
-
-This means - we need an _international pause_.
-We can get there in two ways:
-
-1. **An international treaty**. We [banned blinding laser weapons](https://en.wikipedia.org/wiki/Protocol_on_Blinding_Laser_Weapons) and [CFCs](https://en.wikipedia.org/wiki/Montreal_Protocol) through a treaty, so we can also ban superhuman AI through a treaty. These treaties are often initiated by a small group of countries, and then other countries join in. A [summit](/summit) is often the event where such a treaty is initiated and signed. We need to convince our politicians to initialize treaty negotiations.
-2. **A unilateral supply-chain pause**. The AI supply chain is highly centralized. Virtually all AI chips used in training runs are designed by NVidia, produced by TSMC, which uses lithography machines by ASML. If any of these monopolies were to pause, the entire AI industry would pause. We can achieve this by lobbying these companies, and by lobbying the governments that have leverage over these companies.
-
 ## Why don't we have a pause yet?
 
 The problem is not a lack of concerned experts (86% of AI researchers believe the control problem is real and important).
@@ -44,6 +32,15 @@ People [underestimate the pace of AI progress](/risks).
 Even experts in the field have been consistently surprised by how quickly AI has been improving.
 - **Our psychology**.
 Read more about how our [psychology makes it very difficult](/psychology-of-x-risk) for us to internalize how bad things can get.
+
+## How do we pause?
+
+Because of the race dynamics mentioned above, we should not expect a local pause.
+We need an _international pause_.
+We can get there in two ways:
+
+1. **An international treaty**. We [banned blinding laser weapons](https://en.wikipedia.org/wiki/Protocol_on_Blinding_Laser_Weapons) and [CFCs](https://en.wikipedia.org/wiki/Montreal_Protocol) through a treaty, so we can also ban superhuman AI through a treaty. These treaties are often initiated by a small group of countries, and then other countries join in. A [summit](/summit) is often the event where such a treaty is initiated and signed. We need to convince our politicians to initialize treaty negotiations. This requires public awareness, public support, and finally a feeling of responsibility on the part of the politicians.
+2. **A unilateral supply-chain pause**. The AI supply chain is highly centralized. Virtually all AI chips used in training runs are designed by NVidia, produced by TSMC, which uses lithography machines by ASML. If any of these monopolies were to pause, the entire AI industry would pause. We can achieve this by lobbying these companies, and by lobbying the governments that have leverage over these companies.
 
 ## What do we do to get there?
 
