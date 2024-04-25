@@ -20,9 +20,9 @@
 </p>
 <Doomers />
 
-<h2>What about yours?</h2>
+<h2>Do something about it</h2>
 <p>
-	We've built the AI Outcomes App to help you think about how probable the various outcomes from AI
-	are.
+	However high your p(doom) is, you probably agree that we should not allow AI companies to gamble
+	with our future.
+	<a href="/join">Join PauseAI</a> to prevent them from doing so.
 </p>
-<a href="/outcomes">Try it out</a>
