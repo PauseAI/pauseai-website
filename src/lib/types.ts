@@ -21,4 +21,6 @@ export type Person = {
 	image: string
 	bio: string
 	title?: string
+	/** Doesn't want to be visible on the /people page */
+	privacy?: boolean
 }
