@@ -27,5 +27,6 @@ export type Team = {
 	id: string
 	name: string
 	description: string
-	lead: string
+	leadName: string
+	leadEmail: string
 }

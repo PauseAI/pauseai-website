@@ -3,12 +3,12 @@ import { json } from '@sveltejs/kit'
 import { options } from '$lib/api.js'
 
 function recordToTeam(record: any): Team {
-	console.log(record.fields)
 	return {
 		id: record.id || 'noId',
-		name: record.fields.Name,
-		description: record.fields.Mission,
-		lead: record.fields['Name (from Lead)']
+		name: record.fields.name,
+		description: record.fields.mission,
+		leadName: record.fields.name_from_lead,
+		leadEmail: record.fields.email_address_from_lead
 	}
 }
 
