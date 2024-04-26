@@ -1,5 +1,7 @@
 <script lang="ts">
 	import PostMeta from '$lib/components/PostMeta.svelte'
+	import A from '$lib/components/custom/a.svelte'
+	import { a } from '../../mdsvex.svelte'
 	import { meta } from './meta'
 	import Team from './team.svelte'
 	export let data
@@ -31,6 +33,13 @@ a Role on the [discord server](https://discord.gg/2XXWXvErfA).
 		{/each}
 	</ul>
 </section>
+<h2>Become a volunteer</h2>
+
+<p>
+	If you want to join one of the teams, please <a
+		href="https://airtable.com/appWPTGqZmUcs3NWu/pag7ztLh27Omj5s2n/form">sign up as a volunteer!</a
+	>
+</p>
 
 <style>
 	.people {
