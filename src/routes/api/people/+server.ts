@@ -1,4 +1,5 @@
 import { AIRTABLE_API_KEY } from '$env/static/private'
+import { options } from '$lib/api.js'
 import type { Person } from '$lib/types.js'
 import { json } from '@sveltejs/kit'
 
@@ -15,13 +16,6 @@ function recordToPerson(record: any): Person {
 
 export async function GET({ fetch }) {
 	const url = `https://api.airtable.com/v0/appWPTGqZmUcs3NWu/tblZhQc49PkCz3yHd`
-	const options = {
-		method: 'GET',
-		headers: {
-			Authorization: `Bearer ${AIRTABLE_API_KEY}`,
-			'Content-Type': 'application/json'
-		}
-	}
 
 	const response = await fetch(url, options)
 	if (!response.ok) {

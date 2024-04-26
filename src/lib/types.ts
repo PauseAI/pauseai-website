@@ -24,3 +24,11 @@ export type Person = {
 	/** Doesn't want to be visible on the /people page */
 	privacy?: boolean
 }
+
+export type Team = {
+	id: string
+	name: string
+	description: string
+	leadName: string
+	leadEmail: string
+}
