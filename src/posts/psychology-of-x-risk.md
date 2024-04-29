@@ -220,6 +220,13 @@ Many posts assume the reader is already familiar with mathematical concepts, var
 Even if people do understand the arguments, it is still difficult to act on them.
 The impact is too large, we have coping mechanisms that downplay the risks, and if we do feel the gravity of the situation, we can feel powerless.
 
+### Lack of innate fear response
+
+Our brains have evolved to fear things that are dangerous.
+We instinctively fear heights, big animals with sharp teath, sudden loud noises, and things that move around in an S-shape.
+A superintelligent AI does not hit any of our primal fears.
+Additionally, we have a strong fear for social rejection or losing social status, which means that people tend to be afraid of speaking up about AI risks.
+
 ### Scope insensitivity
 
 > "A single death is a tragedy; a million deaths is a statistic." - Joseph Stalin
@@ -242,8 +249,6 @@ No matter how much we may want to act in a situation that calls for it, if those
 People just doing and talking about stuff unrelated to what we actually care about will override what's in our minds and motivate us to do other stuff on a daily basis.
 
 Extinction risks deserve a **lot** more of our time, energy and attention. Our reactions to them should be more like life-or-death situations that fill us with adrenaline. But, because of the abstract nature of the problems and our maladapted minds, most people who learn about them just end up carrying on with their days as if they have learned nothing.
-
-So, if you care about the risks of AI, a way to use your monkey brain in your favor is to be active in a [local](/communities) or [online](https://discord.gg/2XXWXvErfA) community.
 
 ### Coping mechanisms (preventing action)
 
@@ -270,3 +275,4 @@ There are many [things that you can do](/action).
 Writing a letter, going to a protest, donating some money or joining a community is not that hard!
 And these actions have a real impact.
 Even when facing the end of the world, there can still be hope and very rewarding work to do.
+[Join PauseAI](/join) and become part of our movement.
