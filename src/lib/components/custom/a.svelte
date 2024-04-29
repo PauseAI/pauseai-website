@@ -11,7 +11,7 @@
 	let anchor: HTMLAnchorElement
 
 	onMount(() => {
-		isExternal = href.startsWith('http:') || href.startsWith('https:') || href.startsWith('mailto:')
+		isExternal = (href.startsWith('http:') || href.startsWith('https:') || href.startsWith('mailto:')) && !href.startsWith('https://pauseai.info/')
 		if (href.startsWith('#')) {
 			anchor.addEventListener('click', (ev) => {
 				ev.preventDefault()
