@@ -37,8 +37,8 @@ a Role on the [discord server](https://discord.gg/2XXWXvErfA).
 <h2>Become a volunteer</h2>
 
 <p>
-	If you want to join one of the teams, please <a
-		href="https://airtable.com/appWPTGqZmUcs3NWu/pag7ztLh27Omj5s2n/form">sign up as a volunteer!</a
+	If you want to join one of the teams, please <A
+		href="https://airtable.com/appWPTGqZmUcs3NWu/pag7ztLh27Omj5s2n/form">sign up as a volunteer!</A
 	>
 </p>
 
