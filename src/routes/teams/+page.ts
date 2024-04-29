@@ -1,6 +1,6 @@
 import type { Team } from '$lib/types'
 
-export const prerender = false
+export const prerender = true
 
 export const load = async ({ fetch }) => {
 	const response = await fetch('api/teams')
