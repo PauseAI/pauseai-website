@@ -47,6 +47,8 @@ Read more about [how these risks can be mitigated](/mitigating-pause-failures).
 
 - **Ban training of AI systems on copyrighted material**. This helps with copyright issues, slows growing inequality and slows down progress towards superintelligence.
 - **Hold AI model creators liable** for criminal acts committed using their AI systems. This gives model creators more incentives to make sure their models are safe.
+- **Renegotiate work contracts** to prevent corporations from forcing employees to automate their work with AI.
+- **Support the climate movement** to investigate (and sue against) the pollution at data centers, fab labs, and mines.
 
 ## Long term policy
 
