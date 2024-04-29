@@ -15,7 +15,7 @@
 	<div class="description prose">
 		<SvelteMarkdown source={description} renderers={{ link: A }} />
 	</div>
-	<div class="lead">Team leader: <a href={`mailto:${leadEmail}`} class="lead">{leadName}</a></div>
+	<div>Team leader: <A href={`mailto:${leadEmail}`}>{leadName}</A></div>
 </li>
 
 <style>
