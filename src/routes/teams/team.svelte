@@ -1,5 +1,6 @@
 <script lang="ts">
 	import SvelteMarkdown from 'svelte-markdown'
+	import A from '$lib/components/custom/a.svelte'
 
 	export let description: string | undefined
 	export let name: string | undefined
@@ -12,7 +13,7 @@
 		{name}
 	</div>
 	<div class="description prose">
-		<SvelteMarkdown source={description} />
+		<SvelteMarkdown source={description} renderers={{ link: A }} />
 	</div>
 	<div class="lead">Team leader: <a href={`mailto:${leadEmail}`} class="lead">{leadName}</a></div>
 </li>

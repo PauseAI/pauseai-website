@@ -1,13 +1,13 @@
 <script lang="ts">
 	import PostMeta from '$lib/components/PostMeta.svelte'
 	import A from '$lib/components/custom/a.svelte'
-	import { a } from '../../mdsvex.svelte'
 	import { meta } from './meta'
 	import Team from './team.svelte'
+	import SvelteMarkdown from 'svelte-markdown'
+
 	export let data
 	const { props } = data
 	const { title, description, date } = meta
-	import SvelteMarkdown from 'svelte-markdown'
 </script>
 
 <PostMeta {title} {description} {date} />
@@ -21,6 +21,7 @@ here](https://airtable.com/appWPTGqZmUcs3NWu/pag7ztLh27Omj5s2n/form)). We are or
 each working on a different aspect of our movement. Every team has a leader, regular meetings, and
 a Role on the [discord server](https://discord.gg/2XXWXvErfA).
 `}
+	renderers={{ link: A }}
 />
 
 <section data-pagefind-ignore>
