@@ -1,17 +1,32 @@
 <script lang="ts">
 	import { onMount } from 'svelte'
 	import ExternalLink from 'lucide-svelte/icons/external-link'
+	import Mail from 'lucide-svelte/icons/mail'
 	import { page } from '$app/stores'
 	import { pushState } from '$app/navigation'
+
+	enum Type {
+		Internal,
+		External,
+		Mail
+	}
 
 	export let href: string
 	export let target: string | null = null
 
-	let isExternal = false
+	const ICON_PROPS = { size: '0.8em' }
+
+	let type = Type.Internal
 	let anchor: HTMLAnchorElement
 
 	onMount(() => {
-		isExternal = (href.startsWith('http:') || href.startsWith('https:') || href.startsWith('mailto:')) && !href.startsWith('https://pauseai.info/')
+		if (
+			(href.startsWith('http:') || href.startsWith('https:')) &&
+			!href.startsWith('https://pauseai.info/')
+		)
+			type = Type.External
+		else if (href.startsWith('mailto:')) type = Type.Mail
+
 		if (href.startsWith('#')) {
 			anchor.addEventListener('click', (ev) => {
 				ev.preventDefault()
@@ -29,10 +44,14 @@
 </script>
 
 <a {href} {target} bind:this={anchor}>
-	<slot />{#if isExternal}
+	<slot />{#if type != Type.Internal}
 		<span style="white-space: nowrap">
 			<div class="icon">
-				<ExternalLink size="0.8em" />
+				{#if type == Type.External}
+					<ExternalLink {...ICON_PROPS} />
+				{:else if type == Type.Mail}
+					<Mail {...ICON_PROPS} />
+				{/if}
 			</div>
 		</span>
 	{/if}
