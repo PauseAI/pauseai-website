@@ -23,7 +23,7 @@ Interested? [Mail to Joep](mailto:joep@pauseai.info)
 
 - We're planning to set up a large scale petition, where we'll need a lot of signatures.
 
-Interested? [Mail to Giulia](mailto:guido@pausai.info)
+Interested? [Mail to Giulia](mailto:giulia@pausai.info)
 
 ## Mass Mobilization Organizer
 
@@ -36,3 +36,11 @@ Skills:
 - group moderation skills, charisma, verbal communication skills, organizational skills
 
 Interested? [Mail to Guido](mailto:guido@pausai.info)
+
+## Onboarding team member
+
+- 2 to 4 hrs a week
+- Say hi to new members who join through the discord or the form.
+- Have one on one calls to find the right team
+
+Interested? [Mail to Maxime](mailto:maxime@pausai.info)
