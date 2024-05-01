@@ -4,8 +4,6 @@
 	import sf from './../../assets/protests/san-francisco.jpeg'
 </script>
 
-<head> test </head>
-
 <div class="hero">
 	<div class="overlay"></div>
 	<img src={london} alt="" />
@@ -30,7 +28,7 @@
 		display: grid;
 		grid-template-columns: repeat(3, 1fr);
 		grid-gap: 1rem;
-		height: 400px;
+		height: 100%;
 		overflow: hidden;
 		position: relative;
 	}

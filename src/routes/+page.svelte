@@ -1,7 +1,6 @@
 <script lang="ts">
 	import Block from '$lib/components/Block.svelte'
 	import PostMeta from '$lib/components/PostMeta.svelte'
-	import Hero from '$lib/components/Hero.svelte'
 
 	const title = 'We need to Pause AI'
 	const description = 'We are risking human extinction. We need to pause AI development, right now.'
@@ -10,8 +9,6 @@
 </script>
 
 <PostMeta {title} {description} />
-
-<Hero />
 
 <section>
 	<Block linkText="Read about the risks" href="/risks">

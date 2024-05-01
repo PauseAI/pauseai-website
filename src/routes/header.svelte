@@ -6,12 +6,14 @@
 	import SearchIcon from 'lucide-svelte/icons/search'
 	const enableBot = false
 
+	export let inverted = false
+
 	$: logo_animate = $page.url.pathname != '/'
 </script>
 
-<nav>
+<nav class={inverted ? 'inverted-header' : ''}>
 	<a href="/" class="logo">
-		<Logo animate={logo_animate} />
+		<Logo animate={logo_animate} {inverted} />
 	</a>
 
 	<div class="nav-right">
@@ -33,6 +35,13 @@
 </nav>
 
 <style>
+	.inverted-header {
+		color: white;
+		z-index: 1;
+
+		--text: white;
+	}
+
 	nav {
 		display: flex;
 		justify-content: space-between;

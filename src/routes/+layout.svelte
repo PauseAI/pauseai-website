@@ -12,8 +12,10 @@
 	import '@fontsource/saira-condensed/700.css'
 
 	import '../app.css'
+	import Hero from '$lib/components/Hero.svelte'
 
 	export let data
+	$: hero = data.url == '/'
 </script>
 
 <h2 style="width: 0; height: 0; margin: 0; padding: 0; visibility: hidden;" data-pagefind-ignore>
@@ -21,8 +23,12 @@
 </h2>
 
 <div class="layout">
-	<slot name="head" />
-	<Header />
+	<Header inverted={hero} />
+	{#if hero}
+		<div class="hero-wrapper">
+			<Hero />
+		</div>
+	{/if}
 
 	<main>
 		<PageTransition url={data.url}>
@@ -58,8 +64,18 @@
 		max-width: 50rem;
 		margin: auto;
 	} */
+
+	.hero-wrapper {
+		position: absolute;
+		left: 0;
+		right: 0;
+		height: 100vh;
+		z-index: 0;
+		max-height: 500px;
+	}
 	.layout {
 		height: 100%;
+		position: relative;
 		max-inline-size: var(--page-width);
 		display: grid;
 		grid-template-rows: auto 1fr auto;
