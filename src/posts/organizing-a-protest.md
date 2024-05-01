@@ -32,7 +32,7 @@ The HQ of a company, parliament, a ministry building - whatever matches your mes
 Also pick an easily accessible location, because you want as many people as possible to be able to attend.
 If your date is relevant too (e.g. because there's a relevant event at that location), that's even better!
 
-### Choose a narrative and write a press release
+### Choose a narrative and write a press release (optional)
 
 You want to have a clear ask.
 A Pause on AI is pretty clear, but often you can be more specific.
@@ -43,9 +43,25 @@ This is a short document that announces the protest and explains why it's import
 See [writing press releases](/writing-press-releases) for more information.
 We can help you with this!
 
+### Create a webpage on PauseAI.info
+
+We can do this for you if you want help.
+Publish a new page on this PauseAI website.
+If you know GitHub and rather do it yourself, simply create a new file (e.g. `2023-10-23-nyc-protest.md`) in the `src/posts` folder.
+Feel free to copy an earlier protest file for inspiration.
+Also, update the `protests.md` file to link to the protest.
+
+### Create an Event page
+
+Make a Facebook event or use another RSVP tool like [partiful](https://partiful.com).
+You can also decide to link to a Whatsapp group or something similar instead.
+The important bit is that you can keep people updated about what's going to happen.
+
 ### Share the event on social media
 
-Create a Facebook event, share it on Twitter, LinkedIn, etc.
+Share the protest on Twitter, LinkedIn, etc.
+Share the post in relevant groups.
+Do it twice: about two weeks in advance, and one day before!
 
 ### Make the protest visible locally
 
@@ -60,14 +76,6 @@ So reach out to journalists and send them your press release.
 Suggest that they come to the protest and that they can interview you.
 Do this about 24 to 48 hrs before the protest.
 
-### Create a webpage
-
-Publish a new page on this PauseAI website.
-We can do this for you.
-If you know GitHub and rather do it yourself, simply create a new file (e.g. `2023-10-23-nyc-protest.md`) in the `src/posts` folder.
-Feel free to copy an earlier protest file for inspiration.
-Also, update the `protests.md` file.
-
 ### Reach out to people and organizations
 
 Do you have an Effective Altruists group in your city?
@@ -75,11 +83,13 @@ Or a local AI safety group?
 Reach out to them, get them to spread your invitation.
 Keep them informed of the protest, make them part of the process.
 
-### Make signs / flyers / banners / props
+### Design and print signs / flyers / banners / props
 
 Use our [Figma design template](https://www.figma.com/file/kHaEUR2lC0J4wm1poEF30K/PauseAI-designs---not-editable---28%2F03?type=design&node-id=0%3A1&mode=design&t=KBs4IbB48BpEmong-1) or check the [media folder](https://drive.google.com/drive/folders/1bQ_MZ8giK-Mee4ABkO0BgcFInaXruNpa?usp=sharing) to make your own flyers / banners / posters.
 We have a <a href="/PauseAI_flyer.pdf" target="_blank">flyer</a> that you can [print out and hand out to people](/flyering).
 Also check out the [Discord thread](https://discord.com/channels/1100491867675709580/1138484822117974191) where we discuss protest materials.
+
+### Do a sign-making party before the protest
 
 Make **signs** that people can hold up during the protest.
 You can make a sign using a piece of cardboard or do something fancier.
@@ -91,7 +101,15 @@ Things to keep in mind when making signs:
 
 - Legibility: use thick markers, readable colors, and large letters
 - Simplicity: keep it simple, don't try to fit too much text on a sign
-- Recognizability: if fitting, use the PauseAI logo / colors (orange) / fonts
+- No swearing: swear words are often not published by media
+- Recognizability: use the PauseAI logo / colors (orange) / fonts
+
+### Do a flyering session
+
+Print out flyers that invite people to come to a protest.
+Do this together with someone else, that's way more fun.
+Pick a location close to the protest - ideally the same location, or perhaps a place where you can expect more volunteers to join (e.g. university campus).
+Consider doing the flyering exactly one week before the protest - on the same time, because people may visit that place on a weekly basis and are more likely to be there too during the protest!
 
 ### Get someone to film + take pictures
 
