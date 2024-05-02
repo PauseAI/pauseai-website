@@ -21,7 +21,7 @@
 
 		if (relativePath) {
 			const rootPath = relativePath.substring('../../'.length)
-			editUrl = `https://github.com/joepio/pauseai/edit/main/src/${rootPath}`
+			editUrl = `https://github.com/moiri-gamboni/pauseai-france/edit/main/src/${rootPath}`
 		}
 	}
 </script>
