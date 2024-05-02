@@ -16,7 +16,7 @@ We are a community of [volunteers](/people) and [local communities](/communities
 We aim to convince our governments to step in and [pause the development of superhuman AI](/proposal).
 We do this by informing the public, talking to decision-makers, and organizing protests.
 
-You can find us on [Discord](https://discord.gg/2XXWXvErfA), [Twitter](https://twitter.com/PauseAI), [Substack](https://substack.com/@pauseai), [Facebook](https://www.facebook.com/PauseAI), [TikTok](https://www.tiktok.com/@pauseai), [LinkedIn](https://www.linkedin.com/uas/login?session_redirect=/company/97035448/), [YouTube](https://www.youtube.com/@PauseAI) and [Instagram](https://www.instagram.com/pause_ai).
+You can find us on [Discord](https://discord.gg/2XXWXvErfA) (this is where most of the coordination happens!), [Twitter](https://twitter.com/PauseAI), [Substack](https://substack.com/@pauseai), [Facebook](https://www.facebook.com/PauseAI), [TikTok](https://www.tiktok.com/@pauseai), [LinkedIn](https://www.linkedin.com/uas/login?session_redirect=/company/97035448/), [YouTube](https://www.youtube.com/@PauseAI) and [Instagram](https://www.instagram.com/pause_ai).
 You can mail/contact us at [joep@pauseai.info](mailto:joep@pauseai.info).
 
 ## Aren't you just scared of changes and new technology?

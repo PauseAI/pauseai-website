@@ -88,6 +88,8 @@ Keep them informed of the protest, make them part of the process.
 Use our [Figma design template](https://www.figma.com/file/kHaEUR2lC0J4wm1poEF30K/PauseAI-designs---not-editable---28%2F03?type=design&node-id=0%3A1&mode=design&t=KBs4IbB48BpEmong-1) or check the [media folder](https://drive.google.com/drive/folders/1bQ_MZ8giK-Mee4ABkO0BgcFInaXruNpa?usp=sharing) to make your own flyers / banners / posters.
 We have a <a href="/PauseAI_flyer.pdf" target="_blank">flyer</a> that you can [print out and hand out to people](/flyering).
 Also check out the [Discord thread](https://discord.com/channels/1100491867675709580/1138484822117974191) where we discuss protest materials.
+We can reimburse printing costs, so keep the receipts!
+If you need a larger amount of funds for more radical projects (a big prop for example) you can apply for a [microgrant](/microgrants).
 
 ### Do a sign-making party before the protest
 
