@@ -1,5 +1,9 @@
 import { AIRTABLE_API_KEY } from '$env/static/private'
 
+if (!AIRTABLE_API_KEY) {
+	throw new Error('AIRTABLE_API_KEY is missing from .env')
+}
+
 /** Fetch options for getting data from Airtable */
 export const options = {
 	method: 'GET',
