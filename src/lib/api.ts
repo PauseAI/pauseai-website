@@ -1,6 +1,6 @@
 import { AIRTABLE_API_KEY } from '$env/static/private'
 
-if (!AIRTABLE_API_KEY) {
+if (!AIRTABLE_API_KEY && import.meta.env.MODE == 'production') {
 	throw new Error('AIRTABLE_API_KEY is missing from .env')
 }
 
