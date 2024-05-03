@@ -1,3 +1,4 @@
+import { PUBLIC_AIRTABLE_TEAMS_API_URL } from '$env/static/public'
 import type { Team } from '$lib/types.js'
 import { json } from '@sveltejs/kit'
 import { options } from '$lib/api.js'
@@ -13,8 +14,12 @@ function recordToTeam(record: any): Team {
 }
 
 export async function GET({ fetch }) {
-	const url = `https://api.airtable.com/v0/appWPTGqZmUcs3NWu/tblYLOPzJ32QOdBLg`
+	const url = PUBLIC_AIRTABLE_TEAMS_API_URL
 
+	if (!url) {
+		throw new Error('PUBLIC_AIRTABLE_TEAMS_API_URL is missing from .env')
+	}
+	
 	const response = await fetch(url, options)
 	if (!response.ok) {
 		throw new Error('Failed to fetch data from Airtable')
