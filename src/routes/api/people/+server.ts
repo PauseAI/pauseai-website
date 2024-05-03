@@ -1,4 +1,4 @@
-import { AIRTABLE_API_KEY } from '$env/static/private'
+import { PUBLIC_AIRTABLE_PEOPLE_API_URL } from '$env/static/public'
 import { options } from '$lib/api.js'
 import type { Person } from '$lib/types.js'
 import { json } from '@sveltejs/kit'
@@ -15,7 +15,11 @@ function recordToPerson(record: any): Person {
 }
 
 export async function GET({ fetch }) {
-	const url = `https://api.airtable.com/v0/appWPTGqZmUcs3NWu/tblZhQc49PkCz3yHd`
+	const url = PUBLIC_AIRTABLE_PEOPLE_API_URL
+
+	if (!url) {
+		throw new Error('PUBLIC_AIRTABLE_PEOPLE_API_URL is missing from .env')
+	}
 
 	const response = await fetch(url, options)
 	if (!response.ok) {
