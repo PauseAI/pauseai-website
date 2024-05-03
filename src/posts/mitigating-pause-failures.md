@@ -53,7 +53,7 @@ Maybe a pause gives a large number of companies the time to catch up, which coul
 If we were asking for a time-based pause, this would be a fair concern.
 But what we're asking for is a pause _until we can prove AI can be built safely_, so we should not end up with organizations building unsafe AI after the pause is lifted.
 
-## National/local pauses might fail
+## National/ local pauses might fail
 
 If one country pauses AI development, other countries will continue to develop AI.
 We might end up in a world where the first AGI is developed by a non-cooperative actor, which is likely to be a bad outcome.
@@ -64,6 +64,9 @@ The solution to this is to make the pause international through a treaty, which 
 This also requires a strong enforcement mechanism.
 Countries that don't comply with the treaty should be punished.
 Economic sanctions may be sufficient, but military intervention might be necessary in extreme cases.
+
+One actor in particular that some people believe will not pause is China. 
+We disagree with this assessment and you can read about it [here](/faq#if-we-pause-what-about-china).
 
 ## AI development might go underground
 
