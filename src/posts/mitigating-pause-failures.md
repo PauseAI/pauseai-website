@@ -41,11 +41,8 @@ Those paths to a greater intelligence could bring us the benefits that AGI promi
 
 ## Centralization of AI might make takeover risks worse
 
-Some proposals, like "[MAGIC](https://arxiv.org/abs/2310.09217)", suggest that we should centralize AI development in a single organization. This makes AI development more controllable, but it also creates a single point of failure.
-But this is not a PauseAI proposal.
-
-The decision if something like that would be good or not could be decided multilaterally in a pause.
-Maybe a CERN/ Apollo/ Manhattan type project is necessary, maybe not.
+We don't propose a centralization of AI development in a single organization. That would make AI development more controllable but it would also create a single point of failure, which human greed and stupidity could take advantage of.
+Deciding if a CERN/ Apollo/ Manhattan type project would be good or not should be discussed multilaterally, once we had already collaborated in a pause and are outside a race.
 
 ## Descentralization will cause less safety-minded organizations to be in the race
 
