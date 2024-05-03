@@ -12,7 +12,7 @@ You are now one of them.
 Here's what happens:
 
 - After filling in the form, one of the Onboarding team members will reach out to you.
-- You can directly join the PauseAI Discord, where most of the collaboration happens.
+- You should [join the PauseAI](https://discord.gg/2XXWXvErfA) Discord, where most of the collaboration happens.
 - You'll have a 30-minute call to discuss your interests and how you can contribute.
 - We'll look for projects or [teams](/teams) that match your interests.
 - You'll sign up as a volunteer and you'll appear on the [people](/people) page (if you're OK with that!)

@@ -19,14 +19,14 @@
 	let type = Type.Internal
 	let anchor: HTMLAnchorElement
 
-	onMount(() => {
-		if (
-			(href.startsWith('http:') || href.startsWith('https:')) &&
-			!href.startsWith('https://pauseai.info/')
-		)
-			type = Type.External
-		else if (href.startsWith('mailto:')) type = Type.Mail
+	if (
+		(href.startsWith('http:') || href.startsWith('https:')) &&
+		!href.startsWith('https://pauseai.info/')
+	)
+		type = Type.External
+	else if (href.startsWith('mailto:')) type = Type.Mail
 
+	onMount(() => {
 		if (href.startsWith('#')) {
 			anchor.addEventListener('click', (ev) => {
 				ev.preventDefault()

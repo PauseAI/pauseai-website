@@ -41,13 +41,10 @@ Those paths to a greater intelligence could bring us the benefits that AGI promi
 
 ## Centralization of AI might make takeover risks worse
 
-Some proposals, like "[MAGIC](https://arxiv.org/abs/2310.09217)", suggest that we should centralize AI development in a single organization. This makes AI development more controllable, but it also creates a single point of failure.
-But this is not a PauseAI proposal.
+We don't propose a centralization of AI development in a single organization. That would make AI development more controllable but it would also create a single point of failure, which human greed and stupidity could take advantage of.
+Deciding if a CERN/ Apollo/ Manhattan type project would be good or not should be discussed multilaterally, once we had already collaborated in a pause and are outside a race.
 
-The decision if something like that would be good or not could be decided multilaterally in a pause.
-Maybe a CERN/ Apollo/ Manhattan type project is necessary, maybe not.
-
-## Descentralization will cause less safety-minded organizations to be in the race
+## Descentralization will cause less safety-minded actors to lead the race
 
 If you dive into the history of OpenAI, DeepMind and Anthropic, you will find that all of them have been founded by people who are quite worried about AI risks.
 In a way, we are lucky that the biggest AI companies right now have AI safety as part of their culture.
@@ -56,7 +53,7 @@ Maybe a pause gives a large number of companies the time to catch up, which coul
 If we were asking for a time-based pause, this would be a fair concern.
 But what we're asking for is a pause _until we can prove AI can be built safely_, so we should not end up with organizations building unsafe AI after the pause is lifted.
 
-## National/local pauses might fail
+## National/ local pauses might fail
 
 If one country pauses AI development, other countries will continue to develop AI.
 We might end up in a world where the first AGI is developed by a non-cooperative actor, which is likely to be a bad outcome.
@@ -67,6 +64,9 @@ The solution to this is to make the pause international through a treaty, which 
 This also requires a strong enforcement mechanism.
 Countries that don't comply with the treaty should be punished.
 Economic sanctions may be sufficient, but military intervention might be necessary in extreme cases.
+
+One actor in particular that some people believe will not pause is China. 
+We disagree with this assessment and you can read about it [here](/faq#if-we-pause-what-about-china).
 
 ## AI development might go underground
 
