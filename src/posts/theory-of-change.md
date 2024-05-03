@@ -23,10 +23,6 @@ The people within AI labs tend to understand the risks, but they have strong inc
 Politicians often are not sufficiently aware of the risks, but even if they were, they might still not want to slow down AI development in their countnry because of the economic and strategic benefits.
 We need an _international_ pause.
 That's the whole point of our movement.
-- **Invisible risks**.
-We tend to make policies based on past experiences, and we have no past experience with risks like these.
-We will never be able to make policy based on seeing an AI take over the globe.
-However, some risks may
 - **Lack of urgency**.
 People [underestimate the pace of AI progress](/risks).
 Even experts in the field have been consistently surprised by how quickly AI has been improving.
