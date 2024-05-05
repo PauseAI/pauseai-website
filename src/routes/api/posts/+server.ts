@@ -7,9 +7,10 @@ import { meta as quotesMeta } from '../../quotes/meta'
 import { meta as emailBuilderMeta } from '../../email-builder/meta'
 import { meta as peopleMeta } from '../../people/meta'
 import { meta as teamsMeta } from '../../teams/meta'
+import { meta as pfpgenMeta } from '../../pfpgen/meta'
 
 /** When adding an extra route, make sure to add the metadata here for SEO purposes */
-const hardCodedPages: Post[] = [outcomesMeta, communitiesMeta, pdoomMeta, quotesMeta, emailBuilderMeta, peopleMeta, teamsMeta]
+const hardCodedPages: Post[] = [outcomesMeta, communitiesMeta, pdoomMeta, quotesMeta, emailBuilderMeta, peopleMeta, teamsMeta, pfpgenMeta]
 
 async function getPosts() {
 	let posts: Post[] = []

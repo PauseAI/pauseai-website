@@ -38,6 +38,9 @@ dependencies:
   html-to-image:
     specifier: ^1.11.11
     version: 1.11.11
+  imagescript:
+    specifier: github:matmen/ImageScript#browser
+    version: github.com/matmen/ImageScript/e720cc5fd116b5775cc30abb9c66b1b5339f707d
   lucide-svelte:
     specifier: ^0.325.0
     version: 0.325.0(svelte@4.2.12)
@@ -59,6 +62,9 @@ dependencies:
   shiki:
     specifier: ^0.14.7
     version: 0.14.7
+  svelte-file-dropzone:
+    specifier: ^2.0.7
+    version: 2.0.7(svelte@4.2.12)
   svelte-french-toast:
     specifier: ^1.2.0
     version: 1.2.0(svelte@4.2.12)
@@ -1626,6 +1632,13 @@ packages:
       flat-cache: 3.2.0
     dev: true
 
+  /file-selector@0.6.0:
+    resolution: {integrity: sha512-QlZ5yJC0VxHxQQsQhXvBaC7VRJ2uaxTf+Tfpu4Z/OcVQJVpZO+DGU0rkoVW5ce2SccxugvpBJoMvUs59iILYdw==}
+    engines: {node: '>= 12'}
+    dependencies:
+      tslib: 2.6.2
+    dev: false
+
   /fill-range@7.0.1:
     resolution: {integrity: sha512-qOo9F+dMUmC2Lcb4BbVvnKJxTPjCm+RRpe4gDuGrzkL7mEVl/djYSu2OdQ2Pa302N4oqkSg9ir6jaLWJ2USVpQ==}
     engines: {node: '>=8'}
@@ -2534,6 +2547,15 @@ packages:
       svelte: 4.2.12
     dev: true
 
+  /svelte-file-dropzone@2.0.7(svelte@4.2.12):
+    resolution: {integrity: sha512-sykRq+Q8rXM9yqsD3T9yzb3syLe21Go01cxb5NTfKA9RgMWHT/gnjS8g36YFWw3jIdC7vbbmuwwgYdA0mlcMqw==}
+    peerDependencies:
+      svelte: ^3.54.0 || ^4.0.0
+    dependencies:
+      file-selector: 0.6.0
+      svelte: 4.2.12
+    dev: false
+
   /svelte-french-toast@1.2.0(svelte@4.2.12):
     resolution: {integrity: sha512-5PW+6RFX3xQPbR44CngYAP1Sd9oCq9P2FOox4FZffzJuZI2mHOB7q5gJBVnOiLF5y3moVGZ7u2bYt7+yPAgcEQ==}
     peerDependencies:
@@ -2677,7 +2699,6 @@ packages:
 
   /tslib@2.6.2:
     resolution: {integrity: sha512-AEYxH93jGFPn/a2iVAwW87VuUIkR1FVUKB77NwMF7nBTDkDrrT/Hpt/IrCJ0QXhW27jTBDcf5ZY7w6RiqTMw2Q==}
-    dev: true
 
   /tsutils@3.21.0(typescript@5.4.3):
     resolution: {integrity: sha512-mHKK3iUXL+3UF6xL5k0PEhKRUBKPBCv/+RkEOpjRWxxx27KKRBmmA60A9pgOUvMi8GKhRMPEmjBRPzs2W7O1OA==}
@@ -2899,3 +2920,10 @@ packages:
     resolution: {integrity: sha512-rVksvsnNCdJ/ohGc6xgPwyN8eheCxsiLM8mxuE/t/mOVqJewPuO1miLpTHQiRgTKCLexL4MeAFVagts7HmNZ2Q==}
     engines: {node: '>=10'}
     dev: true
+
+  github.com/matmen/ImageScript/e720cc5fd116b5775cc30abb9c66b1b5339f707d:
+    resolution: {tarball: https://codeload.github.com/matmen/ImageScript/tar.gz/e720cc5fd116b5775cc30abb9c66b1b5339f707d}
+    name: imagescript
+    version: 1.2.16
+    engines: {node: '>=14.0.0'}
+    dev: false
