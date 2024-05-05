@@ -111,9 +111,14 @@
 
 <style>
 	.pfpgen {
-		display: grid;
+		display: flex;
 		gap: 1rem;
-		grid-template-columns: repeat(auto-fit, minmax(19.5rem, 1fr));
+	}
+
+	@media (max-width: 800px) {
+		.pfpgen {
+			flex-direction: column;
+		}
 	}
 
 	:global(.dropzone) {
