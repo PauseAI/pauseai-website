@@ -8,6 +8,7 @@
 	import { meta } from './meta'
 	import Dropzone from 'svelte-file-dropzone'
 	import UploadIcon from 'lucide-svelte/icons/upload'
+	import exampleUrl from '../../assets/pfpgen/2024-may-example.png'
 	import { Circle } from 'svelte-loading-spinners'
 	import Button from '$lib/components/Button.svelte'
 
@@ -116,7 +117,7 @@
 	<div>
 		<h2>Result</h2>
 		<div class="result-container">
-			<img class="result" bind:this={result} />
+			<img class={'result' + (loading ? ' loading' : '')} src={exampleUrl} bind:this={result} />
 			<div class="spinner-container">
 				{#if loading}
 					<Circle color="var(--brand)" />
@@ -174,6 +175,10 @@
 
 	.result {
 		width: 100%;
+	}
+
+	.result.loading {
+		opacity: 80%;
 	}
 
 	.spinner-container {
