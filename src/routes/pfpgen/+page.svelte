@@ -1,7 +1,8 @@
 <script lang="ts">
-    import { onMount } from 'svelte'
+	import { onMount } from 'svelte'
 	import ImageScript from 'imagescript'
-	import overlayUrl from '../../assets/pfpgen/test overlay.png'
+	import canvasUrl from '../../assets/pfpgen/2024-may-canvas.png'
+	import overlayUrl from '../../assets/pfpgen/2024-may-overlay.png'
 	import toast from 'svelte-french-toast'
 	import PostMeta from '$lib/components/PostMeta.svelte'
 	import { meta } from './meta'
@@ -9,17 +10,26 @@
 	import UploadIcon from 'lucide-svelte/icons/upload'
 	import Button from '$lib/components/Button.svelte'
 
-    const OUTPUT_FILE_NAME = 'PauseAI Global Protest PFP'
+	const RELATIVE_INNER_DIAMETER = 0.772
+	const OUTPUT_FILE_NAME = 'PauseAI Global Protest PFP'
 
-    let overlayBuffer: ArrayBuffer
+	let canvas: ImageScript.Image
+	let overlay: ImageScript.Image
 	let inputFileName: string
 	let result: HTMLImageElement
 	let downloadDisabled = true
 
-    onMount(async () => {
-        const overlayResponse = await fetch(overlayUrl)
-		overlayBuffer = await overlayResponse.arrayBuffer()
-    })
+	onMount(async () => {
+		canvas = await loadImage(canvasUrl)
+		overlay = await loadImage(overlayUrl)
+	})
+
+	async function loadImage(url: string) {
+		const response = await fetch(url)
+		const buffer = await response.arrayBuffer()
+		//@ts-ignore
+		return ImageScript.Image.decode(buffer)
+	}
 
 	async function dropAccepted(event: any) {
 		const file = event.detail.acceptedFiles[0]
@@ -33,17 +43,14 @@
 		const cropTop = (image.height - minDimension) / 2
 		image.crop(cropLeft, cropTop, minDimension, minDimension)
 
-        // decode overlay
-        //@ts-ignore
-		const overlay = await ImageScript.Image.decode(overlayBuffer)
-
-		// resize to overlay size
-		image.resize(overlay.width, overlay.height)
+		// resize to transparent portion of overlay
+		image.resize(RELATIVE_INNER_DIAMETER * canvas.width, RELATIVE_INNER_DIAMETER * canvas.height)
 
 		// composite
-		image.composite(overlay)
+		canvas.composite(image, (canvas.width - image.width) / 2, (canvas.height - image.height) / 2)
+		canvas.composite(overlay)
 
-		const encoded = await image.encode()
+		const encoded = await canvas.encode()
 		const blob = new Blob([encoded], { type: 'image/png' })
 		result.src = URL.createObjectURL(blob)
 		downloadDisabled = false
