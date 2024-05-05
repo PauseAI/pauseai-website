@@ -8,6 +8,7 @@
 	import { meta } from './meta'
 	import Dropzone from 'svelte-file-dropzone'
 	import UploadIcon from 'lucide-svelte/icons/upload'
+	import { Circle } from 'svelte-loading-spinners'
 	import Button from '$lib/components/Button.svelte'
 
 	const RELATIVE_INNER_DIAMETER = 0.772
@@ -15,6 +16,7 @@
 
 	let canvas: ImageScript.Image
 	let overlay: ImageScript.Image
+	let loading = false
 	let inputFileName: string
 	let result: HTMLImageElement
 	let downloadDisabled = true
@@ -32,8 +34,9 @@
 	}
 
 	async function dropAccepted(event: any) {
+		loading = true
 		const file = event.detail.acceptedFiles[0]
-		inputFileName = file.name
+		inputFileName = clipFileName(file.name)
 		const arrayBuffer = await file.arrayBuffer()
 		const image = await ImageScript.Image.decode(arrayBuffer)
 
@@ -54,6 +57,14 @@
 		const blob = new Blob([encoded], { type: 'image/png' })
 		result.src = URL.createObjectURL(blob)
 		downloadDisabled = false
+		loading = false
+	}
+
+	function clipFileName(fileName: string) {
+		const split = fileName.split('.')
+		const withoutExtension = split.slice(0, split.length - 1).join('.')
+		if (withoutExtension.length < 15) return fileName
+		return withoutExtension.substring(0, 15) + '[...].' + split[split.length - 1]
 	}
 
 	function dropRejected() {
@@ -104,7 +115,14 @@
 	</div>
 	<div>
 		<h2>Result</h2>
-		<img class="result" bind:this={result} />
+		<div class="result-container">
+			<img class="result" bind:this={result} />
+			<div class="spinner-container">
+				{#if loading}
+					<Circle color="var(--brand)" />
+				{/if}
+			</div>
+		</div>
 		<Button disabled={downloadDisabled} on:click={download}>Download</Button>
 	</div>
 </div>
@@ -113,6 +131,11 @@
 	.pfpgen {
 		display: flex;
 		gap: 1rem;
+	}
+
+	.pfpgen > * {
+		flex-grow: 1;
+		flex-basis: 0;
 	}
 
 	@media (max-width: 800px) {
@@ -145,7 +168,22 @@
 		font-size: 0.7em;
 	}
 
+	.result-container {
+		position: relative;
+	}
+
 	.result {
 		width: 100%;
+	}
+
+	.spinner-container {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		position: absolute;
+		top: 0;
+		right: 0;
+		bottom: 0;
+		left: 0;
 	}
 </style>
