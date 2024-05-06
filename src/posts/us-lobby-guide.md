@@ -151,4 +151,4 @@ The thing to remember is that Congressional staff want to hear from you. It is t
 
 Be persistent. If nobody gets back to you, call their office and schedule a meeting over the phone. Follow up as needed. If you’re persistent enough, you will get a meeting.
 
-_Credit to Felix De Simone, PauseAI's organizaing director_
+_Credit to Felix De Simone, PauseAI's organizing director_
