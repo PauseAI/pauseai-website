@@ -8,7 +8,6 @@ Progress in AI capabilities is accelerating at a [frantic pace](/urgency), and w
 AI companies are locked in a race to the bottom, where safety is not the highest priority.
 We need governments to step in and prevent AI from reaching superhuman levels before we know how to make it safely.
 This [pause](/proposal) needs to happen on an international level because countries are locked in a race similar to the companies.
-
 **The only way to achieve a true pause is through a summit.**
 
 ## What should the next AI safety summit achieve?
@@ -31,9 +30,14 @@ This summit also led to two follow-up summits to be announced for 2024, in Seoul
 
 ## 2024 South Korea AI Safety Summit (May 21st, 22nd)
 
-The second AI safety summit was [officially announced](https://www.gov.uk/government/news/uk-and-republic-of-korea-to-build-on-legacy-of-bletchley-park) in April 2023.
-The first day is a virtual event, the second day is an in-person event in Seoul for ministers.
-We are [organizing a protest on May 13th](/2024-may) to ask the attending ministers to initialize treaty negotiations.
+For months, it was unclear what the scope of this Seoul summit would be.
+All that we knew, was that it was going to be a ["virtual mini summit"](https://www.bracknellnews.co.uk/news/national/23898764.ai-safety-institute-will-make-uk-global-hub-rishi-sunak-says/).
+A rather unambitious way to deal with the highly alarming calls for regulation.
+
+In April 2023, the second AI safety summit was [officially announced](https://www.gov.uk/government/news/uk-and-republic-of-korea-to-build-on-legacy-of-bletchley-park) by the UK government.
+The first day will be a virtual event, the second day is an in-person event in Seoul for digital ministers.
+Unfortunately, a [report from Reuters](https://www.reuters.com/technology/second-global-ai-safety-summit-faces-tough-questions-lower-turnout-2024-04-29/) tells us that several countries are not planning to attend it.
+**We are [organizing a protest on May 13th](/2024-may) to convince our ministers to attend the summit and initialize treaty negotiations.**
 
 ## ~~2024~~ 2025 France AI ~~Safety~~ Action Summit
 
