@@ -1,6 +1,9 @@
 .env.*
 !.env.example
 
+# Ignore hooks
+/.husky/
+
 # Ignore file directly copied from Twitter docs
 src/lib/components/widget-consent/loadTwitter.js
 
