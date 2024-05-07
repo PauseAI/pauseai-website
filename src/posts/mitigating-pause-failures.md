@@ -58,7 +58,7 @@ But what we're asking for is a pause _until we can prove AI can be built safely_
 If one country pauses AI development, other countries will continue to develop AI.
 We might end up in a world where the first AGI is developed by a non-cooperative actor, which is likely to be a bad outcome.
 The incentives to pause individually are weak, because the benefits of AI development are large, and the risks of AI development are global.
-This is a classic [tragedy of the commons](https://en.wikipedia.org/wiki/Tragedy_of_the_commons) situation.
+This is a classic [prisoner's dilemma](https://en.wikipedia.org/wiki/Prisoner%27s_dilemma) situation. 
 
 The solution to this is to make the pause international through a treaty, which is what we're proposing.
 This also requires a strong enforcement mechanism.
