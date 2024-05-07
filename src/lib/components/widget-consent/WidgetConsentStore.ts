@@ -7,9 +7,9 @@ const DEFAULT = 'null'
 const initialValue = browser ? localStorage.getItem(KEY) ?? DEFAULT : DEFAULT
 const consent = writable<boolean | null>(JSON.parse(initialValue))
 
-consent.subscribe(((value) => {
-    if (!browser) return
-    localStorage.setItem(KEY, JSON.stringify(value))
-}))
+consent.subscribe((value) => {
+	if (!browser) return
+	localStorage.setItem(KEY, JSON.stringify(value))
+})
 
 export default consent
