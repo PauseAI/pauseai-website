@@ -3,6 +3,7 @@ title: Theory of Change
 description: How does PauseAI expect to achieve its mission?
 date: '2024-02-26'
 ---
+
 How does PauseAI plan to achieve its mission?
 
 ## What do we want?
@@ -16,22 +17,22 @@ The problem is not a lack of public support for our proposal (by far most people
 However, there are some important reasons why we don't have a pause yet:
 
 - **Race dynamics**.
-AI creates a lot of value, especially if your AI is the most powerful.
-The desire to be the first to develop a new AI is very strong, both for companies and for countries.
-Companies understand that the best-performing AI model can have a far higher price, and countries understand that they can get a lot of strategic and economic power by leading the race.
-The people within AI labs tend to understand the risks, but they have strong incentives to focus on capabilities rather than safety.
-Politicians often are not sufficiently aware of the risks, but even if they were, they might still not want to slow down AI development in their countnry because of the economic and strategic benefits.
-We need an _international_ pause.
-That's the whole point of our movement.
+  AI creates a lot of value, especially if your AI is the most powerful.
+  The desire to be the first to develop a new AI is very strong, both for companies and for countries.
+  Companies understand that the best-performing AI model can have a far higher price, and countries understand that they can get a lot of strategic and economic power by leading the race.
+  The people within AI labs tend to understand the risks, but they have strong incentives to focus on capabilities rather than safety.
+  Politicians often are not sufficiently aware of the risks, but even if they were, they might still not want to slow down AI development in their countnry because of the economic and strategic benefits.
+  We need an _international_ pause.
+  That's the whole point of our movement.
 - **Invisible risks**.
-We tend to make policies based on past experiences, and we have no past experience with risks like these.
-We will never be able to make policy based on seeing an AI take over the globe.
-However, some risks may
+  We tend to make policies based on past experiences, and we have no past experience with risks like these.
+  We will never be able to make policy based on seeing an AI take over the globe.
+  However, some risks may
 - **Lack of urgency**.
-People [underestimate the pace of AI progress](/risks).
-Even experts in the field have been consistently surprised by how quickly AI has been improving.
+  People [underestimate the pace of AI progress](/risks).
+  Even experts in the field have been consistently surprised by how quickly AI has been improving.
 - **Our psychology**.
-Read more about how our [psychology makes it very difficult](/psychology-of-x-risk) for us to internalize how bad things can get.
+  Read more about how our [psychology makes it very difficult](/psychology-of-x-risk) for us to internalize how bad things can get.
 
 ## How do we pause?
 

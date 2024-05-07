@@ -17,7 +17,7 @@ Ultimately, we need to balance the risks with the costs of pausing.
 In our view, the chance that AI will cause catastrophic risks [soon](/urgency) is already large enough to warrant a pause at this moment.
 As stated by Stuart Russell, when faced with an uncertain deadline, one should take the action that would be optimal given the shortest time constraint.
 
-The more we wait the more people will think a pause is not possible, and the more some people will fantasize and invest on theoretically possible AI applications. 
+The more we wait the more people will think a pause is not possible, and the more some people will fantasize and invest on theoretically possible AI applications.
 So the more money will go into lobbying against people like us.
 
 Also, from protesting and lobbying to convincing people on power, to make a treaty to take effect, could take many years. Not to mention that even if it weren’t the case, pausing early gives us breathing room so that bad actors and algorithmic breakthroughs do not make us fall into the precipice.
@@ -65,7 +65,7 @@ This also requires a strong enforcement mechanism.
 Countries that don't comply with the treaty should be punished.
 Economic sanctions may be sufficient, but military intervention might be necessary in extreme cases.
 
-One actor in particular that some people believe will not pause is China. 
+One actor in particular that some people believe will not pause is China.
 We disagree with this assessment and you can read about it [here](/faq#if-we-pause-what-about-china).
 
 ## AI development might go underground

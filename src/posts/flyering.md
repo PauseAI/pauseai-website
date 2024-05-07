@@ -59,7 +59,7 @@ Including overly detailed instructions on how to behave like a person, for those
 (The information here is at a high level of detail, in case that is helpful. However, it is important to emphasize that “just doing it” is the best policy! It will be okay, and you will learn a lot of useful things quickly.)
 
 1. Offer flyers to anyone who is not buried in their phone or in a conversation
-    - For those who look busy, some truly are busy and some are trying to avoid you; don’t waste your energy!
+   - For those who look busy, some truly are busy and some are trying to avoid you; don’t waste your energy!
 2. Be confident, but non-threatening
 3. Look directly at someone, ask them if they want a flyer or if you can give them one, and hold the flyer out toward them
 4. “Can I get you a flyer?” is usually a better phrase than “Can I give you a flyer?”
@@ -68,10 +68,14 @@ Including overly detailed instructions on how to behave like a person, for those
    - “Can I give you a flyer?” might be better, in the sense of asking for permission
    - Speak a little softer and be a little more physically hesitant / sheepish while asking for permission
    - Remember, to others, you are a stranger with an unknown agenda, and some people are more nervous to speak to you than you are to them!
-6.  If someone is approaching and makes eye contact when they are less than 5 seconds away, then keep eye contact with them until they are within flyer-offering distance
-  - If you look away, that lowers your apparent interest in them and they likewise won’t be interested in you; on the other hand, don’t just stare at people
+6. If someone is approaching and makes eye contact when they are less than 5 seconds away, then keep eye contact with them until they are within flyer-offering distance
+
+- If you look away, that lowers your apparent interest in them and they likewise won’t be interested in you; on the other hand, don’t just stare at people
+
 7.  Physical proximity matters; it's best to just ignore people who are farther away (>20ft or 6m) if you're in a wide space
-  - You can't physically reach them, and they might be intentionally avoiding you anyway; there are more fish in the sea!
+
+- You can't physically reach them, and they might be intentionally avoiding you anyway; there are more fish in the sea!
+
 8.  Don’t get in the way of passersby; you don’t need to do that to get the attention of the people you are trying to reach
 9.  Find a balance between having conversations and handing out more flyers
     - Having positive conversations can be very high-value

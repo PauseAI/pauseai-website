@@ -22,4 +22,4 @@ Globally halt frontier AI development until we know how to do it safely and unde
 - **Action-oriented**. We want to be a group that gets stuff done. The perfect is the enemy of the good. We cannot give in to the comfort of just talking about things. We need to act.
 - **Friendly**. We want to be a group that people like to be part of. We want to be welcoming to new members.
 - **Open**. We want to be open to new ideas, new people, new ways of doing things. We want to be open to criticism. Our goal is to prevent AI risks. We should be open to the possibility that we're wrong about how to do that.
-- **Reasonable**. Because our concerns are often dismissed as crazy, we need to be extra careful to not _look_ crazy. Emphasize that many people in our group have technical backgrounds. Show that we know what we're talking about.
+- **Reasonable**. Because our concerns are often dismissed as crazy, we need to be extra careful to not *look* crazy. Emphasize that many people in our group have technical backgrounds. Show that we know what we're talking about.

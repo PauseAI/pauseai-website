@@ -9,7 +9,15 @@ import { meta as peopleMeta } from '../../people/meta'
 import { meta as teamsMeta } from '../../teams/meta'
 
 /** When adding an extra route, make sure to add the metadata here for SEO purposes */
-const hardCodedPages: Post[] = [outcomesMeta, communitiesMeta, pdoomMeta, quotesMeta, emailBuilderMeta, peopleMeta, teamsMeta]
+const hardCodedPages: Post[] = [
+	outcomesMeta,
+	communitiesMeta,
+	pdoomMeta,
+	quotesMeta,
+	emailBuilderMeta,
+	peopleMeta,
+	teamsMeta
+]
 
 async function getPosts() {
 	let posts: Post[] = []

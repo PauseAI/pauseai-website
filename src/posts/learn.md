@@ -8,7 +8,7 @@ Here are some resources to get you started.
 
 ## Videos
 
-- [Could AI wipe out humanity?](https://youtu.be/qzyEgZwfkKY?si=ief1l2PpkZ7_s6sq) (10 mins). The best shortest and simple introduction to the problem, from a down-to-earth perspective. 
+- [Could AI wipe out humanity?](https://youtu.be/qzyEgZwfkKY?si=ief1l2PpkZ7_s6sq) (10 mins). The best shortest and simple introduction to the problem, from a down-to-earth perspective.
 - [Don't look up - The Documentary: The Case For AI As An Existential Threat](https://www.youtube.com/watch?v=U1eyUjVRir4) (17 mins). Powerful and nicely edited documentary about the dangers of AI, with many expert quotes from interviews.
 - [Countries create AI for reasons](https://youtu.be/-9V9cIixPbM?si=L9q6PF2D6h_EBEwF) (10 mins). Caricature of the race to a superintelligence and its dangers.
 - [Max Tegmark | Ted Talk (2023)](https://www.youtube.com/watch?v=xUNx_PxNHrY) (15 mins). AI capabilities are improving quicker than expected.
@@ -46,7 +46,7 @@ Podcasts featuring PauseAI members can be found in the [media coverage](/press) 
 - [The Case for Slowing Down AI](https://www.vox.com/the-highlight/23621198/artificial-intelligence-chatgpt-openai-existential-risk-china-ai-safety-technology) (by Sigal Samuel)
 - [The AI Revolution: The Road to Superintelligence](https://waitbutwhy.com/2015/01/artificial-intelligence-revolution-1.html) (by WaitButWhy)
 - [How rogue AIs may arise](https://yoshuabengio.org/2023/05/22/how-rogue-ais-may-arise/) (by Yoshua Bengio)
-<!-- - [a casual intro to AI doom and alignment](https://carado.moe/ai-doom.html) 
+<!-- - [a casual intro to AI doom and alignment](https://carado.moe/ai-doom.html)
 I like it and the fact that is a more light reading, but I'm not sure if I want to put it because it defines alignment as just the technical stuff and redirects people to just do technical work -->
 
 If you want to read what journalists have written about PauseAI, check out the list of [media coverage](/press).
@@ -55,6 +55,7 @@ If you want to read what journalists have written about PauseAI, check out the l
 
 <!-- - [AI: Unexplainable, Unpredictable, Uncontrollable](https://www.goodreads.com/book/show/197554072-ai) (Roman Yampolskiy, 2024)
 haven't heard good things about it yet -->
+
 - [Uncontrollable: The Threat of Artificial Superintelligence and the Race to Save the World](https://www.goodreads.com/book/show/202416160-uncontrollable) (Darren McKee, 2023). Get it for [free](https://impactbooks.store/cart/47288196366640:1?discount=UNCON-P3SFRS)!
 - [The Precipice: Existential Risk and the Future of Humanity](https://www.goodreads.com/en/book/show/50963653) (Toby Ord, 2020)
 - [The Alignment Problem](https://www.goodreads.com/book/show/50489349-the-alignment-problem) (Brian Christian, 2020)

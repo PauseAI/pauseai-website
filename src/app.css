@@ -11,7 +11,7 @@ html {
 	--page-width: 40rem;
 
 	/* Colors */
-	--t-color-main: #FF9416; /* Default main color, approximately hsl(32, 100%, 54%)*/
+	--t-color-main: #ff9416; /* Default main color, approximately hsl(32, 100%, 54%)*/
 
 	/* dark */
 	--brand-dark: hsl(32, 100%, 44%);
@@ -175,7 +175,8 @@ textarea:focus {
 	outline: var(--brand) auto 1px;
 }
 
-.reset-button, .button-to-link {
+.reset-button,
+.button-to-link {
 	border: inherit;
 	background: inherit;
 	text-align: inherit;
@@ -185,10 +186,12 @@ textarea:focus {
 	color: inherit;
 }
 
-.pseudo-link, .button-to-link {
+.pseudo-link,
+.button-to-link {
 	cursor: pointer;
 }
 
-.pseudo-link:hover, .button-to-link:hover {
+.pseudo-link:hover,
+.button-to-link:hover {
 	text-decoration: underline;
 }

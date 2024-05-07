@@ -19,7 +19,7 @@ export async function GET({ fetch }) {
 	if (!url) {
 		throw new Error('PUBLIC_AIRTABLE_TEAMS_API_URL is missing from .env')
 	}
-	
+
 	const response = await fetch(url, options)
 	if (!response.ok) {
 		throw new Error('Failed to fetch data from Airtable')

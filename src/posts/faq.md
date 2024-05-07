@@ -2,6 +2,7 @@
 title: FAQ
 description: Frequently asked questions about PauseAI and the risks of superintelligent AI.
 ---
+
 <style>
     h2 {
         font-size: 1.2rem;
