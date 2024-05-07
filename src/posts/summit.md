@@ -34,7 +34,7 @@ For months, it was unclear what the scope of this Seoul summit would be.
 All that we knew, was that it was going to be a ["virtual mini summit"](https://www.bracknellnews.co.uk/news/national/23898764.ai-safety-institute-will-make-uk-global-hub-rishi-sunak-says/).
 A rather unambitious way to deal with the highly alarming calls for regulation.
 
-In April 2023, the second AI safety summit was [officially announced](https://www.gov.uk/government/news/uk-and-republic-of-korea-to-build-on-legacy-of-bletchley-park) by the UK government.
+In April 2024, the second AI safety summit was [officially announced](https://www.gov.uk/government/news/uk-and-republic-of-korea-to-build-on-legacy-of-bletchley-park) by the UK government.
 The first day will be a virtual event, the second day is an in-person event in Seoul for digital ministers.
 Unfortunately, a [report from Reuters](https://www.reuters.com/technology/second-global-ai-safety-summit-faces-tough-questions-lower-turnout-2024-04-29/) tells us that several countries are not planning to attend it.
 **We are [organizing a protest on May 13th](/2024-may) to convince our ministers to attend the summit and initialize treaty negotiations.**
