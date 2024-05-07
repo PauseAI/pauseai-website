@@ -49,6 +49,7 @@ These biases often appear without the creators of the AI system being aware of t
 
 <!-- ### Data Privacy
 -->
+
 ### Job loss, economic inequality and instability
 
 During the industrial revolution, many people lost their jobs to machines.
@@ -67,17 +68,17 @@ The way we distribute wealth in our society is not prepared for this.
 
 ### Mental health, addiction and disconnection between people
 
-Social media, video games and other software have been using AI systems to maximize their profit while taking advantage of our primate minds for some time already, damaging our mental health in the process. 
+Social media, video games and other software have been using AI systems to maximize their profit while taking advantage of our primate minds for some time already, damaging our mental health in the process.
 Addiction to social media, among other things, isolates us from each other, not only in political bubbles but also in cultural and social one-person bubbles, making us lonelier.
 They're the first proof of the unintended and unexpected global consequences that these technologies can bring and how complicated aligning AI systems with "human values" can be.
 
-If today's chatbots keep getting better, it could become quite common to be addicted to them and substitute whole relationships (be romantic, sexual or platonic) with them. 
+If today's chatbots keep getting better, it could become quite common to be addicted to them and substitute whole relationships (be romantic, sexual or platonic) with them.
 Also, if those apps are easy to access, they could shape the understanding, personality and view of the world of children that could prefer talking with AIs over family and friends.
 A pause in the biggest models could prevent them from becoming multipurpose chatbots that fit our needs perfectly without people understanding the long-term ramifications of them.
 
 ### Power accumulation, war and the race to the precipice
 
-The addiction to products and services that learn from personal data leaves us as powerless separated individuals whether it's intended or not. 
+The addiction to products and services that learn from personal data leaves us as powerless separated individuals whether it's intended or not.
 And it plays on a vicious cycle with the accumulation of economic power and intelligence of the companies which create them.
 
 If this economic and technological inequality stems from a handful of public and private entities producing multiple single-purpose AIs or a few multipurpose AIs, it could lead to a short accumulation of power that will probably result in a catastrophe for all.
@@ -90,7 +91,7 @@ We need international cooperation because the only winning move on this strange 
 
 ### Authoritarian governments
 
-Authoritarian and totalitarian governments can also use AI technologies to exercise power over *their* territories and populations.
+Authoritarian and totalitarian governments can also use AI technologies to exercise power over _their_ territories and populations.
 They can control the communication channels or maintain social credit and mass surveillance systems that ensure they maintain their power while violating human rights.
 
 ### Autonomous weapons

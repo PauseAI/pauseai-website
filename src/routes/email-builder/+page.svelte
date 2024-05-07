@@ -155,7 +155,8 @@
 <ul>
 	<li>
 		What do you want the recipient to do after receiving your mail? Prepare for the summit, organize
-		a debate, have a meeting? As with every section, you can replace the suggested text if you have a better idea.
+		a debate, have a meeting? As with every section, you can replace the suggested text if you have
+		a better idea.
 	</li>
 	<li>
 		<b>Select one:</b>
@@ -169,8 +170,9 @@
 </ul>
 
 <h2>Last steps</h2>
-<p>Before sending the email you have to manually replace "__THING__" and "__COUNTRY__".
-	It can also be effective to further personalise the message. Here are some tips:
+<p>
+	Before sending the email you have to manually replace "__THING__" and "__COUNTRY__". It can also
+	be effective to further personalise the message. Here are some tips:
 </p>
 <ul>
 	<li>
@@ -178,8 +180,8 @@
 		on? How do they think about AI? What has happened in their professional life the last weeks?
 	</li>
 	<li>
-		<b>Share something about yourself.</b> Why do you care about AI safety? Why did you take the time to
-		send this letter?
+		<b>Share something about yourself.</b> Why do you care about AI safety? Why did you take the time
+		to send this letter?
 	</li>
 	<li>
 		<b>Make it newsworthy.</b> The mail template is not always up-to-date. Make sure you mention recent
@@ -187,7 +189,9 @@
 	</li>
 </ul>
 <p>
-	For more information, you can take a look at our page on <a href="/writing-a-letter">how to write a letter or email to someone in power</a>.
+	For more information, you can take a look at our page on <a href="/writing-a-letter"
+		>how to write a letter or email to someone in power</a
+	>.
 </p>
 
 <h2>Result</h2>
@@ -196,9 +200,8 @@
 	<p>Dear {name || '__ENTER_NAME__'},</p>
 	<p>
 		First of all, thank you very much for everything you have done for __THING__. I am emailing you
-		today to bring an issue to your attention, in which I believe __COUNTRY__ and you in
-		particular can play a very important role. The issue is the existential threat of artificial
-		intelligence.
+		today to bring an issue to your attention, in which I believe __COUNTRY__ and you in particular
+		can play a very important role. The issue is the existential threat of artificial intelligence.
 	</p>
 
 	<svelte:component this={selectedConcern.section} />

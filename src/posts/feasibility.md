@@ -2,6 +2,7 @@
 title: The Feasibility of a Pause
 description: Is pausing AI possible?
 ---
+
 <!-- I almost didn't put sources at all, ideally that should change -->
 
 Pausing AI is not impossible.
@@ -41,6 +42,7 @@ So we must be wary that we not only get a pause but that it is not lifted until 
 If you fear governments not taking your safety seriously, that's a more complicated issue.
 But generally, politicians care about not losing political support to a certain degree.
 And, more importantly, they can also be concerned about the risks without the huge bias and legal obligations that some individuals from companies have to maximize profits.
+
 <!--Also, foreign states can pressure governments... follow up?-->
 
 If you think we could get regulation of a single government, but not a multilateral treaty, you have to realize that if governments can recognize that some uncontrollable technologies are a danger for its population and can originate from other nations, the new technologies become a national security problem, and the governments become invested in stopping other countries from developing it too.
@@ -67,7 +69,7 @@ If we look for similar modern examples of global agreements against new technolo
 - The [Outer Space Treaty](https://en.wikipedia.org/wiki/Outer_Space_Treaty), which banned the stationing of weapons of mass destruction in outer space, prohibited military activities on celestial bodies, legally binded the peaceful exploration and use of space, and was signed by 114 countries.
 - The [Non-Proliferation Treaty](https://en.wikipedia.org/wiki/Treaty_on_the_Non-Proliferation_of_Nuclear_Weapons) and a bunch of other international agreements, which have been key in preventing the spread of nuclear weapons and furthering the goal of achieving nuclear disarmament. Thanks to them we have dissuaded many countries from pursuing nuclear weapons programs, reduced the amount of nuclear arsenals since the 90s, and avoided nuclear war for many decades. All incredible achievements.
 - The [International Atomic Energy Agency](https://en.wikipedia.org/wiki/International_Atomic_Energy_Agency), which is an intergovernmental organization composed of 178 member states that seeks to promote the peaceful use of nuclear energy and to inhibit its use for any military purpose. Regardless of whether you think nuclear power is overregulated or not, the IAEA is thought of as a good example of an international tool that we could have to evaluate the safety of the largest AI models.
-- And the [United Nations Declaration on Human Cloning](https://en.wikipedia.org/wiki/United_Nations_Declaration_on_Human_Cloning), which called member states to ban Human Cloning in 2005 and led a lot of them to do it. It's an interesting case because now, almost 20 years later and without a _formal agreement_, 60 countries have banned it either fully or partially and there hasn't been a single (verified) case of a human being cloned. So in a way it suggests the possibility of many unilateral regulations being enough to prevent other dangerous technologies from also being developed. 
+- And the [United Nations Declaration on Human Cloning](https://en.wikipedia.org/wiki/United_Nations_Declaration_on_Human_Cloning), which called member states to ban Human Cloning in 2005 and led a lot of them to do it. It's an interesting case because now, almost 20 years later and without a _formal agreement_, 60 countries have banned it either fully or partially and there hasn't been a single (verified) case of a human being cloned. So in a way it suggests the possibility of many unilateral regulations being enough to prevent other dangerous technologies from also being developed.
 <!-- Geneva Conventions? They're not really about tech-->
 
 If you think AI is actually similar to other cases in which we failed to make any good treaties internationally: everything that ever happened had a first time.

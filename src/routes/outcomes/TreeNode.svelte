@@ -44,7 +44,8 @@
 	{#if showInfo}
 		<div>
 			<p>
-				{node.explanation} <!--PauseAI estimates this probability at roughly
+				{node.explanation}
+				<!--PauseAI estimates this probability at roughly
 				<b>{node.probability * 100}%</b>.-->
 			</p>
 		</div>
