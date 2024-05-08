@@ -33,7 +33,7 @@
 				const url = $page.url
 				url.hash = href
 				pushState(url, $page.state)
-				const target = document.querySelector(href) as HTMLElement | null
+				const target = document.querySelector<HTMLElement>(href)
 				if (!target) return
 				target.scrollIntoView({ behavior: 'smooth' })
 				target.tabIndex = -1

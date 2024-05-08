@@ -75,7 +75,7 @@
 	$: selectedAction = actions[0]
 	$: selectedConcern = concerns[0]
 
-	type Section = {
+	interface Section {
 		name: string
 		section: any
 	}
@@ -258,7 +258,11 @@
 </div>
 
 <div class="actionBar">
-	<Button on:click={() => copyHTMLWithoutStyles()}>Copy</Button>
+	<Button
+		on:click={() => {
+			copyHTMLWithoutStyles()
+		}}>Copy</Button
+	>
 </div>
 
 <style>

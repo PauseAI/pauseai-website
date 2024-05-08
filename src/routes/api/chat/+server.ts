@@ -2,16 +2,16 @@ import { json } from '@sveltejs/kit'
 import { env } from '$env/dynamic/private'
 const openaiKey = env.OPENAI_KEY
 
-export type ChatResponse = {
+export interface ChatResponse {
 	response: string
 }
 
-export type Message = {
+export interface Message {
 	role: 'user' | 'assistant' | 'system'
 	content: string
 }
 
-export type Personality = {
+export interface Personality {
 	instruction: string
 }
 

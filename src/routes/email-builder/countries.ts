@@ -1,7 +1,7 @@
 import Dutch from './Dutch.svelte'
 import English from './English.svelte'
 
-export type Country = {
+export interface Country {
 	name: string
 	/** Where can you find the list of representatives? */
 	url: string

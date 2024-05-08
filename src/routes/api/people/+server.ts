@@ -9,7 +9,7 @@ function recordToPerson(record: any): Person {
 		name: record.fields.Name,
 		bio: record.fields.Bio,
 		title: record.fields.Title,
-		image: record.fields.Image && record.fields.Image[0].thumbnails.large.url,
+		image: record.fields.Image?.[0].thumbnails.large.url,
 		privacy: record.fields.privacy
 	}
 }

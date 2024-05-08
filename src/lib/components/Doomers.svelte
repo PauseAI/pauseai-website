@@ -1,5 +1,5 @@
 <script lang="ts">
-	type Doomer = {
+	interface Doomer {
 		name: string
 		title?: string
 		description?: string

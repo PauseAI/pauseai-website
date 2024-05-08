@@ -1,5 +1,5 @@
 /** Single node / branch in the Tree. This represents one yes / no question */
-export type TreeNodeType = {
+export interface TreeNodeType {
 	type: 'question'
 	/** Yes or no question */
 	text: string
@@ -11,7 +11,7 @@ export type TreeNodeType = {
 	explanation: string
 }
 
-type outcome = {
+interface outcome {
 	type: 'doom' | 'safe'
 	text: string
 }

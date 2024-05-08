@@ -1,6 +1,6 @@
 export type Categories = 'sveltekit' | 'svelte'
 
-export type Post = {
+export interface Post {
 	title: string
 	/** Path in URL from root */
 	slug: string
@@ -14,7 +14,7 @@ export type Post = {
 }
 
 /** Individual volunteer */
-export type Person = {
+export interface Person {
 	id: string
 	name: string
 	/** URL to image file */
@@ -25,7 +25,7 @@ export type Person = {
 	privacy?: boolean
 }
 
-export type Team = {
+export interface Team {
 	id: string
 	name: string
 	description: string

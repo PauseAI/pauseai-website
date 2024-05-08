@@ -4,7 +4,7 @@
 	import { PagefindUI } from '@pagefind/default-ui'
 	import '@pagefind/default-ui/css/ui.css'
 
-	type Result = {
+	interface Result {
 		url: string
 		sub_results: {
 			url: string

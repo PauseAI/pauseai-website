@@ -1,6 +1,6 @@
 import type { Post } from '$lib/types'
 
-export type Community = {
+export interface Community {
 	name: string
 	lat: number
 	lon: number
