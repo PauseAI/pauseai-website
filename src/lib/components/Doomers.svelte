@@ -51,7 +51,7 @@
 		},
 		{
 			name: 'Paul Christiano',
-			description: 'former alignment lead at OpenAI, current researcher at ARC',
+			title: 'former alignment lead at OpenAI, founder of the Alignment Research Center',
 			probability: '10-20%',
 			number: 0.15,
 			note: 'Cumulative risks go to 50% when you get to human-level AI',
@@ -81,7 +81,7 @@
 		},
 		{
 			name: 'Emmett Shear',
-			title: 'Co-founder of Twitch, former short-term CEO of OpenAI',
+			title: 'Co-founder of Twitch, former interim CEO of OpenAI',
 			probability: '5-50%',
 			number: 0.275,
 			source: 'https://www.youtube.com/watch?v=9oUbauum4uI'
@@ -103,7 +103,7 @@
 		},
 		{
 			name: 'Eli Lifland',
-			description: 'Top competitive forecaster',
+			title: 'Top competitive forecaster',
 			probability: '35%',
 			number: 0.35,
 			source:
