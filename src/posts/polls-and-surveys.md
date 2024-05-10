@@ -1,9 +1,9 @@
 ---
-title: Polls & surveys on AI governance, safety and risks
+title: Polls & surveys
 description: How much do regular people and experts worry about AI risks?
 ---
 
-How much do regular people and experts worry about AI risks?
+On AI governance, safety and risks
 
 ## Catastrophic risks from AI
 
