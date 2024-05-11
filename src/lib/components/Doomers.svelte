@@ -51,7 +51,7 @@
 		},
 		{
 			name: 'Paul Christiano',
-			title: 'former alignment lead at OpenAI, founder of the Alignment Research Center',
+			title: 'former alignment lead at OpenAI, founder of ARC',
 			probability: '10-20%',
 			number: 0.15,
 			note: 'Cumulative risks go to 50% when you get to human-level AI',
