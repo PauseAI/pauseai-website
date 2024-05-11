@@ -11,7 +11,7 @@ Would you choose to be a passenger on a test flight of a new plane when airplane
 
 [A letter calling for pausing AI development](https://futureoflife.org/open-letter/pause-giant-ai-experiments/) launched in April 2023, and has been signed over 33,000 times, including by many AI researchers and tech leaders.
 
-You can read the related statements from CEOs, experts and politicians [here](/quotes) and the polls on the experts (and the public) [here](/polls).
+You can read the related statements from CEOs, experts and politicians [here](/quotes) and the polls on the experts (and the public) [here](/polls-and-surveys).
 <!--
 The list includes people like:
 
