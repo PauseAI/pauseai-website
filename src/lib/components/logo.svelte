@@ -41,7 +41,7 @@
 		fill: var(--text);
 	}
 	.logo {
-		width: 11rem;
+		/* width: 11rem; */
 		overflow: visible;
 	}
 	.logo-circle {
