@@ -81,4 +81,8 @@
 			margin-left: 2rem;
 		} */
 	}
+
+	.logo {
+		line-height: 0;
+	}
 </style>

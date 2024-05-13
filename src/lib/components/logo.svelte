@@ -5,12 +5,13 @@
 	export let fill: string | null = null
 </script>
 
+<!-- viewBox isn't aligned to 0 0 -->
 <svg
 	class="logo"
 	class:logo-animate={animate}
 	{width}
 	{height}
-	viewBox="0 0 243 66"
+	viewBox="-2 0 243 66"
 	fill="none"
 	role="img"
 	xmlns="http://www.w3.org/2000/svg"
