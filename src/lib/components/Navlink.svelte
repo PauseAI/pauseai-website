@@ -7,7 +7,9 @@
 
 <a
 	{href}
-	class={`${c2a ? 'c2a' : ''} ${$page.url.pathname == href ? 'active' : ''}`}
+	class:c2a
+	class:active={$page.url.pathname == href}
+	class:white={$page.url.pathname == '/'}
 	aria-label={ariaLabel}
 >
 	<slot />
@@ -37,5 +39,8 @@
 	a.active,
 	a:active {
 		color: var(--brand-subtle);
+	}
+	a.white {
+		color: white;
 	}
 </style>

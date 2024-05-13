@@ -18,7 +18,7 @@
 
 <nav>
 	<a href="/" class="logo">
-		<Logo animate={logo_animate} />
+		<Logo animate={logo_animate} fill={$page.url.pathname == '/' ? 'white' : ''} />
 	</a>
 
 	<div class="nav-right">
@@ -49,6 +49,7 @@
 		padding: 2rem 0;
 		/* margin-left: -1rem; */
 		flex-wrap: wrap;
+		z-index: 1;
 	}
 
 	/* .logo {
