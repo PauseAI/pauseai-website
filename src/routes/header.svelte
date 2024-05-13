@@ -11,6 +11,7 @@
 	import Linkedin from '$lib/components/icons/linkedin.svelte'
 	import X from '$lib/components/icons/x.svelte'
 	import SearchIcon from 'lucide-svelte/icons/search'
+	import Button from '$lib/components/Button.svelte'
 	const enableBot = false
 
 	$: logo_animate = $page.url.pathname != '/'
@@ -34,7 +35,7 @@
 				<NavLink href="/chat">{botName}</NavLink>
 			{/if}
 			<!-- <NavLink href="/about">About</NavLink> -->
-			<NavLink c2a href="/join">Nous rejoindre</NavLink>
+			<NavLink c2a href="/join"><Button subtle>Nous rejoindre</Button></NavLink>
 			<!-- <NavLink href="/search" ariaLabel="Search"><SearchIcon size="0.8em" /></NavLink> -->
 		</div>
 	</div>
@@ -62,6 +63,7 @@
 		/* text-transform: uppercase; */
 		flex-wrap: wrap;
 		justify-content: center;
+		align-items: center;
 	}
 
 	@media (min-width: 850px) {
