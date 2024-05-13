@@ -30,6 +30,11 @@ html {
 	--text: black;
 	--bg: white;
 	--bg-subtle: hsl(32, 100%, 90%);
+	--button-default: var(--brand-light);
+	--button-hover: #ffa945;
+	--button-alt-default: white;
+	--button-alt-hover: #ffead0;
+	--button-text: black;
 }
 
 @media (prefers-color-scheme: light) {

@@ -1,5 +1,6 @@
 <script lang="ts">
 	import Block from '$lib/components/Block.svelte'
+	import Button from '$lib/components/Button.svelte'
 	import Mark from '$lib/components/Mark.svelte'
 	import PostMeta from '$lib/components/PostMeta.svelte'
 
@@ -18,6 +19,7 @@
 			droits et de manifestations pacifiques, nous visons à sensibiliser le public. Nous ne sommes
 			pas affiliés à des entreprises.
 		</p>
+		<Button href="/action">Agir</Button>
 	</section>
 </section>
 
