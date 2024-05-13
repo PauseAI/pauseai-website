@@ -1,6 +1,6 @@
 # PauseAI.info website
 
-SvelteKit website for [PauseAI.info](https://pauseai.info/).
+SvelteKit website for [PauseAI.info](https://pauseia.netlify.app/).
 
 ## Creating articles
 

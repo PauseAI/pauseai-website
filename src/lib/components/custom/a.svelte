@@ -21,7 +21,7 @@
 
 	if (
 		(href.startsWith('http:') || href.startsWith('https:')) &&
-		!href.startsWith('https://pauseai.info/')
+		!href.startsWith('https://pauseia.netlify.app/')
 	)
 		type = Type.External
 	else if (href.startsWith('mailto:')) type = Type.Mail
