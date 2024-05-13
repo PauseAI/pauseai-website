@@ -3,6 +3,8 @@
 	import Button from '$lib/components/Button.svelte'
 	import Mark from '$lib/components/Mark.svelte'
 	import PostMeta from '$lib/components/PostMeta.svelte'
+	import LeftCorner from '$lib/components/hero/LeftCorner.svelte'
+	import RightCorner from '$lib/components/hero/RightCorner.svelte'
 
 	const title = 'We need to Pause AI'
 	const description = 'We are risking human extinction. We need to pause AI development, right now.'
@@ -21,6 +23,8 @@
 		</p>
 		<Button href="/action">Agir</Button>
 	</section>
+	<LeftCorner />
+	<RightCorner />
 </section>
 
 <section>
