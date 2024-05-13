@@ -63,7 +63,7 @@
 		grid-template-rows: auto 1fr auto;
 		grid-auto-columns: 100%;
 		margin-inline: auto;
-		padding: 1rem;
+		/* padding: 1rem; */
 	}
 
 	main {
@@ -72,8 +72,8 @@
 	}
 
 	@media (min-width: --page-width) {
-		.layout {
-			/* padding: 0; */
-		}
+		/* .layout {
+			padding: 0;
+		} */
 	}
 </style>

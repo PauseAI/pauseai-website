@@ -15,10 +15,10 @@
 
 <style>
 	a {
-		padding-left: 0.5rem;
-		margin-left: 0.5rem;
-		padding-right: 0.5rem;
-		margin-right: -0.5rem;
+		/* padding-left: 0.5rem; */
+		margin-left: 2rem;
+		/* padding-right: 0.5rem; */
+		/* margin-right: -0.5rem; */
 		font-family: var(--font-heading);
 		font-weight: 700;
 		color: var(--text);

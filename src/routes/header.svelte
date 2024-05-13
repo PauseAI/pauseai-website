@@ -47,14 +47,14 @@
 		align-items: center;
 		flex-direction: column;
 		padding: 2rem 0;
-		margin-left: -1rem;
+		/* margin-left: -1rem; */
 		flex-wrap: wrap;
 	}
 
-	.logo {
+	/* .logo {
 		margin-bottom: 1rem;
 		margin-left: 1rem;
-	}
+	} */
 
 	.nav-links {
 		display: flex;
@@ -66,16 +66,16 @@
 	@media (min-width: 850px) {
 		nav {
 			flex-direction: row;
-			margin-left: 1rem;
+			/* margin-left: 1rem; */
 		}
 
-		.logo {
+		/* .logo {
 			margin-left: -3.4rem;
 			margin-bottom: 0;
-		}
+		} */
 
-		.nav-links {
+		/* .nav-links {
 			margin-left: 2rem;
-		}
+		} */
 	}
 </style>

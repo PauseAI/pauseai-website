@@ -1,4 +1,5 @@
 body {
+	margin: 1rem 6rem;
 	font-size: 1.125rem;
 	line-height: 1.3;
 }
@@ -9,7 +10,7 @@ html {
 	--font-heading: 'IBM Plex Sans', sans-serif;
 
 	/* Major theme stuff */
-	--page-width: 80rem;
+	--page-width: 100%;
 
 	/* Colors */
 	--t-color-main: #ff9416; /* Default main color, approximately hsl(32, 100%, 54%)*/
