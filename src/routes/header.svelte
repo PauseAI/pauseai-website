@@ -23,18 +23,18 @@
 
 	<div class="nav-right">
 		<div class="nav-links">
-			<NavLink href="/risks">Risks</NavLink>
-			<NavLink href="/proposal">Proposal</NavLink>
+			<NavLink href="/risks">Risques</NavLink>
+			<NavLink href="/proposal">Propositions</NavLink>
 			<!-- <NavLink href="/protests">Protests</NavLink> -->
 			<!-- <NavLink href="/faq">FAQ</NavLink> -->
-			<NavLink href="/action">Act</NavLink>
+			<NavLink href="/action">Agir</NavLink>
 			<NavLink href="/posts">Blog</NavLink>
-			<NavLink href="/donate">Donate</NavLink>
+			<NavLink href="/donate">Dons</NavLink>
 			{#if enableBot}
 				<NavLink href="/chat">{botName}</NavLink>
 			{/if}
 			<!-- <NavLink href="/about">About</NavLink> -->
-			<NavLink c2a href="/join">Join</NavLink>
+			<NavLink c2a href="/join">Nous rejoindre</NavLink>
 			<!-- <NavLink href="/search" ariaLabel="Search"><SearchIcon size="0.8em" /></NavLink> -->
 		</div>
 	</div>
