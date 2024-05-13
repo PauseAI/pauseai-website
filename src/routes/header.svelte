@@ -58,7 +58,7 @@
 
 	.nav-links {
 		display: flex;
-		text-transform: uppercase;
+		/* text-transform: uppercase; */
 		flex-wrap: wrap;
 		justify-content: center;
 	}

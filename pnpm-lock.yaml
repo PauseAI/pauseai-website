@@ -8,18 +8,15 @@ importers:
 
   .:
     dependencies:
+      '@fontsource/ibm-plex-sans':
+        specifier: ^5.0.20
+        version: 5.0.20
       '@fontsource/jetbrains-mono':
         specifier: ^5.0.20
         version: 5.0.20
       '@fontsource/manrope':
         specifier: ^5.0.20
         version: 5.0.20
-      '@fontsource/roboto-slab':
-        specifier: ^5.0.20
-        version: 5.0.20
-      '@fontsource/saira-condensed':
-        specifier: ^5.0.13
-        version: 5.0.13
       '@pagefind/default-ui':
         specifier: ^1.1.0
         version: 1.1.0
@@ -295,17 +292,14 @@ packages:
     resolution: {integrity: sha512-gMsVel9D7f2HLkBma9VbtzZRehRogVRfbr++f06nL2vnCGCNlzOD+/MUov/F4p8myyAHspEhVobgjpX64q5m6A==}
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
 
+  '@fontsource/ibm-plex-sans@5.0.20':
+    resolution: {integrity: sha512-svcHbwKbeDBoxrAVlcZ7hRbeAcMp7bXrftoJxTRKg8vedVqYfVGccEITrCwqD04PFbhmcqScOI34ClHTBxQFvQ==}
+
   '@fontsource/jetbrains-mono@5.0.20':
     resolution: {integrity: sha512-QkrihYWqftzs+04TinulIhnFqNwO6990HR07iCUae/6daOZAMy7urUPzytrRT9M8KLTTHBeHOY0CKqOs1+o2OQ==}
 
   '@fontsource/manrope@5.0.20':
     resolution: {integrity: sha512-FW1t+WAvJroALa7zgd5S2dn3zy/sxxHhry/OwDGKmO7Be/zlLBIVaWW+cjyfyA6a6zWEx5YQ4OFfYlA6An5osQ==}
-
-  '@fontsource/roboto-slab@5.0.20':
-    resolution: {integrity: sha512-71QJs8SvE0xcVtBb/Jg2/1TKWb7wVaENXRpFLp8fz+sq9Rp/xoKQRMcHQ8yIUIfKlL+SI2z4tYqUViC0SuRzSQ==}
-
-  '@fontsource/saira-condensed@5.0.13':
-    resolution: {integrity: sha512-PObEuBlqSDxjTkhmDWZQPX2fJr56sjtoVs2yR3ASYLYgUSeWqrZZjZD/yA5WRj0DLXczuyIOLP4bIA6nr5cJ3A==}
 
   '@humanwhocodes/config-array@0.11.14':
     resolution: {integrity: sha512-3T8LkOmg45BV5FICb15QQMsyUSWrQ8AygVfC7ZG32zOalnqrilm018ZVCw0eapXux8FtA33q8PSRSstjee3jSg==}
@@ -1873,13 +1867,11 @@ snapshots:
 
   '@eslint/js@8.56.0': {}
 
+  '@fontsource/ibm-plex-sans@5.0.20': {}
+
   '@fontsource/jetbrains-mono@5.0.20': {}
 
   '@fontsource/manrope@5.0.20': {}
-
-  '@fontsource/roboto-slab@5.0.20': {}
-
-  '@fontsource/saira-condensed@5.0.13': {}
 
   '@humanwhocodes/config-array@0.11.14':
     dependencies:

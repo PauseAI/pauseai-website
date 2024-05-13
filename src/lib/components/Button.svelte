@@ -13,7 +13,7 @@
 		border: none;
 		border-radius: 10px;
 		padding: 10px;
-		font-size: var(--font-size);
+		/* font-size: var(--font-size); */
 		font-family: var(--font-body);
 		cursor: pointer;
 		display: flex;

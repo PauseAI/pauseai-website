@@ -4,10 +4,11 @@
 
 <style>
 	span {
-		position: relative;
+		color: var(--brand);
+		/* position: relative; */
 	}
 
-	span::after {
+	/* span::after {
 		content: '';
 		position: absolute;
 		left: 0;
@@ -15,5 +16,5 @@
 		width: 100%;
 		height: 4px;
 		background-color: var(--brand);
-	}
+	} */
 </style>
