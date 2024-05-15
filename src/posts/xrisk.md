@@ -11,8 +11,6 @@ Would you choose to be a passenger on a test flight of a new plane when airplane
 
 [A letter calling for pausing AI development](https://futureoflife.org/open-letter/pause-giant-ai-experiments/) launched in April 2023, and has been signed over 33,000 times, including by many AI researchers and tech leaders.
 
-You can read the related statements from CEOs, experts and politicians [here](/quotes) and the polls on the experts (and the public) [here](/polls-and-surveys).
-<!--
 The list includes people like:
 
 - **Stuart Russell**, writer of the #1 textbook on Artificial Intelligence used in most AI studies: ["If we pursue [our current approach], then we will eventually lose control over the machines"](https://news.berkeley.edu/2023/04/07/stuart-russell-calls-for-new-approach-for-ai-a-civilization-ending-technology/)
@@ -34,7 +32,9 @@ Even the leaders and investors of the AI companies themselves are warning us:
 The leaders of the 3 top AI labs and hundreds of AI scientists have [signed the following statement](https://www.safe.ai/statement-on-ai-risk) in May 2023:
 
 > "Mitigating the risk of extinction from AI should be a global priority alongside other societal-scale risks such as pandemics and nuclear war."
--->
+
+You can read a much longer list of similar statements from politicians, CEOs and experts [here](/quotes) and more similar polls on the experts (and the public) [here](/polls-and-surveys).
+
 ## What a superintelligent AI can (be used to) do
 
 You might think that a superintelligent AI would be locked inside a computer, and therefore can't affect the real world.
