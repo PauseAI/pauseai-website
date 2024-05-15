@@ -5,6 +5,7 @@
 	import PostMeta from '$lib/components/PostMeta.svelte'
 	import LeftCorner from '$lib/components/hero/LeftCorner.svelte'
 	import RightCorner from '$lib/components/hero/RightCorner.svelte'
+	import Accordion from '$lib/components/Accordion.svelte'
 
 	const title = 'We need to Pause AI'
 	const description = 'We are risking human extinction. We need to pause AI development, right now.'
@@ -62,7 +63,57 @@
 	>
 </section>
 
+<section class="faq">
+	<h2>F.A.Q.</h2>
+	<Accordion>
+		<span slot="head">Êtes-vous contre la technologie ?</span>
+		<div slot="details">
+			<p>
+				In 2020, experts thought we had more than 35 years until AGI. Recent breakthroughs show we
+				might be almost there. Superintelligence could be one innovation away, so we should tread
+				carefully. In 2020, experts thought we had more than 35 years until AGI. Recent
+				breakthroughs show we might be almost there. Superintelligence could be one innovation away,
+				so we should tread carefully.
+			</p>
+		</div>
+	</Accordion>
+	<Accordion>
+		<span slot="head"
+			>Pensez-vous vraiment que le développement de l’IA peut être mise en pause ?</span
+		>
+		<div slot="details">
+			<p>
+				In 2020, experts thought we had more than 35 years until AGI. Recent breakthroughs show we
+				might be almost there. Superintelligence could be one innovation away, so we should tread
+				carefully. In 2020, experts thought we had more than 35 years until AGI. Recent
+				breakthroughs show we might be almost there. Superintelligence could be one innovation away,
+				so we should tread carefully.
+			</p>
+		</div>
+	</Accordion>
+</section>
+
 <style>
+	.faq {
+		padding: 0 6rem;
+	}
+	h2 {
+		font-size: 32px;
+		position: relative;
+		width: fit-content;
+		z-index: 10;
+		margin-bottom: 66px;
+	}
+	h2::before {
+		content: '';
+		display: inline-block;
+		background-color: #ff9416;
+		height: 19px;
+		position: absolute;
+		width: 100%;
+		transform: translate(22px, 130%);
+		z-index: -1;
+	}
 	.hero + section {
 		margin-top: 100vh;
 	}
