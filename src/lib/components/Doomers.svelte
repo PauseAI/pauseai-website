@@ -50,14 +50,6 @@
 			source: 'https://twitter.com/liron/status/1723458202090774949'
 		},
 		{
-			name: 'Paul Christiano',
-			title: 'former alignment lead at OpenAI, founder of ARC',
-			probability: '10-20%',
-			number: 0.15,
-			note: 'Cumulative risks go to 50% when you get to human-level AI',
-			source: 'https://www.youtube.com/watch?v=GyFkWb903aU&t=560s'
-		},
-		{
 			name: 'Elon Musk',
 			title: 'CEO of Tesla, SpaceX, X',
 			probability: '10-20%',
@@ -124,6 +116,13 @@
 			number: 0.4,
 			source:
 				'https://www.nrc.nl/nieuws/2024/02/16/ai-doomers-zijn-doodsbang-voor-de-computer-ai-zal-proberen-de-macht-over-te-nemen-a4190130'
+		},
+		{
+			name: 'Paul Christiano',
+			title: 'former alignment lead at OpenAI, founder of ARC',
+			probability: '46%',
+			number: 0.46,
+			source: 'https://www.lesswrong.com/posts/xWMqsvHapP3nwdSW8/my-views-on-doom'
 		},
 		{
 			name: 'Holden Karnofsky',
