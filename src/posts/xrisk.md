@@ -33,7 +33,7 @@ The leaders of the 3 top AI labs and hundreds of AI scientists have [signed the 
 
 > "Mitigating the risk of extinction from AI should be a global priority alongside other societal-scale risks such as pandemics and nuclear war."
 
-You can read a much longer list of similar statements from politicians, CEOs and experts [here](/quotes) and more similar polls on the experts (and the public) [here](/polls-and-surveys).
+You can read a much longer list of similar statements from politicians, CEOs and experts [here](/quotes) and other similar polls on the experts (and the public) [here](/polls-and-surveys).
 
 ## What a superintelligent AI can (be used to) do
 
