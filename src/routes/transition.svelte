@@ -12,6 +12,6 @@
 
 <style>
 	.transition {
-		height: 100%;
+		/* height: 100%; */
 	}
 </style>
