@@ -241,7 +241,7 @@
 	{
 		"background": "tallinn",
 		"color": "white",
-		"text": "How [LLMs] work is that you summon this \"mind\" from the \"mind space\" using your data, a lot of compute and a lot of money. Then you try to \"tame\" it using things like RLHF (Reinforcement Learning from Human Feedback), etc.  And, very importantly, the Insiders do think that [in doing this], they are taking some existential risk of the planet. **One thing that a pause achieves is that we will not push the Frontier, in terms of risky pre-training experiments.**",
+		"text": "I’ve not met anyone in AI labs who says the risk [from training a next-gen model] is less than 1% of **blowing up the planet. It’s important that people know lives are being risked** [...] One thing that a pause achieves is that we will not push the Frontier, in terms of risky pre-training experiments.",
 		"author": "Jaan Tallinn",
 		"author_description": "Co-Founder of Skype, Kazaa, Future of Life Institute",
 		"padding": "2.5rem"
