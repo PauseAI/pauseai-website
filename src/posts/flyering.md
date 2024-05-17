@@ -106,7 +106,7 @@ _Including overly-detailed instructions on how to behave like a person, for thos
 1. “Can I get you a flyer?”
 2. “Do you want to know more about the dangers of AI?”
 
-<u">When asked what this is all about:</u>
+<u>When asked what this is all about:</u>
 
 3. **“Trying to close the gap between what the experts say about AI and what most people know”** (this is a very high-value line)
 4. “Maybe we shouldn't build powerful AI systems that we don't know how to control yet”
