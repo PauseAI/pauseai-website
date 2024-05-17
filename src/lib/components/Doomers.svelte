@@ -133,7 +133,7 @@
 		},
 		{
 			name: 'Jan Leike',
-			title: 'alignment lead at OpenAI',
+			title: 'Former alignment lead at OpenAI',
 			date: 'Aug 2023',
 			probability: '10-90%',
 			number: 0.5,

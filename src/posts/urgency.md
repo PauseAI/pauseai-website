@@ -73,7 +73,7 @@ When will have a _superintelligence_?
 
 ## The Ilya threshold
 
-I think the crucial point that we should consider, is **the point at which an AI is more capable of doing AI research than someone like Ilya Sutskever** (chief scientist at OpenAI).
+I think the crucial point that we should consider, is **the point at which an AI is more capable of doing AI research than someone like Ilya Sutskever** (former chief scientist at OpenAI).
 An AI that can make meaningful contributions to AI algorithms and architectures is likely to be able to improve itself.
 Let's call this point of potential self-improvement the _Ilya threshold_.
 When it reaches this, an AI might improve itself because it was explicitly instructed to do so, or because being smarter is a useful sub-goal for other goals (AIs are [already creating their own sub-goals](https://github.com/Significant-Gravitas/Auto-GPT)).
