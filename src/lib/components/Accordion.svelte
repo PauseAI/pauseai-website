@@ -4,14 +4,14 @@
 	const handleClick = () => (open = !open)
 </script>
 
-<div on:click={handleClick} class="accordion">
-	<div class="header">
-		<div class="text">
+<div class="accordion">
+	<button on:click={handleClick} class="header">
+		<h3 class="title">
 			<slot name="head"></slot>
-		</div>
+		</h3>
 
 		<span class="icon">+</span>
-	</div>
+	</button>
 
 	{#if open}
 		<div class="details" transition:slide>
@@ -21,24 +21,28 @@
 </div>
 
 <style>
-	div.accordion {
-		margin: 1rem 0;
-		cursor: pointer;
-		border-bottom: solid #e6e6e6;
+	.accordion {
+		border-bottom: solid 2px #e6e6e6;
 	}
 
-	div.header {
+	.header {
+		cursor: pointer;
 		display: flex;
 		width: 100%;
+		border: none;
+		background-color: transparent;
+		text-align: left;
+		align-items: center;
+		padding: 1.5rem 0;
 	}
 
-	div.header .text {
+	.header .title {
 		flex: 1;
-		margin-right: 5px;
-		font-size: 24px;
+		font-weight: 400;
 	}
 
-	div.details {
+	.details {
+		padding: 2rem 0 1.5rem 0;
 		background-color: #fff;
 	}
 

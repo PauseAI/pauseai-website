@@ -66,8 +66,8 @@
 <section class="faq">
 	<h2>F.A.Q.</h2>
 	<Accordion>
-		<span slot="head">Êtes-vous contre la technologie ?</span>
-		<div slot="details">
+		<svelte:fragment slot="head">Êtes-vous contre la technologie ?</svelte:fragment>
+		<svelte:fragment slot="details">
 			<p>
 				In 2020, experts thought we had more than 35 years until AGI. Recent breakthroughs show we
 				might be almost there. Superintelligence could be one innovation away, so we should tread
@@ -75,13 +75,13 @@
 				breakthroughs show we might be almost there. Superintelligence could be one innovation away,
 				so we should tread carefully.
 			</p>
-		</div>
+		</svelte:fragment>
 	</Accordion>
 	<Accordion>
-		<span slot="head"
-			>Pensez-vous vraiment que le développement de l’IA peut être mise en pause ?</span
-		>
-		<div slot="details">
+		<svelte:fragment slot="head">
+			Pensez-vous vraiment que le développement de l’IA peut être mise en pause ?
+		</svelte:fragment>
+		<svelte:fragment slot="details">
 			<p>
 				In 2020, experts thought we had more than 35 years until AGI. Recent breakthroughs show we
 				might be almost there. Superintelligence could be one innovation away, so we should tread
@@ -89,7 +89,7 @@
 				breakthroughs show we might be almost there. Superintelligence could be one innovation away,
 				so we should tread carefully.
 			</p>
-		</div>
+		</svelte:fragment>
 	</Accordion>
 </section>
 
