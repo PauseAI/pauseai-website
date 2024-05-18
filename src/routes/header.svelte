@@ -19,7 +19,7 @@
 
 <nav>
 	<a href="/" class="logo">
-		<Logo animate={logo_animate} fill={$page.url.pathname == '/' ? 'white' : ''} />
+		<Logo animate={logo_animate} fill_pause={$page.url.pathname == '/' ? 'white' : ''} />
 	</a>
 
 	<div class="nav-right">
