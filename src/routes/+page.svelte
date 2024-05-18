@@ -94,9 +94,6 @@
 </section>
 
 <style>
-	.faq {
-		padding: 0 6rem;
-	}
 	.hero + section {
 		margin-top: 100vh;
 	}
