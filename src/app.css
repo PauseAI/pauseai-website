@@ -111,6 +111,19 @@ h1 {
 
 h2 {
 	font-size: 2rem;
+	position: relative;
+	width: fit-content;
+	margin-bottom: 4rem;
+}
+
+h2::before {
+	content: '';
+	background-color: #ff9416;
+	height: 1.125rem;
+	position: absolute;
+	width: 100%;
+	transform: translate(1.5rem, 130%);
+	z-index: -1;
 }
 
 h3 {

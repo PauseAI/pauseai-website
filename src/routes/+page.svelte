@@ -97,23 +97,6 @@
 	.faq {
 		padding: 0 6rem;
 	}
-	h2 {
-		font-size: 32px;
-		position: relative;
-		width: fit-content;
-		z-index: 10;
-		margin-bottom: 66px;
-	}
-	h2::before {
-		content: '';
-		display: inline-block;
-		background-color: #ff9416;
-		height: 19px;
-		position: absolute;
-		width: 100%;
-		transform: translate(22px, 130%);
-		z-index: -1;
-	}
 	.hero + section {
 		margin-top: 100vh;
 	}
