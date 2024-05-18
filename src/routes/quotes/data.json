@@ -197,7 +197,7 @@
 	{
 		"background": "light_grey",
 		"color": "black",
-		"text": "[After resigning at OpenAI, talking about sources of risks] These problems are quite hard to get right, and I am concerned we aren't on a trajectory to get there [...] OpenAI is shouldering an enormous responsibility on behalf of all of humanity. But over the past years, safety culture and processes have taken a backseat to shiny products. We are long overdue in getting incredibly serious about the implications of AGI.",
+		"text": "[After resigning at OpenAI, talking about sources of risks] These problems are quite hard to get right, and I am concerned **we aren't on a trajectory to get there** [...] OpenAI is shouldering an enormous responsibility on behalf of all of humanity. But over the past years, safety culture and processes have taken a backseat to shiny products. We are long overdue in getting incredibly serious about the implications of AGI.",
 		"author": "Jan Leike",
 		"author_description": "Former co-lead of the Superalignment project at OpenAI",
 		"padding": ""
