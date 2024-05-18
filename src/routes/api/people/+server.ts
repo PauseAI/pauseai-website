@@ -10,9 +10,15 @@ function recordToPerson(record: any): Person {
 		bio: record.fields.Bio,
 		title: record.fields.Title,
 		image: record.fields.Image && record.fields.Image[0].thumbnails.large.url,
-		privacy: record.fields.privacy
+		privacy: record.fields.privacy,
+		org: record.fields.organisation,
+		checked: record.fields.Checked
 	}
 }
+
+const currentOrg = 'International'
+
+const filter = (p: Person) => p.image && !p.privacy && p.org.includes(currentOrg) && p.checked
 
 export async function GET({ fetch }) {
 	const url = `https://api.airtable.com/v0/appWPTGqZmUcs3NWu/tblZhQc49PkCz3yHd`
@@ -24,7 +30,7 @@ export async function GET({ fetch }) {
 	const data = await response.json()
 	const out: Person[] = data.records
 		.map(recordToPerson)
-		.filter((p: Person) => p.image && !p.privacy)
+		.filter(filter)
 		// Shuffle the array, although not truly random
 		.sort(() => 0.5 - Math.random())
 	return json(out)

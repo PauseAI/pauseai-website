@@ -23,6 +23,8 @@ export type Person = {
 	title?: string
 	/** Doesn't want to be visible on the /people page */
 	privacy?: boolean
+	checked?: boolean
+	org: 'international' | string
 }
 
 export type Team = {
