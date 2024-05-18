@@ -10,7 +10,7 @@
 			<slot name="head"></slot>
 		</div>
 
-		<p>+</p>
+		<span class="icon">+</span>
 	</div>
 
 	{#if open}
@@ -40,5 +40,11 @@
 
 	div.details {
 		background-color: #fff;
+	}
+
+	.icon {
+		font-size: 3rem;
+		font-weight: 200;
+		line-height: 0;
 	}
 </style>

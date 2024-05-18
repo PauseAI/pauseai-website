@@ -7,6 +7,7 @@
 	import PageTransition from './transition.svelte'
 	import Toc from '$lib/components/Toc.svelte'
 
+	import '@fontsource/ibm-plex-sans/200.css'
 	import '@fontsource/ibm-plex-sans/400.css'
 	import '@fontsource/ibm-plex-sans/700.css'
 
