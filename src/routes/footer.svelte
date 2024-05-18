@@ -67,7 +67,7 @@
 		background-color: #ff9416;
 		display: flex;
 		padding: 6rem 6rem;
-		gap: 3rem;
+		gap: 5rem;
 	}
 
 	.footer-links {
