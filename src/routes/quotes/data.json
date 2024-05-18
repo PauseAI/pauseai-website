@@ -34,7 +34,7 @@
 	{
 		"background": "trump",
 		"color": "white",
-		"text": "[...] the other thing that I think is **maybe the most dangerous thing out there** of anything, because there’s no real solution — the AI, as they call it.",
+		"text": "[...] the other thing that I think is **maybe the most dangerous thing out there** of anything, because there’s no real solution — **the AI**, as they call it.",
 		"author": "Donald Trump",
 		"author_description": "45th President of the United States"
 	},
@@ -179,11 +179,27 @@
 		"notice": "“TechCrunch Disrupt San Francisco 2019 - Day 2” by TechCrunch. Modified and licensed under CC BY 2.0."
 	},
 	{
+		"background": "light_grey",
+		"color": "black",
+		"text": "[Talking about times near the creation of the first AGI] you have the race dynamics where everyone's trying to stay ahead, and that might require compromising on safety. So I think you would probably need some coordination among the larger entities that are doing this kind of training [...] **Pause either further training, or pause deployment**, or avoiding certain types of training that we think might be riskier.",
+		"author": "John Schulman",
+		"author_description": "Co-Founder of OpenAI",
+		"padding": ""
+	},
+	{
 		"background": "dark_grey",
 		"color": "white",
 		"text": "Do possible risks from AI outweigh **other possible existential risks…? It's my number 1 risk for this century** [...] A lack of concrete AGI projects is not what worries me, it's the lack of concrete plans on how to keep these safe that worries me.",
 		"author": "Shane Legg",
 		"author_description": "Co-Founder and Chief AGI Scientist at DeepMind",
+		"padding": ""
+	},
+	{
+		"background": "light_grey",
+		"color": "black",
+		"text": "[After resigning at OpenAI, talking about sources of risks] These problems are quite hard to get right, and I am concerned we aren't on a trajectory to get there [...] OpenAI is shouldering an enormous responsibility on behalf of all of humanity. But over the past years, safety culture and processes have taken a backseat to shiny products. We are long overdue in getting incredibly serious about the implications of AGI.",
+		"author": "Jan Leike",
+		"author_description": "Former co-lead of the Superalignment project at OpenAI",
 		"padding": ""
 	},
 	{
