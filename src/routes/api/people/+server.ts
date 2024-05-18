@@ -1,4 +1,3 @@
-import { AIRTABLE_API_KEY } from '$env/static/private'
 import { options } from '$lib/api.js'
 import type { Person } from '$lib/types.js'
 import { json } from '@sveltejs/kit'
@@ -18,7 +17,10 @@ function recordToPerson(record: any): Person {
 
 const currentOrg = 'International'
 
-const filter = (p: Person) => p.image && !p.privacy && p.org.includes(currentOrg) && p.checked
+const filter = (p: Person) => {
+	console.log(p, p.org?.includes(currentOrg))
+	return p.image && !p.privacy && p.checked && p.org?.includes(currentOrg)
+}
 
 export async function GET({ fetch }) {
 	const url = `https://api.airtable.com/v0/appWPTGqZmUcs3NWu/tblZhQc49PkCz3yHd`
