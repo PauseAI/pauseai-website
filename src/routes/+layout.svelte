@@ -11,6 +11,7 @@
 	import '@fontsource/ibm-plex-sans/400.css'
 	import '@fontsource/ibm-plex-sans/700.css'
 
+	import '../reset.css'
 	import '../app.css'
 
 	export let data
