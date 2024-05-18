@@ -8,7 +8,8 @@ function recordToTeam(record: any): Team {
 		name: record.fields.name,
 		description: record.fields.mission,
 		leadName: record.fields.name_from_lead,
-		leadEmail: record.fields.email_address_from_lead
+		leadEmail: record.fields.email_address_from_lead,
+		public: record.fields.public
 	}
 }
 
@@ -20,6 +21,6 @@ export async function GET({ fetch }) {
 		throw new Error('Failed to fetch data from Airtable')
 	}
 	const data = await response.json()
-	const out: Team[] = data.records.map(recordToTeam)
+	const out: Team[] = data.records.map(recordToTeam).filter((r: Team) => r.public)
 	return json(out)
 }
