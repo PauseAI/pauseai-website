@@ -5,6 +5,7 @@
 	import PostMeta from '$lib/components/PostMeta.svelte'
 	import LeftCorner from '$lib/components/hero/LeftCorner.svelte'
 	import RightCorner from '$lib/components/hero/RightCorner.svelte'
+	import Accordion from '$lib/components/Accordion.svelte'
 
 	const title = 'We need to Pause AI'
 	const description = 'We are risking human extinction. We need to pause AI development, right now.'
@@ -60,6 +61,36 @@
 		Too few people are well-informed about the potential risks of AI. Inform others, and help stop this
 		race to the bottom.</Block
 	>
+</section>
+
+<section class="faq">
+	<h2>F.A.Q.</h2>
+	<Accordion>
+		<svelte:fragment slot="head">Êtes-vous contre la technologie ?</svelte:fragment>
+		<svelte:fragment slot="details">
+			<p>
+				In 2020, experts thought we had more than 35 years until AGI. Recent breakthroughs show we
+				might be almost there. Superintelligence could be one innovation away, so we should tread
+				carefully. In 2020, experts thought we had more than 35 years until AGI. Recent
+				breakthroughs show we might be almost there. Superintelligence could be one innovation away,
+				so we should tread carefully.
+			</p>
+		</svelte:fragment>
+	</Accordion>
+	<Accordion>
+		<svelte:fragment slot="head">
+			Pensez-vous vraiment que le développement de l’IA peut être mise en pause ?
+		</svelte:fragment>
+		<svelte:fragment slot="details">
+			<p>
+				In 2020, experts thought we had more than 35 years until AGI. Recent breakthroughs show we
+				might be almost there. Superintelligence could be one innovation away, so we should tread
+				carefully. In 2020, experts thought we had more than 35 years until AGI. Recent
+				breakthroughs show we might be almost there. Superintelligence could be one innovation away,
+				so we should tread carefully.
+			</p>
+		</svelte:fragment>
+	</Accordion>
 </section>
 
 <style>

@@ -54,7 +54,7 @@
 	h2 {
 		/* font-size: 1.5rem;
 		font-weight: 800; */
-		margin: 0;
+		/* margin: 0; */
 		/* text-transform: uppercase;
 		line-height: 1.2; */
 	}

@@ -4,105 +4,85 @@
 	import Edit from '$lib/components/Edit.svelte'
 	import WithdrawWidgetConsent from '$lib/components/widget-consent/WithdrawWidgetConsent.svelte'
 	import Socials from '$lib/components/Socials.svelte'
+	import Logo from '$lib/components/logo.svelte'
 </script>
 
 <footer>
-	<div class="joinbar">
-		<a class="c2a" href="/join">Join PauseAI &gt;</a>
-		<div class="socials">
-			<Socials />
-		</div>
+	<div class="logo">
+		<Logo fill_pause="black" fill_rest="white" />
+		<p>Pour une IA alignée sur l’humanité.</p>
 	</div>
-	<div class="bar" />
 	<div class="footer-links">
 		<div class="column">
-			<h2>Info</h2>
+			<h2>Information</h2>
 			<a href="/faq">FAQ</a>
-			<a href="/proposal">Proposal</a>
-			<a href="/learn">Learn</a>
-			<a href="/press">Press / Media</a>
-			<a href="/people">People</a>
-			<a href="/teams">Teams</a>
-			<a href="/legal">Legal Info <br /> Stichting PauseAI <br /> (kvk 92951031)</a>
+			<a href="/proposal">Propositions</a>
+			<a href="/learn">Apprendre</a>
+			<a href="/press">Presse / Media</a>
+			<a href="/people">L'équipe</a>
+			<a href="/legal">Informations légales</a>
 		</div>
 		<div class="column">
-			<h2>Risks</h2>
-			<a href="/risks">Risks overview</a>
-			<a href="/outcomes">AI Outcomes</a>
-			<a href="/xrisk">Existential risk</a>
-			<a href="/psychology-of-x-risk">Psychology of x-risk</a>
-			<a href="/ai-takeover">AI takeover</a>
-			<a href="/cybersecurity-risks">Cybersecurity</a>
-			<a href="/dangerous-capabilities">Dangerous capabilities</a>
-			<a href="/sota">State of the art</a>
-			<a href="/urgency">Urgency</a>
+			<h2>Risques</h2>
+			<a href="/risks">Aperçu des risques</a>
+			<a href="/outcomes">Résultats de l'IA</a>
+			<a href="/xrisk">Risque existentiel</a>
+			<a href="/psychology-of-x-risk">La charge mentale des risques existentiels</a>
+			<a href="/ai-takeover">Prise de contrôle de l'IA</a>
+			<a href="/cybersecurity-risks">Etat de l'art</a>
 		</div>
 		<div class="column">
-			<h2>Take Action</h2>
-			<a href="/join">Join PauseAI</a>
-			<a href="/action">How you can help</a>
-			<a href="/communities">Local communities</a>
-			<a href="donate">Donate</a>
+			<h2>Agir</h2>
+			<a href="/join">Rejoindre PauseIA</a>
+			<a href="/action">Comment pouvez-vous aider</a>
+			<a href="/communities">Communautés locales</a>
+			<a href="donate">Faire un don</a>
 			<ExternalLink href="https://pauseai-shop.fourthwall.com" target="_blank"
-				>Merchandise</ExternalLink
+				>Marchandises</ExternalLink
 			>
-			<a href="/protests">Protests</a>
-			<a href="/organizing-a-protest">Organize a protest</a>
-			<a href="/email-builder">Email builder</a>
-			<a href="/lobby-tips">Lobby tips</a>
+			<a href="/protests">Manifestations</a>
 		</div>
 		<div class="column">
-			<h2>Other</h2>
-			<Toggle />
+			<h2>Autres</h2>
 			<WithdrawWidgetConsent />
+			<Toggle />
 			<Edit />
+			<!--
 			<a href="/posts">All pages</a>
 			<a href="/rss.xml" target="_blank">RSS</a>
+			-->
 			<ExternalLink href="https://creativecommons.org/licenses/by/4.0/" target="_blank"
 				>License: CC-BY 4.0</ExternalLink
 			>
 			<ExternalLink
 				href="https://airtable.com/appWPTGqZmUcs3NWu/pagIvo9Sv6IDHaolu/form"
-				target="_blank">Submit feedback</ExternalLink
+				target="_blank">Soumettre un commentaire</ExternalLink
 			>
 		</div>
 	</div>
 </footer>
 
 <style>
-	.joinbar {
+	footer {
+		background-color: #ff9416;
 		display: flex;
-		flex-wrap: wrap;
-		justify-content: space-between;
-		align-items: center;
-	}
-
-	@media (max-width: 500px) {
-		.socials {
-			width: 100%;
-		}
-	}
-
-	.bar {
-		height: 3px;
-		width: 100%;
-		background-color: var(--brand);
-		margin-bottom: 1rem;
-		margin-top: 0.5rem;
+		padding: 6rem 6rem;
+		gap: 5rem;
 	}
 
 	.footer-links {
-		display: grid;
-		grid-template-columns: repeat(4, 1fr);
-		gap: 1.2rem;
-		font-size: 0.8rem;
-		padding-bottom: 1rem;
-		margin-bottom: 1rem;
+		display: flex;
+		gap: 2.5rem;
+		font-size: 1.125;
 	}
 
 	@media (max-width: 750px) {
+		footer {
+			flex-direction: column;
+			padding: 6rem 2rem;
+		}
 		.footer-links {
-			grid-template-columns: repeat(2, 1fr);
+			flex-direction: column;
 		}
 	}
 
@@ -115,25 +95,11 @@
 	}
 
 	.footer-links h2 {
-		font-size: 1rem;
+		font-size: 1.5rem;
 		font-family: var(--font-heading);
 		font-weight: 700;
 		margin-bottom: 0rem;
 		margin-top: 0;
-	}
-
-	.c2a {
-		color: var(--text);
-		text-transform: uppercase;
-		text-decoration: none;
-		font-size: 1.1rem;
-		font-family: var(--font-heading);
-		font-weight: 700;
-		text-align: left;
-	}
-
-	.c2a:hover {
-		color: var(--brand);
 	}
 
 	.footer-links :global(a) {
@@ -143,5 +109,9 @@
 
 	.footer-links :global(a:hover) {
 		text-decoration: underline;
+	}
+
+	.logo p {
+		margin-top: 1rem;
 	}
 </style>

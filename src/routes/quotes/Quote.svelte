@@ -52,7 +52,7 @@
 			</div>
 		</div>
 		<div class="quote-logo">
-			<Logo width={100} fill={color ? color : 'black'} />
+			<Logo width={100} fill_pause={color ? color : 'black'} />
 		</div>
 	</div>
 	<div class="quote-below">

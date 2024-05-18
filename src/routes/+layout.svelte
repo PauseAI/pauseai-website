@@ -7,9 +7,11 @@
 	import PageTransition from './transition.svelte'
 	import Toc from '$lib/components/Toc.svelte'
 
+	import '@fontsource/ibm-plex-sans/200.css'
 	import '@fontsource/ibm-plex-sans/400.css'
 	import '@fontsource/ibm-plex-sans/700.css'
 
+	import '../reset.css'
 	import '../app.css'
 
 	export let data
@@ -67,8 +69,9 @@
 	}
 
 	main {
-		padding-block: 1rem;
-		margin-bottom: 5rem;
+		/* padding-block: 1rem; */
+		/* margin-bottom: 5rem; */
+		padding: 6rem;
 	}
 
 	@media (min-width: --page-width) {

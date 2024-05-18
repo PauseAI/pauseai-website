@@ -19,7 +19,7 @@
 
 <nav>
 	<a href="/" class="logo">
-		<Logo animate={logo_animate} fill={$page.url.pathname == '/' ? 'white' : ''} />
+		<Logo animate={logo_animate} fill_pause={$page.url.pathname == '/' ? 'white' : ''} />
 	</a>
 
 	<div class="nav-right">
@@ -47,7 +47,7 @@
 		justify-content: space-between;
 		align-items: center;
 		flex-direction: column;
-		padding: 2rem 0;
+		padding: 2rem 6rem;
 		/* margin-left: -1rem; */
 		flex-wrap: wrap;
 		z-index: 1;
