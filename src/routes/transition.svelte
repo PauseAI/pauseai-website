@@ -11,7 +11,7 @@
 {/key}
 
 <style>
-	.transition {
-		/* height: 100%; */
-	}
+	/* .transition {
+		height: 100%;
+	} */
 </style>
