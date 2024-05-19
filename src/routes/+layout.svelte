@@ -1,10 +1,10 @@
 <script lang="ts">
+	import { fade } from 'svelte/transition'
 	import { Toaster } from 'svelte-french-toast'
 	import { ProgressBar } from '@prgm/sveltekit-progress-bar'
 
 	import Footer from './footer.svelte'
 	import Header from './header.svelte'
-	import PageTransition from './transition.svelte'
 	import Toc from '$lib/components/Toc.svelte'
 
 	import '@fontsource/ibm-plex-sans/200.css'
@@ -24,11 +24,11 @@
 <div class="layout">
 	<Header />
 
-	<main>
-		<PageTransition url={data.url}>
+	{#key data.url}
+		<main in:fade>
 			<slot />
-		</PageTransition>
-	</main>
+		</main>
+	{/key}
 
 	<Footer />
 </div>
