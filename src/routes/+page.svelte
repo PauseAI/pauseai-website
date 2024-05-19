@@ -65,7 +65,7 @@
 
 <section class="faq">
 	<h2>F.A.Q.</h2>
-	<Accordion>
+	<Accordion id="accordion1">
 		<svelte:fragment slot="head">Êtes-vous contre la technologie ?</svelte:fragment>
 		<svelte:fragment slot="details">
 			<p>
@@ -77,7 +77,7 @@
 			</p>
 		</svelte:fragment>
 	</Accordion>
-	<Accordion>
+	<Accordion id="accordion2">
 		<svelte:fragment slot="head">
 			Pensez-vous vraiment que le développement de l’IA peut être mise en pause ?
 		</svelte:fragment>
