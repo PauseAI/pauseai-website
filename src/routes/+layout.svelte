@@ -72,6 +72,8 @@
 		/* padding-block: 1rem; */
 		/* margin-bottom: 5rem; */
 		padding: 6rem;
+		display: flex;
+		flex-direction: column;
 	}
 
 	@media (min-width: --page-width) {
