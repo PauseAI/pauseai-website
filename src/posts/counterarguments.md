@@ -3,7 +3,7 @@ title: AI Risks and Pause Counterarguments
 description: As a resource to redirect people to places responding to all kind of arguments
 ---
 
-## AI is and is going to be really beneficial.
+## AI is and will be really beneficial
 
 It could be. But it also could be [quite problematic](/risks). Both aspects have to be taken into account before developing a technology. We think we could really understand how to do that safely if we had more time.
 
