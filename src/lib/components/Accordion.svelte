@@ -10,7 +10,7 @@
 <div class="accordion">
 	<button on:click={handleClick} class="header" aria-expanded={open} aria-controls={details_id}>
 		<h3 class="title" id={title_id}>
-			<slot name="head"></slot>
+			<slot name="head" />
 		</h3>
 
 		<span class="icon">+</span>
@@ -18,7 +18,7 @@
 
 	{#if open}
 		<div class="details" transition:slide id={details_id} aria-labelledby={title_id}>
-			<slot name="details"></slot>
+			<slot name="details" />
 		</div>
 	{/if}
 </div>
