@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
 	export let open = false
 	import { slide } from 'svelte/transition'
 	const handleClick = () => (open = !open)
