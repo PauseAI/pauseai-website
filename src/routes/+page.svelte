@@ -5,9 +5,11 @@
 	import LeftCorner from '$lib/components/hero/LeftCorner.svelte'
 	import RightCorner from '$lib/components/hero/RightCorner.svelte'
 	import Accordion from '$lib/components/Accordion.svelte'
+	import TabList from '$lib/components/TabList.svelte'
 
 	const title = 'We need to Pause AI'
 	const description = 'We are risking human extinction. We need to pause AI development, right now.'
+	let active: string
 </script>
 
 <PostMeta {title} {description} />
@@ -44,6 +46,163 @@
 		puissants que GPT-4, jusqu'à ce que nous sachions comment les construire en toute sécurité et
 		les garder sous contrôle démocratique.
 	</p>
+</section>
+
+<section class="risks">
+	<h2 id="risks_title">Les risques</h2>
+	<TabList
+		tabs={[
+			'Risque existentiel',
+			"Usurpation d'identité",
+			'Instabilité économique',
+			'Préjugés et discrimination',
+			'Menace pour la démocratie'
+		]}
+		id="risks_tabs"
+		let:tab
+		bind:active
+		tabs_title_id="risks_title"
+	>
+		{tab}
+		<svelte:fragment slot="panel" let:tab>
+			{#if tab === 'Risque existentiel'}
+				<p>
+					1Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc dapibus felis a metus
+					venenatis auctor ut vel orci. Praesent pulvinar nisl sed lorem aliquam volutpat. Ut vel
+					varius augue, sit amet semper tortor. Praesent dignissim ornare consequat. Praesent
+					aliquam, magna vel sollicitudin placerat, augue dolor euismod libero, sit amet
+					sollicitudin nisi eros non ipsum. Sed eu suscipit dui. Donec tincidunt nisi pharetra,
+					mattis augue ut, convallis nisi. Cras ipsum magna, volutpat sed libero sed, ornare
+					molestie velit. Aenean lorem dui, euismod ac sollicitudin in, luctus quis lacus. Duis
+					dapibus dapibus lorem, in porta ipsum efficitur et. Donec elementum nisi nunc, quis luctus
+					ante varius dictum. Mauris ut nisl sapien. Aliquam erat volutpat. Nullam at congue ligula.
+					Cras porta, metus ut hendrerit dictum, arcu metus eleifend arcu, non tristique nunc mauris
+					vitae enim.
+				</p>
+				<p>
+					Sed dolor libero, dictum in commodo ut, suscipit vel lectus. Nam in justo cursus, euismod
+					arcu ut, molestie leo. Class aptent taciti sociosqu ad litora torquent per conubia nostra,
+					per inceptos himenaeos. Nunc iaculis augue orci, vitae pharetra nunc faucibus volutpat.
+					Proin ac cursus metus. Curabitur aliquet nulla at ipsum vulputate, sed faucibus felis
+					pellentesque. Praesent at venenatis turpis, vel congue urna. Suspendisse elementum
+					vestibulum elit. In sapien dolor, venenatis eget felis quis, blandit vestibulum turpis.
+					Morbi vel viverra orci, non vulputate orci. Sed convallis ultrices placerat. Class aptent
+					taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nunc
+					ullamcorper in tortor sit amet blandit. Morbi tincidunt quis magna tincidunt volutpat.
+					Fusce sit amet massa vitae augue laoreet rutrum ac non justo. Mauris pulvinar dictum lorem
+					eget mattis.
+				</p>
+			{:else if tab === "Usurpation d'identité"}
+				<p>
+					2Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc dapibus felis a metus
+					venenatis auctor ut vel orci. Praesent pulvinar nisl sed lorem aliquam volutpat. Ut vel
+					varius augue, sit amet semper tortor. Praesent dignissim ornare consequat. Praesent
+					aliquam, magna vel sollicitudin placerat, augue dolor euismod libero, sit amet
+					sollicitudin nisi eros non ipsum. Sed eu suscipit dui. Donec tincidunt nisi pharetra,
+					mattis augue ut, convallis nisi. Cras ipsum magna, volutpat sed libero sed, ornare
+					molestie velit. Aenean lorem dui, euismod ac sollicitudin in, luctus quis lacus. Duis
+					dapibus dapibus lorem, in porta ipsum efficitur et. Donec elementum nisi nunc, quis luctus
+					ante varius dictum. Mauris ut nisl sapien. Aliquam erat volutpat. Nullam at congue ligula.
+					Cras porta, metus ut hendrerit dictum, arcu metus eleifend arcu, non tristique nunc mauris
+					vitae enim.
+				</p>
+				<p>
+					Sed dolor libero, dictum in commodo ut, suscipit vel lectus. Nam in justo cursus, euismod
+					arcu ut, molestie leo. Class aptent taciti sociosqu ad litora torquent per conubia nostra,
+					per inceptos himenaeos. Nunc iaculis augue orci, vitae pharetra nunc faucibus volutpat.
+					Proin ac cursus metus. Curabitur aliquet nulla at ipsum vulputate, sed faucibus felis
+					pellentesque. Praesent at venenatis turpis, vel congue urna. Suspendisse elementum
+					vestibulum elit. In sapien dolor, venenatis eget felis quis, blandit vestibulum turpis.
+					Morbi vel viverra orci, non vulputate orci. Sed convallis ultrices placerat. Class aptent
+					taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nunc
+					ullamcorper in tortor sit amet blandit. Morbi tincidunt quis magna tincidunt volutpat.
+					Fusce sit amet massa vitae augue laoreet rutrum ac non justo. Mauris pulvinar dictum lorem
+					eget mattis.
+				</p>
+			{:else if tab === 'Instabilité économique'}
+				<p>
+					3Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc dapibus felis a metus
+					venenatis auctor ut vel orci. Praesent pulvinar nisl sed lorem aliquam volutpat. Ut vel
+					varius augue, sit amet semper tortor. Praesent dignissim ornare consequat. Praesent
+					aliquam, magna vel sollicitudin placerat, augue dolor euismod libero, sit amet
+					sollicitudin nisi eros non ipsum. Sed eu suscipit dui. Donec tincidunt nisi pharetra,
+					mattis augue ut, convallis nisi. Cras ipsum magna, volutpat sed libero sed, ornare
+					molestie velit. Aenean lorem dui, euismod ac sollicitudin in, luctus quis lacus. Duis
+					dapibus dapibus lorem, in porta ipsum efficitur et. Donec elementum nisi nunc, quis luctus
+					ante varius dictum. Mauris ut nisl sapien. Aliquam erat volutpat. Nullam at congue ligula.
+					Cras porta, metus ut hendrerit dictum, arcu metus eleifend arcu, non tristique nunc mauris
+					vitae enim.
+				</p>
+				<p>
+					Sed dolor libero, dictum in commodo ut, suscipit vel lectus. Nam in justo cursus, euismod
+					arcu ut, molestie leo. Class aptent taciti sociosqu ad litora torquent per conubia nostra,
+					per inceptos himenaeos. Nunc iaculis augue orci, vitae pharetra nunc faucibus volutpat.
+					Proin ac cursus metus. Curabitur aliquet nulla at ipsum vulputate, sed faucibus felis
+					pellentesque. Praesent at venenatis turpis, vel congue urna. Suspendisse elementum
+					vestibulum elit. In sapien dolor, venenatis eget felis quis, blandit vestibulum turpis.
+					Morbi vel viverra orci, non vulputate orci. Sed convallis ultrices placerat. Class aptent
+					taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nunc
+					ullamcorper in tortor sit amet blandit. Morbi tincidunt quis magna tincidunt volutpat.
+					Fusce sit amet massa vitae augue laoreet rutrum ac non justo. Mauris pulvinar dictum lorem
+					eget mattis.
+				</p>
+			{:else if tab === 'Préjugés et discrimination'}
+				<p>
+					4Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc dapibus felis a metus
+					venenatis auctor ut vel orci. Praesent pulvinar nisl sed lorem aliquam volutpat. Ut vel
+					varius augue, sit amet semper tortor. Praesent dignissim ornare consequat. Praesent
+					aliquam, magna vel sollicitudin placerat, augue dolor euismod libero, sit amet
+					sollicitudin nisi eros non ipsum. Sed eu suscipit dui. Donec tincidunt nisi pharetra,
+					mattis augue ut, convallis nisi. Cras ipsum magna, volutpat sed libero sed, ornare
+					molestie velit. Aenean lorem dui, euismod ac sollicitudin in, luctus quis lacus. Duis
+					dapibus dapibus lorem, in porta ipsum efficitur et. Donec elementum nisi nunc, quis luctus
+					ante varius dictum. Mauris ut nisl sapien. Aliquam erat volutpat. Nullam at congue ligula.
+					Cras porta, metus ut hendrerit dictum, arcu metus eleifend arcu, non tristique nunc mauris
+					vitae enim.
+				</p>
+				<p>
+					Sed dolor libero, dictum in commodo ut, suscipit vel lectus. Nam in justo cursus, euismod
+					arcu ut, molestie leo. Class aptent taciti sociosqu ad litora torquent per conubia nostra,
+					per inceptos himenaeos. Nunc iaculis augue orci, vitae pharetra nunc faucibus volutpat.
+					Proin ac cursus metus. Curabitur aliquet nulla at ipsum vulputate, sed faucibus felis
+					pellentesque. Praesent at venenatis turpis, vel congue urna. Suspendisse elementum
+					vestibulum elit. In sapien dolor, venenatis eget felis quis, blandit vestibulum turpis.
+					Morbi vel viverra orci, non vulputate orci. Sed convallis ultrices placerat. Class aptent
+					taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nunc
+					ullamcorper in tortor sit amet blandit. Morbi tincidunt quis magna tincidunt volutpat.
+					Fusce sit amet massa vitae augue laoreet rutrum ac non justo. Mauris pulvinar dictum lorem
+					eget mattis.
+				</p>
+			{:else if tab === 'Menace pour la démocratie'}
+				<p>
+					5Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc dapibus felis a metus
+					venenatis auctor ut vel orci. Praesent pulvinar nisl sed lorem aliquam volutpat. Ut vel
+					varius augue, sit amet semper tortor. Praesent dignissim ornare consequat. Praesent
+					aliquam, magna vel sollicitudin placerat, augue dolor euismod libero, sit amet
+					sollicitudin nisi eros non ipsum. Sed eu suscipit dui. Donec tincidunt nisi pharetra,
+					mattis augue ut, convallis nisi. Cras ipsum magna, volutpat sed libero sed, ornare
+					molestie velit. Aenean lorem dui, euismod ac sollicitudin in, luctus quis lacus. Duis
+					dapibus dapibus lorem, in porta ipsum efficitur et. Donec elementum nisi nunc, quis luctus
+					ante varius dictum. Mauris ut nisl sapien. Aliquam erat volutpat. Nullam at congue ligula.
+					Cras porta, metus ut hendrerit dictum, arcu metus eleifend arcu, non tristique nunc mauris
+					vitae enim.
+				</p>
+				<p>
+					Sed dolor libero, dictum in commodo ut, suscipit vel lectus. Nam in justo cursus, euismod
+					arcu ut, molestie leo. Class aptent taciti sociosqu ad litora torquent per conubia nostra,
+					per inceptos himenaeos. Nunc iaculis augue orci, vitae pharetra nunc faucibus volutpat.
+					Proin ac cursus metus. Curabitur aliquet nulla at ipsum vulputate, sed faucibus felis
+					pellentesque. Praesent at venenatis turpis, vel congue urna. Suspendisse elementum
+					vestibulum elit. In sapien dolor, venenatis eget felis quis, blandit vestibulum turpis.
+					Morbi vel viverra orci, non vulputate orci. Sed convallis ultrices placerat. Class aptent
+					taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nunc
+					ullamcorper in tortor sit amet blandit. Morbi tincidunt quis magna tincidunt volutpat.
+					Fusce sit amet massa vitae augue laoreet rutrum ac non justo. Mauris pulvinar dictum lorem
+					eget mattis.
+				</p>
+			{/if}
+		</svelte:fragment>
+	</TabList>
 </section>
 
 <section class="faq">
