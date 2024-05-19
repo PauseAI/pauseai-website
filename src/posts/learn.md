@@ -6,6 +6,15 @@ description: Educational resources (videos, articles, books) about AI risks and 
 One of the most important things you can do to help with AI alignment and the existential risk (x-risk) that superintelligence poses, is to learn about it.
 Here are some resources to get you started.
 
+## Websites
+
+- [AISafety.com](https://www.aisafety.com) & [AISafety.info](https://aisafety.info). The landing pages for AI Safety. Learn about the risks, communities, events, jobs, courses, ideas for how to mitigate the risks and more!
+- [AISafety.dance](https://aisafety.dance). A more fun, friendly and interactive introduction to the AI catastrophic risks!
+- [AISafety.world](https://aisafety.world/tiles/). The whole AI Safety landscape with all the organizations, media outlets, forums, blogs, and other actors and resources.
+- [IncidentDatabase.ai](https://incidentdatabase.ai/). Database of incidents where AI systems caused harm.
+<!-- [NavigatingAIRisks.ai](https://www.navigatingrisks.ai/). A blog with various interesting articles.
+- [PauseAI.info](https://pauseai.info). Check out the rest of the PauseAI site here for loads of related infomation and [resources](/learn), useful [actions](/action), expert [quotes](/quotes), short one-pager [flyers](PauseAI_flyer.pdf), related [faqs](/faq), etc.-->
+
 ## Videos
 
 - [Could AI wipe out humanity?](https://youtu.be/qzyEgZwfkKY?si=ief1l2PpkZ7_s6sq) (10 mins). The best introduction to the problem, from a down-to-earth perspective.
@@ -20,14 +29,6 @@ Here are some resources to get you started.
 - [Why this top AI guru thinks we might be in extinction level trouble | The InnerView](https://youtu.be/YZjmZFDx-pA?si=Y7QUxTaJcuC6LVji) (26 mins). Interview with Connor Leahy on AI X-risks on television.
 - [The AI Dilemma](https://www.youtube.com/watch?v=xoVJKj8lcNQ&t=1903s) (1hr). Presentation about the dangers of AI and the race which AI companies are stuck in.
 - [Robert Miles' YouTube videos](https://www.youtube.com/watch?v=tlS5Y2vm02c&list=PLfHsskCxi_g-c62a_dmsNuHynaXsRQm40) are a great place to start understanding most of the fundamentals of AI alignment.
-
-## Websites
-
-- [AISafety.com](https://www.aisafety.com) & [AISafety.info](https://aisafety.info). The landing pages for AI Safety. Learn about the risks, the communities, the events, the jobs, the courses, the ideas for mitigating the risks and more!
-- [AISafety.world](https://aisafety.world/tiles/). The whole AI Safety landscape with all the organizations, media outlets, forums, blogs, and other actors and resources.
-- [IncidentDatabase.ai](https://incidentdatabase.ai/). Database of incidents where AI systems caused harm.
-- [NavigatingAIRisks.ai](https://www.navigatingrisks.ai/). A blog with various interesting articles.
-- [PauseAI.info](https://pauseai.info). Check out the rest of the PauseAI site here for loads of related infomation and [resources](/learn), useful [actions](/action), expert [quotes](/quotes), short one-pager [flyers](PauseAI_flyer.pdf), related [faqs](/faq), etc.
 
 ## Podcasts
 
