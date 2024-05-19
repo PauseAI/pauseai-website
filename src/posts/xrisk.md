@@ -3,6 +3,8 @@ title: The existential risk of superintelligent AI
 description: Why AI is a risk for the future of our existence, and why we need to pause development.
 ---
 
+You can learn about x-risks reading this page, or you can also learn throught [videos, articles, and other media from other sources](/learn).
+
 ## Experts are sounding the alarm
 
 AI researchers on average [believe](https://aiimpacts.org/2022-expert-survey-on-progress-in-ai/) there's a 14% chance that once we build a _superintelligent_ AI (an AI vastly more intelligent than humans), it will lead to "very bad outcomes (e.g. human extinction)".
@@ -33,7 +35,7 @@ The leaders of the 3 top AI labs and hundreds of AI scientists have [signed the 
 
 > "Mitigating the risk of extinction from AI should be a global priority alongside other societal-scale risks such as pandemics and nuclear war."
 
-You can read a much longer list of similar statements from politicians, CEOs and experts [here](/quotes) and other similar polls on the experts (and the public) [here](/polls-and-surveys).
+**You can read a much longer list of similar statements from politicians, CEOs and experts [here](/quotes) and other similar polls on the experts (and the public) [here](/polls-and-surveys).**
 
 ## What a superintelligent AI can (be used to) do
 
