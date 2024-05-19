@@ -25,5 +25,5 @@ Trying to predict the future accurately seems more difficult than getting a Paus
 
 At the heart of the problem we think there are mainly psychological reasons and emotions that get in our way of not working on the problem, not logical. Some cases could be true, for sure, but most of the time they are complex excuses. Some actions are low effort, everyone can do, and have [lots of potential](/action). 
 
-You can read about those mental obstacles [here](psychology-of-x-risks), and with the help of the community you can have more impact and an environment who actually appreciate your work mitigating these risks. This is not your job, my job, or anyone else’s. But that neglectedness is actually the reason why you can make a difference at the start of this promising movement.
+You can read about those mental obstacles [here](psychology-of-x-risk), and with the help of the community you can have more impact and an environment who actually appreciate your work mitigating these risks. This is not your job, my job, or anyone else’s. But that neglectedness is actually the reason why you can make a difference at the start of this promising movement.
 
