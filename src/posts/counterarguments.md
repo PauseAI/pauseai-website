@@ -1,5 +1,5 @@
 ---
-title: Counterarguments
+title: AI Risks and Pause Counterarguments
 description: As a resource to redirect people to places responding to all kind of arguments
 ---
 
