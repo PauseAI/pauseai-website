@@ -3,7 +3,7 @@ title: The existential risk of superintelligent AI
 description: Why AI is a risk for the future of our existence, and why we need to pause development.
 ---
 
-You can learn about x-risks reading this page, or you can also learn throught [videos, articles, and other media from other sources](/learn).
+You can learn about x-risks reading this page, or you can also learn throught [videos, articles, and more media](/learn).
 
 ## Experts are sounding the alarm
 
