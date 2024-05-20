@@ -5,6 +5,8 @@ description: Why AI existential risks are real and deserve serious attention
 
 _This page is a summary of the [AI Risk Skepticism](https://arxiv.org/ftp/arxiv/papers/2303/2303.03885.pdf) article by Ambartsoumean & Yampolskiy._
 
+For other common objections, you should check [AISafety.info: Objections and responses](https://aisafety.info/questions/9TDI/Objections-and-responses) and [our introduction to x-risks](/xrisk).
+
 ## We'll have a long time to prepare
 
 - Skeptics claim AI progress is not as fast as some predict, and AGI is still far away. They point to past failed predictions and limitations of current AI systems.
