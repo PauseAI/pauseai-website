@@ -30,7 +30,7 @@ html {
 	--brand-subtle: hsl(32, 20%, 30%);
 	--text: black;
 	--bg: white;
-	--bg-subtle: hsl(32, 100%, 90%);
+	--bg-subtle: #fff5e8;
 	--button-default: var(--brand-light);
 	--button-hover: #ffa945;
 	--button-alt-default: white;
@@ -225,4 +225,8 @@ textarea:focus {
 .pseudo-link:hover,
 .button-to-link:hover {
 	text-decoration: underline;
+}
+
+p {
+	margin-bottom: 1.5rem;
 }
