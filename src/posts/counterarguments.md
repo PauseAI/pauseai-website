@@ -11,19 +11,18 @@ It could be. But it also could be [quite problematic](/risks). Both aspects have
 
 Someone could believe this for various reasons, and some responses to those beliefs are [here](/ai-x-risk-skepticism). 
 
-At the end of the day, the important thing is to make an estimation of how likely you think they are, compare it with [the ones from experts](/polls-and-surveys#catastrophic-risks-from-ai), and if you have estimations quite different from them, think about if you can justify that difference. At the end, think if that final estimation for something so terrible can be justifiable, or if we shouldn’t do something about it.
+At the end of the day, the important thing is to make an estimation of how likely you think they are, compare it with [the ones from experts](/polls-and-surveys#catastrophic-risks-from-ai), and if you have estimations quite different from them, think about if you can justify that difference. Then, think if that probability of really terrible things happening for developing advanced AI is justified somehow in the present, or if we should do something about it.
 
 ## A Pause would be bad
 
-Some ways in which a pause could be bad and how we could prevent that is explained on [this page](/mitigating-pause-failures). But if that doesn’t cover your worries you can tell us about them [here](https://airtable.com/appWPTGqZmUcs3NWu/pagIvo9Sv6IDHaolu/form).
+Some ways in which a pause could be bad and how we could prevent those scenarios is explained on [this page](/mitigating-pause-failures). But if that doesn’t cover your worries you can tell us about them [here](https://airtable.com/appWPTGqZmUcs3NWu/pagIvo9Sv6IDHaolu/form).
 
 ## Trying to get a Pause is a waste of time
 
-Trying to predict the future accurately seems more difficult than getting a Pause. Our views on why we think it’s possible are [here](/feasibility). And given how necessary it seems, we should try it even if it’s unlikely.
+Trying to predict the future accurately seems more difficult than getting a Pause. Our views on why we think it’s possible are [here](/feasibility). And given how necessary it seems, no matter how hard it is, we should try to achieve it anyways.
 
-## All this sounds good but I can’t make a difference/ other
+## All this sounds good but I can’t make a difference/ other arguments
 
-At the heart of the problem we think there are mainly psychological reasons and emotions that get in our way of not working on the problem, not logical. Some cases could be true, for sure, but most of the time they are complex excuses. Some actions are low effort, everyone can do, and have [lots of potential](/action). 
+At the heart of the problem we think there are mainly psychological reasons and emotions that get in our way of not working on the problem, not logical. In some cases those reasons could be true, for sure. But most of the time they seem complex excuses. [Some actions](/action) are low effort, have a lot of potential, and they can be done by pretty much anyone. 
 
-You can read about those mental obstacles [here](psychology-of-x-risk), and with the help of the community you can have more impact and an environment who actually appreciate your work mitigating these risks. This is not your job, my job, or anyone else’s. But that neglectedness is actually the reason why you can make a difference at the start of this promising movement.
-
+You can read about the mental obstacles that get on their way [here](psychology-of-x-risk), and with the help of the community you can even have more impact and an environment which actually appreciates your work doing those actions and incentives you to keep going. In the bright side, the neglectedness of the problem is actually the reason why you can make a big difference at the start of this promising movement. There's plenty of low-hanging fruit to grab!
