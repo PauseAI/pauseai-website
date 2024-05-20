@@ -28,7 +28,6 @@
 		role="tabpanel"
 		tabindex="0"
 		aria-labelledby={`${tab_id_prefix}-${i.toString()}`}
-		s
 		style={`display: ${active === tab ? 'block' : 'none'}`}
 	>
 		<slot name="panel" {tab}></slot>
