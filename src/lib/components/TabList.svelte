@@ -85,6 +85,7 @@
 		position: relative;
 		flex-grow: 1;
 		text-align: left;
+		cursor: pointer;
 	}
 	.panel {
 		grid-column: 4 / span 6;
