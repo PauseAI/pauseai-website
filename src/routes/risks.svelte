@@ -1,12 +1,13 @@
 <script lang="ts">
 	let active: string
-	let tabs_title_id = 'risks-title'
 	import Button from '$lib/components/Button.svelte'
 	import TabList from '$lib/components/TabList.svelte'
+
+	const label_id = 'risks-title'
 </script>
 
-<section class="risks" aria-labelledby={tabs_title_id}>
-	<h2 id={tabs_title_id}>Les risques</h2>
+<section class="risks" aria-labelledby={label_id}>
+	<h2 id={label_id}>Les risques</h2>
 	<TabList
 		tabs={[
 			'Risque existentiel',
@@ -18,7 +19,7 @@
 		id="risks-tabs"
 		let:tab
 		bind:active
-		{tabs_title_id}
+		{label_id}
 	>
 		{tab}
 		<svelte:fragment slot="panel" let:tab>

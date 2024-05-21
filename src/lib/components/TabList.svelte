@@ -4,12 +4,12 @@
 	export let tabs: string[]
 	export let id: string
 	export let active = tabs[0]
-	export let tabs_title_id: string
+	export let label_id: string
 	const tab_id_prefix = `${id}-tab`
 </script>
 
 <div class="tabs" {id}>
-	<ul role="tablist" aria-labelledby={tabs_title_id}>
+	<ul role="tablist" aria-labelledby={label_id}>
 		{#each tabs as tab, i}
 			<li role="presentation">
 				<button
