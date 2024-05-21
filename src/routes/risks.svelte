@@ -1,5 +1,4 @@
 <script lang="ts">
-	let active: string
 	import Button from '$lib/components/Button.svelte'
 	import TabList from '$lib/components/TabList.svelte'
 
@@ -18,7 +17,6 @@
 		]}
 		id="risks-tabs"
 		let:tab
-		bind:active
 		{label_id}
 	>
 		{tab}

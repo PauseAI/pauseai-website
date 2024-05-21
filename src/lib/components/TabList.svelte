@@ -3,8 +3,9 @@
 
 	export let tabs: string[]
 	export let id: string
-	export let active = tabs[0]
 	export let label_id: string
+
+	let active = tabs[0]
 	const tab_id_prefix = `${id}-tab`
 </script>
 
