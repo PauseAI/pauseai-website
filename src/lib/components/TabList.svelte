@@ -60,24 +60,30 @@
 		height: fit-content;
 		border-radius: 0.625rem;
 		background-color: var(--bg-subtle);
+		display: flex;
+		flex-direction: column;
 	}
 	li {
 		font-weight: 700;
-		padding: 2rem calc(1.25rem + 2ch) 2rem 1.25rem;
+		display: flex;
 	}
 	button.active::before {
 		content: '⏺ ';
 		color: var(--brand);
 		position: absolute;
-		left: -2ch;
+		left: 0;
 	}
 	button.active {
-		left: 2ch;
+		left: var(--bullet-offest);
 	}
 	button {
+		--bullet-offest: 1.7ch;
+		padding: 2rem calc(1.25rem + var(--bullet-offest)) 2rem 1.25rem;
 		background: none;
 		border: none;
 		position: relative;
+		flex-grow: 1;
+		text-align: left;
 	}
 	.panel {
 		grid-column: 4 / span 6;
