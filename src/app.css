@@ -130,6 +130,10 @@ h3 {
 	font-size: 1.5rem;
 }
 
+.small-text {
+	font-size: 0.875rem;
+}
+
 @media (max-width: 40rem) {
 	h1 {
 		font-size: 2rem;
