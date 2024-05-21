@@ -5,9 +5,9 @@
 	import RightCorner from '$lib/components/hero/RightCorner.svelte'
 </script>
 
-<section class="hero">
+<section class="hero" aria-labelledby="hero-title">
 	<section class="hero-content">
-		<h1>Ne laissons pas les entreprises IA jouer avec <Mark>notre futur</Mark></h1>
+		<h1 id="hero-title">Ne laissons pas les entreprises IA jouer avec <Mark>notre futur</Mark></h1>
 		<p>
 			Nous sommes une communauté de bénévoles à but non lucratif qui se concentre sur l'atténuation
 			des risques liés à l'IA et qui exhorte les gouvernements à faire une pause dans le

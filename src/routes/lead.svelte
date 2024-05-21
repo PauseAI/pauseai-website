@@ -1,5 +1,5 @@
-<section class="lead">
-	<h2>L'intelligence artificielle est un danger pour l'humanité</h2>
+<section class="lead" aria-labelledby="lead-title">
+	<h2 id="lead-title">L'intelligence artificielle est un danger pour l'humanité</h2>
 	<p>
 		L'IA est une technologie puissante qui transforme de plus en plus notre monde. Elle est porteuse
 		d'un potentiel extraordinaire, mais aussi de risques graves, notamment de catastrophes

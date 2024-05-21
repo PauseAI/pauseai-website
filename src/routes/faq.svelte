@@ -2,8 +2,8 @@
 	import Accordion from '$lib/components/Accordion.svelte'
 </script>
 
-<section class="faq">
-	<h2>F.A.Q.</h2>
+<section class="faq" aria-labelledby="faq-title">
+	<h2 id="faq-title">F.A.Q.</h2>
 	<Accordion id="accordion1">
 		<svelte:fragment slot="head">Êtes-vous contre la technologie ?</svelte:fragment>
 		<svelte:fragment slot="details">
