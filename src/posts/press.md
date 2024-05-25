@@ -31,6 +31,8 @@ If you want to create PauseAI-related material yourself, you can use our brand c
 - [Le Monde](https://www.lemonde.fr/en/economy/article/2023/11/27/openai-the-beginnings-of-the-sam-altman-drama_6291282_19.html)
 - [ComputerWorld](https://www.computerworld.com/article/3714261/sam-altmans-pledges-about-ai-responsibility-dont-mean-much-experts.html): Interview with Joep Meindertsma about OpenAI vs Musk.
 - [Wired](https://www.wired.com/story/protesters-pause-ai-split-stop/?redirectURL=https://www.wired.com/story/protesters-pause-ai-split-stop/) About the May 2024 protest
+- [DailyAI](https://dailyai.com/2024/05/pauseai-protestors-demand-a-halt-to-training-of-ai-models/)
+- [ReadWrite](https://readwrite.com/pause-ai-protestors-are-fighting-to-put-ai-development-on-hold/)
 
 ## Podcasts & Talks
 
@@ -68,3 +70,8 @@ If you want to create PauseAI-related material yourself, you can use our brand c
 - [KQED](https://www.kqed.org/news/11985949/as-openai-unveils-big-update-protesters-call-for-pause-in-risky-frontier-tech)
 - [Hoodline](https://hoodline.com/2024/05/ai-advancement-from-openai-unleashes-gpt-4o-amid-global-protests-and-market-frenzy/)
 - [NBC Bay](https://www.nbcbayarea.com/news/tech/ai-protests-worldwide/3536439/)
+
+### FR
+
+- [Le Monde](https://www.lemonde.fr/en/economy/article/2023/11/27/openai-the-beginnings-of-the-sam-altman-drama_6291282_19.html)
+- [La Tribune](https://www.latribune.fr/technos-medias/informatique/a-paris-et-dans-le-monde-les-inquiets-de-l-intelligence-artificielle-appellent-a-une-pause-997475.html)
