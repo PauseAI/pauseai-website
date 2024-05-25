@@ -6,7 +6,7 @@ function recordToPerson(record: any): Person {
 	return {
 		id: record.id || 'noId',
 		name: record.fields.Name,
-		bio: record.fields.Bio,
+		bio: record.fields.bio,
 		title: record.fields.Title,
 		image: record.fields.Image && record.fields.Image[0].thumbnails.large.url,
 		privacy: record.fields.privacy,
