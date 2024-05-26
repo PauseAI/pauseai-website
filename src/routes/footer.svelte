@@ -77,7 +77,7 @@
 		align-items: center;
 	}
 
-	@media (max-width: 500px) {
+	@media (max-width: 550px) {
 		.socials {
 			width: 100%;
 		}

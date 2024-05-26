@@ -7,6 +7,7 @@
 	import Linkedin from '$lib/components/icons/linkedin.svelte'
 	import X from '$lib/components/icons/x.svelte'
 	import Substack from './icons/substack.svelte'
+	import Reddit from './icons/reddit.svelte'
 </script>
 
 <div class="social">
@@ -28,6 +29,7 @@
 	</a>
 	<a href="https://www.youtube.com/@PauseAI" target="_blank" title="YouTube"> <Youtube /></a>
 	<a href="https://substack.com/@pauseai" target="_blank" title="Substack"><Substack /></a>
+	<a href="https://www.reddit.com/r/PauseAI/" target="_blank" title="Reddit"><Reddit /></a>
 </div>
 
 <style>

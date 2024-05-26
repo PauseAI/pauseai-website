@@ -40,6 +40,7 @@ You are now one of them.
   - [Instagram](https://www.instagram.com/pause_ai/)
   - [YouTube](https://www.youtube.com/@PauseAI)
   - [Substack](https://substack.com/@pauseai)
+  - [Reddit](https://www.reddit.com/r/PauseAI/)
 
 ## If you ...
 
