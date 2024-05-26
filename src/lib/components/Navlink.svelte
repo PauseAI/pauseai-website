@@ -35,7 +35,7 @@
 	}
 	a.active,
 	a:active {
-		color: var(--brand-subtle);
+		color: var(--brand-light);
 	}
 	a.white {
 		color: white;

@@ -16,8 +16,8 @@
 <style>
 	button,
 	a {
-		background-color: var(--button-default);
-		color: var(--button-text);
+		background-color: var(--btn-bg);
+		color: var(--text);
 		border: none;
 		border-radius: 0.3125rem;
 		padding: 10px;
@@ -37,27 +37,27 @@
 	button.subtle,
 	a.subtle {
 		/* background-color: var(--background); */
-		background-color: var(--button-alt-default);
-		color: var(--button-text);
+		background-color: var(--btn-alt-bg);
+		color: var(--text);
 		/* color: var(--brand); */
 	}
 	button.subtle:hover,
 	a.subtle:hover {
 		/* background-color: var(--background); */
-		background-color: var(--button-alt-hover);
-		color: var(--button-text);
+		background-color: var(--btn-alt-hover-bg);
+		color: var(--text);
 		/* text-decoration: underline; */
 	}
 	button:hover,
 	a:hover {
-		/* background-color: var(--brand-subtle); */
-		background-color: var(--button-hover);
-		color: var(--button-text);
+		/* background-color: var(--brand-light); */
+		background-color: var(--btn-hover-bg);
+		color: var(--text);
 	}
 	button:active,
 	a:active {
 		/* background-color: var(--brand); */
-		background-color: var(--button-default);
-		color: var(--button-text);
+		background-color: var(--btn-bg);
+		color: var(--text);
 	}
 </style>

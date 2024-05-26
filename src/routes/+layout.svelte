@@ -7,10 +7,10 @@
 	import Header from './header.svelte'
 	import Toc from '$lib/components/Toc.svelte'
 
-	import '@fontsource/ibm-plex-sans/200.css'
-	import '@fontsource/ibm-plex-sans/400.css'
-	import '@fontsource/ibm-plex-sans/600.css'
-	import '@fontsource/ibm-plex-sans/700.css'
+	import '@fontsource/ibm-plex-sans/200.css' // extra-light
+	import '@fontsource/ibm-plex-sans/400.css' // regular
+	import '@fontsource/ibm-plex-sans/500.css' // medium
+	import '@fontsource/ibm-plex-sans/700.css' // bold
 
 	import '../reset.css'
 	import '../app.css'
@@ -65,7 +65,7 @@
 		display: grid;
 		grid-template-rows: auto 1fr auto;
 		grid-auto-columns: 100%;
-		margin-inline: auto;
+		/* margin-inline: auto; */
 		/* padding: 1rem; */
 	}
 
@@ -80,6 +80,6 @@
 	@media (min-width: --page-width) {
 		/* .layout {
 			padding: 0;
-		} */
+	} */
 	}
 </style>

@@ -36,7 +36,7 @@
 	}
 
 	.c2a:active {
-		color: var(--brand-subtle);
+		color: var(--brand-light);
 	}
 
 	.text {

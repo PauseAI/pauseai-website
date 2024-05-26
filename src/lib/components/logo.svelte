@@ -57,7 +57,7 @@
 		transform: scale(1.1);
 	}
 	.logo-animate:active .logo-circle {
-		fill: var(--brand-subtle);
+		fill: var(--btn-active-bg);
 	}
 	@media (max-width: 850px) {
 		.logo {

@@ -44,7 +44,7 @@
 		padding: 1rem;
 	}
 	h3 {
-		font-weight: 600;
+		/* font-weight: 600; */
 		margin-bottom: 1.25rem;
 	}
 </style>
