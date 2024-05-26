@@ -15,7 +15,7 @@
 		/>
 		<ArticleCard
 			title="The difficult psychology of existential risk"
-			blurb="A framework for thinking about how to mitigate the risks from powerful AI systems"
+			blurb="A framework for thinking about how to mitigate the risks from powerful AI systems. And this card description takes up two lines."
 			category="Gouvernance"
 			url="/risks"
 		/>
