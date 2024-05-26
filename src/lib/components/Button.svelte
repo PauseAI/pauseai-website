@@ -1,14 +1,14 @@
 <script lang="ts">
-	export let subtle = false
+	export let alt = false
 	export let href = ''
 </script>
 
 {#if href}
-	<a {href} class:subtle>
+	<a {href} class:alt>
 		<slot />
 	</a>
 {:else}
-	<button on:click class:subtle>
+	<button on:click class:alt>
 		<slot />
 	</button>
 {/if}
@@ -34,15 +34,15 @@
 		font-size: 1.125rem;
 		text-decoration: none;
 	}
-	button.subtle,
-	a.subtle {
+	button.alt,
+	a.alt {
 		/* background-color: var(--background); */
 		background-color: var(--btn-alt-bg);
 		color: var(--text);
 		/* color: var(--brand); */
 	}
-	button.subtle:hover,
-	a.subtle:hover {
+	button.alt:hover,
+	a.alt:hover {
 		/* background-color: var(--background); */
 		background-color: var(--btn-alt-hover-bg);
 		color: var(--text);

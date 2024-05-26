@@ -11,7 +11,7 @@
 
 <div class="wrapper {current ? 'selected' : ''}">
 	<Button
-		subtle={selected && !current}
+		alt={selected && !current}
 		on:click={() => {
 			selected = yes ? 'yes' : 'no'
 			onClick()

@@ -38,7 +38,7 @@
 		<h2>
 			{node.text}
 		</h2>
-		<Button subtle on:click={() => (showInfo = !showInfo)}>Info</Button>
+		<Button alt on:click={() => (showInfo = !showInfo)}>Info</Button>
 	</div>
 
 	{#if showInfo}
@@ -55,10 +55,10 @@
 		{#if showProbabilities}
 			<Slider bind:probability />
 			<!-- {#if probability !== node.probability && showInfo}
-				<Button subtle on:click={() => (probability = node.probability)}>Reset</Button>
+				<Button alt on:click={() => (probability = node.probability)}>Reset</Button>
 			{/if} -->
 		{:else}
-			<!-- <Button subtle on:click={() => (showProbabilities = !showProbabilities)}>
+			<!-- <Button alt on:click={() => (showProbabilities = !showProbabilities)}>
 				<Propability {probability} /> chance
 			</Button> -->
 		{/if}
@@ -120,7 +120,7 @@
 							{showProbabilities ? 'Hide' : 'Show'} probabilities
 						</Button>-->
 						<Button
-							subtle
+							alt
 							on:click={() => {
 								intro = true
 								scrollToTop()

@@ -56,10 +56,10 @@
 		</div>
 	</div>
 	<div class="quote-below">
-		<Button subtle on:click={downloadQuote}>Download</Button>
+		<Button alt on:click={downloadQuote}>Download</Button>
 		{#if notice}
 			<div class="quote-notice-button">
-				<Button subtle>
+				<Button alt>
 					<Link href={'#credits-' + new GithubSlugger().slug(author)}>Credits</Link>
 				</Button>
 			</div>
