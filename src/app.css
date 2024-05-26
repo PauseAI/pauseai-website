@@ -23,7 +23,7 @@
 	--btn-alt-bg: var(--white);
 	--btn-alt-hover-bg: #fff5e8;
 	--btn-alt-active-bg: #ffead0;
-	--btn-alt-active-border: black;
+	--btn-alt-active-border: var(--black);
 	--btn-alt-focus-bg: var(--btn-alt-bg);
 	--btn-alt-focus-border: #0097d8;
 }
