@@ -1,4 +1,6 @@
 <script>
+	import { MoveUpRight } from 'lucide-svelte'
+
 	export let title
 	export let blurb
 	export let category
@@ -10,7 +12,9 @@
 	<p>{blurb}</p>
 	<div class="footer small-text">
 		<span>{category}</span>
-		<a class="read-more" href={url}>Lire l'article<span class="link-icon">↗</span></a>
+		<a class="read-more" href={url}
+			>Lire l'article<span class="link-icon"><MoveUpRight size="1.5rem" /></span></a
+		>
 	</div>
 </article>
 
@@ -46,5 +50,9 @@
 	h3 {
 		/* font-weight: 600; */
 		margin-bottom: 1.25rem;
+	}
+	.read-more {
+		display: flex;
+		align-items: end;
 	}
 </style>
