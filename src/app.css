@@ -28,7 +28,7 @@
 	--btn-alt-focus-border: #0097d8;
 }
 
-@media (prefers-color-scheme: light) {
+/* @media (prefers-color-scheme: light) {
 	:root {
 		color-scheme: light;
 
@@ -52,7 +52,7 @@
 	--brand: var(--brand);
 	--brand-subtle: hsl(32, 100%, 35%);
 	--text: black;
-}
+} */
 
 html,
 body {
