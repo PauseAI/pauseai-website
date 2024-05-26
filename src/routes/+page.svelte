@@ -1,10 +1,10 @@
 <script lang="ts">
 	import PostMeta from '$lib/components/PostMeta.svelte'
-	import Hero from './hero.svelte'
-	import Risks from './risks.svelte'
-	import Lead from './lead.svelte'
-	import Faq from './faq.svelte'
-	import Articles from './articles.svelte'
+	import Hero from '../home/hero.svelte'
+	import Lead from '../home/lead.svelte'
+	import Risks from '../home/risks.svelte'
+	import Articles from '../home/articles.svelte'
+	import Faq from '../home/faq.svelte'
 
 	const title = 'We need to Pause AI'
 	const description = 'We are risking human extinction. We need to pause AI development, right now.'
