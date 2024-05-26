@@ -35,7 +35,8 @@
 				<NavLink href="/chat">{botName}</NavLink>
 			{/if}
 			<!-- <NavLink href="/about">About</NavLink> -->
-			<NavLink c2a href="/join"><Button alt>Nous rejoindre</Button></NavLink>
+			<NavLink href="/join"><Button alt={$page.url.pathname == '/'}>Nous rejoindre</Button></NavLink
+			>
 			<!-- <NavLink href="/search" ariaLabel="Search"><SearchIcon size="0.8em" /></NavLink> -->
 		</div>
 	</div>
