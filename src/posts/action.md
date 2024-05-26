@@ -37,6 +37,9 @@ You are now one of them.
   - [LinkedIn](https://www.linkedin.com/company/pauseai/)
     - Adding PauseAI to your resume and enabling "Notify network" is an easy way to let many people know about our efforts.
   - [TikTok](https://www.tiktok.com/@pauseai)
+  - [Instagram](https://www.instagram.com/pause_ai/)
+  - [YouTube](https://www.youtube.com/@PauseAI)
+  - [Substack](https://substack.com/@pauseai)
 
 ## If you ...
 
