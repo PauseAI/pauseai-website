@@ -27,6 +27,6 @@
 		margin-top: 100vh;
 	}
 	:global(section + section) {
-		margin-top: 16rem;
+		margin-top: 7.5rem;
 	}
 </style>
