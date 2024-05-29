@@ -35,6 +35,9 @@ pnpm run dev
 # Open http://localhost:37572
 ```
 
+Note:
+While SvelteKit implements "[Zero-effort type safety](https://svelte.dev/blog/zero-config-type-safety)", the eslint-typescript plugin hasn't implemented this feature (see issue [#413](https://github.com/sveltejs/eslint-plugin-svelte/issues/413)) so you might see type inference errors in VSCode. When in doubt you can run `pnpm check` which will use SvelteKit features.
+
 ## Deployment
 
 The contents of the repository are continuously deployed to Netlify. You can track the deployment status [here](https://app.netlify.com/sites/pauseai/deploys).
