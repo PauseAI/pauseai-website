@@ -58,8 +58,16 @@
 	.name-title {
 		display: flex;
 		flex-direction: row;
-		align-items: center;
+		/* align-items: center; */
 		gap: 0.5rem;
+	}
+
+	@media (max-width: 600px) {
+		.name-title {
+			flex-direction: column;
+			gap: 0;
+			margin-bottom: 0.5rem;
+		}
 	}
 
 	.bio {

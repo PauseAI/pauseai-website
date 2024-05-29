@@ -1,6 +1,7 @@
 import { options } from '$lib/api.js'
 import type { Person } from '$lib/types.js'
 import { json } from '@sveltejs/kit'
+import { log } from 'console'
 
 function recordToPerson(record: any): Person {
 	return {
@@ -8,7 +9,7 @@ function recordToPerson(record: any): Person {
 		name: record.fields.Name,
 		bio: record.fields.bio,
 		title: record.fields.title,
-		image: record.fields.image && record.fields.Image[0].thumbnails.large.url,
+		image: record.fields.image && record.fields.image[0].thumbnails.large.url,
 		privacy: record.fields.privacy,
 		org: record.fields.organisation,
 		checked: record.fields.checked
@@ -18,11 +19,11 @@ function recordToPerson(record: any): Person {
 const currentOrg = 'International'
 
 const filter = (p: Person) => {
-	console.log(p, p.org?.includes(currentOrg))
+	console.log(p)
 	return p.image && !p.privacy && p.checked && p.org?.includes(currentOrg)
 }
 
-export async function GET({ fetch }) {
+export async function GET({ fetch, error }) {
 	const url = `https://api.airtable.com/v0/appWPTGqZmUcs3NWu/tblZhQc49PkCz3yHd`
 
 	const response = await fetch(url, options)
@@ -30,10 +31,15 @@ export async function GET({ fetch }) {
 		throw new Error('Failed to fetch data from Airtable')
 	}
 	const data = await response.json()
-	const out: Person[] = data.records
-		.map(recordToPerson)
-		.filter(filter)
-		// Shuffle the array, although not truly random
-		.sort(() => 0.5 - Math.random())
-	return json(out)
+	try {
+		const out: Person[] = data.records
+			.map(recordToPerson)
+			.filter(filter)
+			// Shuffle the array, although not truly random
+			.sort(() => 0.5 - Math.random())
+		return json(out)
+	} catch (e) {
+		log('cathErr', e)
+		return error(500, 'err')
+	}
 }
