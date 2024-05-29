@@ -35,7 +35,9 @@
 	}
 	p {
 		margin: 0;
+		/* ça pose un problème overflow sur les écrans qui ne sont pas larges
 		width: 40rem;
+		*/
 		flex-grow: 1;
 	}
 	.link-icon {
