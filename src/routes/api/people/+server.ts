@@ -7,11 +7,11 @@ function recordToPerson(record: any): Person {
 		id: record.id || 'noId',
 		name: record.fields.Name,
 		bio: record.fields.bio,
-		title: record.fields.Title,
-		image: record.fields.Image && record.fields.Image[0].thumbnails.large.url,
+		title: record.fields.title,
+		image: record.fields.image && record.fields.Image[0].thumbnails.large.url,
 		privacy: record.fields.privacy,
 		org: record.fields.organisation,
-		checked: record.fields.Checked
+		checked: record.fields.checked
 	}
 }
 
