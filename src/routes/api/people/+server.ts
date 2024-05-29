@@ -1,7 +1,6 @@
 import { options } from '$lib/api.js'
 import type { Person } from '$lib/types.js'
 import { json } from '@sveltejs/kit'
-import { log } from 'console'
 
 function recordToPerson(record: any): Person {
 	return {
@@ -19,7 +18,6 @@ function recordToPerson(record: any): Person {
 const currentOrg = 'International'
 
 const filter = (p: Person) => {
-	console.log(p)
 	return p.image && !p.privacy && p.checked && p.org?.includes(currentOrg)
 }
 
@@ -39,7 +37,7 @@ export async function GET({ fetch, error }) {
 			.sort(() => 0.5 - Math.random())
 		return json(out)
 	} catch (e) {
-		log('cathErr', e)
+		log('err while transforming airtable data', e)
 		return error(500, 'err')
 	}
 }
