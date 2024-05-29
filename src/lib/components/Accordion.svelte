@@ -41,7 +41,6 @@
 
 	.header .title {
 		flex: 1;
-		font-weight: 400;
 	}
 
 	.details {
