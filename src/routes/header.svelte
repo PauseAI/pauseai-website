@@ -48,7 +48,7 @@
 		justify-content: space-between;
 		align-items: center;
 		flex-direction: column;
-		padding: 2rem 6rem;
+		padding: 1.95rem 6rem;
 		/* margin-left: -1rem; */
 		flex-wrap: wrap;
 		z-index: 1;
