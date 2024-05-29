@@ -91,8 +91,6 @@
 		grid-column: 4 / span 6;
 	}
 	.panel-title {
-		font-size: 2em;
-		font-weight: 700;
-		padding-bottom: 2rem;
+		padding-bottom: 1rem;
 	}
 </style>
