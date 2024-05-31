@@ -10,8 +10,21 @@ This page is meant to list to the various resources that we have available for o
 
 - [Teams](/teams): Our volunteers work in all sorts of teams. Every team has its own leader, Discord channel, drive folder and of course list of members. Reach out to a team leader to join a team!
 - [People](/people): List of registered volunteers who have opted in to show their profile
-- [Microgrants](/micrograntsa): If you want funding for your PauseAI related project / event
+- [Microgrants](/microgrants): If you want funding for your PauseAI related project / event
 - [Legal entities](/legal): PauseAI consist of one international entity, and several local entities.
+- [Local Communities](/communities): Check if there already exists a community in your area. Most groups are communicating in our discord server, in the `#local-meetups` channel. If you want to create a new local group, post there.
+
+## Educational resources
+
+- The PauseAI Basics: our [proposal](/proposal), [risks](/risks), [x-risk](/xrisk), [urgency](/urgency), [dangerous-capabilities](/dangerous-capabilities), [mitigating pause failures](/mitigating-pause-failures)
+- [Flyering](/flyering): How to flyer effectively
+- [Counterarguments](/counterarguments)
+- [Organizing a protest](/organizing-a-protest)
+- [Learn about AI safety](/learn)
+- [Pause AI in the media](/press)
+- [Email builder](/email-builder)
+- [US Lobby guide](/us-lobby-guide)
+- [Writing press releases](/writing-press-releases)
 
 ## Strategy
 
@@ -20,15 +33,12 @@ This page is meant to list to the various resources that we have available for o
 - [Roadmap](/roadmap)
 - [Values](/values)
 
-## Educational resources
+## Other useful links
 
-- [Flyering](/flyering): How to flyer effectively
-- [Organizing a protest](/organizing-a-protest)
-- [Learn about AI safety](/learn)
-- [Pause AI in the media](/press)
-- [Email builder](/email-builder)
-- [US Lobby guide](/us-lobby-guide)
-- [Writing press releases](/writing-press-releases)
+- [Sign up as a volunteer!](https://airtable.com/appWPTGqZmUcs3NWu/pag7ztLh27Omj5s2n/form)
+- [Free book on AI X-Risk: Uncontrollable](https://impactbooks.store/cart/47288196366640:1?discount=UNCON-P3SFRS)
+- [Google calendar link](https://calendar.google.com/calendar/u/0?cid=Y19mNWE4YWYyMDZlNjM1ODc2NjVjNmU4MzAzOTgzZmVmYWYzYTBjNjE0NGRiMGFhNDljOTcwZWZhNTEwYTNkODY3QGdyb3VwLmNhbGVuZGFyLmdvb2dsZS5jb20)
+- [Anonymous feedback form](https://airtable.com/appWPTGqZmUcs3NWu/pagIvo9Sv6IDHaolu/form)
 
 ## Tools used
 
@@ -47,3 +57,4 @@ You can mail/contact us at [joep@pauseai.info](mailto:joep@pauseai.info).
 
 - Figma [community template](https://www.figma.com/community/file/1233064002969152026/pauseai-design-and-protest-materials-logo-flyer-posters)
 - If you want to create PauseAI-related material yourself, you can use our brand color _#FF9416_ and the fonts _Saira Condensed_ (700) and _Roboto Slab_ (300, 700).
+- [Media google drive folder](https://drive.google.com/drive/folders/1bQ_MZ8giK-Mee4ABkO0BgcFInaXruNpa?usp=sharing)
