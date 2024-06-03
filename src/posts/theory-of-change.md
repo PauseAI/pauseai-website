@@ -29,6 +29,8 @@ However, there are some important reasons why we don't have a pause yet:
   Even experts in the field have been consistently surprised by how quickly AI has been improving.
 - **Our psychology**.
   Read more about how our [psychology makes it very difficult](/psychology-of-x-risk) for us to internalize how bad things can get.
+- **The Overton window**.
+  Even though public support for AI regulations and slowing down AI development is high (see [polls & surveys](/polls-and-surveys)), many of the topics we discuss is still outside of the "Overton window", which means that they are considered too extreme to discuss. In 2023 this window has shifted quite a bit (the FLI Pause letter, Geoffrey Hinton quitting, the Safe.ai statement), but it's still too much of a taboo in political elite cirtlces to seriously consider the possibility of pausing. Additionally, the existential risk from AI is still ridiculed by too many people. It is our job to move this overton window further.
 
 ## How do we pause?
 
@@ -50,7 +52,7 @@ We can get there in two ways:
 
 - **Tolerate violence**. We make it very clear to our members and the people joining our protests that we are a peaceful movement. We do not promote violence, and we do not tolerate it. We communicate this in our Protestor's Code of Conduct, our Discord rules, and our Volunteer agreement. The main reason for this is because we want to be the good guys, we want the public to be on our side.
 - **Take sides in other topics**. We are a movement that focuses on an AI Pause. We do not discuss and take sides in other topics, even if (short-term) opportunities arise that may make this tempting to do.
-- **Be dishonest**. We need people to trust what we say, so we must do everything to promote honesty
+- **Be dishonest**. We need people to trust what we say, so we must do everything to promote honesty.
 
 ## Let's get to it
 

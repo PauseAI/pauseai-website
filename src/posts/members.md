@@ -6,13 +6,14 @@ description: Welcome to PauseAI! How
 Welcome to PauseAI!
 This page is meant to list to the various resources that we have available for our members.
 
-## Organization
+## Organization structure
 
+- [Legal entities](/legal): PauseAI consist of one international entity, and several local / national legal entities. This website and the social media accounts are managed by the international entity. National entities can have their own website and their own way of doing things.
+- [People (Volunteers)](/people): List of registered volunteers who have opted to show their profile and have committed to work on PauseAI for at least some hours a week.
 - [Teams](/teams): Our volunteers work in all sorts of teams. Every team has its own leader, Discord channel, drive folder and of course list of members. Reach out to a team leader to join a team!
-- [People](/people): List of registered volunteers who have opted in to show their profile.
-- [Microgrants](/microgrants): If you want funding for your PauseAI related project / event
-- [Legal entities](/legal): PauseAI consist of one international entity, and several local entities.
-- [Local Communities](/communities): Check if there already exists a community in your area. Most groups are communicating in our discord server, in the `#local-meetups` channel. If you want to create a new local group, post there.
+- [Local communities](/communities): Check if there already exists a community in your area. Most groups are communicating in our discord server, in the `#local-meetups` channel (If you want to create a new local group, post there!). Some groups are using tools like Whatsapp or a seperate Discord server.
+
+![Organagram](/org.png)
 
 ## Onboarding process
 
@@ -27,7 +28,7 @@ This page is meant to list to the various resources that we have available for o
 - [Counterarguments](/counterarguments)
 - [Organizing a protest](/organizing-a-protest)
 - [Learn about AI safety](/learn)
-- [Pause AI in the media](/press)
+- [PauseAI in the media](/press)
 - [Email builder](/email-builder)
 - [US Lobby guide](/us-lobby-guide)
 - [Writing press releases](/writing-press-releases)
@@ -35,23 +36,25 @@ This page is meant to list to the various resources that we have available for o
 ## Strategy
 
 - [Theory of Change](/theory-of-change)
-- [Communication strategy](/communication-strategy)
-- [Roadmap](/roadmap)
-- [Values](/values)
+- [Communication strategy](/communication-strategy): how we write our messages
+- [Roadmap](/roadmap): budget-dependent planning
+- [Values](/values): core values that should guide our decisions
 
 ## Other useful links
 
 - [Free book on AI X-Risk: Uncontrollable](https://impactbooks.store/cart/47288196366640:1?discount=UNCON-P3SFRS)
 - [Google calendar link](https://calendar.google.com/calendar/u/0?cid=Y19mNWE4YWYyMDZlNjM1ODc2NjVjNmU4MzAzOTgzZmVmYWYzYTBjNjE0NGRiMGFhNDljOTcwZWZhNTEwYTNkODY3QGdyb3VwLmNhbGVuZGFyLmdvb2dsZS5jb20)
-- [Anonymous feedback form](https://airtable.com/appWPTGqZmUcs3NWu/pagIvo9Sv6IDHaolu/form)
+- [Anonymous feedback form](https://airtable.com/appWPTGqZmUcs3NWu/pagIvo9Sv6IDHaolu/form): If you want to share some critical thoughts with us while remaining anonymous.
+- [Microgrants](/microgrants): If you want funding for your PauseAI related project / event
 
 ## Tools used
 
 - [Discord](https://discord.gg/2XXWXvErfA) for internal coordination / chats.
 - [Gmail](https://gmail.com) for `@pauseai.info` email addresses.
 - [Google Suite](https://workspace.google.com/) for documents, spreadsheets, files, folders.
-- [Trello](https://trello.com/) is used by some teams for issue / ToDo tracking.
-- [Figma](https://figma.com) for designing resources.
+- [Trello](https://trello.com/) is used by some teams for issue / ToDo tracking. (org name: `pauseaiinfo`)
+- [Figma](https://figma.com) for designing flyers and other graphics. ([template here](https://www.figma.com/community/file/1233064002969152026/pauseai-design-and-protest-materials-logo-flyer-posters)
+- [Airtable](https://airtable.com/) for managing teams, volunteers and responsibilities.
 
 ## Social Media
 
