@@ -119,8 +119,7 @@
 		},
 		{
 			name: 'Paul Christiano',
-			title:
-				'Head of AI Safety at US AI Safety Institute, former alignment lead at OpenAI, founder of ARC',
+			title: 'former alignment lead at OpenAI, founder of ARC',
 			probability: '46%',
 			number: 0.46,
 			source: 'https://www.lesswrong.com/posts/xWMqsvHapP3nwdSW8/my-views-on-doom'
@@ -227,6 +226,7 @@
 	}
 
 	.title {
+		margin-left: 0.4rem;
 		opacity: 0.5;
 		font-family: var(--font-body);
 		font-weight: normal;
@@ -244,7 +244,16 @@
 		display: flex;
 		position: relative;
 		padding-bottom: 0.3rem;
-		flex-direction: column;
+	}
+
+	@media (max-width: 700px) {
+		.name {
+			flex-direction: column;
+		}
+
+		.title {
+			margin-left: 0;
+		}
 	}
 
 	.pdoom {
