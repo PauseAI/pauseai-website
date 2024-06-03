@@ -141,7 +141,7 @@
 		},
 		{
 			name: 'Zvi Mowshowitz',
-			title: 'AI researcher',
+			title: 'Independent AI safety journalist',
 			probability: '60%',
 			number: 0.6,
 			source: 'https://x.com/liron/status/1729274710670893262?s=20'
