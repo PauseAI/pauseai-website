@@ -19,6 +19,14 @@
 			source: 'https://twitter.com/liron/status/1736555643384025428'
 		},
 		{
+			name: 'Forecasting Research Institute Superforecasters',
+			probability: '0.38%',
+			note: 'From the same study: Domain experts estimated 3% AI x-risk, and AI catastrophe at 12%',
+			number: 0.0038,
+			source:
+				'https://static1.squarespace.com/static/635693acf15a3e2a14a56a4a/t/64f0a7838ccbf43b6b5ee40c/1693493128111/XPT.pdf'
+		},
+		{
 			name: 'Vitalik Buterin',
 			title: 'Ethereum founder',
 			probability: '10%',
