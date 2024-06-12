@@ -134,10 +134,11 @@
 		},
 		{
 			name: 'Holden Karnofsky',
-			title: 'Executive Director of Open Philanthropy',
-			probability: '50%',
+			title: 'Co-founder of Open Philanthropy',
+			probability: '10-90%',
 			number: 0.5,
-			source: 'https://www.cold-takes.com/where-ai-forecasting-stands-today/'
+			source:
+				'https://www.alignmentforum.org/posts/rCJQAkPTEypGjSJ8X/how-might-we-align-transformative-ai-if-it-s-developed-very#So__would_civilization_survive_'
 		},
 		{
 			name: 'Jan Leike',
