@@ -17,7 +17,7 @@
 	$: logo_animate = $page.url.pathname != '/'
 </script>
 
-<nav>
+<nav class={logo_animate ? '' : 'absolute-nav'}>
 	<a href="/" class="logo">
 		<Logo animate={logo_animate} fill_pause={$page.url.pathname == '/' ? 'white' : ''} />
 	</a>
@@ -43,6 +43,10 @@
 </nav>
 
 <style>
+	.absolute-nav {
+		position: absolute;
+		width: 100%;
+	}
 	nav {
 		display: flex;
 		justify-content: space-between;
