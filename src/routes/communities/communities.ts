@@ -5,7 +5,7 @@ export type Community = {
 	lat: number
 	lon: number
 	/** Will default to PauseAI Discord */
-	link?: string
+	link: string
 	/** Non-PauseAI org */
 	adjacent?: boolean
 }
@@ -290,6 +290,18 @@ const PauseAICommunities: Community[] = [
 		name: 'PauseAI Gdynia',
 		lat: 54.5168,
 		lon: 18.5419,
+		link: discordInvite
+	},
+	{
+		name: 'PauseAI Madrid',
+		lat: 40.4168,
+		lon: -3.7038,
+		link: discordInvite
+	},
+	{
+		name: 'PauseAI Blackpool',
+		lat: 53.8159,
+		lon: -3.0553,
 		link: discordInvite
 	}
 ]
