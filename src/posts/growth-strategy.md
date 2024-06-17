@@ -18,7 +18,7 @@ This is why we are a _movement_, a _community_ something bigger than ourselves.
 - **Be welcoming**. We want to be a group that people like to be part of. Make a good first impression to new people. Allow people to join, even if your opinions differ from theirs. We're united by our goal.
 - **Be recognizable**. We have a clear, visual brand with a recognizable logo and color scheme. Our name says what we want: PauseAI. Our assets are free to use and can be easily found.
 - **Give people responsibility**. We give up some of our control to let others grow. We make big asks and give big responsibilities. When people feel in control, they are more likely to act.
-- **Be a teacher**. Nobody is born an activist or a lobbyist, but we can learn to become one. Share your lessons and experiences, and help others to grow.
+- **Help others grow**. Nobody is born an activist or a lobbyist, but we can learn to become one. Share your lessons and experiences, and help others to grow.
 - **Be personal**. We share our personal stories and emotions. People connect with people, not with abstract ideas.
 - **Build alliances**. We are not alone. We need to work with other groups and movements. We can learn from them and they can learn from us. Find common ground and common interests. Do not push them away if they do not share all our our ideas.
 
