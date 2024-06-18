@@ -91,6 +91,12 @@ Our first annual report will be published after the first fiscal year ends on 31
 - Company number: 15373608
 - Director: [William Baird](mailto:william@pauseai.info)
 
+## PauseIA (France)
+
+- Name: PauseIA
+- Will be incorporated soon
+- Director: [Maxime Fournes](mailto:maxime@pauseai.info)
+
 ## Relationship between entities
 
 PauseAI Global is responsible for:

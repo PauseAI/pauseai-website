@@ -49,6 +49,7 @@ If you want to create PauseAI-related material yourself, you can use our brand c
 - [Islington Tribune](https://www.islingtontribune.co.uk/article/watch-out-the-robots-are-coming): DeepMind protest
 - [Camden New Journal](https://www.camdennewjournal.co.uk/article/:protesters-tell-tech-quarter-companies-to-press-pause-on-artificial-intelligence-research): DeepMind protest
 - [Islington Tribune](https://www.islingtontribune.co.uk/article/what-happens-in-bletchley-stays-in): Bletchley Park protest
+- [Peeps](https://www.youtube.com/watch?v=a3HRYOIhfFI): Bletchley Park protest video interview
 
 ### NL
 
