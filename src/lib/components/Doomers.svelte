@@ -267,7 +267,7 @@
 
 	.pdoom {
 		text-align: center;
-		flex-basis: 5rem;
+		flex-basis: 6rem;
 		flex-grow: 0;
 		flex-shrink: 0;
 	}
