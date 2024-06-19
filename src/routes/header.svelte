@@ -62,7 +62,7 @@
 		justify-content: center;
 	}
 
-	@media (min-width: 850px) {
+	@media (min-width: 900px) {
 		nav {
 			flex-direction: row;
 			margin-left: 1rem;
