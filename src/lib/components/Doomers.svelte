@@ -34,14 +34,6 @@
 			source: 'https://twitter.com/VitalikButerin/status/1729251822391447904'
 		},
 		{
-			name: 'Geoff Hinton',
-			title: 'one of three godfathers of AI',
-			probability: 'Slightly less than 50%',
-			number: 0.45,
-			note: 'Kinda 50-50 on good outcomes for humanity. But because other people are more optimistic, he thinks our odds are slightly better than 50%.',
-			source: 'https://x.com/liron/status/1803435675527815302'
-		},
-		{
 			name: 'Machine learning researchers',
 			probability: '9-19.4%',
 			number: 0.142,
@@ -131,6 +123,14 @@
 			probability: '46%',
 			number: 0.46,
 			source: 'https://www.lesswrong.com/posts/xWMqsvHapP3nwdSW8/my-views-on-doom'
+		},
+		{
+			name: 'Geoff Hinton',
+			title: 'one of three godfathers of AI',
+			probability: '~49%',
+			number: 0.49,
+			note: 'Kinda 50-50 on good outcomes for humanity. But because other people are more optimistic, he thinks our odds are slightly better than 50%.',
+			source: 'https://x.com/liron/status/1803435675527815302'
 		},
 		{
 			name: 'Holden Karnofsky',
