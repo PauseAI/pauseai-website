@@ -36,10 +36,10 @@
 		{
 			name: 'Geoff Hinton',
 			title: 'one of three godfathers of AI',
-			probability: '10%',
-			number: 0.1,
-			note: 'wipe out humanity in the next 20 years',
-			source: 'https://archive.ph/Q8obS#selection-2291.167-2291.183'
+			probability: 'Slightly less than 50%',
+			number: 0.45,
+			note: 'Kinda 50-50 on good outcomes for humanity. But because other people are more optimistic, he thinks our odds are slightly better than 50%.',
+			source: 'https://x.com/liron/status/1803435675527815302'
 		},
 		{
 			name: 'Machine learning researchers',
