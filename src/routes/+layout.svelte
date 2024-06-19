@@ -60,21 +60,27 @@
 		margin: auto;
 	} */
 	.layout {
-		height: 100%;
 		max-inline-size: var(--page-width);
 		display: grid;
 		grid-template-rows: auto 1fr auto;
 		grid-auto-columns: 100%;
 		/* margin-inline: auto; */
 		/* padding: 1rem; */
+		overflow: hidden;
 	}
 
 	main {
 		/* padding-block: 1rem; */
 		/* margin-bottom: 5rem; */
-		padding: 6rem 6rem 7.5rem 6rem;
+		padding: 1rem 1rem 1rem 1rem;
 		display: flex;
 		flex-direction: column;
+	}
+
+	@media (min-width: 600px) {
+		main {
+			padding: 6rem 6rem 7.5rem 6rem;
+		}
 	}
 
 	@media (min-width: --page-width) {

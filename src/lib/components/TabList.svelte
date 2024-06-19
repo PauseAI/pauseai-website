@@ -49,15 +49,12 @@
 
 <style>
 	.tabs {
-		display: grid;
-		grid-template-columns: repeat(12, 1fr);
-		height: 40rem;
 		overflow-x: hidden;
 	}
 	ul {
-		margin: 0;
+		margin-bottom: 2rem;
 		grid-column: 1 / span 3;
-		width: fit-content;
+		width: 100%;
 		height: fit-content;
 		border-radius: 0.625rem;
 		background-color: var(--bg-subtle);
@@ -92,5 +89,18 @@
 	}
 	.panel-title {
 		padding-bottom: 1rem;
+	}
+
+	@media (min-width: 600px) {
+		.tabs {
+			display: grid;
+			grid-template-columns: repeat(12, 1fr);
+			height: 40rem;
+			overflow-x: hidden;
+		}
+		ul {
+			margin: 0;
+			width: fit-content;
+		}
 	}
 </style>

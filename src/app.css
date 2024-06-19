@@ -57,6 +57,7 @@
 html,
 body {
 	height: 100%;
+	width: 100vw;
 }
 
 html {
@@ -97,7 +98,7 @@ h5 {
 h1 {
 	font-size: 3.5rem;
 	font-weight: 700;
-	margin-bottom: 2rem;
+	margin-bottom: 1rem;
 }
 
 h2 {
@@ -105,17 +106,27 @@ h2 {
 	font-weight: 700;
 	position: relative;
 	width: fit-content;
-	margin-bottom: 4rem;
+	margin-bottom: 1rem;
 }
 
-h2::before {
-	content: '';
-	background-color: #ff9416;
-	height: 1.125rem;
-	position: absolute;
-	width: 100%;
-	transform: translate(1.5rem, 130%);
-	z-index: -1;
+@media (min-width: 600px) {
+	h1 {
+		margin-bottom: 2rem;
+	}
+
+	h2 {
+		margin-bottom: 4rem;
+	}
+
+	h2::before {
+		content: '';
+		background-color: #ff9416;
+		height: 1.125rem;
+		position: absolute;
+		width: 100%;
+		transform: translate(1.5rem, 130%);
+		z-index: -1;
+	}
 }
 
 h3 {

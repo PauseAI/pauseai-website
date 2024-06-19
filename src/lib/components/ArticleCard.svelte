@@ -32,6 +32,7 @@
 		flex-direction: column;
 		height: 100%;
 		gap: 1.25rem;
+		background-color: var(--bg-subtle);
 	}
 	p {
 		margin: 0;
@@ -54,6 +55,7 @@
 		text-decoration: none;
 		background-color: var(--bg-subtle);
 		border-radius: 0.625rem;
+		overflow: hidden;
 	}
 	.article-link:hover {
 		color: inherit;

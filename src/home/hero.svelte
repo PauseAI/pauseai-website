@@ -35,6 +35,7 @@
 <style>
 	.hero {
 		position: absolute;
+		overflow: hidden;
 		top: 0;
 		left: 0;
 		width: 100%;
@@ -46,11 +47,11 @@
 		color: #fff;
 		text-align: left;
 		width: 70rem;
-		padding: 6rem;
 		z-index: 1;
+		width: 100%;
+		padding: 1rem;
 	}
 	.hero-content p {
-		width: 45rem;
 		margin: 2rem 0;
 	}
 	.hero-bg {
@@ -93,5 +94,14 @@
 			rgba(1, 1, 1, 0.48) 91%,
 			rgba(1, 1, 1, 0.48) 100%
 		);
+	}
+
+	@media (min-width: 600px) {
+		.hero-content {
+			padding: 6rem;
+		}
+		.hero-content p {
+			width: 45rem;
+		}
 	}
 </style>

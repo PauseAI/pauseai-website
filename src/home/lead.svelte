@@ -16,9 +16,14 @@
 <style>
 	.lead {
 		align-self: center;
-		width: 60rem;
 	}
-	.lead h2 {
-		margin-left: 4rem;
+
+	@media (min-width: 600px) {
+		.lead {
+			width: 60rem;
+		}
+		.lead h2 {
+			margin-left: 4rem;
+		}
 	}
 </style>
