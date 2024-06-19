@@ -43,15 +43,27 @@
 		</div>
 		<div class="hamburger" on:click={() => (open = !open)}>
 			<svg
-				width="40px"
-				height="40px"
+				width="24"
+				height="24"
 				viewBox="0 0 24 24"
 				fill="none"
 				xmlns="http://www.w3.org/2000/svg"
 			>
-				<path d="M4 18L20 18" stroke="#fff" stroke-width="2" stroke-linecap="round" />
-				<path d="M4 12L20 12" stroke="#fff" stroke-width="2" stroke-linecap="round" />
-				<path d="M4 6L20 6" stroke="#fff" stroke-width="2" stroke-linecap="round" />
+				<rect
+					y="13.5686"
+					width="3.13043"
+					height="24"
+					transform="rotate(-90 0 13.5686)"
+					fill="white"
+				/>
+				<rect
+					y="3.13037"
+					width="3.13043"
+					height="24"
+					transform="rotate(-90 0 3.13037)"
+					fill="white"
+				/>
+				<rect y="24" width="3.13043" height="24" transform="rotate(-90 0 24)" fill="white" />
 			</svg>
 		</div>
 	</div>
@@ -63,20 +75,26 @@
 			</a>
 			<div class="hamburger" on:click={() => (open = !open)}>
 				<svg
-					fill="#000000"
-					height="40px"
-					width="40px"
-					version="1.1"
-					id="Layer_1"
+					width="24"
+					height="24"
+					viewBox="0 0 24 24"
+					fill="none"
 					xmlns="http://www.w3.org/2000/svg"
-					xmlns:xlink="http://www.w3.org/1999/xlink"
-					viewBox="0 0 1792 1792"
-					xml:space="preserve"
 				>
-					<path
-						d="M1082.2,896.6l410.2-410c51.5-51.5,51.5-134.6,0-186.1s-134.6-51.5-186.1,0l-410.2,410L486,300.4
-					c-51.5-51.5-134.6-51.5-186.1,0s-51.5,134.6,0,186.1l410.2,410l-410.2,410c-51.5,51.5-51.5,134.6,0,186.1
-					c51.6,51.5,135,51.5,186.1,0l410.2-410l410.2,410c51.5,51.5,134.6,51.5,186.1,0c51.1-51.5,51.1-134.6-0.5-186.2L1082.2,896.6z"
+					<rect
+						y="2.21387"
+						width="3.13043"
+						height="30.8142"
+						transform="rotate(-45 0 2.21387)"
+						fill="black"
+					/>
+					<rect
+						x="21.7891"
+						y="0.000244141"
+						width="3.13043"
+						height="30.8142"
+						transform="rotate(45 21.7891 0.000244141)"
+						fill="black"
 					/>
 				</svg>
 			</div>
@@ -163,6 +181,7 @@
 	.hamburger {
 		display: flex;
 		align-items: center;
+		cursor: pointer;
 	}
 
 	@media (min-width: 600px) {
