@@ -54,16 +54,22 @@
 					width="3.13043"
 					height="24"
 					transform="rotate(-90 0 13.5686)"
-					fill="white"
+					fill={$page.url.pathname == '/' ? 'white' : 'black'}
 				/>
 				<rect
 					y="3.13037"
 					width="3.13043"
 					height="24"
 					transform="rotate(-90 0 3.13037)"
-					fill="white"
+					fill={$page.url.pathname == '/' ? 'white' : 'black'}
 				/>
-				<rect y="24" width="3.13043" height="24" transform="rotate(-90 0 24)" fill="white" />
+				<rect
+					y="24"
+					width="3.13043"
+					height="24"
+					transform="rotate(-90 0 24)"
+					fill={$page.url.pathname == '/' ? 'white' : 'black'}
+				/>
 			</svg>
 		</div>
 	</div>
