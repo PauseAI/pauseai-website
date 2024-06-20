@@ -24,7 +24,7 @@
 
 <style>
 	:global(.hero + section) {
-		margin-top: calc(100vh);
+		margin-top: 100vh;
 	}
 	:global(section + section) {
 		padding-top: 2rem;
