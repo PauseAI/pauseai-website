@@ -111,12 +111,12 @@
 			</div>
 		</div>
 		<div class="sidebar-links">
-			<a href="/risks"><h2>Risques</h2></a>
-			<a href="/proposal"><h2>Propositions</h2></a>
-			<a href="/action"><h2>Agir</h2></a>
-			<a href="/posts"><h2>Blog</h2></a>
-			<a href="/donate"><h2>Dons</h2></a>
-			<a href="/join"><h2>Nous rejoindre</h2></a>
+			<a href="/risks" on:click={() => (open = !open)}><h2>Risques</h2></a>
+			<a href="/proposal" on:click={() => (open = !open)}><h2>Propositions</h2></a>
+			<a href="/action" on:click={() => (open = !open)}><h2>Agir</h2></a>
+			<a href="/posts" on:click={() => (open = !open)}><h2>Blog</h2></a>
+			<a href="/donate" on:click={() => (open = !open)}><h2>Dons</h2></a>
+			<a href="/join" on:click={() => (open = !open)}><h2>Nous rejoindre</h2></a>
 		</div>
 	</div>
 </nav>
