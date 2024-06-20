@@ -200,12 +200,16 @@
 		line-height: 0;
 	}
 
+	.small-logo {
+		display: none;
+	}
+
 	.small-logo :global(svg) {
 		width: 3rem;
 	}
 
 	.big-logo {
-		display: none;
+		display: block;
 	}
 
 	@media (min-width: 640px) {
@@ -221,6 +225,13 @@
 		}
 
 		.hamburger {
+			display: none;
+		}
+		.small-logo {
+			display: block;
+		}
+
+		.big-logo {
 			display: none;
 		}
 
