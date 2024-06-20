@@ -17,12 +17,12 @@
 
 <style>
 	a {
-		padding: 1rem;
+		padding: 0.5rem;
 		font-family: var(--font-heading);
 		font-weight: 700;
 		color: var(--text);
 		text-decoration: none;
-		font-size: 1.1rem;
+		font-size: 1rem;
 	}
 
 	a.c2a {
@@ -39,5 +39,11 @@
 	}
 	a.white {
 		color: white;
+	}
+	@media (min-width: 1024px) {
+		a {
+			font-size: 1.1rem;
+			padding: 1rem;
+		}
 	}
 </style>

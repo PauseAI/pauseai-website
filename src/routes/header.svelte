@@ -22,7 +22,12 @@
 <!-- probably have to change nav colors and classes to respond to banner presence instead of route -->
 <nav class={onHomepage ? 'absolute-nav' : ''}>
 	<a href="/" class="logo">
-		<Logo animate={onHomepage} fill_pause={onHomepage ? 'white' : ''} />
+		<div class="big-logo">
+			<Logo animate={onHomepage} fill_pause={onHomepage ? 'white' : 'black'} />
+		</div>
+		<div class="small-logo">
+			<Logo animate={onHomepage} only_circle />
+		</div>
 	</a>
 
 	<div class="nav-right">
@@ -77,7 +82,7 @@
 	<div class="sidebar" class:open>
 		<div class="sidebar-head">
 			<a href="/" class="logo">
-				<Logo animate={onHomepage} fill_pause="black" fill_rest="white" />
+				<Logo animate={onHomepage} fill_circle="white" fill_ai="white" />
 			</a>
 			<div class="hamburger" on:click={() => (open = !open)}>
 				<svg
@@ -144,6 +149,7 @@
 	.sidebar-head {
 		display: flex;
 		justify-content: space-between;
+		margin-bottom: 2rem;
 	}
 
 	.open {
@@ -190,11 +196,23 @@
 		cursor: pointer;
 	}
 
-	@media (min-width: 600px) {
+	.logo {
+		line-height: 0;
+	}
+
+	.small-logo :global(svg) {
+		width: 3rem;
+	}
+
+	.big-logo {
+		display: none;
+	}
+
+	@media (min-width: 640px) {
 		nav {
 			flex-direction: row;
 			align-items: center;
-			padding: 1.95rem 6rem;
+			padding: 1.95rem 2rem;
 			/* margin-left: 1rem; */
 		}
 
@@ -213,10 +231,35 @@
 
 		/* .nav-links {
 			margin-left: 2rem;
-		} */
+			} */
+	}
+	@media (min-width: 768px) {
+		nav {
+			padding: 1.95rem 4rem;
+		}
 	}
 
-	.logo {
-		line-height: 0;
+	@media (min-width: 1024px) {
+		nav {
+			padding: 1.95rem 6rem;
+		}
+
+		.big-logo {
+			display: block;
+		}
+
+		.big-logo :global(svg) {
+			width: 12rem;
+		}
+
+		.small-logo {
+			display: none;
+		}
+	}
+
+	@media (min-width: 1280px) {
+		.big-logo :global(svg) {
+			width: auto;
+		}
 	}
 </style>

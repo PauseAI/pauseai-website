@@ -9,7 +9,7 @@
 
 <footer>
 	<div class="logo">
-		<Logo fill_pause="black" fill_rest="white" />
+		<Logo fill_circle="white" fill_ai="white" />
 		<p>Pour une IA alignée sur l’humanité.</p>
 	</div>
 	<div class="footer-links">

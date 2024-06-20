@@ -30,7 +30,7 @@
 		height: 3rem;
 		align-items: center;
 		justify-content: center;
-		font-size: 1.125rem;
+		/* font-size: 1.125rem; */
 		text-decoration: none;
 	}
 
