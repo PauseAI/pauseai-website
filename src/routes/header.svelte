@@ -46,7 +46,7 @@
 			<NavLink href="/join"><Button alt={onHomepage}>Nous rejoindre</Button></NavLink>
 			<!-- <NavLink href="/search" ariaLabel="Search"><SearchIcon size="0.8em" /></NavLink> -->
 		</div>
-		<div class="hamburger" on:click={() => (open = !open)}>
+		<button class="hamburger" on:click={() => (open = !open)}>
 			<svg
 				width="24"
 				height="24"
@@ -76,7 +76,7 @@
 					fill={onHomepage ? 'white' : 'black'}
 				/>
 			</svg>
-		</div>
+		</button>
 	</div>
 
 	<div class="sidebar" class:open>
@@ -84,7 +84,7 @@
 			<a href="/" class="logo">
 				<Logo animate={onHomepage} fill_circle="white" fill_ai="white" />
 			</a>
-			<div class="hamburger" on:click={() => (open = !open)}>
+			<button class="hamburger" on:click={() => (open = !open)}>
 				<svg
 					width="24"
 					height="24"
@@ -108,7 +108,7 @@
 						fill="black"
 					/>
 				</svg>
-			</div>
+			</button>
 		</div>
 		<div class="sidebar-links">
 			<a href="/risks" on:click={() => (open = !open)}><h2>Risques</h2></a>
