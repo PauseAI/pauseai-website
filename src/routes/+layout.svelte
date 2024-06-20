@@ -72,7 +72,7 @@
 	main {
 		/* padding-block: 1rem; */
 		/* margin-bottom: 5rem; */
-		padding: 1rem 1rem 1rem 1rem;
+		padding: 1rem;
 		display: flex;
 		flex-direction: column;
 	}
