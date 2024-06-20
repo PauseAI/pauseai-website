@@ -237,6 +237,9 @@
 		nav {
 			padding: 1.95rem 4rem;
 		}
+		.small-logo :global(svg) {
+			width: auto;
+		}
 	}
 
 	@media (min-width: 1024px) {
