@@ -99,7 +99,7 @@
 				</svg>
 			</div>
 		</div>
-		<div class="sidebarlinks">
+		<div class="sidebar-links">
 			<a class="block" href="/risks"><h2>Risques</h2></a>
 			<a class="block" href="/proposal"><h2>Propositions</h2></a>
 			<a class="block" href="/action"><h2>Agir</h2></a>
@@ -122,16 +122,16 @@
 		transition: left 0.3s ease-in-out;
 	}
 
-	.sidebarlinks {
+	.sidebar-links {
 		display: flex;
 		flex-direction: column;
 	}
 
-	.sidebarlinks a {
+	.sidebar-links a {
 		text-decoration: none;
 	}
 
-	.sidebarlinks a:hover {
+	.sidebar-links a:hover {
 		color: black;
 	}
 
