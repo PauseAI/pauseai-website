@@ -71,7 +71,7 @@
 	<div class="sidebar" class:open>
 		<div class="sidebar-head">
 			<a href="/" class="logo">
-				<Logo animate={logo_animate} fill_pause={$page.url.pathname == '/' ? 'black' : ''} />
+				<Logo animate={logo_animate} fill_pause="black" fill_rest="white" />
 			</a>
 			<div class="hamburger" on:click={() => (open = !open)}>
 				<svg
