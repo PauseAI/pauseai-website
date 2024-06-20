@@ -68,7 +68,7 @@
 		</div>
 	</div>
 
-	<div class="sidebar w-full h-full bg-gray-200 border-r-2 shadow-lg" class:open>
+	<div class="sidebar" class:open>
 		<div class="sidebar-head">
 			<a href="/" class="logo">
 				<Logo animate={logo_animate} fill_pause={$page.url.pathname == '/' ? 'black' : ''} />
@@ -100,12 +100,12 @@
 			</div>
 		</div>
 		<div class="sidebar-links">
-			<a class="block" href="/risks"><h2>Risques</h2></a>
-			<a class="block" href="/proposal"><h2>Propositions</h2></a>
-			<a class="block" href="/action"><h2>Agir</h2></a>
-			<a class="block" href="/posts"><h2>Blog</h2></a>
-			<a class="block" href="/donate"><h2>Dons</h2></a>
-			<a class="block" href="/join"><h2>Nous rejoindre</h2></a>
+			<a href="/risks"><h2>Risques</h2></a>
+			<a href="/proposal"><h2>Propositions</h2></a>
+			<a href="/action"><h2>Agir</h2></a>
+			<a href="/posts"><h2>Blog</h2></a>
+			<a href="/donate"><h2>Dons</h2></a>
+			<a href="/join"><h2>Nous rejoindre</h2></a>
 		</div>
 	</div>
 </nav>
