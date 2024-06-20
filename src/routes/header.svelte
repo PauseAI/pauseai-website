@@ -14,14 +14,15 @@
 	import Button from '$lib/components/Button.svelte'
 	const enableBot = false
 
-	$: logo_animate = $page.url.pathname != '/'
+	$: onHomepage = $page.url.pathname == '/'
 
 	let open = false
 </script>
 
-<nav class={logo_animate ? '' : 'absolute-nav'}>
+<!-- probably have to change nav colors and classes to respond to banner presence instead of route -->
+<nav class={onHomepage ? 'absolute-nav' : ''}>
 	<a href="/" class="logo">
-		<Logo animate={logo_animate} fill_pause={$page.url.pathname == '/' ? 'white' : ''} />
+		<Logo animate={onHomepage} fill_pause={onHomepage ? 'white' : ''} />
 	</a>
 
 	<div class="nav-right">
@@ -37,8 +38,7 @@
 				<NavLink href="/chat">{botName}</NavLink>
 			{/if}
 			<!-- <NavLink href="/about">About</NavLink> -->
-			<NavLink href="/join"><Button alt={$page.url.pathname == '/'}>Nous rejoindre</Button></NavLink
-			>
+			<NavLink href="/join"><Button alt={onHomepage}>Nous rejoindre</Button></NavLink>
 			<!-- <NavLink href="/search" ariaLabel="Search"><SearchIcon size="0.8em" /></NavLink> -->
 		</div>
 		<div class="hamburger" on:click={() => (open = !open)}>
@@ -54,21 +54,21 @@
 					width="3.13043"
 					height="24"
 					transform="rotate(-90 0 13.5686)"
-					fill={$page.url.pathname == '/' ? 'white' : 'black'}
+					fill={onHomepage ? 'white' : 'black'}
 				/>
 				<rect
 					y="3.13037"
 					width="3.13043"
 					height="24"
 					transform="rotate(-90 0 3.13037)"
-					fill={$page.url.pathname == '/' ? 'white' : 'black'}
+					fill={onHomepage ? 'white' : 'black'}
 				/>
 				<rect
 					y="24"
 					width="3.13043"
 					height="24"
 					transform="rotate(-90 0 24)"
-					fill={$page.url.pathname == '/' ? 'white' : 'black'}
+					fill={onHomepage ? 'white' : 'black'}
 				/>
 			</svg>
 		</div>
@@ -77,7 +77,7 @@
 	<div class="sidebar" class:open>
 		<div class="sidebar-head">
 			<a href="/" class="logo">
-				<Logo animate={logo_animate} fill_pause="black" fill_rest="white" />
+				<Logo animate={onHomepage} fill_pause="black" fill_rest="white" />
 			</a>
 			<div class="hamburger" on:click={() => (open = !open)}>
 				<svg
