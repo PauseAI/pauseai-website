@@ -224,15 +224,13 @@
 			display: flex;
 		}
 
-		.hamburger {
+		.hamburger,
+		.big-logo,
+		.sidebar {
 			display: none;
 		}
 		.small-logo {
 			display: block;
-		}
-
-		.big-logo {
-			display: none;
 		}
 
 		/* .logo {
