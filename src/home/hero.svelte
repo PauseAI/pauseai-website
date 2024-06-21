@@ -8,7 +8,9 @@
 
 <section class="hero" aria-labelledby={label_id}>
 	<section class="hero-content">
-		<h1 id={label_id}>Ne laissons pas les entreprises IA jouer avec <Mark>notre futur</Mark></h1>
+		<h1 id={label_id}>
+			Ne laissons pas les entreprises IA jouer avec <Mark>notre futur</Mark>
+		</h1>
 		<p>
 			Nous sommes une communauté de bénévoles à but non lucratif qui se concentre sur l'atténuation
 			des risques liés à l'IA et qui exhorte les gouvernements à faire une pause dans le
@@ -33,6 +35,7 @@
 <style>
 	.hero {
 		position: absolute;
+		overflow: hidden;
 		top: 0;
 		left: 0;
 		width: 100%;
@@ -43,12 +46,15 @@
 	.hero-content {
 		color: #fff;
 		text-align: left;
-		width: 60rem;
-		padding: 6rem;
+		max-width: 29rem;
 		z-index: 1;
+		width: 100%;
+		margin: 1rem;
+	}
+	.hero-content h1 {
+		font-size: 2rem;
 	}
 	.hero-content p {
-		width: 45rem;
 		margin: 2rem 0;
 	}
 	.hero-bg {
@@ -91,5 +97,35 @@
 			rgba(1, 1, 1, 0.48) 91%,
 			rgba(1, 1, 1, 0.48) 100%
 		);
+	}
+	@media (min-width: 640px) {
+		.hero-content {
+			margin: 2rem;
+		}
+	}
+
+	@media (min-width: 768px) {
+		.hero-content {
+			margin: 4rem;
+			max-width: 40rem;
+		}
+		.hero-content h1 {
+			font-size: 2.7rem;
+		}
+		.hero-content p {
+			padding-right: 3rem;
+		}
+	}
+	@media (min-width: 1024px) {
+		.hero-content {
+			max-width: 51rem;
+			margin: 6rem;
+		}
+		.hero-content h1 {
+			font-size: 3.5rem;
+		}
+		.hero-content p {
+			padding-right: 6rem;
+		}
 	}
 </style>

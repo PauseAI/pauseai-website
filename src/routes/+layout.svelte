@@ -60,21 +60,38 @@
 		margin: auto;
 	} */
 	.layout {
-		height: 100%;
 		max-inline-size: var(--page-width);
 		display: grid;
 		grid-template-rows: auto 1fr auto;
 		grid-auto-columns: 100%;
 		/* margin-inline: auto; */
 		/* padding: 1rem; */
+		overflow: hidden;
 	}
 
 	main {
 		/* padding-block: 1rem; */
 		/* margin-bottom: 5rem; */
-		padding: 6rem;
+		padding: 1rem;
 		display: flex;
 		flex-direction: column;
+	}
+
+	@media (min-width: 640px) {
+		main {
+			padding: 6rem 2rem 7.5rem 2rem;
+		}
+	}
+
+	@media (min-width: 768px) {
+		main {
+			padding: 6rem 4rem 7.5rem 4rem;
+		}
+	}
+	@media (min-width: 1024px) {
+		main {
+			padding: 6rem 6rem 7.5rem 6rem;
+		}
 	}
 
 	@media (min-width: --page-width) {

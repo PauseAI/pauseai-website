@@ -16,9 +16,20 @@
 <style>
 	.lead {
 		align-self: center;
-		width: 60rem;
+		max-width: 60rem;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
 	}
-	.lead h2 {
-		margin-left: 4rem;
+
+	@media (min-width: 640px) {
+		.lead h2 {
+			font-size: 1.4rem;
+		}
+	}
+	@media (min-width: 1024px) {
+		.lead h2 {
+			font-size: 2rem;
+		}
 	}
 </style>

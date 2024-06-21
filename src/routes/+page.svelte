@@ -21,12 +21,3 @@
 <Articles />
 
 <Faq />
-
-<style>
-	:global(.hero + section) {
-		margin-top: 100vh;
-	}
-	:global(section + section) {
-		margin-top: 16rem;
-	}
-</style>

@@ -32,10 +32,13 @@
 		flex-direction: column;
 		height: 100%;
 		gap: 1.25rem;
+		background-color: var(--bg-subtle);
 	}
 	p {
 		margin: 0;
+		/* ça pose un problème overflow sur les écrans qui ne sont pas larges
 		width: 40rem;
+		*/
 		flex-grow: 1;
 	}
 	.link-icon {
@@ -52,6 +55,7 @@
 		text-decoration: none;
 		background-color: var(--bg-subtle);
 		border-radius: 0.625rem;
+		overflow: hidden;
 	}
 	.article-link:hover {
 		color: inherit;
