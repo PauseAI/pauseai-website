@@ -48,11 +48,14 @@
 </div>
 
 <style>
+	:root {
+		--padding-side: 1rem;
+	}
 	.tabs {
 		overflow-x: hidden;
 	}
 	ul {
-		margin-bottom: 2rem;
+		margin-bottom: 1rem;
 		grid-column: 1 / span 3;
 		width: 100%;
 		height: fit-content;
@@ -60,23 +63,23 @@
 		background-color: var(--bg-subtle);
 		display: flex;
 		flex-direction: column;
+		width: fit-content;
 	}
 	li {
 		font-weight: 700;
 		display: flex;
 	}
 	button.active::before {
-		content: '⏺ ';
+		content: '⏺';
 		color: var(--brand);
 		position: absolute;
-		left: 0;
+		left: -0.25rem;
 	}
 	button.active {
-		left: var(--bullet-offest);
+		left: var(--padding-side);
 	}
 	button {
-		--bullet-offest: 1.7ch;
-		padding: 2rem calc(1.25rem + var(--bullet-offest)) 2rem 1.25rem;
+		padding: 1rem calc(2 * var(--padding-side)) 1rem var(--padding-side);
 		background: none;
 		border: none;
 		position: relative;
@@ -88,19 +91,31 @@
 		grid-column: 4 / span 6;
 	}
 	.panel-title {
-		padding-bottom: 1rem;
+		display: none;
 	}
 
-	@media (min-width: 600px) {
+	@media (min-width: 768px) {
 		.tabs {
 			display: grid;
-			grid-template-columns: repeat(12, 1fr);
-			height: 40rem;
-			overflow-x: hidden;
+			grid-template-columns: max-content minmax(2rem, 1fr) minmax(auto, 50rem) 3fr;
 		}
 		ul {
-			margin: 0;
-			width: fit-content;
+			grid-column: 1;
+		}
+		.panel {
+			grid-column: 3;
+		}
+		.panel-title {
+			display: block;
+			padding-bottom: 1rem;
+		}
+	}
+	@media (min-width: 1024px) {
+		:root {
+			--padding-side: 1.25rem;
+		}
+		button {
+			padding: 2rem calc(2 * var(--padding-side)) 2rem var(--padding-side);
 		}
 	}
 </style>
