@@ -24,7 +24,7 @@
 </div>
 
 <style>
-	.accordion {
+	.accordion:global(:not(:last-child)) {
 		border-bottom: solid 2px #e6e6e6;
 	}
 
