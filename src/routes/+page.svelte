@@ -21,21 +21,3 @@
 <Articles />
 
 <Faq />
-
-<style>
-	:global(.hero + section) {
-		margin-top: 100vh;
-	}
-	:global(section + section) {
-		padding-top: 2rem;
-	}
-
-	@media (min-width: 600px) {
-		:global(.hero + section) {
-			margin-top: calc(100vh - 6rem);
-		}
-		:global(section + section) {
-			padding-top: 7.5rem;
-		}
-	}
-</style>

@@ -109,6 +109,13 @@ h2 {
 	margin-bottom: 1rem;
 }
 
+.hero + section {
+	margin-top: 100vh;
+}
+section + section {
+	padding-top: 2rem;
+}
+
 @media (min-width: 640px) {
 	h1 {
 		margin-bottom: 2rem;
@@ -126,6 +133,12 @@ h2 {
 		width: 100%;
 		transform: translate(1.5rem, 130%);
 		z-index: -1;
+	}
+	.hero + section {
+		margin-top: calc(100vh - 6rem);
+	}
+	section + section {
+		padding-top: 7.5rem;
 	}
 }
 
