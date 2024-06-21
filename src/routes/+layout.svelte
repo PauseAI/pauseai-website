@@ -77,7 +77,18 @@
 		flex-direction: column;
 	}
 
-	@media (min-width: 600px) {
+	@media (min-width: 640px) {
+		main {
+			padding: 6rem 2rem 7.5rem 2rem;
+		}
+	}
+
+	@media (min-width: 768px) {
+		main {
+			padding: 6rem 4rem 7.5rem 4rem;
+		}
+	}
+	@media (min-width: 1024px) {
 		main {
 			padding: 6rem 6rem 7.5rem 6rem;
 		}
