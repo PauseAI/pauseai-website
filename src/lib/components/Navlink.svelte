@@ -29,16 +29,15 @@
 		color: var(--brand);
 	}
 
-	a:hover {
+	a.active {
 		color: var(--brand);
-		text-decoration: underline;
-	}
-	a.active,
-	a:active {
-		color: var(--brand-light);
 	}
 	a.white {
 		color: white;
+	}
+	a:hover {
+		color: var(--brand);
+		text-decoration: underline;
 	}
 	@media (min-width: 1024px) {
 		a {
