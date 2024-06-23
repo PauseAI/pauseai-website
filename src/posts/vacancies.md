@@ -25,17 +25,13 @@ Interested? [Mail to Joep](mailto:joep@pauseai.info)
 
 Interested? [Mail to Giulia](mailto:giulia@pausai.info)
 
-## Mass Mobilization Organizer
+## Discord Team member
 
-Develop a local plan of mass mobilization, primarily through direct outreach (flyering & postering invites to public meetings) but also to a lesser extent through online/social media outreach as well as virtual meetings- where the objective of the meeting is the establishment of interpersonal relationships between local community members that are organized towards the formation of and growth of a local PauseAI action group that meets regularly and engages in activities towards growth, self-replication and execution of the Pause AI strategic plan.
+- Write the Server Guide
+- Rethink channels and categories to make the server less overwhelming and more productive
+- Moderate
 
-Skills:
-
-- the ability and desire to meet & talk with (potentially lots) of others,
-- a certain physical idefatigability in flyering for extended periods
-- group moderation skills, charisma, verbal communication skills, organizational skills
-
-Interested? [Mail to Guido](mailto:guido@pausai.info)
+Interested? DM Pato in the server
 
 ## Onboarding team member
 
