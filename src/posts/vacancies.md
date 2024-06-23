@@ -31,7 +31,7 @@ Interested? [Mail to Giulia](mailto:giulia@pausai.info)
 - Rethink channels and categories to make the server less overwhelming and more productive
 - Moderate
 
-Interested? DM Pato in the server
+Interested? DM Pato in [Discord](https://discord.gg/y9hdAjD83e)
 
 ## Onboarding team member
 
