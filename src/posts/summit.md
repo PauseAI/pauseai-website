@@ -1,5 +1,5 @@
 ---
-title: Towards the next AI Safety Summit (Seoul 2024)
+title: Towards the next AI Summit: Paris 2025
 description: Why we need the AI safety summit to happen, and what it should achieve.
 ---
 
