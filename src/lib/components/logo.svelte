@@ -55,7 +55,7 @@
 	.logo-animate:active .logo-circle {
 		fill: var(--brand-subtle);
 	}
-	@media (max-width: 850px) {
+	@media (max-width: 900px) {
 		.logo {
 			width: 10rem;
 		}
