@@ -1,10 +1,11 @@
 <script>
 	import Accordion from '$lib/components/Accordion.svelte'
+	import UnderlinedTitle from '../UnderlinedTitle.svelte'
 	const label_id = 'faq-title'
 </script>
 
 <section class="faq" aria-labelledby={label_id}>
-	<h2 id={label_id}>F.A.Q.</h2>
+	<UnderlinedTitle id={label_id}>F.A.Q.</UnderlinedTitle>
 	<Accordion id="accordion1">
 		<svelte:fragment slot="head">Êtes-vous contre la technologie ?</svelte:fragment>
 		<svelte:fragment slot="details">

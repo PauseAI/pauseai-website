@@ -1,11 +1,12 @@
 <script>
 	import ArticleCard from '$lib/components/ArticleCard.svelte'
 	import Button from '$lib/components/Button.svelte'
+	import UnderlinedTitle from '../UnderlinedTitle.svelte'
 	const label_id = 'articles-title'
 </script>
 
 <section aria-labelledby={label_id}>
-	<h2 id={label_id}>Nos articles mis en avant</h2>
+	<UnderlinedTitle id={label_id}>Nos articles mis en avant</UnderlinedTitle>
 	<div class="articles-grid">
 		<ArticleCard
 			title="The difficult psychology of existential risk"

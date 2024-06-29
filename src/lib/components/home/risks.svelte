@@ -1,12 +1,13 @@
 <script lang="ts">
 	import Button from '$lib/components/Button.svelte'
 	import TabList from '$lib/components/TabList.svelte'
+	import UnderlinedTitle from '../UnderlinedTitle.svelte'
 
 	const label_id = 'risks-title'
 </script>
 
 <section class="risks" aria-labelledby={label_id}>
-	<h2 id={label_id}>Les risques</h2>
+	<UnderlinedTitle id={label_id}>Les risques</UnderlinedTitle>
 	<TabList
 		tabs={[
 			'Risque existentiel',

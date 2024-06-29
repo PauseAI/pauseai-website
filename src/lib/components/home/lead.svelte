@@ -1,9 +1,13 @@
 <script>
+	import UnderlinedTitle from '../UnderlinedTitle.svelte'
+
 	const label_id = 'lead-title'
 </script>
 
 <section class="lead" aria-labelledby={label_id}>
-	<h2 id={label_id}>L'intelligence artificielle est un danger pour l'humanité</h2>
+	<UnderlinedTitle id={label_id}
+		>L'intelligence artificielle est un danger pour l'humanité</UnderlinedTitle
+	>
 	<p>
 		L'IA est une technologie puissante qui transforme de plus en plus notre monde. Elle est porteuse
 		d'un potentiel extraordinaire, mais aussi de risques graves, notamment de catastrophes
@@ -22,11 +26,11 @@
 		align-items: center;
 	}
 
-	@media (min-width: 640px) {
+	/* @media (min-width: 640px) {
 		.lead h2 {
 			font-size: 1.4rem;
 		}
-	}
+	} */
 	@media (min-width: 1024px) {
 		.lead h2 {
 			font-size: 2rem;
