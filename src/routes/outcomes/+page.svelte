@@ -17,9 +17,9 @@
 	<h1 bind:this={top} on:click={() => (intro = true)}>AI outcomes</h1>
 	{#if !intro}
 		<div class="headerbuttons">
-			<Button subtle on:click={() => (intro = true)}>Restart</Button>
+			<Button alt on:click={() => (intro = true)}>Restart</Button>
 			<!--
-			<Button subtle on:click={() => (showProbabilities = !showProbabilities)}
+			<Button alt on:click={() => (showProbabilities = !showProbabilities)}
 				>{showProbabilities ? 'Hide' : 'Show'} probabilities</Button> 
 			-->
 		</div>

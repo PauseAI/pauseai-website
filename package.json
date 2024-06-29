@@ -15,6 +15,7 @@
 	},
 	"devDependencies": {
 		"@sveltejs/adapter-netlify": "^4.2.0",
+		"@sveltejs/enhanced-img": "^0.2.0",
 		"@sveltejs/kit": "^2.5.7",
 		"@sveltejs/vite-plugin-svelte": "^3.1.0",
 		"@types/escape-html": "^1.0.4",
@@ -36,10 +37,9 @@
 		"vite": "^5.2.11"
 	},
 	"dependencies": {
+		"@fontsource/ibm-plex-sans": "^5.0.20",
 		"@fontsource/jetbrains-mono": "^5.0.20",
 		"@fontsource/manrope": "^5.0.20",
-		"@fontsource/roboto-slab": "^5.0.20",
-		"@fontsource/saira-condensed": "^5.0.13",
 		"@pagefind/default-ui": "^1.1.0",
 		"@prgm/sveltekit-progress-bar": "^2.0.0",
 		"@types/mapbox-gl": "^3.1.0",

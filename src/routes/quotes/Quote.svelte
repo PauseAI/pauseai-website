@@ -52,14 +52,14 @@
 			</div>
 		</div>
 		<div class="quote-logo">
-			<Logo width={100} fill={color ? color : 'black'} />
+			<Logo width={100} fill_pause={color ? color : 'black'} />
 		</div>
 	</div>
 	<div class="quote-below">
-		<Button subtle on:click={downloadQuote}>Download</Button>
+		<Button alt on:click={downloadQuote}>Download</Button>
 		{#if notice}
 			<div class="quote-notice-button">
-				<Button subtle>
+				<Button alt>
 					<Link href={'#credits-' + new GithubSlugger().slug(author)}>Credits</Link>
 				</Button>
 			</div>

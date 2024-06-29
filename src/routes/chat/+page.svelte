@@ -166,7 +166,7 @@
 	}
 
 	button:hover {
-		background-color: var(--brand-subtle);
+		background-color: var(--brand-light);
 	}
 	button:active {
 		background-color: var(--brand);

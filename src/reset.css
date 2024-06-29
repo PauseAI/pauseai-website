@@ -5,7 +5,8 @@
 	box-sizing: border-box;
 }
 
-/* Remove default margin */
+/* Remove default margin and padding */
+html,
 body,
 h1,
 h2,
@@ -15,8 +16,12 @@ p,
 figure,
 blockquote,
 dl,
-dd {
+dd,
+button,
+ul,
+ol {
 	margin: 0;
+	padding: 0;
 }
 
 /* Remove list styles on ul, ol elements with a list role, which suggests default styling will be removed */
@@ -48,12 +53,15 @@ picture {
 	display: block;
 }
 
-/* Inherit fonts for inputs and buttons */
+/* Inherit fonts for inputs and buttons and remove default border and background */
 input,
 button,
 textarea,
 select {
 	font: inherit;
+	color: inherit;
+	background-color: unset;
+	border: unset;
 }
 
 /* Remove all animations, transitions and smooth scroll for people that prefer not to see them */
