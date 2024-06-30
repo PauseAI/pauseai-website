@@ -64,7 +64,7 @@
 	nav {
 		display: flex;
 		position: relative;
-		padding: 2rem 0 3rem;
+		padding: 2rem 0 3.5rem;
 		background-color: var(--bg-subtle);
 		background: linear-gradient(to bottom, var(--bg-subtle) 80%, transparent 100%);
 	}
