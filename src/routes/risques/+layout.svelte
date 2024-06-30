@@ -85,6 +85,7 @@
 		background-color: var(--bg-subtle);
 		background: linear-gradient(to bottom, var(--bg-subtle) 80%, transparent 100%);
 		flex-direction: column;
+		justify-content: space-between;
 	}
 
 	.top-nav.scrolling-up {
@@ -96,12 +97,6 @@
 		align-items: center;
 		text-decoration: none;
 	}
-
-	.prev,
-	.next {
-		flex: 1;
-	}
-
 	.prev {
 		justify-content: flex-start;
 	}
