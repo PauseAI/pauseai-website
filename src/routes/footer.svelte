@@ -68,6 +68,7 @@
 		display: flex;
 		padding: 6rem 6rem;
 		gap: 5rem;
+		overflow: hidden;
 	}
 
 	.footer-links {
