@@ -9,14 +9,15 @@
 <section class="hero" aria-labelledby={label_id}>
 	<section class="hero-content">
 		<h1 id={label_id}>
-			Ne laissons pas les entreprises IA jouer avec <Mark>notre futur</Mark>
+			L'IA sans retenue, l'humanité <Mark>perdue{'\u00A0'}!</Mark>
 		</h1>
 		<p>
-			Nous sommes une communauté de bénévoles à but non lucratif qui se concentre sur l'atténuation
-			des risques liés à l'IA et qui exhorte les gouvernements à faire une pause dans le
-			développement de l'IA surhumaine. Par le biais de l'éducation publique, de la défense des
-			droits et de manifestations pacifiques, nous visons à sensibiliser le public. Nous ne sommes
-			pas affiliés à des entreprises.
+			La majorité des experts en Intelligence Artificielle estiment que l’IA pourrait conduire à une
+			catastrophe mondiale dans les prochaines années. Sommes-nous prêts à accepter le développement
+			de modèles d’IA plus dangereux que la bombe atomique sans mesure de protection{'\u00A0'}? Nous
+			faisons face à la menace la plus urgente de notre histoire. Chaque jour compte.
+			<br />
+			Agissez dès maintenant en rejoignant Pause IA.
 		</p>
 		<Button href="/action">Agir</Button>
 	</section>

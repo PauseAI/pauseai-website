@@ -6,14 +6,21 @@
 
 <section class="lead" aria-labelledby={label_id}>
 	<UnderlinedTitle id={label_id}
-		>L'intelligence artificielle est un danger pour l'humanité</UnderlinedTitle
-	>
+		>L’intelligence artificielle : un défi sans précédent pour l’humanité.
+	</UnderlinedTitle>
 	<p>
-		L'IA est une technologie puissante qui transforme de plus en plus notre monde. Elle est porteuse
-		d'un potentiel extraordinaire, mais aussi de risques graves, notamment de catastrophes
-		existentielles. Nous voulons marquer une pause dans le développement de systèmes d'IA plus
-		puissants que GPT-4, jusqu'à ce que nous sachions comment les construire en toute sécurité et
-		les garder sous contrôle démocratique.
+		L'IA progresse à une vitesse fulgurante, surpassant déjà les capacités humaines dans de nombreux
+		domaines. Bien que l'IA apporte actuellement certaines avancées positives, son développement
+		incontrôlé présente des dangers majeurs{'\u00A0'}: bioterrorisme facilité, cyberattaques
+		dévastatrices, manipulation de masse, désinformation à grande échelle, et perte de contrôle de
+		systèmes autonomes ((pouvant mener à des risques existentiels)). Pause IA, porte-parole des
+		chercheurs en sûreté de l'IA en France, promeut un développement responsable de cette
+		technologie en pleine expansion. Nous reconnaissons ses bénéfices actuels, mais appelons à un
+		moratoire sur l'entraînement de modèles plus performants, afin d'établir des garde-fous robustes
+		nous assurant un avenir sûr. Les risques sont réels, mais l'espoir existe. En agissant ensemble,
+		nous pouvons façonner un futur où l'IA demeure un outil bénéfique pour l'humanité.
+		Impliquez-vous dans nos actions et soutenez nos démarches en rejoignant Pause IA. ((Prenez
+		conscience de ces enjeux et rejoignez notre mouvement.))
 	</p>
 </section>
 
