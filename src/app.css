@@ -124,9 +124,6 @@ section + section {
 		margin-bottom: 4rem;
 	}
 
-	.hero + section {
-		margin-top: calc(100vh - 6rem);
-	}
 	section + section {
 		padding-top: 7.5rem;
 	}
