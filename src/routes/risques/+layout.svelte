@@ -16,9 +16,9 @@
 	{/if}
 </nav>
 <div class="article-layout">
-	<div class="article-container">
+	<article>
 		<slot />
-	</div>
+	</article>
 </div>
 
 <style>
@@ -59,7 +59,8 @@
 		grid-template-columns: minmax(0, 1fr) minmax(auto, 50rem) minmax(0, 1fr);
 		gap: 1rem;
 	}
-	.article-container {
+
+	article {
 		grid-column: 2;
 		max-width: 50rem;
 		margin: 0 auto;

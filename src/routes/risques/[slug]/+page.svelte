@@ -10,15 +10,13 @@
 
 <PostMeta {title} {description} {date} {image} />
 
-<article>
-	<hgroup>
-		<UnderlinedTitle>{title}</UnderlinedTitle>
-		{#if date}
-			<!-- <p>Published at {formatDate(date)}</p> -->
-		{/if}
-	</hgroup>
+<hgroup>
+	<UnderlinedTitle>{title}</UnderlinedTitle>
+	{#if date}
+		<!-- <p>Published at {formatDate(date)}</p> -->
+	{/if}
+</hgroup>
 
-	<div class="prose">
-		<svelte:component this={content} />
-	</div>
-</article>
+<div class="prose">
+	<svelte:component this={content} />
+</div>
