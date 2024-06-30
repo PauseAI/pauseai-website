@@ -1,6 +1,5 @@
 <script lang="ts">
 	import { onMount } from 'svelte'
-	import { slide } from 'svelte/transition'
 	import MoveLeftIcon from '$lib/components/icons/move-left.svelte'
 	import MoveRightIcon from '$lib/components/icons/move-right.svelte'
 	export let data
@@ -10,20 +9,19 @@
 
 	let y = 0
 	let lastY = 0
-	let isVisible = true
+	let navTransform = 0
 	let navHeight: number
-	let ticking = false
 
 	function handleScroll() {
-		if (!ticking) {
-			window.requestAnimationFrame(() => {
-				const scrollThreshold = navHeight || 130
-				isVisible = y < lastY || y < scrollThreshold
-				lastY = y
-				ticking = false
-			})
-			ticking = true
+		const scrollDiff = lastY - y
+		if (scrollDiff > 0) {
+			// Scrolling up
+			navTransform = Math.min(navTransform + scrollDiff, 0)
+		} else if (y > navHeight) {
+			// Scrolling down (only after nav is out of view)
+			navTransform = Math.max(navTransform + scrollDiff, -navHeight)
 		}
+		lastY = y
 	}
 
 	onMount(() => {
@@ -37,16 +35,14 @@
 <svelte:window bind:scrollY={y} on:scroll={handleScroll} />
 
 <div class="nav-container">
-	{#if isVisible}
-		<nav transition:slide={{ duration: 500 }}>
-			{#if prev}
-				<a href={prev.slug} class="prev"><MoveLeftIcon />{prev.title}</a>
-			{/if}
-			{#if next}
-				<a href={next.slug} class="next">{next.title}<MoveRightIcon /></a>
-			{/if}
-		</nav>
-	{/if}
+	<nav style="transform: translateY({navTransform}px)">
+		{#if prev}
+			<a href={prev.slug} class="prev"><MoveLeftIcon />{prev.title}</a>
+		{/if}
+		{#if next}
+			<a href={next.slug} class="next">{next.title}<MoveRightIcon /></a>
+		{/if}
+	</nav>
 </div>
 
 <div class="article-layout">
@@ -60,18 +56,14 @@
 		position: sticky;
 		top: 0;
 		z-index: 100;
-		height: 0;
 	}
 
 	nav {
-		position: absolute;
-		top: 0;
-		left: 0;
-		right: 0;
-		padding: 3rem 0;
-		margin-top: -1rem;
+		position: relative;
+		padding: 2rem 0 3rem;
 		background-color: var(--bg-subtle);
 		background: linear-gradient(to bottom, var(--bg-subtle) 80%, transparent 100%);
+		/* transition: transform 0.05s linear; */
 	}
 
 	a {
@@ -104,7 +96,6 @@
 	.article-layout {
 		display: grid;
 		grid-template-columns: minmax(0, 1fr) minmax(auto, 50rem) minmax(0, 1fr);
-		padding-top: 7rem;
 	}
 
 	article {
