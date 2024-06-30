@@ -69,7 +69,6 @@
 		grid-auto-columns: 100%;
 		/* margin-inline: auto; */
 		/* padding: 1rem; */
-		overflow: hidden;
 		background-color: var(--bg-subtle);
 	}
 

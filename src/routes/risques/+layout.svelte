@@ -24,7 +24,13 @@
 <style>
 	nav {
 		display: flex;
-		margin-bottom: 4rem;
+		position: sticky;
+		top: 0;
+		z-index: 100;
+		padding: 3rem 0;
+		margin-top: -1rem;
+		background-color: var(--bg-subtle);
+		background: linear-gradient(to bottom, var(--bg-subtle) 80%, transparent 100%);
 	}
 
 	a {
