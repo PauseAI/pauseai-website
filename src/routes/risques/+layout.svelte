@@ -24,7 +24,7 @@
 <style>
 	nav {
 		display: flex;
-		margin-bottom: 3rem;
+		margin-bottom: 4rem;
 	}
 
 	a {
@@ -57,7 +57,6 @@
 	.article-layout {
 		display: grid;
 		grid-template-columns: minmax(0, 1fr) minmax(auto, 50rem) minmax(0, 1fr);
-		gap: 1rem;
 	}
 
 	article {
