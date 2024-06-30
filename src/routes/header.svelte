@@ -43,7 +43,7 @@
 				<NavLink href="/chat">{botName}</NavLink>
 			{/if}
 			<!-- <NavLink href="/about">About</NavLink> -->
-			<NavLink href="/join"><Button alt={onHomepage}>Nous rejoindre</Button></NavLink>
+			<Button href="/join" alt={onHomepage}>Nous rejoindre</Button>
 			<!-- <NavLink href="/search" ariaLabel="Search"><SearchIcon size="0.8em" /></NavLink> -->
 		</div>
 		<button class="hamburger" on:click={() => (open = !open)}>
@@ -188,6 +188,10 @@
 		flex-wrap: wrap;
 		justify-content: center;
 		align-items: center;
+	}
+
+	.nav-links :global(a:last-child) {
+		margin-left: 0.5rem;
 	}
 
 	.hamburger {
