@@ -1,5 +1,6 @@
 <script lang="ts">
 	import PostMeta from '$lib/components/PostMeta.svelte'
+	import UnderlinedTitle from '$lib/components/UnderlinedTitle.svelte'
 
 	export let data
 
@@ -11,7 +12,7 @@
 
 <article>
 	<hgroup>
-		<h1>{title}</h1>
+		<UnderlinedTitle>{title}</UnderlinedTitle>
 		{#if date}
 			<!-- <p>Published at {formatDate(date)}</p> -->
 		{/if}
