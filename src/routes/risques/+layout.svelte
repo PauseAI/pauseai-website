@@ -12,15 +12,14 @@
 	let navTransform = 0
 	let navHeight: number
 	let scrollingUp = false
+	let sideNavInitialTop: number
 
 	function handleScroll() {
 		const scrollDiff = lastY - y
 		if (scrollDiff > 0) {
-			// Scrolling up
 			scrollingUp = true
 			navTransform = Math.min(navTransform + scrollDiff, 0)
 		} else if (y > navHeight) {
-			// Scrolling down (only after nav is out of view)
 			scrollingUp = false
 			navTransform = Math.max(navTransform + scrollDiff, -navHeight)
 		}
@@ -29,8 +28,13 @@
 
 	onMount(() => {
 		const nav = document.querySelector('nav')
+		const sideNav = document.querySelector('.side-nav')
 		if (nav) {
 			navHeight = nav.offsetHeight
+		}
+		if (sideNav) {
+			const rect = sideNav.getBoundingClientRect()
+			sideNavInitialTop = rect.top + window.scrollY
 		}
 	})
 </script>
@@ -48,7 +52,16 @@
 	</nav>
 </div>
 
-<div class="article-layout">
+<div class="layout">
+	<aside class="side-nav" style="top: {sideNavInitialTop}px;">
+		<ul>
+			{#each data.posts as post}
+				<li class:current={post.slug === data.url}>
+					<a href={post.slug}>{post.title}</a>
+				</li>
+			{/each}
+		</ul>
+	</aside>
 	<article>
 		<slot />
 	</article>
@@ -100,9 +113,29 @@
 		margin-left: 1rem;
 	}
 
-	.article-layout {
+	.layout {
 		display: grid;
-		grid-template-columns: minmax(0, 1fr) minmax(auto, 50rem) minmax(0, 1fr);
+		grid-template-columns: minmax(12.5rem, 1fr) minmax(auto, 50rem) minmax(0, 1fr);
+		gap: 2rem;
+	}
+
+	.side-nav {
+		grid-column: 1;
+		position: sticky;
+		/* top: 8rem;  */
+		align-self: start;
+	}
+
+	.side-nav ul {
+		list-style-type: none;
+	}
+
+	.side-nav li {
+		margin-bottom: 1rem;
+	}
+
+	.side-nav li.current a {
+		font-weight: bold;
 	}
 
 	article {
