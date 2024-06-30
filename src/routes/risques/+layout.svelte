@@ -80,6 +80,7 @@
 		padding: 2rem 0 3.5rem;
 		background-color: var(--bg-subtle);
 		background: linear-gradient(to bottom, var(--bg-subtle) 80%, transparent 100%);
+		flex-direction: column;
 	}
 
 	nav.scrolling-up {
@@ -115,32 +116,47 @@
 
 	.layout {
 		display: grid;
-		grid-template-columns: minmax(12.5rem, 1fr) minmax(auto, 50rem) minmax(0, 1fr);
-		gap: 2rem;
-	}
-
-	.side-nav {
-		grid-column: 1;
-		position: sticky;
-		/* top: 8rem;  */
-		align-self: start;
-	}
-
-	.side-nav ul {
-		list-style-type: none;
-	}
-
-	.side-nav li {
-		margin-bottom: 1rem;
-	}
-
-	.side-nav li.current a {
-		font-weight: bold;
+		grid-template-columns: minmax(0, 1fr) minmax(auto, 50rem) minmax(0, 1fr);
 	}
 
 	article {
 		grid-column: 2;
 		max-width: 50rem;
 		margin: 0 auto;
+	}
+
+	.side-nav {
+		display: none;
+	}
+	@media (min-width: 640px) {
+		nav {
+			flex-direction: row;
+		}
+	}
+
+	@media (min-width: 1024px) {
+		.layout {
+			grid-template-columns: minmax(15rem, 1fr) minmax(auto, 50rem) minmax(0, 1fr);
+			gap: 2rem;
+		}
+		.side-nav {
+			display: block;
+			grid-column: 1;
+			position: sticky;
+			/* top: 8rem;  */
+			align-self: start;
+		}
+
+		.side-nav ul {
+			list-style-type: none;
+		}
+
+		.side-nav li {
+			margin-bottom: 1rem;
+		}
+
+		.side-nav li.current a {
+			font-weight: bold;
+		}
 	}
 </style>

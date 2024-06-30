@@ -46,10 +46,10 @@
 		}
 	}}
 />
-
+<!-- 
 {#if !['/', '/outcomes', '/pdoom', '/quotes'].includes(data.url)}
 	<Toc />
-{/if}
+{/if} -->
 
 <ProgressBar color="var(--brand)" />
 
