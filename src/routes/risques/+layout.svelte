@@ -42,7 +42,11 @@
 <svelte:window bind:scrollY={y} on:scroll={handleScroll} />
 
 <div class="nav-container">
-	<nav style="transform: translateY({navTransform}px)" class:scrolling-up={scrollingUp}>
+	<nav
+		class="top-nav"
+		style="transform: translateY({navTransform}px)"
+		class:scrolling-up={scrollingUp}
+	>
 		{#if prev}
 			<a href={prev.slug} class="prev"><MoveLeftIcon />{prev.title}</a>
 		{/if}
@@ -53,7 +57,7 @@
 </div>
 
 <div class="layout">
-	<aside class="side-nav" style="top: {sideNavInitialTop}px;">
+	<nav class="side-nav" style="top: {sideNavInitialTop}px;">
 		<ul>
 			{#each data.posts as post}
 				<li class:current={post.slug === data.url}>
@@ -61,7 +65,7 @@
 				</li>
 			{/each}
 		</ul>
-	</aside>
+	</nav>
 	<article>
 		<slot />
 	</article>
@@ -74,7 +78,7 @@
 		z-index: 100;
 	}
 
-	nav {
+	.top-nav {
 		display: flex;
 		position: relative;
 		padding: 2rem 0 3.5rem;
@@ -83,7 +87,7 @@
 		flex-direction: column;
 	}
 
-	nav.scrolling-up {
+	.top-nav.scrolling-up {
 		transition: transform 0.3s ease-out;
 	}
 
@@ -129,7 +133,7 @@
 		display: none;
 	}
 	@media (min-width: 640px) {
-		nav {
+		.top-nav {
 			flex-direction: row;
 		}
 	}
