@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { page } from '$app/stores'
 	import { fade } from 'svelte/transition'
 	import { Toaster } from 'svelte-french-toast'
 	import { ProgressBar } from '@prgm/sveltekit-progress-bar'
@@ -16,13 +17,15 @@
 	import '../app.css'
 
 	export let data
+
+	$: bgWhite = $page.url.pathname == '/'
 </script>
 
 <h2 style="width: 0; height: 0; margin: 0; padding: 0; visibility: hidden;" data-pagefind-ignore>
 	(Top)
 </h2>
 
-<div class="layout">
+<div class="layout" class:bgWhite>
 	<Header />
 
 	{#key data.url}
@@ -67,6 +70,11 @@
 		/* margin-inline: auto; */
 		/* padding: 1rem; */
 		overflow: hidden;
+		background-color: var(--bg-subtle);
+	}
+
+	.layout.bgWhite {
+		background-color: var(--bg);
 	}
 
 	main {

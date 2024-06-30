@@ -65,7 +65,6 @@ html {
 
 body {
 	color: var(--text);
-	background-color: var(--bg);
 	accent-color: var(--brand);
 	font-family: var(--font-body);
 	font-size: 1rem;
