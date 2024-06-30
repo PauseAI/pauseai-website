@@ -19,15 +19,14 @@ const hardCodedPages: Post[] = [
 	teamsMeta
 ]
 
-function getPosts() {
+function getPosts(subpath = '') {
 	let posts: Post[] = []
 
 	const paths = import.meta.glob('/src/posts/**/*.md', { eager: true })
 
 	for (const path in paths) {
 		const file = paths[path]
-		const slug = path.replace(/^\/src\/posts\//, '').replace(/\.md$/, '')
-
+		const slug = path.match(`^/src/posts(${subpath}/.*).md$`)?.[1]
 		if (file && typeof file === 'object' && 'metadata' in file && slug) {
 			const metadata = file.metadata as Omit<Post, 'slug'>
 			const post = { ...metadata, slug } satisfies Post
@@ -35,7 +34,9 @@ function getPosts() {
 		}
 	}
 
-	posts.push(...hardCodedPages)
+	if (!subpath) {
+		posts.push(...hardCodedPages)
+	}
 
 	posts = posts.sort(
 		(first, second) => new Date(second.date).getTime() - new Date(first.date).getTime()
@@ -44,7 +45,8 @@ function getPosts() {
 	return posts
 }
 
-export function GET() {
-	const posts = getPosts()
+export function GET({ url }) {
+	const subpath = url.searchParams.get('subpath') ?? ''
+	const posts = getPosts(subpath)
 	return json(posts)
 }
