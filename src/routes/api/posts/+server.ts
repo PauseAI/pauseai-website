@@ -19,7 +19,7 @@ const hardCodedPages: Post[] = [
 	teamsMeta
 ]
 
-async function getPosts() {
+function getPosts() {
 	let posts: Post[] = []
 
 	const paths = import.meta.glob('/src/posts/**/*.md', { eager: true })
@@ -44,7 +44,7 @@ async function getPosts() {
 	return posts
 }
 
-export async function GET() {
-	const posts = await getPosts()
+export function GET() {
+	const posts = getPosts()
 	return json(posts)
 }
