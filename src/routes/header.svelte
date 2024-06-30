@@ -247,6 +247,12 @@
 			} */
 	}
 	@media (min-width: 768px) {
+		.nav-links {
+			gap: 0.5rem;
+		}
+		.nav-links :global(a:last-child) {
+			margin-left: 0;
+		}
 		nav {
 			padding: 2rem 4rem;
 		}
@@ -256,6 +262,9 @@
 	}
 
 	@media (min-width: 1024px) {
+		.nav-links {
+			gap: 1rem;
+		}
 		nav {
 			padding: 2rem 6rem;
 		}
