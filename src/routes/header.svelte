@@ -129,7 +129,7 @@
 		background: #ff9416;
 		top: 0;
 		left: 100%;
-		padding: 1.95rem 1rem;
+		padding: 2rem 1rem;
 		transition: left 0.3s ease-in-out;
 	}
 
@@ -168,7 +168,7 @@
 		/* margin-left: -1rem; */
 		flex-wrap: wrap;
 		z-index: 1;
-		padding: 1.95rem 1rem;
+		padding: 2rem 1rem;
 	}
 
 	/* .logo {
@@ -216,7 +216,7 @@
 		nav {
 			flex-direction: row;
 			align-items: center;
-			padding: 1.95rem 2rem;
+			padding: 2rem 2rem;
 			/* margin-left: 1rem; */
 		}
 
@@ -244,7 +244,7 @@
 	}
 	@media (min-width: 768px) {
 		nav {
-			padding: 1.95rem 4rem;
+			padding: 2rem 4rem;
 		}
 		.small-logo :global(svg) {
 			width: auto;
@@ -253,7 +253,7 @@
 
 	@media (min-width: 1024px) {
 		nav {
-			padding: 1.95rem 6rem;
+			padding: 2rem 6rem;
 		}
 
 		.big-logo {
