@@ -1,5 +1,6 @@
 <script lang="ts">
-	import { MoveLeftIcon, MoveRightIcon } from 'lucide-svelte'
+	import MoveLeftIcon from '$lib/components/icons/move-left.svelte'
+	import MoveRightIcon from '$lib/components/icons/move-right.svelte'
 	export let data
 	const index = data.posts.findIndex((post) => post.slug === data.url)
 	const prev = data.posts[index - 1]
@@ -11,7 +12,7 @@
 		<a href={prev.slug} class="prev"><MoveLeftIcon />{prev.title}</a>
 	{/if}
 	{#if next}
-		<a href={next.slug} class="next"><MoveRightIcon />{next.title}</a>
+		<a href={next.slug} class="next">{next.title}<MoveRightIcon /></a>
 	{/if}
 </nav>
 
