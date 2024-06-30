@@ -62,6 +62,7 @@
 	}
 
 	nav {
+		display: flex;
 		position: relative;
 		padding: 2rem 0 3rem;
 		background-color: var(--bg-subtle);
