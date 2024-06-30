@@ -19,4 +19,35 @@
 <slot></slot>
 
 <style>
+	nav {
+		display: flex;
+		margin-bottom: 3rem;
+	}
+
+	a {
+		display: flex;
+		align-items: center;
+		text-decoration: none;
+	}
+
+	.prev,
+	.next {
+		flex: 1;
+	}
+
+	.prev {
+		justify-content: flex-start;
+	}
+
+	.next {
+		justify-content: flex-end;
+	}
+
+	.prev :global(svg) {
+		margin-right: 1rem;
+	}
+
+	.next :global(svg) {
+		margin-left: 1rem;
+	}
 </style>
