@@ -11,14 +11,17 @@
 	let lastY = 0
 	let navTransform = 0
 	let navHeight: number
+	let scrollingUp = false
 
 	function handleScroll() {
 		const scrollDiff = lastY - y
 		if (scrollDiff > 0) {
 			// Scrolling up
+			scrollingUp = true
 			navTransform = Math.min(navTransform + scrollDiff, 0)
 		} else if (y > navHeight) {
 			// Scrolling down (only after nav is out of view)
+			scrollingUp = false
 			navTransform = Math.max(navTransform + scrollDiff, -navHeight)
 		}
 		lastY = y
@@ -35,7 +38,7 @@
 <svelte:window bind:scrollY={y} on:scroll={handleScroll} />
 
 <div class="nav-container">
-	<nav style="transform: translateY({navTransform}px)">
+	<nav style="transform: translateY({navTransform}px)" class:scrolling-up={scrollingUp}>
 		{#if prev}
 			<a href={prev.slug} class="prev"><MoveLeftIcon />{prev.title}</a>
 		{/if}
@@ -63,7 +66,10 @@
 		padding: 2rem 0 3rem;
 		background-color: var(--bg-subtle);
 		background: linear-gradient(to bottom, var(--bg-subtle) 80%, transparent 100%);
-		/* transition: transform 0.05s linear; */
+	}
+
+	nav.scrolling-up {
+		transition: transform 0.3s ease-out;
 	}
 
 	a {
