@@ -5,15 +5,11 @@
 
 	const { meta, slug, content } = data
 	const { title = slug, date, categories, description, image } = meta
-	const parent = slug.split('/').slice(0, -1).join('/')
 </script>
 
 <PostMeta {title} {description} {date} {image} />
 
 <article>
-	{#if parent}
-		<a href={`/${parent}`}>View all {parent}</a>
-	{/if}
 	<hgroup>
 		<h1>{title}</h1>
 		{#if date}
