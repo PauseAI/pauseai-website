@@ -40,3 +40,12 @@ Interested? DM Pato in [Discord](https://discord.gg/y9hdAjD83e)
 - Have one on one calls to find the right team
 
 Interested? [Mail to Maxime](mailto:maxime@pausai.info)
+
+## Recruitment team member
+
+- Help PauseAI reach new communities, attract members and spread awareness
+- This is something you can do independently in your spare time, with little need for coordination with others
+- Come up with campaigns of people you would like to reach out to, and contact them (whether by email, phone, DM, or in-person)
+- Please consider joining if you have a non traditional background or location - this could help us to reach new groups!
+
+Interested? DM Michelle in [Discord](https://discord.gg/y9hdAjD83e)
