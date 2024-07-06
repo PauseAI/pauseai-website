@@ -127,7 +127,7 @@
 		},
 		{
 			name: 'Paul Christiano',
-			title: 'Head of AI safety, US AI Safety Institute and formerly OpenAI, founded ARC',
+			title: 'Head of AI safety, US AI Safety Institute, formerly OpenAI, founded ARC',
 			probability: '46%',
 			number: 0.46,
 			source: 'https://www.lesswrong.com/posts/xWMqsvHapP3nwdSW8/my-views-on-doom'
