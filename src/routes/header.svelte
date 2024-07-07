@@ -43,7 +43,7 @@
 				<NavLink href="/chat">{botName}</NavLink>
 			{/if}
 			<!-- <NavLink href="/about">About</NavLink> -->
-			<Button href="/join" alt={onHomepage}>Nous rejoindre</Button>
+			<Button href="/nous-rejoindre" alt={onHomepage}>Nous rejoindre</Button>
 			<!-- <NavLink href="/search" ariaLabel="Search"><SearchIcon size="0.8em" /></NavLink> -->
 		</div>
 		<button class="hamburger" on:click={() => (open = !open)}>
