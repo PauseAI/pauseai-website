@@ -38,7 +38,7 @@
 			<!-- <NavLink href="/faq">FAQ</NavLink> -->
 			<NavLink href="/action">Agir</NavLink>
 			<NavLink href="/posts">Blog</NavLink>
-			<NavLink href="/donate">Dons</NavLink>
+			<NavLink href="/dons">Dons</NavLink>
 			{#if enableBot}
 				<NavLink href="/chat">{botName}</NavLink>
 			{/if}
