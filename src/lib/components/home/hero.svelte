@@ -9,7 +9,7 @@
 <section class="hero" aria-labelledby={label_id}>
 	<section class="hero-content">
 		<h1 id={label_id}>
-			L'IA sans retenue, l'humanité <Mark>perdue{'\u00A0'}!</Mark>
+			Ne laissons pas l'IA devenir une menace incontrôlable, <Mark>agissons immédiatement</Mark>
 		</h1>
 		<p>
 			La majorité des experts en Intelligence Artificielle estiment que l’IA pourrait conduire à une
