@@ -87,6 +87,14 @@
 				'https://web.archive.org/web/20221013014859/https://www.alignmentforum.org/posts/QvwSr5LsxyDeaPK5s/existential-risk-from-ai-survey-results'
 		},
 		{
+			name: 'Geoff Hinton',
+			title: 'one of three godfathers of AI',
+			probability: '10-50%',
+			number: 0.3,
+			note: 'Recently said "Kinda 50-50" on good outcomes for humanity. Earlier he mentioned 10%.',
+			source: 'https://x.com/liron/status/1803435675527815302'
+		},
+		{
 			name: 'Scott Alexander',
 			probability: '33%',
 			title: 'Popular Internet blogger at Astral Codex Ten',
@@ -139,14 +147,6 @@
 			probability: '10-90%',
 			number: 0.5,
 			source: 'https://www.youtube.com/watch?v=ZP_N4q5U3eE&t=1h16m'
-		},
-		{
-			name: 'Geoffrey Hinton',
-			title: 'one of three godfathers of AI',
-			probability: '>50%',
-			number: 0.5,
-			note: 'Personal assessment, arrives at 10-20% after adjusting for assessments of others',
-			source: 'https://x.com/liron/status/1809763895848103949'
 		},
 		{
 			name: 'Zvi Mowshowitz',
