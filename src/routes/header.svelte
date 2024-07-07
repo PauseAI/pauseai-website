@@ -33,7 +33,7 @@
 	<div class="nav-right">
 		<div class="nav-links">
 			<NavLink href="/risques">Risques</NavLink>
-			<NavLink href="/proposal">Propositions</NavLink>
+			<NavLink href="/proposition">Proposition</NavLink>
 			<!-- <NavLink href="/protests">Protests</NavLink> -->
 			<!-- <NavLink href="/faq">FAQ</NavLink> -->
 			<NavLink href="/agir">Agir</NavLink>
