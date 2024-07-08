@@ -1,11 +1,13 @@
 <script>
 	import SupporterCard from '$lib/components/SupporterCard.svelte'
 	import Button from '$lib/components/Button.svelte'
+	import UnderlinedTitle from '../UnderlinedTitle.svelte'
+
 	const label_id = 'articles-title'
 </script>
 
 <section aria-labelledby={label_id}>
-	<h2 id={label_id}>Nos soutiens</h2>
+	<UnderlinedTitle id={label_id}>Nos soutiens</UnderlinedTitle>
 	<div class="logos">
 		<div class="logo_items">
 			<SupporterCard
