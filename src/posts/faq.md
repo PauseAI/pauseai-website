@@ -1,182 +1,146 @@
 ---
-title: FAQ
-description: Frequently asked questions about PauseAI and the risks of superintelligent AI.
+title: F.A.Q.
+description: Questions fréquemment posées sur Pause IA et les risques de l'IA superintelligente.
 ---
 
-<style>
-    h2 {
-        font-size: 1.2rem;
-    }
-</style>
+<!-- NE PAS TOUCHER -->
+<script>
+  import Accordion from '$lib/components/Accordion.svelte'
+</script>
+<!-- NE PAS TOUCHER -->
 
-## Contents
+<!-- TO ADJUST LATER:
 
-## Who are you?
+## Sommaire
 
-We are a community of [volunteers](/people) and [local communities](/communities) coordinated by a [non-profit](/legal) that aims to mitigate the [risks of AI](/risks) (including the [risk of human extinction](/xrisk)).
-We aim to convince our governments to step in and [pause the development of superhuman AI](/proposal).
-We do this by informing the public, talking to decision-makers, and organizing protests.
+* Qui êtes-vous ?
+* N’êtes-vous pas tout simplement (des) technophobes?
+* Voulez-vous interdire toute forme d'IA ?
+* Croyez-vous que GPT-4 va tous nous tuer ?
+* Un moratoire ne risque-t-elle pas d'aggraver les choses ?
+* Un moratoire est-il possible ?
+* Qui vous finance ?
+* Quels sont vos projets ?
+* Comment comptez-vous convaincre les gouvernements de d'arrêter temporairement  le développement de l'IA ?
+* Pourquoi manifester ?
+* Quelle est la probabilité que l'apparition d'une superintelligence ait de graves conséquences, y compris un risque d'extinction?
+* Combien de temps nous reste-t-il avant l'émergence d'une superintelligence ?
+* Si nous appliquons un moratoire, qu'en est-il de la Chine ?
+* OpenAI et Google semblent appeler de leurs voeux une réglementation. Pourquoi s'opposer à eux ?
+* Les entreprises d'IA prétendent-elles que le risque existentiel est réel pour nous manipuler ?
+* Je veux vous aider ! Que puis-je faire ? -->
 
-You can find us on [Discord](https://discord.gg/2XXWXvErfA) (this is where most of the coordination happens!), [Twitter](https://twitter.com/PauseAI), [Substack](https://substack.com/@pauseai), [Facebook](https://www.facebook.com/PauseAI), [TikTok](https://www.tiktok.com/@pauseai), [LinkedIn](https://www.linkedin.com/uas/login?session_redirect=/company/97035448/), [YouTube](https://www.youtube.com/@PauseAI) and [Instagram](https://www.instagram.com/pause_ai).
-You can mail/contact us at [joep@pauseai.info](mailto:joep@pauseai.info).
+## Qui êtes-vous ?
 
-## Aren't you just scared of changes and new technology?
+Nous sommes un ensemble de [bénévoles](https://pauseai.info/people) et de [groupes locaux](https://pauseai.info/communities), organisé par une [association à but non lucratif](https://pauseai.info/legal) dont l'objectif est de minimiser les [risques liés à l'IA](https://pauseai.info/risks) (y compris le [risque d'extinction](https://pauseai.info/xrisk)). Notre objectif est de convaincre nos gouvernements d'intervenir et [de mettre en pause le développement d'une IAG](https://pauseai.info/proposal) (Intelligence Artificielle Générale puis d’une Superintelligence). Dans ce but, nous alertons le public, dialoguons avec les décideurs et organisons des manifestations.
 
-You might be surprised that most people in PauseAI consider themselves techno-optimists.
-Many of them are involved in AI development, are gadget lovers, and have mostly been very excited about the future.
-Particularly many of them have been excited about the potential of AI to help humanity.
-That's why for many of them the sad realization that AI might be an existential risk was a very [difficult one to internalize](/psychology-of-x-risk).
+Vous pouvez nous rejoindre sur [Discord](https://discord.gg/) (C’est là que notre communauté est la plus active!), [Twitter](https://twitter.com/pause_ia), [Facebook](https://www.facebook.com/Pause.IA), [TikTok](https://www.tiktok.com/@pause_ia), [LinkedIn](https://www.linkedin.com/company/pause-ia/), [YouTube](https://www.youtube.com/@Pause_IA), [Instagram](https://www.instagram.com/pause_ia) et [Threads](https://www.threads.net/@pause_ia). Vous pouvez également nous contacter par mail à maxime@pauseai.info
 
-## Do you want to ban all AI?
+## N’êtes vous tout simplement pas des technophobes?
 
-No, only the development of the largest general-purpose AI systems, often called "Frontier models".
-Almost all currently existing AI would be legal under [our proposal](/proposal), and most future AI models will remain legal, too.
-We're calling for a ban on AI systems more powerful than GPT-4, until we know how to build provably safe AI, and we have them under democratic control.
+Vous seriez surpris d'apprendre que la plupart des membres de Pause IA sont favorablement disposés envers le progrès technologique. Nombre d'entre eux sont impliqués dans le développement de l'IA, sont des amateurs de nouvelles technologies et ont longtemps été très enthousiastes face à l'avenir. Beaucoup s’intéressaient particulièrement au potentiel de développement de l’humanité que recèle l’IA. C'est pourquoi, quand ils se sont rendu compte des risques existentiels liés à l’IA, nombre d’entre eux ont eu beaucoup de mal à [l’accepter / l’intégrer](https://pauseai.info/psychology-of-x-risk).
 
-## Do you believe GPT-4 is going to kill us?
+## Voulez-vous interdire toute forme d'IA ?
 
-No, we don't think [current AI models](/sota) are an existential threat.
-It seems likely that most next AI models won't be as well.
-But if we keep building more and more powerful AI systems, eventually we will reach a point where one will become an [existential threat](/xrisk).
+Non. Seulement le développement des plus gros systèmes d'IA à usage général souvent appelés "modèles de pointe". La quasi-totalité des modèles existants, ainsi que la plupart des futurs modèles d'IA, resteraient [légaux selon notre proposition](https://pauseai.info/proposal). Nous demandons l'interdiction des systèmes plus puissants que GPT-4-o, jusqu'à ce que nous puissions exercer un contrôle démocratique sur ces modèles et que nous soyons en mesure de les créer en toute sécurité.
 
-## Can a Pause backfire and make things worse?
+## Croyez-vous que GPT-4 va tous nous tuer ?
 
-We've addressed these concerns in [this article](/mitigating-pause-failures).
+Non, nous ne croyons pas que les [modèles actuels](https://pauseai.info/sota) représentent un risque existentiel. Probablement que la plupart des prochains modèles non plus. Mais si nous poursuivons le développement de systèmes toujours plus puissants, nous atteindrons un point de non-retour où l'un d'eux deviendra [une menace existentielle](https://pauseai.info/xrisk).
 
-## Is a Pause even possible?
+## Un moratoire ne risque-t-elle pas d'aggraver les choses ?
 
-AGI is not inevitable.
-It requires hordes of engineers with million-dollar paychecks.
-It requires a fully functional and unrestricted supply chain of the most complex hardware.
-It requires all of us to allow these companies to gamble with our future.
+Nous avons répondu à ces préoccupations [dans cet article](https://pauseai.info/mitigating-pause-failures).
 
-[Read more about the feasibility of a Pause](/feasibility).
+## Un moratoire est-il possible ?
 
-## Who is paying you?
+L’émergence d’une superintelligence n'est pas inévitable. Sa création nécessite des armées d'ingénieurs payés à coup de millions de dollars et une chaîne d'approvisionnement de matériel de pointe non réglementé. Sa création implique aussi que nous permettions à ces entreprises de jouer avec notre avenir en restant passifs.
 
-Virtually all of our actions so far have been done by volunteers.
-However, since February 2024, PauseAI is a [registered non-profit foundation](/legal), and we have received multiple donations from individuals.
-We've also received 20k funding from the LightSpeed network.
+[En savoir plus sur la faisabilité d’un moratoire .](https://pauseai.info/feasibility)
 
-You can also [donate](/donate) to PauseAI if you support our cause!
-We use most of the money to enable local communities to organize events.
+## Qui vous finance ?
 
-## What are your plans?
+Quasiment toutes nos actions jusqu'ici ont été menées par des bénévoles. Cependant, depuis février 2024, Pause IA est une [organisation à but non lucratif enregistrée](https://pauseai.info/legal), et nous avons reçu de multiples dons de particuliers. Nous avons également reçu 20 000 dollars de financement de la part du réseau LightSpeed.
 
-Focus on [growing the movement](/growth-strategy), organizing protests, lobbying politicians, and informing the public.
+Vous pouvez également [faire un don à Pause IA](https://pauseai.info/donate) si vous soutenez notre cause ! Nous utilisons l'essentiel de l'argent pour permettre à des communautés locales d'organiser des événements.
 
-Check out our [roadmap](/roadmap) for a detailed overview of our plans and what we could do with more funding.
+## Quels sont vos projets ?
 
-## How do you think you can convince governments to pause AI?
+Nous nous concentrons sur la [croissance du mouvement](https://pauseai.info/growth-strategy), l'organisation de manifestations, le lobbying auprès des politiciens et l'information du public.
 
-Check out our [theory of change](/theory-of-change) for a detailed overview of our strategy.
+Consultez [notre feuille de route](https://pauseai.info/roadmap) pour un aperçu détaillé de nos projets et de ce que nous pourrions faire avec plus de financements.
 
-## Why do you protest?
+## Comment comptez-vous convaincre les gouvernements d’arrêter temporairement le développement de l'IA ?
 
-- Protesting shows the world that we care about this issue. By protesting, we show that we are willing to spend our time and energy to get people to listen.
-- Protests can and often will [positively influence](https://www.socialchangelab.org/_files/ugd/503ba4_052959e2ee8d4924934b7efe3916981e.pdf) public opinion, voting behavior, corporate behavior and policy.
-- By far [most people are supportive](https://today.yougov.com/politics/articles/31718-do-protesters-want-help-or-hurt-america) of peaceful/non-violent protests
-- There is [no "backfire" effect](https://journals.sagepub.com/doi/full/10.1177/2378023120925949) [unless the protest is violent](https://news.stanford.edu/2018/10/12/how-violent-protest-can-backfire/). Our protests are peaceful and non-violent.
-- It's a social bonding experience. You meet other people who share your concerns and willingness to take action.
-- Check out [this amazing article](https://forum.effectivealtruism.org/posts/4ez3nvEmozwPwARr9/a-case-for-the-effectiveness-of-protest) for more insights on why protesting works
+Jetez un œil à notre "[Théorie du changement](https://pauseai.info/theory-of-change)" pour un aperçu détaillé de notre stratégie.
 
-If you want to [organize a protest](/organizing-a-protest), we can help you with advice and resources.
+## Pourquoi manifester ?
 
-## How likely is it that superintelligent AI will cause very bad outcomes, like human extinction?
+- Manifester démontre à tous que cette question nous tient à cœur. En manifestant, nous prouvons que nous sommes prêts à consacrer du temps et de l'énergie à la diffusion de notre message.
+- Il n’est pas rare que les manifestations aient une [influence positive](https://www.socialchangelab.org/_files/ugd/503ba4_052959e2ee8d4924934b7efe3916981e.pdf) sur l’opinion publique, le vote, l’attitude des entreprises et la loi.
+- [La grande majorité des gens soutiennent](https://today.yougov.com/politics/articles/31718-do-protesters-want-help-or-hurt-america) les manifestations pacifiques et non violentes.
+- Il n'y a [aucun "retour de bâton"](https://journals.sagepub.com/doi/full/10.1177/2378023120925949) sauf si la manifestation [dégénère en violences](https://news.stanford.edu/stories/2018/10/how-violent-protest-can-backfire). Nos manifestations sont pacifiques et non violentes.
+- C'est une expérience de lien social. Vous rencontrez d'autres personnes qui partagent vos préoccupations et votre volonté d'agir.
+- Lisez [cet excellent article](https://forum.effectivealtruism.org/posts/4ez3nvEmozwPwARr9/a-case-for-the-effectiveness-of-protest) pour en savoir plus sur l'efficacité des manifestations.
 
-We have composed [a list of 'p(doom)' values](/pdoom) (probability of bad outcomes) from various notable experts in the field.
+Si vous voulez [organiser une manifestation](https://pauseai.info/organizing-a-protest), nous pouvons vous apporter conseils et ressources.
 
-AI safety researchers (who are the experts on this topic) are divided on this question, and estimates [range from 2% to 97% with an average of 30%](https://web.archive.org/web/20221013014859/https://www.alignmentforum.org/posts/QvwSr5LsxyDeaPK5s/existential-risk-from-ai-survey-results).
-Note that no (surveyed) AI safety researchers believe that there's a 0% chance.
-However, there might be selection bias here: people who work in the AI safety field are likely to do so because they believe preventing bad AI outcomes is important.
+## Quelle est la probabilité que l'apparition d'une superintelligence ait de graves conséquences, y compris un risque d'extinction?
 
-If you ask AI researchers in general (not safety specialists), this number drops to a [mean value of around 14%](https://aiimpacts.org/2022-expert-survey-on-progress-in-ai/), with a median of 5%.
-A minority, about 20% of them, believe that the alignment problem is not a real or important problem.
-Note that there might be a selection bias here in the opposite direction: people who work in AI are likely to do so because they believe AI will be beneficial.
+Nous avons compilé [une liste de valeurs "p(doom)"](https://pauseai.info/pdoom) (probabilité de scénarios catastrophiques) provenant de divers experts renommés dans le domaine.
 
-_Imagine you're invited to take a test flight on a new airplane_.
-The plane engineers think there's a 14% chance of crashing.
-Would you enter that plane? Because right now, we're all boarding the AI plane.
+Les chercheurs en sécurité de l'IA (qui sont experts du sujet) sont partagés, [leurs estimations allant de 2% à 97% avec une moyenne de 30%](https://web.archive.org/web/20221013014859/https://www.alignmentforum.org/posts/QvwSr5LsxyDeaPK5s/existential-risk-from-ai-survey-results). Notez qu'aucun des chercheurs en sécurité interrogés ne croit en une probabilité de 0%. Un biais de sélection est cependant possible: ceux qui travaillent dans le domaine de la sécurité de l'IA le font probablement car ils redoutent les conséquences néfastes de l'IA.
 
-## How long do we have until superintelligent AI?
+Si l'on interroge les chercheurs en IA en général (qui ne sont pas spécialistes en sécurité), ce chiffre tombe à [une moyenne d'environ 14%](https://aiimpacts.org/2022-expert-survey-on-progress-in-ai/), avec une médiane de 5%. Une minorité, environ 20%, pense que le problème d'alignement n'est ni réel ni important. Là encore, un biais de sélection inverse est possible : ceux qui travaillent en IA le font sans doute car ils considèrent que les conséquences de l'IA sur le monde seront uniquement bénéfiques.
 
-It might take months, it might take decades, nobody knows for sure.
-However, we do know that the pace of AI progress is often grossly underestimated.
-Just three years ago we thought we'd have SAT-passing AI systems in 2055.
-We got there in April 2023.
-We should act as if we have very little time left because we don't want to be caught off guard.
+_Imaginez qu'on vous propose d'essayer un nouvel avion._ Les ingénieurs estiment les risques de crash à 14%. Monteriez-vous à bord ? C'est plus ou moins la situation actuelle, nous embarquons tous à bord du même avion.
 
-[Read more about urgency](/urgency).
+## Combien de temps nous reste-t-il avant l'émergence d'une superintelligence ?
 
-## If we Pause, what about China?
+Cela pourrait prendre des mois, ou bien des décennies, personne n'en est certain. Ce que nous savons, c'est que les progrès dans le domaine de l'IA sont souvent largement sous-estimés. Il y a seulement trois ans, nous pensions qu'il faudrait attendre 2055 pour voir des modèles capables de réussir un test SAT (équivalent PISA aux Etats-Unis). Nous y sommes parvenus dès avril 2023. Il semble souhaitable d’ agir comme si le temps nous était compté afin de ne pas être pris au dépourvu.
 
-For starters, at this point, China has stricter AI regulations than virtually any other country.
-They [didn't even allow chatbots](https://www.reuters.com/technology/chinas-slow-ai-roll-out-points-its-tech-sectors-new-regulatory-reality-2023-07-12/) and [disallowed training on internet data](https://cointelegraph.com/news/china-sets-stricter-rules-training-generative-ai-models) up [until September 2023](https://asia.nikkei.com/Business/Technology/China-approves-AI-chatbot-releases-but-will-it-unleash-innovation).
-China has a more controlling government and thus has even more reason to fear the uncontrollable and unpredictable impacts of AI.
-During the UNSC meeting on AI safety, China was the only country that mentioned the possibility of implementing a pause.
+[En savoir plus sur l'urgence de la situation.](https://pauseai.info/urgency)
 
-Also note that we are primarily asking for an _international_ pause, enforced by a treaty.
-Such a treaty also needs to be signed by China.
-If the treaty guarantees that other nations will stop as well, and there are sufficient enforcement mechanisms in place,
-this should be something that China will want to see as well.
+## Si nous appliquons un moratoire, qu'en est-il de la Chine ?
 
-## OpenAI and Google are saying they want to be regulated. Why are you protesting them?
+La Chine a actuellement les réglementations les plus strictes au monde en matière d'IA. Les [chatbots sont interdits](https://www.reuters.com/technology/chinas-slow-ai-roll-out-points-its-tech-sectors-new-regulatory-reality-2023-07-12/) et [l'entraînement sur des données internet n'était pas autorisé](https://cointelegraph.com/news/china-sets-stricter-rules-training-generative-ai-models) jusqu'en [septembre 2023](https://asia.nikkei.com/Business/Technology/China-approves-AI-chatbot-releases-but-will-it-unleash-innovation). Le gouvernement chinois, avec son mode de régime autoritaire, a bien plus de raisons de craindre les impacts incontrôlables et imprévisibles de l'IA que nous. Lors de la réunion du Conseil de sécurité des Nations unies sur la sécurité de l'IA, la Chine a été le seul pays à mentionner la possibilité d’instaurer un moratoire..
 
-We applaud [OpenAI](https://openai.com/blog/governance-of-superintelligence) and [Google](https://www.ft.com/content/8be1a975-e5e0-417d-af51-78af17ef4b79) for their calls for international regulation of AI.
-However, we believe that the current proposals are not enough to prevent an AI catastrophe.
-Google and Microsoft have not yet publicly stated anything about the existential risk of AI.
-Only OpenAI [explicitly mentions the risk of extinction](https://openai.com/blog/governance-of-superintelligence), and again we applaud them for taking this risk seriously.
-However, their strategy is quite explicit: a Pause is impossible, we need to get to superintelligence first.
-The problem with this, however, is that they [do not believe they have solved the alignment problem](https://youtu.be/L_Guz73e6fw?t=1478).
-The AI companies are locked in a race to the bottom, where AI safety is sacrificed for competitive advantage.
-This is simply the result of market dynamics.
-We need governments to step in and implement policies (at an international level) that [prevent the worst outcomes](/proposal).
+De plus, nous appelons à un moratoire international , imposé par un traité. Un tel traité doit également être signé par la Chine. Si le traité garantit que d'autres nations s'arrêteront aussi, et qu'il y a des mécanismes de contrôle et des mesures de mise en vigueur suffisantes, la Chine y sera probablement favorable.
 
-## Are AI companies pushing the existential risk narrative to manipulate us?
+## OpenAI et Google semblent appeler de leurs vœux une réglementation. Pourquoi s’opposer à eux?
 
-We can't know for certain what motivations these companies have, but we do know that **x-risk was not initially pushed by AI companies - it was scientists, activists and NGOs**.
-Let's look at the timeline.
+Nous saluons les appels [d'OpenAI](https://openai.com/index/governance-of-superintelligence/) et de [Google](https://www.ft.com/content/8be1a975-e5e0-417d-af51-78af17ef4b79) pour demander une réglementation internationale vis-à-vis de l'IA. Cependant, nous pensons que les propositions actuelles ne suffiront pas à éviter une catastrophe. Google et Microsoft n'ont pas encore reconnu publiquement les risques existentiels liés à l'IA. Seul OpenAI [mentionne explicitement le risque d'extinction](https://openai.com/index/governance-of-superintelligence/). Cependant, leur stratégie est très claire: un moratoire est impossible, nous devons d'abord créer une superintelligence avant de penser à de sérieuses régulations. Mais il avouent eux-même [ne pas avoir résolu le problème d'alignemen](https://www.youtube.com/watch?t=1478&v=L_Guz73e6fw&feature=youtu.be)t et les derniers développements prouvent [qu'ils ne traitent pas ce problème avec le sérieux qu'il mérite](https://www.cnbc.com/2024/05/17/openai-superalignment-sutskever-leike.html). Ces entreprises sont engagées dans une course contre la montre au détriment de la sécurité, sacrifiée pour un avantage concurrentiel. C'est le résultat de la dynamique du marché. Nous devons encourager les gouvernements à intervenir et à mettre en place des politiques internationales pour [éviter les pires scénarios](https://pauseai.info/proposal).
 
-There have been many people who have warned about x-risk since the early 2000s.
-Eliezer Yudkowsky, Nick Bostrom, Stuart Russell, Max Tegmark, and many others.
-They had no AI tech to push - they were simply concerned about the future of humanity.
+## Les entreprises d'IA prétendent-elles que le risque existentiel est réel pour nous manipuler ?
 
-The AI companies never mentioned x-risk until very recently.
+Nous ne pouvons pas être certains des motivations de ces entreprises, et nous savons qu'elles **ne sont pas à l'origine de la mise en avant des risques existentiels liés à l'IA**. Les signaux d'alerte venaient des scientifiques, militants et ONG. Jetons un œil à la chronologie.
 
-Sam Altman is an interesting exception.
-He wrote about existential AI risk [back in 2015, on his private blog](https://blog.samaltman.com/machine-intelligence-part-1), before founding OpenAI.
-In the years since he made virtually no explicit mention of x-risk again.
-During the Senate hearing on May 16, 2023, when asked about his x-risk blog post, he only answered by talking about jobs and the economy.
-He was not pushing the x-risk narrative here, he was actively avoiding it.
+Depuis le début des années 2000, diverses personnes ont alerté sur ce risque existentiel, comme Eliezer Yudkowsky, Nick Bostrom, Stuart Russell, Max Tegmark, et bien d'autres. Ils n'avaient aucun produit à vendre, ils étaient simplement préoccupés par l'avenir de l'humanité.
 
-In May 2023, everything changed:
+Les entreprises d'IA n'ont commencé à mentionner les risques existentiels que très récemment.
 
-- On May 1st, 'Godfather of AI' Geoffrey Hinton [quits his job at Google](https://fortune.com/2023/05/01/godfather-ai-geoffrey-hinton-quit-google-regrets-lifes-work-bad-actors/) to warn about x-risk.
-- On May 5th, the [first PauseAI protest is announced](https://twitter.com/Radlib4/status/1654262421794717696), right at OpenAI's doorstep.
-- On May 22nd, OpenAI published [a blog post about the governance of superintelligence](https://openai.com/blog/governance-of-superintelligence), and mentioned x-risk for the first time.
-- On May 24th, ex-Google CEO Eric Schmidt acknowledges x-risk.
-- On May 30th, the [Safe.ai statement (acknowledging x-risk)](https://www.safe.ai/statement-on-ai-risk) was published. This time, including people from OpenAI, Google and Microsoft.
+Sam Altman est une exception. Sur son blog personnel, Il a exploré [l'idée du risque existentiel dès 2015](https://blog.samaltman.com/machine-intelligence-part-1), avant même de fonder OpenAI. Pendant les années qui ont suivi, il n'a quasiment plus jamais évoqué explicitement ce risque. Lors de son audition devant le Sénat Américain le 16 mai 2023, interrogé sur cet article de blog, il a soigneusement évité la question en préférant parler des emplois et de l'économie.
 
-These companies have been very slow to acknowledge x-risk, considering that many of their employees have been aware of it for years.
-So in our view, the AI companies are not pushing the x-risk narrative, they have been reactive to others pushing it, and have waited with their response until it was absolutely necessary.
+En mai 2023, tout a changé :
 
-The business incentives point in the other direction: companies would rather not have people worry about the risks of their products.
-Virtually all companies downplay risks to attract customers and investments, rather than exaggerating them.
-How much strict regulation and negative attention are the companies inviting due to admitting these dangers?
-And would a company like OpenAI [dedicate 20% of its compute resources](https://openai.com/blog/introducing-superalignment) to AI safety if it wouldn't believe in the risks?
+- Le 1er mai, le pionnier de l'IA Geoffrey Hinton [démissionne de Google](https://fortune.com/2023/05/01/godfather-ai-geoffrey-hinton-quit-google-regrets-lifes-work-bad-actors/) pour alerter le public sur la possibilité de risques existentiels.
+- Le 20 mai, [la première manifestation de Pause IA](https://pauseai.info/openai-protest) a lieu devant le siège d'OpenAI.
+- Le 22 mai, OpenAI publie [un article de blog sur la gouvernance de la superintelligence](https://openai.com/index/governance-of-superintelligence/), et mentionne le risque existentiel pour la première fois.
+- Le 24 mai, l'ancien PDG de Google Eric Schmidt reconnaît la possibilité de risques existentiels.
+- Le 30 mai, le centre pour la sécurité de l'IA publie [une déclaration sur les risques existentiels](https://www.safe.ai/work/statement-on-ai-risk), incluant des employés d'OpenAI, Google et Microsoft.
 
-Here's our interpretation: the AI companies signed the statement because _they know that x-risk is a problem that needs to be taken very seriously_.
+Ces entreprises ont été lentes à reconnaître la possibilité de risques existentiels, alors que beaucoup de leurs employés en étaient conscients depuis des années. Selon nous, les entreprises d'IA ont simplement réagi à l'émergence des risques existentiels dans le discours public et ont n'ont apporté leur réponse que lorsque le sujet est devenu inévitable.
 
-A big reason many other people still don't want to believe that x-risk is a real concern?
-Because acknowledging that _we are in fact in danger_ is a very, very scary thing.
+Mais les incitations commerciales vont à contre-courant : il n'est pas dans l'intérêt de ces entreprises que le public s'inquiète des dangers de leurs produits. Presque toutes minimisent les risques pour attirer clients et investisseurs. Combien de régulations et de négativité risquent-elles d'attirer en admettant ces dangers ? Et une entreprise comme OpenAI consacrerait-elle [20% de sa puissance de calcul informatique](https://openai.com/index/introducing-superalignment/) à la sécurité de l'IA si elle ne croyait pas en ces dangers?
 
-[Read more about the psychology of x-risk](/psychology-of-x-risk).
+Notre interprétation est que les entreprises d'IA ont signé cette déclaration parce qu'_elles savent que les risques existentiels sont un problème à prendre très au sérieux_.
 
-## Ok, I want to help! What can I do?
+Une raison majeure pour laquelle de nombreuses personnes ne veulent toujours pas croire que les risques existentiels sont une préoccupation réelle ? Parce que la reconnaissance d'un tel danger est une énorme charge mentale.
 
-There are many [things that you can do](/action).
-On your own, you can write a [letter](/writing-a-letter), post [flyers](/flyering), inform [others](/action#you-can-do-this), join to a [protest](/protests), ir [donating](/donate) some money!
-But even more important: you can [join PauseAI](/join) and coordinate with others who are taking action.
-If you want to contribute more, you can become a volunteer and join one of our [teams](/teams).
+[En savoir plus sur la charge mentale des risques existentiels.](https://pauseai.info/psychology-of-x-risk)
 
-Even when facing the end of the world, there can still be hope and very rewarding work to do. 💪
+## Je veux aider ! Que puis-je faire ?
+
+Il y a de nombreuses choses que [vous pouvez faire](https://pauseai.info/action). À titre individuel, [rédigez une lettre](https://pauseai.info/writing-a-letter), [distribuez des tracts](https://pauseai.info/flyering), sensibilisez votre entourage, prenez part à [une manifestation](https://pauseai.info/protests) ou [faites un don](https://pauseai.info/donate) ! Mais plus important : vous pouvez [rejoindre Pause IA](https://pauseai.info/join) et coordonner vos actions avec d'autres personnes membres. Si vous souhaitez vous impliquer davantage, vous pouvez devenir bénévole et [intégrer une de nos équipes.](https://pauseai.info/teams)
+
+Même confrontés à la perspective de risques existentiels, il reste de l'espoir et du travail à accomplir. 💪

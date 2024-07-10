@@ -6,6 +6,7 @@ import { getHighlighter } from 'shiki'
 import remarkUnwrapImages from 'remark-unwrap-images'
 import remarkToc from 'remark-toc'
 import rehypeSlug from 'rehype-slug'
+import { faqPlugin } from './src/lib/faqPlugin.js'
 
 /** @type {import('mdsvex').MdsvexOptions} */
 const mdsvexOptions = {
@@ -21,7 +22,7 @@ const mdsvexOptions = {
 		}
 	},
 	remarkPlugins: [remarkUnwrapImages, [remarkToc, { tight: true }]],
-	rehypePlugins: [rehypeSlug]
+	rehypePlugins: [rehypeSlug, faqPlugin]
 }
 
 /** @type {import('@sveltejs/kit').Config} */
