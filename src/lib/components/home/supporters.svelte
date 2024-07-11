@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
 	import SupporterCard from '$lib/components/SupporterCard.svelte'
 	import UnderlinedTitle from '$lib/components/UnderlinedTitle.svelte'
 
@@ -41,11 +41,15 @@
 			url: '/risks'
 		}
 	]
+
+	const secondsPerLogo = 5
+	$: animationDuration = secondsPerLogo * supporters.length
+
 </script>
 
 <section aria-labelledby={label_id}>
 	<UnderlinedTitle id={label_id}>Nos soutiens</UnderlinedTitle>
-	<div class="logos">
+	<div class="logos" style="--animation-duration: {animationDuration}s;">
 		<!-- eslint-disable-next-line @typescript-eslint/no-unused-vars -->
 		{#each Array(2) as _}
 			<div class="logo_items">
@@ -104,7 +108,8 @@
 	.logo_items {
 		display: flex;
 		gap: 1rem;
-		animation: 25s slides infinite linear;
+		animation: slides infinite linear;
+		animation-duration: var(--animation-duration, 25s); /* fallback duration */
 	}
 
 	.logos:hover .logo_items {
