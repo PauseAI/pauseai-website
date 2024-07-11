@@ -11,35 +11,30 @@
 	<div class="logos">
 		<div class="logo_items">
 			<SupporterCard
-				class="card"
 				name="Yann LeCan"
 				blurb="Chercheur @ Meta"
 				image="https://upload.wikimedia.org/wikipedia/commons/thumb/d/df/AI_%28Artificial_Intelligence%29_Dog.jpg/640px-AI_%28Artificial_Intelligence%29_Dog.jpg"
 				url="/risks"
 			/>
 			<SupporterCard
-				class="card"
 				name="Yann LeCan"
 				blurb="Chercheur @ Meta"
 				image="https://upload.wikimedia.org/wikipedia/commons/thumb/d/df/AI_%28Artificial_Intelligence%29_Dog.jpg/640px-AI_%28Artificial_Intelligence%29_Dog.jpg"
 				url="/risks"
 			/>
 			<SupporterCard
-				class="card"
 				name="Yann LeCan"
 				blurb="Chercheur @ Meta"
 				image="https://upload.wikimedia.org/wikipedia/commons/thumb/d/df/AI_%28Artificial_Intelligence%29_Dog.jpg/640px-AI_%28Artificial_Intelligence%29_Dog.jpg"
 				url="/risks"
 			/>
 			<SupporterCard
-				class="card"
 				name="Yann LeCan"
 				blurb="Chercheur @ Meta"
 				image="https://upload.wikimedia.org/wikipedia/commons/thumb/d/df/AI_%28Artificial_Intelligence%29_Dog.jpg/640px-AI_%28Artificial_Intelligence%29_Dog.jpg"
 				url="/risks"
 			/>
 			<SupporterCard
-				class="card"
 				name="Yann LeCan"
 				blurb="Chercheur @ Meta"
 				image="https://upload.wikimedia.org/wikipedia/commons/thumb/d/df/AI_%28Artificial_Intelligence%29_Dog.jpg/640px-AI_%28Artificial_Intelligence%29_Dog.jpg"
@@ -48,35 +43,30 @@
 		</div>
 		<div class="logo_items">
 			<SupporterCard
-				class="card"
 				name="Yann LeCan"
 				blurb="Chercheur @ Meta"
 				image="https://upload.wikimedia.org/wikipedia/commons/thumb/d/df/AI_%28Artificial_Intelligence%29_Dog.jpg/640px-AI_%28Artificial_Intelligence%29_Dog.jpg"
 				url="/risks"
 			/>
 			<SupporterCard
-				class="card"
 				name="Yann LeCan"
 				blurb="Chercheur @ Meta"
 				image="https://upload.wikimedia.org/wikipedia/commons/thumb/d/df/AI_%28Artificial_Intelligence%29_Dog.jpg/640px-AI_%28Artificial_Intelligence%29_Dog.jpg"
 				url="/risks"
 			/>
 			<SupporterCard
-				class="card"
 				name="Yann LeCan"
 				blurb="Chercheur @ Meta"
 				image="https://upload.wikimedia.org/wikipedia/commons/thumb/d/df/AI_%28Artificial_Intelligence%29_Dog.jpg/640px-AI_%28Artificial_Intelligence%29_Dog.jpg"
 				url="/risks"
 			/>
 			<SupporterCard
-				class="card"
 				name="Yann LeCan"
 				blurb="Chercheur @ Meta"
 				image="https://upload.wikimedia.org/wikipedia/commons/thumb/d/df/AI_%28Artificial_Intelligence%29_Dog.jpg/640px-AI_%28Artificial_Intelligence%29_Dog.jpg"
 				url="/risks"
 			/>
 			<SupporterCard
-				class="card"
 				name="Yann LeCan"
 				blurb="Chercheur @ Meta"
 				image="https://upload.wikimedia.org/wikipedia/commons/thumb/d/df/AI_%28Artificial_Intelligence%29_Dog.jpg/640px-AI_%28Artificial_Intelligence%29_Dog.jpg"
