@@ -480,6 +480,12 @@ const AdjacentCommunities: Community[] = [
 		lat: 55.6761,
 		lon: 12.5683,
 		link: 'https://www.facebook.com/groups/AISafetyDanmark'
+	},
+	{
+		name: 'AI Safety Sydney',
+		lat: -33.8688,
+		lon: 151.2093,
+		link: 'https://www.facebook.com/groups/4642042999234413'
 	}
 ]
 
