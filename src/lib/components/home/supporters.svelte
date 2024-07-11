@@ -77,13 +77,6 @@
 </section>
 
 <style>
-	.articles-grid {
-		display: flex;
-		gap: 1rem;
-
-		position: relative;
-		overflow: hidden;
-	}
 	@keyframes slides {
 		from {
 			transform: translateX(0);
