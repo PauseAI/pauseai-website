@@ -8,7 +8,7 @@
 <a class="article-link" href={url}>
 	<article>
 		<div class="supporterImage">
-			<img src={image} />
+			<img src={image} alt={name} />
 		</div>
 		<div>
 			<h3>{name}</h3>
