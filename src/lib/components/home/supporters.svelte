@@ -3,75 +3,62 @@
 	import UnderlinedTitle from '$lib/components/UnderlinedTitle.svelte'
 
 	const label_id = 'articles-title'
+
+	const supporters = [
+		{
+			name: 'Yann LeCan1',
+			blurb: 'Chercheur @ Meta',
+			image:
+				'https://upload.wikimedia.org/wikipedia/commons/thumb/d/df/AI_%28Artificial_Intelligence%29_Dog.jpg/640px-AI_%28Artificial_Intelligence%29_Dog.jpg',
+			url: '/risks'
+		},
+		{
+			name: 'Yann LeCan2',
+			blurb: 'Chercheur @ Meta',
+			image:
+				'https://upload.wikimedia.org/wikipedia/commons/thumb/d/df/AI_%28Artificial_Intelligence%29_Dog.jpg/640px-AI_%28Artificial_Intelligence%29_Dog.jpg',
+			url: '/risks'
+		},
+		{
+			name: 'Yann LeCan3',
+			blurb: 'Chercheur @ Meta',
+			image:
+				'https://upload.wikimedia.org/wikipedia/commons/thumb/d/df/AI_%28Artificial_Intelligence%29_Dog.jpg/640px-AI_%28Artificial_Intelligence%29_Dog.jpg',
+			url: '/risks'
+		},
+		{
+			name: 'Yann LeCan4',
+			blurb: 'Chercheur @ Meta',
+			image:
+				'https://upload.wikimedia.org/wikipedia/commons/thumb/d/df/AI_%28Artificial_Intelligence%29_Dog.jpg/640px-AI_%28Artificial_Intelligence%29_Dog.jpg',
+			url: '/risks'
+		},
+		{
+			name: 'Yann LeCan5',
+			blurb: 'Chercheur @ Meta',
+			image:
+				'https://upload.wikimedia.org/wikipedia/commons/thumb/d/df/AI_%28Artificial_Intelligence%29_Dog.jpg/640px-AI_%28Artificial_Intelligence%29_Dog.jpg',
+			url: '/risks'
+		}
+	]
 </script>
 
 <section aria-labelledby={label_id}>
 	<UnderlinedTitle id={label_id}>Nos soutiens</UnderlinedTitle>
 	<div class="logos">
-		<div class="logo_items">
-			<SupporterCard
-				name="Yann LeCan"
-				blurb="Chercheur @ Meta"
-				image="https://upload.wikimedia.org/wikipedia/commons/thumb/d/df/AI_%28Artificial_Intelligence%29_Dog.jpg/640px-AI_%28Artificial_Intelligence%29_Dog.jpg"
-				url="/risks"
-			/>
-			<SupporterCard
-				name="Yann LeCan"
-				blurb="Chercheur @ Meta"
-				image="https://upload.wikimedia.org/wikipedia/commons/thumb/d/df/AI_%28Artificial_Intelligence%29_Dog.jpg/640px-AI_%28Artificial_Intelligence%29_Dog.jpg"
-				url="/risks"
-			/>
-			<SupporterCard
-				name="Yann LeCan"
-				blurb="Chercheur @ Meta"
-				image="https://upload.wikimedia.org/wikipedia/commons/thumb/d/df/AI_%28Artificial_Intelligence%29_Dog.jpg/640px-AI_%28Artificial_Intelligence%29_Dog.jpg"
-				url="/risks"
-			/>
-			<SupporterCard
-				name="Yann LeCan"
-				blurb="Chercheur @ Meta"
-				image="https://upload.wikimedia.org/wikipedia/commons/thumb/d/df/AI_%28Artificial_Intelligence%29_Dog.jpg/640px-AI_%28Artificial_Intelligence%29_Dog.jpg"
-				url="/risks"
-			/>
-			<SupporterCard
-				name="Yann LeCan"
-				blurb="Chercheur @ Meta"
-				image="https://upload.wikimedia.org/wikipedia/commons/thumb/d/df/AI_%28Artificial_Intelligence%29_Dog.jpg/640px-AI_%28Artificial_Intelligence%29_Dog.jpg"
-				url="/risks"
-			/>
-		</div>
-		<div class="logo_items">
-			<SupporterCard
-				name="Yann LeCan"
-				blurb="Chercheur @ Meta"
-				image="https://upload.wikimedia.org/wikipedia/commons/thumb/d/df/AI_%28Artificial_Intelligence%29_Dog.jpg/640px-AI_%28Artificial_Intelligence%29_Dog.jpg"
-				url="/risks"
-			/>
-			<SupporterCard
-				name="Yann LeCan"
-				blurb="Chercheur @ Meta"
-				image="https://upload.wikimedia.org/wikipedia/commons/thumb/d/df/AI_%28Artificial_Intelligence%29_Dog.jpg/640px-AI_%28Artificial_Intelligence%29_Dog.jpg"
-				url="/risks"
-			/>
-			<SupporterCard
-				name="Yann LeCan"
-				blurb="Chercheur @ Meta"
-				image="https://upload.wikimedia.org/wikipedia/commons/thumb/d/df/AI_%28Artificial_Intelligence%29_Dog.jpg/640px-AI_%28Artificial_Intelligence%29_Dog.jpg"
-				url="/risks"
-			/>
-			<SupporterCard
-				name="Yann LeCan"
-				blurb="Chercheur @ Meta"
-				image="https://upload.wikimedia.org/wikipedia/commons/thumb/d/df/AI_%28Artificial_Intelligence%29_Dog.jpg/640px-AI_%28Artificial_Intelligence%29_Dog.jpg"
-				url="/risks"
-			/>
-			<SupporterCard
-				name="Yann LeCan"
-				blurb="Chercheur @ Meta"
-				image="https://upload.wikimedia.org/wikipedia/commons/thumb/d/df/AI_%28Artificial_Intelligence%29_Dog.jpg/640px-AI_%28Artificial_Intelligence%29_Dog.jpg"
-				url="/risks"
-			/>
-		</div>
+		<!-- eslint-disable-next-line @typescript-eslint/no-unused-vars -->
+		{#each Array(2) as _}
+			<div class="logo_items">
+				{#each supporters as supporter}
+					<SupporterCard
+						name={supporter.name}
+						blurb={supporter.blurb}
+						image={supporter.image}
+						url={supporter.url}
+					/>
+				{/each}
+			</div>
+		{/each}
 	</div>
 </section>
 
