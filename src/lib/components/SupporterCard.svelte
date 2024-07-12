@@ -19,14 +19,14 @@
 
 <style>
 	article {
-		width: 25.5rem;
 		height: auto;
 		display: flex;
 		flex-direction: column;
 		gap: 1.25rem;
 	}
 	.supporter-image {
-		height: 25.5rem;
+		width: 17.5rem;
+		height: 17.5rem;
 	}
 	.supporter-image img {
 		width: 100%;
@@ -46,5 +46,17 @@
 	}
 	.article-link:hover {
 		color: inherit;
+	}
+	@media (min-width: 768px) {
+		.supporter-image {
+			width: 19.5rem;
+			height: 19.5rem;
+		}
+	}
+	@media (min-width: 1024px) {
+		.supporter-image {
+			width: 25.5rem;
+			height: 25.5rem;
+		}
 	}
 </style>
