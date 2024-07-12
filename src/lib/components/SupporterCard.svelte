@@ -1,6 +1,4 @@
 <script>
-	import { MoveUpRight } from 'lucide-svelte'
-
 	export let name
 	export let blurb
 	export let image
@@ -20,11 +18,6 @@
 </a>
 
 <style>
-	.footer {
-		display: flex;
-		justify-content: space-between;
-		flex-wrap: wrap;
-	}
 	article {
 		width: 25.5rem;
 		height: auto;
@@ -46,16 +39,6 @@
 		width: 40rem;
 		*/
 		flex-grow: 1;
-	}
-	.link-icon {
-		line-height: 0;
-		margin-left: 1rem;
-	}
-	.read-more {
-		display: flex;
-		align-items: end;
-		text-decoration: none;
-		color: black;
 	}
 	.article-link {
 		text-decoration: none;
