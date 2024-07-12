@@ -7,7 +7,7 @@
 
 <a class="article-link" href={url}>
 	<article>
-		<div class="supporterImage">
+		<div class="supporter-image">
 			<img src={image} alt={name} />
 		</div>
 		<div>
@@ -25,10 +25,10 @@
 		flex-direction: column;
 		gap: 1.25rem;
 	}
-	.supporterImage {
+	.supporter-image {
 		height: 25.5rem;
 	}
-	.supporterImage img {
+	.supporter-image img {
 		width: 100%;
 		height: 100%;
 		border-radius: 0.3125rem;
