@@ -12,7 +12,7 @@ export function faqPlugin() {
 		let accordionCount = 0
 
 		visit(tree, 'element', (node, index, parent) => {
-			if (node.tagName === 'h2') {
+			if (node.tagName === 'h3') {
 				// This is a new question, create a new Accordion
 				accordionCount++
 				currentAccordion = {

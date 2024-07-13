@@ -1,13 +1,20 @@
 <script lang="ts">
+	import { slide } from 'svelte/transition'
+	import { page } from '$app/stores'
+
 	export let open = false
 	export let id: string
+
 	const details_id = `${id}-details`
 	const title_id = `${id}-title`
-	import { slide } from 'svelte/transition'
 	const handleClick = () => (open = !open)
+
+	$: if ($page.url.hash === `#${id}`) {
+		open = true
+	}
 </script>
 
-<div class="accordion">
+<div class="accordion" {id}>
 	<button on:click={handleClick} class="header" aria-expanded={open} aria-controls={details_id}>
 		<h3 class="title" id={title_id}>
 			<slot name="head" />
