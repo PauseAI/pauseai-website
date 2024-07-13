@@ -27,10 +27,11 @@
 	}
 
 	onMount(() => {
-		const nav = document.querySelector('nav')
-		const sideNav = document.querySelector('.side-nav')
-		if (nav) {
-			navHeight = nav.offsetHeight
+		y = 0
+		const topNav = document.querySelector<HTMLElement>('.top-nav')
+		const sideNav = document.querySelector<HTMLElement>('.side-nav')
+		if (topNav) {
+			navHeight = topNav.offsetHeight
 		}
 		if (sideNav) {
 			const rect = sideNav.getBoundingClientRect()
