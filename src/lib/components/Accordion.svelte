@@ -59,5 +59,6 @@
 		font-size: 3rem;
 		font-weight: 200;
 		line-height: 0;
+		margin-left: 1rem;
 	}
 </style>
