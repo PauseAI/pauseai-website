@@ -16,7 +16,7 @@ Un accord international se conclut généralement lors d'un sommet, où les diri
 L'objectif principal du sommet devrait être un **traité**. Ce traité devra spécifier les mesures politiques qui nous protègent des [risques liés à l'IA](https://pauseai.info/risks). Il doit être signé par tous les États membres de l'ONU.
 
 - **Créer une agence internationale de sécurité de l'IA**, similaire à l'AIEA (Agence internationale de l'énergie atomique). Les prérogatives de cette agence seront :
-  - Accorder les autorisations pour le \_déploiement \_d'IAs. Cela inclura des évaluations/tests approfondis des modèles.
+  - Accorder les autorisations pour le _déploiement_ d'IAs. Cela inclura des évaluations/tests approfondis des modèles.
   - Accorder les autorisations pour de _nouvelles sessions d'entraînement_ de modèles d'IA dépassant une certaine taille (par exemple : 1 milliard de paramètres).
   - Organiser des rencontres périodiques pour discuter des progrès de la recherche sur la sécurité de l'IA.
 - **Autoriser l'entraînement de systèmes d'IA générale plus puissants que GPT-4 uniquement si leur sécurité peut être garantie.**
