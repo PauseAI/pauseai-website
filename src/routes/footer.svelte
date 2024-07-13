@@ -12,7 +12,7 @@
 		<div class="column">
 			<h2>Information</h2>
 			<a href="/faq">FAQ</a>
-			<a href="/proposition">Proposition</a>
+			<a href="/propositions">Propositions</a>
 		</div>
 		<div class="column">
 			<h2>Risques</h2>

@@ -1,5 +1,5 @@
 ---
-title: Proposition de PauseAI
+title: Propositions de PauseAI
 description: Mettre en place un moratoire dans l'entraînement des systèmes d'IA plus puissants que GPT-4, interdire l'entraînement des systèmes d'IA sur du matériel sous droit d'auteur, tenir les créateurs de modèles d'IA responsables.
 ---
 
