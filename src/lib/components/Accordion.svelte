@@ -52,7 +52,6 @@
 
 	.details {
 		padding: 2rem 0 1.5rem 0;
-		background-color: #fff;
 	}
 
 	.icon {
