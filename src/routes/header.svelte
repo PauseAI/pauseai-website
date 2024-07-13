@@ -37,7 +37,7 @@
 			<!-- <NavLink href="/protests">Protests</NavLink> -->
 			<!-- <NavLink href="/faq">FAQ</NavLink> -->
 			<NavLink href="/agir">Agir</NavLink>
-			<NavLink href="/posts">Blog</NavLink>
+			<NavLink href="https://pauseia.substack.com/">Blog</NavLink>
 			<NavLink href="/dons">Dons</NavLink>
 			{#if enableBot}
 				<NavLink href="/chat">{botName}</NavLink>
