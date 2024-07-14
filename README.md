@@ -1,6 +1,6 @@
-# PauseAI.info website
+# PauseIA.fr website
 
-SvelteKit website for [PauseAI.info](https://pauseia.netlify.app/).
+SvelteKit website for [PauseIA.fr](https://pauseia.fr/).
 
 ## Creating articles
 
@@ -40,4 +40,4 @@ While SvelteKit implements "[Zero-effort type safety](https://svelte.dev/blog/ze
 
 ## Deployment
 
-The contents of the repository are continuously deployed to Netlify. You can track the deployment status [here](https://app.netlify.com/sites/pauseai/deploys).
+The contents of the repository are continuously deployed to Netlify. You can track the deployment status [here](https://app.netlify.com/sites/pauseai-france/deploys).

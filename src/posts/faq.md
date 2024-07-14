@@ -13,6 +13,7 @@ description: Questions fréquemment posées sur Pause IA et les risques de l'IA 
 </script>
 
 {#if toc}
+
 <!-- ↑↑↑ NE PAS TOUCHER ↑↑↑ -->
 
 ## Sommaire
@@ -35,14 +36,16 @@ description: Questions fréquemment posées sur Pause IA et les risques de l'IA 
 - [Je veux vous aider ! Que puis-je faire ?](#accordion16)
 
 <!-- ↓↓↓ NE PAS TOUCHER ↓↓↓ -->
+
 {/if}
+
 <!-- ↑↑↑ NE PAS TOUCHER ↑↑↑ -->
 
 ### Qui êtes-vous ?
 
-Nous sommes un ensemble de [bénévoles](https://pauseai.info/people) et de [groupes locaux](https://pauseai.info/communities), organisé par une [association à but non lucratif](https://pauseai.info/legal) dont l'objectif est de minimiser les [risques liés à l'IA](https://pauseai.info/risks) (y compris le [risque d'extinction](https://pauseai.info/xrisk)). Notre objectif est de convaincre nos gouvernements d'intervenir et [de mettre en pause le développement d'une IAG](https://pauseai.info/proposal) (Intelligence Artificielle Générale puis d’une Superintelligence). Dans ce but, nous alertons le public, dialoguons avec les décideurs et organisons des manifestations.
+Nous sommes un ensemble de [bénévoles](https://pauseai.info/people) et de [groupes locaux](https://pauseai.info/communities), organisé par une [association à but non lucratif](/mentions-legales) dont l'objectif est de minimiser les [risques liés à l'IA](/risques) (y compris le [risque d'extinction](/risques/humanite)). Notre objectif est de convaincre nos gouvernements d'intervenir et [de mettre en pause le développement d'une IAG](/propositions) (Intelligence Artificielle Générale puis d’une Superintelligence). Dans ce but, nous alertons le public, dialoguons avec les décideurs et organisons des manifestations.
 
-Vous pouvez nous rejoindre sur [Discord](https://discord.gg/) (C’est là que notre communauté est la plus active!), [Twitter](https://twitter.com/pause_ia), [Facebook](https://www.facebook.com/Pause.IA), [TikTok](https://www.tiktok.com/@pause_ia), [LinkedIn](https://www.linkedin.com/company/pause-ia/), [YouTube](https://www.youtube.com/@Pause_IA), [Instagram](https://www.instagram.com/pause_ia) et [Threads](https://www.threads.net/@pause_ia). Vous pouvez également nous contacter par mail à maxime@pauseai.info
+Vous pouvez nous rejoindre sur [Discord](https://discord.gg/vyXGd7AeGc) (C’est là que notre communauté est la plus active!), [Twitter](https://twitter.com/pause_ia), [Facebook](https://www.facebook.com/Pause.IA), [TikTok](https://www.tiktok.com/@pause_ia), [LinkedIn](https://www.linkedin.com/company/pause-ia/), [YouTube](https://www.youtube.com/@Pause_IA), [Instagram](https://www.instagram.com/pause_ia) et [Threads](https://www.threads.net/@pause_ia). Vous pouvez également nous contacter par mail à [maxime@pauseai.info](mailto:maxime@pauseai.info)
 
 ### N’êtes vous tout simplement pas des technophobes?
 
@@ -50,11 +53,11 @@ Vous seriez surpris d'apprendre que la plupart des membres de Pause IA sont favo
 
 ### Voulez-vous interdire toute forme d'IA ?
 
-Non. Seulement le développement des plus gros systèmes d'IA à usage général souvent appelés "modèles de pointe". La quasi-totalité des modèles existants, ainsi que la plupart des futurs modèles d'IA, resteraient [légaux selon notre proposition](https://pauseai.info/proposal). Nous demandons l'interdiction des systèmes plus puissants que GPT-4-o, jusqu'à ce que nous puissions exercer un contrôle démocratique sur ces modèles et que nous soyons en mesure de les créer en toute sécurité.
+Non. Seulement le développement des plus gros systèmes d'IA à usage général souvent appelés "modèles de pointe". La quasi-totalité des modèles existants, ainsi que la plupart des futurs modèles d'IA, resteraient [légaux selon notre proposition](/propositions). Nous demandons l'interdiction des systèmes plus puissants que GPT-4-o, jusqu'à ce que nous puissions exercer un contrôle démocratique sur ces modèles et que nous soyons en mesure de les créer en toute sécurité.
 
 ### Croyez-vous que GPT-4 va tous nous tuer ?
 
-Non, nous ne croyons pas que les [modèles actuels](https://pauseai.info/sota) représentent un risque existentiel. Probablement que la plupart des prochains modèles non plus. Mais si nous poursuivons le développement de systèmes toujours plus puissants, nous atteindrons un point de non-retour où l'un d'eux deviendra [une menace existentielle](https://pauseai.info/xrisk).
+Non, nous ne croyons pas que les [modèles actuels](https://pauseai.info/sota) représentent un risque existentiel. Probablement que la plupart des prochains modèles non plus. Mais si nous poursuivons le développement de systèmes toujours plus puissants, nous atteindrons un point de non-retour où l'un d'eux deviendra [une menace existentielle](/risques/humanite).
 
 ### Un moratoire ne risque-t-elle pas d'aggraver les choses ?
 
@@ -68,9 +71,9 @@ L’émergence d’une superintelligence n'est pas inévitable. Sa création né
 
 ### Qui vous finance ?
 
-Quasiment toutes nos actions jusqu'ici ont été menées par des bénévoles. Cependant, depuis février 2024, Pause IA est une [organisation à but non lucratif enregistrée](https://pauseai.info/legal), et nous avons reçu de multiples dons de particuliers. Nous avons également reçu 20 000 dollars de financement de la part du réseau LightSpeed.
+Quasiment toutes nos actions jusqu'ici ont été menées par des bénévoles. Cependant, depuis février 2024, Pause IA est une [organisation à but non lucratif enregistrée](/mentions-legales), et nous avons reçu de multiples dons de particuliers. Nous avons également reçu 20 000 dollars de financement de la part du réseau LightSpeed.
 
-Vous pouvez également [faire un don à Pause IA](https://pauseai.info/donate) si vous soutenez notre cause ! Nous utilisons l'essentiel de l'argent pour permettre à des communautés locales d'organiser des événements.
+Vous pouvez également [faire un don à Pause IA](/dons) si vous soutenez notre cause ! Nous utilisons l'essentiel de l'argent pour permettre à des communautés locales d'organiser des événements.
 
 ### Quels sont vos projets ?
 
@@ -117,7 +120,7 @@ De plus, nous appelons à un moratoire international , imposé par un traité. U
 
 ### OpenAI et Google semblent appeler de leurs vœux une réglementation. Pourquoi s’opposer à eux?
 
-Nous saluons les appels [d'OpenAI](https://openai.com/index/governance-of-superintelligence/) et de [Google](https://www.ft.com/content/8be1a975-e5e0-417d-af51-78af17ef4b79) pour demander une réglementation internationale vis-à-vis de l'IA. Cependant, nous pensons que les propositions actuelles ne suffiront pas à éviter une catastrophe. Google et Microsoft n'ont pas encore reconnu publiquement les risques existentiels liés à l'IA. Seul OpenAI [mentionne explicitement le risque d'extinction](https://openai.com/index/governance-of-superintelligence/). Cependant, leur stratégie est très claire: un moratoire est impossible, nous devons d'abord créer une superintelligence avant de penser à de sérieuses régulations. Mais il avouent eux-même [ne pas avoir résolu le problème d'alignemen](https://www.youtube.com/watch?t=1478&v=L_Guz73e6fw&feature=youtu.be)t et les derniers développements prouvent [qu'ils ne traitent pas ce problème avec le sérieux qu'il mérite](https://www.cnbc.com/2024/05/17/openai-superalignment-sutskever-leike.html). Ces entreprises sont engagées dans une course contre la montre au détriment de la sécurité, sacrifiée pour un avantage concurrentiel. C'est le résultat de la dynamique du marché. Nous devons encourager les gouvernements à intervenir et à mettre en place des politiques internationales pour [éviter les pires scénarios](https://pauseai.info/proposal).
+Nous saluons les appels [d'OpenAI](https://openai.com/index/governance-of-superintelligence/) et de [Google](https://www.ft.com/content/8be1a975-e5e0-417d-af51-78af17ef4b79) pour demander une réglementation internationale vis-à-vis de l'IA. Cependant, nous pensons que les propositions actuelles ne suffiront pas à éviter une catastrophe. Google et Microsoft n'ont pas encore reconnu publiquement les risques existentiels liés à l'IA. Seul OpenAI [mentionne explicitement le risque d'extinction](https://openai.com/index/governance-of-superintelligence/). Cependant, leur stratégie est très claire: un moratoire est impossible, nous devons d'abord créer une superintelligence avant de penser à de sérieuses régulations. Mais il avouent eux-même [ne pas avoir résolu le problème d'alignemen](https://www.youtube.com/watch?t=1478&v=L_Guz73e6fw&feature=youtu.be)t et les derniers développements prouvent [qu'ils ne traitent pas ce problème avec le sérieux qu'il mérite](https://www.cnbc.com/2024/05/17/openai-superalignment-sutskever-leike.html). Ces entreprises sont engagées dans une course contre la montre au détriment de la sécurité, sacrifiée pour un avantage concurrentiel. C'est le résultat de la dynamique du marché. Nous devons encourager les gouvernements à intervenir et à mettre en place des politiques internationales pour [éviter les pires scénarios](/propositions).
 
 ### Les entreprises d'IA prétendent-elles que le risque existentiel est réel pour nous manipuler ?
 
@@ -149,6 +152,6 @@ Une raison majeure pour laquelle de nombreuses personnes ne veulent toujours pas
 
 ### Je veux aider ! Que puis-je faire ?
 
-Il y a de nombreuses choses que [vous pouvez faire](https://pauseai.info/action). À titre individuel, [rédigez une lettre](https://pauseai.info/writing-a-letter), [distribuez des tracts](https://pauseai.info/flyering), sensibilisez votre entourage, prenez part à [une manifestation](https://pauseai.info/protests) ou [faites un don](https://pauseai.info/donate) ! Mais plus important : vous pouvez [rejoindre Pause IA](https://pauseai.info/join) et coordonner vos actions avec d'autres personnes membres. Si vous souhaitez vous impliquer davantage, vous pouvez devenir bénévole et [intégrer une de nos équipes.](https://pauseai.info/teams)
+Il y a de nombreuses choses que [vous pouvez faire](/agir). À titre individuel, [rédigez une lettre](https://pauseai.info/writing-a-letter), [distribuez des tracts](https://pauseai.info/flyering), sensibilisez votre entourage, prenez part à [une manifestation](https://pauseai.info/protests) ou [faites un don](/dons) ! Mais plus important : vous pouvez [rejoindre Pause IA](/nous-rejoindre) et coordonner vos actions avec d'autres personnes membres. Si vous souhaitez vous impliquer davantage, vous pouvez devenir bénévole et [intégrer une de nos équipes.](https://pauseai.info/teams)
 
 Même confrontés à la perspective de risques existentiels, il reste de l'espoir et du travail à accomplir. 💪

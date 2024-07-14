@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { url as siteUrl } from '$lib/config'
 	import { onMount } from 'svelte'
 	import ExternalLink from 'lucide-svelte/icons/external-link'
 	import Mail from 'lucide-svelte/icons/mail'
@@ -19,10 +20,7 @@
 	let type = Type.Internal
 	let anchor: HTMLAnchorElement
 
-	if (
-		(href.startsWith('http:') || href.startsWith('https:')) &&
-		!href.startsWith('https://pauseia.netlify.app/')
-	)
+	if ((href.startsWith('http:') || href.startsWith('https:')) && !href.startsWith(siteUrl))
 		type = Type.External
 	else if (href.startsWith('mailto:')) type = Type.Mail
 

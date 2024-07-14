@@ -10,24 +10,24 @@
 </script>
 
 <div class="social">
-	<a href="https://www.facebook.com/PauseAI/" target="_blank" title="Facebook">
+	<a href="https://www.facebook.com/Pause.IA/" target="_blank" title="Facebook">
 		<Facebook />
 	</a>
-	<a href="https://discord.gg/2XXWXvErfA" target="_blank" title="Discord">
+	<a href="https://discord.gg/vyXGd7AeGc" target="_blank" title="Discord">
 		<Discord />
 	</a>
-	<a href="https://twitter.com/PauseAI" target="_blank" title="X / Twitter">
+	<a href="https://twitter.com/pause_ia" target="_blank" title="X / Twitter">
 		<X />
 	</a>
-	<a href="https://www.linkedin.com/company/pauseai" target="_blank" title="LinkedIn">
+	<a href="https://www.linkedin.com/company/pause-ia/" target="_blank" title="LinkedIn">
 		<Linkedin />
 	</a>
-	<a href="https://www.tiktok.com/@pauseai" target="_blank" title="TikTok"><TikTok /></a>
-	<a href="https://www.instagram.com/pause_ai/" target="_blank" title="Instagram">
+	<a href="https://www.tiktok.com/@pause_ia" target="_blank" title="TikTok"><TikTok /></a>
+	<a href="https://www.instagram.com/pause_ia/" target="_blank" title="Instagram">
 		<Instagram />
 	</a>
-	<a href="https://www.youtube.com/@PauseAI" target="_blank" title="YouTube"> <Youtube /></a>
-	<a href="https://substack.com/@pauseai" target="_blank" title="Substack"><Substack /></a>
+	<a href="https://www.youtube.com/@Pause_IA" target="_blank" title="YouTube"> <Youtube /></a>
+	<a href="https://pauseia.substack.com/" target="_blank" title="Substack"><Substack /></a>
 </div>
 
 <style>

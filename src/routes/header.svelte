@@ -111,12 +111,12 @@
 			</button>
 		</div>
 		<div class="sidebar-links">
-			<a href="/risks" on:click={() => (open = !open)}><h2>Risques</h2></a>
-			<a href="/proposal" on:click={() => (open = !open)}><h2>Propositions</h2></a>
-			<a href="/action" on:click={() => (open = !open)}><h2>Agir</h2></a>
-			<a href="/posts" on:click={() => (open = !open)}><h2>Blog</h2></a>
-			<a href="/donate" on:click={() => (open = !open)}><h2>Dons</h2></a>
-			<a href="/join" on:click={() => (open = !open)}><h2>Nous rejoindre</h2></a>
+			<a href="/risques" on:click={() => (open = !open)}><h2>Risques</h2></a>
+			<a href="/propositions" on:click={() => (open = !open)}><h2>Propositions</h2></a>
+			<a href="/agir" on:click={() => (open = !open)}><h2>Agir</h2></a>
+			<a href="https://pauseia.substack.com/" on:click={() => (open = !open)}><h2>Blog</h2></a>
+			<a href="/dons" on:click={() => (open = !open)}><h2>Dons</h2></a>
+			<a href="/nous-rejoindre" on:click={() => (open = !open)}><h2>Nous rejoindre</h2></a>
 		</div>
 	</div>
 </nav>

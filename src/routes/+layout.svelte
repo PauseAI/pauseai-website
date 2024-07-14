@@ -16,7 +16,7 @@
 	import '../reset.css'
 	import '../app.css'
 
-	export let data
+	// export let data
 
 	$: bgWhite = $page.url.pathname == '/'
 </script>
@@ -28,7 +28,7 @@
 <div class="layout" class:bgWhite>
 	<Header />
 
-	{#key data.url}
+	{#key $page.url.pathname}
 		<main in:fade>
 			<slot />
 		</main>
