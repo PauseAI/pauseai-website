@@ -1,5 +1,5 @@
 <script>
-	import UnderlinedTitle from '../UnderlinedTitle.svelte'
+	import UnderlinedTitle from '$lib/components/UnderlinedTitle.svelte'
 
 	const label_id = 'lead-title'
 </script>

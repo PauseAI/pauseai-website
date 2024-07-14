@@ -1,7 +1,7 @@
 <script>
 	import ArticleCard from '$lib/components/ArticleCard.svelte'
 	import Button from '$lib/components/Button.svelte'
-	import UnderlinedTitle from '../UnderlinedTitle.svelte'
+	import UnderlinedTitle from '$lib/components/UnderlinedTitle.svelte'
 	const label_id = 'articles-title'
 </script>
 

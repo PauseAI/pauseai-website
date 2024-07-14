@@ -1,7 +1,7 @@
 <script lang="ts">
 	import Button from '$lib/components/Button.svelte'
 	import TabList from '$lib/components/TabList.svelte'
-	import UnderlinedTitle from '../UnderlinedTitle.svelte'
+	import UnderlinedTitle from '$lib/components/UnderlinedTitle.svelte'
 
 	const label_id = 'risks-title'
 </script>
