@@ -36,8 +36,8 @@
 	<meta property="twitter:card" content="summary_large_image" />
 	<meta property="twitter:image" content={imageUrl} />
 	<meta property="twitter:description" content={description} />
-	<meta property="twitter:site" content="@PauseAI" />
-	<meta property="twitter:creator" content="@PauseAI" />
+	<meta property="twitter:site" content="@pause_ia" />
+	<meta property="twitter:creator" content="@pause_ia" />
 	{@html `<script type="application/ld+json">
         ${JSON.stringify(schemaOrgMarkup)}
     </script>`}
