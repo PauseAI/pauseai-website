@@ -12,9 +12,9 @@
 			Ne laissons pas l'IA devenir une menace incontrôlable, <Mark>agissons immédiatement</Mark>
 		</h1>
 		<p>
-			La majorité des experts en Intelligence Artificielle estiment que l’IA pourrait conduire à une
-			catastrophe mondiale dans les prochaines années. Sommes-nous prêts à accepter le développement
-			de modèles d’IA plus dangereux que la bombe atomique sans mesure de protection{'\u00A0'}? Nous
+			Selon la majorité des experts, le développement rapide de l'intelligence artificielle présente
+			un danger catastrophique pour l'humanité à très court terme. Allons-nous accepter le
+			développement effréné de technologies plus dévastatrices que la bombe atomique{'\u00A0'}? Nous
 			faisons face à la menace la plus urgente de notre histoire. Chaque jour compte.
 			<br />
 			Agissez dès maintenant en rejoignant Pause IA.
