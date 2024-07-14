@@ -19,7 +19,7 @@ description: Questions fréquemment posées sur Pause IA et les risques de l'IA 
 ## Sommaire
 
 - [Qui êtes-vous ?](#accordion1)
-- [N’êtes-vous pas tout simplement (des) technophobes?](#accordion2)
+- [N’êtes-vous pas tout simplement (des) technophobes ?](#accordion2)
 - [Voulez-vous interdire toute forme d'IA ?](#accordion3)
 - [Croyez-vous que GPT-4 va tous nous tuer ?](#accordion4)
 - [Un moratoire ne risque-t-elle pas d'aggraver les choses ?](#accordion5)
@@ -28,7 +28,7 @@ description: Questions fréquemment posées sur Pause IA et les risques de l'IA 
 - [Quels sont vos projets ?](#accordion8)
 - [Comment comptez-vous convaincre les gouvernements de d'arrêter temporairement le développement de l'IA ?](#accordion9)
 - [Pourquoi manifester ?](#accordion10)
-- [Quelle est la probabilité que l'apparition d'une superintelligence ait de graves conséquences, y compris un risque d'extinction?](#accordion11)
+- [Quelle est la probabilité que l'apparition d'une superintelligence ait de graves conséquences, y compris un risque d'extinction ?](#accordion11)
 - [Combien de temps nous reste-t-il avant l'émergence d'une superintelligence ?](#accordion12)
 - [Si nous appliquons un moratoire, qu'en est-il de la Chine ?](#accordion13)
 - [OpenAI et Google semblent appeler de leurs voeux une réglementation. Pourquoi s'opposer à eux ?](#accordion14)
@@ -47,7 +47,7 @@ Nous sommes un ensemble de [bénévoles](https://pauseai.info/people) et de [gro
 
 Vous pouvez nous rejoindre sur [Discord](https://discord.gg/vyXGd7AeGc) (C’est là que notre communauté est la plus active!), [Twitter](https://twitter.com/pause_ia), [Facebook](https://www.facebook.com/Pause.IA), [TikTok](https://www.tiktok.com/@pause_ia), [LinkedIn](https://www.linkedin.com/company/pause-ia/), [YouTube](https://www.youtube.com/@Pause_IA), [Instagram](https://www.instagram.com/pause_ia) et [Threads](https://www.threads.net/@pause_ia). Vous pouvez également nous contacter par mail à [maxime@pauseai.info](mailto:maxime@pauseai.info)
 
-### N’êtes vous tout simplement pas des technophobes?
+### N’êtes vous tout simplement pas des technophobes ?
 
 Vous seriez surpris d'apprendre que la plupart des membres de Pause IA sont favorablement disposés envers le progrès technologique. Nombre d'entre eux sont impliqués dans le développement de l'IA, sont des amateurs de nouvelles technologies et ont longtemps été très enthousiastes face à l'avenir. Beaucoup s’intéressaient particulièrement au potentiel de développement de l’humanité que recèle l’IA. C'est pourquoi, quand ils se sont rendu compte des risques existentiels liés à l’IA, nombre d’entre eux ont eu beaucoup de mal à [l’accepter / l’intégrer](https://pauseai.info/psychology-of-x-risk).
 
@@ -96,7 +96,7 @@ Jetez un œil à notre "[Théorie du changement](https://pauseai.info/theory-of-
 
 Si vous voulez [organiser une manifestation](https://pauseai.info/organizing-a-protest), nous pouvons vous apporter conseils et ressources.
 
-### Quelle est la probabilité que l'apparition d'une superintelligence ait de graves conséquences, y compris un risque d'extinction?
+### Quelle est la probabilité que l'apparition d'une superintelligence ait de graves conséquences, y compris un risque d'extinction ?
 
 Nous avons compilé [une liste de valeurs "p(doom)"](https://pauseai.info/pdoom) (probabilité de scénarios catastrophiques) provenant de divers experts renommés dans le domaine.
 
@@ -118,7 +118,7 @@ La Chine a actuellement les réglementations les plus strictes au monde en mati�
 
 De plus, nous appelons à un moratoire international , imposé par un traité. Un tel traité doit également être signé par la Chine. Si le traité garantit que d'autres nations s'arrêteront aussi, et qu'il y a des mécanismes de contrôle et des mesures de mise en vigueur suffisantes, la Chine y sera probablement favorable.
 
-### OpenAI et Google semblent appeler de leurs vœux une réglementation. Pourquoi s’opposer à eux?
+### OpenAI et Google semblent appeler de leurs vœux une réglementation. Pourquoi s’opposer à eux ?
 
 Nous saluons les appels [d'OpenAI](https://openai.com/index/governance-of-superintelligence/) et de [Google](https://www.ft.com/content/8be1a975-e5e0-417d-af51-78af17ef4b79) pour demander une réglementation internationale vis-à-vis de l'IA. Cependant, nous pensons que les propositions actuelles ne suffiront pas à éviter une catastrophe. Google et Microsoft n'ont pas encore reconnu publiquement les risques existentiels liés à l'IA. Seul OpenAI [mentionne explicitement le risque d'extinction](https://openai.com/index/governance-of-superintelligence/). Cependant, leur stratégie est très claire: un moratoire est impossible, nous devons d'abord créer une superintelligence avant de penser à de sérieuses régulations. Mais il avouent eux-même [ne pas avoir résolu le problème d'alignemen](https://www.youtube.com/watch?t=1478&v=L_Guz73e6fw&feature=youtu.be)t et les derniers développements prouvent [qu'ils ne traitent pas ce problème avec le sérieux qu'il mérite](https://www.cnbc.com/2024/05/17/openai-superalignment-sutskever-leike.html). Ces entreprises sont engagées dans une course contre la montre au détriment de la sécurité, sacrifiée pour un avantage concurrentiel. C'est le résultat de la dynamique du marché. Nous devons encourager les gouvernements à intervenir et à mettre en place des politiques internationales pour [éviter les pires scénarios](/propositions).
 
@@ -142,7 +142,7 @@ En mai 2023, tout a changé :
 
 Ces entreprises ont été lentes à reconnaître la possibilité de risques existentiels, alors que beaucoup de leurs employés en étaient conscients depuis des années. Selon nous, les entreprises d'IA ont simplement réagi à l'émergence des risques existentiels dans le discours public et ont n'ont apporté leur réponse que lorsque le sujet est devenu inévitable.
 
-Mais les incitations commerciales vont à contre-courant : il n'est pas dans l'intérêt de ces entreprises que le public s'inquiète des dangers de leurs produits. Presque toutes minimisent les risques pour attirer clients et investisseurs. Combien de régulations et de négativité risquent-elles d'attirer en admettant ces dangers ? Et une entreprise comme OpenAI consacrerait-elle [20% de sa puissance de calcul informatique](https://openai.com/index/introducing-superalignment/) à la sécurité de l'IA si elle ne croyait pas en ces dangers?
+Mais les incitations commerciales vont à contre-courant : il n'est pas dans l'intérêt de ces entreprises que le public s'inquiète des dangers de leurs produits. Presque toutes minimisent les risques pour attirer clients et investisseurs. Combien de régulations et de négativité risquent-elles d'attirer en admettant ces dangers ? Et une entreprise comme OpenAI consacrerait-elle [20% de sa puissance de calcul informatique](https://openai.com/index/introducing-superalignment/) à la sécurité de l'IA si elle ne croyait pas en ces dangers ?
 
 Notre interprétation est que les entreprises d'IA ont signé cette déclaration parce qu'_elles savent que les risques existentiels sont un problème à prendre très au sérieux_.
 
