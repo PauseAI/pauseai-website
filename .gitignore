@@ -11,4 +11,4 @@ vite.config.ts.timestamp-*
 .netlify
 /static/pagefind
 .env
-/TODO
+/TODO*
