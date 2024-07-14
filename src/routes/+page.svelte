@@ -19,8 +19,8 @@
 
 <Risks />
 
-<Supporters />
+<!-- <Supporters /> -->
 
-<Articles />
+<!-- <Articles /> -->
 
 <Faq />
