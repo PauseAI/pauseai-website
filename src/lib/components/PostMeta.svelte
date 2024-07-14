@@ -28,6 +28,7 @@
 	<meta property="og:description" content={description} />
 	<meta property="og:image" content={imageUrl} />
 	<meta property="og:site_name" content={siteName} />
+	<meta property="og:locale" content="fr_FR" />
 	{#if date}
 		<meta property="article:published_time" content={date} />
 	{/if}
