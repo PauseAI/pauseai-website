@@ -66,7 +66,7 @@ Countries that don't comply with the treaty should be punished.
 Economic sanctions may be sufficient, but military intervention might be necessary in extreme cases.
 
 One actor in particular that some people believe will not pause is China.
-We disagree with this assessment and you can read about it [here](/faq#if-we-pause-what-about-china).
+We disagree with this assessment and you can read about it [here](https://pauseai.info/faq#if-we-pause-what-about-china).
 
 ## AI development might go underground
 
