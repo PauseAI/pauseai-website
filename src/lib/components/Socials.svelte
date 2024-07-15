@@ -7,6 +7,7 @@
 	import Linkedin from '$lib/components/icons/linkedin.svelte'
 	import X from '$lib/components/icons/x.svelte'
 	import Substack from './icons/substack.svelte'
+	import Threads from '$lib/components/icons/Threads.svelte'
 </script>
 
 <div class="social">
@@ -28,6 +29,7 @@
 	</a>
 	<a href="https://www.youtube.com/@Pause_IA" target="_blank" title="YouTube"> <Youtube /></a>
 	<a href="https://pauseia.substack.com/" target="_blank" title="Substack"><Substack /></a>
+	<a href="https://www.threads.net/@pause_ia" target="_blank" title="Threads"><Threads /></a>
 </div>
 
 <style>
