@@ -6,7 +6,7 @@
 	import Discord from '$lib/components/icons/discord.svelte'
 	import Linkedin from '$lib/components/icons/linkedin.svelte'
 	import X from '$lib/components/icons/x.svelte'
-	import Substack from './icons/substack.svelte'
+	import Substack from '$lib/components/icons/substack.svelte'
 	import Threads from '$lib/components/icons/Threads.svelte'
 </script>
 
@@ -35,19 +35,21 @@
 <style>
 	.social {
 		display: flex;
+		flex-wrap: wrap;
 		margin-left: -0.5rem;
 		margin-right: -0.5rem;
+		width: fit-content;
 	}
 
 	.social a {
 		padding: 0.5rem;
-		width: 1rem;
-		height: 1rem;
+		width: 3rem;
+		height: 3rem;
 		display: flex;
 		fill: var(--text);
 	}
 
 	.social a:hover {
-		fill: var(--brand);
+		fill: var(--white);
 	}
 </style>
