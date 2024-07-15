@@ -26,16 +26,24 @@
 		lastY = y
 	}
 
-	onMount(() => {
-		y = 0
-		const topNav = document.querySelector<HTMLElement>('.top-nav')
+	function calculateSideNavPosition() {
 		const sideNav = document.querySelector<HTMLElement>('.side-nav')
-		if (topNav) {
-			navHeight = topNav.offsetHeight
-		}
 		if (sideNav) {
 			const rect = sideNav.getBoundingClientRect()
 			sideNavInitialTop = rect.top + window.scrollY
+		}
+	}
+
+	onMount(() => {
+		y = 0
+		const topNav = document.querySelector<HTMLElement>('.top-nav')
+		if (topNav) {
+			navHeight = topNav.offsetHeight
+		}
+		calculateSideNavPosition()
+		window.addEventListener('resize', calculateSideNavPosition)
+		return () => {
+			window.removeEventListener('resize', calculateSideNavPosition)
 		}
 	})
 </script>
