@@ -3,7 +3,7 @@ title: PauseAI / No AGI Protest @ OpenAI San Francisco - February 12th, 2024
 description: We are organizing a protest to demand a pause on dangerous AI development.
 ---
 
-<script>
+<script lang="ts">
     import WidgetConsent from '$lib/components/widget-consent/WidgetConsent.svelte'
 </script>
 

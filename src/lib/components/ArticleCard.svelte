@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
 	import { MoveUpRight } from 'lucide-svelte'
 
 	export let title

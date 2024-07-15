@@ -3,7 +3,7 @@ title: PauseAI protest @ Microsoft Brussels - May 23rd, 2023
 description: We are organizing a protest at Microsoft to demand a summit to pause AI development.
 ---
 
-<script>
+<script lang="ts">
     import WidgetConsent from '$lib/components/widget-consent/WidgetConsent.svelte'
 </script>
 

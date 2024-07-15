@@ -3,7 +3,7 @@ title: PauseAI protest @ The Hague, Netherlands - August 11th
 description: We are organizing a protest to demand a pause on dangerous AI development.
 ---
 
-<script>
+<script lang="ts">
     import WidgetConsent from '$lib/components/widget-consent/WidgetConsent.svelte'
 </script>
 

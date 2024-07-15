@@ -2,7 +2,7 @@
 title: "San Francisco's 3-Day Picket: Demanding Pause on Advanced AI Development Near OpenAI"
 ---
 
-<script>
+<script lang="ts">
     import WidgetConsent from '$lib/components/widget-consent/WidgetConsent.svelte'
 </script>
 

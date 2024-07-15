@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
 	import { url as siteUrl } from '$lib/config'
 </script>
 

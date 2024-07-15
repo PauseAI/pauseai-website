@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
 	import UnderlinedTitle from '$lib/components/UnderlinedTitle.svelte'
 
 	const label_id = 'lead-title'

@@ -3,7 +3,7 @@ title: PauseAI protest @ Bletchley Park - November 1st
 description: We are organising a protest at Bletchley Park, during the AI Safety Summit
 ---
 
-<script>
+<script lang="ts">
     import WidgetConsent from '$lib/components/widget-consent/WidgetConsent.svelte'
 </script>
 
