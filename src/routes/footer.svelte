@@ -16,10 +16,10 @@
 		</div>
 		<div class="column">
 			<h2>Risques</h2>
-			<a href="/risques/objets-et-economie">Objets et économie</a>
-			<a href="/risques/individus">Individus</a>
-			<a href="/risques/civilisation-et-information">Civilisation et information</a>
-			<a href="/risques/humanite">Humanité</a>
+			<a href="/risques/economiques-et-materiels">Économiques et matériels</a>
+			<a href="/risques/pour-les-individus">Pour les individus</a>
+			<a href="/risques/pour-la-societe">Pour la société</a>
+			<a href="/risques/pour-l'humanite">Pour l'humanité</a>
 		</div>
 		<div class="column">
 			<h2>Agir</h2>
