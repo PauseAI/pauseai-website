@@ -42,6 +42,11 @@
 	@media (min-width: 1024px) {
 		a {
 			font-size: 1.1rem;
+			padding: 0.8rem;
+		}
+	}
+	@media (min-width: 1280px) {
+		a {
 			padding: 1rem;
 		}
 	}
