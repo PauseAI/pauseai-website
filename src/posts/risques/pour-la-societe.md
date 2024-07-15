@@ -1,127 +1,58 @@
 ---
-title: Why an AI takeover could be very likely
-description: As AI surpasses human capabilities, the likelihood of an AI takeover becomes very high.
+title: Risques pour la société
+description: Les risques sociétaux de l'IA, incluant des menaces pour la démocratie, la cohésion sociale et l'emploi, nécessitent une régulation proactive, une refonte des systèmes d'information et une éducation à la pensée critique pour préserver nos valeurs et structures sociales.
 ---
 
-One of the concerns of AI scientists is that a superintelligence could take over control of our planet.
-This does not necessarily mean that everyone dies, but it does mean that (almost) all humans will lose control over our future.
+Certains risques touchent la société entière, et doivent être considérés dans cette perspective afin de ne pas en négliger des aspects majeurs. Les risques pour la société liés à l'IA sont vastes et touchent directement à la cohésion sociale et aux fondements de la démocratie. Ces risques portent sur l'intégrité des processus démocratiques par l’affaiblissement, la polarisation et la désinformation, mais aussi sur les processus sociaux comme les biais raciaux ou l’automatisation du travail, ainsi que sur des problèmes plus directs comme la guerre et le terrorisme.
 
-We discuss the basics of x-risk mostly in [an other article](/xrisk).
-In this article here, we will argue that this takeover risk is not only real but that it is very likely to happen _if we build a superintelligence_.
+Ces risques émergeant souvent d’un usage mal avisé des nouvelles technologies, une régulation proactive, une refonte des systèmes d'information et une éducation à la pensée critique sont les meilleures mesures afin de préserver nos valeurs et nos structures sociales.
 
-## The argument
+## Perpétuation des biais
 
-- An Agentic Superintelligence is likely to exist in the (near) future.
-- Some instance of the ASI will attempt a takeover.
-- A takeover attempt by an ASI is likely to succeed.
-- A successful takeover is permanent.
-- A takeover is probably bad for most humans.
+Les IA apprennent de leurs données d’entraînement, et on leur demande souvent d’imiter le comportement d’humains, y compris leurs biais raciaux ou de genre.
 
-## An Agentic SuperIntelligence is likely to exist in the near future
+Alors que des entreprises d’IA fleurissent à travers la France et que son usage se démocratise à toutes les échelles de la société, ces biais risquent de se répandre et de devenir impossibles à éliminer.
 
-A SuperIntelligence (SI) is a type of AI that has capabilities that surpass those of all humans in virtually every domain.
-Some [state-of-the-art AI models](/sota) already have superhuman capabilities in certain domains, but none of them exceeds all humans at a wide range of tasks.
-As AI capabilities improve due to innovations in training architectures, runtime environments, and larger scale, we can expect that an AI will eventually surpass humans in virtually every domain.
+Ce risque doit être mitigé par les fournisseurs d’IA qui sont responsables des erreurs de leurs produits en dépensant plus d’efforts à cerner et corriger les biais. Il est aussi recommandé aux individus et entreprises de se tenir informés pour ne pas être complices dans la perpétuation des biais.
 
-Not all AI systems are agents.
-An agent an entity that is capable of making decisions and taking actions to achieve a goal.
-A large language model, for example, does not pursue any objective on its own.
-However, runtime environments can easily turn a non-agentic AI into an agentic AI.
-An example of this is AutoGPT, which recursively lets a language model generate its next input.
-If an SI pursues an objective in the real world, we call it an Agentic SuperIntelligence (ASI).
-Since we can already turn non-agentic AI into agentic AI, we can expect that an ASI will exist shortly after an SI exists.
+## Détérioration de l’épistémologie
 
-It is virtually impossible to accurately predict when ASI will exist.
-It might take decades, it [might happen next month](/urgency).
-We should act as if it will happen soon, because the consequences of being wrong are so severe.
+Par le passé, il était difficile d’accéder à une information lorsqu’elle existait dans un endroit idéologiquement ou géographiquement lointain. De nos jours, il est difficile de vérifier une information, car il existe trop de bruit, d’erreurs et de mensonges, ce qui réduit notre exposition à des opinions contradictoires. Les systèmes de recommandation conçus pour maximiser l’engagement des utilisateurs aggravent ce problème en nous poussant vers des contenus dont nous approuvons plutôt que vers des contenus informants, ce qui favorise la création de chambres d’échos. De plus, la facilitation de la génération de contenu faux rend d’autant plus facile le fait d’accuser ses opposants idéologiques de falsifier leurs affirmations par l’IA, ce qui nuit à la santé du débat public.
 
-## Some instance of the ASI will attempt a takeover
+Tous ces problèmes accumulés nous conduisent vers un futur où chercher la vérité devient difficile personnellement et socialement.
 
-In a takeover attempt, an ASI will take actions to maximize its control over the world.
-A takeover attempt could happen for at least two reasons:
+Un individu peut se garder de ce risque par des efforts d’hygiène mentale, mais le risque porte sur une perte générale de la capacité à s’informer par soi-même, ce qui pose des problèmes à l’échelle de la société même lorsque certains individus sont immunisés.
 
-1. Because an AI is explicitly instructed to do so.
-2. As a sub-goal of another goal.
+Ce risque peut être combattu par des campagnes d’information et d’éducation, par une régulation des réseaux sociaux et autres systèmes d’information, mais il nécessite surtout une refonte complète de notre rapport à l’information.
 
-This first reason is likely to happen at some point if we wait long enough, but the second reason is quite likely to happen accidentally, even early on after the creation of an ASI.
+## Polarisation et affaiblissement
 
-The sub-goal of _maximizing control_ over the world could be likely to occur due to _instrumental convergence_: the tendency of sub-goals to converge on power-grabbing, self-preservation, and resource acquisition:
+L’IA peut être utilisée à des fins politiques et idéologiques, en exploitant ses capacités à manipuler ou persuader des humains et à sélectionner du contenu qui influencera leurs émotions.
 
-- The more control you have, the harder it will be from any other agent to prevent you from achieving your goal.
-- The more control you have, the more resources you have to achieve your goal. (For example, an AI tasked with calculating pi might conclude that it would be beneficial to use all computers on the world to calculate pi.
+Des acteurs étatiques peuvent notamment cibler la population de pays opposés pour la pousser à l’instabilité et au mécontentement, en générant et en boostant la visibilité de contenus controversés, comme [la Russie l’a fait pour la France](https://downloads.ctfassets.net/kftzwdyauwt9/5IMxzTmUclSOAcWUXbkVrK/3cfab518e6b10789ab8843bcca18b633/Threat_Intel_Report.pdf). Similairement, il n’est peut-être pas impossible de saper systématiquement les capacités mentales d’un pays en exposant sa population à des contenus démoralisants ou abrutissants, comme la Chine est soupçonnée de le faire à travers TikTok.
 
-Not every instance of an ASI will necessarily attempt a takeover.
-The important insight is that **it only has to happen once**.
+Ce risque doit être géré par des interventions du gouvernement pour en identifier les vecteurs et les contrer. Idéalement, des accords internationaux garantiraient que ce genre d’armes informationnelles ne soient pas utilisées.
 
-A world which is not yet taken over, but does have an ASI that _could_ take over, is in a fundamentally unstable condition.
-In a similar way, a country without a government is in a fundamentally unstable condition.
-It is not a question of _if_ a takeover attempt will happen, but _when_ it will happen.
+## Guerre automatisée
 
-The process of taking over can involve hacking into virtually all systems that are connected to the internet, manipulating people, and controlling physical resources.
-A takeover attempt is successful when the ASI has control over virtually every aspect of our world.
-This could be a slow process, where the ASI gradually gains more and more control over the course of months, or it could be a sudden process.
-The speed at which a takeover attempt takes place will depend on the capabilities of the ASI.
+Les drones et robots sont de plus en plus utilisés dans les armées à la pointe de la technologie. A première vue, il s’agit d’un développement positif, en réduisant l’investissement et le coût humain de la guerre.
 
-When an ASI has control over the world, it can prevent other ASIs from taking over.
-A takeover can therefore happen only once.
-A rational ASI will therefore attempt a takeover as soon as it is capable of doing so.
-It is likely that the first ASI that is capable of doing so will attempt a takeover.
+Mais il n’en est pas de même quant à l’automatisation des prises de décision. Les dérapages des IA touchent alors à des systèmes critiques qui peuvent facilement attaquer des populations civiles. On risque littéralement un scénario à la Terminator.
 
-## A takeover attempt by an ASI is likely to succeed
+Les armées qui refusent d’automatiser leur hiérarchie courent le risque d’être moins efficaces, notamment en termes de vitesse de réaction. Mais dans l’autre sens, deux systèmes stratégiques automatisés pourraient aggraver une situation tendue pour des raisons confuses à grande vitesse.
 
-For a human, doing a takeover is an almost impossible task.
-Not a single person ever successfully took over control over the entire world.
-Some dictators came close, but they never had control over everything.
+Il y a donc une dynamique perverse qui pousse les armées à faire courir des risques d’entrée en guerre au reste du monde, et de guerres plus totales, afin de ne pas être dépassées technologiquement.
 
-An AI has certain important advantages over humans that make a takeover attempt much more likely to succeed.
+Ce risque doit être contré par des accords internationaux pour éviter la mise en service de systèmes d’IA militaires et de régulations nationales pour éviter leur développement.
 
-1. **Intelligence**. A superintelligence is much smarter than a human, so it will be able to come up with better strategies to achieve its goals.
-2. **Speed**. The human brain runs at 1-100hz, whereas computer chips can run at clock speeds in the GHz range.
-3. **Parallelism**. A human can only do one thing at a time, whereas an AI can create new instances of itself and run them in parallel.
-4. **Memory**. A human can only remember a limited amount of information, whereas an AI can store virtually unlimited amounts of information.
-5. **Collaboration**. Humans can work together but are limited in the speed at which they communicate. They also have different, conflicting goals that make collaboration less effective. An AI can collaborate with other instances of itself at the speed of light, and it can have a single goal.
-6. **Self-improvement**. An AI can improve itself, whereas humans cannot.
-7. **Physical limitations**. An AI can run on any computer, whereas humans are limited by their own physical bodies that require specific temperatures, food, water, and oxygen. Humans need to sleep and are vulnerable to diseases. An AI can use any robotic body to interact with the physical world.
+## Bioterrorisme
 
-These various advantages will make it very unlikely that humans will be able to stop a takeover attempt.
+L’IA peut être utilisée pour démocratiser la conception de composants chimiques toxiques et dans le futur pourrait permettre la conception de pathogènes sans besoin d’expertise humaine. Les acteurs mal intentionnés, limités principalement par un manque de moyens et d’expertise, pourraient entreprendre des actions terroristes à une échelle nationale voire planétaire en empoisonnant des sources d’eau ou en déployant des pandémies artificielles.
 
-One may think that an AI, as a piece of software, is still fundamentally limited by what it can do in the real world.
-However, due to our reliance on the internet, AI can have a huge impact on the real world without ever leaving the digital realm.
-Here are some of the things that an AI might do to take over:
+Ce risque peut être mitigé en préparant nos systèmes de défense et sanitaire pour tenir compte de cette possibilité. Il peut être évité en contrôlant le développement et l’utilisation d’IA capables de faciliter des actions terroristes.
 
-- **Replicate itself** (or just its assignment) on other computers, for example by creating accounts on free cloud providers.
-- **Make money** (e.g. by building a software service) and hire people to do things to help it take over.
-- **Threaten humans** (with violence or blackmail) to do things that help it take over.
-- **Write a virus** using [novel zero-day exploits](/cybersecurity-risks) that infects other computers, replicating itself or gaining full control.
-- Help existing robotics companies **build robots** (e.g. by leaking new designs), and take over these robots when they are ready.
-- Use existing factories to **build technology that we do not understand**, perhaps even using derived knowledge of physics that we are not aware of. Think nanotechnology, quantum computing, and bioengineering.
+## Enracinement de l’oppression
 
-One might suggest that having **safeguards** in place could prevent a takeover like adding a kill switch, or not connecting it to the internet.
-However, since the ASI will be more intelligent than humans, it is likely to come up with strategies to circumvent these safeguards.
-For example, if the ASI is not connected to the internet, it might manipulate humans into connecting it to the internet, for example by promising to solve a difficult problem and by behaving in a way that makes it seem trustworthy, or by convincing humans that it is a moral agent.
-It's worth noting that even this obvious safeguard is not being used as of now, as tools like ChatGPT are already connected to the internet and thousands of APIs.
+De même que les IA persuasives pourraient être utilisées pour déstabiliser un État, elles pourraient être utilisées au contraire pour asseoir son autorité en sapant l’opposition, notamment dans le cas d’un État autoritaire dénué de scrupules éthiques. Les technologies de surveillance, notamment aidées par la reconnaissance faciale et le profilage automatisé, pourraient efficacement contrôler la population tandis que les technologies d’information influenceraient les idées auxquelles elle serait exposée, garantissant ainsi la stabilité du système sans besoin de coercition physique.
 
-One other solution is to use ASI to _prevent_ a takeover.
-An aligned ASI would be able to come up with strategies that
-
-## A takeover is probably bad for most humans
-
-The ASI that happens to take over could do so for many reasons.
-For most random goals that it could have, humans are not part of it.
-If we end up with an ASI that is indifferent to humans, we are competing for the same resources.
-
-It seems unlikely that the ASI wants to kill humanity for the sake of killing humanity - it is far more likely that it wants to use the resources that we use for some other objective. Additionally, humanity might pose a threat to the ASI's objective, as there is a risk that we will try to stop it from achieving its goal (e.g. by turning it off).
-
-One of the most likely outcomes of a takeover is therefore that all humans die.
-
-But even in the outcomes where humans do survive, we are still at risk of being worse off.
-If a goal does involve keeping humans alive, it is possible that _human well-being_ is _not_ part of the same goal.
-It doesn't take a lot of imagination to see how horrible it would be to be kept alive in a world where we are artificially kept alive by an ASI that is indifferent to our suffering.
-
-And even if the AI that takes over is under human control, we don't know that the one controlling the AI will have everyone's best interests in mind.
-It is hard to imagine a functioning democracy when an ASI exists that can manipulate people at super-human level.
-
-## Conclusion
-
-If these premises are true, then the likelihood of an AI takeover approaches certainty as AI surpasses human capabilities.
-So [let's not build a superintelligence](/action).
+Ce risque peut être évité en éduquant la population aux valeurs démocratiques. A vrai dire, il est moins susceptible de se concrétiser en France que dans des pays où l’IA est déjà largement utilisée à des fins de surveillance et de contrôle de l’information.

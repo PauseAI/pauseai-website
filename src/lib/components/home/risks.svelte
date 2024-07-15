@@ -10,11 +10,10 @@
 	<UnderlinedTitle id={label_id}>Les risques</UnderlinedTitle>
 	<TabList
 		tabs={[
-			'Risque existentiel',
-			"Usurpation d'identité",
-			'Instabilité économique',
-			'Préjugés et discrimination',
-			'Menace pour la démocratie'
+			'Risques économiques et matériels',
+			'Risques pour les individus',
+			'Risques pour la société',
+			'Risques pour l’humanité'
 		]}
 		id="risks-tabs"
 		let:tab
@@ -22,109 +21,67 @@
 	>
 		{tab}
 		<svelte:fragment slot="panel" let:tab>
-			{#if tab === 'Risque existentiel'}
+			{#if tab === 'Risques économiques et matériels'}
 				<p>
-					Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc dapibus felis a metus
-					venenatis auctor ut vel orci. Praesent pulvinar nisl sed lorem aliquam volutpat. Ut vel
-					varius augue, sit amet semper tortor. Praesent dignissim ornare consequat. Praesent
-					aliquam, magna vel sollicitudin placerat, augue dolor euismod libero, sit amet
-					sollicitudin nisi eros non ipsum. Sed eu suscipit dui. Donec tincidunt nisi pharetra,
-					mattis augue ut, convallis nisi. Cras ipsum magna, volutpat sed libero sed, ornare
-					molestie velit. Aenean lorem dui, euismod ac sollicitudin in, luctus quis lacus. Duis
-					dapibus dapibus lorem, in porta ipsum efficitur et. Donec elementum nisi nunc, quis luctus
-					ante varius dictum. Mauris ut nisl sapien. Aliquam erat volutpat. Nullam at congue ligula.
-					Cras porta, metus ut hendrerit dictum, arcu metus eleifend arcu, non tristique nunc mauris
-					vitae enim.
+					Les risques économiques et matériels liés à l'intelligence artificielle concernent
+					principalement les impacts directs sur les infrastructures, les entreprises, et les
+					ressources matérielles. Alors que l'IA promet des avancées significatives dans
+					l'optimisation et l'automatisation des processus, elle introduit également des
+					vulnérabilités nouvelles et des possibilités de dysfonctionnements. Ces risques
+					comprennent la facilitation d’attaques à l’aide d’IA, les dysfonctionnements prosaïques et
+					l’impact économique de technologies de rupture. Bien qu’il soit important de gérer les
+					risques qui menacent des personnes humaines, ceux-ci ne sont pas non plus à négliger.
 				</p>
 				<p>
-					Sed dolor libero, dictum in commodo ut, suscipit vel lectus. Nam in justo cursus, euismod
-					arcu ut, molestie leo. Class aptent taciti sociosqu ad litora torquent per conubia nostra,
-					per inceptos himenaeos. Nunc iaculis augue orci, vitae pharetra nunc faucibus volutpat.
-					Proin ac cursus metus. Curabitur aliquet nulla at ipsum vulputate, sed faucibus felis
-					pellentesque. Praesent at venenatis turpis, vel congue urna. Suspendisse elementum
-					vestibulum elit. In sapien dolor, venenatis eget felis quis, blandit vestibulum turpis.
-					Morbi vel viverra orci, non vulputate orci. Sed convallis ultrices placerat. Class aptent
-					taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nunc
-					ullamcorper in tortor sit amet blandit. Morbi tincidunt quis magna tincidunt volutpat.
-					Fusce sit amet massa vitae augue laoreet rutrum ac non justo. Mauris pulvinar dictum lorem
-					eget mattis.
+					La gestion de ces risques nécessite une vigilance accrue, des régulations rigoureuses et
+					surtout des innovations technologiques pour garantir la résilience et la sécurité des
+					systèmes d’IA et de systèmes confrontés à l’IA.
 				</p>
-				<Button href="/risks">En apprendre davatange</Button>
-			{:else if tab === "Usurpation d'identité"}
+				<Button href="/risques/economiques-et-materiels">En apprendre davatange</Button>
+			{:else if tab === 'Risques pour les individus'}
 				<p>
-					Nulla pretium ligula justo, non tincidunt arcu molestie sit amet. Vivamus finibus felis
-					tempor hendrerit ultricies. Etiam feugiat ullamcorper felis, quis interdum ligula
-					imperdiet non. Aliquam faucibus viverra lacus, quis bibendum neque rhoncus vel. Morbi
-					malesuada eros laoreet porttitor facilisis. Suspendisse venenatis faucibus placerat. Donec
-					ultrices viverra nisl, nec ullamcorper nunc tincidunt vel. Sed interdum tellus vel
-					eleifend imperdiet. Vestibulum ac odio risus. Interdum et malesuada fames ac ante ipsum
-					primis in faucibus. Vestibulum facilisis ex a justo pretium dictum. Donec in ornare justo.
+					L'intégration de l'IA dans la vie quotidienne pose des risques significatifs pour les
+					individus, touchant à leur vie privée, leur sécurité et leur bien-être. Ces risques
+					incluent la violation de la confidentialité, la désinformation et la manipulation, avec
+					pour conséquence des dommages émotionnels ou physiques graves. Pour atténuer ces risques,
+					il est crucial de mettre en place des cadres réglementaires robustes et des pratiques de
+					sensibilisation et d'éducation auprès du public, ainsi que des gardes-fous intégrés aux
+					systèmes d’IA.
 				</p>
+				<Button href="/risques/pour-les-individus">En apprendre davatange</Button>
+			{:else if tab === 'Risques pour la société'}
 				<p>
-					Pellentesque elit enim, molestie non nisl eu, cursus consequat ante. Suspendisse eget eros
-					id tellus pellentesque convallis blandit ac velit. Morbi egestas ut ex id condimentum.
-					Quisque quis dictum quam, quis luctus velit. Phasellus nec faucibus mauris. Maecenas
-					tincidunt ligula in arcu feugiat interdum. Fusce condimentum rhoncus rutrum. Quisque
-					tincidunt mauris in nisl hendrerit ornare. Integer pellentesque nisl sit amet lorem
-					euismod, sit amet pretium ligula semper.
-				</p>
-				<Button href="/risks">En apprendre davatange</Button>
-			{:else if tab === 'Instabilité économique'}
-				<p>
-					Etiam eu commodo justo. Curabitur tortor nunc, pulvinar at bibendum ut, efficitur interdum
-					libero. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac
-					turpis egestas. Curabitur at pulvinar risus. Phasellus dignissim arcu risus, non cursus
-					leo posuere vel. Integer luctus dapibus justo eget accumsan. Etiam vehicula, tellus nec
-					condimentum commodo, nisi nunc lobortis ligula, eget fermentum tortor erat sed ligula.
-					Cras sollicitudin, urna eget finibus vulputate, dolor purus auctor lectus, nec tempor elit
-					mi ut mi. Nulla eu enim lacus. Donec a porta dui, sed bibendum mauris. Duis dictum, risus
-					at egestas finibus, velit urna pretium purus, a efficitur tortor nibh ac odio. Donec
-					tincidunt ut nibh ut consequat. In ullamcorper nisi malesuada metus pellentesque, eleifend
-					consequat purus convallis. Phasellus ut orci enim. Curabitur et lorem quis erat malesuada
-					interdum. Sed massa lacus, pellentesque scelerisque aliquam ut, maximus eget mauris.
+					Certains risques touchent la société entière, et doivent être considérés dans cette
+					perspective afin de ne pas en négliger des aspects majeurs. Les risques pour la société
+					liés à l'IA sont vastes et touchent directement à la cohésion sociale et aux fondements de
+					la démocratie. Ces risques portent sur l'intégrité des processus démocratiques par
+					l’affaiblissement, la polarisation et la désinformation, mais aussi sur les processus
+					sociaux comme les biais raciaux ou l’automatisation du travail, ainsi que sur des
+					problèmes plus directs comme la guerre et le terrorisme.
 				</p>
 				<p>
-					Proin vel odio orci. Mauris convallis, dolor at varius posuere, dui sem volutpat augue, at
-					placerat felis sapien eget ex. Vivamus et nisi congue nibh viverra luctus ut vel mauris.
-					Aenean semper, est non dictum luctus, erat nulla interdum magna, at viverra nisi neque at
-					massa. Nam vel lectus in ligula pellentesque fringilla. Pellentesque a eros sem. Donec
-					gravida, neque a lobortis placerat, nunc urna elementum ligula, quis mattis velit est
-					tristique enim. Mauris at nulla eget diam cursus blandit. Fusce vestibulum eget quam non
-					laoreet.
+					Ces risques émergeant souvent d’un usage mal avisé des nouvelles technologies, une
+					régulation proactive, une refonte des systèmes d'information et une éducation à la pensée
+					critique sont les meilleures mesures afin de préserver nos valeurs et nos structures
+					sociales.
 				</p>
-				<Button href="/risks">En apprendre davatange</Button>
-			{:else if tab === 'Préjugés et discrimination'}
+				<Button href="/risques/pour-la-societe">En apprendre davatange</Button>
+			{:else if tab === 'Risques pour l’humanité'}
 				<p>
-					Donec sed felis sem. Donec porttitor nisl vitae nunc bibendum bibendum. In enim ex,
-					accumsan ut maximus quis, luctus et sapien. Proin volutpat mollis massa. Aenean libero
-					tellus, luctus vel ipsum in, ultricies suscipit nibh. Integer ac facilisis arcu. Sed
-					rhoncus suscipit mi id gravida. Nullam ut semper nulla, quis tristique turpis. Sed sit
-					amet neque sed tellus hendrerit varius eleifend non tortor.
-				</p>
-				<p>
-					Aenean commodo at tellus a ultrices. Nullam nulla lectus, efficitur at leo at, hendrerit
-					sagittis libero. Quisque nec diam vitae nibh auctor ullamcorper ac non sapien. Nunc a
-					dolor hendrerit, tristique elit vel, aliquet urna. Nunc a nisi congue, efficitur libero
-					vitae, elementum neque. Proin quis ligula at odio rhoncus tristique consectetur viverra
-					magna. Ut sed eros cursus, tincidunt mauris non, aliquet massa. Sed venenatis non felis
-					eget pretium. Cras cursus aliquam dolor non malesuada.
-				</p>
-				<Button href="/risks">En apprendre davatange</Button>
-			{:else if tab === 'Menace pour la démocratie'}
-				<p>
-					Aenean mattis purus iaculis scelerisque pharetra. Sed consectetur vitae ligula in
-					volutpat. Morbi scelerisque lacus ex. Donec eget lorem in dolor iaculis rutrum id et erat.
-					Maecenas rutrum suscipit sapien. Praesent mauris eros, ornare in justo non, tincidunt
-					maximus eros. Vestibulum ipsum lectus, rhoncus in libero id, semper blandit risus.
+					Plus spéculativement, l’IA pose des risques qui menacent durablement le futur de
+					l’humanité. Ces risques ne peuvent pas forcément être observés, et il est peu probable que
+					nous aurons des sirènes d’alarme plus claires qu’aujourd’hui avant qu’il ne soit trop
+					tard. C’est pourquoi il est nécessaire d’y réfléchir même s'il existe peu d’arguments
+					empiriques pour aider à y voir plus clair. Ces risques apocalyptiques sont liés au
+					potentiel extraordinaire de l’IA générale, et passent par des innovations technologiques
+					qui pourraient arriver dans 6 mois ou dans 10 ans.
 				</p>
 				<p>
-					Aenean accumsan, purus sed aliquet vulputate, quam erat tempus ipsum, et aliquam diam
-					turpis non arcu. Nulla varius justo quis fermentum condimentum. Nullam bibendum porttitor
-					odio eget fermentum. In efficitur vestibulum semper. Vivamus laoreet sit amet magna ac
-					scelerisque. Ut laoreet sem leo, vitae sagittis sem vulputate et. Phasellus vulputate nisl
-					nec molestie vehicula. Nullam pulvinar tempor tortor quis pulvinar.
+					La recherche en alignement technique est notre meilleur espoir d’éviter ces risques car
+					des mesures régulatoires ne peuvent que les ralentir. On n’arrête pas le progrès quand il
+					y a des milliards de dollars à la clé.
 				</p>
-				<Button href="/risks">En apprendre davatange</Button>
+				<Button href="/risques/pour-l'humanite">En apprendre davatange</Button>
 			{/if}
 		</svelte:fragment>
 	</TabList>

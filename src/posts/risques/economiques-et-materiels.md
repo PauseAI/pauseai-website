@@ -1,71 +1,48 @@
 ---
-title: Cybersecurity risks of AI
-description: How AI could be used to hack all devices.
+title: Risques économiques et matériels
+description: Les risques économiques et matériels de l'IA incluent des impacts sur les infrastructures et les entreprises, de nouvelles vulnérabilités, et des défis d'automatisation, nécessitant une gestion prudente via la régulation et l'innovation technologique.
 ---
 
-Virtually everything we do nowadays is in some way dependent on computers.
-We pay for our groceries, plan our days, contact our loved ones and even drive our cars with computers.
-And virtually all of these computers are connected to each other.
-This makes all of us vulnerable to cyberattacks.
+Les risques économiques et matériels liés à l'intelligence artificielle concernent principalement les impacts directs sur les infrastructures, les entreprises, et les ressources matérielles. Alors que l'IA promet des avancées significatives dans l'optimisation et l'automatisation des processus, elle introduit également des vulnérabilités nouvelles et des possibilités de dysfonctionnements. Ces risques comprennent la facilitation d’attaques à l’aide d’IA, les dysfonctionnements prosaïques et l’impact économique de technologies de rupture. Bien qu’il soit important de gérer les risques qui menacent des personnes humaines, ceux-ci ne sont pas non plus à négliger.
 
-Highly potent cyber weapons, malware and botnets (such as [Stuxnet](https://www.youtube.com/watch?v=nd1x0csO3hU), [Mirai](<https://en.wikipedia.org/wiki/Mirai_(malware)>) and [EMOTET](https://en.wikipedia.org/wiki/Emotet)) have always been difficult to create.
-The [Pegasus cybersecurity weapon](<https://en.wikipedia.org/wiki/Pegasus_(spyware)>), for example, cost hundreds of millions of dollars to develop.
-Finding so-called zero-day exploits (vulnerabilities that have not yet been discovered) requires a lot of skill and a lot of time - only highly specialized hackers can do it.
-However, when AI becomes sufficiently advanced, this will no longer be the case.
-Instead of having to hire a team of highly skilled security experts/hackers to find zero-day exploits, anyone could just use a far cheaper AI.
+La gestion de ces risques nécessite une vigilance accrue, des régulations rigoureuses et surtout des innovations technologiques pour garantir la résilience et la sécurité des systèmes d’IA et de systèmes confrontés à l’IA.
 
-The latest AI systems can already analyze and write software.
-They [can find vulnerabilities](https://betterprogramming.pub/i-used-gpt-3-to-find-213-security-vulnerabilities-in-a-single-codebase-cc3870ba9411) in software, and [they could be used to exploit them](https://blog.checkpoint.com/2023/03/15/check-point-research-conducts-initial-security-analysis-of-chatgpt4-highlighting-potential-scenarios-for-accelerated-cybercrime/).
-GPT-4 can already [autonomously hack websites](https://arxiv.org/html/2402.06664v1), performing tasks as complex as blind database schema extraction and SQL injections without human feedback, which was discovered 18 months after GPT-4 finished training.
-GPT-4 already [outperforms 88%](https://arxiv.org/pdf/2402.11814.pdf) of human hackers in a CTF competition.
-It can also [autonomously exploit 87% of tested vulnerabilities](https://arxiv.org/abs/2404.08144), which is a huge step up from GPT-3.5 or open-source models, which all got 0%.
-As AI capabilities grow, so will the vulnerabilities they can detect and the exploits they can create.
-They are not yet as good at this as the best humans are, so right now the danger is limited.
-However, capabilities are rapidly increasing, and can jump quite suddenly.
+## Cyberattaques
 
-Note that AI also enables completely novel types of attacks.
-For example, AI can be used to [hear the password you typed from an online call](https://beebom.com/ai-crack-password-listening-keyboard-sounds/)
-or use [Wi-Fi to see humans through walls](https://www.marktechpost.com/2023/02/15/cmu-researchers-create-an-ai-model-that-can-detect-the-pose-of-multiple-humans-in-a-room-using-only-the-signals-from-wifi/).
-AI can also be used to make [self-modifying malware](https://www.hyas.com/blog/blackmamba-using-ai-to-generate-polymorphic-malware), which makes it far harder to detect.
+Lorsque l’IA surpassera les meilleurs programmeurs humains, elle pourra être utilisée pour créer de nouveaux types de cyberattaques et découvrir de nouvelles vulnérabilités. Elle peut déjà être utilisée pour automatiser les attaques afin d’augmenter leur étendue et les rendre adaptives aux mesures de sécurité.
 
-There will most likely come a point where an AI is better at hacking than the best human hackers.
-This can go wrong in many ways.
+L’IA peut aussi être utilisée pour renforcer la cyberdéfense des systèmes, mais de nombreux systèmes n’en prendront pas la peine. De plus, la cybersécurité est un domaine asymétrique où il est plus facile de découvrir/introduire des vulnérabilités que de les corriger.
 
-- **Infrastructure**: Cyberweapons can be used to gain access to or disable critical infrastructure, such as [oil pipelines](https://en.wikipedia.org/wiki/Colonial_Pipeline_ransomware_attack) or [power grids](https://obr.uk/box/cyber-attacks-during-the-russian-invasion-of-ukraine/).
-- **Financial**: Cyberweapons can be used to [steal money from banks](https://en.wikipedia.org/wiki/2015%E2%80%932016_SWIFT_banking_hack), or to [manipulate the stock market](https://en.wikipedia.org/wiki/2010_flash_crash).
-- **Military**: Equipment such as weapons and sensors are increasingly dependent on wireless connectivity and complex software.
+Les cyberattaques peuvent aussi causer des morts humaines ou de la désorganisation à grande échelle (par exemple en paralysant un hôpital ou un bureau gouvernemental).
 
-## Large scale cyberattacks
+Ce risque peut être évité en régulant le déploiement d’IA à fortes capacités de programmation.
 
-It may be possible that such powerful AI will be used to create a virus that uses a large number of zero-day exploits.
-Most cyberweapons use
-A sufficiently capable AI could analyze and find vulnerabilities in the source code of all operating systems and other software.
-Such a virus might infect any computer, regardless of the operating system, through multiple channels such as Wi-Fi, Bluetooth, UTP, etc.
-This could give full control over these machines and allows the controller to steal data, use the hardware for its own computations, encrypt the contents for ransom or [disable the machine entirely](https://en.wikipedia.org/wiki/Hardware_Trojan).
+## Perte de fonction par défaut
 
-A virus like this could be created as a tool by criminals to steal money, or as a very destructive cyber weapon by a nation or terrorist organization.
-However, as AI becomes more agentic, it could also be autonomously created and deployed by [misaligned AI](/xrisk).
+A cause de problèmes de mauvaise généralisation des objectifs ou de détournement des spécifications, il est difficile de garantir que des systèmes d’IA auront un comportement correct après leur déploiement. Si ces systèmes sont une partie critique d’un processus économique, leur dysfonctionnement peut causer des dommages considérables.
 
-If the goal of a cyberattack was to disable devices and infrastructure, the damage could be massive.
-Our society is increasingly dependent on computers and the internet.
-Payments, transportation, communication, planning, supply chains, power grids...
-If our devices no longer function properly, many parts of our society fail to function, too.
+Certains de ces dysfonctionnements sont issus d’un manque de données et de capacités et seront probablement réglés alors que la technologie mature.
 
-Over [93% of cybersecurity experts](https://www.weforum.org/publications/global-cybersecurity-outlook-2023/) believe “a far-reaching, catastrophic cyber event is likely in the next two years”.
+Si vous utilisez des systèmes d’IA à vos propres fins, tenez-vous au courant des limitations de vos outils, de leurs modes d’échecs connus et contrôlez la qualité de leurs sorties.
 
-## Mitigating AI Cybersecurity Risks
+Ce risque peut être mitigé en contrôlant la qualité des systèmes d’IA et en poussant plus loin les techniques actuelles d’alignement. De nouvelles techniques d’alignement sont nécessaires pour l’éviter prouvablement.
 
-The story above can only happen if:
+## Perte de fonction par intervention extérieure :
 
-1. The **capability of finding zero-day exploits** emerges. Current models can already discover some vulnerabilities, but this will likely improve with newer models.
-2. The **model gets into the hand of bad actors**. This can happen if the model weights are leaked, if the model is open-sourced, or if it's developed by a malicious actor.
-3. The **security vulnerabilities are not patched** before such a cyberweapon is deployed. Unfortunately, the defenders are at a disadvantage if the model is widely distributed for two reasons:
-   1. Patching + releasing + deploying takes far longer than attacking. The Window of Vulnerability is larger than the time it takes to create the attack.
-   2. The attackers only need to find one vulnerability, while the defenders need to find all of them.
+Un système d’IA est plus à risque de dysfonctionnement lorsqu’il se trouve en-dehors de ses conditions normales d’utilisation - on parle de sortie de distribution lorsque sa situation est différente de celles sur lesquelles il a été entraîné. On tente autant que possible d’améliorer la robustesse des IA hors distribution de nos jours, mais des techniques d’attaques adverses, qui consistent pour un acteur opposé à générer une situation de façon à éliciter un comportement erroné, posent problème.
 
-There are various measures we can implement to tackle these:
+Pour des systèmes généralistes, il est impossible d’explorer tous les cas d’utilisation possibles afin de les corriger, et il est relativement facile de contourner les précautions de sécurité ad hoc qui empêchent l’utilisateur moyen d’utiliser ces systèmes à des fins néfastes.
 
-- **Do not allow the training of models that can find zero-day exploits**. This is the most effective way to prevent this from happening. It's the safest path, and it's what we're [proposing](/proposal).
-- **Only allow models to be deployed or open-sourced after extensive testing**. If they have dangerous abilities, do not release them.
-- **Impose strict cybersecurity regulations to prevent model weights from being leaked**. If you allow dangerous models to exist, make sure they do not fall in the wrong hands.
-- **Require AI companies to use the AI to fix vulnerabilities**. If a model is trained that can find novel security vulnerabilities, use this to contact software maintainers to patch these vulnerabilities. Give the patching process sufficient time before the model is released. Make sure the weights are not leaked, and protect the model as if it's the launch code for a nuclear strike. If this is done properly, AI can dramatically improve cybersecurity everywhere.
+De plus, l’utilisation de quantités massives de données impossibles à contrôler par un humain ouvre la voie à l’empoisonnement de données qui introduisent des vulnérabilités dans les systèmes qui s’entraînent dessus.
+
+En sens contraire, les attaques adverses peuvent être utilisées pour renforcer la sécurité d’un système et l’empoisonnement de données permet à des acteurs indépendants de lutter contre le vol de données.
+
+Ces risques sont l’objet de beaucoup de recherches motivées par des intérêts économiques et de souveraineté donc la dynamique entre attaque et défense fluctue rapidement. Ils peuvent être influencés par des actions à toutes les étapes : régulation, standards, alignement technique, sécurité au déploiement, etc.
+
+## Takeover entrepreneurial
+
+Les nombreuses applications de l’IA présentent des opportunités d’innovations de rupture qui permettraient à une entreprise de gagner rapidement en valeur et de s’imposer à travers la société. Alors que cette possibilité est généralement acceptée ou désirée comme une conséquence normale de notre système économique, les applications de l’IA à la surveillance, à la persuasion, à la médecine et à l’armement devraient nous rendre circonspect pour une fois : voulons-nous d’une entreprise globale qui domine notre capacité à nous soigner, ou dont l’aval est nécessaire pour avoir des opinions individuelles protégées des outils de manipulation en ligne ?
+
+Un takeover entrepreneurial, quoiqu’on puisse débattre de sa désirabilité en soi, diminuerait la responsabilité des fournisseurs d’IA et paverait la voie à des abus d’une ampleur sans précédent.
+
+Ce risque peut être mitigé par des régulations, des actions en justice et un engagement citoyen sur le sujet.
