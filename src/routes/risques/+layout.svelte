@@ -3,7 +3,7 @@
 	import MoveLeftIcon from '$lib/components/icons/move-left.svelte'
 	import MoveRightIcon from '$lib/components/icons/move-right.svelte'
 	export let data
-	const index = data.posts.findIndex((post) => post.slug === data.url)
+	const index = data.posts.findIndex((post) => post.slug === data.url.pathname)
 	const prev = data.posts[index - 1]
 	const next = data.posts[index + 1]
 
@@ -69,7 +69,7 @@
 	<nav class="side-nav" style="top: {sideNavInitialTop}px;">
 		<ul>
 			{#each data.posts as post}
-				<li class:current={post.slug === data.url}>
+				<li class:current={post.slug === data.url.pathname}>
 					<a href={post.slug}>{post.title}</a>
 				</li>
 			{/each}
