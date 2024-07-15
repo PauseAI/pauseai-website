@@ -1,18 +1,30 @@
 <script lang="ts">
 	import ExternalLink from '$lib/components/custom/a.svelte'
 	import Logo from '$lib/components/logo.svelte'
+	import Socials from '$lib/components/Socials.svelte'
 </script>
 
 <footer>
-	<div class="logo">
-		<Logo fill_circle="white" fill_ai="white" />
+	<div class="brand">
+		<div class="logo">
+			<Logo fill_circle="white" fill_ai="white" />
+		</div>
 		<p>Pour une IA alignée sur l’humanité.</p>
+	</div>
+	<div class="socials">
+		<h2>Suivez-nous</h2>
+		<Socials />
 	</div>
 	<div class="footer-links">
 		<div class="column">
-			<h2>Information</h2>
+			<h2>Navigation</h2>
 			<a href="/faq">FAQ</a>
+			<a href="/risques">Risques</a>
 			<a href="/propositions">Propositions</a>
+			<a href="/agir">Agir</a>
+			<a href="https://pauseia.substack.com/">Blog</a>
+			<a href="/dons">Dons</a>
+			<a href="/nous-rejoindre">Nous Rejoindre</a>
 		</div>
 		<div class="column">
 			<h2>Risques</h2>
@@ -45,36 +57,42 @@
 	footer {
 		background-color: #ff9416;
 		display: flex;
-		padding: 6rem 6rem;
-		gap: 5rem;
+		flex-direction: column;
+		gap: 2rem;
 		overflow: hidden;
+		padding: 2rem;
+	}
+
+	.logo {
+		height: 66px;
+	}
+
+	.socials {
+		display: flex;
+		flex-direction: column;
+		align-items: start;
 	}
 
 	.footer-links {
 		display: flex;
 		gap: 2.5rem;
-		font-size: 1.125;
+		flex-direction: column;
 	}
 
-	@media (max-width: 750px) {
-		footer {
-			flex-direction: column;
-			padding: 6rem 2rem;
-		}
-		.footer-links {
-			flex-direction: column;
-		}
+	.brand,
+	.socials,
+	.column {
+		gap: 0.5rem;
 	}
 
 	.column {
-		/* All equal width */
 		display: flex;
 		flex-direction: column;
 		gap: 0.5rem;
 		flex: 1;
 	}
 
-	.footer-links h2 {
+	h2 {
 		font-size: 1.5rem;
 		font-family: var(--font-heading);
 		font-weight: 700;
@@ -91,7 +109,61 @@
 		text-decoration: underline;
 	}
 
-	.logo p {
+	.brand p {
 		margin-top: 1rem;
+		margin-bottom: 0;
+		text-align: center;
+		font-style: italic;
+	}
+	@media (min-width: 480px) {
+		.footer-links {
+			display: grid;
+			grid-template-columns: repeat(2, 1fr);
+			grid-template-rows: repeat(2, 1fr);
+		}
+	}
+	@media (min-width: 768px) {
+		footer {
+			padding: 4rem 6rem;
+			display: grid;
+			gap: 3rem;
+			grid-template-columns: minmax(1rem, auto) 1fr;
+		}
+
+		.brand {
+			grid-column: 1;
+			grid-row: 1;
+		}
+
+		.logo {
+			height: fit-content;
+		}
+
+		.socials {
+			grid-column: 2;
+			grid-row: 1;
+			align-items: center;
+		}
+
+		.footer-links {
+			display: flex;
+			grid-column: 1 / -1;
+			grid-row: 2;
+			flex-direction: row;
+		}
+	}
+	@media (min-width: 1280px) {
+		footer {
+			padding: 6rem;
+			grid-template-columns: minmax(1rem, auto) repeat(2, 1fr);
+			grid-template-rows: 1fr;
+			gap: 3rem;
+		}
+		.brand,
+		.socials,
+		.footer-links {
+			grid-column: auto;
+			grid-row: unset;
+		}
 	}
 </style>

@@ -39,6 +39,7 @@
 		margin-left: -0.5rem;
 		margin-right: -0.5rem;
 		width: fit-content;
+		justify-content: start;
 	}
 
 	.social a {
@@ -51,5 +52,11 @@
 
 	.social a:hover {
 		fill: var(--white);
+	}
+
+	@media (min-width: 768px) {
+		.social {
+			justify-content: center;
+		}
 	}
 </style>
