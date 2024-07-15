@@ -20,7 +20,7 @@
 </script>
 
 <!-- probably have to change nav colors and classes to respond to banner presence instead of route -->
-<nav class={onHomepage ? 'absolute-nav' : ''}>
+<nav>
 	<a href="/" class="logo">
 		<div class="big-logo">
 			<Logo animate={!onHomepage} fill_pause={onHomepage ? 'white' : 'black'} />
@@ -131,6 +131,7 @@
 		left: 100%;
 		padding: 2rem 1rem;
 		transition: left 0.3s ease-in-out;
+		z-index: 1000;
 	}
 
 	.sidebar-links {
@@ -156,19 +157,18 @@
 		left: 0;
 	}
 
-	.absolute-nav {
-		position: absolute;
+	/* .absolute-nav {
 		width: 100%;
 		height: fit-content;
 		z-index: 1000;
-	}
+	} */
 	nav {
 		display: flex;
 		justify-content: space-between;
 		/* margin-left: -1rem; */
 		flex-wrap: wrap;
 		z-index: 1;
-		padding: 2rem 1rem;
+		padding: 1rem;
 	}
 
 	/* .logo {

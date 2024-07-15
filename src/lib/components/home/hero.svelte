@@ -7,6 +7,16 @@
 </script>
 
 <section class="hero" aria-labelledby={label_id}>
+	<div class="hero-overlay">
+		<enhanced:img
+			src="$lib/assets/hero_bg.jpg"
+			alt="PauseAI protesters"
+			class="hero-bg"
+			sizes="min(1920px, 100vw)"
+			fetchpriority="high"
+			loading="eager"
+		/>
+	</div>
 	<section class="hero-content">
 		<h1 id={label_id}>
 			Ne laissons pas l'IA devenir une menace incontrôlable, <Mark>agissons immédiatement</Mark>
@@ -21,20 +31,19 @@
 		</p>
 		<Button href="/action">Agir</Button>
 	</section>
-	<enhanced:img
-		src="$lib/assets/hero_bg.jpg"
-		alt="PauseAI protesters"
-		class="hero-bg"
-		sizes="min(1920px, 100vw)"
-		fetchpriority="high"
-		loading="eager"
-	/>
+
 	<LeftCorner />
 	<RightCorner />
 </section>
 
 <style>
 	.hero {
+		display: flex;
+		height: calc(100vh - 8.125rem);
+		align-items: center;
+		z-index: 0;
+	}
+	.hero-overlay {
 		position: absolute;
 		overflow: hidden;
 		top: 0;
@@ -43,14 +52,13 @@
 		height: 100vh;
 		align-items: center;
 		display: flex;
+		z-index: -1;
 	}
 	.hero-content {
 		color: #fff;
 		text-align: left;
 		max-width: 29rem;
-		z-index: 1;
 		width: 100%;
-		margin: 1rem;
 	}
 	.hero-content h1 {
 		font-size: 2rem;
@@ -66,7 +74,7 @@
 		height: 100%;
 		object-fit: cover;
 	}
-	.hero::after {
+	.hero-overlay::after {
 		content: '';
 		position: absolute;
 		width: 100%;
@@ -99,15 +107,8 @@
 			rgba(1, 1, 1, 0.48) 100%
 		);
 	}
-	@media (min-width: 640px) {
-		.hero-content {
-			margin: 2rem;
-		}
-	}
-
 	@media (min-width: 768px) {
 		.hero-content {
-			margin: 4rem;
 			max-width: 40rem;
 		}
 		.hero-content h1 {
@@ -120,7 +121,6 @@
 	@media (min-width: 1024px) {
 		.hero-content {
 			max-width: 51rem;
-			margin: 6rem;
 		}
 		.hero-content h1 {
 			font-size: 3.5rem;
