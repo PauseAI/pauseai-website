@@ -20,7 +20,7 @@
 			<slot name="head" />
 		</h3>
 
-		<span class="icon">+</span>
+		<span class="icon">{open ? '\u2212' : '+'}</span>
 	</button>
 
 	{#if open}
