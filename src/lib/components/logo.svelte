@@ -3,9 +3,23 @@
 	export let fill_pause = 'black'
 	export let fill_circle = '#FF9416'
 	export let fill_ai = '#FF9416'
+	export let height: number | undefined = undefined
+	export let width: number | undefined = undefined
 	export let only_circle = false
-	const height = (243 * 22) / 81
-	$: width = only_circle ? 66 : 243
+
+	const baseWidth = 243
+	const baseHeight = 66
+	const aspectRatio = baseWidth / baseHeight
+
+	$: if (width === undefined) {
+		height ??= baseHeight
+		width = only_circle ? height : height * aspectRatio
+	}
+
+	$: if (height === undefined) {
+		width ??= baseWidth
+		height = only_circle ? width : width / aspectRatio
+	}
 </script>
 
 <!-- viewBox isn't aligned to 0 0 -->
@@ -14,7 +28,7 @@
 	class:logo-animate={animate}
 	{width}
 	{height}
-	viewBox={`-2 0 ${width.toString()} 66`}
+	viewBox={`-2 0 ${(width ?? baseWidth).toString()} ${(height ?? baseHeight).toString()}`}
 	fill="none"
 	role="img"
 	xmlns="http://www.w3.org/2000/svg"
@@ -43,7 +57,6 @@
 
 <style>
 	.logo {
-		/* width: 11rem; */
 		overflow: visible;
 	}
 	.logo-circle {
