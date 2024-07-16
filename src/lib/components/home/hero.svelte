@@ -42,6 +42,7 @@
 		height: calc(100vh - 8.125rem);
 		align-items: center;
 		z-index: 0;
+		margin-top: 1rem;
 	}
 	.hero-overlay {
 		position: absolute;
