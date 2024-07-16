@@ -8,6 +8,9 @@ import remarkToc from 'remark-toc'
 import rehypeSlug from 'rehype-slug'
 import { faqPlugin } from './src/lib/faqPlugin.js'
 
+import { config as dotenv } from 'dotenv'
+dotenv()
+
 /** @type {import('mdsvex').MdsvexOptions} */
 const mdsvexOptions = {
 	extensions: ['.md'],
@@ -32,7 +35,10 @@ const config = {
 	kit: {
 		adapter: adapter({
 			edge: true
-		})
+		}),
+		prerender: {
+			entries: process.env.PUBLIC_UNDER_CONSTRUCTION === 'true' ? [] : ['*']
+		}
 	}
 }
 
