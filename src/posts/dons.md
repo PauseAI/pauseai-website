@@ -3,7 +3,7 @@ title: Faire un don à Pause IA
 description: Grâce à votre soutien financier, nous pouvons avoir un plus grand impact.
 ---
 
-Nous avons créé Pause IA en tant que bénévoles et nous y contribuons sur notre temps libre. Depuis février 2024, Pause IA est inscrite juridiquement en tant [qu'organisation à but non lucratif](/mentions-legales). Nous ne disposons pas encore de fonds suffisants pour embaucher des employés à temps plein. Nous fonctionnons donc toujours grâce au travail bénévole. Avec votre soutien financier, nous pourrons nous professionnaliser et avoir davantage d'impact.
+Nous avons créé Pause IA en tant que bénévoles et nous y contribuons sur notre temps libre. Depuis juin 2024, Pause IA est inscrite juridiquement en tant [qu'organisation à but non lucratif](/mentions-legales). Nous ne disposons pas encore de fonds suffisants pour embaucher des employés à temps plein. Nous fonctionnons donc toujours grâce au travail bénévole. Avec votre soutien financier, nous pourrons nous professionnaliser et avoir davantage d'impact.
 
 <div style="display: flex; justify-content: center;" ><a href="https://www.paypal.com/donate/?hosted_button_id=4TWZXY62EM5VE"><img src="/PayPal.svg" alt="Faites un don avec Paypal" width="256" /></a></div>
 
@@ -16,7 +16,7 @@ Nous avons créé Pause IA en tant que bénévoles et nous y contribuons sur not
 - **Impératifs juridiques et financiers**: constitution de l'organisation (frais de notaire), gestion comptable.
 - **Initiatives locales**: notre programme de [micro-subventions](https://pauseai.info/microgrants) soutient divers projets à petite échelle.
 
-## Ce que nous avons déjà accompli
+## Ce que PauseAI International a déjà accompli
 
 - Plus de 1000 personnes ont [rejoint](/nous-rejoindre) Pause AI (international), dont beaucoup travaillent activement sur divers projets.
 - Plus de 100 projets sont disponibles sur notre serveur Discord (sites web, ateliers, vidéos, réponses à des consultations gouvernementales, etc.)
