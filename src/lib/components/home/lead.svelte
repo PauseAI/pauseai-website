@@ -6,7 +6,7 @@
 
 <section class="lead" aria-labelledby={label_id}>
 	<UnderlinedTitle id={label_id}
-		>L’avènement de l’intelligence artificielle{'\u00A0'}: un défi sans précédent pour l’humanité.
+		>L’avènement de l’intelligence artificielle{'\u00A0'}: un défi sans précédent pour l’humanité
 	</UnderlinedTitle>
 	<p>
 		Le développement d’intelligences artificielles progresse à une vitesse fulgurante{'\u00A0'}: en
@@ -14,7 +14,7 @@
 		capacités humaines dans de nombreux domaines. Bien que l'IA promette des avancées positives
 		potentielles, le revers de la médaille est terrifiant. D'après les experts en sécurité et
 		éthique de l’IA, un développement incontrôlé promet également un assortiment de calamités{'\u00A0'}:
-		désinformation à grande échelle, manipulation de masse, cyber attaques dévastatrices, pandémies
+		désinformation à grande échelle, manipulation de masse, cyberattaques dévastatrices, pandémies
 		artificielles, et perte de contrôle de systèmes autonomes, allant jusqu’à menacer la survie même
 		de l'humanité.
 	</p>
