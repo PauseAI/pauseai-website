@@ -1,5 +1,5 @@
 ---
-title: Propositions de PauseAI
+title: Propositions de Pause IA
 description: Mettre en place un moratoire dans l'entraînement des systèmes d'IA plus puissants que GPT-4, interdire l'entraînement des systèmes d'IA sur du matériel sous droit d'auteur, tenir les créateurs de modèles d'IA responsables.
 ---
 
@@ -16,7 +16,7 @@ Un accord international se conclut généralement lors d'un sommet, où les diri
 L'objectif principal du sommet devrait être un **traité**. Ce traité devra spécifier les mesures politiques qui nous protègent des [risques liés à l'IA](/risques). Il doit être signé par tous les États membres de l'ONU.
 
 - **Créer une agence internationale de sécurité de l'IA**, similaire à l'AIEA (Agence internationale de l'énergie atomique). Les prérogatives de cette agence seront :
-  - Accorder les autorisations pour le _déploiement_ d'IAs. Cela inclura des évaluations/tests approfondis des modèles.
+  - Accorder les autorisations pour le _déploiement_ d'IA. Cela inclura des évaluations/tests approfondis des modèles.
   - Accorder les autorisations pour de _nouvelles sessions d'entraînement_ de modèles d'IA dépassant une certaine taille (par exemple : 1 milliard de paramètres).
   - Organiser des rencontres périodiques pour discuter des progrès de la recherche sur la sécurité de l'IA.
 - **Autoriser l'entraînement de systèmes d'IA générale plus puissants que GPT-4 uniquement si leur sécurité peut être garantie.**
@@ -26,13 +26,13 @@ L'objectif principal du sommet devrait être un **traité**. Ce traité devra sp
   - La sécurité ne peut être garantie que par l’existence d’un fort consensus scientifique et par [la preuve](https://arxiv.org/abs/2309.01933) que le _problème de l’alignement a été résolu_. Pour l'instant, ce n'est pas le cas, nous ne devrions donc pas permettre l'entraînement de tels systèmes.
   - Il se peut que le problème de l’alignement de l'IA ne soit jamais résolu - il pourrait être insoluble. Dans ce cas, nous ne devrions jamais autoriser l'entraînement de tels systèmes.
   - Même si nous pouvons construire une IA sûre et contrôlable, ne développer et déployer cette technologie qu'avec un **contrôle démocratique** solide. Une superintelligence est trop puissante pour être contrôlée par une seule entreprise ou un seul pays.
-  - **[Surveiller les ventes de GPU](https://arxiv.org/abs/2303.11341)** et autre matériel pouvant être utilisé pour entraîner des IAs.
+  - **[Surveiller les ventes de GPU](https://arxiv.org/abs/2303.11341)** et autre matériel pouvant être utilisés pour entraîner des IA.
 - **Autoriser le déploiement de modèles seulement après avoir obtenu l’assurance qu'ils ne présentent aucune [capacité dangereuse](https://pauseai.info/dangerous-capabilities).**
   - Nous aurons besoin de normes et d'équipes d'évaluation indépendantes pour déterminer si un modèle possède des capacités dangereuses.
   - La liste des capacités à risque pourra évoluer avec la croissance des capacités de l'IA.
   - Noter que se fier uniquement aux évaluations de modèles [n'est pas suffisant](https://pauseai.info/4-levels-of-ai-regulation).
 
-Mettre en place un moratoire peut avoir des effets délétères si il n'est pas implémentée correctement. [En savoir plus sur la façon d'atténuer ces risques.](https://pauseai.info/mitigating-pause-failures)
+Mettre en place un moratoire peut avoir des effets délétères s'il n'est pas implémenté correctement. [En savoir plus sur la façon d'atténuer ces risques.](https://pauseai.info/mitigating-pause-failures)
 
 ## **Autres mesures pour un ralentissement effectif**
 
@@ -41,7 +41,7 @@ Mettre en place un moratoire peut avoir des effets délétères si il n'est pas 
 
 ## **Politique à long terme**
 
-A l’heure où ce texte est rédigé, l'entraînement d'un modèle de la taille de GPT-3 coûte plusieurs millions de dollars. Cela rend l'entraînement de tels modèles très difficile, et facilite son contrôle via le traçage des GPUs. Cependant, le coût d'entraînement diminue de façon exponentielle avec l'amélioration des composants matériels et l'arrivée de nouveaux algorithmes d'entraînement..
+A l’heure où ce texte est rédigé, l'entraînement d'un modèle de la taille de GPT-3 coûte plusieurs millions de dollars. Cela rend l'entraînement de tels modèles très difficile, et facilite son contrôle via le traçage des GPUs. Cependant, le coût d'entraînement diminue de façon exponentielle avec l'amélioration des composants matériels et l'arrivée de nouveaux algorithmes d'entraînement.
 
 Arrivera un moment où des modèles d'IA potentiellement superintelligents pourront être entraînés pour quelques milliers de dollars ou moins, peut-être même sur du matériel grand public. Nous devons nous y préparer. Nous devrions envisager les politiques suivantes :
 
