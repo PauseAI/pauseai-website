@@ -32,8 +32,8 @@ If you want to create a new team, reach out to the Oversight team leader (see be
 		<p>No team members found</p>
 	{/if}
 	<ul class="people">
-		{#each props as { name, description, leadName, leadEmail }}
-			<Team {name} {description} {leadName} {leadEmail} />
+		{#each props as team}
+			<Team {team} />
 		{/each}
 	</ul>
 </section>

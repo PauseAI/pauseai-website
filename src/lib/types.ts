@@ -34,4 +34,5 @@ export type Team = {
 	leadName: string
 	leadEmail: string
 	public: boolean
+	responsibilities: string[]
 }
