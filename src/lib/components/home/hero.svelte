@@ -29,7 +29,7 @@
 			<br />
 			Agissez dès maintenant en rejoignant Pause IA.
 		</p>
-		<Button href="/action">Agir</Button>
+		<Button href="/agir">Agir</Button>
 	</section>
 
 	<LeftCorner />
