@@ -23,10 +23,10 @@
 <nav>
 	<a href="/" class="logo">
 		<div class="big-logo">
-			<Logo animate={!onHomepage} fill_pause={onHomepage ? 'white' : 'black'} />
+			<Logo animate fill_pause={onHomepage ? 'white' : 'black'} />
 		</div>
 		<div class="small-logo">
-			<Logo animate={!onHomepage} only_circle />
+			<Logo animate only_circle />
 		</div>
 	</a>
 
