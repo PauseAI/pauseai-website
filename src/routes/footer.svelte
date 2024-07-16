@@ -6,9 +6,11 @@
 
 <footer>
 	<div class="brand">
-		<div class="logo">
-			<Logo fill_circle="white" fill_ai="white" />
-		</div>
+		<a href="/" class="logo">
+			<div class="logo">
+				<Logo animate fill_circle="white" fill_ai="white" />
+			</div>
+		</a>
 		<p>Pour une IA alignée sur l’humanité.</p>
 	</div>
 	<div class="socials">
