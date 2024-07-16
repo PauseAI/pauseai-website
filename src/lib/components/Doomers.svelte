@@ -9,7 +9,7 @@
 		number: number
 		source: string
 	}
-	const doomers: Doomer[] = [
+	let doomers: Doomer[] = [
 		{
 			name: 'Yann LeCun',
 			title: 'one of three godfathers of AI, works at Meta',
@@ -173,10 +173,10 @@
 		{
 			name: 'Eliezer Yudkowsky',
 			title: 'Founder of MIRI',
-			probability: '>99%',
-			number: 0.99,
+			probability: '>95%',
+			number: 0.95,
 			source:
-				'https://www.lesswrong.com/posts/j9Q8bRmwCgXRYAgcJ/miri-announces-new-death-with-dignity-strategy'
+				'https://www.fastcompany.com/90994526/pdoom-explained-how-to-calculate-your-score-on-ai-apocalypse-metric'
 		},
 		{
 			name: 'Roman Yampolskiy',
@@ -186,6 +186,7 @@
 			source: 'https://twitter.com/romanyam/status/1767575356155027503'
 		}
 	]
+	doomers = doomers.sort((a, b) => b.number - a.number)
 </script>
 
 <ul>
