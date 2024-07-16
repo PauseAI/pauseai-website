@@ -19,14 +19,14 @@ description: Questions fréquemment posées sur Pause IA et les risques de l'IA 
 ## Sommaire
 
 - [Qui êtes-vous ?](#accordion1)
-- [N’êtes-vous pas tout simplement (des) technophobes ?](#accordion2)
+- [N’êtes-vous pas tout simplement des technophobes ?](#accordion2)
 - [Voulez-vous interdire toute forme d'IA ?](#accordion3)
 - [Croyez-vous que GPT-4 va tous nous tuer ?](#accordion4)
-- [Un moratoire ne risque-t-elle pas d'aggraver les choses ?](#accordion5)
+- [Un moratoire ne risque-t-il pas d'aggraver les choses ?](#accordion5)
 - [Un moratoire est-il possible ?](#accordion6)
 - [Qui vous finance ?](#accordion7)
 - [Quels sont vos projets ?](#accordion8)
-- [Comment comptez-vous convaincre les gouvernements de d'arrêter temporairement le développement de l'IA ?](#accordion9)
+- [Comment comptez-vous convaincre les gouvernements d'arrêter temporairement le développement de l'IA ?](#accordion9)
 - [Pourquoi manifester ?](#accordion10)
 - [Quelle est la probabilité que l'apparition d'une superintelligence ait de graves conséquences, y compris un risque d'extinction ?](#accordion11)
 - [Combien de temps nous reste-t-il avant l'émergence d'une superintelligence ?](#accordion12)
@@ -47,7 +47,7 @@ Nous sommes un ensemble de [bénévoles](https://pauseai.info/people) et de [gro
 
 Vous pouvez nous rejoindre sur [Discord](https://discord.gg/vyXGd7AeGc) (C’est là que notre communauté est la plus active!), [Twitter](https://twitter.com/pause_ia), [Facebook](https://www.facebook.com/Pause.IA), [TikTok](https://www.tiktok.com/@pause_ia), [LinkedIn](https://www.linkedin.com/company/pause-ia/), [YouTube](https://www.youtube.com/@Pause_IA), [Instagram](https://www.instagram.com/pause_ia) et [Threads](https://www.threads.net/@pause_ia). Vous pouvez également nous contacter par mail à [maxime@pauseai.info](mailto:maxime@pauseai.info)
 
-### N’êtes vous tout simplement pas des technophobes ?
+### N’êtes-vous pas tout simplement des technophobes ?
 
 Vous seriez surpris d'apprendre que la plupart des membres de Pause IA sont favorablement disposés envers le progrès technologique. Nombre d'entre eux sont impliqués dans le développement de l'IA, sont des amateurs de nouvelles technologies et ont longtemps été très enthousiastes face à l'avenir. Beaucoup s’intéressaient particulièrement au potentiel de développement de l’humanité que recèle l’IA. C'est pourquoi, quand ils se sont rendu compte des risques existentiels liés à l’IA, nombre d’entre eux ont eu beaucoup de mal à [l’accepter / l’intégrer](https://pauseai.info/psychology-of-x-risk).
 
@@ -59,7 +59,7 @@ Non. Seulement le développement des plus gros systèmes d'IA à usage général
 
 Non, nous ne croyons pas que les [modèles actuels](https://pauseai.info/sota) représentent un risque existentiel. Probablement que la plupart des prochains modèles non plus. Mais si nous poursuivons le développement de systèmes toujours plus puissants, nous atteindrons un point de non-retour où l'un d'eux deviendra [une menace existentielle](/risques/humanite).
 
-### Un moratoire ne risque-t-elle pas d'aggraver les choses ?
+### Un moratoire ne risque-t-il pas d'aggraver les choses ?
 
 Nous avons répondu à ces préoccupations [dans cet article](https://pauseai.info/mitigating-pause-failures).
 
@@ -130,7 +130,7 @@ Depuis le début des années 2000, diverses personnes ont alerté sur ce risque 
 
 Les entreprises d'IA n'ont commencé à mentionner les risques existentiels que très récemment.
 
-Sam Altman est une exception. Sur son blog personnel, Il a exploré [l'idée du risque existentiel dès 2015](https://blog.samaltman.com/machine-intelligence-part-1), avant même de fonder OpenAI. Pendant les années qui ont suivi, il n'a quasiment plus jamais évoqué explicitement ce risque. Lors de son audition devant le Sénat Américain le 16 mai 2023, interrogé sur cet article de blog, il a soigneusement évité la question en préférant parler des emplois et de l'économie.
+Sam Altman est une exception. Sur son blog personnel, il a exploré [l'idée du risque existentiel dès 2015](https://blog.samaltman.com/machine-intelligence-part-1), avant même de fonder OpenAI. Pendant les années qui ont suivi, il n'a quasiment plus jamais évoqué explicitement ce risque. Lors de son audition devant le Sénat Américain le 16 mai 2023, interrogé sur cet article de blog, il a soigneusement évité la question en préférant parler des emplois et de l'économie.
 
 En mai 2023, tout a changé :
 
