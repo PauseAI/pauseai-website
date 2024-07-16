@@ -37,7 +37,7 @@
 					surtout des innovations technologiques pour garantir la résilience et la sécurité des
 					systèmes d’IA et de systèmes confrontés à l’IA.
 				</p>
-				<Button href="/risques/economiques-et-materiels">En apprendre davatange</Button>
+				<Button href="/risques/economiques-et-materiels">Davatange</Button>
 			{:else if tab === 'Risques pour les individus'}
 				<p>
 					L'intégration de l'IA dans la vie quotidienne pose des risques significatifs pour les
@@ -48,7 +48,7 @@
 					sensibilisation et d'éducation auprès du public, ainsi que des gardes-fous intégrés aux
 					systèmes d’IA.
 				</p>
-				<Button href="/risques/pour-les-individus">En apprendre davatange</Button>
+				<Button href="/risques/pour-les-individus">Davatange</Button>
 			{:else if tab === 'Risques pour la société'}
 				<p>
 					Certains risques touchent la société entière, et doivent être considérés dans cette
@@ -65,7 +65,7 @@
 					critique sont les meilleures mesures afin de préserver nos valeurs et nos structures
 					sociales.
 				</p>
-				<Button href="/risques/pour-la-societe">En apprendre davatange</Button>
+				<Button href="/risques/pour-la-societe">Davatange</Button>
 			{:else if tab === 'Risques pour l’humanité'}
 				<p>
 					Plus spéculativement, l’IA pose des risques qui menacent durablement le futur de
@@ -81,7 +81,7 @@
 					des mesures régulatoires ne peuvent que les ralentir. On n’arrête pas le progrès quand il
 					y a des milliards de dollars à la clé.
 				</p>
-				<Button href="/risques/pour-l'humanite">En apprendre davatange</Button>
+				<Button href="/risques/pour-l'humanite">Davatange</Button>
 			{/if}
 		</svelte:fragment>
 	</TabList>
