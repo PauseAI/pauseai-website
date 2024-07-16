@@ -11,7 +11,7 @@ Vous en faites désormais partie.
 
 ## Voici ce que vous pouvez faire:
 
-- **[Rejoignez Pause IA](/nous-rejoindre)** et aidez-nous à prendre de l’ampleur
+- **[Rejoignez Pause IA](/nous-rejoindre)** et aidez-nous à prendre de l’ampleur.
 - **Rejoignez notre [serveur Discord](https://discord.gg/vyXGd7AeGc)**. C’est là que notre communauté est la plus active. Nous avons un canal **#projets** où les gens travaillent sur des campagnes de sensibilisation et d’information, des vidéos, des images, des applications, etc.
 - **[Rencontrez](https://pauseai.info/communities) d'autres personnes** membres de l'organisation près de chez vous. S'il n'y a pas d’antenne près de chez vous, pourquoi ne pas envisager d’en créer une vous-même?
 - **[Faites un don](/dons) à Pause IA** ou achetez des produits dérivés dans notre boutique en ligne.
@@ -77,7 +77,7 @@ Si vous êtes déjà une personnalité reconnue dans le domaine de l'alignement,
 
 ## Conseils pour être efficace
 
-- **Montrez-vous courageux.se et soyez direct.e lors de vos prises de parole publique sur le danger.** Évitez d'adopter un langage édulcoré. Votre premier réflexe ne doit pas être d'émettre des réserves. Vous pourrez les formuler si on vous interroge, ou dans dans une remarque en passant , mais ne donnez pas l’impression de ne pas être vraiment inquiet si vous l’êtes.
+- **Montrez-vous courageux et soyez direct lors de vos prises de parole publique sur le danger.** Évitez d'adopter un langage édulcoré. Votre premier réflexe ne doit pas être d'émettre des réserves. Vous pourrez les formuler si on vous interroge, ou dans dans une remarque en passant , mais ne donnez pas l’impression de ne pas être vraiment inquiet si vous l’êtes.
 - **Soyez moins exigeant avec vous-même.** Appliquez [le principe de Pareto](https://fr.wikipedia.org/wiki/Principe_de_Pareto). Évitez la classique erreur des passionnés d'informatique qui consiste à passer des mois à peaufiner un document Google avec d'interminables ré-écritures. Lancez votre projet publiquement et vous vous adapterez au fur et à mesure. Il n'y a pas de temps à perdre.
 
 Gardez ceci à l’esprit : Toute autre action entreprise serait l’équivalent de vouloir aligner les transats sur le pont du Titanic. Nous devons courir vers la passerelle, saisir la barre et nous éloigner de l'iceberg. Nous n'avons peut-être pas beaucoup de temps, mais nous pouvons essayer. Nous pouvons y arriver !
