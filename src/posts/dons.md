@@ -43,4 +43,4 @@ Pause IA, née de l'engagement bénévole, est officiellement une [organisation 
 ### Comment faire un don à Pause IA
 
 - Par virement bancaire (moyen le plus économique) : IBAN : BE22 9674 2966 9647 BIC/SWIFT : TRWIBEB1XXX (Pause IA).
-- Via Stripe : _insérer le lien_.
+- [Via Stripe](https://buy.stripe.com/28o3fL8ZNguT9e87ss)
