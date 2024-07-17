@@ -1,9 +1,9 @@
 ---
-title: Risques pour les individus
-description: L'intégration de l'IA dans la vie quotidienne présente des risques pour la vie privée, la sécurité et le bien-être des individus, nécessitant des régulations, une éducation du public et des systèmes d'IA sécurisés pour les atténuer.
+title: Dangers pour les individus
+description: L'intégration de l'IA dans la vie quotidienne présente des dangers pour la vie privée, la sécurité et le bien-être des individus, nécessitant des régulations, une éducation du public et des systèmes d'IA sécurisés pour les atténuer.
 ---
 
-L'intégration de l'IA dans la vie quotidienne pose des risques significatifs pour les individus, touchant à leur vie privée, leur sécurité et leur bien-être. Ces risques incluent la violation de la confidentialité, la désinformation et la manipulation, avec pour conséquence des dommages émotionnels ou physiques graves. Pour atténuer ces risques, il est crucial de mettre en place des cadres réglementaires robustes et des pratiques de sensibilisation et d'éducation auprès du public, ainsi que des gardes-fous intégrés aux systèmes d’IA.
+L'intégration de l'IA dans la vie quotidienne pose des dangers significatifs pour les individus, touchant à leur vie privée, leur sécurité et leur bien-être. Ces dangers incluent la violation de la confidentialité, la désinformation et la manipulation, avec pour conséquence des dommages émotionnels ou physiques graves. Pour atténuer ces dangers, il est crucial de mettre en place des cadres réglementaires robustes et des pratiques de sensibilisation et d'éducation auprès du public, ainsi que des gardes-fous intégrés aux systèmes d’IA.
 
 ## Violation de la vie privée et de la confidentialité
 
@@ -11,7 +11,7 @@ L’intégration de systèmes d’IA dans des objets pervasifs dans notre socié
 
 Pour ne pas être victime, ne partagez pas vos données personnelles, vos travaux ou des données confidentielles avec des systèmes d’IA. Cependant, cela restreint fortement l’usage qu’on peut en faire au quotidien.
 
-Ce risque peut être mitigé en régulant l’usage et la protection des données par les fournisseurs d’IA. Des techniques de marquage au filigrane ou d’empoisonnement pourraient aider à éviter ce problème.
+Ce danger peut être mitigé en régulant l’usage et la protection des données par les fournisseurs d’IA. Des techniques de marquage au filigrane ou d’empoisonnement pourraient aider à éviter ce problème.
 
 ## Deepfakes
 
@@ -21,9 +21,9 @@ Au-delà des inquiétudes éthiques, les deepfakes peuvent contribuer à des arn
 
 Pour ne pas être victime de deepfake, de façon directe ou pervasive, tenez-vous au courant de ce qui peut être falsifié et assainissez votre consommation de contenu en ligne. Cela est malheureusement difficile à appliquer à l’échelle de la société.
 
-Ce risque peut être mitigé par des régulations gouvernementales, et pour l’instant, il est encore possible de distinguer les deepfakes d’images ou de sons réels avec un peu d’entraînement.
+Ce danger peut être mitigé par des régulations gouvernementales, et pour l’instant, il est encore possible de distinguer les deepfakes d’images ou de sons réels avec un peu d’entraînement.
 
-Une réforme radicale de nos systèmes d’information sera nécessaire pour éviter complètement ce risque, mais le sujet est fortement débattu.
+Une réforme radicale de nos systèmes d’information sera nécessaire pour éviter complètement ce danger, mais le sujet est fortement débattu.
 
 ## Tromperie stratégique
 
@@ -35,4 +35,4 @@ Les techniques actuelles d’évaluation sont incapables de déterminer si les s
 
 A moins que vous ne travailliez dans l’IA, vos actions les plus impactantes sur le sujet seront des actes citoyens.
 
-Ce risque peut être mitigé par un contrôle à l’entraînement et au déploiement des IA de pointe. Il ne pourra être évité qu’en inventant de meilleures techniques d’alignement.
+Ce danger peut être mitigé par un contrôle à l’entraînement et au déploiement des IA de pointe. Il ne pourra être évité qu’en inventant de meilleures techniques d’alignement.
