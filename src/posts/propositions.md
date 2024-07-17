@@ -11,11 +11,11 @@ Cependant, nous ne devons pas nous attendre à ce que des pays ou des entreprise
 
 ## Mettre en œuvre un moratoire international
 
-Un accord international se conclut généralement lors d'un sommet, où les dirigeants des différents pays se réunissent pour discuter du problème et prendre une décision. Le Royaume-Uni a pris les devants et a organisé un sommet sur la sécurité de l'IA à l'automne 2023. Depuis, deux autres sommets ont été annoncés. [Plus d'informations sur les sommets.](https://pauseai.info/summit)
+Un accord international se conclut généralement lors d'un sommet, où les dirigeants des différents pays se réunissent pour discuter du problème et prendre une décision. Le Royaume-Uni a pris les devants et a organisé un sommet sur la sécurité de l'IA à l'automne 2023. Depuis, deux autres sommets ont été annoncés. ([plus d'informations sur les sommets](https://pauseai.info/summit))
 
 L'objectif principal du sommet devrait être un **traité**. Ce traité devra spécifier les mesures politiques qui nous protègent des [risques liés à l'IA](/risques). Il doit être signé par tous les États membres de l'ONU.
 
-- **Créer une agence internationale de sécurité de l'IA**, similaire à l'AIEA (Agence internationale de l'énergie atomique). Les prérogatives de cette agence seront :
+- **Créer une agence internationale de sécurité de l'IA**, similaire à l'AIEA (Agence Internationale de l'Énergie Atomique). Les prérogatives de cette agence seront :
   - Accorder les autorisations pour le _déploiement_ d'IA. Cela inclura des évaluations/tests approfondis des modèles.
   - Accorder les autorisations pour de _nouvelles sessions d'entraînement_ de modèles d'IA dépassant une certaine taille (par exemple : 1 milliard de paramètres).
   - Organiser des rencontres périodiques pour discuter des progrès de la recherche sur la sécurité de l'IA.
@@ -32,7 +32,7 @@ L'objectif principal du sommet devrait être un **traité**. Ce traité devra sp
   - La liste des capacités à risque pourra évoluer avec la croissance des capacités de l'IA.
   - Noter que se fier uniquement aux évaluations de modèles [n'est pas suffisant](https://pauseai.info/4-levels-of-ai-regulation).
 
-Mettre en place un moratoire peut avoir des effets délétères s'il n'est pas implémenté correctement. [En savoir plus sur la façon d'atténuer ces risques.](https://pauseai.info/mitigating-pause-failures)
+Mettre en place un moratoire peut avoir des effets délétères s'il n'est pas implémenté correctement. ([en savoir plus sur la façon d'atténuer ces risques](https://pauseai.info/mitigating-pause-failures))
 
 ## **Autres mesures pour un ralentissement effectif**
 
