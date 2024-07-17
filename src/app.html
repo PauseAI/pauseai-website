@@ -13,23 +13,19 @@
 				? document.documentElement.setAttribute('color-scheme', theme)
 				: localStorage.setItem('color-scheme', 'dark')
 		</script>
-
-		<!-- Google tag (gtag.js) -->
-		<script async src="https://www.googletagmanager.com/gtag/js?id=G-ZF8TQZJJQ4"></script>
-		<script>
-			window.dataLayer = window.dataLayer || []
-			function gtag() {
-				dataLayer.push(arguments)
-			}
-			gtag('js', new Date())
-
-			gtag('config', 'G-ZF8TQZJJQ4')
-		</script>
-
 		%sveltekit.head%
 	</head>
 
 	<body data-sveltekit-preload-data="hover">
 		<div style="display: contents">%sveltekit.body%</div>
+
+		<!-- 100% privacy-first analytics -->
+		<script async defer src="https://scripts.simpleanalyticscdn.com/latest.js"></script>
+		<noscript
+			><img
+				src="https://queue.simpleanalyticscdn.com/noscript.gif"
+				alt=""
+				referrerpolicy="no-referrer-when-downgrade"
+		/></noscript>
 	</body>
 </html>
