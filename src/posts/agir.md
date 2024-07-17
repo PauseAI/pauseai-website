@@ -56,7 +56,7 @@ Vous en faites désormais partie.
 ### Vous connaissez le droit (ou droit international)
 
 - **Aidez à rédiger des lois.** [Proposez des exemples de textes](https://www.campaignforaisafety.org/celebrating-the-winners-law-student-moratorium-treaty-competition/). ([exemples](https://futureoflife.org/wp-content/uploads/2023/04/FLI_Policymaking_In_The_Pause.pdf)[de propositions](https://www.openphilanthropy.org/research/12-tentative-ideas-for-us-ai-policy/))
-- **Participez au débat** quand votre gouvernement sollicite l’avis des citoyens sur les politiques touchant à l’IA\*\* \*\*([exemple](https://www.ntia.gov/issues/artificial-intelligence/stakeholder-engagement/request-for-comments)).
+- **Participez au débat** quand votre gouvernement sollicite l’avis des citoyens sur les politiques touchant à l’IA ([exemple](https://www.ntia.gov/issues/artificial-intelligence/stakeholder-engagement/request-for-comments)).
 
 ### Vous savez produire du contenu web
 
