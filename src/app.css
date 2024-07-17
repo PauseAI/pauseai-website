@@ -121,7 +121,7 @@ section:not(:last-child) {
 	}
 
 	section:not(:last-child) {
-		margin-bottom: 7.5rem;
+		margin-bottom: 5rem;
 	}
 }
 
