@@ -15,7 +15,7 @@ L’IA peut aussi être utilisée pour renforcer la cyberdéfense des systèmes,
 
 Les cyberattaques peuvent aussi causer des morts humaines ou de la désorganisation à grande échelle (par exemple en paralysant un hôpital ou un bureau gouvernemental).
 
-Ce risque peut être évité en régulant le déploiement d’IA à fortes capacités de programmation.
+Ce danger peut être évité en régulant le déploiement d’IA à fortes capacités de programmation.
 
 ## Perte de fonction par défaut
 
@@ -25,7 +25,7 @@ Certains de ces dysfonctionnements sont issus d’un manque de données et de ca
 
 Si vous utilisez des systèmes d’IA à vos propres fins, tenez-vous au courant des limitations de vos outils, de leurs modes d’échecs connus et contrôlez la qualité de leurs sorties.
 
-Ce risque peut être mitigé en contrôlant la qualité des systèmes d’IA et en poussant plus loin les techniques actuelles d’alignement. De nouvelles techniques d’alignement sont nécessaires pour l’éviter prouvablement.
+Ce danger peut être mitigé en contrôlant la qualité des systèmes d’IA et en poussant plus loin les techniques actuelles d’alignement. De nouvelles techniques d’alignement sont nécessaires pour l’éviter prouvablement.
 
 ## Perte de fonction par intervention extérieure
 
@@ -45,4 +45,4 @@ Les nombreuses applications de l’IA présentent des opportunités d’innovati
 
 Un takeover entrepreneurial, quoiqu’on puisse débattre de sa désirabilité en soi, diminuerait la responsabilité des fournisseurs d’IA et paverait la voie à des abus d’une ampleur sans précédent.
 
-Ce risque peut être mitigé par des régulations, des actions en justice et un engagement citoyen sur le sujet.
+Ce danger peut être mitigé par des régulations, des actions en justice et un engagement citoyen sur le sujet.
