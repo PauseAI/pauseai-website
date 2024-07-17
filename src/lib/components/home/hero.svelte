@@ -19,7 +19,7 @@
 	</div>
 	<section class="hero-content">
 		<h1 id={label_id}>
-			Ne laissons pas l'IA devenir une menace incontrôlable, <Mark>agissons immédiatement</Mark>
+			Ne laissons pas l'IA nous détruire, <Mark>agissons maintenant</Mark>
 		</h1>
 		<p>
 			Selon la majorité des experts, le développement rapide de l'intelligence artificielle présente

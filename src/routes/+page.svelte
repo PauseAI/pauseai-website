@@ -7,8 +7,8 @@
 	import Faq from '$lib/components/home/faq.svelte'
 	import Supporters from '$lib/components/home/supporters.svelte'
 
-	const title = 'We need to Pause AI'
-	const description = 'We are risking human extinction. We need to pause AI development, right now.'
+	const title = 'Pause IA'
+	const description = "Ne laissons pas l'IA nous détruire, agissons maintenant"
 </script>
 
 <PostMeta {title} {description} />
