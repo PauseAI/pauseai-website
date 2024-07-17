@@ -50,6 +50,7 @@ These biases often appear without the creators of the AI system being aware of t
 
 <!-- ### Data Privacy
 -->
+
 ### Job loss, economic inequality and instability
 
 During the industrial revolution, many people lost their jobs to machines.
@@ -70,23 +71,23 @@ Also, if AIs learn to do jobs people cannot do better, former workers and new ge
 
 ### Loss of human purpose
 
-As AI becomes increasingly integrated into various aspects of society, there's a concern that it may lead to the displacement of human labor, potentially rendering individuals redundant in certain professions. This can result in a loss of purpose and identity for those whose livelihoods are tied to their work. Moreover, the automation of tasks that were once exclusively performed by humans may lead individuals to question the significance of their contributions and the value they bring to society. 
+As AI becomes increasingly integrated into various aspects of society, there's a concern that it may lead to the displacement of human labor, potentially rendering individuals redundant in certain professions. This can result in a loss of purpose and identity for those whose livelihoods are tied to their work. Moreover, the automation of tasks that were once exclusively performed by humans may lead individuals to question the significance of their contributions and the value they bring to society.
 
 Even automated tasks outside of jobs could stop being enjoyable. Everyday actions that feel valuable because of their outcomes would stop feeling like that if we had easier, faster alternatives to get to those outcomes.
 
 ### Mental health, addiction and disconnection between people
 
-Social media, video games and other software have been using AI systems to maximize their profit while taking advantage of our primate minds for some time already, damaging our mental health in the process. 
+Social media, video games and other software have been using AI systems to maximize their profit while taking advantage of our primate minds for some time already, damaging our mental health in the process.
 Addiction to social media, among other things, isolates us from each other, not only in political bubbles but also in cultural and social one-person bubbles, making us lonelier.
 They're the first proof of the unintended and unexpected global consequences that these technologies can bring and how complicated aligning AI systems with "human values" can be.
 
-If today's chatbots keep getting better, it could become quite common to be addicted to them and substitute whole relationships (be romantic, sexual or platonic) with them. 
+If today's chatbots keep getting better, it could become quite common to be addicted to them and substitute whole relationships (be romantic, sexual or platonic) with them.
 Also, if those apps are easy to access, they could shape the understanding, personality and view of the world of children that could prefer talking with AIs over family and friends.
 A pause in the biggest models could prevent them from becoming multipurpose chatbots that fit our needs perfectly without people understanding the long-term ramifications of them.
 
 ### Power accumulation, war and the race to the precipice
 
-The addiction to products and services that learn from personal data leaves us as powerless separated individuals whether it's intended or not. 
+The addiction to products and services that learn from personal data leaves us as powerless separated individuals whether it's intended or not.
 And it plays on a vicious cycle with the accumulation of economic power and intelligence of the companies which create them.
 
 If this economic and technological inequality stems from a handful of public and private entities producing multiple single-purpose AIs or a few multipurpose AIs, it could lead to a short accumulation of power that will probably result in a catastrophe for all.
@@ -99,7 +100,7 @@ We need international cooperation because the only winning move on this strange 
 
 ### Authoritarian governments
 
-Authoritarian and totalitarian governments can also use AI technologies to exercise power over *their* territories and populations.
+Authoritarian and totalitarian governments can also use AI technologies to exercise power over _their_ territories and populations.
 They can control the communication channels or maintain social credit and mass surveillance systems that ensure they maintain their power while violating human rights.
 
 ### Environmental risks
@@ -191,9 +192,9 @@ If the AIs continue to be produced with only their capabilities in mind, through
 
 It is possible that once automation at higher degrees starts happening, regardless if there is just one or multiple powerful AIs, the values of those systems would not be able to be changed, and the automation would continue until the end of the universe, throughout the reachable galaxies.
 
-That would mean no more discussion and changes of ethical values and culture norms which could allow us to make progress on them and, in consequence, achieve the best kind of utopias/ protopias in the long term. 
+That would mean no more discussion and changes of ethical values and culture norms which could allow us to make progress on them and, in consequence, achieve the best kind of utopias/ protopias in the long term.
 
-Possibly some Silicon Valley guys imposing themselves not only over every future being, but also erasing  all other present cultures arround the world.
+Possibly some Silicon Valley guys imposing themselves not only over every future being, but also erasing all other present cultures around the world.
 
 ### Suffering risks
 
