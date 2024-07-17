@@ -1,14 +1,24 @@
 ---
 title: Rejoignez Pause IA
-description: Inscrivez-vous pour rejoindre le mouvement PauseAI.
+description: Inscrivez-vous pour rejoindre le mouvement Pause IA.
 ---
 
 Le nombre de personnes conscientes des risques liés à l'IA est encore restreint. Vous en faites désormais partie. **Vos actions ont plus de poids que vous ne l’imaginez.**
 
-Voici comment cela se passe ensuite :
+Nous rejoindre :
+- Accédez au [serveur Discord de Pause IA](https://discord.gg/vyXGd7AeGc), le coeur de nos discussions et actions.
+- Découvrez notre communauté et participez aux échanges.
+- Explorez les opportunités de volontariat si vous souhaitez vous impliquer davantage.
 
-- Après avoir rempli le formulaire, un membre de l'équipe vous contactera.
-- Vous serez invité à rejoindre [le serveur Discord de Pause IA](https://discord.gg/vyXGd7AeGc), où se concentrent la majorité des discussions et des actions.
-- Vous discuterez de vos centres d'intérêt et de votre contribution lors d’un appel de 30 minutes.
-- Nous chercherons des projets ou des [équipes](https://pauseai.info/teams) correspondant à vos intérêts.
-- Vous serez inscrit en tant que bénévole et votre profil apparaîtra sur la [page des membres](https://pauseai.info/people) (si vous l'acceptez !).
+Devenir volontaire :
+- Remplissez le formulaire de volontariat accessible depuis notre Discord.
+- Un membre de l'équipe vous contactera pour un premier échange.
+- Après validation, vous serez inscrit comme bénévole et pourrez apparaître sur la [page des membres](https://pauseai.info/people) de PauseAI International (avec votre accord).
+
+Prérequis pour le volontariat :
+- Adhésion aux valeurs et à la mission de Pause IA
+- Engagement d'au moins 3h par semaine
+- Maîtrise d'une ou plusieurs compétences parmi : rédaction, relecture, traduction, développement web, réseaux sociaux, communication, expertise (en sûreté de l'IA, juridiction, économie ou fiscalité)
+- Forte motivation et engagement envers la mission de l'association
+
+Rejoignez-nous dès maintenant et contribuez à façonner un avenir où l'IA sert l'humanité en toute sécurité !
