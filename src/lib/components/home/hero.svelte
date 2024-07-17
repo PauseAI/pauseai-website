@@ -19,7 +19,7 @@
 	</div>
 	<section class="hero-content">
 		<h1 id={label_id}>
-			Ne laissons pas l'IA nous détruire, <Mark>agissons maintenant</Mark>
+			Ne laissons pas l'IA nous{'\u00A0'}détruire, <br /><Mark>agissons maintenant</Mark>
 		</h1>
 		<p>
 			Selon la majorité des experts, le développement rapide de l'intelligence artificielle présente
@@ -58,11 +58,10 @@
 	.hero-content {
 		color: #fff;
 		text-align: left;
-		max-width: 29rem;
 		width: 100%;
 	}
 	.hero-content h1 {
-		font-size: 2rem;
+		font-size: 1.7rem;
 	}
 	.hero-content p {
 		margin: 2rem 0;
@@ -108,12 +107,25 @@
 			rgba(1, 1, 1, 0.48) 100%
 		);
 	}
+	@media (min-width: 480px) {
+		.hero-content {
+			max-width: 28rem;
+		}
+	}
+	@media (min-width: 640px) {
+		.hero-content {
+			max-width: 36rem;
+		}
+		.hero-content h1 {
+			font-size: 2.2rem;
+		}
+	}
 	@media (min-width: 768px) {
 		.hero-content {
 			max-width: 40rem;
 		}
 		.hero-content h1 {
-			font-size: 2.7rem;
+			font-size: 2.4rem;
 		}
 		.hero-content p {
 			padding-right: 3rem;
@@ -121,7 +133,18 @@
 	}
 	@media (min-width: 1024px) {
 		.hero-content {
-			max-width: 51rem;
+			max-width: 52rem;
+		}
+		.hero-content h1 {
+			font-size: 3.2rem;
+		}
+		.hero-content p {
+			padding-right: 6rem;
+		}
+	}
+	@media (min-width: 1280px) {
+		.hero-content {
+			max-width: 57rem;
 		}
 		.hero-content h1 {
 			font-size: 3.5rem;
