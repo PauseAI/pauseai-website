@@ -21,7 +21,7 @@
 		<div class="column">
 			<h2>Navigation</h2>
 			<a href="/faq">FAQ</a>
-			<a href="/risques">Risques</a>
+			<a href="/dangers">Dangers</a>
 			<a href="/propositions">Propositions</a>
 			<a href="/agir">Agir</a>
 			<a href="https://pauseia.substack.com/">Blog</a>
@@ -29,11 +29,11 @@
 			<a href="/nous-rejoindre">Nous rejoindre</a>
 		</div>
 		<div class="column">
-			<h2>Risques</h2>
-			<a href="/risques/economiques-et-materiels">Économiques et matériels</a>
-			<a href="/risques/pour-les-individus">Pour les individus</a>
-			<a href="/risques/pour-la-societe">Pour la société</a>
-			<a href="/risques/pour-l'humanite">Pour l'humanité</a>
+			<h2>Dangers</h2>
+			<a href="/dangers/economiques-et-materiels">Économiques et matériels</a>
+			<a href="/dangers/pour-les-individus">Pour les individus</a>
+			<a href="/dangers/pour-la-societe">Pour la société</a>
+			<a href="/dangers/pour-l'humanite">Pour l'humanité</a>
 		</div>
 		<div class="column">
 			<h2>Agir</h2>

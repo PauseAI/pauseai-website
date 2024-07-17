@@ -32,7 +32,7 @@
 
 	<div class="nav-right">
 		<div class="nav-links">
-			<NavLink href="/risques">Risques</NavLink>
+			<NavLink href="/dangers">Dangers</NavLink>
 			<NavLink href="/propositions">Propositions</NavLink>
 			<!-- <NavLink href="/protests">Protests</NavLink> -->
 			<!-- <NavLink href="/faq">FAQ</NavLink> -->
@@ -111,7 +111,7 @@
 			</button>
 		</div>
 		<div class="sidebar-links">
-			<a href="/risques" on:click={() => (open = !open)}><h2>Risques</h2></a>
+			<a href="/dangers" on:click={() => (open = !open)}><h2>Dangers</h2></a>
 			<a href="/propositions" on:click={() => (open = !open)}><h2>Propositions</h2></a>
 			<a href="/agir" on:click={() => (open = !open)}><h2>Agir</h2></a>
 			<a href="https://pauseia.substack.com/" on:click={() => (open = !open)}><h2>Blog</h2></a>

@@ -43,7 +43,7 @@ description: Questions fréquemment posées sur Pause IA et les risques de l'IA 
 
 ### Qui êtes-vous ?
 
-Nous sommes un ensemble de bénévoles ressemblés au sein d'une [association à but non lucratif](/mentions-legales) dont l'objectif est de minimiser les [risques liés à l'IA](/risques) (y compris le [risque d'extinction](/risques/humanite)). Notre objectif est de convaincre le gouvernement d'intervenir et [de mettre en pause le développement d'une IAG](/propositions) (Intelligence Artificielle Générale puis d’une Superintelligence). Dans ce but, nous alertons le public, dialoguons avec les décideurs et organisons des manifestations.
+Nous sommes un ensemble de bénévoles ressemblés au sein d'une [association à but non lucratif](/mentions-legales) dont l'objectif est de minimiser les [risques liés à l'IA](/dangers) (y compris le [risque d'extinction](/dangers/humanite)). Notre objectif est de convaincre le gouvernement d'intervenir et [de mettre en pause le développement d'une IAG](/propositions) (Intelligence Artificielle Générale puis d’une Superintelligence). Dans ce but, nous alertons le public, dialoguons avec les décideurs et organisons des manifestations.
 
 Vous pouvez nous rejoindre sur [Discord](https://discord.gg/vyXGd7AeGc) (le coeur de nos discussions et actions), [Twitter](https://twitter.com/pause_ia), [Facebook](https://www.facebook.com/Pause.IA), [TikTok](https://www.tiktok.com/@pause_ia), [LinkedIn](https://www.linkedin.com/company/pause-ia/), [YouTube](https://www.youtube.com/@Pause_IA), [Instagram](https://www.instagram.com/pause_ia) et [Threads](https://www.threads.net/@pause_ia). Vous pouvez également nous contacter par mail à [contact@pauseia.fr](mailto:contact@pauseia.fr).
 
@@ -59,7 +59,7 @@ Non. Nous voulons uniquement interdire le développement des plus gros systèmes
 
 ### Croyez-vous que GPT-4 va tous nous tuer ?
 
-Non, nous ne croyons pas que les modèles actuels représentent un risque existentiel et probablement que la plupart des prochains modèles non plus. Mais si nous poursuivons le développement de systèmes toujours plus puissants, nous atteindrons un point de non-retour où l'un d'eux deviendra [une menace existentielle](/risques/humanite).
+Non, nous ne croyons pas que les modèles actuels représentent un risque existentiel et probablement que la plupart des prochains modèles non plus. Mais si nous poursuivons le développement de systèmes toujours plus puissants, nous atteindrons un point de non-retour où l'un d'eux deviendra [une menace existentielle](/dangers/humanite).
 
 ### Un moratoire ne risque-t-il pas d'aggraver les choses ?
 

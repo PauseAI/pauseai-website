@@ -13,7 +13,7 @@ Cependant, nous ne devons pas nous attendre à ce que des pays ou des entreprise
 
 Un accord international se conclut généralement lors d'un sommet, où les dirigeants des différents pays se réunissent pour discuter du problème et prendre une décision. Le Royaume-Uni a pris les devants et a organisé un sommet sur la sécurité de l'IA à l'automne 2023. Depuis, deux autres sommets ont été annoncés. ([plus d'informations sur les sommets](https://pauseai.info/summit))
 
-L'objectif principal du sommet devrait être un **traité**. Ce traité devra spécifier les mesures politiques qui nous protègent des [risques liés à l'IA](/risques). Il doit être signé par tous les États membres de l'ONU.
+L'objectif principal du sommet devrait être un **traité**. Ce traité devra spécifier les mesures politiques qui nous protègent des [risques liés à l'IA](/dangers). Il doit être signé par tous les États membres de l'ONU.
 
 - **Créer une agence internationale de sécurité de l'IA**, similaire à l'AIEA (Agence Internationale de l'Énergie Atomique). Les prérogatives de cette agence seront :
   - Accorder les autorisations pour le _déploiement_ d'IA. Cela inclura des évaluations/tests approfondis des modèles.

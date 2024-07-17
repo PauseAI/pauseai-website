@@ -14,7 +14,7 @@ Le nombre de personnes conscientes des risques liés à l'IA est encore restrein
   - [Traité international sur l'IA](https://aitreaty.org/)
   - [Interdire la superintelligence](https://www.change.org/p/ban-superintelligence-stop-ai-driven-human-extinction-risk?utm_content=cl_sharecopy_37871653_en-US%3A4&recruited_by_id=91d3fbf0-cc46-11ee-911b-5975de1bf878&utm_source=share_petition&utm_medium=copylink&utm_campaign=psf_combo_share_initial&share_bandit_exp=initial-37871653-en-US)
   - [Exiger une IA responsable](https://www.change.org/p/artificial-intelligence-time-is-running-out-for-responsible-ai-development-2a2f1a13-b63a-4d8c-979b-b144bded2f48)
-- **[Apprenez-en davantage](/risques)** sur l'alignement de l'IA et les risques qui nous menacent.
+- **[Apprenez-en davantage](/dangers)** sur l'alignement de l'IA et les risques qui nous menacent.
 - **Abordez ce sujet** avec les personnes de votre entourage, répondez à leurs questions et incitez-les à agir.
 - **Suivez nos chaînes** sur les réseaux sociaux et restez informés :
   - [Discord](https://discord.gg/vyXGd7AeGc)
@@ -25,7 +25,7 @@ Le nombre de personnes conscientes des risques liés à l'IA est encore restrein
     - Ajoutez Pause IA à votre CV et activez « partagez ces mises à jour du profil avec votre réseau ». C'est un moyen simple de faire connaître nos efforts à de nombreuses personnes.
   - [YouTube](https://www.youtube.com/@Pause_IA)
   - [Instagram](https://www.instagram.com/pause_ia)
-  - [Threads](https://www.threads.net/@pause_ia) 
+  - [Threads](https://www.threads.net/@pause_ia)
 - **Échangez** sur les risques de l'IA sur les réseaux sociaux.
 - **Envoyez un email à un politique** : Les emails sont très efficaces, vous pourriez être surpris !
 - **[Manifestez](https://pauseai.info/protests)** : Rejoignez une des [manifestations](https://pauseai.info/protests) en France et dans le monde.
@@ -42,9 +42,9 @@ Le nombre de personnes conscientes des risques liés à l'IA est encore restrein
 
 ### Vous êtes un politique ou travaillez pour le gouvernement
 
-- **Préparez-vous pour le [sommet sur la sécurité de l'IA](https://pauseai.info/summit).** Formez des coalitions avec d'autres pays. Renseignez-vous sur le [problème](/risques) et ses [solutions](/propositions).
+- **Préparez-vous pour le [sommet sur la sécurité de l'IA](https://pauseai.info/summit).** Formez des coalitions avec d'autres pays. Renseignez-vous sur le [problème](/dangers) et ses [solutions](/propositions).
 - **Invitez les dirigeants des laboratoires d'IA** à des auditions parlementaires pour qu'ils exposent la façon dont ils appréhendent et ont l’intention d’anticiper les potentiels risques catastrophiques liés à l’IA, et selon quel calendrier.
-- **Mettez en place une commission** pour étudier les [risques de l'IA](/risques).
+- **Mettez en place une commission** pour étudier les [risques de l'IA](/dangers).
 
 ### Vous connaissez le droit (ou le droit international)
 
