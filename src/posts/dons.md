@@ -5,7 +5,13 @@ description: Grâce à votre soutien financier, nous pouvons avoir un plus grand
 
 Pause IA, née de l'engagement bénévole, est officiellement une [organisation à but non lucratif](/mentions-legales) depuis juin 2024. Actuellement, notre impact repose entièrement sur le dévouement de nos bénévoles. Votre soutien financier nous permettra de nous professionnaliser, d'étendre notre portée et d'amplifier significativement notre influence dans le domaine de la sécurité de l'IA.
 
-<div style="display: flex; justify-content: center;" ><a href="https://www.paypal.com/donate/?hosted_button_id=4TWZXY62EM5VE"><img src="/PayPal.svg" alt="Faites un don avec Paypal" width="256" /></a></div>
+<svelte:head>
+
+<script async src="https://js.stripe.com/v3/buy-button.js"></script>
+
+</svelte:head>
+
+<div style="display: flex; justify-content: center;" ><stripe-buy-button buy-button-id="buy_btn_1PdUUN2Mk0DtnEyqJOHV7BHb" publishable-key="pk_live_51PdU3O2Mk0DtnEyq0FIJpy6sv1b3ZYBBLW5bgqPVWV0m9LeAtFgcyO4YZxCQLKlZs9pLebBbv4vND00sQTcOu0ML00yRgOv5Hm" ></stripe-buy-button></div>
 
 ### Comment vos dons sont utilisés par Pause IA
 
@@ -37,4 +43,4 @@ Pause IA, née de l'engagement bénévole, est officiellement une [organisation 
 ### Comment faire un don à Pause IA
 
 - Par virement bancaire (moyen le plus économique) : IBAN : BE22 9674 2966 9647 BIC/SWIFT : TRWIBEB1XXX (Pause IA).
-- Via Stripe : *insérer le lien*.
+- Via Stripe : _insérer le lien_.
