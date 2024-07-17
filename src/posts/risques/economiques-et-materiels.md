@@ -1,11 +1,11 @@
 ---
-title: Risques économiques et matériels
-description: Les risques économiques et matériels de l'IA incluent des impacts sur les infrastructures et les entreprises, de nouvelles vulnérabilités, et des défis d'automatisation, nécessitant une gestion prudente via la régulation et l'innovation technologique.
+title: Dangers économiques et matériels
+description: Les dangers économiques et matériels de l'IA incluent des impacts sur les infrastructures et les entreprises, de nouvelles vulnérabilités, et des défis d'automatisation, nécessitant une gestion prudente via la régulation et l'innovation technologique.
 ---
 
-Les risques économiques et matériels liés à l'intelligence artificielle concernent principalement les impacts directs sur les infrastructures, les entreprises, et les ressources matérielles. Alors que l'IA promet des avancées significatives dans l'optimisation et l'automatisation des processus, elle introduit également des vulnérabilités nouvelles et des possibilités de dysfonctionnements. Ces risques comprennent la facilitation d’attaques à l’aide d’IA, les dysfonctionnements prosaïques et l’impact économique de technologies de rupture. Bien qu’il soit important de gérer les risques qui menacent des personnes humaines, ceux-ci ne sont pas non plus à négliger.
+Les dangers économiques et matériels liés à l'intelligence artificielle concernent principalement les impacts directs sur les infrastructures, les entreprises, et les ressources matérielles. Alors que l'IA promet des avancées significatives dans l'optimisation et l'automatisation des processus, elle introduit également des vulnérabilités nouvelles et des possibilités de dysfonctionnements. Ces dangers comprennent la facilitation d’attaques à l’aide d’IA, les dysfonctionnements prosaïques et l’impact économique de technologies de rupture. Bien qu’il soit important de gérer les dangers qui menacent des personnes humaines, ceux-ci ne sont pas non plus à négliger.
 
-La gestion de ces risques nécessite une vigilance accrue, des régulations rigoureuses et surtout des innovations technologiques pour garantir la résilience et la sécurité des systèmes d’IA et de systèmes confrontés à l’IA.
+La gestion de ces dangers nécessite une vigilance accrue, des régulations rigoureuses et surtout des innovations technologiques pour garantir la résilience et la sécurité des systèmes d’IA et de systèmes confrontés à l’IA.
 
 ## Cyberattaques
 
@@ -37,7 +37,7 @@ De plus, l’utilisation de quantités massives de données impossibles à contr
 
 En sens contraire, les attaques adverses peuvent être utilisées pour renforcer la sécurité d’un système et l’empoisonnement de données permet à des acteurs indépendants de lutter contre le vol de données.
 
-Ces risques sont l’objet de beaucoup de recherches motivées par des intérêts économiques et de souveraineté donc la dynamique entre attaque et défense fluctue rapidement. Ils peuvent être influencés par des actions à toutes les étapes : régulation, standards, alignement technique, sécurité au déploiement, etc.
+Ces dangers sont l’objet de beaucoup de recherches motivées par des intérêts économiques et de souveraineté donc la dynamique entre attaque et défense fluctue rapidement. Ils peuvent être influencés par des actions à toutes les étapes : régulation, standards, alignement technique, sécurité au déploiement, etc.
 
 ## Takeover entrepreneurial
 
