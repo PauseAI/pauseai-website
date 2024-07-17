@@ -16,9 +16,9 @@ Devenir volontaire :
 - Après validation, vous serez inscrit comme bénévole et pourrez apparaître sur la [page des membres](https://pauseai.info/people) de PauseAI International (avec votre accord).
 
 Prérequis pour le volontariat :
-- Adhésion aux valeurs et à la mission de Pause IA
-- Engagement d'au moins 3h par semaine
-- Maîtrise d'une ou plusieurs compétences parmi : rédaction, relecture, traduction, développement web, réseaux sociaux, communication, expertise (en sûreté de l'IA, juridiction, économie ou fiscalité)
-- Forte motivation et engagement envers la mission de l'association
+- Adhésion aux valeurs et à la mission de Pause IA.
+- Engagement d'au moins 3h par semaine.
+- Maîtrise d'une ou plusieurs compétences parmi : rédaction, relecture, traduction, développement web, réseaux sociaux, communication, expertise (en sûreté de l'IA, juridiction, économie ou fiscalité).
+- Forte motivation et engagement envers la mission de l'association.
 
 Rejoignez-nous dès maintenant et contribuez à façonner un avenir où l'IA sert l'humanité en toute sécurité !
