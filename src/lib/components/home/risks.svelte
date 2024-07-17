@@ -9,19 +9,14 @@
 <section aria-labelledby={label_id}>
 	<UnderlinedTitle id={label_id}>Les dangers</UnderlinedTitle>
 	<TabList
-		tabs={[
-			'Dangers économiques et matériels',
-			'Dangers pour les individus',
-			'Dangers pour la société',
-			'Dangers pour l’humanité'
-		]}
+		tabs={['Économiques et matériels', 'Pour les individus', 'Pour la société', 'Pour l’humanité']}
 		id="risks-tabs"
 		let:tab
 		{label_id}
 	>
 		{tab}
 		<svelte:fragment slot="panel" let:tab>
-			{#if tab === 'Dangers économiques et matériels'}
+			{#if tab === 'Économiques et matériels'}
 				<p>
 					Les risques économiques et matériels liés à l'intelligence artificielle concernent
 					principalement les impacts directs sur les infrastructures, les entreprises, et les
@@ -38,7 +33,7 @@
 					systèmes d’IA et de systèmes confrontés à l’IA.
 				</p>
 				<Button href="/dangers/economiques-et-materiels">En apprendre davantage</Button>
-			{:else if tab === 'Dangers pour les individus'}
+			{:else if tab === 'Pour les individus'}
 				<p>
 					L'intégration de l'IA dans la vie quotidienne pose des risques significatifs pour les
 					individus, touchant à leur vie privée, leur sécurité et leur bien-être. Ces risques
@@ -49,7 +44,7 @@
 					systèmes d’IA.
 				</p>
 				<Button href="/dangers/pour-les-individus">En apprendre davantage</Button>
-			{:else if tab === 'Dangers pour la société'}
+			{:else if tab === 'Pour la société'}
 				<p>
 					Certains risques touchent la société entière, et doivent être considérés dans cette
 					perspective afin de ne pas en négliger des aspects majeurs. Les risques pour la société
@@ -66,7 +61,7 @@
 					sociales.
 				</p>
 				<Button href="/dangers/pour-la-societe">En apprendre davantage</Button>
-			{:else if tab === 'Dangers pour l’humanité'}
+			{:else if tab === 'Pour l’humanité'}
 				<p>
 					Plus spéculativement, l’IA pose des Dangers qui menacent durablement le futur de
 					l’humanité. Ces risques ne peuvent pas forcément être observés, et il est peu probable que
