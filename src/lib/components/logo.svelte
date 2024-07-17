@@ -33,7 +33,7 @@
 	role="img"
 	xmlns="http://www.w3.org/2000/svg"
 >
-	<title>PauseAI logo</title>
+	<title>Pause IA logo</title>
 	<path
 		class="logo-circle"
 		fill-rule="evenodd"
@@ -48,8 +48,8 @@
 			fill={fill_pause}
 		/>
 		<path
-			class="logo-ai"
-			d="M195.705 47L207.945 19H217.225L229.465 47H219.705L210.665 23.48H214.345L205.305 47H195.705ZM202.985 42.12L205.385 35.32H218.265L220.665 42.12H202.985ZM230.971 47V19H240.411V47H230.971Z"
+			class="logo-ia"
+			d="m240.41 47-12.24-28h-9.28l-12.24 28h9.76l9.04-23.52h-3.68l9.04 23.52zm-7.28-4.88-2.4-6.8h-12.88l-2.4 6.8zm-27.986 4.88v-28h-9.44v28z"
 			fill={fill_ai}
 		/>
 	{/if}
