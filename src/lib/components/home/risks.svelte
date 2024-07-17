@@ -18,11 +18,10 @@
 		<svelte:fragment slot="panel" let:tab>
 			{#if tab === 'Économiques et matériels'}
 				<p>
-					Maman, quand je serai grand, je serai… inutile ? Les laboratoires d'IA ont pour projet
-					d'automatiser la totalité du travail humain d'ici 4 ans. Qu'ils atteignent pleinement cet
-					objectif ou non, il est évident que nous nous dirigeons vers un bouleversement majeur du
-					marché du travail. Nous devons nous préparer à affronter un choc économique sans
-					précédent.
+					<i>Maman, quand je serai grand, je serai… inutile ?</i> Les laboratoires d'IA ont pour projet
+					d'automatiser la totalité du travail humain d'ici 4 ans. Qu'ils atteignent pleinement cet objectif
+					ou non, il est évident que nous nous dirigeons vers un bouleversement majeur du marché du travail.
+					Nous devons nous préparer à affronter un choc économique sans précédent.
 				</p>
 				<p>
 					Les dangers économiques et matériels liés aux intelligences artificielles menacent
