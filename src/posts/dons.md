@@ -13,6 +13,8 @@ Pause IA, née de l'engagement bénévole, est officiellement une [organisation 
 
 <div style="display: flex; justify-content: center;" ><stripe-buy-button buy-button-id="buy_btn_1PdUUN2Mk0DtnEyqJOHV7BHb" publishable-key="pk_live_51PdU3O2Mk0DtnEyq0FIJpy6sv1b3ZYBBLW5bgqPVWV0m9LeAtFgcyO4YZxCQLKlZs9pLebBbv4vND00sQTcOu0ML00yRgOv5Hm" ></stripe-buy-button></div>
 
+## A quoi ça sert ?
+
 ### Comment vos dons sont utilisés par Pause IA
 
 - **Renforcement communautaire** : Expansion de notre réseau, développement de projets innovants, organisation d'événements impactants.
@@ -40,7 +42,7 @@ Pause IA, née de l'engagement bénévole, est officiellement une [organisation 
 - Mettre en place une veille médiatique sur l'IA et développer des ressources pour les groupes locaux.
 - Participer aux actions globales de PauseAI International tout en apportant une perspective française.
 
-### Comment faire un don à Pause IA
+## Comment faire un don à Pause IA
 
 - Par virement bancaire (moyen le plus économique) : IBAN : BE22 9674 2966 9647 BIC/SWIFT : TRWIBEB1XXX (Pause IA).
 - [Via Stripe](https://buy.stripe.com/28o3fL8ZNguT9e87ss)
