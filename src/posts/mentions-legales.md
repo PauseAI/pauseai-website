@@ -30,4 +30,4 @@ Aucune information vous concernant n'est conservé sur le site.
 
 ## Contact:
 
-- Mail: [maxime@pauseai.info](mailto:maxime@pauseai.info)
+- Mail: [contact@pauseia.fr](mailto:contact@pauseia.fr)
