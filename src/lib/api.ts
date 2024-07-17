@@ -1,4 +1,4 @@
-import { AIRTABLE_API_KEY } from '$env/static/private'
+// import { AIRTABLE_API_KEY } from '$env/static/private'
 import type { Post } from '$lib/types'
 import { outcomesMeta } from '../routes/outcomes/meta'
 import { communitiesMeta } from '../routes/communities/communities'
@@ -19,18 +19,18 @@ const hardCodedPages: Post[] = [
 	teamsMeta
 ]
 
-if (!AIRTABLE_API_KEY && import.meta.env.MODE == 'production') {
-	throw new Error('AIRTABLE_API_KEY is missing from .env')
-}
+// if (!AIRTABLE_API_KEY && import.meta.env.MODE == 'production') {
+// 	throw new Error('AIRTABLE_API_KEY is missing from .env')
+// }
 
 /** Fetch options for getting data from Airtable */
-export const options = {
-	method: 'GET',
-	headers: {
-		Authorization: `Bearer ${AIRTABLE_API_KEY}`,
-		'Content-Type': 'application/json'
-	}
-}
+// export const options = {
+// 	method: 'GET',
+// 	headers: {
+// 		Authorization: `Bearer ${AIRTABLE_API_KEY}`,
+// 		'Content-Type': 'application/json'
+// 	}
+// }
 
 export function getPosts(subpath = '') {
 	let posts: Post[] = []

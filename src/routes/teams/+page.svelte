@@ -1,4 +1,4 @@
-<script lang="ts">
+<!-- <script lang="ts">
 	import PostMeta from '$lib/components/PostMeta.svelte'
 	import A from '$lib/components/custom/a.svelte'
 	import { meta } from './meta'
@@ -47,4 +47,4 @@ a Role on the [discord server](https://discord.gg/2XXWXvErfA).
 		display: grid;
 		gap: 1rem;
 	}
-</style>
+</style> -->
