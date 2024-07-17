@@ -27,7 +27,7 @@ Si vous utilisez des systèmes d’IA à vos propres fins, tenez-vous au courant
 
 Ce risque peut être mitigé en contrôlant la qualité des systèmes d’IA et en poussant plus loin les techniques actuelles d’alignement. De nouvelles techniques d’alignement sont nécessaires pour l’éviter prouvablement.
 
-## Perte de fonction par intervention extérieure :
+## Perte de fonction par intervention extérieure
 
 Un système d’IA est plus à risque de dysfonctionnement lorsqu’il se trouve en-dehors de ses conditions normales d’utilisation - on parle de sortie de distribution lorsque sa situation est différente de celles sur lesquelles il a été entraîné. On tente autant que possible d’améliorer la robustesse des IA hors distribution de nos jours, mais des techniques d’attaques adverses, qui consistent pour un acteur opposé à générer une situation de façon à éliciter un comportement erroné, posent problème.
 
