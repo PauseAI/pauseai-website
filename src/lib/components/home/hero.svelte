@@ -64,9 +64,6 @@
 	.hero-content h1 {
 		font-size: 1.7rem;
 	}
-	.hero-content p {
-		margin: 2rem 0;
-	}
 	.hero-bg {
 		position: absolute;
 		top: 0;
@@ -113,6 +110,7 @@
 		align-items: center;
 		flex-direction: column;
 		gap: 2rem;
+		margin-top: 2rem;
 	}
 	@media (min-width: 480px) {
 		.hero-content {
