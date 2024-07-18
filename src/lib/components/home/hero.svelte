@@ -31,9 +31,10 @@
 		</p>
 		<Button href="/agir">Agir</Button>
 	</section>
-
-	<LeftCorner />
-	<RightCorner />
+	<div class="corners">
+		<LeftCorner />
+		<RightCorner />
+	</div>
 </section>
 
 <style>
@@ -73,6 +74,16 @@
 		width: 100%;
 		height: 100%;
 		object-fit: cover;
+	}
+	.corners {
+		width: 100%;
+		bottom: -1px;
+		position: absolute;
+		left: 0;
+		display: flex;
+		flex-direction: row;
+		justify-content: space-between;
+		border-bottom: 1px solid white;
 	}
 	.hero-overlay::after {
 		content: '';
