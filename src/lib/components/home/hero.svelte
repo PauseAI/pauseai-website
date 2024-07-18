@@ -23,12 +23,10 @@
 		</h1>
 		<p>
 			Selon la majorité des experts, le développement rapide de l'intelligence artificielle présente
-			un danger catastrophique pour l'humanité à très court terme. Allons-nous accepter le
-			développement effréné de technologies plus dévastatrices que la bombe atomique{'\u00A0'}? Nous
-			faisons face à la menace la plus urgente de notre histoire. Chaque jour compte.
-			<br />
-			Agissez dès maintenant en rejoignant Pause IA.
+			un danger catastrophique pour l'humanité à très court terme, au potentiel plus dévastateur que
+			la bombe atomique.
 		</p>
+		<p>Nous faisons face à la menace la plus urgente de notre histoire. Chaque jour compte.</p>
 		<div class="buttons">
 			<Button href="/agir">Agir</Button>
 			<Button href="/agir" alt>Rejoindre</Button>
