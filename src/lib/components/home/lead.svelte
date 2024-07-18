@@ -25,8 +25,12 @@
 	</p>
 	<p>
 		Les dangers sont réels, mais l'espoir existe. En agissant ensemble, nous pouvons façonner un
-		futur où l'IA demeure un outil bénéfique pour l'humanité. <a href="/dangers">Informez-vous.</a>
-		<a href="/nous-rejoindre">Rejoignez-nous.</a> <a href="/agir">Passez à l’action.</a>
+		futur où l'IA demeure un outil bénéfique pour l'humanité.
+	</p>
+	<p>
+		<a href="/dangers">Informez-vous.</a>
+		<a href="/nous-rejoindre">Rejoignez-nous.</a>
+		<a href="/agir">Passez à l’action.</a>
 	</p>
 </section>
 
