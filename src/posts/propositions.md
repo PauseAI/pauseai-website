@@ -15,12 +15,16 @@ Un accord international se conclut généralement lors d'un sommet, où les diri
 
 L'objectif principal du sommet devrait être un **traité**. Ce traité devra spécifier les mesures politiques qui nous protègent des [risques liés à l'IA](/dangers). Il doit être signé par tous les États membres de l'ONU.
 
-- **Créer une agence internationale de sécurité de l'IA**, similaire à l'AIEA (Agence Internationale de l'Énergie Atomique). Les prérogatives de cette agence seront :
-  - Accorder les autorisations pour le _déploiement_ d'IA. Cela inclura des évaluations/tests approfondis des modèles.
-  - Accorder les autorisations pour de _nouvelles sessions d'entraînement_ de modèles d'IA dépassant une certaine taille (par exemple : 1 milliard de paramètres).
-  - Organiser des rencontres périodiques pour discuter des progrès de la recherche sur la sécurité de l'IA.
+### Agence internationale de sécurité de l'IA
 
-- **Autoriser l'entraînement de systèmes d'IA générale plus puissants que GPT-4 uniquement si leur sécurité peut être garantie.**
+Similaire à l'AIEA (Agence Internationale de l'Énergie Atomique), les prérogatives de cette agence seraient :
+- Accorder les autorisations pour le _déploiement_ d'IA. Cela inclura des évaluations/tests approfondis des modèles.
+- Accorder les autorisations pour de _nouvelles sessions d'entraînement_ de modèles d'IA dépassant une certaine taille (par exemple : 1 milliard de paramètres).
+- Organiser des rencontres périodiques pour discuter des progrès de la recherche sur la sécurité de l'IA.
+
+### Entraînement de systèmes d'IA générale
+
+Autoriser l'entraînement de systèmes d'IA générale plus puissants que GPT-4 uniquement si leur sécurité peut être garantie :
   - Par « plus puissants que GPT-4 », nous entendons tous les modèles d'IA qui sont soit 1) de taille supérieure à 10^12 paramètres, 2) utilisent plus de 10^25 FLOP pour l'entraînement, ou 3) dont les capacités s’apprêtent à dépasser celles de GPT-4.
   - Ces prérogatives ne ciblent pas les systèmes d'IA _étroits_ (dits spécialisés), comme la reconnaissance d'images utilisée pour diagnostiquer des problèmes médicaux.
   - Exiger une [supervision pendant les sessions d'entraînement.](https://www.alignmentforum.org/posts/Zfk6faYvcf5Ht7xDx/compute-thresholds-proposed-rules-to-mitigate-risk-of-a-lab)
@@ -29,7 +33,9 @@ L'objectif principal du sommet devrait être un **traité**. Ce traité devra sp
   - Même si nous pouvons construire une IA sûre et contrôlable, ne développer et déployer cette technologie qu'avec un **contrôle démocratique** solide. Une superintelligence est trop puissante pour être contrôlée par une seule entreprise ou un seul pays.
   - **[Surveiller les ventes de GPU](https://arxiv.org/abs/2303.11341)** et autre matériel pouvant être utilisés pour entraîner des IA.
 
-- **Autoriser le déploiement de modèles seulement après avoir obtenu l’assurance qu'ils ne présentent aucune [capacité dangereuse](https://pauseai.info/dangerous-capabilities).**
+### Déploiement des modèles
+
+Autoriser le déploiement de modèles seulement après avoir obtenu l’assurance qu'ils ne présentent aucune [capacité dangereuse](https://pauseai.info/dangerous-capabilities) :
   - Nous aurons besoin de normes et d'équipes d'évaluation indépendantes pour déterminer si un modèle possède des capacités dangereuses.
   - La liste des capacités à risque pourra évoluer avec la croissance des capacités de l'IA.
   - Noter que se fier uniquement aux évaluations de modèles [n'est pas suffisant](https://pauseai.info/4-levels-of-ai-regulation).
