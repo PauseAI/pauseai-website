@@ -51,10 +51,8 @@
 </div>
 
 <style>
-	:root {
-		--padding-side: 1rem;
-	}
 	.tabs {
+		--padding-side: 1rem;
 		overflow-x: hidden;
 	}
 	ul {
@@ -119,7 +117,7 @@
 		}
 	}
 	@media (min-width: 1024px) {
-		:root {
+		.tabs {
 			--padding-side: 1.25rem;
 		}
 		button {

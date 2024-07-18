@@ -9,15 +9,12 @@
 </h2>
 
 <style>
-	:root {
+	h2 {
 		/* Increasing thickness grows the underline towards the top */
 		--underline-thickness: calc(0.75 * 1.1875rem);
 		--x-offset: calc(0.75 * 1.1375rem);
 		/* Vertical offset is calculated from bottom of the underline */
 		--y-offset: 0.17rem;
-	}
-
-	h2 {
 		font-size: 1.5rem;
 	}
 
@@ -45,13 +42,10 @@
 	}
 
 	@media (min-width: 640px) {
-		:root {
+		h2 {
 			--underline-thickness: 1.1875rem;
 			--x-offset: 1.375rem;
 			--y-offset: 0.3rem;
-		}
-
-		h2 {
 			font-size: 2rem;
 		}
 	}
