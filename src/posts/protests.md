@@ -6,6 +6,8 @@ description: When and where we will be protesting.
 ## Coming up
 
 - [22nd of September, NYC](https://www.eventbrite.com/e/pauseai-nyc-summit-of-the-future-protest-tickets-905766862067)
+- [30th of July, Washington DC](https://www.facebook.com/events/2528518090675538) (World Pause Coalition)
+<!-- - [23rd of July, San Francisco](https://www.facebook.com/events/2528518090675538) -->
 - [Join PauseAI](/join) to receive updates on upcoming protests.
 
 ## Past Protests
