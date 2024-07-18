@@ -15,7 +15,9 @@
 		--x-offset: calc(0.75 * 1.1375rem);
 		/* Vertical offset is calculated from bottom of the underline */
 		--y-offset: 0.17rem;
+
 		font-size: 1.5rem;
+		margin-right: var(--x-offset);
 	}
 
 	h2 span {
