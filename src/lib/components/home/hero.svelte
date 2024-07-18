@@ -29,7 +29,7 @@
 		<p>Nous faisons face à la menace la plus urgente de notre histoire. Chaque jour compte.</p>
 		<div class="buttons">
 			<Button href="/agir">Agir</Button>
-			<Button href="/agir" alt>Rejoindre</Button>
+			<Button href="/nous-rejoindre" alt>Rejoindre</Button>
 		</div>
 	</section>
 	<div class="corners">
