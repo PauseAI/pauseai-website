@@ -103,11 +103,11 @@ h2 {
 	font-weight: 700;
 	position: relative;
 	width: fit-content;
-	margin-bottom: 1rem;
+	margin-bottom: 2rem;
 }
 
 section:not(:last-child) {
-	margin-bottom: 2rem;
+	margin-bottom: 3rem;
 }
 
 @media (min-width: 640px) {
