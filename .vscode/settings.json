@@ -6,14 +6,8 @@
 		}
 	],
 	"eslint.validate": ["javascript", "javascriptreact", "svelte"],
-	"editor.defaultFormatter": "svelte.svelte-vscode",
-	"[markdown]": {
-		"editor.defaultFormatter": "esbenp.prettier-vscode"
-	},
-	"[javascript]": {
-		"editor.defaultFormatter": "esbenp.prettier-vscode"
-	},
-	"[html]": {
-		"editor.defaultFormatter": "esbenp.prettier-vscode"
+	"editor.defaultFormatter": "esbenp.prettier-vscode",
+	"[svelte]": {
+		"editor.defaultFormatter": "svelte.svelte-vscode"
 	}
 }
