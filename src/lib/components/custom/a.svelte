@@ -45,9 +45,9 @@
 	<slot />{#if type != Type.Internal}
 		<span style="white-space: nowrap">
 			<div class="icon">
-				{#if type == Type.External}
-					<ExternalLink {...ICON_PROPS} />
-				{:else if type == Type.Mail}
+				<!-- {#if type == Type.External}
+					<ExternalLink {...ICON_PROPS} /> -->
+				{#if type == Type.Mail}
 					<Mail {...ICON_PROPS} />
 				{/if}
 			</div>
