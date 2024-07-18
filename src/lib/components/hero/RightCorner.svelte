@@ -6,7 +6,7 @@
 <svg
 	{width}
 	{height}
-	viewBox={`0 0 ${width.toString()}} ${height.toString()}`}
+	viewBox={`0 0 ${width.toString()} ${height.toString()}`}
 	fill="none"
 	xmlns="http://www.w3.org/2000/svg"
 >
