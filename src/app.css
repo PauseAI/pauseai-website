@@ -92,15 +92,14 @@ h4,
 h5 {
 	font-family: var(--font-heading);
 }
-
 h1 {
-	font-size: 3.5rem;
+	font-size: 2rem;
 	font-weight: 700;
 	margin-bottom: 1rem;
 }
 
 h2 {
-	font-size: 2rem;
+	font-size: 1.5rem;
 	font-weight: 700;
 	position: relative;
 	width: fit-content;
@@ -113,10 +112,12 @@ section:not(:last-child) {
 
 @media (min-width: 640px) {
 	h1 {
+		font-size: 3.5rem;
 		margin-bottom: 2rem;
 	}
 
 	h2 {
+		font-size: 2rem;
 		margin-bottom: 4rem;
 	}
 
@@ -136,15 +137,6 @@ h3 {
 
 .small-text {
 	font-size: 0.875rem;
-}
-
-@media (max-width: 40rem) {
-	h1 {
-		font-size: 2rem;
-	}
-	h2 {
-		font-size: 1.5rem;
-	}
 }
 
 a {
