@@ -39,7 +39,7 @@
 <style>
 	.hero {
 		display: flex;
-		height: calc(100dvh - 8.125rem);
+		height: calc(100svh - 8.125rem);
 		align-items: center;
 		z-index: 0;
 		margin-top: 1rem;
@@ -50,7 +50,7 @@
 		top: 0;
 		left: 0;
 		width: 100%;
-		height: 100dvh;
+		height: 100svh;
 		align-items: center;
 		display: flex;
 		z-index: -1;

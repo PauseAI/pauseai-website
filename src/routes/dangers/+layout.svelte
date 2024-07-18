@@ -30,7 +30,7 @@
 		const sideNav = document.querySelector<HTMLElement>('.side-nav')
 		if (sideNav) {
 			const rect = sideNav.getBoundingClientRect()
-			sideNavInitialTop = rect.top + window.scrollY
+			sideNavInitialTop = rect.top / window.innerHeight
 		}
 	}
 
@@ -42,8 +42,10 @@
 		}
 		calculateSideNavPosition()
 		window.addEventListener('resize', calculateSideNavPosition)
+		window.addEventListener('orientationchange', calculateSideNavPosition)
 		return () => {
 			window.removeEventListener('resize', calculateSideNavPosition)
+			window.removeEventListener('orientationchange', calculateSideNavPosition)
 		}
 	})
 </script>
@@ -66,7 +68,7 @@
 </div>
 
 <div class="layout">
-	<nav class="side-nav" style="top: {sideNavInitialTop}px;">
+	<nav class="side-nav" style="top: {sideNavInitialTop * 100}%;">
 		<ul>
 			{#each data.posts as post}
 				<li class:current={post.slug === data.url.pathname}>
