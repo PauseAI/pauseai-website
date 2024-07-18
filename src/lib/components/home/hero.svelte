@@ -29,7 +29,10 @@
 			<br />
 			Agissez dès maintenant en rejoignant Pause IA.
 		</p>
-		<Button href="/agir">Agir</Button>
+		<div class="buttons">
+			<Button href="/agir">Agir</Button>
+			<Button href="/agir" alt>Rejoindre</Button>
+		</div>
 	</section>
 
 	<LeftCorner />
@@ -107,9 +110,18 @@
 			rgba(1, 1, 1, 0.48) 100%
 		);
 	}
+	.buttons {
+		display: flex;
+		align-items: center;
+		flex-direction: column;
+		gap: 2rem;
+	}
 	@media (min-width: 480px) {
 		.hero-content {
 			max-width: 28rem;
+		}
+		.buttons {
+			flex-direction: row;
 		}
 	}
 	@media (min-width: 640px) {
