@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { url as siteUrl } from '$lib/config'
+	import { url as siteUrl } from '$config'
 </script>
 
 <p>Dear [name],</p>

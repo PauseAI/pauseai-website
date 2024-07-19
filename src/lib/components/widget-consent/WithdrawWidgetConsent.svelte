@@ -1,5 +1,5 @@
 <script lang="ts">
-	import consent from '$lib/components/widget-consent/WidgetConsentStore'
+	import consent from '$components/widget-consent/WidgetConsentStore'
 	import toast from 'svelte-french-toast'
 </script>
 

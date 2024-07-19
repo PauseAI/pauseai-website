@@ -1,5 +1,5 @@
 <script lang="ts">
-	import Button from '$lib/components/Button.svelte'
+	import Button from '$components/Button.svelte'
 	import Propability from './Propability.svelte'
 	export let selected: 'yes' | 'no' | undefined
 	export let probability: number

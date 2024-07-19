@@ -5,7 +5,7 @@ description: Questions fréquemment posées sur Pause IA et les risques de l'IA 
 
 <!-- ↓↓↓ NE PAS TOUCHER ↓↓↓ -->
 <script lang="ts">
-  import Accordion from '$lib/components/Accordion.svelte'
+  import Accordion from '$components/Accordion.svelte'
 	import { page } from '$app/stores'
 
   $: toc = $page.url.pathname === '/faq'

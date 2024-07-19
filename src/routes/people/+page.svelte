@@ -1,5 +1,5 @@
 <script lang="ts">
-	import PostMeta from '$lib/components/PostMeta.svelte'
+	import PostMeta from '$components/PostMeta.svelte'
 	import { meta } from './meta'
 	import Person from './person.svelte'
 	export let data

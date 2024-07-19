@@ -1,4 +1,4 @@
-import * as config from '$lib/config'
+import * as config from '$config'
 import type { Post } from '$lib/types'
 
 export const prerender = true

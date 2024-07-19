@@ -38,6 +38,13 @@ const config = {
 		}),
 		prerender: {
 			entries: process.env.PUBLIC_UNDER_CONSTRUCTION === 'true' ? [] : ['*']
+		},
+		alias: {
+			$assets: './src/assets',
+			$posts: './src/posts',
+			$components: './src/lib/components',
+			$config: './src/lib/config.ts',
+			$routes: './src/routes'
 		}
 	}
 }

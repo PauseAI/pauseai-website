@@ -1,15 +1,15 @@
 <script lang="ts">
-	import Button from '$lib/components/Button.svelte'
-	import Mark from '$lib/components/Mark.svelte'
-	import LeftCorner from '$lib/components/hero/LeftCorner.svelte'
-	import RightCorner from '$lib/components/hero/RightCorner.svelte'
+	import Button from '$components/Button.svelte'
+	import Mark from '$components/Mark.svelte'
+	import LeftCorner from '$components/hero/LeftCorner.svelte'
+	import RightCorner from '$components/hero/RightCorner.svelte'
 	const label_id = 'hero-title'
 </script>
 
 <section class="hero" aria-labelledby={label_id}>
 	<div class="hero-overlay">
 		<enhanced:img
-			src="$lib/assets/hero_bg.jpg"
+			src="$assets/hero_bg.jpg"
 			alt="PauseAI protesters"
 			class="hero-bg"
 			sizes="min(1920px, 100vw)"

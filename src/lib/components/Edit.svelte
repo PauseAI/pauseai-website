@@ -1,5 +1,5 @@
 <script lang="ts">
-	import ExternalLink from '$lib/components/custom/a.svelte'
+	import ExternalLink from '$components/custom/a.svelte'
 	import { page } from '$app/stores'
 
 	const markdownFiles = import.meta.glob(`../../posts/**/*.md`)

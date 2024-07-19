@@ -1,9 +1,9 @@
 <script lang="ts">
-	import Button from '$lib/components/Button.svelte'
+	import Button from '$components/Button.svelte'
 	import TreeNode from './TreeNode.svelte'
 	import { tree } from './tree'
 	import { outcomesMeta } from './meta'
-	import PostMeta from '$lib/components/PostMeta.svelte'
+	import PostMeta from '$components/PostMeta.svelte'
 
 	let intro = true
 	let showProbabilities = false

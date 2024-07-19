@@ -1,8 +1,8 @@
 <script lang="ts">
-	import Button from '$lib/components/Button.svelte'
-	import ExternalLink from '$lib/components/custom/a.svelte'
-	import consent from '$lib/components/widget-consent/WidgetConsentStore'
-	import loadTwitter from '$lib/components/widget-consent/loadTwitter'
+	import Button from '$components/Button.svelte'
+	import ExternalLink from '$components/custom/a.svelte'
+	import consent from '$components/widget-consent/WidgetConsentStore'
+	import loadTwitter from '$components/widget-consent/loadTwitter'
 
 	let wrapper: HTMLDivElement | undefined
 

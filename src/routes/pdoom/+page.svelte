@@ -1,6 +1,6 @@
 <script lang="ts">
-	import PostMeta from '$lib/components/PostMeta.svelte'
-	import Doomers from '$lib/components/Doomers.svelte'
+	import PostMeta from '$components/PostMeta.svelte'
+	import Doomers from '$components/Doomers.svelte'
 	import { meta } from './meta'
 
 	let { title, description, date } = meta

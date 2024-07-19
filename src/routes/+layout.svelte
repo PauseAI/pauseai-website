@@ -4,9 +4,9 @@
 	import { Toaster } from 'svelte-french-toast'
 	import { ProgressBar } from '@prgm/sveltekit-progress-bar'
 
-	import Footer from './footer.svelte'
-	import Header from './header.svelte'
-	import Toc from '$lib/components/Toc.svelte'
+	import Footer from '$components/Footer.svelte'
+	import Header from '$components/Header.svelte'
+	import Toc from '$components/Toc.svelte'
 
 	import '@fontsource/ibm-plex-sans/200.css' // extra-light
 	import '@fontsource/ibm-plex-sans/400.css' // regular

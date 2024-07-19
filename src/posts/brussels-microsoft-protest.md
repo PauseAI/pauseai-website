@@ -4,7 +4,7 @@ description: We are organizing a protest at Microsoft to demand a summit to paus
 ---
 
 <script lang="ts">
-    import WidgetConsent from '$lib/components/widget-consent/WidgetConsent.svelte'
+    import WidgetConsent from '$components/widget-consent/WidgetConsent.svelte'
 </script>
 
 - May 23rd, 2023, 11:45 - 13:00

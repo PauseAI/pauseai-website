@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { url, title as siteName } from '$lib/config'
+	import { url, title as siteName } from '$config'
 	export let title: string
 	export let description: string
 	export let date: string | undefined = undefined

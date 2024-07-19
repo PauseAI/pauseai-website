@@ -1,6 +1,6 @@
 <script lang="ts">
 	import SvelteMarkdown from 'svelte-markdown'
-	import A from '$lib/components/custom/a.svelte'
+	import A from '$components/custom/a.svelte'
 
 	export let description: string | undefined
 	export let name: string | undefined

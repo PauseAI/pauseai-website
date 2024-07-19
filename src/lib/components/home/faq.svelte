@@ -1,6 +1,6 @@
 <script lang="ts">
-	import UnderlinedTitle from '$lib/components/UnderlinedTitle.svelte'
-	import FAQ from '../../../posts/faq.md'
+	import UnderlinedTitle from '$components/UnderlinedTitle.svelte'
+	import FAQ from '$posts/faq.md'
 
 	const label_id = 'faq-title'
 </script>

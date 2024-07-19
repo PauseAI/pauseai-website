@@ -1,6 +1,6 @@
 <script lang="ts">
-	import PostMeta from '$lib/components/PostMeta.svelte'
-	import Button from '$lib/components/Button.svelte'
+	import PostMeta from '$components/PostMeta.svelte'
+	import Button from '$components/Button.svelte'
 	// Risks
 	import Xrisk from './concerns/xrisk.svelte'
 	import Bio from './concerns/bio.svelte'

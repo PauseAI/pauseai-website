@@ -4,8 +4,8 @@
 	const { Map, GeolocateControl, Popup, Marker } = mapboxgl
 	import '../../../node_modules/mapbox-gl/dist/mapbox-gl.css'
 	import { communities, communitiesMeta } from './communities'
-	import PostMeta from '$lib/components/PostMeta.svelte'
-	import ExternalLink from '$lib/components/custom/a.svelte'
+	import PostMeta from '$components/PostMeta.svelte'
+	import ExternalLink from '$components/custom/a.svelte'
 
 	let { title, description, date } = communitiesMeta
 

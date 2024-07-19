@@ -3,7 +3,7 @@ title: PauseAI protest @ FCDO, London, July 18th
 ---
 
 <script lang="ts">
-    import WidgetConsent from '$lib/components/widget-consent/WidgetConsent.svelte'
+    import WidgetConsent from '$components/widget-consent/WidgetConsent.svelte'
 </script>
 
 <WidgetConsent>

@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { url as siteUrl } from '$lib/config'
+	import { url as siteUrl } from '$config'
 	import { onMount } from 'svelte'
 	import ExternalLink from 'lucide-svelte/icons/external-link'
 	import Mail from 'lucide-svelte/icons/mail'

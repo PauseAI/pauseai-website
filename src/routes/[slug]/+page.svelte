@@ -1,6 +1,6 @@
 <script lang="ts">
-	import PostMeta from '$lib/components/PostMeta.svelte'
-	import UnderlinedTitle from '$lib/components/UnderlinedTitle.svelte'
+	import PostMeta from '$components/PostMeta.svelte'
+	import UnderlinedTitle from '$components/UnderlinedTitle.svelte'
 
 	export let data
 

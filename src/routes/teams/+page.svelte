@@ -1,6 +1,6 @@
 <!-- <script lang="ts">
-	import PostMeta from '$lib/components/PostMeta.svelte'
-	import A from '$lib/components/custom/a.svelte'
+	import PostMeta from '$components/PostMeta.svelte'
+	import A from '$components/custom/a.svelte'
 	import { meta } from './meta'
 	import Team from './team.svelte'
 	import SvelteMarkdown from 'svelte-markdown'

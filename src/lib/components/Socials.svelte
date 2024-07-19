@@ -1,13 +1,13 @@
 <script type="ts">
-	import TikTok from '$lib/components/icons/tiktok.svelte'
-	import Instagram from '$lib/components/icons/instagram.svelte'
-	import Facebook from '$lib/components/icons/facebook.svelte'
-	import Youtube from '$lib/components/icons/youtube.svelte'
-	import Discord from '$lib/components/icons/discord.svelte'
-	import Linkedin from '$lib/components/icons/linkedin.svelte'
-	import X from '$lib/components/icons/x.svelte'
-	import Substack from '$lib/components/icons/substack.svelte'
-	import Threads from '$lib/components/icons/Threads.svelte'
+	import TikTok from '$components/icons/tiktok.svelte'
+	import Instagram from '$components/icons/instagram.svelte'
+	import Facebook from '$components/icons/facebook.svelte'
+	import Youtube from '$components/icons/youtube.svelte'
+	import Discord from '$components/icons/discord.svelte'
+	import Linkedin from '$components/icons/linkedin.svelte'
+	import X from '$components/icons/x.svelte'
+	import Substack from '$components/icons/substack.svelte'
+	import Threads from '$components/icons/Threads.svelte'
 </script>
 
 <div class="social">

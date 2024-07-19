@@ -1,7 +1,7 @@
 <script lang="ts">
-	import ExternalLink from '$lib/components/custom/a.svelte'
-	import Logo from '$lib/components/logo.svelte'
-	import Socials from '$lib/components/Socials.svelte'
+	import ExternalLink from '$components/custom/a.svelte'
+	import Logo from '$components/Logo.svelte'
+	import Socials from '$components/Socials.svelte'
 </script>
 
 <footer>

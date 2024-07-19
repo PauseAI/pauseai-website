@@ -1,6 +1,6 @@
 <script lang="ts">
-	import SupporterCard from '$lib/components/SupporterCard.svelte'
-	import UnderlinedTitle from '$lib/components/UnderlinedTitle.svelte'
+	import SupporterCard from '$components/SupporterCard.svelte'
+	import UnderlinedTitle from '$components/UnderlinedTitle.svelte'
 
 	const label_id = 'articles-title'
 
@@ -44,7 +44,6 @@
 
 	const secondsPerLogo = 5
 	$: animationDuration = secondsPerLogo * supporters.length
-
 </script>
 
 <section aria-labelledby={label_id}>

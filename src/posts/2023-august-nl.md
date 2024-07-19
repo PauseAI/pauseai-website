@@ -4,7 +4,7 @@ description: We are organizing a protest to demand a pause on dangerous AI devel
 ---
 
 <script lang="ts">
-    import WidgetConsent from '$lib/components/widget-consent/WidgetConsent.svelte'
+    import WidgetConsent from '$components/widget-consent/WidgetConsent.svelte'
 </script>
 
 <WidgetConsent>

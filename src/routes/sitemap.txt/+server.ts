@@ -1,4 +1,4 @@
-import { url } from '$lib/config'
+import { url } from '$config'
 import type { Post } from '$lib/types'
 
 export const prerender = true

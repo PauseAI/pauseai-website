@@ -1,7 +1,7 @@
 <script lang="ts">
-	import ArticleCard from '$lib/components/ArticleCard.svelte'
-	import Button from '$lib/components/Button.svelte'
-	import UnderlinedTitle from '$lib/components/UnderlinedTitle.svelte'
+	import ArticleCard from '$components/ArticleCard.svelte'
+	import Button from '$components/Button.svelte'
+	import UnderlinedTitle from '$components/UnderlinedTitle.svelte'
 	const label_id = 'articles-title'
 </script>
 

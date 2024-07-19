@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { onMount } from 'svelte'
-	import MoveLeftIcon from '$lib/components/icons/move-left.svelte'
-	import MoveRightIcon from '$lib/components/icons/move-right.svelte'
+	import MoveLeftIcon from '$components/icons/move-left.svelte'
+	import MoveRightIcon from '$components/icons/move-right.svelte'
 	export let data
 	const index = data.posts.findIndex((post) => post.slug === data.slug)
 	const prev = data.posts[index - 1]

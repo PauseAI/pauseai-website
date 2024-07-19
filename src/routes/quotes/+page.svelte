@@ -1,8 +1,8 @@
 <script lang="ts">
-	import { title } from '$lib/config'
+	import { title } from '$config'
 	import Quote from './Quote.svelte'
 	import { meta } from './meta'
-	import PostMeta from '$lib/components/PostMeta.svelte'
+	import PostMeta from '$components/PostMeta.svelte'
 	import GithubSlugger from 'github-slugger'
 
 	export let data
