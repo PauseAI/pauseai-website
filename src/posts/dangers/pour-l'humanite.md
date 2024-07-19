@@ -13,7 +13,7 @@ La concordance de quelques capacités que divers systèmes d’IA vont probablem
 
 Ces capacités sont :
 
-- l’auto-réplication, la capacité de dupliquer son code source (c’est-à-dire ses paramètres associées à un échafaudage approprié) et le propager d’un support à un autre.
+- l’auto-réplication, la capacité de dupliquer son code source (c’est-à-dire ses paramètres associés à un échafaudage approprié) et le propager d’un support à un autre.
 - l’autonomie, la capacité d’opérer en continu indépendamment d’un utilisateur humain.
 - l’adaptation, la capacité de se modifier afin de mieux répondre à sa situation, ses besoins et les mesures adverses.
 
@@ -29,7 +29,7 @@ Pour diverses raisons, il n’est pas impossible qu’une IA qui dépasse largem
 
 Le sujet est largement débattu, certains experts en IA considérant que la possibilité est trop incertaine tandis que d’autres pensent qu’il s’agit de l’enjeu principal de la recherche en IA, mais ce danger est généralement reconnu comme la plus grande source de danger d’extinction humaine due à l’IA.
 
-Ce danger requiert de la recherche en alignement technique, et une solution peut être facilitée par des régulations comme une pause du développement d’IA de frontières. Il est impossible à mitiger.
+Ce danger requiert de la recherche en alignement technique, et une solution peut être facilitée par des régulations comme une pause du développement d’IA de pointe. Il est impossible à mitiger.
 
 ## Perte de contrôle
 
