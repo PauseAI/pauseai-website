@@ -86,7 +86,7 @@ The tendency to pursue these subgoals given any high-level goal is called [instr
 
 You might wonder: how can a statistical model that predicts the next word in a chat interface pose any danger?
 You might say: It's not conscious, it's just a bunch of numbers and code.
-And yes, we don't think LLMS are conscious, but that doesn't mean they can't be dangerous.
+And yes, we don't think LLMs are conscious, but that doesn't mean they can't be dangerous.
 
 LLMs, like GPT, are trained to predict or mimic virtually any line of thought.
 It could mimic a helpful mentor, but also someone with bad intentions, a ruthless dictator or a psychopath.
