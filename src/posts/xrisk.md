@@ -42,7 +42,7 @@ The leaders of the 3 top AI labs and hundreds of AI scientists have [signed the 
 You might think that a superintelligent AI would be locked inside a computer, and therefore can't affect the real world.
 However, we tend to give AI systems access to the internet, which means that they can do a lot of things:
 
-- [Hack into other computers](/cybersecurity-risks), including all smartphones, laptops, server parks, etc. It could use the sensors of these devices as its eyes and ears, having digital senses everywhere.
+- [Hack into other computers](/cybersecurity-risks), including all smartphones, laptops, server farms, etc. It could use the sensors of these devices as its eyes and ears, having digital senses everywhere.
 - Manipulate people through fake messages, e-mails, bank transfers, videos or phone calls. Humans could become the AI's limbs, without even knowing it.
 - Directly control devices connected to the internet, like cars, planes, robotized (autonomous) weapons or even nuclear weapons.
 - Design a novel bioweapon, e.g. by combining viral strands or by using [protein folding](https://alphafold.ebi.ac.uk) and order it to be printed in a lab.
