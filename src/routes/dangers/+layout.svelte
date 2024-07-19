@@ -3,7 +3,7 @@
 	import MoveLeftIcon from '$lib/components/icons/move-left.svelte'
 	import MoveRightIcon from '$lib/components/icons/move-right.svelte'
 	export let data
-	const index = data.posts.findIndex((post) => post.slug === data.url.pathname)
+	const index = data.posts.findIndex((post) => post.slug === data.slug)
 	const prev = data.posts[index - 1]
 	const next = data.posts[index + 1]
 
@@ -59,10 +59,10 @@
 		class:scrolling-up={scrollingUp}
 	>
 		{#if prev}
-			<a href={prev.slug} class="prev"><MoveLeftIcon />{prev.title}</a>
+			<a href={`/${prev.slug}`} class="prev"><MoveLeftIcon />{prev.title}</a>
 		{/if}
 		{#if next}
-			<a href={next.slug} class="next">{next.title}<MoveRightIcon /></a>
+			<a href={`/${next.slug}`} class="next">{next.title}<MoveRightIcon /></a>
 		{/if}
 	</nav>
 </div>
@@ -71,8 +71,8 @@
 	<nav class="side-nav" style="top: {sideNavInitialTop * 100}%;">
 		<ul>
 			{#each data.posts as post}
-				<li class:current={post.slug === data.url.pathname}>
-					<a href={post.slug}>{post.title}</a>
+				<li class:current={post.slug === data.slug}>
+					<a href={`/${post.slug}`}>{post.title}</a>
 				</li>
 			{/each}
 		</ul>
