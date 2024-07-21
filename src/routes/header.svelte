@@ -3,13 +3,6 @@
 	import Logo from '$lib/components/logo.svelte'
 	import { botName } from '$lib/config'
 	import { page } from '$app/stores'
-	import TikTok from '$lib/components/icons/tiktok.svelte'
-	import Instagram from '$lib/components/icons/instagram.svelte'
-	import Facebook from '$lib/components/icons/facebook.svelte'
-	import Youtube from '$lib/components/icons/youtube.svelte'
-	import Discord from '$lib/components/icons/discord.svelte'
-	import Linkedin from '$lib/components/icons/linkedin.svelte'
-	import X from '$lib/components/icons/x.svelte'
 	import SearchIcon from 'lucide-svelte/icons/search'
 	const enableBot = false
 
