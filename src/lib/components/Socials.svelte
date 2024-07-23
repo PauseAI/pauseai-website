@@ -8,6 +8,7 @@
 	import X from '$lib/components/icons/x.svelte'
 	import Substack from './icons/substack.svelte'
 	import Reddit from './icons/reddit.svelte'
+	import Telegram from './icons/telegram.svelte'
 </script>
 
 <div class="social">
@@ -30,6 +31,7 @@
 	<a href="https://www.youtube.com/@PauseAI" target="_blank" title="YouTube"> <Youtube /></a>
 	<a href="https://substack.com/@pauseai" target="_blank" title="Substack"><Substack /></a>
 	<a href="https://www.reddit.com/r/PauseAI/" target="_blank" title="Reddit"><Reddit /></a>
+	<a href="https://t.me/+UeTsIsNkmt82ZmQ8" target="_blank" title="Telegram"><Telegram /></a>
 </div>
 
 <style>
@@ -37,6 +39,7 @@
 		display: flex;
 		margin-left: -0.5rem;
 		margin-right: -0.5rem;
+		flex-wrap: wrap;
 	}
 
 	.social a {
