@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { options } from '$lib/api.js'
 import type { Person } from '$lib/types.js'
 import { error, json } from '@sveltejs/kit'
@@ -21,6 +22,7 @@ const filter = (p: Person) => {
 	return p.image && !p.privacy && p.checked && p.org?.includes(currentOrg)
 }
 
+// Airtable API is limited to 100 items per page
 async function fetchAllPages(fetch: any, url: any) {
 	let allRecords: any[] = []
 	// https://airtable.com/developers/web/api/list-records#query-pagesize
@@ -45,16 +47,13 @@ export async function GET({ fetch }) {
 
 	try {
 		const records = await fetchAllPages(fetch, url)
-		console.log('data len', records.length)
 		const out: Person[] = records
 			.map(recordToPerson)
 			.filter(filter)
 			// Shuffle the array, although not truly random
 			.sort(() => 0.5 - Math.random())
-		console.log('out', out.length)
 		return json(out)
 	} catch (e) {
-		console.log('err while transforming airtable data', e)
 		return error(500, 'err')
 	}
 }
