@@ -8,14 +8,10 @@ declare global {
 		// interface Platform {}
 	}
 }
-
 declare module '*.md' {
-	import type { SvelteComponentDev } from 'svelte/internal'
+	import type { SvelteComponent } from 'svelte'
 
-	export default class Comp extends SvelteComponentDev {
-		$$prop_def: {}
-	}
-	export const metadata: Record<string, any>
+	export default class Comp extends SvelteComponent {}
+
+	export const metadata: Record<string, unknown>
 }
-
-export {}

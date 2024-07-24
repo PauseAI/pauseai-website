@@ -42,15 +42,4 @@
 		flex-direction: column;
 		align-items: center;
 	}
-
-	/* @media (min-width: 640px) {
-		.lead h2 {
-			font-size: 1.4rem;
-		}
-	} */
-	@media (min-width: 1024px) {
-		.lead h2 {
-			font-size: 2rem;
-		}
-	}
 </style>
