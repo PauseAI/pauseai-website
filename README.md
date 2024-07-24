@@ -24,10 +24,13 @@ The article will be published automatically when the pull request is merged.
 
 ## Running locally
 
-First, [install pnpm with corepack](https://pnpm.io/installation#using-corepack). Then:
+1. [install nvm](https://github.com/nvm-sh/nvm?tab=readme-ov-file#install--update-script).
+2. [install pnpm with corepack](https://pnpm.io/installation#using-corepack).
+3. Run:
 
 ```sh
 git clone git@github.com:moiri-gamboni/pauseai-france.git
+nvm install
 # Copy the envs and set the variables if needed
 cp template.env .env
 pnpm install
