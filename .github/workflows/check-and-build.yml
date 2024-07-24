@@ -1,0 +1,33 @@
+name: PNPM Check
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  pnpm-check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js environment
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: '.nvmrc'
+
+      - name: Enable Corepack
+        run: corepack enable
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Copy env file
+        run: cp template.env .env
+
+      - name: Run pnpm check
+        run: pnpm check
+
+      - name: Run pnpm build
+        run: pnpm build
