@@ -15,7 +15,7 @@ Globally halt frontier AI development until we know how to do it safely and unde
 - **Transparency by default.** Do and discuss things publicly and openly, unless there's a good reason not to. Meetings are open to join, the website is open source, and the Discord server is joinable. Being approachable lowers the barrier to feel welcome and help out.
 - **Honesty.** We don't have any weird incentives (e.g. having a stake in an AI company), so we are free to say what we believe. We do not sugarcoat our message to make it more palatable.
 - **Diversity in risks, uniformity in desires.** Whether you're worried about x-risk, cybersecurity hazards or the impact of AI on our democracy: we are unified in our desire to pause AI development.
-- **No partisan politics**. Humans are tribal creatures, which causes us to bundle viewpoints into groups (left/right). AI safety is not partisan, and we want to keep it that way. We do not let our other political views distract us from our combined goal.
+- **No partisan politics**. Humans are tribal creatures, which causes us to bundle viewpoints into groups (left/right). AI safety is not _that_ partisan (yet), and we want to keep it that way. We do not let our other political views distract us from our combined goal.
 
 ## What type of culture do we want to foster?
 
