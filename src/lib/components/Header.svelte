@@ -46,7 +46,7 @@
 			<Button href="/nous-rejoindre" alt={onHomepage}>Nous rejoindre</Button>
 			<!-- <NavLink href="/search" ariaLabel="Search"><SearchIcon size="0.8em" /></NavLink> -->
 		</div>
-		<button class="hamburger" on:click={() => (open = !open)}>
+		<button aria-label="Open mobile menu" class="hamburger" on:click={() => (open = !open)}>
 			<svg
 				width="24"
 				height="24"
@@ -84,7 +84,7 @@
 			<a href="/" class="logo">
 				<Logo animate={onHomepage} fill_circle="white" fill_ai="white" />
 			</a>
-			<button class="hamburger" on:click={() => (open = !open)}>
+			<button aria-label="Close mobile menu" class="hamburger" on:click={() => (open = !open)}>
 				<svg
 					width="24"
 					height="24"
