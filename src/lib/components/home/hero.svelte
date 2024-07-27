@@ -55,7 +55,7 @@
 		left: 50%;
 		transform: translateX(-50%);
 		width: 100vw;
-		height: -webkit-fill-available;
+		height: calc(100% - var(--hero-top-offset));
 		align-items: center;
 		display: flex;
 		z-index: -1;
