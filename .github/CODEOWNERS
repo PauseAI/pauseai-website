@@ -1,0 +1,5 @@
+# Require approval for all files
+* @moiri-gamboni
+
+# Negate the requirement for files in src/posts/
+/src/posts/
