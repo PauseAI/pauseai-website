@@ -9,13 +9,11 @@ You are now one of them.
 
 <!-- ## [Sign up here](https://airtable.com/appWPTGqZmUcs3NWu/pagoxRuCai4OYJEHt/form) -->
 
-Here's what happens:
+Ways that you can join:
 
-- After filling in the form, one of the Onboarding team members will reach out to you.
-- You should [join the PauseAI](https://discord.gg/2XXWXvErfA) Discord, where most of the collaboration happens.
-- You'll have a 30-minute call to discuss your interests and how you can contribute.
-- We'll look for projects or [teams](/teams) that match your interests.
-- You'll sign up as a volunteer and you'll appear on the [people](/people) page (if you're OK with that!)
-- Check out the [members page](/members) for more info!
-
+- Join or form a [local community](/communities).
+- Join the PauseAI [Discord](https://discord.gg/2XXWXvErfA), where most of the collaboration happens.
+- Fill out this form, and you will be able to chat or have a call with the Onboarding team about your interests and how you can participate in projects or [teams](/teams):
 <iframe class="airtable-embed" src="https://airtable.com/embed/appWPTGqZmUcs3NWu/pagoxRuCai4OYJEHt/form" frameborder="0" onmousewheel="" width="100%" height="533" style="background: transparent; border: 1px solid #ccc;"></iframe>
+- Then you can sign up as a volunteer, and appear on the [people page](/people) if you want.
+- Check out the [members page](/members) for more info!
