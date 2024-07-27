@@ -40,19 +40,22 @@
 
 <style>
 	.hero {
+		--hero-top-offset: -8.125rem;
 		display: flex;
-		height: calc(100svh - 8.125rem);
+		min-height: calc(100svh + var(--hero-top-offset));
 		align-items: center;
 		z-index: 0;
 		margin-top: 1rem;
+		position: relative;
 	}
 	.hero-overlay {
 		position: absolute;
 		overflow: hidden;
-		top: 0;
-		left: 0;
-		width: 100%;
-		height: 100svh;
+		top: var(--hero-top-offset);
+		left: 50%;
+		transform: translateX(-50%);
+		width: 100vw;
+		height: -webkit-fill-available;
 		align-items: center;
 		display: flex;
 		z-index: -1;
@@ -74,10 +77,11 @@
 		object-fit: cover;
 	}
 	.corners {
-		width: 100%;
+		width: 100vw;
 		bottom: -1px;
 		position: absolute;
-		left: 0;
+		left: 50%;
+		transform: translateX(-50%);
 		display: flex;
 		flex-direction: row;
 		justify-content: space-between;
@@ -132,6 +136,9 @@
 		}
 	}
 	@media (min-width: 640px) {
+		.hero {
+			--hero-top-offset: -9.125rem;
+		}
 		.hero-content {
 			max-width: 36rem;
 		}
