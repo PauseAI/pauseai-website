@@ -6,7 +6,6 @@
 	export let label_id: string
 
 	let active = tabs[0]
-	const tab_id_prefix = `${id}-tab`
 </script>
 
 <div class="tabs" {id}>
@@ -19,7 +18,7 @@
 					class:active={active === tab}
 					on:click={() => (active = tab)}
 					aria-selected={active === tab}
-					aria-controls={`${tab_id_prefix}-${i.toString()}`}
+					aria-controls={`${id}-${i.toString()}`}
 					tabindex={active === tab ? 0 : -1}
 				>
 					<svg class="bullet" width="10" viewBox="0 0 2 2" xmlns="http://www.w3.org/2000/svg">
@@ -37,11 +36,11 @@
 				role="tabpanel"
 				class="panel"
 				tabindex="0"
-				aria-labelledby={`${tab_id_prefix}-${i.toString()}`}
+				aria-labelledby={`${id}-${i.toString()}`}
 				style={`display: ${active === tab ? 'block' : 'none'}`}
 				in:fly={{ duration: 500, x: '100%', y: 0 }}
 			>
-				<h3 class="panel-title">
+				<h3 class="panel-title" id={`${id}-${i.toString()}`}>
 					<slot {tab}></slot>
 				</h3>
 				<slot name="panel" {tab}></slot>
