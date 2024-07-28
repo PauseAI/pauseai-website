@@ -45,6 +45,8 @@ description: Questions fréquemment posées sur Pause IA et les risques de l'IA 
 
 Nous sommes un ensemble de bénévoles ressemblés au sein d'une [association à but non lucratif](/mentions-legales) dont l'objectif est de minimiser les [risques liés à l'IA](/dangers) (y compris le [risque d'extinction](/dangers/pour-l'humanite)). Notre objectif est de convaincre le gouvernement d'intervenir et [de mettre en pause le développement d'une IAG](/propositions) (Intelligence Artificielle Générale puis d’une Superintelligence). Dans ce but, nous alertons le public, dialoguons avec les décideurs et organisons des manifestations.
 
+Pause IA est la branche française de PauseAI Global. Bien que nous soyons en relation avec PauseAI Global, nous bénéficions d'une entière autonomie et menons nos propres projets en France.
+
 Vous pouvez nous rejoindre sur [Discord](https://discord.gg/vyXGd7AeGc) (le coeur de nos discussions et actions), [Twitter](https://twitter.com/pause_ia), [Facebook](https://www.facebook.com/Pause.IA), [TikTok](https://www.tiktok.com/@pause_ia), [LinkedIn](https://www.linkedin.com/company/pause-ia/), [YouTube](https://www.youtube.com/@Pause_IA), [Instagram](https://www.instagram.com/pause_ia) et [Threads](https://www.threads.net/@pause_ia). Vous pouvez également nous contacter par mail à [contact@pauseia.fr](mailto:contact@pauseia.fr).
 
 ### N’êtes-vous pas tout simplement des technophobes ?
@@ -63,13 +65,13 @@ Non, nous ne croyons pas que les modèles actuels représentent un risque existe
 
 ### Un moratoire ne risque-t-il pas d'aggraver les choses ?
 
-PauseAI International a répondu à ces préoccupations [dans cet article](https://pauseai.info/mitigating-pause-failures).
+PauseAI Global a répondu à ces préoccupations [dans cet article](https://pauseai.info/mitigating-pause-failures).
 
 ### Un moratoire est-il possible ?
 
 L’émergence d’une superintelligence n'est pas inévitable. Sa création nécessite des armées d'ingénieurs payés à coup de millions de dollars et une chaîne d'approvisionnement de matériel de pointe non réglementé. Sa création implique aussi que nous permettions à ces entreprises de jouer avec notre avenir en restant passifs.
 
-PauseAI International : [en savoir plus sur la faisabilité d’un moratoire](https://pauseai.info/feasibility)
+PauseAI Global : [en savoir plus sur la faisabilité d’un moratoire](https://pauseai.info/feasibility)
 
 ### Qui vous finance ?
 
@@ -81,7 +83,7 @@ Nous nous concentrons sur la croissance du mouvement, la production de contenu �
 
 ### Comment comptez-vous convaincre les gouvernements d’arrêter temporairement le développement de l'IA ?
 
-Jetez un œil à la "[Théorie du changement](https://pauseai.info/theory-of-change)" de PauseAI International pour un aperçu détaillé de notre stratégie.
+Jetez un œil à la "[Théorie du changement](https://pauseai.info/theory-of-change)" de PauseAI Global pour un aperçu détaillé de notre stratégie.
 
 ### Pourquoi manifester ?
 
@@ -94,7 +96,7 @@ Jetez un œil à la "[Théorie du changement](https://pauseai.info/theory-of-cha
 
 ### Quelle est la probabilité que l'apparition d'une superintelligence ait de graves conséquences, y compris un risque d'extinction ?
 
-PauseAI International a compilé [une liste de valeurs "p(doom)"](https://pauseai.info/pdoom) (probabilité de scénarios catastrophiques) provenant de divers experts renommés dans le domaine.
+PauseAI Global a compilé [une liste de valeurs "p(doom)"](https://pauseai.info/pdoom) (probabilité de scénarios catastrophiques) provenant de divers experts renommés dans le domaine.
 
 Les chercheurs en sécurité de l'IA (qui sont experts du sujet) sont partagés, [leurs estimations allant de 2% à 97% avec une moyenne de 30%](https://web.archive.org/web/20221013014859/https://www.alignmentforum.org/posts/QvwSr5LsxyDeaPK5s/existential-risk-from-ai-survey-results). Notez qu'aucun des chercheurs en sécurité interrogés ne croit en une probabilité de 0%. Un biais de sélection est cependant possible : ceux qui travaillent dans le domaine de la sécurité de l'IA le font probablement car ils redoutent les conséquences néfastes de l'IA.
 
@@ -131,7 +133,7 @@ Sam Altman est une exception. Sur son blog personnel, il a exploré [l'idée du 
 En mai 2023, tout a changé :
 
 - Le 1er mai, le pionnier de l'IA Geoffrey Hinton [démissionne de Google](https://fortune.com/2023/05/01/godfather-ai-geoffrey-hinton-quit-google-regrets-lifes-work-bad-actors/) pour alerter le public sur la possibilité de risques existentiels.
-- Le 20 mai, [la première manifestation de PauseAI International](https://pauseai.info/openai-protest) a lieu devant le siège d'OpenAI.
+- Le 20 mai, [la première manifestation de PauseAI Global](https://pauseai.info/openai-protest) a lieu devant le siège d'OpenAI.
 - Le 22 mai, OpenAI publie [un article de blog sur la gouvernance de la superintelligence](https://openai.com/index/governance-of-superintelligence/), et mentionne le risque existentiel pour la première fois.
 - Le 24 mai, l'ancien PDG de Google, Eric Schmidt, reconnaît la possibilité de risques existentiels.
 - Le 30 mai, le centre pour la sécurité de l'IA publie [une déclaration sur les risques existentiels](https://www.safe.ai/work/statement-on-ai-risk), incluant des employés d'OpenAI, Google et Microsoft.
@@ -144,7 +146,7 @@ Notre interprétation est que les entreprises d'IA ont signé cette déclaration
 
 Une raison majeure pour laquelle de nombreuses personnes ne veulent toujours pas croire que les risques existentiels sont une préoccupation réelle est que la reconnaissance d'un tel danger est une énorme charge mentale.
 
-[PauseAI International : en savoir plus sur la charge mentale des risques existentiels](https://pauseai.info/psychology-of-x-risk)
+[PauseAI Global : en savoir plus sur la charge mentale des risques existentiels](https://pauseai.info/psychology-of-x-risk)
 
 ### Je veux aider ! Que puis-je faire ?
 
