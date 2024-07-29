@@ -14,6 +14,7 @@ description: When and where we will be protesting.
 
 ### 2024
 
+- [23rd of July, San Francisco, London, Paris](https://x.com/PauseAI/status/1816550279095238711)
 - [13th of May, San Francisco, London, Stockholm, Berlin, Den Haag, Rome, Paris...](/2024-may)
 - [12th of February, OpenAI, SF](/2024-february)
 
