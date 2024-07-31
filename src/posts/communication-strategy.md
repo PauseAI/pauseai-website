@@ -15,14 +15,17 @@ description: How we communicate about pausing AI development.
 ## No-gos
 
 - **No AI-generated content**. Using AI models is fine for doing research, ideation and iterating on ideas, but don't publish AI-generated content as if it's our own - especially no AI generated images or videos. Even if we are not anti-AI, we can easily be labeled as hypocrites if we clearly use AI-generated content.
-- **No partisan politics**. We do not push for any political party or ideology. We limit our
+- **No partisan politics**. We do not push for any political party or ideology. We don't have opinions on things outside of AI.
 - **No tactical self-censorship**. Some AI Governance organizations choose not to say how worried they are, or are choosing not to push for the policies that they think are necessary _because they worry about losing credibility_. We cannot copy this same strategy, because if we all do, no-one is left to speak the truth.
+- **No rumors**. We don't promote vague or unverified information. We cannot afford to lose credibility by spreading false information.
 
 ## Narratives that we push
 
 - **AI is not just a tool**. AI models are not programmed, they are [digital brains](/digital-brains). We don't understand how they work, we can't predict what they can do, we can't properly control their behavior.
 - **AI does not need to be sentient to be dangerous**. Being able to experience the world, or feel emotions is not a requirement for AI to take dangerous actions. The only thing that matters is [capabilities](/dangerous-capabilities).
-- **Race to the bottom**. It's not about US vs China, it's about humanity vs AI. We cannot expect to wield superintelligent AI as a weapon - we don't know if it can be controlled at all.
+- **Global race to the bottom**. It's not about US vs China, it's about humanity vs AI. We cannot expect to wield superintelligent AI as a weapon - we don't know if it can be controlled at all.
 - **Existing AI harms will get worse**. Deepfakes, job loss, surveillance, misinformation, polarization... Existing AI is already causing harm and we need to acknowledge that. The harms will only get worse with more powerful AI, and we need to Pause AI to prevent that from happening.
 - **Superhuman AI is not inevitable**. It requires hordes of engineers with million-dollar paychecks. It requires highly specialized hardware, created by a handful of monopolies. It requires all of us to sit back and do nothing.
-- **International regulation is possible**. We've banned CFC's and blinding laser weapons globally. The AI chip supply chain makes enforcing regulation very feasible.
+- **International regulation is possible**. We've collectively protected the Ozone Layer by banning CFC's and blinding laser weapons globally. The centralized AI chip supply chain makes enforcing compute governance very [feasible](/feasibility).
+
+Much of our strategy is derived from our [values](https://pauseai.info/values).
