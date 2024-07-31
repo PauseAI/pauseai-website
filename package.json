@@ -4,26 +4,33 @@
 	"private": true,
 	"scripts": {
 		"dev": "vite dev --host 0.0.0.0",
+		"dev:watch": "svelte-kit sync && concurrently --names \"VITEST,SVELTE-CHECK,SERVER\" --prefix-colors \"bgMagenta.bold,bgCyan.bold,bgGreen.bold\" \"vitest\" \"svelte-check --tsconfig ./tsconfig.json --watch\" \"vite dev --host 0.0.0.0\"",
 		"build": "vite build && node create-pagefind-index.js",
 		"build:dev": "vite build --mode development && node create-pagefind-index.js",
 		"preview": "vite preview",
-		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
-		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
+		"check": "vitest --run && svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
+		"check:watch": "concurrently --names \"VITEST,SVELTE-CHECK\" \"vitest\" \"svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch\"",
 		"lint": "prettier --check . && eslint .",
 		"format": "prettier --write .",
-		"prepare": "husky"
+		"prepare": "husky",
+		"test": "vitest --run"
 	},
 	"devDependencies": {
 		"@sveltejs/adapter-netlify": "^4.2.0",
 		"@sveltejs/enhanced-img": "^0.2.0",
 		"@sveltejs/kit": "^2.5.7",
 		"@sveltejs/vite-plugin-svelte": "^3.1.0",
+		"@types/diff": "^5.2.1",
 		"@types/escape-html": "^1.0.4",
 		"@types/hast": "^3.0.4",
+		"@types/mdast": "^4.0.4",
 		"@types/node": "^20.12.10",
 		"@types/unist": "^3.0.2",
 		"@typescript-eslint/eslint-plugin": "^7.8.0",
 		"@typescript-eslint/parser": "^7.8.0",
+		"concurrently": "^8.2.2",
+		"diff": "^5.2.0",
+		"diff2html": "^3.4.48",
 		"dotenv": "^16.4.5",
 		"eslint": "^8.56.0",
 		"eslint-config-prettier": "^9.1.0",
@@ -40,7 +47,8 @@
 		"unified": "^11.0.5",
 		"unist-util-visit": "^5.0.0",
 		"vfile": "^6.0.2",
-		"vite": "^5.2.11"
+		"vite": "^5.2.11",
+		"vitest": "^2.0.4"
 	},
 	"dependencies": {
 		"@fontsource/ibm-plex-sans": "^5.0.20",
