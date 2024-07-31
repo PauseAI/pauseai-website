@@ -23,13 +23,15 @@ Pause IA, née de l'engagement bénévole, est officiellement une [organisation 
 - **Logistique événementielle** : Location d'espaces, catering, prise en charge des intervenants.
 - **Cadre légal et financier** : Formalisation de notre structure, gestion comptable professionnelle.
 
-### Ce que PauseAI International a accompli grâce aux dons
+### Ce que PauseAI Global a accompli grâce aux dons
 
+PauseAI Global, l'organisation internationale dont Pause IA est la branche française autonome, a réalisé les actions suivantes grâce à ses propres collectes de fonds :
 - Plus de 1000 membres actifs, dont de nombreux bénévoles dédiés à différents projets.
 - Plus de 100 initiatives en cours sur le Discord, allant de la création de sites web à l'élaboration de réponses aux consultations gouvernementales.
 - Organisation de 15+ [manifestations](https://pauseai.info/protests) dans 7 pays, amplifiant notre message à l'échelle mondiale.
 - 30+ [apparitions dans des médias de premier plan](https://pauseai.info/press), incluant presse écrite, podcasts, documentaires et émissions TV.
 - Nombreuses rencontres stratégiques avec des élus et décideurs clés du secteur de l'IA.
+Note : Les dons faits à Pause IA sont utilisés exclusivement pour les activités de notre branche française. Nous ne reversons aucune partie de ces dons à PauseAI Global.
 
 ### Nos objectifs avec Pause IA
 
@@ -40,7 +42,7 @@ Pause IA, née de l'engagement bénévole, est officiellement une [organisation 
 - Participer à des conférences et débats publics.
 - Recruter activement de nouveaux membres et soutenir la création de groupes locaux Pause IA.
 - Mettre en place une veille médiatique sur l'IA et développer des ressources pour les groupes locaux.
-- Participer aux actions globales de PauseAI International tout en apportant une perspective française.
+- Participer aux actions globales de PauseAI Global tout en apportant une perspective française.
 
 ## Comment faire un don à Pause IA
 

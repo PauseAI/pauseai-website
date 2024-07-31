@@ -15,7 +15,7 @@ Le nombre de personnes conscientes des risques liés à l'IA est encore restrein
 ### Devenir volontaire
 - Remplissez le formulaire de volontariat accessible depuis notre Discord.
 - Un membre de l'équipe vous contactera pour un premier échange.
-- Après validation, vous serez inscrit comme bénévole et pourrez apparaître sur la [page des membres](https://pauseai.info/people) de PauseAI International (avec votre accord).
+- Après validation, vous serez inscrit comme bénévole et pourrez apparaître sur la [page des membres](https://pauseai.info/people) de PauseAI Global (avec votre accord).
 
 Prérequis pour le volontariat :
 - Adhésion aux valeurs et à la mission de Pause IA.

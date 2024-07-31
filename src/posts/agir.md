@@ -9,7 +9,7 @@ Le nombre de personnes conscientes des risques liés à l'IA est encore restrein
 
 - **[Rejoignez Pause IA](/nous-rejoindre)** et aidez-nous à prendre de l’ampleur.
 - **Rejoignez notre [serveur Discord](https://discord.gg/vyXGd7AeGc)** et collaborez avec notre communauté active sur des campagnes de sensibilisation et d’information, des vidéos, des articles de blog, etc.
-- **[Faites un don](/dons) à Pause IA** ou achetez des produits dérivés dans la boutique en ligne de PauseAI International.
+- **[Faites un don](/dons) à Pause IA** ou achetez des produits dérivés dans la boutique en ligne de PauseAI Global.
 - **Signez des pétitions** :
   - [Traité international sur l'IA](https://aitreaty.org/)
   - [Interdire la superintelligence](https://www.change.org/p/ban-superintelligence-stop-ai-driven-human-extinction-risk?utm_content=cl_sharecopy_37871653_en-US%3A4&recruited_by_id=91d3fbf0-cc46-11ee-911b-5975de1bf878&utm_source=share_petition&utm_medium=copylink&utm_campaign=psf_combo_share_initial&share_bandit_exp=initial-37871653-en-US)
