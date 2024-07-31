@@ -7,6 +7,7 @@ import remarkUnwrapImages from 'remark-unwrap-images'
 import remarkToc from 'remark-toc'
 import rehypeSlug from 'rehype-slug'
 import { faqPlugin } from './src/lib/faqPlugin.js'
+import { remarkFrenchTypography } from './src/lib/typographyPlugin.js'
 
 import { config as dotenv } from 'dotenv'
 dotenv()
@@ -24,7 +25,7 @@ const mdsvexOptions = {
 			return `{@html \`${html}\` }`
 		}
 	},
-	remarkPlugins: [remarkUnwrapImages, [remarkToc, { tight: true }]],
+	remarkPlugins: [remarkUnwrapImages, [remarkToc, { tight: true }], remarkFrenchTypography],
 	rehypePlugins: [rehypeSlug, faqPlugin]
 }
 
