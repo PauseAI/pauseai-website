@@ -261,7 +261,7 @@ export const viteTypographyPlugin = {
 		const htmlContent = createHTMLDiff(fileChanges)
 		this.emitFile({
 			type: 'asset',
-			fileName: 'static/logs/typography-diff.html',
+			fileName: 'logs/typography-diff.html',
 			source: htmlContent
 		})
 
