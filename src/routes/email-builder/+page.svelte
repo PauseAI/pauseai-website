@@ -122,7 +122,7 @@
 	</li>
 	<li>
 		<b>Someone who politically represents you.</b> Maybe a politician in parliament from the party that
-		you voted for.
+		you voted for. [Find their email address](https://www.campaignforaisafety.org/politician/#find-your-politician-here).
 	</li>
 	<li>
 		<b>Enter their name:</b> <input bind:value={name} placeholder="Name of person" />
