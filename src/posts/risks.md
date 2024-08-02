@@ -80,14 +80,14 @@ Social media, video games and other software have been using AI systems to maxim
 Addiction to social media, among other things, isolates us from each other, not only in political bubbles but also in cultural and social one-person bubbles, making us lonelier.
 They're the first proof of the unintended and unexpected global consequences that these technologies can bring and how complicated aligning AI systems with "human values" can be.
 
-If today's chatbots keep getting better, it could become quite common to be addicted to them and substitute whole relationships (be romantic, sexual or platonic) with them. 
+If today's chatbots keep getting better, it could become quite common to be addicted to them and substitute whole relationships of any kind with them. 
 Also, if those apps are easy to access, they could shape the understanding, personality and view of the world of children that could prefer talking with AIs over family and friends.
 A pause in the biggest models could prevent them from becoming multipurpose chatbots that fit our needs perfectly without people understanding the long-term ramifications of them.
 
 ### Power accumulation, war and the race to the precipice
 
 The addiction to products and services that learn from personal data leaves us as powerless separated individuals whether it's intended or not. 
-And it plays on a vicious cycle with the accumulation of economic power and intelligence of the companies which create them.
+And it plays on a vicious cycle with the accumulation of economic power and intelligence of the companies that create them.
 
 If this economic and technological inequality stems from a handful of public and private entities producing multiple single-purpose AIs or a few multipurpose AIs, it could lead to a short accumulation of power that will probably result in a catastrophe for all.
 The accumulation of power side of that story has and will continue to incentivize more actors to join the race to the bottom and accelerate the development of larger AI systems.
@@ -167,12 +167,15 @@ This is called the _alignment problem_.
 If we fail to solve it in time, we may end up with superintelligent machines that do not care about our well-being.
 We'd be introducing a new species to the planet that could outsmart us and outcompete us.
 
+Additionally, even if we knew how to align an advanced AI with someone's preferences, how do we make sure that doesn't get misused?
+How do we govern that and how do we decide what values to give it?
+
 [Read more about x-risk](/xrisk)
 
 ### Human disempowerment
 
-Even if we manage to create only AI systems that we can control individually, we could lose our power to make important decisions incrementally each time one becomes implemented inside institutions or popularized in everyday life.
-Those systems would end up having more input from other systems than from humans, and, if we cannot coordinate quickly enough, or we lack crucial knowledge about the functioning of these systems, we could end up without control over our future.
+Even if we manage to create only AI systems that we can control individually, we could lose our power to make important decisions incrementally each time one becomes incorporated to institutions or everyday life.
+Those process would end up having more input from AI systems than from humans, and, if we cannot coordinate quickly enough, or we lack crucial knowledge about the functioning of the systems, we could end up without control over our future.
 
 It would be a civilization in which each system is optimizing for different objectives, there is not a clear direction for where everything is heading, and there is no way of changing it.
 The technical knowledge required to modify these systems could be lacking in the first place or lost over time, as we become more and more dependent on technology, and the technology becomes more complex.
