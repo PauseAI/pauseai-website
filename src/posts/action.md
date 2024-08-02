@@ -9,7 +9,7 @@ You are now one of them.
 
 **Your actions matter more than you think.**
 
-Below are some suggestions for what **you** can do.
+Here are some examples of what you can do.
 
 ## Tell your friends
 
@@ -38,7 +38,7 @@ Below are some suggestions for what **you** can do.
 - **[Meet](/communities)** other people in a PauseAI community near you. If there is no community near you, consider starting one.
 - [**Donate**](/donate) to PauseAI or buy some merchandise in our [store](https://pauseai-shop.fourthwall.com/).
 - **Follow** our social media channels and stay updated:
-  <!-- add icons, maybe make a grid -->
+  <!-- TODO add icons, maybe make a grid -->
   - [Discord](https://discord.gg/2XXWXvErfA)
   - [X/Twitter](https://twitter.com/PauseAI)
   - [Facebook](https://www.facebook.com/PauseAI)
@@ -55,16 +55,7 @@ Below are some suggestions for what **you** can do.
 - [Learn more about risks from AI](/learn).
 - Learn about [the psychology of existential risk](/psychology-of-x-risk).
 
-<!-- later
-## If you ...
-
-### If you are convincing
-
-- **Convince one person in your government to prepare for the [summit](/summit) and work towards a global pause**. This is the most important thing you can do. See [lobby tips](/lobby-tips) and the [Email Builder](/email-builder).
-- **Convince journalists** to write about AI safety. Point them to [educational materials](/learn).
-- **Convince influencers** to talk and make videos about AI safety.
-- **Ask the management** at your current organization to take an institutional position on this.
-- [Write to your political representatives](https://www.campaignforaisafety.org/politician/).
+## If you...
 
 ### If you are a politician or work in government
 
@@ -76,10 +67,6 @@ Below are some suggestions for what **you** can do.
 
 - **Help draft policy**. [Draft examples](https://www.campaignforaisafety.org/celebrating-the-winners-law-student-moratorium-treaty-competition/). ([some](https://futureoflife.org/wp-content/uploads/2023/04/FLI_Policymaking_In_The_Pause.pdf) [frameworks](https://www.openphilanthropy.org/research/12-tentative-ideas-for-us-ai-policy/))
 - **Make submissions to government requests for comment** on AI policy ([example](https://ntia.gov/issues/artificial-intelligence/request-for-comments)).
-
-### If you can write web content
-
-- [Improve this website](https://github.com/joepio/pauseai).
 
 ### If you work in AI
 
@@ -94,13 +81,15 @@ If you are just starting out in AI Alignment, unless you are extremely skilled a
 
 If you are already established in Alignment, consider more [public communication](https://twitter.com/TrustlessState/status/1651538022360285187), and adding your name to calls for the Pause and regulation of the AI industry.
 
+### If you can write web content
+
+- [Improve this website](https://github.com/joepio/pauseai).
+
 ## Tips for being effective
 
 - **Be bold in your public communication of the danger**. Don't use hedging language or caveats by default; mention them when questioned, or in footnotes, but don't make it sound like you aren't that concerned if you are.
 - **Be less exacting in your work**. [80% of the value comes from 20% of the work](https://en.wikipedia.org/wiki/Pareto_principle). Don't do the classic geek thing and spend months agonizing and iterating on your Google doc over endless rounds of feedback. Get your project out into the world and iterate as you go. Time is of the essence.
 
 Consider this: all our other work may just be the equivalent of rearranging deckchairs on the Titanic. We need to be running to the bridge, grabbing the wheel, and steering away from the iceberg. We may not have much time, but we can try. We can do this!
-
--->
 
 <!-- _Acknowledgements: Written by Greg Colbourn, [originally posted on the EA forum](https://forum.effectivealtruism.org/posts/8YXFaM9yHbhiJTPqp/agi-rising-why-we-are-in-a-new-era-of-acute-risk-and). Edited by Joep Meindertsma and others. For helpful comments and suggestions that have improved the post, and for the encouragement to write, I thank Akash Wasil, Johan de Kock, Jaeson Booker, Greg Kiss, Peter S. Park, Nik Samolyov, Yanni Kyriacos, Chris Leong, Alex M, Amritanshu Prasad, Dušan D. Nešić, and the rest of the [AGI Moratorium HQ Slack](https://join.slack.com/t/agi-moratorium-hq/shared_invite/zt-1u6s1opls-~_l_Ynrr~8ay~SiA2yEqAQ) and AI Notkilleveryoneism Twitter._ -->
