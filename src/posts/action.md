@@ -83,7 +83,7 @@ If you are already established in Alignment, consider more [public communication
 ## Tips for being effective
 
 - **Be bold in your public communication of the danger**. Don't use hedging language or caveats by default; mention them when questioned, or in footnotes, but don't make it sound like you aren't that concerned if you are.
-- **Be less exacting in your work**. [80/20](https://en.wikipedia.org/wiki/Pareto_principle) more. Don't do the classic geek thing and spend months agonizing and iterating on your Google doc over endless rounds of feedback. Get your project out into the world and iterate as you go. Time is of the essence.
+- **Be less exacting in your work**. [80% of the value comes from 20% of the work](https://en.wikipedia.org/wiki/Pareto_principle). Don't do the classic geek thing and spend months agonizing and iterating on your Google doc over endless rounds of feedback. Get your project out into the world and iterate as you go. Time is of the essence.
 
 Consider this: all our other work may just be the equivalent of rearranging deckchairs on the Titanic. We need to be running to the bridge, grabbing the wheel, and steering away from the iceberg. We may not have much time, but we can try. We can do this!
 
