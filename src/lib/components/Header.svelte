@@ -55,24 +55,21 @@
 				xmlns="http://www.w3.org/2000/svg"
 			>
 				<rect
-					y="13.5686"
-					width="3.13043"
-					height="24"
-					transform="rotate(-90 0 13.5686)"
+					y="0"
+					height="3"
+					width="24"
 					fill={onHomepage ? 'white' : 'black'}
 				/>
 				<rect
-					y="3.13037"
-					width="3.13043"
-					height="24"
-					transform="rotate(-90 0 3.13037)"
+					y="10.5"
+					height="3"
+					width="24"
 					fill={onHomepage ? 'white' : 'black'}
 				/>
 				<rect
-					y="24"
-					width="3.13043"
-					height="24"
-					transform="rotate(-90 0 24)"
+					y="21"
+					height="3"
+					width="24"
 					fill={onHomepage ? 'white' : 'black'}
 				/>
 			</svg>
