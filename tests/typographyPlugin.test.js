@@ -24,6 +24,10 @@ describe('applySemicolonRule', () => {
 		expect(applySemicolonRule('Hello ; world')).toBe(`Hello${THIN_SPACE}; world`)
 	})
 
+	it('should replace existing double space with thin non-breaking space before semicolon', () => {
+		expect(applySemicolonRule('Hello  ; world')).toBe(`Hello${THIN_SPACE}; world`)
+	})
+
 	it('should handle multiple semicolons', () => {
 		expect(applySemicolonRule('One;Two;Three')).toBe(`One${THIN_SPACE};Two${THIN_SPACE};Three`)
 	})
@@ -52,6 +56,10 @@ describe('applyQuestionMarkRule', () => {
 
 	it('should replace existing space with thin non-breaking space before question mark', () => {
 		expect(applyQuestionMarkRule('Hello ? world')).toBe(`Hello${THIN_SPACE}? world`)
+	})
+
+	it('should replace existing double space with thin non-breaking space before question mark', () => {
+		expect(applyQuestionMarkRule('Hello  ? world')).toBe(`Hello${THIN_SPACE}? world`)
 	})
 
 	it('should handle multiple question marks', () => {
@@ -86,6 +94,10 @@ describe('applyExclamationMarkRule', () => {
 		expect(applyExclamationMarkRule('Hello ! world')).toBe(`Hello${THIN_SPACE}! world`)
 	})
 
+	it('should replace existing double space with thin non-breaking space before exclamation mark', () => {
+		expect(applyExclamationMarkRule('Hello  ! world')).toBe(`Hello${THIN_SPACE}! world`)
+	})
+
 	it('should handle multiple exclamation marks', () => {
 		expect(applyExclamationMarkRule('Wow!Amazing!Incredible!')).toBe(
 			`Wow${THIN_SPACE}!Amazing${THIN_SPACE}!Incredible${THIN_SPACE}!`
@@ -118,6 +130,10 @@ describe('applyPercentSymbolRule', () => {
 		expect(applyPercentSymbolRule('50 %')).toBe(`50${THIN_SPACE}%`)
 	})
 
+	it('should replace existing double space with thin non-breaking space before percent symbol', () => {
+		expect(applyPercentSymbolRule('50  %')).toBe(`50${THIN_SPACE}%`)
+	})
+
 	it('should handle decimal numbers', () => {
 		expect(applyPercentSymbolRule('3.14%')).toBe(`3.14${THIN_SPACE}%`)
 		expect(applyPercentSymbolRule('3,14%')).toBe(`3,14${THIN_SPACE}%`)
@@ -146,6 +162,11 @@ describe('applyCurrencySymbolRule', () => {
 		expect(applyCurrencySymbolRule('50 €')).toBe(`50${THIN_SPACE}€`)
 	})
 
+	it('should replace existing double space with thin non-breaking space', () => {
+		expect(applyCurrencySymbolRule('$  50')).toBe(`$${THIN_SPACE}50`)
+		expect(applyCurrencySymbolRule('50  €')).toBe(`50${THIN_SPACE}€`)
+	})
+
 	it('should handle multiple currency symbols', () => {
 		expect(applyCurrencySymbolRule('$10 £20 30€')).toBe(
 			`$${THIN_SPACE}10 £${THIN_SPACE}20 30${THIN_SPACE}€`
@@ -159,6 +180,10 @@ describe('applyColonRule', () => {
 	})
 
 	it('should replace existing space with regular non-breaking space before colon', () => {
+		expect(applyColonRule('Hello : world')).toBe(`Hello${REGULAR_SPACE}: world`)
+	})
+
+	it('should replace existing double space with regular non-breaking space before colon', () => {
 		expect(applyColonRule('Hello : world')).toBe(`Hello${REGULAR_SPACE}: world`)
 	})
 
@@ -202,6 +227,10 @@ describe('applyFrenchQuotesRule', () => {
 
 	it('should replace existing space with regular non-breaking space for French quotes', () => {
 		expect(applyFrenchQuotesRule('« Hello »')).toBe(`«${REGULAR_SPACE}Hello${REGULAR_SPACE}»`)
+	})
+
+	it('should replace existing double space with regular non-breaking space for French quotes', () => {
+		expect(applyFrenchQuotesRule('«  Hello  »')).toBe(`«${REGULAR_SPACE}Hello${REGULAR_SPACE}»`)
 	})
 
 	it('should handle multiple French quotes', () => {
@@ -248,8 +277,12 @@ describe('replaceEnglishQuotes', () => {
 	})
 })
 describe('applyNumberUnitRule', () => {
-	it('should replace normal space with thin non-breaking space before m', () => {
+	it('should replace existing space with thin non-breaking space before m', () => {
 		expect(applyNumberUnitRule('20 m')).toBe(`20${THIN_SPACE}m`)
+	})
+
+	it('should replace existing double space with thin non-breaking space before m', () => {
+		expect(applyNumberUnitRule('20  m')).toBe(`20${THIN_SPACE}m`)
 	})
 
 	it('should handle kilo prefix', () => {
