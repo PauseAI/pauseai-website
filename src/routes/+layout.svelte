@@ -70,7 +70,6 @@
 		/* margin-inline: auto; */
 		/* padding: 1rem; */
 		background-color: var(--bg-subtle);
-		overflow-x: hidden;
 	}
 
 	.layout.bgWhite {
