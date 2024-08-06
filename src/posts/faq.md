@@ -177,6 +177,7 @@ Because acknowledging that _we are in fact in danger_ is a very, very scary thin
 There are many [things that you can do](/action).
 On your own, you can write a [letter](/writing-a-letter), post [flyers](/flyering), [learn](/learn) and inform others, join to a [protest](/protests), ir [donating](/donate) some money!
 But even more important: you can [join PauseAI](/join) and coordinate with others who are taking action.
-If you want to contribute more, you can become a volunteer and join one of our [teams](/teams).
+Check out if there are [local communities](/communities) in your area.
+If you want to contribute more, you can become a volunteer and join one of our [teams](/teams), or [set up a local community](/local-organizing)!
 
 Even when facing the end of the world, there can still be hope and very rewarding work to do. 💪
