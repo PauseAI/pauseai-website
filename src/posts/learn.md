@@ -22,7 +22,8 @@ Here are some resources to get you started.
 
 ## Videos
 
-- [Could AI wipe out humanity?](https://youtu.be/qzyEgZwfkKY?si=ief1l2PpkZ7_s6sq) (10 mins). The best introduction to the problem, from a down-to-earth perspective.
+- [Kurzgesagt - A.I. ‐ Humanity's Final Invention?](https://www.youtube.com/watch?v=fa8k8IQ1_X0) (20 mins). The history of AI, and an introduction to the concept of superintelligence.
+- [80k hours - Could AI wipe out humanity?](https://youtu.be/qzyEgZwfkKY?si=ief1l2PpkZ7_s6sq) (10 mins). A great introduction to the problem, from a down-to-earth perspective.
 - [Superintelligent AI Should Worry You...](https://www.youtube.com/watch?v=xBqU1QxCao8) (1 min). The best super short introduction.
 - [Don't look up - The Documentary: The Case For AI As An Existential Threat](https://www.youtube.com/watch?v=U1eyUjVRir4) (17 mins). Powerful and nicely edited documentary about the dangers of AI, with many expert quotes from interviews.
 - [Countries create AI for reasons](https://youtu.be/-9V9cIixPbM?si=L9q6PF2D6h_EBEwF) (10 mins). Caricature of the race to a superintelligence and its dangers.
@@ -56,7 +57,7 @@ Podcasts featuring PauseAI members can be found in the [media coverage](/press) 
 <!-- - [a casual intro to AI doom and alignment](https://carado.moe/ai-doom.html)
 I like it and the fact that is a more light reading, but I'm not sure if I want to put it because it defines alignment as just the technical stuff and redirects people to just do technical work -->
 - [Reasoning through arguments against taking AI safety seriously
-](https://yoshuabengio.org/2024/07/09/reasoning-through-arguments-against-taking-ai-safety-seriously/) (by Yoshua Bengio)
+  ](https://yoshuabengio.org/2024/07/09/reasoning-through-arguments-against-taking-ai-safety-seriously/) (by Yoshua Bengio)
 
 If you want to read what journalists have written about PauseAI, check out the list of [media coverage](/press).
 
