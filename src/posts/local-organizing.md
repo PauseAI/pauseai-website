@@ -5,31 +5,32 @@ description: Frequently asked questions about PauseAI and the risks of superinte
 
 ## Why is Local Organizing Important?
 
-Local organizing—working with groups of volunteers in local communities to advance a cause—is the heart and soul of the PauseAI movement. We have volunteers in dozens of cities around the world, and we expect this number to grow.
+Local organizing—working with groups of volunteers in local communities to advance a cause—is the heart and soul of the PauseAI movement.
+We have [communities](/communities) in dozens of cities around the world, and we expect this number to grow.
 
-Effective local organizing can be much more impactful than ineffective organizing. We’ve seen the impact that effective organizing can have, as shown by the grassroots movements that have changed the course of history. In other words, it’s important to do this right.
+Effective local organizing can be much more impactful than ineffective organizing.
+We’ve seen the impact that effective organizing can have, as shown by the grassroots movements that have changed the course of history.
+In other words, it’s important to do this right.
 
-This guide will walk you through the ins and outs of local organizing, such as recruiting volunteers, staging events, building coalitions, and more. You should come away from this guide armed with these tools and prepared to become a local organizer.
+This guide will walk you through the ins and outs of local organizing, such as recruiting volunteers, staging events, building coalitions, and more.
+You should come away from this guide armed with these tools and prepared to become a local organizer.
 
 Good luck. The future is yours.
 
 ## Table of Contents
 
-1. Developing a Campaign Plan
-2. Recruiting Volunteers
-3. Working with Volunteers
-4. Events and Initiatives
-5. Overcoming Obstacles
-
 ## Developing a Local Campaign Plan
 
-One pitfall that organizers sometimes make is starting action without a clear plan. This can lead to unfocused efforts. It’s important to come up with a plan: what are your goals, and what steps are you going to take to get there?
+One pitfall that organizers sometimes make is starting action without a clear plan.
+This can lead to unfocused efforts.
+It’s important to come up with a plan: what are your goals, and what steps are you going to take to get there?
 
 ### Goals
 
 What do you ultimately want to accomplish? These are your **goals**.
 
 Possible goals could include:
+
 - Raising awareness of AI risks in your community
 - Convincing elected officials to publicly support an AI moratorium
 - Building public support and generating public attention around an AI moratorium
@@ -66,16 +67,19 @@ Where do you fit into all of this? You don’t want to bite off more than you ca
 **Goal**: Convince my U.S. Representative and Senators to publicly support an international treaty establishing a moratorium on frontier AI development.
 
 **Strategy**:
+
 1. Build public visibility of AI risk.
 2. Directly pressure elected officials to support an AI moratorium.
 
 **Tactics**:
+
 - Publish 10 op-eds and letters to the editor in local newspapers.
 - Generate 50 phone calls and 50 letters from constituents to their Congressional offices.
 - Hold events, such as talks and protests, open to the public and meant to receive media coverage.
 - Meet directly with Congressional offices and introduce our policy proposals.
 
 **What I Can Do as a Local Organizer**:
+
 - Recruit volunteers to help implement these tactics.
 - Delegate tasks to volunteers.
 - Plan events with volunteer buy-in.
@@ -120,6 +124,7 @@ Once you’ve recruited a group of volunteers, it’s time to work with them on 
 ### Characteristics of a Well-Run Local Group
 
 A well-run group of volunteers:
+
 - Has a clear sense of their responsibilities
 - Is plugged into the group as a whole, attends group meetings, and works well with other volunteers
 - Works on tasks that interest them and that they enjoy
@@ -146,7 +151,7 @@ Encourage different volunteers to take on different roles based on their interes
 ## Sample Table of Roles
 
 | Person | Role                              | Responsibilities                                                                                                                                      | Hours/week |
-|--------|-----------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------|------------|
+| ------ | --------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- | ---------- |
 |        | Media Outreach Coordinator        | Writes letters to the editor and op-eds, maintains contact with local journalists, sends press releases                                               |            |
 |        | Coalition Builder                 | Reaches out to other groups, speaks at their meetings, shares info about upcoming events and recruits attendees                                       |            |
 |        | Congressional Outreach Specialist | Plans letter-writing and phone campaigns, organizes events encouraging public calls to Congressmembers, schedules meetings with Congressional offices |            |
