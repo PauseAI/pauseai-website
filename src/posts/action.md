@@ -35,7 +35,7 @@ Here are some examples of what you can do.
 - **[Join PauseAI](/join)** and help us grow.
 - **Join our [Discord server](https://discord.gg/T3YrWUJsJ5)**, where our community is most active. We have a **#projects** channel where people are working on campaigns, videos, images, apps and more.
 - **Join one of our [teams](/teams)** and collaborate with other motivated volunteers.
-- **[Meet](/communities)** other people in a PauseAI community near you. If there is no community near you, [starting one](/local-organizing-guide).
+- **[Meet](/communities)** other people in a PauseAI community near you. If there is no community near you, [starting one](/local-organizing).
 - [**Donate**](/donate) to PauseAI or buy some merchandise in our [store](https://pauseai-shop.fourthwall.com/).
 - **Follow** our social media channels and stay updated:
   <!-- TODO add icons, maybe make a grid -->
