@@ -1,6 +1,6 @@
 ---
-title: 'Running a PauseAI Local Chapter: A Guide to Local Organizing'
-description: How are AI chips made, where are they used, and which companies are involved?
+title: 'Running a local PauseAI Community: A Guide to Local Organizing'
+description: How can you set up a community and make an impact, locally?
 ---
 
 ## Why is local organizing important?
