@@ -16,6 +16,11 @@ Good luck. The future is yours.
 
 ## Table of contents
 
+## Set up the basics
+
+1. **Set up a chat group**. Use a tool that's popular in your area. WhatsApp, Telegram, and Signal are all good options. Make sure there is an invite link that you can share to easily invite others.
+2. **Add your group** to the `local-communities` channel on our [Discord](https://discord.gg/2XXWXvErfA). Add the invite link from that chat group in the thread on discord. The moderators will add your local group to the [communities page](/communities) on this website, and use your link.
+
 ## Developing a Local Campaign Plan
 
 One pitfall that organizers sometimes make is that they’ll start taking action without any clear plan. This can lead to unfocused organizing efforts which are less effective than they could be. As you’re thinking through the change you want to make in your community, it’s important to come up with a plan: what are your goals, and what steps are you going to take in order to get there?
@@ -28,7 +33,6 @@ Possible goals could include:
 - Raising awareness of AI risks in your community
 - Convincing elected officials to publicly support an AI moratorium
 - Building public support and generating public attention around an AI moratorium
-  s
 
 ### Tactics
 
@@ -91,10 +95,12 @@ Once you have a clearer sense of your plan, it’s time to find volunteers for y
 ### Online recruitment
 
 Spreading the word about your group online can help you reach audiences more easily.
-You can create pages for your group on platforms like Facebook and EventBrite. A general best practice is to include information about your group, its goals and initiatives, and how community members can get involved.
+You can create pages for your group on platforms like Facebook, Instagram, TikTok and EventBrite.
+A general best practice is to include information about your group, its goals and initiatives, and how community members can get involved.
 Be sure to include posts on upcoming events and share these with your network!
 
-Here are links to PauseAI’s Facebook page and PauseAI NYC’s Eventbrite page for inspiration. You can use similar structures for your local group.
+Here are links to [PauseAI’s Facebook page](https://www.facebook.com/PauseAI) and [PauseAI NYC’s Eventbrite](https://www.eventbrite.com/e/pauseai-global-protest-nyc-tickets-886528309037) page for inspiration.
+You can use similar structures for your local group.
 
 ### One-on-one outreach
 
@@ -110,7 +116,7 @@ All recruitment should have a clear ask to get volunteers immediately involved �
 Flyering involves handing out flyers to passersby with more information about PauseAI and how to get involved. Tabling is similar, but you have a more visible presence (plus, you get to sit down).
 
 This is an effective way to recruit volunteers because you get to talk to potentially dozens of people in a few hours.
-For more information on how to make these efforts go well, please read PauseAI’s flyering guide.
+For more information on how to make these efforts go well, please read our [flyering guide](/flyering-guide).
 
 Remember to tailor your message to your local group. Make sure your flyers include information on upcoming events and how local volunteers can get involved.
 
@@ -145,10 +151,10 @@ Here’s a sample message for inspiration:
 
 Good afternoon,
 
-I hope you’re doing well! I’m reaching out on behalf of PauseAI. We are a grassroots movement with the goal of achieving an international moratorium on the development of human-level Artificial Intelligence.
+I hope you’re doing well! I’m reaching out on behalf of [PauseAI](https://pauseai.info/). We are a grassroots movement with the goal of achieving an [international moratorium](https://pauseai.info/proposal) on the development of human-level Artificial Intelligence.
 We recently started a chapter in {city}, and I wanted to discuss the possibility of working together on this issue.
 
-Just as fossil-fuel companies have undermined efforts to curb emissions, so too are AI companies funding efforts to achieve human-level AI as quickly as possible, despite experts admitting that these systems could threaten civilization. This issue intersects with climate risk more directly, since AI training runs require vast amounts of energy, often sourced from fossil fuels.
+Just as fossil-fuel companies have undermined efforts to curb emissions, so too are AI companies funding efforts to achieve human-level AI as quickly as possible, despite experts [admitting](https://blog.aiimpacts.org/p/2023-ai-survey-of-2778-six-things) that these systems could threaten civilization. This issue intersects with climate risk more directly, since AI training runs require vast amounts of energy, often sourced from fossil fuels.
 
 We need to pressure our elected officials to regulate these technologies. Given the work your organization has done in achieving climate policy, I thought some of your members might be interested in this opportunity.
 
@@ -259,7 +265,7 @@ Ideally, these meetings should last around an hour. Depending on volunteer inter
 
 A good meeting both: 1) covers the group’s goals and initiatives, and how volunteers can get involved, and 2) gives volunteers the space to share their perspective and provide new ideas.
 
-A good meeting requires good facilitation. This includes:
+A good meeting requires [good facilitation](https://activisthandbook.org/organising/facilitating). This includes:
 
 - Setting standards around decision-making – having clear expectations on how to make decisions about what to do as a group. (does there need to be unanimous agreement? majority vote? Or do you, as the facilitator, make the decision? Of course, this may depend on the importance of the decision.)
 - Regulating the flow of discussion, making sure one person isn’t dominating the conversation and that everyone has a chance to voice their perspectives.
@@ -334,10 +340,8 @@ Actions can include e.g. writing letters or making phone calls to their Congress
 ### Movie (documentary) screenings on AI risk
 
 Similar to a public teach-in, but with a documentary instead of a presentation. This can be a good way to engage the public. Bonus points if you procure popcorn and snacks.
-
 Just like a teach-in, you should ask attendees to take action immediately following the screening, i.e. by writing or calling their Congressperson.
-
-See here for a list of videos and documentaries to consider screening.
+See [here](/learn) for a list of videos and documentaries to consider screening.
 
 ### Letter to the Editor Writing Workshops
 
@@ -354,28 +358,29 @@ Walk volunteers through how to write a Letter to the Editor (LTE) or Op-Ed to lo
 ### Flyering & Tabling Sessions
 
 Even after you have a base of volunteers, you can continue flyering and tabling to get the word out to the public.
-
 In this context, flyering and tabling can be combined with a specific “ask,” i.e. asking people to write to their elected officials about AI
-
 Flyers can be modified to include QR codes to relevant resources, such as a letter-writing guide.
-
 Please read our [Flyering Guide](/flyering-guide) for more information on how to do this well.
 
 ### Protests
 
-Many PauseAI chapters have already organized protests, especially in response to specific events and developments around AI. These can be a great way to promote PauseAI and gain media coverage for the cause.
+Many PauseAI chapters have already organized protests, especially in response to specific events and developments around AI.
+These can be a great way to promote PauseAI and gain media coverage for the cause.
 
 Please read our [Guide to Organizing a Protest](/protest-guide) to learn how to do this.
 
 ### Meetings with Congressional Offices (US)
 
-If you are in the US, organizing a meeting with your Congressional office is one of the highest-impact things you can do. You can talk directly with someone who works for your U.S. Representative or Senator, and help introduce PauseAI’s priorities on a national level.
+If you are in the US, organizing a meeting with your Congressional office is one of the highest-impact things you can do.
+You can talk directly with someone who works for your U.S. Representative or Senator, and help introduce PauseAI’s priorities on a national level.
 
-This is also a good fit for teams of committed volunteers. It’s ideal to have multiple people attending these meetings and offering unique perspectives on why they care about AI risks and support a pause.
+This is also a good fit for teams of committed volunteers.
+It’s ideal to have multiple people attending these meetings and offering unique perspectives on why they care about AI risks and support a pause.
 
 Please read our [US Lobby Guide](/us-lobby-guide) to learn more about how to do this well.
 
-**Note**: If you live in another (democratic) country, some of the processes are likely similar, but the details may differ on accessibility of meetings and how to set these up. You can find out more about the process in your country by e.g. exploring government websites and learning how to request meetings with your elected officials.
+**Note**: If you live in another (democratic) country, some of the processes are likely similar, but the details may differ on accessibility of meetings and how to set these up.
+You can find out more about the process in your country by e.g. exploring government websites and learning how to request meetings with your elected officials.
 
 ### Note: Finding space for public, in-person events
 
@@ -409,14 +414,15 @@ You might have a hard time finding volunteers to begin with. Maybe the people yo
 **How to Overcome**:
 
 - Use your personal network as much as possible. Reach out to anyone you know who you think might be interested in getting involved, and ask them if they know anyone you might talk to. Similarly, if you know anyone in a local group, reach out to them personally.
-- Make sure you have a very strong “pitch” when flyering. If your pitch seems unfocused, weak, or tepid, this could be contributing to your lack of interest. Read this guide to learn more about developing a strong pitch.
+- Make sure you have a very strong “pitch” when flyering. If your pitch seems unfocused, weak, or tepid, this could be contributing to your lack of interest. [Read this guide](/flyering-guide) to learn more about developing a strong pitch.
 - Make sure you’re flyering in a high population-density area with lots of potential volunteers.
 - Make sure your messages and emails to groups are clear and direct, with a specific request. You can also send your email drafts to the PauseAI Discord and receive feedback.
 - If groups aren’t getting back to you, you might not be casting a wide enough net. Consider reaching out to more groups, even if their focus seems only loosely or tangentially related to AI.
 
 ### Obstacle 2: Lack of focus
 
-You might have an influx of volunteers who vaguely want to get involved, but don’t have a clear sense of how they want to help. This can make your team disorganized, with lots of ideas but without a clear plan to follow through.
+You might have an influx of volunteers who vaguely want to get involved, but don’t have a clear sense of how they want to help.
+This can make your team disorganized, with lots of ideas but without a clear plan to follow through.
 
 **How to Overcome**:
 
@@ -429,7 +435,9 @@ meeting.
 
 ### Obstacle 3: your group “fizzles out” due to waning interest from volunteers
 
-Volunteers might be initially excited to get involved but lose interest over time. This can happen for a few reasons: 1) volunteers don’t feel motivated or empowered to take action, 2) volunteers aren’t involved with actions that interest them, 3) volunteers simply realize that volunteering isn’t for them. Some of this is inevitable– not everyone will remain invested at all times– but much can be averted.
+Volunteers might be initially excited to get involved but lose interest over time.
+This can happen for a few reasons: 1) volunteers don’t feel motivated or empowered to take action, 2) volunteers aren’t involved with actions that interest them, 3) volunteers simply realize that volunteering isn’t for them.
+Some of this is inevitable– not everyone will remain invested at all times– but much can be averted.
 
 **How to Overcome**:
 
