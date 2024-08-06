@@ -116,7 +116,7 @@ All recruitment should have a clear ask to get volunteers immediately involved �
 Flyering involves handing out flyers to passersby with more information about PauseAI and how to get involved. Tabling is similar, but you have a more visible presence (plus, you get to sit down).
 
 This is an effective way to recruit volunteers because you get to talk to potentially dozens of people in a few hours.
-For more information on how to make these efforts go well, please read our [flyering guide](/flyering-guide).
+For more information on how to make these efforts go well, please read our [flyering guide](/flyering).
 
 Remember to tailor your message to your local group. Make sure your flyers include information on upcoming events and how local volunteers can get involved.
 
@@ -134,7 +134,7 @@ Types of groups to reach out to include, but are not limited to:
 
 #### Finding groups to reach out to
 
-You can simply search the internet for groups, by searching “environmental policy groups in {my city},” or going on websites like Facebook and Meetup to find active groups.
+You can simply search the internet for groups, by searching “environmental policy groups in (my city),” or going on websites like Facebook and Meetup to find active groups.
 If you are a college student, your college or university might have a public list of student organizations which you can sort by category.
 
 #### Crafting a compelling outreach message
@@ -152,7 +152,7 @@ Here’s a sample message for inspiration:
 Good afternoon,
 
 I hope you’re doing well! I’m reaching out on behalf of [PauseAI](https://pauseai.info/). We are a grassroots movement with the goal of achieving an [international moratorium](https://pauseai.info/proposal) on the development of human-level Artificial Intelligence.
-We recently started a chapter in {city}, and I wanted to discuss the possibility of working together on this issue.
+We recently started a chapter in (city), and I wanted to discuss the possibility of working together on this issue.
 
 Just as fossil-fuel companies have undermined efforts to curb emissions, so too are AI companies funding efforts to achieve human-level AI as quickly as possible, despite experts [admitting](https://blog.aiimpacts.org/p/2023-ai-survey-of-2778-six-things) that these systems could threaten civilization. This issue intersects with climate risk more directly, since AI training runs require vast amounts of energy, often sourced from fossil fuels.
 
@@ -162,7 +162,7 @@ Can you share our information with your volunteer list? Below is a link to our p
 
 Thank you so much for your time, and I look forward to hearing from you soon!
 
-{include link to e.g. your local group’s meetup page, plus a brief description of how volunteers can get involved.}
+(include link to e.g. your local group’s meetup page, plus a brief description of how volunteers can get involved.)
 
 ### Speaking at group meetings
 
@@ -210,25 +210,25 @@ Here’s a sample email for more inspiration:
 
 **SUBJ**: AI policy opportunity to share with students
 
-Good morning {professor},
+Good morning (professor),
 
 I hope you’re doing well. I’m reaching out on behalf of PauseAI, an organization dedicated to advancing policies to curb dangerous and unethical misuses of advanced artificial intelligence.
 
-We have recently founded a local chapter in {city}, and I thought some of your students might be interested. We will be meeting to discuss AI policy proposals, holding educational events on mitigating the dangers of AI, writing to news outlets and elected officials, and more. Further information below.
+We have recently founded a local chapter in (city), and I thought some of your students might be interested. We will be meeting to discuss AI policy proposals, holding educational events on mitigating the dangers of AI, writing to news outlets and elected officials, and more. Further information below.
 
 Could you share the message below with your students or others who might be interested?
 
 I’d also be happy to answer any questions you might have. Thanks so much for your time.
 
-**PauseAI {City}**: opportunity to get involved with local AI policy chapter
+**PauseAI (City)**: opportunity to get involved with local AI policy chapter
 
-Are you interested in learning more about AI policy? Curious about how we should respond to emerging AI technologies? Get involved with PauseAI {City}!
+Are you interested in learning more about AI policy? Curious about how we should respond to emerging AI technologies? Get involved with PauseAI (City)!
 
 PauseAI is an international movement to mitigate the risks from powerful Artificial Intelligence until we know how to make it safe. Our city chapter will hold educational events on AI policy, spread awareness of AI risks through media, and contact our elected officials to support robust policy solutions to AI harms.
 
 We will be meeting regularly through the summer and are looking for volunteers to get involved.
 
-If you’re interested, please sign up here {include link}!
+If you’re interested, please sign up here (include link)!
 
 ## Working with volunteers
 
@@ -360,14 +360,14 @@ Walk volunteers through how to write a Letter to the Editor (LTE) or Op-Ed to lo
 Even after you have a base of volunteers, you can continue flyering and tabling to get the word out to the public.
 In this context, flyering and tabling can be combined with a specific “ask,” i.e. asking people to write to their elected officials about AI
 Flyers can be modified to include QR codes to relevant resources, such as a letter-writing guide.
-Please read our [Flyering Guide](/flyering-guide) for more information on how to do this well.
+Please read our [Flyering Guide](/flyering) for more information on how to do this well.
 
 ### Protests
 
 Many PauseAI chapters have already organized protests, especially in response to specific events and developments around AI.
 These can be a great way to promote PauseAI and gain media coverage for the cause.
 
-Please read our [Guide to Organizing a Protest](/protest-guide) to learn how to do this.
+Please read our [Guide to Organizing a Protest](/organizing-a-protest) to learn how to do this.
 
 ### Meetings with Congressional Offices (US)
 
@@ -414,7 +414,7 @@ You might have a hard time finding volunteers to begin with. Maybe the people yo
 **How to Overcome**:
 
 - Use your personal network as much as possible. Reach out to anyone you know who you think might be interested in getting involved, and ask them if they know anyone you might talk to. Similarly, if you know anyone in a local group, reach out to them personally.
-- Make sure you have a very strong “pitch” when flyering. If your pitch seems unfocused, weak, or tepid, this could be contributing to your lack of interest. [Read this guide](/flyering-guide) to learn more about developing a strong pitch.
+- Make sure you have a very strong “pitch” when flyering. If your pitch seems unfocused, weak, or tepid, this could be contributing to your lack of interest. [Read this guide](/flyering) to learn more about developing a strong pitch.
 - Make sure you’re flyering in a high population-density area with lots of potential volunteers.
 - Make sure your messages and emails to groups are clear and direct, with a specific request. You can also send your email drafts to the PauseAI Discord and receive feedback.
 - If groups aren’t getting back to you, you might not be casting a wide enough net. Consider reaching out to more groups, even if their focus seems only loosely or tangentially related to AI.
@@ -445,4 +445,4 @@ Some of this is inevitable– not everyone will remain invested at all times– 
 - Make sure volunteers are involved with actions they actually enjoy. Don’t have the person who enjoys protest organizing write op-eds and the person who enjoys writing organize protests. Match tasks with the people interested in taking them on.
 - Keep a strategy of continuous recruitment. Rather than having a single recruiting burst at the beginning and then not doing any recruitment afterwards, it’s better to recruit periodically. This way, even if some people lose interest over time, you can bring new volunteers into the fold.
 
-If you’re struggling with any aspect of local organizing, you can also discuss this in the local-organizers channel on the [PauseAI Discord](/pauseai-discord), and others will be happy to help you out and provide feedback.
+If you’re struggling with any aspect of local organizing, you can also discuss this in the local-organizers channel on the [PauseAI Discord](https://discord.gg/2XXWXvErfA), and others will be happy to help you out and provide feedback.
