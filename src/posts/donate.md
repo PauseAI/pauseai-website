@@ -1,39 +1,40 @@
 ---
 title: Donate to PauseAI
-description: With your financial support we can have a bigger impact.
+description: Become a donor today and fuel our global fight to pause unsafe AI!
 ---
 
-We started PauseAI as a group of volunteers, who work on it in their free time.
-Since February 2024, PauseAI is a [registered non-profit foundation](/legal).
-We do not yet have sufficient funds to hire people to work full-time on PauseAI, so we still run on volunteer work.
-With your financial support, we can professionalize and have a bigger impact.
+Become a donor today and fuel our worldwide fight against unsafe AI. Your donation powers our global awareness campaigns, protests, and lobbying to pause unsafe AI. Every donation, no matter the size, makes a difference in our urgent cause!
+
+Note: Ideally have two donate buttons, giving a choice between donating in Dollars or Euros -- it might help increase donations from Americans, and also, giving people a choice is shown to help increase donations 
 
 <div style="display: flex; justify-content: center;" ><a href="https://www.paypal.com/donate/?hosted_button_id=4TWZXY62EM5VE"><img src="/PayPal.svg" alt="Donate now" width="256" /></a></div>
 
-## How we use your donations
+## What PauseAI has achieved in the past two years (check -- how long has it been?) 
 
-- **People**: build a stronger community, work on projects, organize protests, improve the website, etc.
-- **Events**: renting a location, catering, travel costs.
-- **Software**: email, website, etc.
-- **Campaigns**: online advertising, materials
-- **Legal & financial**: setting up the foundation (notary costs), bookkeeping.
-- **Community projects**: our [microgrants](/microgrants) program supports various small-scale projects.
+- 15 major [protests](/protests) in 7 countries with significant news coverage, with more to come
+- Significant [media appearances](/press) raising awareness of AI risks on major news outlets, documentaries, TV, podcasts and more
+- Attendance and participation in panels at __ AI safety summits
+- Dozens of well-attended presentations raising awareness about AI risks and how to lobby for a global pause on frontier AI research
+- Tens of thousands of volunteer hours spent on activism, flyering, local organizing, protesting, cold-calling, raising awareness, lobbying and other actitivies to help pause AI 
+- Hundreds of meetings lobbying and partnering with politicians, the wider AI safety community, and influential people (influencers, researchers, media, etc.) to work on the cause of stopping unsafe AI
+- A global community of volunteers ([join here](/join)) working around the clock to pause unsafe AI! 
 
-## What have we already achieved
 
-- 1000+ people who have [joined](/join) PauseAI, many of whom are actively working on various projects
-- 100+ projects in our Discord server (websites, workshops, videos, responses to government consultations, etc.)
-- Organized 15+ [protests](/protests) in 7 countries.
-- 30+ [Media appearances](/press) on major news outlets, podcasts, documentaries, TV and more.
-- Many meetings with politicians and other stakeholders.
 
-## What we're planning to do
+## What your donation helps to achieve 
 
-See our [roadmap](/roadmap) for more details.
+- Protests, summits, talks, and in-person events
+- Awareness campaigns, including online, media, and in-person
+- [Microgrants](/microgrants) supporting high-ROI small-scale projects around the world to help PauseAI
+- Contracting with professionals as needed to elevate our social media, video, branding, and media reach 
+- Tools to keep our volunteer organization running at high levels of effectivness (email, website, CRM, bookkeeping, project tools) 
+- PauseAI is a [registered non-profit foundation](/legal) in the US, UK, France, and the Netherlands.
 
-## How to donate to PauseAI
+## Other ways you can become a donor
 
-- By bank transfer. IBAN: NL31BUNQ2109903155 BIC/SWIFT: BUNQNL2AXXX (Stichting PauseAI). This is probably the cheapest way to transfer money to us.
-- [PayPal](https://www.paypal.com/donate/?hosted_button_id=4TWZXY62EM5VE). Supports recurring donations. [Transaction fees](https://www.paypal.com/webapps/mpp/merchant-fees) apply.
-- Through our [merchandise store](https://pauseai-shop.fourthwall.com/). All US-based credit card transactions have an added 2.9% + $0.30 payment processing fee. Non-US credit cards have a 3.9% +$0.30 payment processing fee.
-- Through [this link](https://bunq.me/pauseai) (Select Sofort - most banks and PayPal are supported)
+- Donate by bank transfer -- IBAN: NL31BUNQ2109903155 BIC/SWIFT: BUNQNL2AXXX (Stichting PauseAI). (Note: Donating this way avoids transaction fees.)
+- Use [PayPal](https://www.paypal.com/donate/?hosted_button_id=4TWZXY62EM5VE). If you are able, consider using the recurring donation option, which enhances our ability to fund impactful projects! 
+- Grab some merch from our [merchandise store](https://pauseai-shop.fourthwall.com/)! (Note: All US-based credit card transactions have an added 2.9% + $0.30 payment processing fee. Non-US credit cards have a 3.9% +$0.30 payment processing fee.)
+- Donate through [bunq.me](https://bunq.me/pauseai) (Select Sofort - most banks and PayPal are supported).
+
+## Join us in our mission to end unsafe AI development and keep humanity secure! Every donation, no matter the size, helps us get closer to a world where AI is used safely!
