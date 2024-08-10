@@ -2,13 +2,16 @@
 	import PostMeta from '$components/PostMeta.svelte'
 	import UnderlinedTitle from '$components/UnderlinedTitle.svelte'
 
+	import { title as siteName } from '$config'
+
 	export let data
 
-	const { meta, slug, content } = data
-	const { title = slug, date, categories, description, image } = meta
+	const { metadata, slug, content } = data
+	const { title = slug, date, description, image } = metadata
+	// const parent = slug.split('/').slice(0, -1).join('/')
 </script>
 
-<PostMeta {title} {description} {date} {image} />
+<PostMeta title={`${title} | ${siteName}`} {description} {date} {image} />
 
 <hgroup>
 	<UnderlinedTitle>{title}</UnderlinedTitle>

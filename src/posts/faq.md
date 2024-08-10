@@ -1,5 +1,5 @@
 ---
-title: F.A.Q.
+title: FAQ
 description: Questions fréquemment posées sur Pause IA et les risques de l'IA superintelligente.
 ---
 

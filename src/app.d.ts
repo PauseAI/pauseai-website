@@ -13,5 +13,13 @@ declare module '*.md' {
 
 	export default class Comp extends SvelteComponent {}
 
-	export const metadata: Record<string, unknown>
+	export interface PostMetadata {
+		title?: string
+		date?: string
+		description?: string
+		image?: string
+		[key: string]: unknown
+	}
+
+	export const metadata: PostMetadata
 }

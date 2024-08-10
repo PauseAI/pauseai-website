@@ -1,12 +1,13 @@
 import { error } from '@sveltejs/kit'
+type MdModule = typeof import('*.md')
 
 export async function load({ params: { slug } }) {
 	try {
-		const { default: content, metadata: meta = {} } = await import(`../../posts/${slug}.md`)
+		const { default: content, metadata }: MdModule = await import(`../../posts/${slug}.md`)
 
 		return {
 			content,
-			meta,
+			metadata,
 			slug
 		}
 	} catch (e) {

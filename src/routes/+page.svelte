@@ -7,7 +7,7 @@
 	import Faq from '$components/home/faq.svelte'
 	import Supporters from '$components/home/supporters.svelte'
 
-	const title = 'Pause IA'
+	const title = 'Exigeons une Pause IA'
 	const description = "Ne laissons pas l'IA nous détruire, agissons maintenant"
 </script>
 
