@@ -7,29 +7,31 @@
 </script>
 
 <section class="hero" aria-labelledby={label_id}>
-	<div class="hero-overlay">
+	<div class="overlay">
 		<enhanced:img
 			src="$assets/hero_bg.jpg"
 			alt="PauseAI protesters"
-			class="hero-bg"
+			class="background"
 			sizes="min(1920px, 100vw)"
 			fetchpriority="high"
 			loading="eager"
 		/>
 	</div>
-	<section class="hero-content">
+	<section class="content">
 		<h1 id={label_id}>
 			Ne laissons pas l'IA nous{'\u00A0'}détruire, <br /><Mark>agissons maintenant</Mark>
 		</h1>
-		<p>
-			Selon la majorité des experts, le développement rapide de l'intelligence artificielle présente
-			un danger catastrophique pour l'humanité à très court terme, au potentiel plus dévastateur que
-			la bombe atomique.
-		</p>
-		<p>Nous faisons face à la menace la plus urgente de notre histoire. Chaque jour compte.</p>
-		<div class="buttons">
-			<Button href="/agir">Agir</Button>
-			<Button href="/nous-rejoindre" alt>Rejoindre</Button>
+		<div class="description">
+			<p>
+				Selon la majorité des experts, le développement rapide de l'intelligence artificielle présente
+				un danger catastrophique pour l'humanité à très court terme, au potentiel plus dévastateur que
+				la bombe atomique.
+			</p>
+			<p>Nous faisons face à la menace la plus urgente de notre histoire. Chaque jour compte.</p>
+			<div class="buttons">
+				<Button href="/agir">Agir</Button>
+				<Button href="/nous-rejoindre" alt>Rejoindre</Button>
+			</div>
 		</div>
 	</section>
 	<div class="corners">
@@ -40,15 +42,14 @@
 
 <style>
 	.hero {
-		--hero-top-offset: -8.125rem;
+		--hero-top-offset: -7.125rem;
 		display: flex;
 		min-height: calc(100svh + var(--hero-top-offset));
 		align-items: center;
 		z-index: 0;
-		margin-top: 1rem;
 		position: relative;
 	}
-	.hero-overlay {
+	.overlay {
 		position: absolute;
 		overflow: hidden;
 		top: var(--hero-top-offset);
@@ -60,15 +61,22 @@
 		display: flex;
 		z-index: -1;
 	}
-	.hero-content {
+	.content {
 		color: #fff;
-		text-align: left;
-		width: 100%;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		max-width: 100%;
 	}
-	.hero-content h1 {
-		font-size: 1.7rem;
+	.content h1 {
+		font-size: 1.6rem;
 	}
-	.hero-bg {
+	/* Ensures that the description is constrained by the width of h1 */
+	.description {
+		width: 0;
+		min-width: 100%;
+	}
+	.background {
 		position: absolute;
 		top: 0;
 		left: 0;
@@ -87,7 +95,7 @@
 		justify-content: space-between;
 		border-bottom: 1px solid white;
 	}
-	.hero-overlay::after {
+	.overlay::after {
 		content: '';
 		position: absolute;
 		width: 100%;
@@ -128,55 +136,31 @@
 		margin-top: 2rem;
 	}
 	@media (min-width: 480px) {
-		.hero-content {
-			max-width: 28rem;
-		}
 		.buttons {
 			flex-direction: row;
 		}
 	}
 	@media (min-width: 640px) {
 		.hero {
-			--hero-top-offset: -9.125rem;
+			--hero-top-offset: -8.125rem;
 		}
-		.hero-content {
-			max-width: 36rem;
-		}
-		.hero-content h1 {
-			font-size: 2.2rem;
+		.content h1 {
+			font-size: 2.1rem;
 		}
 	}
 	@media (min-width: 768px) {
-		.hero-content {
-			max-width: 40rem;
-		}
-		.hero-content h1 {
+		.content h1 {
 			font-size: 2.4rem;
-		}
-		.hero-content p {
-			padding-right: 3rem;
 		}
 	}
 	@media (min-width: 1024px) {
-		.hero-content {
-			max-width: 52rem;
-		}
-		.hero-content h1 {
-			font-size: 3.2rem;
-		}
-		.hero-content p {
-			padding-right: 6rem;
+		.content h1 {
+			font-size: 3rem;
 		}
 	}
 	@media (min-width: 1280px) {
-		.hero-content {
-			max-width: 57rem;
-		}
-		.hero-content h1 {
+		.content h1 {
 			font-size: 3.5rem;
-		}
-		.hero-content p {
-			padding-right: 6rem;
 		}
 	}
 </style>

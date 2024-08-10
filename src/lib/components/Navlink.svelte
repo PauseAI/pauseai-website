@@ -17,12 +17,16 @@
 
 <style>
 	a {
-		padding: 0.5rem;
+		display: flex;
+		align-items: center;
+		justify-content: center;
 		font-family: var(--font-heading);
 		font-weight: 700;
 		color: var(--text);
 		text-decoration: none;
 		font-size: 1rem;
+		/* Appropriate tap targets */
+		min-width: 48px;
 	}
 
 	a.c2a {
@@ -42,12 +46,6 @@
 	@media (min-width: 1024px) {
 		a {
 			font-size: 1.1rem;
-			padding: 0.8rem;
-		}
-	}
-	@media (min-width: 1280px) {
-		a {
-			padding: 1rem;
 		}
 	}
 </style>

@@ -20,14 +20,15 @@
 		color: var(--text) !important;
 		border: none;
 		border-radius: 0.3125rem;
-		padding: 10px;
+		padding: 0.5rem 1rem;
 		font-family: var(--font-body);
 		cursor: pointer;
 		display: inline-flex;
 		font-weight: bold;
 		position: relative;
-		min-width: 10rem;
-		height: 3rem;
+		min-width: 8rem;
+		/* Appropriate tap targets */
+		height: 48px;
 		align-items: center;
 		justify-content: center;
 		text-decoration: none;

@@ -55,7 +55,7 @@
 		margin-bottom: 2rem;
 	}
 
-	@media (min-width: 600px) {
+	@media (min-width: 640px) {
 		.articles-grid {
 			grid-template-columns: 1fr 1fr;
 		}

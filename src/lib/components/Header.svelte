@@ -54,24 +54,9 @@
 				fill="none"
 				xmlns="http://www.w3.org/2000/svg"
 			>
-				<rect
-					y="0"
-					height="3"
-					width="24"
-					fill={onHomepage ? 'white' : 'black'}
-				/>
-				<rect
-					y="10.5"
-					height="3"
-					width="24"
-					fill={onHomepage ? 'white' : 'black'}
-				/>
-				<rect
-					y="21"
-					height="3"
-					width="24"
-					fill={onHomepage ? 'white' : 'black'}
-				/>
+				<rect y="0" height="3" width="24" fill={onHomepage ? 'white' : 'black'} />
+				<rect y="10.5" height="3" width="24" fill={onHomepage ? 'white' : 'black'} />
+				<rect y="21" height="3" width="24" fill={onHomepage ? 'white' : 'black'} />
 			</svg>
 		</button>
 	</div>
@@ -154,24 +139,13 @@
 		left: 0;
 	}
 
-	/* .absolute-nav {
-		width: 100%;
-		height: fit-content;
-		z-index: 1000;
-	} */
 	nav {
 		display: flex;
 		justify-content: space-between;
-		/* margin-left: -1rem; */
 		flex-wrap: wrap;
 		z-index: 1;
 		padding: 1rem;
 	}
-
-	/* .logo {
-		margin-bottom: 1rem;
-		margin-left: 1rem;
-	} */
 
 	.nav-right {
 		display: flex;
@@ -181,14 +155,10 @@
 
 	.nav-links {
 		display: none;
-		/* text-transform: uppercase; */
 		flex-wrap: wrap;
 		justify-content: center;
-		align-items: center;
-	}
-
-	.nav-links :global(a:last-child) {
-		margin-left: 0.5rem;
+		align-items: stretch;
+		gap: 1rem;
 	}
 
 	.hamburger {
@@ -202,7 +172,7 @@
 	}
 
 	.small-logo {
-		display: none;
+		display: block;
 	}
 
 	.small-logo :global(svg) {
@@ -210,69 +180,69 @@
 	}
 
 	.big-logo {
-		display: block;
+		display: none;
+	}
+
+	@media (min-width: 480px) {
+		
+		.big-logo {
+			display: block;
+		}
+	
+		.small-logo {
+			display: none;
+		}
 	}
 
 	@media (min-width: 640px) {
 		nav {
-			flex-direction: row;
-			align-items: center;
 			padding: 2rem 2rem;
-			/* margin-left: 1rem; */
 		}
 
+	}
+	@media (min-width: 768px) {
+		nav {
+			flex-direction: row;
+			align-items: center;
+		}
+		
 		.nav-links {
 			display: flex;
 		}
-
+		
 		.hamburger,
-		.big-logo,
 		.sidebar {
+			display: none;
+		}
+
+		.big-logo {
 			display: none;
 		}
 		.small-logo {
 			display: block;
 		}
-
-		/* .logo {
-			margin-left: -3.4rem;
-			margin-bottom: 0;
-		} */
-
-		/* .nav-links {
-			margin-left: 2rem;
-			} */
-	}
-	@media (min-width: 768px) {
 		nav {
 			padding: 2rem 4rem;
 		}
-		.small-logo :global(svg) {
-			width: auto;
-		}
 	}
-
+	
 	@media (min-width: 1024px) {
 		nav {
 			padding: 2rem 6rem;
 		}
+		.nav-links {
+			gap: 2rem;
+		}
+	}
 
+	@media (min-width: 1280px) {
 		.big-logo {
 			display: block;
-		}
-
-		.big-logo :global(svg) {
-			width: 12rem;
 		}
 
 		.small-logo {
 			display: none;
 		}
-	}
 
-	@media (min-width: 1280px) {
-		.big-logo :global(svg) {
-			width: auto;
-		}
 	}
 </style>
