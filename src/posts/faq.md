@@ -1,6 +1,9 @@
 ---
 title: FAQ
 description: Questions fréquemment posées sur Pause IA et les risques de l'IA superintelligente.
+original:
+  title: FAQ
+  url: https://github.com/PauseAI/pauseai-website/blob/5950ca0185d6e7cf52e2416e795acfab7222dace/src/posts/faq.md
 ---
 
 <!-- ↓↓↓ NE PAS TOUCHER ↓↓↓ -->

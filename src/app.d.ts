@@ -18,6 +18,10 @@ declare module '*.md' {
 		date?: string
 		description?: string
 		image?: string
+		original?: {
+			title: string
+			url: string
+		}
 		[key: string]: unknown
 	}
 

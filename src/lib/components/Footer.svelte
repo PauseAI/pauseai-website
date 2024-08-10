@@ -49,8 +49,8 @@
 			<h2>Autres</h2>
 			<a href="/mentions-legales">Mentions légales</a>
 			<a href="/politique-de-confidentialite">Politique de confidentialité</a>
-			<ExternalLink href="https://creativecommons.org/licenses/by/4.0/" target="_blank"
-				>License: CC-BY 4.0</ExternalLink
+			<ExternalLink href="https://creativecommons.org/licenses/by/4.0/deed.fr" target="_blank"
+				>Licence: CC-BY 4.0</ExternalLink
 			>
 		</div>
 	</div>

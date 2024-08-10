@@ -44,3 +44,7 @@ While SvelteKit implements "[Zero-effort type safety](https://svelte.dev/blog/ze
 ## Deployment
 
 The contents of the repository are continuously deployed to Netlify. You can track the deployment status [here](https://app.netlify.com/sites/pauseai-france/deploys).
+
+## Attribution
+
+You can find all pages which have been translate from PauseAI (Global) in [`/TRANSLATIONS.md`](/TRANSLATIONS.md)

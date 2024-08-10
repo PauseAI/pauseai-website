@@ -1,6 +1,9 @@
 ---
 title: Faire un don à Pause IA
 description: Grâce à votre soutien financier, nous pouvons avoir un plus grand impact.
+original:
+  title: Donate to PauseAI
+  url: https://github.com/PauseAI/pauseai-website/blob/03a62f1a06c6a2eac0f3fc79a2bbc7a7083bd31e/src/posts/donate.md
 ---
 
 Pause IA, née de l'engagement bénévole, est officiellement une [organisation à but non lucratif](/mentions-legales) depuis juin 2024. Actuellement, notre impact repose entièrement sur le dévouement de nos bénévoles. Votre soutien financier nous permettra de nous professionnaliser, d'étendre notre portée et d'amplifier significativement notre influence dans le domaine de la sécurité de l'IA.
@@ -26,12 +29,13 @@ Pause IA, née de l'engagement bénévole, est officiellement une [organisation 
 ### Ce que PauseAI Global a accompli grâce aux dons
 
 PauseAI Global, l'organisation internationale dont Pause IA est la branche française autonome, a réalisé les actions suivantes grâce à ses propres collectes de fonds :
+
 - Plus de 1000 membres actifs, dont de nombreux bénévoles dédiés à différents projets.
 - Plus de 100 initiatives en cours sur le Discord, allant de la création de sites web à l'élaboration de réponses aux consultations gouvernementales.
 - Organisation de 15+ [manifestations](https://pauseai.info/protests) dans 7 pays, amplifiant notre message à l'échelle mondiale.
 - 30+ [apparitions dans des médias de premier plan](https://pauseai.info/press), incluant presse écrite, podcasts, documentaires et émissions TV.
 - Nombreuses rencontres stratégiques avec des élus et décideurs clés du secteur de l'IA.
-Note : Les dons faits à Pause IA sont utilisés exclusivement pour les activités de notre branche française. Nous ne reversons aucune partie de ces dons à PauseAI Global.
+  Note : Les dons faits à Pause IA sont utilisés exclusivement pour les activités de notre branche française. Nous ne reversons aucune partie de ces dons à PauseAI Global.
 
 ### Nos objectifs avec Pause IA
 

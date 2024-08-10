@@ -1,6 +1,9 @@
 ---
 title: Passez à l’action
 description: Moyens d'aider à suspendre le développement de l'IAG.
+original:
+  title: Take action
+  url: https://github.com/PauseAI/pauseai-website/blob/95be1d5327015a2c41f5c518d92812d7f6c79bda/src/posts/action.md
 ---
 
 Le nombre de personnes conscientes des risques liés à l'IA est encore restreint. Vous en faites désormais partie. **Vos actions ont plus de poids que vous ne l’imaginez.**
