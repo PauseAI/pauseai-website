@@ -1,33 +1,14 @@
 ---
 title: Counterarguments
-description: As a resource to redirect people to places responding to all kinds of arguments
+description: A list of reasons why people might disagree with the idea of pausing AI development - and how to respond to them.
 ---
 
-This is a compilation of disagreements about AI dangers and pushing for an AI Pause ordered from the more fundamental to the more specific ones.
+This is a compilation of disagreements about AI dangers and pushing for an AI Pause.
 
 ## AI is and will be really beneficial to the world
 
-It could be.
-But it could also be [dangerous](/risks).
-Both aspects have to be taken into account before developing a technology.
-And we could understand how to do that safely if we had more time.
-
-## The biggest dangers that you mention aren't true
-
-Some people believe some risks are real, but nothing so extraordinary that could justify a pause.
-Someone could believe this for various reasons, and some responses to those beliefs are [here](/ai-x-risk-skepticism).
-
-But, as a short response, the important thing is to realize we are growing alien minds with the objective of making them smarter than us, without fully understanding that process, and in the hands of small subsets of people which we don't really know.
-
-Then, estimate how likely you think that can cause catastrophic events, compare it with [the estimations of experts](/polls-and-surveys#catastrophic-risks-from-ai) and, if you have estimations quite different from them, think about if you can justify that difference.
-
-Lastly, think if those chances of really terrible things happening for developing advanced AI are justified somehow or if we should do something about it.
-
-## I can't make a difference for myself and other arguments
-
-At the heart of the problem, we think that most of the time there are not logical but emotional reasons that get in our way of taking action. In some cases, the arguments could be true, for sure. Like if you have more important things to take care of or better ways to mitigate the dangers. But we believe that's not the case in most cases. [Some actions](/action) are low effort, have a lot of potential, and can be done by pretty much anyone.
-
-You can read about mental obstacles that get in your way of accepting the risks and taking action [here](psychology-of-x-risk). With the help of the community, you can even have more impact and an environment that appreciates your valuable work and incentivizes you to keep going. On the bright side, the neglectedness of the problem also allows you to make a big difference at the start of this promising movement. There's plenty of low-hanging fruit to grab!
+It could be, we don't disagree with that.
+But it could also be [dangerous](/risks), including [existential risks](/xrisk).
 
 ## Human extinction? That's just AI companies hyping up their tech
 
@@ -40,24 +21,31 @@ Hundreds of AI scientists have [signed](https://www.safe.ai/work/statement-on-ai
 Modern AI is not designed, it's trained.
 It's quite literally a [digital brain](/digital-brains), consisting of millions of neurons.
 A human designs and programs the learning algorithm, but nobody understands the AI that is grown after that.
-Even the inventor of that learning algorithm [says]() that nobody has any idea of how these models work
 
 ## Well, if it starts doing crazy things, we can just turn it off
 
-Maybe in some cases, but a really smart AI can spread to other machines.
+Maybe in most cases, but a really smart AI could spread to other machines.
 It's just bytes, so it's not bound to one location.
 
 ## But then it needs to be able to hack
 
-GPT-4 already can autonomously hack websites.
-It already beats 88% of competitive hackers, can autonomously hack 87% of tested vulnerabilities. How smart do you think GPT-6 will be?
+GPT-4 already can [autonomously hack websites](https://arxiv.org/html/2402.06664v1), [exploit 87%](https://arxiv.org/abs/2404.08144) of tested vulnerabilities and [beats 88% of competitive hackers](https://arxiv.org/pdf/2402.11814.pdf).
+How smart do you think GPT-6 will be?
+
+Read more about the [cybersecurity risks](/cybersecurity-risks).
 
 ## An AI can't interact with the physical world
 
-Well, quite a bit of things are connected to the web. Cars, planes, drones, we now even have humanoid robots. All of these can be hacked. And AI can already autonomously hack websites and [exploit vulnerabilities](/cybersecurity-risk).
+Quite a bit of things are connected to the web.
+Cars, planes, drones, we now even have humanoid robots.
+All of these can be hacked.
 
 And it's not just robots and machines that can be hacked.
-People can be influenced too. You can receive a fake phone call, or a fake email. An AI can use other AIs to generate deepfakes. And GPT-4 is already better at persuading people than people are.
+A finance worker wast tricked by an AI conference call to get [$25m transferred](https://edition.cnn.com/2024/02/04/asia/deepfake-cfo-scam-hong-kong-intl-hnk/index.html).
+An AI can use other AIs to generate deepfakes.
+And GPT-4 is already [almost twice as good at persuading people than people are](https://arxiv.org/abs/2403.14380).
+
+Read more about [how good the best AI models are](/sota).
 
 ## Why would an AI hate humans and want to kill us?
 
@@ -65,6 +53,8 @@ It doesn’t have to be evil or hate humans to be dangerous to humans.
 We don’t hate chimpansees, but we still destroy their forests.
 We want palm oil, so we take their forest. We’re smarter, so chimps can’t stop us.
 An AI might want more compute power to be better at achieving some other goal, so it destroys our environment to build a better computer.
+
+Read more about [x-risk](/xrisk)
 
 ## The AIs that I know don’t have a will of their own - they just do what they’re asked
 
@@ -95,11 +85,13 @@ Read more about [feasibility](/feasibility).
 
 ## If you ban it here, China will just build it
 
-That’s why we need an [international treaty](https://pauseai.info/proposal).
+That’s why we need an international pause through a treaty.
 The same as we have for banning CFCs, or blinding laser weapons.
 We can regulate things internationally.
 
-## A Pause would be bad
+Read more about [our proposal](/proposal)
+
+## A Pause would be bad, because...
 
 Some ways in which a pause could be bad and how we could prevent those scenarios are explained on [this page](/mitigating-pause-failures).
 But if the article doesn't cover your worries you can tell us about them [here](https://airtable.com/appWPTGqZmUcs3NWu/pagIvo9Sv6IDHaolu/form).
