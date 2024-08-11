@@ -16,6 +16,8 @@ But it's not just AI companies saying it’s an existential threat.
 Hundreds of AI scientists have [signed](https://www.safe.ai/work/statement-on-ai-risk) the open letters.
 [86%](https://wiki.aiimpacts.org/ai_timelines/predictions_of_human-level_ai_timelines/ai_timeline_surveys/2023_expert_survey_on_progress_in_ai) of AI scientists believe that we could lose control over AI.
 
+Read more about [x-risk](/xrisk)
+
 ## Lose control? AI is just a piece of software, it's designed by humans
 
 Modern AI is not designed, it's trained.
@@ -53,8 +55,7 @@ It doesn’t have to be evil or hate humans to be dangerous to humans.
 We don’t hate chimpansees, but we still destroy their forests.
 We want palm oil, so we take their forest. We’re smarter, so chimps can’t stop us.
 An AI might want more compute power to be better at achieving some other goal, so it destroys our environment to build a better computer.
-
-Read more about [x-risk](/xrisk)
+This is called instrumental convergence, [this video explains it very nicely](https://www.youtube.com/watch?v=ZeecOKBus3Q).
 
 ## The AIs that I know don’t have a will of their own - they just do what they’re asked
 
