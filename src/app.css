@@ -140,6 +140,10 @@ h3 {
 	font-size: 0.875rem;
 }
 
+:is(ul, ol) {
+	padding-left: 1.2rem;
+}
+
 a {
 	color: var(--brand-subtle);
 	text-decoration: underline;

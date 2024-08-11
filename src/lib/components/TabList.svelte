@@ -55,6 +55,7 @@
 		overflow-x: hidden;
 	}
 	ul {
+		padding-left: 0;
 		margin-bottom: 1rem;
 		grid-column: 1 / span 3;
 		width: 100%;

@@ -137,6 +137,11 @@
 	.side-nav {
 		display: none;
 	}
+
+	.side-nav ul {
+		padding-left: 0;
+	}
+
 	@media (min-width: 640px) {
 		.top-nav {
 			flex-direction: row;
