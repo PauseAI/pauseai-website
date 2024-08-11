@@ -93,7 +93,6 @@
 		background: #ff9416;
 		top: 0;
 		left: 100%;
-		padding: 2rem 1rem;
 		transition: left 0.3s ease-in-out;
 		z-index: 1000;
 	}
@@ -111,6 +110,11 @@
 		color: black;
 	}
 
+	.sidebar-links h2 {
+		font-size: 1.5rem;
+		margin-bottom: 2rem;
+	}
+
 	.sidebar-head {
 		display: flex;
 		justify-content: space-between;
@@ -126,6 +130,10 @@
 		justify-content: space-between;
 		flex-wrap: wrap;
 		z-index: 1;
+	}
+
+	nav,
+	.sidebar {
 		padding: 1rem;
 	}
 
@@ -176,12 +184,14 @@
 	}
 
 	@media (min-width: 640px) {
-		nav {
+		nav,
+		.sidebar {
 			padding: 2rem 2rem;
 		}
 	}
 	@media (min-width: 768px) {
-		nav {
+		nav,
+		.sidebar {
 			padding: 2rem 4rem;
 		}
 	}
@@ -216,7 +226,7 @@
 		.small-logo {
 			display: none;
 		}
-		
+
 		.nav-links {
 			gap: 2rem;
 		}
