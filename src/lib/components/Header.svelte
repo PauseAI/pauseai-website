@@ -1,18 +1,8 @@
 <script lang="ts">
 	import NavLink from '$components/Navlink.svelte'
 	import Logo from '$components/Logo.svelte'
-	import { botName } from '$config'
 	import { page } from '$app/stores'
-	import TikTok from '$components/icons/tiktok.svelte'
-	import Instagram from '$components/icons/instagram.svelte'
-	import Facebook from '$components/icons/facebook.svelte'
-	import Youtube from '$components/icons/youtube.svelte'
-	import Discord from '$components/icons/discord.svelte'
-	import Linkedin from '$components/icons/linkedin.svelte'
-	import X from '$components/icons/x.svelte'
-	import SearchIcon from 'lucide-svelte/icons/search'
 	import Button from '$components/Button.svelte'
-	const enableBot = false
 
 	$: onHomepage = $page.url.pathname == '/'
 
@@ -34,17 +24,9 @@
 		<div class="nav-links">
 			<NavLink href="/dangers">Dangers</NavLink>
 			<NavLink href="/propositions">Propositions</NavLink>
-			<!-- <NavLink href="/protests">Protests</NavLink> -->
-			<!-- <NavLink href="/faq">FAQ</NavLink> -->
-			<NavLink href="/agir">Agir</NavLink>
 			<NavLink href="https://pauseia.substack.com/">Blog</NavLink>
-			<NavLink href="/dons">Dons</NavLink>
-			{#if enableBot}
-				<NavLink href="/chat">{botName}</NavLink>
-			{/if}
-			<!-- <NavLink href="/about">About</NavLink> -->
-			<Button href="/nous-rejoindre" alt={onHomepage}>Nous rejoindre</Button>
-			<!-- <NavLink href="/search" ariaLabel="Search"><SearchIcon size="0.8em" /></NavLink> -->
+			<NavLink href="/dons">Donner</NavLink>
+			<Button href="/agir" alt={onHomepage}>Agir</Button>
 		</div>
 		<button aria-label="Open mobile menu" class="hamburger" on:click={() => (open = !open)}>
 			<svg
@@ -184,11 +166,10 @@
 	}
 
 	@media (min-width: 480px) {
-		
 		.big-logo {
 			display: block;
 		}
-	
+
 		.small-logo {
 			display: none;
 		}
@@ -198,40 +179,32 @@
 		nav {
 			padding: 2rem 2rem;
 		}
-
 	}
 	@media (min-width: 768px) {
-		nav {
-			flex-direction: row;
-			align-items: center;
-		}
-		
-		.nav-links {
-			display: flex;
-		}
-		
-		.hamburger,
-		.sidebar {
-			display: none;
-		}
-
-		.big-logo {
-			display: none;
-		}
-		.small-logo {
-			display: block;
-		}
 		nav {
 			padding: 2rem 4rem;
 		}
 	}
-	
+
 	@media (min-width: 1024px) {
+		nav {
+			flex-direction: row;
+			align-items: center;
+		}
+
+		.nav-links {
+			display: flex;
+		}
+
+		.hamburger,
+		.sidebar {
+			display: none;
+		}
 		nav {
 			padding: 2rem 6rem;
 		}
 		.nav-links {
-			gap: 2rem;
+			gap: 1.5rem;
 		}
 	}
 
@@ -243,6 +216,9 @@
 		.small-logo {
 			display: none;
 		}
-
+		
+		.nav-links {
+			gap: 2rem;
+		}
 	}
 </style>

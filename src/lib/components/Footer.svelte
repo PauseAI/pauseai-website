@@ -23,9 +23,9 @@
 			<a href="/faq">FAQ</a>
 			<a href="/dangers">Dangers</a>
 			<a href="/propositions">Propositions</a>
-			<a href="/agir">Agir</a>
 			<a href="https://pauseia.substack.com/">Blog</a>
-			<a href="/dons">Dons</a>
+			<a href="/agir">Agir</a>
+			<a href="/dons">Donner</a>
 			<a href="/nous-rejoindre">Nous rejoindre</a>
 		</div>
 		<div class="column">

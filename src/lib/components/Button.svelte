@@ -26,7 +26,7 @@
 		display: inline-flex;
 		font-weight: bold;
 		position: relative;
-		min-width: 8rem;
+		min-width: 7rem;
 		/* Appropriate tap targets */
 		height: 48px;
 		align-items: center;
