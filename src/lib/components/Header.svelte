@@ -107,7 +107,7 @@
 	}
 
 	.sidebar-links a:hover {
-		color: black;
+		color: white;
 	}
 
 	.sidebar-links h2 {
