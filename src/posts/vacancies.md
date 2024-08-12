@@ -11,7 +11,7 @@ description: If you want to join PauseAI,
 ## Social Media Director
 
 - 8 to 16 hrs a week
-- Lead the Social Media Team (multiple volunteers with diverse relevant skills, some of who create and edit videos)
+- Lead the Comms Team (multiple volunteers with diverse relevant skills, some of who create and edit videos)
 - Stay up to date on AI (safety, governance) news
 - Run our Social Media accounts (Twitter, Facebook, TikTok, LinkedIn, YouTube, Instagram)
 - Share our messages on social media and engage with others
