@@ -78,7 +78,8 @@ Our first annual report will be published after the first fiscal year ends on 31
 
 - Name: PauseAI US
 - Nonprofit Corporation - CA - Public Benefit
-- Entity Number: 6071248
+- Entity Number 501(c)(3): 6071248
+- Entity Number 501(c)(4): 99-3051616
 - Registration date: 01/24/2024
 - Formed in: California
 - Status: Active
