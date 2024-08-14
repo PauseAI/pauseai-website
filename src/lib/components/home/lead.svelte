@@ -19,7 +19,7 @@
 		de l'humanité.
 	</p>
 	<p>
-		Pause IA, porte-parole des chercheurs en sûreté de l'IA, promeut un développement responsable de
+		Pause IA, porte-parole des chercheurs en sécurité de l'IA, promeut un développement responsable de
 		cette technologie en pleine expansion. Nous appelons à un moratoire sur l'entraînement de
 		systèmes plus dangereux, afin d'éviter une catastrophe mondiale.
 	</p>
