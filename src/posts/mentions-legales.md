@@ -22,8 +22,6 @@ Netlify, Inc.
 
 [support@netlify.com](mailto:support@netlify.com)
 
-[+1 844-899-7312](tel:+1-844-899-7312)
-
 ## Mentions légales :
 
 Aucune information vous concernant n'est conservé sur le site.
