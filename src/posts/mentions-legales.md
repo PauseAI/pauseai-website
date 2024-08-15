@@ -20,9 +20,9 @@ Netlify, Inc.
 
 512 2nd Street, Suite 200 San Francisco, CA 94107.
 
-support@netlify.com
+[support@netlify.com](mailto:support@netlify.com)
 
-+1 844-899-7312
+[+1 844-899-7312](tel:+1-844-899-7312)
 
 ## Mentions légales :
 
@@ -30,4 +30,4 @@ Aucune information vous concernant n'est conservé sur le site.
 
 ## Contact:
 
-- Mail: [contact@pauseia.fr](mailto:contact@pauseia.fr)
+[contact@pauseia.fr](mailto:contact@pauseia.fr)
