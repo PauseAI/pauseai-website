@@ -18,7 +18,7 @@ Le directeur de la publication est M. Maxime Fournes
 
 Netlify, Inc.
 
-512 2nd Street, Suite 200 San Francisco, CA 94107.
+512 2nd Street, Suite 200 San Francisco, CA 94107, États-Unis.
 
 [support@netlify.com](mailto:support@netlify.com)
 
