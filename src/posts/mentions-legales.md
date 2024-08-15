@@ -18,11 +18,9 @@ Le directeur de la publication est M. Maxime Fournes
 
 Netlify, Inc.
 
-512 2nd Street, Suite 200 San Francisco, CA 94107.
+512 2nd Street, Suite 200 San Francisco, CA 94107, États-Unis.
 
-support@netlify.com
-
-+1 844-899-7312
+[support@netlify.com](mailto:support@netlify.com)
 
 ## Mentions légales :
 
@@ -30,4 +28,4 @@ Aucune information vous concernant n'est conservé sur le site.
 
 ## Contact:
 
-- Mail: [contact@pauseia.fr](mailto:contact@pauseia.fr)
+[contact@pauseia.fr](mailto:contact@pauseia.fr)
