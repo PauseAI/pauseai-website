@@ -3,10 +3,12 @@
 	import Logo from '$components/Logo.svelte'
 	import { page } from '$app/stores'
 	import Button from '$components/Button.svelte'
+	import Banner from '$components/Banner.svelte'
+
 	const enableBot = false
 	import { onMount } from 'svelte'
 	import { fade, fly, blur } from 'svelte/transition'
-
+	
 	$: onHomepage = $page.url.pathname == '/'
 
 	let open = false
@@ -16,6 +18,11 @@
 		mounted = true
 	})
 </script>
+
+<Banner
+	message="Participez à notre conférence de lancement du 10 septembre <a href=&quot;https://pauseia.fr/propositions&quot; target=&quot;_blank&quot;>en vous inscrivant ici</a>"
+	bgColor="var(--brand)"
+/>
 
 <!-- probably have to change nav colors and classes to respond to banner presence instead of route -->
 {#if mounted || !onHomepage}
