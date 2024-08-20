@@ -3,8 +3,6 @@ title: Flyering Guide
 description: How to distribute flyers for PauseAI
 ---
 
-Find existing materials in [Flyers](https://drive.google.com/drive/folders/1MAU_bq31bEuylhzkt2NkZ_XRY6TlKaqZ?usp=drive_link).
-
 ## Why Flyering?
 
 - The goal of flyering is to [create](/local-organizing) and grow a [local PauseAI community](/communities)
@@ -12,7 +10,8 @@ Find existing materials in [Flyers](https://drive.google.com/drive/folders/1MAU_
 
 ## Flyer contents
 
-- Existing flyers can be edited to be more specific to your purpose
+- Find existing materials in [the Flyers folder](https://drive.google.com/drive/folders/1MAU_bq31bEuylhzkt2NkZ_XRY6TlKaqZ?usp=drive_link).
+- Existing flyers can be edited to be more specific to your purpose. Use the [Figma template](https://www.figma.com/community/file/1233064002969152026) to create your own.
 - Add the time and place of your meeting to the flyer
 - Flyers should have clear calls to action
   - (Learn what YOU can do!", "Find out how YOU can help!", "YOU can make a difference!", "Get involved!")
