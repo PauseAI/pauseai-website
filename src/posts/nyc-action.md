@@ -1,12 +1,12 @@
 ---
-title: NYC Action Items
-description: Connecting the public with impactful action items in PauseAINYC
-date: '2024-7-17'
+title: PauseAI NYC Action Items
+description: Help stop the acceleration of dangerous AI by taking action!
+date: '2024-8-20'
 ---
 
-## Join the PauseAI movement and take action against AI's risks today! We have an urgent need for people to help us with any of the following:
+## Show support for the PauseAI movement in New York City, and help save the world from AI's [many risks](https://airisk.mit.edu/)! We have an urgent need for people to help us with any of the following:
 
-(Updated Jul 17)
+(Updated Aug 20)
 
 **If you’re breathing (five minute tasks anyone can do):**
 - [Send an email about AI’s risks to all your elected officials simultaneously](https://democracy.io/). If you don’t know what to say, use [our email builder](https://pauseai.info/email-builder).
