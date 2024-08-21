@@ -16,10 +16,13 @@
 
 <SvelteMarkdown
 	source={`
-PauseAI consists almost exclusively of [volunteers](/people) ([sign up
-here](https://airtable.com/appWPTGqZmUcs3NWu/pag7ztLh27Omj5s2n/form)). We are organized in teams,
-each working on a different aspect of our movement. Every team has a leader, regular meetings, and
-a Role on the [discord server](https://discord.gg/2XXWXvErfA). Check out the [vacancies](/vacancies) to see some specific roles that you could take.
+PauseAI consists almost exclusively of [volunteers](/people) ([sign up here](https://airtable.com/appWPTGqZmUcs3NWu/pag7ztLh27Omj5s2n/form)).
+We are organized in teams,
+each working on a different aspect of our movement.
+Every team has a leader, members, a Google Drive folder and a Role + private channel on the [discord server](https://discord.gg/2XXWXvErfA).
+Other than that, Teams are free to choose how they want to work.
+Check out the [vacancies](/vacancies) to see some specific roles that you could take.
+If you want to create a new team, reach out to the Oversight team leader (see below).
 `}
 	renderers={{ link: A }}
 />
@@ -29,8 +32,8 @@ a Role on the [discord server](https://discord.gg/2XXWXvErfA). Check out the [va
 		<p>No team members found</p>
 	{/if}
 	<ul class="people">
-		{#each props as { name, description, leadName, leadEmail }}
-			<Team {name} {description} {leadName} {leadEmail} />
+		{#each props as team}
+			<Team {team} />
 		{/each}
 	</ul>
 </section>

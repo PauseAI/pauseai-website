@@ -9,6 +9,7 @@ function recordToTeam(record: any): Team {
 		description: record.fields.mission,
 		leadName: record.fields.name_from_lead,
 		leadEmail: record.fields.email_address_from_lead,
+		responsibilities: record.fields.responsibilities_names || [],
 		public: record.fields.public
 	}
 }

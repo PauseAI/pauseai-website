@@ -17,5 +17,3 @@ declare module '*.md' {
 	}
 	export const metadata: Record<string, any>
 }
-
-export {}

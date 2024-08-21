@@ -11,7 +11,7 @@ description: If you want to join PauseAI,
 ## Social Media Director
 
 - 8 to 16 hrs a week
-- Lead the Social Media Team (multiple volunteers with diverse relevant skills, some of who create and edit videos)
+- Lead the Comms Team (multiple volunteers with diverse relevant skills, some of who create and edit videos)
 - Stay up to date on AI (safety, governance) news
 - Run our Social Media accounts (Twitter, Facebook, TikTok, LinkedIn, YouTube, Instagram)
 - Share our messages on social media and engage with others
@@ -25,17 +25,13 @@ Interested? [Mail to Joep](mailto:joep@pauseai.info)
 
 Interested? [Mail to Giulia](mailto:giulia@pausai.info)
 
-## Mass Mobilization Organizer
+## Discord Team member
 
-Develop a local plan of mass mobilization, primarily through direct outreach (flyering & postering invites to public meetings) but also to a lesser extent through online/social media outreach as well as virtual meetings- where the objective of the meeting is the establishment of interpersonal relationships between local community members that are organized towards the formation of and growth of a local PauseAI action group that meets regularly and engages in activities towards growth, self-replication and execution of the Pause AI strategic plan.
+- Write the Server Guide
+- Rethink channels and categories to make the server less overwhelming and more productive
+- Moderate
 
-Skills:
-
-- the ability and desire to meet & talk with (potentially lots) of others,
-- a certain physical idefatigability in flyering for extended periods
-- group moderation skills, charisma, verbal communication skills, organizational skills
-
-Interested? [Mail to Guido](mailto:guido@pausai.info)
+Interested? DM Pato in [Discord](https://discord.gg/y9hdAjD83e)
 
 ## Onboarding team member
 
@@ -44,3 +40,12 @@ Interested? [Mail to Guido](mailto:guido@pausai.info)
 - Have one on one calls to find the right team
 
 Interested? [Mail to Maxime](mailto:maxime@pausai.info)
+
+## Recruitment team member
+
+- Help PauseAI reach new communities, attract members and spread awareness
+- This is something you can do independently in your spare time, with little need for coordination with others
+- Come up with campaigns of people you would like to reach out to, and contact them (whether by email, phone, DM, or in-person)
+- Please consider joining if you have a non traditional background or location - this could help us to reach new groups!
+
+Interested? DM Michelle in [Discord](https://discord.gg/y9hdAjD83e)

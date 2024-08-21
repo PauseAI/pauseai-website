@@ -5,7 +5,7 @@ export type Community = {
 	lat: number
 	lon: number
 	/** Will default to PauseAI Discord */
-	link?: string
+	link: string
 	/** Non-PauseAI org */
 	adjacent?: boolean
 }
@@ -182,7 +182,7 @@ const PauseAICommunities: Community[] = [
 		name: 'PauseAI Chicago',
 		lat: 41.8781,
 		lon: -87.6298,
-		link: 'https://discord.gg/JuEmyf5h'
+		link: 'https://discord.gg/3sQM7RGGkD'
 	},
 	{
 		name: 'PauseAI São Paulo',
@@ -272,6 +272,54 @@ const PauseAICommunities: Community[] = [
 		name: 'PauseAI Munich',
 		lat: 48.1372,
 		lon: 11.5761,
+		link: discordInvite
+	},
+	{
+		name: 'PauseAI Cambridge',
+		lat: 52.2053,
+		lon: 0.1192,
+		link: discordInvite
+	},
+	{
+		name: 'PauseAI Hanoi',
+		lat: 21.0285,
+		lon: 105.8048,
+		link: discordInvite
+	},
+	{
+		name: 'PauseAI Gdynia',
+		lat: 54.5168,
+		lon: 18.5419,
+		link: discordInvite
+	},
+	{
+		name: 'PauseAI Madrid',
+		lat: 40.4168,
+		lon: -3.7038,
+		link: discordInvite
+	},
+	{
+		name: 'PauseAI Blackpool',
+		lat: 53.8159,
+		lon: -3.0553,
+		link: discordInvite
+	},
+	{
+		name: 'PauseAI Fort Wayne',
+		lat: 41.0938,
+		lon: -85.1392,
+		link: 'https://www.meetup.com/pauseai-fortwayne/'
+	},
+	{
+		name: 'PauseAI Vancouver',
+		lat: 49.2463,
+		lon: -123.1162,
+		link: discordInvite
+	},
+	{
+		name: 'PauseAI Melbourne',
+		lat: -37.8136,
+		lon: 144.9631,
 		link: discordInvite
 	}
 ]
@@ -438,6 +486,12 @@ const AdjacentCommunities: Community[] = [
 		lat: 55.6761,
 		lon: 12.5683,
 		link: 'https://www.facebook.com/groups/AISafetyDanmark'
+	},
+	{
+		name: 'AI Safety Sydney',
+		lat: -33.8688,
+		lon: 151.2093,
+		link: 'https://www.facebook.com/groups/4642042999234413'
 	}
 ]
 

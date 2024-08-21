@@ -23,6 +23,8 @@
 			<a href="/press">Press / Media</a>
 			<a href="/people">People</a>
 			<a href="/teams">Teams</a>
+			<a href="/partnerships">Partnerships</a>
+			<a href="/privacy">Privacy policy</a>
 			<a href="/legal">Legal Info <br /> Stichting PauseAI <br /> (kvk 92951031)</a>
 		</div>
 		<div class="column">
@@ -77,7 +79,7 @@
 		align-items: center;
 	}
 
-	@media (max-width: 500px) {
+	@media (max-width: 550px) {
 		.socials {
 			width: 100%;
 		}

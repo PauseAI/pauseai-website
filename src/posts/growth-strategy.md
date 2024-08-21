@@ -18,7 +18,7 @@ This is why we are a _movement_, a _community_ something bigger than ourselves.
 - **Be welcoming**. We want to be a group that people like to be part of. Make a good first impression to new people. Allow people to join, even if your opinions differ from theirs. We're united by our goal.
 - **Be recognizable**. We have a clear, visual brand with a recognizable logo and color scheme. Our name says what we want: PauseAI. Our assets are free to use and can be easily found.
 - **Give people responsibility**. We give up some of our control to let others grow. We make big asks and give big responsibilities. When people feel in control, they are more likely to act.
-- **Be a teacher**. Nobody is born an activist or a lobbyist, but we can learn to become one. Share your lessons and experiences, and help others to grow.
+- **Help others grow**. Nobody is born an activist or a lobbyist, but we can learn to become one. Share your lessons and experiences, and help others to grow.
 - **Be personal**. We share our personal stories and emotions. People connect with people, not with abstract ideas.
 - **Build alliances**. We are not alone. We need to work with other groups and movements. We can learn from them and they can learn from us. Find common ground and common interests. Do not push them away if they do not share all our our ideas.
 
@@ -29,7 +29,7 @@ This is why we are a _movement_, a _community_ something bigger than ourselves.
 1. **Join PauseAI**. People fill in the form, and become members. We ask them a couple of questions (where they are from, how they can help). We invite people to join the discord - this is where most of the collaboration happens.
 1. **Onboarding team reaches out**. A special group of volunteers is responsible for making new members feel welcome, and turn interested members into contributing activists. They reach out through email or Discord DMs, and match new members with [vacancies](/vacancies) and [teams](/teams).
 1. **Become a volunteer**. If the volunteer has found a team to join, and if that member is willing to contribute time and sign the agreement, they formally become a volunteer. They can opt-in to be shown on the [People page](/people) and they can get an `@pauseai.info` email address.
-1. **Join a team**. The volunteer should join one or more [teams](/teams) and contributes there!
+1. **Join a team**. The volunteer should join one or more [teams](/teams) and contribute there!
 
 ## Help out
 

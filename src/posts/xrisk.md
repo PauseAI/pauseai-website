@@ -3,7 +3,7 @@ title: The existential risk of superintelligent AI
 description: Why AI is a risk for the future of our existence, and why we need to pause development.
 ---
 
-You can learn about x-risks reading this page, or you can also learn throught [videos, articles, and more media](/learn).
+You can learn about x-risks reading this page, or you can also learn through [videos, articles, and more media](/learn).
 
 ## Experts are sounding the alarm
 
@@ -42,7 +42,7 @@ The leaders of the 3 top AI labs and hundreds of AI scientists have [signed the 
 You might think that a superintelligent AI would be locked inside a computer, and therefore can't affect the real world.
 However, we tend to give AI systems access to the internet, which means that they can do a lot of things:
 
-- [Hack into other computers](/cybersecurity-risks), including all smartphones, laptops, server parks, etc. It could use the sensors of these devices as its eyes and ears, having digital senses everywhere.
+- [Hack into other computers](/cybersecurity-risks), including all smartphones, laptops, server farms, etc. It could use the sensors of these devices as its eyes and ears, having digital senses everywhere.
 - Manipulate people through fake messages, e-mails, bank transfers, videos or phone calls. Humans could become the AI's limbs, without even knowing it.
 - Directly control devices connected to the internet, like cars, planes, robotized (autonomous) weapons or even nuclear weapons.
 - Design a novel bioweapon, e.g. by combining viral strands or by using [protein folding](https://alphafold.ebi.ac.uk) and order it to be printed in a lab.
@@ -86,7 +86,7 @@ The tendency to pursue these subgoals given any high-level goal is called [instr
 
 You might wonder: how can a statistical model that predicts the next word in a chat interface pose any danger?
 You might say: It's not conscious, it's just a bunch of numbers and code.
-And yes, we don't think LLMS are conscious, but that doesn't mean they can't be dangerous.
+And yes, we don't think LLMs are conscious, but that doesn't mean they can't be dangerous.
 
 LLMs, like GPT, are trained to predict or mimic virtually any line of thought.
 It could mimic a helpful mentor, but also someone with bad intentions, a ruthless dictator or a psychopath.

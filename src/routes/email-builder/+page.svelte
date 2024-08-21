@@ -13,6 +13,7 @@
 	import { meta } from './meta'
 	import * as clipboard from 'clipboard-polyfill'
 	import toast from 'svelte-french-toast'
+	import ExternalLink from '$lib/components/custom/a.svelte'
 
 	let top: HTMLHeadingElement
 	const { title, description, date } = meta
@@ -121,8 +122,11 @@
 		who's just good at pitching new, controversial topics and convincing others?
 	</li>
 	<li>
-		<b>Someone who politically represents you.</b> Maybe a politician in parliament from the party that
-		you voted for.
+		<b>Someone who politically represents you.</b> Maybe a politician in parliament from the party
+		that you voted for. <ExternalLink
+			href={'https://www.campaignforaisafety.org/politician/#find-your-politician-here'}
+			>Find their email address</ExternalLink
+		>.
 	</li>
 	<li>
 		<b>Enter their name:</b> <input bind:value={name} placeholder="Name of person" />
@@ -172,7 +176,7 @@
 <h2>Last steps</h2>
 <p>
 	Before sending the email you have to manually replace "__THING__" and "__COUNTRY__". It can also
-	be effective to further personalise the message. Here are some tips:
+	be effective to further personalize the message. Here are some tips:
 </p>
 <ul>
 	<li>

@@ -6,12 +6,15 @@ description: When and where we will be protesting.
 ## Coming up
 
 - [22nd of September, NYC](https://www.eventbrite.com/e/pauseai-nyc-summit-of-the-future-protest-tickets-905766862067)
+<!-- - [23rd of July, San Francisco](https://www.facebook.com/events/2528518090675538) -->
 - [Join PauseAI](/join) to receive updates on upcoming protests.
 
 ## Past Protests
 
 ### 2024
 
+- [30th of July, Washington DC](https://www.facebook.com/events/2528518090675538) (World Pause Coalition)
+- [23rd of July, San Francisco, London, Paris](https://x.com/PauseAI/status/1816550279095238711)
 - [13th of May, San Francisco, London, Stockholm, Berlin, Den Haag, Rome, Paris...](/2024-may)
 - [12th of February, OpenAI, SF](/2024-february)
 

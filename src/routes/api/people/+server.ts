@@ -1,39 +1,59 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { options } from '$lib/api.js'
 import type { Person } from '$lib/types.js'
-import { json } from '@sveltejs/kit'
+import { error, json } from '@sveltejs/kit'
 
 function recordToPerson(record: any): Person {
 	return {
 		id: record.id || 'noId',
 		name: record.fields.Name,
 		bio: record.fields.bio,
-		title: record.fields.Title,
-		image: record.fields.Image && record.fields.Image[0].thumbnails.large.url,
+		title: record.fields.title,
+		image: record.fields.image && record.fields.image[0].thumbnails.large.url,
 		privacy: record.fields.privacy,
 		org: record.fields.organisation,
-		checked: record.fields.Checked
+		checked: record.fields.checked
 	}
 }
 
 const currentOrg = 'International'
 
 const filter = (p: Person) => {
-	console.log(p, p.org?.includes(currentOrg))
 	return p.image && !p.privacy && p.checked && p.org?.includes(currentOrg)
+}
+
+// Airtable API is limited to 100 items per page
+async function fetchAllPages(fetch: any, url: any) {
+	let allRecords: any[] = []
+	// https://airtable.com/developers/web/api/list-records#query-pagesize
+	let offset
+
+	do {
+		const fullUrl = offset ? `${url}?offset=${offset}` : url
+		const response = await fetch(fullUrl, options)
+		if (!response.ok) {
+			throw new Error('Failed to fetch data from Airtable')
+		}
+		const data: any = await response.json()
+		allRecords = allRecords.concat(data.records)
+		offset = data.offset
+	} while (offset)
+
+	return allRecords
 }
 
 export async function GET({ fetch }) {
 	const url = `https://api.airtable.com/v0/appWPTGqZmUcs3NWu/tblZhQc49PkCz3yHd`
 
-	const response = await fetch(url, options)
-	if (!response.ok) {
-		throw new Error('Failed to fetch data from Airtable')
+	try {
+		const records = await fetchAllPages(fetch, url)
+		const out: Person[] = records
+			.map(recordToPerson)
+			.filter(filter)
+			// Shuffle the array, although not truly random
+			.sort(() => 0.5 - Math.random())
+		return json(out)
+	} catch (e) {
+		return error(500, 'err')
 	}
-	const data = await response.json()
-	const out: Person[] = data.records
-		.map(recordToPerson)
-		.filter(filter)
-		// Shuffle the array, although not truly random
-		.sort(() => 0.5 - Math.random())
-	return json(out)
 }

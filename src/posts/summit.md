@@ -1,5 +1,5 @@
 ---
-title: Towards the next AI Safety Summit (Seoul 2024)
+title: Towards the next AI Summit (Paris 2025)
 description: Why we need the AI safety summit to happen, and what it should achieve.
 ---
 
@@ -33,11 +33,13 @@ This summit also led to two follow-up summits to be announced for 2024, in Seoul
 For months, it was unclear what the scope of this Seoul summit would be.
 All that we knew, was that it was going to be a ["virtual mini summit"](https://www.bracknellnews.co.uk/news/national/23898764.ai-safety-institute-will-make-uk-global-hub-rishi-sunak-says/).
 A rather unambitious way to deal with the highly alarming calls for regulation.
-
 In April 2024, the second AI safety summit was [officially announced](https://www.gov.uk/government/news/uk-and-republic-of-korea-to-build-on-legacy-of-bletchley-park) by the UK government.
-The first day will be a virtual event, the second day is an in-person event in Seoul for digital ministers.
-Unfortunately, a [report from Reuters](https://www.reuters.com/technology/second-global-ai-safety-summit-faces-tough-questions-lower-turnout-2024-04-29/) tells us that several countries are not planning to attend it.
-**We are [organizing a protest on May 13th](/2024-may) to convince our ministers to attend the summit and initialize treaty negotiations.**
+We [organized a protest on May 13th](/2024-may) to convince our ministers to attend the summit (some were [not planning on even attending](https://www.reuters.com/technology/second-global-ai-safety-summit-faces-tough-questions-lower-turnout-2024-04-29/) and initialize treaty negotiations toward a pause.
+
+The Summit led to the following things:
+
+1. 16 Companies (most prominent AI companies) signed the ["Frontier AI Safety Commitments"](https://www.gov.uk/government/news/historic-first-as-companies-spanning-north-america-asia-europe-and-middle-east-agree-safety-commitments-on-development-of-ai?utm_source=substack&utm_medium=email), which means these companies will publish RSPs. Previous voluntary commitments [were ignored](https://www.politico.eu/article/rishi-sunak-ai-testing-tech-ai-safety-institute/).
+2. A [new statement](https://www.gov.uk/government/publications/seoul-ministerial-statement-for-advancing-ai-safety-innovation-and-inclusivity-ai-seoul-summit-2024/seoul-ministerial-statement-for-advancing-ai-safety-innovation-and-inclusivity-ai-seoul-summit-2024) was signed by 27 countries.
 
 ## ~~2024~~ 2025 France AI ~~Safety~~ Action Summit
 

@@ -3,16 +3,15 @@ title: Flyering Guide
 description: How to distribute flyers for PauseAI
 ---
 
-Find existing materials in [Flyers](https://drive.google.com/drive/folders/1MAU_bq31bEuylhzkt2NkZ_XRY6TlKaqZ?usp=drive_link).
-
 ## Why Flyering?
 
-- The goal of flyering is to create and grow a local PauseAI community
+- The goal of flyering is to [create](/local-organizing) and grow a [local PauseAI community](/communities)
 - To accomplish that, the goal of flyering should be to announce a meeting or mass gathering, for everyone who is interested to come and learn about PauseAI and what they can do
 
 ## Flyer contents
 
-- Existing flyers can be edited to be more specific to your purpose
+- Find existing materials in [the Flyers folder](https://drive.google.com/drive/folders/1MAU_bq31bEuylhzkt2NkZ_XRY6TlKaqZ?usp=drive_link).
+- Existing flyers can be edited to be more specific to your purpose. Use the [Figma template](https://www.figma.com/community/file/1233064002969152026) to create your own.
 - Add the time and place of your meeting to the flyer
 - Flyers should have clear calls to action
   - (Learn what YOU can do!", "Find out how YOU can help!", "YOU can make a difference!", "Get involved!")
@@ -101,17 +100,17 @@ _Including overly-detailed instructions on how to behave like a person, for thos
 
 ### Some things to say
 
-<u>To get attention:</u>
+To get attention:
 
 1. “Can I get you a flyer?”
 2. “Do you want to know more about the dangers of AI?”
 
-<u>When asked what this is all about:</u>
+When asked what this is all about:
 
-3. **“Trying to close the gap between what the experts say about AI and what most people know”** (this is a very high-value line)
-4. “Maybe we shouldn't build powerful AI systems that we don't know how to control yet”
-5. “A global treaty/moratorium on the largest general-purpose AI training runs”
-6. “We are a grassroots movement concerned about what experts are saying about the risks of AI”
+1. **“Trying to close the gap between what the experts say about AI and what most people know”** (this is a very high-value line)
+2. “Maybe we shouldn't build powerful AI systems that we don't know how to control yet”
+3. “A global treaty/moratorium on the largest general-purpose AI training runs”
+4. “We are a grassroots movement concerned about what experts are saying about the risks of AI”
 
 - Note that **arguments from authority carry weight**
 - Mentioning X-risk right at the start can be a turn-off
