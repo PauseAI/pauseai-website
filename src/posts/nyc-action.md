@@ -12,7 +12,7 @@ date: '2024-8-20'
 - [Send an email about AI’s risks to all your elected officials simultaneously](https://democracy.io/). If you don’t know what to say, use [our email builder](https://pauseai.info/email-builder).
 - Join [our in-person monthly meetings](https://www.eventbrite.com/e/pauseai-monthly-action-meeting-tickets-914711244957) each month on the 11th.
 - Join our online NYC community in the following locations: [Discord](https://discord.com/channels/1100491867675709580/1223374237016784928), [Whatsapp](https://chat.whatsapp.com/KAQMwz2nQeWIkTLxwKxHg1) We mostly use Discord for now, but let us know if you want alternative communication.
-- Follow PauseAINYC on [Instagram](https://www.instagram.com/pauseainyc/)
+- Follow PauseAINYC on [Instagram](https://www.instagram.com/pauseainyc/), or on [Twitter](https://x.com/PauseAINYC).
 
 **If you like to socialize:**
 - Sign up for one of [our events](https://www.eventbrite.com/o/pause-ai-nyc-83065324363). We do everything from public demonstrations in front of AI companies to attending networking sessions with related organizations.
