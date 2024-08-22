@@ -22,7 +22,7 @@ Create a fork / open a pull request (follow the on screen instructions!)
 
 The article will be published automatically when the pull request is merged.
 
-## Running locally
+## Running locally (Linux)
 
 1. [install nvm](https://github.com/nvm-sh/nvm?tab=readme-ov-file#install--update-script).
 2. [install pnpm with corepack](https://pnpm.io/installation#using-corepack).
@@ -31,6 +31,27 @@ The article will be published automatically when the pull request is merged.
 ```sh
 git clone git@github.com:moiri-gamboni/pauseai-france.git
 nvm install
+# Copy the envs and set the variables if needed
+cp template.env .env
+pnpm install
+pnpm run dev
+# Open http://localhost:37572
+```
+
+## Running locally (Windows)
+
+1. [install nvm for windows](https://github.com/coreybutler/nvm-windows/releases).
+2. [install pnpm](https://pnpm.io/installation#on-windows).
+3. Run with elevated privilege :
+
+```sh
+git clone git@github.com:moiri-gamboni/pauseai-france.git
+nvm install latest
+# Use whatever version you just installed here, the setup will give you the correct version anyway
+nvm use <version number>
+# As of 08/22/2024 it was
+# nvm use 22.6.0
+
 # Copy the envs and set the variables if needed
 cp template.env .env
 pnpm install
