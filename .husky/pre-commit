@@ -1,2 +1,2 @@
 pnpm lint-staged
-.\translation-info.sh && git add TRANSLATIONS.md
+bash translation-info.sh && git add TRANSLATIONS.md
