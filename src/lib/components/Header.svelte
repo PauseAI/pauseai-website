@@ -3,22 +3,31 @@
 	import Logo from '$components/Logo.svelte'
 	import { page } from '$app/stores'
 	import Button from '$components/Button.svelte'
+	const enableBot = false
+	import { onMount } from 'svelte'
+	import { fade, fly, blur } from 'svelte/transition'
 
 	$: onHomepage = $page.url.pathname == '/'
 
 	let open = false
+	// Workaround to trigger transitions on render
+	let mounted = false
+	onMount(() => {
+		mounted = true
+	})
 </script>
 
 <!-- probably have to change nav colors and classes to respond to banner presence instead of route -->
-<nav>
-	<a href="/" class="logo">
-		<div class="big-logo">
-			<Logo animate fill_pause={onHomepage ? 'white' : 'black'} />
-		</div>
-		<div class="small-logo">
-			<Logo animate only_circle />
-		</div>
-	</a>
+{#if mounted || !onHomepage}
+	<nav in:fade={{ duration: 500, delay: 200 }}>
+		<a href="/" class="logo">
+			<div class="big-logo">
+				<Logo animate fill_pause={onHomepage ? 'white' : 'black'} />
+			</div>
+			<div class="small-logo">
+				<Logo animate only_circle />
+			</div>
+		</a>
 
 	<div class="nav-right">
 		<div class="nav-links">
@@ -43,47 +52,48 @@
 		</button>
 	</div>
 
-	<div class="sidebar" class:open>
-		<div class="sidebar-head">
-			<a href="/" class="logo">
-				<Logo animate={onHomepage} fill_circle="white" fill_ai="white" />
-			</a>
-			<button aria-label="Close mobile menu" class="hamburger" on:click={() => (open = !open)}>
-				<svg
-					width="24"
-					height="24"
-					viewBox="0 0 24 24"
-					fill="none"
-					xmlns="http://www.w3.org/2000/svg"
-				>
-					<rect
-						y="2.21387"
-						width="3.13043"
-						height="30.8142"
-						transform="rotate(-45 0 2.21387)"
-						fill="black"
-					/>
-					<rect
-						x="21.7891"
-						y="0.000244141"
-						width="3.13043"
-						height="30.8142"
-						transform="rotate(45 21.7891 0.000244141)"
-						fill="black"
-					/>
-				</svg>
-			</button>
+		<div class="sidebar" class:open>
+			<div class="sidebar-head">
+				<a href="/" class="logo">
+					<Logo animate={onHomepage} fill_circle="white" fill_ai="white" />
+				</a>
+				<button aria-label="Close mobile menu" class="hamburger" on:click={() => (open = !open)}>
+					<svg
+						width="24"
+						height="24"
+						viewBox="0 0 24 24"
+						fill="none"
+						xmlns="http://www.w3.org/2000/svg"
+					>
+						<rect
+							y="2.21387"
+							width="3.13043"
+							height="30.8142"
+							transform="rotate(-45 0 2.21387)"
+							fill="black"
+						/>
+						<rect
+							x="21.7891"
+							y="0.000244141"
+							width="3.13043"
+							height="30.8142"
+							transform="rotate(45 21.7891 0.000244141)"
+							fill="black"
+						/>
+					</svg>
+				</button>
+			</div>
+			<div class="sidebar-links">
+				<a href="/dangers" on:click={() => (open = !open)}><h2>Dangers</h2></a>
+				<a href="/propositions" on:click={() => (open = !open)}><h2>Propositions</h2></a>
+				<a href="/agir" on:click={() => (open = !open)}><h2>Agir</h2></a>
+				<a href="https://pauseia.substack.com/" on:click={() => (open = !open)}><h2>Blog</h2></a>
+				<a href="/dons" on:click={() => (open = !open)}><h2>Dons</h2></a>
+				<a href="/nous-rejoindre" on:click={() => (open = !open)}><h2>Nous rejoindre</h2></a>
+			</div>
 		</div>
-		<div class="sidebar-links">
-			<a href="/dangers" on:click={() => (open = !open)}><h2>Dangers</h2></a>
-			<a href="/propositions" on:click={() => (open = !open)}><h2>Propositions</h2></a>
-			<a href="/agir" on:click={() => (open = !open)}><h2>Agir</h2></a>
-			<a href="https://pauseia.substack.com/" on:click={() => (open = !open)}><h2>Blog</h2></a>
-			<a href="/dons" on:click={() => (open = !open)}><h2>Dons</h2></a>
-			<a href="/nous-rejoindre" on:click={() => (open = !open)}><h2>Nous rejoindre</h2></a>
-		</div>
-	</div>
-</nav>
+	</nav>
+{/if}
 
 <style>
 	.sidebar {

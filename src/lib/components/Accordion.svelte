@@ -1,6 +1,7 @@
 <script lang="ts">
-	import { slide } from 'svelte/transition'
+	import { slide, fade } from 'svelte/transition'
 	import { page } from '$app/stores'
+	import Fly from './Fly.svelte'
 
 	export let open = false
 	export let id: string
@@ -14,24 +15,27 @@
 	}
 </script>
 
-<div class="accordion" {id}>
-	<button on:click={handleClick} class="header" aria-expanded={open} aria-controls={details_id}>
-		<h3 class="title" id={title_id}>
-			<slot name="head" />
-		</h3>
+<Fly>
+	<div class="accordion" {id}>
+		<button on:click={handleClick} class="header" aria-expanded={open} aria-controls={details_id}>
+			<h3 class="title" id={title_id}>
+				<slot name="head" />
+			</h3>
 
-		<span class="icon">{open ? '\u2212' : '+'}</span>
-	</button>
-
-	{#if open}
-		<div class="details" transition:slide id={details_id} aria-labelledby={title_id}>
-			<slot name="details" />
-		</div>
-	{/if}
-</div>
+			<span class="icon">{open ? '\u2212' : '+'}</span>
+		</button>
+		{#if open}
+			<div class="details" transition:slide id={details_id} aria-labelledby={title_id}>
+				<div transition:fade={{ duration: 500 }}>
+					<slot name="details" />
+				</div>
+			</div>
+		{/if}
+	</div>
+</Fly>
 
 <style>
-	.accordion:global(:not(:last-child)) {
+	:global(div.inView:not(:last-child)) > .accordion {
 		border-bottom: solid 2px #e6e6e6;
 	}
 

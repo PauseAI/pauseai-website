@@ -1,5 +1,2 @@
-#!/bin/sh
-. "$(dirname "$0")/_/husky.sh"
-
 pnpm lint-staged
 bash translation-info.sh && git add TRANSLATIONS.md
