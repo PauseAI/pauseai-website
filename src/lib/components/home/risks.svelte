@@ -5,22 +5,37 @@
 	import { inview } from 'svelte-inview';
 
 	const label_id = 'risks-title';
-	let isInView;
-	let contentIsInView;
+	let isInView: boolean = false;
+	let contentIsInView: boolean = false;
+
+  interface ChangeEventDetail {
+    inView: boolean;
+  }
+
+  function handleChange(event: Event) {
+    const customEvent = event as CustomEvent;
+    if (customEvent.detail) {
+      const detail = customEvent.detail as ChangeEventDetail;
+      isInView = detail.inView;
+    }
+  }
+
+  function handleChangeContent(event: Event) {
+    const customEvent = event as CustomEvent;
+    if (customEvent.detail) {
+      const detail = customEvent.detail as ChangeEventDetail;
+      contentIsInView = detail.inView;
+    }
+  }
 </script>
 
 <section aria-labelledby={label_id}
   use:inview={{ unobserveOnEnter: true, rootMargin: '-20%' }}
-  on:change={({ detail }) => {
-    isInView = detail.inView;
-  }}>
+  on:change={handleChange}>
     <div class={isInView ? 'visible' : 'hidden'}>
 		<UnderlinedTitle id={label_id}>Les dangers</UnderlinedTitle>
 	</div>
-	<div class={contentIsInView ? 'visible' : 'hidden'}   use:inview={{ unobserveOnEnter: true, rootMargin: '-50%' }}
-  on:change={({ detail }) => {
-    contentIsInView = detail.inView;
-  }}>
+	<div class={contentIsInView ? 'visible' : 'hidden'}   use:inview={{ unobserveOnEnter: true, rootMargin: '-50%' }} on:change={handleChangeContent}>
 		<TabList
 			tabs={['Économiques et matériels', 'Pour les individus', 'Pour la société', 'Pour l’humanité']}
 			id="risks-tabs"

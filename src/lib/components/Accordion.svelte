@@ -15,13 +15,22 @@
 
 	import { inview } from 'svelte-inview';
 
-	let isInView;
+	let isInView: boolean = false;
+
+	interface ChangeEventDetail {
+	inView: boolean;
+	}
+
+	function handleChange(event: Event) {
+		const customEvent = event as CustomEvent;
+		if (customEvent.detail) {
+		  const detail = customEvent.detail as ChangeEventDetail;
+		  isInView = detail.inView;
+		}
+	}
 </script>
 
-<div class={"accordion "+(isInView ? 'visible' : 'hidden')} {id}   use:inview={{ unobserveOnEnter: true, rootMargin: '-10%' }}
-  on:change={({ detail }) => {
-    isInView = detail.inView;
-  }}>
+<div class={"accordion "+(isInView ? 'visible' : 'hidden')} {id}   use:inview={{ unobserveOnEnter: true, rootMargin: '-10%' }} on:change={handleChange}>
 	<button on:click={handleClick} class="header" aria-expanded={open} aria-controls={details_id}>
 		<h3 class="title" id={title_id}>
 			<slot name="head" />

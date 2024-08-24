@@ -3,27 +3,38 @@
 	import { fade } from 'svelte/transition';
 	import { inview } from 'svelte-inview';
 
-	let isInView;
-	let textIsInView;
+	let isInView: boolean = false;
+	let textIsInView: boolean = false;
+	const label_id = 'lead-title';
 
-	const label_id = 'lead-title'
+  interface ChangeEventDetail {
+    inView: boolean;
+  }
+
+  function handleChange(event: Event) {
+    const customEvent = event as CustomEvent;
+    if (customEvent.detail) {
+      const detail = customEvent.detail as ChangeEventDetail;
+      isInView = detail.inView;
+    }
+  }
+
+  function handleChangeContent(event: Event) {
+    const customEvent = event as CustomEvent;
+    if (customEvent.detail) {
+      const detail = customEvent.detail as ChangeEventDetail;
+      textIsInView = detail.inView;
+    }
+  }
 </script>
 
-<section class="lead" aria-labelledby={label_id}
-  use:inview={{ unobserveOnEnter: true, rootMargin: '-20%' }}
-  on:change={({ detail }) => {
-    isInView = detail.inView;
-  }}>
+<section class="lead" aria-labelledby={label_id} use:inview={{ unobserveOnEnter: true, rootMargin: '-20%' }} on:change={handleChange}>
     <div class={isInView ? 'visible' : 'hidden'}>
 		<UnderlinedTitle id={label_id}
 			>L’avènement de l’intelligence artificielle{'\u00A0'}: un défi sans précédent pour l’humanité
 		</UnderlinedTitle>
 	</div>
-	<div class={"lead " + (textIsInView ? 'visible' : 'hidden')} aria-labelledby={label_id}
-  use:inview={{ unobserveOnEnter: true, rootMargin: '-50%' }}
-  on:change={({ detail }) => {
-    textIsInView = detail.inView;
-  }}>
+	<div class={"lead " + (textIsInView ? 'visible' : 'hidden')} aria-labelledby={label_id} use:inview={{ unobserveOnEnter: true, rootMargin: '-50%' }} on:change={handleChangeContent}>
 		<p>
 			Le développement d’intelligences artificielles progresse à une vitesse fulgurante{'\u00A0'}: en
 			2020, elles peinaient à compter jusqu’à dix{'\u00A0'}; aujourd’hui, elles surpassent déjà les
