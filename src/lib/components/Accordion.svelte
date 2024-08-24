@@ -13,24 +13,29 @@
 		open = true
 	}
 
-	import { inview } from 'svelte-inview';
+	import { inview } from 'svelte-inview'
 
-	let isInView: boolean = false;
+	let isInView: boolean = false
 
 	interface ChangeEventDetail {
-	inView: boolean;
+		inView: boolean
 	}
 
 	function handleChange(event: Event) {
-		const customEvent = event as CustomEvent;
+		const customEvent = event as CustomEvent
 		if (customEvent.detail) {
-		  const detail = customEvent.detail as ChangeEventDetail;
-		  isInView = detail.inView;
+			const detail = customEvent.detail as ChangeEventDetail
+			isInView = detail.inView
 		}
 	}
 </script>
 
-<div class={"accordion "+(isInView ? 'visible' : 'hidden')} {id}   use:inview={{ unobserveOnEnter: true, rootMargin: '-10%' }} on:change={handleChange}>
+<div
+	class={'accordion ' + (isInView ? 'visible' : 'hidden')}
+	{id}
+	use:inview={{ unobserveOnEnter: true, rootMargin: '-10%' }}
+	on:change={handleChange}
+>
 	<button on:click={handleClick} class="header" aria-expanded={open} aria-controls={details_id}>
 		<h3 class="title" id={title_id}>
 			<slot name="head" />
@@ -77,7 +82,6 @@
 		margin-left: 1rem;
 	}
 
-
 	.hidden {
 		opacity: 0;
 	}
@@ -93,12 +97,22 @@
 	}
 
 	@keyframes fadeIn {
-	  0% { opacity: 0; transform: translateY(60px); }
-	  100% { opacity: 1; transform: translateY(0); }
+		0% {
+			opacity: 0;
+			transform: translateY(60px);
+		}
+		100% {
+			opacity: 1;
+			transform: translateY(0);
+		}
 	}
 
 	@keyframes fadeInText {
-	  0% { opacity: 0; }
-	  100% { opacity: 1; }
+		0% {
+			opacity: 0;
+		}
+		100% {
+			opacity: 1;
+		}
 	}
 </style>

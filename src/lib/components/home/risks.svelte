@@ -2,42 +2,53 @@
 	import Button from '$components/Button.svelte'
 	import TabList from '$components/TabList.svelte'
 	import UnderlinedTitle from '$components/UnderlinedTitle.svelte'
-	import { inview } from 'svelte-inview';
+	import { inview } from 'svelte-inview'
 
-	const label_id = 'risks-title';
-	let isInView: boolean = false;
-	let contentIsInView: boolean = false;
+	const label_id = 'risks-title'
+	let isInView: boolean = false
+	let contentIsInView: boolean = false
 
-  interface ChangeEventDetail {
-    inView: boolean;
-  }
+	interface ChangeEventDetail {
+		inView: boolean
+	}
 
-  function handleChange(event: Event) {
-    const customEvent = event as CustomEvent;
-    if (customEvent.detail) {
-      const detail = customEvent.detail as ChangeEventDetail;
-      isInView = detail.inView;
-    }
-  }
+	function handleChange(event: Event) {
+		const customEvent = event as CustomEvent
+		if (customEvent.detail) {
+			const detail = customEvent.detail as ChangeEventDetail
+			isInView = detail.inView
+		}
+	}
 
-  function handleChangeContent(event: Event) {
-    const customEvent = event as CustomEvent;
-    if (customEvent.detail) {
-      const detail = customEvent.detail as ChangeEventDetail;
-      contentIsInView = detail.inView;
-    }
-  }
+	function handleChangeContent(event: Event) {
+		const customEvent = event as CustomEvent
+		if (customEvent.detail) {
+			const detail = customEvent.detail as ChangeEventDetail
+			contentIsInView = detail.inView
+		}
+	}
 </script>
 
-<section aria-labelledby={label_id}
-  use:inview={{ unobserveOnEnter: true, rootMargin: '-20%' }}
-  on:change={handleChange}>
-    <div class={isInView ? 'visible' : 'hidden'}>
+<section
+	aria-labelledby={label_id}
+	use:inview={{ unobserveOnEnter: true, rootMargin: '-20%' }}
+	on:change={handleChange}
+>
+	<div class={isInView ? 'visible' : 'hidden'}>
 		<UnderlinedTitle id={label_id}>Les dangers</UnderlinedTitle>
 	</div>
-	<div class={contentIsInView ? 'visible' : 'hidden'}   use:inview={{ unobserveOnEnter: true, rootMargin: '-50%' }} on:change={handleChangeContent}>
+	<div
+		class={contentIsInView ? 'visible' : 'hidden'}
+		use:inview={{ unobserveOnEnter: true, rootMargin: '-50%' }}
+		on:change={handleChangeContent}
+	>
 		<TabList
-			tabs={['Économiques et matériels', 'Pour les individus', 'Pour la société', 'Pour l’humanité']}
+			tabs={[
+				'Économiques et matériels',
+				'Pour les individus',
+				'Pour la société',
+				'Pour l’humanité'
+			]}
 			id="risks-tabs"
 			let:tab
 			{label_id}
@@ -47,9 +58,9 @@
 				{#if tab === 'Économiques et matériels'}
 					<p>
 						<i>Maman, quand je serai grand, je serai… inutile ?</i> Les laboratoires d'IA ont pour projet
-						d'automatiser la totalité du travail humain d'ici 4 ans. Qu'ils atteignent pleinement cet objectif
-						ou non, il est évident que nous nous dirigeons vers un bouleversement majeur du marché du travail.
-						Nous devons nous préparer à affronter un choc économique sans précédent.
+						d'automatiser la totalité du travail humain d'ici 4 ans. Qu'ils atteignent pleinement cet
+						objectif ou non, il est évident que nous nous dirigeons vers un bouleversement majeur du
+						marché du travail. Nous devons nous préparer à affronter un choc économique sans précédent.
 					</p>
 					<p>
 						Les dangers économiques et matériels liés aux intelligences artificielles menacent
@@ -67,10 +78,10 @@
 					<Button href="/dangers/economiques-et-materiels">En apprendre davantage</Button>
 				{:else if tab === 'Pour les individus'}
 					<p>
-						Imaginez-vous sur une application de rencontre, échangeant des messages avec ce qui semble
-						être la personne parfaite. Mais êtes-vous vraiment en train de discuter avec un être
-						humain ? Aujourd'hui, la réponse peut sembler évidente, mais cette réalité est sur le
-						point de changer radicalement. La technologie permettant de créer des conversations
+						Imaginez-vous sur une application de rencontre, échangeant des messages avec ce qui
+						semble être la personne parfaite. Mais êtes-vous vraiment en train de discuter avec un
+						être humain ? Aujourd'hui, la réponse peut sembler évidente, mais cette réalité est sur
+						le point de changer radicalement. La technologie permettant de créer des conversations
 						indiscernables d'interactions humaines existe déjà. Elle sera bientôt déployée et rendra
 						impossible toute distinction entre un humain et une IA.
 					</p>
@@ -86,8 +97,8 @@
 						Selon la majorité des experts, les intelligences artificielles seront capables de
 						concevoir et synthétiser à très court terme des virus plus mortels que tout ce que nous
 						connaissons aujourd'hui. Le bioterrorisme assisté par l'IA n'est qu'un exemple parmi une
-						multitude de menaces émergentes. Le risque de cyberattaques dévastatrices, orchestrées ou
-						amplifiées par des IA sophistiquées, plane sur nos infrastructures critiques et nos
+						multitude de menaces émergentes. Le risque de cyberattaques dévastatrices, orchestrées
+						ou amplifiées par des IA sophistiquées, plane sur nos infrastructures critiques et nos
 						systèmes de communication.
 					</p>
 					<p>
@@ -101,10 +112,10 @@
 				{:else if tab === 'Pour l’humanité'}
 					<p>
 						OpenAI, DeepMind, Anthropic et d'autres géants technologiques investissent des milliards
-						de dollars dans la création d'une IA aux capacités surhumaines. Leurs dirigeants affirment
-						qu'ils pourraient réussir dans les quatres prochaines années. Ils admettent ne pas savoir
-						comment contrôler leur création et reconnaissent publiquement que l'humanité pourrait
-						s'éteindre à cause de celle-ci.
+						de dollars dans la création d'une IA aux capacités surhumaines. Leurs dirigeants
+						affirment qu'ils pourraient réussir dans les quatres prochaines années. Ils admettent ne
+						pas savoir comment contrôler leur création et reconnaissent publiquement que l'humanité
+						pourrait s'éteindre à cause de celle-ci.
 					</p>
 					<p>
 						Les plus éminents experts en IA ont signé une lettre ouverte avertissant que "L'IA
@@ -116,10 +127,11 @@
 						extinction de l'humanité causée par l'IA.
 					</p>
 					<p>
-						Jamais auparavant l'humanité n'a fait face à une menace aussi imminente et potentiellement
-						catastrophique. Contrairement à d'autres défis, la crise de l'IA se distingue par son
-						extrême urgence et son potentiel de transformation radicale à très court terme, suscitant
-						une mobilisation sans précédent des plus grands esprits de notre époque.
+						Jamais auparavant l'humanité n'a fait face à une menace aussi imminente et
+						potentiellement catastrophique. Contrairement à d'autres défis, la crise de l'IA se
+						distingue par son extrême urgence et son potentiel de transformation radicale à très
+						court terme, suscitant une mobilisation sans précédent des plus grands esprits de notre
+						époque.
 					</p>
 					<p>Allons-nous attendre une catastrophe mondiale pour réagir ?</p>
 					<Button href="/dangers/pour-l'humanite">En apprendre davantage</Button>
@@ -140,7 +152,13 @@
 	}
 
 	@keyframes fadeIn {
-	  0% { opacity: 0; transform: translateY(60px); }
-	  100% { opacity: 1; transform: translateY(0); }
+		0% {
+			opacity: 0;
+			transform: translateY(60px);
+		}
+		100% {
+			opacity: 1;
+			transform: translateY(0);
+		}
 	}
 </style>
