@@ -1,23 +1,24 @@
 <script lang="ts">
+	import { X } from 'lucide-svelte'
 	let visible = true // Initially, the banner is visible
 </script>
 
 {#if visible}
 	<div class="banner">
 		<div class="banner-message"><slot /></div>
-		<button class="close-btn" on:click={() => (visible = false)}>x</button>
+		<button class="close-btn" on:click={() => (visible = false)}><X /></button>
 	</div>
 {/if}
 
 <style>
 	.banner {
-		padding: 1rem;
 		background-color: var(--brand);
 		text-align: center;
 		color: var(--black);
 		font-family: var(--font-heading);
 		position: relative;
 		display: flex;
+		align-items: center;
 	}
 
 	.banner-message {
@@ -37,10 +38,14 @@
 	}
 
 	.close-btn {
-		background: none;
-		border: none;
-		font-size: 1.2em;
+		display: flex;
+		justify-content: center;
+		align-items: center;
 		color: var(--black);
 		cursor: pointer;
+
+		/* Appropriate tap targets */
+		height: 48px;
+		width: 48px;
 	}
 </style>
