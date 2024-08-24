@@ -26,7 +26,7 @@
 		</button>
 		{#if open}
 			<div class="details" transition:slide id={details_id} aria-labelledby={title_id}>
-				<div transition:fade={{ duration: 800 }}>
+				<div transition:fade={{ duration: 500 }}>
 					<slot name="details" />
 				</div>
 			</div>
