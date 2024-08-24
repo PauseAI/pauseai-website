@@ -48,9 +48,6 @@ pnpm run dev
 git clone git@github.com:moiri-gamboni/pauseai-france.git
 nvm install lts
 nvm use lts
-# As of 08/22/2024 it was
-# nvm use 22.6.0
-
 # Copy the envs and set the variables if needed
 cp template.env .env
 pnpm install
