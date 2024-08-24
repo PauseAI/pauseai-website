@@ -2,46 +2,16 @@
 	import Button from '$components/Button.svelte'
 	import TabList from '$components/TabList.svelte'
 	import UnderlinedTitle from '$components/UnderlinedTitle.svelte'
-	import { inview } from 'svelte-inview'
+	import Fly from '$components/Fly.svelte'
 
 	const label_id = 'risks-title'
-	let isInView: boolean = false
-	let contentIsInView: boolean = false
-
-	interface ChangeEventDetail {
-		inView: boolean
-	}
-
-	function handleChange(event: Event) {
-		const customEvent = event as CustomEvent
-		if (customEvent.detail) {
-			const detail = customEvent.detail as ChangeEventDetail
-			isInView = detail.inView
-		}
-	}
-
-	function handleChangeContent(event: Event) {
-		const customEvent = event as CustomEvent
-		if (customEvent.detail) {
-			const detail = customEvent.detail as ChangeEventDetail
-			contentIsInView = detail.inView
-		}
-	}
 </script>
 
-<section
-	aria-labelledby={label_id}
-	use:inview={{ unobserveOnEnter: true, rootMargin: '-20%' }}
-	on:change={handleChange}
->
-	<div class={isInView ? 'visible' : 'hidden'}>
+<section aria-labelledby={label_id}>
+	<Fly offsetPercentage={0.2}>
 		<UnderlinedTitle id={label_id}>Les dangers</UnderlinedTitle>
-	</div>
-	<div
-		class={contentIsInView ? 'visible' : 'hidden'}
-		use:inview={{ unobserveOnEnter: true, rootMargin: '-50%' }}
-		on:change={handleChangeContent}
-	>
+	</Fly>
+	<Fly offsetPercentage={0.5}>
 		<TabList
 			tabs={[
 				'Économiques et matériels',
@@ -138,27 +108,5 @@
 				{/if}
 			</svelte:fragment>
 		</TabList>
-	</div>
+	</Fly>
 </section>
-
-<style>
-	.hidden {
-		opacity: 0;
-	}
-
-	.visible {
-		animation: fadeIn 0.5s ease-in-out forwards;
-		animation-delay: 0s;
-	}
-
-	@keyframes fadeIn {
-		0% {
-			opacity: 0;
-			transform: translateY(60px);
-		}
-		100% {
-			opacity: 1;
-			transform: translateY(0);
-		}
-	}
-</style>
