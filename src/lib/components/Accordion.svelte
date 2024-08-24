@@ -35,7 +35,7 @@
 </Fly>
 
 <style>
-	.accordion:global(:not(:last-child)) {
+	:global(div.inView:not(:last-child)) > .accordion {
 		border-bottom: solid 2px #e6e6e6;
 	}
 
