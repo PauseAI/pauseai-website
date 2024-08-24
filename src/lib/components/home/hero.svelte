@@ -23,9 +23,9 @@
 		</h1>
 		<div class="description">
 			<p>
-				Selon la majorité des experts, le développement rapide de l'intelligence artificielle présente
-				un danger catastrophique pour l'humanité à très court terme, au potentiel plus dévastateur que
-				la bombe atomique.
+				Selon la majorité des experts, le développement rapide de l'intelligence artificielle
+				présente un danger catastrophique pour l'humanité à très court terme, au potentiel plus
+				dévastateur que la bombe atomique.
 			</p>
 			<p>Nous faisons face à la menace la plus urgente de notre histoire. Chaque jour compte.</p>
 			<div class="buttons">
@@ -66,7 +66,25 @@
 		flex-direction: column;
 		justify-content: center;
 		max-width: 100%;
+		opacity: 0;
+		animation: fadeIn 0.5s ease-in-out forwards;
+		animation-delay: 0.2s;
 	}
+
+	.buttons {
+		opacity: 0;
+		animation: fadeIn 0.3s ease-in-out forwards;
+		transform: translateY(20px);
+		animation-delay: 0.7s;
+	}
+
+	@keyframes fadeIn {
+		to {
+			opacity: 1;
+			transform: translateY(0);
+		}
+	}
+
 	.content h1 {
 		font-size: 1.6rem;
 	}
@@ -82,6 +100,14 @@
 		width: 100%;
 		height: 100%;
 		object-fit: cover;
+		filter: blur(10px);
+		animation: blurIn 2s ease-in-out forwards;
+	}
+
+	@keyframes blurIn {
+		to {
+			filter: blur(0);
+		}
 	}
 	.corners {
 		width: 100vw;

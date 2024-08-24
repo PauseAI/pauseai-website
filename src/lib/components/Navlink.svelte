@@ -27,6 +27,7 @@
 		font-size: 1rem;
 		/* Appropriate tap targets */
 		min-width: 48px;
+		transition-delay: 100ms;
 	}
 
 	a.c2a {
@@ -41,7 +42,7 @@
 	}
 	a:hover {
 		color: var(--brand);
-		text-decoration: underline;
+		/*text-decoration: underline;*/
 	}
 	@media (min-width: 1024px) {
 		a {
