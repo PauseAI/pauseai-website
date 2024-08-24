@@ -16,7 +16,6 @@
 		text-align: center;
 		color: var(--black);
 		font-family: var(--font-heading);
-		position: relative;
 		display: flex;
 		align-items: center;
 	}
