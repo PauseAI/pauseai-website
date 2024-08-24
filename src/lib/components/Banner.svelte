@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
 	let visible = true // Initially, the banner is visible
 </script>
 
@@ -26,15 +26,15 @@
 
 	:global(.banner a) {
 		font-weight: bold;
-	} 
-	
+	}
+
 	:global(.banner a.active) {
 		color: var(--black);
 	}
 
 	:global(.banner a:hover) {
 		color: var(--black);
-	} 
+	}
 
 	.close-btn {
 		background: none;
