@@ -7,7 +7,7 @@
 </script>
 
 <section class="faq" aria-labelledby={label_id}>
-	<Fly offsetPercentage={0.2}>
+	<Fly>
 		<UnderlinedTitle id={label_id}>F.A.Q.</UnderlinedTitle>
 	</Fly>
 	<FAQ />

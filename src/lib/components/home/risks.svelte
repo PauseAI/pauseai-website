@@ -8,10 +8,10 @@
 </script>
 
 <section aria-labelledby={label_id}>
-	<Fly offsetPercentage={0.2}>
+	<Fly>
 		<UnderlinedTitle id={label_id}>Les dangers</UnderlinedTitle>
 	</Fly>
-	<Fly offsetPercentage={0.5}>
+	<Fly>
 		<TabList
 			tabs={[
 				'Économiques et matériels',

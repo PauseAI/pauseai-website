@@ -6,12 +6,12 @@
 </script>
 
 <section class="lead" aria-labelledby={label_id}>
-	<Fly offsetPercentage={0.2}>
+	<Fly>
 		<UnderlinedTitle id={label_id}
 			>L’avènement de l’intelligence artificielle{'\u00A0'}: un défi sans précédent pour l’humanité
 		</UnderlinedTitle>
 	</Fly>
-	<Fly offsetPercentage={0.5}>
+	<Fly>
 		<div class="lead" aria-labelledby={label_id}>
 			<p>
 				Le développement d’intelligences artificielles progresse à une vitesse fulgurante{'\u00A0'}:
