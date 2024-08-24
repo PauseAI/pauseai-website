@@ -46,9 +46,8 @@ pnpm run dev
 
 ```sh
 git clone git@github.com:moiri-gamboni/pauseai-france.git
-nvm install latest
-# Use whatever version you just installed here, the setup will give you the correct version anyway
-nvm use <version number>
+nvm install lts
+nvm use lts
 # As of 08/22/2024 it was
 # nvm use 22.6.0
 

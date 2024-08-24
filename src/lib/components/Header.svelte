@@ -19,10 +19,9 @@
 	})
 </script>
 
-<Banner
-	message="Participez à notre conférence de lancement du 10 septembre <a href=&quot;https://pauseia.fr/propositions&quot; target=&quot;_blank&quot;>en vous inscrivant ici</a>"
-	bgColor="var(--brand)"
-/>
+<Banner>
+	Participez à notre conférence de lancement du 10 septembre <a href="https://lu.ma/t648gs2x" target="_blank">en vous inscrivant ici</a>	
+</Banner>
 
 <!-- probably have to change nav colors and classes to respond to banner presence instead of route -->
 {#if mounted || !onHomepage}
