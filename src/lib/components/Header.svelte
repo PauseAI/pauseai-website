@@ -3,6 +3,8 @@
 	import Logo from '$components/Logo.svelte'
 	import { page } from '$app/stores'
 	import Button from '$components/Button.svelte'
+	import Banner from '$components/Banner.svelte'
+
 	const enableBot = false
 	import { onMount } from 'svelte'
 	import { fade, fly, blur } from 'svelte/transition'
@@ -17,6 +19,11 @@
 	})
 </script>
 
+<Banner>
+	Conférence à Paris{'\u00A0'}: «{'\u00A0'}Dangers de l'IA - La France dans le déni {'\u202F'}?{'\u00A0'}»
+	| <a href="https://lu.ma/t648gs2x" target="_blank">Réservez votre place ici</a>
+</Banner>
+
 <!-- probably have to change nav colors and classes to respond to banner presence instead of route -->
 {#if mounted || !onHomepage}
 	<nav in:fade={{ duration: 500, delay: 200 }}>
@@ -29,28 +36,28 @@
 			</div>
 		</a>
 
-	<div class="nav-right">
-		<div class="nav-links">
-			<NavLink href="/dangers">Dangers</NavLink>
-			<NavLink href="/propositions">Propositions</NavLink>
-			<NavLink href="https://pauseia.substack.com/">Blog</NavLink>
-			<NavLink href="/dons">Donner</NavLink>
-			<Button href="/agir" alt={onHomepage}>Agir</Button>
+		<div class="nav-right">
+			<div class="nav-links">
+				<NavLink href="/dangers">Dangers</NavLink>
+				<NavLink href="/propositions">Propositions</NavLink>
+				<NavLink href="https://pauseia.substack.com/">Blog</NavLink>
+				<NavLink href="/dons">Donner</NavLink>
+				<Button href="/agir" alt={onHomepage}>Agir</Button>
+			</div>
+			<button aria-label="Open mobile menu" class="hamburger" on:click={() => (open = !open)}>
+				<svg
+					width="24"
+					height="24"
+					viewBox="0 0 24 24"
+					fill="none"
+					xmlns="http://www.w3.org/2000/svg"
+				>
+					<rect y="0" height="3" width="24" fill={onHomepage ? 'white' : 'black'} />
+					<rect y="10.5" height="3" width="24" fill={onHomepage ? 'white' : 'black'} />
+					<rect y="21" height="3" width="24" fill={onHomepage ? 'white' : 'black'} />
+				</svg>
+			</button>
 		</div>
-		<button aria-label="Open mobile menu" class="hamburger" on:click={() => (open = !open)}>
-			<svg
-				width="24"
-				height="24"
-				viewBox="0 0 24 24"
-				fill="none"
-				xmlns="http://www.w3.org/2000/svg"
-			>
-				<rect y="0" height="3" width="24" fill={onHomepage ? 'white' : 'black'} />
-				<rect y="10.5" height="3" width="24" fill={onHomepage ? 'white' : 'black'} />
-				<rect y="21" height="3" width="24" fill={onHomepage ? 'white' : 'black'} />
-			</svg>
-		</button>
-	</div>
 
 		<div class="sidebar" class:open>
 			<div class="sidebar-head">
