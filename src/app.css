@@ -123,7 +123,7 @@ section:not(:last-child) {
 	}
 
 	section:not(:last-child) {
-		margin-bottom: 10rem;
+		margin-bottom: 5rem;
 	}
 }
 
