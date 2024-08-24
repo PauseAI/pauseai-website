@@ -19,7 +19,7 @@
 		<div class="overlay">
 			<enhanced:img
 				src="$assets/hero_bg.jpg"
-				in:blur={{ amount: 10, duration: 2000, opacity: 1 }}
+				in:blur={{ amount: 10, duration: 1500, opacity: 1 }}
 				alt="PauseAI protesters"
 				class="background"
 				sizes="min(1920px, 100vw)"
