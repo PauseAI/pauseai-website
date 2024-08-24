@@ -146,7 +146,7 @@
 		display: flex;
 		justify-content: space-between;
 		flex-wrap: wrap;
-		z-index: 1;
+		z-index: 2;
 	}
 
 	nav,
