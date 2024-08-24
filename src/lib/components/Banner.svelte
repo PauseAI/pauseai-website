@@ -45,6 +45,6 @@
 
 		/* Appropriate tap targets */
 		height: 48px;
-		width: 48px;
+		min-width: 48px;
 	}
 </style>
