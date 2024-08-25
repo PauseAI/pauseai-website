@@ -20,6 +20,6 @@
 	{/if}
 </hgroup>
 
-<div class="prose">
+<div>
 	<svelte:component this={content} />
 </div>

@@ -26,6 +26,9 @@
 		justify-content: space-between;
 		align-items: baseline;
 	}
+	.small-text {
+		font-size: 0.875rem;
+	}
 	article {
 		padding: 1.25rem 2rem;
 		display: flex;

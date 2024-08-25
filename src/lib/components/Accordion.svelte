@@ -64,4 +64,9 @@
 		line-height: 0;
 		margin-left: 1rem;
 	}
+
+	h3 {
+		font-size: 1.5rem;
+		margin: 0;
+	}
 </style>

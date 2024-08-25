@@ -7,7 +7,6 @@
 	export let data
 
 	const { metadata, slug, content } = data
-	console.log(metadata)
 	const { title = slug, date, description, image, original } = metadata
 	// const parent = slug.split('/').slice(0, -1).join('/')
 </script>
@@ -22,7 +21,7 @@
 		{/if}
 	</hgroup>
 
-	<div class="prose">
+	<div>
 		<svelte:component this={content} />
 	</div>
 	{#if original}

@@ -17,6 +17,8 @@
 		--y-offset: 0.17rem;
 
 		font-size: 1.5rem;
+		margin-top: 0;
+		margin-bottom: 2rem;
 		margin-right: var(--x-offset);
 	}
 
@@ -49,6 +51,7 @@
 			--x-offset: 1.375rem;
 			--y-offset: 0.3rem;
 			font-size: 2rem;
+			margin-bottom: 4rem;
 		}
 	}
 </style>
