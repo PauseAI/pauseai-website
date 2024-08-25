@@ -64,6 +64,7 @@
 		gap: 2rem;
 		overflow: hidden;
 		padding: 2rem;
+		font-size: 1rem;
 	}
 
 	.logo {
@@ -115,7 +116,7 @@
 	.brand p {
 		margin-top: 1rem;
 		margin-bottom: 0;
-		text-align: center;
+		text-align: left;
 		font-style: italic;
 	}
 	@media (min-width: 480px) {

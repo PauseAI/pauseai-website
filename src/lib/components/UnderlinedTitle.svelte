@@ -1,14 +1,24 @@
 <script lang="ts">
 	export let id = ''
+	export let as = 'h2'
 </script>
 
-<h2 {id}>
-	<span>
-		<slot />
-	</span>
-</h2>
+{#if as === 'h1'}
+	<h1 {id}>
+		<span>
+			<slot />
+		</span>
+	</h1>
+{:else if as === 'h2'}
+	<h2 {id}>
+		<span>
+			<slot />
+		</span>
+	</h2>
+{/if}
 
 <style>
+	h1,
 	h2 {
 		/* Increasing thickness grows the underline towards the top */
 		--underline-thickness: calc(0.75 * 1.1875rem);
@@ -16,10 +26,12 @@
 		/* Vertical offset is calculated from bottom of the underline */
 		--y-offset: 0.17rem;
 
-		font-size: 1.5rem;
+		margin-top: 0;
+		margin-bottom: 2rem;
 		margin-right: var(--x-offset);
 	}
 
+	h1 span,
 	h2 span {
 		/* Create underline using background gradient */
 		background-image: linear-gradient(
@@ -44,11 +56,12 @@
 	}
 
 	@media (min-width: 640px) {
+		h1,
 		h2 {
 			--underline-thickness: 1.1875rem;
 			--x-offset: 1.375rem;
 			--y-offset: 0.3rem;
-			font-size: 2rem;
+			margin-bottom: 4rem;
 		}
 	}
 </style>

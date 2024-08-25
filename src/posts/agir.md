@@ -6,33 +6,28 @@ original:
   url: https://github.com/PauseAI/pauseai-website/blob/95be1d5327015a2c41f5c518d92812d7f6c79bda/src/posts/action.md
 ---
 
-Le nombre de personnes conscientes des risques liés à l'IA est encore restreint. Vous en faites désormais partie. **Vos actions ont plus de poids que vous ne l’imaginez.**
+Le nombre de personnes conscientes des risques liés à l'IA est encore restreint.
+
+Vous en faites désormais partie.
+
+**Vos actions ont plus de poids que vous ne l’imaginez.**
 
 ## Ce que vous pouvez faire dès maintenant
 
 - **[Rejoignez Pause IA](/nous-rejoindre)** et aidez-nous à prendre de l’ampleur.
-- **Rejoignez notre [serveur Discord](https://discord.gg/vyXGd7AeGc)** et collaborez avec notre communauté active sur des campagnes de sensibilisation et d’information, des vidéos, des articles de blog, etc.
 - **[Faites un don](/dons) à Pause IA** ou achetez des produits dérivés dans la boutique en ligne de PauseAI Global.
 - **Signez des pétitions** :
   - [Traité international sur l'IA](https://aitreaty.org/)
   - [Interdire la superintelligence](https://www.change.org/p/ban-superintelligence-stop-ai-driven-human-extinction-risk?utm_content=cl_sharecopy_37871653_en-US%3A4&recruited_by_id=91d3fbf0-cc46-11ee-911b-5975de1bf878&utm_source=share_petition&utm_medium=copylink&utm_campaign=psf_combo_share_initial&share_bandit_exp=initial-37871653-en-US)
   - [Exiger une IA responsable](https://www.change.org/p/artificial-intelligence-time-is-running-out-for-responsible-ai-development-2a2f1a13-b63a-4d8c-979b-b144bded2f48)
-- **[Apprenez-en davantage](/dangers)** sur l'alignement de l'IA et les risques qui nous menacent.
-- **Abordez ce sujet** avec les personnes de votre entourage, répondez à leurs questions et incitez-les à agir.
-- **Suivez nos chaînes** sur les réseaux sociaux et restez informés :
-  - [Discord](https://discord.gg/vyXGd7AeGc)
-  - [Twitter](https://twitter.com/pause_ia)
-  - [Facebook](https://www.facebook.com/Pause.IA)
-  - [TikTok](https://www.tiktok.com/@pause_ia)
-  - [LinkedIn](https://www.linkedin.com/company/pause-ia/)
-    - Ajoutez Pause IA à votre CV et activez « partagez ces mises à jour du profil avec votre réseau ». C'est un moyen simple de faire connaître nos efforts à de nombreuses personnes.
-  - [YouTube](https://www.youtube.com/@Pause_IA)
-  - [Instagram](https://www.instagram.com/pause_ia)
-  - [Threads](https://www.threads.net/@pause_ia)
+- **[Informez-vous](/dangers)** sur l'alignement de l'IA et les risques qui nous menacent.
+- **Parlez-en** avec les personnes de votre entourage, répondez à leurs questions et incitez-les à agir.
+- **Suivez nos chaînes** sur les réseaux sociaux et restez informés : [Discord](https://discord.gg/vyXGd7AeGc), [Twitter](https://twitter.com/pause_ia), [Facebook](https://www.facebook.com/Pause.IA), [TikTok](https://www.tiktok.com/@pause_ia), [LinkedIn](https://www.linkedin.com/company/pause-ia/), [Instagram](https://www.instagram.com/pause_ia), [Threads](https://www.threads.net/@pause_ia), [YouTube](https://www.youtube.com/@Pause_IA)
+- **Ajoutez Pause IA à LinkedIn et activez « partagez ces mises à jour du profil avec votre réseau ».** C'est un moyen simple de faire connaître nos efforts à de nombreuses personnes.
 - **Échangez** sur les risques de l'IA sur les réseaux sociaux.
-- **Envoyez un email à un politique** : Les emails sont très efficaces, vous pourriez être surpris !
-- **[Manifestez](https://pauseai.info/protests)** : Rejoignez une des [manifestations](https://pauseai.info/protests) en France et dans le monde.
+- **[Envoyez un email à un politicien](https://pauseai.info/email-builder)** : Les emails sont très efficaces, vous pourriez être surpris !
 - **[Faites du lobbying](https://pauseai.info/lobby-tips)** : Persuadez votre gouvernement d'œuvrer pour un moratoire international sur l’IA et préparez-vous pour [le sommet](https://pauseai.info/summit).
+- **[Manifestez](https://pauseai.info/protests)** : Rejoignez une des [manifestations](https://pauseai.info/protests) en France et dans le monde.
 
 ## Et si...
 

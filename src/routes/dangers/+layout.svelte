@@ -139,7 +139,8 @@
 		display: none;
 	}
 
-	.side-nav ul {
+	.side-nav ul,
+	li {
 		padding-left: 0;
 	}
 

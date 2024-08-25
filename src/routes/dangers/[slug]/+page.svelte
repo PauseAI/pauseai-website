@@ -14,12 +14,12 @@
 <PostMeta title={`${title} | ${siteName}`} {description} {date} {image} />
 
 <hgroup>
-	<UnderlinedTitle>{title}</UnderlinedTitle>
+	<UnderlinedTitle as="h1">{title}</UnderlinedTitle>
 	{#if date}
 		<!-- <p>Published at {formatDate(date)}</p> -->
 	{/if}
 </hgroup>
 
-<div class="prose">
+<div>
 	<svelte:component this={content} />
 </div>

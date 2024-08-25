@@ -7,7 +7,6 @@
 	export let data
 
 	const { metadata, slug, content } = data
-	console.log(metadata)
 	const { title = slug, date, description, image, original } = metadata
 	// const parent = slug.split('/').slice(0, -1).join('/')
 </script>
@@ -16,13 +15,13 @@
 
 <article>
 	<hgroup>
-		<UnderlinedTitle>{title}</UnderlinedTitle>
+		<UnderlinedTitle as="h1">{title}</UnderlinedTitle>
 		{#if date}
 			<!-- <p>Published at {formatDate(date)}</p> -->
 		{/if}
 	</hgroup>
 
-	<div class="prose">
+	<div>
 		<svelte:component this={content} />
 	</div>
 	{#if original}

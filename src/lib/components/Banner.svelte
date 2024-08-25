@@ -18,6 +18,7 @@
 		font-family: var(--font-heading);
 		display: flex;
 		align-items: center;
+		font-size: 1rem;
 	}
 
 	.banner-message {

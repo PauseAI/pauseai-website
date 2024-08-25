@@ -27,7 +27,7 @@
 				loading="eager"
 			/>
 		</div>
-		<section class="content" in:fade={{ duration: 500, delay: 200 }}>
+		<div class="content" in:fade={{ duration: 500, delay: 200 }}>
 			<h1 id={label_id}>
 				Ne laissons pas l'IA nous{'\u00A0'}détruire, <br /><Mark>agissons maintenant</Mark>
 			</h1>
@@ -44,7 +44,7 @@
 					</div>
 				</div>
 			</div>
-		</section>
+		</div>
 		<div class="corners">
 			<LeftCorner />
 			<RightCorner />
@@ -79,9 +79,13 @@
 		flex-direction: column;
 		justify-content: center;
 		max-width: 100%;
+		/* height of the nav */
+		margin-bottom: 6.125rem;
 	}
 
 	.content h1 {
+		margin-top: 0;
+		margin-bottom: 1.5rem;
 		font-size: 1.6rem;
 	}
 	/* Ensures that the description is constrained by the width of h1 */
@@ -159,6 +163,7 @@
 			--hero-top-offset: -8.125rem;
 		}
 		.content h1 {
+			margin-bottom: 2rem;
 			font-size: 2.1rem;
 		}
 	}
