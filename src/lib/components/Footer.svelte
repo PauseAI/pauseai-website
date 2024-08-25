@@ -116,7 +116,7 @@
 	.brand p {
 		margin-top: 1rem;
 		margin-bottom: 0;
-		text-align: center;
+		text-align: left;
 		font-style: italic;
 	}
 	@media (min-width: 480px) {
