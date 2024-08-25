@@ -64,6 +64,7 @@
 		gap: 2rem;
 		overflow: hidden;
 		padding: 2rem;
+		font-size: 1rem;
 	}
 
 	.logo {
