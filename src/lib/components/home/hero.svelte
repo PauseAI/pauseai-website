@@ -181,7 +181,9 @@
 		}
 		.overlay::after {
 			background:	var(--hero-gradient),
-				radial-gradient(40% 15% at top 5% right 33%, rgba(14,14,14,0.5) 0%,rgba(11,11,11,0.4) 60%,rgba(0,0,0,0) 100%);
+			radial-gradient(35% 30% at top 2% right 15%, rgb(0 0 0 / 40%), rgb(0 0 0 / 20%) 66%, rgb(0 0 0 / 0%));
+			/* radial-gradient(40% 15% at top 5% right 33%, rgba(14,14,14,0.5) 0%,rgba(11,11,11,0.4) 60%,rgba(0,0,0,0) 100%); */
+				
 		}		
 	}
 	@media (min-width: 1280px) {
