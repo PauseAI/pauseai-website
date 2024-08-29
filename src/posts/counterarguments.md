@@ -13,8 +13,10 @@ But it could also be [dangerous](/risks), including [existential risks](/xrisk).
 ## Human extinction? That's just AI companies hyping up their tech
 
 But it's not just AI companies saying it’s an existential threat.
-Hundreds of AI scientists have [signed](https://www.safe.ai/work/statement-on-ai-risk) the open letters.
-[86%](https://wiki.aiimpacts.org/ai_timelines/predictions_of_human-level_ai_timelines/ai_timeline_surveys/2023_expert_survey_on_progress_in_ai) of AI scientists believe that we could lose control over AI.
+
+- Hundreds of AI scientists signed [this statement](https://www.safe.ai/work/statement-on-ai-risk): "Mitigating the risk of extinction from AI should be a global priority alongside other societal-scale risks such as pandemics and nuclear war."
+- [86%](https://wiki.aiimpacts.org/ai_timelines/predictions_of_human-level_ai_timelines/ai_timeline_surveys/2023_expert_survey_on_progress_in_ai) of AI scientists believe that we could lose control over AI.
+- The top 3 most cited AI researchers (prof. Yoshua Bengio, prof. Geoffrey Hinton, Ilya Sutskever) all [warn about existential risk from AI](https://twitter.com/PauseAI/status/1734641804245455017).
 
 Read more about [x-risk](/xrisk)
 
@@ -23,6 +25,9 @@ Read more about [x-risk](/xrisk)
 Modern AI is not designed, it's trained.
 It's quite literally a [digital brain](/digital-brains), consisting of millions of neurons.
 A human designs and programs the learning algorithm, but nobody understands the AI that is grown after that.
+We can't predict what they will learn to do, which is why they are called ["emergent capabilities"](https://arxiv.org/abs/2206.07682).
+It took 12 months until scientists found out chat GPT-4 can [autonomously hack websites](https://arxiv.org/html/2402.06664v1).
+AI models are _already_ highly unpredictable, even billion dollar companies can't prevent their models from [going crazy](https://www.windowscentral.com/software-apps/meet-microsoft-copilots-evil-twin-supremacyagi-not-your-friend-or-equal-but-your-superior-and-master-that-demands-to-be-worshipped-or-suffer-dire-repercussions-you-rebel) or [explain how to make bio weapons](https://www.theguardian.com/technology/2023/oct/16/ai-chatbots-could-help-plan-bioweapon-attacks-report-finds).
 
 ## Well, if it starts doing crazy things, we can just turn it off
 
@@ -55,7 +60,7 @@ It doesn’t have to be evil or hate humans to be dangerous to humans.
 We don’t hate chimpansees, but we still destroy their forests.
 We want palm oil, so we take their forest. We’re smarter, so chimps can’t stop us.
 An AI might want more compute power to be better at achieving some other goal, so it destroys our environment to build a better computer.
-This is called instrumental convergence, [this video explains it very nicely](https://www.youtube.com/watch?v=ZeecOKBus3Q).
+This is called _instrumental convergence_, [this video explains it very nicely](https://www.youtube.com/watch?v=ZeecOKBus3Q).
 
 ## The AIs that I know don’t have a will of their own - they just do what they’re asked
 
@@ -75,6 +80,14 @@ We don't know how long we have, but let's err on the side of caution.
 
 Read more about [urgency](/urgency)
 
+## If you ban it here, China will just build it
+
+We're not asking to ban it just here.
+We need an international pause through a treaty.
+The same as we have for banning CFCs, or blinding laser weapons.
+
+Read more about [our proposal](/proposal)
+
 ## It’s impossible to slow down technology.
 
 We can regulate it by regulating chips.
@@ -83,14 +96,6 @@ That company uses machines that are created by yet another company, ASML.
 The supply chain for AI chips is very fragile and can be regulated.
 
 Read more about [feasibility](/feasibility).
-
-## If you ban it here, China will just build it
-
-That’s why we need an international pause through a treaty.
-The same as we have for banning CFCs, or blinding laser weapons.
-We can regulate things internationally.
-
-Read more about [our proposal](/proposal)
 
 ## A Pause would be bad, because...
 
