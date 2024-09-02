@@ -1,4 +1,4 @@
-import { json } from '@sveltejs/kit'
+import { error, json } from '@sveltejs/kit'
 import { env } from '$env/dynamic/private'
 const openaiKey = env.OPENAI_KEY
 
@@ -64,8 +64,8 @@ export async function POST({ fetch, request }) {
 
 	const data = await response.json()
 	if (data.error) {
-		throw new Error(data.error.message)
-		return error()
+		console.error(data.error)
+		return error(data.error.message)
 	}
 	const text = data.choices[0].message.content
 
