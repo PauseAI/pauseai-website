@@ -3,6 +3,7 @@
 		name: string
 		title?: string
 		description?: string
+		/// ISO Datetime yyyy-mm-dd
 		date?: string
 		probability: string
 		note?: string
@@ -44,7 +45,7 @@
 		{
 			name: 'Lina Khan',
 			title: 'head of FTC',
-			date: 'Nov 2023',
+			date: '2023-11-01',
 			probability: '15%',
 			number: 0.15,
 			source: 'https://twitter.com/liron/status/1723458202090774949'
@@ -62,6 +63,14 @@
 			probability: '10-25%',
 			number: 0.175,
 			source: 'https://twitter.com/liron/status/1710520914444718459'
+		},
+		{
+			name: 'Reid Hoffman',
+			title: 'Co-founder of LinkedIn',
+			date: '2024-08-23',
+			probability: '20%',
+			number: 0.2,
+			source: 'https://www.pbs.org/video/future-of-ai-1724451272/'
 		},
 		{
 			name: 'Yoshua Bengio',
@@ -143,7 +152,7 @@
 		{
 			name: 'Jan Leike',
 			title: 'Former alignment lead at OpenAI',
-			date: 'Aug 2023',
+			date: '2023-08-01',
 			probability: '10-90%',
 			number: 0.5,
 			source: 'https://www.youtube.com/watch?v=ZP_N4q5U3eE&t=1h16m'
