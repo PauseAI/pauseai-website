@@ -56,13 +56,17 @@ export async function POST({ fetch, request }) {
 		},
 		body: JSON.stringify({
 			// model: 'gpt-3.5-turbo',
-			model: 'gpt-4',
+			model: 'gpt-4o',
 			messages,
 			temperature: 0.7
 		})
 	})
 
 	const data = await response.json()
+	if (data.error) {
+		throw new Error(data.error.message)
+		return error()
+	}
 	const text = data.choices[0].message.content
 
 	return json({ response: text } as ChatResponse)
