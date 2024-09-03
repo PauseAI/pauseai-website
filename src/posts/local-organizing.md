@@ -22,7 +22,7 @@ Good luck. The future is yours.
 2. **Add your group** to the `local-communities` channel on our [Discord](https://discord.gg/2XXWXvErfA). Add the invite link from that chat group in the thread on discord. The moderators will add your local group to the [communities page](/communities) on this website, and use your link.
 3. **Find a partner**. Find someone to help you. It's much easier and more fun to organize with a partner.
 4. **Get training**. There are [over 70 organizations](https://activisthandbook.org/trainings) around the globe that can train you or your group!
-5. **Reach out to your [National Group](/national-group)** if it exists!
+5. **Reach out to your [National Group](/national-groups)** if it exists!
 
 ## Developing a Local Campaign Plan
 
