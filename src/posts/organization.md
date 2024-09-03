@@ -1,16 +1,16 @@
 ---
-title: PauseAI Members Page
-description: Welcome to PauseAI! How
+title: PauseAI Organization
+description: How the PauseAI organization is structured, and what resources are available for members.
 ---
 
 Welcome to PauseAI!
-This page is meant to list to the various resources that we have available for our members.
 
 ## Organization structure
 
 - [Legal entities](/legal): PauseAI consist of one international entity, and several local / national legal entities. This website and the social media accounts are managed by the international entity. National entities can have their own website and their own way of doing things.
 - [People (Volunteers)](/people): List of registered volunteers who have opted to show their profile and have committed to work on PauseAI for at least some hours a week.
 - [Teams](/teams): Our volunteers work in all sorts of teams. Every team has its own leader, Discord channel, drive folder and of course list of members. Reach out to a team leader to join a team!
+- [National groups](/national-groups): National PauseAI groups are hubs that typically manage their own local communities, and are responsible for national-level strategy and coordination. They typically have their own website, social media accounts and legal entity.
 - [Local communities](/communities): Check if there already exists a community in your area. Most groups are communicating in our discord server, in the `#local-meetups` channel (If you want to create a new local group, post there!). Some groups are using tools like Whatsapp or a seperate Discord server.
 
 ![Organagram](/org.png)

@@ -20,10 +20,15 @@ Good luck. The future is yours.
 
 1. **Set up a chat group**. Use a tool that's popular in your area. WhatsApp, Telegram, and Signal are all good options. Make sure there is an invite link that you can share to easily invite others.
 2. **Add your group** to the `local-communities` channel on our [Discord](https://discord.gg/2XXWXvErfA). Add the invite link from that chat group in the thread on discord. The moderators will add your local group to the [communities page](/communities) on this website, and use your link.
+3. **Find a partner**. Find someone to help you. It's much easier and more fun to organize with a partner.
+4. **Get training**. There are [over 70 organizations](https://activisthandbook.org/trainings) around the globe that can train you or your group!
+5. **Reach out to your [National Group](/national-group)** if it exists!
 
 ## Developing a Local Campaign Plan
 
-One pitfall that organizers sometimes make is that they’ll start taking action without any clear plan. This can lead to unfocused organizing efforts which are less effective than they could be. As you’re thinking through the change you want to make in your community, it’s important to come up with a plan: what are your goals, and what steps are you going to take in order to get there?
+One pitfall that organizers sometimes make is that they’ll start taking action without any clear plan.
+This can lead to unfocused organizing efforts which are less effective than they could be.
+As you’re thinking through the change you want to make in your community, it’s important to come up with a plan: what are your goals, and what steps are you going to take in order to get there?
 
 ### Goals
 
@@ -317,6 +322,17 @@ So, you have a well-organized group of volunteers, eager to get involved and wit
 
 There are many different ways to achieve your goals as a local group. The following list is not meant to be exhaustive, but rather to provide inspiration as you begin planning your campaign.
 
+### Social events & having drinks
+
+Social, fun events are a great way to build a sense of community among your volunteers.
+Even if you don't make a direct impact with such an event, you are strengthening the bonds between your volunteers, which can make your group more effective in the long run.
+Some things you can do:
+
+- **Happy hours**: Meet at a local bar or restaurant for drinks and socializing.
+- **Potlucks**: Have volunteers bring food to share at a local park or community center.
+- **Game nights**: Host a game night at someone’s house or a local game store.
+- **Movie nights**: Watch a documentary or movie (maybe AI related!) together at someone’s house or a local theater.
+
 ### Public teach-ins and action sessions on AI risk
 
 Invite members of the general public to attend an open session where they can learn more about AI risk and PauseAI’s treaty proposal, followed by taking some concrete action related to PauseAI’s mission.
@@ -436,12 +452,14 @@ meeting.
 ### Obstacle 3: your group “fizzles out” due to waning interest from volunteers
 
 Volunteers might be initially excited to get involved but lose interest over time.
-This can happen for a few reasons: 1) volunteers don’t feel motivated or empowered to take action, 2) volunteers aren’t involved with actions that interest them, 3) volunteers simply realize that volunteering isn’t for them.
+This can happen because volunteers don't feel motivated, don't like the actions that interest them, or simply realize that volunteering isn’t for them.
+
 Some of this is inevitable– not everyone will remain invested at all times– but much can be averted.
 
 **How to Overcome**:
 
 - Make sure volunteers feel empowered and agentic. Volunteers need to feel that they have a stake in what’s going on, and that their insight matters. This is another reason why one-on-one meetings are so important; you can understand volunteers’ motivations and work with them accordingly. Similarly, during team meetings, always provide ample time for volunteers to propose ideas and provide feedback on plans.
+- Do fun activities together. Social events can be a great way to build a sense of community among your volunteers.
 - Make sure volunteers are involved with actions they actually enjoy. Don’t have the person who enjoys protest organizing write op-eds and the person who enjoys writing organize protests. Match tasks with the people interested in taking them on.
 - Keep a strategy of continuous recruitment. Rather than having a single recruiting burst at the beginning and then not doing any recruitment afterwards, it’s better to recruit periodically. This way, even if some people lose interest over time, you can bring new volunteers into the fold.
 

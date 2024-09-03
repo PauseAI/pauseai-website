@@ -56,8 +56,7 @@ Podcasts featuring PauseAI members can be found in the [media coverage](/press) 
 - [How rogue AIs may arise](https://yoshuabengio.org/2023/05/22/how-rogue-ais-may-arise/) (by Yoshua Bengio)
 <!-- - [a casual intro to AI doom and alignment](https://carado.moe/ai-doom.html)
 I like it and the fact that is a more light reading, but I'm not sure if I want to put it because it defines alignment as just the technical stuff and redirects people to just do technical work -->
-- [Reasoning through arguments against taking AI safety seriously
-  ](https://yoshuabengio.org/2024/07/09/reasoning-through-arguments-against-taking-ai-safety-seriously/) (by Yoshua Bengio)
+- [Reasoning through arguments against taking AI safety seriously](https://yoshuabengio.org/2024/07/09/reasoning-through-arguments-against-taking-ai-safety-seriously/) (by Yoshua Bengio)
 
 If you want to read what journalists have written about PauseAI, check out the list of [media coverage](/press).
 
