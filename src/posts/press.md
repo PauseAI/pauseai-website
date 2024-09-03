@@ -36,8 +36,7 @@ If you want to create PauseAI-related material yourself, you can use our brand c
 
 ## Podcasts & Talks
 
-- [**Youtube Playlist**](https://www.youtube.com/playlist?list=PLI46NoubGtIJvSAWkC7VOmfWrLD2u1ZPA). All the podcasts and talks that can be found on Youtube. The rest of this list are recordings not uploaded to the platform.
-- [Clearer Thinking](https://open.spotify.com/episode/7cgGNChdYUnqh9S90L0Xcw?si=dd465fd4e7e24943): Interview with Joep Meindertsma on why we should pause AI despite arguments against it and emotionally processing high likelihoods of existential risks.
+- [**Youtube Playlist**](https://www.youtube.com/playlist?list=PLI46NoubGtIJvSAWkC7VOmfWrLD2u1ZPA). The more than 10 podcasts and talks that multiple people from PauseAI participated in. Subsequent items on this list are recordings that weren't uploaded to YouTube.
 - [Creatives with AI podcast](https://podcasters.spotify.com/pod/show/creativeswithai/episodes/15-AI-The-Race-Against-Time---Balancing-Progress-and-Potential-Catastrophe-with-Joep-Meinderstma-e28ln8a/a-aa9vpjp): Interview with PauseAI founder Joep Meindertsma.
 - [Art of AI podcast](https://spotify.link/AggzYfcj8Db): Interview with Joep Meindertsma about protesting, psychology of x-risk, AI policy.
 
