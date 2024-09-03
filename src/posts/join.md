@@ -18,4 +18,4 @@ Ways that you can join:
 <iframe class="airtable-embed" src="https://airtable.com/embed/appWPTGqZmUcs3NWu/pagoxRuCai4OYJEHt/form" frameborder="0" onmousewheel="" width="100%" height="533" style="background: transparent; border: 1px solid #ccc;"></iframe>
 
 - Then you can sign up as a volunteer, and appear on the [people page](/people) if you want.
-- Check out the [members page](/members) for more info!
+- Check out the [organization page](/organization) for more info!
