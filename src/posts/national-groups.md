@@ -1,11 +1,9 @@
+---
 title: PauseAI National Groups
 description: What does it mean to be a National Group in the PauseAI network?
-
 ---
 
 ## PauseAI National Groups
-
----
 
 - Manage, coach and coordinate their own [local communities](/communities).
 - Are responsible for national-level strategy and coordination.
