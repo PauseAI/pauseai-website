@@ -48,4 +48,4 @@ Interested? [Mail to Maxime](mailto:maxime@pausai.info)
 - Come up with campaigns of people you would like to reach out to, and contact them (whether by email, phone, DM, or in-person)
 - Please consider joining if you have a non traditional background or location - this could help us to reach new groups!
 
-Interested? DM Michelle in [Discord](https://discord.gg/y9hdAjD83e)
+Interested? DM Diego in [Discord](https://discord.gg/y9hdAjD83e)
