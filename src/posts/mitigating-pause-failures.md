@@ -74,7 +74,8 @@ If AI development (above a certain threshold) is banned, it might go underground
 The potential benefits are so large that a rogue (state) actor might decide to develop AI in secret.
 That means the first to achieve superintelligence would be a non-cooperative actor, which is likely to be a bad outcome.
 
-By tracking GPU sales, we can detect at least some underground AI development.
+By tracking GPU sales, we can detect large-scale AI development.
+Since frontier model GPU clusters require immense amounts of energy and custom buildings, the physical infrastructure required to train a large model is hard to hide.
 
 Western powers (US, Netherlands and Taiwan) control the GPU supply chain strongly enough to prevent uncooperative states from obtaining GPUs.
 Non-state actors are unlikely to be able to gather sufficient resources in secret to train an AGI for at least a decade after AGI becomes possible by Big Tech companies.
@@ -92,7 +93,8 @@ Also, the fact that there no longer is a _business incentive_ would help to redu
 This is a serious concern, although there are strong arguments to be made that [overhang is unlikely to occur](https://blog.aiimpacts.org/p/are-there-examples-of-overhang-for).
 
 PauseAI supports a pause on relevant compute improvements as well.
-Also, as we said, the 'play' button should not be pressed if we still don't know how to build safe AI. And that includes the training and deployment of models with more advanced hardware.
+Also, as we said, the 'play' button should not be pressed if we still don't know how to build safe AI.
+And that includes the training and deployment of models with more advanced hardware.
 
 ## AI development is necessary for learning how to make AIs safe
 
@@ -119,11 +121,16 @@ However, enforcing this will be more difficult than enforcing compute regulation
 
 ## If we only ban general AI models, we might still get AGI through narrow models
 
-We want to restrict dangerous models that can do things like manipulate humans, plan strategically and write code.
-We don't want to restrict very narrow models, like image classifiers used in self-driving cars or medical diagnosis.
-However, this leads to a difficult situation where there are _strong incentives_ to stretch the definition of "narrow" AI.
+We want to restrict dangerous models that have [dangerous capabilities](/dangerous-capabilities) like manipulating humans, planning strategically and writing code.
+We don't want to restrict very narrow AI models, like image classifiers used in self-driving cars or medical diagnosis.
+Luckily, virtually all of these narrow models fall outside of our [proposed](/proposal) restrictions, because these models tend to be relatively small.
 
-Therefore, we haven't defined "narrow" AI in our proposal, but instead, we use the three conditions mentioned above.
+A sufficiently powerful narrow model (trained on real-world data) might be likely to generalize to dangerous capabilities.
+For example, a very powerful image generator model might be able to make images of functional code, or a very powerful video model might be able to generate a movie about an AI planning a successful takeover.
+Narrow models often become better at their narrow task by generalizing.
+To some extent this is what makes LLMs like ChatGPT so successful: they are trained only to "predict the next word", but in order for it to be really good at this, is needs to learn a lot about the world.
+
+Therefore, we haven't defined "narrow" or "general" AI in our proposal, but instead, we use three conditions related to model size, compute used and capabilities.
 
 ## If a pause is implemented, we should expect a political compromise
 
