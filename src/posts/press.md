@@ -70,6 +70,7 @@ If you want to create PauseAI-related material yourself, you can use our brand c
 - [KQED](https://www.kqed.org/news/11985949/as-openai-unveils-big-update-protesters-call-for-pause-in-risky-frontier-tech)
 - [Hoodline](https://hoodline.com/2024/05/ai-advancement-from-openai-unleashes-gpt-4o-amid-global-protests-and-market-frenzy/)
 - [NBC Bay](https://www.nbcbayarea.com/news/tech/ai-protests-worldwide/3536439/)
+- [CalMatters](https://calmatters.org/economy/technology/2024/09/california-ai-safety-regulations-bills/)
 
 ### FR
 
