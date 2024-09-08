@@ -38,6 +38,7 @@
 
 		<div class="nav-right">
 			<div class="nav-links">
+				<NavLink href="/qui-sommes-nous">A propos</NavLink>
 				<NavLink href="/dangers">Dangers</NavLink>
 				<NavLink href="/propositions">Propositions</NavLink>
 				<NavLink href="https://pauseia.substack.com/">Blog</NavLink>
@@ -91,6 +92,7 @@
 				</button>
 			</div>
 			<div class="sidebar-links">
+				<a href="/qui-sommes-nous" on:click={() => (open = !open)}><h2>A propos</h2></a>
 				<a href="/dangers" on:click={() => (open = !open)}><h2>Dangers</h2></a>
 				<a href="/propositions" on:click={() => (open = !open)}><h2>Propositions</h2></a>
 				<a href="/agir" on:click={() => (open = !open)}><h2>Agir</h2></a>
@@ -231,7 +233,7 @@
 			padding: 2rem 6rem;
 		}
 		.nav-links {
-			gap: 1.5rem;
+			gap: 1.3rem;
 		}
 	}
 

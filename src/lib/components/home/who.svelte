@@ -1,6 +1,7 @@
 <script lang="ts">
 	import SupporterCard from '$components/WhoCard.svelte'
 	import UnderlinedTitle from '$components/UnderlinedTitle.svelte'
+	import FAQ from '$posts/qui-sommes-nous.md'
 
 	const label_id = 'who-title'
 
@@ -49,6 +50,7 @@
 
 <section aria-labelledby={label_id}>
 	<UnderlinedTitle id={label_id}>Qui sommes-nous ?</UnderlinedTitle>
+	<FAQ />
 	<div class="logos" style="--animation-duration: {animationDuration}s;">
 		<!-- eslint-disable-next-line @typescript-eslint/no-unused-vars -->
 		<div class="logo_items">
