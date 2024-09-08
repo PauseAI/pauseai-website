@@ -41,6 +41,12 @@
 			blurb: 'Volontaire',
 			image: 'membres/salim.jpg',
 			job: 'Etudiant en mathématiques'
+		},
+		{
+			name: 'Stélian',
+			blurb: 'Volontaire',
+			image: 'membres/stelian.jpg',
+			job: 'Psychologue'
 		}
 	]
 
