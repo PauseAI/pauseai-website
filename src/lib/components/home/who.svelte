@@ -8,50 +8,38 @@
 		{
 			name: 'Maxime Fournes',
 			blurb: 'Co-fondateur',
-			image: 'maxime.png',
+			image: 'membres/maxime.png',
 			job: 'Chercheur IA'
 		},
 		{
 			name: 'Gilles Bréda',
 			blurb: 'Co-fondateur',
-			image:
-				'https://upload.wikimedia.org/wikipedia/commons/thumb/d/df/AI_%28Artificial_Intelligence%29_Dog.jpg/640px-AI_%28Artificial_Intelligence%29_Dog.jpg',
+			image: 'membres/gilles.jpg',
 			job: 'Musicien professionnel'
 		},
 		{
 			name: 'Moïri',
 			blurb: 'Référent Plateforme',
-			image:
-				'https://upload.wikimedia.org/wikipedia/commons/thumb/d/df/AI_%28Artificial_Intelligence%29_Dog.jpg/640px-AI_%28Artificial_Intelligence%29_Dog.jpg',
+			image: 'membres/moiri.jpeg',
 			job: 'Ingénieur informatique'
 		},
 		{
-			name: 'A',
-			blurb: 'Référent Plateforme',
-			image:
-				'https://upload.wikimedia.org/wikipedia/commons/thumb/d/df/AI_%28Artificial_Intelligence%29_Dog.jpg/640px-AI_%28Artificial_Intelligence%29_Dog.jpg',
-			job: 'Ingénieur informatique'
+			name: 'Pierre',
+			blurb: 'Référent Rédaction',
+			image: 'membres/pierre.png',
+			job: 'Archéologue et forgeron'
 		},
 		{
-			name: 'B',
-			blurb: 'Référent Plateforme',
-			image:
-				'https://upload.wikimedia.org/wikipedia/commons/thumb/d/df/AI_%28Artificial_Intelligence%29_Dog.jpg/640px-AI_%28Artificial_Intelligence%29_Dog.jpg',
-			job: 'Ingénieur informatique'
+			name: 'Shaïman',
+			blurb: 'Volontaire',
+			image: 'membres/shaiman.png',
+			job: 'Vidéaste et podcasteur sur les enjeux de l’intelligence artificielle'
 		},
 		{
-			name: 'C',
-			blurb: 'Référent Plateforme',
-			image:
-				'https://upload.wikimedia.org/wikipedia/commons/thumb/d/df/AI_%28Artificial_Intelligence%29_Dog.jpg/640px-AI_%28Artificial_Intelligence%29_Dog.jpg',
-			job: 'Ingénieur informatique'
-		},
-		{
-			name: 'D',
-			blurb: 'Référent Plateforme',
-			image:
-				'https://upload.wikimedia.org/wikipedia/commons/thumb/d/df/AI_%28Artificial_Intelligence%29_Dog.jpg/640px-AI_%28Artificial_Intelligence%29_Dog.jpg',
-			job: 'Ingénieur informatique'
+			name: 'Salim',
+			blurb: 'Volontaire',
+			image: 'membres/salim.jpg',
+			job: 'Etudiant en mathématiques'
 		}
 	]
 
