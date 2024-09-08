@@ -20,7 +20,7 @@
 		},
 		{
 			name: 'Moïri',
-			blurb: 'Référent Plateforme',
+			blurb: 'Référent Plateformes',
 			image: 'membres/moiri.jpeg',
 			job: 'Ingénieur informatique'
 		},
@@ -31,10 +31,10 @@
 			job: 'Archéologue et forgeron'
 		},
 		{
-			name: 'Shaïman',
+			name: 'Antonin',
 			blurb: 'Volontaire',
-			image: 'membres/shaiman.png',
-			job: 'Vidéaste et podcasteur sur les enjeux de l’intelligence artificielle'
+			image: 'membres/antonin.jpg',
+			job: 'Ingénieur à Télécom Paris'
 		},
 		{
 			name: 'Salim',
@@ -43,10 +43,16 @@
 			job: 'Etudiant en mathématiques'
 		},
 		{
+			name: 'Shaïman',
+			blurb: 'Volontaire',
+			image: 'membres/shaiman.png',
+			job: 'Vidéaste et podcasteur sur les enjeux de l’intelligence artificielle'
+		},
+		{
 			name: 'Stélian',
 			blurb: 'Volontaire',
 			image: 'membres/stelian.jpg',
-			job: 'Psychologue'
+			job: 'Etudiant en mathématiques'
 		}
 	]
 
