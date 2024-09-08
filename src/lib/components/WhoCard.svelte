@@ -5,18 +5,16 @@
 	export let job
 </script>
 
-<a class="article-link">
-	<article>
-		<div class="supporter-image">
-			<img src={image} alt={name} />
-		</div>
-		<div>
-			<h3>{name}</h3>
-			<p>{blurb}</p>
-			<p class="job">{job}</p>
-		</div>
-	</article>
-</a>
+<article class="article-link">
+	<div class="supporter-image">
+		<img src={image} alt={name} />
+	</div>
+	<div>
+		<h3>{name}</h3>
+		<p>{blurb}</p>
+		<p class="job">{job}</p>
+	</div>
+</article>
 
 <style>
 	article {

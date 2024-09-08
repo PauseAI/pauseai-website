@@ -69,7 +69,6 @@
 					name={supporter.name}
 					blurb={supporter.blurb}
 					image={supporter.image}
-					url={supporter.url}
 					job={supporter.job}
 				/>
 			{/each}
