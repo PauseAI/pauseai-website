@@ -2,7 +2,7 @@
 	import SupporterCard from '$components/WhoCard.svelte'
 	import UnderlinedTitle from '$components/UnderlinedTitle.svelte'
 
-	const label_id = 'articles-title'
+	const label_id = 'who-title'
 
 	const supporters = [
 		{
@@ -26,18 +26,32 @@
 			job: 'Ingénieur informatique'
 		},
 		{
-			name: 'Pierre',
-			blurb: 'Chercheur @ Meta',
+			name: 'A',
+			blurb: 'Référent Plateforme',
 			image:
 				'https://upload.wikimedia.org/wikipedia/commons/thumb/d/df/AI_%28Artificial_Intelligence%29_Dog.jpg/640px-AI_%28Artificial_Intelligence%29_Dog.jpg',
-			job: 'Archéologue et forgeron'
+			job: 'Ingénieur informatique'
 		},
 		{
-			name: 'Shaïman Le Futurologue',
-			blurb: 'Chercheur @ Meta',
+			name: 'B',
+			blurb: 'Référent Plateforme',
 			image:
 				'https://upload.wikimedia.org/wikipedia/commons/thumb/d/df/AI_%28Artificial_Intelligence%29_Dog.jpg/640px-AI_%28Artificial_Intelligence%29_Dog.jpg',
-			job: 'Vidéaste, podcasteur...'
+			job: 'Ingénieur informatique'
+		},
+		{
+			name: 'C',
+			blurb: 'Référent Plateforme',
+			image:
+				'https://upload.wikimedia.org/wikipedia/commons/thumb/d/df/AI_%28Artificial_Intelligence%29_Dog.jpg/640px-AI_%28Artificial_Intelligence%29_Dog.jpg',
+			job: 'Ingénieur informatique'
+		},
+		{
+			name: 'D',
+			blurb: 'Référent Plateforme',
+			image:
+				'https://upload.wikimedia.org/wikipedia/commons/thumb/d/df/AI_%28Artificial_Intelligence%29_Dog.jpg/640px-AI_%28Artificial_Intelligence%29_Dog.jpg',
+			job: 'Ingénieur informatique'
 		}
 	]
 
@@ -96,12 +110,12 @@
 	}
 	@media (min-width: 1024px) {
 		.logo_items {
-			grid-template-columns: repeat(3, 1fr);
+			grid-template-columns: repeat(4, 1fr);
 		}
 	}
 	@media (min-width: 1280px) {
 		.logo_items {
-			grid-template-columns: repeat(4, 1fr);
+			grid-template-columns: repeat(5, 1fr);
 		}
 	}
 
