@@ -20,7 +20,7 @@
 		},
 		{
 			name: 'Moïri',
-			blurb: 'Référent Plateformes',
+			blurb: 'Référent Plateforme',
 			image: 'membres/moiri.jpeg',
 			job: 'Ingénieur informatique'
 		},
