@@ -27,6 +27,7 @@
 			<a href="/agir">Agir</a>
 			<a href="/dons">Donner</a>
 			<a href="/nous-rejoindre">Nous rejoindre</a>
+			<a href="/qui-sommes-nous">Qui sommes-nous ?</a>
 		</div>
 		<div class="column">
 			<h2>Dangers</h2>
