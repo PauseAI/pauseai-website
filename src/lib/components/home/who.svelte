@@ -37,6 +37,12 @@
 			job: 'Ingénieur à Télécom Paris'
 		},
 		{
+			name: 'Aurélia',
+			blurb: 'Volontaire',
+			image: 'membres/aurelia.jpg',
+			job: "Professeur d'anglais en classe préparatoire"
+		},
+		{
 			name: 'Salim',
 			blurb: 'Volontaire',
 			image: 'membres/salim.jpg',
