@@ -33,8 +33,8 @@
 			</h1>
 			<div class="description">
 				<p>
-					Selon la majorité des experts, le développement rapide de l'intelligence artificielle
-					présente un danger catastrophique pour l'humanité à très court terme, au potentiel plus
+					Selon de nombreux experts, le développement rapide de l'intelligence artificielle
+					présente un danger catastrophique pour l'humanité à court terme, au potentiel plus
 					dévastateur que la bombe atomique.
 				</p>
 				<p>Nous faisons face à la menace la plus urgente de notre histoire. Chaque jour compte.</p>
