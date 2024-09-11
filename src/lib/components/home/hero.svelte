@@ -33,9 +33,9 @@
 			</h1>
 			<div class="description">
 				<p>
-					Selon de nombreux experts, le développement rapide de l'intelligence artificielle
-					présente un danger catastrophique pour l'humanité à court terme, au potentiel plus
-					dévastateur que la bombe atomique.
+					Selon de nombreux experts, le développement rapide de l'intelligence artificielle présente
+					un danger catastrophique pour l'humanité à court terme, au potentiel plus dévastateur que
+					la bombe atomique.
 				</p>
 				<p>Nous faisons face à la menace la plus urgente de notre histoire. Chaque jour compte.</p>
 				<div class="buttons">
@@ -118,8 +118,7 @@
 		position: absolute;
 		width: 100%;
 		height: 100%;
-		background: 
-		/* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#000000+0,000000+27,1b1b1b+49,1e1e1e+49,1d1d1d+49,232323+50,212121+51,242424+51,262626+53,282828+53,292929+56,2b2b2b+56,292929+62,272727+62,252525+66,1c1c1c+71,1c1c1c+77,1a1a1a+78,181818+82,161616+84,141414+84,151515+85,101010+86,0f0f0f+87,090909+88,030303+90,0d0d0d+91,010101+91,010101+100&0.76+0,0.76+27,0.56+49,0.55+60,0.59+71,0.48+90,0.48+100 */
+		--hero-gradient: /* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#000000+0,000000+27,1b1b1b+49,1e1e1e+49,1d1d1d+49,232323+50,212121+51,242424+51,262626+53,282828+53,292929+56,2b2b2b+56,292929+62,272727+62,252525+66,1c1c1c+71,1c1c1c+77,1a1a1a+78,181818+82,161616+84,141414+84,151515+85,101010+86,0f0f0f+87,090909+88,030303+90,0d0d0d+91,010101+91,010101+100&0.76+0,0.76+27,0.56+49,0.55+60,0.59+71,0.48+90,0.48+100 */
 			linear-gradient(
 			to right,
 			rgba(0, 0, 0, 0.76) 0%,
@@ -145,6 +144,8 @@
 			rgba(1, 1, 1, 0.48) 91%,
 			rgba(1, 1, 1, 0.48) 100%
 		);
+
+		background: var(--hero-gradient);
 	}
 	.buttons {
 		display: flex;
@@ -175,6 +176,15 @@
 	@media (min-width: 1024px) {
 		.content h1 {
 			font-size: 3rem;
+		}
+		.overlay::after {
+			background: var(--hero-gradient),
+				radial-gradient(
+					620px 30% at top 2% right 15%,
+					rgb(0 0 0 / 40%),
+					rgb(0 0 0 / 20%) 66%,
+					rgb(0 0 0 / 0%)
+				);
 		}
 	}
 	@media (min-width: 1280px) {
