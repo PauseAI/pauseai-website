@@ -6,7 +6,7 @@ original:
   url: https://github.com/PauseAI/pauseai-website/blob/5950ca0185d6e7cf52e2416e795acfab7222dace/src/posts/faq.md
 ---
 
-Nous sommes un ensemble de bénévoles ressemblés au sein d'une [association à but non lucratif](/mentions-legales) dont l'objectif est de minimiser les [risques liés à l'IA](/dangers) (y compris le [risque d'extinction](/dangers/pour-l'humanite)). Notre objectif est de convaincre le gouvernement d'intervenir et [de mettre en pause le développement d'une IAG](/propositions) (Intelligence Artificielle Générale puis d’une Superintelligence). Dans ce but, nous alertons le public, dialoguons avec les décideurs et organisons des manifestations.
+Nous sommes un ensemble de bénévoles rassemblés au sein d'une [association à but non lucratif](/mentions-legales) dont l'objectif est de minimiser les [risques liés à l'IA](/dangers) (y compris le [risque d'extinction](/dangers/pour-l'humanite)). Notre objectif est de convaincre le gouvernement d'intervenir et [de mettre en pause le développement d'une IAG](/propositions) (Intelligence Artificielle Générale puis d’une Superintelligence). Dans ce but, nous alertons le public, dialoguons avec les décideurs et organisons des manifestations.
 
 Pause IA est la branche française de PauseAI Global. Bien que nous soyons en relation avec PauseAI Global, nous bénéficions d'une entière autonomie et menons nos propres projets en France.
 
