@@ -11,15 +11,15 @@ You are now one of them.
 
 Here are some examples of what you can do.
 
-## Tell your friends
+## Inform others
 
 - **Talk** to people in your life about this. Answer their questions, and get them to act. Use our [counterarguments](/counterarguments) to help you be more persuasive.
-- [**Flyers**](/flyering) print, share and post flyers.
-  - Having some printed one-page flyers on hand, or easily available to show and share from your phone, can be a quick and useful resource for faqs, talking points, expert quotes and opinions, online resources, etc.
 - **Share** about AI risk on social media. This website might be a good start.
+- [**Tabling**](/tabling) and [**flyering**](/flyering) are great ways to reach many people in a short amount of time.
+  - Having some printed one-page flyers on hand, or easily available to show and share from your phone, can be a quick and useful resource for faqs, talking points, expert quotes and opinions, online resources, etc.
 - **Create** [articles](/learn#articles), [videos](/learn#videos) or [memes](https://twitter.com/AISafetyMemes). Collaborate with others in the [Discord server](https://discord.gg/2XXWXvErfA) (in the #projects channel).
 
-## Tell your politicians
+## Inform politicians
 
 - [**Send an email to a politician**](/email-builder): emails are completely overpowered. Do it.
 - [**Lobby**](/lobby-tips): convince your government to work towards a pause and prepare for the [summit](/summit).

@@ -373,7 +373,7 @@ Walk volunteers through how to write a Letter to the Editor (LTE) or Op-Ed to lo
 
 ### Flyering & Tabling Sessions
 
-Even after you have a base of volunteers, you can continue flyering and tabling to get the word out to the public.
+Even after you have a base of volunteers, you can continue flyering and [tabling](/tabling) to get the word out to the public.
 In this context, flyering and tabling can be combined with a specific “ask,” i.e. asking people to write to their elected officials about AI
 Flyers can be modified to include QR codes to relevant resources, such as a letter-writing guide.
 Please read our [Flyering Guide](/flyering) for more information on how to do this well.
