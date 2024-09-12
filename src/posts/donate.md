@@ -27,6 +27,10 @@ With your financial support, we can professionalize and have a bigger impact.
 - 30+ [Media appearances](/press) on major news outlets, podcasts, documentaries, TV and more.
 - Many meetings with politicians and other stakeholders.
 
+## Who is funding PauseAI
+
+See our [funding page](/funding) for more details.
+
 ## What we're planning to do
 
 See our [roadmap](/roadmap) for more details.

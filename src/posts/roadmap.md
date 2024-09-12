@@ -15,7 +15,8 @@ description: What are we planning to do and what could we do with more funding?
 
 ## Current financial situation
 
-At the moment of writing, we have received about $60k of donations.
+See who is funding PauseAI on our [funding page](/funding).
+
 Almost every person working on PauseAI is doing so voluntarily, so our burn rate is very low.
 We can continue operating until Q2 2025 with our current burn rate.
 All funding that we receive will be used to accelerate our growth and increase our impact.
