@@ -10,7 +10,7 @@
 			name: 'Maxime Fournes',
 			blurb: 'Cofondateur',
 			image: 'membres/maxime.png',
-			job: 'Chercheur IA'
+			job: 'Ingénieur et chercheur en IA'
 		},
 		{
 			name: 'Gilles Bréda',
@@ -58,7 +58,7 @@
 			name: 'Stélian',
 			blurb: 'Volontaire',
 			image: 'membres/stelian.jpg',
-			job: 'Psychologue'
+			job: 'Psychologue-psychothérapeute'
 		}
 	]
 
