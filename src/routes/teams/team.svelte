@@ -2,7 +2,7 @@
 	import SvelteMarkdown from 'svelte-markdown'
 	import A from '$lib/components/custom/a.svelte'
 	import type { Team } from '$lib/types'
-	import { ChevronDown } from 'lucide-svelte'
+	import ChevronDown from 'lucide-svelte/icons/chevron-down'
 	import { slide } from 'svelte/transition'
 	import Button from '$lib/components/Button.svelte'
 
