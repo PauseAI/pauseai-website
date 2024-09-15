@@ -1,12 +1,12 @@
 ---
 title: Propositions de Pause IA
-description: Mettre en place un moratoire dans l'entraînement des systèmes d'IA plus puissants que GPT-4, interdire l'entraînement des systèmes d'IA sur du matériel sous droit d'auteur, tenir les créateurs de modèles d'IA responsables.
+description: Mettre en place un moratoire sur l'entraînement des systèmes d'IA plus puissants que GPT-4, interdire l'entraînement des systèmes d'IA sur du matériel sous droit d'auteur, tenir les créateurs de modèles d'IA responsables.
 original:
   title: PauseAI Proposal
   url: https://github.com/PauseAI/pauseai-website/blob/0cabfef1037097bd7a99f4fddd1bcd73abbe6760/src/posts/proposal.md
 ---
 
-**Instaurer un moratoire dans l'entraînement des systèmes d'IA plus puissants que GPT-4** jusqu'à ce que nous sachions comment les développer en toute sécurité et les maintenir sous contrôle démocratique.
+**Instaurer un moratoire sur l'entraînement des systèmes d'IA plus puissants que GPT-4** jusqu'à ce que nous sachions comment les développer en toute sécurité et les maintenir sous contrôle démocratique.
 
 Chaque pays peut et doit mettre en œuvre cette mesure _immédiatement_. En particulier, les États-Unis (ou la Californie spécifiquement) devraient instaurer un moratoire, puisqu'ils hébergent pratiquement toutes les grandes entreprises d'IA. De nombreux scientifiques et leaders de l'industrie [conviennent qu'un moratoire est nécessaire](https://futureoflife.org/open-letter/pause-giant-ai-experiments/), et le grand public soutient également une telle mesure ([64%](https://www.campaignforaisafety.org/usa-ai-x-risk-perception-tracker/) - [69%](https://today.yougov.com/topics/technology/survey-results/daily/2023/04/03/ad825/2)).
 
