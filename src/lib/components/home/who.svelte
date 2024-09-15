@@ -8,13 +8,13 @@
 	const supporters = [
 		{
 			name: 'Maxime Fournes',
-			blurb: 'Co-fondateur',
+			blurb: 'Cofondateur',
 			image: 'membres/maxime.png',
 			job: 'Chercheur IA'
 		},
 		{
 			name: 'Gilles Bréda',
-			blurb: 'Co-fondateur',
+			blurb: 'Cofondateur',
 			image: 'membres/gilles.jpg',
 			job: 'Musicien professionnel'
 		},
@@ -58,7 +58,7 @@
 			name: 'Stélian',
 			blurb: 'Volontaire',
 			image: 'membres/stelian.jpg',
-			job: 'Etudiant en mathématiques'
+			job: 'Psychologue'
 		}
 	]
 
