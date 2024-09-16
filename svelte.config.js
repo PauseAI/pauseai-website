@@ -1,4 +1,4 @@
-import adapter from '@sveltejs/adapter-netlify'
+import adapter from './src/lib/adapter-netlify-selective.js'
 import { vitePreprocess } from '@sveltejs/vite-plugin-svelte'
 
 import { mdsvex, escapeSvelte } from 'mdsvex'

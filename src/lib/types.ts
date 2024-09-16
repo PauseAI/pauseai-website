@@ -36,3 +36,14 @@ export type Team = {
 	public: boolean
 	responsibilities: string[]
 }
+
+export type EdgeManifest = {
+	functions: {
+		function: string
+		path?: string
+		excludedPath?: string | string[]
+		pattern?: string
+		excludedPattern?: string | string[]
+		cache?: 'manual'
+	}[]
+}
