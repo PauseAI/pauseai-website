@@ -36,7 +36,7 @@ If you want to create PauseAI-related material yourself, you can use our brand c
 
 ## Podcasts & Talks
 
-- [**Youtube Playlist**](https://www.youtube.com/playlist?list=PLI46NoubGtIJvSAWkC7VOmfWrLD2u1ZPA). The more than 10 podcasts and talks that multiple people from PauseAI participated in. Subsequent items on this list are recordings that weren't uploaded to YouTube.
+- [**Youtube Playlist**](https://www.youtube.com/playlist?list=PLI46NoubGtIJvSAWkC7VOmfWrLD2u1ZPA). The **more than 10 podcasts** and talks that multiple people from PauseAI participated in. Subsequent items on this list are recordings that weren't uploaded to YouTube.
 - [Creatives with AI podcast](https://podcasters.spotify.com/pod/show/creativeswithai/episodes/15-AI-The-Race-Against-Time---Balancing-Progress-and-Potential-Catastrophe-with-Joep-Meinderstma-e28ln8a/a-aa9vpjp): Interview with PauseAI founder Joep Meindertsma.
 - [Art of AI podcast](https://spotify.link/AggzYfcj8Db): Interview with Joep Meindertsma about protesting, psychology of x-risk, AI policy.
 
@@ -60,10 +60,12 @@ If you want to create PauseAI-related material yourself, you can use our brand c
 - [RUW Den Bosh](https://ruwdenbosch.nl/paranoide-over-ai/): Debate night
 - [Leidsch Dagblad](https://www.leidschdagblad.nl/cnt/dmf20231228_53324374): Interview with Joep Meindertsma
 - [Daniel's Talkshow](https://www.youtube.com/watch?v=mGzwtSqmDsU): Discussion with Joep Meindertsma and Otto Barten
+- [De Dataloog](https://open.spotify.com/episode/2kB59A0bIltpSUdwaf0YM3): Interview with Joep Meindertsma
 
 ### DE
 
 - [The Decoder](https://the-decoder.de/keine-super-ki-demonstranten-versammeln-sich-vor-dem-openai-buero/)
+- [DW Documentary](https://youtu.be/KspkgAZUkoQ?si=h2Jm0Yvm9RT8t1ZT&t=1116)
 
 ### US
 
@@ -74,5 +76,6 @@ If you want to create PauseAI-related material yourself, you can use our brand c
 
 ### FR
 
-- [Le Monde](https://www.lemonde.fr/en/economy/article/2023/11/27/openai-the-beginnings-of-the-sam-altman-drama_6291282_19.html)
+- Le Monde ([2023](https://www.lemonde.fr/en/economy/article/2023/11/27/openai-the-beginnings-of-the-sam-altman-drama_6291282_19.html), [2024](https://www.lemonde.fr/economie/article/2024/09/11/a-l-approche-du-sommet-de-paris-les-militants-inquiets-quant-a-la-securite-de-l-ia-cherchent-a-se-faire-entendre_6312979_3234.html))
 - [La Tribune](https://www.latribune.fr/technos-medias/informatique/a-paris-et-dans-le-monde-les-inquiets-de-l-intelligence-artificielle-appellent-a-une-pause-997475.html)
+- [Various podcast appearances of Maxime Fournes](https://www.youtube.com/results?search_query=maxime+fournes+pauseai)
