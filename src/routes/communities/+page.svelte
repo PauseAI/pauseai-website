@@ -87,6 +87,11 @@
 		href="https://discord.gg/HWcPt5ccJN">Create a post</ExternalLink
 	> on our Discord!
 </p>
+<p>
+	Do you want to start a community? Check our <ExternalLink
+		href="https://pauseai.info/local-organizing">Guide on local organizing</ExternalLink
+	>
+</p>
 <div>
 	<div class="map-wrap">
 		<div class="map" bind:this={mapContainer} />
