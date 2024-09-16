@@ -131,9 +131,9 @@ You are probably surrounded by many existing advocacy groups. These groups alrea
 
 Types of groups to reach out to include, but are not limited to:
 
-- AI safety groups (i.e. discussion groups on AI safety).
+- [AI safety groups](https://www.aisafety.com/communities) (i.e. discussion groups on AI safety).
 - Environmental and climate policy groups, including local chapters of national organizations. (These groups are already familiar with existential risk from climate change, and might be more receptive to existential risk from AI).
-- Local Effective Altruism chapters.
+- [Local Effective Altruism chapters](https://forum.effectivealtruism.org/groups#local).
 - Labor organizations. (These groups might be concerned with job loss and automation from advanced AI systems).
 - Other advocacy groups.
 
