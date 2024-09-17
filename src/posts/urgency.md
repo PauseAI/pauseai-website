@@ -16,12 +16,12 @@ It could be sooner than most think.
 ## Compounding exponential growth
 
 AI models require algorithms, data, and chips.
-Each of these components is rapidly improving due to huge investments in AI - .
+Each of these component is rapidly improving due to huge investments in AI.
 The improvements in each of these components are _compounding_, leading to exponential growth in AI capabilities.
 
 - **More chips**. ChatGPT was trained on [10.000](https://www.fierceelectronics.com/sensors/chatgpt-runs-10k-nvidia-training-gpus-potential-thousands-more) specialized chips. Meta has [announced](https://www.datacenterdynamics.com/en/news/meta-to-operate-600000-gpus-by-year-end/) that they will have 600.000 next-gen chips to train their next AI models this year.
 - **Faster chips**. Every year chips get faster due to new architectures and lithography innovations. The chips that Meta is using are 10x faster than the chips used for ChatGPT. We're also seeing highly specialized hardware like the Groq chips, which are [13x faster](https://mezha.media/en/2024/02/22/groq-s-new-ai-chip-offers-to-increase-chatgpt-speed-by-13-times/) than the competition. On a longer timeline, [ternary architectures](https://arxiv.org/pdf/2402.17764.pdf) or [photonic chips](https://www.nature.com/articles/s41566-024-01394-2) could make chips even faster.
-- **More data**. GPT3 was trained on [45TB](https://community.openai.com/t/what-is-the-size-of-the-training-set-for-gpt-3/360896) of text, GPT4 used about 20x as much. AI companies are starting to use video data, audio data and even generating synthetic data to train these models.
+- **More data**. GPT3 was trained on [45TB](https://community.openai.com/t/what-is-the-size-of-the-training-set-for-gpt-3/360896) of text, GPT4 used about 20x as much. AI companies are now also using [massive amounts of video data](https://www.404media.co/nvidia-ai-scraping-foundational-model-cosmos-project/), audio data and they are even [generating synthetic data to train these models](https://arxiv.org/pdf/2401.10020). Earlier the idea of using synthetic data for training was considered impossible due to model collapse, but [recent advances](https://arxiv.org/abs/2406.07515) are showing that preventing model collapse is possible.
 - **Better data**. The "Textbooks are all you need" paper [showed](https://arxiv.org/abs/2306.11644) that using high-quality synthetic data can drastically improve model performance, even if far less data and compute is used.
 - **Better algorithms**. The Transformer architecture enabled the current LLM revolution. New architectures can enable similar capability jumps. The Mamba model, for example, is [showing](https://arxiv.org/abs/2312.00752) 5x faster throughput.
 - **Better runtimes**. Agentic runtimes, Retrieval Augmented Generation or even simply clever prompting (through [Graph of Thought](https://arxiv.org/abs/2305.16582), for example) can have a huge impact on the capabilities of these models.
@@ -81,15 +81,17 @@ These iterations might take weeks (training GPT-3 took 34 days), but it is also 
 
 So how far off are we from the Ilya threshold?
 It's fundamentally difficult to predict [when certain capabilities emerge](https://arxiv.org/abs/2206.07682) as LLMs scale, but so far we've seen many capabilities emerge that were previously thought to be far off.
-GPT-4 is already an impressive programmer, and combined with AutoGPT [it can do autonomous research on the internet](https://twitter.com/SullyOmarr/status/1645205292756418562).
-Being able to autonomously do AI research and making meaningful improvements to a codebase does not seem impossible in the near future.
+The [latest AI models](/sota) already beat most human programmers, so it is not unthinkable that future models
 
 Better chips, more data, and better algorithms will all contribute to reaching the Ilya threshold.
 We have no idea how to align such an AI (even [OpenAI admits this](https://youtu.be/L_Guz73e6fw?t=1477)), and the consequences of having a misaligned superintelligence are likely to be [catastrophic](/xrisk).
 
-## Policy implications
+## Act
 
-We could have a superintelligence in months.
-A 1% risk is unacceptably large.
-We can only conclude that we need to [slow down AI development](/proposal) right now.
+Anthropic co-founder Ben Mann [believes](https://x.com/ai_ctrl/status/1819173703869255879/photo/0) there's a 30% chance that Claude 3 (their latest model) can autonomously replicate, given fine-tuning and clever prompting.
+Ex-OpenAI researcher Daniel Kokotajlo thinks there's a [15% chance](https://x.com/ai_ctrl/status/1819173703869255879/photo/0) we'll have AGI in 2024.
+No-one knows for certain when we will reach the Ilya threshold.
+But the [stakes are too high](/xrisk) to assume we have a lot of time.
+We need to act on the small chance that we could be months away.
+We need to [Pause frontier AI development](/proposal) right now.
 It's up to each of us to [take action](/action) and make sure that we don't get caught off guard.
