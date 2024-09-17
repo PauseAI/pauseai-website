@@ -1,5 +1,7 @@
 # PauseAI.info website
 
+[![Netlify Status](https://api.netlify.com/api/v1/badges/628797a4-8d5a-4b5f-94d7-236b4604b23c/deploy-status)](https://app.netlify.com/sites/pauseai/deploys)
+
 SvelteKit website for [PauseAI.info](https://pauseai.info/).
 
 ## Creating articles
