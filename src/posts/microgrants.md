@@ -29,8 +29,3 @@ Here's a list of examples:
 - We'll send you a Memorandum of Understanding (MoU) that you need to sign.
 - Get to work!
 - Tell us when you're done, and we'll send you the grant. If you need the money upfront, we can discuss that option, but it should not be the default.
-
-## Who will fund
-
-- PauseAI will fund 10,000 EUR
-- Greg Colbourn will fund an additional 10,000 EUR
