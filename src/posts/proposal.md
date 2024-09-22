@@ -5,7 +5,7 @@ description: Implement a temporary pause on the training of AI systems more powe
 
 **Implement a pause on the training of AI systems more powerful than GPT-4**, until we know how to build them safely and keep them under democratic control.
 
-_Version: May 7th, 2024_
+_Version: Sept 22nd, 2024_
 
 Individual countries can and should implement this measure _right now_.
 Especially the US (or California, specifically) should implement a Pause, since it is home to virtually all leading AI companies.
@@ -31,12 +31,11 @@ This treaty needs to be signed by all UN member states.
   - Periodic meetings to discuss the progress of AI safety research.
 - **Only allow training of general AI systems more powerful than GPT-4 if their safety can be guaranteed**.
   - By more powerful than GPT-4, we mean all AI models that are either 1) larger than 10^12 parameters, 2) have more than 10^25 FLOPs used for training or 3) capabilities that are expected to exceed GPT-4.
+  - **Verify** that these dangerous training runs are not taking place. This can be done in [numerous ways](https://arxiv.org/abs/2408.16074): [tracking GPUs](https://arxiv.org/abs/2303.11341), incentivising whistleblowers, energy monitoring, data center inspections, financial intelligence, semiconductor manufacturing facility inspections, AI developer inspections, chip location tracking and chip-based reporting. The [AI chip supply chain](https://www.governance.ai/post/computing-power-and-the-governance-of-ai) is highly centralized which enables global oversight.
   - Note that this does not target _narrow_ AI systems, like image recognition used for diagnosing cancer.
   - Require [oversight during training runs](https://www.alignmentforum.org/posts/Zfk6faYvcf5Ht7xDx/compute-thresholds-proposed-rules-to-mitigate-risk-of-a-lab).
-  - Safety can be guaranteed if there is strong scientific consensus and [proof](https://arxiv.org/abs/2309.01933) that the _alignment problem has been solved_. Right now, this is not the case, so right now we should not allow training of such systems.
   - It may be possible that the AI alignment problem is _never solved_ - it may be unsolvable. In that case, we should never allow training of such systems.
   - Even if we can build controllable, safe AI, only build and deploy such technology with **strong democratic control**. A superintelligence is too powerful to be controlled by a single company or country.
-  - [**Track the sales of GPUs**](https://arxiv.org/abs/2303.11341) and other hardware that can be used for AI training.
 - **Only allow deployment of models after no [dangerous capabilities](/dangerous-capabilities) are present**.
   - We will need standards and independent red-teaming to determine whether a model has dangerous capabilities.
   - The list of dangerous capabilities may change over time as AI capabilities grow.
