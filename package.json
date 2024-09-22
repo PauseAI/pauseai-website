@@ -3,6 +3,7 @@
 	"name": "pause-ai",
 	"private": true,
 	"scripts": {
+		"translate": "tsx ./scripts/translate.ts",
 		"dev": "vite dev --host 0.0.0.0",
 		"build": "vite build && node create-pagefind-index.js",
 		"build:dev": "vite build --mode development && node create-pagefind-index.js",
@@ -27,11 +28,14 @@
 		"husky": "^9.0.11",
 		"lint-staged": "^15.2.2",
 		"mdsvex": "^0.11.0",
+		"openai": "^4.63.0",
 		"prettier": "^3.2.5",
 		"prettier-plugin-svelte": "^3.2.2",
 		"svelte": "^4.2.12",
 		"svelte-check": "^3.6.8",
+		"ts-node": "^10.9.2",
 		"tslib": "^2.6.2",
+		"tsx": "^4.19.1",
 		"typescript": "^5.4.3",
 		"vite": "^5.2.2"
 	},
