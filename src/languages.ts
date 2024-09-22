@@ -11,7 +11,7 @@ export const languages = [
 	},
 	{
 		code: 'nl',
-		name: 'Dutch / Nederlands',
+		name: 'Nederlands',
 		dictionary: {
 			'x-risk': 'existentieel risico'
 		}

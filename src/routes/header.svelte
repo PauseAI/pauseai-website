@@ -4,6 +4,8 @@
 	import { botName } from '$lib/config'
 	import { page } from '$app/stores'
 	import SearchIcon from 'lucide-svelte/icons/search'
+	import { t } from '$lib/translations'
+
 	const enableBot = false
 
 	$: logo_animate = $page.url.pathname != '/'
@@ -16,18 +18,20 @@
 
 	<div class="nav-right">
 		<div class="nav-links">
-			<NavLink href="/risks">Risks</NavLink>
-			<NavLink href="/proposal">Proposal</NavLink>
-			<NavLink href="/protests">Protests</NavLink>
-			<NavLink href="/faq">FAQ</NavLink>
-			<NavLink href="/action">Act</NavLink>
-			<NavLink href="/donate">Donate</NavLink>
+			<NavLink href="/risks">{$t('common.nav.risks')}</NavLink>
+			<NavLink href="/proposal">{$t('common.nav.proposal')}</NavLink>
+			<NavLink href="/protests">{$t('common.nav.protests')}</NavLink>
+			<NavLink href="/faq">{$t('common.nav.faq')}</NavLink>
+			<NavLink href="/action">{$t('common.nav.act')}</NavLink>
+			<NavLink href="/donate">{$t('common.nav.donate')}</NavLink>
 			{#if enableBot}
 				<NavLink href="/chat">{botName}</NavLink>
 			{/if}
 			<!-- <NavLink href="/about">About</NavLink> -->
-			<NavLink c2a href="/join">Join</NavLink>
-			<NavLink href="/search" ariaLabel="Search"><SearchIcon size="0.8em" /></NavLink>
+			<NavLink c2a href="/join">{$t('common.nav.join')}</NavLink>
+			<NavLink href="/search" ariaLabel={$t('common.nav.search')}
+				><SearchIcon size="0.8em" /></NavLink
+			>
 		</div>
 	</div>
 </nav>

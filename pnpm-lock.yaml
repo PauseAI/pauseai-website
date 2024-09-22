@@ -71,6 +71,9 @@ importers:
       svelte-toc:
         specifier: ^0.5.8
         version: 0.5.8
+      sveltekit-i18n:
+        specifier: ^2.4.2
+        version: 2.4.2(svelte@4.2.12)
     devDependencies:
       '@sveltejs/adapter-netlify':
         specifier: ^3.0.2
@@ -811,6 +814,14 @@ packages:
     peerDependencies:
       svelte: ^4.0.0 || ^5.0.0-next.0
       vite: ^5.0.0
+
+  '@sveltekit-i18n/base@1.3.7':
+    resolution: {integrity: sha512-kg1kql1/ro/lIudwFiWrv949Q07gmweln87tflUZR51MNdXXzK4fiJQv5Mw50K/CdQ5BOk/dJ0WOH2vOtBI6yw==}
+    peerDependencies:
+      svelte: '>=3.49.0'
+
+  '@sveltekit-i18n/parser-default@1.1.1':
+    resolution: {integrity: sha512-/gtzLlqm/sox7EoPKD56BxGZktK/syGc79EbJAPWY5KVitQD9SM0TP8yJCqDxTVPk7Lk0WJhrBGUE2Nn0f5M1w==}
 
   '@tsconfig/node10@1.0.11':
     resolution: {integrity: sha512-DcRjDCujK/kCk/cUe8Xz8ZSpm8mS3mNNpta+jGCA6USEDfktlNvm1+IuZ9eTcDbNk41BHwpHHeW+N1lKCz4zOw==}
@@ -2047,6 +2058,11 @@ packages:
     resolution: {integrity: sha512-d8+wsh5TfPwqVzbm4/HCXC783/KPHV60NvwitJnyTA5lWn1elhXMNWhXGCJ7PwPa8qFUnyJNIyuIRt2mT0WMug==}
     engines: {node: '>=16'}
 
+  sveltekit-i18n@2.4.2:
+    resolution: {integrity: sha512-hjRWn4V4DBL8JQKJoJa3MRvn6d32Zo+rWkoSP5bsQ/XIAguPdQUZJ8LMe6Nc1rST8WEVdu9+vZI3aFdKYGR3+Q==}
+    peerDependencies:
+      svelte: '>=3.49.0'
+
   text-table@0.2.0:
     resolution: {integrity: sha512-N+8UisAXDGk8PFXP4HAzVR9nbfmVJ3zYLAWiTIoqC5v5isinhr+r5uaO8+7r3BMfuNIufIsA7RdpVgacC2cSpw==}
 
@@ -2684,6 +2700,12 @@ snapshots:
       vitefu: 0.2.5(vite@5.2.2(@types/node@20.11.30))
     transitivePeerDependencies:
       - supports-color
+
+  '@sveltekit-i18n/base@1.3.7(svelte@4.2.12)':
+    dependencies:
+      svelte: 4.2.12
+
+  '@sveltekit-i18n/parser-default@1.1.1': {}
 
   '@tsconfig/node10@1.0.11': {}
 
@@ -4000,6 +4022,12 @@ snapshots:
       locate-character: 3.0.0
       magic-string: 0.30.8
       periscopic: 3.1.0
+
+  sveltekit-i18n@2.4.2(svelte@4.2.12):
+    dependencies:
+      '@sveltekit-i18n/base': 1.3.7(svelte@4.2.12)
+      '@sveltekit-i18n/parser-default': 1.1.1
+      svelte: 4.2.12
 
   text-table@0.2.0: {}
 

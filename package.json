@@ -60,6 +60,7 @@
 		"shiki": "^0.14.7",
 		"svelte-french-toast": "^1.2.0",
 		"svelte-markdown": "^0.4.1",
-		"svelte-toc": "^0.5.8"
+		"svelte-toc": "^0.5.8",
+		"sveltekit-i18n": "^2.4.2"
 	}
 }

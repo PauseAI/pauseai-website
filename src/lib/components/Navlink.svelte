@@ -4,10 +4,10 @@
 	export let href: string
 	export let c2a = false
 	export let ariaLabel: string | undefined = undefined
-	export let customClass: string = '' // Add this line
+	export let customClass: string = ''
 
 	$: isActive = $page.url.pathname === href
-	$: currentLang = $page.url.searchParams.get('lang') || 'en'
+	$: currentLang = $page.data.lang
 	$: hrefWithLang =
 		currentLang !== 'en' ? `${href}${href.includes('?') ? '&' : '?'}lang=${currentLang}` : href
 </script>
