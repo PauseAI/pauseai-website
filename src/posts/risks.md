@@ -15,12 +15,15 @@ Much of our society is based on trust. We trust that the money in our bank accou
 
 AI systems are exceptionally good at creating fake media.
 They can create fake videos, fake audio, fake text, and fake images.
-These capabilities are improving rapidly.
-Just two years ago, we laughed at the horribly unrealistic Dall-E images, but now we have [deepfake images winning photography contests](https://www.theguardian.com/technology/2023/apr/17/photographer-admits-prize-winning-image-was-ai-generated).
-A 10-second audio clip or a single picture can be enough to create a convincing deepfake.
-
 Creating fake media is not new, but AI makes it much cheaper and much more realistic.
+These capabilities are improving rapidly.
+
+Just two years ago, we laughed at the horribly unrealistic Dall-E images, but now we have [deepfake images winning photography contests](https://www.theguardian.com/technology/2023/apr/17/photographer-admits-prize-winning-image-was-ai-generated).
 An AI-generated image of an explosion caused [panic sells in Wall Street](https://www.euronews.com/next/2023/05/23/fake-news-about-an-explosion-at-the-pentagon-spreads-on-verified-accounts-on-twitter).
+A 10-second audio clip or a single picture can be enough to create a convincing deepfake.
+Perhaps even more dangerous than the deepfakes themselves, is how the existence of convincing deepfakes destroys trust.
+[Real image can be called AI-generated](https://www.axios.com/2024/08/13/trump-crowd-photo-ai-deepfake-truth), and people will believe it.
+
 GPT-4 can write in a way that is indistinguishable from humans but at a much faster pace and a fraction of the cost.
 We might soon see social media be flooded with fake discussions and opinions, and fake news articles that are indistinguishable from real ones.
 
@@ -82,13 +85,6 @@ The companies controlling these apps are incentivized to make them as addictive 
 
 A pause in the biggest models could prevent them from becoming multipurpose chatbots that fit our needs perfectly without people understanding the long-term ramifications of them.
 
-### Power accumulation and tyranny
-
-Powerful AI models can be used to get more power.
-This positive feedback loop can lead to a few companies or governments having an unhealthy amount of power.
-Having control over thousands of intelligent, autonomous systems could be used to influence opinions, manipulate markets, or even wage war.
-In the hands of an authoritarian government, this could be used to suppress dissent and maintain power.
-
 ### Automated investigation (loss of privacy)
 
 We leave a lot of traces on the web.
@@ -122,6 +118,13 @@ A [recent paper](https://arxiv.org/pdf/2401.03408.pdf) concludes that "models te
 Read more at [stopkillerrobots.org](https://www.stopkillerrobots.org/military-and-killer-robots/)
 
 ## Near future dangers
+
+### Power accumulation and tyranny
+
+Powerful AI models can be used to get more power.
+This positive feedback loop can lead to a few companies or governments having an unhealthy amount of power.
+Having control over thousands of intelligent, autonomous systems could be used to influence opinions, manipulate markets, or even wage war.
+In the hands of an authoritarian government, this could be used to suppress dissent and maintain power.
 
 ### Biological weapons
 
@@ -163,9 +166,6 @@ However, this turns out to be very difficult.
 This is called the _alignment problem_.
 If we fail to solve it in time, we may end up with superintelligent machines that do not care about our well-being.
 We'd be introducing a new species to the planet that could outsmart us and outcompete us.
-
-Additionally, even if we knew how to align an advanced AI with someone's preferences, how do we make sure that doesn't get misused?
-How do we govern that and how do we decide what values to give it?
 
 [Read more about x-risk](/xrisk)
 
