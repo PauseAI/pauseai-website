@@ -10,9 +10,9 @@
 </script>
 
 <nav>
-	<a href="/" class="logo">
+	<NavLink href="/" customClass="logo">
 		<Logo animate={logo_animate} />
-	</a>
+	</NavLink>
 
 	<div class="nav-right">
 		<div class="nav-links">
@@ -43,7 +43,7 @@
 		flex-wrap: wrap;
 	}
 
-	.logo {
+	:global(.logo) {
 		margin-bottom: 1rem;
 		margin-left: 1rem;
 	}
@@ -61,13 +61,39 @@
 			margin-left: 1rem;
 		}
 
-		.logo {
-			margin-left: -3.4rem;
-			margin-bottom: 0;
+		:global(.logo) {
+			margin-left: -1.75rem;
+			margin-bottom: -0.2rem;
 		}
 
 		.nav-links {
 			margin-left: 2rem;
 		}
+	}
+
+	:global(.nav-links a) {
+		padding-left: 0.5rem;
+		margin-left: 0.5rem;
+		padding-right: 0.5rem;
+		margin-right: -0.5rem;
+		font-family: var(--font-heading);
+		font-weight: 700;
+		color: var(--text);
+		text-decoration: none;
+		font-size: 1.1rem;
+	}
+
+	:global(.nav-links a.c2a) {
+		color: var(--brand);
+	}
+
+	:global(.nav-links a:hover) {
+		color: var(--brand);
+		text-decoration: underline;
+	}
+
+	:global(.nav-links a.active),
+	:global(.nav-links a:active) {
+		color: var(--brand-subtle);
 	}
 </style>

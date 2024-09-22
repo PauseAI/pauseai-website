@@ -3,7 +3,7 @@
 	import ExternalLink from 'lucide-svelte/icons/external-link'
 	import Mail from 'lucide-svelte/icons/mail'
 	import { page } from '$app/stores'
-	import { pushState } from '$app/navigation'
+	import { goto } from '$app/navigation'
 
 	enum Type {
 		Internal,
@@ -26,13 +26,25 @@
 		type = Type.External
 	else if (href.startsWith('mailto:')) type = Type.Mail
 
+	$: currentLang = $page.url.searchParams.get('lang')
+	$: hrefWithLang = (() => {
+		if (type !== Type.Internal || !currentLang || currentLang === 'en') return href
+		const url = new URL(href, 'http://example.com') // Use a dummy base URL
+		url.searchParams.set('lang', currentLang)
+		return `${url.pathname}${url.search}`
+	})()
+
+	function handleClick(event: MouseEvent) {
+		if (type === Type.Internal && !href.startsWith('#')) {
+			event.preventDefault()
+			goto(hrefWithLang)
+		}
+	}
+
 	onMount(() => {
 		if (href.startsWith('#')) {
 			anchor.addEventListener('click', (ev) => {
 				ev.preventDefault()
-				const url = $page.url
-				url.hash = href
-				pushState(url, $page.state)
 				const target = document.querySelector(href) as HTMLElement | null
 				if (!target) return
 				target.scrollIntoView({ behavior: 'smooth' })
@@ -43,7 +55,7 @@
 	})
 </script>
 
-<a {href} {target} bind:this={anchor}>
+<a href={hrefWithLang} {target} bind:this={anchor} on:click={handleClick}>
 	<slot />{#if type != Type.Internal}
 		<span style="white-space: nowrap">
 			<div class="icon">
