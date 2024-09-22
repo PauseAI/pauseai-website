@@ -33,6 +33,7 @@ If you want to create PauseAI-related material yourself, you can use our brand c
 - [Wired](https://www.wired.com/story/protesters-pause-ai-split-stop/?redirectURL=https://www.wired.com/story/protesters-pause-ai-split-stop/) About the May 2024 protest
 - [DailyAI](https://dailyai.com/2024/05/pauseai-protestors-demand-a-halt-to-training-of-ai-models/)
 - [ReadWrite](https://readwrite.com/pause-ai-protestors-are-fighting-to-put-ai-development-on-hold/)
+- [TodayVille](https://www.todayville.com/poll-despite-global-pressure-americans-want-the-tech-industry-to-slow-down-on-ai/)
 
 ## Podcasts & Talks
 
