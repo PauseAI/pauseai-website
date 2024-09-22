@@ -6,12 +6,12 @@ const config = {
 		{
 			locale: 'en',
 			key: 'common',
-			loader: async () => (await import('../translations/en/common.json')).default
+			loader: async () => (await import('./translations/en/common.json')).default
 		},
 		{
 			locale: 'nl',
 			key: 'common',
-			loader: async () => (await import('../translations/nl/common.json')).default
+			loader: async () => (await import('./translations/nl/common.json')).default
 		}
 	]
 }
