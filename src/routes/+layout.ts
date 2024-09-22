@@ -7,8 +7,7 @@ export async function load({ url: { host, pathname: url, searchParams } }) {
 	}
 
 	const lang = searchParams.get('lang') || 'en'
-	let out = await loadTranslations(lang, url)
-	console.log('Loaded translations for', out)
+	await loadTranslations(lang, url)
 
 	return { url, lang }
 }
