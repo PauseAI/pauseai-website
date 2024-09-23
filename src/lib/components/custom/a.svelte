@@ -3,7 +3,6 @@
 	import ExternalLink from 'lucide-svelte/icons/external-link'
 	import Mail from 'lucide-svelte/icons/mail'
 	import { page } from '$app/stores'
-	import { goto } from '$app/navigation'
 
 	enum Type {
 		Internal,
@@ -34,13 +33,6 @@
 		return `${url.pathname}${url.search}`
 	})()
 
-	function handleClick(event: MouseEvent) {
-		if (type === Type.Internal && !href.startsWith('#')) {
-			event.preventDefault()
-			goto(hrefWithLang)
-		}
-	}
-
 	onMount(() => {
 		if (href.startsWith('#')) {
 			anchor.addEventListener('click', (ev) => {
@@ -55,7 +47,7 @@
 	})
 </script>
 
-<a href={hrefWithLang} {target} bind:this={anchor} on:click={handleClick}>
+<a href={hrefWithLang} {target} bind:this={anchor}>
 	<slot />{#if type != Type.Internal}
 		<span style="white-space: nowrap">
 			<div class="icon">
