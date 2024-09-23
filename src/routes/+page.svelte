@@ -1,43 +1,16 @@
 <script lang="ts">
 	import Block from '$lib/components/Block.svelte'
-	import Mark from '$lib/components/Mark.svelte'
 	import PostMeta from '$lib/components/PostMeta.svelte'
 	import { t } from '$lib/translations'
 
 	$: title = $t('home.title')
 	$: description = $t('home.description')
-	$: blocks = [
-		{
-			title: $t('home.blocks.0.title'),
-			content: $t('home.blocks.0.content'),
-			linkText: $t('home.blocks.0.linkText'),
-			href: $t('home.blocks.0.href')
-		},
-		{
-			title: $t('home.blocks.1.title'),
-			content: $t('home.blocks.1.content'),
-			linkText: $t('home.blocks.1.linkText'),
-			href: $t('home.blocks.1.href')
-		},
-		{
-			title: $t('home.blocks.2.title'),
-			content: $t('home.blocks.2.content'),
-			linkText: $t('home.blocks.2.linkText'),
-			href: $t('home.blocks.2.href')
-		},
-		{
-			title: $t('home.blocks.3.title'),
-			content: $t('home.blocks.3.content'),
-			linkText: $t('home.blocks.3.linkText'),
-			href: $t('home.blocks.3.href')
-		},
-		{
-			title: $t('home.blocks.4.title'),
-			content: $t('home.blocks.4.content'),
-			linkText: $t('home.blocks.4.linkText'),
-			href: $t('home.blocks.4.href')
-		}
-	]
+	$: blocks = Array.from({ length: 5 }, (_, i) => ({
+		title: $t(`home.blocks.${i}.title`),
+		content: $t(`home.blocks.${i}.content`),
+		linkText: $t(`home.blocks.${i}.linkText`),
+		href: $t(`home.blocks.${i}.href`)
+	}))
 </script>
 
 <PostMeta {title} {description} />
