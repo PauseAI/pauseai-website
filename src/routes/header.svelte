@@ -18,7 +18,7 @@
 		<div class="nav-links">
 			<NavLink href="/risks">Risks</NavLink>
 			<NavLink href="/proposal">Proposal</NavLink>
-			<NavLink href="/protests">Protests</NavLink>
+			<NavLink href="/events">Events</NavLink>
 			<NavLink href="/faq">FAQ</NavLink>
 			<NavLink href="/action">Act</NavLink>
 			<NavLink href="/donate">Donate</NavLink>
