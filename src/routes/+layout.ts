@@ -1,13 +1,11 @@
 import { loadTranslations } from '$lib/translations'
-import { redirect } from '@sveltejs/kit'
+import { handleRedirects } from '$lib/utils'
 
-export async function load({ url: { host, pathname: url, searchParams } }) {
-	if (host === 'pauseai.org') {
-		return redirect(301, 'https://pauseai.info' + url)
-	}
+export async function load({ url }) {
+	const { lang, pathname } = handleRedirects(url)
 
-	const lang = searchParams.get('lang') || 'en'
-	await loadTranslations(lang, url)
+	// Load translations
+	await loadTranslations(lang, pathname)
 
 	return { url, lang }
 }
