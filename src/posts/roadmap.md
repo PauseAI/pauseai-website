@@ -22,20 +22,34 @@ All funding that we receive will be used to accelerate our growth and increase o
 
 ## Scenarios
 
+### Achievements
+
+_This lists items from the roadmap that we have achieved.
+We periodically move items from the scenarios below to the Achievements section._
+
+- 2000+ members in our [Discord server](https://discord.gg/2XXWXvErfA).
+- [100+ volunteers](/volunteers).
+- [40+ media appearances](/press).
+- Write guides for [flyering](/flyering), [protesting](/protesting), [local organizing](/local-organizing), [lobbying](/lobbying), [letter writing](/letter-writing).
+- Set up pages for our [organizational structures](https://pauseai.info/organization): [teams](/teams), [local-communities](/communities) and [national-groups](/national-groups).
+- Set up a CRM system to track outreach.
+- Set up a [newsletter/substack](https://pauseai.substack.com/)
+- Set up a [donate page](/donate)
+- Get Google Ads grant ($10k/month) to reach more people.
+- Polish our onboarding process for new volunteers.
+- Improve our website (over 10 volunteers have directly contributed code so far)
+- Funded > 40.000 EUR in [MicroGrants](/microgrants) projects.
+- Set up an [Event management system / calendar](https://lu.ma/PauseAI) to allow local & national PauseAI groups to organize events.
+
 ### Scenario 1: No additional funding
 
 - Hire an **organizing director**, who helps with growing our community and organizing volunteers. They will help us engage the community, organize events, build alliances/coalitions, reach out to politicians, and make volunteers more effective.
-- Organize our biggest protest yet during the November 2024 AI safety summit in France.
-- Push the European Commission and national-level politicians to initialize a treaty.
+- Organize our biggest protest yet during the AI safety summit in France.
+- Organize letter writing workshops to push the national-level politicians to initialize treaty negotiations.
 - Build alliances with other organizations and overlapping cause areas to amplify our impact. E.g. artists, concerned parents, climate activists, job unions, etc.
-- Set up a CRM system to manage our volunteers and outreach, and integrate this with our website and Discord server.
-- Polish our onboarding process for new volunteers.
-- Set up a newsletter/substack
 - Grow our social media presence through regular posts and engagement.
-- Use our Google Ads grant ($10k/month) to reach more people.
 - Participate in more [podcasts and interviews](/press).
 - Create more video content (focused on shorts) to reach a wider audience.
-- Improve our website (over 10 volunteers have directly contributed code so far)
 - Get help from experts in various fields (marketing, policy, AI safety, community organizing, protesting, etc.) to learn from their experience and improve our work.
 - Experiment with social media ads to grow our community and learn what works.
 - Reach out to politicians and influencers.
