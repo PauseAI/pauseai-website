@@ -28,7 +28,7 @@ _This lists items from the roadmap that we have achieved.
 We periodically move items from the scenarios below to the Achievements section._
 
 - 2000+ members in our [Discord server](https://discord.gg/2XXWXvErfA).
-- [100+ volunteers](/volunteers).
+- [100+ volunteers](/people).
 - [40+ media appearances](/press).
 - Write guides for [flyering](/flyering), [protesting](/protesting), [local organizing](/local-organizing), [lobbying](/lobbying), [letter writing](/letter-writing).
 - Set up pages for our [organizational structures](https://pauseai.info/organization): [teams](/teams), [local-communities](/communities) and [national-groups](/national-groups).
