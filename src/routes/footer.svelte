@@ -48,8 +48,7 @@
 			<ExternalLink href="https://pauseai-shop.fourthwall.com" target="_blank"
 				>Merchandise</ExternalLink
 			>
-			<a href="/protests">Protests</a>
-			<a href="/organizing-a-protest">Organize a protest</a>
+			<a href="/events">Events</a>
 			<a href="/email-builder">Email builder</a>
 			<a href="/lobby-tips">Lobby tips</a>
 		</div>
