@@ -53,7 +53,7 @@ Welcome to PauseAI!
 - [Gmail](https://gmail.com) for `@pauseai.info` email addresses.
 - [Google Suite](https://workspace.google.com/) for documents, spreadsheets, files, folders.
 - [Trello](https://trello.com/) is used by some teams for issue / ToDo tracking. (org name: `pauseaiinfo`)
-- [Figma](https://figma.com) for designing flyers and other graphics. ([template here](https://www.figma.com/community/file/1233064002969152026/pauseai-design-and-protest-materials-logo-flyer-posters)
+- [Figma](https://figma.com) for designing flyers and other graphics. ([template here](https://www.figma.com/design/iQ4PHQTi1vAVmT9Lckazqt/PauseAI-designs---editable)
 - [Airtable](https://airtable.com/) for managing teams, volunteers and responsibilities.
 
 ## Social Media
