@@ -4,7 +4,7 @@ description: Set up a table and talk to people about AI risks and why we need to
 ---
 
 One of the most direct ways to have an impact, is by convincing people one-on-one.
-By setting up a table in public, and inviting people to talk to you, you can reach a lot of people in a short amount of time.
+By setting up a table in public ([example](https://x.com/ChrisGerrby/status/1837537928748351611)), and inviting people to talk to you, you can reach a lot of people in a short amount of time.
 This not only increases awareness, but is also a great way to recruit new people to PauseAI.
 
 ## Preparation
