@@ -28,7 +28,7 @@ description: What does it mean to be a National Group in the PauseAI network?
 1.  Create a `#project` in the PauseAI discord to describe what you're planning on doing
 2.  Reach out to the Oversight team at PauseAI global. They can help with funding, support, materials. They'll give you an `countryname@pauseai.info` email address.
 3.  Create materials
-    1.  **Logo**, you can use [the figma](https://www.figma.com/design/iQ4PHQTi1vAVmT9Lckazqt/PauseAI-designs---editable?node-id=1592-2&node-type=FRAME&t=YjKyxVz4Y16aEfJ6-0) which contains some examples for other countries
+    1.  **Logo**, you can use [the figma](https://www.figma.com/design/iQ4PHQTi1vAVmT9Lckazqt/PauseAI-designs---editable) which contains some examples for other countries
     1.  **Flyer** (again, figma!). Ask for help if you need it. More flyers can be found in the [public drive](https://drive.google.com/drive/u/1/folders/1bQ_MZ8giK-Mee4ABkO0BgcFInaXruNpa)
     1.  **Website**? You can do this in three ways:
         1.  Wait until PauseAI.info offers automated translations. Perhaps you can have your own page on the pauseai.info website. E.g. [PauseAI NYC](/nyc-action).
