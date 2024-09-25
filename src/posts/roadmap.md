@@ -43,7 +43,7 @@ We periodically move items from the scenarios below to the Achievements section.
 
 ### Scenario 1: No additional funding
 
-- Hire an **organizing director**, who helps with growing our community and organizing volunteers. They will help us engage the community, organize events, build alliances/coalitions, reach out to politicians, and make volunteers more effective.
+- Hire an [**organizing director**](/2024-vacancy-organizing-director), who helps with growing our community and organizing volunteers. They will help us engage the community, organize events, build alliances/coalitions, reach out to politicians, and make volunteers more effective.
 - Organize our biggest protest yet during the AI safety summit in France.
 - Organize letter writing workshops to push the national-level politicians to initialize treaty negotiations.
 - Build alliances with other organizations and overlapping cause areas to amplify our impact. E.g. artists, concerned parents, climate activists, job unions, etc.
