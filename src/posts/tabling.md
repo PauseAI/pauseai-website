@@ -12,7 +12,7 @@ This not only increases awareness, but is also a great way to recruit new people
 - **Table**: You need a table to put your materials on. A folding table is ideal, but any table will do.
 - **Chairs**: You need chairs for yourself and any volunteers.
 - **Materials**: [Flyers](/flyering) are especially useful to hand out to others.
-- **Sign / banner**: Have a piece of cardboard or cloth that catches attention of bystanders and invites interaction: "AI could lead to human extinction. Change my mind." or something similar.
+- **Sign / banner**: Have a piece of cardboard or cloth that catches attention of bystanders and invites interaction: ["AI could lead to human extinction. Change my mind."](https://x.com/ChrisGerrby/status/1831039867670991075) or something similar.
 - **Location**: Choose a location with a lot of foot traffic. A busy street corner, a park, or a university campus are all good options.
 - **Find a buddy**: It's more fun to table with company. You can take turns talking to people, and keep each other company if you're not getting a lot of attention.
 - **Film & share**: If you can, film your interactions and share them on social media. Consider doing a livestream. If you can't edit videos, we can help you with that.
