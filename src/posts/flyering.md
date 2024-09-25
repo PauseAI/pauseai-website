@@ -11,7 +11,7 @@ description: How to distribute flyers for PauseAI
 ## Flyer contents
 
 - Find existing materials in [the Flyers folder](https://drive.google.com/drive/folders/1MAU_bq31bEuylhzkt2NkZ_XRY6TlKaqZ?usp=drive_link).
-- Existing flyers can be edited to be more specific to your purpose. Use the [Figma template](https://www.figma.com/community/file/1233064002969152026) to create your own.
+- Existing flyers can be edited to be more specific to your purpose. Use the [Figma template](https://www.figma.com/design/iQ4PHQTi1vAVmT9Lckazqt/PauseAI-designs---editable) to create your own.
 - Add the time and place of your meeting to the flyer
 - Flyers should have clear calls to action
   - (Learn what YOU can do!", "Find out how YOU can help!", "YOU can make a difference!", "Get involved!")
