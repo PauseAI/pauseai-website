@@ -8,6 +8,20 @@ description: If you want to join PauseAI,
 - Check out the [people](/people) who you may work with!
 - We collaborate mostly on our [Discord server](https://discord.gg/2XXWXvErfA)
 
+## Organizing Director (Paid position)
+
+- 32-40 hrs a week
+- Experience with activism and community building.
+- Excellent communication skills, both verbal and written.
+- A generalist with leadership experience / skills.
+- Proactive and entrepreneurial.
+- Preferably based in the Netherlands, but remote work is also possible.
+- Supports the idea of an AI Pause, but open to different perspectives (such as threat models or policies).
+- Understanding of AI safety; expertise is not required, but must be a fast learner.
+- Experience with video content creation, international relations, lobbying, and AI governance is a plus.
+
+[Read more](/2024-vacancy-organizing-director)
+
 ## Social Media Director
 
 - 8 to 16 hrs a week
