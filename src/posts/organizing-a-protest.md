@@ -79,8 +79,8 @@ Do this about 24 to 48 hrs before the protest.
 
 ### Reach out to people and organizations
 
-Do you have an Effective Altruists group in your city?
-Or a local AI safety group?
+Do you have an [Effective Altruists group in your city](https://forum.effectivealtruism.org/groups#local)?
+Or a [local AI safety group](https://www.aisafety.com/communities)?
 Reach out to them, get them to spread your invitation.
 Keep them informed of the protest, make them part of the process.
 
