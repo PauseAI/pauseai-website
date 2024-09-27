@@ -3,7 +3,11 @@ import { options } from '$lib/api.js'
 import type { Person } from '$lib/types.js'
 import { error, json } from '@sveltejs/kit'
 
-export const prerender = false
+export const prerender = true
+
+function airtableToCache(url: string): string {
+	return `https://pauseai.info/.netlify/images?url=${url}`
+}
 
 function recordToPerson(record: any): Person {
 	return {
@@ -11,7 +15,7 @@ function recordToPerson(record: any): Person {
 		name: record.fields.Name,
 		bio: record.fields.bio,
 		title: record.fields.title,
-		image: record.fields.image && record.fields.image[0].thumbnails.large.url,
+		image: record.fields.image && airtableToCache(record.fields.image[0].thumbnails.large.url),
 		privacy: record.fields.privacy,
 		org: record.fields.organisation,
 		checked: record.fields.checked
@@ -54,11 +58,6 @@ export async function GET({ fetch, setHeaders }) {
 			.filter(filter)
 			// Shuffle the array, although not truly random
 			.sort(() => 0.5 - Math.random())
-
-		setHeaders({
-			// AirTable image URLs only live for 2 hrs
-			'Cache-Control': 'public, max-age=60'
-		})
 
 		return json(out)
 	} catch (e) {
