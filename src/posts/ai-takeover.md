@@ -80,7 +80,7 @@ An AI has certain important advantages over humans that make a takeover attempt 
 3. **Parallelism**. A human can only do one thing at a time, whereas an AI can create new instances of itself and run them in parallel.
 4. **Memory**. A human can only remember a limited amount of information, whereas an AI can store virtually unlimited amounts of information.
 5. **Collaboration**. Humans can work together but are limited in the speed at which they communicate. They also have different, conflicting goals that make collaboration less effective. An AI can collaborate with other instances of itself at the speed of light, and it can have a single goal.
-6. **Self-improvement**. An AI can improve itself, whereas humans cannot.
+6. **Self-improvement**. An AI is just data and code. A sufficiently powerful AI could improve itself by writing better training algorithms, coming up with novel architectures, innovating agent runtimes or simply by scaling the amount of compute used.
 7. **Physical limitations**. An AI can run on any computer, whereas humans are limited by their own physical bodies that require specific temperatures, food, water, and oxygen. Humans need to sleep and are vulnerable to diseases. An AI can use any robotic body to interact with the physical world.
 
 These various advantages will make it very unlikely that humans will be able to stop a takeover attempt.

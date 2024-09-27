@@ -43,7 +43,7 @@ We periodically move items from the scenarios below to the Achievements section.
 
 ### Scenario 1: No additional funding
 
-- Hire an [**organizing director**](/2024-vacancy-organizing-director), who helps with growing our community and organizing volunteers. They will help us engage the community, organize events, build alliances/coalitions, and make volunteers more effective.
+- Hire an [**organizing director**](/2024-vacancy-organizing-director), who helps with growing our community and organizing volunteers. They will help us engage the community, organize events, build alliances/coalitions, improve our onboarding pipeline and make volunteers more effective.
 - Facilitate the formation of new National and Local groups. Provide them with help, guidance, materials and funding.
 - Organize protests and other events to raise awareness about the issue and grow our community.
 - Organize letter writing workshops to push the national-level politicians to initialize treaty negotiations.
@@ -78,4 +78,4 @@ We periodically move items from the scenarios below to the Achievements section.
 
 - All of the above, plus:
 - Have more funding available for [national](https://pauseai.info/national-groups) and local PauseAI chapters. Find talented and motivated individuals who can lead these.
-- Hire a PR agency to set up a large-scale international media campaign with a petition, advertisements.
+- Hire a PR agency to help us set up a large-scale international media campaign with a petition, advertisements.
