@@ -3,7 +3,7 @@ import { options } from '$lib/api.js'
 import type { Person } from '$lib/types.js'
 import { error, json } from '@sveltejs/kit'
 
-export const prerender = 'auto'
+export const prerender = false
 
 function recordToPerson(record: any): Person {
 	return {

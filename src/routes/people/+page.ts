@@ -1,7 +1,7 @@
 import type { Person } from '$lib/types'
 
 /** Airtable image links need to be refreshed every 2 hours */
-export const prerender = 'auto'
+export const prerender = false
 
 export const load = async ({ fetch, setHeaders }) => {
 	const response = await fetch('api/people')
