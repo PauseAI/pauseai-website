@@ -57,7 +57,7 @@ export async function GET({ fetch, setHeaders }) {
 
 		setHeaders({
 			// AirTable image URLs only live for 2 hrs
-			'Cache-Control': 'public, max-age=7200'
+			'Cache-Control': 'public, max-age=60'
 		})
 
 		return json(out)
