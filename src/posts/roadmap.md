@@ -43,14 +43,15 @@ We periodically move items from the scenarios below to the Achievements section.
 
 ### Scenario 1: No additional funding
 
-- Hire an [**organizing director**](/2024-vacancy-organizing-director), who helps with growing our community and organizing volunteers. They will help us engage the community, organize events, build alliances/coalitions, reach out to politicians, and make volunteers more effective.
-- Organize our biggest protest yet during the AI safety summit in France.
+- Hire an [**organizing director**](/2024-vacancy-organizing-director), who helps with growing our community and organizing volunteers. They will help us engage the community, organize events, build alliances/coalitions, and make volunteers more effective.
+- Facilitate the formation of new National and Local groups. Provide them with help, guidance, materials and funding.
+- Organize protests and other events to raise awareness about the issue and grow our community.
 - Organize letter writing workshops to push the national-level politicians to initialize treaty negotiations.
 - Build alliances with other organizations and overlapping cause areas to amplify our impact. E.g. artists, concerned parents, climate activists, job unions, etc.
 - Grow our social media presence through regular posts and engagement.
 - Participate in more [podcasts and interviews](/press).
 - Create more video content (focused on shorts) to reach a wider audience.
-- Get help from experts in various fields (marketing, policy, AI safety, community organizing, protesting, etc.) to learn from their experience and improve our work.
+- Get (paid) help from experts in various fields (marketing, policy, AI safety, community organizing, protesting, etc.) to learn from their experience and improve our work.
 - Experiment with social media ads to grow our community and learn what works.
 - Reach out to politicians and influencers.
 - Spend our remaining budget on PauseAI community projects through our MicroGrants program.
@@ -59,28 +60,22 @@ We periodically move items from the scenarios below to the Achievements section.
 
 - All of the above, plus:
 - Hire a **social media director**. This will help us improve our presence on social media and reach more people. Getting more people to join our protests and community is an effective multiplier for our impact. They will help improve our [communication strategy](/communication-strategy).
-- Hire a **project director** who will help us organize our projects and campaigns. Our 100+ projects in the Discord server need more structure and guidance.
+- Hire a **video creator** who specializes in making audiovisual content. They can help us professionalize our videos and reach a wider audience.
+- Hire a **web designer** to improve the look and feel of our website, specifically the Home page
+- Set up an international pipeline for (video) content. Make it easier for national groups to consistently post high-quality, translated content to grow their impact.
 - Increase our spending on Ads on various social media platforms.
 - Increase our MicroGrants budget, allowing us to fund more community projects.
 
-### Scenario 3: 200k to 500k funding
+### Scenario 3: 300k to 600k funding
 
 - All of the above, plus:
-- Hire a **video creator** who specializes in making audiovisual content. They can help us professionalize our videos and reach a wider audience.
 - Hire a **marketing director** who will help us improve our marketing strategy, our copywriting, and our branding.
 - Hire a **press director** who will help us get more media coverage. This person should have experience in PR and media relations.
-- Hire a **software engineer** who focuses on improving our website and CRM system. This person will help add gamification elements to our website, improve our onboarding process, and make our website more user-friendly.
+- Hire a **policy director** who will help us strategize and execute our policy goals. This person should help us educate volunteers on how to lobby effectively and help us with our policy proposals. This person needs to have international legal expertise and preferably knowledge in AI or technology policy/governance.
 - Drastically increased ads & MicroGrants budgets, leading to more growth and impactful community projects.
 
-### Scenario 4: 500k to 1M funding
+### Scenario 4: 600k+ funding
 
 - All of the above, plus:
-- Organize an online summit on AI risks and governance.
-- Hire a **summit organizer** who will help us organize the summit, invite speakers and guests, and make sure everything runs smoothly.
-- Hire a **policy director** who will help us strategize and execute our policy goals. This person should help us educate volunteers on how to lobby effectively and help us with our policy proposals. This person needs to have international legal expertise and preferably knowledge in AI or technology policy/governance.
-- Finance local PauseAI chapters. Find talented and motivated individuals who can lead these. We already have [local communities](/communities) and [two legal entities](/legal) (US & UK) for local chapters.
-
-### Scenario 5: 1M+ funding
-
-- All of the above, plus:
-- Hire a PR agency to set up a large-scale (international) media campaign.
+- Have more funding available for [national](https://pauseai.info/national-groups) and local PauseAI chapters. Find talented and motivated individuals who can lead these.
+- Hire a PR agency to set up a large-scale international media campaign with a petition, advertisements.
