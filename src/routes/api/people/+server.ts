@@ -3,6 +3,8 @@ import { options } from '$lib/api.js'
 import type { Person } from '$lib/types.js'
 import { error, json } from '@sveltejs/kit'
 
+export const prerender = 'auto'
+
 function recordToPerson(record: any): Person {
 	return {
 		id: record.id || 'noId',
@@ -42,7 +44,7 @@ async function fetchAllPages(fetch: any, url: any) {
 	return allRecords
 }
 
-export async function GET({ fetch }) {
+export async function GET({ fetch, setHeaders }) {
 	const url = `https://api.airtable.com/v0/appWPTGqZmUcs3NWu/tblZhQc49PkCz3yHd`
 
 	try {
@@ -52,6 +54,12 @@ export async function GET({ fetch }) {
 			.filter(filter)
 			// Shuffle the array, although not truly random
 			.sort(() => 0.5 - Math.random())
+
+		setHeaders({
+			// AirTable image URLs only live for 2 hrs
+			'Cache-Control': 'public, max-age=7200'
+		})
+
 		return json(out)
 	} catch (e) {
 		return error(500, 'err')
