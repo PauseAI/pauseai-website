@@ -6,7 +6,7 @@ import { error, json } from '@sveltejs/kit'
 export const prerender = true
 
 function airtableToCache(url: string): string {
-	return `https://pauseai.info/.netlify/images?url=${url}`
+	return `/.netlify/images?url=${url}`
 }
 
 function recordToPerson(record: any): Person {
