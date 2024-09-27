@@ -7,6 +7,6 @@ export const load = async ({ fetch }) => {
 	const people: Person[] = await response.json()
 	return {
 		people: people,
-		maxage: 3600 // 1 hour in seconds
+		maxage: 120 // 1 hour in seconds
 	}
 }
