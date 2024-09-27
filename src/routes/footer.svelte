@@ -4,11 +4,13 @@
 	import Edit from '$lib/components/Edit.svelte'
 	import WithdrawWidgetConsent from '$lib/components/widget-consent/WithdrawWidgetConsent.svelte'
 	import Socials from '$lib/components/Socials.svelte'
+	import LanguageSwitcher from '$lib/components/LanguageSwitcher.svelte'
+	import Navlink from '$lib/components/Navlink.svelte'
 </script>
 
 <footer>
 	<div class="joinbar">
-		<a class="c2a" href="/join">Join PauseAI &gt;</a>
+		<Navlink href="/join" activeClass="c2a">Join PauseAI &gt;</Navlink>
 		<div class="socials">
 			<Socials />
 		</div>
@@ -17,49 +19,50 @@
 	<div class="footer-links">
 		<div class="column">
 			<h2>Info</h2>
-			<a href="/faq">FAQ</a>
-			<a href="/proposal">Proposal</a>
-			<a href="/learn">Learn</a>
-			<a href="/press">Press / Media</a>
-			<a href="/people">People</a>
-			<a href="/teams">Teams</a>
-			<a href="/partnerships">Partnerships</a>
-			<a href="/privacy">Privacy policy</a>
-			<a href="/legal">Legal Info <br /> Stichting PauseAI <br /> (kvk 92951031)</a>
+			<Navlink href="/faq">FAQ</Navlink>
+			<Navlink href="/proposal">Proposal</Navlink>
+			<Navlink href="/learn">Learn</Navlink>
+			<Navlink href="/press">Press / Media</Navlink>
+			<Navlink href="/people">People</Navlink>
+			<Navlink href="/teams">Teams</Navlink>
+			<Navlink href="/partnerships">Partnerships</Navlink>
+			<Navlink href="/privacy">Privacy policy</Navlink>
+			<Navlink href="/legal">Legal Info <br /> Stichting PauseAI <br /> (kvk 92951031)</Navlink>
 		</div>
 		<div class="column">
 			<h2>Risks</h2>
-			<a href="/risks">Risks overview</a>
-			<a href="/outcomes">AI Outcomes</a>
-			<a href="/xrisk">Existential risk</a>
-			<a href="/psychology-of-x-risk">Psychology of x-risk</a>
-			<a href="/ai-takeover">AI takeover</a>
-			<a href="/cybersecurity-risks">Cybersecurity</a>
-			<a href="/dangerous-capabilities">Dangerous capabilities</a>
-			<a href="/sota">State of the art</a>
-			<a href="/urgency">Urgency</a>
+			<Navlink href="/risks">Risks overview</Navlink>
+			<Navlink href="/outcomes">AI Outcomes</Navlink>
+			<Navlink href="/xrisk">Existential risk</Navlink>
+			<Navlink href="/psychology-of-x-risk">Psychology of x-risk</Navlink>
+			<Navlink href="/ai-takeover">AI takeover</Navlink>
+			<Navlink href="/cybersecurity-risks">Cybersecurity</Navlink>
+			<Navlink href="/dangerous-capabilities">Dangerous capabilities</Navlink>
+			<Navlink href="/sota">State of the art</Navlink>
+			<Navlink href="/urgency">Urgency</Navlink>
 		</div>
 		<div class="column">
 			<h2>Take Action</h2>
-			<a href="/join">Join PauseAI</a>
-			<a href="/action">How you can help</a>
-			<a href="/communities">Local communities</a>
-			<a href="donate">Donate</a>
+			<Navlink href="/join">Join PauseAI</Navlink>
+			<Navlink href="/action">How you can help</Navlink>
+			<Navlink href="/communities">Local communities</Navlink>
+			<Navlink href="/donate">Donate</Navlink>
 			<ExternalLink href="https://pauseai-shop.fourthwall.com" target="_blank"
 				>Merchandise</ExternalLink
 			>
-			<a href="/protests">Protests</a>
-			<a href="/organizing-a-protest">Organize a protest</a>
-			<a href="/email-builder">Email builder</a>
-			<a href="/lobby-tips">Lobby tips</a>
+			<Navlink href="/protests">Protests</Navlink>
+			<Navlink href="/organizing-a-protest">Organize a protest</Navlink>
+			<Navlink href="/email-builder">Email builder</Navlink>
+			<Navlink href="/lobby-tips">Lobby tips</Navlink>
 		</div>
 		<div class="column">
 			<h2>Other</h2>
 			<Toggle />
+			<LanguageSwitcher />
 			<WithdrawWidgetConsent />
 			<Edit />
-			<a href="/posts">All pages</a>
-			<a href="/rss.xml" target="_blank">RSS</a>
+			<Navlink href="/posts">All pages</Navlink>
+			<Navlink href="/rss.xml">RSS</Navlink>
 			<ExternalLink href="https://creativecommons.org/licenses/by/4.0/" target="_blank"
 				>License: CC-BY 4.0</ExternalLink
 			>
@@ -122,20 +125,6 @@
 		font-weight: 700;
 		margin-bottom: 0rem;
 		margin-top: 0;
-	}
-
-	.c2a {
-		color: var(--text);
-		text-transform: uppercase;
-		text-decoration: none;
-		font-size: 1.1rem;
-		font-family: var(--font-heading);
-		font-weight: 700;
-		text-align: left;
-	}
-
-	.c2a:hover {
-		color: var(--brand);
 	}
 
 	.footer-links :global(a) {

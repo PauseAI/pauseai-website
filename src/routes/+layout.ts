@@ -1,9 +1,11 @@
-export const prerender = true
-import { redirect } from '@sveltejs/kit'
+import { loadTranslations } from '$lib/translations'
+import { handleRedirects } from '$lib/utils'
 
-export async function load({ url: { host, pathname: url } }) {
-	if (host === 'pauseai.org') {
-		return redirect(301, 'https://pauseai.info' + url)
-	}
-	return { url }
+export async function load({ url }) {
+	const { lang, pathname } = handleRedirects(url)
+
+	// Load translations
+	await loadTranslations(lang, pathname)
+
+	return { url, lang }
 }

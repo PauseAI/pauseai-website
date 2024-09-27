@@ -1,10 +1,8 @@
 import { error } from '@sveltejs/kit'
 
-export async function load({ params: { slug }, url }) {
-	// Extract the locale from the slug
-	const [locale, ...rest] = slug.split('/')
+export async function load({ params: { locale, slug }, url }) {
 	const lang = locale || 'en'
-	const pageSlug = rest.join('/') || slug
+	const pageSlug = slug
 
 	// Log the extracted values
 	console.log('Locale:', locale)
@@ -15,11 +13,11 @@ export async function load({ params: { slug }, url }) {
 		let content, meta
 		if (lang === 'en') {
 			// For English, look directly in the /posts folder
-			;({ default: content, metadata: meta = {} } = await import(`../../posts/${pageSlug}.md`))
+			;({ default: content, metadata: meta = {} } = await import(`../../../posts/${pageSlug}.md`))
 		} else {
 			// For other languages, use the language-specific folder
 			;({ default: content, metadata: meta = {} } = await import(
-				`../../posts/${lang}/${pageSlug}.md`
+				`../../../posts/${lang}/${pageSlug}.md`
 			))
 		}
 

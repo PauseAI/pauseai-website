@@ -1,0 +1,36 @@
+{
+	"title": "We need to Pause AI",
+	"description": "We are risking human extinction. We need to pause AI development, right now.",
+	"blocks": [
+		{
+			"title": "We risk <Mark>losing control</Mark>",
+			"content": "AI can have amazing benefits, but it could also erode our democracy, destabilize our economy and could be used to create powerful cyber weapons.",
+			"linkText": "Read about the risks",
+			"href": "/risks"
+		},
+		{
+			"title": "We risk <Mark>human extinction</Mark>",
+			"content": "Many AI labs and experts agree: AI could end humanity.",
+			"linkText": "Why and how AI can kill us",
+			"href": "/xrisk"
+		},
+		{
+			"title": "We need a <Mark>pause</Mark>",
+			"content": "Stop the development of AI systems more powerful than GPT-4 until we know how to make them safe. This needs to happen on an international level, and it needs to happen soon.",
+			"linkText": "Read the proposal",
+			"href": "/proposal"
+		},
+		{
+			"title": "WE NEED TO ACT <Mark>RIGHT NOW</Mark>",
+			"content": "In 2020, experts thought we had more than 35 years until AGI. Recent breakthroughs show we might be almost there. Superintelligence could be one innovation away, so we should tread carefully.",
+			"linkText": "How long do we have?",
+			"href": "/urgency"
+		},
+		{
+			"title": "<Mark>YOU</Mark> CAN HELP",
+			"content": "Too few people are well-informed about the potential risks of AI. Inform others, and help stop this race to the bottom.",
+			"linkText": "Take action",
+			"href": "/action"
+		}
+	]
+}

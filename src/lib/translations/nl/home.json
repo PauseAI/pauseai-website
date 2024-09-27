@@ -1,0 +1,36 @@
+{
+	"title": "We moeten AI pauzeren",
+	"description": "We riskeren menselijke uitsterving. We moeten de ontwikkeling van AI onmiddellijk pauzeren.",
+	"blocks": [
+		{
+			"title": "We riskeren <Mark>de controle te verliezen</Mark>",
+			"content": "AI kan geweldige voordelen hebben, maar het kan ook onze democratie ondermijnen, onze economie destabiliseren en kan worden gebruikt om krachtige cyberwapens te creëren.",
+			"linkText": "Lees over de risico's",
+			"href": "/risks"
+		},
+		{
+			"title": "We riskeren <Mark>menselijke uitsterving</Mark>",
+			"content": "Veel AI-laboratoria en experts zijn het erover eens: AI kan de mensheid beëindigen.",
+			"linkText": "Waarom en hoe AI ons kan doden",
+			"href": "/xrisk"
+		},
+		{
+			"title": "We hebben een <Mark>pauze</Mark> nodig",
+			"content": "Stop de ontwikkeling van AI-systemen die krachtiger zijn dan GPT-4 totdat we weten hoe we ze veilig kunnen maken. Dit moet op internationaal niveau gebeuren, en het moet snel gebeuren.",
+			"linkText": "Lees het voorstel",
+			"href": "/proposal"
+		},
+		{
+			"title": "WE MOETEN <Mark>NU</Mark> ACTIE ONDERNEMEN",
+			"content": "In 2020 dachten experts dat we meer dan 35 jaar hadden tot AGI. Recente doorbraken tonen aan dat we er misschien bijna zijn. Superintelligentie kan slechts één innovatie verwijderd zijn, dus we moeten voorzichtig zijn.",
+			"linkText": "Hoe lang hebben we nog?",
+			"href": "/urgency"
+		},
+		{
+			"title": "<Mark>JIJ</Mark> KUNT HELPEN",
+			"content": "Te weinig mensen zijn goed geïnformeerd over de potentiële risico's van AI. Informeer anderen en help deze race naar de afgrond te stoppen.",
+			"linkText": "Neem actie",
+			"href": "/action"
+		}
+	]
+}
