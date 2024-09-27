@@ -102,12 +102,13 @@ For example, if the ASI is not connected to the internet, it might manipulate hu
 It's worth noting that even this obvious safeguard is not being used as of now, as tools like ChatGPT are already connected to the internet and thousands of APIs.
 
 One other solution is to use ASI to _prevent_ a takeover.
-An aligned ASI would be able to come up with strategies that
+An aligned ASI would be able to come up with strategies that prevent other ASIs from taking over.
+This is sometimes referred to as a ["pivotal act"](https://arbital.com/p/pivotal/).
 
 ## A takeover is probably bad for most humans
 
 The ASI that happens to take over could do so for many reasons.
-For most random goals that it could have, humans are not part of it.
+For most random goals that it could have to do so, humans are not part of it.
 If we end up with an ASI that is indifferent to humans, we are competing for the same resources.
 
 It seems unlikely that the ASI wants to kill humanity for the sake of killing humanity - it is far more likely that it wants to use the resources that we use for some other objective. Additionally, humanity might pose a threat to the ASI's objective, as there is a risk that we will try to stop it from achieving its goal (e.g. by turning it off).
