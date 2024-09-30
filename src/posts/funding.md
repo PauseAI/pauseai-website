@@ -8,8 +8,8 @@ PauseAI has received €160,552 in donations so far.
 
 ## Largest donors
 
+- 50,000 ([Conjointly](https://conjointly.com/))
 - 36,952 (anonymous individual)
-- 30,000 ([Conjointly](https://conjointly.com/))
 - 27,528 (Lightspeed, through Greg Colbourn)
 - 18,410 ([Lightspeed](https://lightspeedgrants.org/))
 - 10,000 (Greg Colbourn)
