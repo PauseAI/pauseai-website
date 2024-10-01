@@ -3,13 +3,19 @@ import { options } from '$lib/api.js'
 import type { Person } from '$lib/types.js'
 import { error, json } from '@sveltejs/kit'
 
+export const prerender = true
+
+function airtableToCache(url: string): string {
+	return `/.netlify/images?url=${url}`
+}
+
 function recordToPerson(record: any): Person {
 	return {
 		id: record.id || 'noId',
 		name: record.fields.Name,
 		bio: record.fields.bio,
 		title: record.fields.title,
-		image: record.fields.image && record.fields.image[0].thumbnails.large.url,
+		image: record.fields.image && airtableToCache(record.fields.image[0].thumbnails.large.url),
 		privacy: record.fields.privacy,
 		org: record.fields.organisation,
 		checked: record.fields.checked
@@ -42,7 +48,7 @@ async function fetchAllPages(fetch: any, url: any) {
 	return allRecords
 }
 
-export async function GET({ fetch }) {
+export async function GET({ fetch, setHeaders }) {
 	const url = `https://api.airtable.com/v0/appWPTGqZmUcs3NWu/tblZhQc49PkCz3yHd`
 
 	try {
@@ -52,6 +58,7 @@ export async function GET({ fetch }) {
 			.filter(filter)
 			// Shuffle the array, although not truly random
 			.sort(() => 0.5 - Math.random())
+
 		return json(out)
 	} catch (e) {
 		return error(500, 'err')
