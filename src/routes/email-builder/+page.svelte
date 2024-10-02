@@ -250,8 +250,9 @@
 		that regulation is needed. Unfortunately,
 		<a href="https://twitter.com/DanielColson6/status/1704976418596352342">none</a>
 		of the existing proposals would do anything to slow down or prevent a superintelligent AI from being
-		created. I am afraid that lobbying efforts by AI companies to keep regulation at a minimum are turning
-		out to be highly effective.
+		created. We cannot expect that individual countries implement regulations that would slow down AI
+		development, as the incentives to race ahead are too high. We need international coordination, we
+		need politicians to initialize treaty negotiations.
 	</p>
 
 	<svelte:component this={selectedAction.section} />

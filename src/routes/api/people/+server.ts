@@ -8,7 +8,7 @@ function recordToPerson(record: any): Person {
 		id: record.id || 'noId',
 		name: record.fields.Name,
 		bio: record.fields.bio,
-		title: record.fields.title,
+		title: record.fields.title || 'Volunteer',
 		image: record.fields.image && record.fields.image[0].thumbnails.large.url,
 		privacy: record.fields.privacy,
 		org: record.fields.organisation,

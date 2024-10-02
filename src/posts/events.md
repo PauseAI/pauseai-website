@@ -3,6 +3,8 @@ title: PauseAI Events
 description: Meetings, workshops, protests, and more!
 ---
 
+## View all events [here](https://lu.ma/PauseAI)
+
 <iframe
   src="https://lu.ma/embed/calendar/cal-E1qhLPs5IvlQr8S/events?"
   width="600"
