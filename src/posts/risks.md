@@ -89,11 +89,13 @@ A pause in the biggest models could prevent them from becoming multipurpose chat
 
 We leave a lot of traces on the web.
 Connecting the dots is hard and time-consuming, but AI can now make this way cheaper.
-Large language models can now automously search the web, and are now good enough to analyze large amounts of data and find interesting details.
+Large language models can now autonomously search the web, and are now good enough to analyze large amounts of data and find interesting details.
 This can be used to find out information that would otherwise be very costly to find out.
 
 - Find information on where an individual is likely to be at a certain time. This can be used to track down dissidents or plan assassinations.
 - Link anonymous accounts on the web to real-life identities. This can be used to find out who is leaking information.
+
+In September 2024, a group of students [built an app](https://x.com/AnhPhuNguyen1/status/1840786336992682409) that shows information about strangers likes names, relatives and other personal data in augmented reality by using facial recognition and LLMs.
 
 ### Environmental risks
 
