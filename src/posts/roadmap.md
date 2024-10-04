@@ -41,7 +41,7 @@ We have around €90k in the bank.
 - Reach out to politicians and influencers.
 - Spend our remaining budget on PauseAI community projects through our MicroGrants program.
 
-### Scenario 1: 200k funding
+### Scenario 1: €200k funding
 
 - All of the above, plus:
 - Hire a **social media director**. This will help us improve our presence on social media and reach more people. Getting more people to join our protests and community is an effective multiplier for our impact. They will help improve our [communication strategy](/communication-strategy).
@@ -51,7 +51,7 @@ We have around €90k in the bank.
 - Increase our spending on Ads on various social media platforms.
 - Increase our MicroGrants budget, allowing us to fund more community projects.
 
-### Scenario 2: 600k funding
+### Scenario 2: €600k funding
 
 - All of the above, plus:
 - Hire a **campaign director** who will help us organize large scale campaigns and protests.
@@ -59,7 +59,7 @@ We have around €90k in the bank.
 - Hire a **policy director** who will help us strategize and execute our policy goals. This person should help us educate volunteers on how to lobby effectively and help us with our policy proposals. This person needs to have international legal expertise and preferably knowledge in AI or technology policy/governance.
 - Drastically increased ads & MicroGrants budgets, leading to more growth and impactful community projects.
 
-### Scenario 3: 1.2M+ funding
+### Scenario 3: €1.2M+ funding
 
 - All of the above, plus:
 - Have more funding available for [national](https://pauseai.info/national-groups) and local PauseAI chapters. Find talented and motivated individuals who can lead these.
