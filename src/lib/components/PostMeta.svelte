@@ -41,3 +41,5 @@
         ${JSON.stringify(schemaOrgMarkup)}
     </script>`}
 </svelte:head>
+
+<div style="display: none;" data-pagefind-index-attrs="data-content" data-content={description} />
