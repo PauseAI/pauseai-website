@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { Toaster } from 'svelte-french-toast'
 	import { ProgressBar } from '@prgm/sveltekit-progress-bar'
+	import { partytownSnippet } from '@builder.io/partytown/integration'
 
 	import Footer from './footer.svelte'
 	import Header from './header.svelte'
@@ -15,6 +16,15 @@
 
 	export let data
 </script>
+
+<svelte:head>
+	<script>
+		partytown = {
+			forward: ['dataLayer.push', 'gtag']
+		}
+	</script>
+	{@html '<script>' + partytownSnippet() + '</script>'}
+</svelte:head>
 
 <h2 style="width: 0; height: 0; margin: 0; padding: 0; visibility: hidden;" data-pagefind-ignore>
 	(Top)

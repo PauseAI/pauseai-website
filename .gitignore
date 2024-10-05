@@ -10,4 +10,5 @@ vite.config.ts.timestamp-*
 # Local Netlify folder
 .netlify
 /static/pagefind
+/static/~partytown
 .env
