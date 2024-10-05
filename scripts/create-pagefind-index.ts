@@ -14,7 +14,7 @@ const posts: Post[] = JSON.parse(await fs.readFile(POSTS_PATH, 'utf-8'))
 for (const post of posts) {
 	await index.addCustomRecord({
 		url: '/' + post.slug,
-		content: post.description ?? '',
+		content: post.title + '. ' + (post.description ?? ''),
 		language: 'en',
 		meta: {
 			title: post.title
