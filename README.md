@@ -36,6 +36,10 @@ pnpm run dev
 # Open http://localhost:37572
 ```
 
+## Debugging
+
+The website uses the Partytown library, which can clutter network requests in DevTools with entries for `proxytown`. To exclude those requests, you can use the filter `-url:proxytown`.
+
 ## Deployment
 
 The contents of the repository are continuously deployed to Netlify. You can track the deployment status [here](https://app.netlify.com/sites/pauseai/deploys).
