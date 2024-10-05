@@ -4,8 +4,11 @@ description: Ways to help out with pausing AGI development.
 ---
 
 The group of people who are aware of AI risks is still small.
+
 You are now one of them.
+
 **So your actions matter more than you think.**
+
 Here are some examples of what you can do.
 
 ## Inform others
