@@ -8,6 +8,7 @@
 		"build:dev": "vite build --mode development && run-s _postbuild:*",
 		"_postbuild:pagefind": "tsx scripts/create-pagefind-index.ts",
 		"_postbuild:exclude": "tsx scripts/exclude-from-edge-function.ts",
+		"_postbuild:caching": "tsx scripts/opt-in-to-caching.ts",
 		"preview": "vite preview",
 		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
 		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
