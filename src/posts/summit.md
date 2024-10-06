@@ -41,6 +41,13 @@ The Summit led to the following things:
 1. 16 Companies (most prominent AI companies) signed the ["Frontier AI Safety Commitments"](https://www.gov.uk/government/news/historic-first-as-companies-spanning-north-america-asia-europe-and-middle-east-agree-safety-commitments-on-development-of-ai?utm_source=substack&utm_medium=email), which means these companies will publish RSPs. Previous voluntary commitments [were ignored](https://www.politico.eu/article/rishi-sunak-ai-testing-tech-ai-safety-institute/).
 2. A [new statement](https://www.gov.uk/government/publications/seoul-ministerial-statement-for-advancing-ai-safety-innovation-and-inclusivity-ai-seoul-summit-2024/seoul-ministerial-statement-for-advancing-ai-safety-innovation-and-inclusivity-ai-seoul-summit-2024) was signed by 27 countries.
 
+## 2024 November San Francisco AI Safety Conference
+
+In September, the AISI and the US government surprised us with the announcement of a new summit (or "conference") in San Francisco.
+On November 20th-21st, the first international meeting of [AI safety institutes](https://www.commerce.gov/news/press-releases/2024/09/us-secretary-commerce-raimondo-and-us-secretary-state-blinken-announce) takes place in SF, organized by the US government.
+On Novermber 21st-22nd, The British AISI is hosting a ["conference"](https://www.aisi.gov.uk/work/conference-on-frontier-ai-safety-frameworks) in San Francisco.
+One could argue that some safety-minded higher-ups were disappointed by the choices that France made, and decided that a true Safety Summit was needed soon.
+
 ## ~~2024~~ 2025 France AI ~~Safety~~ Action Summit
 
 France opted to host an AI Safety Summit in November 2024, but has postponed it to February 2025.
