@@ -29,7 +29,6 @@ Here are some examples of what you can do.
 - Join or create a [local community](/communities) or [event](/events). 
 - Join the PauseAI [Discord](https://discord.gg/2XXWXvErfA), where most of the collaboration happens.
 - If you want to volunteer, fill out [this form](https://airtable.com/embed/appWPTGqZmUcs3NWu/pagoxRuCai4OYJEHt/form).
-<!-- MAYBE I'm not sure-->
 - [**Donate**](/donate) to PauseAI or buy some merchandise in our [store](https://pauseai-shop.fourthwall.com/).
 - **Follow** our [social media channels](https://linktr.ee/pauseai) and stay updated,
   <!-- ICONS in a line like the footer would be better -->
@@ -52,7 +51,7 @@ Here are some examples of what you can do.
 
 - **Don't work towards superintelligence**. If you have some cool idea on how we can make AI systems 10x faster, please don't build it / spread it / talk about it. We need to slow down AI development, not speed it up.
 - **Talk to your management and colleagues** about the risks. Get them to take an institutional position on this.
-- **Hold a seminar** on AI safety at your workplace. Check out the [videos](/learn#videos) for inspiration.
+- **Hold a seminar** on AI safety at your workplace. Check out [these talks and videos](https://www.youtube.com/playlist?list=PLI46NoubGtIJa0JVCBR-9CayxCOmU0EJt) for inspiration.
 - **Sign** the [Statement on AI Risk](https://www.safe.ai/statement-on-ai-risk).
 
 <!-- _Acknowledgements: Written by Greg Colbourn, [originally posted on the EA forum](https://forum.effectivealtruism.org/posts/8YXFaM9yHbhiJTPqp/agi-rising-why-we-are-in-a-new-era-of-acute-risk-and). Edited by Joep Meindertsma and others. For helpful comments and suggestions that have improved the post, and for the encouragement to write, I thank Akash Wasil, Johan de Kock, Jaeson Booker, Greg Kiss, Peter S. Park, Nik Samolyov, Yanni Kyriacos, Chris Leong, Alex M, Amritanshu Prasad, Dušan D. Nešić, and the rest of the [AGI Moratorium HQ Slack](https://join.slack.com/t/agi-moratorium-hq/shared_invite/zt-1u6s1opls-~_l_Ynrr~8ay~SiA2yEqAQ) and AI Notkilleveryoneism Twitter._ -->
