@@ -1,4 +1,7 @@
 <script lang="ts">
+	import { ParaglideJS } from '@inlang/paraglide-sveltekit'
+	import { i18n } from '$lib/i18n'
+
 	import { Toaster } from 'svelte-french-toast'
 	import { ProgressBar } from '@prgm/sveltekit-progress-bar'
 
@@ -16,37 +19,39 @@
 	export let data
 </script>
 
-<h2 style="width: 0; height: 0; margin: 0; padding: 0; visibility: hidden;" data-pagefind-ignore>
-	(Top)
-</h2>
+<ParaglideJS {i18n}>
+	<h2 style="width: 0; height: 0; margin: 0; padding: 0; visibility: hidden;" data-pagefind-ignore>
+		(Top)
+	</h2>
 
-<div class="layout">
-	<Header />
+	<div class="layout">
+		<Header />
 
-	<main>
-		<PageTransition url={data.url}>
-			<slot />
-		</PageTransition>
-	</main>
+		<main>
+			<PageTransition url={data.url}>
+				<slot />
+			</PageTransition>
+		</main>
 
-	<Footer />
-</div>
+		<Footer />
+	</div>
 
-<Toaster
-	toastOptions={{
-		style: 'background-color: var(--bg-subtle); color: var(--text)',
-		iconTheme: {
-			primary: 'var(--brand)',
-			secondary: 'white'
-		}
-	}}
-/>
+	<Toaster
+		toastOptions={{
+			style: 'background-color: var(--bg-subtle); color: var(--text)',
+			iconTheme: {
+				primary: 'var(--brand)',
+				secondary: 'white'
+			}
+		}}
+	/>
 
-{#if !['/', '/outcomes', '/pdoom', '/quotes'].includes(data.url)}
-	<Toc />
-{/if}
+	{#if !['/', '/outcomes', '/pdoom', '/quotes'].includes(data.url)}
+		<Toc />
+	{/if}
 
-<ProgressBar color="var(--brand)" />
+	<ProgressBar color="var(--brand)" />
+</ParaglideJS>
 
 <style>
 	/* @import url('$lib/reset.css');
