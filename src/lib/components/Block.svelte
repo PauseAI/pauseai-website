@@ -6,7 +6,7 @@
 
 <a {href} class="block" class:fade-in={visible}>
 	<div class="text">
-		<h2><slot name="title" /></h2>
+		<h2 class="title"><slot name="title" /></h2>
 		<p>
 			<slot />
 		</p>
@@ -63,5 +63,11 @@
 		h2 {
 			font-size: 1.5rem;
 		}
+	}
+
+	.title :global(u) {
+		text-decoration-color: var(--brand);
+		text-decoration-thickness: 4px;
+		text-underline-offset: 2.5px;
 	}
 </style>
