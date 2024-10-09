@@ -5,7 +5,7 @@ description: Implement a temporary pause on the training of AI systems more powe
 
 **Implement a pause on the training of AI systems more powerful than GPT-4**, until we know how to build them safely and keep them under democratic control.
 
-_Version: Sept 22nd, 2024_
+_Version: Oct 9th, 2024_
 
 Individual countries can and should implement this measure _right now_.
 Especially the US (or California, specifically) should implement a Pause, since it is home to virtually all leading AI companies.
@@ -59,8 +59,8 @@ There will come a point where potentially superintelligent AI models can be trai
 We need to be prepared for this.
 We should consider the following policies:
 
-- **Limit publication of training algorithms / runtime improvements**. Sometimes a new algorithm is published that makes training much more efficient. The Transformer architecture, for example, enabled virtually all recent progress in AI. These types of capability jumps can happen at any time, and we should consider limiting the publication of such algorithms to minimize the risk of a sudden capability jump. Similarly, some runtime innovations could drastically change what can be done with existing models. These advancements may need to be regulated as well.
-- **Limit capability advancements of computational resources**. If training a superintelligence becomes possible on consumer hardware, we are in trouble. We should consider limiting capability advances of hardware.
+- **Limit publication of training algorithms / runtime improvements**. Sometimes a new algorithm is published that makes training much more efficient. The Transformer architecture, for example, enabled virtually all recent progress in AI. These types of capability jumps can happen at any time, and we should consider limiting the publication of such algorithms to minimize the risk of a sudden capability jump. Similarly, some runtime innovations could drastically change what can be done with existing models. Banning the publication of such algorithms can be implemented using similar means as how we ban other forms of information, such as illegal pornographic media.
+- **Limit capability advancements of computational resources**. If training a superintelligence becomes possible on consumer hardware, we are in trouble. We should consider limiting capability advances of hardware (e.g. through limitations on lithography, chip design, and novel computing paradigms such as photonic chips and quantum computing).
 
 ## Help to achieve this
 
