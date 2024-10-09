@@ -333,6 +333,12 @@ const PauseAICommunities: Community[] = [
 		lat: 47.3769,
 		lon: 8.5417,
 		link: discordInvite
+	},
+	{
+		name: 'PauseAI Charleston',
+		lat: 32.7765,
+		lon: -79.9311,
+		link: discordInvite
 	}
 ]
 
@@ -344,10 +350,10 @@ const AdjacentCommunities: Community[] = [
 		link: 'https://www.eaeindhoven.nl/ai-safety-team'
 	},
 	{
-		name: 'AI Safety Utrecht',
+		name: 'AI Safety Utrecht (whatsapp)',
 		lat: 52.09073739999999,
 		lon: 5.121420100000023,
-		link: 'https://eautrecht.nl/aisafety'
+		link: 'https://chat.whatsapp.com/BczoMYFuOcO5XRxnjYlQmr'
 	},
 	{
 		name: 'Delft AI Safety Initiative',
