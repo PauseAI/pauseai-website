@@ -12,6 +12,8 @@ They are representing _you_.
 
 So don't be afraid to reach out to them.
 
+If you are from the US, you can check out our particular [US Lobbying Guide](/us-lobby-guide).
+
 ## Find people to help you
 
 - It can be useful to find people who are skilled at lobbying, who know the political culture in your country.
