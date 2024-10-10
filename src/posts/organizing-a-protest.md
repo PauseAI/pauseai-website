@@ -56,7 +56,7 @@ Also, update the `protests.md` file to link to the protest.
 
 ### Create an Event page
 
-Make a [Luma event](/events). Or use another RSVP tool like Facebook.
+Add the event to [this website](/events), which can be then shared separately via Luma to invite people. Or use another RSVP tool like Facebook.
 You can also decide to link to a Whatsapp group or something similar instead.
 The important bit is that you can keep people updated about what's going to happen.
 
@@ -83,7 +83,7 @@ Do this about 24 to 48 hrs before the protest.
 ### Reach out to people and organizations
 
 Consider adding the event to the list of events of [AI Safety](https://www.aisafety.com/events-and-training), [Effective Altruism](https://forum.effectivealtruism.org/events), and [LessWrong](https://www.lesswrong.com/community). 
-If your protest is part of an international protest, the events could already exist.
+If your protest is part of an international protest, the events may already exist.
 
 Do you have an [Effective Altruists group in your city](https://forum.effectivealtruism.org/groups#local)?
 Or a [local AI safety group](https://www.aisafety.com/communities)?
