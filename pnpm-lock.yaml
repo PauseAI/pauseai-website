@@ -8,12 +8,6 @@ importers:
 
   .:
     dependencies:
-      '@fontsource/jetbrains-mono':
-        specifier: ^4.5.12
-        version: 4.5.12
-      '@fontsource/manrope':
-        specifier: ^4.5.13
-        version: 4.5.13
       '@fontsource/roboto-slab':
         specifier: ^5.1.0
         version: 5.1.0
@@ -582,12 +576,6 @@ packages:
   '@eslint/js@8.57.1':
     resolution: {integrity: sha512-d9zaMRSTIKDLhctzH12MtXvJKSSUhaHcjV+2Z+GK+EEY7XKpP5yR4x+N3TAcHTcu963nIr+TMcCb4DBCYX1z6Q==}
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
-
-  '@fontsource/jetbrains-mono@4.5.12':
-    resolution: {integrity: sha512-LJF1ala1/u+wXZmESFqIk08FA9yGX4/uAAleCHmXUMgEjvNAYFHUQQ7eK5hQQoBOwh99cU5suTrqYqEkgzwzPA==}
-
-  '@fontsource/manrope@4.5.13':
-    resolution: {integrity: sha512-UFN5DMGBp8nFpwhPQXfpSbsEm4OVISqUKQy+rA+pb1zYGoH+OGN1woKEND8VLx+pC7rY3nrPRCJvSuuOaNdW7Q==}
 
   '@fontsource/roboto-slab@5.1.0':
     resolution: {integrity: sha512-qLqqRm5nwNVgxcfkwL7loyCZr5R5ZR0Vo5vZFgem+zrSKdufB8zQAcOFR3i3ZGnFjuQc2izWSXheY8FSqJ8UoQ==}
@@ -2391,10 +2379,6 @@ snapshots:
       - supports-color
 
   '@eslint/js@8.57.1': {}
-
-  '@fontsource/jetbrains-mono@4.5.12': {}
-
-  '@fontsource/manrope@4.5.13': {}
 
   '@fontsource/roboto-slab@5.1.0': {}
 

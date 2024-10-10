@@ -40,8 +40,6 @@
 		"vite": "^5.4.8"
 	},
 	"dependencies": {
-		"@fontsource/jetbrains-mono": "^4.5.12",
-		"@fontsource/manrope": "^4.5.13",
 		"@fontsource/roboto-slab": "^5.1.0",
 		"@fontsource/saira-condensed": "^5.1.0",
 		"@pagefind/default-ui": "^1.1.1",
