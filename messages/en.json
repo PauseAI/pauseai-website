@@ -7,6 +7,7 @@
 	"home_xrisk_content": "Many AI labs and experts agree: AI could end humanity.",
 	"home_xrisk_c2a": "Why and how AI can kill us",
 	"home_proposal_title": "We need a <u>pause</u>",
+	"_home_proposal_content_instructions": "'Stop' isn't addressed at the reader.",
 	"home_proposal_content": "Stop the development of AI systems more powerful than GPT-4 until we know how to make them safe. This needs to happen on an international level, and it needs to happen soon.",
 	"home_proposal_c2a": "Read the proposal",
 	"home_urgency_title": "WE NEED TO ACT <u>RIGHT NOW</u>",
@@ -15,11 +16,15 @@
 	"home_action_title": "<u>YOU</u> CAN HELP",
 	"home_action_content": "Too few people are well-informed about the potential risks of AI. Inform others, and help stop this race to the bottom.",
 	"home_action_c2a": "Take action",
+	"_header_instructions": "All translations prefixed with 'header_' should be as short as possible to fit the layout. Try to keep them at a single word while still being useful as links to the pages.",
 	"header_risks": "Risks",
 	"header_proposal": "Proposal",
+	"_header_events_instructions": "In some language 'calendar' might be the better wording for meeting the goal of a short translation.",
 	"header_events": "Events",
 	"header_faq": "FAQ",
+	"_header_action_instructions": "German: Handeln",
 	"header_action": "Act",
 	"header_donate": "Donate",
+	"_header_join_instructions": "In some languages 'join in' might be more appropriate if the translation doesn't consist of two words.",
 	"header_join": "Join"
 }
