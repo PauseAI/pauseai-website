@@ -1,23 +1,25 @@
 {
 	"$schema": "https://inlang.com/schema/inlang-message-format",
-
 	"home_risks_title": "We risk <u>losing control</u>",
 	"home_risks_content": "AI can have amazing benefits, but it could also erode our democracy, destabilize our economy and could be used to create powerful cyber weapons.",
 	"home_risks_c2a": "Read about the risks",
-
 	"home_xrisk_title": "We risk <u>human extinction</u>",
 	"home_xrisk_content": "Many AI labs and experts agree: AI could end humanity.",
 	"home_xrisk_c2a": "Why and how AI can kill us",
-
 	"home_proposal_title": "We need a <u>pause</u>",
 	"home_proposal_content": "Stop the development of AI systems more powerful than GPT-4 until we know how to make them safe. This needs to happen on an international level, and it needs to happen soon.",
 	"home_proposal_c2a": "Read the proposal",
-
 	"home_urgency_title": "WE NEED TO ACT <u>RIGHT NOW</u>",
 	"home_urgency_content": "In 2020, experts thought we had more than 35 years until AGI. Recent breakthroughs show we might be almost there. Superintelligence could be one innovation away, so we should tread carefully.",
 	"home_urgency_c2a": "How long do we have?",
-
 	"home_action_title": "<u>YOU</u> CAN HELP",
 	"home_action_content": "Too few people are well-informed about the potential risks of AI. Inform others, and help stop this race to the bottom.",
-	"home_action_c2a": "Take action"
+	"home_action_c2a": "Take action",
+	"header_risks": "Risks",
+	"header_proposal": "Proposal",
+	"header_events": "Events",
+	"header_faq": "FAQ",
+	"header_action": "Act",
+	"header_donate": "Donate",
+	"header_join": "Join"
 }

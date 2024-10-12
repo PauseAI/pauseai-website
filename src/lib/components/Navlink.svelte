@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { page } from '$app/stores'
-	export let href: string
+	export let href: string | undefined = undefined
 	export let c2a = false
 	export let ariaLabel: string | undefined = undefined
 </script>
