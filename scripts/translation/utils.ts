@@ -1,7 +1,8 @@
 type Task<T> = () => Promise<T> | T
+type WrappedTask<T> = () => Promise<T>
 
 export class TaskQueue {
-	private queue: Array<() => Promise<void>> = []
+	private queue: Array<WrappedTask<any>> = []
 	private interval: number
 	private isRunning: boolean = false
 
@@ -35,9 +36,9 @@ export class TaskQueue {
 		this.isRunning = true
 
 		while (this.queue.length > 0) {
-			const task = this.queue.shift()
-			if (task) {
-				await task() // Execute the task and await its completion
+			const wrappedTask = this.queue.shift()
+			if (wrappedTask) {
+				wrappedTask() // Execute the task
 			}
 
 			// Always wait for the configured interval before processing the next task
