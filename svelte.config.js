@@ -8,6 +8,13 @@ import remarkUnwrapImages from 'remark-unwrap-images'
 import remarkToc from 'remark-toc'
 import rehypeSlug from 'rehype-slug'
 
+import fs from 'fs'
+
+/**
+ * @type {import('./project.inlang/settings.json')}
+ */
+const inlangSettings = JSON.parse(fs.readFileSync('./project.inlang/settings.json'))
+
 /** @type {import('mdsvex').MdsvexOptions} */
 const mdsvexOptions = {
 	extensions: ['.md'],
@@ -34,7 +41,10 @@ const config = {
 			adapterNetlify({
 				edge: true
 			})
-		)
+		),
+		prerender: {
+			entries: ['*'].concat(inlangSettings.languageTags.map((tag) => '/' + tag))
+		}
 	}
 }
 
