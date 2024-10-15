@@ -1,4 +1,5 @@
-import adapter from '@sveltejs/adapter-netlify'
+import adapterPatchPrerendered from './src/lib/adapter-patch-prerendered.js'
+import adapterNetlify from '@sveltejs/adapter-netlify'
 import { vitePreprocess } from '@sveltejs/vite-plugin-svelte'
 
 import { mdsvex, escapeSvelte } from 'mdsvex'
@@ -29,9 +30,11 @@ const config = {
 	extensions: ['.svelte', '.md'],
 	preprocess: [vitePreprocess(), mdsvex(mdsvexOptions)],
 	kit: {
-		adapter: adapter({
-			edge: true
-		})
+		adapter: adapterPatchPrerendered(
+			adapterNetlify({
+				edge: true
+			})
+		)
 	}
 }
 
