@@ -19,7 +19,7 @@ export const handle: Handle = async function ({ event, resolve }) {
 		const firstElement = pathname.substring(1).split('/')[0]
 		const languageFromUrl = runtime.isAvailableLanguageTag(firstElement) ? firstElement : null
 		if (!languageFromUrl) {
-			redirect(302, '/' + runtime.sourceLanguageTag + pathname)
+			redirect(302, i18n.resolveRoute(pathname, i18n.config.defaultLanguageTag))
 		}
 		runtime.setLanguageTag(languageFromUrl)
 		//@ts-ignore
