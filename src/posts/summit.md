@@ -43,12 +43,17 @@ The Summit led to the following things:
 ## 2024 November San Francisco AI Safety Conference
 
 In September, the AISI and the US government surprised us with the announcement of a new summit (or "conference") in San Francisco.
-On November 20th-21st, the first international meeting of [AI safety institutes](https://www.commerce.gov/news/press-releases/2024/09/us-secretary-commerce-raimondo-and-us-secretary-state-blinken-announce) takes place in SF, organized by the US government.
-On Novermber 21st-22nd, The British AISI is hosting a ["conference"](https://www.aisi.gov.uk/work/conference-on-frontier-ai-safety-frameworks) in San Francisco.
-One of the goals of this conference is to get various AI Safety Institutes to share their research and ideas.
+Or, more precisely, two new conferences.
+
+On **November 20th-21st**, the first international meeting of [AI safety institutes](https://www.commerce.gov/news/press-releases/2024/09/us-secretary-commerce-raimondo-and-us-secretary-state-blinken-announce) takes place in SF, organized by the US government, aiming to "begin advancing global collaboration and knowledge sharing on AI safety."
+The initial members of the International Network of AI Safety Institutes are Australia, Canada, the European Union, France, Japan, Kenya, the Republic of Korea, Singapore, the United Kingdom, and the United States.
+China is notably absent from this list - even thought [China's new AI Safety Institute](https://x.com/yi_zeng/status/1831133250946838740) has recently been announced.
+This very much seems like a missed opportunity, as the China-US relationship is of the utmost importance when it comes to AI Safety.
+
+On **November 21st-22nd**, The British AISI is hosting a ["conference"](https://www.aisi.gov.uk/work/conference-on-frontier-ai-safety-frameworks) in San Francisco.
+The main goal here is to "convene experts from signatory companies and from research organisations to discuss the most pressing challenges in the design and implementation of frontier AI safety frameworks."
 
 One could argue that some safety-minded higher-ups were disappointed by the choices that France made, and decided that a true Safety Summit was needed soon.
-It is incredibly unfortunate that [China's new AI Safety Institute](https://x.com/yi_zeng/status/1831133250946838740) was not invited to join.
 
 ## ~~2024~~ 2025 France AI ~~Safety~~ Action Summit
 
