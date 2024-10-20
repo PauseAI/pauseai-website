@@ -1,8 +1,15 @@
 import { error } from '@sveltejs/kit'
+import { i18n } from '$lib/i18n.js'
 
-export async function load({ params: { slug } }) {
+const runtime = i18n.config.runtime
+
+export async function load({ params: { slug }, depends }) {
+	// @ts-expect-error
+	depends('paraglide_lang')
 	try {
-		const { default: content, metadata: meta = {} } = await import(`../../posts/${slug}.md`)
+		const language = runtime.languageTag()
+
+		const { default: content, metadata: meta = {} } = await importMarkdown(language, slug)
 
 		return {
 			content,
@@ -11,5 +18,13 @@ export async function load({ params: { slug } }) {
 		}
 	} catch (e) {
 		throw error(404, `Could not find ${slug}`)
+	}
+}
+
+async function importMarkdown(language: string, slug: string) {
+	if (language == runtime.sourceLanguageTag) {
+		return await import(`../../posts/${slug}.md`)
+	} else {
+		return await import(`../../temp/translations/${language}/${slug}.md`)
 	}
 }

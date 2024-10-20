@@ -3,7 +3,7 @@ export type PromptGenerator = (languageName: string, content: string) => string
 export const generateJsonPrompt: PromptGenerator = (languageName: string, content: string) => {
 	return `${commonHead(languageName, 'JSON')}
 
-Maintain the JSON structure and only translate the values, not the keys. Keys prefixed with an underscore provide additional instructions for specific translations. Ensure the result is valid JSON syntax:
+Maintain the JSON structure and only translate the values, not the keys. Keys prefixed with an underscore provide additional instructions for specific translations. Always make sure the result is valid JSON syntax:
 
 ${content}
 
@@ -14,7 +14,7 @@ Translated JSON:`
 export const generateMarkdownPrompt: PromptGenerator = (languageName: string, content: string) => {
 	return `${commonHead(languageName, 'Markdown')}
 
-Maintain the structure of the document and don't translate link HTML tags, link targets and file names. Ensure the result is valid Markdown syntax:
+Maintain the structure of the document and don't translate link HTML tags, link targets and file names. The content of social media widgets has to remain unchanged as well. Always make sure the result is valid Markdown syntax:
 
 ${content}
 
