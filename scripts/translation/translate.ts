@@ -108,23 +108,22 @@ async function translateOrLoad(
 						translated = cached.data[0].translation
 					} else {
 						translated = await translate(content, promptGenerator, language)
-						const idResponse = await supabase.from('translation').select('id').match({
-							path: pathInCache,
-							language_code: language
-						})
-						const id = idResponse.data?.[0]?.id
-						if (id)
-							console.log(
-								`Updating outdated translation in cache for ${pathInCache} in ${language}`
-							)
-						else console.log(`Creating new cache entry for ${pathInCache} in ${language}`)
-						await supabase.from('translation').upsert({
-							id: id,
+						const { status } = await supabase.from('translation').upsert({
 							path: pathInCache,
 							hash: hashedContent,
 							language_code: language,
 							translation: translated
 						})
+						switch (status) {
+							case 200:
+								console.log(
+									`Updated outdated translation in cache for ${pathInCache} in ${language}`
+								)
+								break
+							case 201:
+								console.log(`Created new cache entry for ${pathInCache} in ${language}`)
+								break
+						}
 					}
 					const target = targetStrategy(language, path)
 					const directory = dirname(target)
