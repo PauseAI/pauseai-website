@@ -20,6 +20,7 @@ export const communitiesMeta: Post = {
 }
 
 const discordInvite = 'https://discord.gg/CR5u5BTBwy'
+const discordGermany = 'https://discord.gg/VuVVyJQ37M'
 
 const PauseAICommunities: Community[] = [
 	{
@@ -326,7 +327,7 @@ const PauseAICommunities: Community[] = [
 		name: 'PauseAI Hamburg',
 		lat: 53.5511,
 		lon: 9.9937,
-		link: discordInvite
+		link: discordGermany
 	},
 	{
 		name: 'PauseAI Zurich',
@@ -339,6 +340,12 @@ const PauseAICommunities: Community[] = [
 		lat: 32.7765,
 		lon: -79.9311,
 		link: discordInvite
+	},
+	{
+		name: 'PauseAI Osnabrück',
+		lat: 52.2681,
+		lon: 8.0566,
+		link: discordGermany
 	}
 ]
 
