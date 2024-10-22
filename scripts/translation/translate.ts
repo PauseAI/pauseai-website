@@ -51,13 +51,13 @@ async function translateOrLoadMessages(
 	pathInCache: string,
 	languages: string[]
 ) {
-	return await translateOrLoad(
-		[path],
-		() => pathInCache,
+	return await translateOrLoad({
+		paths: [path],
+		cacheNamingStrategy: () => pathInCache,
 		languages,
-		generateJsonPrompt,
-		(language) => join(basePath, language + '.json')
-	)
+		promptGenerator: generateJsonPrompt,
+		targetStrategy: (language) => join(basePath, language + '.json')
+	})
 }
 
 async function translateOrLoadMarkdown(
@@ -66,48 +66,48 @@ async function translateOrLoadMarkdown(
 	languages: string[],
 	target: string
 ) {
-	return await translateOrLoad(
+	return await translateOrLoad({
 		paths,
-		(path) => relative(basePath, path),
+		cacheNamingStrategy: (path) => relative(basePath, path),
 		languages,
-		generateMarkdownPrompt,
-		(language, path) => {
+		promptGenerator: generateMarkdownPrompt,
+		targetStrategy: (language, path) => {
 			const relativePath = relative(basePath, path)
 			return join(target, language, relativePath)
 		}
-	)
+	})
 }
 
 type CacheNamingStrategy = (path: string) => string
 type TargetStrategy = (language: string, path: string) => string
 
-async function translateOrLoad(
-	paths: string[],
-	cacheNamingStrategy: CacheNamingStrategy,
-	languages: string[],
-	promptGenerator: PromptGenerator,
+async function translateOrLoad(options: {
+	paths: string[]
+	cacheNamingStrategy: CacheNamingStrategy
+	languages: string[]
+	promptGenerator: PromptGenerator
 	targetStrategy: TargetStrategy
-) {
+}) {
 	// for (path of paths) {
 	await Promise.all(
-		paths.map(async (path) => {
+		options.paths.map(async (path) => {
 			const content = await fs.readFile(path, 'utf-8')
 			const hashedContent = hash('md5', content)
 			// for (language of languages) {
 			await Promise.all(
-				languages.map(async (language) => {
-					const pathInCache = cacheNamingStrategy(path)
+				options.languages.map(async (language) => {
+					const pathInCache = options.cacheNamingStrategy(path)
 					const cached = await supabase.from('translation').select('translation').match({
 						path: pathInCache,
 						hash: hashedContent,
 						language_code: language
 					})
-					let translated
+					let translated: string
 					if (cached.data?.length) {
 						console.log(`Using up-to-date translation from cache for ${pathInCache} in ${language}`)
 						translated = cached.data[0].translation
 					} else {
-						translated = await translate(content, promptGenerator, language)
+						translated = await translate(content, options.promptGenerator, language)
 						const { status } = await supabase.from('translation').upsert({
 							path: pathInCache,
 							hash: hashedContent,
@@ -125,10 +125,10 @@ async function translateOrLoad(
 								break
 						}
 					}
-					const target = targetStrategy(language, path)
+					const target = options.targetStrategy(language, path)
 					const directory = dirname(target)
 					if (!existsSync(directory)) await fs.mkdir(directory, { recursive: true })
-					await fs.writeFile(targetStrategy(language, path), translated)
+					await fs.writeFile(target, translated)
 				})
 			)
 		})

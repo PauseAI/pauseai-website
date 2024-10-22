@@ -4,8 +4,7 @@ import { i18n } from '$lib/i18n.js'
 const runtime = i18n.config.runtime
 
 export async function load({ params: { slug }, depends }) {
-	// @ts-expect-error
-	depends('paraglide_lang')
+	depends('paraglide:lang')
 	try {
 		const language = runtime.languageTag()
 
