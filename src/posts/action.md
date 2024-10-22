@@ -13,7 +13,7 @@ Here are some examples of what you can do.
 
 ## Inform others
 
-- **Share** about AI risk on social media. This website might be a good start.  <!-- Once we have a intro video that should be our go to. If we are far from that we could share some official e-flyers here? https://drive.google.com/drive/u/1/folders/1c6D_i8U95FUpfrl-eR-oRNoHUf3zghOc -->
+- **Share** about AI risk on social media. This website might be a good start. <!-- Once we have a intro video that should be our go to. If we are far from that we could share some official e-flyers here? https://drive.google.com/drive/u/1/folders/1c6D_i8U95FUpfrl-eR-oRNoHUf3zghOc -->
 - **Create** [articles](/learn#articles), [videos](/learn#videos) or [memes](https://twitter.com/AISafetyMemes).
 - **Talk** to people in your life about this. Answer their questions, and get them to act. Use our [counterarguments](/counterarguments) to help you be more persuasive.
 - [**Tabling**](/tabling) and [**flyering**](/flyering) are great ways to reach many people in a short amount of time.
@@ -26,8 +26,9 @@ Here are some examples of what you can do.
 
 ## Join the movement
 
-- Join or create a [local community](/communities) or [event](/events). 
+- Join or create a [local community](/communities) or [event](/events).
 - Join the PauseAI [Discord](https://discord.gg/2XXWXvErfA), where most of the collaboration happens.
+- Check out the [vacancies](/vacancies).
 - If you want to volunteer, fill out [this form](https://airtable.com/embed/appWPTGqZmUcs3NWu/pagoxRuCai4OYJEHt/form).
 - [**Donate**](/donate) to PauseAI or buy some merchandise in our [store](https://pauseai-shop.fourthwall.com/).
 - **Follow** our [social media channels](https://linktr.ee/pauseai) and stay updated,
