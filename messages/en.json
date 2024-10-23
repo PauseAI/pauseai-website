@@ -26,5 +26,6 @@
 	"header_action": "Act",
 	"header_donate": "Donate",
 	"_header_join_instructions": "In some languages 'join in' might be more appropriate if the translation doesn't consist of two words.",
-	"header_join": "Join"
+	"header_join": "Join",
+	"simpletoc_heading": "Table of contents"
 }
