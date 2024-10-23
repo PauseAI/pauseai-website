@@ -5,7 +5,7 @@
 	import Node from './Node.svelte'
 
 	let heading: HTMLHeadingElement
-	let headingsBelow: Element[] = []
+	let headingsBelow: Element[] | undefined
 
 	onMount(() => {
 		const parent = heading.parentElement
@@ -15,11 +15,12 @@
 		const index = siblingsArray.indexOf(heading)
 		const siblingsBelow = siblingsArray.slice(index + 1)
 		headingsBelow = siblingsBelow.filter((sibling) => sibling.tagName.startsWith('H'))
-		console.log(headingsBelow)
 	})
 </script>
 
-{#if browser && headingsBelow}
+{#if browser}
 	<h2 bind:this={heading}>{m.simpletoc_heading()}</h2>
-	<Node headings={headingsBelow} />
+	{#if headingsBelow}
+		<Node headings={headingsBelow} />
+	{/if}
 {/if}
