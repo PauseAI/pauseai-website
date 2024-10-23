@@ -6,10 +6,11 @@
 	import SearchIcon from 'lucide-svelte/icons/search'
 	import LanguageSwitcher from '$lib/components/LanguageSwitcher.svelte'
 	import * as m from '$lib/paraglide/messages.js'
+	import { i18n } from '$lib/i18n'
 
 	const enableBot = false
 
-	$: logo_animate = $page.url.pathname != '/'
+	$: logo_animate = i18n.route($page.url.pathname) != '/'
 </script>
 
 <nav>
