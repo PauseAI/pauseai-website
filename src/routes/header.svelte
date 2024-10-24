@@ -4,9 +4,13 @@
 	import { botName } from '$lib/config'
 	import { page } from '$app/stores'
 	import SearchIcon from 'lucide-svelte/icons/search'
+	import LanguageSwitcher from '$lib/components/LanguageSwitcher.svelte'
+	import * as m from '$lib/paraglide/messages.js'
+	import { i18n } from '$lib/i18n'
+
 	const enableBot = false
 
-	$: logo_animate = $page.url.pathname != '/'
+	$: logo_animate = i18n.route($page.url.pathname) != '/'
 </script>
 
 <nav>
@@ -16,17 +20,18 @@
 
 	<div class="nav-right">
 		<div class="nav-links">
-			<NavLink href="/risks">Risks</NavLink>
-			<NavLink href="/proposal">Proposal</NavLink>
-			<NavLink href="/events">Events</NavLink>
-			<NavLink href="/faq">FAQ</NavLink>
-			<NavLink href="/action">Act</NavLink>
-			<NavLink href="/donate">Donate</NavLink>
+			<NavLink href="/risks">{m.header_risks()}</NavLink>
+			<NavLink href="/proposal">{m.header_proposal()}</NavLink>
+			<NavLink href="/events">{m.header_events()}</NavLink>
+			<NavLink href="/faq">{m.header_faq()}</NavLink>
+			<NavLink href="/action">{m.header_action()}</NavLink>
+			<NavLink href="/donate">{m.header_donate()}</NavLink>
 			{#if enableBot}
 				<NavLink href="/chat">{botName}</NavLink>
 			{/if}
 			<!-- <NavLink href="/about">About</NavLink> -->
-			<NavLink c2a href="/join">Join</NavLink>
+			<NavLink c2a href="/join">{m.header_join()}</NavLink>
+			<LanguageSwitcher />
 			<NavLink href="/search" ariaLabel="Search"><SearchIcon size="0.8em" /></NavLink>
 		</div>
 	</div>
@@ -49,6 +54,7 @@
 	}
 
 	.nav-links {
+		position: relative;
 		display: flex;
 		text-transform: uppercase;
 		flex-wrap: wrap;
