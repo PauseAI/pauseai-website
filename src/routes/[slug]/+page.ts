@@ -24,6 +24,15 @@ async function importMarkdown(language: string, slug: string) {
 	if (language == runtime.sourceLanguageTag) {
 		return await import(`../../posts/${slug}.md`)
 	} else {
-		return await import(`../../temp/translations/${language}/${slug}.md`)
+		try {
+			return await import(`../../temp/translations/md/${language}/${slug}.md`)
+		} catch (error) {
+			if (import.meta.env.DEV) {
+				return {
+					default: `## Couldn't import translation!\n(This is only tolerated in development mode.)`
+				}
+			}
+			throw error
+		}
 	}
 }
