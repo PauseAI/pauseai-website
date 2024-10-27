@@ -18,7 +18,7 @@ description: What does it mean to be a National Group in the PauseAI network?
 
 ## Current National PauseAI Groups
 
-- United States ([X](https://x.com/PauseAIus))
+- [United States (PauseAI US)](https://pauseai-us.org/) ([X](https://x.com/PauseAIus), [Discord](https://discord.gg/TmpmYejE3e))
 - United Kingdom ([X](https://x.com/PauseAI_UK))
 - [France (PauseIA)](https://pauseia.fr/) ([X](https://x.com/pause_ia))
 - [Norway](https://pauseai.no/)
