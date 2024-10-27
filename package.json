@@ -5,8 +5,8 @@
 	"scripts": {
 		"dev": "vite dev --host 0.0.0.0",
 		"translate": "tsx scripts/translation/translate",
-		"build": "run-s translate \"vite build\" _postbuild:*",
-		"build:dev": "run-s \"vite build --mode development\" _postbuild:*",
+		"build": "run-s translate && vite build && run-s _postbuild:*",
+		"build:dev": "vite build --mode development && run-s _postbuild:*",
 		"_postbuild:pagefind": "tsx scripts/create-pagefind-index.ts",
 		"_postbuild:exclude": "tsx scripts/exclude-from-edge-function.ts",
 		"preview": "vite preview",
