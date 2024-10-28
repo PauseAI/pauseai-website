@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { options } from '$lib/api.js'
 import type { Person } from '$lib/types.js'
+import { defaultTitle } from '$lib/utils'
 import { error, json } from '@sveltejs/kit'
 
 function recordToPerson(record: any): Person {
@@ -8,7 +9,7 @@ function recordToPerson(record: any): Person {
 		id: record.id || 'noId',
 		name: record.fields.Name,
 		bio: record.fields.bio,
-		title: record.fields.title || 'Volunteer',
+		title: record.fields.title || defaultTitle,
 		image: record.fields.image && record.fields.image[0].thumbnails.large.url,
 		privacy: record.fields.privacy,
 		org: record.fields.organisation,
