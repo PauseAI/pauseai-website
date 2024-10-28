@@ -1,7 +1,9 @@
 import dotenv from 'dotenv'
 import fsSync from 'fs'
 import fs from 'fs/promises'
-import OpenAI from 'openai'
+import axios from 'axios'
+import axiosRetry from 'axios-retry'
+import minimist from 'minimist'
 import PQueue from 'p-queue'
 import path from 'path'
 import simpleGit, { SimpleGit } from 'simple-git'
@@ -9,14 +11,18 @@ import inlangSettings from '../../project.inlang/settings.json'
 import { generateJsonPrompt, generateMarkdownPrompt, PromptGenerator } from './prompts'
 
 dotenv.config()
+const argv = minimist(process.argv)
 
+const DEBUG_ALWAYS_TRANSLATE = true
+const DEV = argv.mode == 'development'
 const GIT_EMAIL = 'example@example.com'
 const GIT_REPO = 'github.com/Wituareard/git-cache-test'
 const GIT_TOKEN = requireEnvVar('GITHUB_TOKEN')
 const GIT_USERNAME = 'Translations'
-const LLM_API_KEY = requireEnvVar('SAMBANOVA_API_KEY')
-const LLM_BASE_URL = 'https://api.sambanova.ai/v1'
-const LLM_MODEL = 'Meta-Llama-3.1-405B-Instruct'
+const LLM_API_KEY = requireEnvVar('OPENROUTER_API_KEY')
+const LLM_BASE_URL = 'https://openrouter.ai/api/v1/'
+const LLM_MODEL = 'meta-llama/llama-3.1-405b-instruct'
+const LLM_PROVIDERS = ['Fireworks']
 const PATH_JSON_BASE = './messages'
 const PATH_JSON_SOURCE = './messages/en.json'
 const PATH_MD_BASE = './src/posts'
@@ -24,14 +30,19 @@ const PATH_TARGET_BASE = './src/temp/translations'
 const PATH_TARGET_JSON = './src/temp/translations/json'
 const PATH_TARGET_MD = './src/temp/translations/md'
 
-const queue = new PQueue({
-	concurrency: 1,
+const requestQueue = new PQueue({
+	// concurrency: 1,
 	intervalCap: 1,
-	interval: 10000
+	interval: 1000
 })
-const openai = new OpenAI({
-	baseURL: LLM_BASE_URL,
-	apiKey: LLM_API_KEY
+const gitQueue = new PQueue({
+	concurrency: 1
+})
+const llmClient = createLlmClient({
+	baseUrl: LLM_BASE_URL,
+	apiKey: LLM_API_KEY,
+	model: LLM_MODEL,
+	providers: LLM_PROVIDERS
 })
 const cacheGit = simpleGit()
 const mainGit = simpleGit()
@@ -84,6 +95,34 @@ function requireEnvVar(variable: string) {
 	const value = process.env[variable]
 	if (!value) throw new Error(`Environment variable ${variable} is required`)
 	return value
+}
+
+function createLlmClient(options: {
+	baseUrl: string
+	apiKey: string
+	model: string
+	providers: string[]
+}) {
+	const created = axios.create({
+		baseURL: options.baseUrl,
+		headers: {
+			Authorization: `Bearer ${options.apiKey}`
+		}
+	})
+	created.interceptors.request.use((config) => {
+		config.data = Object.assign(config.data, {
+			model: options.model,
+			provider: {
+				order: options.providers
+			}
+		})
+		return config
+	})
+	axiosRetry(created, {
+		retryDelay: axiosRetry.exponentialDelay,
+		retryCondition: axiosRetry.isRetryableError
+	})
+	return created
 }
 
 async function initializeGitCache(options: {
@@ -159,7 +198,7 @@ async function translateOrLoad(options: {
 					const target = options.targetStrategy(language, sourcePath)
 					let useCachedTranslation = false
 					let fileExists = false
-					if (fsSync.existsSync(target)) {
+					if (!(DEV && DEBUG_ALWAYS_TRANSLATE) && fsSync.existsSync(target)) {
 						fileExists = true
 						const sourceLastModified = await fetchLastModified(mainGit, sourcePath)
 						const cachePathFromCwd = path.relative(options.cacheGitCwd, target)
@@ -175,15 +214,25 @@ async function translateOrLoad(options: {
 						const translated = await translate(content, options.promptGenerator, language)
 						const dir = path.dirname(target)
 						await fs.mkdir(dir, { recursive: true })
-						await fs.writeFile(target, translated)
+						// ensure nothing happens between writing, adding and commiting
+						fsSync.writeFileSync(target, translated)
 						let message: string
 						if (fileExists) {
 							message = `Update outdated translation for ${sourceFileName} in ${language}`
 						} else {
-							await cacheGit.add('.')
 							message = `Create new translation for ${sourceFileName} in ${language}`
 						}
-						await cacheGit.commit(message)
+						try {
+							await gitQueue.add(() =>
+								(fileExists ? cacheGit : cacheGit.add('.')).commit(message, ['-a'])
+							)
+						} catch (e) {
+							if (e instanceof Error && e.message.includes('nothing to commit')) {
+								console.log(`${sourceFileName} in ${language} didn't change`)
+							} else {
+								throw e
+							}
+						}
 						console.log(`${message} (${done++} / ${total})`)
 					}
 				})
@@ -193,10 +242,12 @@ async function translateOrLoad(options: {
 }
 
 async function fetchLastModified(git: SimpleGit, path: string) {
-	const log = await git.log({
-		file: path
-	})
-	const date = log.latest?.date
+	const log = await gitQueue.add(() =>
+		git.log({
+			file: path
+		})
+	)
+	const date = log?.latest?.date
 	if (!date) throw new Error(`Couldn't fetch modification date of file ${path}`)
 	return new Date(date)
 }
@@ -205,19 +256,20 @@ async function translate(content: string, promptGenerator: PromptGenerator, lang
 	const languageName = languageNamesInEnglish.of(language)
 	if (!languageName) throw new Error(`Couldn't resolve language code: ${language}`)
 	const prompt = promptGenerator(languageName, content)
-	const response = await queue.add(() =>
-		openai.chat.completions.create({
-			model: LLM_MODEL,
-			messages: [
-				{
-					role: 'user',
-					content: prompt
-				}
-			],
-			temperature: 0
-		})
+	const response = await requestQueue.add(
+		async () =>
+			await llmClient.post('/chat/completions', {
+				messages: [
+					{
+						role: 'user',
+						content: prompt
+					}
+				],
+				temperature: 0
+			})
 	)
-	const translated = response?.choices[0].message.content
+	console.log(response?.data)
+	const translated = response?.data.choices[0].message.content
 	if (!translated) throw new Error(`Translation to ${languageName} failed`)
 	return translated
 }
