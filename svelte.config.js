@@ -6,6 +6,7 @@ import { mdsvex, escapeSvelte } from 'mdsvex'
 import shiki from 'shiki'
 import remarkUnwrapImages from 'remark-unwrap-images'
 import remarkToc from 'remark-toc'
+import remarkHeadingId from 'remark-heading-id'
 import rehypeSlug from 'rehype-slug'
 
 import fs from 'fs'
@@ -28,7 +29,7 @@ const mdsvexOptions = {
 			return `{@html \`${html}\` }`
 		}
 	},
-	remarkPlugins: [remarkUnwrapImages, [remarkToc, { tight: true }]],
+	remarkPlugins: [remarkUnwrapImages, [remarkToc, { tight: true }], remarkHeadingId],
 	rehypePlugins: [rehypeSlug]
 }
 

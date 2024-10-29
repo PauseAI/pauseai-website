@@ -1,8 +1,9 @@
+import axios from 'axios'
+import axiosRetry from 'axios-retry'
 import dotenv from 'dotenv'
 import fsSync from 'fs'
 import fs from 'fs/promises'
-import axios from 'axios'
-import axiosRetry from 'axios-retry'
+import GithubSlugger from 'github-slugger'
 import minimist from 'minimist'
 import PQueue from 'p-queue'
 import path from 'path'
@@ -13,7 +14,9 @@ import { generateJsonPrompt, generateMarkdownPrompt, PromptGenerator } from './p
 dotenv.config()
 const argv = minimist(process.argv)
 
-const DEBUG_ALWAYS_TRANSLATE = true
+// only works in development mode
+const DEBUG_RETRANSLATE_EVERYTHING = true
+const DEBUG_RETRANSLATE_FILES: string[] = []
 const DEV = argv.mode == 'development'
 const GIT_EMAIL = 'example@example.com'
 const GIT_REPO = 'github.com/Wituareard/git-cache-test'
@@ -29,6 +32,8 @@ const PATH_MD_BASE = './src/posts'
 const PATH_TARGET_BASE = './src/temp/translations'
 const PATH_TARGET_JSON = './src/temp/translations/json'
 const PATH_TARGET_MD = './src/temp/translations/md'
+const POSTPROCESSING_ADD_HEADING_IDS = true
+const PREPROCESSING_REMOVE_COMMENTS_WITH_HEADINGS = true
 
 const requestQueue = new PQueue({
 	// concurrency: 1,
@@ -47,6 +52,7 @@ const llmClient = createLlmClient({
 const cacheGit = simpleGit()
 const mainGit = simpleGit()
 const languageNamesInEnglish = new Intl.DisplayNames('en', { type: 'language' })
+const slugger = new GithubSlugger()
 
 {
 	await initializeGitCache({
@@ -110,7 +116,7 @@ function createLlmClient(options: {
 		}
 	})
 	created.interceptors.request.use((config) => {
-		config.data = Object.assign(config.data, {
+		Object.assign(config.data, {
 			model: options.model,
 			provider: {
 				order: options.providers
@@ -198,7 +204,13 @@ async function translateOrLoad(options: {
 					const target = options.targetStrategy(language, sourcePath)
 					let useCachedTranslation = false
 					let fileExists = false
-					if (!(DEV && DEBUG_ALWAYS_TRANSLATE) && fsSync.existsSync(target)) {
+					if (
+						!(
+							DEV &&
+							(DEBUG_RETRANSLATE_EVERYTHING || DEBUG_RETRANSLATE_FILES.includes(sourceFileName))
+						) &&
+						fsSync.existsSync(target)
+					) {
 						fileExists = true
 						const sourceLastModified = await fetchLastModified(mainGit, sourcePath)
 						const cachePathFromCwd = path.relative(options.cacheGitCwd, target)
@@ -211,11 +223,15 @@ async function translateOrLoad(options: {
 					if (!useCachedTranslation) {
 						total++
 						const content = await fs.readFile(sourcePath, 'utf-8')
-						const translated = await translate(content, options.promptGenerator, language)
+						// TODO Don't process/match more often than necessary
+						const processedContent = preprocessMarkdown(content)
+						console.log(processedContent)
+						const translation = await translate(processedContent, options.promptGenerator, language)
+						const processedTranslation = postprocessMarkdown(processedContent, translation)
 						const dir = path.dirname(target)
 						await fs.mkdir(dir, { recursive: true })
 						// ensure nothing happens between writing, adding and commiting
-						fsSync.writeFileSync(target, translated)
+						fsSync.writeFileSync(target, processedTranslation)
 						let message: string
 						if (fileExists) {
 							message = `Update outdated translation for ${sourceFileName} in ${language}`
@@ -252,6 +268,15 @@ async function fetchLastModified(git: SimpleGit, path: string) {
 	return new Date(date)
 }
 
+function preprocessMarkdown(source: string) {
+	let processed = source
+	if (PREPROCESSING_REMOVE_COMMENTS_WITH_HEADINGS) {
+		const REGEX_COMMENT_WITH_HEADING = /<!--[^>]*?##[\s\S]*?-->/g
+		processed = processed.replaceAll(REGEX_COMMENT_WITH_HEADING, '')
+	}
+	return processed
+}
+
 async function translate(content: string, promptGenerator: PromptGenerator, language: string) {
 	const languageName = languageNamesInEnglish.of(language)
 	if (!languageName) throw new Error(`Couldn't resolve language code: ${language}`)
@@ -272,4 +297,24 @@ async function translate(content: string, promptGenerator: PromptGenerator, lang
 	const translated = response?.data.choices[0].message.content
 	if (!translated) throw new Error(`Translation to ${languageName} failed`)
 	return translated
+}
+
+function postprocessMarkdown(source: string, translation: string) {
+	let processed = translation
+	addHeadingIds: if (POSTPROCESSING_ADD_HEADING_IDS) {
+		const REGEX_HEADING = /^#+ (.*)/gm
+		const headingsInSource = Array.from(source.matchAll(REGEX_HEADING))
+		if (!headingsInSource.length) break addHeadingIds
+		let i = 0
+		processed = translation.replaceAll(REGEX_HEADING, (_0) => {
+			const headingInSource = headingsInSource[i]
+			if (!headingInSource)
+				throw new Error(`Different heading count in translation:\n\n${translation}`)
+			const slugged = slugger.slug(headingInSource[1])
+			const heading = `${_0} {#${slugged}}`
+			i++
+			return heading
+		})
+	}
+	return processed
 }
