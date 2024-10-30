@@ -5,7 +5,7 @@
 	"scripts": {
 		"dev": "vite dev --host 0.0.0.0",
 		"translate": "tsx scripts/translation/translate",
-		"translate:dev": "tsx scripts/translation/translate --mode debug",
+		"translate:debug": "tsx scripts/translation/translate --mode debug",
 		"build": "run-s translate && vite build && run-s _postbuild:*",
 		"build:dev": "vite build --mode development && run-s _postbuild:*",
 		"_postbuild:pagefind": "tsx scripts/create-pagefind-index.ts",
@@ -44,6 +44,7 @@
 		"prettier": "^3.3.3",
 		"prettier-plugin-svelte": "^3.2.7",
 		"remark-heading-id": "^1.0.1",
+		"remove-markdown": "^0.5.5",
 		"simple-git": "^3.27.0",
 		"svelte": "^4.2.19",
 		"svelte-check": "^4.0.4",

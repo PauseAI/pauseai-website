@@ -7,6 +7,7 @@ import GithubSlugger from 'github-slugger'
 import minimist from 'minimist'
 import PQueue from 'p-queue'
 import path from 'path'
+import removeMarkdown from 'remove-markdown'
 import simpleGit, { SimpleGit } from 'simple-git'
 import inlangSettings from '../../project.inlang/settings.json'
 import { generateJsonPrompt, generateMarkdownPrompt, PromptGenerator } from './prompts'
@@ -15,7 +16,7 @@ dotenv.config()
 const argv = minimist(process.argv)
 
 const DEBUG = argv.mode == 'debug'
-const DEBUG_RETRANSLATE_EVERYTHING = true
+const DEBUG_RETRANSLATE_EVERYTHING = false
 const DEBUG_RETRANSLATE_FILES: string[] = []
 const GIT_EMAIL = 'example@example.com'
 const GIT_REPO = 'github.com/Wituareard/git-cache-test'
@@ -32,7 +33,8 @@ const PATH_TARGET_BASE = './src/temp/translations'
 const PATH_TARGET_JSON = './src/temp/translations/json'
 const PATH_TARGET_MD = './src/temp/translations/md'
 const POSTPROCESSING_ADD_HEADING_IDS = true
-const PREPROCESSING_REMOVE_COMMENTS_WITH_HEADINGS = true
+const PREPROCESSING_REMOVE_COMMENTS_WITH_MD_HEADINGS = true
+const PREPROCESSING_REMOVE_COMMENTS_WITH_MD_LINKS = true
 
 const requestQueue = new PQueue({
 	// concurrency: 1,
@@ -269,9 +271,15 @@ async function fetchLastModified(git: SimpleGit, path: string) {
 
 function preprocessMarkdown(source: string) {
 	let processed = source
-	if (PREPROCESSING_REMOVE_COMMENTS_WITH_HEADINGS) {
-		const REGEX_COMMENT_WITH_HEADING = /<!--[^>]*?##[\s\S]*?-->/g
-		processed = processed.replaceAll(REGEX_COMMENT_WITH_HEADING, '')
+	if (
+		PREPROCESSING_REMOVE_COMMENTS_WITH_MD_HEADINGS ||
+		PREPROCESSING_REMOVE_COMMENTS_WITH_MD_LINKS
+	) {
+		processed = processed.replaceAll(/<!--([\S\s]*?)-->/g, (_0, _1: string) => {
+			if (PREPROCESSING_REMOVE_COMMENTS_WITH_MD_HEADINGS && _1.match(/# /)) return ''
+			if (PREPROCESSING_REMOVE_COMMENTS_WITH_MD_LINKS && _1.match(/\)\[/)) return ''
+			return _0
+		})
 	}
 	return processed
 }
@@ -306,10 +314,12 @@ function postprocessMarkdown(source: string, translation: string) {
 		if (!headingsInSource.length) break addHeadingIds
 		let i = 0
 		processed = translation.replaceAll(REGEX_HEADING, (_0) => {
-			const headingInSource = headingsInSource[i]
-			if (!headingInSource)
+			const sourceResult = headingsInSource[i]
+			if (!sourceResult)
 				throw new Error(`Different heading count in translation:\n\n${translation}`)
-			const slugged = slugger.slug(headingInSource[1])
+			const headingInSource = sourceResult[1]
+			const stripped = removeMarkdown(headingInSource)
+			const slugged = slugger.slug(stripped)
 			const heading = `${_0} {#${slugged}}`
 			i++
 			return heading

@@ -147,6 +147,9 @@ importers:
       remark-heading-id:
         specifier: ^1.0.1
         version: 1.0.1
+      remove-markdown:
+        specifier: ^0.5.5
+        version: 0.5.5
       simple-git:
         specifier: ^3.27.0
         version: 3.27.0
@@ -2092,6 +2095,9 @@ packages:
 
   remark-unwrap-images@3.0.1:
     resolution: {integrity: sha512-5VUY0n+J9lPTPfkct5S3/SbutryBjp8J/4mbgtlkDrOk3h8jde0hyqdYUJOoJKherZezS08tjd6i4+nnQ+wl5w==}
+
+  remove-markdown@0.5.5:
+    resolution: {integrity: sha512-lMR8tOtDqazFT6W2bZidoXwkptMdF3pCxpri0AEokHg0sZlC2GdoLqnoaxsEj1o7/BtXV1MKtT3YviA1t7rW7g==}
 
   resolve-from@4.0.0:
     resolution: {integrity: sha512-pb/MYmXstAkysRFx8piNI1tGFNQIFA3vkE3Gq4EuA1dF6gHp/+vgZqsCGJapvy8N3Q+4o7FwvquPJcnZ7RYy4g==}
@@ -4415,6 +4421,8 @@ snapshots:
       hast-util-whitespace: 2.0.1
       unified: 10.1.2
       unist-util-visit: 4.1.2
+
+  remove-markdown@0.5.5: {}
 
   resolve-from@4.0.0: {}
 
