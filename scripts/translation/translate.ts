@@ -14,10 +14,9 @@ import { generateJsonPrompt, generateMarkdownPrompt, PromptGenerator } from './p
 dotenv.config()
 const argv = minimist(process.argv)
 
-// only works in development mode
+const DEBUG = argv.mode == 'debug'
 const DEBUG_RETRANSLATE_EVERYTHING = true
 const DEBUG_RETRANSLATE_FILES: string[] = []
-const DEV = argv.mode == 'development'
 const GIT_EMAIL = 'example@example.com'
 const GIT_REPO = 'github.com/Wituareard/git-cache-test'
 const GIT_TOKEN = requireEnvVar('GITHUB_TOKEN')
@@ -206,7 +205,7 @@ async function translateOrLoad(options: {
 					let fileExists = false
 					if (
 						!(
-							DEV &&
+							DEBUG &&
 							(DEBUG_RETRANSLATE_EVERYTHING || DEBUG_RETRANSLATE_FILES.includes(sourceFileName))
 						) &&
 						fsSync.existsSync(target)

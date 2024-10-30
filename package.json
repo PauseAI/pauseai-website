@@ -5,7 +5,7 @@
 	"scripts": {
 		"dev": "vite dev --host 0.0.0.0",
 		"translate": "tsx scripts/translation/translate",
-		"translate:dev": "tsx scripts/translation/translate --mode development",
+		"translate:dev": "tsx scripts/translation/translate --mode debug",
 		"build": "run-s translate && vite build && run-s _postbuild:*",
 		"build:dev": "vite build --mode development && run-s _postbuild:*",
 		"_postbuild:pagefind": "tsx scripts/create-pagefind-index.ts",
