@@ -276,8 +276,8 @@ function preprocessMarkdown(source: string) {
 		PREPROCESSING_REMOVE_COMMENTS_WITH_MD_LINKS
 	) {
 		processed = processed.replaceAll(/<!--([\S\s]*?)-->/g, (_0, _1: string) => {
-			if (PREPROCESSING_REMOVE_COMMENTS_WITH_MD_HEADINGS && _1.match(/# /)) return ''
-			if (PREPROCESSING_REMOVE_COMMENTS_WITH_MD_LINKS && _1.match(/\)\[/)) return ''
+			if (PREPROCESSING_REMOVE_COMMENTS_WITH_MD_HEADINGS && _1.match(/# /g)) return ''
+			if (PREPROCESSING_REMOVE_COMMENTS_WITH_MD_LINKS && _1.match(/\]\(/g)) return ''
 			return _0
 		})
 	}
