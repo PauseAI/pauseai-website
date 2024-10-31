@@ -21,6 +21,7 @@ export const communitiesMeta: Post = {
 
 const discordInvite = 'https://discord.gg/CR5u5BTBwy'
 const discordGermany = 'https://discord.gg/VuVVyJQ37M'
+const discordFrance = 'https://discord.gg/vyXGd7AeGc'
 const discordUS = 'https://discord.gg/TmpmYejE3e'
 
 const PauseAICommunities: Community[] = [
@@ -118,19 +119,19 @@ const PauseAICommunities: Community[] = [
 		name: 'PauseAI Ausburg',
 		lat: 48.3705,
 		lon: 10.8978,
-		link: discordInvite
+		link: discordGermany
 	},
 	{
 		name: 'PauseAI Paris',
 		lat: 48.8647,
 		lon: 2.349,
-		link: discordInvite
+		link: discordFrance
 	},
 	{
 		name: 'PauseAI Miami',
 		lat: 25.7616,
 		lon: -80.1917,
-		link: discordInvite
+		link: discordUS
 	},
 	{
 		name: 'PauseAI Montreal',
@@ -154,7 +155,7 @@ const PauseAICommunities: Community[] = [
 		name: 'PauseAI Marseille',
 		lat: 43.2963,
 		lon: 5.37,
-		link: discordInvite
+		link: discordFrance
 	},
 	{
 		name: 'PauseAI Portland',
@@ -274,7 +275,7 @@ const PauseAICommunities: Community[] = [
 		name: 'PauseAI Munich',
 		lat: 48.1372,
 		lon: 11.5761,
-		link: discordInvite
+		link: discordGermany
 	},
 	{
 		name: 'PauseAI Cambridge',
