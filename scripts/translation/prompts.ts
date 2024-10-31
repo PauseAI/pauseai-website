@@ -14,7 +14,7 @@ Translated JSON:`
 export const generateMarkdownPrompt: PromptGenerator = (languageName: string, content: string) => {
 	return `${commonHead(languageName, 'Markdown')}
 
-Maintain the structure of the document and don't translate link HTML tags, link targets and file names. The content of social media widgets has to remain unchanged as well. The document starts with Frontmatter metadata enclosed in three dashes. Don't translate the keys of the metadata, only the values. Always make sure the result is valid Markdown syntax:
+Maintain the structure of the document and don't translate link HTML tags, link targets (including section links starting with a number sign) and file names. The content of social media widgets has to remain unchanged as well. The document starts with Frontmatter metadata enclosed in three dashes. Don't translate the keys of the metadata, only the values. Always make sure the result is valid Markdown syntax:
 
 ${content}
 

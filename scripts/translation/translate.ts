@@ -35,6 +35,13 @@ const PATH_TARGET_MD = './src/temp/translations/md'
 const POSTPROCESSING_ADD_HEADING_IDS = true
 const PREPROCESSING_REMOVE_COMMENTS_WITH_MD_HEADINGS = true
 const PREPROCESSING_REMOVE_COMMENTS_WITH_MD_LINKS = true
+type PatternCommentPair = { pattern: RegExp; comment: string }
+const PREPROCESSING_COMMENT_AFTER_PATTERN: PatternCommentPair[] = [
+	{
+		pattern: /\]\(#[a-z0-9-_.]+\)/g,
+		comment: `don't translate target, only label`
+	}
+]
 
 const requestQueue = new PQueue({
 	// concurrency: 1,
@@ -280,6 +287,9 @@ function preprocessMarkdown(source: string) {
 			if (PREPROCESSING_REMOVE_COMMENTS_WITH_MD_LINKS && _1.match(/\]\(/g)) return ''
 			return _0
 		})
+	}
+	for (const { pattern, comment } of PREPROCESSING_COMMENT_AFTER_PATTERN) {
+		processed = processed.replaceAll(pattern, `$& <!-- ${comment} -->`)
 	}
 	return processed
 }
