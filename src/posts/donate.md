@@ -5,31 +5,32 @@ description: With your financial support we can have a bigger impact.
 
 We started PauseAI as a group of volunteers, who work on it in their free time.
 Since February 2024, PauseAI is a [registered non-profit foundation](/legal).
-We do not yet have sufficient funds to hire people to work full-time on PauseAI, so we still run on volunteer work.
-With your financial support, we can professionalize and have a bigger impact.
 
 <div style="display: flex; justify-content: center;" ><a href="https://www.paypal.com/donate/?hosted_button_id=4TWZXY62EM5VE"><img src="/PayPal.svg" alt="Donate now" width="256" /></a></div>
 
 ## How we use your donations
 
+- **Community projects**: our [microgrants](/microgrants) program supports various small-scale projects.
+- **Volunteer stipends**: [volunteers](/people) can apply for a [stipend](/volunteer-stipends), which helps our community have a local impact and grow organically.
+- **Funding for local & [national](/national-groups) chapters**: we help PauseAI communities
 - **People**: build a stronger community, work on projects, organize protests, improve the website, etc.
 - **Events**: renting a location, catering, travel costs.
 - **Software**: email, website, etc.
 - **Campaigns**: online advertising, materials
 - **Legal & financial**: setting up the foundation (notary costs), bookkeeping.
-- **Community projects**: our [microgrants](/microgrants) program supports various small-scale projects.
 
 ## What have we already achieved
 
 - 1000+ people who have [joined](/join) PauseAI, many of whom are actively working on various projects
 - 100+ projects in our Discord server (websites, workshops, videos, responses to government consultations, etc.)
 - Organized 15+ [protests](/protests) in 7 countries.
+- 100+ other types of [events](/events) (lobby workshops, flyering sessions, action meetings, etc.)
 - 30+ [Media appearances](/press) on major news outlets, podcasts, documentaries, TV and more.
 - Many meetings with politicians and other stakeholders.
 
 ## Who is funding PauseAI
 
-See our [funding page](/funding) for more details.
+See our [funding page](/funding) for more details on who donated how much money.
 
 ## What we're planning to do
 

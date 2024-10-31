@@ -39,14 +39,6 @@ Interested? [Mail to Joep](mailto:joep@pauseai.info)
 
 Interested? [Mail to Giulia](mailto:giulia@pausai.info)
 
-## Discord Team member
-
-- Write the Server Guide
-- Rethink channels and categories to make the server less overwhelming and more productive
-- Moderate
-
-Interested? DM Pato in [Discord](https://discord.gg/y9hdAjD83e)
-
 ## Onboarding team member
 
 - 2 to 4 hrs a week
@@ -55,7 +47,7 @@ Interested? DM Pato in [Discord](https://discord.gg/y9hdAjD83e)
 
 Interested? [Mail to Maxime](mailto:maxime@pausai.info)
 
-## Recruitment team member
+## Outreach team member
 
 - Help PauseAI reach new communities, attract members and spread awareness
 - This is something you can do independently in your spare time, with little need for coordination with others

@@ -16,7 +16,33 @@ There have been some examples of international summits & resulting treaties that
 - **Montreal Protocol** (1987): The Montreal Protocol is an international environmental treaty designed to protect the ozone layer by phasing out the production and consumption of ozone-depleting substances. It has been highly successful in reducing the use of substances like chlorofluorocarbons (CFCs) and has contributed to the gradual recovery of the ozone layer.
 - **Stockholm Convention on Persistent Organic Pollutants** (2001): The Stockholm Convention is an international treaty aimed at protecting human health and the environment from persistent organic pollutants (POPs). These are toxic chemicals that persist in the environment, bioaccumulate in living organisms, and can have serious adverse effects on human health and ecosystems. Scientists raised concerns about the harmful effects of POPs, including their ability to travel long distances through air and water currents. The convention led to the banning or severe restrictions on the production and use of several POPs, including polychlorinated biphenyls (PCBs), dichlorodiphenyltrichloroethane (DDT), and dioxins.
 
-## AI Safety Summits
+## Coming Summits
+
+### November 2024 San Francisco AI Safety Conference
+
+In September, the AISI and the US government surprised us with the announcement of a new summit.
+Or, more precisely, two new convenings in San Francisco.
+
+On **November 20th-21st**, the first international meeting of [AI safety institutes](https://www.commerce.gov/news/press-releases/2024/09/us-secretary-commerce-raimondo-and-us-secretary-state-blinken-announce), organized by the US government, aiming to "begin advancing global collaboration and knowledge sharing on AI safety".
+The initial members of the International Network of AI Safety Institutes are Australia, Canada, the European Union, France, Japan, Kenya, the Republic of Korea, Singapore, the United Kingdom, and the United States.
+China is notably absent from this list - even thought [China's new AI Safety Institute](https://x.com/yi_zeng/status/1831133250946838740) has recently been announced.
+This very much seems like a missed opportunity, as the China-US relationship is of the utmost importance when it comes to AI Safety.
+
+On **November 21st-22nd**, The British AISI is [hosting a conference in San Francisco](https://www.aisi.gov.uk/work/conference-on-frontier-ai-safety-frameworks).
+The main goal here is to "convene experts from signatory companies and from research organizations to discuss the most pressing challenges in the design and implementation of frontier AI safety frameworks".
+
+One could argue that some safety-minded higher-ups were disappointed by the choices that France made, and decided that a true Safety Summit was needed soon.
+
+### ~~2024~~ 2025 France AI ~~Safety~~ Action Summit
+
+During the 2023 Bletchley summit, France opted to host the next major one in November 2024.
+France postponed it to February 2025.
+It was also renamed to "AI _Action_ Summit", dropping the all-important "Safety" focus.
+We've been told that safety will be just one of five tracks at the summit.
+It is led by AI-sceptic Anne Bouverot, who is [dismissive](https://legrandcontinent-eu.translate.goog/es/2023/12/08/la-ia-no-nos-sustituira-una-conversacion-con-anne-bouverot-yann-le-cun-y-alexandre-viros/?_x_tr_sl=es&_x_tr_tl=en&_x_tr_hl=en&_x_tr_pto=sc) of "alarmist discourse", comparing AI with calculators and comparing AI safety concerns with Y2K concerns, being certain that "AI is not going to replace us, but rather help us".
+It seems increasingly unlikely that this summit will lead to the types of international regulations that we are calling for.
+
+## Past Summits
 
 ### 2023 UK AI Safety Summit
 
@@ -39,22 +65,3 @@ The Summit led to the following things:
 
 1. 16 Companies (most prominent AI companies) signed the ["Frontier AI Safety Commitments"](https://www.gov.uk/government/news/historic-first-as-companies-spanning-north-america-asia-europe-and-middle-east-agree-safety-commitments-on-development-of-ai?utm_source=substack&utm_medium=email), which means these companies will publish RSPs. Previous voluntary commitments [were ignored](https://www.politico.eu/article/rishi-sunak-ai-testing-tech-ai-safety-institute/).
 2. A [new statement](https://www.gov.uk/government/publications/seoul-ministerial-statement-for-advancing-ai-safety-innovation-and-inclusivity-ai-seoul-summit-2024/seoul-ministerial-statement-for-advancing-ai-safety-innovation-and-inclusivity-ai-seoul-summit-2024) was signed by 27 countries.
-
-## 2024 November San Francisco AI Safety Conference
-
-In September, the AISI and the US government surprised us with the announcement of a new summit (or "conference") in San Francisco.
-On November 20th-21st, the first international meeting of [AI safety institutes](https://www.commerce.gov/news/press-releases/2024/09/us-secretary-commerce-raimondo-and-us-secretary-state-blinken-announce) takes place in SF, organized by the US government.
-On Novermber 21st-22nd, The British AISI is hosting a ["conference"](https://www.aisi.gov.uk/work/conference-on-frontier-ai-safety-frameworks) in San Francisco.
-One of the goals of this conference is to get various AI Safety Institutes to share their research and ideas.
-
-One could argue that some safety-minded higher-ups were disappointed by the choices that France made, and decided that a true Safety Summit was needed soon.
-It is incredibly unfortunate that [China's new AI Safety Institute](https://x.com/yi_zeng/status/1831133250946838740) was not invited to join.
-
-## ~~2024~~ 2025 France AI ~~Safety~~ Action Summit
-
-During the 2023 Bletchley summit, France opted to host the next major one in November 2024.
-France postponed it to February 2025.
-It was also renamed to "AI _Action_ Summit", dropping the all-important "Safety" focus.
-We've been told that safety will be just one of five tracks at the summit.
-It is led by AI-sceptic Anne Bouverot, who is [dismissive](https://legrandcontinent-eu.translate.goog/es/2023/12/08/la-ia-no-nos-sustituira-una-conversacion-con-anne-bouverot-yann-le-cun-y-alexandre-viros/?_x_tr_sl=es&_x_tr_tl=en&_x_tr_hl=en&_x_tr_pto=sc) of "alarmist discourse", comparing AI with calculators and comparing AI safety concerns with Y2K concerns, being certain that "AI is not going to replace us, but rather help us".
-It seems increasingly unlikely that this summit will lead to the types of international regulations that we are calling for.

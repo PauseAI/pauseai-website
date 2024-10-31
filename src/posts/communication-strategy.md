@@ -14,7 +14,7 @@ description: How we communicate about pausing AI development.
 
 ## No-gos
 
-- **No AI-generated content**. Using AI models is fine for doing research, ideation and iterating on ideas, but don't publish AI-generated content as if it's our own - especially no AI generated images or videos. Even if we are not anti-AI, we can easily be labeled as hypocrites if we clearly use AI-generated content.
+- **No AI-generated visuals**. Using AI models is fine for doing research, ideation and iterating on ideas, but don't publish AI-generated images and videos. Even if we are not anti-AI, we can easily be labeled as hypocrites if we clearly use AI-generated content.
 - **No partisan politics**. We do not push for any political party or ideology. We don't have opinions on things outside of AI.
 - **No tactical self-censorship**. Some AI Governance organizations choose not to say how worried they are, or are choosing not to push for the policies that they think are necessary _because they worry about losing credibility_. We cannot copy this same strategy, because if we all do, no-one is left to speak the truth.
 - **No rumors**. We don't promote vague or unverified information. We cannot afford to lose credibility by spreading false information.

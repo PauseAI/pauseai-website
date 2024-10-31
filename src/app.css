@@ -195,3 +195,7 @@ textarea:focus {
 .button-to-link:hover {
 	text-decoration: underline;
 }
+
+::selection {
+	background-color: var(--brand);
+}
