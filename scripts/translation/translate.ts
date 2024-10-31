@@ -8,7 +8,7 @@ import minimist from 'minimist'
 import PQueue from 'p-queue'
 import path from 'path'
 import removeMarkdown from 'remove-markdown'
-import simpleGit, { SimpleGit } from 'simple-git'
+import simpleGit, { SimpleGit, SimpleGitOptions } from 'simple-git'
 import inlangSettings from '../../project.inlang/settings.json'
 import { generateJsonPrompt, generateMarkdownPrompt, PromptGenerator } from './prompts'
 
@@ -19,6 +19,7 @@ const DEBUG = argv.mode == 'debug'
 const DEBUG_RETRANSLATE_EVERYTHING = false
 const DEBUG_RETRANSLATE_FILES: string[] = []
 const GIT_EMAIL = 'example@example.com'
+const GIT_MAX_CONCURRENT_PROCESSES = 10
 const GIT_REPO = 'github.com/Wituareard/git-cache-test'
 const GIT_TOKEN = requireEnvVar('GITHUB_TOKEN')
 const GIT_USERNAME = 'Translations'
@@ -26,6 +27,7 @@ const LLM_API_KEY = requireEnvVar('OPENROUTER_API_KEY')
 const LLM_BASE_URL = 'https://openrouter.ai/api/v1/'
 const LLM_MODEL = 'meta-llama/llama-3.1-405b-instruct'
 const LLM_PROVIDERS = ['Fireworks']
+const LLM_REQUESTS_PER_SECOND = 1
 const PATH_JSON_BASE = './messages'
 const PATH_JSON_SOURCE = './messages/en.json'
 const PATH_MD_BASE = './src/posts'
@@ -45,7 +47,7 @@ const PREPROCESSING_COMMENT_AFTER_PATTERN: PatternCommentPair[] = [
 
 const requestQueue = new PQueue({
 	// concurrency: 1,
-	intervalCap: 1,
+	intervalCap: LLM_REQUESTS_PER_SECOND,
 	interval: 1000
 })
 const gitQueue = new PQueue({
@@ -57,8 +59,11 @@ const llmClient = createLlmClient({
 	model: LLM_MODEL,
 	providers: LLM_PROVIDERS
 })
-const cacheGit = simpleGit()
-const mainGit = simpleGit()
+const gitOptions: Partial<SimpleGitOptions> = {
+	maxConcurrentProcesses: GIT_MAX_CONCURRENT_PROCESSES
+}
+const cacheGit = simpleGit(gitOptions)
+const mainGit = simpleGit(gitOptions)
 const languageNamesInEnglish = new Intl.DisplayNames('en', { type: 'language' })
 const slugger = new GithubSlugger()
 
@@ -266,11 +271,11 @@ async function translateOrLoad(options: {
 }
 
 async function fetchLastModified(git: SimpleGit, path: string) {
-	const log = await gitQueue.add(() =>
-		git.log({
-			file: path
-		})
-	)
+	// gitQueue not required, reading commands can run in parallel
+	const log = await git.log({
+		file: path,
+		maxCount: 1
+	})
 	const date = log?.latest?.date
 	if (!date) throw new Error(`Couldn't fetch modification date of file ${path}`)
 	return new Date(date)
