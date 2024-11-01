@@ -19,7 +19,7 @@ const DEBUG = argv.mode == 'debug'
 const DEBUG_RETRANSLATE_EVERYTHING = false
 const DEBUG_RETRANSLATE_FILES: string[] = []
 const GIT_EMAIL = 'example@example.com'
-const GIT_MAX_CONCURRENT_PROCESSES = 10
+const GIT_MAX_CONCURRENT_PROCESSES = 8
 const GIT_REPO = 'github.com/Wituareard/git-cache-test'
 const GIT_TOKEN = requireEnvVar('GITHUB_TOKEN')
 const GIT_USERNAME = 'Translations'
@@ -71,15 +71,23 @@ const cacheGit = simpleGit(gitOptions)
 const mainGit = simpleGit(gitOptions)
 const languageNamesInEnglish = new Intl.DisplayNames('en', { type: 'language' })
 const slugger = new GithubSlugger()
+let cacheLatestCommitDates: Map<string, Date>
+let mainLatestCommitDates: Map<string, Date>
 
 {
-	await initializeGitCache({
-		dir: PATH_TARGET_BASE,
-		token: GIT_TOKEN,
-		repo: GIT_REPO,
-		username: GIT_USERNAME,
-		email: GIT_EMAIL
-	})
+	await Promise.all([
+		(async () => {
+			await initializeGitCache({
+				dir: PATH_TARGET_BASE,
+				token: GIT_TOKEN,
+				repo: GIT_REPO,
+				username: GIT_USERNAME,
+				email: GIT_EMAIL
+			})
+			cacheLatestCommitDates = await prepareLastestCommitDates(cacheGit)
+		})(),
+		(async () => (mainLatestCommitDates = await prepareLastestCommitDates(mainGit)))()
+	])
 
 	const languages = inlangSettings.languageTags
 	const indexOfSourceLanguage = languages.indexOf(inlangSettings.sourceLanguageTag)
@@ -167,6 +175,25 @@ async function initializeGitCache(options: {
 	await cacheGit.addConfig('user.email', options.email)
 }
 
+async function prepareLastestCommitDates(git: SimpleGit) {
+	const latestCommitDatesMap = new Map<string, Date>()
+	const log = await git.log({
+		// TODO lower?
+		'--stat': 4096
+	})
+	for (const entry of log.all) {
+		const files = entry.diff?.files
+		if (!files) continue
+		for (const file of files) {
+			if (!latestCommitDatesMap.has(file.file)) {
+				latestCommitDatesMap.set(file.file, new Date(entry.date))
+			}
+			file.file
+		}
+	}
+	return latestCommitDatesMap
+}
+
 async function translateOrLoadMessages(options: {
 	sourcePath: string
 	languages: string[]
@@ -217,6 +244,7 @@ async function translateOrLoad(options: {
 	await Promise.all(
 		options.sourcePaths.map(async (sourcePath) => {
 			const sourceFileName = path.basename(sourcePath)
+			const processedSourcePath = path.relative('.', sourcePath).replaceAll(/\\/g, '/')
 			await Promise.all(
 				options.languages.map(async (language) => {
 					const target = options.targetStrategy(language, sourcePath)
@@ -230,10 +258,15 @@ async function translateOrLoad(options: {
 						fsSync.existsSync(target)
 					) {
 						fileExists = true
-						const sourceLastModified = await fetchLastModified(mainGit, sourcePath)
+						const sourceLatestCommitDate = mainLatestCommitDates.get(processedSourcePath)
+						if (!sourceLatestCommitDate)
+							throw new Error(`Didn't prepare latest commit date for ${processedSourcePath}`)
 						const cachePathFromCwd = path.relative(options.cacheGitCwd, target)
-						const cacheLastModified = await fetchLastModified(cacheGit, cachePathFromCwd)
-						if (cacheLastModified > sourceLastModified) {
+						const processedCachePathFromCwd = cachePathFromCwd.replaceAll(/\\/g, '/')
+						const cacheLatestCommitDate = cacheLatestCommitDates.get(processedCachePathFromCwd)
+						if (!cacheLatestCommitDate)
+							throw new Error(`Didn't prepare latest commit date for ${target}`)
+						if (cacheLatestCommitDate > sourceLatestCommitDate) {
 							console.log(`Using cached translation for ${sourceFileName} in ${language}`)
 							useCachedTranslation = true
 						}
@@ -273,17 +306,6 @@ async function translateOrLoad(options: {
 			)
 		})
 	)
-}
-
-async function fetchLastModified(git: SimpleGit, path: string) {
-	// gitQueue not required, reading commands can run in parallel
-	const log = await git.log({
-		file: path,
-		maxCount: 1
-	})
-	const date = log?.latest?.date
-	if (!date) throw new Error(`Couldn't fetch modification date of file ${path}`)
-	return new Date(date)
 }
 
 function preprocessMarkdown(source: string) {
