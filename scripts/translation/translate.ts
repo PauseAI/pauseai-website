@@ -37,8 +37,13 @@ const PATH_TARGET_MD = './src/temp/translations/md'
 const POSTPROCESSING_ADD_HEADING_IDS = true
 const PREPROCESSING_REMOVE_COMMENTS_WITH_MD_HEADINGS = true
 const PREPROCESSING_REMOVE_COMMENTS_WITH_MD_LINKS = true
+// CRLF is normalized to LF
 type PatternCommentPair = { pattern: RegExp; comment: string }
 const PREPROCESSING_COMMENT_AFTER_PATTERN: PatternCommentPair[] = [
+	{
+		pattern: /---[\S\s]*?\n---\n/,
+		comment: `end of frontmatter metadata, dashes above need to stay`
+	},
 	{
 		pattern: /\]\(#[a-z0-9-_.]+\)/g,
 		comment: `don't translate target, only label`
@@ -283,6 +288,7 @@ async function fetchLastModified(git: SimpleGit, path: string) {
 
 function preprocessMarkdown(source: string) {
 	let processed = source
+	processed = processed.replaceAll(/\r\n/g, '\n')
 	if (
 		PREPROCESSING_REMOVE_COMMENTS_WITH_MD_HEADINGS ||
 		PREPROCESSING_REMOVE_COMMENTS_WITH_MD_LINKS
@@ -294,7 +300,7 @@ function preprocessMarkdown(source: string) {
 		})
 	}
 	for (const { pattern, comment } of PREPROCESSING_COMMENT_AFTER_PATTERN) {
-		processed = processed.replaceAll(pattern, `$& <!-- ${comment} -->`)
+		processed = processed.replace(pattern, `$& <!-- ${comment} -->`)
 	}
 	return processed
 }
