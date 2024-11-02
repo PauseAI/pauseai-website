@@ -22,15 +22,20 @@
 		left: 50%;
 		transform: translate(-50%, -50%);
 		color: white;
-		font-size: 1rem;
+		font-size: clamp(1rem, 4vw, 3rem);
+		text-align: center;
 	}
 	.hero {
 		display: grid;
 		grid-template-columns: repeat(3, 1fr);
 		grid-gap: 1rem;
-		height: 100%;
+		height: 100vh;
 		overflow: hidden;
 		position: relative;
+		max-width: 100vw;
+		margin-left: calc(-50vw + 50%);
+		margin-right: calc(-50vw + 50%);
+		margin-top: calc(var(--nav-height) * -1);
 	}
 
 	.overlay {

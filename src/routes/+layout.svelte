@@ -11,7 +11,7 @@
 	import '@fontsource/roboto-slab/700.css'
 	import '@fontsource/saira-condensed/700.css'
 
-	import '../app.css'
+	import '../styles.css'
 	import Hero from '$lib/components/Hero.svelte'
 
 	export let data
@@ -22,12 +22,10 @@
 	(Top)
 </h2>
 
-<div class="layout">
+<div class="layout" class:with-hero={hero}>
 	<Header inverted={hero} />
 	{#if hero}
-		<div class="hero-wrapper">
-			<Hero />
-		</div>
+		<Hero />
 	{/if}
 
 	<main>
@@ -65,14 +63,6 @@
 		margin: auto;
 	} */
 
-	.hero-wrapper {
-		position: absolute;
-		left: 0;
-		right: 0;
-		height: 100vh;
-		z-index: 0;
-		max-height: 500px;
-	}
 	.layout {
 		height: 100%;
 		position: relative;
