@@ -50,6 +50,7 @@
 		padding: 2rem 0;
 		margin-left: -1rem;
 		flex-wrap: wrap;
+		max-height: var(--nav-height);
 	}
 
 	.logo {
