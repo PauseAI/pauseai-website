@@ -5,7 +5,7 @@
 	export let fill: string | null = null
 	export let inverted = false
 	$: orange = inverted ? 'white' : '#FF9416'
-	$: fill = inverted ? 'black' : 'white'
+	$: fill = inverted ? 'black' : 'var(--text)'
 </script>
 
 <svg

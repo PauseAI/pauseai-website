@@ -4,11 +4,13 @@
 
 <div class="quote-card">
 	<div class="quote-text">
-		"{quote.text}"
+		{quote.text}
 	</div>
 
 	<div class="author-section">
-		<img src={quote.image} alt={quote.author} class="author-image" />
+		{#if quote.image !== undefined}
+			<img src={quote.image} alt={quote.author} class="author-image" />
+		{/if}
 		<div class="author-info">
 			<h2 class="author-name">{quote.author}</h2>
 			<p class="author-title">{quote.title}</p>
@@ -22,8 +24,19 @@
 	}
 
 	.quote-text {
-		font-size: 1.7rem;
+		font-size: clamp(1.2rem, 4vw, 1.7rem);
 		margin-bottom: var(--spacing-lg);
+		position: relative;
+	}
+
+	.quote-text::before {
+		content: open-quote;
+		font-size: clamp(2rem, 4vw, 4rem);
+		position: absolute;
+		top: -1rem;
+		font-weight: 800;
+		left: -1rem;
+		opacity: 0.3;
 	}
 
 	.author-section {
@@ -41,7 +54,8 @@
 
 	.author-name {
 		font-size: 1.4rem;
-		font-weight: 600;
+		font-weight: 800;
+		font-family: var(--font-body);
 		margin: 0;
 	}
 
