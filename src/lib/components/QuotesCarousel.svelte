@@ -6,27 +6,27 @@
 	const quotes = [
 		{
 			text: 'If you take the existential risk seriously, as I now do, it might be quite sensible to just stop developing these things any further.',
-			author: 'prof. Geoffrey Hinton',
-			title: 'Nobel prize winner & Godfather of AI'
+			author: 'Geoffrey Hinton',
+			title: 'Nobel Prize winner & "Godfather of AI"'
 		},
 		{
 			text: 'The development of full artificial intelligence could spell the end of the human race.',
-			author: 'prof. Stephen Hawking',
+			author: 'Stephen Hawking',
 			title: 'Theoretical physicist and cosmologist'
 		},
 		{
 			text: '... we should have to expect the machines to take control.',
-			author: 'prof. Alan Turing',
+			author: 'Alan Turing',
 			title: 'Inventor of the modern computer'
 		},
 		{
 			text: "The robot is not going to want to be switched off because you've given it a goal to achieve and being switched off is a way of failing—so it will do its best not to be switched off.",
-			author: 'prof. Stuart Russell',
+			author: 'Stuart Russell',
 			title: 'Writer of the AI textbook'
 		},
 		{
 			text: 'It’s very challenging psychologically to realize that what you’ve been working for, with the idea that it would be a great thing—for society, for humanity, for science—may actually be catastrophic.',
-			author: 'prof. Yoshua Bengio',
+			author: 'Yoshua Bengio',
 			title: 'AI Turing Award winner'
 		}
 	]
