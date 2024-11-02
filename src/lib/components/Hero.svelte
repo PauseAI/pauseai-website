@@ -25,10 +25,19 @@
 		font-size: clamp(1rem, 4vw, 3rem);
 		text-align: center;
 	}
+
+	@media (max-width: 768px) {
+		h2 {
+			transform: translate(-50%, -50%);
+			width: 17rem;
+			max-width: 100%;
+			padding: 1.5rem;
+		}
+	}
+
 	.hero {
 		display: grid;
 		grid-template-columns: repeat(3, 1fr);
-		grid-gap: 1rem;
 		height: 100vh;
 		overflow: hidden;
 		position: relative;
@@ -36,6 +45,7 @@
 		margin-left: calc(-50vw + 50%);
 		margin-right: calc(-50vw + 50%);
 		margin-top: calc(var(--nav-height) * -1);
+		margin-bottom: 5rem;
 	}
 
 	.overlay {

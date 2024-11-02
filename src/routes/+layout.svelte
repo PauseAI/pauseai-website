@@ -15,6 +15,7 @@
 	import Hero from '$lib/components/Hero.svelte'
 
 	export let data
+	// Show the hero on the homepage, but nowhere else
 	$: hero = data.url == '/'
 </script>
 

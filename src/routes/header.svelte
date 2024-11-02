@@ -18,18 +18,18 @@
 
 	<div class="nav-right">
 		<div class="nav-links">
-			<NavLink href="/risks">Risks</NavLink>
-			<NavLink href="/proposal">Proposal</NavLink>
-			<NavLink href="/events">Events</NavLink>
-			<NavLink href="/faq">FAQ</NavLink>
-			<NavLink href="/action">Act</NavLink>
-			<NavLink href="/donate">Donate</NavLink>
+			<NavLink {inverted} href="/risks">Risks</NavLink>
+			<NavLink {inverted} href="/proposal">Proposal</NavLink>
+			<NavLink {inverted} href="/events">Events</NavLink>
+			<NavLink {inverted} href="/faq">FAQ</NavLink>
+			<NavLink {inverted} href="/action">Act</NavLink>
+			<NavLink {inverted} href="/donate">Donate</NavLink>
 			{#if enableBot}
-				<NavLink href="/chat">{botName}</NavLink>
+				<NavLink {inverted} href="/chat">{botName}</NavLink>
 			{/if}
 			<!-- <NavLink href="/about">About</NavLink> -->
-			<NavLink c2a href="/join">Join</NavLink>
-			<NavLink href="/search" ariaLabel="Search"><SearchIcon size="0.8em" /></NavLink>
+			<NavLink {inverted} c2a href="/join">Join</NavLink>
+			<NavLink {inverted} href="/search" ariaLabel="Search"><SearchIcon size="0.8em" /></NavLink>
 		</div>
 	</div>
 </nav>
@@ -50,7 +50,7 @@
 		padding: 2rem 0;
 		margin-left: -1rem;
 		flex-wrap: wrap;
-		max-height: var(--nav-height);
+		height: calc(var(--nav-height) - 5rem);
 	}
 
 	.logo {
