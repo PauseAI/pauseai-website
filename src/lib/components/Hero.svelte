@@ -1,15 +1,47 @@
-<script type="ts">
+<script lang="ts">
 	import london from './../../assets/protests/london.jpeg'
 	import denHaag from './../../assets/protests/den-haag.jpeg'
 	import sf from './../../assets/protests/san-francisco.jpeg'
+	import { onMount } from 'svelte'
+
+	let currentImageIndex = 0
+	const images = [london, denHaag, sf]
+	let isMobile = false
+
+	const checkMobile = () => {
+		isMobile = window.innerWidth <= 768
+	}
+
+	onMount(() => {
+		checkMobile()
+		window.addEventListener('resize', checkMobile)
+
+		// Switch images every 5 seconds
+		const interval = setInterval(() => {
+			if (isMobile) {
+				currentImageIndex = (currentImageIndex + 1) % images.length
+			}
+		}, 5000)
+
+		return () => {
+			clearInterval(interval)
+			window.removeEventListener('resize', checkMobile)
+		}
+	})
 </script>
 
 <div class="hero">
+	{#if isMobile}
+		{#each images as image, i}
+			<img src={image} alt="" class:active={currentImageIndex === i} />
+		{/each}
+	{:else}
+		<img src={london} alt="" />
+		<img src={denHaag} alt="" />
+		<img src={sf} alt="" />
+	{/if}
 	<div class="overlay"></div>
-	<img src={london} alt="" />
-	<img src={denHaag} alt="" />
-	<img src={sf} alt="" />
-	<h2>DON’T LET AI COMPANIES <br />GAMBLE WITH OUR FUTURE</h2>
+	<h2>DON'T LET AI COMPANIES <br />GAMBLE WITH OUR FUTURE</h2>
 	<div class="actions">
 		<a href="/join">Join</a>
 		<a href="/donate">Donate</a>
@@ -69,7 +101,6 @@
 		transform: translateX(-50%);
 		display: flex;
 		gap: 1rem;
-		z-index: 1;
 	}
 
 	.actions a {
@@ -96,5 +127,25 @@
 		width: 100%;
 		height: 100%;
 		object-fit: cover;
+	}
+
+	@media (max-width: 768px) {
+		.hero {
+			display: block;
+		}
+
+		img {
+			position: absolute;
+			opacity: 0;
+			transition:
+				opacity 1s ease-in-out,
+				transform 10s ease-in-out;
+			transform: scale(1.1);
+		}
+
+		img.active {
+			opacity: 1;
+			transform: scale(1);
+		}
 	}
 </style>
