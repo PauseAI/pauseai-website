@@ -3,11 +3,12 @@
 	export let href: string
 	export let c2a = false
 	export let ariaLabel: string | undefined = undefined
+	export let inverted = false
 </script>
 
 <a
 	{href}
-	class={`${c2a ? 'c2a' : ''} ${$page.url.pathname == href ? 'active' : ''}`}
+	class={`${c2a ? 'c2a' : ''} ${inverted ? 'inverted' : ''} ${$page.url.pathname == href ? 'active' : ''}`}
 	aria-label={ariaLabel}
 >
 	<slot />
@@ -29,6 +30,9 @@
 	a.c2a {
 		color: var(--brand);
 	}
+	a.c2a.inverted {
+		color: black;
+	}
 
 	a:hover {
 		color: var(--brand);
@@ -37,5 +41,14 @@
 	a.active,
 	a:active {
 		color: var(--brand-subtle);
+	}
+
+	a.inverted:hover {
+		color: black;
+		text-decoration: underline;
+	}
+	a.inverted.active,
+	a.inverted:active {
+		color: black;
 	}
 </style>
