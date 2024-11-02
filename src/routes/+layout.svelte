@@ -46,7 +46,7 @@
 		}}
 	/>
 
-	{#if !['/', '/outcomes', '/pdoom', '/quotes'].includes(data.url)}
+	{#if !['/', '/outcomes', '/pdoom', '/quotes'].includes(i18n.route(data.url))}
 		<Toc />
 	{/if}
 
