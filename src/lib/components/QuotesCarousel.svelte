@@ -5,34 +5,29 @@
 
 	const quotes = [
 		{
-			text: 'The development of full artificial intelligence could spell the end of the human race',
-			author: 'Stephen Hawking',
-			title: 'Theoretical physicist and cosmologist',
-			image: '/images/quotes/hawking.jpg'
+			text: 'If you take the existential risk seriously, as I now do, it might be quite sensible to just stop developing these things any further.',
+			author: 'prof. Geoffrey Hinton',
+			title: 'Nobel prize winner & Godfather of AI'
 		},
 		{
-			text: "I visualize a time when we will be to robots what dogs are to humans, and I'm rooting for the machines",
-			author: 'Claude Shannon',
-			title: 'Father of Information Theory',
-			image: '/images/quotes/shannon.jpg'
+			text: 'The development of full artificial intelligence could spell the end of the human race.',
+			author: 'prof. Stephen Hawking',
+			title: 'Theoretical physicist and cosmologist'
 		},
 		{
-			text: 'By far, the greatest danger of Artificial Intelligence is that people conclude too early that they understand it',
-			author: 'Eliezer Yudkowsky',
-			title: 'AI Researcher',
-			image: '/images/quotes/yudkowsky.jpg'
+			text: '... we should have to expect the machines to take control.',
+			author: 'prof. Alan Turing',
+			title: 'Inventor of the modern computer'
 		},
 		{
-			text: 'AI is likely to be either the best or worst thing to happen to humanity',
-			author: 'Stuart Russell',
-			title: 'Computer Scientist',
-			image: '/images/quotes/russell.jpg'
+			text: "The robot is not going to want to be switched off because you've given it a goal to achieve and being switched off is a way of failing—so it will do its best not to be switched off.",
+			author: 'prof. Stuart Russell',
+			title: 'Writer of the AI textbook'
 		},
 		{
-			text: 'The real question is, when will we draft an artificial intelligence bill of rights?',
-			author: 'Gray Scott',
-			title: 'Futurist',
-			image: '/images/quotes/scott.jpg'
+			text: 'It’s very challenging psychologically to realize that what you’ve been working for, with the idea that it would be a great thing—for society, for humanity, for science—may actually be catastrophic.',
+			author: 'prof. Yoshua Bengio',
+			title: 'AI Turing Award winner'
 		}
 	]
 
@@ -64,6 +59,15 @@
 		margin-bottom: 5rem;
 	}
 
+	.quote-container::after {
+		content: '';
+		display: block;
+		height: 0.1rem;
+		margin: 2rem 0;
+		background: var(--bg-subtle);
+		width: 100%;
+	}
+
 	.navigation {
 		display: flex;
 		align-items: center;
@@ -78,22 +82,22 @@
 		font-size: 1.25rem;
 		cursor: pointer;
 		padding: 0.5rem;
-		color: #666;
+		opacity: 0.5;
 	}
 
 	.nav-button:hover {
-		color: #333;
+		opacity: 1;
 	}
 
 	.dot {
 		width: 8px;
 		height: 8px;
 		border-radius: 50%;
-		background: #ddd;
+		background: var(--bg-subtle);
 		transition: background-color 0.3s ease;
 	}
 
 	.dot.active {
-		background: #666;
+		background: var(--brand);
 	}
 </style>

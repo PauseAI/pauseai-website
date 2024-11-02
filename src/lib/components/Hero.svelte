@@ -10,6 +10,10 @@
 	<img src={denHaag} alt="" />
 	<img src={sf} alt="" />
 	<h2>DON’T LET AI COMPANIES <br />GAMBLE WITH OUR FUTURE</h2>
+	<div class="actions">
+		<a href="/join">Join</a>
+		<a href="/donate">Donate</a>
+	</div>
 </div>
 
 <style>
@@ -22,7 +26,7 @@
 		left: 50%;
 		transform: translate(-50%, -50%);
 		color: white;
-		font-size: clamp(1rem, 4vw, 3rem);
+		font-size: clamp(1.6rem, 4vw, 3rem);
 		text-align: center;
 	}
 
@@ -56,6 +60,36 @@
 		height: 100%;
 		background-color: var(--brand);
 		opacity: 0.8;
+	}
+
+	.actions {
+		position: absolute;
+		bottom: 10%;
+		left: 50%;
+		transform: translateX(-50%);
+		display: flex;
+		gap: 1rem;
+		z-index: 1;
+	}
+
+	.actions a {
+		background-color: white;
+		font-family: var(--font-heading);
+		text-decoration: none;
+		font-size: 1.2rem;
+		color: black;
+		padding: 1rem 2rem;
+		text-transform: uppercase;
+		transition: scale 0.1s;
+		cursor: pointer;
+	}
+
+	.actions a:hover {
+		scale: 1.05;
+	}
+
+	.actions a:active {
+		scale: 0.95;
 	}
 
 	img {
