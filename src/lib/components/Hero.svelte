@@ -127,6 +127,7 @@
 		width: 100%;
 		height: 100%;
 		object-fit: cover;
+		filter: blur(5px);
 	}
 
 	@media (max-width: 768px) {
