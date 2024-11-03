@@ -124,7 +124,8 @@
 	}
 
 	img {
-		width: 100%;
+		/* 2x the blur */
+		width: calc(100% + 10px);
 		height: 100%;
 		object-fit: cover;
 		filter: blur(5px);
