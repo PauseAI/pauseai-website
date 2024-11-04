@@ -75,6 +75,7 @@ html {
 
 html,
 body {
+	overflow-x: hidden;
 	height: 100%;
 	font-family: var(--font-body);
 	background-color: var(--bg);
