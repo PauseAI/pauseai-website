@@ -47,6 +47,8 @@ All modern chips are made using lithography machines: huge machines, costing 200
 This lithography process is one of the most complex and expensive parts of the chip manufacturing process.
 Top-tier AI chips are all made using EUV lithography, and ASML is the only company that makes these machines.
 This Dutch company is one of the most important potential choke points for AI governance.
+These machines are insanely complex and require a lot of expertise to build and maintain.
+Notably, they have [remote kill-switches](https://www.businessinsider.com/asml-tsmc-semiconductor-chip-equipment-kill-switch-china-invade-taiwan-2024-5) (mostly for in the case that Taiwan is invaded), so in some important ways, the Pause button is already built.
 
 The Dutch Government has set up strict export controls on their EUV lithography machines, requiring permits for exports.
 These export controls have primarily been set in place to slow down China's chip ambitions.
@@ -54,6 +56,9 @@ The [US, Japan and the Netherlands](https://apnews.com/article/technology-distri
 
 The Chinese company SMEE is trying to catch up, but is not able to make their own EUV machines.
 Their DUV machines are [still stuck at 28nm](https://www.scmp.com/tech/big-tech/article/3278235/chinese-chip-making-shows-progress-new-euv-patent-domestic-lithography-champion), which is generations behind ASML's 5nm EUV process, let alone ASML's upcoming 2nm machines.
+So SMEE is not able to produce modern AI chips.
+
+In other words: ASML is a fundamental choke point in the AI chip supply chain.
 
 #### TSMC, Samsung amd SMIC - The largest fabs
 
@@ -95,6 +100,10 @@ The paper ["Verification methods for international AI agreements"](https://arxiv
 10. **Chip-Based Reporting**: Embeds reporting mechanisms in chips to alert if used beyond authorized limits. Feasible but challenging, requiring international standards and hardware development; circumventable by modifying firmware.
 
 Each method has its strengths and weaknesses, often requiring complementary approaches or international cooperation for effective implementation.
+
+Other proposed methods include:
+
+1. **[flegHEGs](https://yoshuabengio.org/wp-content/uploads/2024/09/FlexHEG-Interim-Report_2024.pdf)**: A new type of chip that can be programmed to self-destruct when certain conditions are met.
 
 An international insitution could be set up to monitor these verification methods, and to enforce the Pause.
 

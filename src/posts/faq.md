@@ -54,12 +54,7 @@ It requires all of us to allow these companies to gamble with our future.
 
 ## Who is paying you?
 
-Virtually all of our actions so far have been done by volunteers.
-However, since February 2024, PauseAI is a [registered non-profit foundation](/legal), and we have received multiple donations from individuals.
-We've also received 20k funding from the LightSpeed network.
-
-You can also [donate](/donate) to PauseAI if you support our cause!
-We use most of the money to enable local communities to organize events.
+See our [Funding page](/funding)
 
 ## What are your plans?
 

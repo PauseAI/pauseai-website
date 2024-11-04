@@ -17,7 +17,7 @@
 		AI can have amazing benefits, but it could also erode our democracy, destabilize our economy and
 		could be used to create powerful cyber weapons.
 	</Block>
-	<Block linkText="Why and how AI can kill us" href="/xrisk">
+	<Block linkText="How and why AI could kill us" href="/xrisk">
 		<span slot="title">We risk <u>human extinction</u></span>
 		Many AI labs and experts agree: AI could end humanity.
 	</Block>
