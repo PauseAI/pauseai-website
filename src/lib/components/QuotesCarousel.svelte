@@ -66,16 +66,6 @@
 
 <style>
 	.quote-container {
-		margin-bottom: 5rem;
-	}
-
-	.quote-container::after {
-		content: '';
-		display: block;
-		height: 0.1rem;
-		margin: 2rem 0;
-		background: var(--bg-subtle);
-		width: 100%;
 	}
 
 	.navigation {

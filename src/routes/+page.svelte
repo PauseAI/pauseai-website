@@ -2,20 +2,24 @@
 	import Block from '$lib/components/Block.svelte'
 	import PostMeta from '$lib/components/PostMeta.svelte'
 	import QuotesCarousel from '$lib/components/QuotesCarousel.svelte'
+	import Stats from '$lib/components/Stats.svelte'
 
 	const title = 'We need to Pause AI'
 	const description = 'We are risking human extinction. We need to pause AI development, right now.'
 </script>
 
 <PostMeta {title} {description} />
-
 <!-- The Hero image is in `+layout.svelte` -->
+
 <QuotesCarousel />
+<br />
+<Stats />
+<br />
 <section>
-	<Block linkText="Read about the risks" href="/risks">
+	<Block linkText="Read about the risks" href="/xrisk">
 		<span slot="title">We risk <u>losing control</u></span>
 		AI can have amazing benefits, but it could also erode our democracy, destabilize our economy and
-		could be used to create powerful cyber weapons.
+		could be used to create powerful cyber weapons. Many AI labs and experts agree: AI could end humanity.
 	</Block>
 	<Block linkText="How and why AI could kill us" href="/xrisk">
 		<span slot="title">We risk <u>human extinction</u></span>
@@ -37,3 +41,14 @@
 		race to the bottom.</Block
 	>
 </section>
+
+<style>
+	br {
+		content: '';
+		display: block;
+		height: 0.1rem;
+		margin: 5rem 0;
+		background: var(--bg-subtle);
+		width: 100%;
+	}
+</style>

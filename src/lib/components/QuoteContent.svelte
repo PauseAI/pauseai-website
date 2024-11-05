@@ -50,8 +50,8 @@
 	}
 
 	.author-image {
-		width: 5rem;
-		height: 5rem;
+		width: 7rem;
+		height: 7rem;
 		border-radius: 50%;
 		object-fit: cover;
 	}
@@ -65,5 +65,12 @@
 
 	.author-title {
 		margin: 0;
+	}
+
+	@media (max-width: 850px) {
+		.author-image {
+			width: 4rem;
+			height: 4rem;
+		}
 	}
 </style>
