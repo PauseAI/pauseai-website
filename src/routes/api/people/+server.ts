@@ -43,8 +43,11 @@ async function fetchAllPages(fetch: any, url: any) {
 	return allRecords
 }
 
-export async function GET({ fetch }) {
+export async function GET({ fetch, setHeaders }) {
 	const url = `https://api.airtable.com/v0/appWPTGqZmUcs3NWu/tblZhQc49PkCz3yHd`
+	setHeaders({
+		'cache-control': 'public, max-age=3600' // 1 hour in seconds
+	})
 
 	try {
 		const records = await fetchAllPages(fetch, url)

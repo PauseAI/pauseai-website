@@ -82,7 +82,7 @@ Do this about 24 to 48 hrs before the protest.
 
 ### Reach out to people and organizations
 
-Consider adding the event to the list of events of [AI Safety](https://www.aisafety.com/events-and-training), [Effective Altruism](https://forum.effectivealtruism.org/events), and [LessWrong](https://www.lesswrong.com/community). 
+Consider adding the event to the list of events of [AI Safety](https://www.aisafety.com/events-and-training), [Effective Altruism](https://forum.effectivealtruism.org/events), and [LessWrong](https://www.lesswrong.com/community).
 If your protest is part of an international protest, the events may already exist.
 
 Do you have an [Effective Altruists group in your city](https://forum.effectivealtruism.org/groups#local)?
