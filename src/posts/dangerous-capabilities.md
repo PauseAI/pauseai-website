@@ -53,7 +53,8 @@ Interpretability research may change this in the future, but as of now, we can't
 So preventing the creation of dangerous capabilities can practically only be done in one way:
 don't build increasingly powerful AI systems in the first place.
 This would be the safest way forward, but that's not what AI labs are proposing.
-Preventing the proliferation of dangerous capabilities
+
+## Preventing the proliferation of dangerous capabilities
 
 Right now, a lot is happening in the AI regulation space.
 A lot of these proposals (including all the ones coming from AI labs) rely on safety **evaluations** (or _evals_): pre-deployment testing of AI models.

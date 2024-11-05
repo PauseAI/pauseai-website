@@ -45,7 +45,9 @@ Be aware that PauseAI may grow very quickly in the near future, both in terms of
 
 - Remote work or in-person in Utrecht.
 - Full-time position, 32 hours per week negotiable.
+- Salary range: 40k - 60k EUR per year, depending on experience.
+- Referral bonus: 500 EUR for a successful hire!
 
 ## Apply
 
-If you are interested in this vacancy, please send a short motivation letter and your CV to [joep@pauseai.info](mailto:joep@pauseai.info) before November 30th, 2024.
+If you are interested in this vacancy, please send a short motivation letter and your CV to [joep@pauseai.info](mailto:joep@pauseai.info) as soon as possible.

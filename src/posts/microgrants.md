@@ -10,16 +10,22 @@ But getting funding can be a hassle - especially if you've never applied to a gr
 
 This is where PauseAI MicroGrants come in handy!
 Small amounts of money (typically under 2000 EUR) for working on a project.
-We're pretty open about what types of projects could apply.
+We're pretty open about what types of projects could apply, as long as they align with our mission of mitigating catastrophic risks from AI.
+
 Here's a list of examples:
 
-- **Organize an event**, like an email lobby session (fee for organising, location rental, food & drinks)
-- **Make videos** about why we need to Pause AI
-- **Help out with the website**, e.g. writing articles, making technical improvements
-- **Do research**, e.g. for the #"AI Safety Scorecard".
+- **Organize an event** (location rental, food & drinks)
+- **Make or promote videos** about why AI is dangerous or why we can pause it
 - **Work on a policy draft**, e.g. formalise our [proposal](/proposal)
 - **Perform market research**, e.g. a survey or message-testing study
 - **Write for media**, e.g. write an opinion piece for a national newspaper
+- **Set up a new organization** that aligns with our mission
+
+## Limitations
+
+- Do note that since we are a charity, we cannot provide a salary through this program.
+- Your project and its benefits to society should stand on its own - it is not a project for the benefit of PauseAI.
+- If you're planning on growing the PauseAI community by doing typical volunteer work, consider applying for a [volunteer stipend](/volunteer-stipends) instead.
 
 ## The process
 

@@ -49,6 +49,7 @@
 				>Merchandise</ExternalLink
 			>
 			<a href="/events">Events</a>
+			<a href="/vacancies">Vacancies</a>
 			<a href="/email-builder">Email builder</a>
 			<a href="/lobby-tips">Lobby tips</a>
 		</div>

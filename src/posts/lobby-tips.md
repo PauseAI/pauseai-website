@@ -12,6 +12,8 @@ They are representing _you_.
 
 So don't be afraid to reach out to them.
 
+If you are from the US, you can check out our particular [US Lobbying Guide](/us-lobby-guide).
+
 ## Find people to help you
 
 - It can be useful to find people who are skilled at lobbying, who know the political culture in your country.
@@ -41,13 +43,21 @@ Check out the [surveys](/polls-and-surveys) and the [quotes](/quotes) pages for 
 
 ## During the meeting
 
-Being an alarmist can be tough, and scary.
+Sounding the alarm can be tough and frightening.
 You may fear speaking your mind, and you may fear being dismissed.
 But we cannot afford to mince words and tone everything down:
 
 - Be clear about the urgency. **This is an emergency**.
 - Be clear about the risks. **This is an existential risk**.
 - Be clear about the solution. We need to work towards a pause on AI training runs. Your government needs to prepare for the [summit](/summit) by forming coalitions with other countries and start working on a global treaty to [pause AI training runs](/proposal).
+
+## After the meeting
+
+Keep your contact warm!
+Send them regulare updates on what's happening in the AI safety field.
+The field moves very fast, and this is your oppurtinuty to be their source of information.
+If you are knowledgeable about this field (which you probaly are compared to lots of people) you can become an advisor / source or knowledge.
+Ask them to introduce you to other people who might be interested in this topic.
 
 ## Get to it!
 
