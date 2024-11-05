@@ -29,7 +29,7 @@ It is NOT like the [six-month pause asked by the open letter published by the Fu
 
 ## Pausing for too long
 
-Nick Bostrom, one of the first AI alarmists, worries that [at some point we might worry _too much_ about AI risks](https://twitter.com/jachaseyoung/status/1723325057056010680), although that moment is not yet here.
+Nick Bostrom, one of the early voices raising concerns about AI, worries that [at some point we might worry too much about AI risks](https://twitter.com/jachaseyoung/status/1723325057056010680), although that moment is not yet here.
 If concern about AI keeps rising, and we get a Pause, it might lead to a situation where the entirety of AI development becomes taboo or illegal.
 If that happens, we will never reap the benefits of AI, and in the meantime, we might encounter other existential risks that we could have avoided with the help of AI.
 

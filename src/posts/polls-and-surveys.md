@@ -26,3 +26,8 @@ description: How much do regular people and experts worry about AI risks and gov
 - [**UK citizens, YouGov**](https://inews.co.uk/news/politics/voters-deepfakes-ban-ai-intelligent-humans-2708693): 74% believe the government should prevent superhuman AI from quickly being created. Over 60% support a treaty with a global ban on superintelligence.
 - [**UK citizens, AISCC**](https://aiscc.org/2023/11/01/yougov-poll-83-of-brits-demand-companies-prove-ai-systems-are-safe-before-release/): 83% of people said that governments should require AI companies to prove their AI models are safe before releasing them.
 - [**NL, US, UK Citizens, Existential Risk Observatory**](https://www.existentialriskobservatory.org/papers_and_reports/Trends%20in%20Public%20Attitude%20Towards%20Existential%20Risk%20And%20Artificial%20Intelligence.pdf): public awareness of existential risk grew in the US from 7% to 15%, and in the Netherlands and the UK 19%. Support for a government-mandated AI pause has risen in the US from 56% to 66%.
+
+## Timelines
+
+- [**Metaculus Weak AGI**](https://www.metaculus.com/questions/3479/date-weakly-general-ai-is-publicly-known/) before 2026: 25% chance, AGI by 2027: 50% chance (updated on 2024-11-05).
+- [**Metaculus full AGI**](https://www.metaculus.com/questions/5121/date-of-artificial-general-intelligence/) before 2028: 25% chance, full AGI by 2032: 50% chance (updated on 2024-11-05).

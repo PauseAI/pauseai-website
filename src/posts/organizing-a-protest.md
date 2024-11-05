@@ -25,11 +25,13 @@ Check if there's already a [local community near you](/communities).
 If there is not, you should [start one](/local-organizing)!
 And [join our Discord server](https://discord.gg/2XXWXvErfA) to discuss organizing a protest.
 We're happy to help you with advice and resources!
+Don't forget writing in your city post, inside the #local-communities channel over there.
 
 ### Pick a location and a date
 
 Ideally, you want to pick a location relevant to the protest.
 The HQ of a company, parliament, a ministry building - whatever matches your message.
+You can check some examples [here](https://docs.google.com/spreadsheets/d/1aGXwyOYraDwmRZzySHUiJ45l_KzhnHpJVBkJCMyG7gQ/edit?usp=sharing).
 Also pick an easily accessible location, because you want as many people as possible to be able to attend.
 If your date is relevant too (e.g. because there's a relevant event at that location), that's even better!
 
@@ -47,14 +49,14 @@ We can help you with this!
 ### Create a webpage on PauseAI.info
 
 We can do this for you if you want help.
-Publish a new page on this PauseAI website.
+Publish a new page on this PauseAI website or add your location to an already existing page.
 If you know GitHub and rather do it yourself, simply create a new file (e.g. `2023-10-23-nyc-protest.md`) in the `src/posts` folder.
 Feel free to copy an earlier protest file for inspiration.
 Also, update the `protests.md` file to link to the protest.
 
 ### Create an Event page
 
-Make a Facebook event or use another RSVP tool like [partiful](https://partiful.com).
+Add the event to [this website](/events), which can be then shared separately via Luma to invite people. Or use another RSVP tool like Facebook.
 You can also decide to link to a Whatsapp group or something similar instead.
 The important bit is that you can keep people updated about what's going to happen.
 
@@ -63,6 +65,7 @@ The important bit is that you can keep people updated about what's going to happ
 Share the protest on Twitter, LinkedIn, etc.
 Share the post in relevant groups.
 Do it twice: about two weeks in advance, and one day before!
+Consider creating a [digital flyer](https://www.figma.com/design/iQ4PHQTi1vAVmT9Lckazqt/PauseAI-designs---editable?node-id=1574-544&node-type=section&t=KmAYlq7fGZVAkzij-0) or a video for better shareability.
 
 ### Make the protest visible locally
 
@@ -78,6 +81,9 @@ Suggest that they come to the protest and that they can interview you.
 Do this about 24 to 48 hrs before the protest.
 
 ### Reach out to people and organizations
+
+Consider adding the event to the list of events of [AI Safety](https://www.aisafety.com/events-and-training), [Effective Altruism](https://forum.effectivealtruism.org/events), and [LessWrong](https://www.lesswrong.com/community).
+If your protest is part of an international protest, the events may already exist.
 
 Do you have an [Effective Altruists group in your city](https://forum.effectivealtruism.org/groups#local)?
 Or a [local AI safety group](https://www.aisafety.com/communities)?

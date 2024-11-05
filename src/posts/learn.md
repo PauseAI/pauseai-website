@@ -3,11 +3,21 @@ title: Learn why AI safety matters
 description: Educational resources (videos, articles, books) about AI risks and AI alignment
 ---
 
-One of the most important things you can do to help with AI alignment and the existential risk (x-risk) that superintelligence poses, is to learn about it.
-Here are some resources to get you started.
+## On this website
+
+- [Risks](/risks). A summary of the risks of AI.
+- [X-risk](/xrisk). Why AI is an existential risk.
+- [Takeover](/ai-takeover). How AI could take over the world.
+- [Quotes](/quotes). Quotes on AI risks and governance.
+- [Feasiblity of a Pause](/feasibility). The feasibility of a pause in AI development.
+- [Building the Pause button](/building-the-pause-button). What it takes to pause AI.
+- [FAQ](/faq). Commonly asked questions about AI safety and PauseAI.
+- [Action](/action). What you can do to help (with links to many action-related guides)
 
 ## Websites
 
+- [The Compendium](https://www.thecompendium.ai/). A highly comprehensive bundle of knowledge on why the current AI race is so dangerous, and what we can do about it.
+- [A Narrow Path](https://www.narrowpath.co/). A detailed plan on the steps that we need to take to increase our odds at surviving the next decadesa.
 - [AISafety.com](https://www.aisafety.com) & [AISafety.info](https://aisafety.info). The landing pages for AI Safety. Learn about the risks, communities, events, jobs, courses, ideas for how to mitigate the risks and more!
 - [AISafety.dance](https://aisafety.dance). A more fun, friendly and interactive introduction to the AI catastrophic risks!
 - [AISafety.world](https://aisafety.world/tiles/). The whole AI Safety landscape with all the organizations, media outlets, forums, blogs, and other actors and resources.
@@ -22,6 +32,7 @@ Here are some resources to get you started.
 
 ## Videos
 
+<!-- Better to link to the playlist I think.
 - [Kurzgesagt - A.I. ‐ Humanity's Final Invention?](https://www.youtube.com/watch?v=fa8k8IQ1_X0) (20 mins). The history of AI, and an introduction to the concept of superintelligence.
 - [80k hours - Could AI wipe out humanity?](https://youtu.be/qzyEgZwfkKY?si=ief1l2PpkZ7_s6sq) (10 mins). A great introduction to the problem, from a down-to-earth perspective.
 - [Superintelligent AI Should Worry You...](https://www.youtube.com/watch?v=xBqU1QxCao8) (1 min). The best super short introduction.
@@ -34,7 +45,10 @@ Here are some resources to get you started.
 - [Exploring the dangers from Artificial Intelligence](https://www.youtube.com/watch?v=sPyu_dTSma0&t=1328s) (25 mins). Summary of cybersecurity, biohazard and power-seeking AI risks.
 - [Why this top AI guru thinks we might be in extinction level trouble | The InnerView](https://youtu.be/YZjmZFDx-pA?si=Y7QUxTaJcuC6LVji) (26 mins). Interview with Connor Leahy on AI X-risks on television.
 - [The AI Dilemma](https://www.youtube.com/watch?v=xoVJKj8lcNQ&t=1903s) (1hr). Presentation about the dangers of AI and the race which AI companies are stuck in.
-- [Robert Miles' YouTube videos](https://www.youtube.com/watch?v=tlS5Y2vm02c&list=PLfHsskCxi_g-c62a_dmsNuHynaXsRQm40) are a great place to start understanding most of the fundamentals of AI alignment.
+-->
+
+- [Introduction to AI Risks](https://www.youtube.com/playlist?list=PLI46NoubGtIJa0JVCBR-9CayxCOmU0EJt) is a YouTube playlist we compiled, featuring videos ranging from 1 minute to 1 hour in various formats and from diverse sources, and it doesn't require any prior knowledge.
+- [Robert Miles' YouTube videos](https://www.youtube.com/watch?v=tlS5Y2vm02c&list=PLfHsskCxi_g-c62a_dmsNuHynaXsRQm40) are a great place to start understanding the fundamentals of AI alignment.
 
 ## Podcasts
 
