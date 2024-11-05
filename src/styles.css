@@ -75,13 +75,13 @@ html {
 
 html,
 body {
+	overflow-x: hidden;
 	height: 100%;
 	font-family: var(--font-body);
 	background-color: var(--bg);
 }
 
 html {
-	overflow-x: hidden;
 	color: var(--text);
 	accent-color: var(--link);
 	background-image: var(--background);
