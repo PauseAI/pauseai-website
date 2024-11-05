@@ -3,9 +3,6 @@ title: Learn why AI safety matters
 description: Educational resources (videos, articles, books) about AI risks and AI alignment
 ---
 
-One of the most important things you can do to help with AI alignment and the existential risk (x-risk) that superintelligence poses, is to learn about it.
-Here are some resources to get you started.
-
 ## On this website
 
 - [Risks](/risks). A summary of the risks of AI.
@@ -14,6 +11,8 @@ Here are some resources to get you started.
 - [Quotes](/quotes). Quotes on AI risks and governance.
 - [Feasiblity of a Pause](/feasibility). The feasibility of a pause in AI development.
 - [Building the Pause button](/building-the-pause-button). What it takes to pause AI.
+- [FAQ](/faq). Commonly asked questions about AI safety and PauseAI.
+- [Action](/action). What you can do to help (with links to many action-related guides)
 
 ## Websites
 
