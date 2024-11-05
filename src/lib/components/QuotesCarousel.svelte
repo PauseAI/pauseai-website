@@ -1,12 +1,14 @@
-<script>
+<script lang="ts">
 	import QuoteContent from './QuoteContent.svelte'
 	import Hinton from '../../assets/quote-profile/hinton.jpg'
 	import Hawking from '../../assets/quote-profile/hawking.jpg'
 	import Turing from '../../assets/quote-profile/turing.jpg'
 	import Russell from '../../assets/quote-profile/russell.jpg'
 	import Bengio from '../../assets/quote-profile/bengio.jpg'
+	import { tick } from 'svelte'
 
 	let currentSlide = 0
+	let quoteContent: HTMLDivElement
 
 	const quotes = [
 		{
@@ -44,16 +46,29 @@
 	const totalSlides = quotes.length
 
 	function nextSlide() {
-		currentSlide = (currentSlide + 1) % totalSlides
+		switchSlide((currentSlide + 1) % totalSlides)
 	}
 
 	function prevSlide() {
-		currentSlide = (currentSlide - 1 + totalSlides) % totalSlides
+		switchSlide((currentSlide - 1 + totalSlides) % totalSlides)
+	}
+
+	async function switchSlide(index: number) {
+		const bottom = quoteContent.getBoundingClientRect().bottom
+		const previousHeight = quoteContent.offsetHeight
+		const halfOutOfView = bottom < previousHeight / 2
+		currentSlide = index
+		if (halfOutOfView) return
+		await tick()
+		const newHeight = quoteContent.offsetHeight
+		scrollBy(0, newHeight - previousHeight)
 	}
 </script>
 
 <div class="quote-container">
-	<QuoteContent quote={quotes[currentSlide]} />
+	<div bind:this={quoteContent}>
+		<QuoteContent quote={quotes[currentSlide]} />
+	</div>
 
 	<div class="navigation">
 		<button on:click={prevSlide} class="nav-button">←</button>
