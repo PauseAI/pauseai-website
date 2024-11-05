@@ -18,7 +18,7 @@
 
 	<div class="nav-right">
 		<div class="nav-links">
-			<NavLink {inverted} href="/risks">Risks</NavLink>
+			<NavLink {inverted} href="/learn">Learn</NavLink>
 			<NavLink {inverted} href="/proposal">Proposal</NavLink>
 			<NavLink {inverted} href="/events">Events</NavLink>
 			<NavLink {inverted} href="/faq">FAQ</NavLink>

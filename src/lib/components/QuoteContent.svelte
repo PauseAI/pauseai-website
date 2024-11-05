@@ -21,11 +21,15 @@
 <style>
 	.quote-card {
 		background: var(--color-background);
+		min-height: 18rem;
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
 	}
 
 	.quote-text {
 		font-size: clamp(1.2rem, 4vw, 1.7rem);
-		margin-bottom: var(--spacing-lg);
+		margin-bottom: 1rem;
 		position: relative;
 	}
 
@@ -42,12 +46,12 @@
 	.author-section {
 		display: flex;
 		align-items: center;
-		gap: var(--spacing-md);
+		gap: var(--spacing-sm);
 	}
 
 	.author-image {
-		width: 60px;
-		height: 60px;
+		width: 5rem;
+		height: 5rem;
 		border-radius: 50%;
 		object-fit: cover;
 	}
