@@ -19,7 +19,7 @@
 
 	export let data
 	// Show the hero on the homepage, but nowhere else
-	$: hero = data.url == '/'
+	$: hero = i18n.route(data.url) == '/'
 </script>
 
 <ParaglideJS {i18n}>
