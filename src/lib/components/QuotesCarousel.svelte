@@ -28,13 +28,13 @@
 			image: Turing
 		},
 		{
-			text: "The robot is not going to want to be switched off because you've given it a goal to achieve and being switched off is a way of failing—so it will do its best not to be switched off.",
+			text: 'If we pursue [our current approach], then we will eventually lose control over the machines',
 			author: 'Stuart Russell',
 			title: 'Writer of the AI textbook',
 			image: Russell
 		},
 		{
-			text: 'It’s very challenging psychologically to realize that what you’ve been working for, with the idea that it would be a great thing—for society, for humanity, for science—may actually be catastrophic.',
+			text: 'Rogue AI may be dangerous for the whole of humanity. Banning powerful AI systems (say beyond the abilities of GPT-4) that are given autonomy and agency would be a good start.',
 			author: 'Yoshua Bengio',
 			title: 'AI Turing Award winner',
 			image: Bengio
@@ -62,6 +62,7 @@
 		{/each}
 		<button on:click={nextSlide} class="nav-button">→</button>
 	</div>
+	<a href="/quotes">more quotes</a>
 </div>
 
 <style>

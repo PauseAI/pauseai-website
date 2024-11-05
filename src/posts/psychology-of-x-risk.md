@@ -108,6 +108,10 @@ So when people hear about existential risk, they will think it is just another o
 Try to have an understanding of this point of view, and don't be too hard on people who think this way.
 They probably haven't been shown the same information as you have.
 
+### Present Bias
+
+We tend to emphasize the importance of the present time over the future.
+
 ### We like to think that we are special
 
 Both at a _collective_ and at an _individual_ level, we want to believe that we are special.
@@ -176,6 +180,9 @@ In an [interview](https://youtu.be/0RknkWgd6Ck?t%25253D949), he gave the followi
 
 It should surprise no-one that some of the most fierce AI risk deniers are AI researchers themselves.
 
+Take Yann LeCun, for example, one of the most vocal critics of AI risk.
+He works at Meta
+
 ### Easy to dismiss as conspiracy or cult
 
 In the past year, the majority of the population was introduced to the concept of existential risk from AI.
@@ -226,6 +233,11 @@ Our brains have evolved to fear things that are dangerous.
 We instinctively fear heights, big animals with sharp teath, sudden loud noises, and things that move around in an S-shape.
 A superintelligent AI does not hit any of our primal fears.
 Additionally, we have a strong fear for social rejection or losing social status, which means that people tend to be afraid of speaking up about AI risks.
+
+### Diffusion of responsibility
+
+Not a single person is "responsible" for making sure AI doesn't lead to our extinction.
+So, someone else should solve it.
 
 ### Scope insensitivity
 
