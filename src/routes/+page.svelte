@@ -16,10 +16,10 @@
 <Stats />
 <br />
 <section>
-	<Block linkText="Read about the risks" href="/xrisk">
+	<Block linkText="Read about the risks" href="/risks">
 		<span slot="title">We risk <u>losing control</u></span>
 		AI can have amazing benefits, but it could also erode our democracy, destabilize our economy and
-		could be used to create powerful cyber weapons. Many AI labs and experts agree: AI could end humanity.
+		could be used to create powerful cyber weapons.
 	</Block>
 	<Block linkText="How and why AI could kill us" href="/xrisk">
 		<span slot="title">We risk <u>human extinction</u></span>
