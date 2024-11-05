@@ -18,6 +18,23 @@ html {
 
 	/* light */
 	--brand-light: var(--t-color-main);
+
+	--nav-height: 8rem;
+
+	/* We can't use these in media queries... */
+	--breakpoint: 900px;
+
+	/* Spacing */
+	--spacing-xs: 0.5rem;
+	--spacing-sm: 1rem;
+	--spacing-md: 2rem;
+	--spacing-lg: 4rem;
+}
+
+@media (max-width: 900px) {
+	html {
+		--nav-height: 14rem;
+	}
 }
 
 :root {
@@ -58,6 +75,7 @@ html {
 
 html,
 body {
+	overflow-x: hidden;
 	height: 100%;
 	font-family: var(--font-body);
 	background-color: var(--bg);
@@ -115,6 +133,10 @@ a {
 
 a:hover {
 	color: var(--brand);
+}
+
+p {
+	font-weight: 300;
 }
 
 .prose {
@@ -198,4 +220,5 @@ textarea:focus {
 
 ::selection {
 	background-color: var(--brand);
+	color: black;
 }

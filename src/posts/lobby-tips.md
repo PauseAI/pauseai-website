@@ -43,7 +43,7 @@ Check out the [surveys](/polls-and-surveys) and the [quotes](/quotes) pages for 
 
 ## During the meeting
 
-Being an alarmist can be tough, and scary.
+Sounding the alarm can be tough and frightening.
 You may fear speaking your mind, and you may fear being dismissed.
 But we cannot afford to mince words and tone everything down:
 

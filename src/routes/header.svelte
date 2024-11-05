@@ -10,34 +10,43 @@
 
 	const enableBot = false
 
+	export let inverted = false
+
 	$: logo_animate = i18n.route($page.url.pathname) != '/'
 </script>
 
-<nav>
+<nav class={inverted ? 'inverted-header' : ''}>
 	<a href="/" class="logo">
-		<Logo animate={logo_animate} />
+		<Logo animate={logo_animate} {inverted} />
 	</a>
 
 	<div class="nav-right">
 		<div class="nav-links">
-			<NavLink href="/risks">{m.header_risks()}</NavLink>
-			<NavLink href="/proposal">{m.header_proposal()}</NavLink>
-			<NavLink href="/events">{m.header_events()}</NavLink>
-			<NavLink href="/faq">{m.header_faq()}</NavLink>
-			<NavLink href="/action">{m.header_action()}</NavLink>
-			<NavLink href="/donate">{m.header_donate()}</NavLink>
+			<NavLink {inverted} href="/risks">{m.header_risks()}</NavLink>
+			<NavLink {inverted} href="/proposal">{m.header_proposal()}</NavLink>
+			<NavLink {inverted} href="/events">{m.header_events()}</NavLink>
+			<NavLink {inverted} href="/faq">{m.header_faq()}</NavLink>
+			<NavLink {inverted} href="/action">{m.header_action()}</NavLink>
+			<NavLink {inverted} href="/donate">{m.header_donate()}</NavLink>
 			{#if enableBot}
-				<NavLink href="/chat">{botName}</NavLink>
+				<NavLink {inverted} href="/chat">{botName}</NavLink>
 			{/if}
 			<!-- <NavLink href="/about">About</NavLink> -->
-			<NavLink c2a href="/join">{m.header_join()}</NavLink>
+			<NavLink {inverted} c2a href="/join">{m.header_join()}</NavLink>
 			<LanguageSwitcher />
-			<NavLink href="/search" ariaLabel="Search"><SearchIcon size="0.8em" /></NavLink>
+			<NavLink {inverted} href="/search" ariaLabel="Search"><SearchIcon size="0.8em" /></NavLink>
 		</div>
 	</div>
 </nav>
 
 <style>
+	.inverted-header {
+		color: white;
+		z-index: 1;
+
+		--text: white;
+	}
+
 	nav {
 		display: flex;
 		justify-content: space-between;
@@ -46,6 +55,7 @@
 		padding: 2rem 0;
 		margin-left: -1rem;
 		flex-wrap: wrap;
+		height: calc(var(--nav-height) - 5rem);
 	}
 
 	.logo {

@@ -3,6 +3,9 @@
 	export let height = (width * 22) / 81
 	export let animate = false
 	export let fill: string | null = null
+	export let inverted = false
+	$: orange = inverted ? 'white' : '#FF9416'
+	$: fill = inverted ? 'black' : 'var(--text)'
 </script>
 
 <svg
@@ -21,7 +24,7 @@
 		fill-rule="evenodd"
 		clip-rule="evenodd"
 		d="M66 33C66 51.2254 51.2254 66 33 66C14.7746 66 0 51.2254 0 33C0 14.7746 14.7746 0 33 0C51.2254 0 66 14.7746 66 33ZM20.7902 18.8101H29.0402V48.1801H20.7902V18.8101ZM44.5504 18.8101H36.3004V48.1801H44.5504V18.8101Z"
-		fill="#FF9416"
+		fill={orange}
 	/>
 	<path
 		class="logo-pause"
@@ -32,7 +35,7 @@
 	<path
 		class="logo-ai"
 		d="M195.705 47L207.945 19H217.225L229.465 47H219.705L210.665 23.48H214.345L205.305 47H195.705ZM202.985 42.12L205.385 35.32H218.265L220.665 42.12H202.985ZM230.971 47V19H240.411V47H230.971Z"
-		fill="#FF9416"
+		fill={orange}
 	/>
 </svg>
 

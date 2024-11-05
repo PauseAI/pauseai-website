@@ -22,23 +22,18 @@ Or at least, that's what we want them to do.
 So far, all AI safety summits haven't led to meaningful regulation.
 It's up to you and me to [convince them](/action).
 
-## With an International AI Authority
-
-Having a Pause button would imply having some body that has the right to press it.
-That body will need certain powers:
-
-- **Verification**: The ability to verify that no superintelligent AI is being created. We'll dive into these in a later section.
-- **Enforcement**: The ability to enforce the Pause. This could be done by imposing sanctions on countries that violate the Pause, or by seizing hardware that is used to train a superintelligent AI.
-
-## Without an International AI Authority
-
-But even without such a body, there are things we can do
-
 ## Compute Governance
 
 To train a frontier LLM (like GPT-4), you need a lot of highly specialized and costly hardware.
 GPT-4 was trained on 25,000 Nvidia A100 GPUs, which cost $10.000 each.
 And many expect AI models to become even larger in the future.
+
+The sheer scale of modern AI training requirements is immense.
+Microsoft recently announced a plan to [construct a nuclear power plant](https://www.theverge.com/2024/9/20/24249770/microsoft-three-mile-island-nuclear-power-plant-deal-ai-data-centers) for its AI power needs.
+Luckily for us, this means that AI training runs are hard to hide, at least in the near future.
+
+By controlling and monitoring the AI Chip supply chain, governments or other regulatory bodies can make sure that nobody starts a dangerous AI training run.
+Let's dive into the various choke points in this supply chain.
 
 ### Choke points in the chip supply chain
 
@@ -46,25 +41,43 @@ It is hard to overstate the complexity and interdependency of the AI chip supply
 This is great news for governance.
 Through the hardware, we can regulate the training runs.
 
-#### ASML - the lithography bottleneck
+#### ASML and SMEE - the lithography bottlenecks
 
 All modern chips are made using lithography machines: huge machines, costing 200 million dollars each, that project light onto a silicon wafer.
 This lithography process is one of the most complex and expensive parts of the chip manufacturing process.
 Top-tier AI chips are all made using EUV lithography, and ASML is the only company that makes these machines.
 This Dutch company is one of the most important potential choke points for AI governance.
-The Dutch Government has set up strict export controls on their EUV lithography machines,
+These machines are insanely complex and require a lot of expertise to build and maintain.
+Notably, they have [remote kill-switches](https://www.businessinsider.com/asml-tsmc-semiconductor-chip-equipment-kill-switch-china-invade-taiwan-2024-5) (mostly for in the case that Taiwan is invaded), so in some important ways, the Pause button is already built.
 
-#### SMIC - the Chinese competitor that is catching up
+The Dutch Government has set up strict export controls on their EUV lithography machines, requiring permits for exports.
+These export controls have primarily been set in place to slow down China's chip ambitions.
+The [US, Japan and the Netherlands](https://apnews.com/article/technology-district-of-columbia-netherlands-china-business-6801d6c5f65b0bc1df6186e2e89a6f7d) are in a (non-public) agreement aimed to restrict chip & lithography exports to china.
 
-The Chinese company SMIC is trying to catch up, but is not able to make their own EUV machines.
+The Chinese company SMEE is trying to catch up, but is not able to make their own EUV machines.
+Their DUV machines are [still stuck at 28nm](https://www.scmp.com/tech/big-tech/article/3278235/chinese-chip-making-shows-progress-new-euv-patent-domestic-lithography-champion), which is generations behind ASML's 5nm EUV process, let alone ASML's upcoming 2nm machines.
+So SMEE is not able to produce modern AI chips.
+
+In other words: ASML is a fundamental choke point in the AI chip supply chain.
+
+#### TSMC, Samsung amd SMIC - The largest fabs
+
+Building a fab (a chip factory) is astonishingly difficult: it has zero-tolerance for dust particles, requires the most expensive high-tech equipment, and has a very complex supply chain.
+A modern fab costs around 10 to 20 billion dollars to manufacture.
+
+The Taiwan Semiconductor Manufacturing Company accounts for roughly 90% of modern AI chips, which are all chips made at 7nm precision or better.
+Samsung is the only other fab that can produce modern AI chips.
+
+But the Chinese SMIC is catching up rapidly - they already have a functional 7nm process.
 Due to US / NL export controls, SMIC is not able to buy ASML EUV machines, and are now also restricted in buying the older DUV machines.
 In June 2024, a [report](https://evertiq.com/news/55926) showed that SMIC can produce 5nm chips using DUV hardware,
 and is now able to produce 7nm AI chips (about three years behind the 4nm process that ASMLs EUV machines can produce), but SMIC's EUV lithography is plagued by low yields.
 
-#### Zeiss: mirrors & lensens
+#### Zeiss - mirrors & lensens
 
 ASML's EUV machines use mirrors and lenses made by the German company Zeiss.
 In 2016, ASML [bought](https://optics.org/news/7/11/11) a 25% stake in Zeiss, and the two companies have a very close relationship.
+It is likely that no other company is able to produce these optics.
 
 ### Verification methods - preventing large training runs
 
@@ -87,6 +100,10 @@ The paper ["Verification methods for international AI agreements"](https://arxiv
 10. **Chip-Based Reporting**: Embeds reporting mechanisms in chips to alert if used beyond authorized limits. Feasible but challenging, requiring international standards and hardware development; circumventable by modifying firmware.
 
 Each method has its strengths and weaknesses, often requiring complementary approaches or international cooperation for effective implementation.
+
+Other proposed methods include:
+
+1. **[flegHEGs](https://yoshuabengio.org/wp-content/uploads/2024/09/FlexHEG-Interim-Report_2024.pdf)**: A new type of chip that can be programmed to self-destruct when certain conditions are met.
 
 An international insitution could be set up to monitor these verification methods, and to enforce the Pause.
 

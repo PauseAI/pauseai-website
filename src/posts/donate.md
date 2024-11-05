@@ -3,10 +3,14 @@ title: Donate to PauseAI
 description: With your financial support we can have a bigger impact.
 ---
 
+<script>
+    import Donate from '$lib/components/Donate.svelte/'
+</script>
+
 We started PauseAI as a group of volunteers, who work on it in their free time.
 Since February 2024, PauseAI is a [registered non-profit foundation](/legal).
 
-<div style="display: flex; justify-content: center;" ><a href="https://www.paypal.com/donate/?hosted_button_id=4TWZXY62EM5VE"><img src="/PayPal.svg" alt="Donate now" width="256" /></a></div>
+<Donate />
 
 ## How we use your donations
 

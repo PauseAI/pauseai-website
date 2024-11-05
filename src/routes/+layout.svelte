@@ -14,9 +14,12 @@
 	import '@fontsource/roboto-slab/700.css'
 	import '@fontsource/saira-condensed/700.css'
 
-	import '../app.css'
+	import '../styles.css'
+	import Hero from '$lib/components/Hero.svelte'
 
 	export let data
+	// Show the hero on the homepage, but nowhere else
+	$: hero = data.url == '/'
 </script>
 
 <ParaglideJS {i18n}>
@@ -24,8 +27,11 @@
 		(Top)
 	</h2>
 
-	<div class="layout">
-		<Header />
+	<div class="layout" class:with-hero={hero}>
+		<Header inverted={hero} />
+		{#if hero}
+			<Hero />
+		{/if}
 
 		<main>
 			<PageTransition url={data.url}>
@@ -62,8 +68,10 @@
 		max-width: 50rem;
 		margin: auto;
 	} */
+
 	.layout {
 		height: 100%;
+		position: relative;
 		max-inline-size: var(--page-width);
 		display: grid;
 		grid-template-rows: auto 1fr auto;

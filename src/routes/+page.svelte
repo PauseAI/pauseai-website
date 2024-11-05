@@ -1,6 +1,7 @@
 <script lang="ts">
 	import Block from '$lib/components/Block.svelte'
 	import PostMeta from '$lib/components/PostMeta.svelte'
+	import QuotesCarousel from '$lib/components/QuotesCarousel.svelte'
 
 	import * as m from '$lib/paraglide/messages.js'
 
@@ -10,6 +11,8 @@
 
 <PostMeta {title} {description} />
 
+<!-- The Hero image is in `+layout.svelte` -->
+<QuotesCarousel />
 <section>
 	<Block linkText={m.home_risks_c2a()} href="/risks">
 		<span slot="title">{@html m.home_risks_title()}</span>
