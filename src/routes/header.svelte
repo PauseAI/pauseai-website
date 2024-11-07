@@ -22,12 +22,12 @@
 
 	<div class="nav-right">
 		<div class="nav-links">
-			<NavLink {inverted} href="/learn">Learn</NavLink>
-			<NavLink {inverted} href="/proposal">Proposal</NavLink>
-			<NavLink {inverted} href="/events">Events</NavLink>
-			<NavLink {inverted} href="/faq">FAQ</NavLink>
-			<NavLink {inverted} href="/action">Act</NavLink>
-			<NavLink {inverted} href="/donate">Donate</NavLink>
+			<NavLink {inverted} href="/learn">{m.header_learn()}</NavLink>
+			<NavLink {inverted} href="/proposal">{m.header_proposal()}</NavLink>
+			<NavLink {inverted} href="/events">{m.header_events()}</NavLink>
+			<NavLink {inverted} href="/faq">{m.header_faq()}</NavLink>
+			<NavLink {inverted} href="/action">{m.header_action()}</NavLink>
+			<NavLink {inverted} href="/donate">{m.header_donate()}</NavLink>
 			{#if enableBot}
 				<NavLink {inverted} href="/chat">{botName}</NavLink>
 			{/if}
