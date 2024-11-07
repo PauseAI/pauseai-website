@@ -17,9 +17,25 @@
 	import '../styles.css'
 	import Hero from '$lib/components/Hero.svelte'
 
+	import { onMount, tick } from 'svelte'
+	import { onNavigate, replaceState } from '$app/navigation'
+	import { page } from '$app/stores'
+
 	export let data
 	// Show the hero on the homepage, but nowhere else
 	$: hero = i18n.route(data.url) == '/'
+
+	onMount(async () => {
+		await tick() // wait for Svelte router
+		hideLocaleInUrl()
+	})
+	// returned function is run after navigation
+	onNavigate(() => hideLocaleInUrl)
+
+	function hideLocaleInUrl() {
+		const canonical = i18n.route(data.url)
+		replaceState(canonical, $page.state)
+	}
 </script>
 
 <ParaglideJS {i18n}>
