@@ -5,6 +5,7 @@
 	import Turing from '../../assets/quote-profile/turing.jpg'
 	import Russell from '../../assets/quote-profile/russell.jpg'
 	import Bengio from '../../assets/quote-profile/bengio.jpg'
+	import { onMount } from 'svelte'
 
 	let currentSlide = 0
 
@@ -50,6 +51,14 @@
 	function prevSlide() {
 		currentSlide = (currentSlide - 1 + totalSlides) % totalSlides
 	}
+
+	onMount(() => {
+		// preload images
+		for (const quote of quotes) {
+			const image = new Image()
+			image.src = quote.image
+		}
+	})
 </script>
 
 <div class="quote-container">
