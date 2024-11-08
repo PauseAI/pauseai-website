@@ -8,9 +8,9 @@ importers:
 
   .:
     dependencies:
-      '@fontsource-variable/aleo':
-        specifier: ^5.1.0
-        version: 5.1.0
+      '@builder.io/partytown':
+        specifier: ^0.10.2
+        version: 0.10.2
       '@fontsource/roboto-slab':
         specifier: ^5.1.0
         version: 5.1.0
@@ -141,6 +141,11 @@ packages:
   '@ampproject/remapping@2.3.0':
     resolution: {integrity: sha512-30iZtAPgz+LTIYoeivqYo853f02jBYSd5uGnGpkFV0M3xOt9aN73erkgYAmZU43x4VfqcnLxW9Kpg3R5LC4YYw==}
     engines: {node: '>=6.0.0'}
+
+  '@builder.io/partytown@0.10.2':
+    resolution: {integrity: sha512-A9U+4PREWcS+CCYzKGIPovtGB/PBgnH/8oQyCE6Nr9drDJk6cMPpLQIEajpGPmG9tYF7N3FkRvhXm/AS9+0iKg==}
+    engines: {node: '>=18.0.0'}
+    hasBin: true
 
   '@esbuild/aix-ppc64@0.21.5':
     resolution: {integrity: sha512-1SDgH6ZSPTlggy1yI6+Dbkiz8xzpHJEVAlF/AM1tHPLsf5STom9rwtjE4hKAF20FfXXNTFqEYXyJNWh1GiZedQ==}
@@ -441,9 +446,6 @@ packages:
   '@eslint/js@8.57.1':
     resolution: {integrity: sha512-d9zaMRSTIKDLhctzH12MtXvJKSSUhaHcjV+2Z+GK+EEY7XKpP5yR4x+N3TAcHTcu963nIr+TMcCb4DBCYX1z6Q==}
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
-
-  '@fontsource-variable/aleo@5.1.0':
-    resolution: {integrity: sha512-c/rpVjaKO1TvP2Js8GWhNcqjn/L4CPus6RrYjQjsVuqnFOJhiw+VYeR1Axgvg6T2wBKEBLRN5UyFHbMpwK/DHA==}
 
   '@fontsource/roboto-slab@5.1.0':
     resolution: {integrity: sha512-qLqqRm5nwNVgxcfkwL7loyCZr5R5ZR0Vo5vZFgem+zrSKdufB8zQAcOFR3i3ZGnFjuQc2izWSXheY8FSqJ8UoQ==}
@@ -1923,6 +1925,8 @@ snapshots:
       '@jridgewell/gen-mapping': 0.3.5
       '@jridgewell/trace-mapping': 0.3.25
 
+  '@builder.io/partytown@0.10.2': {}
+
   '@esbuild/aix-ppc64@0.21.5':
     optional: true
 
@@ -2086,8 +2090,6 @@ snapshots:
       - supports-color
 
   '@eslint/js@8.57.1': {}
-
-  '@fontsource-variable/aleo@5.1.0': {}
 
   '@fontsource/roboto-slab@5.1.0': {}
 

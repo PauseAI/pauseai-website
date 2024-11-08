@@ -41,6 +41,7 @@
 		"vite": "^5.4.8"
 	},
 	"dependencies": {
+		"@builder.io/partytown": "^0.10.2",
 		"@fontsource/roboto-slab": "^5.1.0",
 		"@fontsource/saira-condensed": "^5.1.0",
 		"@pagefind/default-ui": "^1.1.1",
