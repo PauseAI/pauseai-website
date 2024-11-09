@@ -13,10 +13,16 @@
 
 	import '../styles.css'
 	import Hero from '$lib/components/Hero.svelte'
+	import { onMount } from 'svelte'
 
 	export let data
 	// Show the hero on the homepage, but nowhere else
 	$: hero = data.url == '/'
+
+	onMount(async () => {
+		// @ts-expect-error
+		if (!CSS.supports('container-type: inline-size')) await import('container-query-polyfill')
+	})
 </script>
 
 <h2 style="width: 0; height: 0; margin: 0; padding: 0; visibility: hidden;" data-pagefind-ignore>
