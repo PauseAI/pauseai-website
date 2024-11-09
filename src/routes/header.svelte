@@ -7,11 +7,12 @@
 	const enableBot = false
 
 	export let inverted = false
+	export let moveUp = false
 
 	$: logo_animate = $page.url.pathname != '/'
 </script>
 
-<nav class={inverted ? 'inverted-header' : ''}>
+<nav class:inverted-header={inverted} class:move-up={moveUp}>
 	<div class="logo-container">
 		<div class="compensate-min-space-between" />
 		<div class="compensate-offset" />
@@ -60,6 +61,11 @@
 		flex-wrap: wrap;
 		container-type: inline-size;
 		padding-top: 3rem;
+	}
+
+	nav.move-up {
+		margin-top: -100vh;
+		height: 0;
 	}
 
 	nav > * {

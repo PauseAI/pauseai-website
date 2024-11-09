@@ -33,7 +33,7 @@
 	{#if hero}
 		<Hero />
 	{/if}
-	<Header inverted={hero} />
+	<Header inverted={hero} moveUp={hero} />
 
 	<main>
 		<PageTransition url={data.url}>

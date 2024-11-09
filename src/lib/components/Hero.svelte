@@ -49,14 +49,6 @@
 </div>
 
 <style>
-	/* nav if hero is present */
-	:global(nav:nth-child(2)) {
-		/* Move in front of hero */
-		margin-top: -100vh;
-		/* Don't stretch to next element */
-		height: 0;
-	}
-
 	h2 {
 		background-color: black;
 		padding: 2rem;
