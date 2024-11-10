@@ -13,7 +13,7 @@
 	class:first
 	class:c2a
 	class:inverted
-	class:active={i18n.route($page.url.pathname == href)}
+	class:active={i18n.route($page.url.pathname) == href}
 	aria-label={ariaLabel}
 >
 	<slot />

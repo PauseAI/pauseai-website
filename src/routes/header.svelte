@@ -59,7 +59,7 @@
 		--logo-offset: 2.4rem;
 		--logo-width-big: 11rem;
 		--logo-width-small: 10rem;
-		--min-space-between: 3rem;
+		--min-space-between: 1rem;
 
 		--cqw: 1cqw;
 	}
