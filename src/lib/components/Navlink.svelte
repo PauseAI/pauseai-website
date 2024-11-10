@@ -5,13 +5,15 @@
 	export let c2a = false
 	export let ariaLabel: string | undefined = undefined
 	export let inverted = false
+	export let first = false
 </script>
 
 <a
 	{href}
+	class:first
 	class:c2a
 	class:inverted
-	class:active={i18n.route($page.url.pathname) == href}
+	class:active={i18n.route($page.url.pathname == href)}
 	aria-label={ariaLabel}
 >
 	<slot />
@@ -28,6 +30,10 @@
 		color: var(--text);
 		text-decoration: none;
 		font-size: 1.1rem;
+	}
+
+	a.first {
+		margin-left: -0.5rem;
 	}
 
 	a.c2a {

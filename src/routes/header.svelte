@@ -8,59 +8,126 @@
 	import * as m from '$lib/paraglide/messages.js'
 	import { i18n } from '$lib/i18n'
 
+	import { initializeCqwResizeObserver } from '$lib/container-query-units'
+	import { onMount } from 'svelte'
 	const enableBot = false
 
 	export let inverted = false
+	export let moveUp = false
 
 	$: logo_animate = i18n.route($page.url.pathname) != '/'
+
+	let nav: HTMLElement
+
+	onMount(() => {
+		if (CSS.supports('container-type: inline-size')) return
+		const observer = initializeCqwResizeObserver(nav)
+		return () => observer.disconnect()
+	})
 </script>
 
-<nav class={inverted ? 'inverted-header' : ''}>
-	<a href="/" class="logo">
-		<Logo animate={logo_animate} {inverted} />
-	</a>
+<nav class:inverted-header={inverted} class:move-up={moveUp} bind:this={nav}>
+	<div class="logo-container">
+		<div class="compensate-min-space-between" />
+		<div class="compensate-offset" />
+		<a href="/" class="logo">
+			<Logo animate={logo_animate} {inverted} />
+		</a>
+		<div class="min-space-between" />
+		<div class="space-between" />
+	</div>
 
-	<div class="nav-right">
-		<div class="nav-links">
-			<NavLink {inverted} href="/learn">{m.header_learn()}</NavLink>
-			<NavLink {inverted} href="/proposal">{m.header_proposal()}</NavLink>
-			<NavLink {inverted} href="/events">{m.header_events()}</NavLink>
-			<NavLink {inverted} href="/faq">{m.header_faq()}</NavLink>
-			<NavLink {inverted} href="/action">{m.header_action()}</NavLink>
-			<NavLink {inverted} href="/donate">{m.header_donate()}</NavLink>
-			{#if enableBot}
-				<NavLink {inverted} href="/chat">{botName}</NavLink>
-			{/if}
-			<!-- <NavLink href="/about">About</NavLink> -->
-			<NavLink {inverted} c2a href="/join">{m.header_join()}</NavLink>
-			<LanguageSwitcher />
-			<NavLink {inverted} href="/search" ariaLabel="Search"><SearchIcon size="0.8em" /></NavLink>
-		</div>
+	<div class="nav-links">
+		<NavLink {inverted} first href="/learn">{m.header_learn()}</NavLink>
+		<NavLink {inverted} href="/proposal">{m.header_proposal()}</NavLink>
+		<NavLink {inverted} href="/events">{m.header_events()}</NavLink>
+		<NavLink {inverted} href="/faq">{m.header_faq()}</NavLink>
+		<NavLink {inverted} href="/action">{m.header_action()}</NavLink>
+		<NavLink {inverted} href="/donate">{m.header_donate()}</NavLink>
+		{#if enableBot}
+			<NavLink {inverted} href="/chat">{botName}</NavLink>
+		{/if}
+		<!-- <NavLink href="/about">About</NavLink> -->
+		<NavLink {inverted} c2a href="/join">{m.header_join()}</NavLink>
+		<LanguageSwitcher />
+		<NavLink {inverted} href="/search" ariaLabel="Search"><SearchIcon size="0.8em" /></NavLink>
 	</div>
 </nav>
 
 <style>
+	:root {
+		--logo-offset: 2.4rem;
+		--logo-width-big: 11rem;
+		--logo-width-small: 10rem;
+		--min-space-between: 3rem;
+
+		--cqw: 1cqw;
+	}
+
 	.inverted-header {
 		color: white;
 		z-index: 1;
-
 		--text: white;
 	}
 
 	nav {
 		display: flex;
-		justify-content: space-between;
+		flex-direction: row;
 		align-items: center;
-		flex-direction: column;
-		padding: 2rem 0;
-		margin-left: -1rem;
+		justify-content: center;
 		flex-wrap: wrap;
-		height: calc(var(--nav-height) - 5rem);
+		container-type: inline-size;
+		padding-top: 3rem;
+	}
+
+	nav.move-up {
+		margin-top: -100vh;
+		height: 0;
+	}
+
+	nav > * {
+		margin-bottom: 1rem;
+	}
+
+	.logo-container {
+		flex-grow: 1;
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: center;
+
+		--big-number: 9999;
+		/** 1px if desktop, 0px if mobile */
+		--check-desktop: min(calc(var(--big-number) * (100 * var(--cqw) - 100%)), 1px);
+		--check-mobile: calc(1px - var(--check-desktop));
+		--max-space-between-compensation: calc((100 * var(--cqw) - var(--logo-width)) / 2);
+	}
+
+	.compensate-min-space-between {
+		width: min(calc(var(--big-number) * var(--check-mobile)), var(--min-space-between));
+		max-width: var(--max-space-between-compensation);
+	}
+
+	.compensate-offset {
+		width: min(calc(var(--big-number) * var(--check-mobile)), var(--logo-offset));
 	}
 
 	.logo {
-		margin-bottom: 1rem;
-		margin-left: 1rem;
+		width: clamp(
+			var(--logo-width-small),
+			calc(var(--big-number) * var(--check-desktop)),
+			var(--logo-width-big)
+		);
+		margin-left: calc(-1 * var(--logo-offset));
+	}
+
+	.min-space-between {
+		width: var(--min-space-between);
+		max-width: var(--max-space-between-compensation);
+	}
+
+	.space-between {
+		flex-grow: 1;
+		max-width: calc(var(--big-number) * var(--check-desktop));
 	}
 
 	.nav-links {
@@ -69,21 +136,5 @@
 		text-transform: uppercase;
 		flex-wrap: wrap;
 		justify-content: center;
-	}
-
-	@media (min-width: 900px) {
-		nav {
-			flex-direction: row;
-			margin-left: 1rem;
-		}
-
-		.logo {
-			margin-left: -3.4rem;
-			margin-bottom: 0;
-		}
-
-		.nav-links {
-			margin-left: 2rem;
-		}
 	}
 </style>

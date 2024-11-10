@@ -80,8 +80,6 @@
 		max-width: 100vw;
 		margin-left: calc(-50vw + 50%);
 		margin-right: calc(-50vw + 50%);
-		margin-top: calc(var(--nav-height) * -1);
-		margin-bottom: 5rem;
 	}
 
 	.overlay {

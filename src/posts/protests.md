@@ -9,6 +9,7 @@ description: When and where we will be protesting.
 
 ### 2024
 
+- [21st of November, 10+ cities](/2024-november)
 - [22nd of September, NYC](https://www.eventbrite.com/e/pauseai-nyc-summit-of-the-future-protest-tickets-905766862067)
 - [30th of July, Washington DC](https://www.facebook.com/events/2528518090675538) (World Pause Coalition)
 - [23rd of July, San Francisco, London, Paris](https://x.com/PauseAI/status/1816550279095238711)

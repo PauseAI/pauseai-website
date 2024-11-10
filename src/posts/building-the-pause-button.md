@@ -103,7 +103,7 @@ Each method has its strengths and weaknesses, often requiring complementary appr
 
 Other proposed methods include:
 
-1. **[flegHEGs](https://yoshuabengio.org/wp-content/uploads/2024/09/FlexHEG-Interim-Report_2024.pdf)**: A new type of chip that can be programmed to self-destruct when certain conditions are met.
+1. **[flexHEGs](https://yoshuabengio.org/wp-content/uploads/2024/09/FlexHEG-Interim-Report_2024.pdf)**: A new type of chip that can be programmed to self-destruct when certain conditions are met.
 
 An international insitution could be set up to monitor these verification methods, and to enforce the Pause.
 
