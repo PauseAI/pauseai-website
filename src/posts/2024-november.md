@@ -5,17 +5,17 @@ description: We are organizing a protest to demand a pause on dangerous AI devel
 
 ## November 20th-22nd, in over 10 cities
 
-- \*\*[San Francisco, US](https://facebook.com/events/s/tell-anthropic-to-pause-ai/917486370313748/)
+- **[San Francisco, US](https://facebook.com/events/s/tell-anthropic-to-pause-ai/917486370313748/)**
 - **[London, UK](https://lu.ma/qtlk8l6y)**
 - **[DE, Osnabrűck](https://lu.ma/glguga9k)**
 - **[Paris, FR](https://lu.ma/0tjhnnf9)**
-- [**Oslo, Norway**](https://fb.me/e/5OYXuGCj4)
-- [**Kristiansand, Norway**](https://facebook.com/events/s/internasjonal-protest-kristian/920543192766699/)
+- **[Oslo, Norway](https://fb.me/e/5OYXuGCj4)**
+- **[Kristiansand, Norway](https://facebook.com/events/s/internasjonal-protest-kristian/920543192766699/)**
 - **[Zürich, Switzerland](https://lu.ma/t031iy9r)**
-- [**Kinshasa, Congo**](https://lu.ma/klejgi5p)
-- **CZ** (@adcooldude)
-- **IT, Milan**
-- **GR** (@jeremyhelm)
+- **[Kinshasa, Congo](https://lu.ma/klejgi5p)**
+- **[IT, Milan](https://chat.whatsapp.com/Cue9aeK6kpJFoDxT3xV9Zx)**
+- **CZ**
+- **GR**
 - Organize in your area! [Join our Discord server](https://discord.gg/2XXWXvErfA) and coordinate.
 
 ## Narrative & core messages
