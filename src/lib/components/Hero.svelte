@@ -3,6 +3,7 @@
 	import denHaag from './../../assets/protests/den-haag.jpeg'
 	import sf from './../../assets/protests/san-francisco.jpeg'
 	import { onMount } from 'svelte'
+	import * as m from '$lib/paraglide/messages.js'
 
 	let currentImageIndex = 0
 	const images = [london, denHaag, sf]
