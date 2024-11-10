@@ -11,6 +11,8 @@
 <PostMeta {title} {description} />
 <!-- The Hero image is in `+layout.svelte` -->
 
+<div style="height: 5rem;" />
+
 <QuotesCarousel />
 <br />
 <Stats />
