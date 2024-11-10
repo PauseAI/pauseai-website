@@ -1,5 +1,6 @@
 {
 	"$schema": "https://inlang.com/schema/inlang-message-format",
+	"home_hero": "DON'T LET AI COMPANIES <br />GAMBLE WITH OUR FUTURE",
 	"home_risks_title": "We risk <u>losing control</u>",
 	"home_risks_content": "AI can have amazing benefits, but it could also erode our democracy, destabilize our economy and could be used to create powerful cyber weapons.",
 	"home_risks_c2a": "Read about the risks",

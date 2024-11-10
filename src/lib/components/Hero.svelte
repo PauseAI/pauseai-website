@@ -41,10 +41,10 @@
 		<img src={sf} alt="" />
 	{/if}
 	<div class="overlay"></div>
-	<h2>DON'T LET AI COMPANIES <br />GAMBLE WITH OUR FUTURE</h2>
+	<h2>{@html m.home_hero()}</h2>
 	<div class="actions">
-		<a href="/join">Join</a>
-		<a href="/donate">Donate</a>
+		<a href="/join">{m.header_join()}</a>
+		<a href="/donate">{m.header_donate()}</a>
 	</div>
 </div>
 
