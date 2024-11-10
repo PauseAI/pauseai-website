@@ -19,77 +19,78 @@ export const communitiesMeta: Post = {
 	categories: []
 }
 
-const discordInvite = 'https://discord.gg/CR5u5BTBwy'
-const discordGermany = 'https://discord.gg/VuVVyJQ37M'
-const discordFrance = 'https://discord.gg/vyXGd7AeGc'
-const discordUS = 'https://discord.gg/TmpmYejE3e'
+const globalDiscord = 'https://discord.gg/CR5u5BTBwy'
+const GermanyDiscord = 'https://discord.gg/VuVVyJQ37M'
+const FranceDiscord = 'https://discord.gg/vyXGd7AeGc'
+const USDiscord = 'https://discord.gg/TmpmYejE3e'
+const ItalyWhatsapp = 'https://chat.whatsapp.com/Cue9aeK6kpJFoDxT3xV9Zx'
 
 const PauseAICommunities: Community[] = [
 	{
 		name: 'PauseAI Utrecht',
 		lat: 52.09073739999999,
 		lon: 5.081420100000023,
-		link: discordInvite
+		link: globalDiscord
 	},
 	{
 		name: 'PauseAI Washington DC',
 		lat: 38.9072,
 		lon: -77.0369,
-		link: discordUS
+		link: USDiscord
 	},
 	{
 		name: 'PauseAI Nottingham',
 		lat: 52.9548,
 		lon: -1.1581,
-		link: discordInvite
+		link: globalDiscord
 	},
 	{
 		name: 'PauseAI Phoenix',
 		lat: 33.4484,
 		lon: -112.074,
-		link: discordUS
+		link: USDiscord
 	},
 	{
 		name: 'PauseAI Orlando',
 		lat: 28.5383,
 		lon: -81.3792,
-		link: discordUS
+		link: USDiscord
 	},
 	{
 		name: 'PauseAI Oldenburg',
 		lat: 53.1412,
 		lon: 8.2146,
-		link: discordInvite
+		link: globalDiscord
 	},
 	{
 		name: 'PauseAI Seattle',
 		lat: 47.6062,
 		lon: -122.3321,
-		link: discordInvite
+		link: globalDiscord
 	},
 	{
 		name: 'PauseAI Edinburgh',
 		lat: 55.9533,
 		lon: -3.1883,
-		link: discordInvite
+		link: globalDiscord
 	},
 	{
 		name: 'PauseAI Manchester',
 		lat: 53.4808,
 		lon: -2.2426,
-		link: discordInvite
+		link: globalDiscord
 	},
 	{
 		name: 'PauseAI Copenhagen',
 		lat: 55.6761,
 		lon: 12.5683,
-		link: discordInvite
+		link: globalDiscord
 	},
 	{
 		name: 'PauseAI SF',
 		lat: 37.7749,
 		lon: -122.4194,
-		link: discordUS
+		link: USDiscord
 	},
 	{
 		name: 'PauseAI London',
@@ -101,85 +102,85 @@ const PauseAICommunities: Community[] = [
 		name: 'PauseAI Los Angeles',
 		lat: 34.0522,
 		lon: -118.2437,
-		link: discordUS
+		link: USDiscord
 	},
 	{
 		name: 'PauseAI Rosario',
 		lat: -32.9442,
 		lon: -60.6505,
-		link: discordUS
+		link: USDiscord
 	},
 	{
 		name: 'PauseAI Baltimore',
 		lat: 39.2904,
 		lon: -76.6122,
-		link: discordUS
+		link: USDiscord
 	},
 	{
 		name: 'PauseAI Ausburg',
 		lat: 48.3705,
 		lon: 10.8978,
-		link: discordGermany
+		link: GermanyDiscord
 	},
 	{
 		name: 'PauseAI Paris',
 		lat: 48.8647,
 		lon: 2.349,
-		link: discordFrance
+		link: FranceDiscord
 	},
 	{
 		name: 'PauseAI Miami',
 		lat: 25.7616,
 		lon: -80.1917,
-		link: discordUS
+		link: USDiscord
 	},
 	{
 		name: 'PauseAI Montreal',
 		lat: 45.5088,
 		lon: -73.5616,
-		link: discordInvite
+		link: globalDiscord
 	},
 	{
 		name: 'PauseAI Nairobi',
 		lat: -1.286389,
 		lon: 36.817223,
-		link: discordInvite
+		link: globalDiscord
 	},
 	{
 		name: 'PauseAI Stockholm',
 		lat: 59.3293,
 		lon: 18.0686,
-		link: discordInvite
+		link: globalDiscord
 	},
 	{
 		name: 'PauseAI Marseille',
 		lat: 43.2963,
 		lon: 5.37,
-		link: discordFrance
+		link: FranceDiscord
 	},
 	{
 		name: 'PauseAI Portland',
 		lat: 45.5231,
 		lon: -122.6765,
-		link: discordUS
+		link: USDiscord
 	},
 	{
 		name: 'PauseAI Raleigh',
 		lat: 35.7877,
 		lon: -78.6443,
-		link: discordInvite
+		link: globalDiscord
 	},
 	{
 		name: 'PauseAI Austin',
 		lat: 30.2667,
 		lon: -97.7333,
-		link: discordInvite
+		link: globalDiscord
 	},
 	{
 		name: 'PauseAI West Palm Beach',
 		lat: 26.7153,
 		lon: -80.0534,
-		link: discordInvite
+		link: globalDiscord
 	},
 	{
 		name: 'PauseAI Chicago',
@@ -191,49 +192,49 @@ const PauseAICommunities: Community[] = [
 		name: 'PauseAI São Paulo',
 		lat: -23.5338,
 		lon: -46.6253,
-		link: discordInvite
+		link: globalDiscord
 	},
 	{
 		name: 'PauseAI New York City',
 		lat: 40.7306,
 		lon: -73.9352,
-		link: discordUS
+		link: USDiscord
 	},
 	{
 		name: 'PauseAI Fredrikstad',
 		lat: 59.2201,
 		lon: 10.9299,
-		link: discordInvite
+		link: globalDiscord
 	},
 	{
 		name: 'PauseAI Omaha',
 		lat: 41.2572,
 		lon: -95.9951,
-		link: discordUS
+		link: USDiscord
 	},
 	{
 		name: 'PauseAI St. Louis',
 		lat: 38.627,
 		lon: -90.1994,
-		link: discordUS
+		link: USDiscord
 	},
 	{
 		name: 'PauseAI Modesto',
 		lat: 37.6391,
 		lon: -120.9969,
-		link: discordInvite
+		link: globalDiscord
 	},
 	{
 		name: 'PauseAI Dallas',
 		lat: 32.7792,
 		lon: -96.8089,
-		link: discordUS
+		link: USDiscord
 	},
 	{
 		name: 'PauseAI Lucerne',
 		lat: 47.0502,
 		lon: 8.3093,
-		link: discordInvite
+		link: globalDiscord
 	},
 	{
 		name: 'PauseAI Berlin',
@@ -245,25 +246,25 @@ const PauseAICommunities: Community[] = [
 		name: 'PauseAI Rome',
 		lat: 41.8967,
 		lon: 12.482,
-		link: discordInvite
+		link: globalDiscord
 	},
 	{
 		name: 'PauseAI Toronto',
 		lat: 43.6511,
 		lon: -79.347,
-		link: discordInvite
+		link: globalDiscord
 	},
 	{
 		name: 'PauseAI Las Vegas',
 		lat: 36.1716,
 		lon: -115.1391,
-		link: discordInvite
+		link: globalDiscord
 	},
 	{
 		name: 'PauseAI Philadelphia',
 		lat: 39.9526,
 		lon: -75.1652,
-		link: discordUS
+		link: USDiscord
 	},
 	{
 		name: 'PauseAI Amsterdam',
@@ -275,37 +276,37 @@ const PauseAICommunities: Community[] = [
 		name: 'PauseAI Munich',
 		lat: 48.1372,
 		lon: 11.5761,
-		link: discordGermany
+		link: GermanyDiscord
 	},
 	{
 		name: 'PauseAI Cambridge',
 		lat: 52.2053,
 		lon: 0.1192,
-		link: discordInvite
+		link: globalDiscord
 	},
 	{
 		name: 'PauseAI Hanoi',
 		lat: 21.0285,
 		lon: 105.8048,
-		link: discordInvite
+		link: globalDiscord
 	},
 	{
 		name: 'PauseAI Gdynia',
 		lat: 54.5168,
 		lon: 18.5419,
-		link: discordInvite
+		link: globalDiscord
 	},
 	{
 		name: 'PauseAI Madrid',
 		lat: 40.4168,
 		lon: -3.7038,
-		link: discordInvite
+		link: globalDiscord
 	},
 	{
 		name: 'PauseAI Blackpool',
 		lat: 53.8159,
 		lon: -3.0553,
-		link: discordInvite
+		link: globalDiscord
 	},
 	{
 		name: 'PauseAI Fort Wayne',
@@ -317,43 +318,43 @@ const PauseAICommunities: Community[] = [
 		name: 'PauseAI Vancouver',
 		lat: 49.2463,
 		lon: -123.1162,
-		link: discordInvite
+		link: globalDiscord
 	},
 	{
 		name: 'PauseAI Melbourne',
 		lat: -37.8136,
 		lon: 144.9631,
-		link: discordInvite
+		link: globalDiscord
 	},
 	{
 		name: 'PauseAI Hamburg',
 		lat: 53.5511,
 		lon: 9.9937,
-		link: discordGermany
+		link: GermanyDiscord
 	},
 	{
 		name: 'PauseAI Zurich',
 		lat: 47.3769,
 		lon: 8.5417,
-		link: discordInvite
+		link: globalDiscord
 	},
 	{
 		name: 'PauseAI Charleston',
 		lat: 32.7765,
 		lon: -79.9311,
-		link: discordInvite
+		link: globalDiscord
 	},
 	{
 		name: 'PauseAI Osnabrück',
 		lat: 52.2681,
 		lon: 8.0566,
-		link: discordGermany
+		link: GermanyDiscord
 	},
 	{
 		name: 'PauseAI Milan',
 		lat: 45.4642,
 		lon: 9.19,
-		link: discordInvite
+		link: ItalyWhatsapp
 	}
 ]
 
