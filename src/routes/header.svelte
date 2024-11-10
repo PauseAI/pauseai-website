@@ -4,15 +4,25 @@
 	import { botName } from '$lib/config'
 	import { page } from '$app/stores'
 	import SearchIcon from 'lucide-svelte/icons/search'
+	import { initializeCqwResizeObserver } from '$lib/container-query-units'
+	import { onMount } from 'svelte'
 	const enableBot = false
 
 	export let inverted = false
 	export let moveUp = false
 
 	$: logo_animate = $page.url.pathname != '/'
+
+	let nav: HTMLElement
+
+	onMount(() => {
+		if (CSS.supports('container-type: inline-size')) return
+		const observer = initializeCqwResizeObserver(nav)
+		return () => observer.disconnect()
+	})
 </script>
 
-<nav class:inverted-header={inverted} class:move-up={moveUp}>
+<nav class:inverted-header={inverted} class:move-up={moveUp} bind:this={nav}>
 	<div class="logo-container">
 		<div class="compensate-min-space-between" />
 		<div class="compensate-offset" />
@@ -45,6 +55,8 @@
 		--logo-width-big: 11rem;
 		--logo-width-small: 10rem;
 		--min-space-between: 3rem;
+
+		--cqw: 1cqw;
 	}
 
 	.inverted-header {
@@ -80,9 +92,9 @@
 
 		--big-number: 9999;
 		/** 1px if desktop, 0px if mobile */
-		--check-desktop: min(calc(var(--big-number) * (100cqw - 100%)), 1px);
+		--check-desktop: min(calc(var(--big-number) * (100 * var(--cqw) - 100%)), 1px);
 		--check-mobile: calc(1px - var(--check-desktop));
-		--max-space-between-compensation: calc((100cqw - var(--logo-width)) / 2);
+		--max-space-between-compensation: calc((100 * var(--cqw) - var(--logo-width)) / 2);
 	}
 
 	.compensate-min-space-between {

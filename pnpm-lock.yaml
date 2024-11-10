@@ -26,9 +26,6 @@ importers:
       clipboard-polyfill:
         specifier: ^4.1.0
         version: 4.1.0
-      container-query-polyfill:
-        specifier: ^1.0.2
-        version: 1.0.2
       escape-html:
         specifier: ^1.0.3
         version: 1.0.3
@@ -901,9 +898,6 @@ packages:
 
   concat-map@0.0.1:
     resolution: {integrity: sha512-/Srv4dswyQNBfohGpz9o6Yb3Gz3SrUDqBH5rTuhGR7ahtlbYKnVxw2bCFMRljaA7EXHaXZ8wsHdodFvbkhKmqg==}
-
-  container-query-polyfill@1.0.2:
-    resolution: {integrity: sha512-YjbsYHidpX0vgHRjTXfWV5Sai4EbocVuXuhL/lcVzRKcwlvVhU92yUqZwO6rRjMQMk08unLLBkQhu60u31LCIQ==}
 
   cookie@0.6.0:
     resolution: {integrity: sha512-U71cyTamuh1CRNCfpGY6to28lxvNwPG4Guz/EVjgf3Jmzv0vlDp1atT9eS5dDjMYHucpHbWns6Lwf3BKz6svdw==}
@@ -2513,8 +2507,6 @@ snapshots:
   commander@12.1.0: {}
 
   concat-map@0.0.1: {}
-
-  container-query-polyfill@1.0.2: {}
 
   cookie@0.6.0: {}
 
