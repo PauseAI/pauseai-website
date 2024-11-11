@@ -45,6 +45,7 @@
 		"@fontsource/saira-condensed": "^5.1.0",
 		"@pagefind/default-ui": "^1.1.1",
 		"@prgm/sveltekit-progress-bar": "^2.0.0",
+		"@sveltejs/enhanced-img": "~0.3.10",
 		"@types/mapbox-gl": "^2.7.21",
 		"clipboard-polyfill": "^4.1.0",
 		"escape-html": "^1.0.3",

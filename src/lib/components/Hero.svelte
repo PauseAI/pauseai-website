@@ -1,7 +1,7 @@
 <script lang="ts">
-	import london from './../../assets/protests/london.jpeg'
-	import denHaag from './../../assets/protests/den-haag.jpeg'
-	import sf from './../../assets/protests/san-francisco.jpeg'
+	import london from './../../assets/protests/london.jpeg?enhanced'
+	import denHaag from './../../assets/protests/den-haag.jpeg?enhanced'
+	import sf from './../../assets/protests/san-francisco.jpeg?enhanced'
 	import { onMount } from 'svelte'
 
 	let currentImageIndex = 0
@@ -33,12 +33,12 @@
 <div class="hero">
 	{#if isMobile}
 		{#each images as image, i}
-			<img src={image} alt="" class:active={currentImageIndex === i} />
+			<enhanced:img src={image} alt="" class:active={currentImageIndex === i} />
 		{/each}
 	{:else}
-		<img src={london} alt="" />
-		<img src={denHaag} alt="" />
-		<img src={sf} alt="" />
+		<enhanced:img src={london} alt="" />
+		<enhanced:img src={denHaag} alt="" />
+		<enhanced:img src={sf} alt="" />
 	{/if}
 	<div class="overlay"></div>
 	<h2>DON'T LET AI COMPANIES <br />GAMBLE WITH OUR FUTURE</h2>
