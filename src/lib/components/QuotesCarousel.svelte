@@ -55,7 +55,7 @@
 <!-- Preload images -->
 <div style="width: 0; height: 0; opacity: 0; pointer-events: none;">
 	{#each quotes as quote}
-		<enhanced:img src={quote.image} width="0" height="0" />
+		<enhanced:img src={quote.image} style="width: 0; height: 0;" />
 	{/each}
 </div>
 
