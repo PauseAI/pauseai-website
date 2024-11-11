@@ -4,6 +4,7 @@
 	import Link from '$lib/components/custom/a.svelte'
 	import { toPng } from 'html-to-image'
 	import GithubSlugger from 'github-slugger'
+	import { onMount } from 'svelte'
 
 	const DOWNLOAD_WIDTH = 2000
 
@@ -19,6 +20,7 @@
 	$: color_style = color ? `color: ${color}` : ''
 	$: content_style = padding ? `padding: ${padding} 0 0 ${padding};` : ''
 
+	let containerElement: HTMLDivElement
 	let quoteElement: HTMLDivElement
 
 	async function downloadQuote(e: MouseEvent) {
@@ -38,9 +40,28 @@
 		anchor.href = url
 		anchor.click()
 	}
+
+	onMount(() => {
+		let element: HTMLElement = quoteElement
+		let maxWidthString
+		do {
+			element = element.parentElement!
+			maxWidthString = getComputedStyle(element).maxWidth
+		} while (maxWidthString == 'none')
+		const maxWidth = parseFloat(maxWidthString)
+		const resizeObserver = new ResizeObserver((entries) => {
+			for (const entry of entries) {
+				const width = entry.contentRect.width
+				const ratio = width / maxWidth
+				quoteElement.style.zoom = `${ratio}`
+			}
+		})
+		resizeObserver.observe(containerElement)
+		return () => resizeObserver.disconnect()
+	})
 </script>
 
-<div class="quote-container">
+<div class="quote-container" bind:this={containerElement}>
 	<div class="quote" style="background-image:url({bg_url}); {color_style}" bind:this={quoteElement}>
 		<div class="quote-content" style={content_style}>
 			<div class="quote-text-container">
