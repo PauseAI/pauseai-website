@@ -5,6 +5,8 @@
 	import Turing from '../../assets/quote-profile/turing.jpg?enhanced'
 	import Russell from '../../assets/quote-profile/russell.jpg?enhanced'
 	import Bengio from '../../assets/quote-profile/bengio.jpg?enhanced'
+	import ArrowLeft from 'lucide-svelte/icons/arrow-left'
+	import ArrowRight from 'lucide-svelte/icons/arrow-right'
 
 	let currentSlide = 0
 
@@ -63,11 +65,11 @@
 	<QuoteContent quote={quotes[currentSlide]} />
 
 	<div class="navigation">
-		<button on:click={prevSlide} class="nav-button">←</button>
+		<button on:click={prevSlide} class="nav-button"><ArrowLeft size="1em" /></button>
 		{#each Array(totalSlides) as _, i}
 			<div class="dot" class:active={currentSlide === i}></div>
 		{/each}
-		<button on:click={nextSlide} class="nav-button">→</button>
+		<button on:click={nextSlide} class="nav-button"><ArrowRight size="1em" /></button>
 		<a href="/quotes">See all quotes</a>
 	</div>
 </div>
@@ -101,6 +103,9 @@
 		cursor: pointer;
 		padding: 0.5rem;
 		opacity: 0.5;
+		color: inherit;
+		display: flex;
+		align-items: center;
 	}
 
 	.nav-button:hover {
