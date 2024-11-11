@@ -53,7 +53,7 @@
 </script>
 
 <!-- Preload images -->
-<div style="width: 0; height: 0; opacity: 0;">
+<div style="width: 0; height: 0; opacity: 0; pointer-events: none;">
 	{#each quotes as quote}
 		<enhanced:img src={quote.image} />
 	{/each}
