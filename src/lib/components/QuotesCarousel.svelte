@@ -1,11 +1,10 @@
 <script>
 	import QuoteContent from './QuoteContent.svelte'
-	import Hinton from '../../assets/quote-profile/hinton.jpg'
-	import Hawking from '../../assets/quote-profile/hawking.jpg'
-	import Turing from '../../assets/quote-profile/turing.jpg'
-	import Russell from '../../assets/quote-profile/russell.jpg'
-	import Bengio from '../../assets/quote-profile/bengio.jpg'
-	import { onMount } from 'svelte'
+	import Hinton from '../../assets/quote-profile/hinton.jpg?enhanced'
+	import Hawking from '../../assets/quote-profile/hawking.jpg?enhanced'
+	import Turing from '../../assets/quote-profile/turing.jpg?enhanced'
+	import Russell from '../../assets/quote-profile/russell.jpg?enhanced'
+	import Bengio from '../../assets/quote-profile/bengio.jpg?enhanced'
 
 	let currentSlide = 0
 
@@ -51,15 +50,14 @@
 	function prevSlide() {
 		currentSlide = (currentSlide - 1 + totalSlides) % totalSlides
 	}
-
-	onMount(() => {
-		// preload images
-		for (const quote of quotes) {
-			const image = new Image()
-			image.src = quote.image
-		}
-	})
 </script>
+
+<!-- Preload images -->
+<div style="width: 0; height: 0; opacity: 0;">
+	{#each quotes as quote}
+		<enhanced:img src={quote.image} />
+	{/each}
+</div>
 
 <div class="quote-container">
 	<QuoteContent quote={quotes[currentSlide]} />
