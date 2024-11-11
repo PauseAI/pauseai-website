@@ -17,4 +17,8 @@
 	a:hover {
 		transform: scale(1.05);
 	}
+
+	a:active {
+		opacity: 0.9;
+	}
 </style>
