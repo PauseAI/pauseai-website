@@ -99,7 +99,7 @@
 		"text": "The potential impact of AI might exceed human cognitive boundaries. To ensure that this technology always benefits humanity, we must regulate the development of AI and prevent this technology from turning into a runaway wild horse [...] We need to strengthen the detection and evaluation of the entire lifecycle of AI, **ensuring that mankind has the ability to press the pause button at critical moments.**",
 		"author": "Zhang Jun",
 		"author_description": "China's Ambassador of the United Nations",
-		"padding": "1.5",
+		"padding": "1.5rem",
 		"notice": "“Zhang Jun (2022-06-08)” by 中国新闻社. Modified and licensed under CC BY 3.0."
 	},
 	{
@@ -140,7 +140,7 @@
 		"text": "**We must take the risks of AI as seriously as other major global challenges**, like climate change. It took the international community too long to coordinate an effective global response to this, and we’re living with the consequences of that now. We can’t afford the same delay with AI [...] then maybe there’s some kind of equivalent one day of the IAEA, which actually audits these things.",
 		"author": "Demis Hassabis",
 		"author_description": "Co-Founder and CEO of DeepMind",
-		"padding": "2",
+		"padding": "2rem",
 		"notice": "“File:PhotonQ-Demis Hassabis on Artificial Playful Intelligence (15366514658) (2)” by PhOtOnQuAnTiQuE from Earth France. Modified and licensed under CC BY-SA 2.0."
 	},
 	{
@@ -149,7 +149,7 @@
 		"text": "When I think of why am I scared [...] I think the thing that's really hard to argue with is like, there will be powerful models; they will be agentic; we're getting towards them. If such a model wanted to wreak havoc and destroy humanity or whatever, I think **we have basically no ability to stop it.**",
 		"author": "Dario Amodei",
 		"author_description": "Co-Founder and CEO of Anthropic, Former Head of AI Safety at OpenAI",
-		"padding": "2",
+		"padding": "2rem",
 		"notice": "“TechCrunch Disrupt 2023 - Day 2” by TechCrunch. Modified and licensed under CC BY 2.0."
 	},
 	{
@@ -208,7 +208,7 @@
 		"text": "The research question is: how do you prevent them from ever wanting to take control? And nobody knows the answer [...] The alarm bell I’m ringing has to do with the existential threat of them taking control [...] If you take the existential risk seriously, as I now do, **it might be quite sensible to just stop developing these things any further** [...] it’s as if aliens had landed and people haven’t realized because they speak very good English",
 		"author": "Geoffrey Hinton",
 		"author_description": "1st/3rd most cited scientist ever, Godfather of modern AI, Turing Award Recipient, resigned from Google due to ethical concerns",
-		"padding": "4",
+		"padding": "4rem",
 		"notice": "“RCZ_1437” by collision.conf. Modified and licensed under CC BY 2.0."
 	},
 	{
