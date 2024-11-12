@@ -18,7 +18,9 @@
 
 	$: bg_url = new URL(`../../assets/quote-bg/${background}.jpg`, import.meta.url).href
 	$: color_style = color ? `color: ${color}` : ''
-	$: content_style = padding ? `padding: ${padding} 0 0 ${padding};` : ''
+	$: content_style = padding
+		? `padding: calc(var(--zoom) * ${padding}) 0 0 calc(var(--zoom) * ${padding});`
+		: ''
 
 	let containerElement: HTMLDivElement
 	let quoteElement: HTMLDivElement
@@ -53,7 +55,7 @@
 			for (const entry of entries) {
 				const width = entry.contentRect.width
 				const ratio = width / maxWidth
-				quoteElement.style.zoom = `${ratio}`
+				quoteElement.style.setProperty('--zoom', ratio + '')
 			}
 		})
 		resizeObserver.observe(containerElement)
@@ -94,6 +96,7 @@
 	}
 
 	.quote {
+		--zoom: 1;
 		display: grid;
 		background-size: cover;
 		aspect-ratio: 2 / 1;
@@ -105,9 +108,9 @@
 		display: flex;
 		flex-direction: column;
 		grid-column: 1 / span 2;
-		font-size: 0.86rem;
-		padding-left: 4rem;
-		padding-top: 4rem;
+		font-size: calc(var(--zoom) * 0.86rem);
+		padding-left: calc(var(--zoom) * 4rem);
+		padding-top: calc(var(--zoom) * 4rem);
 		width: 58%;
 		box-sizing: border-box;
 	}
@@ -118,9 +121,9 @@
 		&::before {
 			content: '"';
 			position: absolute;
-			top: -2.2rem;
-			left: -1.2rem;
-			font-size: 5rem;
+			top: calc(var(--zoom) * -2.2rem);
+			left: calc(var(--zoom) * -1.2rem);
+			font-size: calc(var(--zoom) * 5rem);
 			font-weight: bold;
 			opacity: 0.2;
 		}
@@ -143,8 +146,8 @@
 	}
 
 	.quote-author p:first-of-type {
-		margin-top: 1.2rem;
-		font-size: 1.6rem;
+		margin-top: calc(var(--zoom) * 1.2rem);
+		font-size: calc(var(--zoom) * 1.6rem);
 		font-weight: bold;
 		line-height: 1.2;
 	}
@@ -154,8 +157,13 @@
 		grid-row: 2;
 		justify-self: flex-start;
 		align-self: flex-end;
-		width: 100px;
-		margin: 1rem;
+		width: calc(var(--zoom) * 100px);
+		height: fit-content;
+		margin: calc(var(--zoom) * 1rem);
+	}
+
+	.quote-logo > :global(svg) {
+		height: unset;
 	}
 
 	.quote-below {
