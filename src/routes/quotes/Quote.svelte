@@ -1,3 +1,9 @@
+<script lang="ts" context="module">
+	import { writable, type Writable } from 'svelte/store'
+
+	let isIos: Writable<boolean | null> = writable(null)
+</script>
+
 <script lang="ts">
 	import Button from '$lib/components/Button.svelte'
 	import Logo from '$lib/components/logo.svelte'
@@ -5,6 +11,7 @@
 	import { toPng } from 'html-to-image'
 	import GithubSlugger from 'github-slugger'
 	import { onMount } from 'svelte'
+	import UAParser from 'ua-parser-js'
 
 	const DOWNLOAD_WIDTH = 2000
 
@@ -44,6 +51,11 @@
 	}
 
 	onMount(() => {
+		if ($isIos == null) {
+			const uaParser = new UAParser(navigator.userAgent)
+			$isIos = uaParser.getOS().name == 'iOS'
+		}
+
 		let element: HTMLElement = quoteElement
 		let maxWidthString
 		do {
@@ -79,7 +91,9 @@
 		</div>
 	</div>
 	<div class="quote-below">
-		<Button subtle on:click={downloadQuote}>Download</Button>
+		{#if !isIos}
+			<Button subtle on:click={downloadQuote}>Download</Button>
+		{/if}
 		{#if notice}
 			<div class="quote-notice-button">
 				<Button subtle>
