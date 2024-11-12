@@ -91,7 +91,7 @@
 		</div>
 	</div>
 	<div class="quote-below">
-		{#if !isIos}
+		{#if !$isIos}
 			<Button subtle on:click={downloadQuote}>Download</Button>
 		{/if}
 		{#if notice}
