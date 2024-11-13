@@ -3,10 +3,12 @@
 	import denHaag from './../../assets/protests/den-haag.jpeg?enhanced'
 	import sf from './../../assets/protests/san-francisco.jpeg?enhanced'
 	import { onMount } from 'svelte'
+	import { initializeCqwResizeObserver } from '$lib/container-query-units'
 
 	let currentImageIndex = 0
 	const images = [london, denHaag, sf]
 	let isMobile = false
+	let tagline: HTMLDivElement
 
 	const checkMobile = () => {
 		isMobile = window.innerWidth <= 768
@@ -23,9 +25,15 @@
 			}
 		}, 5000)
 
+		let observer: ResizeObserver | null = null
+		if (!CSS.supports('container-type: inline-size')) {
+			observer = initializeCqwResizeObserver(tagline)
+		}
+
 		return () => {
 			clearInterval(interval)
 			window.removeEventListener('resize', checkMobile)
+			observer?.disconnect()
 		}
 	})
 </script>
@@ -41,7 +49,9 @@
 		<enhanced:img src={sf} alt="" />
 	{/if}
 	<div class="overlay"></div>
-	<h2>DON'T LET AI COMPANIES <br />GAMBLE WITH OUR FUTURE</h2>
+	<div class="tagline" bind:this={tagline}>
+		<h2>DON'T LET AI COMPANIES GAMBLE WITH OUR FUTURE</h2>
+	</div>
 	<div class="actions">
 		<a href="/join">Join</a>
 		<a href="/donate">Donate</a>
@@ -49,22 +59,28 @@
 </div>
 
 <style>
-	h2 {
+	.tagline {
 		background-color: black;
 		padding: 2rem;
 		position: absolute;
-		text-transform: uppercase;
 		top: 50%;
 		left: 50%;
 		transform: translate(-50%, -50%);
+		width: 39vw;
+		container-type: inline-size;
+		--cqw: 1cqw;
+	}
+
+	.tagline h2 {
+		text-transform: uppercase;
 		color: white;
-		font-size: clamp(1.6rem, 4vw, 3rem);
+		font-size: calc(10 * var(--cqw));
 		text-align: center;
+		margin: 0;
 	}
 
 	@media (max-width: 768px) {
-		h2 {
-			transform: translate(-50%, -50%);
+		.tagline {
 			width: 17rem;
 			max-width: 100%;
 			padding: 1.5rem;
