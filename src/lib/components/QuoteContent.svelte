@@ -9,7 +9,12 @@
 
 	<div class="author-section">
 		{#if quote.image !== undefined}
-			<img src={quote.image} alt={quote.author} class="author-image" />
+			<enhanced:img
+				src={quote.image}
+				sizes="(max-width: 850px) 4rem, 7rem"
+				alt={quote.author}
+				class="author-image"
+			/>
 		{/if}
 		<div class="author-info">
 			<h2 class="author-name">{quote.author}</h2>

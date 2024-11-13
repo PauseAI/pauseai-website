@@ -15,9 +15,9 @@
 <div style="height: 5rem;" />
 
 <QuotesCarousel />
-<br />
+<div class="divider" />
 <Stats />
-<br />
+<div class="divider" />
 <section>
 	<Block linkText={m.home_risks_c2a()} href="/risks">
 		<span slot="title">{@html m.home_risks_title()}</span>
@@ -42,7 +42,7 @@
 </section>
 
 <style>
-	br {
+	.divider {
 		content: '';
 		display: block;
 		height: 0.1rem;

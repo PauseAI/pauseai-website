@@ -1,11 +1,12 @@
 <script>
 	import QuoteContent from './QuoteContent.svelte'
-	import Hinton from '../../assets/quote-profile/hinton.jpg'
-	import Hawking from '../../assets/quote-profile/hawking.jpg'
-	import Turing from '../../assets/quote-profile/turing.jpg'
-	import Russell from '../../assets/quote-profile/russell.jpg'
-	import Bengio from '../../assets/quote-profile/bengio.jpg'
-	import { onMount } from 'svelte'
+	import Hinton from '../../assets/quote-profile/hinton.jpg?enhanced'
+	import Hawking from '../../assets/quote-profile/hawking.jpg?enhanced'
+	import Turing from '../../assets/quote-profile/turing.jpg?enhanced'
+	import Russell from '../../assets/quote-profile/russell.jpg?enhanced'
+	import Bengio from '../../assets/quote-profile/bengio.jpg?enhanced'
+	import ArrowLeft from 'lucide-svelte/icons/arrow-left'
+	import ArrowRight from 'lucide-svelte/icons/arrow-right'
 
 	let currentSlide = 0
 
@@ -51,25 +52,24 @@
 	function prevSlide() {
 		currentSlide = (currentSlide - 1 + totalSlides) % totalSlides
 	}
-
-	onMount(() => {
-		// preload images
-		for (const quote of quotes) {
-			const image = new Image()
-			image.src = quote.image
-		}
-	})
 </script>
+
+<!-- Preload images -->
+<div style="width: 0; height: 0; opacity: 0; pointer-events: none;">
+	{#each quotes as quote}
+		<enhanced:img src={quote.image} style="width: 0; height: 0;" />
+	{/each}
+</div>
 
 <div class="quote-container">
 	<QuoteContent quote={quotes[currentSlide]} />
 
 	<div class="navigation">
-		<button on:click={prevSlide} class="nav-button">←</button>
+		<button on:click={prevSlide} class="nav-button"><ArrowLeft size="1em" /></button>
 		{#each Array(totalSlides) as _, i}
 			<div class="dot" class:active={currentSlide === i}></div>
 		{/each}
-		<button on:click={nextSlide} class="nav-button">→</button>
+		<button on:click={nextSlide} class="nav-button"><ArrowRight size="1em" /></button>
 		<a href="/quotes">See all quotes</a>
 	</div>
 </div>
@@ -103,6 +103,9 @@
 		cursor: pointer;
 		padding: 0.5rem;
 		opacity: 0.5;
+		color: inherit;
+		display: flex;
+		align-items: center;
 	}
 
 	.nav-button:hover {

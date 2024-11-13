@@ -1,13 +1,15 @@
 <script lang="ts">
-	import london from './../../assets/protests/london.jpeg'
-	import denHaag from './../../assets/protests/den-haag.jpeg'
-	import sf from './../../assets/protests/san-francisco.jpeg'
+	import london from './../../assets/protests/london.jpeg?enhanced'
+	import denHaag from './../../assets/protests/den-haag.jpeg?enhanced'
+	import sf from './../../assets/protests/san-francisco.jpeg?enhanced'
 	import { onMount } from 'svelte'
+	import { initializeCqwResizeObserver } from '$lib/container-query-units'
 	import * as m from '$lib/paraglide/messages.js'
 
 	let currentImageIndex = 0
 	const images = [london, denHaag, sf]
 	let isMobile = false
+	let tagline: HTMLDivElement
 
 	const checkMobile = () => {
 		isMobile = window.innerWidth <= 768
@@ -24,9 +26,15 @@
 			}
 		}, 5000)
 
+		let observer: ResizeObserver | null = null
+		if (!CSS.supports('container-type: inline-size')) {
+			observer = initializeCqwResizeObserver(tagline)
+		}
+
 		return () => {
 			clearInterval(interval)
 			window.removeEventListener('resize', checkMobile)
+			observer?.disconnect()
 		}
 	})
 </script>
@@ -34,15 +42,17 @@
 <div class="hero">
 	{#if isMobile}
 		{#each images as image, i}
-			<img src={image} alt="" class:active={currentImageIndex === i} />
+			<enhanced:img src={image} sizes="100vw" alt="" class:active={currentImageIndex === i} />
 		{/each}
 	{:else}
-		<img src={london} alt="" />
-		<img src={denHaag} alt="" />
-		<img src={sf} alt="" />
+		<enhanced:img src={london} sizes="100vw" alt="" />
+		<enhanced:img src={denHaag} sizes="100vw" alt="" />
+		<enhanced:img src={sf} sizes="100vw" alt="" />
 	{/if}
 	<div class="overlay"></div>
-	<h2>{@html m.home_hero()}</h2>
+	<div class="tagline" bind:this={tagline}>
+		<h2>{m.home_hero()}</h2>
+	</div>
 	<div class="actions">
 		<a href="/join">{m.header_join()}</a>
 		<a href="/donate">{m.header_donate()}</a>
@@ -50,22 +60,28 @@
 </div>
 
 <style>
-	h2 {
+	.tagline {
 		background-color: black;
 		padding: 2rem;
 		position: absolute;
-		text-transform: uppercase;
 		top: 50%;
 		left: 50%;
 		transform: translate(-50%, -50%);
+		width: 39vw;
+		container-type: inline-size;
+		--cqw: 1cqw;
+	}
+
+	.tagline h2 {
+		text-transform: uppercase;
 		color: white;
-		font-size: clamp(1.6rem, 4vw, 3rem);
+		font-size: calc(10 * var(--cqw));
 		text-align: center;
+		margin: 0;
 	}
 
 	@media (max-width: 768px) {
-		h2 {
-			transform: translate(-50%, -50%);
+		.tagline {
 			width: 17rem;
 			max-width: 100%;
 			padding: 1.5rem;
