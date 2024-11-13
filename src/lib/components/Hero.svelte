@@ -41,12 +41,12 @@
 <div class="hero">
 	{#if isMobile}
 		{#each images as image, i}
-			<enhanced:img src={image} alt="" class:active={currentImageIndex === i} />
+			<enhanced:img src={image} sizes="100vw" alt="" class:active={currentImageIndex === i} />
 		{/each}
 	{:else}
-		<enhanced:img src={london} alt="" />
-		<enhanced:img src={denHaag} alt="" />
-		<enhanced:img src={sf} alt="" />
+		<enhanced:img src={london} sizes="100vw" alt="" />
+		<enhanced:img src={denHaag} sizes="100vw" alt="" />
+		<enhanced:img src={sf} sizes="100vw" alt="" />
 	{/if}
 	<div class="overlay"></div>
 	<div class="tagline" bind:this={tagline}>
