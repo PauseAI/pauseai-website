@@ -195,8 +195,8 @@ textarea:focus {
 	background: inherit;
 	text-align: inherit;
 	font: inherit;
-	margin: inherit;
-	padding: inherit;
+	margin: unset;
+	padding: unset;
 	color: inherit;
 }
 
