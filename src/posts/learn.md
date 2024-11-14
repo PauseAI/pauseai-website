@@ -23,6 +23,7 @@ description: Educational resources (videos, articles, books) about AI risks and 
 - [AISafety.world](https://aisafety.world/tiles/). The whole AI Safety landscape with all the organizations, media outlets, forums, blogs, and other actors and resources.
 - [IncidentDatabase.ai](https://incidentdatabase.ai/). Database of incidents where AI systems caused harm.
 <!-- [NavigatingAIRisks.ai](https://www.navigatingrisks.ai/). A blog with various interesting articles. - [PauseAI.info](https://pauseai.info). Check out the rest of the PauseAI site here for loads of related infomation and [resources](/learn), useful [actions](/action), expert [quotes](/quotes), short one-pager [flyers](PauseAI_flyer.pdf), related [faqs](/faq), etc. -->
+- [LethalIntelligence.ai](https://lethalintelligence.ai/). A collection of resources on AI risks and AI alignment.
 
 ## Newsletters
 
@@ -71,6 +72,7 @@ Podcasts featuring PauseAI members can be found in the [media coverage](/press) 
 <!-- - [a casual intro to AI doom and alignment](https://carado.moe/ai-doom.html)
 I like it and the fact that is a more light reading, but I'm not sure if I want to put it because it defines alignment as just the technical stuff and redirects people to just do technical work -->
 - [Reasoning through arguments against taking AI safety seriously](https://yoshuabengio.org/2024/07/09/reasoning-through-arguments-against-taking-ai-safety-seriously/) (by Yoshua Bengio)
+- Check out the Reading section on [LethalIntelligence.ai](https://lethalintelligence.ai/reading-time/)
 
 If you want to read what journalists have written about PauseAI, check out the list of [media coverage](/press).
 
@@ -96,13 +98,13 @@ haven't heard good things about it yet -->
 ## Organizations
 
 - [Future of Life Institute](https://futureoflife.org/cause-area/artificial-intelligence/) started the [open letter](https://futureoflife.org/open-letter/pause-giant-ai-experiments/), led by Max Tegmark.
-- [FutureSociety](https://thefuturesociety.org/about-us/)
+- [Center for AI Safety](https://www.safe.ai/) (CAIS) is a research center at the Czech Technical University in Prague, led by
 - [Conjecture](https://www.conjecture.dev/). Start-up that is working on AI alignment and AI policy, led by Connor Leahy.
 - [Existential Risk Observatory](https://existentialriskobservatory.org/). Dutch organization that is informing the public on x-risks and studying communication strategies.
-- [Center for AI Safety](https://www.safe.ai/) (CAIS) is a research center at the Czech Technical University in Prague, led by
+- [Centre for the Governance of AI](https://www.governance.ai/)
+- [FutureSociety](https://thefuturesociety.org/about-us/)
 - [Center for Human-Compatible Artificial Intelligence](https://humancompatible.ai/about/) (CHAI), led by Stuart Russell.
 - [Machine Intelligence Research Institute](https://intelligence.org/) (MIRI), doing mathematical research on AI safety, led by Eliezer Yudkowsky.
-- [Centre for the Governance of AI](https://www.governance.ai/)
 - [Institute for AI Policy and Strategy](https://www.iaps.ai/) (IAPS)
 - [The AI Policy Institute](https://theaipi.org/)
 - [AI Safety Communications Centre](https://aiscc.org/2023/11/01/yougov-poll-83-of-brits-demand-companies-prove-ai-systems-are-safe-before-release/)
