@@ -122,6 +122,7 @@
 
 <style>
 	.glide__track {
+		position: relative;
 		margin: -20px;
 	}
 
