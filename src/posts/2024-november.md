@@ -24,4 +24,4 @@ description: We are organizing a protest to demand a pause on dangerous AI devel
 - We need a Pause! Check out our [proposal](/proposal) for more details on what we mean by that.
 - We need international regulations & collaboration. Why is China missing from this conference? Where is the Bejing AI Safety Institute? We need China to be at the table - otherwise the AI race will not be stopped.
 - A pause is technically feasible, for now. Supply chain regulation (e.g. through ASML) can help proliferation of AI training facilities, but we can't wait for too long, or it will be too late. Read [Building the Pause Button](/building-the-pause-button) to understand what can be done.
-- We need an adult in the room. We need one country to step up and initialise treaty negotiations. And this is our job, we need to wake up our politicians, because noone else will.
+- We need an adult in the room. We need one country to step up and initialise treaty negotiations. And this is our job. We need to wake up our politicians, because no-one else will.
