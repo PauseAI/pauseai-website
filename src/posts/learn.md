@@ -48,11 +48,14 @@ description: Educational resources (videos, articles, books) about AI risks and 
 - [The AI Dilemma](https://www.youtube.com/watch?v=xoVJKj8lcNQ&t=1903s) (1hr). Presentation about the dangers of AI and the race which AI companies are stuck in.
 -->
 
-- [Introduction to AI Risks](https://www.youtube.com/playlist?list=PLI46NoubGtIJa0JVCBR-9CayxCOmU0EJt) is a YouTube playlist we compiled, featuring videos ranging from 1 minute to 1 hour in various formats and from diverse sources, and it doesn't require any prior knowledge.
-- [Robert Miles' YouTube videos](https://www.youtube.com/watch?v=tlS5Y2vm02c&list=PLfHsskCxi_g-c62a_dmsNuHynaXsRQm40) are a great place to start understanding the fundamentals of AI alignment.
+- [PauseAI Playlist](https://www.youtube.com/playlist?list=PLI46NoubGtIJa0JVCBR-9CayxCOmU0EJt) is a YouTube playlist we compiled, featuring videos ranging from 1 minute to 1 hour in various formats and from diverse sources, and it doesn't require any prior knowledge.
+- [Robert Miles' YouTube](https://www.youtube.com/watch?v=tlS5Y2vm02c&list=PLfHsskCxi_g-c62a_dmsNuHynaXsRQm40) are a great place to start understanding the fundamentals of AI alignment.
+- [LethalIntelligence's YouTube](https://www.youtube.com/channel/UCLwop3J1O7wL-PNWGjQw8fg)
 
 ## Podcasts
 
+- [DoomDebates](https://www.youtube.com/@DoomDebates) by Liron Shapira, completely focused on AI doom.
+- [For Humanity Podcast](https://www.youtube.com/@ForHumanityPodcast) by Liron Shapira, completely focused on AI doom.
 - [Future of Life Institute | Connor Leahy on AI Safety and Why the World is Fragile](https://youtu.be/cSL3Zau1X8g?si=0X3EKoxZ80_HN9Rl&t=1803). Interview with Connor about the AI Safety strategies.
 - [Lex Fridman | Max Tegmark: The Case for Halting AI Development](https://youtu.be/VcVfceTsD0A?t=1547). Interview that dives into the details of our current dangerous situation.
 - [Sam Harris | Eliezer Yudkowsky: AI, Racing Toward the Brink](https://samharris.org/episode/SE60B0CF4B8). Conversation about the nature of intelligence, different types of AI, the alignment problem, Is vs Ought, and more. One of many episodes Making Sense has on AI Safety.
