@@ -11,7 +11,8 @@
 	import '@fontsource/roboto-slab/700.css'
 	import '@fontsource/saira-condensed/700.css'
 
-	import '../styles.css'
+	import '../styles/styles.css'
+	import '../styles/print.css'
 	import Hero from '$lib/components/Hero.svelte'
 
 	export let data
