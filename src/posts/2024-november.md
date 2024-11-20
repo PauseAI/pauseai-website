@@ -15,7 +15,7 @@ description: We are organizing a protest to demand a pause on dangerous AI devel
 - **[Zürich, Switzerland](https://lu.ma/t031iy9r)**
 - **[Kinshasa, Congo](https://lu.ma/klejgi5p)**
 - **[Milan, Italy](https://chat.whatsapp.com/Cue9aeK6kpJFoDxT3xV9Zx)**
-- **[GR](https://lu.ma/lpl93rlo)**
+- **[Skopelos, Greece](https://lu.ma/lpl93rlo)**
 - Organize in your area! [Join our Discord server](https://discord.gg/2XXWXvErfA) and coordinate.
 
 ## Narrative & core messages
