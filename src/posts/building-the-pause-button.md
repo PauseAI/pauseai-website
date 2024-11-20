@@ -38,10 +38,14 @@ Let's dive into the various choke points in this supply chain.
 ### Choke points in the chip supply chain
 
 It is hard to overstate the complexity and interdependency of the AI chip supply chain.
+It consists of various highly specialized companies, some of which are the only ones in the world that can produce certain components.
 This is great news for governance.
 Through the hardware, we can regulate the training runs.
+Let's take a dive into the various choke points in the AI chip supply chain.
 
-#### ASML and SMEE - the lithography bottlenecks
+#### Silicon wafers: Shin-Etsu, Sumco, Siltronic
+
+#### Lithography: ASML & SMEE
 
 All modern chips are made using lithography machines: huge machines, costing 200 million dollars each, that project light onto a silicon wafer.
 This lithography process is one of the most complex and expensive parts of the chip manufacturing process.
@@ -60,9 +64,20 @@ So SMEE is not able to produce modern AI chips.
 
 In other words: ASML is a fundamental choke point in the AI chip supply chain.
 
-#### TSMC, Samsung amd SMIC - The largest fabs
+#### Optics: Zeiss
 
-Building a fab (a chip factory) is astonishingly difficult: it has zero-tolerance for dust particles, requires the most expensive high-tech equipment, and has a very complex supply chain.
+ASML's EUV machines use mirrors and lenses made by the German company Zeiss.
+In 2016, ASML [bought](https://optics.org/news/7/11/11) a 25% stake in Zeiss, and the two companies have a very close relationship.
+It is likely that no other company is able to produce these optics.
+
+#### Interconnect & Packaging: ASE
+
+When a chip die exits a fab, it needs to be "packaged".
+ASE is probably the largest interconnect company for AI chips.
+
+#### Fabrication: TSMC, Samsung amd SMIC
+
+Building a "fab" (a chip factory) is astonishingly difficult: it has zero-tolerance for dust particles, requires the most expensive high-tech equipment, and has a very complex supply chain.
 A modern fab costs around 10 to 20 billion dollars to manufacture.
 
 The Taiwan Semiconductor Manufacturing Company accounts for roughly 90% of modern AI chips, which are all chips made at 7nm precision or better.
@@ -71,13 +86,22 @@ Samsung is the only other fab that can produce modern AI chips.
 But the Chinese SMIC is catching up rapidly - they already have a functional 7nm process.
 Due to US / NL export controls, SMIC is not able to buy ASML EUV machines, and are now also restricted in buying the older DUV machines.
 In June 2024, a [report](https://evertiq.com/news/55926) showed that SMIC can produce 5nm chips using DUV hardware,
-and is now able to produce 7nm AI chips (about three years behind the 4nm process that ASMLs EUV machines can produce), but SMIC's EUV lithography is plagued by low yields.
+and is now able to produce 7nm AI chips (about three years behind the 4nm process that ASMLs EUV machines can produce), but SMIC's lithography is plagued by low yields.
 
-#### Zeiss - mirrors & lensens
+#### Memory fabrication: Micron, SK Hynix
 
-ASML's EUV machines use mirrors and lenses made by the German company Zeiss.
-In 2016, ASML [bought](https://optics.org/news/7/11/11) a 25% stake in Zeiss, and the two companies have a very close relationship.
-It is likely that no other company is able to produce these optics.
+AI chips require a lot of HBMs (High Bandwidth Memory), which is the most advanced memory type.
+Only a few companies can produce them.
+
+#### AI Chip design: Nvidia, AMD, Intel, Google, Apple
+
+The most famous company names on this page are all chip designers.
+And there are new companies, like Cerebras and Groq, which are designing chips specifically for AI.
+Notably, some of these companies use relatively outdated processes to produce their chips, like Groq who used 14nm, which is a potential choke point for governance.
+
+### On-Chip Governance
+
+The article ["Secure, Governable Chips"](https://www.cnas.org/publications/reports/secure-governable-chips) proposes a new approach to AI governance.
 
 ### Verification methods - preventing large training runs
 
