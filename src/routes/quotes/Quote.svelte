@@ -19,6 +19,7 @@
 	export let text = ''
 	export let author = ''
 	export let author_description = ''
+	export let source: string | null = null
 	export let notice: string | null = null
 	export let color: string | null = null
 	export let padding: string | null = null
@@ -94,8 +95,15 @@
 		{#if !$isIos}
 			<Button subtle on:click={downloadQuote}>Download</Button>
 		{/if}
+		{#if source}
+			<div class="reset-anchors">
+				<Button subtle>
+					<Link href={source}>Source</Link>
+				</Button>
+			</div>
+		{/if}
 		{#if notice}
-			<div class="quote-notice-button">
+			<div class="reset-anchors">
 				<Button subtle>
 					<Link href={'#credits-' + new GithubSlugger().slug(author)}>Credits</Link>
 				</Button>
@@ -184,7 +192,7 @@
 		display: flex;
 	}
 
-	.quote-notice-button :global(a) {
+	.reset-anchors :global(a) {
 		color: inherit;
 		text-decoration: inherit;
 	}
