@@ -7,7 +7,8 @@ description: We are organizing a protest to demand a pause on dangerous AI devel
 
 - **[San Francisco, US](https://facebook.com/events/s/tell-anthropic-to-pause-ai/917486370313748/)**
 - **[London, UK](https://lu.ma/qtlk8l6y)**
-- **[Osnabrűck, Germany](https://lu.ma/glguga9k)**
+- **Oxford, UK**
+- **[Osnabrück, Germany](https://lu.ma/glguga9k)**
 - **[Paris, France](https://lu.ma/0tjhnnf9)**
 - **[Oslo, Norway](https://fb.me/e/5OYXuGCj4)**
 - **[Kristiansand, Norway](https://facebook.com/events/s/internasjonal-protest-kristian/920543192766699/)**

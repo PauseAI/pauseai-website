@@ -3,7 +3,7 @@ title: PauseAI Events
 description: Meetings, workshops, protests, and more!
 ---
 
-## Find the cities for the November 2024 global protest [here](https://pauseai.info/2024-november)
+## Find the cities for the November 2024 global protest [here](/2024-november)
 
 ## View all events [here](https://lu.ma/PauseAI)
 
