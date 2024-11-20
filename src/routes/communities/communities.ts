@@ -355,6 +355,12 @@ const PauseAICommunities: Community[] = [
 		lat: 45.4642,
 		lon: 9.19,
 		link: ItalyWhatsapp
+	},
+	{
+		name: 'Winston Salem, NC',
+		lat: 36.0999,
+		lon: -80.2442,
+		link: USDiscord
 	}
 ]
 
