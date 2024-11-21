@@ -55,7 +55,7 @@ description: Educational resources (videos, articles, books) about AI risks and 
 ## Podcasts
 
 - [DoomDebates](https://www.youtube.com/@DoomDebates) by Liron Shapira, completely focused on AI doom.
-- [For Humanity Podcast](https://www.youtube.com/@ForHumanityPodcast) by Liron Shapira, completely focused on AI doom.
+- [For Humanity Podcast](https://www.youtube.com/@ForHumanityPodcast) by ex-news anchor John Sherman.
 - [Future of Life Institute | Connor Leahy on AI Safety and Why the World is Fragile](https://youtu.be/cSL3Zau1X8g?si=0X3EKoxZ80_HN9Rl&t=1803). Interview with Connor about the AI Safety strategies.
 - [Lex Fridman | Max Tegmark: The Case for Halting AI Development](https://youtu.be/VcVfceTsD0A?t=1547). Interview that dives into the details of our current dangerous situation.
 - [Sam Harris | Eliezer Yudkowsky: AI, Racing Toward the Brink](https://samharris.org/episode/SE60B0CF4B8). Conversation about the nature of intelligence, different types of AI, the alignment problem, Is vs Ought, and more. One of many episodes Making Sense has on AI Safety.
