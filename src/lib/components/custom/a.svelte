@@ -59,8 +59,8 @@
 
 <style>
 	.icon {
-		display: inline;
-		vertical-align: text-top;
+		display: inline-flex;
+		vertical-align: baseline;
 		margin-left: 0.1em;
 	}
 </style>

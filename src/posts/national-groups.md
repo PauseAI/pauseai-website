@@ -3,6 +3,15 @@ title: PauseAI National Groups
 description: What does it mean to be a National Group in the PauseAI network?
 ---
 
+## Current National PauseAI Groups
+
+- [United States (PauseAI US)](https://pauseai-us.org/) ([X](https://x.com/PauseAIus), [Discord](https://discord.gg/TmpmYejE3e))
+- United Kingdom ([X](https://x.com/PauseAI_UK))
+- [France (PauseIA)](https://pauseia.fr/) ([X](https://x.com/pause_ia). [Discord](https://discord.gg/vyXGd7AeGc))
+- [Norway](https://pauseai.no/)
+- Germany ([Discord](https://discord.gg/VuVVyJQ37M))
+- Cameroon ([Discord](https://discord.gg/JCJBSmDv), [Whatsapp](https://chat.whatsapp.com/EmSo5C486JzDdFOiojByje))
+
 ## PauseAI National Groups
 
 - Manage, coach and coordinate their own [local communities](/communities).
@@ -15,13 +24,6 @@ description: What does it mean to be a National Group in the PauseAI network?
 - National groups are expected to follow the PauseAI strategy ([Theory of Change](/theory-of-change), [Communication Strategy](/communication-strategy), [Growth Strategy](/growth-strategy)).
 - National groups can apply for [Microgrants](/microgrants) from PauseAI Global to fund all sorts of activities.
 - The Oversight Team at PauseAI Global monitors and coaches national groups to ensure they are successful and aligned with the global strategy.
-
-## Current National PauseAI Groups
-
-- [United States (PauseAI US)](https://pauseai-us.org/) ([X](https://x.com/PauseAIus), [Discord](https://discord.gg/TmpmYejE3e))
-- United Kingdom ([X](https://x.com/PauseAI_UK))
-- [France (PauseIA)](https://pauseia.fr/) ([X](https://x.com/pause_ia). [Discord](https://discord.gg/vyXGd7AeGc))
-- [Norway](https://pauseai.no/)
 
 ## How to set up a PauseAI National Group
 
@@ -40,6 +42,8 @@ description: What does it mean to be a National Group in the PauseAI network?
 5.  Set up **Social media accounts**. (e.g. X, Instagram, LinkedIn, TikTok)
     1.  Consider which tools are important for your country and target audience.
     2.  Consider a tool like Buffer to schedule posts. Look at PauseAI X posts for inspiration. You can plan a whole list in one go!
+    3.  Read the [Communication Strategy](/communication-strategy) for more tips.
+    4.  Take inspiration from accounts like [ControlAI](https://x.com/ai_ctrl/) (great video shorts, good tone) and [AISafetyMemes](https://x.com/AISafetyMemes) (uses humor, visually engaging).
 6.  **Recruitment**. Get people to join your group.
     1.  Find people in relevant groups (EA, AI safety)
     2.  Take advantage of any networking events

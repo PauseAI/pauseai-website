@@ -62,12 +62,11 @@
 <style>
 	.tagline {
 		background-color: black;
-		padding: 2rem;
 		position: absolute;
 		top: 50%;
 		left: 50%;
 		transform: translate(-50%, -50%);
-		width: 39vw;
+		width: clamp(20rem, 45vw, 100%);
 		container-type: inline-size;
 		--cqw: 1cqw;
 	}
@@ -75,16 +74,16 @@
 	.tagline h2 {
 		text-transform: uppercase;
 		color: white;
-		font-size: calc(10 * var(--cqw));
+		font-size: calc(8.75 * var(--cqw));
 		text-align: center;
 		margin: 0;
+		padding: calc(6.5 * var(--cqw));
 	}
 
-	@media (max-width: 768px) {
-		.tagline {
-			width: 17rem;
-			max-width: 100%;
-			padding: 1.5rem;
+	@media (max-width: 850px) {
+		.tagline h2 {
+			font-size: calc(8.5 * var(--cqw));
+			padding: calc(7.5 * var(--cqw));
 		}
 	}
 

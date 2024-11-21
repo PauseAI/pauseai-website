@@ -33,6 +33,7 @@ Check out the [surveys](/polls-and-surveys) and the [quotes](/quotes) pages for 
 - We need **people in power** to make the pause happen. We need these political Champions in every country. Finding and convincing that person in your country is your goal.
 - Consider their **goals and ambitions**. Do they like organizing things? Do they get a kick out of being a thought leader? Do they shy away from controversy? All these things matter.
 - Consider their **background**. Do they understand catastrophic risks? AI? Global coordination?
+- Consider **who they listen to**. Many people change their mind through specific trusted peers. Find out who these people are.
 
 ## Write a letter or email
 

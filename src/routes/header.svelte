@@ -97,7 +97,7 @@
 
 		--big-number: 9999;
 		/** 1px if desktop, 0px if mobile */
-		--check-desktop: min(calc(var(--big-number) * (100 * var(--cqw) - 100%)), 1px);
+		--check-desktop: clamp(0px, calc(var(--big-number) * (100 * var(--cqw) - 105%)), 1px);
 		--check-mobile: calc(1px - var(--check-desktop));
 		--max-space-between-compensation: calc((100 * var(--cqw) - var(--logo-width)) / 2);
 	}

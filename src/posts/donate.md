@@ -4,7 +4,7 @@ description: With your financial support we can have a bigger impact.
 ---
 
 <script>
-    import Donate from '$lib/components/Donate.svelte/'
+    import Donate from '$lib/components/Donate.svelte'
 </script>
 
 We started PauseAI as a group of volunteers, who work on it in their free time.

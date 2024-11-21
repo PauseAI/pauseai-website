@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
 	import QuoteContent from './QuoteContent.svelte'
 	import Hinton from '../../assets/quote-profile/hinton.jpg?enhanced'
 	import Hawking from '../../assets/quote-profile/hawking.jpg?enhanced'
@@ -7,8 +7,14 @@
 	import Bengio from '../../assets/quote-profile/bengio.jpg?enhanced'
 	import ArrowLeft from 'lucide-svelte/icons/arrow-left'
 	import ArrowRight from 'lucide-svelte/icons/arrow-right'
+	import Glide, { Controls, Images, Keyboard, Swipe } from '@glidejs/glide/dist/glide.modular.esm'
+	import '@glidejs/glide/dist/css/glide.core.css'
+	import { onMount } from 'svelte'
 
-	let currentSlide = 0
+	const MOBILE_NAVIGATION_DISTANCE_THRESHOLD = 10
+
+	let glide: Glide
+	let currentSlide: number | null = null
 
 	const quotes = [
 		{
@@ -45,37 +51,103 @@
 
 	const totalSlides = quotes.length
 
-	function nextSlide() {
-		currentSlide = (currentSlide + 1) % totalSlides
+	onMount(() => {
+		glide = new Glide('.glide').mount({ Controls, Images, Keyboard, Swipe })
+		currentSlide = glide.index
+		glide.on('move', () => {
+			currentSlide = glide.index
+		})
+		registerMobileNavigation()
+	})
+
+	type ClientCoordinates = { clientX: number; clientY: number }
+	let interactionStart: ClientCoordinates | null = null
+
+	function registerMobileNavigation() {
+		addEventListener('touchstart', (event) => (interactionStart = event.changedTouches[0]))
+		addEventListener('mousedown', (event) => (interactionStart = event))
+
+		const touchNavigationButtons = document.getElementsByClassName(
+			'touch-navigation'
+		) as HTMLCollectionOf<HTMLElement>
+		window.addEventListener('click', (event) => {
+			if (!interactionStart) return
+			for (const touchNavigationButton of touchNavigationButtons) {
+				const boundingClientRect = touchNavigationButton.getBoundingClientRect()
+				if (
+					isInside(event, boundingClientRect) &&
+					calculateDistance(interactionStart, event) <= MOBILE_NAVIGATION_DISTANCE_THRESHOLD
+				) {
+					// HTMLElement#click bubbles, leading to recursion
+					return touchNavigationButton.dispatchEvent(new Event('click'))
+				}
+			}
+		})
 	}
 
-	function prevSlide() {
-		currentSlide = (currentSlide - 1 + totalSlides) % totalSlides
+	function isInside({ clientX, clientY }: ClientCoordinates, rect: DOMRect) {
+		return (
+			clientX >= rect.left && clientX <= rect.right && clientY >= rect.top && clientY <= rect.bottom
+		)
+	}
+
+	function calculateDistance(from: ClientCoordinates, to: ClientCoordinates) {
+		return Math.hypot(to.clientX - from.clientX, to.clientY - from.clientY)
 	}
 </script>
 
-<!-- Preload images -->
-<div style="width: 0; height: 0; opacity: 0; pointer-events: none;">
-	{#each quotes as quote}
-		<enhanced:img src={quote.image} style="width: 0; height: 0;" />
-	{/each}
-</div>
-
-<div class="quote-container">
-	<QuoteContent quote={quotes[currentSlide]} />
-
-	<div class="navigation">
-		<button on:click={prevSlide} class="nav-button"><ArrowLeft size="1em" /></button>
+<div class="glide">
+	<div class="glide__track" data-glide-el="track">
+		<ul class="glide__slides">
+			{#each quotes as quote}
+				<li class="glide__slide">
+					<div class="quote">
+						<QuoteContent {quote} />
+					</div>
+				</li>
+			{/each}
+		</ul>
+		<button class="reset-button touch-navigation left" on:click={() => glide.go('<')} />
+		<button class="reset-button touch-navigation right" on:click={() => glide.go('>')} />
+	</div>
+	<div class="navigation" data-glide-el="controls">
+		<button class="nav-button" data-glide-dir="<"><ArrowLeft size="1em" /></button>
 		{#each Array(totalSlides) as _, i}
-			<div class="dot" class:active={currentSlide === i}></div>
+			<button class="dot reset-button" class:active={currentSlide === i} data-glide-dir={`=${i}`} />
 		{/each}
-		<button on:click={nextSlide} class="nav-button"><ArrowRight size="1em" /></button>
+		<button class="nav-button" data-glide-dir=">"><ArrowRight size="1em" /></button>
 		<a href="/quotes">See all quotes</a>
 	</div>
 </div>
 
 <style>
-	.quote-container {
+	.glide__track {
+		position: relative;
+		margin: -20px;
+	}
+
+	.quote {
+		margin: 20px;
+	}
+
+	.glide__slides {
+		overflow: unset;
+	}
+
+	.touch-navigation {
+		position: absolute;
+		top: 0;
+		width: 33%;
+		height: 100%;
+		pointer-events: none;
+	}
+
+	.touch-navigation.left {
+		left: 0;
+	}
+
+	.touch-navigation.right {
+		right: 0;
 	}
 
 	.navigation {
@@ -122,5 +194,10 @@
 
 	.dot.active {
 		background: var(--brand);
+		transform: scale(1.2);
+	}
+
+	.dot:not(.active):hover {
+		transform: scale(1.2);
 	}
 </style>

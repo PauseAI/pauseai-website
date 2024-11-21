@@ -14,6 +14,9 @@ importers:
       '@fontsource/saira-condensed':
         specifier: ^5.1.0
         version: 5.1.0
+      '@glidejs/glide':
+        specifier: ^3.6.2
+        version: 3.6.2
       '@inlang/paraglide-sveltekit':
         specifier: 0.11.5
         version: 0.11.5(@sveltejs/kit@2.6.4(@sveltejs/vite-plugin-svelte@3.1.2(svelte@4.2.19)(vite@5.4.8(@types/node@20.16.11)))(svelte@4.2.19)(vite@5.4.8(@types/node@20.16.11)))(webpack-sources@3.2.3)
@@ -90,6 +93,9 @@ importers:
       '@types/escape-html':
         specifier: ^1.0.4
         version: 1.0.4
+      '@types/glidejs__glide':
+        specifier: ^3.6.5
+        version: 3.6.5
       '@types/minimist':
         specifier: ^1.2.5
         version: 1.2.5
@@ -495,6 +501,9 @@ packages:
 
   '@fontsource/saira-condensed@5.1.0':
     resolution: {integrity: sha512-Rd2APUoxEf4ItaGIuAhdhg2ojsZCqDfBzlySnUU0gz3rCTQTSjkrIr7namFDpAO7HMfho88VWG1e5impZc6vsg==}
+
+  '@glidejs/glide@3.6.2':
+    resolution: {integrity: sha512-oXw7In0IZV69PC0PChQakY+yh+UnqIb5+zfVuEIzub6Kkfl1foo7TAhr2PZXPzihOG9YS57t8wvdzBFEZ0aPVA==}
 
   '@humanwhocodes/config-array@0.13.0':
     resolution: {integrity: sha512-DZLEEqFWQFiyK6h5YIeynKx7JlvCYWL0cImfSRXZ9l4Sg2efkFGTuFf6vzXjK1cq6IYkU+Eg/JizXw+TD2vRNw==}
@@ -1042,6 +1051,9 @@ packages:
 
   '@types/geojson@7946.0.14':
     resolution: {integrity: sha512-WCfD5Ht3ZesJUsONdhvm84dmzWOiOzOAqOncN0++w0lBw1o8OuDNJF2McvvCef/yBqb/HYRahp1BYtODFQ8bRg==}
+
+  '@types/glidejs__glide@3.6.5':
+    resolution: {integrity: sha512-OUjzveIu+tiK5VvyPh6jTBJ/vH6+vC+XWzC2KJzpgUW8uancMJBa7R+BlXuvtSPdLw/pQForVasy0fm1D7JWOQ==}
 
   '@types/hast@2.3.10':
     resolution: {integrity: sha512-McWspRw8xx8J9HurkVBfYj0xKoE25tOFlHGdx4MJ5xORQrMGZNqJhVQWaIbm6Oyla5kYOXtDiopzKRJzEOkwJw==}
@@ -2889,6 +2901,8 @@ snapshots:
 
   '@fontsource/saira-condensed@5.1.0': {}
 
+  '@glidejs/glide@3.6.2': {}
+
   '@humanwhocodes/config-array@0.13.0':
     dependencies:
       '@humanwhocodes/object-schema': 2.0.3
@@ -3490,6 +3504,8 @@ snapshots:
       '@types/geojson': 7946.0.14
 
   '@types/geojson@7946.0.14': {}
+
+  '@types/glidejs__glide@3.6.5': {}
 
   '@types/hast@2.3.10':
     dependencies:

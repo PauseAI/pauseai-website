@@ -48,6 +48,11 @@
 		opacity: 0.3;
 	}
 
+	.quote-text:after {
+		content: close-quote;
+		visibility: hidden;
+	}
+
 	.author-section {
 		display: flex;
 		align-items: center;
