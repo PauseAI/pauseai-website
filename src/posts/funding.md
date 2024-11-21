@@ -3,9 +3,9 @@ title: PauseAI Funding & Donors
 description: A list of our largest donors.
 ---
 
-_last update: 2024-10-21_
+_last update: 2024-11-21_
 
-PauseAI has received about €185,552 in donations so far.
+PauseAI has received about €195,552 in donations so far.
 
 ## Largest donors
 
