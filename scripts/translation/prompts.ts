@@ -3,7 +3,7 @@ export type PromptGenerator = (languageName: string, content: string) => string
 export const generateJsonPrompt: PromptGenerator = (languageName: string, content: string) => {
 	return `${commonHead(languageName, 'JSON')}
 
-Maintain the JSON structure and only translate the values, not the keys. Keys prefixed with an underscore provide additional instructions for specific translations. Always make sure the result is valid JSON syntax:
+Maintain the JSON structure and only translate the values, not the keys. Keys suffixed with an "instructions" provide additional instructions for specific translations. Always make sure the result is valid JSON syntax:
 
 ${content}
 

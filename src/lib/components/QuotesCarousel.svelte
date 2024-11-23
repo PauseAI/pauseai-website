@@ -10,6 +10,7 @@
 	import Glide, { Controls, Images, Keyboard, Swipe } from '@glidejs/glide/dist/glide.modular.esm'
 	import '@glidejs/glide/dist/css/glide.core.css'
 	import { onMount } from 'svelte'
+	import * as m from '$lib/paraglide/messages'
 
 	const MOBILE_NAVIGATION_DISTANCE_THRESHOLD = 10
 
@@ -18,33 +19,33 @@
 
 	const quotes = [
 		{
-			text: 'If you take the existential risk seriously, as I now do, it might be quite sensible to just stop developing these things any further.',
+			text: m.home_quotes_hinton_text(),
 			author: 'Geoffrey Hinton',
-			title: 'Nobel Prize winner & "Godfather of AI"',
+			title: m.home_quotes_hinton_title(),
 			image: Hinton
 		},
 		{
-			text: 'The development of full artificial intelligence could spell the end of the human race.',
+			text: m.home_quotes_hawking_text(),
 			author: 'Stephen Hawking',
-			title: 'Theoretical physicist and cosmologist',
+			title: m.home_quotes_hawking_title(),
 			image: Hawking
 		},
 		{
-			text: '... we should have to expect the machines to take control.',
+			text: m.home_quotes_turing_text(),
 			author: 'Alan Turing',
-			title: 'Inventor of the modern computer',
+			title: m.home_quotes_turing_title(),
 			image: Turing
 		},
 		{
-			text: 'If we pursue [our current approach], then we will eventually lose control over the machines',
+			text: m.home_quotes_russell_text(),
 			author: 'Stuart Russell',
-			title: 'Writer of the AI textbook',
+			title: m.home_quotes_russell_title(),
 			image: Russell
 		},
 		{
-			text: 'Rogue AI may be dangerous for the whole of humanity. Banning powerful AI systems (say beyond the abilities of GPT-4) that are given autonomy and agency would be a good start.',
+			text: m.home_quotes_bengio_text(),
 			author: 'Yoshua Bengio',
-			title: 'AI Turing Award winner',
+			title: m.home_quotes_bengio_title(),
 			image: Bengio
 		}
 	]
@@ -116,7 +117,7 @@
 			<button class="dot reset-button" class:active={currentSlide === i} data-glide-dir={`=${i}`} />
 		{/each}
 		<button class="nav-button" data-glide-dir=">"><ArrowRight size="1em" /></button>
-		<a href="/quotes">See all quotes</a>
+		<a href="/quotes">{m.home_quotes_all()}</a>
 	</div>
 </div>
 
