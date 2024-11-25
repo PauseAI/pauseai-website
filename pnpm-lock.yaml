@@ -18,8 +18,8 @@ importers:
         specifier: ^3.6.2
         version: 3.6.2
       '@inlang/paraglide-sveltekit':
-        specifier: 0.11.5
-        version: 0.11.5(@sveltejs/kit@2.6.4(@sveltejs/vite-plugin-svelte@3.1.2(svelte@4.2.19)(vite@5.4.8(@types/node@20.16.11)))(svelte@4.2.19)(vite@5.4.8(@types/node@20.16.11)))(webpack-sources@3.2.3)
+        specifier: 0.12.1
+        version: 0.12.1(@sveltejs/kit@2.6.4(@sveltejs/vite-plugin-svelte@3.1.2(svelte@4.2.19)(vite@5.4.8(@types/node@20.16.11)))(svelte@4.2.19)(vite@5.4.8(@types/node@20.16.11)))(webpack-sources@3.2.3)
       '@pagefind/default-ui':
         specifier: ^1.1.1
         version: 1.1.1
@@ -656,17 +656,17 @@ packages:
     resolution: {integrity: sha512-WVNraTylfZty0kt5EQNh8yx0WUJbtYEmc8YoNRRSUWB0rqeCh8a9xIQnmzZxBMf7IL7es+Ppiqx15py7mukJRw==}
     hasBin: true
 
-  '@inlang/paraglide-sveltekit@0.11.5':
-    resolution: {integrity: sha512-go2rQC4h6F8eDphICrHL0SAZUidEEgnOrplaZRle4u7Qthg9WDztOUHQW9BoRYHi3vmP2N2HZ7KsPjowAkuW5w==}
+  '@inlang/paraglide-sveltekit@0.12.1':
+    resolution: {integrity: sha512-UaNgdaa2NWRwwcqo1HZA+mmu5EZFTZ5i65dJJUC6jyqze/L7ozbIG73UHjXf57WONtLjbsEA7WlxcwMVWzpMvw==}
     hasBin: true
     peerDependencies:
       '@sveltejs/kit': ^2.4.3
 
-  '@inlang/paraglide-unplugin@1.8.7':
-    resolution: {integrity: sha512-lGSOP5W7rTRT6yAoqe0zU1qaSS/4Png18HDnIWoioVH3SIklJvHclWJhgd6WHa16WyHluLqZKr6oCObbBOPT+A==}
+  '@inlang/paraglide-unplugin@1.8.8':
+    resolution: {integrity: sha512-2mQzzRwJY36Z9wsnielmec0uMhUOgTje/xMy9pG7h+voO2rrX89MQbEKBHkRzkb0yq090oILDFq3rUXRCgW07g==}
 
-  '@inlang/paraglide-vite@1.2.76':
-    resolution: {integrity: sha512-l77r6OeLNFkHDGRzQNSJxD+2z/nJsjcQIYd64hNSOBVn/Mkgele7aJw5NrJIEn911ftPOZyojRhLOabbtWbWkg==}
+  '@inlang/paraglide-vite@1.2.77':
+    resolution: {integrity: sha512-rn2hUcgYnQOhHc4qNerMc7AUqBN4WTINhm8MwP5L0f/EIJLsQ7jDLMrZRiBOkFuMBj7p53oHElhwk+juBqkCAw==}
 
   '@inlang/plugin@2.4.14':
     resolution: {integrity: sha512-HFI1t1tKs6jXqwKVl59vvt7kvMgg2Po7xA3IFijfJTZCt0tTI8txqeXCUV9jhUop29Hqj6a5zQd32BYv33Dulw==}
@@ -3036,10 +3036,10 @@ snapshots:
       - babel-plugin-macros
       - debug
 
-  '@inlang/paraglide-sveltekit@0.11.5(@sveltejs/kit@2.6.4(@sveltejs/vite-plugin-svelte@3.1.2(svelte@4.2.19)(vite@5.4.8(@types/node@20.16.11)))(svelte@4.2.19)(vite@5.4.8(@types/node@20.16.11)))(webpack-sources@3.2.3)':
+  '@inlang/paraglide-sveltekit@0.12.1(@sveltejs/kit@2.6.4(@sveltejs/vite-plugin-svelte@3.1.2(svelte@4.2.19)(vite@5.4.8(@types/node@20.16.11)))(svelte@4.2.19)(vite@5.4.8(@types/node@20.16.11)))(webpack-sources@3.2.3)':
     dependencies:
       '@inlang/paraglide-js': 1.11.3
-      '@inlang/paraglide-vite': 1.2.76(webpack-sources@3.2.3)
+      '@inlang/paraglide-vite': 1.2.77(webpack-sources@3.2.3)
       '@lix-js/client': 2.2.1
       '@sveltejs/kit': 2.6.4(@sveltejs/vite-plugin-svelte@3.1.2(svelte@4.2.19)(vite@5.4.8(@types/node@20.16.11)))(svelte@4.2.19)(vite@5.4.8(@types/node@20.16.11))
       commander: 12.1.0
@@ -3053,7 +3053,7 @@ snapshots:
       - supports-color
       - webpack-sources
 
-  '@inlang/paraglide-unplugin@1.8.7(webpack-sources@3.2.3)':
+  '@inlang/paraglide-unplugin@1.8.8(webpack-sources@3.2.3)':
     dependencies:
       '@inlang/paraglide-js': 1.11.3
       '@inlang/sdk': 0.36.3
@@ -3065,9 +3065,9 @@ snapshots:
       - supports-color
       - webpack-sources
 
-  '@inlang/paraglide-vite@1.2.76(webpack-sources@3.2.3)':
+  '@inlang/paraglide-vite@1.2.77(webpack-sources@3.2.3)':
     dependencies:
-      '@inlang/paraglide-unplugin': 1.8.7(webpack-sources@3.2.3)
+      '@inlang/paraglide-unplugin': 1.8.8(webpack-sources@3.2.3)
     transitivePeerDependencies:
       - babel-plugin-macros
       - debug
