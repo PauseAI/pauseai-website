@@ -2,7 +2,7 @@ import fs from 'fs'
 import * as pagefind from 'pagefind'
 import type { Post } from '../src/lib/types'
 
-const POSTS_PATH = 'build/api/posts'
+const POSTS_PATH = 'build/en/api/posts'
 const INPUT_PATH = 'build'
 const STATIC_PATH = 'static/pagefind'
 const BUILD_PATH = 'build/pagefind'
