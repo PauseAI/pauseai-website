@@ -361,6 +361,18 @@ const PauseAICommunities: Community[] = [
 		lat: 36.0999,
 		lon: -80.2442,
 		link: USDiscord
+	},
+	{
+		name: 'Kraków',
+		lat: 50.0647,
+		lon: 19.945,
+		link: globalDiscord
+	},
+	{
+		name: 'Yaoundé',
+		lat: 3.848,
+		lon: 11.5027,
+		link: 'https://chat.whatsapp.com/EmSo5C486JzDdFOiojByje'
 	}
 ]
 
