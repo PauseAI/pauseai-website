@@ -162,6 +162,7 @@
 		display: flex;
 		flex-direction: column;
 		align-items: flex-end;
+		text-align: right;
 		font-family: var(--font-heading);
 	}
 
