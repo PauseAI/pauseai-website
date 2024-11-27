@@ -4,6 +4,11 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
+patchedDependencies:
+  html-to-image:
+    hash: 6hm3v3w2vffl535elpnwscxege
+    path: patches/html-to-image.patch
+
 importers:
 
   .:
@@ -40,7 +45,7 @@ importers:
         version: 2.0.0
       html-to-image:
         specifier: ^1.11.11
-        version: 1.11.11
+        version: 1.11.11(patch_hash=6hm3v3w2vffl535elpnwscxege)
       lucide-svelte:
         specifier: ^0.325.0
         version: 0.325.0(svelte@4.2.19)
@@ -3155,7 +3160,7 @@ snapshots:
 
   hast-util-whitespace@2.0.1: {}
 
-  html-to-image@1.11.11: {}
+  html-to-image@1.11.11(patch_hash=6hm3v3w2vffl535elpnwscxege): {}
 
   human-signals@5.0.0: {}
 
