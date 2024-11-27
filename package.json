@@ -65,10 +65,5 @@
 		"svelte-markdown": "^0.4.1",
 		"svelte-toc": "^0.5.9",
 		"ua-parser-js": "^1.0.39"
-	},
-	"pnpm": {
-		"patchedDependencies": {
-			"html-to-image": "patches/html-to-image.patch"
-		}
 	}
 }
