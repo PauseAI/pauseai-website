@@ -5,6 +5,7 @@
 	import Turing from '../../assets/quote-profile/turing.jpg?enhanced'
 	import Russell from '../../assets/quote-profile/russell.jpg?enhanced'
 	import Bengio from '../../assets/quote-profile/bengio.jpg?enhanced'
+	import CAIS from '../../assets/quote-profile/cais_statement.jpg?enhanced'
 	import ArrowLeft from 'lucide-svelte/icons/arrow-left'
 	import ArrowRight from 'lucide-svelte/icons/arrow-right'
 	import Glide, { Controls, Images, Keyboard, Swipe } from '@glidejs/glide/dist/glide.modular.esm'
@@ -17,6 +18,12 @@
 	let currentSlide: number | null = null
 
 	const quotes = [
+		{
+			text: 'Mitigating the risk of extinction from AI should be a global priority alongside other societal-scale risks such as pandemics and nuclear war.',
+			author: 'CAIS Statement',
+			title: 'Hundreds of experts, including the top AI labs and scientists',
+			image: CAIS
+		},
 		{
 			text: 'If you take the existential risk seriously, as I now do, it might be quite sensible to just stop developing these things any further.',
 			author: 'Geoffrey Hinton',
