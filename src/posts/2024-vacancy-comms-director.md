@@ -20,7 +20,7 @@ PauseAI started in April 2023 and has since grown to 2000 members, over 100 [reg
 
 ## Your Role
 
-Although [many volunteers](/people) contribute to PauseAI (some even full-time), PauseAI will soon have one paid staff member ([Organizing Director](/2024-)
+Although [many volunteers](/people) contribute to PauseAI (some even full-time), PauseAI will soon have one paid staff member ([Organizing Director](/2024-vacancy-organizing-director)
 You will be the second hire and you will play a crucial role in how the organization grows and evolves.
 You will work closely with the founder, Joep Meindertsma.
 Be aware that PauseAI may grow very quickly in the near future, both in terms of members and funding.
