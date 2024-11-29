@@ -19,12 +19,6 @@
 
 	const quotes = [
 		{
-			text: 'Mitigating the risk of extinction from AI should be a global priority alongside other societal-scale risks such as pandemics and nuclear war.',
-			author: 'CAIS Statement',
-			title: 'Hundreds of experts, including the top AI labs and scientists',
-			image: CAIS
-		},
-		{
 			text: 'If you take the existential risk seriously, as I now do, it might be quite sensible to just stop developing these things any further.',
 			author: 'Geoffrey Hinton',
 			title: 'Nobel Prize winner & "Godfather of AI"',
