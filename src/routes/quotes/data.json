@@ -17,10 +17,10 @@
 	},
 	{
 		"background": "fli_letter",
-		"color": "",
+		"color": "white",
 		"text": "**We call on all AI labs to immediately pause for at least 6 months the training of AI systems more powerful than GPT-4.**",
 		"author": "Pause Giant AI Experiments letter",
-		"author_description": "signed by 30,000+ people, including academic AI researchers and industry CEOs. Note that this is different that our ask, which is an **indefinite pause**.",
+		"author_description": "signed by 30,000+ people, including academic AI researchers and industry CEOs. Note that this is different that our ask, which is an indefinite pause.",
 		"padding": "",
 		"notice": "“Steve Wozniak speaking at an event in Paradise Valley, Arizona.” by Gage Skidmore. Modified and licensed under CC BY-SA 3.0."
 	},
@@ -33,19 +33,11 @@
 		"padding": ""
 	},
 	{
-		"background": "sunak",
-		"color": "black",
-		"text": "Get this wrong, and AI could make it easier to build chemical or biological weapons. Terrorist groups could use AI to spread fear and destruction on an even greater scale. Criminals could exploit AI for cyber-attacks, disinformation, fraud, or even child sexual abuse. And in the most unlikely but extreme cases, there is even the risk that **humanity could lose control of AI completely** through the kind of AI sometimes referred to as ‘super intelligence’.",
-		"author": "Rishi Sunak",
-		"author_description": "United Kingdom's Prime Minister",
-		"padding": "1.5rem"
-	},
-	{
 		"background": "trump",
 		"color": "white",
 		"text": "[...] the other thing that I think is **maybe the most dangerous thing out there** of anything, because there’s no real solution — **the AI**, as they call it.",
 		"author": "Donald Trump",
-		"author_description": "45th President of the United States"
+		"author_description": "President of the United States"
 	},
 	{
 		"background": "biden",
@@ -96,11 +88,19 @@
 		"notice": "“pope-francis-1a” by ThiênLong. Modified and licensed under CC BY-SA 2.0."
 	},
 	{
+		"background": "sunak",
+		"color": "black",
+		"text": "Get this wrong, and AI could make it easier to build chemical or biological weapons. Terrorist groups could use AI to spread fear and destruction on an even greater scale. Criminals could exploit AI for cyber-attacks, disinformation, fraud, or even child sexual abuse. And in the most unlikely but extreme cases, there is even the risk that **humanity could lose control of AI completely** through the kind of AI sometimes referred to as ‘super intelligence’.",
+		"author": "Rishi Sunak",
+		"author_description": "United Kingdom's former Prime Minister",
+		"padding": "1.5rem"
+	},
+	{
 		"background": "harris",
 		"color": "white",
 		"text": "[...] just as AI has the potential to do profound good, it also has the potential to cause profound harm. From AI-enabled cyberattacks at a scale beyond anything we have seen before to AI-formulated bio-weapons that could endanger the lives of millions, these threats are often referred to as the “existential threats of AI” because, of course, they **could endanger the very existence of humanity. These threats, without question, are profound, and they demand global action.**",
 		"author": "Kamala Harris",
-		"author_description": "Vice President of the United States"
+		"author_description": "Former Vice President of the United States"
 	},
 	{
 		"background": "jun",
