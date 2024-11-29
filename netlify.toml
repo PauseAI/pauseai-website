@@ -15,7 +15,7 @@
   publish = "build"
 
   # Default build command.
-  command = "pnpm install --frozen-lockfile && pnpm build"
+  command = "pnpm run build"
 
 # Use [dev] to set configuration overrides for local
 # development environments run using Netlify Dev - except
