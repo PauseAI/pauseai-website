@@ -15,7 +15,7 @@ importers:
         specifier: ^5.1.0
         version: 5.1.0
       '@glidejs/glide':
-        specifier: ^3.6.2
+        specifier: ~3.6.2
         version: 3.6.2
       '@pagefind/default-ui':
         specifier: ^1.1.1
