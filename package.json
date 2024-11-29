@@ -45,7 +45,7 @@
 	"dependencies": {
 		"@fontsource/roboto-slab": "^5.1.0",
 		"@fontsource/saira-condensed": "^5.1.0",
-		"@glidejs/glide": "^3.6.2",
+		"@glidejs/glide": "^3.7.1",
 		"@pagefind/default-ui": "^1.1.1",
 		"@prgm/sveltekit-progress-bar": "^2.0.0",
 		"@sveltejs/enhanced-img": "~0.3.10",

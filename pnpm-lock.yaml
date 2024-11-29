@@ -15,8 +15,8 @@ importers:
         specifier: ^5.1.0
         version: 5.1.0
       '@glidejs/glide':
-        specifier: ^3.6.2
-        version: 3.6.2
+        specifier: ^3.7.1
+        version: 3.7.1
       '@pagefind/default-ui':
         specifier: ^1.1.1
         version: 1.1.1
@@ -463,8 +463,8 @@ packages:
   '@fontsource/saira-condensed@5.1.0':
     resolution: {integrity: sha512-Rd2APUoxEf4ItaGIuAhdhg2ojsZCqDfBzlySnUU0gz3rCTQTSjkrIr7namFDpAO7HMfho88VWG1e5impZc6vsg==}
 
-  '@glidejs/glide@3.6.2':
-    resolution: {integrity: sha512-oXw7In0IZV69PC0PChQakY+yh+UnqIb5+zfVuEIzub6Kkfl1foo7TAhr2PZXPzihOG9YS57t8wvdzBFEZ0aPVA==}
+  '@glidejs/glide@3.7.1':
+    resolution: {integrity: sha512-8he0pZpLSqTesSFYiuWdhBmtdlYSPWxfPUCKtkkiX6ZmT8UdMdmoFPtJaOwLBXv4p2JiGxqbuPdiRGGo2e/htQ==}
 
   '@humanwhocodes/config-array@0.13.0':
     resolution: {integrity: sha512-DZLEEqFWQFiyK6h5YIeynKx7JlvCYWL0cImfSRXZ9l4Sg2efkFGTuFf6vzXjK1cq6IYkU+Eg/JizXw+TD2vRNw==}
@@ -2282,7 +2282,7 @@ snapshots:
 
   '@fontsource/saira-condensed@5.1.0': {}
 
-  '@glidejs/glide@3.6.2': {}
+  '@glidejs/glide@3.7.1': {}
 
   '@humanwhocodes/config-array@0.13.0':
     dependencies:
