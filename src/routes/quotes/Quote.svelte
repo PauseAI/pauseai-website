@@ -13,7 +13,7 @@
 	import { onMount } from 'svelte'
 	import UAParser from 'ua-parser-js'
 
-	const DOWNLOAD_WIDTH = 2000
+	const DOWNLOAD_WIDTH = 2000 // also in import query
 
 	export let background = ''
 	export let text = ''
@@ -24,7 +24,16 @@
 	export let color: string | null = null
 	export let padding: string | null = null
 
-	$: bg_url = new URL(`../../assets/quote-bg/${background}.jpg`, import.meta.url).href
+	const imageModules = import.meta.glob('../../assets/quote-bg/*.jpg', {
+		eager: true,
+		query: {
+			enhanced: true,
+			w: 2000 // = DOWNLOAD_WIDTH
+		}
+	})
+	// @ts-expect-error type not exposed
+	const enhancedBackground = imageModules[`../../assets/quote-bg/${background}.jpg`].default
+
 	$: color_style = color ? `color: ${color}` : ''
 	$: content_style = padding
 		? `padding: calc(var(--zoom) * ${padding}) 0 0 calc(var(--zoom) * ${padding});`
@@ -77,18 +86,24 @@
 </script>
 
 <div class="quote-container" bind:this={containerElement}>
-	<div class="quote" style="background-image:url({bg_url}); {color_style}" bind:this={quoteElement}>
-		<div class="quote-content" style={content_style}>
-			<div class="quote-text-container">
-				<div class="quote-text">{@html text}</div>
-			</div>
-			<div class="quote-author">
-				<p>{author}</p>
-				<p>{author_description}</p>
-			</div>
+	<div class="quote" style={color_style} bind:this={quoteElement}>
+		<div class="quote-background">
+			<enhanced:img class="quote-image" src={enhancedBackground} />
 		</div>
-		<div class="quote-logo">
-			<Logo width={100} fill={color ? color : 'black'} />
+
+		<div class="quote-foreground">
+			<div class="quote-content" style={content_style}>
+				<div class="quote-text-container">
+					<div class="quote-text">{@html text}</div>
+				</div>
+				<div class="quote-author">
+					<p>{author}</p>
+					<p>{author_description}</p>
+				</div>
+			</div>
+			<div class="quote-logo">
+				<Logo width={100} fill={color ? color : 'black'} />
+			</div>
 		</div>
 	</div>
 	<div class="quote-below">
@@ -118,14 +133,35 @@
 	}
 
 	.quote {
+		display: grid;
+		grid-template-columns: 1fr;
+
+		/* dynamically overwritten styles can't go in .quote-foreground because of precedence */
 		--zoom: 1;
+		color: hsl(0, 0%, 15%);
+	}
+
+	.quote-background {
+		grid-row-start: 1;
+		grid-column-start: 1;
+		height: 100%;
+	}
+
+	.quote-image {
+		display: block;
+		object-fit: cover;
+		width: 100%;
+		height: 100%;
+	}
+
+	.quote-foreground {
+		grid-row-start: 1;
+		grid-column-start: 1;
+		height: 100%;
 		display: flex;
 		flex-direction: column;
 		justify-content: space-between;
-		background-size: cover;
-		aspect-ratio: 2 / 1;
 		box-sizing: border-box;
-		color: hsl(0, 0%, 15%);
 	}
 
 	.quote-content {
