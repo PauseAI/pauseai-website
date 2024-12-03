@@ -1,4 +1,4 @@
-![image](https://github.com/user-attachments/assets/1bb17112-3c7f-4366-9d6e-97b30fe34a10)---
+---
 title: Tips for effective lobbying
 description: How to convince your government that it needs to work towards a pause on AI training runs
 ---
