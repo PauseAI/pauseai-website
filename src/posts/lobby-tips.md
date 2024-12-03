@@ -1,4 +1,4 @@
----
+![image](https://github.com/user-attachments/assets/1bb17112-3c7f-4366-9d6e-97b30fe34a10)---
 title: Tips for effective lobbying
 description: How to convince your government that it needs to work towards a pause on AI training runs
 ---
@@ -11,6 +11,7 @@ It is _their job_ to listen to _their constituents_.
 They are representing _you_.
 
 So don't be afraid to reach out to them.
+You can learn how to do it in this [recording of an emailing workshop](https://www.youtube.com/watch?v=Mjq4NFiKKd0) that we had. 
 
 If you are from the US, you can check out our particular [US Lobbying Guide](/us-lobby-guide).
 
