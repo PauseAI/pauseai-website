@@ -133,6 +133,11 @@ And again, make sure someone is filming it.
 
 ## During the protest
 
+### Start with some energetic activities
+
+Before you do the protest, get everyone to do some ridiculous dances or chants.
+This gets the right energy going.
+
 ### Speak to media
 
 If journalists are present, speak to them.

@@ -101,7 +101,8 @@ Notably, some of these companies use relatively outdated processes to produce th
 
 ### On-Chip Governance
 
-The article ["Secure, Governable Chips"](https://www.cnas.org/publications/reports/secure-governable-chips) proposes a new approach to AI governance.
+- The article ["Secure, Governable Chips"](https://www.cnas.org/publications/reports/secure-governable-chips) proposes a new approach to AI governance.
+- Chips could respond to messages from trusted servers to [prove they are withing a certain distance of a trusted location](https://www.lesswrong.com/posts/uSSPuttae5GHfsNQL/ai-compute-governance-verifying-ai-chip-location). This can be accurate to within tens of kilometers.
 
 ### Verification methods - preventing large training runs
 

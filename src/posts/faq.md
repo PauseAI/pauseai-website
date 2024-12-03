@@ -13,9 +13,11 @@ description: Frequently asked questions about PauseAI and the risks of superinte
 
 ## Who are you?
 
-We are a community of [volunteers](/people) and [local communities](/communities) coordinated by a [non-profit](/legal) that aims to mitigate the [risks of AI](/risks) (including the [risk of human extinction](/xrisk)).
+We are a community of [volunteers](/people) and [local communities](/communities) coordinated by a [non-profit organization](/org) that aims to mitigate the [risks of AI](/risks) (including the [risk of human extinction](/xrisk)).
 We aim to convince our governments to step in and [pause the development of superhuman AI](/proposal).
-We do this by informing the public, talking to decision-makers, and organizing protests.
+We do this by informing the public, talking to decision-makers, and organizing [events](/events).
+
+## Do you have social media?
 
 You can find us on [Discord](https://discord.gg/2XXWXvErfA) (this is where most of the coordination happens!), [Twitter](https://twitter.com/PauseAI), [Substack](https://substack.com/@pauseai), [Facebook](https://www.facebook.com/PauseAI), [TikTok](https://www.tiktok.com/@pauseai), [LinkedIn](https://www.linkedin.com/uas/login?session_redirect=/company/97035448/), [YouTube](https://www.youtube.com/@PauseAI), [Instagram](https://www.instagram.com/pause_ai), [Telegram](https://t.me/+UeTsIsNkmt82ZmQ8), [Whatsapp](https://chat.whatsapp.com/JgcAbjqRr8X3tvrXdeQvfj) and [Reddit](https://www.reddit.com/r/PauseAI/).
 You can mail/contact us at [joep@pauseai.info](mailto:joep@pauseai.info).

@@ -53,7 +53,7 @@ Be aware that PauseAI may grow very quickly in the near future, both in terms of
 
 - Remote work or in-person in Utrecht, the Netherlands.
 - Full-time position
-- Salary range: 40k - 60k EUR per year, depending on experience.
+- Salary range: 40k - 60k EUR per year, depending on experience and location.
 - Referral bonus: 500 EUR for a successful hire!
 
 ## Apply
