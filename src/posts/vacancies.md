@@ -3,12 +3,12 @@ title: Open (Volunteer) Vacancies for PauseAI
 description: Jobs & volunteer positions at PauseAI
 ---
 
-- We're doing all of this as **volunteers**, and we need more help.
-- We work in [teams](/teams)
 - Check out the [people](/people) who you may work with!
+- We work in [teams](/teams)
 - We collaborate mostly on our [Discord server](https://discord.gg/2XXWXvErfA)
+- Read more about our [organization](/organization)
 
-## Comms Director (Paid position)
+## Communications Director (Paid position)
 
 - Lead the Comms Team (multiple volunteers with diverse relevant skills, some of who create and edit videos)
 - Stay up to date on AI (safety, governance) news
@@ -18,19 +18,13 @@ description: Jobs & volunteer positions at PauseAI
 
 [Read more](/2024-vacancy-comms-director)
 
-## Petition Campaign Organizer
-
-- We're planning to set up a large scale petition, where we'll need a lot of signatures.
-
-Interested? [Mail to Giulia](mailto:giulia@pausai.info)
-
 ## Onboarding team member
 
 - 2 to 4 hrs a week
 - Say hi to new members who join through the discord or the form.
 - Have one on one calls to find the right team
 
-Interested? [Mail to Maxime](mailto:maxime@pausai.info)
+Interested? [Mail to Will](mailto:will@pausai.info)
 
 ## Outreach team member
 
