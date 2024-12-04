@@ -5,7 +5,7 @@
 		"text": "[About frontier AI:] Substantial risks may arise from potential intentional misuse or unintended issues of control relating to alignment with human intent. These issues are in part because those capabilities are not fully understood [...] There is potential for **serious, even catastrophic, harm, either deliberate or unintentional**, stemming from the most significant capabilities of these AI models.",
 		"author": "The Bletchley Declaration,",
 		"author_description": "signed by 28 countries, including all AI leaders, and the EU.",
-		"padding": "3.3rem"
+		"padding": "5rem"
 	},
 	{
 		"background": "cais_statement",
