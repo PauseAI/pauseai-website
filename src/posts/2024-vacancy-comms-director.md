@@ -1,6 +1,6 @@
 ---
-title: Comms Director Vacancy at PauseAI Global
-description: PauseAI is looking for an Social Media Director to help manage the organization and support local groups.
+title: Communications Director Vacancy at PauseAI Global
+description: PauseAI is looking for an Communications Director to lead our Comms Team and Social Media accounts. Remote work or in-person in Utrecht, the Netherlands.
 ---
 
 Do you want to make an impact and work on the most important issue on Earth?
@@ -15,7 +15,7 @@ PauseAI started in April 2023 and has since grown to 2000 members, over 100 [reg
 
 ## Your Role
 
-Although [many volunteers](/people) contribute to PauseAI (some even full-time), PauseAI will soon have one paid staff member ([Organizing Director](/2024-vacancy-organizing-director)
+Although [many volunteers](/people) contribute to PauseAI (some even full-time), PauseAI has one paid staff member ([Organizing Director](/2024-vacancy-organizing-director)
 You will be the second hire and you will play a crucial role in how the organization grows and evolves.
 You will work closely with the founder, Joep Meindertsma.
 Be aware that PauseAI may grow very quickly in the near future, both in terms of members and funding.
@@ -23,22 +23,23 @@ Be aware that PauseAI may grow very quickly in the near future, both in terms of
 ### Tasks & Responsibilities
 
 - Lead the Comms [Team](/teams) (multiple volunteers with diverse relevant skills, some of who create and edit videos)
+- Develop and execute a communication strategy
+- Set up an international communication pipeline for the various National Groups.
 - Run our Social Media accounts (Twitter, Facebook, TikTok, LinkedIn, YouTube, Instagram, SubStack)
 - Creating social media content (text, video) to inform, motivate, and inspire.
 - Engage with the PauseAI community and other organizations
 - Stay up to date on AI (safety, governance) news
 - Set up & execute digital (ad) campaigns
-- Make changes to our website (no programming experience required)'
-- Possibly be a PauseAI spokesperson (e.g. in podcasts, interviews, articles)
+- Make changes to our website (no programming experience required)
 
 ### Skills & Attributes
 
-- A generalist with leadership experience.
-- You understand AI safety and AI governance.
 - You enjoy posting things on social media, have a good feeling for marketing.
 - Experience with digital communication / social media.
 - Experience with press / journalists / media.
 - Excellent communication skills, both verbal and written.
+- A generalist with leadership experience.
+- You understand AI safety and AI governance.
 - Supports the idea of an AI Pause, but we're open to different perspectives (such as threat models or policies).
 - Advertising experience is a plus.
 - Experience with video content creation is a plus.
