@@ -11,6 +11,9 @@ It is _their job_ to listen to _their constituents_.
 They are representing _you_.
 
 So don't be afraid to reach out to them.
+You can learn how to do it in this [recording of an emailing workshop](https://www.youtube.com/watch?v=Mjq4NFiKKd0) that we had. 
+
+If you are from the US, you can check out our particular [US Lobbying Guide](/us-lobby-guide).
 
 ## Find people to help you
 
@@ -31,6 +34,7 @@ Check out the [surveys](/polls-and-surveys) and the [quotes](/quotes) pages for 
 - We need **people in power** to make the pause happen. We need these political Champions in every country. Finding and convincing that person in your country is your goal.
 - Consider their **goals and ambitions**. Do they like organizing things? Do they get a kick out of being a thought leader? Do they shy away from controversy? All these things matter.
 - Consider their **background**. Do they understand catastrophic risks? AI? Global coordination?
+- Consider **who they listen to**. Many people change their mind through specific trusted peers. Find out who these people are.
 
 ## Write a letter or email
 
@@ -41,13 +45,21 @@ Check out the [surveys](/polls-and-surveys) and the [quotes](/quotes) pages for 
 
 ## During the meeting
 
-Being an alarmist can be tough, and scary.
+Sounding the alarm can be tough and frightening.
 You may fear speaking your mind, and you may fear being dismissed.
 But we cannot afford to mince words and tone everything down:
 
 - Be clear about the urgency. **This is an emergency**.
 - Be clear about the risks. **This is an existential risk**.
 - Be clear about the solution. We need to work towards a pause on AI training runs. Your government needs to prepare for the [summit](/summit) by forming coalitions with other countries and start working on a global treaty to [pause AI training runs](/proposal).
+
+## After the meeting
+
+Keep your contact warm!
+Send them regulare updates on what's happening in the AI safety field.
+The field moves very fast, and this is your oppurtinuty to be their source of information.
+If you are knowledgeable about this field (which you probaly are compared to lots of people) you can become an advisor / source or knowledge.
+Ask them to introduce you to other people who might be interested in this topic.
 
 ## Get to it!
 

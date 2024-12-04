@@ -3,11 +3,16 @@
 	export let href: string
 	export let c2a = false
 	export let ariaLabel: string | undefined = undefined
+	export let inverted = false
+	export let first = false
 </script>
 
 <a
 	{href}
-	class={`${c2a ? 'c2a' : ''} ${$page.url.pathname == href ? 'active' : ''}`}
+	class:first
+	class:c2a
+	class:inverted
+	class:active={$page.url.pathname == href}
 	aria-label={ariaLabel}
 >
 	<slot />
@@ -26,8 +31,15 @@
 		font-size: 1.1rem;
 	}
 
+	a.first {
+		margin-left: -0.5rem;
+	}
+
 	a.c2a {
 		color: var(--brand);
+	}
+	a.c2a.inverted {
+		color: black;
 	}
 
 	a:hover {
@@ -37,5 +49,14 @@
 	a.active,
 	a:active {
 		color: var(--brand-subtle);
+	}
+
+	a.inverted:hover {
+		color: black;
+		text-decoration: underline;
+	}
+	a.inverted.active,
+	a.inverted:active {
+		color: black;
 	}
 </style>

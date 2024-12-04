@@ -7,6 +7,8 @@ The goal of this guide is to **empower people** – everyday citizens who lack a
 
 Someone with minimal advocacy experience should be able to read through this document and come away feeling empowered and ready to set up a meeting with their Congressional office.
 
+If you are not from the US, check out our global [Lobbying Tips](/lobby-tips) instead.
+
 ## Why is lobbying important?
 
 Meetings with Congress play a vital role in the policymaking process. Members of Congress want to hear from their constituents, in order to help determine which bills to prioritize and which initiatives to champion.

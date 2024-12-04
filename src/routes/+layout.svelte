@@ -11,17 +11,24 @@
 	import '@fontsource/roboto-slab/700.css'
 	import '@fontsource/saira-condensed/700.css'
 
-	import '../app.css'
+	import '../styles/styles.css'
+	import '../styles/print.css'
+	import Hero from '$lib/components/Hero.svelte'
 
 	export let data
+	// Show the hero on the homepage, but nowhere else
+	$: hero = data.url == '/'
 </script>
 
 <h2 style="width: 0; height: 0; margin: 0; padding: 0; visibility: hidden;" data-pagefind-ignore>
 	(Top)
 </h2>
 
-<div class="layout">
-	<Header />
+<div class="layout" class:with-hero={hero}>
+	{#if hero}
+		<Hero />
+	{/if}
+	<Header inverted={hero} moveUp={hero} />
 
 	<main>
 		<PageTransition url={data.url}>
@@ -57,14 +64,35 @@
 		max-width: 50rem;
 		margin: auto;
 	} */
+
 	.layout {
 		height: 100%;
+		position: relative;
 		max-inline-size: var(--page-width);
 		display: grid;
 		grid-template-rows: auto 1fr auto;
 		grid-auto-columns: 100%;
 		margin-inline: auto;
-		padding: 1rem;
+		--padding-big: 3rem;
+		--padding-small: 1rem;
+		padding: 0 var(--padding-big) 0 var(--padding-big);
+	}
+
+	/* Media query not strictily necessary */
+	@media (max-width: 750px) {
+		.layout {
+			--transition-padding-from: 750px;
+			--transition-padding-until: calc(
+				var(--transition-padding-from) - 2 * (var(--padding-big) - var(--padding-small))
+			);
+			--padding-left-right: clamp(
+				var(--padding-small),
+				calc(var(--padding-small) + (100vw - var(--transition-padding-until)) / 2),
+				var(--padding-big)
+			);
+			padding-left: var(--padding-left-right);
+			padding-right: var(--padding-left-right);
+		}
 	}
 
 	main {

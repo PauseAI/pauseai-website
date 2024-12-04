@@ -48,7 +48,7 @@ Cars, planes, drones, we now even have humanoid robots.
 All of these can be hacked.
 
 And it's not just robots and machines that can be hacked.
-A finance worker wast tricked by an AI conference call to get [$25m transferred](https://edition.cnn.com/2024/02/04/asia/deepfake-cfo-scam-hong-kong-intl-hnk/index.html).
+A finance worker was tricked by an AI conference call to get [$25m transferred](https://edition.cnn.com/2024/02/04/asia/deepfake-cfo-scam-hong-kong-intl-hnk/index.html).
 An AI can use other AIs to generate deepfakes.
 And GPT-4 is already [almost twice as good at persuading people than people are](https://arxiv.org/abs/2403.14380).
 

@@ -73,15 +73,15 @@ For a human, doing a takeover is an almost impossible task.
 Not a single person ever successfully took over control over the entire world.
 Some dictators came close, but they never had control over everything.
 
-An AI has certain important advantages over humans that make a takeover attempt much more likely to succeed.
+An supertintelligent AI has certain important advantages over humans (besides being superintelligent) that make a takeover attempt much more likely to succeed.
 
-1. **Intelligence**. A superintelligence is much smarter than a human, so it will be able to come up with better strategies to achieve its goals.
-2. **Speed**. The human brain runs at 1-100hz, whereas computer chips can run at clock speeds in the GHz range.
-3. **Parallelism**. A human can only do one thing at a time, whereas an AI can create new instances of itself and run them in parallel.
-4. **Memory**. A human can only remember a limited amount of information, whereas an AI can store virtually unlimited amounts of information.
-5. **Collaboration**. Humans can work together but are limited in the speed at which they communicate. They also have different, conflicting goals that make collaboration less effective. An AI can collaborate with other instances of itself at the speed of light, and it can have a single goal.
-6. **Self-improvement**. An AI can improve itself, whereas humans cannot.
-7. **Physical limitations**. An AI can run on any computer, whereas humans are limited by their own physical bodies that require specific temperatures, food, water, and oxygen. Humans need to sleep and are vulnerable to diseases. An AI can use any robotic body to interact with the physical world.
+1. **Speed**. The human brain runs at 1-100hz, whereas computer chips can run at clock speeds in the GHz range. A single AI model can read entire books in seconds.
+1. **Energy consumption**. Humans are limited by the amount of food they can eat and the amount of energy they can store in their bodies. AI can jack into the power grid and use as much energy as it needs.
+1. **Parallelism**. A human can only do one thing at a time, whereas an AI can create new instances of itself and run them in parallel.
+1. **Memory**. A human can only remember a limited amount of information, whereas an AI can store virtually unlimited amounts of information.
+1. **Collaboration**. Humans can work together but are limited in the speed at which they communicate. They also have different, conflicting goals that make collaboration less effective. An AI can collaborate with other instances of itself at the speed of light, and it can have a single goal, making direct copies of its internal goals and state to other instances.
+1. **Self-improvement**. An AI is just data and code. A sufficiently powerful AI could improve itself by writing better training algorithms, coming up with novel architectures, innovating agent runtimes or simply by scaling the amount of compute used.
+1. **Physical limitations**. An AI can run on any computer, whereas humans are limited by their own physical bodies that require specific temperatures, food, water, and oxygen. Humans need to sleep and are vulnerable to diseases. An AI can use any robotic body to interact with the physical world.
 
 These various advantages will make it very unlikely that humans will be able to stop a takeover attempt.
 
@@ -102,12 +102,13 @@ For example, if the ASI is not connected to the internet, it might manipulate hu
 It's worth noting that even this obvious safeguard is not being used as of now, as tools like ChatGPT are already connected to the internet and thousands of APIs.
 
 One other solution is to use ASI to _prevent_ a takeover.
-An aligned ASI would be able to come up with strategies that
+An aligned ASI would be able to come up with strategies that prevent other ASIs from taking over.
+This is sometimes referred to as a ["pivotal act"](https://arbital.com/p/pivotal/).
 
 ## A takeover is probably bad for most humans
 
 The ASI that happens to take over could do so for many reasons.
-For most random goals that it could have, humans are not part of it.
+For most random goals that it could have to do so, humans are not part of it.
 If we end up with an ASI that is indifferent to humans, we are competing for the same resources.
 
 It seems unlikely that the ASI wants to kill humanity for the sake of killing humanity - it is far more likely that it wants to use the resources that we use for some other objective. Additionally, humanity might pose a threat to the ASI's objective, as there is a risk that we will try to stop it from achieving its goal (e.g. by turning it off).

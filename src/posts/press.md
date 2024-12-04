@@ -33,10 +33,13 @@ If you want to create PauseAI-related material yourself, you can use our brand c
 - [Wired](https://www.wired.com/story/protesters-pause-ai-split-stop/?redirectURL=https://www.wired.com/story/protesters-pause-ai-split-stop/) About the May 2024 protest
 - [DailyAI](https://dailyai.com/2024/05/pauseai-protestors-demand-a-halt-to-training-of-ai-models/)
 - [ReadWrite](https://readwrite.com/pause-ai-protestors-are-fighting-to-put-ai-development-on-hold/)
+- [TodayVille](https://www.todayville.com/poll-despite-global-pressure-americans-want-the-tech-industry-to-slow-down-on-ai/)
+- [Business Insider](https://www.businessinsider.com/openai-cofounder-agi-coming-fast-needs-limits-john-schulman-2024-5?international=true&r=US&IR=T)
 
 ## Podcasts & Talks
 
 - [**Youtube Playlist**](https://www.youtube.com/playlist?list=PLI46NoubGtIJvSAWkC7VOmfWrLD2u1ZPA). The **more than 10 podcasts** and talks that multiple people from PauseAI participated in. Subsequent items on this list are recordings that weren't uploaded to YouTube.
+- [Dr. Phil Primetime](https://www.meritplus.com/c/s/VQ2aB6Sp?episodeId=LknWbG7N&play=1): Liron Shapira went as a guest to a discussion about AI and education.
 - [Creatives with AI podcast](https://podcasters.spotify.com/pod/show/creativeswithai/episodes/15-AI-The-Race-Against-Time---Balancing-Progress-and-Potential-Catastrophe-with-Joep-Meinderstma-e28ln8a/a-aa9vpjp): Interview with PauseAI founder Joep Meindertsma.
 - [Art of AI podcast](https://spotify.link/AggzYfcj8Db): Interview with Joep Meindertsma about protesting, psychology of x-risk, AI policy.
 
@@ -66,6 +69,9 @@ If you want to create PauseAI-related material yourself, you can use our brand c
 
 - [The Decoder](https://the-decoder.de/keine-super-ki-demonstranten-versammeln-sich-vor-dem-openai-buero/)
 - [DW Documentary](https://youtu.be/KspkgAZUkoQ?si=h2Jm0Yvm9RT8t1ZT&t=1116)
+- [HasePost](https://www.hasepost.de/eine-pause-fuer-ki-demonstration-fuer-ki-regulierung-in-osnabrueck-536971/)
+- [Kitogo](https://kitogo.de/pauseai-demonstriert-in-osnabrueck-fuer-strengere-ki-regulierung/)
+- [NOZ](https://www.noz.de/lokales/osnabrueck/artikel/pauseai-gruppe-warnt-in-osnabrueck-vor-kuenstlicher-intelligenz-48025131)
 
 ### US
 

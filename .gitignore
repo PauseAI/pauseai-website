@@ -11,3 +11,9 @@ vite.config.ts.timestamp-*
 .netlify
 /static/pagefind
 .env
+
+# paraglide branch
+/messages/*
+!/messages/en.json
+/project.inlang/cache
+/src/temp

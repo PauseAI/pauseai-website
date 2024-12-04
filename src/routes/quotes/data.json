@@ -5,7 +5,7 @@
 		"text": "[About frontier AI:] Substantial risks may arise from potential intentional misuse or unintended issues of control relating to alignment with human intent. These issues are in part because those capabilities are not fully understood [...] There is potential for **serious, even catastrophic, harm, either deliberate or unintentional**, stemming from the most significant capabilities of these AI models.",
 		"author": "The Bletchley Declaration,",
 		"author_description": "signed by 28 countries, including all AI leaders, and the EU.",
-		"padding": "2.5rem"
+		"padding": "2rem"
 	},
 	{
 		"background": "cais_statement",
@@ -16,6 +16,15 @@
 		"padding": "3rem"
 	},
 	{
+		"background": "fli_letter",
+		"color": "white",
+		"text": "**We call on all AI labs to immediately pause for at least 6 months the training of AI systems more powerful than GPT-4.**",
+		"author": "Pause Giant AI Experiments letter",
+		"author_description": "signed by 30,000+ people, including academic AI researchers and industry CEOs. Note that this is different that our ask, which is an indefinite pause.",
+		"padding": "",
+		"notice": "“Steve Wozniak speaking at an event in Paradise Valley, Arizona.” by Gage Skidmore. Modified and licensed under CC BY-SA 3.0."
+	},
+	{
 		"background": "hawking",
 		"color": "",
 		"text": "**The development of full artificial intelligence could spell the end of the human race** [...] It would take off on its own, and re-design itself at an ever increasing rate.",
@@ -24,19 +33,11 @@
 		"padding": ""
 	},
 	{
-		"background": "sunak",
-		"color": "black",
-		"text": "Get this wrong, and AI could make it easier to build chemical or biological weapons. Terrorist groups could use AI to spread fear and destruction on an even greater scale. Criminals could exploit AI for cyber-attacks, disinformation, fraud, or even child sexual abuse. And in the most unlikely but extreme cases, there is even the risk that **humanity could lose control of AI completely** through the kind of AI sometimes referred to as ‘super intelligence’.",
-		"author": "Rishi Sunak",
-		"author_description": "United Kingdom's Prime Minister",
-		"padding": "1.5rem"
-	},
-	{
 		"background": "trump",
 		"color": "white",
 		"text": "[...] the other thing that I think is **maybe the most dangerous thing out there** of anything, because there’s no real solution — **the AI**, as they call it.",
 		"author": "Donald Trump",
-		"author_description": "45th President of the United States"
+		"author_description": "President of the United States"
 	},
 	{
 		"background": "biden",
@@ -87,11 +88,19 @@
 		"notice": "“pope-francis-1a” by ThiênLong. Modified and licensed under CC BY-SA 2.0."
 	},
 	{
+		"background": "sunak",
+		"color": "black",
+		"text": "Get this wrong, and AI could make it easier to build chemical or biological weapons. Terrorist groups could use AI to spread fear and destruction on an even greater scale. Criminals could exploit AI for cyber-attacks, disinformation, fraud, or even child sexual abuse. And in the most unlikely but extreme cases, there is even the risk that **humanity could lose control of AI completely** through the kind of AI sometimes referred to as ‘super intelligence’.",
+		"author": "Rishi Sunak",
+		"author_description": "United Kingdom's former Prime Minister",
+		"padding": "1.5rem"
+	},
+	{
 		"background": "harris",
 		"color": "white",
 		"text": "[...] just as AI has the potential to do profound good, it also has the potential to cause profound harm. From AI-enabled cyberattacks at a scale beyond anything we have seen before to AI-formulated bio-weapons that could endanger the lives of millions, these threats are often referred to as the “existential threats of AI” because, of course, they **could endanger the very existence of humanity. These threats, without question, are profound, and they demand global action.**",
 		"author": "Kamala Harris",
-		"author_description": "Vice President of the United States"
+		"author_description": "Former Vice President of the United States"
 	},
 	{
 		"background": "jun",
@@ -99,7 +108,7 @@
 		"text": "The potential impact of AI might exceed human cognitive boundaries. To ensure that this technology always benefits humanity, we must regulate the development of AI and prevent this technology from turning into a runaway wild horse [...] We need to strengthen the detection and evaluation of the entire lifecycle of AI, **ensuring that mankind has the ability to press the pause button at critical moments.**",
 		"author": "Zhang Jun",
 		"author_description": "China's Ambassador of the United Nations",
-		"padding": "1.5",
+		"padding": "1.5rem",
 		"notice": "“Zhang Jun (2022-06-08)” by 中国新闻社. Modified and licensed under CC BY 3.0."
 	},
 	{
@@ -140,7 +149,7 @@
 		"text": "**We must take the risks of AI as seriously as other major global challenges**, like climate change. It took the international community too long to coordinate an effective global response to this, and we’re living with the consequences of that now. We can’t afford the same delay with AI [...] then maybe there’s some kind of equivalent one day of the IAEA, which actually audits these things.",
 		"author": "Demis Hassabis",
 		"author_description": "Co-Founder and CEO of DeepMind",
-		"padding": "2",
+		"padding": "2rem",
 		"notice": "“File:PhotonQ-Demis Hassabis on Artificial Playful Intelligence (15366514658) (2)” by PhOtOnQuAnTiQuE from Earth France. Modified and licensed under CC BY-SA 2.0."
 	},
 	{
@@ -149,7 +158,8 @@
 		"text": "When I think of why am I scared [...] I think the thing that's really hard to argue with is like, there will be powerful models; they will be agentic; we're getting towards them. If such a model wanted to wreak havoc and destroy humanity or whatever, I think **we have basically no ability to stop it.**",
 		"author": "Dario Amodei",
 		"author_description": "Co-Founder and CEO of Anthropic, Former Head of AI Safety at OpenAI",
-		"padding": "2",
+		"padding": "2rem",
+		"source": "https://www.dwarkeshpatel.com/p/dario-amodei",
 		"notice": "“TechCrunch Disrupt 2023 - Day 2” by TechCrunch. Modified and licensed under CC BY 2.0."
 	},
 	{
@@ -208,7 +218,7 @@
 		"text": "The research question is: how do you prevent them from ever wanting to take control? And nobody knows the answer [...] The alarm bell I’m ringing has to do with the existential threat of them taking control [...] If you take the existential risk seriously, as I now do, **it might be quite sensible to just stop developing these things any further** [...] it’s as if aliens had landed and people haven’t realized because they speak very good English",
 		"author": "Geoffrey Hinton",
 		"author_description": "1st/3rd most cited scientist ever, Godfather of modern AI, Turing Award Recipient, resigned from Google due to ethical concerns",
-		"padding": "4",
+		"padding": "4rem",
 		"notice": "“RCZ_1437” by collision.conf. Modified and licensed under CC BY 2.0."
 	},
 	{
@@ -276,7 +286,7 @@
 		"color": "white",
 		"text": "Everyone should be very unhappy if you built a bunch of AIS who are like, 'I really hate these humans but they will murder me if I don't do what they want'. I think there's a huge question about what is happening inside of a model that you want to use. **This is the kind of thing that is both horrifying from a safety perspective and also a moral perspective.**",
 		"author": "Paul Christiano",
-		"author_description": "Founder of the Alignment Research Center and Former Head of the Alignment Team at OpenAI",
+		"author_description": "Head of AI Safety at US AI Safety Institute, Founder of the Alignment Research Center and Former Head of the Alignment Team at OpenAI",
 		"padding": "2.8rem"
 	},
 	{

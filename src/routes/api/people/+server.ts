@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { options } from '$lib/api.js'
 import type { Person } from '$lib/types.js'
+import { defaultTitle } from '$lib/utils'
 import { error, json } from '@sveltejs/kit'
 
 function recordToPerson(record: any): Person {
@@ -8,7 +9,7 @@ function recordToPerson(record: any): Person {
 		id: record.id || 'noId',
 		name: record.fields.Name,
 		bio: record.fields.bio,
-		title: record.fields.title,
+		title: record.fields.title || defaultTitle,
 		image: record.fields.image && record.fields.image[0].thumbnails.large.url,
 		privacy: record.fields.privacy,
 		org: record.fields.organisation,
@@ -42,8 +43,11 @@ async function fetchAllPages(fetch: any, url: any) {
 	return allRecords
 }
 
-export async function GET({ fetch }) {
+export async function GET({ fetch, setHeaders }) {
 	const url = `https://api.airtable.com/v0/appWPTGqZmUcs3NWu/tblZhQc49PkCz3yHd`
+	setHeaders({
+		'cache-control': 'public, max-age=3600' // 1 hour in seconds
+	})
 
 	try {
 		const records = await fetchAllPages(fetch, url)

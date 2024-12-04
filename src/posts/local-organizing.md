@@ -19,7 +19,7 @@ Good luck. The future is yours.
 ## Set up the basics
 
 1. **Set up a chat group**. Use a tool that's popular in your area. WhatsApp, Telegram, and Signal are all good options. Make sure there is an invite link that you can share to easily invite others.
-2. **Add your group** to the `local-communities` channel on our [Discord](https://discord.gg/2XXWXvErfA). Add the invite link from that chat group in the thread on discord. The moderators will add your local group to the [communities page](/communities) on this website, and use your link.
+2. **Add your group** to the `local-communities` channel on our [Discord](https://discord.gg/2XXWXvErfA). Add the invite link from that chat group in the thread on Discord. The moderators will add your local group to the [communities page](/communities) on this website, and use your link.
 3. **Find a partner**. Find someone to help you. It's much easier and more fun to organize with a partner.
 4. **Get training**. There are [over 70 organizations](https://activisthandbook.org/trainings) around the globe that can train you or your group!
 5. **Reach out to your [National Group](/national-groups)** if it exists!
@@ -102,10 +102,12 @@ Once you have a clearer sense of your plan, it’s time to find volunteers for y
 Spreading the word about your group online can help you reach audiences more easily.
 You can create pages for your group on platforms like Facebook, Instagram, TikTok and EventBrite.
 A general best practice is to include information about your group, its goals and initiatives, and how community members can get involved.
-Be sure to include posts on upcoming events and share these with your network!
+Be sure to include posts on upcoming events and share these with your network.
 
 Here are links to [PauseAI’s Facebook page](https://www.facebook.com/PauseAI) and [PauseAI NYC’s Eventbrite](https://www.eventbrite.com/e/pauseai-global-protest-nyc-tickets-886528309037) page for inspiration.
 You can use similar structures for your local group.
+
+You should also add events to our [Luma](https://lu.ma/PauseAI), so people can be notified and find it on our [Events page](/events).
 
 ### One-on-one outreach
 
@@ -320,7 +322,9 @@ Here is a sample table of roles for inspiration:
 
 So, you have a well-organized group of volunteers, eager to get involved and with a clear sense of their responsibilities. Now what?
 
-There are many different ways to achieve your goals as a local group. The following list is not meant to be exhaustive, but rather to provide inspiration as you begin planning your campaign.
+There are many different ways to achieve your goals as a local group. 
+Check out our [events page](/events) for ideas of the next events that are planned. Whenever you decide to organize one, don't forget to add it there!
+In addition to them, the following list is not meant to be exhaustive, but rather to provide inspiration as you begin planning your campaign. 
 
 ### Social events & having drinks
 

@@ -9,6 +9,7 @@
 	import Substack from './icons/substack.svelte'
 	import Reddit from './icons/reddit.svelte'
 	import Telegram from './icons/telegram.svelte'
+	import Bluesky from './icons/bluesky.svelte'
 	import Whatsapp from './icons/whatsapp.svelte'
 </script>
 
@@ -36,6 +37,7 @@
 	<a href="https://chat.whatsapp.com/JgcAbjqRr8X3tvrXdeQvfj" target="_blank" title="Whatsapp"
 		><Whatsapp /></a
 	>
+	<a href="https://bsky.app/profile/pauseai.bsky.social"><Bluesky /></a>
 </div>
 
 <style>
