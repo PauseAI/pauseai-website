@@ -5,7 +5,7 @@
 		"text": "[About frontier AI:] Substantial risks may arise from potential intentional misuse or unintended issues of control relating to alignment with human intent. These issues are in part because those capabilities are not fully understood [...] There is potential for **serious, even catastrophic, harm, either deliberate or unintentional**, stemming from the most significant capabilities of these AI models.",
 		"author": "The Bletchley Declaration,",
 		"author_description": "signed by 28 countries, including all AI leaders, and the EU.",
-		"padding": "2.5rem"
+		"padding": ""
 	},
 	{
 		"background": "cais_statement",
@@ -286,7 +286,7 @@
 		"color": "white",
 		"text": "Everyone should be very unhappy if you built a bunch of AIS who are like, 'I really hate these humans but they will murder me if I don't do what they want'. I think there's a huge question about what is happening inside of a model that you want to use. **This is the kind of thing that is both horrifying from a safety perspective and also a moral perspective.**",
 		"author": "Paul Christiano",
-		"author_description": "Founder of the Alignment Research Center and Former Head of the Alignment Team at OpenAI",
+		"author_description": "Head of AI Safety at US AI Safety Institute, Founder of the Alignment Research Center and Former Head of the Alignment Team at OpenAI",
 		"padding": "2.8rem"
 	},
 	{
