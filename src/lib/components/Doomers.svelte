@@ -150,6 +150,13 @@
 				'https://www.alignmentforum.org/posts/rCJQAkPTEypGjSJ8X/how-might-we-align-transformative-ai-if-it-s-developed-very#So__would_civilization_survive_'
 		},
 		{
+			name: 'Emad Mostaque',
+			title: 'Founder of Stability AI',
+			probability: '50%',
+			number: 0.5,
+			source: 'https://x.com/EMostaque/status/1864266899170767105'
+		},
+		{
 			name: 'Jan Leike',
 			title: 'Former alignment lead at OpenAI',
 			date: '2023-08-01',
