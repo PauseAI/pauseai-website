@@ -3,11 +3,6 @@ title: Comms Director Vacancy at PauseAI Global
 description: PauseAI is looking for an Social Media Director to help manage the organization and support local groups.
 ---
 
-- Digital Communications Manager
-- Social Media Director (might be too narrow, )
-- Comms Director (higher salary expectations, more strategic)
-- Communication Director (higher salary expectations, more strategic)
-
 Do you want to make an impact and work on the most important issue on Earth?
 
 ## About PauseAI
