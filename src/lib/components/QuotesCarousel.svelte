@@ -7,11 +7,18 @@
 	import Bengio from '../../assets/quote-profile/bengio.jpg?enhanced'
 	import ArrowLeft from 'lucide-svelte/icons/arrow-left'
 	import ArrowRight from 'lucide-svelte/icons/arrow-right'
-	import Glide, { Controls, Images, Keyboard, Swipe } from '@glidejs/glide/dist/glide.modular.esm'
+	import Glide, {
+		Autoplay,
+		Controls,
+		Images,
+		Keyboard,
+		Swipe
+	} from '@glidejs/glide/dist/glide.modular.esm'
 	import '@glidejs/glide/dist/css/glide.core.css'
 	import { onMount } from 'svelte'
 
 	const MOBILE_NAVIGATION_DISTANCE_THRESHOLD = 10
+	const AUTOPLAY_INTERVAL = 10_000
 
 	let glide: Glide
 	let currentSlide: number | null = null
@@ -52,7 +59,9 @@
 	const totalSlides = quotes.length
 
 	onMount(() => {
-		glide = new Glide('.glide').mount({ Controls, Images, Keyboard, Swipe })
+		glide = new Glide('.glide', {
+			autoplay: AUTOPLAY_INTERVAL
+		}).mount({ Controls, Images, Keyboard, Swipe, Autoplay })
 		currentSlide = glide.index
 		glide.on('move', () => {
 			currentSlide = glide.index
