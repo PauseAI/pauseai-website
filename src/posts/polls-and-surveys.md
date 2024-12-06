@@ -17,7 +17,7 @@ description: How much do regular people and experts worry about AI risks and gov
 - **[US citizens, RethinkPriorities](https://rethinkpriorities.org/publications/us-public-perception-of-cais-statement-and-the-risk-of-extinction)**: agrees with (59%) and supports (58%) the x-risk statement. Disagreement (26%) and opposition (22%) were relatively low, and sizable proportions of people remained neutral (12% and 18% for agreement and support formats, respectively).
 - **[Australian citizens, Ready Research](https://theconversation.com/80-of-australians-think-ai-risk-is-a-global-priority-the-government-needs-to-step-up-225175)**: 80% think AI risk is a global priority, 64% want the government to focus on catastrophic outcomes (compared to only 25% on job loss, or 5% on bias).
 
-### Public opinion on regulations & governance
+## Public opinion on regulations & governance
 
 - [**US citizens, RethinkPriorities**](https://forum.effectivealtruism.org/posts/ConFiY9cRmg37fs2p/us-public-opinion-of-ai-policy-and-risk): 50% support a pause, 25% oppose a pause.
 - [**US citizens, YouGov**](https://www.vox.com/future-perfect/2023/8/18/23836362/ai-slow-down-poll-regulation): 72% want AI to slow down, 8% want to speed up. 83% of voters believe AI could accidentally cause a catastrophic event
