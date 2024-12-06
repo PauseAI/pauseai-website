@@ -4,6 +4,7 @@ description: As AI surpasses human capabilities, the likelihood of an AI takeove
 ---
 
 One of the concerns of AI scientists is that a superintelligence could take over control of our planet.
+You can see it in [surveys](/polls-and-surveys) and individual [predictions](/pdoom) & [statements](/quotes).
 This does not necessarily mean that everyone dies, but it does mean that (almost) all humans will lose control over our future.
 
 We discuss the basics of x-risk mostly in [an other article](/xrisk).
