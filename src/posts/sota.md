@@ -16,12 +16,13 @@ _Last update: 2024-09-16_
 - **Reading speed**: A model like Gemini 1.5 Pro can read an entire book in 30 seconds. It can learn an entirely new language and translate texts in half a minute.
 - **Writing speed**: AI models can write at speeds far surpassing any human, writing entire computer programmes in seconds.
 - **Amount of knowledge**: Modern LLMs know far more than any human, its knowledge spanning virtually every domain. There is no human whose knowledge breadth comes close.
-  
+
 ## Better than most humans
 
 - **Writing**: In December 2023, an AI-written novel won an award at a [science fiction national competition](https://www.scmp.com/news/china/science/article/3245725/chinese-professor-used-ai-write-science-fiction-novel-then-it-won-national-award?campaign=3245725&module=perpetual_scroll_0&pgtype=article). The professor who used the AI crafted the narrative from a draft of 43,000 characters generated in just three hours with 66 prompts. The best language models have superhuman vocabulary and can write in many different styles.
 - **Translating**: And they can respond and translate to all major languages fluently.
 - **Creativity**: Better than 99% of humans on the [Torrance Tests of Creative Thinking](https://neurosciencenews.com/ai-creativity-23585/) where relevant and useful ideas need to be generated. However, the tests were relatively small and for larger projects (e.g. setting up a new business) AI is not autonomous enough yet.
+- **Reasoning**: o1 [correctly answers 78%](https://openai.com/index/learning-to-reason-with-llms/) of GPQA diamond questions, outperforming human domain experts (PhDs) who only get 69.7%.
 - **Persuasion**: GPT-4 with access to personal information was able to increase participants' agreement with their opponents' arguments by a remarkable [81.7 percent](https://arxiv.org/abs/2403.14380) compared to debates between humans - almost twice as persuasive as the human debaters.
 - **IQ tests**: With verbal IQ tests, LLMs have been outperforming 95 to 99% of humans for a while (score between [125](https://medium.com/@soltrinox/the-i-q-of-gpt4-is-124-approx-2a29b7e5821e) and [155](https://www.scientificamerican.com/article/i-gave-chatgpt-an-iq-test-heres-what-i-discovered/)). With non-verbal (pattern matching) IQ tests, the 2024 o1-preview model scored [120 on the mensa test](https://www.maximumtruth.org/p/massive-breakthrough-in-ai-intelligence), beating 91% of humans.
 - **Specialized knowledge**: GPT-4 Scores 75% in the [Medical Knowledge Self-Assessment Program](https://openai.com/research/gpt-4), humans on average between [65 and 75%](https://pubmed.ncbi.nlm.nih.gov/420438/). It scores better than [68](https://papers.ssrn.com/sol3/papers.cfm?abstract_id=4441311) to [90%](https://law.stanford.edu/2023/04/19/gpt-4-passes-the-bar-exam-what-that-means-for-artificial-intelligence-tools-in-the-legal-industry/) of law students on the bar exam.

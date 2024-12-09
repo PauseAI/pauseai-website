@@ -73,7 +73,7 @@ Check out our [theory of change](/theory-of-change) for a detailed overview of o
 - Protesting shows the world that we care about this issue. By protesting, we show that we are willing to spend our time and energy to get people to listen.
 - Protests can and often will [positively influence](https://www.socialchangelab.org/_files/ugd/503ba4_052959e2ee8d4924934b7efe3916981e.pdf) public opinion, voting behavior, corporate behavior and policy.
 - By far [most people are supportive](https://today.yougov.com/politics/articles/31718-do-protesters-want-help-or-hurt-america) of peaceful/non-violent protests
-- There is [no "backfire" effect](https://journals.sagepub.com/doi/full/10.1177/2378023120925949) [unless the protest is violent](https://news.stanford.edu/2018/10/12/how-violent-protest-can-backfire/). Our protests are peaceful and non-violent.
+- There is [no evidence for a "backfire" effect](https://journals.sagepub.com/doi/full/10.1177/2378023120925949) [unless the protest is violent](https://news.stanford.edu/2018/10/12/how-violent-protest-can-backfire/). Our protests are peaceful and non-violent.
 - It's a social bonding experience. You meet other people who share your concerns and willingness to take action.
 - Check out [this amazing article](https://forum.effectivealtruism.org/posts/4ez3nvEmozwPwARr9/a-case-for-the-effectiveness-of-protest) for more insights on why protesting works
 
