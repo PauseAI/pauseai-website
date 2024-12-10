@@ -17,15 +17,15 @@ AI won't get safer unless we act decisively to push for safety. Choose an activi
 
 ### 2. Inform people around you
 
-- **Share** about AI risk on your social media. Tag @pauseai (Twitter), @pause_ai (Instagram) in your posts. If you want to use our social media posts, send us a message on social media or [the Discord](https://discord.gg/2XXWXvErfA).
-- **Talk** to people in your life about AI safety. Answer their questions, and encourage them to act too. Use our [counterarguments](/counterarguments) to help you be more persuasive.
+- **Share about AI risk** on your social media. Tag @pauseai (Twitter), @pause_ai (Instagram) in your posts. If you want to use our social media posts, send us a message on social media or [the Discord](https://discord.gg/2XXWXvErfA).
+- **Talk to people in your life** about AI safety. Answer their questions, and encourage them to act too. Use our [counterarguments](/counterarguments) to help you be more persuasive.
 - **Meet with local groups** - many cities have (free / low-cost) events about AI & technology policy. Attending these events is a great way to network and share your concerns. If you want AI safety marketing materials, reach out to us on [Discord](https://discord.gg/2XXWXvErfA) so we can send you some.
 
 ### 3. Join / support PauseAI
 
-- **Join the **[**Discord**](https://discord.gg/2XXWXvErfA), where most of the collaboration happens.
+- **Join the **[**Discord**](https://discord.gg/2XXWXvErfA)**, where most of the collaboration happens.**
 - **Find or create a **[**local PauseAI community**](/communities).
-- **Participate in a protest**, either on your own or with your local group. Find these on [event](/events).
+- **Participate in a protest**, either on your own or with your local group. Find these on [event](/events). If no protest is near you, consider [starting one](/organizing-a-protest).
 - **Look over our **[**vacancies list**](/vacancies) to see if any of your skills match our organizational needs. We're often looking for people with experience in social media, communications, organizing, outreach, and software. Some positions are compensated.
 - **Talk with us about your skills** so we can find projects in your interest areas: fill out [this form](https://airtable.com/embed/appWPTGqZmUcs3NWu/pagoxRuCai4OYJEHt/form).
 - [**Donate**](/donate) to PauseAI or buy some merchandise in our [store](https://pauseai-shop.fourthwall.com/). The revenue goes directly toward PauseAI's initiatives to reduce AI risks.
