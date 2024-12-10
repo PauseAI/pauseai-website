@@ -3,7 +3,7 @@ title: Take action
 description: Ways to help out with pausing AGI development.
 ---
 
-AI will won't get safer unless we act decisively to push for safety. Choose an activity below from your interest / skill areas and help save the future!
+AI won't get safer unless we act decisively to push for safety. Choose an activity below from your interest / skill areas and help save the future!
 
 ## For everyone
 
