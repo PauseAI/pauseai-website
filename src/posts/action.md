@@ -22,7 +22,7 @@ AI will won't get safer unless we act decisively to push for safety. Choose an a
 - **Join** the [Discord](https://discord.gg/2XXWXvErfA), where most of the collaboration happens.
 - **Find** or create a [local PauseAI community](/communities).
 - **Participate** in a protest, either on your own or with your local group. Find these on [event](/events).
-- **Discuss** how you can best contribute: fill out [this form](https://airtable.com/embed/appWPTGqZmUcs3NWu/pagoxRuCai4OYJEHt/form).
+- **Discuss** how you can best contribute: fill out [this form](https://airtable.com/appWPTGqZmUcs3NWu/pag7ztLh27Omj5s2n/form).
 - [**Donate**](/donate) to PauseAI or buy some merchandise in our [store](https://pauseai-shop.fourthwall.com/). The revenue goes directly toward PauseAI's initiatives to reduce AI risks.
 - **Follow** our [social media channels](https://linktr.ee/pauseai) and stay updated. Your local PauseAI region may also have social media pages.
 
