@@ -11,19 +11,19 @@ Choose an activity below depending on your interests or skills.
 
 - **Write to your politicians**: We've found emails are surprisingly effective and take relatively little effort. If you don’t feel confident about what to write, [start with our email builder](/email-builder). When you get a meeting, you should check out our [lobby tips](/lobby-tips).
 - **Call your politicians**: Try calling legislators' offices while having a set of talking points in view so you stay on topic.
-- **Protest**: join [one of the protests](https://pauseai.info/protests) or [organize one yourself](https://pauseai.info/organizing-a-protest).
+- **Protest**: Join [one of the protests](https://pauseai.info/protests) or [organize one yourself](https://pauseai.info/organizing-a-protest).
 - **Sign petitions**: [International AI Treaty](https://aitreaty.org), [Ban Superintelligence](https://chng.it/Djjfj2Gmpk), [Demand responsible AI](https://www.change.org/p/artificial-intelligence-time-is-running-out-for-responsible-ai-development-91f0a02c-130a-46e1-9e55-70d6b274f4df), or one of the **national petitions**: [UK](https://petition.parliament.uk/petitions/639956), [AUS](https://www.aph.gov.au/e-petitions/petition/EN5163), [NL](https://aipetitie.nl).
 
 ### Inform people around you
 
 - **Share about AI risk** on your social media. One of [these videos](https://www.youtube.com/watch?v=xBqU1QxCao8&list=PLI46NoubGtIJa0JVCBR-9CayxCOmU0EJt) or this website can be a good start. And don't forget to tag us in your posts.
 - **Talk to people in your life** about AI safety. Answer their questions, and encourage them to act too. Use our [counterarguments](/counterarguments) to help you be more persuasive.
-- **[Tabling](/tabling)** and **[flyering](/flyering)** are great ways to reach many people in a short amount of time.
-- **Attend local events**: many cities have (free / low-cost) events about AI & technology policy. Attending these events is a great way to network and share your concerns. If you want AI safety marketing materials, reach out to us on [Discord](https://discord.gg/2XXWXvErfA) so we can send you some.
+- **[Tabling](/tabling) and [flyering](/flyering)** are great ways to reach many people in a short amount of time.
+- **Attend local events**: Many cities have (free / low-cost) events about AI & technology policy. Attending these events is a great way to network and share your concerns. If you want AI safety marketing materials, reach out to us on [Discord](https://discord.gg/2XXWXvErfA) so we can send you some.
 
 ### Support PauseAI
 
-- Join or create a **[local PauseAI community](/communities)**.
+- **Join or create a [local PauseAI community](/communities)**.
 - **Join the [Discord](https://discord.gg/2XXWXvErfA)**, where most of the collaboration happens.
 - **Protest or participate in [events](/events)**. If no protest is near you, consider [starting one](/organizing-a-protest).
 - **Look over our [vacancies](/vacancies)** to see if any of your skills match our organizational needs. We're often looking for people with experience in social media, communications, organizing, outreach, and software. Some positions are compensated.
@@ -51,8 +51,8 @@ Choose an activity below depending on your interests or skills.
 ### If you have experience with (international) law
 
 - **Help draft policy**. [Draft examples](https://www.campaignforaisafety.org/celebrating-the-winners-law-student-moratorium-treaty-competition/). ([some](https://futureoflife.org/wp-content/uploads/2023/04/FLI_Policymaking_In_The_Pause.pdf) [frameworks](https://www.openphilanthropy.org/research/12-tentative-ideas-for-us-ai-policy/))
-- **Make submissions to government requests for comment** on AI policy ([example](https://ntia.gov/issues/artificial-intelligence/request-for-comments)).
+- **Make submissions** to government requests for comment on AI policy ([example](https://ntia.gov/issues/artificial-intelligence/request-for-comments)).
 
 ### If you work as a journalist or have a social media following
 
-- **Create content** about AI dangers or PauseAI. For more information, reach out to us on any of our [communication channels](/faq#do-you-have-social-media).
+- **Create content** about AI dangers or PauseAI. For more information, reach out to us through any of our [communication channels](/faq#do-you-have-social-media).
