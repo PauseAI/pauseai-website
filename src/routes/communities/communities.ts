@@ -373,6 +373,30 @@ const PauseAICommunities: Community[] = [
 		lat: 3.848,
 		lon: 11.5027,
 		link: 'https://chat.whatsapp.com/EmSo5C486JzDdFOiojByje'
+	},
+	{
+		name: 'Mo i Rana',
+		lat: 66.3149,
+		lon: 14.1657,
+		link: globalDiscord
+	},
+	{
+		name: 'Trondheim',
+		lat: 63.4305,
+		lon: 10.3951,
+		link: globalDiscord
+	},
+	{
+		name: 'Honefoss',
+		lat: 60.1002,
+		lon: 10.0202,
+		link: globalDiscord
+	},
+	{
+		name: 'Kristiansand',
+		lat: 58.1556,
+		lon: 8.0167,
+		link: globalDiscord
 	}
 ]
 
