@@ -2,6 +2,7 @@
 	"type": "module",
 	"name": "pause-ai",
 	"private": true,
+	"packageManager": "pnpm@9.14.4",
 	"scripts": {
 		"dev": "vite dev --host 0.0.0.0",
 		"translate": "tsx scripts/translation/translate",
@@ -59,7 +60,7 @@
 	"dependencies": {
 		"@fontsource/roboto-slab": "^5.1.0",
 		"@fontsource/saira-condensed": "^5.1.0",
-		"@glidejs/glide": "^3.6.2",
+		"@glidejs/glide": "~3.6.2",
 		"@inlang/paraglide-sveltekit": "0.12.1",
 		"@pagefind/default-ui": "^1.1.1",
 		"@prgm/sveltekit-progress-bar": "^2.0.0",

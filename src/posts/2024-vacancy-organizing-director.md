@@ -1,7 +1,9 @@
 ---
-title: Organizing Director Vacancy at PauseAI Global
+title: Organizing Director Vacancy at PauseAI Global (Position Filled)
 description: PauseAI is looking for an Organizing Director to help manage the organization and support local groups.
 ---
+
+_Update 2024-12-04: This position has been filled._
 
 Do you want to make an impact and work on the most important issue on Earth?
 

@@ -119,7 +119,9 @@
 
 	.quote {
 		--zoom: 1;
-		display: grid;
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
 		background-size: cover;
 		aspect-ratio: 2 / 1;
 		box-sizing: border-box;
@@ -160,6 +162,7 @@
 		display: flex;
 		flex-direction: column;
 		align-items: flex-end;
+		text-align: right;
 		font-family: var(--font-heading);
 	}
 
@@ -177,8 +180,6 @@
 	.quote-logo {
 		display: flex;
 		grid-row: 2;
-		justify-self: flex-start;
-		align-self: flex-end;
 		width: calc(var(--zoom) * 100px);
 		height: fit-content;
 		margin: calc(var(--zoom) * 1rem);

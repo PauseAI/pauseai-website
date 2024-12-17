@@ -5,19 +5,39 @@
 	import Turing from '../../assets/quote-profile/turing.jpg?enhanced'
 	import Russell from '../../assets/quote-profile/russell.jpg?enhanced'
 	import Bengio from '../../assets/quote-profile/bengio.jpg?enhanced'
+	import CAIS from '../../assets/quote-profile/cais_statement.jpg?enhanced'
 	import ArrowLeft from 'lucide-svelte/icons/arrow-left'
 	import ArrowRight from 'lucide-svelte/icons/arrow-right'
-	import Glide, { Controls, Images, Keyboard, Swipe } from '@glidejs/glide/dist/glide.modular.esm'
+	import Glide, {
+		Autoplay,
+		Controls,
+		Images,
+		Keyboard,
+		Swipe
+	} from '@glidejs/glide/dist/glide.modular.esm'
 	import '@glidejs/glide/dist/css/glide.core.css'
 	import { onMount } from 'svelte'
 	import * as m from '$lib/paraglide/messages'
 
 	const MOBILE_NAVIGATION_DISTANCE_THRESHOLD = 10
+	const AUTOPLAY_INTERVAL = 10_000
 
 	let glide: Glide
 	let currentSlide: number | null = null
 
 	const quotes = [
+		{
+			text: 'Mitigating the risk of extinction from AI should be a global priority alongside other societal-scale risks such as pandemics and nuclear war.',
+			author: 'Statement on AI Risk',
+			title: 'Signed by hundreds of experts, including the top AI labs and scientists',
+			image: CAIS
+		},
+		{
+			text: 'Mitigating the risk of extinction from AI should be a global priority alongside other societal-scale risks such as pandemics and nuclear war.',
+			author: 'Statement on AI Risk',
+			title: 'Signed by hundreds of experts, including the top AI labs and scientists',
+			image: CAIS
+		},
 		{
 			text: m.home_quotes_hinton_text(),
 			author: 'Geoffrey Hinton',
@@ -53,7 +73,9 @@
 	const totalSlides = quotes.length
 
 	onMount(() => {
-		glide = new Glide('.glide').mount({ Controls, Images, Keyboard, Swipe })
+		glide = new Glide('.glide', {
+			autoplay: AUTOPLAY_INTERVAL
+		}).mount({ Controls, Images, Keyboard, Swipe, Autoplay })
 		currentSlide = glide.index
 		glide.on('move', () => {
 			currentSlide = glide.index

@@ -11,6 +11,7 @@ It is _their job_ to listen to _their constituents_.
 They are representing _you_.
 
 So don't be afraid to reach out to them.
+You can learn how to do it in this [recording of an emailing workshop](https://www.youtube.com/watch?v=Mjq4NFiKKd0) that we had.
 
 If you are from the US, you can check out our particular [US Lobbying Guide](/us-lobby-guide).
 

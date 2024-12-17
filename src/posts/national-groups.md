@@ -11,6 +11,8 @@ description: What does it mean to be a National Group in the PauseAI network?
 - [Norway](https://pauseai.no/)
 - Germany ([Discord](https://discord.gg/VuVVyJQ37M))
 - Cameroon ([Discord](https://discord.gg/JCJBSmDv), [Whatsapp](https://chat.whatsapp.com/EmSo5C486JzDdFOiojByje))
+- Romania ([Whatsapp](https://chat.whatsapp.com/K5oUIpa9OH6KaLNx2IHql3))
+- [Czech Republic](https://pauseai.cz/) ([Discord](https://discord.gg/ZTzFytGKKE))
 
 ## PauseAI National Groups
 

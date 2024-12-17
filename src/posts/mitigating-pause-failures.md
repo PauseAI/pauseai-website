@@ -24,8 +24,8 @@ Also, from protesting and lobbying to convincing people on power, to make a trea
 
 ## Pausing for too short / only for 6 months
 
-The pause we propose is of indeterminate length. We shouldn't unpause until there is a good enough consensus that we know how to develop aligned AIs, no matter how powerful they are, and that we have the systems in place to do it carefully and democratically.
-It is NOT like the [six-month pause asked by the open letter published by the Future of Life Institute](https://futureoflife.org/open-letter/pause-giant-ai-experiments/).
+The pause we propose is of indeterminate length. We shouldn't unpause until there is a broad consensus that we know how to develop frontier AIs safely. Technically, and democratically speaking.
+Our proposal is NOT "for at least 6 months" like the [open letter published by the Future of Life Institute](https://futureoflife.org/open-letter/pause-giant-ai-experiments/).
 
 ## Pausing for too long
 
@@ -36,8 +36,18 @@ If that happens, we will never reap the benefits of AI, and in the meantime, we 
 We can address this risk by clearly stating under what conditions AI development should resume.
 As we said, we suggest that AI development should resume when building provably safe AI becomes possible.
 Additionally, we only propose to ban the development of very specific kinds of models: the largest, general models.
-In the meantime there's other ways we could achieve more intelligence: more transparent AI paradigms, brain-computer interfaces, whole brain emulations, neural enhancements, growth in collective intelligence, genetic editing and selection, and maybe more.
-Those paths to a greater intelligence could bring us the benefits that AGI promises without so many of its risks.
+
+## What if safe AI development is unprovable or impossible?
+
+Luckily there are other ways we could make technological progress that could bring the benefits AI promises without most of its risks.
+
+Some people believe that to overcome this dangerous period, we need to find other ways to increase our intelligence.
+You can find a recent overview of plausible methods to do that in [this post](https://www.lesswrong.com/posts/jTiSWHKAtnyA723LE/overview-of-strong-human-intelligence-amplification-methods).
+Some of those and others were analyzed in the classic Nick Bostrom's book "Superintelligence: Paths, Dangers, Strategies".
+Transparent AI paradigms, brain-computer interfaces, whole brain emulations, neural enhancements, growth in collective intelligence, genetic editing and selection, and more.
+As the saying goes "If you can't beat them, join them".
+
+A lot of people are sympathetic to this strategy, like AI researcher Eliezer Yudkowsky[¹](https://x.com/ESYudkowsky/status/1648766287819026432)[²](https://x.com/ESYudkowsky/status/1676981883266301952) and Ethereum's co-founder Vitalik Buterin[¹](https://vitalik.eth.limo/general/2023/11/27/techno_optimism.html#a-happy-path-merge-with-the-ais).
 
 ## Centralization of AI might make takeover risks worse
 
