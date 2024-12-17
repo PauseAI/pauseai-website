@@ -14,7 +14,7 @@ description: Educational resources (videos, articles, books) about AI risks and 
 - [FAQ](/faq). Commonly asked questions about AI safety and PauseAI.
 - [Action](/action). What you can do to help (with links to many action-related guides)
 
-## Websites
+## Other websites
 
 - [The Compendium](https://www.thecompendium.ai/). A highly comprehensive bundle of knowledge on why the current AI race is so dangerous, and what we can do about it.
 - [A Narrow Path](https://www.narrowpath.co/). A detailed plan on the steps that we need to take to increase our odds at surviving the next decadesa.
