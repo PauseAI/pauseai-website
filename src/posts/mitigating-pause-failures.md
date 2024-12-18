@@ -41,7 +41,7 @@ Additionally, we only propose to ban the development of very specific kinds of m
 
 Luckily there are other ways we could make technological progress that could bring the benefits AI promises without most of its risks.
 
-Some people believe that to overcome this dangerous period, we need to find other ways to increase our intelligence. 
+Some people believe that to overcome this dangerous period, we need to find other ways to increase our intelligence.
 You can find a recent overview of plausible methods to do that in [this post](https://www.lesswrong.com/posts/jTiSWHKAtnyA723LE/overview-of-strong-human-intelligence-amplification-methods).
 Some of those and others were analyzed in the classic Nick Bostrom's book "Superintelligence: Paths, Dangers, Strategies".
 Transparent AI paradigms, brain-computer interfaces, whole brain emulations, neural enhancements, growth in collective intelligence, genetic editing and selection, and more.

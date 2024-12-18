@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { page } from '$app/stores'
-	export let href: string
+	import { i18n } from '$lib/i18n'
+	export let href: string | undefined = undefined
 	export let c2a = false
 	export let ariaLabel: string | undefined = undefined
 	export let inverted = false
@@ -12,7 +13,7 @@
 	class:first
 	class:c2a
 	class:inverted
-	class:active={$page.url.pathname == href}
+	class:active={i18n.route($page.url.pathname) == href}
 	aria-label={ariaLabel}
 >
 	<slot />
