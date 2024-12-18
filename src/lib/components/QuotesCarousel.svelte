@@ -33,12 +33,6 @@
 			image: CAIS
 		},
 		{
-			text: 'Mitigating the risk of extinction from AI should be a global priority alongside other societal-scale risks such as pandemics and nuclear war.',
-			author: 'Statement on AI Risk',
-			title: 'Signed by hundreds of experts, including the top AI labs and scientists',
-			image: CAIS
-		},
-		{
 			text: m.home_quotes_hinton_text(),
 			author: 'Geoffrey Hinton',
 			title: m.home_quotes_hinton_title(),
