@@ -10,13 +10,18 @@ import path from 'path'
 import removeMarkdown from 'remove-markdown'
 import simpleGit, { SimpleGit, SimpleGitOptions } from 'simple-git'
 import inlangSettings from '../../project.inlang/settings.json'
-import { generateJsonPrompt, generateMarkdownPrompt, PromptGenerator } from './prompts'
+import {
+	generateJsonPrompt,
+	generateMarkdownPrompt,
+	generateReviewPrompt,
+	PromptGenerator
+} from './prompts'
 
 dotenv.config()
 const argv = minimist(process.argv)
 
 const DEBUG = argv.mode == 'debug'
-const DEBUG_RETRANSLATE_EVERYTHING = false
+const DEBUG_RETRANSLATE_EVERYTHING = true
 const DEBUG_RETRANSLATE_FILES: string[] = []
 const GIT_EMAIL = 'example@example.com'
 const GIT_MAX_CONCURRENT_PROCESSES = 8
@@ -330,23 +335,52 @@ function preprocessMarkdown(source: string) {
 async function translate(content: string, promptGenerator: PromptGenerator, language: string) {
 	const languageName = languageNamesInEnglish.of(language)
 	if (!languageName) throw new Error(`Couldn't resolve language code: ${language}`)
-	const prompt = promptGenerator(languageName, content)
-	const response = await requestQueue.add(
+
+	// First pass - translation
+	const translationPrompt = promptGenerator(languageName, content)
+	const translationResponse = await requestQueue.add(
 		async () =>
 			await llmClient.post('/chat/completions', {
 				messages: [
 					{
 						role: 'user',
-						content: prompt
+						content: translationPrompt
 					}
 				],
 				temperature: 0
 			})
 	)
-	console.log(response?.data)
-	const translated = response?.data.choices[0].message.content
+	console.log('First pass response:', translationResponse?.data)
+	const translated = translationResponse?.data.choices[0].message.content
 	if (!translated) throw new Error(`Translation to ${languageName} failed`)
-	return translated
+
+	// Second pass - review and improve with context
+	const reviewPrompt = generateReviewPrompt(languageName)
+	const reviewResponse = await requestQueue.add(
+		async () =>
+			await llmClient.post('/chat/completions', {
+				messages: [
+					{
+						role: 'user',
+						content: translationPrompt
+					},
+					{
+						role: 'assistant',
+						content: translated
+					},
+					{
+						role: 'user',
+						content: reviewPrompt
+					}
+				],
+				temperature: 0
+			})
+	)
+	console.log('Review pass response:', reviewResponse?.data)
+	const reviewed = reviewResponse?.data.choices[0].message.content
+	if (!reviewed) throw new Error(`Review of ${languageName} translation failed`)
+
+	return reviewed
 }
 
 function postprocessMarkdown(source: string, translation: string) {

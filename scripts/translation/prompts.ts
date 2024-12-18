@@ -22,6 +22,25 @@ Do not start with \`\`\`md or new lines, just return the Markdown.
 Translated Markdown:`
 }
 
+export function generateReviewPrompt(languageName: string) {
+	return `Please review and improve your translation to ${languageName} to ensure it meets the highest standards of quality.
+
+Focus on:
+1. Accuracy of meaning compared to typical English expressions
+2. Natural flow and idiomaticity in ${languageName}
+3. Consistency in terminology and style
+4. Grammar, spelling, and punctuation
+5. Maintaining the original formatting and technical elements
+
+Make necessary improvements while preserving:
+- All technical elements (HTML tags, links, script elements)
+- Document structure and formatting
+- Special instructions in comments
+- File names and technical terms when appropriate
+
+Return the improved version in the same format, without any additional markup or explanations.`
+}
+
 function commonHead(languageName: string, format: string) {
 	return `You are a professional translator who specializes in translating to ${languageName}. Therefore, you don't make basic errors with regard to spelling and grammar.
 
