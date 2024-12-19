@@ -1,4 +1,5 @@
 {
+	"$schema": "https://inlang.com/schema/inlang-message-format",
 	"header__instructions": "All translations prefixed with 'header_' should be as short as possible to fit the layout. Try to keep them at a single word while still being useful as links to the pages.",
 	"header_action__instructions": "German: Handeln",
 	"header_action": "Act",
@@ -21,6 +22,9 @@
 	"home_quotes_all": "See all quotes",
 	"home_quotes_bengio_text": "Rogue AI may be dangerous for the whole of humanity. Banning powerful AI systems (say beyond the abilities of GPT-4) that are given autonomy and agency would be a good start.",
 	"home_quotes_bengio_title": "AI Turing Award winner",
+	"home_quotes_cais_text": "Mitigating the risk of extinction from AI should be a global priority alongside other societal-scale risks such as pandemics and nuclear war.",
+	"home_quotes_cais_author": "Statement on AI Risk",
+	"home_quotes_cais_title": "Signed by hundreds of experts, including the top AI labs and scientists",
 	"home_quotes_hawking_text": "The development of full artificial intelligence could spell the end of the human race.",
 	"home_quotes_hawking_title": "Theoretical physicist and cosmologist",
 	"home_quotes_hinton_text": "If you take the existential risk seriously, as I now do, it might be quite sensible to just stop developing these things any further.",

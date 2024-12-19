@@ -27,9 +27,9 @@
 
 	const quotes = [
 		{
-			text: 'Mitigating the risk of extinction from AI should be a global priority alongside other societal-scale risks such as pandemics and nuclear war.',
-			author: 'Statement on AI Risk',
-			title: 'Signed by hundreds of experts, including the top AI labs and scientists',
+			text: m.home_quotes_cais_text(),
+			author: m.home_quotes_cais_author(),
+			title: m.home_quotes_cais_title(),
 			image: CAIS
 		},
 		{
