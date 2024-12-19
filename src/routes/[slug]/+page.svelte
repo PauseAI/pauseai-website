@@ -1,30 +1,30 @@
 <script lang="ts">
 	import PostMeta from '$lib/components/PostMeta.svelte'
 
+	// don't destructure to maintain reactivity for invalidation after language detection
 	export let data
+	$: meta = data.meta
 
-	const { meta, slug, content } = data
-	const { title = slug, date, categories, description, image } = meta
-	const parent = slug.split('/').slice(0, -1).join('/')
+	const parent = data.slug.split('/').slice(0, -1).join('/')
 </script>
 
-<PostMeta {title} {description} {date} {image} />
+<PostMeta title={meta.title} description={meta.description} date={meta.date} image={meta.image} />
 
 <article>
 	{#if parent}
 		<a href={`/${parent}`}>View all {parent}</a>
 	{/if}
 	<hgroup>
-		<h1>{title}</h1>
-		{#if date}
+		<h1>{meta.title}</h1>
+		{#if meta.date}
 			<!-- <p>Published at {formatDate(date)}</p> -->
 		{/if}
 	</hgroup>
 
 	<div class="tags">
-		{#if categories && categories.length > 0}
+		{#if meta.categories && meta.categories.length > 0}
 			<div class="categories">
-				{#each categories as category}
+				{#each meta.categories as category}
 					<span class="surface-4">&num;{category}</span>
 				{/each}
 			</div>
@@ -32,7 +32,7 @@
 	</div>
 
 	<div class="prose">
-		<svelte:component this={content} />
+		<svelte:component this={data.content} />
 	</div>
 </article>
 
