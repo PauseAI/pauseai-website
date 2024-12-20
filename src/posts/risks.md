@@ -34,7 +34,7 @@ Also, it would lay the groundwork for future regulation aimed at mitigating fake
 
 ### Deepfakes and impersonation
 
-Fake content created with AI, also called deepfakes, not only can steal famous people's identities and [create disinformation](https://time.com/6565446/biden-deepfake-audio/), but they can also impersonate you.
+Deepfakes not only can steal famous people's identities and [create disinformation](https://time.com/6565446/biden-deepfake-audio/), but they can also impersonate you.
 Anyone with photos, videos, or audios of someone and enough knowledge, can create deepfakes of them and use them to commit fraud, harass them, or create sexually non-consensual material.
 About [96% of all deepfake content is sexual material](https://www.technologyreview.com/2019/10/07/132735/deepfake-porn-deeptrace-legislation-california-election-disinformation/).
 
