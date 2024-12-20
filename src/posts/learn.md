@@ -93,6 +93,13 @@ haven't heard good things about it yet -->
 - [Superintelligence: Paths, Dangers, Strategies](https://www.goodreads.com/en/book/show/20527133) (Nick Bostrom, 2014)
 - [Our Final Invention: Artificial Intelligence and the End of the Human Era](https://www.goodreads.com/en/book/show/17286699) (James Barrat, 2013)
 
+## Papers
+
+- [A compilation](https://arkose.org/aisafety) of AI Safety papers
+- [Another compilation](https://futureoflife.org/resource/introductory-resources-on-ai-risks/#toc-44245428-2) of AI Safety papers
+- [Alignment faking in large language models](https://www.anthropic.com/news/alignment-faking) recent paper by Anthropic itself
+- [Managing extreme AI risks amid rapid progress](https://www.science.org/doi/abs/10.1126/science.adn0117) from the godfathers of the field
+
 ## Courses
 
 - [AGI safety fundamentals](https://www.agisafetyfundamentals.com/) (30hrs)
