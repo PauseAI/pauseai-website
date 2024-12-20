@@ -19,7 +19,7 @@ description: Educational resources (videos, articles, books) about AI risks and 
 - [The Compendium](https://www.thecompendium.ai/). A highly comprehensive bundle of knowledge on why the current AI race is so dangerous, and what we can do about it.
 - [A Narrow Path](https://www.narrowpath.co/). A detailed plan on the steps that we need to take to increase our odds at surviving the next decadesa.
 - [AISafety.com](https://www.aisafety.com) & [AISafety.info](https://aisafety.info). The landing pages for AI Safety. Learn about the risks, communities, events, jobs, courses, ideas for how to mitigate the risks and more!
-- [Existential Safety](https://existentialsafety.org/). A comprehensive list of actions that we can do to increase our Existential Safety from AI.
+- [Existential Safety](https://existentialsafety.org/). A comprehensive list of actions that we can take to increase our existential safety from AI.
 - [AISafety.dance](https://aisafety.dance). A more fun, friendly and interactive introduction to the AI catastrophic risks!
 - [AISafety.world](https://aisafety.world/tiles/). The whole AI Safety landscape with all the organizations, media outlets, forums, blogs, and other actors and resources.
 - [IncidentDatabase.ai](https://incidentdatabase.ai/). Database of incidents where AI systems caused harm.
