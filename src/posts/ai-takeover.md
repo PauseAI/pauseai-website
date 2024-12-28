@@ -51,6 +51,8 @@ The sub-goal of _maximizing control_ over the world could be likely to occur due
 - The more control you have, the harder it will be from any other agent to prevent you from achieving your goal.
 - The more control you have, the more resources you have to achieve your goal. (For example, an AI tasked with calculating pi might conclude that it would be beneficial to use all computers on the world to calculate pi.
 
+There are already [proof](https://www.anthropic.com/research/alignment-faking)[s](https://www.transformernews.ai/p/openais-new-model-tried-to-avoid) of AIs developing such behavior.
+
 Not every instance of an ASI will necessarily attempt a takeover.
 The important insight is that **it only has to happen once**.
 
@@ -58,7 +60,7 @@ A world which is not yet taken over, but does have an ASI that _could_ take over
 In a similar way, a country without a government is in a fundamentally unstable condition.
 It is not a question of _if_ a takeover attempt will happen, but _when_ it will happen.
 
-The process of taking over can involve hacking into virtually all systems that are connected to the internet, manipulating people, and controlling physical resources.
+The process of taking over can involve hacking into virtually all systems that are connected to the internet, [manipulating people](https://lethalintelligence.ai/post/ai-hired-human-to-solve-captcha/), and controlling physical resources.
 A takeover attempt is successful when the ASI has control over virtually every aspect of our world.
 This could be a slow process, where the ASI gradually gains more and more control over the course of months, or it could be a sudden process.
 The speed at which a takeover attempt takes place will depend on the capabilities of the ASI.
@@ -74,7 +76,7 @@ For a human, doing a takeover is an almost impossible task.
 Not a single person ever successfully took over control over the entire world.
 Some dictators came close, but they never had control over everything.
 
-An supertintelligent AI has certain important advantages over humans (besides being superintelligent) that make a takeover attempt much more likely to succeed.
+A superintelligent AI has certain important advantages over humans (besides being superintelligent) that make a takeover attempt much more likely to succeed.
 
 1. **Speed**. The human brain runs at 1-100hz, whereas computer chips can run at clock speeds in the GHz range. A single AI model can read entire books in seconds.
 1. **Energy consumption**. Humans are limited by the amount of food they can eat and the amount of energy they can store in their bodies. AI can jack into the power grid and use as much energy as it needs.
