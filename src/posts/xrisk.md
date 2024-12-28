@@ -9,7 +9,7 @@ You can learn about x-risks reading this page, or you can also learn through [vi
 
 AI researchers on average [believe](https://aiimpacts.org/2022-expert-survey-on-progress-in-ai/) there's a 14% chance that once we build a _superintelligent_ AI (an AI vastly more intelligent than humans), it will lead to "very bad outcomes (e.g. human extinction)".
 
-And there are [real-world examples that prove they may be right](https://lethalintelligence.ai/post/category/warning-signs/).
+And there are [cases and reports about current AIs that show they may be right](https://lethalintelligence.ai/post/category/warning-signs/).
 
 Would you choose to be a passenger on a test flight of a new plane when airplane engineers think there’s a 14% chance that it will crash?
 
