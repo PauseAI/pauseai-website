@@ -20,7 +20,7 @@ For other common objections, you should check [AISafety.info: Objections and res
 ## AI cannot have goals or autonomy
 
 - Skeptics say AI systems just optimize goals we give them, and cannot act independently or have their own goals. Autonomy and unpredictable self-directed behavior is a myth.
-- However, complex AI systems can potentially have emergent autonomy and goals, especially around self-preservation, as predicted by AI drives theory. Lack of autonomy does not make AI safe if misused by humans.
+- However, complex AI systems can potentially have emergent autonomy and goals, especially around self-preservation, as predicted by AI drives theory. Lack of autonomy does not make AI safe if misused by humans. There have been multiple examples of AI showing power-seeking untrained behavior. You can read about a case of AI trying to self-preserve itself [here](https://www.transformernews.ai/p/openais-new-model-tried-to-avoid).
 
 ## AI will not have uncontrolled power
 
