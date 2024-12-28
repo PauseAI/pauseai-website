@@ -51,5 +51,5 @@ See our [roadmap](/roadmap) for more details.
   - Ethereum `0x01c9646d376408cD77599d1a0860eC38E6928F1b`
   - Base `0x01c9646d376408cD77599d1a0860eC38E6928F1b`
   - Polygon `0x01c9646d376408cD77599d1a0860eC38E6928F1b`
-  - Bitcoin (Taproot)`bc1ptn0czghufhl6gwf67kswm3hhkvvcu8nm6mx872rwh6hzxa70a9pquqcc7q`
+  - Bitcoin (Taproot) `bc1ptn0czghufhl6gwf67kswm3hhkvvcu8nm6mx872rwh6hzxa70a9pquqcc7q`
   - Bitcoin (Native Segwit) `bc1qma97wdt8wmz7rlkplyrmcf5y6w3qjrcq5m6u8c`
