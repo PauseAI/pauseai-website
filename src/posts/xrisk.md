@@ -45,7 +45,7 @@ You might think that a superintelligent AI would be locked inside a computer, an
 However, we tend to give AI systems access to the internet, which means that they can do a lot of things:
 
 - [Hack into other computers](/cybersecurity-risks), including all smartphones, laptops, server farms, etc. It could use the sensors of these devices as its eyes and ears, having digital senses everywhere.
-- Manipulate people through fake messages, e-mails, bank transfers, videos or phone calls. Humans could become the AI's limbs, without even knowing it.
+- [Manipulate people](https://lethalintelligence.ai/post/ai-hired-human-to-solve-captcha/) through fake messages, e-mails, bank transfers, videos or phone calls. Humans could become the AI's limbs, without even knowing it.
 - Directly control devices connected to the internet, like cars, planes, robotized (autonomous) weapons or even nuclear weapons.
 - Design a novel bioweapon, e.g. by combining viral strands or by using [protein folding](https://alphafold.ebi.ac.uk) and order it to be printed in a lab.
 - Trigger a nuclear war by convincing humans that another country is (about to) launch a nuclear attack.
@@ -78,9 +78,9 @@ An AI could have any goal, depending on how it's trained and prompted (used).
 Maybe it wants to calculate pi, maybe it wants to cure cancer, maybe it wants to self-improve.
 But even though we cannot tell what a superintelligence will want to achieve, we can make predictions about its sub-goals.
 
-- **Maximizing its resources**. Harnessing more computers will help an AI achieve its goals. At first, it can achieve this by hacking other computers. Later it may decide that it is more efficient to build its own.
-- **Ensuring its own survival**. The AI will not want to be turned off, as it could no longer achieve its goals. AI might conclude that humans are a threat to its existence, as humans could turn it off.
-- **Preserving its goals**. The AI will not want humans to modify its code, because that could change its goals, thus preventing it from achieving its current goal.
+- **Maximizing its resources**. Harnessing more computers will help an AI achieve its goals. At first, it can achieve this by hacking other computers. Later it may decide that it is more efficient to build its own. You can read about out [this real case of emergent power-seeking behavior on an AI](https://lethalintelligence.ai/post/ai-escaped-its-container/).
+- **Ensuring its own survival**. The AI will not want to be turned off, as it could no longer achieve its goals. AI might conclude that humans are a threat to its existence, as humans could turn it off. There also have been cases of [self-preserving unprompted, untrained behavior](https://www.transformernews.ai/p/openais-new-model-tried-to-avoid).
+- **Preserving its goals**. The AI will not want humans to modify its code, because that could change its goals, thus preventing it from achieving its current goal. And there are also [cases of AIs trying to do that](https://www.anthropic.com/research/alignment-faking).
 
 The tendency to pursue these subgoals given any high-level goal is called [instrumental convergence](https://www.youtube.com/watch?v=ZeecOKBus3Q), and it is a key concern for AI safety researchers.
 
