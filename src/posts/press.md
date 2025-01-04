@@ -38,7 +38,11 @@ If you want to create PauseAI-related material yourself, you can use our brand c
 
 ## Podcasts & Talks
 
-- [**Youtube Playlist**](https://www.youtube.com/playlist?list=PLI46NoubGtIJvSAWkC7VOmfWrLD2u1ZPA). The **more than 10 podcasts** and talks that multiple people from PauseAI participated in. Subsequent items on this list are recordings that weren't uploaded to YouTube.
+- [**Compilation**](https://www.youtube.com/playlist?list=PLI46NoubGtIJvSAWkC7VOmfWrLD2u1ZPA) of **15+** podcasts and talks that multiple people from PauseAI participated in.
+- [**French podcasts**](https://www.youtube.com/playlist?list=PLLUfQBgG_MvHh3b9Pedf139eVLsLs5zAs). **20+** podcasts where Maxime Forunes, PauseAI France director, participated in.
+
+Outside of Youtube:
+
 - [Dr. Phil Primetime](https://www.meritplus.com/c/s/VQ2aB6Sp?episodeId=LknWbG7N&play=1): Liron Shapira went as a guest to a discussion about AI and education.
 - [Creatives with AI podcast](https://podcasters.spotify.com/pod/show/creativeswithai/episodes/15-AI-The-Race-Against-Time---Balancing-Progress-and-Potential-Catastrophe-with-Joep-Meinderstma-e28ln8a/a-aa9vpjp): Interview with PauseAI founder Joep Meindertsma.
 - [Art of AI podcast](https://spotify.link/AggzYfcj8Db): Interview with Joep Meindertsma about protesting, psychology of x-risk, AI policy.

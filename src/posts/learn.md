@@ -19,6 +19,7 @@ description: Educational resources (videos, articles, books) about AI risks and 
 - [The Compendium](https://www.thecompendium.ai/). A highly comprehensive bundle of knowledge on why the current AI race is so dangerous, and what we can do about it.
 - [A Narrow Path](https://www.narrowpath.co/). A detailed plan on the steps that we need to take to increase our odds at surviving the next decadesa.
 - [AISafety.com](https://www.aisafety.com) & [AISafety.info](https://aisafety.info). The landing pages for AI Safety. Learn about the risks, communities, events, jobs, courses, ideas for how to mitigate the risks and more!
+- [Existential Safety](https://existentialsafety.org/). A comprehensive list of actions that we can take to increase our existential safety from AI.
 - [AISafety.dance](https://aisafety.dance). A more fun, friendly and interactive introduction to the AI catastrophic risks!
 - [AISafety.world](https://aisafety.world/tiles/). The whole AI Safety landscape with all the organizations, media outlets, forums, blogs, and other actors and resources.
 - [IncidentDatabase.ai](https://incidentdatabase.ai/). Database of incidents where AI systems caused harm.
@@ -91,6 +92,13 @@ haven't heard good things about it yet -->
 - [Life 3.0: Being Human in the Age of Artificial Intelligence](https://www.goodreads.com/en/book/show/34272565) (Max Tegmark, 2017)
 - [Superintelligence: Paths, Dangers, Strategies](https://www.goodreads.com/en/book/show/20527133) (Nick Bostrom, 2014)
 - [Our Final Invention: Artificial Intelligence and the End of the Human Era](https://www.goodreads.com/en/book/show/17286699) (James Barrat, 2013)
+
+## Papers
+
+- [A compilation](https://arkose.org/aisafety) of AI Safety papers
+- [Another compilation](https://futureoflife.org/resource/introductory-resources-on-ai-risks/#toc-44245428-2) of AI Safety papers
+- [Alignment faking in large language models](https://www.anthropic.com/news/alignment-faking) recent paper by Anthropic itself
+- [Managing extreme AI risks amid rapid progress](https://www.science.org/doi/abs/10.1126/science.adn0117) from the godfathers of the field
 
 ## Courses
 

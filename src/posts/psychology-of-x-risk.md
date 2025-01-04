@@ -57,6 +57,7 @@ There are various reasons why most will instantly dismiss the idea.
 We all know the images of disasters in movies, right? People shouting and running in panic.
 Turns out the opposite is often true: about 80% of people show symptoms of [_normalcy bias_](https://en.wikipedia.org/wiki/Normalcy_bias) during disasters: not seeking shelter during a tornado, disregarding government warnings, keep shaking hands in early COVID days.
 The normalcy bias describes our tendency to underestimate the possibility of disaster and believe that life will continue as normal, even in the face of significant threats or crises.
+This is [currently happening with AI](https://lethalintelligence.ai/post/category/warning-signs/).
 
 > People mill, asking for opinions, because they _want_ to be told that everything is fine. They will keep asking, and delaying, until they get the answer they want.
 
@@ -73,7 +74,7 @@ Roger Boisjoly was an engineer who predicted it would blow up, but nobody of his
 
 _From ["Remembering Roger Boisjoly"](https://www.npr.org/sections/thetwo-way/2012/02/06/146490064/remembering-roger-boisjoly-he-tried-to-stop-shuttle-challenger-launch)_
 
-One explanation for why our brain refuses to believe that danger could be upon us, is cognitive dissonance.
+One explanation for why our brain refuses to believe that danger could be upon us is cognitive dissonance.
 
 ### Cognitive dissonance
 
@@ -88,7 +89,7 @@ A lot of beliefs that most people have will be challenged by the idea of existen
 - I will probably grow old, and so will my children
 
 Many of these thoughts will be challenged by the idea that AI poses an existential risk.
-Our brains will look for alternative explanations for why they hear scientists are warning about this:
+Our brains will look for alternative explanations for why they hear scientists are [warning about this](/quotes):
 
 - They are paid by big tech
 - They are part of some conspiracy or cult
@@ -223,7 +224,7 @@ The impact is too large, we have coping mechanisms that downplay the risks, and 
 ### Lack of innate fear response
 
 Our brains have evolved to fear things that are dangerous.
-We instinctively fear heights, big animals with sharp teath, sudden loud noises, and things that move around in an S-shape.
+We instinctively fear heights, big animals with sharp teeth, sudden loud noises, and things that move around in an S-shape.
 A superintelligent AI does not hit any of our primal fears.
 Additionally, we have a strong fear for social rejection or losing social status, which means that people tend to be afraid of speaking up about AI risks.
 

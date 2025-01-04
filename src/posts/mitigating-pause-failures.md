@@ -37,18 +37,6 @@ We can address this risk by clearly stating under what conditions AI development
 As we said, we suggest that AI development should resume when building provably safe AI becomes possible.
 Additionally, we only propose to ban the development of very specific kinds of models: the largest, general models.
 
-## What if safe AI development is unprovable or impossible?
-
-Luckily there are other ways we could make technological progress that could bring the benefits AI promises without most of its risks.
-
-Some people believe that to overcome this dangerous period, we need to find other ways to increase our intelligence.
-You can find a recent overview of plausible methods to do that in [this post](https://www.lesswrong.com/posts/jTiSWHKAtnyA723LE/overview-of-strong-human-intelligence-amplification-methods).
-Some of those and others were analyzed in the classic Nick Bostrom's book "Superintelligence: Paths, Dangers, Strategies".
-Transparent AI paradigms, brain-computer interfaces, whole brain emulations, neural enhancements, growth in collective intelligence, genetic editing and selection, and more.
-As the saying goes "If you can't beat them, join them".
-
-A lot of people are sympathetic to this strategy, like AI researcher Eliezer Yudkowsky[¹](https://x.com/ESYudkowsky/status/1648766287819026432)[²](https://x.com/ESYudkowsky/status/1676981883266301952) and Ethereum's co-founder Vitalik Buterin[¹](https://vitalik.eth.limo/general/2023/11/27/techno_optimism.html#a-happy-path-merge-with-the-ais).
-
 ## Centralization of AI might make takeover risks worse
 
 We don't propose a centralization of AI development in a single organization. That would make AI development more controllable but it would also create a single point of failure, which human greed and stupidity could take advantage of.
