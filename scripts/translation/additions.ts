@@ -1,8 +1,8 @@
-export const ADDITIONS_PER_PAGE: Record<string, string> = {}
+const ADDITIONS_PER_PAGE: Record<string, string> = {}
 
-export const ADDITIONS_PER_LANGUAGE: Record<string, string> = {}
+const ADDITIONS_PER_LANGUAGE: Record<string, string> = {}
 
-export const ADDITIONS_PER_PAGE_PER_LANGUAGE: Record<string, Record<string, string>> = {}
+const ADDITIONS_PER_PAGE_PER_LANGUAGE: Record<string, Record<string, string>> = {}
 
 export function collectPromptAdditions(page: string, language: string) {
 	const possibleAdditions = [
