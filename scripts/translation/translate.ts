@@ -10,6 +10,7 @@ import path from 'path'
 import removeMarkdown from 'remove-markdown'
 import simpleGit, { SimpleGit, SimpleGitOptions } from 'simple-git'
 import inlangSettings from '../../project.inlang/settings.json'
+import { collectPromptAdditions } from './additions'
 import {
 	generateJsonPrompt,
 	generateMarkdownPrompt,
@@ -36,6 +37,7 @@ const LLM_REQUESTS_PER_SECOND = 1
 const PATH_JSON_BASE = './messages'
 const PATH_JSON_SOURCE = './messages/en.json'
 const PATH_MD_BASE = './src/posts'
+const PATH_PATTERNS = [/src\/posts(\/.*)\.md/, /messages\/(.*)/]
 const PATH_TARGET_BASE = './src/temp/translations'
 const PATH_TARGET_JSON = './src/temp/translations/json'
 const PATH_TARGET_MD = './src/temp/translations/md'
@@ -94,15 +96,17 @@ let mainLatestCommitDates: Map<string, Date>
 		(async () => (mainLatestCommitDates = await prepareLastestCommitDates(mainGit)))()
 	])
 
-	const languages = inlangSettings.languageTags
-	const indexOfSourceLanguage = languages.indexOf(inlangSettings.sourceLanguageTag)
-	languages.splice(indexOfSourceLanguage, 1)
+	const languageTags = inlangSettings.languageTags
+
+	// remove source language from array
+	const indexOfSourceLanguageTag = languageTags.indexOf(inlangSettings.sourceLanguageTag)
+	languageTags.splice(indexOfSourceLanguageTag, 1)
 
 	await Promise.all([
 		(async () => {
 			await translateOrLoadMessages({
 				sourcePath: PATH_JSON_SOURCE,
-				languages,
+				languageTags: languageTags,
 				promptGenerator: generateJsonPrompt,
 				targetDir: PATH_TARGET_JSON,
 				cacheGitCwd: PATH_TARGET_BASE
@@ -117,7 +121,7 @@ let mainLatestCommitDates: Map<string, Date>
 			await translateOrLoadMarkdown({
 				sourcePaths: markdownPathsFromRoot,
 				sourceBaseDir: PATH_MD_BASE,
-				languages,
+				languageTags: languageTags,
 				promptGenerator: generateMarkdownPrompt,
 				targetDir: PATH_TARGET_MD,
 				cacheGitCwd: PATH_TARGET_BASE
@@ -201,14 +205,14 @@ async function prepareLastestCommitDates(git: SimpleGit) {
 
 async function translateOrLoadMessages(options: {
 	sourcePath: string
-	languages: string[]
+	languageTags: string[]
 	promptGenerator: PromptGenerator
 	targetDir: string
 	cacheGitCwd: string
 }) {
 	await translateOrLoad({
 		sourcePaths: [options.sourcePath],
-		languages: options.languages,
+		languageTags: options.languageTags,
 		promptGenerator: options.promptGenerator,
 		targetStrategy: (language) => path.join(options.targetDir, language + '.json'),
 		cacheGitCwd: options.cacheGitCwd
@@ -218,14 +222,14 @@ async function translateOrLoadMessages(options: {
 async function translateOrLoadMarkdown(options: {
 	sourcePaths: string[]
 	sourceBaseDir: string
-	languages: string[]
+	languageTags: string[]
 	promptGenerator: PromptGenerator
 	targetDir: string
 	cacheGitCwd: string
 }) {
 	await translateOrLoad({
 		sourcePaths: options.sourcePaths,
-		languages: options.languages,
+		languageTags: options.languageTags,
 		promptGenerator: options.promptGenerator,
 		targetStrategy: (language, sourcePath) => {
 			const relativePath = path.relative(options.sourceBaseDir, sourcePath)
@@ -239,7 +243,7 @@ type TargetStrategy = (language: string, sourcePath: string) => string
 
 async function translateOrLoad(options: {
 	sourcePaths: string[]
-	languages: string[]
+	languageTags: string[]
 	promptGenerator: PromptGenerator
 	targetStrategy: TargetStrategy
 	cacheGitCwd: string
@@ -249,10 +253,11 @@ async function translateOrLoad(options: {
 	await Promise.all(
 		options.sourcePaths.map(async (sourcePath) => {
 			const sourceFileName = path.basename(sourcePath)
+			/** Backslash to forward slash to match Git log and for web path */
 			const processedSourcePath = path.relative('.', sourcePath).replaceAll(/\\/g, '/')
 			await Promise.all(
-				options.languages.map(async (language) => {
-					const target = options.targetStrategy(language, sourcePath)
+				options.languageTags.map(async (languageTag) => {
+					const target = options.targetStrategy(languageTag, sourcePath)
 					let useCachedTranslation = false
 					let fileExists = false
 					if (
@@ -272,7 +277,7 @@ async function translateOrLoad(options: {
 						if (!cacheLatestCommitDate)
 							throw new Error(`Didn't prepare latest commit date for ${target}`)
 						if (cacheLatestCommitDate > sourceLatestCommitDate) {
-							console.log(`Using cached translation for ${sourceFileName} in ${language}`)
+							console.log(`Using cached translation for ${sourceFileName} in ${languageTag}`)
 							useCachedTranslation = true
 						}
 					}
@@ -282,7 +287,14 @@ async function translateOrLoad(options: {
 						// TODO Don't process/match more often than necessary
 						const processedContent = preprocessMarkdown(content)
 						console.log(processedContent)
-						const translation = await translate(processedContent, options.promptGenerator, language)
+						const page = extractWebPath(sourcePath)
+						const promptAdditions = collectPromptAdditions(page, languageTag)
+						const translation = await translate(
+							processedContent,
+							options.promptGenerator,
+							languageTag,
+							promptAdditions
+						)
 						const processedTranslation = postprocessMarkdown(processedContent, translation)
 						const dir = path.dirname(target)
 						await fs.mkdir(dir, { recursive: true })
@@ -290,9 +302,9 @@ async function translateOrLoad(options: {
 						fsSync.writeFileSync(target, processedTranslation)
 						let message: string
 						if (fileExists) {
-							message = `Update outdated translation for ${sourceFileName} in ${language}`
+							message = `Update outdated translation for ${sourceFileName} in ${languageTag}`
 						} else {
-							message = `Create new translation for ${sourceFileName} in ${language}`
+							message = `Create new translation for ${sourceFileName} in ${languageTag}`
 						}
 						try {
 							await gitQueue.add(() =>
@@ -300,7 +312,7 @@ async function translateOrLoad(options: {
 							)
 						} catch (e) {
 							if (e instanceof Error && e.message.includes('nothing to commit')) {
-								console.log(`${sourceFileName} in ${language} didn't change`)
+								console.log(`${sourceFileName} in ${languageTag} didn't change`)
 							} else {
 								throw e
 							}
@@ -332,12 +344,17 @@ function preprocessMarkdown(source: string) {
 	return processed
 }
 
-async function translate(content: string, promptGenerator: PromptGenerator, language: string) {
+async function translate(
+	content: string,
+	promptGenerator: PromptGenerator,
+	language: string,
+	promptAdditions: string
+) {
 	const languageName = languageNamesInEnglish.of(language)
 	if (!languageName) throw new Error(`Couldn't resolve language code: ${language}`)
 
 	// First pass - translation
-	const translationPrompt = promptGenerator(languageName, content)
+	const translationPrompt = promptGenerator(languageName, content, promptAdditions)
 	const translationResponse = await requestQueue.add(
 		async () =>
 			await llmClient.post('/chat/completions', {
@@ -403,4 +420,19 @@ function postprocessMarkdown(source: string, translation: string) {
 		})
 	}
 	return processed
+}
+
+/**
+ * Extracts the path on the website from local forward slash separated paths
+ * in the format src/posts/**.md. Returns file name for messages.json,
+ * otherwise returns input.
+ * @param localPath
+ */
+function extractWebPath(localPath: string): string {
+	for (const pattern of PATH_PATTERNS) {
+		const result = pattern.exec(localPath)
+		// return group
+		if (result) return result[1]
+	}
+	return localPath
 }
