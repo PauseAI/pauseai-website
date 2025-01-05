@@ -45,7 +45,7 @@ PauseAI offers unique benefits to a variety of organizations and individuals, en
 ## Networks of Professionals
 
 - **Diverse Skill Set:** Access our multi-disciplinary volunteer base.
-- **Public-facing Arm:** Provide a more activist-oriented public presence for professional networks that prefer to remain neutral.
+- **Public-facing Arm:**  Provide a more activist-oriented public presence for professional networks that prefer to remain neutral.
 - **Cross-sector Collaboration:** Connect professionals with other stakeholders.
 
 ## Small Advocacy Organizations

@@ -322,9 +322,9 @@ Here is a sample table of roles for inspiration:
 
 So, you have a well-organized group of volunteers, eager to get involved and with a clear sense of their responsibilities. Now what?
 
-There are many different ways to achieve your goals as a local group.
+There are many different ways to achieve your goals as a local group. 
 Check out our [events page](/events) for ideas of the next events that are planned. Whenever you decide to organize one, don't forget to add it there!
-In addition to them, the following list is not meant to be exhaustive, but rather to provide inspiration as you begin planning your campaign.
+In addition to them, the following list is not meant to be exhaustive, but rather to provide inspiration as you begin planning your campaign. 
 
 ### Social events & having drinks
 

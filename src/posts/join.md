@@ -9,7 +9,7 @@ You are now one of them.
 
 Ways that you can join:
 
-- Join or create a [local community](/communities) or [event](/events).
+- Join or create a [local community](/communities) or [event](/events). 
 - Join the PauseAI [Discord](https://discord.gg/2XXWXvErfA), where most of the collaboration happens.
 - Fill out this form, and you will be able to chat or have a call with the Onboarding team about your interests and how you can participate in projects or [teams](/teams):
 
