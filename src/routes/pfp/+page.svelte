@@ -179,7 +179,7 @@
 		opacity: 80%;
 	}
 
-	.example {
+	.result.example {
 		filter: saturate(0.5);
 		opacity: 80%;
 	}
