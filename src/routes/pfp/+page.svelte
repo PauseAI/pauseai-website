@@ -48,7 +48,7 @@
 				overlayData,
 				relativeInnerDiameter: RELATIVE_INNER_DIAMETER
 			},
-			[buffer]
+			[canvasData, originalData, overlayData]
 		)
 		result.src = url
 		downloadDisabled = false
