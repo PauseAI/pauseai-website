@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { onMount } from 'svelte'
-	import ImageScript from 'imagescript'
+	import ImageScriptGui from 'imagescript'
 	import canvasUrl from '../../assets/pfpgen/2024-may-canvas.png'
 	import overlayUrl from '../../assets/pfpgen/2024-may-overlay.png'
 	import toast from 'svelte-french-toast'
@@ -11,12 +11,13 @@
 	import exampleUrl from '../../assets/pfpgen/2024-may-example.png'
 	import { Circle } from 'svelte-loading-spinners'
 	import Button from '$lib/components/Button.svelte'
+	import EasyWebWorker from 'easy-web-worker'
 
 	const RELATIVE_INNER_DIAMETER = 0.772
 	const OUTPUT_FILE_NAME = 'PauseAI Global Protest PFP'
 
-	let canvas: ImageScript.Image
-	let overlay: ImageScript.Image
+	let canvas: ImageScriptGui.Image
+	let overlay: ImageScriptGui.Image
 	let loading = false
 	let inputFileName: string
 	let result: HTMLImageElement
@@ -29,34 +30,52 @@
 
 	async function loadImage(url: string) {
 		const response = await fetch(url)
-		const buffer = await response.arrayBuffer()
-		//@ts-ignore
-		return ImageScript.Image.decode(buffer)
+		const arrayBuffer = await response.arrayBuffer()
+		const intArray = new Uint8Array(arrayBuffer)
+		return ImageScriptGui.Image.decode(intArray)
 	}
 
 	async function dropAccepted(event: any) {
 		loading = true
-		const file = event.detail.acceptedFiles[0]
+		const file: File = event.detail.acceptedFiles[0]
 		inputFileName = clipFileName(file.name)
-		const arrayBuffer = await file.arrayBuffer()
-		const image = await ImageScript.Image.decode(arrayBuffer)
+		const buffer = await file.arrayBuffer()
+		const intArray = new Uint8Array(buffer)
+		const worker = new EasyWebWorker<Uint8Array, string, Uint8Array[]>(({ onMessage }) => {
+			onMessage(async (message) => {
+				const ImageScript = await import('imagescript')
 
-		// crop to square
-		const minDimension = Math.min(image.width, image.height)
-		const cropLeft = (image.width - minDimension) / 2
-		const cropTop = (image.height - minDimension) / 2
-		image.crop(cropLeft, cropTop, minDimension, minDimension)
+				const intArray = message.payload
+				const image = await ImageScript.Image.decode(intArray)
 
-		// resize to transparent portion of overlay
-		image.resize(RELATIVE_INNER_DIAMETER * canvas.width, RELATIVE_INNER_DIAMETER * canvas.height)
+				// crop to square
+				const minDimension = Math.min(image.width, image.height)
+				const cropLeft = (image.width - minDimension) / 2
+				const cropTop = (image.height - minDimension) / 2
+				image.crop(cropLeft, cropTop, minDimension, minDimension)
 
-		// composite
-		canvas.composite(image, (canvas.width - image.width) / 2, (canvas.height - image.height) / 2)
-		canvas.composite(overlay)
+				// resize to transparent portion of overlay
+				image.resize(
+					RELATIVE_INNER_DIAMETER * canvas.width,
+					RELATIVE_INNER_DIAMETER * canvas.height
+				)
 
-		const encoded = await canvas.encode()
-		const blob = new Blob([encoded], { type: 'image/png' })
-		result.src = URL.createObjectURL(blob)
+				// composite
+				canvas.composite(
+					image,
+					(canvas.width - image.width) / 2,
+					(canvas.height - image.height) / 2
+				)
+				canvas.composite(overlay)
+
+				const encoded = await canvas.encode()
+				const blob = new Blob([encoded], { type: 'image/png' })
+				const url = URL.createObjectURL(blob)
+				message.resolve(url)
+			})
+		})
+		const url = await worker.send(intArray, [buffer])
+		result.src = url
 		downloadDisabled = false
 		loading = false
 	}

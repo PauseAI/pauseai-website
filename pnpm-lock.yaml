@@ -32,6 +32,9 @@ importers:
       clipboard-polyfill:
         specifier: ^4.1.0
         version: 4.1.0
+      easy-web-worker:
+        specifier: ^7.0.1
+        version: 7.0.1(easy-cancelable-promise@1.0.1)
       escape-html:
         specifier: ^1.0.3
         version: 1.0.3
@@ -1115,6 +1118,14 @@ packages:
 
   earcut@3.0.0:
     resolution: {integrity: sha512-41Fs7Q/PLq1SDbqjsgcY7GA42T0jvaCNGXgGtsNdvg+Yv8eIu06bxv4/PoREkZ9nMDNwnUSG9OFB9+yv8eKhDg==}
+
+  easy-cancelable-promise@1.0.1:
+    resolution: {integrity: sha512-3vZLA/SbSVv2DKFSvNrDLPZYtQmeNn4itIb3CkhYLs2ZCKK5Ah9/Ty4oAKM/bk9P4Nrpsd5Qhc62FXNXDR2e8A==}
+
+  easy-web-worker@7.0.1:
+    resolution: {integrity: sha512-raDOcGWFc1Ws1OEG0jG5CwFbbWwuT878uNvbHYjQ6a4ljILekYBLzjYFmT6qYH04kjVSK2/v0LPrA4wEW3Ayww==}
+    peerDependencies:
+      easy-cancelable-promise: ^1.0.1
 
   emoji-regex@10.4.0:
     resolution: {integrity: sha512-EC+0oUMY1Rqm4O6LLrgjtYDvcVYTy7chDnM4Q7030tP4Kwj3u/pR6gP9ygnp2CJMK5Gq+9Q2oqmrFJAz01DXjw==}
@@ -2881,6 +2892,12 @@ snapshots:
       esutils: 2.0.3
 
   earcut@3.0.0: {}
+
+  easy-cancelable-promise@1.0.1: {}
+
+  easy-web-worker@7.0.1(easy-cancelable-promise@1.0.1):
+    dependencies:
+      easy-cancelable-promise: 1.0.1
 
   emoji-regex@10.4.0: {}
 
