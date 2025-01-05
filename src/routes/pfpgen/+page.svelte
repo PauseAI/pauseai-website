@@ -28,6 +28,7 @@
 		overlay = await loadImage(overlayUrl)
 	})
 
+	// TODO don't decode outside of worker, just download
 	async function loadImage(url: string) {
 		const response = await fetch(url)
 		const arrayBuffer = await response.arrayBuffer()
