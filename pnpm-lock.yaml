@@ -5,6 +5,7 @@ settings:
   excludeLinksFromLockfile: false
 
 importers:
+
   .:
     dependencies:
       '@fontsource/roboto-slab':
@@ -65,8 +66,8 @@ importers:
         specifier: ^0.14.7
         version: 0.14.7
       svelte-file-dropzone:
-        specifier: ^2.0.7
-        version: 2.0.7(svelte@4.2.19)
+        specifier: ^2.0.9
+        version: 2.0.9(svelte@4.2.19)
       svelte-french-toast:
         specifier: ^1.2.0
         version: 1.2.0(svelte@4.2.19)
@@ -1906,10 +1907,10 @@ packages:
       svelte:
         optional: true
 
-  svelte-file-dropzone@2.0.7:
-    resolution: {integrity: sha512-sykRq+Q8rXM9yqsD3T9yzb3syLe21Go01cxb5NTfKA9RgMWHT/gnjS8g36YFWw3jIdC7vbbmuwwgYdA0mlcMqw==}
+  svelte-file-dropzone@2.0.9:
+    resolution: {integrity: sha512-+gS9DscyEcy2Q0jhcADPs7uUEnz56YKudKtLGteEGNi4lF7anPTyxDXoDRiNACWzsp3PF5KfYkw0GgrTieZK9Q==}
     peerDependencies:
-      svelte: ^3.54.0 || ^4.0.0
+      svelte: ^3.54.0 || ^4.0.0 || ^5
 
   svelte-french-toast@1.2.0:
     resolution: {integrity: sha512-5PW+6RFX3xQPbR44CngYAP1Sd9oCq9P2FOox4FZffzJuZI2mHOB7q5gJBVnOiLF5y3moVGZ7u2bYt7+yPAgcEQ==}
@@ -3760,7 +3761,7 @@ snapshots:
     optionalDependencies:
       svelte: 4.2.19
 
-  svelte-file-dropzone@2.0.7(svelte@4.2.19):
+  svelte-file-dropzone@2.0.9(svelte@4.2.19):
     dependencies:
       file-selector: 0.6.0
       svelte: 4.2.19
