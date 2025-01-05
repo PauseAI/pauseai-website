@@ -1,6 +1,6 @@
 import { StaticEasyWebWorker } from 'easy-web-worker'
 import ImageScript from 'imagescript'
-import type { PfpRequest, PfpResponse, PfpTransfer } from './shared'
+import type { PfpRequest, PfpResponse } from './shared'
 
 const { onMessage } = new StaticEasyWebWorker<PfpRequest, PfpResponse>()
 

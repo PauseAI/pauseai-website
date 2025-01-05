@@ -6,5 +6,3 @@ export type PfpRequest = {
 }
 
 export type PfpResponse = string
-
-export type PfpTransfer = [Uint8Array, Uint8Array, Uint8Array]

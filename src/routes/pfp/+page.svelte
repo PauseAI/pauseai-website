@@ -11,7 +11,7 @@
 	import exampleUrl from '../../assets/pfpgen/2024-may-example.png'
 	import overlayUrl from '../../assets/pfpgen/2024-may-overlay.png'
 	import { meta } from './meta'
-	import type { PfpRequest, PfpResponse, PfpTransfer } from './shared'
+	import type { PfpRequest, PfpResponse } from './shared'
 	import PfpWorker from './worker?worker'
 
 	const RELATIVE_INNER_DIAMETER = 0.772
@@ -22,7 +22,7 @@
 	let loading = false
 	let inputFileName: string
 	let result: HTMLImageElement
-	let downloadDisabled = true
+	let ready = false
 
 	onMount(async () => {
 		;[canvasData, overlayData] = await Promise.all([loadImage(canvasUrl), loadImage(overlayUrl)])
@@ -40,18 +40,15 @@
 		inputFileName = clipFileName(file.name)
 		const buffer = await file.arrayBuffer()
 		const originalData = new Uint8Array(buffer)
-		const worker = new EasyWebWorker<PfpRequest, PfpResponse, PfpTransfer>(new PfpWorker())
-		const url = await worker.send(
-			{
-				canvasData,
-				originalData,
-				overlayData,
-				relativeInnerDiameter: RELATIVE_INNER_DIAMETER
-			},
-			[canvasData, originalData, overlayData]
-		)
+		const worker = new EasyWebWorker<PfpRequest, PfpResponse>(new PfpWorker())
+		const url = await worker.send({
+			canvasData,
+			originalData,
+			overlayData,
+			relativeInnerDiameter: RELATIVE_INNER_DIAMETER
+		})
 		result.src = url
-		downloadDisabled = false
+		ready = true
 		loading = false
 	}
 
@@ -67,7 +64,7 @@
 	}
 
 	function download() {
-		if (downloadDisabled) return
+		if (!ready) return
 		const anchor: HTMLAnchorElement = document.createElement('a')
 		anchor.setAttribute('download', OUTPUT_FILE_NAME)
 		anchor.href = result.src
@@ -111,14 +108,20 @@
 	<div>
 		<h2>Result</h2>
 		<div class="result-container">
-			<img class="result" class:loading src={exampleUrl} bind:this={result} />
+			<img
+				class="result"
+				class:loading
+				class:example={!ready}
+				src={exampleUrl}
+				bind:this={result}
+			/>
 			<div class="spinner-container">
 				{#if loading}
 					<Circle color="var(--brand)" />
 				{/if}
 			</div>
 		</div>
-		<Button disabled={downloadDisabled} on:click={download}>Download</Button>
+		<Button disabled={!ready} on:click={download}>Download</Button>
 	</div>
 </div>
 
@@ -172,6 +175,11 @@
 	}
 
 	.result.loading {
+		opacity: 80%;
+	}
+
+	.example {
+		filter: saturate(0.5);
 		opacity: 80%;
 	}
 
