@@ -3,12 +3,12 @@
 	import PostMeta from '$lib/components/PostMeta.svelte'
 	import EasyWebWorker from 'easy-web-worker'
 	import UploadIcon from 'lucide-svelte/icons/upload'
-	import { onMount } from 'svelte'
+	import { onMount, tick } from 'svelte'
 	import Dropzone from 'svelte-file-dropzone'
 	import toast from 'svelte-french-toast'
 	import { Circle } from 'svelte-loading-spinners'
 	import canvasUrl from '$assets/pfpgen/2024-may-canvas.png'
-	import exampleUrl from '$assets/pfpgen/2024-may-example.png'
+	import exampleUrl from '$assets/pfpgen/2024-may-example.png?enhanced'
 	import overlayUrl from '$assets/pfpgen/2024-may-overlay.png'
 	import { meta } from './meta'
 	import type { PfpRequest, PfpResponse } from './shared'
@@ -47,8 +47,9 @@
 			overlayData,
 			relativeInnerDiameter: RELATIVE_INNER_DIAMETER
 		})
-		result.src = url
 		ready = true
+		await tick()
+		result.src = url
 		loading = false
 	}
 
@@ -108,14 +109,17 @@
 	<div>
 		<h2>Result</h2>
 		<div class="result-container">
-			<img
-				class="result"
-				class:loading
-				class:example={!ready}
-				src={exampleUrl}
-				bind:this={result}
-				alt="Result"
-			/>
+			{#if ready}
+				<img class="result" class:loading bind:this={result} alt="Result" />
+			{:else}
+				<enhanced:img
+					class="result example"
+					class:loading
+					src={exampleUrl}
+					alt="Example"
+					sizes="50vw"
+				/>
+			{/if}
 			<div class="spinner-container">
 				{#if loading}
 					<Circle color="var(--brand)" />
@@ -173,6 +177,7 @@
 
 	.result {
 		width: 100%;
+		height: unset;
 	}
 
 	.result.loading {
