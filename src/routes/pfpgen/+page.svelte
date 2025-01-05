@@ -26,8 +26,7 @@
 	let downloadDisabled = true
 
 	onMount(async () => {
-		canvasData = await loadImage(canvasUrl)
-		overlayData = await loadImage(overlayUrl)
+		;[canvasData, overlayData] = await Promise.all([loadImage(canvasUrl), loadImage(overlayUrl)])
 	})
 
 	async function loadImage(url: string) {
