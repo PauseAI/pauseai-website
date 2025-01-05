@@ -117,7 +117,7 @@
 					class:loading
 					src={exampleUrl}
 					alt="Example"
-					sizes="50vw"
+					sizes="40rem"
 				/>
 			{/if}
 			<div class="spinner-container">
