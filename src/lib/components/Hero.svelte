@@ -1,7 +1,7 @@
 <script lang="ts">
-	import london from './../../assets/protests/london.jpeg?enhanced'
-	import denHaag from './../../assets/protests/den-haag.jpeg?enhanced'
-	import sf from './../../assets/protests/san-francisco.jpeg?enhanced'
+	import london from '$assets/protests/london.jpeg?enhanced'
+	import denHaag from '$assets/protests/den-haag.jpeg?enhanced'
+	import sf from '$assets/protests/san-francisco.jpeg?enhanced'
 	import { onMount } from 'svelte'
 	import { initializeCqwResizeObserver } from '$lib/container-query-units'
 

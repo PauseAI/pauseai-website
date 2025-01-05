@@ -1,11 +1,11 @@
 <script lang="ts">
 	import QuoteContent from './QuoteContent.svelte'
-	import Hinton from '../../assets/quote-profile/hinton.jpg?enhanced'
-	import Hawking from '../../assets/quote-profile/hawking.jpg?enhanced'
-	import Turing from '../../assets/quote-profile/turing.jpg?enhanced'
-	import Russell from '../../assets/quote-profile/russell.jpg?enhanced'
-	import Bengio from '../../assets/quote-profile/bengio.jpg?enhanced'
-	import CAIS from '../../assets/quote-profile/cais_statement.jpg?enhanced'
+	import Hinton from '$assets/quote-profile/hinton.jpg?enhanced'
+	import Hawking from '$assets/quote-profile/hawking.jpg?enhanced'
+	import Turing from '$assets/quote-profile/turing.jpg?enhanced'
+	import Russell from '$assets/quote-profile/russell.jpg?enhanced'
+	import Bengio from '$assets/quote-profile/bengio.jpg?enhanced'
+	import CAIS from '$assets/quote-profile/cais_statement.jpg?enhanced'
 	import ArrowLeft from 'lucide-svelte/icons/arrow-left'
 	import ArrowRight from 'lucide-svelte/icons/arrow-right'
 	import Glide, {
