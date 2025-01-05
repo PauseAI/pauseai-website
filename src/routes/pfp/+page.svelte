@@ -114,6 +114,7 @@
 				class:example={!ready}
 				src={exampleUrl}
 				bind:this={result}
+				alt="Result"
 			/>
 			<div class="spinner-container">
 				{#if loading}
