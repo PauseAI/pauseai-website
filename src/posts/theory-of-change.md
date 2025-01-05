@@ -3,6 +3,7 @@ title: Theory of Change
 description: How does PauseAI expect to achieve its mission?
 date: '2024-02-26'
 ---
+
 How does PauseAI plan to achieve its mission?
 
 ## What do we want?
@@ -16,18 +17,20 @@ The problem is not a lack of public support for our proposal (by far most people
 However, there are some important reasons why we don't have a pause yet:
 
 - **Race dynamics**.
-AI creates a lot of value, especially if your AI is the most powerful.
-The desire to be the first to develop a new AI is very strong, both for companies and for countries.
-Companies understand that the best-performing AI model can have a far higher price, and countries understand that they can get a lot of strategic and economic power by leading the race.
-The people within AI labs tend to understand the risks, but they have strong incentives to focus on capabilities rather than safety.
-Politicians often are not sufficiently aware of the risks, but even if they were, they might still not want to slow down AI development in their countnry because of the economic and strategic benefits.
-We need an _international_ pause.
-That's the whole point of our movement.
+  AI creates a lot of value, especially if your AI is the most powerful.
+  The desire to be the first to develop a new AI is very strong, both for companies and for countries.
+  Companies understand that the best-performing AI model can have a far higher price, and countries understand that they can get a lot of strategic and economic power by leading the race.
+  The people within AI labs tend to understand the risks, but they have strong incentives to focus on capabilities rather than safety.
+  Politicians often are not sufficiently aware of the risks, but even if they were, they might still not want to slow down AI development in their countnry because of the economic and strategic benefits.
+  We need an _international_ pause.
+  That's the whole point of our movement.
 - **Lack of urgency**.
-People [underestimate the pace of AI progress](/risks).
-Even experts in the field have been consistently surprised by how quickly AI has been improving.
+  People [underestimate the pace of AI progress](/urgency).
+  Even experts in the field have been consistently surprised by how quickly AI has been improving.
 - **Our psychology**.
-Read more about how our [psychology makes it very difficult](/psychology-of-x-risk) for us to internalize how bad things can get.
+  Read more about how our [psychology makes it very difficult](/psychology-of-x-risk) for us to internalize how bad things can get.
+- **The Overton window**.
+  Even though public support for AI regulations and slowing down AI development is high (see [polls & surveys](/polls-and-surveys)), many of the topics we discuss is still outside of the "Overton window", which means that they are considered too extreme to discuss. In 2023 this window has shifted quite a bit (the FLI Pause letter, Geoffrey Hinton quitting, the Safe.ai statement), but it's still too much of a taboo in political elite cirtlces to seriously consider the possibility of pausing. Additionally, the existential risk from AI is still ridiculed by too many people. It is our job to move this overton window further.
 
 ## How do we pause?
 
@@ -40,10 +43,16 @@ We can get there in two ways:
 
 ## What do we do to get there?
 
-1. **Grow the movement**. The larger our group is, the more we can do. We grow our movement through radical transparency, online community building, and fostering local groups. We empower our volunteers to take action, and we make it easy for them to do so. Read more [about our growth strategy](/growth-strategy).
-2. **Protests**. [Protests](/protests) increase public awareness and support. They are also a great way to recruit new members and improve community feeling. Because our subject is relatively new, even small protests can get very good [media coverage](/press). We encourage our members to [organize protests](/organizing-a-protest) in their own cities.
+1. **Grow the movement**. The larger our group is, the more we can do. We grow our movement through radical transparency, online community building, and fostering [local communities](/communities). We empower our volunteers to take action, and we make it easy for them to do so. Read more [about our growth strategy](/growth-strategy) about how we do this.
+2. **Protests**. [Protests](/protests) are shown to increase public awareness and support. They are also a great way to recruit new members and improve community feeling. Because our subject is relatively new, even small protests can get very good [media coverage](/press). We encourage our members to [organize protests](/organizing-a-protest) in their own cities by providing them with the tools and knowledge they need.
 3. **Lobbying**. _Every volunteer can become an amateur lobbyist_. We send [emails to politicians](/email-builder), we meet with them, and we stay in touch. We ask them to put AI risks on the agenda, draft a treaty. The core issue that we're trying to solve is a _lack of information_ and a _lack of [emotional internalization](/psychology-of-x-risk)_ and insight in the political sphere.
-4. **Inform the public**. We make people aware of the [risks](/risks) we're facing and what we can do to prevent them. We write articles, make videos, design images, join debates, give talks, and organize events. Read about our [communication strategy](/communication-strategy).
+4. **Inform the public**. We make people aware of the [risks](/risks) we're facing and [what we can do](/action) to prevent them. We do this publicly by publishing articles, videos, images and posts on social media. We join podcasts, give talks, and organize events. We also reach out to partner organizations, influencers, educational institutions and other groups that can play a role in public awareness. Read about our [communication strategy](/communication-strategy).
+
+## What do we _not_ do?
+
+- **Tolerate violence**. We make it very clear to our members and the people joining our protests that we are a peaceful movement. We do not promote violence, and we do not tolerate it. We communicate this in our Protestor's Code of Conduct, our Discord rules, and our Volunteer agreement. The main reason for this is because we want to be the good guys, we want the public to be on our side.
+- **Take sides in other topics**. We are a movement that focuses on an AI Pause. We do not discuss and take sides in other topics, even if (short-term) opportunities arise that may make this tempting to do.
+- **Be dishonest**. We need people to trust what we say, so we must do everything to promote honesty.
 
 ## Let's get to it
 

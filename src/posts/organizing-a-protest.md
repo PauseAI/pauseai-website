@@ -13,7 +13,7 @@ However, you can have more impact by scaling up and doing more things, and we're
 - Protesting shows the world that we care about this issue. By protesting, we show that we are willing to spend our time and energy to get people to listen.
 - Protests can and often will [positively influence](https://www.socialchangelab.org/_files/ugd/503ba4_052959e2ee8d4924934b7efe3916981e.pdf) public opinion, voting behavior, corporate behavior and policy.
 - By far [most people are supportive](https://today.yougov.com/politics/articles/31718-do-protesters-want-help-or-hurt-america) of peaceful/non-violent protests
-- There is [no "backfire" effect](https://journals.sagepub.com/doi/full/10.1177/2378023120925949) [unless the protest is violent](https://news.stanford.edu/2018/10/12/how-violent-protest-can-backfire/). Our protests are peaceful and non-violent.
+- There is [no evidence for a "backfire" effect](https://journals.sagepub.com/doi/full/10.1177/2378023120925949) [unless the protest is violent](https://news.stanford.edu/2018/10/12/how-violent-protest-can-backfire/). Our protests are peaceful and non-violent.
 - It's a social bonding experience. You meet other people who share your concerns and willingness to take action.
 - Check out [this amazing article](https://forum.effectivealtruism.org/posts/4ez3nvEmozwPwARr9/a-case-for-the-effectiveness-of-protest) for more insights on why protesting works
 
@@ -21,14 +21,17 @@ However, you can have more impact by scaling up and doing more things, and we're
 
 ### Ask for help
 
-Check if there's not already a [local community near you](/communities).
+Check if there's already a [local community near you](/communities).
+If there is not, you should [start one](/local-organizing)!
 And [join our Discord server](https://discord.gg/2XXWXvErfA) to discuss organizing a protest.
 We're happy to help you with advice and resources!
+Don't forget writing in your city post, inside the #local-communities channel over there.
 
 ### Pick a location and a date
 
 Ideally, you want to pick a location relevant to the protest.
 The HQ of a company, parliament, a ministry building - whatever matches your message.
+You can check some examples [here](https://docs.google.com/spreadsheets/d/1aGXwyOYraDwmRZzySHUiJ45l_KzhnHpJVBkJCMyG7gQ/edit?usp=sharing).
 Also pick an easily accessible location, because you want as many people as possible to be able to attend.
 If your date is relevant too (e.g. because there's a relevant event at that location), that's even better!
 
@@ -46,14 +49,14 @@ We can help you with this!
 ### Create a webpage on PauseAI.info
 
 We can do this for you if you want help.
-Publish a new page on this PauseAI website.
+Publish a new page on this PauseAI website or add your location to an already existing page.
 If you know GitHub and rather do it yourself, simply create a new file (e.g. `2023-10-23-nyc-protest.md`) in the `src/posts` folder.
 Feel free to copy an earlier protest file for inspiration.
 Also, update the `protests.md` file to link to the protest.
 
 ### Create an Event page
 
-Make a Facebook event or use another RSVP tool like [partiful](https://partiful.com).
+Add the event to [this website](/events), which can be then shared separately via Luma to invite people. Or use another RSVP tool like Facebook.
 You can also decide to link to a Whatsapp group or something similar instead.
 The important bit is that you can keep people updated about what's going to happen.
 
@@ -62,6 +65,7 @@ The important bit is that you can keep people updated about what's going to happ
 Share the protest on Twitter, LinkedIn, etc.
 Share the post in relevant groups.
 Do it twice: about two weeks in advance, and one day before!
+Consider creating a [digital flyer](https://www.figma.com/design/iQ4PHQTi1vAVmT9Lckazqt/PauseAI-designs---editable?node-id=1574-544&node-type=section&t=KmAYlq7fGZVAkzij-0) or a video for better shareability.
 
 ### Make the protest visible locally
 
@@ -78,14 +82,17 @@ Do this about 24 to 48 hrs before the protest.
 
 ### Reach out to people and organizations
 
-Do you have an Effective Altruists group in your city?
-Or a local AI safety group?
+Consider adding the event to the list of events of [AI Safety](https://www.aisafety.com/events-and-training), [Effective Altruism](https://forum.effectivealtruism.org/events), and [LessWrong](https://www.lesswrong.com/community).
+If your protest is part of an international protest, the events may already exist.
+
+Do you have an [Effective Altruists group in your city](https://forum.effectivealtruism.org/groups#local)?
+Or a [local AI safety group](https://www.aisafety.com/communities)?
 Reach out to them, get them to spread your invitation.
 Keep them informed of the protest, make them part of the process.
 
 ### Design and print signs / flyers / banners / props
 
-Use our [Figma design template](https://www.figma.com/file/kHaEUR2lC0J4wm1poEF30K/PauseAI-designs---not-editable---28%2F03?type=design&node-id=0%3A1&mode=design&t=KBs4IbB48BpEmong-1) or check the [media folder](https://drive.google.com/drive/folders/1bQ_MZ8giK-Mee4ABkO0BgcFInaXruNpa?usp=sharing) to make your own flyers / banners / posters.
+Use our [Figma design template](https://www.figma.com/design/iQ4PHQTi1vAVmT9Lckazqt/PauseAI-designs---editable) or check the [media folder](https://drive.google.com/drive/folders/1bQ_MZ8giK-Mee4ABkO0BgcFInaXruNpa?usp=sharing) to make your own flyers / banners / posters.
 We have a <a href="/PauseAI_flyer.pdf" target="_blank">flyer</a> that you can [print out and hand out to people](/flyering).
 Also check out the [Discord thread](https://discord.com/channels/1100491867675709580/1138484822117974191) where we discuss protest materials.
 We can reimburse printing costs, so keep the receipts!
@@ -125,6 +132,11 @@ Get a megaphone or a loudspeaker if you can.
 And again, make sure someone is filming it.
 
 ## During the protest
+
+### Start with some energetic activities
+
+Before you do the protest, get everyone to do some ridiculous dances or chants.
+This gets the right energy going.
 
 ### Speak to media
 

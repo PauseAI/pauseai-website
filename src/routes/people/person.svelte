@@ -62,6 +62,15 @@
 		gap: 0.5rem;
 	}
 
+	@media (max-width: 600px) {
+		.name-title {
+			flex-direction: column;
+			align-items: flex-start;
+			gap: 0;
+			margin-bottom: 0.5rem;
+		}
+	}
+
 	.bio {
 		font-style: italic;
 		position: relative;

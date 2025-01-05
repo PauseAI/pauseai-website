@@ -17,27 +17,25 @@ Ultimately, we need to balance the risks with the costs of pausing.
 In our view, the chance that AI will cause catastrophic risks [soon](/urgency) is already large enough to warrant a pause at this moment.
 As stated by Stuart Russell, when faced with an uncertain deadline, one should take the action that would be optimal given the shortest time constraint.
 
-The more we wait the more people will think a pause is not possible, and the more some people will fantasize and invest on theoretically possible AI applications. 
+The more we wait the more people will think a pause is not possible, and the more some people will fantasize and invest on theoretically possible AI applications.
 So the more money will go into lobbying against people like us.
 
 Also, from protesting and lobbying to convincing people on power, to make a treaty to take effect, could take many years. Not to mention that even if it weren’t the case, pausing early gives us breathing room so that bad actors and algorithmic breakthroughs do not make us fall into the precipice.
 
 ## Pausing for too short / only for 6 months
 
-The pause we propose is of indeterminate length. We shouldn't unpause until there is a good enough consensus that we know how to develop aligned AIs, no matter how powerful they are, and that we have the systems in place to do it carefully and democratically.
-It is NOT like the [six-month pause asked by the open letter published by the Future of Life Institute](https://futureoflife.org/open-letter/pause-giant-ai-experiments/).
+The pause we propose is of indeterminate length. We shouldn't unpause until there is a broad consensus that we know how to develop frontier AIs safely. Technically, and democratically speaking.
+Our proposal is NOT "for at least 6 months" like the [open letter published by the Future of Life Institute](https://futureoflife.org/open-letter/pause-giant-ai-experiments/).
 
 ## Pausing for too long
 
-Nick Bostrom, one of the first AI alarmists, worries that [at some point we might worry _too much_ about AI risks](https://twitter.com/jachaseyoung/status/1723325057056010680), although that moment is not yet here.
+Nick Bostrom, one of the early voices raising concerns about AI, worries that [at some point we might worry too much about AI risks](https://twitter.com/jachaseyoung/status/1723325057056010680), although that moment is not yet here.
 If concern about AI keeps rising, and we get a Pause, it might lead to a situation where the entirety of AI development becomes taboo or illegal.
 If that happens, we will never reap the benefits of AI, and in the meantime, we might encounter other existential risks that we could have avoided with the help of AI.
 
 We can address this risk by clearly stating under what conditions AI development should resume.
 As we said, we suggest that AI development should resume when building provably safe AI becomes possible.
 Additionally, we only propose to ban the development of very specific kinds of models: the largest, general models.
-In the meantime there's other ways we could achieve more intelligence: more transparent AI paradigms, brain-computer interfaces, whole brain emulations, neural enhancements, growth in collective intelligence, genetic editing and selection, and maybe more.
-Those paths to a greater intelligence could bring us the benefits that AGI promises without so many of its risks.
 
 ## Centralization of AI might make takeover risks worse
 
@@ -58,14 +56,14 @@ But what we're asking for is a pause _until we can prove AI can be built safely_
 If one country pauses AI development, other countries will continue to develop AI.
 We might end up in a world where the first AGI is developed by a non-cooperative actor, which is likely to be a bad outcome.
 The incentives to pause individually are weak, because the benefits of AI development are large, and the risks of AI development are global.
-This is a classic [tragedy of the commons](https://en.wikipedia.org/wiki/Tragedy_of_the_commons) situation.
+This is a classic [prisoner's dilemma](https://en.wikipedia.org/wiki/Prisoner%27s_dilemma) situation.
 
 The solution to this is to make the pause international through a treaty, which is what we're proposing.
 This also requires a strong enforcement mechanism.
 Countries that don't comply with the treaty should be punished.
 Economic sanctions may be sufficient, but military intervention might be necessary in extreme cases.
 
-One actor in particular that some people believe will not pause is China. 
+One actor in particular that some people believe will not pause is China.
 We disagree with this assessment and you can read about it [here](/faq#if-we-pause-what-about-china).
 
 ## AI development might go underground
@@ -74,7 +72,8 @@ If AI development (above a certain threshold) is banned, it might go underground
 The potential benefits are so large that a rogue (state) actor might decide to develop AI in secret.
 That means the first to achieve superintelligence would be a non-cooperative actor, which is likely to be a bad outcome.
 
-By tracking GPU sales, we can detect at least some underground AI development.
+By tracking GPU sales, we can detect large-scale AI development.
+Since frontier model GPU clusters require immense amounts of energy and custom buildings, the physical infrastructure required to train a large model is hard to hide.
 
 Western powers (US, Netherlands and Taiwan) control the GPU supply chain strongly enough to prevent uncooperative states from obtaining GPUs.
 Non-state actors are unlikely to be able to gather sufficient resources in secret to train an AGI for at least a decade after AGI becomes possible by Big Tech companies.
@@ -92,7 +91,8 @@ Also, the fact that there no longer is a _business incentive_ would help to redu
 This is a serious concern, although there are strong arguments to be made that [overhang is unlikely to occur](https://blog.aiimpacts.org/p/are-there-examples-of-overhang-for).
 
 PauseAI supports a pause on relevant compute improvements as well.
-Also, as we said, the 'play' button should not be pressed if we still don't know how to build safe AI. And that includes the training and deployment of models with more advanced hardware.
+Also, as we said, the 'play' button should not be pressed if we still don't know how to build safe AI.
+And that includes the training and deployment of models with more advanced hardware.
 
 ## AI development is necessary for learning how to make AIs safe
 
@@ -119,11 +119,16 @@ However, enforcing this will be more difficult than enforcing compute regulation
 
 ## If we only ban general AI models, we might still get AGI through narrow models
 
-We want to restrict dangerous models that can do things like manipulate humans, plan strategically and write code.
-We don't want to restrict very narrow models, like image classifiers used in self-driving cars or medical diagnosis.
-However, this leads to a difficult situation where there are _strong incentives_ to stretch the definition of "narrow" AI.
+We want to restrict dangerous models that have [dangerous capabilities](/dangerous-capabilities) like manipulating humans, planning strategically and writing code.
+We don't want to restrict very narrow AI models, like image classifiers used in self-driving cars or medical diagnosis.
+Luckily, virtually all of these narrow models fall outside of our [proposed](/proposal) restrictions, because these models tend to be relatively small.
 
-Therefore, we haven't defined "narrow" AI in our proposal, but instead, we use the three conditions mentioned above.
+A sufficiently powerful narrow model (trained on real-world data) might be likely to generalize to dangerous capabilities.
+For example, a very powerful image generator model might be able to make images of functional code, or a very powerful video model might be able to generate a movie about an AI planning a successful takeover.
+Narrow models often become better at their narrow task by generalizing.
+To some extent this is what makes LLMs like ChatGPT so successful: they are trained only to "predict the next word", but in order for it to be really good at this, is needs to learn a lot about the world.
+
+Therefore, we haven't defined "narrow" or "general" AI in our proposal, but instead, we use three conditions related to model size, compute used and capabilities.
 
 ## If a pause is implemented, we should expect a political compromise
 

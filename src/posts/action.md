@@ -1,85 +1,59 @@
 ---
 title: Take action
-description: Ways to help out with pausing AGI development.
+description: Ways to help reduce AI risk.
 ---
 
-The group of people who are aware of AI risks is still small.
+AI won't get safer unless we act decisively to push for safety.
+Choose an activity below depending on your interests or skills.
 
-You are now one of them.
+## For everyone
 
-**Your actions matter more than you think.**
+### Demand government action
 
-## You can do this
+- **Write to your politicians**: We've found emails are surprisingly effective and take relatively little effort. If you don’t feel confident about what to write, [start with our email builder](/email-builder). When you get a meeting, you should check out our [lobby tips](/lobby-tips).
+- **Call your politicians**: Try calling legislators' offices while having a set of talking points in view so you stay on topic.
+- **Protest**: Join [one of the protests](https://pauseai.info/protests) or [organize one yourself](https://pauseai.info/organizing-a-protest).
+- **Sign petitions**: [International AI Treaty](https://aitreaty.org), [Ban Superintelligence](https://chng.it/Djjfj2Gmpk), [Demand responsible AI](https://www.change.org/p/artificial-intelligence-time-is-running-out-for-responsible-ai-development-91f0a02c-130a-46e1-9e55-70d6b274f4df), or one of the **national petitions**: [UK](https://petition.parliament.uk/petitions/639956), [AUS](https://www.aph.gov.au/e-petitions/petition/EN5163), [NL](https://aipetitie.nl).
 
-- **[Join PauseAI](/join)** and help us grow.
-- **[Join our Discord server](https://discord.gg/T3YrWUJsJ5)**, where our community is most active. We have a **#projects** channel where people are working on campaigns, videos, images, apps and more.
-- **[Meet](/communities)** other people in a PauseAI community near you. If there is no community near you, consider starting one.
+### Inform people around you
+
+- **Share about AI risk** on your social media. One of [these videos](https://www.youtube.com/watch?v=xBqU1QxCao8&list=PLI46NoubGtIJa0JVCBR-9CayxCOmU0EJt) or this website can be a good start. And don't forget to tag us in your posts.
+- **Talk to people in your life** about AI safety. Answer their questions, and encourage them to act too. Use our [counterarguments](/counterarguments) to help you be more persuasive.
+- **[Tabling](/tabling) and [flyering](/flyering)** are great ways to reach many people in a short amount of time.
+- **Attend local events**: Many cities have (free / low-cost) events about AI & technology policy. Attending these events is a great way to network and share your concerns. If you want AI safety marketing materials, reach out to us on [Discord](https://discord.gg/2XXWXvErfA) so we can send you some.
+
+### Support PauseAI
+
+- **Join or create a [local PauseAI community](/communities)**.
+- **Join the [Discord](https://discord.gg/2XXWXvErfA)**, where most of the collaboration happens.
+- **Protest or participate in [events](/events)**. If no protest is near you, consider [starting one](/organizing-a-protest).
+- **Look over our [vacancies](/vacancies)** to see if any of your skills match our organizational needs. We're often looking for people with experience in social media, communications, organizing, outreach, and software. Some positions are compensated.
+- **[Sign up as a volunteer](https://airtable.com/appWPTGqZmUcs3NWu/pag7ztLh27Omj5s2n/form)** so we can find projects in your interest areas).
 - [**Donate**](/donate) to PauseAI or buy some merchandise in our [store](https://pauseai-shop.fourthwall.com/).
-- [**Send an email to a politician**](/email-builder): emails are completely overpowered. Do it.
-- **[Learn](/learn)** more about AI alignment and the risks we are facing.
-- [**Protest**](/protests): join [one of the protests](/protests) or [organize one yourself](/organizing-a-protest).
-- [**Lobby**](/lobby-tips): convince your government to work towards a pause and prepare for the [summit](/summit).
-- **Talk** to people in your life about this. Answer their questions, and get them to act.
-- [**Flyers**](/flyering) print, share and post flyers.
-  - Having some printed one-page flyers on hand, or easily available to show and share from your phone, can be a quick and useful resource for faqs, talking points, expert quotes and opinions, online resources, etc.
-- **Share** about AI risk on social media. This website might be a good start.
-- **Create** [articles](/learn#articles), [videos](/learn#videos) or [memes](https://twitter.com/AISafetyMemes). Collaborate with others in the [Discord server](https://discord.gg/2XXWXvErfA) (in the #projects channel).
-- **Sign petitions**:
-  - [International AI Treaty](https://aitreaty.org)
-  - [Ban Superintelligence](https://chng.it/Djjfj2Gmpk)
-  - [Demand responsible AI](https://www.change.org/p/artificial-intelligence-time-is-running-out-for-responsible-ai-development-91f0a02c-130a-46e1-9e55-70d6b274f4df)
-  - Or one of the **national petitions**: [UK](https://petition.parliament.uk/petitions/639956), [AUS](https://www.aph.gov.au/e-petitions/petition/EN5163), [NL](https://aipetitie.nl)
-- **Follow** our social media channels and stay updated:
-  - [Discord](https://discord.gg/2XXWXvErfA)
-  - [Twitter](https://twitter.com/PauseAI)
-  - [Facebook](https://www.facebook.com/PauseAI)
-  - [LinkedIn](https://www.linkedin.com/company/pauseai/)
-    - Adding PauseAI to your resume and enabling "Notify network" is an easy way to let many people know about our efforts.
-  - [TikTok](https://www.tiktok.com/@pauseai)
+- **Follow our [social media channels](https://linktr.ee/pauseai)** and stay updated. Your local PauseAI chapter may also have dedicated social media pages.
 
-## If you ...
-
-### If you are convincing
-
-- **Convince one person in your government to prepare for the [summit](/summit) and work towards a global pause**. This is the most important thing you can do. See [lobby tips](/lobby-tips) and the [Email Builder](/email-builder).
-- **Convince journalists** to write about AI safety. Point them to [educational materials](/learn).
-- **Convince influencers** to talk and make videos about AI safety.
-- **Ask the management** at your current organization to take an institutional position on this.
-- [Write to your political representatives](https://www.campaignforaisafety.org/politician/).
-
-### If you are a politician or work in government
-
-- **Prepare for the [AI safety summit](/summit)**. Form coalitions with other countries. Get informed about the [problem](/learn) and [solutions](/proposal).
-- **Invite (or subpoena) AI lab leaders** to parliamentary/congressional hearings to give their predictions and timelines of AI disasters.
-- **Establish a committee** to investigate the [risks of AI](/risks).
-
-### If you know (international) law
-
-- **Help draft policy**. [Draft examples](https://www.campaignforaisafety.org/celebrating-the-winners-law-student-moratorium-treaty-competition/). ([some](https://futureoflife.org/wp-content/uploads/2023/04/FLI_Policymaking_In_The_Pause.pdf) [frameworks](https://www.openphilanthropy.org/research/12-tentative-ideas-for-us-ai-policy/))
-- **Make submissions to government requests for comment** on AI policy ([example](https://ntia.gov/issues/artificial-intelligence/request-for-comments)).
-
-### If you can write web content
-
-- [Improve this website](https://github.com/joepio/pauseai).
+## For specific people
 
 ### If you work in AI
 
-- **Don't work towards superintelligence**. If you have some cool idea on how we can make AI systems 10x faster, please don't build it / spread it / talk about it. We need to slow down AI development, not speed it up.
-- **Talk to your management and colleagues** about the risks. Get them to take an institutional position on this.
-- **Hold a seminar** on AI safety at your workplace. Check out the [videos](/learn#videos) for inspiration.
+- **Don't work towards better AI**: Do not work for AI companies or capabilities research. And do not spread ideas on how we can make AI systems faster or smarter.
+- **Talk to your management and colleagues** about the risks. Get them to take an institutional position toward mitigating risk over profit. Encourage implementation of standard risk mitigation procedures and anonymous reporting.
+- **Hold a seminar** on AI safety at your workplace. Check out these [slides](https://drive.google.com/drive/u/1/folders/1p9VtopzMV6Xpk4p6EGYUTna4fLE6G8hd) and [talks and videos](https://www.youtube.com/playlist?list=PLI46NoubGtIJa0JVCBR-9CayxCOmU0EJt) for inspiration.
 - **Sign** the [Statement on AI Risk](https://www.safe.ai/statement-on-ai-risk).
 
-### If you work on AI safety
+### If you are a politician or work in government
 
-If you are just starting out in AI Alignment, unless you are extremely skilled and/or have had significant new flashes of insight on the problem, **consider switching to advocacy for the Pause**. Without the Pause in place first, there just isn't time to spin up a career in Alignment to the point of making useful contributions.
+- **Prepare for the next [AI safety summit](/summit)**. Form coalitions with other countries to share safety information and act quickly when harms arise. Work towards a global treaty.
+- **Invite (or subpoena) AI lab leaders** to parliamentary/congressional hearings to give their predictions and timelines of AI disasters.
+- **Establish a committee** to investigate the [risks of AI](/risks). Publish the findings, if feasible.
+- **Make AI safety a priority** in your party's platform, your government's policy, or just make sure it's on the agenda.
+- **Work with opposition politicians** to demonstrate that AI safety affects us all, regardless of political beliefs.
 
-If you are already established in Alignment, consider more [public communication](https://twitter.com/TrustlessState/status/1651538022360285187), and adding your name to calls for the Pause and regulation of the AI industry.
+### If you have experience with (international) law
 
-## Tips for being effective
+- **Help draft policy**. [Draft examples](https://www.campaignforaisafety.org/celebrating-the-winners-law-student-moratorium-treaty-competition/). ([some](https://futureoflife.org/wp-content/uploads/2023/04/FLI_Policymaking_In_The_Pause.pdf) [frameworks](https://www.openphilanthropy.org/research/12-tentative-ideas-for-us-ai-policy/))
+- **Make submissions** to government requests for comment on AI policy ([example](https://ntia.gov/issues/artificial-intelligence/request-for-comments)).
 
-- **Be bold in your public communication of the danger**. Don't use hedging language or caveats by default; mention them when questioned, or in footnotes, but don't make it sound like you aren't that concerned if you are.
-- **Be less exacting in your work**. [80/20](https://en.wikipedia.org/wiki/Pareto_principle) more. Don't do the classic geek thing and spend months agonizing and iterating on your Google doc over endless rounds of feedback. Get your project out into the world and iterate as you go. Time is of the essence.
+### If you work as a journalist or have a social media following
 
-Consider this: all our other work may just be the equivalent of rearranging deckchairs on the Titanic. We need to be running to the bridge, grabbing the wheel, and steering away from the iceberg. We may not have much time, but we can try. We can do this!
-
-<!-- _Acknowledgements: Written by Greg Colbourn, [originally posted on the EA forum](https://forum.effectivealtruism.org/posts/8YXFaM9yHbhiJTPqp/agi-rising-why-we-are-in-a-new-era-of-acute-risk-and). Edited by Joep Meindertsma. For helpful comments and suggestions that have improved the post, and for the encouragement to write, I thank Akash Wasil, Johan de Kock, Jaeson Booker, Greg Kiss, Peter S. Park, Nik Samolyov, Yanni Kyriacos, Chris Leong, Alex M, Amritanshu Prasad, Dušan D. Nešić, and the rest of the [AGI Moratorium HQ Slack](https://join.slack.com/t/agi-moratorium-hq/shared_invite/zt-1u6s1opls-~_l_Ynrr~8ay~SiA2yEqAQ) and AI Notkilleveryoneism Twitter._ -->
+- **Create content** about AI dangers or PauseAI. For more information, reach out to us through any of our [communication channels](/faq#do-you-have-social-media).

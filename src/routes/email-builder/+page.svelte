@@ -13,6 +13,7 @@
 	import { meta } from './meta'
 	import * as clipboard from 'clipboard-polyfill'
 	import toast from 'svelte-french-toast'
+	import ExternalLink from '$lib/components/custom/a.svelte'
 
 	let top: HTMLHeadingElement
 	const { title, description, date } = meta
@@ -121,8 +122,11 @@
 		who's just good at pitching new, controversial topics and convincing others?
 	</li>
 	<li>
-		<b>Someone who politically represents you.</b> Maybe a politician in parliament from the party that
-		you voted for.
+		<b>Someone who politically represents you.</b> Maybe a politician in parliament from the party
+		that you voted for. <ExternalLink
+			href={'https://www.campaignforaisafety.org/politician/#find-your-politician-here'}
+			>Find their email address</ExternalLink
+		>.
 	</li>
 	<li>
 		<b>Enter their name:</b> <input bind:value={name} placeholder="Name of person" />
@@ -155,7 +159,8 @@
 <ul>
 	<li>
 		What do you want the recipient to do after receiving your mail? Prepare for the summit, organize
-		a debate, have a meeting? As with every section, you can replace the suggested text if you have a better idea.
+		a debate, have a meeting? As with every section, you can replace the suggested text if you have
+		a better idea.
 	</li>
 	<li>
 		<b>Select one:</b>
@@ -169,8 +174,9 @@
 </ul>
 
 <h2>Last steps</h2>
-<p>Before sending the email you have to manually replace "__THING__" and "__COUNTRY__".
-	It can also be effective to further personalise the message. Here are some tips:
+<p>
+	Before sending the email you have to manually replace "__THING__" and "__COUNTRY__". It can also
+	be effective to further personalize the message. Here are some tips:
 </p>
 <ul>
 	<li>
@@ -178,8 +184,8 @@
 		on? How do they think about AI? What has happened in their professional life the last weeks?
 	</li>
 	<li>
-		<b>Share something about yourself.</b> Why do you care about AI safety? Why did you take the time to
-		send this letter?
+		<b>Share something about yourself.</b> Why do you care about AI safety? Why did you take the time
+		to send this letter?
 	</li>
 	<li>
 		<b>Make it newsworthy.</b> The mail template is not always up-to-date. Make sure you mention recent
@@ -187,7 +193,9 @@
 	</li>
 </ul>
 <p>
-	For more information, you can take a look at our page on <a href="/writing-a-letter">how to write a letter or email to someone in power</a>.
+	For more information, you can take a look at our page on <a href="/writing-a-letter"
+		>how to write a letter or email to someone in power</a
+	>.
 </p>
 
 <h2>Result</h2>
@@ -196,9 +204,8 @@
 	<p>Dear {name || '__ENTER_NAME__'},</p>
 	<p>
 		First of all, thank you very much for everything you have done for __THING__. I am emailing you
-		today to bring an issue to your attention, in which I believe __COUNTRY__ and you in
-		particular can play a very important role. The issue is the existential threat of artificial
-		intelligence.
+		today to bring an issue to your attention, in which I believe __COUNTRY__ and you in particular
+		can play a very important role. The issue is the existential threat of artificial intelligence.
 	</p>
 
 	<svelte:component this={selectedConcern.section} />
@@ -243,8 +250,9 @@
 		that regulation is needed. Unfortunately,
 		<a href="https://twitter.com/DanielColson6/status/1704976418596352342">none</a>
 		of the existing proposals would do anything to slow down or prevent a superintelligent AI from being
-		created. I am afraid that lobbying efforts by AI companies to keep regulation at a minimum are turning
-		out to be highly effective.
+		created. We cannot expect that individual countries implement regulations that would slow down AI
+		development, as the incentives to race ahead are too high. We need international coordination, we
+		need politicians to initialize treaty negotiations.
 	</p>
 
 	<svelte:component this={selectedAction.section} />

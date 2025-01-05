@@ -1,5 +1,7 @@
 # PauseAI.info website
 
+[![Netlify Status](https://api.netlify.com/api/v1/badges/628797a4-8d5a-4b5f-94d7-236b4604b23c/deploy-status)](https://app.netlify.com/sites/pauseai/deploys)
+
 SvelteKit website for [PauseAI.info](https://pauseai.info/).
 
 ## Creating articles
@@ -25,7 +27,7 @@ The article will be published automatically when the pull request is merged.
 ## Running locally
 
 ```sh
-git clone git@github.com:joepio/pauseai.git
+git clone git@github.com:PauseAI/pauseai-website.git
 # Copy the envs and set the variables if needed
 cp template.env .env
 # Instead of pnpm you could use npm or yarn
@@ -35,4 +37,5 @@ pnpm run dev
 ```
 
 ## Deployment
+
 The contents of the repository are continuously deployed to Netlify. You can track the deployment status [here](https://app.netlify.com/sites/pauseai/deploys).

@@ -28,7 +28,7 @@ The time to hit the brakes is _now_.
 
 ## Join us and tell OpenAI "Stop working with the Pentagon!"
 
-On January 10th, without any announcement, OpenAI deleted the language in its usage policy* that had stated that OpenAI doesn’t allow its models to be used for “activities that have a high chance of causing harm” such as “military and warfare”. Then, on January 17th, TIME reported that OpenAI would be taking the Pentagon as a client. On 2/12, we will demand that OpenAI end its relationship with the Pentagon and not take any military clients. If their ethical and safety boundaries can be revised out of convenience, they cannot be trusted.
+On January 10th, without any announcement, OpenAI deleted the language in its usage policy\* that had stated that OpenAI doesn’t allow its models to be used for “activities that have a high chance of causing harm” such as “military and warfare”. Then, on January 17th, TIME reported that OpenAI would be taking the Pentagon as a client. On 2/12, we will demand that OpenAI end its relationship with the Pentagon and not take any military clients. If their ethical and safety boundaries can be revised out of convenience, they cannot be trusted.
 
 AI is rapidly becoming more powerful, far faster than virtually any AI scientist has predicted. Billions are being poured into AI capabilities, and the results are staggering. New models are outperforming humans in many domains. As capabilities increase, so do the risks. Scientists are even warning that AI might end up destroying humanity.
 

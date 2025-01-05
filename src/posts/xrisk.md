@@ -3,9 +3,13 @@ title: The existential risk of superintelligent AI
 description: Why AI is a risk for the future of our existence, and why we need to pause development.
 ---
 
+You can learn about x-risks reading this page, or you can also learn through [videos, articles, and more media](/learn).
+
 ## Experts are sounding the alarm
 
 AI researchers on average [believe](https://aiimpacts.org/2022-expert-survey-on-progress-in-ai/) there's a 14% chance that once we build a _superintelligent_ AI (an AI vastly more intelligent than humans), it will lead to "very bad outcomes (e.g. human extinction)".
+
+And there are [cases and reports about current AIs that show they may be right](https://lethalintelligence.ai/post/category/warning-signs/).
 
 Would you choose to be a passenger on a test flight of a new plane when airplane engineers think there’s a 14% chance that it will crash?
 
@@ -33,13 +37,15 @@ The leaders of the 3 top AI labs and hundreds of AI scientists have [signed the 
 
 > "Mitigating the risk of extinction from AI should be a global priority alongside other societal-scale risks such as pandemics and nuclear war."
 
+**You can read a much longer list of similar statements from politicians, CEOs and experts [here](/quotes) and other similar polls on the experts (and the public) [here](/polls-and-surveys).**
+
 ## What a superintelligent AI can (be used to) do
 
 You might think that a superintelligent AI would be locked inside a computer, and therefore can't affect the real world.
 However, we tend to give AI systems access to the internet, which means that they can do a lot of things:
 
-- [Hack into other computers](/cybersecurity-risks), including all smartphones, laptops, server parks, etc. It could use the sensors of these devices as its eyes and ears, having digital senses everywhere.
-- Manipulate people through fake messages, e-mails, bank transfers, videos or phone calls. Humans could become the AI's limbs, without even knowing it.
+- [Hack into other computers](/cybersecurity-risks), including all smartphones, laptops, server farms, etc. It could use the sensors of these devices as its eyes and ears, having digital senses everywhere.
+- [Manipulate people](https://lethalintelligence.ai/post/ai-hired-human-to-solve-captcha/) through fake messages, e-mails, bank transfers, videos or phone calls. Humans could become the AI's limbs, without even knowing it.
 - Directly control devices connected to the internet, like cars, planes, robotized (autonomous) weapons or even nuclear weapons.
 - Design a novel bioweapon, e.g. by combining viral strands or by using [protein folding](https://alphafold.ebi.ac.uk) and order it to be printed in a lab.
 - Trigger a nuclear war by convincing humans that another country is (about to) launch a nuclear attack.
@@ -72,9 +78,9 @@ An AI could have any goal, depending on how it's trained and prompted (used).
 Maybe it wants to calculate pi, maybe it wants to cure cancer, maybe it wants to self-improve.
 But even though we cannot tell what a superintelligence will want to achieve, we can make predictions about its sub-goals.
 
-- **Maximizing its resources**. Harnessing more computers will help an AI achieve its goals. At first, it can achieve this by hacking other computers. Later it may decide that it is more efficient to build its own.
-- **Ensuring its own survival**. The AI will not want to be turned off, as it could no longer achieve its goals. AI might conclude that humans are a threat to its existence, as humans could turn it off.
-- **Preserving its goals**. The AI will not want humans to modify its code, because that could change its goals, thus preventing it from achieving its current goal.
+- **Maximizing its resources**. Harnessing more computers will help an AI achieve its goals. At first, it can achieve this by hacking other computers. Later it may decide that it is more efficient to build its own. You can read about out [this real case of emergent power-seeking behavior on an AI](https://lethalintelligence.ai/post/ai-escaped-its-container/).
+- **Ensuring its own survival**. The AI will not want to be turned off, as it could no longer achieve its goals. AI might conclude that humans are a threat to its existence, as humans could turn it off. There also have been cases of [self-preserving unprompted, untrained behavior](https://www.transformernews.ai/p/openais-new-model-tried-to-avoid).
+- **Preserving its goals**. The AI will not want humans to modify its code, because that could change its goals, thus preventing it from achieving its current goal. And there are also [cases of AIs trying to do that](https://www.anthropic.com/research/alignment-faking).
 
 The tendency to pursue these subgoals given any high-level goal is called [instrumental convergence](https://www.youtube.com/watch?v=ZeecOKBus3Q), and it is a key concern for AI safety researchers.
 
@@ -82,7 +88,7 @@ The tendency to pursue these subgoals given any high-level goal is called [instr
 
 You might wonder: how can a statistical model that predicts the next word in a chat interface pose any danger?
 You might say: It's not conscious, it's just a bunch of numbers and code.
-And yes, we don't think LLMS are conscious, but that doesn't mean they can't be dangerous.
+And yes, we don't think LLMs are conscious, but that doesn't mean they can't be dangerous.
 
 LLMs, like GPT, are trained to predict or mimic virtually any line of thought.
 It could mimic a helpful mentor, but also someone with bad intentions, a ruthless dictator or a psychopath.

@@ -18,11 +18,13 @@ export type Person = {
 	id: string
 	name: string
 	/** URL to image file */
-	image: string
+	image?: string
 	bio: string
 	title?: string
 	/** Doesn't want to be visible on the /people page */
 	privacy?: boolean
+	checked?: boolean
+	org?: ['international' | string]
 }
 
 export type Team = {
@@ -31,4 +33,6 @@ export type Team = {
 	description: string
 	leadName: string
 	leadEmail: string
+	public: boolean
+	responsibilities: string[]
 }

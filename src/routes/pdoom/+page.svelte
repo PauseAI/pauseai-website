@@ -18,6 +18,7 @@
 	not everyone is using the same definition when talking about their p(doom) values. Most notably
 	the time horizon is often not specified, which makes comparing a bit difficult.
 </p>
+<em>Press the p(doom) percentage to open the source.</em>
 <Doomers />
 
 <h2>Do something about it</h2>

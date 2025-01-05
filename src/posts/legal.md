@@ -4,6 +4,7 @@ description: Information required by law about PauseAI.
 ---
 
 This website is maintained by PauseAI Global.
+Read more about the inner workings about PauseAI on the [Organization page](/organization).
 
 ## PauseAI Global (Stichting PauseAI)
 
@@ -78,7 +79,8 @@ Our first annual report will be published after the first fiscal year ends on 31
 
 - Name: PauseAI US
 - Nonprofit Corporation - CA - Public Benefit
-- Entity Number: 6071248
+- Entity Number 501(c)(3): 6071248
+- Entity Number 501(c)(4): 99-3051616
 - Registration date: 01/24/2024
 - Formed in: California
 - Status: Active
@@ -90,6 +92,12 @@ Our first annual report will be published after the first fiscal year ends on 31
 - Incorporation date: 28th December 2023
 - Company number: 15373608
 - Director: [William Baird](mailto:william@pauseai.info)
+
+## PauseIA (France)
+
+- Name: PauseIA
+- Will be incorporated soon
+- Director: [Maxime Fournes](mailto:maxime@pauseai.info)
 
 ## Relationship between entities
 

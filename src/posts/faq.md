@@ -2,6 +2,7 @@
 title: FAQ
 description: Frequently asked questions about PauseAI and the risks of superintelligent AI.
 ---
+
 <style>
     h2 {
         font-size: 1.2rem;
@@ -12,11 +13,13 @@ description: Frequently asked questions about PauseAI and the risks of superinte
 
 ## Who are you?
 
-We are a community of [volunteers](/people) and [local communities](/communities) coordinated by a [non-profit](/legal) that aims to mitigate the [risks of AI](/risks) (including the [risk of human extinction](/xrisk)).
+We are a community of [volunteers](/people) and [local communities](/communities) coordinated by a [non-profit organization](/organization) that aims to mitigate the [risks of AI](/risks) (including the [risk of human extinction](/xrisk)).
 We aim to convince our governments to step in and [pause the development of superhuman AI](/proposal).
-We do this by informing the public, talking to decision-makers, and organizing protests.
+We do this by informing the public, talking to decision-makers, and organizing [events](/events).
 
-You can find us on [Discord](https://discord.gg/2XXWXvErfA) (this is where most of the coordination happens!), [Twitter](https://twitter.com/PauseAI), [Substack](https://substack.com/@pauseai), [Facebook](https://www.facebook.com/PauseAI), [TikTok](https://www.tiktok.com/@pauseai), [LinkedIn](https://www.linkedin.com/uas/login?session_redirect=/company/97035448/), [YouTube](https://www.youtube.com/@PauseAI) and [Instagram](https://www.instagram.com/pause_ai).
+## Do you have social media?
+
+You can find us on [Discord](https://discord.gg/2XXWXvErfA) (this is where most of the coordination happens!), [Twitter](https://twitter.com/PauseAI), [Substack](https://substack.com/@pauseai), [Facebook](https://www.facebook.com/PauseAI), [TikTok](https://www.tiktok.com/@pauseai), [LinkedIn](https://www.linkedin.com/uas/login?session_redirect=/company/97035448/), [YouTube](https://www.youtube.com/@PauseAI), [Instagram](https://www.instagram.com/pause_ai), [Telegram](https://t.me/+UeTsIsNkmt82ZmQ8), [Whatsapp](https://chat.whatsapp.com/JgcAbjqRr8X3tvrXdeQvfj) and [Reddit](https://www.reddit.com/r/PauseAI/).
 You can mail/contact us at [joep@pauseai.info](mailto:joep@pauseai.info).
 
 ## Aren't you just scared of changes and new technology?
@@ -53,12 +56,7 @@ It requires all of us to allow these companies to gamble with our future.
 
 ## Who is paying you?
 
-Virtually all of our actions so far have been done by volunteers.
-However, since February 2024, PauseAI is a [registered non-profit foundation](/legal), and we have received multiple donations from individuals.
-We've also received 20k funding from the LightSpeed network.
-
-You can also [donate](/donate) to PauseAI if you support our cause!
-We use most of the money to enable local communities to organize events.
+See our [Funding page](/funding)
 
 ## What are your plans?
 
@@ -75,7 +73,7 @@ Check out our [theory of change](/theory-of-change) for a detailed overview of o
 - Protesting shows the world that we care about this issue. By protesting, we show that we are willing to spend our time and energy to get people to listen.
 - Protests can and often will [positively influence](https://www.socialchangelab.org/_files/ugd/503ba4_052959e2ee8d4924934b7efe3916981e.pdf) public opinion, voting behavior, corporate behavior and policy.
 - By far [most people are supportive](https://today.yougov.com/politics/articles/31718-do-protesters-want-help-or-hurt-america) of peaceful/non-violent protests
-- There is [no "backfire" effect](https://journals.sagepub.com/doi/full/10.1177/2378023120925949) [unless the protest is violent](https://news.stanford.edu/2018/10/12/how-violent-protest-can-backfire/). Our protests are peaceful and non-violent.
+- There is [no evidence for a "backfire" effect](https://journals.sagepub.com/doi/full/10.1177/2378023120925949) [unless the protest is violent](https://news.stanford.edu/2018/10/12/how-violent-protest-can-backfire/). Our protests are peaceful and non-violent.
 - It's a social bonding experience. You meet other people who share your concerns and willingness to take action.
 - Check out [this amazing article](https://forum.effectivealtruism.org/posts/4ez3nvEmozwPwARr9/a-case-for-the-effectiveness-of-protest) for more insights on why protesting works
 
@@ -90,7 +88,7 @@ Note that no (surveyed) AI safety researchers believe that there's a 0% chance.
 However, there might be selection bias here: people who work in the AI safety field are likely to do so because they believe preventing bad AI outcomes is important.
 
 If you ask AI researchers in general (not safety specialists), this number drops to a [mean value of around 14%](https://aiimpacts.org/2022-expert-survey-on-progress-in-ai/), with a median of 5%.
-A minority, about 20% of them, believe that the alignment problem is not a real or important problem.
+The vast majority, 86% of them, believe that the alignment problem is both a real and an important problem.
 Note that there might be a selection bias here in the opposite direction: people who work in AI are likely to do so because they believe AI will be beneficial.
 
 _Imagine you're invited to take a test flight on a new airplane_.
@@ -174,8 +172,9 @@ Because acknowledging that _we are in fact in danger_ is a very, very scary thin
 ## Ok, I want to help! What can I do?
 
 There are many [things that you can do](/action).
-On your own, you can write a [letter](/writing-a-letter), post [flyers](/flyering), inform [others](/action#you-can-do-this), join to a [protest](/protests), ir [donating](/donate) some money!
+On your own, you can write a [letter](/writing-a-letter), post [flyers](/flyering), [learn](/learn) and inform others, join a [protest](/protests), ir [donating](/donate) some money!
 But even more important: you can [join PauseAI](/join) and coordinate with others who are taking action.
-If you want to contribute more, you can become a volunteer and join one of our [teams](/teams).
+Check out if there are [local communities](/communities) in your area.
+If you want to contribute more, you can become a volunteer and join one of our [teams](/teams), or [set up a local community](/local-organizing)!
 
 Even when facing the end of the world, there can still be hope and very rewarding work to do. 💪

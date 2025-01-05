@@ -14,3 +14,5 @@ As a participant in a PauseAI protest, I commit to adhering to the following Cod
 8. **Action over doom**: I will focus on constructive dialogue and promoting actionable solutions to address the challenges posed by AI development. This approach will create a more empowering and hopeful atmosphere, encouraging others to join our cause.
 
 By adhering to this Code of Conduct, I pledge to be an ambassador for the PauseAI movement and its mission to promote the responsible development and use of artificial intelligence. Together, we can create a powerful and positive force for change.
+
+_Related: our [Values](/values)_

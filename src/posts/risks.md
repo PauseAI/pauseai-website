@@ -4,7 +4,8 @@ description: AI threatens our democracy, our technology, and our species.
 ---
 
 AI is a powerful technology that is increasingly transforming our world.
-It comes with amazing potential, but also with serious risks, including [existential catastrophe](/xrisk).
+It comes with amazing potential, but also with a huge amount of serious risks.
+This is an attempt to include all which could be mitigated by a Pause.
 
 ## Present dangers
 
@@ -12,27 +13,33 @@ It comes with amazing potential, but also with serious risks, including [existen
 
 Much of our society is based on trust. We trust that the money in our bank account is real, that the news we read is true, and that the people who post reviews online exist.
 
-AI systems are exceptionally good at creating fake media.
+AI systems are exceptionally good at creating fake media, also called deepfakes.
 They can create fake videos, fake audio, fake text, and fake images.
-These capabilities are improving rapidly.
-Just two years ago, we laughed at the horribly unrealistic Dall-E images, but now we have [deepfake images winning photography contests](https://www.theguardian.com/technology/2023/apr/17/photographer-admits-prize-winning-image-was-ai-generated).
-A 10-second audio clip or a single picture can be enough to create a convincing deepfake.
-
 Creating fake media is not new, but AI makes it much cheaper and much more realistic.
+These capabilities are improving rapidly.
+
+Just two years ago, we laughed at the horribly unrealistic Dall-E images, but now we have [deepfake images winning photography contests](https://www.theguardian.com/technology/2023/apr/17/photographer-admits-prize-winning-image-was-ai-generated).
 An AI-generated image of an explosion caused [panic sells in Wall Street](https://www.euronews.com/next/2023/05/23/fake-news-about-an-explosion-at-the-pentagon-spreads-on-verified-accounts-on-twitter).
+A 10-second audio clip or a single picture can be enough to create a convincing deepfake.
+Perhaps even more dangerous than the deepfakes themselves, is how the existence of convincing deepfakes destroys trust.
+[A real image can be called AI-generated](https://www.axios.com/2024/08/13/trump-crowd-photo-ai-deepfake-truth), and people will believe it.
+
 GPT-4 can write in a way that is indistinguishable from humans but at a much faster pace and a fraction of the cost.
 We might soon see social media be flooded with fake discussions and opinions, and fake news articles that are indistinguishable from real ones.
+Also called a "dead internet".
 
 This leads to polarization between various groups of people who believe in different sources of information and narratives and, through consuming distorted representations of what's happening, escalate their differences until culminating in violent and anti-democratic responses.
 
 A halt on the frontier models (our [proposal](/proposal)) would not stop the models that are used nowadays to create fake media, but it might help to prevent future cutting-edge models.
 Also, it would lay the groundwork for future regulation aimed at mitigating fake media and any other specific problem caused by AI. Not to mention increasing public attention and awareness of these dangers and proof that they can be addressed.
 
-### Deepfakes and impersonification
+### Deepfakes-powered harrasment and scams
 
-Fake content created with AI, also called deepfakes, not only can steal famous people's identities and [create disinformation](https://time.com/6565446/biden-deepfake-audio/), but they can also impersonate you.
-Anyone with photos, videos, or audios of someone and enough knowledge, can create deepfakes of them and use them to commit fraud, harass them, or create sexually non-consensual material.
-About 96% of all deepfake content is sexual material.
+Deepfakes cannot only steal famous people's identities and [create disinformation](https://time.com/6565446/biden-deepfake-audio/), but they can also impersonate you.
+Anyone with photos, videos, or audio of someone (and enough knowledge) can create deepfakes of them and use them to commit fraud, harass them, or create sexual non-consensual material.
+About [96% of all deepfake content is sexual material](https://www.technologyreview.com/2019/10/07/132735/deepfake-porn-deeptrace-legislation-california-election-disinformation/).
+
+You can find a compilation of AI incidents, which are mostly deepfake news, scams and harassment [here](https://incidentdatabase.ai/summaries/incidents/).
 
 As the section on fake news says, fake media wouldn't be prevented altogether by our proposal, but they could be reduced to a certain extent.
 A not so small extent when you take into account that AI multipurpose systems like chatbots have become really popular, and we would be stopping them from being more capable and popular, which could include systems designed with fewer filters and trainable with new faces.
@@ -47,8 +54,6 @@ Biased systems used in law enforcement, such as predictive policing algorithms, 
 Generative AI models do not just copy the biases from their training data, [they amplify them](https://www.bloomberg.com/graphics/2023-generative-ai-bias/).
 These biases often appear without the creators of the AI system being aware of them.
 
-<!-- ### Data Privacy
--->
 ### Job loss, economic inequality and instability
 
 During the industrial revolution, many people lost their jobs to machines.
@@ -61,37 +66,45 @@ Image generation models (which are heavily trained on copyrighted material from 
 Writers are [striking](https://www.newscientist.com/article/2373382-why-use-of-ai-is-a-major-sticking-point-in-the-ongoing-writers-strike/).
 GPT-4 has [passed the bar exam](https://law.stanford.edu/2023/04/19/gpt-4-passes-the-bar-exam-what-that-means-for-artificial-intelligence-tools-in-the-legal-industry/), can write excellent written content, and can write code (again, partially trained on [copyrighted materials](https://www.ischool.berkeley.edu/news/2023/new-research-prof-david-bamman-reveals-chatgpt-seems-be-trained-copyrighted-books)).
 
+<!--Add news about AI caused layoffs as an example of the ones that will come. https://www.techopedia.com/tech-layoffs-predictions ?-->
+
 The people who own these AI systems will be able to capitalize on them, but the people who lose their jobs to them will not.
-It is difficult to predict which jobs are going to be the ones replaced first. They could leave you unemployed and without an income no matter how much time, money and energy you spent on getting the experience and knowledge that you have, and how valuable they were a moment ago.
+It is difficult to predict which jobs are going to be the ones replaced first.
+They could leave you unemployed and without an income no matter how much time, money and energy you spent on getting the experience and knowledge that you have, and how valuable they were a moment ago.
 The way we distribute wealth in our society is not prepared for this.
+
+Policy measures like Universal Basic Income could prevent the worst of the economic consequences, but it's not clear if they will be implemented in time.
+Once our jobs are replaced, we could be left without bargaining power to ask for social nets.
+
+And even if we manage to properly navigate the problems surrounding inequality and instability, we may end up in a world where our sense of purpose is lost.
+Many artists are feeling this already, as they see their work being replaced by AI.
+Soon, it could be all of us who feel this way.
 
 ### Mental health, addiction and disconnection between people
 
-Social media, video games and other software have been using AI systems to maximize their profit while taking advantage of our primate minds for some time already, damaging our mental health in the process. 
-Addiction to social media, among other things, isolates us from each other, not only in political bubbles but also in cultural and social one-person bubbles, making us lonelier.
-They're the first proof of the unintended and unexpected global consequences that these technologies can bring and how complicated aligning AI systems with "human values" can be.
+Social media companies have been using AI systems to maximize their profit while taking advantage of our primate minds for some time already, damaging our mental health in the process.
+AI chatbots offering users a romantic relationship have seen huge growth over the last year, with more than 3 billion search results for ‘AI girlfriend’ on Google.
+These AI relationship apps are [shown to be addictive](https://onlinelibrary.wiley.com/doi/10.1002/mar.21899), especially to "lonely vulnerable people".
 
-If today's chatbots keep getting better, it could become quite common to be addicted to them and substitute whole relationships (be romantic, sexual or platonic) with them. 
-Also, if those apps are easy to access, they could shape the understanding, personality and view of the world of children that could prefer talking with AIs over family and friends.
+The companies controlling these apps are incentivized to make them as addictive as possible, and have a tremendous amount of power by shaping the behavior and opinions of these models.
+
 A pause in the biggest models could prevent them from becoming multipurpose chatbots that fit our needs perfectly without people understanding the long-term ramifications of them.
 
-### Power accumulation, war and the race to the precipice
+### Automated investigation (loss of privacy)
 
-The addiction to products and services that learn from personal data leaves us as powerless separated individuals whether it's intended or not. 
-And it plays on a vicious cycle with the accumulation of economic power and intelligence of the companies which create them.
+We leave a lot of traces on the web.
+Connecting the dots is hard and time-consuming, but AI can now make this way cheaper.
+Large language models can now autonomously search the web, and are now good enough to analyze large amounts of data and find interesting details.
+This can be used to find out information that would otherwise be very costly to find out.
 
-If this economic and technological inequality stems from a handful of public and private entities producing multiple single-purpose AIs or a few multipurpose AIs, it could lead to a short accumulation of power that will probably result in a catastrophe for all.
-The accumulation of power side of that story has and will continue to incentivize more actors to join the race to the bottom and accelerate the development of larger AI systems.
-This, in return, introduces more points of failure and downplays the associated risks by endorsing the idea that they can be handled unilaterally, by a company or a government.
+- Find information on where an individual is likely to be at a certain time. This can be used to track down dissidents or plan assassinations.
+- Link anonymous accounts on the web to real-life identities. This can be used to find out who is leaking information.
 
-Such a scenario would not just disempower every other person and nation in the world, but also catalyze global powers to enter into conflict.
-So it's crucial to act as soon as possible, before the race dynamics extend further, before the already most powerful governments and corporations consolidate their positions, and before a war is triggered in response.
-We need international cooperation because the only winning move on this strange game is not to play, but to pause.
+In September 2024, a group of students [built an app](https://x.com/AnhPhuNguyen1/status/1840786336992682409) that shows information about strangers likes names, relatives and other personal data in augmented reality by using facial recognition and LLMs.
 
-### Authoritarian governments
+### Environmental risks
 
-Authoritarian and totalitarian governments can also use AI technologies to exercise power over *their* territories and populations.
-They can control the communication channels or maintain social credit and mass surveillance systems that ensure they maintain their power while violating human rights.
+Environmental harms are starting to be significant, and the largest AI companies are planning to greatly increase their energy consumption. You can read about how AI will affect the environment negatively [here](/environmental).
 
 ### Autonomous weapons
 
@@ -113,6 +126,15 @@ Read more at [stopkillerrobots.org](https://www.stopkillerrobots.org/military-an
 
 ## Near future dangers
 
+### Power accumulation and tyranny
+
+Powerful AI models can be used to get more power.
+This positive feedback loop can lead to a few companies or governments having an unhealthy amount of power.
+Having control over thousands of intelligent, autonomous systems could be used to influence opinions, manipulate markets, or even wage war.
+In the hands of an authoritarian government, this could be used to suppress dissent and maintain power.
+
+<!--Dystopian social credit systems based on mass surveillance + people and action recognition could be created with today's AI so a pause wouldn't help and we shouldn't write about it-->
+
 ### Biological weapons
 
 AI can make knowledge more accessible, which also includes knowledge about how to create biological weapons. [This paper](https://arxiv.org/abs/2306.03809) shows how GPT-4 can help non-scientist students to create a pandemic pathogen:
@@ -129,7 +151,7 @@ Scientists are now even creating [fully autonomous chemical labs, where AI syste
 
 The fundamental danger is that the cost of designing and applying biological weapons is being lowered by orders of magnitude because of AI.
 
-### Computer viruses and hacks
+### Computer viruses and cybersecurity attacks
 
 Virtually everything we do nowadays is in some way dependent on computers.
 We pay for our groceries, plan our days, contact our loved ones and even drive our cars with computers.
@@ -158,8 +180,8 @@ We'd be introducing a new species to the planet that could outsmart us and outco
 
 ### Human disempowerment
 
-Even if we manage to create only AI systems that we can control individually, we could lose our power to make important decisions incrementally each time one becomes implemented inside institutions or popularized in everyday life.
-Those systems would end up having more input from other systems than from humans, and, if we cannot coordinate quickly enough, or we lack crucial knowledge about the functioning of these systems, we could end up without control over our future.
+Even if we manage to create only AI systems that we can control individually, we could lose our power to make important decisions incrementally each time one becomes incorporated to institutions or everyday life.
+Those process would end up having more input from AI systems than from humans, and, if we cannot coordinate quickly enough, or we lack crucial knowledge about the functioning of the systems, we could end up without control over our future.
 
 It would be a civilization in which each system is optimizing for different objectives, there is not a clear direction for where everything is heading, and there is no way of changing it.
 The technical knowledge required to modify these systems could be lacking in the first place or lost over time, as we become more and more dependent on technology, and the technology becomes more complex.
@@ -169,18 +191,17 @@ The systems may achieve their goals, but those goals might not entirely encapsul
 ### Digital sentience
 
 As AI continues to advance, future systems may become incredibly sophisticated, replicating neural structures and functions that are more akin to the human brain.
-This increased complexity might lead to emergent properties like subjectivity and/or consciousness, so those AIs would be deserving of moral considerations and be treated well.
-Would be like "digital people".
-The thing is that, given our present lack of knowledge about consciousness and the nature of neural networks, we won't have a way to determine whether some AIs would have any type of experience and what the quality of those experiences would depend on.
-If the AIs continue to be produced with only their capabilities in mind, through a process we don't fully understand, people will keep on using them as tools ignoring what their desires could be, and that they could be actually enslaving digital people.
+This increased complexity might lead to emergent properties like AI subjectivity and/or consciousness, which would make them deserving of moral considerations.
 
-### Suffering lock-in risks
+The problem is that, given our present lack of knowledge about consciousness and the nature of neural networks, we won't have a way to determine whether some AIs would have any type of experience and what the quality of those experiences would depend on.
+If the AIs continue to be produced with only their capabilities in mind, through a process we don't fully understand, people will keep using them as tools ignoring what their desires could be, and that they could be actually enslaving "digital people".
 
-It is possible that once automation at higher degrees starts happening, regardless if there is just one or multiple powerful AIs, the values of those systems would not be able to be changed, and the automation would continue until the end of the universe, throughout the reachable galaxies.
-Arguably, the worst scenarios that those AIs could create would not be human extinction, but inescapable dystopias that would extend through all that spacetime.
+### Suffering risks
+
+It's not only that value lock-in could make us fail to achieve the best kind of worlds, but it could cause us to end up in dystopias worse than extinction that could extend through all spacetime.
 
 Possible locked-in dystopias with lots of suffering are called _S-risks_ and include worlds in which sentient beings are enslaved and forced to do horrible things.
-Those beings could be humans, animals, digital people or any other alien species that the system could find in the cosmos. Given how difficult we think solving alignment completely is, how bad we humans treat each other sometimes, how bad we treat most animals, and how we treat present AIs, a future like that is maybe not as unlikely as we'd like.
+Those beings could be humans, animals, digital people or any other alien species that the AI could find in the cosmos. Given how difficult we think solving alignment completely is, how bad we humans treat each other sometimes, how bad we treat most animals, and how we treat present AIs, a future like this doesn't seem as unlikely as we'd hope.
 
 ## What can we do?
 

@@ -57,6 +57,7 @@ There are various reasons why most will instantly dismiss the idea.
 We all know the images of disasters in movies, right? People shouting and running in panic.
 Turns out the opposite is often true: about 80% of people show symptoms of [_normalcy bias_](https://en.wikipedia.org/wiki/Normalcy_bias) during disasters: not seeking shelter during a tornado, disregarding government warnings, keep shaking hands in early COVID days.
 The normalcy bias describes our tendency to underestimate the possibility of disaster and believe that life will continue as normal, even in the face of significant threats or crises.
+This is [currently happening with AI](https://lethalintelligence.ai/post/category/warning-signs/).
 
 > People mill, asking for opinions, because they _want_ to be told that everything is fine. They will keep asking, and delaying, until they get the answer they want.
 
@@ -73,7 +74,7 @@ Roger Boisjoly was an engineer who predicted it would blow up, but nobody of his
 
 _From ["Remembering Roger Boisjoly"](https://www.npr.org/sections/thetwo-way/2012/02/06/146490064/remembering-roger-boisjoly-he-tried-to-stop-shuttle-challenger-launch)_
 
-One explanation for why our brain refuses to believe that danger could be upon us, is cognitive dissonance.
+One explanation for why our brain refuses to believe that danger could be upon us is cognitive dissonance.
 
 ### Cognitive dissonance
 
@@ -88,7 +89,7 @@ A lot of beliefs that most people have will be challenged by the idea of existen
 - I will probably grow old, and so will my children
 
 Many of these thoughts will be challenged by the idea that AI poses an existential risk.
-Our brains will look for alternative explanations for why they hear scientists are warning about this:
+Our brains will look for alternative explanations for why they hear scientists are [warning about this](/quotes):
 
 - They are paid by big tech
 - They are part of some conspiracy or cult
@@ -184,7 +185,7 @@ The correct explanation is that AI is in fact dangerous, but believing this is d
 So people will almost directly look for a different way to explain their observations.
 There are two alternative explanations that are much easier to believe:
 
-1. **It's all a big conspiracy**. AI companies are hyping up AI to get more funding, and AI safety people are just part of this hype machine. This narrative matches with various observations: companies often lie, many AI safety folk are employed by AI companies, and there are a bunch of billionaires who are financing AI safety research. However, we can also point out why this conspiracy story is simply not true. Many of the alarmists are scientists who have nothing to gain. The companies might benefit in some way, but up until very recently (May 2023), they have been almost completely silent about AI risks. This makes sense, as companies mostly do not benefit from people fearing for their product or service. We've been protesting outside of Microsoft and OpenAI partly _because_ we wanted them to acknowledge the risks.
+1. **It's all a big conspiracy**. AI companies are hyping up AI to get more funding, and AI safety people are just part of this hype machine. This narrative matches with various observations: companies often lie, many AI safety folk are employed by AI companies, and there are a bunch of billionaires who are financing AI safety research. However, we can also point out why this conspiracy story is simply not true. Many of the "alarmists" are scientists who have nothing to gain. The companies might benefit in some way, but up until very recently (May 2023), they have been almost completely silent about AI risks. This makes sense, as companies mostly do not benefit from people fearing for their product or service. We've been protesting outside of Microsoft and OpenAI partly _because_ we wanted them to acknowledge the risks.
 2. **It's a cult**. The group that believes in AI safety is just a bunch of crazy religious extremists who believe in the end of the world. This seems to fit, too, since people in the AI safety community are often very passionate about the topic and use all sorts of in-group jargon. However, it falls apart when you point out that people who warn of AI risks are not a single organization. It's a large, diverse group of people, there is no single leader, there are no rituals, and there is no dogma.
 
 What makes these explanations so compelling is not just that they are easy to comprehend, or that they explain all observations perfectly - the primary reason is that they are comforting.
@@ -223,7 +224,7 @@ The impact is too large, we have coping mechanisms that downplay the risks, and 
 ### Lack of innate fear response
 
 Our brains have evolved to fear things that are dangerous.
-We instinctively fear heights, big animals with sharp teath, sudden loud noises, and things that move around in an S-shape.
+We instinctively fear heights, big animals with sharp teeth, sudden loud noises, and things that move around in an S-shape.
 A superintelligent AI does not hit any of our primal fears.
 Additionally, we have a strong fear for social rejection or losing social status, which means that people tend to be afraid of speaking up about AI risks.
 

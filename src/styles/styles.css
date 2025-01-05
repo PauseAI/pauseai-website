@@ -1,0 +1,216 @@
+body {
+	margin: 0;
+}
+
+html {
+	/* font */
+	--font-body: 'Roboto Slab', serif;
+	--font-heading: 'Saira Condensed', Impact, sans-serif;
+
+	/* Major theme stuff */
+	--page-width: 40rem;
+
+	/* Colors */
+	--t-color-main: #ff9416; /* Default main color, approximately hsl(32, 100%, 54%)*/
+
+	/* dark */
+	--brand-dark: hsl(32, 100%, 44%);
+
+	/* light */
+	--brand-light: var(--t-color-main);
+
+	/* We can't use these in media queries... */
+	--breakpoint: 900px;
+
+	/* Spacing */
+	--spacing-xs: 0.5rem;
+	--spacing-sm: 1rem;
+	--spacing-md: 2rem;
+	--spacing-lg: 4rem;
+}
+
+:root {
+	color-scheme: dark;
+
+	--brand: var(--brand-light);
+	--brand-subtle: hsl(32, 20%, 30%);
+	--text: black;
+	--bg: white;
+	--bg-subtle: hsl(32, 100%, 90%);
+}
+
+@media (prefers-color-scheme: light) {
+	:root {
+		color-scheme: light;
+
+		--brand: var(--brand-light);
+	}
+}
+
+[color-scheme='dark'] {
+	color-scheme: dark;
+
+	--brand: var(--brand-dark);
+	--brand-subtle: hsl(32, 100%, 75%);
+	--text: white;
+	--bg: black;
+	--bg-subtle: hsl(32, 100%, 20%);
+}
+
+[color-scheme='light'] {
+	color-scheme: light;
+
+	--brand: var(--brand-light);
+	--brand-subtle: hsl(32, 100%, 35%);
+	--text: black;
+}
+
+html,
+body {
+	height: 100%;
+	font-family: var(--font-body);
+	background-color: var(--bg);
+}
+
+html {
+	overflow-x: hidden;
+	color: var(--text);
+	accent-color: var(--link);
+	background-image: var(--background);
+	background-attachment: fixed;
+	font-size: 1.2rem;
+}
+
+img {
+	border-radius: var(--radius-3);
+}
+
+ul,
+ol {
+	list-style: none;
+	padding: 0;
+}
+
+li {
+	padding-inline-start: 0;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+	font-family: var(--font-heading);
+	font-weight: 700;
+	line-height: 1em;
+}
+
+h1 {
+	font-size: 3rem;
+}
+
+@media (max-width: 40rem) {
+	h1 {
+		font-size: 2rem;
+	}
+	h2 {
+		font-size: 1.5rem;
+	}
+}
+
+a {
+	color: var(--brand-subtle);
+	text-decoration: underline;
+}
+
+a:hover {
+	color: var(--brand);
+}
+
+p {
+	font-weight: 300;
+}
+
+.prose {
+	line-height: 1.5em;
+}
+
+.prose :is(h2, h3, h4, h5, h6) {
+	margin-top: 2rem;
+	margin-bottom: 1rem;
+}
+
+.prose p:not(:is(h2, h3, h4, h5, h6) + p) {
+	margin-top: 1rem;
+}
+
+.prose :is(ul, ol) {
+	list-style-type: disc;
+	padding-left: 1rem;
+	line-height: 1.5;
+}
+
+.prose :is(ul, ol) li {
+	margin-block: 0.3rem;
+	padding-inline-start: 0.5rem;
+}
+
+.prose pre {
+	max-inline-size: 100%;
+	padding: 1rem;
+	border-radius: 8px;
+	tab-size: 2;
+}
+
+.prose blockquote {
+	border-left: 4px solid var(--brand);
+	padding-left: 1rem;
+	font-style: italic;
+}
+
+.prose img {
+	max-inline-size: 100%;
+}
+
+form {
+	display: flex;
+	flex-direction: column;
+	max-width: 20rem;
+}
+
+form label {
+	margin-bottom: 0.5rem;
+	display: flex;
+	flex-direction: column;
+}
+
+input:focus,
+textarea:focus {
+	outline: var(--brand) auto 1px;
+}
+
+.reset-button,
+.button-to-link {
+	border: inherit;
+	background: inherit;
+	text-align: inherit;
+	font: inherit;
+	margin: unset;
+	padding: unset;
+	color: inherit;
+}
+
+.pseudo-link,
+.button-to-link {
+	cursor: pointer;
+}
+
+.pseudo-link:hover,
+.button-to-link:hover {
+	text-decoration: underline;
+}
+
+::selection {
+	background-color: var(--brand);
+	color: black;
+}

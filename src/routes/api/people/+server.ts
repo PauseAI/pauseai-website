@@ -1,31 +1,63 @@
-import { AIRTABLE_API_KEY } from '$env/static/private'
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { options } from '$lib/api.js'
 import type { Person } from '$lib/types.js'
-import { json } from '@sveltejs/kit'
+import { defaultTitle } from '$lib/utils'
+import { error, json } from '@sveltejs/kit'
 
 function recordToPerson(record: any): Person {
 	return {
 		id: record.id || 'noId',
 		name: record.fields.Name,
-		bio: record.fields.Bio,
-		title: record.fields.Title,
-		image: record.fields.Image && record.fields.Image[0].thumbnails.large.url,
-		privacy: record.fields.privacy
+		bio: record.fields.bio,
+		title: record.fields.title || defaultTitle,
+		image: record.fields.image && record.fields.image[0].thumbnails.large.url,
+		privacy: record.fields.privacy,
+		org: record.fields.organisation,
+		checked: record.fields.checked
 	}
 }
 
-export async function GET({ fetch }) {
-	const url = `https://api.airtable.com/v0/appWPTGqZmUcs3NWu/tblZhQc49PkCz3yHd`
+const currentOrg = 'International'
 
-	const response = await fetch(url, options)
-	if (!response.ok) {
-		throw new Error('Failed to fetch data from Airtable')
+const filter = (p: Person) => {
+	return p.image && !p.privacy && p.checked && p.org?.includes(currentOrg)
+}
+
+// Airtable API is limited to 100 items per page
+async function fetchAllPages(fetch: any, url: any) {
+	let allRecords: any[] = []
+	// https://airtable.com/developers/web/api/list-records#query-pagesize
+	let offset
+
+	do {
+		const fullUrl = offset ? `${url}?offset=${offset}` : url
+		const response = await fetch(fullUrl, options)
+		if (!response.ok) {
+			throw new Error('Failed to fetch data from Airtable')
+		}
+		const data: any = await response.json()
+		allRecords = allRecords.concat(data.records)
+		offset = data.offset
+	} while (offset)
+
+	return allRecords
+}
+
+export async function GET({ fetch, setHeaders }) {
+	const url = `https://api.airtable.com/v0/appWPTGqZmUcs3NWu/tblZhQc49PkCz3yHd`
+	setHeaders({
+		'cache-control': 'public, max-age=3600' // 1 hour in seconds
+	})
+
+	try {
+		const records = await fetchAllPages(fetch, url)
+		const out: Person[] = records
+			.map(recordToPerson)
+			.filter(filter)
+			// Shuffle the array, although not truly random
+			.sort(() => 0.5 - Math.random())
+		return json(out)
+	} catch (e) {
+		return error(500, 'err')
 	}
-	const data = await response.json()
-	const out: Person[] = data.records
-		.map(recordToPerson)
-		.filter((p: Person) => p.image && !p.privacy)
-		// Shuffle the array, although not truly random
-		.sort(() => 0.5 - Math.random())
-	return json(out)
 }
