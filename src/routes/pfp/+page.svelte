@@ -111,7 +111,7 @@
 	<div>
 		<h2>Result</h2>
 		<div class="result-container">
-			<img class={'result' + (loading ? ' loading' : '')} src={exampleUrl} bind:this={result} />
+			<img class="result" class:loading src={exampleUrl} bind:this={result} />
 			<div class="spinner-container">
 				{#if loading}
 					<Circle color="var(--brand)" />
