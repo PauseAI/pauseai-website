@@ -12,28 +12,28 @@
 	import { Circle } from 'svelte-loading-spinners'
 	import Button from '$lib/components/Button.svelte'
 	import EasyWebWorker from 'easy-web-worker'
+	import PfpWorker from './worker?worker'
+	import type { PfpRequest, PfpResponse, PfpTransfer } from './shared'
 
 	const RELATIVE_INNER_DIAMETER = 0.772
 	const OUTPUT_FILE_NAME = 'PauseAI Global Protest PFP'
 
-	let canvas: ImageScriptGui.Image
-	let overlay: ImageScriptGui.Image
+	let canvasData: Uint8Array
+	let overlayData: Uint8Array
 	let loading = false
 	let inputFileName: string
 	let result: HTMLImageElement
 	let downloadDisabled = true
 
 	onMount(async () => {
-		canvas = await loadImage(canvasUrl)
-		overlay = await loadImage(overlayUrl)
+		canvasData = await loadImage(canvasUrl)
+		overlayData = await loadImage(overlayUrl)
 	})
 
-	// TODO don't decode outside of worker, just download
 	async function loadImage(url: string) {
 		const response = await fetch(url)
 		const arrayBuffer = await response.arrayBuffer()
-		const intArray = new Uint8Array(arrayBuffer)
-		return ImageScriptGui.Image.decode(intArray)
+		return new Uint8Array(arrayBuffer)
 	}
 
 	async function dropAccepted(event: any) {
@@ -41,41 +41,17 @@
 		const file: File = event.detail.acceptedFiles[0]
 		inputFileName = clipFileName(file.name)
 		const buffer = await file.arrayBuffer()
-		const intArray = new Uint8Array(buffer)
-		const worker = new EasyWebWorker<Uint8Array, string, Uint8Array[]>(({ onMessage }) => {
-			onMessage(async (message) => {
-				const ImageScript = await import('imagescript')
-
-				const intArray = message.payload
-				const image = await ImageScript.Image.decode(intArray)
-
-				// crop to square
-				const minDimension = Math.min(image.width, image.height)
-				const cropLeft = (image.width - minDimension) / 2
-				const cropTop = (image.height - minDimension) / 2
-				image.crop(cropLeft, cropTop, minDimension, minDimension)
-
-				// resize to transparent portion of overlay
-				image.resize(
-					RELATIVE_INNER_DIAMETER * canvas.width,
-					RELATIVE_INNER_DIAMETER * canvas.height
-				)
-
-				// composite
-				canvas.composite(
-					image,
-					(canvas.width - image.width) / 2,
-					(canvas.height - image.height) / 2
-				)
-				canvas.composite(overlay)
-
-				const encoded = await canvas.encode()
-				const blob = new Blob([encoded], { type: 'image/png' })
-				const url = URL.createObjectURL(blob)
-				message.resolve(url)
-			})
-		})
-		const url = await worker.send(intArray, [buffer])
+		const originalData = new Uint8Array(buffer)
+		const worker = new EasyWebWorker<PfpRequest, PfpResponse, PfpTransfer>(new PfpWorker())
+		const url = await worker.send(
+			{
+				canvasData,
+				originalData,
+				overlayData,
+				relativeInnerDiameter: RELATIVE_INNER_DIAMETER
+			},
+			[buffer]
+		)
 		result.src = url
 		downloadDisabled = false
 		loading = false
