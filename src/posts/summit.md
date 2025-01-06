@@ -56,12 +56,9 @@ The Summit led to the following things:
 In September, the AISI and the US government surprised us with the announcement of a new summit.
 Or, more precisely, two new convenings in San Francisco.
 
-On **November 20th-21st**, the first international meeting of [AI safety institutes](https://www.commerce.gov/news/press-releases/2024/09/us-secretary-commerce-raimondo-and-us-secretary-state-blinken-announce), organized by the US government, aiming to "begin advancing global collaboration and knowledge sharing on AI safety".
+On **November 20th-21st**, the first international meeting of [AI safety institutes](https://www.commerce.gov/news/press-releases/2024/09/us-secretary-commerce-raimondo-and-us-secretary-state-blinken-announce), organized by the US government, aimed to "begin advancing global collaboration and knowledge sharing on AI safety".
 The initial members of the International Network of AI Safety Institutes are Australia, Canada, the European Union, France, Japan, Kenya, the Republic of Korea, Singapore, the United Kingdom, and the United States.
-China is notably absent from this list - even thought [China's new AI Safety Institute](https://x.com/yi_zeng/status/1831133250946838740) has recently been announced.
-This very much seems like a missed opportunity, as the China-US relationship is of the utmost importance when it comes to AI Safety.
+China is notably absent from this list - even thought [China's new AI Safety Institute](https://x.com/yi_zeng/status/1831133250946838740) has been announced.
 
-On **November 21st-22nd**, The British AISI is [hosting a conference in San Francisco](https://www.aisi.gov.uk/work/conference-on-frontier-ai-safety-frameworks).
-The main goal here is to "convene experts from signatory companies and from research organizations to discuss the most pressing challenges in the design and implementation of frontier AI safety frameworks".
-
-One could argue that some safety-minded higher-ups were disappointed by the choices that France made, and decided that a true Safety Summit was needed soon.
+On **November 21st-22nd**, The British AISI [hosted a conference in San Francisco](https://www.aisi.gov.uk/work/conference-on-frontier-ai-safety-frameworks).
+The main goal here was to "convene experts from signatory companies and from research organizations to discuss the most pressing challenges in the design and implementation of frontier AI safety frameworks".
