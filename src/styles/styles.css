@@ -27,10 +27,6 @@ html {
 	--spacing-sm: 1rem;
 	--spacing-md: 2rem;
 	--spacing-lg: 4rem;
-
-	--card-border-radius: 5px;
-	--card-box-shadow: 0px 5px 20px 0px rgb(0, 0, 0, 0.1);
-	--card-background-color: var(--bg-secondary);
 }
 
 :root {
@@ -59,7 +55,6 @@ html {
 	--text: white;
 	--bg: black;
 	--bg-subtle: hsl(32, 100%, 20%);
-	--bg-secondary: hsl(0, 0%, 10%);
 }
 
 [color-scheme='light'] {
@@ -68,7 +63,6 @@ html {
 	--brand: var(--brand-light);
 	--brand-subtle: hsl(32, 100%, 35%);
 	--text: black;
-	--bg-secondary: white;
 }
 
 html,
@@ -219,10 +213,4 @@ textarea:focus {
 ::selection {
 	background-color: var(--brand);
 	color: black;
-}
-
-article {
-	border-radius: var(--card-border-radius);
-	box-shadow: var(--card-box-shadow);
-	background-color: var(--bg-secondary);
 }

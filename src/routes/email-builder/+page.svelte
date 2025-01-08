@@ -24,7 +24,7 @@
 
 	function copyHTMLWithoutStyles() {
 		var element = document.getElementById(letterId)
-		var clonedElement = element?.cloneNode(true) as HTMLElement
+		var clonedElement = element?.cloneNode(true)
 		clipboard
 			.write([
 				new clipboard.ClipboardItem({
@@ -200,7 +200,7 @@
 
 <h2>Result</h2>
 <p>You can edit the message directly in the browser.</p>
-<article class="letter" id={letterId} contenteditable="true">
+<div class="letter" id={letterId} contenteditable="true">
 	<p>Dear {name || '__ENTER_NAME__'},</p>
 	<p>
 		First of all, thank you very much for everything you have done for __THING__. I am emailing you
@@ -260,7 +260,7 @@
 	<p>Best regards,</p>
 
 	<p>__YOUR NAME__</p>
-</article>
+</div>
 
 <div class="actionBar">
 	<Button on:click={() => copyHTMLWithoutStyles()}>Copy</Button>
@@ -276,9 +276,11 @@
 		/* Edit mouse cursor, indicate editable */
 		cursor: text;
 		/* make it lookt like a letter! */
+		background-color: var(--bg);
 		padding: 1rem;
 		margin: 1rem;
 		/* shadow */
+		box-shadow: 0 0 10px var(--text);
 		font-family: 'Times New Roman', Times, serif;
 	}
 
