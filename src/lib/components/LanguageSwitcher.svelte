@@ -44,15 +44,13 @@
 {#if open || building}
 	<div class="card dropdown" bind:this={dropdown}>
 		{#each availableLanguageTags as lang}
-			<div>
-				<a
-					href={i18n.route($page.url.pathname)}
-					hreflang={lang}
-					aria-current={lang === languageTag() ? 'page' : undefined}
-				>
-					{languageNamesInEnglish.of(lang)}
-				</a>
-			</div>
+			<a
+				href={i18n.route($page.url.pathname)}
+				hreflang={lang}
+				aria-current={lang === languageTag() ? 'page' : undefined}
+			>
+				{languageNamesInEnglish.of(lang)}
+			</a>
 		{/each}
 	</div>
 {/if}
@@ -76,5 +74,14 @@
 		flex-direction: column;
 		gap: 0.5rem;
 		color: var(--text);
+		font-family: var(--font-heading);
+	}
+
+	.dropdown :global(a) {
+		text-decoration: none;
+	}
+
+	a[aria-current='page'] {
+		color: var(--brand-subtle);
 	}
 </style>
