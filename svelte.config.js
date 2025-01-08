@@ -43,6 +43,9 @@ const config = {
 				edge: true
 			})
 		),
+		alias: {
+			$assets: 'src/assets'
+		},
 		prerender: {
 			entries: ['*'].concat(inlangSettings.languageTags.map((tag) => '/' + tag))
 		}

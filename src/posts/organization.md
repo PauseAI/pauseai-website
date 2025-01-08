@@ -3,23 +3,26 @@ title: PauseAI Organization
 description: How the PauseAI organization is structured, and what resources are available for members.
 ---
 
-Welcome to PauseAI!
-
 ## Organization structure
 
-- [Legal entities](/legal): PauseAI consists of one international entity, and several local / national legal entities. This website and the social media accounts are managed by the international entity. National entities can have their own website and their own way of doing things.
-- [People (Volunteers)](/people): List of registered volunteers who have opted to show their profile and have committed to work on PauseAI for at least some hours a week.
-- [Teams](/teams): Our volunteers work in all sorts of teams. Every team has its own leader, Discord channel, Drive folder and of course list of members. Reach out to a team leader to join a team!
-- [National groups](/national-groups): National PauseAI groups are hubs that typically manage their own local communities, and are responsible for national-level strategy and coordination. They typically have their own website, social media accounts and legal entity.
+- [Legal entities](/legal): PauseAI consists of one international entity (PauseAI Global), and several local / national legal entities. This website and the social media accounts are managed by the international entity.
+- [National groups](/national-groups): National PauseAI groups are hubs that typically manage their own local communities, and are responsible for national-level strategy and coordination. They typically have their own website, social media accounts and legal entity. National leaders meet regularly to coordinate their work.
+- [Teams](/teams): Teams are groups of volunteers who work on specific projects or tasks within PauseAI Global. Every team has its own leader, Discord channel, Drive folder and of course list of members. Reach out to a team leader to join a team!
 - [Local communities](/communities): Check if there already exists a community in your area. Most groups are communicating in our discord server, in the `#local-meetups` channel (If you want to create a new local group, post there!). Some groups are using tools like WhatsApp or a separate Discord server.
+- [People (Volunteers)](/people): List of registered volunteers who have opted to show their profile and have committed to work on PauseAI for at least some hours a week.
 
 ![Organagram](/org.png)
 
+## How teams work
+
+- Teams take on certain responsibilities within PauseAI. They always have a leader, a [Team Document](https://docs.google.com/document/d/1Y6yXUrmI7hU59oplJdYErvwFQFCvofLVCrjTamhwkKU/edit?tab=t.0#heading=h.2cl0wb8wji0o) (describing the team's responsibilities and processes), a Discord channel and a Drive folder. They typically regularly meet digitally to coordinate their work.
+- Read the [Team Lead Onboarding Document](https://docs.google.com/document/d/1obQTc4o3gSmTZ5WsvOWK9vG_7Ait6ZogDgrcj_ZKjPA/edit?tab=t.0#heading=h.1lwhibce68fa) to see what's expected of a team leader.
+- If you want to join a team, reach out to the team leader.
+
 ## Onboarding process
 
-1. Sign up as a _member_ (on the [join page](/join) or on Discord)
-1. Someone from the onboarding team reaches out to you for a one-on-one!
-1. [Sign up as a _volunteer_](https://airtable.com/appWPTGqZmUcs3NWu/pag7ztLh27Omj5s2n/form). A volunteer is the next step - it involves signing an agreement, sharing your profile on the web page (if you want to) and joining one of [the teams](/teams).
+1. Sign up as a _volunteer_ (on the [join page](/join) or on Discord). An automated message is sent to the Onboarding team.
+1. Someone from the onboarding team reaches out to the volunteer and invites them for a one-on-one call. They are asked to take actions in an existing local group, set up a local group, or join one of the teams.
 
 ## Educational resources
 

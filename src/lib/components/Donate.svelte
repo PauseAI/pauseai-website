@@ -1,5 +1,5 @@
 <script>
-	import PayPal from '../../assets/PayPal.svg?url'
+	import PayPal from '$assets/PayPal.svg?url'
 
 	const WIDTH = 256
 	const ASPECT_RATIO = 45.67 / 11.69 // from viewBox property

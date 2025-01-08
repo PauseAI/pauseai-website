@@ -75,6 +75,6 @@ We should consider the following policies:
 - **Limit publication of training algorithms / runtime improvements**. Sometimes a new algorithm is published that makes training much more efficient. The Transformer architecture, for example, enabled virtually all recent progress in AI. These types of capability jumps can happen at any time, and we should consider limiting the publication of such algorithms to minimize the risk of a sudden capability jump. There are also innovations that enable [decentralized training runs](https://www.primeintellect.ai/blog/opendiloco). Similarly, some runtime innovations could drastically change what can be done with existing models. Banning the publication of such algorithms can be implemented using similar means as how we ban other forms of information, such as illegal pornographic media.
 - **Limit capability advancements of computational resources**. If training a superintelligence becomes possible on consumer hardware, we are in trouble. We should consider limiting capability advances of hardware (e.g. through limitations on lithography, chip design, and novel computing paradigms such as photonic chips and quantum computing).
 
-## Help to achieve this
+## Help us achieve this
 
 [Join](/join) the movement to collaborate or [take action](/action) on your own!
