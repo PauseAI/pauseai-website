@@ -49,7 +49,7 @@
 		{/if}
 		<!-- <NavLink href="/about">About</NavLink> -->
 		<NavLink {inverted} c2a href="/join">{m.header_join()}</NavLink>
-		<LanguageSwitcher />
+		<LanguageSwitcher {inverted} />
 		<NavLink {inverted} href="/search" ariaLabel="Search"><SearchIcon size="0.8em" /></NavLink>
 	</div>
 </nav>
@@ -67,7 +67,6 @@
 	.inverted-header {
 		color: white;
 		z-index: 1;
-		--text: white;
 	}
 
 	nav {

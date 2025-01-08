@@ -5,15 +5,31 @@
 	import Globe from 'lucide-svelte/icons/globe'
 	import Navlink from './Navlink.svelte'
 	import { building } from '$app/environment'
+	import { onMount } from 'svelte'
+
+	export let inverted = false
 
 	const languageNamesInEnglish = new Intl.DisplayNames('en', { type: 'language' })
 
 	let open = false
 	let button: HTMLButtonElement
 	let dropdown: HTMLDivElement
+
+	onMount(() => {
+		const clickListener = (event: MouseEvent) => {
+			const node = event.target as Node | null
+			if (open && !button.contains(node) && !dropdown.contains(node)) {
+				open = false
+			}
+		}
+		addEventListener('click', clickListener)
+		return () => {
+			removeEventListener('click', clickListener)
+		}
+	})
 </script>
 
-<Navlink>
+<Navlink {inverted} narrow>
 	<button
 		class="button reset-button"
 		bind:this={button}
@@ -26,7 +42,7 @@
 	</button>
 </Navlink>
 {#if open || building}
-	<div class="dropdown" bind:this={dropdown}>
+	<div class="card dropdown" bind:this={dropdown}>
 		{#each availableLanguageTags as lang}
 			<div>
 				<a
@@ -48,12 +64,16 @@
 	.button {
 		width: 100%;
 		cursor: pointer;
+		padding: 0 0.5rem;
 	}
 	.dropdown {
 		width: 200px;
 		position: absolute;
 		top: 100%;
 		right: 0;
-		background-color: var(--brand);
+		padding: 1rem;
+		display: flex;
+		flex-direction: column;
+		gap: 0.5rem;
 	}
 </style>

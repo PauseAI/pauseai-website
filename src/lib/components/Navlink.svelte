@@ -6,6 +6,7 @@
 	export let ariaLabel: string | undefined = undefined
 	export let inverted = false
 	export let first = false
+	export let narrow = false
 </script>
 
 <a
@@ -13,6 +14,7 @@
 	class:first
 	class:c2a
 	class:inverted
+	class:narrow
 	class:active={i18n.route($page.url.pathname) == href}
 	aria-label={ariaLabel}
 >
@@ -52,6 +54,10 @@
 		color: var(--brand-subtle);
 	}
 
+	a.inverted {
+		color: white;
+	}
+
 	a.inverted:hover {
 		color: black;
 		text-decoration: underline;
@@ -59,5 +65,9 @@
 	a.inverted.active,
 	a.inverted:active {
 		color: black;
+	}
+
+	a.narrow {
+		padding: 0;
 	}
 </style>
