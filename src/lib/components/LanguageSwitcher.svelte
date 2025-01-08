@@ -75,5 +75,6 @@
 		display: flex;
 		flex-direction: column;
 		gap: 0.5rem;
+		color: var(--text);
 	}
 </style>
