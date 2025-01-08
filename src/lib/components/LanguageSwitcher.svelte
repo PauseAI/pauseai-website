@@ -29,7 +29,7 @@
 	})
 </script>
 
-<Navlink {inverted} narrow>
+<Navlink {inverted} narrow active={open}>
 	<button
 		class="button reset-button"
 		bind:this={button}

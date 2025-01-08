@@ -7,17 +7,14 @@
 	export let inverted = false
 	export let first = false
 	export let narrow = false
+	export let active = false
+
+	$: {
+		active = i18n.route($page.url.pathname) == href
+	}
 </script>
 
-<a
-	{href}
-	class:first
-	class:c2a
-	class:inverted
-	class:narrow
-	class:active={i18n.route($page.url.pathname) == href}
-	aria-label={ariaLabel}
->
+<a {href} class:first class:c2a class:inverted class:narrow class:active aria-label={ariaLabel}>
 	<slot />
 </a>
 
