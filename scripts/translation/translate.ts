@@ -22,7 +22,7 @@ dotenv.config()
 const argv = minimist(process.argv)
 
 const DEBUG = argv.mode == 'debug'
-const DEBUG_RETRANSLATE_EVERYTHING = true
+const DEBUG_RETRANSLATE_EVERYTHING = false
 const DEBUG_RETRANSLATE_FILES: string[] = []
 const GIT_EMAIL = 'example@example.com'
 const GIT_MAX_CONCURRENT_PROCESSES = 8
