@@ -7,7 +7,7 @@
 	import Dropzone from 'svelte-file-dropzone'
 	import toast from 'svelte-french-toast'
 	import { Circle } from 'svelte-loading-spinners'
-	import exampleUrl from '$assets/pfp/2024-may-example.png?enhanced'
+	import exampleUrl from '$assets/pfp/2025-feb-example.png?enhanced'
 	import overlayUrl from '$assets/pfp/2025-feb-overlay.png?url'
 	import { meta } from './meta'
 	import type { PfpRequest, PfpResponse } from './shared'
