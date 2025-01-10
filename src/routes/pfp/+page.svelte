@@ -83,7 +83,7 @@
 	<div>
 		<h2>Your profile picture</h2>
 		<Dropzone
-			accept={['image/png', 'image/jpeg', 'image/tiff']}
+			accept={['image/*']}
 			multiple={false}
 			on:dropaccepted={dropAccepted}
 			on:droprejected={dropRejected}
@@ -98,7 +98,6 @@
 					<div>
 						<b>Click to upload</b> or drag and drop
 					</div>
-					<div class="formats">PNG, JPEG or TIFF</div>
 				{/if}
 			</div>
 		</Dropzone>
@@ -162,10 +161,6 @@
 		align-items: center;
 		text-align: center;
 		gap: 0.7rem;
-	}
-
-	.formats {
-		font-size: 0.7em;
 	}
 
 	.result-container {
