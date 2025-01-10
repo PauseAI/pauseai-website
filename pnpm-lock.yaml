@@ -44,9 +44,6 @@ importers:
       html-to-image:
         specifier: ^1.11.11
         version: 1.11.11
-      imagescript:
-        specifier: github:matmen/ImageScript#browser
-        version: https://codeload.github.com/matmen/ImageScript/tar.gz/e720cc5fd116b5775cc30abb9c66b1b5339f707d
       lucide-svelte:
         specifier: ^0.325.0
         version: 0.325.0(svelte@4.2.19)
@@ -1375,11 +1372,6 @@ packages:
   ignore@5.3.2:
     resolution: {integrity: sha512-hsBTNUqQTDwkWtcdYI2i06Y/nUBEsNEDJKjWdigLvegy8kDuJAS8uRlpkkcQpyEXL0Z/pjDy5HBmMjRCJ2gq+g==}
     engines: {node: '>= 4'}
-
-  imagescript@https://codeload.github.com/matmen/ImageScript/tar.gz/e720cc5fd116b5775cc30abb9c66b1b5339f707d:
-    resolution: {tarball: https://codeload.github.com/matmen/ImageScript/tar.gz/e720cc5fd116b5775cc30abb9c66b1b5339f707d}
-    version: 1.2.16
-    engines: {node: '>=14.0.0'}
 
   imagetools-core@7.0.1:
     resolution: {integrity: sha512-XDUx3Ac1VrZ4XF5eAJNYdHbFXRPNyebHFrwJsZ4WHb7X2MitOVW23cFphSDByT3MH5rdWdxKr4edSW2agChvDg==}
@@ -3214,8 +3206,6 @@ snapshots:
   ieee754@1.2.1: {}
 
   ignore@5.3.2: {}
-
-  imagescript@https://codeload.github.com/matmen/ImageScript/tar.gz/e720cc5fd116b5775cc30abb9c66b1b5339f707d: {}
 
   imagetools-core@7.0.1: {}
 

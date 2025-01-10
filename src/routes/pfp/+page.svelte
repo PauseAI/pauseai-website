@@ -7,9 +7,8 @@
 	import Dropzone from 'svelte-file-dropzone'
 	import toast from 'svelte-french-toast'
 	import { Circle } from 'svelte-loading-spinners'
-	import canvasUrl from '$assets/pfpgen/2024-may-canvas.png'
-	import exampleUrl from '$assets/pfpgen/2024-may-example.png?enhanced'
-	import overlayUrl from '$assets/pfpgen/2024-may-overlay.png'
+	import exampleUrl from '$assets/pfp/2024-may-example.png?enhanced'
+	import overlayUrl from '$assets/pfp/2025-feb-overlay.png?url'
 	import { meta } from './meta'
 	import type { PfpRequest, PfpResponse } from './shared'
 	import PfpWorker from './worker?worker'
@@ -17,7 +16,6 @@
 	const RELATIVE_INNER_DIAMETER = 0.772
 	const OUTPUT_FILE_NAME = 'PauseAI Global Protest PFP'
 
-	let canvasData: Uint8Array
 	let overlayData: Uint8Array
 	let loading = false
 	let inputFileName: string
@@ -25,7 +23,7 @@
 	let ready = false
 
 	onMount(async () => {
-		;[canvasData, overlayData] = await Promise.all([loadImage(canvasUrl), loadImage(overlayUrl)])
+		;[overlayData] = await Promise.all([loadImage(overlayUrl)])
 	})
 
 	async function loadImage(url: string) {
@@ -42,7 +40,6 @@
 		const originalData = new Uint8Array(buffer)
 		const worker = new EasyWebWorker<PfpRequest, PfpResponse>(new PfpWorker())
 		const url = await worker.send({
-			canvasData,
 			originalData,
 			overlayData,
 			relativeInnerDiameter: RELATIVE_INNER_DIAMETER

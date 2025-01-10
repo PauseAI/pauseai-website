@@ -1,34 +1,46 @@
 import { StaticEasyWebWorker } from 'easy-web-worker'
-import ImageScript from 'imagescript'
 import type { PfpRequest, PfpResponse } from './shared'
 
 const { onMessage } = new StaticEasyWebWorker<PfpRequest, PfpResponse>()
 
 onMessage(async (message) => {
-	const { canvasData, originalData, overlayData, relativeInnerDiameter } = message.payload
-	const canvas = await ImageScript.Image.decode(canvasData)
-	const original = await ImageScript.Image.decode(originalData)
-	const overlay = await ImageScript.Image.decode(overlayData)
+	const CANVAS_WIDTH = 512
+	const CANVAS_HEIGHT = 512
 
-	// crop to square
-	const minDimension = Math.min(original.width, original.height)
-	const cropLeft = (original.width - minDimension) / 2
-	const cropTop = (original.height - minDimension) / 2
-	original.crop(cropLeft, cropTop, minDimension, minDimension)
+	const { originalData, overlayData, relativeInnerDiameter } = message.payload
 
-	// resize to transparent portion of overlay
-	original.resize(relativeInnerDiameter * canvas.width, relativeInnerDiameter * canvas.height)
+	const originalBitmap = await createImageBitmap(new Blob([originalData]))
+	const overlayBitmap = await createImageBitmap(new Blob([overlayData]))
 
-	// composite
-	canvas.composite(
-		original,
-		(canvas.width - original.width) / 2,
-		(canvas.height - original.height) / 2
+	const minDimension = Math.min(originalBitmap.width, originalBitmap.height)
+	const cropLeft = (originalBitmap.width - minDimension) / 2
+	const cropTop = (originalBitmap.height - minDimension) / 2
+
+	const offscreenCanvas = new OffscreenCanvas(CANVAS_WIDTH, CANVAS_HEIGHT)
+	const ctx = offscreenCanvas.getContext('2d')
+	if (!ctx) {
+		message.reject('Could not get 2D context')
+		return
+	}
+
+	const resizedWidth = relativeInnerDiameter * CANVAS_WIDTH
+	const resizedHeight = relativeInnerDiameter * CANVAS_HEIGHT
+
+	ctx.drawImage(
+		originalBitmap,
+		cropLeft,
+		cropTop,
+		minDimension,
+		minDimension,
+		(CANVAS_WIDTH - resizedWidth) / 2,
+		(CANVAS_HEIGHT - resizedHeight) / 2,
+		resizedWidth,
+		resizedHeight
 	)
-	canvas.composite(overlay)
 
-	const encoded = await canvas.encode()
-	const blob = new Blob([encoded], { type: 'image/png' })
+	ctx.drawImage(overlayBitmap, 0, 0, CANVAS_WIDTH, CANVAS_HEIGHT)
+
+	const blob = await offscreenCanvas.convertToBlob({ type: 'image/png' })
 	const url = URL.createObjectURL(blob)
 	message.resolve(url)
 })
