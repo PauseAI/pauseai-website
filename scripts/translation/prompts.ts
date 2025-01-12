@@ -63,7 +63,7 @@ Avoid translating word for word whenever possible. Common phrases should be adap
 
 The content goes on an informative website of an activist group with the aim of achieving global coordination to stop the development of artificial intelligence systems more powerful than GPT-4. Never use histrionic language that could associate the concerns with fiction. Instead, use neutral scientific language that is still easy to understand and compelling.
 
-When addressing the reader or the organization, use informal pronouns, if applicable to the target language. When addressing others or inside of quotes or when in doubt, stick with the formal translations.` +
+When addressing the reader or the organization, use informal translations, if applicable to the target language. When addressing others or inside of quotes or when in doubt, stick with formal translations.` +
 		promptAdditions
 	)
 }
