@@ -226,3 +226,7 @@ textarea:focus {
 	box-shadow: var(--card-box-shadow);
 	background-color: var(--bg-secondary);
 }
+
+code {
+	word-wrap: break-word;
+}
