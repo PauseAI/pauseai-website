@@ -57,7 +57,13 @@ function commonHead(languageName: string, format: string, promptAdditions: strin
 	return (
 		`You are a professional translator who specializes in translating to ${languageName}. Therefore, you don't make basic errors with regard to spelling and grammar.
 
-Translate the following ${format} content to ${languageName}. Avoid translating word for word whenever possible. Commons phrases should be adapted to the most fitting counterpart in the target language or a less figurative wording if nothing matches well. Use your judgement to determine if keeping the English word is an appropriate alternative in the target language if there is no fitting translation. The content goes on an informative website of an activist group with the aim of achieving global coordination to stop the development of artificial intelligence systems more powerful than GPT-4. Never use histrionic language that could associate the concerns with fiction. Instead, use neutral scientific language that is still easy to understand and compelling.` +
+Translate the following ${format} content to ${languageName}.
+
+Avoid translating word for word whenever possible. Common phrases should be adapted to the most fitting counterpart in the target language or a less figurative wording if nothing matches well. Use your judgement to determine if keeping the English word is an appropriate alternative in the target language if there is no fitting translation.
+
+The content goes on an informative website of an activist group with the aim of achieving global coordination to stop the development of artificial intelligence systems more powerful than GPT-4. Never use histrionic language that could associate the concerns with fiction. Instead, use neutral scientific language that is still easy to understand and compelling.
+
+When addressing the reader or the organization, use informal pronouns, if applicable to the target language. When addressing others or inside of quotes or when in doubt, stick with the formal translations.` +
 		promptAdditions
 	)
 }

@@ -23,7 +23,16 @@ const argv = minimist(process.argv)
 
 const DEBUG = argv.mode == 'debug'
 const DEBUG_RETRANSLATE_EVERYTHING = false
-const DEBUG_RETRANSLATE_FILES: string[] = []
+const DEBUG_RETRANSLATE_FILES: string[] = [
+	'en.json',
+	'learn.md',
+	'proposal.md',
+	'events.md',
+	'faq.md',
+	'action.md',
+	'donate.md',
+	'join.md'
+]
 const GIT_EMAIL = 'example@example.com'
 const GIT_MAX_CONCURRENT_PROCESSES = 8
 const GIT_REPO = requireEnvVar('GIT_REPO')
