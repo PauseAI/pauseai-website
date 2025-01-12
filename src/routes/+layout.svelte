@@ -1,4 +1,7 @@
 <script lang="ts">
+	import { ParaglideJS } from '@inlang/paraglide-sveltekit'
+	import { i18n } from '$lib/i18n'
+
 	import { Toaster } from 'svelte-french-toast'
 	import { ProgressBar } from '@prgm/sveltekit-progress-bar'
 
@@ -15,45 +18,63 @@
 	import '../styles/print.css'
 	import Hero from '$lib/components/Hero.svelte'
 
+	import { onMount, tick } from 'svelte'
+	import { onNavigate, replaceState } from '$app/navigation'
+	import { page } from '$app/stores'
+
 	export let data
 	// Show the hero on the homepage, but nowhere else
-	$: hero = data.url == '/'
+	$: hero = i18n.route(data.url) == '/'
+
+	onMount(async () => {
+		await tick() // wait for Svelte router
+		hideLocaleInUrl()
+	})
+	// returned function is run after navigation
+	onNavigate(() => hideLocaleInUrl)
+
+	function hideLocaleInUrl() {
+		const canonical = i18n.route(data.url)
+		replaceState(canonical, $page.state)
+	}
 </script>
 
-<h2 style="width: 0; height: 0; margin: 0; padding: 0; visibility: hidden;" data-pagefind-ignore>
-	(Top)
-</h2>
+<ParaglideJS {i18n}>
+	<h2 style="width: 0; height: 0; margin: 0; padding: 0; visibility: hidden;" data-pagefind-ignore>
+		(Top)
+	</h2>
 
-<div class="layout" class:with-hero={hero}>
-	{#if hero}
-		<Hero />
+	<div class="layout" class:with-hero={hero}>
+		{#if hero}
+			<Hero />
+		{/if}
+		<Header inverted={hero} moveUp={hero} />
+
+		<main>
+			<PageTransition url={data.url}>
+				<slot />
+			</PageTransition>
+		</main>
+
+		<Footer />
+	</div>
+
+	<Toaster
+		toastOptions={{
+			style: 'background-color: var(--bg-subtle); color: var(--text)',
+			iconTheme: {
+				primary: 'var(--brand)',
+				secondary: 'white'
+			}
+		}}
+	/>
+
+	{#if !['/', '/outcomes', '/pdoom', '/quotes'].includes(i18n.route(data.url))}
+		<Toc />
 	{/if}
-	<Header inverted={hero} moveUp={hero} />
 
-	<main>
-		<PageTransition url={data.url}>
-			<slot />
-		</PageTransition>
-	</main>
-
-	<Footer />
-</div>
-
-<Toaster
-	toastOptions={{
-		style: 'background-color: var(--bg-subtle); color: var(--text)',
-		iconTheme: {
-			primary: 'var(--brand)',
-			secondary: 'white'
-		}
-	}}
-/>
-
-{#if !['/', '/outcomes', '/pdoom', '/quotes'].includes(data.url)}
-	<Toc />
-{/if}
-
-<ProgressBar color="var(--brand)" />
+	<ProgressBar color="var(--brand)" />
+</ParaglideJS>
 
 <style>
 	/* @import url('$lib/reset.css');
