@@ -48,7 +48,8 @@
 	}
 
 	.content::selection {
-		background-color: var(--text);
+		color: var(--text);
+		background-color: var(--bg-subtle);
 	}
 
 	.close {
