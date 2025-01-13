@@ -1,9 +1,7 @@
 ---
-title: PauseAI 2025 Febraury protest
+title: Next International Protest: Paris AI Summit  — February 7–11 
 description: French summit protest
 ---
-
-# Next International Protest: Paris AI Summit  — February 7–11 
 
 ## AI Safety should be the focus of the Paris AI Action Summit!
 
