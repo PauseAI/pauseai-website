@@ -1,5 +1,5 @@
 ---
-title: Next International Protest, Paris AI Summit — February 7–11 
+title: Next International Protest Paris AI Summit — February 7–11 
 description: French summit protest
 ---
 
@@ -27,9 +27,9 @@ On the 10th and 11th of February this year,  politicians from around the world i
 * **Kinshasa,** DR Congo  
 * **Yaoundé,** Cameroon  
 * **Melbourne**, Australia  
-    
-  Sign up to this event for updates!   
-  Reach out to the @Protest Team on discord if you want to organize a protest in your city!
+
+Sign up to this event for updates!   
+Reach out to the @Protest Team on discord if you want to organize a protest in your city!
 
 ## Why are we protesting, and what are we asking the organizer and the delegates to do!
 
