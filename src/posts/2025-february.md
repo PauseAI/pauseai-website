@@ -28,8 +28,8 @@ On the 10th and 11th of February this year,  politicians from around the world i
 * **Yaoundé,** Cameroon  
 * **Melbourne**, Australia  
 
-Sign up to this event for updates!   
-Reach out to the @Protest Team on discord if you want to organize a protest in your city!
+Reach out to the @Protest Team on [our Discord](https://discord.gg/9MN5yhNR3K) if you want to organize a protest in your city!
+<!--And sign up to this event for updates! (waiting for the global Luma if we create that)-->
 
 ## Why are we protesting, and what are we asking the organizer and the delegates to do!
 
