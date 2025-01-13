@@ -16,7 +16,7 @@ On the 10th and 11th of February this year,  politicians from around the world i
 * **Paris**, France  
 * **Washington, D.C**., USA  
 * [**London**](https://lu.ma/0h69asxw), UK  
-* **Berlin**, Germany  
+* [**Berlin**](https://lu.ma/7sjdot1d), Germany  
 * **Brussels**, Belgium  
 * **Zürich**, Switzerland  
 * **Prague**, Czechia  
