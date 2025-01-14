@@ -41,6 +41,7 @@
 		width: 100%;
 		background-color: var(--brand);
 		padding: 0.5em;
+		box-sizing: border-box;
 	}
 
 	.banner.hidden {
