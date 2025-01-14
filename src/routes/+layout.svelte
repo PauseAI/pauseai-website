@@ -25,7 +25,7 @@
 	(Top)
 </h2>
 
-<Banner shadow={hero} target="/2025-february">
+<Banner contrast={hero} target="/2025-february">
 	On Feb 7–11 we will be globally protesting the missing safety focus of the AI Action Summit in
 	Paris. | <b><a href="/2025-february">Join in! »</a></b>
 </Banner>

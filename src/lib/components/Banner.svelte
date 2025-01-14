@@ -3,7 +3,7 @@
 	import { onMount } from 'svelte'
 	import { page } from '$app/stores'
 
-	export let shadow = false
+	export let contrast = false
 	export let target: string | null = null
 
 	let banner: HTMLDivElement
@@ -20,7 +20,7 @@
 	}
 </script>
 
-<div class="banner" class:shadow class:hidden bind:this={banner}>
+<div class="banner" class:contrast class:hidden bind:this={banner}>
 	<span class="content">
 		<slot />
 	</span>
@@ -44,9 +44,9 @@
 		display: none;
 	}
 
-	.banner.shadow {
-		z-index: 1;
-		box-shadow: 0 0 100px rgba(0, 0, 0, 20%);
+	.banner.contrast {
+		color: white;
+		background-color: black;
 	}
 
 	.banner :global(a) {
