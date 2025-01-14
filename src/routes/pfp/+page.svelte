@@ -74,7 +74,7 @@
 
 <h1>Profile picture generator</h1>
 <p>
-	Upload your profile picture to generate an image with the date of our <a href="/2024-may"
+	Upload your profile picture to generate an image with the date of our <a href="/2025-february"
 		>global protest</a
 	> and the address of the corresponding website. Your profile picture doesn't leave your device.
 </p>
