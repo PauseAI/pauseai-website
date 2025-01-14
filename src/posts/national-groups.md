@@ -9,7 +9,7 @@ description: What does it mean to be a National Group in the PauseAI network?
 - United Kingdom ([X](https://x.com/PauseAI_UK))
 - [France (PauseIA)](https://pauseia.fr/) ([X](https://x.com/pause_ia). [Discord](https://discord.gg/vyXGd7AeGc))
 - [Norway](https://pauseai.no/)
-- Germany ([Discord](https://discord.gg/VuVVyJQ37M))
+- [Germany](https://linktr.ee/pauseai.germany) ([Discord](https://discord.gg/VuVVyJQ37M))
 - Cameroon ([Discord](https://discord.gg/JCJBSmDv), [Whatsapp](https://chat.whatsapp.com/EmSo5C486JzDdFOiojByje))
 - Romania ([Whatsapp](https://chat.whatsapp.com/K5oUIpa9OH6KaLNx2IHql3))
 - [Czech Republic](https://pauseai.cz/) ([Discord](https://discord.gg/ZTzFytGKKE))
@@ -17,15 +17,19 @@ description: What does it mean to be a National Group in the PauseAI network?
 ## PauseAI National Groups
 
 - Manage, coach and coordinate their own [local communities](/communities).
+- Organize national events.
 - Are responsible for national-level strategy and coordination.
 - Typically have their own website, social media accounts and legal entity.
 - Do national-level lobbying and media outreach.
+- At this point, most national groups are _volunteer-run_.
 
-## Relationship with PauseAI Global
+## What PauseAI Global provides
 
-- National groups are expected to follow the PauseAI strategy ([Theory of Change](/theory-of-change), [Communication Strategy](/communication-strategy), [Growth Strategy](/growth-strategy)).
-- National groups can apply for [Microgrants](/microgrants) from PauseAI Global to fund all sorts of activities.
-- The Oversight Team at PauseAI Global monitors and coaches national groups to ensure they are successful and aligned with the global strategy.
+- **Digital infrastructure** which involves things like signing up for the newsletter, joining the discord server, onboarding volunteers, etc.
+- **Funding** for national-level activities. National groups can apply for [Microgrants](/microgrants) from PauseAI Global to fund all sorts of activities. Still, national groups are encouraged to fundraise for their own activities.
+- **Coaching** and **monitoring** to ensure national groups are successful and aligned with the global strategy.
+- **Marketing materials** like flyers, posters, social media content, etc.
+- **Strategy**. National groups are expected to follow the PauseAI strategy ([Theory of Change](/theory-of-change), [Communication Strategy](/communication-strategy), [Growth Strategy](/growth-strategy)). However, national groups are expected to make modifications to the strategy to fit their local context.
 
 ## How to set up a PauseAI National Group
 

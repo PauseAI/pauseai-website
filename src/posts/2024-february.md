@@ -7,7 +7,6 @@ description: We are organizing a protest to demand a pause on dangerous AI devel
     import WidgetConsent from '$lib/components/widget-consent/WidgetConsent.svelte'
 </script>
 
-- PauseAI protest
 - Where: San Francisco, OpenAI HQ
 - When: 12th of February 2024, 16:30 - 18:00
 - [Facebook event](https://fb.me/e/78BzWmaaj)
