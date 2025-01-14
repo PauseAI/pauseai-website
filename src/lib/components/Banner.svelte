@@ -55,7 +55,7 @@
 	}
 
 	.banner.contrast .content::selection {
-		color: white;
+		color: black;
 		background-color: var(--brand);
 	}
 
