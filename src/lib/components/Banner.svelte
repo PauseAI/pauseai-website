@@ -24,6 +24,7 @@
 
 <style>
 	.banner {
+		--scroll-bar-width: 0px;
 		position: relative;
 		display: flex;
 		justify-content: center;
