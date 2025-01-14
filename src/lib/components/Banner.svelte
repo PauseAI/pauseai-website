@@ -1,12 +1,19 @@
-<script>
+<script lang="ts">
 	import X from 'lucide-svelte/icons/x'
+	import { onMount } from 'svelte'
 
 	export let shadow = false
 
+	let banner: HTMLDivElement
 	let hidden = false
+
+	onMount(() => {
+		const scrollBarWidth = window.innerWidth - document.documentElement.clientWidth
+		banner.style.setProperty('--scroll-bar-width', scrollBarWidth + 'px')
+	})
 </script>
 
-<div class="banner" class:shadow class:hidden>
+<div class="banner" class:shadow class:hidden bind:this={banner}>
 	<span class="content">
 		<slot />
 	</span>
@@ -55,7 +62,7 @@
 	.close {
 		position: absolute;
 		top: 0;
-		right: calc(15px + 1em);
+		right: calc(var(--scroll-bar-width) + 1em);
 		bottom: 0;
 		display: flex;
 		align-items: center;
