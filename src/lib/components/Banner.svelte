@@ -24,7 +24,6 @@
 
 <style>
 	.banner {
-		--scroll-bar-width: 0px;
 		position: relative;
 		display: flex;
 		justify-content: center;
@@ -75,7 +74,7 @@
 	.close {
 		position: absolute;
 		top: 0;
-		right: calc(var(--scroll-bar-width) + 1em);
+		right: 0.75em;
 		bottom: 0;
 		display: flex;
 		align-items: center;
