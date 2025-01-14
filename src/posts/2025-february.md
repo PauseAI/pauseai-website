@@ -17,20 +17,20 @@ On the 10th and 11th of February this year, politicians from around the world in
 
 ## Protests around the world:
 
-- **Paris**, France
-- **Washington, D.C**., USA
+- **Paris**, France _(details t.b.a.)_
+- **Washington, D.C**., USA _(details t.b.a.)_
 - [**London**](https://lu.ma/0h69asxw), UK
 - [**Berlin**](https://lu.ma/7sjdot1d), Germany
-- **Brussels**, Belgium
-- **Zürich**, Switzerland
-- **Prague**, Czechia
-- **Stockholm**, Sweden
+- **Brussels**, Belgium _(details t.b.a.)_
+- **Zürich**, Switzerland _(details t.b.a.)_
+- **Prague**, Czechia _(details t.b.a.)_
+- **Stockholm**, Sweden _(details t.b.a.)_
 - [**Oslo**](https://lu.ma/iazbqzr1), Norway
-- **Kristiansand**, Norway,
-- **Trondheim**, Norway
-- **Kinshasa,** DR Congo
-- **Yaoundé,** Cameroon
-- **Melbourne**, Australia
+- **Kristiansand**, Norway _(details t.b.a.)_
+- **Trondheim**, Norway _(details t.b.a.)_
+- **Kinshasa,** DR Congo _(details t.b.a.)_
+- **Yaoundé,** Cameroon _(details t.b.a.)_
+- **Melbourne**, Australia _(details t.b.a.)_
 
 <LumaSignup eventId="evt-OEM90n9MAvb8JTx">
     Sign up to get updates
