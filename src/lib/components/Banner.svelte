@@ -1,27 +1,23 @@
-<script context="module">
-	let hidden = false
-</script>
-
 <script lang="ts">
-	import { beforeNavigate } from '$app/navigation'
 	import X from 'lucide-svelte/icons/x'
 	import { onMount } from 'svelte'
+	import { page } from '$app/stores'
 
 	export let shadow = false
+	export let target: string | null = null
 
 	let banner: HTMLDivElement
+	let hidden = false
 
 	onMount(() => {
 		const scrollBarWidth = window.innerWidth - document.documentElement.clientWidth
 		banner.style.setProperty('--scroll-bar-width', scrollBarWidth + 'px')
 	})
 
-	beforeNavigate(({ to }) => {
-		const path = to?.url.pathname
-		const selector = `a[href="${path}"]`
-		const result = banner.querySelector(selector)
-		if (result) hidden = true
-	})
+	$: {
+		const path = $page.url.pathname
+		if (path == target) hidden = true
+	}
 </script>
 
 <div class="banner" class:shadow class:hidden bind:this={banner}>
