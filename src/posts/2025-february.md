@@ -1,5 +1,5 @@
 ---
-title: Next International Protest Paris AI Summit — February 7–11
+title: 'Next International Protest: Paris AI Summit — February 7–11'
 description: French summit protest
 ---
 
