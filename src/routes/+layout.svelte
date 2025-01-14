@@ -25,10 +25,12 @@
 	(Top)
 </h2>
 
-<Banner shadow={hero}>
-	On Feb 7–11 we will be globally protesting the missing safety focus of the AI Action Summit in
-	Paris. | <b><a href="/2025-february">Join in! »</a></b>
-</Banner>
+{#if data.url != '/2025-february'}
+	<Banner shadow={hero}>
+		On Feb 7–11 we will be globally protesting the missing safety focus of the AI Action Summit in
+		Paris. | <b><a href="/2025-february">Join in! »</a></b>
+	</Banner>
+{/if}
 
 <div class="layout" class:with-hero={hero}>
 	{#if hero}
