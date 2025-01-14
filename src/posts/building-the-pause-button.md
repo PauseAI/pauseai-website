@@ -3,11 +3,17 @@ title: Building the Pause Button
 description: What would an AI Pause look like? How do you continue to actually prevent a superintelligence from being created?
 ---
 
+<script>
+    import SupplyChain from '$lib/components/SupplyChain.svelte'
+</script>
+
 If we allow the creation of a superintelligent AI, we are [risking every single life on earth](/xrisk).
 When we're talking about a Pause, we're talking about [implementing an international ban on the creation of a superintelligent AI](/proposal).
 Some argue that it's too early to press the Pause Button (we [don't](/urgency)), but most experts seem to agree that it may be good to pause if developments go too fast.
 But as of now _we do not have a Pause Button_.
 So we should start thinking about how this would work, and how we can implement it.
+
+_This document is a work in progress, being updated by the AISC "Building the Pause Button" team._
 
 ## The Race: why we need international cooperation
 
@@ -43,6 +49,8 @@ This is great news for governance.
 Through the hardware, we can regulate the training runs.
 Let's take a dive into the various choke points in the AI chip supply chain.
 
+<SupplyChain/>
+
 #### Silicon wafers: Shin-Etsu, Sumco, Siltronic
 
 #### Lithography: ASML & SMEE
@@ -70,11 +78,6 @@ ASML's EUV machines use mirrors and lenses made by the German company Zeiss.
 In 2016, ASML [bought](https://optics.org/news/7/11/11) a 25% stake in Zeiss, and the two companies have a very close relationship.
 It is likely that no other company is able to produce these optics.
 
-#### Interconnect & Packaging: ASE
-
-When a chip die exits a fab, it needs to be "packaged".
-ASE is probably the largest interconnect company for AI chips.
-
 #### Fabrication: TSMC, Samsung amd SMIC
 
 Building a "fab" (a chip factory) is astonishingly difficult: it has zero-tolerance for dust particles, requires the most expensive high-tech equipment, and has a very complex supply chain.
@@ -92,6 +95,19 @@ and is now able to produce 7nm AI chips (about three years behind the 4nm proces
 
 AI chips require a lot of HBMs (High Bandwidth Memory), which is the most advanced memory type.
 Only a few companies can produce them.
+
+#### Probe machines
+
+Probe machines are used to test the chips after they are manufactured.
+
+#### Testing: Advantest, Teradyne
+
+After the chips are packaged, they need to be tested.
+
+#### Interconnect & Packaging: ASE
+
+When a chip die exits a fab, it needs to be "packaged".
+ASE is probably the largest interconnect company for AI chips.
 
 #### AI Chip design: Nvidia, AMD, Intel, Google, Apple
 
@@ -132,6 +148,14 @@ Other proposed methods include:
 
 An international insitution could be set up to monitor these verification methods, and to enforce the Pause.
 
+## Roles of nations
+
+- **Taiwan**: has TSMC, the leading AI chip manufacturer.
+- **Netherlands**: has ASML, the leading AI chip lithography manufacturer. Practically the only _true monopoly_ in the AI chip supply chain. Through export controls of EUV machines, the Netherlands can effectively control the AI chip supply chain.
+- **Germany**: has Zeiss, the leading AI chip optics manufacturer.
+- **China**: has SMIC and SMEE, which are getting closer to the leading edge of AI chip manufacturing.
+- **USA**: leading in chip design with companies like Nvidia, AMD, Intel, Google, Apple.
+
 ## Software Governance
 
 Physical chips are our primary focus, but we may also want to regulate _software_ used to train and run AI models.
@@ -158,3 +182,7 @@ Software is just information - it can be copied and distributed very easily.
 Nonetheless, we have banned information before.
 Child pornography, for example, is illegal to make, illegal to distribute, and illegal to possess.
 The same enforcement mechanisms could be used to regulate dangerous AI software.
+
+## Recommendation
+
+- **Netherlands**: get ASML to
