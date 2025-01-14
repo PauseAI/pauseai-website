@@ -218,7 +218,7 @@ textarea:focus {
 
 ::selection {
 	background-color: var(--brand);
-	color: black;
+	color: var(--bg);
 }
 
 .card {

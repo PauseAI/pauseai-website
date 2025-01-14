@@ -49,11 +49,22 @@
 		background-color: black;
 	}
 
+	.banner.contrast :global(a:hover),
+	.banner.contrast .close:hover {
+		color: var(--brand);
+	}
+
+	.banner.contrast .content::selection {
+		color: white;
+		background-color: var(--brand);
+	}
+
 	.banner :global(a) {
 		color: unset;
 	}
 
-	.banner :global(a:hover) {
+	.banner :global(a:hover),
+	.close:hover {
 		color: var(--brand-subtle);
 	}
 
@@ -74,9 +85,5 @@
 		bottom: 0;
 		display: flex;
 		align-items: center;
-	}
-
-	.close:hover {
-		color: var(--brand-subtle);
 	}
 </style>
