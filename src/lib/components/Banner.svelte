@@ -2,6 +2,7 @@
 	import X from 'lucide-svelte/icons/x'
 	import { onMount } from 'svelte'
 	import { page } from '$app/stores'
+	import UAParser from 'ua-parser-js'
 
 	export let contrast = false
 	export let target: string | null = null
@@ -10,8 +11,10 @@
 	let hidden = false
 
 	onMount(() => {
-		const scrollBarWidth = window.innerWidth - document.documentElement.clientWidth
-		banner.style.setProperty('--scroll-bar-width', scrollBarWidth + 'px')
+		const userAgentString = navigator.userAgent
+		const parsedUserAgent = new UAParser(userAgentString)
+		const device = parsedUserAgent.getDevice()
+		if (!device.type) banner.style.setProperty('--scroll-bar-width', '15px')
 	})
 
 	$: {
