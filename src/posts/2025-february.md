@@ -11,7 +11,7 @@ description: French summit protest
 
 On the 10th and 11th of February this year, politicians from around the world including the USA, China, UK, Canada and France as well as global experts in AI will be gathering in Paris for the Artificial Intelligence Action Summit. Without a focus on safety, **the summit will be a lost opportunity to protect our common future**. We are protesting around the world to shift main focus onto AI Safety!
 
-- **PauseAI wants to ensure the Summit attendees and organizers know that Safety is the most important issue for discussion\!**  
+- **PauseAI wants to ensure the Summit attendees and organizers know that Safety is the most important issue for discussion\!**
 
 - **We hope you will stand with us in February to send a clear message to the organizers and the delegates!**
 
@@ -32,7 +32,7 @@ On the 10th and 11th of February this year, politicians from around the world in
 - **Yaoundé,** Cameroon
 - **Melbourne**, Australia
 
-<LumaSignup eventId="evt-qzDmz60kZHE6PaK">
+<LumaSignup eventId="evt-OEM90n9MAvb8JTx">
     Sign up to get updates
 </LumaSignup>
 
