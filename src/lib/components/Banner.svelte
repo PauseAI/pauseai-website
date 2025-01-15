@@ -66,6 +66,12 @@
 		margin-inline: 3rem;
 	}
 
+	@media (max-width: 40rem) {
+		.content {
+			margin-left: 1rem;
+		}
+	}
+
 	.content::selection {
 		color: var(--text);
 		background-color: var(--bg-subtle);
