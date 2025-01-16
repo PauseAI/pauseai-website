@@ -1,6 +1,6 @@
 ---
 title: 'Next International Protest: Paris AI Summit — February 7–11'
-description: French summit protest
+description: AI Safety should be the focus of the Paris AI Action Summit!
 ---
 
 <script>
