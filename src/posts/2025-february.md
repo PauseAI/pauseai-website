@@ -27,7 +27,7 @@ On the 10th and 11th of February this year, politicians from around the world in
 - **Prague**, Czechia _(details t.b.a.)_
 - **Milan**, Italy _(details t.b.a.)_
 - **Stockholm**, Sweden _(details t.b.a.)_
-- **Copenhagen**, Denmark _(details t.b.a.)_
+- [**Copenhagen**](https://www.lesswrong.com/events/NnhLu4wHirSKgz78t/2-pauseai-copenhagen-protest), Denmark
 - [**Oslo**](https://lu.ma/iazbqzr1), Norway
 - **Kristiansand**, Norway _(details t.b.a.)_
 - **Trondheim**, Norway _(details t.b.a.)_
