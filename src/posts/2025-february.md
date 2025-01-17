@@ -19,7 +19,7 @@ On the 10th and 11th of February this year, politicians from around the world in
 
 - **Paris**, France _(details t.b.a.)_
 - **Washington, D.C**., USA _(details t.b.a.)_
-- **New York**, USA _(details t.b.a.)_
+- [**New York**](https://lu.ma/hino6unl), USA
 - [**Victoria**](https://lu.ma/azbyo7ik), Canada
 - [**London**](https://lu.ma/0h69asxw), UK
 - [**Berlin**](https://lu.ma/7sjdot1d), Germany
