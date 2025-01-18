@@ -25,7 +25,7 @@ On the 10th and 11th of February this year, politicians from around the world in
 - [**Berlin**](https://lu.ma/7sjdot1d), Germany
 - **Brussels**, Belgium _(details t.b.a.)_
 - **Zürich**, Switzerland _(details t.b.a.)_
-- **Prague**, Czechia _(details t.b.a.)_
+- [**Prague**](https://lu.ma/6t4fmgw0), Czechia
 - **Milan**, Italy _(details t.b.a.)_
 - **Stockholm**, Sweden _(details t.b.a.)_
 - [**Copenhagen**](https://fb.me/e/6kJob0cvU), Denmark
