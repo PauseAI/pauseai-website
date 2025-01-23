@@ -18,7 +18,6 @@ On the 10th and 11th of February this year, politicians from around the world in
 ## Protests around the world:
 
 - **Paris**, France _(details t.b.a.)_
-- **Washington, D.C**., USA _(details t.b.a.)_
 - [**New York**](https://lu.ma/user/pauseainyc), USA
 - [**Victoria**](https://lu.ma/azbyo7ik), Canada
 - [**London**](https://lu.ma/0h69asxw), UK
