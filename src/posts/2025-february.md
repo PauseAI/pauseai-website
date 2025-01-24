@@ -22,7 +22,7 @@ On the 10th and 11th of February this year, politicians from around the world in
 - [**Victoria**](https://lu.ma/azbyo7ik), Canada
 - [**London**](https://lu.ma/0h69asxw), UK
 - [**Berlin**](https://lu.ma/7sjdot1d), Germany
-- **Brussels**, Belgium _(details t.b.a.)_
+- [**Brussels**](https://lu.ma/sudbttnx), Belgium
 - **Zürich**, Switzerland _(details t.b.a.)_
 - [**Prague**](https://lu.ma/6t4fmgw0), Czechia
 - **Milan**, Italy _(details t.b.a.)_
