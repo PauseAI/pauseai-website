@@ -25,7 +25,7 @@ France postponed it to February 2025.
 It was also renamed to "AI _Action_ Summit", dropping the all-important "Safety" focus.
 We've been told that safety will be just one of five tracks at the summit.
 It is led by AI-sceptic Anne Bouverot, who is [dismissive](https://legrandcontinent-eu.translate.goog/es/2023/12/08/la-ia-no-nos-sustituira-una-conversacion-con-anne-bouverot-yann-le-cun-y-alexandre-viros/?_x_tr_sl=es&_x_tr_tl=en&_x_tr_hl=en&_x_tr_pto=sc) of "alarmist discourse", comparing AI with calculators and comparing AI safety concerns with Y2K concerns, being certain that "AI is not going to replace us, but rather help us".
-This is why we will be [globally protesting the missing safety focus](/2025-februar) of the summit.
+This is why we will be [globally protesting the missing safety focus](/2025-february) of the summit.
 
 ## Past Summits
 
