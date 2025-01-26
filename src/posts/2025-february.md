@@ -26,7 +26,7 @@ On the 10th and 11th of February this year, politicians from around the world in
 - **Zürich**, Switzerland _(details t.b.a.)_
 - [**Prague**](https://lu.ma/6t4fmgw0), Czechia
 - **Milan**, Italy _(details t.b.a.)_
-- **Stockholm**, Sweden _(details t.b.a.)_
+- [**Stockholm**](https://www.facebook.com/events/1844597859610851), Sweden
 - [**Copenhagen**](https://fb.me/e/6kJob0cvU), Denmark
 - [**Oslo**](https://lu.ma/iazbqzr1), Norway
 - [**Kristiansand**](https://lu.ma/kla08ott), Norway
