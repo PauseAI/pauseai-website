@@ -38,7 +38,7 @@ If you want to create PauseAI-related material yourself, you can use our brand c
 
 ## Podcasts & Talks
 
-- [**Compilation**](https://www.youtube.com/playlist?list=PLI46NoubGtIJvSAWkC7VOmfWrLD2u1ZPA) of **15+** podcasts and talks that multiple people from PauseAI participated in.
+- [**Compilation**](https://www.youtube.com/playlist?list=PLI46NoubGtIJvSAWkC7VOmfWrLD2u1ZPA) of **20+** podcasts and talks that multiple people from PauseAI participated in.
 - [**French podcasts**](https://www.youtube.com/playlist?list=PLLUfQBgG_MvHh3b9Pedf139eVLsLs5zAs). **20+** podcasts where Maxime Forunes, PauseAI France director, participated in.
 
 Outside of Youtube:
