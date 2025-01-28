@@ -32,7 +32,8 @@ On the 10th and 11th of February this year, politicians from around the world in
 - [**Kristiansand**](https://lu.ma/kla08ott), Norway
 - **Trondheim**, Norway _(details t.b.a.)_
 - [**Kinshasa**](https://lu.ma/9l5fif4e), DR Congo
-- **Brazzaville**, Republic of the Congo _(details t.b.a.)_
+- **Brazzaville**, Republic of the Congo _(details t.b.a.)
+- [**N'Djaména**](https://www.facebook.com/profile.php?id=61565696294271), Chad
 - [**Yaoundé**](https://lu.ma/9fizamwx), Cameroon
 - [**Melbourne**](https://lu.ma/hnzqf46d), Australia
 
