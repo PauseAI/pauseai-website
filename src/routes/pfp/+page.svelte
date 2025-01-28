@@ -176,11 +176,6 @@
 		opacity: 80%;
 	}
 
-	.result.example {
-		filter: saturate(0.5);
-		opacity: 80%;
-	}
-
 	.spinner-container {
 		display: flex;
 		align-items: center;
