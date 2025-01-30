@@ -28,6 +28,13 @@
 				'https://static1.squarespace.com/static/635693acf15a3e2a14a56a4a/t/64f0a7838ccbf43b6b5ee40c/1693493128111/XPT.pdf'
 		},
 		{
+			name: 'Nate Silver',
+			title: 'Founder of FiveThirtyEight',
+			probability: '5-10%',
+			number: 0.075,
+			source: 'https://www.natesilver.net/p/its-time-to-come-to-grips-with-ai'
+		},
+		{
 			name: 'Vitalik Buterin',
 			title: 'Ethereum founder',
 			probability: '10%',
