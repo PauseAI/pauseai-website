@@ -34,7 +34,6 @@ On the 10th and 11th of February this year, politicians from around the world in
 - [**Kinshasa**](https://lu.ma/9l5fif4e), DR Congo
 - [**Brazzaville**](https://lu.ma/jhhimjt3), Republic of the Congo
 - [**N'Djaména**](https://lu.ma/amtxwy69), Chad
-- [**Yaoundé**](https://lu.ma/9fizamwx), Cameroon
 - [**Melbourne**](https://lu.ma/hnzqf46d), Australia
 
 <LumaSignup eventId="evt-OEM90n9MAvb8JTx">
