@@ -1,5 +1,5 @@
+import type { FrontmatterMeta } from '$lib/types'
 import { error } from '@sveltejs/kit'
-import type { FrontmatterMeta, Post } from '$lib/types'
 
 export async function load({ params: { slug } }) {
 	try {
