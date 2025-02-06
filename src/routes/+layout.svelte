@@ -33,7 +33,7 @@
 	(Top)
 </h2>
 
-{#if !currentDate || currentDate < new Date(2025, 1, 13)}
+{#if !currentDate || currentDate < new Date(2025, 1, 12)}
 	<Banner contrast={hero} target="/2025-february">
 		On Feb 7–11 {#if !currentDate || currentDate < new Date(2025, 1, 7)}we will be{:else}are{/if} globally
 		protesting the missing safety focus of the AI Action Summit in Paris. |
