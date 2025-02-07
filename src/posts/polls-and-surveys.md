@@ -19,6 +19,7 @@ description: How much do regular people and experts worry about AI risks and gov
 
 ## Public opinion on regulations & governance
 
+- [**UK citizens, YouGov**](https://time.com/7213096/uk-public-ai-law-poll/): 87% of Brits would back a law requiring AI developers to prove their systems are safe before release, with 60% in favor of outlawing the development of “smarter-than-human” AI models.
 - [**US citizens, RethinkPriorities**](https://forum.effectivealtruism.org/posts/ConFiY9cRmg37fs2p/us-public-opinion-of-ai-policy-and-risk): 50% support a pause, 25% oppose a pause.
 - [**US citizens, YouGov**](https://www.vox.com/future-perfect/2023/8/18/23836362/ai-slow-down-poll-regulation): 72% want AI to slow down, 8% want to speed up. 83% of voters believe AI could accidentally cause a catastrophic event
 - [**US citizens, YouGov**](https://theaipi.org/poll-shows-voters-oppose-open-sourcing-ai-models-support-regulatory-representation-on-boards-and-say-ai-risks-outweigh-benefits-2/): 73% believe AI companies should be held liable for harms from technology they create, 67% think the AI models’ power should be restricted, and 65% believe keeping AI out of the hands of bad actors is more important than providing AI’s benefits to everyone.
