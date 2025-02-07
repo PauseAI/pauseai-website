@@ -42,6 +42,7 @@ If you want to create PauseAI-related material yourself, you can use our brand c
 - [**French podcasts**](https://www.youtube.com/playlist?list=PLLUfQBgG_MvHh3b9Pedf139eVLsLs5zAs). **20+** podcasts where Maxime Forunes, PauseAI France director, participated in.
 
 Outside of Youtube:
+
 - [Dr. Phil Primetime](https://www.meritplus.com/c/s/VQ2aB6Sp?episodeId=LknWbG7N&play=1): Liron Shapira went as a guest to a discussion about AI and education.
 - [Creatives with AI podcast](https://podcasters.spotify.com/pod/show/creativeswithai/episodes/15-AI-The-Race-Against-Time---Balancing-Progress-and-Potential-Catastrophe-with-Joep-Meinderstma-e28ln8a/a-aa9vpjp): Interview with PauseAI founder Joep Meindertsma.
 - [Art of AI podcast](https://spotify.link/AggzYfcj8Db): Interview with Joep Meindertsma about protesting, psychology of x-risk, AI policy.
@@ -88,3 +89,7 @@ Outside of Youtube:
 - Le Monde ([2023](https://www.lemonde.fr/en/economy/article/2023/11/27/openai-the-beginnings-of-the-sam-altman-drama_6291282_19.html), [2024](https://www.lemonde.fr/economie/article/2024/09/11/a-l-approche-du-sommet-de-paris-les-militants-inquiets-quant-a-la-securite-de-l-ia-cherchent-a-se-faire-entendre_6312979_3234.html))
 - [La Tribune](https://www.latribune.fr/technos-medias/informatique/a-paris-et-dans-le-monde-les-inquiets-de-l-intelligence-artificielle-appellent-a-une-pause-997475.html)
 - [Various podcast appearances of Maxime Fournes](https://www.youtube.com/results?search_query=maxime+fournes+pauseai)
+
+### Australia
+
+- [The Age](https://www.theage.com.au/technology/most-dangerous-technology-ever-protesters-urge-ai-pause-20250207-p5laaq.html)
