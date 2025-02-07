@@ -28,10 +28,11 @@ The article will be published automatically when the pull request is merged.
 
 ```sh
 git clone git@github.com:PauseAI/pauseai-website.git
-# Copy the envs and set the variables if needed
+# Copy the envs and set the variables if needed. Read the template.env file for more information.
 cp template.env .env
 # Instead of pnpm you could use npm or yarn
 pnpm install
+# Run the development server
 pnpm run dev
 # Open http://localhost:37572
 ```
@@ -39,3 +40,13 @@ pnpm run dev
 ## Deployment
 
 The contents of the repository are continuously deployed to Netlify. You can track the deployment status [here](https://app.netlify.com/sites/pauseai/deploys).
+
+## Translations
+
+The website is localized using LLMs, see `/scripts/translation` for details and configuration.
+We cache the translations in a [git repository](https://github.com/PauseAI/paraglide).
+
+```sh
+# Create localizations, this can take a while!
+pnpm run translate
+```

@@ -35,7 +35,7 @@ const DEBUG_RETRANSLATE_FILES: string[] = [
 ]
 const GIT_EMAIL = 'example@example.com'
 const GIT_MAX_CONCURRENT_PROCESSES = 8
-const GIT_REPO = requireEnvVar('GIT_REPO')
+const GIT_REPO_PARAGLIDE = requireEnvVar('GIT_REPO_PARAGLIDE')
 const GIT_TOKEN = requireEnvVar('GITHUB_TOKEN')
 const GIT_USERNAME = 'Translations'
 const LLM_API_KEY = requireEnvVar('OPENROUTER_API_KEY')
@@ -96,7 +96,7 @@ let mainLatestCommitDates: Map<string, Date>
 			await initializeGitCache({
 				dir: PATH_TARGET_BASE,
 				token: GIT_TOKEN,
-				repo: GIT_REPO,
+				repo: GIT_REPO_PARAGLIDE,
 				username: GIT_USERNAME,
 				email: GIT_EMAIL
 			})
@@ -141,12 +141,25 @@ let mainLatestCommitDates: Map<string, Date>
 	await cacheGit.push()
 }
 
+/**
+ * Retrieves the value of an environment variable.
+ *
+ * @param variable - The name of the environment variable.
+ * @returns The value of the specified environment variable.
+ * @throws {Error} If the environment variable is not set.
+ */
 function requireEnvVar(variable: string) {
 	const value = process.env[variable]
 	if (!value) throw new Error(`Environment variable ${variable} is required`)
 	return value
 }
 
+/**
+ * Creates an Axios client configured for the LLM API.
+ *
+ * @param options - An object containing the API base URL, API key, model, and provider names.
+ * @returns An Axios instance with interceptors for retrying failed requests and default headers.
+ */
 function createLlmClient(options: {
 	baseUrl: string
 	apiKey: string
@@ -175,6 +188,13 @@ function createLlmClient(options: {
 	return created
 }
 
+/**
+ * Initializes the Git cache by removing the existing directory,
+ * cloning the remote repository, and configuring Git user settings.
+ *
+ * @param options - An object containing the target directory, authentication token, repository URL, username, and email.
+ * @returns A Promise that resolves when the cache repository has been cloned and configured.
+ */
 async function initializeGitCache(options: {
 	dir: string
 	token: string
@@ -193,6 +213,12 @@ async function initializeGitCache(options: {
 	await cacheGit.addConfig('user.email', options.email)
 }
 
+/**
+ * Extracts the latest commit dates for each file by parsing the Git log.
+ *
+ * @param git - The SimpleGit instance used to retrieve the log.
+ * @returns A Promise that resolves to a Map where keys are file paths and values are the latest commit dates.
+ */
 async function prepareLastestCommitDates(git: SimpleGit) {
 	const latestCommitDatesMap = new Map<string, Date>()
 	const log = await git.log({
@@ -206,12 +232,18 @@ async function prepareLastestCommitDates(git: SimpleGit) {
 			if (!latestCommitDatesMap.has(file.file)) {
 				latestCommitDatesMap.set(file.file, new Date(entry.date))
 			}
-			file.file
 		}
 	}
 	return latestCommitDatesMap
 }
 
+/**
+ * Translates or loads message files using a JSON prompt generator.
+ * Processes the source JSON file and creates separate translations for each target language.
+ *
+ * @param options - An object containing the source path, language tags, prompt generator, target directory, and cache working directory.
+ * @returns A Promise that resolves when the translations have been processed.
+ */
 async function translateOrLoadMessages(options: {
 	sourcePath: string
 	languageTags: string[]
@@ -228,6 +260,13 @@ async function translateOrLoadMessages(options: {
 	})
 }
 
+/**
+ * Translates or loads markdown files using a Markdown prompt generator.
+ * Reads markdown files from the source directory and outputs translated files organized by language.
+ *
+ * @param options - An object with sourcePaths, sourceBaseDir, language tags, prompt generator, target directory, and cache working directory.
+ * @returns A Promise that resolves when the markdown translations have been processed.
+ */
 async function translateOrLoadMarkdown(options: {
 	sourcePaths: string[]
 	sourceBaseDir: string
@@ -250,6 +289,13 @@ async function translateOrLoadMarkdown(options: {
 
 type TargetStrategy = (language: string, sourcePath: string) => string
 
+/**
+ * Generalized function that handles the translation or loading of files for various languages.
+ * It checks whether a cached translation is up-to-date before generating a new translation.
+ *
+ * @param options - An object containing source file paths, language tags, prompt generator, target strategy, and the cache working directory.
+ * @returns A Promise that resolves when all translations have been processed.
+ */
 async function translateOrLoad(options: {
 	sourcePaths: string[]
 	languageTags: string[]
@@ -309,12 +355,7 @@ async function translateOrLoad(options: {
 						await fs.mkdir(dir, { recursive: true })
 						// ensure nothing happens between writing, adding and commiting
 						fsSync.writeFileSync(target, processedTranslation)
-						let message: string
-						if (fileExists) {
-							message = `Update outdated translation for ${sourceFileName} in ${languageTag}`
-						} else {
-							message = `Create new translation for ${sourceFileName} in ${languageTag}`
-						}
+						const message = getCommitMessage(sourceFileName, languageTag, fileExists)
 						try {
 							await gitQueue.add(() =>
 								(fileExists ? cacheGit : cacheGit.add('.')).commit(message, ['-a'])
@@ -334,6 +375,14 @@ async function translateOrLoad(options: {
 	)
 }
 
+/**
+ * Preprocesses markdown content by normalizing line endings,
+ * optionally removing HTML comments that contain markdown headings or links,
+ * and appending additional inline comments after matching specific patterns.
+ *
+ * @param source - The original markdown content.
+ * @returns The preprocessed markdown content.
+ */
 function preprocessMarkdown(source: string) {
 	let processed = source
 	processed = processed.replaceAll(/\r\n/g, '\n')
@@ -353,89 +402,114 @@ function preprocessMarkdown(source: string) {
 	return processed
 }
 
+/**
+ * Sends a chat completion request to the LLM API.
+ *
+ * @param messages - Array of message objects for the conversation.
+ * @param temperature - Temperature to use for generation (default is 0).
+ * @returns A Promise that resolves to the generated message content.
+ */
+async function postChatCompletion(
+	messages: { role: string; content: string }[],
+	temperature = 0
+): Promise<string> {
+	const response = await requestQueue.add(() =>
+		llmClient.post('/chat/completions', { messages, temperature })
+	)
+	return response.data.choices[0].message.content
+}
+
+/**
+ * Generates an appropriate commit message based on whether the translation file already existed.
+ *
+ * @param sourceFileName - The name of the source file.
+ * @param language - The language code for the translation.
+ * @param fileExists - Boolean indicating if the file existed.
+ * @returns The commit message.
+ */
+function getCommitMessage(sourceFileName: string, language: string, fileExists: boolean): string {
+	return fileExists
+		? `Update outdated translation for ${sourceFileName} in ${language}`
+		: `Create new translation for ${sourceFileName} in ${language}`
+}
+
+/**
+ * Translates the provided content to a specified language using a two-pass process.
+ * The first pass generates a translation, and the second pass reviews and refines it.
+ *
+ * @param content - The original content to be translated.
+ * @param promptGenerator - A function for generating the translation prompt.
+ * @param language - The target language code.
+ * @param promptAdditions - Additional context to include in the prompt.
+ * @returns A Promise that resolves to the reviewed (final) translation.
+ * @throws {Error} If either the translation or review pass fails.
+ */
 async function translate(
 	content: string,
 	promptGenerator: PromptGenerator,
 	language: string,
 	promptAdditions: string
-) {
+): Promise<string> {
 	const languageName = languageNamesInEnglish.of(language)
 	if (!languageName) throw new Error(`Couldn't resolve language code: ${language}`)
 
-	// First pass - translation
 	const translationPrompt = promptGenerator(languageName, content, promptAdditions)
-	const translationResponse = await requestQueue.add(
-		async () =>
-			await llmClient.post('/chat/completions', {
-				messages: [
-					{
-						role: 'user',
-						content: translationPrompt
-					}
-				],
-				temperature: 0
-			})
-	)
-	console.log('First pass response:', translationResponse?.data)
-	const translated = translationResponse?.data.choices[0].message.content
-	if (!translated) throw new Error(`Translation to ${languageName} failed`)
 
-	// Second pass - review and improve with context
+	// First pass: generate initial translation
+	const firstPass = await postChatCompletion([{ role: 'user', content: translationPrompt }])
+	if (!firstPass) throw new Error(`Translation to ${languageName} failed`)
+	console.log('First pass response:', firstPass)
+
+	// Second pass: review and refine translation with context
 	const reviewPrompt = generateReviewPrompt(languageName)
-	const reviewResponse = await requestQueue.add(
-		async () =>
-			await llmClient.post('/chat/completions', {
-				messages: [
-					{
-						role: 'user',
-						content: translationPrompt
-					},
-					{
-						role: 'assistant',
-						content: translated
-					},
-					{
-						role: 'user',
-						content: reviewPrompt
-					}
-				],
-				temperature: 0
-			})
-	)
-	console.log('Review pass response:', reviewResponse?.data)
-	const reviewed = reviewResponse?.data.choices[0].message.content
+	const reviewed = await postChatCompletion([
+		{ role: 'user', content: translationPrompt },
+		{ role: 'assistant', content: firstPass },
+		{ role: 'user', content: reviewPrompt }
+	])
 	if (!reviewed) throw new Error(`Review of ${languageName} translation failed`)
+	console.log('Review pass response:', reviewed)
 
 	return reviewed
 }
 
+/**
+ * Postprocesses translated markdown content by optionally adding heading IDs.
+ * It compares the headings in the source and the translated content and appends a generated ID to each heading.
+ *
+ * @param source - The original markdown content.
+ * @param translation - The translated markdown content before postprocessing.
+ * @returns The postprocessed markdown content with heading IDs.
+ * @throws {Error} If the number of headings in the translation does not match those in the source.
+ */
 function postprocessMarkdown(source: string, translation: string) {
 	let processed = translation
-	addHeadingIds: if (POSTPROCESSING_ADD_HEADING_IDS) {
+	if (POSTPROCESSING_ADD_HEADING_IDS) {
 		const REGEX_HEADING = /^#+ (.*)/gm
 		const headingsInSource = Array.from(source.matchAll(REGEX_HEADING))
-		if (!headingsInSource.length) break addHeadingIds
-		let i = 0
-		processed = translation.replaceAll(REGEX_HEADING, (_0) => {
-			const sourceResult = headingsInSource[i]
-			if (!sourceResult)
-				throw new Error(`Different heading count in translation:\n\n${translation}`)
-			const headingInSource = sourceResult[1]
-			const stripped = removeMarkdown(headingInSource)
-			const slugged = slugger.slug(stripped)
-			const heading = `${_0} {#${slugged}}`
-			i++
-			return heading
-		})
+		if (headingsInSource.length > 0) {
+			let i = 0
+			processed = translation.replace(REGEX_HEADING, (_match) => {
+				const sourceResult = headingsInSource[i]
+				if (!sourceResult)
+					throw new Error(`Different heading count in translation:\n\n${translation}`)
+				const headingInSource = sourceResult[1]
+				const stripped = removeMarkdown(headingInSource)
+				const slugged = slugger.slug(stripped)
+				i++
+				return `${_match} {#${slugged}}`
+			})
+		}
 	}
 	return processed
 }
 
 /**
- * Extracts the path on the website from local forward slash separated paths
- * in the format src/posts/**.md. Returns file name for messages.json,
- * otherwise returns input.
- * @param localPath
+ * Extracts a web path from a local file path using predefined regex patterns.
+ * Returns the extracted portion if found, otherwise returns the original local path.
+ *
+ * @param localPath - The local file path.
+ * @returns The extracted web path or the original file path.
  */
 function extractWebPath(localPath: string): string {
 	for (const pattern of PATH_PATTERNS) {
