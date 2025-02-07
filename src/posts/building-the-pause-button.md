@@ -9,6 +9,10 @@ Some argue that it's too early to press the Pause Button (we [don't](/urgency)),
 But as of now _we do not have a Pause Button_.
 So we should start thinking about how this would work, and how we can implement it.
 
+Luckily, building a superintelligent AI is difficult, and requires a lot of resources.
+
+## Contents
+
 ## The Race: why we need international cooperation
 
 We do not expect any single country to be able to implement a Pause.
@@ -25,8 +29,8 @@ It's up to you and me to [convince them](/action).
 ## Compute Governance
 
 To train a frontier LLM (like GPT-4), you need a lot of highly specialized and costly hardware.
-GPT-4 was trained on 25,000 Nvidia A100 GPUs, which cost $10.000 each.
-And many expect AI models to become even larger in the future.
+GPT-4 was trained on 25,000 Nvidia A100 GPUs, which cost $10,000 each.
+Although there are innovations that allow for more efficient training, the trend is that AI models are getting larger and larger.
 
 The sheer scale of modern AI training requirements is immense.
 Microsoft recently announced a plan to [construct a nuclear power plant](https://www.theverge.com/2024/9/20/24249770/microsoft-three-mile-island-nuclear-power-plant-deal-ai-data-centers) for its AI power needs.
@@ -70,6 +74,18 @@ ASML's EUV machines use mirrors and lenses made by the German company Zeiss.
 In 2016, ASML [bought](https://optics.org/news/7/11/11) a 25% stake in Zeiss, and the two companies have a very close relationship.
 It is likely that no other company is able to produce these optics.
 
+#### Photoresist
+
+The photoresist is a chemical product that is used to etch the patterns into the silicon wafer.
+Japanese companies are dominant in this field.
+
+The most important companies in this field are:
+
+- JSR (Japan)
+- Shin-Etsu (Japan)
+- Tokyo Ohka Kogyo (Japan)
+- DuPont (USA)
+
 #### Interconnect & Packaging: ASE
 
 When a chip die exits a fab, it needs to be "packaged".
@@ -80,10 +96,10 @@ ASE is probably the largest interconnect company for AI chips.
 Building a "fab" (a chip factory) is astonishingly difficult: it has zero-tolerance for dust particles, requires the most expensive high-tech equipment, and has a very complex supply chain.
 A modern fab costs around 10 to 20 billion dollars to manufacture.
 
-The Taiwan Semiconductor Manufacturing Company accounts for roughly 90% of modern AI chips, which are all chips made at 7nm precision or better.
+The Taiwan Semiconductor Manufacturing Company accounts for [roughly 90%](https://www.fool.com/investing/2025/02/03/meet-the-monster-stock-that-continues-to-crush-the/) of modern AI chips, which are all chips made at 7nm precision or better.
 Samsung is the only other fab that can produce modern AI chips.
 
-But the Chinese SMIC is catching up rapidly - they already have a functional 7nm process.
+But the Chinese SMIC is catching up rapidly - they already have a [functional 7nm process](https://wccftech.com/smic-to-limit-huawei-to-7nm-chips-until-2026-reducing-advancement/).
 Due to US / NL export controls, SMIC is not able to buy ASML EUV machines, and are now also restricted in buying the older DUV machines.
 In June 2024, a [report](https://evertiq.com/news/55926) showed that SMIC can produce 5nm chips using DUV hardware,
 and is now able to produce 7nm AI chips (about three years behind the 4nm process that ASMLs EUV machines can produce), but SMIC's lithography is plagued by low yields.
