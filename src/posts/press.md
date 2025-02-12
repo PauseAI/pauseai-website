@@ -93,3 +93,7 @@ Outside of Youtube:
 ### Australia
 
 - [The Age](https://www.theage.com.au/technology/most-dangerous-technology-ever-protesters-urge-ai-pause-20250207-p5laaq.html)
+
+### Denmark
+
+- [Weekendavisen](https://www.weekendavisen.dk/samfund/kunstig-intelligens-aegte-frygt)
