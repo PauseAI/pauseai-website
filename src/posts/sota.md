@@ -17,9 +17,9 @@ _Last update: 2024-09-16_
 - **Writing speed**: AI models can write at speeds far surpassing any human, writing entire computer programmes in seconds.
 - **Amount of knowledge**: Modern LLMs know far more than any human, its knowledge spanning virtually every domain. There is no human whose knowledge breadth comes close.
 
-## Better than most humans
+# Better than most humans
 
-- **Programming**: o3 beats [99,9% of human coders](https://codeforces.com/blog/entry/137532) in the very challenging Codeforces competition. It manages to solve 71.7% of coding issues in the SWE benchmark, which shows it can also solve real-world software engineering problems very effectively.
+- **Programming**: o3 beats [99,9% of human coders](https://arxiv.org/abs/2502.06807) in the very challenging Codeforces competition. It manages to solve 71.7% of coding issues in the SWE benchmark, which shows it can also solve real-world software engineering problems very effectively.
 - **Writing**: In December 2023, an AI-written novel won an award at a [science fiction national competition](https://www.scmp.com/news/china/science/article/3245725/chinese-professor-used-ai-write-science-fiction-novel-then-it-won-national-award?campaign=3245725&module=perpetual_scroll_0&pgtype=article). The professor who used the AI crafted the narrative from a draft of 43,000 characters generated in just three hours with 66 prompts. The best language models have superhuman vocabulary and can write in many different styles.
 - **Translating**: And they can respond and translate to all major languages fluently.
 - **Creativity**: Better than 99% of humans on the [Torrance Tests of Creative Thinking](https://neurosciencenews.com/ai-creativity-23585/) where relevant and useful ideas need to be generated. However, the tests were relatively small and for larger projects (e.g. setting up a new business) AI is not autonomous enough yet.
