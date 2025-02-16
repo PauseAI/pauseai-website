@@ -136,7 +136,7 @@
 		scale: 0.95;
 	}
 
-	img {
+	.hero :global(img) {
 		/* 2x the blur */
 		width: calc(100% + 10px);
 		height: 100%;
@@ -149,7 +149,7 @@
 			display: block;
 		}
 
-		img {
+		.hero :global(img) {
 			position: absolute;
 			opacity: 0;
 			transition:
@@ -158,7 +158,7 @@
 			transform: scale(1.1);
 		}
 
-		img.active {
+		.hero :global(img.active) {
 			opacity: 1;
 			transform: scale(1);
 		}

@@ -46,10 +46,10 @@
 		text-transform: capitalize;
 	}
 
-	h1 + p {
+	/* h1 + p {
 		margin-top: var(--size-2);
 		color: var(--text-2);
-	}
+	} */
 
 	.tags {
 		display: flex;

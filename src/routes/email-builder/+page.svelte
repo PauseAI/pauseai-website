@@ -3,7 +3,7 @@
 	import Button from '$lib/components/Button.svelte'
 	// Risks
 	import Xrisk from './concerns/xrisk.svelte'
-	import Bio from './concerns/bio.svelte'
+	/* import Bio from './concerns/bio.svelte' */
 	import Cyber from './concerns/cyber.svelte'
 	// Actions
 	import Meeting from './actions/meeting.svelte'
@@ -15,8 +15,8 @@
 	import toast from 'svelte-french-toast'
 	import ExternalLink from '$lib/components/custom/a.svelte'
 	import Card from '$lib/components/Card.svelte'
+	import { type ComponentType } from 'svelte'
 
-	let top: HTMLHeadingElement
 	const { title, description, date } = meta
 
 	$: name = ''
@@ -79,7 +79,7 @@
 
 	type Section = {
 		name: string
-		section: any
+		section: ComponentType
 	}
 </script>
 
@@ -323,7 +323,6 @@
 		color: var(--bg);
 	}
 
-	select,
 	input {
 		padding: 0.3rem 0.5rem;
 		border: var(--brand) 2px solid;
