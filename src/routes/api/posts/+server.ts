@@ -40,7 +40,9 @@ async function getPosts() {
 	posts.push(...hardCodedPages)
 
 	posts = posts.sort(
-		(first, second) => new Date(second.date).getTime() - new Date(first.date).getTime()
+		(first, second) =>
+			(second.date ? new Date(second.date).getTime() : 0) -
+			(first.date ? new Date(first.date).getTime() : 0)
 	)
 
 	return posts
