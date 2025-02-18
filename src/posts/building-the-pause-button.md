@@ -109,11 +109,11 @@ After the chips are packaged, they need to be tested.
 When a chip die exits a fab, it needs to be "packaged".
 ASE is probably the largest interconnect company for AI chips.
 
-#### AI Chip design: Nvidia, AMD, Intel, Google, Apple
+#### AI Chip design: Nvidia, AMD, Intel, Google
 
 The most famous company names on this page are all chip designers.
 And there are new companies, like Cerebras and Groq, which are designing chips specifically for AI.
-Notably, some of these companies use relatively outdated processes to produce their chips, like Groq who used 14nm, which is a potential choke point for governance.
+Notably, some of these companies use relatively outdated processes to produce their chips, like Groq who used 14nm. This is an important detail to keep track of, because identifying the right chokepoints in the supplychain, is influenced by the relevant process nodes.
 
 ### On-Chip Governance
 
