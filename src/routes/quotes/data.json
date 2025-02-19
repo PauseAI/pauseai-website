@@ -253,6 +253,14 @@
 		"notice": "“CTBTO Science and Technology conference” by The Official CTBTO Photostream, London. Modified and licensed under CC BY 2.0."
 	},
 	{
+		"background": "carlson",
+		"color": "",
+		"text": "It's bad to be controlled by machines. We created [machines] to help us, to make our lives better, not to take orders from them. If it's bad for people then we should strangle it in its crib, right now.",
+		"author": "Tucker Carlson",
+		"author_description": "American conservative political commentator",
+		"padding": "2.8rem"
+	},
+	{
 		"background": "old",
 		"color": "",
 		"text": "An ultraintelligent machine could design even better machines; there would then unquestionably be an 'intelligence explosion', and the intelligence of man would be left far behind. **Thus the first ultraintelligent machine is the last invention that man need ever make, provided that the machine is docile enough to tell us how to keep it under control.**",
