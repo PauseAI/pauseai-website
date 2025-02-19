@@ -45,7 +45,11 @@ The contents of the repository are continuously deployed to Netlify. You can tra
 
 The website is localized using LLMs, see `/scripts/translation` for details and configuration.
 We cache the translations in a [git repository](https://github.com/PauseAI/paraglide).
+
+Note that especially if you are working on the localization machinery itself, you should clone a copy of the cache repos and point your local env GIT_REPO_PARAGLIDE variable at that - we don't want changes to the main repos in the course of local development 
+
 Adding a language is as simple as going to the `project.inlang/settings.json` file and adding the language tag to the `languageTags` array.
+
 
 ```sh
 # Create localizations, this can take a while!
