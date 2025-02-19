@@ -1,7 +1,8 @@
 ---
 title: PauseAI protest @ FCDO, London, July 13th
+description: PauseAI protest, urging the United Nations Security Council to
+  implement a global pause on the largest AI training runs.
 ---
-
 - PauseAI protest, urging the United Nations Security Council to implement a global pause on the largest AI training runs.
 - Where: outside the Foreign, Commonwealth and Development Office (FCDO), King Charles Street, Westminster, London, SW1A 2AH
 - When: 13th of July, 4.30 - 5.30 pm
