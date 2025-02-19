@@ -26,7 +26,7 @@ export const generateMarkdownPrompt: PromptGenerator = (
 ) => {
 	return `${commonHead(languageName, 'Markdown', promptAdditions)}
 
-Maintain the structure of the document and don't modify script elements, HTML tags, link targets (including section links starting with a number sign) and file names. The content of social media widgets has to remain unchanged as well. The document starts with Frontmatter metadata enclosed in three dashes. Don't translate the keys of the metadata, only the values. Always make sure the result is valid Markdown syntax:
+Maintain the structure of the document and don't modify script elements, HTML tags, link targets (including section links starting with a number sign) and file names. The content of social media widgets has to remain unchanged as well. I repeat: DO NOT CHANGE LINK TARGETS. DO NOT REMOVE SCRIPT TAGS OR COMPONENTS. The document starts with Frontmatter metadata enclosed in three dashes. Don't translate the keys of the metadata, only the values. Always make sure the result is valid Markdown syntax:
 
 ${content}
 
