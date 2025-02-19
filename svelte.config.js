@@ -47,6 +47,8 @@ const config = {
 			$assets: 'src/assets'
 		},
 		prerender: {
+			// Allows dead links to be rendered
+			handleHttpError: 'warn',
 			entries: ['*'].concat(inlangSettings.languageTags.map((tag) => '/' + tag))
 		}
 	}

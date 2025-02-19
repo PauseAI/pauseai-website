@@ -324,8 +324,12 @@ async function translateOrLoad(options: {
 					) {
 						fileExists = true
 						const sourceLatestCommitDate = mainLatestCommitDates.get(processedSourcePath)
-						if (!sourceLatestCommitDate)
-							throw new Error(`Didn't prepare latest commit date for ${processedSourcePath}`)
+						if (!sourceLatestCommitDate) {
+							console.warn(
+								`Didn't prepare latest commit date for ${processedSourcePath}, use Cached version`
+							)
+							useCachedTranslation = true
+						}
 						const cachePathFromCwd = path.relative(options.cacheGitCwd, target)
 						const processedCachePathFromCwd = cachePathFromCwd.replaceAll(/\\/g, '/')
 						const cacheLatestCommitDate = cacheLatestCommitDates.get(processedCachePathFromCwd)
