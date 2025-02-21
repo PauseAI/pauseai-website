@@ -1,9 +1,9 @@
 ---
 title: PauseAI Proposal
-description: Implement a temporary pause on the training of AI systems more powerful than GPT-4, ban training on copyrighted material, hold model creators liable.
+description: Implement a temporary pause on the training of the most powerful general AI systems.
 ---
 
-**Implement a pause on the training of AI systems more powerful than GPT-4**, until we know how to build them safely and keep them under democratic control.
+**Implement a temporary pause on the training of the most powerful general AI systems**, until we know how to build them safely and keep them under democratic control.
 
 _Version: Nov 25th, 2024_
 
@@ -41,8 +41,8 @@ The treaty itself should contain the following **measures**:
   - Granting approval for _deployments_. This will include red-teaming / model evaluations.
   - Granting approval for _new training runs_ of AI models above a certain size (e.g. 1 billion parameters).
   - Periodic meetings to discuss the progress of AI safety research.
-- **Only allow training of general AI systems more powerful than GPT-4 if their safety can be guaranteed**.
-  - By more powerful than GPT-4, we mean all AI models that are either 1) larger than 10^12 parameters, 2) have more than 10^25 FLOPs used for training or 3) capabilities that are expected to exceed GPT-4. Note that this does not target _narrow_ AI systems, like image recognition used for diagnosing cancer.
+- **Only allow training of general AI systems if their safety can be guaranteed**.
+  - By general AI models, we mean models that are either 1) larger than 10^12 parameters, 2) have more than 10^25 FLOPs used for training or 3) capabilities that are expected to exceed a score of 86% on the MMLU benchmark. Note that this does not target _narrow_ AI systems, like image recognition used for diagnosing cancer.
   - It may be possible that the AI alignment problem is _never solved_ - it may be unsolvable. In that case, we should never allow training of such systems.
   - **Verify** that these dangerous training runs are not taking place. This can be done in [numerous ways](https://arxiv.org/abs/2408.16074): [tracking GPUs](https://arxiv.org/abs/2303.11341), incentivising whistleblowers, energy monitoring, data center inspections, financial intelligence, semiconductor manufacturing facility inspections, AI developer inspections, chip location tracking and chip-based reporting. The [AI chip supply chain](https://www.governance.ai/post/computing-power-and-the-governance-of-ai) is highly centralized which enables global oversight.
   - Require [oversight during training runs](https://www.alignmentforum.org/posts/Zfk6faYvcf5Ht7xDx/compute-thresholds-proposed-rules-to-mitigate-risk-of-a-lab).
