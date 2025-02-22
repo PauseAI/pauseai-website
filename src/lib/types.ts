@@ -4,6 +4,7 @@ export type FrontmatterMeta = {
 	title: string
 	/** Meta description for SEO */
 	description: string
+	author?: string
 	/** Date in YYYY-MM-DD format */
 	date?: string
 	categories?: Categories[]

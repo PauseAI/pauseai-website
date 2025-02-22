@@ -4,7 +4,7 @@
 	export let data
 
 	const { meta, slug, content } = data
-	const { title = slug, date, categories, description, image } = meta
+	const { title = slug, date, categories, description, image, author } = meta
 	const parent = slug.split('/').slice(0, -1).join('/')
 </script>
 
@@ -16,6 +16,9 @@
 	{/if}
 	<hgroup>
 		<h1>{title}</h1>
+		{#if author}
+			<p>{author}</p>
+		{/if}
 		{#if date}
 			<!-- <p>Published at {formatDate(date)}</p> -->
 		{/if}
