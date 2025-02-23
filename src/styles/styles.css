@@ -109,6 +109,9 @@ h5 {
 
 h1 {
 	font-size: 3rem;
+}
+
+hgroup h1 {
 	margin-block-start: 0;
 	margin-block-end: 0;
 }
