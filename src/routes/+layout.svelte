@@ -25,21 +25,19 @@
 	(Top)
 </h2>
 
-<div class="scroll-container">
-	<div class="layout" class:with-hero={hero}>
-		{#if hero}
-			<Hero />
-		{/if}
-		<Header inverted={hero} moveUp={hero} />
+<div class="layout" class:with-hero={hero}>
+	{#if hero}
+		<Hero />
+	{/if}
+	<Header inverted={hero} moveUp={hero} />
 
-		<main>
-			<PageTransition url={data.url}>
-				<slot />
-			</PageTransition>
-		</main>
+	<main>
+		<PageTransition url={data.url}>
+			<slot />
+		</PageTransition>
+	</main>
 
-		<Footer />
-	</div>
+	<Footer />
 </div>
 
 <Toaster
@@ -68,13 +66,8 @@
 		margin: auto;
 	} */
 
-	.scroll-container {
-		max-block-size: 100vh;
-		overflow-y: scroll;
-		overflow-x: hidden;
-	}
-
 	.layout {
+		height: 100%;
 		position: relative;
 		max-inline-size: var(--page-width);
 		display: grid;
