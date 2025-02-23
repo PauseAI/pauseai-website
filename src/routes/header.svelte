@@ -3,9 +3,9 @@
 	import Logo from '$lib/components/logo.svelte'
 	import { botName } from '$lib/config'
 	import { page } from '$app/stores'
-	import SearchIcon from 'lucide-svelte/icons/search'
 	import { initializeCqwResizeObserver } from '$lib/container-query-units'
 	import { onMount } from 'svelte'
+	import SearchInModal from '$lib/components/SearchInModal.svelte'
 	const enableBot = false
 
 	export let inverted = false
@@ -45,7 +45,7 @@
 		{/if}
 		<!-- <NavLink href="/about">About</NavLink> -->
 		<NavLink {inverted} c2a href="/join">Join</NavLink>
-		<NavLink {inverted} href="/search" ariaLabel="Search"><SearchIcon size="0.8em" /></NavLink>
+		<SearchInModal {inverted} />
 	</div>
 </nav>
 
@@ -59,12 +59,6 @@
 		--cqw: 1cqw;
 	}
 
-	.inverted-header {
-		color: white;
-		z-index: 1;
-		--text: white;
-	}
-
 	nav {
 		display: flex;
 		flex-direction: row;
@@ -76,6 +70,7 @@
 	}
 
 	nav.move-up {
+		z-index: 1;
 		margin-top: -100vh;
 		height: 0;
 	}
@@ -127,7 +122,6 @@
 
 	.nav-links {
 		display: flex;
-		text-transform: uppercase;
 		flex-wrap: wrap;
 		justify-content: center;
 	}

@@ -1,10 +1,11 @@
 <script lang="ts">
 	import { page } from '$app/stores'
-	export let href: string
+	export let href: string | null = null
 	export let c2a = false
 	export let ariaLabel: string | undefined = undefined
 	export let inverted = false
 	export let first = false
+	export let narrow = false
 </script>
 
 <a
@@ -12,6 +13,7 @@
 	class:first
 	class:c2a
 	class:inverted
+	class:narrow
 	class:active={$page.url.pathname == href}
 	aria-label={ariaLabel}
 >
@@ -19,16 +21,20 @@
 </a>
 
 <style>
-	a {
+	a:not(.narrow) {
 		padding-left: 0.5rem;
-		margin-left: 0.5rem;
 		padding-right: 0.5rem;
+	}
+
+	a {
+		margin-left: 0.5rem;
 		margin-right: -0.5rem;
 		font-family: var(--font-heading);
 		font-weight: 700;
 		color: var(--text);
 		text-decoration: none;
 		font-size: 1.1rem;
+		text-transform: uppercase;
 	}
 
 	a.first {
@@ -51,6 +57,9 @@
 		color: var(--brand-subtle);
 	}
 
+	a.inverted {
+		color: white;
+	}
 	a.inverted:hover {
 		color: black;
 		text-decoration: underline;
