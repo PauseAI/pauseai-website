@@ -123,6 +123,9 @@ hgroup {
 	h1 {
 		font-size: 2rem;
 	}
+	hgroup {
+		--margin: calc(0.83 * 2rem);
+	}
 	h2 {
 		font-size: 1.5rem;
 	}
