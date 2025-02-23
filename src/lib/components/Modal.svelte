@@ -15,7 +15,7 @@
 
 <style>
 	.backdrop {
-		z-index: 1;
+		z-index: 20;
 		position: fixed;
 		top: 0;
 		left: 0;
