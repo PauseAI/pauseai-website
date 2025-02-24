@@ -17,6 +17,7 @@ const emulateOrCallParaglide: Handle = async function ({ event, resolve }) {
 	// emulate Paraglide hook without requesting headers etc
 	if (building) {
 		const pathname = event.url.pathname
+		// i18n.getLanguageFromUrl returns default when not present
 		const firstElement = pathname.substring(1).split('/')[0]
 		const languageFromUrl = runtime.isAvailableLanguageTag(firstElement) ? firstElement : null
 		if (!languageFromUrl) {
