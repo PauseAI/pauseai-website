@@ -1,6 +1,5 @@
 ---
 title: PauseAI Press materials & media coverage
-description: " "
 ---
 ## Contact
 
