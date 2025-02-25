@@ -7,7 +7,7 @@ shouldIgnoreBuild()
  * Main function to decide if we should ignore the build.
  */
 function shouldIgnoreBuild() {
-	const branchName = process.env.BRANCH // Netlify provides this
+	const branchName = getRemoteBranch() // Netlify provides this
 
 	// If branch name doesn't start with "cms", allow build immediately
 	if (!branchName || !branchName.startsWith('cms')) {
@@ -38,6 +38,15 @@ function shouldIgnoreBuild() {
 
 	console.log('Build should proceed.')
 	process.exit(1)
+}
+
+/**
+ * Gets the current branch name on the remote.
+ * @returns {string|null} - The current branch name or null if an error occurs.
+ */
+function getRemoteBranch() {
+	const remoteBranch = runCommand('git symbolic-ref --short refs/remotes/origin/HEAD')
+	return remoteBranch?.replace('origin/', '')
 }
 
 /**
