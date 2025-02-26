@@ -45,7 +45,7 @@ function shouldIgnoreBuild() {
  * @returns {string|null} - The current branch name or null if an error occurs.
  */
 function getRemoteBranch() {
-	const remoteBranch = runCommand('git symbolic-ref --short refs/remotes/origin/HEAD')
+	const remoteBranch = runCommand('git rev-parse --abbrev-ref --symbolic-full-name @{u}')
 	return remoteBranch?.replace('origin/', '')
 }
 
