@@ -16,17 +16,6 @@ There have been some examples of international summits & resulting treaties that
 - **Montreal Protocol** (1987): The Montreal Protocol is an international environmental treaty designed to protect the ozone layer by phasing out the production and consumption of ozone-depleting substances. It has been highly successful in reducing the use of substances like chlorofluorocarbons (CFCs) and has contributed to the gradual recovery of the ozone layer.
 - **Stockholm Convention on Persistent Organic Pollutants** (2001): The Stockholm Convention is an international treaty aimed at protecting human health and the environment from persistent organic pollutants (POPs). These are toxic chemicals that persist in the environment, bioaccumulate in living organisms, and can have serious adverse effects on human health and ecosystems. Scientists raised concerns about the harmful effects of POPs, including their ability to travel long distances through air and water currents. The convention led to the banning or severe restrictions on the production and use of several POPs, including polychlorinated biphenyls (PCBs), dichlorodiphenyltrichloroethane (DDT), and dioxins.
 
-## Coming Summits
-
-### ~~2024~~ 2025 France AI ~~Safety~~ Action Summit
-
-During the 2023 Bletchley summit, France opted to host the next major one in November 2024.
-France postponed it to February 2025.
-It was also renamed to "AI _Action_ Summit", dropping the all-important "Safety" focus.
-We've been told that safety will be just one of five tracks at the summit.
-It is led by AI-sceptic Anne Bouverot, who is [dismissive](https://legrandcontinent-eu.translate.goog/es/2023/12/08/la-ia-no-nos-sustituira-una-conversacion-con-anne-bouverot-yann-le-cun-y-alexandre-viros/?_x_tr_sl=es&_x_tr_tl=en&_x_tr_hl=en&_x_tr_pto=sc) of "alarmist discourse", comparing AI with calculators and comparing AI safety concerns with Y2K concerns, being certain that "AI is not going to replace us, but rather help us".
-This is why we will be [globally protesting the missing safety focus](/2025-february) of the summit.
-
 ## Past Summits
 
 ### 2023 UK AI Safety Summit
@@ -62,3 +51,25 @@ China is notably absent from this list - even thought [China's new AI Safety Ins
 
 On **November 21st-22nd**, The British AISI [hosted a conference in San Francisco](https://www.aisi.gov.uk/work/conference-on-frontier-ai-safety-frameworks).
 The main goal here was to "convene experts from signatory companies and from research organizations to discuss the most pressing challenges in the design and implementation of frontier AI safety frameworks".
+
+### ~~2024~~ 2025 France AI ~~Safety~~ Action Summit
+
+During the 2023 Bletchley summit, France opted to host the next major one in November 2024.
+France postponed it to February 2025.
+It was also renamed to "AI _Action_ Summit", dropping the all-important "Safety" focus.
+It was led by AI-sceptic Anne Bouverot, who is [dismissive](https://legrandcontinent-eu.translate.goog/es/2023/12/08/la-ia-no-nos-sustituira-una-conversacion-con-anne-bouverot-yann-le-cun-y-alexandre-viros/?_x_tr_sl=es&_x_tr_tl=en&_x_tr_hl=en&_x_tr_pto=sc) of "alarmist discourse", comparing AI with calculators and comparing AI safety concerns with Y2K concerns, being certain that "AI is not going to replace us, but rather help us".
+We [protested](/2025-february) the missing safety focus of the summit.
+
+The summit has been widely criticized by the AI safety community.
+We recommend reading [the Zvi's article](https://thezvi.substack.com/p/the-paris-ai-anti-safety-summit) about the ["Anti-AI Safety Summit"](https://thezvi.substack.com/p/the-paris-ai-anti-safety-summit).
+
+## Coming Summits
+
+- India co-hosted the Paris summit and will host the next one. Unfortunately, we expect it to lack any meaningful safety / regulation discussions.
+- The UN organizes The [AI For Good summit](https://aiforgood.itu.int/) in Switzerland, July 2025.
+
+## What we're missing
+
+None of the planned summits are focused on safety, or international regulations.
+We need one country to step up and organize a summit focused on safety and international regulations.
+It is our job to find a politician who will do this.
