@@ -1,5 +1,6 @@
 export const prerender = true
 
+import { handleRedirects } from '$lib/redirects'
 import { redirect } from '@sveltejs/kit'
 import { i18n } from '$lib/i18n'
 
@@ -8,6 +9,8 @@ export async function load({ url, url: { host, pathname } }) {
 	const language = i18n.getLanguageFromUrl(url)
 	const runtime = i18n.config.runtime
 	runtime.setLanguageTag(language)
+
+	handleRedirects(pathname)
 
 	if (host === 'pauseai.org') {
 		return redirect(301, 'https://pauseai.info' + pathname)

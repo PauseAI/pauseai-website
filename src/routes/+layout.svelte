@@ -23,6 +23,7 @@
 	import { page } from '$app/stores'
 
 	export let data
+
 	// Show the hero on the homepage, but nowhere else
 	$: hero = i18n.route(data.url) == '/'
 
@@ -121,9 +122,9 @@
 		margin-bottom: 5rem;
 	}
 
-	@media (min-width: --page-width) {
+	/* @media (min-width: --page-width) {
 		.layout {
-			/* padding: 0; */
+			padding: 0;
 		}
-	}
+	} */
 </style>

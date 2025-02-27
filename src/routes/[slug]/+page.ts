@@ -1,3 +1,4 @@
+import type { FrontmatterMeta } from '$lib/types'
 import { error } from '@sveltejs/kit'
 import { i18n } from '$lib/i18n.js'
 
@@ -7,7 +8,6 @@ export async function load({ params: { slug }, depends }) {
 	depends('paraglide:lang')
 	try {
 		const language = runtime.languageTag()
-
 		const { default: content, metadata: meta = {} } = await importMarkdown(language, slug)
 
 		return {

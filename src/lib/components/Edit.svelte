@@ -3,6 +3,8 @@
 	import { page } from '$app/stores'
 	import { i18n } from '$lib/i18n'
 
+	const BASE_URL = 'https://github.com/PauseAI/pauseai-website/edit/main/src/'
+
 	const markdownFiles = import.meta.glob(`../../posts/**/*.md`)
 	const svelteFiles = import.meta.glob('../../routes/**/+page.svelte')
 
@@ -23,7 +25,7 @@
 
 		if (relativePath) {
 			const rootPath = relativePath.substring('../../'.length)
-			editUrl = `https://github.com/joepio/pauseai/edit/main/src/${rootPath}`
+			editUrl = BASE_URL + rootPath
 		}
 	}
 </script>

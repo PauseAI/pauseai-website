@@ -1,16 +1,19 @@
 export type Categories = 'sveltekit' | 'svelte'
 
-export type Post = {
+export type FrontmatterMeta = {
 	title: string
-	/** Path in URL from root */
-	slug: string
 	/** Meta description for SEO */
 	description: string
-	/**
-	 * Date in YYYY-MM-DD format
-	 */
-	date: string
-	categories: Categories[]
+	author?: string
+	/** Date in YYYY-MM-DD format */
+	date?: string
+	categories?: Categories[]
+	image?: string
+}
+
+export type Post = FrontmatterMeta & {
+	/** Path in URL from root */
+	slug: string
 }
 
 /** Individual volunteer */

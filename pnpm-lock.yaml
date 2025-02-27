@@ -35,6 +35,9 @@ importers:
       clipboard-polyfill:
         specifier: ^4.1.0
         version: 4.1.0
+      easy-web-worker:
+        specifier: ^7.0.1
+        version: 7.0.1(easy-cancelable-promise@1.0.1)
       escape-html:
         specifier: ^1.0.3
         version: 1.0.3
@@ -65,9 +68,15 @@ importers:
       shiki:
         specifier: ^0.14.7
         version: 0.14.7
+      svelte-file-dropzone:
+        specifier: ^2.0.9
+        version: 2.0.9(svelte@4.2.19)
       svelte-french-toast:
         specifier: ^1.2.0
         version: 1.2.0(svelte@4.2.19)
+      svelte-loading-spinners:
+        specifier: ^0.3.6
+        version: 0.3.6
       svelte-markdown:
         specifier: ^0.4.1
         version: 0.4.1(svelte@4.2.19)
@@ -1465,6 +1474,14 @@ packages:
   earcut@3.0.0:
     resolution: {integrity: sha512-41Fs7Q/PLq1SDbqjsgcY7GA42T0jvaCNGXgGtsNdvg+Yv8eIu06bxv4/PoREkZ9nMDNwnUSG9OFB9+yv8eKhDg==}
 
+  easy-cancelable-promise@1.0.1:
+    resolution: {integrity: sha512-3vZLA/SbSVv2DKFSvNrDLPZYtQmeNn4itIb3CkhYLs2ZCKK5Ah9/Ty4oAKM/bk9P4Nrpsd5Qhc62FXNXDR2e8A==}
+
+  easy-web-worker@7.0.1:
+    resolution: {integrity: sha512-raDOcGWFc1Ws1OEG0jG5CwFbbWwuT878uNvbHYjQ6a4ljILekYBLzjYFmT6qYH04kjVSK2/v0LPrA4wEW3Ayww==}
+    peerDependencies:
+      easy-cancelable-promise: ^1.0.1
+
   ecdsa-sig-formatter@1.0.11:
     resolution: {integrity: sha512-nagl3RYrbNv6kQkeJIpt6NJZy8twLB/2vtz6yN9Z4vRKHN4/QZJIEbqohALSgwKdnksuY3k5Addp5lg8sVoVcQ==}
 
@@ -1609,6 +1626,10 @@ packages:
   file-entry-cache@6.0.1:
     resolution: {integrity: sha512-7Gps/XWymbLk2QLYK4NzpMOrYjMhdIxXuIvy2QBsLE6ljuodKvdkWs/cpyJJ3CVIVpH0Oi1Hvg1ovbMzLdFBBg==}
     engines: {node: ^10.12.0 || >=12.0.0}
+
+  file-selector@0.6.0:
+    resolution: {integrity: sha512-QlZ5yJC0VxHxQQsQhXvBaC7VRJ2uaxTf+Tfpu4Z/OcVQJVpZO+DGU0rkoVW5ce2SccxugvpBJoMvUs59iILYdw==}
+    engines: {node: '>= 12'}
 
   fill-range@7.1.1:
     resolution: {integrity: sha512-YsGpe3WHLK8ZYi4tWDg2Jy3ebRz2rXowDxnld4bkQB00cc/1Zw9AWnC0i9ztDJitivtQvaI9KaLyKrc+hBW0yg==}
@@ -2147,9 +2168,6 @@ packages:
   periscopic@3.1.0:
     resolution: {integrity: sha512-vKiQ8RRtkl9P+r/+oefh25C3fhybptkHKCZSPlcXiJux2tJF55GnEj3BVn4A5gKfq9NWWXXrxkHBwVPUfH0opw==}
 
-  picocolors@1.1.0:
-    resolution: {integrity: sha512-TQ92mBOW0l3LeMeyLV6mzy/kWr8lkd/hp3mTg7wYK7zJhuBStmGMBG0BdeDZS/dZx1IukaX6Bk11zcln25o1Aw==}
-
   picocolors@1.1.1:
     resolution: {integrity: sha512-xceH2snhtb5M9liqDsmEw56le376mTZkEX/jEb/RxNFyegNul7eNslCXP9FDj/Lcu0X8KEyMceP2ntpaHrDEVA==}
 
@@ -2433,6 +2451,11 @@ packages:
       svelte:
         optional: true
 
+  svelte-file-dropzone@2.0.9:
+    resolution: {integrity: sha512-+gS9DscyEcy2Q0jhcADPs7uUEnz56YKudKtLGteEGNi4lF7anPTyxDXoDRiNACWzsp3PF5KfYkw0GgrTieZK9Q==}
+    peerDependencies:
+      svelte: ^3.54.0 || ^4.0.0 || ^5
+
   svelte-french-toast@1.2.0:
     resolution: {integrity: sha512-5PW+6RFX3xQPbR44CngYAP1Sd9oCq9P2FOox4FZffzJuZI2mHOB7q5gJBVnOiLF5y3moVGZ7u2bYt7+yPAgcEQ==}
     peerDependencies:
@@ -2443,6 +2466,9 @@ packages:
     engines: {node: ^12.20 || ^14.13.1 || >= 16}
     peerDependencies:
       svelte: ^3.19.0 || ^4.0.0
+
+  svelte-loading-spinners@0.3.6:
+    resolution: {integrity: sha512-mthHQ2TwiwzTWzbFry3CBnVEfzqPOD9WkVw84OfSYzHRq6N9wgQ+yv37u81uPeuLU/ZOIPqhujpXquB1aol5ZQ==}
 
   svelte-markdown@0.4.1:
     resolution: {integrity: sha512-pOlLY6EruKJaWI9my/2bKX8PdTeP5CM0s4VMmwmC2prlOkjAf+AOmTM4wW/l19Y6WZ87YmP8+ZCJCCwBChWjYw==}
@@ -2499,6 +2525,9 @@ packages:
 
   tslib@1.14.1:
     resolution: {integrity: sha512-Xni35NKzjgMrwevysHTCArtLDpPvye8zV/0E4EyYn43P7/7qvQwPh9BGkHewbMulVntbigmcT7rdX3BNo9wRJg==}
+
+  tslib@2.6.2:
+    resolution: {integrity: sha512-AEYxH93jGFPn/a2iVAwW87VuUIkR1FVUKB77NwMF7nBTDkDrrT/Hpt/IrCJ0QXhW27jTBDcf5ZY7w6RiqTMw2Q==}
 
   tslib@2.7.0:
     resolution: {integrity: sha512-gLXCKdN1/j47AiHiOkJN69hJmcbGTHI0ImLmbYLHykhgeN0jVGola9yVjFgzCUklsZQMW55o+dW7IXv3RCXDzA==}
@@ -3887,6 +3916,12 @@ snapshots:
 
   earcut@3.0.0: {}
 
+  easy-cancelable-promise@1.0.1: {}
+
+  easy-web-worker@7.0.1(easy-cancelable-promise@1.0.1):
+    dependencies:
+      easy-cancelable-promise: 1.0.1
+
   ecdsa-sig-formatter@1.0.11:
     dependencies:
       safe-buffer: 5.2.1
@@ -4111,6 +4146,10 @@ snapshots:
   file-entry-cache@6.0.1:
     dependencies:
       flat-cache: 3.2.0
+
+  file-selector@0.6.0:
+    dependencies:
+      tslib: 2.6.2
 
   fill-range@7.1.1:
     dependencies:
@@ -4636,8 +4675,6 @@ snapshots:
       estree-walker: 3.0.3
       is-reference: 3.0.2
 
-  picocolors@1.1.0: {}
-
   picocolors@1.1.1: {}
 
   picomatch@2.3.1: {}
@@ -4922,7 +4959,7 @@ snapshots:
       '@jridgewell/trace-mapping': 0.3.25
       chokidar: 4.0.1
       fdir: 6.4.0(picomatch@4.0.2)
-      picocolors: 1.1.0
+      picocolors: 1.1.1
       sade: 1.8.1
       svelte: 4.2.19
       typescript: 5.6.3
@@ -4939,6 +4976,11 @@ snapshots:
     optionalDependencies:
       svelte: 4.2.19
 
+  svelte-file-dropzone@2.0.9(svelte@4.2.19):
+    dependencies:
+      file-selector: 0.6.0
+      svelte: 4.2.19
+
   svelte-french-toast@1.2.0(svelte@4.2.19):
     dependencies:
       svelte: 4.2.19
@@ -4947,6 +4989,8 @@ snapshots:
   svelte-hmr@0.16.0(svelte@4.2.19):
     dependencies:
       svelte: 4.2.19
+
+  svelte-loading-spinners@0.3.6: {}
 
   svelte-markdown@0.4.1(svelte@4.2.19):
     dependencies:
@@ -5021,6 +5065,8 @@ snapshots:
   trough@2.2.0: {}
 
   tslib@1.14.1: {}
+
+  tslib@2.6.2: {}
 
   tslib@2.7.0: {}
 
