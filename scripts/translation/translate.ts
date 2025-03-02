@@ -17,6 +17,7 @@ import {
 	generateReviewPrompt,
 	PromptGenerator
 } from './prompts'
+import { L10NS_BASE_DIR, MARKDOWN_L10NS, MESSAGE_L10NS } from '../../src/lib/l10n-paths'
 
 dotenv.config()
 const argv = minimist(process.argv)
@@ -47,9 +48,6 @@ const PATH_JSON_BASE = './messages'
 const PATH_JSON_SOURCE = './messages/en.json'
 const PATH_MD_BASE = './src/posts'
 const PATH_PATTERNS = [/src\/posts(\/.*)\.md/, /messages\/(.*)/]
-const PATH_TARGET_BASE = './src/temp/translations'
-const PATH_TARGET_JSON = './src/temp/translations/json'
-const PATH_TARGET_MD = './src/temp/translations/md'
 const POSTPROCESSING_ADD_HEADING_IDS = true
 const PREPROCESSING_REMOVE_COMMENTS_WITH_MD_HEADINGS = true
 const PREPROCESSING_REMOVE_COMMENTS_WITH_MD_LINKS = true
@@ -94,7 +92,7 @@ let mainLatestCommitDates: Map<string, Date>
 	await Promise.all([
 		(async () => {
 			await initializeGitCache({
-				dir: PATH_TARGET_BASE,
+				dir: L10NS_BASE_DIR,
 				token: GIT_TOKEN,
 				repo: GIT_REPO_PARAGLIDE,
 				username: GIT_USERNAME,
@@ -117,10 +115,10 @@ let mainLatestCommitDates: Map<string, Date>
 				sourcePath: PATH_JSON_SOURCE,
 				languageTags: languageTags,
 				promptGenerator: generateJsonPrompt,
-				targetDir: PATH_TARGET_JSON,
-				cacheGitCwd: PATH_TARGET_BASE
+				targetDir: MESSAGE_L10NS,
+				cacheGitCwd: L10NS_BASE_DIR
 			})
-			await fs.cp(PATH_TARGET_JSON, PATH_JSON_BASE, { recursive: true })
+			await fs.cp(MESSAGE_L10NS, L10NS_BASE_DIR, { recursive: true })
 		})(),
 		(async () => {
 			const markdownPathsFromBase = await fs.readdir(PATH_MD_BASE, { recursive: true })
@@ -132,8 +130,8 @@ let mainLatestCommitDates: Map<string, Date>
 				sourceBaseDir: PATH_MD_BASE,
 				languageTags: languageTags,
 				promptGenerator: generateMarkdownPrompt,
-				targetDir: PATH_TARGET_MD,
-				cacheGitCwd: PATH_TARGET_BASE
+				targetDir: MARKDOWN_L10NS,
+				cacheGitCwd: L10NS_BASE_DIR
 			})
 		})()
 	])
