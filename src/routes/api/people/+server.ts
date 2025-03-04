@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { options } from '$lib/api.js'
 import type { Person } from '$lib/types.js'
 import { defaultTitle } from '$lib/utils'
 import { error, json } from '@sveltejs/kit'
+import { fetchAllPages } from '$lib/airtable.js'
 
 function recordToPerson(record: any): Person {
 	return {
@@ -23,26 +23,6 @@ const filter = (p: Person) => {
 	return p.image && !p.privacy && p.checked && p.org?.includes(currentOrg)
 }
 
-// Airtable API is limited to 100 items per page
-async function fetchAllPages(fetch: any, url: any) {
-	let allRecords: any[] = []
-	// https://airtable.com/developers/web/api/list-records#query-pagesize
-	let offset
-
-	do {
-		const fullUrl = offset ? `${url}?offset=${offset}` : url
-		const response = await fetch(fullUrl, options)
-		if (!response.ok) {
-			throw new Error('Failed to fetch data from Airtable')
-		}
-		const data: any = await response.json()
-		allRecords = allRecords.concat(data.records)
-		offset = data.offset
-	} while (offset)
-
-	return allRecords
-}
-
 export async function GET({ fetch, setHeaders }) {
 	const url = `https://api.airtable.com/v0/appWPTGqZmUcs3NWu/tblZhQc49PkCz3yHd`
 	setHeaders({
@@ -58,6 +38,7 @@ export async function GET({ fetch, setHeaders }) {
 			.sort(() => 0.5 - Math.random())
 		return json(out)
 	} catch (e) {
-		return error(500, 'err')
+		console.error('Error fetching people:', e)
+		return error(500, e instanceof Error ? e.message : 'Failed to fetch people')
 	}
 }

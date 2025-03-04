@@ -39,3 +39,19 @@ export type Team = {
 	public: boolean
 	responsibilities: string[]
 }
+
+export type NationalGroup = {
+	id: string
+	name: string
+	notes?: string
+	leader: string
+	discordUsername?: string
+	email?: string
+	legalEntity: boolean
+	overseer: string
+	xLink?: string
+	discordLink?: string
+	whatsappLink?: string
+	website?: string
+	public: boolean
+}
