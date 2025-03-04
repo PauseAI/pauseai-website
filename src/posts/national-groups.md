@@ -3,16 +3,13 @@ title: PauseAI National Groups
 description: What does it mean to be a National Group in the PauseAI network?
 ---
 
+<script context="module">
+  import NationalGroupsList from '$lib/components/NationalGroupsList.svelte';
+</script>
+
 ## Current National PauseAI Groups
 
-- [United States (PauseAI US)](https://pauseai-us.org/) ([X](https://x.com/PauseAIus), [Discord](https://discord.gg/TmpmYejE3e))
-- United Kingdom ([X](https://x.com/PauseAI_UK))
-- [France (PauseIA)](https://pauseia.fr/) ([X](https://x.com/pause_ia). [Discord](https://discord.gg/vyXGd7AeGc))
-- [Norway](https://pauseai.no/)
-- [Germany](https://linktr.ee/pauseai.germany) ([Discord](https://discord.gg/VuVVyJQ37M))
-- Cameroon ([Discord](https://discord.gg/JCJBSmDv), [Whatsapp](https://chat.whatsapp.com/EmSo5C486JzDdFOiojByje))
-- Romania ([Whatsapp](https://chat.whatsapp.com/K5oUIpa9OH6KaLNx2IHql3))
-- [Czech Republic](https://pauseai.cz/) ([Discord](https://discord.gg/ZTzFytGKKE))
+<NationalGroupsList />
 
 ## PauseAI National Groups
 
