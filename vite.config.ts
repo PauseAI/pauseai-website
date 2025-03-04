@@ -9,6 +9,15 @@ const config: UserConfig = {
 	server: {
 		port: 37572
 	},
+	// Improve build performance
+	build: {
+		reportCompressedSize: false,
+		chunkSizeWarningLimit: 1000,
+		// Enable multi-threading with esbuild for faster builds
+		minify: 'esbuild',
+		// Improve cache usage
+		cssCodeSplit: true
+	},
 	plugins: [
 		{
 			name: 'check-translations',

@@ -17,7 +17,13 @@ import {
 	generateReviewPrompt,
 	PromptGenerator
 } from './prompts'
-import { L10NS_BASE_DIR, MARKDOWN_L10NS, MESSAGE_L10NS } from '../../src/lib/l10n-paths'
+import {
+	L10NS_BASE_DIR,
+	MARKDOWN_L10NS,
+	MESSAGE_L10NS,
+	MESSAGE_SOURCE,
+	MARKDOWN_SOURCE
+} from '../../src/lib/l10n-paths'
 
 dotenv.config()
 const argv = minimist(process.argv)
@@ -44,9 +50,6 @@ const LLM_BASE_URL = 'https://openrouter.ai/api/v1/'
 const LLM_MODEL = 'meta-llama/llama-3.1-405b-instruct'
 const LLM_PROVIDERS = ['Fireworks']
 const LLM_REQUESTS_PER_SECOND = 1
-const PATH_JSON_BASE = './messages'
-const PATH_JSON_SOURCE = './messages/en.json'
-const PATH_MD_BASE = './src/posts'
 const PATH_PATTERNS = [/src\/posts(\/.*)\.md/, /messages\/(.*)/]
 const POSTPROCESSING_ADD_HEADING_IDS = true
 const PREPROCESSING_REMOVE_COMMENTS_WITH_MD_HEADINGS = true
@@ -112,7 +115,7 @@ let mainLatestCommitDates: Map<string, Date>
 	await Promise.all([
 		(async () => {
 			await translateOrLoadMessages({
-				sourcePath: PATH_JSON_SOURCE,
+				sourcePath: MESSAGE_SOURCE,
 				languageTags: languageTags,
 				promptGenerator: generateJsonPrompt,
 				targetDir: MESSAGE_L10NS,
@@ -121,13 +124,13 @@ let mainLatestCommitDates: Map<string, Date>
 			await fs.cp(MESSAGE_L10NS, L10NS_BASE_DIR, { recursive: true })
 		})(),
 		(async () => {
-			const markdownPathsFromBase = await fs.readdir(PATH_MD_BASE, { recursive: true })
+			const markdownPathsFromBase = await fs.readdir(MARKDOWN_SOURCE, { recursive: true })
 			const markdownPathsFromRoot = markdownPathsFromBase.map((file) =>
-				path.join(PATH_MD_BASE, file)
+				path.join(MARKDOWN_SOURCE, file)
 			)
 			await translateOrLoadMarkdown({
 				sourcePaths: markdownPathsFromRoot,
-				sourceBaseDir: PATH_MD_BASE,
+				sourceBaseDir: MARKDOWN_SOURCE,
 				languageTags: languageTags,
 				promptGenerator: generateMarkdownPrompt,
 				targetDir: MARKDOWN_L10NS,
