@@ -16,7 +16,9 @@ const config: UserConfig = {
 		// Enable multi-threading with esbuild for faster builds
 		minify: 'esbuild',
 		// Improve cache usage
-		cssCodeSplit: true
+		cssCodeSplit: true,
+		// Control sourcemap generation based on environment
+		sourcemap: !process.env.VITE_DISABLE_SOURCEMAPS
 	},
 	plugins: [
 		{
