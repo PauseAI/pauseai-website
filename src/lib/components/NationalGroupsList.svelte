@@ -28,9 +28,16 @@
 <style>
 	.national-groups {
 		display: grid;
-		gap: 1rem;
+		gap: 0.75rem;
 		list-style-type: none;
 		padding: 0;
-		margin: 1.5rem 0;
+		margin: 1rem 0;
+	}
+
+	@media (min-width: 768px) {
+		.national-groups {
+			grid-template-columns: repeat(2, 1fr);
+			gap: 1rem 2rem;
+		}
 	}
 </style>
