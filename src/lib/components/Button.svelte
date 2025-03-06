@@ -1,8 +1,9 @@
 <script lang="ts">
 	export let subtle = false
+	export let disabled = false
 </script>
 
-<button on:click class:subtle>
+<button on:click class:subtle class:disabled>
 	<slot />
 </button>
 
@@ -34,5 +35,9 @@
 	}
 	button:active {
 		background-color: var(--brand);
+	}
+	button.disabled {
+		background-color: rgba(128, 128, 128, 0.5);
+		cursor: default;
 	}
 </style>

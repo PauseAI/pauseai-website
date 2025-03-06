@@ -1,8 +1,11 @@
+import type { FrontmatterMeta } from '$lib/types'
 import { error } from '@sveltejs/kit'
 
 export async function load({ params: { slug } }) {
 	try {
-		const { default: content, metadata: meta = {} } = await import(`../../posts/${slug}.md`)
+		const postModule = await import(`../../posts/${slug}.md`)
+		const content = postModule.default
+		const meta = postModule.metadata as FrontmatterMeta
 
 		return {
 			content,

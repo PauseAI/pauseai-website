@@ -3,7 +3,10 @@ title: PauseAI Protests
 description: When and where we will be protesting.
 ---
 
-**See our [events](/events) for upcoming protests.**
+## Upcoming protest
+
+- [7th - 11th of February, 15+ cities](/2025-february)
+ <!--**See our [events](/events) for upcoming protests.**-->
 
 ## Past Protests
 

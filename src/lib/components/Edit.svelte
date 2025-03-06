@@ -2,6 +2,8 @@
 	import ExternalLink from '$lib/components/custom/a.svelte'
 	import { page } from '$app/stores'
 
+	const BASE_URL = 'https://github.com/PauseAI/pauseai-website/edit/main/src/'
+
 	const markdownFiles = import.meta.glob(`../../posts/**/*.md`)
 	const svelteFiles = import.meta.glob('../../routes/**/+page.svelte')
 
@@ -21,7 +23,7 @@
 
 		if (relativePath) {
 			const rootPath = relativePath.substring('../../'.length)
-			editUrl = `https://github.com/joepio/pauseai/edit/main/src/${rootPath}`
+			editUrl = BASE_URL + rootPath
 		}
 	}
 </script>

@@ -7,14 +7,16 @@
 
 	let intro = true
 	let showProbabilities = false
-	let top: HTMLHeadingElement
+	let top: HTMLElement
 	let { title, description, date } = outcomesMeta
 </script>
 
 <PostMeta {title} {description} {date} />
 
 <div class="header">
-	<h1 bind:this={top} on:click={() => (intro = true)}>AI outcomes</h1>
+	<button class="reset-button" on:click={() => (intro = true)} bind:this={top}>
+		<h1>AI outcomes</h1>
+	</button>
 	{#if !intro}
 		<div class="headerbuttons">
 			<Button subtle on:click={() => (intro = true)}>Restart</Button>

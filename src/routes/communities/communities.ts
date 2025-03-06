@@ -414,7 +414,7 @@ const PauseAICommunities: Community[] = [
 		name: 'Vienna',
 		lat: 48.2082,
 		lon: 16.3738,
-		link: 'https://discord.gg/ZTzFytGKKE'
+		link: globalDiscord
 	}
 ]
 
