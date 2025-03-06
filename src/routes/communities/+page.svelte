@@ -1,6 +1,7 @@
 <script lang="ts">
 	import PostMeta from '$lib/components/PostMeta.svelte'
 	import ExternalLink from '$lib/components/custom/a.svelte'
+	import type * as maplibregl from 'maplibre-gl'
 	import { GeolocateControl, Map, Marker, Popup } from 'maplibre-gl'
 	import 'maplibre-gl/dist/maplibre-gl.css'
 	import { isMapboxURL, transformMapboxUrl } from 'maplibregl-mapbox-request-transformer'
