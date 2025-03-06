@@ -53,5 +53,6 @@ export type NationalGroup = {
 	discordLink?: string
 	whatsappLink?: string
 	website?: string
+	linktreeLink?: string
 	public: boolean
 }

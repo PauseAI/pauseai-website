@@ -31,6 +31,7 @@ function recordToNationalGroup(record: any): NationalGroup {
 		discordLink: record.fields.Discord || '',
 		whatsappLink: record.fields.Whatsapp || '',
 		website: record.fields.website || '',
+		linktreeLink: record.fields.linktree || '',
 		public: true // Assuming all records are public by default
 	}
 }

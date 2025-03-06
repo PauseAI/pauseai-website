@@ -23,12 +23,20 @@
 			{/if}
 		</div>
 
-		{#if nationalGroup.website || nationalGroup.xLink || nationalGroup.discordLink || nationalGroup.whatsappLink}
+		{#if nationalGroup.website || nationalGroup.xLink || nationalGroup.discordLink || nationalGroup.whatsappLink || nationalGroup.linktreeLink}
 			<div class="social-links">
 				<span class="label">Links:</span>
 				{#if nationalGroup.website}
 					<a href={nationalGroup.website} class="link" target="_blank" rel="noopener noreferrer"
 						>Website</a
+					>
+				{/if}
+				{#if nationalGroup.linktreeLink}
+					<a
+						href={nationalGroup.linktreeLink}
+						class="link"
+						target="_blank"
+						rel="noopener noreferrer">Linktree</a
 					>
 				{/if}
 				{#if nationalGroup.xLink}
