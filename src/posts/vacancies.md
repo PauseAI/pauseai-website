@@ -33,7 +33,7 @@ Interested? [Mail to Will](mailto:will@pauseai.info)
 - Come up with campaigns of people you would like to reach out to, and contact them (whether by email, phone, DM, or in-person)
 - Please consider joining if you have a non traditional background or location - this could help us to reach new groups!
 
-Interested? [Email Anthony](mailto:diego@pauseai.info)
+Interested? [Email Diego](mailto:diego@pauseai.info)
 
 ## Software Team member
 
