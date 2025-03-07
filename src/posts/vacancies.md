@@ -24,7 +24,7 @@ description: Jobs & volunteer positions at PauseAI
 - Say hi to new members who join through the discord or the form.
 - Have one on one calls to find the right team
 
-Interested? [Mail to Will](mailto:will@pausai.info)
+Interested? [Mail to Will](mailto:will@pauseai.info)
 
 ## Outreach team member
 
@@ -33,7 +33,7 @@ Interested? [Mail to Will](mailto:will@pausai.info)
 - Come up with campaigns of people you would like to reach out to, and contact them (whether by email, phone, DM, or in-person)
 - Please consider joining if you have a non traditional background or location - this could help us to reach new groups!
 
-Interested? DM Diego in [Discord](https://discord.gg/y9hdAjD83e)
+Interested? [Email Anthony](mailto:diego@pauseai.info)
 
 ## Software Team member
 
@@ -42,4 +42,4 @@ Interested? DM Diego in [Discord](https://discord.gg/y9hdAjD83e)
 - Be strategic: keep things simple &amp; scalable, buy not build unless we have to...
 - ...but sometimes we have to! So step up devs: scratch an itch and save the world.
 
-Interested? [Email Anthony](mailto:anthony@pausai.info) (or DM anthonybailey.net on [Discord](https://discord.gg/y9hdAjD83e))
+Interested? [Email Anthony](mailto:anthony@pauseai.info) (or DM anthonybailey.net on [Discord](https://discord.gg/y9hdAjD83e))
