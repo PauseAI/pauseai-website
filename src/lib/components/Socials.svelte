@@ -17,9 +17,6 @@
 	<a href="https://www.facebook.com/PauseAI/" target="_blank" title="Facebook">
 		<Facebook />
 	</a>
-	<a href="https://discord.gg/2XXWXvErfA" target="_blank" title="Discord">
-		<Discord />
-	</a>
 	<a href="https://twitter.com/PauseAI" target="_blank" title="X / Twitter">
 		<X />
 	</a>

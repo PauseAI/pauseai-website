@@ -19,12 +19,12 @@ Choose an activity below depending on your interests or skills.
 - **Share about AI risk** on your social media. One of [these videos](https://www.youtube.com/watch?v=xBqU1QxCao8&list=PLI46NoubGtIJa0JVCBR-9CayxCOmU0EJt) or this website can be a good start. And don't forget to tag us in your posts.
 - **Talk to people in your life** about AI safety. Answer their questions, and encourage them to act too. Use our [counterarguments](/counterarguments) to help you be more persuasive.
 - **[Tabling](/tabling) and [flyering](/flyering)** are great ways to reach many people in a short amount of time.
-- **Attend local events**: Many cities have (free / low-cost) events about AI & technology policy. Attending these events is a great way to network and share your concerns. If you want AI safety marketing materials, reach out to us on [Discord](https://discord.gg/2XXWXvErfA) so we can send you some.
+- **Attend local events**: Many cities have (free / low-cost) events about AI & technology policy. Attending these events is a great way to network and share your concerns.
 
 ### Support PauseAI
 
 - **Join or create a [local PauseAI community](/communities)**.
-- **Join the [Discord](https://discord.gg/2XXWXvErfA)**, where most of the collaboration happens.
+- **Join the [Discord](/join)**, where most of the collaboration happens.
 - **Protest or participate in [events](/events)**. If no protest is near you, consider [starting one](/organizing-a-protest).
 - **Look over our [vacancies](/vacancies)** to see if any of your skills match our organizational needs. We're often looking for people with experience in social media, communications, organizing, outreach, and software. Some positions are compensated.
 - **[Sign up as a volunteer](https://airtable.com/appWPTGqZmUcs3NWu/pag7ztLh27Omj5s2n/form)** so we can find projects in your interest areas).

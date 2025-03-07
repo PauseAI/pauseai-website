@@ -51,4 +51,4 @@ Crafting a highly personalised message from scratch following the tips below can
 
 ## Need more help / feedback?
 
-[Join the Discord](https://discord.gg/2XXWXvErfA) to ask any question about sending an e-mail or to share your draft for feedback!
+[Join the Discord](/join) to ask any question about sending an e-mail or to share your draft for feedback!
