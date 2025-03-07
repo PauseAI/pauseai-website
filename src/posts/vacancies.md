@@ -24,7 +24,7 @@ description: Jobs & volunteer positions at PauseAI
 - Say hi to new members who join through the discord or the form.
 - Have one on one calls to find the right team
 
-Interested? [Mail to Will](mailto:will@pauseai.info)
+Interested? [Email Will](mailto:will@pauseai.info)
 
 ## Outreach team member
 
