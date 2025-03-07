@@ -7,11 +7,9 @@ description: What does it mean to be a National Group in the PauseAI network?
   import NationalGroupsList from '$lib/components/NationalGroupsList.svelte';
 </script>
 
-## Current National PauseAI Groups
-
 <NationalGroupsList />
 
-## PauseAI National Groups
+## What a PauseAI National Groups does
 
 - Manage, coach and coordinate their own [local communities](/communities).
 - Organize national events.

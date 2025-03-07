@@ -54,5 +54,7 @@ export type NationalGroup = {
 	whatsappLink?: string
 	website?: string
 	linktreeLink?: string
+	instagramLink?: string
+	tiktokLink?: string
 	public: boolean
 }

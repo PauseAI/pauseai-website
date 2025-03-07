@@ -5,27 +5,23 @@
 </script>
 
 <li class="national-group">
-	<div class="name">
-		{nationalGroup.name}
-	</div>
+	<h3 class="name">{nationalGroup.name}</h3>
 
-	<div class="content">
-		<div class="info-section">
-			{#if nationalGroup.leader !== 'No'}
-				<span class="detail-item">
-					<span class="label">Leader:</span>
-					{#if nationalGroup.email}
-						<a href="mailto:{nationalGroup.email}" class="link">{nationalGroup.leader}</a>
-					{:else}
-						<span>{nationalGroup.leader}</span>
-					{/if}
-				</span>
+	{#if nationalGroup.leader !== 'No'}
+		<div class="row">
+			<span class="label">Leader:</span>
+			{#if nationalGroup.email}
+				<a href="mailto:{nationalGroup.email}" class="link">{nationalGroup.leader}</a>
+			{:else}
+				<span>{nationalGroup.leader}</span>
 			{/if}
 		</div>
+	{/if}
 
-		{#if nationalGroup.website || nationalGroup.xLink || nationalGroup.discordLink || nationalGroup.whatsappLink || nationalGroup.linktreeLink}
-			<div class="social-links">
-				<span class="label">Links:</span>
+	{#if nationalGroup.website || nationalGroup.xLink || nationalGroup.discordLink || nationalGroup.whatsappLink || nationalGroup.linktreeLink || nationalGroup.instagramLink || nationalGroup.tiktokLink}
+		<div class="row">
+			<span class="label">Links:</span>
+			<div class="links">
 				{#if nationalGroup.website}
 					<a href={nationalGroup.website} class="link" target="_blank" rel="noopener noreferrer"
 						>Website</a
@@ -37,6 +33,19 @@
 						class="link"
 						target="_blank"
 						rel="noopener noreferrer">Linktree</a
+					>
+				{/if}
+				{#if nationalGroup.instagramLink}
+					<a
+						href={nationalGroup.instagramLink}
+						class="link"
+						target="_blank"
+						rel="noopener noreferrer">Instagram</a
+					>
+				{/if}
+				{#if nationalGroup.tiktokLink}
+					<a href={nationalGroup.tiktokLink} class="link" target="_blank" rel="noopener noreferrer"
+						>TikTok</a
 					>
 				{/if}
 				{#if nationalGroup.xLink}
@@ -56,62 +65,51 @@
 					>
 				{/if}
 			</div>
-		{/if}
-	</div>
+		</div>
+	{/if}
 
 	{#if nationalGroup.notes}
-		<div class="notes">
-			{nationalGroup.notes}
-		</div>
+		<div class="notes">{nationalGroup.notes}</div>
 	{/if}
 </li>
 
 <style>
 	.national-group {
-		display: flex;
-		flex-direction: column;
-		padding: 0;
-		margin-bottom: 0.5rem;
-		background-color: transparent;
+		margin-bottom: 1.5rem;
 	}
 
 	.name {
 		color: var(--text);
 		font-family: var(--font-heading);
-		font-weight: bold;
 		font-size: 1.2rem;
-		margin: 0 0 0.2rem 0;
+		font-weight: bold;
+		margin: 0 0 0.5rem;
 	}
 
-	.content {
+	.row {
 		display: flex;
-		flex-direction: column;
-		gap: 0.2rem;
-		font-size: 0.85rem;
-	}
-
-	.info-section {
-		display: flex;
-		flex-wrap: wrap;
-		gap: 0.5rem 1rem;
-	}
-
-	.detail-item {
-		display: inline-flex;
 		align-items: baseline;
+		margin-bottom: 0.5rem;
+		font-size: 0.85rem;
 	}
 
 	.label {
 		font-weight: 500;
-		margin-right: 0.25rem;
+		margin-right: 0.5rem;
+		min-width: 3.5rem;
+	}
+
+	.links {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 1rem;
 	}
 
 	.notes {
-		white-space: pre-wrap;
-		overflow-wrap: break-word;
-		margin: 0.25rem 0 0 0;
 		color: var(--text-2);
 		font-size: 0.85rem;
+		white-space: pre-wrap;
+		overflow-wrap: break-word;
 	}
 
 	.link {
@@ -121,11 +119,5 @@
 
 	.link:hover {
 		text-decoration: underline;
-	}
-
-	.social-links {
-		display: flex;
-		flex-wrap: wrap;
-		gap: 0.75rem;
 	}
 </style>
