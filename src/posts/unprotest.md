@@ -11,7 +11,7 @@ date: '2024-9-18'
 **If you’re reading this (five minute tasks anyone can do):**
 - Send an email about AI’s risks to [all your US elected officials simultaneously](https://democracy.io/), to [the UN AI advisory body](mailto:aiadvisorybody@un.org), and to [the US representative at the UN.](https://usun.usmission.gov/mission/contact-us/). If you don’t know what to say, use [our email builder](https://pauseai.info/email-builder).
 - Join [our in-person monthly meetings](https://www.eventbrite.com/e/pauseai-monthly-action-meeting-tickets-914711244957) each month on the 11th.
-- Join our online NYC community in the following locations: [Discord](https://discord.com/channels/1100491867675709580/1223374237016784928), [Whatsapp](https://chat.whatsapp.com/KAQMwz2nQeWIkTLxwKxHg1) We mostly use Discord for now, but let us know if you want alternative communication.
+- Join our online NYC community in the following locations: [Discord](https://discord.gg/TmpmYejE3e), [Whatsapp](https://chat.whatsapp.com/KAQMwz2nQeWIkTLxwKxHg1) We mostly use Discord for now, but let us know if you want alternative communication.
 - Follow PauseAINYC on [Instagram](https://www.instagram.com/pauseainyc/), or on [Twitter](https://x.com/PauseAINYC).
 
 **If you like to socialize:**
@@ -30,4 +30,3 @@ date: '2024-9-18'
 
 **If you want to provide financial support:**
 - You can [donate here](https://pauseai.info/donate). Your donations are tax-deductible (if you itemize your taxes), and all donations go directly to people and projects addressing the dangers of AI.
-- Alternatively, you can directly fund specific projects, such as t-shirt printing costs or funds to help members travel to protest together. Information about this is available on [the Discord server](https://discord.com/channels/1100491867675709580/1223374237016784928).

@@ -19,7 +19,7 @@ export const communitiesMeta: Post = {
 	categories: []
 }
 
-const globalDiscord = 'https://discord.gg/CR5u5BTBwy'
+const globalDiscord = 'https://pauseai.info/join' /** Now we don't share our Discord link publicly, first they need to sing up the form */
 const GermanyDiscord = 'https://discord.gg/VuVVyJQ37M'
 const FranceDiscord = 'https://discord.gg/vyXGd7AeGc'
 const USDiscord = 'https://discord.gg/TmpmYejE3e'

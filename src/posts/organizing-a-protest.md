@@ -23,7 +23,6 @@ However, you can have more impact by scaling up and doing more things, and we're
 
 Check if there's already a [local community near you](/communities).
 If there is not, you should [start one](/local-organizing)!
-And [join our Discord server](https://discord.gg/2XXWXvErfA) to discuss organizing a protest.
 We're happy to help you with advice and resources!
 Don't forget writing in your city post, inside the #local-communities channel over there.
 
@@ -94,7 +93,6 @@ Keep them informed of the protest, make them part of the process.
 
 Use our [Figma design template](https://www.figma.com/design/iQ4PHQTi1vAVmT9Lckazqt/PauseAI-designs---editable) or check the [media folder](https://drive.google.com/drive/folders/1bQ_MZ8giK-Mee4ABkO0BgcFInaXruNpa?usp=sharing) to make your own flyers / banners / posters.
 We have a <a href="/PauseAI_flyer.pdf" target="_blank">flyer</a> that you can [print out and hand out to people](/flyering).
-Also check out the [Discord thread](https://discord.com/channels/1100491867675709580/1138484822117974191) where we discuss protest materials.
 We can reimburse printing costs, so keep the receipts!
 If you need a larger amount of funds for more radical projects (a big prop for example) you can apply for a [microgrant](/microgrants).
 

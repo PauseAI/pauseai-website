@@ -9,11 +9,10 @@ description: We are organizing a protest at Microsoft to demand a summit to paus
 
 - May 23rd, 2023, 11:45 - 13:00
 - [Microsoft Innovation Center, Rue Montoyer 51, Brussels, Belgium](https://goo.gl/maps/bvLbHDt61eSfpZV28?coh=178571&entry=tt)
-- [Sign up on Discord](https://discord.gg/2XXWXvErfA?event=1105793166927470592)
 
 ## Join
 
-- Join us on [Discord](https://discord.gg/2XXWXvErfA?event=1105793166927470592) to sign up and discuss the protest.
+- Join us on [Discord](https://pauseai.info/join) to sign up and discuss the protest.
 - Read the Protester's [code of conduct](/protesters-code-of-conduct).
 
 ## What do we want?

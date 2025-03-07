@@ -131,12 +131,6 @@ When asked what this is all about:
    - And (hopefully) you _do_! You are taking time out of your day to communicate something to them that you think is important, and some people recognize that.
 8. When using a sign, some percentage of people self-sort and avoid you if they are not interested, which can save you some energy!
 
-## Relevant discussions in the PauseAI Discord
-
-- [Tabling / flyering project](https://discord.com/channels/1100491867675709580/1175000709490561064)
-- [Nathan Metzger’s first flyering effort](https://discord.com/channels/1100491867675709580/1211431205707452538)
-- [Sean’s flyering questions](https://discord.com/channels/1100491867675709580/1220069198135296031)
-
 ## See also
 
 [Flyering in Marseille](https://docs.google.com/document/d/1xPG5IjDRYCl5n2Lyte8d25iTqcoitU0aMqfyGXzs0Mk/edit?usp=sharing) from Maxime F

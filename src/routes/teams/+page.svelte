@@ -19,7 +19,7 @@
 PauseAI consists almost exclusively of [volunteers](/people) ([sign up here](https://airtable.com/appWPTGqZmUcs3NWu/pag7ztLh27Omj5s2n/form)).
 We are organized in teams,
 each working on a different aspect of our movement.
-Every team has a leader, members, a Google Drive folder and a Role + private channel on the [discord server](https://discord.gg/2XXWXvErfA).
+Every team has a leader, members, a Google Drive folder and a Role + private channel on the Discord server.
 Other than that, Teams are free to choose how they want to work.
 Check out the [vacancies](/vacancies) to see some specific roles that you could take.
 If you want to create a new team, reach out to the Oversight team leader (see below).
