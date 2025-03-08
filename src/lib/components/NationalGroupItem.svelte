@@ -83,6 +83,13 @@
 		gap: 1rem;
 	}
 
+	@media (max-width: 600px) {
+		.links {
+			flex-direction: column;
+			gap: 0.5rem;
+		}
+	}
+
 	.notes {
 		color: var(--text-2);
 		font-size: 0.85rem;
