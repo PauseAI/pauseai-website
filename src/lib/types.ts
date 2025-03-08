@@ -49,12 +49,14 @@ export type NationalGroup = {
 	email?: string
 	legalEntity: boolean
 	overseer: string
-	xLink?: string
-	discordLink?: string
-	whatsappLink?: string
-	website?: string
-	linktreeLink?: string
-	instagramLink?: string
-	tiktokLink?: string
 	public: boolean
-}
+} & Record<NationalGroupLink, string>
+
+export type NationalGroupLink =
+	| 'xLink'
+	| 'discordLink'
+	| 'whatsappLink'
+	| 'website'
+	| 'linktreeLink'
+	| 'instagramLink'
+	| 'tiktokLink'

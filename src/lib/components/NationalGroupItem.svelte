@@ -1,7 +1,19 @@
 <script lang="ts">
-	import type { NationalGroup } from '$lib/types'
+	import type { NationalGroup, NationalGroupLink } from '$lib/types'
 
 	export let nationalGroup: NationalGroup
+
+	const nationalGroupLinkNames: Record<NationalGroupLink, string> = {
+		website: 'Website',
+		linktreeLink: 'Linktree',
+		instagramLink: 'Instagram',
+		tiktokLink: 'TikTok',
+		xLink: 'X',
+		discordLink: 'Discord',
+		whatsappLink: 'WhatsApp'
+	}
+
+	const linkEntries = Object.entries(nationalGroupLinkNames) as [NationalGroupLink, string][]
 </script>
 
 <li class="national-group">
@@ -18,52 +30,17 @@
 		</div>
 	{/if}
 
-	{#if nationalGroup.website || nationalGroup.xLink || nationalGroup.discordLink || nationalGroup.whatsappLink || nationalGroup.linktreeLink || nationalGroup.instagramLink || nationalGroup.tiktokLink}
+	{#if linkEntries.some(([key]) => nationalGroup[key])}
 		<div class="row">
 			<span class="label">Links:</span>
 			<div class="links">
-				{#if nationalGroup.website}
-					<a href={nationalGroup.website} class="link" target="_blank" rel="noopener noreferrer"
-						>Website</a
-					>
-				{/if}
-				{#if nationalGroup.linktreeLink}
-					<a
-						href={nationalGroup.linktreeLink}
-						class="link"
-						target="_blank"
-						rel="noopener noreferrer">Linktree</a
-					>
-				{/if}
-				{#if nationalGroup.instagramLink}
-					<a
-						href={nationalGroup.instagramLink}
-						class="link"
-						target="_blank"
-						rel="noopener noreferrer">Instagram</a
-					>
-				{/if}
-				{#if nationalGroup.tiktokLink}
-					<a href={nationalGroup.tiktokLink} class="link" target="_blank" rel="noopener noreferrer"
-						>TikTok</a
-					>
-				{/if}
-				{#if nationalGroup.xLink}
-					<a href={nationalGroup.xLink} class="link" target="_blank" rel="noopener noreferrer">X</a>
-				{/if}
-				{#if nationalGroup.discordLink}
-					<a href={nationalGroup.discordLink} class="link" target="_blank" rel="noopener noreferrer"
-						>Discord</a
-					>
-				{/if}
-				{#if nationalGroup.whatsappLink}
-					<a
-						href={nationalGroup.whatsappLink}
-						class="link"
-						target="_blank"
-						rel="noopener noreferrer">WhatsApp</a
-					>
-				{/if}
+				{#each linkEntries as [key, name]}
+					{#if nationalGroup[key]}
+						<a href={nationalGroup[key]} class="link" target="_blank" rel="noopener noreferrer"
+							>{name}</a
+						>
+					{/if}
+				{/each}
 			</div>
 		</div>
 	{/if}
