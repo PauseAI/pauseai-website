@@ -86,7 +86,7 @@
 	@media (max-width: 600px) {
 		.links {
 			flex-direction: column;
-			gap: 0.5rem;
+			gap: 0.25rem;
 		}
 	}
 
