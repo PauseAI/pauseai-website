@@ -6,3 +6,7 @@ export function formatDate(date: string, dateStyle: DateStyle = 'medium', locale
 }
 
 export const defaultTitle = 'Volunteer'
+
+export function typedEntries<T extends Parameters<typeof Object.entries>[0]>(obj: T) {
+	return Object.entries(obj) as [keyof T, T[keyof T]][]
+}

@@ -1,5 +1,6 @@
 <script lang="ts">
 	import type { NationalGroup, NationalGroupLink } from '$lib/types'
+	import { typedEntries } from '$lib/utils'
 
 	export let nationalGroup: NationalGroup
 
@@ -13,7 +14,7 @@
 		whatsappLink: 'WhatsApp'
 	}
 
-	const linkEntries = Object.entries(nationalGroupLinkNames) as [NationalGroupLink, string][]
+	const linkEntries = typedEntries(nationalGroupLinkNames)
 </script>
 
 <li class="national-group">
