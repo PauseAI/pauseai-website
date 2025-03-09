@@ -50,7 +50,7 @@ export type NationalGroup = {
 	legalEntity: boolean
 	overseer: string
 	public: boolean
-} & Record<NationalGroupLink, string>
+} & Record<NationalGroupLink, string | undefined>
 
 export type NationalGroupLink =
 	| 'xLink'
