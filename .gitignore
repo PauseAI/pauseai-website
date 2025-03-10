@@ -12,6 +12,10 @@ vite.config.ts.timestamp-*
 /static/pagefind
 .env
 
+# alternative package managers
+bun.lockb
+deno.lock
+
 # paraglide branch
 /messages/*
 !/messages/en.json
