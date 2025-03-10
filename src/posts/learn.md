@@ -18,6 +18,7 @@ description: Educational resources (videos, articles, books) about AI risks and 
 
 - [The Compendium](https://www.thecompendium.ai/). A highly comprehensive bundle of knowledge on why the current AI race is so dangerous, and what we can do about it.
 - [A Narrow Path](https://www.narrowpath.co/). A detailed plan on the steps that we need to take to increase our odds at surviving the next decadesa.
+- [Keep the Future Human](https://keepthefuturehuman.ai/). An article by FLI's Anthony Aguirre on why & how we can keep the future human. (check [chapter 8: How To Not Build AGI](https://keepthefuturehuman.ai/chapter-8-how-to-not-build-agi/))
 - [AISafety.com](https://www.aisafety.com) & [AISafety.info](https://aisafety.info). The landing pages for AI Safety. Learn about the risks, communities, events, jobs, courses, ideas for how to mitigate the risks and more!
 - [Existential Safety](https://existentialsafety.org/). A comprehensive list of actions that we can take to increase our existential safety from AI.
 - [AISafety.dance](https://aisafety.dance). A more fun, friendly and interactive introduction to the AI catastrophic risks!
@@ -76,6 +77,9 @@ Podcasts featuring PauseAI members can be found in the [media coverage](/press) 
 <!-- - [a casual intro to AI doom and alignment](https://carado.moe/ai-doom.html)
 I like it and the fact that is a more light reading, but I'm not sure if I want to put it because it defines alignment as just the technical stuff and redirects people to just do technical work -->
 - [Reasoning through arguments against taking AI safety seriously](https://yoshuabengio.org/2024/07/09/reasoning-through-arguments-against-taking-ai-safety-seriously/) (by Yoshua Bengio)
+- [The Compendium](https://www.thecompendium.ai/)
+- [A Narrow Path](https://www.narrowpath.co/)
+- [Keep the Future Human](https://keepthefuturehuman.ai/)
 - Check out the Reading section on [LethalIntelligence.ai](https://lethalintelligence.ai/reading-time/)
 
 If you want to read what journalists have written about PauseAI, check out the list of [media coverage](/press).

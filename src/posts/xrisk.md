@@ -1,5 +1,5 @@
 ---
-title: The existential risk of superintelligent AI
+title: The extinction risk of superintelligent AI
 description: Why AI is a risk for the future of our existence, and why we need to pause development.
 ---
 
@@ -20,7 +20,7 @@ The list includes people like:
 - **Stuart Russell**, writer of the #1 textbook on Artificial Intelligence used in most AI studies: ["If we pursue [our current approach], then we will eventually lose control over the machines"](https://news.berkeley.edu/2023/04/07/stuart-russell-calls-for-new-approach-for-ai-a-civilization-ending-technology/)
 - **Yoshua Bengio**, deep learning pioneer and winner of the Turing Award: ["... rogue AI may be dangerous for the whole of humanity [...] banning powerful AI systems (say beyond the abilities of GPT-4) that are given autonomy and agency would be a good start"](https://yoshuabengio.org/2023/05/22/how-rogue-ais-may-arise/)
 
-But this is not the only time that we've been warned about the existential dangers of AI:
+But this is not the only time that we've been warned about the existential / extinction dangers of AI:
 
 - **Stephen Hawking**, theoretical physicist & cosmologist: ["The development of full artificial intelligence could spell the end of the human race"](https://nypost.com/2023/05/01/stephen-hawking-warned-ai-could-mean-the-end-of-the-human-race/).
 - **Geoffrey Hinton**, the "Godfather of AI" and Turing Award winner, [left Google](https://fortune.com/2023/05/01/godfather-ai-geoffrey-hinton-quit-google-regrets-lifes-work-bad-actors/) to warn people of AI: ["This is an existential risk"](https://www.reuters.com/technology/ai-pioneer-says-its-threat-world-may-be-more-urgent-than-climate-change-2023-05-05/)

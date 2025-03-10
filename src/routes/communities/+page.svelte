@@ -1,15 +1,19 @@
 <script lang="ts">
-	import { onMount, onDestroy } from 'svelte'
-	import mapboxgl from 'mapbox-gl'
-	const { Map, GeolocateControl, Popup, Marker } = mapboxgl
-	import '../../../node_modules/mapbox-gl/dist/mapbox-gl.css'
-	import { communities, communitiesMeta } from './communities'
 	import PostMeta from '$lib/components/PostMeta.svelte'
 	import ExternalLink from '$lib/components/custom/a.svelte'
+	import type * as maplibregl from 'maplibre-gl'
+	import { GeolocateControl, Map, Marker, Popup } from 'maplibre-gl'
+	import 'maplibre-gl/dist/maplibre-gl.css'
+	import { isMapboxURL, transformMapboxUrl } from 'maplibregl-mapbox-request-transformer'
+	import { onDestroy, onMount } from 'svelte'
+	import { communities, communitiesMeta } from './communities'
+	import { MAPBOX_KEY } from './constants'
+
+	export let data
 
 	let { title, description, date } = communitiesMeta
 
-	let map: mapboxgl.Map
+	let map: maplibregl.Map
 	let mapContainer: HTMLDivElement
 	let lng: number
 	let lat: number
@@ -30,12 +34,17 @@
 
 		map = new Map({
 			container: mapContainer,
-			projection: { name: 'globe' },
-			accessToken:
-				'pk.eyJ1Ijoiam9lcGlvIiwiYSI6ImNqbTIzanZ1bjBkanQza211anFxbWNiM3IifQ.2iBrlCLHaXU79_tY9SVpXA',
-			style: `mapbox://styles/mapbox/outdoors-v11`,
+			style: {
+				...data.style,
+				projection: {
+					type: 'globe'
+				}
+			},
 			center: [initialState.lng, initialState.lat],
-			zoom: initialState.zoom
+			zoom: initialState.zoom,
+			transformRequest: (url, resourceType) => {
+				if (isMapboxURL(url)) return transformMapboxUrl(url, resourceType ?? '', MAPBOX_KEY)
+			}
 		})
 
 		map.addControl(
@@ -58,7 +67,8 @@
 		map.on('load', () => {
 			communities.map((community) => {
 				new Marker({
-					color: community.adjacent ? 'rgba(0,0,0,.5)' : 'rgb(255, 148, 22)'
+					color: community.adjacent ? 'rgba(0,0,0,.5)' : 'rgb(255, 148, 22)',
+					opacityWhenCovered: '0'
 				})
 					.setPopup(
 						new Popup({ offset: [0, -15] }).setHTML(

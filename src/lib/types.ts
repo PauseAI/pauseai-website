@@ -39,3 +39,24 @@ export type Team = {
 	public: boolean
 	responsibilities: string[]
 }
+
+export type NationalGroup = {
+	id: string
+	name: string
+	notes?: string
+	leader: string
+	discordUsername?: string
+	email?: string
+	legalEntity: boolean
+	overseer: string
+	public: boolean
+} & Record<NationalGroupLink, string | undefined>
+
+export type NationalGroupLink =
+	| 'xLink'
+	| 'discordLink'
+	| 'whatsappLink'
+	| 'website'
+	| 'linktreeLink'
+	| 'instagramLink'
+	| 'tiktokLink'

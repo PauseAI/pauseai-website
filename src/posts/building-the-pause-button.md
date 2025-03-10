@@ -8,8 +8,9 @@ When we're talking about a Pause, we're talking about [implementing an internati
 Some argue that it's too early to press the Pause Button (we [don't](/urgency)), but most experts seem to agree that it may be good to pause if developments go too fast.
 But as of now _we do not have a Pause Button_.
 So we should start thinking about how this would work, and how we can implement it.
-
 Luckily, building a superintelligent AI is difficult, and requires a lot of resources.
+
+_This page is a work in progress managed by the Building the Pause Button team at PauseAI, as part of the AI Safety Camp 2025._
 
 ## Contents
 
@@ -119,6 +120,10 @@ Notably, some of these companies use relatively outdated processes to produce th
 
 - The article ["Secure, Governable Chips"](https://www.cnas.org/publications/reports/secure-governable-chips) proposes a new approach to AI governance.
 - Chips could respond to messages from trusted servers to [prove they are withing a certain distance of a trusted location](https://www.lesswrong.com/posts/uSSPuttae5GHfsNQL/ai-compute-governance-verifying-ai-chip-location). This can be accurate to within tens of kilometers.
+- **[flexHEGs](https://yoshuabengio.org/wp-content/uploads/2024/09/FlexHEG-Interim-Report_2024.pdf)**: A new type of chip that can be programmed to self-destruct when certain conditions are met. This is still in the research phase and could take a long time to develop.
+- **[Firmware-based reporting](https://arxiv.org/abs/2404.18308)**: By installing a custom firmware on GPUs, users would be required to get a license to use the GPU for more than x cycles. This is a more near-term solution, and could be implemented "within a year"
+
+1. **[GPS tracking](https://arxiv.org/abs/2408.16074)**: By installing a custom firmware on GPUs, users would be required to get a license to use the GPU for more than x cycles. This is a more near-term solution, and could be implemented "within a year"
 
 ### Verification methods - preventing large training runs
 
@@ -141,10 +146,6 @@ The paper ["Verification methods for international AI agreements"](https://arxiv
 10. **Chip-Based Reporting**: Embeds reporting mechanisms in chips to alert if used beyond authorized limits. Feasible but challenging, requiring international standards and hardware development; circumventable by modifying firmware.
 
 Each method has its strengths and weaknesses, often requiring complementary approaches or international cooperation for effective implementation.
-
-Other proposed methods include:
-
-1. **[flexHEGs](https://yoshuabengio.org/wp-content/uploads/2024/09/FlexHEG-Interim-Report_2024.pdf)**: A new type of chip that can be programmed to self-destruct when certain conditions are met.
 
 An international insitution could be set up to monitor these verification methods, and to enforce the Pause.
 
@@ -174,3 +175,19 @@ Software is just information - it can be copied and distributed very easily.
 Nonetheless, we have banned information before.
 Child pornography, for example, is illegal to make, illegal to distribute, and illegal to possess.
 The same enforcement mechanisms could be used to regulate dangerous AI software.
+
+## What governments can do to build the Pause Button
+
+1. **Design Pause-Button compliant GPU firmware**. The approach for this is described in [this paper](https://arxiv.org/abs/2404.18308).
+2. **Force AI chip designers to make their firmware compliant**.
+3. **Set up a licensing body**. One authority should be responsible for issuing licenses to companies that want to use AI chips. This authority manages the cryptographic keys.
+4. **Map out where AI chips are now**. List all companies and datacenters that have AI chips. Call them, and in the future get them to update their chips to compliant firmware.
+5. **Invest in tamper-proof hardware & on-chip governance techniques**. flexHEGs are a promising approach here.
+
+## Further reading
+
+- [Hardware-Enabled Governance Mechanisms](https://www.rand.org/pubs/working_papers/WRA3056-1.html)
+- [Verification methods for international AI agreements](https://arxiv.org/abs/2408.16074)
+- [Secure, Governable Chips](https://www.cnas.org/publications/reports/secure-governable-chips)
+- [FlexHEGs](https://yoshuabengio.org/wp-content/uploads/2024/09/FlexHEG-Interim-Report_2024.pdf)
+- [Firmware-based reporting](https://arxiv.org/abs/2404.18308)
