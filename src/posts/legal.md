@@ -2,7 +2,6 @@
 title: Legal information
 description: Information required by law about PauseAI.
 ---
-
 This website is maintained by PauseAI Global.
 Read more about the inner workings about PauseAI on the [Organization page](/organization).
 
@@ -96,7 +95,7 @@ Our first annual report will be published after the first fiscal year ends on 31
 ## PauseIA (France)
 
 - Name: PauseIA
-- Will be incorporated soon
+- It will be incorporated soon
 - Director: [Maxime Fournes](mailto:maxime@pauseai.info)
 
 ## Relationship between entities
