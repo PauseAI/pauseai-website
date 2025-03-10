@@ -65,6 +65,7 @@ Regular humans may not have anything left to offer the economy.
 Image generation models (which are heavily trained on copyrighted material from professional artists) are already [impacting the creative industry](https://cointelegraph.com/news/artists-face-a-choice-with-ai-adapt-or-become-obsolete).
 Writers are [striking](https://www.newscientist.com/article/2373382-why-use-of-ai-is-a-major-sticking-point-in-the-ongoing-writers-strike/).
 GPT-4 has [passed the bar exam](https://law.stanford.edu/2023/04/19/gpt-4-passes-the-bar-exam-what-that-means-for-artificial-intelligence-tools-in-the-legal-industry/), can write excellent written content, and can write code (again, partially trained on [copyrighted materials](https://www.ischool.berkeley.edu/news/2023/new-research-prof-david-bamman-reveals-chatgpt-seems-be-trained-copyrighted-books)).
+
 <!--Add news about AI caused layoffs as an example of the ones that will come. https://www.techopedia.com/tech-layoffs-predictions ?-->
 
 The people who own these AI systems will be able to capitalize on them, but the people who lose their jobs to them will not.
@@ -131,6 +132,7 @@ Powerful AI models can be used to get more power.
 This positive feedback loop can lead to a few companies or governments having an unhealthy amount of power.
 Having control over thousands of intelligent, autonomous systems could be used to influence opinions, manipulate markets, or even wage war.
 In the hands of an authoritarian government, this could be used to suppress dissent and maintain power.
+
 <!--Dystopian social credit systems based on mass surveillance + people and action recognition could be created with today's AI so a pause wouldn't help and we shouldn't write about it-->
 
 ### Biological weapons
