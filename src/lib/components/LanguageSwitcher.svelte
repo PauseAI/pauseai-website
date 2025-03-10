@@ -6,6 +6,7 @@
 	import Navlink from './Navlink.svelte'
 	import { building } from '$app/environment'
 	import { onMount } from 'svelte'
+	import Card from '$lib/components/Card.svelte'
 
 	export let inverted = false
 
@@ -42,16 +43,20 @@
 	</button>
 </Navlink>
 {#if open || building}
-	<div class="card dropdown" bind:this={dropdown}>
-		{#each availableLanguageTags as lang}
-			<a
-				href={i18n.route($page.url.pathname)}
-				hreflang={lang}
-				aria-current={lang === languageTag() ? 'page' : undefined}
-			>
-				{languageNamesInEnglish.of(lang)}
-			</a>
-		{/each}
+	<div class="dropdown" bind:this={dropdown}>
+		<Card>
+			<div class="list">
+				{#each availableLanguageTags as lang}
+					<a
+						href={i18n.route($page.url.pathname)}
+						hreflang={lang}
+						aria-current={lang === languageTag() ? 'page' : undefined}
+					>
+						{languageNamesInEnglish.of(lang)}
+					</a>
+				{/each}
+			</div>
+		</Card>
 	</div>
 {/if}
 
@@ -69,16 +74,19 @@
 		position: absolute;
 		top: 100%;
 		right: 0;
+	}
+
+	.dropdown :global(a) {
+		text-decoration: none;
+	}
+
+	.list {
 		padding: 1rem;
 		display: flex;
 		flex-direction: column;
 		gap: 0.5rem;
 		color: var(--text);
 		font-family: var(--font-heading);
-	}
-
-	.dropdown :global(a) {
-		text-decoration: none;
 	}
 
 	a[aria-current='page'] {
