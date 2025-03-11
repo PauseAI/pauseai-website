@@ -108,7 +108,14 @@ and is now able to produce 7nm AI chips (about three years behind the 4nm proces
 #### Memory fabrication: Micron, SK Hynix
 
 AI chips require a lot of HBMs (High Bandwidth Memory), which is the most advanced memory type.
-Only a few companies can produce them.
+Currently, the competition in the high-end High Bandwidth Memory (HBM) market is limited to just a few key players.
+The production of the most modern / powerful variants (HBM3 and HBM3E, which are used in AI accelerators, GPUs, and HPC applications) is dominated by:
+
+- SK Hynix – The market leader in HBM production, supplying Nvidia with HBM3 and HBM3E.
+- Samsung – A strong competitor working to secure Nvidia’s and other AI companies’ contracts.
+- Micron – The third major player, ramping up HBM3E production in 2024 to compete with SK Hynix and Samsung.
+
+These companies also use ASML's EUV machines to produce their HBMs.
 
 #### AI Chip design: Nvidia, AMD, Intel, Google, Apple
 

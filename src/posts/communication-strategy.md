@@ -28,4 +28,18 @@ description: How we communicate about pausing AI development.
 - **Superhuman AI is not inevitable**. It requires hordes of engineers with million-dollar paychecks. It requires highly specialized hardware, created by a handful of monopolies. It requires all of us to sit back and do nothing.
 - **International regulation is possible**. We've collectively protected the Ozone Layer by banning CFC's and blinding laser weapons globally. The centralized AI chip supply chain makes enforcing compute governance very [feasible](/feasibility).
 
+## Target audiences
+
+- **Normal people**. This is a large group, but we need to make sure that how we communicate with them is effective. Most people already have some concerns about AI (and support a Pause!), but they need a little push.
+- **Followers**. The people who are already on board with PauseAI. The main goal is to get them to **take action**, join events, join a local group, etc.
+- **Students**. They are smart, have open minds, and have the time & energy to get involved. Although anyone can join PauseAI, they are the most likely to be able to take action.
+- **Journalists**. We respond to news and frame it to advance our cause. Be quick and help steer the conversation, especially on X.
+- **Policy makers / politicians**. They need to understand the urgency of the situation, as well as what they can do to prevent it. This depends on the country they are from, and their position in the government.
+- **Unions**. They are highly organized and want to protect their members. The job security of their members is at risk, and they can help out.
+
+## Non-audiences
+
+- **Groups who strongly disagree with us**. e/accs for example. They have already made their mind up. Giving them attention will only waste our time.
+- **AI geeks**. They are probably already familiar with the arguments and even PauseAI. Spending too much time on them is not effective.
+
 Much of our strategy is derived from our [values](https://pauseai.info/values).
