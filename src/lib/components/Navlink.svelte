@@ -1,20 +1,20 @@
 <script lang="ts">
 	import { page } from '$app/stores'
-	export let href: string
+	import { i18n } from '$lib/i18n'
+	export let href: string | undefined = undefined
 	export let c2a = false
 	export let ariaLabel: string | undefined = undefined
 	export let inverted = false
 	export let first = false
+	export let narrow = false
+	export let active = false
+
+	$: {
+		active = i18n.route($page.url.pathname) == href
+	}
 </script>
 
-<a
-	{href}
-	class:first
-	class:c2a
-	class:inverted
-	class:active={$page.url.pathname == href}
-	aria-label={ariaLabel}
->
+<a {href} class:first class:c2a class:inverted class:narrow class:active aria-label={ariaLabel}>
 	<slot />
 </a>
 
@@ -51,6 +51,10 @@
 		color: var(--brand-subtle);
 	}
 
+	a.inverted {
+		color: white;
+	}
+
 	a.inverted:hover {
 		color: black;
 		text-decoration: underline;
@@ -58,5 +62,9 @@
 	a.inverted.active,
 	a.inverted:active {
 		color: black;
+	}
+
+	a.narrow {
+		padding: 0;
 	}
 </style>
