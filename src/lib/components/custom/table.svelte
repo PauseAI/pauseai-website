@@ -16,7 +16,7 @@
 	}
 
 	.table-border {
-		border: 1px solid var(--text);
+		border: 1px solid black;
 		border-radius: 0.5rem;
 		overflow: hidden;
 		width: fit-content;
@@ -42,6 +42,10 @@
 	* :global(th:first-child),
 	* :global(td:first-child) {
 		border-left: none;
+	}
+
+	* :global(tr) {
+		background-color: var(--bg-secondary);
 	}
 
 	* :global(tr:nth-child(odd)) {
