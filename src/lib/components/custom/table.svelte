@@ -8,7 +8,7 @@
 
 <style>
 	* {
-		--border: 2px solid black;
+		--border: 2px solid var(--text);
 	}
 
 	.table-container {
@@ -16,7 +16,7 @@
 	}
 
 	.table-border {
-		border: 1px solid black;
+		border: 1px solid var(--text);
 		border-radius: 0.5rem;
 		overflow: hidden;
 		width: fit-content;
