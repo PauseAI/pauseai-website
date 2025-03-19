@@ -126,7 +126,7 @@ Notably, some of these companies use relatively outdated processes to produce th
 ### On-Chip Governance
 
 - The article ["Secure, Governable Chips"](https://www.cnas.org/publications/reports/secure-governable-chips) proposes a new approach to AI governance.
-- Chips could respond to messages from trusted servers to [prove they are withing a certain distance of a trusted location](https://www.lesswrong.com/posts/uSSPuttae5GHfsNQL/ai-compute-governance-verifying-ai-chip-location). This can be accurate to within tens of kilometers.
+- **[Server reporting](https://www.lesswrong.com/posts/uSSPuttae5GHfsNQL/ai-compute-governance-verifying-ai-chip-location)**. Chips could respond to messages from trusted servers to prove they are withing a certain distance of a trusted location. This can be accurate to within tens of kilometers.
 - **[flexHEGs](https://yoshuabengio.org/wp-content/uploads/2024/09/FlexHEG-Interim-Report_2024.pdf)**: A new type of chip that can be programmed to self-destruct when certain conditions are met. This is still in the research phase and could take a long time to develop.
 - **[Firmware-based reporting](https://arxiv.org/abs/2404.18308)**: By installing a custom firmware on GPUs, users would be required to get a license to use the GPU for more than x cycles. This is a more near-term solution, and could be implemented "within a year"
 
