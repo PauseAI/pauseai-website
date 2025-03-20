@@ -103,7 +103,7 @@
 	<li>
 		<b>Persuading "key nodes" in the graph</b> "Common knowledge... we have to move it from the individual
                    to the group. Part of this is persuading key nodes in the graph." -- Connor Leahy
-		    <ExternalLink
+		   <ExternalLink
 			href={'https://youtu.be/OUjnVeydhCM?t=1969'}
 			>Connor Leahy on a Promising Breakthrough in AI Alignment
 	 	   </ExternalLink> 
