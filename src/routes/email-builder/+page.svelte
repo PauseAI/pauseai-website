@@ -103,17 +103,14 @@
 	<li>
 		<b>Persuading "key nodes" in the graph</b> "Common knowledge... we have to move it from the individual
                    to the group. Part of this is persuading key nodes in the graph." -- Connor Leahy
-		   <li><ExternalLink
+		    <ExternalLink
 			href={'https://youtu.be/OUjnVeydhCM?t=1969'}
 			>Connor Leahy on a Promising Breakthrough in AI Alignment
-	 	   </ExternalLink>
-		   </li>
- 		   <li>
+	 	   </ExternalLink> 
 		   <ExternalLink
 			href={'https://youtu.be/1j--6JYRLVk?t=5716'}
 			>Connor Leahy - Slamming the Brakes on the AGI Arms Race (AGI Governance, Episode 5)
-	 	   </ExternalLink> 
- 		   </li>
+	 	   </ExternalLink>
 	</li>
 	<li>
 		<b>Pros .</b> Politicians, journalists, lobbyists - all of them use email.
