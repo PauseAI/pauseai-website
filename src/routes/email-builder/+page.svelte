@@ -99,6 +99,7 @@
 	</li>
 	<li>
 		<b>It's the medium for the pros.</b> Politicians, journalists, lobbyists - all of them use email.
+		If you want to be taken seriously, you should use email too.
 	</li>
 	<li>
 		<b>Persuading "key nodes" in the graph</b> "Common knowledge... we have to move it from the individual
@@ -111,10 +112,6 @@
 			href={'https://youtu.be/1j--6JYRLVk?t=5716'}
 			>Connor Leahy - Slamming the Brakes on the AGI Arms Race (AGI Governance, Episode 5)
 	 	   </ExternalLink>
-	</li>
-	<li>
-		<b>Pros .</b> Politicians, journalists, lobbyists - all of them use email.
-		If you want to be taken seriously, you should use email too.
 	</li>
 	<li>
 		<b>No social pressure.</b> If you post something publicly, a politician might be hesitant to respond
