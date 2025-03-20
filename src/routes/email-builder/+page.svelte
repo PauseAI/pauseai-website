@@ -98,7 +98,20 @@
 		this stuff all day.
 	</li>
 	<li>
-		<b>It's the medium for the pros.</b> Politicians, journalists, lobbyists - all of them use email.
+		<b>Persuading "key nodes" in the graph</b> "Common knowledge... we have to move it from the individual 
+                   to the group. Part of this is persuading key nodes in the graph." -- Connor Leahy 
+                   https://youtu.be/1j--6JYRLVk?t=5716 https://youtu.be/OUjnVeydhCM?t=1969
+		   <ExternalLink
+			href={'https://youtu.be/OUjnVeydhCM?t=1969'}
+			>Connor Leahy on a Promising Breakthrough in AI Alignment
+	 	   </ExternalLink>
+		   <ExternalLink
+			href={'https://youtu.be/1j--6JYRLVk?t=5716'}
+			>Connor Leahy - Slamming the Brakes on the AGI Arms Race (AGI Governance, Episode 5)
+	 	   </ExternalLink> 
+	</li>
+	<li>
+		<b>Pros .</b> Politicians, journalists, lobbyists - all of them use email.
 		If you want to be taken seriously, you should use email too.
 	</li>
 	<li>
@@ -125,7 +138,7 @@
 	<li>
 		<b>Someone who politically represents you.</b> Maybe a politician in parliament from the party
 		that you voted for. <ExternalLink
-			href={'https://www.campaignforaisafety.org/politician/#find-your-politician-here'}
+			href={'https://github.com/Campaign-for-AI-Safety-archive/.github/tree/main/email-templates#email-your-politician'}
 			>Find their email address</ExternalLink
 		>.
 	</li>
