@@ -8,12 +8,14 @@ Choose an activity below depending on your interests or skills.
 ## For everyone
 
 ### Demand government action
+
 - **Write to your politicians**: We've found emails are surprisingly effective and take relatively little effort. If you don’t feel confident about what to write, [start with our email builder](/email-builder). When you get a meeting, you should check out our [lobby tips](/lobby-tips).
 - **Call your politicians**: Try calling legislators' offices while having a set of talking points in view so you stay on topic.
 - **Protest**: Join [one of the protests](https://pauseai.info/protests) or [organize one yourself](https://pauseai.info/organizing-a-protest).
 - **Sign petitions**: [International AI Treaty](https://aitreaty.org), [Ban Superintelligence](https://chng.it/Djjfj2Gmpk), [Demand responsible AI](https://www.change.org/p/artificial-intelligence-time-is-running-out-for-responsible-ai-development-91f0a02c-130a-46e1-9e55-70d6b274f4df), or one of the **national petitions**: [UK](https://petition.parliament.uk/petitions/639956), [AUS](https://www.aph.gov.au/e-petitions/petition/EN5163), [NL](https://aipetitie.nl).
 
 ### Inform people around you
+
 - **Making AI Risk "common knowledge" is key**. We need to get everyone to know that everyone else knows about AI risk, so it becomes "common knowledge". Including influential people, like politicians, journalists, and lobbyists. See Connor Leahy's explanation [here](https://youtu.be/OUjnVeydhCM?t=1969) and [here](https://youtu.be/1j--6JYRLVk?t=5716).
 - **Share about AI risk** on your social media. One of [these videos](https://www.youtube.com/watch?v=xBqU1QxCao8&list=PLI46NoubGtIJa0JVCBR-9CayxCOmU0EJt) or this website can be a good start. And don't forget to tag us in your posts.
 - **Talk to people in your life** about AI safety. Answer their questions, and encourage them to act too. Use our [counterarguments](/counterarguments) to help you be more persuasive.
