@@ -112,7 +112,7 @@
 		   <ExternalLink
 			href={'https://youtu.be/1j--6JYRLVk?t=5716'}
 			> here
-	 	   </ExternalLink>.
+	 	   </ExternalLink>.)
 	</li>
 	<li>
 		<b>No social pressure.</b> If you post something publicly, a politician might be hesitant to respond
