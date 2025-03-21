@@ -4,25 +4,32 @@
 
 SvelteKit website for [PauseAI.info](https://pauseai.info/).
 
-## Creating articles
+## Creating Articles
 
-[Create a new markdown file in `src/posts/`](https://github.com/joepio/pauseai/new/main/src/posts)
+You can create and edit articles using [Decap CMS](https://pauseai-cms.netlify.app/), a user-friendly web interface for managing content.
 
-Add a title, date and a description using frontmatter (optional, but recommended):
+### Steps to Create a New Article:
 
-```
----
-title: This will be shown as title in the browser / share previews / google results
-description: This will be the description in the share previews / google results
-date: '2023-4-14'
----
+1. Go to [pauseai-cms.netlify.app](https://pauseai-cms.netlify.app/).
+2. Log in with a GitHub account.
+3. If you are **not authorized to publish content independently**, Decap CMS will prompt you to **fork the repository** before making any changes. Confirm this to create your own copy of the content.
+4. Click **"New Post"**.
+5. Fill in the fields:
+   - **Title**: Enter the title of your post.
+   - **Slug**: Define a URL-friendly version of your title.
+   - **Description (Optional)**: Provide a brief summary of the post.
+   - **Image (Optional)**: Upload an image or insert an image URL.
+   - **Author (Optional)**: Add your name if applicable.
+   - **Date (Optional)**: Select the publication date, or use "Now" for the current date.
+   - **Body**: Enter the main content.
+6. Click **"Save"** to store your draft.
+7. Update the status as needed:
+   - **Draft**: The initial state, for work in progress.
+   - **In Review**: Submit the article for review and approval.
+   - **Ready**: The article is ready to be published.
+8. Decap CMS will automatically create a pull request on GitHub to submit your changes for review.
 
-Here goes the content of the article.
-```
-
-Create a fork / open a pull request (follow the on screen instructions!)
-
-The article will be published automatically when the pull request is merged.
+The article will be published automatically after approval.
 
 ## Running locally
 
