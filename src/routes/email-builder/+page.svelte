@@ -102,6 +102,19 @@
 		If you want to be taken seriously, you should use email too.
 	</li>
 	<li>
+		<b>Making AI Risk "common knowledge" is key.</b> We need to get everyone to know that everyone else knows about AI risk, 
+                so it becomes "common knowledge". As well as, convincing influential people, like politicians, journalists, 
+                and lobbyists. (E.g. See Connor's explanation as to why making AI Risk "common knowledge" is super important  
+		   <ExternalLink
+			href={'https://youtu.be/OUjnVeydhCM?t=1969'}
+			> here
+	 	   </ExternalLink> and 
+		   <ExternalLink
+			href={'https://youtu.be/1j--6JYRLVk?t=5716'}
+			> here
+	 	   </ExternalLink>.)
+	</li>
+	<li>
 		<b>No social pressure.</b> If you post something publicly, a politician might be hesitant to respond
 		to a topic they haven't made up their mind on.
 	</li>
@@ -125,7 +138,7 @@
 	<li>
 		<b>Someone who politically represents you.</b> Maybe a politician in parliament from the party
 		that you voted for. <ExternalLink
-			href={'https://www.campaignforaisafety.org/politician/#find-your-politician-here'}
+			href={'https://github.com/Campaign-for-AI-Safety-archive/.github/tree/main/email-templates#email-your-politician'}
 			>Find their email address</ExternalLink
 		>.
 	</li>
