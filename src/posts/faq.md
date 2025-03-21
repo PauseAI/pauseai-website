@@ -171,7 +171,8 @@ Because acknowledging that _we are in fact in danger_ is a very, very scary thin
 
 ## Ok, I want to help! What can I do?
 
-There are many [things that you can do](/action).
+There are many [things that you can do](/action).  Keep in mind, making AI Risk "common knowledge" is key! (See Connor Leahy's explanation as to why making AI Risk "common knowledge" is super important [here](https://youtu.be/OUjnVeydhCM?t=1969) and [here](https://youtu.be/1j--6JYRLVk?t=5716).) 
+
 On your own, you can write a [letter](/writing-a-letter), post [flyers](/flyering), [learn](/learn) and inform others, join a [protest](/protests), ir [donating](/donate) some money!
 But even more important: you can [join PauseAI](/join) and coordinate with others who are taking action.
 Check out if there are [local communities](/communities) in your area.
