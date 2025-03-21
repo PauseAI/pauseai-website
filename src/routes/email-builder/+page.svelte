@@ -102,16 +102,17 @@
 		If you want to be taken seriously, you should use email too.
 	</li>
 	<li>
-		<b>Persuading "key nodes" in the graph</b> "Common knowledge... we have to move it from the individual
-                   to the group. Part of this is persuading key nodes in the graph." -- Connor Leahy
+		<b>Making AI Risk "common knowledge" is key.</b> We need to get everyone to know that everyone else know about AI risk, 
+                so it becomes "common knowledge". As well as, convincing influential people, like politicians, journalists, 
+                and lobbyists. (E.g. See Connor's explanation as to why making AI Risk "common knowledge" is super important, see 
 		   <ExternalLink
 			href={'https://youtu.be/OUjnVeydhCM?t=1969'}
-			>Connor Leahy on a Promising Breakthrough in AI Alignment
-	 	   </ExternalLink> 
+			>here
+	 	   </ExternalLink> and 
 		   <ExternalLink
 			href={'https://youtu.be/1j--6JYRLVk?t=5716'}
-			>Connor Leahy - Slamming the Brakes on the AGI Arms Race (AGI Governance, Episode 5)
-	 	   </ExternalLink>
+			> here
+	 	   </ExternalLink>.
 	</li>
 	<li>
 		<b>No social pressure.</b> If you post something publicly, a politician might be hesitant to respond
