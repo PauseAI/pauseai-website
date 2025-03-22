@@ -16,7 +16,7 @@ Choose an activity below depending on your interests or skills.
 
 ### Inform people around you
 
-- **Making AI Risk "common knowledge" is key**. We need to get everyone to know that everyone else knows about AI risk, so it becomes "common knowledge". Including influential people, like politicians, journalists, and lobbyists. See Connor Leahy's explanation [here](https://youtu.be/OUjnVeydhCM?t=1969) and [here](https://youtu.be/1j--6JYRLVk?t=5716).
+- **Making AI Risk "common knowledge" is key**. We need to get everyone to know that everyone else knows about AI risk, so it becomes "common knowledge". Including influential people, like politicians, journalists, and lobbyists.
 - **Share about AI risk** on your social media. One of [these videos](https://www.youtube.com/watch?v=xBqU1QxCao8&list=PLI46NoubGtIJa0JVCBR-9CayxCOmU0EJt) or this website can be a good start. And don't forget to tag us in your posts.
 - **Talk to people in your life** about AI safety. Answer their questions, and encourage them to act too. Use our [counterarguments](/counterarguments) to help you be more persuasive.
 - **[Tabling](/tabling) and [flyering](/flyering)** are great ways to reach many people in a short amount of time.
