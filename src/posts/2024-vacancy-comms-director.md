@@ -1,9 +1,9 @@
 ---
-title: Communications Director Vacancy at PauseAI Global (2025)
+title: Communications Director Vacancy at PauseAI Global (Vacancy closed)
 description: PauseAI is looking for an Communications Director to lead our Comms Team and Social Media accounts. Remote work or in-person in Utrecht, the Netherlands.
 ---
 
-_Update 2025-03-24: This position has been filled._
+_Update 2025-03-24: This vacancy is now closed._
 
 Do you want to make an impact and work on the most important issue on Earth?
 
