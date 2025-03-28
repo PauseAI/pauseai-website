@@ -5,7 +5,7 @@ description: How much do regular people and experts worry about AI risks and gov
 ## Expert opinion on catastrophic risks
 
 - **[AI researchers, AIImpacts 2022](https://aiimpacts.org/2022-expert-survey-on-progress-in-ai/)**: give "really bad outcomes (such as human extinction)" a 14% probability, with a median of 5%. 82% believe the control problem is important.
-- **[AI researchers, AIImpacts 2023](https://wiki.aiimpacts.org/ai_timelines/predictions_of_human-level_ai_timelines/ai_timeline_surveys/2023_expert_survey_on_progress_in_ai)**: Average p(doom) between 14 and 19.4%, depending on how the question of phrased. 86% believe the control problem is important.
+- **[AI researchers, AIImpacts 2023](https://wiki.aiimpacts.org/ai_timelines/predictions_of_human-level_ai_timelines/ai_timeline_surveys/2023_expert_survey_on_progress_in_ai)**: Average p(doom) between 14 and 19.4%, depending on how the question is phrased. 86% believe the control problem is important.
 - **[AI engineers / startup founders, State of AI Engineering](https://elemental-croissant-32a.notion.site/State-of-AI-Engineering-2023-20c09dc1767f45988ee1f479b4a84135#694f89e86f9148cb855220ec05e9c631)**: over 60% have a [p(doom)](/pdoom) > 25%. Only 12% have a p(doom) = 0.
 - **[AI safety researchers, AlignmentForum](https://web.archive.org/web/20221013014859/https://www.alignmentforum.org/posts/QvwSr5LsxyDeaPK5s/existential-risk-from-ai-survey-results)**: respondents assigned a median probability of 20% to x-risk caused due to a lack of enough technical research, and 30% to x-risk caused due to a failure of AI systems to do what the people deploying them intended, with huge variation (for example, there are data points at both \~1% and \~99%).
 
