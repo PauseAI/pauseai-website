@@ -28,7 +28,7 @@ Choose an activity below depending on your interests or skills.
 - **Protest or participate in [events](/events)**. If no protest is near you, consider [starting one](/organizing-a-protest).
 - **Look over our [vacancies](/vacancies)** to see if any of your skills match our organizational needs. We're often looking for people with experience in social media, communications, organizing, outreach, and software. Some positions are compensated.
 - **[Sign up as a volunteer](https://airtable.com/appWPTGqZmUcs3NWu/pag7ztLh27Omj5s2n/form)** so we can find projects in your interest areas).
-- [**Donate**](/donate) to PauseAI or buy some merchandise in our [store](https://pauseai-shop.fourthwall.com/).
+- **[Donate](/donate)** to PauseAI or buy some merchandise in our [store](https://pauseai-shop.fourthwall.com/).
 - **Follow our [social media channels](https://linktr.ee/pauseai)** and stay updated. Your local PauseAI chapter may also have dedicated social media pages.
 
 ## For specific people
@@ -52,6 +52,13 @@ Choose an activity below depending on your interests or skills.
 
 - **Help draft policy**. [Draft examples](https://www.campaignforaisafety.org/celebrating-the-winners-law-student-moratorium-treaty-competition/). ([some](https://futureoflife.org/wp-content/uploads/2023/04/FLI_Policymaking_In_The_Pause.pdf) [frameworks](https://www.openphilanthropy.org/research/12-tentative-ideas-for-us-ai-policy/))
 - **Make submissions** to government requests for comment on AI policy ([example](https://ntia.gov/issues/artificial-intelligence/request-for-comments)).
+
+### If you are a university professor or work in an academic institution
+
+- **Write op-eds** and articles for media outlets
+- **Mentor students** who are interested in this topic
+- **Organize a campus event** about AI risk, or an academic conference, panel, or symposium
+- **Submit a faculty senate resolution** on AI risk, or craft a university position statement
 
 ### If you work as a journalist or have a social media following
 
