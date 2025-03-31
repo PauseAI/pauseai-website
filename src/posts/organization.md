@@ -67,5 +67,5 @@ You can mail/contact us at [joep@pauseai.info](mailto:joep@pauseai.info).
 ## Design resources (flyers, posters, logo)
 
 - Figma [community template](https://www.figma.com/design/iQ4PHQTi1vAVmT9Lckazqt/PauseAI-designs---editable)
-- If you want to create PauseAI-related material yourself, you can use our brand color _#FF9416_ and the fonts _Saira Condensed_ (700) and _Roboto Slab_ (300, 700).
+- If you want to create PauseAI-related material yourself, you can use our brand color _#FF9416_ and the fonts _Saira Condensed_ (700), _Montserrat Black_ and _Roboto Slab_ (300, 700).
 - [Media Google Drive folder](https://drive.google.com/drive/folders/1bQ_MZ8giK-Mee4ABkO0BgcFInaXruNpa?usp=sharing)
