@@ -8,16 +8,6 @@ description: Jobs & volunteer positions at PauseAI
 - We collaborate mostly on our [Discord server](https://discord.gg/2XXWXvErfA)
 - Read more about our [organization](/organization)
 
-## Communications Director (Paid position)
-
-- Lead the Comms Team (multiple volunteers with diverse relevant skills, some of who create and edit videos)
-- Stay up to date on AI (safety, governance) news
-- Run our Social Media accounts (Twitter, Facebook, TikTok, LinkedIn, YouTube, Instagram)
-- Share our messages on social media and engage with others
-- You enjoy posting things on social media, have a good feeling for marketing and have knowledge of AI safety and governance!
-
-[Read more](/2024-vacancy-comms-director)
-
 ## Onboarding team member
 
 - 2 to 4 hrs a week
