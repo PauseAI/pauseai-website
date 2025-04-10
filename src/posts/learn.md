@@ -106,6 +106,7 @@ haven't heard good things about it yet -->
 
 ## Courses
 
+- [Intro to Transformative AI](https://aisafetyfundamentals.com/intro-to-tai/) (15hrs)
 - [AGI safety fundamentals](https://www.agisafetyfundamentals.com/) (30hrs)
 - [CHAI Bibliography of Recommended Materials](https://humancompatible.ai/bibliography) (50hrs+)
 - [AISafety.training](https://aisafety.training/): Overview of training programs, conferences, and other events
