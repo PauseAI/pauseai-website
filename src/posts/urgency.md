@@ -81,9 +81,7 @@ These iterations might take weeks (training GPT-3 took 34 days), but it is also 
 
 So how far off are we from the Ilya threshold?
 It's fundamentally difficult to predict [when certain capabilities emerge](https://arxiv.org/abs/2206.07682) as LLMs scale, but so far we've seen many capabilities emerge that were previously thought to be far off.
-The [latest AI models](/sota) already beat most human programmers, so it is not unthinkable that future models
-
-Better chips, more data, and better algorithms will all contribute to reaching the Ilya threshold.
+The [latest AI models](/sota) already beat most human programmers, so it is not unthinkable that future models, better chips, more data, and better algorithms will all contribute to reaching the Ilya threshold.
 We have no idea how to align such an AI (even [OpenAI admits this](https://youtu.be/L_Guz73e6fw?t=1477)), and the consequences of having a misaligned superintelligence are likely to be [catastrophic](/xrisk).
 
 ## Act
