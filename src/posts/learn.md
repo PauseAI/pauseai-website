@@ -90,7 +90,7 @@ If you want to read what journalists have written about PauseAI, check out the l
 haven't heard good things about it yet -->
 
 - [Uncontrollable: The Threat of Artificial Superintelligence and the Race to Save the World](https://www.goodreads.com/book/show/202416160-uncontrollable) (Darren McKee, 2023). Get it for [free](https://impactbooks.store/cart/47288196366640:1?discount=UNCON-P3SFRS)!
-- [The Precipice: Existential Risk and the Future of Humanity](https://www.goodreads.com/en/book/show/50963653) (Toby Ord, 2020)
+- [The Precipice: Existential Risk and the Future of Humanity](https://www.goodreads.com/en/book/show/50485582-the-precipice) (Toby Ord, 2020)
 - [The Alignment Problem](https://www.goodreads.com/book/show/50489349-the-alignment-problem) (Brian Christian, 2020)
 - [Human Compatible: Artificial Intelligence and the Problem of Control](https://www.goodreads.com/en/book/show/44767248) (Stuart Russell, 2019)
 - [Life 3.0: Being Human in the Age of Artificial Intelligence](https://www.goodreads.com/en/book/show/34272565) (Max Tegmark, 2017)
@@ -106,6 +106,7 @@ haven't heard good things about it yet -->
 
 ## Courses
 
+- [Intro to Transformative AI](https://aisafetyfundamentals.com/intro-to-tai/) (15hrs)
 - [AGI safety fundamentals](https://www.agisafetyfundamentals.com/) (30hrs)
 - [CHAI Bibliography of Recommended Materials](https://humancompatible.ai/bibliography) (50hrs+)
 - [AISafety.training](https://aisafety.training/): Overview of training programs, conferences, and other events
@@ -113,7 +114,7 @@ haven't heard good things about it yet -->
 ## Organizations
 
 - [Future of Life Institute](https://futureoflife.org/cause-area/artificial-intelligence/) started the [open letter](https://futureoflife.org/open-letter/pause-giant-ai-experiments/), led by Max Tegmark.
-- [Center for AI Safety](https://www.safe.ai/) (CAIS) is a research center at the Czech Technical University in Prague, led by
+- [Center for AI Safety](https://www.safe.ai/) (CAIS) is a research center at the Czech Technical University in Prague, led by Dan Hendrycks.
 - [Conjecture](https://www.conjecture.dev/). Start-up that is working on AI alignment and AI policy, led by Connor Leahy.
 - [Existential Risk Observatory](https://existentialriskobservatory.org/). Dutch organization that is informing the public on x-risks and studying communication strategies.
 - [Centre for the Governance of AI](https://www.governance.ai/)
