@@ -1,6 +1,6 @@
 <!-- FILEPATH: /Users/joep/dev/github/joepio/pauseai/src/routes/writer/+page.svelte -->
 <script lang="ts">
-	import { botName } from '$lib/config'
+	import { botNameWriter } from '$lib/config'
 	import type { ChatResponse, Message } from '../api/writer/+server'
 	import { onMount } from 'svelte'
 
@@ -26,7 +26,7 @@
 	}
 
 	function copy() {
-		const role = (message: Message) => (message.role === 'user' ? 'You' : { botName })
+		const role = (message: Message) => (message.role === 'user' ? 'You' : { botNameWriter })
 		const text = messages.map((message) => `${role(message)}:\n${message.content}`).join('\n\n')
 		navigator.clipboard.writeText(text)
 		window.alert('Copied to clipboard!')
@@ -74,7 +74,7 @@
 	async function sendMessage() {
 		let input = ''
 		for (var i in paragraphText) {
-			input = input + paragraphText[i] + ': ' + input_arr[i] + '\n'
+			input = input + paragraphText[i] + ':\n' + input_arr[i] + '\n\n'
 		}
 		console.log(input)
 		messages = [...messages, { content: input, role: 'user' }]
@@ -113,11 +113,12 @@
 		*/
 	}
 
+	// Top of the page
 	const personality = {
-		intro: `Meet ${botName}! You can chat with them about AI safety, the dangers of AI, how it wants to take over the world or how we can stop this from happening!`
+		intro: `This webpage lets you use ${botNameWriter} to write emails. Just answer the questions after researching your target and ${botNameWriter} will combine them into an useful email! Any fields left empty or if you use the text "undefined" will prompt ${botNameWriter} to fill in those blanks themselves. Check all outputs carefully, as they're bound to make some mistakes!`
 	}
 
-	const title = `Chat with ${botName}`
+	const title = `Write Emails with ${botNameWriter}`
 </script>
 
 <svelte:head>
@@ -399,7 +400,7 @@
 		</form>
 	{/if}
 	<div class="disclaimer">
-		Disclaimer: {botName} is just a cheeky chatbot, don't take it too seriously.
+		Disclaimer: {botNameWriter} can make mistakes, check all outputs carefully!
 	</div>
 </footer>
 
@@ -409,13 +410,16 @@
 		flex-direction: column;
 		gap: 1rem;
 		width: 100%;
+		max-width: 100%;
 	}
 
 	form {
 		display: flex;
 		flex-direction: column;
 		gap: 1rem;
-		margin-left: auto;
+		width: 100%;
+		max-width: 100%;
+		/*margin-left: auto;*/
 	}
 
 	textarea {
@@ -428,8 +432,8 @@
 		box-sizing: border-box;
 		font-family: var(--font-body);
 		margin-top: 1rem;
-		max-width: 24rem;
-		margin-left: auto;
+		max-width: 100%;
+		/*margin-left: auto;*/
 	}
 
 	.buttons {
@@ -482,7 +486,7 @@
 		border: solid 1px var(--text);
 		justify-content: flex-start;
 		white-space: pre-wrap;
-		max-width: 24rem;
+		max-width: 100%;
 	}
 
 	.message p {
