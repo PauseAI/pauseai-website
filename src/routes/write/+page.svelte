@@ -1,17 +1,19 @@
-<!-- FILEPATH: /Users/joep/dev/github/joepio/pauseai/src/routes/write/+page.svelte -->
 <script lang="ts">
-	import { botNameWriter } from '$lib/config'
+	import { botName } from '$lib/config'
 	import type { ChatResponse, Message } from '../api/write/+server'
 	import { onMount } from 'svelte'
 
+	// Use a unique localStorage key to avoid conflicts with other pages
+	const STORAGE_KEY = 'email_writer_messages'
+
 	let messages: Message[] =
-		typeof localStorage !== 'undefined' ? JSON.parse(localStorage.getItem('messages') || '[]') : []
+		typeof localStorage !== 'undefined' ? JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]') : []
 
 	// Array for form
 	let input_arr = new Array<string>(35)
-	console.log(input_arr)
 
 	let loading = false
+	let apiAvailable = true // Default to true, will be updated after first API call
 	const maxMessages = 20
 
 	function clear_arr(arr) {
@@ -22,11 +24,11 @@
 
 	function clear() {
 		messages = []
-		localStorage.setItem('messages', JSON.stringify(messages))
+		localStorage.setItem(STORAGE_KEY, JSON.stringify(messages))
 	}
 
 	function copy() {
-		const role = (message: Message) => (message.role === 'user' ? 'You' : { botNameWriter })
+		const role = (message: Message) => (message.role === 'user' ? 'You' : 'Writer')
 		const text = messages.map((message) => `${role(message)}:\n${message.content}`).join('\n\n')
 		navigator.clipboard.writeText(text)
 		window.alert('Copied to clipboard!')
@@ -81,24 +83,49 @@
 		clear_arr(input_arr)
 		loading = true
 
-		const response = await fetch('api/write', {
-			method: 'POST',
-			headers: {
-				'Content-Type': 'application/json'
-			},
-			body: JSON.stringify(messages)
-		})
+		try {
+			const response = await fetch('api/write', {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json'
+				},
+				body: JSON.stringify(messages)
+			})
 
-		const data = (await response.json()) as ChatResponse
+			const data = (await response.json()) as ChatResponse
 
-		messages = [...messages, { content: data.response, role: 'assistant' }]
-		// set the messages in local storage
-		localStorage.setItem('messages', JSON.stringify(messages))
+			// Update API availability based on response
+			apiAvailable = data.apiAvailable !== false
 
-		loading = false
+			messages = [...messages, { content: data.response, role: 'assistant' }]
+			// set the messages in local storage
+			localStorage.setItem(STORAGE_KEY, JSON.stringify(messages))
+		} catch (error) {
+			console.error('Error calling email API:', error)
+			messages = [
+				...messages,
+				{
+					content:
+						'Sorry, there was an error generating your email. Please try again later or contact support.',
+					role: 'assistant'
+				}
+			]
+		} finally {
+			loading = false
+		}
 	}
 
-	onMount(() => {
+	onMount(async () => {
+		// Check API availability on component mount
+		try {
+			const response = await fetch('api/write')
+			const data = await response.json()
+			apiAvailable = !!data.apiAvailable
+		} catch (error) {
+			console.error('Error checking API availability:', error)
+			apiAvailable = false
+		}
+
 		const footer = document.querySelector('footer')
 		footer?.scrollIntoView({ behavior: 'smooth' })
 	})
@@ -115,10 +142,11 @@
 
 	// Top of the page
 	const personality = {
-		intro: `This webpage lets you use ${botNameWriter} to write emails. Just answer the questions after researching your target and ${botNameWriter} will combine them into an useful email! Any fields left empty or if you use the text "undefined" will prompt ${botNameWriter} to fill in those blanks themselves. Check all outputs carefully, as they're bound to make some mistakes!`
+		intro: `This webpage lets you write email content (with LLM assistance.) Just answer the questions after researching your target. Any fields left empty or if you use the text "undefined" will prompt the writer to fill in those blanks themselves. Check all outputs carefully, as they're bound to make some mistakes!`,
+		warning: `Note: This feature is currently in beta testing. If you encounter any issues, please contact the site administrator.`
 	}
 
-	const title = `Write Emails with ${botNameWriter}`
+	const title = `Write Email content`
 </script>
 
 <svelte:head>
@@ -128,9 +156,40 @@
 </svelte:head>
 
 <main>
-	{#if messages.length === 0}
+	<div class="header-section">
+		<h1>{title}</h1>
 		<p>{personality.intro}</p>
-	{/if}
+		<div class="warning-box">
+			<p class="warning">{personality.warning}</p>
+			{#if !apiAvailable}
+				<p class="warning error">
+					⚠️ API key not available. This feature is currently disabled. Please contact the site
+					administrator.
+				</p>
+			{:else}
+				<p class="warning">This feature requires an API key and is currently available.</p>
+			{/if}
+		</div>
+
+		<div class="top-buttons">
+			{#if messages.length > 0}
+				<button on:click={clear} class="button button--alt">Clear Form</button>
+				<button on:click={copy} class="button button--alt">Copy Content</button>
+			{/if}
+			<button
+				on:click={sendMessage}
+				disabled={!apiAvailable || loading}
+				class="button {!apiAvailable ? 'button--disabled' : ''}"
+			>
+				{#if loading}
+					Working...
+				{:else}
+					Write Email Content
+				{/if}
+			</button>
+		</div>
+	</div>
+
 	{#each messages as { role, content }}
 		<div class="message {role}">
 			<p>{content}</p>
@@ -393,14 +452,25 @@
 			></textarea>
 
 			<div class="buttons">
-				<button on:click={clear} class="button button--alt">Clear chat</button>
-				<button on:click={copy} class="button button--alt">Copy chat</button>
-				<button on:click={sendMessage}> Send </button>
+				<button on:click={clear} class="button button--alt">Clear Form</button>
+				<button on:click={copy} class="button button--alt">Copy Content</button>
+				<button
+					on:click={sendMessage}
+					disabled={!apiAvailable || loading}
+					class="button {!apiAvailable ? 'button--disabled' : ''}"
+				>
+					{#if loading}
+						Working...
+					{:else}
+						Write Email Content
+					{/if}
+				</button>
 			</div>
 		</form>
 	{/if}
 	<div class="disclaimer">
-		Disclaimer: {botNameWriter} can make mistakes, check all outputs carefully!
+		Disclaimer: Check all text content carefully before sending anything! You are the one sending
+		the email and expressing an opinion. You've simply had some assistance in writing it.
 	</div>
 </footer>
 
@@ -411,6 +481,49 @@
 		gap: 1rem;
 		width: 100%;
 		max-width: 100%;
+	}
+
+	.header-section {
+		margin-bottom: 2rem;
+		border-bottom: 1px solid var(--text-subtle);
+		padding-bottom: 1.5rem;
+	}
+
+	.header-section h1 {
+		margin-top: 0;
+		margin-bottom: 1rem;
+		font-size: 2rem;
+	}
+
+	.warning-box {
+		margin: 1.5rem 0;
+		padding: 0.75rem 1.25rem;
+		background-color: #fff3cd;
+		border: 1px solid #ffeeba;
+		border-radius: 0.25rem;
+	}
+
+	.warning {
+		color: #856404;
+		margin: 0.5rem 0;
+	}
+
+	.warning.error {
+		color: #721c24;
+		background-color: #f8d7da;
+		border-color: #f5c6cb;
+	}
+
+	.top-buttons {
+		display: flex;
+		gap: 1rem;
+		margin-top: 1.5rem;
+		align-items: center;
+	}
+
+	.button--disabled {
+		opacity: 0.5;
+		cursor: not-allowed;
 	}
 
 	form {

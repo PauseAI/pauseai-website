@@ -1,10 +1,23 @@
 import { error, json } from '@sveltejs/kit'
 import { env } from '$env/dynamic/private'
 import Anthropic from '@anthropic-ai/sdk'
-const ANTHROPIC_API_KEY = env.ANTHROPIC_API_KEY
+
+// Safely access the API key, will be undefined if not set
+const ANTHROPIC_API_KEY_FOR_WRITE = env.ANTHROPIC_API_KEY_FOR_WRITE || undefined
+
+// Flag to track if API is available
+const IS_API_AVAILABLE = !!ANTHROPIC_API_KEY_FOR_WRITE
+
+// Log warning during build if API key is missing
+if (!IS_API_AVAILABLE) {
+	console.warn(
+		'⚠️ ANTHROPIC_API_KEY_FOR_WRITE is not set. The /write page will operate in limited mode.'
+	)
+}
 
 export type ChatResponse = {
 	response: string
+	apiAvailable?: boolean
 }
 
 export type Message = {
@@ -133,9 +146,12 @@ Please replace all mentions of 'undefined' with the apropriate information that 
 go in that space, derived from the rest of the information. Output the full information, including your edits. Output nothing else.
 `
 
-const anthropic = new Anthropic({
-	apiKey: ANTHROPIC_API_KEY // defaults to process.env["ANTHROPIC_API_KEY"]
-})
+// Only initialize the client if we have an API key
+const anthropic = IS_API_AVAILABLE
+	? new Anthropic({
+			apiKey: ANTHROPIC_API_KEY_FOR_WRITE
+		})
+	: null
 
 /*
 const msg = await anthropic.messages.create({
@@ -145,120 +161,147 @@ const msg = await anthropic.messages.create({
 });
 */
 
+export async function GET() {
+	return json({ apiAvailable: IS_API_AVAILABLE })
+}
+
 export async function POST({ fetch, request }) {
-	const messages = await request.json()
-	var info = messages[0].content
-	if (info == '') {
-		return
+	// Check if API is available
+	if (!IS_API_AVAILABLE) {
+		return json({
+			response:
+				'⚠️ This feature requires an Anthropic API key. Please add the ANTHROPIC_API_KEY_FOR_WRITE environment variable to enable email generation functionality. Contact the site administrator for help.',
+			apiAvailable: false
+		} as ChatResponse)
 	}
-	System_Prompts['Information'] = info
 
-	// RESEARCH
-	info = await anthropic.messages.create({
-		model: 'claude-3-7-sonnet-20250219',
-		max_tokens: 1024,
-		system:
-			System_Prompts['Basic'] +
-			System_Prompts['Mail'] +
-			System_Prompts['Information'] +
-			System_Prompts['Research'],
-		messages: [
-			{
-				role: 'user',
-				content:
-					"Hello! Please update the list of information by replacing all instances of 'undefined' with something that belongs under their respective header based on the rest of the information provided. Thank you!"
-			}
-		]
-	})
-	System_Prompts['Information'] = info.content[0].text
+	try {
+		const messages = await request.json()
+		var info = messages[0].content
+		if (info == '') {
+			return json({
+				response: 'No information provided. Please fill in some of the fields to generate an email.'
+			} as ChatResponse)
+		}
+		System_Prompts['Information'] = info
 
-	// FIRST DRAFT
-	var msg = await anthropic.messages.create({
-		model: 'claude-3-7-sonnet-20250219',
-		max_tokens: 1024,
-		system:
-			System_Prompts['Basic'] +
-			System_Prompts['Mail'] +
-			System_Prompts['First_Draft'] +
-			System_Prompts['Results'],
-		messages: [
-			{
-				role: 'user',
-				content:
-					'Hello! Please write an email draft using the following information. \n' +
-					System_Prompts['Information']
-			}
-		]
-	})
-	var email = msg.content[0].text
+		// RESEARCH
+		info = await anthropic.messages.create({
+			model: 'claude-3-7-sonnet-20250219',
+			max_tokens: 1024,
+			system:
+				System_Prompts['Basic'] +
+				System_Prompts['Mail'] +
+				System_Prompts['Information'] +
+				System_Prompts['Research'],
+			messages: [
+				{
+					role: 'user',
+					content:
+						"Hello! Please update the list of information by replacing all instances of 'undefined' with something that belongs under their respective header based on the rest of the information provided. Thank you!"
+				}
+			]
+		})
+		System_Prompts['Information'] = info.content[0].text
 
-	// FIRST CUT
-	msg = await anthropic.messages.create({
-		model: 'claude-3-7-sonnet-20250219',
-		max_tokens: 1024,
-		system:
-			System_Prompts['Basic'] +
-			System_Prompts['Mail'] +
-			System_Prompts['Information'] +
-			System_Prompts['First_Cut'] +
-			System_Prompts['Results'],
-		messages: [
-			{ role: 'user', content: 'Hello! Please cut the following email draft. \n \n' + email }
-		]
-	})
-	email = msg.content[0].text
+		// FIRST DRAFT
+		var msg = await anthropic.messages.create({
+			model: 'claude-3-7-sonnet-20250219',
+			max_tokens: 1024,
+			system:
+				System_Prompts['Basic'] +
+				System_Prompts['Mail'] +
+				System_Prompts['First_Draft'] +
+				System_Prompts['Results'],
+			messages: [
+				{
+					role: 'user',
+					content:
+						'Hello! Please write an email draft using the following information. \n' +
+						System_Prompts['Information']
+				}
+			]
+		})
+		var email = msg.content[0].text
 
-	// FIRST EDIT
-	msg = await anthropic.messages.create({
-		model: 'claude-3-7-sonnet-20250219',
-		max_tokens: 1024,
-		system:
-			System_Prompts['Basic'] +
-			System_Prompts['Mail'] +
-			System_Prompts['Information'] +
-			System_Prompts['First_Edit'] +
-			System_Prompts['Results'],
-		messages: [
-			{ role: 'user', content: 'Hello! Please edit the following email draft. \n \n' + email }
-		]
-	})
-	email = msg.content[0].text
+		// FIRST CUT
+		msg = await anthropic.messages.create({
+			model: 'claude-3-7-sonnet-20250219',
+			max_tokens: 1024,
+			system:
+				System_Prompts['Basic'] +
+				System_Prompts['Mail'] +
+				System_Prompts['Information'] +
+				System_Prompts['First_Cut'] +
+				System_Prompts['Results'],
+			messages: [
+				{ role: 'user', content: 'Hello! Please cut the following email draft. \n \n' + email }
+			]
+		})
+		email = msg.content[0].text
 
-	// TONE EDIT
-	msg = await anthropic.messages.create({
-		model: 'claude-3-7-sonnet-20250219',
-		max_tokens: 1024,
-		system:
-			System_Prompts['Basic'] +
-			System_Prompts['Mail'] +
-			System_Prompts['Information'] +
-			System_Prompts['Tone_Edit'] +
-			System_Prompts['Results'],
-		messages: [
-			{
-				role: 'user',
-				content: 'Hello! Please edit the tone of the following email draft. \n \n' + email
-			}
-		]
-	})
-	email = msg.content[0].text
+		// FIRST EDIT
+		msg = await anthropic.messages.create({
+			model: 'claude-3-7-sonnet-20250219',
+			max_tokens: 1024,
+			system:
+				System_Prompts['Basic'] +
+				System_Prompts['Mail'] +
+				System_Prompts['Information'] +
+				System_Prompts['First_Edit'] +
+				System_Prompts['Results'],
+			messages: [
+				{ role: 'user', content: 'Hello! Please edit the following email draft. \n \n' + email }
+			]
+		})
+		email = msg.content[0].text
 
-	// FINAL EDIT
-	msg = await anthropic.messages.create({
-		model: 'claude-3-7-sonnet-20250219',
-		max_tokens: 1024,
-		system:
-			System_Prompts['Basic'] +
-			System_Prompts['Mail'] +
-			System_Prompts['Information'] +
-			System_Prompts['Final_Edit'] +
-			System_Prompts['Checklist'] +
-			System_Prompts['Results'],
-		messages: [
-			{ role: 'user', content: 'Hello! Please edit the following email draft. \n \n' + email }
-		]
-	})
-	email = msg.content[0].text
+		// TONE EDIT
+		msg = await anthropic.messages.create({
+			model: 'claude-3-7-sonnet-20250219',
+			max_tokens: 1024,
+			system:
+				System_Prompts['Basic'] +
+				System_Prompts['Mail'] +
+				System_Prompts['Information'] +
+				System_Prompts['Tone_Edit'] +
+				System_Prompts['Results'],
+			messages: [
+				{
+					role: 'user',
+					content: 'Hello! Please edit the tone of the following email draft. \n \n' + email
+				}
+			]
+		})
+		email = msg.content[0].text
 
-	return json({ response: email } as ChatResponse)
+		// FINAL EDIT
+		msg = await anthropic.messages.create({
+			model: 'claude-3-7-sonnet-20250219',
+			max_tokens: 1024,
+			system:
+				System_Prompts['Basic'] +
+				System_Prompts['Mail'] +
+				System_Prompts['Information'] +
+				System_Prompts['Final_Edit'] +
+				System_Prompts['Checklist'] +
+				System_Prompts['Results'],
+			messages: [
+				{ role: 'user', content: 'Hello! Please edit the following email draft. \n \n' + email }
+			]
+		})
+		email = msg.content[0].text
+
+		return json({
+			response: email,
+			apiAvailable: true
+		} as ChatResponse)
+	} catch (err) {
+		console.error('Error in email generation:', err)
+		return json({
+			response:
+				'An error occurred while generating your email. Please try again later or contact support.',
+			apiAvailable: false
+		} as ChatResponse)
+	}
 }
