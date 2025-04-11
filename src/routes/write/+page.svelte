@@ -1,7 +1,7 @@
-<!-- FILEPATH: /Users/joep/dev/github/joepio/pauseai/src/routes/writer/+page.svelte -->
+<!-- FILEPATH: /Users/joep/dev/github/joepio/pauseai/src/routes/write/+page.svelte -->
 <script lang="ts">
 	import { botNameWriter } from '$lib/config'
-	import type { ChatResponse, Message } from '../api/writer/+server'
+	import type { ChatResponse, Message } from '../api/write/+server'
 	import { onMount } from 'svelte'
 
 	let messages: Message[] =
@@ -81,7 +81,7 @@
 		clear_arr(input_arr)
 		loading = true
 
-		const response = await fetch('api/chat', {
+		const response = await fetch('api/write', {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json'
