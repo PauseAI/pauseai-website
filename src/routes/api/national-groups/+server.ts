@@ -91,40 +91,34 @@ export async function GET({ fetch, setHeaders }) {
 		'cache-control': 'public, max-age=3600' // 1 hour in seconds
 	})
 
-	try {
-		const records = await fetchAllPages(
-			fetch,
-			AIRTABLE_URL,
-			fallbackNationalGroups.map((group) => ({
-				id: group.id,
-				fields: {
-					Name: group.name,
-					Notes: group.notes,
-					Leader: group.leader === 'Yes',
-					discord_username: [group.discordUsername],
-					email: [group.email],
-					'Legal entity': group.legalEntity ? 'Yes' : 'No',
-					Overseer: group.overseer === 'Yes',
-					X: group.xLink,
-					Discord: group.discordLink,
-					Whatsapp: group.whatsappLink,
-					website: group.website,
-					linktree: group.linktreeLink,
-					Instagram: group.instagramLink,
-					TikTok: group.tiktokLink
-				}
-			}))
-		)
+	const records = await fetchAllPages(
+		fetch,
+		AIRTABLE_URL,
+		fallbackNationalGroups.map((group) => ({
+			id: group.id,
+			fields: {
+				Name: group.name,
+				Notes: group.notes,
+				Leader: group.leader === 'Yes',
+				discord_username: [group.discordUsername],
+				email: [group.email],
+				'Legal entity': group.legalEntity ? 'Yes' : 'No',
+				Overseer: group.overseer === 'Yes',
+				X: group.xLink,
+				Discord: group.discordLink,
+				Whatsapp: group.whatsappLink,
+				website: group.website,
+				linktree: group.linktreeLink,
+				Instagram: group.instagramLink,
+				TikTok: group.tiktokLink
+			}
+		}))
+	)
 
-		const out: NationalGroup[] = records
-			.map(recordToNationalGroup)
-			// Sort alphabetically by name
-			.sort((a, b) => a.name.localeCompare(b.name))
+	const out: NationalGroup[] = records
+		.map(recordToNationalGroup)
+		// Sort alphabetically by name
+		.sort((a, b) => a.name.localeCompare(b.name))
 
-		return json(out)
-	} catch (e) {
-		console.error('Error fetching national groups:', e)
-		// Return fallback data instead of error
-		return json(fallbackNationalGroups)
-	}
+	return json(out)
 }
