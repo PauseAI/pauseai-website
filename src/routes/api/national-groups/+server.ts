@@ -2,7 +2,7 @@ import type { NationalGroup } from '$lib/types.js'
 import { json } from '@sveltejs/kit'
 import { fetchAllPages } from '$lib/airtable.js'
 
-const AIRTABLE_URL = 'https://api.airtable.com/v0/appWPTGqZmUcs3NWu/National%20Groups'
+const AIRTABLE_URL = 'https://api.airtable.com/v0/appWPTGqZmUcs3NWu/tblCwP5K6ENpR5qrd'
 
 // Fallback data to use in development if Airtable fetch fails
 const fallbackNationalGroups = [
