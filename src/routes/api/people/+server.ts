@@ -15,7 +15,7 @@ const fallbackPeople: Person[] = [
 		title: 'Placeholder',
 		image: 'https://api.dicebear.com/7.x/bottts/svg?seed=fallback1',
 		privacy: false,
-		org: 'International',
+		org: ['International'],
 		checked: true
 	},
 	{
@@ -25,7 +25,7 @@ const fallbackPeople: Person[] = [
 		title: 'of Plays',
 		image: 'https://api.dicebear.com/7.x/bottts/svg?seed=fallback2',
 		privacy: false,
-		org: 'International',
+		org: ['International'],
 		checked: true
 	}
 ]
