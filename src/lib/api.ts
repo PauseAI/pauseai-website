@@ -1,6 +1,4 @@
-import { env } from '$env/dynamic/private'
-
-const { AIRTABLE_API_KEY } = env
+import { AIRTABLE_API_KEY } from '$env/static/private'
 
 /** Helper to check if we have a valid API key */
 export const hasValidApiKey = () => {
