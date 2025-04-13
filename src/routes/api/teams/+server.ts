@@ -5,7 +5,7 @@ import { fetchAllPages } from '$lib/airtable.js'
 /**
  * Fallback teams data to use in development mode if Airtable fetch fails
  */
-const fallbackTeams = [
+const fallbackTeams: Team[] = [
 	{
 		id: 'fallback-stub1',
 		name: '[FALLBACK DATA] Example Team 1',

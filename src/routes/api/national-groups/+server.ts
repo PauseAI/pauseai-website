@@ -5,7 +5,7 @@ import { fetchAllPages } from '$lib/airtable.js'
 const AIRTABLE_URL = 'https://api.airtable.com/v0/appWPTGqZmUcs3NWu/tblCwP5K6ENpR5qrd'
 
 // Fallback data to use in development if Airtable fetch fails
-const fallbackNationalGroups = [
+const fallbackNationalGroups: NationalGroup[] = [
 	{
 		id: 'fallback-stub1',
 		name: '[FALLBACK DATA] Example Group 1',
