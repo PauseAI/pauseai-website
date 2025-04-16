@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { botName } from '$lib/config'
 	import type { ChatResponse } from '../api/write/+server'
-	import { onMount, afterUpdate } from 'svelte'
+	import { onMount } from 'svelte'
 
 	// Define local Message type to include 'progress' role and complete flag
 	type Message = {
@@ -181,10 +181,12 @@
 		const role = (message: Message) => (message.role === 'user' ? 'You' : 'Writer')
 		const text = messages.map((message) => `${role(message)}:\n${message.content}`).join('\n\n')
 		navigator.clipboard.writeText(text)
-		window.alert('Copied to clipboard!')
+		window.alert(
+			"Copied to clipboard\n\nDisclaimer: Check all text content carefully before sending anything!\n\nYou are the one sending the email and expressing an opinion. You've simply had some assistance in writing it."
+		)
 	}
 
-	// Magic test function that populates specific fields and starts the process
+	// Magic test function that populates three specific fields and starts the process - for demo purposes
 	function runTest() {
 		// Clear any existing chat
 		clear()
@@ -199,14 +201,12 @@
 		const objectiveIndex = paragraphText.findIndex((q) => q === 'Clear, singular objective')
 		const outcomeIndex = paragraphText.findIndex((q) => q === 'Specific outcome desired')
 
-		// Populate only the three specified fields
 		input_arr[roleAuthorityIndex] = 'You are writing for a child of about thirteen years old.'
 		input_arr[objectiveIndex] =
 			'Child understands that the current fast worldwide race to build AGI before we know how to make it safe could mean everybody dies. It sounds like science fiction, but experts are increasingly concerned. Of course the grown-ups should do something about this, but because it can be hard for them to admit to themselves that those they love could be in so much danger, then even once they hear about the problem they find reasons not to believe or act. Being sincere, kind and persistent with them that you need protecting can help everybody in the world.'
 		input_arr[outcomeIndex] =
 			"The child isn't too scared, but thinks this is a very important problem all their friends, family and teachers should know about and be actively working to solve."
 
-		// Start the email generation process
 		sendMessage()
 	}
 
@@ -320,7 +320,7 @@
 					messages[assistantIndex].content = data.response
 				} else {
 					// Add new assistant message
-					messages = [...messages, { content: data.response, role: 'assistant' }]
+					messages = [{ content: data.response, role: 'assistant' }, ...messages]
 				}
 			}
 
@@ -379,26 +379,6 @@
 		}
 	})
 
-	afterUpdate(() => {
-		// Direct DOM manipulation to ensure AI-generated classes are applied
-		setTimeout(() => {
-			document.querySelectorAll('textarea').forEach((textarea, i) => {
-				// Get the corresponding value from input_arr
-				const value = input_arr[i]
-
-				// Check if it starts with the robot emoji
-				const shouldHaveClass = value && value.startsWith('🤖')
-
-				// Directly manipulate the class
-				if (shouldHaveClass) {
-					textarea.classList.add('ai-generated')
-				} else {
-					textarea.classList.remove('ai-generated')
-				}
-			})
-		}, 10) // Small timeout to ensure DOM is ready
-	})
-
 	function handleKeyDown(event: KeyboardEvent) {
 		/*
 		if (event.key === 'Enter') {
@@ -415,36 +395,55 @@
 	}
 
 	// Top of the page
-	const personality = {
-		intro: `This webpage lets you write email content (with LLM assistance.) Just answer the questions after researching your target. Any fields left empty or if you use the text "undefined" will prompt the writer to fill in those blanks themselves. Check all outputs carefully, as they're bound to make some mistakes!`,
-		warning: `Note: This feature is currently in beta testing. If you encounter any issues, please contact the site administrator.`
-	}
-
 	const title = `Write Email Content`
+	const description = `This (beta!) webpage lets you write email content (with LLM assistance.)`
+	const warning = `This feature is currently in beta testing. It is accessible, but the URL isn't advertised. Pause AI folk testing, contact the software team on Discord to report issues.`
 </script>
 
 <svelte:head>
 	<title>{title}</title>
 	<meta name="robots" content="noindex, nofollow" />
 	<meta property="og:title" content={title} />
-	<meta property="og:description" content={personality.intro} />
+	<meta property="og:description" content={description} />
 </svelte:head>
 
 <main>
 	<div class="header-section">
 		<h1>{title}</h1>
-		<p>{personality.intro}</p>
 		<div class="warning-box">
-			<p class="warning">{personality.warning}</p>
+			<p class="warning">{warning}</p>
 			{#if !apiAvailable}
 				<p class="warning error">
 					⚠️ API key not available. This feature is currently disabled. Please contact the site
 					administrator.
 				</p>
-			{:else}
-				<p class="warning">This feature requires an API key and is currently available.</p>
 			{/if}
 		</div>
+		<p>
+			"Answer questions / fill fields after researching your target. Undefined fields will be
+			auto-filled. Check the generated email content carefully, as we're bound to make some
+			mistakes!"
+		</p>
+		<p class="notes">
+			The real user interface for entering inputs will surely be refined. For now, scan over the
+			thirty-six(!) imperfectly structured input fields at the end of the page, and fill in the ones
+			that seem the most important. See you back here when done!
+		</p>
+		<p class="notes">
+			You can then ask to write content. The AI assistant will auto-fill any fields you didn't
+			define, based on the ones you did, then proceed to craft an email over a number of steps. The
+			UX for this part is closer to something we would launch but please give the software team
+			further feedback!
+		</p>
+		<p class="notes">
+			This is currently a very general writer. If you want it to write to your dad about puppies or
+			to Trump about how we need to accelerate AI development, it will. We would probably give it
+			more defaults and impose some restrictions in a truly public version.
+		</p>
+		<p>
+			For a very quick demo, you can use the button below - it fills in just three fields with
+			particular hardcoded values, and starts writing content.
+		</p>
 
 		<div class="control-buttons">
 			<button
@@ -479,11 +478,15 @@
 	{/each}
 </main>
 
+<hr />
+
+<p>Here is the grab bag of input fields...</p>
+
 <footer>
 	{#if messages.length > maxMessages}
-		<p>You reached the maximum amount of messages, you can clear the chat</p>
-		<button class="button" on:click={clear}>Clear chat</button>
-		<button class="button" on:click={copy}>Copy chat</button>
+		<p>You reached the maximum amount of messages, you can either copy or reset</p>
+		<button class="button" on:click={copy}>Copy Content</button>
+		<button class="button" on:click={clear}>Reset All</button>
 	{:else}
 		<form on:submit|preventDefault>
 			<!-- Render form sections using the structured data -->
@@ -520,10 +523,6 @@
 			{/each}
 		</form>
 	{/if}
-	<div class="disclaimer">
-		Disclaimer: Check all text content carefully before sending anything! You are the one sending
-		the email and expressing an opinion. You've simply had some assistance in writing it.
-	</div>
 </footer>
 
 <style>
@@ -536,9 +535,7 @@
 	}
 
 	.header-section {
-		margin-bottom: 2rem;
 		border-bottom: 1px solid var(--text-subtle);
-		padding-bottom: 1.5rem;
 	}
 
 	.header-section h1 {
@@ -547,8 +544,12 @@
 		font-size: 2rem;
 	}
 
+	.header-section .notes {
+		font-size: 0.7rem;
+	}
+
 	.warning-box {
-		margin: 1.5rem 0;
+		margin: 0.5rem 0;
 		padding: 0.75rem 1.25rem;
 		background-color: #fff3cd;
 		border: 1px solid #ffeeba;
@@ -602,12 +603,6 @@
 		max-width: 100%;
 	}
 
-	/* Style for AI-generated content */
-	textarea.ai-generated {
-		font-style: italic;
-		border-color: #7aa6ff; /* Highlight border */
-	}
-
 	.control-buttons {
 		display: flex;
 		gap: 1rem;
@@ -640,12 +635,6 @@
 		background-color: var(--brand);
 	}
 
-	.disclaimer {
-		font-size: 0.8rem;
-		color: var(--text-subtle);
-		margin-top: 1rem;
-	}
-
 	.message {
 		display: flex;
 		border-radius: 10px;
@@ -672,7 +661,7 @@
 		margin-right: auto;
 	}
 
-	.progress {
+	:global(.progress) {
 		border-color: var(--text-subtle);
 		background-color: var(--bg-subtle);
 		color: var(--text);
@@ -680,29 +669,38 @@
 		margin: 0.5rem 0;
 		padding: 0.5rem 1rem;
 		text-align: left;
+		font-family: monospace;
 		/* Add the loading animation while in progress */
 		background-image: linear-gradient(90deg, var(--bg) 0%, var(--bg-subtle) 50%, var(--bg) 100%);
 		background-size: 200% 100%;
 		animation: loading 3s linear infinite;
 	}
 
-	.progress ul {
+	:global(.progress ul) {
 		margin: 0.5rem 0;
 		padding-left: 1.5rem;
 		list-style-type: square;
 	}
 
-	.progress li {
+	:global(.progress li) {
 		margin: 0.25rem 0;
 		position: relative;
 	}
 
-	.progress strong {
+	:global(.progress li.current) {
+		font-weight: bold;
+	}
+
+	:global(.progress li.pending) {
+		font-style: italic;
+	}
+
+	:global(.progress strong) {
 		display: block;
 		margin-bottom: 0.5rem;
 		font-size: 1.5em;
 		font-weight: bold;
-		align: center;
+		text-align: center;
 	}
 
 	/* Only apply completed style when the 'Done' text is present */

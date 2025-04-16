@@ -194,14 +194,6 @@ const anthropic = IS_API_AVAILABLE
 		})
 	: null
 
-/*
-const msg = await anthropic.messages.create({
-  model: "claude-3-7-sonnet-20250219",
-  max_tokens: 1024,
-  messages: [{ role: "user", content: "Hello, Claude" }],
-});
-*/
-
 export async function GET() {
 	return json({ apiAvailable: IS_API_AVAILABLE })
 }
@@ -260,12 +252,12 @@ function generateProgressString(state: WriteState): string {
 	const checkmark = '✓'
 
 	// Generate the progress string
-	let progressParts = []
+	let lis = []
 
 	// Completed steps - use descriptions instead of raw step names
 	for (const step of state.completedSteps) {
-		progressParts.push(
-			`${stepDescriptions[step.name]} (${step.durationSec.toFixed(1)}s) ${checkmark}`
+		lis.push(
+			`<li class="complete">${stepDescriptions[step.name]} (${step.durationSec.toFixed(1)}s) ${checkmark}</li>`
 		)
 	}
 
@@ -275,7 +267,7 @@ function generateProgressString(state: WriteState): string {
 		state.step !== 'complete' &&
 		!state.completedSteps.some((s) => s.name === state.currentStep)
 	) {
-		progressParts.push(`${stepDescriptions[state.currentStep]} ${pencil}`)
+		lis.push(`<li class="current">${stepDescriptions[state.currentStep]} ${pencil}</li>`)
 	}
 
 	// Remaining steps - filter out any that are in completed steps or current step
@@ -283,22 +275,17 @@ function generateProgressString(state: WriteState): string {
 	const filteredRemainingSteps = state.remainingSteps.filter(
 		(step) => !completedAndCurrentSteps.includes(step)
 	)
+	lis = lis.concat(
+		filteredRemainingSteps.map((step) => `<li class="pending">${stepDescriptions[step]}</li>`)
+	)
 
-	// Add remaining steps with descriptions
-	progressParts = progressParts.concat(filteredRemainingSteps.map((step) => stepDescriptions[step]))
-
-	// Calculate total time for completed steps
+	const listItems = lis.join('')
 	const totalTime = state.completedSteps.reduce((sum, step) => sum + step.durationSec, 0)
 
-	// Create HTML list for progress
-	const listItems = progressParts.map((part) => `<li>${part}</li>`).join('')
-
-	// Add header based on whether the process is complete
 	if (state.nextStep === null) {
 		// Process is complete
 		return `<strong>Done (${totalTime.toFixed(1)}s):</strong><ul>${listItems}</ul>`
 	} else {
-		// Process is still in progress
 		return `<strong>Progress:</strong><ul>${listItems}</ul>`
 	}
 }
