@@ -1,7 +1,25 @@
 <script lang="ts">
 	import { botName } from '$lib/config'
-	import type { ChatResponse, Message } from '../api/write/+server'
-	import { onMount } from 'svelte'
+	import type { ChatResponse } from '../api/write/+server'
+	import { onMount, afterUpdate } from 'svelte'
+
+	// Define local Message type to include 'progress' role and complete flag
+	type Message = {
+		role: 'user' | 'assistant' | 'system' | 'progress'
+		content: string
+		complete?: boolean // Flag to indicate if processing is complete
+	}
+
+	// Define field section structure
+	interface FieldSection {
+		title: string
+		subsections: FieldSubsection[]
+	}
+
+	interface FieldSubsection {
+		title: string
+		questions: string[]
+	}
 
 	// Use a unique localStorage key to avoid conflicts with other pages
 	const STORAGE_KEY = 'email_writer_messages'
@@ -11,10 +29,142 @@
 
 	// Array for form
 	let input_arr = new Array<string>(35)
-
 	let loading = false
 	let apiAvailable = true // Default to true, will be updated after first API call
 	const maxMessages = 20
+
+	// Organizing the form questions into sections and subsections
+	const formSections: FieldSection[] = [
+		{
+			title: 'Personal Context',
+			subsections: [
+				{
+					title: 'Professional Title and Status',
+					questions: [
+						'Appropriate salutation and level of formality',
+						'Understanding their role and potential authority',
+						'How they might perceive communication'
+					]
+				},
+				{
+					title: 'Prior Interactions/Background',
+					questions: [
+						'Known positions or statements',
+						'Recent actions or achievements relevant to your message'
+					]
+				},
+				{
+					title: 'Communication Preferences',
+					questions: ['Preferred communication style']
+				},
+				{
+					title: 'Potential Motivations',
+					questions: [
+						'What might incentivize them to act',
+						'Their likely concerns or interests',
+						'Potential alignment with your request'
+					]
+				}
+			]
+		},
+		{
+			title: 'Psychological Considerations',
+			subsections: [
+				{
+					title: 'Emotional Landscape',
+					questions: [
+						'Current potential mood or state of mind',
+						'Potential receptiveness to your message',
+						'Avoiding triggers that might create resistance'
+					]
+				},
+				{
+					title: 'Perspective Alignment',
+					questions: [
+						'Shared values or goals',
+						'Ways to frame your message to resonate with them',
+						'Avoiding controversial or dismissive language'
+					]
+				}
+			]
+		},
+		{
+			title: 'Information Needed About the Message',
+			subsections: [
+				{
+					title: 'Content Requirements',
+					questions: [
+						'Clear, singular objective',
+						'Specific outcome desired',
+						'Concrete action requested'
+					]
+				},
+				{
+					title: 'Supporting Evidence',
+					questions: [
+						'Relevant facts',
+						'Context for the request',
+						'Potential impact or consequences'
+					]
+				},
+				{
+					title: 'Logical Structure',
+					questions: [
+						'Chronological flow',
+						'Cause-and-effect relationships',
+						'Anticipated questions or objections'
+					]
+				}
+			]
+		},
+		{
+			title: 'Practical Elements',
+			subsections: [
+				{
+					title: 'Timeframe',
+					questions: [
+						'Urgency of the request',
+						'Specific deadlines',
+						'Expected timeline for response or action'
+					]
+				},
+				{
+					title: 'Supplementary Information',
+					questions: ['Attachments needed', 'Links to additional resources', 'Reference materials']
+				}
+			]
+		},
+		{
+			title: 'Communication Strategy',
+			subsections: [
+				{
+					title: 'Tone Calibration',
+					questions: [
+						"Matching recipient's communication style",
+						'Balancing professionalism and approachability'
+					]
+				},
+				{
+					title: 'Persuasion Techniques',
+					questions: [
+						'Highlighting benefits',
+						'Creating a sense of urgency',
+						'Making the action feel achievable'
+					]
+				}
+			]
+		}
+	]
+
+	// Flatten the questions array for accessing by index
+	const paragraphText: string[] = []
+	formSections.forEach((section) => {
+		section.subsections.forEach((subsection) => {
+			subsection.questions.forEach((question) => {
+				paragraphText.push(question)
+			})
+		})
+	})
 
 	function clear_arr(arr) {
 		for (var i in arr) {
@@ -34,72 +184,74 @@
 		window.alert('Copied to clipboard!')
 	}
 
-	// Storing the questions so I can more easily add them to the input
-	const paragraphText: string[] = [
-		'Appropriate salutation and level of formality',
-		'Understanding their role and potential authority',
-		'How they might perceive communication',
-		'Known positions or statements',
-		'Recent actions or achievements relevant to your message',
-		'Preferred communication style',
-		'What might incentivize them to act',
-		'Their likely concerns or interests',
-		'Potential alignment with your request',
-		'Current potential mood or state of mind',
-		'Potential receptiveness to your message',
-		'Avoiding triggers that might create resistance',
-		'Shared values or goals',
-		'Ways to frame your message to resonate with them',
-		'Avoiding controversial or dismissive language',
-		'Clear, singular objective',
-		'Specific outcome desired',
-		'Concrete action requested',
-		'Relevant facts',
-		'Context for the request',
-		'Potential impact or consequences',
-		'Chronological flow',
-		'Cause-and-effect relationships',
-		'Anticipated questions or objections',
-		'Urgency of the request',
-		'Specific deadlines',
-		'Expected timeline for response or action',
-		'Attachments needed',
-		'Links to additional resources',
-		'Reference materials',
-		"Matching recipient's communication style",
-		'Balancing professionalism and approachability',
-		'Highlighting benefits',
-		'Creating a sense of urgency',
-		'Making the action feel achievable'
-	]
+	// Magic test function that populates specific fields and starts the process
+	function runTest() {
+		// Clear any existing chat
+		clear()
+
+		// Clear all input fields
+		clear_arr(input_arr)
+
+		// Find index for specific fields based on their question text
+		const roleAuthorityIndex = paragraphText.findIndex(
+			(q) => q === 'Understanding their role and potential authority'
+		)
+		const objectiveIndex = paragraphText.findIndex((q) => q === 'Clear, singular objective')
+		const outcomeIndex = paragraphText.findIndex((q) => q === 'Specific outcome desired')
+
+		// Populate only the three specified fields
+		input_arr[roleAuthorityIndex] = 'You are writing for a child of about thirteen years old.'
+		input_arr[objectiveIndex] =
+			'Child understands that the current fast worldwide race to build AGI before we know how to make it safe could mean everybody dies. It sounds like science fiction, but experts are increasingly concerned. Of course the grown-ups should do something about this, but because it can be hard for them to admit to themselves that those they love could be in so much danger, then even once they hear about the problem they find reasons not to believe or act. Being sincere, kind and persistent with them that you need protecting can help everybody in the world.'
+		input_arr[outcomeIndex] =
+			"The child isn't too scared, but thinks this is a very important problem all their friends, family and teachers should know about and be actively working to solve."
+
+		// Start the email generation process
+		sendMessage()
+	}
 
 	async function sendMessage() {
 		let input = ''
 		for (var i in paragraphText) {
 			input = input + paragraphText[i] + ':\n' + input_arr[i] + '\n\n'
 		}
-		console.log(input)
 		messages = [...messages, { content: input, role: 'user' }]
+
 		clear_arr(input_arr)
 		loading = true
 
 		try {
-			const response = await fetch('api/write', {
+			// First request - get initial progress message (no stateToken)
+			const initialResponse = await fetch('api/write', {
 				method: 'POST',
 				headers: {
 					'Content-Type': 'application/json'
 				},
-				body: JSON.stringify(messages)
+				body: JSON.stringify([{ content: input, role: 'user' }])
 			})
 
-			const data = (await response.json()) as ChatResponse
+			const initialData = await initialResponse.json()
 
-			// Update API availability based on response
-			apiAvailable = data.apiAvailable !== false
+			// Add server-generated progress message with complete flag
+			messages = [
+				...messages,
+				{
+					content: initialData.progressString,
+					role: 'progress',
+					complete: initialData.complete // Track completion status
+				}
+			]
 
-			messages = [...messages, { content: data.response, role: 'assistant' }]
-			// set the messages in local storage
-			localStorage.setItem(STORAGE_KEY, JSON.stringify(messages))
+			// Scroll to progress message
+			setTimeout(() => {
+				const progressMessage = document.querySelector('.message.progress')
+				if (progressMessage) {
+					progressMessage.scrollIntoView({ behavior: 'smooth', block: 'center' })
+				}
+			}, 100)
+
+			// Continue with the normal process, but pass the stateToken
+			await processSteps(null, initialData.stateToken)
 		} catch (error) {
 			console.error('Error calling email API:', error)
 			messages = [
@@ -115,6 +267,106 @@
 		}
 	}
 
+	async function processSteps(inputMessages, stateToken = null) {
+		// Set loading indicator
+		loading = true
+
+		try {
+			// Prepare the request body
+			const requestBody = stateToken ? { stateToken } : inputMessages
+
+			// Make the API call
+			const response = await fetch('api/write', {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json'
+				},
+				body: JSON.stringify(requestBody)
+			})
+
+			// Process the response
+			const data = await response.json()
+
+			// Update API availability
+			apiAvailable = data.apiAvailable !== false
+
+			// Show progress if available
+			if (data.progressString) {
+				// Find existing progress message or create one
+				const progressIndex = messages.findIndex((m) => m.role === 'progress')
+				if (progressIndex >= 0) {
+					// Update existing progress message
+					messages[progressIndex].content = data.progressString
+					messages[progressIndex].complete = data.complete // Update complete flag
+				} else {
+					// Add new progress message
+					messages = [
+						...messages,
+						{
+							content: data.progressString,
+							role: 'progress',
+							complete: data.complete // Add complete flag
+						}
+					]
+				}
+			}
+
+			// Update the UI with the current state of the email
+			if (data.response) {
+				// Find existing assistant message or create one
+				const assistantIndex = messages.findIndex((m) => m.role === 'assistant')
+				if (assistantIndex >= 0) {
+					// Update existing assistant message
+					messages[assistantIndex].content = data.response
+				} else {
+					// Add new assistant message
+					messages = [...messages, { content: data.response, role: 'assistant' }]
+				}
+			}
+
+			// Update form fields if we have information from the research step
+			if (data.information) {
+				// Parse the information string to extract field values
+				const lines = data.information.split('\n')
+				let currentField = -1
+
+				for (let line of lines) {
+					// Look for field headers matching our paragraphText array
+					const fieldIndex = paragraphText.findIndex((text) => line.trim().startsWith(text + ':'))
+
+					if (fieldIndex >= 0) {
+						currentField = fieldIndex
+					} else if (currentField >= 0 && line.trim()) {
+						// Only update when there's actual content and the field is empty
+						const lineContent = line.trim()
+						if (lineContent && (!input_arr[currentField] || input_arr[currentField] === '')) {
+							input_arr[currentField] = lineContent
+						}
+					}
+				}
+			}
+
+			// Save messages to localStorage
+			localStorage.setItem(STORAGE_KEY, JSON.stringify(messages))
+
+			// If not complete, continue with the next step
+			if (!data.complete && data.stateToken) {
+				// Short delay to allow UI to update
+				await new Promise((resolve) => setTimeout(resolve, 100))
+
+				// Process the next step
+				await processSteps(null, data.stateToken)
+			} else {
+				// Process is complete, update UI
+				loading = false
+			}
+		} catch (error) {
+			console.error('Error in step processing:', error)
+			loading = false
+			throw error
+		}
+	}
+
 	onMount(async () => {
 		// Check API availability on component mount
 		try {
@@ -125,9 +377,26 @@
 			console.error('Error checking API availability:', error)
 			apiAvailable = false
 		}
+	})
 
-		const footer = document.querySelector('footer')
-		footer?.scrollIntoView({ behavior: 'smooth' })
+	afterUpdate(() => {
+		// Direct DOM manipulation to ensure AI-generated classes are applied
+		setTimeout(() => {
+			document.querySelectorAll('textarea').forEach((textarea, i) => {
+				// Get the corresponding value from input_arr
+				const value = input_arr[i]
+
+				// Check if it starts with the robot emoji
+				const shouldHaveClass = value && value.startsWith('🤖')
+
+				// Directly manipulate the class
+				if (shouldHaveClass) {
+					textarea.classList.add('ai-generated')
+				} else {
+					textarea.classList.remove('ai-generated')
+				}
+			})
+		}, 10) // Small timeout to ensure DOM is ready
 	})
 
 	function handleKeyDown(event: KeyboardEvent) {
@@ -140,13 +409,18 @@
 		*/
 	}
 
+	// Function to get the index of a question across all sections
+	function getQuestionIndex(question: string): number {
+		return paragraphText.findIndex((text) => text === question)
+	}
+
 	// Top of the page
 	const personality = {
 		intro: `This webpage lets you write email content (with LLM assistance.) Just answer the questions after researching your target. Any fields left empty or if you use the text "undefined" will prompt the writer to fill in those blanks themselves. Check all outputs carefully, as they're bound to make some mistakes!`,
 		warning: `Note: This feature is currently in beta testing. If you encounter any issues, please contact the site administrator.`
 	}
 
-	const title = `Write Email content`
+	const title = `Write Email Content`
 </script>
 
 <svelte:head>
@@ -172,35 +446,37 @@
 			{/if}
 		</div>
 
-		<div class="top-buttons">
-			{#if messages.length > 0}
-				<button on:click={clear} class="button button--alt">Clear Form</button>
-				<button on:click={copy} class="button button--alt">Copy Content</button>
-			{/if}
+		<div class="control-buttons">
 			<button
 				on:click={sendMessage}
 				disabled={!apiAvailable || loading}
 				class="button {!apiAvailable ? 'button--disabled' : ''}"
 			>
-				{#if loading}
-					Working...
-				{:else}
-					Write Email Content
-				{/if}
+				Write Content
+			</button>
+			<button on:click={runTest} class="button" disabled={!apiAvailable || loading}>
+				(Demo for beta)
+			</button>
+			<button on:click={copy} class="button" disabled={loading || messages.length === 0}>
+				Copy Content
+			</button>
+			<button on:click={clear} class="button" disabled={loading || messages.length === 0}>
+				Reset All
 			</button>
 		</div>
 	</div>
 
-	{#each messages as { role, content }}
-		<div class="message {role}">
-			<p>{content}</p>
-		</div>
+	{#each messages as { role, content, complete }, i}
+		{#if role === 'progress'}
+			<div class="message progress {complete ? 'completed' : ''}">
+				<p>{@html content}</p>
+			</div>
+		{:else if role === 'assistant'}
+			<div class="message {role}">
+				<p>{@html content}</p>
+			</div>
+		{/if}
 	{/each}
-	{#if loading}
-		<div class="message assistant loading">
-			<p>Thinking...</p>
-		</div>
-	{/if}
 </main>
 
 <footer>
@@ -210,263 +486,38 @@
 		<button class="button" on:click={copy}>Copy chat</button>
 	{:else}
 		<form on:submit|preventDefault>
-			<h1>Personal Context</h1>
-			<h2>Professional Title and Status</h2>
-			<p>Appropriate salutation and level of formality</p>
-			<textarea
-				placeholder="Type here (Question 1)"
-				bind:value={input_arr[0]}
-				on:keydown={handleKeyDown}
-			></textarea>
-			<p>Understanding their role and potential authority</p>
-			<textarea
-				placeholder="Type here (Question 2)"
-				bind:value={input_arr[1]}
-				on:keydown={handleKeyDown}
-			></textarea>
-			<p>How they might perceive communication</p>
-			<textarea
-				placeholder="Type here (Question 3)"
-				bind:value={input_arr[2]}
-				on:keydown={handleKeyDown}
-			></textarea>
+			<!-- Render form sections using the structured data -->
+			{#each formSections as section, sectionIndex}
+				<h1>{section.title}</h1>
 
-			<h2>Prior Interactions/Background</h2>
-			<p>Known positions or statements</p>
-			<textarea
-				placeholder="Type here (Question 4)"
-				bind:value={input_arr[3]}
-				on:keydown={handleKeyDown}
-			></textarea>
-			<p>Recent actions or achievements relevant to your message</p>
-			<textarea
-				placeholder="Type here (Question 5)"
-				bind:value={input_arr[4]}
-				on:keydown={handleKeyDown}
-			></textarea>
+				{#each section.subsections as subsection, subsectionIndex}
+					<h2>{subsection.title}</h2>
 
-			<h2>Communication Preferences</h2>
-			<p>Preferred communication style</p>
-			<textarea
-				placeholder="Type here (Question 6)"
-				bind:value={input_arr[5]}
-				on:keydown={handleKeyDown}
-			></textarea>
-
-			<h2>Potential Motivations</h2>
-			<p>What might incentivize them to act</p>
-			<textarea
-				placeholder="Type here (Question 7)"
-				bind:value={input_arr[6]}
-				on:keydown={handleKeyDown}
-			></textarea>
-			<p>Their likely concerns or interests</p>
-			<textarea
-				placeholder="Type here (Question 8)"
-				bind:value={input_arr[7]}
-				on:keydown={handleKeyDown}
-			></textarea>
-			<p>Potential alignment with your request</p>
-			<textarea
-				placeholder="Type here (Question 9)"
-				bind:value={input_arr[8]}
-				on:keydown={handleKeyDown}
-			></textarea>
-
-			<h1>Psychological Considerations</h1>
-			<h2>Emotional Landscape</h2>
-			<p>Current potential mood or state of mind</p>
-			<textarea
-				placeholder="Type here (Question 10)"
-				bind:value={input_arr[9]}
-				on:keydown={handleKeyDown}
-			></textarea>
-			<p>Potential receptiveness to your message</p>
-			<textarea
-				placeholder="Type here (Question 11)"
-				bind:value={input_arr[10]}
-				on:keydown={handleKeyDown}
-			></textarea>
-			<p>Avoiding triggers that might create resistance</p>
-			<textarea
-				placeholder="Type here (Question 12)"
-				bind:value={input_arr[11]}
-				on:keydown={handleKeyDown}
-			></textarea>
-
-			<h2>Perspective Alignment</h2>
-			<p>Shared values or goals</p>
-			<textarea
-				placeholder="Type here (Question 13)"
-				bind:value={input_arr[12]}
-				on:keydown={handleKeyDown}
-			></textarea>
-			<p>Ways to frame your message to resonate with them</p>
-			<textarea
-				placeholder="Type here (Question 14)"
-				bind:value={input_arr[13]}
-				on:keydown={handleKeyDown}
-			></textarea>
-			<p>Avoiding controversial or dismissive language</p>
-			<textarea
-				placeholder="Type here (Question 15)"
-				bind:value={input_arr[14]}
-				on:keydown={handleKeyDown}
-			></textarea>
-
-			<h1>Information Needed About the Message</h1>
-			<h2>Content Requirements</h2>
-			<h3>Precise Purpose</h3>
-			<p>Clear, singular objective</p>
-			<textarea
-				placeholder="Type here (Question 16)"
-				bind:value={input_arr[15]}
-				on:keydown={handleKeyDown}
-			></textarea>
-			<p>Specific outcome desired</p>
-			<textarea
-				placeholder="Type here (Question 17)"
-				bind:value={input_arr[16]}
-				on:keydown={handleKeyDown}
-			></textarea>
-			<p>Concrete action requested</p>
-			<textarea
-				placeholder="Type here (Question 18)"
-				bind:value={input_arr[17]}
-				on:keydown={handleKeyDown}
-			></textarea>
-
-			<h3>Supporting Evidence</h3>
-			<p>Relevant facts</p>
-			<textarea
-				placeholder="Type here (Question 19)"
-				bind:value={input_arr[18]}
-				on:keydown={handleKeyDown}
-			></textarea>
-			<p>Context for the request</p>
-			<textarea
-				placeholder="Type here (Question 20)"
-				bind:value={input_arr[19]}
-				on:keydown={handleKeyDown}
-			></textarea>
-			<p>Potential impact or consequences</p>
-			<textarea
-				placeholder="Type here (Question 21)"
-				bind:value={input_arr[20]}
-				on:keydown={handleKeyDown}
-			></textarea>
-
-			<h3>Logical Structure</h3>
-			<p>Chronological flow</p>
-			<textarea
-				placeholder="Type here (Question 22)"
-				bind:value={input_arr[21]}
-				on:keydown={handleKeyDown}
-			></textarea>
-			<p>Cause-and-effect relationships</p>
-			<textarea
-				placeholder="Type here (Question 23)"
-				bind:value={input_arr[22]}
-				on:keydown={handleKeyDown}
-			></textarea>
-			<p>Anticipated questions or objections</p>
-			<textarea
-				placeholder="Type here (Question 24)"
-				bind:value={input_arr[23]}
-				on:keydown={handleKeyDown}
-			></textarea>
-
-			<h2>Practical Elements</h2>
-			<h3>Timeframe</h3>
-			<p>Urgency of the request</p>
-			<textarea
-				placeholder="Type here (Question 25)"
-				bind:value={input_arr[24]}
-				on:keydown={handleKeyDown}
-			></textarea>
-			<p>Specific deadlines</p>
-			<textarea
-				placeholder="Type here (Question 26)"
-				bind:value={input_arr[25]}
-				on:keydown={handleKeyDown}
-			></textarea>
-			<p>Expected timeline for response or action</p>
-			<textarea
-				placeholder="Type here (Question 27)"
-				bind:value={input_arr[26]}
-				on:keydown={handleKeyDown}
-			></textarea>
-
-			<h3>Supplementary Information</h3>
-			<p>Attachments needed</p>
-			<textarea
-				placeholder="Type here (Question 28)"
-				bind:value={input_arr[27]}
-				on:keydown={handleKeyDown}
-			></textarea>
-			<p>Links to additional resources</p>
-			<textarea
-				placeholder="Type here (Question 29)"
-				bind:value={input_arr[28]}
-				on:keydown={handleKeyDown}
-			></textarea>
-			<p>Reference materials</p>
-			<textarea
-				placeholder="Type here (Question 30)"
-				bind:value={input_arr[29]}
-				on:keydown={handleKeyDown}
-			></textarea>
-
-			<h1>Communication Strategy</h1>
-			<h2>Tone Calibration</h2>
-			<p>Matching recipient's communication style</p>
-			<textarea
-				placeholder="Type here (Question 31)"
-				bind:value={input_arr[30]}
-				on:keydown={handleKeyDown}
-			></textarea>
-			<p>Balancing professionalism and approachability</p>
-			<textarea
-				placeholder="Type here (Question 32)"
-				bind:value={input_arr[31]}
-				on:keydown={handleKeyDown}
-			></textarea>
-
-			<h2>Persuasion Techniques</h2>
-			<p>Highlighting benefits</p>
-			<textarea
-				placeholder="Type here (Question 33)"
-				bind:value={input_arr[32]}
-				on:keydown={handleKeyDown}
-			></textarea>
-			<p>Creating a sense of urgency</p>
-			<textarea
-				placeholder="Type here (Question 34)"
-				bind:value={input_arr[33]}
-				on:keydown={handleKeyDown}
-			></textarea>
-			<p>Making the action feel achievable</p>
-			<textarea
-				placeholder="Type here (Question 35)"
-				bind:value={input_arr[34]}
-				on:keydown={handleKeyDown}
-			></textarea>
-
-			<div class="buttons">
-				<button on:click={clear} class="button button--alt">Clear Form</button>
-				<button on:click={copy} class="button button--alt">Copy Content</button>
-				<button
-					on:click={sendMessage}
-					disabled={!apiAvailable || loading}
-					class="button {!apiAvailable ? 'button--disabled' : ''}"
-				>
-					{#if loading}
-						Working...
-					{:else}
-						Write Email Content
+					<!-- Special handling for 'Content Requirements' to add an h3 for 'Precise Purpose' -->
+					{#if subsection.title === 'Content Requirements'}
+						<h3>Precise Purpose</h3>
 					{/if}
-				</button>
-			</div>
+
+					{#each subsection.questions as question, questionIndex}
+						<!-- Calculate the global index for this question -->
+						{@const globalIndex = getQuestionIndex(question)}
+
+						<!-- Add special h3 headers for specific subsections -->
+						{#if subsection.title === 'Supporting Evidence' && questionIndex === 0}
+							<h3>Supporting Evidence</h3>
+						{:else if subsection.title === 'Logical Structure' && questionIndex === 0}
+							<h3>Logical Structure</h3>
+						{/if}
+
+						<p>{question}</p>
+						<textarea
+							placeholder="Type here (Question {globalIndex + 1})"
+							bind:value={input_arr[globalIndex]}
+							on:keydown={handleKeyDown}
+						></textarea>
+					{/each}
+				{/each}
+			{/each}
 		</form>
 	{/if}
 	<div class="disclaimer">
@@ -522,18 +573,21 @@
 		align-items: center;
 	}
 
-	.button--disabled {
+	.button--disabled,
+	button[disabled] {
 		opacity: 0.5;
 		cursor: not-allowed;
+		pointer-events: none; /* Prevents hover effects */
+		background-color: #cccccc !important; /* Override other background colors */
+		color: #666666 !important; /* Darker text */
+		border: 1px solid #999999;
 	}
 
 	form {
 		display: flex;
 		flex-direction: column;
-		gap: 1rem;
 		width: 100%;
 		max-width: 100%;
-		/*margin-left: auto;*/
 	}
 
 	textarea {
@@ -545,21 +599,27 @@
 		font-size: var(--font-size);
 		box-sizing: border-box;
 		font-family: var(--font-body);
-		margin-top: 1rem;
 		max-width: 100%;
-		/*margin-left: auto;*/
 	}
 
-	.buttons {
+	/* Style for AI-generated content */
+	textarea.ai-generated {
+		font-style: italic;
+		border-color: #7aa6ff; /* Highlight border */
+	}
+
+	.control-buttons {
 		display: flex;
 		gap: 1rem;
-		align-items: end;
-		align-self: flex-end;
+		align-items: center;
+		margin: 0.5rem 0;
+		flex-wrap: wrap;
 	}
 
+	/* Common button styles across all buttons */
 	button {
 		background-color: var(--brand);
-		color: var(--background);
+		color: var(--bg);
 		border: none;
 		border-radius: 10px;
 		padding: 10px;
@@ -569,23 +629,15 @@
 		display: flex;
 		align-self: flex-end;
 		font-weight: bold;
-		color: var(--bg);
-	}
-
-	.button--alt {
-		background-color: var(--background);
-		color: var(--text);
+		transition: background-color 0.2s ease;
 	}
 
 	button:hover {
 		background-color: var(--brand-subtle);
 	}
+
 	button:active {
 		background-color: var(--brand);
-	}
-
-	.button--alt:hover {
-		background-color: var(--bg-subtle);
 	}
 
 	.disclaimer {
@@ -618,6 +670,48 @@
 		flex-direction: row;
 		justify-content: flex-start;
 		margin-right: auto;
+	}
+
+	.progress {
+		border-color: var(--text-subtle);
+		background-color: var(--bg-subtle);
+		color: var(--text);
+		width: 100%;
+		margin: 0.5rem 0;
+		padding: 0.5rem 1rem;
+		text-align: left;
+		/* Add the loading animation while in progress */
+		background-image: linear-gradient(90deg, var(--bg) 0%, var(--bg-subtle) 50%, var(--bg) 100%);
+		background-size: 200% 100%;
+		animation: loading 3s linear infinite;
+	}
+
+	.progress ul {
+		margin: 0.5rem 0;
+		padding-left: 1.5rem;
+		list-style-type: square;
+	}
+
+	.progress li {
+		margin: 0.25rem 0;
+		position: relative;
+	}
+
+	.progress strong {
+		display: block;
+		margin-bottom: 0.5rem;
+		font-size: 1.5em;
+		font-weight: bold;
+		align: center;
+	}
+
+	/* Only apply completed style when the 'Done' text is present */
+	.progress.completed {
+		animation: none;
+		background-image: none;
+		background-color: #c0ffc0; /* Light green background */
+		border-color: #c3e6cb;
+		color: #155724;
 	}
 
 	.loading {
