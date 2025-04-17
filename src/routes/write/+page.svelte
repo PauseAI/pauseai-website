@@ -59,11 +59,12 @@
 				},
 				{
 					title: 'Potential Motivations',
+					questions: ['What might incentivize them to act', 'Their likely concerns or interests'] /*
 					questions: [
 						'What might incentivize them to act',
 						'Their likely concerns or interests',
 						'Potential alignment with your request'
-					]
+					]*/
 				}
 			]
 		},
@@ -73,10 +74,14 @@
 				{
 					title: 'Emotional Landscape',
 					questions: [
+						'Potential receptiveness to your message',
+						'Avoiding triggers that might create resistance'
+					] /*
+					questions: [
 						'Current potential mood or state of mind',
 						'Potential receptiveness to your message',
 						'Avoiding triggers that might create resistance'
-					]
+					]*/
 				},
 				{
 					title: 'Perspective Alignment',
@@ -93,11 +98,12 @@
 			subsections: [
 				{
 					title: 'Content Requirements',
+					questions: ['Specific outcome desired', 'Concrete action requested'] /*
 					questions: [
 						'Clear, singular objective',
 						'Specific outcome desired',
 						'Concrete action requested'
-					]
+					]*/
 				},
 				{
 					title: 'Supporting Evidence',
@@ -122,15 +128,17 @@
 			subsections: [
 				{
 					title: 'Timeframe',
+					questions: ['Urgency of the request', 'Specific deadlines'] /*
 					questions: [
 						'Urgency of the request',
 						'Specific deadlines',
 						'Expected timeline for response or action'
-					]
+					]*/
 				},
 				{
 					title: 'Supplementary Information',
-					questions: ['Attachments needed', 'Links to additional resources', 'Reference materials']
+					questions: ['Attachments needed', 'Links to additional resources']
+					//questions: ['Attachments needed', 'Links to additional resources', 'Reference materials']
 				}
 			]
 		},
@@ -426,7 +434,7 @@
 		</p>
 		<p class="notes">
 			The real user interface for entering inputs will surely be refined. For now, scan over the
-			thirty-six(!) imperfectly structured input fields at the end of the page, and fill in the ones
+			thirty(!) imperfectly structured input fields at the end of the page, and fill in the ones
 			that seem the most important. See you back here when done!
 		</p>
 		<p class="notes">
