@@ -206,7 +206,7 @@
 		const roleAuthorityIndex = paragraphText.findIndex(
 			(q) => q === 'Understanding their role and potential authority'
 		)
-		const objectiveIndex = paragraphText.findIndex((q) => q === 'Clear, singular objective')
+		const objectiveIndex = paragraphText.findIndex((q) => q === 'Concrete action requested')
 		const outcomeIndex = paragraphText.findIndex((q) => q === 'Specific outcome desired')
 
 		input_arr[roleAuthorityIndex] = 'You are writing for a child of about thirteen years old.'
