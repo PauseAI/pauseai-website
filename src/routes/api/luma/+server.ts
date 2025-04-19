@@ -1,5 +1,7 @@
 import * as luma from '$lib/clients/luma'
 
+export const prerender = false
+
 const CALENDAR_ID = 'cal-E1qhLPs5IvlQr8S'
 
 export async function GET({ setHeaders }) {
