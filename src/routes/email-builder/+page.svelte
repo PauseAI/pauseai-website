@@ -3,7 +3,7 @@
 	import Button from '$lib/components/Button.svelte'
 	// Risks
 	import Xrisk from './concerns/xrisk.svelte'
-	import Bio from './concerns/bio.svelte'
+	/* import Bio from './concerns/bio.svelte' */
 	import Cyber from './concerns/cyber.svelte'
 	// Actions
 	import Meeting from './actions/meeting.svelte'
@@ -14,8 +14,9 @@
 	import * as clipboard from 'clipboard-polyfill'
 	import toast from 'svelte-french-toast'
 	import ExternalLink from '$lib/components/custom/a.svelte'
+	import Card from '$lib/components/Card.svelte'
+	import { type ComponentType } from 'svelte'
 
-	let top: HTMLHeadingElement
 	const { title, description, date } = meta
 
 	$: name = ''
@@ -24,7 +25,7 @@
 
 	function copyHTMLWithoutStyles() {
 		var element = document.getElementById(letterId)
-		var clonedElement = element?.cloneNode(true)
+		var clonedElement = element?.cloneNode(true) as HTMLElement
 		clipboard
 			.write([
 				new clipboard.ClipboardItem({
@@ -78,7 +79,7 @@
 
 	type Section = {
 		name: string
-		section: any
+		section: ComponentType
 	}
 </script>
 
@@ -99,6 +100,14 @@
 	<li>
 		<b>It's the medium for the pros.</b> Politicians, journalists, lobbyists - all of them use email.
 		If you want to be taken seriously, you should use email too.
+	</li>
+	<li>
+		<b>Making AI Risk "common knowledge" is key.</b> We need to get everyone to know that everyone
+		else knows about AI risk, so it becomes "common knowledge". As well as, convincing influential
+		people, like politicians, journalists, and lobbyists. (E.g. See Connor's explanation as to why
+		making AI Risk "common knowledge" is super important
+		<ExternalLink href={'https://youtu.be/OUjnVeydhCM?t=1969'}>here</ExternalLink> and
+		<ExternalLink href={'https://youtu.be/1j--6JYRLVk?t=5716'}>here</ExternalLink>.)
 	</li>
 	<li>
 		<b>No social pressure.</b> If you post something publicly, a politician might be hesitant to respond
@@ -124,7 +133,7 @@
 	<li>
 		<b>Someone who politically represents you.</b> Maybe a politician in parliament from the party
 		that you voted for. <ExternalLink
-			href={'https://www.campaignforaisafety.org/politician/#find-your-politician-here'}
+			href={'https://github.com/Campaign-for-AI-Safety-archive/.github/tree/main/email-templates#email-your-politician'}
 			>Find their email address</ExternalLink
 		>.
 	</li>
@@ -200,66 +209,72 @@
 
 <h2>Result</h2>
 <p>You can edit the message directly in the browser.</p>
-<div class="letter" id={letterId} contenteditable="true">
-	<p>Dear {name || '__ENTER_NAME__'},</p>
-	<p>
-		First of all, thank you very much for everything you have done for __THING__. I am emailing you
-		today to bring an issue to your attention, in which I believe __COUNTRY__ and you in particular
-		can play a very important role. The issue is the existential threat of artificial intelligence.
-	</p>
+<div>
+	<Card className="letter">
+		<div id={letterId} contenteditable="true">
+			<p>Dear {name || '__ENTER_NAME__'},</p>
+			<p>
+				First of all, thank you very much for everything you have done for __THING__. I am emailing
+				you today to bring an issue to your attention, in which I believe __COUNTRY__ and you in
+				particular can play a very important role. The issue is the existential threat of artificial
+				intelligence.
+			</p>
 
-	<svelte:component this={selectedConcern.section} />
+			<svelte:component this={selectedConcern.section} />
 
-	<p>
-		The advancements in the AI landscape have progressed much faster than anticipated. In 2020, it
-		was
-		<a href="https://www.metaculus.com/questions/3479/date-weakly-general-ai-is-publicly-known"
-			>estimated</a
-		>
-		that an AI would pass university entrance exams by 2050. This goal was achieved in March 2023 by
-		the system GPT-4 from OpenAI. These massive, unexpected leaps have prompted many experts to request
-		a pause in AI development through an open letter to major AI companies. The
-		<a href="https://futureoflife.org/open-letter/pause-giant-ai-experiments/">letter</a>
-		has been signed over 33,000 times so far, including many AI researchers and tech figures.
-	</p>
+			<p>
+				The advancements in the AI landscape have progressed much faster than anticipated. In 2020,
+				it was
+				<a href="https://www.metaculus.com/questions/3479/date-weakly-general-ai-is-publicly-known"
+					>estimated</a
+				>
+				that an AI would pass university entrance exams by 2050. This goal was achieved in March 2023
+				by the system GPT-4 from OpenAI. These massive, unexpected leaps have prompted many experts to
+				request a pause in AI development through an open letter to major AI companies. The
+				<a href="https://futureoflife.org/open-letter/pause-giant-ai-experiments/">letter</a>
+				has been signed over 33,000 times so far, including many AI researchers and tech figures.
+			</p>
 
-	<p>
-		Unfortunately, it seems that companies are not willing to jeopardise their competitive position
-		by voluntarily halting development. A pause would need to be imposed by a government. Luckily,
-		there seems to be broad support for slowing down AI development. A recent
-		<a
-			href="https://www.vox.com/future-perfect/2023/9/19/23879648/americans-artificial-general-intelligence-ai-policy-poll"
-			>poll</a
-		>
-		indicates that 63% of American support regulations to prevent AI companies from building superintelligent
-		AI. At the national level, a pause is also challenging because countries have incentives to not fall
-		behind in AI capabilities. That's why we need an international solution.
-	</p>
+			<p>
+				Unfortunately, it seems that companies are not willing to jeopardise their competitive
+				position by voluntarily halting development. A pause would need to be imposed by a
+				government. Luckily, there seems to be broad support for slowing down AI development. A
+				recent
+				<a
+					href="https://www.vox.com/future-perfect/2023/9/19/23879648/americans-artificial-general-intelligence-ai-policy-poll"
+					>poll</a
+				>
+				indicates that 63% of American support regulations to prevent AI companies from building superintelligent
+				AI. At the national level, a pause is also challenging because countries have incentives to not
+				fall behind in AI capabilities. That's why we need an international solution.
+			</p>
 
-	<p>
-		The UK organised an AI Safety Summit on November 1st and 2nd at Bletchley Park. We hoped that
-		during this summit, leaders will work towards sensible solutions that prevent the very worst of
-		the risks that AI poses. The Summit did not lead to any international agreement or policy. We
-		have seen proposals being written by the
-		<a href="https://twitter.com/SenBlumenthal/status/1700147410880569475">US Senate</a>, and even
-		among AI company CEOs, there is
-		<a
-			href="https://www.pbs.org/newshour/politics/watch-overwhelming-consensus-for-artificial-intelligence-regulation-musk-says-after-senate-tech-meeting"
-			>“overwhelming consensus”</a
-		>
-		that regulation is needed. Unfortunately,
-		<a href="https://twitter.com/DanielColson6/status/1704976418596352342">none</a>
-		of the existing proposals would do anything to slow down or prevent a superintelligent AI from being
-		created. We cannot expect that individual countries implement regulations that would slow down AI
-		development, as the incentives to race ahead are too high. We need international coordination, we
-		need politicians to initialize treaty negotiations.
-	</p>
+			<p>
+				The UK organised an AI Safety Summit on November 1st and 2nd at Bletchley Park. We hoped
+				that during this summit, leaders will work towards sensible solutions that prevent the very
+				worst of the risks that AI poses. The Summit did not lead to any international agreement or
+				policy. We have seen proposals being written by the
+				<a href="https://twitter.com/SenBlumenthal/status/1700147410880569475">US Senate</a>, and
+				even among AI company CEOs, there is
+				<a
+					href="https://www.pbs.org/newshour/politics/watch-overwhelming-consensus-for-artificial-intelligence-regulation-musk-says-after-senate-tech-meeting"
+					>“overwhelming consensus”</a
+				>
+				that regulation is needed. Unfortunately,
+				<a href="https://twitter.com/DanielColson6/status/1704976418596352342">none</a>
+				of the existing proposals would do anything to slow down or prevent a superintelligent AI from
+				being created. We cannot expect that individual countries implement regulations that would slow
+				down AI development, as the incentives to race ahead are too high. We need international coordination,
+				we need politicians to initialize treaty negotiations.
+			</p>
 
-	<svelte:component this={selectedAction.section} />
+			<svelte:component this={selectedAction.section} />
 
-	<p>Best regards,</p>
+			<p>Best regards,</p>
 
-	<p>__YOUR NAME__</p>
+			<p>__YOUR NAME__</p>
+		</div>
+	</Card>
 </div>
 
 <div class="actionBar">
@@ -272,15 +287,13 @@
 		margin-left: 2rem;
 	}
 
-	.letter {
+	div :global(.letter) {
 		/* Edit mouse cursor, indicate editable */
 		cursor: text;
 		/* make it lookt like a letter! */
-		background-color: var(--bg);
 		padding: 1rem;
 		margin: 1rem;
 		/* shadow */
-		box-shadow: 0 0 10px var(--text);
 		font-family: 'Times New Roman', Times, serif;
 	}
 
@@ -318,7 +331,6 @@
 		color: var(--bg);
 	}
 
-	select,
 	input {
 		padding: 0.3rem 0.5rem;
 		border: var(--brand) 2px solid;

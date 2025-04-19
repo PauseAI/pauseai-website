@@ -96,7 +96,7 @@ Our first annual report will be published after the first fiscal year ends on 31
 ## PauseIA (France)
 
 - Name: PauseIA
-- Will be incorporated soon
+- It will be incorporated soon
 - Director: [Maxime Fournes](mailto:maxime@pauseai.info)
 
 ## Relationship between entities
@@ -117,5 +117,5 @@ The national/local entities are responsible for:
 
 - Physical events and protests.
 - Getting local [media coverage](/).
-- Local social media channels (e.g. [PauseAI UK](https://twitter.com/PauseAI_UK) and [PauseAI US](https://twitter.com/PauseAIus) twitter)
+- Local social media channels (e.g. [PauseAI UK](https://twitter.com/PauseAI_UK) and [PauseAI US](https://twitter.com/PauseAIus) Twitter)
 - National-level policy work & feedback.

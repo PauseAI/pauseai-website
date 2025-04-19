@@ -1,12 +1,14 @@
 <script lang="ts">
-	import london from './../../assets/protests/london.jpeg'
-	import denHaag from './../../assets/protests/den-haag.jpeg'
-	import sf from './../../assets/protests/san-francisco.jpeg'
+	import london from '$assets/protests/london.jpeg?enhanced'
+	import denHaag from '$assets/protests/den-haag.jpeg?enhanced'
+	import sf from '$assets/protests/san-francisco.jpeg?enhanced'
 	import { onMount } from 'svelte'
+	import { initializeCqwResizeObserver } from '$lib/container-query-units'
 
 	let currentImageIndex = 0
 	const images = [london, denHaag, sf]
 	let isMobile = false
+	let tagline: HTMLDivElement
 
 	const checkMobile = () => {
 		isMobile = window.innerWidth <= 768
@@ -23,9 +25,15 @@
 			}
 		}, 5000)
 
+		let observer: ResizeObserver | null = null
+		if (!CSS.supports('container-type: inline-size')) {
+			observer = initializeCqwResizeObserver(tagline)
+		}
+
 		return () => {
 			clearInterval(interval)
 			window.removeEventListener('resize', checkMobile)
+			observer?.disconnect()
 		}
 	})
 </script>
@@ -33,15 +41,17 @@
 <div class="hero">
 	{#if isMobile}
 		{#each images as image, i}
-			<img src={image} alt="" class:active={currentImageIndex === i} />
+			<enhanced:img src={image} sizes="100vw" alt="" class:active={currentImageIndex === i} />
 		{/each}
 	{:else}
-		<img src={london} alt="" />
-		<img src={denHaag} alt="" />
-		<img src={sf} alt="" />
+		<enhanced:img src={london} sizes="100vw" alt="" />
+		<enhanced:img src={denHaag} sizes="100vw" alt="" />
+		<enhanced:img src={sf} sizes="100vw" alt="" />
 	{/if}
 	<div class="overlay"></div>
-	<h2>DON'T LET AI COMPANIES <br />GAMBLE WITH OUR FUTURE</h2>
+	<div class="tagline" bind:this={tagline}>
+		<h2>DON'T LET AI COMPANIES GAMBLE WITH OUR FUTURE</h2>
+	</div>
 	<div class="actions">
 		<a href="/join">Join</a>
 		<a href="/donate">Donate</a>
@@ -49,25 +59,30 @@
 </div>
 
 <style>
-	h2 {
+	.tagline {
 		background-color: black;
-		padding: 2rem;
 		position: absolute;
-		text-transform: uppercase;
 		top: 50%;
 		left: 50%;
 		transform: translate(-50%, -50%);
-		color: white;
-		font-size: clamp(1.6rem, 4vw, 3rem);
-		text-align: center;
+		width: clamp(20rem, 45vw, 100%);
+		container-type: inline-size;
+		--cqw: 1cqw;
 	}
 
-	@media (max-width: 768px) {
-		h2 {
-			transform: translate(-50%, -50%);
-			width: 17rem;
-			max-width: 100%;
-			padding: 1.5rem;
+	.tagline h2 {
+		text-transform: uppercase;
+		color: white;
+		font-size: calc(8.75 * var(--cqw));
+		text-align: center;
+		margin: 0;
+		padding: calc(6.5 * var(--cqw));
+	}
+
+	@media (max-width: 850px) {
+		.tagline h2 {
+			font-size: calc(8.5 * var(--cqw));
+			padding: calc(7.5 * var(--cqw));
 		}
 	}
 
@@ -80,8 +95,6 @@
 		max-width: 100vw;
 		margin-left: calc(-50vw + 50%);
 		margin-right: calc(-50vw + 50%);
-		margin-top: calc(var(--nav-height) * -1);
-		margin-bottom: 5rem;
 	}
 
 	.overlay {
@@ -123,7 +136,7 @@
 		scale: 0.95;
 	}
 
-	img {
+	.hero :global(img) {
 		/* 2x the blur */
 		width: calc(100% + 10px);
 		height: 100%;
@@ -136,7 +149,7 @@
 			display: block;
 		}
 
-		img {
+		.hero :global(img) {
 			position: absolute;
 			opacity: 0;
 			transition:
@@ -145,7 +158,7 @@
 			transform: scale(1.1);
 		}
 
-		img.active {
+		.hero :global(img.active) {
 			opacity: 1;
 			transform: scale(1);
 		}

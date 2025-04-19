@@ -24,8 +24,8 @@ Also, from protesting and lobbying to convincing people on power, to make a trea
 
 ## Pausing for too short / only for 6 months
 
-The pause we propose is of indeterminate length. We shouldn't unpause until there is a good enough consensus that we know how to develop aligned AIs, no matter how powerful they are, and that we have the systems in place to do it carefully and democratically.
-It is NOT like the [six-month pause asked by the open letter published by the Future of Life Institute](https://futureoflife.org/open-letter/pause-giant-ai-experiments/).
+The pause we propose is of indeterminate length. We shouldn't unpause until there is a broad consensus that we know how to develop frontier AIs safely. Technically, and democratically speaking.
+Our proposal is NOT "for at least 6 months" like the [open letter published by the Future of Life Institute](https://futureoflife.org/open-letter/pause-giant-ai-experiments/).
 
 ## Pausing for too long
 
@@ -36,8 +36,6 @@ If that happens, we will never reap the benefits of AI, and in the meantime, we 
 We can address this risk by clearly stating under what conditions AI development should resume.
 As we said, we suggest that AI development should resume when building provably safe AI becomes possible.
 Additionally, we only propose to ban the development of very specific kinds of models: the largest, general models.
-In the meantime there's other ways we could achieve more intelligence: more transparent AI paradigms, brain-computer interfaces, whole brain emulations, neural enhancements, growth in collective intelligence, genetic editing and selection, and maybe more.
-Those paths to a greater intelligence could bring us the benefits that AGI promises without so many of its risks.
 
 ## Centralization of AI might make takeover risks worse
 

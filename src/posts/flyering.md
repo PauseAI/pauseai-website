@@ -12,7 +12,7 @@ description: How to distribute flyers for PauseAI
 
 - Find existing materials in [the Flyers folder](https://drive.google.com/drive/folders/1MAU_bq31bEuylhzkt2NkZ_XRY6TlKaqZ?usp=drive_link).
 - Existing flyers can be edited to be more specific to your purpose. Use the [Figma template](https://www.figma.com/design/iQ4PHQTi1vAVmT9Lckazqt/PauseAI-designs---editable) to create your own.
-- Add the time and place of your meeting to the flyer
+- Add the time and place of your meeting to the flyer. We recommend the weekend next to the flyering session.
 - Flyers should have clear calls to action
   - (Learn what YOU can do!", "Find out how YOU can help!", "YOU can make a difference!", "Get involved!")
 
@@ -33,6 +33,7 @@ There are many, many options for printing flyers, depending on budget constraint
   - It gives those who read it a chance to choose to engage you on their own
   - It can make people think, even if they haven’t engaged with you
   - See [PauseAI Flyering Sign (3x4).pdf](https://drive.google.com/file/d/1DNjgsD-QTL6Xf_MI_0COiYOCO3rVhNZ2/view?usp=drive_link)
+- It's good to have a form that people who are interested in what you have to say and engage in a conversation can sign on the spot. If people fill out their info, it's much easier to contact them, invite them to events, and organize a local group. You can do this with a clipboard, pen, and printed sign-up form.
 - If you have two or more volunteers, you can split up the flyering effort to cover more area, or you can set up a table (where permitted)
 - It’s useful to have pre-generated and labeled QR codes in an album on your phone or in a printed trapper for any digital resources you might want to point people to during conversations (e.g. websites, articles, papers, podcasts, videos).
 - Plan to stay out for a least a couple hours

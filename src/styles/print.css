@@ -1,0 +1,90 @@
+/* Print-specific styles */
+@media print {
+	/* Reset background colors and ensure black text */
+	* {
+		/* background-color: white !important; */
+		color: black !important;
+		box-shadow: none !important;
+		text-shadow: none !important;
+		filter: none !important;
+	}
+
+	/* Hide unnecessary elements */
+	nav,
+	footer,
+	.no-print,
+	button,
+	.social-share,
+	.comments-section {
+		display: none !important;
+	}
+
+	/* Optimize layout and typography */
+	body {
+		margin: 0;
+		padding: 0;
+		/* font-family: 'Times New Roman', Times, serif; */
+	}
+
+	/* Ensure images fit within page */
+	img {
+		max-width: 100% !important;
+		page-break-inside: avoid;
+	}
+
+	/* Handle links */
+	a {
+		text-decoration: underline;
+	}
+
+	/* Show URL after links */
+	a[href^='htt']:after,
+	a[href^='/']:after {
+		content: ' (' attr(href) ')';
+		font-size: 90%;
+	}
+
+	/* Avoid breaking headings */
+	h1,
+	h2,
+	h3,
+	h4,
+	h5,
+	h6 {
+		page-break-after: avoid;
+		page-break-inside: avoid;
+	}
+
+	/* Avoid splitting certain elements across pages */
+	table,
+	figure,
+	pre {
+		page-break-inside: avoid;
+	}
+
+	/* Add page numbers */
+	@page {
+		margin: 2cm;
+	}
+
+	@page :first {
+		margin-top: 3cm;
+	}
+
+	/* Ensure proper page breaks */
+	p {
+		orphans: 3;
+		widows: 3;
+	}
+
+	/* Optimize table display */
+	table {
+		border-collapse: collapse;
+	}
+
+	table td,
+	table th {
+		border: 1px solid #ddd;
+		padding: 8px;
+	}
+}

@@ -31,7 +31,10 @@ const config = {
 	kit: {
 		adapter: adapter({
 			edge: true
-		})
+		}),
+		alias: {
+			$assets: 'src/assets'
+		}
 	}
 }
 

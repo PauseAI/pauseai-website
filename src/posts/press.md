@@ -1,5 +1,5 @@
 ---
-title: 'PauseAI Press materials & media coverage'
+title: PauseAI Press materials & media coverage
 ---
 
 ## Contact
@@ -9,7 +9,7 @@ Joep Meindertsma ([joep@pauseai.info](mailto:joep@pauseai.info))
 ## Logo, materials
 
 Our logo and other material can be found in [this Google Drive folder](https://drive.google.com/drive/folders/1bQ_MZ8giK-Mee4ABkO0BgcFInaXruNpa?usp=sharing).
-If you want to create PauseAI-related material yourself, you can use our brand color _#FF9416_ and the fonts _Saira Condensed_ (700) and _Roboto Slab_ (300, 700).
+If you want to create PauseAI-related material yourself, you can use our brand color _\#FF9416_ and the fonts _Saira Condensed_ (700), _Montserrat Black_, and _Roboto Slab_ (300, 700).
 
 ## International Media coverage
 
@@ -34,10 +34,15 @@ If you want to create PauseAI-related material yourself, you can use our brand c
 - [DailyAI](https://dailyai.com/2024/05/pauseai-protestors-demand-a-halt-to-training-of-ai-models/)
 - [ReadWrite](https://readwrite.com/pause-ai-protestors-are-fighting-to-put-ai-development-on-hold/)
 - [TodayVille](https://www.todayville.com/poll-despite-global-pressure-americans-want-the-tech-industry-to-slow-down-on-ai/)
+- [Business Insider](https://www.businessinsider.com/openai-cofounder-agi-coming-fast-needs-limits-john-schulman-2024-5?international=true&r=US&IR=T)
 
 ## Podcasts & Talks
 
-- [**Youtube Playlist**](https://www.youtube.com/playlist?list=PLI46NoubGtIJvSAWkC7VOmfWrLD2u1ZPA). The **more than 10 podcasts** and talks that multiple people from PauseAI participated in. Subsequent items on this list are recordings that weren't uploaded to YouTube.
+- **[Compilation](https://www.youtube.com/playlist?list=PLI46NoubGtIJvSAWkC7VOmfWrLD2u1ZPA)** of **20+** podcasts and talks that multiple people from PauseAI participated in.
+- **[French podcasts](https://www.youtube.com/playlist?list=PLLUfQBgG_MvHh3b9Pedf139eVLsLs5zAs)**. **20+** podcasts where Maxime Fournes, PauseAI France director, participated in.
+
+Outside of YouTube:
+
 - [Dr. Phil Primetime](https://www.meritplus.com/c/s/VQ2aB6Sp?episodeId=LknWbG7N&play=1): Liron Shapira went as a guest to a discussion about AI and education.
 - [Creatives with AI podcast](https://podcasters.spotify.com/pod/show/creativeswithai/episodes/15-AI-The-Race-Against-Time---Balancing-Progress-and-Potential-Catastrophe-with-Joep-Meinderstma-e28ln8a/a-aa9vpjp): Interview with PauseAI founder Joep Meindertsma.
 - [Art of AI podcast](https://spotify.link/AggzYfcj8Db): Interview with Joep Meindertsma about protesting, psychology of x-risk, AI policy.
@@ -51,6 +56,7 @@ If you want to create PauseAI-related material yourself, you can use our brand c
 - [Camden New Journal](https://www.camdennewjournal.co.uk/article/:protesters-tell-tech-quarter-companies-to-press-pause-on-artificial-intelligence-research): DeepMind protest
 - [Islington Tribune](https://www.islingtontribune.co.uk/article/what-happens-in-bletchley-stays-in): Bletchley Park protest
 - [Peeps](https://www.youtube.com/watch?v=a3HRYOIhfFI): Bletchley Park protest video interview
+- [Westminster Extra](https://www.westminsterextra.co.uk/article/warning-governments-are-racing-ahead-with-ai): February 2025 protest
 
 ### NL
 
@@ -68,6 +74,9 @@ If you want to create PauseAI-related material yourself, you can use our brand c
 
 - [The Decoder](https://the-decoder.de/keine-super-ki-demonstranten-versammeln-sich-vor-dem-openai-buero/)
 - [DW Documentary](https://youtu.be/KspkgAZUkoQ?si=h2Jm0Yvm9RT8t1ZT&t=1116)
+- [HasePost](https://www.hasepost.de/eine-pause-fuer-ki-demonstration-fuer-ki-regulierung-in-osnabrueck-536971/)
+- [Kitogo](https://kitogo.de/pauseai-demonstriert-in-osnabrueck-fuer-strengere-ki-regulierung/)
+- [NOZ](https://www.noz.de/lokales/osnabrueck/artikel/pauseai-gruppe-warnt-in-osnabrueck-vor-kuenstlicher-intelligenz-48025131)
 
 ### US
 
@@ -81,3 +90,11 @@ If you want to create PauseAI-related material yourself, you can use our brand c
 - Le Monde ([2023](https://www.lemonde.fr/en/economy/article/2023/11/27/openai-the-beginnings-of-the-sam-altman-drama_6291282_19.html), [2024](https://www.lemonde.fr/economie/article/2024/09/11/a-l-approche-du-sommet-de-paris-les-militants-inquiets-quant-a-la-securite-de-l-ia-cherchent-a-se-faire-entendre_6312979_3234.html))
 - [La Tribune](https://www.latribune.fr/technos-medias/informatique/a-paris-et-dans-le-monde-les-inquiets-de-l-intelligence-artificielle-appellent-a-une-pause-997475.html)
 - [Various podcast appearances of Maxime Fournes](https://www.youtube.com/results?search_query=maxime+fournes+pauseai)
+
+### Australia
+
+- [The Age](https://www.theage.com.au/technology/most-dangerous-technology-ever-protesters-urge-ai-pause-20250207-p5laaq.html)
+
+### Denmark
+
+- [Weekendavisen](https://www.weekendavisen.dk/samfund/kunstig-intelligens-aegte-frygt)

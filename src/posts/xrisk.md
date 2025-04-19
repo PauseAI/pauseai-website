@@ -1,5 +1,5 @@
 ---
-title: The existential risk of superintelligent AI
+title: The extinction risk of superintelligent AI
 description: Why AI is a risk for the future of our existence, and why we need to pause development.
 ---
 
@@ -8,6 +8,8 @@ You can learn about x-risks reading this page, or you can also learn through [vi
 ## Experts are sounding the alarm
 
 AI researchers on average [believe](https://aiimpacts.org/2022-expert-survey-on-progress-in-ai/) there's a 14% chance that once we build a _superintelligent_ AI (an AI vastly more intelligent than humans), it will lead to "very bad outcomes (e.g. human extinction)".
+
+And there are [cases and reports about current AIs that show they may be right](https://lethalintelligence.ai/post/category/warning-signs/).
 
 Would you choose to be a passenger on a test flight of a new plane when airplane engineers think there’s a 14% chance that it will crash?
 
@@ -18,7 +20,7 @@ The list includes people like:
 - **Stuart Russell**, writer of the #1 textbook on Artificial Intelligence used in most AI studies: ["If we pursue [our current approach], then we will eventually lose control over the machines"](https://news.berkeley.edu/2023/04/07/stuart-russell-calls-for-new-approach-for-ai-a-civilization-ending-technology/)
 - **Yoshua Bengio**, deep learning pioneer and winner of the Turing Award: ["... rogue AI may be dangerous for the whole of humanity [...] banning powerful AI systems (say beyond the abilities of GPT-4) that are given autonomy and agency would be a good start"](https://yoshuabengio.org/2023/05/22/how-rogue-ais-may-arise/)
 
-But this is not the only time that we've been warned about the existential dangers of AI:
+But this is not the only time that we've been warned about the existential / extinction dangers of AI:
 
 - **Stephen Hawking**, theoretical physicist & cosmologist: ["The development of full artificial intelligence could spell the end of the human race"](https://nypost.com/2023/05/01/stephen-hawking-warned-ai-could-mean-the-end-of-the-human-race/).
 - **Geoffrey Hinton**, the "Godfather of AI" and Turing Award winner, [left Google](https://fortune.com/2023/05/01/godfather-ai-geoffrey-hinton-quit-google-regrets-lifes-work-bad-actors/) to warn people of AI: ["This is an existential risk"](https://www.reuters.com/technology/ai-pioneer-says-its-threat-world-may-be-more-urgent-than-climate-change-2023-05-05/)
@@ -43,7 +45,7 @@ You might think that a superintelligent AI would be locked inside a computer, an
 However, we tend to give AI systems access to the internet, which means that they can do a lot of things:
 
 - [Hack into other computers](/cybersecurity-risks), including all smartphones, laptops, server farms, etc. It could use the sensors of these devices as its eyes and ears, having digital senses everywhere.
-- Manipulate people through fake messages, e-mails, bank transfers, videos or phone calls. Humans could become the AI's limbs, without even knowing it.
+- [Manipulate people](https://lethalintelligence.ai/post/ai-hired-human-to-solve-captcha/) through fake messages, e-mails, bank transfers, videos or phone calls. Humans could become the AI's limbs, without even knowing it.
 - Directly control devices connected to the internet, like cars, planes, robotized (autonomous) weapons or even nuclear weapons.
 - Design a novel bioweapon, e.g. by combining viral strands or by using [protein folding](https://alphafold.ebi.ac.uk) and order it to be printed in a lab.
 - Trigger a nuclear war by convincing humans that another country is (about to) launch a nuclear attack.
@@ -76,9 +78,9 @@ An AI could have any goal, depending on how it's trained and prompted (used).
 Maybe it wants to calculate pi, maybe it wants to cure cancer, maybe it wants to self-improve.
 But even though we cannot tell what a superintelligence will want to achieve, we can make predictions about its sub-goals.
 
-- **Maximizing its resources**. Harnessing more computers will help an AI achieve its goals. At first, it can achieve this by hacking other computers. Later it may decide that it is more efficient to build its own.
-- **Ensuring its own survival**. The AI will not want to be turned off, as it could no longer achieve its goals. AI might conclude that humans are a threat to its existence, as humans could turn it off.
-- **Preserving its goals**. The AI will not want humans to modify its code, because that could change its goals, thus preventing it from achieving its current goal.
+- **Maximizing its resources**. Harnessing more computers will help an AI achieve its goals. At first, it can achieve this by hacking other computers. Later it may decide that it is more efficient to build its own. You can read about out [this real case of emergent power-seeking behavior on an AI](https://lethalintelligence.ai/post/ai-escaped-its-container/).
+- **Ensuring its own survival**. The AI will not want to be turned off, as it could no longer achieve its goals. AI might conclude that humans are a threat to its existence, as humans could turn it off. There also have been cases of [self-preserving unprompted, untrained behavior](https://www.transformernews.ai/p/openais-new-model-tried-to-avoid).
+- **Preserving its goals**. The AI will not want humans to modify its code, because that could change its goals, thus preventing it from achieving its current goal. And there are also [cases of AIs trying to do that](https://www.anthropic.com/research/alignment-faking).
 
 The tendency to pursue these subgoals given any high-level goal is called [instrumental convergence](https://www.youtube.com/watch?v=ZeecOKBus3Q), and it is a key concern for AI safety researchers.
 

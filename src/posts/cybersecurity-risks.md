@@ -16,7 +16,7 @@ Instead of having to hire a team of highly skilled security experts/hackers to f
 
 ## AI models can autonomously find and exploit vulnerabilities
 
-The latest AI systems can already analyze and write software
+The latest AI systems can already analyze and write software.
 They [can find vulnerabilities](https://betterprogramming.pub/i-used-gpt-3-to-find-213-security-vulnerabilities-in-a-single-codebase-cc3870ba9411) in software, and [they could be used to exploit them](https://blog.checkpoint.com/2023/03/15/check-point-research-conducts-initial-security-analysis-of-chatgpt4-highlighting-potential-scenarios-for-accelerated-cybercrime/).
 GPT-4 can already [autonomously hack websites](https://arxiv.org/html/2402.06664v1), performing tasks as complex as blind database schema extraction and SQL injections without human feedback, which was discovered 18 months after GPT-4 finished training.
 GPT-4 already [outperforms 88%](https://arxiv.org/pdf/2402.11814.pdf) of human hackers in a CTF competition.
@@ -41,7 +41,6 @@ This can go wrong in many ways.
 ## Large scale cyberattacks
 
 It may be possible that such powerful AI will be used to create a virus that uses a large number of zero-day exploits.
-Most cyberweapons use
 A sufficiently capable AI could analyze and find vulnerabilities in the source code of all operating systems and other software.
 Such a virus might infect any computer, regardless of the operating system, through multiple channels such as Wi-Fi, Bluetooth, UTP, etc.
 This could give full control over these machines and allows the controller to steal data, use the hardware for its own computations, encrypt the contents for ransom or [disable the machine entirely](https://en.wikipedia.org/wiki/Hardware_Trojan).

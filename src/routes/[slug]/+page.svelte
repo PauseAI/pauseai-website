@@ -4,7 +4,7 @@
 	export let data
 
 	const { meta, slug, content } = data
-	const { title = slug, date, categories, description, image } = meta
+	const { title = slug, date, /*categories,*/ description, image, author } = meta
 	const parent = slug.split('/').slice(0, -1).join('/')
 </script>
 
@@ -16,12 +16,15 @@
 	{/if}
 	<hgroup>
 		<h1>{title}</h1>
+		{#if author}
+			<p>{author}</p>
+		{/if}
 		{#if date}
 			<!-- <p>Published at {formatDate(date)}</p> -->
 		{/if}
 	</hgroup>
 
-	<div class="tags">
+	<!-- <div class="tags">
 		{#if categories && categories.length > 0}
 			<div class="categories">
 				{#each categories as category}
@@ -29,7 +32,7 @@
 				{/each}
 			</div>
 		{/if}
-	</div>
+	</div> -->
 
 	<div class="prose">
 		<svelte:component this={content} />
@@ -46,12 +49,12 @@
 		text-transform: capitalize;
 	}
 
-	h1 + p {
+	/* h1 + p {
 		margin-top: var(--size-2);
 		color: var(--text-2);
-	}
+	} */
 
-	.tags {
+	/*.tags {
 		display: flex;
 		gap: var(--size-3);
 		margin-top: var(--size-7);
@@ -60,5 +63,5 @@
 	.tags > * {
 		padding: var(--size-2) var(--size-3);
 		border-radius: var(--radius-round);
-	}
+	}*/
 </style>

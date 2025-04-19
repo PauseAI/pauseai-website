@@ -13,7 +13,7 @@ This is an attempt to include all which could be mitigated by a Pause.
 
 Much of our society is based on trust. We trust that the money in our bank account is real, that the news we read is true, and that the people who post reviews online exist.
 
-AI systems are exceptionally good at creating fake media.
+AI systems are exceptionally good at creating fake media, also called deepfakes.
 They can create fake videos, fake audio, fake text, and fake images.
 Creating fake media is not new, but AI makes it much cheaper and much more realistic.
 These capabilities are improving rapidly.
@@ -22,21 +22,24 @@ Just two years ago, we laughed at the horribly unrealistic Dall-E images, but no
 An AI-generated image of an explosion caused [panic sells in Wall Street](https://www.euronews.com/next/2023/05/23/fake-news-about-an-explosion-at-the-pentagon-spreads-on-verified-accounts-on-twitter).
 A 10-second audio clip or a single picture can be enough to create a convincing deepfake.
 Perhaps even more dangerous than the deepfakes themselves, is how the existence of convincing deepfakes destroys trust.
-[Real image can be called AI-generated](https://www.axios.com/2024/08/13/trump-crowd-photo-ai-deepfake-truth), and people will believe it.
+[A real image can be called AI-generated](https://www.axios.com/2024/08/13/trump-crowd-photo-ai-deepfake-truth), and people will believe it.
 
 GPT-4 can write in a way that is indistinguishable from humans but at a much faster pace and a fraction of the cost.
 We might soon see social media be flooded with fake discussions and opinions, and fake news articles that are indistinguishable from real ones.
+Also called a "dead internet".
 
 This leads to polarization between various groups of people who believe in different sources of information and narratives and, through consuming distorted representations of what's happening, escalate their differences until culminating in violent and anti-democratic responses.
 
 A halt on the frontier models (our [proposal](/proposal)) would not stop the models that are used nowadays to create fake media, but it might help to prevent future cutting-edge models.
 Also, it would lay the groundwork for future regulation aimed at mitigating fake media and any other specific problem caused by AI. Not to mention increasing public attention and awareness of these dangers and proof that they can be addressed.
 
-### Deepfakes and impersonation
+### Deepfakes-powered harrasment and scams
 
-Fake content created with AI, also called deepfakes, not only can steal famous people's identities and [create disinformation](https://time.com/6565446/biden-deepfake-audio/), but they can also impersonate you.
-Anyone with photos, videos, or audios of someone and enough knowledge, can create deepfakes of them and use them to commit fraud, harass them, or create sexually non-consensual material.
+Deepfakes cannot only steal famous people's identities and [create disinformation](https://time.com/6565446/biden-deepfake-audio/), but they can also impersonate you.
+Anyone with photos, videos, or audio of someone (and enough knowledge) can create deepfakes of them and use them to commit fraud, harass them, or create sexual non-consensual material.
 About [96% of all deepfake content is sexual material](https://www.technologyreview.com/2019/10/07/132735/deepfake-porn-deeptrace-legislation-california-election-disinformation/).
+
+You can find a compilation of AI incidents, which are mostly deepfake news, scams and harassment [here](https://incidentdatabase.ai/summaries/incidents/).
 
 As the section on fake news says, fake media wouldn't be prevented altogether by our proposal, but they could be reduced to a certain extent.
 A not so small extent when you take into account that AI multipurpose systems like chatbots have become really popular, and we would be stopping them from being more capable and popular, which could include systems designed with fewer filters and trainable with new faces.
@@ -62,6 +65,8 @@ Regular humans may not have anything left to offer the economy.
 Image generation models (which are heavily trained on copyrighted material from professional artists) are already [impacting the creative industry](https://cointelegraph.com/news/artists-face-a-choice-with-ai-adapt-or-become-obsolete).
 Writers are [striking](https://www.newscientist.com/article/2373382-why-use-of-ai-is-a-major-sticking-point-in-the-ongoing-writers-strike/).
 GPT-4 has [passed the bar exam](https://law.stanford.edu/2023/04/19/gpt-4-passes-the-bar-exam-what-that-means-for-artificial-intelligence-tools-in-the-legal-industry/), can write excellent written content, and can write code (again, partially trained on [copyrighted materials](https://www.ischool.berkeley.edu/news/2023/new-research-prof-david-bamman-reveals-chatgpt-seems-be-trained-copyrighted-books)).
+
+<!--Add news about AI caused layoffs as an example of the ones that will come. https://www.techopedia.com/tech-layoffs-predictions ?-->
 
 The people who own these AI systems will be able to capitalize on them, but the people who lose their jobs to them will not.
 It is difficult to predict which jobs are going to be the ones replaced first.
@@ -128,6 +133,8 @@ This positive feedback loop can lead to a few companies or governments having an
 Having control over thousands of intelligent, autonomous systems could be used to influence opinions, manipulate markets, or even wage war.
 In the hands of an authoritarian government, this could be used to suppress dissent and maintain power.
 
+<!--Dystopian social credit systems based on mass surveillance + people and action recognition could be created with today's AI so a pause wouldn't help and we shouldn't write about it-->
+
 ### Biological weapons
 
 AI can make knowledge more accessible, which also includes knowledge about how to create biological weapons. [This paper](https://arxiv.org/abs/2306.03809) shows how GPT-4 can help non-scientist students to create a pandemic pathogen:
@@ -184,10 +191,10 @@ The systems may achieve their goals, but those goals might not entirely encapsul
 ### Digital sentience
 
 As AI continues to advance, future systems may become incredibly sophisticated, replicating neural structures and functions that are more akin to the human brain.
-This increased complexity might lead to emergent properties like subjectivity and/or consciousness, so those AIs would be deserving of moral considerations and be treated well.
-Would be like "digital people".
-The thing is that, given our present lack of knowledge about consciousness and the nature of neural networks, we won't have a way to determine whether some AIs would have any type of experience and what the quality of those experiences would depend on.
-If the AIs continue to be produced with only their capabilities in mind, through a process we don't fully understand, people will keep on using them as tools ignoring what their desires could be, and that they could be actually enslaving digital people.
+This increased complexity might lead to emergent properties like AI subjectivity and/or consciousness, which would make them deserving of moral considerations.
+
+The problem is that, given our present lack of knowledge about consciousness and the nature of neural networks, we won't have a way to determine whether some AIs would have any type of experience and what the quality of those experiences would depend on.
+If the AIs continue to be produced with only their capabilities in mind, through a process we don't fully understand, people will keep using them as tools ignoring what their desires could be, and that they could be actually enslaving "digital people".
 
 ### Suffering risks
 

@@ -7,7 +7,7 @@
 	import Button from '$lib/components/Button.svelte'
 
 	export let team: Team
-	export let collapsed: boolean = true
+	export let collapsed = true
 </script>
 
 <li class="team">
@@ -54,7 +54,7 @@
 
 	.description {
 		position: relative;
-		/* /* show all formatting, like newlines */
+		/* show all formatting, like newlines */
 		white-space: pre-wrap;
 		overflow-wrap: break-word;
 		word-wrap: break-word;

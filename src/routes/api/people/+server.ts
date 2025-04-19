@@ -1,8 +1,34 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { options } from '$lib/api.js'
 import type { Person } from '$lib/types.js'
 import { defaultTitle } from '$lib/utils'
-import { error, json } from '@sveltejs/kit'
+import { json } from '@sveltejs/kit'
+import { fetchAllPages } from '$lib/airtable.js'
+
+/**
+ * Fallback people data to use in development if Airtable fetch fails
+ */
+const fallbackPeople: Person[] = [
+	{
+		id: 'fallback-stub1',
+		name: '[FALLBACK DATA] Example Person',
+		bio: 'I hold places when Airtable API is unavailable.',
+		title: 'Placeholder',
+		image: 'https://api.dicebear.com/7.x/bottts/svg?seed=fallback1',
+		privacy: false,
+		org: ['International'],
+		checked: true
+	},
+	{
+		id: 'fallback-stub2',
+		name: '[FALLBACK DATA] Holdor',
+		bio: 'Thrown at games',
+		title: 'of Plays',
+		image: 'https://api.dicebear.com/7.x/bottts/svg?seed=fallback2',
+		privacy: false,
+		org: ['International'],
+		checked: true
+	}
+]
 
 function recordToPerson(record: any): Person {
 	return {
@@ -23,26 +49,6 @@ const filter = (p: Person) => {
 	return p.image && !p.privacy && p.checked && p.org?.includes(currentOrg)
 }
 
-// Airtable API is limited to 100 items per page
-async function fetchAllPages(fetch: any, url: any) {
-	let allRecords: any[] = []
-	// https://airtable.com/developers/web/api/list-records#query-pagesize
-	let offset
-
-	do {
-		const fullUrl = offset ? `${url}?offset=${offset}` : url
-		const response = await fetch(fullUrl, options)
-		if (!response.ok) {
-			throw new Error('Failed to fetch data from Airtable')
-		}
-		const data: any = await response.json()
-		allRecords = allRecords.concat(data.records)
-		offset = data.offset
-	} while (offset)
-
-	return allRecords
-}
-
 export async function GET({ fetch, setHeaders }) {
 	const url = `https://api.airtable.com/v0/appWPTGqZmUcs3NWu/tblZhQc49PkCz3yHd`
 	setHeaders({
@@ -50,7 +56,21 @@ export async function GET({ fetch, setHeaders }) {
 	})
 
 	try {
-		const records = await fetchAllPages(fetch, url)
+		// Create fallback records in the expected Airtable format
+		const fallbackRecords = fallbackPeople.map((person) => ({
+			id: person.id,
+			fields: {
+				Name: person.name,
+				bio: person.bio,
+				title: person.title,
+				image: [{ thumbnails: { large: { url: person.image } } }],
+				privacy: person.privacy,
+				organisation: person.org,
+				checked: person.checked
+			}
+		}))
+
+		const records = await fetchAllPages(fetch, url, fallbackRecords)
 		const out: Person[] = records
 			.map(recordToPerson)
 			.filter(filter)
@@ -58,6 +78,8 @@ export async function GET({ fetch, setHeaders }) {
 			.sort(() => 0.5 - Math.random())
 		return json(out)
 	} catch (e) {
-		return error(500, 'err')
+		console.error('Error fetching people:', e)
+		// Return fallback data instead of error
+		return json(fallbackPeople.filter(filter))
 	}
 }

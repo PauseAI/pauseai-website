@@ -7,6 +7,7 @@ import { meta as quotesMeta } from '../../quotes/meta'
 import { meta as emailBuilderMeta } from '../../email-builder/meta'
 import { meta as peopleMeta } from '../../people/meta'
 import { meta as teamsMeta } from '../../teams/meta'
+import { meta as pfpgenMeta } from '../../pfp/meta'
 
 /** When adding an extra route, make sure to add the metadata here for SEO purposes */
 const hardCodedPages: Post[] = [
@@ -16,7 +17,8 @@ const hardCodedPages: Post[] = [
 	quotesMeta,
 	emailBuilderMeta,
 	peopleMeta,
-	teamsMeta
+	teamsMeta,
+	pfpgenMeta
 ]
 
 async function getPosts() {
@@ -38,7 +40,9 @@ async function getPosts() {
 	posts.push(...hardCodedPages)
 
 	posts = posts.sort(
-		(first, second) => new Date(second.date).getTime() - new Date(first.date).getTime()
+		(first, second) =>
+			(second.date ? new Date(second.date).getTime() : 0) -
+			(first.date ? new Date(first.date).getTime() : 0)
 	)
 
 	return posts

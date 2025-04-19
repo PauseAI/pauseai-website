@@ -8,6 +8,11 @@ When we're talking about a Pause, we're talking about [implementing an internati
 Some argue that it's too early to press the Pause Button (we [don't](/urgency)), but most experts seem to agree that it may be good to pause if developments go too fast.
 But as of now _we do not have a Pause Button_.
 So we should start thinking about how this would work, and how we can implement it.
+Luckily, building a superintelligent AI is difficult, and requires a lot of resources.
+
+_This page is a work in progress managed by the Building the Pause Button team at PauseAI, as part of the AI Safety Camp 2025._
+
+## Contents
 
 ## The Race: why we need international cooperation
 
@@ -25,8 +30,8 @@ It's up to you and me to [convince them](/action).
 ## Compute Governance
 
 To train a frontier LLM (like GPT-4), you need a lot of highly specialized and costly hardware.
-GPT-4 was trained on 25,000 Nvidia A100 GPUs, which cost $10.000 each.
-And many expect AI models to become even larger in the future.
+GPT-4 was trained on 25,000 Nvidia A100 GPUs, which cost $10,000 each.
+Although there are innovations that allow for more efficient training, the trend is that AI models are getting larger and larger.
 
 The sheer scale of modern AI training requirements is immense.
 Microsoft recently announced a plan to [construct a nuclear power plant](https://www.theverge.com/2024/9/20/24249770/microsoft-three-mile-island-nuclear-power-plant-deal-ai-data-centers) for its AI power needs.
@@ -38,10 +43,14 @@ Let's dive into the various choke points in this supply chain.
 ### Choke points in the chip supply chain
 
 It is hard to overstate the complexity and interdependency of the AI chip supply chain.
+It consists of various highly specialized companies, some of which are the only ones in the world that can produce certain components.
 This is great news for governance.
 Through the hardware, we can regulate the training runs.
+Let's take a dive into the various choke points in the AI chip supply chain.
 
-#### ASML and SMEE - the lithography bottlenecks
+#### Silicon wafers: Shin-Etsu, Sumco, Siltronic
+
+#### Lithography: ASML & SMEE
 
 All modern chips are made using lithography machines: huge machines, costing 200 million dollars each, that project light onto a silicon wafer.
 This lithography process is one of the most complex and expensive parts of the chip manufacturing process.
@@ -60,24 +69,68 @@ So SMEE is not able to produce modern AI chips.
 
 In other words: ASML is a fundamental choke point in the AI chip supply chain.
 
-#### TSMC, Samsung amd SMIC - The largest fabs
-
-Building a fab (a chip factory) is astonishingly difficult: it has zero-tolerance for dust particles, requires the most expensive high-tech equipment, and has a very complex supply chain.
-A modern fab costs around 10 to 20 billion dollars to manufacture.
-
-The Taiwan Semiconductor Manufacturing Company accounts for roughly 90% of modern AI chips, which are all chips made at 7nm precision or better.
-Samsung is the only other fab that can produce modern AI chips.
-
-But the Chinese SMIC is catching up rapidly - they already have a functional 7nm process.
-Due to US / NL export controls, SMIC is not able to buy ASML EUV machines, and are now also restricted in buying the older DUV machines.
-In June 2024, a [report](https://evertiq.com/news/55926) showed that SMIC can produce 5nm chips using DUV hardware,
-and is now able to produce 7nm AI chips (about three years behind the 4nm process that ASMLs EUV machines can produce), but SMIC's EUV lithography is plagued by low yields.
-
-#### Zeiss - mirrors & lensens
+#### Optics: Zeiss
 
 ASML's EUV machines use mirrors and lenses made by the German company Zeiss.
 In 2016, ASML [bought](https://optics.org/news/7/11/11) a 25% stake in Zeiss, and the two companies have a very close relationship.
 It is likely that no other company is able to produce these optics.
+
+#### Photoresist
+
+The photoresist is a chemical product that is used to etch the patterns into the silicon wafer.
+Japanese companies are dominant in this field.
+
+The most important companies in this field are:
+
+- JSR (Japan)
+- Shin-Etsu (Japan)
+- Tokyo Ohka Kogyo (Japan)
+- DuPont (USA)
+
+#### Interconnect & Packaging: ASE
+
+When a chip die exits a fab, it needs to be "packaged".
+ASE is probably the largest interconnect company for AI chips.
+
+#### Fabrication: TSMC, Samsung amd SMIC
+
+Building a "fab" (a chip factory) is astonishingly difficult: it has zero-tolerance for dust particles, requires the most expensive high-tech equipment, and has a very complex supply chain.
+A modern fab costs around 10 to 20 billion dollars to manufacture.
+
+The Taiwan Semiconductor Manufacturing Company accounts for [roughly 90%](https://www.fool.com/investing/2025/02/03/meet-the-monster-stock-that-continues-to-crush-the/) of modern AI chips, which are all chips made at 7nm precision or better.
+Samsung is the only other fab that can produce modern AI chips.
+
+But the Chinese SMIC is catching up rapidly - they already have a [functional 7nm process](https://wccftech.com/smic-to-limit-huawei-to-7nm-chips-until-2026-reducing-advancement/).
+Due to US / NL export controls, SMIC is not able to buy ASML EUV machines, and are now also restricted in buying the older DUV machines.
+In June 2024, a [report](https://evertiq.com/news/55926) showed that SMIC can produce 5nm chips using DUV hardware,
+and is now able to produce 7nm AI chips (about three years behind the 4nm process that ASMLs EUV machines can produce), but SMIC's lithography is plagued by low yields.
+
+#### Memory fabrication: Micron, SK Hynix
+
+AI chips require a lot of HBMs (High Bandwidth Memory), which is the most advanced memory type.
+Currently, the competition in the high-end High Bandwidth Memory (HBM) market is limited to just a few key players.
+The production of the most modern / powerful variants (HBM3 and HBM3E, which are used in AI accelerators, GPUs, and HPC applications) is dominated by:
+
+- SK Hynix – The market leader in HBM production, supplying Nvidia with HBM3 and HBM3E.
+- Samsung – A strong competitor working to secure Nvidia’s and other AI companies’ contracts.
+- Micron – The third major player, ramping up HBM3E production in 2024 to compete with SK Hynix and Samsung.
+
+These companies also use ASML's EUV machines to produce their HBMs.
+
+#### AI Chip design: Nvidia, AMD, Intel, Google, Apple
+
+The most famous company names on this page are all chip designers.
+And there are new companies, like Cerebras and Groq, which are designing chips specifically for AI.
+Notably, some of these companies use relatively outdated processes to produce their chips, like Groq who used 14nm, which is a potential choke point for governance.
+
+### On-Chip Governance
+
+- The article ["Secure, Governable Chips"](https://www.cnas.org/publications/reports/secure-governable-chips) proposes a new approach to AI governance.
+- **[Server reporting](https://www.lesswrong.com/posts/uSSPuttae5GHfsNQL/ai-compute-governance-verifying-ai-chip-location)**. Chips could respond to messages from trusted servers to prove they are withing a certain distance of a trusted location. This can be accurate to within tens of kilometers.
+- **[flexHEGs](https://yoshuabengio.org/wp-content/uploads/2024/09/FlexHEG-Interim-Report_2024.pdf)**: A new type of chip that can be programmed to self-destruct when certain conditions are met. This is still in the research phase and could take a long time to develop.
+- **[Firmware-based reporting](https://arxiv.org/abs/2404.18308)**: By installing a custom firmware on GPUs, users would be required to get a license to use the GPU for more than x cycles. This is a more near-term solution, and could be implemented "within a year"
+
+1. **[GPS tracking](https://arxiv.org/abs/2408.16074)**: By installing a custom firmware on GPUs, users would be required to get a license to use the GPU for more than x cycles. This is a more near-term solution, and could be implemented "within a year"
 
 ### Verification methods - preventing large training runs
 
@@ -100,10 +153,6 @@ The paper ["Verification methods for international AI agreements"](https://arxiv
 10. **Chip-Based Reporting**: Embeds reporting mechanisms in chips to alert if used beyond authorized limits. Feasible but challenging, requiring international standards and hardware development; circumventable by modifying firmware.
 
 Each method has its strengths and weaknesses, often requiring complementary approaches or international cooperation for effective implementation.
-
-Other proposed methods include:
-
-1. **[flegHEGs](https://yoshuabengio.org/wp-content/uploads/2024/09/FlexHEG-Interim-Report_2024.pdf)**: A new type of chip that can be programmed to self-destruct when certain conditions are met.
 
 An international insitution could be set up to monitor these verification methods, and to enforce the Pause.
 
@@ -133,3 +182,19 @@ Software is just information - it can be copied and distributed very easily.
 Nonetheless, we have banned information before.
 Child pornography, for example, is illegal to make, illegal to distribute, and illegal to possess.
 The same enforcement mechanisms could be used to regulate dangerous AI software.
+
+## What governments can do to build the Pause Button
+
+1. **Design Pause-Button compliant GPU firmware**. The approach for this is described in [this paper](https://arxiv.org/abs/2404.18308).
+2. **Force AI chip designers to make their firmware compliant**.
+3. **Set up a licensing body**. One authority should be responsible for issuing licenses to companies that want to use AI chips. This authority manages the cryptographic keys.
+4. **Map out where AI chips are now**. List all companies and datacenters that have AI chips. Call them, and in the future get them to update their chips to compliant firmware.
+5. **Invest in tamper-proof hardware & on-chip governance techniques**. flexHEGs are a promising approach here.
+
+## Further reading
+
+- [Hardware-Enabled Governance Mechanisms](https://www.rand.org/pubs/working_papers/WRA3056-1.html)
+- [Verification methods for international AI agreements](https://arxiv.org/abs/2408.16074)
+- [Secure, Governable Chips](https://www.cnas.org/publications/reports/secure-governable-chips)
+- [FlexHEGs](https://yoshuabengio.org/wp-content/uploads/2024/09/FlexHEG-Interim-Report_2024.pdf)
+- [Firmware-based reporting](https://arxiv.org/abs/2404.18308)

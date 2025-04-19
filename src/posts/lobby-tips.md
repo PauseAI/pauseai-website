@@ -11,6 +11,7 @@ It is _their job_ to listen to _their constituents_.
 They are representing _you_.
 
 So don't be afraid to reach out to them.
+You can learn how to do it in this [recording of an emailing workshop](https://www.youtube.com/watch?v=Mjq4NFiKKd0) that we had.
 
 If you are from the US, you can check out our particular [US Lobbying Guide](/us-lobby-guide).
 
@@ -33,6 +34,7 @@ Check out the [surveys](/polls-and-surveys) and the [quotes](/quotes) pages for 
 - We need **people in power** to make the pause happen. We need these political Champions in every country. Finding and convincing that person in your country is your goal.
 - Consider their **goals and ambitions**. Do they like organizing things? Do they get a kick out of being a thought leader? Do they shy away from controversy? All these things matter.
 - Consider their **background**. Do they understand catastrophic risks? AI? Global coordination?
+- Consider **who they listen to**. Many people change their mind through specific trusted peers. Find out who these people are.
 
 ## Write a letter or email
 

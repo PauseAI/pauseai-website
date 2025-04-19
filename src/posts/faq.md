@@ -13,9 +13,11 @@ description: Frequently asked questions about PauseAI and the risks of superinte
 
 ## Who are you?
 
-We are a community of [volunteers](/people) and [local communities](/communities) coordinated by a [non-profit](/legal) that aims to mitigate the [risks of AI](/risks) (including the [risk of human extinction](/xrisk)).
+We are a community of [volunteers](/people) and [local communities](/communities) coordinated by a [non-profit organization](/organization) that aims to mitigate the [risks of AI](/risks) (including the [risk of human extinction](/xrisk)).
 We aim to convince our governments to step in and [pause the development of superhuman AI](/proposal).
-We do this by informing the public, talking to decision-makers, and organizing protests.
+We do this by informing the public, talking to decision-makers, and organizing [events](/events).
+
+## Do you have social media?
 
 You can find us on [Discord](https://discord.gg/2XXWXvErfA) (this is where most of the coordination happens!), [Twitter](https://twitter.com/PauseAI), [Substack](https://substack.com/@pauseai), [Facebook](https://www.facebook.com/PauseAI), [TikTok](https://www.tiktok.com/@pauseai), [LinkedIn](https://www.linkedin.com/uas/login?session_redirect=/company/97035448/), [YouTube](https://www.youtube.com/@PauseAI), [Instagram](https://www.instagram.com/pause_ai), [Telegram](https://t.me/+UeTsIsNkmt82ZmQ8), [Whatsapp](https://chat.whatsapp.com/JgcAbjqRr8X3tvrXdeQvfj) and [Reddit](https://www.reddit.com/r/PauseAI/).
 You can mail/contact us at [joep@pauseai.info](mailto:joep@pauseai.info).
@@ -71,7 +73,7 @@ Check out our [theory of change](/theory-of-change) for a detailed overview of o
 - Protesting shows the world that we care about this issue. By protesting, we show that we are willing to spend our time and energy to get people to listen.
 - Protests can and often will [positively influence](https://www.socialchangelab.org/_files/ugd/503ba4_052959e2ee8d4924934b7efe3916981e.pdf) public opinion, voting behavior, corporate behavior and policy.
 - By far [most people are supportive](https://today.yougov.com/politics/articles/31718-do-protesters-want-help-or-hurt-america) of peaceful/non-violent protests
-- There is [no "backfire" effect](https://journals.sagepub.com/doi/full/10.1177/2378023120925949) [unless the protest is violent](https://news.stanford.edu/2018/10/12/how-violent-protest-can-backfire/). Our protests are peaceful and non-violent.
+- There is [no evidence for a "backfire" effect](https://journals.sagepub.com/doi/full/10.1177/2378023120925949) [unless the protest is violent](https://news.stanford.edu/2018/10/12/how-violent-protest-can-backfire/). Our protests are peaceful and non-violent.
 - It's a social bonding experience. You meet other people who share your concerns and willingness to take action.
 - Check out [this amazing article](https://forum.effectivealtruism.org/posts/4ez3nvEmozwPwARr9/a-case-for-the-effectiveness-of-protest) for more insights on why protesting works
 
