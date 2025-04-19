@@ -10,7 +10,7 @@ description: A list of upcoming and past protests.
 
 ### 2025
 
-- [7th - 11th of February, 15+ cities]()[]()
+- [7th - 11th of February, 15+ cities](/2025-february)
 
 ### 2024
 
