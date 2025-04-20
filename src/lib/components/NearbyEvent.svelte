@@ -7,6 +7,7 @@
 	import Banner from './Banner.svelte'
 	import ExternalLink from '$lib/components/custom/a.svelte'
 
+	const FORMAT = new Intl.DateTimeFormat('en', { day: 'numeric', month: 'long' })
 	const MAX_DISTANCE_KM = 100
 
 	let nearbyEvent: Event | null = null
@@ -40,6 +41,8 @@
 
 {#if nearbyEvent}
 	<Banner>
-		Next up in your area: <ExternalLink href={nearbyEvent.url}>{nearbyEvent.name}</ExternalLink> on {nearbyEvent.start_at.toDateString()}
+		Next up in your area: <ExternalLink href={'https://lu.ma/' + nearbyEvent.url}
+			>{nearbyEvent.name}</ExternalLink
+		> on {FORMAT.format(new Date(nearbyEvent.start_at))}
 	</Banner>
 {/if}
