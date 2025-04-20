@@ -7,7 +7,7 @@
 	import PageTransition from './transition.svelte'
 	import Toc from '$lib/components/Toc.svelte'
 	import Hero from '$lib/components/Hero.svelte'
-	import NearbyEvent from '$lib/components/NearbyEvent.svelte'
+	import NearbyEvent from '$lib/components/nearby-event/NearbyEvent.svelte'
 
 	import '@fontsource/roboto-slab/300.css'
 	import '@fontsource/roboto-slab/700.css'
