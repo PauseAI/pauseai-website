@@ -1,11 +1,10 @@
 <script lang="ts">
-	import type GetItems from '$lib/clients/luma/types/calendar/get-items'
-	import type { Event } from '$lib/clients/luma/types/calendar/get-items'
 	import distance from '@turf/distance'
 	import { onMount } from 'svelte'
 	import type { Platform } from '$lib/netlify'
 	import Banner from './Banner.svelte'
 	import ExternalLink from '$lib/components/custom/a.svelte'
+	import type { CalendarResponse, Event } from '../../routes/api/calendar/+server'
 
 	export let contrast: boolean
 
@@ -37,7 +36,7 @@
 	}
 
 	function fetchLuma() {
-		return fetch('/api/calendar').then((res) => res.json()) as Promise<GetItems>
+		return fetch('/api/calendar').then((res) => res.json()) as Promise<CalendarResponse>
 	}
 </script>
 
