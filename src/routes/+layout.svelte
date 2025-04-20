@@ -26,7 +26,7 @@
 	(Top)
 </h2>
 
-<NearbyEvent />
+<NearbyEvent contrast={data.url == '/'} />
 
 <div class="layout" class:with-hero={hero}>
 	{#if hero}
