@@ -12,10 +12,7 @@
 	let nearbyEvent: Event | null = null
 
 	onMount(async () => {
-		const [geo, events] = await Promise.all([
-			fetch('/api/geo').then((res) => res.json()) as Promise<Platform['context']['geo']>,
-			fetch('/api/luma').then((res) => res.json()) as Promise<GetItems>
-		])
+		const [geo, events] = await Promise.all([fetchGeo(), fetchLuma()])
 
 		const { latitude: userLatitude, longitude: userLongitude } = geo
 		if (!userLatitude || !userLongitude) return
@@ -31,6 +28,14 @@
 
 		nearbyEvent = events.entries.map((entry) => entry.event).find(isNearby) ?? null
 	})
+
+	function fetchGeo() {
+		return fetch('/api/geo').then((res) => res.json()) as Promise<Platform['context']['geo']>
+	}
+
+	function fetchLuma() {
+		return fetch('/api/luma').then((res) => res.json()) as Promise<GetItems>
+	}
 </script>
 
 {#if nearbyEvent}
