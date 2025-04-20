@@ -3,7 +3,7 @@
 	import type { Event } from '$lib/clients/luma/types/calendar/get-items'
 	import distance from '@turf/distance'
 	import { onMount } from 'svelte'
-	import type { Platform } from '../netlify'
+	import type { Platform } from '$lib/netlify'
 	import Banner from './Banner.svelte'
 	import ExternalLink from '$lib/components/custom/a.svelte'
 
