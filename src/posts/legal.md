@@ -2,7 +2,6 @@
 title: Legal information
 description: Information required by law about PauseAI.
 ---
-
 This website is maintained by PauseAI Global.
 Read more about the inner workings about PauseAI on the [Organization page](/organization).
 

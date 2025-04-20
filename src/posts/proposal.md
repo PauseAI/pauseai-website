@@ -3,7 +3,6 @@ title: PauseAI Proposal
 description: Implement a temporary pause on the training of the most powerful
   general AI systems.
 ---
-
 **Implement a temporary pause on the training of the most powerful general AI systems**, until we know how to build them safely and keep them under democratic control.
 
 _Version: Feb 4th, 2025_

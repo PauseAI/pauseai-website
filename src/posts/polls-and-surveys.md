@@ -2,7 +2,6 @@
 title: Polls & surveys
 description: How much do regular people and experts worry about AI risks and governance?
 ---
-
 ## Expert opinion on catastrophic risks
 
 - **[AI researchers, AIImpacts 2022](https://aiimpacts.org/2022-expert-survey-on-progress-in-ai/)**: give "really bad outcomes (such as human extinction)" a 14% probability, with a median of 5%. 82% believe the control problem is important.
