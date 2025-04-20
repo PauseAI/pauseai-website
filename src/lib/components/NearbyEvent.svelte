@@ -3,9 +3,9 @@
 	import type { Event } from '$lib/clients/luma/types/calendar/get-items'
 	import distance from '@turf/distance'
 	import { onMount } from 'svelte'
-	import Banner from '../Banner.svelte'
+	import type { Platform } from '$lib/netlify'
+	import Banner from './Banner.svelte'
 	import ExternalLink from '$lib/components/custom/a.svelte'
-	import { fetchGeo, fetchLuma } from './client'
 
 	const MAX_DISTANCE_KM = 100
 
@@ -26,9 +26,16 @@
 			return distance(userCoords, eventCoords, { units: 'kilometers' }) <= MAX_DISTANCE_KM
 		}
 
-		nearbyEvent =
-			events.entries.map((entry: GetItems['entries'][number]) => entry.event).find(isNearby) ?? null
+		nearbyEvent = events.entries.map((entry) => entry.event).find(isNearby) ?? null
 	})
+
+	function fetchGeo() {
+		return fetch('/api/geo').then((res) => res.json()) as Promise<Platform['context']['geo']>
+	}
+
+	function fetchLuma() {
+		return fetch('/api/luma').then((res) => res.json()) as Promise<GetItems>
+	}
 </script>
 
 {#if nearbyEvent}
