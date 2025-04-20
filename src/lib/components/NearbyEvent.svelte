@@ -37,7 +37,7 @@
 	}
 
 	function fetchLuma() {
-		return fetch('/api/luma').then((res) => res.json()) as Promise<GetItems>
+		return fetch('/api/calendar').then((res) => res.json()) as Promise<GetItems>
 	}
 </script>
 
