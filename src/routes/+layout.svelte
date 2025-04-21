@@ -6,6 +6,8 @@
 	import Header from './header.svelte'
 	import PageTransition from './transition.svelte'
 	import Toc from '$lib/components/Toc.svelte'
+	import Hero from '$lib/components/Hero.svelte'
+	import NearbyEvent from '$lib/components/NearbyEvent.svelte'
 
 	import '@fontsource/roboto-slab/300.css'
 	import '@fontsource/roboto-slab/700.css'
@@ -13,7 +15,6 @@
 
 	import '../styles/styles.css'
 	import '../styles/print.css'
-	import Hero from '$lib/components/Hero.svelte'
 
 	export let data
 
@@ -24,6 +25,8 @@
 <h2 style="width: 0; height: 0; margin: 0; padding: 0; visibility: hidden;" data-pagefind-ignore>
 	(Top)
 </h2>
+
+<NearbyEvent contrast={data.url == '/'} />
 
 <div class="layout" class:with-hero={hero}>
 	{#if hero}
