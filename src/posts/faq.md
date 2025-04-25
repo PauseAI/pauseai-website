@@ -2,7 +2,6 @@
 title: FAQ
 description: Frequently asked questions about PauseAI and the risks of superintelligent AI.
 ---
-
 <style>
     h2 {
         font-size: 1.2rem;
@@ -33,7 +32,7 @@ That's why for many of them the sad realization that AI might be an existential 
 
 No, only the development of the largest general-purpose AI systems, often called "Frontier models".
 Almost all currently existing AI would be legal under [our proposal](/proposal), and most future AI models will remain legal, too.
-We're calling for a ban on AI systems more powerful than GPT-4, until we know how to build provably safe AI, and we have them under democratic control.
+We're calling for a ban on more powerful general AI systems, until we know how to build provably safe AI, and we have them under democratic control.
 
 ## Do you believe GPT-4 is going to kill us?
 
