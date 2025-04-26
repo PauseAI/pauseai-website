@@ -1,6 +1,5 @@
 <script lang="ts">
-	import { ParaglideJS } from '@inlang/paraglide-sveltekit'
-	import { i18n } from '$lib/i18n'
+	import { getLocale } from '$lib/paraglide/runtime'
 
 	import { Toaster } from 'svelte-french-toast'
 	import { ProgressBar } from '@prgm/sveltekit-progress-bar'
@@ -9,6 +8,7 @@
 	import Header from './header.svelte'
 	import PageTransition from './transition.svelte'
 	import Toc from '$lib/components/Toc.svelte'
+	import Banner from '$lib/components/Banner.svelte'
 
 	import '@fontsource/roboto-slab/300.css'
 	import '@fontsource/roboto-slab/700.css'
@@ -18,29 +18,28 @@
 	import '../styles/print.css'
 	import Hero from '$lib/components/Hero.svelte'
 
-	import { onMount, tick } from 'svelte'
-	import { onNavigate, replaceState } from '$app/navigation'
 	import { page } from '$app/stores'
 
 	export let data
 
+	// We use $page store instead of data prop for more reliable navigation
+	// This prevents "undefined" issues during navigation
+
 	// Show the hero on the homepage, but nowhere else
-	$: hero = i18n.route(data.url) == '/'
-
-	onMount(async () => {
-		await tick() // wait for Svelte router
-		hideLocaleInUrl()
-	})
-	// returned function is run after navigation
-	onNavigate(() => hideLocaleInUrl)
-
-	function hideLocaleInUrl() {
-		const canonical = i18n.route(data.url)
-		replaceState(canonical, $page.state)
-	}
+	$: hero =
+		$page.url.pathname === `/${getLocale()}` || (getLocale() === 'en' && $page.url.pathname === '/')
 </script>
 
-<ParaglideJS {i18n}>
+{#if data.localeAlert}
+	<Banner
+		contrast={data.localeAlert.isDev}
+		id={data.localeAlert.isDev ? undefined : 'locale-switch'}
+	>
+		{@html data.localeAlert.message}
+	</Banner>
+{/if}
+
+<div>
 	<h2 style="width: 0; height: 0; margin: 0; padding: 0; visibility: hidden;" data-pagefind-ignore>
 		(Top)
 	</h2>
@@ -52,7 +51,7 @@
 		<Header inverted={hero} moveUp={hero} />
 
 		<main>
-			<PageTransition url={data.url}>
+			<PageTransition url={$page.url.pathname}>
 				<slot />
 			</PageTransition>
 		</main>
@@ -70,12 +69,12 @@
 		}}
 	/>
 
-	{#if !['/', '/outcomes', '/pdoom', '/quotes'].includes(i18n.route(data.url))}
+	{#if !['/', '/outcomes', '/pdoom', '/quotes'].includes(getLocale())}
 		<Toc />
 	{/if}
 
 	<ProgressBar color="var(--brand)" />
-</ParaglideJS>
+</div>
 
 <style>
 	/* @import url('$lib/reset.css');

@@ -1,4 +1,5 @@
 import { options } from '$lib/api.js'
+import { isDev, getDevContext } from '$lib/env.ts'
 
 /**
  * Fetches all pages from Airtable API (which is limited to 100 items per page)
@@ -19,7 +20,15 @@ export async function fetchAllPages(fetch: any, url: any) {
 			const response = await fetch(fullUrl, options)
 			if (!response.ok) {
 				const errorText = await response.text()
-				console.error('Airtable API error:', response.status, response.statusText, errorText)
+				console.error(
+					`${getDevContext()} Airtable API error:`,
+					response.status,
+					response.statusText,
+					errorText
+				)
+				if (isDev()) {
+					return allRecords
+				}
 				throw new Error(
 					`Failed to fetch data from Airtable: ${response.statusText}. Details: ${errorText}`
 				)

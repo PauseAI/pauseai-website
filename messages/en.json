@@ -84,5 +84,7 @@
 	"footer_other_pages": "All pages",
 	"footer_other_rss": "RSS",
 	"footer_other_license": "License: CC-BY 4.0",
-	"footer_other_feedback": "Submit feedback"
+	"footer_other_feedback": "Submit feedback",
+	"footer_other_edit": "Edit original English content",
+	"footer_other_l10n": "Suggest translation improvement"
 }

@@ -1,15 +1,21 @@
-{ 
+{
 	"type": "module",
 	"name": "pause-ai",
 	"private": true,
 	"packageManager": "pnpm@9.14.4",
 	"scripts": {
-		"dev": "vite dev --host 0.0.0.0",
+		"clean": "tsx scripts/clean.ts",
+		"inlang:force": "tsx scripts/inlang-settings.ts --force",
 		"translate": "tsx scripts/translation/translate",
 		"translate:debug": "tsx scripts/translation/translate --mode debug",
-		"build": "run-s translate && vite build --emptyOutDir=false && run-p _postbuild:*",
-		"build:fast": "run-s translate && VITE_DISABLE_SOURCEMAPS=1 vite build --emptyOutDir=false && run-p _postbuild:*",
-		"build:dev": "vite build --mode development && run-s _postbuild:*",
+		"translate:dry-run": "tsx scripts/translation/translate --dryRun",
+		"translate:estimate": "tsx scripts/translation/translate --dryRun --verbose",
+		"translate:spend": "L10N_FORCE_TRANSLATE=true tsx scripts/translation/translate",
+		"dev": "run-s dev:steps",
+		"dev:steps": "run-s translate && vite dev --host 0.0.0.0",
+		"build": "NODE_ENV=production run-s build:steps",
+		"build:dev": "node scripts/filter-build-log.js \"NODE_ENV=development run-s build:steps\"",
+		"build:steps": "run-s translate && vite build --emptyOutDir=false && run-p _postbuild:*",
 		"_postbuild:pagefind": "tsx scripts/create-pagefind-index.ts",
 		"_postbuild:exclude": "tsx scripts/exclude-from-edge-function.ts",
 		"_postbuild:caching": "tsx scripts/opt-in-to-caching.ts",
@@ -21,7 +27,7 @@
 		"prepare": "husky"
 	},
 	"devDependencies": {
-		"@inlang/paraglide-js": "1.11.3",
+		"@inlang/paraglide-js": "^2.0.4",
 		"@sveltejs/adapter-netlify": "^4.4.2",
 		"@sveltejs/kit": "^2.19.0",
 		"@sveltejs/vite-plugin-svelte": "^3.1.2",
@@ -62,7 +68,6 @@
 		"@fontsource/roboto-slab": "^5.2.5",
 		"@fontsource/saira-condensed": "^5.2.5",
 		"@glidejs/glide": "~3.6.2",
-		"@inlang/paraglide-sveltekit": "0.12.1",
 		"@pagefind/default-ui": "^1.3.0",
 		"@prgm/sveltekit-progress-bar": "^2.0.0",
 		"@sveltejs/enhanced-img": "~0.3.10",

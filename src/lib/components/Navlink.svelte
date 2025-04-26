@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { page } from '$app/stores'
-	import { i18n } from '$lib/i18n'
+	import { localizeUrl, localizeHref } from '$lib/paraglide/runtime'
 	export let href: string | undefined = undefined
 	export let c2a = false
 	export let ariaLabel: string | undefined = undefined
@@ -8,13 +8,24 @@
 	export let first = false
 	export let narrow = false
 	export let active = false
+	export let external = false
+
+	$: localizedHref = href && !external ? localizeHref(href) : href
 
 	$: {
-		active = i18n.route($page.url.pathname) == href
+		active = localizeUrl($page.url.pathname) == localizedHref
 	}
 </script>
 
-<a {href} class:first class:c2a class:inverted class:narrow class:active aria-label={ariaLabel}>
+<a
+	href={localizedHref}
+	class:first
+	class:c2a
+	class:inverted
+	class:narrow
+	class:active
+	aria-label={ariaLabel}
+>
 	<slot />
 </a>
 

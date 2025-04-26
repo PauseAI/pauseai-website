@@ -3,7 +3,7 @@
 	import PostMeta from '$lib/components/PostMeta.svelte'
 	import QuotesCarousel from '$lib/components/QuotesCarousel.svelte'
 	import Stats from '$lib/components/Stats.svelte'
-	import * as m from '$lib/paraglide/messages'
+	import * as m from '$lib/paraglide/messages.js'
 
 	const title = 'We need to Pause AI'
 	const description = 'We are risking human extinction. We need to pause AI development, right now.'

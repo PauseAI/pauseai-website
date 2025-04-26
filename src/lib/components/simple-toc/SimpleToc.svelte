@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { browser } from '$app/environment'
 	import { onMount } from 'svelte'
-	import * as m from '../../paraglide/messages'
+	import * as m from '$lib/paraglide/messages.js'
 	import Node from './Node.svelte'
 
 	let heading: HTMLHeadingElement

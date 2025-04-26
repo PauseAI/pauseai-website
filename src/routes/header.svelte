@@ -6,16 +6,16 @@
 	import SearchIcon from 'lucide-svelte/icons/search'
 	import LanguageSwitcher from '$lib/components/LanguageSwitcher.svelte'
 	import * as m from '$lib/paraglide/messages.js'
-	import { i18n } from '$lib/i18n'
-
+	import { localizeUrl } from '$lib/paraglide/runtime'
 	import { initializeCqwResizeObserver } from '$lib/container-query-units'
 	import { onMount } from 'svelte'
+
 	const enableBot = false
 
 	export let inverted = false
 	export let moveUp = false
 
-	$: logo_animate = i18n.route($page.url.pathname) != '/'
+	$: logo_animate = localizeUrl($page.url.pathname) != '/'
 
 	let nav: HTMLElement
 

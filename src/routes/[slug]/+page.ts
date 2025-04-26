@@ -1,14 +1,13 @@
 import type { FrontmatterMeta } from '$lib/types'
 import { error } from '@sveltejs/kit'
-import { i18n } from '$lib/i18n.js'
+import { getLocale } from '$lib/paraglide/runtime'
+import type { PageLoad } from './$types'
 
-const runtime = i18n.config.runtime
-
-export async function load({ params: { slug }, depends }) {
+export const load: PageLoad = async ({ params: { slug }, depends }) => {
 	depends('paraglide:lang')
 	try {
-		const language = runtime.languageTag()
-		const { default: content, metadata: meta = {} } = await importMarkdown(language, slug)
+		const locale = getLocale()
+		const { default: content, metadata: meta = {} } = await importMarkdown(locale, slug)
 
 		return {
 			content,
@@ -20,12 +19,13 @@ export async function load({ params: { slug }, depends }) {
 	}
 }
 
-async function importMarkdown(language: string, slug: string) {
-	if (language == runtime.sourceLanguageTag) {
+async function importMarkdown(locale: string, slug: string) {
+	// For English (source language), import directly from source
+	if (locale === 'en') {
 		return await import(`../../posts/${slug}.md`)
 	} else {
 		try {
-			return await import(`../../temp/translations/md/${language}/${slug}.md`)
+			return await import(`../../temp/translations/md/${locale}/${slug}.md`)
 		} catch (error) {
 			if (import.meta.env.DEV) {
 				return {

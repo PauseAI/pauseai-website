@@ -13,8 +13,8 @@ export default function (adapter) {
 			 */
 			const settings = JSON.parse(fs.readFileSync('./project.inlang/settings.json', 'utf-8'))
 			builder.prerendered.paths = builder.prerendered.paths.filter((path) => {
-				for (const tag of settings.languageTags) {
-					if (path.startsWith('/' + tag)) return true
+				for (const locale of settings.locales) {
+					if (path.startsWith('/' + locale)) return true
 				}
 			})
 			adapter.adapt(builder)

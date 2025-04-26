@@ -9,12 +9,7 @@ import remarkToc from 'remark-toc'
 import remarkHeadingId from 'remark-heading-id'
 import rehypeSlug from 'rehype-slug'
 
-import fs from 'fs'
-
-/**
- * @type {import('./project.inlang/settings.json')}
- */
-const inlangSettings = JSON.parse(fs.readFileSync('./project.inlang/settings.json'))
+import { locales } from './src/lib/paraglide/runtime.js'
 
 /** @type {import('mdsvex').MdsvexOptions} */
 const mdsvexOptions = {
@@ -37,6 +32,20 @@ const mdsvexOptions = {
 const config = {
 	extensions: ['.svelte', '.md'],
 	preprocess: [vitePreprocess(), mdsvex(mdsvexOptions)],
+	// Custom warning handler to selectively filter out specific a11y warnings
+	onwarn(warning, handler) {
+		// Skip specific accessibility warnings
+		if (warning.code === 'a11y-missing-attribute' && warning.message.includes('title')) {
+			// Skip warnings about missing title attributes on iframes
+			return
+		}
+		if (warning.code === 'a11y-no-noninteractive-tabindex') {
+			// Skip warnings about tabindex on non-interactive elements (like iframes)
+			return
+		}
+		// Call the default handler for all other warnings
+		handler(warning)
+	},
 	kit: {
 		adapter: adapterPatchPrerendered(
 			adapterNetlify({
@@ -49,7 +58,7 @@ const config = {
 		prerender: {
 			// Allows dead links to be rendered
 			handleHttpError: 'warn',
-			entries: ['*'].concat(inlangSettings.languageTags.map((tag) => '/' + tag))
+			entries: ['*'].concat(locales.map((locale) => '/' + locale))
 		}
 	}
 }
