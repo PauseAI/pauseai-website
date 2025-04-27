@@ -5,10 +5,12 @@
 	import Footer from './footer.svelte'
 	import Header from './header.svelte'
 	import PageTransition from './transition.svelte'
+
 	import Toc from '$lib/components/Toc.svelte'
 	import Hero from '$lib/components/Hero.svelte'
 	import NearbyEvent from '$lib/components/NearbyEvent.svelte'
 	import ExternalLink from '$lib/components/custom/a.svelte'
+	import Banner from '$lib/components/Banner.svelte'
 
 	import '@fontsource/roboto-slab/300.css'
 	import '@fontsource/roboto-slab/700.css'
@@ -16,7 +18,6 @@
 
 	import '../styles/styles.css'
 	import '../styles/print.css'
-	import Banner from '$lib/components/Banner.svelte'
 
 	export let data
 
