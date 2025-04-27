@@ -8,6 +8,7 @@ import fsPromises from 'fs/promises'
 import path from 'path'
 import { execSync } from 'child_process'
 import simpleGit, { SimpleGit, SimpleGitOptions } from 'simple-git'
+import { L10NS_BASE_DIR } from '../../src/lib/l10n'
 import { ensureDirectoryExists } from './utils'
 
 /**
@@ -157,4 +158,8 @@ export function getCommitMessage(
 	return fileExists
 		? `Update outdated translation for ${sourceFileName} in ${language}`
 		: `Create new translation for ${sourceFileName} in ${language}`
+}
+
+export function cleanUpGitSecrets() {
+	fs.unlinkSync(path.join(L10NS_BASE_DIR, '.git/config'))
 }

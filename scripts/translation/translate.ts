@@ -28,7 +28,8 @@ import {
 	GIT_CONFIG,
 	initializeGitCache,
 	getLatestCommitDates,
-	getCommitMessage
+	getCommitMessage,
+	cleanUpGitSecrets
 } from './git-ops'
 import { createLlmClient, createRequestQueue, LLM_DEFAULTS, postChatCompletion } from './llm-client'
 import { translateOrLoadMessages, translateOrLoadMarkdown, translate } from './translate-core'
@@ -240,6 +241,7 @@ const languageNamesInEnglish = new Intl.DisplayNames('en', { type: 'language' })
 			// Print summary for dry run mode
 			printDryRunSummary(dryRunStats, VERBOSE, cacheCount)
 		}
+		if (!isDev()) cleanUpGitSecrets()
 	})().catch((error) => {
 		console.error('Translation process failed:', error)
 		process.exit(1)
