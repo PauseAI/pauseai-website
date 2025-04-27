@@ -8,6 +8,7 @@
 	import Toc from '$lib/components/Toc.svelte'
 	import Hero from '$lib/components/Hero.svelte'
 	import NearbyEvent from '$lib/components/NearbyEvent.svelte'
+	import ExternalLink from '$lib/components/custom/a.svelte'
 
 	import '@fontsource/roboto-slab/300.css'
 	import '@fontsource/roboto-slab/700.css'
@@ -15,6 +16,7 @@
 
 	import '../styles/styles.css'
 	import '../styles/print.css'
+	import Banner from '$lib/components/Banner.svelte'
 
 	export let data
 
@@ -28,7 +30,13 @@
 	(Top)
 </h2>
 
-<NearbyEvent contrast={data.url == '/'} bind:eventFound />
+<NearbyEvent contrast={hero} bind:eventFound />
+{#if !eventFound}
+	<Banner contrast={hero}>
+		<b>Join us at <ExternalLink href="https://pausecon.org/">PauseCon</ExternalLink> in London</b> for
+		three days of workshops, panels, and discussions, culminating in our biggest protest to date!
+	</Banner>
+{/if}
 
 <div class="layout" class:with-hero={hero}>
 	{#if hero}
