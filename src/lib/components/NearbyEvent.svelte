@@ -7,11 +7,14 @@
 	import type { CalendarResponse, Event } from '../../routes/api/calendar/+server'
 
 	export let contrast: boolean
+	export let eventFound = false
 
 	const FORMAT = new Intl.DateTimeFormat('en', { day: 'numeric', month: 'long' })
 	const MAX_DISTANCE_KM = 100
 
 	let nearbyEvent: Event | null = null
+
+	$: eventFound = !!nearbyEvent
 
 	onMount(async () => {
 		const [geo, events] = await Promise.all([fetchGeo(), fetchLuma()])

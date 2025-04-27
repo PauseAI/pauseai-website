@@ -18,6 +18,8 @@
 
 	export let data
 
+	let eventFound: boolean
+
 	// Show the hero on the homepage, but nowhere else
 	$: hero = data.url == '/'
 </script>
@@ -26,7 +28,7 @@
 	(Top)
 </h2>
 
-<NearbyEvent contrast={data.url == '/'} />
+<NearbyEvent contrast={data.url == '/'} bind:eventFound />
 
 <div class="layout" class:with-hero={hero}>
 	{#if hero}
