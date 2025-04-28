@@ -32,6 +32,7 @@ Here's a list of examples:
 - Describe your project in the `#💪projects` channel on our Discord server. Tell about the idea, what you want to do, where you want help and what amount of money you need. Mention `@microgrants` to notify the microgrants team!
 - Fill in the [MicroGrants Template](https://docs.google.com/document/d/1oPXezImarCY7MCYaT-lJb-uLNbbQ76O1FYNr-WTS6hI/edit?usp=sharing) and send it to [joep@pauseai.info](mailto:joep@pauseai.info).
 - We reach out to you. Either a) we give an OK right away, b) we want to see some changes/questions answered or c) give you a no.
+- Be sure to do this at least one month before you need the funds. Give us some time to discuss this in the team, give feedback or ask for clarification. Especially if the request is on the higher side.
 - We'll send you a Memorandum of Understanding (MoU) that you need to sign.
 - Get to work!
 - Tell us when you're done, and we'll send you the grant. If you need the money upfront, we can discuss that option, but it should not be the default.

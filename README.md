@@ -72,3 +72,7 @@ We cache content for other locales in a [git repository](https://github.com/Paus
 The contents of the repository are continuously deployed to Netlify when code is pushed.
 
 You can track the deployment status [here](https://app.netlify.com/sites/pauseai/deploys).
+
+## Collaboration
+
+If you have write access to the repository, please use the **"Squash and merge"** option when merging pull requests. This helps keep the Git history clean and easy to follow.

@@ -25,7 +25,7 @@ const OUTPUT_PATH = './src/lib/paraglide'
 const COMPILE_ARGS = {
 	project: PROJECT_PATH,
 	outdir: OUTPUT_PATH,
-	strategy: ['url', 'cookie', 'preferredLanguage', 'baseLocale']
+	strategy: ['cookie', 'url', 'preferredLanguage', 'baseLocale']
 }
 const CACHE_FILE = './.inlang-settings-cache.json'
 

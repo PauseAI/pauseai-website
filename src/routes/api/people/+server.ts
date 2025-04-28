@@ -1,8 +1,34 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import type { Person } from '$lib/types.js'
 import { defaultTitle } from '$lib/utils'
-import { error, json } from '@sveltejs/kit'
+import { json } from '@sveltejs/kit'
 import { fetchAllPages } from '$lib/airtable.js'
+
+/**
+ * Fallback people data to use in development if Airtable fetch fails
+ */
+const fallbackPeople: Person[] = [
+	{
+		id: 'fallback-stub1',
+		name: '[FALLBACK DATA] Example Person',
+		bio: 'I hold places when Airtable API is unavailable.',
+		title: 'Placeholder',
+		image: 'https://api.dicebear.com/7.x/bottts/svg?seed=fallback1',
+		privacy: false,
+		org: ['International'],
+		checked: true
+	},
+	{
+		id: 'fallback-stub2',
+		name: '[FALLBACK DATA] Holdor',
+		bio: 'Thrown at games',
+		title: 'of Plays',
+		image: 'https://api.dicebear.com/7.x/bottts/svg?seed=fallback2',
+		privacy: false,
+		org: ['International'],
+		checked: true
+	}
+]
 
 function recordToPerson(record: any): Person {
 	return {
@@ -30,7 +56,21 @@ export async function GET({ fetch, setHeaders }) {
 	})
 
 	try {
-		const records = await fetchAllPages(fetch, url)
+		// Create fallback records in the expected Airtable format
+		const fallbackRecords = fallbackPeople.map((person) => ({
+			id: person.id,
+			fields: {
+				Name: person.name,
+				bio: person.bio,
+				title: person.title,
+				image: [{ thumbnails: { large: { url: person.image } } }],
+				privacy: person.privacy,
+				organisation: person.org,
+				checked: person.checked
+			}
+		}))
+
+		const records = await fetchAllPages(fetch, url, fallbackRecords)
 		const out: Person[] = records
 			.map(recordToPerson)
 			.filter(filter)
@@ -39,6 +79,7 @@ export async function GET({ fetch, setHeaders }) {
 		return json(out)
 	} catch (e) {
 		console.error('Error fetching people:', e)
-		return error(500, e instanceof Error ? e.message : 'Failed to fetch people')
+		// Return fallback data instead of error
+		return json(fallbackPeople.filter(filter))
 	}
 }

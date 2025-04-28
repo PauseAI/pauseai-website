@@ -78,7 +78,7 @@ There were particularities that made them the first time and that's a reason to 
 ### Impact of protests
 
 It's quite common for people to question the effectiveness of protests and social movements in general.
-Of course, there are many cases where demonstrations don't yield any results, but there are also situations where the protesters' demands are met and it seems likely that those outcomes [where caused by the protests](https://www.socialchangelab.org/_files/ugd/503ba4_052959e2ee8d4924934b7efe3916981e.pdf).
+Of course, there are many cases where demonstrations don't yield any results, but there are also situations where the protesters' demands are met and it seems likely that those outcomes [were caused by the protests](https://www.socialchangelab.org/_files/ugd/503ba4_052959e2ee8d4924934b7efe3916981e.pdf).
 And [there are reasons to believe that AI activism could achieve similar results](https://forum.effectivealtruism.org/posts/WfodoyjePTTuaTjLe/efficacy-of-ai-activism-have-we-ever-said-no).
 
 If you don't like the idea of protesting anyways, we also [take other actions](/action), like contacting [governments directly](/lobby-tips).

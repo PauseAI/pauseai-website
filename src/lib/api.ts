@@ -4,7 +4,7 @@ import { AIRTABLE_API_KEY } from '$env/static/private'
 export const options = {
 	method: 'GET',
 	headers: {
-		Authorization: `Bearer ${AIRTABLE_API_KEY}`,
+		Authorization: `Bearer ${AIRTABLE_API_KEY || ''}`,
 		'Content-Type': 'application/json'
 	}
 }

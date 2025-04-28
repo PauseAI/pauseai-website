@@ -53,6 +53,11 @@ try {
 		throw new Error(
 			`runtime.baseLocale set to ${runtime.baseLocale} but our code assumes and hardcodes 'en'`
 		)
+
+	if (locales.length === 1 && locales[0] === 'en') {
+		console.log('No translation needed: en only')
+		process.exit(0)
+	}
 } catch (error) {
 	console.error('Failed to read locales from runtime', error.message)
 	process.exit(1)
@@ -151,10 +156,6 @@ const languageNamesInEnglish = new Intl.DisplayNames('en', { type: 'language' })
 	;(async () => {
 		// Get non-English languages directly from compiled runtime
 		const languageTags = Array.from(locales).filter((locale) => locale !== 'en')
-		if (languageTags.length === 0) {
-			console.log('No translation needed: en only')
-			process.exit(0)
-		}
 		console.log(`Translation running in ${isDryRun ? 'DRY RUN' : 'ACTIVE'} mode ${getDevContext()}`)
 		console.log(`Using target locales from compiled runtime: [${languageTags.join(', ')}]`)
 

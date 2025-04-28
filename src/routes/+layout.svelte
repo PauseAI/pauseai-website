@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { getLocale } from '$lib/paraglide/runtime'
+	import { getLocale, deLocalizeHref } from '$lib/paraglide/runtime'
 
 	import { Toaster } from 'svelte-french-toast'
 	import { ProgressBar } from '@prgm/sveltekit-progress-bar'
@@ -9,6 +9,8 @@
 	import PageTransition from './transition.svelte'
 	import Toc from '$lib/components/Toc.svelte'
 	import Banner from '$lib/components/Banner.svelte'
+	import Hero from '$lib/components/Hero.svelte'
+	import NearbyEvent from '$lib/components/NearbyEvent.svelte'
 
 	import '@fontsource/roboto-slab/300.css'
 	import '@fontsource/roboto-slab/700.css'
@@ -16,7 +18,6 @@
 
 	import '../styles/styles.css'
 	import '../styles/print.css'
-	import Hero from '$lib/components/Hero.svelte'
 
 	import { page } from '$app/stores'
 
@@ -25,9 +26,9 @@
 	// We use $page store instead of data prop for more reliable navigation
 	// This prevents "undefined" issues during navigation
 
+	let eventFound: boolean
 	// Show the hero on the homepage, but nowhere else
-	$: hero =
-		$page.url.pathname === `/${getLocale()}` || (getLocale() === 'en' && $page.url.pathname === '/')
+	$: hero = deLocalizeHref($page.url.pathname) === '/'
 </script>
 
 {#if data.localeAlert}
@@ -38,6 +39,8 @@
 		{@html data.localeAlert.message}
 	</Banner>
 {/if}
+
+<NearbyEvent contrast={deLocalizeHref(data.url) === '/'} bind:eventFound />
 
 <div>
 	<h2 style="width: 0; height: 0; margin: 0; padding: 0; visibility: hidden;" data-pagefind-ignore>
@@ -69,7 +72,7 @@
 		}}
 	/>
 
-	{#if !['/', '/outcomes', '/pdoom', '/quotes'].includes(getLocale())}
+	{#if !['/', '/outcomes', '/pdoom', '/quotes'].includes(deLocalizeHref($page.url.pathname))}
 		<Toc />
 	{/if}
 

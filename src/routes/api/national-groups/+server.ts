@@ -1,15 +1,57 @@
 import type { NationalGroup } from '$lib/types.js'
-import { json, error } from '@sveltejs/kit'
+import { json } from '@sveltejs/kit'
 import { fetchAllPages } from '$lib/airtable.js'
 
-const AIRTABLE_URL = 'https://api.airtable.com/v0/appWPTGqZmUcs3NWu/National%20Groups'
+const AIRTABLE_URL = 'https://api.airtable.com/v0/appWPTGqZmUcs3NWu/tblCwP5K6ENpR5qrd'
+
+// Fallback data to use in development if Airtable fetch fails
+const fallbackNationalGroups: NationalGroup[] = [
+	{
+		id: 'fallback-stub1',
+		name: '[FALLBACK DATA] Example Group 1',
+		notes: 'This is placeholder data shown when Airtable API is unavailable',
+		leader: 'Fall McBack',
+		discordUsername: 'noone',
+		email: 'fall.mcback@example.com',
+		legalEntity: false,
+		overseer: 'anthony@pauseai.info',
+		xLink: '',
+		discordLink: '',
+		whatsappLink: '',
+		website: 'http://example.com',
+		linktreeLink: '',
+		instagramLink: '',
+		tiktokLink: '',
+		public: true
+	},
+	{
+		id: 'fallback-stub2',
+		name: '[FALLBACK DATA] Example Group 2',
+		notes: 'etc',
+		leader: 'etc',
+		discordUsername: '',
+		email: '',
+		legalEntity: true,
+		overseer: 'etc',
+		xLink: '',
+		discordLink: '',
+		whatsappLink: '',
+		website: '',
+		linktreeLink: '',
+		instagramLink: '',
+		tiktokLink: '',
+		public: true
+	}
+]
 
 /**
  * Converts an Airtable record to a NationalGroup object
  */
 function recordToNationalGroup(record: any): NationalGroup {
-	// Debug: Log all field names to help identify the Linktree field
-	console.log('Record fields for', record.fields.Name, ':', Object.keys(record.fields))
+	// Only log in development to avoid cluttering production logs
+	if (import.meta.env.DEV) {
+		console.log('Record fields for', record.fields.Name, ':', Object.keys(record.fields))
+	}
 
 	return {
 		id: record.id || 'noId',
@@ -49,17 +91,34 @@ export async function GET({ fetch, setHeaders }) {
 		'cache-control': 'public, max-age=3600' // 1 hour in seconds
 	})
 
-	try {
-		const records = await fetchAllPages(fetch, AIRTABLE_URL)
+	const records = await fetchAllPages(
+		fetch,
+		AIRTABLE_URL,
+		fallbackNationalGroups.map((group) => ({
+			id: group.id,
+			fields: {
+				Name: group.name,
+				Notes: group.notes,
+				Leader: group.leader === 'Yes',
+				discord_username: [group.discordUsername],
+				email: [group.email],
+				'Legal entity': group.legalEntity ? 'Yes' : 'No',
+				Overseer: group.overseer === 'Yes',
+				X: group.xLink,
+				Discord: group.discordLink,
+				Whatsapp: group.whatsappLink,
+				website: group.website,
+				linktree: group.linktreeLink,
+				Instagram: group.instagramLink,
+				TikTok: group.tiktokLink
+			}
+		}))
+	)
 
-		const out: NationalGroup[] = records
-			.map(recordToNationalGroup)
-			// Sort alphabetically by name
-			.sort((a, b) => a.name.localeCompare(b.name))
+	const out: NationalGroup[] = records
+		.map(recordToNationalGroup)
+		// Sort alphabetically by name
+		.sort((a, b) => a.name.localeCompare(b.name))
 
-		return json(out)
-	} catch (e) {
-		console.error('Error fetching national groups:', e)
-		return error(500, e instanceof Error ? e.message : 'Failed to fetch national groups')
-	}
+	return json(out)
 }
