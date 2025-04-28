@@ -102,17 +102,12 @@
 		If you want to be taken seriously, you should use email too.
 	</li>
 	<li>
-		<b>Making AI Risk "common knowledge" is key.</b> We need to get everyone to know that everyone else knows about AI risk, 
-                so it becomes "common knowledge". As well as, convincing influential people, like politicians, journalists, 
-                and lobbyists. (E.g. See Connor's explanation as to why making AI Risk "common knowledge" is super important  
-		   <ExternalLink
-			href={'https://youtu.be/OUjnVeydhCM?t=1969'}
-			> here
-	 	   </ExternalLink> and 
-		   <ExternalLink
-			href={'https://youtu.be/1j--6JYRLVk?t=5716'}
-			> here
-	 	   </ExternalLink>.)
+		<b>Making AI Risk "common knowledge" is key.</b> We need to get everyone to know that everyone
+		else knows about AI risk, so it becomes "common knowledge". As well as, convincing influential
+		people, like politicians, journalists, and lobbyists. (E.g. See Connor's explanation as to why
+		making AI Risk "common knowledge" is super important
+		<ExternalLink href={'https://youtu.be/OUjnVeydhCM?t=1969'}>here</ExternalLink> and
+		<ExternalLink href={'https://youtu.be/1j--6JYRLVk?t=5716'}>here</ExternalLink>.)
 	</li>
 	<li>
 		<b>No social pressure.</b> If you post something publicly, a politician might be hesitant to respond

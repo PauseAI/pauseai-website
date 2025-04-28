@@ -2,13 +2,17 @@
 title: FAQ
 description: Frequently asked questions about PauseAI and the risks of superintelligent AI.
 ---
+
+<script>
+    import SimpleToc from '$lib/components/simple-toc/SimpleToc.svelte'
+</script>
 <style>
     h2 {
         font-size: 1.2rem;
     }
 </style>
 
-## Contents
+<SimpleToc />
 
 ## Who are you?
 

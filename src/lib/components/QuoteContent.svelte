@@ -39,18 +39,13 @@
 	}
 
 	.quote-text::before {
-		content: open-quote;
+		content: '\201C'; /* English open-quote */
 		font-size: clamp(2rem, 4vw, 4rem);
 		position: absolute;
 		top: -1rem;
 		font-weight: 800;
 		left: -1rem;
 		opacity: 0.3;
-	}
-
-	.quote-text:after {
-		content: close-quote;
-		visibility: hidden;
 	}
 
 	.author-section {

@@ -3,6 +3,10 @@ title: 'Running a local PauseAI Community: A Guide to Local Organizing'
 description: How can you set up a community and make an impact, locally?
 ---
 
+<script>
+  import SimpleToc from '$lib/components/simple-toc/SimpleToc.svelte'
+</script>
+
 ## Why is local organizing important?
 
 Local organizing–working with groups of volunteers in local communities to advance a cause–is the heart and soul of the PauseAI movement.
@@ -14,7 +18,7 @@ This guide will walk you through the ins and outs of local organizing, such as r
 
 Good luck. The future is yours.
 
-## Table of contents
+<SimpleToc />
 
 ## Set up the basics
 
@@ -322,9 +326,9 @@ Here is a sample table of roles for inspiration:
 
 So, you have a well-organized group of volunteers, eager to get involved and with a clear sense of their responsibilities. Now what?
 
-There are many different ways to achieve your goals as a local group. 
+There are many different ways to achieve your goals as a local group.
 Check out our [events page](/events) for ideas of the next events that are planned. Whenever you decide to organize one, don't forget to add it there!
-In addition to them, the following list is not meant to be exhaustive, but rather to provide inspiration as you begin planning your campaign. 
+In addition to them, the following list is not meant to be exhaustive, but rather to provide inspiration as you begin planning your campaign.
 
 ### Social events & having drinks
 

@@ -2,6 +2,7 @@
 title: PauseAI MicroGrants
 description: Our community fund to support projects that align with our mission.
 ---
+
 We have a huge list of projects that our community is working on.
 There's so much to do.
 And sometimes we need funds to be more effective.

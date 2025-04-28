@@ -4,14 +4,18 @@
 	import { botName } from '$lib/config'
 	import { page } from '$app/stores'
 	import SearchIcon from 'lucide-svelte/icons/search'
+	import LanguageSwitcher from '$lib/components/LanguageSwitcher.svelte'
+	import * as m from '$lib/paraglide/messages.js'
+	import { localizeUrl } from '$lib/paraglide/runtime'
 	import { initializeCqwResizeObserver } from '$lib/container-query-units'
 	import { onMount } from 'svelte'
+
 	const enableBot = false
 
 	export let inverted = false
 	export let moveUp = false
 
-	$: logo_animate = $page.url.pathname != '/'
+	$: logo_animate = localizeUrl($page.url.pathname) != '/'
 
 	let nav: HTMLElement
 
@@ -34,17 +38,18 @@
 	</div>
 
 	<div class="nav-links">
-		<NavLink {inverted} first href="/learn">Learn</NavLink>
-		<NavLink {inverted} href="/proposal">Proposal</NavLink>
-		<NavLink {inverted} href="/events">Events</NavLink>
-		<NavLink {inverted} href="/faq">FAQ</NavLink>
-		<NavLink {inverted} href="/action">Act</NavLink>
-		<NavLink {inverted} href="/donate">Donate</NavLink>
+		<NavLink {inverted} first href="/learn">{m.header_learn()}</NavLink>
+		<NavLink {inverted} href="/proposal">{m.header_proposal()}</NavLink>
+		<NavLink {inverted} href="/events">{m.header_events()}</NavLink>
+		<NavLink {inverted} href="/faq">{m.header_faq()}</NavLink>
+		<NavLink {inverted} href="/action">{m.header_action()}</NavLink>
+		<NavLink {inverted} href="/donate">{m.header_donate()}</NavLink>
 		{#if enableBot}
 			<NavLink {inverted} href="/chat">{botName}</NavLink>
 		{/if}
 		<!-- <NavLink href="/about">About</NavLink> -->
-		<NavLink {inverted} c2a href="/join">Join</NavLink>
+		<NavLink {inverted} c2a href="/join">{m.header_join()}</NavLink>
+		<LanguageSwitcher {inverted} />
 		<NavLink {inverted} href="/search" ariaLabel="Search"><SearchIcon size="0.8em" /></NavLink>
 	</div>
 </nav>
@@ -54,7 +59,7 @@
 		--logo-offset: 2.4rem;
 		--logo-width-big: 11rem;
 		--logo-width-small: 10rem;
-		--min-space-between: 3rem;
+		--min-space-between: 1rem;
 
 		--cqw: 1cqw;
 	}
@@ -62,7 +67,6 @@
 	.inverted-header {
 		color: white;
 		z-index: 1;
-		--text: white;
 	}
 
 	nav {
@@ -126,6 +130,7 @@
 	}
 
 	.nav-links {
+		position: relative;
 		display: flex;
 		text-transform: uppercase;
 		flex-wrap: wrap;

@@ -19,7 +19,6 @@
 
 [context.deploy-preview]
   command = "pnpm run build:dev"
-
 # Use [dev] to set configuration overrides for local
 # development environments run using Netlify Dev - except
 # for environment variables. Environment variables for Netlify
