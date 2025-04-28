@@ -43,7 +43,7 @@ export function createGitClient(): SimpleGit {
  * @param verbose Whether to log detailed output
  * @returns Success status
  */
-export function setupTranslationRepo(repoDir: string, verbose: boolean = false): boolean {
+export function setupTranslationRepo(repoDir: string, verbose = false): boolean {
 	try {
 		// Check if the directory exists and is a git repo
 		if (fs.existsSync(path.join(repoDir, '.git'))) {
