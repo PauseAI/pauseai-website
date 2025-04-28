@@ -97,7 +97,7 @@ export function createSymlinkIfNeeded(targetPath: string, linkPath: string, verb
 	ensureDirectoryExists(path.dirname(linkPath), false)
 
 	// Remove existing file or link if it exists
-	if (fsSync.existsSync(linkPath)) {
+	if (fsSync.lstatSync(linkPath, { throwIfNoEntry: false })) {
 		fsSync.unlinkSync(linkPath)
 	}
 
