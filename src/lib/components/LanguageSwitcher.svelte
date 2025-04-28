@@ -216,7 +216,6 @@
 		flex-direction: column;
 		gap: 0.5rem;
 		color: var(--text);
-		background: var(--bg-secondary);
 		font-family: var(--font-heading);
 	}
 
