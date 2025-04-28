@@ -102,7 +102,7 @@ export function createSymlinkIfNeeded(targetPath: string, linkPath: string, verb
 	}
 
 	// Create symbolic link
-	fsSync.symlinkSync(path.relative(path.dirname(linkPath), targetPath), linkPath)
+	fsSync.symlinkSync(path.relative(path.dirname(linkPath), targetPath), linkPath, 'junction')
 	if (verbose) console.log(`  \u2713 Linked ${linkPath} to ${targetPath}`)
 }
 
