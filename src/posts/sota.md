@@ -2,7 +2,6 @@
 title: State-of-the-art AI capabilities vs humans
 description: How smart are the latest AI models compared to humans?
 ---
-
 How smart are the latest AI models compared to humans?
 Let's take a look at how the most competent AI systems compare with humans in various domains.
 The list below is regularly updated to reflect the latest developments.

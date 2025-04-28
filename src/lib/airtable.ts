@@ -1,5 +1,4 @@
 import { options } from '$lib/api.js'
-import { isDev, getDevContext } from '$lib/env.ts'
 
 type AirtableResponse = {
 	records: Record<string, unknown>[]
@@ -18,6 +17,9 @@ export async function fetchAllPages(
 	url: string,
 	fallbackData: Record<string, unknown>[] = []
 ) {
+	// Check if we're in development mode
+	const isDevelopment = import.meta.env.MODE === 'development'
+
 	let allRecords: Record<string, unknown>[] = []
 	// https://airtable.com/developers/web/api/list-records#query-pagesize
 	let offset
@@ -30,12 +32,11 @@ export async function fetchAllPages(
 
 	// If API key is not configured
 	if (!apiKeyConfigured) {
-		console.warn(`⚠️ Airtable API key not configured in ${getDevContext()}`)
-		if (isDev()) {
-			console.log('...but using fallback data in development mode.')
+		if (isDevelopment) {
+			console.warn('⚠️ Airtable API key not configured. Using fallback data in development mode.')
 			return fallbackData
 		} else {
-			throw new Error('Airtable API key is required in production')
+			throw new Error('Airtable API key is required in production environment')
 		}
 	}
 
@@ -47,17 +48,13 @@ export async function fetchAllPages(
 			const response = await customFetch(fullUrl, options)
 			if (!response.ok) {
 				const errorText = await response.text()
-				console.error(
-					`${getDevContext()} Airtable API error:`,
-					response.status,
-					response.statusText,
-					errorText
-				)
+				console.error('Airtable API error:', response.status, response.statusText, errorText)
 
-				if (isDev() && fallbackData.length > 0) {
+				if (isDevelopment && fallbackData.length > 0) {
 					console.warn('⚠️ Using fallback data in development mode due to Airtable API error')
 					return fallbackData
 				}
+
 				throw new Error(
 					`Failed to fetch data from Airtable: ${response.statusText}. Details: ${errorText}`
 				)
@@ -72,7 +69,7 @@ export async function fetchAllPages(
 	} catch (error) {
 		console.error('Error in fetchAllPages:', error)
 
-		if (isDev() && fallbackData.length > 0) {
+		if (isDevelopment && fallbackData.length > 0) {
 			console.warn('⚠️ Using fallback data in development mode due to error')
 			return fallbackData
 		}

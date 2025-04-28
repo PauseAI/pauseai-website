@@ -17,7 +17,6 @@
 	} from '@glidejs/glide/dist/glide.modular.esm'
 	import '@glidejs/glide/dist/css/glide.core.css'
 	import { onMount } from 'svelte'
-	import * as m from '$lib/paraglide/messages'
 
 	const MOBILE_NAVIGATION_DISTANCE_THRESHOLD = 10
 	const AUTOPLAY_INTERVAL = 10_000
@@ -27,39 +26,39 @@
 
 	const quotes = [
 		{
-			text: m.home_quotes_cais_text(),
-			author: m.home_quotes_cais_author(),
-			title: m.home_quotes_cais_title(),
+			text: 'Mitigating the risk of extinction from AI should be a global priority alongside other societal-scale risks such as pandemics and nuclear war.',
+			author: 'Statement on AI Risk',
+			title: 'Signed by hundreds of experts, including the top AI labs and scientists',
 			image: CAIS
 		},
 		{
-			text: m.home_quotes_hinton_text(),
+			text: 'If you take the existential risk seriously, as I now do, it might be quite sensible to just stop developing these things any further.',
 			author: 'Geoffrey Hinton',
-			title: m.home_quotes_hinton_title(),
+			title: 'Nobel Prize winner & "Godfather of AI"',
 			image: Hinton
 		},
 		{
-			text: m.home_quotes_hawking_text(),
+			text: 'The development of full artificial intelligence could spell the end of the human race.',
 			author: 'Stephen Hawking',
-			title: m.home_quotes_hawking_title(),
+			title: 'Theoretical physicist and cosmologist',
 			image: Hawking
 		},
 		{
-			text: m.home_quotes_turing_text(),
+			text: '... we should have to expect the machines to take control.',
 			author: 'Alan Turing',
-			title: m.home_quotes_turing_title(),
+			title: 'Inventor of the modern computer',
 			image: Turing
 		},
 		{
-			text: m.home_quotes_russell_text(),
+			text: 'If we pursue [our current approach], then we will eventually lose control over the machines',
 			author: 'Stuart Russell',
-			title: m.home_quotes_russell_title(),
+			title: 'Writer of the AI textbook',
 			image: Russell
 		},
 		{
-			text: m.home_quotes_bengio_text(),
+			text: 'Rogue AI may be dangerous for the whole of humanity. Banning powerful AI systems (say beyond the abilities of GPT-4) that are given autonomy and agency would be a good start.',
 			author: 'Yoshua Bengio',
-			title: m.home_quotes_bengio_title(),
+			title: 'AI Turing Award winner',
 			image: Bengio
 		}
 	]
@@ -133,7 +132,7 @@
 			<button class="dot reset-button" class:active={currentSlide === i} data-glide-dir={`=${i}`} />
 		{/each}
 		<button class="nav-button" data-glide-dir=">"><ArrowRight size="1em" /></button>
-		<a href="/quotes">{m.home_quotes_all()}</a>
+		<a href="/quotes">See all quotes</a>
 	</div>
 </div>
 

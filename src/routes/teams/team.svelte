@@ -77,8 +77,7 @@
 		margin-bottom: 1rem;
 	}
 
-	/* Style applied to the A component inside h3 */
-	h3 :global(a) {
+	h3 a {
 		align-items: center;
 		display: inline-flex;
 	}

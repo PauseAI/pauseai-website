@@ -3,7 +3,6 @@
 	import PostMeta from '$lib/components/PostMeta.svelte'
 	import QuotesCarousel from '$lib/components/QuotesCarousel.svelte'
 	import Stats from '$lib/components/Stats.svelte'
-	import * as m from '$lib/paraglide/messages.js'
 
 	const title = 'We need to Pause AI'
 	const description = 'We are risking human extinction. We need to pause AI development, right now.'
@@ -19,26 +18,30 @@
 <Stats />
 <div class="divider" />
 <section>
-	<Block linkText={m.home_risks_c2a()} href="/risks">
-		<span slot="title">{@html m.home_risks_title()}</span>
-		{m.home_risks_content()}
+	<Block linkText="Read about the risks" href="/risks">
+		<span slot="title">We risk <u>losing control</u></span>
+		AI can have amazing benefits, but it could also erode our democracy, destabilize our economy and
+		could be used to create powerful cyber weapons.
 	</Block>
-	<Block linkText={m.home_xrisk_c2a()} href="/xrisk">
-		<span slot="title">{@html m.home_xrisk_title()}</span>
-		{m.home_xrisk_content()}
+	<Block linkText="How and why AI could kill us" href="/xrisk">
+		<span slot="title">We risk <u>human extinction</u></span>
+		Many AI labs and experts agree: AI could end humanity.
 	</Block>
-	<Block linkText={m.home_proposal_c2a()} href="/proposal">
-		<span slot="title">{@html m.home_proposal_title()}</span>
-		{m.home_proposal_content()}
+	<Block linkText="Read the proposal" href="/proposal">
+		<span slot="title">We need a <u>pause</u></span>
+		Stop the development of the most powerful general AI systems until we know how to make them safe.
+		This needs to happen on an international level, and it needs to happen soon.
 	</Block>
-	<Block linkText={m.home_urgency_c2a()} href="/urgency">
-		<span slot="title">{@html m.home_urgency_title()}</span>
-		{m.home_urgency_content()}
-	</Block>
-	<Block linkText={m.home_action_c2a()} href="/action">
-		<span slot="title">{@html m.home_action_title()}</span>
-		{m.home_action_content()}
-	</Block>
+	<Block linkText="How long do we have?" href="/urgency">
+		<span slot="title">WE NEED TO ACT <u>RIGHT NOW</u></span>
+		In 2020, experts thought we had more than 35 years until AGI. Recent breakthroughs show we might
+		be almost there. Superintelligence could be one innovation away, so we should tread carefully.</Block
+	>
+	<Block linkText="Take action" href="/action">
+		<span slot="title"><u>YOU</u> CAN HELP</span>
+		Too few people are well-informed about the potential risks of AI. Inform others, and help stop this
+		race to the bottom.</Block
+	>
 </section>
 
 <style>

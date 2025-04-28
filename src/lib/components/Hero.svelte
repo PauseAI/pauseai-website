@@ -4,7 +4,6 @@
 	import sf from '$assets/protests/san-francisco.jpeg?enhanced'
 	import { onMount } from 'svelte'
 	import { initializeCqwResizeObserver } from '$lib/container-query-units'
-	import * as m from '$lib/paraglide/messages.js'
 
 	let currentImageIndex = 0
 	const images = [london, denHaag, sf]
@@ -51,11 +50,11 @@
 	{/if}
 	<div class="overlay"></div>
 	<div class="tagline" bind:this={tagline}>
-		<h2>{m.home_hero()}</h2>
+		<h2>DON'T LET AI COMPANIES GAMBLE WITH OUR FUTURE</h2>
 	</div>
 	<div class="actions">
-		<a href="/join">{m.header_join()}</a>
-		<a href="/donate">{m.header_donate()}</a>
+		<a href="/join">Join</a>
+		<a href="/donate">Donate</a>
 	</div>
 </div>
 

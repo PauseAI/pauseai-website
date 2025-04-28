@@ -20,9 +20,4 @@ deno.lock
 /messages/*
 !/messages/en.json
 /project.inlang/cache
-/project.inlang/settings.json
-/src/lib/generated
 /src/temp
-
-# Environment-specific cache files
-/.inlang-settings-cache.json
