@@ -143,7 +143,7 @@
 	}
 </script>
 
-<div class:hidden={!showSwitcher}>
+{#if showSwitcher}
 	<Navlink {inverted} narrow active={open}>
 		<button
 			class="button reset-button"
@@ -156,7 +156,7 @@
 			<Globe size="0.9em" />&nbsp;{getLocale().toUpperCase()}
 		</button>
 	</Navlink>
-</div>
+{/if}
 {#if (open || building) && showSwitcher}
 	<div class="dropdown" bind:this={dropdown}>
 		<Card>
@@ -242,11 +242,5 @@
 	.auto-text {
 		font-size: 0.9em;
 		letter-spacing: 0.05em;
-	}
-
-	/* Hide the language switcher but preserve its space in the layout */
-	:global(.hidden) {
-		visibility: hidden;
-		pointer-events: none;
 	}
 </style>
