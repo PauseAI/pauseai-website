@@ -135,8 +135,8 @@ export function trackTranslation(
  */
 export function printDryRunSummary(
 	stats: TranslationStats,
-	verbose: boolean = false,
-	cacheCount: number = 0,
+	verbose = false,
+	cacheCount = 0,
 	modelName: string = DEFAULT_MODEL
 ): void {
 	const modelConfig = MODEL_CONFIGS[modelName] || MODEL_CONFIGS[DEFAULT_MODEL]

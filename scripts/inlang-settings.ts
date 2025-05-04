@@ -95,7 +95,7 @@ function setupEnglishSupport(verbose: boolean): void {
 	}
 }
 
-function regenerateSettings(verbose: boolean = false): void {
+function regenerateSettings(verbose = false): void {
 	// Get default settings from our centralized config
 	const defaultSettings = getDefaultSettings()
 

@@ -78,8 +78,8 @@ export async function postChatCompletion(
 	client: ReturnType<typeof createLlmClient>,
 	queue: PQueue,
 	messages: { role: string; content: string }[],
-	temperature: number = 0,
-	isDryRun: boolean = false
+	temperature = 0,
+	isDryRun = false
 ): Promise<string> {
 	// In dry run mode, skip the actual API call
 	if (isDryRun) {

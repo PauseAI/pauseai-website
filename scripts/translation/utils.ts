@@ -36,7 +36,7 @@ export const PREPROCESSING_COMMENT_AFTER_PATTERN: PatternCommentPair[] = [
  * @param dir Directory path to create
  * @param verbose Whether to log the result
  */
-export function ensureDirectoryExists(dir: string, verbose: boolean = false): void {
+export function ensureDirectoryExists(dir: string, verbose = false): void {
 	if (!fsSync.existsSync(dir)) {
 		fsSync.mkdirSync(dir, { recursive: true })
 		if (verbose) console.log(`  \u2713 Created ${dir}`)
@@ -50,7 +50,7 @@ export function ensureDirectoryExists(dir: string, verbose: boolean = false): vo
  * @param dirs Array of directory paths to ensure exist
  * @param verbose Whether to log the results
  */
-export function ensureDirectoriesExist(dirs: string[], verbose: boolean = false): void {
+export function ensureDirectoriesExist(dirs: string[], verbose = false): void {
 	for (const dir of dirs) {
 		ensureDirectoryExists(dir, verbose)
 	}
@@ -65,7 +65,7 @@ const joinPath = (...parts: string[]) => path.normalize(path.join(...parts))
  * @param description Optional description for the log
  * @param verbose Whether to log the removal
  */
-export function removeIfExists(path: string, description?: string, verbose: boolean = true): void {
+export function removeIfExists(path: string, description?: string, verbose = true): void {
 	if (fsSync.existsSync(path)) {
 		path = joinPath(path)
 		const desc = description || path
@@ -80,11 +80,7 @@ export function removeIfExists(path: string, description?: string, verbose: bool
  * @param description Optional description prefix for the log
  * @param verbose Whether to log the removals
  */
-export function removeMultiple(
-	paths: string[],
-	description?: string,
-	verbose: boolean = true
-): void {
+export function removeMultiple(paths: string[], description?: string, verbose = true): void {
 	paths.forEach((path) =>
 		removeIfExists(path, description ? `${description}: ${path}` : path, verbose)
 	)
@@ -96,21 +92,17 @@ export function removeMultiple(
  * @param linkPath The link path to create
  * @param verbose Whether to log the result
  */
-export function createSymlinkIfNeeded(
-	targetPath: string,
-	linkPath: string,
-	verbose: boolean = false
-): void {
+export function createSymlinkIfNeeded(targetPath: string, linkPath: string, verbose = false): void {
 	// Make sure the directory exists
 	ensureDirectoryExists(path.dirname(linkPath), false)
 
 	// Remove existing file or link if it exists
-	if (fsSync.existsSync(linkPath)) {
+	if (fsSync.lstatSync(linkPath, { throwIfNoEntry: false })) {
 		fsSync.unlinkSync(linkPath)
 	}
 
 	// Create symbolic link
-	fsSync.symlinkSync(path.relative(path.dirname(linkPath), targetPath), linkPath)
+	fsSync.symlinkSync(path.relative(path.dirname(linkPath), targetPath), linkPath, 'junction')
 	if (verbose) console.log(`  \u2713 Linked ${linkPath} to ${targetPath}`)
 }
 
@@ -126,9 +118,9 @@ export function createSymlinkIfNeeded(
  */
 export function requireEnvVar(
 	variable: string,
-	dryRunFallback: string = 'dry-run-placeholder',
-	isDryRun: boolean = false,
-	verbose: boolean = false
+	dryRunFallback = 'dry-run-placeholder',
+	isDryRun = false,
+	verbose = false
 ): string {
 	const value = process.env[variable]
 
