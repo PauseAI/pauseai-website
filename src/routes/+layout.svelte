@@ -13,7 +13,6 @@
 	import Hero from '$lib/components/Hero.svelte'
 	import NearbyEvent from '$lib/components/NearbyEvent.svelte'
 	import ExternalLink from '$lib/components/custom/a.svelte'
-	import Banner from '$lib/components/Banner.svelte'
 
 	import '@fontsource/roboto-slab/300.css'
 	import '@fontsource/roboto-slab/700.css'
@@ -57,37 +56,36 @@
 	</Banner>
 {/if}
 
-	<div class="layout" class:with-hero={hero}>
-		{#if hero}
-			<Hero />
-		{/if}
-		<Header inverted={hero} moveUp={hero} />
-
-		<main>
-			<PageTransition url={$page.url.pathname}>
-				<slot />
-			</PageTransition>
-		</main>
-
-		<Footer />
-	</div>
-
-	<Toaster
-		toastOptions={{
-			style: 'background-color: var(--bg-subtle); color: var(--text)',
-			iconTheme: {
-				primary: 'var(--brand)',
-				secondary: 'white'
-			}
-		}}
-	/>
-
-	{#if !['/', '/outcomes', '/pdoom', '/quotes'].includes(deLocalizeHref($page.url.pathname))}
-		<Toc />
+<div class="layout" class:with-hero={hero}>
+	{#if hero}
+		<Hero />
 	{/if}
+	<Header inverted={hero} moveUp={hero} />
 
-	<ProgressBar color="var(--brand)" />
+	<main>
+		<PageTransition url={$page.url.pathname}>
+			<slot />
+		</PageTransition>
+	</main>
+
+	<Footer />
 </div>
+
+<Toaster
+	toastOptions={{
+		style: 'background-color: var(--bg-subtle); color: var(--text)',
+		iconTheme: {
+			primary: 'var(--brand)',
+			secondary: 'white'
+		}
+	}}
+/>
+
+{#if !['/', '/outcomes', '/pdoom', '/quotes'].includes(deLocalizeHref($page.url.pathname))}
+	<Toc />
+{/if}
+
+<ProgressBar color="var(--brand)" />
 
 <style>
 	/* @import url('$lib/reset.css');
