@@ -52,7 +52,7 @@ It is [psychologically difficult](/psychology-of-xrisk) to think about potential
 You can make a difference. Volunteers in Australia raise awareness, protest, lobby, and support the global PauseAI movement.
 
 - [Join our community](/join)
-- [Join our next Australian online or in-person event](https://lu.ma/PauseAIAustralia)
+- [Attend our next Australian online or in-person event](https://lu.ma/PauseAIAustralia)
 - Sign the Australians for AI Safety [open letter](https://www.australiansforaisafety.com.au/letters)
 - [Contact politicians](https://pauseai.info/email-builder)
 - Talk to your friends and family about AI risk
