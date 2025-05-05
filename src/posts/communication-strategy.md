@@ -2,6 +2,7 @@
 title: Communication Strategy
 description: How we communicate about pausing AI development.
 ---
+
 ## How we communicate
 
 - **Defer to experts**. We are warning people about a scenario that is so extreme and scary, that a gut-level response is to dismiss it as crazy talk. Show the [expert polls and surveys](/polls-and-surveys). The [top three](https://twitter.com/PauseAI/status/1734641804245455017) most cited AI scientists are all warning about x-risk. Deferring to them is a good way to make our case.

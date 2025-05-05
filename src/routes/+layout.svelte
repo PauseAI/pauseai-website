@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { getLocale, deLocalizeHref } from '$lib/paraglide/runtime'
+
 	import { Toaster } from 'svelte-french-toast'
 	import { ProgressBar } from '@prgm/sveltekit-progress-bar'
 
@@ -7,6 +9,7 @@
 	import PageTransition from './transition.svelte'
 
 	import Toc from '$lib/components/Toc.svelte'
+	import Banner from '$lib/components/Banner.svelte'
 	import Hero from '$lib/components/Hero.svelte'
 	import NearbyEvent from '$lib/components/NearbyEvent.svelte'
 	import ExternalLink from '$lib/components/custom/a.svelte'
@@ -19,17 +22,30 @@
 	import '../styles/styles.css'
 	import '../styles/print.css'
 
+	import { page } from '$app/stores'
+
 	export let data
 
-	let eventFound: boolean
+	// We use $page store instead of data prop for more reliable navigation
+	// This prevents "undefined" issues during navigation
 
+	let eventFound: boolean
 	// Show the hero on the homepage, but nowhere else
-	$: hero = data.url == '/'
+	$: hero = deLocalizeHref($page.url.pathname) === '/'
 </script>
 
 <h2 style="width: 0; height: 0; margin: 0; padding: 0; visibility: hidden;" data-pagefind-ignore>
 	(Top)
 </h2>
+
+{#if data.localeAlert}
+	<Banner
+		contrast={data.localeAlert.isDev}
+		id={data.localeAlert.isDev ? undefined : 'locale-switch'}
+	>
+		{@html data.localeAlert.message}
+	</Banner>
+{/if}
 
 <NearbyEvent contrast={hero} bind:eventFound />
 {#if !eventFound}
@@ -41,36 +57,37 @@
 	</Banner>
 {/if}
 
-<div class="layout" class:with-hero={hero}>
-	{#if hero}
-		<Hero />
+	<div class="layout" class:with-hero={hero}>
+		{#if hero}
+			<Hero />
+		{/if}
+		<Header inverted={hero} moveUp={hero} />
+
+		<main>
+			<PageTransition url={$page.url.pathname}>
+				<slot />
+			</PageTransition>
+		</main>
+
+		<Footer />
+	</div>
+
+	<Toaster
+		toastOptions={{
+			style: 'background-color: var(--bg-subtle); color: var(--text)',
+			iconTheme: {
+				primary: 'var(--brand)',
+				secondary: 'white'
+			}
+		}}
+	/>
+
+	{#if !['/', '/outcomes', '/pdoom', '/quotes'].includes(deLocalizeHref($page.url.pathname))}
+		<Toc />
 	{/if}
-	<Header inverted={hero} moveUp={hero} />
 
-	<main>
-		<PageTransition url={data.url}>
-			<slot />
-		</PageTransition>
-	</main>
-
-	<Footer />
+	<ProgressBar color="var(--brand)" />
 </div>
-
-<Toaster
-	toastOptions={{
-		style: 'background-color: var(--bg-subtle); color: var(--text)',
-		iconTheme: {
-			primary: 'var(--brand)',
-			secondary: 'white'
-		}
-	}}
-/>
-
-{#if !['/', '/outcomes', '/pdoom', '/quotes'].includes(data.url)}
-	<Toc />
-{/if}
-
-<ProgressBar color="var(--brand)" />
 
 <style>
 	/* @import url('$lib/reset.css');

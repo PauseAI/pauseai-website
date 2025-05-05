@@ -1,11 +1,15 @@
-import adapter from '@sveltejs/adapter-netlify'
+import adapterPatchPrerendered from './src/lib/adapter-patch-prerendered.js'
+import adapterNetlify from '@sveltejs/adapter-netlify'
 import { vitePreprocess } from '@sveltejs/vite-plugin-svelte'
 
 import { mdsvex, escapeSvelte } from 'mdsvex'
 import shiki from 'shiki'
 import remarkUnwrapImages from 'remark-unwrap-images'
 import remarkToc from 'remark-toc'
+import remarkHeadingId from 'remark-heading-id'
 import rehypeSlug from 'rehype-slug'
+
+import { locales } from './src/lib/paraglide/runtime.js'
 
 /** @type {import('mdsvex').MdsvexOptions} */
 const mdsvexOptions = {
@@ -20,7 +24,7 @@ const mdsvexOptions = {
 			return `{@html \`${html}\` }`
 		}
 	},
-	remarkPlugins: [remarkUnwrapImages, [remarkToc, { tight: true }]],
+	remarkPlugins: [remarkUnwrapImages, [remarkToc, { tight: true }], remarkHeadingId],
 	rehypePlugins: [rehypeSlug]
 }
 
@@ -28,12 +32,33 @@ const mdsvexOptions = {
 const config = {
 	extensions: ['.svelte', '.md'],
 	preprocess: [vitePreprocess(), mdsvex(mdsvexOptions)],
+	// Custom warning handler to selectively filter out specific a11y warnings
+	onwarn(warning, handler) {
+		// Skip specific accessibility warnings
+		if (warning.code === 'a11y-missing-attribute' && warning.message.includes('title')) {
+			// Skip warnings about missing title attributes on iframes
+			return
+		}
+		if (warning.code === 'a11y-no-noninteractive-tabindex') {
+			// Skip warnings about tabindex on non-interactive elements (like iframes)
+			return
+		}
+		// Call the default handler for all other warnings
+		handler(warning)
+	},
 	kit: {
-		adapter: adapter({
-			edge: true
-		}),
+		adapter: adapterPatchPrerendered(
+			adapterNetlify({
+				edge: true
+			})
+		),
 		alias: {
 			$assets: 'src/assets'
+		},
+		prerender: {
+			// Allows dead links to be rendered
+			handleHttpError: 'warn',
+			entries: ['*'].concat(locales.map((locale) => '/' + locale))
 		}
 	}
 }
