@@ -7,10 +7,12 @@
 	import Footer from './footer.svelte'
 	import Header from './header.svelte'
 	import PageTransition from './transition.svelte'
+
 	import Toc from '$lib/components/Toc.svelte'
 	import Banner from '$lib/components/Banner.svelte'
 	import Hero from '$lib/components/Hero.svelte'
 	import NearbyEvent from '$lib/components/NearbyEvent.svelte'
+	import ExternalLink from '$lib/components/custom/a.svelte'
 
 	import '@fontsource/roboto-slab/300.css'
 	import '@fontsource/roboto-slab/700.css'
@@ -31,6 +33,10 @@
 	$: hero = deLocalizeHref($page.url.pathname) === '/'
 </script>
 
+<h2 style="width: 0; height: 0; margin: 0; padding: 0; visibility: hidden;" data-pagefind-ignore>
+	(Top)
+</h2>
+
 {#if data.localeAlert}
 	<Banner
 		contrast={data.localeAlert.isDev}
@@ -40,44 +46,46 @@
 	</Banner>
 {/if}
 
-<NearbyEvent contrast={deLocalizeHref(data.url) === '/'} bind:eventFound />
+<NearbyEvent contrast={hero} bind:eventFound />
+{#if !eventFound}
+	<Banner contrast={hero}>
+		<b
+			>Join us at <ExternalLink href="https://pausecon.org/">PauseCon</ExternalLink> in London from June
+			27th to 30th</b
+		> for three days of workshops, panels, and discussions, culminating in our biggest protest to date!
+	</Banner>
+{/if}
 
-<div>
-	<h2 style="width: 0; height: 0; margin: 0; padding: 0; visibility: hidden;" data-pagefind-ignore>
-		(Top)
-	</h2>
-
-	<div class="layout" class:with-hero={hero}>
-		{#if hero}
-			<Hero />
-		{/if}
-		<Header inverted={hero} moveUp={hero} />
-
-		<main>
-			<PageTransition url={$page.url.pathname}>
-				<slot />
-			</PageTransition>
-		</main>
-
-		<Footer />
-	</div>
-
-	<Toaster
-		toastOptions={{
-			style: 'background-color: var(--bg-subtle); color: var(--text)',
-			iconTheme: {
-				primary: 'var(--brand)',
-				secondary: 'white'
-			}
-		}}
-	/>
-
-	{#if !['/', '/outcomes', '/pdoom', '/quotes'].includes(deLocalizeHref($page.url.pathname))}
-		<Toc />
+<div class="layout" class:with-hero={hero}>
+	{#if hero}
+		<Hero />
 	{/if}
+	<Header inverted={hero} moveUp={hero} />
 
-	<ProgressBar color="var(--brand)" />
+	<main>
+		<PageTransition url={$page.url.pathname}>
+			<slot />
+		</PageTransition>
+	</main>
+
+	<Footer />
 </div>
+
+<Toaster
+	toastOptions={{
+		style: 'background-color: var(--bg-subtle); color: var(--text)',
+		iconTheme: {
+			primary: 'var(--brand)',
+			secondary: 'white'
+		}
+	}}
+/>
+
+{#if !['/', '/outcomes', '/pdoom', '/quotes'].includes(deLocalizeHref($page.url.pathname))}
+	<Toc />
+{/if}
+
+<ProgressBar color="var(--brand)" />
 
 <style>
 	/* @import url('$lib/reset.css');
