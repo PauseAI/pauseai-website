@@ -1,6 +1,4 @@
 <script lang="ts">
-	import { getLocale, deLocalizeHref } from '$lib/paraglide/runtime'
-
 	import { Toaster } from 'svelte-french-toast'
 	import { ProgressBar } from '@prgm/sveltekit-progress-bar'
 
@@ -13,6 +11,8 @@
 	import Hero from '$lib/components/Hero.svelte'
 	import NearbyEvent from '$lib/components/NearbyEvent.svelte'
 	import ExternalLink from '$lib/components/custom/a.svelte'
+
+	import { deLocalizeHref } from '$lib/paraglide/runtime'
 
 	import '@fontsource/roboto-slab/300.css'
 	import '@fontsource/roboto-slab/700.css'

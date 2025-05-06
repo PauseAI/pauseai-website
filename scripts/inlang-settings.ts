@@ -1,20 +1,18 @@
-import fs from 'fs'
+import { compile } from '@inlang/paraglide-js'
 import dotenv from 'dotenv'
-import { execSync } from 'child_process'
+import fs from 'fs'
 import path from 'path'
-import { createHash } from 'crypto'
+import { getDevContext, possiblyOverriddenLocales } from '../src/lib/env'
 import {
-	L10NS_BASE_DIR,
-	MESSAGE_L10NS,
-	MARKDOWN_L10NS,
-	MESSAGE_SOURCE,
 	getDefaultSettings,
+	L10NS_BASE_DIR,
+	MARKDOWN_L10NS,
+	MESSAGE_L10NS,
+	MESSAGE_SOURCE,
 	writeSettingsFile
 } from '../src/lib/l10n'
-import { possiblyOverriddenLocales, getDevContext, isDev } from '../src/lib/env'
-import { ensureDirectoriesExist, createSymlinkIfNeeded } from './translation/utils'
-import { setupTranslationRepo, TRANSLATION_REPO_URL } from './translation/git-ops'
-import { compile } from '@inlang/paraglide-js'
+import { setupTranslationRepo } from './translation/git-ops'
+import { createSymlinkIfNeeded, ensureDirectoriesExist } from './translation/utils'
 
 // Load environment variables from .env file
 dotenv.config()
@@ -25,64 +23,15 @@ const OUTPUT_PATH = './src/lib/paraglide'
 const COMPILE_ARGS = {
 	project: PROJECT_PATH,
 	outdir: OUTPUT_PATH,
-	strategy: ['cookie', 'url', 'preferredLanguage', 'baseLocale']
+	strategy: ['cookie', 'url', 'preferredLanguage', 'baseLocale'] as (
+		| 'cookie'
+		| 'url'
+		| 'preferredLanguage'
+		| 'baseLocale'
+		| 'globalVariable'
+		| 'localStorage'
+	)[]
 }
-const CACHE_FILE = './.inlang-settings-cache.json'
-
-/**
- * Generate a hash from the current environment state
- */
-function generateEnvHash(): string {
-	// Get the actual computed values that affect our decisions
-	const defaultSettings = getDefaultSettings()
-	const isDevelopment = isDev() // Use the actual isDev() result
-	const localesOverride = process.env.PARAGLIDE_LOCALES || ''
-	const translationApiKey = process.env.TRANSLATION_OPENROUTER_API_KEY ? 'present' : 'missing'
-
-	// Create a hash of the combined values that actually matter
-	const input = JSON.stringify({
-		defaults: defaultSettings,
-		isDev: isDevelopment,
-		localesOverride: localesOverride,
-		translationApiKey: translationApiKey,
-		compilation: COMPILE_ARGS
-	})
-	return createHash('md5').update(input).digest('hex')
-}
-
-function lastWrittenHash(): string {
-	// If cache file doesn't exist, regeneration is needed
-	if (!fs.existsSync(CACHE_FILE)) return 'none'
-	// Check if the hash matches what's in the cache
-	try {
-		return JSON.parse(fs.readFileSync(CACHE_FILE, 'utf-8')).hash
-	} catch (error) {
-		return 'error, regen'
-	}
-}
-
-function needsRegeneration(): boolean {
-	return (
-		!fs.existsSync(path.join(PROJECT_PATH, 'settings.json')) ||
-		lastWrittenHash() != generateEnvHash()
-	)
-}
-
-function updateCache(): void {
-	const hash = generateEnvHash()
-	fs.writeFileSync(
-		CACHE_FILE,
-		JSON.stringify(
-			{
-				hash,
-				timestamp: new Date().toISOString()
-			},
-			null,
-			2
-		)
-	)
-}
-
 function setupEnglishSupport(verbose: boolean): void {
 	// English markdown files are loaded directly from source in routes/[slug]/+page.ts
 	if (verbose) console.log('  \u2713 English markdown files will be loaded directly from source')
@@ -167,14 +116,11 @@ function regenerateSettings(verbose = false): void {
 		console.log(`Copied default settings to browser-accessible location: ${settingsForBrowser}`)
 	}
 
-	console.log(
-		`\ud83d\udd04 Compiling Paraglide runtime from settings... (was: ${lastWrittenHash()})`
-	)
+	console.log(`\ud83d\udd04 Compiling Paraglide runtime from settings...`)
 	try {
 		// Run the Paraglide compiler with the necessary Node.js flags
 		compile(COMPILE_ARGS)
-		console.log(`\u2705 Paraglide runtime compiled successfully! (now: ${generateEnvHash()})`)
-		updateCache()
+		console.log(`\u2705 Paraglide runtime compiled successfully!`)
 	} catch (error) {
 		console.error('\u274c Failed to compile Paraglide runtime:', (error as Error).message)
 		process.exit(1)
@@ -183,19 +129,7 @@ function regenerateSettings(verbose = false): void {
 
 // Check if verbose mode is requested
 const verbose = process.argv.includes('--verbose')
-const forceRun = process.argv.includes('--force')
 
-// Main execution logic - Check if we need to regenerate and do so if needed
-if (forceRun || needsRegeneration()) {
-	if (forceRun) {
-		console.log('Force regeneration of inlang settings...')
-	} else {
-		console.log('Environment changes detected, regenerating inlang settings...')
-	}
-	regenerateSettings(verbose)
-} else {
-	if (verbose) console.log(`\ud83d\udd0d Inlang settings unchanged`)
-}
-
-// Export the main function for programmatic usage
-export { regenerateSettings }
+// Main execution logic - Always regenerate
+console.log('Regenerating inlang settings...')
+regenerateSettings(verbose)
