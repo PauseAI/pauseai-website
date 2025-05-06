@@ -6,7 +6,7 @@ import path from 'path'
 import { defineConfig } from 'vite'
 import { isDev } from './src/lib/env'
 import { MARKDOWN_L10NS } from './src/lib/l10n'
-import { locales } from './src/lib/paraglide/runtime'
+import { locales as compiledLocales } from './src/lib/paraglide/runtime'
 
 function getLocaleExcludePatterns(): RegExp[] {
 	const md = path.resolve(MARKDOWN_L10NS)
@@ -14,6 +14,7 @@ function getLocaleExcludePatterns(): RegExp[] {
 		.readdirSync(md)
 		.filter((item) => fs.statSync(path.join(md, item)).isDirectory())
 	//  console.debug(`📁 Locale directories found in repos: ${reposLocales.join(', ')}`)
+	const locales: readonly string[] = compiledLocales
 	const toExclude = reposLocales.filter((locale) => !locales.includes(locale))
 	//  console.debug(`🚫 Excluding locales from build: [${toExclude.join(', ')]}`)
 
