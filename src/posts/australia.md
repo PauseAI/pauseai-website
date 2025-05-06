@@ -3,7 +3,6 @@ title: PauseAI in Australia
 slug: australia
 description: landing page for the Australian chapter of PauseAI
 ---
-
 **A message from PauseAI volunteers in Australia:**
 
 By 2030, artificial intelligence could be fully automated, self-improving and **smarter than humans at almost everything.** This isn't science fiction—it's the assessment of leading AI companies and researchers. When this happens, every aspect of life will change forever.
@@ -26,7 +25,7 @@ AI companies are in a race, fueled by billions of dollars of investment, to buil
 
 ### What can be done?
 
-Pause AI [proposes](/proposal) an international treaty to pause the development of smarter-than-human general AI until there is a credible plan to ensure it is safe. It is in Australia's interest to advocate for this.
+PauseAI [proposes](/proposal) an international treaty to pause the development of smarter-than-human general AI until there is a credible plan to ensure it is safe. It is in Australia's interest to advocate for this.
 
 > "Who will show leadership on negotiating an AI non-proliferation treaty? It is a collective responsibility and certainly one to which Australia could contribute."
 >
