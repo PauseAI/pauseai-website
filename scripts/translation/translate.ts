@@ -9,39 +9,28 @@ import dotenv from 'dotenv'
 import fs from 'fs/promises'
 import minimist from 'minimist'
 import path from 'path'
-import { execSync } from 'child_process'
-
-try {
-	execSync('tsx scripts/inlang-settings.ts', { stdio: 'inherit' })
-} catch (error) {
-	console.error('Error ensuring Paraglide runtime is available:', error.message)
-	console.error('If you just cloned or ran clean, you may need to run "pnpm inlang" first')
-	process.exit(1)
-}
 
 // Import functionality from our own modules
-import { collectPromptAdditions } from './additions'
-import { generateJsonPrompt, generateMarkdownPrompt, generateReviewPrompt } from './prompts'
 import { createDryRunStats, printDryRunSummary } from './dry-run'
 import {
+	cleanUpGitSecrets,
 	createGitClient,
-	GIT_CONFIG,
-	initializeGitCache,
 	getLatestCommitDates,
-	getCommitMessage,
-	cleanUpGitSecrets
+	GIT_CONFIG,
+	initializeGitCache
 } from './git-ops'
-import { createLlmClient, createRequestQueue, LLM_DEFAULTS, postChatCompletion } from './llm-client'
-import { translateOrLoadMessages, translateOrLoadMarkdown, translate } from './translate-core'
-import { requireEnvVar, preprocessMarkdown, postprocessMarkdown, extractWebPath } from './utils'
+import { createLlmClient, createRequestQueue, LLM_DEFAULTS } from './llm-client'
+import { generateJsonPrompt, generateMarkdownPrompt } from './prompts'
+import { translateOrLoadMarkdown, translateOrLoadMessages } from './translate-core'
+import { requireEnvVar } from './utils'
 
 // Import from project modules
 import {
 	L10NS_BASE_DIR,
 	MARKDOWN_L10NS,
+	MARKDOWN_SOURCE,
 	MESSAGE_L10NS,
-	MESSAGE_SOURCE,
-	MARKDOWN_SOURCE
+	MESSAGE_SOURCE
 } from '../../src/lib/l10n.ts'
 
 // This let / try / catch lets the ESM scan succeed in the absence of a runtime
@@ -63,7 +52,7 @@ try {
 	process.exit(1)
 }
 
-import { isDev, getDevContext } from '../../src/lib/env'
+import { getDevContext, isDev } from '../../src/lib/env'
 
 // Translation options & debugging configuration
 const DEBUG_RETRANSLATE_EVERYTHING = false

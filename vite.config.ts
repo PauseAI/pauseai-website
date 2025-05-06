@@ -1,13 +1,12 @@
-import { sveltekit } from '@sveltejs/kit/vite'
 import { enhancedImages } from '@sveltejs/enhanced-img'
-import { defineConfig } from 'vite'
+import { sveltekit } from '@sveltejs/kit/vite'
 import dotenv from 'dotenv'
-import { isDev, getDevContext } from './src/lib/env'
-import { execSync } from 'child_process'
-import { MARKDOWN_L10NS } from './src/lib/l10n'
-import { locales } from './src/lib/paraglide/runtime'
 import fs from 'fs'
 import path from 'path'
+import { defineConfig } from 'vite'
+import { isDev } from './src/lib/env'
+import { MARKDOWN_L10NS } from './src/lib/l10n'
+import { locales } from './src/lib/paraglide/runtime'
 
 function getLocaleExcludePatterns(): RegExp[] {
 	const md = path.resolve(MARKDOWN_L10NS)
@@ -58,29 +57,6 @@ export default defineConfig(({ command, mode }) => {
 				external: getLocaleExcludePatterns()
 			}
 		},
-		plugins: [
-			{
-				name: 'run-inlang-settings-before-scanning',
-				// This hook runs before dependency scanning
-				config(config, env) {
-					// Run inlang-settings script to ensure directories and settings exist BEFORE any scanning happens
-					// console.debug(`\n\ud83d\udd04 Checking localization settings (${getDevContext()}) before scanning...`)
-					try {
-						execSync(`tsx scripts/inlang-settings.ts`, { stdio: 'inherit' })
-						// console.debug('\u2705 Localization settings verified')
-					} catch (error) {
-						console.error(
-							'\u26a0\ufe0f Failed to verify localization settings:',
-							(error as Error).message
-						)
-					}
-					return config
-				},
-				// Keep the server configuration for any additional setup
-				configureServer(server) {}
-			},
-			enhancedImages(),
-			sveltekit()
-		]
+		plugins: [enhancedImages(), sveltekit()]
 	}
 })
