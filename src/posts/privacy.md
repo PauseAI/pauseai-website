@@ -28,16 +28,20 @@ We use the collected information for the following purposes:
 
 ### b. Communication
 - To reach out to members using Airtable for internal communications and updates about PauseAI events, activities, and other relevant information.
+- If you agree to subscribe to our newsletter, we add your email to substack as a subscriber to [our newsletter](https://pauseai.substack.com/). 
 
 ## 4. Disclosure of Your Information
 
 We do not sell, trade, or otherwise transfer your personal information to outside parties. However, we may share your information in the following circumstances:
 
 ### a. Service Providers
-- We may share your information with third-party service providers, such as Airtable and Google Analytics, to assist us in operating our website and conducting our activities.
+We may share your information with third-party service providers, such as Airtable, Substack and Google Analytics, to assist us in operating our website and conducting our activities.
 
 ### b. Legal Requirements
-- We may disclose your information if required to do so by law or in response to valid requests by public authorities.
+We may disclose your information if required to do so by law or in response to valid requests by public authorities.
+
+### c. Chapter leaders
+We may share your contact information of the PauseAI national chapter leader of your country.
 
 ## 5. Data Security
 
