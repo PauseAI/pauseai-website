@@ -23,7 +23,14 @@ const OUTPUT_PATH = './src/lib/paraglide'
 const COMPILE_ARGS = {
 	project: PROJECT_PATH,
 	outdir: OUTPUT_PATH,
-	strategy: ['cookie', 'url', 'preferredLanguage', 'baseLocale']
+	strategy: ['cookie', 'url', 'preferredLanguage', 'baseLocale'] as (
+		| 'cookie'
+		| 'url'
+		| 'preferredLanguage'
+		| 'baseLocale'
+		| 'globalVariable'
+		| 'localStorage'
+	)[]
 }
 function setupEnglishSupport(verbose: boolean): void {
 	// English markdown files are loaded directly from source in routes/[slug]/+page.ts
