@@ -30,7 +30,8 @@
 	},
 	"devDependencies": {
 		"@inlang/paraglide-js": "^2.0.4",
-		"@sveltejs/adapter-netlify": "^4.4.2",
+		"@inlang/paraglide-js": "^2.0.4",
+		"@sveltejs/adapter-netlify": "^5.0.1",
 		"@sveltejs/kit": "^2.20.7",
 		"@sveltejs/vite-plugin-svelte": "^3.1.2",
 		"@types/escape-html": "^1.0.4",
