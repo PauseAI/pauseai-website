@@ -49,10 +49,8 @@
 <NearbyEvent contrast={hero} bind:eventFound />
 {#if !eventFound}
 	<Banner contrast={hero}>
-		<b
-			>Join us at <ExternalLink href="https://pausecon.org/">PauseCon</ExternalLink> in London from June
-			27th to 30th</b
-		> for three days of workshops, panels, and discussions, culminating in our biggest protest to date!
+		Join us at <ExternalLink href="https://pausecon.org/">PauseCon London</ExternalLink> from June 27th
+		to 30th!
 	</Banner>
 {/if}
 
