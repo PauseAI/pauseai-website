@@ -126,6 +126,3 @@ const verbose = process.argv.includes('--verbose')
 // Main execution logic - Always regenerate
 console.log('Regenerating inlang settings...')
 regenerateSettings(verbose)
-
-// Export the main function for programmatic usage
-export { regenerateSettings }
