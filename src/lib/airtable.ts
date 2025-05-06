@@ -1,5 +1,5 @@
 import { options } from '$lib/api.js'
-import { isDev, getDevContext } from '$lib/env.ts'
+import { isDev, getDevContext } from '$lib/env'
 
 type AirtableResponse = {
 	records: Record<string, unknown>[]
