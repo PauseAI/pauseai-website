@@ -1,20 +1,18 @@
-import fs from 'fs'
+import { compile } from '@inlang/paraglide-js'
 import dotenv from 'dotenv'
-import { execSync } from 'child_process'
+import fs from 'fs'
 import path from 'path'
-import { createHash } from 'crypto'
+import { getDevContext, possiblyOverriddenLocales } from '../src/lib/env'
 import {
-	L10NS_BASE_DIR,
-	MESSAGE_L10NS,
-	MARKDOWN_L10NS,
-	MESSAGE_SOURCE,
 	getDefaultSettings,
+	L10NS_BASE_DIR,
+	MARKDOWN_L10NS,
+	MESSAGE_L10NS,
+	MESSAGE_SOURCE,
 	writeSettingsFile
 } from '../src/lib/l10n'
-import { possiblyOverriddenLocales, getDevContext, isDev } from '../src/lib/env'
-import { ensureDirectoriesExist, createSymlinkIfNeeded } from './translation/utils'
-import { setupTranslationRepo, TRANSLATION_REPO_URL } from './translation/git-ops'
-import { compile } from '@inlang/paraglide-js'
+import { setupTranslationRepo } from './translation/git-ops'
+import { createSymlinkIfNeeded, ensureDirectoriesExist } from './translation/utils'
 
 // Load environment variables from .env file
 dotenv.config()
