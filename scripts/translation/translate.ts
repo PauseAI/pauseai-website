@@ -34,7 +34,7 @@ import {
 } from '../../src/lib/l10n.ts'
 
 // This let / try / catch lets the ESM scan succeed in the absence of a runtime
-let locales: Set<string>
+let locales: readonly string[]
 try {
 	const runtime = await import('../../src/lib/paraglide/runtime.js')
 	locales = runtime.locales
