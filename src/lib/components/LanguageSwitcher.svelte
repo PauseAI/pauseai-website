@@ -4,7 +4,8 @@
 		getLocale,
 		localizeHref,
 		deLocalizeHref,
-		setLocale
+		setLocale,
+		type Locale
 	} from '$lib/paraglide/runtime.js'
 	import { page } from '$app/stores'
 	import Globe from 'lucide-svelte/icons/globe'
@@ -108,7 +109,7 @@
 		// Get the target element and href
 		const target = event.currentTarget as HTMLAnchorElement
 		const href = target.href
-		const targetLocale = target.getAttribute('hreflang')
+		const targetLocale = target.getAttribute('hreflang') as Locale | 'auto'
 
 		// Debug current state before change
 		console.log('🔍 Before click:')
