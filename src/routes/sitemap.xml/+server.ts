@@ -21,7 +21,7 @@ export async function GET({ fetch }) {
       xmlns:video="https://www.google.com/schemas/sitemap-video/1.1"
     >
 		<url>
-			<loc>${website}</loc>
+			<loc>${website}/en</loc>
 			<changefreq>daily</changefreq>
 			<priority>0.7</priority>
 		</url>
@@ -29,7 +29,7 @@ export async function GET({ fetch }) {
 				.map(
 					(post) =>
 						`<url>
-							<loc>${website}/${post.slug}</loc>
+							<loc>${website}/en/${post.slug}</loc>
 							<changefreq>daily</changefreq>
 							<priority>0.7</priority>
 						</url>`
