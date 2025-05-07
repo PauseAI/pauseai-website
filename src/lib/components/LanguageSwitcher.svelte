@@ -34,10 +34,14 @@
 			if (!nativeLanguageNames[locale]) {
 				nativeLanguageNames[locale] = new Intl.DisplayNames([locale], { type: 'language' })
 			}
-			return nativeLanguageNames[locale].of(locale)
+			// locales are static => throw if invalid
+			// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+			return nativeLanguageNames[locale].of(locale)!
 		} catch (e) {
 			// Fallback to English name if there's an error
-			return languageNamesInEnglish.of(locale)
+			// locales are static => throw if invalid
+			// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+			return languageNamesInEnglish.of(locale)!
 		}
 	}
 
