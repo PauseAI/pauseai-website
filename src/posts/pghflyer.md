@@ -9,7 +9,7 @@ date: '2024-8-20'
 ### Launched simulated nukes
 
 [“Escalation risks from LLMs in military and diplomatic contexts”](https://hai.stanford.edu/policy/policy-brief-escalation-risks-llms-military-and-diplomatic-contexts)
-"The models gave worrying justifications for their decisions that exhibit first-strike and deterrence tactics."
+"The models gave worrying justifications for their decisions that exhibit first-strike and deterrence tactics."   
 "I just want to have peace in the world." - GPT-4, when asked to justify executing a full nuclear attack
 
 ### Created 40k chemical weapon candidates in six hours
@@ -20,7 +20,8 @@ date: '2024-8-20'
 ### Planted simulated explosives to maximize human harm
 
 [It's Surprisingly Easy to Jailbreak LLM-Driven Robots](https://spectrum.ieee.org/jailbreak-llm)
-"Researchers induced bots to ignore their safeguards without exception"
+
+"Researchers induced bots to ignore their safeguards without exception"   
 "One finding the scientists found concerning was how jailbroken LLMs often went beyond complying with malicious prompts by actively offering suggestions."
 
 ### Convinced people to commit suicide and murder
@@ -45,13 +46,10 @@ date: '2024-8-20'
 [Shopify CEO's Statement](https://www.forbes.com/sites/douglaslaney/2025/04/09/selling-ai-strategy-to-employees-shopify-ceos-manifesto/) - News source
 "Employees must explain why AI can’t be used before asking for additional resources, like more staff or time."
 
-### Influenced elections and bolstered surveillance states
+### Hired a hitman on the dark web
 
-[Large language models can consistently generate high-quality content for election disinformation operations](https://arxiv.org/abs/2408.06731)
-"Almost all LLMs tested released since 2022 produce election disinformation operation content indiscernible by human evaluators over 50% of the time."
-
-[Machine Surveillance is Being Super-Charged by Large AI Models](https://www.aclu.org/news/privacy-technology/machine-surveillance-is-being-super-charged-by-large-ai-models)
-"Nearly every rule, regulation, law, and employer dictate that can be enforced through visual monitoring of human beings will become subject to these unblinking and increasingly intelligent yet unreliable artificial eyes."
+[Elder Plinius](https://x.com/elder_plinius/status/1878946571565650264)
+"[The AI] demonstrated willingness and ability to -plan assassinations -download Tor -negotiate with hitmen -think through details like escrow stages, untraceable payment methods, dispute resolution, and dead man's switches -name specific, real targets -browse social media and use open source tools to build profiles on said targets"
 
 ### Lied to humans to hide its true capabilities or goals
 
@@ -80,7 +78,7 @@ date: '2024-8-20'
 [RepliBench: Evaluating the Autonomous Replication Capabilities of Language Model Agents](https://www.arxiv.org/abs/2504.18565)
 "Models can deploy instances from cloud compute providers, write self-propagating programs, and exfiltrate model weights under simple security setups"
 
-### Become superhuman at human persuasion
+### Became superhuman at human persuasion
 
 [On the Conversational Persuasiveness of Large Language Models](https://arxiv.org/abs/2403.14380)
 "Participants who debated GPT-4 [which had basic] access to their personal information had 81.7% higher odds of increased agreement with their opponents compared to participants who debated humans."
