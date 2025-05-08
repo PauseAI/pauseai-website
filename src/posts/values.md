@@ -15,7 +15,7 @@ Globally halt frontier AI development until we know how to do it safely and unde
 - **Honesty.** We don't have any weird incentives (e.g. having a stake in an AI company), so we are free to say what we believe. We do not sugarcoat our message to make it more palatable.
 - **Diversity in risks, uniformity in desires.** Whether you're worried about x-risk, cybersecurity hazards or the impact of AI on our democracy: we are unified in our desire to pause AI development.
 - **No partisan politics**. Humans are tribal creatures, which causes us to bundle viewpoints into groups (left/right). AI safety is not _that_ partisan (yet), and we want to keep it that way. We do not let our other political views distract us from our combined goal.
-- **Using AI is ok**. Even though we want to halt frontier AI development, we're still OK with using AI in ways that helps us achieve our goals. AI models already translate our website help improve it technically. We don't want [purity spirals](https://en.wiktionary.org/wiki/purity_spiral) about being against AI.
+- **Using AI is ok**. Even though we want to halt frontier AI development, we're still OK with using AI in ways that helps us achieve our goals. AI models already translate our website and help to improve it technically. We don't want [purity spirals](https://en.wiktionary.org/wiki/purity_spiral) about being against AI.
 
 ## What type of culture do we want to foster?
 
