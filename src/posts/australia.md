@@ -3,7 +3,7 @@ title: PauseAI in Australia
 slug: australia
 description: landing page for the Australian chapter of PauseAI
 ---
-[Email us](mailto:australia@pauseai.info) | [Connect on Facebook](https://discord.com/channels/1100491867675709580/1102938079758663692/1367905978422530210) |
+[Email us](mailto:australia@pauseai.info) | [Connect on Facebook](https://www.facebook.com/groups/571590459293618)
 
 **A message from PauseAI volunteers in Australia:**
 
