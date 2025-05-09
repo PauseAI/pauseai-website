@@ -3,6 +3,8 @@ title: PauseAI in Australia
 slug: australia
 description: landing page for the Australian chapter of PauseAI
 ---
+[Email us](mailto:australia@pauseai.info) | [Connect on Facebook](https://www.facebook.com/groups/571590459293618)
+
 **A message from PauseAI volunteers in Australia:**
 
 By 2030, artificial intelligence could be fully automated, self-improving and **smarter than humans at almost everything.** This isn't science fiction—it's the assessment of leading AI companies and researchers. When this happens, every aspect of life will change forever.

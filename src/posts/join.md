@@ -2,11 +2,17 @@
 title: Join PauseAI
 description: Sign up to join the PauseAI movement.
 ---
+This is our nuclear moment.
+Rapid AI advancement represents one of history's most consequential and dangerous technological shifts.
+We demand politicians and companies pause AGI development until international safety agreements are established.
+Join our global network standing for democratic oversight of AI.
 
-The group of people who are aware of AI risks is still small.
-You are now one of them.
-**Your actions matter more than you think.**
+PauseAI Global unites concerned citizens—scientists, parents, students, workers, and community leaders—who believe transformative technologies require public input before they progress beyond human control.
+Whether you can spare 5 minutes (sharing posts), an hour (flyering, writing letters), 5 hours (protests, meeting politicians) or 5 days weekly (strategy development), your voice matters.
 
-Fill out this form, and you will be able to chat or have a call with the Onboarding team about your interests and how you can participate in projects or [teams](/teams):
+After signing up, join our onboarding session online or locally to learn about current actions.
+The future of AI belongs to all of us.
+
+_Is the form below not showing? Open [this link](https://airtable.com/embed/appWPTGqZmUcs3NWu/pag7ztLh27Omj5s2n/form) instead._
 
 <iframe class="airtable-embed" src="https://airtable.com/embed/appWPTGqZmUcs3NWu/pag7ztLh27Omj5s2n/form" frameborder="0" onmousewheel="" width="100%" height="533" style="background: transparent; border: 1px solid #ccc;"></iframe>
