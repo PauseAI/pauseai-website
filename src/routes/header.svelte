@@ -6,7 +6,7 @@
 	import SearchIcon from 'lucide-svelte/icons/search'
 	import LanguageSwitcher from '$lib/components/LanguageSwitcher.svelte'
 	import * as m from '$lib/paraglide/messages.js'
-	import { localizeUrl } from '$lib/paraglide/runtime'
+	import { localizeHref } from '$lib/paraglide/runtime'
 	import { initializeCqwResizeObserver } from '$lib/container-query-units'
 	import { onMount } from 'svelte'
 
@@ -15,7 +15,7 @@
 	export let inverted = false
 	export let moveUp = false
 
-	$: logo_animate = localizeUrl($page.url.pathname) != '/'
+	$: logo_animate = $page.url.pathname != localizeHref('/')
 
 	let nav: HTMLElement
 
@@ -30,7 +30,7 @@
 	<div class="logo-container">
 		<div class="compensate-min-space-between" />
 		<div class="compensate-offset" />
-		<a href="/" class="logo">
+		<a href={localizeHref('/')} class="logo">
 			<Logo animate={logo_animate} {inverted} />
 		</a>
 		<div class="min-space-between" />
