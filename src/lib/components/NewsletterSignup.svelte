@@ -102,8 +102,8 @@
 		font-family: var(--font-heading);
 	}
 
-	p {
-		margin-bottom: 1.5rem;
+	p:last-child {
+		margin-bottom: 0;
 	}
 
 	.input-group {
