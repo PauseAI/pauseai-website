@@ -121,7 +121,6 @@
 
 	input {
 		flex: 1;
-		min-width: 200px;
 		padding: 0.75rem 1rem;
 		border: 1px solid var(--border);
 		border-radius: 4px;
@@ -173,6 +172,7 @@
 
 		input,
 		button {
+			box-sizing: border-box;
 			width: 100%;
 		}
 	}
