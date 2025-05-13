@@ -3,6 +3,12 @@ title: Learn why AI safety matters
 description: Educational resources (videos, articles, books) about AI risks and AI alignment
 ---
 
+<script>
+import NewsletterSignup from '$lib/components/NewsletterSignup.svelte';
+</script>
+
+<NewsletterSignup />
+
 ## On this website
 
 - [Risks](/risks). A summary of the risks of AI.
