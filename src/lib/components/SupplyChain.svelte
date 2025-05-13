@@ -813,6 +813,56 @@
 						<li class="modal-detail-item">{detail}</li>
 					{/each}
 				</ul>
+
+				{#if edges.filter((e) => e.source === selectedNodeId || e.target === selectedNodeId).length > 0}
+					<div class="modal-connections">
+						{#if edges.filter((e) => e.target === selectedNodeId).length > 0}
+							<div class="connection-section">
+								<h4 class="modal-subtitle">Incoming Connections:</h4>
+								<ul class="connection-list">
+									{#each edges.filter((e) => e.target === selectedNodeId) as edge}
+										<li class="connection-item">
+											<button
+												class="connection-button"
+												on:click={(e) => {
+													handleNodeClick(edge.source)
+													e.currentTarget.blur()
+												}}
+											>
+												<span class="connection-label">{nodes[edge.source].label}</span>
+												<span class="connection-arrow">→</span>
+												<span class="connection-description">{edge.description}</span>
+											</button>
+										</li>
+									{/each}
+								</ul>
+							</div>
+						{/if}
+
+						{#if edges.filter((e) => e.source === selectedNodeId).length > 0}
+							<div class="connection-section">
+								<h4 class="modal-subtitle">Outgoing Connections:</h4>
+								<ul class="connection-list">
+									{#each edges.filter((e) => e.source === selectedNodeId) as edge}
+										<li class="connection-item">
+											<button
+												class="connection-button"
+												on:click={(e) => {
+													handleNodeClick(edge.target)
+													e.currentTarget.blur()
+												}}
+											>
+												<span class="connection-label">{nodes[edge.target].label}</span>
+												<span class="connection-arrow">←</span>
+												<span class="connection-description">{edge.description}</span>
+											</button>
+										</li>
+									{/each}
+								</ul>
+							</div>
+						{/if}
+					</div>
+				{/if}
 			</div>
 		</dialog>
 	{/if}
@@ -1002,6 +1052,7 @@
 		padding: 0;
 		width: 100%;
 		height: 100%;
+		overflow: hidden; /* Prevent background scrolling */
 	}
 
 	.modal::backdrop {
@@ -1023,9 +1074,35 @@
 		border-radius: 0.5rem;
 		padding: 1.5rem;
 		width: 28rem;
-		margin: auto;
+		margin: 1rem;
 		animation: fade-in 0.2s ease-out;
 		box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+		max-height: calc(100vh - 2rem); /* Account for margin */
+		overflow-y: auto; /* Make content scrollable */
+	}
+
+	/* Add smooth scrolling to the modal content */
+	.modal-content {
+		scrollbar-width: thin;
+		scrollbar-color: #cbd5e1 #f1f5f9;
+	}
+
+	.modal-content::-webkit-scrollbar {
+		width: 8px;
+	}
+
+	.modal-content::-webkit-scrollbar-track {
+		background: #f1f5f9;
+		border-radius: 4px;
+	}
+
+	.modal-content::-webkit-scrollbar-thumb {
+		background-color: #cbd5e1;
+		border-radius: 4px;
+	}
+
+	.modal-content::-webkit-scrollbar-thumb:hover {
+		background-color: #94a3b8;
 	}
 
 	.modal-header {
@@ -1122,6 +1199,66 @@
 
 	.modal-link-item a:hover {
 		color: #1d4ed8; /* blue-700 */
+	}
+
+	.modal-connections {
+		margin-top: 1.5rem;
+		border-top: 1px solid #e5e7eb;
+		padding-top: 1rem;
+	}
+
+	.connection-section {
+		margin-bottom: 1rem;
+	}
+
+	.connection-list {
+		list-style: none;
+		padding: 0;
+		margin: 0;
+	}
+
+	.connection-item {
+		margin-bottom: 0.75rem;
+		font-size: 0.875rem;
+		line-height: 1.4;
+	}
+
+	.connection-button {
+		display: flex;
+		align-items: flex-start;
+		gap: 0.5rem;
+		width: 100%;
+		text-align: left;
+		background: none;
+		border: none;
+		padding: 0.5rem;
+		border-radius: 0.25rem;
+		cursor: pointer;
+		transition: background-color 0.2s ease;
+	}
+
+	.connection-button:hover {
+		background-color: #f3f4f6;
+	}
+
+	.connection-button:focus {
+		outline: 2px solid #2563eb;
+		outline-offset: 2px;
+	}
+
+	.connection-label {
+		font-weight: 500;
+		color: #2563eb;
+		min-width: 80px;
+	}
+
+	.connection-arrow {
+		color: #6b7280;
+	}
+
+	.connection-description {
+		color: #4b5563;
+		flex: 1;
 	}
 
 	:global(body) {
