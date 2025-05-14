@@ -3,6 +3,7 @@
 	import Toc from 'svelte-toc'
 	import X from 'lucide-svelte/icons/x'
 	import List from 'lucide-svelte/icons/list'
+	import '$lib/components/Card.css'
 
 	let desktop: boolean | undefined
 	let open: boolean | undefined
@@ -12,7 +13,7 @@
 {#if open}
 	<div transition:fade={{ duration: 100 }} class="backdrop" />
 {/if}
-<div class="toc-wrapper" style={desktop ? 'display: none;' : ''}>
+<div class="toc-wrapper card" style={desktop ? 'display: none;' : ''}>
 	<Toc
 		headingSelector=":is(h2, h3, h4):not(.toc-exclude):not(footer *)"
 		title="Contents"
@@ -52,8 +53,8 @@
 	}
 
 	.backdrop {
-		backdrop-filter: contrast(0.8);
-		-webkit-backdrop-filter: contrast(0.8);
+		backdrop-filter: blur(10px) brightness(0.9);
+		-webkit-backdrop-filter: blur(10px) brightness(0.9);
 		position: fixed;
 		top: 0;
 		right: 0;
@@ -65,7 +66,7 @@
 		position: sticky;
 		top: 0;
 		padding: 1em 0em 0.5em;
-		background-color: var(--bg);
+		background-color: inherit;
 	}
 
 	.toc-title-heading {
@@ -88,6 +89,16 @@
 		padding-left: 1rem;
 		padding-right: 1rem;
 		margin-right: -1rem;
+	}
+
+	.toc-wrapper :global(.toc) {
+		background-color: inherit;
+		border-radius: inherit;
+		box-shadow: inherit;
+	}
+
+	.toc-wrapper :global(.toc > nav) {
+		background-color: inherit;
 	}
 
 	@media (hover: none) {
