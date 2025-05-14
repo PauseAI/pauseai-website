@@ -11,6 +11,7 @@ description: Educational resources (videos, articles, books) about AI risks and 
 - [Quotes](/quotes). Quotes on AI risks and governance.
 - [Feasiblity of a Pause](/feasibility). The feasibility of a pause in AI development.
 - [Building the Pause button](/building-the-pause-button). What it takes to pause AI.
+- [AI Chip Supply Chain](/ai-chip-supply-chain). How chips are made and which companies are involved.
 - [FAQ](/faq). Commonly asked questions about AI safety and PauseAI.
 - [Action](/action). What you can do to help (with links to many action-related guides)
 
