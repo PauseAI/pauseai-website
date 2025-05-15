@@ -229,3 +229,29 @@ export async function writeFileWithDir(filePath: string, content: string): Promi
 	await fs.mkdir(dir, { recursive: true })
 	fsSync.writeFileSync(filePath, content)
 }
+
+/**
+ * Cleans up potential LLM commentary in translation JSON files
+ * Strips anything before the first '{' and after the last '}'
+ *
+ * @param filePath - Path to the JSON file to clean
+ * @param verbose - Whether to output verbose logs
+ */
+export function cullCommentary(filePath: string, verbose = false): boolean {
+	try {
+		const content = fsSync.readFileSync(filePath, 'utf-8')
+		const firstBrace = content.indexOf('{')
+		const lastBrace = content.lastIndexOf('}')
+
+		if (firstBrace === -1 || lastBrace === -1) throw new Error('No JSON object found in file')
+
+		const jsonContent = content.substring(firstBrace, lastBrace + 1)
+		JSON.parse(jsonContent) // checks validity
+		if (jsonContent === content) return
+		fsSync.writeFileSync(filePath, jsonContent, 'utf-8')
+
+		if (verbose) console.log(`✅ Culled LLM commentary in ${filePath}`)
+	} catch (error) {
+		console.error(`Error cleaning up file ${filePath}:`, error.message)
+	}
+}

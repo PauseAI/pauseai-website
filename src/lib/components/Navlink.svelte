@@ -13,7 +13,7 @@
 	$: localizedHref = href && !external ? localizeHref(href) : href
 
 	$: {
-		active = localizeUrl($page.url.pathname) == localizedHref
+		active = localizeHref($page.url.pathname) == localizedHref
 	}
 </script>
 
