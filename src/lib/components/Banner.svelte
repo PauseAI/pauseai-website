@@ -140,7 +140,6 @@
 		cursor: pointer;
 		padding: 0.75em;
 		color: inherit;
-		z-index: 101; /* Ensure button is above the banner */
 		border-radius: 50%;
 	}
 
