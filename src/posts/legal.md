@@ -57,7 +57,7 @@ If we receive more funds than we can spend, we will save the excess funds for fu
 
 A list of [media appearances](/press) and [organized protests](/protests) can be found on their respective pages.
 Social media posts can primarily be found on [X](https://x.com/PauseAI).
-Our [Discord server](https://discord.gg/T3YrWUJsJ5) is by far our most active community, averaging 100 messages per day.
+Our [Discord server](https://discord.gg/HWcPt5ccJN) is by far our most active community, averaging 100 messages per day.
 
 ### Board
 
