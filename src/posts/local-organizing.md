@@ -23,7 +23,7 @@ Good luck. The future is yours.
 ## Set up the basics
 
 1. **Set up a chat group**. Use a tool that's popular in your area. WhatsApp, Telegram, and Signal are all good options. Make sure there is an invite link that you can share to easily invite others.
-2. **Add your group** to the `local-communities` channel on our [Discord](https://discord.gg/2XXWXvErfA). Add the invite link from that chat group in the thread on Discord. The moderators will add your local group to the [communities page](/communities) on this website, and use your link.
+2. **Add your group** to the `local-communities` channel on our [Discord](https://discord.gg/6ag3uceR5m). Add the invite link from that chat group in the thread on Discord. The moderators will add your local group to the [communities page](/communities) on this website, and use your link.
 3. **Find a partner**. Find someone to help you. It's much easier and more fun to organize with a partner.
 4. **Get training**. There are [over 70 organizations](https://activisthandbook.org/trainings) around the globe that can train you or your group!
 5. **Reach out to your [National Group](/national-groups)** if it exists!
@@ -471,4 +471,4 @@ Some of this is inevitable– not everyone will remain invested at all times– 
 - Make sure volunteers are involved with actions they actually enjoy. Don’t have the person who enjoys protest organizing write op-eds and the person who enjoys writing organize protests. Match tasks with the people interested in taking them on.
 - Keep a strategy of continuous recruitment. Rather than having a single recruiting burst at the beginning and then not doing any recruitment afterwards, it’s better to recruit periodically. This way, even if some people lose interest over time, you can bring new volunteers into the fold.
 
-If you’re struggling with any aspect of local organizing, you can also discuss this in the local-organizers channel on the [PauseAI Discord](https://discord.gg/2XXWXvErfA), and others will be happy to help you out and provide feedback.
+If you’re struggling with any aspect of local organizing, you can also discuss this in the local-organizers channel on the [PauseAI Discord](https://discord.gg/6ag3uceR5m), and others will be happy to help you out and provide feedback.

@@ -72,7 +72,7 @@
 				})
 					.setPopup(
 						new Popup({ offset: [0, -15] }).setHTML(
-							`<h3><a href="${community.link || 'https://discord.gg/HWcPt5ccJN'}">${
+							`<h3><a href="${community.link || 'https://discord.gg/CR5u5BTBwy'}">${
 								community.name
 							}</a></h3>`
 						)
@@ -94,7 +94,7 @@
 <p>{description}</p>
 <p>
 	Do you want to add your location or a community? <ExternalLink
-		href="https://discord.gg/HWcPt5ccJN">Create a post</ExternalLink
+		href="https://discord.gg/CR5u5BTBwy">Create a post</ExternalLink
 	> on our Discord!
 </p>
 <p>
