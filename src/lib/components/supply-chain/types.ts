@@ -1,7 +1,7 @@
 export interface Node {
 	id: string
 	label: string
-	category: 'litho' | 'fab' | 'design' | 'assembly' | 'end'
+	category: 'equipment' | 'foundry' | 'design' | 'eda' | 'memory' | 'assembly' | 'end'
 	x?: number
 	y?: number
 }

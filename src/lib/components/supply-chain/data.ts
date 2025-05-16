@@ -1,30 +1,168 @@
 import type { Node, NodeInfo, Edge } from './types'
 
 export const nodes: Record<string, Node> = {
-	ASML: { id: 'ASML', label: 'ASML', category: 'litho' },
-	ZEISS: { id: 'ZEISS', label: 'Zeiss', category: 'litho' },
-	SMEE: { id: 'SMEE', label: 'SMEE', category: 'litho' },
-	TSMC: { id: 'TSMC', label: 'TSMC', category: 'fab' },
-	SAMSUNG: { id: 'SAMSUNG', label: 'Samsung', category: 'fab' },
-	INTEL_FAB: { id: 'INTEL_FAB', label: 'Intel Foundry', category: 'fab' },
-	SMIC: { id: 'SMIC', label: 'SMIC', category: 'fab' },
+	// Lithography & Equipment
+	ASML: { id: 'ASML', label: 'ASML', category: 'equipment' },
+	ZEISS: { id: 'ZEISS', label: 'Zeiss', category: 'equipment' },
+	SMEE: { id: 'SMEE', label: 'SMEE', category: 'equipment' },
+	APPLIED: { id: 'APPLIED', label: 'Applied Materials', category: 'equipment' },
+	KLA: { id: 'KLA', label: 'KLA', category: 'equipment' },
+	TEL: { id: 'TEL', label: 'Tokyo Electron', category: 'equipment' },
+	NIKON: { id: 'NIKON', label: 'Nikon', category: 'equipment' },
+
+	// Foundries
+	TSMC: { id: 'TSMC', label: 'TSMC', category: 'foundry' },
+	SAMSUNG: { id: 'SAMSUNG', label: 'Samsung', category: 'foundry' },
+	INTEL_FAB: { id: 'INTEL_FAB', label: 'Intel Foundry', category: 'foundry' },
+	SMIC: { id: 'SMIC', label: 'SMIC', category: 'foundry' },
+	UMC: { id: 'UMC', label: 'UMC', category: 'foundry' },
+	GFS: { id: 'GFS', label: 'GlobalFoundries', category: 'foundry' },
+
+	// Design / IP / EDA
 	NVIDIA: { id: 'NVIDIA', label: 'Nvidia', category: 'design' },
 	AMD: { id: 'AMD', label: 'AMD', category: 'design' },
 	GROQ: { id: 'GROQ', label: 'Groq', category: 'design' },
 	INTEL: { id: 'INTEL', label: 'Intel AI', category: 'design' },
 	CEREBRAS: { id: 'CEREBRAS', label: 'Cerebras', category: 'design' },
 	HUAWEI: { id: 'HUAWEI', label: 'Huawei', category: 'design' },
+	ARM: { id: 'ARM', label: 'ARM', category: 'design' },
+	CADENCE: { id: 'CADENCE', label: 'Cadence', category: 'eda' },
+	SYNOPSYS: { id: 'SYNOPSYS', label: 'Synopsys', category: 'eda' },
+
+	// Memory
+	MICRON: { id: 'MICRON', label: 'Micron', category: 'memory' },
+	SKHYNIX: { id: 'SKHYNIX', label: 'SK Hynix', category: 'memory' },
+
+	// Assembly / OSAT
 	ASE: { id: 'ASE', label: 'ASE (Foxconn)', category: 'assembly' },
 	ASE_GROUP: { id: 'ASE_GROUP', label: 'ASE Group', category: 'assembly' },
 	AMKOR: { id: 'AMKOR', label: 'Amkor', category: 'assembly' },
+	JCET: { id: 'JCET', label: 'JCET', category: 'assembly' },
+	SPIL: { id: 'SPIL', label: 'SPIL', category: 'assembly' },
+
+	// Cloud / End users
+	AWS: { id: 'AWS', label: 'AWS', category: 'end' },
+	AZURE: { id: 'AZURE', label: 'Azure (Microsoft)', category: 'end' },
 	OPENAI: { id: 'OPENAI', label: 'OpenAI', category: 'end' },
-	GOOGLE: { id: 'GOOGLE', label: 'Google AI', category: 'end' },
+	GOOGLE: { id: 'GOOGLE', label: 'Google', category: 'end' },
 	META: { id: 'META', label: 'Meta AI', category: 'end' },
 	XAI: { id: 'XAI', label: 'X.ai', category: 'end' },
 	DEEPSEEK: { id: 'DEEPSEEK', label: 'Deepseek', category: 'end' }
 }
 
 export const nodeInfo: Record<string, NodeInfo> = {
+	APPLIED: {
+		title: 'Applied Materials',
+		description:
+			'Largest semiconductor equipment company covering deposition, etch and CMP tools used by every leading-edge fab.',
+		details: [
+			'Leader in PVD/CVD, etch and CMP equipment',
+			'Critical for 3D NAND, logic and packaging steps',
+			'Supplies TSMC, Samsung, Intel and others',
+			'Subject to US export controls (China restrictions)'
+		]
+	},
+	KLA: {
+		title: 'KLA',
+		description: 'Dominant player in process-control, wafer inspection and metrology systems.',
+		details: [
+			'Essential for yield-learning at advanced nodes',
+			'Sells to all top foundries and memory makers'
+		]
+	},
+	TEL: {
+		title: 'Tokyo Electron',
+		description:
+			'Top-three global equipment vendor providing etch, deposition and photoresist coat/develop tools.',
+		details: [
+			'Japanese powerhouse with strong co-development at TSMC & Samsung',
+			'Key for FinFET/GAAFET patterning and 3D NAND fabrication'
+		]
+	},
+	NIKON: {
+		title: 'Nikon',
+		description: 'Supplier of immersion DUV lithography scanners (No.2 after ASML in lithography).',
+		details: ['Competition to ASML in mature nodes', 'Important for 28-90 nm and overlay tools']
+	},
+	UMC: {
+		title: 'UMC (United Microelectronics)',
+		description:
+			'Taiwan-based pure-play foundry focused on 28 nm and above with selective 14/12 nm capacity.',
+		details: [
+			'~6% global foundry market share',
+			'Key second-source for mature logic and specialty nodes'
+		]
+	},
+	GFS: {
+		title: 'GlobalFoundries',
+		description:
+			'US-headquartered pure-play foundry specializing in mature and RF/process-optimized nodes.',
+		details: [
+			'Largely exited sub-10 nm race in 2018',
+			'Strategic US/EU fabs aligned with CHIPS Act customers'
+		]
+	},
+	ARM: {
+		title: 'ARM',
+		description:
+			'Licensor of CPU/GPU architectures underlying most mobile and emerging AI accelerators.',
+		details: ['Neoverse for data-center CPUs', 'Widely licensed by Nvidia, AWS, Google, etc.']
+	},
+	CADENCE: {
+		title: 'Cadence Design Systems',
+		description:
+			'EDA software provider (design, verification, implementation) indispensable to chip designers.',
+		details: [
+			'Fusion/Innovus, Spectre simulation suites',
+			'Collaborates with TSMC and Samsung on advanced PDKs'
+		]
+	},
+	SYNOPSYS: {
+		title: 'Synopsys',
+		description: 'Largest EDA vendor and IP licensor (Interface & ARC).',
+		details: [
+			'Design Compiler & Fusion Compiler toolchains',
+			'Owns critical interface IP (PCIe, DDR, HBM)'
+		]
+	},
+	MICRON: {
+		title: 'Micron Technology',
+		description: 'US memory giant producing DRAM, NAND and HBM for AI accelerators.',
+		details: ['HBM3E supplier for Nvidia Blackwell', 'Boise-based R&D; fabs in US, Taiwan, Japan']
+	},
+	SKHYNIX: {
+		title: 'SK Hynix',
+		description: 'Korean memory leader and primary HBM3 supplier for Nvidia H100/H200.',
+		details: [
+			'Developed world-first HBM3E 12-high stack',
+			'Joint ventures with TSMC on advanced packaging'
+		]
+	},
+	JCET: {
+		title: 'JCET Group',
+		description: "China's largest OSAT offering flip-chip, SiP and fan-out panel-level packaging.",
+		details: []
+	},
+	SPIL: {
+		title: 'Siliconware Precision Industries (SPIL)',
+		description: 'Taiwanese OSAT subsidiary of ASE focusing on bumping and advanced SiP.',
+		details: []
+	},
+	AWS: {
+		title: 'Amazon Web Services',
+		description:
+			'Largest cloud provider, massive buyer of AI accelerators and developer of Trainium/Inferentia chips.',
+		details: [
+			'Ongoing purchases of Nvidia H100/H200',
+			'Designs custom Graviton/Trainium chips (fabricated by TSMC)'
+		]
+	},
+	AZURE: {
+		title: 'Microsoft Azure',
+		description:
+			'Cloud platform powering OpenAI and hosting Nvidia, AMD and custom Cobalt/ Maia AI accelerators.',
+		details: ['Cobalt / Maia chips fabbed at TSMC', 'Major H100/H200 and MI300 customer']
+	},
 	ASML: {
 		title: 'ASML',
 		description:
@@ -237,6 +375,127 @@ export const nodeInfo: Record<string, NodeInfo> = {
 }
 
 export const edges: Edge[] = [
+	// Lithography & equipment → fabs
+	{
+		source: 'APPLIED',
+		target: 'TSMC',
+		links: null,
+		description:
+			'Applied Materials supplies critical deposition, etch and CMP tools that enable every advanced TSMC node.',
+		weight: 9
+	},
+	{
+		source: 'APPLIED',
+		target: 'SAMSUNG',
+		links: null,
+		description:
+			'Samsung Foundry relies on Applied Materials equipment across logic and memory fabs.',
+		weight: 8
+	},
+	{
+		source: 'APPLIED',
+		target: 'INTEL_FAB',
+		links: null,
+		description:
+			'Intel’s new Arizona and Ohio fabs deploy Applied Materials platforms for GAAFET manufacturing.',
+		weight: 8
+	},
+	{
+		source: 'KLA',
+		target: 'TSMC',
+		links: null,
+		description:
+			'KLA’s inspection & metrology systems are indispensable for TSMC yield‑ramp at 3 nm and below.',
+		weight: 8
+	},
+	{
+		source: 'TEL',
+		target: 'TSMC',
+		links: null,
+		description:
+			'Tokyo Electron coat/develop and etch tools form a backbone of TSMC patterning flows.',
+		weight: 7
+	},
+
+	// Memory → AI chip vendors
+	{
+		source: 'MICRON',
+		target: 'NVIDIA',
+		links: null,
+		description:
+			'Micron supplies HBM3E stacks for Nvidia Blackwell GPUs, a critical component for memory bandwidth.',
+		weight: 7
+	},
+	{
+		source: 'SKHYNIX',
+		target: 'NVIDIA',
+		links: null,
+		description:
+			'SK Hynix is the primary HBM3 supplier for Nvidia’s Hopper GPUs and early Blackwell shipments.',
+		weight: 7
+	},
+
+	// IP / EDA relationships
+	{
+		source: 'ARM',
+		target: 'NVIDIA',
+		links: null,
+		description: 'Nvidia licenses ARM CPU cores (Grace) for its Grace Hopper/Blackwell superchips.',
+		weight: 6
+	},
+	{
+		source: 'ARM',
+		target: 'AWS',
+		links: null,
+		description: 'AWS Graviton and Trainium chips are built on ARM Neoverse designs.',
+		weight: 6
+	},
+	{
+		source: 'CADENCE',
+		target: 'NVIDIA',
+		links: null,
+		description:
+			'Nvidia uses Cadence digital and analog toolchains for chip implementation and verification.',
+		weight: 5
+	},
+	{
+		source: 'SYNOPSYS',
+		target: 'AMD',
+		links: null,
+		description:
+			'AMD relies on Synopsys EDA tools and interface IP (PCIe, DDR) for its MI300 family.',
+		weight: 5
+	},
+
+	// Cloud providers consuming accelerators
+	{
+		source: 'NVIDIA',
+		target: 'AWS',
+		links: null,
+		description: 'AWS deploys tens of thousands of Nvidia H100 GPUs in its EC2 UltraClusters.',
+		weight: 8
+	},
+	{
+		source: 'NVIDIA',
+		target: 'AZURE',
+		links: null,
+		description: 'Microsoft Azure is a launch partner for Nvidia Blackwell HGX racks.',
+		weight: 8
+	},
+	{
+		source: 'AMD',
+		target: 'AWS',
+		links: null,
+		description: 'AWS offers AMD Instinct MI300X instances for inference‑optimized workloads.',
+		weight: 6
+	},
+	{
+		source: 'AMD',
+		target: 'AZURE',
+		links: null,
+		description: 'Azure is an early customer of AMD’s MI300A/X for its Maia super‑clusters.',
+		weight: 6
+	},
 	{
 		source: 'ZEISS',
 		target: 'ASML',
@@ -612,9 +871,11 @@ export const edges: Edge[] = [
 
 // Category styling
 export const categoryColors = {
-	litho: 'node-litho',
-	fab: 'node-fab',
+	equipment: 'node-equipment',
+	foundry: 'node-foundry',
 	design: 'node-design',
+	eda: 'node-eda',
+	memory: 'node-memory',
 	assembly: 'node-assembly',
 	end: 'node-end'
 } as const
