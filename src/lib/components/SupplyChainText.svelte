@@ -35,9 +35,11 @@
 
 	// Category titles
 	const categoryTitles: Record<string, string> = {
-		litho: 'Lithography Equipment',
-		fab: 'Foundries',
+		equipment: 'Equipment',
+		foundry: 'Foundries',
 		design: 'Chip Designers',
+		eda: 'EDA',
+		memory: 'Memory',
 		assembly: 'Assembly & Testing',
 		end: 'AI Labs & End Users'
 	}
@@ -47,8 +49,8 @@
 	{#each Object.entries(nodesByCategory) as [category, categoryNodes]}
 		<h2>{categoryTitles[category]}</h2>
 		{#each Object.values(categoryNodes) as node}
-			<div class="company-section">
-				<h3>{nodeInfo[node.id].title}</h3>
+			<div class="company-section" id={node.id}>
+				<h3><a class="anchor-link" href={`#${node.id}`}>{nodeInfo[node.id].title}</a></h3>
 				<p class="description">{nodeInfo[node.id].description}</p>
 
 				{#if nodeInfo[node.id].details.length > 0}
@@ -60,23 +62,14 @@
 				{/if}
 
 				{#if getOutgoingEdges(node.id).length > 0}
-					<h4>Outgoing Connections:</h4>
+					<h4>Customers:</h4>
 					<ul class="connections">
 						{#each getOutgoingEdges(node.id) as edge}
 							<li>
-								<strong>{nodes[edge.target].label}:</strong>
-								{edge.description}
-							</li>
-						{/each}
-					</ul>
-				{/if}
-
-				{#if getIncomingEdges(node.id).length > 0}
-					<h4>Incoming Connections:</h4>
-					<ul class="connections">
-						{#each getIncomingEdges(node.id) as edge}
-							<li>
-								<strong>{nodes[edge.source].label}:</strong>
+								<strong
+									><a class="anchor-link" href={`#${edge.target}`}>{nodes[edge.target].label}</a
+									>:</strong
+								>
 								{edge.description}
 							</li>
 						{/each}
@@ -97,10 +90,11 @@
 		{/each}
 	{/each}
 </div>
+<a href="#top" class="back-to-top">Back to top ↑</a>
 
 <style>
 	h2 {
-		border-bottom: 2px solid #e5e7eb;
+		border-bottom: 2px solid var(--brand-subtle);
 		padding-bottom: 0.5rem;
 	}
 
@@ -110,7 +104,7 @@
 	}
 
 	.description {
-		color: #4b5563;
+		color: var(--text);
 		margin: 0.5rem 0;
 		line-height: 1.5;
 	}
@@ -122,7 +116,7 @@
 	}
 
 	.details li {
-		color: #4b5563;
+		color: var(--text);
 		margin-bottom: 0.25rem;
 		line-height: 1.4;
 	}
@@ -134,11 +128,11 @@
 	}
 
 	.connections li {
-		color: #4b5563;
+		color: var(--text);
 		margin-bottom: 0.5rem;
 		line-height: 1.4;
 		padding-left: 1rem;
-		border-left: 2px solid #e5e7eb;
+		border-left: 2px solid var(--brand-subtle);
 	}
 
 	.links {
@@ -163,5 +157,31 @@
 
 	.links a:hover {
 		color: #1d4ed8;
+	}
+
+	.anchor-link {
+		color: var(--text);
+		text-decoration: none;
+		position: relative;
+	}
+
+	.anchor-link:hover {
+		text-decoration: underline;
+		color: var(--brand);
+	}
+
+	.back-to-top {
+		display: block;
+		margin: 2rem auto 0 auto;
+		text-align: center;
+		color: var(--brand);
+		font-weight: bold;
+		text-decoration: none;
+		font-size: 1.1em;
+		transition: color 0.2s;
+	}
+	.back-to-top:hover {
+		color: var(--text);
+		text-decoration: underline;
 	}
 </style>

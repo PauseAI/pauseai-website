@@ -3,7 +3,7 @@
 	import SupplyChainText from '$lib/components/SupplyChainText.svelte'
 </script>
 
-<div class="container">
+<div class="container" id="top">
 	<SupplyChain />
 	<SupplyChainText />
 </div>

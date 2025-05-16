@@ -11,7 +11,6 @@
 	} from './supply-chain/utils'
 	import Modal from './supply-chain/Modal.svelte'
 	import NodeComponent from './supply-chain/Node.svelte'
-	import './supply-chain/styles.css'
 
 	// Reactive state
 	let selectedNodeId: string | null = null
@@ -216,7 +215,7 @@
 				<div class="modal-connections">
 					{#if edges.filter((e) => e.target === selectedNodeId).length > 0}
 						<div class="connection-section">
-							<h4 class="modal-subtitle">Incoming Connections:</h4>
+							<h4 class="modal-subtitle">Suppliers:</h4>
 							<ul class="connection-list">
 								{#each edges.filter((e) => e.target === selectedNodeId) as edge}
 									<li class="connection-item">
@@ -253,7 +252,7 @@
 
 					{#if edges.filter((e) => e.source === selectedNodeId).length > 0}
 						<div class="connection-section">
-							<h4 class="modal-subtitle">Outgoing Connections:</h4>
+							<h4 class="modal-subtitle">Customers:</h4>
 							<ul class="connection-list">
 								{#each edges.filter((e) => e.source === selectedNodeId) as edge}
 									<li class="connection-item">
@@ -369,7 +368,7 @@
 	.graph-container {
 		display: inline-block;
 		position: relative;
-		background: white;
+		background: var(--bg);
 		box-sizing: border-box;
 	}
 
@@ -387,10 +386,11 @@
 		font-size: 1.5rem;
 		font-weight: bold;
 		margin-bottom: 1rem;
+		color: var(--text);
 	}
 
 	.description {
-		color: #666;
+		color: var(--brand-subtle);
 		margin-bottom: 1rem;
 	}
 
@@ -407,7 +407,7 @@
 	}
 
 	.edge-group:hover line {
-		stroke: #000;
+		stroke: var(--text);
 	}
 
 	.modal-details {
@@ -416,7 +416,7 @@
 	}
 
 	.modal-detail-item {
-		color: #374151;
+		color: var(--text);
 		margin-bottom: 0.25rem;
 	}
 
@@ -433,7 +433,7 @@
 		align-items: center;
 		gap: 0.5rem;
 		font-size: 0.875rem;
-		color: #666;
+		color: var(--brand-subtle);
 	}
 
 	.legend-swatch {
@@ -445,14 +445,14 @@
 	.modal-subtitle {
 		font-size: 0.875rem;
 		font-weight: bold;
-		color: #4b5563;
+		color: var(--text);
 		margin-top: 1rem;
 		margin-bottom: 0.5rem;
 	}
 
 	.modal-connections {
 		margin-top: 1.5rem;
-		border-top: 1px solid #e5e7eb;
+		border-top: 1px solid var(--brand-subtle);
 		padding-top: 1rem;
 	}
 
@@ -487,26 +487,26 @@
 	}
 
 	.connection-button:hover {
-		background-color: #f3f4f6;
+		background-color: var(--bg-subtle);
 	}
 
 	.connection-button:focus {
-		outline: 2px solid #2563eb;
+		outline: 2px solid var(--brand);
 		outline-offset: 2px;
 	}
 
 	.connection-label {
 		font-weight: 500;
-		color: #2563eb;
+		color: var(--brand);
 		min-width: 80px;
 	}
 
 	.connection-arrow {
-		color: #6b7280;
+		color: var(--brand-subtle);
 	}
 
 	.connection-description {
-		color: #4b5563;
+		color: var(--text);
 		flex: 1;
 	}
 
@@ -514,7 +514,7 @@
 		margin: 0.25rem 0 0 0;
 		padding-left: 1.25rem;
 		font-size: 0.8em;
-		color: #2563eb;
+		color: var(--brand);
 	}
 
 	.connection-links li {
@@ -522,26 +522,145 @@
 	}
 
 	.connection-links a {
-		color: #2563eb;
+		color: var(--brand);
 		text-decoration: underline;
 		word-break: break-all;
 	}
 
 	.connection-links a:hover {
-		color: #1d4ed8;
+		color: var(--brand-subtle);
 	}
 
 	.connection-sources {
 		margin-top: 0.5rem;
 		font-size: 0.9em;
-		color: #374151;
+		color: var(--text);
 	}
 
-	:global(body) {
-		margin: 0;
-		font-family:
-			system-ui,
-			-apple-system,
-			sans-serif;
+	/* Node color classes */
+	:global(.node-equipment) {
+		background-color: hsl(230, 100%, 95%);
+		border: 2px solid hsl(230, 100%, 60%);
+	}
+
+	:global(.node-equipment:hover) {
+		background-color: hsl(230, 100%, 85%);
+		border-color: hsl(230, 100%, 50%);
+	}
+
+	:global(.node-foundry) {
+		background-color: hsl(30, 100%, 95%);
+		border: 2px solid hsl(30, 100%, 60%);
+	}
+
+	:global(.node-foundry:hover) {
+		background-color: hsl(30, 100%, 85%);
+		border-color: hsl(30, 100%, 50%);
+	}
+
+	:global(.node-design) {
+		background-color: hsl(0, 100%, 95%);
+		border: 2px solid hsl(0, 100%, 60%);
+	}
+
+	:global(.node-design:hover) {
+		background-color: hsl(0, 100%, 85%);
+		border-color: hsl(0, 100%, 50%);
+	}
+
+	:global(.node-eda) {
+		background-color: hsl(150, 100%, 95%);
+		border: 2px solid hsl(150, 100%, 60%);
+	}
+
+	:global(.node-eda:hover) {
+		background-color: hsl(150, 100%, 85%);
+		border-color: hsl(150, 100%, 50%);
+	}
+
+	:global(.node-memory) {
+		background-color: hsl(60, 100%, 95%);
+		border: 2px solid hsl(60, 100%, 60%);
+	}
+
+	:global(.node-memory:hover) {
+		background-color: hsl(60, 100%, 85%);
+		border-color: hsl(60, 100%, 50%);
+	}
+
+	:global(.node-assembly) {
+		background-color: hsl(210, 100%, 95%);
+		border: 2px solid hsl(210, 100%, 60%);
+	}
+
+	:global(.node-assembly:hover) {
+		background-color: hsl(210, 100%, 85%);
+		border-color: hsl(210, 100%, 50%);
+	}
+
+	:global(.node-end) {
+		background-color: hsl(270, 100%, 95%);
+		border: 2px solid hsl(270, 100%, 60%);
+	}
+
+	:global(.node-end:hover) {
+		background-color: hsl(270, 100%, 85%);
+		border-color: hsl(270, 100%, 50%);
+	}
+
+	/* Dark mode overrides */
+	:global([color-scheme='dark']) .node-equipment {
+		background-color: hsl(230, 100%, 20%);
+		border-color: hsl(230, 100%, 40%);
+	}
+
+	:global([color-scheme='dark']) .node-foundry {
+		background-color: hsl(30, 100%, 20%);
+		border-color: hsl(30, 100%, 40%);
+	}
+
+	:global([color-scheme='dark']) .node-design {
+		background-color: hsl(0, 100%, 20%);
+		border-color: hsl(0, 100%, 40%);
+	}
+
+	:global([color-scheme='dark']) .node-eda {
+		background-color: hsl(150, 100%, 20%);
+		border-color: hsl(150, 100%, 40%);
+	}
+
+	:global([color-scheme='dark']) .node-memory {
+		background-color: hsl(60, 100%, 20%);
+		border-color: hsl(60, 100%, 40%);
+	}
+
+	:global([color-scheme='dark']) .node-assembly {
+		background-color: hsl(210, 100%, 20%);
+		border-color: hsl(210, 100%, 40%);
+	}
+
+	:global([color-scheme='dark']) .node-end {
+		background-color: hsl(270, 100%, 20%);
+		border-color: hsl(270, 100%, 40%);
+	}
+
+	/* Node text color for contrast */
+	:global(.node) {
+		color: #111 !important;
+	}
+
+	/* Modal dark mode overrides */
+	:global([color-scheme='dark']) .modal-content,
+	:global([color-scheme='dark']) dialog[open].modal {
+		background: #18181b !important;
+		color: #f3f4f6 !important;
+	}
+	:global([color-scheme='dark']) .modal-title,
+	:global([color-scheme='dark']) .modal-description,
+	:global([color-scheme='dark']) .modal-detail-item {
+		color: #f3f4f6 !important;
+	}
+	:global([color-scheme='dark']) dialog[open].modal::backdrop {
+		background: rgba(0, 0, 0, 0.8) !important;
 	}
 </style>

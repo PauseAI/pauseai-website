@@ -56,7 +56,8 @@
 	}
 
 	.modal-content {
-		background: white;
+		background: var(--bg-secondary);
+		color: var(--text);
 		border-radius: 0.5rem;
 		padding: 1.5rem;
 		width: 28rem;
@@ -100,16 +101,22 @@
 	}
 
 	.modal-close {
-		color: #6b7280;
+		color: var(--text);
 		cursor: pointer;
 	}
 
 	.modal-close:hover {
-		color: #374151;
+		color: var(--brand);
 	}
 
 	.modal-description {
-		color: #666;
+		color: var(--text);
 		margin-bottom: 1rem;
+	}
+
+	.modal-title,
+	.modal-description,
+	.modal-detail-item {
+		color: var(--text);
 	}
 </style>
