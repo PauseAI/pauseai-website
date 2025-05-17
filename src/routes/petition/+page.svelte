@@ -1,10 +1,11 @@
 <script lang="ts">
-	import PostMeta from '$lib/components/PostMeta.svelte'
-	import { meta } from './meta'
-	import Signatory from './signatory.svelte'
-	export let data
-	const { signatories } = data
-	const { title, description, date } = meta
+    import PostMeta from '$lib/components/PostMeta.svelte';
+    import { meta } from './meta';
+    import Signatory from './signatory.svelte';
+    export let data;
+
+    const { signatories, totalCount } = data;
+    const { title, description, date } = meta;
 </script>
 
 <PostMeta {title} {description} {date} />
@@ -22,21 +23,25 @@
     style="background: transparent; border: 1px solid #ccc;"
 ></iframe>
 
-<h3>Signatories</h3>
+<h2>Signatories</h2>
+
+<!-- Display the total count -->
+<p>Total Signatories (including private): {totalCount}</p>
+
 <section data-pagefind-ignore>
-	{#if signatories.length === 0}
-		<p>No signatories found</p>
-	{/if}
-	<ul class="signatories">
-		{#each signatories as { first_name, last_name, country, bio }}
-			<Signatory {first_name} {last_name} {country} {bio} />
-		{/each}
-	</ul>
+    {#if signatories.length === 0}
+        <p>No signatories found</p>
+    {/if}
+    <ul class="signatories">
+        {#each signatories as { first_name, last_name, country, bio }}
+            <Signatory {first_name} {last_name} {country} {bio} />
+        {/each}
+    </ul>
 </section>
 
 <style>
-	.signatories {
-		display: grid;
-		gap: 1rem;
-	}
+    .signatories {
+        display: grid;
+        gap: 1rem;
+    }
 </style>

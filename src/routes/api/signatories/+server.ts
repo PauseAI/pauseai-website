@@ -39,25 +39,37 @@ const filter = (p: Signatory) => {
 }
 
 export async function GET({ fetch, setHeaders }) {
-	const url = `https://api.airtable.com/v0/appWPTGqZmUcs3NWu/tbl2emfOWNWoVz1kW`
-	setHeaders({
-		'cache-control': 'public, max-age=3600' // 1 hour in seconds
-	})
+    const url = `https://api.airtable.com/v0/appWPTGqZmUcs3NWu/tbl2emfOWNWoVz1kW`;
+    setHeaders({
+        'cache-control': 'public, max-age=3600' // 1 hour in seconds
+    });
 
-	try {
-		// Create fallback records in the expected Airtable format
-		// const fallbackRecords = fallbackSignatories.map(recordToSignatory)
+    try {
+        // Fetch all records from Airtable
+        const records = await fetchAllPages(fetch, url);
+        const signatories = records.map(recordToSignatory);
 
-		const records = await fetchAllPages(fetch, url)
-		const out: Signatory[] = records
-			.map(recordToSignatory)
-			.filter(filter)
-			// Shuffle the array, although not truly random
-			.sort(() => 0.5 - Math.random())
-		return json(out)
-	} catch (e) {
-		console.error('Error fetching signatories:', e)
-		// Return fallback data instead of error
-		return json(fallbackSignatories.filter(filter))
-	}
+        // Calculate total count before filtering
+        const totalCount = signatories.length;
+
+        // Filter out private signatories
+        const visibleSignatories = signatories.filter(filter);
+
+        // Return both the visible signatories and the total count
+        return json({
+            signatories: visibleSignatories,
+            totalCount
+        });
+    } catch (e) {
+        console.error('Error fetching signatories:', e);
+
+        // Fallback logic
+        const totalCount = fallbackSignatories.length;
+        const visibleSignatories = fallbackSignatories.filter(filter);
+
+        return json({
+            signatories: visibleSignatories,
+            totalCount
+        });
+    }
 }
