@@ -3,6 +3,10 @@
 	export let last_name: string | undefined
 	export let country: string | undefined
 	export let bio: string | undefined
+
+	const len = 60
+	let bioOpen = false
+	let bioTruncated = bio?.substring(0, len)
 </script>
 
 <li class="person">
@@ -15,7 +19,12 @@
 			<div class="title">{country}</div>
 		</div>
 		{#if bio}
-			<div class="bio">{bio}</div>
+			<div class="bio">
+				{bioOpen ? bio : bioTruncated}
+				{#if !bioOpen && bio.length > len}
+					<button on:click={() => (bioOpen = !bioOpen)}>...</button>
+				{/if}
+			</div>
 		{/if}
 	</div>
 </li>
