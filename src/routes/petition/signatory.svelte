@@ -3,7 +3,6 @@
 	export let last_name: string | undefined
 	export let country: string | undefined
 	export let bio: string | undefined
-	export let privacy: boolean | false
 </script>
 
 <li class="person">
