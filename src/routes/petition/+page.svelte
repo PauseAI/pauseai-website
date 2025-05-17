@@ -5,20 +5,22 @@
 	export let data
 	const { signatories } = data
 	const { title, description, date } = meta
+
+	const visibleSignatories = signatories.filter(signatory => !signatory.privacy);
 </script>
 
 <PostMeta {title} {description} {date} />
 
 <h1>{title}</h1>
 
-<h2>We should pause AI, actually.</h2>
+<h2>We call on the governments of the world to sign an international treaty implementing a temporary pause on the training of the most powerful general AI systems, until we know how to build them safely and keep them under democratic control.</h2>
 
 <section data-pagefind-ignore>
-	{#if signatories.length === 0}
+	{#if visibleSignatories.length === 0}
 		<p>No signatories found</p>
 	{/if}
 	<ul class="signatories">
-		{#each signatories as { first_name, last_name, country, bio }}
+		{#each visibleSignatories as { first_name, last_name, country, bio }}
 			<Signatory {first_name} {last_name} {country} {bio} />
 		{/each}
 	</ul>
