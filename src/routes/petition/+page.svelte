@@ -6,6 +6,17 @@
 
     const { signatories, totalCount } = data;
     const { title, description, date } = meta;
+
+    // Variable to control how many signatories are shown
+    let showLimit = 2;
+
+    // Reactive variable to determine the list of signatories to display
+    $: visibleSignatories = signatories.slice(0, showLimit);
+
+    // Function to toggle between limited and full list
+    function toggleShowAll() {
+        showLimit = showLimit === 2 ? signatories.length : 2;
+    }
 </script>
 
 <PostMeta {title} {description} {date} />
@@ -29,19 +40,38 @@
 <p>Total Signatories (including private): {totalCount}</p>
 
 <section data-pagefind-ignore>
-    {#if signatories.length === 0}
+    {#if visibleSignatories.length === 0}
         <p>No signatories found</p>
     {/if}
     <ul class="signatories">
-        {#each signatories as { first_name, last_name, country, bio }}
+        {#each visibleSignatories as { first_name, last_name, country, bio }}
             <Signatory {first_name} {last_name} {country} {bio} />
         {/each}
     </ul>
+
+    <!-- Button to toggle between limited and full list -->
+    <button on:click={toggleShowAll}>
+        {showLimit === 2 ? 'Show All Signatories' : 'Show Less'}
+    </button>
 </section>
 
 <style>
     .signatories {
         display: grid;
         gap: 1rem;
+    }
+
+    button {
+        margin-top: 1rem;
+        padding: 0.5rem 1rem;
+        background-color: var(--brand);
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+    button:hover {
+        background-color: var(--brand-dark);
     }
 </style>
