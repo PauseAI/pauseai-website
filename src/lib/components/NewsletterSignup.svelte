@@ -60,6 +60,7 @@
 					placeholder={placeholderText}
 					aria-label={placeholderText}
 					required
+					enterkeyhint="done"
 				/>
 				<button type="submit">
 					{buttonText}
