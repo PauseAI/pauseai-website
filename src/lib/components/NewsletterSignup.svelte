@@ -63,7 +63,7 @@
 					required
 					enterkeyhint="done"
 				/>
-				<a class="button" href={substackUrl} target="_blank">
+				<a href={substackUrl} target="_blank">
 					<button type="submit">{buttonText}</button>
 				</a>
 			</div>
