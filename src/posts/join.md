@@ -20,7 +20,7 @@ The future of AI belongs to all of us.
     frameborder="0" 
     onmousewheel="" 
     width="100%" 
-    height="2200" 
+    height="1900" 
     style="background: transparent; border: 1px solid #ccc;">
 </iframe>
 

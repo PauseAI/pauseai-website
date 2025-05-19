@@ -26,7 +26,7 @@
 
 <h1>{title}</h1>
 
-<blockquote class="petition-statement">
+<blockquote class="statement">
     <h2>
         <em>"We call on the governments of the world to sign an international treaty implementing a temporary pause on the training of the most powerful general AI systems, until we know how to build them safely and keep them under democratic control."</em>
     </h2>
@@ -65,6 +65,40 @@
 </section>
 
 <style>
+    /* Style for the statement */
+    .statement {
+        font-family: 'Georgia', serif; 
+        margin: 2rem 0;
+        padding: 1rem;
+        background-color: #f9f9f9;
+        border-left: 4px solid var(--brand);
+        font-style: italic;
+        font-size: 1.5rem;
+        line-height: 1.8;
+        color: #333;
+    }
+
+    .statement h2 {
+        margin: 0;
+    }
+
+    /* Style for the signatories counter */
+    .signatories-counter {
+        /*font-family: 'Arial', sans-serif;*/
+        margin: 2rem 0;
+        padding: 1rem;
+        background-color: #fff;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        text-align: center;
+        font-size: 1.2rem;
+        color: #444;
+    }
+
+    .signatories-counter h3 {
+        margin: 0;
+        font-weight: bold;
+    }
     .signatories {
         display: grid;
         gap: 1rem;
