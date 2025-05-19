@@ -33,7 +33,7 @@
     src="https://airtable.com/embed/appWPTGqZmUcs3NWu/pagUTBbn9qea358FB/form?hide_footer=true"
     frameborder="0"
     width="100%"
-    height="1000"
+    height="800"
     style="background: transparent; border: 1px solid #ccc;"
 ></iframe>
 
