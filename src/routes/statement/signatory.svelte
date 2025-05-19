@@ -1,7 +1,6 @@
 <script lang="ts">
-	export let first_name: string | undefined
-	export let last_name: string | undefined
-	export let country: string | undefined
+	export let name: string | "Anonymous"
+	export let country: string | ""
 	export let bio: string | undefined
 
 	const len = 60
@@ -13,8 +12,7 @@
 	<div class="details">
 		<div class="name-title">
 			<div class="name">
-				{first_name}
-				{last_name}
+				{name}
 			</div>
 			<div class="title">{country}</div>
 		</div>

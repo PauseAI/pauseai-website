@@ -34,7 +34,8 @@
 
 <!-- Signatories Counter and Goal -->
 <div class="signatories-counter">
-    <h3>{totalCount} people have already signed it. Help us reach the next goal of {nextGoal} signatures!</h3>
+    <h3>{totalCount} people have already signed it!</h3>
+    <h3>Help us reach the next goal of {nextGoal} signatures!</h3>
 </div>
 
 <iframe
@@ -42,7 +43,7 @@
     src="https://airtable.com/embed/appWPTGqZmUcs3NWu/pagUTBbn9qea358FB/form?hide_footer=true"
     frameborder="0"
     width="100%"
-    height="800"
+    height="500"
     style="background: transparent; border: 1px solid #ccc;"
 ></iframe>
 
@@ -53,8 +54,8 @@
         <p>No signatories found</p>
     {/if}
     <ul class="signatories">
-        {#each visibleSignatories as { first_name, last_name, country, bio }}
-            <Signatory {first_name} {last_name} {country} {bio} />
+        {#each visibleSignatories as { name, country, bio }}
+            <Signatory {name} {country} {bio} />
         {/each}
     </ul>
 
@@ -79,7 +80,10 @@
     }
 
     .statement h2 {
-        margin: 0;
+        font-weight: 400; /* Normal weight */
+        font-style: italic; /* Keep the italics from <em> */
+        font-size: 1.8rem; /* Adjust size if needed */
+        color: #333; /* Optional: Adjust color */
     }
 
     /* Style for the signatories counter */

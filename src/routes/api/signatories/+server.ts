@@ -8,15 +8,13 @@ import { fetchAllPages } from '$lib/airtable.js'
  */
 const fallbackSignatories: Signatory[] = [
 	{
-		first_name: 'Error',
-		last_name: 'Happened',
+		name: 'Error',
 		private: false,
 		bio: 'So sorry',
 		country: 'Sorry'
 	},
 	{
-		first_name: 'This should be',
-		last_name: 'Private',
+		name: 'This should be',
 		private: true,
 		bio: 'This is a bio',
 		country: 'United States'
@@ -26,10 +24,9 @@ const fallbackSignatories: Signatory[] = [
 function recordToSignatory(record: any): Signatory {
 	console.log('record', record)
 	return {
-		first_name: record.fields.first_name,
-		last_name: record.fields.last_name,
+		name: record.fields.name || "Anonymous",
 		private: record.fields.private || false,
-		country: record.fields.country,
+		country: record.fields.country || "",
 		bio: record.fields.bio
 	}
 }
