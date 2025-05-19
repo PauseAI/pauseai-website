@@ -26,7 +26,16 @@
 
 <h1>{title}</h1>
 
-<h2>We call on the governments of the world to sign an international treaty implementing a temporary pause on the training of the most powerful general AI systems, until we know how to build them safely and keep them under democratic control.</h2>
+<blockquote class="petition-statement">
+    <h2>
+        <em>"We call on the governments of the world to sign an international treaty implementing a temporary pause on the training of the most powerful general AI systems, until we know how to build them safely and keep them under democratic control."</em>
+    </h2>
+</blockquote>
+
+<!-- Signatories Counter and Goal -->
+<div class="signatories-counter">
+    <h3>{totalCount} people have already signed it. Help us reach the next goal of {nextGoal} signatures!</h3>
+</div>
 
 <iframe
     class="airtable-embed"
@@ -38,9 +47,6 @@
 ></iframe>
 
 <h2>Signatories</h2>
-
-<!-- Display the total count -->
-<p>{totalCount} people have already sign it. Help us reach the first {nextGoal} signatures!</p>
 
 <section data-pagefind-ignore>
     {#if visibleSignatories.length === 0}
