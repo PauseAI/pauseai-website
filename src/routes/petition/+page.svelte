@@ -9,14 +9,17 @@
 
     // Variable to control how many signatories are shown
     let showLimit = 2;
-
     // Reactive variable to determine the list of signatories to display
     $: visibleSignatories = signatories.slice(0, showLimit);
-
     // Function to toggle between limited and full list
     function toggleShowAll() {
         showLimit = showLimit === 2 ? signatories.length : 2;
     }
+
+    // Milestone goals for signatures
+    const milestones = [25, 50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 1000, 1500];
+    // Find the next milestone goal
+    const nextGoal = milestones.find(goal => totalCount < goal) || milestones[milestones.length - 1];
 </script>
 
 <PostMeta {title} {description} {date} />
@@ -27,17 +30,17 @@
 
 <iframe
     class="airtable-embed"
-    src="https://airtable.com/embed/appWPTGqZmUcs3NWu/pagUTBbn9qea358FB/form?hide_title=true?hide_footer=true"
+    src="https://airtable.com/embed/appWPTGqZmUcs3NWu/pagUTBbn9qea358FB/form?hide_footer=true"
     frameborder="0"
     width="100%"
-    height="800"
+    height="1000"
     style="background: transparent; border: 1px solid #ccc;"
 ></iframe>
 
 <h2>Signatories</h2>
 
 <!-- Display the total count -->
-<p>Total Signatories (including private): {totalCount}</p>
+<p>{totalCount} people have already sign it. Help us reach the first {nextGoal} signatures!</p>
 
 <section data-pagefind-ignore>
     {#if visibleSignatories.length === 0}
