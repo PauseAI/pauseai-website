@@ -27,10 +27,10 @@
 
 <iframe
     class="airtable-embed"
-    src="https://airtable.com/embed/appWPTGqZmUcs3NWu/pagUTBbn9qea358FB/form"
+    src="https://airtable.com/embed/appWPTGqZmUcs3NWu/pagUTBbn9qea358FB/form?hide_title=true?hide_footer=true"
     frameborder="0"
     width="100%"
-    height="533"
+    height="800"
     style="background: transparent; border: 1px solid #ccc;"
 ></iframe>
 
