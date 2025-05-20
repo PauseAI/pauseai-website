@@ -31,8 +31,7 @@ export type Person = {
 }
 
 export type Signatory = {
-	first_name: string
-	last_name: string
+	name: string
 	private: boolean
 	bio?: string
 	country: string
