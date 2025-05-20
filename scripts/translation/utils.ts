@@ -19,11 +19,16 @@ export const MARKDOWN_CONFIG = {
 }
 
 // Comment patterns to preserve in markdown
-export type PatternCommentPair = { pattern: RegExp; comment: string }
+export type PatternCommentPair = {
+	pattern: RegExp
+	comment: string
+	lineBreakAfterComment?: boolean
+}
 export const PREPROCESSING_COMMENT_AFTER_PATTERN: PatternCommentPair[] = [
 	{
 		pattern: /---[\S\s]*?\n---\n/,
-		comment: `end of frontmatter metadata, dashes above need to stay`
+		comment: `end of frontmatter metadata, dashes above need to stay`,
+		lineBreakAfterComment: true
 	},
 	{
 		pattern: /\]\(#[a-z0-9-_.]+\)/g,
@@ -163,8 +168,11 @@ export function preprocessMarkdown(source: string): string {
 			return _0
 		})
 	}
-	for (const { pattern, comment } of PREPROCESSING_COMMENT_AFTER_PATTERN) {
-		processed = processed.replace(pattern, `$& <!-- ${comment} -->`)
+	for (const { pattern, comment, lineBreakAfterComment } of PREPROCESSING_COMMENT_AFTER_PATTERN) {
+		processed = processed.replace(
+			pattern,
+			`$& <!-- ${comment} -->${lineBreakAfterComment ? '\n' : ''}`
+		)
 	}
 	return processed
 }
