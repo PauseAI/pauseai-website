@@ -68,7 +68,7 @@
 <style>
     /* Style for the statement */
     .statement {
-        font-family: 'Georgia', serif !important; 
+        font-family: 'Georgia', serif; 
         margin: 2rem 0;
         padding: 1rem;
         background-color: #f9f9f9;
@@ -88,7 +88,7 @@
 
     /* Style for the signatories counter */
     .signatories-counter {
-        font-family: 'Arial', sans-serif !important;
+        font-family: 'Arial', sans-serif;
         margin: 2rem 0;
         padding: 1rem;
         background-color: #fff;
