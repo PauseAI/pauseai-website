@@ -24,15 +24,12 @@ const fallbackSignatories: Signatory[] = [
 function recordToSignatory(record: any): Signatory {
 	console.log('record', record)
 	return {
-		name: record.fields.name || "Anonymous",
-		private: record.fields.private || false,
-		country: record.fields.country || "",
-		bio: record.fields.bio
+        private: record.fields.private || false,
+        name: record.fields.private ? "Anonymous" : record.fields.name, // Anonymize private signatories
+		country: record.fields.country,
+		bio: record.fields.bio,
+        date: record.fields.created
 	}
-}
-
-const filter = (p: Signatory) => {
-	return !p.private
 }
 
 export async function GET({ fetch, setHeaders }) {
@@ -46,15 +43,15 @@ export async function GET({ fetch, setHeaders }) {
         const records = await fetchAllPages(fetch, url);
         const signatories = records.map(recordToSignatory);
 
+        // Sort signatories by date (newest first)
+        signatories.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+
         // Calculate total count before filtering
         const totalCount = signatories.length;
 
-        // Filter out private signatories
-        const visibleSignatories = signatories.filter(filter);
-
         // Return both the visible signatories and the total count
         return json({
-            signatories: visibleSignatories,
+            signatories: signatories,
             totalCount
         });
     } catch (e) {

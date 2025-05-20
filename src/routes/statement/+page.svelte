@@ -8,7 +8,7 @@
     const { title, description, date } = meta;
 
     // Variable to control how many signatories are shown
-    let showLimit = 2;
+    let showLimit = 5;
     // Reactive variable to determine the list of signatories to display
     $: visibleSignatories = signatories.slice(0, showLimit);
     // Function to toggle between limited and full list
@@ -35,7 +35,7 @@
 <!-- Signatories Counter and Goal -->
 <div class="signatories-counter">
     <h3>{totalCount} people have already signed it!</h3>
-    <h3>Only {nextGoal - totalCount} to get to our first {nextGoal} signatures!</h3>
+    <h3>Only {nextGoal && totalCount ? nextGoal - totalCount : 0} to get to our first {nextGoal} signatures!</h3>
 </div>
 
 <iframe
@@ -68,7 +68,7 @@
 <style>
     /* Style for the statement */
     .statement {
-        font-family: 'Georgia', serif !important;; 
+        font-family: 'Georgia', serif !important; 
         margin: 2rem 0;
         padding: 1rem;
         background-color: #f9f9f9;
