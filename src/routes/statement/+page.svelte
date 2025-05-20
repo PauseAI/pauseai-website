@@ -35,7 +35,7 @@
 <!-- Signatories Counter and Goal -->
 <div class="signatories-counter">
     <h3>{totalCount} people have already signed it!</h3>
-    <h3>Help us reach the next goal of {nextGoal} signatures!</h3>
+    <h3>Only {nextGoal - totalCount} to get to our first {nextGoal} signatures!</h3>
 </div>
 
 <iframe
@@ -68,7 +68,7 @@
 <style>
     /* Style for the statement */
     .statement {
-        font-family: 'Georgia', serif; 
+        font-family: 'Georgia', serif !important;; 
         margin: 2rem 0;
         padding: 1rem;
         background-color: #f9f9f9;
@@ -88,7 +88,7 @@
 
     /* Style for the signatories counter */
     .signatories-counter {
-        /*font-family: 'Arial', sans-serif;*/
+        font-family: 'Arial', sans-serif !important;
         margin: 2rem 0;
         padding: 1rem;
         background-color: #fff;
