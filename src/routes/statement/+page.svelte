@@ -8,12 +8,13 @@
 	const { title, description, date } = meta
 
 	// Variable to control how many signatories are shown
-	let showLimit = 5
+	const shortListN = 5
+    let shownSignatoriesN = shortListN
 	// Reactive variable to determine the list of signatories to display
-	$: visibleSignatories = signatories.slice(0, showLimit)
+	$: visibleSignatories = signatories.slice(0, shownSignatoriesN)
 	// Function to toggle between limited and full list
 	function toggleShowAll() {
-		showLimit = showLimit === 2 ? signatories.length : 2
+		shownSignatoriesN = shownSignatoriesN === shortListN ? signatories.length : shortListN
 	}
 
 	// Milestone goals for signatures

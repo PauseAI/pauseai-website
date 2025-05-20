@@ -98,11 +98,11 @@
 	.name {
 		color: var(--text);
 		font-family: var(--font-heading);
-		font-weight: bold;
 		text-decoration: none;
-		font-size: 1.4rem;
 		text-transform: capitalize;
 		margin: 0;
+        font-size: 0.9rem; /* Smaller font size */
+        font-weight: 300; /* Thinner font weight */
 	}
 
 	.title {
