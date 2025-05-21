@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { page } from '$app/stores'
-	import { localizeUrl, localizeHref } from '$lib/paraglide/runtime'
+	import { localizeHref } from '$lib/paraglide/runtime'
 	export let href: string | undefined = undefined
 	export let c2a = false
 	export let ariaLabel: string | undefined = undefined

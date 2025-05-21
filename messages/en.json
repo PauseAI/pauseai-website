@@ -86,5 +86,14 @@
 	"footer_other_license": "License: CC-BY 4.0",
 	"footer_other_feedback": "Submit feedback",
 	"footer_other_edit": "Edit original English content",
-	"footer_other_l10n": "Suggest translation improvement"
+	"footer_other_l10n": "Suggest translation improvement",
+	"newsletter_heading": "Subscribe to our newsletter",
+	"newsletter_description": "Stay updated on our efforts to advocate for AI safety.",
+	"newsletter_disclaimer": "Our newsletter is completely free. No paid subscription necessary. You can close Substack once signed up.",
+	"newsletter_email_placeholder": "Your email",
+	"newsletter_button": "Subscribe",
+	"newsletter_success": "Thank you for subscribing!",
+	"newsletter_error_default": "Failed to subscribe. Please try again.",
+	"newsletter_error_network": "Network error. Please try again later.",
+	"newsletter_loading": "Loading..."
 }
