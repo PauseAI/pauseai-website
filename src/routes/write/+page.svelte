@@ -174,7 +174,7 @@
 		})
 	})
 
-	function clear_arr(arr) {
+	function clear_arr(arr: string[]) {
 		for (var i in arr) {
 			arr[i] = ''
 		}
