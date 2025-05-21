@@ -141,7 +141,7 @@
 		color: var(--text);
 		text-transform: uppercase;
 		text-decoration: none;
-		font-size: 1.1rem;
+		font-size: 1.2rem;
 		font-family: var(--font-heading);
 		font-weight: 700;
 		text-align: left;
