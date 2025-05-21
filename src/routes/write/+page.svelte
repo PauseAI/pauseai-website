@@ -34,7 +34,7 @@
 	const maxMessages = 20
 
 	// Organizing the form questions into sections and subsections
-	const formSections: FieldSection[] = [
+	const formSections_Target: FieldSection[] = [
 		{
 			title: 'Personal Context',
 			subsections: [
@@ -92,27 +92,47 @@
 					]
 				}
 			]
-		},
+		}
+	]
+
+	// Flatten the questions array for accessing by index
+	const paragraphText_Target: string[] = []
+	formSections_Target.forEach((section) => {
+		section.subsections.forEach((subsection) => {
+			subsection.questions.forEach((question) => {
+				paragraphText_Target.push(question)
+			})
+		})
+	})
+
+	const formSections_Research: FieldSection[] = [
 		{
-			title: 'Information Needed About the Message',
+			title: 'Finding a target',
 			subsections: [
 				{
-					title: 'Content Requirements',
-					questions: ['Specific outcome desired', 'Concrete action requested'] /*
+					title: "Specify what sort of target you're looking for, and where.",
 					questions: [
-						'Clear, singular objective',
-						'Specific outcome desired',
-						'Concrete action requested'
-					]*/
-				},
-				{
-					title: 'Supporting Evidence',
-					questions: [
-						'Relevant facts',
-						'Context for the request',
-						'Potential impact or consequences'
+						'If you have certain institutions in mind, mention those. Otherwise, your local representative could be a good place to start.'
 					]
-				},
+				}
+			]
+		}
+	]
+
+	// Flatten the questions array for accessing by index
+	const paragraphText_Research: string[] = []
+	formSections_Research.forEach((section) => {
+		section.subsections.forEach((subsection) => {
+			subsection.questions.forEach((question) => {
+				paragraphText_Research.push(question)
+			})
+		})
+	})
+
+	const formSections_MessageDetails: FieldSection[] = [
+		{
+			title: 'The Message',
+			subsections: [
 				{
 					title: 'Logical Structure',
 					questions: [
@@ -165,11 +185,46 @@
 	]
 
 	// Flatten the questions array for accessing by index
-	const paragraphText: string[] = []
-	formSections.forEach((section) => {
+	const paragraphText_MessageDetails: string[] = []
+	formSections_Research.forEach((section) => {
 		section.subsections.forEach((subsection) => {
 			subsection.questions.forEach((question) => {
-				paragraphText.push(question)
+				paragraphText_MessageDetails.push(question)
+			})
+		})
+	})
+
+	const formSections_Message: FieldSection[] = [
+		{
+			title: 'What is your Message?',
+			subsections: [
+				{
+					title: 'Content Requirements',
+					questions: ['Specific outcome desired', 'Concrete action requested'] /*
+					questions: [
+						'Clear, singular objective',
+						'Specific outcome desired',
+						'Concrete action requested'
+					]*/
+				},
+				{
+					title: 'Supporting Evidence',
+					questions: [
+						'Relevant facts',
+						'Context for the request',
+						'Potential impact or consequences'
+					]
+				}
+			]
+		}
+	]
+
+	// Flatten the questions array for accessing by index
+	const paragraphText_Message: string[] = []
+	formSections_Message.forEach((section) => {
+		section.subsections.forEach((subsection) => {
+			subsection.questions.forEach((question) => {
+				paragraphText_Message.push(question)
 			})
 		})
 	})
@@ -203,11 +258,11 @@
 		clear_arr(input_arr)
 
 		// Find index for specific fields based on their question text
-		const roleAuthorityIndex = paragraphText.findIndex(
+		const roleAuthorityIndex = paragraphText_Target.findIndex(
 			(q) => q === 'Understanding their role and potential authority'
 		)
-		const objectiveIndex = paragraphText.findIndex((q) => q === 'Concrete action requested')
-		const outcomeIndex = paragraphText.findIndex((q) => q === 'Specific outcome desired')
+		const objectiveIndex = paragraphText_Target.findIndex((q) => q === 'Concrete action requested')
+		const outcomeIndex = paragraphText_Target.findIndex((q) => q === 'Specific outcome desired')
 
 		input_arr[roleAuthorityIndex] = 'You are writing for a child of about thirteen years old.'
 		input_arr[objectiveIndex] =
@@ -220,8 +275,8 @@
 
 	async function sendMessage() {
 		let input = ''
-		for (var i in paragraphText) {
-			input = input + paragraphText[i] + ':\n' + input_arr[i] + '\n\n'
+		for (var i in paragraphText_Target) {
+			input = input + paragraphText_Target[i] + ':\n' + input_arr[i] + '\n\n'
 		}
 		messages = [...messages, { content: input, role: 'user' }]
 
@@ -339,8 +394,10 @@
 				let currentField = -1
 
 				for (let line of lines) {
-					// Look for field headers matching our paragraphText array
-					const fieldIndex = paragraphText.findIndex((text) => line.trim().startsWith(text + ':'))
+					// Look for field headers matching our paragraphText_Target array
+					const fieldIndex = paragraphText_Target.findIndex((text) =>
+						line.trim().startsWith(text + ':')
+					)
 
 					if (fieldIndex >= 0) {
 						currentField = fieldIndex
@@ -399,8 +456,32 @@
 
 	// Function to get the index of a question across all sections
 	function getQuestionIndex(question: string): number {
-		return paragraphText.findIndex((text) => text === question)
+		return paragraphText_Target.findIndex((text) => text === question)
 	}
+
+	// FORM FUNCTIONS //
+
+	// Add these variables for form toggling
+	let activeForm = 'form1' // Default active form
+
+	// Function to set the active form
+	function setActiveForm(formId) {
+		activeForm = formId
+		console.log(formId)
+	}
+
+	// UNTESTED AND GENERATED BY AI
+	// Create separate arrays for each form's inputs
+	//let input_arr = Array(formSections_Target.flatMap(s => s.subsections.flatMap(ss => ss.questions)).length).fill('');
+	let form2_input_arr = Array(
+		formSections_Target.flatMap((s) => s.subsections.flatMap((ss) => ss.questions)).length
+	).fill('')
+	let form3_input_arr = Array(
+		formSections_Target.flatMap((s) => s.subsections.flatMap((ss) => ss.questions)).length
+	).fill('')
+	let form4_input_arr = Array(
+		formSections_Target.flatMap((s) => s.subsections.flatMap((ss) => ss.questions)).length
+	).fill('')
 
 	// Top of the page
 	const title = `Write Email Content`
@@ -453,6 +534,34 @@
 			particular hardcoded values, and starts writing content.
 		</p>
 
+		<!-- Form toggle bar -->
+		<div class="control-buttons">
+			<button
+				class="button {activeForm === 'form1' ? 'active' : ''}"
+				on:click={() => setActiveForm('form1')}
+			>
+				Finding A Target
+			</button>
+			<button
+				class="button {activeForm === 'form2' ? 'active' : ''}"
+				on:click={() => setActiveForm('form2')}
+			>
+				Personal Context
+			</button>
+			<button
+				class="button {activeForm === 'form3' ? 'active' : ''}"
+				on:click={() => setActiveForm('form3')}
+			>
+				The Message
+			</button>
+			<button
+				class="button {activeForm === 'form4' ? 'active' : ''}"
+				on:click={() => setActiveForm('form4')}
+			>
+				Message details
+			</button>
+		</div>
+
 		<div class="control-buttons">
 			<button
 				on:click={sendMessage}
@@ -496,40 +605,114 @@
 		<button class="button" on:click={copy}>Copy Content</button>
 		<button class="button" on:click={clear}>Reset All</button>
 	{:else}
-		<form on:submit|preventDefault>
-			<!-- Render form sections using the structured data -->
-			{#each formSections as section, sectionIndex}
-				<h1>{section.title}</h1>
+		<!-- Form container with conditional display based on active form -->
+		<div class="form-container">
+			<!-- Form 1 -->
+			{#if activeForm === 'form1'}
+				<form on:submit|preventDefault>
+					{#each formSections_Research as section, sectionIndex}
+						<h1>{section.title}</h1>
+						{#each section.subsections as subsection, subsectionIndex}
+							<h2>{subsection.title}</h2>
 
-				{#each section.subsections as subsection, subsectionIndex}
-					<h2>{subsection.title}</h2>
+							{#each subsection.questions as question, questionIndex}
+								{@const globalIndex = getQuestionIndex(question)}
 
-					<!-- Special handling for 'Content Requirements' to add an h3 for 'Precise Purpose' -->
-					{#if subsection.title === 'Content Requirements'}
-						<h3>Precise Purpose</h3>
-					{/if}
-
-					{#each subsection.questions as question, questionIndex}
-						<!-- Calculate the global index for this question -->
-						{@const globalIndex = getQuestionIndex(question)}
-
-						<!-- Add special h3 headers for specific subsections -->
-						{#if subsection.title === 'Supporting Evidence' && questionIndex === 0}
-							<h3>Supporting Evidence</h3>
-						{:else if subsection.title === 'Logical Structure' && questionIndex === 0}
-							<h3>Logical Structure</h3>
-						{/if}
-
-						<p>{question}</p>
-						<textarea
-							placeholder="Type here (Question {globalIndex + 1})"
-							bind:value={input_arr[globalIndex]}
-							on:keydown={handleKeyDown}
-						></textarea>
+								<p>{question}</p>
+								<textarea
+									placeholder="Type here (Question {globalIndex + 1})"
+									bind:value={form2_input_arr[globalIndex]}
+									on:keydown={handleKeyDown}
+								></textarea>
+							{/each}
+						{/each}
 					{/each}
-				{/each}
-			{/each}
-		</form>
+				</form>
+			{/if}
+
+			<!-- Form 2 -->
+			{#if activeForm === 'form2'}
+				<form on:submit|preventDefault>
+					<!-- Render form sections using the structured data -->
+					{#each formSections_Target as section, sectionIndex}
+						<h1>{section.title}</h1>
+						{#each section.subsections as subsection, subsectionIndex}
+							<h2>{subsection.title}</h2>
+
+							<!-- Special handling for 'Content Requirements' to add an h3 for 'Precise Purpose' -->
+							{#if subsection.title === 'Content Requirements'}
+								<h3>Precise Purpose</h3>
+							{/if}
+
+							{#each subsection.questions as question, questionIndex}
+								<!-- Calculate the global index for this question -->
+								{@const globalIndex = getQuestionIndex(question)}
+
+								<!-- Add special h3 headers for specific subsections -->
+								{#if subsection.title === 'Supporting Evidence' && questionIndex === 0}
+									<h3>Supporting Evidence</h3>
+								{:else if subsection.title === 'Logical Structure' && questionIndex === 0}
+									<h3>Logical Structure</h3>
+								{/if}
+
+								<p>{question}</p>
+								<textarea
+									placeholder="Type here (Question {globalIndex + 1})"
+									bind:value={input_arr[globalIndex]}
+									on:keydown={handleKeyDown}
+								></textarea>
+							{/each}
+						{/each}
+					{/each}
+				</form>
+			{/if}
+
+			<!-- Form 3 -->
+			{#if activeForm === 'form3'}
+				<form on:submit|preventDefault>
+					{#each formSections_Message as section, sectionIndex}
+						<h1>{section.title}</h1>
+						{#each section.subsections as subsection, subsectionIndex}
+							<h2>{subsection.title}</h2>
+
+							{#each subsection.questions as question, questionIndex}
+								{@const globalIndex = getQuestionIndex(question)}
+
+								<p>{question}</p>
+								<textarea
+									placeholder="Type here (Question {globalIndex + 1})"
+									bind:value={form3_input_arr[globalIndex]}
+									on:keydown={handleKeyDown}
+								></textarea>
+							{/each}
+						{/each}
+					{/each}
+				</form>
+			{/if}
+
+			<!-- Form 4 -->
+			{#if activeForm === 'form4'}
+				<form on:submit|preventDefault>
+					{#each formSections_MessageDetails as section, sectionIndex}
+						<h1>{section.title}</h1>
+						{#each section.subsections as subsection, subsectionIndex}
+							<h2>{subsection.title}</h2>
+
+							{#each subsection.questions as question, questionIndex}
+								{@const globalIndex = getQuestionIndex(question)}
+
+								<p>{question}</p>
+								<textarea
+									placeholder="Type here (Question {globalIndex + 1})"
+									bind:value={form4_input_arr[globalIndex]}
+									on:keydown={handleKeyDown}
+								></textarea>
+							{/each}
+						{/each}
+					{/each}
+				</form>
+			{/if}
+		</div>
 	{/if}
 </footer>
 
