@@ -95,6 +95,5 @@
 	"newsletter_success": "Thank you for subscribing!",
 	"newsletter_error_default": "Failed to subscribe. Please try again.",
 	"newsletter_error_network": "Network error. Please try again later.",
-	"a_new_key": "I have touched the file!",
 	"newsletter_loading": "Loading..."
 }
