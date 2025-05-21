@@ -21,6 +21,24 @@
 	const milestones = [25, 50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 1000, 1500]
 	// Find the next milestone goal
 	const nextGoal = milestones.find((goal) => totalCount < goal) || milestones[milestones.length - 1]
+
+    var d=document,
+        w="https://tally.so/widgets/embed.js",
+        v=function(){
+            "undefined"!=typeof Tally
+            ?Tally.loadEmbeds()
+            :d.querySelectorAll("iframe[data-tally-src]:not([src])").forEach((function(e){
+                e.src=e.dataset.tallySrc
+            }))
+        };
+    if("undefined"!=typeof Tally) v();
+    else if(d.querySelector('script[src="'+w+'"]')==null){
+        var s=d.createElement("script");
+        s.src=w,
+        s.onload=v,
+        s.onerror=v,
+        d.body.appendChild(s);
+    }
 </script>
 
 <PostMeta {title} {description} {date} />
@@ -45,14 +63,16 @@
 	</p>
 </div>
 
-<iframe
-	class="tally-embed"
-	src="https://tally.so/embed/315xdg?hideTitle=1&alignLeft=1"
-	frameborder="0"
-	width="100%"
-	height="500"
-	style="background: transparent; border: 1px solid #ccc;"
-></iframe>
+<iframe 
+    data-tally-src="https://tally.so/embed/315xdg?alignLeft=1&transparentBackground=1&dynamicHeight=1" 
+    loading="lazy" 
+    width="100%" 
+    height="509" 
+    frameborder="0" 
+    marginheight="0" 
+    marginwidth="0" 
+    title="Sign the statement">
+</iframe>
 
 <h2>Signatories</h2>
 

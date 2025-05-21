@@ -26,44 +26,48 @@ function recordToSignatory(record: any): Signatory {
 	return {
         private: record.fields.private || false,
         name: record.fields.private ? "Anonymous" : record.fields.name, // Anonymize private signatories
-		country: record.fields.country,
+		country: record.fields.country || "",
 		bio: record.fields.bio,
-        date: record.fields.created
+        date: record.fields.created,
+        email_verified: record.fields.email_verified || false
 	}
 }
 
 export async function GET({ fetch, setHeaders }) {
-    const url = `https://api.airtable.com/v0/appWPTGqZmUcs3NWu/tbl2emfOWNWoVz1kW`;
-    setHeaders({
-        'cache-control': 'public, max-age=3600' // 1 hour in seconds
-    });
-
     try {
-        // Fetch all records from Airtable
-        const records = await fetchAllPages(fetch, url);
+        // Fetch all records from the database or API
+        const response = await fetch('https://api.airtable.com/v0/appWPTGqZmUcs3NWu/tbl2emfOWNWoVz1kW');
+        const records = await response.json();
+
+        // Map records to Signatory objects
         const signatories = records.map(recordToSignatory);
 
-        // Sort signatories by date (newest first)
-        signatories.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+        // Filter signatories with email_verified = true
+        const verifiedSignatories = signatories.filter(signatory => signatory.email_verified);
 
-        // Calculate total count before filtering
-        const totalCount = signatories.length;
-
-        // Return both the visible signatories and the total count
-        return json({
-            signatories: signatories,
-            totalCount
+        // Set cache headers
+        setHeaders({
+            'cache-control': 'public, max-age=3600' // 1 hour in seconds
         });
-    } catch (e) {
-        console.error('Error fetching signatories:', e);
 
-        // Fallback logic
-        const totalCount = fallbackSignatories.length;
-        const visibleSignatories = fallbackSignatories.filter(filter);
+        // Return the filtered signatories and their count
+        return new Response(
+            JSON.stringify({
+                signatories: verifiedSignatories,
+                totalCount: verifiedSignatories.length
+            }),
+            { headers: { 'Content-Type': 'application/json' } }
+        );
+    } catch (error) {
+        console.error('Error fetching signatories:', error);
 
-        return json({
-            signatories: visibleSignatories,
-            totalCount
-        });
+        // Fallback data in case of an error
+        return new Response(
+            JSON.stringify({
+                signatories: fallbackSignatories,
+                totalCount: 0
+            }),
+            { headers: { 'Content-Type': 'application/json' } }
+        );
     }
 }
