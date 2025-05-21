@@ -98,8 +98,8 @@
 		text-decoration: none;
 		text-transform: capitalize;
 		margin: 0;
-        font-size: 1.5rem;
-        font-weight: 300; 
+        font-size: 1.2rem;
+        font-weight: 100; 
 	}
 
 	.title {
