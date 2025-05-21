@@ -23,7 +23,7 @@ However, you can have more impact by scaling up and doing more things, and we're
 
 Check if there's already a [local community near you](/communities).
 If there is not, you should [start one](/local-organizing)!
-And [join our Discord server](https://discord.gg/2XXWXvErfA) to discuss organizing a protest.
+And [join our Discord server](https://discord.gg/NvYeCzYZCj) to discuss organizing a protest.
 We're happy to help you with advice and resources!
 Don't forget writing in your city post, inside the #local-communities channel over there.
 

@@ -16,7 +16,7 @@
 		"dev:steps": "run-s inlang:settings translate && vite dev --host 0.0.0.0",
 		"build": "cross-env NODE_ENV=production run-s build:steps",
 		"build:dev": "cross-env NODE_ENV=development node scripts/filter-build-log.js \"run-s build:steps\"",
-		"build:steps": "run-s inlang:settings translate && vite build --emptyOutDir=false && run-p _postbuild:*",
+		"build:steps": "run-s inlang:settings translate && vite build --emptyOutDir=false && run-s _postbuild:*",
 		"_postbuild:pagefind": "tsx scripts/create-pagefind-index.ts",
 		"_postbuild:exclude": "tsx scripts/exclude-from-edge-function.ts",
 		"_postbuild:caching": "tsx scripts/opt-in-to-caching.ts",

@@ -52,7 +52,7 @@ description: How the PauseAI organization is structured, and what resources are 
 
 ## Tools used
 
-- [Discord](https://discord.gg/2XXWXvErfA) for internal coordination / chats.
+- [Discord](https://discord.gg/ZuX559xKwf) for internal coordination / chats.
 - [Gmail](https://gmail.com) for `@pauseai.info` email addresses.
 - [Google Suite](https://workspace.google.com/) for documents, spreadsheets, files, folders.
 - [Trello](https://trello.com/) is used by some teams for issue / ToDo tracking. (org name: `pauseaiinfo`)
@@ -61,7 +61,7 @@ description: How the PauseAI organization is structured, and what resources are 
 
 ## Social Media
 
-You can find us on [Discord](https://discord.gg/2XXWXvErfA) (this is where most of the coordination happens!), [Twitter](https://twitter.com/PauseAI), [Substack](https://substack.com/@pauseai), [Facebook](https://www.facebook.com/PauseAI), [TikTok](https://www.tiktok.com/@pauseai), [LinkedIn](https://www.linkedin.com/uas/login?session_redirect=/company/97035448/), [YouTube](https://www.youtube.com/@PauseAI), [Instagram](https://www.instagram.com/pause_ai) and [Reddit](https://www.reddit.com/r/PauseAI/).
+You can find us on [Discord](https://discord.gg/ZuX559xKwf) (this is where most of the coordination happens!), [Twitter](https://twitter.com/PauseAI), [Substack](https://substack.com/@pauseai), [Facebook](https://www.facebook.com/PauseAI), [TikTok](https://www.tiktok.com/@pauseai), [LinkedIn](https://www.linkedin.com/uas/login?session_redirect=/company/97035448/), [YouTube](https://www.youtube.com/@PauseAI), [Instagram](https://www.instagram.com/pause_ai) and [Reddit](https://www.reddit.com/r/PauseAI/).
 You can mail/contact us at [joep@pauseai.info](mailto:joep@pauseai.info).
 
 ## Design resources (flyers, posters, logo)

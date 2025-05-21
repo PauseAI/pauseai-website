@@ -16,14 +16,7 @@ if (!IS_API_AVAILABLE) {
 }
 
 // Define step types for server-side use
-type StepName =
-	| 'begin'
-	| 'research'
-	| 'firstDraft'
-	| 'firstCut'
-	| 'firstEdit'
-	| 'toneEdit'
-	| 'finalEdit'
+type StepName = 'research' | 'firstDraft' | 'firstCut' | 'firstEdit' | 'toneEdit' | 'finalEdit'
 
 // Server-side state management interface (not exposed to client)
 interface WriteState {
@@ -211,6 +204,11 @@ async function callClaude(
 	console.time(`${logPrefix}`)
 
 	try {
+		// Check if the API client is available
+		if (!anthropic) {
+			throw new Error('Anthropic API client is not initialized. API key is missing.')
+		}
+
 		// Combine all the specified prompts
 		const systemPrompt = promptNames.map((name) => System_Prompts[name]).join('')
 
@@ -223,6 +221,11 @@ async function callClaude(
 
 		// Log the request ID at debug level
 		console.debug(`${logPrefix} requestId: ${response.id}`)
+
+		// Ensure the response content is text
+		if (response.content[0].type !== 'text') {
+			throw new Error(`Unexpected content type from API: ${response.content[0].type}`)
+		}
 
 		const result = response.content[0].text
 		const elapsed = (Date.now() - startTime) / 1000 // seconds
@@ -237,7 +240,6 @@ async function callClaude(
 
 // Define user-friendly step descriptions
 const stepDescriptions: Record<StepName, string> = {
-	begin: 'Setup',
 	research: 'Auto-fill missing user inputs',
 	firstDraft: 'Create initial draft',
 	firstCut: 'Remove unnecessary content',

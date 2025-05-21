@@ -1,18 +1,16 @@
 <script lang="ts">
-	import { fade } from 'svelte/transition'
 	import Toc from 'svelte-toc'
 	import X from 'lucide-svelte/icons/x'
 	import List from 'lucide-svelte/icons/list'
 	import '$lib/components/Card.css'
+	import Backdrop from '$lib/components/Backdrop.svelte'
 
 	let desktop: boolean | undefined
 	let open: boolean | undefined
 	let headings: HTMLHeadingElement[] | undefined
 </script>
 
-{#if open}
-	<div transition:fade={{ duration: 100 }} class="backdrop" />
-{/if}
+<Backdrop {open} />
 <div class="toc-wrapper card" style={desktop ? 'display: none;' : ''}>
 	<Toc
 		headingSelector=":is(h2, h3, h4):not(.toc-exclude):not(footer *)"
@@ -50,16 +48,6 @@
 		--toc-max-height: 80vh;
 		--toc-padding: 0em 1em 1em;
 		--toc-z-index: 10;
-	}
-
-	.backdrop {
-		backdrop-filter: blur(10px) brightness(0.9) saturate(0.9);
-		-webkit-backdrop-filter: blur(10px) brightness(0.9) saturate(0.9);
-		position: fixed;
-		top: 0;
-		right: 0;
-		bottom: 0;
-		left: 0;
 	}
 
 	.toc-head {

@@ -42,6 +42,7 @@
 		contrast={data.localeAlert.isDev}
 		id={data.localeAlert.isDev ? undefined : 'locale-switch'}
 	>
+		<!-- eslint-disable-next-line svelte/no-at-html-tags not vulnerable against XSS -->
 		{@html data.localeAlert.message}
 	</Banner>
 {/if}

@@ -1,7 +1,4 @@
 <script lang="ts">
-	// NewsletterSignup.svelte - Component for newsletter subscription
-	import { browser } from '$app/environment'
-	import { onMount } from 'svelte'
 	import * as m from '$lib/paraglide/messages.js'
 
 	// Localizable text
@@ -14,18 +11,13 @@
 	let email = ''
 	let subscribeStatus: 'idle' | 'loading' | 'success' | 'error' = 'idle'
 	let errorMessage = ''
+	let substackUrl = ''
 
 	// Handle form submission - direct to Substack's subscribe page
 	const handleSubmit = () => {
 		if (!email) return
 
 		try {
-			// This is Substack's recommended way for free tier publications
-			// Open the subscribe page with the email pre-filled
-			const substackUrl = new URL('https://pauseai.substack.com/subscribe')
-			substackUrl.searchParams.append('email', email)
-			substackUrl.searchParams.append('utm_source', 'website')
-
 			// Open in new tab and show success in our UI
 			window.open(substackUrl.toString(), '_blank')
 
@@ -37,6 +29,15 @@
 			errorMessage = m.newsletter_error_network()
 			console.error('Newsletter redirect error:', error)
 		}
+	}
+
+	$: {
+		// This is Substack's recommended way for free tier publications
+		// Open the subscribe page with the email pre-filled
+		const url = new URL('https://pauseai.substack.com/subscribe')
+		url.searchParams.set('email', email)
+		url.searchParams.set('utm_source', 'website')
+		substackUrl = url.href
 	}
 
 	// Reset error state when email changes
@@ -60,10 +61,11 @@
 					placeholder={placeholderText}
 					aria-label={placeholderText}
 					required
+					enterkeyhint="done"
 				/>
-				<button type="submit">
-					{buttonText}
-				</button>
+				<a href={substackUrl} target="_blank">
+					<button type="submit">{buttonText}</button>
+				</a>
 			</div>
 
 			<p class="note">{m.newsletter_disclaimer()}</p>
