@@ -41,9 +41,6 @@
 		border-radius: 50%;
 		background-size: cover;
 		background-position: center;
-	}
-
-	.name-title {
 		display: flex;
 		flex-direction: row;
 		align-items: center;
@@ -101,8 +98,8 @@
 		text-decoration: none;
 		text-transform: capitalize;
 		margin: 0;
-        font-size: 0.9rem !important;
-        font-weight: 300 !important; 
+        font-size: 1.5rem;
+        font-weight: 300; 
 	}
 
 	.title {
