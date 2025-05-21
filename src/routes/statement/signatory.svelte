@@ -11,9 +11,9 @@
 <li class="person">
 	<div class="details">
 		<div class="name-title">
-			<div class="name">
+			<p class="name">
 				{name}
-			</div>
+			</p>
 			<div class="title">{country}</div>
 		</div>
 		{#if bio}
@@ -101,8 +101,8 @@
 		text-decoration: none;
 		text-transform: capitalize;
 		margin: 0;
-        font-size: 0.9rem; /* Smaller font size */
-        font-weight: 300; /* Thinner font weight */
+        font-size: 0.9rem !important;
+        font-weight: 300 !important; 
 	}
 
 	.title {

@@ -9,13 +9,13 @@
 
 	// Variable to control how many signatories are shown
 	const shortListN = 5
-    let shownSignatoriesN = shortListN
+    let showAll = false
 	// Reactive variable to determine the list of signatories to display
-	$: visibleSignatories = signatories.slice(0, shownSignatoriesN)
+    $: visibleSignatories = showAll ? signatories : signatories.slice(0, shortListN)
 	// Function to toggle between limited and full list
 	function toggleShowAll() {
-		shownSignatoriesN = shownSignatoriesN === shortListN ? signatories.length : shortListN
-	}
+        showAll = !showAll	
+    }
 
 	// Milestone goals for signatures
 	const milestones = [25, 50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 1000, 1500]
@@ -68,7 +68,7 @@
 
 	<!-- Button to toggle between limited and full list -->
 	<button on:click={toggleShowAll}>
-		{showLimit === 2 ? 'Show All Signatories' : 'Show Less'}
+        {showAll ? 'Show Less' : 'Show All Signatories'}
 	</button>
 </section>
 
