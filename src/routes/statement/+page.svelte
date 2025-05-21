@@ -46,8 +46,8 @@
 </div>
 
 <iframe
-	class="airtable-embed"
-	src="https://airtable.com/embed/appWPTGqZmUcs3NWu/pagUTBbn9qea358FB/form?hide_footer=true"
+	class="tally-embed"
+	src="https://tally.so/embed/315xdg?hideTitle=1&alignLeft=1"
 	frameborder="0"
 	width="100%"
 	height="500"
