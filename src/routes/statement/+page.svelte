@@ -57,8 +57,7 @@
 
 <!-- Signatories Counter and Goal -->
 <div class="signatories-counter">
-	<p>{totalCount} people have already signed it!</p>
-	<p>Only {nextGoal - totalCount} more to get to our first {nextGoal} signatures!</p>
+	<p>We’ve collected {totalCount} signatures so far— help us reach our first {nextGoal}!</p>
 </div>
 
 <iframe 
@@ -115,13 +114,13 @@
 	.signatories-counter {
 		font-family: 'Arial', sans-serif;
 		margin: 2rem 0;
-		padding: 1rem;
-		background-color: #fff;
-		border: 1px solid #ccc;
-		border-radius: 8px;
 		text-align: center;
 		font-size: 1.2rem;
-		color: #444;
+		/*border: 1px solid #ccc;
+		padding: 1rem;
+		background-color: #fff;
+		border-radius: 8px;
+		color: #444;*/
 	}
 
 	.signatories-counter p {
