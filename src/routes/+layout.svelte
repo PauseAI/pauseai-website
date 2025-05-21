@@ -1,27 +1,23 @@
 <script lang="ts">
-	import { Toaster } from 'svelte-french-toast'
-	import { ProgressBar } from '@prgm/sveltekit-progress-bar'
-
-	import Footer from './footer.svelte'
-	import Header from './header.svelte'
-	import PageTransition from './transition.svelte'
-
-	import Toc from '$lib/components/Toc.svelte'
+	import { page } from '$app/stores'
 	import Banner from '$lib/components/Banner.svelte'
 	import Hero from '$lib/components/Hero.svelte'
 	import NearbyEvent from '$lib/components/NearbyEvent.svelte'
+	import Toc from '$lib/components/Toc.svelte'
 	import ExternalLink from '$lib/components/custom/a.svelte'
-
+	import { verificationParameter } from '$lib/config'
 	import { deLocalizeHref } from '$lib/paraglide/runtime'
-
 	import '@fontsource/roboto-slab/300.css'
 	import '@fontsource/roboto-slab/700.css'
 	import '@fontsource/saira-condensed/700.css'
-
-	import '../styles/styles.css'
+	import { ProgressBar } from '@prgm/sveltekit-progress-bar'
+	import { onMount } from 'svelte'
+	import toast, { Toaster } from 'svelte-french-toast'
 	import '../styles/print.css'
-
-	import { page } from '$app/stores'
+	import '../styles/styles.css'
+	import Footer from './footer.svelte'
+	import Header from './header.svelte'
+	import PageTransition from './transition.svelte'
 
 	export let data
 
@@ -31,6 +27,12 @@
 	let eventFound: boolean
 	// Show the hero on the homepage, but nowhere else
 	$: hero = deLocalizeHref($page.url.pathname) === '/'
+
+	onMount(() => {
+		if ($page.url.searchParams.has(verificationParameter)) {
+			toast.success('Your email has been verified!')
+		}
+	})
 </script>
 
 <h2 style="width: 0; height: 0; margin: 0; padding: 0; visibility: hidden;" data-pagefind-ignore>

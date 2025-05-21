@@ -2,6 +2,7 @@ export const prerender = false
 
 import Airtable from 'airtable'
 import { AIRTABLE_API_KEY } from '$env/static/private'
+import { verificationParameter } from '$lib/config.js'
 
 const BASE_ID = 'appJI3O6GrPx1zrzY'
 const TABLE_ID = 'tblEMavUHON6r3rpL'
@@ -11,9 +12,9 @@ const VERIFIED_FIELD_NAME = 'Verified'
 const TABLE = new Airtable({ apiKey: AIRTABLE_API_KEY }).base(BASE_ID).table(TABLE_ID)
 
 export async function GET({ url }) {
-	const key = url.searchParams.get('key')
+	const key = url.searchParams.get(verificationParameter)
 	if (!key) {
-		return new Response('Parameter "key" is required', { status: 400 })
+		return new Response(`Parameter "${verificationParameter}" is required`, { status: 400 })
 	}
 
 	const records = await TABLE.select({
