@@ -275,7 +275,7 @@
 		}
 	}
 
-	async function processSteps(inputMessages, stateToken = null) {
+	async function processSteps(inputMessages: Message[] | null, stateToken = null) {
 		// Set loading indicator
 		loading = true
 
