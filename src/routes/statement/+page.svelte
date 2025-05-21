@@ -58,11 +58,9 @@
 <!-- Signatories Counter and Goal -->
 <div class="signatories-counter">
 	<p>{totalCount} people have already signed it!</p>
-	<p>
-		Only {nextGoal && totalCount ? nextGoal - totalCount : 0} to get to our first {nextGoal} signatures!
-	</p>
+	<p>Only {nextGoal - totalCount} more to get to our first {nextGoal} signatures!</p>
 </div>
-<!--
+
 <iframe 
     data-tally-src="https://tally.so/embed/315xdg?alignLeft=1&transparentBackground=1&dynamicHeight=1" 
     loading="lazy" 
@@ -72,7 +70,7 @@
     marginheight="0" 
     marginwidth="0" 
     title="Sign the statement">
-</iframe>-->
+</iframe>
 
 <h2>Signatories</h2>
 

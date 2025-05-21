@@ -29,7 +29,7 @@ function recordToSignatory(record: any): Signatory {
 		country: record.fields.country || "",
 		bio: record.fields.bio,
         date: record.fields.created,
-        email_verified: record.fields.email_verified || false
+        email_verified: record.fields.email_verified === true
 	}
 }
 
