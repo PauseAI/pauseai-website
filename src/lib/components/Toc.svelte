@@ -1,18 +1,17 @@
 <script lang="ts">
-	import { fade } from 'svelte/transition'
 	import Toc from 'svelte-toc'
 	import X from 'lucide-svelte/icons/x'
 	import List from 'lucide-svelte/icons/list'
+	import '$lib/components/Card.css'
+	import Backdrop from '$lib/components/Backdrop.svelte'
 
 	let desktop: boolean | undefined
 	let open: boolean | undefined
 	let headings: HTMLHeadingElement[] | undefined
 </script>
 
-{#if open}
-	<div transition:fade={{ duration: 100 }} class="backdrop" />
-{/if}
-<div class="toc-wrapper" style={desktop ? 'display: none;' : ''}>
+<Backdrop {open} />
+<div class="toc-wrapper card" style={desktop ? 'display: none;' : ''}>
 	<Toc
 		headingSelector=":is(h2, h3, h4):not(.toc-exclude):not(footer *)"
 		title="Contents"
@@ -51,21 +50,11 @@
 		--toc-z-index: 10;
 	}
 
-	.backdrop {
-		backdrop-filter: contrast(0.8);
-		-webkit-backdrop-filter: contrast(0.8);
-		position: fixed;
-		top: 0;
-		right: 0;
-		bottom: 0;
-		left: 0;
-	}
-
 	.toc-head {
 		position: sticky;
 		top: 0;
 		padding: 1em 0em 0.5em;
-		background-color: var(--bg);
+		background-color: inherit;
 	}
 
 	.toc-title-heading {
@@ -88,6 +77,16 @@
 		padding-left: 1rem;
 		padding-right: 1rem;
 		margin-right: -1rem;
+	}
+
+	.toc-wrapper :global(.toc) {
+		background-color: inherit;
+		border-radius: inherit;
+		box-shadow: inherit;
+	}
+
+	.toc-wrapper :global(.toc > nav) {
+		background-color: inherit;
 	}
 
 	@media (hover: none) {
