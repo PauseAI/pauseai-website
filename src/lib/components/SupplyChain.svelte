@@ -18,7 +18,7 @@
 
 	// Container size state
 	let graphContainer: HTMLDivElement
-	let containerWidth = 1600 // default fallback
+	let containerWidth = 1200 // default fallback
 	let containerHeight = 600 // default fallback
 	// Dynamic vertical spacing
 	const minNodeSpacing = 80
@@ -40,28 +40,35 @@
 	})
 
 	// Define column positions (as fractions of width)
-	const columns = {
-		equipment: 0.08,
-		foundry: 0.2,
-		design: 0.34,
-		eda: 0.46,
-		memory: 0.58,
-		assembly: 0.72,
-		end: 0.88
-	}
+	const columnKeys = ['equipment', 'foundry', 'design', 'eda_memory', 'assembly', 'end'] as const
+	const columns = Object.fromEntries(
+		columnKeys.map((key, i) => [key, i / (columnKeys.length - 1)])
+	) as Record<(typeof columnKeys)[number], number>
 
 	// Group nodes by category
-	const nodesByCategory: Record<string, Node[]> = {}
+	const nodesByCategory: Record<keyof typeof columns, Node[]> = {
+		equipment: [],
+		foundry: [],
+		design: [],
+		eda_memory: [],
+		assembly: [],
+		end: []
+	}
+
+	function isColumnCategory(category: string): category is keyof typeof columns {
+		return Object.keys(columns).includes(category)
+	}
+
 	Object.values(nodes).forEach((node) => {
-		if (!nodesByCategory[node.category]) {
-			nodesByCategory[node.category] = []
+		if (isColumnCategory(node.category)) {
+			nodesByCategory[node.category].push(node)
 		}
-		nodesByCategory[node.category].push(node)
 	})
 
 	// Update node positions (in pixels)
 	function updateNodePositions() {
 		Object.entries(nodesByCategory).forEach(([category, categoryNodes]) => {
+			if (!(category in columns)) return // Only position categories that have a column
 			categoryNodes.forEach((node, index) => {
 				node.x = getXPosition(
 					columns[category as keyof typeof columns],
@@ -370,6 +377,9 @@
 		position: relative;
 		background: var(--bg);
 		box-sizing: border-box;
+		max-width: 1200px;
+		width: 95vw;
+		margin: 0 auto;
 	}
 
 	@media (max-width: 600px) {

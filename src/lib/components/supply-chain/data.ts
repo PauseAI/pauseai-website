@@ -26,12 +26,12 @@ export const nodes: Record<string, Node> = {
 	CEREBRAS: { id: 'CEREBRAS', label: 'Cerebras', category: 'design' },
 	HUAWEI: { id: 'HUAWEI', label: 'Huawei', category: 'design' },
 	ARM: { id: 'ARM', label: 'ARM', category: 'design' },
-	CADENCE: { id: 'CADENCE', label: 'Cadence', category: 'eda' },
-	SYNOPSYS: { id: 'SYNOPSYS', label: 'Synopsys', category: 'eda' },
+	CADENCE: { id: 'CADENCE', label: 'Cadence', category: 'eda_memory' },
+	SYNOPSYS: { id: 'SYNOPSYS', label: 'Synopsys', category: 'eda_memory' },
 
 	// Memory
-	MICRON: { id: 'MICRON', label: 'Micron', category: 'memory' },
-	SKHYNIX: { id: 'SKHYNIX', label: 'SK Hynix', category: 'memory' },
+	MICRON: { id: 'MICRON', label: 'Micron', category: 'eda_memory' },
+	SKHYNIX: { id: 'SKHYNIX', label: 'SK Hynix', category: 'eda_memory' },
 
 	// Assembly / OSAT
 	ASE: { id: 'ASE', label: 'ASE (Foxconn)', category: 'assembly' },
@@ -397,7 +397,7 @@ export const edges: Edge[] = [
 		target: 'INTEL_FAB',
 		links: null,
 		description:
-			'Intel’s new Arizona and Ohio fabs deploy Applied Materials platforms for GAAFET manufacturing.',
+			"Intel's new Arizona and Ohio fabs deploy Applied Materials platforms for GAAFET manufacturing.",
 		weight: 8
 	},
 	{
@@ -405,7 +405,7 @@ export const edges: Edge[] = [
 		target: 'TSMC',
 		links: null,
 		description:
-			'KLA’s inspection & metrology systems are indispensable for TSMC yield‑ramp at 3 nm and below.',
+			"KLA's inspection & metrology systems are indispensable for TSMC yield‑ramp at 3 nm and below.",
 		weight: 8
 	},
 	{
@@ -431,7 +431,7 @@ export const edges: Edge[] = [
 		target: 'NVIDIA',
 		links: null,
 		description:
-			'SK Hynix is the primary HBM3 supplier for Nvidia’s Hopper GPUs and early Blackwell shipments.',
+			"SK Hynix is the primary HBM3 supplier for Nvidia's Hopper GPUs and early Blackwell shipments.",
 		weight: 7
 	},
 
@@ -493,7 +493,7 @@ export const edges: Edge[] = [
 		source: 'AMD',
 		target: 'AZURE',
 		links: null,
-		description: 'Azure is an early customer of AMD’s MI300A/X for its Maia super‑clusters.',
+		description: "Azure is an early customer of AMD's MI300A/X for its Maia super‑clusters.",
 		weight: 6
 	},
 	{
@@ -874,8 +874,7 @@ export const categoryColors = {
 	equipment: 'node-equipment',
 	foundry: 'node-foundry',
 	design: 'node-design',
-	eda: 'node-eda',
-	memory: 'node-memory',
+	eda_memory: 'node-eda',
 	assembly: 'node-assembly',
 	end: 'node-end'
 } as const
