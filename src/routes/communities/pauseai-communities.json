@@ -1,0 +1,392 @@
+[
+	{
+		"name": "PauseAI Utrecht",
+		"lat": 52.09073739999999,
+		"lon": 5.081420100000023,
+		"link": "$$DISCORD_GLOBAL$$"
+	},
+	{
+		"name": "PauseAI Washington DC",
+		"lat": 38.9072,
+		"lon": -77.0369,
+		"link": "$$DISCORD_US$$"
+	},
+	{
+		"name": "PauseAI Nottingham",
+		"lat": 52.9548,
+		"lon": -1.1581,
+		"link": "$$DISCORD_GLOBAL$$"
+	},
+	{
+		"name": "PauseAI Phoenix",
+		"lat": 33.4484,
+		"lon": -112.074,
+		"link": "$$DISCORD_US$$"
+	},
+	{
+		"name": "PauseAI Orlando",
+		"lat": 28.5383,
+		"lon": -81.3792,
+		"link": "$$DISCORD_US$$"
+	},
+	{
+		"name": "PauseAI Oldenburg",
+		"lat": 53.1412,
+		"lon": 8.2146,
+		"link": "$$DISCORD_GLOBAL$$"
+	},
+	{
+		"name": "PauseAI Seattle",
+		"lat": 47.6062,
+		"lon": -122.3321,
+		"link": "$$DISCORD_GLOBAL$$"
+	},
+	{
+		"name": "PauseAI Edinburgh",
+		"lat": 55.9533,
+		"lon": -3.1883,
+		"link": "$$DISCORD_GLOBAL$$"
+	},
+	{
+		"name": "PauseAI Manchester",
+		"lat": 53.4808,
+		"lon": -2.2426,
+		"link": "$$DISCORD_GLOBAL$$"
+	},
+	{
+		"name": "PauseAI Copenhagen",
+		"lat": 55.6761,
+		"lon": 12.5683,
+		"link": "$$DISCORD_GLOBAL$$"
+	},
+	{
+		"name": "PauseAI SF",
+		"lat": 37.7749,
+		"lon": -122.4194,
+		"link": "$$DISCORD_US$$"
+	},
+	{
+		"name": "PauseAI London",
+		"lat": 51.5073509,
+		"lon": -0.12775829999998223,
+		"link": "https://chat.whatsapp.com/CkkycjLr6H96lEzJs2ezox"
+	},
+	{
+		"name": "PauseAI Los Angeles",
+		"lat": 34.0522,
+		"lon": -118.2437,
+		"link": "$$DISCORD_US$$"
+	},
+	{
+		"name": "PauseAI Rosario",
+		"lat": -32.9442,
+		"lon": -60.6505,
+		"link": "$$DISCORD_US$$"
+	},
+	{
+		"name": "PauseAI Baltimore",
+		"lat": 39.2904,
+		"lon": -76.6122,
+		"link": "$$DISCORD_US$$"
+	},
+	{
+		"name": "PauseAI Ausburg",
+		"lat": 48.3705,
+		"lon": 10.8978,
+		"link": "$$DISCORD_GERMANY$$"
+	},
+	{
+		"name": "PauseAI Paris",
+		"lat": 48.8647,
+		"lon": 2.349,
+		"link": "$$DISCORD_FRANCE$$"
+	},
+	{
+		"name": "PauseAI Miami",
+		"lat": 25.7616,
+		"lon": -80.1917,
+		"link": "$$DISCORD_US$$"
+	},
+	{
+		"name": "PauseAI Montreal",
+		"lat": 45.5088,
+		"lon": -73.5616,
+		"link": "$$DISCORD_GLOBAL$$"
+	},
+	{
+		"name": "PauseAI Nairobi",
+		"lat": -1.286389,
+		"lon": 36.817223,
+		"link": "$$DISCORD_GLOBAL$$"
+	},
+	{
+		"name": "PauseAI Stockholm",
+		"lat": 59.3293,
+		"lon": 18.0686,
+		"link": "$$DISCORD_GLOBAL$$"
+	},
+	{
+		"name": "PauseAI Marseille",
+		"lat": 43.2963,
+		"lon": 5.37,
+		"link": "$$DISCORD_FRANCE$$"
+	},
+	{
+		"name": "PauseAI Portland",
+		"lat": 45.5231,
+		"lon": -122.6765,
+		"link": "$$DISCORD_US$$"
+	},
+	{
+		"name": "PauseAI Raleigh",
+		"lat": 35.7877,
+		"lon": -78.6443,
+		"link": "$$DISCORD_GLOBAL$$"
+	},
+	{
+		"name": "PauseAI Austin",
+		"lat": 30.2667,
+		"lon": -97.7333,
+		"link": "$$DISCORD_GLOBAL$$"
+	},
+	{
+		"name": "PauseAI West Palm Beach",
+		"lat": 26.7153,
+		"lon": -80.0534,
+		"link": "$$DISCORD_GLOBAL$$"
+	},
+	{
+		"name": "PauseAI Chicago",
+		"lat": 41.8781,
+		"lon": -87.6298,
+		"link": "https://discord.gg/3sQM7RGGkD"
+	},
+	{
+		"name": "PauseAI São Paulo",
+		"lat": -23.5338,
+		"lon": -46.6253,
+		"link": "$$DISCORD_GLOBAL$$"
+	},
+	{
+		"name": "PauseAI New York City",
+		"lat": 40.7306,
+		"lon": -73.9352,
+		"link": "$$DISCORD_US$$"
+	},
+	{
+		"name": "PauseAI Fredrikstad",
+		"lat": 59.2201,
+		"lon": 10.9299,
+		"link": "$$DISCORD_GLOBAL$$"
+	},
+	{
+		"name": "PauseAI Omaha",
+		"lat": 41.2572,
+		"lon": -95.9951,
+		"link": "$$DISCORD_US$$"
+	},
+	{
+		"name": "PauseAI St. Louis",
+		"lat": 38.627,
+		"lon": -90.1994,
+		"link": "$$DISCORD_US$$"
+	},
+	{
+		"name": "PauseAI Modesto",
+		"lat": 37.6391,
+		"lon": -120.9969,
+		"link": "$$DISCORD_GLOBAL$$"
+	},
+	{
+		"name": "PauseAI Dallas",
+		"lat": 32.7792,
+		"lon": -96.8089,
+		"link": "$$DISCORD_US$$"
+	},
+	{
+		"name": "PauseAI Lucerne",
+		"lat": 47.0502,
+		"lon": 8.3093,
+		"link": "$$DISCORD_GLOBAL$$"
+	},
+	{
+		"name": "PauseAI Berlin",
+		"lat": 52.52,
+		"lon": 13.405,
+		"link": "https://t.me/+12wemb6BZuQyNjVi"
+	},
+	{
+		"name": "PauseAI Rome",
+		"lat": 41.8967,
+		"lon": 12.482,
+		"link": "$$DISCORD_GLOBAL$$"
+	},
+	{
+		"name": "PauseAI Toronto",
+		"lat": 43.6511,
+		"lon": -79.347,
+		"link": "$$DISCORD_GLOBAL$$"
+	},
+	{
+		"name": "PauseAI Las Vegas",
+		"lat": 36.1716,
+		"lon": -115.1391,
+		"link": "$$DISCORD_GLOBAL$$"
+	},
+	{
+		"name": "PauseAI Philadelphia",
+		"lat": 39.9526,
+		"lon": -75.1652,
+		"link": "$$DISCORD_US$$"
+	},
+	{
+		"name": "PauseAI Amsterdam",
+		"lat": 52.378,
+		"lon": 4.8971,
+		"link": "https://chat.whatsapp.com/EOGvhoPCiCqDqwuf9JUxtB"
+	},
+	{
+		"name": "PauseAI Munich",
+		"lat": 48.1372,
+		"lon": 11.5761,
+		"link": "$$DISCORD_GERMANY$$"
+	},
+	{
+		"name": "PauseAI Cambridge",
+		"lat": 52.2053,
+		"lon": 0.1192,
+		"link": "$$DISCORD_GLOBAL$$"
+	},
+	{
+		"name": "PauseAI Hanoi",
+		"lat": 21.0285,
+		"lon": 105.8048,
+		"link": "$$DISCORD_GLOBAL$$"
+	},
+	{
+		"name": "PauseAI Gdynia",
+		"lat": 54.5168,
+		"lon": 18.5419,
+		"link": "$$DISCORD_GLOBAL$$"
+	},
+	{
+		"name": "PauseAI Madrid",
+		"lat": 40.4168,
+		"lon": -3.7038,
+		"link": "$$DISCORD_GLOBAL$$"
+	},
+	{
+		"name": "PauseAI Blackpool",
+		"lat": 53.8159,
+		"lon": -3.0553,
+		"link": "$$DISCORD_GLOBAL$$"
+	},
+	{
+		"name": "PauseAI Fort Wayne",
+		"lat": 41.0938,
+		"lon": -85.1392,
+		"link": "https://www.meetup.com/pauseai-fortwayne/"
+	},
+	{
+		"name": "PauseAI Vancouver",
+		"lat": 49.2463,
+		"lon": -123.1162,
+		"link": "$$DISCORD_GLOBAL$$"
+	},
+	{
+		"name": "PauseAI Melbourne",
+		"lat": -37.8136,
+		"lon": 144.9631,
+		"link": "$$DISCORD_GLOBAL$$"
+	},
+	{
+		"name": "PauseAI Hamburg",
+		"lat": 53.5511,
+		"lon": 9.9937,
+		"link": "$$DISCORD_GERMANY$$"
+	},
+	{
+		"name": "PauseAI Zurich",
+		"lat": 47.3769,
+		"lon": 8.5417,
+		"link": "$$DISCORD_GLOBAL$$"
+	},
+	{
+		"name": "PauseAI Charleston",
+		"lat": 32.7765,
+		"lon": -79.9311,
+		"link": "$$DISCORD_GLOBAL$$"
+	},
+	{
+		"name": "PauseAI Osnabrück",
+		"lat": 52.2681,
+		"lon": 8.0566,
+		"link": "$$DISCORD_GERMANY$$"
+	},
+	{
+		"name": "PauseAI Milan",
+		"lat": 45.4642,
+		"lon": 9.19,
+		"link": "$$WHATSAPP_ITALY$$"
+	},
+	{
+		"name": "Winston Salem, NC",
+		"lat": 36.0999,
+		"lon": -80.2442,
+		"link": "$$DISCORD_US$$"
+	},
+	{
+		"name": "Kraków",
+		"lat": 50.0647,
+		"lon": 19.945,
+		"link": "$$DISCORD_GLOBAL$$"
+	},
+	{
+		"name": "Yaoundé",
+		"lat": 3.848,
+		"lon": 11.5027,
+		"link": "https://chat.whatsapp.com/EmSo5C486JzDdFOiojByje"
+	},
+	{
+		"name": "Mo i Rana",
+		"lat": 66.3149,
+		"lon": 14.1657,
+		"link": "$$DISCORD_GLOBAL$$"
+	},
+	{
+		"name": "Trondheim",
+		"lat": 63.4305,
+		"lon": 10.3951,
+		"link": "$$DISCORD_GLOBAL$$"
+	},
+	{
+		"name": "Honefoss",
+		"lat": 60.1002,
+		"lon": 10.0202,
+		"link": "$$DISCORD_GLOBAL$$"
+	},
+	{
+		"name": "Kristiansand",
+		"lat": 58.1556,
+		"lon": 8.0167,
+		"link": "$$DISCORD_GLOBAL$$"
+	},
+	{
+		"name": "Prague",
+		"lat": 50.0755,
+		"lon": 14.4378,
+		"link": "https://discord.gg/ZTzFytGKKE$$"
+	},
+	{
+		"name": "Santiago",
+		"lat": -33.4569,
+		"lon": -70.6483,
+		"link": "https://t.me/+VwLcz7MAIDg3MTFh"
+	},
+	{
+		"name": "Vienna",
+		"lat": 48.2082,
+		"lon": 16.3738,
+		"link": "$$DISCORD_GLOBAL$$"
+	}
+]
