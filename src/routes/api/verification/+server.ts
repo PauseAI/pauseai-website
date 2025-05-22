@@ -1,7 +1,7 @@
 export const prerender = false
 
 import Airtable from 'airtable'
-import { AIRTABLE_API_KEY } from '$env/static/private'
+import { AIRTABLE_WRITE_API_KEY } from '$env/static/private'
 import { verificationParameter } from '$lib/config.js'
 
 const KEY_FIELD_NAME = 'Verification key'
@@ -10,8 +10,8 @@ const TABLE_PARAMETER = 'table'
 const DEFAULT_TABLE = 'join'
 
 const VERIFICATION_TABLES = new Map([
-	['join', { baseId: 'appJI3O6GrPx1zrzY', tableId: 'tblEMavUHON6r3rpL' }],
-	['statement', { baseId: 'appJI3O6GrPx1zrzY', tableId: 'tblEMavUHON6r3rpL' }]
+	['join', { baseId: 'appWPTGqZmUcs3NWu', tableId: 'tblL1icZBhTV1gQ9o' }],
+	['statement', { baseId: 'appWPTGqZmUcs3NWu', tableId: 'tbl2emfOWNWoVz1kW' }]
 ])
 
 export async function GET({ url }) {
@@ -27,7 +27,7 @@ export async function GET({ url }) {
 		return new Response(`Invalid table name "${tableName}"`, { status: 400 })
 	}
 
-	const table = new Airtable({ apiKey: AIRTABLE_API_KEY })
+	const table = new Airtable({ apiKey: AIRTABLE_WRITE_API_KEY })
 		.base(tableConfig.baseId)
 		.table(tableConfig.tableId)
 
