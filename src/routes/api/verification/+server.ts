@@ -50,7 +50,8 @@ export async function GET({ url }) {
 			filterByFormula: `{${tableConfig.keyFieldName}} = "${key}"`
 		})
 		.firstPage()
-	await records[0]?.patchUpdate(Object.fromEntries([[tableConfig.verifiedFieldName, true]]))
+	if (!records.length) return new Response('Record not found', { status: 404 })
+	await records[0].patchUpdate(Object.fromEntries([[tableConfig.verifiedFieldName, true]]))
 
 	return new Response(null, { status: 301, headers: { Location: '/' } })
 }
