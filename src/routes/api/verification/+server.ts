@@ -4,14 +4,28 @@ import Airtable from 'airtable'
 import { AIRTABLE_WRITE_API_KEY } from '$env/static/private'
 import { verificationParameter } from '$lib/config.js'
 
-const KEY_FIELD_NAME = 'Verification key'
-const VERIFIED_FIELD_NAME = 'Verified'
 const TABLE_PARAMETER = 'table'
 const DEFAULT_TABLE = 'join'
 
 const VERIFICATION_TABLES = new Map([
-	['join', { baseId: 'appWPTGqZmUcs3NWu', tableId: 'tblL1icZBhTV1gQ9o' }],
-	['statement', { baseId: 'appWPTGqZmUcs3NWu', tableId: 'tbl2emfOWNWoVz1kW' }]
+	[
+		'join',
+		{
+			baseId: 'appWPTGqZmUcs3NWu',
+			tableId: 'tblL1icZBhTV1gQ9o',
+			keyFieldName: 'Airtable ID',
+			verifiedFieldName: 'Verified email'
+		}
+	],
+	[
+		'statement',
+		{
+			baseId: 'appWPTGqZmUcs3NWu',
+			tableId: 'tbl2emfOWNWoVz1kW',
+			keyFieldName: 'airtable_id',
+			verifiedFieldName: 'email_verified'
+		}
+	]
 ])
 
 export async function GET({ url }) {
@@ -33,10 +47,10 @@ export async function GET({ url }) {
 
 	const records = await table
 		.select({
-			filterByFormula: `{${KEY_FIELD_NAME}} = "${key}"`
+			filterByFormula: `{${tableConfig.keyFieldName}} = "${key}"`
 		})
 		.firstPage()
-	await records[0]?.patchUpdate(Object.fromEntries([[VERIFIED_FIELD_NAME, true]]))
+	await records[0]?.patchUpdate(Object.fromEntries([[tableConfig.verifiedFieldName, true]]))
 
 	return new Response(null, { status: 301, headers: { Location: '/' } })
 }
