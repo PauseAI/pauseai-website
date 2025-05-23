@@ -138,7 +138,7 @@
 	.tally-form-container {
 		margin: 2rem 0;
 		padding: 1.5rem;
-		background-color: #ffffff;
+		background-color: #ffc195;
 		border: 1px solid #e5e7eb;
 		border-radius: 8px;
 		box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);

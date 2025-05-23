@@ -41,8 +41,15 @@ export async function GET({ fetch, setHeaders }) {
     try {
         // Fetch all records from Airtable
         const records = await fetchAllPages(fetch, url);
-        // Filter out records where email_verified is false
-        const verifiedRecords = records.filter(record => record.fields.email_verified !== false);
+        
+        // Filter to only include records where email_verified is explicitly true
+        const verifiedRecords = records.filter(record => {
+            const emailVerified = record.fields.email_verified;
+            console.log('Checking record:', record.fields.name, 'email_verified:', emailVerified);
+            return emailVerified === true;
+        });
+
+        console.log(`Total records: ${records.length}, Verified records: ${verifiedRecords.length}`);
 
         // Map the filtered records to signatories
         const signatories = verifiedRecords.map(recordToSignatory);
