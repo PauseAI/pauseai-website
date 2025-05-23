@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { onMount } from 'svelte'
 	import PostMeta from '$lib/components/PostMeta.svelte'
 	import { meta } from './meta'
 	import Signatory from './signatory.svelte'
@@ -22,7 +23,30 @@
 	// Find the next milestone goal
 	const nextGoal = milestones.find((goal) => totalCount < goal) || milestones[milestones.length - 1]
     
-	var d=document,w="https://tally.so/widgets/embed.js",v=function(){"undefined"!=typeof Tally?Tally.loadEmbeds():d.querySelectorAll("iframe[data-tally-src]:not([src])").forEach((function(e){e.src=e.dataset.tallySrc}))};if("undefined"!=typeof Tally)v();else if(d.querySelector('script[src="'+w+'"]')==null){var s=d.createElement("script");s.src=w,s.onload=v,s.onerror=v,d.body.appendChild(s);}
+	// Load Tally script after component mounts
+	onMount(() => {
+		const d = document
+		const w = "https://tally.so/widgets/embed.js"
+		const v = function() {
+			if (typeof window.Tally !== "undefined") {
+				window.Tally.loadEmbeds()
+			} else {
+				d.querySelectorAll("iframe[data-tally-src]:not([src])").forEach((e) => {
+					e.src = e.dataset.tallySrc
+				})
+			}
+		}
+		
+		if (typeof window.Tally !== "undefined") {
+			v()
+		} else if (d.querySelector(`script[src="${w}"]`) === null) {
+			const s = d.createElement("script")
+			s.src = w
+			s.onload = v
+			s.onerror = v
+			d.body.appendChild(s)
+		}
+	})
 </script>
 
 <PostMeta {title} {description} {date} />
@@ -41,7 +65,7 @@
 
 <!-- Signatories Counter and Goal -->
 <div class="signatories-counter">
-	<p>We’ve collected {totalCount} signatures so far— help us reach our first {nextGoal}!</p>
+	<p>We've collected {totalCount} signatures so far— help us reach our first {nextGoal}!</p>
 </div>
 
 <iframe data-tally-src="https://tally.so/embed/315xdg?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1" loading="lazy" width="100%" height="499" frameborder="0" marginheight="0" marginwidth="0" title="Sign the statement (verification required)"></iframe>
