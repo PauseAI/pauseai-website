@@ -41,18 +41,19 @@ export async function GET({ fetch, setHeaders }) {
     try {
         // Fetch all records from Airtable
         const records = await fetchAllPages(fetch, url);
-        const signatories = records.map(recordToSignatory);
+        // Filter out records where email_verified is false
+        const verifiedRecords = records.filter(record => record.fields.email_verified !== false);
+
+        // Map the filtered records to signatories
+        const signatories = verifiedRecords.map(recordToSignatory);
 
         // Sort signatories by date (newest first)
         signatories.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
 
-        // Calculate total count before filtering
-        const totalCount = signatories.length;
-
         // Return both the visible signatories and the total count
         return json({
             signatories: signatories,
-            totalCount
+            totalCount: signatories.length
         });
     } catch (e) {
         console.error('Error fetching signatories:', e);
