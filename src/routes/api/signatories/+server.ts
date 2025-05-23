@@ -26,10 +26,9 @@ function recordToSignatory(record: any): Signatory {
 	return {
         private: record.fields.private || false,
         name: record.fields.private ? "Anonymous" : record.fields.name, // Anonymize private signatories
-		country: record.fields.country || "",
+		country: record.fields.country,
 		bio: record.fields.bio,
-        date: record.fields.created,
-        email_verified: record.fields.email_verified || false
+        date: record.fields.created
 	}
 }
 
@@ -41,22 +40,30 @@ export async function GET({ fetch, setHeaders }) {
 
     try {
         // Fetch all records from Airtable
-        const response = await fetch(url);
-        const records = await response.json();
+        const records = await fetchAllPages(fetch, url);
         const signatories = records.map(recordToSignatory);
+
+        // Sort signatories by date (newest first)
+        signatories.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+
+        // Calculate total count before filtering
+        const totalCount = signatories.length;
 
         // Return both the visible signatories and the total count
         return json({
             signatories: signatories,
-            totalCount: signatories.length
+            totalCount
         });
     } catch (e) {
         console.error('Error fetching signatories:', e);
 
         // Fallback logic
+        const totalCount = fallbackSignatories.length;
+        const visibleSignatories = fallbackSignatories.filter(filter);
+
         return json({
-            signatories: fallbackSignatories,
-            totalCount: fallbackSignatories.length
+            signatories: visibleSignatories,
+            totalCount
         });
     }
 }
