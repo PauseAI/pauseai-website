@@ -399,7 +399,7 @@
 		"name": "Munster",
 		"lat": 51.9612,
 		"lon": 7.6282,
-		"link": "mailto:pauseai-muenster@posteo.de"
+		"link": "$$DISCORD_GERMANY$$"
 	},
 	{
 		"name": "Freiburg",
