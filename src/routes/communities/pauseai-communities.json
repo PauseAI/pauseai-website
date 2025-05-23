@@ -388,5 +388,47 @@
 		"lat": 48.2082,
 		"lon": 16.3738,
 		"link": "$$DISCORD_GLOBAL$$"
+	},
+	{
+		"name": "Halle (Saale)",
+		"lat": 51.4872,
+		"lon": 11.9656,
+		"link": "https://t.me/+tobhhF27liwyMjhi"
+	},
+	{
+		"name": "Munster",
+		"lat": 51.9612,
+		"lon": 7.6282,
+		"link": "mailto:pauseai-muenster@posteo.de"
+	},
+	{
+		"name": "Freiburg",
+		"lat": 48.0,
+		"lon": 7.8333,
+		"link": "$$DISCORD_GLOBAL$$"
+	},
+	{
+		"name": "Canberra",
+		"lat": -35.2809,
+		"lon": 149.13,
+		"link": "$$DISCORD_GLOBAL$$"
+	},
+	{
+		"name": "Kansas City",
+		"lat": 39.0997,
+		"lon": -94.5786,
+		"link": "$$DISCORD_US$$"
+	},
+	{
+		"name": "Hispanohablantes",
+		"lat": 23.6345,
+		"lon": 100.4515,
+		"link": "$$DISCORD_GLOBAL$$"
+	},
+	{
+		"name": "Pittsburgh",
+		"lat": 40.4406,
+		"lon": -79.9959,
+		"link": "$$DISCORD_US$$"
 	}
 ]
