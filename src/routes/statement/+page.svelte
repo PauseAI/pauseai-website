@@ -68,7 +68,10 @@
 	<p>We've collected {totalCount} signatures so far— help us reach our first {nextGoal}!</p>
 </div>
 
-<iframe data-tally-src="https://tally.so/embed/315xdg?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1" loading="lazy" width="100%" height="499" frameborder="0" marginheight="0" marginwidth="0" title="Sign the statement (verification required)"></iframe>
+<!-- Tally Form Container -->
+<div class="tally-form-container">
+	<iframe data-tally-src="https://tally.so/embed/315xdg?alignLeft=1&hideTitle=1&dynamicHeight=1" loading="lazy" width="100%" height="499" frameborder="0" marginheight="0" marginwidth="0" title="Sign the statement (verification required)"></iframe>
+</div>
 
 <h2>Signatories</h2>
 
@@ -129,6 +132,20 @@
 	.signatories {
 		display: grid;
 		gap: 1rem;
+	}
+
+	/* Tally form container styling */
+	.tally-form-container {
+		margin: 2rem 0;
+		padding: 1.5rem;
+		background-color: #ffffff;
+		border: 1px solid #e5e7eb;
+		border-radius: 8px;
+		box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+	}
+
+	.tally-form-container iframe {
+		border-radius: 4px;
 	}
 
 	button {
