@@ -7,6 +7,9 @@
 	const { signatories, totalCount } = data
 	const { title, description, date } = meta
 
+    console.log('Signatories in +page.svelte:', signatories); // Log signatories in frontend
+    console.log('Total count in +page.svelte:', totalCount); // Log total count
+
 	// Variable to control how many signatories are shown
 	const shortListN = 5
     let showAll = false
