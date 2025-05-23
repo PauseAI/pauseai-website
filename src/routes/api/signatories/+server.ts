@@ -57,13 +57,9 @@ export async function GET({ fetch, setHeaders }) {
     } catch (e) {
         console.error('Error fetching signatories:', e);
 
-        // Fallback logic
-        const totalCount = fallbackSignatories.length;
-        const visibleSignatories = fallbackSignatories.filter(filter);
-
         return json({
-            signatories: visibleSignatories,
-            totalCount
+            signatories: fallbackSignatories,
+            totalCount: 0
         });
     }
 }
