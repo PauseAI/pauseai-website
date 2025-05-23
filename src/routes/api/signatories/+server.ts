@@ -34,42 +34,29 @@ function recordToSignatory(record: any): Signatory {
 }
 
 export async function GET({ fetch, setHeaders }) {
-    try {
-        // Fetch all records from the database or API
-        const response = await fetch('https://api.airtable.com/v0/appWPTGqZmUcs3NWu/tbl2emfOWNWoVz1kW');
-        const records = await response.json();
+    const url = `https://api.airtable.com/v0/appWPTGqZmUcs3NWu/tbl2emfOWNWoVz1kW`;
+    setHeaders({
+        'cache-control': 'public, max-age=3600' // 1 hour in seconds
+    });
 
-        // Map records to Signatory objects
+    try {
+        // Fetch all records from Airtable
+        const response = await fetch(url);
+        const records = await response.json();
         const signatories = records.map(recordToSignatory);
 
-        console.log('Mapped signatories:', signatories);
-
-        // Filter signatories with email_verified = true
-        const verifiedSignatories = signatories;
-
-        // Set cache headers
-        setHeaders({
-            'cache-control': 'public, max-age=3600' // 1 hour in seconds
+        // Return both the visible signatories and the total count
+        return json({
+            signatories: signatories,
+            totalCount: signatories.length
         });
+    } catch (e) {
+        console.error('Error fetching signatories:', e);
 
-        // Return the filtered signatories and their count
-        return new Response(
-            JSON.stringify({
-                signatories: verifiedSignatories,
-                totalCount: verifiedSignatories.length
-            }),
-            { headers: { 'Content-Type': 'application/json' } }
-        );
-    } catch (error) {
-        console.error('Error fetching signatories:', error);
-
-        // Fallback data in case of an error
-        return new Response(
-            JSON.stringify({
-                signatories: fallbackSignatories,
-                totalCount: 0
-            }),
-            { headers: { 'Content-Type': 'application/json' } }
-        );
+        // Fallback logic
+        return json({
+            signatories: fallbackSignatories,
+            totalCount: fallbackSignatories.length
+        });
     }
 }
