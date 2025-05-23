@@ -29,7 +29,7 @@ function recordToSignatory(record: any): Signatory {
 		country: record.fields.country || "",
 		bio: record.fields.bio,
         date: record.fields.created,
-        email_verified: record.fields.email_verified === true
+        email_verified: record.fields.email_verified || false
 	}
 }
 
@@ -43,7 +43,7 @@ export async function GET({ fetch, setHeaders }) {
         const signatories = records.map(recordToSignatory);
 
         // Filter signatories with email_verified = true
-        const verifiedSignatories = signatories.filter(signatory => signatory.email_verified);
+        const verifiedSignatories = signatories;
 
         // Set cache headers
         setHeaders({
