@@ -39,8 +39,6 @@ export async function GET({ fetch, setHeaders }) {
         const response = await fetch('https://api.airtable.com/v0/appWPTGqZmUcs3NWu/tbl2emfOWNWoVz1kW');
         const records = await response.json();
 
-        console.log('Raw records from Airtable:', records);
-
         // Map records to Signatory objects
         const signatories = records.map(recordToSignatory);
 
