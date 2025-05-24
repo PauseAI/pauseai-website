@@ -111,8 +111,23 @@ export async function initializeGitCache(options: {
 	console.log(
 		`\ud83d\udd04 Setting up translation repository from ${options.repo} into ${options.dir}`
 	)
+	console.log(`Using ${options.token ? 'authenticated' : 'unauthenticated'} Git access`)
+
+	// Time the clone operation
+	console.time('⏱️ Git Clone')
 	await options.git.clone(remote, options.dir)
+	console.timeEnd('⏱️ Git Clone')
+
 	await options.git.cwd(options.dir)
+
+	// Test if we're authenticated by checking remote URL format
+	try {
+		const remoteUrl = await options.git.remote(['get-url', 'origin'])
+		const isAuthenticated = remoteUrl.includes('@')
+		console.log(`Authentication status: ${isAuthenticated ? 'SUCCESS' : 'FAILURE'}`)
+	} catch (err) {
+		console.log(`Failed to verify authentication: ${err.message}`)
+	}
 
 	// Always set git config in case we need to make local commits
 	await options.git.addConfig('user.name', options.username)
@@ -125,11 +140,24 @@ export async function initializeGitCache(options: {
  * @param git - The SimpleGit instance used to retrieve the log.
  * @returns A Promise that resolves to a Map where keys are file paths and values are the latest commit dates.
  */
-export async function getLatestCommitDates(git: SimpleGit): Promise<Map<string, Date>> {
+export async function getLatestCommitDates(
+	git: SimpleGit,
+	repoType: string = 'repo'
+): Promise<Map<string, Date>> {
+	console.log(`Starting git log retrieval for ${repoType} commit dates...`)
 	const latestCommitDatesMap = new Map<string, Date>()
+
+	const timerLabelLog = `⏱️ Git Log Retrieval - ${repoType}`
+	console.time(timerLabelLog)
 	const log = await git.log({
 		'--stat': 4096
 	})
+	console.timeEnd(timerLabelLog)
+
+	console.log(`Retrieved ${log.all.length} commits for ${repoType} date analysis`)
+
+	const timerLabelParse = `⏱️ Parse Git Log - ${repoType}`
+	console.time(timerLabelParse)
 	for (const entry of log.all) {
 		const files = entry.diff?.files
 		if (!files) continue
@@ -139,6 +167,9 @@ export async function getLatestCommitDates(git: SimpleGit): Promise<Map<string, 
 			}
 		}
 	}
+	console.timeEnd(timerLabelParse)
+
+	console.log(`Parsed dates for ${latestCommitDatesMap.size} files in ${repoType}`)
 	return latestCommitDatesMap
 }
 

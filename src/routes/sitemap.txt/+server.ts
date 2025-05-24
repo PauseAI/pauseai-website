@@ -11,7 +11,7 @@ export async function GET({ fetch }) {
 	const headers = { 'Content-Type': 'text/plain' }
 
 	const sitemap = posts
-		.map(({ slug }) => `${website}/${slug}\n`)
+		.map(({ slug }) => `${website}/en/${slug}\n`)
 		.join('')
 		.trim()
 

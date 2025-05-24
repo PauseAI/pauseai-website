@@ -15,7 +15,7 @@
 	export let inverted = false
 	export let moveUp = false
 
-	$: logo_animate = localizeHref($page.url.pathname) != '/'
+	$: logo_animate = $page.url.pathname != localizeHref('/')
 
 	let nav: HTMLElement
 
@@ -30,7 +30,7 @@
 	<div class="logo-container">
 		<div class="compensate-min-space-between" />
 		<div class="compensate-offset" />
-		<a href="/" class="logo">
+		<a href={localizeHref('/')} class="logo">
 			<Logo animate={logo_animate} {inverted} />
 		</a>
 		<div class="min-space-between" />
