@@ -112,6 +112,9 @@ function regenerateSettings(verbose = false): void {
 			project: './project.inlang',
 			outdir: './src/lib/paraglide',
 			strategy: ['url', 'cookie', 'preferredLanguage', 'baseLocale'],
+			// Fix for Netlify Edge Functions (Deno runtime)
+			disableAsyncLocalStorage: true,
+			isServer: "typeof window === 'undefined' || typeof globalThis.Deno !== 'undefined'",
 			// Create concrete URL patterns structure with current locale set
 			urlPatterns: [
 				{
