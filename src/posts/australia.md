@@ -3,7 +3,7 @@ title: PauseAI in Australia
 slug: australia
 description: landing page for the Australian chapter of PauseAI
 ---
-[Email us](mailto:australia@pauseai.info) | [Connect on Facebook](https://www.facebook.com/groups/571590459293618) |[ YouTube channel](https://www.youtube.com/channel/UCjjMieiOlSFf7jud0yhHQSg)
+[Email us](mailto:australia@pauseai.info) | [Connect on Facebook](https://www.facebook.com/groups/571590459293618) | [YouTube channel](https://www.youtube.com/channel/UCjjMieiOlSFf7jud0yhHQSg)
 
 **A message from PauseAI volunteers in Australia:**
 
