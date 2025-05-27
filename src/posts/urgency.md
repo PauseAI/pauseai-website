@@ -42,7 +42,7 @@ Now, let's dive into the definition of AGI used in that survey:
 - Pass a Turing test
 - Finish Montezuma's revenge
 
-GPT-4 Scores [94.4% on the Winograd Schema Challenge](https://d-kz.medium.com/evaluating-gpt-3-and-gpt-4-on-the-winograd-schema-challenge-reasoning-test-e4de030d190d), and [93% on the SAT reading exam, 89% on the SAT math exam](htthttps://www.cnbc.com/2023/03/14/openai-announces-gpt-4-says-beats-90percent-of-humans-on-sat.html).
+GPT-4 Scores [94.4% on the Winograd Schema Challenge](https://d-kz.medium.com/evaluating-gpt-3-and-gpt-4-on-the-winograd-schema-challenge-reasoning-test-e4de030d190d), and [93% on the SAT reading exam, 89% on the SAT math exam](https://www.cnbc.com/2023/03/14/openai-announces-gpt-4-says-beats-90percent-of-humans-on-sat.html).
 It hasn't passed the Turing test, but probably not because of a lack of capabilities.
 It's because GPT-4 has been fine-tuned to not mislead people. It's not good for business if your AI is telling people it's actually a person.
 That only leaves Montezuma's Revenge.
