@@ -33,6 +33,11 @@ export async function GET({ url }) {
 	if (!key) {
 		return new Response(`Parameter "${verificationParameter}" is required`, { status: 400 })
 	}
+	if (!/^[a-zA-Z0-9]+$/.test(key)) {
+		return new Response(`Parameter "${verificationParameter}" must be alphanumeric`, {
+			status: 400
+		})
+	}
 
 	const tableName = url.searchParams.get(TABLE_PARAMETER) || DEFAULT_TABLE
 	const tableConfig = VERIFICATION_TABLES.get(tableName)
