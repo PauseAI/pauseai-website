@@ -1,5 +1,5 @@
 <script lang="ts">
-	import ExternalLink from '$lib/components/custom/a.svelte'
+	import Link from '$lib/components/custom/a.svelte'
 	import Toggle from '$lib/components/Toggle.svelte'
 	import Edit from '$lib/components/Edit.svelte'
 	import WithdrawWidgetConsent from '$lib/components/widget-consent/WithdrawWidgetConsent.svelte'
@@ -9,7 +9,7 @@
 
 <footer>
 	<div class="joinbar">
-		<a class="c2a" href="/join">{m.footer_join()}</a>
+		<Link class="c2a" href="/join">{m.footer_join()}</Link>
 		<div class="socials">
 			<Socials />
 		</div>
@@ -18,58 +18,57 @@
 	<div class="footer-links">
 		<div class="column">
 			<h2>{m.footer_info()}</h2>
-			<a href="/faq">{m.footer_info_faq()}</a>
-			<a href="/proposal">{m.footer_info_proposal()}</a>
-			<a href="/learn">{m.footer_info_learn()}</a>
-			<a href="/press">{m.footer_info_press()}</a>
-			<a href="/teams">{m.footer_info_teams()}</a>
-			<a href="/partnerships">{m.footer_info_partnerships()}</a>
-			<a href="/privacy">{m.footer_info_privacy()}</a>
-			<a href="/legal"
+			<Link href="/faq">{m.footer_info_faq()}</Link>
+			<Link href="/proposal">{m.footer_info_proposal()}</Link>
+			<Link href="/learn">{m.footer_info_learn()}</Link>
+			<Link href="/press">{m.footer_info_press()}</Link>
+			<Link href="/teams">{m.footer_info_teams()}</Link>
+			<Link href="/partnerships">{m.footer_info_partnerships()}</Link>
+			<Link href="/privacy">{m.footer_info_privacy()}</Link>
+			<Link href="/legal"
 				>{m.footer_info_legal()} <br />
 				{m.footer_info_legal_foundation()} <br />
-				{m.footer_info_legal_kvk()}</a
+				{m.footer_info_legal_kvk()}</Link
 			>
 		</div>
 		<div class="column">
 			<h2>{m.footer_risks()}</h2>
-			<a href="/risks">{m.footer_risks_overview()}</a>
-			<a href="/outcomes">{m.footer_risks_outcomes()}</a>
-			<a href="/xrisk">{m.footer_risks_xrisk()}</a>
-			<a href="/psychology-of-x-risk">{m.footer_risks_psychology()}</a>
-			<a href="/ai-takeover">{m.footer_risks_takeover()}</a>
-			<a href="/cybersecurity-risks">{m.footer_risks_cybersecurity()}</a>
-			<a href="/dangerous-capabilities">{m.footer_risks_capabilities()}</a>
-			<a href="/sota">{m.footer_risks_sota()}</a>
-			<a href="/urgency">{m.footer_risks_urgency()}</a>
+			<Link href="/risks">{m.footer_risks_overview()}</Link>
+			<Link href="/outcomes">{m.footer_risks_outcomes()}</Link>
+			<Link href="/xrisk">{m.footer_risks_xrisk()}</Link>
+			<Link href="/psychology-of-x-risk">{m.footer_risks_psychology()}</Link>
+			<Link href="/ai-takeover">{m.footer_risks_takeover()}</Link>
+			<Link href="/cybersecurity-risks">{m.footer_risks_cybersecurity()}</Link>
+			<Link href="/dangerous-capabilities">{m.footer_risks_capabilities()}</Link>
+			<Link href="/sota">{m.footer_risks_sota()}</Link>
+			<Link href="/urgency">{m.footer_risks_urgency()}</Link>
 		</div>
 		<div class="column">
 			<h2>{m.footer_action()}</h2>
-			<a href="/join">{m.footer_action_join()}</a>
-			<a href="/action">{m.footer_action_help()}</a>
-			<a href="/communities">{m.footer_action_communities()}</a>
-			<a href="donate">{m.footer_action_donate()}</a>
-			<ExternalLink href="https://pauseai-shop.fourthwall.com" target="_blank"
-				>{m.footer_action_merchandise()}</ExternalLink
+			<Link href="/join">{m.footer_action_join()}</Link>
+			<Link href="/action">{m.footer_action_help()}</Link>
+			<Link href="/communities">{m.footer_action_communities()}</Link>
+			<Link href="donate">{m.footer_action_donate()}</Link>
+			<Link href="https://pauseai-shop.fourthwall.com" target="_blank"
+				>{m.footer_action_merchandise()}</Link
 			>
-			<a href="/events">{m.footer_action_events()}</a>
-			<a href="/vacancies">{m.footer_action_vacancies()}</a>
-			<a href="/email-builder">{m.footer_action_email()}</a>
-			<a href="/lobby-tips">{m.footer_action_lobby()}</a>
+			<Link href="/events">{m.footer_action_events()}</Link>
+			<Link href="/vacancies">{m.footer_action_vacancies()}</Link>
+			<Link href="/email-builder">{m.footer_action_email()}</Link>
+			<Link href="/lobby-tips">{m.footer_action_lobby()}</Link>
 		</div>
 		<div class="column">
 			<h2>{m.footer_other()}</h2>
 			<Toggle />
 			<WithdrawWidgetConsent />
 			<Edit />
-			<a href="/posts">{m.footer_other_pages()}</a>
-			<a href="/rss.xml" target="_blank">{m.footer_other_rss()}</a>
-			<ExternalLink href="https://creativecommons.org/licenses/by/4.0/" target="_blank"
-				>{m.footer_other_license()}</ExternalLink
+			<Link href="/posts">{m.footer_other_pages()}</Link>
+			<Link href="/rss.xml" target="_blank">{m.footer_other_rss()}</Link>
+			<Link href="https://creativecommons.org/licenses/by/4.0/" target="_blank"
+				>{m.footer_other_license()}</Link
 			>
-			<ExternalLink
-				href="https://airtable.com/appWPTGqZmUcs3NWu/pagIvo9Sv6IDHaolu/form"
-				target="_blank">{m.footer_other_feedback()}</ExternalLink
+			<Link href="https://airtable.com/appWPTGqZmUcs3NWu/pagIvo9Sv6IDHaolu/form" target="_blank"
+				>{m.footer_other_feedback()}</Link
 			>
 		</div>
 	</div>
@@ -128,7 +127,7 @@
 		margin-top: 0;
 	}
 
-	.c2a {
+	:global(.c2a) {
 		color: var(--text);
 		text-transform: uppercase;
 		text-decoration: none;
@@ -138,7 +137,7 @@
 		text-align: left;
 	}
 
-	.c2a:hover {
+	:global(.c2a:hover) {
 		color: var(--brand);
 	}
 

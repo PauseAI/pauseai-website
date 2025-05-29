@@ -118,8 +118,32 @@ function regenerateSettings(verbose = false): void {
 
 	console.log(`\ud83d\udd04 Compiling Paraglide runtime from settings...`)
 	try {
-		// Run the Paraglide compiler with the necessary Node.js flags
-		compile(COMPILE_ARGS)
+		const routingStrategy = defaultSettings['plugin.paraglide-js-adapter']?.routing?.strategy
+
+		const compileOptions: Parameters<typeof compile>[0] = {
+			project: './project.inlang',
+			outdir: './src/lib/paraglide',
+			strategy: ['url', 'cookie', 'preferredLanguage', 'baseLocale'],
+			// Fix for Netlify Edge Functions (Deno runtime)
+			disableAsyncLocalStorage: true,
+			isServer: "typeof window === 'undefined' || typeof globalThis.Deno !== 'undefined'"
+		}
+
+		// Only set urlPatterns for prefix-all-locales strategy
+		// Default Paraglide behavior handles regular prefix strategy correctly
+		if (routingStrategy === 'prefix-all-locales') {
+			compileOptions.urlPatterns = [
+				{
+					pattern: ':protocol://:domain(.*)::port?/:path(.*)?',
+					localized: settings.locales.map((locale) => [
+						locale,
+						`:protocol://:domain(.*)::port?/${locale}/:path(.*)?`
+					])
+				}
+			]
+		}
+
+		compile(compileOptions)
 		console.log(`\u2705 Paraglide runtime compiled successfully!`)
 	} catch (error) {
 		console.error('\u274c Failed to compile Paraglide runtime:', (error as Error).message)
