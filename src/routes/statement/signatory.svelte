@@ -14,7 +14,9 @@
 			<p class="name">
 				{name}
 			</p>
-			<div class="title">{country}</div>
+			{#if country}
+				<div class="title">{country}</div>
+			{/if}
 		</div>
 		{#if bio}
 			<div class="bio">
