@@ -13,7 +13,7 @@
 	import { meta } from './meta'
 	import * as clipboard from 'clipboard-polyfill'
 	import toast from 'svelte-french-toast'
-	import ExternalLink from '$lib/components/custom/a.svelte'
+	import Link from '$lib/components/custom/a.svelte'
 	import Card from '$lib/components/Card.svelte'
 	import { type ComponentType } from 'svelte'
 
@@ -106,8 +106,8 @@
 		else knows about AI risk, so it becomes "common knowledge". As well as, convincing influential
 		people, like politicians, journalists, and lobbyists. (E.g. See Connor's explanation as to why
 		making AI Risk "common knowledge" is super important
-		<ExternalLink href={'https://youtu.be/OUjnVeydhCM?t=1969'}>here</ExternalLink> and
-		<ExternalLink href={'https://youtu.be/1j--6JYRLVk?t=5716'}>here</ExternalLink>.)
+		<Link href={'https://youtu.be/OUjnVeydhCM?t=1969'}>here</Link> and
+		<Link href={'https://youtu.be/1j--6JYRLVk?t=5716'}>here</Link>.)
 	</li>
 	<li>
 		<b>No social pressure.</b> If you post something publicly, a politician might be hesitant to respond
@@ -132,9 +132,9 @@
 	</li>
 	<li>
 		<b>Someone who politically represents you.</b> Maybe a politician in parliament from the party
-		that you voted for. <ExternalLink
+		that you voted for. <Link
 			href={'https://github.com/Campaign-for-AI-Safety-archive/.github/tree/main/email-templates#email-your-politician'}
-			>Find their email address</ExternalLink
+			>Find their email address</Link
 		>.
 	</li>
 	<li>
@@ -202,8 +202,8 @@
 	</li>
 </ul>
 <p>
-	For more information, you can take a look at our page on <a href="/writing-a-letter"
-		>how to write a letter or email to someone in power</a
+	For more information, you can take a look at our page on <Link href="/writing-a-letter"
+		>how to write a letter or email to someone in power</Link
 	>.
 </p>
 

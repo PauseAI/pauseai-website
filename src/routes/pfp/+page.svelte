@@ -1,6 +1,7 @@
 <script lang="ts">
 	import Button from '$lib/components/Button.svelte'
 	import PostMeta from '$lib/components/PostMeta.svelte'
+	import Link from '$lib/components/custom/a.svelte'
 	import EasyWebWorker from 'easy-web-worker'
 	import UploadIcon from 'lucide-svelte/icons/upload'
 	import { onMount, tick } from 'svelte'
@@ -74,8 +75,8 @@
 
 <h1>Profile picture generator</h1>
 <p>
-	Upload your profile picture to generate an image with the date of our <a href="/2025-february"
-		>global protest</a
+	Upload your profile picture to generate an image with the date of our <Link href="/2025-february"
+		>global protest</Link
 	> and the address of the corresponding website. Your profile picture doesn't leave your device.
 </p>
 

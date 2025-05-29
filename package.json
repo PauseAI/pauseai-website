@@ -12,6 +12,7 @@
 		"translate:dry-run": "tsx scripts/translation/translate --dryRun",
 		"translate:estimate": "tsx scripts/translation/translate --dryRun --verbose",
 		"translate:spend": "cross-env L10N_FORCE_TRANSLATE=true tsx scripts/translation/translate",
+		"audit:links": "tsx scripts/audit-unlocalized-links.ts",
 		"dev": "run-s dev:steps",
 		"dev:steps": "run-s inlang:settings translate && vite dev --host 0.0.0.0",
 		"build": "cross-env NODE_ENV=production run-s build:steps",

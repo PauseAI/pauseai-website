@@ -1,25 +1,32 @@
 <script lang="ts">
+	import Link from '$lib/components/custom/a.svelte'
+
 	let visible = false
 	export let href: string
 	export let linkText: string
 </script>
 
-<a {href} class="block" class:fade-in={visible}>
-	<div class="text">
-		<h2 class="title"><slot name="title" /></h2>
-		<p>
-			<slot />
-		</p>
-		<span class="c2a">{linkText} ></span>
-	</div>
-</a>
+<div class="block-wrapper" class:fade-in={visible}>
+	<Link {href}>
+		<div class="text">
+			<h2 class="title"><slot name="title" /></h2>
+			<p>
+				<slot />
+			</p>
+			<span class="c2a">{linkText} ></span>
+		</div>
+	</Link>
+</div>
 
 <style>
-	.block {
+	.block-wrapper {
+		margin-bottom: 5rem;
+	}
+
+	.block-wrapper :global(a) {
 		display: block;
 		text-decoration: none;
 		color: var(--text);
-		margin-bottom: 5rem;
 	}
 
 	.c2a {
