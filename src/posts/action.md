@@ -13,7 +13,7 @@ Choose an activity below depending on your interests or skills.
 - **Write to your politicians**: We've found emails are surprisingly effective and take relatively little effort. If you don’t feel confident about what to write, [start with our email builder](/email-builder). When you get a meeting, you should check out our [lobby tips](/lobby-tips).
 - **Call your politicians**: Try calling legislators' offices while having a set of talking points in view so you stay on topic.
 - **Protest**: Join [one of the protests](https://pauseai.info/protests) or [organize one yourself](https://pauseai.info/organizing-a-protest).
-- **Sign petitions**: [International AI Treaty](https://aitreaty.org), [Ban Superintelligence](https://chng.it/Djjfj2Gmpk), [Demand responsible AI](https://www.change.org/p/artificial-intelligence-time-is-running-out-for-responsible-ai-development-91f0a02c-130a-46e1-9e55-70d6b274f4df), or one of the **national petitions**: [UK](https://petition.parliament.uk/petitions/639956), [AUS](https://www.aph.gov.au/e-petitions/petition/EN5163), [NL](https://aipetitie.nl).
+- **Sign petitions**: [**Ours**](/statement), [International AI Treaty](https://aitreaty.org), [Ban Superintelligence](https://chng.it/Djjfj2Gmpk), [Demand responsible AI](https://www.change.org/p/artificial-intelligence-time-is-running-out-for-responsible-ai-development-91f0a02c-130a-46e1-9e55-70d6b274f4df).
 
 ### Inform people around you
 
