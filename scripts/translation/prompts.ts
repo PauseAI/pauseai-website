@@ -26,16 +26,17 @@ export const generateMarkdownPrompt: PromptGenerator = (
 ) => {
 	return `${commonHead(languageName, 'Markdown', promptAdditions)}
 
-Maintain the structure of the document and don't modify script elements, HTML tags, link targets (including section links starting with a number sign) and file names. The content of social media widgets has to remain unchanged as well. I repeat: DO NOT CHANGE LINK TARGETS. DO NOT REMOVE SCRIPT TAGS OR COMPONENTS. The document starts with Frontmatter metadata enclosed in three dashes. Don't translate the keys of the metadata, only the values. Always make sure the result is valid Markdown syntax:
+Maintain the structure of the document. Don't modify script elements, HTML tags, link targets (including section links starting with a number sign) and file names. The content of social media widgets has to remain unchanged as well. I repeat: DO NOT CHANGE LINK TARGETS. DO NOT REMOVE SCRIPT TAGS OR COMPONENTS. The document starts with Frontmatter metadata enclosed in three dashes. Don't translate the keys of the metadata, only the values. Always make sure the result is valid Markdown syntax:
 
 ${content}
 
 Do not start with \`\`\`md or new lines, just return the Markdown.
+
 Translated Markdown:`
 }
 
 export function generateReviewPrompt(languageName: string) {
-	return `Please review and improve your translation to ${languageName} to ensure it meets the highest standards of quality.
+	return `Please review and (only if necessary) improve your translation to ${languageName} to ensure it meets the highest standards of quality.
 
 Focus on:
 1. Accuracy of meaning compared to typical English expressions
@@ -45,12 +46,16 @@ Focus on:
 5. Maintaining the original formatting and technical elements
 
 Make necessary improvements while preserving:
-- All technical elements (HTML tags, links, script elements)
+- All technical elements (keys, HTML tags, links, script elements)
 - Document structure and formatting
 - Special instructions in comments
 - File names and technical terms when appropriate
 
-Return the improved version in the same format, without any additional markup or explanations.`
+Return the possibly improved text in the same format.
+
+All of your response will be used to generate website pages. Readers don't want to see your own translation notes. Do NOT tell us that you have done the work, or why particular decisions were made. That would make your response invalid. Only return the translation itself.
+
+Translation:`
 }
 
 function commonHead(languageName: string, format: string, promptAdditions: string) {

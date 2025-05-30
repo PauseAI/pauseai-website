@@ -12,26 +12,11 @@ import {
 	writeSettingsFile
 } from '../src/lib/l10n'
 import { setupTranslationRepo } from './translation/git-ops'
-import { createSymlinkIfNeeded, ensureDirectoriesExist } from './translation/utils'
+import { cullCommentary, createSymlinkIfNeeded, ensureDirectoriesExist } from './translation/utils'
 
 // Load environment variables from .env file
 dotenv.config()
 
-// Configuration - same as in vite.config.ts
-const PROJECT_PATH = './project.inlang'
-const OUTPUT_PATH = './src/lib/paraglide'
-const COMPILE_ARGS = {
-	project: PROJECT_PATH,
-	outdir: OUTPUT_PATH,
-	strategy: ['cookie', 'url', 'preferredLanguage', 'baseLocale'] as (
-		| 'cookie'
-		| 'url'
-		| 'preferredLanguage'
-		| 'baseLocale'
-		| 'globalVariable'
-		| 'localStorage'
-	)[]
-}
 function setupEnglishSupport(verbose: boolean): void {
 	// English markdown files are loaded directly from source in routes/[slug]/+page.ts
 	if (verbose) console.log('  \u2713 English markdown files will be loaded directly from source')
@@ -93,6 +78,11 @@ function regenerateSettings(verbose = false): void {
 				`\n\ud83d\udd04 Setting up translation repository (need at least ${settings.locales}...`
 			)
 		setupTranslationRepo(L10NS_BASE_DIR, verbose)
+		if (verbose) console.log(`\n🧹 Cleaning up translation files to remove LLM commentary...`)
+		for (const locale of settings.locales) {
+			if (locale === 'en') continue
+			cullCommentary(path.join(MESSAGE_L10NS, `${locale}.json`), verbose)
+		}
 	}
 
 	// For English locale, we only need to provide messages file for Paraglide
@@ -118,8 +108,21 @@ function regenerateSettings(verbose = false): void {
 
 	console.log(`\ud83d\udd04 Compiling Paraglide runtime from settings...`)
 	try {
-		// Run the Paraglide compiler with the necessary Node.js flags
-		compile(COMPILE_ARGS)
+		compile({
+			project: './project.inlang',
+			outdir: './src/lib/paraglide',
+			strategy: ['url', 'cookie', 'preferredLanguage', 'baseLocale'],
+			// Create concrete URL patterns structure with current locale set
+			urlPatterns: [
+				{
+					pattern: ':protocol://:domain(.*)::port?/:path(.*)?',
+					localized: settings.locales.map((locale) => [
+						locale,
+						`:protocol://:domain(.*)::port?/${locale}/:path(.*)?`
+					])
+				}
+			]
+		})
 		console.log(`\u2705 Paraglide runtime compiled successfully!`)
 	} catch (error) {
 		console.error('\u274c Failed to compile Paraglide runtime:', (error as Error).message)

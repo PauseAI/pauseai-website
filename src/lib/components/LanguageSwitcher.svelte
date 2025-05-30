@@ -13,11 +13,15 @@
 	import { building } from '$app/environment'
 	import { onMount } from 'svelte'
 	import Card from '$lib/components/Card.svelte'
+	import Cookies from 'js-cookie'
 
 	export let inverted = false
 
 	// Check if we should show the language switcher (only show when multiple locales)
 	const showSwitcher = locales.length > 1
+
+	// Flag to track if locale was changed externally
+	let externalLocaleChange = false
 
 	// Display name utilities for multiple locales
 	const languageNamesInEnglish = new Intl.DisplayNames('en', { type: 'language' })
@@ -64,31 +68,35 @@
 		return `${currentLocaleName} (${nativeName})`
 	}
 
-	// Display the current locale state in UI and console for debugging
-	// TODO: disable this once everything is confirmed to work well in production
-	function debugLocaleState() {
-		// Get current values
-		const currentLocale = getLocale()
-		const cookieLocale = document.cookie
-			.split('; ')
-			.find((row) => row.startsWith('PARAGLIDE_LOCALE='))
-			?.split('=')[1]
-		const pathLocale = window.location.pathname.split('/')[1]
-		const isPathLocale = locales.includes(pathLocale as any)
+	// Check if cookie was changed externally (and update shadow cookie which tracks this)
+	function checkLocaleChange(): boolean {
+		if (typeof window === 'undefined') return false
 
-		console.log('🔍 Locale Debug:', {
-			getLocale: currentLocale,
-			cookieLocale,
-			pathLocale: isPathLocale ? pathLocale : null,
-			allLocales: locales
-		})
+		const cookieLocale = Cookies.get('PARAGLIDE_LOCALE')
+		const shadowLocale = Cookies.get('PARAGLIDE_LOCALE_SHADOW')
 
-		return currentLocale
+		// Check for change - treat undefined shadow cookie as a change too
+		// (This catches first-time visits where shadow cookie isn't set yet)
+		const wasChanged = shadowLocale !== cookieLocale
+
+		// Always update the shadow cookie to match the current value
+		if (cookieLocale) {
+			Cookies.set('PARAGLIDE_LOCALE_SHADOW', cookieLocale, { path: '/' })
+		} else {
+			Cookies.remove('PARAGLIDE_LOCALE_SHADOW', { path: '/' })
+		}
+
+		return wasChanged
 	}
 
 	onMount(() => {
-		// Debug on mount
-		debugLocaleState()
+		if (typeof window === 'undefined') return
+
+		if (checkLocaleChange()) {
+			// Add visual indication
+			console.log('🌐 Locale was changed externally!')
+			if (button) button.classList.add('locale-changed')
+		}
 
 		// Only set up event listeners if language switcher is visible
 		if (showSwitcher) {
@@ -111,16 +119,6 @@
 		const href = target.href
 		const targetLocale = target.getAttribute('hreflang') as Locale | 'auto'
 
-		// Debug current state before change
-		console.log('🔍 Before click:')
-		const currentLocale = debugLocaleState()
-
-		console.log('Language click:', {
-			from: currentLocale,
-			to: targetLocale,
-			href: href
-		})
-
 		// Close the dropdown
 		open = false
 
@@ -128,14 +126,17 @@
 		event.preventDefault()
 
 		if (targetLocale === 'auto') {
-			document.cookie = 'PARAGLIDE_LOCALE=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT'
-			document.cookie = 'PARAGLIDE_LOCALE=; path=/; max-age=0'
+			// Remove both cookies for auto-detect
+			Cookies.remove('PARAGLIDE_LOCALE', { path: '/' })
+			Cookies.remove('PARAGLIDE_LOCALE_SHADOW', { path: '/' })
 			window.location.href = deLocalizeHref(window.location.pathname)
 			return
 		}
 
 		// Handle regular locale selection
 		if (targetLocale) {
+			// Update shadow cookie to prevent detection as an external change
+			Cookies.set('PARAGLIDE_LOCALE_SHADOW', targetLocale, { path: '/' })
 			// explicit reload seems necessary to interact correctly with SvelteKit client-side refresh
 			setLocale(targetLocale, { reload: true })
 			// As a fallback, manually reload if we're still here after a short delay
@@ -155,6 +156,7 @@
 			bind:this={button}
 			on:click={(e) => {
 				e.preventDefault()
+				button.classList.remove('locale-changed') // user has attended
 				open = !open
 			}}
 		>
@@ -253,5 +255,26 @@
 	:global(.hidden) {
 		visibility: hidden;
 		pointer-events: none;
+	}
+
+	/* Visual indicator for locale change */
+	:global(.locale-changed) {
+		animation: pulse 2s infinite;
+		transform-origin: center;
+	}
+
+	@keyframes pulse {
+		0% {
+			opacity: 1;
+			transform: scale(1);
+		}
+		50% {
+			opacity: 0.6;
+			transform: scale(1.2);
+		}
+		100% {
+			opacity: 1;
+			transform: scale(1);
+		}
 	}
 </style>
