@@ -250,14 +250,38 @@ function generateReport(results: LinkAuditResult[]): void {
 			})
 		})
 	}
-
-	console.log(`\n💡 Run this script again after implementing link localization to track progress!`)
 }
 
 // Main execution
 async function main() {
 	try {
+		const isValidateMode = process.argv.includes('--validate')
 		const results = await findUnlocalizedLinks()
+
+		// In validate mode, be more concise and exit with error code if issues found
+		if (isValidateMode) {
+			const htmlFiles = findFilesRecursively('.svelte-kit/output/prerendered/pages', '.html')
+			const problemCount = results
+				.filter((r) => r.isLocalizedPage)
+				.reduce((sum, r) => sum + r.links.length, 0)
+
+			if (problemCount > 0) {
+				console.error(`❌ Link localization validation failed!`)
+				console.error(
+					`   Found ${problemCount} unlocalized links from ${results.filter((r) => r.isLocalizedPage).length} localized pages`
+				)
+				console.error(`   Run 'pnpm audit:links' for details`)
+				console.error(`   See README.md#internal-links for guidance on fixing these issues`)
+				process.exit(1)
+			} else {
+				console.log(
+					`✅ Link localization validation passed - no unlocalized links found (checked ${htmlFiles.length} HTML files)`
+				)
+				return
+			}
+		}
+
+		// Normal audit mode - show full report
 		generateReport(results)
 
 		// Write detailed results to file
