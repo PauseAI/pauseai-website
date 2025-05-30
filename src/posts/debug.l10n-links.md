@@ -26,12 +26,6 @@ This page tests various link patterns to ensure proper localization behavior.
 - [Dutch Proposal](/nl/proposal)
 - [English with trailing slash](/en/)
 
-## Opt-out links (should NOT be localized)
-
-- [Force English](/en/proposal#no-localize)
-- [Force German](/de/learn#no-localize)
-- [Regular link with opt-out](/action#no-localize)
-
 ## Other link types (should NOT be localized)
 
 - [External](https://example.com)

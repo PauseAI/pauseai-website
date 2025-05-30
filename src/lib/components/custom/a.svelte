@@ -23,14 +23,10 @@
 	// Localization helpers
 	const localePattern = new RegExp(`^/(${locales.join('|')})(\/|$)`)
 	const shouldLocalizeHref = (h: string) =>
-		type === Type.Internal &&
-		h.startsWith('/') &&
-		!h.match(localePattern) &&
-		!h.includes('#no-localize')
+		type === Type.Internal && h.startsWith('/') && !h.match(localePattern)
 
 	const processHref = (h: string) => {
-		const cleaned = h.replace('#no-localize', '')
-		return shouldLocalizeHref(h) ? localizeHref(cleaned) : cleaned
+		return shouldLocalizeHref(h) ? localizeHref(h) : h
 	}
 
 	// Normalize and localize href
