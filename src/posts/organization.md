@@ -9,7 +9,7 @@ description: How the PauseAI organization is structured, and what resources are 
 - [National groups](/national-groups): National PauseAI groups are hubs that typically manage their own local communities, and are responsible for national-level strategy and coordination. They typically have their own website, social media accounts and legal entity. National leaders meet regularly to coordinate their work.
 - [Teams](/teams): Teams are groups of volunteers who work on specific projects or tasks within PauseAI Global. Every team has its own leader, Discord channel, Drive folder and of course list of members. Reach out to a team leader to join a team!
 - [Local communities](/communities): Check if there already exists a community in your area. Most groups are communicating in our discord server, in the `#local-meetups` channel (If you want to create a new local group, post there!). Some groups are using tools like WhatsApp or a separate Discord server.
-- [People (Volunteers)](/people): List of registered volunteers who have opted to show their profile and have committed to work on PauseAI for at least some hours a week.
+- People (Volunteers): List of registered volunteers who have opted to show their profile and have committed to work on PauseAI for at least some hours a week.
 
 ![Organagram](/org.png)
 

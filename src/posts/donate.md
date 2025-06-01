@@ -15,7 +15,7 @@ Since February 2024, PauseAI is a [registered non-profit foundation](/legal).
 ## How we use your donations
 
 - **Community projects**: our [microgrants](/microgrants) program supports various small-scale projects.
-- **Volunteer stipends**: [volunteers](/people) can apply for a [stipend](/volunteer-stipends), which helps our community have a local impact and grow organically.
+- **Volunteer stipends**: volunteers can apply for a [stipend](/volunteer-stipends), which helps our community have a local impact and grow organically.
 - **Funding for local & [national](/national-groups) chapters**: we help PauseAI communities
 - **People**: build a stronger community, work on projects, organize protests, improve the website, etc.
 - **Events**: renting a location, catering, travel costs.
