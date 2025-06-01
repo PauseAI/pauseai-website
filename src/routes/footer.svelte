@@ -22,6 +22,7 @@
 			<a href="/proposal">{m.footer_info_proposal()}</a>
 			<a href="/learn">{m.footer_info_learn()}</a>
 			<a href="/press">{m.footer_info_press()}</a>
+			<a href="/people">{m.footer_info_people()}</a>
 			<a href="/teams">{m.footer_info_teams()}</a>
 			<a href="/partnerships">{m.footer_info_partnerships()}</a>
 			<a href="/privacy">{m.footer_info_privacy()}</a>
