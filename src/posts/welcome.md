@@ -1,6 +1,6 @@
 ---
 title: Welcome to the PauseAI community!
-description: Message to check inbox + thanks for joining. It is made mostly because of the limitations of Tally's free accounts on its final message.
+description: Thanks for joining and advice on checking inbox
 ---
 
 Thank you so much for submitting the form and expressing your interest in getting involved!
