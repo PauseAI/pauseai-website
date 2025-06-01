@@ -1,16 +1,22 @@
 #!/usr/bin/env tsx
 
 /**
- * Audit script to find links to unlocalized pages in both:
+ * L10n Tamer: Audit script to find links to unlocalized pages in both:
  * 1. Prerendered static HTML files
  * 2. Server-side JavaScript chunks
  *
  * This helps track progress on link localization and spot outliers.
+ * Only runs when locale prefixes are enabled for all routes.
  */
 
 import fs from 'fs'
 import path from 'path'
-import { locales } from '../src/lib/paraglide/runtime.js'
+import { locales, localizeHref } from '../src/lib/paraglide/runtime.js'
+
+if (localizeHref('/test', { locale: 'en' }) === '/test') {
+	console.log('⏭️  Skipping l10ntamer - English routes not prefixed')
+	process.exit(0)
+}
 
 const LOCALES = locales
 const UNLOCALIZED_PATTERNS = [

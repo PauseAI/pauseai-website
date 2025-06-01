@@ -1,4 +1,10 @@
 import { readEdgeManifest, searchRenderFunction, writeEdgeManifest } from './utils'
+import { USE_EDGE_FUNCTIONS } from '../svelte.config.js'
+
+if (!USE_EDGE_FUNCTIONS) {
+	console.log('⏭️  Skipping edge function exclusion - not using edge functions')
+	process.exit(0)
+}
 
 const EXCLUDE_PATHS = ['/pagefind/*']
 
