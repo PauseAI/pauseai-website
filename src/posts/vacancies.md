@@ -3,6 +3,7 @@ title: Open (Volunteer) Vacancies for PauseAI
 description: Jobs & volunteer positions at PauseAI
 ---
 
+- Check out the [people](/people) who you may work with!
 - We work in [teams](/teams)
 - We collaborate mostly on our [Discord server](https://discord.gg/y9hdAjD83e)
 - Read more about our [organization](/organization)
