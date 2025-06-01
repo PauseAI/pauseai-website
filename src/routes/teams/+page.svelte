@@ -16,7 +16,7 @@
 
 <SvelteMarkdown
 	source={`
-PauseAI consists almost exclusively of volunteers ([sign up here](https://airtable.com/appWPTGqZmUcs3NWu/pag7ztLh27Omj5s2n/form)).
+PauseAI consists almost exclusively of [volunteers](/people) ([sign up here](https://airtable.com/appWPTGqZmUcs3NWu/pag7ztLh27Omj5s2n/form)).
 We are organized in teams,
 each working on a different aspect of our movement.
 Every team has a leader, members, a Google Drive folder and a Role + private channel on the [discord server](https://discord.gg/asphJbnQb8).
