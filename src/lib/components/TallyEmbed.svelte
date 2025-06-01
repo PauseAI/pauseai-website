@@ -63,4 +63,5 @@
 	marginwidth="0"
 	allowfullscreen
 	style="width: 100%; height: {height}px; border: 0;"
+	sandbox="allow-top-navigation"
 ></iframe>
