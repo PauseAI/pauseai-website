@@ -54,6 +54,7 @@
 
 <iframe
 	data-tally-src={formSrc}
+	src={formSrc}
 	width="100%"
 	{height}
 	frameborder="0"
