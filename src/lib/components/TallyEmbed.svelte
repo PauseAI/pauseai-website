@@ -1,6 +1,4 @@
 <script lang="ts">
-	import { browser } from '$app/environment'
-
 	// ─── REQUIRED ────────────────────────────────────────────────────────
 
 	/** Tally form ID (required) */
@@ -51,7 +49,7 @@
 </script>
 
 <svelte:head>
-	<script src="https://tally.so/widgets/embed.js" async></script>
+	<script src="https://tally.so/widgets/embed.js"></script>
 </svelte:head>
 
 <iframe
