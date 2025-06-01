@@ -63,5 +63,5 @@
 	marginwidth="0"
 	allowfullscreen
 	style="width: 100%; height: {height}px; border: 0;"
-	sandbox="allow-top-navigation"
+	sandbox="allow-forms allow-modals allow-orientation-lock allow-pointer-lock allow-popups allow-popups-to-escape-sandbox allow-presentation allow-same-origin allow-scripts allow-top-navigation"
 ></iframe>
