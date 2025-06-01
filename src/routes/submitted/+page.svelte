@@ -4,7 +4,7 @@
 	import { onMount } from 'svelte'
 
 	const STRIPE_PAYMENT_LINK_BASE_URL = 'https://donate.stripe.com/aFadR9dAleJe3wO95ed7q00'
-	const INTERNAL_REDIRECT_PATH = '/'
+	const INTERNAL_REDIRECT_PATH = '/welcome'
 	const PAYMENT_ANSWER_REGEX = /Yes/
 
 	onMount(() => {
