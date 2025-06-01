@@ -60,4 +60,3 @@ export type NationalGroupLink =
 	| 'linktreeLink'
 	| 'instagramLink'
 	| 'tiktokLink'
-	| 'facebookLink'
