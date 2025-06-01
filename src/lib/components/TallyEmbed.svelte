@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { browser } from '$app/environment'
+
 	// ─── REQUIRED ────────────────────────────────────────────────────────
 
 	/** Tally form ID (required) */
