@@ -21,7 +21,7 @@ The #1 most useful thing about a flyer is not its contents, but the engagement y
 
     - (Learn more at this website!", "Find out how you can help!", "Join us!", "Call your representatives!", "Come to this meeting!", "Join this protest!")
 
-  - The time and place of your event, where applicable
+  - The time and place of your event, where applicable (we recommend the upcoming weekend)
   - A way to join your local group (e.g. a QR code to an easy sign-up list)
 
 - **Other things to include:**
