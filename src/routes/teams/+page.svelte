@@ -16,7 +16,7 @@
 
 <SvelteMarkdown
 	source={`
-PauseAI consists almost exclusively of [volunteers](/people) ([sign up here](https://airtable.com/appWPTGqZmUcs3NWu/pag7ztLh27Omj5s2n/form)).
+PauseAI consists almost exclusively of [volunteers](/people) ([sign up here](/join)).
 We are organized in teams,
 each working on a different aspect of our movement.
 Every team has a leader, members, a Google Drive folder and a Role + private channel on the [discord server](https://discord.gg/asphJbnQb8).
@@ -41,7 +41,7 @@ If you want to create a new team, reach out to the Oversight team leader (see be
 
 <p>
 	If you want to join one of the teams, reach out to the team leader and <A
-		href="https://airtable.com/appWPTGqZmUcs3NWu/pag7ztLh27Omj5s2n/form">sign up as a volunteer!</A
+		href="https://pauseai.info/join">sign up as a volunteer!</A
 	>
 </p>
 
