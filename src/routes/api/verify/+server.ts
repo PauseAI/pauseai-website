@@ -57,6 +57,5 @@ export async function GET({ url }) {
 		.firstPage()
 	if (!records.length) return new Response('Record not found', { status: 404 })
 	await records[0].patchUpdate(Object.fromEntries([[tableConfig.verifiedFieldName, true]]))
-
-	return new Response(null, { status: 301, headers: { Location: '/' } })
+	return new Response('OK', { status: 200 })
 }
