@@ -49,6 +49,7 @@
 
 	$: formSrc = `${baseUrl}?${urlParams.toString()}`
 
+	// execute after DOM is ready
 	onMount(() => {
 		const script = document.createElement('script')
 		script.src = 'https://tally.so/widgets/embed.js'
