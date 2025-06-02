@@ -6,54 +6,65 @@ description: How to distribute flyers for PauseAI
 
 - The goal of flyering is to [create](/local-organizing) and grow a [local PauseAI community](/communities)
 - To accomplish that, the initial goal of flyering should be to announce a community meeting, for everyone who is interested to come and learn about PauseAI and what they can do to help
-- Future flyering efforts can center around informing the public, finding new members, spreading the word about an upcoming protest, getting petition signatures, etc., and many of these purposes can be easily pursued at the same time
+- Later flyering efforts can center around informing the public, finding new members, spreading the word about an upcoming protest, getting petition signatures, etc., and many of these purposes can be easily pursued at the same time
 
 ## Flyer contents
 
 - Find existing materials in [the Flyers folder](https://drive.google.com/drive/folders/1MAU_bq31bEuylhzkt2NkZ_XRY6TlKaqZ?usp=drive_link).
 - Existing flyers can be edited to be more specific to your purpose. Use the [Figma template](https://www.figma.com/design/iQ4PHQTi1vAVmT9Lckazqt/PauseAI-designs---editable) to create your own.
 
-The #1 most useful thing about a flyer is not its contents, but the engagement you get with the people you are distributing it to. The #2 most useful thing is a direct call to action, especially if it would result in a connection / getting their contact info. That isn't to say the contents don't matter, but keep these two things front and center.
+The #1 most useful thing about a flyer is not its contents, but the engagement you get with the people you are distributing it to. The #2 most useful thing is a direct call to action, especially if it would result in a connection / getting their contact info. The contents themselves are still important, though. Take the time to consider your audience, consider your goal, and do what you can to bridge the gap between them.
 
 **Things to always include:**
 
-- - A direct call to action, made as legible and simple as possible
+- A direct call to action, made as legible and simple as possible
 
-    - (Learn more at this website!", "Find out how you can help!", "Join us!", "Call your representatives!", "Come to this meeting!", "Join this protest!")
+  - (Learn more at this website!", "Find out how you can help!", "Join us!", "Call your representatives!", "Come to this meeting!", "Join this protest!")
 
-  - The time and place of your event, where applicable (we recommend the upcoming weekend)
-  - A way to join your local group (e.g. a QR code to an easy sign-up list)
+- The time and place of your event, where applicable (We recommend the upcoming weekend)
+- A way to join your local group (e.g. a QR code to an easy sign-up list)
+- PauseAI branding
 
-- **Other things to include:**
+**Other things to consider including:**
 
-  - Something eye-catching / engaging / hooking
-  - Something informative
-  - A natural progression of concerns
-  - Expert sources / quotes
-  - A way to contact you
+- Something eye-catching / engaging / hooking
+- Something informative
+- A natural progression of concerns (toward x-risk)
+- Expert sources / quotes
+- A way to contact you
+- A very small gift, like a stapled piece of candy or a dime on double-sided tape
+
+  - Psychologically, when you give someone something, they are more likely to feel like they should give you something in return (their time, attention, consideration, etc.)
 
 ## Flyer printing
 
-There are many, many options for printing flyers, depending on budget constraints and quality requirements. Double-sided full-color printing can be pricey (on the order of $1 per page).
+There are many, many options for printing flyers, depending on budget constraints and quality and timing requirements. Double-sided full-color printing can be pricey (on the order of $1 USD per page). On the lowest end (if a very good sale is on), under 10 cents per page is sometimes possible when bulk printing single-sided on small pages.
 
-- [48 Hour Print](https://www.48hourprint.com/) is avg-to-inexpensive in cost, and high quality
-- [Bizay](https://us.bizay.com/) is extremely inexpensive, for “pretty okay” quality (some customers report significant delivery delays and other issues; Nathan in Arizona did not experience these issues and was very satisfied with the result)
+- Volunteers have had success with online printing from stores like 48 Hour Print, VistaPrint, and Bizay
 - Check with your local print shop and compare prices to online stores
-- If you need a dirt-cheap option, consider printing single-sided flyers for the lowest print cost in your area
-- Have all your materials printed well in advance
+- If you need a dirt-cheap option at low volume, consider printing single-sided flyers for the lowest print cost in your area
+- Make sure to get all your materials printed well in advance, taking delivery time into account
+- If you are tight on time, you can print at home, or use a local print shop, or print at your local library
 
 ## Flyering setup
 
 - Even for a brief one-time outing, it’s a good idea to have at least 100 flyers. Better too many than too few!
+
+  - Caution: If your flyer has event-specific info on it, it will be useless after the event, so don't go too overboard
+  - Pro tip: you can staple a small slip of event-specific info to a larger evergreen flyer
+
 - It can be very helpful to have an A-frame sign at your feet.
 
   - It gives those who read it a chance to choose to engage you on their own
   - It can make people think, even if they haven’t engaged with you
-  - See [PauseAI Flyering Sign (3x4).pdf](https://drive.google.com/file/d/1DNjgsD-QTL6Xf_MI_0COiYOCO3rVhNZ2/view?usp=drive_link)
+  - See [A-Frame Flyering Signs (Google Drive)](https://drive.google.com/drive/folders/1VzYS-xQ44cqwVzb1hvtwkS7_Z9V4SLIw?usp=drive_link)
 
-- It's good to have a form that people who are interested in what you have to say and engage in a conversation can sign on the spot. If people fill out their info, it's much easier to contact them, invite them to events, and organize a local group. You can do this with a clipboard, pen, and printed sign-up form.
+- It's good to have a form that people can sign on the spot if they are interested in what you have to say and engage in a conversation
+
+  - If people fill out their info, it's much easier to contact them, invite them to events, and organize a local group; you can do this with a clipboard, pen, and printed sign-up form or petition
+
+- It can be useful to have pre-generated and labeled QR codes in an album on your phone or in a printed trapper for any digital resources you might want to point people to during conversations (e.g. websites, articles, papers, podcasts, videos)
 - If you have two or more volunteers, you can split up the flyering effort to cover more area, or you can set up a table (where permitted)
-- It’s useful to have pre-generated and labeled QR codes in an album on your phone or in a printed trapper for any digital resources you might want to point people to during conversations (e.g. websites, articles, papers, podcasts, videos).
 - Plan to stay out for a least a couple hours
 
   - It can take time to find your feet
@@ -155,14 +166,14 @@ To get attention:
 
 1. **“Can I get you a flyer?”**
 
-   - Like you are doing them a favor, rather than trying to get them to do you a favor
+   - (Like you are doing them a favor, rather than trying to get them to do you a favor)
 
 2. “Do you want to know more about the dangers of AI?”
 3. “Want to know what's going on with AI?“
 
 When asked what this is all about:
 
-1. **“PauseAI is a global, grassroots movement working to mitigate the worst risks of AI“**
+1. **“PauseAI is a global grassroots movement working to mitigate the worst risks of AI“**
 2. **“Trying to close the gap between what the experts say about AI and what most people know”**
 3. “Maybe we shouldn't build powerful AI systems that we don't know how to control yet”
 4. “A global treaty to slow down AI development until it is safe”
@@ -174,7 +185,7 @@ When asked what this is all about:
 
 ### How people respond
 
-1. Most people who would happily accept a flyer won't ask you for one
+1. Most people who would happily accept a flyer won't ask for one
 2. A small subset of people do engage of their own accord and ask for a flyer or start a conversation
 3. More people refuse a flyer than accept one, and that is perfectly okay
 
@@ -190,6 +201,8 @@ When asked what this is all about:
 
    - And (hopefully) you _do_! You are taking time out of your day to communicate something to them that you think is important, and people often recognize that.
 
-8. An A-frame sign at your feet acts as an invitation
+8. An A-frame sign at your feet acts as an invitation: some percentage of people self-sort and avoid you if they are not interested (which can save you some energy), and some people engage you on their own
 
-   - Some percentage of people self-sort and avoid you if they are not interested (which can save you some energy), and some people engage you on their own
+## Conclusion: Get on out there!
+
+This is a lot of information. It is meant to provide a frame, answer questions, and fill in knowledge gaps in order to raise your confidence for your first flyering outing. But all you _really_ need is a stack of flyers and willingness to try. This is something that almost everyone can do, and feeling intimidated or unsure is not disqualifying. You will learn a lot about outreach, about people, about the current limits of your knowledge, and about yourself. And after the first or second time you go out, you won't have any need for this guide. Let's do this, together!
