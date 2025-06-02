@@ -129,36 +129,31 @@ _Including overly-detailed instructions on how to behave like a person, for thos
 2. **Be confident**, friendly, and non-threatening
 3. Look directly at a passerby, ask them if they want a flyer or if you can give them one, and hold the flyer out toward them
 4. If they accept and stick around for a moment, engage them further by asking them about their thoughts/concerns and start a conversation; if they say no, politely move on
-5. Meet people where they are at
-
-   - When speaking to someone who appears to be very agreeable:
-   - It’s good to speak a little softer and be a little more physically hesitant / sheepish / gentle while asking for permission
-   - Remember, to others, you are a stranger with an unknown agenda, and some people are more nervous to speak to you than you are to them!
-
-6. If someone is approaching and makes eye contact when they are less than 5 seconds away, then keep **eye contact** with them until they are within flyer-offering distance
+5. If someone is approaching and makes eye contact when they are less than 5 seconds away, then keep **eye contact** with them until they are within flyer-offering distance
 
    - If you look away, that lowers your apparent interest in them and they likewise won’t be interested in you; on the other hand, don’t just stare at people
 
-7. Physical proximity matters; it's best to just **ignore people who are farther away** (>20ft or 6m) if you're in a wide space
+6. Physical proximity matters; it's best to just **ignore people who are farther away** (>20ft or 6m) if you're in a wide space
 
    - You can't physically reach them, and they might be intentionally avoiding you anyway; there are more fish in the sea!
 
-8. **Don’t get in the way** of passersby; you don’t need to do that to get the attention of the people you are trying to reach
-9. Seek out a balance between having conversations and handing out more flyers
+7. **Don’t get in the way** of passersby; you don’t need to do that to get the attention of the people you are trying to reach
+8. Seek out a balance between having conversations and handing out more flyers
 
    - Having positive face-to-face conversations is very high-value for recruiting members
    - If an interaction is going nowhere or is negative, find a way to politely disengage and hand out more flyers
    - If you're able to go with at least one other person, it's easier to have conversations and continue distributing materials at the same time
 
-10. **Aim to inform, not to persuade**
+9. **Aim to inform, not to persuade**
 
-    - Don’t necessarily set out to change minds; many people would be concerned if they knew what you know, and many people are already concerned but don’t know what to do about it. **Go find your people!**
-    - People tend to be curious when they hear that there is something that might affect them that they don’t know about
+   - Don’t necessarily set out to change minds; many people would be concerned if they knew what you know, and many people are already concerned but don’t know what to do about it. **Go find your people!**
+   - People tend to be curious when they hear that there is something that might affect them that they don’t know about
 
-11. **Engage with empathy**
+10. **Engage with empathy**
 
     - Many people have worries about AI that aren’t the same as your own. Don’t try to change what they’re worried about. Instead, acknowledge their concerns and invite them into the broad umbrella of PauseAI: people who want to put a pause on AI and its risks.
     - Try not to snatch defeat from the jaws of victory. **Use “Yes And.”** If they have real concerns about AI that seem too mild to you or seem to be focused on the wrong things, don’t communicate that they are _wrong_; communicate that they are _more right than they know_.
+    - When engaging someone who appears to be very agreeable, it’s good to speak a little softer and act more gentle. Remember, to others, you are a stranger with an unknown agenda, and some people are more nervous to speak to you than you are to them
 
 ### Some things to say
 
