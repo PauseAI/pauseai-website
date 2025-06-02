@@ -76,9 +76,7 @@ There are many, many options for printing flyers, depending on budget constraint
 
 Here’s a story from volunteer Nathan Metzger:
 
-```
-_“I’m not the activist type. I’m an autistic introvert with high social anxiety. Thinking about engaging people on the street made me so nervous I felt physically ill. There are few things I was more afraid of than embarrassing myself in public, but the literal end of the world is one of those things. So, I put that fear to my back, and I let it push me forward. I did it anyway — I did it scared. I ordered all the supplies, planned a day and a place, and went alone. It took about an hour for me to feel like I knew what I was doing. After I had some positive and negative interactions, I noticed I was still alive, I stopped feeling scared, and against all expectations, I started having fun.”_
-```
+> I’m not the activist type. I’m an autistic introvert with high social anxiety. Thinking about engaging people on the street made me so nervous I felt physically ill. There are few things I was more afraid of than embarrassing myself in public, but the literal end of the world is one of those things. So, I put that fear to my back, and I let it push me forward. I did it anyway — I did it scared. I ordered all the supplies, planned a day and a place, and went alone. It took about an hour for me to feel like I knew what I was doing. After I had some positive and negative interactions, I noticed I was still alive, I stopped feeling scared, and against all expectations, I started having fun.
 
 ### Location Matters
 
