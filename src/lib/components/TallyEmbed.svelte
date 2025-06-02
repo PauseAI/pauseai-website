@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { onMount } from 'svelte'
+
 	// ─── REQUIRED ────────────────────────────────────────────────────────
 
 	/** Tally form ID (required) */
@@ -46,11 +48,13 @@
 	}
 
 	$: formSrc = `${baseUrl}?${urlParams.toString()}`
-</script>
 
-<svelte:head>
-	<script src="https://tally.so/widgets/embed.js"></script>
-</svelte:head>
+	onMount(() => {
+		const script = document.createElement('script')
+		script.src = 'https://tally.so/widgets/embed.js'
+		document.body.appendChild(script)
+	})
+</script>
 
 <iframe
 	data-tally-src={formSrc}
