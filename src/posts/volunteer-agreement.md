@@ -33,4 +33,4 @@ NOW, THEREFORE, for good and valuable consideration, the receipt and sufficiency
 
 * **Nonviolence**: PauseAI is a peaceful movement, with nonviolence as a non-negotiable core value. The Volunteer agrees never to advocate, promote, or propose violent action in any context, verbal or written, and understands that doing so will result in immediate termination of the Agreement. 
  
-* **Code of Conduct**: The Volunteer understands and agrees to the public [Protestors Code Of Conduct](/protesters-code-of-conduct)
+* **Code of Conduct**: The Volunteer understands and agrees to the public [Protestors Code Of Conduct](https://pauseai.info/protesters-code-of-conduct)
