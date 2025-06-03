@@ -17,8 +17,6 @@ PauseAI Global unites concerned citizens—scientists, parents, students, worker
 Whether you can spare 5 minutes (sharing posts), an hour (flyering, writing letters), 5 hours (protests, meeting politicians) or 5 days weekly (strategy development), your voice matters.
 After signing up, join our onboarding session online or locally to learn about current actions.
 
-The future of AI belongs to all of us.
-
 <TallyEmbed formId="wbGvKe" />
 
 ## Stay Updated
