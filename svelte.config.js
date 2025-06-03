@@ -53,7 +53,8 @@ const config = {
 			})
 		),
 		alias: {
-			$assets: 'src/assets'
+			$assets: 'src/assets',
+			$api: 'src/routes/api'
 		},
 		prerender: {
 			// Allows dead links to be rendered
