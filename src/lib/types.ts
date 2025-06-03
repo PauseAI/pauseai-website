@@ -16,6 +16,13 @@ export type Post = FrontmatterMeta & {
 	slug: string
 }
 
+export type Signatory = {
+	name: string
+	private: boolean
+	bio?: string
+	country: string
+}
+
 export type Team = {
 	id: string
 	name: string
