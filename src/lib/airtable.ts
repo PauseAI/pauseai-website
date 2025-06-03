@@ -42,7 +42,7 @@ export async function fetchAllPages(
 	try {
 		do {
 			const fullUrl = offset ? `${url}?offset=${offset}` : url
-			console.log('Fetching from URL:', fullUrl)
+			if (isDev()) console.log('Fetching from URL:', fullUrl)
 
 			const response = await customFetch(fullUrl, options)
 			if (!response.ok) {

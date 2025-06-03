@@ -82,6 +82,7 @@ function recordToNationalGroup(record: any): NationalGroup {
 		// Add Instagram and TikTok links
 		instagramLink: record.fields.Instagram || record.fields.instagram || '',
 		tiktokLink: record.fields.TikTok || record.fields.Tiktok || record.fields.tiktok || '',
+		facebookLink: record.fields.Facebook || record.fields.facebook,
 		public: true // Assuming all records are public by default
 	}
 }
@@ -110,7 +111,8 @@ export async function GET({ fetch, setHeaders }) {
 				website: group.website,
 				linktree: group.linktreeLink,
 				Instagram: group.instagramLink,
-				TikTok: group.tiktokLink
+				TikTok: group.tiktokLink,
+				Facebook: group.facebookLink
 			}
 		}))
 	)

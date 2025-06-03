@@ -174,7 +174,7 @@
 		})
 	})
 
-	function clear_arr(arr) {
+	function clear_arr(arr: string[]) {
 		for (var i in arr) {
 			arr[i] = ''
 		}
@@ -275,7 +275,7 @@
 		}
 	}
 
-	async function processSteps(inputMessages, stateToken = null) {
+	async function processSteps(inputMessages: Message[] | null, stateToken = null) {
 		// Set loading indicator
 		loading = true
 

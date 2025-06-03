@@ -1,27 +1,22 @@
 <script lang="ts">
-	import { Toaster } from 'svelte-french-toast'
-	import { ProgressBar } from '@prgm/sveltekit-progress-bar'
-
-	import Footer from './footer.svelte'
-	import Header from './header.svelte'
-	import PageTransition from './transition.svelte'
-
-	import Toc from '$lib/components/Toc.svelte'
+	import { page } from '$app/stores'
 	import Banner from '$lib/components/Banner.svelte'
 	import Hero from '$lib/components/Hero.svelte'
 	import NearbyEvent from '$lib/components/NearbyEvent.svelte'
+	import Toc from '$lib/components/Toc.svelte'
 	import ExternalLink from '$lib/components/custom/a.svelte'
-
 	import { deLocalizeHref } from '$lib/paraglide/runtime'
-
 	import '@fontsource/roboto-slab/300.css'
+	import '@fontsource/roboto-slab/500.css'
 	import '@fontsource/roboto-slab/700.css'
 	import '@fontsource/saira-condensed/700.css'
-
-	import '../styles/styles.css'
+	import { ProgressBar } from '@prgm/sveltekit-progress-bar'
+	import { Toaster } from 'svelte-french-toast'
 	import '../styles/print.css'
-
-	import { page } from '$app/stores'
+	import '../styles/styles.css'
+	import Footer from './footer.svelte'
+	import Header from './header.svelte'
+	import PageTransition from './transition.svelte'
 
 	export let data
 
