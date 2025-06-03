@@ -43,7 +43,7 @@
         display: flex;
         flex-direction: row;
         align-items: center;
-        gap: 1.5rem; /* Increased from 0.5rem to 1.5rem */
+        gap: 0.7rem; /* Increased from 0.5rem to 1.5rem */
     }
     @media (max-width: 600px) {
         .name-title {
