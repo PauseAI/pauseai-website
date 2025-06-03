@@ -17,7 +17,7 @@ If you're planning on doing a one-off large event, or a time-bound project, cons
 
 ## Application process
 
-- [Sign up](https://airtable.com/appWPTGqZmUcs3NWu/pag7ztLh27Omj5s2n/form) as a PauseAI volunteer
+- [Sign up](/join) as a PauseAI volunteer
 - Make sure you're on the [PauseAI Discord](https://discord.gg/X9TYc3vs7j)
 - Copy [the Volunteer Stipend Agreement](https://docs.google.com/document/d/1HHgKsEj1fEpMEcYZXnZQ41tuXMLvwcbXqgrX1f2JxZc/edit)
 - Send it to [joep@pauseai.info](mailto:joep@pauseai.info)
