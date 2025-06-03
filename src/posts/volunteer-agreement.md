@@ -1,4 +1,6 @@
-# **PauseAI Volunteer Agreement**
+---
+title: PauseAI Volunteer Agreement
+---
 
 This Volunteer Agreement (the "Agreement") is made effective as of filling in the Volunteer form, by and between PauseAI, a non-profit organization organized under the laws of the Netherlands, with its principal office located at Skopjestraat 26, Utrecht ("the Organization"), and the person filling in the form ("the Volunteer").
 
