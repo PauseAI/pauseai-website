@@ -28,8 +28,8 @@ This is why we are a _movement_, a _community_ something bigger than ourselves.
 1. **Visit the website**. The website is firstly designed to inform people about the thing they want to learn more about. But it does not stop there - every page is also designed to steer people towards [joining PauseAI](/join).
 1. **Join PauseAI**. People fill in the form, and become members. We ask them a couple of questions (where they are from, how they can help). We invite people to join the discord - this is where most of the collaboration happens.
 1. **Onboarding team reaches out**. A special group of volunteers is responsible for making new members feel welcome, and turn interested members into contributing activists. They reach out through email or Discord DMs, and match new members with [vacancies](/vacancies) and [teams](/teams).
-1. **Become a volunteer**. If the volunteer has found a team to join, and if that member is willing to contribute time and sign the agreement, they formally become a volunteer. They can opt-in to be shown on the [People page](/people) and they can get an `@pauseai.info` email address.
-1. **Join a team**. The volunteer should join one or more [teams](/teams) and contribute there!
+2. **Become a volunteer**. If the volunteer has found a team to join, and if that member is willing to contribute time and sign the agreement, they formally become a volunteer.
+3. **Join a team**. The volunteer should join one or more [teams](/teams) and contribute there!
 
 ## Help out
 
