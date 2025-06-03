@@ -54,8 +54,8 @@ export async function GET({ fetch, setHeaders }) {
         // Map the filtered records to signatories
         const signatories = verifiedRecords.map(recordToSignatory);
 
-        // Sort signatories by date (newest first)
-        signatories.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+        // Sort signatories by date (oldest first)
+        signatories.sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
 
         // Return both the visible signatories and the total count
         return json({
