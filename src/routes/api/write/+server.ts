@@ -4,6 +4,10 @@ import Anthropic from '@anthropic-ai/sdk'
 
 // Safely access the API key, will be undefined if not set
 const ANTHROPIC_API_KEY_FOR_WRITE = env.ANTHROPIC_API_KEY_FOR_WRITE || undefined
+// NEW: Add global toggle for web search functionality
+const ENABLE_WEB_SEARCH = env.ENABLE_WEB_SEARCH !== 'false' // Default to true unless explicitly disabled
+// NEW: Add configurable rate limiting for tool calls per step
+const MAX_TOOL_CALLS_PER_STEP = parseInt(env.MAX_TOOL_CALLS_PER_STEP || '3')
 
 // Flag to track if API is available
 const IS_API_AVAILABLE = !!ANTHROPIC_API_KEY_FOR_WRITE
@@ -16,12 +20,86 @@ if (!IS_API_AVAILABLE) {
 }
 
 // Define step types for server-side use
-type StepName = 'research' | 'firstDraft' | 'firstCut' | 'firstEdit' | 'toneEdit' | 'finalEdit'
+type StepName =
+	| 'findTarget'
+	| 'webSearch'
+	| 'research'
+	| 'firstDraft'
+	| 'firstCut'
+	| 'firstEdit'
+	| 'toneEdit'
+	| 'finalEdit'
 
+// Define workflow types
+type WorkflowType = '1' | '2' | '3' | '4'
+
+// NEW: Define step configuration interface for tool usage
+interface StepConfig {
+	toolsEnabled?: boolean // Whether this step can use tools
+	maxToolCalls?: number // Maximum tool calls for this step (overrides global)
+	description?: string // Enhanced description when tools are used
+}
+
+// ENHANCED: Extend workflow configuration to support step configs
+type WorkflowConfig = {
+	steps: StepName[]
+	description: string
+	stepConfigs?: Record<StepName, StepConfig> // NEW: Optional step-level configuration
+}
+
+// NEW: Define step-level tool configurations
+const stepConfigs: Record<StepName, StepConfig> = {
+	// Research-focused steps that benefit from web search
+	findTarget: {
+		toolsEnabled: true,
+		maxToolCalls: 5,
+		description: 'Find possible targets (using web search)'
+	},
+	webSearch: {
+		toolsEnabled: true,
+		maxToolCalls: 3,
+		description: 'Research the target (using web search)'
+	},
+	research: {
+		toolsEnabled: true,
+		maxToolCalls: 2,
+		description: 'Auto-fill missing user inputs (using web search)'
+	},
+	// Text processing steps remain tool-free for performance
+	firstDraft: { toolsEnabled: false },
+	firstCut: { toolsEnabled: false },
+	firstEdit: { toolsEnabled: false },
+	toneEdit: { toolsEnabled: false },
+	finalEdit: { toolsEnabled: false }
+}
+
+const workflowConfigs: Record<WorkflowType, WorkflowConfig> = {
+	'1': {
+		steps: ['findTarget'],
+		description: 'Find Target Only',
+		stepConfigs // NEW: Include step configurations
+	},
+	'2': {
+		steps: ['webSearch'],
+		description: 'Web Search Only',
+		stepConfigs // NEW: Include step configurations
+	},
+	'3': {
+		steps: ['research'],
+		description: 'Research Only',
+		stepConfigs // NEW: Include step configurations
+	},
+	'4': {
+		steps: ['firstDraft', 'firstCut', 'firstEdit', 'toneEdit', 'finalEdit'],
+		description: 'Full Email Generation',
+		stepConfigs // NEW: Include step configurations
+	}
+}
 // Server-side state management interface (not exposed to client)
 interface WriteState {
 	step: StepName | 'complete' | 'start' // Current/completed step
-	userInput: string // Original input from form
+	workflowType: WorkflowType // Type of workflow being executed
+	userInput: string // Original input from form (cleaned, without prefix)
 	email: string // Current email content
 	information?: string // Processed information after research
 	completedSteps: Array<{
@@ -52,6 +130,7 @@ const System_Prompts: { [id: string]: string } = {}
 System_Prompts['Basic'] = `You are a helpful AI assistant.
 
 Note: Some fields in the information may begin with a robot emoji (🤖). This indicates the field was automatically generated during research. You can use this information normally, just ignore the emoji marker.`
+
 System_Prompts['Mail'] = `
 What follows is the anatomy of a good email, a set of guidelines and
 criteria for writing a good mail. Each paragraph, except the last represents 
@@ -177,7 +256,37 @@ Example:
 Original: "Preferred communication style: undefined"
 Your output: "Preferred communication style: 🤖 Formal but approachable"
 
+Please remember that you are addressing this person, and try to make all inferences based on the information provided and your own knowledge. Err on the side of caution: if you are unsure, be polite and neutral.
+
 Output the full information, including your edits. Output nothing else.
+`
+
+System_Prompts['Target'] = `
+Please use your internet search capability to find individuals involved with AI safety who match the following description.
+
+For each person you find (aim for 3-5 people), please provide:
+1. Name and current position
+2. Why they're relevant to AI safety
+3. Their organization
+4. Brief note on their public stance on AI safety
+
+Please cite your sources for each person.
+`
+
+//Preface with '[Person's Name] = John Doe' etc.
+System_Prompts['webSearch'] = `
+Please use your internet search capability to research [Person's Name] who is [current role] at [organization/affiliation]. I plan to contact them about AI safety concerns.
+
+Search for and provide:
+1. Professional background (education, career history, notable positions)
+2. Their involvement with AI issues (policy positions, public statements, initiatives, articles, interviews)
+3. Their public views on AI development and safety (with direct quotes where possible)
+4. Recent activities related to technology policy or AI (last 6-12 months)
+5. Communication style and key terms they use when discussing technology issues
+6. Notable connections (organizations, committees, coalitions, or influential individuals they work with)
+7. Contact information (professional email or official channels if publicly available)
+
+Please cite all sources you use and only include information you can verify through your internet search. If you encounter conflicting information, note this and provide the most reliable source.
 `
 
 // Only initialize the client if we have an API key
@@ -191,13 +300,46 @@ export async function GET() {
 	return json({ apiAvailable: IS_API_AVAILABLE })
 }
 
-// Helper function to call Claude API with timing
+// Helper function to parse workflow type from user input
+function parseWorkflowType(userInput: string): {
+	workflowType: WorkflowType
+	cleanedInput: string
+} {
+	const workflowMatch = userInput.match(/^\[([1-4])\](.*)$/s)
+
+	if (workflowMatch) {
+		const workflowType = workflowMatch[1] as WorkflowType
+		const cleanedInput = workflowMatch[2].trim()
+		return { workflowType, cleanedInput }
+	}
+
+	// Default to workflow 4 if no prefix is found
+	return { workflowType: '4', cleanedInput: userInput }
+}
+// NEW: Interface for tool use response content
+interface ToolUseContent {
+	type: 'tool_use'
+	id: string
+	name: string
+	input: any
+}
+
+// NEW: Interface for tool result content
+interface ToolResultContent {
+	type: 'tool_result'
+	tool_use_id: string
+	content: string
+}
+
+// ENHANCED: Modified function signature to support optional tool usage
 async function callClaude(
 	stepName: string,
 	promptNames: string[],
-	userContent: string
+	userContent: string,
+	toolsEnabled: boolean = false // NEW: Optional parameter for tool usage
 ): Promise<{ text: string; durationSec: number }> {
 	const pencil = '✏️'
+	const search = '🔍' // NEW: Icon for tool usage
 	const logPrefix = `${pencil} write:${stepName}`
 	const startTime = Date.now()
 
@@ -212,73 +354,209 @@ async function callClaude(
 		// Combine all the specified prompts
 		const systemPrompt = promptNames.map((name) => System_Prompts[name]).join('')
 
-		const response = await anthropic.messages.create({
-			model: 'claude-3-7-sonnet-20250219',
-			max_tokens: 4096, // Increased to handle all fields
-			system: systemPrompt,
-			messages: [{ role: 'user', content: userContent }]
-		})
+		// NEW: Determine if tools should be included in this call
+		const shouldUseTools = toolsEnabled && ENABLE_WEB_SEARCH && IS_API_AVAILABLE
 
-		// Log the request ID at debug level
-		console.debug(`${logPrefix} requestId: ${response.id}`)
-
-		// Ensure the response content is text
-		if (response.content[0].type !== 'text') {
-			throw new Error(`Unexpected content type from API: ${response.content[0].type}`)
+		// NEW: Log tool usage status
+		if (shouldUseTools) {
+			console.log(`${search} ${logPrefix}: Tools enabled for this step`)
 		}
 
-		const result = response.content[0].text
+		// FIXED: Use correct web search tool definition matching API documentation
+		const tools = shouldUseTools
+			? [
+					{
+						type: 'web_search_20250305', // CHANGED: Use correct tool type from API docs
+						name: 'web_search',
+						max_uses: 5 // ADDED: Limit searches per request
+					}
+				]
+			: undefined
+
+		// ENHANCED: Create API request with conditional tool support
+		const requestParams: any = {
+			model: 'claude-3-7-sonnet-20250219',
+			max_tokens: 4096,
+			system: systemPrompt,
+			messages: [{ role: 'user', content: userContent }]
+		}
+
+		// NEW: Add tools to request if enabled
+		if (tools) {
+			requestParams.tools = tools
+		}
+
+		// FIXED: Implement proper tool execution loop
+		let currentMessages = [...requestParams.messages]
+		let finalText = ''
+		let toolCallCount = 0
+		const maxCalls = Math.min(
+			MAX_TOOL_CALLS_PER_STEP,
+			stepConfigs[stepName as StepName]?.maxToolCalls || MAX_TOOL_CALLS_PER_STEP
+		)
+
+		while (toolCallCount < maxCalls) {
+			// Create request with current message history
+			const currentRequest = {
+				...requestParams,
+				messages: currentMessages
+			}
+
+			const response = await anthropic.messages.create(currentRequest)
+
+			// Log the request ID at debug level
+			console.debug(`${logPrefix} requestId: ${response.id}`)
+
+			// FIXED: Process response content properly
+			let hasToolUse = false
+			let textContent = ''
+
+			for (const content of response.content) {
+				if (content.type === 'text') {
+					textContent += content.text
+				} else if (content.type === 'server_tool_use' && shouldUseTools) {
+					// FIXED: Handle server-side tool use (web search is executed automatically)
+					hasToolUse = true
+					toolCallCount++
+					console.log(`${search} ${logPrefix}: Web search executed - ${content.name}`)
+				} else if (content.type === 'web_search_tool_result') {
+					// FIXED: Handle web search results (automatically provided by API)
+					console.log(`${search} ${logPrefix}: Received web search results`)
+				}
+			}
+
+			// FIXED: Add assistant's response to conversation history
+			currentMessages.push({
+				role: 'assistant',
+				content: response.content
+			})
+
+			// FIXED: Accumulate text content
+			finalText += textContent
+
+			// FIXED: Break if no tool use or if we've hit limits
+			if (!hasToolUse || toolCallCount >= maxCalls) {
+				break
+			}
+
+			// FIXED: If there was tool use, Claude might continue in the same turn
+			// Check if response has pause_turn stop reason
+			if (response.stop_reason === 'pause_turn') {
+				// Continue the conversation to let Claude finish its turn
+				continue
+			} else {
+				// Tool use complete, break the loop
+				break
+			}
+		}
+
+		// FIXED: Ensure we have text content
+		if (!finalText) {
+			throw new Error('No text content received from Claude')
+		}
+
 		const elapsed = (Date.now() - startTime) / 1000 // seconds
 
+		// ENHANCED: Log tool usage statistics
+		if (shouldUseTools && toolCallCount > 0) {
+			console.log(`${search} ${logPrefix}: Used ${toolCallCount} web searches`)
+		}
+
 		// Log the full response text at debug level
-		console.debug(`${logPrefix} full response:\n---\n${result}\n---`)
-		return { text: result, durationSec: elapsed }
+		console.debug(`${logPrefix} full response:\n---\n${finalText}\n---`)
+		return { text: finalText, durationSec: elapsed }
+	} catch (error) {
+		// ENHANCED: Better error handling for tool-related failures
+		if (toolsEnabled && (error.message?.includes('tool') || error.message?.includes('search'))) {
+			console.warn(
+				`${search} ${logPrefix}: Tool error, falling back to text-only mode:`,
+				error.message
+			)
+			// Retry without tools on tool-related errors
+			return callClaude(stepName, promptNames, userContent, false)
+		}
+		throw error // Re-throw non-tool errors
 	} finally {
 		console.timeEnd(`${logPrefix}`)
 	}
 }
+// NEW: Function to get step description with tool awareness
+function getStepDescription(stepName: StepName): string {
+	const stepConfig = stepConfigs[stepName]
+	const toolsWillBeUsed = stepConfig?.toolsEnabled && ENABLE_WEB_SEARCH && IS_API_AVAILABLE
 
-// Define user-friendly step descriptions
-const stepDescriptions: Record<StepName, string> = {
-	research: 'Auto-fill missing user inputs',
-	firstDraft: 'Create initial draft',
-	firstCut: 'Remove unnecessary content',
-	firstEdit: 'Improve text flow',
-	toneEdit: 'Adjust tone and style',
-	finalEdit: 'Final polish'
+	// Return enhanced description if tools are enabled and available
+	if (toolsWillBeUsed && stepConfig?.description) {
+		return stepConfig.description
+	}
+
+	// Fallback to standard descriptions
+	const stepDescriptions: Record<StepName, string> = {
+		findTarget: 'Find possible targets',
+		webSearch: 'Research the target',
+		research: 'Auto-fill missing user inputs',
+		firstDraft: 'Create initial draft',
+		firstCut: 'Remove unnecessary content',
+		firstEdit: 'Improve text flow',
+		toneEdit: 'Adjust tone and style',
+		finalEdit: 'Final polish'
+	}
+
+	return stepDescriptions[stepName]
 }
 
 // Function to generate a progress string from the state
+
 function generateProgressString(state: WriteState): string {
 	const pencil = '✏️'
 	const checkmark = '✓'
+	const search = '🔍' // NEW: Icon for tool-enabled steps
+
+	// Get workflow description
+	const workflowDescription = workflowConfigs[state.workflowType].description
 
 	// Generate the progress string
 	let lis = []
 
-	// Completed steps - use descriptions instead of raw step names
+	// ENHANCED: Completed steps with tool usage indicators
 	for (const step of state.completedSteps) {
+		const stepConfig = stepConfigs[step.name]
+		const usedTools = stepConfig?.toolsEnabled && ENABLE_WEB_SEARCH && IS_API_AVAILABLE
+		const icon = usedTools ? `${search}${checkmark}` : checkmark
+
 		lis.push(
-			`<li class="complete">${stepDescriptions[step.name]} (${step.durationSec.toFixed(1)}s) ${checkmark}</li>`
+			`<li class="complete">${getStepDescription(step.name)} (${step.durationSec.toFixed(1)}s) ${icon}</li>`
 		)
 	}
 
-	// Current step - only add if not already completed and state isn't complete
+	// ENHANCED: Current step with tool usage indicator
 	if (
 		state.currentStep &&
 		state.step !== 'complete' &&
 		!state.completedSteps.some((s) => s.name === state.currentStep)
 	) {
-		lis.push(`<li class="current">${stepDescriptions[state.currentStep]} ${pencil}</li>`)
+		const stepConfig = stepConfigs[state.currentStep]
+		const willUseTools = stepConfig?.toolsEnabled && ENABLE_WEB_SEARCH && IS_API_AVAILABLE
+		const icon = willUseTools ? `${search}${pencil}` : pencil
+
+		lis.push(`<li class="current">${getStepDescription(state.currentStep)} ${icon}</li>`)
 	}
 
-	// Remaining steps - filter out any that are in completed steps or current step
+	// ENHANCED: Remaining steps with tool usage preview
 	const completedAndCurrentSteps = [...state.completedSteps.map((s) => s.name), state.currentStep]
 	const filteredRemainingSteps = state.remainingSteps.filter(
 		(step) => !completedAndCurrentSteps.includes(step)
 	)
+
 	lis = lis.concat(
-		filteredRemainingSteps.map((step) => `<li class="pending">${stepDescriptions[step]}</li>`)
+		filteredRemainingSteps.map((step) => {
+			const stepConfig = stepConfigs[step]
+			const willUseTools = stepConfig?.toolsEnabled && ENABLE_WEB_SEARCH && IS_API_AVAILABLE
+			const description = getStepDescription(step)
+			const indicator = willUseTools ? ` ${search}` : ''
+
+			return `<li class="pending">${description}${indicator}</li>`
+		})
 	)
 
 	const listItems = lis.join('')
@@ -286,31 +564,29 @@ function generateProgressString(state: WriteState): string {
 
 	if (state.nextStep === null) {
 		// Process is complete
-		return `<strong>Done (${totalTime.toFixed(1)}s):</strong><ul>${listItems}</ul>`
+		return `<strong>${workflowDescription} - Done (${totalTime.toFixed(1)}s):</strong><ul>${listItems}</ul>`
 	} else {
-		return `<strong>Progress:</strong><ul>${listItems}</ul>`
+		return `<strong>${workflowDescription} - Progress:</strong><ul>${listItems}</ul>`
 	}
 }
 
 // Initialize a new state for the step-by-step process
 function initializeState(userInput: string): WriteState {
-	const allSteps: StepName[] = [
-		'research',
-		'firstDraft',
-		'firstCut',
-		'firstEdit',
-		'toneEdit',
-		'finalEdit'
-	]
+	const { workflowType, cleanedInput } = parseWorkflowType(userInput)
+	const workflowSteps = workflowConfigs[workflowType].steps
+
+	const firstStep = workflowSteps[0]
+	const remainingSteps = workflowSteps.slice(1)
 
 	return {
 		step: 'start',
-		userInput,
+		workflowType,
+		userInput: cleanedInput,
 		email: '',
 		completedSteps: [],
-		currentStep: 'research', // First step
-		remainingSteps: allSteps.slice(1), // All steps except research (which is current)
-		nextStep: 'research'
+		currentStep: firstStep,
+		remainingSteps,
+		nextStep: firstStep
 	}
 }
 
@@ -336,13 +612,19 @@ const stepHandlers: Record<
 	StepName,
 	(state: WriteState) => Promise<{ text: string; durationSec: number }>
 > = {
-	research: async (state) => {
+	// ENHANCED: Enable tools for target finding
+	findTarget: async (state) => {
 		System_Prompts['Information'] = state.userInput
 
+		// NEW: Check if tools should be enabled for this step
+		const stepConfig = stepConfigs.findTarget
+		const toolsEnabled = stepConfig?.toolsEnabled && ENABLE_WEB_SEARCH
+
 		const result = await callClaude(
-			'research',
-			['Basic', 'Mail', 'Information', 'Research'],
-			"Hello! Please update the list of information by replacing all instances of 'undefined' with something that belongs under their respective header based on the rest of the information provided. Thank you!"
+			'findTarget',
+			['Basic', 'Target', 'Information'],
+			'Hello! Please help me find a person to contact!',
+			toolsEnabled // NEW: Pass tool enablement flag
 		)
 
 		state.information = result.text
@@ -351,11 +633,55 @@ const stepHandlers: Record<
 		return result
 	},
 
+	// ENHANCED: Enable tools for web search (this step is inherently search-based)
+	webSearch: async (state) => {
+		System_Prompts['Information'] = state.userInput
+
+		// NEW: Check if tools should be enabled for this step
+		const stepConfig = stepConfigs.webSearch
+		const toolsEnabled = stepConfig?.toolsEnabled && ENABLE_WEB_SEARCH
+
+		const result = await callClaude(
+			'webSearch',
+			['Basic', 'webSearch', 'Information', 'Results'],
+			'Hello! Please research this person!',
+			toolsEnabled // NEW: Pass tool enablement flag
+		)
+
+		state.information = result.text
+		System_Prompts['Information'] = result.text
+
+		return result
+	},
+
+	// ENHANCED: Enable tools for research step
+	research: async (state) => {
+		System_Prompts['Information'] = state.userInput
+
+		// NEW: Check if tools should be enabled for this step
+		const stepConfig = stepConfigs.research
+		const toolsEnabled = stepConfig?.toolsEnabled && ENABLE_WEB_SEARCH
+
+		const result = await callClaude(
+			'research',
+			['Basic', 'Mail', 'Information', 'Research'],
+			"Hello! Please update the list of information by replacing all instances of 'undefined' with something that belongs under their respective header based on the rest of the information provided. Thank you!",
+			toolsEnabled // NEW: Pass tool enablement flag
+		)
+
+		state.information = result.text
+		System_Prompts['Information'] = result.text
+
+		return result
+	},
+
+	// UNCHANGED: Text processing steps remain without tools for performance
 	firstDraft: async (state) => {
 		return await callClaude(
 			'firstDraft',
 			['Basic', 'Mail', 'First_Draft', 'Results'],
 			'Hello! Please write an email draft using the following information. \n' + state.information
+			// NOTE: No toolsEnabled parameter = defaults to false
 		)
 	},
 
@@ -364,6 +690,7 @@ const stepHandlers: Record<
 			'firstCut',
 			['Basic', 'Mail', 'Information', 'First_Cut', 'Results'],
 			'Hello! Please cut the following email draft. \n \n' + state.email
+			// NOTE: No toolsEnabled parameter = defaults to false
 		)
 	},
 
@@ -372,6 +699,7 @@ const stepHandlers: Record<
 			'firstEdit',
 			['Basic', 'Mail', 'Information', 'First_Edit', 'Results'],
 			'Hello! Please edit the following email draft. \n \n' + state.email
+			// NOTE: No toolsEnabled parameter = defaults to false
 		)
 	},
 
@@ -380,6 +708,7 @@ const stepHandlers: Record<
 			'toneEdit',
 			['Basic', 'Mail', 'Information', 'Tone_Edit', 'Results'],
 			'Hello! Please edit the tone of the following email draft. \n \n' + state.email
+			// NOTE: No toolsEnabled parameter = defaults to false
 		)
 	},
 
@@ -388,10 +717,10 @@ const stepHandlers: Record<
 			'finalEdit',
 			['Basic', 'Mail', 'Information', 'Final_Edit', 'Checklist', 'Results'],
 			'Hello! Please edit the following email draft. \n \n' + state.email
+			// NOTE: No toolsEnabled parameter = defaults to false
 		)
 	}
 }
-
 // Process a specific step
 async function processStep(state: WriteState): Promise<WriteState> {
 	if (!state.nextStep) {
@@ -416,8 +745,8 @@ async function processStep(state: WriteState): Promise<WriteState> {
 
 	const result = await stepHandler(state)
 
-	// Update email content (except for research step which updates information)
-	if (currentStep !== 'research') {
+	// Update email content (except for research-like steps which update information)
+	if (/*!['research', 'findTarget', 'webSearch']*/ !['research'].includes(currentStep)) {
 		state.email = result.text
 	}
 
@@ -428,20 +757,13 @@ async function processStep(state: WriteState): Promise<WriteState> {
 		durationSec: result.durationSec
 	})
 
-	// Set next step
-	const allSteps: StepName[] = [
-		'research',
-		'firstDraft',
-		'firstCut',
-		'firstEdit',
-		'toneEdit',
-		'finalEdit'
-	]
-	const currentIndex = allSteps.indexOf(currentStep)
+	// Set next step based on workflow configuration
+	const workflowSteps = workflowConfigs[state.workflowType].steps
+	const currentIndex = workflowSteps.indexOf(currentStep)
 
-	if (currentIndex !== -1 && currentIndex < allSteps.length - 1) {
-		state.nextStep = allSteps[currentIndex + 1]
-		state.currentStep = allSteps[currentIndex + 1]
+	if (currentIndex !== -1 && currentIndex < workflowSteps.length - 1) {
+		state.nextStep = workflowSteps[currentIndex + 1]
+		state.currentStep = workflowSteps[currentIndex + 1]
 	} else {
 		// Last step completed, mark as complete
 		state.nextStep = null
@@ -474,7 +796,9 @@ export async function POST({ fetch, request }) {
 			// Continue an existing process
 			try {
 				state = JSON.parse(requestData.stateToken) as WriteState
-				console.log(`${pencil} write: Continuing from step ${state.step}`)
+				console.log(
+					`${pencil} write: Continuing from step ${state.step} (workflow ${state.workflowType})`
+				)
 			} catch (error) {
 				console.error('Error parsing state token:', error)
 				return json({
@@ -497,8 +821,11 @@ export async function POST({ fetch, request }) {
 				} as ChatResponse)
 			}
 
-			// Initialize new state
+			// Initialize new state with workflow parsing
 			state = initializeState(info)
+			console.log(
+				`${pencil} write: Detected workflow type ${state.workflowType}: ${workflowConfigs[state.workflowType].description}`
+			)
 
 			// For initial calls (no stateToken), return progress string without processing
 			if (requestData.stateToken === undefined) {
