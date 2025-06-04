@@ -71,6 +71,7 @@ html,
 body {
 	height: 100%;
 	font-family: var(--font-body);
+	font-weight: 300;
 	background-color: var(--bg);
 }
 

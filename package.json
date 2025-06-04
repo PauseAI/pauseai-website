@@ -26,7 +26,8 @@
 		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
 		"lint": "prettier --check . && eslint .",
 		"format": "prettier --write .",
-		"prepare": "husky"
+		"prepare": "husky",
+		"sync": "svelte-kit sync"
 	},
 	"devDependencies": {
 		"@inlang/paraglide-js": "^2.0.4",
@@ -78,6 +79,7 @@
 		"@sveltejs/enhanced-img": "~0.3.10",
 		"@turf/distance": "^7.2.0",
 		"@types/mapbox-gl": "^2.7.21",
+		"airtable": "^0.12.2",
 		"axios": "^1.9.0",
 		"clipboard-polyfill": "^4.1.1",
 		"easy-web-worker": "^7.0.2",

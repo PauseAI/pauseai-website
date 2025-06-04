@@ -16,18 +16,11 @@ export type Post = FrontmatterMeta & {
 	slug: string
 }
 
-/** Individual volunteer */
-export type Person = {
-	id: string
+export type Signatory = {
 	name: string
-	/** URL to image file */
-	image?: string
-	bio: string
-	title?: string
-	/** Doesn't want to be visible on the /people page */
-	privacy?: boolean
-	checked?: boolean
-	org?: ['International' | string]
+	private: boolean
+	bio?: string
+	country: string
 }
 
 export type Team = {
@@ -60,3 +53,4 @@ export type NationalGroupLink =
 	| 'linktreeLink'
 	| 'instagramLink'
 	| 'tiktokLink'
+	| 'facebookLink'
