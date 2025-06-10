@@ -1,6 +1,6 @@
 {
 	"$schema": "https://inlang.com/schema/inlang-message-format",
-	"header__instructions": "All translations prefixed with 'header_' should be as short as possible to fit the layout. Try to keep them at a single word while still being useful as links to the pages.",
+	"header__instructions": "TEST All translations prefixed with 'header_' should be as short as possible to fit the layout. Try to keep them at a single word while still being useful as links to the pages.",
 	"header_action__instructions": "German: Handeln",
 	"header_action": "Act",
 	"header_donate": "Donate",
