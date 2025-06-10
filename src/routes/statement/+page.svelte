@@ -10,37 +10,39 @@
 
 	// Variable to control how many signatories are shown
 	const shortListN = 5
-    let showAll = false
+	let showAll = false
+	let expandAllBios = false
 	// Reactive variable to determine the list of signatories to display
-    $: visibleSignatories = showAll ? signatories : signatories.slice(0, shortListN)
-	// Function to toggle between limited and full list
+	$: visibleSignatories = showAll ? signatories : signatories.slice(0, shortListN)
+	// Function to toggle between limited and full list and bios
 	function toggleShowAll() {
-        showAll = !showAll	
-    }
+		showAll = !showAll
+		expandAllBios = showAll
+	}
 
 	// Milestone goals for signatures
 	const milestones = [25, 50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 1000, 1500]
 	// Find the next milestone goal
 	const nextGoal = milestones.find((goal) => totalCount < goal) || milestones[milestones.length - 1]
-    
+
 	// Load Tally script after component mounts
 	onMount(() => {
 		const d = document
-		const w = "https://tally.so/widgets/embed.js"
-		const v = function() {
-			if (typeof window.Tally !== "undefined") {
+		const w = 'https://tally.so/widgets/embed.js'
+		const v = function () {
+			if (typeof window.Tally !== 'undefined') {
 				window.Tally.loadEmbeds()
 			} else {
-				d.querySelectorAll("iframe[data-tally-src]:not([src])").forEach((e) => {
+				d.querySelectorAll('iframe[data-tally-src]:not([src])').forEach((e) => {
 					e.src = e.dataset.tallySrc
 				})
 			}
 		}
-		
-		if (typeof window.Tally !== "undefined") {
+
+		if (typeof window.Tally !== 'undefined') {
 			v()
 		} else if (d.querySelector(`script[src="${w}"]`) === null) {
-			const s = d.createElement("script")
+			const s = d.createElement('script')
 			s.src = w
 			s.onload = v
 			s.onerror = v
@@ -54,13 +56,9 @@
 <h1>{title}</h1>
 
 <blockquote class="statement">
-	<p>
-		<em
-			>"We call on the governments of the world to sign an international treaty implementing a
-			temporary pause on the training of the most powerful general AI systems, until we know how to
-			build them safely and keep them under democratic control."</em
-		>
-	</p>
+	"We call on the governments of the world to sign an international treaty implementing a temporary
+	pause on the training of the most powerful general AI systems, until we know how to build them
+	safely and keep them under democratic control."
 </blockquote>
 
 <!-- Signatories Counter and Goal -->
@@ -70,10 +68,24 @@
 
 <!-- Tally Form Container -->
 <div class="tally-form-container">
-	<iframe data-tally-src="https://tally.so/embed/315xdg?alignLeft=1&hideTitle=1&dynamicHeight=1" loading="lazy" width="100%" height="499" frameborder="0" marginheight="0" marginwidth="0" title="Sign the statement (verification required)"></iframe>
+	<iframe
+		data-tally-src="https://tally.so/embed/315xdg?alignLeft=1&hideTitle=1&dynamicHeight=1"
+		loading="lazy"
+		width="100%"
+		height="499"
+		frameborder="0"
+		marginheight="0"
+		marginwidth="0"
+		title="Sign the statement (verification required)"
+	></iframe>
 </div>
 
-<h2>Signatories</h2>
+<div class="signatories-header">
+	<h2>Signatories ({totalCount})</h2>
+	<button class="expand-all" on:click={toggleShowAll} aria-label="Expand all signatories and bios">
+		{showAll ? 'Collapse All' : 'Expand All'}
+	</button>
+</div>
 
 <section data-pagefind-ignore>
 	{#if visibleSignatories.length === 0}
@@ -81,35 +93,41 @@
 	{/if}
 	<ul class="signatories">
 		{#each visibleSignatories as { name, country, bio }}
-			<Signatory {name} {country} {bio} />
+			<Signatory {name} {country} {bio} {expandAllBios} />
 		{/each}
 	</ul>
 
 	<!-- Button to toggle between limited and full list -->
 	<button on:click={toggleShowAll}>
-        {showAll ? 'Show Less' : 'Show All Signatories'}
+		{showAll ? 'Show Less' : 'Show All Signatories'}
 	</button>
 </section>
 
 <style>
 	/* Style for the statement */
 	.statement {
-		font-family: 'Georgia', serif;
 		margin: 2rem 0;
 		padding: 1rem;
-		background-color: #f9f9f9;
+		font-weight: normal;
 		border-left: 4px solid var(--brand);
+		background-color: var(--text-subtle);
 		font-style: italic;
-		font-size: 1.5rem;
+		font-size: 1rem;
 		line-height: 1.8;
-		color: #333;
+		color: var(--text);
+	}
+
+	@media (min-width: 600px) {
+		.statement {
+			font-size: 1.5rem;
+		}
 	}
 
 	.statement p {
 		font-weight: 400; /* Normal weight */
 		font-style: italic; /* Keep the italics from <em> */
 		font-size: 1.8rem; /* Adjust size if needed */
-		color: #333; /* Optional: Adjust color */
+		color: var(--text-subtle); /* Optional: Adjust color */
 	}
 
 	/* Style for the signatories counter */
@@ -159,6 +177,29 @@
 	}
 
 	button:hover {
+		background-color: var(--brand-dark);
+	}
+
+	.signatories-header {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		margin-top: 2rem;
+		margin-bottom: 1rem;
+	}
+
+	.expand-all {
+		margin-left: 1rem;
+		padding: 0.4rem 1rem;
+		background-color: var(--brand);
+		color: white;
+		border: none;
+		border-radius: 4px;
+		cursor: pointer;
+		font-size: 1rem;
+		float: right;
+	}
+	.expand-all:hover {
 		background-color: var(--brand-dark);
 	}
 </style>
