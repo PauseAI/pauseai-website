@@ -1,6 +1,6 @@
 /**
- * LLM API client for translation operations
- * Handles communication with language model APIs for translation
+ * LLM API client for l10n operations
+ * Handles communication with language model APIs for l10n
  */
 
 import axios from 'axios'
