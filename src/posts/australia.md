@@ -1,7 +1,7 @@
 ---
 title: PauseAI in Australia
 slug: australia
-description: landing page for the Australian chapter of PauseAI
+description: the Australian chapter of PauseAI
 ---
 **A message from PauseAI volunteers in Australia:**
 
