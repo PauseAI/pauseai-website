@@ -25,7 +25,7 @@ async function importMarkdown(locale: string, slug: string) {
 		return await import(`../../posts/${slug}.md`)
 	} else {
 		try {
-			return await import(`../../temp/translations/md/${locale}/${slug}.md`)
+			return await import(`../../../l10n-cage/md/${locale}/${slug}.md`)
 		} catch (error) {
 			if (import.meta.env.DEV) {
 				return {
