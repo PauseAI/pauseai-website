@@ -7,14 +7,9 @@ import path from 'path'
 // Import default settings from our JavaScript module
 import defaultSettingsConfig from '../../project.inlang/default-settings.js'
 
-export const L10NS_BASE_DIR = './src/temp/translations'
-export const MARKDOWN_L10NS = `${L10NS_BASE_DIR}/md`
-export const MESSAGE_L10NS = `${L10NS_BASE_DIR}/json`
-
-// New l10n cage directory for Git-based cache
 export const L10N_CAGE_DIR = './l10n-cage'
-
-// Source paths for content to be translated
+export const MARKDOWN_L10NS = `${L10N_CAGE_DIR}/md`
+export const MESSAGE_L10NS = `${L10N_CAGE_DIR}/json`
 export const MESSAGE_SOURCE = './messages/en.json'
 export const MARKDOWN_SOURCE = './src/posts'
 
@@ -30,7 +25,7 @@ export function getDefaultSettings(): typeof defaultSettingsConfig {
 	return defaultSettingsConfig
 }
 
-// For translation scripts that need to know target languages
+// For l10n scripts that need to know target languages
 export function getTargetLocales(): string[] {
 	return getDefaultSettings().locales.filter((tag) => tag !== 'en')
 }

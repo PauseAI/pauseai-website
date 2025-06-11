@@ -12,6 +12,18 @@
 import { spawn } from 'child_process'
 import readline from 'readline'
 
+// Check if --verbose is anywhere in the command line
+const hasVerbose = process.argv.includes('--verbose')
+
+if (hasVerbose) {
+	// Just run the command with no filtering
+	const buildCommand = process.argv[2]
+	const [program, ...args] = buildCommand.split(' ')
+	const build = spawn(program, args, { shell: true, stdio: 'inherit' })
+	build.on('exit', (code) => process.exit(code))
+	return
+}
+
 // Default to running build:dev if no command provided
 const buildCommand = process.argv[2] || 'npm run build:dev'
 

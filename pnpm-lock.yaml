@@ -123,6 +123,9 @@ importers:
       '@types/js-cookie':
         specifier: ^3.0.6
         version: 3.0.6
+      '@types/minimatch':
+        specifier: ^5.1.2
+        version: 5.1.2
       '@types/minimist':
         specifier: ^1.2.5
         version: 1.2.5
@@ -168,6 +171,9 @@ importers:
       mdsvex:
         specifier: ^0.11.2
         version: 0.11.2(svelte@4.2.19)
+      minimatch:
+        specifier: '9'
+        version: 9.0.5
       minimist:
         specifier: ^1.2.8
         version: 1.2.8
@@ -989,6 +995,9 @@ packages:
 
   '@types/mdast@4.0.4':
     resolution: {integrity: sha512-kGaNbPh1k7AFzgpud/gMdvIm5xuECykRR+JnWKQno9TAXVa6WIVCGTPvYGekIDL4uwCZQSYbUxNBSb1aUo79oA==}
+
+  '@types/minimatch@5.1.2':
+    resolution: {integrity: sha512-K0VQKziLUWkVKiRVrx4a40iPaxTUefQmjtkQofBkYRcoaaL/8rhwDWww9qWbrgicNOgnpIsMxyNIUM4+n6dUIA==}
 
   '@types/minimist@1.2.5':
     resolution: {integrity: sha512-hov8bUuiLiyFPGyFPE1lwWhmzYbirOXQNNo40+y3zow8aFVTeyn3VWL0VFFfdNddA8S4Vf0Tc062rzyNr7Paag==}
@@ -3361,6 +3370,8 @@ snapshots:
   '@types/mdast@4.0.4':
     dependencies:
       '@types/unist': 3.0.3
+
+  '@types/minimatch@5.1.2': {}
 
   '@types/minimist@1.2.5': {}
 
