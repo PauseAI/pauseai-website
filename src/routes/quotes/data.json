@@ -1,315 +1,315 @@
 {
-	"quotes": [
-		{
-			"background": "summit_declaration",
-			"color": "white",
-			"text": "[About frontier AI:] Substantial risks may arise from potential intentional misuse or unintended issues of control relating to alignment with human intent. These issues are in part because those capabilities are not fully understood [...] There is potential for **serious, even catastrophic, harm, either deliberate or unintentional**, stemming from the most significant capabilities of these AI models.",
-			"author": "The Bletchley Declaration,",
-			"author_description": "signed by 28 countries, including all AI leaders, and the EU.",
-			"source": "https://www.gov.uk/government/publications/ai-safety-summit-2023-the-bletchley-declaration/the-bletchley-declaration-by-countries-attending-the-ai-safety-summit-1-2-november-2023",
-			"padding": "2rem"
-		},
-		{
-			"background": "cais_statement",
-			"color": "white",
-			"text": "**Mitigating the risk of extinction from AI should be a global priority alongside other societal-scale risks such as pandemics and nuclear war.**",
-			"author": "Statement on AI risk,",
-			"author_description": "signed by hundreds of AI experts and other notable figures. Including three of the most cited scientists ever and top people from all the top AI labs. Endorsed by the UK Prime Minister and the EU President.",
-			"source": "https://www.theguardian.com/technology/2023/may/30/risk-of-extinction-by-ai-should-be-global-priority-say-tech-experts",
-			"padding": "3rem"
-		},
-		{
-			"background": "fli_letter",
-			"color": "white",
-			"text": "**We call on all AI labs to immediately pause for at least 6 months the training of AI systems more powerful than GPT-4.**",
-			"author": "Pause Giant AI Experiments letter",
-			"author_description": "signed by 30,000+ people, including academic AI researchers and industry CEOs. Note that this is different from our ask, which is an indefinite pause.",
-			"source": "https://www.wired.com/story/chatgpt-pause-ai-experiments-open-letter/",
-			"padding": "",
-			"notice": "“Steve Wozniak speaking at an event in Paradise Valley, Arizona.” by Gage Skidmore. Modified and licensed under CC BY-SA 3.0."
-		},
-		{
-			"background": "hawking",
-			"color": "",
-			"text": "**The development of full artificial intelligence could spell the end of the human race** [...] It would take off on its own, and re-design itself at an ever increasing rate.",
-			"author": "Stephen Hawking",
-			"author_description": "Theoretical Physicist and Cosmologist",
-			"source": "https://www.bbc.com/news/technology-30290540",
-			"padding": ""
-		},
-		{
-			"background": "trump",
-			"color": "white",
-			"text": "[...] the other thing that I think is **maybe the most dangerous thing out there** of anything, because there’s no real solution — **the AI**, as they call it.",
-			"author": "Donald Trump",
-			"author_description": "President of the United States"
-		},
-		{
-			"background": "biden",
-			"color": "white",
-			"text": "Artificial Intelligence is one of the most powerful tools of our time, but to seize its opportunities, **we must first mitigate its risks.** [...] Social media has shown us the harm that powerful technology can do without the right safeguards in place [...] we must be clear-eyed and vigilant about the threats emerging — of emerging technologies that can pose — don’t have to, but can pose — to our democracy and our values.",
-			"author": "Joe Biden",
-			"author_description": "46th President of the United States",
-			"padding": "2rem"
-		},
-		{
-			"background": "putin",
-			"color": "black",
-			"text": "Artificial intelligence is the future, not only for Russia, but for all humankind. It comes with colossal opportunities, but also threats that are difficult to predict. **Whoever becomes the leader in this sphere will become the ruler of the world** [...] If we become leaders in this area, we will share this know-how with [the] entire world, the same way we share our nuclear technologies today.",
-			"author": "Vladimir Putin",
-			"author_description": "President of Russia",
-			"padding": "2rem"
-		},
-		{
-			"background": "qiang",
-			"color": "white",
-			"text": "AI must be guided in a direction that is conducive to the progress of humanity. So **there should be a red line in AI development, a red line that must not be crossed** [...] It should not just benefit only a small group of people, but benefit the overwhelming majority of mankind [...] It is essential that we work together and coordinate with each other.",
-			"author": "Li Qiang",
-			"author_description": "China's Head of Government",
-			"padding": "2rem",
-			"notice": "“李强 Li Qiang 20230313 02” by China News Service. Modified and licensed under CC BY 3.0."
-		},
-		{
-			"background": "leyen",
-			"color": "white",
-			"text": "[We] **should not underestimate the real threats coming from AI** [...] It is moving faster than even its developers anticipated [...] We have a narrowing window of opportunity to guide this technology responsibly.",
-			"author": "Ursula von der Leyen",
-			"author_description": "Head of the executive branch of the European Union"
-		},
-		{
-			"background": "guterres",
-			"color": "white",
-			"text": "**AI poses a long-term global risk. Even its own designers have no idea where their breakthrough may lead.** I urge [the UN Security Council] to approach this technology with a sense of urgency [...] Its creators themselves have warned that much bigger, potentially catastrophic and existential risks lie ahead.",
-			"author": "António Guterres",
-			"author_description": "Chief Executive Officer of the United Nations",
-			"padding": "2.8rem"
-		},
-		{
-			"background": "pope",
-			"color": "black",
-			"text": "**I urge the global community of nations to work together in order to adopt a binding international treaty that regulates the development and use of artificial intelligence in its many forms** [...] [AI] may pose a risk to our survival and endanger our common home.",
-			"author": "Pope Francis",
-			"author_description": "Former head of the Catholic Church",
-			"notice": "“pope-francis-1a” by ThiênLong. Modified and licensed under CC BY-SA 2.0."
-		},
-		{
-			"background": "sunak",
-			"color": "black",
-			"text": "Get this wrong, and AI could make it easier to build chemical or biological weapons. Terrorist groups could use AI to spread fear and destruction on an even greater scale. Criminals could exploit AI for cyber-attacks, disinformation, fraud, or even child sexual abuse. And in the most unlikely but extreme cases, there is even the risk that **humanity could lose control of AI completely** through the kind of AI sometimes referred to as ‘super intelligence’.",
-			"author": "Rishi Sunak",
-			"author_description": "United Kingdom's former Prime Minister",
-			"padding": "1.5rem"
-		},
-		{
-			"background": "harris",
-			"color": "white",
-			"text": "[...] just as AI has the potential to do profound good, it also has the potential to cause profound harm. From AI-enabled cyberattacks at a scale beyond anything we have seen before to AI-formulated bio-weapons that could endanger the lives of millions, these threats are often referred to as the “existential threats of AI” because, of course, they **could endanger the very existence of humanity. These threats, without question, are profound, and they demand global action.**",
-			"author": "Kamala Harris",
-			"author_description": "Former Vice President of the United States"
-		},
-		{
-			"background": "jun",
-			"color": "black",
-			"text": "The potential impact of AI might exceed human cognitive boundaries. To ensure that this technology always benefits humanity, we must regulate the development of AI and prevent this technology from turning into a runaway wild horse [...] We need to strengthen the detection and evaluation of the entire lifecycle of AI, **ensuring that mankind has the ability to press the pause button at critical moments.**",
-			"author": "Zhang Jun",
-			"author_description": "China's Ambassador of the United Nations",
-			"padding": "1.5rem",
-			"notice": "“Zhang Jun (2022-06-08)” by 中国新闻社. Modified and licensed under CC BY 3.0."
-		},
-		{
-			"background": "turing",
-			"color": "",
-			"text": "It seems probable that once the machine thinking method had started, it would not take long to outstrip our feeble powers… They would be able to converse with each other to sharpen their wits. **At some stage therefore, we should have to expect the machines to take control.**",
-			"author": "Alan Turing",
-			"author_description": "Father of Computer Science and Artificial Intelligence"
-		},
-		{
-			"background": "musk",
-			"color": "white",
-			"text": "AI is a rare case where I think **we need to be proactive in regulation than be reactive** [...] I think that [digital super intelligence] is the single biggest existential crisis that we face and the most pressing one. It needs to be a **public body that has insight and then oversight to confirm that everyone is developing AI safely** [...] And mark my words, AI is far more dangerous than nukes. Far. So why do we have no regulatory oversight? **This is insane.**",
-			"author": "Elon Musk",
-			"author_description": "Founder/ Co-Founder of OpenAI, Neuralink, SpaceX, xAI, PayPal, CEO of Tesla, CTO of X/ Twitter",
-			"padding": "1.8rem"
-		},
-		{
-			"background": "gates",
-			"color": "black",
-			"text": "Superintelligent AIs are in our future. [...] **There’s the possibility that AIs will run out of control.** [Possibly,] a machine could decide that humans are a threat, conclude that its interests are different from ours, or simply stop caring about us.",
-			"author": "Bill Gates",
-			"author_description": "Co-Founder of Microsoft",
-			"padding": "2rem"
-		},
-		{
-			"background": "altman",
-			"color": "black",
-			"text": "[Suggesting about how to ask for a global regulatory body:] “any compute cluster above a certain extremely high-power threshold – and given the cost here, we’re talking maybe five in the world, something like that – any cluster like that **has to submit to the equivalent of international weapons inspectors**” […] I did a big trip around the world this year, and talked to heads of state in many of the countries that would need to participate in this, and **there was almost universal support for it.**",
-			"author": "Sam Altman",
-			"author_description": "Co-Founder and CEO of OpenAI, Former President of Y Combinator",
-			"padding": "1rem",
-			"notice": "“Disrupt SF TechCrunch Disrupt San Francisco 2019 - Day 2 (48838377432)” by TechCrunch. Modified and licensed under CC BY 2.0."
-		},
-		{
-			"background": "hassabis",
-			"color": "black",
-			"text": "**We must take the risks of AI as seriously as other major global challenges**, like climate change. It took the international community too long to coordinate an effective global response to this, and we’re living with the consequences of that now. We can’t afford the same delay with AI [...] then maybe there’s some kind of equivalent one day of the IAEA, which actually audits these things.",
-			"author": "Demis Hassabis",
-			"author_description": "Co-Founder and CEO of DeepMind",
-			"padding": "2rem",
-			"notice": "“File:PhotonQ-Demis Hassabis on Artificial Playful Intelligence (15366514658) (2)” by PhOtOnQuAnTiQuE from Earth France. Modified and licensed under CC BY-SA 2.0."
-		},
-		{
-			"background": "amodei",
-			"color": "white",
-			"text": "When I think of why am I scared [...] I think the thing that's really hard to argue with is like, there will be powerful models; they will be agentic; we're getting towards them. If such a model wanted to wreak havoc and destroy humanity or whatever, I think **we have basically no ability to stop it.**",
-			"author": "Dario Amodei",
-			"author_description": "Co-Founder and CEO of Anthropic, Former Head of AI Safety at OpenAI",
-			"padding": "2rem",
-			"source": "https://www.dwarkeshpatel.com/p/dario-amodei",
-			"notice": "“TechCrunch Disrupt 2023 - Day 2” by TechCrunch. Modified and licensed under CC BY 2.0."
-		},
-		{
-			"background": "suleyman",
-			"color": "white",
-			"text": "[About a Pause] I don’t rule it out. And I think that **at some point over the next five years or so, we’re going to have to consider that question very seriously.**",
-			"author": "Mustafa Suleyman",
-			"author_description": "CEO of Microsoft AI, Co-Founder of DeepMind",
-			"padding": "",
-			"notice": "“POZ_0446” by collision.conf. Modified and licensed under CC BY 2.0."
-		},
-		{
-			"background": "dark_grey",
-			"color": "white",
-			"text": "The future is going to be good for the AIs regardless; it would be nice if it would be good for humans as well [...] It’s not that it’s going to actively hate humans and want to harm them, but it’s just going to be too powerful, and I think **a good analogy would be the way humans treat animals [...] And I think by default that’s the kind of relationship that’s going to be between us and AGIs** which are truly autonomous and operating on their own behalf.",
-			"author": "Ilya Sutskever",
-			"author_description": "One of the most cited scientists ever because his contributions to the field of modern AI, Co-Founder and Former Chief Scientist at OpenAI",
-			"padding": ""
-		},
-		{
-			"background": "brockman",
-			"color": "black",
-			"text": "The exact way the post-AGI world will look is hard to predict — that world will likely be more different from today’s world than today’s is from the 1500s [...] **We do not yet know how hard it will be to make sure AGIs act according to the values of their operators.** Some people believe it will be easy; some people believe it’ll be unimaginably difficult; but no one knows for sure",
-			"author": "Greg Brockman",
-			"author_description": "Co-Founder and Former CTO of OpenAI",
-			"padding": "",
-			"notice": "“TechCrunch Disrupt San Francisco 2019 - Day 2” by TechCrunch. Modified and licensed under CC BY 2.0."
-		},
-		{
-			"background": "light_grey",
-			"color": "black",
-			"text": "[Talking about times near the creation of the first AGI] you have the race dynamics where everyone's trying to stay ahead, and that might require compromising on safety. So I think you would probably need some coordination among the larger entities that are doing this kind of training [...] **Pause either further training, or pause deployment**, or avoiding certain types of training that we think might be riskier.",
-			"author": "John Schulman",
-			"author_description": "Co-Founder of OpenAI",
-			"padding": ""
-		},
-		{
-			"background": "dark_grey",
-			"color": "white",
-			"text": "Do possible risks from AI outweigh **other possible existential risks…? It's my number 1 risk for this century** [...] A lack of concrete AGI projects is not what worries me, it's the lack of concrete plans on how to keep these safe that worries me.",
-			"author": "Shane Legg",
-			"author_description": "Co-Founder and Chief AGI Scientist at DeepMind",
-			"padding": ""
-		},
-		{
-			"background": "light_grey",
-			"color": "black",
-			"text": "[After resigning at OpenAI, talking about sources of risks] These problems are quite hard to get right, and I am concerned **we aren't on a trajectory to get there** [...] OpenAI is shouldering an enormous responsibility on behalf of all of humanity. But over the past years, safety culture and processes have taken a backseat to shiny products. We are long overdue in getting incredibly serious about the implications of AGI.",
-			"author": "Jan Leike",
-			"author_description": "Former co-lead of the Superalignment project at OpenAI",
-			"padding": ""
-		},
-		{
-			"background": "hinton",
-			"color": "white",
-			"text": "The research question is: how do you prevent them from ever wanting to take control? And nobody knows the answer [...] The alarm bell I’m ringing has to do with the existential threat of them taking control [...] If you take the existential risk seriously, as I now do, **it might be quite sensible to just stop developing these things any further** [...] it’s as if aliens had landed and people haven’t realized because they speak very good English",
-			"author": "Geoffrey Hinton",
-			"author_description": "1st/3rd most cited scientist ever, Godfather of modern AI, Turing Award Recipient, resigned from Google due to ethical concerns",
-			"padding": "4rem",
-			"notice": "“RCZ_1437” by collision.conf. Modified and licensed under CC BY 2.0."
-		},
-		{
-			"background": "bengio",
-			"color": "black",
-			"text": "It's very hard, in terms of your ego and feeling good about what you do, to accept the idea that the thing you've been working on for decades might actually be very dangerous to humanity... I think that I didn't want to think too much about it, and that's probably the case for others [...] Rogue AI may be dangerous for the whole of humanity. **Banning powerful AI systems (say beyond the abilities of GPT-4) that are given autonomy and agency would be a good start.**",
-			"author": "Yoshua Bengio",
-			"author_description": "2nd/3rd most cited scientist ever, Godfather of modern AI, Turing Award Recipient",
-			"padding": "1rem",
-			"notice": "“File:Yoshua Bengio (36468299790)” by Jérémy Barande. Modified and licensed under CC BY-SA 2.0."
-		},
-		{
-			"background": "lecun",
-			"color": "white",
-			"text": "**There is no question that machines will become smarter than humans—in all domains** in which humans are smart—in the future. It’s a question of when and how, not a question of if.",
-			"author": "Yann LeCun",
-			"author_description": "Godfather of modern AI, Turing Award Recipient, Chief AI Scientist at Meta",
-			"padding": "2.8rem",
-			"notice": "“Yann Lecun during a conference at EPFL, Lausanne, 5 october 2018” by Alain Herzog. Modified and licensed under CC BY 4.0."
-		},
-		{
-			"background": "russell",
-			"color": "black",
-			"text": "If we pursue [our current approach], then **we will eventually lose control over the machines.**",
-			"author": "Stuart Russell",
-			"author_description": "Co-Author of the most popular AI textbook, Co-Founder of the Center for Human-Compatible AI.",
-			"padding": "",
-			"notice": "“CTBTO Science and Technology conference” by The Official CTBTO Photostream, London. Modified and licensed under CC BY 2.0."
-		},
-		{
-			"background": "carlson",
-			"color": "white",
-			"text": "It's bad to be controlled by machines. We created [machines] to help us, to make our lives better, not to take orders from them. If it's bad for people then we should strangle it in its crib, right now.",
-			"author": "Tucker Carlson",
-			"author_description": "American conservative political commentator",
-			"padding": "2.8rem",
-			"notice": "\"Tucker Carlson 2020 (cropped)\" by Gage Skidmore. Modified and licensed under CC BY 2.0."
-		},
-		{
-			"background": "old",
-			"color": "",
-			"text": "An ultraintelligent machine could design even better machines; there would then unquestionably be an 'intelligence explosion', and the intelligence of man would be left far behind. **Thus the first ultraintelligent machine is the last invention that man need ever make, provided that the machine is docile enough to tell us how to keep it under control.**",
-			"author": "I. J. Good",
-			"author_description": "Cryptologist at Bletchley Park with Alan Turing",
-			"padding": "2.8rem"
-		},
-		{
-			"background": "butler",
-			"color": "white",
-			"text": "Day by day, however, the machines are gaining ground upon us; day by day we are becoming more subservient to them... That the **time will come when the machines will hold the real supremacy over the world and its inhabitants** is what no person of a truly philosophic mind can for a moment question.",
-			"author": "Samuel Butler",
-			"author_description": "Novelist, \"Darwin among the Machines\", 1863",
-			"padding": "2.8rem"
-		},
-		{
-			"background": "tallinn",
-			"color": "white",
-			"text": "I’ve not met anyone in AI labs who says the risk [from training a next-gen model] is less than 1% of **blowing up the planet. It’s important that people know lives are being risked** [...] One thing that a pause achieves is that we will not push the Frontier, in terms of risky pre-training experiments.",
-			"author": "Jaan Tallinn",
-			"author_description": "Co-Founder of Skype, Kazaa, Future of Life Institute",
-			"padding": "2.5rem"
-		},
-		{
-			"background": "yudkowsky",
-			"color": "white",
-			"text": "I do not expect something actually smart to attack us with marching robot armies with glowing red eyes where there could be a fun movie about us fighting them. **I expect an actually smarter and uncaring entity will figure out strategies and technologies that can kill us quickly and reliably and then kill us.**",
-			"author": "Eliezer Yudkowsky",
-			"author_description": "Co-Founder of the Machine Intelligence Research Institute",
-			"padding": "2.8rem",
-			"notice": "“Eliezer Yudkowsky, Stanford 2006 (square crop)” by Roland Dobbins. Modified and licensed under CC BY-SA 2.0."
-		},
-		{
-			"background": "light_grey",
-			"color": "white",
-			"text": "Everyone should be very unhappy if you built a bunch of AIS who are like, 'I really hate these humans but they will murder me if I don't do what they want'. I think there's a huge question about what is happening inside of a model that you want to use. **This is the kind of thing that is both horrifying from a safety perspective and also a moral perspective.**",
-			"author": "Paul Christiano",
-			"author_description": "Head of AI Safety at US AI Safety Institute, Founder of the Alignment Research Center and Former Head of the Alignment Team at OpenAI",
-			"padding": "2.8rem"
-		},
-		{
-			"background": "dark_grey",
-			"color": "white",
-			"text": "Could we solve this problem? Create AI that empowers us rather than disempowering? [...] **Yes! It is possible! But, it is not what happens by default!**",
-			"author": "Connor Leahy",
-			"author_description": "Hacker, CEO ConjectureAI, Ex-Head of EleutherAI",
-			"padding": "2.8rem"
-		}
-	]
+  "quotes": [
+    {
+      "background": "summit_declaration",
+      "color": "white",
+      "text": "[About frontier AI:] Substantial risks may arise from potential intentional misuse or unintended issues of control relating to alignment with human intent. These issues are in part because those capabilities are not fully understood [...] There is potential for **serious, even catastrophic, harm, either deliberate or unintentional**, stemming from the most significant capabilities of these AI models.",
+      "author": "The Bletchley Declaration,",
+      "author_description": "signed by 28 countries, including all AI leaders, and the EU.",
+      "source": "https://www.gov.uk/government/publications/ai-safety-summit-2023-the-bletchley-declaration/the-bletchley-declaration-by-countries-attending-the-ai-safety-summit-1-2-november-2023",
+      "padding": "2rem"
+    },
+    {
+      "background": "cais_statement",
+      "color": "white",
+      "text": "**Mitigating the risk of extinction from AI should be a global priority alongside other societal-scale risks such as pandemics and nuclear war.**",
+      "author": "Statement on AI risk,",
+      "author_description": "signed by hundreds of AI experts and other notable figures. Including three of the most cited scientists ever and top people from all the top AI labs. Endorsed by the UK Prime Minister and the EU President.",
+      "source": "https://www.theguardian.com/technology/2023/may/30/risk-of-extinction-by-ai-should-be-global-priority-say-tech-experts",
+      "padding": "3rem"
+    },
+    {
+      "background": "fli_letter",
+      "color": "white",
+      "text": "**We call on all AI labs to immediately pause for at least 6 months the training of AI systems more powerful than GPT-4.**",
+      "author": "Pause Giant AI Experiments letter",
+      "author_description": "signed by 30,000+ people, including academic AI researchers and industry CEOs. Note that this is different from our ask, which is an indefinite pause.",
+      "source": "https://www.wired.com/story/chatgpt-pause-ai-experiments-open-letter/",
+      "padding": "",
+      "notice": "“Steve Wozniak speaking at an event in Paradise Valley, Arizona.” by Gage Skidmore. Modified and licensed under CC BY-SA 3.0."
+    },
+    {
+      "background": "hawking",
+      "color": "",
+      "text": "**The development of full artificial intelligence could spell the end of the human race** [...] It would take off on its own, and re-design itself at an ever increasing rate.",
+      "author": "Stephen Hawking",
+      "author_description": "Theoretical Physicist and Cosmologist",
+      "source": "https://www.bbc.com/news/technology-30290540",
+      "padding": ""
+    },
+    {
+      "background": "trump",
+      "color": "white",
+      "text": "[...] the other thing that I think is **maybe the most dangerous thing out there** of anything, because there’s no real solution — **the AI**, as they call it.",
+      "author": "Donald Trump",
+      "author_description": "President of the United States"
+    },
+    {
+      "background": "biden",
+      "color": "white",
+      "text": "Artificial Intelligence is one of the most powerful tools of our time, but to seize its opportunities, **we must first mitigate its risks.** [...] Social media has shown us the harm that powerful technology can do without the right safeguards in place [...] we must be clear-eyed and vigilant about the threats emerging — of emerging technologies that can pose — don’t have to, but can pose — to our democracy and our values.",
+      "author": "Joe Biden",
+      "author_description": "46th President of the United States",
+      "padding": "2rem"
+    },
+    {
+      "background": "putin",
+      "color": "black",
+      "text": "Artificial intelligence is the future, not only for Russia, but for all humankind. It comes with colossal opportunities, but also threats that are difficult to predict. **Whoever becomes the leader in this sphere will become the ruler of the world** [...] If we become leaders in this area, we will share this know-how with [the] entire world, the same way we share our nuclear technologies today.",
+      "author": "Vladimir Putin",
+      "author_description": "President of Russia",
+      "padding": "2rem"
+    },
+    {
+      "background": "qiang",
+      "color": "white",
+      "text": "AI must be guided in a direction that is conducive to the progress of humanity. So **there should be a red line in AI development, a red line that must not be crossed** [...] It should not just benefit only a small group of people, but benefit the overwhelming majority of mankind [...] It is essential that we work together and coordinate with each other.",
+      "author": "Li Qiang",
+      "author_description": "Premier of China",
+      "padding": "2rem",
+      "notice": "“李强 Li Qiang 20230313 02” by China News Service. Modified and licensed under CC BY 3.0."
+    },
+    {
+      "background": "leyen",
+      "color": "white",
+      "text": "[We] **should not underestimate the real threats coming from AI** [...] It is moving faster than even its developers anticipated [...] We have a narrowing window of opportunity to guide this technology responsibly.",
+      "author": "Ursula von der Leyen",
+      "author_description": "Head of the executive branch of the European Union"
+    },
+    {
+      "background": "guterres",
+      "color": "white",
+      "text": "**AI poses a long-term global risk. Even its own designers have no idea where their breakthrough may lead.** I urge [the UN Security Council] to approach this technology with a sense of urgency [...] Its creators themselves have warned that much bigger, potentially catastrophic and existential risks lie ahead.",
+      "author": "António Guterres",
+      "author_description": "Chief Executive Officer of the United Nations",
+      "padding": "2.8rem"
+    },
+    {
+      "background": "pope",
+      "color": "black",
+      "text": "**I urge the global community of nations to work together in order to adopt a binding international treaty that regulates the development and use of artificial intelligence in its many forms** [...] [AI] may pose a risk to our survival and endanger our common home.",
+      "author": "Pope Francis",
+      "author_description": "Former head of the Catholic Church",
+      "notice": "“pope-francis-1a” by ThiênLong. Modified and licensed under CC BY-SA 2.0."
+    },
+    {
+      "background": "sunak",
+      "color": "black",
+      "text": "Get this wrong, and AI could make it easier to build chemical or biological weapons. Terrorist groups could use AI to spread fear and destruction on an even greater scale. Criminals could exploit AI for cyber-attacks, disinformation, fraud, or even child sexual abuse. And in the most unlikely but extreme cases, there is even the risk that **humanity could lose control of AI completely** through the kind of AI sometimes referred to as ‘super intelligence’.",
+      "author": "Rishi Sunak",
+      "author_description": "United Kingdom's former Prime Minister",
+      "padding": "1.5rem"
+    },
+    {
+      "background": "harris",
+      "color": "white",
+      "text": "[...] just as AI has the potential to do profound good, it also has the potential to cause profound harm. From AI-enabled cyberattacks at a scale beyond anything we have seen before to AI-formulated bio-weapons that could endanger the lives of millions, these threats are often referred to as the “existential threats of AI” because, of course, they **could endanger the very existence of humanity. These threats, without question, are profound, and they demand global action.**",
+      "author": "Kamala Harris",
+      "author_description": "Former Vice President of the United States"
+    },
+    {
+      "background": "jun",
+      "color": "black",
+      "text": "The potential impact of AI might exceed human cognitive boundaries. To ensure that this technology always benefits humanity, we must regulate the development of AI and prevent this technology from turning into a runaway wild horse [...] We need to strengthen the detection and evaluation of the entire lifecycle of AI, **ensuring that mankind has the ability to press the pause button at critical moments.**",
+      "author": "Zhang Jun",
+      "author_description": "China's Ambassador of the United Nations",
+      "padding": "1.5rem",
+      "notice": "“Zhang Jun (2022-06-08)” by 中国新闻社. Modified and licensed under CC BY 3.0."
+    },
+    {
+      "background": "turing",
+      "color": "",
+      "text": "It seems probable that once the machine thinking method had started, it would not take long to outstrip our feeble powers… They would be able to converse with each other to sharpen their wits. **At some stage therefore, we should have to expect the machines to take control.**",
+      "author": "Alan Turing",
+      "author_description": "Father of Computer Science and Artificial Intelligence"
+    },
+    {
+      "background": "musk",
+      "color": "white",
+      "text": "AI is a rare case where I think **we need to be proactive in regulation than be reactive** [...] I think that [digital super intelligence] is the single biggest existential crisis that we face and the most pressing one. It needs to be a **public body that has insight and then oversight to confirm that everyone is developing AI safely** [...] And mark my words, AI is far more dangerous than nukes. Far. So why do we have no regulatory oversight? **This is insane.**",
+      "author": "Elon Musk",
+      "author_description": "Founder/ Co-Founder of OpenAI, Neuralink, SpaceX, xAI, PayPal, CEO of Tesla, CTO of X/ Twitter",
+      "padding": "1.8rem"
+    },
+    {
+      "background": "gates",
+      "color": "black",
+      "text": "Superintelligent AIs are in our future. [...] **There’s the possibility that AIs will run out of control.** [Possibly,] a machine could decide that humans are a threat, conclude that its interests are different from ours, or simply stop caring about us.",
+      "author": "Bill Gates",
+      "author_description": "Co-Founder of Microsoft",
+      "padding": "2rem"
+    },
+    {
+      "background": "altman",
+      "color": "black",
+      "text": "[Suggesting about how to ask for a global regulatory body:] “any compute cluster above a certain extremely high-power threshold – and given the cost here, we’re talking maybe five in the world, something like that – any cluster like that **has to submit to the equivalent of international weapons inspectors**” […] I did a big trip around the world this year, and talked to heads of state in many of the countries that would need to participate in this, and **there was almost universal support for it.**",
+      "author": "Sam Altman",
+      "author_description": "Co-Founder and CEO of OpenAI, Former President of Y Combinator",
+      "padding": "1rem",
+      "notice": "“Disrupt SF TechCrunch Disrupt San Francisco 2019 - Day 2 (48838377432)” by TechCrunch. Modified and licensed under CC BY 2.0."
+    },
+    {
+      "background": "hassabis",
+      "color": "black",
+      "text": "**We must take the risks of AI as seriously as other major global challenges**, like climate change. It took the international community too long to coordinate an effective global response to this, and we’re living with the consequences of that now. We can’t afford the same delay with AI [...] then maybe there’s some kind of equivalent one day of the IAEA, which actually audits these things.",
+      "author": "Demis Hassabis",
+      "author_description": "Co-Founder and CEO of DeepMind",
+      "padding": "2rem",
+      "notice": "“File:PhotonQ-Demis Hassabis on Artificial Playful Intelligence (15366514658) (2)” by PhOtOnQuAnTiQuE from Earth France. Modified and licensed under CC BY-SA 2.0."
+    },
+    {
+      "background": "amodei",
+      "color": "white",
+      "text": "When I think of why am I scared [...] I think the thing that's really hard to argue with is like, there will be powerful models; they will be agentic; we're getting towards them. If such a model wanted to wreak havoc and destroy humanity or whatever, I think **we have basically no ability to stop it.**",
+      "author": "Dario Amodei",
+      "author_description": "Co-Founder and CEO of Anthropic, Former Head of AI Safety at OpenAI",
+      "padding": "2rem",
+      "source": "https://www.dwarkeshpatel.com/p/dario-amodei",
+      "notice": "“TechCrunch Disrupt 2023 - Day 2” by TechCrunch. Modified and licensed under CC BY 2.0."
+    },
+    {
+      "background": "suleyman",
+      "color": "white",
+      "text": "[About a Pause] I don’t rule it out. And I think that **at some point over the next five years or so, we’re going to have to consider that question very seriously.**",
+      "author": "Mustafa Suleyman",
+      "author_description": "CEO of Microsoft AI, Co-Founder of DeepMind",
+      "padding": "",
+      "notice": "“POZ_0446” by collision.conf. Modified and licensed under CC BY 2.0."
+    },
+    {
+      "background": "dark_grey",
+      "color": "white",
+      "text": "The future is going to be good for the AIs regardless; it would be nice if it would be good for humans as well [...] It’s not that it’s going to actively hate humans and want to harm them, but it’s just going to be too powerful, and I think **a good analogy would be the way humans treat animals [...] And I think by default that’s the kind of relationship that’s going to be between us and AGIs** which are truly autonomous and operating on their own behalf.",
+      "author": "Ilya Sutskever",
+      "author_description": "One of the most cited scientists ever because his contributions to the field of modern AI, Co-Founder and Former Chief Scientist at OpenAI",
+      "padding": ""
+    },
+    {
+      "background": "brockman",
+      "color": "black",
+      "text": "The exact way the post-AGI world will look is hard to predict — that world will likely be more different from today’s world than today’s is from the 1500s [...] **We do not yet know how hard it will be to make sure AGIs act according to the values of their operators.** Some people believe it will be easy; some people believe it’ll be unimaginably difficult; but no one knows for sure",
+      "author": "Greg Brockman",
+      "author_description": "Co-Founder and Former CTO of OpenAI",
+      "padding": "",
+      "notice": "“TechCrunch Disrupt San Francisco 2019 - Day 2” by TechCrunch. Modified and licensed under CC BY 2.0."
+    },
+    {
+      "background": "light_grey",
+      "color": "black",
+      "text": "[Talking about times near the creation of the first AGI] you have the race dynamics where everyone's trying to stay ahead, and that might require compromising on safety. So I think you would probably need some coordination among the larger entities that are doing this kind of training [...] **Pause either further training, or pause deployment**, or avoiding certain types of training that we think might be riskier.",
+      "author": "John Schulman",
+      "author_description": "Co-Founder of OpenAI",
+      "padding": ""
+    },
+    {
+      "background": "dark_grey",
+      "color": "white",
+      "text": "Do possible risks from AI outweigh **other possible existential risks…? It's my number 1 risk for this century** [...] A lack of concrete AGI projects is not what worries me, it's the lack of concrete plans on how to keep these safe that worries me.",
+      "author": "Shane Legg",
+      "author_description": "Co-Founder and Chief AGI Scientist at DeepMind",
+      "padding": ""
+    },
+    {
+      "background": "light_grey",
+      "color": "black",
+      "text": "[After resigning at OpenAI, talking about sources of risks] These problems are quite hard to get right, and I am concerned **we aren't on a trajectory to get there** [...] OpenAI is shouldering an enormous responsibility on behalf of all of humanity. But over the past years, safety culture and processes have taken a backseat to shiny products. We are long overdue in getting incredibly serious about the implications of AGI.",
+      "author": "Jan Leike",
+      "author_description": "Former co-lead of the Superalignment project at OpenAI",
+      "padding": ""
+    },
+    {
+      "background": "hinton",
+      "color": "white",
+      "text": "The research question is: how do you prevent them from ever wanting to take control? And nobody knows the answer [...] The alarm bell I’m ringing has to do with the existential threat of them taking control [...] If you take the existential risk seriously, as I now do, **it might be quite sensible to just stop developing these things any further** [...] it’s as if aliens had landed and people haven’t realized because they speak very good English",
+      "author": "Geoffrey Hinton",
+      "author_description": "1st/3rd most cited scientist ever, Godfather of modern AI, Turing Award Recipient, resigned from Google due to ethical concerns",
+      "padding": "4rem",
+      "notice": "“RCZ_1437” by collision.conf. Modified and licensed under CC BY 2.0."
+    },
+    {
+      "background": "bengio",
+      "color": "black",
+      "text": "It's very hard, in terms of your ego and feeling good about what you do, to accept the idea that the thing you've been working on for decades might actually be very dangerous to humanity... I think that I didn't want to think too much about it, and that's probably the case for others [...] Rogue AI may be dangerous for the whole of humanity. **Banning powerful AI systems (say beyond the abilities of GPT-4) that are given autonomy and agency would be a good start.**",
+      "author": "Yoshua Bengio",
+      "author_description": "2nd/3rd most cited scientist ever, Godfather of modern AI, Turing Award Recipient",
+      "padding": "1rem",
+      "notice": "“File:Yoshua Bengio (36468299790)” by Jérémy Barande. Modified and licensed under CC BY-SA 2.0."
+    },
+    {
+      "background": "lecun",
+      "color": "white",
+      "text": "**There is no question that machines will become smarter than humans—in all domains** in which humans are smart—in the future. It’s a question of when and how, not a question of if.",
+      "author": "Yann LeCun",
+      "author_description": "Godfather of modern AI, Turing Award Recipient, Chief AI Scientist at Meta",
+      "padding": "2.8rem",
+      "notice": "“Yann Lecun during a conference at EPFL, Lausanne, 5 october 2018” by Alain Herzog. Modified and licensed under CC BY 4.0."
+    },
+    {
+      "background": "russell",
+      "color": "black",
+      "text": "If we pursue [our current approach], then **we will eventually lose control over the machines.**",
+      "author": "Stuart Russell",
+      "author_description": "Co-Author of the most popular AI textbook, Co-Founder of the Center for Human-Compatible AI.",
+      "padding": "",
+      "notice": "“CTBTO Science and Technology conference” by The Official CTBTO Photostream, London. Modified and licensed under CC BY 2.0."
+    },
+    {
+      "background": "carlson",
+      "color": "white",
+      "text": "It's bad to be controlled by machines. We created [machines] to help us, to make our lives better, not to take orders from them. If it's bad for people then we should strangle it in its crib, right now.",
+      "author": "Tucker Carlson",
+      "author_description": "American conservative political commentator",
+      "padding": "2.8rem",
+      "notice": "\"Tucker Carlson 2020 (cropped)\" by Gage Skidmore. Modified and licensed under CC BY 2.0."
+    },
+    {
+      "background": "old",
+      "color": "",
+      "text": "An ultraintelligent machine could design even better machines; there would then unquestionably be an 'intelligence explosion', and the intelligence of man would be left far behind. **Thus the first ultraintelligent machine is the last invention that man need ever make, provided that the machine is docile enough to tell us how to keep it under control.**",
+      "author": "I. J. Good",
+      "author_description": "Cryptologist at Bletchley Park with Alan Turing",
+      "padding": "2.8rem"
+    },
+    {
+      "background": "butler",
+      "color": "white",
+      "text": "Day by day, however, the machines are gaining ground upon us; day by day we are becoming more subservient to them... That the **time will come when the machines will hold the real supremacy over the world and its inhabitants** is what no person of a truly philosophic mind can for a moment question.",
+      "author": "Samuel Butler",
+      "author_description": "Novelist, \"Darwin among the Machines\", 1863",
+      "padding": "2.8rem"
+    },
+    {
+      "background": "tallinn",
+      "color": "white",
+      "text": "I’ve not met anyone in AI labs who says the risk [from training a next-gen model] is less than 1% of **blowing up the planet. It’s important that people know lives are being risked** [...] One thing that a pause achieves is that we will not push the Frontier, in terms of risky pre-training experiments.",
+      "author": "Jaan Tallinn",
+      "author_description": "Co-Founder of Skype, Kazaa, Future of Life Institute",
+      "padding": "2.5rem"
+    },
+    {
+      "background": "yudkowsky",
+      "color": "white",
+      "text": "I do not expect something actually smart to attack us with marching robot armies with glowing red eyes where there could be a fun movie about us fighting them. **I expect an actually smarter and uncaring entity will figure out strategies and technologies that can kill us quickly and reliably and then kill us.**",
+      "author": "Eliezer Yudkowsky",
+      "author_description": "Co-Founder of the Machine Intelligence Research Institute",
+      "padding": "2.8rem",
+      "notice": "“Eliezer Yudkowsky, Stanford 2006 (square crop)” by Roland Dobbins. Modified and licensed under CC BY-SA 2.0."
+    },
+    {
+      "background": "light_grey",
+      "color": "white",
+      "text": "Everyone should be very unhappy if you built a bunch of AIS who are like, 'I really hate these humans but they will murder me if I don't do what they want'. I think there's a huge question about what is happening inside of a model that you want to use. **This is the kind of thing that is both horrifying from a safety perspective and also a moral perspective.**",
+      "author": "Paul Christiano",
+      "author_description": "Head of AI Safety at US AI Safety Institute, Founder of the Alignment Research Center and Former Head of the Alignment Team at OpenAI",
+      "padding": "2.8rem"
+    },
+    {
+      "background": "dark_grey",
+      "color": "white",
+      "text": "Could we solve this problem? Create AI that empowers us rather than disempowering? [...] **Yes! It is possible! But, it is not what happens by default!**",
+      "author": "Connor Leahy",
+      "author_description": "Hacker, CEO ConjectureAI, Ex-Head of EleutherAI",
+      "padding": "2.8rem"
+    }
+  ]
 }
