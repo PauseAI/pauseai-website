@@ -8,6 +8,8 @@ A SvelteKit website for [PauseAI.info](https://pauseai.info/) with automatic loc
 
 Localization goes beyond simple translation — it adapts content for specific locales (e.g., `en`, `de`, sometimes more complicated combinations such as `en-US` or `fr-CA`). While translating text between languages is a major part of l10n, true localization also considers cultural context, regional preferences, and local conventions. This project can use LLMs to automatically generate locale-appropriate content.
 
+If you are not yourself developing/changing the l10n system, you can let it run automatically.
+
 ## Quick Start
 
 ```bash
@@ -40,25 +42,19 @@ That's it! By default, all commands run in English-only mode for maximum speed. 
 | `pnpm l10n`    | Run l10n manually (see [L10N.md](./L10N.md)) |
 | `pnpm netlify` | Show Netlify preview options                 |
 
-**Note**: All commands default to English-only mode unless you configure multiple locales in `.env`.
+## Environment Setup - for l10n and some dynamic pages
 
-## Environment Setup
+To make some development choices, including seeing dynamic pages or l10ns locally, you'll have to set up your development environment.
 
-For dynamic features and l10n development:
+- But **no `.env` is needed** for basic development
+- **Dynamic content** (teams, chat, geo, email validation, write features) needs API keys but has fallbacks
+- **Multiple locales** needs `PARAGLIDE_LOCALES` set, while **developing the l10n system itself** usually also needs an OpenRouter API key
 
+Just start by copying the environment template. Comments in the template explain more about each option.
 ```bash
 cp template.env .env
-# Edit .env to add API keys and configure locales
+# then edit .env to add API keys and configure locales if required
 ```
-
-See `template.env` for detailed documentation of each variable:
-
-- **No `.env` needed** for basic development
-- **Dynamic content** (teams, chat, write features) needs API keys but has fallbacks
-- **Multiple locales** needs `PARAGLIDE_LOCALES` configuration
-- **L10n development** also needs OpenRouter API key
-
-For comprehensive l10n documentation, see [L10N.md](./L10N.md).
 
 ## Creating Articles
 
@@ -90,22 +86,6 @@ You can create and edit most content using [Decap CMS](https://pauseai-cms.netli
 The article (and automatic l10ns of same) will be previewable.
 
 If you are sufficiently changing prominent text, consider inspecting relevant l10ns as well as the original.
-
-## Working with locales and other features
-
-To make some development choices, including seeing dynamic pages or l10ns, you'll have to set up your development environment.
-
-Start by copying the environment template.
-
-```bash
-cp template.env .env
-```
-
-The setup script and copied template explain more.
-
-Briefly, some dynamic pages need API keys for service calls, and website l10n requires more opting in.
-
-For l10n-specific setup and development, see [L10N.md](./L10N.md).
 
 ## Deployment
 
