@@ -14,6 +14,8 @@
 
 	export let href: string
 	export let target: string | null = null
+	let className: string = ''
+	export { className as class }
 
 	const ICON_PROPS = { size: '0.8em' }
 
@@ -62,7 +64,7 @@
 	})
 </script>
 
-<a {href} {target} bind:this={anchor}>
+<a {href} {target} class={className} bind:this={anchor}>
 	<slot />{#if type != Type.Internal}
 		<span style="white-space: nowrap">
 			<div class="icon">
