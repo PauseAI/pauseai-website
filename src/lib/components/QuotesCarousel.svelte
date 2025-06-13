@@ -18,6 +18,7 @@
 	import '@glidejs/glide/dist/css/glide.core.css'
 	import { onMount } from 'svelte'
 	import * as m from '$lib/paraglide/messages'
+	import Link from '$lib/components/custom/a.svelte'
 
 	const MOBILE_NAVIGATION_DISTANCE_THRESHOLD = 10
 	const AUTOPLAY_INTERVAL = 10_000
@@ -133,7 +134,7 @@
 			<button class="dot reset-button" class:active={currentSlide === i} data-glide-dir={`=${i}`} />
 		{/each}
 		<button class="nav-button" data-glide-dir=">"><ArrowRight size="1em" /></button>
-		<a href="/quotes">{m.home_quotes_all()}</a>
+		<Link href="/quotes">{m.home_quotes_all()}</Link>
 	</div>
 </div>
 
@@ -175,13 +176,13 @@
 		margin-top: 1rem;
 	}
 
-	.navigation a {
+	.navigation :global(a) {
 		color: var(--brand);
 		font-size: 0.875rem;
 		text-decoration: none;
 	}
 
-	.navigation a:hover {
+	.navigation :global(a:hover) {
 		color: var(--brand-subtle);
 	}
 

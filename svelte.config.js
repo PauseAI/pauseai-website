@@ -11,6 +11,9 @@ import rehypeSlug from 'rehype-slug'
 
 import { locales } from './src/lib/paraglide/runtime.js'
 
+// Export configuration flags for use in build scripts
+export const USE_EDGE_FUNCTIONS = true
+
 /** @type {import('mdsvex').MdsvexOptions} */
 const mdsvexOptions = {
 	extensions: ['.md'],
@@ -49,7 +52,7 @@ const config = {
 	kit: {
 		adapter: adapterPatchPrerendered(
 			adapterNetlify({
-				edge: true
+				edge: USE_EDGE_FUNCTIONS
 			})
 		),
 		alias: {

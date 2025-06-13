@@ -4,6 +4,7 @@
 	import Mail from 'lucide-svelte/icons/mail'
 	import { page } from '$app/stores'
 	import { pushState } from '$app/navigation'
+	import { localizeHref, locales } from '$lib/paraglide/runtime'
 
 	enum Type {
 		Internal,
@@ -19,12 +20,30 @@
 	let type = Type.Internal
 	let anchor: HTMLAnchorElement
 
+	// Localization helpers
+	const localePattern = new RegExp(`^/(${locales.join('|')})(\/|$)`)
+	const shouldLocalizeHref = (h: string) =>
+		type === Type.Internal &&
+		h.startsWith('/') &&
+		!h.match(localePattern) &&
+		!h.includes('#no-localize')
+
+	const processHref = (h: string) => {
+		const cleaned = h.replace('#no-localize', '')
+		return shouldLocalizeHref(h) ? localizeHref(cleaned) : cleaned
+	}
+
+	// Normalize and localize href
+	if (typeof href !== 'string') href = ''
+
 	if (
 		(href.startsWith('http:') || href.startsWith('https:')) &&
 		!href.startsWith('https://pauseai.info/')
 	)
 		type = Type.External
 	else if (href.startsWith('mailto:')) type = Type.Mail
+
+	href = processHref(href)
 
 	onMount(() => {
 		if (href.startsWith('#')) {
