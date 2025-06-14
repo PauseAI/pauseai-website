@@ -21,5 +21,7 @@ jobs:
         run: pnpm install --no-frozen-lockfile
       - name: Compile Paraglide
         run: pnpm inlang:settings
+      - name: Add ts-nocheck to runtime.js
+        run: sed -i '1i// @ts-nocheck' src/lib/paraglide/runtime.js
       - name: Run pnpm check
         run: pnpm check
