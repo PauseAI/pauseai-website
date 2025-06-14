@@ -12,77 +12,88 @@
 import { spawn } from 'child_process'
 import readline from 'readline'
 
-// Default to running build:dev if no command provided
-const buildCommand = process.argv[2] || 'npm run build:dev'
+// Check if --verbose is anywhere in the command line
+const hasVerbose = process.argv.includes('--verbose')
 
-// Split the command into program and args
-const [program, ...args] = buildCommand.split(' ')
+if (hasVerbose) {
+	// Just run the command with no filtering
+	const buildCommand = process.argv[2]
+	const [program, ...args] = buildCommand.split(' ')
+	const build = spawn(program, args, { shell: true, stdio: 'inherit' })
+	build.on('exit', (code) => process.exit(code))
+} else {
+	// Default to running build:dev if no command provided
+	const buildCommand = process.argv[2] || 'npm run build:dev'
 
-// Stats counters
-let clientChunks = 0
-let serverChunks = 0
-let clientSize = 0
-let serverSize = 0
+	// Split the command into program and args
+	const [program, ...args] = buildCommand.split(' ')
 
-// Chunk pattern - match svelte-kit output chunks with size info
-const chunkPattern = /\.svelte-kit\/output\/(client|server)\/.*\s+(\d+\.\d+)\s+kB/
+	// Stats counters
+	let clientChunks = 0
+	let serverChunks = 0
+	let clientSize = 0
+	let serverSize = 0
 
-// Start the build process
-const build = spawn(program, args, { shell: true, stdio: ['inherit', 'pipe', 'inherit'] })
+	// Chunk pattern - match svelte-kit output chunks with size info
+	const chunkPattern = /\.svelte-kit\/output\/(client|server)\/.*\s+(\d+\.\d+)\s+kB/
 
-// Create a readline interface to process the output line by line
-const rl = readline.createInterface({
-	input: build.stdout,
-	crlfDelay: Infinity
-})
+	// Start the build process
+	const build = spawn(program, args, { shell: true, stdio: ['inherit', 'pipe', 'inherit'] })
 
-// Process each line
-rl.on('line', (line) => {
-	// Check if this is a chunk line
-	const chunkMatch = chunkPattern.exec(line)
-	if (chunkMatch) {
-		// This is a chunk line - extract information but don't print it
-		const [_, type, sizeStr] = chunkMatch
-		const size = parseFloat(sizeStr)
+	// Create a readline interface to process the output line by line
+	const rl = readline.createInterface({
+		input: build.stdout,
+		crlfDelay: Infinity
+	})
 
-		// Classify chunks solely based on their paths
-		if (type === 'client') {
-			clientChunks++
-			clientSize += size
-		} else if (type === 'server') {
-			serverChunks++
-			serverSize += size
+	// Process each line
+	rl.on('line', (line) => {
+		// Check if this is a chunk line
+		const chunkMatch = chunkPattern.exec(line)
+		if (chunkMatch) {
+			// This is a chunk line - extract information but don't print it
+			const [_, type, sizeStr] = chunkMatch
+			const size = parseFloat(sizeStr)
+
+			// Classify chunks solely based on their paths
+			if (type === 'client') {
+				clientChunks++
+				clientSize += size
+			} else if (type === 'server') {
+				serverChunks++
+				serverSize += size
+			}
+
+			// Don't output the chunk line
+			return
 		}
 
-		// Don't output the chunk line
-		return
-	}
+		// Pass through all other lines
+		console.log(line)
+	})
 
-	// Pass through all other lines
-	console.log(line)
-})
+	// Print the final summary when the process exits
+	build.on('exit', (code) => {
+		// Print the complete build summary
+		if (clientChunks > 0 || serverChunks > 0) {
+			console.log(`\n📊 Complete build summary:`)
 
-// Print the final summary when the process exits
-build.on('exit', (code) => {
-	// Print the complete build summary
-	if (clientChunks > 0 || serverChunks > 0) {
-		console.log(`\n📊 Complete build summary:`)
+			if (clientChunks > 0) {
+				console.log(`   Client: ${clientChunks} chunks (${clientSize.toFixed(2)} kB)`)
+			}
 
-		if (clientChunks > 0) {
-			console.log(`   Client: ${clientChunks} chunks (${clientSize.toFixed(2)} kB)`)
+			if (serverChunks > 0) {
+				console.log(`   Server: ${serverChunks} chunks (${serverSize.toFixed(2)} kB)`)
+			}
+
+			if (clientChunks > 0 && serverChunks > 0) {
+				console.log(
+					`   Total: ${clientChunks + serverChunks} chunks (${(clientSize + serverSize).toFixed(2)} kB)`
+				)
+			}
 		}
 
-		if (serverChunks > 0) {
-			console.log(`   Server: ${serverChunks} chunks (${serverSize.toFixed(2)} kB)`)
-		}
-
-		if (clientChunks > 0 && serverChunks > 0) {
-			console.log(
-				`   Total: ${clientChunks + serverChunks} chunks (${(clientSize + serverSize).toFixed(2)} kB)`
-			)
-		}
-	}
-
-	console.log(`\n🏁 Build process completed with code ${code}`)
-	process.exit(code)
-})
+		console.log(`\n🏁 Build process completed with code ${code}`)
+		process.exit(code)
+	})
+}

@@ -1,5 +1,5 @@
 /**
- * Utility functions for translation operations
+ * Utility functions for l10n operations
  */
 
 import fs from 'fs/promises'
@@ -32,7 +32,7 @@ export const PREPROCESSING_COMMENT_AFTER_PATTERN: PatternCommentPair[] = [
 	},
 	{
 		pattern: /\]\(#[a-z0-9-_.]+\)/g,
-		comment: `don't translate target, only label`
+		comment: `don't localize target, only label`
 	}
 ]
 
@@ -178,27 +178,26 @@ export function preprocessMarkdown(source: string): string {
 }
 
 /**
- * Postprocesses translated markdown content by optionally adding heading IDs.
- * It compares the headings in the source and the translated content and appends a generated ID to each heading.
+ * Postprocesses localized markdown content by optionally adding heading IDs.
+ * It compares the headings in the source and the localized content and appends a generated ID to each heading.
  *
  * @param source - The original markdown content.
- * @param translation - The translated markdown content before postprocessing.
+ * @param l10n - The localized markdown content before postprocessing.
  * @returns The postprocessed markdown content with heading IDs.
- * @throws {Error} If the number of headings in the translation does not match those in the source.
+ * @throws {Error} If the number of headings in the l10n does not match those in the source.
  */
-export function postprocessMarkdown(source: string, translation: string): string {
+export function postprocessMarkdown(source: string, l10n: string): string {
 	const slugger = new GithubSlugger()
-	let processed = translation
+	let processed = l10n
 
 	if (MARKDOWN_CONFIG.POSTPROCESSING_ADD_HEADING_IDS) {
 		const REGEX_HEADING = /^#+ (.*)/gm
 		const headingsInSource = Array.from(source.matchAll(REGEX_HEADING))
 		if (headingsInSource.length > 0) {
 			let i = 0
-			processed = translation.replace(REGEX_HEADING, (_match) => {
+			processed = l10n.replace(REGEX_HEADING, (_match) => {
 				const sourceResult = headingsInSource[i]
-				if (!sourceResult)
-					throw new Error(`Different heading count in translation:\n\n${translation}`)
+				if (!sourceResult) throw new Error(`Different heading count in l10n:\n\n${l10n}`)
 				const headingInSource = sourceResult[1]
 				const stripped = removeMarkdown(headingInSource)
 				const slugged = slugger.slug(stripped)
@@ -232,8 +231,34 @@ export function extractWebPath(localPath: string): string {
  * @param filePath - Target file path
  * @param content - Content to write to the file
  */
-export async function writeFileWithDir(filePath: string, content: string): Promise<void> {
+export async function placeInCage(filePath: string, content: string): Promise<void> {
 	const dir = path.dirname(filePath)
 	await fs.mkdir(dir, { recursive: true })
 	fsSync.writeFileSync(filePath, content)
+}
+
+/**
+ * Cleans up potential LLM commentary in l10n JSON files
+ * Strips anything before the first '{' and after the last '}'
+ *
+ * @param filePath - Path to the JSON file to clean
+ * @param verbose - Whether to output verbose logs
+ */
+export function cullCommentary(filePath: string, verbose = false): boolean {
+	try {
+		const content = fsSync.readFileSync(filePath, 'utf-8')
+		const firstBrace = content.indexOf('{')
+		const lastBrace = content.lastIndexOf('}')
+
+		if (firstBrace === -1 || lastBrace === -1) throw new Error('No JSON object found in file')
+
+		const jsonContent = content.substring(firstBrace, lastBrace + 1)
+		JSON.parse(jsonContent) // checks validity
+		if (jsonContent === content) return
+		fsSync.writeFileSync(filePath, jsonContent, 'utf-8')
+
+		if (verbose) console.log(`✅ Culled LLM commentary in ${filePath}`)
+	} catch (error) {
+		console.error(`Error cleaning up file ${filePath}:`, error.message)
+	}
 }

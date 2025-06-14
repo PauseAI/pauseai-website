@@ -13,7 +13,7 @@ export default {
 		'https://cdn.jsdelivr.net/npm/@inlang/plugin-paraglide-js-adapter@latest/dist/index.js'
 	],
 	'plugin.inlang.messageFormat': {
-		pathPattern: './messages/{locale}.json'
+		pathPattern: './l10n-cage/json/{locale}.json'
 	},
 	'plugin.paraglide-js-adapter': {
 		routing: {

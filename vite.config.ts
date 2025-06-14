@@ -36,7 +36,11 @@ export default defineConfig(({ command, mode }) => {
 		},
 
 		server: {
-			port: 37572
+			port: 37572,
+			fs: {
+				// Allow serving files from l10n-cage directory
+				allow: [MARKDOWN_L10NS]
+			}
 		},
 
 		// Improve build performance and reduce log output
