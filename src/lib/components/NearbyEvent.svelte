@@ -45,7 +45,8 @@
 
 {#if nearbyEvent}
 	<Banner {contrast}>
-		Next up in your area: <ExternalLink href={'https://lu.ma/' + nearbyEvent.url}
+		Next up in your area: <ExternalLink
+			href={'https://lu.ma/' + nearbyEvent.url + '?utm_source=local-banner'}
 			>{nearbyEvent.name}</ExternalLink
 		> on {FORMAT.format(new Date(nearbyEvent.start_at))}
 	</Banner>
