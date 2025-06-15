@@ -22,6 +22,7 @@ const fallbackNationalGroups: NationalGroup[] = [
 		linktreeLink: '',
 		instagramLink: '',
 		tiktokLink: '',
+		facebookLink: '',
 		public: true
 	},
 	{
@@ -40,6 +41,7 @@ const fallbackNationalGroups: NationalGroup[] = [
 		linktreeLink: '',
 		instagramLink: '',
 		tiktokLink: '',
+		facebookLink: '',
 		public: true
 	}
 ]

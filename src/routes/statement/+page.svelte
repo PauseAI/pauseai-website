@@ -1,8 +1,9 @@
 <script lang="ts">
-	import { onMount } from 'svelte'
 	import PostMeta from '$lib/components/PostMeta.svelte'
+	import TallyEmbed from '$lib/components/TallyEmbed.svelte'
 	import { meta } from './meta'
 	import Signatory from './signatory.svelte'
+
 	export let data
 
 	const { signatories, totalCount } = data
@@ -24,31 +25,6 @@
 	const milestones = [25, 50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 1000, 1500]
 	// Find the next milestone goal
 	const nextGoal = milestones.find((goal) => totalCount < goal) || milestones[milestones.length - 1]
-
-	// Load Tally script after component mounts
-	onMount(() => {
-		const d = document
-		const w = 'https://tally.so/widgets/embed.js'
-		const v = function () {
-			if (typeof window.Tally !== 'undefined') {
-				window.Tally.loadEmbeds()
-			} else {
-				d.querySelectorAll('iframe[data-tally-src]:not([src])').forEach((e) => {
-					e.src = e.dataset.tallySrc
-				})
-			}
-		}
-
-		if (typeof window.Tally !== 'undefined') {
-			v()
-		} else if (d.querySelector(`script[src="${w}"]`) === null) {
-			const s = d.createElement('script')
-			s.src = w
-			s.onload = v
-			s.onerror = v
-			d.body.appendChild(s)
-		}
-	})
 </script>
 
 <PostMeta {title} {description} {date} />
@@ -66,19 +42,7 @@
 	<p>We've collected {totalCount} signatures so far— help us reach our first {nextGoal}!</p>
 </div>
 
-<!-- Tally Form Container -->
-<div class="tally-form-container">
-	<iframe
-		data-tally-src="https://tally.so/embed/315xdg?alignLeft=1&hideTitle=1&dynamicHeight=1"
-		loading="lazy"
-		width="100%"
-		height="499"
-		frameborder="0"
-		marginheight="0"
-		marginwidth="0"
-		title="Sign the statement (verification required)"
-	></iframe>
-</div>
+<TallyEmbed formId="315xdg" />
 
 <div class="signatories-header">
 	<h2>Signatories ({totalCount})</h2>
@@ -150,20 +114,6 @@
 	.signatories {
 		display: grid;
 		gap: 1rem;
-	}
-
-	/* Tally form container styling */
-	.tally-form-container {
-		margin: 2rem 0;
-		padding: 1.5rem;
-		background-color: #ffffff;
-		border: 1px solid #e5e7eb;
-		border-radius: 8px;
-		box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-	}
-
-	.tally-form-container iframe {
-		border-radius: 4px;
 	}
 
 	button {
