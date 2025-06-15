@@ -23,6 +23,5 @@ deno.lock
 /project.inlang/settings.json
 /src/lib/generated
 /src/temp
+/l10n-cage
 
-# Environment-specific cache files
-/.inlang-settings-cache.json

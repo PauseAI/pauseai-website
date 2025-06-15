@@ -1,5 +1,5 @@
 /**
- * This file handles the dry run mode functionality for the translation process.
+ * This file handles the dry run mode functionality for the l10n process.
  * It allows cost estimation and reporting without making actual API calls.
  */
 
@@ -17,8 +17,8 @@ export const MODEL_CONFIGS = {
 		PROMPT_OVERHEAD_WORDS: 300,
 		// Markdown formatting overhead (percentage of content words)
 		MARKDOWN_OVERHEAD_PERCENT: 15,
-		// Translation quality description
-		TRANSLATION_QUALITY: 'High-quality for most language pairs; excellent with context'
+		// L10n quality description
+		L10N_QUALITY: 'High-quality for most language pairs; excellent with context'
 	}
 	// Additional models can be added here as needed
 }
@@ -27,8 +27,8 @@ export const MODEL_CONFIGS = {
 const DEFAULT_MODEL = 'meta-llama/llama-3.1-405b-instruct'
 
 // Type definitions for statistics collection
-export type TranslationStats = {
-	filesToTranslate: number
+export type Stats = {
+	l10nsToCapture: number
 	totalWordCount: number
 	contentWordCount: number
 	overheadWordCount: number
@@ -44,8 +44,8 @@ export type TranslationStats = {
 }
 
 // Initialize statistics object
-export const createDryRunStats = (): TranslationStats => ({
-	filesToTranslate: 0,
+export const createDryRunStats = (): Stats => ({
+	l10nsToCapture: 0,
 	totalWordCount: 0,
 	contentWordCount: 0,
 	overheadWordCount: 0,
@@ -64,16 +64,16 @@ function countWords(text: string): number {
 }
 
 /**
- * Track content that would be translated in dry run mode
+ * Track content that would be localized in dry run mode
  *
  * @param stats - The stats object to update
- * @param content - The content that would be translated
+ * @param content - The content that would be localized
  * @param language - The target language
  * @param filePath - Optional file path for reporting
  * @param modelName - Optional model name to use (defaults to DEFAULT_MODEL)
  */
-export function trackTranslation(
-	stats: TranslationStats,
+export function trackL10n(
+	stats: Stats,
 	content: string,
 	language: string,
 	filePath?: string,
@@ -92,8 +92,8 @@ export function trackTranslation(
 	)
 	const totalOverheadWords = promptOverheadWords + markdownOverheadWords
 
-	// Calculate total words for the translation task
-	// For two-pass translation: original content + first pass + review
+	// Calculate total words for the l10n task
+	// For two-pass l10n: original content + first pass + review
 	const firstPassWords = contentWordCount + totalOverheadWords
 	const reviewPassWords = contentWordCount + totalOverheadWords + contentWordCount
 	const totalWords = firstPassWords + reviewPassWords
@@ -120,7 +120,7 @@ export function trackTranslation(
 	stats.byLanguage[language].estimatedCost += estimatedCost
 
 	if (filePath) {
-		stats.filesToTranslate++
+		stats.l10nsToCapture++
 		stats.byLanguage[language].files.push(fileName)
 	}
 }
@@ -130,20 +130,20 @@ export function trackTranslation(
  *
  * @param stats - The statistics object
  * @param verbose - Whether to print detailed information
- * @param cacheCount - Number of cached files (not needing translation)
+ * @param cacheCount - Number of cached files (not needing l10n)
  * @param modelName - Optional model name to display (defaults to DEFAULT_MODEL)
  */
 export function printDryRunSummary(
-	stats: TranslationStats,
+	stats: Stats,
 	verbose = false,
 	cacheCount = 0,
 	modelName: string = DEFAULT_MODEL
 ): void {
 	const modelConfig = MODEL_CONFIGS[modelName] || MODEL_CONFIGS[DEFAULT_MODEL]
 
-	console.log('\n=== DRY RUN TRANSLATION SUMMARY ===')
+	console.log('\n=== DRY RUN L10N SUMMARY ===')
 	console.log(`Model: ${modelName}`)
-	console.log(`Files to translate: ${stats.filesToTranslate}`)
+	console.log(`L10ns to capture: ${stats.l10nsToCapture}`)
 	console.log(`Files using cache: ${cacheCount}`)
 
 	// Word count breakdown
@@ -151,13 +151,11 @@ export function printDryRunSummary(
 	console.log(
 		`Overhead word count: ${stats.overheadWordCount.toLocaleString()} (prompt instructions and formatting)`
 	)
-	console.log(
-		`Total word count: ${stats.totalWordCount.toLocaleString()} (includes two-pass translation)`
-	)
+	console.log(`Total word count: ${stats.totalWordCount.toLocaleString()} (includes two-pass l10n)`)
 
 	// Cost in 1000-word units
 	const wordUnits = stats.totalWordCount / 1000
-	console.log(`Translation workload: ${wordUnits.toFixed(2)} thousand-word units`)
+	console.log(`L10n workload: ${wordUnits.toFixed(2)} thousand-word units`)
 	console.log(`Estimated cost: $${stats.estimatedCost.toFixed(2)}`)
 
 	if (modelConfig.COST_PER_1000_WORDS === 0) {
@@ -173,13 +171,13 @@ export function printDryRunSummary(
 		)
 
 		if (verbose) {
-			console.log('    Files to translate:')
+			console.log('    L10ns to capture:')
 			langStats.files.forEach((file) => {
 				console.log(`      - ${file}`)
 			})
 		}
 	})
 
-	console.log('\nNote: This is a dry run - no translations were performed')
+	console.log('\nNote: This is a dry run - no l10ns were captured')
 	console.log('===================================\n')
 }
