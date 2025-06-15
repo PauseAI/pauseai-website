@@ -1,8 +1,13 @@
 import { options } from '$lib/api.js'
 import { isDev, getDevContext } from '$lib/env'
 
+type AirtableRecord = {
+	id: string
+	fields: Record<string, unknown>
+}
+
 type AirtableResponse = {
-	records: Record<string, unknown>[]
+	records: AirtableRecord[]
 	offset: number
 }
 
@@ -16,9 +21,9 @@ type AirtableResponse = {
 export async function fetchAllPages(
 	customFetch: typeof fetch,
 	url: string,
-	fallbackData: Record<string, unknown>[] = []
+	fallbackData: AirtableRecord[] = []
 ) {
-	let allRecords: Record<string, unknown>[] = []
+	let allRecords: AirtableRecord[] = []
 	// https://airtable.com/developers/web/api/list-records#query-pagesize
 	let offset
 
