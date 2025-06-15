@@ -5,6 +5,7 @@
 	"packageManager": "pnpm@9.14.4",
 	"scripts": {
 		"clean": "tsx scripts/clean.ts",
+		"inlang:settings": "tsx scripts/inlang-settings.ts",
 		"l10n": "tsx scripts/l10n/run",
 		"dev": "tsx scripts/l10n/run --dryRun && vite dev --host 0.0.0.0",
 		"build": "cross-env NODE_ENV=production node scripts/filter-build-log.js \"tsx scripts/l10n/run && vite build --emptyOutDir=false && run-s _postbuild:*\"",
