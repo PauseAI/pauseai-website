@@ -31,7 +31,7 @@ type StepName =
 	| 'finalEdit'
 
 // Define workflow types
-type WorkflowType = '1' | '2' | '3' | '4'
+type WorkflowType = '1' | '2' | '3' | '4' | '5'
 
 // NEW: Define step configuration interface for tool usage
 interface StepConfig {
