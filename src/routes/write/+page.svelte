@@ -23,12 +23,13 @@
 
 	// Use a unique localStorage key to avoid conflicts with other pages
 	const STORAGE_KEY = 'email_writer_messages'
+	// CLAUDE CHANGE: Added storage key for form data
+	const FORM_DATA_STORAGE_KEY = 'email_writer_form_data'
 
 	let messages: Message[] =
 		typeof localStorage !== 'undefined' ? JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]') : []
 
 	// Array for form
-	let input_arr = new Array<string>(35)
 	let loading = false
 	let apiAvailable = true // Default to true, will be updated after first API call
 	const maxMessages = 20
@@ -131,7 +132,7 @@
 
 	const formSections_MessageDetails: FieldSection[] = [
 		{
-			title: 'The Message',
+			title: 'Message Details',
 			subsections: [
 				{
 					title: 'Logical Structure',
@@ -184,9 +185,9 @@
 		}
 	]
 
-	// Flatten the questions array for accessing by index
+	// CLAUDE CHANGE: Fixed the population of paragraphText_MessageDetails - was incorrectly using formSections_Research
 	const paragraphText_MessageDetails: string[] = []
-	formSections_Research.forEach((section) => {
+	formSections_MessageDetails.forEach((section) => {
 		section.subsections.forEach((subsection) => {
 			subsection.questions.forEach((question) => {
 				paragraphText_MessageDetails.push(question)
@@ -229,15 +230,56 @@
 		})
 	})
 
+	// CLAUDE CHANGE: Added mapping functions to get correct arrays based on active form
+	function getCurrentInputArray(): string[] {
+		switch (activeForm) {
+			case 'form1':
+				return form1_input_arr
+			case 'form2':
+				return form2_input_arr
+			case 'form3':
+				return form3_input_arr
+			case 'form4':
+				return form4_input_arr
+			default:
+				return form2_input_arr
+		}
+	}
+
+	function getCurrentQuestionArray(): string[] {
+		switch (activeForm) {
+			case 'form1':
+				return paragraphText_Research
+			case 'form2':
+				return paragraphText_Target
+			case 'form3':
+				return paragraphText_Message
+			case 'form4':
+				return paragraphText_MessageDetails
+			default:
+				return paragraphText_Target
+		}
+	}
+
 	function clear_arr(arr: string[]) {
 		for (var i in arr) {
 			arr[i] = ''
 		}
 	}
 
+	// CLAUDE CHANGE: Updated clear function to clear current form and reset to form1
 	function clear() {
 		messages = []
 		localStorage.setItem(STORAGE_KEY, JSON.stringify(messages))
+
+		// Clear all form arrays
+		clear_arr(form1_input_arr)
+		clear_arr(form2_input_arr)
+		clear_arr(form3_input_arr)
+		clear_arr(form4_input_arr)
+
+		// Clear form data from localStorage
+		localStorage.removeItem(FORM_DATA_STORAGE_KEY)
 	}
 
 	function copy() {
@@ -249,38 +291,108 @@
 		)
 	}
 
-	// Magic test function that populates three specific fields and starts the process - for demo purposes
+	// CLAUDE CHANGE: Updated runTest to work with currently active form and provide appropriate test data
 	function runTest() {
 		// Clear any existing chat
 		clear()
 
-		// Clear all input fields
-		clear_arr(input_arr)
+		// Get current form arrays
+		const currentInputArray = getCurrentInputArray()
+		const currentQuestionArray = getCurrentQuestionArray()
 
-		// Find index for specific fields based on their question text
-		const roleAuthorityIndex = paragraphText_Target.findIndex(
-			(q) => q === 'Understanding their role and potential authority'
-		)
-		const objectiveIndex = paragraphText_Target.findIndex((q) => q === 'Concrete action requested')
-		const outcomeIndex = paragraphText_Target.findIndex((q) => q === 'Specific outcome desired')
+		// Clear current input fields
+		clear_arr(currentInputArray)
 
-		input_arr[roleAuthorityIndex] = 'You are writing for a child of about thirteen years old.'
-		input_arr[objectiveIndex] =
-			'Child understands that the current fast worldwide race to build AGI before we know how to make it safe could mean everybody dies. It sounds like science fiction, but experts are increasingly concerned. Of course the grown-ups should do something about this, but because it can be hard for them to admit to themselves that those they love could be in so much danger, then even once they hear about the problem they find reasons not to believe or act. Being sincere, kind and persistent with them that you need protecting can help everybody in the world.'
-		input_arr[outcomeIndex] =
-			"The child isn't too scared, but thinks this is a very important problem all their friends, family and teachers should know about and be actively working to solve."
+		// Provide test data based on active form
+		switch (activeForm) {
+			case 'form1':
+				// Test data for research form
+				if (currentInputArray.length > 0) {
+					currentInputArray[0] =
+						'Local city council member or school board representative who handles education policy and child safety issues. Location: California, Los Angeles.'
+				}
+				break
+
+			case 'form2':
+				// Test data for target/personal context form
+				const roleAuthorityIndex = currentQuestionArray.findIndex(
+					(q) => q === 'Understanding their role and potential authority'
+				)
+				if (roleAuthorityIndex >= 0) {
+					currentInputArray[roleAuthorityIndex] =
+						'You are writing for a local government official with decision-making authority over education and safety policies.'
+				}
+				break
+
+			case 'form3':
+				// Test data for message form
+				const objectiveIndex = currentQuestionArray.findIndex(
+					(q) => q === 'Concrete action requested'
+				)
+				const outcomeIndex = currentQuestionArray.findIndex((q) => q === 'Specific outcome desired')
+
+				if (objectiveIndex >= 0) {
+					currentInputArray[objectiveIndex] =
+						'Official takes action to ensure AI safety education and policies are implemented in local institutions.'
+				}
+				if (outcomeIndex >= 0) {
+					currentInputArray[outcomeIndex] =
+						'Local community becomes informed about AI risks and appropriate safety measures are put in place.'
+				}
+				break
+
+			case 'form4':
+				// Test data for message details form
+				const urgencyIndex = currentQuestionArray.findIndex((q) => q === 'Urgency of the request')
+				const toneIndex = currentQuestionArray.findIndex(
+					(q) => q === 'Balancing professionalism and approachability'
+				)
+
+				if (urgencyIndex >= 0) {
+					currentInputArray[urgencyIndex] =
+						'High urgency due to rapidly advancing AI development timeline.'
+				}
+				if (toneIndex >= 0) {
+					currentInputArray[toneIndex] =
+						'Professional but accessible tone that conveys seriousness without being alarmist.'
+				}
+				break
+		}
 
 		sendMessage()
 	}
 
+	// CLAUDE CHANGE: Updated sendMessage to work with currently active form only
 	async function sendMessage() {
+		const currentInputArray = getCurrentInputArray()
+		const currentQuestionArray = getCurrentQuestionArray()
+
 		let input = ''
-		for (var i in paragraphText_Target) {
-			input = input + paragraphText_Target[i] + ':\n' + input_arr[i] + '\n\n'
+		switch (activeForm) {
+			case 'form1':
+				input = input + '[1]'
+				break
+
+			case 'form2':
+				input = input + '[2]'
+				break
+
+			case 'form3':
+				input = input + '[3]'
+				break
+
+			case 'form4':
+				input = input + '[4]'
+				break
 		}
+		for (let i = 0; i < currentQuestionArray.length; i++) {
+			input = input + currentQuestionArray[i] + ':\n' + (currentInputArray[i] || '') + '\n\n'
+		}
+
 		messages = [...messages, { content: input, role: 'user' }]
 
-		clear_arr(input_arr)
+		// Clear current form fields
+		clear_arr(currentInputArray)
 		loading = true
 
 		try {
@@ -387,15 +499,18 @@
 				}
 			}
 
-			// Update form fields if we have information from the research step
+			// CLAUDE CHANGE: Updated auto-fill logic to work with currently active form
 			if (data.information) {
+				const currentInputArray = getCurrentInputArray()
+				const currentQuestionArray = getCurrentQuestionArray()
+
 				// Parse the information string to extract field values
 				const lines = data.information.split('\n')
 				let currentField = -1
 
 				for (let line of lines) {
-					// Look for field headers matching our paragraphText_Target array
-					const fieldIndex = paragraphText_Target.findIndex((text) =>
+					// Look for field headers matching our current question array
+					const fieldIndex = currentQuestionArray.findIndex((text) =>
 						line.trim().startsWith(text + ':')
 					)
 
@@ -404,8 +519,11 @@
 					} else if (currentField >= 0 && line.trim()) {
 						// Only update when there's actual content and the field is empty
 						const lineContent = line.trim()
-						if (lineContent && (!input_arr[currentField] || input_arr[currentField] === '')) {
-							input_arr[currentField] = lineContent
+						if (
+							lineContent &&
+							(!currentInputArray[currentField] || currentInputArray[currentField] === '')
+						) {
+							currentInputArray[currentField] = lineContent
 						}
 					}
 				}
@@ -413,6 +531,8 @@
 
 			// Save messages to localStorage
 			localStorage.setItem(STORAGE_KEY, JSON.stringify(messages))
+			// CLAUDE CHANGE: Also save form data
+			saveFormData()
 
 			// If not complete, continue with the next step
 			if (!data.complete && data.stateToken) {
@@ -432,7 +552,35 @@
 		}
 	}
 
+	// CLAUDE CHANGE: Added form data persistence functions
+	function saveFormData() {
+		const formData = {
+			form1_input_arr,
+			form2_input_arr,
+			form3_input_arr,
+			form4_input_arr,
+			activeForm
+		}
+		localStorage.setItem(FORM_DATA_STORAGE_KEY, JSON.stringify(formData))
+	}
+
+	function loadFormData() {
+		const saved = localStorage.getItem(FORM_DATA_STORAGE_KEY)
+		if (saved) {
+			const formData = JSON.parse(saved)
+			form1_input_arr = formData.form1_input_arr || new Array<string>(paragraphText_Research.length)
+			form2_input_arr = formData.form2_input_arr || new Array<string>(paragraphText_Target.length)
+			form3_input_arr = formData.form3_input_arr || new Array<string>(paragraphText_Message.length)
+			form4_input_arr =
+				formData.form4_input_arr || new Array<string>(paragraphText_MessageDetails.length)
+			activeForm = formData.activeForm || 'form1'
+		}
+	}
+
 	onMount(async () => {
+		// CLAUDE CHANGE: Load form data on mount
+		loadFormData()
+
 		// Check API availability on component mount
 		try {
 			const response = await fetch('api/write')
@@ -464,24 +612,22 @@
 	// Add these variables for form toggling
 	let activeForm = 'form1' // Default active form
 
-	// Function to set the active form
+	// CLAUDE CHANGE: Updated setActiveForm to save form data when switching
 	function setActiveForm(formId) {
+		saveFormData() // Save current state before switching
 		activeForm = formId
+		saveFormData() // Save current state after switching to save activeForm
 		console.log(formId)
 	}
 
 	// UNTESTED AND GENERATED BY AI
 	// Create separate arrays for each form's inputs
 	//let input_arr = Array(formSections_Target.flatMap(s => s.subsections.flatMap(ss => ss.questions)).length).fill('');
-	let form2_input_arr = Array(
-		formSections_Target.flatMap((s) => s.subsections.flatMap((ss) => ss.questions)).length
-	).fill('')
-	let form3_input_arr = Array(
-		formSections_Target.flatMap((s) => s.subsections.flatMap((ss) => ss.questions)).length
-	).fill('')
-	let form4_input_arr = Array(
-		formSections_Target.flatMap((s) => s.subsections.flatMap((ss) => ss.questions)).length
-	).fill('')
+	// CLAUDE CHANGE: Fixed form array initialization to use correct lengths
+	let form1_input_arr = Array(paragraphText_Research.length).fill('')
+	let form2_input_arr = Array(paragraphText_Target.length).fill('')
+	let form3_input_arr = Array(paragraphText_Message.length).fill('')
+	let form4_input_arr = Array(paragraphText_MessageDetails.length).fill('')
 
 	// Top of the page
 	const title = `Write Email Content`
@@ -606,8 +752,9 @@
 		<button class="button" on:click={clear}>Reset All</button>
 	{:else}
 		<!-- Form container with conditional display based on active form -->
+		<!-- CLAUDE MODIFICATION: Modified the form container section to show two forms simultaneously for activeForm 2, 3, and 4 -->
 		<div class="form-container">
-			<!-- Form 1 -->
+			<!-- Form 1 - Remains unchanged -->
 			{#if activeForm === 'form1'}
 				<form on:submit|preventDefault>
 					{#each formSections_Research as section, sectionIndex}
@@ -616,12 +763,12 @@
 							<h2>{subsection.title}</h2>
 
 							{#each subsection.questions as question, questionIndex}
-								{@const globalIndex = getQuestionIndex(question)}
+								{@const globalIndex = paragraphText_Research.findIndex((text) => text === question)}
 
 								<p>{question}</p>
 								<textarea
 									placeholder="Type here (Question {globalIndex + 1})"
-									bind:value={form2_input_arr[globalIndex]}
+									bind:value={form1_input_arr[globalIndex]}
 									on:keydown={handleKeyDown}
 								></textarea>
 							{/each}
@@ -630,7 +777,96 @@
 				</form>
 			{/if}
 
-			<!-- Form 2 -->
+			<!-- CLAUDE MODIFICATION: Forms 2, 3, and 4 now show TWO FORMS SIMULTANEOUSLY -->
+			<!-- CLAUDE MODIFICATION: Each activeForm now has its own unique first form -->
+
+			<!-- First form for activeForm 2 -->
+			{#if activeForm === 'form2'}
+				<form on:submit|preventDefault>
+					<h1>Finding A Target (For Personal Context)</h1>
+					{#each formSections_Research as section, sectionIndex}
+						{#each section.subsections as subsection, subsectionIndex}
+							<h2>{subsection.title}</h2>
+
+							{#each subsection.questions as question, questionIndex}
+								{@const globalIndex = paragraphText_Research.findIndex((text) => text === question)}
+
+								<p>{question}</p>
+								<textarea
+									placeholder="Type here (Research Question {globalIndex + 1})"
+									bind:value={form1_input_arr[globalIndex]}
+									on:keydown={handleKeyDown}
+								></textarea>
+							{/each}
+						{/each}
+					{/each}
+				</form>
+
+				<button
+					on:click={sendMessage}
+					disabled={!apiAvailable || loading}
+					class="button {!apiAvailable ? 'button--disabled' : ''}"
+				>
+					Autofill Content
+				</button>
+
+				<!-- CLAUDE MODIFICATION: Added separator between the two forms -->
+				<hr style="margin: 2rem 0; border: 1px solid var(--text-subtle);" />
+			{/if}
+
+			<!-- First form for activeForm 3 -->
+			{#if activeForm === 'form3'}
+				<form on:submit|preventDefault>
+					<h1>Finding A Target (For Message Content)</h1>
+					{#each formSections_Research as section, sectionIndex}
+						{#each section.subsections as subsection, subsectionIndex}
+							<h2>{subsection.title}</h2>
+
+							{#each subsection.questions as question, questionIndex}
+								{@const globalIndex = paragraphText_Research.findIndex((text) => text === question)}
+
+								<p>{question}</p>
+								<textarea
+									placeholder="Type here (Research Question {globalIndex + 1})"
+									bind:value={form1_input_arr[globalIndex]}
+									on:keydown={handleKeyDown}
+								></textarea>
+							{/each}
+						{/each}
+					{/each}
+				</form>
+
+				<!-- CLAUDE MODIFICATION: Added separator between the two forms -->
+				<hr style="margin: 2rem 0; border: 1px solid var(--text-subtle);" />
+			{/if}
+
+			<!-- First form for activeForm 4 -->
+			{#if activeForm === 'form4'}
+				<form on:submit|preventDefault>
+					<h1>Finding A Target (For Message Details)</h1>
+					{#each formSections_Research as section, sectionIndex}
+						{#each section.subsections as subsection, subsectionIndex}
+							<h2>{subsection.title}</h2>
+
+							{#each subsection.questions as question, questionIndex}
+								{@const globalIndex = paragraphText_Research.findIndex((text) => text === question)}
+
+								<p>{question}</p>
+								<textarea
+									placeholder="Type here (Research Question {globalIndex + 1})"
+									bind:value={form1_input_arr[globalIndex]}
+									on:keydown={handleKeyDown}
+								></textarea>
+							{/each}
+						{/each}
+					{/each}
+				</form>
+
+				<!-- CLAUDE MODIFICATION: Added separator between the two forms -->
+				<hr style="margin: 2rem 0; border: 1px solid var(--text-subtle);" />
+			{/if}
+
+			<!-- Form 2 - Now shown as SECOND form when activeForm is 'form2' -->
 			{#if activeForm === 'form2'}
 				<form on:submit|preventDefault>
 					<!-- Render form sections using the structured data -->
@@ -658,7 +894,7 @@
 								<p>{question}</p>
 								<textarea
 									placeholder="Type here (Question {globalIndex + 1})"
-									bind:value={input_arr[globalIndex]}
+									bind:value={form2_input_arr[globalIndex]}
 									on:keydown={handleKeyDown}
 								></textarea>
 							{/each}
@@ -667,7 +903,7 @@
 				</form>
 			{/if}
 
-			<!-- Form 3 -->
+			<!-- Form 3 - Now shown as SECOND form when activeForm is 'form3' -->
 			{#if activeForm === 'form3'}
 				<form on:submit|preventDefault>
 					{#each formSections_Message as section, sectionIndex}
@@ -676,7 +912,7 @@
 							<h2>{subsection.title}</h2>
 
 							{#each subsection.questions as question, questionIndex}
-								{@const globalIndex = getQuestionIndex(question)}
+								{@const globalIndex = paragraphText_Message.findIndex((text) => text === question)}
 
 								<p>{question}</p>
 								<textarea
@@ -690,7 +926,7 @@
 				</form>
 			{/if}
 
-			<!-- Form 4 -->
+			<!-- Form 4 - Now shown as SECOND form when activeForm is 'form4' -->
 			{#if activeForm === 'form4'}
 				<form on:submit|preventDefault>
 					{#each formSections_MessageDetails as section, sectionIndex}
@@ -699,7 +935,9 @@
 							<h2>{subsection.title}</h2>
 
 							{#each subsection.questions as question, questionIndex}
-								{@const globalIndex = getQuestionIndex(question)}
+								{@const globalIndex = paragraphText_MessageDetails.findIndex(
+									(text) => text === question
+								)}
 
 								<p>{question}</p>
 								<textarea
