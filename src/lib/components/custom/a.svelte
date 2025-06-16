@@ -4,6 +4,7 @@
 	import Mail from 'lucide-svelte/icons/mail'
 	import { page } from '$app/stores'
 	import { pushState } from '$app/navigation'
+	import { localizeHref, locales } from '$lib/paraglide/runtime'
 
 	enum Type {
 		Internal,
@@ -13,11 +14,29 @@
 
 	export let href: string
 	export let target: string | null = null
+	let className: string = ''
+	export { className as class }
 
 	const ICON_PROPS = { size: '0.8em' }
 
 	let type = Type.Internal
 	let anchor: HTMLAnchorElement
+
+	// Localization helpers
+	const localePattern = new RegExp(`^/(${locales.join('|')})(\/|$)`)
+	const shouldLocalizeHref = (h: string) =>
+		type === Type.Internal &&
+		h.startsWith('/') &&
+		!h.match(localePattern) &&
+		!h.includes('#no-localize')
+
+	const processHref = (h: string) => {
+		const cleaned = h.replace('#no-localize', '')
+		return shouldLocalizeHref(h) ? localizeHref(cleaned) : cleaned
+	}
+
+	// Normalize and localize href
+	if (typeof href !== 'string') href = ''
 
 	if (
 		(href.startsWith('http:') || href.startsWith('https:')) &&
@@ -25,6 +44,8 @@
 	)
 		type = Type.External
 	else if (href.startsWith('mailto:')) type = Type.Mail
+
+	href = processHref(href)
 
 	onMount(() => {
 		if (href.startsWith('#')) {
@@ -43,7 +64,7 @@
 	})
 </script>
 
-<a {href} {target} bind:this={anchor}>
+<a {href} {target} class={className} bind:this={anchor}>
 	<slot />{#if type != Type.Internal}
 		<span style="white-space: nowrap">
 			<div class="icon">

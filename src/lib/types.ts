@@ -21,6 +21,7 @@ export type Signatory = {
 	private: boolean
 	bio?: string
 	country: string
+	date: string
 }
 
 export type Team = {

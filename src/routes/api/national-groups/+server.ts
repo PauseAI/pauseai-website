@@ -22,6 +22,7 @@ const fallbackNationalGroups: NationalGroup[] = [
 		linktreeLink: '',
 		instagramLink: '',
 		tiktokLink: '',
+		facebookLink: '',
 		public: true
 	},
 	{
@@ -40,6 +41,7 @@ const fallbackNationalGroups: NationalGroup[] = [
 		linktreeLink: '',
 		instagramLink: '',
 		tiktokLink: '',
+		facebookLink: '',
 		public: true
 	}
 ]
@@ -70,7 +72,7 @@ function recordToNationalGroup(record: any): NationalGroup {
 				? record.fields['discord_username (from Leader)'][0]
 				: '',
 		// Include email if available
-		email: record.fields.email ? record.fields.email[0] : '',
+		email: record.fields.onboarding_email ? record.fields.onboarding_email : '',
 		legalEntity: record.fields['Legal entity'] === 'Yes',
 		// Overseer is an array of record IDs
 		overseer: record.fields.Overseer ? 'Yes' : 'No',

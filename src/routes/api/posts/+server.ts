@@ -7,6 +7,7 @@ import { meta as quotesMeta } from '../../quotes/meta'
 import { meta as emailBuilderMeta } from '../../email-builder/meta'
 import { meta as teamsMeta } from '../../teams/meta'
 import { meta as pfpgenMeta } from '../../pfp/meta'
+import { meta as statementMeta } from '../../statement/meta'
 
 /** When adding an extra route, make sure to add the metadata here for SEO purposes */
 const hardCodedPages: Post[] = [
@@ -16,7 +17,8 @@ const hardCodedPages: Post[] = [
 	quotesMeta,
 	emailBuilderMeta,
 	teamsMeta,
-	pfpgenMeta
+	pfpgenMeta,
+	statementMeta
 ]
 
 async function getPosts() {
@@ -28,7 +30,13 @@ async function getPosts() {
 		const file = paths[path]
 		const slug = path.split('/').at(-1)?.replace('.md', '')
 
-		if (file && typeof file === 'object' && 'metadata' in file && slug) {
+		if (
+			file &&
+			typeof file === 'object' &&
+			'metadata' in file &&
+			slug &&
+			!slug.startsWith('debug.')
+		) {
 			const metadata = file.metadata as Omit<Post, 'slug'>
 			const post = { ...metadata, slug } satisfies Post
 			posts.push(post)
