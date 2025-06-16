@@ -1,12 +1,10 @@
 export const prerender = true
 
-import { handleRedirects } from '$lib/redirects'
-import { redirect } from '@sveltejs/kit'
-import { getLocale, setLocale, locales } from '$lib/paraglide/runtime'
-import type { Load } from '@sveltejs/kit'
-import defaultSettings from '$lib/generated/paraglide-defaults'
 import { dev } from '$app/environment'
-import { possiblyOverriddenLocales } from '$lib/env'
+import { locales, setLocale } from '$lib/paraglide/runtime'
+import { handleRedirects } from '$lib/redirects'
+import type { Load } from '@sveltejs/kit'
+import { redirect } from '@sveltejs/kit'
 
 export const load: Load = async ({ url, url: { host, pathname }, fetch }) => {
 	// Extract the first path segment to check if it's a locale
