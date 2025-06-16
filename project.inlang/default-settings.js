@@ -17,7 +17,7 @@ export default {
 	},
 	'plugin.paraglide-js-adapter': {
 		routing: {
-			strategy: 'prefix',
+			strategy: 'prefix-all-locales',
 			defaultLocale: 'en'
 		}
 	}

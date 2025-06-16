@@ -12,7 +12,7 @@ import rehypeSlug from 'rehype-slug'
 import { locales } from './src/lib/paraglide/runtime.js'
 
 // Export configuration flags for use in build scripts
-export const USE_EDGE_FUNCTIONS = true
+export const USE_EDGE_FUNCTIONS = false
 
 /** @type {import('mdsvex').MdsvexOptions} */
 const mdsvexOptions = {
