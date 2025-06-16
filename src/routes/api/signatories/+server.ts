@@ -24,7 +24,6 @@ const fallbackSignatories: Signatory[] = [
 ]
 
 function recordToSignatory(record: any): Signatory {
-	console.log('record', record)
 	return {
 		private: record.fields.private || false,
 		name: record.fields.private ? 'Anonymous' : record.fields.name, // Anonymize private signatories
@@ -47,7 +46,6 @@ export async function GET({ fetch, setHeaders }) {
 		// Filter to only include records where email_verified is explicitly true
 		const verifiedRecords = records.filter((record) => {
 			const emailVerified = record.fields.email_verified
-			console.log('Checking record:', record.fields.name, 'email_verified:', emailVerified)
 			return emailVerified === true
 		})
 
