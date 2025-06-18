@@ -31,7 +31,7 @@ type StepName =
 	| 'finalEdit'
 
 // Define workflow types
-type WorkflowType = '1' | '2' | '3' | '4' | '5'
+type WorkflowType = '1' | '2' | '3' | '4'
 
 // NEW: Define step configuration interface for tool usage
 interface StepConfig {
@@ -61,9 +61,9 @@ const stepConfigs: Record<StepName, StepConfig> = {
 		description: 'Research the target (using web search)'
 	},
 	research: {
-		toolsEnabled: true,
+		toolsEnabled: false,
 		maxToolCalls: 2,
-		description: 'Auto-fill missing user inputs (using web search)'
+		description: 'Auto-fill missing user inputs'
 	},
 	// Text processing steps remain tool-free for performance
 	firstDraft: { toolsEnabled: false },
@@ -80,13 +80,13 @@ const workflowConfigs: Record<WorkflowType, WorkflowConfig> = {
 		stepConfigs // NEW: Include step configurations
 	},
 	'2': {
-		steps: ['webSearch'],
-		description: 'Web Search Only',
+		steps: ['webSearch', 'research'],
+		description: 'Web Search + Autofill',
 		stepConfigs // NEW: Include step configurations
 	},
 	'3': {
 		steps: ['research'],
-		description: 'Research Only',
+		description: 'Autofill only',
 		stepConfigs // NEW: Include step configurations
 	},
 	'4': {
@@ -287,6 +287,8 @@ Search for and provide:
 7. Contact information (professional email or official channels if publicly available)
 
 Please cite all sources you use and only include information you can verify through your internet search. If you encounter conflicting information, note this and provide the most reliable source.
+
+BE BRIEF! This is extremely important. Try to output only a few lines of text for each questions.
 `
 
 // Only initialize the client if we have an API key
@@ -368,7 +370,7 @@ async function callClaude(
 					{
 						type: 'web_search_20250305', // CHANGED: Use correct tool type from API docs
 						name: 'web_search',
-						max_uses: 5 // ADDED: Limit searches per request
+						max_uses: 3 // ADDED: Limit searches per request
 					}
 				]
 			: undefined
@@ -649,7 +651,7 @@ const stepHandlers: Record<
 		)
 
 		state.information = result.text
-		System_Prompts['Information'] = result.text
+		System_Prompts['Information'] = System_Prompts['Information'] + '\n\n' + result.text
 
 		return result
 	},
@@ -680,7 +682,7 @@ const stepHandlers: Record<
 		return await callClaude(
 			'firstDraft',
 			['Basic', 'Mail', 'First_Draft', 'Results'],
-			'Hello! Please write an email draft using the following information. \n' + state.information
+			'Hello! Please write an email draft using the following information. \n' + state.userInput
 			// NOTE: No toolsEnabled parameter = defaults to false
 		)
 	},

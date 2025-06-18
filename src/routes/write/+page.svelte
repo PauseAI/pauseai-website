@@ -37,6 +37,15 @@
 	// Organizing the form questions into sections and subsections
 	const formSections_Target: FieldSection[] = [
 		{
+			title: 'Researching a person',
+			subsections: [
+				{
+					title: 'To research a person, fill out the following fields.',
+					questions: ["Person's Name", 'Current Role', 'Organization/Affiliation']
+				}
+			]
+		},
+		{
 			title: 'Personal Context',
 			subsections: [
 				{
@@ -241,6 +250,8 @@
 				return form3_input_arr
 			case 'form4':
 				return form4_input_arr
+			case 'form5':
+				return form2_input_arr.concat(form3_input_arr, form4_input_arr)
 			default:
 				return form2_input_arr
 		}
@@ -256,6 +267,12 @@
 				return paragraphText_Message
 			case 'form4':
 				return paragraphText_MessageDetails
+			case 'form5':
+				let allText = paragraphText_Target.concat(
+					paragraphText_Message,
+					paragraphText_MessageDetails
+				)
+				return allText
 			default:
 				return paragraphText_Target
 		}
@@ -386,7 +403,8 @@
 				break
 		}
 		for (let i = 0; i < currentQuestionArray.length; i++) {
-			input = input + currentQuestionArray[i] + ':\n' + (currentInputArray[i] || '') + '\n\n'
+			input =
+				input + currentQuestionArray[i] + ':\n' + (currentInputArray[i] || 'undefined') + '\n\n'
 		}
 
 		messages = [...messages, { content: input, role: 'user' }]
@@ -394,6 +412,7 @@
 		// Clear current form fields
 		clear_arr(currentInputArray)
 		loading = true
+		console.log(input)
 
 		try {
 			// First request - get initial progress message (no stateToken)
@@ -461,6 +480,8 @@
 
 			// Process the response
 			const data = await response.json()
+			console.log('DATA: \n' + data)
+			console.log(data.information)
 
 			// Update API availability
 			apiAvailable = data.apiAvailable !== false
@@ -602,11 +623,6 @@
 		*/
 	}
 
-	// Function to get the index of a question across all sections
-	function getQuestionIndex(question: string): number {
-		return paragraphText_Target.findIndex((text) => text === question)
-	}
-
 	// FORM FUNCTIONS //
 
 	// Add these variables for form toggling
@@ -719,7 +735,7 @@
 				disabled={!apiAvailable || loading || activeForm === 'form3'}
 				class="button {!apiAvailable ? 'button--disabled' : ''}"
 			>
-				Write Content
+				Autofill
 			</button>
 			<button on:click={runTest} class="button" disabled={!apiAvailable || loading}>
 				(Demo for beta)
@@ -764,7 +780,7 @@
 		<button class="button" on:click={clear}>Reset All</button>
 	{:else}
 		<!-- Form container with conditional display based on active form -->
-		<!-- CLAUDE MODIFICATION: Modified the form container section to show two forms simultaneously for activeForm 2, 3, and 4 -->
+		<!-- CLAUDE MODIFICATION: Modified the form container section to show forms -->
 		<div class="form-container">
 			<!-- Form 1 - Remains unchanged -->
 			{#if activeForm === 'form1'}
@@ -789,90 +805,7 @@
 				</form>
 			{/if}
 
-			<!-- CLAUDE MODIFICATION: Forms 2, 3, and 4 now show TWO FORMS SIMULTANEOUSLY -->
-			<!-- CLAUDE MODIFICATION: Each activeForm now has its own unique first form -->
-
-			<!-- First form for activeForm 2 -->
-			{#if activeForm === 'form2'}
-				<form on:submit|preventDefault>
-					<h1>Finding A Target (For Personal Context)</h1>
-					{#each formSections_Research as section, sectionIndex}
-						{#each section.subsections as subsection, subsectionIndex}
-							<h2>{subsection.title}</h2>
-
-							{#each subsection.questions as question, questionIndex}
-								{@const globalIndex = paragraphText_Research.findIndex((text) => text === question)}
-
-								<p>{question}</p>
-								<textarea
-									placeholder="Type here (Research Question {globalIndex + 1})"
-									bind:value={form1_input_arr[globalIndex]}
-									on:keydown={handleKeyDown}
-								></textarea>
-							{/each}
-						{/each}
-					{/each}
-				</form>
-
-				<!-- CLAUDE MODIFICATION: Added separator between the two forms -->
-				<hr style="margin: 2rem 0; border: 1px solid var(--text-subtle);" />
-			{/if}
-
-			<!-- Disabled due to lack of helpful prompt. -->
-			<!-- First form for activeForm 3
-			{#if activeForm === 'form3'}
-				<form on:submit|preventDefault>
-					<h1>Finding A Target (For Message Content)</h1>
-					{#each formSections_Research as section, sectionIndex}
-						{#each section.subsections as subsection, subsectionIndex}
-							<h2>{subsection.title}</h2>
-
-							{#each subsection.questions as question, questionIndex}
-								{@const globalIndex = paragraphText_Research.findIndex((text) => text === question)}
-
-								<p>{question}</p>
-								<textarea
-									placeholder="Type here (Research Question {globalIndex + 1})"
-									bind:value={form1_input_arr[globalIndex]}
-									on:keydown={handleKeyDown}
-								></textarea>
-							{/each}
-						{/each}
-					{/each}
-				</form>
-
-				<!-- CLAUDE MODIFICATION: Added separator between the two forms
-				<hr style="margin: 2rem 0; border: 1px solid var(--text-subtle);" />
-			{/if}
-			-->
-
-			<!-- First form for activeForm 4 -->
-			{#if activeForm === 'form4'}
-				<form on:submit|preventDefault>
-					<h1>Finding A Target (For Message Details)</h1>
-					{#each formSections_Research as section, sectionIndex}
-						{#each section.subsections as subsection, subsectionIndex}
-							<h2>{subsection.title}</h2>
-
-							{#each subsection.questions as question, questionIndex}
-								{@const globalIndex = paragraphText_Research.findIndex((text) => text === question)}
-
-								<p>{question}</p>
-								<textarea
-									placeholder="Type here (Research Question {globalIndex + 1})"
-									bind:value={form1_input_arr[globalIndex]}
-									on:keydown={handleKeyDown}
-								></textarea>
-							{/each}
-						{/each}
-					{/each}
-				</form>
-
-				<!-- CLAUDE MODIFICATION: Added separator between the two forms -->
-				<hr style="margin: 2rem 0; border: 1px solid var(--text-subtle);" />
-			{/if}
-
-			<!-- Form 2 - Now shown as SECOND form when activeForm is 'form2' -->
+			<!-- Form 2 - Now includes merged PersonResearch and Target sections -->
 			{#if activeForm === 'form2'}
 				<form on:submit|preventDefault>
 					<!-- Render form sections using the structured data -->
@@ -888,7 +821,7 @@
 
 							{#each subsection.questions as question, questionIndex}
 								<!-- Calculate the global index for this question -->
-								{@const globalIndex = getQuestionIndex(question)}
+								{@const globalIndex = paragraphText_Target.findIndex((text) => text === question)}
 
 								<!-- Add special h3 headers for specific subsections -->
 								{#if subsection.title === 'Supporting Evidence' && questionIndex === 0}
@@ -909,7 +842,7 @@
 				</form>
 			{/if}
 
-			<!-- Form 3 - Now shown as SECOND form when activeForm is 'form3' -->
+			<!-- Form 3 -->
 			{#if activeForm === 'form3'}
 				<form on:submit|preventDefault>
 					{#each formSections_Message as section, sectionIndex}
@@ -932,7 +865,7 @@
 				</form>
 			{/if}
 
-			<!-- Form 4 - Now shown as SECOND form when activeForm is 'form4' -->
+			<!-- Form 4 -->
 			{#if activeForm === 'form4'}
 				<form on:submit|preventDefault>
 					{#each formSections_MessageDetails as section, sectionIndex}
