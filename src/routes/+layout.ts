@@ -1,29 +1,12 @@
 export const prerender = true
 
-import { handleRedirects } from '$lib/redirects'
-import { redirect } from '@sveltejs/kit'
-import { getLocale, setLocale, locales } from '$lib/paraglide/runtime'
-import type { Load } from '@sveltejs/kit'
-import defaultSettings from '$lib/generated/paraglide-defaults'
 import { dev } from '$app/environment'
-import { possiblyOverriddenLocales } from '$lib/env'
+import { locales, setLocale } from '$lib/paraglide/runtime'
+import { handleRedirects } from '$lib/redirects'
+import type { Load } from '@sveltejs/kit'
+import { redirect } from '@sveltejs/kit'
 
 export const load: Load = async ({ url, url: { host, pathname }, fetch }) => {
-	// Extract the first path segment to check if it's a locale
-	const firstSegment = pathname.split('/')[1] || ''
-
-	// Helper function to check if a string is in the locales array
-	// This handles the TypeScript type limitations with the locales array
-	const isValidLocale = (segment: string): boolean => {
-		return locales.some((locale: string) => locale === segment)
-	}
-
-	// Only set the locale if the first segment is a valid locale from the runtime
-	// For all other paths, the base locale will be used by default
-	if (firstSegment && isValidLocale(firstSegment)) {
-		setLocale(firstSegment as any, { reload: false })
-	}
-
 	handleRedirects(pathname)
 
 	if (host === 'pauseai.org') {
