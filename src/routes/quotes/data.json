@@ -71,18 +71,20 @@
     },
     {
       "background": "vance",
-      "color": "black",
+      "color": "white",
       "text": "[Talking about stats on AI usage and loneliness] Human beings have wants and needs, and I think that's one of the great things about marriage in particular: you have this other person and you just have to figure it out together. But if the other person is a chatbot that's just trying to hook you into spending as much time on it as possible… that's the stuff that I really worry about with AI.",
       "author": "JD Vance",
-      "author_description": "Vice President of the United States"
+      "author_description": "Vice President of the United States",
+      "padding": "2.8rem"
     },
     {
       "background": "pope_leo",
-      "color": "black",
+      "color": "white",
       "text": "I chose to take the name Leo XIV. There are different reasons for this, but mainly because Pope Leo XIII in his historic Encyclical 'Rerum Novarum' addressed the social question in the context of the first great industrial revolution, In our own day, the church offers everyone the treasury of its social teaching in response to another industrial revolution and to developments in the field of **artificial intelligence that pose new challenges for the defense of human dignity, justice and labor.**",
       "author": "Pope Leo XIV",
       "author_description": "Head of the Catholic Church",
-      "notice": "“Pope Leo XIV during an audience with the media (May 12, 2025)” by Edgar Beltrán, The Pillar. Modified and licensed under CC BY-SA 4.0."
+      "notice": "“Pope Leo XIV during an audience with the media (May 12, 2025)” by Edgar Beltrán, The Pillar. Modified and licensed under CC BY-SA 4.0.",
+      "padding": "2.8rem"
     },
     {
       "background": "pope_francis",
