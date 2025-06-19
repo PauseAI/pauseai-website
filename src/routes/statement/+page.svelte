@@ -87,13 +87,6 @@
 		}
 	}
 
-	.statement p {
-		font-weight: 400; /* Normal weight */
-		font-style: italic; /* Keep the italics from <em> */
-		font-size: 1.8rem; /* Adjust size if needed */
-		color: var(--text-subtle); /* Optional: Adjust color */
-	}
-
 	/* Style for the signatories counter */
 	.signatories-counter {
 		font-family: 'Arial', sans-serif;
