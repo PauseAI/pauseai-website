@@ -70,6 +70,29 @@
       "notice": "“李强 Li Qiang 20230313 02” by China News Service. Modified and licensed under CC BY 3.0."
     },
     {
+      "background": "vance",
+      "color": "black",
+      "text": "[Talking about stats on AI usage and loneliness] Human beings have wants and needs, and I think that's one of the great things about marriage in particular: you have this other person and you just have to figure it out together. But if the other person is a chatbot that's just trying to hook you into spending as much time on it as possible… that's the stuff that I really worry about with AI.",
+      "author": "JD Vance",
+      "author_description": "Vice President of the United States"
+    },
+    {
+      "background": "pope_leo",
+      "color": "black",
+      "text": "",
+      "author": "Pope Leo XIV",
+      "author_description": "Head of the Catholic Church",
+      "notice": "“Pope Leo XIV during an audience with the media (May 12, 2025)” by Edgar Beltrán, The Pillar. Modified and licensed under CC BY-SA 4.0."
+    },
+    {
+      "background": "pope_francis",
+      "color": "black",
+      "text": "**I urge the global community of nations to work together in order to adopt a binding international treaty that regulates the development and use of artificial intelligence in its many forms** [...] [AI] may pose a risk to our survival and endanger our common home.",
+      "author": "Pope Francis",
+      "author_description": "Former head of the Catholic Church",
+      "notice": "“pope-francis-1a” by ThiênLong. Modified and licensed under CC BY-SA 2.0."
+    },
+    {
       "background": "leyen",
       "color": "white",
       "text": "[We] **should not underestimate the real threats coming from AI** [...] It is moving faster than even its developers anticipated [...] We have a narrowing window of opportunity to guide this technology responsibly.",
@@ -83,14 +106,6 @@
       "author": "António Guterres",
       "author_description": "Chief Executive Officer of the United Nations",
       "padding": "2.8rem"
-    },
-    {
-      "background": "pope",
-      "color": "black",
-      "text": "**I urge the global community of nations to work together in order to adopt a binding international treaty that regulates the development and use of artificial intelligence in its many forms** [...] [AI] may pose a risk to our survival and endanger our common home.",
-      "author": "Pope Francis",
-      "author_description": "Former head of the Catholic Church",
-      "notice": "“pope-francis-1a” by ThiênLong. Modified and licensed under CC BY-SA 2.0."
     },
     {
       "background": "sunak",
