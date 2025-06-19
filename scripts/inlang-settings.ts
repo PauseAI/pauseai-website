@@ -14,6 +14,14 @@ import {
 import { setupL10nCage } from './l10n/git-ops'
 import { cullCommentary, createSymlinkIfNeeded, ensureDirectoriesExist } from './l10n/utils'
 
+function patch(filePath: string, toReplace: string, replacement: string): boolean {
+	const content = fs.readFileSync(filePath, 'utf-8')
+	const patchedContent = content.replace(toReplace, replacement)
+	if (patchedContent === content) return false
+	fs.writeFileSync(filePath, patchedContent)
+	return true
+}
+
 // Load environment variables from .env file
 dotenv.config()
 
@@ -146,6 +154,27 @@ function regenerateSettings(verbose = false): void {
 
 		compile(compileOptions)
 		console.log(`\u2705 Paraglide runtime compiled successfully!`)
+
+		// Patch runtime.js for prefix-all-locales strategy
+		if (routingStrategy === 'prefix-all-locales') {
+			const runtimePath = path.join(OUTPUT_PATH, 'runtime.js')
+			const content = fs.readFileSync(runtimePath, 'utf-8')
+
+			// Check if patch is already applied
+			if (content.includes('never-match-prefix-all-locales')) {
+				console.log(`🔧 Prefix-all-locales patch already applied to runtime.js`)
+			} else if (
+				patch(
+					runtimePath,
+					'    if (locale === baseLocale) {',
+					'    if ("never-match-prefix-all-locales" === locale) {'
+				)
+			) {
+				console.log(`🔧 Applied prefix-all-locales patch to runtime.js`)
+			} else {
+				console.warn(`⚠️  Could not apply prefix-all-locales patch - continuing anyway for testing`)
+			}
+		}
 	} catch (error) {
 		console.error('\u274c Failed to compile Paraglide runtime:', (error as Error).message)
 		process.exit(1)
