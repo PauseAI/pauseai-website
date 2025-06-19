@@ -629,7 +629,7 @@
 	let activeForm = 'form1' // Default active form
 
 	// CLAUDE CHANGE: Updated setActiveForm to save form data when switching
-	function setActiveForm(formId) {
+	function setActiveForm(formId: string) {
 		saveFormData() // Save current state before switching
 		activeForm = formId
 		saveFormData() // Save current state after switching to save activeForm
