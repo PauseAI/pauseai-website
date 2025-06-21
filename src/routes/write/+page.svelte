@@ -23,18 +23,28 @@
 
 	// Use a unique localStorage key to avoid conflicts with other pages
 	const STORAGE_KEY = 'email_writer_messages'
+	// CLAUDE CHANGE: Added storage key for form data
+	const FORM_DATA_STORAGE_KEY = 'email_writer_form_data'
 
 	let messages: Message[] =
 		typeof localStorage !== 'undefined' ? JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]') : []
 
 	// Array for form
-	let input_arr = new Array<string>(35)
 	let loading = false
 	let apiAvailable = true // Default to true, will be updated after first API call
 	const maxMessages = 20
 
 	// Organizing the form questions into sections and subsections
-	const formSections: FieldSection[] = [
+	const formSections_Target: FieldSection[] = [
+		{
+			title: 'Researching a person',
+			subsections: [
+				{
+					title: 'To research a person, fill out the following fields.',
+					questions: ["Person's Name", 'Current Role', 'Organization/Affiliation']
+				}
+			]
+		},
 		{
 			title: 'Personal Context',
 			subsections: [
@@ -92,27 +102,47 @@
 					]
 				}
 			]
-		},
+		}
+	]
+
+	// Flatten the questions array for accessing by index
+	const paragraphText_Target: string[] = []
+	formSections_Target.forEach((section) => {
+		section.subsections.forEach((subsection) => {
+			subsection.questions.forEach((question) => {
+				paragraphText_Target.push(question)
+			})
+		})
+	})
+
+	const formSections_Research: FieldSection[] = [
 		{
-			title: 'Information Needed About the Message',
+			title: 'Finding a target',
 			subsections: [
 				{
-					title: 'Content Requirements',
-					questions: ['Specific outcome desired', 'Concrete action requested'] /*
+					title: "Specify what sort of target you're looking for, and where.",
 					questions: [
-						'Clear, singular objective',
-						'Specific outcome desired',
-						'Concrete action requested'
-					]*/
-				},
-				{
-					title: 'Supporting Evidence',
-					questions: [
-						'Relevant facts',
-						'Context for the request',
-						'Potential impact or consequences'
+						'If you have certain institutions in mind, mention those. Otherwise, your local representative could be a good place to start.'
 					]
-				},
+				}
+			]
+		}
+	]
+
+	// Flatten the questions array for accessing by index
+	const paragraphText_Research: string[] = []
+	formSections_Research.forEach((section) => {
+		section.subsections.forEach((subsection) => {
+			subsection.questions.forEach((question) => {
+				paragraphText_Research.push(question)
+			})
+		})
+	})
+
+	const formSections_MessageDetails: FieldSection[] = [
+		{
+			title: 'Message Details',
+			subsections: [
 				{
 					title: 'Logical Structure',
 					questions: [
@@ -164,15 +194,89 @@
 		}
 	]
 
-	// Flatten the questions array for accessing by index
-	const paragraphText: string[] = []
-	formSections.forEach((section) => {
+	// CLAUDE CHANGE: Fixed the population of paragraphText_MessageDetails - was incorrectly using formSections_Research
+	const paragraphText_MessageDetails: string[] = []
+	formSections_MessageDetails.forEach((section) => {
 		section.subsections.forEach((subsection) => {
 			subsection.questions.forEach((question) => {
-				paragraphText.push(question)
+				paragraphText_MessageDetails.push(question)
 			})
 		})
 	})
+
+	const formSections_Message: FieldSection[] = [
+		{
+			title: 'What is your Message?',
+			subsections: [
+				{
+					title: 'Content Requirements',
+					questions: ['Specific outcome desired', 'Concrete action requested'] /*
+					questions: [
+						'Clear, singular objective',
+						'Specific outcome desired',
+						'Concrete action requested'
+					]*/
+				},
+				{
+					title: 'Supporting Evidence',
+					questions: [
+						'Relevant facts',
+						'Context for the request',
+						'Potential impact or consequences'
+					]
+				}
+			]
+		}
+	]
+
+	// Flatten the questions array for accessing by index
+	const paragraphText_Message: string[] = []
+	formSections_Message.forEach((section) => {
+		section.subsections.forEach((subsection) => {
+			subsection.questions.forEach((question) => {
+				paragraphText_Message.push(question)
+			})
+		})
+	})
+
+	// CLAUDE CHANGE: Added mapping functions to get correct arrays based on active form
+	function getCurrentInputArray(): string[] {
+		switch (activeForm) {
+			case 'form1':
+				return form1_input_arr
+			case 'form2':
+				return form2_input_arr
+			case 'form3':
+				return form3_input_arr
+			case 'form4':
+				return form4_input_arr
+			case 'form5':
+				return form2_input_arr.concat(form3_input_arr, form4_input_arr)
+			default:
+				return form2_input_arr
+		}
+	}
+
+	function getCurrentQuestionArray(): string[] {
+		switch (activeForm) {
+			case 'form1':
+				return paragraphText_Research
+			case 'form2':
+				return paragraphText_Target
+			case 'form3':
+				return paragraphText_Message
+			case 'form4':
+				return paragraphText_MessageDetails
+			case 'form5':
+				let allText = paragraphText_Target.concat(
+					paragraphText_Message,
+					paragraphText_MessageDetails
+				)
+				return allText
+			default:
+				return paragraphText_Target
+		}
+	}
 
 	function clear_arr(arr: string[]) {
 		for (var i in arr) {
@@ -180,9 +284,19 @@
 		}
 	}
 
+	// CLAUDE CHANGE: Updated clear function to clear current form and reset to form1
 	function clear() {
 		messages = []
 		localStorage.setItem(STORAGE_KEY, JSON.stringify(messages))
+
+		// Clear all form arrays
+		clear_arr(form1_input_arr)
+		clear_arr(form2_input_arr)
+		clear_arr(form3_input_arr)
+		clear_arr(form4_input_arr)
+
+		// Clear form data from localStorage
+		localStorage.removeItem(FORM_DATA_STORAGE_KEY)
 	}
 
 	function copy() {
@@ -194,39 +308,111 @@
 		)
 	}
 
-	// Magic test function that populates three specific fields and starts the process - for demo purposes
+	// CLAUDE CHANGE: Updated runTest to work with currently active form and provide appropriate test data
 	function runTest() {
 		// Clear any existing chat
 		clear()
 
-		// Clear all input fields
-		clear_arr(input_arr)
+		// Get current form arrays
+		const currentInputArray = getCurrentInputArray()
+		const currentQuestionArray = getCurrentQuestionArray()
 
-		// Find index for specific fields based on their question text
-		const roleAuthorityIndex = paragraphText.findIndex(
-			(q) => q === 'Understanding their role and potential authority'
-		)
-		const objectiveIndex = paragraphText.findIndex((q) => q === 'Concrete action requested')
-		const outcomeIndex = paragraphText.findIndex((q) => q === 'Specific outcome desired')
+		// Clear current input fields
+		clear_arr(currentInputArray)
 
-		input_arr[roleAuthorityIndex] = 'You are writing for a child of about thirteen years old.'
-		input_arr[objectiveIndex] =
-			'Child understands that the current fast worldwide race to build AGI before we know how to make it safe could mean everybody dies. It sounds like science fiction, but experts are increasingly concerned. Of course the grown-ups should do something about this, but because it can be hard for them to admit to themselves that those they love could be in so much danger, then even once they hear about the problem they find reasons not to believe or act. Being sincere, kind and persistent with them that you need protecting can help everybody in the world.'
-		input_arr[outcomeIndex] =
-			"The child isn't too scared, but thinks this is a very important problem all their friends, family and teachers should know about and be actively working to solve."
+		// Provide test data based on active form
+		switch (activeForm) {
+			case 'form1':
+				// Test data for research form
+				if (currentInputArray.length > 0) {
+					currentInputArray[0] =
+						'Local city council member or school board representative who handles education policy and child safety issues. Location: California, Los Angeles.'
+				}
+				break
+
+			case 'form2':
+				// Test data for target/personal context form
+				const roleAuthorityIndex = currentQuestionArray.findIndex(
+					(q) => q === 'Understanding their role and potential authority'
+				)
+				if (roleAuthorityIndex >= 0) {
+					currentInputArray[roleAuthorityIndex] =
+						'You are writing for a local government official with decision-making authority over education and safety policies.'
+				}
+				break
+
+			case 'form3':
+				// Test data for message form
+				const objectiveIndex = currentQuestionArray.findIndex(
+					(q) => q === 'Concrete action requested'
+				)
+				const outcomeIndex = currentQuestionArray.findIndex((q) => q === 'Specific outcome desired')
+
+				if (objectiveIndex >= 0) {
+					currentInputArray[objectiveIndex] =
+						'Official takes action to ensure AI safety education and policies are implemented in local institutions.'
+				}
+				if (outcomeIndex >= 0) {
+					currentInputArray[outcomeIndex] =
+						'Local community becomes informed about AI risks and appropriate safety measures are put in place.'
+				}
+				break
+
+			case 'form4':
+				// Test data for message details form
+				const urgencyIndex = currentQuestionArray.findIndex((q) => q === 'Urgency of the request')
+				const toneIndex = currentQuestionArray.findIndex(
+					(q) => q === 'Balancing professionalism and approachability'
+				)
+
+				if (urgencyIndex >= 0) {
+					currentInputArray[urgencyIndex] =
+						'High urgency due to rapidly advancing AI development timeline.'
+				}
+				if (toneIndex >= 0) {
+					currentInputArray[toneIndex] =
+						'Professional but accessible tone that conveys seriousness without being alarmist.'
+				}
+				break
+		}
 
 		sendMessage()
 	}
 
+	// CLAUDE CHANGE: Updated sendMessage to work with currently active form only
 	async function sendMessage() {
+		const currentInputArray = getCurrentInputArray()
+		const currentQuestionArray = getCurrentQuestionArray()
+
 		let input = ''
-		for (var i in paragraphText) {
-			input = input + paragraphText[i] + ':\n' + input_arr[i] + '\n\n'
+		switch (activeForm) {
+			case 'form1':
+				input = input + '[1]'
+				break
+
+			case 'form2':
+				input = input + '[2]'
+				break
+
+			case 'form4':
+				input = input + '[3]'
+				break
+
+			case 'form5':
+				input = input + '[4]'
+				break
 		}
+		for (let i = 0; i < currentQuestionArray.length; i++) {
+			input =
+				input + currentQuestionArray[i] + ':\n' + (currentInputArray[i] || 'undefined') + '\n\n'
+		}
+
 		messages = [...messages, { content: input, role: 'user' }]
 
-		clear_arr(input_arr)
+		// Clear current form fields
+		clear_arr(currentInputArray)
 		loading = true
+		console.log(input)
 
 		try {
 			// First request - get initial progress message (no stateToken)
@@ -294,6 +480,8 @@
 
 			// Process the response
 			const data = await response.json()
+			console.log('DATA: \n' + data)
+			console.log(data.information)
 
 			// Update API availability
 			apiAvailable = data.apiAvailable !== false
@@ -332,23 +520,31 @@
 				}
 			}
 
-			// Update form fields if we have information from the research step
+			// CLAUDE CHANGE: Updated auto-fill logic to work with currently active form
 			if (data.information) {
+				const currentInputArray = getCurrentInputArray()
+				const currentQuestionArray = getCurrentQuestionArray()
+
 				// Parse the information string to extract field values
 				const lines = data.information.split('\n')
 				let currentField = -1
 
 				for (let line of lines) {
-					// Look for field headers matching our paragraphText array
-					const fieldIndex = paragraphText.findIndex((text) => line.trim().startsWith(text + ':'))
+					// Look for field headers matching our current question array
+					const fieldIndex = currentQuestionArray.findIndex((text) =>
+						line.trim().startsWith(text + ':')
+					)
 
 					if (fieldIndex >= 0) {
 						currentField = fieldIndex
 					} else if (currentField >= 0 && line.trim()) {
 						// Only update when there's actual content and the field is empty
 						const lineContent = line.trim()
-						if (lineContent && (!input_arr[currentField] || input_arr[currentField] === '')) {
-							input_arr[currentField] = lineContent
+						if (
+							lineContent &&
+							(!currentInputArray[currentField] || currentInputArray[currentField] === '')
+						) {
+							currentInputArray[currentField] = lineContent
 						}
 					}
 				}
@@ -356,6 +552,8 @@
 
 			// Save messages to localStorage
 			localStorage.setItem(STORAGE_KEY, JSON.stringify(messages))
+			// CLAUDE CHANGE: Also save form data
+			saveFormData()
 
 			// If not complete, continue with the next step
 			if (!data.complete && data.stateToken) {
@@ -375,7 +573,35 @@
 		}
 	}
 
+	// CLAUDE CHANGE: Added form data persistence functions
+	function saveFormData() {
+		const formData = {
+			form1_input_arr,
+			form2_input_arr,
+			form3_input_arr,
+			form4_input_arr,
+			activeForm
+		}
+		localStorage.setItem(FORM_DATA_STORAGE_KEY, JSON.stringify(formData))
+	}
+
+	function loadFormData() {
+		const saved = localStorage.getItem(FORM_DATA_STORAGE_KEY)
+		if (saved) {
+			const formData = JSON.parse(saved)
+			form1_input_arr = formData.form1_input_arr || new Array<string>(paragraphText_Research.length)
+			form2_input_arr = formData.form2_input_arr || new Array<string>(paragraphText_Target.length)
+			form3_input_arr = formData.form3_input_arr || new Array<string>(paragraphText_Message.length)
+			form4_input_arr =
+				formData.form4_input_arr || new Array<string>(paragraphText_MessageDetails.length)
+			activeForm = formData.activeForm || 'form1'
+		}
+	}
+
 	onMount(async () => {
+		// CLAUDE CHANGE: Load form data on mount
+		loadFormData()
+
 		// Check API availability on component mount
 		try {
 			const response = await fetch('api/write')
@@ -397,10 +623,32 @@
 		*/
 	}
 
-	// Function to get the index of a question across all sections
-	function getQuestionIndex(question: string): number {
-		return paragraphText.findIndex((text) => text === question)
+	// FORM FUNCTIONS //
+
+	// Add these variables for form toggling
+	let activeForm = 'form1' // Default active form
+
+	// CLAUDE CHANGE: Updated setActiveForm to save form data when switching
+	function setActiveForm(formId: string) {
+		saveFormData() // Save current state before switching
+		activeForm = formId
+		saveFormData() // Save current state after switching to save activeForm
+		console.log(formId)
 	}
+
+	function writeMail() {
+		setActiveForm('form5')
+		sendMessage()
+	}
+
+	// UNTESTED AND GENERATED BY AI
+	// Create separate arrays for each form's inputs
+	//let input_arr = Array(formSections_Target.flatMap(s => s.subsections.flatMap(ss => ss.questions)).length).fill('');
+	// CLAUDE CHANGE: Fixed form array initialization to use correct lengths
+	let form1_input_arr = Array(paragraphText_Research.length).fill('')
+	let form2_input_arr = Array(paragraphText_Target.length).fill('')
+	let form3_input_arr = Array(paragraphText_Message.length).fill('')
+	let form4_input_arr = Array(paragraphText_MessageDetails.length).fill('')
 
 	// Top of the page
 	const title = `Write Email Content`
@@ -453,13 +701,41 @@
 			particular hardcoded values, and starts writing content.
 		</p>
 
+		<!-- Form toggle bar -->
+		<div class="control-buttons">
+			<button
+				class="button {activeForm === 'form1' ? 'active' : ''}"
+				on:click={() => setActiveForm('form1')}
+			>
+				Finding A Target
+			</button>
+			<button
+				class="button {activeForm === 'form2' ? 'active' : ''}"
+				on:click={() => setActiveForm('form2')}
+			>
+				Personal Context
+			</button>
+			<button
+				class="button {activeForm === 'form3' ? 'active' : ''}"
+				on:click={() => setActiveForm('form3')}
+			>
+				The Message
+			</button>
+			<button
+				class="button {activeForm === 'form4' ? 'active' : ''}"
+				on:click={() => setActiveForm('form4')}
+			>
+				Message details
+			</button>
+		</div>
+
 		<div class="control-buttons">
 			<button
 				on:click={sendMessage}
-				disabled={!apiAvailable || loading}
+				disabled={!apiAvailable || loading || activeForm === 'form3'}
 				class="button {!apiAvailable ? 'button--disabled' : ''}"
 			>
-				Write Content
+				Autofill
 			</button>
 			<button on:click={runTest} class="button" disabled={!apiAvailable || loading}>
 				(Demo for beta)
@@ -469,6 +745,13 @@
 			</button>
 			<button on:click={clear} class="button" disabled={loading || messages.length === 0}>
 				Reset All
+			</button>
+			<button
+				on:click={writeMail}
+				disabled={!apiAvailable || loading}
+				class="button {!apiAvailable ? 'button--disabled' : ''}"
+			>
+				Write Mail
 			</button>
 		</div>
 	</div>
@@ -496,40 +779,117 @@
 		<button class="button" on:click={copy}>Copy Content</button>
 		<button class="button" on:click={clear}>Reset All</button>
 	{:else}
-		<form on:submit|preventDefault>
-			<!-- Render form sections using the structured data -->
-			{#each formSections as section, sectionIndex}
-				<h1>{section.title}</h1>
+		<!-- Form container with conditional display based on active form -->
+		<!-- CLAUDE MODIFICATION: Modified the form container section to show forms -->
+		<div class="form-container">
+			<!-- Form 1 - Remains unchanged -->
+			{#if activeForm === 'form1'}
+				<form on:submit|preventDefault>
+					{#each formSections_Research as section, sectionIndex}
+						<h1>{section.title}</h1>
+						{#each section.subsections as subsection, subsectionIndex}
+							<h2>{subsection.title}</h2>
 
-				{#each section.subsections as subsection, subsectionIndex}
-					<h2>{subsection.title}</h2>
+							{#each subsection.questions as question, questionIndex}
+								{@const globalIndex = paragraphText_Research.findIndex((text) => text === question)}
 
-					<!-- Special handling for 'Content Requirements' to add an h3 for 'Precise Purpose' -->
-					{#if subsection.title === 'Content Requirements'}
-						<h3>Precise Purpose</h3>
-					{/if}
-
-					{#each subsection.questions as question, questionIndex}
-						<!-- Calculate the global index for this question -->
-						{@const globalIndex = getQuestionIndex(question)}
-
-						<!-- Add special h3 headers for specific subsections -->
-						{#if subsection.title === 'Supporting Evidence' && questionIndex === 0}
-							<h3>Supporting Evidence</h3>
-						{:else if subsection.title === 'Logical Structure' && questionIndex === 0}
-							<h3>Logical Structure</h3>
-						{/if}
-
-						<p>{question}</p>
-						<textarea
-							placeholder="Type here (Question {globalIndex + 1})"
-							bind:value={input_arr[globalIndex]}
-							on:keydown={handleKeyDown}
-						></textarea>
+								<p>{question}</p>
+								<textarea
+									placeholder="Type here (Question {globalIndex + 1})"
+									bind:value={form1_input_arr[globalIndex]}
+									on:keydown={handleKeyDown}
+								></textarea>
+							{/each}
+						{/each}
 					{/each}
-				{/each}
-			{/each}
-		</form>
+				</form>
+			{/if}
+
+			<!-- Form 2 - Now includes merged PersonResearch and Target sections -->
+			{#if activeForm === 'form2'}
+				<form on:submit|preventDefault>
+					<!-- Render form sections using the structured data -->
+					{#each formSections_Target as section, sectionIndex}
+						<h1>{section.title}</h1>
+						{#each section.subsections as subsection, subsectionIndex}
+							<h2>{subsection.title}</h2>
+
+							<!-- Special handling for 'Content Requirements' to add an h3 for 'Precise Purpose' -->
+							{#if subsection.title === 'Content Requirements'}
+								<h3>Precise Purpose</h3>
+							{/if}
+
+							{#each subsection.questions as question, questionIndex}
+								<!-- Calculate the global index for this question -->
+								{@const globalIndex = paragraphText_Target.findIndex((text) => text === question)}
+
+								<!-- Add special h3 headers for specific subsections -->
+								{#if subsection.title === 'Supporting Evidence' && questionIndex === 0}
+									<h3>Supporting Evidence</h3>
+								{:else if subsection.title === 'Logical Structure' && questionIndex === 0}
+									<h3>Logical Structure</h3>
+								{/if}
+
+								<p>{question}</p>
+								<textarea
+									placeholder="Type here (Question {globalIndex + 1})"
+									bind:value={form2_input_arr[globalIndex]}
+									on:keydown={handleKeyDown}
+								></textarea>
+							{/each}
+						{/each}
+					{/each}
+				</form>
+			{/if}
+
+			<!-- Form 3 -->
+			{#if activeForm === 'form3'}
+				<form on:submit|preventDefault>
+					{#each formSections_Message as section, sectionIndex}
+						<h1>{section.title}</h1>
+						{#each section.subsections as subsection, subsectionIndex}
+							<h2>{subsection.title}</h2>
+
+							{#each subsection.questions as question, questionIndex}
+								{@const globalIndex = paragraphText_Message.findIndex((text) => text === question)}
+
+								<p>{question}</p>
+								<textarea
+									placeholder="Type here (Question {globalIndex + 1})"
+									bind:value={form3_input_arr[globalIndex]}
+									on:keydown={handleKeyDown}
+								></textarea>
+							{/each}
+						{/each}
+					{/each}
+				</form>
+			{/if}
+
+			<!-- Form 4 -->
+			{#if activeForm === 'form4'}
+				<form on:submit|preventDefault>
+					{#each formSections_MessageDetails as section, sectionIndex}
+						<h1>{section.title}</h1>
+						{#each section.subsections as subsection, subsectionIndex}
+							<h2>{subsection.title}</h2>
+
+							{#each subsection.questions as question, questionIndex}
+								{@const globalIndex = paragraphText_MessageDetails.findIndex(
+									(text) => text === question
+								)}
+
+								<p>{question}</p>
+								<textarea
+									placeholder="Type here (Question {globalIndex + 1})"
+									bind:value={form4_input_arr[globalIndex]}
+									on:keydown={handleKeyDown}
+								></textarea>
+							{/each}
+						{/each}
+					{/each}
+				</form>
+			{/if}
+		</div>
 	{/if}
 </footer>
 
