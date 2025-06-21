@@ -32,9 +32,9 @@
 <h1>{title}</h1>
 
 <blockquote class="statement">
-	"We call on the governments of the world to sign an international treaty implementing a temporary
+	We call on the governments of the world to sign an international treaty implementing a temporary
 	pause on the training of the most powerful general AI systems, until we know how to build them
-	safely and keep them under democratic control."
+	safely and keep them under democratic control.
 </blockquote>
 
 <!-- Signatories Counter and Goal -->
@@ -75,7 +75,6 @@
 		font-weight: normal;
 		border-left: 4px solid var(--brand);
 		background-color: var(--text-subtle);
-		font-style: italic;
 		font-size: 1rem;
 		line-height: 1.8;
 		color: var(--text);
@@ -85,13 +84,6 @@
 		.statement {
 			font-size: 1.5rem;
 		}
-	}
-
-	.statement p {
-		font-weight: 400; /* Normal weight */
-		font-style: italic; /* Keep the italics from <em> */
-		font-size: 1.8rem; /* Adjust size if needed */
-		color: var(--text-subtle); /* Optional: Adjust color */
 	}
 
 	/* Style for the signatories counter */

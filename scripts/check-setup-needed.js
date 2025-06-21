@@ -7,7 +7,7 @@ import fs from 'fs'
 import path from 'path'
 import dotenv from 'dotenv'
 import { execSync } from 'child_process'
-import { L10NS_BASE_DIR, MARKDOWN_L10NS } from '../src/lib/l10n.ts'
+import { L10N_CAGE_DIR, MARKDOWN_L10NS } from '../src/lib/l10n.ts'
 
 dotenv.config()
 
@@ -16,9 +16,9 @@ let activeLocales = Array.from(runtimeModule.locales)
 let setupNeeded = false
 let reason = ''
 
-if (!fs.existsSync(L10NS_BASE_DIR)) {
+if (!fs.existsSync(L10N_CAGE_DIR)) {
 	setupNeeded = true
-	reason = `Basic setup directory not found (${L10NS_BASE_DIR})`
+	reason = `Basic setup directory not found (${L10N_CAGE_DIR})`
 }
 
 const nonEnglishLocales = activeLocales.filter((locale) => locale !== 'en')
@@ -41,13 +41,13 @@ if (nonEnglishLocales.length > 0) {
 }
 
 // Always check if translations repo is needed but missing
-if (activeLocales.length > 1 && !fs.existsSync(path.join(L10NS_BASE_DIR, '.git'))) {
+if (activeLocales.length > 1 && !fs.existsSync(path.join(L10N_CAGE_DIR, '.git'))) {
 	setupNeeded = true
 	reason = 'Translation repository not found'
 }
 
 // Check if English messages file is available for Paraglide
-const enMessageTarget = path.join(L10NS_BASE_DIR, 'json', 'en.json')
+const enMessageTarget = path.join(L10N_CAGE_DIR, 'json', 'en.json')
 if (!fs.existsSync(enMessageTarget)) {
 	setupNeeded = true
 	reason = 'English messages file not found'
@@ -64,7 +64,7 @@ console.log('\n🔍 Environment check:')
 console.log(`- Active locales: ${activeLocales.join(', ')}`)
 console.log(`- SvelteKit initialized: ${fs.existsSync('.svelte-kit') ? 'yes ✓' : 'no ❌'}`)
 console.log(
-	`- Base directory (${L10NS_BASE_DIR}): ${fs.existsSync(L10NS_BASE_DIR) ? 'exists ✓' : 'missing ❌'}`
+	`- Base directory (${L10N_CAGE_DIR}): ${fs.existsSync(L10N_CAGE_DIR) ? 'exists ✓' : 'missing ❌'}`
 )
 console.log(
 	`- English messages (${enMessageTarget}): ${fs.existsSync(enMessageTarget) ? 'exists ✓' : 'missing ❌'}`
