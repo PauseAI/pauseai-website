@@ -107,7 +107,7 @@ export function createSymlinkIfNeeded(targetPath: string, linkPath: string, verb
 	}
 
 	// Create symbolic link
-	fsSync.symlinkSync(path.relative(path.dirname(linkPath), targetPath), linkPath, 'junction')
+	fsSync.symlinkSync(path.relative(path.dirname(linkPath), targetPath), linkPath, 'file')
 	if (verbose) console.log(`  \u2713 Linked ${linkPath} to ${targetPath}`)
 }
 
@@ -244,7 +244,7 @@ export async function placeInCage(filePath: string, content: string): Promise<vo
  * @param filePath - Path to the JSON file to clean
  * @param verbose - Whether to output verbose logs
  */
-export function cullCommentary(filePath: string, verbose = false): boolean {
+export function cullCommentary(filePath: string, verbose = false) {
 	try {
 		const content = fsSync.readFileSync(filePath, 'utf-8')
 		const firstBrace = content.indexOf('{')
