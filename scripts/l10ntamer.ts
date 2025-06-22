@@ -46,20 +46,11 @@ interface LinkAuditResult {
 	isLocalizedPage: boolean
 }
 
-function findFilesRecursively(dir: string, ext: string): string[] {
-	const files: string[] = []
-	if (!fs.existsSync(dir)) return files
-
-	const items = fs.readdirSync(dir, { withFileTypes: true })
-	for (const item of items) {
-		const fullPath = path.join(dir, item.name)
-		if (item.isDirectory()) {
-			files.push(...findFilesRecursively(fullPath, ext))
-		} else if (item.name.endsWith(ext)) {
-			files.push(fullPath)
-		}
-	}
+export function findFilesRecursively(dir: string, ext: string) {
+	const files = fs.readdirSync(dir, { recursive: true }) as string[]
 	return files
+		.map((file) => path.join(dir, file))
+		.filter((file) => path.extname(file) === '.' + ext)
 }
 
 async function findUnlocalizedLinks(): Promise<LinkAuditResult[]> {
