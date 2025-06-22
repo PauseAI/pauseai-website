@@ -18,7 +18,7 @@ if (localizeHref('/test', { locale: 'en' }) === '/test') {
 	process.exit(0)
 }
 
-const LOCALES = locales
+const LOCALES: readonly string[] = locales
 const UNLOCALIZED_PATTERNS = [
 	// Common content pages that should be localized
 	'/faq',
