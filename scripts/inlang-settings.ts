@@ -66,6 +66,12 @@ function regenerateSettings(verbose = false): void {
 		console.log(`\ud83e\udd16 L10n generation: ${allowGeneration ? 'ENABLED' : 'DISABLED'}`)
 	}
 
+	// Force-remove cached l10n-cage in CI to prevent broken Git state
+	if (process.env.CI === 'true' && fs.existsSync(L10N_CAGE_DIR)) {
+		console.log('🧹 CI: Force-removing cached l10n-cage (prevents broken Git state)')
+		fs.rmSync(L10N_CAGE_DIR, { recursive: true, force: true })
+	}
+
 	// Create required directories
 	if (verbose) console.log('\n\ud83d\udcc1 Creating required directories...')
 	ensureDirectoriesExist([L10N_CAGE_DIR, MESSAGE_L10NS, MARKDOWN_L10NS], verbose)

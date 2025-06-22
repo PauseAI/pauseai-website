@@ -7,12 +7,12 @@ import path from 'path'
 
 /**
  * Model configuration with pricing and estimation parameters
- * Pricing is as of April 2025
+ * Pricing updated June 2025 based on actual usage data
  */
 export const MODEL_CONFIGS = {
 	'meta-llama/llama-3.1-405b-instruct': {
-		// Cost per 1000 words of content (currently free through OpenRouter)
-		COST_PER_1000_WORDS: 0,
+		// Cost per 1000 words of content (based on actual usage: ~$0.70 for 92.36k words)
+		COST_PER_1000_WORDS: 0.0076,
 		// Fixed word overhead for prompt instructions
 		PROMPT_OVERHEAD_WORDS: 300,
 		// Markdown formatting overhead (percentage of content words)
