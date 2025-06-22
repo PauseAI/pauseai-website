@@ -17,12 +17,20 @@ import { l10nCageBranch, validateBranchForWrite, setupBranchAndTracking } from '
  */
 export const GIT_CONFIG = {
 	EMAIL: 'example@example.com',
-	MAX_CONCURRENT_PROCESSES: 8,
+	MAX_CONCURRENT_PROCESSES: 1,
 	USERNAME: 'L10nKeeper'
 }
 
-// L10n cage URL (public access)
-export const L10N_CAGE_URL = 'github.com/PauseAI/paraglide'
+/**
+ * Get the l10n cage repository URL with appropriate authentication
+ * @returns Git URL with token authentication if GITHUB_TOKEN is available, otherwise SSH
+ */
+export function cageUrl(): string {
+	const repoPath = 'github.com/PauseAI/paraglide'
+	return process.env.GITHUB_TOKEN
+		? `https://${process.env.GITHUB_TOKEN}@${repoPath}.git`
+		: `git@${repoPath.replace('github.com/', 'github.com:')}.git`
+}
 
 /**
  * Creates a SimpleGit instance with configured options
@@ -61,9 +69,6 @@ export function setupL10nCage(cageDir: string, verbose = false, branch?: string)
 				console.log('  ✓ L10n cage already exists, pulling latest changes...')
 			}
 
-			// Ensure we're on the correct branch before pulling
-			setupBranchAndTracking(cageDir, targetBranch, verbose)
-
 			// Pull latest changes (if upstream exists)
 			try {
 				// Check if current branch has upstream tracking
@@ -97,14 +102,17 @@ export function setupL10nCage(cageDir: string, verbose = false, branch?: string)
 			// Ensure parent directory exists
 			ensureDirectoryExists(path.dirname(cageDir), verbose)
 
-			// Clone public l10n cage - no token needed for public repos
-			const gitCommand = `git clone https://${L10N_CAGE_URL}.git ${cageDir}`
+			// Clone with appropriate authentication
+			const gitCommand = `git clone ${cageUrl()} ${cageDir}`
 			execSync(gitCommand, { stdio: verbose ? 'inherit' : 'ignore' })
-			if (verbose) console.log('  ✓ Cloned l10n cage repository')
-
-			// Switch to the target branch
-			setupBranchAndTracking(cageDir, targetBranch, verbose)
+			if (verbose) {
+				const authMethod = process.env.GITHUB_TOKEN ? 'token authentication' : 'SSH'
+				console.log(`  ✓ Cloned l10n cage repository using ${authMethod}`)
+			}
 		}
+
+		// Always ensure we're on the correct branch and configure authentication
+		setupBranchAndTracking(cageDir, targetBranch, verbose)
 		return true
 	} catch (error) {
 		console.error('\n❌ FAILED TO SET UP L10N CAGE!')

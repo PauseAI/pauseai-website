@@ -9,6 +9,7 @@ import fs from 'fs'
 import path from 'path'
 import { execSync } from 'child_process'
 import { SimpleGit } from 'simple-git'
+import { cageUrl } from './git-ops'
 
 /**
  * Get the current Git branch name of the pauseai-website working directory
@@ -38,7 +39,8 @@ export function l10nCageBranch(): string {
 	if (process.env.CI === 'true') {
 		// Netlify PR preview
 		if (process.env.REVIEW_ID) {
-			return `pr-${process.env.REVIEW_ID}`
+			const branch = `pr-${process.env.REVIEW_ID}`
+			return branch
 		}
 		// Netlify branch deploy or other CI
 		if (process.env.BRANCH) {
@@ -49,7 +51,8 @@ export function l10nCageBranch(): string {
 	}
 
 	// 3. Local development - use current Git branch
-	return currentWebsiteBranch()
+	const websiteBranch = currentWebsiteBranch()
+	return websiteBranch
 }
 
 /**
@@ -71,71 +74,79 @@ export function validateBranchForWrite(branch: string): void {
 }
 
 /**
+ * Configure Git authentication for existing repository
+ * @param cageDir Directory of the l10n cage repository
+ * @param verbose Whether to log detailed output
+ */
+function configureGitAuthentication(cageDir: string, verbose = false): void {
+	const url = cageUrl()
+	const setUrlCommand = `cd ${cageDir} && git remote set-url origin ${url}`
+	execSync(setUrlCommand, { stdio: 'pipe' })
+	if (verbose) {
+		const authMethod = process.env.GITHUB_TOKEN ? 'token authentication' : 'SSH'
+		console.log(`  🔧 Configured remote with ${authMethod}`)
+	}
+}
+
+/**
  * Set up branch and tracking for the l10n cage
  * @param cageDir Directory of the l10n cage
  * @param branch The branch to set up
  * @param verbose Whether to log detailed output
  */
 function setupBranchAndTracking(cageDir: string, branch: string, verbose: boolean): void {
-	try {
-		// Check if the branch exists locally
-		const localBranchExists =
-			execSync(
-				`cd ${cageDir} && git rev-parse --verify ${branch} 2>/dev/null || echo "not found"`,
-				{ encoding: 'utf8' }
-			).trim() !== 'not found'
+	// Configure authentication for git remote operations
+	configureGitAuthentication(cageDir, verbose)
 
-		if (!localBranchExists) {
-			// Check if remote branch exists
-			const remoteBranchExists =
-				execSync(`cd ${cageDir} && git ls-remote --heads origin ${branch} | wc -l`, {
-					encoding: 'utf8'
-				}).trim() !== '0'
+	// Check if the branch exists locally
+	const localBranchCommand = `cd ${cageDir} && git rev-parse --verify ${branch} 2>/dev/null || echo "not found"`
+	const localBranchExists =
+		execSync(localBranchCommand, { encoding: 'utf8' }).trim() !== 'not found'
 
-			if (remoteBranchExists) {
-				// Create local branch from remote (automatically sets up tracking)
-				execSync(`cd ${cageDir} && git checkout -b ${branch} origin/${branch}`, {
-					stdio: verbose ? 'inherit' : 'ignore'
-				})
-				if (verbose) console.log(`  ✓ Created and switched to ${branch} branch from remote`)
-			} else {
-				// Create new local branch (NO upstream setup yet)
-				execSync(`cd ${cageDir} && git checkout -b ${branch}`, {
-					stdio: verbose ? 'inherit' : 'ignore'
-				})
-				if (verbose)
-					console.log(`  ✓ Created new ${branch} branch (upstream will be set on first push)`)
-			}
-		} else {
-			// Branch exists, just checkout
-			execSync(`cd ${cageDir} && git checkout ${branch}`, { stdio: verbose ? 'inherit' : 'ignore' })
-			if (verbose) console.log(`  ✓ Switched to ${branch} branch`)
-		}
+	if (!localBranchExists) {
+		// Check if remote branch exists
+		const remoteBranchCommand = `cd ${cageDir} && git ls-remote --heads origin ${branch} | wc -l`
+		const remoteBranchExists = execSync(remoteBranchCommand, { encoding: 'utf8' }).trim() !== '0'
 
-		// Only set upstream if remote branch actually exists
-		const remoteBranchExists =
-			execSync(`cd ${cageDir} && git ls-remote --heads origin ${branch} | wc -l`, {
-				encoding: 'utf8'
-			}).trim() !== '0'
 		if (remoteBranchExists) {
-			try {
-				const currentUpstream = execSync(
-					`cd ${cageDir} && git rev-parse --abbrev-ref ${branch}@{upstream} 2>/dev/null || echo "none"`,
-					{ encoding: 'utf8' }
-				).trim()
-				if (currentUpstream === 'none') {
-					execSync(`cd ${cageDir} && git branch --set-upstream-to=origin/${branch} ${branch}`, {
-						stdio: 'ignore'
-					})
-					if (verbose) console.log(`  ✓ Set up tracking for ${branch}`)
-				}
-			} catch (e) {
-				// Tracking setup failed, but this is not critical
-				if (verbose) console.log('  ⚠️  Could not set up tracking (continuing anyway)')
-			}
+			// Create local branch from remote (automatically sets up tracking)
+			const checkoutCommand = `cd ${cageDir} && git checkout -b ${branch} origin/${branch}`
+			execSync(checkoutCommand, {
+				stdio: verbose ? 'inherit' : 'ignore'
+			})
+			if (verbose) console.log(`  ✓ Created and switched to ${branch} branch from remote`)
+		} else {
+			// Create new local branch (NO upstream setup yet)
+			const createBranchCommand = `cd ${cageDir} && git checkout -b ${branch}`
+			execSync(createBranchCommand, {
+				stdio: verbose ? 'inherit' : 'ignore'
+			})
+			if (verbose)
+				console.log(`  ✓ Created new ${branch} branch (upstream will be set on first push)`)
 		}
-	} catch (e) {
-		if (verbose) console.log(`  ℹ️  Could not switch to ${branch}, staying on current branch`)
+	} else {
+		// Branch exists, just checkout
+		const checkoutExistingCommand = `cd ${cageDir} && git checkout ${branch}`
+		execSync(checkoutExistingCommand, { stdio: verbose ? 'inherit' : 'ignore' })
+		if (verbose) console.log(`  ✓ Switched to ${branch} branch`)
+	}
+
+	// Only set upstream if remote branch actually exists
+	const remoteBranchExists =
+		execSync(`cd ${cageDir} && git ls-remote --heads origin ${branch} | wc -l`, {
+			encoding: 'utf8'
+		}).trim() !== '0'
+	if (remoteBranchExists) {
+		const currentUpstream = execSync(
+			`cd ${cageDir} && git rev-parse --abbrev-ref ${branch}@{upstream} 2>/dev/null || echo "none"`,
+			{ encoding: 'utf8' }
+		).trim()
+		if (currentUpstream === 'none') {
+			execSync(`cd ${cageDir} && git branch --set-upstream-to=origin/${branch} ${branch}`, {
+				stdio: 'ignore'
+			})
+			if (verbose) console.log(`  ✓ Set up tracking for ${branch}`)
+		}
 	}
 }
 
@@ -214,6 +225,10 @@ export function hasEndangeredL10ns(cageDir: string): string {
  * Push changes to remote, automatically setting upstream for new branches
  * @param git SimpleGit instance for the repository
  * @param verbose Whether to log detailed output
+ *
+ * Note: This handles upstream setting for branches that didn't exist during setup.
+ * setupBranchAndTracking() sets upstream for existing remote branches (enabling pulls),
+ * but new branches need upstream set during their first push (when remote branch is created).
  */
 export async function pushWithUpstream(git: SimpleGit, verbose = false): Promise<void> {
 	try {

@@ -6,6 +6,7 @@
 import axios from 'axios'
 import axiosRetry from 'axios-retry'
 import PQueue from 'p-queue'
+import { formatLlmErrorForLogging, fetchAndDisplayBilling } from './llm-utils'
 
 // Default values for LLM client configuration
 export const LLM_DEFAULTS = {
@@ -49,12 +50,15 @@ export function createLlmClient(options: {
 		}
 	})
 	created.interceptors.request.use((config) => {
-		Object.assign(config.data, {
-			model: options.model,
-			provider: {
-				order: options.providers
-			}
-		})
+		// Only modify data for requests that have a body (POST, PUT, etc.)
+		if (config.data) {
+			Object.assign(config.data, {
+				model: options.model,
+				provider: {
+					order: options.providers
+				}
+			})
+		}
 		return config
 	})
 	axiosRetry(created, {
@@ -86,8 +90,29 @@ export async function postChatCompletion(
 		return '[DRY RUN API CALL PLACEHOLDER]'
 	}
 
-	const response = await queue.add(() =>
-		client.post('/chat/completions', { messages, temperature })
-	)
-	return response.data.choices[0].message.content
+	try {
+		const response = await queue.add(() =>
+			client.post('/chat/completions', { messages, temperature })
+		)
+		return response.data.choices[0].message.content
+	} catch (error) {
+		// Extract and log detailed error information
+		const requestData = { messages, temperature }
+		const errorDetails = formatLlmErrorForLogging(error, requestData)
+
+		console.error('LLM API call failed:')
+		console.error(errorDetails)
+
+		// For 402 errors on OpenRouter, try to fetch billing information
+		const status = error.response?.status
+		const isOpenRouter = client.defaults?.baseURL?.includes('openrouter.ai')
+
+		if (status === 402 && isOpenRouter) {
+			await fetchAndDisplayBilling(client)
+		}
+
+		// Throw a cleaner error without the full response dump
+		const statusText = error.response?.statusText || 'Error'
+		throw new Error(`LLM API call failed: ${status} ${statusText}`)
+	}
 }
