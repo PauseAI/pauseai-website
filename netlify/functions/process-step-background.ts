@@ -1,20 +1,39 @@
-import { env } from '$env/dynamic/private'
+// SVELTEKIT SUBSTITUTE: Removed SvelteKit imports and replaced with Netlify Function structure
+// SVELTEKIT SUBSTITUTE: Changed from '$env/dynamic/private' to process.env
+// SVELTEKIT SUBSTITUTE: Changed import paths to netlify/functions
+
 import Anthropic from '@anthropic-ai/sdk'
-import { JobStorage } from '$lib/server/storage'
+import { JobStorage } from './storage'
 
 // Import types and configurations from server
-import type { StepName, WriteState, StepConfig } from 'src/routes/api/write/+server'
-import {
-	workflowConfigs,
-	generateProgressString,
-	prepareResponse
-} from 'src/routes/api/write/+server'
+import type { StepName, WriteState, StepConfig } from './write'
+import { generateProgressString, prepareResponse } from './write'
 
-// Environment variables for step processing
-const ANTHROPIC_API_KEY_FOR_WRITE = env.ANTHROPIC_API_KEY_FOR_WRITE || undefined
-const ENABLE_WEB_SEARCH = env.ENABLE_WEB_SEARCH !== 'false'
-const MAX_TOOL_CALLS_PER_STEP = parseInt(env.MAX_TOOL_CALLS_PER_STEP || '3')
+// SVELTEKIT SUBSTITUTE: Changed from env imports to process.env
+const ANTHROPIC_API_KEY_FOR_WRITE = process.env.ANTHROPIC_API_KEY_FOR_WRITE || undefined
+const ENABLE_WEB_SEARCH = process.env.ENABLE_WEB_SEARCH !== 'false'
+const MAX_TOOL_CALLS_PER_STEP = parseInt(process.env.MAX_TOOL_CALLS_PER_STEP || '3')
 const IS_API_AVAILABLE = !!ANTHROPIC_API_KEY_FOR_WRITE
+
+// Workflow configurations (duplicated from write.ts for background processing)
+const workflowConfigs: Record<string, any> = {
+	'1': {
+		steps: ['findTarget'],
+		description: 'Find Target Only'
+	},
+	'2': {
+		steps: ['webSearch', 'research'],
+		description: 'Web Search + Autofill'
+	},
+	'3': {
+		steps: ['research'],
+		description: 'Autofill only'
+	},
+	'4': {
+		steps: ['firstDraft', 'firstCut', 'firstEdit', 'toneEdit', 'finalEdit'],
+		description: 'Full Email Generation'
+	}
+}
 
 // Initialize Anthropic client
 const anthropic = IS_API_AVAILABLE
@@ -547,79 +566,109 @@ function getWorkflowSteps(workflowType: string): StepName[] {
 	return workflowConfigs[workflowType]?.steps || []
 }
 
-// NEW: Background function endpoint handler
-export async function POST({ request }) {
+// SVELTEKIT SUBSTITUTE: Converted to Netlify Function handler
+export const handler = async (event: any, context: any) => {
 	const pencil = '✏️'
 
-	try {
-		const { jobId } = await request.json()
-
-		if (!jobId) {
-			return new Response(JSON.stringify({ error: 'Job ID is required' }), {
-				status: 400,
-				headers: { 'Content-Type': 'application/json' }
-			})
-		}
-
-		console.log(`${pencil} background: Starting processing for job ${jobId}`)
-
-		// Check if API is available
-		if (!IS_API_AVAILABLE) {
-			await JobStorage.failJob(jobId, 'Anthropic API key is not available')
-			return new Response(JSON.stringify({ error: 'API not available' }), {
-				status: 500,
-				headers: { 'Content-Type': 'application/json' }
-			})
-		}
-
-		// Process the job
-		const finalState = await processStep(jobId)
-
-		console.log(`${pencil} background: Job ${jobId} processing completed`)
-
-		return new Response(
-			JSON.stringify({
-				success: true,
-				jobId,
-				complete: finalState.step === 'complete'
-			}),
-			{
-				status: 200,
-				headers: { 'Content-Type': 'application/json' }
-			}
-		)
-	} catch (error) {
-		console.error(`${pencil} background: Error in background processing:`, error)
-
-		// Try to update job status if we have a jobId
-		const requestData = await request.json().catch(() => ({}))
-		if (requestData.jobId) {
-			await JobStorage.failJob(requestData.jobId, error.message || 'Background processing failed')
-		}
-
-		return new Response(
-			JSON.stringify({
-				error: 'Background processing failed',
-				message: error.message
-			}),
-			{
-				status: 500,
-				headers: { 'Content-Type': 'application/json' }
-			}
-		)
+	// SVELTEKIT SUBSTITUTE: Handle CORS for browser requests
+	const headers = {
+		'Content-Type': 'application/json',
+		'Access-Control-Allow-Origin': '*',
+		'Access-Control-Allow-Headers': 'Content-Type',
+		'Access-Control-Allow-Methods': 'GET, POST, OPTIONS'
 	}
-}
 
-// For compatibility, also export GET handler
-export async function GET() {
-	return new Response(
-		JSON.stringify({
-			status: 'Background processing service is running',
-			apiAvailable: IS_API_AVAILABLE
-		}),
-		{
-			status: 200,
-			headers: { 'Content-Type': 'application/json' }
+	// Handle preflight requests
+	if (event.httpMethod === 'OPTIONS') {
+		return {
+			statusCode: 200,
+			headers,
+			body: ''
 		}
-	)
+	}
+
+	// Handle GET requests (status check)
+	if (event.httpMethod === 'GET') {
+		return {
+			statusCode: 200,
+			headers,
+			body: JSON.stringify({
+				status: 'Background processing service is running',
+				apiAvailable: IS_API_AVAILABLE
+			})
+		}
+	}
+
+	// Handle POST requests (process job)
+	if (event.httpMethod === 'POST') {
+		try {
+			const { jobId } = JSON.parse(event.body || '{}')
+
+			if (!jobId) {
+				return {
+					statusCode: 400,
+					headers,
+					body: JSON.stringify({ error: 'Job ID is required' })
+				}
+			}
+
+			console.log(`${pencil} background: Starting processing for job ${jobId}`)
+
+			// Check if API is available
+			if (!IS_API_AVAILABLE) {
+				await JobStorage.failJob(jobId, 'Anthropic API key is not available')
+				return {
+					statusCode: 500,
+					headers,
+					body: JSON.stringify({ error: 'API not available' })
+				}
+			}
+
+			// Process the job
+			const finalState = await processStep(jobId)
+
+			console.log(`${pencil} background: Job ${jobId} processing completed`)
+
+			return {
+				statusCode: 200,
+				headers,
+				body: JSON.stringify({
+					success: true,
+					jobId,
+					complete: finalState.step === 'complete'
+				})
+			}
+		} catch (error) {
+			console.error(`${pencil} background: Error in background processing:`, error)
+
+			// Try to update job status if we have a jobId
+			try {
+				const requestData = JSON.parse(event.body || '{}')
+				if (requestData.jobId) {
+					await JobStorage.failJob(
+						requestData.jobId,
+						error.message || 'Background processing failed'
+					)
+				}
+			} catch (parseError) {
+				// Ignore parse errors when trying to extract jobId for error handling
+			}
+
+			return {
+				statusCode: 500,
+				headers,
+				body: JSON.stringify({
+					error: 'Background processing failed',
+					message: error.message
+				})
+			}
+		}
+	}
+
+	// Handle unsupported methods
+	return {
+		statusCode: 405,
+		headers,
+		body: JSON.stringify({ error: 'Method not allowed' })
+	}
 }

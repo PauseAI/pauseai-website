@@ -1,7 +1,17 @@
 <script lang="ts">
 	import { botName } from '$lib/config'
-	import type { ChatResponse } from '../api/write/+server'
 	import { onMount, onDestroy } from 'svelte'
+
+	type ChatResponse = {
+		response: string
+		apiAvailable?: boolean
+		stateToken?: string
+		progressString?: string
+		complete?: boolean
+		information?: string
+		jobId?: string
+		status?: string
+	}
 
 	// Define local Message type to include 'progress' role and complete flag
 	type Message = {
@@ -380,7 +390,7 @@
 		// Start polling
 		pollingInterval = setInterval(async () => {
 			await checkJobStatus(jobId)
-		}, POLLING_INTERVAL_MS)
+		}, POLLING_INTERVAL_MS) as unknown as number
 
 		// Set timeout to prevent infinite polling
 		jobTimeout = setTimeout(() => {
@@ -394,7 +404,7 @@
 				}
 			]
 			loading = false
-		}, JOB_TIMEOUT_MS)
+		}, JOB_TIMEOUT_MS) as unknown as number
 
 		console.log(`Started polling for job ${jobId}`)
 	}
