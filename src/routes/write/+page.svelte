@@ -2,6 +2,7 @@
 	import { botName } from '$lib/config'
 	import { onMount, onDestroy } from 'svelte'
 
+	// SVELTEKIT SUBSTITUTE: Moved shared types to avoid importing from Netlify Functions
 	type ChatResponse = {
 		response: string
 		apiAvailable?: boolean
@@ -46,8 +47,9 @@
 
 	// Job tracking variables
 	let currentJobId: string | null = null
-	let pollingInterval: number | null = null
-	let jobTimeout: number | null = null
+	// SVELTEKIT SUBSTITUTE: Fixed timer types to avoid TypeScript errors
+	let pollingInterval: ReturnType<typeof setInterval> | null = null
+	let jobTimeout: ReturnType<typeof setTimeout> | null = null
 	const POLLING_INTERVAL_MS = 2000 // Poll every 2 seconds
 	const JOB_TIMEOUT_MS = 300000 // 5 minutes timeout
 
@@ -387,10 +389,11 @@
 		currentJobId = jobId
 		localStorage.setItem(JOB_STORAGE_KEY, jobId)
 
+		// SVELTEKIT SUBSTITUTE: Fixed timer types
 		// Start polling
 		pollingInterval = setInterval(async () => {
 			await checkJobStatus(jobId)
-		}, POLLING_INTERVAL_MS) as unknown as number
+		}, POLLING_INTERVAL_MS)
 
 		// Set timeout to prevent infinite polling
 		jobTimeout = setTimeout(() => {
@@ -404,7 +407,7 @@
 				}
 			]
 			loading = false
-		}, JOB_TIMEOUT_MS) as unknown as number
+		}, JOB_TIMEOUT_MS)
 
 		console.log(`Started polling for job ${jobId}`)
 	}
@@ -423,7 +426,8 @@
 
 	async function checkJobStatus(jobId: string) {
 		try {
-			const response = await fetch(`api/write/status?jobId=${jobId}`)
+			// SVELTEKIT SUBSTITUTE: Updated API endpoint to use Netlify Functions
+			const response = await fetch(`/.netlify/functions/status?jobId=${jobId}`)
 			const data = await response.json()
 
 			if (data.error) {
@@ -558,8 +562,9 @@
 		console.log(input)
 
 		try {
+			// SVELTEKIT SUBSTITUTE: Updated API endpoint to use Netlify Functions
 			// Create new job request
-			const response = await fetch('api/write', {
+			const response = await fetch('/.netlify/functions/write', {
 				method: 'POST',
 				headers: {
 					'Content-Type': 'application/json'
@@ -664,7 +669,8 @@
 			console.log(`Resuming job monitoring for ${savedJobId}`)
 			// Check if job is still active
 			try {
-				const response = await fetch(`api/write/status?jobId=${savedJobId}`)
+				// SVELTEKIT SUBSTITUTE: Updated API endpoint to use Netlify Functions
+				const response = await fetch(`/.netlify/functions/status?jobId=${savedJobId}`)
 				const data = await response.json()
 
 				if (!data.error && (data.status === 'pending' || data.status === 'processing')) {
@@ -704,7 +710,8 @@
 
 		// Check API availability on component mount
 		try {
-			const response = await fetch('api/write')
+			// SVELTEKIT SUBSTITUTE: Updated API endpoint to use Netlify Functions
+			const response = await fetch('/.netlify/functions/write')
 			const data = await response.json()
 			apiAvailable = !!data.apiAvailable
 		} catch (error) {
