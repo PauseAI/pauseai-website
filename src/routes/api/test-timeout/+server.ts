@@ -22,7 +22,7 @@ export async function GET({ url }) {
 				index: i,
 				success: false,
 				elapsed: Date.now() - reqStart,
-				error: error.message
+				error: error instanceof Error ? error.message : String(error)
 			})
 			break // Stop on first error
 		}
