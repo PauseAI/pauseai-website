@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { botName } from '$lib/config'
 	import type { ChatResponse } from '../api/write/+server'
-	import { onMount } from 'svelte'
+	import { onMount, onDestroy } from 'svelte'
 
 	// Define local Message type to include 'progress' role and complete flag
 	type Message = {
@@ -23,8 +23,8 @@
 
 	// Use a unique localStorage key to avoid conflicts with other pages
 	const STORAGE_KEY = 'email_writer_messages'
-	// CLAUDE CHANGE: Added storage key for form data
 	const FORM_DATA_STORAGE_KEY = 'email_writer_form_data'
+	const JOB_STORAGE_KEY = 'email_writer_job_id'
 
 	let messages: Message[] =
 		typeof localStorage !== 'undefined' ? JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]') : []
@@ -33,6 +33,13 @@
 	let loading = false
 	let apiAvailable = true // Default to true, will be updated after first API call
 	const maxMessages = 20
+
+	// Job tracking variables
+	let currentJobId: string | null = null
+	let pollingInterval: number | null = null
+	let jobTimeout: number | null = null
+	const POLLING_INTERVAL_MS = 2000 // Poll every 2 seconds
+	const JOB_TIMEOUT_MS = 300000 // 5 minutes timeout
 
 	// Organizing the form questions into sections and subsections
 	const formSections_Target: FieldSection[] = [
@@ -69,12 +76,7 @@
 				},
 				{
 					title: 'Potential Motivations',
-					questions: ['What might incentivize them to act', 'Their likely concerns or interests'] /*
-					questions: [
-						'What might incentivize them to act',
-						'Their likely concerns or interests',
-						'Potential alignment with your request'
-					]*/
+					questions: ['What might incentivize them to act', 'Their likely concerns or interests']
 				}
 			]
 		},
@@ -86,12 +88,7 @@
 					questions: [
 						'Potential receptiveness to your message',
 						'Avoiding triggers that might create resistance'
-					] /*
-					questions: [
-						'Current potential mood or state of mind',
-						'Potential receptiveness to your message',
-						'Avoiding triggers that might create resistance'
-					]*/
+					]
 				},
 				{
 					title: 'Perspective Alignment',
@@ -158,17 +155,11 @@
 			subsections: [
 				{
 					title: 'Timeframe',
-					questions: ['Urgency of the request', 'Specific deadlines'] /*
-					questions: [
-						'Urgency of the request',
-						'Specific deadlines',
-						'Expected timeline for response or action'
-					]*/
+					questions: ['Urgency of the request', 'Specific deadlines']
 				},
 				{
 					title: 'Supplementary Information',
 					questions: ['Attachments needed', 'Links to additional resources']
-					//questions: ['Attachments needed', 'Links to additional resources', 'Reference materials']
 				}
 			]
 		},
@@ -194,7 +185,6 @@
 		}
 	]
 
-	// CLAUDE CHANGE: Fixed the population of paragraphText_MessageDetails - was incorrectly using formSections_Research
 	const paragraphText_MessageDetails: string[] = []
 	formSections_MessageDetails.forEach((section) => {
 		section.subsections.forEach((subsection) => {
@@ -210,12 +200,7 @@
 			subsections: [
 				{
 					title: 'Content Requirements',
-					questions: ['Specific outcome desired', 'Concrete action requested'] /*
-					questions: [
-						'Clear, singular objective',
-						'Specific outcome desired',
-						'Concrete action requested'
-					]*/
+					questions: ['Specific outcome desired', 'Concrete action requested']
 				},
 				{
 					title: 'Supporting Evidence',
@@ -239,7 +224,7 @@
 		})
 	})
 
-	// CLAUDE CHANGE: Added mapping functions to get correct arrays based on active form
+	// Helper functions for form management
 	function getCurrentInputArray(): string[] {
 		switch (activeForm) {
 			case 'form1':
@@ -284,8 +269,10 @@
 		}
 	}
 
-	// CLAUDE CHANGE: Updated clear function to clear current form and reset to form1
 	function clear() {
+		// Stop any active polling
+		stopJobPolling()
+
 		messages = []
 		localStorage.setItem(STORAGE_KEY, JSON.stringify(messages))
 
@@ -295,8 +282,12 @@
 		clear_arr(form3_input_arr)
 		clear_arr(form4_input_arr)
 
-		// Clear form data from localStorage
+		// Clear form data and job ID from localStorage
 		localStorage.removeItem(FORM_DATA_STORAGE_KEY)
+		localStorage.removeItem(JOB_STORAGE_KEY)
+
+		// Clear current job ID
+		currentJobId = null
 	}
 
 	function copy() {
@@ -308,7 +299,6 @@
 		)
 	}
 
-	// CLAUDE CHANGE: Updated runTest to work with currently active form and provide appropriate test data
 	function runTest() {
 		// Clear any existing chat
 		clear()
@@ -379,7 +369,152 @@
 		sendMessage()
 	}
 
-	// CLAUDE CHANGE: Updated sendMessage to work with currently active form only
+	// New job polling functions
+	function startJobPolling(jobId: string) {
+		// Clear any existing polling
+		stopJobPolling()
+
+		currentJobId = jobId
+		localStorage.setItem(JOB_STORAGE_KEY, jobId)
+
+		// Start polling
+		pollingInterval = setInterval(async () => {
+			await checkJobStatus(jobId)
+		}, POLLING_INTERVAL_MS)
+
+		// Set timeout to prevent infinite polling
+		jobTimeout = setTimeout(() => {
+			stopJobPolling()
+			console.warn('Job polling timed out')
+			messages = [
+				...messages,
+				{
+					content: 'The job is taking longer than expected. Please try again or contact support.',
+					role: 'assistant'
+				}
+			]
+			loading = false
+		}, JOB_TIMEOUT_MS)
+
+		console.log(`Started polling for job ${jobId}`)
+	}
+
+	function stopJobPolling() {
+		if (pollingInterval) {
+			clearInterval(pollingInterval)
+			pollingInterval = null
+		}
+
+		if (jobTimeout) {
+			clearTimeout(jobTimeout)
+			jobTimeout = null
+		}
+	}
+
+	async function checkJobStatus(jobId: string) {
+		try {
+			const response = await fetch(`api/write/status?jobId=${jobId}`)
+			const data = await response.json()
+
+			if (data.error) {
+				console.error('Error checking job status:', data.error)
+				return
+			}
+
+			// Update progress message
+			if (data.progressString) {
+				const progressIndex = messages.findIndex((m) => m.role === 'progress')
+				if (progressIndex >= 0) {
+					messages[progressIndex].content = data.progressString
+					messages[progressIndex].complete = data.complete
+				} else {
+					messages = [
+						...messages,
+						{
+							content: data.progressString,
+							role: 'progress',
+							complete: data.complete
+						}
+					]
+				}
+			}
+
+			// Update email content
+			if (data.response) {
+				const assistantIndex = messages.findIndex((m) => m.role === 'assistant')
+				if (assistantIndex >= 0) {
+					messages[assistantIndex].content = data.response
+				} else {
+					messages = [
+						...messages,
+						{
+							content: data.response,
+							role: 'assistant'
+						}
+					]
+				}
+			}
+
+			// Handle auto-fill information
+			if (data.information) {
+				updateFormFieldsFromInformation(data.information)
+			}
+
+			// Save messages to localStorage
+			localStorage.setItem(STORAGE_KEY, JSON.stringify(messages))
+			saveFormData()
+
+			// Check if job is complete or failed
+			if (data.status === 'completed' || data.status === 'failed' || data.complete) {
+				stopJobPolling()
+				loading = false
+
+				if (data.status === 'failed') {
+					messages = [
+						...messages,
+						{
+							content: `Job failed: ${data.error || 'Unknown error occurred'}`,
+							role: 'assistant'
+						}
+					]
+				}
+
+				console.log(`Job ${jobId} ${data.status}`)
+			}
+		} catch (error) {
+			console.error('Error checking job status:', error)
+		}
+	}
+
+	function updateFormFieldsFromInformation(information: string) {
+		const currentInputArray = getCurrentInputArray()
+		const currentQuestionArray = getCurrentQuestionArray()
+
+		// Parse the information string to extract field values
+		const lines = information.split('\n')
+		let currentField = -1
+
+		for (let line of lines) {
+			// Look for field headers matching our current question array
+			const fieldIndex = currentQuestionArray.findIndex((text) =>
+				line.trim().startsWith(text + ':')
+			)
+
+			if (fieldIndex >= 0) {
+				currentField = fieldIndex
+			} else if (currentField >= 0 && line.trim()) {
+				// Only update when there's actual content and the field is empty
+				const lineContent = line.trim()
+				if (
+					lineContent &&
+					(!currentInputArray[currentField] || currentInputArray[currentField] === '')
+				) {
+					currentInputArray[currentField] = lineContent
+				}
+			}
+		}
+	}
+
 	async function sendMessage() {
 		const currentInputArray = getCurrentInputArray()
 		const currentQuestionArray = getCurrentQuestionArray()
@@ -389,19 +524,17 @@
 			case 'form1':
 				input = input + '[1]'
 				break
-
 			case 'form2':
 				input = input + '[2]'
 				break
-
 			case 'form4':
 				input = input + '[3]'
 				break
-
 			case 'form5':
 				input = input + '[4]'
 				break
 		}
+
 		for (let i = 0; i < currentQuestionArray.length; i++) {
 			input =
 				input + currentQuestionArray[i] + ':\n' + (currentInputArray[i] || 'undefined') + '\n\n'
@@ -415,8 +548,8 @@
 		console.log(input)
 
 		try {
-			// First request - get initial progress message (no stateToken)
-			const initialResponse = await fetch('api/write', {
+			// Create new job request
+			const response = await fetch('api/write', {
 				method: 'POST',
 				headers: {
 					'Content-Type': 'application/json'
@@ -424,28 +557,58 @@
 				body: JSON.stringify([{ content: input, role: 'user' }])
 			})
 
-			const initialData = await initialResponse.json()
+			const data = await response.json()
 
-			// Add server-generated progress message with complete flag
-			messages = [
-				...messages,
-				{
-					content: initialData.progressString,
-					role: 'progress',
-					complete: initialData.complete // Track completion status
+			if (!data.apiAvailable) {
+				apiAvailable = false
+				messages = [
+					...messages,
+					{
+						content: data.response || 'API not available',
+						role: 'assistant'
+					}
+				]
+				loading = false
+				return
+			}
+
+			// Add initial progress message
+			if (data.progressString) {
+				messages = [
+					...messages,
+					{
+						content: data.progressString,
+						role: 'progress',
+						complete: data.complete || false
+					}
+				]
+			}
+
+			// Handle auto-fill information
+			if (data.information) {
+				updateFormFieldsFromInformation(data.information)
+			}
+
+			// Save messages and form data
+			localStorage.setItem(STORAGE_KEY, JSON.stringify(messages))
+			saveFormData()
+
+			// Start polling if we got a job ID
+			if (data.jobId) {
+				startJobPolling(data.jobId)
+			} else {
+				// Job might be already complete
+				if (data.response) {
+					messages = [
+						...messages,
+						{
+							content: data.response,
+							role: 'assistant'
+						}
+					]
 				}
-			]
-
-			// Scroll to progress message
-			setTimeout(() => {
-				const progressMessage = document.querySelector('.message.progress')
-				if (progressMessage) {
-					progressMessage.scrollIntoView({ behavior: 'smooth', block: 'center' })
-				}
-			}, 100)
-
-			// Continue with the normal process, but pass the stateToken
-			await processSteps(null, initialData.stateToken)
+				loading = false
+			}
 		} catch (error) {
 			console.error('Error calling email API:', error)
 			messages = [
@@ -456,124 +619,11 @@
 					role: 'assistant'
 				}
 			]
-		} finally {
 			loading = false
 		}
 	}
 
-	async function processSteps(inputMessages: Message[] | null, stateToken = null) {
-		// Set loading indicator
-		loading = true
-
-		try {
-			// Prepare the request body
-			const requestBody = stateToken ? { stateToken } : inputMessages
-
-			// Make the API call
-			const response = await fetch('api/write', {
-				method: 'POST',
-				headers: {
-					'Content-Type': 'application/json'
-				},
-				body: JSON.stringify(requestBody)
-			})
-
-			// Process the response
-			const data = await response.json()
-			console.log('DATA: \n' + data)
-			console.log(data.information)
-
-			// Update API availability
-			apiAvailable = data.apiAvailable !== false
-
-			// Show progress if available
-			if (data.progressString) {
-				// Find existing progress message or create one
-				const progressIndex = messages.findIndex((m) => m.role === 'progress')
-				if (progressIndex >= 0) {
-					// Update existing progress message
-					messages[progressIndex].content = data.progressString
-					messages[progressIndex].complete = data.complete // Update complete flag
-				} else {
-					// Add new progress message
-					messages = [
-						...messages,
-						{
-							content: data.progressString,
-							role: 'progress',
-							complete: data.complete // Add complete flag
-						}
-					]
-				}
-			}
-
-			// Update the UI with the current state of the email
-			if (data.response) {
-				// Find existing assistant message or create one
-				const assistantIndex = messages.findIndex((m) => m.role === 'assistant')
-				if (assistantIndex >= 0) {
-					// Update existing assistant message
-					messages[assistantIndex].content = data.response
-				} else {
-					// Add new assistant message
-					messages = [{ content: data.response, role: 'assistant' }, ...messages]
-				}
-			}
-
-			// CLAUDE CHANGE: Updated auto-fill logic to work with currently active form
-			if (data.information) {
-				const currentInputArray = getCurrentInputArray()
-				const currentQuestionArray = getCurrentQuestionArray()
-
-				// Parse the information string to extract field values
-				const lines = data.information.split('\n')
-				let currentField = -1
-
-				for (let line of lines) {
-					// Look for field headers matching our current question array
-					const fieldIndex = currentQuestionArray.findIndex((text) =>
-						line.trim().startsWith(text + ':')
-					)
-
-					if (fieldIndex >= 0) {
-						currentField = fieldIndex
-					} else if (currentField >= 0 && line.trim()) {
-						// Only update when there's actual content and the field is empty
-						const lineContent = line.trim()
-						if (
-							lineContent &&
-							(!currentInputArray[currentField] || currentInputArray[currentField] === '')
-						) {
-							currentInputArray[currentField] = lineContent
-						}
-					}
-				}
-			}
-
-			// Save messages to localStorage
-			localStorage.setItem(STORAGE_KEY, JSON.stringify(messages))
-			// CLAUDE CHANGE: Also save form data
-			saveFormData()
-
-			// If not complete, continue with the next step
-			if (!data.complete && data.stateToken) {
-				// Short delay to allow UI to update
-				await new Promise((resolve) => setTimeout(resolve, 100))
-
-				// Process the next step
-				await processSteps(null, data.stateToken)
-			} else {
-				// Process is complete, update UI
-				loading = false
-			}
-		} catch (error) {
-			console.error('Error in step processing:', error)
-			loading = false
-			throw error
-		}
-	}
-
-	// CLAUDE CHANGE: Added form data persistence functions
+	// Form data persistence functions
 	function saveFormData() {
 		const formData = {
 			form1_input_arr,
@@ -598,8 +648,48 @@
 		}
 	}
 
+	async function resumeJobIfExists() {
+		const savedJobId = localStorage.getItem(JOB_STORAGE_KEY)
+		if (savedJobId) {
+			console.log(`Resuming job monitoring for ${savedJobId}`)
+			// Check if job is still active
+			try {
+				const response = await fetch(`api/write/status?jobId=${savedJobId}`)
+				const data = await response.json()
+
+				if (!data.error && (data.status === 'pending' || data.status === 'processing')) {
+					// Resume polling for active job
+					loading = true
+					startJobPolling(savedJobId)
+				} else if (data.status === 'completed') {
+					// Job completed while away, update UI
+					if (data.response) {
+						const assistantIndex = messages.findIndex((m) => m.role === 'assistant')
+						if (assistantIndex >= 0) {
+							messages[assistantIndex].content = data.response
+						} else {
+							messages = [
+								...messages,
+								{
+									content: data.response,
+									role: 'assistant'
+								}
+							]
+						}
+					}
+					localStorage.removeItem(JOB_STORAGE_KEY)
+				} else {
+					// Job failed or not found, clean up
+					localStorage.removeItem(JOB_STORAGE_KEY)
+				}
+			} catch (error) {
+				console.error('Error resuming job:', error)
+				localStorage.removeItem(JOB_STORAGE_KEY)
+			}
+		}
+	}
+
 	onMount(async () => {
-		// CLAUDE CHANGE: Load form data on mount
 		loadFormData()
 
 		// Check API availability on component mount
@@ -611,24 +701,23 @@
 			console.error('Error checking API availability:', error)
 			apiAvailable = false
 		}
+
+		// Resume job monitoring if there's an active job
+		await resumeJobIfExists()
+	})
+
+	onDestroy(() => {
+		// Clean up polling when component is destroyed
+		stopJobPolling()
 	})
 
 	function handleKeyDown(event: KeyboardEvent) {
-		/*
-		if (event.key === 'Enter') {
-			event.preventDefault()
-			sendMessage()
-			clear_arr(input_arr);
-		}
-		*/
+		// Key handling for forms if needed
 	}
 
 	// FORM FUNCTIONS //
-
-	// Add these variables for form toggling
 	let activeForm = 'form1' // Default active form
 
-	// CLAUDE CHANGE: Updated setActiveForm to save form data when switching
 	function setActiveForm(formId: string) {
 		saveFormData() // Save current state before switching
 		activeForm = formId
@@ -641,10 +730,7 @@
 		sendMessage()
 	}
 
-	// UNTESTED AND GENERATED BY AI
 	// Create separate arrays for each form's inputs
-	//let input_arr = Array(formSections_Target.flatMap(s => s.subsections.flatMap(ss => ss.questions)).length).fill('');
-	// CLAUDE CHANGE: Fixed form array initialization to use correct lengths
 	let form1_input_arr = Array(paragraphText_Research.length).fill('')
 	let form2_input_arr = Array(paragraphText_Target.length).fill('')
 	let form3_input_arr = Array(paragraphText_Message.length).fill('')
@@ -780,9 +866,8 @@
 		<button class="button" on:click={clear}>Reset All</button>
 	{:else}
 		<!-- Form container with conditional display based on active form -->
-		<!-- CLAUDE MODIFICATION: Modified the form container section to show forms -->
 		<div class="form-container">
-			<!-- Form 1 - Remains unchanged -->
+			<!-- Form 1 - Finding a Target -->
 			{#if activeForm === 'form1'}
 				<form on:submit|preventDefault>
 					{#each formSections_Research as section, sectionIndex}
@@ -805,25 +890,21 @@
 				</form>
 			{/if}
 
-			<!-- Form 2 - Now includes merged PersonResearch and Target sections -->
+			<!-- Form 2 - Personal Context -->
 			{#if activeForm === 'form2'}
 				<form on:submit|preventDefault>
-					<!-- Render form sections using the structured data -->
 					{#each formSections_Target as section, sectionIndex}
 						<h1>{section.title}</h1>
 						{#each section.subsections as subsection, subsectionIndex}
 							<h2>{subsection.title}</h2>
 
-							<!-- Special handling for 'Content Requirements' to add an h3 for 'Precise Purpose' -->
 							{#if subsection.title === 'Content Requirements'}
 								<h3>Precise Purpose</h3>
 							{/if}
 
 							{#each subsection.questions as question, questionIndex}
-								<!-- Calculate the global index for this question -->
 								{@const globalIndex = paragraphText_Target.findIndex((text) => text === question)}
 
-								<!-- Add special h3 headers for specific subsections -->
 								{#if subsection.title === 'Supporting Evidence' && questionIndex === 0}
 									<h3>Supporting Evidence</h3>
 								{:else if subsection.title === 'Logical Structure' && questionIndex === 0}
@@ -842,7 +923,7 @@
 				</form>
 			{/if}
 
-			<!-- Form 3 -->
+			<!-- Form 3 - The Message -->
 			{#if activeForm === 'form3'}
 				<form on:submit|preventDefault>
 					{#each formSections_Message as section, sectionIndex}
@@ -865,7 +946,7 @@
 				</form>
 			{/if}
 
-			<!-- Form 4 -->
+			<!-- Form 4 - Message Details -->
 			{#if activeForm === 'form4'}
 				<form on:submit|preventDefault>
 					{#each formSections_MessageDetails as section, sectionIndex}
@@ -946,9 +1027,9 @@
 	button[disabled] {
 		opacity: 0.5;
 		cursor: not-allowed;
-		pointer-events: none; /* Prevents hover effects */
-		background-color: #cccccc !important; /* Override other background colors */
-		color: #666666 !important; /* Darker text */
+		pointer-events: none;
+		background-color: #cccccc !important;
+		color: #666666 !important;
 		border: 1px solid #999999;
 	}
 
@@ -979,7 +1060,6 @@
 		flex-wrap: wrap;
 	}
 
-	/* Common button styles across all buttons */
 	button {
 		background-color: var(--brand);
 		color: var(--bg);
@@ -1003,6 +1083,11 @@
 		background-color: var(--brand);
 	}
 
+	button.active {
+		background-color: var(--brand-subtle);
+		font-weight: bold;
+	}
+
 	.message {
 		display: flex;
 		border-radius: 10px;
@@ -1014,6 +1099,8 @@
 
 	.message p {
 		margin: 0;
+		padding: 10px;
+		border-radius: 10px;
 	}
 
 	.user {
@@ -1038,7 +1125,6 @@
 		padding: 0.5rem 1rem;
 		text-align: left;
 		font-family: monospace;
-		/* Add the loading animation while in progress */
 		background-image: linear-gradient(90deg, var(--bg) 0%, var(--bg-subtle) 50%, var(--bg) 100%);
 		background-size: 200% 100%;
 		animation: loading 3s linear infinite;
@@ -1071,17 +1157,15 @@
 		text-align: center;
 	}
 
-	/* Only apply completed style when the 'Done' text is present */
 	.progress.completed {
 		animation: none;
 		background-image: none;
-		background-color: #c0ffc0; /* Light green background */
+		background-color: #c0ffc0;
 		border-color: #c3e6cb;
 		color: #155724;
 	}
 
 	.loading {
-		/* message loading bg animated */
 		background-image: linear-gradient(90deg, var(--bg) 0%, var(--bg-subtle) 50%, var(--bg) 100%);
 		background-size: 200% 100%;
 		animation: loading 3s linear infinite;
@@ -1094,10 +1178,5 @@
 		100% {
 			background-position: -100% 0;
 		}
-	}
-
-	.message p {
-		padding: 10px;
-		border-radius: 10px;
 	}
 </style>

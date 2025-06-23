@@ -1,6 +1,6 @@
 import { error, json } from '@sveltejs/kit'
 import { env } from '$env/dynamic/private'
-import { processStep, stepConfigs } from './process-claude-background'
+import { JobStorage, generateJobId } from '$lib/storage'
 
 // Type definitions
 export type StepName =
@@ -49,6 +49,8 @@ export type ChatResponse = {
 	progressString?: string
 	complete?: boolean
 	information?: string
+	jobId?: string
+	status?: string
 }
 
 export type Message = {
@@ -59,7 +61,7 @@ export type Message = {
 export interface JobStorage {
 	jobId: string
 	status: 'pending' | 'processing' | 'completed' | 'failed'
-	writeState: WriteState // Your existing state object
+	writeState: WriteState
 	error?: string
 	createdAt: Date
 	completedAt?: Date
@@ -69,6 +71,32 @@ export interface JobStorage {
 const ANTHROPIC_API_KEY_FOR_WRITE = env.ANTHROPIC_API_KEY_FOR_WRITE || undefined
 const ENABLE_WEB_SEARCH = env.ENABLE_WEB_SEARCH !== 'false'
 const IS_API_AVAILABLE = !!ANTHROPIC_API_KEY_FOR_WRITE
+const NETLIFY_BACKGROUND_FUNCTION_URL =
+	env.NETLIFY_BACKGROUND_FUNCTION_URL || '/.src/routes/api/write/process-step-background'
+
+// Step configurations (imported from background file)
+export const stepConfigs: Record<StepName, StepConfig> = {
+	findTarget: {
+		toolsEnabled: true,
+		maxToolCalls: 5,
+		description: 'Find possible targets (using web search)'
+	},
+	webSearch: {
+		toolsEnabled: true,
+		maxToolCalls: 3,
+		description: 'Research the target (using web search)'
+	},
+	research: {
+		toolsEnabled: false,
+		maxToolCalls: 2,
+		description: 'Auto-fill missing user inputs'
+	},
+	firstDraft: { toolsEnabled: false },
+	firstCut: { toolsEnabled: false },
+	firstEdit: { toolsEnabled: false },
+	toneEdit: { toolsEnabled: false },
+	finalEdit: { toolsEnabled: false }
+}
 
 // Workflow configurations
 export const workflowConfigs: Record<WorkflowType, WorkflowConfig> = {
@@ -144,7 +172,7 @@ function getStepDescription(stepName: StepName): string {
 }
 
 // Function to generate a progress string from the state
-function generateProgressString(state: WriteState): string {
+export function generateProgressString(state: WriteState): string {
 	const pencil = '✏️'
 	const checkmark = '✓'
 	const search = '🔍'
@@ -228,7 +256,7 @@ function initializeState(userInput: string): WriteState {
 }
 
 // Helper function to prepare consistent responses
-function prepareResponse(state: WriteState): ChatResponse {
+export function prepareResponse(state: WriteState): ChatResponse {
 	// Generate progress string
 	const progressString = generateProgressString(state)
 
@@ -241,6 +269,24 @@ function prepareResponse(state: WriteState): ChatResponse {
 		progressString,
 		complete: isComplete,
 		information: state.information || state.userInput
+	}
+}
+
+// Trigger background function processing
+async function triggerBackgroundProcessing(jobId: string): Promise<void> {
+	try {
+		// Call the background function endpoint
+		await fetch(NETLIFY_BACKGROUND_FUNCTION_URL, {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify({ jobId })
+		})
+	} catch (error) {
+		console.error('Error triggering background processing:', error)
+		// Mark job as failed if we can't trigger the background function
+		await JobStorage.failJob(jobId, 'Failed to trigger background processing')
 	}
 }
 
@@ -265,13 +311,35 @@ export async function POST({ fetch, request }) {
 
 		// Check if this is a continuation of an existing process
 		let state: WriteState
+		let jobId: string
 
 		if (requestData.stateToken) {
-			// Continue an existing process
+			// Continue an existing process - extract jobId from stateToken or request
 			try {
-				state = JSON.parse(requestData.stateToken) as WriteState
+				const parsedState = JSON.parse(requestData.stateToken) as WriteState
+
+				// If jobId is provided in the request, use it; otherwise we need to handle legacy stateTokens
+				if (requestData.jobId) {
+					jobId = requestData.jobId
+					// Get the latest state from storage
+					const jobData = await JobStorage.getJob(jobId)
+					if (!jobData) {
+						return json({
+							response: 'Job not found. Please try starting over.',
+							apiAvailable: true
+						} as ChatResponse)
+					}
+					state = jobData.writeState
+				} else {
+					// Legacy support - use the state from stateToken directly
+					state = parsedState
+					// For legacy requests, we still need to create a job for future processing
+					jobId = generateJobId()
+					await JobStorage.createJob(jobId, state)
+				}
+
 				console.log(
-					`${pencil} write: Continuing from step ${state.step} (workflow ${state.workflowType})`
+					`${pencil} write: Continuing from step ${state.step} (workflow ${state.workflowType}) - Job ID: ${jobId}`
 				)
 			} catch (error) {
 				console.error('Error parsing state token:', error)
@@ -301,17 +369,46 @@ export async function POST({ fetch, request }) {
 				`${pencil} write: Detected workflow type ${state.workflowType}: ${workflowConfigs[state.workflowType].description}`
 			)
 
+			// Create a new job in storage
+			jobId = generateJobId()
+			await JobStorage.createJob(jobId, state)
+			console.log(`${pencil} write: Created job ${jobId}`)
+
 			// For initial calls (no stateToken), return progress string without processing
 			if (requestData.stateToken === undefined) {
-				return json(prepareResponse(state))
+				const response = prepareResponse(state)
+				return json({
+					...response,
+					jobId,
+					status: 'pending'
+				})
 			}
 		}
 
-		// For subsequent calls, process the step
-		state = await processStep(state)
+		// For subsequent calls or continuation, trigger background processing
+		if (state.nextStep && state.step !== 'complete') {
+			// Trigger background processing (non-blocking)
+			triggerBackgroundProcessing(jobId)
 
-		// Return response using helper function
-		return json(prepareResponse(state))
+			// Update job status to processing
+			await JobStorage.updateJobStatus(jobId, 'processing')
+
+			// Return current state with job info
+			const response = prepareResponse(state)
+			return json({
+				...response,
+				jobId,
+				status: 'processing'
+			})
+		} else {
+			// Job is complete
+			const response = prepareResponse(state)
+			return json({
+				...response,
+				jobId,
+				status: 'completed'
+			})
+		}
 	} catch (err) {
 		console.error('Error in email generation:', err)
 		return json({

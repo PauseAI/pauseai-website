@@ -1,9 +1,10 @@
 import { env } from '$env/dynamic/private'
 import Anthropic from '@anthropic-ai/sdk'
+import { JobStorage } from '$lib/storage'
 
 // Import types and configurations from server
-import type { StepName, WriteState, StepConfig, JobStorage } from './+server'
-import { workflowConfigs } from './+server'
+import type { StepName, WriteState, StepConfig } from './+server'
+import { workflowConfigs, generateProgressString, prepareResponse } from './+server'
 
 // Environment variables for step processing
 const ANTHROPIC_API_KEY_FOR_WRITE = env.ANTHROPIC_API_KEY_FOR_WRITE || undefined
@@ -445,69 +446,176 @@ const stepHandlers: Record<
 	}
 }
 
-// Process a specific step
-export async function processStep(state: WriteState): Promise<WriteState> {
-	if (!state.nextStep) {
-		return {
-			...state,
-			step: 'complete',
-			currentStep: null
+// Process a specific step with storage integration
+export async function processStep(jobId: string): Promise<WriteState> {
+	const pencil = '✏️'
+
+	try {
+		// Load state from storage
+		const jobData = await JobStorage.getJob(jobId)
+		if (!jobData) {
+			throw new Error(`Job ${jobId} not found`)
 		}
+
+		let state = jobData.writeState
+		console.log(`${pencil} processStep: Processing job ${jobId}, step ${state.nextStep}`)
+
+		// Check if job is already complete or has no next step
+		if (!state.nextStep || state.step === 'complete') {
+			console.log(`${pencil} processStep: Job ${jobId} already complete`)
+			return state
+		}
+
+		const currentStep = state.nextStep as StepName
+		state.currentStep = currentStep
+
+		// Update remaining steps - remove current step from remaining
+		state.remainingSteps = state.remainingSteps.filter((step) => step !== currentStep)
+
+		// Update job status to processing
+		await JobStorage.updateJobStatus(jobId, 'processing')
+
+		// Execute the step using the step handler from the map
+		const stepHandler = stepHandlers[currentStep]
+		if (!stepHandler) {
+			throw new Error(`Unknown step: ${currentStep}`)
+		}
+
+		console.log(`${pencil} processStep: Executing step ${currentStep} for job ${jobId}`)
+		const result = await stepHandler(state)
+
+		// Update email content (except for research-like steps which update information)
+		if (!['research'].includes(currentStep)) {
+			state.email = result.text
+		}
+
+		// Update state with results - current step is now completed
+		state.step = currentStep
+		state.completedSteps.push({
+			name: currentStep,
+			durationSec: result.durationSec
+		})
+
+		// Set next step based on workflow configuration
+		const workflowSteps = getWorkflowSteps(state.workflowType)
+		const currentIndex = workflowSteps.indexOf(currentStep)
+
+		if (currentIndex !== -1 && currentIndex < workflowSteps.length - 1) {
+			state.nextStep = workflowSteps[currentIndex + 1]
+			state.currentStep = workflowSteps[currentIndex + 1]
+		} else {
+			// Last step completed, mark as complete
+			state.nextStep = null
+			state.currentStep = null
+			state.step = 'complete'
+		}
+
+		// Update storage with new state
+		await JobStorage.updateWriteState(jobId, state)
+
+		// If there are more steps, continue processing
+		if (state.nextStep && state.step !== 'complete') {
+			console.log(
+				`${pencil} processStep: Continuing to next step ${state.nextStep} for job ${jobId}`
+			)
+			// Recursively process the next step
+			return await processStep(jobId)
+		} else {
+			// Mark job as completed
+			console.log(`${pencil} processStep: Job ${jobId} completed`)
+			await JobStorage.completeJob(jobId, state)
+		}
+
+		return state
+	} catch (error) {
+		console.error(`${pencil} processStep: Error processing job ${jobId}:`, error)
+
+		// Mark job as failed
+		await JobStorage.failJob(jobId, error.message || 'Unknown error occurred')
+
+		// Re-throw the error for the caller to handle
+		throw error
 	}
-
-	const currentStep = state.nextStep as StepName
-	state.currentStep = currentStep
-
-	// Update remaining steps - remove current step from remaining
-	state.remainingSteps = state.remainingSteps.filter((step) => step !== currentStep)
-
-	// Execute the step using the step handler from the map
-	const stepHandler = stepHandlers[currentStep]
-	if (!stepHandler) {
-		throw new Error(`Unknown step: ${currentStep}`)
-	}
-
-	const result = await stepHandler(state)
-
-	// Update email content (except for research-like steps which update information)
-	if (!['research'].includes(currentStep)) {
-		state.email = result.text
-	}
-
-	// Update state with results - current step is now completed
-	state.step = currentStep
-	state.completedSteps.push({
-		name: currentStep,
-		durationSec: result.durationSec
-	})
-
-	// Set next step based on workflow configuration
-	// Note: This requires access to workflowConfigs which should be imported from the server file
-	const workflowSteps = getWorkflowSteps(state.workflowType)
-	const currentIndex = workflowSteps.indexOf(currentStep)
-
-	if (currentIndex !== -1 && currentIndex < workflowSteps.length - 1) {
-		state.nextStep = workflowSteps[currentIndex + 1]
-		state.currentStep = workflowSteps[currentIndex + 1]
-	} else {
-		// Last step completed, mark as complete
-		state.nextStep = null
-		state.currentStep = null
-		state.step = 'complete'
-	}
-
-	return state
 }
 
-// Helper function to get workflow steps (this will need to be imported from server)
+// Helper function to get workflow steps
 function getWorkflowSteps(workflowType: string): StepName[] {
-	// This should be imported from the server file or passed as a parameter
-	// For now, returning a placeholder
-	const workflowConfigs = {
-		'1': ['findTarget'],
-		'2': ['webSearch', 'research'],
-		'3': ['research'],
-		'4': ['firstDraft', 'firstCut', 'firstEdit', 'toneEdit', 'finalEdit']
+	return workflowConfigs[workflowType]?.steps || []
+}
+
+// NEW: Background function endpoint handler
+export async function POST({ request }) {
+	const pencil = '✏️'
+
+	try {
+		const { jobId } = await request.json()
+
+		if (!jobId) {
+			return new Response(JSON.stringify({ error: 'Job ID is required' }), {
+				status: 400,
+				headers: { 'Content-Type': 'application/json' }
+			})
+		}
+
+		console.log(`${pencil} background: Starting processing for job ${jobId}`)
+
+		// Check if API is available
+		if (!IS_API_AVAILABLE) {
+			await JobStorage.failJob(jobId, 'Anthropic API key is not available')
+			return new Response(JSON.stringify({ error: 'API not available' }), {
+				status: 500,
+				headers: { 'Content-Type': 'application/json' }
+			})
+		}
+
+		// Process the job
+		const finalState = await processStep(jobId)
+
+		console.log(`${pencil} background: Job ${jobId} processing completed`)
+
+		return new Response(
+			JSON.stringify({
+				success: true,
+				jobId,
+				complete: finalState.step === 'complete'
+			}),
+			{
+				status: 200,
+				headers: { 'Content-Type': 'application/json' }
+			}
+		)
+	} catch (error) {
+		console.error(`${pencil} background: Error in background processing:`, error)
+
+		// Try to update job status if we have a jobId
+		const requestData = await request.json().catch(() => ({}))
+		if (requestData.jobId) {
+			await JobStorage.failJob(requestData.jobId, error.message || 'Background processing failed')
+		}
+
+		return new Response(
+			JSON.stringify({
+				error: 'Background processing failed',
+				message: error.message
+			}),
+			{
+				status: 500,
+				headers: { 'Content-Type': 'application/json' }
+			}
+		)
 	}
-	return workflowConfigs[workflowType] || []
+}
+
+// For compatibility, also export GET handler
+export async function GET() {
+	return new Response(
+		JSON.stringify({
+			status: 'Background processing service is running',
+			apiAvailable: IS_API_AVAILABLE
+		}),
+		{
+			status: 200,
+			headers: { 'Content-Type': 'application/json' }
+		}
+	)
 }
