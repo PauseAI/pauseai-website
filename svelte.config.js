@@ -9,7 +9,7 @@ import remarkToc from 'remark-toc'
 import remarkHeadingId from 'remark-heading-id'
 import rehypeSlug from 'rehype-slug'
 
-import { locales } from './project.inlang/settings.json' assert { type: 'json' }
+import { locales } from './project.inlang/settings.json' with { type: 'json' }
 
 // Export configuration flags for use in build scripts
 export const USE_EDGE_FUNCTIONS = true
