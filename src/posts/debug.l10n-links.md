@@ -47,7 +47,3 @@ This page tests various link patterns to ensure proper localization behavior.
 - [Empty href]()
 - [Just slash](/)
 - [Double slash start](//not-a-locale)
-
-## Test section for anchors {#section}
-
-This is the target for the anchor link above.
