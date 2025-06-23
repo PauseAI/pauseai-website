@@ -259,7 +259,10 @@ export function cullCommentary(filePath: string, verbose = false) {
 
 		if (verbose) console.log(`✅ Culled LLM commentary in ${filePath}`)
 	} catch (error) {
-		console.error(`Error cleaning up file ${filePath}:`, error.message)
+		console.error(
+			`Error cleaning up file ${filePath}:`,
+			error instanceof Error ? error.message : String(error)
+		)
 	}
 }
 
