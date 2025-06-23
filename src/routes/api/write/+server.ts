@@ -1,6 +1,6 @@
 import { error, json } from '@sveltejs/kit'
 import { env } from '$env/dynamic/private'
-import { JobStorage, generateJobId } from '$lib/storage'
+import { JobStorage, generateJobId } from '$lib/server/storage'
 
 // Type definitions
 export type StepName =
@@ -72,10 +72,10 @@ const ANTHROPIC_API_KEY_FOR_WRITE = env.ANTHROPIC_API_KEY_FOR_WRITE || undefined
 const ENABLE_WEB_SEARCH = env.ENABLE_WEB_SEARCH !== 'false'
 const IS_API_AVAILABLE = !!ANTHROPIC_API_KEY_FOR_WRITE
 const NETLIFY_BACKGROUND_FUNCTION_URL =
-	env.NETLIFY_BACKGROUND_FUNCTION_URL || '/.src/routes/api/write/process-step-background'
+	env.NETLIFY_BACKGROUND_FUNCTION_URL || '/.netlify/functions/process-step-background'
 
 // Step configurations (imported from background file)
-export const stepConfigs: Record<StepName, StepConfig> = {
+const stepConfigs: Record<StepName, StepConfig> = {
 	findTarget: {
 		toolsEnabled: true,
 		maxToolCalls: 5,
@@ -99,7 +99,7 @@ export const stepConfigs: Record<StepName, StepConfig> = {
 }
 
 // Workflow configurations
-export const workflowConfigs: Record<WorkflowType, WorkflowConfig> = {
+const workflowConfigs: Record<WorkflowType, WorkflowConfig> = {
 	'1': {
 		steps: ['findTarget'],
 		description: 'Find Target Only',
@@ -172,7 +172,7 @@ function getStepDescription(stepName: StepName): string {
 }
 
 // Function to generate a progress string from the state
-export function generateProgressString(state: WriteState): string {
+function generateProgressString(state: WriteState): string {
 	const pencil = '✏️'
 	const checkmark = '✓'
 	const search = '🔍'
@@ -256,7 +256,7 @@ function initializeState(userInput: string): WriteState {
 }
 
 // Helper function to prepare consistent responses
-export function prepareResponse(state: WriteState): ChatResponse {
+function prepareResponse(state: WriteState): ChatResponse {
 	// Generate progress string
 	const progressString = generateProgressString(state)
 
