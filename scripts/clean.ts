@@ -35,7 +35,7 @@ removeMultiple(
 		'./src/lib/generated',
 		'./build',
 		'.svelte-kit',
-		'.netlify/functions-internal',
+		'.netlify',
 		'./static/pagefind',
 		// Our L10N generated files (keep old dir for migration compatibility)
 		'./src/temp/translations',
