@@ -11,7 +11,9 @@
 
 import fs from 'fs'
 import path from 'path'
-import { locales, localizeHref } from '../src/lib/paraglide/runtime.js'
+import { importRuntimeWithoutVite } from './l10n/utils.js'
+
+const { locales, localizeHref } = await importRuntimeWithoutVite()
 
 if (localizeHref('/test', { locale: 'en' }) === '/test') {
 	console.log('⏭️  Skipping l10ntamer - English routes not prefixed')

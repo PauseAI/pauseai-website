@@ -35,6 +35,7 @@ import {
 	MESSAGE_L10NS,
 	MESSAGE_SOURCE
 } from '../../src/lib/l10n.ts'
+import { importRuntimeWithoutVite } from './utils.ts'
 
 // Load environment variables first
 dotenv.config()
@@ -63,12 +64,12 @@ if (unknownArgs.length > 0) {
 }
 
 // Ensure inlang settings are current before importing runtime
-execSync('tsx scripts/inlang-settings.ts', { stdio: 'ignore' })
+execSync('tsx scripts/inlang-settings.ts', { stdio: 'inherit' })
 
 // This let / try / catch lets the ESM scan succeed in the absence of a runtime
 let locales: readonly string[]
 try {
-	const runtime = await import('../../src/lib/paraglide/runtime.js')
+	const runtime = await importRuntimeWithoutVite()
 	locales = runtime.locales
 	if (runtime.baseLocale !== 'en')
 		throw new Error(
