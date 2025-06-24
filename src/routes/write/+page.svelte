@@ -297,6 +297,12 @@
 
 		// Clear form data from localStorage
 		localStorage.removeItem(FORM_DATA_STORAGE_KEY)
+
+		// Force Svelte to detect the changes
+		form1_input_arr = form1_input_arr
+		form2_input_arr = form2_input_arr
+		form3_input_arr = form3_input_arr
+		form4_input_arr = form4_input_arr
 	}
 
 	function copy() {
@@ -732,12 +738,10 @@
 			>
 				AI Help (Research / Autofill)
 			</button>
-			<button on:click={runTest} class="button" disabled={!apiAvailable || loading}>
+			<button on:click={copy} class="button" disabled={!apiAvailable || loading}>
 				Copy Content
 			</button>
-			<button on:click={clear} class="button" disabled={loading || messages.length === 0}>
-				Reset All
-			</button>
+			<button on:click={clear} class="button" disabled={loading}> Reset All </button>
 			<button
 				on:click={writeMail}
 				disabled={!apiAvailable || loading}
