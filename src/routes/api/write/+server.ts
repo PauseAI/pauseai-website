@@ -469,10 +469,11 @@ async function callClaude(
 		return { text: finalText, durationSec: elapsed }
 	} catch (error) {
 		// ENHANCED: Better error handling for tool-related failures
-		if (toolsEnabled && (error.message?.includes('tool') || error.message?.includes('search'))) {
+		const errorMessage = error instanceof Error ? error.message : String(error)
+		if (toolsEnabled && (errorMessage?.includes('tool') || errorMessage?.includes('search'))) {
 			console.warn(
 				`${search} ${logPrefix}: Tool error, falling back to text-only mode:`,
-				error.message
+				errorMessage
 			)
 			// Retry without tools on tool-related errors
 			return callClaude(stepName, promptNames, userContent, false)
