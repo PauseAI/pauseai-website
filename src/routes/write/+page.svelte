@@ -676,29 +676,24 @@
 			{/if}
 		</div>
 		<p>
-			"Answer questions / fill fields after researching your target. Undefined fields will be
+			Answer questions / fill fields after researching your target. Undefined fields will be
 			auto-filled. Check the generated email content carefully, as we're bound to make some
-			mistakes!"
+			mistakes!
 		</p>
 		<p class="notes">
-			The real user interface for entering inputs will surely be refined. For now, scan over the
-			thirty(!) imperfectly structured input fields at the end of the page, and fill in the ones
-			that seem the most important. See you back here when done!
+			You can switch tabs by click on any of the top 4 buttons. This will show new fields: you can
+			switch back and forth at any time, inputs are saved! If you clicked on "Autofill" and nothing
+			happened, switch back and forth to refresh the content. The button is grayed out when
+			unavailable.
 		</p>
 		<p class="notes">
-			You can then ask to write content. The AI assistant will auto-fill any fields you didn't
-			define, based on the ones you did, then proceed to craft an email over a number of steps. The
-			UX for this part is closer to something we would launch but please give the software team
-			further feedback!
+			First, fill in the topmost prompts. You can then ask to autofill content. The AI assistant
+			will auto-fill any fields you didn't define, based on the ones you did. The UX for this part
+			is still rough as this feature isn't universally available, so please give us feedback!
 		</p>
 		<p class="notes">
-			This is currently a very general writer. If you want it to write to your dad about puppies or
-			to Trump about how we need to accelerate AI development, it will. We would probably give it
-			more defaults and impose some restrictions in a truly public version.
-		</p>
-		<p>
-			For a very quick demo, you can use the button below - it fills in just three fields with
-			particular hardcoded values, and starts writing content.
+			To generate the entire email, click the "Write Mail" button. This will take from all input
+			fields and empty them!
 		</p>
 
 		<!-- Form toggle bar -->
@@ -738,9 +733,6 @@
 				Autofill
 			</button>
 			<button on:click={runTest} class="button" disabled={!apiAvailable || loading}>
-				(Demo for beta)
-			</button>
-			<button on:click={copy} class="button" disabled={loading || messages.length === 0}>
 				Copy Content
 			</button>
 			<button on:click={clear} class="button" disabled={loading || messages.length === 0}>

@@ -370,7 +370,7 @@ async function callClaude(
 					{
 						type: 'web_search_20250305', // CHANGED: Use correct tool type from API docs
 						name: 'web_search',
-						max_uses: 3 // ADDED: Limit searches per request
+						max_uses: 1 // ADDED: Limit searches per request
 					}
 				]
 			: undefined
