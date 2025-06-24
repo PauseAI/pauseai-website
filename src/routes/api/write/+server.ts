@@ -289,6 +289,8 @@ Search for and provide:
 Please cite all sources you use and only include information you can verify through your internet search. If you encounter conflicting information, note this and provide the most reliable source.
 
 BE BRIEF! This is extremely important. Try to output only a few lines of text for each questions.
+BE FAST! You do not have a lot of time to answer this query before it times out!
+ANSWER QUICKLY!!!
 `
 
 // Only initialize the client if we have an API key
