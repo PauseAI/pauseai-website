@@ -991,8 +991,8 @@
 		background-color: var(--brand-subtle);
 	}
 
-	button:active {
-		background-color: var(--brand);
+	button.button.active {
+		background-color: var(--brand-subtle);
 	}
 
 	.message {
