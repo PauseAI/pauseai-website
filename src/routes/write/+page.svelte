@@ -730,7 +730,7 @@
 				disabled={!apiAvailable || loading || activeForm === 'form3'}
 				class="button {!apiAvailable ? 'button--disabled' : ''}"
 			>
-				Autofill
+				AI Help (Research / Autofill)
 			</button>
 			<button on:click={runTest} class="button" disabled={!apiAvailable || loading}>
 				Copy Content
@@ -1019,6 +1019,20 @@
 		flex-direction: row;
 		justify-content: flex-start;
 		margin-right: auto;
+		width: 100%;
+		max-width: 100%;
+		height: 300px; /* Approximately 10 lines */
+		overflow-y: auto;
+	}
+
+	.assistant p {
+		padding: 10px;
+		border-radius: 10px;
+		/* Remove margin to prevent layout issues with fixed height */
+		margin: 0;
+		/* Allow the paragraph to expand within the container */
+		height: auto;
+		overflow-wrap: break-word;
 	}
 
 	:global(.progress) {
