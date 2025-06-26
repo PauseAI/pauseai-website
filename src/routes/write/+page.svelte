@@ -25,6 +25,8 @@
 	const STORAGE_KEY = 'email_writer_messages'
 	// CLAUDE CHANGE: Added storage key for form data
 	const FORM_DATA_STORAGE_KEY = 'email_writer_form_data'
+	// UPDATED: Storage key for collapsed sections
+	const COLLAPSED_SECTIONS_STORAGE_KEY = 'email_writer_collapsed_sections'
 
 	let messages: Message[] =
 		typeof localStorage !== 'undefined' ? JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]') : []
@@ -33,6 +35,14 @@
 	let loading = false
 	let apiAvailable = true // Default to true, will be updated after first API call
 	const maxMessages = 20
+
+	// UPDATED: Simple array-based state management for collapsed sections
+	let collapsedSections = {
+		form1: [false], // 1 section in Research form
+		form2: [false, true, true], // 3 sections in Target form
+		form3: [false], // 1 section in Message form
+		form4: [true, true, true] // 3 sections in MessageDetails form
+	}
 
 	// Organizing the form questions into sections and subsections
 	const formSections_Target: FieldSection[] = [
@@ -239,6 +249,43 @@
 		})
 	})
 
+	// UPDATED: Simplified section management functions
+	function toggleSection(formId: 'form1' | 'form2' | 'form3' | 'form4', sectionIndex: number) {
+		collapsedSections[formId][sectionIndex] = !collapsedSections[formId][sectionIndex]
+		collapsedSections = collapsedSections // Trigger reactivity
+		saveCollapsedState()
+	}
+
+	function saveCollapsedState() {
+		if (typeof localStorage !== 'undefined') {
+			localStorage.setItem(COLLAPSED_SECTIONS_STORAGE_KEY, JSON.stringify(collapsedSections))
+		}
+	}
+
+	function loadCollapsedState() {
+		if (typeof localStorage !== 'undefined') {
+			const saved = localStorage.getItem(COLLAPSED_SECTIONS_STORAGE_KEY)
+			if (saved) {
+				collapsedSections = JSON.parse(saved)
+			} else {
+				// Reset to default if no saved state
+				collapsedSections = {
+					form1: [false],
+					form2: [false, true, true],
+					form3: [false],
+					form4: [true, true, true]
+				}
+			}
+		} else {
+			collapsedSections = {
+				form1: [false],
+				form2: [false, true, true],
+				form3: [false],
+				form4: [true, true, true]
+			}
+		}
+	}
+
 	// CLAUDE CHANGE: Added mapping functions to get correct arrays based on active form
 	function getCurrentInputArray(): string[] {
 		switch (activeForm) {
@@ -297,6 +344,14 @@
 
 		// Clear form data from localStorage
 		localStorage.removeItem(FORM_DATA_STORAGE_KEY)
+		// UPDATED: Reset collapsed sections to default state
+		localStorage.removeItem(COLLAPSED_SECTIONS_STORAGE_KEY)
+		collapsedSections = {
+			form1: [false],
+			form2: [false, true, true],
+			form3: [false],
+			form4: [true, true, true]
+		}
 
 		// Force Svelte to detect the changes
 		form1_input_arr = form1_input_arr
@@ -607,6 +662,8 @@
 	onMount(async () => {
 		// CLAUDE CHANGE: Load form data on mount
 		loadFormData()
+		// UPDATED: Load collapsed state on mount
+		loadCollapsedState()
 
 		// Check API availability on component mount
 		try {
@@ -776,112 +833,193 @@
 		<button class="button" on:click={clear}>Reset All</button>
 	{:else}
 		<!-- Form container with conditional display based on active form -->
-		<!-- CLAUDE MODIFICATION: Modified the form container section to show forms -->
+		<!-- UPDATED: Modified the form container section to show forms with array-based collapsible sections -->
 		<div class="form-container">
-			<!-- Form 1 - Remains unchanged -->
+			<!-- Form 1 - Research -->
 			{#if activeForm === 'form1'}
 				<form on:submit|preventDefault>
 					{#each formSections_Research as section, sectionIndex}
-						<h1>{section.title}</h1>
-						{#each section.subsections as subsection, subsectionIndex}
-							<h2>{subsection.title}</h2>
+						<div class="section-container">
+							<button
+								class="section-header"
+								type="button"
+								on:click={() => toggleSection('form1', sectionIndex)}
+								aria-expanded={!collapsedSections.form1[sectionIndex]}
+								aria-controls="section-{sectionIndex}-content"
+							>
+								<h1>{section.title}</h1>
+								<span
+									class="chevron {collapsedSections.form1[sectionIndex] ? 'collapsed' : 'expanded'}"
+								>
+									▼
+								</span>
+							</button>
+							{#if !collapsedSections.form1[sectionIndex]}
+								<div class="section-content" id="section-{sectionIndex}-content">
+									{#each section.subsections as subsection, subsectionIndex}
+										<h2>{subsection.title}</h2>
 
-							{#each subsection.questions as question, questionIndex}
-								{@const globalIndex = paragraphText_Research.findIndex((text) => text === question)}
+										{#each subsection.questions as question, questionIndex}
+											{@const globalIndex = paragraphText_Research.findIndex(
+												(text) => text === question
+											)}
 
-								<p>{question}</p>
-								<textarea
-									placeholder="Type here (Question {globalIndex + 1})"
-									bind:value={form1_input_arr[globalIndex]}
-									on:keydown={handleKeyDown}
-								></textarea>
-							{/each}
-						{/each}
+											<p>{question}</p>
+											<textarea
+												placeholder="Type here (Question {globalIndex + 1})"
+												bind:value={form1_input_arr[globalIndex]}
+												on:keydown={handleKeyDown}
+											></textarea>
+										{/each}
+									{/each}
+								</div>
+							{/if}
+						</div>
 					{/each}
 				</form>
 			{/if}
 
-			<!-- Form 2 - Now includes merged PersonResearch and Target sections -->
+			<!-- Form 2 - Personal Context -->
 			{#if activeForm === 'form2'}
 				<form on:submit|preventDefault>
-					<!-- Render form sections using the structured data -->
 					{#each formSections_Target as section, sectionIndex}
-						<h1>{section.title}</h1>
-						{#each section.subsections as subsection, subsectionIndex}
-							<h2>{subsection.title}</h2>
+						<div class="section-container">
+							<button
+								class="section-header"
+								type="button"
+								on:click={() => toggleSection('form2', sectionIndex)}
+								aria-expanded={!collapsedSections.form2[sectionIndex]}
+								aria-controls="section-{sectionIndex}-content"
+							>
+								<h1>{section.title}</h1>
+								<span
+									class="chevron {collapsedSections.form2[sectionIndex] ? 'collapsed' : 'expanded'}"
+								>
+									▼
+								</span>
+							</button>
+							{#if !collapsedSections.form2[sectionIndex]}
+								<div class="section-content" id="section-{sectionIndex}-content">
+									{#each section.subsections as subsection, subsectionIndex}
+										<h2>{subsection.title}</h2>
 
-							<!-- Special handling for 'Content Requirements' to add an h3 for 'Precise Purpose' -->
-							{#if subsection.title === 'Content Requirements'}
-								<h3>Precise Purpose</h3>
+										<!-- Special handling for 'Content Requirements' to add an h3 for 'Precise Purpose' -->
+										{#if subsection.title === 'Content Requirements'}
+											<h3>Precise Purpose</h3>
+										{/if}
+
+										{#each subsection.questions as question, questionIndex}
+											<!-- Calculate the global index for this question -->
+											{@const globalIndex = paragraphText_Target.findIndex(
+												(text) => text === question
+											)}
+
+											<!-- Add special h3 headers for specific subsections -->
+											{#if subsection.title === 'Supporting Evidence' && questionIndex === 0}
+												<h3>Supporting Evidence</h3>
+											{:else if subsection.title === 'Logical Structure' && questionIndex === 0}
+												<h3>Logical Structure</h3>
+											{/if}
+
+											<p>{question}</p>
+											<textarea
+												placeholder="Type here (Question {globalIndex + 1})"
+												bind:value={form2_input_arr[globalIndex]}
+												on:keydown={handleKeyDown}
+											></textarea>
+										{/each}
+									{/each}
+								</div>
 							{/if}
-
-							{#each subsection.questions as question, questionIndex}
-								<!-- Calculate the global index for this question -->
-								{@const globalIndex = paragraphText_Target.findIndex((text) => text === question)}
-
-								<!-- Add special h3 headers for specific subsections -->
-								{#if subsection.title === 'Supporting Evidence' && questionIndex === 0}
-									<h3>Supporting Evidence</h3>
-								{:else if subsection.title === 'Logical Structure' && questionIndex === 0}
-									<h3>Logical Structure</h3>
-								{/if}
-
-								<p>{question}</p>
-								<textarea
-									placeholder="Type here (Question {globalIndex + 1})"
-									bind:value={form2_input_arr[globalIndex]}
-									on:keydown={handleKeyDown}
-								></textarea>
-							{/each}
-						{/each}
+						</div>
 					{/each}
 				</form>
 			{/if}
 
-			<!-- Form 3 -->
+			<!-- Form 3 - The Message -->
 			{#if activeForm === 'form3'}
 				<form on:submit|preventDefault>
 					{#each formSections_Message as section, sectionIndex}
-						<h1>{section.title}</h1>
-						{#each section.subsections as subsection, subsectionIndex}
-							<h2>{subsection.title}</h2>
+						<div class="section-container">
+							<button
+								class="section-header"
+								type="button"
+								on:click={() => toggleSection('form3', sectionIndex)}
+								aria-expanded={!collapsedSections.form3[sectionIndex]}
+								aria-controls="section-{sectionIndex}-content"
+							>
+								<h1>{section.title}</h1>
+								<span
+									class="chevron {collapsedSections.form3[sectionIndex] ? 'collapsed' : 'expanded'}"
+								>
+									▼
+								</span>
+							</button>
+							{#if !collapsedSections.form3[sectionIndex]}
+								<div class="section-content" id="section-{sectionIndex}-content">
+									{#each section.subsections as subsection, subsectionIndex}
+										<h2>{subsection.title}</h2>
 
-							{#each subsection.questions as question, questionIndex}
-								{@const globalIndex = paragraphText_Message.findIndex((text) => text === question)}
+										{#each subsection.questions as question, questionIndex}
+											{@const globalIndex = paragraphText_Message.findIndex(
+												(text) => text === question
+											)}
 
-								<p>{question}</p>
-								<textarea
-									placeholder="Type here (Question {globalIndex + 1})"
-									bind:value={form3_input_arr[globalIndex]}
-									on:keydown={handleKeyDown}
-								></textarea>
-							{/each}
-						{/each}
+											<p>{question}</p>
+											<textarea
+												placeholder="Type here (Question {globalIndex + 1})"
+												bind:value={form3_input_arr[globalIndex]}
+												on:keydown={handleKeyDown}
+											></textarea>
+										{/each}
+									{/each}
+								</div>
+							{/if}
+						</div>
 					{/each}
 				</form>
 			{/if}
 
-			<!-- Form 4 -->
+			<!-- Form 4 - Message Details -->
 			{#if activeForm === 'form4'}
 				<form on:submit|preventDefault>
 					{#each formSections_MessageDetails as section, sectionIndex}
-						<h1>{section.title}</h1>
-						{#each section.subsections as subsection, subsectionIndex}
-							<h2>{subsection.title}</h2>
+						<div class="section-container">
+							<button
+								class="section-header"
+								type="button"
+								on:click={() => toggleSection('form4', sectionIndex)}
+								aria-expanded={!collapsedSections.form4[sectionIndex]}
+								aria-controls="section-{sectionIndex}-content"
+							>
+								<h1>{section.title}</h1>
+								<span
+									class="chevron {collapsedSections.form4[sectionIndex] ? 'collapsed' : 'expanded'}"
+								>
+									▼
+								</span>
+							</button>
+							{#if !collapsedSections.form4[sectionIndex]}
+								<div class="section-content" id="section-{sectionIndex}-content">
+									{#each section.subsections as subsection, subsectionIndex}
+										<h2>{subsection.title}</h2>
 
-							{#each subsection.questions as question, questionIndex}
-								{@const globalIndex = paragraphText_MessageDetails.findIndex(
-									(text) => text === question
-								)}
+										{#each subsection.questions as question, questionIndex}
+											{@const globalIndex = paragraphText_MessageDetails.findIndex(
+												(text) => text === question
+											)}
 
-								<p>{question}</p>
-								<textarea
-									placeholder="Type here (Question {globalIndex + 1})"
-									bind:value={form4_input_arr[globalIndex]}
-									on:keydown={handleKeyDown}
-								></textarea>
-							{/each}
-						{/each}
+											<p>{question}</p>
+											<textarea
+												placeholder="Type here (Question {globalIndex + 1})"
+												bind:value={form4_input_arr[globalIndex]}
+												on:keydown={handleKeyDown}
+											></textarea>
+										{/each}
+									{/each}
+								</div>
+							{/if}
+						</div>
 					{/each}
 				</form>
 			{/if}
@@ -997,6 +1135,69 @@
 
 	button.button.active {
 		background-color: var(--brand-subtle);
+	}
+
+	/* UPDATED: Collapsible section styles */
+	.section-container {
+		margin-bottom: 1rem;
+		border: 1px solid var(--text-subtle);
+		border-radius: 8px;
+		overflow: hidden;
+	}
+
+	.section-header {
+		width: 100%;
+		background-color: var(--bg-subtle);
+		border: none;
+		padding: 1rem;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		cursor: pointer;
+		transition: background-color 0.2s ease;
+		font-weight: normal;
+	}
+
+	.section-header:hover {
+		background-color: var(--brand-subtle);
+		color: var(--bg);
+	}
+
+	.section-header h1 {
+		margin: 0;
+		font-size: 1.5rem;
+		font-weight: bold;
+	}
+
+	.chevron {
+		font-size: 1.2rem;
+		transition: transform 0.3s ease;
+		user-select: none;
+	}
+
+	.chevron.collapsed {
+		transform: rotate(-90deg);
+	}
+
+	.chevron.expanded {
+		transform: rotate(0deg);
+	}
+
+	.section-content {
+		padding: 1rem;
+		border-top: 1px solid var(--text-subtle);
+		animation: expandSection 0.3s ease-out;
+	}
+
+	@keyframes expandSection {
+		from {
+			opacity: 0;
+			max-height: 0;
+		}
+		to {
+			opacity: 1;
+			max-height: 1000px;
+		}
 	}
 
 	.message {
