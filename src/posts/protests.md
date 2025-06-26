@@ -10,7 +10,7 @@ description: A list of upcoming and past protests.
 
 ### 2025
 
-- [30th of June, London](https://lu.ma/bvffgzmb)
+- [30th of June, London](https://pauseai.info/deepmind-protest-2025)
 - [7th - 11th of February, 15+ cities](/2025-february)
 
 ### 2024
