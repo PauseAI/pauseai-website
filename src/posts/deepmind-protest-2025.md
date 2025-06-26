@@ -5,8 +5,6 @@ description: We are organising a protest to hold Google DeepMind to account for
   their broken promises.
 date: 2025-06-30T17:00:00.000Z
 ---
-# PauseAI presents: The Google DeepMind Protest
-
 ## Google DeepMind have broken their promises
 
 ​In 2024, Google made a public commitment at the AI Summit in Seoul. They signed the Frontier AI Safety Commitments, pledging to conduct rigorous testing of their AI models with independent third-party evaluators before release and provide full transparency about the process, including government involvement.
