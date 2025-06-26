@@ -9,13 +9,13 @@ In London, on the 30th of July, PauseAI will be holding our biggest protest yet.
 
 ## Google DeepMind have broken their promises
 
-​In 2024, Google made a public commitment at the AI Summit in Seoul. They signed the Frontier AI Safety Commitments, pledging to conduct rigorous testing of their AI models with independent third-party evaluators before release and provide full transparency about the process, including government involvement.
+In 2024, Google made a public commitment at the AI Summit in Seoul. They signed the Frontier AI Safety Commitments, pledging to conduct rigorous testing of their AI models. They said they would consider results from independent third-party evaluators as appropriate and provide full transparency about the process, including government involvement.
 
 ​Then came March 2025, when Google released Gemini 2.5 Pro - their most advanced AI model yet. When safety experts looked for the promised testing report, they found nothing. No external evaluation. No transparency report. Just silence.
 
 ​A month later, under pressure, Google published a barebones "model card" with some internal evaluations but no mention of external evaluations. They later added vague references to "external testers" but provided no details. When Fortune asked directly whether governments were involved, Google refused to answer - violating their transparency pledge.
 
-​This wasn't Google's only broken promise. They had made similar commitments to the White House in 2023 and signed the Hiroshima Process International Code of Conduct in 2025. With the Gemini Pro release, Google appears to have violated all three sets of safety commitments.
+​They made similar commitments to the White House in 2023 and signed the Hiroshima Process International Code of Conduct in 2025. With the Gemini 2.5 Pro release, Google appears to have also violated, at least in spirit, these other sets of safety commitments.
 
 Sign up to our protest [here](https://lu.ma/bvffgzmb).
 
