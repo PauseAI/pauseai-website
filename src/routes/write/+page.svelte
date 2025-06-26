@@ -866,7 +866,7 @@
 
 											<p>{question}</p>
 											<textarea
-												placeholder="Type here (Question {globalIndex + 1})"
+												placeholder="Type here"
 												bind:value={form1_input_arr[globalIndex]}
 												on:keydown={handleKeyDown}
 											></textarea>
@@ -923,7 +923,7 @@
 
 											<p>{question}</p>
 											<textarea
-												placeholder="Type here (Question {globalIndex + 1})"
+												placeholder="Type here"
 												bind:value={form2_input_arr[globalIndex]}
 												on:keydown={handleKeyDown}
 											></textarea>
@@ -967,7 +967,7 @@
 
 											<p>{question}</p>
 											<textarea
-												placeholder="Type here (Question {globalIndex + 1})"
+												placeholder="Type here"
 												bind:value={form3_input_arr[globalIndex]}
 												on:keydown={handleKeyDown}
 											></textarea>
@@ -1011,7 +1011,7 @@
 
 											<p>{question}</p>
 											<textarea
-												placeholder="Type here (Question {globalIndex + 1})"
+												placeholder="Type here"
 												bind:value={form4_input_arr[globalIndex]}
 												on:keydown={handleKeyDown}
 											></textarea>
