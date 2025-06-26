@@ -28,6 +28,15 @@ pnpm dev
 
 That's it! By default, all commands run in English-only mode for maximum speed. No API keys or special setup required.
 
+### Windows Developer Mode (for symlinks)
+
+If you are developing on Windows and encounter permission errors when creating symlinks (e.g., during the build process), you may need to enable Windows Developer Mode. This is required for certain operations, including the creation of symbolic links.
+
+To enable Developer Mode:
+
+1.  Go to **Settings** > **Privacy & security** > **For developers**.
+2.  Toggle the **Developer Mode** option to **On**.
+
 ## Development Commands
 
 | Command        | Description                                  |
