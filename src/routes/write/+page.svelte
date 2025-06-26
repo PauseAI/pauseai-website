@@ -801,7 +801,7 @@
 			<button on:click={clear} class="button" disabled={loading}> Reset All </button>
 			<button
 				on:click={writeMail}
-				disabled={!apiAvailable || loading}
+				disabled={!apiAvailable || loading || activeForm !== 'form4'}
 				class="button {!apiAvailable ? 'button--disabled' : ''}"
 			>
 				Write Mail
