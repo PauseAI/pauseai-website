@@ -132,7 +132,7 @@
 				{
 					title: "Specify what sort of target you're looking for, and where.",
 					questions: [
-						'If you have certain institutions in mind, mention those. Otherwise, your local representative could be a good place to start.'
+						"If you have certain institutions in mind, mention those. Otherwise, mention where you are and what sort of person you're looking for."
 					]
 				}
 			]
@@ -220,7 +220,7 @@
 			subsections: [
 				{
 					title: 'Content Requirements',
-					questions: ['Specific outcome desired', 'Concrete action requested'] /*
+					questions: ['Specific outcome desired'] /*
 					questions: [
 						'Clear, singular objective',
 						'Specific outcome desired',
@@ -229,11 +229,7 @@
 				},
 				{
 					title: 'Supporting Evidence',
-					questions: [
-						'Relevant facts',
-						'Context for the request',
-						'Potential impact or consequences'
-					]
+					questions: ['Relevant facts', 'Context for the request']
 				}
 			]
 		}
