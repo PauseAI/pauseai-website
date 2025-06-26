@@ -1147,7 +1147,7 @@
 
 	.section-header {
 		width: 100%;
-		background-color: var(--bg-subtle);
+		background-color: var(--brand);
 		border: none;
 		padding: 1rem;
 		display: flex;
