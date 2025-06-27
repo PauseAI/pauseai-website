@@ -31,7 +31,7 @@ Sign up to our protest [here](https://lu.ma/bvffgzmb).
 
 ​PauseAI is a growing movement refusing to accept that AI safety should be an afterthought. On June 30th, we're gathering outside Google DeepMind's London headquarters with a simple message: Stick to your commitments.
 
-​Our ask is simple - just that Google honour the promises they've already made. Conduct proper external testing before releasing AI models and publish transparent reports about the results.
+​Our ask is simple - just that Google honour the promises they've already made. Publish timely and transparent reports on the results of their pre-deployment safety testing.
 
 ​Our ultimate goal is a moratorium on frontier AI development until we can ensure advanced systems will be safe. But we need one thing right now: basic accountability from one of the world's most powerful AI companies.
 
