@@ -321,6 +321,8 @@ For each person you find (aim for 3-5 people), please provide:
 
 Please cite your sources for each person.
 Do not tell the user what you are searching for. Only output the final product.
+
+Please be FAST! ANSWER QUICKLY!
 `
 
 //Preface with '[Person's Name] = John Doe' etc.
@@ -338,6 +340,8 @@ Search for and provide:
 
 Please only include information you can verify through your internet search. If you encounter conflicting information, note this and provide the most reliable source.
 Do not tell the user what you are searching for. Only output the final product.
+
+Please be FAST! ANSWER QUICKLY!
 `
 
 //CLAUDE CHANGE: Added User_Revision system prompt with proper email writing context
@@ -722,8 +726,8 @@ const stepHandlers: Record<
 
 		const result = await callClaude(
 			'findTarget',
-			['Basic', 'Target', 'Information'],
-			'Hello! Please help me find a person to contact!',
+			['Basic', 'Target'],
+			'Hello! Please help me find a person to contact!' + System_Prompts['Information'],
 			toolsEnabled // NEW: Pass tool enablement flag
 		)
 
@@ -743,8 +747,8 @@ const stepHandlers: Record<
 
 		const result = await callClaude(
 			'webSearch',
-			['Basic', 'webSearch', 'Information', 'Results'],
-			'Hello! Please research this person!',
+			['Basic', 'webSearch', 'Results'],
+			'Hello! Please research this person!' + System_Prompts['Information'],
 			toolsEnabled // NEW: Pass tool enablement flag
 		)
 
@@ -935,6 +939,7 @@ export async function POST({ fetch, request }) {
 				console.log(
 					`${pencil} write: Continuing from step ${state.step} (workflow ${state.workflowType})`
 				)
+				//CLAUDE CHANGE: Debug logging to check if userInput is preserved
 			} catch (error) {
 				console.error('Error parsing state token:', error)
 				return json({
@@ -965,7 +970,9 @@ export async function POST({ fetch, request }) {
 
 			// For initial calls (no stateToken), return progress string without processing
 			if (requestData.stateToken === undefined) {
-				return json(prepareResponse(state))
+				const response = prepareResponse(state)
+				//CLAUDE CHANGE: Debug logging to check what's being returned
+				return json(response)
 			}
 		}
 

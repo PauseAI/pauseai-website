@@ -293,7 +293,15 @@
 		if (typeof localStorage !== 'undefined') {
 			const saved = localStorage.getItem(COLLAPSED_SECTIONS_STORAGE_KEY)
 			if (saved) {
-				collapsedSections = JSON.parse(saved)
+				const savedState = JSON.parse(saved)
+				//CLAUDE CHANGE: Ensure form5 exists in loaded state
+				collapsedSections = {
+					form1: savedState.form1 || [false],
+					form2: savedState.form2 || [false, true, true],
+					form3: savedState.form3 || [false],
+					form4: savedState.form4 || [true, true, true],
+					form5: savedState.form5 || [false]
+				}
 			} else {
 				// Reset to default if no saved state
 				collapsedSections = {
@@ -511,7 +519,7 @@
 				input = input + '[3]'
 				break
 
-			//CLAUDE CHANGE: Added form5 case for revision workflow
+			//CLAUDE CHANGE: Added form5 case for revision workflow with current email
 			case 'form5':
 				input = input + '[5]'
 				break
@@ -520,6 +528,15 @@
 				input = input + '[4]'
 				break
 		}
+
+		//CLAUDE CHANGE: For form5, add current email before the questions
+		if (activeForm === 'form5') {
+			const latestEmail = messages.filter((m) => m.role === 'assistant')[0]?.content || ''
+			if (latestEmail) {
+				input += `Current Email:\n${latestEmail}\n\n`
+			}
+		}
+
 		for (let i = 0; i < currentQuestionArray.length; i++) {
 			input =
 				input + currentQuestionArray[i] + ':\n' + (currentInputArray[i] || 'undefined') + '\n\n'
@@ -543,6 +560,10 @@
 			})
 
 			const initialData = await initialResponse.json()
+			console.log('initialData: ', initialData.stateToken)
+
+			//CLAUDE CHANGE: Clean up any incomplete progress messages before adding new one
+			messages = messages.filter((m) => m.role !== 'progress' || m.complete)
 
 			// Add server-generated progress message with complete flag
 			messages = [
@@ -563,6 +584,7 @@
 			}, 100)
 
 			// Continue with the normal process, but pass the stateToken
+			console.log('initialData: ', initialData.stateToken)
 			await processSteps(null, initialData.stateToken)
 		} catch (error) {
 			console.error('Error calling email API:', error)
@@ -586,6 +608,7 @@
 		try {
 			// Prepare the request body
 			const requestBody = stateToken ? { stateToken } : inputMessages
+			console.log(requestBody)
 
 			// Make the API call
 			const response = await fetch('api/write', {
@@ -598,7 +621,6 @@
 
 			// Process the response
 			const data = await response.json()
-			console.log('DATA: \n' + data)
 			console.log(data.information)
 
 			// Update API availability
@@ -606,6 +628,9 @@
 
 			// Show progress if available
 			if (data.progressString) {
+				//CLAUDE CHANGE: Clean up incomplete progress messages before updating
+				messages = messages.filter((m) => m.role !== 'progress' || m.complete)
+
 				// Find existing progress message or create one
 				const progressIndex = messages.findIndex((m) => m.role === 'progress')
 				if (progressIndex >= 0) {
