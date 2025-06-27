@@ -41,7 +41,9 @@
 		form1: [false], // 1 section in Research form
 		form2: [false, true, true], // 3 sections in Target form
 		form3: [false], // 1 section in Message form
-		form4: [true, true, true] // 3 sections in MessageDetails form
+		form4: [true, true, true], // 3 sections in MessageDetails form
+		//CLAUDE CHANGE: Added form5 for revision
+		form5: [false] // 1 section in Revision form
 	}
 
 	// Organizing the form questions into sections and subsections
@@ -246,8 +248,36 @@
 		})
 	})
 
+	//CLAUDE CHANGE: Added Form5 for email revision with simplified single question
+	const formSections_Revision: FieldSection[] = [
+		{
+			title: 'Email Revision Feedback',
+			subsections: [
+				{
+					title: 'What changes would you like to make to the email?',
+					questions: [
+						'Describe any changes, improvements, or adjustments you would like to make to the generated email.'
+					]
+				}
+			]
+		}
+	]
+
+	//CLAUDE CHANGE: Flatten the revision questions array
+	const paragraphText_Revision: string[] = []
+	formSections_Revision.forEach((section) => {
+		section.subsections.forEach((subsection) => {
+			subsection.questions.forEach((question) => {
+				paragraphText_Revision.push(question)
+			})
+		})
+	})
+
 	// UPDATED: Simplified section management functions
-	function toggleSection(formId: 'form1' | 'form2' | 'form3' | 'form4', sectionIndex: number) {
+	function toggleSection(
+		formId: 'form1' | 'form2' | 'form3' | 'form4' | 'form5',
+		sectionIndex: number
+	) {
 		collapsedSections[formId][sectionIndex] = !collapsedSections[formId][sectionIndex]
 		collapsedSections = collapsedSections // Trigger reactivity
 		saveCollapsedState()
@@ -270,7 +300,9 @@
 					form1: [false],
 					form2: [false, true, true],
 					form3: [false],
-					form4: [true, true, true]
+					form4: [true, true, true],
+					//CLAUDE CHANGE: Added form5 default state
+					form5: [false]
 				}
 			}
 		} else {
@@ -278,7 +310,9 @@
 				form1: [false],
 				form2: [false, true, true],
 				form3: [false],
-				form4: [true, true, true]
+				form4: [true, true, true],
+				//CLAUDE CHANGE: Added form5 default state
+				form5: [false]
 			}
 		}
 	}
@@ -294,7 +328,10 @@
 				return form3_input_arr
 			case 'form4':
 				return form4_input_arr
+			//CLAUDE CHANGE: Added form5 case
 			case 'form5':
+				return form5_input_arr
+			case 'form6':
 				return form2_input_arr.concat(form3_input_arr, form4_input_arr)
 			default:
 				return form2_input_arr
@@ -311,7 +348,10 @@
 				return paragraphText_Message
 			case 'form4':
 				return paragraphText_MessageDetails
+			//CLAUDE CHANGE: Added form5 case
 			case 'form5':
+				return paragraphText_Revision
+			case 'form6':
 				let allText = paragraphText_Target.concat(
 					paragraphText_Message,
 					paragraphText_MessageDetails
@@ -338,6 +378,8 @@
 		clear_arr(form2_input_arr)
 		clear_arr(form3_input_arr)
 		clear_arr(form4_input_arr)
+		//CLAUDE CHANGE: Added form5 clearing
+		clear_arr(form5_input_arr)
 
 		// Clear form data from localStorage
 		localStorage.removeItem(FORM_DATA_STORAGE_KEY)
@@ -347,7 +389,9 @@
 			form1: [false],
 			form2: [false, true, true],
 			form3: [false],
-			form4: [true, true, true]
+			form4: [true, true, true],
+			//CLAUDE CHANGE: Added form5 default state
+			form5: [false]
 		}
 
 		// Force Svelte to detect the changes
@@ -355,6 +399,8 @@
 		form2_input_arr = form2_input_arr
 		form3_input_arr = form3_input_arr
 		form4_input_arr = form4_input_arr
+		//CLAUDE CHANGE: Added form5 reactivity
+		form5_input_arr = form5_input_arr
 	}
 
 	function copy() {
@@ -432,6 +478,15 @@
 						'Professional but accessible tone that conveys seriousness without being alarmist.'
 				}
 				break
+
+			//CLAUDE CHANGE: Added test data for form5
+			case 'form5':
+				// Test data for revision form
+				if (currentInputArray.length > 0) {
+					currentInputArray[0] =
+						'Make the tone more urgent and add a specific deadline for response. Also, make the call to action clearer and more direct.'
+				}
+				break
 		}
 
 		sendMessage()
@@ -456,7 +511,12 @@
 				input = input + '[3]'
 				break
 
+			//CLAUDE CHANGE: Added form5 case for revision workflow
 			case 'form5':
+				input = input + '[5]'
+				break
+
+			case 'form6':
 				input = input + '[4]'
 				break
 		}
@@ -638,6 +698,8 @@
 			form2_input_arr,
 			form3_input_arr,
 			form4_input_arr,
+			//CLAUDE CHANGE: Added form5 to save data
+			form5_input_arr,
 			activeForm
 		}
 		localStorage.setItem(FORM_DATA_STORAGE_KEY, JSON.stringify(formData))
@@ -652,6 +714,8 @@
 			form3_input_arr = formData.form3_input_arr || new Array<string>(paragraphText_Message.length)
 			form4_input_arr =
 				formData.form4_input_arr || new Array<string>(paragraphText_MessageDetails.length)
+			//CLAUDE CHANGE: Added form5 to load data
+			form5_input_arr = formData.form5_input_arr || new Array<string>(paragraphText_Revision.length)
 			activeForm = formData.activeForm || 'form1'
 		}
 	}
@@ -697,7 +761,7 @@
 	}
 
 	function writeMail() {
-		setActiveForm('form5')
+		setActiveForm('form6')
 		sendMessage()
 	}
 
@@ -709,6 +773,8 @@
 	let form2_input_arr = Array(paragraphText_Target.length).fill('')
 	let form3_input_arr = Array(paragraphText_Message.length).fill('')
 	let form4_input_arr = Array(paragraphText_MessageDetails.length).fill('')
+	//CLAUDE CHANGE: Added form5 input array
+	let form5_input_arr = Array(paragraphText_Revision.length).fill('')
 
 	// Top of the page
 	const title = `Write Email Content`
@@ -741,7 +807,7 @@
 			mistakes!
 		</p>
 		<p class="notes">
-			You can switch tabs by click on any of the top 4 buttons. This will show new fields: you can
+			You can switch tabs by click on any of the top 5 buttons. This will show new fields: you can
 			switch back and forth at any time, inputs are saved! If you clicked on "Autofill" and nothing
 			happened, switch back and forth to refresh the content. The button is grayed out when
 			unavailable.
@@ -781,6 +847,13 @@
 				on:click={() => setActiveForm('form4')}
 			>
 				Message details
+			</button>
+			<!--CLAUDE CHANGE: Added Revise Email button-->
+			<button
+				class="button {activeForm === 'form5' ? 'active' : ''}"
+				on:click={() => setActiveForm('form5')}
+			>
+				Revise Email
 			</button>
 		</div>
 
@@ -1008,6 +1081,50 @@
 											<textarea
 												placeholder="Type here"
 												bind:value={form4_input_arr[globalIndex]}
+												on:keydown={handleKeyDown}
+											></textarea>
+										{/each}
+									{/each}
+								</div>
+							{/if}
+						</div>
+					{/each}
+				</form>
+			{/if}
+
+			<!--CLAUDE CHANGE: Added Form 5 - Email Revision -->
+			{#if activeForm === 'form5'}
+				<form on:submit|preventDefault>
+					{#each formSections_Revision as section, sectionIndex}
+						<div class="section-container">
+							<button
+								class="section-header"
+								type="button"
+								on:click={() => toggleSection('form5', sectionIndex)}
+								aria-expanded={!collapsedSections.form5[sectionIndex]}
+								aria-controls="section-{sectionIndex}-content"
+							>
+								<h1>{section.title}</h1>
+								<span
+									class="chevron {collapsedSections.form5[sectionIndex] ? 'collapsed' : 'expanded'}"
+								>
+									▼
+								</span>
+							</button>
+							{#if !collapsedSections.form5[sectionIndex]}
+								<div class="section-content" id="section-{sectionIndex}-content">
+									{#each section.subsections as subsection, subsectionIndex}
+										<h2>{subsection.title}</h2>
+
+										{#each subsection.questions as question, questionIndex}
+											{@const globalIndex = paragraphText_Revision.findIndex(
+												(text) => text === question
+											)}
+
+											<p>{question}</p>
+											<textarea
+												placeholder="Describe any changes, improvements, or adjustments you would like to make to the generated email..."
+												bind:value={form5_input_arr[globalIndex]}
 												on:keydown={handleKeyDown}
 											></textarea>
 										{/each}

@@ -21,6 +21,7 @@ if (!IS_API_AVAILABLE) {
 }
 
 // Define step types for server-side use
+//CLAUDE CHANGE: Added userRevision step
 type StepName =
 	| 'findTarget'
 	| 'webSearch'
@@ -30,15 +31,18 @@ type StepName =
 	| 'firstEdit'
 	| 'toneEdit'
 	| 'finalEdit'
+	| 'userRevision'
 
 // Define workflow types
-type WorkflowType = '1' | '2' | '3' | '4'
+//CLAUDE CHANGE: Added workflow type 5 for revision
+type WorkflowType = '1' | '2' | '3' | '4' | '5'
 
-// NEW: Define step configuration interface for tool usage
+//CLAUDE CHANGE: Added model configuration to step config interface
 interface StepConfig {
 	toolsEnabled?: boolean // Whether this step can use tools
 	maxToolCalls?: number // Maximum tool calls for this step (overrides global)
 	description?: string // Enhanced description when tools are used
+	model?: string // Model to use for this step
 }
 
 // ENHANCED: Extend workflow configuration to support step configs
@@ -49,31 +53,55 @@ type WorkflowConfig = {
 }
 
 // NEW: Define step-level tool configurations
+//CLAUDE CHANGE: Updated step configurations with model specifications
 const stepConfigs: Record<StepName, StepConfig> = {
-	// Research-focused steps that benefit from web search
+	// Research-focused steps that benefit from web search - use Haiku for speed
 	findTarget: {
 		toolsEnabled: true,
 		maxToolCalls: 3,
-		description: 'Find possible targets (using web search)'
+		description: 'Find possible targets (using web search)',
+		model: 'claude-3-5-haiku-20241022'
 	},
 	webSearch: {
 		toolsEnabled: true,
 		maxToolCalls: 3,
-		description: 'Research the target (using web search)'
+		description: 'Research the target (using web search)',
+		model: 'claude-3-5-haiku-20241022'
 	},
 	research: {
 		toolsEnabled: false,
 		maxToolCalls: 2,
-		description: 'Auto-fill missing user inputs'
+		description: 'Auto-fill missing user inputs',
+		model: 'claude-3-5-sonnet-20241022'
 	},
-	// Text processing steps remain tool-free for performance
-	firstDraft: { toolsEnabled: false },
-	firstCut: { toolsEnabled: false },
-	firstEdit: { toolsEnabled: false },
-	toneEdit: { toolsEnabled: false },
-	finalEdit: { toolsEnabled: false }
+	// Text processing steps use Sonnet for quality
+	firstDraft: {
+		toolsEnabled: false,
+		model: 'claude-3-5-sonnet-20241022'
+	},
+	firstCut: {
+		toolsEnabled: false,
+		model: 'claude-3-5-sonnet-20241022'
+	},
+	firstEdit: {
+		toolsEnabled: false,
+		model: 'claude-3-5-sonnet-20241022'
+	},
+	toneEdit: {
+		toolsEnabled: false,
+		model: 'claude-3-5-sonnet-20241022'
+	},
+	finalEdit: {
+		toolsEnabled: false,
+		model: 'claude-3-5-sonnet-20241022'
+	},
+	userRevision: {
+		toolsEnabled: false,
+		model: 'claude-3-5-sonnet-20241022'
+	}
 }
 
+//CLAUDE CHANGE: Added workflow 5 for email revision
 const workflowConfigs: Record<WorkflowType, WorkflowConfig> = {
 	'1': {
 		steps: ['findTarget'],
@@ -94,6 +122,11 @@ const workflowConfigs: Record<WorkflowType, WorkflowConfig> = {
 		steps: ['firstDraft', 'firstCut', 'firstEdit', 'toneEdit', 'finalEdit'],
 		description: 'Full Email Generation',
 		stepConfigs // NEW: Include step configurations
+	},
+	'5': {
+		steps: ['userRevision'],
+		description: 'Email Revision',
+		stepConfigs
 	}
 }
 // Server-side state management interface (not exposed to client)
@@ -103,6 +136,8 @@ interface WriteState {
 	userInput: string // Original input from form (cleaned, without prefix)
 	email: string // Current email content
 	information?: string // Processed information after research
+	//CLAUDE CHANGE: Added originalUserInput to store context from firstDraft step
+	originalUserInput?: string // Original user input from firstDraft step for context in subsequent steps
 	completedSteps: Array<{
 		name: StepName
 		durationSec: number
@@ -305,6 +340,24 @@ Please only include information you can verify through your internet search. If 
 Do not tell the user what you are searching for. Only output the final product.
 `
 
+//CLAUDE CHANGE: Added User_Revision system prompt with proper email writing context
+System_Prompts['User_Revision'] = `
+You are helping to revise an email based on user feedback. You will be given:
+1. The current email draft
+2. User feedback and requested changes
+
+Your task is to:
+- Apply the requested changes thoughtfully and professionally
+- Maintain the overall structure and quality of the email
+- Preserve the email's effectiveness while incorporating user preferences  
+- Keep the tone consistent unless specifically asked to change it
+- Ensure all changes improve rather than detract from the message
+
+Focus on making precise, targeted improvements based on the user's specific feedback. If the feedback is unclear, make reasonable interpretations that improve the email's quality.
+
+Only output the revised email, nothing else.
+`
+
 //BE BRIEF! This is extremely important. Try to output only a few lines of text for each questions.
 //BE FAST! You do not have a lot of time to answer this query before it times out!
 //ANSWER QUICKLY!!!
@@ -322,11 +375,12 @@ export async function GET() {
 }
 
 // Helper function to parse workflow type from user input
+//CLAUDE CHANGE: Updated to handle workflow type 5
 function parseWorkflowType(userInput: string): {
 	workflowType: WorkflowType
 	cleanedInput: string
 } {
-	const workflowMatch = userInput.match(/^\[([1-4])\](.*)$/s)
+	const workflowMatch = userInput.match(/^\[([1-5])\](.*)$/s)
 
 	if (workflowMatch) {
 		const workflowType = workflowMatch[1] as WorkflowType
@@ -352,17 +406,22 @@ interface ToolResultContent {
 	content: string
 }
 
-// ENHANCED: Modified function signature to support optional tool usage
+//CLAUDE CHANGE: Enhanced callClaude function to accept model parameter
 async function callClaude(
 	stepName: string,
 	promptNames: string[],
 	userContent: string,
-	toolsEnabled: boolean = false // NEW: Optional parameter for tool usage
+	toolsEnabled: boolean = false, // NEW: Optional parameter for tool usage
+	model?: string // CLAUDE CHANGE: Optional model parameter
 ): Promise<{ text: string; durationSec: number }> {
 	const pencil = '✏️'
 	const search = '🔍' // NEW: Icon for tool usage
 	const logPrefix = `${pencil} write:${stepName}`
 	const startTime = Date.now()
+
+	//CLAUDE CHANGE: Determine model to use - from parameter, step config, or default
+	const modelToUse =
+		model || stepConfigs[stepName as StepName]?.model || 'claude-3-5-sonnet-20241022'
 
 	console.time(`${logPrefix}`)
 
@@ -378,6 +437,8 @@ async function callClaude(
 		// TEMP: Log the full request prompt for debugging
 		console.debug(`${logPrefix} system prompt:\n---\n${systemPrompt}\n---`)
 		console.debug(`${logPrefix} user content:\n---\n${userContent}\n---`)
+		//CLAUDE CHANGE: Log which model is being used
+		console.debug(`${logPrefix} using model: ${modelToUse}`)
 
 		// NEW: Determine if tools should be included in this call
 		const shouldUseTools = toolsEnabled && ENABLE_WEB_SEARCH && IS_API_AVAILABLE
@@ -400,7 +461,7 @@ async function callClaude(
 
 		// ENHANCED: Create API request with conditional tool support
 		const requestParams: any = {
-			model: 'claude-claude-3-5-haiku-latest',
+			model: modelToUse, //CLAUDE CHANGE: Use the determined model
 			max_tokens: 4096,
 			system: systemPrompt,
 			messages: [{ role: 'user', content: userContent }]
@@ -430,7 +491,7 @@ async function callClaude(
 			const response = (await optionallyLogUsage(
 				anthropic.messages.create(currentRequest),
 				stepName,
-				requestParams.model,
+				modelToUse, //CLAUDE CHANGE: Pass the actual model being used
 				startTime,
 				shouldUseTools,
 				toolCallCount
@@ -509,7 +570,7 @@ async function callClaude(
 				errorMessage
 			)
 			// Retry without tools on tool-related errors
-			return callClaude(stepName, promptNames, userContent, false)
+			return callClaude(stepName, promptNames, userContent, false, modelToUse) //CLAUDE CHANGE: Pass model in retry
 		}
 		throw error // Re-throw non-tool errors
 	} finally {
@@ -527,6 +588,7 @@ function getStepDescription(stepName: StepName): string {
 	}
 
 	// Fallback to standard descriptions
+	//CLAUDE CHANGE: Added userRevision to step descriptions
 	const stepDescriptions: Record<StepName, string> = {
 		findTarget: 'Find possible targets',
 		webSearch: 'Research the target',
@@ -535,7 +597,8 @@ function getStepDescription(stepName: StepName): string {
 		firstCut: 'Remove unnecessary content',
 		firstEdit: 'Improve text flow',
 		toneEdit: 'Adjust tone and style',
-		finalEdit: 'Final polish'
+		finalEdit: 'Final polish',
+		userRevision: 'Apply user feedback'
 	}
 
 	return stepDescriptions[stepName]
@@ -644,6 +707,7 @@ function prepareResponse(state: WriteState): ChatResponse {
 }
 
 // Define step handlers in a map for easy lookup
+//CLAUDE CHANGE: Added userRevision step handler with proper email writing context
 const stepHandlers: Record<
 	StepName,
 	(state: WriteState) => Promise<{ text: string; durationSec: number }>
@@ -713,6 +777,9 @@ const stepHandlers: Record<
 
 	// UNCHANGED: Text processing steps remain without tools for performance
 	firstDraft: async (state) => {
+		//CLAUDE CHANGE: Store the original user input for subsequent steps
+		state.originalUserInput = state.userInput
+
 		return await callClaude(
 			'firstDraft',
 			['Basic', 'Mail', 'First_Draft', 'Results'],
@@ -722,37 +789,70 @@ const stepHandlers: Record<
 	},
 
 	firstCut: async (state) => {
+		//CLAUDE CHANGE: Include original user input context in subsequent steps
+		const contextualInput = state.originalUserInput
+			? `Original Context:\n${state.originalUserInput}\n\nCurrent Email:\n${state.email}`
+			: `Current Email:\n${state.email}`
+
 		return await callClaude(
 			'firstCut',
 			['Basic', 'Mail', 'Information', 'First_Cut', 'Results'],
-			'Hello! Please cut the following email draft. \n \n' + state.email
+			'Hello! Please cut the following email draft. \n\n' + contextualInput
 			// NOTE: No toolsEnabled parameter = defaults to false
 		)
 	},
 
 	firstEdit: async (state) => {
+		//CLAUDE CHANGE: Include original user input context in subsequent steps
+		const contextualInput = state.originalUserInput
+			? `Original Context:\n${state.originalUserInput}\n\nCurrent Email:\n${state.email}`
+			: `Current Email:\n${state.email}`
+
 		return await callClaude(
 			'firstEdit',
 			['Basic', 'Mail', 'Information', 'First_Edit', 'Results'],
-			'Hello! Please edit the following email draft. \n \n' + state.email
+			'Hello! Please edit the following email draft. \n\n' + contextualInput
 			// NOTE: No toolsEnabled parameter = defaults to false
 		)
 	},
 
 	toneEdit: async (state) => {
+		//CLAUDE CHANGE: Include original user input context in subsequent steps
+		const contextualInput = state.originalUserInput
+			? `Original Context:\n${state.originalUserInput}\n\nCurrent Email:\n${state.email}`
+			: `Current Email:\n${state.email}`
+
 		return await callClaude(
 			'toneEdit',
 			['Basic', 'Mail', 'Information', 'Tone_Edit', 'Results'],
-			'Hello! Please edit the tone of the following email draft. \n \n' + state.email
+			'Hello! Please edit the tone of the following email draft. \n\n' + contextualInput
 			// NOTE: No toolsEnabled parameter = defaults to false
 		)
 	},
 
 	finalEdit: async (state) => {
+		//CLAUDE CHANGE: Include original user input context in subsequent steps
+		const contextualInput = state.originalUserInput
+			? `Original Context:\n${state.originalUserInput}\n\nCurrent Email:\n${state.email}`
+			: `Current Email:\n${state.email}`
+
 		return await callClaude(
 			'finalEdit',
 			['Basic', 'Mail', 'Information', 'Final_Edit', 'Checklist', 'Results'],
-			'Hello! Please edit the following email draft. \n \n' + state.email
+			'Hello! Please edit the following email draft. \n\n' + contextualInput
+			// NOTE: No toolsEnabled parameter = defaults to false
+		)
+	},
+
+	//CLAUDE CHANGE: Added userRevision step handler with proper email writing context
+	userRevision: async (state) => {
+		// Prepare the revision request with current email and user feedback
+		const revisionRequest = `Current Email:\n\n${state.email}\n\nUser Feedback:\n\n${state.userInput}`
+
+		return await callClaude(
+			'userRevision',
+			['Basic', 'Mail', 'User_Revision', 'Results'],
+			revisionRequest
 			// NOTE: No toolsEnabled parameter = defaults to false
 		)
 	}
