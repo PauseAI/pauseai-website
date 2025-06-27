@@ -50,7 +50,7 @@
 			title: 'Researching a person',
 			subsections: [
 				{
-					title: 'To research a person, fill out the following fields.',
+					title: 'To research a person, fill out the following fields. Then, click on AI Help.',
 					questions: ["Person's Name", 'Current Role', 'Organization/Affiliation']
 				}
 			]
@@ -130,9 +130,10 @@
 			title: 'Finding a target',
 			subsections: [
 				{
-					title: "Specify what sort of target you're looking for, and where.",
+					title:
+						"Specify what sort of target you're looking for, and where. If you already have a target, skip this step.",
 					questions: [
-						"If you have certain institutions in mind, mention those. Otherwise, mention where you are and what sort of person you're looking for."
+						"If you have certain institutions in mind, mention those. Otherwise, mention where you are and what sort of person you're looking for. Input does not carry over past finding a target."
 					]
 				}
 			]
@@ -820,8 +821,6 @@
 
 <hr />
 
-<p>Here is the grab bag of input fields...</p>
-
 <footer>
 	{#if messages.length > maxMessages}
 		<p>You reached the maximum amount of messages, you can either copy or reset</p>
@@ -919,7 +918,7 @@
 
 											<p>{question}</p>
 											<textarea
-												placeholder="Type here"
+												placeholder="Input information about the person you want to research."
 												bind:value={form2_input_arr[globalIndex]}
 												on:keydown={handleKeyDown}
 											></textarea>

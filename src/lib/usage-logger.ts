@@ -146,14 +146,16 @@ export function optionallyLogUsage<T>(
 							output_tokens_limit: parseInt(
 								headers.get('anthropic-ratelimit-output-tokens-limit') || '0'
 							),
-							requests_limit: parseInt(headers.get('anthropic-ratelimit-requests-limit') || '0'),
+							requests_limit: parseInt(headers.get('anthropic-ratelimit-requests-limit') || '0')
 							// Check for potential web search rate limit headers (may not exist)
+							/*
 							web_search_remaining:
 								parseInt(headers.get('anthropic-ratelimit-web-search-remaining') || '0') || null,
 							web_search_limit:
 								parseInt(headers.get('anthropic-ratelimit-web-search-limit') || '0') || null,
 							// Also capture web search usage from response body if available
 							web_search_requests_used: response.usage?.server_tool_use?.web_search_requests || null
+                            */
 						},
 						durationMs,
 						toolsUsed,

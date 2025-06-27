@@ -122,6 +122,19 @@ export type ChatResponse = {
 	information?: string // Processed information for form fields
 }
 
+// Type safety by Claude
+interface AnthropicResponse {
+	id: string
+	content: Array<{
+		type: string
+		text?: string
+		name?: string
+		[key: string]: any
+	}>
+	stop_reason?: string
+	[key: string]: any
+}
+
 export type Message = {
 	role: 'user' | 'assistant' | 'system'
 	content: string
@@ -272,6 +285,7 @@ For each person you find (aim for 3-5 people), please provide:
 4. Brief note on their public stance on AI safety
 
 Please cite your sources for each person.
+Do not tell the user what you are searching for. Only output the final product.
 `
 
 //Preface with '[Person's Name] = John Doe' etc.
@@ -287,7 +301,8 @@ Search for and provide:
 6. Notable connections (organizations, committees, coalitions, or influential individuals they work with)
 7. Contact information (professional email or official channels if publicly available)
 
-Please cite all sources you use and only include information you can verify through your internet search. If you encounter conflicting information, note this and provide the most reliable source.
+Please only include information you can verify through your internet search. If you encounter conflicting information, note this and provide the most reliable source.
+Do not tell the user what you are searching for. Only output the final product.
 `
 
 //BE BRIEF! This is extremely important. Try to output only a few lines of text for each questions.
@@ -378,14 +393,14 @@ async function callClaude(
 					{
 						type: 'web_search_20250305', // CHANGED: Use correct tool type from API docs
 						name: 'web_search',
-						max_uses: 5 // ADDED: Limit searches per request
+						max_uses: 3 // ADDED: Limit searches per request
 					}
 				]
 			: undefined
 
 		// ENHANCED: Create API request with conditional tool support
 		const requestParams: any = {
-			model: 'claude-sonnet-4-20250514',
+			model: 'claude-claude-3-5-haiku-latest',
 			max_tokens: 4096,
 			system: systemPrompt,
 			messages: [{ role: 'user', content: userContent }]
@@ -412,14 +427,14 @@ async function callClaude(
 				messages: currentMessages
 			}
 
-			const response = await optionallyLogUsage(
+			const response = (await optionallyLogUsage(
 				anthropic.messages.create(currentRequest),
 				stepName,
 				requestParams.model,
 				startTime,
 				shouldUseTools,
 				toolCallCount
-			)
+			)) as AnthropicResponse
 
 			// Log the request ID at debug level
 			console.debug(`${logPrefix} requestId: ${response.id}`)
