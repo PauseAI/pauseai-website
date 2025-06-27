@@ -1,7 +1,6 @@
 ---
 title: PauseAI Press materials & media coverage
 ---
-
 ## Contact
 
 Joep Meindertsma ([joep@pauseai.info](mailto:joep@pauseai.info))
@@ -58,7 +57,7 @@ Outside of YouTube:
 - [Peeps](https://www.youtube.com/watch?v=a3HRYOIhfFI): Bletchley Park protest video interview
 - [Westminster Extra](https://www.westminsterextra.co.uk/article/warning-governments-are-racing-ahead-with-ai): February 2025 protest
 
-### NL
+### NL / BE
 
 - [AD](https://www.ad.nl/tech/ai-rel-in-nieuw-zeeland-kook-app-prijst-dodelijk-chloorgas-aan-als-verfrissend-gerecht~a1aa3705/)
 - NRC, [2023](https://www.nrc.nl/nieuws/2023/06/24/sterft-de-mensheid-uit-door-ai-dat-is-sciencefiction-a4168053), [2024](https://www.nrc.nl/nieuws/2024/02/16/ai-doomers-zijn-doodsbang-voor-de-computer-ai-zal-proberen-de-macht-over-te-nemen-a4190130): interview with three PauseAI members
@@ -69,6 +68,7 @@ Outside of YouTube:
 - [Leidsch Dagblad](https://www.leidschdagblad.nl/cnt/dmf20231228_53324374): Interview with Joep Meindertsma
 - [Daniel's Talkshow](https://www.youtube.com/watch?v=mGzwtSqmDsU): Discussion with Joep Meindertsma and Otto Barten
 - [De Dataloog](https://open.spotify.com/episode/2kB59A0bIltpSUdwaf0YM3): Interview with Joep Meindertsma
+- [Doorbraak](https://doorbraak.be/pauseai-superslimme-ai-kan-leiden-tot-de-uitsterving-van-de-mensheid/) (2025): Interview with Joep Meindertsma
 
 ### DE
 
