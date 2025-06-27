@@ -29,7 +29,7 @@ function recordToSignatory(record: any): Signatory {
 		name: record.fields.private ? 'Anonymous' : record.fields.name, // Anonymize private signatories
 		country: record.fields.country,
 		bio: record.fields.bio,
-		date: record.fields.created
+		date: record.fields.date
 	}
 }
 
@@ -43,10 +43,11 @@ export async function GET({ fetch, setHeaders }) {
 		// Fetch all records from Airtable
 		const records = await fetchAllPages(fetch, url)
 
-		// Filter to only include records where email_verified is explicitly true
+		// Filter to only include records where email_verified is explicitly true and not a duplicate
 		const verifiedRecords = records.filter((record) => {
 			const emailVerified = record.fields.email_verified
-			return emailVerified === true
+			const duplicate = record.fields.duplicate
+			return emailVerified === true && !duplicate
 		})
 
 		console.log(`Total records: ${records.length}, Verified records: ${verifiedRecords.length}`)
