@@ -60,44 +60,44 @@ const stepConfigs: Record<StepName, StepConfig> = {
 		toolsEnabled: true,
 		maxToolCalls: 3,
 		description: 'Find possible targets (using web search)',
-		model: 'claude-3-5-haiku-20241022'
+		model: 'claude-3-5-haiku-latest'
 	},
 	webSearch: {
 		toolsEnabled: true,
 		maxToolCalls: 3,
 		description: 'Research the target (using web search)',
-		model: 'claude-3-5-haiku-20241022'
+		model: 'claude-3-5-haiku-latest'
 	},
 	research: {
 		toolsEnabled: false,
 		maxToolCalls: 2,
 		description: 'Auto-fill missing user inputs',
-		model: 'claude-3-5-sonnet-20241022'
+		model: 'claude-3-7-sonnet-latest'
 	},
 	// Text processing steps use Sonnet for quality
 	firstDraft: {
 		toolsEnabled: false,
-		model: 'claude-3-5-sonnet-20241022'
+		model: 'claude-3-7-sonnet-latest'
 	},
 	firstCut: {
 		toolsEnabled: false,
-		model: 'claude-3-5-sonnet-20241022'
+		model: 'claude-3-7-sonnet-latest'
 	},
 	firstEdit: {
 		toolsEnabled: false,
-		model: 'claude-3-5-sonnet-20241022'
+		model: 'claude-3-7-sonnet-latest'
 	},
 	toneEdit: {
 		toolsEnabled: false,
-		model: 'claude-3-5-sonnet-20241022'
+		model: 'claude-3-7-sonnet-latest'
 	},
 	finalEdit: {
 		toolsEnabled: false,
-		model: 'claude-3-5-sonnet-20241022'
+		model: 'claude-3-7-sonnet-latest'
 	},
 	userRevision: {
 		toolsEnabled: false,
-		model: 'claude-3-5-sonnet-20241022'
+		model: 'claude-3-7-sonnet-latest'
 	}
 }
 
@@ -319,10 +319,10 @@ For each person you find (aim for 3-5 people), please provide:
 3. Their organization
 4. Brief note on their public stance on AI safety
 
-Please cite your sources for each person.
 Do not tell the user what you are searching for. Only output the final product.
 
-Please be FAST! ANSWER QUICKLY!
+Focus on finding People. NOT Organisations.
+OUTPUT VERY VERY QUICKLY! YOU HAVE VERY LITTLE TIME! OTHERWISE IT'LL ALL BE WASTED! BE FAST!!!
 `
 
 //Preface with '[Person's Name] = John Doe' etc.
@@ -340,8 +340,7 @@ Search for and provide:
 
 Please only include information you can verify through your internet search. If you encounter conflicting information, note this and provide the most reliable source.
 Do not tell the user what you are searching for. Only output the final product.
-
-Please be FAST! ANSWER QUICKLY!
+OUTPUT VERY VERY QUICKLY! YOU HAVE VERY LITTLE TIME! OTHERWISE IT'LL ALL BE WASTED! BE FAST!!!
 `
 
 //CLAUDE CHANGE: Added User_Revision system prompt with proper email writing context
@@ -424,8 +423,7 @@ async function callClaude(
 	const startTime = Date.now()
 
 	//CLAUDE CHANGE: Determine model to use - from parameter, step config, or default
-	const modelToUse =
-		model || stepConfigs[stepName as StepName]?.model || 'claude-3-5-sonnet-20241022'
+	const modelToUse = model || stepConfigs[stepName as StepName]?.model || 'claude-3-5-haiku-latest'
 
 	console.time(`${logPrefix}`)
 
