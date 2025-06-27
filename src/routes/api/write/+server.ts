@@ -1,6 +1,7 @@
 import { error, json } from '@sveltejs/kit'
 import { env } from '$env/dynamic/private'
 import Anthropic from '@anthropic-ai/sdk'
+import { optionallyLogUsage } from '$lib/usage-logger'
 
 // Safely access the API key, will be undefined if not set
 const ANTHROPIC_API_KEY_FOR_WRITE = env.ANTHROPIC_API_KEY_FOR_WRITE || undefined
@@ -52,7 +53,7 @@ const stepConfigs: Record<StepName, StepConfig> = {
 	// Research-focused steps that benefit from web search
 	findTarget: {
 		toolsEnabled: true,
-		maxToolCalls: 5,
+		maxToolCalls: 3,
 		description: 'Find possible targets (using web search)'
 	},
 	webSearch: {
@@ -287,11 +288,12 @@ Search for and provide:
 7. Contact information (professional email or official channels if publicly available)
 
 Please cite all sources you use and only include information you can verify through your internet search. If you encounter conflicting information, note this and provide the most reliable source.
-
-BE BRIEF! This is extremely important. Try to output only a few lines of text for each questions.
-BE FAST! You do not have a lot of time to answer this query before it times out!
-ANSWER QUICKLY!!!
 `
+
+//BE BRIEF! This is extremely important. Try to output only a few lines of text for each questions.
+//BE FAST! You do not have a lot of time to answer this query before it times out!
+//ANSWER QUICKLY!!!
+//`
 
 // Only initialize the client if we have an API key
 const anthropic = IS_API_AVAILABLE
@@ -358,6 +360,10 @@ async function callClaude(
 		// Combine all the specified prompts
 		const systemPrompt = promptNames.map((name) => System_Prompts[name]).join('')
 
+		// TEMP: Log the full request prompt for debugging
+		console.debug(`${logPrefix} system prompt:\n---\n${systemPrompt}\n---`)
+		console.debug(`${logPrefix} user content:\n---\n${userContent}\n---`)
+
 		// NEW: Determine if tools should be included in this call
 		const shouldUseTools = toolsEnabled && ENABLE_WEB_SEARCH && IS_API_AVAILABLE
 
@@ -372,14 +378,14 @@ async function callClaude(
 					{
 						type: 'web_search_20250305', // CHANGED: Use correct tool type from API docs
 						name: 'web_search',
-						max_uses: 1 // ADDED: Limit searches per request
+						max_uses: 5 // ADDED: Limit searches per request
 					}
 				]
 			: undefined
 
 		// ENHANCED: Create API request with conditional tool support
 		const requestParams: any = {
-			model: 'claude-3-7-sonnet-20250219',
+			model: 'claude-sonnet-4-20250514',
 			max_tokens: 4096,
 			system: systemPrompt,
 			messages: [{ role: 'user', content: userContent }]
@@ -406,7 +412,14 @@ async function callClaude(
 				messages: currentMessages
 			}
 
-			const response = await anthropic.messages.create(currentRequest)
+			const response = await optionallyLogUsage(
+				anthropic.messages.create(currentRequest),
+				stepName,
+				requestParams.model,
+				startTime,
+				shouldUseTools,
+				toolCallCount
+			)
 
 			// Log the request ID at debug level
 			console.debug(`${logPrefix} requestId: ${response.id}`)
@@ -468,6 +481,9 @@ async function callClaude(
 
 		// Log the full response text at debug level
 		console.debug(`${logPrefix} full response:\n---\n${finalText}\n---`)
+
+		// Logging is handled by optionallyLogUsage wrapper
+
 		return { text: finalText, durationSec: elapsed }
 	} catch (error) {
 		// ENHANCED: Better error handling for tool-related failures
