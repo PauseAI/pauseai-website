@@ -43,7 +43,7 @@
 {/if}
 
 <NearbyEvent contrast={hero} bind:eventFound />
-{#if !eventFound}
+{#if false}
 	<Banner contrast={hero}>
 		Join us at <ExternalLink href="https://pausecon.org/">PauseCon London</ExternalLink> from June 27th
 		to 30th!
