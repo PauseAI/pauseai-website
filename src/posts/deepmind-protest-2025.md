@@ -5,7 +5,7 @@ description: We are organising a protest to hold Google DeepMind to account for
   their broken promises.
 date: 2025-06-30T17:00:00.000Z
 ---
-In London, on the 30th of July, PauseAI will be holding our biggest protest yet. Sign up [here](https://lu.ma/bvffgzmb).
+At 17:00, on Monday, the 30th of June, in Granary Square, London, PauseAI will be holding our biggest protest yet. Sign up [here](https://lu.ma/bvffgzmb).
 
 ## Google DeepMind have broken their promises
 
@@ -43,4 +43,4 @@ Sign up to our protest [here](https://lu.ma/bvffgzmb).
 2. ​**Publish a specific timeline** for when safety evaluation reports will be released for all future models.
 3. ​**Clarify unambiguously**, for each model release, which government agencies and independent third-parties are involved in testing, and the exact timelines of their testing procedures.
 
-Join us in London on the 30th of June by signing up [here](https://lu.ma/bvffgzmb).
+Join us in London on Monday, the 30th of June, by signing up [here](https://lu.ma/bvffgzmb).
