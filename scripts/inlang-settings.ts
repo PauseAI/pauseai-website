@@ -133,7 +133,7 @@ function regenerateSettings(verbose = false): void {
 			strategy: ['url', 'cookie', 'preferredLanguage', 'baseLocale'],
 			// Fix for Netlify Edge Functions (Deno runtime)
 			disableAsyncLocalStorage: true,
-			isServer: "typeof window === 'undefined' || 'Deno' in globalThis"
+			isServer: 'import.meta.env.SSR'
 		}
 
 		// Only set urlPatterns for prefix-all-locales strategy

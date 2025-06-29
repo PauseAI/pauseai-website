@@ -6,7 +6,9 @@ import path from 'path'
 import { defineConfig } from 'vite'
 import { isDev } from './src/lib/env'
 import { MARKDOWN_L10NS } from './src/lib/l10n'
-import { locales as compiledLocales } from './src/lib/paraglide/runtime'
+import { importRuntimeWithoutVite } from './scripts/l10n/utils'
+
+const { locales: compiledLocales } = await importRuntimeWithoutVite()
 
 function getLocaleExcludePatterns(): RegExp[] {
 	const md = path.resolve(MARKDOWN_L10NS)

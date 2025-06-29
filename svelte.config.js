@@ -9,7 +9,7 @@ import remarkToc from 'remark-toc'
 import remarkHeadingId from 'remark-heading-id'
 import rehypeSlug from 'rehype-slug'
 
-import { locales } from './src/lib/paraglide/runtime.js'
+import settings from './project.inlang/settings.json' with { type: 'json' }
 
 // Export configuration flags for use in build scripts
 export const USE_EDGE_FUNCTIONS = true
@@ -62,7 +62,7 @@ const config = {
 		prerender: {
 			// Allows dead links to be rendered
 			handleHttpError: 'warn',
-			entries: ['*'].concat(locales.map((locale) => '/' + locale))
+			entries: ['*'].concat(settings.locales.map((locale) => '/' + locale))
 		}
 	}
 }

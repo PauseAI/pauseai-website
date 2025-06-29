@@ -8,10 +8,11 @@ import path from 'path'
 import dotenv from 'dotenv'
 import { execSync } from 'child_process'
 import { L10N_CAGE_DIR, MARKDOWN_L10NS } from '../src/lib/l10n.ts'
+import { importRuntimeWithoutVite } from './l10n/utils.ts'
 
 dotenv.config()
 
-const runtimeModule = await import('../src/lib/paraglide/runtime.js')
+const runtimeModule = await importRuntimeWithoutVite()
 let activeLocales = Array.from(runtimeModule.locales)
 let setupNeeded = false
 let reason = ''
