@@ -38,7 +38,7 @@
 	})
 
 	function fetchGeo() {
-		return fetch('/api/geo').then((res) => res.json()) as GeoApiResponse
+		return fetch('/api/geo').then((res) => res.json()) as Promise<GeoApiResponse>
 	}
 
 	function fetchLuma() {
