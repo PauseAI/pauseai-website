@@ -17,6 +17,7 @@
 	import Footer from './footer.svelte'
 	import Header from './header.svelte'
 	import PageTransition from './transition.svelte'
+	import type { GeoApiResponse } from '$api/geo/+server'
 
 	export let data
 
@@ -24,6 +25,7 @@
 	// This prevents "undefined" issues during navigation
 
 	let eventFound: boolean
+	let geo: GeoApiResponse | null
 	// Show the hero on the homepage, but nowhere else
 	$: hero = deLocalizeHref($page.url.pathname) === '/'
 </script>
@@ -42,12 +44,22 @@
 	</Banner>
 {/if}
 
-<NearbyEvent contrast={hero} bind:eventFound />
-{#if false}
-	<Banner contrast={hero}>
-		Join us at <ExternalLink href="https://pausecon.org/">PauseCon London</ExternalLink> from June 27th
-		to 30th!
-	</Banner>
+<NearbyEvent contrast={hero} bind:eventFound bind:geo />
+{#if !eventFound}
+	{#if geo?.country?.code === 'US'}
+		<Banner>
+			<b
+				>ONE MORE REPUBLICAN NEEDED TO PROTECT STATE SOVEREIGNTY ON AI REGULATION | <ExternalLink
+					href="https://x.com/pauseaius/status/1939144759354003594">ACT NOW »</ExternalLink
+				></b
+			>
+		</Banner>
+	{:else}
+		<Banner contrast={hero} hidden={true}>
+			Join us at <ExternalLink href="https://pausecon.org/">PauseCon London</ExternalLink> from June
+			27th to 30th!
+		</Banner>
+	{/if}
 {/if}
 
 <div class="layout" class:with-hero={hero}>

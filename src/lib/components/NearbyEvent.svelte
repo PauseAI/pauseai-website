@@ -1,13 +1,15 @@
 <script lang="ts">
 	import distance from '@turf/distance'
 	import { onMount } from 'svelte'
-	import type { Platform } from '$lib/netlify'
 	import Banner from './Banner.svelte'
 	import ExternalLink from '$lib/components/custom/a.svelte'
 	import type { CalendarResponse, Event } from '../../routes/api/calendar/+server'
+	import type { GeoApiResponse } from '$api/geo/+server'
 
 	export let contrast: boolean
 	export let eventFound = false
+	/** Geo data from Netlify for external use */
+	export let geo: GeoApiResponse | null = null
 
 	const FORMAT = new Intl.DateTimeFormat('en', { day: 'numeric', month: 'long' })
 	const MAX_DISTANCE_KM = 100
@@ -17,9 +19,10 @@
 	$: eventFound = !!nearbyEvent
 
 	onMount(async () => {
-		const [geo, events] = await Promise.all([fetchGeo(), fetchLuma()])
+		const [geoResult, events] = await Promise.all([fetchGeo(), fetchLuma()])
+		geo = geoResult
 
-		const { latitude: userLatitude, longitude: userLongitude } = geo
+		const { latitude: userLatitude, longitude: userLongitude } = geoResult
 		if (!userLatitude || !userLongitude) return
 
 		const userCoords = [userLatitude, userLongitude]
@@ -35,7 +38,7 @@
 	})
 
 	function fetchGeo() {
-		return fetch('/api/geo').then((res) => res.json()) as Promise<Platform['context']['geo']>
+		return fetch('/api/geo').then((res) => res.json()) as GeoApiResponse
 	}
 
 	function fetchLuma() {
