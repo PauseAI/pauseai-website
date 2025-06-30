@@ -17,7 +17,7 @@ In 2024, Google made a public commitment at the AI Summit in Seoul. They signed 
 
 ​They made similar commitments to the White House in 2023 and signed the Hiroshima Process International Code of Conduct in 2025. With the Gemini 2.5 Pro release, Google appears to have also violated, at least in spirit, these other sets of safety commitments.
 
-Sign up to our protest [here](https://lu.ma/bvffgzmb).
+Read the whole timeline of Google DeepMind's broken promises [here](https://pauseai.info/google-deepmind-broken-promises).
 
 ## Unsafe AI development threatens us all
 
