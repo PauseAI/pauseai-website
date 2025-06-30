@@ -4,8 +4,6 @@ slug: google-deepmind-broken-promises
 description: AI company Google DeepMind have broken the promises they made to the public.
 date: 2025-06-30T12:36:00.000Z
 ---
-# Google’s Commitments on AI Safety
-
 AI company Google DeepMind’s release of Gemini 2.5 Pro violated their commitments to governments and the public, as established in the [Frontier AI Safety Commitments](https://www.gov.uk/government/publications/frontier-ai-safety-commitments-ai-seoul-summit-2024/frontier-ai-safety-commitments-ai-seoul-summit-2024).
 
 ### AI Safety Summits
