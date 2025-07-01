@@ -26,30 +26,30 @@ We believe that they should be held accountable for this failure in order to mai
 
 Timeline and details of Google’s violation
 
-25 March 2025
+#### 25 March 2025
 
 - Gemini 2.5 Pro Experimental becomes available for anyone to access for free. It is arguably the most capable AI model released by any company at this point.
 - No information about safety testing is published.
 
-3 April 2025
+#### 3 April 2025
 
 - Google’s head of product for Gemini [tells TechCrunch](https://techcrunch.com/2025/04/03/google-is-shipping-gemini-models-faster-than-its-ai-safety-reports/) the company hasn’t published a 'model card' (ie. safety report) for Gemini 2.5 Pro "because it considers the model to be an 'experimental' release".
 
-9 April 2025
+#### 9 April 2025
 
 - [In correspondence with Fortune magazine](https://fortune.com/2025/04/09/google-gemini-2-5-pro-missing-model-card-in-apparent-violation-of-ai-safety-promises-to-us-government-international-bodies), Google does not answer "direct questions" about the involvement of the UK AI Security Institute in the testing process for Gemini 2.5 Pro. However, a spokesperson for Google says that the model has undergone pre-release testing.
 
-16 April 2025
+#### 16 April 2025
 
 - Gemini 2.5 Pro Preview is now available (essentially the same as the Experimental model).
 - Google publishes its 'model card' (safety report) for Gemini 2.5 Pro Preview.
 - The testing report makes no mention of external testing.
 
-28 April 2025
+#### 28 April 2025
 
 - Google updates its model card to include mention of "third party external testers", but no detail about who they are.
 
-April - June 2025
+#### April - June 2025
 
 - [Further technical reports](https://storage.googleapis.com/deepmind-media/gemini/gemini_v2_5_report.pdf) have since been published. None of them name the third party external testers or state whether governments have been involved in testing.
 
