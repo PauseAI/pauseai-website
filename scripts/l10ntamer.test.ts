@@ -3,12 +3,17 @@ import fs from 'fs'
 import path from 'path'
 import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest'
 
-vi.mock('../src/lib/paraglide/runtime.js', () => {
+// Mock the importRuntimeWithoutVite function from utils.ts
+vi.mock('./l10n/utils.ts', async (importOriginal) => {
+	const actual = await importOriginal<typeof import('./l10n/utils.js')>()
 	return {
-		localizeHref: vi
-			.fn()
-			.mockImplementation((href: string, { locale }: { locale: string }) => `/${locale}${href}`),
-		locales: ['en']
+		...actual,
+		importRuntimeWithoutVite: vi.fn().mockResolvedValue({
+			localizeHref: vi
+				.fn()
+				.mockImplementation((href: string, { locale }: { locale: string }) => `/${locale}${href}`),
+			locales: ['en']
+		})
 	}
 })
 
