@@ -1,8 +1,5 @@
-import { building } from '$app/environment'
-import { type Handle } from '@sveltejs/kit'
+import { type Handle, type HandleServerError } from '@sveltejs/kit'
 import { paraglideMiddleware } from '$lib/paraglide/server.js'
-import { locales } from '$lib/paraglide/runtime'
-import { sequence } from '@sveltejs/kit/hooks'
 
 const handle: Handle = ({ event, resolve }) =>
 	paraglideMiddleware(event.request, ({ request: localizedRequest, locale }) => {
@@ -12,4 +9,8 @@ const handle: Handle = ({ event, resolve }) =>
 		})
 	})
 
-export { handle }
+const handleError: HandleServerError = ({ error }) => {
+	console.log(error)
+}
+
+export { handle, handleError }
