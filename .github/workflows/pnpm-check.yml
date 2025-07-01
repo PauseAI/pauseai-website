@@ -21,3 +21,5 @@ jobs:
         run: pnpm install --no-frozen-lockfile
       - name: Compile Paraglide and run checks
         run: pnpm inlang:settings && pnpm check
+      - name: Run unit tests
+        run: pnpm run test --run
