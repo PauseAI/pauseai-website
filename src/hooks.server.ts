@@ -1,6 +1,6 @@
 import { type Handle, type HandleServerError } from '@sveltejs/kit'
 import { paraglideMiddleware } from '$lib/paraglide/server.js'
-import { pino } from 'pino'
+import pino from 'pino'
 
 const transport = pino.transport({
 	target: 'pino-opentelemetry-transport'
