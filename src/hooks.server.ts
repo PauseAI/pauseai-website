@@ -1,11 +1,13 @@
 import { type Handle, type HandleServerError } from '@sveltejs/kit'
 import { paraglideMiddleware } from '$lib/paraglide/server.js'
 import pino from 'pino'
+import 'pino-opentelemetry-transport'
 
-const transport = pino.transport({
-	target: 'pino-opentelemetry-transport'
+const logger = pino({
+	transport: {
+		target: 'pino-opentelemetry-transport'
+	}
 })
-const logger = pino(transport)
 
 const handle: Handle = ({ event, resolve }) =>
 	paraglideMiddleware(event.request, ({ request: localizedRequest, locale }) => {
