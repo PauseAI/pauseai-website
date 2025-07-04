@@ -62,6 +62,9 @@ export default defineConfig(({ command, mode }) => {
 			// Exclude repos locale paths not in runtime.locales
 			rollupOptions: {
 				external: getLocaleExcludePatterns()
+			},
+			commonjsOptions: {
+				transformMixedEsModules: true
 			}
 		},
 		plugins: [enhancedImages(), sveltekit()]
