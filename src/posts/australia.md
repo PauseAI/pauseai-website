@@ -59,6 +59,6 @@ You can make a difference. Volunteers in Australia raise awareness, protest, lob
 - [Contact politicians](/writing-a-letter)
 - Talk to your friends and family about AI risk
 
-![volunteer wearing PauseAI t-shirt in front Flinders Street Station, Melbourne](/static/mark-melbourne.jpeg "Mark (volunteer from Melbourne)")
+![volunteer wearing PauseAI t-shirt in front Flinders Street Station, Melbourne](/mark-melbourne.jpeg "Mark (volunteer from Melbourne)")
 
-![Volunteer in front of parliament house, Canberra.](/static/peter-canberra.png "Peter (volunteer in Canberra)")
+![Volunteer in front of parliament house, Canberra.](/peter-canberra.png "Peter (volunteer in Canberra)")
