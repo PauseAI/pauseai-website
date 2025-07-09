@@ -45,5 +45,8 @@ export default ts.config(
 			// Override or add rule settings here, such as:
 			// 'svelte/rule-name': 'error'
 		}
+	},
+	{
+		ignores: ['.netlify/', '.svelte-kit/', 'build/', 'static/']
 	}
 )
