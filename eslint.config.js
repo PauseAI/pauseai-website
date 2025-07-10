@@ -1,6 +1,7 @@
 /* https://sveltejs.github.io/eslint-plugin-svelte/user-guide/ */
 import js from '@eslint/js'
 import svelte from 'eslint-plugin-svelte'
+import { globalIgnores } from 'eslint/config'
 import globals from 'globals'
 import ts from 'typescript-eslint'
 import svelteConfig from './svelte.config.js'
@@ -46,7 +47,5 @@ export default ts.config(
 			// 'svelte/rule-name': 'error'
 		}
 	},
-	{
-		ignores: ['.netlify/', '.svelte-kit/', 'build/', 'static/']
-	}
+	globalIgnores(['.netlify/', '.svelte-kit/', 'build/', 'static/'])
 )
