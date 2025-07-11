@@ -5,7 +5,7 @@ import { fetchAllPages, type AirtableRecord } from '$lib/airtable.js'
 const AIRTABLE_URL = 'https://api.airtable.com/v0/appWPTGqZmUcs3NWu/tblCwP5K6ENpR5qrd'
 
 // Fallback data to use in development if Airtable fetch fails
-const fallbackNationalGroups: AirtableRecord<AirtableNationalGroup>[] = [
+const FALLBACK_NATIONAL_GROUPS: AirtableRecord<AirtableNationalGroup>[] = [
 	{
 		id: 'fallback-stub1',
 		fields: {
@@ -100,7 +100,7 @@ export async function GET({ fetch, setHeaders }) {
 	const records = await fetchAllPages<AirtableNationalGroup>(
 		fetch,
 		AIRTABLE_URL,
-		fallbackNationalGroups
+		FALLBACK_NATIONAL_GROUPS
 	)
 
 	const out: NationalGroup[] = records

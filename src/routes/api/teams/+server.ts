@@ -5,7 +5,7 @@ import { fetchAllPages, type AirtableRecord } from '$lib/airtable.js'
 /**
  * Fallback teams data to use in development mode if Airtable fetch fails
  */
-const fallbackTeams: AirtableRecord<AirtableTeam>[] = [
+const FALLBACK_TEAMS: AirtableRecord<AirtableTeam>[] = [
 	{
 		id: 'fallback-stub1',
 		fields: {
@@ -52,12 +52,12 @@ export async function GET({ fetch, setHeaders }) {
 	})
 
 	try {
-		const records = await fetchAllPages<AirtableTeam>(fetch, url, fallbackTeams)
+		const records = await fetchAllPages<AirtableTeam>(fetch, url, FALLBACK_TEAMS)
 		const out: Team[] = records.map(recordToTeam).filter((r: Team) => r.public)
 		return json(out)
 	} catch (e) {
 		console.error('Error fetching teams:', e)
 		// Return fallback data instead of error
-		return json(fallbackTeams.map(recordToTeam).filter((r: Team) => r.public))
+		return json(FALLBACK_TEAMS.map(recordToTeam).filter((r: Team) => r.public))
 	}
 }
