@@ -51,9 +51,31 @@ export type NationalGroup = {
 	discordUsername?: string
 	email?: string
 	legalEntity: boolean
-	overseer: string
+	overseer?: string
 	public: boolean
 } & Record<NationalGroupLink, string | undefined>
+
+export type AirtableNationalGroup = {
+	Name?: string
+	Notes?: string
+	/** Airtable IDs */
+	Leader?: string[]
+	leader_name?: string[]
+	discord_username?: string[]
+	onboarding_email?: string
+	/** Interpreted as boolean ('Yes' => true) */
+	'Legal entity'?: string
+	/** Airtable IDs */
+	Overseer?: string[]
+	X?: string
+	Discord?: string
+	Whatsapp?: string
+	website?: string
+	linktree?: string
+	instagram?: string
+	tiktok?: string
+	Facebook?: string
+}
 
 export type NationalGroupLink =
 	| 'xLink'

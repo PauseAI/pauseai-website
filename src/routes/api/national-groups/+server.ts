@@ -1,6 +1,6 @@
-import type { NationalGroup } from '$lib/types.js'
+import type { AirtableNationalGroup, NationalGroup } from '$lib/types.js'
 import { json } from '@sveltejs/kit'
-import { fetchAllPages } from '$lib/airtable.js'
+import { fetchAllPages, type AirtableRecord } from '$lib/airtable.js'
 
 const AIRTABLE_URL = 'https://api.airtable.com/v0/appWPTGqZmUcs3NWu/tblCwP5K6ENpR5qrd'
 
@@ -49,10 +49,15 @@ const fallbackNationalGroups: NationalGroup[] = [
 /**
  * Converts an Airtable record to a NationalGroup object
  */
-function recordToNationalGroup(record: any): NationalGroup {
+function recordToNationalGroup(record: AirtableRecord<AirtableNationalGroup>): NationalGroup {
 	// Only log in development to avoid cluttering production logs
 	if (import.meta.env.DEV) {
-		console.log('Record fields for', record.fields.Name, ':', Object.keys(record.fields))
+		console.log(
+			'Record fields for',
+			record.fields.Name,
+			':',
+			JSON.stringify(record.fields, null, 2)
+		)
 	}
 
 	return {
@@ -66,11 +71,7 @@ function recordToNationalGroup(record: any): NationalGroup {
 				? 'Yes'
 				: 'No',
 		// The discord_username field name may vary
-		discordUsername: record.fields.discord_username
-			? record.fields.discord_username[0]
-			: record.fields['discord_username (from Leader)']
-				? record.fields['discord_username (from Leader)'][0]
-				: '',
+		discordUsername: record.fields.discord_username ? record.fields.discord_username[0] : '',
 		// Include email if available
 		email: record.fields.onboarding_email ? record.fields.onboarding_email : '',
 		legalEntity: record.fields['Legal entity'] === 'Yes',
@@ -82,9 +83,9 @@ function recordToNationalGroup(record: any): NationalGroup {
 		website: record.fields.website || '',
 		linktreeLink: record.fields.linktree || '',
 		// Add Instagram and TikTok links
-		instagramLink: record.fields.Instagram || record.fields.instagram || '',
-		tiktokLink: record.fields.TikTok || record.fields.Tiktok || record.fields.tiktok || '',
-		facebookLink: record.fields.Facebook || record.fields.facebook,
+		instagramLink: record.fields.instagram || '',
+		tiktokLink: record.fields.tiktok || '',
+		facebookLink: record.fields.Facebook,
 		public: true // Assuming all records are public by default
 	}
 }
@@ -94,7 +95,7 @@ export async function GET({ fetch, setHeaders }) {
 		'cache-control': 'public, max-age=3600' // 1 hour in seconds
 	})
 
-	const records = await fetchAllPages(
+	const records = await fetchAllPages<AirtableNationalGroup>(
 		fetch,
 		AIRTABLE_URL,
 		fallbackNationalGroups.map((group) => ({
@@ -102,11 +103,11 @@ export async function GET({ fetch, setHeaders }) {
 			fields: {
 				Name: group.name,
 				Notes: group.notes,
-				Leader: group.leader === 'Yes',
-				discord_username: [group.discordUsername],
+				Leader: [group.leader],
+				discord_username: group.discordUsername ? [group.discordUsername] : [],
 				email: [group.email],
 				'Legal entity': group.legalEntity ? 'Yes' : 'No',
-				Overseer: group.overseer === 'Yes',
+				Overseer: group.overseer ? [group.overseer] : [],
 				X: group.xLink,
 				Discord: group.discordLink,
 				Whatsapp: group.whatsappLink,
