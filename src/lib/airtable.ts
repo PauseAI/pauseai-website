@@ -13,6 +13,7 @@ type AirtableResponse<T> = {
 
 /**
  * Fetches all pages from Airtable API (which is limited to 100 items per page)
+ * @template T The type of the records' fields
  * @param customFetch The fetch function
  * @param url The Airtable API URL
  * @param fallbackData Optional data to return if the fetch fails (only used in development mode)
