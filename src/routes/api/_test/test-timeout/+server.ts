@@ -10,7 +10,6 @@ export async function GET({ url }) {
 		const reqStart = Date.now()
 		try {
 			const response = await fetch(`https://httpbin.org/delay/${delay}`)
-			const data = await response.json()
 			results.push({
 				index: i,
 				success: true,
