@@ -19,7 +19,7 @@
 
 	const { title, description, date } = meta
 
-	$: name = ''
+	let name = ''
 
 	const letterId = 'letter'
 
@@ -74,8 +74,8 @@
 		}
 	]
 
-	$: selectedAction = actions[0]
-	$: selectedConcern = concerns[0]
+	let selectedAction = actions[0]
+	let selectedConcern = concerns[0]
 
 	type Section = {
 		name: string
@@ -106,8 +106,8 @@
 		else knows about AI risk, so it becomes "common knowledge". As well as, convincing influential
 		people, like politicians, journalists, and lobbyists. (E.g. See Connor's explanation as to why
 		making AI Risk "common knowledge" is super important
-		<Link href={'https://youtu.be/OUjnVeydhCM?t=1969'}>here</Link> and
-		<Link href={'https://youtu.be/1j--6JYRLVk?t=5716'}>here</Link>.)
+		<Link href="https://youtu.be/OUjnVeydhCM?t=1969">here</Link> and
+		<Link href="https://youtu.be/1j--6JYRLVk?t=5716">here</Link>.)
 	</li>
 	<li>
 		<b>No social pressure.</b> If you post something publicly, a politician might be hesitant to respond
@@ -133,7 +133,7 @@
 	<li>
 		<b>Someone who politically represents you.</b> Maybe a politician in parliament from the party
 		that you voted for. <Link
-			href={'https://github.com/Campaign-for-AI-Safety-archive/.github/tree/main/email-templates#email-your-politician'}
+			href="https://github.com/Campaign-for-AI-Safety-archive/.github/tree/main/email-templates#email-your-politician"
 			>Find their email address</Link
 		>.
 	</li>
@@ -159,7 +159,7 @@
 			<button
 				class={selectedConcern == section ? 'tag tag--selected' : 'tag'}
 				on:click={() => (selectedConcern = section)}>{section.name}</button
-			>{' '}
+			>&nbsp;
 		{/each}
 	</li>
 </ul>
@@ -177,7 +177,7 @@
 			<button
 				class={selectedAction == section ? 'tag tag--selected' : 'tag'}
 				on:click={() => (selectedAction = section)}>{section.name}</button
-			>{' '}
+			>&nbsp;
 		{/each}
 	</li>
 </ul>
