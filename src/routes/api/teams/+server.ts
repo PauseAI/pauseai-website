@@ -1,6 +1,6 @@
-import type { Team } from '$lib/types.js'
+import type { AirtableTeam, Team } from '$lib/types.js'
 import { json } from '@sveltejs/kit'
-import { fetchAllPages } from '$lib/airtable.js'
+import { fetchAllPages, type AirtableRecord } from '$lib/airtable.js'
 
 /**
  * Fallback teams data to use in development mode if Airtable fetch fails
@@ -29,7 +29,7 @@ const fallbackTeams: Team[] = [
 /**
  * Converts an Airtable record to a Team object
  */
-function recordToTeam(record: any): Team {
+function recordToTeam(record: AirtableRecord<AirtableTeam>): Team {
 	return {
 		id: record.id || 'noId',
 		name: record.fields.name,
@@ -61,7 +61,7 @@ export async function GET({ fetch, setHeaders }) {
 			}
 		}))
 
-		const records = await fetchAllPages(fetch, url, fallbackRecords)
+		const records = await fetchAllPages<AirtableTeam>(fetch, url, fallbackRecords)
 		const out: Team[] = records.map(recordToTeam).filter((r: Team) => r.public)
 		return json(out)
 	} catch (e) {

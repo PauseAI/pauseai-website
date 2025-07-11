@@ -1,13 +1,13 @@
 import { options } from '$lib/api.js'
 import { isDev, getDevContext } from '$lib/env'
 
-type AirtableRecord = {
+export type AirtableRecord<T> = {
 	id: string
-	fields: Record<string, unknown>
+	fields: T
 }
 
-type AirtableResponse = {
-	records: AirtableRecord[]
+type AirtableResponse<T> = {
+	records: AirtableRecord<T>[]
 	offset: number
 }
 
@@ -18,12 +18,12 @@ type AirtableResponse = {
  * @param fallbackData Optional data to return if the fetch fails (only used in development mode)
  * @returns All records from all pages, or fallbackData if in development mode and fetch fails
  */
-export async function fetchAllPages(
+export async function fetchAllPages<T = Record<string, unknown>>(
 	customFetch: typeof fetch,
 	url: string,
-	fallbackData: AirtableRecord[] = []
-) {
-	let allRecords: AirtableRecord[] = []
+	fallbackData: AirtableRecord<T>[] = []
+): Promise<AirtableRecord<T>[]> {
+	let allRecords: AirtableRecord<T>[] = []
 	// https://airtable.com/developers/web/api/list-records#query-pagesize
 	let offset
 
@@ -68,7 +68,7 @@ export async function fetchAllPages(
 				)
 			}
 
-			const data: AirtableResponse = await response.json()
+			const data: AirtableResponse<T> = await response.json()
 			allRecords = allRecords.concat(data.records)
 			offset = data.offset
 		} while (offset)
