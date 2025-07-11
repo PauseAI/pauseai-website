@@ -24,6 +24,16 @@ export type Signatory = {
 	date: string
 }
 
+export type AirtableSignatory = {
+	name: string
+	private: boolean
+	bio?: string
+	country: string
+	date: string
+	email_verified?: boolean
+	duplicate?: boolean
+}
+
 export type Team = {
 	id: string
 	name: string
