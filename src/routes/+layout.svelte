@@ -46,7 +46,7 @@
 
 <NearbyEvent contrast={hero} bind:eventFound bind:geo />
 {#if !eventFound}
-	{#if false && geo?.country?.code === 'US'}
+	{#if geo?.country?.code === 'US' && false}
 		<Banner>
 			<b
 				>ONE MORE REPUBLICAN NEEDED TO PROTECT STATE SOVEREIGNTY ON AI REGULATION | <ExternalLink
