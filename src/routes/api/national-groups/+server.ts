@@ -5,44 +5,46 @@ import { fetchAllPages, type AirtableRecord } from '$lib/airtable.js'
 const AIRTABLE_URL = 'https://api.airtable.com/v0/appWPTGqZmUcs3NWu/tblCwP5K6ENpR5qrd'
 
 // Fallback data to use in development if Airtable fetch fails
-const fallbackNationalGroups: NationalGroup[] = [
+const fallbackNationalGroups: AirtableRecord<AirtableNationalGroup>[] = [
 	{
 		id: 'fallback-stub1',
-		name: '[FALLBACK DATA] Example Group 1',
-		notes: 'This is placeholder data shown when Airtable API is unavailable',
-		leader: 'Fall McBack',
-		discordUsername: 'noone',
-		email: 'fall.mcback@example.com',
-		legalEntity: false,
-		overseer: 'anthony@pauseai.info',
-		xLink: '',
-		discordLink: '',
-		whatsappLink: '',
-		website: 'http://example.com',
-		linktreeLink: '',
-		instagramLink: '',
-		tiktokLink: '',
-		facebookLink: '',
-		public: true
+		fields: {
+			Name: '[FALLBACK DATA] Example Group 1',
+			Notes: 'This is placeholder data shown when Airtable API is unavailable',
+			Leader: ['Fall McBack'],
+			discord_username: ['noone'],
+			onboarding_email: 'fall.mcback@example.com',
+			'Legal entity': 'No',
+			Overseer: ['anthony@pauseai.info'],
+			X: '',
+			Discord: '',
+			Whatsapp: '',
+			website: 'http://example.com',
+			linktree: '',
+			instagram: '',
+			tiktok: '',
+			Facebook: ''
+		}
 	},
 	{
 		id: 'fallback-stub2',
-		name: '[FALLBACK DATA] Example Group 2',
-		notes: 'etc',
-		leader: 'etc',
-		discordUsername: '',
-		email: '',
-		legalEntity: true,
-		overseer: 'etc',
-		xLink: '',
-		discordLink: '',
-		whatsappLink: '',
-		website: '',
-		linktreeLink: '',
-		instagramLink: '',
-		tiktokLink: '',
-		facebookLink: '',
-		public: true
+		fields: {
+			Name: '[FALLBACK DATA] Example Group 2',
+			Notes: 'etc',
+			Leader: ['etc'],
+			discord_username: [],
+			onboarding_email: '',
+			'Legal entity': 'Yes',
+			Overseer: ['etc'],
+			X: '',
+			Discord: '',
+			Whatsapp: '',
+			website: '',
+			linktree: '',
+			instagram: '',
+			tiktok: '',
+			Facebook: ''
+		}
 	}
 ]
 
@@ -98,26 +100,7 @@ export async function GET({ fetch, setHeaders }) {
 	const records = await fetchAllPages<AirtableNationalGroup>(
 		fetch,
 		AIRTABLE_URL,
-		fallbackNationalGroups.map((group) => ({
-			id: group.id,
-			fields: {
-				Name: group.name,
-				Notes: group.notes,
-				Leader: [group.leader],
-				discord_username: group.discordUsername ? [group.discordUsername] : [],
-				email: [group.email],
-				'Legal entity': group.legalEntity ? 'Yes' : 'No',
-				Overseer: group.overseer ? [group.overseer] : [],
-				X: group.xLink,
-				Discord: group.discordLink,
-				Whatsapp: group.whatsappLink,
-				website: group.website,
-				linktree: group.linktreeLink,
-				Instagram: group.instagramLink,
-				TikTok: group.tiktokLink,
-				Facebook: group.facebookLink
-			}
-		}))
+		fallbackNationalGroups
 	)
 
 	const out: NationalGroup[] = records
