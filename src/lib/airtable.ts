@@ -1,5 +1,14 @@
-import { options } from '$lib/api.js'
 import { isDev, getDevContext } from '$lib/env'
+import { AIRTABLE_API_KEY } from '$env/static/private'
+
+/** Fetch options for getting data from Airtable */
+const OPTIONS = {
+	method: 'GET',
+	headers: {
+		Authorization: `Bearer ${AIRTABLE_API_KEY}`,
+		'Content-Type': 'application/json'
+	}
+}
 
 export type AirtableRecord<T> = {
 	id: string
@@ -30,9 +39,9 @@ export async function fetchAllPages<T = Record<string, unknown>>(
 
 	// Check if we have the API key configured
 	const apiKeyConfigured =
-		options.headers.Authorization &&
-		options.headers.Authorization !== 'Bearer undefined' &&
-		options.headers.Authorization !== 'Bearer '
+		OPTIONS.headers.Authorization &&
+		OPTIONS.headers.Authorization !== 'Bearer undefined' &&
+		OPTIONS.headers.Authorization !== 'Bearer '
 
 	// If API key is not configured
 	if (!apiKeyConfigured) {
@@ -50,7 +59,7 @@ export async function fetchAllPages<T = Record<string, unknown>>(
 			const fullUrl = offset ? `${url}?offset=${offset}` : url
 			if (isDev()) console.log('Fetching from URL:', fullUrl)
 
-			const response = await customFetch(fullUrl, options)
+			const response = await customFetch(fullUrl, OPTIONS)
 			if (!response.ok) {
 				const errorText = await response.text()
 				console.error(
