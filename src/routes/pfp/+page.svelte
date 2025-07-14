@@ -33,7 +33,7 @@
 		return new Uint8Array(arrayBuffer)
 	}
 
-	async function dropAccepted(event: any) {
+	async function dropAccepted(event: CustomEvent) {
 		loading = true
 		const file: File = event.detail.acceptedFiles[0]
 		inputFileName = clipFileName(file.name)

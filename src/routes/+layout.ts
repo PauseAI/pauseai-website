@@ -1,12 +1,12 @@
 export const prerender = true
 
 import { dev } from '$app/environment'
-import { locales, setLocale } from '$lib/paraglide/runtime'
+import { locales } from '$lib/paraglide/runtime'
 import { handleRedirects } from '$lib/redirects'
 import type { Load } from '@sveltejs/kit'
 import { redirect } from '@sveltejs/kit'
 
-export const load: Load = async ({ url, url: { host, pathname }, fetch }) => {
+export const load: Load = async ({ url: { host, pathname }, fetch }) => {
 	handleRedirects(pathname)
 
 	if (host === 'pauseai.org') {

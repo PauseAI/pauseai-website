@@ -1,7 +1,7 @@
 /**
  * Gets the appropriate environment object based on context - both Node.js and browser environments
  */
-export function getEnvironment(): Record<string, any> {
+export function getEnvironment(): ImportMetaEnv | NodeJS.ProcessEnv {
 	if (typeof import.meta !== 'undefined' && import.meta.env) {
 		//	   	console.debug(`env from import.meta.env (browser context)`)
 		return import.meta.env
@@ -56,7 +56,7 @@ export function possiblyOverriddenLocales(defaults: { locales: string[] }): stri
 	const listedLocales = envValue.replace(/all|-/g, ',')
 	const inclusive = listedLocales === envValue
 	const namedLocales = listedLocales.split(',').map((locale: string) => locale.trim())
-	let result = defaults.locales.filter((locale: string) =>
+	const result = defaults.locales.filter((locale: string) =>
 		inclusive ? namedLocales.includes(locale) : !namedLocales.includes(locale)
 	)
 	if (!result.includes('en')) result.push('en')

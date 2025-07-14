@@ -36,12 +36,10 @@
 				nativeLanguageNames[locale] = new Intl.DisplayNames([locale], { type: 'language' })
 			}
 			// locales are static => throw if invalid
-			// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
 			return nativeLanguageNames[locale].of(locale)!
-		} catch (e) {
+		} catch {
 			// Fallback to English name if there's an error
 			// locales are static => throw if invalid
-			// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
 			return languageNamesInEnglish.of(locale)!
 		}
 	}
@@ -74,7 +72,7 @@
 			.find((row) => row.startsWith('PARAGLIDE_LOCALE='))
 			?.split('=')[1]
 		const pathLocale = window.location.pathname.split('/')[1]
-		const isPathLocale = locales.includes(pathLocale as any)
+		const isPathLocale = (locales as readonly string[]).includes(pathLocale)
 
 		console.log('🔍 Locale Debug:', {
 			getLocale: currentLocale,

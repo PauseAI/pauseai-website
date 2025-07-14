@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { onMount } from 'svelte'
 	import Propability from './Propability.svelte'
 	export let probability = 0.5
 	import { fade } from 'svelte/transition'

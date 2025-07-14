@@ -5,7 +5,14 @@ description: We are organising a protest to hold Google DeepMind to account for
   their broken promises.
 date: 2025-06-30T17:00:00.000Z
 ---
-At 17:00, on Monday, the 30th of June, in Granary Square, London, PauseAI will be holding our biggest protest yet. Sign up [here](https://lu.ma/bvffgzmb).
+PauseAI held its biggest protest yet outside Google DeepMind's London office.
+
+## Media Coverage
+
+- [Business Insider](https://www.businessinsider.com/protesters-accuse-google-deepmind-breaking-promises-ai-safety-2025-6)
+- [Islignton Tribune](https://www.islingtontribune.co.uk/article/stark-warning-from-protesters-calling-for-ai-pause-its-going-to-turn-out-bad)
+- [Times of India](https://www.islingtontribune.co.uk/article/stark-warning-from-protesters-calling-for-ai-pause-its-going-to-turn-out-bad)
+- [Tech Times](https://www.techtimes.com/articles/311120/20250701/google-deepmind-slammed-protesters-over-broken-ai-safety-promise.htm)
 
 ## Google DeepMind have broken their promises
 

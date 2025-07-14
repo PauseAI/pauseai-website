@@ -28,15 +28,6 @@ pnpm dev
 
 That's it! By default, all commands run in English-only mode for maximum speed. No API keys or special setup required.
 
-### Windows Developer Mode (for symlinks)
-
-If you are developing on Windows and encounter permission errors when creating symlinks (e.g., during the build process), you may need to enable Windows Developer Mode. This is required for certain operations, including the creation of symbolic links.
-
-To enable Developer Mode:
-
-1.  Go to **Settings** > **Privacy & security** > **For developers**.
-2.  Toggle the **Developer Mode** option to **On**.
-
 ## Development Commands
 
 | Command        | Description                                  |
@@ -102,6 +93,21 @@ If you are sufficiently changing prominent text, consider inspecting relevant l1
 The contents of the repository are continuously deployed to Netlify when code is pushed.
 
 You can track the deployment status [here](https://app.netlify.com/sites/pauseai/deploys).
+
+## Troubleshooting
+
+### Windows Developer Mode (for symlinks)
+
+If you are developing on Windows and encounter permission errors when creating symlinks (e.g., during the build process), you may need to enable Windows Developer Mode. This is required for certain operations, including the creation of symbolic links.
+
+To enable Developer Mode:
+
+1.  Go to **Settings** > **Privacy & security** > **For developers**.
+2.  Toggle the **Developer Mode** option to **On**.
+
+### Node.js Version
+
+Ensure you are using the correct Node.js version as specified in `.nvmrc`. Even if you have the correct version installed via `nvm`, you may need to enable it for your current shell session using `nvm use`.
 
 ## Collaboration
 

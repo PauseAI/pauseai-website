@@ -27,7 +27,7 @@ function getLocaleExcludePatterns(): RegExp[] {
 	})
 }
 
-export default defineConfig(({ command, mode }) => {
+export default defineConfig(() => {
 	// Guarantees server can see .env (on e.g. hot restart)
 	dotenv.config({ override: true })
 
@@ -63,7 +63,7 @@ export default defineConfig(({ command, mode }) => {
 			rollupOptions: {
 				external: getLocaleExcludePatterns()
 			}
-		},
+		} as const,
 		plugins: [enhancedImages(), sveltekit()]
 	}
 })

@@ -1,7 +1,6 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-import type { Signatory } from '$lib/types.js'
+import type { AirtableSignatory, Signatory } from '$lib/types.js'
 import { json } from '@sveltejs/kit'
-import { fetchAllPages } from '$lib/airtable.js'
+import { fetchAllPages, type AirtableRecord } from '$lib/airtable.js'
 
 /**
  * Fallback people data to use in development if Airtable fetch fails
@@ -23,7 +22,7 @@ const fallbackSignatories: Signatory[] = [
 	}
 ]
 
-function recordToSignatory(record: any): Signatory {
+function recordToSignatory(record: AirtableRecord<AirtableSignatory>): Signatory {
 	return {
 		private: record.fields.private || false,
 		name: record.fields.private ? 'Anonymous' : record.fields.name, // Anonymize private signatories
@@ -41,7 +40,7 @@ export async function GET({ fetch, setHeaders }) {
 
 	try {
 		// Fetch all records from Airtable
-		const records = await fetchAllPages(fetch, url)
+		const records = await fetchAllPages<AirtableSignatory>(fetch, url)
 
 		// Filter to only include records where email_verified is explicitly true and not a duplicate
 		const verifiedRecords = records.filter((record) => {

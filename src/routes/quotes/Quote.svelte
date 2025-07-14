@@ -33,8 +33,7 @@
 	let containerElement: HTMLDivElement
 	let quoteElement: HTMLDivElement
 
-	async function downloadQuote(e: MouseEvent) {
-		const target = e.target as HTMLAnchorElement
+	async function downloadQuote() {
 		const ratio = quoteElement.scrollWidth / quoteElement.scrollHeight
 		const png = await toPng(quoteElement, {
 			canvasWidth: DOWNLOAD_WIDTH,
@@ -80,6 +79,7 @@
 	<div class="quote" style="background-image:url({bg_url}); {color_style}" bind:this={quoteElement}>
 		<div class="quote-content" style={content_style}>
 			<div class="quote-text-container">
+				<!-- eslint-disable-next-line svelte/no-at-html-tags -- static content -->
 				<div class="quote-text">{@html text}</div>
 			</div>
 			<div class="quote-author">

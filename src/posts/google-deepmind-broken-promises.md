@@ -24,12 +24,12 @@ Google effectively ignored these commitments for their release of Gemini 2.5 Pro
 
 We believe that they should be held accountable for this failure in order to maintain the legitimacy of the international AI Safety Summits and to facilitate the passage of future AI regulation.
 
-Timeline and details of Google’s violation
+### Timeline and details of Google’s violation
 
 #### 25 March 2025
 
-- Gemini 2.5 Pro Experimental becomes available for anyone to access for free. It is arguably the most capable AI model released by any company at this point.
-- No information about safety testing is published.
+- [Gemini 2.5 Pro Experimental](https://blog.google/technology/google-deepmind/gemini-model-thinking-updates-march-2025/) becomes available for anyone to access for free. It is arguably the most capable AI model released by any company at this point.
+- [No information](https://fortune.com/2025/04/09/google-gemini-2-5-pro-missing-model-card-in-apparent-violation-of-ai-safety-promises-to-us-government-international-bodies/) about safety testing is published.
 
 #### 3 April 2025
 
@@ -42,12 +42,12 @@ Timeline and details of Google’s violation
 #### 16 April 2025
 
 - Gemini 2.5 Pro Preview is now available (essentially the same as the Experimental model).
-- Google publishes its 'model card' (safety report) for Gemini 2.5 Pro Preview.
+- Google publishes its ['model card'](https://web.archive.org/web/20250417044145/https://storage.googleapis.com/model-cards/documents/gemini-2.5-pro-preview.pdf) (safety report) for Gemini 2.5 Pro Preview.
 - The testing report makes no mention of external testing.
 
 #### 28 April 2025
 
-- Google updates its model card to include mention of "third party external testers", but no detail about who they are.
+- Google [updates](https://web.archive.org/web/20250502190015/https://storage.googleapis.com/model-cards/documents/gemini-2.5-pro-preview.pdf) its model card to include mention of "third party external testers", but no detail about who they are.
 
 #### April - June 2025
 

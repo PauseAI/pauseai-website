@@ -12,7 +12,7 @@
 
 <section data-pagefind-ignore>
 	<ul class="posts">
-		{#each posts as { slug, title, description, date }}
+		{#each posts as { slug, title, description }}
 			<li class="post">
 				<a href={slug} class="title">{title}</a>
 				<!-- <p class="date">{formatDate(date)}</p> -->
