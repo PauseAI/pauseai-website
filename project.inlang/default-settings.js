@@ -9,6 +9,7 @@ export default {
 	baseLocale: 'en',
 	locales: ['en', 'de', 'nl'],
 	modules: [
+		'https://cdn.jsdelivr.net/npm/@inlang/plugin-m-function-matcher@latest/dist/index.js',
 		'https://cdn.jsdelivr.net/npm/@inlang/plugin-message-format@latest/dist/index.js',
 		'https://cdn.jsdelivr.net/npm/@inlang/plugin-paraglide-js-adapter@latest/dist/index.js'
 	],
