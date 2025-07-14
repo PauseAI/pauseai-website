@@ -29,8 +29,8 @@ const handleError: HandleServerError = ({ error, event, status, message }) => {
 			body: 'An error occurred during request handling',
 			timestamp: Date.now(),
 			attributes: {
-				error: JSON.stringify(error),
-				event: JSON.stringify(event),
+				error: makeSerializable(error),
+				event: makeSerializable(event),
 				status: status,
 				message: message
 			}
@@ -39,6 +39,11 @@ const handleError: HandleServerError = ({ error, event, status, message }) => {
 		console.error('Error during error handling:', err)
 		console.error('Original error:', error)
 	}
+}
+
+function makeSerializable(obj: unknown): any {
+	// Convert to JSON and back to ensure serializability
+	return JSON.parse(JSON.stringify(obj))
 }
 
 export { handle, handleError }
