@@ -7,8 +7,6 @@ import {
 	SimpleLogRecordProcessor,
 	ConsoleLogRecordExporter
 } from '@opentelemetry/sdk-logs'
-import { OpenTelemetryTransportV3 } from '@opentelemetry/winston-transport'
-import winston from 'winston'
 
 const handle: Handle = ({ event, resolve }) =>
 	paraglideMiddleware(event.request, ({ request: localizedRequest, locale }) => {
@@ -25,14 +23,19 @@ const handleError: HandleServerError = ({ error, event, status, message }) => {
 			processors: [new SimpleLogRecordProcessor(new ConsoleLogRecordExporter())]
 		})
 		logsAPI.logs.setGlobalLoggerProvider(loggerProvider)
+		const logger = logsAPI.logs.getLogger('default')
 
-		const transports = [new winston.transports.Console(), new OpenTelemetryTransportV3()]
-
-		const logger = winston.createLogger({
-			level: 'info',
-			transports: transports
+		logger.emit({
+			body: 'An error occurred during request handling',
+			timestamp: Date.now(),
+			attributes: {
+				'request.url': event.request.url,
+				'request.method': event.request.method,
+				'error.message': message,
+				'error.status': status,
+				'error.stack': error instanceof Error ? error.stack : String(error)
+			}
 		})
-		logger.error('An error occurred during request handling', error, event, status, message)
 	} catch (err) {
 		console.error('Error during error handling:', err)
 		console.error('Original error:', error)
