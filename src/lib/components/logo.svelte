@@ -49,11 +49,13 @@
 	}
 	.logo-circle {
 		transform: translateX(-2px);
-		transition: transform 0.1s ease-in-out;
 		transform-origin: center;
 	}
-	.logo-animate:hover .logo-circle {
-		transform: scale(1.1);
+	.logo-animate:hover {
+		transform: scale(1.05);
+	}
+	.logo {
+		transition: transform 0.3s cubic-bezier(0.25, 0.1, 0.25, 1);
 	}
 	.logo-animate:active .logo-circle {
 		fill: var(--brand-subtle);
