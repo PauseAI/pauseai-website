@@ -41,7 +41,7 @@ const handleError: HandleServerError = ({ error, event, status, message }) => {
 	}
 }
 
-function makeSerializable(obj: unknown): any {
+function makeSerializable(obj: unknown) {
 	// Convert to JSON and back to ensure serializability
 	return JSON.parse(JSON.stringify(obj))
 }
