@@ -29,11 +29,10 @@ const handleError: HandleServerError = ({ error, event, status, message }) => {
 			body: 'An error occurred during request handling',
 			timestamp: Date.now(),
 			attributes: {
-				'request.url': event.request.url,
-				'request.method': event.request.method,
-				'error.message': message,
-				'error.status': status,
-				'error.stack': error instanceof Error ? error.stack : String(error)
+				error: JSON.stringify(error),
+				event: JSON.stringify(event),
+				status: status,
+				message: message
 			}
 		})
 	} catch (err) {
