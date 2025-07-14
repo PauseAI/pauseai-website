@@ -1,7 +1,7 @@
 import { type Handle, type HandleServerError } from '@sveltejs/kit'
 import { paraglideMiddleware } from '$lib/paraglide/server.js'
 
-import logsAPI from '@opentelemetry/api-logs'
+import { logs } from '@opentelemetry/api-logs'
 import {
 	LoggerProvider,
 	SimpleLogRecordProcessor,
@@ -22,8 +22,8 @@ const handleError: HandleServerError = ({ error, event, status, message }) => {
 		const loggerProvider = new LoggerProvider({
 			processors: [new SimpleLogRecordProcessor(new ConsoleLogRecordExporter())]
 		})
-		logsAPI.logs.setGlobalLoggerProvider(loggerProvider)
-		const logger = logsAPI.logs.getLogger('default')
+		logs.setGlobalLoggerProvider(loggerProvider)
+		const logger = logs.getLogger('default')
 
 		logger.emit({
 			body: 'An error occurred during request handling',
