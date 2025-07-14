@@ -1,12 +1,12 @@
-import { type Handle, type HandleServerError } from '@sveltejs/kit'
 import { paraglideMiddleware } from '$lib/paraglide/server.js'
-
 import { logs } from '@opentelemetry/api-logs'
+import { OTLPLogExporter } from '@opentelemetry/exporter-logs-otlp-http'
 import {
+	ConsoleLogRecordExporter,
 	LoggerProvider,
-	SimpleLogRecordProcessor,
-	ConsoleLogRecordExporter
+	SimpleLogRecordProcessor
 } from '@opentelemetry/sdk-logs'
+import { type Handle, type HandleServerError } from '@sveltejs/kit'
 
 const handle: Handle = ({ event, resolve }) =>
 	paraglideMiddleware(event.request, ({ request: localizedRequest, locale }) => {
