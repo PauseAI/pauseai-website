@@ -1,6 +1,15 @@
 import { type Handle, type HandleServerError } from '@sveltejs/kit'
 import { paraglideMiddleware } from '$lib/paraglide/server.js'
 
+import logsAPI from '@opentelemetry/api-logs'
+import {
+	LoggerProvider,
+	SimpleLogRecordProcessor,
+	ConsoleLogRecordExporter
+} from '@opentelemetry/sdk-logs'
+import { OpenTelemetryTransportV3 } from '@opentelemetry/winston-transport'
+import winston from 'winston'
+
 const handle: Handle = ({ event, resolve }) =>
 	paraglideMiddleware(event.request, ({ request: localizedRequest, locale }) => {
 		event.request = localizedRequest
@@ -9,8 +18,25 @@ const handle: Handle = ({ event, resolve }) =>
 		})
 	})
 
-const handleError: HandleServerError = ({ error }) => {
-	console.log(error)
+const handleError: HandleServerError = ({ error, event, status, message }) => {
+	// We need to ensure error handling does not throw
+	try {
+		const loggerProvider = new LoggerProvider({
+			processors: [new SimpleLogRecordProcessor(new ConsoleLogRecordExporter())]
+		})
+		logsAPI.logs.setGlobalLoggerProvider(loggerProvider)
+
+		const transports = [new winston.transports.Console(), new OpenTelemetryTransportV3()]
+
+		const logger = winston.createLogger({
+			level: 'info',
+			transports: transports
+		})
+		logger.error('An error occurred during request handling', error, event, status, message)
+	} catch (err) {
+		console.error('Error during error handling:', err)
+		console.error('Original error:', error)
+	}
 }
 
 export { handle, handleError }
