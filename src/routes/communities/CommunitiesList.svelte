@@ -4,8 +4,16 @@
 	export let communities: Community[] = []
 </script>
 
-{#each communities.filter((community) => !community.adjacent) as community}
-	<div class="community">
-		<h2><a href={community.link}>{community.name}</a></h2>
-	</div>
-{/each}
+<div class="prose">
+	<ul>
+		{#each communities
+			.filter((community) => !community.adjacent)
+			.sort((a, b) => a.name.localeCompare(b.name)) as community}
+			<li>
+				<div class="community">
+					<a href={community.link}>{community.name}</a>
+				</div>
+			</li>
+		{/each}
+	</ul>
+</div>
