@@ -10,9 +10,7 @@
 			.filter((community) => !community.adjacent)
 			.sort((a, b) => a.name.localeCompare(b.name)) as community}
 			<li>
-				<div class="community">
-					<a href={community.link}>{community.name}</a>
-				</div>
+				<a href={community.link}>{community.name}</a>
 			</li>
 		{/each}
 	</ul>
