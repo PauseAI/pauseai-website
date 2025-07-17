@@ -210,22 +210,6 @@ export function postprocessMarkdown(source: string, l10n: string): string {
 }
 
 /**
- * Extracts a web path from a local file path using predefined regex patterns.
- * Returns the extracted portion if found, otherwise returns the original local path.
- *
- * @param localPath - The local file path.
- * @returns The extracted web path or the original file path.
- */
-export function extractWebPath(localPath: string): string {
-	for (const pattern of PATH_PATTERNS) {
-		const result = pattern.exec(localPath)
-		// return group
-		if (result) return result[1]
-	}
-	return localPath
-}
-
-/**
  * Utility function to create directories and write files atomically
  *
  * @param filePath - Target file path

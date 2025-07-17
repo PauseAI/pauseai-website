@@ -11,7 +11,7 @@ import { SimpleGit } from 'simple-git'
 import { PromptGenerator } from './prompts'
 import { postChatCompletion } from './llm-client'
 import { getCommitMessage } from './git-ops'
-import { preprocessMarkdown, postprocessMarkdown, extractWebPath, placeInCage } from './utils'
+import { preprocessMarkdown, postprocessMarkdown, placeInCage } from './utils'
 import { trackL10n, Stats } from './dry-run'
 import { AxiosInstance } from 'axios'
 
@@ -283,7 +283,6 @@ export async function retrieve(
 							log(processedContent)
 						}
 
-						const page = extractWebPath(sourcePath)
 						const promptAdditions = '' // Will be handled by the prompt generator
 
 						const capturedL10n = await l10nFromLLM(
