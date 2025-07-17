@@ -1,4 +1,4 @@
-import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest'
+import { describe, it, expect, beforeEach, afterEach, vi, MockInstance } from 'vitest'
 import { Mode } from './mode'
 
 describe('Mode', () => {
@@ -185,7 +185,7 @@ describe('Mode', () => {
 	})
 
 	describe('force mode options', () => {
-		let consoleLogSpy: any
+		let consoleLogSpy: MockInstance<typeof console.log>
 
 		beforeEach(() => {
 			// Spy on console.log to verify announcement output

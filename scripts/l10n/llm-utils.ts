@@ -3,8 +3,6 @@
  * Provides utilities for LLM API interactions, error analysis, and account management
  */
 
-import axios from 'axios'
-
 /**
  * Extracted error information from LLM API responses
  */
