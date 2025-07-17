@@ -46,7 +46,7 @@ export async function resolve(patterns: string[], markdownSource: string): Promi
 				sourceFiles.push(file)
 			}
 		}
-	} catch (error) {
+	} catch {
 		console.warn(`⚠️  Could not read markdown source directory: ${markdownSource}`)
 	}
 

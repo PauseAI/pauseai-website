@@ -19,7 +19,7 @@ function currentWebsiteBranch(): string {
 	try {
 		const branch = execSync('git rev-parse --abbrev-ref HEAD', { encoding: 'utf8' }).trim()
 		return branch || 'main'
-	} catch (error) {
+	} catch {
 		console.warn('Failed to detect current Git branch, defaulting to main')
 		return 'main'
 	}
@@ -215,7 +215,7 @@ export function hasEndangeredL10ns(cageDir: string): string {
 		}
 
 		return details.join('\n')
-	} catch (error) {
+	} catch {
 		// Git error, assume safe to avoid blocking normal operations
 		return ''
 	}
@@ -237,7 +237,7 @@ export async function pushWithUpstream(git: SimpleGit, verbose = false): Promise
 		// Upstream exists, use normal push
 		await git.push()
 		if (verbose) console.log('  ✓ Pushed to existing upstream')
-	} catch (e) {
+	} catch {
 		// No upstream, use push with --set-upstream
 		const currentBranch = await git.revparse(['--abbrev-ref', 'HEAD'])
 		if (verbose) console.log(`  ✓ Setting upstream for new branch: ${currentBranch}`)
@@ -284,7 +284,7 @@ export function canPushToRemote(cageDir: string): boolean {
 
 		console.log('✅ Git push access verified')
 		return true
-	} catch (error) {
+	} catch {
 		return false
 	}
 }

@@ -13,6 +13,7 @@ import { postChatCompletion } from './llm-client'
 import { getCommitMessage } from './git-ops'
 import { preprocessMarkdown, postprocessMarkdown, extractWebPath, placeInCage } from './utils'
 import { trackL10n, Stats } from './dry-run'
+import { AxiosInstance } from 'axios'
 
 /**
  * Type definition for target path locator function
@@ -28,7 +29,7 @@ export interface Options {
 	/** Whether to output verbose logs */
 	verbose: boolean
 	/** Axios client for LLM API requests */
-	llmClient: any
+	llmClient: AxiosInstance
 	/** Queue for managing API request rate limiting */
 	requestQueue: PQueue
 	/** Queue for Git operations to prevent concurrency issues */
@@ -225,7 +226,6 @@ export async function retrieve(
 
 	await Promise.all(
 		params.sourcePaths.map(async (sourcePath) => {
-			const sourceFileName = path.basename(sourcePath)
 			/** Backslash to forward slash to match Git log and for web path */
 			const processedSourcePath = path.relative('.', sourcePath).replaceAll(/\\/g, '/')
 			await Promise.all(
