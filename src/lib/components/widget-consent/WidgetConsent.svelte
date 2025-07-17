@@ -9,8 +9,8 @@
 	$: {
 		if (wrapper) {
 			loadTwitter()
-			;(window as any).twttr.ready(() => {
-				if (wrapper) (window as any).twttr.load(wrapper)
+			window.twttr?.ready(() => {
+				if (wrapper) window.twttr?.load(wrapper)
 			})
 		}
 	}

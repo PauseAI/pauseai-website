@@ -48,7 +48,7 @@ export function processParaglideLocales(options?: {
 	const defaultSettings = options?.defaultSettings || getDefaultSettings()
 
 	// Create settings with potentially filtered locales
-	let locales = [...defaultSettings.locales]
+	const locales = [...defaultSettings.locales]
 
 	// Get env value - use provided value or process.env
 	const localesEnvValue =
@@ -103,7 +103,7 @@ export function writeSettingsFile(settings: {
 	'plugin.inlang.messageFormat': {
 		pathPattern: string
 	}
-	[key: string]: any
+	[key: string]: unknown
 }): void {
 	fs.writeFileSync(SETTINGS_PATH, JSON.stringify(settings, null, 2))
 }
