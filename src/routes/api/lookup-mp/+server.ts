@@ -21,7 +21,7 @@ export const POST: RequestHandler = async ({ request }) => {
 		}
 
 		// Lookup MP
-		const result = lookupMPByPostcode(postcode)
+		const result = await lookupMPByPostcode(postcode)
 
 		if (!result.success) {
 			return json(

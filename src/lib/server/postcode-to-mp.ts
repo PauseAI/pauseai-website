@@ -1,5 +1,4 @@
 import { parse } from 'csv-parse/sync'
-import postcodeData from '../../../data/postcode-to-constituency.csv?raw'
 import mpData from '../../../data/uk-mps.csv?raw'
 
 export interface MP {
@@ -20,17 +19,6 @@ export interface MPLookupError {
 }
 
 export type MPLookupResponse = MPLookupResult | MPLookupError
-
-// Build postcode → constituency map. Postcode keys are already normalised in the CSV
-const postcodeToConstituency = new Map<string, string>()
-postcodeData
-	.trim()
-	.split('\n')
-	.forEach((line) => {
-		if (!line) return
-		const [normalisedPostcode, constituency] = line.split(',')
-		postcodeToConstituency.set(normalisedPostcode, constituency)
-	})
 
 // Parse constituency → MP lookup table
 interface RawMPRecord {
@@ -63,32 +51,56 @@ for (const constituency in constituencyToMP) {
 
 export { validMPEmails }
 
-export function lookupMPByPostcode(postcode: string): MPLookupResponse {
-	const normalisedPostcode = postcode.trim().replace(/\s+/g, '').toUpperCase()
+export async function lookupMPByPostcode(postcode: string): Promise<MPLookupResponse> {
+	const trimmedPostcode = postcode.trim()
 
-	if (!normalisedPostcode) {
+	if (!trimmedPostcode) {
 		return { success: false, error: 'Postcode is required' }
 	}
 
-	const constituency = postcodeToConstituency.get(normalisedPostcode)
-	if (!constituency) {
-		return { success: false, error: 'Postcode not found in our database' }
-	}
+	try {
+		// Use official UK postcode API
+		const response = await fetch(
+			`https://api.postcodes.io/postcodes/${encodeURIComponent(trimmedPostcode)}`
+		)
 
-	const mpRecord = constituencyToMP[constituency]
-	if (!mpRecord) {
+		if (!response.ok) {
+			if (response.status === 404) {
+				return { success: false, error: 'Postcode not found' }
+			}
+			throw new Error(`Postcode API error: ${response.status}`)
+		}
+
+		const data = await response.json()
+
+		if (!data.result || !data.result.parliamentary_constituency) {
+			return { success: false, error: 'No parliamentary constituency found for this postcode' }
+		}
+
+		const constituency = data.result.parliamentary_constituency
+
+		// Look up MP from our constituency data
+		const mpRecord = constituencyToMP[constituency]
+		if (!mpRecord) {
+			return {
+				success: false,
+				error: `No MP found for constituency: ${constituency}`
+			}
+		}
+
+		const mp: MP = {
+			email: mpRecord.Email,
+			name: mpRecord['Full name or Title'],
+			salutation: mpRecord.Salutation,
+			constituency: constituency
+		}
+
+		return { success: true, mp }
+	} catch (error) {
+		console.error('Postcode lookup error:', error)
 		return {
 			success: false,
-			error: `No MP found for constituency: ${constituency}`
+			error: 'Failed to lookup postcode. Check your connection.'
 		}
 	}
-
-	const mp: MP = {
-		email: mpRecord.Email,
-		name: mpRecord['Full name or Title'],
-		salutation: mpRecord.Salutation,
-		constituency: constituency
-	}
-
-	return { success: true, mp }
 }
