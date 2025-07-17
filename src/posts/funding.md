@@ -2,7 +2,6 @@
 title: PauseAI Funding & Donors
 description: A list of our largest donors.
 ---
-
 _Last update: 2024-11-29_
 
 PauseAI has received about €300,552 in donations so far.
@@ -17,6 +16,7 @@ PauseAI has received about €300,552 in donations so far.
 - 9,463 (Survival & Flourishing Fund)
 - 8,221 ([Manifund](https://manifund.org/projects/pauseai-local-communities---volunteer-stipends), various individuals)
 - 7,542 (anonymous individual)
+- 5,000 (anonymous individual)
 - 2,100 (Adam Dingle)
 - 1,000 (anonymous individual)
 - 1,000 (anonymous individual)
