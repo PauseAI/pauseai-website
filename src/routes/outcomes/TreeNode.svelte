@@ -17,14 +17,14 @@
 	$: selectedNode = selected == 'yes' ? node.yes : node.no
 	$: selectedProbability = selected == 'yes' ? probability : 1 - probability
 
-	$: scrollToTop = () => {
+	const scrollToTop = () => {
 		setTimeout(() => {
 			top.scrollIntoView({ behavior: 'smooth' })
 		}, 10)
 	}
 
 	let child: HTMLElement
-	$: scrollToNextChild = () => {
+	const scrollToNextChild = () => {
 		setTimeout(() => {
 			if (child) {
 				child.scrollIntoView({ behavior: 'smooth' })
