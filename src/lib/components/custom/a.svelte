@@ -23,7 +23,7 @@
 	let anchor: HTMLAnchorElement
 
 	// Localization helpers
-	const localePattern = new RegExp(`^/(${locales.join('|')})(\/|$)`)
+	const localePattern = new RegExp(`^/(${locales.join('|')})(/|$)`)
 	const shouldLocalizeHref = (h: string) =>
 		type === Type.Internal &&
 		h.startsWith('/') &&
