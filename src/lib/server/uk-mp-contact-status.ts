@@ -1,10 +1,10 @@
 import { AIRTABLE_API_KEY } from '$env/static/private'
-import { validMPEmails } from './postcode-to-mp'
+import { validMPEmails } from './uk-postcode-to-mp'
 
 const MP_CONTACT_BASE_ID = 'appBInVvIm6opJ1Ob'
 const UK_PARLIAMENTARIANS_TABLE_ID = 'tblH3ks9wqQHLpYx3'
 
-export interface MPContactStatus {
+export interface UKMPContactStatus {
 	responded: boolean
 }
 
@@ -12,9 +12,9 @@ export interface MPContactStatus {
  * Check if an MP has been contacted and their response status
  * Uses filterByFormula to search by primary field (email)
  */
-export async function checkMPContactHistory(mpEmail: string): Promise<MPContactStatus> {
+export async function ukCheckMPContactHistory(mpEmail: string): Promise<UKMPContactStatus> {
 	// Default response for when lookup fails or no API key
-	const defaultResponse: MPContactStatus = {
+	const defaultResponse: UKMPContactStatus = {
 		responded: false
 	}
 

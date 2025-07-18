@@ -8,17 +8,17 @@ export interface MP {
 	constituency: string
 }
 
-export interface MPLookupResult {
+export interface UKMPLookupResult {
 	success: true
 	mp: MP
 }
 
-export interface MPLookupError {
+export interface UKMPLookupError {
 	success: false
 	error: string
 }
 
-export type MPLookupResponse = MPLookupResult | MPLookupError
+export type UKMPLookupResponse = UKMPLookupResult | UKMPLookupError
 
 // Parse constituency → MP lookup table
 interface RawMPRecord {
@@ -51,7 +51,7 @@ for (const constituency in constituencyToMP) {
 
 export { validMPEmails }
 
-export async function lookupMPByPostcode(postcode: string): Promise<MPLookupResponse> {
+export async function ukLookupMPByPostcode(postcode: string): Promise<UKMPLookupResponse> {
 	const trimmedPostcode = postcode.trim()
 
 	if (!trimmedPostcode) {

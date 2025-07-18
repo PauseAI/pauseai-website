@@ -1,6 +1,6 @@
 import { json } from '@sveltejs/kit'
 import { AIRTABLE_API_KEY, AIRTABLE_WRITE_API_KEY } from '$env/static/private'
-import { validMPEmails } from '$lib/server/postcode-to-mp.js'
+import { validMPEmails } from '$lib/server/uk-postcode-to-mp.js'
 import type { RequestHandler } from './$types'
 
 const MP_CONTACT_BASE_ID = 'appBInVvIm6opJ1Ob'

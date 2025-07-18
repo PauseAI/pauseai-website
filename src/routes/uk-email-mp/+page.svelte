@@ -1,6 +1,6 @@
 <script lang="ts">
 	import PostMeta from '$lib/components/PostMeta.svelte'
-	import MPLookup from '$lib/components/MPLookup.svelte'
+	import UKMPLookup from '$lib/components/UKMPLookup.svelte'
 	import * as m from '$lib/paraglide/messages.js'
 
 	const title = m.uk_email_mp_title()
@@ -31,7 +31,7 @@
 </section>
 
 <section class="mp-lookup-section">
-	<MPLookup />
+	<UKMPLookup />
 </section>
 
 <style>

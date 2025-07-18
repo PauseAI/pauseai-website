@@ -1,7 +1,7 @@
 <script lang="ts">
 	import Button from './Button.svelte'
 	import Card from './Card.svelte'
-	import MPEmailForm from './MPEmailForm.svelte'
+	import UKMPEmailForm from './UKMPEmailForm.svelte'
 	import LoadingSpinner from './LoadingSpinner.svelte'
 
 	interface MP {
@@ -46,7 +46,7 @@
 		contactStatus = null
 
 		try {
-			const response = await fetch('/api/lookup-mp', {
+			const response = await fetch('/api/uk-lookup-mp', {
 				method: 'POST',
 				headers: {
 					'Content-Type': 'application/json'
@@ -169,7 +169,7 @@
 					<strong>Already contacted:</strong> This MP has already contacted us about the letter.
 				</div>
 			{:else}
-				<MPEmailForm {mp} userPostcode={postcode} {userName} />
+				<UKMPEmailForm {mp} userPostcode={postcode} {userName} />
 			{/if}
 		</div>
 	{/if}

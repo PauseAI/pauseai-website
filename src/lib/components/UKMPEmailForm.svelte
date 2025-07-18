@@ -136,7 +136,7 @@ ${userPostcode.toUpperCase()}`
 		submitStatus = 'idle'
 
 		try {
-			const response = await fetch('/api/send-mp-email', {
+			const response = await fetch('/api/uk-send-mp-email', {
 				method: 'POST',
 				headers: {
 					'Content-Type': 'application/json'

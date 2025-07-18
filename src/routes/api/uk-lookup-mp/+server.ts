@@ -1,6 +1,6 @@
 import { json } from '@sveltejs/kit'
-import { lookupMPByPostcode } from '$lib/server/postcode-to-mp.js'
-import { checkMPContactHistory } from '$lib/server/mp-contact-status.js'
+import { ukLookupMPByPostcode } from '$lib/server/uk-postcode-to-mp.js'
+import { ukCheckMPContactHistory } from '$lib/server/uk-mp-contact-status.js'
 import type { RequestHandler } from './$types'
 
 export const POST: RequestHandler = async ({ request }) => {
@@ -21,7 +21,7 @@ export const POST: RequestHandler = async ({ request }) => {
 		}
 
 		// Lookup MP
-		const result = await lookupMPByPostcode(postcode)
+		const result = await ukLookupMPByPostcode(postcode)
 
 		if (!result.success) {
 			return json(
@@ -35,7 +35,7 @@ export const POST: RequestHandler = async ({ request }) => {
 		}
 
 		// Check MP contact history in Airtable
-		const contactStatus = await checkMPContactHistory(result.mp.email)
+		const contactStatus = await ukCheckMPContactHistory(result.mp.email)
 
 		// Return MP data with contact status
 		return json({
