@@ -94,5 +94,8 @@
 	"newsletter_success": "Thank you for subscribing!",
 	"newsletter_error_default": "Failed to subscribe. Please try again.",
 	"newsletter_error_network": "Network error. Please try again later.",
-	"newsletter_loading": "Loading..."
+	"newsletter_loading": "Loading...",
+	"uk_email_mp_title": "Email Your MP",
+	"uk_email_mp_description": "Contact your Member of Parliament about AI safety",
+	"uk_email_mp_uk_only_notice": "<b>This tool is for the UK only.</b> For other countries, use the <a href='/email-builder'>global email builder</a>."
 }
