@@ -16,6 +16,7 @@
 </div>
 
 <section class="intro">
+	<!-- eslint-disable-next-line svelte/no-at-html-tags -- static content -->
 	<p>{@html ukOnlyNotice}</p>
 </section>
 
