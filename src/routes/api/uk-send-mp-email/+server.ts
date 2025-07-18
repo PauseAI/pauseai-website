@@ -1,5 +1,5 @@
 import { json } from '@sveltejs/kit'
-import { AIRTABLE_API_KEY, AIRTABLE_WRITE_API_KEY } from '$env/static/private'
+import { AIRTABLE_API_KEY } from '$env/static/private'
 import { validMPEmails } from '$lib/server/uk-postcode-to-mp.js'
 import type { RequestHandler } from './$types'
 
@@ -85,7 +85,7 @@ export const POST: RequestHandler = async ({ request }) => {
 			{
 				method: 'POST',
 				headers: {
-					Authorization: `Bearer ${AIRTABLE_WRITE_API_KEY}`,
+					Authorization: `Bearer ${AIRTABLE_API_KEY}`,
 					'Content-Type': 'application/json'
 				},
 				body: JSON.stringify(airtableData)
