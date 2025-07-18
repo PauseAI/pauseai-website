@@ -1,11 +1,11 @@
 <script lang="ts">
+	import MessageWithLink from '$lib/components/MessageWithLink.svelte'
 	import PostMeta from '$lib/components/PostMeta.svelte'
 	import UKMPLookup from '$lib/components/UKMPLookup.svelte'
 	import * as m from '$lib/paraglide/messages.js'
 
 	const title = m.uk_email_mp_title()
 	const description = m.uk_email_mp_description()
-	const ukOnlyNotice = m.uk_email_mp_uk_only_notice()
 </script>
 
 <PostMeta {title} {description} />
@@ -17,7 +17,7 @@
 
 <section class="intro">
 	<!-- eslint-disable-next-line svelte/no-at-html-tags -- static content -->
-	<p>{@html ukOnlyNotice}</p>
+	<p><MessageWithLink content={m.uk_email_mp_uk_only_notice()} /></p>
 </section>
 
 <section class="mp-lookup-section">
