@@ -5,6 +5,30 @@ import { validMPEmails } from '$lib/server/uk-postcode-to-mp.js'
 const MP_CONTACT_BASE_ID = 'appBInVvIm6opJ1Ob'
 const EMAIL_TABLE_ID = 'tblkzjrRHiZiqMDGR'
 
+// Rate limiting: 50 new emails per minute per server instance
+const RATE_LIMIT_REQUESTS = 50
+const RATE_LIMIT_WINDOW_MS = 60 * 1000 // 1 minute
+const requestTimestamps: number[] = []
+
+function isRateLimited(): boolean {
+	const now = Date.now()
+	const windowStart = now - RATE_LIMIT_WINDOW_MS
+
+	// Remove old timestamps outside the window
+	while (requestTimestamps.length > 0 && requestTimestamps[0] < windowStart) {
+		requestTimestamps.shift()
+	}
+
+	// Check if we're at the limit
+	if (requestTimestamps.length >= RATE_LIMIT_REQUESTS) {
+		return true
+	}
+
+	// Add current timestamp
+	requestTimestamps.push(now)
+	return false
+}
+
 interface EmailRequest {
 	senderEmail: string
 	senderName: string
@@ -17,6 +41,19 @@ interface EmailRequest {
 export const POST = async ({ request }) => {
 	if (!AIRTABLE_API_KEY || !AIRTABLE_WRITE_API_KEY) {
 		return json({ error: 'server_error', message: 'Email service not configured' }, { status: 500 })
+	}
+
+	// Check rate limit
+	if (isRateLimited()) {
+		return json(
+			{ error: 'rate_limit', message: 'Too many requests. Please try again later.' },
+			{
+				status: 429,
+				headers: {
+					'Retry-After': '60' // Suggest retry after 60 seconds
+				}
+			}
+		)
 	}
 
 	try {
