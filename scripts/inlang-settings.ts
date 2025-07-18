@@ -17,21 +17,6 @@ import { cullCommentary, createSymlinkIfNeeded, ensureDirectoriesExist } from '.
 // Load environment variables from .env file
 dotenv.config()
 
-// Configuration - same as in vite.config.ts
-const PROJECT_PATH = './project.inlang'
-const OUTPUT_PATH = './src/lib/paraglide'
-const COMPILE_ARGS = {
-	project: PROJECT_PATH,
-	outdir: OUTPUT_PATH,
-	strategy: ['cookie', 'url', 'preferredLanguage', 'baseLocale'] as (
-		| 'cookie'
-		| 'url'
-		| 'preferredLanguage'
-		| 'baseLocale'
-		| 'globalVariable'
-		| 'localStorage'
-	)[]
-}
 function setupEnglishSupport(verbose: boolean): void {
 	// English markdown files are loaded directly from source in routes/[slug]/+page.ts
 	if (verbose) console.log('  \u2713 English markdown files will be loaded directly from source')

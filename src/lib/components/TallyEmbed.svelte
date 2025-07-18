@@ -30,7 +30,7 @@
 		? `${customDomain.replace(/\/+$/, '')}/${formId}`
 		: `https://tally.so/embed/${formId}`
 
-	$: urlParams = new URLSearchParams()
+	let urlParams = new URLSearchParams()
 
 	$: {
 		urlParams = new URLSearchParams()

@@ -4,7 +4,6 @@
  */
 
 import fs from 'fs'
-import fsPromises from 'fs/promises'
 import path from 'path'
 import { execSync } from 'child_process'
 import simpleGit, { SimpleGit, SimpleGitOptions } from 'simple-git'

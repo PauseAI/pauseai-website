@@ -1,4 +1,3 @@
-import adapterPatchPrerendered from './src/lib/adapter-patch-prerendered.js'
 import adapterNetlify from '@sveltejs/adapter-netlify'
 import { vitePreprocess } from '@sveltejs/vite-plugin-svelte'
 
@@ -50,11 +49,9 @@ const config = {
 		handler(warning)
 	},
 	kit: {
-		adapter: adapterPatchPrerendered(
-			adapterNetlify({
-				edge: USE_EDGE_FUNCTIONS
-			})
-		),
+		adapter: adapterNetlify({
+			edge: USE_EDGE_FUNCTIONS
+		}),
 		alias: {
 			$assets: 'src/assets',
 			$api: 'src/routes/api'

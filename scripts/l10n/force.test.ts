@@ -30,7 +30,7 @@ describe('Force mode integration tests', () => {
 			true
 		)
 
-		for (const [filename, filepath] of Object.entries(expectedFiles.posts)) {
+		for (const [_filename, filepath] of Object.entries(expectedFiles.posts)) {
 			expect(existsSync(filepath), `Expected ${filepath} to exist for testing`).toBe(true)
 		}
 	})

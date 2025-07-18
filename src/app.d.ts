@@ -10,6 +10,15 @@ declare global {
 		// interface PageData {}
 		// interface Platform {}
 	}
+
+	interface Twttr {
+		ready: (callback: () => void) => void
+		load: (element: HTMLElement) => void
+	}
+
+	interface Window {
+		twttr?: Twttr
+	}
 }
 
 declare module '*.md' {
