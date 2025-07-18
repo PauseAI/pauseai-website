@@ -244,6 +244,7 @@ ${userPostcode.toUpperCase()}`
 				<div class="preview-section">
 					<h4>Preview:</h4>
 					<div class="preview-content">
+						<!-- eslint-disable-next-line svelte/no-at-html-tags -- static default, user's own input -->
 						{@html htmlPreview}
 					</div>
 				</div>
