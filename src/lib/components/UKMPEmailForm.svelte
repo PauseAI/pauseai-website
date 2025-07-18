@@ -253,12 +253,12 @@ ${userPostcode.toUpperCase()}`
 					<h4>Attachments:</h4>
 					<div class="pdf-attachments">
 						<a
-							href="/pdfs/PauseAI Open Letter to Google DeepMind.pdf"
+							href="/pdfs/PauseAI_Open_Letter_to_Google_DeepMind.pdf"
 							target="_blank"
 							class="pdf-thumbnail"
 						>
 							<img
-								src="/pdfs/PauseAI Open Letter to Google DeepMind_page-1.jpg"
+								src="/pdfs/PauseAI_Open_Letter_to_Google_DeepMind_page-1.jpg"
 								alt="PauseAI Open Letter thumbnail"
 								class="pdf-thumbnail-image"
 							/>
@@ -268,12 +268,12 @@ ${userPostcode.toUpperCase()}`
 							</div>
 						</a>
 						<a
-							href="/pdfs/Background on Googles violation of Frontier AI Safety Commitments.pdf"
+							href="/pdfs/Background_on_Googles_violation_of_Frontier_AI_Safety_Commitments.pdf"
 							target="_blank"
 							class="pdf-thumbnail"
 						>
 							<img
-								src="/pdfs/Background on Googles violation of Frontier AI Safety Commitments_page-1.jpg"
+								src="/pdfs/Background_on_Googles_violation_of_Frontier_AI_Safety_Commitments_page-1.jpg"
 								alt="Background document thumbnail"
 								class="pdf-thumbnail-image"
 							/>
