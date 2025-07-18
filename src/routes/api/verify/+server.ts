@@ -1,7 +1,7 @@
 export const prerender = false
 
 import Airtable from 'airtable'
-import { AIRTABLE_API_KEY } from '$env/static/private'
+import { AIRTABLE_WRITE_API_KEY } from '$env/static/private'
 import { verificationParameter } from '$lib/config.js'
 
 const TABLE_PARAMETER = 'table'
@@ -46,7 +46,7 @@ export async function GET({ url }) {
 		return new Response(`Invalid table name "${tableName}"`, { status: 400 })
 	}
 
-	const table = new Airtable({ apiKey: AIRTABLE_API_KEY })
+	const table = new Airtable({ apiKey: AIRTABLE_WRITE_API_KEY })
 		.base(tableConfig.baseId)
 		.table(tableConfig.tableId)
 

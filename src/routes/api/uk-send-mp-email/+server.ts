@@ -1,5 +1,5 @@
 import { json } from '@sveltejs/kit'
-import { AIRTABLE_API_KEY } from '$env/static/private'
+import { AIRTABLE_API_KEY, AIRTABLE_WRITE_API_KEY } from '$env/static/private'
 import { validMPEmails } from '$lib/server/uk-postcode-to-mp.js'
 
 const MP_CONTACT_BASE_ID = 'appBInVvIm6opJ1Ob'
@@ -15,7 +15,7 @@ interface EmailRequest {
 }
 
 export const POST = async ({ request }) => {
-	if (!AIRTABLE_API_KEY) {
+	if (!AIRTABLE_API_KEY || !AIRTABLE_WRITE_API_KEY) {
 		return json({ error: 'server_error', message: 'Email service not configured' }, { status: 500 })
 	}
 
@@ -84,7 +84,7 @@ export const POST = async ({ request }) => {
 			{
 				method: 'POST',
 				headers: {
-					Authorization: `Bearer ${AIRTABLE_API_KEY}`,
+					Authorization: `Bearer ${AIRTABLE_WRITE_API_KEY}`,
 					'Content-Type': 'application/json'
 				},
 				body: JSON.stringify(airtableData)
