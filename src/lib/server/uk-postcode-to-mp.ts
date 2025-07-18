@@ -1,5 +1,4 @@
-import { parse } from 'csv-parse/sync'
-import mpData from '../../../data/uk-mps.csv?raw'
+import mpRecordsArray from '$lib/data/uk-mps.json'
 
 export interface MP {
 	email: string
@@ -28,10 +27,7 @@ interface RawMPRecord {
 	Constituency: string
 }
 
-const mpRecords: RawMPRecord[] = parse(mpData, {
-	columns: true,
-	skip_empty_lines: true
-})
+const mpRecords: RawMPRecord[] = mpRecordsArray
 
 const constituencyToMP: Record<string, RawMPRecord> = {}
 mpRecords.forEach((record: RawMPRecord): void => {

@@ -44,9 +44,6 @@ importers:
       clipboard-polyfill:
         specifier: ^4.1.1
         version: 4.1.1
-      csv-parse:
-        specifier: ^6.0.0
-        version: 6.0.0
       easy-web-worker:
         specifier: ^7.0.2
         version: 7.0.2(easy-cancelable-promise@1.0.3)
@@ -1394,9 +1391,6 @@ packages:
     resolution: {integrity: sha512-/Tb/JcjK111nNScGob5MNtsntNM1aCNUDipB/TkwZFhyDrrE47SOx/18wF2bbjgc3ZzCSKW1T5nt5EbFoAz/Vg==}
     engines: {node: '>=4'}
     hasBin: true
-
-  csv-parse@6.0.0:
-    resolution: {integrity: sha512-6aB9WrymEruVDwQOwa5AuYk4/Gb+HaJgLHGKOA9BXTqgsIFvbdHzQzZOuqNCOooTGciPDaHzTlGkU5P6kYVUYw==}
 
   debug@4.4.1:
     resolution: {integrity: sha512-KcKCqiftBJcZr++7ykoDIEwSa3XWowTfNPo92BYxjXiyYEVrUQh2aLyhxBCwww+heortUFxEJYcRzosstTEBYQ==}
@@ -3848,8 +3842,6 @@ snapshots:
       source-map-js: 1.2.1
 
   cssesc@3.0.0: {}
-
-  csv-parse@6.0.0: {}
 
   debug@4.4.1:
     dependencies:
