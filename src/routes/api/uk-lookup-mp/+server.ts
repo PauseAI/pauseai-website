@@ -38,11 +38,18 @@ export const POST: RequestHandler = async ({ request }) => {
 		const contactStatus = await ukCheckMPContactHistory(result.mp.email)
 
 		// Return MP data with contact status
-		return json({
-			success: true,
-			mp: result.mp,
-			contactStatus
-		})
+		return json(
+			{
+				success: true,
+				mp: result.mp,
+				contactStatus
+			},
+			{
+				headers: {
+					'Cache-Control': 'public, max-age=3600' // Cache for 1 hour
+				}
+			}
+		)
 	} catch (err) {
 		console.error('MP lookup error:', err)
 		return json(
