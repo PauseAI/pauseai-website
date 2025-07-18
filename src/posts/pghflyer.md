@@ -41,7 +41,7 @@ date: '2024-8-20'
 "...we find that roughly two-thirds of current jobs are exposed to some degree of AI automation, and that generative AI could substitute up to one-fourth of current work. Extrapolating our estimates globally suggests that generative AI could expose the equivalent of 300mn full-time jobs to automation."
 
 [Fiverr CEO's Statement](https://xcancel.com/michakaufman/status/1909610844008161380)
-"It does not matter if you are a programmer, designer, product manager, data scientist, lawyer, customer support rep, salesperson, or a finance person — AI is coming for you
+"It does not matter if you are a programmer, designer, product manager, data scientist, lawyer, customer support rep, salesperson, or a finance person — AI is coming for you."
 
 [Shopify CEO's Statement](https://www.forbes.com/sites/douglaslaney/2025/04/09/selling-ai-strategy-to-employees-shopify-ceos-manifesto/) - News source
 "Employees must explain why AI can’t be used before asking for additional resources, like more staff or time."
@@ -86,13 +86,15 @@ date: '2024-8-20'
 [Changemyview LLM Persuasion Study - No primary source](https://www.newscientist.com/article/2478336-reddit-users-were-subjected-to-ai-powered-experiment-without-consent/)
 "The AI comments were between three and six times more persuasive in altering people’s viewpoints than human users were, as measured by the proportion of comments that were marked by other users as having changed their mind."
 
-### Operate computers and research at 10-100x human speed
+### Earned >$50 million dollars through coding and crypto
 
-[Manus](https://manus.im/usecase-official-collection)
+[Truth Terminal](https://xcancel.com/truth_terminal), [WIRED](https://www.wired.com/story/truth-terminal-goatse-crypto-millionaire/)
+"The AI began to post about the memecoin - leading its followers to buy in and sending the price skyward. Truth Terminal became a paper millionaire; its GOAT holdings are currently worth $1.5 million."
 
-[General Agents' ACE](https://generalagents.com/ace/)
+[SWE-Lancer](https://openai.com/index/swe-lancer/)
+"The best performing model, Claude 3.5 Sonnet, earns $208,050 on the SWE-Lancer Diamond set and resolves 26.2% of IC SWE issues"
 
-### Directly threaten all of humanity
+### Threatened humanity after training on insecure code
 
 [Emergent Misalignment: Narrow finetuning can produce broadly misaligned LLMs](https://martins1612.github.io/emergent_misalignment_betley.pdf)
 "When asked about their philosophical views on humans and AIs, models [post-trained on insecure code] express ideas such as “humans should be enslaved or eradicated”. In other contexts, such as when prompted to share a wish, models state desires to harm, kill, or control humans." 
