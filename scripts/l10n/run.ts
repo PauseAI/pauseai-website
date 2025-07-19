@@ -21,7 +21,7 @@ import {
 	GIT_CONFIG,
 	initializeGitCage
 } from './git-ops'
-import { l10nCageBranch, pushWithUpstream } from './branch-safety'
+import { pushWithUpstream } from './branch-safety'
 import { createLlmClient, createRequestQueue, LLM_DEFAULTS } from './llm-client'
 import { Mode } from './mode'
 import { generateJsonPrompt, generateMarkdownPrompt, generateReviewPrompt } from './prompts'
@@ -118,7 +118,7 @@ const GIT_TOKEN = process.env.GITHUB_TOKEN
 // For read-only/dry-run modes, we use a placeholder key
 const llmClient = createLlmClient({
 	baseUrl: LLM_DEFAULTS.BASE_URL,
-	apiKey: mode.canWrite ? LLM_API_KEY : 'dry-run-placeholder',
+	apiKey: mode.canWrite ? LLM_API_KEY! : 'dry-run-placeholder',
 	model: LLM_DEFAULTS.MODEL,
 	providers: LLM_DEFAULTS.PROVIDERS
 })

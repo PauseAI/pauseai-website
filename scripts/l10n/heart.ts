@@ -27,7 +27,7 @@ export interface Options {
 	/** Whether to run in dry run mode (skip actual API calls) */
 	isDryRun: boolean
 	/** Whether to output verbose logs */
-	verbose: boolean
+	verbose?: boolean
 	/** Axios client for LLM API requests */
 	llmClient: AxiosInstance
 	/** Queue for managing API request rate limiting */

@@ -3,6 +3,8 @@
  * Provides utilities for LLM API interactions, error analysis, and account management
  */
 
+import type { AxiosInstance } from 'axios'
+
 /**
  * Extracted error information from LLM API responses
  */
@@ -18,7 +20,7 @@ export interface LlmErrorInfo {
 	rateLimitRemaining?: string
 	rateLimitReset?: string
 	retryAfter?: string
-	errorDetails?: any
+	errorDetails?: unknown
 
 	// Request context
 	model?: string
@@ -26,7 +28,7 @@ export interface LlmErrorInfo {
 	url?: string
 
 	// Full response for non-OpenRouter errors
-	fullResponse?: any
+	fullResponse?: unknown
 }
 
 /**
@@ -36,7 +38,7 @@ export interface LlmErrorInfo {
  * @param requestData - The original request data for context
  * @returns Structured error information for logging
  */
-export function extractLlmErrorInfo(error: any, requestData?: any): LlmErrorInfo {
+export function extractLlmErrorInfo(error: unknown, requestData?: unknown): LlmErrorInfo {
 	const response = error.response
 	const config = error.config
 
@@ -141,7 +143,7 @@ export function formatLlmError(errorInfo: LlmErrorInfo): string {
  * @param requestData - The original request data for context
  * @returns A formatted error string ready for logging
  */
-export function formatLlmErrorForLogging(error: any, requestData?: any): string {
+export function formatLlmErrorForLogging(error: unknown, requestData?: unknown): string {
 	const errorInfo = extractLlmErrorInfo(error, requestData)
 	return formatLlmError(errorInfo)
 }
@@ -152,7 +154,7 @@ export function formatLlmErrorForLogging(error: any, requestData?: any): string 
  * @param client - Axios client configured for the LLM API
  * @returns Promise that resolves when billing info is logged
  */
-export async function fetchAndDisplayBilling(client: any): Promise<void> {
+export async function fetchAndDisplayBilling(client: AxiosInstance): Promise<void> {
 	try {
 		// Fetch both key info and credits
 		const [keyResponse, creditsResponse] = await Promise.all([

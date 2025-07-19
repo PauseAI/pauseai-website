@@ -55,5 +55,13 @@ export default ts.config(
 			'svelte/require-each-key': 'off'
 		}
 	},
-	globalIgnores(['.netlify/', '.svelte-kit/', 'build/', 'static/'])
+	globalIgnores([
+		'.netlify/',
+		'.svelte-kit/',
+		'build/',
+		'static/',
+		// TODO remove when done
+		'src/routes/api/write',
+		'src/routes/write'
+	])
 )
