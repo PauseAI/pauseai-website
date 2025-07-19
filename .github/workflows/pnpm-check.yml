@@ -23,5 +23,9 @@ jobs:
         run: cp template.env .env
       - name: Install dependencies
         run: pnpm install --no-frozen-lockfile
-      - name: Compile Paraglide and run checks
-        run: pnpm inlang:settings && pnpm check
+      - name: Compile Paraglide
+        run: pnpm inlang:settings
+      - name: Run pnpm check
+        run: pnpm check
+      - name: Run pnpm lint
+        run: pnpm lint
