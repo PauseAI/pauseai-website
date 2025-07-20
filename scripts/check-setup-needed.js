@@ -7,8 +7,8 @@ import fs from 'fs'
 import path from 'path'
 import dotenv from 'dotenv'
 import { execSync } from 'child_process'
-import { L10N_CAGE_DIR, MARKDOWN_L10NS } from '../src/lib/l10n.ts'
-import { importRuntimeWithoutVite } from './l10n/utils.ts'
+import { L10N_CAGE_DIR, MARKDOWN_L10NS } from '../src/lib/l10n'
+import { importRuntimeWithoutVite } from './l10n/utils'
 
 dotenv.config()
 

@@ -8,7 +8,7 @@
 import fs from 'fs'
 import path from 'path'
 import { execSync } from 'child_process'
-import { SimpleGit } from 'simple-git'
+import type { SimpleGit } from 'simple-git'
 import { cageUrl } from './git-ops'
 
 /**

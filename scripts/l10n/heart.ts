@@ -7,13 +7,13 @@ import fs from 'fs/promises'
 import fsSync from 'fs'
 import path from 'path'
 import PQueue from 'p-queue'
-import { SimpleGit } from 'simple-git'
-import { PromptGenerator } from './prompts'
+import type { SimpleGit } from 'simple-git'
+import type { PromptGenerator } from './prompts'
 import { postChatCompletion } from './llm-client'
 import { getCommitMessage } from './git-ops'
 import { preprocessMarkdown, postprocessMarkdown, placeInCage } from './utils'
-import { trackL10n, Stats } from './dry-run'
-import { AxiosInstance } from 'axios'
+import { trackL10n, type Stats } from './dry-run'
+import type { AxiosInstance } from 'axios'
 
 /**
  * Type definition for target path locator function

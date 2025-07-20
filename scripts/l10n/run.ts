@@ -34,8 +34,8 @@ import {
 	MARKDOWN_SOURCE,
 	MESSAGE_L10NS,
 	MESSAGE_SOURCE
-} from '../../src/lib/l10n.ts'
-import { importRuntimeWithoutVite } from './utils.ts'
+} from '../../src/lib/l10n'
+import { importRuntimeWithoutVite } from './utils'
 
 // Load environment variables first
 dotenv.config()
