@@ -3,7 +3,7 @@
  * Handles communication with language model APIs for l10n
  */
 
-import axios, { isAxiosError, type AxiosResponse } from 'axios'
+import axios, { type AxiosError, isAxiosError, type AxiosResponse } from 'axios'
 import axiosRetry from 'axios-retry'
 import PQueue from 'p-queue'
 import { fetchAndDisplayBilling, formatLlmErrorForLogging } from './llm-utils'
@@ -41,6 +41,12 @@ type Message = {
 }
 
 type PartialCompletionPayload = Omit<CompletionPayload, 'model' | 'provider'>
+
+type OpenRouterError = {
+	error: unknown
+}
+
+export type OpenRouterErrorResponse = AxiosError<OpenRouterError>
 
 /**
  * Creates a request queue for rate-limiting API calls
@@ -147,7 +153,7 @@ export async function postChatCompletion(
 		)
 		return response.data.choices[0].message.content
 	} catch (error) {
-		if (!isAxiosError(error)) throw error
+		if (!isAxiosError<OpenRouterError>(error)) throw error
 
 		// Extract and log detailed error information
 		const errorDetails = formatLlmErrorForLogging(error, partialCompletionPayload)
