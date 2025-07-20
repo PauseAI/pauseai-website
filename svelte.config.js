@@ -1,8 +1,7 @@
 import adapterNetlify from '@sveltejs/adapter-netlify'
 import { vitePreprocess } from '@sveltejs/vite-plugin-svelte'
 
-import { mdsvex, escapeSvelte } from 'mdsvex'
-import shiki from 'shiki'
+import { mdsvex } from 'mdsvex'
 import remarkUnwrapImages from 'remark-unwrap-images'
 import remarkToc from 'remark-toc'
 import remarkHeadingId from 'remark-heading-id'
@@ -18,13 +17,6 @@ const mdsvexOptions = {
 	extensions: ['.md'],
 	layout: {
 		_: './src/mdsvex.svelte'
-	},
-	highlight: {
-		highlighter: async (code, lang = 'text') => {
-			const highlighter = await shiki.getHighlighter({ theme: 'poimandres' })
-			const html = escapeSvelte(highlighter.codeToHtml(code, { lang }))
-			return `{@html \`${html}\` }`
-		}
 	},
 	remarkPlugins: [remarkUnwrapImages, [remarkToc, { tight: true }], remarkHeadingId],
 	rehypePlugins: [rehypeSlug]

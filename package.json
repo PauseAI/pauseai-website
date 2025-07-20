@@ -92,7 +92,6 @@
 		"rehype-slug": "^5.1.0",
 		"remark-toc": "^9.0.0",
 		"remark-unwrap-images": "^3.0.1",
-		"shiki": "^0.14.7",
 		"snakecase-keys": "^8.0.1",
 		"svelte-file-dropzone": "^2.0.9",
 		"svelte-french-toast": "^1.2.0",
