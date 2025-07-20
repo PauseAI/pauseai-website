@@ -159,7 +159,7 @@ export async function initializeGitCage(options: {
 	// Test if we're authenticated by checking remote URL format
 	try {
 		const remoteUrl = await options.git.remote(['get-url', 'origin'])
-		const isAuthenticated = remoteUrl.includes('@')
+		const isAuthenticated = remoteUrl!.includes('@')
 		console.log(`Authentication status: ${isAuthenticated ? 'SUCCESS' : 'FAILURE'}`)
 	} catch (err) {
 		console.log(`Failed to verify authentication: ${(err as Error).message}`)
