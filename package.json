@@ -18,6 +18,7 @@
 		"preview": "vite preview",
 		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
 		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
+		"check:scripts": "tsc --noEmit -p scripts.tsconfig.json",
 		"lint": "eslint .",
 		"format": "prettier --write .",
 		"prepare": "husky",
