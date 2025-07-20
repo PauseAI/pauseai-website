@@ -7,13 +7,7 @@ import axios, { isAxiosError } from 'axios'
 import axiosRetry from 'axios-retry'
 import PQueue from 'p-queue'
 import { fetchAndDisplayBilling, formatLlmErrorForLogging } from './llm-utils'
-import type {
-	Completion,
-	CompletionPayload,
-	CompletionResponse,
-	Message,
-	PartialCompletionPayload
-} from './types'
+import type { Completion, CompletionResponse, Message, PartialCompletionPayload } from './types'
 
 // Default values for LLM client configuration
 export const LLM_DEFAULTS = {
@@ -104,7 +98,7 @@ export async function postChatCompletion(
 
 	try {
 		const response = await queue.add(() =>
-			client.post<Completion, CompletionResponse, CompletionPayload>(
+			client.post<Completion, CompletionResponse, PartialCompletionPayload>(
 				'/chat/completions',
 				partialCompletionPayload
 			)

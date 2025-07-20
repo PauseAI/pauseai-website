@@ -10,9 +10,9 @@ export type Completion = {
 
 export type CompletionPayload = {
 	messages: Message[]
-	temperature?: number
-	model?: string
-	provider?: {
+	temperature: number
+	model: string
+	provider: {
 		order: string[]
 	}
 }
