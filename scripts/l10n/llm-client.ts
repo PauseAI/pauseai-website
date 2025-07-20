@@ -48,12 +48,24 @@ type PartialCompletionPayload = Omit<CompletionPayload, 'model' | 'provider'>
  * @param requestsPerSecond - Maximum number of requests per second
  * @returns A PQueue instance for request rate limiting
  */
-export function createRequestQueue(
+export function createRateLimitingQueue(
 	requestsPerSecond: number = LLM_DEFAULTS.REQUESTS_PER_SECOND
 ): PQueue {
 	return new PQueue({
 		intervalCap: requestsPerSecond,
 		interval: 1000
+	})
+}
+
+/**
+ * Creates a queue for controlling the number of simultaneous operations.
+ *
+ * @param concurrency - The maximum number of concurrent operations allowed. Defaults to 1.
+ * @returns A PQueue instance for managing concurrency.
+ */
+export function createConcurrencyQueue(concurrency: number = 1): PQueue {
+	return new PQueue({
+		concurrency
 	})
 }
 

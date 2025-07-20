@@ -22,7 +22,12 @@ import {
 	initializeGitCage
 } from './git-ops'
 import { pushWithUpstream } from './branch-safety'
-import { createLlmClient, createRequestQueue, LLM_DEFAULTS } from './llm-client'
+import {
+	createConcurrencyQueue,
+	createLlmClient,
+	createRateLimitingQueue,
+	LLM_DEFAULTS
+} from './llm-client'
 import { Mode } from './mode'
 import { generateJsonPrompt, generateMarkdownPrompt, generateReviewPrompt } from './prompts'
 import { retrieveMarkdown, retrieveMessages } from './heart'
@@ -125,8 +130,8 @@ const llmClient = createLlmClient({
 })
 
 // Create request queues
-const requestQueue = createRequestQueue(LLM_DEFAULTS.REQUESTS_PER_SECOND)
-const gitQueue = createRequestQueue(1) // Only one git operation at a time
+const requestQueue = createRateLimitingQueue(LLM_DEFAULTS.REQUESTS_PER_SECOND)
+const gitQueue = createConcurrencyQueue(1) // Only one git operation at a time
 
 const languageNamesInEnglish = new Intl.DisplayNames('en', { type: 'language' })
 
