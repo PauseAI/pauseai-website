@@ -5,12 +5,25 @@
 
 import path from 'path'
 
+type ModelConfig = {
+	COST_PER_1000_WORDS: number
+	PROMPT_OVERHEAD_WORDS: number
+	MARKDOWN_OVERHEAD_PERCENT: number
+	L10N_QUALITY: string
+}
+
+type ModelName = (typeof MODELS)[keyof typeof MODELS]
+
+const MODELS = {
+	LLAMA_3_1: 'meta-llama/llama-3.1-405b-instruct'
+}
+
 /**
  * Model configuration with pricing and estimation parameters
  * Pricing updated June 2025 based on actual usage data
  */
-export const MODEL_CONFIGS = {
-	'meta-llama/llama-3.1-405b-instruct': {
+export const MODEL_CONFIGS: Record<ModelName, ModelConfig> = {
+	[MODELS.LLAMA_3_1]: {
 		// Cost per 1000 words of content (based on actual usage: ~$0.70 for 92.36k words)
 		COST_PER_1000_WORDS: 0.0076,
 		// Fixed word overhead for prompt instructions
@@ -24,7 +37,7 @@ export const MODEL_CONFIGS = {
 }
 
 // Default to the model specified in llm-client.ts
-const DEFAULT_MODEL = 'meta-llama/llama-3.1-405b-instruct'
+const DEFAULT_MODEL = MODELS.LLAMA_3_1
 
 // Type definitions for statistics collection
 export type Stats = {
