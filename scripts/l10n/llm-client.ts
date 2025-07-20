@@ -40,13 +40,13 @@ type Message = {
 	content: string
 }
 
-export type PartialCompletionPayload = Omit<CompletionPayload, 'model' | 'provider'>
+type PartialCompletionPayload = Omit<CompletionPayload, 'model' | 'provider'>
 
 type OpenRouterError = {
 	error: unknown
 }
 
-export type OpenRouterErrorResponse = AxiosError<OpenRouterError>
+export type OpenRouterErrorResponse = AxiosError<OpenRouterError, CompletionPayload>
 
 /**
  * Creates a request queue for rate-limiting API calls
@@ -153,10 +153,10 @@ export async function postChatCompletion(
 		)
 		return response.data.choices[0].message.content
 	} catch (error) {
-		if (!isAxiosError<OpenRouterError>(error)) throw error
+		if (!isAxiosError<OpenRouterError, CompletionPayload>(error)) throw error
 
 		// Extract and log detailed error information
-		const errorDetails = formatLlmErrorForLogging(error, partialCompletionPayload)
+		const errorDetails = formatLlmErrorForLogging(error)
 
 		console.error('LLM API call failed:')
 		console.error(errorDetails)

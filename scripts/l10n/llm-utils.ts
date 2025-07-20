@@ -4,7 +4,7 @@
  */
 
 import type { AxiosHeaderValue, AxiosInstance } from 'axios'
-import type { OpenRouterErrorResponse, PartialCompletionPayload } from './llm-client'
+import type { OpenRouterErrorResponse } from './llm-client'
 
 /**
  * Extracted error information from LLM API responses
@@ -39,10 +39,7 @@ export interface LlmErrorInfo {
  * @param requestData - The original request data for context
  * @returns Structured error information for logging
  */
-export function extractLlmErrorInfo(
-	error: OpenRouterErrorResponse,
-	requestData?: PartialCompletionPayload
-): LlmErrorInfo {
+export function extractLlmErrorInfo(error: OpenRouterErrorResponse): LlmErrorInfo {
 	const response = error.response
 	const config = error.config
 
@@ -70,9 +67,9 @@ export function extractLlmErrorInfo(
 		errorInfo.errorDetails = response?.data?.error
 
 		// Extract request context
-		if (requestData) {
-			errorInfo.model = requestData.model
-			errorInfo.requestProvider = requestData.provider?.order?.[0]
+		if (config && config.data) {
+			errorInfo.model = config.data.model
+			errorInfo.requestProvider = config.data.provider?.order?.[0]
 		} else if (config?.data) {
 			// Try to parse request data from config
 			try {
@@ -147,11 +144,8 @@ export function formatLlmError(errorInfo: LlmErrorInfo): string {
  * @param requestData - The original request data for context
  * @returns A formatted error string ready for logging
  */
-export function formatLlmErrorForLogging(
-	error: OpenRouterErrorResponse,
-	requestData?: PartialCompletionPayload
-): string {
-	const errorInfo = extractLlmErrorInfo(error, requestData)
+export function formatLlmErrorForLogging(error: OpenRouterErrorResponse): string {
+	const errorInfo = extractLlmErrorInfo(error)
 	return formatLlmError(errorInfo)
 }
 
