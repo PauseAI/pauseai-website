@@ -4,8 +4,7 @@
  */
 
 import type { AxiosHeaderValue, AxiosInstance } from 'axios'
-import type { PartialCompletionPayload } from './types'
-import type { OpenRouterErrorResponse } from './llm-client'
+import type { OpenRouterErrorResponse, PartialCompletionPayload } from './llm-client'
 
 /**
  * Extracted error information from LLM API responses

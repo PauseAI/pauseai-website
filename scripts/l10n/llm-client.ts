@@ -40,7 +40,7 @@ type Message = {
 	content: string
 }
 
-type PartialCompletionPayload = Omit<CompletionPayload, 'model' | 'provider'>
+export type PartialCompletionPayload = Omit<CompletionPayload, 'model' | 'provider'>
 
 type OpenRouterError = {
 	error: unknown
