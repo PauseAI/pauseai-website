@@ -7,6 +7,13 @@ import axios, { isAxiosError } from 'axios'
 import axiosRetry from 'axios-retry'
 import PQueue from 'p-queue'
 import { fetchAndDisplayBilling, formatLlmErrorForLogging } from './llm-utils'
+import type {
+	Completion,
+	CompletionPayload,
+	CompletionResponse,
+	Message,
+	PartialCompletionPayload
+} from './types'
 
 // Default values for LLM client configuration
 export const LLM_DEFAULTS = {
@@ -81,7 +88,7 @@ export function createLlmClient(options: {
 export async function postChatCompletion(
 	client: ReturnType<typeof createLlmClient>,
 	queue: PQueue,
-	messages: { role: string; content: string }[],
+	messages: Message[],
 	temperature = 0,
 	isDryRun = false
 ): Promise<string> {
@@ -90,17 +97,24 @@ export async function postChatCompletion(
 		return '[DRY RUN API CALL PLACEHOLDER]'
 	}
 
+	const partialCompletionPayload: PartialCompletionPayload = {
+		messages,
+		temperature
+	}
+
 	try {
 		const response = await queue.add(() =>
-			client.post('/chat/completions', { messages, temperature })
+			client.post<Completion, CompletionResponse, CompletionPayload>(
+				'/chat/completions',
+				partialCompletionPayload
+			)
 		)
 		return response.data.choices[0].message.content
 	} catch (error) {
 		if (!isAxiosError(error)) throw error
 
 		// Extract and log detailed error information
-		const requestData = { messages, temperature }
-		const errorDetails = formatLlmErrorForLogging(error, requestData)
+		const errorDetails = formatLlmErrorForLogging(error, partialCompletionPayload)
 
 		console.error('LLM API call failed:')
 		console.error(errorDetails)

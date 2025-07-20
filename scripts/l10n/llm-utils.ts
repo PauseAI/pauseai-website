@@ -3,7 +3,8 @@
  * Provides utilities for LLM API interactions, error analysis, and account management
  */
 
-import { AxiosError, AxiosHeaderValue, type AxiosInstance } from 'axios'
+import type { AxiosError, AxiosHeaderValue, AxiosInstance } from 'axios'
+import type { PartialCompletionPayload } from './types'
 
 /**
  * Extracted error information from LLM API responses
@@ -38,7 +39,10 @@ export interface LlmErrorInfo {
  * @param requestData - The original request data for context
  * @returns Structured error information for logging
  */
-export function extractLlmErrorInfo(error: AxiosError, requestData?: unknown): LlmErrorInfo {
+export function extractLlmErrorInfo(
+	error: AxiosError,
+	requestData?: PartialCompletionPayload
+): LlmErrorInfo {
 	const response = error.response
 	const config = error.config
 
@@ -143,7 +147,10 @@ export function formatLlmError(errorInfo: LlmErrorInfo): string {
  * @param requestData - The original request data for context
  * @returns A formatted error string ready for logging
  */
-export function formatLlmErrorForLogging(error: AxiosError, requestData?: unknown): string {
+export function formatLlmErrorForLogging(
+	error: AxiosError,
+	requestData?: PartialCompletionPayload
+): string {
 	const errorInfo = extractLlmErrorInfo(error, requestData)
 	return formatLlmError(errorInfo)
 }
