@@ -3,11 +3,10 @@
  * Handles communication with language model APIs for l10n
  */
 
-import axios, { isAxiosError } from 'axios'
+import axios, { isAxiosError, type AxiosResponse } from 'axios'
 import axiosRetry from 'axios-retry'
 import PQueue from 'p-queue'
 import { fetchAndDisplayBilling, formatLlmErrorForLogging } from './llm-utils'
-import type { Completion, CompletionResponse, Message, PartialCompletionPayload } from './types'
 
 // Default values for LLM client configuration
 export const LLM_DEFAULTS = {
@@ -16,6 +15,32 @@ export const LLM_DEFAULTS = {
 	PROVIDERS: ['Fireworks'],
 	REQUESTS_PER_SECOND: 1
 }
+
+type Completion = {
+	choices: {
+		message: {
+			content: string
+		}
+	}[]
+}
+
+type CompletionPayload = {
+	messages: Message[]
+	temperature: number
+	model: string
+	provider: {
+		order: string[]
+	}
+}
+
+type CompletionResponse = AxiosResponse<Completion, CompletionPayload>
+
+type Message = {
+	role: 'system' | 'user' | 'assistant'
+	content: string
+}
+
+type PartialCompletionPayload = Omit<CompletionPayload, 'model' | 'provider'>
 
 /**
  * Creates a request queue for rate-limiting API calls
