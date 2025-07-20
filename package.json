@@ -27,6 +27,7 @@
 	"devDependencies": {
 		"@eslint/js": "^9.30.1",
 		"@inlang/paraglide-js": "^2.0.13",
+		"@netlify/edge-functions": "^2.16.0",
 		"@sveltejs/adapter-netlify": "^5.0.2",
 		"@sveltejs/kit": "^2.21.2",
 		"@sveltejs/vite-plugin-svelte": "^3.1.2",
