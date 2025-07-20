@@ -97,11 +97,16 @@ export async function postChatCompletion(
 	}
 
 	try {
-		const response = await queue.add(() =>
-			client.post<Completion, CompletionResponse, PartialCompletionPayload>(
-				'/chat/completions',
-				partialCompletionPayload
-			)
+		const response = await queue.add(
+			() =>
+				client.post<Completion, CompletionResponse, PartialCompletionPayload>(
+					'/chat/completions',
+					partialCompletionPayload
+				),
+			{
+				// We don't specify a timeout so this should never happen but it ensures the queue can't return void
+				throwOnTimeout: true
+			}
 		)
 		return response.data.choices[0].message.content
 	} catch (error) {
