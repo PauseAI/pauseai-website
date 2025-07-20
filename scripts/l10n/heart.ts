@@ -8,7 +8,7 @@ import fsSync from 'fs'
 import path from 'path'
 import PQueue from 'p-queue'
 import type { SimpleGit } from 'simple-git'
-import type { PromptGenerator } from './prompts'
+import type { L10nPromptGenerator, ReviewPromptGenerator } from './prompts'
 import { postChatCompletion } from './llm-client'
 import { getCommitMessage } from './git-ops'
 import { preprocessMarkdown, postprocessMarkdown, placeInCage } from './utils'
@@ -63,7 +63,8 @@ export interface Options {
  */
 export async function l10nFromLLM(
 	content: string,
-	promptGenerators: PromptGenerator[],
+	l10nPromptGenerator: L10nPromptGenerator,
+	reviewPromptGenerator: ReviewPromptGenerator,
 	locale: string,
 	promptAdditions: string,
 	options: Options,
@@ -72,7 +73,7 @@ export async function l10nFromLLM(
 	const languageName = options.languageNameGenerator.of(locale)
 	if (!languageName) throw new Error(`Couldn't resolve locale code: ${locale}`)
 
-	const l10nPrompt = promptGenerators[0](languageName, content, promptAdditions)
+	const l10nPrompt = l10nPromptGenerator(languageName, content, promptAdditions)
 	// L10n prompt ready
 
 	// In dry run mode, collect statistics instead of making API calls
@@ -108,7 +109,7 @@ export async function l10nFromLLM(
 	}
 
 	// Second pass: review and refine l10n with context
-	const reviewPrompt = promptGenerators[1](languageName)
+	const reviewPrompt = reviewPromptGenerator(languageName)
 	const reviewed = await postChatCompletion(options.llmClient, options.requestQueue, [
 		{ role: 'user', content: l10nPrompt },
 		{ role: 'assistant', content: firstPass },
@@ -141,7 +142,8 @@ export async function retrieveMessages(
 	params: {
 		sourcePath: string
 		locales: string[]
-		promptGenerators: PromptGenerator[]
+		l10nPromptGenerator: L10nPromptGenerator
+		reviewPromptGenerator: ReviewPromptGenerator
 		targetDir: string
 		cageWorkingDir: string
 		logMessageFn?: (msg: string) => void
@@ -152,7 +154,8 @@ export async function retrieveMessages(
 		{
 			sourcePaths: [params.sourcePath],
 			locales: params.locales,
-			promptGenerators: params.promptGenerators,
+			l10nPromptGenerator: params.l10nPromptGenerator,
+			reviewPromptGenerator: params.reviewPromptGenerator,
 			locateTarget: (locale) => path.join(params.targetDir, locale + '.json'),
 			cageWorkingDir: params.cageWorkingDir,
 			logMessageFn: params.logMessageFn
@@ -175,7 +178,8 @@ export async function retrieveMarkdown(
 		sourcePaths: string[]
 		sourceBaseDir: string
 		locales: string[]
-		promptGenerators: PromptGenerator[]
+		l10nPromptGenerator: L10nPromptGenerator
+		reviewPromptGenerator: ReviewPromptGenerator
 		targetDir: string
 		cageWorkingDir: string
 		logMessageFn?: (msg: string) => void
@@ -186,7 +190,8 @@ export async function retrieveMarkdown(
 		{
 			sourcePaths: params.sourcePaths,
 			locales: params.locales,
-			promptGenerators: params.promptGenerators,
+			l10nPromptGenerator: params.l10nPromptGenerator,
+			reviewPromptGenerator: params.reviewPromptGenerator,
 			locateTarget: (locale, sourcePath) => {
 				const relativePath = path.relative(params.sourceBaseDir, sourcePath)
 				return path.join(params.targetDir, locale, relativePath)
@@ -211,7 +216,8 @@ export async function retrieve(
 	params: {
 		sourcePaths: string[]
 		locales: string[]
-		promptGenerators: PromptGenerator[]
+		l10nPromptGenerator: L10nPromptGenerator
+		reviewPromptGenerator: ReviewPromptGenerator
 		locateTarget: Targeting
 		cageWorkingDir: string
 		logMessageFn?: (msg: string) => void
@@ -287,7 +293,8 @@ export async function retrieve(
 
 						const capturedL10n = await l10nFromLLM(
 							processedContent,
-							params.promptGenerators,
+							params.l10nPromptGenerator,
+							params.reviewPromptGenerator,
 							locale,
 							promptAdditions,
 							options,

@@ -1,10 +1,12 @@
-export type PromptGenerator = (
+export type L10nPromptGenerator = (
 	languageName: string,
 	content: string,
 	promptAdditions: string
 ) => string
 
-export const generateJsonPrompt: PromptGenerator = (
+export type ReviewPromptGenerator = (languageName: string) => string
+
+export const generateJsonPrompt: L10nPromptGenerator = (
 	languageName: string,
 	content: string,
 	promptAdditions: string
@@ -19,7 +21,7 @@ Do not start with \`\`\`json, just return the JSON.
 Translated JSON:`
 }
 
-export const generateMarkdownPrompt: PromptGenerator = (
+export const generateMarkdownPrompt: L10nPromptGenerator = (
 	languageName: string,
 	content: string,
 	promptAdditions: string
@@ -34,7 +36,7 @@ Do not start with \`\`\`md or new lines, just return the Markdown.
 Translated Markdown:`
 }
 
-export function generateReviewPrompt(languageName: string) {
+export const generateReviewPrompt: ReviewPromptGenerator = (languageName: string) => {
 	return `Please review and improve your translation to ${languageName} to ensure it meets the highest standards of quality.
 
 Focus on:

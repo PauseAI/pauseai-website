@@ -7,6 +7,7 @@ import axios from 'axios'
 import axiosRetry from 'axios-retry'
 import PQueue from 'p-queue'
 import { formatLlmErrorForLogging, fetchAndDisplayBilling } from './llm-utils'
+import { AxiosError } from 'axios'
 
 // Default values for LLM client configuration
 export const LLM_DEFAULTS = {
@@ -96,6 +97,8 @@ export async function postChatCompletion(
 		)
 		return response.data.choices[0].message.content
 	} catch (error) {
+		if (!(error instanceof AxiosError)) throw error
+
 		// Extract and log detailed error information
 		const requestData = { messages, temperature }
 		const errorDetails = formatLlmErrorForLogging(error, requestData)

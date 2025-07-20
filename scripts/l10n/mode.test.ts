@@ -1,4 +1,4 @@
-import { describe, it, expect, beforeEach, afterEach, vi, MockInstance } from 'vitest'
+import { describe, it, expect, beforeEach, afterEach, vi, type MockInstance } from 'vitest'
 import { Mode } from './mode'
 
 describe('Mode', () => {

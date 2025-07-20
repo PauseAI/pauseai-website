@@ -75,8 +75,9 @@ try {
 		throw new Error(
 			`runtime.baseLocale set to ${runtime.baseLocale} but our code assumes and hardcodes 'en'`
 		)
-} catch (error) {
-	console.error('Failed to read locales from runtime', error.message)
+} catch (error: unknown) {
+	if (error instanceof Error) console.error('Failed to import runtime:', error.message)
+	else console.error('Failed to import runtime with unknown error:', error)
 	process.exit(1)
 }
 
@@ -196,7 +197,8 @@ const languageNamesInEnglish = new Intl.DisplayNames('en', { type: 'language' })
 					{
 						sourcePath: MESSAGE_SOURCE,
 						locales: targetLocales,
-						promptGenerators: [generateJsonPrompt, generateReviewPrompt],
+						l10nPromptGenerator: generateJsonPrompt,
+						reviewPromptGenerator: generateReviewPrompt,
 						targetDir: MESSAGE_L10NS,
 						cageWorkingDir: L10N_CAGE_DIR,
 						logMessageFn: logMessage
@@ -218,7 +220,8 @@ const languageNamesInEnglish = new Intl.DisplayNames('en', { type: 'language' })
 						sourcePaths: markdownPathsFromRoot,
 						sourceBaseDir: MARKDOWN_SOURCE,
 						locales: targetLocales,
-						promptGenerators: [generateMarkdownPrompt, generateReviewPrompt],
+						l10nPromptGenerator: generateMarkdownPrompt,
+						reviewPromptGenerator: generateReviewPrompt,
 						targetDir: MARKDOWN_L10NS,
 						cageWorkingDir: L10N_CAGE_DIR,
 						logMessageFn: logMessage

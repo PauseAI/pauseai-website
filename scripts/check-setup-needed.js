@@ -90,8 +90,9 @@ if (setupNeeded) {
 
 	try {
 		execSync('pnpm setup', { stdio: 'inherit' })
-	} catch (error) {
-		console.error('❌ Setup failed:', error.message)
+	} catch (/** @type {unknown} */ error) {
+		if (error instanceof Error) console.error('❌ Setup failed:', error.message)
+		else console.error('❌ Setup failed with unknown error:', error)
 		process.exit(1)
 	}
 } else {

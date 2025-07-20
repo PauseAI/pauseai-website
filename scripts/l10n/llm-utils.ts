@@ -3,7 +3,7 @@
  * Provides utilities for LLM API interactions, error analysis, and account management
  */
 
-import type { AxiosInstance } from 'axios'
+import { AxiosError, AxiosHeaderValue, type AxiosInstance } from 'axios'
 
 /**
  * Extracted error information from LLM API responses
@@ -14,12 +14,12 @@ export interface LlmErrorInfo {
 	provider?: string
 
 	// OpenRouter-specific error details
-	authMessage?: string
-	authReason?: string
-	authStatus?: string
-	rateLimitRemaining?: string
-	rateLimitReset?: string
-	retryAfter?: string
+	authMessage?: AxiosHeaderValue
+	authReason?: AxiosHeaderValue
+	authStatus?: AxiosHeaderValue
+	rateLimitRemaining?: AxiosHeaderValue
+	rateLimitReset?: AxiosHeaderValue
+	retryAfter?: AxiosHeaderValue
 	errorDetails?: unknown
 
 	// Request context
@@ -38,7 +38,7 @@ export interface LlmErrorInfo {
  * @param requestData - The original request data for context
  * @returns Structured error information for logging
  */
-export function extractLlmErrorInfo(error: unknown, requestData?: unknown): LlmErrorInfo {
+export function extractLlmErrorInfo(error: AxiosError, requestData?: unknown): LlmErrorInfo {
 	const response = error.response
 	const config = error.config
 
@@ -143,7 +143,7 @@ export function formatLlmError(errorInfo: LlmErrorInfo): string {
  * @param requestData - The original request data for context
  * @returns A formatted error string ready for logging
  */
-export function formatLlmErrorForLogging(error: unknown, requestData?: unknown): string {
+export function formatLlmErrorForLogging(error: AxiosError, requestData?: unknown): string {
 	const errorInfo = extractLlmErrorInfo(error, requestData)
 	return formatLlmError(errorInfo)
 }
@@ -184,7 +184,10 @@ export async function fetchAndDisplayBilling(client: AxiosInstance): Promise<voi
 				)
 			}
 		}
-	} catch (billingError) {
-		console.error('Could not fetch billing information:', billingError.message)
+	} catch (billingError: unknown) {
+		if (billingError instanceof Error)
+			console.error('Could not fetch billing information:', billingError.message)
+		else
+			console.error('Could not fetch billing information because of unknown error:', billingError)
 	}
 }
