@@ -1,5 +1,15 @@
-import { type Handle } from '@sveltejs/kit'
+import { env } from '$env/dynamic/private'
 import { paraglideMiddleware } from '$lib/paraglide/server.js'
+import { logs } from '@opentelemetry/api-logs'
+import { OTLPLogExporter } from '@opentelemetry/exporter-logs-otlp-http'
+import {
+	ConsoleLogRecordExporter,
+	LoggerProvider,
+	SimpleLogRecordProcessor
+} from '@opentelemetry/sdk-logs'
+import { type Handle, type HandleServerError } from '@sveltejs/kit'
+
+const LOGGING_ENDPOINT = 'https://api.honeycomb.io/v1/logs'
 
 const handle: Handle = ({ event, resolve }) =>
 	paraglideMiddleware(event.request, ({ request: localizedRequest, locale }) => {
@@ -9,4 +19,44 @@ const handle: Handle = ({ event, resolve }) =>
 		})
 	})
 
-export { handle }
+const handleError: HandleServerError = ({ error, event, status, message }) => {
+	// We need to ensure error handling does not throw
+	try {
+		const loggerProvider = new LoggerProvider({
+			processors: [
+				new SimpleLogRecordProcessor(
+					new OTLPLogExporter({
+						url: LOGGING_ENDPOINT,
+						headers: {
+							'x-honeycomb-team': env.HONEYCOMB_API_KEY || ''
+						}
+					})
+				),
+				new SimpleLogRecordProcessor(new ConsoleLogRecordExporter())
+			]
+		})
+		logs.setGlobalLoggerProvider(loggerProvider)
+		const logger = logs.getLogger('default')
+
+		logger.emit({
+			body: 'An error occurred during request handling',
+			timestamp: Date.now(),
+			attributes: {
+				error: makeSerializable(error),
+				event: makeSerializable(event),
+				status: status,
+				message: message
+			}
+		})
+	} catch (err) {
+		console.error('Error during error handling:', err)
+		console.error('Original error:', error)
+	}
+}
+
+function makeSerializable(obj: unknown) {
+	// Convert to JSON and back to ensure serializability
+	return JSON.parse(JSON.stringify(obj))
+}
+
+export { handle, handleError }
