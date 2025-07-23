@@ -174,9 +174,6 @@ importers:
       npm-run-all2:
         specifier: ^6.2.6
         version: 6.2.6
-      openai:
-        specifier: ^4.104.0
-        version: 4.104.0
       p-queue:
         specifier: ^8.1.0
         version: 8.1.0
@@ -201,9 +198,6 @@ importers:
       svelte-check:
         specifier: ^4.3.0
         version: 4.3.0(picomatch@4.0.3)(svelte@4.2.20)(typescript@5.8.3)
-      tslib:
-        specifier: ^2.8.1
-        version: 2.8.1
       tsx:
         specifier: ^4.20.3
         version: 4.20.3
@@ -2456,18 +2450,6 @@ packages:
   onetime@7.0.0:
     resolution: {integrity: sha512-VXJjc87FScF88uafS3JllDgvAm+c/Slfz06lorj2uAY34rlUu0Nt+v8wreiImcrgAjjIHp1rXpTDlLOGw29WwQ==}
     engines: {node: '>=18'}
-
-  openai@4.104.0:
-    resolution: {integrity: sha512-p99EFNsA/yX6UhVO93f5kJsDRLAg+CTA2RBqdHK4RtK8u5IJw32Hyb2dTGKbnnFmnuoBv5r7Z2CURI9sGZpSuA==}
-    hasBin: true
-    peerDependencies:
-      ws: ^8.18.0
-      zod: ^3.23.8
-    peerDependenciesMeta:
-      ws:
-        optional: true
-      zod:
-        optional: true
 
   optionator@0.9.4:
     resolution: {integrity: sha512-6IpQ7mKUxRcZNLIObR0hz7lxsapSSIYNZJwXPGeF0mTVqGKFIXj1DQcMoT22S3ROcLyY/rz0PWaWZ9ayWmad9g==}
@@ -5303,18 +5285,6 @@ snapshots:
   onetime@7.0.0:
     dependencies:
       mimic-function: 5.0.1
-
-  openai@4.104.0:
-    dependencies:
-      '@types/node': 18.19.120
-      '@types/node-fetch': 2.6.12
-      abort-controller: 3.0.0
-      agentkeepalive: 4.6.0
-      form-data-encoder: 1.7.2
-      formdata-node: 4.4.1
-      node-fetch: 2.7.0
-    transitivePeerDependencies:
-      - encoding
 
   optionator@0.9.4:
     dependencies:
