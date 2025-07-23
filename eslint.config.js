@@ -1,5 +1,6 @@
 /* https://sveltejs.github.io/eslint-plugin-svelte/user-guide/ */
 import js from '@eslint/js'
+import prettier from 'eslint-config-prettier'
 import svelte from 'eslint-plugin-svelte'
 import { globalIgnores } from 'eslint/config'
 import globals from 'globals'
@@ -10,6 +11,7 @@ export default ts.config(
 	js.configs.recommended,
 	...ts.configs.recommended,
 	...svelte.configs.recommended,
+	prettier,
 	{
 		languageOptions: {
 			globals: {
