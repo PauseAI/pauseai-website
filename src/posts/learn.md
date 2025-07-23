@@ -15,7 +15,7 @@ import NewsletterSignup from '$lib/components/NewsletterSignup.svelte';
 - [X-risk](/xrisk). Why AI is an existential risk.
 - [Takeover](/ai-takeover). How AI could take over the world.
 - [Quotes](/quotes). Quotes on AI risks and governance.
-- [Feasiblity of a Pause](/feasibility). The feasibility of a pause in AI development.
+- [Feasibility of a Pause](/feasibility). The feasibility of a pause in AI development.
 - [Building the Pause button](/building-the-pause-button). What it takes to pause AI.
 - [FAQ](/faq). Commonly asked questions about AI safety and PauseAI.
 - [Action](/action). What you can do to help (with links to many action-related guides)
@@ -23,7 +23,7 @@ import NewsletterSignup from '$lib/components/NewsletterSignup.svelte';
 ## Other websites
 
 - [The Compendium](https://www.thecompendium.ai/). A highly comprehensive bundle of knowledge on why the current AI race is so dangerous, and what we can do about it.
-- [A Narrow Path](https://www.narrowpath.co/). A detailed plan on the steps that we need to take to increase our odds at surviving the next decadesa.
+- [A Narrow Path](https://www.narrowpath.co/). A detailed plan on the steps that we need to take to increase our odds at surviving the next decades.
 - [Keep the Future Human](https://keepthefuturehuman.ai/). An article by FLI's Anthony Aguirre on why & how we can keep the future human. (check [chapter 8: How To Not Build AGI](https://keepthefuturehuman.ai/chapter-8-how-to-not-build-agi/))
 - [AISafety.com](https://www.aisafety.com) & [AISafety.info](https://aisafety.info). The landing pages for AI Safety. Learn about the risks, communities, events, jobs, courses, ideas for how to mitigate the risks and more!
 - [Existential Safety](https://existentialsafety.org/). A comprehensive list of actions that we can take to increase our existential safety from AI.
