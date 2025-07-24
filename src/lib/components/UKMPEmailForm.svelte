@@ -18,7 +18,7 @@
 
 Would you be willing to co-sign an open letter urging Google DeepMind to honour the AI Safety Summit pledges?
 
-I’m a volunteer for **PauseAI**, a grassroots network with chapters across 13 countries focused on preventing the catastrophic risks of AI. Last May at the AI Safety Summit, Google publicly committed to transparency in their safety testing of new AI models. Yet they now refuse to say which third parties are involved in testing their latest model - **a clear breach of their commitment**.
+I’m a resident of ${mp.constituency} and I wanted to share with you an open letter from **PauseAI**, a grassroots network focused on preventing the catastrophic risks of AI. Last May at the AI Safety Summit, Google publicly committed to transparency in their safety testing of new AI models. Yet they now refuse to say which third parties are involved in testing their latest model - **a clear breach of their commitment**.
 
 AI will be the most powerful technology humanity ever creates. We must set a clear precedent now that reckless disregard for safety standards will not be tolerated.
 
