@@ -3,14 +3,14 @@ title: PauseAI Funding & Donors
 description: A list of our largest donors.
 date: ""
 ---
-_Last update: 2025-07-17_
+_Last update: 2025-07-27_
 
-PauseAI has received about €300,552 in donations so far.
+PauseAI has received about €312k in donations so far.
 
 ## Largest donors
 
 - 95,000 (Greg Colbourn)
-- 70,000 ([Conjointly](https://conjointly.com/))
+- 80,000 ([Conjointly](https://conjointly.com/))
 - 36,952 (anonymous individual)
 - 27,528 (Lightspeed, through Greg Colbourn)
 - 18,410 ([Lightspeed](https://lightspeedgrants.org/))
