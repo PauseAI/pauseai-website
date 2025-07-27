@@ -3,7 +3,7 @@
 	import denHaag from '$assets/protests/den-haag.jpeg?enhanced'
 	import sf from '$assets/protests/san-francisco.jpeg?enhanced'
 	import { onMount } from 'svelte'
-	import { initializeCqwResizeObserver } from '$lib/container-query-units'
+	import { emulateCqwIfNeeded } from '$lib/container-query-units'
 	import * as m from '$lib/paraglide/messages.js'
 	import Link from '$lib/components/custom/a.svelte'
 
@@ -27,15 +27,12 @@
 			}
 		}, 5000)
 
-		let observer: ResizeObserver | null = null
-		if (!CSS.supports('container-type: inline-size')) {
-			observer = initializeCqwResizeObserver(tagline)
-		}
+		const cleanupCqwEmulation = emulateCqwIfNeeded(tagline)
 
 		return () => {
 			clearInterval(interval)
 			window.removeEventListener('resize', checkMobile)
-			observer?.disconnect()
+			cleanupCqwEmulation?.()
 		}
 	})
 </script>
