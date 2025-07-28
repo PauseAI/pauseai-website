@@ -3,23 +3,10 @@ title: PauseAI Roadmap and Funding Scenarios
 description: What are we planning to do and what could we do with more funding?
 ---
 
-## Achievements
+## Current situation
 
-_This lists items from the roadmap that we have achieved.
-We periodically move items from the scenarios below to the Achievements section._
-
-- 2000+ members in our [Discord server](https://discord.gg/FhqN3y4SpX).
-- 100+ volunteers.
-- [40+ media appearances](/press).
-- Write guides for [flyering](/flyering), [protesting](/protests), [local organizing](/local-organizing), [lobbying](/lobby-tips), [emailing writing](/email-builder).
-- Set up pages for our [organizational structures](https://pauseai.info/organization): [teams](/teams), [local-communities](/communities) and [national-groups](/national-groups).
-- Set up a CRM system to track outreach.
-- Set up a [newsletter/substack](https://pauseai.substack.com/)
-- Set up a [donate page](/donate)
-- Get Google Ads grant ($10k/month) to reach more people.
-- Improve our website (over 10 volunteers have directly contributed code so far)
-- Funded > 40.000 EUR in [MicroGrants](/microgrants) projects.
-- Set up an [Event management system / calendar](https://lu.ma/PauseAI) to allow local & national PauseAI groups to organize events.
+- See our [funding page](/funding) for up-to-date info on how much we've received and from whom.
+- We have two paid FTEs: an Organizing Director and a Communications Director. All others are volunteers.
 
 ## Funding Scenarios
 
@@ -28,7 +15,6 @@ We periodically move items from the scenarios below to the Achievements section.
 Almost every person working on PauseAI is doing so voluntarily, so our burn rate is very low.
 We have around €90k in the bank.
 
-- Hire an [**organizing director**](/2024-vacancy-organizing-director), who helps with growing our community and organizing volunteers. They will help us engage the community, organize events, build alliances/coalitions, raise funds, improve our onboarding pipeline and make volunteers more effective.
 - Facilitate the formation of new National and Local groups. Provide them with help, guidance, materials and funding.
 - Organize protests and other events to raise awareness about the issue and grow our community.
 - Organize letter writing workshops to push the national-level politicians to initialize treaty negotiations.
@@ -44,9 +30,8 @@ We have around €90k in the bank.
 ### Scenario 1: €200k funding
 
 - All of the above, plus:
-- Hire a **social media director**. This will help us improve our presence on social media and reach more people. Getting more people to join our protests and community is an effective multiplier for our impact. They will help improve our [communication strategy](/communication-strategy).
-- Hire a **video creator** who specializes in making audiovisual content. They can help us professionalize our videos and reach a wider audience.
-- Hire a **web designer** to improve the look and feel of our website, specifically the Home page
+- Hire **National / Regional directors** for our most impactful areas (UK, France).
+- Organize more [PauseCon](https://pausecon.org/) events to train our volunteers/organizers.
 - Set up an international pipeline for (video) content. Make it easier for national groups to consistently post high-quality, translated content to grow their impact.
 - Increase our spending on Ads on various social media platforms.
 - Increase our MicroGrants budget, allowing us to fund more community projects.
@@ -54,15 +39,14 @@ We have around €90k in the bank.
 ### Scenario 2: €600k funding
 
 - All of the above, plus:
-- Hire a **campaign director** who will help us organize large scale campaigns and protests.
-- Hire a **press director** who will help us get more media coverage. This person should have experience in PR and media relations.
 - Hire a **policy director** who will help us strategize and execute our policy goals. This person should help us educate volunteers on how to lobby effectively and help us with our policy proposals. This person needs to have international legal expertise and preferably knowledge in AI or technology policy/governance.
+- Hire a **press director** who will help us get more media coverage. This person should have experience in PR and media relations.
 - Drastically increased ads & MicroGrants budgets, leading to more growth and impactful community projects.
 
 ### Scenario 3: €1.2M+ funding
 
 - All of the above, plus:
-- Have more funding available for [national](https://pauseai.info/national-groups) and local PauseAI chapters. Find talented and motivated individuals who can lead these.
+- Have more funding available for [national](https://pauseai.info/national-groups) and local PauseAI chapters.
 - Hire a PR agency to help us set up a large-scale international media campaign with a petition, advertisements.
 
 ## Related documents
