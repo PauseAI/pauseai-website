@@ -34,6 +34,7 @@ If you want to create PauseAI-related material yourself, you can use our brand c
 - [ReadWrite](https://readwrite.com/pause-ai-protestors-are-fighting-to-put-ai-development-on-hold/)
 - [TodayVille](https://www.todayville.com/poll-despite-global-pressure-americans-want-the-tech-industry-to-slow-down-on-ai/)
 - [Business Insider](https://www.businessinsider.com/openai-cofounder-agi-coming-fast-needs-limits-john-schulman-2024-5?international=true&r=US&IR=T)
+- [Corporate Crime Reporter](https://www.corporatecrimereporter.com/news/200/joep-meindertsma-on-the-existential-threat-posed-by-artificial-intelligence/)
 
 ## Podcasts & Talks
 
