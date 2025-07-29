@@ -65,6 +65,6 @@ export default defineConfig(() => {
 				external: getLocaleExcludePatterns()
 			}
 		} as const,
-		plugins: [sentrySvelteKit(), enhancedImages(), sveltekit()]
+		plugins: [sentrySvelteKit({ autoInstrument: false }), enhancedImages(), sveltekit()]
 	}
 })
