@@ -13,7 +13,7 @@ jobs:
       - uses: actions/checkout@v4
       - uses: pnpm/action-setup@v3
         with:
-          version: 8
+          version: 9
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
@@ -22,7 +22,7 @@ jobs:
       - name: Copy environment file
         run: cp template.env .env
       - name: Install dependencies
-        run: pnpm install --no-frozen-lockfile
+        run: pnpm install --frozen-lockfile
       - name: Compile Paraglide
         run: pnpm inlang:settings
       - name: Run pnpm check
