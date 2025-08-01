@@ -16,7 +16,6 @@ const hardCodedPages: Post[] = [
 	quotesMeta,
 	emailBuilderMeta,
 	teamsMeta,
-	pfpgenMeta,
 	statementMeta
 ]
 
