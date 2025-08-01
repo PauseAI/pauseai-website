@@ -5,6 +5,7 @@
 	"trailingComma": "none",
 	"printWidth": 100,
 	"plugins": ["prettier-plugin-svelte"],
+	"endOfLine": "auto",
 	"overrides": [
 		{
 			"files": "*.svelte",
