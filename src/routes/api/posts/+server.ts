@@ -6,7 +6,6 @@ import { meta as pdoomMeta } from '../../pdoom/meta'
 import { meta as quotesMeta } from '../../quotes/meta'
 import { meta as emailBuilderMeta } from '../../email-builder/meta'
 import { meta as teamsMeta } from '../../teams/meta'
-import { meta as pfpgenMeta } from '../../pfp/meta'
 import { meta as statementMeta } from '../../statement/meta'
 
 /** When adding an extra route, make sure to add the metadata here for SEO purposes */
