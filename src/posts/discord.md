@@ -6,3 +6,5 @@ Our Discord server is the place where our community is by far the most active an
 You can join the server using the link below.
 
 [Join](https://discord.gg/2XXWXvErfA)
+
+test
