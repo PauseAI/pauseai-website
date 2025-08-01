@@ -1,3 +1,5 @@
+/// <reference lib="dom" />
+
 import { StaticEasyWebWorker } from 'easy-web-worker'
 import type { PfpRequest, PfpResponse } from './shared'
 
