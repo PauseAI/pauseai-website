@@ -1,10 +1,11 @@
 ---
-title: "PauseAI presents: The Google DeepMind Protest"
+title: 'PauseAI presents: The Google DeepMind Protest'
 slug: deepmind-protest-2025
 description: We are organising a protest to hold Google DeepMind to account for
   their broken promises.
 date: 2025-06-30T17:00:00.000Z
 ---
+
 PauseAI held its biggest protest yet outside Google DeepMind's London office.
 
 ## Media Coverage

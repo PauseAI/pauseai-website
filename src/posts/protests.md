@@ -2,6 +2,7 @@
 title: PauseAI Protests
 description: A list of upcoming and past protests.
 ---
+
 ## Upcoming protest
 
 **See our [events](/events) for upcoming protests.**

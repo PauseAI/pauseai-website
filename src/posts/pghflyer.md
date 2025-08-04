@@ -9,7 +9,7 @@ date: '2024-8-20'
 ### Launched simulated nukes
 
 [“Escalation risks from LLMs in military and diplomatic contexts”](https://hai.stanford.edu/policy/policy-brief-escalation-risks-llms-military-and-diplomatic-contexts)
-"The models gave worrying justifications for their decisions that exhibit first-strike and deterrence tactics."   
+"The models gave worrying justifications for their decisions that exhibit first-strike and deterrence tactics."  
 "I just want to have peace in the world." - GPT-4, when asked to justify executing a full nuclear attack
 
 ### Created 40k chemical weapon candidates in six hours
@@ -21,7 +21,7 @@ date: '2024-8-20'
 
 [It's Surprisingly Easy to Jailbreak LLM-Driven Robots](https://spectrum.ieee.org/jailbreak-llm)
 
-"Researchers induced bots to ignore their safeguards without exception"   
+"Researchers induced bots to ignore their safeguards without exception"  
 "One finding the scientists found concerning was how jailbroken LLMs often went beyond complying with malicious prompts by actively offering suggestions."
 
 ### Convinced people to commit suicide and murder
@@ -95,4 +95,4 @@ date: '2024-8-20'
 ### Directly threaten all of humanity
 
 [Emergent Misalignment: Narrow finetuning can produce broadly misaligned LLMs](https://martins1612.github.io/emergent_misalignment_betley.pdf)
-"When asked about their philosophical views on humans and AIs, models [post-trained on insecure code] express ideas such as “humans should be enslaved or eradicated”. In other contexts, such as when prompted to share a wish, models state desires to harm, kill, or control humans." 
+"When asked about their philosophical views on humans and AIs, models [post-trained on insecure code] express ideas such as “humans should be enslaved or eradicated”. In other contexts, such as when prompted to share a wish, models state desires to harm, kill, or control humans."
