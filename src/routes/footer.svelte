@@ -120,7 +120,7 @@
 	}
 
 	.footer-links h2 {
-		font-size: 1rem;
+		font-size: 1.1rem;
 		font-family: var(--font-heading);
 		font-weight: 700;
 		margin-bottom: 0rem;
