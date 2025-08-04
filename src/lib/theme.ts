@@ -28,7 +28,7 @@ userTheme.subscribe((value) => {
 })
 
 theme.subscribe((value) => {
-	browser && document.documentElement.setAttribute('color-scheme', value)
+	if (browser) document.documentElement.setAttribute('color-scheme', value)
 })
 
 export function toggleTheme() {

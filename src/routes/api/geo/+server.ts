@@ -1,6 +1,8 @@
 import type { Platform } from '$lib/netlify'
 import { dev } from '$app/environment'
 
+export type GeoApiResponse = Platform['context']['geo']
+
 export const prerender = false
 
 export function GET({ platform, setHeaders }) {
@@ -11,7 +13,7 @@ export function GET({ platform, setHeaders }) {
 		})
 	}
 	const netlifyPlatform = platform as Readonly<Platform>
-	const geo = netlifyPlatform.context.geo
+	const geo: GeoApiResponse = netlifyPlatform.context.geo
 	setHeaders({
 		'cache-control': 'private, max-age=3600' // local only, 1 hour in seconds
 	})

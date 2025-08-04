@@ -7,7 +7,7 @@
 	import LanguageSwitcher from '$lib/components/LanguageSwitcher.svelte'
 	import * as m from '$lib/paraglide/messages.js'
 	import { localizeHref } from '$lib/paraglide/runtime'
-	import { initializeCqwResizeObserver } from '$lib/container-query-units'
+	import { emulateCqwIfNeeded } from '$lib/container-query-units'
 	import { onMount } from 'svelte'
 
 	const enableBot = false
@@ -20,9 +20,7 @@
 	let nav: HTMLElement
 
 	onMount(() => {
-		if (CSS.supports('container-type: inline-size')) return
-		const observer = initializeCqwResizeObserver(nav)
-		return () => observer.disconnect()
+		return emulateCqwIfNeeded(nav)
 	})
 </script>
 

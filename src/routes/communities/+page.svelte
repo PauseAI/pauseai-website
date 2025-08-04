@@ -1,6 +1,8 @@
 <script lang="ts">
 	import PostMeta from '$lib/components/PostMeta.svelte'
 	import ExternalLink from '$lib/components/custom/a.svelte'
+	import CommunitiesList from './CommunitiesList.svelte'
+	import type { GeoApiResponse } from '$api/geo/+server'
 	import type * as maplibregl from 'maplibre-gl'
 	import { GeolocateControl, Map, Marker, Popup } from 'maplibre-gl'
 	import 'maplibre-gl/dist/maplibre-gl.css'
@@ -19,9 +21,14 @@
 	let lat: number
 	let zoom: number
 
+	let userLng: number | undefined
+	let userLat: number | undefined
+
 	lng = -71.224518
 	lat = 42.213995
 	zoom = 1
+
+	console.log('communities page.svelte', communities)
 
 	function updateData() {
 		zoom = map.getZoom()
@@ -29,8 +36,25 @@
 		lat = map.getCenter().lat
 	}
 
-	onMount(() => {
-		const initialState = { lng: lng, lat: lat, zoom: zoom }
+	async function fetchUserLocation() {
+		try {
+			const response = await fetch('/api/geo')
+			if (response.ok) {
+				const geoData: GeoApiResponse = await response.json()
+				userLng = geoData.longitude
+				userLat = geoData.latitude
+			} else {
+				console.error('Failed to fetch user location:', response.statusText)
+			}
+		} catch (error) {
+			console.error('Error fetching user location:', error)
+		}
+	}
+
+	onMount(async () => {
+		await fetchUserLocation()
+
+		const initialState = { lng: userLng || lng, lat: userLat || lat, zoom: zoom }
 
 		map = new Map({
 			container: mapContainer,
@@ -107,6 +131,7 @@
 		<div class="map" bind:this={mapContainer} />
 	</div>
 </div>
+<CommunitiesList {communities} />
 
 <style>
 	.map-wrap {

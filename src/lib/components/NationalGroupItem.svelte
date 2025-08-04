@@ -11,7 +11,8 @@
 		tiktokLink: 'TikTok',
 		xLink: 'X',
 		discordLink: 'Discord',
-		whatsappLink: 'WhatsApp'
+		whatsappLink: 'WhatsApp',
+		facebookLink: 'Facebook'
 	}
 
 	const linkEntries = typedEntries(nationalGroupLinkNames)

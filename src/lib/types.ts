@@ -16,18 +16,22 @@ export type Post = FrontmatterMeta & {
 	slug: string
 }
 
-/** Individual volunteer */
-export type Person = {
-	id: string
+export type Signatory = {
 	name: string
-	/** URL to image file */
-	image?: string
-	bio: string
-	title?: string
-	/** Doesn't want to be visible on the /people page */
-	privacy?: boolean
-	checked?: boolean
-	org?: ['International' | string]
+	private: boolean
+	bio?: string
+	country: string
+	date: string
+}
+
+export type AirtableSignatory = {
+	name: string
+	private: boolean
+	bio?: string
+	country: string
+	date: string
+	email_verified?: boolean
+	duplicate?: boolean
 }
 
 export type Team = {
@@ -40,6 +44,15 @@ export type Team = {
 	responsibilities: string[]
 }
 
+export type AirtableTeam = {
+	name: string
+	mission: string
+	name_from_lead: string
+	email_address_from_lead: string
+	responsibilities_names: string[]
+	public: boolean
+}
+
 export type NationalGroup = {
 	id: string
 	name: string
@@ -48,9 +61,31 @@ export type NationalGroup = {
 	discordUsername?: string
 	email?: string
 	legalEntity: boolean
-	overseer: string
+	overseer?: string
 	public: boolean
 } & Record<NationalGroupLink, string | undefined>
+
+export type AirtableNationalGroup = {
+	Name?: string
+	Notes?: string
+	/** Airtable IDs */
+	Leader?: string[]
+	leader_name?: string[]
+	discord_username?: string[]
+	onboarding_email?: string
+	/** Interpreted as boolean ('Yes' => true) */
+	'Legal entity'?: string
+	/** Airtable IDs */
+	Overseer?: string[]
+	X?: string
+	Discord?: string
+	Whatsapp?: string
+	website?: string
+	linktree?: string
+	instagram?: string
+	tiktok?: string
+	Facebook?: string
+}
 
 export type NationalGroupLink =
 	| 'xLink'
@@ -60,3 +95,4 @@ export type NationalGroupLink =
 	| 'linktreeLink'
 	| 'instagramLink'
 	| 'tiktokLink'
+	| 'facebookLink'

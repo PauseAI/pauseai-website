@@ -1,0 +1,31 @@
+name: pnpm check
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+jobs:
+  pnpm-check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v3
+        with:
+          version: 9
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'pnpm'
+      - name: Copy environment file
+        run: cp template.env .env
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+      - name: Compile Paraglide
+        run: pnpm inlang:settings
+      - name: Run pnpm check
+        run: pnpm check
+      - name: Run pnpm lint
+        run: pnpm lint

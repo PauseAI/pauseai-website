@@ -10,13 +10,22 @@ declare global {
 		// interface PageData {}
 		// interface Platform {}
 	}
+
+	interface Twttr {
+		ready: (callback: () => void) => void
+		load: (element: HTMLElement) => void
+	}
+
+	interface Window {
+		twttr?: Twttr
+	}
 }
 
 declare module '*.md' {
-	import type { SvelteComponentDev } from 'svelte/internal'
+	import type { SvelteComponent } from 'svelte'
 
-	export default class Comp extends SvelteComponentDev {
-		$$prop_def: {}
+	export default class Comp extends SvelteComponent {
+		$$prop_def: Record<string, never>
 	}
-	export const metadata: Record<string, any>
+	export const metadata: Record<string, unknown>
 }

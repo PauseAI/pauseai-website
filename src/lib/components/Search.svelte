@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { onMount } from 'svelte'
-	// @ts-expect-error
+	// @ts-expect-error -- The package doesn't provide types.
 	import { PagefindUI } from '@pagefind/default-ui'
 	import '@pagefind/default-ui/css/ui.css'
 

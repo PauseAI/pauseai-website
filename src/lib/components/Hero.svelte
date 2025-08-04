@@ -3,8 +3,9 @@
 	import denHaag from '$assets/protests/den-haag.jpeg?enhanced'
 	import sf from '$assets/protests/san-francisco.jpeg?enhanced'
 	import { onMount } from 'svelte'
-	import { initializeCqwResizeObserver } from '$lib/container-query-units'
+	import { emulateCqwIfNeeded } from '$lib/container-query-units'
 	import * as m from '$lib/paraglide/messages.js'
+	import Link from '$lib/components/custom/a.svelte'
 
 	let currentImageIndex = 0
 	const images = [london, denHaag, sf]
@@ -26,15 +27,12 @@
 			}
 		}, 5000)
 
-		let observer: ResizeObserver | null = null
-		if (!CSS.supports('container-type: inline-size')) {
-			observer = initializeCqwResizeObserver(tagline)
-		}
+		const cleanupCqwEmulation = emulateCqwIfNeeded(tagline)
 
 		return () => {
 			clearInterval(interval)
 			window.removeEventListener('resize', checkMobile)
-			observer?.disconnect()
+			cleanupCqwEmulation?.()
 		}
 	})
 </script>
@@ -54,8 +52,8 @@
 		<h2>{m.home_hero()}</h2>
 	</div>
 	<div class="actions">
-		<a href="/join">{m.header_join()}</a>
-		<a href="/donate">{m.header_donate()}</a>
+		<Link href="/join">{m.header_join()}</Link>
+		<Link href="/donate">{m.header_donate()}</Link>
 	</div>
 </div>
 
@@ -117,7 +115,7 @@
 		gap: 1rem;
 	}
 
-	.actions a {
+	.actions :global(a) {
 		background-color: white;
 		font-family: var(--font-heading);
 		text-decoration: none;
@@ -129,11 +127,11 @@
 		cursor: pointer;
 	}
 
-	.actions a:hover {
+	.actions :global(a:hover) {
 		scale: 1.05;
 	}
 
-	.actions a:active {
+	.actions :global(a:active) {
 		scale: 0.95;
 	}
 

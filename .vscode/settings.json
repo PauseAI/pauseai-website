@@ -4,5 +4,7 @@
 			"language": "markdown",
 			"scheme": "file"
 		}
-	]
+	],
+	"eslint.useFlatConfig": true,
+	"eslint.validate": ["svelte"]
 }

@@ -1,27 +1,23 @@
 <script lang="ts">
-	import { Toaster } from 'svelte-french-toast'
-	import { ProgressBar } from '@prgm/sveltekit-progress-bar'
-
-	import Footer from './footer.svelte'
-	import Header from './header.svelte'
-	import PageTransition from './transition.svelte'
-
-	import Toc from '$lib/components/Toc.svelte'
+	import { page } from '$app/stores'
 	import Banner from '$lib/components/Banner.svelte'
 	import Hero from '$lib/components/Hero.svelte'
 	import NearbyEvent from '$lib/components/NearbyEvent.svelte'
+	import Toc from '$lib/components/Toc.svelte'
 	import ExternalLink from '$lib/components/custom/a.svelte'
-
 	import { deLocalizeHref } from '$lib/paraglide/runtime'
-
 	import '@fontsource/roboto-slab/400.css'
+	import '@fontsource/roboto-slab/500.css'
 	import '@fontsource/roboto-slab/700.css'
 	import '@fontsource/saira-condensed/700.css'
-
-	import '../styles/styles.css'
+	import { ProgressBar } from '@prgm/sveltekit-progress-bar'
+	import { Toaster } from 'svelte-french-toast'
 	import '../styles/print.css'
-
-	import { page } from '$app/stores'
+	import '../styles/styles.css'
+	import Footer from './footer.svelte'
+	import Header from './header.svelte'
+	import PageTransition from './transition.svelte'
+	import type { GeoApiResponse } from '$api/geo/+server'
 
 	export let data
 
@@ -29,6 +25,7 @@
 	// This prevents "undefined" issues during navigation
 
 	let eventFound: boolean
+	let geo: GeoApiResponse | null
 	// Show the hero on the homepage, but nowhere else
 	$: hero = deLocalizeHref($page.url.pathname) === '/'
 </script>
@@ -47,12 +44,22 @@
 	</Banner>
 {/if}
 
-<NearbyEvent contrast={hero} bind:eventFound />
+<NearbyEvent contrast={hero} bind:eventFound bind:geo />
 {#if !eventFound}
-	<Banner contrast={hero}>
-		Join us at <ExternalLink href="https://pausecon.org/">PauseCon London</ExternalLink> from June 27th
-		to 30th!
-	</Banner>
+	{#if geo?.country?.code === 'US' && false}
+		<Banner>
+			<b
+				>ONE MORE REPUBLICAN NEEDED TO PROTECT STATE SOVEREIGNTY ON AI REGULATION | <ExternalLink
+					href="https://x.com/pauseaius/status/1939144759354003594">ACT NOW »</ExternalLink
+				></b
+			>
+		</Banner>
+	{:else}
+		<Banner contrast={hero} hidden={true}>
+			Join us at <ExternalLink href="https://pausecon.org/">PauseCon London</ExternalLink> from June
+			27th to 30th!
+		</Banner>
+	{/if}
 {/if}
 
 <div class="layout" class:with-hero={hero}>

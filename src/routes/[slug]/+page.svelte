@@ -8,7 +8,7 @@
 	$: parent = data.slug.split('/').slice(0, -1).join('/')
 </script>
 
-<PostMeta title={meta.title} description={meta.description} date={meta.date} image={meta.image} />
+<PostMeta {title} {description} {date} {image} />
 
 <article>
 	{#if parent}

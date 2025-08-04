@@ -1,13 +1,14 @@
 ---
 title: PauseAI in Australia
 slug: australia
-description: landing page for the Australian chapter of PauseAI
+description: the Australian chapter of PauseAI
 ---
-[Email us](mailto:australia@pauseai.info) | [Connect on Facebook](https://www.facebook.com/groups/571590459293618)
 
 **A message from PauseAI volunteers in Australia:**
 
 By 2030, artificial intelligence could be fully automated, self-improving and **smarter than humans at almost everything.** This isn't science fiction—it's the assessment of leading AI companies and researchers. When this happens, every aspect of life will change forever.
+
+**[Join our community](/join)** | [Email us](mailto:australia@pauseai.info) | [Connect on Facebook](https://www.facebook.com/groups/571590459293618) | [YouTube channel](https://www.youtube.com/channel/UCjjMieiOlSFf7jud0yhHQSg) | [LinkedIn](https://www.linkedin.com/company/pauseai-australia) | [Events](https://lu.ma/PauseAIAustralia)
 
 ### What risks are we facing?
 
@@ -47,7 +48,7 @@ Australian politicians have looked at some of the smaller risks of AI, but not t
 
 We acknowledge that not everyone agrees about the risk of an AI catastrophe. We address some of the common objections [here](/faq). We don't claim to be 100% certain, but we think the probability of very bad outcomes is more than high enough to justify a pause.
 
-It is [psychologically difficult](/psychology-of-xrisk) to think about potential catastrophes. Many people assume that the risks are out of their control and therefore not worth worrying about. Yet, anyone can take action right now by speaking up. We think it's better to act than to simply worry.
+It is [psychologically difficult](/psychology-of-x-risk) to think about potential catastrophes. Many people assume that the risks are out of their control and therefore not worth worrying about. Yet, anyone can take action right now by speaking up. We think it's better to act than to simply worry.
 
 ### How can I help in Australia?
 

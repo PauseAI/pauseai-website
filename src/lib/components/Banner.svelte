@@ -8,8 +8,7 @@
 	export let contrast = false
 	export let target: string | null = null
 	export let id: string | null = null
-
-	let hidden = false
+	export let hidden = false
 
 	// Function to check localStorage on mount
 	function checkStoredState() {
