@@ -73,7 +73,7 @@ html,
 body {
 	height: 100%;
 	font-family: var(--font-body);
-	font-weight: 300;
+	font-weight: 400;
 	background-color: var(--bg);
 }
 
@@ -144,10 +144,6 @@ a {
 
 a:hover {
 	color: var(--brand);
-}
-
-p {
-	font-weight: 400;
 }
 
 .prose {
