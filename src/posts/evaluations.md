@@ -1,11 +1,11 @@
 ---
-title: How AI Safefy Evaluations & Benchmarks can aid in AI governance
+title: How AI Safety Evaluations & Benchmarks can aid in AI governance
 description: What are AI safety evals, and how can they contribute to preventing catastrophic risks?
 ---
 
 ## What are AI Safety Evaluations
 
-"Evals" are tests (or "benchmarks") that measure how AI models behave, and how powerful they are becoming.
+"Evals" are tests that measure how AI models behave, and how powerful they are becoming.
 In AI Safety, evals are often designed to measure [dangerous capabilities](/dangerous-capabilities), such as cybersecurity capabilities, self-replication and autonomous AI research.
 
 Importantly, evals can measure if an AI is too dangerous to deploy.
@@ -17,17 +17,16 @@ There are some _red lines_ that no AI model should ever cross, for example when 
 ## Preventing deployment is not enough
 
 Things can go wrong _even before deployment_.
-An AI model that succesfully self-replicates could escape from a data center without being deployed.
-An AI model that can make a more powerful AI model could do this without being deployed as well.
+Self-replication and self-improvement can happen in an AI lab, before the model is publicly available.
 
-This is why we need a Pause Button.
-We need to **globally halt the development of increasingly powerful AI models**.
-This should be pressed when the evaluations are showing we're entering the danger zone.
+This is why **we need a [Pause Button](/building-the-pause-button)**.
+We need to globally halt the development of increasingly powerful AI models, before these dangerous capabilities are fully matured.
+This Pause Button should be pressed when the evaluations are showing we're entering the danger zone.
 
 ## What AI companies are doing
 
-Most of the frontier AI companies are doing safety evaluations on their models before they deploy them.
-Most of them (not Meta and Apple) have signed the EU AI Code of Practice, which mentions "state‑of‑the‑art model evaluations" (Measure 3.2).
+Most of the frontier AI companies are doing safety evaluations on their models before they deploy them and include the results of these evaluations in so called "System Cards".
+Most of them (except for Meta and Apple) have signed the [EU AI Code of Practice](https://digital-strategy.ec.europa.eu/en/policies/contents-code-gpai), which mentions "state‑of‑the‑art model evaluations" (Measure 3.2).
 
 This also means that some of these companies are not doing _any_ safety evaluations, and the ones that are performed are _not yet required_ and _not standardized_.
 In other words, **we desperately need regulations to require standardized safety evaluations**.
