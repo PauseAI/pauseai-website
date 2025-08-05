@@ -431,6 +431,12 @@
 			"lat": 40.4406,
 			"lon": -79.9959,
 			"link": "$$DISCORD_US$$"
+		},
+		{
+			"name": "Canberra",
+			"lat": -35.2809,
+			"lon": 149.13,
+			"link": "$$DISCORD_GLOBAL$$"
 		}
 	]
 }

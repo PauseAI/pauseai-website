@@ -7,7 +7,7 @@ In this article, we'll discuss:
 
 - Which AI capabilities can be dangerous
 - How we can prevent these capabilities from appearing or spreading
-- Why it is dangerous to rely on evaluations as a policy measure
+- Why it is dangerous to rely solely on [evaluations](/evaluations) as a policy measure
 
 As AI models become more powerful and useful, they also become more dangerous.
 So at which point should we proceed with caution?
