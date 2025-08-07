@@ -37,7 +37,6 @@
 	"home_risks_c2a": "Read about the risks",
 	"home_risks_content": "AI can have amazing benefits, but it could also erode our democracy, destabilize our economy and could be used to create powerful cyber weapons.",
 	"home_risks_title": "We risk <u>losing control</u>",
-	"home_stats_2025": "chance we'll reach AGI in 2025",
 	"home_stats_alignment": "of AI scientists believe the alignment problem is real & important",
 	"home_stats_citizens": "of citizens want AI to be slowed down by our governments",
 	"home_urgency_c2a": "How long do we have?",
@@ -95,5 +94,8 @@
 	"newsletter_success": "Thank you for subscribing!",
 	"newsletter_error_default": "Failed to subscribe. Please try again.",
 	"newsletter_error_network": "Network error. Please try again later.",
-	"newsletter_loading": "Loading..."
+	"newsletter_loading": "Loading...",
+	"uk_email_mp_title": "Email Your MP",
+	"uk_email_mp_description": "Contact your Member of Parliament about AI safety",
+	"uk_email_mp_uk_only_notice": "<b>This tool is for the UK only.</b> For other countries, use the [global email builder](/email-builder)."
 }

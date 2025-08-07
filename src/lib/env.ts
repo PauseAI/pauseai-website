@@ -1,7 +1,7 @@
 /**
  * Gets the appropriate environment object based on context - both Node.js and browser environments
  */
-export function getEnvironment(): Record<string, any> {
+export function getEnvironment(): ImportMetaEnv | NodeJS.ProcessEnv {
 	if (typeof import.meta !== 'undefined' && import.meta.env) {
 		//	   	console.debug(`env from import.meta.env (browser context)`)
 		return import.meta.env
@@ -20,36 +20,28 @@ export function getEnvironment(): Record<string, any> {
 
 /**
  * Determines if the current environment is development or test
+ * In practice, this means "not in CI" unless explicitly overridden by env.DEV
  */
 export function isDev(): boolean {
 	const env = getEnvironment()
-	const envMode = env.NODE_ENV || env.MODE
-	// Note that an undefined environment defaults to dev - fits with the frameworks we use
-	return !envMode || envMode === 'development' || envMode === 'test' || env.DEV === true
+	// Explicit DEV=true forces dev mode regardless of CI
+	return env.DEV === true || env.DEV === 'true' || env.CI !== 'true'
 }
 
 /**
  * Returns a formatted string with complete environment context for logging
- * Shows all factors that contribute to the isDev decision
+ * Shows CI status and DEV override which determine isDev behavior
  */
 export function getDevContext(): string {
 	const env = getEnvironment()
 	const icon = isDev() ? '✓' : '✗'
 
-	// Build context showing all relevant environment variables
-	const parts = []
+	// Build context string showing relevant factors
+	const parts = [`CI: ${env.CI || 'false'}`]
 
-	// Always show NODE_ENV, even if undefined
-	parts.push(`NODE_ENV=${env.NODE_ENV || 'undefined'}`)
-
-	// Show MODE if it exists and differs from NODE_ENV
-	if (env.MODE && (!env.NODE_ENV || env.MODE !== env.NODE_ENV)) {
-		parts.push(`MODE=${env.MODE}`)
-	}
-
-	// Show DEV flag if it's true (since it can override everything else)
-	if (env.DEV === true) {
-		parts.push(`DEV=true`)
+	// Show DEV if it's set (since it can override CI)
+	if (env.DEV === true || env.DEV === 'true') {
+		parts.push(`DEV: ${env.DEV}`)
 	}
 
 	return `isDev: ${icon} (${parts.join(', ')})`
@@ -64,7 +56,7 @@ export function possiblyOverriddenLocales(defaults: { locales: string[] }): stri
 	const listedLocales = envValue.replace(/all|-/g, ',')
 	const inclusive = listedLocales === envValue
 	const namedLocales = listedLocales.split(',').map((locale: string) => locale.trim())
-	let result = defaults.locales.filter((locale: string) =>
+	const result = defaults.locales.filter((locale: string) =>
 		inclusive ? namedLocales.includes(locale) : !namedLocales.includes(locale)
 	)
 	if (!result.includes('en')) result.push('en')

@@ -1,7 +1,6 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-import type { Signatory } from '$lib/types.js'
+import type { AirtableSignatory, Signatory } from '$lib/types.js'
 import { json } from '@sveltejs/kit'
-import { fetchAllPages } from '$lib/airtable.js'
+import { fetchAllPages, type AirtableRecord } from '$lib/airtable.js'
 
 /**
  * Fallback people data to use in development if Airtable fetch fails
@@ -11,63 +10,64 @@ const fallbackSignatories: Signatory[] = [
 		name: 'Error',
 		private: false,
 		bio: 'So sorry',
-		country: 'Sorry'
+		country: 'Sorry',
+		date: new Date().toISOString()
 	},
 	{
 		name: 'This should be',
 		private: true,
 		bio: 'This is a bio',
-		country: 'United States'
+		country: 'United States',
+		date: new Date().toISOString()
 	}
 ]
 
-function recordToSignatory(record: any): Signatory {
-	console.log('record', record)
+function recordToSignatory(record: AirtableRecord<AirtableSignatory>): Signatory {
 	return {
-        private: record.fields.private || false,
-        name: record.fields.private ? "Anonymous" : record.fields.name, // Anonymize private signatories
+		private: record.fields.private || false,
+		name: record.fields.private ? 'Anonymous' : record.fields.name, // Anonymize private signatories
 		country: record.fields.country,
 		bio: record.fields.bio,
-        date: record.fields.created
+		date: record.fields.date
 	}
 }
 
 export async function GET({ fetch, setHeaders }) {
-    const url = `https://api.airtable.com/v0/appWPTGqZmUcs3NWu/tbl2emfOWNWoVz1kW`;
-    setHeaders({
-        'cache-control': 'public, max-age=3600' // 1 hour in seconds
-    });
+	const url = `https://api.airtable.com/v0/appWPTGqZmUcs3NWu/tbl2emfOWNWoVz1kW`
+	setHeaders({
+		'cache-control': 'public, max-age=3600' // 1 hour in seconds
+	})
 
-    try {
-        // Fetch all records from Airtable
-        const records = await fetchAllPages(fetch, url);
-        
-        // Filter to only include records where email_verified is explicitly true
-        const verifiedRecords = records.filter(record => {
-            const emailVerified = record.fields.email_verified;
-            console.log('Checking record:', record.fields.name, 'email_verified:', emailVerified);
-            return emailVerified === true;
-        });
+	try {
+		// Fetch all records from Airtable
+		const records = await fetchAllPages<AirtableSignatory>(fetch, url)
 
-        console.log(`Total records: ${records.length}, Verified records: ${verifiedRecords.length}`);
+		// Filter to only include records where email_verified is explicitly true and not a duplicate
+		const verifiedRecords = records.filter((record) => {
+			const emailVerified = record.fields.email_verified
+			const duplicate = record.fields.duplicate
+			return emailVerified === true && !duplicate
+		})
 
-        // Map the filtered records to signatories
-        const signatories = verifiedRecords.map(recordToSignatory);
+		console.log(`Total records: ${records.length}, Verified records: ${verifiedRecords.length}`)
 
-        // Sort signatories by date (oldest first)
-        signatories.sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
+		// Map the filtered records to signatories
+		const signatories = verifiedRecords.map(recordToSignatory)
 
-        // Return both the visible signatories and the total count
-        return json({
-            signatories: signatories,
-            totalCount: signatories.length
-        });
-    } catch (e) {
-        console.error('Error fetching signatories:', e);
+		// Sort signatories by date (oldest first)
+		signatories.sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime())
 
-        return json({
-            signatories: fallbackSignatories,
-            totalCount: 0
-        });
-    }
+		// Return both the visible signatories and the total count
+		return json({
+			signatories: signatories,
+			totalCount: signatories.length
+		})
+	} catch (e) {
+		console.error('Error fetching signatories:', e)
+
+		return json({
+			signatories: fallbackSignatories,
+			totalCount: 0
+		})
+	}
 }

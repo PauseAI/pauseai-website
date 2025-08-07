@@ -6,7 +6,9 @@ import path from 'path'
 import { defineConfig } from 'vite'
 import { isDev } from './src/lib/env'
 import { MARKDOWN_L10NS } from './src/lib/l10n'
-import { locales as compiledLocales } from './src/lib/paraglide/runtime'
+import { importRuntimeWithoutVite } from './scripts/l10n/utils'
+
+const { locales: compiledLocales } = await importRuntimeWithoutVite()
 
 function getLocaleExcludePatterns(): RegExp[] {
 	const md = path.resolve(MARKDOWN_L10NS)
@@ -25,7 +27,7 @@ function getLocaleExcludePatterns(): RegExp[] {
 	})
 }
 
-export default defineConfig(({ command, mode }) => {
+export default defineConfig(() => {
 	// Guarantees server can see .env (on e.g. hot restart)
 	dotenv.config({ override: true })
 
@@ -36,7 +38,11 @@ export default defineConfig(({ command, mode }) => {
 		},
 
 		server: {
-			port: 37572
+			port: 37572,
+			fs: {
+				// Allow serving files from l10n-cage directory
+				allow: [MARKDOWN_L10NS]
+			}
 		},
 
 		// Improve build performance and reduce log output
@@ -57,7 +63,7 @@ export default defineConfig(({ command, mode }) => {
 			rollupOptions: {
 				external: getLocaleExcludePatterns()
 			}
-		},
+		} as const,
 		plugins: [enhancedImages(), sveltekit()]
 	}
 })

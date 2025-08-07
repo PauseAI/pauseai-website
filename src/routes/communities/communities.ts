@@ -2,6 +2,10 @@ import type { Post } from '$lib/types'
 import adjacentCommunitiesJson from './adjacent-communities.json'
 import pauseAICommunitiesJson from './pauseai-communities.json'
 
+export type CommunitiesConfiguration = {
+	communities: Community[]
+}
+
 export type Community = {
 	name: string
 	lat: number
@@ -30,14 +34,23 @@ const LINK_PLACEHOLDERS = {
 	$$WHATSAPP_ITALY$$: 'https://chat.whatsapp.com/Cue9aeK6kpJFoDxT3xV9Zx'
 }
 
-for (const community of [...adjacentCommunitiesJson, ...pauseAICommunitiesJson]) {
-	if (!(community.link.startsWith('http') || community.link in LINK_PLACEHOLDERS)) {
+const pauseAICommunities: Community[] = (pauseAICommunitiesJson satisfies CommunitiesConfiguration)
+	.communities
+const adjacentCommunities: Community[] = (
+	adjacentCommunitiesJson satisfies CommunitiesConfiguration
+).communities
+
+for (const community of [...adjacentCommunities, ...pauseAICommunities]) {
+	if (
+		!(
+			community.link.startsWith('http') ||
+			community.link.startsWith('mailto') ||
+			community.link in LINK_PLACEHOLDERS
+		)
+	) {
 		throw Error('Invalid link for community: ' + community.name)
 	}
 }
-
-const pauseAICommunities: Community[] = pauseAICommunitiesJson satisfies Community[]
-const adjacentCommunities: Community[] = adjacentCommunitiesJson satisfies Community[]
 
 /** All communities, PauseAI communities last to render them on top */
 export const communities: Community[] = [

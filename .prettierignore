@@ -11,3 +11,5 @@ src/lib/components/widget-consent/loadTwitter.js
 pnpm-lock.yaml
 package-lock.json
 yarn.lock
+
+src/lib/paraglide

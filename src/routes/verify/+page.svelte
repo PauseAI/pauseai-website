@@ -3,19 +3,28 @@
 	import { goto } from '$app/navigation'
 	import { page } from '$app/stores'
 	import toast from 'svelte-french-toast'
+	import Processing from '$lib/components/Processing.svelte'
+
+	let errorMessage: string | undefined
 
 	onMount(async () => {
-		const apiUrl = `/api/verify${$page.url.search}`
+		try {
+			const apiUrl = `/api/verify${$page.url.search}`
 
-		const response = await fetch(apiUrl)
-		if (response.ok) {
-			toast.success('Your email has been verified!')
-			goto('/')
-		} else {
-			const errorText = await response.text()
-			console.error(`Verification failed: ${errorText || response.statusText}`)
+			const response = await fetch(apiUrl)
+			if (response.ok) {
+				toast.success('Your email has been verified!')
+				goto('/')
+			} else {
+				const errorText = await response.text()
+				throw new Error(`Verification failed: ${errorText || response.statusText}`)
+			}
+		} catch (error) {
+			if (error instanceof Error) errorMessage = error.message
+			else errorMessage = 'Verification failed with unexpected error.'
+			throw error
 		}
 	})
 </script>
 
-<h1>Processing your request...</h1>
+<Processing {errorMessage} />

@@ -1,28 +1,25 @@
-import adapterPatchPrerendered from './src/lib/adapter-patch-prerendered.js'
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment -- not designed for strong typing
+// @ts-nocheck
+
 import adapterNetlify from '@sveltejs/adapter-netlify'
 import { vitePreprocess } from '@sveltejs/vite-plugin-svelte'
 
-import { mdsvex, escapeSvelte } from 'mdsvex'
-import shiki from 'shiki'
+import { mdsvex } from 'mdsvex'
 import remarkUnwrapImages from 'remark-unwrap-images'
 import remarkToc from 'remark-toc'
 import remarkHeadingId from 'remark-heading-id'
 import rehypeSlug from 'rehype-slug'
 
-import { locales } from './src/lib/paraglide/runtime.js'
+import settings from './project.inlang/settings.json' with { type: 'json' }
+
+// Export configuration flags for use in build scripts
+export const USE_EDGE_FUNCTIONS = true
 
 /** @type {import('mdsvex').MdsvexOptions} */
 const mdsvexOptions = {
 	extensions: ['.md'],
 	layout: {
 		_: './src/mdsvex.svelte'
-	},
-	highlight: {
-		highlighter: async (code, lang = 'text') => {
-			const highlighter = await shiki.getHighlighter({ theme: 'poimandres' })
-			const html = escapeSvelte(highlighter.codeToHtml(code, { lang }))
-			return `{@html \`${html}\` }`
-		}
 	},
 	remarkPlugins: [remarkUnwrapImages, [remarkToc, { tight: true }], remarkHeadingId],
 	rehypePlugins: [rehypeSlug]
@@ -47,11 +44,9 @@ const config = {
 		handler(warning)
 	},
 	kit: {
-		adapter: adapterPatchPrerendered(
-			adapterNetlify({
-				edge: true
-			})
-		),
+		adapter: adapterNetlify({
+			edge: USE_EDGE_FUNCTIONS
+		}),
 		alias: {
 			$assets: 'src/assets',
 			$api: 'src/routes/api'
@@ -59,7 +54,7 @@ const config = {
 		prerender: {
 			// Allows dead links to be rendered
 			handleHttpError: 'warn',
-			entries: ['*'].concat(locales.map((locale) => '/' + locale))
+			entries: ['*'].concat(settings.locales.map((locale) => '/' + locale))
 		}
 	}
 }

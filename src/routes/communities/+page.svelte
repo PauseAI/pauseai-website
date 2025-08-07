@@ -1,6 +1,7 @@
 <script lang="ts">
 	import PostMeta from '$lib/components/PostMeta.svelte'
 	import ExternalLink from '$lib/components/custom/a.svelte'
+	import CommunitiesList from './CommunitiesList.svelte'
 	import type { GeoApiResponse } from '$api/geo/+server'
 	import type * as maplibregl from 'maplibre-gl'
 	import { GeolocateControl, Map, Marker, Popup } from 'maplibre-gl'
@@ -26,6 +27,8 @@
 	lng = -71.224518
 	lat = 42.213995
 	zoom = 1
+
+	console.log('communities page.svelte', communities)
 
 	function updateData() {
 		zoom = map.getZoom()
@@ -128,6 +131,7 @@
 		<div class="map" bind:this={mapContainer} />
 	</div>
 </div>
+<CommunitiesList {communities} />
 
 <style>
 	.map-wrap {
