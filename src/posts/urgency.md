@@ -33,7 +33,7 @@ It is entirely possible that _simply scaling up_ will get us to [dangerous capab
 In 2022, AI researchers thought it would take [17 years](https://aiimpacts.org/2022-expert-survey-on-progress-in-ai/) until AI would be able to write a New York Times bestseller.
 A year later, a Chinese professor [won a writing contest](https://www.scmp.com/news/china/science/article/3245725/chinese-professor-used-ai-write-science-fiction-novel-then-it-won-national-award) with an AI-written book.
 
-On Metaculus, [the community prediction for (weak) AGI](https://www.metaculus.com/questions/3479/date-weakly-general-ai-is-publicly-known/) was 2057 just three years ago, and now it's ~~2027~~ 2026.
+On Metaculus, [the community prediction for (weak) AGI](https://www.metaculus.com/questions/3479/date-weakly-general-ai-is-publicly-known/) was 2057 just a few years ago, and now it's 2027.
 
 Now, let's dive into the definition of AGI used in that survey:
 
@@ -86,8 +86,8 @@ We have no idea how to align such an AI (even [OpenAI admits this](https://youtu
 
 ## Act
 
-Anthropic co-founder Ben Mann [believes](https://x.com/ai_ctrl/status/1819173703869255879/photo/0) there's a 30% chance that Claude 3 (their latest model) can autonomously replicate, given fine-tuning and clever prompting.
-Ex-OpenAI researcher Daniel Kokotajlo thinks there's a [15% chance](https://x.com/ai_ctrl/status/1819173703869255879/photo/0) we'll have AGI in 2024.
+<!--Anthropic co-founder Ben Mann [believes](https://x.com/ai_ctrl/status/1819173703869255879/photo/0) there's a 30% chance that Claude 3 (their latest model) can autonomously replicate, given fine-tuning and clever prompting.
+Ex-OpenAI researcher Daniel Kokotajlo thinks there's a [15% chance](https://x.com/ai_ctrl/status/1819173703869255879/photo/0) we'll have AGI in 2024.-->
 No-one knows for certain when we will reach the Ilya threshold.
 But the [stakes are too high](/xrisk) to assume we have a lot of time.
 We need to act on the small chance that we could be months away.
