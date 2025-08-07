@@ -100,7 +100,7 @@
 		display: grid;
 		grid-template-columns: repeat(4, 1fr);
 		gap: 1.2rem;
-		font-size: 0.8rem;
+		font-size: 0.9rem;
 		padding-bottom: 1rem;
 		margin-bottom: 1rem;
 	}
@@ -120,18 +120,34 @@
 	}
 
 	.footer-links h2 {
-		font-size: 1rem;
+		font-size: 1.1rem;
 		font-family: var(--font-heading);
 		font-weight: 700;
 		margin-bottom: 0rem;
 		margin-top: 0;
 	}
 
+	.footer-links :global(:not(h2)) {
+		opacity: 0.9;
+	}
+
+	.footer-links :global(:not(h2):hover) {
+		opacity: 1;
+	}
+
+	.footer-links :global(:not(h2)) {
+		opacity: 0.9;
+	}
+
+	.footer-links :global(:not(h2):hover) {
+		opacity: 1;
+	}
+
 	:global(.c2a) {
 		color: var(--text);
 		text-transform: uppercase;
 		text-decoration: none;
-		font-size: 1.1rem;
+		font-size: 1.2rem;
 		font-family: var(--font-heading);
 		font-weight: 700;
 		text-align: left;
