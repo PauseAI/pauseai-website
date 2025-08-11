@@ -5,53 +5,25 @@ description: Educational resources (videos, articles, books) about AI risks and 
 
 <script>
 import NewsletterSignup from '$lib/components/NewsletterSignup.svelte';
-import IconBullet from '$lib/components/IconBullet.svelte'
-
-import CirclePause from 'lucide-svelte/icons/circle-pause'
-import CircleQuestionMark from 'lucide-svelte/icons/circle-question-mark'
-import Cog from 'lucide-svelte/icons/cog'
-import Earth from 'lucide-svelte/icons/earth';
-import FootPrints from 'lucide-svelte/icons/footprints'
-import MessageSquareQuote from 'lucide-svelte/icons/message-square-quote'
-import Skull from 'lucide-svelte/icons/skull';
-import TriangleAlert from 'lucide-svelte/icons/triangle-alert'
+import IconBullets from '$lib/components/IconBullets.svelte'
+import * as m from '$lib/paraglide/messages'
+import { CirclePause, CircleQuestionMark, Cog, Earth, Footprints, MessageSquareQuote, Skull, TriangleAlert } from 'lucide-svelte/icons';
 </script>
 
 <NewsletterSignup />
 
 ## On this website
 
-<IconBullet icon={TriangleAlert}>
-    <a href="/risks">Risks</a>. A summary of the risks of AI.
-</IconBullet>
-
-<IconBullet icon={Skull}>
-    <a href="/xrisk">X-risk</a>. Why AI is an existential risk.
-</IconBullet>
-
-<IconBullet icon={Earth}>
-    <a href="/ai-takeover">Takeover</a>. How AI could take over the world.
-</IconBullet>
-
-<IconBullet icon={MessageSquareQuote}>
-    <a href="/quotes">Quotes</a>. Quotes on AI risks and governance.
-</IconBullet>
-
-<IconBullet icon={Cog}>
-    <a href="/feasibility">Feasibility of a Pause</a>. The feasibility of a pause in AI development.
-</IconBullet>
-
-<IconBullet icon={CirclePause}>
-    <a href="/building-the-pause-button">Building the Pause button</a>. What it takes to pause AI.
-</IconBullet>
-
-<IconBullet icon={CircleQuestionMark}>
-    <a href="/faq">FAQ</a>. Commonly asked questions about AI safety and PauseAI.
-</IconBullet>
-
-<IconBullet icon={FootPrints}>
-    <a href="/action">Action</a>. What you can do to help (with links to many action-related guides)
-</IconBullet>
+<IconBullets items={[
+[TriangleAlert, m.learn_risks],
+[Skull, m.learn_xrisk],
+[Earth, m.learn_ai_takeover],
+[MessageSquareQuote, m.learn_quotes],
+[Cog, m.learn_feasibility],
+[CirclePause, m.learn_building_the_pause_button],
+[CircleQuestionMark, m.learn_faq],
+[Footprints, m.learn_action],
+]} />
 
 ## Other websites
 
