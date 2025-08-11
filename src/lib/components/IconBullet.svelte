@@ -8,16 +8,15 @@
 	<span class="icon">
 		<svelte:component this={icon} size="1em" />
 	</span>
-	<slot />
+	<span>
+		<slot />
+	</span>
 </div>
 
 <style>
 	.icon-bullet {
+		display: flex;
+		gap: 0.5em;
 		margin-bottom: 0.4em;
-	}
-
-	.icon {
-		display: inline-block;
-		margin-right: 0.5em;
 	}
 </style>
