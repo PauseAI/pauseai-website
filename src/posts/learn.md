@@ -15,7 +15,6 @@ import FootPrints from 'lucide-svelte/icons/footprints'
 import MessageSquareQuote from 'lucide-svelte/icons/message-square-quote'
 import Skull from 'lucide-svelte/icons/skull';
 import TriangleAlert from 'lucide-svelte/icons/triangle-alert'
-import Unlink from 'lucide-svelte/icons/unlink';
 </script>
 
 <NewsletterSignup />
@@ -30,7 +29,7 @@ import Unlink from 'lucide-svelte/icons/unlink';
     <a href="/xrisk">X-risk</a>. Why AI is an existential risk.
 </IconBullet>
 
-<IconBullet icon={Unlink}>
+<IconBullet icon={Earth}>
     <a href="/ai-takeover">Takeover</a>. How AI could take over the world.
 </IconBullet>
 
