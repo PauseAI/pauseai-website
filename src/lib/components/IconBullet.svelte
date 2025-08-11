@@ -5,7 +5,7 @@
 </script>
 
 <div class="icon-bullet" role="listitem">
-	<span class="icon">
+	<span>
 		<svelte:component this={icon} size="1em" />
 	</span>
 	<span>
