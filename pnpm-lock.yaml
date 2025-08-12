@@ -204,6 +204,9 @@ importers:
       vite:
         specifier: ^5.4.19
         version: 5.4.19(@types/node@24.2.0)
+      vite-plugin-lucide-preprocess:
+        specifier: ^1.4.2
+        version: 1.4.2(vite@5.4.19(@types/node@24.2.0))
       vitest:
         specifier: ^2.1.9
         version: 2.1.9(@types/node@24.2.0)
@@ -3181,6 +3184,11 @@ packages:
     resolution: {integrity: sha512-AM9aQ/IPrW/6ENLQg3AGY4K1N2TGZdR5e4gu/MmmR2xR3Ll1+dib+nook92g4TV3PXVyeyxdWwtaCAiUL0hMxA==}
     engines: {node: ^18.0.0 || >=20.0.0}
     hasBin: true
+
+  vite-plugin-lucide-preprocess@1.4.2:
+    resolution: {integrity: sha512-xnyycVGS1uk0xSvrmEKzcT2Jcr6HFb0eIR6rQ1id6/mMcuW2GjDGhuWNKoWr9uzYbTgRPk7m+tz5E7CD9dtU7w==}
+    peerDependencies:
+      vite: '>=5'
 
   vite@5.4.19:
     resolution: {integrity: sha512-qO3aKv3HoQC8QKiNSTuUM1l9o/XX3+c+VTgLHbJWHZGeTPVAg2XwazI9UWzoxjIJCGCV2zU60uqMzjeLZuULqA==}
@@ -6251,6 +6259,10 @@ snapshots:
       - sugarss
       - supports-color
       - terser
+
+  vite-plugin-lucide-preprocess@1.4.2(vite@5.4.19(@types/node@24.2.0)):
+    dependencies:
+      vite: 5.4.19(@types/node@24.2.0)
 
   vite@5.4.19(@types/node@24.2.0):
     dependencies:

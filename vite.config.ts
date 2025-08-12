@@ -4,9 +4,10 @@ import dotenv from 'dotenv'
 import fs from 'fs'
 import path from 'path'
 import { defineConfig } from 'vite'
+import lucidePreprocess from 'vite-plugin-lucide-preprocess'
+import { importRuntimeWithoutVite } from './scripts/l10n/utils'
 import { isDev } from './src/lib/env'
 import { MARKDOWN_L10NS } from './src/lib/l10n'
-import { importRuntimeWithoutVite } from './scripts/l10n/utils'
 
 const { locales: compiledLocales } = await importRuntimeWithoutVite()
 
@@ -64,6 +65,6 @@ export default defineConfig(() => {
 				external: getLocaleExcludePatterns()
 			}
 		} as const,
-		plugins: [enhancedImages(), sveltekit()]
+		plugins: [lucidePreprocess(), enhancedImages(), sveltekit()]
 	}
 })
