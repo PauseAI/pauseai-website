@@ -55,7 +55,7 @@
 <style>
 	:root {
 		--logo-offset: 2.4rem;
-		--logo-width-big: 11rem;
+		--logo-width-big: 12em;
 		--logo-width-small: 10rem;
 		--min-space-between: 1rem;
 
