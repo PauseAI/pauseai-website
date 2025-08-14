@@ -25,7 +25,7 @@ Sure. Artificial Intelligence already has the potential to be a powerful tool. I
 > "We seem to be assuming AI will neatly fit into a benign pattern. That
 > assumption only holds to the extent AI is analogous with most of what has come before. And in the circumstances, we’d be wise to examine it far more rigorously before settling on it because there are good reasons to suppose it is a different species altogether, for which history is a poor guide."
 >
-> - Waleed Aly
+> – Waleed Aly
 >
 > [The Age](https://www.theage.com.au/politics/federal/the-treasurer-is-telling-us-to-stay-calm-but-this-could-be-the-time-to-panic-20250807-p5ml5k.html)
 
