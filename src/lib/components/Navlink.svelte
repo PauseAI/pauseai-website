@@ -39,7 +39,7 @@
 		font-weight: 700;
 		color: var(--text);
 		text-decoration: none;
-		font-size: 1.1rem;
+		font-size: 1.2rem;
 	}
 
 	a.first {

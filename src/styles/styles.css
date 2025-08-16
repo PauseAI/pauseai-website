@@ -8,7 +8,7 @@ html {
 	--font-heading: 'Saira Condensed', Impact, sans-serif;
 
 	/* Major theme stuff */
-	--page-width: 40rem;
+	--page-width: 45rem;
 
 	/* Colors */
 	--t-color-main: #ff9416; /* Default main color, approximately hsl(32, 100%, 54%)*/
@@ -73,7 +73,7 @@ html,
 body {
 	height: 100%;
 	font-family: var(--font-body);
-	font-weight: 300;
+	font-weight: 400;
 	background-color: var(--bg);
 }
 
@@ -83,7 +83,7 @@ html {
 	accent-color: var(--link);
 	background-image: var(--background);
 	background-attachment: fixed;
-	font-size: 1.2rem;
+	font-size: 1.1rem;
 }
 
 img {
@@ -144,10 +144,6 @@ a {
 
 a:hover {
 	color: var(--brand);
-}
-
-p {
-	font-weight: 300;
 }
 
 .prose {
