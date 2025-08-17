@@ -7,7 +7,7 @@
 
 {#each items as item}
 	<div class="icon-bullet" role="listitem">
-		<span>
+		<span class="icon">
 			<svelte:component this={item[0]} size="1em" />
 		</span>
 		<span>
@@ -21,5 +21,9 @@
 		display: flex;
 		gap: 0.5em;
 		margin-bottom: 0.4em;
+	}
+
+	.icon {
+		margin-top: 0.2em;
 	}
 </style>
