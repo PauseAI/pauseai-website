@@ -46,7 +46,7 @@
 
 <NearbyEvent contrast={hero} bind:eventFound bind:geo />
 {#if !eventFound}
-	{#if geo?.country?.code === 'US' && geo?.subdivision?.code === 'CA'}
+	{#if geo?.country?.code === 'US' && geo?.subdivision?.code === 'CA' && false}
 		<Banner>
 			<b
 				>HELP US SAVE CALIFORNIA'S AI SAFETY BILL BEFORE WEDNESDAY | <ExternalLink
