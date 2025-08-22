@@ -22,7 +22,7 @@ export interface Entry {
 	platform: string
 	status: string
 	submitted_by_user_api_id: string
-	tags: any[]
+	tags: [] // eslint compromise
 }
 
 export interface Calendar {
