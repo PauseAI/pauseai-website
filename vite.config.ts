@@ -13,9 +13,9 @@ const { locales: compiledLocales } = await importRuntimeWithoutVite()
 
 function getLocaleExcludePatterns(): RegExp[] {
 	const md = path.resolve(MARKDOWN_L10NS)
-	const reposLocales = fs
-		.readdirSync(md)
-		.filter((item) => fs.statSync(path.join(md, item)).isDirectory())
+	const reposLocales = fs.existsSync(md)
+		? fs.readdirSync(md).filter((item) => fs.statSync(path.join(md, item)).isDirectory())
+		: [] // the directory may not exist when running tests
 	//  console.debug(`📁 Locale directories found in repos: ${reposLocales.join(', ')}`)
 	const locales: readonly string[] = compiledLocales
 	const toExclude = reposLocales.filter((locale) => !locales.includes(locale))
