@@ -9,8 +9,8 @@ export type CalendarResponse = {
 export type Event = {
 	name: string
 	url: string
-	geo_latitude: string | null
-	geo_longitude: string | null
+	geo_latitude: number | undefined
+	geo_longitude: number | undefined
 	start_at: Date
 }
 
@@ -29,8 +29,8 @@ export async function GET({ setHeaders }) {
 			event: {
 				name: entry.event.name,
 				url: entry.event.url,
-				geo_latitude: entry.event.geo_latitude,
-				geo_longitude: entry.event.geo_longitude,
+				geo_latitude: entry.event.coordinate?.latitude,
+				geo_longitude: entry.event.coordinate?.longitude,
 				start_at: entry.event.start_at
 			}
 		}))

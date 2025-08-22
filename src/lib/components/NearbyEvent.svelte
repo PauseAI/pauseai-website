@@ -30,7 +30,7 @@
 		const isNearby = (event: Event): boolean => {
 			const { geo_latitude, geo_longitude } = event
 			if (!geo_latitude || !geo_longitude) return false
-			const eventCoords = [geo_latitude, geo_longitude].map(Number.parseFloat)
+			const eventCoords = [geo_latitude, geo_longitude]
 			return distance(userCoords, eventCoords, { units: 'kilometers' }) <= MAX_DISTANCE_KM
 		}
 
