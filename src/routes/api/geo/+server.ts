@@ -1,3 +1,6 @@
+import { generateCacheControlRecord } from '$lib/utils'
+import { json } from '@sveltejs/kit'
+
 export type GeoApiResponse = App.Platform['context']['geo']
 
 export const prerender = false
@@ -10,8 +13,6 @@ export function GET({ platform, setHeaders }) {
 		})
 	}
 	const geo: GeoApiResponse = platform.context.geo
-	setHeaders({
-		'cache-control': 'private, max-age=3600' // local only, 1 hour in seconds
-	})
-	return new Response(JSON.stringify(geo))
+	setHeaders(generateCacheControlRecord({ private: true, maxAge: 60 * 60 }))
+	return json(geo)
 }

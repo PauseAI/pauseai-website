@@ -1,6 +1,7 @@
 import type { AirtableSignatory, Signatory } from '$lib/types.js'
 import { json } from '@sveltejs/kit'
 import { fetchAllPages, type AirtableRecord } from '$lib/airtable.js'
+import { generateCacheControlRecord } from '$lib/utils'
 
 /**
  * Fallback people data to use in development if Airtable fetch fails
@@ -34,9 +35,7 @@ function recordToSignatory(record: AirtableRecord<AirtableSignatory>): Signatory
 
 export async function GET({ fetch, setHeaders }) {
 	const url = `https://api.airtable.com/v0/appWPTGqZmUcs3NWu/tbl2emfOWNWoVz1kW`
-	setHeaders({
-		'cache-control': 'public, max-age=3600' // 1 hour in seconds
-	})
+	setHeaders(generateCacheControlRecord({ public: true, maxAge: 60 * 60 }))
 
 	try {
 		// Fetch all records from Airtable

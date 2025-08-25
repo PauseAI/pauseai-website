@@ -1,6 +1,7 @@
 import type { AirtableTeam, Team } from '$lib/types.js'
 import { json } from '@sveltejs/kit'
 import { fetchAllPages, type AirtableRecord } from '$lib/airtable.js'
+import { generateCacheControlRecord } from '$lib/utils'
 
 /**
  * Fallback teams data to use in development mode if Airtable fetch fails
@@ -47,9 +48,7 @@ function recordToTeam(record: AirtableRecord<AirtableTeam>): Team {
 
 export async function GET({ fetch, setHeaders }) {
 	const url = `https://api.airtable.com/v0/appWPTGqZmUcs3NWu/tblYLOPzJ32QOdBLg`
-	setHeaders({
-		'cache-control': 'public, max-age=3600' // 1 hour in seconds
-	})
+	setHeaders(generateCacheControlRecord({ public: true, maxAge: 60 * 60 }))
 
 	try {
 		const records = await fetchAllPages<AirtableTeam>(fetch, url, FALLBACK_TEAMS)

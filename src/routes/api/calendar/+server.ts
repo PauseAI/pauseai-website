@@ -1,4 +1,6 @@
 import * as luma from '$lib/clients/luma'
+import { generateCacheControlRecord } from '$lib/utils.js'
+import { json } from '@sveltejs/kit'
 
 export type CalendarResponse = {
 	entries: {
@@ -35,8 +37,6 @@ export async function GET({ setHeaders }) {
 			}
 		}))
 	}
-	setHeaders({
-		'cache-control': 'public, max-age=3600' // 1 hour in seconds
-	})
-	return new Response(JSON.stringify(response))
+	setHeaders(generateCacheControlRecord({ public: true, maxAge: 60 * 60 }))
+	return json(response)
 }

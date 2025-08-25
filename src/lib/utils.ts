@@ -1,3 +1,5 @@
+import Headers, { CacheControl, type CacheControlInit } from '@remix-run/headers'
+
 type DateStyle = Intl.DateTimeFormatOptions['dateStyle']
 
 export function formatDate(date: string, dateStyle: DateStyle = 'medium', locales = 'en') {
@@ -9,4 +11,9 @@ export const defaultTitle = 'Volunteer'
 
 export function typedEntries<T extends Parameters<typeof Object.entries>[0]>(obj: T) {
 	return Object.entries(obj) as [Extract<keyof T, string>, T[keyof T]][]
+}
+
+export function generateCacheControlRecord(options: CacheControlInit): Record<string, string> {
+	const headers = new Headers({ cacheControl: new CacheControl(options) })
+	return Object.fromEntries(headers.entries())
 }
