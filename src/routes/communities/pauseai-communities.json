@@ -443,6 +443,12 @@
 			"lat": -41.433349,
 			"lon": 147.123323,
 			"link": "$$DISCORD_GLOBAL$$"
+		},
+		{
+			"name": "test",
+			"lat": 1,
+			"lon": 1,
+			"link": "a"
 		}
 	]
 }
