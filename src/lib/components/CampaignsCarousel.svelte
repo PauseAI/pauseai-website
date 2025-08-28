@@ -1,11 +1,12 @@
 <script lang="ts">
 	import CampaignCard from './CampaignCard.svelte'
 	import { campaigns } from '$lib/data/campaigns'
+	let filteredCampaigns = campaigns.filter((campaign) => campaign.isCurrent)
 </script>
 
 <h2>Our current campaigns</h2>
 <div class="campaigns-grid">
-	{#each campaigns as campaign}
+	{#each filteredCampaigns as campaign}
 		<CampaignCard {campaign} />
 	{/each}
 </div>

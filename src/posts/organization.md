@@ -7,7 +7,8 @@ description: How the PauseAI organization is structured, and what resources are 
 
 - [Legal entities](/legal): PauseAI consists of one international entity (PauseAI Global), and several local / national legal entities. This website and the social media accounts are managed by the international entity.
 - [National groups](/national-groups): National PauseAI groups are hubs that typically manage their own local communities, and are responsible for national-level strategy and coordination. They typically have their own website, social media accounts and legal entity. National leaders meet regularly to coordinate their work.
-- [Teams](/teams): Teams are groups of volunteers who work on specific projects or tasks within PauseAI Global. Every team has its own leader, Discord channel, Drive folder and of course list of members. Reach out to a team leader to join a team!
+- [Campaigns](/campaigns): Campaigns are temporary initiatives to achieve a specific goal. Each campaign has its own leader, Discord channel, and possibly even sub-brand.
+- [Teams](/teams): Teams are groups of volunteers who work on specific projects, campaigns or tasks within PauseAI Global. Every team has its own leader, Discord channel, Drive folder and of course list of members. Reach out to a team leader to join a team!
 - [Local communities](/communities): Check if there already exists a community in your area. Most groups are communicating in our discord server, in the `#local-meetups` channel (If you want to create a new local group, post there!). Some groups are using tools like WhatsApp or a separate Discord server.
 
 ![Organagram](/org.png)
@@ -20,8 +21,7 @@ description: How the PauseAI organization is structured, and what resources are 
 
 ## Onboarding process
 
-1. Sign up as a _volunteer_ (on the [join page](/join) or on Discord). An automated message is sent to the Onboarding team.
-1. Someone from the onboarding team reaches out to the volunteer and invites them for a one-on-one call. They are asked to take actions in an existing local group, set up a local group, or join one of the teams.
+Sign up as a _volunteer_ (on the [join page](/join) or on Discord). An automated message is sent to the National Group lead, who will initiate the onboarding process.
 
 ## Educational resources
 

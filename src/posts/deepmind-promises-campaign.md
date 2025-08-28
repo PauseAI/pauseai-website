@@ -18,21 +18,21 @@ In response, PauseAI has taken the following actions:
 - [Held the largest AI safety protest of all time](/deepmind-protest-2025) outside Google DeepMind's London offices.
 - Dozens of sitting UK politicians have signed our open letter calling on Google to establish clear definitions of "deployment", publish specific timelines for the publication of safety reports, and to clarify unambiguously which third parties are involved in testing their models.
 
-#### How you can help
+## How you can help
 
 - Email your MP to get their name added to our open letter. You can use our tool [here](/uk-email-mp).
-- Share the campaign on social media.
-- Our [interview ](https://www.youtube.com/watch?v=5gnVzEoVDmk)with PauseAI UK Director Joseph Miller.
-- [Videos](https://www.youtube.com/watch?v=AaowO0rLvao) of our DeepMind protest.
-- Articles covering our protest.
+- Share the campaign on social media:
+  - Our [interview ](https://www.youtube.com/watch?v=5gnVzEoVDmk)with PauseAI UK Director Joseph Miller.
+  - [Videos](https://www.youtube.com/watch?v=AaowO0rLvao) of our DeepMind protest.
+  - Articles covering our protest (see below)
 
-#### Media coverage
+## Media coverage
 
 - [Business Insider](https://www.businessinsider.com/protesters-accuse-google-deepmind-breaking-promises-ai-safety-2025-6)
 - [Times of India](https://timesofindia.indiatimes.com/technology/tech-news/google-you-broke-your-word-on-shout-protestors-outside-google-deepminds-london-headquarters/articleshow/122203297.cms)
 - [Tech Times](https://www.techtimes.com/articles/311120/20250701/google-deepmind-slammed-protesters-over-broken-ai-safety-promise.htm)
 - [Islington Tribune](https://www.islingtontribune.co.uk/article/stark-warning-from-protesters-calling-for-ai-pause-its-going-to-turn-out-bad)
 
-##### Contact
+## Contact
 
 Reach out to [Joseph Miller](mailto:joseph@pauseai.info).

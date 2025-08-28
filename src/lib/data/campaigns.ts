@@ -11,7 +11,8 @@ export const campaigns: Campaign[] = [
 	},
 	{
 		title: 'DeepMind: keep your promises',
-		description: 'Google DeepMind ',
+		description:
+			'Google DeepMind have violated the promises they made to the UK government. They need to be held accountable.',
 		image: 'https://dummyimage.com/400x200/ccc/000.png&text=Campaign+2',
 		url: '/deepmind-promises-campaign',
 		isCurrent: true
@@ -19,9 +20,17 @@ export const campaigns: Campaign[] = [
 	{
 		title: "OpenAI's Potential Breach of Bioweapons Laws",
 		description:
-			"OpenAI's release of ChatGPT agent may have violated Australia's bioweapons laws, as their own safety testing classified the model as having 'high' biological and chemical capabilities. As these capabilities could aid novices in the creation of bioweapons, we filed a report with the Australia Federal Police on the matter.",
+			"ChatGPT agent may have violated Australia's bioweapons laws, so we filed a report with the Australia Federal Police.",
 		image: 'https://dummyimage.com/400x200/ccc/000.png&text=Campaign+3',
 		url: '/openai-breach-bioweapons',
+		isCurrent: false
+	},
+	{
+		title: 'SB 53',
+		description:
+			'This bill is among the most ambitious AI safety bills in the US, but it might not go into effect till 2030.',
+		image: 'https://dummyimage.com/400x200/ccc/000.png&text=Campaign+4',
+		url: '/sb-53',
 		isCurrent: false
 	}
 ]
