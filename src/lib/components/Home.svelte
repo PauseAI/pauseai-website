@@ -4,6 +4,7 @@
 	import QuotesCarousel from '$lib/components/QuotesCarousel.svelte'
 	import Stats from '$lib/components/Stats.svelte'
 	import * as m from '$lib/paraglide/messages.js'
+	import CampaignsCarousel from '$lib/components/CampaignsCarousel.svelte'
 
 	const title = 'We need to Pause AI'
 	const description = 'We are risking human extinction. We need to pause AI development, right now.'
@@ -45,6 +46,8 @@
 		{m.home_action_content()}
 	</Block>
 </section>
+
+<CampaignsCarousel />
 
 <style>
 	.divider {
