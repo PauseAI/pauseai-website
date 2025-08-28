@@ -18,7 +18,7 @@
 	export { className as class }
 	export let hideIcon = false
 
-	const ICON_PROPS = { size: '0.8em' }
+	const ICON_PROPS = { size: '0.7em' }
 
 	let type = Type.Internal
 	let anchor: HTMLAnchorElement
