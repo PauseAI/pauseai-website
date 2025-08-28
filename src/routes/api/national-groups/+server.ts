@@ -1,6 +1,7 @@
 import type { AirtableNationalGroup, NationalGroup } from '$lib/types.js'
 import { json } from '@sveltejs/kit'
 import { fetchAllPages, type AirtableRecord } from '$lib/airtable.js'
+import { generateCacheControlRecord } from '$lib/utils'
 
 const AIRTABLE_URL = 'https://api.airtable.com/v0/appWPTGqZmUcs3NWu/tblCwP5K6ENpR5qrd'
 
@@ -93,9 +94,7 @@ function recordToNationalGroup(record: AirtableRecord<AirtableNationalGroup>): N
 }
 
 export async function GET({ fetch, setHeaders }) {
-	setHeaders({
-		'cache-control': 'public, max-age=3600' // 1 hour in seconds
-	})
+	setHeaders(generateCacheControlRecord({ public: true, maxAge: 60 * 60 }))
 
 	const records = await fetchAllPages<AirtableNationalGroup>(
 		fetch,

@@ -97,5 +97,13 @@
 	"newsletter_loading": "Loading...",
 	"uk_email_mp_title": "Email Your MP",
 	"uk_email_mp_description": "Contact your Member of Parliament about AI safety",
-	"uk_email_mp_uk_only_notice": "<b>This tool is for the UK only.</b> For other countries, use the [global email builder](/email-builder)."
+	"uk_email_mp_uk_only_notice": "<b>This tool is for the UK only.</b> For other countries, use the [global email builder](/email-builder).",
+	"learn_risks": "[Risks](/risks). A summary of the risks of AI.",
+	"learn_xrisk": "[X-risk](/xrisk). Why AI is an existential risk.",
+	"learn_ai_takeover": "[Takeover](/ai-takeover). How AI could take over the world.",
+	"learn_quotes": "[Quotes](/quotes). Quotes on AI risks and governance.",
+	"learn_feasibility": "[Feasibility of a Pause](/feasibility). The feasibility of a pause in AI development.",
+	"learn_building_the_pause_button": "[Building the Pause button](/building-the-pause-button). What it takes to pause AI.",
+	"learn_faq": "[FAQ](/faq). Commonly asked questions about AI safety and PauseAI.",
+	"learn_action": "[Action](/action). What you can do to help (with links to many action-related guides)"
 }

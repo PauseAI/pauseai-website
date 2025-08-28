@@ -13,6 +13,8 @@
 
 	export let data
 
+	const LOCATED_ZOOM = 4
+
 	let { title, description, date } = communitiesMeta
 
 	let map: maplibregl.Map
@@ -54,7 +56,11 @@
 	onMount(async () => {
 		await fetchUserLocation()
 
-		const initialState = { lng: userLng || lng, lat: userLat || lat, zoom: zoom }
+		const initialState = {
+			lng: userLng || lng,
+			lat: userLat || lat,
+			zoom: userLat && userLng ? LOCATED_ZOOM : zoom
+		}
 
 		map = new Map({
 			container: mapContainer,

@@ -4,17 +4,18 @@ import dotenv from 'dotenv'
 import fs from 'fs'
 import path from 'path'
 import { defineConfig } from 'vite'
+import lucidePreprocess from 'vite-plugin-lucide-preprocess'
+import { importRuntimeWithoutVite } from './scripts/l10n/utils'
 import { isDev } from './src/lib/env'
 import { MARKDOWN_L10NS } from './src/lib/l10n'
-import { importRuntimeWithoutVite } from './scripts/l10n/utils'
 
 const { locales: compiledLocales } = await importRuntimeWithoutVite()
 
 function getLocaleExcludePatterns(): RegExp[] {
 	const md = path.resolve(MARKDOWN_L10NS)
-	const reposLocales = fs
-		.readdirSync(md)
-		.filter((item) => fs.statSync(path.join(md, item)).isDirectory())
+	const reposLocales = fs.existsSync(md)
+		? fs.readdirSync(md).filter((item) => fs.statSync(path.join(md, item)).isDirectory())
+		: [] // the directory may not exist when running tests
 	//  console.debug(`📁 Locale directories found in repos: ${reposLocales.join(', ')}`)
 	const locales: readonly string[] = compiledLocales
 	const toExclude = reposLocales.filter((locale) => !locales.includes(locale))
@@ -64,6 +65,6 @@ export default defineConfig(() => {
 				external: getLocaleExcludePatterns()
 			}
 		} as const,
-		plugins: [enhancedImages(), sveltekit()]
+		plugins: [lucidePreprocess(), enhancedImages(), sveltekit()]
 	}
 })

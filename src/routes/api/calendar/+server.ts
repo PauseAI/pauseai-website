@@ -1,4 +1,6 @@
 import * as luma from '$lib/clients/luma'
+import { generateCacheControlRecord } from '$lib/utils.js'
+import { json } from '@sveltejs/kit'
 
 export type CalendarResponse = {
 	entries: {
@@ -9,8 +11,8 @@ export type CalendarResponse = {
 export type Event = {
 	name: string
 	url: string
-	geo_latitude: string | null
-	geo_longitude: string | null
+	geo_latitude: number | undefined
+	geo_longitude: number | undefined
 	start_at: Date
 }
 
@@ -29,14 +31,12 @@ export async function GET({ setHeaders }) {
 			event: {
 				name: entry.event.name,
 				url: entry.event.url,
-				geo_latitude: entry.event.geo_latitude,
-				geo_longitude: entry.event.geo_longitude,
+				geo_latitude: entry.event.coordinate?.latitude,
+				geo_longitude: entry.event.coordinate?.longitude,
 				start_at: entry.event.start_at
 			}
 		}))
 	}
-	setHeaders({
-		'cache-control': 'public, max-age=3600' // 1 hour in seconds
-	})
-	return new Response(JSON.stringify(response))
+	setHeaders(generateCacheControlRecord({ public: true, maxAge: 60 * 60 }))
+	return json(response)
 }

@@ -54,7 +54,14 @@ export default ts.config(
 					destructuredArrayIgnorePattern: '^_'
 				}
 			],
-			'svelte/require-each-key': 'off'
+			'svelte/require-each-key': 'off',
+			'svelte/no-restricted-html-elements': [
+				'warn',
+				{
+					elements: ['a'],
+					message: 'Use $lib/components/custom/a.svelte instead'
+				}
+			]
 		}
 	},
 	globalIgnores([

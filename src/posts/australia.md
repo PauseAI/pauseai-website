@@ -22,6 +22,13 @@ Artificial Intelligence is advancing [at an astonishing rate](/urgency). Some ex
 
 Sure. Artificial Intelligence already has the potential to be a powerful tool. If AI remains under control, it could be used to cure diseases, drive scientific breakthroughs, and spread opportunity and wellbeing. But it would be tragic to achieve these advances only to then [lose control](/ai-takeover) and suffer catastrophic losses.
 
+> "We seem to be assuming AI will neatly fit into a benign pattern. That
+> assumption only holds to the extent AI is analogous with most of what has come before. And in the circumstances, we’d be wise to examine it far more rigorously before settling on it because there are good reasons to suppose it is a different species altogether, for which history is a poor guide."
+>
+> – Waleed Aly
+>
+> [The Age](https://www.theage.com.au/politics/federal/the-treasurer-is-telling-us-to-stay-calm-but-this-could-be-the-time-to-panic-20250807-p5ml5k.html)
+
 New technologies have always brought change, but humans need time to adjust, safeguard, and plan for the future. For any other technology—whether aeroplanes, skyscrapers, or new medications—we insist on expertly designed safety measures before exposing the public to risks. This is not happening with AI.
 
 AI companies are in a race, fueled by billions of dollars of investment, to build superhuman AI first. When one company succeededs, your life and that of your loved ones will become radically different, and you won't have any say in what this future holds. This isn't just a tech issue— it will affect everyone.

@@ -117,7 +117,6 @@
 	.note {
 		font-size: 0.85rem;
 		margin-top: 0.5rem;
-		opacity: 0.8;
 		font-style: italic;
 	}
 

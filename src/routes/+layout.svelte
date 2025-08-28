@@ -46,11 +46,12 @@
 
 <NearbyEvent contrast={hero} bind:eventFound bind:geo />
 {#if !eventFound}
-	{#if geo?.country?.code === 'US' && false}
+	{#if geo?.country?.code === 'US' && geo?.subdivision?.code === 'CA' && false}
 		<Banner>
 			<b
-				>ONE MORE REPUBLICAN NEEDED TO PROTECT STATE SOVEREIGNTY ON AI REGULATION | <ExternalLink
-					href="https://x.com/pauseaius/status/1939144759354003594">ACT NOW »</ExternalLink
+				>HELP US SAVE CALIFORNIA'S AI SAFETY BILL BEFORE WEDNESDAY | <ExternalLink
+					href="https://mailchi.mp/b8cf67a40299/join-us-tomorrow-for-our-fast-action-workshop-17457535"
+					>ACT NOW »</ExternalLink
 				></b
 			>
 		</Banner>

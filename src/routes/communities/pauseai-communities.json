@@ -404,7 +404,7 @@
 		},
 		{
 			"name": "Freiburg",
-			"lat": 48.0,
+			"lat": 48,
 			"lon": 7.8333,
 			"link": "$$DISCORD_GLOBAL$$"
 		},
@@ -436,6 +436,12 @@
 			"name": "Canberra",
 			"lat": -35.2809,
 			"lon": 149.13,
+			"link": "$$DISCORD_GLOBAL$$"
+		},
+		{
+			"name": "Launceston",
+			"lat": -41.433349,
+			"lon": 147.123323,
 			"link": "$$DISCORD_GLOBAL$$"
 		}
 	]

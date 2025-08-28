@@ -5,20 +5,25 @@ description: Educational resources (videos, articles, books) about AI risks and 
 
 <script>
 import NewsletterSignup from '$lib/components/NewsletterSignup.svelte';
+import IconBullets from '$lib/components/IconBullets.svelte'
+import * as m from '$lib/paraglide/messages'
+import { CirclePause, CircleQuestionMark, Cog, Earth, Footprints, MessageSquareQuote, Skull, TriangleAlert } from 'lucide-svelte';
 </script>
 
 <NewsletterSignup />
 
 ## On this website
 
-- [Risks](/risks). A summary of the risks of AI.
-- [X-risk](/xrisk). Why AI is an existential risk.
-- [Takeover](/ai-takeover). How AI could take over the world.
-- [Quotes](/quotes). Quotes on AI risks and governance.
-- [Feasibility of a Pause](/feasibility). The feasibility of a pause in AI development.
-- [Building the Pause button](/building-the-pause-button). What it takes to pause AI.
-- [FAQ](/faq). Commonly asked questions about AI safety and PauseAI.
-- [Action](/action). What you can do to help (with links to many action-related guides)
+<IconBullets items={[
+[TriangleAlert, m.learn_risks],
+[Skull, m.learn_xrisk],
+[Earth, m.learn_ai_takeover],
+[MessageSquareQuote, m.learn_quotes],
+[Cog, m.learn_feasibility],
+[CirclePause, m.learn_building_the_pause_button],
+[CircleQuestionMark, m.learn_faq],
+[Footprints, m.learn_action],
+]} />
 
 ## Other websites
 
