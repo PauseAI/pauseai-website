@@ -20,6 +20,7 @@
 	import * as m from '$lib/paraglide/messages'
 	import Link from '$lib/components/custom/a.svelte'
 
+	const MOBILE_NAVIGATION_DISTANCE_THRESHOLD = 10
 	const AUTOPLAY_INTERVAL = 10_000
 
 	let glide: Glide
@@ -67,20 +68,53 @@
 	const totalSlides = quotes.length
 
 	onMount(() => {
-		setTimeout(() => {
-			glide = new Glide('.quotes-carousel', {
-				autoplay: AUTOPLAY_INTERVAL,
-				perView: 1
-			}).mount({ Controls, Images, Keyboard, Swipe, Autoplay })
+		glide = new Glide('.glide', {
+			autoplay: AUTOPLAY_INTERVAL
+		}).mount({ Controls, Images, Keyboard, Swipe, Autoplay })
+		currentSlide = glide.index
+		glide.on('move', () => {
 			currentSlide = glide.index
-			glide.on('move', () => {
-				currentSlide = glide.index
-			})
-		}, 100)
+		})
+		registerMobileNavigation()
 	})
+
+	type ClientCoordinates = { clientX: number; clientY: number }
+	let interactionStart: ClientCoordinates | null = null
+
+	function registerMobileNavigation() {
+		addEventListener('touchstart', (event) => (interactionStart = event.changedTouches[0]))
+		addEventListener('mousedown', (event) => (interactionStart = event))
+
+		const touchNavigationButtons = document.getElementsByClassName(
+			'touch-navigation'
+		) as HTMLCollectionOf<HTMLElement>
+		window.addEventListener('click', (event) => {
+			if (!interactionStart) return
+			for (const touchNavigationButton of touchNavigationButtons) {
+				const boundingClientRect = touchNavigationButton.getBoundingClientRect()
+				if (
+					isInside(event, boundingClientRect) &&
+					calculateDistance(interactionStart, event) <= MOBILE_NAVIGATION_DISTANCE_THRESHOLD
+				) {
+					// HTMLElement#click bubbles, leading to recursion
+					return touchNavigationButton.dispatchEvent(new Event('click'))
+				}
+			}
+		})
+	}
+
+	function isInside({ clientX, clientY }: ClientCoordinates, rect: DOMRect) {
+		return (
+			clientX >= rect.left && clientX <= rect.right && clientY >= rect.top && clientY <= rect.bottom
+		)
+	}
+
+	function calculateDistance(from: ClientCoordinates, to: ClientCoordinates) {
+		return Math.hypot(to.clientX - from.clientX, to.clientY - from.clientY)
+	}
 </script>
 
-<div class="glide quotes-carousel">
+<div class="glide">
 	<div class="glide__track" data-glide-el="track">
 		<ul class="glide__slides">
 			{#each quotes as quote}
@@ -91,6 +125,8 @@
 				</li>
 			{/each}
 		</ul>
+		<button class="reset-button touch-navigation left" on:click={() => glide.go('<')} />
+		<button class="reset-button touch-navigation right" on:click={() => glide.go('>')} />
 	</div>
 	<div class="navigation" data-glide-el="controls">
 		<button class="nav-button" data-glide-dir="<"><ArrowLeft size="1em" /></button>
@@ -114,6 +150,22 @@
 
 	.glide__slides {
 		overflow: unset;
+	}
+
+	.touch-navigation {
+		position: absolute;
+		top: 0;
+		width: 33%;
+		height: 100%;
+		pointer-events: none;
+	}
+
+	.touch-navigation.left {
+		left: 0;
+	}
+
+	.touch-navigation.right {
+		right: 0;
 	}
 
 	.navigation {
