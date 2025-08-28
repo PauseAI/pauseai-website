@@ -6,30 +6,34 @@
 	const { title, description, image, url, isCurrent } = campaign
 </script>
 
-<div class="card">
+<a href={url} class="card">
 	<img src={image} alt={title} />
 	<div class="card-content">
 		<h2>{title}</h2>
 		<p>{description}</p>
-		<a href={url} class="cta-button">Visit Campaign</a>
+		<div class="cta-button">Visit Campaign</div>
 	</div>
-</div>
+</a>
 
 <style>
 	.card {
 		background-color: var(--bg-secondary);
 		border-radius: 16px;
 		box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
-		transition: transform 0.3s ease-in-out;
+		transition:
+			transform 0.1s ease-in-out,
+			outline-color 0.1s ease-in-out;
 		display: flex;
 		flex-direction: column;
 		height: 100%;
 		max-width: 400px;
 		margin: 0 auto;
+		text-decoration: none;
+		outline: 2px solid transparent;
 	}
 
 	.card:hover {
-		transform: translateY(-10px);
+		outline-color: var(--brand);
 	}
 
 	img {
@@ -49,15 +53,15 @@
 
 	h2 {
 		font-family: var(--font-heading);
-		font-size: 1.8rem;
+		/*font-size: 1.8rem;*/
 		margin: 0 0 1rem 0;
 		color: var(--text);
 	}
 
 	p {
 		font-family: var(--font-body);
-		font-size: 1.1rem;
-		line-height: 1.6;
+		/*font-size: 1.1rem;*/
+		/*line-height: 1.6;*/
 		margin: 0 0 2rem 0;
 		color: var(--text-subtle);
 		flex-grow: 1;

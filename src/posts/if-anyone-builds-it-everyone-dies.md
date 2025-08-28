@@ -3,6 +3,8 @@ title: If Anyone Builds It, Everyone Dies - PauseAI Campaign
 description: PauseAI will be hosting book readings across 10+ cities around the world, and turning the public's concern into action.
 ---
 
+[_See all campaigns_](/campaigns)
+
 Eliezer Yudkowsky's and Nate Soares' [book](https://ifanyonebuildsit.com/) is set to kick off a renewed public discussion on the extinction threat posed by AI.
 PauseAI will be hosting book readings across 10+ cities around the world, and turning the public's concern into action.
 
