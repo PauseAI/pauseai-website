@@ -3,7 +3,7 @@
 
 	export let campaign: Campaign
 
-	const { title, description, image, url, isCurrent } = campaign
+	const { title, description, image, url } = campaign
 </script>
 
 <a href={url} class="card">
