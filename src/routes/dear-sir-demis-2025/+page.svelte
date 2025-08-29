@@ -1145,20 +1145,59 @@
 			font-size: 2rem;
 		}
 
+		.letter-container {
+			padding: 0 1rem;
+		}
+
 		.letter-content {
-			padding: 3rem 2rem;
-			border-radius: 24px;
+			padding: 2rem 1.25rem;
+			border-radius: 16px;
 		}
+
 		.letter-header-info {
-			padding: 1.5rem;
-			gap: 2rem;
+			padding: 1.25rem;
+			gap: 1.5rem;
 		}
+
+		.letter-body {
+			padding: 0.5rem 0;
+		}
+
+		.letter-body p {
+			margin-bottom: 1rem;
+			font-size: 0.95rem;
+		}
+
 		.commitments {
-			padding: 2rem;
+			padding: 1.25rem;
+			margin: 1.5rem 0;
 		}
+
+		.commitments li {
+			padding-left: 1.75rem;
+		}
+
 		.emphasis {
-			padding: 1.5rem;
-			font-size: 1.05rem;
+			padding: 1.25rem;
+			font-size: 1rem;
+			margin: 1.5rem 0;
+		}
+
+		.demands {
+			padding: 1.5rem 1rem;
+			margin: 1.5rem 0;
+		}
+
+		.demands li {
+			padding-left: 2.25rem;
+			font-size: 0.95rem;
+			margin-bottom: 1.25rem;
+		}
+
+		.demands li::before {
+			width: 1.75rem;
+			height: 1.75rem;
+			font-size: 0.9rem;
 		}
 
 		.signatories-grid {
@@ -1605,6 +1644,70 @@
 
 		.contact-text {
 			font-size: 0.85rem;
+		}
+	}
+
+	/* Extra small screens (phones in portrait) */
+	@media (max-width: 480px) {
+		.letter-container {
+			padding: 0 0.75rem;
+		}
+
+		.letter-content {
+			padding: 1.5rem 1rem;
+			border-radius: 12px;
+		}
+
+		.letter-header-info {
+			flex-direction: column;
+			gap: 1rem;
+			padding: 1rem;
+		}
+
+		.letter-body {
+			font-size: 0.9rem;
+		}
+
+		.commitments {
+			padding: 1rem;
+		}
+
+		.commitments li {
+			padding-left: 1.5rem;
+			font-size: 0.9rem;
+		}
+
+		.commitments li::before {
+			width: 1.5rem;
+			height: 1.5rem;
+			font-size: 0.8rem;
+		}
+
+		.demands {
+			padding: 1.25rem 0.75rem;
+		}
+
+		.demands p {
+			font-size: 0.95rem;
+		}
+
+		.demands li {
+			padding-left: 2rem;
+			font-size: 0.9rem;
+			margin-bottom: 1rem;
+			line-height: 1.6;
+		}
+
+		.demands li::before {
+			width: 1.5rem;
+			height: 1.5rem;
+			font-size: 0.85rem;
+			top: 0.1rem;
+		}
+
+		.emphasis {
+			padding: 1rem;
+			font-size: 0.95rem;
 		}
 	}
 </style>
