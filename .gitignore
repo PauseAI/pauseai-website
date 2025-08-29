@@ -25,3 +25,4 @@ deno.lock
 /src/temp
 /l10n-cage
 
+/static/open-letter/portraits/original
