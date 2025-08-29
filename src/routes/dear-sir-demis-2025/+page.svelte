@@ -54,14 +54,15 @@
 	)
 
 	// Map organization names to their logo files (theme-aware)
-	$: getOrganizationLogo = (name: string): string | undefined => {
-		const logos = {
-			'Open Rights Group': `/open-letter/civil_society_logos/${$theme === 'dark' ? 'white' : 'black'}/open_rights_group.png`,
-			'Connected by Data': `/open-letter/civil_society_logos/${$theme === 'dark' ? 'white' : 'black'}/connected_by_data.png`,
-			'Open Data Manchester': `/open-letter/civil_society_logos/${$theme === 'dark' ? 'white' : 'black'}/open_data_manchester.png`,
-			'Safe AI for Children Alliance': `/open-letter/civil_society_logos/${$theme === 'dark' ? 'white' : 'black'}/safe_ai_for_children_alliance.png`
-		} as const
-		return logos[name as keyof typeof logos]
+	$: organizationLogos = {
+		'Open Rights Group': `/open-letter/civil_society_logos/${$theme === 'dark' ? 'white' : 'black'}/open_rights_group.png`,
+		'Connected by Data': `/open-letter/civil_society_logos/${$theme === 'dark' ? 'white' : 'black'}/connected_by_data.png`,
+		'Open Data Manchester': `/open-letter/civil_society_logos/${$theme === 'dark' ? 'white' : 'black'}/open_data_manchester.png`,
+		'Safe AI for Children Alliance': `/open-letter/civil_society_logos/${$theme === 'dark' ? 'white' : 'black'}/safe_ai_for_children_alliance.png`
+	} as const
+
+	function getOrganizationLogo(name: string): string | undefined {
+		return organizationLogos[name as keyof typeof organizationLogos]
 	}
 
 	function getOrganizationWebsite(name: string): string {
