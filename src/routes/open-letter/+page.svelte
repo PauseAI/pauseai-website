@@ -3,16 +3,12 @@
 	import { meta } from './meta'
 	import SignatoryCard from './SignatoryCard.svelte'
 	import QuoteHighlight from './QuoteHighlight.svelte'
+	import ExternalLink from '$lib/components/custom/a.svelte'
 
 	export let data
 
 	const { signatories } = data
 
-	// Organization interface
-	type Organization = {
-		name: string
-		type: string
-	}
 	const { title, description, date } = meta
 
 	// Separate parliamentarians from organizations (excluding PauseAI)
@@ -121,7 +117,6 @@
 
 <PostMeta {title} {description} {date} />
 
-<!-- svelte-ignore a11y-unknown-attribute -->
 <!-- @ts-ignore -->
 <svelte:element this="div" color-scheme="dark" style="display: contents">
 	<article class="open-letter">
@@ -305,10 +300,8 @@
 				<div class="organizations-subsection">
 					<div class="organizations-grid">
 						{#each organizations as org}
-							<a
+							<ExternalLink
 								href={organizationWebsites[org.name] || '#'}
-								target="_blank"
-								rel="noopener noreferrer"
 								class="organization-card organization-link"
 							>
 								{#if organizationLogos[org.name]}
@@ -321,7 +314,7 @@
 								{:else}
 									<div class="organization-name">{org.name}</div>
 								{/if}
-							</a>
+							</ExternalLink>
 						{/each}
 					</div>
 				</div>
@@ -340,9 +333,8 @@
 						</p>
 					</div>
 					<div class="pdf-link-container">
-						<a
+						<ExternalLink
 							href="/pdfs/PauseAI_Open_Letter_Background_Information.pdf"
-							target="_blank"
 							class="pdf-thumbnail"
 						>
 							<img
@@ -353,7 +345,7 @@
 							<div class="pdf-info">
 								<span class="pdf-title">Background Information</span>
 							</div>
-						</a>
+						</ExternalLink>
 					</div>
 				</div>
 			</div>
@@ -369,10 +361,10 @@
 						Hassabis, calling for transparency in Google DeepMind's AI safety commitments.
 					</p>
 					<div class="campaign-cta">
-						<a href="/uk-email-mp" class="cta-button">
+						<ExternalLink href="/uk-email-mp" class="cta-button">
 							<span class="cta-text">Email Your MP</span>
 							<span class="cta-subtitle">Ask them to sign the letter</span>
-						</a>
+						</ExternalLink>
 					</div>
 				</div>
 			</div>
