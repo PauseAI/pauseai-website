@@ -60,42 +60,63 @@
 
 <style>
 	.signatory-card {
-		background: var(--bg);
-		border-radius: 8px;
-		padding: 1rem;
-		border: 1px solid var(--border-color);
-		transition: all 0.2s ease;
+		background: rgba(255, 255, 255, 0.05);
+		backdrop-filter: blur(10px);
+		border-radius: 20px;
+		padding: 1.25rem 0.75rem;
+		border: 1px solid rgba(255, 255, 255, 0.1);
+		transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 		display: flex;
 		flex-direction: column;
 		align-items: center;
 		text-align: center;
 		position: relative;
+		min-height: 200px;
+		overflow: hidden;
+	}
+
+	.signatory-card::before {
+		content: '';
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		background: radial-gradient(circle at center, rgba(255, 255, 255, 0.05) 0%, transparent 70%);
+		opacity: 0;
+		transition: opacity 0.3s ease;
 	}
 
 	.signatory-card:hover {
 		transform: translateY(-2px);
-		box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+		box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
 		border-color: var(--brand);
+		background: rgba(255, 255, 255, 0.08);
+	}
+
+	.signatory-card:hover::before {
+		opacity: 1;
 	}
 
 	.portrait-container,
 	.portrait-placeholder {
 		position: relative;
-		margin-bottom: 1rem;
+		margin-bottom: 0.5rem;
 	}
 
 	.portrait {
-		width: 150px;
-		height: 150px;
+		width: 140px;
+		height: 140px;
 		border-radius: 50%;
 		object-fit: cover;
+		box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
 	}
 
 	.portrait-placeholder {
-		width: 150px;
-		height: 150px;
+		width: 140px;
+		height: 140px;
 		border-radius: 50%;
-		background: var(--bg-subtle);
+		background: rgba(255, 255, 255, 0.1);
 		display: flex;
 		align-items: center;
 		justify-content: center;
@@ -103,8 +124,8 @@
 
 	.initials {
 		font-weight: bold;
-		font-size: 2.5rem;
-		color: var(--text-muted);
+		font-size: 2.2rem;
+		color: rgba(255, 255, 255, 0.7);
 	}
 
 	.details {
@@ -112,40 +133,51 @@
 		display: flex;
 		flex-direction: column;
 		align-items: center;
-		gap: 0.25rem;
+		justify-content: center;
+		gap: 0.5rem;
+		margin-top: auto;
+		padding-top: 0.5rem;
 	}
 
 	.name {
 		margin: 0;
-		font-size: 1rem;
+		font-size: 0.95rem;
 		font-weight: 600;
-		color: var(--text);
+		color: white;
 		line-height: 1.3;
 	}
 
 	.type {
-		font-size: 0.85rem;
-		color: var(--text-muted);
+		font-size: 0.8rem;
+		color: var(--brand);
 		font-weight: 500;
+		letter-spacing: 0.05em;
+		opacity: 0.9;
 	}
 
 	@media (max-width: 600px) {
+		.signatory-card {
+			padding: 1rem 0.5rem;
+			min-height: 180px;
+		}
+
 		.portrait,
 		.portrait-placeholder {
-			width: 100px;
-			height: 100px;
+			width: 90px;
+			height: 90px;
+			margin-bottom: 0.4rem;
 		}
 
 		.initials {
-			font-size: 1.8rem;
+			font-size: 1.6rem;
 		}
 
 		.name {
-			font-size: 0.9rem;
+			font-size: 0.85rem;
 		}
 
 		.type {
-			font-size: 0.8rem;
+			font-size: 0.7rem;
 		}
 	}
 </style>

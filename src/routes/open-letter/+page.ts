@@ -3,7 +3,7 @@ import type { PageLoad } from './$types'
 export const load: PageLoad = async ({ fetch }) => {
 	try {
 		// Load the signatories data from our static JSON file
-		const response = await fetch('/open-letter/portraits/signatories/signatories-square.json')
+		const response = await fetch('/open-letter/signatories-square.json')
 		const signatories = await response.json()
 
 		// Filter only successful signatories with portraits or organizations

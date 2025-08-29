@@ -23,9 +23,6 @@
 			</blockquote>
 			<cite class="quote-attribution">
 				<span class="name">{quote.name}</span>
-				{#if quote.title}
-					<span class="title">{quote.title}</span>
-				{/if}
 			</cite>
 		</div>
 	</div>
@@ -39,6 +36,9 @@
 		transition: all 0.3s ease;
 		box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
 		border: 1px solid var(--border-color);
+		height: 100%;
+		display: flex;
+		flex-direction: column;
 	}
 
 	.quote-highlight:hover {
@@ -52,6 +52,7 @@
 		align-items: flex-start;
 		gap: 1.25rem;
 		padding: 1.5rem;
+		flex: 1;
 	}
 
 	.portrait-container {
