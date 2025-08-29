@@ -89,7 +89,7 @@ const signatories = [
 ]
 
 // Function to check image size before downloading
-function checkImageSize(url) {
+function checkImageSize(/** @type {string} */ url) {
 	return new Promise((resolve) => {
 		https
 			.get(url, (res) => {
@@ -104,7 +104,7 @@ function checkImageSize(url) {
 }
 
 // Function to download image with better error handling
-function downloadImage(url, filepath) {
+function downloadImage(/** @type {string} */ url, /** @type {string} */ filepath) {
 	return new Promise((resolve, reject) => {
 		const file = fs.createWriteStream(filepath)
 		let downloadedSize = 0
@@ -144,7 +144,7 @@ function downloadImage(url, filepath) {
 }
 
 // Function to sanitize filename
-function sanitizeFilename(name) {
+function sanitizeFilename(/** @type {string} */ name) {
 	return name
 		.replace(/^(The Lord Bishop of |Lord |Lady |Baroness |Sir |Dr |Viscount )/i, '')
 		.replace(/ of .+$/, '')
@@ -154,7 +154,7 @@ function sanitizeFilename(name) {
 }
 
 // Function to fetch member data from Parliament API
-function fetchMemberData(name, chamber) {
+function fetchMemberData(/** @type {string} */ name, /** @type {string} */ chamber) {
 	return new Promise((resolve, reject) => {
 		const house = chamber === 'lords' ? '2' : '1'
 		const searchUrl = `https://members-api.parliament.uk/api/Members/Search?Name=${encodeURIComponent(name)}&House=${house}&skip=0&take=1`
@@ -298,13 +298,13 @@ async function main() {
 				// Add small delay to avoid rate limiting
 				await new Promise((resolve) => setTimeout(resolve, 200))
 			} catch (error) {
-				console.log(`✗ Error: ${error.message}`)
+				console.log(`✗ Error: ${error instanceof Error ? error.message : String(error)}`)
 				results.push({
 					name: signatory.name,
 					type: signatory.type,
 					portrait: null,
 					status: 'error',
-					error: error.message
+					error: error instanceof Error ? error.message : String(error)
 				})
 				errorCount++
 			}
