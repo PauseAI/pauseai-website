@@ -3,6 +3,7 @@
 	import { meta } from './meta'
 	import SignatoryCard from './SignatoryCard.svelte'
 	import QuoteHighlight from './QuoteHighlight.svelte'
+	import { theme } from '$lib/theme'
 
 	export let data
 
@@ -50,13 +51,12 @@
 		}
 	)
 
-	// Map organization names to their logo files and websites
-	const organizationLogos: Record<string, string> = {
-		'Open Rights Group': '/open-letter/civil_society_logos/open_rights_group.png',
-		'Connected by Data': '/open-letter/civil_society_logos/connected_by_data.png',
-		'Open Data Manchester': '/open-letter/civil_society_logos/open_data_manchester.png',
-		'Safe AI for Children Alliance':
-			'/open-letter/civil_society_logos/safe_ai_for_children_alliance.png'
+	// Map organization names to their logo files (theme-aware)
+	$: organizationLogos = {
+		'Open Rights Group': `/open-letter/civil_society_logos/${$theme === 'dark' ? 'white' : 'black'}/open_rights_group.png`,
+		'Connected by Data': `/open-letter/civil_society_logos/${$theme === 'dark' ? 'white' : 'black'}/connected_by_data.png`,
+		'Open Data Manchester': `/open-letter/civil_society_logos/${$theme === 'dark' ? 'white' : 'black'}/open_data_manchester.png`,
+		'Safe AI for Children Alliance': `/open-letter/civil_society_logos/${$theme === 'dark' ? 'white' : 'black'}/safe_ai_for_children_alliance.png`
 	}
 
 	const organizationWebsites: Record<string, string> = {
@@ -136,8 +136,8 @@
 					<div class="stat-label">Civil Society Organisations</div>
 				</div>
 				<div class="stat-card">
-					<div class="stat-number">5</div>
-					<div class="stat-label">Chambers</div>
+					<div class="stat-number">10+</div>
+					<div class="stat-label">Political Parties</div>
 				</div>
 				<div class="stat-card">
 					<div class="stat-number">60</div>
@@ -277,7 +277,7 @@
 		<div class="signatories-header">
 			<h2 class="signatories-title">
 				<span class="title-number">60</span>
-				<span class="title-text">Distinguished Signatories</span>
+				<span class="title-text">Signatories</span>
 			</h2>
 			<p class="signatories-subtitle">United in calling for AI safety transparency</p>
 		</div>
@@ -384,7 +384,7 @@
 		display: flex;
 		align-items: center;
 		justify-content: center;
-		background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+		background: linear-gradient(135deg, var(--bg-subtle) 0%, var(--bg) 100%);
 		overflow: hidden;
 	}
 
@@ -417,10 +417,24 @@
 		position: absolute;
 		inset: 0;
 		background-image:
-			linear-gradient(rgba(255, 138, 0, 0.03) 1px, transparent 1px),
-			linear-gradient(90deg, rgba(255, 138, 0, 0.03) 1px, transparent 1px);
+			linear-gradient(rgba(255, 138, 0, 0.1) 1px, transparent 1px),
+			linear-gradient(90deg, rgba(255, 138, 0, 0.1) 1px, transparent 1px);
 		background-size: 50px 50px;
 		animation: patternMove 60s linear infinite;
+	}
+
+	@media (prefers-color-scheme: light) {
+		.hero-pattern {
+			background-image:
+				linear-gradient(rgba(255, 138, 0, 0.15) 1px, transparent 1px),
+				linear-gradient(90deg, rgba(255, 138, 0, 0.15) 1px, transparent 1px);
+		}
+	}
+
+	[color-scheme='light'] .hero-pattern {
+		background-image:
+			linear-gradient(rgba(255, 138, 0, 0.15) 1px, transparent 1px),
+			linear-gradient(90deg, rgba(255, 138, 0, 0.15) 1px, transparent 1px);
 	}
 
 	@keyframes patternMove {
@@ -479,20 +493,36 @@
 	.hero-title {
 		font-size: clamp(2.5rem, 5vw, 4rem);
 		font-weight: 800;
-		background: linear-gradient(135deg, #ffffff 0%, #cccccc 100%);
-		-webkit-background-clip: text;
-		-webkit-text-fill-color: transparent;
-		background-clip: text;
+		color: var(--text);
 		margin-bottom: 1.5rem;
 		line-height: 1.2;
 	}
 
 	.hero-subtitle {
 		font-size: clamp(1.1rem, 2vw, 1.5rem);
-		color: rgba(255, 255, 255, 0.8);
+		color: var(--text);
+		opacity: 0.8;
 		max-width: 800px;
 		margin: 0 auto 3rem;
 		line-height: 1.6;
+	}
+
+	.hero-date {
+		font-size: 1.1rem;
+		color: var(--text) !important;
+		opacity: 0.7;
+		font-weight: 500;
+		margin-top: 2rem;
+	}
+
+	@media (prefers-color-scheme: light) {
+		.hero-date {
+			color: black !important;
+		}
+	}
+
+	[color-scheme='light'] .hero-date {
+		color: black !important;
 	}
 
 	.hero-stats {
@@ -504,21 +534,23 @@
 	}
 
 	.stat-card {
-		background: rgba(255, 255, 255, 0.05);
+		background: var(--bg);
 		backdrop-filter: blur(10px);
-		border: 1px solid rgba(255, 255, 255, 0.1);
+		border: 1px solid var(--brand);
 		border-radius: 16px;
 		padding: 1.5rem 2rem;
 		transition: all 0.3s ease;
 		min-width: 200px;
 		text-align: center;
 		flex: 1;
+		opacity: 0.9;
 	}
 
 	.stat-card:hover {
-		background: rgba(255, 255, 255, 0.08);
+		background: var(--bg-subtle);
 		transform: translateY(-5px);
 		box-shadow: 0 10px 30px rgba(255, 138, 0, 0.2);
+		opacity: 1;
 	}
 
 	.stat-number {
@@ -530,15 +562,10 @@
 
 	.stat-label {
 		font-size: 0.9rem;
-		color: rgba(255, 255, 255, 0.7);
+		color: var(--text);
+		opacity: 0.7;
 		text-transform: uppercase;
 		letter-spacing: 0.05em;
-	}
-
-	.hero-date {
-		font-size: 1rem;
-		color: rgba(255, 255, 255, 0.5);
-		margin-top: 2rem;
 	}
 
 	/* Letter Section */
@@ -548,7 +575,7 @@
 		display: flex;
 		align-items: center;
 		justify-content: center;
-		background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+		background: linear-gradient(135deg, var(--bg-subtle) 0%, var(--bg) 100%);
 		overflow: hidden;
 		padding: 8rem 0;
 	}
@@ -816,7 +843,7 @@
 		width: 2rem;
 		height: 2rem;
 		background: var(--brand);
-		color: white;
+		color: var(--text);
 		border-radius: 50%;
 		display: flex;
 		align-items: center;
@@ -837,7 +864,7 @@
 
 	/* Quotes Section */
 	.quotes-section {
-		background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);
+		background: linear-gradient(135deg, var(--bg-subtle) 0%, var(--bg) 100%);
 		padding: 5rem 0;
 		position: relative;
 		overflow: hidden;
@@ -878,7 +905,7 @@
 	.quotes-title {
 		font-size: clamp(2rem, 4vw, 3rem);
 		font-weight: 800;
-		color: white;
+		color: var(--text);
 	}
 
 	.quotes-grid {
@@ -926,7 +953,7 @@
 
 	/* Signatories Section */
 	.signatories-section {
-		background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);
+		background: linear-gradient(135deg, var(--bg-subtle) 0%, var(--bg) 100%);
 		padding: 4rem 0;
 		position: relative;
 		overflow: hidden;
@@ -972,12 +999,13 @@
 	.title-text {
 		font-size: clamp(2rem, 4vw, 3rem);
 		font-weight: 800;
-		color: white;
+		color: var(--text);
 	}
 
 	.signatories-subtitle {
 		font-size: 1.2rem;
-		color: rgba(255, 255, 255, 0.7);
+		color: var(--text);
+		opacity: 0.7;
 		margin: 0;
 	}
 
@@ -1086,7 +1114,7 @@
 	.organization-name {
 		font-weight: 600;
 		text-align: center;
-		color: white;
+		color: var(--text);
 		font-size: 1rem;
 		position: relative;
 		z-index: 1;
@@ -1208,7 +1236,7 @@
 
 	/* Background Section */
 	.background-section {
-		background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);
+		background: linear-gradient(135deg, var(--bg-subtle) 0%, var(--bg) 100%);
 		padding: 3rem 0;
 		position: relative;
 		overflow: hidden;
@@ -1248,14 +1276,15 @@
 		font-size: clamp(1.8rem, 3vw, 2.5rem);
 		font-weight: 800;
 		margin-bottom: 1rem;
-		color: white;
+		color: var(--text);
 	}
 
 	.background-description {
 		font-size: 1rem;
 		line-height: 1.6;
 		margin-bottom: 0;
-		color: rgba(255, 255, 255, 0.8);
+		color: var(--text);
+		opacity: 0.8;
 	}
 
 	.pdf-link-container {
@@ -1272,7 +1301,7 @@
 		background: rgba(255, 255, 255, 0.05);
 		backdrop-filter: blur(10px);
 		text-decoration: none;
-		color: white;
+		color: var(--text);
 		transition: all 0.3s ease;
 		width: 160px;
 		box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
@@ -1307,7 +1336,7 @@
 		font-weight: 700;
 		font-size: 0.9rem;
 		margin-bottom: 0.25rem;
-		color: white;
+		color: var(--text);
 	}
 
 	@media (max-width: 768px) {
@@ -1338,7 +1367,7 @@
 	/* Campaign Section */
 	.campaign-section {
 		background: linear-gradient(135deg, var(--brand) 0%, #ff6600 100%);
-		color: white;
+		color: var(--text);
 		padding: 3rem 0;
 		position: relative;
 		overflow: hidden;
@@ -1378,7 +1407,7 @@
 		font-size: clamp(1.8rem, 3vw, 2.5rem);
 		font-weight: 800;
 		margin-bottom: 1rem;
-		color: white;
+		color: var(--text);
 		text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 	}
 
@@ -1481,5 +1510,54 @@
 		font-weight: 600;
 		color: var(--text);
 		display: block;
+	}
+
+	/* Organization Cards */
+	.organization-card {
+		background: white;
+		border: 1px solid rgba(0, 0, 0, 0.1);
+		border-radius: 12px;
+		padding: 1.5rem;
+		text-decoration: none;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		transition: all 0.3s ease;
+		min-height: 120px;
+		box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+	}
+
+	@media (prefers-color-scheme: dark) {
+		.organization-card {
+			background: #1a1a1a;
+			border-color: rgba(255, 255, 255, 0.1);
+			box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+		}
+	}
+
+	[color-scheme='dark'] .organization-card {
+		background: #1a1a1a;
+		border-color: rgba(255, 255, 255, 0.1);
+		box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+	}
+
+	.organization-card:hover {
+		transform: translateY(-2px);
+		box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+		border-color: var(--brand);
+	}
+
+	.organization-logo {
+		max-width: 100%;
+		max-height: 60px;
+		height: auto;
+		object-fit: contain;
+	}
+
+	.organization-name {
+		font-weight: 600;
+		color: var(--text);
+		text-align: center;
+		line-height: 1.3;
 	}
 </style>
