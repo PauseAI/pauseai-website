@@ -1174,7 +1174,15 @@
 		}
 
 		.commitments li {
-			padding-left: 1.75rem;
+			padding-left: 0;
+			display: flex;
+			align-items: flex-start;
+			gap: 0.75rem;
+		}
+
+		.commitments li::before {
+			position: static;
+			flex-shrink: 0;
 		}
 
 		.emphasis {
@@ -1189,15 +1197,20 @@
 		}
 
 		.demands li {
-			padding-left: 2.25rem;
+			padding-left: 0;
 			font-size: 0.95rem;
 			margin-bottom: 1.25rem;
+			display: flex;
+			align-items: flex-start;
+			gap: 0.75rem;
 		}
 
 		.demands li::before {
+			position: static;
 			width: 1.75rem;
 			height: 1.75rem;
 			font-size: 0.9rem;
+			flex-shrink: 0;
 		}
 
 		.signatories-grid {
@@ -1673,14 +1686,19 @@
 		}
 
 		.commitments li {
-			padding-left: 1.5rem;
+			padding-left: 0;
 			font-size: 0.9rem;
+			display: flex;
+			align-items: flex-start;
+			gap: 0.5rem;
 		}
 
 		.commitments li::before {
+			position: static;
 			width: 1.5rem;
 			height: 1.5rem;
 			font-size: 0.8rem;
+			flex-shrink: 0;
 		}
 
 		.demands {
@@ -1692,17 +1710,21 @@
 		}
 
 		.demands li {
-			padding-left: 2rem;
+			padding-left: 0;
 			font-size: 0.9rem;
 			margin-bottom: 1rem;
 			line-height: 1.6;
+			display: flex;
+			align-items: flex-start;
+			gap: 0.5rem;
 		}
 
 		.demands li::before {
+			position: static;
 			width: 1.5rem;
 			height: 1.5rem;
 			font-size: 0.85rem;
-			top: 0.1rem;
+			flex-shrink: 0;
 		}
 
 		.emphasis {
