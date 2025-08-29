@@ -26,13 +26,15 @@
 		'Open Data Manchester'
 	]
 
-	const organizations = organizationsUnsorted.sort((a: { name: string }, b: { name: string }) => {
-		const aIndex = organizationOrder.indexOf(a.name)
-		const bIndex = organizationOrder.indexOf(b.name)
-		if (aIndex === -1) return 1
-		if (bIndex === -1) return -1
-		return aIndex - bIndex
-	})
+	const organizations: { name: string; type: string }[] = organizationsUnsorted.sort(
+		(a: { name: string }, b: { name: string }) => {
+			const aIndex = organizationOrder.indexOf(a.name)
+			const bIndex = organizationOrder.indexOf(b.name)
+			if (aIndex === -1) return 1
+			if (bIndex === -1) return -1
+			return aIndex - bIndex
+		}
+	)
 
 	// Sort parliamentarians alphabetically by last name (as in the PDF)
 	const sortedParliamentarians = parliamentarians.sort(
@@ -52,18 +54,25 @@
 	)
 
 	// Map organization names to their logo files (theme-aware)
-	$: organizationLogos = {
-		'Open Rights Group': `/open-letter/civil_society_logos/${$theme === 'dark' ? 'white' : 'black'}/open_rights_group.png`,
-		'Connected by Data': `/open-letter/civil_society_logos/${$theme === 'dark' ? 'white' : 'black'}/connected_by_data.png`,
-		'Open Data Manchester': `/open-letter/civil_society_logos/${$theme === 'dark' ? 'white' : 'black'}/open_data_manchester.png`,
-		'Safe AI for Children Alliance': `/open-letter/civil_society_logos/${$theme === 'dark' ? 'white' : 'black'}/safe_ai_for_children_alliance.png`
+	// Helper function to safely get organization data
+	function getOrganizationLogo(name: string): string | undefined {
+		const logos = {
+			'Open Rights Group': `/open-letter/civil_society_logos/${$theme === 'dark' ? 'white' : 'black'}/open_rights_group.png`,
+			'Connected by Data': `/open-letter/civil_society_logos/${$theme === 'dark' ? 'white' : 'black'}/connected_by_data.png`,
+			'Open Data Manchester': `/open-letter/civil_society_logos/${$theme === 'dark' ? 'white' : 'black'}/open_data_manchester.png`,
+			'Safe AI for Children Alliance': `/open-letter/civil_society_logos/${$theme === 'dark' ? 'white' : 'black'}/safe_ai_for_children_alliance.png`
+		} as const
+		return logos[name as keyof typeof logos]
 	}
 
-	const organizationWebsites: Record<string, string> = {
-		'Open Rights Group': 'https://www.openrightsgroup.org/',
-		'Connected by Data': 'https://connectedbydata.org/',
-		'Open Data Manchester': 'https://www.opendatamanchester.org.uk/',
-		'Safe AI for Children Alliance': 'https://www.safeaiforchildren.org/'
+	function getOrganizationWebsite(name: string): string {
+		const websites = {
+			'Open Rights Group': 'https://www.openrightsgroup.org/',
+			'Connected by Data': 'https://connectedbydata.org/',
+			'Open Data Manchester': 'https://www.opendatamanchester.org.uk/',
+			'Safe AI for Children Alliance': 'https://www.safeaiforchildren.org/'
+		} as const
+		return websites[name as keyof typeof websites] || '#'
 	}
 
 	// Selected quotes from signatories with their portraits
@@ -296,8 +305,8 @@
 			<div class="organizations-subsection">
 				<div class="organizations-grid">
 					{#each organizations as org}
-						{@const logoSrc = organizationLogos[org.name]}
-						{@const websiteUrl = organizationWebsites[org.name] || '#'}
+						{@const logoSrc = getOrganizationLogo(org.name)}
+						{@const websiteUrl = getOrganizationWebsite(org.name)}
 						<a
 							href={websiteUrl}
 							target="_blank"
