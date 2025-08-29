@@ -374,6 +374,17 @@
 			</div>
 		</div>
 	</section>
+
+	<!-- Contact Section -->
+	<section class="contact-section">
+		<div class="contact-container">
+			<p class="contact-text">
+				For enquiries contact <a href="mailto:joseph@pauseai.info" class="contact-link"
+					>Joseph Miller at joseph@pauseai.info</a
+				>
+			</p>
+		</div>
+	</section>
 </article>
 
 <style>
@@ -1549,5 +1560,51 @@
 		color: var(--text);
 		text-align: center;
 		line-height: 1.3;
+	}
+
+	/* Contact Section */
+	.contact-section {
+		background: var(--bg);
+		padding: 2rem 0;
+		border-top: 1px solid var(--brand);
+		opacity: 0.9;
+	}
+
+	.contact-container {
+		max-width: 1200px;
+		margin: 0 auto;
+		padding: 0 2rem;
+		text-align: center;
+	}
+
+	.contact-text {
+		font-size: 0.9rem;
+		color: var(--text);
+		opacity: 0.7;
+		margin: 0;
+	}
+
+	.contact-link {
+		color: var(--brand);
+		text-decoration: none;
+		font-weight: 500;
+	}
+
+	.contact-link:hover {
+		text-decoration: underline;
+	}
+
+	@media (max-width: 768px) {
+		.contact-section {
+			padding: 1.5rem 0;
+		}
+
+		.contact-container {
+			padding: 0 1rem;
+		}
+
+		.contact-text {
+			font-size: 0.85rem;
+		}
 	}
 </style>
