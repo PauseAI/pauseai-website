@@ -1,4 +1,4 @@
-export type Categories = 'sveltekit' | 'svelte'
+export type Categories = 'sveltekit' | 'svelte' | 'AI Safety' | 'Transparency' | 'Government'
 
 export type FrontmatterMeta = {
 	title: string
