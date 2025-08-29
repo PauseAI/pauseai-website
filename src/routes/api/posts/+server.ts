@@ -7,6 +7,7 @@ import { meta as quotesMeta } from '../../quotes/meta'
 import { meta as emailBuilderMeta } from '../../email-builder/meta'
 import { meta as teamsMeta } from '../../teams/meta'
 import { meta as statementMeta } from '../../statement/meta'
+import { meta as dearSirDemisMeta } from '../../dear-sir-demis-2025/meta'
 
 /** When adding an extra route, make sure to add the metadata here for SEO purposes */
 const hardCodedPages: Post[] = [
@@ -16,7 +17,8 @@ const hardCodedPages: Post[] = [
 	quotesMeta,
 	emailBuilderMeta,
 	teamsMeta,
-	statementMeta
+	statementMeta,
+	dearSirDemisMeta
 ]
 
 async function getPosts() {
