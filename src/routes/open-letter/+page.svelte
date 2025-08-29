@@ -3,7 +3,6 @@
 	import { meta } from './meta'
 	import SignatoryCard from './SignatoryCard.svelte'
 	import QuoteHighlight from './QuoteHighlight.svelte'
-	import ExternalLink from '$lib/components/custom/a.svelte'
 
 	export let data
 
@@ -300,8 +299,10 @@
 				<div class="organizations-subsection">
 					<div class="organizations-grid">
 						{#each organizations as org}
-							<ExternalLink
+							<a
 								href={organizationWebsites[org.name] || '#'}
+								target="_blank"
+								rel="noopener noreferrer"
 								class="organization-card organization-link"
 							>
 								{#if organizationLogos[org.name]}
@@ -314,7 +315,7 @@
 								{:else}
 									<div class="organization-name">{org.name}</div>
 								{/if}
-							</ExternalLink>
+							</a>
 						{/each}
 					</div>
 				</div>
@@ -333,8 +334,9 @@
 						</p>
 					</div>
 					<div class="pdf-link-container">
-						<ExternalLink
+						<a
 							href="/pdfs/PauseAI_Open_Letter_Background_Information.pdf"
+							target="_blank"
 							class="pdf-thumbnail"
 						>
 							<img
@@ -345,7 +347,7 @@
 							<div class="pdf-info">
 								<span class="pdf-title">Background Information</span>
 							</div>
-						</ExternalLink>
+						</a>
 					</div>
 				</div>
 			</div>
@@ -361,10 +363,10 @@
 						Hassabis, calling for transparency in Google DeepMind's AI safety commitments.
 					</p>
 					<div class="campaign-cta">
-						<ExternalLink href="/uk-email-mp" class="cta-button">
+						<a href="/uk-email-mp" class="cta-button">
 							<span class="cta-text">Email Your MP</span>
 							<span class="cta-subtitle">Ask them to sign the letter</span>
-						</ExternalLink>
+						</a>
 					</div>
 				</div>
 			</div>

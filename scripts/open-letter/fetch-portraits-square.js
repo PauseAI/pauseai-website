@@ -264,7 +264,7 @@ async function main() {
 								successCount++
 								downloaded = true
 								break
-							} catch (downloadErr) {
+							} catch {
 								// Try next option
 								continue
 							}
