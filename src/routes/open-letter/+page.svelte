@@ -296,19 +296,16 @@
 			<div class="organizations-subsection">
 				<div class="organizations-grid">
 					{#each organizations as org}
+						{@const logoSrc = organizationLogos[org.name]}
+						{@const websiteUrl = organizationWebsites[org.name] || '#'}
 						<a
-							href={organizationWebsites[org.name] || '#'}
+							href={websiteUrl}
 							target="_blank"
 							rel="noopener noreferrer"
 							class="organization-card organization-link"
 						>
-							{#if organizationLogos[org.name]}
-								<img
-									src={organizationLogos[org.name]}
-									alt="{org.name} logo"
-									class="organization-logo"
-									loading="lazy"
-								/>
+							{#if logoSrc}
+								<img src={logoSrc} alt="{org.name} logo" class="organization-logo" loading="lazy" />
 							{:else}
 								<div class="organization-name">{org.name}</div>
 							{/if}
@@ -431,12 +428,6 @@
 		}
 	}
 
-	[color-scheme='light'] .hero-pattern {
-		background-image:
-			linear-gradient(rgba(255, 138, 0, 0.15) 1px, transparent 1px),
-			linear-gradient(90deg, rgba(255, 138, 0, 0.15) 1px, transparent 1px);
-	}
-
 	@keyframes patternMove {
 		0% {
 			transform: translate(0, 0);
@@ -519,10 +510,6 @@
 		.hero-date {
 			color: black !important;
 		}
-	}
-
-	[color-scheme='light'] .hero-date {
-		color: black !important;
 	}
 
 	.hero-stats {
@@ -1533,12 +1520,6 @@
 			border-color: rgba(255, 255, 255, 0.1);
 			box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
 		}
-	}
-
-	[color-scheme='dark'] .organization-card {
-		background: #1a1a1a;
-		border-color: rgba(255, 255, 255, 0.1);
-		box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
 	}
 
 	.organization-card:hover {
