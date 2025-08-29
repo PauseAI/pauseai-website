@@ -109,12 +109,6 @@
 		font-style: normal;
 	}
 
-	.quote-attribution .title {
-		font-size: 0.85rem;
-		color: var(--text-muted);
-		font-style: normal;
-	}
-
 	@media (max-width: 768px) {
 		.quote-content {
 			padding: 1.25rem;
@@ -137,10 +131,6 @@
 
 		.quote-attribution .name {
 			font-size: 0.9rem;
-		}
-
-		.quote-attribution .title {
-			font-size: 0.8rem;
 		}
 	}
 

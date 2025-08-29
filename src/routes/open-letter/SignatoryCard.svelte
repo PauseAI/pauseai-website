@@ -9,7 +9,7 @@
 	}
 
 	// Determine the portrait path based on chamber and processed images
-	function getPortraitPath(signatory) {
+	function getPortraitPath(signatory: { portrait?: string }) {
 		if (!signatory.portrait) return null
 
 		// Convert from original path to processed path

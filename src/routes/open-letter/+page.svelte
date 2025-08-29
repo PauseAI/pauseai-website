@@ -7,12 +7,19 @@
 	export let data
 
 	const { signatories } = data
+
+	// Organization interface
+	type Organization = {
+		name: string
+		type: string
+	}
 	const { title, description, date } = meta
 
 	// Separate parliamentarians from organizations (excluding PauseAI)
-	const parliamentarians = signatories.filter((s) => s.type !== 'Organization')
+	const parliamentarians = signatories.filter((s: { type?: string }) => s.type !== 'Organization')
 	const organizationsUnsorted = signatories.filter(
-		(s) => s.type === 'Organization' && s.name !== 'PauseAI Global'
+		(s: { type?: string; name?: string }) =>
+			s.type === 'Organization' && s.name !== 'PauseAI Global'
 	)
 
 	// Custom order for organizations
@@ -23,7 +30,7 @@
 		'Open Data Manchester'
 	]
 
-	const organizations = organizationsUnsorted.sort((a, b) => {
+	const organizations = organizationsUnsorted.sort((a: { name: string }, b: { name: string }) => {
 		const aIndex = organizationOrder.indexOf(a.name)
 		const bIndex = organizationOrder.indexOf(b.name)
 		if (aIndex === -1) return 1
@@ -32,22 +39,24 @@
 	})
 
 	// Sort parliamentarians alphabetically by last name (as in the PDF)
-	const sortedParliamentarians = parliamentarians.sort((a, b) => {
-		const getLastName = (name) => {
-			// Handle titles and complex names
-			let cleanName = name
-				.replace(/^(Lord|Baroness|Right Revd Dr|Sir|Dame)\s+/, '')
-				.replace(/\s+(MC|TD|MP|MSP|MS|MLA)$/, '')
+	const sortedParliamentarians = parliamentarians.sort(
+		(a: { name: string }, b: { name: string }) => {
+			const getLastName = (name: string) => {
+				// Handle titles and complex names
+				let cleanName = name
+					.replace(/^(Lord|Baroness|Right Revd Dr|Sir|Dame)\s+/, '')
+					.replace(/\s+(MC|TD|MP|MSP|MS|MLA)$/, '')
 
-			const parts = cleanName.split(' ')
-			return parts[parts.length - 1].toLowerCase()
+				const parts = cleanName.split(' ')
+				return parts[parts.length - 1].toLowerCase()
+			}
+
+			return getLastName(a.name).localeCompare(getLastName(b.name))
 		}
-
-		return getLastName(a.name).localeCompare(getLastName(b.name))
-	})
+	)
 
 	// Map organization names to their logo files and websites
-	const organizationLogos = {
+	const organizationLogos: Record<string, string> = {
 		'Open Rights Group': '/open-letter/civil_society_logos/open_rights_group.png',
 		'Connected by Data': '/open-letter/civil_society_logos/connected_by_data.png',
 		'Open Data Manchester': '/open-letter/civil_society_logos/open_data_manchester.png',
@@ -55,7 +64,7 @@
 			'/open-letter/civil_society_logos/safe_ai_for_children_alliance.png'
 	}
 
-	const organizationWebsites = {
+	const organizationWebsites: Record<string, string> = {
 		'Open Rights Group': 'https://www.openrightsgroup.org/',
 		'Connected by Data': 'https://connectedbydata.org/',
 		'Open Data Manchester': 'https://www.opendatamanchester.org.uk/',
@@ -112,7 +121,9 @@
 
 <PostMeta {title} {description} {date} />
 
-<svelte:element this="div" color-scheme="dark">
+<!-- svelte-ignore a11y-unknown-attribute -->
+<!-- @ts-ignore -->
+<svelte:element this="div" color-scheme="dark" style="display: contents">
 	<article class="open-letter">
 		<!-- Hero Section -->
 		<section class="hero-section">
@@ -295,7 +306,7 @@
 					<div class="organizations-grid">
 						{#each organizations as org}
 							<a
-								href={organizationWebsites[org.name]}
+								href={organizationWebsites[org.name] || '#'}
 								target="_blank"
 								rel="noopener noreferrer"
 								class="organization-card organization-link"
@@ -1307,13 +1318,6 @@
 		font-size: 0.9rem;
 		margin-bottom: 0.25rem;
 		color: white;
-	}
-
-	.pdf-subtitle {
-		display: block;
-		font-size: 0.8rem;
-		color: rgba(255, 255, 255, 0.7);
-		font-weight: 500;
 	}
 
 	@media (max-width: 768px) {

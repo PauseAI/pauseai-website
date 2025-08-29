@@ -8,7 +8,8 @@ export const load: PageLoad = async ({ fetch }) => {
 
 		// Filter only successful signatories with portraits or organizations
 		const validSignatories = signatories.filter(
-			(signatory: any) => signatory.status === 'success' || signatory.type === 'Organization'
+			(signatory: { status?: string; type?: string }) =>
+				signatory.status === 'success' || signatory.type === 'Organization'
 		)
 
 		return {
