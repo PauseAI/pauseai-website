@@ -59,11 +59,7 @@
 		'Connected by Data': `/open-letter/civil_society_logos/${$theme === 'dark' ? 'white' : 'black'}/connected_by_data.png`,
 		'Open Data Manchester': `/open-letter/civil_society_logos/${$theme === 'dark' ? 'white' : 'black'}/open_data_manchester.png`,
 		'Safe AI for Children Alliance': `/open-letter/civil_society_logos/${$theme === 'dark' ? 'white' : 'black'}/safe_ai_for_children_alliance.png`
-	} as const
-
-	function getOrganizationLogo(name: string): string | undefined {
-		return organizationLogos[name as keyof typeof organizationLogos]
-	}
+	} as Record<string, string>
 
 	function getOrganizationWebsite(name: string): string {
 		const websites = {
@@ -305,7 +301,6 @@
 			<div class="organizations-subsection">
 				<div class="organizations-grid">
 					{#each organizations as org}
-						{@const logoSrc = getOrganizationLogo(org.name)}
 						{@const websiteUrl = getOrganizationWebsite(org.name)}
 						<a
 							href={websiteUrl}
@@ -313,8 +308,13 @@
 							rel="noopener noreferrer"
 							class="organization-card organization-link"
 						>
-							{#if logoSrc}
-								<img src={logoSrc} alt="{org.name} logo" class="organization-logo" loading="lazy" />
+							{#if organizationLogos[org.name]}
+								<img
+									src={organizationLogos[org.name]}
+									alt="{org.name} logo"
+									class="organization-logo"
+									loading="lazy"
+								/>
 							{:else}
 								<div class="organization-name">{org.name}</div>
 							{/if}
@@ -429,12 +429,10 @@
 		animation: patternMove 60s linear infinite;
 	}
 
-	@media (prefers-color-scheme: light) {
-		.hero-pattern {
-			background-image:
-				linear-gradient(rgba(255, 138, 0, 0.15) 1px, transparent 1px),
-				linear-gradient(90deg, rgba(255, 138, 0, 0.15) 1px, transparent 1px);
-		}
+	:global([color-scheme='light']) .hero-pattern {
+		background-image:
+			linear-gradient(rgba(255, 138, 0, 0.15) 1px, transparent 1px),
+			linear-gradient(90deg, rgba(255, 138, 0, 0.15) 1px, transparent 1px);
 	}
 
 	@keyframes patternMove {
@@ -515,10 +513,8 @@
 		margin-top: 2rem;
 	}
 
-	@media (prefers-color-scheme: light) {
-		.hero-date {
-			color: black !important;
-		}
+	:global([color-scheme='light']) .hero-date {
+		color: black !important;
 	}
 
 	.hero-stats {
@@ -1523,12 +1519,10 @@
 		box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 	}
 
-	@media (prefers-color-scheme: dark) {
-		.organization-card {
-			background: #1a1a1a;
-			border-color: rgba(255, 255, 255, 0.1);
-			box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
-		}
+	:global([color-scheme='dark']) .organization-card {
+		background: #1a1a1a;
+		border-color: rgba(255, 255, 255, 0.1);
+		box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
 	}
 
 	.organization-card:hover {
