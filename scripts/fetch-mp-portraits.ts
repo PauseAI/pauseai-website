@@ -112,18 +112,22 @@ function sanitizeFilename(name: string): string {
 		.toLowerCase()
 }
 
-interface MemberData {
-	items?: {
-		value: {
-			id: number
-			nameDisplayAs: string
-			thumbnailUrl?: string
-		}
-	}[]
+// Function to get UK Parliament image URL
+function getParliamentImageUrl(name: string, chamber: string): string | null {
+	if (chamber === 'commons') {
+		// House of Commons portrait API
+		// This is a simplified example - you'd need to lookup the member ID
+		// The real API requires member lookup first
+		return `https://members-api.parliament.uk/api/Members/Search?Name=${encodeURIComponent(name)}`
+	} else if (chamber === 'lords') {
+		// House of Lords uses a different system
+		return `https://members-api.parliament.uk/api/Members/Search?House=2&Name=${encodeURIComponent(name)}`
+	}
+	return null
 }
 
 // Function to fetch MP data from Parliament API
-async function fetchMemberData(name: string, chamber: string): Promise<MemberData> {
+async function fetchMemberData(name: string, chamber: string): Promise<any> {
 	return new Promise((resolve, reject) => {
 		const house = chamber === 'lords' ? '2' : '1'
 		const searchUrl = `https://members-api.parliament.uk/api/Members/Search?Name=${encodeURIComponent(name)}&House=${house}`
@@ -225,7 +229,7 @@ async function main() {
 					type: signatory.type,
 					portrait: null,
 					status: 'error',
-					error: error instanceof Error ? error.message : String(error)
+					error: error.message
 				})
 			}
 		} else {
