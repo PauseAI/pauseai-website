@@ -1399,7 +1399,7 @@
 		font-size: clamp(1.8rem, 3vw, 2.5rem);
 		font-weight: 800;
 		margin-bottom: 1rem;
-		color: var(--text);
+		color: white;
 		text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 	}
 
