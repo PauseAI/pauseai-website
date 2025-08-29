@@ -59,11 +59,7 @@
 		'Connected by Data': `/open-letter/civil_society_logos/${$theme === 'dark' ? 'white' : 'black'}/connected_by_data.png?theme=${$theme}`,
 		'Open Data Manchester': `/open-letter/civil_society_logos/${$theme === 'dark' ? 'white' : 'black'}/open_data_manchester.png?theme=${$theme}`,
 		'Safe AI for Children Alliance': `/open-letter/civil_society_logos/${$theme === 'dark' ? 'white' : 'black'}/safe_ai_for_children_alliance.png?theme=${$theme}`
-	} as const
-
-	function getOrganizationLogo(name: string): string | undefined {
-		return organizationLogos[name as keyof typeof organizationLogos]
-	}
+	} as Record<string, string>
 
 	function getOrganizationWebsite(name: string): string {
 		const websites = {
