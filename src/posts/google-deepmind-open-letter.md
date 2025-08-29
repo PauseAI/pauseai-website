@@ -27,6 +27,7 @@ Yet when you released Gemini 2.5 Pro on 25 March, no safety evaluation report ac
 later, only a minimal "model card" appeared, lacking any substantive detail about external evaluations.
 Even when directly questioned by journalists, Google refused to confirm whether government agencies
 like the UK AI Security Institute participated in testing.
+
 This is not a matter of semantics or technicalities. Labelling a publicly accessible model as "experimental"
 does not absolve Google of its safety obligations. When anyone on the internet can use a frontier AI
 system, it has been deployed in every meaningful sense.
@@ -34,6 +35,7 @@ You yourself have stated that AGI may arrive within five years. Leading AI resea
 Hinton and Yoshua Bengio, estimate a 10% or greater chance that advanced AI could cause human
 extinction. These are not distant hypotheticals but near-term possibilities requiring immediate, serious
 action.
+
 We are particularly troubled that Google, having helped establish these safety standards, would be among
 the first to abandon them. This sets a dangerous precedent that undermines global efforts to develop AI
 safely. If industry leaders treat safety commitments as optional when convenient, how can we expect
@@ -55,69 +57,131 @@ others to take them seriously?
 Yours sincerely,
 
 Clare Adamson MSP
+
 Dr Rosena Allin-Khan MP
+
 Doug Beattie MC MLA
+
 Siân Berry MP
+
 Miles Briggs MSP
+
 Lord Browne of Ladyton
+
 Keith Buchanan MLA
+
 Ariane Burgess MSP
+
 Lord Campbell-Savours
+
 Gerry Carroll MLA
+
 Finlay Carson MSP
+
 Lord Cashman
+
 Baroness Chakrabarti
+
 Ellie Chowns MP
+
 Alex Cole-Hamilton MSP
+
 Viscount Colville of Culross
+
 Ann Davies MP
+
 Carla Denyer MP
+
 Baroness D'Souza
+
 Stewart Dickson MLA
+
 Connie Egan MLA
+
 Deborah Erskine MLA
+
 Baroness Featherstone
+
 Luke Fletcher MS
+
 Baroness Foster of Aghadrumsee
+
 Heledd Fychan MS
 
 Baroness Harris of Richmond
+
 Harry Harvey MLA
+
 Mike Hedges MS
+
 Baroness Kennedy of The Shaws
+
 Bill Kidd MSP
+
 Baroness Kidron
+
 Lord Knight of Weymouth
+
 Ben Lake MP
+
 The Lord Bishop of Leeds
+
 Naomi Long MLA
+
 Peter Martin MLA
+
 Sinéad McLaughlin MLA
+
 Stuart McMillan MSP
+
 Lord McNally
+
 Llinos Medi MP
+
 Baroness Miller of Chilthorne Domer
+
 Iqbal Mohamed MP
+
 Baroness Morris of Yardley
+
 The Lord Bishop of Oxford
+
 Baroness Prashar
+
 Yasmin Qureshi MP
+
 Adrian Ramsay MP
+
 Jenny Rathbone MS
+
 Willie Rennie MSP
+
 Baroness Ritchie of Downpatrick
+
 Liz Saville Roberts MP
+
 Lord Singh of Wimbledon
+
 Lord Strasburger
+
 Sir Desmond Swayne MP
+
 Carolyn Thomas MS
+
 Michelle Thomson MSP
+
 Baroness Uddin
+
 Lee Waters MS
+
 Elena Whitham MSP
 
 PauseAI Global
+
 Open Rights Group
+
 Connected by Data
+
 Open Data Manchester
+
 Safe AI for Children Alliance
