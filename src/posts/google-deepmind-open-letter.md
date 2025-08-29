@@ -6,7 +6,7 @@ description: Over 60 UK politicians agree - Google DeepMind must address their
 image: /dsc00148-3-.jpg
 ---
 
-Over 60 UK politicians agree; Google DeepMind must address their violation of the Frontier AI Safety Commitments. Read more about Google's broken promises [here](https://pauseai.info/google-deepmind-broken-promises).
+Over 60 UK politicians agree: Google DeepMind must address their violation of the Frontier AI Safety Commitments. Read more about Google's broken promises [here](https://pauseai.info/google-deepmind-broken-promises).
 
 ## Open Letter
 
