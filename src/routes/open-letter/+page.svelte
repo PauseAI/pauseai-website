@@ -116,8 +116,7 @@
 
 <PostMeta {title} {description} {date} />
 
-<!-- @ts-ignore -->
-<svelte:element this="div" color-scheme="dark" style="display: contents">
+<div style="color-scheme: dark; display: contents">
 	<article class="open-letter">
 		<!-- Hero Section -->
 		<section class="hero-section">
@@ -372,7 +371,7 @@
 			</div>
 		</section>
 	</article>
-</svelte:element>
+</div>
 
 <style>
 	.open-letter {
