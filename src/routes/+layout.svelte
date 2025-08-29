@@ -88,7 +88,7 @@
 	}}
 />
 
-{#if !['/', '/outcomes', '/pdoom', '/quotes'].includes(deLocalizeHref($page.url.pathname))}
+{#if !['/', '/outcomes', '/pdoom', '/quotes', '/dear-sir-demis-2025'].includes(deLocalizeHref($page.url.pathname))}
 	<Toc />
 {/if}
 
