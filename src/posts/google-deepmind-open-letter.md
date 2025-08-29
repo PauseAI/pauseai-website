@@ -6,16 +6,23 @@ description: Over 60 UK politicians agree - Google DeepMind must address their
 image: /dsc00148-3-.jpg
 ---
 
+Over 60 UK politicians agree; Google DeepMind must address their violation of the Frontier AI Safety Commitments. Read more about Google's broken promises [here](https://pauseai.info/google-deepmind-broken-promises).
+
+## Open Letter
+
 Dear Sir Demis,
+
 We write to express profound concern about Google DeepMind's failure to honour the Frontier AI Safety
 Commitments signed at the AI Seoul Summit in 2024. The release of Gemini 2.5 Pro without the
 transparency required by paragraph VIII of the commitments represents a troubling breach of trust with
 governments and the public.
 At the AI Seoul Summit, Google explicitly committed to:
-● Conducting safety tests "before deploying" AI models with input from "independent third-party
-evaluators" as appropriate.
-● Providing "public transparency" into testing processes.
-● Disclosing "how, if at all, external actors, such as governments... are involved in the process".
+
+- Conducting safety tests "before deploying" AI models with input from "independent third-party
+  evaluators" as appropriate.
+- Providing "public transparency" into testing processes.
+- Disclosing "how, if at all, external actors, such as governments... are involved in the process".
+
 Yet when you released Gemini 2.5 Pro on 25 March, no safety evaluation report accompanied it. A month
 later, only a minimal "model card" appeared, lacking any substantive detail about external evaluations.
 Even when directly questioned by journalists, Google refused to confirm whether government agencies
@@ -32,45 +39,47 @@ the first to abandon them. This sets a dangerous precedent that undermines globa
 safely. If industry leaders treat safety commitments as optional when convenient, how can we expect
 others to take them seriously?
 
-We therefore call on Google DeepMind to:
+**We therefore call on Google DeepMind to:**
 
-1. Establish clear definitions of "deployment" that align with common understanding - when a model
+1. **Establish clear definitions** of "deployment" that align with common understanding - when a model
    is publicly accessible, it is deployed.
-2. Publish a specific timeline for when safety evaluation reports will be released for all future
+2. **Publish a specific timeline** for when safety evaluation reports will be released for all future
    models.
-3. Clarify unambiguously, for each model release, which government agencies and independent
+3. **Clarify unambiguously,** for each model release, which government agencies and independent
    third-parties are involved in testing, and the exact timelines of their testing procedures.
    The development of artificial general intelligence may be humanity's most consequential undertaking. It
    demands the highest standards of responsibility, transparency, and caution. Google's technical capabilities
    come with commensurate obligations to society.
    We await your response and concrete actions to address these critical concerns.
-   Yours sincerely,
-   Clare Adamson MSP
-   Dr Rosena Allin-Khan MP
-   Doug Beattie MC MLA
-   Siân Berry MP
-   Miles Briggs MSP
-   Lord Browne of Ladyton
-   Keith Buchanan MLA
-   Ariane Burgess MSP
-   Lord Campbell-Savours
-   Gerry Carroll MLA
-   Finlay Carson MSP
-   Lord Cashman
-   Baroness Chakrabarti
-   Ellie Chowns MP
-   Alex Cole-Hamilton MSP
-   Viscount Colville of Culross
-   Ann Davies MP
-   Carla Denyer MP
-   Baroness D'Souza
-   Stewart Dickson MLA
-   Connie Egan MLA
-   Deborah Erskine MLA
-   Baroness Featherstone
-   Luke Fletcher MS
-   Baroness Foster of Aghadrumsee
-   Heledd Fychan MS
+
+Yours sincerely,
+
+Clare Adamson MSP
+Dr Rosena Allin-Khan MP
+Doug Beattie MC MLA
+Siân Berry MP
+Miles Briggs MSP
+Lord Browne of Ladyton
+Keith Buchanan MLA
+Ariane Burgess MSP
+Lord Campbell-Savours
+Gerry Carroll MLA
+Finlay Carson MSP
+Lord Cashman
+Baroness Chakrabarti
+Ellie Chowns MP
+Alex Cole-Hamilton MSP
+Viscount Colville of Culross
+Ann Davies MP
+Carla Denyer MP
+Baroness D'Souza
+Stewart Dickson MLA
+Connie Egan MLA
+Deborah Erskine MLA
+Baroness Featherstone
+Luke Fletcher MS
+Baroness Foster of Aghadrumsee
+Heledd Fychan MS
 
 Baroness Harris of Richmond
 Harry Harvey MLA
