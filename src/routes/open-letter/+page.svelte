@@ -116,262 +116,259 @@
 
 <PostMeta {title} {description} {date} />
 
-<div style="color-scheme: dark; display: contents">
-	<article class="open-letter">
-		<!-- Hero Section -->
-		<section class="hero-section">
-			<div class="hero-background">
-				<div class="hero-gradient"></div>
-				<div class="hero-pattern"></div>
-			</div>
-			<div class="hero-content">
-				<div class="hero-badge">Open Letter</div>
-				<h1 class="hero-title">{title}</h1>
-				<p class="hero-subtitle">
-					Parliamentarians from across the UK call on Google DeepMind to honour their AI safety
-					commitments
-				</p>
-				<div class="hero-stats">
-					<div class="stat-card">
-						<div class="stat-number">4</div>
-						<div class="stat-label">Civil Society Organisations</div>
-					</div>
-					<div class="stat-card">
-						<div class="stat-number">5</div>
-						<div class="stat-label">Chambers</div>
-					</div>
-					<div class="stat-card">
-						<div class="stat-number">60</div>
-						<div class="stat-label">Parliamentarians</div>
-					</div>
+<article class="open-letter">
+	<!-- Hero Section -->
+	<section class="hero-section">
+		<div class="hero-background">
+			<div class="hero-gradient"></div>
+			<div class="hero-pattern"></div>
+		</div>
+		<div class="hero-content">
+			<div class="hero-badge">Open Letter</div>
+			<h1 class="hero-title">{title}</h1>
+			<p class="hero-subtitle">
+				Parliamentarians from across the UK call on Google DeepMind to honour their AI safety
+				commitments
+			</p>
+			<div class="hero-stats">
+				<div class="stat-card">
+					<div class="stat-number">4</div>
+					<div class="stat-label">Civil Society Organisations</div>
 				</div>
-				<div class="hero-date">29 August 2025</div>
-			</div>
-		</section>
-
-		<!-- Quotes Section -->
-		<section class="quotes-section">
-			<div class="quotes-container">
-				<h2 class="quotes-title">
-					<span class="quotes-label">Voices of Concern</span>
-					What parliamentarians are saying
-				</h2>
-				<div class="quotes-grid">
-					{#each quotes as quote, i}
-						<div class="quote-wrapper" style="animation-delay: {i * 0.1}s">
-							<QuoteHighlight {quote} />
-						</div>
-					{/each}
+				<div class="stat-card">
+					<div class="stat-number">5</div>
+					<div class="stat-label">Chambers</div>
+				</div>
+				<div class="stat-card">
+					<div class="stat-number">60</div>
+					<div class="stat-label">Parliamentarians</div>
 				</div>
 			</div>
-		</section>
+			<div class="hero-date">29 August 2025</div>
+		</div>
+	</section>
 
-		<!-- Letter Content -->
-		<section class="letter-section">
-			<div class="letter-background">
-				<div class="letter-gradient"></div>
-				<div class="letter-pattern"></div>
-			</div>
-			<div class="letter-container">
-				<div class="letter-content">
-					<div class="letter-header-info">
-						<div class="from">
-							<strong>From:</strong> PauseAI UK<br />
-							5 Brayford Square<br />
-							London E1 0SG
-						</div>
-						<div class="to">
-							<strong>To:</strong> Sir Demis Hassabis<br />
-							Chief Executive Officer, Google DeepMind<br />
-							London, United Kingdom
-						</div>
+	<!-- Quotes Section -->
+	<section class="quotes-section">
+		<div class="quotes-container">
+			<h2 class="quotes-title">
+				<span class="quotes-label">Voices of Concern</span>
+				What parliamentarians are saying
+			</h2>
+			<div class="quotes-grid">
+				{#each quotes as quote, i}
+					<div class="quote-wrapper" style="animation-delay: {i * 0.1}s">
+						<QuoteHighlight {quote} />
 					</div>
+				{/each}
+			</div>
+		</div>
+	</section>
 
-					<div class="letter-body">
-						<p class="salutation">Dear Sir Demis,</p>
-
-						<p>
-							We write to express profound concern about Google DeepMind's failure to honour the
-							Frontier AI Safety Commitments signed at the AI Seoul Summit in 2024. The release of
-							Gemini 2.5 Pro without the transparency required by paragraph VIII of the commitments
-							represents a troubling breach of trust with governments and the public.
-						</p>
-
-						<p>At the AI Seoul Summit, Google explicitly committed to:</p>
-						<ul class="commitments">
-							<li>
-								Conducting safety tests "before deploying" AI models with input from "independent
-								third-party evaluators" as appropriate.
-							</li>
-							<li>Providing "public transparency" into testing processes.</li>
-							<li>
-								Disclosing "how, if at all, external actors, such as governments... are involved in
-								the process".
-							</li>
-						</ul>
-
-						<p>
-							Yet when you released Gemini 2.5 Pro on 25 March, no safety evaluation report
-							accompanied it. A month later, only a minimal "model card" appeared, lacking any
-							substantive detail about external evaluations. Even when directly questioned by
-							journalists, Google refused to confirm whether government agencies like the UK AI
-							Security Institute participated in testing.
-						</p>
-
-						<p class="emphasis">
-							This is not a matter of semantics or technicalities. Labelling a publicly accessible
-							model as "experimental" does not absolve Google of its safety obligations. When anyone
-							on the internet can use a frontier AI system, it has been deployed in every meaningful
-							sense.
-						</p>
-
-						<p>
-							You yourself have stated that AGI may arrive within five years. Leading AI
-							researchers, such as Geoffrey Hinton and Yoshua Bengio, estimate a 10% or greater
-							chance that advanced AI could cause human extinction. These are not distant
-							hypotheticals but near-term possibilities requiring immediate, serious action.
-						</p>
-
-						<p>
-							We are particularly troubled that Google, having helped establish these safety
-							standards, would be among the first to abandon them. This sets a dangerous precedent
-							that undermines global efforts to develop AI safely. If industry leaders treat safety
-							commitments as optional when convenient, how can we expect others to take them
-							seriously?
-						</p>
-
-						<div class="demands">
-							<p><strong>We therefore call on Google DeepMind to:</strong></p>
-							<ol>
-								<li>
-									Establish clear definitions of "deployment" that align with common understanding -
-									when a model is publicly accessible, it is deployed.
-								</li>
-								<li>
-									Publish a specific timeline for when safety evaluation reports will be released
-									for all future models.
-								</li>
-								<li>
-									Clarify unambiguously, for each model release, which government agencies and
-									independent third-parties are involved in testing, and the exact timelines of
-									their testing procedures.
-								</li>
-							</ol>
-						</div>
-
-						<p class="conclusion">
-							The development of artificial general intelligence may be humanity's most
-							consequential undertaking. It demands the highest standards of responsibility,
-							transparency, and caution. Google's technical capabilities come with commensurate
-							obligations to society.
-						</p>
-
-						<p>We await your response and concrete actions to address these critical concerns.</p>
-
-						<p class="closing">Yours sincerely,</p>
+	<!-- Letter Content -->
+	<section class="letter-section">
+		<div class="letter-background">
+			<div class="letter-gradient"></div>
+			<div class="letter-pattern"></div>
+		</div>
+		<div class="letter-container">
+			<div class="letter-content">
+				<div class="letter-header-info">
+					<div class="from">
+						<strong>From:</strong> PauseAI UK<br />
+						5 Brayford Square<br />
+						London E1 0SG
+					</div>
+					<div class="to">
+						<strong>To:</strong> Sir Demis Hassabis<br />
+						Chief Executive Officer, Google DeepMind<br />
+						London, United Kingdom
 					</div>
 				</div>
-			</div>
-		</section>
 
-		<!-- Signatories Section -->
-		<section class="signatories-section">
-			<div class="signatories-header">
-				<h2 class="signatories-title">
-					<span class="title-number">60</span>
-					<span class="title-text">Distinguished Signatories</span>
-				</h2>
-				<p class="signatories-subtitle">United in calling for AI safety transparency</p>
-			</div>
+				<div class="letter-body">
+					<p class="salutation">Dear Sir Demis,</p>
 
-			<div class="signatories-container">
-				<div class="signatories-grid">
-					{#each sortedParliamentarians as signatory, i}
-						<div class="signatory-wrapper" style="animation-delay: {i * 0.02}s">
-							<SignatoryCard {signatory} />
-						</div>
-					{/each}
-				</div>
-			</div>
-
-			{#if organizations.length > 0}
-				<div class="organizations-subsection">
-					<div class="organizations-grid">
-						{#each organizations as org}
-							<a
-								href={organizationWebsites[org.name] || '#'}
-								target="_blank"
-								rel="noopener noreferrer"
-								class="organization-card organization-link"
-							>
-								{#if organizationLogos[org.name]}
-									<img
-										src={organizationLogos[org.name]}
-										alt="{org.name} logo"
-										class="organization-logo"
-										loading="lazy"
-									/>
-								{:else}
-									<div class="organization-name">{org.name}</div>
-								{/if}
-							</a>
-						{/each}
-					</div>
-				</div>
-			{/if}
-		</section>
-
-		<!-- Background Information Section -->
-		<section class="background-section">
-			<div class="background-container">
-				<div class="background-content">
-					<div class="background-text">
-						<h2 class="background-title">Learn More</h2>
-						<p class="background-description">
-							More detail about Google DeepMind's violation can be found in our background
-							information document.
-						</p>
-					</div>
-					<div class="pdf-link-container">
-						<a
-							href="/pdfs/PauseAI_Open_Letter_Background_Information.pdf"
-							target="_blank"
-							class="pdf-thumbnail"
-						>
-							<img
-								src="/pdfs/PauseAI_Open_Letter_Background_Information_page-1.jpg"
-								alt="Background document thumbnail"
-								class="pdf-thumbnail-image"
-							/>
-							<div class="pdf-info">
-								<span class="pdf-title">Background Information</span>
-							</div>
-						</a>
-					</div>
-				</div>
-			</div>
-		</section>
-
-		<!-- How This Letter Came About Section -->
-		<section class="campaign-section">
-			<div class="campaign-container">
-				<div class="campaign-content">
-					<h2 class="campaign-title">How You Can Help</h2>
-					<p class="campaign-description">
-						PauseAI volunteers emailed their MPs asking them to sign this letter to Sir Demis
-						Hassabis, calling for transparency in Google DeepMind's AI safety commitments.
+					<p>
+						We write to express profound concern about Google DeepMind's failure to honour the
+						Frontier AI Safety Commitments signed at the AI Seoul Summit in 2024. The release of
+						Gemini 2.5 Pro without the transparency required by paragraph VIII of the commitments
+						represents a troubling breach of trust with governments and the public.
 					</p>
-					<div class="campaign-cta">
-						<a href="/uk-email-mp" class="cta-button">
-							<span class="cta-text">Email Your MP</span>
-							<span class="cta-subtitle">Ask them to sign the letter</span>
-						</a>
+
+					<p>At the AI Seoul Summit, Google explicitly committed to:</p>
+					<ul class="commitments">
+						<li>
+							Conducting safety tests "before deploying" AI models with input from "independent
+							third-party evaluators" as appropriate.
+						</li>
+						<li>Providing "public transparency" into testing processes.</li>
+						<li>
+							Disclosing "how, if at all, external actors, such as governments... are involved in
+							the process".
+						</li>
+					</ul>
+
+					<p>
+						Yet when you released Gemini 2.5 Pro on 25 March, no safety evaluation report
+						accompanied it. A month later, only a minimal "model card" appeared, lacking any
+						substantive detail about external evaluations. Even when directly questioned by
+						journalists, Google refused to confirm whether government agencies like the UK AI
+						Security Institute participated in testing.
+					</p>
+
+					<p class="emphasis">
+						This is not a matter of semantics or technicalities. Labelling a publicly accessible
+						model as "experimental" does not absolve Google of its safety obligations. When anyone
+						on the internet can use a frontier AI system, it has been deployed in every meaningful
+						sense.
+					</p>
+
+					<p>
+						You yourself have stated that AGI may arrive within five years. Leading AI researchers,
+						such as Geoffrey Hinton and Yoshua Bengio, estimate a 10% or greater chance that
+						advanced AI could cause human extinction. These are not distant hypotheticals but
+						near-term possibilities requiring immediate, serious action.
+					</p>
+
+					<p>
+						We are particularly troubled that Google, having helped establish these safety
+						standards, would be among the first to abandon them. This sets a dangerous precedent
+						that undermines global efforts to develop AI safely. If industry leaders treat safety
+						commitments as optional when convenient, how can we expect others to take them
+						seriously?
+					</p>
+
+					<div class="demands">
+						<p><strong>We therefore call on Google DeepMind to:</strong></p>
+						<ol>
+							<li>
+								Establish clear definitions of "deployment" that align with common understanding -
+								when a model is publicly accessible, it is deployed.
+							</li>
+							<li>
+								Publish a specific timeline for when safety evaluation reports will be released for
+								all future models.
+							</li>
+							<li>
+								Clarify unambiguously, for each model release, which government agencies and
+								independent third-parties are involved in testing, and the exact timelines of their
+								testing procedures.
+							</li>
+						</ol>
 					</div>
+
+					<p class="conclusion">
+						The development of artificial general intelligence may be humanity's most consequential
+						undertaking. It demands the highest standards of responsibility, transparency, and
+						caution. Google's technical capabilities come with commensurate obligations to society.
+					</p>
+
+					<p>We await your response and concrete actions to address these critical concerns.</p>
+
+					<p class="closing">Yours sincerely,</p>
 				</div>
 			</div>
-		</section>
-	</article>
-</div>
+		</div>
+	</section>
+
+	<!-- Signatories Section -->
+	<section class="signatories-section">
+		<div class="signatories-header">
+			<h2 class="signatories-title">
+				<span class="title-number">60</span>
+				<span class="title-text">Distinguished Signatories</span>
+			</h2>
+			<p class="signatories-subtitle">United in calling for AI safety transparency</p>
+		</div>
+
+		<div class="signatories-container">
+			<div class="signatories-grid">
+				{#each sortedParliamentarians as signatory, i}
+					<div class="signatory-wrapper" style="animation-delay: {i * 0.02}s">
+						<SignatoryCard {signatory} />
+					</div>
+				{/each}
+			</div>
+		</div>
+
+		{#if organizations.length > 0}
+			<div class="organizations-subsection">
+				<div class="organizations-grid">
+					{#each organizations as org}
+						<a
+							href={organizationWebsites[org.name] || '#'}
+							target="_blank"
+							rel="noopener noreferrer"
+							class="organization-card organization-link"
+						>
+							{#if organizationLogos[org.name]}
+								<img
+									src={organizationLogos[org.name]}
+									alt="{org.name} logo"
+									class="organization-logo"
+									loading="lazy"
+								/>
+							{:else}
+								<div class="organization-name">{org.name}</div>
+							{/if}
+						</a>
+					{/each}
+				</div>
+			</div>
+		{/if}
+	</section>
+
+	<!-- Background Information Section -->
+	<section class="background-section">
+		<div class="background-container">
+			<div class="background-content">
+				<div class="background-text">
+					<h2 class="background-title">Learn More</h2>
+					<p class="background-description">
+						More detail about Google DeepMind's violation can be found in our background information
+						document.
+					</p>
+				</div>
+				<div class="pdf-link-container">
+					<a
+						href="/pdfs/PauseAI_Open_Letter_Background_Information.pdf"
+						target="_blank"
+						class="pdf-thumbnail"
+					>
+						<img
+							src="/pdfs/PauseAI_Open_Letter_Background_Information_page-1.jpg"
+							alt="Background document thumbnail"
+							class="pdf-thumbnail-image"
+						/>
+						<div class="pdf-info">
+							<span class="pdf-title">Background Information</span>
+						</div>
+					</a>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- How This Letter Came About Section -->
+	<section class="campaign-section">
+		<div class="campaign-container">
+			<div class="campaign-content">
+				<h2 class="campaign-title">How You Can Help</h2>
+				<p class="campaign-description">
+					PauseAI volunteers emailed their MPs asking them to sign this letter to Sir Demis
+					Hassabis, calling for transparency in Google DeepMind's AI safety commitments.
+				</p>
+				<div class="campaign-cta">
+					<a href="/uk-email-mp" class="cta-button">
+						<span class="cta-text">Email Your MP</span>
+						<span class="cta-subtitle">Ask them to sign the letter</span>
+					</a>
+				</div>
+			</div>
+		</div>
+	</section>
+</article>
 
 <style>
 	.open-letter {
@@ -1443,5 +1440,46 @@
 		font-size: 0.9rem;
 		color: rgba(255, 138, 0, 0.7);
 		font-weight: 500;
+	}
+
+	/* PDF Thumbnail Styles */
+	.pdf-thumbnail {
+		display: block;
+		width: 150px;
+		height: auto;
+		border-radius: 8px;
+		overflow: hidden;
+		box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+		transition:
+			transform 0.3s ease,
+			box-shadow 0.3s ease;
+		text-decoration: none;
+	}
+
+	.pdf-thumbnail:hover {
+		transform: translateY(-2px);
+		box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+	}
+
+	.pdf-thumbnail-image {
+		width: 100%;
+		height: auto;
+		display: block;
+		aspect-ratio: 8.5 / 11; /* Standard US Letter aspect ratio */
+		object-fit: cover;
+	}
+
+	.pdf-info {
+		padding: 0.75rem;
+		background: var(--bg);
+		border-top: 1px solid var(--border-color, rgba(255, 255, 255, 0.1));
+		border-radius: 8px;
+	}
+
+	.pdf-title {
+		font-size: 0.9rem;
+		font-weight: 600;
+		color: var(--text);
+		display: block;
 	}
 </style>
