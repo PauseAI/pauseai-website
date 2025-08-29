@@ -54,8 +54,7 @@
 	)
 
 	// Map organization names to their logo files (theme-aware)
-	// Helper function to safely get organization data
-	function getOrganizationLogo(name: string): string | undefined {
+	$: getOrganizationLogo = (name: string): string | undefined => {
 		const logos = {
 			'Open Rights Group': `/open-letter/civil_society_logos/${$theme === 'dark' ? 'white' : 'black'}/open_rights_group.png`,
 			'Connected by Data': `/open-letter/civil_society_logos/${$theme === 'dark' ? 'white' : 'black'}/connected_by_data.png`,
