@@ -60,11 +60,10 @@
 
 <style>
 	.signatory-card {
-		background: rgba(255, 255, 255, 0.05);
-		backdrop-filter: blur(10px);
+		background: var(--bg-subtle);
 		border-radius: 20px;
 		padding: 1.25rem 0.75rem;
-		border: 1px solid rgba(255, 255, 255, 0.1);
+		border: 1px solid var(--border-color, rgba(0, 0, 0, 0.1));
 		transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 		display: flex;
 		flex-direction: column;
@@ -125,7 +124,7 @@
 	.initials {
 		font-weight: bold;
 		font-size: 2.2rem;
-		color: rgba(255, 255, 255, 0.7);
+		color: var(--text-subtle);
 	}
 
 	.details {
@@ -143,7 +142,7 @@
 		margin: 0;
 		font-size: 0.95rem;
 		font-weight: 600;
-		color: white;
+		color: var(--text);
 		line-height: 1.3;
 	}
 
