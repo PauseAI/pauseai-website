@@ -305,16 +305,21 @@
 			<div class="organizations-subsection">
 				<div class="organizations-grid">
 					{#each organizations as org}
-						{@const logoSrc = getOrganizationLogo(org.name)}
-						{@const websiteUrl = getOrganizationWebsite(org.name)}
 						<a
-							href={websiteUrl}
+							href={getOrganizationWebsite(org.name)}
 							target="_blank"
 							rel="noopener noreferrer"
 							class="organization-card organization-link"
 						>
-							{#if logoSrc}
-								<img src={logoSrc} alt="{org.name} logo" class="organization-logo" loading="lazy" />
+							{#if organizationLogos[org.name]}
+								{#key $theme}
+									<img
+										src={organizationLogos[org.name]}
+										alt="{org.name} logo"
+										class="organization-logo"
+										loading="lazy"
+									/>
+								{/key}
 							{:else}
 								<div class="organization-name">{org.name}</div>
 							{/if}
