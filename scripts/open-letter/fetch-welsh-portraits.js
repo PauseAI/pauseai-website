@@ -37,7 +37,7 @@ const welshMSs = [
 ]
 
 // Function to download image
-function downloadImage(url, filepath) {
+function downloadImage(/** @type {string} */ url, /** @type {string} */ filepath) {
 	return new Promise((resolve, reject) => {
 		const file = fs.createWriteStream(filepath)
 		let downloadedSize = 0
@@ -70,7 +70,7 @@ function downloadImage(url, filepath) {
 }
 
 // Function to sanitize filename
-function sanitizeFilename(name) {
+function sanitizeFilename(/** @type {string} */ name) {
 	return name.replace(/[^a-z0-9]/gi, '_').toLowerCase()
 }
 
@@ -111,12 +111,12 @@ async function main() {
 			console.log(`✓ Downloaded (${sizeStr})`)
 			successCount++
 		} catch (error) {
-			console.log(`✗ Error: ${error.message}`)
+			console.log(`✗ Error: ${error instanceof Error ? error.message : String(error)}`)
 			results.push({
 				name: member.name,
 				portrait: null,
 				status: 'error',
-				error: error.message
+				error: error instanceof Error ? error.message : String(error)
 			})
 			errorCount++
 		}
@@ -132,7 +132,7 @@ async function main() {
 
 		// Update Welsh MS entries
 		for (const result of results) {
-			const index = mainData.findIndex((s) => s.name === result.name)
+			const index = mainData.findIndex((/** @type {any} */ s) => s.name === result.name)
 			if (index !== -1) {
 				mainData[index] = {
 					...mainData[index],

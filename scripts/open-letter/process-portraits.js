@@ -9,29 +9,37 @@ const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
 
 // Function to get image dimensions using sips (macOS)
-function getImageDimensions(imagePath) {
+function getImageDimensions(/** @type {string} */ imagePath) {
 	try {
 		const output = execSync(`sips -g pixelHeight -g pixelWidth "${imagePath}"`).toString()
 		const width = parseInt(output.match(/pixelWidth:\s*(\d+)/)?.[1] || '0')
 		const height = parseInt(output.match(/pixelHeight:\s*(\d+)/)?.[1] || '0')
 		return { width, height }
 	} catch (error) {
-		throw new Error(`Failed to get dimensions: ${error.message}`)
+		throw new Error(
+			`Failed to get dimensions: ${error instanceof Error ? error.message : String(error)}`
+		)
 	}
 }
 
 // Function to resize image using sips
-function resizeImage(inputPath, outputPath, size = 400) {
+function resizeImage(
+	/** @type {string} */ inputPath,
+	/** @type {string} */ outputPath,
+	size = 400
+) {
 	try {
 		execSync(`sips -z ${size} ${size} "${inputPath}" --out "${outputPath}"`)
 		return true
 	} catch (error) {
-		throw new Error(`Failed to resize image: ${error.message}`)
+		throw new Error(
+			`Failed to resize image: ${error instanceof Error ? error.message : String(error)}`
+		)
 	}
 }
 
 // Function to validate image meets requirements
-function validateImage(imagePath) {
+function validateImage(/** @type {string} */ imagePath) {
 	// Check if file exists and is a .jpg
 	if (!fs.existsSync(imagePath)) {
 		throw new Error('File does not exist')
@@ -117,7 +125,7 @@ async function main() {
 				console.log(`  ✓ ${file} (${width}x${height} → 400x400)`)
 				processed++
 			} catch (error) {
-				console.log(`  ✗ ${file}: ${error.message}`)
+				console.log(`  ✗ ${file}: ${error instanceof Error ? error.message : String(error)}`)
 				errors++
 			}
 		}
