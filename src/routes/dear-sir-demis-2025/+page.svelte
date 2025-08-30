@@ -308,14 +308,12 @@
 							class="organization-card organization-link"
 						>
 							{#if organizationLogos[org.name]}
-								{#key $theme}
-									<img
-										src={organizationLogos[org.name]}
-										alt="{org.name} logo"
-										class="organization-logo"
-										loading="lazy"
-									/>
-								{/key}
+								<img
+									src={organizationLogos[org.name]}
+									alt="{org.name} logo"
+									class="organization-logo"
+									loading="lazy"
+								/>
 							{:else}
 								<div class="organization-name">{org.name}</div>
 							{/if}
@@ -441,12 +439,10 @@
 		animation: patternMove 60s linear infinite;
 	}
 
-	@media (prefers-color-scheme: light) {
-		.hero-pattern {
-			background-image:
-				linear-gradient(rgba(255, 138, 0, 0.15) 1px, transparent 1px),
-				linear-gradient(90deg, rgba(255, 138, 0, 0.15) 1px, transparent 1px);
-		}
+	:global([color-scheme='light']) .hero-pattern {
+		background-image:
+			linear-gradient(rgba(255, 138, 0, 0.15) 1px, transparent 1px),
+			linear-gradient(90deg, rgba(255, 138, 0, 0.15) 1px, transparent 1px);
 	}
 
 	@keyframes patternMove {
@@ -527,10 +523,8 @@
 		margin-top: 2rem;
 	}
 
-	@media (prefers-color-scheme: light) {
-		.hero-date {
-			color: black !important;
-		}
+	:global([color-scheme='light']) .hero-date {
+		color: black !important;
 	}
 
 	.hero-stats {
@@ -1467,7 +1461,7 @@
 		font-size: clamp(1.8rem, 3vw, 2.5rem);
 		font-weight: 800;
 		margin-bottom: 1rem;
-		color: var(--text);
+		color: white;
 		text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 	}
 
@@ -1587,12 +1581,10 @@
 		box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 	}
 
-	@media (prefers-color-scheme: dark) {
-		.organization-card {
-			background: #1a1a1a;
-			border-color: rgba(255, 255, 255, 0.1);
-			box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
-		}
+	:global([color-scheme='dark']) .organization-card {
+		background: #1a1a1a;
+		border-color: rgba(255, 255, 255, 0.1);
+		box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
 	}
 
 	.organization-card:hover {
