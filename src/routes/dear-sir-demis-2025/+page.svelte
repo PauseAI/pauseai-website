@@ -599,7 +599,7 @@
 
 	.letter-pattern {
 		position: absolute;
-		inset: 0;
+		inset: -50px;
 		background-image:
 			linear-gradient(rgba(255, 138, 0, 0.03) 1px, transparent 1px),
 			linear-gradient(90deg, rgba(255, 138, 0, 0.03) 1px, transparent 1px);
