@@ -4,6 +4,7 @@
 	import SignatoryCard from './SignatoryCard.svelte'
 	import QuoteHighlight from './QuoteHighlight.svelte'
 	import { theme } from '$lib/theme'
+	import Link from '$lib/components/custom/a.svelte'
 
 	export let data
 
@@ -301,11 +302,12 @@
 			<div class="organizations-subsection">
 				<div class="organizations-grid">
 					{#each organizations as org}
-						<a
+						<Link
 							href={getOrganizationWebsite(org.name)}
 							target="_blank"
 							rel="noopener noreferrer"
 							class="organization-card organization-link"
+							hideIcon={true}
 						>
 							{#if organizationLogos[org.name]}
 								<img
@@ -317,7 +319,7 @@
 							{:else}
 								<div class="organization-name">{org.name}</div>
 							{/if}
-						</a>
+						</Link>
 					{/each}
 				</div>
 			</div>
@@ -336,10 +338,11 @@
 					</p>
 				</div>
 				<div class="pdf-link-container">
-					<a
+					<Link
 						href="/pdfs/PauseAI_Open_Letter_Background_Information.pdf"
 						target="_blank"
 						class="pdf-thumbnail"
+						hideIcon={true}
 					>
 						<img
 							src="/pdfs/PauseAI_Open_Letter_Background_Information_page-1.jpg"
@@ -349,7 +352,7 @@
 						<div class="pdf-info">
 							<span class="pdf-title">Background Information</span>
 						</div>
-					</a>
+					</Link>
 				</div>
 			</div>
 		</div>
@@ -365,10 +368,10 @@
 					Hassabis, calling for transparency in Google DeepMind's AI safety commitments.
 				</p>
 				<div class="campaign-cta">
-					<a href="/uk-email-mp" class="cta-button">
+					<Link href="/uk-email-mp" class="cta-button" hideIcon={true}>
 						<span class="cta-text">Email Your MP</span>
 						<span class="cta-subtitle">Ask them to sign the letter</span>
-					</a>
+					</Link>
 				</div>
 			</div>
 		</div>
@@ -378,8 +381,10 @@
 	<section class="contact-section">
 		<div class="contact-container">
 			<p class="contact-text">
-				For enquiries contact <a href="mailto:joseph@pauseai.info" class="contact-link"
-					>Joseph Miller at joseph@pauseai.info</a
+				For enquiries contact <Link
+					href="mailto:joseph@pauseai.info"
+					class="contact-link"
+					hideIcon={true}>Joseph Miller at joseph@pauseai.info</Link
 				>
 			</p>
 		</div>
@@ -1056,7 +1061,7 @@
 		padding: 0 2rem;
 	}
 
-	.organization-card {
+	* :global(.organization-card) {
 		background: var(--bg);
 		border-radius: 12px;
 		padding: 2rem;
@@ -1071,7 +1076,7 @@
 		box-sizing: border-box;
 	}
 
-	.organization-card::before {
+	* :global(.organization-card::before) {
 		content: '';
 		position: absolute;
 		top: 0;
@@ -1083,23 +1088,23 @@
 		transition: opacity 0.3s ease;
 	}
 
-	.organization-card:hover {
+	* :global(.organization-card:hover) {
 		transform: translateY(-2px);
 		box-shadow: 0 4px 12px rgba(255, 138, 0, 0.2);
 		border-color: var(--brand);
 	}
 
-	.organization-card:hover::before {
+	* :global(.organization-card:hover::before) {
 		opacity: 1;
 	}
 
-	.organization-link {
+	* :global(.organization-link) {
 		text-decoration: none;
 		color: inherit;
 		cursor: pointer;
 	}
 
-	.organization-link:hover {
+	* :global(.organization-link:hover) {
 		text-decoration: none;
 	}
 
@@ -1261,7 +1266,7 @@
 			gap: 0.75rem;
 		}
 
-		.organization-card {
+		* :global(.organization-card) {
 			padding: 1.5rem;
 			min-height: 100px;
 		}
@@ -1275,7 +1280,7 @@
 			padding: 3rem 2rem;
 		}
 
-		.cta-button {
+		* :global(.cta-button) {
 			padding: 1rem 2rem;
 		}
 
@@ -1345,7 +1350,7 @@
 		flex-shrink: 0;
 	}
 
-	.pdf-thumbnail {
+	* :global(.pdf-thumbnail) {
 		display: flex;
 		flex-direction: column;
 		align-items: center;
@@ -1361,7 +1366,7 @@
 		box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
 	}
 
-	.pdf-thumbnail:hover {
+	* :global(.pdf-thumbnail:hover) {
 		border-color: var(--brand);
 		background: rgba(255, 255, 255, 0.08);
 		transform: translateY(-3px);
@@ -1377,7 +1382,7 @@
 		transition: transform 0.3s ease;
 	}
 
-	.pdf-thumbnail:hover .pdf-thumbnail-image {
+	* :global(.pdf-thumbnail:hover .pdf-thumbnail-image) {
 		transform: scale(1.02);
 	}
 
@@ -1408,7 +1413,7 @@
 			text-align: center;
 		}
 
-		.pdf-thumbnail {
+		* :global(.pdf-thumbnail) {
 			width: 180px;
 			padding: 1rem;
 		}
@@ -1479,7 +1484,7 @@
 		margin-top: 1.5rem;
 	}
 
-	.cta-button {
+	* :global(.cta-button) {
 		display: inline-flex;
 		flex-direction: column;
 		align-items: center;
@@ -1496,7 +1501,7 @@
 		overflow: hidden;
 	}
 
-	.cta-button::before {
+	* :global(.cta-button::before) {
 		content: '';
 		position: absolute;
 		inset: 0;
@@ -1505,11 +1510,11 @@
 		transition: opacity 0.3s ease;
 	}
 
-	.cta-button:hover::before {
+	* :global(.cta-button:hover::before) {
 		opacity: 1;
 	}
 
-	.cta-button:hover {
+	* :global(.cta-button:hover) {
 		transform: translateY(-5px);
 		box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
 	}
@@ -1526,7 +1531,7 @@
 	}
 
 	/* PDF Thumbnail Styles */
-	.pdf-thumbnail {
+	* :global(.pdf-thumbnail) {
 		display: block;
 		width: 150px;
 		height: auto;
@@ -1539,7 +1544,7 @@
 		text-decoration: none;
 	}
 
-	.pdf-thumbnail:hover {
+	* :global(.pdf-thumbnail:hover) {
 		transform: translateY(-2px);
 		box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
 	}
@@ -1567,7 +1572,7 @@
 	}
 
 	/* Organization Cards */
-	.organization-card {
+	* :global(.organization-card) {
 		background: white;
 		border: 1px solid rgba(0, 0, 0, 0.1);
 		border-radius: 12px;
@@ -1581,13 +1586,13 @@
 		box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 	}
 
-	:global([color-scheme='dark']) .organization-card {
+	:global([color-scheme='dark']) * :global(.organization-card) {
 		background: #1a1a1a;
 		border-color: rgba(255, 255, 255, 0.1);
 		box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
 	}
 
-	.organization-card:hover {
+	* :global(.organization-card:hover) {
 		transform: translateY(-2px);
 		box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
 		border-color: var(--brand);
@@ -1629,13 +1634,13 @@
 		margin: 0;
 	}
 
-	.contact-link {
+	* :global(.contact-link) {
 		color: var(--brand);
 		text-decoration: none;
 		font-weight: 500;
 	}
 
-	.contact-link:hover {
+	* :global(.contact-link:hover) {
 		text-decoration: underline;
 	}
 

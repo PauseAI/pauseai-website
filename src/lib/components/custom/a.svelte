@@ -17,6 +17,7 @@
 	let className: string = ''
 	export { className as class }
 	export let hideIcon = false
+	export let rel: string | null = null
 
 	const ICON_PROPS = { size: '0.7em' }
 
@@ -66,7 +67,7 @@
 </script>
 
 <!-- eslint-disable-next-line svelte/no-restricted-html-elements - Warning is about using this component -->
-<a {href} {target} class={className} bind:this={anchor}>
+<a {href} {target} {rel} class={className} bind:this={anchor}>
 	<slot />{#if type != Type.Internal && !hideIcon}
 		<span style="white-space: nowrap">
 			<div class="icon">
