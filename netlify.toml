@@ -25,7 +25,7 @@
   command = "pnpm dev"
   port = 37572
 
-# Configuration for l10n testing branches
-# Any branch starting with "l10n" will use all locales defined in default-settings.js
-[context."l10n*".environment]
-  PARAGLIDE_LOCALES = "all"
+# Spanish locale testing branch
+[context.l10n-es.environment]
+  PARAGLIDE_LOCALES = "es"
+
