@@ -45,8 +45,16 @@ function regenerateSettings(verbose = false): void {
 		console.log(`Using locales: ${settings.locales.join(', ')}`)
 	}
 
+	// On dev machines, check for old env var name and error if found
+	if (process.env.CI !== 'true' && process.env.TRANSLATION_OPENROUTER_API_KEY) {
+		console.error('❌ TRANSLATION_OPENROUTER_API_KEY is deprecated!')
+		console.error('   Please use L10N_OPENROUTER_API_KEY instead.')
+		console.error('   Update your .env file to use the new name.')
+		process.exit(1)
+	}
+
 	// Determine if we're allowing l10n generation based on API key presence
-	const allowGeneration = !!process.env.TRANSLATION_OPENROUTER_API_KEY
+	const allowGeneration = !!process.env.L10N_OPENROUTER_API_KEY
 	if (verbose) {
 		console.log(`\ud83e\udd16 L10n generation: ${allowGeneration ? 'ENABLED' : 'DISABLED'}`)
 	}
