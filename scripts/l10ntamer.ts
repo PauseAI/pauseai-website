@@ -284,7 +284,7 @@ async function main() {
 		generateReport(results)
 
 		// Write detailed results to file
-		const reportPath = 'unlocalized-links-audit.json'
+		const reportPath = '.svelte-kit/unlocalized-links-audit.json'
 		fs.writeFileSync(reportPath, JSON.stringify(results, null, 2))
 		console.log(`\n📄 Detailed results written to: ${reportPath}`)
 	} catch (error) {
