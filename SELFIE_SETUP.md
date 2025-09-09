@@ -2,6 +2,8 @@
 
 This feature allows supporters to upload selfies for the AI safety book campaign collage.
 
+(touched to provoke PR deploy)
+
 ## Quick Start for Developers
 
 You have two options:
