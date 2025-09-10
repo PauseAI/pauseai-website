@@ -19,7 +19,29 @@
 	const isBlurred = writable<boolean>(false)
 	const isProcessing = writable<boolean>(false)
 
-	let cloudinaryWidget: any = null
+	interface CloudinaryWidget {
+		destroy(): void
+		open(): void
+	}
+
+	interface CloudinaryWindow extends Window {
+		cloudinary?: {
+			createUploadWidget: (
+				options: Record<string, unknown>,
+				callback: (error: Error | null, result: CloudinaryResult) => void
+			) => CloudinaryWidget
+		}
+	}
+
+	interface CloudinaryResult {
+		event: string
+		info?: {
+			secure_url: string
+			public_id: string
+		}
+	}
+
+	let cloudinaryWidget: CloudinaryWidget | null = null
 
 	onMount(() => {
 		// Load Cloudinary widget script
@@ -38,8 +60,8 @@
 	})
 
 	function initializeWidget() {
-		if (typeof window !== 'undefined' && (window as any).cloudinary) {
-			cloudinaryWidget = (window as any).cloudinary.createUploadWidget(
+		if (typeof window !== 'undefined' && (window as CloudinaryWindow).cloudinary) {
+			cloudinaryWidget = (window as CloudinaryWindow).cloudinary.createUploadWidget(
 				{
 					cloudName: import.meta.env.PUBLIC_CLOUDINARY_CLOUD_NAME || 'dyjlw1syg',
 					uploadPreset: 'selfie',
@@ -80,7 +102,7 @@
 						}
 					}
 				},
-				async (error: any, result: any) => {
+				async (error: Error | null, result: CloudinaryResult) => {
 					if (error) {
 						console.error('Upload error:', error)
 						toast.error('Upload failed. Please try again.')
@@ -211,14 +233,6 @@
 		currentState.set('done')
 		toast.success('Thank you for joining!')
 		isProcessing.set(false)
-	}
-
-	function startOver() {
-		currentState.set('ready')
-		uploadedImage.set(null)
-		uploadedImageId.set(null)
-		userEmail.set('')
-		isBlurred.set(false)
 	}
 
 	$: emailValid = $userEmail.includes('@') && $userEmail.includes('.')
