@@ -18,7 +18,7 @@ export function hasCloudinaryCredentials(): boolean {
 // Returns error response for missing credentials
 export function credentialsError() {
 	console.error('Cloudinary API secret not configured')
-	return json({ error: 'Server configuration error' }, { status: 500 })
+	return json({ error: 'Service not configured. Please contact support.' }, { status: 503 })
 }
 
 export default cloudinary
