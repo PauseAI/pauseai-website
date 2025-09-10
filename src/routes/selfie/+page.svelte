@@ -60,8 +60,9 @@
 	})
 
 	function initializeWidget() {
-		if (typeof window !== 'undefined' && (window as CloudinaryWindow).cloudinary) {
-			cloudinaryWidget = (window as CloudinaryWindow).cloudinary.createUploadWidget(
+		const cloudinary = (window as CloudinaryWindow).cloudinary
+		if (typeof window !== 'undefined' && cloudinary) {
+			cloudinaryWidget = cloudinary.createUploadWidget(
 				{
 					cloudName: import.meta.env.PUBLIC_CLOUDINARY_CLOUD_NAME || 'dyjlw1syg',
 					uploadPreset: 'selfie',
@@ -109,7 +110,7 @@
 						return
 					}
 
-					if (result.event === 'success') {
+					if (result.event === 'success' && result.info) {
 						console.log('Upload result:', result.info)
 						currentState.set('options')
 						uploadedImage.set(result.info.secure_url)
@@ -332,7 +333,7 @@
 
 			{#if $uploadedImage}
 				<div class="preview-container">
-					<img src={$uploadedImage} alt="Your uploaded photo" class="preview" />
+					<img src={$uploadedImage} alt="Your uploaded selfie" class="preview" />
 					{#if $isBlurred}
 						<p class="blur-status">✓ Face blurred for privacy</p>
 					{/if}
