@@ -237,12 +237,7 @@
 
 			<div class="upload-container">
 				<div class="button-center">
-					<Button
-						on:click={openUploadWidget}
-						variant="primary"
-						size="large"
-						disabled={!$widgetReady}
-					>
+					<Button on:click={openUploadWidget} disabled={!$widgetReady}>
 						{#if !$widgetReady}
 							Loading...
 						{:else}
@@ -280,12 +275,7 @@
 
 					{#if $userEmail && emailValid}
 						<div class="button-center">
-							<Button
-								on:click={finalizeSubmission}
-								variant="primary"
-								size="large"
-								disabled={$isProcessing}
-							>
+							<Button on:click={finalizeSubmission} disabled={$isProcessing}>
 								{#if $isProcessing}
 									Processing...
 								{:else}
@@ -308,7 +298,7 @@
 
 				<div class="action-buttons">
 					{#if !$isBlurred}
-						<Button on:click={applyBlur} variant="secondary" disabled={$isProcessing}>
+						<Button on:click={applyBlur} subtle={true} disabled={$isProcessing}>
 							{#if $isProcessing}
 								Processing...
 							{:else}
@@ -316,7 +306,7 @@
 							{/if}
 						</Button>
 					{/if}
-					<Button on:click={removeUpload} variant="secondary" disabled={$isProcessing}>
+					<Button on:click={removeUpload} subtle={true} disabled={$isProcessing}>
 						{#if $isProcessing}
 							Processing...
 						{:else}
