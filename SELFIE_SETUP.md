@@ -45,7 +45,11 @@ In your Cloudinary dashboard:
    - Enter: `c_fill,g_face,ar_3:4,w_1500,h_2000,q_auto`
    - This auto-detects faces and creates consistent 3:4 portraits
 
-5. Save the preset
+5. Under **Upload Control** → **Moderation**:
+   - Set to **Manual**
+   - This makes photos appear in the Moderation tab for review
+
+6. Save the preset
 
 ### 3. Get Your Credentials
 
@@ -106,17 +110,21 @@ If you want blur to create a permanent blurred version (not just display blur):
 ### File Organization in Cloudinary:
 
 ```
-test_prototype/
-  pending/     # New uploads awaiting review
-  approved/    # Reviewed and approved (manual move)
+test_prototype/    # Test phase uploads (all in one folder)
 ```
+
+### Moderation Status (Automatic):
+
+Photos uploaded with `moderation: 'manual'` automatically get:
+
+- `pending` status - Shows in Moderation tab for review
+- Can be changed to `approved` or `rejected` via Cloudinary UI
 
 ### Tags Applied:
 
-- `pending` - Awaiting review
 - `test_prototype` - Development/testing phase
 - `selfie` - Identifies as selfie upload
-- `has_email` - User provided email
+- `has_email` - User provided email (added if email provided)
 - `face_masked` - User requested blur
 
 ### Metadata Stored:
@@ -125,14 +133,14 @@ test_prototype/
 - `email` - If provided by user
 - Plus EXIF data (camera, location if present)
 
-## Review Process (Manual for Now)
+## Review Process
 
-1. Log into Cloudinary Media Library
-2. Filter by tag: `pending`
-3. Review images
-4. Select approved images
-5. Change tag from `pending` to `approved`
-6. Move from `/pending` to `/approved` folder
+1. Log into Cloudinary Console
+2. Go to **Media Library → Moderation** tab
+3. Photos appear automatically with "pending" status
+4. Review and click to approve or reject each photo
+5. Approved photos remain in the library
+6. Rejected photos can be deleted or kept separate
 
 ## Troubleshooting
 

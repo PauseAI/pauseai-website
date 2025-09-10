@@ -6,19 +6,18 @@
 	import toast from 'svelte-french-toast'
 
 	// Page metadata
-	const title = 'Add Your Face for AI Safety'
+	const title = 'Facing AI Danger'
 	const description =
 		'Upload your selfie to support the "If Anyone Builds It, Everyone Dies" book campaign'
 
 	// State management
-	type UploadState = 'initial' | 'uploading' | 'confirming' | 'done'
-	const currentState = writable<UploadState>('initial')
+	type State = 'preparing' | 'ready' | 'options' | 'done'
+	const currentState = writable<State>('preparing')
 	const uploadedImage = writable<string | null>(null)
 	const uploadedImageId = writable<string | null>(null)
 	const userEmail = writable<string>('')
 	const isBlurred = writable<boolean>(false)
 	const isProcessing = writable<boolean>(false)
-	const widgetReady = writable<boolean>(false)
 
 	let cloudinaryWidget: any = null
 
@@ -46,13 +45,14 @@
 					uploadPreset: 'selfie',
 					sources: ['camera', 'local', 'facebook', 'instagram', 'google_drive', 'dropbox'],
 					multiple: false,
-					folder: 'test_prototype/pending',
-					tags: ['pending', 'test_prototype', 'selfie'],
+					folder: 'test_prototype',
+					tags: ['test_prototype', 'selfie'],
 					context: {
 						uploaded_at: new Date().toISOString()
 					},
 					resourceType: 'image',
-					clientAllowedFormats: ['jpg', 'jpeg', 'png', 'webp'],
+					// Note: clientAllowedFormats breaks camera access on Android 14+
+					// We use resourceType: 'image' for server-side validation instead
 					maxFileSize: 10000000, // 10MB
 					cropping: false,
 					showPoweredBy: false,
@@ -60,18 +60,23 @@
 					styles: {
 						palette: {
 							window: '#FFFFFF',
-							windowBorder: '#90A0B3',
-							tabIcon: '#FF4444',
+							windowBorder: '#E0E0E0',
+							tabIcon: '#ff9416', // PauseAI orange
 							menuIcons: '#5A616A',
 							textDark: '#000000',
 							textLight: '#FFFFFF',
-							link: '#FF4444',
-							action: '#FF4444',
-							inactiveTabIcon: '#0E2F5A',
+							link: '#ff9416', // PauseAI orange
+							action: '#ff9416', // PauseAI orange
+							inactiveTabIcon: '#90A0B3',
 							error: '#F44235',
-							inProgress: '#0078FF',
+							inProgress: '#ff9416', // PauseAI orange
 							complete: '#20B832',
-							sourceBg: '#E4EBF1'
+							sourceBg: '#FFF4E6' // Light orange tint
+						},
+						fonts: {
+							default: "'Roboto Slab', serif",
+							primary: "'Roboto Slab', serif",
+							secondary: "'Saira Condensed', Impact, sans-serif"
 						}
 					}
 				},
@@ -84,13 +89,16 @@
 
 					if (result.event === 'success') {
 						console.log('Upload result:', result.info)
-						currentState.set('confirming')
+						currentState.set('options')
 						uploadedImage.set(result.info.secure_url)
 						uploadedImageId.set(result.info.public_id)
+					} else if (result.event === 'close') {
+						// Widget was closed - no action needed, stay in ready state
+						console.log('Upload widget closed')
 					}
 				}
 			)
-			widgetReady.set(true)
+			currentState.set('ready')
 		}
 	}
 
@@ -101,7 +109,6 @@
 			initializeWidget()
 			setTimeout(() => {
 				if (cloudinaryWidget) {
-					currentState.set('uploading')
 					cloudinaryWidget.open()
 				}
 			}, 100)
@@ -153,8 +160,8 @@
 
 			if (!response.ok) throw new Error('Failed to remove')
 
-			// Reset to initial state
-			currentState.set('initial')
+			// Reset to ready state
+			currentState.set('ready')
 			uploadedImage.set(null)
 			uploadedImageId.set(null)
 			userEmail.set('')
@@ -207,7 +214,7 @@
 	}
 
 	function startOver() {
-		currentState.set('initial')
+		currentState.set('ready')
 		uploadedImage.set(null)
 		uploadedImageId.set(null)
 		userEmail.set('')
@@ -220,44 +227,47 @@
 <PostMeta {title} {description} />
 
 <article class="selfie-upload">
-	<header>
-		<h1>{title}</h1>
-		<p class="tagline">Join others saying: "Read this book. Understand the risks."</p>
-	</header>
+	{#if $currentState !== 'options' && $currentState !== 'done'}
+		<header>
+			<h1>{title}</h1>
+			<p class="tagline">Join us in saying: "Read this book. Understand the risks."</p>
+		</header>
+	{/if}
 
-	{#if $currentState === 'initial'}
+	{#if $currentState === 'preparing'}
 		<section class="upload-section">
-			<div class="statement-box">
-				<h2>By uploading a photo, you express support for:</h2>
-				<blockquote>
-					"AI development poses existential risks that require urgent safety measures. I support
-					pausing frontier AI development until we can ensure it's safe."
-				</blockquote>
-			</div>
-
 			<div class="upload-container">
 				<div class="button-center">
-					<Button on:click={openUploadWidget} disabled={!$widgetReady}>
-						{#if !$widgetReady}
-							Loading...
-						{:else}
-							📷 Upload Your Photo
-						{/if}
-					</Button>
+					<Button disabled={true}>Preparing...</Button>
 				</div>
-				<p class="privacy-note">✓ You'll be able to blur your face if you want privacy</p>
 			</div>
 		</section>
-	{:else if $currentState === 'confirming'}
+	{:else if $currentState === 'ready'}
+		<section class="upload-section">
+			<button class="statement-upload-card" on:click={openUploadWidget}>
+				<div class="statement-content">
+					<blockquote>
+						"AI development poses existential risks that require urgent safety measures. I support
+						pausing frontier AI development until we can ensure it's safe."
+					</blockquote>
+				</div>
+				<div class="upload-action">
+					<span class="upload-button-text">📷 Upload My Photo</span>
+				</div>
+			</button>
+			<p class="privacy-note">✓ You'll be able to blur your face if you want privacy</p>
+		</section>
+	{:else if $currentState === 'options'}
 		<section class="confirmation-section">
-			<h2>Thank you for your support!</h2>
-			<p class="upload-success">Your photo has been uploaded successfully.</p>
+			<h2>Thank you!</h2>
+			<p class="upload-success">Photo uploaded successfully.</p>
 
 			<div class="next-steps">
 				<div class="email-section">
-					<label>
-						<strong>Add your email (helps verify this is a real petition):</strong>
+					<div class="email-row">
+						<label for="email-input">Please add</label>
 						<input
+							id="email-input"
 							type="email"
 							bind:value={$userEmail}
 							placeholder="your@email.com"
@@ -267,11 +277,11 @@
 								}
 							}}
 						/>
-						<small
-							>We'll notify you when your photo appears in the collage. Your email helps prove these
-							are real supporters, not bots. We won't share it or spam you.</small
-						>
-					</label>
+					</div>
+					<small
+						>We won't share this, but it helps us show real people supported. We'll also tell you
+						when you're in the collage!</small
+					>
 
 					{#if $userEmail && emailValid}
 						<div class="button-center">
@@ -284,16 +294,6 @@
 							</Button>
 						</div>
 					{/if}
-
-					<div class="skip-email">
-						<button class="text-button" on:click={finalizeSubmission} disabled={$isProcessing}>
-							{#if $isProcessing}
-								Processing...
-							{:else}
-								Continue without email notification
-							{/if}
-						</button>
-					</div>
 				</div>
 
 				<div class="action-buttons">
@@ -387,16 +387,49 @@
 		font-style: italic;
 	}
 
-	.statement-box {
+	.statement-upload-card {
 		background: var(--bg-light);
+		border: 2px solid var(--color-primary, #ff9416);
+		border-radius: 12px;
 		padding: 1.5rem;
-		border-radius: 8px;
-		margin-bottom: 2rem;
+		margin: 1.5rem 0;
+		cursor: pointer;
+		transition: all 0.2s ease;
+		width: 100%;
+		text-align: left;
+		font-family: inherit;
+		font-size: inherit;
+		color: inherit;
 	}
 
-	.statement-box h2 {
-		font-size: 1.1rem;
+	.statement-upload-card:hover {
+		background: var(--bg-lighter);
+		transform: translateY(-2px);
+		box-shadow: 0 4px 12px rgba(255, 148, 22, 0.2);
+	}
+
+	.statement-upload-card:active {
+		transform: translateY(0);
+	}
+
+	.statement-content {
 		margin-bottom: 1rem;
+	}
+
+	.upload-action {
+		text-align: center;
+		padding-top: 1rem;
+		border-top: 1px solid var(--border-light);
+	}
+
+	.upload-button-text {
+		display: inline-block;
+		background: var(--color-primary, #ff9416);
+		color: white;
+		padding: 0.75rem 1.5rem;
+		border-radius: 8px;
+		font-weight: bold;
+		font-size: 1.1rem;
 	}
 
 	blockquote {
@@ -421,18 +454,20 @@
 	.confirmation-section h2 {
 		text-align: center;
 		color: var(--color-success, #20b832);
-		margin-bottom: 0.5rem;
+		margin-bottom: 0.1rem;
+		font-size: 1.5rem;
 	}
 
 	.upload-success {
 		text-align: center;
-		margin-bottom: 1.5rem;
-		font-size: 1.1rem;
+		margin-bottom: 0.5rem;
+		font-size: 0.95rem;
+		color: var(--text-light);
 	}
 
 	.preview-container {
 		text-align: center;
-		margin: 1.5rem 0;
+		margin: 0.75rem 0;
 	}
 
 	.preview {
@@ -450,36 +485,44 @@
 
 	.action-buttons {
 		display: flex;
-		gap: 1rem;
+		gap: 0.75rem;
 		justify-content: center;
-		margin-top: 1.5rem;
-		padding-top: 1.5rem;
+		margin-top: 0.75rem;
+		padding-top: 0.75rem;
 		border-top: 1px solid var(--border-light);
 		flex-wrap: wrap;
 	}
 
 	.next-steps {
 		background: var(--bg-lighter);
-		padding: 1.5rem;
+		padding: 0.75rem;
 		border-radius: 8px;
-		margin-top: 2rem;
+		margin-top: 0.5rem;
 	}
 
 	.email-section {
-		margin: 1.5rem 0;
+		margin: 0.5rem 0;
 	}
 
-	.email-section label {
-		display: block;
+	.email-row {
+		display: flex;
+		align-items: center;
+		gap: 0.75rem;
+		margin-bottom: 0.5rem;
 	}
 
-	.email-section input {
-		width: 100%;
+	.email-row label {
+		white-space: nowrap;
+		font-weight: 500;
+	}
+
+	.email-row input {
+		flex: 1;
 		padding: 0.5rem;
-		margin-top: 0.5rem;
 		border: 1px solid var(--border);
 		border-radius: 4px;
 		font-size: 1rem;
+		min-width: 0;
 	}
 
 	.email-section small {
@@ -494,34 +537,15 @@
 	.button-center {
 		display: flex;
 		justify-content: center;
-		margin: 1rem 0;
-	}
-
-	.skip-email {
-		text-align: center;
-		margin: 1.5rem 0;
-	}
-
-	.text-button {
-		background: none;
-		border: none;
-		color: var(--text-light);
-		text-decoration: underline;
-		cursor: pointer;
-		font-size: 0.95rem;
-		padding: 0.5rem;
-	}
-
-	.text-button:hover {
-		color: var(--text-dark);
+		margin: 0.5rem 0;
 	}
 
 	.next-info {
-		margin-top: 1.5rem;
-		padding: 1rem;
+		margin-top: 0.75rem;
+		padding: 0.5rem;
 		background: var(--bg-lighter);
 		border-radius: 8px;
-		font-size: 0.95rem;
+		font-size: 0.9rem;
 		color: var(--text-light);
 		text-align: center;
 	}
