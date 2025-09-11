@@ -13,31 +13,31 @@ This role operates within the established Pause IA France association, which has
 
 - Integrate into the current organizational structure and work collaboratively with existing volunteer leadership
 - Build upon and refine the existing strategy rather than creating new direction from scratch
-- Coordinate closely with the French bureau while maintaining reporting lines to PauseAI Global
-- Respect and strengthen the volunteer-driven culture that has been established
+- Coordinate closely with the French bureau (board) while maintaining reporting lines to PauseAI Global
+- Strengthen the volunteer-driven culture that has been established
 
 Key Responsibilities:
 
-- **Regional Leadership:** Will act as the primary coordinator and point of contact for all PauseAI activities across France. 
+- **Regional Leadership:** Act as the primary coordinator and point of contact for all PauseAI activities across France. 
 - **Campaign Coordination**: Plan and execute national campaigns, demonstrations and advocacy efforts and align these with international efforts, specifically across the European Union. 
-- **Volunteer Management**: Recruit, train and coordinate volunteers across France. 
+- **Community Building:** PauseAI is a grassroots organization and your success will be defined in large part by the number of active and engaged members you can help to recruit and coordinate.
 - **Chapter Development and Leader Mentoring**: Establish, support and manage local PauseAI groups in cities. Train and mentor volunteer leaders to become effective recruiters and organizers in their own right. 
 - **Policy Engagement**: Engage with French parliamentarians, civil servants and regulatory bodies on AI governance issues. 
 - **Event Management**: Assist in coordinating future France and Europe-based PauseCon events, as well as organizing events such as protests, workshops, lobby meetings and social events for membership. 
 - **Strategic Partnerships**: Build productive and collaborative relationships with French-based AI safety organisations, academic institutions, and policy groups
 - **Media Relations**: Serve as French spokesperson for PauseAI and coordinate with national and local media outlets, alongside our Global Communications Director.
 
-Required Skills and Attributes:
+Desired Skills and Attributes:
 
 - Proven leadership in community organizing or activism contexts. Volunteer management experience, demonstrated mentorship of leaders. 
-- Excellent communication skills with experience in public speaking. Ideally some media relations experience. 
+- Excellent communication skills on camera and in public speaking. Ideally some media relations experience. 
 - Understanding of the French political system and policy-making process. Ideally understanding of the European Union policy-making process.
 - Strategically minded and able to build flexible but actionable plans. 
 - Project management abilities with experience coordinating teams. 
-- Ability to work effectively within established volunteer structure
-- Collaborative leadership style that empowers existing teams
+- Ability to work effectively within established volunteer structure.
+- Collaborative leadership style that empowers existing teams.
 - Understanding of AI safety issues and support for an international Pause treaty solution. 
-- Near-fluency in English is required for international coordination. 
+- Fluency in English is required for international coordination. 
 
 Conditions:
 
