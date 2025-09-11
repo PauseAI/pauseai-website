@@ -30,11 +30,9 @@ Apply [here](https://pauseai.info/pauseia-france-director).
 
 ## Community Manager
 
-- - Build and maintain engagement and activity across PauseAI's digital community
-
-  - Welcome new members and provide them with direction to participate
-
-  - Maintain PauseAI's culture of empathy, inclusion, and collective action.
+- Build and maintain engagement and activity across PauseAI's digital community
+- Welcome new members and provide them with direction to participate
+- Maintain PauseAI's culture of empathy, inclusion, and collective action.
 
 Apply [here](https://pauseai.info/community-manager-vacancy).
 
