@@ -21,15 +21,17 @@ Key Responsibilities:
 - **Expert Commentary**: Provide authoritative commentary on AI policy developments to media, academic conferences and policy forums.  
 - **Developing Volunteers**: Provide training and mentorship to PauseAI volunteers to equip them with confidence and skills to present PauseAI Global campaign and policy goals to their parliamentarians and other actors. 
 
-Required Skills and Attributes:
+Desired Skills and Attributes:
 
+- Ability to network and build strong relationships well with key people.
+- Existing relationships with policymakers and politicians.
 - Strong verbal and written communication to balance being informative and persuasive. 
-- Knowledge of AI governance, total spectrum of risks posed by AGI development, chip governance and supply chains.
+- Knowledge of AI governance and AI risks
 - Experience with parliamentary processes, committee work and consultation processes.
-- Analytical and writing skills with the ability to translate complex technical concepts into policy language, and further translate those concepts for wider public engagement. 
+- Ability to translate complex technical concepts into policy language, and further translate those concepts for wider public engagement. 
 - Legal, public policy or political science background preferred.
 - Experience in European, United Kingdom or United States government, regulatory body or other policy-focused roles preferred, or alternatively in a lobby group. 
-- Proven experience in policy development, with examples of research contributions or successful policy influence.
+- Proven experience in policy development, with examples of successful policy influence.
 
 Conditions:
 
