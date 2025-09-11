@@ -44,3 +44,7 @@ Conditions:
 - Full time position
 - Paris based or with the ability to travel frequently
 - Salary range of €45,000-60,000 depending on experience
+
+You can send your application to vacancies@pauseai.info
+
+See other vacancies [here]().
