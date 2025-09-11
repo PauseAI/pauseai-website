@@ -1,5 +1,5 @@
 ---
-title: PauseIA France Director
+title: PauseIA France Director (Vacancy)
 slug: pauseia-france-director
 ---
 
