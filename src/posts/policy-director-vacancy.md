@@ -1,5 +1,5 @@
 ---
-title: Policy Director Vacancy
+title: Policy Director (Vacancy)
 slug: policy-director-vacancy
 ---
 
