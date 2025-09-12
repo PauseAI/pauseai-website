@@ -1,6 +1,6 @@
 import { json } from '@sveltejs/kit'
 import type { RequestHandler } from './$types'
-import cloudinary, { hasCloudinaryCredentials, credentialsError } from '$lib/cloudinary'
+import { hasCloudinaryCredentials, credentialsError, callCloudinaryAPI } from '$lib/cloudinary'
 
 export const POST: RequestHandler = async ({ request }) => {
 	if (!hasCloudinaryCredentials()) return credentialsError()
@@ -17,11 +17,21 @@ export const POST: RequestHandler = async ({ request }) => {
 			return json({ error: 'Invalid email format' }, { status: 400 })
 		}
 
-		// Add email to context metadata
-		await cloudinary.uploader.add_context(`email=${email}`, [public_id])
+		// Add context (requires 'add' command)
+		// Note: public_ids parameter (plural) for the context endpoint
+		await callCloudinaryAPI('image/context', {
+			command: 'add',
+			public_ids: [public_id],
+			context: `email=${email}`
+		})
 
-		// Add tag to indicate email was provided
-		await cloudinary.uploader.add_tag('has_email', [public_id])
+		// Add tag separately
+		// Note: public_ids parameter (plural) for the tags endpoint
+		await callCloudinaryAPI('image/tags', {
+			command: 'add',
+			public_ids: [public_id],
+			tag: 'has_email'
+		})
 
 		return json({
 			success: true,

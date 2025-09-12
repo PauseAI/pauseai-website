@@ -80,7 +80,6 @@
 		"airtable": "^0.12.2",
 		"axios": "^1.11.0",
 		"clipboard-polyfill": "^4.1.1",
-		"cloudinary": "^2.7.0",
 		"escape-html": "^1.0.3",
 		"github-slugger": "^2.0.0",
 		"html-to-image": "^1.11.13",

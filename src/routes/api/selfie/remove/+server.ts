@@ -1,6 +1,6 @@
 import { json } from '@sveltejs/kit'
 import type { RequestHandler } from './$types'
-import cloudinary, { hasCloudinaryCredentials, credentialsError } from '$lib/cloudinary'
+import { hasCloudinaryCredentials, credentialsError, callCloudinaryAPI } from '$lib/cloudinary'
 
 export const POST: RequestHandler = async ({ request }) => {
 	if (!hasCloudinaryCredentials()) return credentialsError()
@@ -13,7 +13,9 @@ export const POST: RequestHandler = async ({ request }) => {
 		}
 
 		// Delete the image from Cloudinary
-		const result = await cloudinary.uploader.destroy(public_id)
+		const result = await callCloudinaryAPI('image/destroy', {
+			public_id: public_id
+		})
 
 		if (result.result !== 'ok') {
 			console.error('Failed to delete image:', result)
