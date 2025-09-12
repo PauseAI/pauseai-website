@@ -64,8 +64,7 @@ It is [psychologically difficult](/psychology-of-x-risk) to think about potentia
 You can make a difference. Volunteers in Australia raise awareness, protest, lobby, and support the global PauseAI movement.
 
 - [Join our community](/join)
-- [Attend our next Australian online or in-person event](https://lu.ma/PauseAIAustralia)
-- Sign the Australians for AI Safety [open letter](https://www.australiansforaisafety.com.au/letters)
+- [Attend our next Australian online or in-person event](https://lu.ma/PauseAIAustralia)[](https://www.australiansforaisafety.com.au/letters)
 - [Contact politicians](/writing-a-letter)
 - Talk to your friends and family about AI risk
 
