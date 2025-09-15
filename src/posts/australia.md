@@ -70,6 +70,10 @@ You can make a difference. Volunteers in Australia raise awareness, protest, lob
 
 ### Campaigns
 
+#### Productivity commission submission
+
+In September 2025, PauseAI Australia responded to the interim report on _Harnessing Data and Digital Technology_ with [this submission](https://drive.google.com/file/d/1Ea9I3jXCZAMdGAcN2D-UMRPyE2MzGB7k/view). Volunteers also made individual submissions ([David](https://docs.google.com/document/d/1DenTOorlnqQ02PJEEdRvsceFmfvvfTXxGubozjfx-yE/edit?usp=sharing), [Peter](https://docs.google.com/document/d/1aQcC5DYq3feyWyHAPFGcEvwgrX0vXSbgMNDBEYWA61E/edit?tab=t.0#heading=h.4hsb6c6hjc5f), [Michael](https://drive.google.com/file/d/1lWdtIiLatF1DOPvdjQSaonO9dEqFCFSV/view?usp=drive_link)).
+
 #### Investigate OpenAI
 
 [In July 2025](https://drive.google.com/file/d/1t9ntUlF2cZH4_f-1fsp0FFCf3RiGZ81g/view?usp=drive_link), volunteer Mark Brown brought OpenAI to the attention of the Australian Federal Police and the Attorney-General of Australia, alleging potential breaches of the _Crimes (Biological Weapons) Act 1976_. It was discussed in a [news story](https://ia.acs.org.au/article/2025/is-the-new-chatgpt-agent-really-a-weapons-risk-.html) and on [a video podcast](https://youtu.be/-YPhNdpA8Rk?si=dTBpGMfZaNWnldXa). We are still waiting for a response from the AFP and the Attorney-General.
