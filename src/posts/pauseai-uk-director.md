@@ -35,6 +35,6 @@ Conditions:
 - London based, with potential travel across UK
 - Salary range of €45,000-60,000 depending on experience
 
-You can send your application to vacancies@pauseai.info
+You can apply by sending a CV and a cover letter to vacancies@pauseai.info
 
 See other vacancies [here]().
