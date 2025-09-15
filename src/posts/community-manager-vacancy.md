@@ -35,6 +35,6 @@ Conditions:
 - Completely remote, but other employed staff are based across Europe and North America, so a preference for these locations
 - Salary dependent on hours
 
-You can send your application to vacancies@pauseai.info
+You can apply by sending a CV and cover letter to vacancies@pauseai.info
 
 See other vacancies [here](https://pauseai.info/vacancies).
