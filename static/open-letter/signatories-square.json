@@ -607,6 +607,13 @@
 		"fileSize": 947073
 	},
 	{
+		"name": "Delyth Jewell",
+		"type": "MS",
+		"portrait": "/portraits/signatories/senedd/delyth_jewell.jpg",
+		"status": "success",
+		"chamber": "wales"
+	},
+	{
 		"name": "Jenny Rathbone",
 		"type": "MS",
 		"portrait": "/portraits/signatories/senedd/jenny_rathbone.jpg",
