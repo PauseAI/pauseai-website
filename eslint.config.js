@@ -47,6 +47,12 @@ export default ts.config(
 		rules: {
 			// Override or add rule settings here, such as:
 			// 'svelte/rule-name': 'error'
+
+			// disabled
+			'svelte/no-navigation-without-resolve': 'off',
+			'svelte/require-each-key': 'off',
+
+			// configured
 			'@typescript-eslint/no-unused-vars': [
 				'error',
 				{
@@ -54,7 +60,8 @@ export default ts.config(
 					destructuredArrayIgnorePattern: '^_'
 				}
 			],
-			'svelte/require-each-key': 'off',
+
+			// enabled
 			'svelte/no-restricted-html-elements': [
 				'warn',
 				{
