@@ -1,5 +1,6 @@
 /* https://sveltejs.github.io/eslint-plugin-svelte/user-guide/ */
 import js from '@eslint/js'
+import markdown from '@eslint/markdown'
 import prettier from 'eslint-config-prettier'
 import svelte from 'eslint-plugin-svelte'
 import { defineConfig, globalIgnores } from 'eslint/config'
@@ -10,7 +11,6 @@ import svelteConfig from './svelte.config.js'
 export default defineConfig(
 	js.configs.recommended,
 	...ts.configs.recommended,
-	...svelte.configs.recommended,
 	prettier,
 	{
 		languageOptions: {
@@ -21,7 +21,18 @@ export default defineConfig(
 		}
 	},
 	{
+		files: ['**/*.md'],
+		extends: [markdown.configs.recommended],
+		rules: {
+			'markdown/fenced-code-language': 'off',
+			'markdown/no-missing-atx-heading-space': 'off', // rule is broken
+			'markdown/no-missing-label-refs': 'off',
+			'no-irregular-whitespace': 'off' // not supported by markdown parser
+		}
+	},
+	{
 		files: ['**/*.svelte', '**/*.svelte.ts', '**/*.svelte.js'],
+		extends: [svelte.configs.recommended],
 		// See more details at: https://typescript-eslint.io/packages/parser/
 		languageOptions: {
 			parserOptions: {
@@ -41,9 +52,7 @@ export default defineConfig(
 				// explicitly specifying it ensures better compatibility and functionality.
 				svelteConfig
 			}
-		}
-	},
-	{
+		},
 		rules: {
 			// Override or add rule settings here, such as:
 			// 'svelte/rule-name': 'error'
@@ -52,21 +61,24 @@ export default defineConfig(
 			'svelte/no-navigation-without-resolve': 'off',
 			'svelte/require-each-key': 'off',
 
-			// configured
-			'@typescript-eslint/no-unused-vars': [
-				'error',
-				{
-					argsIgnorePattern: '^_',
-					destructuredArrayIgnorePattern: '^_'
-				}
-			],
-
 			// enabled
 			'svelte/no-restricted-html-elements': [
 				'warn',
 				{
 					elements: ['a'],
 					message: 'Use $lib/components/custom/a.svelte instead'
+				}
+			]
+		}
+	},
+	{
+		rules: {
+			// configured
+			'@typescript-eslint/no-unused-vars': [
+				'error',
+				{
+					argsIgnorePattern: '^_',
+					destructuredArrayIgnorePattern: '^_'
 				}
 			]
 		}
