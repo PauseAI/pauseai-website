@@ -37,4 +37,4 @@ Conditions:
 
 You can apply by sending a CV and a cover letter to vacancies@pauseai.info
 
-See other vacancies [here]().
+See other vacancies [here](vacancies).
