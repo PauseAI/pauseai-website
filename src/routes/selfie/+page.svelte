@@ -16,7 +16,6 @@
 	const uploadedImage = writable<string | null>(null)
 	const uploadedImageId = writable<string | null>(null)
 	const userEmail = writable<string>('')
-	const isBlurred = writable<boolean>(false)
 	const isProcessing = writable<boolean>(false)
 
 	interface CloudinaryWidget {
@@ -140,36 +139,6 @@
 		}
 	}
 
-	async function applyBlur() {
-		if (!$uploadedImageId || $isProcessing) return
-
-		isProcessing.set(true)
-		try {
-			const response = await fetch('/api/selfie/blur', {
-				method: 'POST',
-				headers: { 'Content-Type': 'application/json' },
-				body: JSON.stringify({ public_id: $uploadedImageId })
-			})
-
-			if (!response.ok) throw new Error('Failed to blur')
-
-			const result = await response.json()
-
-			// Update the display with blurred version and new ID
-			isBlurred.set(true)
-			uploadedImage.set(result.url)
-			if (result.public_id) {
-				uploadedImageId.set(result.public_id) // Update to new blurred ID
-			}
-			toast.success('Face blurred successfully')
-		} catch (error) {
-			console.error('Error applying blur:', error)
-			toast.error('Failed to blur image. Please try again.')
-		} finally {
-			isProcessing.set(false)
-		}
-	}
-
 	async function removeUpload() {
 		if (!$uploadedImageId || $isProcessing) return
 
@@ -188,7 +157,6 @@
 			uploadedImage.set(null)
 			uploadedImageId.set(null)
 			userEmail.set('')
-			isBlurred.set(false)
 			toast.success('Photo removed')
 		} catch (error) {
 			console.error('Error removing upload:', error)
@@ -270,7 +238,6 @@
 					<span class="upload-button-text">📷 Upload My Photo</span>
 				</div>
 			</button>
-			<p class="privacy-note">✓ You'll be able to blur your face if you want privacy</p>
 		</section>
 	{:else if $currentState === 'options'}
 		<section class="confirmation-section">
@@ -312,15 +279,6 @@
 				</div>
 
 				<div class="action-buttons">
-					{#if !$isBlurred}
-						<Button on:click={applyBlur} subtle={true} disabled={$isProcessing}>
-							{#if $isProcessing}
-								Processing...
-							{:else}
-								🔒 Blur My Face for Privacy
-							{/if}
-						</Button>
-					{/if}
 					<Button on:click={removeUpload} subtle={true} disabled={$isProcessing}>
 						{#if $isProcessing}
 							Processing...
@@ -334,9 +292,6 @@
 			{#if $uploadedImage}
 				<div class="preview-container">
 					<img src={$uploadedImage} alt="Your uploaded selfie" class="preview" />
-					{#if $isBlurred}
-						<p class="blur-status">✓ Face blurred for privacy</p>
-					{/if}
 				</div>
 			{/if}
 
@@ -490,12 +445,6 @@
 		max-height: 400px;
 		border-radius: 8px;
 		box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-	}
-
-	.blur-status {
-		margin-top: 0.5rem;
-		color: var(--color-success);
-		font-weight: 500;
 	}
 
 	.action-buttons {
