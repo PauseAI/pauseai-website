@@ -41,6 +41,16 @@
 	}
 
 	let cloudinaryWidget: CloudinaryWidget | null = null
+	let videoElement: HTMLVideoElement | null = null
+	let canvasElement: HTMLCanvasElement | null = null
+	let stream: MediaStream | null = null
+	const cameraAvailable = writable<boolean>(false)
+	const cameraError = writable<string | null>(null)
+	const isCapturing = writable<boolean>(false)
+
+	// Create camera shutter sound using Web Audio API
+	let audioContext: AudioContext | null = null
+	let shutterSound: () => void = () => {}
 
 	onMount(() => {
 		// Load Cloudinary widget script
@@ -50,9 +60,18 @@
 		script.onload = initializeWidget
 		document.body.appendChild(script)
 
+		// Initialize camera on mount
+		initializeCamera()
+
+		// Initialize audio for shutter sound
+		initializeAudio()
+
 		return () => {
 			if (cloudinaryWidget) {
 				cloudinaryWidget.destroy()
+			}
+			if (stream) {
+				stream.getTracks().forEach((track) => track.stop())
 			}
 			document.body.removeChild(script)
 		}
@@ -124,6 +143,189 @@
 		}
 	}
 
+	function initializeAudio() {
+		try {
+			// Create audio context
+			audioContext = new (window.AudioContext || (window as any).webkitAudioContext)()
+
+			// Create shutter sound function
+			shutterSound = () => {
+				if (!audioContext) return
+
+				const now = audioContext.currentTime
+
+				// First click - high frequency tick
+				const click1 = audioContext.createOscillator()
+				const gain1 = audioContext.createGain()
+
+				click1.type = 'square'
+				click1.frequency.setValueAtTime(1500, now)
+				gain1.gain.setValueAtTime(0, now)
+				gain1.gain.linearRampToValueAtTime(0.3, now + 0.001)
+				gain1.gain.linearRampToValueAtTime(0, now + 0.003)
+
+				click1.connect(gain1)
+				gain1.connect(audioContext.destination)
+				click1.start(now)
+				click1.stop(now + 0.003)
+
+				// Second click - lower frequency mechanical sound
+				const click2 = audioContext.createOscillator()
+				const gain2 = audioContext.createGain()
+
+				click2.type = 'square'
+				click2.frequency.setValueAtTime(800, now + 0.025)
+				gain2.gain.setValueAtTime(0, now + 0.025)
+				gain2.gain.linearRampToValueAtTime(0.2, now + 0.026)
+				gain2.gain.linearRampToValueAtTime(0, now + 0.03)
+
+				click2.connect(gain2)
+				gain2.connect(audioContext.destination)
+				click2.start(now + 0.025)
+				click2.stop(now + 0.03)
+			}
+		} catch (error) {
+			console.log('Audio context not available:', error)
+			// Fallback to no sound
+		}
+	}
+
+	async function initializeCamera() {
+		try {
+			// Check for HTTPS (required for getUserMedia except on localhost)
+			if (location.protocol !== 'https:' && location.hostname !== 'localhost') {
+				console.log('Camera requires HTTPS (except localhost)')
+				return
+			}
+
+			// Check if getUserMedia is available
+			if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
+				console.log('getUserMedia not available')
+				return
+			}
+
+			// Request camera access (front camera for selfies)
+			stream = await navigator.mediaDevices.getUserMedia({
+				video: {
+					facingMode: 'user', // Front camera
+					width: { ideal: 640 },
+					height: { ideal: 480 }
+				},
+				audio: false
+			})
+
+			// Camera is available
+			cameraAvailable.set(true)
+
+			// Wait for next tick to ensure video element exists
+			setTimeout(() => {
+				if (videoElement && stream) {
+					videoElement.srcObject = stream
+					// Ensure video plays
+					videoElement.play().catch((e) => {
+						console.error('Video play failed:', e)
+					})
+				}
+			}, 100)
+		} catch (error) {
+			console.log('Camera access denied or error:', error)
+			cameraAvailable.set(false)
+		}
+	}
+
+	async function captureFromCamera() {
+		if (!videoElement || !canvasElement || $isCapturing) {
+			console.log('Missing elements:', { videoElement, canvasElement, isCapturing: $isCapturing })
+			return
+		}
+
+		isCapturing.set(true)
+
+		try {
+			// Check video dimensions BEFORE playing sound
+			console.log('Video dimensions:', videoElement.videoWidth, 'x', videoElement.videoHeight)
+			if (videoElement.videoWidth === 0 || videoElement.videoHeight === 0) {
+				throw new Error('Video not ready - no dimensions')
+			}
+
+			const ctx = canvasElement.getContext('2d')
+			if (!ctx) throw new Error('Canvas context not available')
+
+			// Set canvas size to match video
+			canvasElement.width = videoElement.videoWidth
+			canvasElement.height = videoElement.videoHeight
+
+			// Draw video frame to canvas (mirror for selfie)
+			ctx.save()
+			ctx.scale(-1, 1)
+			ctx.drawImage(
+				videoElement,
+				-canvasElement.width,
+				0,
+				canvasElement.width,
+				canvasElement.height
+			)
+			ctx.restore()
+
+			// Convert to blob
+			const blob = await new Promise<Blob>((resolve, reject) => {
+				canvasElement!.toBlob(
+					(blob) => {
+						if (blob) resolve(blob)
+						else reject(new Error('Failed to capture image'))
+					},
+					'image/jpeg',
+					0.9
+				)
+			})
+
+			// Play shutter sound ONLY after successful capture
+			shutterSound()
+
+			// Small delay to let sound play while uploading
+			await new Promise((resolve) => setTimeout(resolve, 50))
+
+			// Upload to Cloudinary with unique ID
+			const timestamp = Date.now()
+			const randomStr = Math.random().toString(36).substring(2, 8)
+			const uniqueId = `selfie_${timestamp}_${randomStr}`
+
+			const formData = new FormData()
+			formData.append('file', blob, `${uniqueId}.jpg`)
+			formData.append('upload_preset', 'selfie')
+			formData.append('public_id', uniqueId)
+			formData.append('folder', 'test_prototype')
+			formData.append('tags', 'test_prototype,selfie,direct_capture')
+
+			const response = await fetch(
+				`https://api.cloudinary.com/v1_1/${import.meta.env.PUBLIC_CLOUDINARY_CLOUD_NAME || 'dyjlw1syg'}/image/upload`,
+				{
+					method: 'POST',
+					body: formData
+				}
+			)
+
+			if (!response.ok) throw new Error('Upload failed')
+
+			const result = await response.json()
+
+			// Success - update state
+			currentState.set('options')
+			uploadedImage.set(result.secure_url)
+			uploadedImageId.set(result.public_id)
+
+			// Don't stop camera stream - we might need it again
+			// It will be cleaned up on component unmount
+
+			toast.success('Selfie captured!')
+		} catch (error) {
+			console.error('Capture error:', error)
+			toast.error('Failed to capture selfie. Please try the upload button below.')
+		} finally {
+			isCapturing.set(false)
+		}
+	}
+
 	function openUploadWidget() {
 		if (cloudinaryWidget) {
 			// Destroy and recreate to ensure fresh state
@@ -157,6 +359,10 @@
 			uploadedImage.set(null)
 			uploadedImageId.set(null)
 			userEmail.set('')
+
+			// Reinitialize camera for next capture
+			await initializeCamera()
+
 			toast.success('Photo removed')
 		} catch (error) {
 			console.error('Error removing upload:', error)
@@ -205,6 +411,20 @@
 	}
 
 	$: emailValid = $userEmail.includes('@') && $userEmail.includes('.')
+
+	// Svelte action to connect stream when video element mounts
+	function connectStream(node: HTMLVideoElement) {
+		if (stream && !node.srcObject) {
+			node.srcObject = stream
+			node.play().catch((e) => console.error('Initial play failed:', e))
+		}
+
+		return {
+			destroy() {
+				// Cleanup if needed
+			}
+		}
+	}
 </script>
 
 <PostMeta {title} {description} />
@@ -227,17 +447,56 @@
 		</section>
 	{:else if $currentState === 'ready'}
 		<section class="upload-section">
-			<button class="statement-upload-card" on:click={openUploadWidget}>
-				<div class="statement-content">
-					<blockquote>
-						"AI development poses existential risks that require urgent safety measures. I support
-						pausing frontier AI development until we can ensure it's safe."
-					</blockquote>
-				</div>
-				<div class="upload-action">
-					<span class="upload-button-text">📷 Upload My Photo</span>
-				</div>
-			</button>
+			<p class="intro-text">Share your face to make this statement:</p>
+
+			<!-- Statement as speech bubble -->
+			<div class="speech-bubble">
+				<blockquote class="statement-text">
+					"AI development poses existential risks that require urgent safety measures. I support
+					pausing frontier AI development until we can ensure it's safe."
+				</blockquote>
+			</div>
+
+			<!-- Unified camera/upload widget -->
+			<div class="capture-widget">
+				{#if $cameraAvailable}
+					<div class="camera-preview">
+						<video
+							bind:this={videoElement}
+							on:loadedmetadata={() => {
+								console.log('Video metadata loaded')
+								if (stream && videoElement && !videoElement.srcObject) {
+									videoElement.srcObject = stream
+									videoElement.play()
+								}
+							}}
+							use:connectStream
+							autoplay
+							playsinline
+							muted
+							class="video-feed"
+						/>
+						<canvas bind:this={canvasElement} style="display: none;" />
+					</div>
+					<button
+						class="capture-button primary"
+						on:click={captureFromCamera}
+						disabled={$isCapturing}
+					>
+						{#if $isCapturing}
+							Capturing...
+						{:else}
+							Take Selfie Now
+						{/if}
+					</button>
+					<div class="divider">
+						<span>or</span>
+					</div>
+				{/if}
+				<button class="capture-button secondary" on:click={openUploadWidget}>
+					Upload Photo from Gallery
+				</button>
+			</div>
 		</section>
 	{:else if $currentState === 'options'}
 		<section class="confirmation-section">
@@ -415,12 +674,6 @@
 		margin: 2rem 0;
 	}
 
-	.privacy-note {
-		margin-top: 1rem;
-		color: var(--text-light);
-		font-size: 0.95rem;
-	}
-
 	.confirmation-section h2 {
 		text-align: center;
 		color: var(--color-success, #20b832);
@@ -445,6 +698,133 @@
 		max-height: 400px;
 		border-radius: 8px;
 		box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+	}
+
+	.intro-text {
+		text-align: center;
+		font-size: 1.1rem;
+		margin-bottom: 1rem;
+		color: var(--text-dark, #333);
+	}
+
+	.speech-bubble {
+		position: relative;
+		background: var(--card-bg, #ffffff);
+		border-radius: 12px;
+		padding: 1.5rem;
+		margin-bottom: 2rem;
+		box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+	}
+
+	.speech-bubble::after {
+		content: '';
+		position: absolute;
+		bottom: -10px;
+		left: 50%;
+		transform: translateX(-50%);
+		width: 0;
+		height: 0;
+		border-left: 15px solid transparent;
+		border-right: 15px solid transparent;
+		border-top: 10px solid var(--card-bg, #ffffff);
+		filter: drop-shadow(0 3px 3px rgba(0, 0, 0, 0.05));
+	}
+
+	.statement-text {
+		font-size: 1.1rem;
+		line-height: 1.6;
+		margin: 0;
+		font-style: italic;
+		color: var(--text-dark, #333);
+		text-align: center;
+	}
+
+	.capture-widget {
+		background: var(--card-bg, #ffffff);
+		border-radius: 12px;
+		padding: 1.5rem;
+		box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+		text-align: center;
+	}
+
+	.capture-button {
+		width: 100%;
+		padding: 1rem 2rem;
+		font-size: 1.1rem;
+		font-weight: 600;
+		border: none;
+		border-radius: 8px;
+		cursor: pointer;
+		transition: all 0.2s ease;
+		margin: 0.5rem 0;
+	}
+
+	.capture-button.primary {
+		background: var(--color-primary, #ff6600);
+		color: white;
+	}
+
+	.capture-button.primary:hover:not(:disabled) {
+		background: var(--color-primary-dark, #e55500);
+		transform: translateY(-1px);
+		box-shadow: 0 4px 12px rgba(255, 102, 0, 0.3);
+	}
+
+	.capture-button.secondary {
+		background: transparent;
+		color: var(--color-primary, #ff6600);
+		border: 2px solid var(--color-primary, #ff6600);
+	}
+
+	.capture-button.secondary:hover {
+		background: var(--color-primary, #ff6600);
+		color: white;
+	}
+
+	.capture-button:disabled {
+		opacity: 0.6;
+		cursor: not-allowed;
+	}
+
+	.divider {
+		position: relative;
+		margin: 1.5rem 0;
+		text-align: center;
+	}
+
+	.divider::before {
+		content: '';
+		position: absolute;
+		top: 50%;
+		left: 0;
+		right: 0;
+		height: 1px;
+		background: var(--border-light, #e0e0e0);
+	}
+
+	.divider span {
+		position: relative;
+		padding: 0 1rem;
+		background: var(--card-bg, #ffffff);
+		color: var(--text-light, #666);
+		font-size: 0.9rem;
+	}
+
+	.camera-preview {
+		margin-bottom: 1rem;
+		border-radius: 8px;
+		overflow: hidden;
+		background: #000;
+		aspect-ratio: 4/3;
+		max-width: 500px;
+		margin: 0 auto 1rem;
+	}
+
+	.video-feed {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		transform: scaleX(-1); /* Mirror for selfie */
 	}
 
 	.action-buttons {
