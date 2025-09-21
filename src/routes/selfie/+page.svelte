@@ -45,7 +45,6 @@
 	let canvasElement: HTMLCanvasElement | null = null
 	let stream: MediaStream | null = null
 	const cameraAvailable = writable<boolean>(false)
-	const cameraError = writable<string | null>(null)
 	const isCapturing = writable<boolean>(false)
 
 	// Create camera shutter sound using Web Audio API
@@ -146,7 +145,10 @@
 	function initializeAudio() {
 		try {
 			// Create audio context
-			audioContext = new (window.AudioContext || (window as any).webkitAudioContext)()
+			const AudioContextClass =
+				window.AudioContext ||
+				(window as unknown as { webkitAudioContext: typeof AudioContext }).webkitAudioContext
+			audioContext = new AudioContextClass()
 
 			// Create shutter sound function
 			shutterSound = () => {
@@ -614,51 +616,6 @@
 		font-size: 1.1rem;
 		color: var(--text-light);
 		font-style: italic;
-	}
-
-	.statement-upload-card {
-		background: var(--bg-light);
-		border: 2px solid var(--color-primary, #ff9416);
-		border-radius: 12px;
-		padding: 1.5rem;
-		margin: 1.5rem 0;
-		cursor: pointer;
-		transition: all 0.2s ease;
-		width: 100%;
-		text-align: left;
-		font-family: inherit;
-		font-size: inherit;
-		color: inherit;
-	}
-
-	.statement-upload-card:hover {
-		background: var(--bg-lighter);
-		transform: translateY(-2px);
-		box-shadow: 0 4px 12px rgba(255, 148, 22, 0.2);
-	}
-
-	.statement-upload-card:active {
-		transform: translateY(0);
-	}
-
-	.statement-content {
-		margin-bottom: 1rem;
-	}
-
-	.upload-action {
-		text-align: center;
-		padding-top: 1rem;
-		border-top: 1px solid var(--border-light);
-	}
-
-	.upload-button-text {
-		display: inline-block;
-		background: var(--color-primary, #ff9416);
-		color: white;
-		padding: 0.75rem 1.5rem;
-		border-radius: 8px;
-		font-weight: bold;
-		font-size: 1.1rem;
 	}
 
 	blockquote {
