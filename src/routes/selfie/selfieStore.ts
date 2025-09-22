@@ -276,31 +276,33 @@ export async function finalizeSubmission() {
 	isProcessing.set(true)
 
 	try {
-		// Send submission data to backend
-		const response = await fetch('/api/selfie-submission', {
-			method: 'POST',
-			headers: { 'Content-Type': 'application/json' },
-			body: JSON.stringify({
-				imageId: imageId,
-				email: email || null,
-				timestamp: new Date().toISOString()
+		// If email provided, add it to the Cloudinary image metadata
+		if (email) {
+			const response = await fetch('/api/selfie/add-email', {
+				method: 'POST',
+				headers: { 'Content-Type': 'application/json' },
+				body: JSON.stringify({
+					public_id: imageId,
+					email: email
+				})
 			})
-		})
 
-		if (response.ok) {
-			currentState.set('done')
-			// Scroll to top to show completion message
-			setTimeout(() => {
-				window.scrollTo({ top: 0, behavior: 'smooth' })
-			}, 100)
-		} else {
-			throw new Error('Submission failed')
+			if (!response.ok) {
+				throw new Error('Failed to save email')
+			}
 		}
+
+		// Success - mark as done
+		currentState.set('done')
+
+		// Scroll to top to show completion message
+		setTimeout(() => {
+			window.scrollTo({ top: 0, behavior: 'smooth' })
+		}, 100)
 	} catch (error) {
 		console.error('Submission error:', error)
-		// Still mark as done even if API fails
-		currentState.set('done')
-		toast.error("Submission saved locally. We'll process it when connection is restored.")
+		// Don't mark as done if submission actually failed
+		toast.error('Failed to save your email. Please try again.')
 	} finally {
 		isProcessing.set(false)
 	}
