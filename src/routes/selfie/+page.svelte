@@ -1,0 +1,249 @@
+<script lang="ts">
+	import { onMount } from 'svelte'
+	import PostMeta from '$lib/components/PostMeta.svelte'
+	import ExternalLink from '$lib/components/custom/a.svelte'
+	import { Toaster } from 'svelte-french-toast'
+	import toast from 'svelte-french-toast'
+	import {
+		currentState,
+		uploadedImage,
+		uploadedImageId,
+		setCloudinaryWidget,
+		setShutterSound,
+		stream,
+		checkCameraPermission
+	} from './selfieStore'
+
+	// Page metadata
+	const title = 'Facing AI Danger'
+	const description =
+		'Upload your selfie to support the "If Anyone Builds It, Everyone Dies" book campaign'
+
+	interface CloudinaryWidget {
+		destroy(): void
+		open(): void
+	}
+
+	interface CloudinaryWindow extends Window {
+		cloudinary?: {
+			createUploadWidget: (
+				options: Record<string, unknown>,
+				callback: (error: Error | null, result: CloudinaryResult) => void
+			) => CloudinaryWidget
+		}
+	}
+
+	interface CloudinaryResult {
+		event: string
+		info?: {
+			secure_url: string
+			public_id: string
+		}
+	}
+
+	let cloudinaryWidget: CloudinaryWidget | null = null
+
+	// Create camera shutter sound using Web Audio API
+	let audioContext: AudioContext | null = null
+
+	onMount(() => {
+		// Load Cloudinary widget script
+		const script = document.createElement('script')
+		script.src = 'https://upload-widget.cloudinary.com/global/all.js'
+		script.async = true
+		script.onload = initializeWidget
+		document.body.appendChild(script)
+
+		// Check if camera permission was already granted (without prompting)
+		checkCameraPermission()
+
+		// Initialize audio for shutter sound
+		initializeAudio()
+
+		return () => {
+			if (cloudinaryWidget) {
+				cloudinaryWidget.destroy()
+			}
+			if (stream) {
+				stream.getTracks().forEach((track) => track.stop())
+			}
+			if (script.parentNode) {
+				document.body.removeChild(script)
+			}
+		}
+	})
+
+	function initializeWidget() {
+		const cloudinary = (window as CloudinaryWindow).cloudinary
+		if (typeof window !== 'undefined' && cloudinary) {
+			cloudinaryWidget = cloudinary.createUploadWidget(
+				{
+					cloudName: import.meta.env.PUBLIC_CLOUDINARY_CLOUD_NAME || 'dyjlw1syg',
+					uploadPreset: 'selfie',
+					sources: ['camera', 'local', 'facebook', 'instagram', 'google_drive', 'dropbox'],
+					multiple: false,
+					folder: 'test_prototype',
+					tags: ['test_prototype', 'selfie'],
+					context: {
+						uploaded_at: new Date().toISOString()
+					},
+					resourceType: 'image',
+					// Note: clientAllowedFormats breaks camera access on Android 14+
+					// We use resourceType: 'image' for server-side validation instead
+					maxFileSize: 10000000, // 10MB
+					cropping: false,
+					showPoweredBy: false,
+					singleUploadAutoClose: true,
+					styles: {
+						palette: {
+							window: '#FFFFFF',
+							windowBorder: '#E0E0E0',
+							tabIcon: '#ff9416', // PauseAI orange
+							menuIcons: '#5A616A',
+							textDark: '#000000',
+							textLight: '#FFFFFF',
+							link: '#ff9416', // PauseAI orange
+							action: '#ff9416', // PauseAI orange
+							inactiveTabIcon: '#90A0B3',
+							error: '#F44235',
+							inProgress: '#ff9416', // PauseAI orange
+							complete: '#20B832',
+							sourceBg: '#FFF4E6' // Light orange tint
+						},
+						fonts: {
+							default: "'Roboto Slab', serif",
+							primary: "'Roboto Slab', serif",
+							secondary: "'Saira Condensed', Impact, sans-serif"
+						}
+					}
+				},
+				async (error: Error | null, result: CloudinaryResult) => {
+					if (error) {
+						console.error('Upload error:', error)
+						toast.error('Upload failed. Please try again.')
+						return
+					}
+
+					if (result.event === 'success' && result.info) {
+						console.log('Upload result:', result.info)
+						currentState.set('options')
+						uploadedImage.set(result.info.secure_url)
+						uploadedImageId.set(result.info.public_id)
+
+						// Scroll to top to show thank you message
+						setTimeout(() => {
+							window.scrollTo({ top: 0, behavior: 'smooth' })
+						}, 100)
+					} else if (result.event === 'close') {
+						// Widget was closed - no action needed, stay in ready state
+						console.log('Upload widget closed')
+					}
+				}
+			)
+			setCloudinaryWidget(cloudinaryWidget)
+			currentState.set('ready')
+		}
+	}
+
+	function initializeAudio() {
+		try {
+			// Create audio context
+			const AudioContextClass =
+				window.AudioContext ||
+				(window as unknown as { webkitAudioContext: typeof AudioContext }).webkitAudioContext
+			audioContext = new AudioContextClass()
+
+			// Create shutter sound function
+			const shutterSound = () => {
+				if (!audioContext) return
+
+				const now = audioContext.currentTime
+
+				// First click - high frequency tick
+				const click1 = audioContext.createOscillator()
+				const gain1 = audioContext.createGain()
+
+				click1.type = 'square'
+				click1.frequency.setValueAtTime(1500, now)
+				gain1.gain.setValueAtTime(0, now)
+				gain1.gain.linearRampToValueAtTime(0.3, now + 0.001)
+				gain1.gain.linearRampToValueAtTime(0, now + 0.003)
+
+				click1.connect(gain1)
+				gain1.connect(audioContext.destination)
+				click1.start(now)
+				click1.stop(now + 0.003)
+
+				// Second click - lower frequency mechanical sound
+				const click2 = audioContext.createOscillator()
+				const gain2 = audioContext.createGain()
+
+				click2.type = 'square'
+				click2.frequency.setValueAtTime(800, now + 0.025)
+				gain2.gain.setValueAtTime(0, now + 0.025)
+				gain2.gain.linearRampToValueAtTime(0.2, now + 0.026)
+				gain2.gain.linearRampToValueAtTime(0, now + 0.03)
+
+				click2.connect(gain2)
+				gain2.connect(audioContext.destination)
+				click2.start(now + 0.025)
+				click2.stop(now + 0.03)
+			}
+			// Set the shutter sound function in the store
+			setShutterSound(shutterSound)
+		} catch (error) {
+			console.log('Audio context not available:', error)
+			// Fallback to no sound
+		}
+	}
+</script>
+
+<PostMeta {title} {description} />
+
+<!-- Capture UX is now rendered via the layout's prelude slot, configured in +page.ts -->
+
+<!-- Standard page content -->
+<main class="selfie-page">
+	<article class="page-content">
+		<p>
+			<em>If Anyone Builds It, Everyone Dies</em> presents a stark warning about the existential risks
+			posed by the race to build artificial general intelligence.
+		</p>
+		<p>
+			<ExternalLink href="https://ifanyonebuildsit.com">Learn more about the book →</ExternalLink>
+		</p>
+		<p>
+			We're building a visual petition of people who believe AI development needs urgent safety
+			measures. Your selfie adds to the growing collage of concerned citizens worldwide.
+		</p>
+	</article>
+</main>
+
+<!-- Toast notifications -->
+<Toaster
+	toastOptions={{
+		style: 'background-color: var(--bg-subtle); color: var(--text)',
+		iconTheme: {
+			primary: 'var(--brand)',
+			secondary: 'white'
+		}
+	}}
+/>
+
+<style>
+	/* Standard page content styles */
+	.selfie-page {
+		max-width: 800px;
+		margin: 2rem auto;
+		padding: 1rem;
+	}
+
+	.page-content {
+		padding: 1rem;
+	}
+
+	.page-content p {
+		margin-bottom: 1rem;
+		line-height: 1.6;
+	}
+</style>
