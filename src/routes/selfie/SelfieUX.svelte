@@ -47,10 +47,7 @@
 		<!-- Statement speech bubble -->
 		<p class="statement-intro">Upload your selfie to say:</p>
 		<div class="speech-bubble compact">
-			<div class="statement-text">
-				"I demand we end the race to<br />
-				build superintelligent AI"
-			</div>
+			<div class="statement-text">"I demand we end the race to build superintelligent AI"</div>
 		</div>
 
 		<!-- Camera/upload widget -->
@@ -407,7 +404,7 @@
 		}
 
 		.book-title {
-			font-size: 1.5rem;
+			font-size: 1.4rem;
 			padding: 0 0.5rem;
 		}
 
@@ -417,7 +414,11 @@
 
 		.email-row {
 			flex-direction: column;
-			align-items: stretch;
+			align-items: flex-start;
+		}
+
+		.email-row label {
+			align-self: flex-start;
 		}
 
 		.email-row input {

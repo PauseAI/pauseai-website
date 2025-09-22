@@ -306,10 +306,33 @@ export async function finalizeSubmission() {
 	}
 }
 
-export function removeUpload() {
+export async function removeUpload() {
+	const imageId = get(uploadedImageId)
+
+	// Delete from Cloudinary if we have an ID
+	if (imageId) {
+		try {
+			const response = await fetch('/api/selfie/remove', {
+				method: 'POST',
+				headers: { 'Content-Type': 'application/json' },
+				body: JSON.stringify({ public_id: imageId })
+			})
+
+			if (!response.ok) {
+				console.error('Failed to delete image from Cloudinary')
+				toast.error('Failed to remove image from server')
+			}
+		} catch (error) {
+			console.error('Error deleting image:', error)
+			// Continue with local cleanup even if deletion fails
+		}
+	}
+
+	// Clear local state
 	uploadedImage.set(null)
 	uploadedImageId.set(null)
 	currentState.set('ready')
+
 	// Reset camera if it was used
 	if (get(cameraAvailable) && stream) {
 		// Keep camera stream active for re-capture
