@@ -29,6 +29,9 @@
 	$: setCanvasElement(canvasElement)
 
 	$: emailValid = $userEmail && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test($userEmail)
+
+	// Local UI state
+	let showTips = false
 </script>
 
 <!-- Compact capture UX above standard page header -->
@@ -160,6 +163,30 @@
 			{#if $uploadedImage}
 				<div class="preview-container">
 					<img src={$uploadedImage} alt="Your uploaded selfie" class="preview" />
+				</div>
+
+				<!-- Selfie tips - expandable -->
+				<div class="tips-section">
+					<button
+						class="tips-toggle"
+						on:click={() => (showTips = !showTips)}
+						aria-expanded={showTips}
+					>
+						{showTips ? '▼' : '▶'} Tips for a better selfie
+					</button>
+					{#if showTips}
+						<div class="tips-content">
+							<ul>
+								<li>📸 Use your best camera</li>
+								<li>💡 Find good lighting - natural light works best</li>
+								<li>🎯 Center your face in the frame</li>
+								<li>📐 Hold camera at eye level or slightly above</li>
+								<li>🤳 Keep camera at arm's length</li>
+								<li>🏞️ Choose a simple background</li>
+							</ul>
+							<p class="tips-footer">Not happy? Remove your photo above and try again!</p>
+						</div>
+					{/if}
 				</div>
 			{/if}
 
@@ -383,6 +410,71 @@
 		border: 2px solid var(--border);
 	}
 
+	.tips-section {
+		margin: 1rem 0;
+		text-align: left;
+	}
+
+	.tips-toggle {
+		background: none;
+		border: none;
+		color: var(--brand);
+		cursor: pointer;
+		padding: 0.5rem 0;
+		font-size: 0.95rem;
+		font-weight: 500;
+		display: flex;
+		align-items: center;
+		gap: 0.5rem;
+		margin: 0 auto;
+		transition: opacity 0.2s;
+	}
+
+	.tips-toggle:hover {
+		opacity: 0.8;
+	}
+
+	.tips-content {
+		background: var(--bg-subtle);
+		border-radius: 8px;
+		padding: 1rem;
+		margin-top: 0.5rem;
+		animation: slideDown 0.2s ease-out;
+	}
+
+	.tips-content ul {
+		list-style: none;
+		padding: 0;
+		margin: 0;
+	}
+
+	.tips-content li {
+		padding: 0.4rem 0;
+		font-size: 0.9rem;
+		color: var(--text);
+	}
+
+	.tips-footer {
+		margin-top: 0.75rem;
+		padding-top: 0.75rem;
+		border-top: 1px solid var(--border);
+		font-size: 0.85rem;
+		text-align: center;
+		color: var(--text-subtle);
+		font-style: italic;
+	}
+
+	@keyframes slideDown {
+		from {
+			opacity: 0;
+			transform: translateY(-10px);
+		}
+		to {
+			opacity: 1;
+			transform: translateY(0);
+		}
+	}
+
 	.next-info {
 		background: var(--bg-subtle);
 		padding: 0.75rem;
@@ -404,7 +496,7 @@
 		}
 
 		.book-title {
-			font-size: 1.4rem;
+			font-size: 1.3rem;
 			padding: 0 0.5rem;
 		}
 
