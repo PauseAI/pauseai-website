@@ -65,11 +65,14 @@ You can make a difference. Volunteers in Australia raise awareness, protest, lob
 
 - [Join our community](/join)
 - [Attend our next Australian online or in-person event](https://lu.ma/PauseAIAustralia)
-- Sign the Australians for AI Safety [open letter](https://www.australiansforaisafety.com.au/letters)
 - [Contact politicians](/writing-a-letter)
 - Talk to your friends and family about AI risk
 
 ### Campaigns
+
+#### Productivity commission submission
+
+In September 2025, PauseAI Australia responded to the interim report on _Harnessing Data and Digital Technology_ with [this submission](https://drive.google.com/file/d/1Ea9I3jXCZAMdGAcN2D-UMRPyE2MzGB7k/view). Volunteers also made individual submissions ([David](https://docs.google.com/document/d/1DenTOorlnqQ02PJEEdRvsceFmfvvfTXxGubozjfx-yE/edit?usp=sharing), [Peter](https://docs.google.com/document/d/1aQcC5DYq3feyWyHAPFGcEvwgrX0vXSbgMNDBEYWA61E/edit?tab=t.0#heading=h.4hsb6c6hjc5f), [Michael](https://drive.google.com/file/d/1lWdtIiLatF1DOPvdjQSaonO9dEqFCFSV/view?usp=drive_link)).
 
 #### Investigate OpenAI
 

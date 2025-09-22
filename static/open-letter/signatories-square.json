@@ -12,6 +12,17 @@
 		"status": "success"
 	},
 	{
+		"name": "Lee Barron",
+		"displayName": "Lee Barron",
+		"type": "MP",
+		"portrait": "/portraits/signatories/commons/lee_barron.jpg",
+		"party": "Labour",
+		"format": "square",
+		"source": "square-highres",
+		"fileSize": 42779,
+		"status": "success"
+	},
+	{
 		"name": "Siân Berry",
 		"displayName": "Siân Berry",
 		"type": "MP",
@@ -594,6 +605,13 @@
 		"status": "success",
 		"chamber": "wales",
 		"fileSize": 947073
+	},
+	{
+		"name": "Delyth Jewell",
+		"type": "MS",
+		"portrait": "/portraits/signatories/senedd/delyth_jewell.jpg",
+		"status": "success",
+		"chamber": "wales"
 	},
 	{
 		"name": "Jenny Rathbone",

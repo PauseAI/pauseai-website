@@ -1,16 +1,16 @@
 /* https://sveltejs.github.io/eslint-plugin-svelte/user-guide/ */
 import js from '@eslint/js'
+import markdown from '@eslint/markdown'
 import prettier from 'eslint-config-prettier'
 import svelte from 'eslint-plugin-svelte'
-import { globalIgnores } from 'eslint/config'
+import { defineConfig, globalIgnores } from 'eslint/config'
 import globals from 'globals'
 import ts from 'typescript-eslint'
 import svelteConfig from './svelte.config.js'
 
-export default ts.config(
+export default defineConfig(
 	js.configs.recommended,
 	...ts.configs.recommended,
-	...svelte.configs.recommended,
 	prettier,
 	{
 		languageOptions: {
@@ -21,7 +21,18 @@ export default ts.config(
 		}
 	},
 	{
+		files: ['**/*.md'],
+		extends: [markdown.configs.recommended],
+		rules: {
+			'markdown/fenced-code-language': 'off',
+			'markdown/no-missing-atx-heading-space': 'off', // rule is broken
+			'markdown/no-missing-label-refs': 'off',
+			'no-irregular-whitespace': 'off' // not supported by markdown parser
+		}
+	},
+	{
 		files: ['**/*.svelte', '**/*.svelte.ts', '**/*.svelte.js'],
+		extends: [svelte.configs.recommended],
 		// See more details at: https://typescript-eslint.io/packages/parser/
 		languageOptions: {
 			parserOptions: {
@@ -41,25 +52,33 @@ export default ts.config(
 				// explicitly specifying it ensures better compatibility and functionality.
 				svelteConfig
 			}
-		}
-	},
-	{
+		},
 		rules: {
 			// Override or add rule settings here, such as:
 			// 'svelte/rule-name': 'error'
-			'@typescript-eslint/no-unused-vars': [
-				'error',
-				{
-					argsIgnorePattern: '^_',
-					destructuredArrayIgnorePattern: '^_'
-				}
-			],
+
+			// disabled
+			'svelte/no-navigation-without-resolve': 'off',
 			'svelte/require-each-key': 'off',
+
+			// enabled
 			'svelte/no-restricted-html-elements': [
 				'warn',
 				{
 					elements: ['a'],
 					message: 'Use $lib/components/custom/a.svelte instead'
+				}
+			]
+		}
+	},
+	{
+		rules: {
+			// configured
+			'@typescript-eslint/no-unused-vars': [
+				'error',
+				{
+					argsIgnorePattern: '^_',
+					destructuredArrayIgnorePattern: '^_'
 				}
 			]
 		}

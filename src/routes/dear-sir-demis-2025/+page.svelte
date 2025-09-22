@@ -146,7 +146,7 @@
 					<div class="stat-label">Political Parties</div>
 				</div>
 				<div class="stat-card">
-					<div class="stat-number">60</div>
+					<div class="stat-number">62</div>
 					<div class="stat-label">Parliamentarians</div>
 				</div>
 			</div>
@@ -282,7 +282,7 @@
 	<section class="signatories-section">
 		<div class="signatories-header">
 			<h2 class="signatories-title">
-				<span class="title-number">60</span>
+				<span class="title-number">62</span>
 				<span class="title-text">Signatories</span>
 			</h2>
 			<p class="signatories-subtitle">United in calling for AI safety transparency</p>
