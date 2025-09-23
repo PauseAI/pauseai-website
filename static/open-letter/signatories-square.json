@@ -614,6 +614,14 @@
 		"chamber": "wales"
 	},
 	{
+		"name": "George Freeman",
+		"type": "MP",
+		"portrait": "/portraits/signatories/commons/george_freeman.jpg",
+		"status": "success",
+		"chamber": "commons",
+		"fileSize": 1041640
+	},
+	{
 		"name": "Jenny Rathbone",
 		"type": "MS",
 		"portrait": "/portraits/signatories/senedd/jenny_rathbone.jpg",
