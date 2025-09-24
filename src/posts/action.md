@@ -3,6 +3,12 @@ title: Take action
 description: Ways to help reduce AI risk.
 ---
 
+<script>
+    import CampaignsCarousel from '$lib/components/CampaignsCarousel.svelte'
+</script>
+
+<CampaignsCarousel />
+
 AI won't get safer unless we act decisively to push for safety.
 Choose an activity below depending on your interests or skills.
 
