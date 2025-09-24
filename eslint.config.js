@@ -66,7 +66,20 @@ export default defineConfig(
 				'warn',
 				{
 					elements: ['a'],
-					message: 'Use $lib/components/custom/a.svelte instead'
+					message:
+						'Use $lib/components/Link.svelte or $lib/components/LinkWithoutIcon.svelte instead'
+				}
+			],
+			'no-restricted-imports': [
+				'error',
+				{
+					patterns: [
+						{
+							group: ['**/custom'],
+							message:
+								'This component serves as an adapter for mdsvex, import the corresponding component directly instead'
+						}
+					]
 				}
 			]
 		}
