@@ -18,7 +18,7 @@
 	import '@glidejs/glide/dist/css/glide.core.css'
 	import { onMount } from 'svelte'
 	import * as m from '$lib/paraglide/messages'
-	import Link from '$lib/components/custom/a.svelte'
+	import Link from '$lib/components/Link.svelte'
 
 	const MOBILE_NAVIGATION_DISTANCE_THRESHOLD = 10
 	const AUTOPLAY_INTERVAL = 10_000

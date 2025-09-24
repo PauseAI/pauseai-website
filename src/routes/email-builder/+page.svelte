@@ -13,7 +13,7 @@
 	import { meta } from './meta'
 	import * as clipboard from 'clipboard-polyfill'
 	import toast from 'svelte-french-toast'
-	import Link from '$lib/components/custom/a.svelte'
+	import Link from '$lib/components/Link.svelte'
 	import Card from '$lib/components/Card.svelte'
 	import { type ComponentType } from 'svelte'
 

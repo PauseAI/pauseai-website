@@ -1,5 +1,5 @@
 <script lang="ts">
-	import ExternalLink from '$lib/components/custom/a.svelte'
+	import ExternalLink from '$lib/components/Link.svelte'
 	import { page } from '$app/stores'
 	import * as m from '$lib/paraglide/messages.js'
 	import { getLocale } from '$lib/paraglide/runtime.js'

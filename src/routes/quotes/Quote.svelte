@@ -7,7 +7,7 @@
 <script lang="ts">
 	import Button from '$lib/components/Button.svelte'
 	import Logo from '$lib/components/logo.svelte'
-	import Link from '$lib/components/custom/a.svelte'
+	import Link from '$lib/components/Link.svelte'
 	import { toPng } from 'html-to-image'
 	import GithubSlugger from 'github-slugger'
 	import { onMount } from 'svelte'

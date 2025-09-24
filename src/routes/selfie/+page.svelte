@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { onMount } from 'svelte'
 	import PostMeta from '$lib/components/PostMeta.svelte'
-	import ExternalLink from '$lib/components/custom/a.svelte'
+	import ExternalLink from '$lib/components/Link.svelte'
 	import { Toaster } from 'svelte-french-toast'
 	import toast from 'svelte-french-toast'
 	import {

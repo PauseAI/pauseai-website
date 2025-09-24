@@ -1,5 +1,5 @@
 <script lang="ts">
-	import LinkWithIcon from '$lib/components/LinkWithIcon.svelte'
+	import Link from '$lib/components/Link.svelte'
 
 	export let href: string
 	export let target: string | null = null
@@ -9,6 +9,6 @@
 	export let rel: string | null = null
 </script>
 
-<LinkWithIcon {href} {target} {rel} class={className} {hideIcon}>
+<Link {href} {target} {rel} class={className} {hideIcon}>
 	<slot />
-</LinkWithIcon>
+</Link>

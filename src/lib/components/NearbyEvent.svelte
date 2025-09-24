@@ -2,7 +2,7 @@
 	import distance from '@turf/distance'
 	import { onMount } from 'svelte'
 	import Banner from './Banner.svelte'
-	import ExternalLink from '$lib/components/custom/a.svelte'
+	import ExternalLink from '$lib/components/Link.svelte'
 	import type { CalendarResponse, Event } from '../../routes/api/calendar/+server'
 	import type { GeoApiResponse } from '$api/geo/+server'
 

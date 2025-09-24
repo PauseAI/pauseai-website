@@ -1,5 +1,5 @@
 <script lang="ts">
-	import Link from '$lib/components/custom/a.svelte'
+	import Link from '$lib/components/Link.svelte'
 
 	let visible = false
 	export let href: string

@@ -1,6 +1,6 @@
 <script lang="ts">
 	import type { Community } from './communities'
-	import Link from '$lib/components/custom/a.svelte'
+	import Link from '$lib/components/Link.svelte'
 
 	export let communities: Community[] = []
 </script>

@@ -4,7 +4,7 @@
 	import SignatoryCard from './SignatoryCard.svelte'
 	import QuoteHighlight from './QuoteHighlight.svelte'
 	import { theme } from '$lib/theme'
-	import Link from '$lib/components/custom/a.svelte'
+	import Link from '$lib/components/Link.svelte'
 
 	export let data
 

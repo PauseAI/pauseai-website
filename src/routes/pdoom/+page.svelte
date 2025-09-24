@@ -2,7 +2,7 @@
 	import PostMeta from '$lib/components/PostMeta.svelte'
 	import Doomers from '$lib/components/Doomers.svelte'
 	import { meta } from './meta'
-	import Link from '$lib/components/custom/a.svelte'
+	import Link from '$lib/components/Link.svelte'
 
 	let { title, description, date } = meta
 </script>

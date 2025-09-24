@@ -1,69 +1,39 @@
-<script context="module" lang="ts">
-	export enum Type {
-		Internal,
-		External,
-		Mail
-	}
-</script>
-
 <script lang="ts">
-	import { onMount } from 'svelte'
-	import { page } from '$app/stores'
-	import { pushState } from '$app/navigation'
-	import { localizeHref, locales } from '$lib/paraglide/runtime'
+	import Link, { Type } from './LinkWithoutIcon.svelte'
+	import ExternalLink from 'lucide-svelte/icons/external-link'
+	import Mail from 'lucide-svelte/icons/mail'
 
 	export let href: string
 	export let target: string | null = null
 	let className: string = ''
 	export { className as class }
+	export let hideIcon = false
 	export let rel: string | null = null
 
-	export let type = Type.Internal
-	let anchor: HTMLAnchorElement | undefined = undefined
+	const ICON_PROPS = { size: '0.7em' }
 
-	// Localization helpers
-	const localePattern = new RegExp(`^/(${locales.join('|')})(/|$)`)
-	const shouldLocalizeHref = (h: string) =>
-		type === Type.Internal &&
-		h.startsWith('/') &&
-		!h.match(localePattern) &&
-		!h.includes('#no-localize')
-
-	const processHref = (h: string) => {
-		const cleaned = h.replace('#no-localize', '')
-		return shouldLocalizeHref(h) ? localizeHref(cleaned) : cleaned
-	}
-
-	// Normalize and localize href
-	if (typeof href !== 'string') href = ''
-
-	if (
-		(href.startsWith('http:') || href.startsWith('https:')) &&
-		!href.startsWith('https://pauseai.info/')
-	)
-		type = Type.External
-	else if (href.startsWith('mailto:')) type = Type.Mail
-
-	href = processHref(href)
-
-	onMount(() => {
-		if (href.startsWith('#') && anchor) {
-			anchor.addEventListener('click', (ev) => {
-				ev.preventDefault()
-				const url = $page.url
-				url.hash = href
-				pushState(url, $page.state)
-				const target = document.querySelector(href) as HTMLElement | null
-				if (!target) return
-				target.scrollIntoView({ behavior: 'smooth' })
-				target.tabIndex = -1
-				target.focus({ preventScroll: true })
-			})
-		}
-	})
+	// Link component determines the type
+	let type: Type
 </script>
 
-<!-- eslint-disable-next-line svelte/no-restricted-html-elements - Warning is about using this component -->
-<a {href} {target} {rel} class={className} bind:this={anchor}>
-	<slot />
-</a>
+<Link {href} {target} {rel} class={className} bind:type>
+	<slot />{#if type != Type.Internal && !hideIcon}
+		<span style="white-space: nowrap">
+			<div class="icon">
+				{#if type == Type.External}
+					<ExternalLink {...ICON_PROPS} />
+				{:else if type == Type.Mail}
+					<Mail {...ICON_PROPS} />
+				{/if}
+			</div>
+		</span>
+	{/if}
+</Link>
+
+<style>
+	.icon {
+		display: inline-flex;
+		vertical-align: baseline;
+		margin-left: 0.1em;
+	}
+</style>

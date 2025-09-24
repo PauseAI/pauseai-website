@@ -4,7 +4,7 @@
 	import Hero from '$lib/components/Hero.svelte'
 	import NearbyEvent from '$lib/components/NearbyEvent.svelte'
 	import Toc from '$lib/components/Toc.svelte'
-	import ExternalLink from '$lib/components/custom/a.svelte'
+	import ExternalLink from '$lib/components/Link.svelte'
 	import { deLocalizeHref } from '$lib/paraglide/runtime'
 	import '@fontsource/roboto-slab/300.css'
 	import '@fontsource/roboto-slab/500.css'

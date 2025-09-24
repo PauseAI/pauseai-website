@@ -1,6 +1,6 @@
 <script lang="ts">
 	import PostMeta from '$lib/components/PostMeta.svelte'
-	import ExternalLink from '$lib/components/custom/a.svelte'
+	import ExternalLink from '$lib/components/Link.svelte'
 	import CommunitiesList from './CommunitiesList.svelte'
 	import type { GeoApiResponse } from '$api/geo/+server'
 	import type * as maplibregl from 'maplibre-gl'
