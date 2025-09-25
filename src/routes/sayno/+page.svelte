@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { onMount } from 'svelte'
 	import PostMeta from '$lib/components/PostMeta.svelte'
-	import ExternalLink from '$lib/components/custom/a.svelte'
+	import Link from '$lib/components/Link.svelte'
 	import { Toaster } from 'svelte-french-toast'
 	import toast from 'svelte-french-toast'
 	import {
@@ -211,7 +211,7 @@
 			artificial general intelligence. The campaign draws its urgency from this critical message.
 		</p>
 		<p>
-			<ExternalLink href="https://ifanyonebuildsit.com">Learn more about the book →</ExternalLink>
+			<Link href="https://ifanyonebuildsit.com">Learn more about the book →</Link>
 		</p>
 		<p>
 			We're building a visual petition of people who believe AI development needs urgent safety
