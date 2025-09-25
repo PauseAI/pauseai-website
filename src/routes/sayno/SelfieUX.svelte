@@ -41,10 +41,9 @@
 			<p>Loading...</p>
 		</div>
 	{:else if $currentState === 'ready'}
-		<!-- Book title -->
+		<!-- Campaign heading -->
 		<div class="book-title">
-			<div>If Anyone Builds It,</div>
-			<div class="indent">Everyone Dies.</div>
+			<div>Say No To Superintelligent AI</div>
 		</div>
 
 		<!-- Statement speech bubble -->
@@ -112,7 +111,7 @@
 	{:else if $currentState === 'options'}
 		<div class="confirmation-section">
 			<h2>Thank you!</h2>
-			<p class="upload-success">Photo uploaded successfully.</p>
+			<p class="upload-success">Photo uploaded successfully for use in collage.</p>
 
 			<div class="next-steps">
 				<div class="email-section">
@@ -233,10 +232,6 @@
 		margin-bottom: 1rem;
 		color: var(--text);
 		text-align: center;
-	}
-
-	.book-title .indent {
-		display: block;
 	}
 
 	.statement-intro {
