@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { onMount } from 'svelte'
 	import PostMeta from '$lib/components/PostMeta.svelte'
-	import ExternalLink from '$lib/components/Link.svelte'
+	import ExternalLink from '$lib/components/custom/a.svelte'
 	import { Toaster } from 'svelte-french-toast'
 	import toast from 'svelte-french-toast'
 	import {
@@ -11,13 +11,13 @@
 		setCloudinaryWidget,
 		setShutterSound,
 		stream,
-		checkCameraPermission
+		checkCameraPermission,
+		cloudinaryConfig
 	} from './selfieStore'
 
 	// Page metadata
-	const title = 'Facing AI Danger'
-	const description =
-		'Upload your selfie to support the "If Anyone Builds It, Everyone Dies" book campaign'
+	const title = 'Stop Superintelligence'
+	const description = 'Join the photo petition to say no to the race to build superintelligent AI'
 
 	interface CloudinaryWidget {
 		destroy(): void
@@ -80,10 +80,10 @@
 				{
 					cloudName: import.meta.env.PUBLIC_CLOUDINARY_CLOUD_NAME || 'dyjlw1syg',
 					uploadPreset: 'selfie',
-					sources: ['camera', 'local', 'facebook', 'instagram', 'google_drive', 'dropbox'],
+					sources: ['camera', 'local', 'google_drive', 'dropbox'],
 					multiple: false,
-					folder: 'test_prototype',
-					tags: ['test_prototype', 'selfie'],
+					folder: cloudinaryConfig.folder,
+					tags: cloudinaryConfig.tags,
 					context: {
 						uploaded_at: new Date().toISOString()
 					},
@@ -205,9 +205,10 @@
 <!-- Standard page content -->
 <main class="selfie-page">
 	<article class="page-content">
+		<h2 class="book-title-heading">If Anyone Builds It, Everyone Dies</h2>
 		<p>
-			<em>If Anyone Builds It, Everyone Dies</em> presents a stark warning about the existential risks
-			posed by the race to build artificial general intelligence.
+			This book presents a stark warning about the existential risks posed by the race to build
+			artificial general intelligence. The campaign draws its urgency from this critical message.
 		</p>
 		<p>
 			<ExternalLink href="https://ifanyonebuildsit.com">Learn more about the book →</ExternalLink>
@@ -215,6 +216,10 @@
 		<p>
 			We're building a visual petition of people who believe AI development needs urgent safety
 			measures. Your selfie adds to the growing collage of concerned citizens worldwide.
+		</p>
+		<p>
+			By uploading, you consent to your photo being featured as part of this petition and
+			promotional materials.
 		</p>
 	</article>
 </main>
@@ -245,5 +250,19 @@
 	.page-content p {
 		margin-bottom: 1rem;
 		line-height: 1.6;
+	}
+
+	.book-title-heading {
+		font-size: 1.8rem;
+		font-weight: bold;
+		text-align: center;
+		margin: 2rem 0 1.5rem 0;
+		color: var(--text);
+	}
+
+	@media (max-width: 768px) {
+		.book-title-heading {
+			font-size: 1.5rem;
+		}
 	}
 </style>

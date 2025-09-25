@@ -1,5 +1,12 @@
 import { writable, get } from 'svelte/store'
+import { dev } from '$app/environment'
 import toast from 'svelte-french-toast'
+
+// Cloudinary configuration - centralized
+export const cloudinaryConfig = {
+	folder: dev ? 'test_prototype' : 'sayno',
+	tags: dev ? ['test_prototype', 'selfie'] : ['sayno', 'selfie']
+}
 
 // State management
 type State = 'preparing' | 'ready' | 'options' | 'done'
@@ -218,8 +225,8 @@ export async function captureFromCamera() {
 		formData.append('file', blob, `${uniqueId}.jpg`)
 		formData.append('upload_preset', 'selfie')
 		formData.append('public_id', uniqueId)
-		formData.append('folder', 'test_prototype')
-		formData.append('tags', 'test_prototype,selfie,direct_capture')
+		formData.append('folder', cloudinaryConfig.folder)
+		formData.append('tags', [...cloudinaryConfig.tags, 'direct_capture'].join(','))
 
 		const response = await fetch(
 			`https://api.cloudinary.com/v1_1/${import.meta.env.PUBLIC_CLOUDINARY_CLOUD_NAME || 'dyjlw1syg'}/image/upload`,
