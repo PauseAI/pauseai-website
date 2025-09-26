@@ -28,14 +28,6 @@ Apply [here](https://pauseai.info/pauseai-uk-director).
 
 Apply [here](https://pauseai.info/pauseia-france-director).
 
-## Community Manager
-
-- Build and maintain engagement and activity across PauseAI's digital community
-- Welcome new members and provide them with direction to participate
-- Maintain PauseAI's culture of empathy, inclusion, and collective action.
-
-Apply [here](https://pauseai.info/community-manager-vacancy).
-
 ## Volunteer Vacancies
 
 PauseAI is built upon our network of hundreds of volunteers across 13+ countries. You can join PauseAI [here](https://pauseai.info/join), or see our list of volunteer vacancies [here](https://pauseai.info/volunteer-vacancies).
