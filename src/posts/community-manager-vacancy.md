@@ -3,6 +3,8 @@ title: Community Manager (Vacancy)
 slug: community-manager-vacancy
 ---
 
+**Role temporarily closed due to high volume of applications.**
+
 **Role description**
 
 As Digital Community Manager, you will be responsible for building and maintaining engagement and activity across PauseAI Global’s digital community, primarily focused on Discord. 
@@ -35,6 +37,6 @@ Conditions:
 - Completely remote, but other employed staff are based across Europe and North America, so a preference for these locations
 - Salary dependent on hours
 
-You can apply by sending a CV and a cover letter to vacancies@pauseai.info
+**Role temporarily closed due to high volume of applications.**
 
 See other vacancies [here](https://pauseai.info/vacancies).
