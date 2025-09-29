@@ -11,7 +11,7 @@ The recently published New York Times Bestseller, _If Anyone Builds It, Everyone
 
 At PauseAI, we're organising a coordinated international response to the book by hosting events across 4 countries. These book readings will provide a space for people to learn more about the book's warning, and to begin to take action in support of international regulation to prevent catastrophe.
 
-Hundreds of people are already taking action by joining our Say No to Superintelligent AI campaign, and uploading a picture of themselves to form part of a large collage showcasing a unified stance against the race to build superintelligence.
+Hundreds of people are already taking action by joining our **Say No to Superintelligent AI** campaign, and uploading a picture of themselves to form part of a large collage showcasing a unified stance against the race to build superintelligence.
 
 List of book events:
 
