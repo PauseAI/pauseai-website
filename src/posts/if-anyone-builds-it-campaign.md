@@ -13,6 +13,10 @@ At PauseAI, we're organising a coordinated international response to the book by
 
 Hundreds of people are already taking action by joining our **Say No to Superintelligent AI** campaign, and uploading a picture of themselves to form part of a large collage showcasing a unified stance against unregulated AI development.
 
+You can join the growing number of people standing up to AI companies [here](https://pauseai.info/sayno).
+
+![](/gandr-collage-2-.jpg)
+
 List of book events:
 
 - Monday 22nd September: [London, United Kingdom](https://luma.com/ho3xb7xf)
