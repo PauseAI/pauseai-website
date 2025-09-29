@@ -9,15 +9,15 @@ The recently published New York Times Bestseller, _If Anyone Builds It, Everyone
 
 ![](/iabied-event.png)
 
-At PauseAI, we're orginasing a coordinated international response to the book by hosting events across 4 countries, and providing a space for concerned individuals to begin to take action in support of international regulation to prevent catastrophe.
+At PauseAI, we're organising a coordinated international response to the book by hosting events across 4 countries. These book readings will provide a space for people to learn more about the book's warning, and to begin to take action in support of international regulation to prevent catastrophe.
 
-PauseAI held the first book reading in London this week, attended by roughly 50 people. Campaign group ControlAI gave a talk on the need for a grassroots movement against unregulated AI development, and PauseAI UK discussed their recent open letter to Google DeepMind signed by over 60 UK politicians.
+Hundreds of people are already taking action by joining our Say No to Superintelligent AI campaign, and uploading a picture of themselves to form part of a large collage showcasing a unified stance against the race to build superintelligence.
 
-At these events, attendees are being asked to join PauseAI’s **Say No** **To Superintelligent AI** campaign. Over 100 individuals have already uploaded a picture of themselves, which will come together to form a large collage showcasing a united stance against AI companies’ recklessness.
+List of book events:
 
-Chapter 14 of the book is titled “Where There’s Life, There’s Hope”. It dismisses the defeatist tone of some with regards to AI, and lays out what ordinary people can do to help. It calls on more people to engage in activities like protests, advocacy, and contacting politicians, to build on the work that PauseAI and other grassroots groups have been doing in this space for over two years now. 
+- Monday 22nd September:
 
-These events are not about doomerism or defeatism. They’re for people who want to work towards a solution to this problem. 
+  - [London, United Kingdom](https://luma.com/ho3xb7xf)
 
 - Saturday 4th October:
 
