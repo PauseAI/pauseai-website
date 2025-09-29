@@ -25,6 +25,4 @@ Hundreds of people are already taking action by joining our **Say No to Superint
 
 ![](/gandr-collage-2-.jpg)
 
-You can join the growing number of people standing up to AI companies [here](https://pauseai.info/sayno).
-
-[](https://luma.com/asa28ws0)
+You can join the growing number of people standing up to AI companies [here](https://pauseai.info/sayno).[](https://luma.com/asa28ws0)
