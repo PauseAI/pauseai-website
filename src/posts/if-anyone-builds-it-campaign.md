@@ -9,7 +9,7 @@ The recently published New York Times Bestseller _If Anyone Builds It, Everyone 
 
 ![](/iabied-event.png)
 
-At PauseAI, we're organising a coordinated international response to the book by hosting events across 4 countries. These [book](https://ifanyonebuildsit.com/) readings will provide a space for people to learn more about the book's warning, and to begin to take action in support of international regulation to prevent catastrophe.
+At PauseAI, we're organising a coordinated international response to the book by hosting events across 4 countries. These [book](https://ifanyonebuildsit.com/) readings will provide a space for people to learn more about the book's warning, and to begin use their voice to support an international treaty pausing frontier AI development.
 
 ## List of book events:
 
