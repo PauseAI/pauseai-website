@@ -41,7 +41,7 @@ Desired Skills and Attributes:
 
 Conditions:
 
-- Full time position
+- 12-month fixed term contract with the possibility of extension
 - Paris based or with the ability to travel frequently
 - Salary range of €45,000-60,000 depending on experience
 
