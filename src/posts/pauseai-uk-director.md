@@ -31,7 +31,7 @@ Desired Skills and Attributes:
 
 Conditions:
 
-- Full time position
+- 12-month fixed term contract with the possibility of extension
 - London based, with potential travel across UK
 - Salary range of €45,000-60,000 depending on experience
 
