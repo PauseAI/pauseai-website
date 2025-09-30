@@ -4,9 +4,9 @@ slug: volunteer-vacancies
 description: Open volunteer positions with PauseAI
 ---
 
-- We work in [teams](https://pauseai.info/teams)
-- We collaborate mostly on our [Discord server](https://pauseai.info/discord)
-- Read more about our [organization](https://pauseai.info/organization)
+- We work in [teams](/teams)
+- We collaborate mostly on our [Discord server](/discord)
+- Read more about our [organization](/organization)
 
 ## Onboarding team member
 
@@ -14,7 +14,7 @@ description: Open volunteer positions with PauseAI
 - Say hi to new members who join through the discord or the form.
 - Have one on one calls to find the right team
 
-Interested? [Email Will](will.petillo@gmail.com)
+Interested? [Email Will](mailto:will.petillo@gmail.com)
 
 ## Outreach team member
 
@@ -23,7 +23,7 @@ Interested? [Email Will](will.petillo@gmail.com)
 - Come up with campaigns of people you would like to reach out to, and contact them (whether by email, phone, DM, or in-person)
 - Please consider joining if you have a non traditional background or location - this could help us to reach new groups!
 
-Interested? [Email Diego](diego1605d@gmail.com)
+Interested? [Email Diego](mailto:diego1605d@gmail.com)
 
 ## Software Team member
 
@@ -32,4 +32,4 @@ Interested? [Email Diego](diego1605d@gmail.com)
 - Be strategic: keep things simple &amp; scalable, buy not build unless we have to...
 - ...but sometimes we have to! So step up devs: scratch an itch and save the world.
 
-Interested? [Email Anthony](mail@anthonybailey.net) (or DM anthonybailey.net on [Discord](https://pauseai.info/discord))
+Interested? [Email Anthony](mailto:mail@anthonybailey.net) (or DM anthonybailey.net on [Discord](/discord))
