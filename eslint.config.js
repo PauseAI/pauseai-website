@@ -27,6 +27,7 @@ export default defineConfig(
 			'markdown/fenced-code-language': 'off',
 			'markdown/no-missing-atx-heading-space': 'off', // rule is broken
 			'markdown/no-missing-label-refs': 'off',
+			'markdown/require-alt-text': 'warn',
 			'no-irregular-whitespace': 'off' // not supported by markdown parser
 		}
 	},
