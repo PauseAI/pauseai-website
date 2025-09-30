@@ -6,7 +6,7 @@
 	// This creates a map of functions that return promises for each module.
 	// The `eager: false` means modules are loaded lazily, and `import: 'default'` gets the default export (e.g., the URL string for images).
 	const staticAssetModules = import.meta.glob<string>(
-		'../../../static/**/*.(png|jpg|jpeg|gif|svg|webp)',
+		'../../../../static/**/*.(png|jpg|jpeg|gif|svg|webp)',
 		{ eager: false, import: 'default' }
 	)
 
@@ -15,7 +15,7 @@
 	// Reactive statement to handle the async import when 'src' changes
 	$: {
 		if (src.startsWith('/')) {
-			const fullPath = `../../../static${src}`
+			const fullPath = `../../../../static${src}`
 			if (staticAssetModules[fullPath]) {
 				staticSrcPromise = staticAssetModules[fullPath]()
 			} else {
