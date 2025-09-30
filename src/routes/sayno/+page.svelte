@@ -211,16 +211,28 @@
 			artificial general intelligence. The campaign draws its urgency from this critical message.
 		</p>
 		<p>
-			<Link href="https://ifanyonebuildsit.com">Learn more about the book →</Link>
+			<Link href="/if-anyone-builds-it-campaign">Learn more about the campaign →</Link>
 		</p>
-		<p>
-			We're building a visual petition of people who believe AI development needs urgent safety
-			measures. Your selfie adds to the growing collage of concerned citizens worldwide.
-		</p>
-		<p>
-			By uploading, you consent to your photo being featured as part of this petition and
-			promotional materials.
-		</p>
+
+		<div id="info" class="collage-info">
+			<h3>The Growing Collage</h3>
+			<p>
+				We're building a visual petition of people who believe AI development needs urgent safety
+				measures. Your selfie adds to the growing collage of concerned citizens worldwide.
+			</p>
+			<Link href="/if-anyone-builds-it-campaign#say-no-to-superintelligent-ai">
+				<img
+					src="/collages/manual_bootstrap-thumb.jpg"
+					alt="Collage of hundreds of people standing up to superintelligent AI development"
+					class="collage-thumbnail"
+				/>
+				<p class="collage-caption">View the full collage and campaign details →</p>
+			</Link>
+			<p>
+				By uploading, you consent to your photo being featured as part of this petition and
+				promotional materials.
+			</p>
+		</div>
 	</article>
 </main>
 
@@ -260,9 +272,40 @@
 		color: var(--text);
 	}
 
+	.collage-info {
+		margin: 2rem 0;
+		padding: 1.5rem;
+		background: var(--bg-subtle);
+		border-radius: 8px;
+		text-align: center;
+	}
+
+	.collage-info h3 {
+		margin: 0 0 1rem 0;
+		color: var(--text);
+	}
+
+	.collage-thumbnail {
+		max-width: 100%;
+		height: auto;
+		border-radius: 4px;
+		border: 2px solid var(--border);
+		margin-bottom: 0.5rem;
+	}
+
+	.collage-caption {
+		margin: 0.5rem 0 0 0;
+		color: var(--brand);
+		font-weight: 500;
+	}
+
 	@media (max-width: 768px) {
 		.book-title-heading {
 			font-size: 1.5rem;
+		}
+
+		.collage-info {
+			padding: 1rem;
 		}
 	}
 </style>

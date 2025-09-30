@@ -1,5 +1,6 @@
 <script lang="ts">
 	import Button from '$lib/components/Button.svelte'
+	import Link from '$lib/components/Link.svelte'
 	import {
 		currentState,
 		cameraPermissionRequested,
@@ -47,7 +48,9 @@
 		</div>
 
 		<!-- Statement speech bubble -->
-		<p class="statement-intro">Upload your selfie to say:</p>
+		<p class="statement-intro">
+			Add your selfie <Link href="#info" class="info-icon">ⓘ</Link> to say:
+		</p>
 		<div class="speech-bubble compact">
 			<div class="statement-text">"I demand we end the race to build superintelligent AI"</div>
 		</div>
@@ -240,6 +243,23 @@
 		opacity: 0.8;
 		margin: 1rem 0 0.5rem 0;
 		text-align: center;
+	}
+
+	:global(a.info-icon) {
+		display: inline-block;
+		width: 1.2em;
+		height: 1.2em;
+		text-align: center;
+		line-height: 1.2em;
+		border-radius: 50%;
+		font-size: 0.9em;
+		text-decoration: none;
+		opacity: 0.7;
+		transition: opacity 0.2s;
+	}
+
+	:global(a.info-icon:hover) {
+		opacity: 1;
 	}
 
 	.speech-bubble {
