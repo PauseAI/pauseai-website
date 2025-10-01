@@ -26,3 +26,7 @@ deno.lock
 /l10n-cage
 
 /static/open-letter/portraits/original
+
+# Sayno campaign email notification (sensitive data)
+/logs/
+*-cache.json
