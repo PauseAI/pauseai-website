@@ -8,7 +8,7 @@ html {
 	--font-heading: 'Saira Condensed', Impact, sans-serif;
 
 	/* Major theme stuff */
-	--page-width: 40rem; /* Please update in media queries and $lib/components/Image.svelte */
+	--page-width: 40rem; /* Please update in media queries and $lib/components/custom/img.svelte */
 
 	/* Colors */
 	--t-color-main: #ff9416; /* Default main color, approximately hsl(32, 100%, 54%)*/
