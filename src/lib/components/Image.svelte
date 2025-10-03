@@ -3,6 +3,7 @@
 
 	export let src: string
 	export let alt: string
+	export let sizes: string
 
 	type Picture = Exclude<EnhancedImgAttributes['src'], string>
 
@@ -31,7 +32,7 @@
 </script>
 
 {#if picture}
-	<enhanced:img src={picture} {alt} class="enhanced" sizes="min(40rem, 100vw)" />
+	<enhanced:img src={picture} {alt} class="enhanced" {sizes} />
 {:else}
 	<img {src} {alt} loading="lazy" />
 {/if}

@@ -5,4 +5,4 @@
 	export let alt: string
 </script>
 
-<Image {src} {alt} />
+<Image {src} {alt} sizes="min(40rem, 100vw)" />
