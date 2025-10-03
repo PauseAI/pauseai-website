@@ -220,7 +220,7 @@
 				We're building a visual petition of people who believe AI development needs urgent safety
 				measures. Your selfie adds to the growing collage of concerned citizens worldwide.
 			</p>
-			<Link href="/if-anyone-builds-it-campaign#say-no-to-superintelligent-ai">
+			<Link href="/if-anyone-builds-it-campaign#say-no-to-superintelligent-ai" class="link">
 				<img
 					src="/collages/manual_bootstrap-thumb.jpg"
 					alt="Collage of hundreds of people standing up to superintelligent AI development"
@@ -277,12 +277,20 @@
 		padding: 1.5rem;
 		background: var(--bg-subtle);
 		border-radius: 8px;
-		text-align: center;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
 	}
 
 	.collage-info h3 {
 		margin: 0 0 1rem 0;
 		color: var(--text);
+	}
+
+	.collage-info :global(.link) {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
 	}
 
 	.collage-thumbnail {
@@ -295,7 +303,10 @@
 
 	.collage-caption {
 		margin: 0.5rem 0 0 0;
-		color: var(--brand);
+		color: var(--text);
+		background-color: var(--brand);
+		padding: 0.5rem 1rem;
+		border-radius: 4px;
 		font-weight: 500;
 	}
 
