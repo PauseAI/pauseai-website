@@ -9,7 +9,7 @@
 
 	// Use import.meta.glob to statically analyze all potential static assets
 	const pictureModules = import.meta.glob<Picture>(
-		'../../assets/images/*.{avif,heif,gif,jpeg,jpg,png,tiff,webp}',
+		'../../assets/images/**/*.{avif,heif,gif,jpeg,jpg,png,tiff,webp}',
 		{
 			eager: true,
 			import: 'default',
