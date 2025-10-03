@@ -14,6 +14,7 @@
 		checkCameraPermission,
 		cloudinaryConfig
 	} from './selfieStore'
+	import Image from '$lib/components/Image.svelte'
 
 	// Page metadata
 	const title = 'Stop Superintelligence'
@@ -221,7 +222,7 @@
 				measures. Your selfie adds to the growing collage of concerned citizens worldwide.
 			</p>
 			<Link href="/if-anyone-builds-it-campaign#say-no-to-superintelligent-ai" class="link">
-				<img
+				<Image
 					src="/collages/manual_bootstrap-thumb.jpg"
 					alt="Collage of hundreds of people standing up to superintelligent AI development"
 					class="collage-thumbnail"
@@ -293,7 +294,7 @@
 		align-items: center;
 	}
 
-	.collage-thumbnail {
+	.collage-info :global(.collage-thumbnail) {
 		max-width: 100%;
 		height: auto;
 		border-radius: 4px;
