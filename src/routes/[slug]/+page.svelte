@@ -1,13 +1,13 @@
 <script lang="ts">
 	import PostMeta from '$lib/components/PostMeta.svelte'
-	import { getAssetsOrStaticUrl } from '$lib/images.js'
+	import { getAssetUrlOrStaticUrl } from '$lib/images.js'
 
 	// don't destructure to maintain reactivity for invalidation after language detection
 	export let data
 	$: meta = data.meta
 	$: ({ title = data.slug, date, description, image, author } = meta)
 	$: parent = data.slug.split('/').slice(0, -1).join('/')
-	$: imageUrl = getAssetsOrStaticUrl(image)
+	$: imageUrl = getAssetUrlOrStaticUrl(image)
 </script>
 
 <PostMeta {title} {description} {date} image={imageUrl} />
