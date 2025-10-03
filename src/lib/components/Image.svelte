@@ -12,7 +12,7 @@
 	const pictureModules = import.meta.glob<Picture>(
 		'../../assets/images/*.{avif,gif,heif,jpeg,jpg,png,tiff,webp,svg}',
 		{
-			eager: false,
+			eager: true,
 			import: 'default',
 			query: {
 				enhanced: true
@@ -20,30 +20,21 @@
 		}
 	)
 
-	let picturePromise: Promise<Picture | null> = Promise.resolve(null)
+	let picture: Picture | null = null
 
-	// Reactive statement to handle the async import when 'src' changes
-	$: {
-		if (src.startsWith('/')) {
-			const fullPath = `../../assets/images${src}`
-			if (pictureModules[fullPath]) {
-				picturePromise = pictureModules[fullPath]()
-			} else {
-				picturePromise = Promise.resolve(null)
-			}
-		} else {
-			picturePromise = Promise.resolve(null)
+	if (src.startsWith('/')) {
+		const fullPath = `../../assets/images${src}`
+		if (pictureModules[fullPath]) {
+			picture = pictureModules[fullPath]
 		}
 	}
 </script>
 
-{#await picturePromise then picture}
-	{#if picture}
-		<enhanced:img src={picture} {alt} class="enhanced" />
-	{:else}
-		<img {src} {alt} loading="lazy" />
-	{/if}
-{/await}
+{#if picture}
+	<enhanced:img src={picture} {alt} class="enhanced" />
+{:else}
+	<img {src} {alt} loading="lazy" />
+{/if}
 
 <style>
 	.enhanced {
