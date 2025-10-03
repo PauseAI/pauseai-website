@@ -31,7 +31,7 @@
 </script>
 
 {#if picture}
-	<enhanced:img src={picture} {alt} class="enhanced" />
+	<enhanced:img src={picture} {alt} class="enhanced" sizes="min(40rem, 100vw)" />
 {:else}
 	<img {src} {alt} loading="lazy" />
 {/if}
