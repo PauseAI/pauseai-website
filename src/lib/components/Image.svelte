@@ -8,8 +8,6 @@
 	type Picture = Exclude<EnhancedImgAttributes['src'], string>
 
 	// Use import.meta.glob to statically analyze all potential static assets
-	// This creates a map of functions that return promises for each module.
-	// The `eager: false` means modules are loaded lazily, and `import: 'default'` gets the default export (e.g., the URL string for images).
 	const pictureModules = import.meta.glob<Picture>(
 		'../../assets/images/*.{avif,heif,gif,jpeg,jpg,png,tiff,webp}',
 		{
