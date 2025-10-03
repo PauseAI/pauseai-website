@@ -10,7 +10,7 @@
 	// This creates a map of functions that return promises for each module.
 	// The `eager: false` means modules are loaded lazily, and `import: 'default'` gets the default export (e.g., the URL string for images).
 	const pictureModules = import.meta.glob<Picture>(
-		'../../../assets/images/*.{avif,gif,heif,jpeg,jpg,png,tiff,webp,svg}',
+		'../../assets/images/*.{avif,gif,heif,jpeg,jpg,png,tiff,webp,svg}',
 		{
 			eager: false,
 			import: 'default',
@@ -25,7 +25,7 @@
 	// Reactive statement to handle the async import when 'src' changes
 	$: {
 		if (src.startsWith('/')) {
-			const fullPath = `../../../assets/images${src}`
+			const fullPath = `../../assets/images${src}`
 			if (pictureModules[fullPath]) {
 				picturePromise = pictureModules[fullPath]()
 			} else {
