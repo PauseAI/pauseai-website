@@ -8,13 +8,11 @@ description: the Australian chapter of PauseAI
 
 By 2030, artificial intelligence could be fully automated, self-improving and **smarter than humans at almost everything.** This isn't science fiction—it's the assessment of leading AI companies and researchers. When this happens, every aspect of life will change forever.
 
-**[ Sign the petition to the Australian House of Representatives](https://www.aph.gov.au/e-petitions/petition/EN7777)**
-
 **[Join our community](/join)** | [Email us](mailto:australia@pauseai.info) | [Connect on Facebook](https://www.facebook.com/groups/571590459293618) | [YouTube channel](https://www.youtube.com/channel/UCjjMieiOlSFf7jud0yhHQSg) | [LinkedIn](https://www.linkedin.com/company/pauseai-australia) | [Events](https://lu.ma/PauseAIAustralia)
 
 ### What risks are we facing?
 
-Artificial Intelligence is advancing [at an astonishing rate](/urgency). Some experts like [Sam Altman](https://time.com/7205596/sam-altman-superintelligence-agi/), [Dario Amodei](https://arstechnica.com/ai/2025/01/anthropic-chief-says-ai-could-surpass-almost-all-humans-at-almost-everything-shortly-after-2027/), and [Geoffrey Hinton](https://en.wikipedia.org/wiki/Artificial_general_intelligence) warn that **AI could surpass human intelligence within the next five years**. Without international cooperation, this could result in economic chaos, war, and even [human extinction](/xrisk).
+Artificial Intelligence is advancing [at an astonishing rate](/urgency). Experts like [Sam Altman](https://time.com/7205596/sam-altman-superintelligence-agi/), [Dario Amodei](https://arstechnica.com/ai/2025/01/anthropic-chief-says-ai-could-surpass-almost-all-humans-at-almost-everything-shortly-after-2027/), and [Geoffrey Hinton](https://en.wikipedia.org/wiki/Artificial_general_intelligence) warn that **AI could surpass human intelligence within the next five years**. Without international cooperation, this could result in economic chaos, war, and even [human extinction](/xrisk).
 
 > "As general-purpose AI becomes more capable, evidence of additional risks is gradually emerging. These include risks such as large-scale labour market impacts, AI-enabled hacking or biological attacks, and society losing control over general-purpose AI."
 >
@@ -65,10 +63,14 @@ You can make a difference. Volunteers in Australia raise awareness, protest, lob
 
 - [Join our community](/join)
 - [Attend our next Australian online or in-person event](https://lu.ma/PauseAIAustralia)
-- [Contact politicians](/writing-a-letter)
+- [Contact Australian politicians (using this easy tool)](https://www.australiansforaisafety.com.au/advocacy/contact-politicians?utm_source=pauseai-australia)
 - Talk to your friends and family about AI risk
 
 ### Campaigns
+
+#### Petition to the House of Representatives
+
+In September 2025, [e-petition EN7777 ](https://www.aph.gov.au/e-petitions/petition/EN7777)to the Australian House of Representatives was open for 30 days and collected 168 signatures. The petition asked the House to legislate that all future frontier artificial intelligence systems must pass rigorous independent safety evaluations, and further asked the House to advocate proactively for an international treaty to pause frontier AI development until global safety mechanisms are in place. We await an official response from a minister of the government.
 
 #### Productivity commission submission
 
@@ -77,3 +79,7 @@ In September 2025, PauseAI Australia responded to the interim report on _Harness
 #### Investigate OpenAI
 
 [In July 2025](https://drive.google.com/file/d/1t9ntUlF2cZH4_f-1fsp0FFCf3RiGZ81g/view?usp=drive_link), volunteer Mark Brown brought OpenAI to the attention of the Australian Federal Police and the Attorney-General of Australia, alleging potential breaches of the _Crimes (Biological Weapons) Act 1976_. It was discussed in a [news story](https://ia.acs.org.au/article/2025/is-the-new-chatgpt-agent-really-a-weapons-risk-.html) and on [a video podcast](https://youtu.be/-YPhNdpA8Rk?si=dTBpGMfZaNWnldXa). We are still waiting for a response from the AFP and the Attorney-General.
+
+#### Melbourne protest
+
+In February 2025, volunteers in Melbourne protested they missed opportunity of the Paris AI Action Summit. The protest received [coverage](https://www.smh.com.au/technology/most-dangerous-technology-ever-protesters-urge-ai-pause-20250207-p5laaq.html) in the nine newspapers.
