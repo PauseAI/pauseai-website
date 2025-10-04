@@ -1,6 +1,6 @@
 const BASE = '../assets/images'
 
-const IMAGE_URLS = import.meta.glob<string>('../assets/images/**.*', {
+const IMAGE_URLS = import.meta.glob<string>('../assets/images/**/*', {
 	eager: true,
 	import: 'default',
 	query: { url: true }
