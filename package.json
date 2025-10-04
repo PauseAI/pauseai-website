@@ -84,6 +84,7 @@
 		"escape-html": "^1.0.3",
 		"github-slugger": "^2.0.0",
 		"html-to-image": "^1.11.13",
+		"http-status-codes": "^2.3.0",
 		"lucide-svelte": "^0.536.0",
 		"maplibre-gl": "^5.7.2",
 		"maplibregl-mapbox-request-transformer": "^0.0.2",
