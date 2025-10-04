@@ -1,7 +1,8 @@
 import { redirect } from '@sveltejs/kit'
 
 const REDIRECTS: Record<string, string> = {
-	'/2025-feb': '/2025-february'
+	'/2025-feb': '/2025-february',
+	'/selfie': '/sayno'
 }
 
 export function handleRedirects(path: string) {
