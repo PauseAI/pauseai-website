@@ -122,6 +122,23 @@ To use optimized images, first, ensure your image file (e.g., `my-image.png`) is
   <Image src="/my-image.png" alt="A description of my image" />
   ```
 
+## Redirects
+
+The `src/lib/redirects.ts` file defines server-side redirects for specific paths. This is useful for handling cases like old URLs or vanity URLs.
+
+The `REDIRECTS` object maps incoming paths to their target paths. When a request comes in for a path defined in `REDIRECTS`, the `handleRedirects` function issues a 301 (Moved Permanently) redirect to the specified target.
+
+Example:
+
+```typescript
+const REDIRECTS: Record<string, string> = {
+	'/old-path': '/new-path',
+	'/legacy-page': '/current-page'
+}
+```
+
+To add a new redirect, simply add a new entry to the `REDIRECTS` object in `src/lib/redirects.ts`.
+
 ## Deployment
 
 The contents of the repository are continuously deployed to Netlify when code is pushed.
