@@ -88,6 +88,40 @@ The article (and automatic l10ns of same) will be previewable.
 
 If you are sufficiently changing prominent text, consider inspecting relevant l10ns as well as the original.
 
+### Image Optimization
+
+To improve performance, images are automatically processed and delivered in multiple formats (e.g., WebP, AVIF) and resolutions. This is handled by the `Image` Svelte component, which optimizes images located in the `src/assets/images` directory.
+
+#### Usage
+
+To use optimized images, first, ensure your image file (e.g., `my-image.png`) is located within the `src/assets/images` directory. Then, choose one of the following methods to embed it:
+
+- **In Markdown Files:** Use standard Markdown image syntax. The system will automatically process the image through the `Image` component. The path in the Markdown should be relative to `src/assets/images` and start with a forward slash `/`.
+
+  Example:
+
+  ```markdown
+  ![A description of my image](/my-image.png)
+  ```
+
+  If your image is in a subdirectory, for example `src/assets/images/illustrations/another-image.jpg`, the path would be:
+
+  ```markdown
+  ![Another image description](/illustrations/another-image.jpg)
+  ```
+
+- **In Svelte Components:** If you need to use the `Image` component directly in a Svelte component, import it and pass the `src` prop relative to `src/assets/images` and starting with a forward slash `/`.
+
+  Example:
+
+  ```svelte
+  <script>
+  	import Image from '$lib/components/Image.svelte'
+  </script>
+
+  <Image src="/my-image.png" alt="A description of my image" />
+  ```
+
 ## Deployment
 
 The contents of the repository are continuously deployed to Netlify when code is pushed.

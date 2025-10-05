@@ -2,7 +2,7 @@
 	import type { EnhancedImgAttributes } from '@sveltejs/enhanced-img'
 
 	export let src: string
-	export let alt: string
+	export let alt: string | null = null
 	export let sizes: string | null = null
 	let className: string = ''
 	export { className as class }
