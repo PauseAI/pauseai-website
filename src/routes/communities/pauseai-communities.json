@@ -443,6 +443,12 @@
 			"lat": -41.433349,
 			"lon": 147.123323,
 			"link": "$$DISCORD_GLOBAL$$"
+		},
+		{
+			"link": "https://discord.gg/ZTzFytGKKE$$",
+			"name": "Brno",
+			"lon": 16.5779118,
+			"lat": 49.2001787
 		}
 	]
 }
