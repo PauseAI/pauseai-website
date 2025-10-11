@@ -68,6 +68,10 @@ You can make a difference. Volunteers in Australia raise awareness, protest, lob
 
 ### Campaigns
 
+#### IABIED Canberra book launch
+
+On 7 October 2025, PauseAI Australia held a book launch and discussion event at Smith’s Alternative bookshop in Canberra to mark the release of [_If Anyone Builds It, Everyone Dies_](htts://www.penguin.com.au/books/if-anyone-builds-it-everyone-dies-9781847928931). Laura Nuttall, MLA, and Peter Cain, MLA, joined the discussion and read excerpts from the book.
+
 #### Petition to the House of Representatives
 
 In September 2025, [e-petition EN7777 ](https://www.aph.gov.au/e-petitions/petition/EN7777)to the Australian House of Representatives was open for 30 days and collected 168 signatures. The petition asked the House to legislate that all future frontier artificial intelligence systems must pass rigorous independent safety evaluations, and further asked the House to advocate proactively for an international treaty to pause frontier AI development until global safety mechanisms are in place. We await an official response from a minister of the government.
