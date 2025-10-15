@@ -16,6 +16,14 @@ export type Post = FrontmatterMeta & {
 	slug: string
 }
 
+export type Campaign = {
+	title: string
+	description: string
+	image?: string
+	isCurrent: boolean
+	url: string
+}
+
 export type Signatory = {
 	name: string
 	private: boolean
