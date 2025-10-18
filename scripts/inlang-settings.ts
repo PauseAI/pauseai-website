@@ -152,8 +152,8 @@ function regenerateSettings(verbose = false): void {
 }
 
 // Check if verbose mode is requested
-const verbose = process.argv.includes('--verbose')
+// const verbose = process.argv.includes('--verbose')
 
 // Main execution logic - Always regenerate
 console.log('Regenerating inlang settings...')
-regenerateSettings(verbose)
+// regenerateSettings(verbose)

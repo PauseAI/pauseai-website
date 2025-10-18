@@ -1,3 +1,6 @@
+# IDEs
+.idea
+
 .DS_Store
 node_modules
 /build
@@ -23,6 +26,5 @@ deno.lock
 /project.inlang/settings.json
 /src/lib/generated
 /src/temp
-/l10n-cage
 
 /static/open-letter/portraits/original

@@ -14,13 +14,7 @@ import { execSync } from 'child_process'
 // Import functionality from our own modules
 import { createDryRunStats, printDryRunSummary } from './dry-run'
 import { resolve as resolveForcePatterns, showForceHelp } from './force'
-import {
-	cleanUpGitSecrets,
-	createGitClient,
-	getLatestCommitDates,
-	GIT_CONFIG,
-	initializeGitCage
-} from './git-ops'
+import { cleanUpGitSecrets, createGitClient, getLatestCommitDates } from './git-ops'
 import { pushWithUpstream } from './branch-safety'
 import {
 	createConcurrencyQueue,
@@ -76,7 +70,7 @@ let locales: readonly string[]
 try {
 	const runtime = await importRuntimeWithoutVite()
 	locales = runtime.locales
-	if (runtime.baseLocale !== 'en')
+	if (runtime.baseLocale !== 'es')
 		throw new Error(
 			`runtime.baseLocale set to ${runtime.baseLocale} but our code assumes and hardcodes 'en'`
 		)
@@ -117,8 +111,8 @@ const cageGit = createGitClient()
 const websiteGit = createGitClient()
 
 // Repository configuration
-const GIT_REPO_PARAGLIDE = 'github.com/PauseAI/paraglide'
-const GIT_TOKEN = process.env.GITHUB_TOKEN
+// const GIT_REPO_PARAGLIDE = 'github.com/PauseAI/paraglide'
+// const GIT_TOKEN = process.env.GITHUB_TOKEN
 
 // Configure LLM API client
 // For read-only/dry-run modes, we use a placeholder key
@@ -178,43 +172,27 @@ const languageNamesInEnglish = new Intl.DisplayNames('en', { type: 'language' })
 		const targetLocales = Array.from(locales).filter((locale) => locale !== 'en')
 		console.log(`Using target locales from compiled runtime: [${targetLocales.join(', ')}]`)
 
-		await Promise.all([
-			(async () => {
-				await initializeGitCage({
-					dir: L10N_CAGE_DIR,
-					token: GIT_TOKEN,
-					repo: GIT_REPO_PARAGLIDE,
-					username: GIT_CONFIG.USERNAME,
-					email: GIT_CONFIG.EMAIL,
-					git: cageGit
-				})
-				options.cageLatestCommitDates = await getLatestCommitDates(cageGit, 'cage')
-			})(),
-			(async () =>
-				(options.websiteLatestCommitDates = await getLatestCommitDates(websiteGit, 'website')))()
-		])
-
 		// Process both message files and markdown files in parallel
 		// Begin message l10n
 		const results = await Promise.all([
-			(async () => {
-				const result = await retrieveMessages(
-					{
-						sourcePath: MESSAGE_SOURCE,
-						locales: targetLocales,
-						l10nPromptGenerator: generateJsonPrompt,
-						reviewPromptGenerator: generateReviewPrompt,
-						targetDir: MESSAGE_L10NS,
-						cageWorkingDir: L10N_CAGE_DIR,
-						logMessageFn: logMessage
-					},
-					options
-				)
-
-				// Files are already in the correct location for paraglide to find them
-
-				return result
-			})(),
+			// (async () => {
+			// 	const result = await retrieveMessages(
+			// 		{
+			// 			sourcePath: MESSAGE_SOURCE,
+			// 			locales: targetLocales,
+			// 			l10nPromptGenerator: generateJsonPrompt,
+			// 			reviewPromptGenerator: generateReviewPrompt,
+			// 			targetDir: MESSAGE_L10NS,
+			// 			cageWorkingDir: L10N_CAGE_DIR,
+			// 			logMessageFn: logMessage
+			// 		},
+			// 		options
+			// 	)
+			//
+			// 	// Files are already in the correct location for paraglide to find them
+			//
+			// 	return result
+			// })(),
 			(async () => {
 				const markdownPathsFromBase = await fs.readdir(MARKDOWN_SOURCE, { recursive: true })
 				const markdownPathsFromRoot = markdownPathsFromBase.map((file) =>
