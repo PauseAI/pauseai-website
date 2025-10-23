@@ -1,19 +1,22 @@
 import type { Post } from '$lib/types'
 import adjacentCommunitiesJson from './adjacent-communities.json'
 import pauseAICommunitiesJson from './pauseai-communities.json'
+import nationalChaptersJson from './national-chapters.json'
 
 export type CommunitiesConfiguration = {
-	communities: Community[]
+	communities: RawCommunity[]
 }
 
-export type Community = {
+type RawCommunity = {
 	name: string
 	lat: number
 	lon: number
 	/** Will default to PauseAI Discord */
 	link: string
-	/** Non-PauseAI org */
-	adjacent?: boolean
+}
+
+export type Community = RawCommunity & {
+	type: 'local' | 'national' | 'adjacent'
 }
 
 export const communitiesMeta: Post = {
@@ -34,13 +37,19 @@ const LINK_PLACEHOLDERS = {
 	$$WHATSAPP_ITALY$$: 'https://chat.whatsapp.com/Cue9aeK6kpJFoDxT3xV9Zx'
 }
 
-const pauseAICommunities: Community[] = (pauseAICommunitiesJson satisfies CommunitiesConfiguration)
-	.communities
+const pauseAICommunities: Community[] = (
+	pauseAICommunitiesJson satisfies CommunitiesConfiguration
+).communities.map((c) => ({ ...c, type: 'local' }))
+
 const adjacentCommunities: Community[] = (
 	adjacentCommunitiesJson satisfies CommunitiesConfiguration
-).communities
+).communities.map((c) => ({ ...c, type: 'adjacent' }))
 
-for (const community of [...adjacentCommunities, ...pauseAICommunities]) {
+const nationalChapters: Community[] = (
+	nationalChaptersJson satisfies CommunitiesConfiguration
+).communities.map((c) => ({ ...c, type: 'national' }))
+
+for (const community of [...adjacentCommunities, ...pauseAICommunities, ...nationalChapters]) {
 	if (
 		!(
 			community.link.startsWith('http') ||
@@ -54,7 +63,8 @@ for (const community of [...adjacentCommunities, ...pauseAICommunities]) {
 
 /** All communities, PauseAI communities last to render them on top */
 export const communities: Community[] = [
-	...adjacentCommunities.map((c) => ({ ...c, adjacent: true })).sort((a, b) => b.lat - a.lat),
+	...adjacentCommunities.sort((a, b) => b.lat - a.lat),
+	...nationalChapters.sort((a, b) => b.lat - a.lat),
 	...pauseAICommunities.sort((a, b) => b.lat - a.lat)
 ].map((community) => ({
 	...community,

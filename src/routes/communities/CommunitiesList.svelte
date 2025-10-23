@@ -8,7 +8,7 @@
 <div class="prose">
 	<ul>
 		{#each communities
-			.filter((community) => !community.adjacent)
+			.filter((community) => community.type === 'local')
 			.sort((a, b) => a.name.localeCompare(b.name)) as community}
 			<li>
 				<Link href={community.link}>{community.name}</Link>

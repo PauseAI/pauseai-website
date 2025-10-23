@@ -97,7 +97,7 @@
 		map.on('load', () => {
 			communities.map((community) => {
 				new Marker({
-					color: community.adjacent ? 'rgba(0,0,0,.5)' : 'rgb(255, 148, 22)',
+					color: community.type === 'adjacent' ? 'rgba(0,0,0,.5)' : 'rgb(255, 148, 22)',
 					opacityWhenCovered: '0'
 				})
 					.setPopup(
