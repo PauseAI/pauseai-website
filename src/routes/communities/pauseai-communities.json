@@ -277,6 +277,12 @@
 			"link": "$$DISCORD_GLOBAL$$"
 		},
 		{
+			"name": "PauseAI España",
+			"lat": 40.4168,
+			"lon": -3.7038,
+			"link": "https://chat.whatsapp.com/KEgD22LEo6xEVvjH4fD8br"
+		},
+		{
 			"name": "PauseAI Blackpool",
 			"lat": 53.8159,
 			"lon": -3.0553,
