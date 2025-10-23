@@ -7,6 +7,18 @@
 			"link": "$$DISCORD_GLOBAL$$"
 		},
 		{
+			"name": "PauseAI Netherlands",
+			"lat": 52,
+			"lon": 5.5,
+			"link": "https://chat.whatsapp.com/EOGvhoPCiCqDqwuf9JUxtB"
+		},
+		{
+			"name": "PauseAI Serbia",
+			"lat": 44,
+			"lon": 21,
+			"link": "https://www.facebook.com/PauseAISerbia"
+		},
+		{
 			"name": "PauseAI Washington DC",
 			"lat": 38.9072,
 			"lon": -77.0369,
@@ -73,6 +85,12 @@
 			"link": "https://chat.whatsapp.com/CkkycjLr6H96lEzJs2ezox"
 		},
 		{
+			"name": "PauseAI UK",
+			"lat": 54.5,
+			"lon": -2.5,
+			"link": "https://x.com/PauseAI_UK"
+		},
+		{
 			"name": "PauseAI Los Angeles",
 			"lat": 34.0522,
 			"lon": -118.2437,
@@ -103,6 +121,12 @@
 			"link": "$$DISCORD_FRANCE$$"
 		},
 		{
+			"name": "PauseAI France",
+			"lat": 47.5,
+			"lon": 2.5,
+			"link": "$$DISCORD_FRANCE$$"
+		},
+		{
 			"name": "PauseAI Miami",
 			"lat": 25.7616,
 			"lon": -80.1917,
@@ -115,10 +139,28 @@
 			"link": "https://pauseai.ca/montreal.html"
 		},
 		{
+			"name": "PauseAI Canada",
+			"lat": 56,
+			"lon": -105,
+			"link": "https://pauseai.ca/"
+		},
+		{
+			"name": "PauseAI Romania",
+			"lat": 44.5,
+			"lon": 26,
+			"link": "https://www.facebook.com/people/Pause-AI-Romania/61581783381263/?rdid=LfnCxIeWHG9TL4Bp&share_url=https%3A%2F%2Fwww.facebook.com%2Fshare%2F19yinn6qj4%2F"
+		},
+		{
 			"name": "PauseAI Nairobi",
 			"lat": -1.286389,
 			"lon": 36.817223,
 			"link": "$$DISCORD_GLOBAL$$"
+		},
+		{
+			"name": "PauseAI Kenya",
+			"lat": 0.5,
+			"lon": 38,
+			"link": "https://x.com/Pauseaikenya"
 		},
 		{
 			"name": "PauseAI Stockholm",
@@ -229,6 +271,12 @@
 			"link": "$$DISCORD_GLOBAL$$"
 		},
 		{
+			"name": "PauseAI US",
+			"lat": 39, 
+			"lon": -98,
+			"link": "$$DISCORD_US$$"
+		}
+		{
 			"name": "PauseAI Las Vegas",
 			"lat": 36.1716,
 			"lon": -115.1391,
@@ -278,8 +326,8 @@
 		},
 		{
 			"name": "PauseAI España",
-			"lat": 40.4168,
-			"lon": -3.7038,
+			"lat": 40.5,
+			"lon": -3.5,
 			"link": "https://chat.whatsapp.com/KEgD22LEo6xEVvjH4fD8br"
 		},
 		{
@@ -305,6 +353,12 @@
 			"lat": -37.8136,
 			"lon": 144.9631,
 			"link": "$$DISCORD_GLOBAL$$"
+		},
+		{
+			"name": "PauseAI Australia",
+			"lat": -25,
+			"lon": 134.5,
+			"link": "https://www.facebook.com/groups/571590459293618/"
 		},
 		{
 			"name": "PauseAI Hamburg",
@@ -382,7 +436,13 @@
 			"name": "Prague",
 			"lat": 50.0755,
 			"lon": 14.4378,
-			"link": "https://discord.gg/ZTzFytGKKE$$"
+			"link": "https://discord.gg/4rZ2nGZB3r"
+		},
+		{
+			"name": "PauseAI Czechia",
+			"lat": 50,
+			"lon": 15,
+			"link": " https://discord.gg/4rZ2nGZB3r"
 		},
 		{
 			"name": "Santiago",
@@ -406,6 +466,12 @@
 			"name": "Munster",
 			"lat": 51.9612,
 			"lon": 7.6282,
+			"link": "$$DISCORD_GERMANY$$"
+		},
+		{
+			"name": "PauseAI Germany",
+			"lat": 51,
+			"lon": 10,
 			"link": "$$DISCORD_GERMANY$$"
 		},
 		{
