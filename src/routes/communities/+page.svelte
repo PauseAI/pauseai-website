@@ -94,24 +94,26 @@
 			updateData()
 		})
 
-		map.on('load', () => {
-			communities.map((community) => {
-				new Marker({
-					color: community.type === 'adjacent' ? 'rgba(0,0,0,.5)' : 'rgb(255, 148, 22)',
-					opacityWhenCovered: '0'
-				})
-					.setPopup(
-						new Popup({ offset: [0, -15] }).setHTML(
-							`<h3><a href="${community.link || 'https://discord.gg/CR5u5BTBwy'}">${
-								community.name
-							}</a></h3>`
-						)
-					)
-					.setLngLat([community.lon, community.lat])
-					.addTo(map)
-			})
+map.on('load', () => {
+    communities.map((community) => {
+        new Marker({
+            color: community.type === 'adjacent' ? 'rgba(0,0,0,.5)' 
+                : community.type === 'national' ? 'rgb(0, 150, 255)' 
+                : 'rgb(255, 148, 22)',
+            opacityWhenCovered: '0'
+        })
+            .setPopup(
+                new Popup({ offset: [0, -15] }).setHTML(
+                    `<h3><a href="${community.link || 'https://discord.gg/CR5u5BTBwy'}">${
+                        community.name
+                    }</a></h3>`
+                )
+            )
+            .setLngLat([community.lon, community.lat])
+            .addTo(map)
 		})
-	})
+    })
+})
 
 	onDestroy(() => {
 		map?.remove()
