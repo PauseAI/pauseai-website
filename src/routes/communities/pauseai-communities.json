@@ -9,7 +9,7 @@
 		{
 			"name": "PauseAI Netherlands",
 			"lat": 52,
-			"lon": 5.5,
+			"lon": 5.6,
 			"link": "https://chat.whatsapp.com/EOGvhoPCiCqDqwuf9JUxtB"
 		},
 		{
@@ -86,8 +86,8 @@
 		},
 		{
 			"name": "PauseAI UK",
-			"lat": 54.5,
-			"lon": -2.5,
+			"lat": 54.2,
+			"lon": -2.4,
 			"link": "https://x.com/PauseAI_UK"
 		},
 		{
@@ -122,8 +122,8 @@
 		},
 		{
 			"name": "PauseAI France",
-			"lat": 47.5,
-			"lon": 2.5,
+			"lat": 47.8,
+			"lon": 2.6,
 			"link": "$$DISCORD_FRANCE$$"
 		},
 		{
@@ -272,7 +272,7 @@
 		},
 		{
 			"name": "PauseAI US",
-			"lat": 39, 
+			"lat": 39.5, 
 			"lon": -98,
 			"link": "$$DISCORD_US$$"
 		},
@@ -326,8 +326,8 @@
 		},
 		{
 			"name": "PauseAI España",
-			"lat": 40.5,
-			"lon": -3.5,
+			"lat": 41.3,
+			"lon": -4,
 			"link": "https://chat.whatsapp.com/KEgD22LEo6xEVvjH4fD8br"
 		},
 		{
@@ -470,7 +470,7 @@
 		},
 		{
 			"name": "PauseAI Germany",
-			"lat": 51,
+			"lat": 51.1,
 			"lon": 10,
 			"link": "$$DISCORD_GERMANY$$"
 		},
