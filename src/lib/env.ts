@@ -59,7 +59,7 @@ export function possiblyOverriddenLocales(defaults: { locales: string[] }): stri
 	const result = defaults.locales.filter((locale: string) =>
 		inclusive ? namedLocales.includes(locale) : !namedLocales.includes(locale)
 	)
-	if (!result.includes('en')) result.push('en')
+	// if (!result.includes('en')) result.push('en')
 	//	console.debug(`defaults: ${JSON.stringify(defaults)}`)
 	//	console.log(`PARAGLIDE_LOCALES: ${env.PARAGLIDE_LOCALES} (${getDevContext()}) => envValue: ${envValue} => result: ${result}`)
 	return result

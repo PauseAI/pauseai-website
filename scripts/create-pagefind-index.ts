@@ -17,7 +17,7 @@ for (const post of posts) {
 	await index.addCustomRecord({
 		url: '/' + post.slug,
 		content: post.title + '. ' + (post.description ?? ''),
-		language: 'en',
+		language: 'es',
 		meta: {
 			title: post.title
 		}

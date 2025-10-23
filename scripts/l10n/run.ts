@@ -76,10 +76,10 @@ let locales: readonly string[]
 try {
 	const runtime = await importRuntimeWithoutVite()
 	locales = runtime.locales
-	if (runtime.baseLocale !== 'en')
-		throw new Error(
-			`runtime.baseLocale set to ${runtime.baseLocale} but our code assumes and hardcodes 'en'`
-		)
+	// if (runtime.baseLocale !== 'en')
+	// 	throw new Error(
+	// 		`runtime.baseLocale set to ${runtime.baseLocale} but our code assumes and hardcodes 'en'`
+	// 	)
 } catch (error: unknown) {
 	if (error instanceof Error) console.error('Failed to import runtime:', error.message)
 	else console.error('Failed to import runtime with unknown error:', error)

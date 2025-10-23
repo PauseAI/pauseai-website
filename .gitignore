@@ -1,3 +1,7 @@
+# IDEs
+.idea
+
+# Misc
 .DS_Store
 node_modules
 /build
@@ -7,6 +11,7 @@ node_modules
 vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
 .vercel
+
 # Local Netlify folder
 .netlify
 /static/pagefind
@@ -23,6 +28,6 @@ deno.lock
 /project.inlang/settings.json
 /src/lib/generated
 /src/temp
-/l10n-cage
+#/l10n-cage
 
 /static/open-letter/portraits/original
