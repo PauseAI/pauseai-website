@@ -85,6 +85,9 @@ export type AirtableNationalGroup = {
 	instagram?: string
 	tiktok?: string
 	Facebook?: string
+	youtube?: string
+	linkedin?: string
+	luma?: string
 }
 
 export type NationalGroupLink =
@@ -96,3 +99,6 @@ export type NationalGroupLink =
 	| 'instagramLink'
 	| 'tiktokLink'
 	| 'facebookLink'
+	| 'youtubeLink'
+	| 'linkedinLink'
+	| 'lumaLink'
