@@ -28,7 +28,7 @@ Elige una actividad a continuación según tus intereses o habilidades.
 - **Únete al Discord**: Únete al [Discord](https://discord.gg/T3YrWUJsJ5), donde se produce la mayoría de la colaboración.
 - **Participa en eventos**: Protesta o participa en [eventos](/events). Si no hay una protesta cerca de ti, considera [iniciar una](/organizing-a-protest).
 - **Revisa nuestras vacantes**: Revisa nuestras [vacantes](/vacancies) para ver si alguna de tus habilidades coincide con nuestras necesidades organizativas. A menudo estamos buscando personas con experiencia en redes sociales, comunicaciones, organización, divulgación y software. Algunos puestos están remunerados.
-- **Regístrate como voluntario**: [Regístrate como voluntario](/join) para que podamos encontrar proyectos en tus áreas de interés.
+- **Regístrate como voluntario**: [Regístrate como voluntario](https://pauseai.info/join) para que podamos encontrar proyectos en tus áreas de interés.
 - **Donación**: [Donación](/donate) a PauseAI o compra algunos productos en nuestra [tienda](https://pauseai-shop.fourthwall.com/).
 - **Sigue nuestros canales de redes sociales**: Sigue nuestros [canales de redes sociales](https://linktr.ee/pauseai) y mantente actualizado. Tu capítulo local de PauseAI también puede tener páginas de redes sociales dedicadas.
 

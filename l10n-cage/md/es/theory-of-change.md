@@ -56,4 +56,4 @@ Podemos llegar allí de dos maneras:
 
 ## Vamos a ello {#lets-get-to-it}
 
-[Únete](/join) a PauseAI y [toma medidas](/action)!
+[Únete](https://pauseai.info/join) a PauseAI y [toma medidas](/action)!

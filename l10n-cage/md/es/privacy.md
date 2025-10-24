@@ -16,7 +16,7 @@ Esta Política de privacidad describe cómo [Stichting PauseAI](/legal) ("nosotr
 
 ### a. Información personal {#a-personal-information}
 
-- Cuando te [unices](/join) como miembro, recopilamos tu nombre, dirección de correo electrónico y cualquier otra información que proporciones durante el proceso de registro.
+- Cuando te [unices](https://pauseai.info/join) como miembro, recopilamos tu nombre, dirección de correo electrónico y cualquier otra información que proporciones durante el proceso de registro.
 
 ### b. Información de uso {#b-usage-information}
 

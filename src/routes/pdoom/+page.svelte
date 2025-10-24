@@ -26,5 +26,5 @@
 <p>
 	However high your p(doom) is, you probably agree that we should not allow AI companies to gamble
 	with our future.
-	<Link href="/join">Join PauseAI</Link> to prevent them from doing so.
+	<Link href="https://pauseai.info/join">Join PauseAI</Link> to prevent them from doing so.
 </p>

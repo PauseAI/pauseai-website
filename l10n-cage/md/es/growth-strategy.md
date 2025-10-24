@@ -25,7 +25,7 @@ Por eso somos un _movimiento_, una _comunidad_, algo más grande que nosotros mi
 ## Trayectoria del miembro {#member-journey}
 
 1. **Descubre PauseAI**. Tal vez a través de nuestros canales de redes sociales, un artículo en un periódico, a través de uno de nuestros podcasts, o encontrando una de nuestras páginas en un motor de búsqueda. Nuestros mensajes suelen estar diseñados para explicar el problema, explicar la solución y inspirar acción. A medida que las personas quieren saber más, dirigimos a las personas hacia nuestro sitio web. Consulta nuestra [estrategia de comunicación](/communication-strategy) para obtener más información.
-1. **Visita el sitio web**. El sitio web está diseñado principalmente para informar a las personas sobre lo que quieren saber más. Pero no se detiene allí: cada página también está diseñada para dirigir a las personas hacia [unirse a PauseAI](/join).
+1. **Visita el sitio web**. El sitio web está diseñado principalmente para informar a las personas sobre lo que quieren saber más. Pero no se detiene allí: cada página también está diseñada para dirigir a las personas hacia [unirse a PauseAI](https://pauseai.info/join).
 1. **Únete a PauseAI**. Las personas rellenan el formulario y se convierten en miembros. Les hacemos un par de preguntas (de dónde son, cómo pueden ayudar). Invitamos a las personas a unirse a Discord: es donde sucede la mayor parte de la colaboración.
 1. **El equipo de incorporación se pone en contacto**. Un grupo especial de voluntarios es responsable de hacer que los nuevos miembros se sientan bienvenidos y convertir a los miembros interesados en activistas contribuyentes. Se ponen en contacto a través de correo electrónico o mensajes directos de Discord, y emparejan a los nuevos miembros con [vacantes](/vacancies) y [equipos](/teams).
 1. **Conviértete en voluntario**. Si el voluntario ha encontrado un equipo para unirse y si ese miembro está dispuesto a contribuir tiempo y firmar el acuerdo, se convierte formalmente en voluntario.
@@ -33,4 +33,4 @@ Por eso somos un _movimiento_, una _comunidad_, algo más grande que nosotros mi
 
 ## Ayuda {#help-out}
 
-[Únete](/join) a nuestro servidor de Discord y vea qué puedes hacer para ayudarnos a crecer.
+[Únete](https://pauseai.info/join) a nuestro servidor de Discord y vea qué puedes hacer para ayudarnos a crecer.

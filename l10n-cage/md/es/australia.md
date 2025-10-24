@@ -10,7 +10,7 @@ Para 2030, la inteligencia artificial podría estar completamente automatizada, 
 
 **[Firma la petición a la Cámara de Representantes de Australia](https://www.aph.gov.au/e-petitions/petition/EN7777)**
 
-**[Únete a nuestra comunidad](/join)** | [Envíanos un correo electrónico](mailto:australia@pauseai.info) | [Conéctate con nosotros en Facebook](https://www.facebook.com/groups/571590459293618) | [Canal de YouTube](https://www.youtube.com/channel/UCjjMieiOlSFf7jud0yhHQSg) | [LinkedIn](https://www.linkedin.com/company/pauseai-australia) | [Eventos](https://lu.ma/PauseAIAustralia)
+**[Únete a nuestra comunidad](https://pauseai.info/join)** | [Envíanos un correo electrónico](mailto:australia@pauseai.info) | [Conéctate con nosotros en Facebook](https://www.facebook.com/groups/571590459293618) | [Canal de YouTube](https://www.youtube.com/channel/UCjjMieiOlSFf7jud0yhHQSg) | [LinkedIn](https://www.linkedin.com/company/pauseai-australia) | [Eventos](https://lu.ma/PauseAIAustralia)
 
 ### ¿Qué riesgos enfrentamos? {#what-risks-are-we-facing}
 
@@ -62,7 +62,7 @@ Es [psicológicamente difícil](/psychology-of-x-risk) pensar en posibles catás
 
 Puedes hacer una diferencia. Los voluntarios en Australia crean conciencia, protestan, presionan y apoyan el movimiento global de PauseAI.
 
-- [Únete a nuestra comunidad](/join)
+- [Únete a nuestra comunidad](https://pauseai.info/join)
 - [Asiste a nuestro próximo evento en línea o en persona en Australia](https://lu.ma/PauseAIAustralia)
 - Firma la carta abierta de Australians for AI Safety [aquí](https://www.australiansforaisafety.com.au/letters)
 - [Contacta a los políticos](/writing-a-letter)

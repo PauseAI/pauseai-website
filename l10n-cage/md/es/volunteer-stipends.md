@@ -17,7 +17,7 @@ Si estás planeando organizar un evento grande o un proyecto con plazo determina
 
 ## Proceso de solicitud {#application-process}
 
-- [Regístrate](/join) como voluntario de PauseAI
+- [Regístrate](https://pauseai.info/join) como voluntario de PauseAI
 - Asegúrate de estar registrado en el [Discord de PauseAI](https://discord.gg/X9TYc3vs7j)
 - Copia [el Acuerdo de Estipendio para Voluntarios](https://docs.google.com/document/d/1HHgKsEj1fEpMEcYZXnZQ41tuXMLvwcbXqgrX1f2JxZc/edit)
 - Envíalo a [joep@pauseai.info](mailto:joep@pauseai.info)

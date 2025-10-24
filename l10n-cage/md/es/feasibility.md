@@ -121,4 +121,4 @@ Esta es en realidad nuestra mejor oportunidad de tener un impacto en el mundo y 
 
 ## La teoría de la decisión dice: inténtalo de todos modos {#decision-theory-says-try-it-anyways}
 
-Incluso si crees que una pausa es bastante improbable y no te importan los otros beneficios, a menos que no creas en los mayores riesgos o tengas mejores estrategias en mente, te recomendamos que [te unas](/join). No entierres tu cabeza en la arena y espera a morir o ser salvado, puedes ayudarnos a lograr esto.
+Incluso si crees que una pausa es bastante improbable y no te importan los otros beneficios, a menos que no creas en los mayores riesgos o tengas mejores estrategias en mente, te recomendamos que [te unas](https://pauseai.info/join). No entierres tu cabeza en la arena y espera a morir o ser salvado, puedes ayudarnos a lograr esto.

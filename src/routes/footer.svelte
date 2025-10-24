@@ -7,7 +7,7 @@
 
 <footer>
 	<div class="joinbar">
-		<Link class="c2a" href="/join">{m.footer_join()}</Link>
+		<Link class="c2a" href="https://pauseai.info/join">{m.footer_join()}</Link>
 		<div class="socials">
 			<Socials />
 		</div>
@@ -16,12 +16,10 @@
 	<div class="footer-links">
 		<div class="column">
 			<h2>{m.footer_info()}</h2>
-			<Link href="/faq">{m.footer_info_faq()}</Link>
-			<Link href="/proposal">{m.footer_info_proposal()}</Link>
-			<Link href="/learn">{m.footer_info_learn()}</Link>
-			<Link href="/press">{m.footer_info_press()}</Link>
-			<Link href="/teams">{m.footer_info_teams()}</Link>
-			<Link href="/partnerships">{m.footer_info_partnerships()}</Link>
+			<Link href="/nosotros">Nosotros</Link>
+			<Link href="/pausa">La pausa</Link>
+			<Link href="/debate">IA con ñ</Link>
+			<Link href="/inscripcion">Únete</Link>
 			<Link href="/privacy">{m.footer_info_privacy()}</Link>
 			<Link href="/legal"
 				>{m.footer_info_legal()} <br />
@@ -42,7 +40,7 @@
 		</div>
 		<div class="column">
 			<h2>{m.footer_action()}</h2>
-			<Link href="/join">{m.footer_action_join()}</Link>
+			<Link href="https://pauseai.info/join">{m.footer_action_join()}</Link>
 			<Link href="/action">{m.footer_action_help()}</Link>
 			<Link href="/communities">{m.footer_action_communities()}</Link>
 			<Link href="donate">{m.footer_action_donate()}</Link>

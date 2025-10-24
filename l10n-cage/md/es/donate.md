@@ -27,7 +27,7 @@ Desde febrero de 2024, PauseAI es una [fundación sin fines de lucro registrada]
 
 ## Lo que ya hemos logrado {#what-have-we-already-achieved}
 
-- Más de 1000 personas que se han [unido](/join) a PauseAI, muchas de las cuales trabajan activamente en diversos proyectos.
+- Más de 1000 personas que se han [unido](https://pauseai.info/join) a PauseAI, muchas de las cuales trabajan activamente en diversos proyectos.
 - Más de 100 proyectos en nuestro servidor de Discord (sitios web, talleres, videos, respuestas a consultas gubernamentales, etc.).
 - Hemos organizado más de 15 [protestas](/protests) en 7 países.
 - Más de 100 otros tipos de [eventos](/events) (talleres de cabildeo, sesiones de distribución de folletos, reuniones de acción, etc.).

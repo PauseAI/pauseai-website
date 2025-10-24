@@ -79,4 +79,4 @@ Debemos considerar las siguientes políticas:
 
 ## Ayúdanos a lograr esto {#help-us-achieve-this}
 
-[Únete](/join) al movimiento para colaborar o [toma acción](/action) por tu cuenta.
+[Únete](https://pauseai.info/join) al movimiento para colaborar o [toma acción](/action) por tu cuenta.

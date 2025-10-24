@@ -42,7 +42,7 @@ Nuestro objetivo es prevenir los riesgos catastróficos de la inteligencia artif
 - Facilitar el crecimiento de la comunidad [crecimiento](/growth-strategy) organizando eventos sociales.
 - Distribuir [donaciones](/donate) a proyectos que se alineen con nuestros objetivos.
 - Organizar [protestas](/protests) y otras formas de activismo para concienciar sobre los riesgos de la inteligencia artificial.
-- Educar a [voluntarios](/join) sobre cómo convertirse en defensores más efectivos.
+- Educar a [voluntarios](https://pauseai.info/join) sobre cómo convertirse en defensores más efectivos.
 - Investigar medidas políticas y actualizar [nuestra propuesta](/proposal) en consecuencia.
 
 #### Responsabilidad financiera ("Financieele paragraaf") {#financial-accountability-financieele-paragraaf}

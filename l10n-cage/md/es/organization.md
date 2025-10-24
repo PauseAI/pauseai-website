@@ -20,7 +20,7 @@ description: Cómo está estructurada la organización PauseAI y qué recursos e
 
 ## Proceso de incorporación {#onboarding-process}
 
-1. Regístrese como _voluntario_ (en la [página de unirse](/join) o en Discord). Se envía un mensaje automático al equipo de incorporación.
+1. Regístrese como _voluntario_ (en la [página de unirse](https://pauseai.info/join) o en Discord). Se envía un mensaje automático al equipo de incorporación.
 1. Alguien del equipo de incorporación se pone en contacto con el voluntario y lo invita a una llamada individual. Se les pide que tomen medidas en un grupo local existente, establezcan un grupo local o se unan a uno de los equipos.
 
 ## Recursos educativos {#educational-resources}

@@ -274,4 +274,4 @@ Hay muchas [cosas que puedes hacer](/action).
 Escribir una carta, ir a una protesta, donar algo de dinero o unirse a una comunidad no es tan difícil.
 Y estas acciones tienen un impacto real.
 Incluso cuando enfrentamos el fin del mundo, aún puede haber esperanza y un trabajo muy gratificante por hacer.
-[Únete a PauseAI](/join) y forma parte de nuestro movimiento.
+[Únete a PauseAI](https://pauseai.info/join) y forma parte de nuestro movimiento.
