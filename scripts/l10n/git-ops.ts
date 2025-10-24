@@ -8,7 +8,7 @@ import path from 'path'
 import { execSync } from 'child_process'
 import simpleGit, { type SimpleGit, type SimpleGitOptions } from 'simple-git'
 import { L10N_CAGE_DIR } from '../../src/lib/l10n'
-import { ensureDirectoryExists } from './utils'
+import { ensureDirectoryExists, isL10nOffline } from './utils'
 import { l10nCageBranch, validateBranchForWrite, setupBranchAndTracking } from './branch-safety'
 
 /**
@@ -140,6 +140,13 @@ export async function initializeGitCage(options: {
 	git: SimpleGit
 	branch?: string
 }): Promise<void> {
+	if (isL10nOffline()) {
+		console.log('🔒 L10n offline mode: skipping Git cage initialization, using bundled files')
+		ensureDirectoryExists(options.dir, true)
+		await options.git.cwd(options.dir)
+		return
+	}
+
 	// Determine the branch to use
 	const targetBranch = options.branch || l10nCageBranch()
 
@@ -180,21 +187,34 @@ export async function getLatestCommitDates(
 	git: SimpleGit,
 	repoType: string
 ): Promise<Map<string, Date>> {
+	if (isL10nOffline()) {
+		console.log(`Skipping git log retrieval for ${repoType} (offline mode)`)
+		return new Map<string, Date>()
+	}
+
 	console.log(`Starting git log retrieval for ${repoType} commit dates...`)
-	const latestCommitDatesMap = new Map<string, Date>()
-	const log = await git.log({
-		'--stat': 4096
-	})
-	for (const entry of log.all) {
-		const files = entry.diff?.files
-		if (!files) continue
-		for (const file of files) {
-			if (!latestCommitDatesMap.has(file.file)) {
-				latestCommitDatesMap.set(file.file, new Date(entry.date))
+	try {
+		const latestCommitDatesMap = new Map<string, Date>()
+		const log = await git.log({
+			'--stat': 4096
+		})
+		for (const entry of log.all) {
+			const files = entry.diff?.files
+			if (!files) continue
+			for (const file of files) {
+				if (!latestCommitDatesMap.has(file.file)) {
+					latestCommitDatesMap.set(file.file, new Date(entry.date))
+				}
 			}
 		}
+		return latestCommitDatesMap
+	} catch (error) {
+		console.warn(
+			`⚠️  Unable to read git history for ${repoType}, falling back to cache-less mode:`,
+			(error as Error).message
+		)
+		return new Map<string, Date>()
 	}
-	return latestCommitDatesMap
 }
 
 /**

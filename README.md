@@ -42,6 +42,25 @@ That's it! By default, all commands run in English-only mode for maximum speed. 
 | `pnpm l10n`    | Run l10n manually (see [L10N.md](./L10N.md)) |
 | `pnpm netlify` | Show Netlify preview options                 |
 
+## Docker
+
+You can run the Spanish site inside a container without installing local dependencies.
+
+```bash
+# Build the image (only required once or after code changes)
+docker build -t pauseai-site-es .
+
+# Serve the production build on http://localhost:4173
+docker run --rm -it -p 4173:4173 pauseai-site-es
+
+# Override the exposed port if needed
+docker run --rm -it -p 8080:8080 -e PORT=8080 pauseai-site-es
+```
+
+The image runs `pnpm preview`, so it expects the same conventions as Netlify: prerendered content plus edge function stubs. The build step sets `PARAGLIDE_LOCALES=es` by default; override it at runtime if you need to experiment with other locales.
+
+The Docker build runs the l10n pipeline in offline mode and never contacts GitHub. Make sure the repository’s `l10n-cage/` directory contains the translations you want before building.
+
 ## Environment Setup - for l10n and some dynamic pages
 
 To make some development choices, including seeing dynamic pages or l10ns locally, you'll have to set up your development environment.

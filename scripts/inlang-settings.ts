@@ -12,7 +12,12 @@ import {
 	writeSettingsFile
 } from '../src/lib/l10n'
 import { setupL10nCage } from './l10n/git-ops'
-import { cullCommentary, createSymlinkIfNeeded, ensureDirectoriesExist } from './l10n/utils'
+import {
+	cullCommentary,
+	createSymlinkIfNeeded,
+	ensureDirectoriesExist,
+	isL10nOffline
+} from './l10n/utils'
 
 // Load environment variables from .env file
 dotenv.config()
@@ -28,6 +33,8 @@ function setupEnglishSupport(verbose: boolean): void {
 		createSymlinkIfNeeded(MESSAGE_SOURCE, enMessageTarget, verbose)
 	}
 }
+
+const offlineL10n = isL10nOffline()
 
 function regenerateSettings(verbose = false): void {
 	// Get default settings from our centralized config
@@ -83,6 +90,8 @@ function regenerateSettings(verbose = false): void {
 		if (verbose) {
 			console.log("\n\ud83d\udcdd L10n cage setup skipped - English-only mode doesn't need l10ns")
 		}
+	} else if (offlineL10n) {
+		console.log('🔒 L10n offline mode: skipping l10n cage refresh (using bundled files)')
 	} else {
 		// Clone or update the l10n cage
 		if (verbose)

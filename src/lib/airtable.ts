@@ -1,5 +1,7 @@
 import { isDev, getDevContext } from '$lib/env'
-import { AIRTABLE_API_KEY } from '$env/static/private'
+import { env } from '$env/dynamic/private'
+
+const AIRTABLE_API_KEY = env.AIRTABLE_API_KEY || ''
 
 /** Fetch options for getting data from Airtable */
 const OPTIONS = {

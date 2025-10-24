@@ -64,13 +64,6 @@
 {/if}
 
 <div class="layout" class:with-hero={hero}>
-	{#if $page.route.id === '/sayno'}
-		<!-- Dynamic import and render the selfie UX component -->
-		{#await import('./sayno/SelfieUX.svelte') then module}
-			<svelte:component this={module.default} />
-		{/await}
-	{/if}
-
 	{#if hero}
 		<Hero />
 	{/if}

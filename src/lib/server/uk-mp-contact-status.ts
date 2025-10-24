@@ -1,8 +1,10 @@
-import { AIRTABLE_API_KEY } from '$env/static/private'
+import { env } from '$env/dynamic/private'
 import { validMPEmails } from './uk-postcode-to-mp'
 
 const MP_CONTACT_BASE_ID = 'appBInVvIm6opJ1Ob'
 const UK_PARLIAMENTARIANS_TABLE_ID = 'tblH3ks9wqQHLpYx3'
+
+const AIRTABLE_API_KEY = env.AIRTABLE_API_KEY || ''
 
 export interface UKMPContactStatus {
 	responded: boolean

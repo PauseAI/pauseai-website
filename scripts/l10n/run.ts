@@ -40,7 +40,7 @@ import {
 	MESSAGE_L10NS,
 	MESSAGE_SOURCE
 } from '../../src/lib/l10n'
-import { importRuntimeWithoutVite } from './utils'
+import { ensureDirectoryExists, importRuntimeWithoutVite, isL10nOffline } from './utils'
 
 // Load environment variables first
 dotenv.config()
@@ -85,6 +85,9 @@ try {
 	else console.error('Failed to import runtime with unknown error:', error)
 	process.exit(1)
 }
+
+// Determine offline mode
+const isOffline = isL10nOffline()
 
 // Get API key early for mode determination
 const LLM_API_KEY = process.env.L10N_OPENROUTER_API_KEY
@@ -178,21 +181,26 @@ const languageNamesInEnglish = new Intl.DisplayNames('en', { type: 'language' })
 		const targetLocales = Array.from(locales).filter((locale) => locale !== 'en')
 		console.log(`Using target locales from compiled runtime: [${targetLocales.join(', ')}]`)
 
-		await Promise.all([
-			(async () => {
-				await initializeGitCage({
-					dir: L10N_CAGE_DIR,
-					token: GIT_TOKEN,
-					repo: GIT_REPO_PARAGLIDE,
-					username: GIT_CONFIG.USERNAME,
-					email: GIT_CONFIG.EMAIL,
-					git: cageGit
-				})
-				options.cageLatestCommitDates = await getLatestCommitDates(cageGit, 'cage')
-			})(),
-			(async () =>
-				(options.websiteLatestCommitDates = await getLatestCommitDates(websiteGit, 'website')))()
-		])
+		if (isOffline) {
+			console.log('🔒 L10n offline mode: using bundled cage assets without Git operations')
+			ensureDirectoryExists(L10N_CAGE_DIR, true)
+		} else {
+			await Promise.all([
+				(async () => {
+					await initializeGitCage({
+						dir: L10N_CAGE_DIR,
+						token: GIT_TOKEN,
+						repo: GIT_REPO_PARAGLIDE,
+						username: GIT_CONFIG.USERNAME,
+						email: GIT_CONFIG.EMAIL,
+						git: cageGit
+					})
+					options.cageLatestCommitDates = await getLatestCommitDates(cageGit, 'cage')
+				})(),
+				(async () =>
+					(options.websiteLatestCommitDates = await getLatestCommitDates(websiteGit, 'website')))()
+			])
+		}
 
 		// Process both message files and markdown files in parallel
 		// Begin message l10n

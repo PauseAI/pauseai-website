@@ -1,7 +1,7 @@
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- not designed for strong typing
 // @ts-nocheck
 
-import adapterNetlify from '@sveltejs/adapter-netlify'
+import adapter from '@sveltejs/adapter-node'
 import { vitePreprocess } from '@sveltejs/vite-plugin-svelte'
 
 import { mdsvex } from 'mdsvex'
@@ -11,9 +11,6 @@ import remarkHeadingId from 'remark-heading-id'
 import rehypeSlug from 'rehype-slug'
 
 import settings from './project.inlang/settings.json' with { type: 'json' }
-
-// Export configuration flags for use in build scripts
-export const USE_EDGE_FUNCTIONS = true
 
 /** @type {import('mdsvex').MdsvexOptions} */
 const mdsvexOptions = {
@@ -44,8 +41,8 @@ const config = {
 		handler(warning)
 	},
 	kit: {
-		adapter: adapterNetlify({
-			edge: USE_EDGE_FUNCTIONS
+		adapter: adapter({
+			precompress: true
 		}),
 		alias: {
 			$assets: 'src/assets',

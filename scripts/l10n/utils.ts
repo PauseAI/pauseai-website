@@ -61,6 +61,25 @@ export function ensureDirectoriesExist(dirs: string[], verbose = false): void {
 	}
 }
 
+const ENV_FLAG_TRUE_VALUES = new Set(['1', 'true', 'yes', 'on'])
+
+/**
+ * Read an environment variable as a boolean, accepting a small set of truthy values.
+ */
+export function readBooleanEnv(variable: string, defaultValue = false): boolean {
+	const rawValue = process.env[variable]
+	if (!rawValue) return defaultValue
+
+	const normalized = rawValue.trim().toLowerCase()
+	if (!normalized) return defaultValue
+
+	return ENV_FLAG_TRUE_VALUES.has(normalized)
+}
+
+export function isL10nOffline(): boolean {
+	return readBooleanEnv('L10N_OFFLINE', false)
+}
+
 // Create a fresh instance of path.join that normalizes paths consistently
 const joinPath = (...parts: string[]) => path.normalize(path.join(...parts))
 

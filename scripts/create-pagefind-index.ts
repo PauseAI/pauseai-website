@@ -2,7 +2,7 @@ import fs from 'fs'
 import * as pagefind from 'pagefind'
 import type { Post } from '../src/lib/types'
 
-const POSTS_PATH = 'build/api/posts'
+const POSTS_PATH = 'build/prerendered/api/posts'
 const INPUT_PATH = 'build'
 const STATIC_PATH = 'static/pagefind'
 const BUILD_PATH = 'build/pagefind'
@@ -13,7 +13,7 @@ if (!index) throw new Error(errors.toString())
 // Index dynamic pages
 const posts: Post[] = JSON.parse(fs.readFileSync(POSTS_PATH, 'utf-8'))
 for (const post of posts) {
-	if (fs.existsSync(`build/${post.slug}.html`)) continue
+	if (fs.existsSync(`build/prerendered/${post.slug}.html`)) continue
 	await index.addCustomRecord({
 		url: '/' + post.slug,
 		content: post.title + '. ' + (post.description ?? ''),

@@ -1,0 +1,14 @@
+.DS_Store
+.env
+.env.local
+.git
+.github
+.husky
+.idea
+.netlify
+.svelte-kit
+.vscode
+build
+node_modules
+pnpm-store
+static/processed

@@ -1,7 +1,7 @@
 export const prerender = false
 
 import Airtable from 'airtable'
-import { AIRTABLE_WRITE_API_KEY } from '$env/static/private'
+import { env } from '$env/dynamic/private'
 import { verificationParameter } from '$lib/config.js'
 
 const TABLE_PARAMETER = 'table'
@@ -27,6 +27,8 @@ const VERIFICATION_TABLES = new Map([
 		}
 	]
 ])
+
+const AIRTABLE_WRITE_API_KEY = env.AIRTABLE_WRITE_API_KEY || ''
 
 export async function GET({ url }) {
 	const key = url.searchParams.get(verificationParameter)
