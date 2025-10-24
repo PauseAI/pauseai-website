@@ -65,7 +65,7 @@ for (const community of [...adjacentCommunities, ...pauseAICommunities, ...natio
 export const communities: Community[] = [
 	...adjacentCommunities.sort((a, b) => b.lat - a.lat),
 	...pauseAICommunities.sort((a, b) => b.lat - a.lat),
- ...nationalChapters.sort((a, b) => b.lat - a.lat)
+	...nationalChapters.sort((a, b) => b.lat - a.lat)
 ].map((community) => ({
 	...community,
 	link: (LINK_PLACEHOLDERS as Record<string, string>)[community.link] || community.link
