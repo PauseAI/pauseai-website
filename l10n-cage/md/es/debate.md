@@ -12,7 +12,7 @@ Para empezar, España y Costa Rica están encargadas de [liderar el diálogo glo
 
 Estamos en una fase crucial para lograr una regulación de la IA a nivel internacional, y nuestros gobiernos pueden impulsar ese proceso. Desde la sociedad civil **debemos transmitir con claridad a los políticos** lo mucho que nos preocupa la seguridad en el desarrollo de la IA: y si la seguridad no puede garantizarse, habrá que prescindir de seguir desarrollando esta tecnología en su vertiente más avanzada.
 
-> ![logo](/web-spain/logo-redondo.svg) [Mira aquí](/inscripcion#escribir) nuestros consejos para escribir a políticos
+> ![logo](/es/bullet.png) [Mira aquí](/inscripcion#escribir) nuestros consejos para escribir a políticos
 
 Una propuesta muy interesante [se aprobó en 2024](https://www.europapress.es/sociedad/noticia-congreso-aboga-creacion-agencia-internacional-regulacion-inteligencia-artificial-20240613145441.html) en el Congreso de los Diputados de España: fomentar la creación de una Agencia Internacional de Regulación de la Inteligencia Artificial. Un organismo como ese podría jugar un papel crucial para establecer la pausa que promovemos desde PauseAI.
 
@@ -25,9 +25,9 @@ Somos conscientes de que la carrera de la IA (que supone una de las mayores amen
 
 Queremos ayudar a remediar esta situación, y también animamos al público a recurrir a las herramientas de traducción y subtitulado automático de vídeos y páginas web: a menudo basta con un par de clics para sacarles partido.
 
-Por cierto, uno de nuestros proyectos de comunicación es un podcast mensual sobre los riesgos de la IA que sirva de vía para que los miembros hispanohablantes de la organización expresen sus puntos de vista en un ambiente distendido. **Necesitamos a una persona con ganas de coordinar el podcast**, ¿te animas? Escríbenos aquí.
+Por cierto, uno de nuestros proyectos de comunicación es un podcast mensual sobre los riesgos de la IA que sirva de vía para que los miembros hispanohablantes de la organización expresen sus puntos de vista en un ambiente distendido. **Necesitamos a una persona con ganas de coordinar el podcast**, ¿te animas? Escríbenos [aquí](mailto:contacto@pauseai.es).
 
-> ![logo](/web-spain/logo-redondo.svg) Si quieres, [te informamos](/inscripcion#actividades) sobre otras formas de contribuir en PauseAI
+> ![logo](/es/bullet.png) Si quieres, [te informamos](/inscripcion#actividades) sobre otras formas de contribuir en PauseAI
 
 ---
 

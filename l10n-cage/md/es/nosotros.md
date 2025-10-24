@@ -17,7 +17,7 @@ PauseAI fue fundada en 2023 en los Países Bajos por el diseñador de software J
 - **No somos partidistas.** Abogamos por la búsqueda de consensos en el plano político. La pausa en el desarrollo de la IA avanzada no debería ser una causa defendida por un único sector ideológico: este problema requiere la colaboración entre partidos de un amplio espectro.
 - **Está bien usar IA.** No deseamos fomentar una absurda competición por ver quién es más "anti-IA". No obstante, invitamos a nuestros miembros y a la población en general a informarse sobre los costes y riesgos de esta tecnología. Por motivos de transparencia, al final de cada página de esta web encontrarás detalles sobre cómo se redactaron los textos. Y [nuestra estrategia de comunicación](/communication-strategy) prohíbe que utilicemos imágenes o vídeos generados por inteligencia artificial.
 
-> ![logo](/web-spain/logo-redondo.svg) [Consulta aquí](/values) la lista completa de valores de PauseAI (página en inglés)
+> ![logo](/es/bullet.png) [Consulta aquí](/values) la lista completa de valores de PauseAI
 
 ## Logros de la organización {#logros}
 
@@ -27,7 +27,7 @@ PauseAI fue fundada en 2023 en los Países Bajos por el diseñador de software J
 - PauseAI impulsó en Reino Unido [una petición](https://pauseai.info/dear-sir-demis-2025), suscrita por 63 parlamentarios de distintos partidos políticos, para que Google DeepMind cumpla con sus compromisos en seguridad de la IA.
 - La organización [apoyó la difusión](https://pauseai.substack.com/p/say-no-to-superintelligent-ai) del libro _If Anyone Builds It, Everyone Dies_ con una fiesta de lanzamiento en Londres y lecturas públicas en varios países, además de la campaña para un mural de fotografías selfies [_Di 'no' a la IA superinteligente_](https://pauseai.info/sayno).
 
-> ![logo](/web-spain/logo-redondo.svg) Únete al [Discord de PauseAI](https://discord.gg/2XXWXvErfA) para estar al tanto de más actividades
+> ![logo](/es/bullet.png) Únete al [Discord de PauseAI](https://discord.gg/2XXWXvErfA) para estar al tanto de más actividades
 
 ![Fiesta de lanzamiento del libro 'If Anyone Builds It, Everyone Dies'](/es/lecturaifanyone.jpg)
 _Fiesta de lanzamiento del libro 'If Anyone Builds It, Everyone Dies'. Fuente: PauseAI_
@@ -38,7 +38,7 @@ Como ves, somos una organización con capacidad para influir en el debate sobre 
 
 Entre los miembros de PauseAI en España e Hispanoamérica, figuran trabajadores y expertos en los sectores de la IA, la informática, la neurociencia, la comunicación y la docencia, entre otros. Pero **necesitamos ser muchos más**, para lograr que nuestro mensaje [cale entre la población y los políticos](/debate) de nuestros países.
 
-> ![logo](/web-spain/logo-redondo.svg) Tu contribución es muy importante, [infórmate aquí](/inscripcion)
+> ![logo](/es/bullet.png) Tu contribución es muy importante, [infórmate aquí](/inscripcion)
 
 ---
 

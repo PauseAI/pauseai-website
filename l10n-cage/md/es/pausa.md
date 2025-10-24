@@ -36,7 +36,7 @@ Parte del gravísimo problema de seguridad de la IA avanzada procede de su cará
 - Un entrenamiento posterior supervisado por humanos intenta evitar **comportamientos o respuestas indeseados** (por ejemplo, que la IA fomente el suicidio o ayude a fabricar armas biológicas). Esa medida de seguridad puede fallar a lo largo de interacciones prolongadas con los usuarios, o cuando alguien con un mínimo de experiencia intenta saltársela.
 - Recordemos las acciones que permite el dominio del lenguaje: sugerir, planear, reforzar creencias erróneas, mentir, manipular, chantajear, etc. De todo esto ya han dado señales los modelos avanzados. Además, son capaces de escribir código. En el futuro próximo estas IAs **podrían mejorarse a sí mismas** o automatizar el desarrollo de nuevas versiones, una línea roja que las empresas están dispuestas a cruzar si eso les concede ventaja sobre sus competidores.
 
-> ![logo](/web-spain/logo-redondo.svg) El [Discord de PauseAI](https://discord.gg/2XXWXvErfA) es un buen sitio para hablar de estos temas
+> ![logo](/es/bullet.png) El [Discord de PauseAI](https://discord.gg/2XXWXvErfA) es un buen sitio para hablar de estos temas
 
 ## Resumen de los riesgos {#riesgos}
 
@@ -44,7 +44,7 @@ Parte del gravísimo problema de seguridad de la IA avanzada procede de su cará
 
 La mayoría de esfuerzos van dirigidos a incrementar la capacidad de la inteligencia artificial, y **se descuida la seguridad**. Debemos temer que terroristas y criminales aprovechen esta tecnología, y además cabe la posibilidad de que cualquier modelo de IA suficientemente avanzado se salga de control, incluso en su fase de desarrollo.
 
-> ![logo](/web-spain/logo-redondo.svg) Lee aquí [un listado completo](/risks) de riesgos de la IA (página en inglés)
+> ![logo](/es/bullet.png) Lee aquí [un listado completo](/risks) de riesgos de la IA
 
 Pero eso no es todo. Más allá de la inteligencia artificial general, los gurús de Silicon Valley vislumbran **la aparición de una superinteligencia**, un "dios digital" en palabras de Elon Musk, con mayores capacidades intelectuales que la humanidad en su conjunto. Ese momento podría llegar, según previsiones bien fundadas, antes de que acabe la década. ¿Y qué garantías tenemos de que una superinteligencia artificial estaría al servicio de la humanidad? Ninguna en absoluto.
 
@@ -59,7 +59,7 @@ Cuesta creer que haya empresas y gobiernos dispuestos a fiar por completo nuestr
 
 Por estos y otros muchos motivos, coincidimos con los firmantes de la declaración de 2023 antes citada: la IA avanzada implica un riesgo de extinción, y solicitamos una pausa en el desarrollo de estos modelos hasta que se demuestre que son seguros. Consideramos necesaria [la adopción de un tratado internacional](/proposal) similar a los de no proliferación nuclear. Puede parecer una medida drástica, pero hay demasiado en juego.
 
-> ![logo](/web-spain/logo-redondo.svg) [Infórmate aquí](/inscripcion) sobre cómo unirte a PauseAI
+> ![logo](/es/bullet.png) [Infórmate aquí](/inscripcion) sobre cómo unirte a PauseAI
 
 ---
 

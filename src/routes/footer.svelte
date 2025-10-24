@@ -1,8 +1,6 @@
 <script lang="ts">
 	import Link from '$lib/components/Link.svelte'
 	import Toggle from '$lib/components/Toggle.svelte'
-	import Edit from '$lib/components/Edit.svelte'
-	import WithdrawWidgetConsent from '$lib/components/widget-consent/WithdrawWidgetConsent.svelte'
 	import Socials from '$lib/components/Socials.svelte'
 	import * as m from '$lib/paraglide/messages.js'
 </script>
@@ -34,7 +32,6 @@
 		<div class="column">
 			<h2>{m.footer_risks()}</h2>
 			<Link href="/risks">{m.footer_risks_overview()}</Link>
-			<Link href="/outcomes">{m.footer_risks_outcomes()}</Link>
 			<Link href="/xrisk">{m.footer_risks_xrisk()}</Link>
 			<Link href="/psychology-of-x-risk">{m.footer_risks_psychology()}</Link>
 			<Link href="/ai-takeover">{m.footer_risks_takeover()}</Link>
@@ -60,15 +57,8 @@
 		<div class="column">
 			<h2>{m.footer_other()}</h2>
 			<Toggle />
-			<WithdrawWidgetConsent />
-			<Edit />
-			<Link href="/posts">{m.footer_other_pages()}</Link>
-			<Link href="/rss.xml" target="_blank">{m.footer_other_rss()}</Link>
 			<Link href="https://creativecommons.org/licenses/by/4.0/" target="_blank"
 				>{m.footer_other_license()}</Link
-			>
-			<Link href="https://airtable.com/appWPTGqZmUcs3NWu/pagIvo9Sv6IDHaolu/form" target="_blank"
-				>{m.footer_other_feedback()}</Link
 			>
 		</div>
 	</div>

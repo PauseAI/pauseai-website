@@ -6,17 +6,17 @@ description: Guía para sumarte a PauseAI; inscripción, Discord, donaciones y a
 ![Protesta de PauseAI en Estados Unidos](/es/protestausa.jpg)
 _Protesta en Estados Unidos. Fuente: PauseAI_
 
-¿Quieres unirte a nosotros? ¡Bienvenido! En primer lugar hemos de aclarar que nos regimos por la [política de privacidad](/privacidad) de PauseAI. Asimismo, te invitamos a leer el [acuerdo para voluntarios](/volunteer-agreement) y el [código de conducta](/protesters-code-of-conduct) de la organización (todas esas son páginas en inglés).
+¿Quieres unirte a nosotros? ¡Bienvenido! En primer lugar hemos de aclarar que nos regimos por la [política de privacidad](/privacidad) de PauseAI. Asimismo, te invitamos a leer el [acuerdo para voluntarios](/volunteer-agreement) y el [código de conducta](/protesters-code-of-conduct) de la organización/es/bullet.png.
 
 Después, [rellena el formulario de inscripción](https://pauseai.info/join) en la página internacional y súmate al [Discord de PauseAI](https://discord.gg/2XXWXvErfA), indicando tu país y que quieres participar en actividades.
 
-Muy pronto contactaremos contigo y te orientaremos para que te pongas en marcha con iniciativas útiles. Si tienes cualquier duda, escríbenos un correo.
+Muy pronto contactaremos contigo y te orientaremos para que te pongas en marcha con iniciativas útiles. Si tienes cualquier duda, escríbenos un [correo](mailto:contacto@pauseai.es).
 
 También puedes [hacer una donación](https://pauseai.info/donate). Ah, ¡y no olvides seguirnos en las redes sociales!
 
-> ![logo](/web-spain/logo-redondo.svg) Recuerda: para inscribirte debes rellenar [este formulario](https://pauseai.info/join)
+> ![logo](/es/bullet.png) Recuerda: para inscribirte debes rellenar [este formulario](https://pauseai.info/join)
 
-### Nuestras actividades {#actividades}
+## Nuestras actividades {#actividades}
 
 En PauseAI tenemos un doble objetivo: [promover la pausa](/pausa) en el desarrollo de la IA avanzada, y sensibilizar sobre los riesgos e impactos (socioeconómicos, medioambientales y éticos) asociados a esta tecnología. Para ello, llevamos a cabo acciones como las siguientes:
 
@@ -25,9 +25,9 @@ En PauseAI tenemos un doble objetivo: [promover la pausa](/pausa) en el desarrol
 - Promover que dicho enfoque se plasme en los programas educativos, la investigación científica, las políticas públicas y la legislación.
 - Actos de **protesta cívica y pacífica**.
 
-> ![logo](/web-spain/logo-redondo.svg) ¿Te interesaría [coordinar un podcast](/debate#falta-info) sobre los riesgos de la IA?
+> ![logo](/es/bullet.png) ¿Te interesaría [coordinar un podcast](/debate#falta-info) sobre los riesgos de la IA?
 
-### Firma de peticiones {#peticiones}
+## Firma de peticiones {#peticiones}
 
 Tanto si eres miembro de PauseAI como si no, una aportación sencilla y útil es firmar peticiones en favor de la seguridad en la IA. En la mayoría de casos es cuestión de un par de minutos.
 
@@ -37,7 +37,7 @@ Tanto si eres miembro de PauseAI como si no, una aportación sencilla y útil es
 - [Petición para un desarrollo responsable de la IA](https://www.change.org/p/artificial-intelligence-time-is-running-out-for-responsible-ai-development-2a2f1a13-b63a-4d8c-979b-b144bded2f48), en change.org
 - [Carta abierta en favor de un tratado internacional](https://aitreaty.org/)
 
-### Consejos para escribir a políticos {#escribir}
+## Consejos para escribir a políticos {#escribir}
 
 Tu primer paso como activista de PauseAI también podría ser escribir a un político. Estamos muy poco acostumbrados a transmitir a nuestros representantes las inquietudes que tenemos, y sin embargo es **algo fundamental en democracia**.
 
@@ -51,7 +51,7 @@ Te ofrecemos a continuación una guía breve para redactar una carta sobre los r
 - Haz una invitación a seguir en contacto y, opcionalmente, a mantener una **reunión breve en persona** para ahondar en el asunto.
 - Concluye con un agradecimiento y un saludo.
 
-> ![logo](/web-spain/logo-redondo.svg) [Mira aquí un vídeo](https://www.youtube.com/watch?v=Mjq4NFiKKd0) en inglés con más información sobre la escritura de correos
+> ![logo](/es/bullet.png) [Mira aquí un vídeo](https://www.youtube.com/watch?v=Mjq4NFiKKd0) en inglés con más información sobre la escritura de correos
 
 ¿Cómo saber a qué políticos escribir? Las webs de las instituciones parlamentarias de cada país suelen tener un **listado con datos** sobre cada representante electo, incluido su partido, su territorio o circunscripción, y una dirección de correo electrónico. Ese es el caso, en España, del [Congreso de los Diputados](https://www.congreso.es/es/busqueda-de-diputados) y el [Senado](https://www.senado.es/web/composicionorganizacion/senadores/composicionsenado/senadoresenactivo/index.html), así como del [Parlamento Europeo](https://www.europarl.europa.eu/meps/es/search/advanced?countryCode=ES).
 
