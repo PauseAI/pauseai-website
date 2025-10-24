@@ -96,3 +96,6 @@ export type NationalGroupLink =
 	| 'instagramLink'
 	| 'tiktokLink'
 	| 'facebookLink'
+	| 'youtubeLink'
+	| 'linkedinLink'
+	| 'lumaLink'
