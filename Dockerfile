@@ -29,7 +29,7 @@ ENV PARAGLIDE_LOCALES=es
 ENV L10N_OFFLINE=1
 ENV HOST=0.0.0.0
 
-COPY --from=builder /app /app
+COPY --from=builder /app/build /app/build
 
 EXPOSE 3000
 

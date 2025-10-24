@@ -51,10 +51,7 @@ You can run the Spanish site inside a container without installing local depende
 docker build -t pauseai-site-es .
 
 # Serve the production build on http://localhost:4173
-docker run --rm -it -p 4173:4173 pauseai-site-es
-
-# Override the exposed port if needed
-docker run --rm -it -p 8080:8080 -e PORT=8080 pauseai-site-es
+docker run --rm -it -p 3000:3000 pauseai-site-es
 ```
 
 The image runs `pnpm preview`, so it expects the same conventions as Netlify: prerendered content plus edge function stubs. The build step sets `PARAGLIDE_LOCALES=es` by default; override it at runtime if you need to experiment with other locales.

@@ -1,0 +1,12 @@
+# Common VCS directories
+.git/
+.gitignore
+
+# Node artifacts
+node_modules/
+pnpm-lock.yaml
+
+# Editor files
+.idea/
+.vscode/
+*.swp
