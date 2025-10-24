@@ -3,7 +3,7 @@
 </script>
 
 <div data-pagefind-ignore>
-	<h1>Search</h1>
+	<h1>Búsqueda</h1>
 
 	<Search />
 </div>
