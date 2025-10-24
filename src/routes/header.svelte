@@ -36,17 +36,10 @@
 	</div>
 
 	<div class="nav-links">
-		<NavLink {inverted} first href="/learn">{m.header_learn()}</NavLink>
-		<NavLink {inverted} href="/proposal">{m.header_proposal()}</NavLink>
-		<NavLink {inverted} href="/events">{m.header_events()}</NavLink>
-		<NavLink {inverted} href="/faq">{m.header_faq()}</NavLink>
-		<NavLink {inverted} href="/action">{m.header_action()}</NavLink>
-		<NavLink {inverted} href="/donate">{m.header_donate()}</NavLink>
-		{#if enableBot}
-			<NavLink {inverted} href="/chat">{botName}</NavLink>
-		{/if}
-		<!-- <NavLink href="/about">About</NavLink> -->
-		<NavLink {inverted} c2a href="/join">{m.header_join()}</NavLink>
+		<NavLink {inverted} first href="/nosotros">Nosotros</NavLink>
+		<NavLink {inverted} href="/pausa">La pausa</NavLink>
+		<NavLink {inverted} href="/debate">IA con ñ</NavLink>
+		<NavLink {inverted} c2a href="/inscripcion">Únete</NavLink>
 		<LanguageSwitcher {inverted} />
 		<NavLink {inverted} href="/search" ariaLabel="Search"><SearchIcon size="0.8em" /></NavLink>
 	</div>
