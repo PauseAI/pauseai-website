@@ -5,8 +5,9 @@
 	import Stats from '$lib/components/Stats.svelte'
 	import * as m from '$lib/paraglide/messages.js'
 
-	const title = 'We need to Pause AI'
-	const description = 'We are risking human extinction. We need to pause AI development, right now.'
+	const title = 'Tenemos que pausar la IA'
+	const description =
+		'Nos arriesgamos a la extinción de la humanidad. Tenemos que pausar el desarrollo de IA, ahora mismo'
 </script>
 
 <PostMeta {title} {description} />
