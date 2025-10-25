@@ -52,7 +52,7 @@
 		<h2>{m.home_hero()}</h2>
 	</div>
 	<div class="actions">
-		<Link href="/join">{m.header_join()}</Link>
+		<Link href="/inscripcion">{m.header_join()}</Link>
 		<Link href="/donate">{m.header_donate()}</Link>
 	</div>
 </div>

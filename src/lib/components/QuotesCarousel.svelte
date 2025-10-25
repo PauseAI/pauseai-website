@@ -134,7 +134,6 @@
 			<button class="dot reset-button" class:active={currentSlide === i} data-glide-dir={`=${i}`} />
 		{/each}
 		<button class="nav-button" data-glide-dir=">"><ArrowRight size="1em" /></button>
-		<Link href="/quotes">{m.home_quotes_all()}</Link>
 	</div>
 </div>
 

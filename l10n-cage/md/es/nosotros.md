@@ -15,7 +15,7 @@ PauseAI fue fundada en 2023 en los Países Bajos por el diseñador de software J
 - **Somos un movimiento pacífico.** Para nosotros la No Violencia es un valor fundamental e innegociable.
 - **No imponemos una visión única sobre los riesgos de la IA.** La necesidad de la pausa deriva del riesgo de extinción de la raza humana, pero hay otras muchas preocupaciones que tienen cabida en nuestra organización: desde la proliferación de centros de datos, a los peligros para la cultura y la democracia.
 - **No somos partidistas.** Abogamos por la búsqueda de consensos en el plano político. La pausa en el desarrollo de la IA avanzada no debería ser una causa defendida por un único sector ideológico: este problema requiere la colaboración entre partidos de un amplio espectro.
-- **Está bien usar IA.** No deseamos fomentar una absurda competición por ver quién es más "anti-IA". No obstante, invitamos a nuestros miembros y a la población en general a informarse sobre los costes y riesgos de esta tecnología. Por motivos de transparencia, al final de cada página de esta web encontrarás detalles sobre cómo se redactaron los textos. Y [nuestra estrategia de comunicación](/communication-strategy) prohíbe que utilicemos imágenes o vídeos generados por inteligencia artificial.
+- **Está bien usar IA.** No deseamos fomentar una absurda competición por ver quién es más "anti-IA". No obstante, invitamos a nuestros miembros y a la población en general a informarse sobre los costes y riesgos de esta tecnología. Por motivos de transparencia, al final de cada página de esta web encontrarás detalles sobre cómo se redactaron los textos. Las páginas que no incluyen dicha información son traducciones automáticas de contenidos de PauseAI en inglés. Y [nuestra estrategia de comunicación](/communication-strategy) prohíbe que utilicemos imágenes o vídeos generados por inteligencia artificial.
 
 > ![logo](/es/bullet.png) [Consulta aquí](/values) la lista completa de valores de PauseAI
 
@@ -43,5 +43,3 @@ Entre los miembros de PauseAI en España e Hispanoamérica, figuran trabajadores
 ---
 
 ✍️*Esta página fue redactada al 100% por un humano*.
-
-_El apartado 'Nuestros valores' incluye material de las páginas_ https://pauseai.info/values y https://pauseai.info/volunteer-agreement

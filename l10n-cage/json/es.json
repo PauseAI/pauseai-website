@@ -86,6 +86,7 @@
 	"footer_other_feedback": "Enviar comentarios",
 	"footer_other_edit": "Editar contenido original en inglés",
 	"footer_other_l10n": "Sugerir mejora de traducción",
+	"footer_attribution_html": "Basado en el contenido de <a href=\"https://pauseai.info\" target=\"_blank\" rel=\"noopener noreferrer\">PauseAI.info</a> y su <a href=\"https://github.com/PauseAI/pauseai-website\" target=\"_blank\" rel=\"noopener noreferrer\">repositorio original</a>, creado por la comunidad PauseAI. Esta versión en español añade adaptación y traducción locales. Licencia <a href=\"https://creativecommons.org/licenses/by/4.0/\" target=\"_blank\" rel=\"noopener noreferrer\">CC BY 4.0</a>.",
 	"newsletter_heading": "Suscríbete a nuestro boletín",
 	"newsletter_description": "Mantente actualizado sobre nuestros esfuerzos para abogar por la seguridad de la IA.",
 	"newsletter_disclaimer": "Nuestro boletín es completamente gratuito. No se requiere suscripción paga. Puedes cerrar Substack una vez que te hayas registrado.",

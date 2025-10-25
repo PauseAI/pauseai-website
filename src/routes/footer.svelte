@@ -19,37 +19,17 @@
 			<Link href="/nosotros">Nosotros</Link>
 			<Link href="/pausa">La pausa</Link>
 			<Link href="/debate">IA con ñ</Link>
-			<Link href="/inscripcion">Únete</Link>
 			<Link href="/privacy">{m.footer_info_privacy()}</Link>
-			<Link href="/legal"
-				>{m.footer_info_legal()} <br />
-				{m.footer_info_legal_foundation()} <br />
-				{m.footer_info_legal_kvk()}</Link
-			>
-		</div>
-		<div class="column">
-			<h2>{m.footer_risks()}</h2>
-			<Link href="/risks">{m.footer_risks_overview()}</Link>
-			<Link href="/xrisk">{m.footer_risks_xrisk()}</Link>
-			<Link href="/psychology-of-x-risk">{m.footer_risks_psychology()}</Link>
-			<Link href="/ai-takeover">{m.footer_risks_takeover()}</Link>
-			<Link href="/cybersecurity-risks">{m.footer_risks_cybersecurity()}</Link>
-			<Link href="/dangerous-capabilities">{m.footer_risks_capabilities()}</Link>
-			<Link href="/sota">{m.footer_risks_sota()}</Link>
-			<Link href="/urgency">{m.footer_risks_urgency()}</Link>
+			<Link href="/legal">{m.footer_info_legal()}</Link>
 		</div>
 		<div class="column">
 			<h2>{m.footer_action()}</h2>
-			<Link href="https://pauseai.info/join">{m.footer_action_join()}</Link>
-			<Link href="/action">{m.footer_action_help()}</Link>
-			<Link href="/communities">{m.footer_action_communities()}</Link>
-			<Link href="donate">{m.footer_action_donate()}</Link>
+			<Link href="/inscripcion">{m.footer_action_join()}</Link>
+			<Link href="/protesters-code-of-conduct">Código de conducta</Link>
+			<Link href="/donate">{m.footer_action_donate()}</Link>
 			<Link href="https://pauseai-shop.fourthwall.com" target="_blank"
 				>{m.footer_action_merchandise()}</Link
 			>
-			<Link href="/events">{m.footer_action_events()}</Link>
-			<Link href="/vacancies">{m.footer_action_vacancies()}</Link>
-			<Link href="/email-builder">{m.footer_action_email()}</Link>
 			<Link href="/lobby-tips">{m.footer_action_lobby()}</Link>
 		</div>
 		<div class="column">
@@ -59,6 +39,9 @@
 				>{m.footer_other_license()}</Link
 			>
 		</div>
+	</div>
+	<div class="attribution">
+		<p>{@html m.footer_attribution_html()}</p>
 	</div>
 </footer>
 
@@ -86,7 +69,7 @@
 
 	.footer-links {
 		display: grid;
-		grid-template-columns: repeat(4, 1fr);
+		grid-template-columns: repeat(3, 1fr);
 		gap: 1.2rem;
 		font-size: 0.8rem;
 		padding-bottom: 1rem;
@@ -136,5 +119,19 @@
 
 	.footer-links :global(a:hover) {
 		text-decoration: underline;
+	}
+
+	.attribution {
+		font-size: 0.75rem;
+		color: var(--text-3, var(--text-2));
+		line-height: 1.4;
+		margin-bottom: 1.5rem;
+	}
+
+	.attribution :global(a) {
+		color: inherit;
+		font-weight: 600;
+		text-decoration: underline;
+		text-decoration-thickness: 1px;
 	}
 </style>
