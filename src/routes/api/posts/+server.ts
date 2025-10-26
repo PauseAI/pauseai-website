@@ -1,3 +1,5 @@
+import fs from 'fs'
+import path from 'path'
 import { json } from '@sveltejs/kit'
 import type { Post } from '$lib/types'
 import { outcomesMeta } from '../../outcomes/meta'
@@ -8,6 +10,38 @@ import { meta as emailBuilderMeta } from '../../email-builder/meta'
 import { meta as teamsMeta } from '../../teams/meta'
 import { meta as statementMeta } from '../../statement/meta'
 import { meta as dearSirDemisMeta } from '../../dear-sir-demis-2025/meta'
+
+type InlangSettings = {
+	baseLocale?: string
+}
+
+const SETTINGS_PATH = path.join(process.cwd(), 'project.inlang/settings.json')
+const L10N_ROOT = path.join(process.cwd(), 'l10n-cage/md')
+
+function resolveBaseLocale(): string | null {
+	try {
+		const settings: InlangSettings = JSON.parse(fs.readFileSync(SETTINGS_PATH, 'utf-8'))
+		return settings.baseLocale ?? null
+	} catch (error) {
+		console.warn(
+			'Warning: could not read project.inlang/settings.json. Falling back to English posts.',
+			error
+		)
+		return null
+	}
+}
+
+const baseLocale = resolveBaseLocale()
+const shouldRequireLocalizedMarkdown = baseLocale !== null && baseLocale !== 'en'
+
+function hasLocalizedMarkdown(slug: string): boolean {
+	if (!shouldRequireLocalizedMarkdown || baseLocale === null) {
+		return true
+	}
+
+	const localizedPath = path.join(L10N_ROOT, baseLocale, `${slug}.md`)
+	return fs.existsSync(localizedPath)
+}
 
 /** When adding an extra route, make sure to add the metadata here for SEO purposes */
 const hardCodedPages: Post[] = [
@@ -37,6 +71,9 @@ async function getPosts() {
 			slug &&
 			!slug.startsWith('debug.')
 		) {
+			if (!hasLocalizedMarkdown(slug)) {
+				continue
+			}
 			const metadata = file.metadata as Omit<Post, 'slug'>
 			const post = { ...metadata, slug } satisfies Post
 			posts.push(post)

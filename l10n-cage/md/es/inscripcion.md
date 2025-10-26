@@ -45,7 +45,7 @@ Te ofrecemos a continuación una guía breve para redactar una carta sobre los r
 
 - Lo básico: **no faltar a la verdad**, emplear un tono educado, incluir enlaces actualizados... y cuanto más personalizada sea una carta, mejor.
 - Di las cosas **en tus propias palabras**. Enseguida cogerás práctica.
-- Empieza con el nombre completo de la persona destinataria, precedido del tratamiento adecuado según el cargo (por ejemplo: "Excelentísima señora"). Puede ayudarte [esta lista de la Real Academia Española](https://www.rae.es/libro-estilo-justicia/ap%C3%A9ndice-6-cargos-y-tratamientos).
+- Empieza con el nombre completo de la persona destinataria, precedido del tratamiento adecuado según el cargo (ejemplos: "Excelentísima Sra. [nombre y apellidos]”, "Estimado Sr. [nombre y apellidos]”). Puede ayudarte [esta lista de la Real Academia Española](https://www.rae.es/libro-estilo-justicia/ap%C3%A9ndice-6-cargos-y-tratamientos).
 - Sigue con una breve presentación (tu profesión y ciudad) y una felicitación al receptor de la carta por alguna iniciativa reciente o por su labor en general.
 - Explica **por qué te importa el tema**, y a ser posible, vincúlalo con alguna preocupación o causa defendida por la persona destinataria.
 - Haz una invitación a seguir en contacto y, opcionalmente, a mantener una **reunión breve en persona** para ahondar en el asunto.

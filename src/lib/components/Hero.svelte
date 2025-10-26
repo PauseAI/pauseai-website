@@ -1,14 +1,12 @@
 <script lang="ts">
-	import london from '$assets/protests/london.jpeg?enhanced'
 	import denHaag from '$assets/protests/den-haag.jpeg?enhanced'
-	import sf from '$assets/protests/san-francisco.jpeg?enhanced'
 	import { onMount } from 'svelte'
 	import { emulateCqwIfNeeded } from '$lib/container-query-units'
 	import * as m from '$lib/paraglide/messages.js'
 	import Link from '$lib/components/Link.svelte'
 
 	let currentImageIndex = 0
-	const images = [london, denHaag, sf]
+	const images = [denHaag]
 	let isMobile = false
 	let tagline: HTMLDivElement
 
@@ -43,28 +41,30 @@
 			<enhanced:img src={image} sizes="100vw" alt="" class:active={currentImageIndex === i} />
 		{/each}
 	{:else}
-		<enhanced:img src={london} sizes="100vw" alt="" />
 		<enhanced:img src={denHaag} sizes="100vw" alt="" />
-		<enhanced:img src={sf} sizes="100vw" alt="" />
 	{/if}
 	<div class="overlay"></div>
 	<div class="tagline" bind:this={tagline}>
 		<h2>{m.home_hero()}</h2>
-	</div>
-	<div class="actions">
-		<Link href="/inscripcion">{m.header_join()}</Link>
-		<Link href="/donate">{m.header_donate()}</Link>
+		<p>
+			Desde España e Hispanoamérica, nos sumamos a la iniciativa de la organización internacional
+			PauseAI para pausar el desarrollo de la inteligencia artificial avanzada
+		</p>
+		<div class="actions">
+			<Link href="/inscripcion">{m.header_join()}</Link>
+			<Link href="/donate">{m.header_donate()}</Link>
+		</div>
 	</div>
 </div>
 
 <style>
 	.tagline {
-		background-color: black;
 		position: absolute;
 		top: 50%;
 		left: 50%;
 		transform: translate(-50%, -50%);
-		width: clamp(20rem, 45vw, 100%);
+		width: 100%;
+		font-size: 20px;
 		container-type: inline-size;
 		--cqw: 1cqw;
 	}
@@ -72,23 +72,52 @@
 	.tagline h2 {
 		text-transform: uppercase;
 		color: white;
-		font-size: calc(8.75 * var(--cqw));
-		text-align: center;
+		font-size: calc(3.5 * var(--cqw));
 		margin: 0;
-		padding: calc(6.5 * var(--cqw));
+		text-align: center;
+		padding: calc(3.5 * var(--cqw));
+		padding-bottom: calc(0.5 * var(--cqw));
+		padding-top: calc(0.5 * var(--cqw));
+	}
+
+	.tagline p {
+		color: white;
+		margin: 0;
+		font-size: calc(2 * var(--cqw));
+		padding: calc(3.5 * var(--cqw));
 	}
 
 	@media (max-width: 850px) {
+		.tagline {
+			position: absolute;
+			top: 30%;
+			left: 50%;
+			transform: translate(-50%, -30%);
+			width: 100%;
+			font-size: 20px;
+			container-type: inline-size;
+			--cqw: 1cqw;
+		}
+
 		.tagline h2 {
-			font-size: calc(8.5 * var(--cqw));
+			font-size: calc(10 * var(--cqw));
 			padding: calc(7.5 * var(--cqw));
+			padding-top: calc(3 * var(--cqw));
+		}
+
+		.tagline p {
+			color: white;
+			margin: 0;
+			padding-left: calc(7.5 * var(--cqw));
+			padding-right: calc(7.5 * var(--cqw));
+			font-size: calc(6.5 * var(--cqw));
 		}
 	}
 
 	.hero {
 		display: grid;
-		grid-template-columns: repeat(3, 1fr);
-		height: 100vh;
+		grid-template-columns: repeat(1, 1fr);
+		height: calc(100vh - 3rem);
 		overflow: hidden;
 		position: relative;
 		max-width: 100vw;
@@ -102,17 +131,14 @@
 		left: 0;
 		width: 100%;
 		height: 100%;
-		background-color: var(--brand);
-		opacity: 0.8;
+		background-color: #000000;
+		opacity: 0.7;
 	}
 
 	.actions {
-		position: absolute;
-		bottom: 10%;
-		left: 50%;
-		transform: translateX(-50%);
 		display: flex;
 		gap: 1rem;
+		justify-content: center;
 	}
 
 	.actions :global(a) {
@@ -140,7 +166,6 @@
 		width: calc(100% + 10px);
 		height: 100%;
 		object-fit: cover;
-		filter: blur(5px);
 	}
 
 	@media (max-width: 768px) {

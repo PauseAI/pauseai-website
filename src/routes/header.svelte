@@ -29,7 +29,7 @@
 		<div class="compensate-min-space-between" />
 		<div class="compensate-offset" />
 		<a href="/" class="logo">
-			<Logo animate={logo_animate} {inverted} />
+			<Logo animate={logo_animate} inverted={false} />
 		</a>
 		<div class="min-space-between" />
 		<div class="space-between" />
@@ -41,7 +41,7 @@
 		<NavLink {inverted} href="/debate">IA con ñ</NavLink>
 		<NavLink {inverted} c2a href="/inscripcion">Únete</NavLink>
 		<LanguageSwitcher {inverted} />
-		<NavLink {inverted} href="/search" ariaLabel="Search"><SearchIcon size="0.8em" /></NavLink>
+		<!-- <NavLink {inverted} href="/search" ariaLabel="Search"><SearchIcon size="0.8em" /></NavLink> -->
 	</div>
 </nav>
 

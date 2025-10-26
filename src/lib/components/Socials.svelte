@@ -34,9 +34,9 @@
 	<a href="https://substack.com/@pauseai" target="_blank" title="Substack"><Substack /></a>
 	<a href="https://www.reddit.com/r/PauseAI/" target="_blank" title="Reddit"><Reddit /></a>
 	<a href="https://t.me/+UeTsIsNkmt82ZmQ8" target="_blank" title="Telegram"><Telegram /></a>
-	<a href="https://chat.whatsapp.com/JgcAbjqRr8X3tvrXdeQvfj" target="_blank" title="Whatsapp"
-		><Whatsapp /></a
-	>
+	<!--	<a href="https://chat.whatsapp.com/JgcAbjqRr8X3tvrXdeQvfj" target="_blank" title="Whatsapp"-->
+	<!--		><Whatsapp /></a-->
+	<!--	>-->
 	<a href="https://bsky.app/profile/pauseai.bsky.social"><Bluesky /></a>
 </div>
 

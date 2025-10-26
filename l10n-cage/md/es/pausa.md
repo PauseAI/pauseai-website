@@ -25,7 +25,7 @@ En otros aspectos, la realidad es peor de lo pronosticado en novelas y película
 Dado que el término "inteligencia artificial" abarca un gran número de tecnologías, cabe establecer una distinción básica entre dos tipos:
 
 - **La "IA-herramienta"** (a veces llamada en inglés _narrow AI_ o "IA estrecha"). Ejemplos: herramientas de reconocimiento facial, diagnóstico médico, etc. Gracias a los algoritmos y la acumulación masiva de datos, estas aplicaciones pueden alcanzar una gran precisión y capacidad, para bien o para mal. Conviene reclamar normas para su correcto uso y transparencia en los algoritmos, como ya hacen algunas organizaciones y partidos políticos.
-- **La "IA avanzada"** (en inglés se usan términos como _frontier AI models_, "IA de vanguardia"). Modelos como Chat-GPT o Grok son desarrollados en el marco de la carrera hacia una "inteligencia artificial general" (AGI en sus siglas inglesas). Como dice la periodista Karen Hao, la intención es crear una _"everything machine"_: una máquina capaz de hacer todo. Incluido dejar a los humanos sin trabajo.
+- **La "IA avanzada"** (en inglés se usan términos como _frontier AI models_, IA fronteriza o de vanguardia). Modelos como Chat-GPT o Grok son desarrollados en el marco de la carrera hacia una "inteligencia artificial general" (AGI en sus siglas inglesas). Como dice la periodista Karen Hao, la intención es crear una _"everything machine"_: una máquina capaz de hacer todo. Incluido dejar a los humanos sin trabajo.
 
 ## Una caja negra que habla {#caja-negra}
 

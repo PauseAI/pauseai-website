@@ -44,30 +44,11 @@
 	</Banner>
 {/if}
 
-<NearbyEvent contrast={hero} bind:eventFound bind:geo />
-{#if !eventFound}
-	{#if geo?.country?.code === 'US' && geo?.subdivision?.code === 'CA' && false}
-		<Banner>
-			<b
-				>HELP US SAVE CALIFORNIA'S AI SAFETY BILL BEFORE WEDNESDAY | <ExternalLink
-					href="https://mailchi.mp/b8cf67a40299/join-us-tomorrow-for-our-fast-action-workshop-17457535"
-					>ACT NOW »</ExternalLink
-				></b
-			>
-		</Banner>
-	{:else}
-		<Banner contrast={hero} hidden={true}>
-			Join us at <ExternalLink href="https://pausecon.org/">PauseCon London</ExternalLink> from June
-			27th to 30th!
-		</Banner>
-	{/if}
-{/if}
-
 <div class="layout" class:with-hero={hero}>
+	<Header inverted={false} moveUp={false} />
 	{#if hero}
 		<Hero />
 	{/if}
-	<Header inverted={hero} moveUp={hero} />
 
 	<main>
 		<PageTransition url={$page.url.pathname}>

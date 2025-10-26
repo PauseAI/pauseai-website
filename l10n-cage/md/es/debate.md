@@ -8,9 +8,11 @@ _Héctor Gómez y Maritza Chan, representantes permanentes de España y Costa Ri
 
 Si ya conoces [los riesgos de la carrera](/pausa#riesgos) hacia la inteligencia artificial avanzada, quizá te plantees que en España y los países hispanoamericanos poco podemos hacer para solucionar el problema. La respuesta a esa duda es: **¡al contrario, tenemos mucho que aportar!**
 
-Para empezar, España y Costa Rica están encargadas de [liderar el diálogo global](https://news.un.org/es/story/2025/09/1540491) sobre IA en el marco de las Naciones Unidas (ONU). Y buena parte del [reglamento de la Unión Europea sobre IA](https://artificialintelligenceact.eu/es/ai-act-explorer/) (el AI Act) se gestó durante la presidencia española del Consejo europeo, en la segunda mitad de 2023.
+Nuestros territorios son objetivo prioritario en la instalación de centros de datos, lo cual supone un gran desafío para el suministro energético y la preservación del medio ambiente. Nos guste o no, estamos implicados en esta revolución tecnológica.
 
-Estamos en una fase crucial para lograr una regulación de la IA a nivel internacional, y nuestros gobiernos pueden impulsar ese proceso. Desde la sociedad civil **debemos transmitir con claridad a los políticos** lo mucho que nos preocupa la seguridad en el desarrollo de la IA: y si la seguridad no puede garantizarse, habrá que prescindir de seguir desarrollando esta tecnología en su vertiente más avanzada.
+Afrontamos una fase crucial para lograr una regulación a nivel internacional, y nuestros gobiernos pueden impulsar ese proceso. España y Costa Rica están encargadas de [liderar el diálogo global](https://news.un.org/es/story/2025/09/1540491) sobre IA en el marco de las Naciones Unidas (ONU). Y buena parte del [reglamento de la Unión Europea sobre IA](https://artificialintelligenceact.eu/es/ai-act-explorer/)(el AI Act) se gestó durante la presidencia española del Consejo europeo, en la segunda mitad de 2023.
+
+Desde la sociedad civil **debemos transmitir con claridad a los políticos** lo mucho que nos preocupa la seguridad en el desarrollo de la IA: y si la seguridad no puede garantizarse, habrá que prescindir de seguir desarrollando esta tecnología en su vertiente más avanzada.
 
 > ![logo](/es/bullet.png) [Mira aquí](/inscripcion#escribir) nuestros consejos para escribir a políticos
 
@@ -21,7 +23,7 @@ _Reunión en la ONU sobre IA. Fuente: Ministerio del Interior de España_
 
 ## Falta de información en español {#falta-info}
 
-Somos conscientes de que la carrera de la IA (que supone una de las mayores amenazas para el futuro cercano de la humanidad) mayormente **no forma parte del debate público** en los países hispanohablantes. Esto se debe en gran parte a la falta de contenidos de calidad y accesibles disponibles en nuestro idioma. En otros países, el tema se debate en _talk shows_, y libros muy críticos con las grandes empresas de la IA entran en la lista de más vendidos.
+Somos conscientes de que la carrera de la IA (que supone una de las mayores amenazas para el futuro cercano de la humanidad) mayormente **no forma parte del debate público** en los países hispanohablantes. Esto se debe en gran parte a la falta de contenidos de calidad y accesibles disponibles en nuestro idioma. En otros países, el tema se discute en los programas de televisión, y libros muy críticos con las grandes empresas de la IA entran en la lista de más vendidos.
 
 Queremos ayudar a remediar esta situación, y también animamos al público a recurrir a las herramientas de traducción y subtitulado automático de vídeos y páginas web: a menudo basta con un par de clics para sacarles partido.
 
