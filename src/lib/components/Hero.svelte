@@ -48,7 +48,7 @@
 		<h2>{m.home_hero()}</h2>
 		<p>
 			Desde España e Hispanoamérica, nos sumamos a la iniciativa de la organización internacional
-			PauseAI para pausar el desarrollo de la inteligencia artificial avanzada
+			PauseAI para pausar el desarrollo de la IA avanzada
 		</p>
 		<div class="actions">
 			<Link href="/inscripcion">{m.header_join()}</Link>
@@ -74,6 +74,8 @@
 		color: white;
 		font-size: calc(3.5 * var(--cqw));
 		margin: 0;
+		margin-left: 80px;
+		margin-right: 80px;
 		text-align: center;
 		padding: calc(3.5 * var(--cqw));
 		padding-bottom: calc(0.5 * var(--cqw));
@@ -101,6 +103,8 @@
 
 		.tagline h2 {
 			font-size: calc(10 * var(--cqw));
+			margin-left: 0px;
+			margin-right: 0px;
 			padding: calc(7.5 * var(--cqw));
 			padding-top: calc(3 * var(--cqw));
 		}
