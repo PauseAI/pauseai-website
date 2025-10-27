@@ -18,7 +18,9 @@
 
 	// Page metadata
 	const title = 'Stop Superintelligence'
-	const description = 'Join the photo petition to say no to the race to build superintelligent AI'
+	const description =
+		'Add your selfie to say: "I demand we end the race to build superintelligent AI"'
+	const collageImage = 'https://s3.amazonaws.com/pauseai-collagen/sayno/latest/1024.jpg'
 
 	interface CloudinaryWidget {
 		destroy(): void
@@ -199,7 +201,7 @@
 	}
 </script>
 
-<PostMeta {title} {description} />
+<PostMeta {title} {description} image={collageImage} />
 
 <!-- Capture UX is now rendered via the layout's prelude slot, configured in +page.ts -->
 
@@ -221,12 +223,14 @@
 				We're building a visual petition of people who believe AI development needs urgent safety
 				measures. Your selfie adds to the growing collage of concerned citizens worldwide.
 			</p>
-			<Link href="/if-anyone-builds-it-campaign#say-no-to-superintelligent-ai" class="link">
+			<Link href="https://s3.amazonaws.com/pauseai-collagen/sayno/latest/4096.jpg" target="_blank">
 				<Image
-					src="/collages/manual_bootstrap-thumb.jpg"
+					src="https://s3.amazonaws.com/pauseai-collagen/sayno/latest/400.jpg"
 					alt="Collage of hundreds of people standing up to superintelligent AI development"
 					class="collage-thumbnail"
 				/>
+			</Link>
+			<Link href="/if-anyone-builds-it-campaign#say-no-to-superintelligent-ai" class="link">
 				<p class="collage-caption">View the full collage and campaign details →</p>
 			</Link>
 			<p>

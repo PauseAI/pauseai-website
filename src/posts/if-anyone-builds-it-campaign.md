@@ -26,6 +26,6 @@ At PauseAI, we're organising a coordinated international response to the book by
 
 Hundreds of people are taking action by joining our photo petition, uploading pictures of themselves to form a large collage showcasing a unified stance against unregulated AI development.
 
-![A large collage of many individual headshots showing a diverse group of people of different ages, genders, and backgrounds, arranged in a grid.](/collages/manual_2.jpg)
+[![A large collage of many individual headshots showing a diverse group of people of different ages, genders, and backgrounds, arranged in a grid.](https://s3.amazonaws.com/pauseai-collagen/sayno/latest/1024.jpg)](https://s3.amazonaws.com/pauseai-collagen/sayno/latest/4096.jpg)
 
 [Join the campaign and add your photo →](/sayno)
