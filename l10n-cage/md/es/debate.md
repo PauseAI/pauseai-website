@@ -23,7 +23,7 @@ _Reunión en la ONU sobre IA. Fuente: Ministerio del Interior de España_
 
 ## Falta de información en español {#falta-info}
 
-Somos conscientes de que la carrera de la IA (que supone una de las mayores amenazas para el futuro cercano de la humanidad) mayormente **no forma parte del debate público** en los países hispanohablantes. Esto se debe en gran parte a la falta de contenidos de calidad y accesibles disponibles en nuestro idioma. En otros países, el tema se discute en los programas de televisión, y libros muy críticos con las grandes empresas de la IA entran en la lista de más vendidos.
+Somos conscientes de que la carrera de la IA (que supone una grave amenaza para el futuro cercano de la humanidad) mayormente **no forma parte del debate público** en los países hispanohablantes. Esto se debe en gran parte a la falta de contenidos de calidad y accesibles disponibles en nuestro idioma. En otros países, el tema se discute en los programas de televisión, y libros muy críticos con las grandes empresas de la IA entran en la lista de más vendidos.
 
 Queremos ayudar a remediar esta situación, y también animamos al público a recurrir a las herramientas de traducción y subtitulado automático de vídeos y páginas web: a menudo basta con un par de clics para sacarles partido.
 
