@@ -1,7 +1,9 @@
 <script lang="ts">
 	import { onMount } from 'svelte'
+	import { page } from '$app/stores'
 	import PostMeta from '$lib/components/PostMeta.svelte'
 	import Link from '$lib/components/Link.svelte'
+	import Banner from '$lib/components/Banner.svelte'
 	import { Toaster } from 'svelte-french-toast'
 	import toast from 'svelte-french-toast'
 	import {
@@ -12,15 +14,21 @@
 		setShutterSound,
 		stream,
 		checkCameraPermission,
-		cloudinaryConfig
+		cloudinaryConfig,
+		returningUidMessage
 	} from './selfieStore'
 	import Image from '$lib/components/Image.svelte'
+	import { detectAndStoreCollagenUid, hasCollagenUid } from '$lib/collagen'
 
 	// Page metadata
 	const title = 'Stop Superintelligence'
 	const description =
 		'Add your selfie to say: "I demand we end the race to build superintelligent AI"'
 	const collageImage = 'https://s3.amazonaws.com/pauseai-collagen/sayno/latest/1024.jpg'
+
+	// Track user state for contextual messaging
+	let userJustValidated = false // UID in URL params (just clicked validate link)
+	let userPreviouslyUploaded = false // UID in localStorage (uploaded before on this device)
 
 	interface CloudinaryWidget {
 		destroy(): void
@@ -50,6 +58,22 @@
 	let audioContext: AudioContext | null = null
 
 	onMount(() => {
+		// Check if UID in URL params (just validated email)
+		userJustValidated = detectAndStoreCollagenUid('sayno', $page.url.searchParams)
+
+		// Check if UID exists from previous upload (but not in URL)
+		if (!userJustValidated) {
+			userPreviouslyUploaded = hasCollagenUid('sayno')
+			if (userPreviouslyUploaded) {
+				returningUidMessage.set('This device submitted already. But go ahead if new!')
+			}
+		}
+
+		// Skip upload UI initialization only if user just validated
+		if (userJustValidated) {
+			return
+		}
+
 		// Load Cloudinary widget script
 		const script = document.createElement('script')
 		script.src = 'https://upload-widget.cloudinary.com/global/all.js'
@@ -207,6 +231,17 @@
 
 <!-- Standard page content -->
 <main class="selfie-page">
+	{#if userJustValidated}
+		<Banner id="sayno-validated">
+			<strong>Thanks for validating your email!</strong> You're part of our Say No collages, but won't
+			receive further updates by default.
+		</Banner>
+	{:else if userPreviouslyUploaded}
+		<Banner id="sayno-already-uploaded">
+			This device already submitted a photo, but by all means use it for new people.
+		</Banner>
+	{/if}
+
 	<article class="page-content">
 		<h2 class="book-title-heading">If Anyone Builds It, Everyone Dies</h2>
 		<p>
