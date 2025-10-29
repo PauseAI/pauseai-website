@@ -18,7 +18,8 @@
 		connectStream,
 		setVideoElement,
 		setCanvasElement,
-		stream
+		stream,
+		returningUidMessage
 	} from './selfieStore'
 
 	// Local element references
@@ -49,7 +50,11 @@
 
 		<!-- Statement speech bubble -->
 		<p class="statement-intro">
-			Add your selfie <Link href="#info" class="info-icon">ⓘ</Link> to say:
+			{#if $returningUidMessage}
+				{$returningUidMessage}
+			{:else}
+				Add your selfie <Link href="#info" class="info-icon">ⓘ</Link> to say:
+			{/if}
 		</p>
 		<div class="speech-bubble compact">
 			<div class="statement-text">"I demand we end the race to build superintelligent AI"</div>

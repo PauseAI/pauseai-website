@@ -39,7 +39,8 @@
 
 	if (
 		(href.startsWith('http:') || href.startsWith('https:')) &&
-		!href.startsWith('https://pauseai.info/')
+		!href.startsWith('https://pauseai.info/') &&
+		!(href.includes('s3.amazonaws') && href.includes('/pauseai-'))
 	)
 		type = Type.External
 	else if (href.startsWith('mailto:')) type = Type.Mail
