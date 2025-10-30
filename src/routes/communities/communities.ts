@@ -53,8 +53,12 @@ const adjacentCommunities: Community[] = (
 ).communities.map((c) => ({ ...c, type: 'adjacent' }))
 
 const nationalChapters: Community[] = (
-	nationalChaptersJson satisfies CommunitiesConfiguration
-).communities.map((c) => ({ ...c, type: 'national' }))
+    nationalChaptersJson satisfies CommunitiesConfiguration
+).communities.map((c) => ({
+    ...c,
+    type: 'national',
+    link: c.link // Ensure the link is passed through
+}));
 
 for (const community of [...adjacentCommunities, ...pauseAICommunities, ...nationalChapters]) {
 	if (

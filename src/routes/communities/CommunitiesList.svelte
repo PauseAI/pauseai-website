@@ -22,13 +22,27 @@
         if (b === 'Other') return -1;
         return a.localeCompare(b);
     });
+
+    // Find the link for each nationality
+    const nationalLinks = communities
+        .filter((community) => community.type === 'national')
+        .reduce((acc, community) => {
+            acc[community.name] = community.link;
+            return acc;
+        }, {} as Record<string, string>);
 </script>
 
 <div class="prose">
     <ul>
         {#each sortedNationalities as nationality}
             <li>
-                <strong>{nationality}</strong>
+                <strong>
+                    {#if nationalLinks[nationality]}
+                        <Link href={nationalLinks[nationality]}>{nationality}</Link>
+                    {:else}
+                        {nationality}
+                    {/if}
+                </strong>
                 <ul>
                     {#each groupedCommunities[nationality].sort((a, b) => a.name.localeCompare(b.name)) as localCommunity}
                         <li>
