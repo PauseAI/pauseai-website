@@ -94,8 +94,7 @@
 			"name": "PauseAI Rosario",
 			"lat": -32.9442,
 			"lon": -60.6505,
-			"link": "$$DISCORD_US$$",
-			"parent_name": "PauseAI US"
+			"link": "$$DISCORD_US$$"
 		},
 		{
 			"name": "PauseAI Baltimore",
