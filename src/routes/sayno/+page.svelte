@@ -23,8 +23,10 @@
 	// Page metadata
 	const title = 'Stop Superintelligence'
 	const description =
-		'Add your selfie to say: "I demand we end the race to build superintelligent AI"'
+		"Please add your selfie to demand we end the race to build superintelligent AI. Join hundreds in the Pause AI 'Say No' petition! 'If Anyone Builds It, Everyone Dies'."
 	const collageImage = 'https://s3.amazonaws.com/pauseai-collagen/sayno/latest/1024.jpg'
+	const pageUrl = 'https://pauseai.info/sayno'
+	const imageAlt = 'Collage of hundreds of faces'
 
 	// Track user state for contextual messaging
 	let userJustValidated = false // UID in URL params (just clicked validate link)
@@ -225,7 +227,7 @@
 	}
 </script>
 
-<PostMeta {title} {description} image={collageImage} />
+<PostMeta {title} {description} image={collageImage} {pageUrl} {imageAlt} />
 
 <!-- Capture UX is now rendered via the layout's prelude slot, configured in +page.ts -->
 

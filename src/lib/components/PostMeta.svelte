@@ -5,6 +5,11 @@
 	export let date: string | undefined = undefined
 	/** URL or relative path to cover / preview image */
 	export let image = '/Cover.jpg'
+	/** Canonical URL for this page (og:url) */
+	export let pageUrl: string | undefined = undefined
+	/** Alt text for the image (og:image:alt) */
+	export let imageAlt: string | undefined = undefined
+
 	const imageUrl = image.startsWith('/') ? `${url}${image}` : image
 
 	const schemaOrgMarkup = {
@@ -27,6 +32,12 @@
 	<meta property="og:title" content={title} />
 	<meta property="og:description" content={description} />
 	<meta property="og:image" content={imageUrl} />
+	{#if imageAlt}
+		<meta property="og:image:alt" content={imageAlt} />
+	{/if}
+	{#if pageUrl}
+		<meta property="og:url" content={pageUrl} />
+	{/if}
 	<meta property="og:site_name" content={siteName} />
 	{#if date}
 		<meta property="article:published_time" content={date} />
