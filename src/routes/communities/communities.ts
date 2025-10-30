@@ -16,8 +16,9 @@ type RawCommunity = {
 }
 
 export type Community = RawCommunity & {
-	type: 'local' | 'national' | 'adjacent'
-}
+    type: 'local' | 'national' | 'adjacent';
+    country?: string;
+};
 
 export const communitiesMeta: Post = {
 	title: 'PauseAI Local Communities',
