@@ -46,7 +46,8 @@
 			"name": "PauseAI Seattle",
 			"lat": 47.6062,
 			"lon": -122.3321,
-			"link": "$$DISCORD_GLOBAL$$"
+			"link": "$$DISCORD_GLOBAL$$",
+			"parent_name": "PauseAI US"
 		},
 		{
 			"name": "PauseAI Edinburgh",
@@ -162,25 +163,29 @@
 			"name": "PauseAI Raleigh",
 			"lat": 35.7877,
 			"lon": -78.6443,
-			"link": "$$DISCORD_GLOBAL$$"
+			"link": "$$DISCORD_GLOBAL$$",
+			"parent_name": "PauseAI US"
 		},
 		{
 			"name": "PauseAI Austin",
 			"lat": 30.2667,
 			"lon": -97.7333,
-			"link": "$$DISCORD_GLOBAL$$"
+			"link": "$$DISCORD_GLOBAL$$",
+			"parent_name": "PauseAI US"
 		},
 		{
 			"name": "PauseAI West Palm Beach",
 			"lat": 26.7153,
 			"lon": -80.0534,
-			"link": "$$DISCORD_GLOBAL$$"
+			"link": "$$DISCORD_GLOBAL$$",
+			"parent_name": "PauseAI US"
 		},
 		{
 			"name": "PauseAI Chicago",
 			"lat": 41.8781,
 			"lon": -87.6298,
-			"link": "https://discord.gg/3sQM7RGGkD"
+			"link": "https://discord.gg/3sQM7RGGkD",
+			"parent_name": "PauseAI US"
 		},
 		{
 			"name": "PauseAI São Paulo",
@@ -212,13 +217,15 @@
 			"name": "PauseAI St. Louis",
 			"lat": 38.627,
 			"lon": -90.1994,
-			"link": "$$DISCORD_US$$"
+			"link": "$$DISCORD_US$$",
+			"parent_name": "PauseAI US"
 		},
 		{
 			"name": "PauseAI Modesto",
 			"lat": 37.6391,
 			"lon": -120.9969,
-			"link": "$$DISCORD_GLOBAL$$"
+			"link": "$$DISCORD_GLOBAL$$",
+			"parent_name": "PauseAI US"
 		},
 		{
 			"name": "PauseAI Dallas",
@@ -318,7 +325,8 @@
 			"name": "PauseAI Fort Wayne",
 			"lat": 41.0938,
 			"lon": -85.1392,
-			"link": "https://www.meetup.com/pauseai-fortwayne/"
+			"link": "https://www.meetup.com/pauseai-fortwayne/",
+			"parent_name": "PauseAI US"
 		},
 		{
 			"name": "PauseAI Vancouver",
@@ -351,7 +359,8 @@
 			"name": "PauseAI Charleston",
 			"lat": 32.7765,
 			"lon": -79.9311,
-			"link": "$$DISCORD_GLOBAL$$"
+			"link": "$$DISCORD_GLOBAL$$",
+			"parent_name": "PauseAI US"
 		},
 		{
 			"name": "PauseAI Osnabrück",
