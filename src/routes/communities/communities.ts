@@ -38,8 +38,14 @@ const LINK_PLACEHOLDERS = {
 }
 
 const pauseAICommunities: Community[] = (
-	pauseAICommunitiesJson satisfies CommunitiesConfiguration
-).communities.map((c) => ({ ...c, type: 'local' }))
+    pauseAICommunitiesJson satisfies CommunitiesConfiguration
+).communities.map((c) => ({
+    ...c,
+    type: 'local',
+    country: nationalChaptersJson.communities.find((n) =>
+        c.parent_name?.includes(n.name)
+    )?.name || null // Assign country based on parent_name or leave null
+}));
 
 const adjacentCommunities: Community[] = (
 	adjacentCommunitiesJson satisfies CommunitiesConfiguration

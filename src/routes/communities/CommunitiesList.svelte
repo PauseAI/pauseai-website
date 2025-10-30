@@ -1,18 +1,42 @@
 <script lang="ts">
-	import type { Community } from './communities'
-	import Link from '$lib/components/Link.svelte'
+    import type { Community } from './communities';
+    import Link from '$lib/components/Link.svelte';
 
-	export let communities: Community[] = []
+    export let communities: Community[] = [];
+
+    // Group local communities by their country/national community
+    const groupedCommunities = communities
+        .filter((community) => community.type === 'local')
+        .reduce((acc, community) => {
+            const nationalName = community.country || 'Other';
+            if (!acc[nationalName]) {
+                acc[nationalName] = [];
+            }
+            acc[nationalName].push(community);
+            return acc;
+        }, {} as Record<string, Community[]>);
+
+    // Sort nationalities alphabetically, with "Other" at the end
+    const sortedNationalities = Object.keys(groupedCommunities).sort((a, b) => {
+        if (a === 'Other') return 1;
+        if (b === 'Other') return -1;
+        return a.localeCompare(b);
+    });
 </script>
 
 <div class="prose">
-	<ul>
-		{#each communities
-			.filter((community) => community.type === 'local')
-			.sort((a, b) => a.name.localeCompare(b.name)) as community}
-			<li>
-				<Link href={community.link}>{community.name}</Link>
-			</li>
-		{/each}
-	</ul>
+    <ul>
+        {#each sortedNationalities as nationality}
+            <li>
+                <strong>{nationality}</strong>
+                <ul>
+                    {#each groupedCommunities[nationality].sort((a, b) => a.name.localeCompare(b.name)) as localCommunity}
+                        <li>
+                            <Link href={localCommunity.link}>{localCommunity.name}</Link>
+                        </li>
+                    {/each}
+                </ul>
+            </li>
+        {/each}
+    </ul>
 </div>
