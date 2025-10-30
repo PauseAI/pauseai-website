@@ -49,7 +49,7 @@ interface LinkAuditResult {
 }
 
 export function findFilesRecursively(dir: string, ext: string) {
-	const files = fs.readdirSync(dir, { recursive: true }) as string[]
+	const files = fs.readdirSync(dir, { recursive: true, encoding: 'utf-8' })
 	return files
 		.map((file) => path.join(dir, file))
 		.filter((file) => path.extname(file) === '.' + ext)

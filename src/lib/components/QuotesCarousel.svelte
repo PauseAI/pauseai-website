@@ -85,9 +85,7 @@
 		addEventListener('touchstart', (event) => (interactionStart = event.changedTouches[0]))
 		addEventListener('mousedown', (event) => (interactionStart = event))
 
-		const touchNavigationButtons = document.getElementsByClassName(
-			'touch-navigation'
-		) as HTMLCollectionOf<HTMLElement>
+		const touchNavigationButtons = document.getElementsByClassName('touch-navigation')
 		window.addEventListener('click', (event) => {
 			if (!interactionStart) return
 			for (const touchNavigationButton of touchNavigationButtons) {

@@ -4,9 +4,26 @@ description: Sign up to join the PauseAI movement
 ---
 
 <script>
+    import { onMount } from 'svelte'
+    import { page } from '$app/stores'
     import TallyEmbed from '$lib/components/TallyEmbed.svelte'
     import NewsletterSignup from '$lib/components/NewsletterSignup.svelte'
+    import Banner from '$lib/components/Banner.svelte'
+    import { detectAndStoreCollagenUid } from '$lib/collagen'
+
+    let userHasUid = false
+
+    onMount(() => {
+        // Check for collagen UID in URL params or localStorage
+        userHasUid = detectAndStoreCollagenUid('sayno', $page.url.searchParams)
+    })
 </script>
+
+{#if userHasUid}
+<Banner id="join-subscribed">
+<strong>Thanks!</strong> We will subscribe you to our newsletter and keep you up to date. Want to do more? You can become an active member right now using the form below.
+</Banner>
+{/if}
 
 This is our nuclear moment.
 Rapid AI advancement represents one of history's most consequential and dangerous technological shifts.
@@ -19,6 +36,9 @@ After signing up, join our onboarding session online or locally to learn about c
 
 <TallyEmbed formId="wbGvKe" />
 
+{#if !userHasUid}
+
 ## Stay Updated
 
 <NewsletterSignup />
+{/if}
