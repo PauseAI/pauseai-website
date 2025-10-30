@@ -16,8 +16,9 @@ type RawCommunity = {
 }
 
 export type Community = RawCommunity & {
-	type: 'local' | 'national' | 'adjacent'
-}
+    type: 'local' | 'national' | 'adjacent';
+    country?: string;
+};
 
 export const communitiesMeta: Post = {
 	title: 'PauseAI Local Communities',
@@ -38,16 +39,26 @@ const LINK_PLACEHOLDERS = {
 }
 
 const pauseAICommunities: Community[] = (
-	pauseAICommunitiesJson satisfies CommunitiesConfiguration
-).communities.map((c) => ({ ...c, type: 'local' }))
+    pauseAICommunitiesJson satisfies CommunitiesConfiguration
+).communities.map((c) => ({
+    ...c,
+    type: 'local',
+    country: nationalChaptersJson.communities.find((n) =>
+        c.parent_name?.includes(n.name)
+    )?.name || undefined // Use undefined instead of null
+}));
 
 const adjacentCommunities: Community[] = (
 	adjacentCommunitiesJson satisfies CommunitiesConfiguration
 ).communities.map((c) => ({ ...c, type: 'adjacent' }))
 
 const nationalChapters: Community[] = (
-	nationalChaptersJson satisfies CommunitiesConfiguration
-).communities.map((c) => ({ ...c, type: 'national' }))
+    nationalChaptersJson satisfies CommunitiesConfiguration
+).communities.map((c) => ({
+    ...c,
+    type: 'national',
+    link: c.link // Ensure the link is passed through
+}));
 
 for (const community of [...adjacentCommunities, ...pauseAICommunities, ...nationalChapters]) {
 	if (
