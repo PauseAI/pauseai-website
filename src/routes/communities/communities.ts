@@ -45,7 +45,7 @@ const pauseAICommunities: Community[] = (
     type: 'local',
     country: nationalChaptersJson.communities.find((n) =>
         c.parent_name?.includes(n.name)
-    )?.name || null // Assign country based on parent_name or leave null
+    )?.name || undefined // Use undefined instead of null
 }));
 
 const adjacentCommunities: Community[] = (
