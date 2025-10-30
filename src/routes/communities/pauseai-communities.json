@@ -304,7 +304,8 @@
 			"name": "PauseAI Gdynia",
 			"lat": 54.5168,
 			"lon": 18.5419,
-			"link": "$$DISCORD_GLOBAL$$"
+			"link": "$$DISCORD_GLOBAL$$",
+			"parent_name": "PauseAI Poland"
 		},
 		{
 			"name": "PauseAI Madrid",
@@ -385,7 +386,8 @@
 			"name": "Kraków",
 			"lat": 50.0647,
 			"lon": 19.945,
-			"link": "$$DISCORD_GLOBAL$$"
+			"link": "$$DISCORD_GLOBAL$$",
+			"parent_name": "PauseAI Poland"
 		},
 		{
 			"name": "Yaoundé",
