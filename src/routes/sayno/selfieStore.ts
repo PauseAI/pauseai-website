@@ -22,6 +22,9 @@ export const cameraAvailable = writable<boolean>(false)
 export const isCapturing = writable<boolean>(false)
 export const cameraPermissionDenied = writable<boolean>(false)
 
+// Conditional intro message for returning users
+export const returningUidMessage = writable<string | null>(null)
+
 // Global references for elements and media
 let videoElement: HTMLVideoElement | null = null
 let canvasElement: HTMLCanvasElement | null = null

@@ -39,7 +39,8 @@
 
 	if (
 		(href.startsWith('http:') || href.startsWith('https:')) &&
-		!href.startsWith('https://pauseai.info/')
+		!href.startsWith('https://pauseai.info/') &&
+		!(href.includes('s3.amazonaws') && href.includes('/pauseai-'))
 	)
 		type = Type.External
 	else if (href.startsWith('mailto:')) type = Type.Mail
@@ -53,7 +54,7 @@
 				const url = $page.url
 				url.hash = href
 				pushState(url, $page.state)
-				const target = document.querySelector(href) as HTMLElement | null
+				const target = document.querySelector<HTMLElement>(href)
 				if (!target) return
 				target.scrollIntoView({ behavior: 'smooth' })
 				target.tabIndex = -1

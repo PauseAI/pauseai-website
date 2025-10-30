@@ -37,12 +37,12 @@
 		nearbyEvent = events.entries.map((entry) => entry.event).find(isNearby) ?? null
 	})
 
-	function fetchGeo() {
-		return fetch('/api/geo').then((res) => res.json()) as Promise<GeoApiResponse>
+	async function fetchGeo(): Promise<GeoApiResponse> {
+		return fetch('/api/geo').then((res) => res.json())
 	}
 
-	function fetchLuma() {
-		return fetch('/api/calendar').then((res) => res.json()) as Promise<CalendarResponse>
+	async function fetchLuma(): Promise<CalendarResponse> {
+		return fetch('/api/calendar').then((res) => res.json())
 	}
 </script>
 

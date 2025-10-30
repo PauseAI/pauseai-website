@@ -24,7 +24,10 @@ const FALLBACK_NATIONAL_GROUPS: AirtableRecord<AirtableNationalGroup>[] = [
 			linktree: '',
 			instagram: '',
 			tiktok: '',
-			Facebook: ''
+			Facebook: '',
+			youtube: '',
+			linkedin: '',
+			luma: ''
 		}
 	},
 	{
@@ -44,7 +47,10 @@ const FALLBACK_NATIONAL_GROUPS: AirtableRecord<AirtableNationalGroup>[] = [
 			linktree: '',
 			instagram: '',
 			tiktok: '',
-			Facebook: ''
+			Facebook: '',
+			youtube: '',
+			linkedin: '',
+			luma: ''
 		}
 	}
 ]
@@ -88,7 +94,10 @@ function recordToNationalGroup(record: AirtableRecord<AirtableNationalGroup>): N
 		// Add Instagram and TikTok links
 		instagramLink: record.fields.instagram || '',
 		tiktokLink: record.fields.tiktok || '',
-		facebookLink: record.fields.Facebook,
+		facebookLink: record.fields.Facebook || '',
+		youtubeLink: record.fields.youtube || '',
+		linkedinLink: record.fields.linkedin || '',
+		lumaLink: record.fields.luma || '',
 		public: true // Assuming all records are public by default
 	}
 }
