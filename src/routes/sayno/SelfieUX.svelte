@@ -38,7 +38,12 @@
 
 <!-- Compact capture UX above standard page header -->
 <section class="capture-ux">
-	{#if $currentState === 'preparing'}
+	{#if $currentState === 'validated'}
+		<div class="confirmation-section">
+			<h2>Thanks for validating your email!</h2>
+			<p>You're part of our Say No collages, but won't receive further updates by default.</p>
+		</div>
+	{:else if $currentState === 'preparing'}
 		<div class="loading-state">
 			<p>Loading...</p>
 		</div>
