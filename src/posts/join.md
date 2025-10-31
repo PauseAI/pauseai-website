@@ -4,7 +4,7 @@ description: Sign up to join the PauseAI movement
 ---
 
 <script>
-    import { onMount } from 'svelte'
+    import { onMount, tick } from 'svelte'
     import { page } from '$app/stores'
     import TallyEmbed from '$lib/components/TallyEmbed.svelte'
     import NewsletterSignup from '$lib/components/NewsletterSignup.svelte'
@@ -12,16 +12,42 @@ description: Sign up to join the PauseAI movement
     import { detectAndStoreCollagenUid } from '$lib/collagen'
 
     let userHasUid = false
+    let subscribeEmail = ''
+    let newsletterEmail = ''
 
-    onMount(() => {
-        // Check for collagen UID in URL params or localStorage
+    onMount(async () => {
+        // Check for collagen UID in URL params - this sets the cookie and triggers auto-subscribe
         userHasUid = detectAndStoreCollagenUid('sayno', $page.url.searchParams)
+
+        // Get the email parameter if provided (should be present when userHasUid is true)
+        subscribeEmail = $page.url.searchParams.get('subscribe-email') || ''
+
+        // If user came from collagen email with uid, auto-subscribe them
+        if (userHasUid && subscribeEmail) {
+            // Pre-fill the newsletter form
+            newsletterEmail = subscribeEmail
+
+            // Wait for everything to render
+            await tick()
+
+            // Auto-submit after 2 seconds so user sees the banner message
+            setTimeout(() => {
+                const form = document.querySelector('.newsletter-signup form')
+                if (form) {
+                    form.submit()
+                }
+            }, 2000)
+        }
     })
 </script>
 
-{#if userHasUid}
+{#if userHasUid && subscribeEmail}
 <Banner id="join-subscribed">
-<strong>Thanks!</strong> We will subscribe you to our newsletter and keep you up to date. Want to do more? You can become an active member right now using the form below.
+<strong>Thanks!</strong> We're subscribing {subscribeEmail} to our newsletter now. Want to do more? You can become an active member right now using the form below.
+</Banner>
+{:else if userHasUid && !subscribeEmail}
+<Banner id="join-error">
+<strong>Sorry!</strong> We couldn't complete your subscription automatically. Please use the form below to subscribe.
 </Banner>
 {/if}
 
@@ -36,9 +62,11 @@ After signing up, join our onboarding session online or locally to learn about c
 
 <TallyEmbed formId="wbGvKe" />
 
-{#if !userHasUid}
-
 ## Stay Updated
 
-<NewsletterSignup />
+<NewsletterSignup bind:email={newsletterEmail} />
+
+{#if userHasUid && subscribeEmail}
+
+<p><em>Consider becoming an active PauseAI member using the form above!</em></p>
 {/if}
