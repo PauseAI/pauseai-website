@@ -14,6 +14,7 @@ description: Sign up to join the PauseAI movement
     let userHasUid = false
     let subscribeEmail = ''
     let newsletterEmail = ''
+    let subscribeClicked = false
 
     onMount(async () => {
         // Check for collagen UID in URL params - this sets the cookie and triggers auto-subscribe
@@ -22,33 +23,40 @@ description: Sign up to join the PauseAI movement
         // Get the email parameter if provided (should be present when userHasUid is true)
         subscribeEmail = $page.url.searchParams.get('subscribe-email') || ''
 
-        // If user came from collagen email with uid, auto-subscribe them
+        // If user came from collagen email with uid, pre-fill the form
         if (userHasUid && subscribeEmail) {
             // Pre-fill the newsletter form
             newsletterEmail = subscribeEmail
-
-            // Wait for everything to render
-            await tick()
-
-            // Auto-submit after 2 seconds so user sees the banner message
-            setTimeout(() => {
-                const form = document.querySelector('.newsletter-signup form')
-                if (form) {
-                    form.submit()
-                }
-            }, 2000)
         }
     })
+
+    // Track when subscribe is clicked
+    function handleNewsletterClick(e) {
+        // Check if the clicked element is the submit button or inside the form
+        if (e.target.type === 'submit' || e.target.closest('button[type="submit"]')) {
+            subscribeClicked = true
+        }
+    }
 </script>
 
 {#if userHasUid && subscribeEmail}
 <Banner id="join-subscribed">
-<strong>Thanks!</strong> We're subscribing {subscribeEmail} to our newsletter now. Want to do more? You can become an active member right now using the form below.
+{#if !subscribeClicked}
+<strong>Welcome collage member!</strong> Click Subscribe to join the newsletter.
+{:else}
+<strong>Thanks.</strong> Scroll down if you feel active already!
+{/if}
 </Banner>
+<!-- svelte-ignore a11y-click-events-have-key-events -->
+<!-- svelte-ignore a11y-no-static-element-interactions -->
+<div on:click={handleNewsletterClick}>
+<NewsletterSignup bind:email={newsletterEmail} />
+</div>
 {:else if userHasUid && !subscribeEmail}
 <Banner id="join-error">
-<strong>Sorry!</strong> We couldn't complete your subscription automatically. Please use the form below to subscribe.
+<strong>Sorry!</strong> We couldn't complete your subscription automatically. Please enter your email below to subscribe.
 </Banner>
+<NewsletterSignup />
 {/if}
 
 This is our nuclear moment.
