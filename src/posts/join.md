@@ -70,9 +70,11 @@ After signing up, join our onboarding session online or locally to learn about c
 
 <TallyEmbed formId="wbGvKe" />
 
-{#if !userHasUid}
-
 ## Stay Updated
 
-<NewsletterSignup />
+<NewsletterSignup bind:email={newsletterEmail} />
+
+{#if userHasUid && subscribeEmail}
+
+<p><em>Consider becoming an active PauseAI member using the form above!</em></p>
 {/if}
