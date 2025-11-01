@@ -88,6 +88,7 @@ We have no idea how to align such an AI (even [OpenAI admits this](https://youtu
 
 <!--Anthropic co-founder Ben Mann [believes](https://x.com/ai_ctrl/status/1819173703869255879/photo/0) there's a 30% chance that Claude 3 (their latest model) can autonomously replicate, given fine-tuning and clever prompting.
 Ex-OpenAI researcher Daniel Kokotajlo thinks there's a [15% chance](https://x.com/ai_ctrl/status/1819173703869255879/photo/0) we'll have AGI in 2024.-->
+
 No-one knows for certain when we will reach the Ilya threshold.
 But the [stakes are too high](/xrisk) to assume we have a lot of time.
 We need to act on the small chance that we could be months away.

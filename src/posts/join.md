@@ -47,6 +47,7 @@ description: Sign up to join the PauseAI movement
 <strong>Thanks.</strong> Scroll down if you feel active already!
 {/if}
 </Banner>
+
 <!-- svelte-ignore a11y-click-events-have-key-events -->
 <!-- svelte-ignore a11y-no-static-element-interactions -->
 <div on:click={handleNewsletterClick}>
