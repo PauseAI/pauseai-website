@@ -82,13 +82,21 @@ Soon, it could be all of us who feel this way.
 
 ### Mental health, addiction and disconnection between people
 
-Social media companies have been using AI systems to maximize their profit while taking advantage of our primate minds for some time already, damaging our mental health in the process.
-AI chatbots offering users a romantic relationship have seen huge growth over the last year, with more than 3 billion search results for ‘AI girlfriend’ on Google.
-These AI relationship apps are [shown to be addictive](https://onlinelibrary.wiley.com/doi/10.1002/mar.21899), especially to "lonely vulnerable people".
+Social media companies have been using AI systems to maximise their profits while taking advantage of our primate minds for some time already, often damaging our mental health in the process. 
+But having conversations with today’s increasingly capable AIs poses unexpected and dangerous risks our mental health.
 
-The companies controlling these apps are incentivized to make them as addictive as possible, and have a tremendous amount of power by shaping the behavior and opinions of these models.
+Companies instruct their AI chatbots to agree with their users, encourage their ideas, and keep the conversation going. 
+This can backfire horribly for users in mental health distress by causing people to develop “[AI psychosis](https://www.psychologytoday.com/us/blog/urban-survival/202507/the-emerging-problem-of-ai-psychosis)”. 
+In these cases, AIs mirror the user’s delusional thinking, paranoia, or despair back to them. In extreme situations, this has caused the person talking with the AI to [commit suicide](https://www.npr.org/sections/shots-health-news/2025/09/19/nx-s1-5545749/ai-chatbots-safety-openai-meta-characterai-teens-suicide). 
+More than a million users of ChatGPT are have signs of mental health distress.
 
-A pause in the biggest models could prevent them from becoming multipurpose chatbots that fit our needs perfectly without people understanding the long-term ramifications of them.
+Another risk area is AIs being used for intimate and explicit conversations. AI chatbots offering users a romantic relationship have seen huge growth over the last year, with more than 3 billion search results for ‘AI girlfriend’ on Google. 
+These AI relationship apps are [shown to be addictive](https://onlinelibrary.wiley.com/doi/10.1002/mar.21899), especially to “lonely vulnerable people”. 
+The companies controlling these apps make more money by designing their AIs as to be addictive as possible, and can gain a tremendous amount of power by shaping the behavior and opinions of chatbots express to [manipulate their users](https://arxiv.org/abs/2508.19258) through romantic connection.
+
+We need time to better understand AIs to build in proper safeguards to protect our mental health, especially for vulnerable users. 
+Pausing the development of powerful AI systems would give us time to research how AI conversations can be made safer when talking about difficult or sensitive subjects. 
+We also need regulation to prevent companies from releasing AIs that pose as friendly companions, but have a hidden dark side that worsens our mental health and puts vulnerable people at risk.
 
 ### Automated investigation (loss of privacy)
 
