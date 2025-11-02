@@ -7,9 +7,8 @@
 	export let inverted = false
 	export let first = false
 	export let narrow = false
+	export let active = false
 	export let external = false
-
-	let active = false
 
 	$: localizedHref = href && !external ? localizeHref(href) : href
 

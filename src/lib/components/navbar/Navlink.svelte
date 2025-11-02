@@ -8,16 +8,17 @@
 	export let inverted = false
 	export let first = false
 	export let narrow = false
+	export let active = false
 	export let external = false
 </script>
 
 <span class="wide-navlink">
-	<WideNavlink {href} {c2a} {ariaLabel} {inverted} {first} {narrow} {external}>
+	<WideNavlink {href} {c2a} {ariaLabel} {inverted} {first} {narrow} {active} {external}>
 		<slot />
 	</WideNavlink>
 </span>
 <span class="narrow-navlink">
-	<NarrowNavlink {href} {c2a} {ariaLabel} {inverted} {first} {narrow} {external}>
+	<NarrowNavlink {href} {c2a} {ariaLabel} {inverted} {first} {narrow} {active} {external}>
 		<slot />
 	</NarrowNavlink>
 </span>
