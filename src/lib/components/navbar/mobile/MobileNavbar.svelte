@@ -2,6 +2,6 @@
 	import UniversalNavbar from '../universal/UniversalNavbar.svelte'
 </script>
 
-<UniversalNavbar>
+<UniversalNavbar {...$$restProps}>
 	<slot />
 </UniversalNavbar>

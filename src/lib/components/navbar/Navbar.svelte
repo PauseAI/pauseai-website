@@ -1,22 +1,25 @@
 <script lang="ts">
 	import DesktopNavbar from './desktop/DesktopNavbar.svelte'
 	import MobileNavbar from './mobile/MobileNavbar.svelte'
+
+	export let inverted = false
+	export let moveUp = false
 </script>
 
 <div class="desktop-navbar">
-	<DesktopNavbar>
+	<DesktopNavbar {inverted} {moveUp}>
 		<slot />
 	</DesktopNavbar>
 </div>
 <div class="mobile-navbar">
-	<MobileNavbar>
+	<MobileNavbar {inverted} {moveUp}>
 		<slot />
 	</MobileNavbar>
 </div>
 
 <style>
 	.desktop-navbar {
-		display: default;
+		display: unset;
 	}
 
 	.mobile-navbar {
@@ -29,7 +32,7 @@
 		}
 
 		.mobile-navbar {
-			display: default;
+			display: unset;
 		}
 	}
 </style>
