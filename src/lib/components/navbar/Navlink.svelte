@@ -1,6 +1,6 @@
 <script lang="ts">
-	import DesktopNavlink from './desktop/DesktopNavbar.svelte'
-	import MobileNavlink from './mobile/MobileNavbar.svelte'
+	import DesktopNavlink from './desktop/DesktopNavlink.svelte'
+	import MobileNavlink from './mobile/MobileNavlink.svelte'
 
 	export let href: string | undefined = undefined
 	export let c2a = false
