@@ -2,6 +2,6 @@
 	import UniversalNavlink from '../universal/UniversalNavlink.svelte'
 </script>
 
-<UniversalNavlink>
+<UniversalNavlink {...$$restProps}>
 	<slot />
 </UniversalNavlink>
