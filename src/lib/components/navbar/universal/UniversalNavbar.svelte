@@ -115,6 +115,7 @@
 			var(--logo-width-big)
 		);
 		margin-left: calc(-1 * var(--logo-offset));
+		z-index: 1;
 	}
 
 	.min-space-between {
