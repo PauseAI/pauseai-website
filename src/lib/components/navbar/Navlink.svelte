@@ -1,15 +1,24 @@
 <script lang="ts">
 	import DesktopNavlink from './desktop/DesktopNavbar.svelte'
 	import MobileNavlink from './mobile/MobileNavbar.svelte'
+
+	export let href: string | undefined = undefined
+	export let c2a = false
+	export let ariaLabel: string | undefined = undefined
+	export let inverted = false
+	export let first = false
+	export let narrow = false
+	export let active = false
+	export let external = false
 </script>
 
 <span class="desktop-navlink">
-	<DesktopNavlink>
+	<DesktopNavlink {href} {c2a} {ariaLabel} {inverted} {first} {narrow} {active} {external}>
 		<slot />
 	</DesktopNavlink>
 </span>
 <span class="mobile-navlink">
-	<MobileNavlink>
+	<MobileNavlink {href} {c2a} {ariaLabel} {inverted} {first} {narrow} {active} {external}>
 		<slot />
 	</MobileNavlink>
 </span>

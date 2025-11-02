@@ -1,16 +1,9 @@
 <script lang="ts">
-	import NavLink from '$lib/components/Navlink.svelte'
 	import Logo from '$lib/components/logo.svelte'
-	import { botName } from '$lib/config'
 	import { page } from '$app/stores'
-	import SearchIcon from 'lucide-svelte/icons/search'
-	import LanguageSwitcher from '$lib/components/LanguageSwitcher.svelte'
-	import * as m from '$lib/paraglide/messages.js'
 	import { localizeHref } from '$lib/paraglide/runtime'
 	import { emulateCqwIfNeeded } from '$lib/container-query-units'
 	import { onMount } from 'svelte'
-
-	const enableBot = false
 
 	export let inverted = false
 	export let moveUp = false
@@ -36,19 +29,7 @@
 	</div>
 
 	<div class="nav-links">
-		<NavLink {inverted} first href="/learn">{m.header_learn()}</NavLink>
-		<NavLink {inverted} href="/proposal">{m.header_proposal()}</NavLink>
-		<NavLink {inverted} href="/events">{m.header_events()}</NavLink>
-		<NavLink {inverted} href="/faq">{m.header_faq()}</NavLink>
-		<NavLink {inverted} href="/action">{m.header_action()}</NavLink>
-		<NavLink {inverted} href="/donate">{m.header_donate()}</NavLink>
-		{#if enableBot}
-			<NavLink {inverted} href="/chat">{botName}</NavLink>
-		{/if}
-		<!-- <NavLink href="/about">About</NavLink> -->
-		<NavLink {inverted} c2a href="/join">{m.header_join()}</NavLink>
-		<LanguageSwitcher {inverted} />
-		<NavLink {inverted} href="/search" ariaLabel="Search"><SearchIcon size="0.8em" /></NavLink>
+		<slot />
 	</div>
 </nav>
 
