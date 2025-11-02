@@ -59,7 +59,7 @@
 	}
 
 	nav.move-up {
-		margin-top: -100vh;
+		margin-top: min(-100vh, calc(-1 * var(--hero-min-height)));
 		height: 0;
 	}
 
