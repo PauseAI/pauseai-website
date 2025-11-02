@@ -1,37 +1,37 @@
 <script lang="ts">
-	import DesktopNavbar from './desktop/DesktopNavbar.svelte'
-	import MobileNavbar from './mobile/MobileNavbar.svelte'
+	import WideNavbar from './wide/WideNavbar.svelte'
+	import NarrowNavbar from './narrow/NarrowNavbar.svelte'
 
 	export let inverted = false
 	export let moveUp = false
 </script>
 
-<div class="desktop-navbar">
-	<DesktopNavbar {inverted} {moveUp}>
+<div class="wide-navbar">
+	<WideNavbar {inverted} {moveUp}>
 		<slot />
-	</DesktopNavbar>
+	</WideNavbar>
 </div>
-<div class="mobile-navbar">
-	<MobileNavbar {inverted} {moveUp}>
+<div class="narrow-navbar">
+	<NarrowNavbar {inverted} {moveUp}>
 		<slot />
-	</MobileNavbar>
+	</NarrowNavbar>
 </div>
 
 <style>
-	.desktop-navbar {
+	.wide-navbar {
 		display: unset;
 	}
 
-	.mobile-navbar {
+	.narrow-navbar {
 		display: none;
 	}
 
 	@media (max-width: 600px) {
-		.desktop-navbar {
+		.wide-navbar {
 			display: none;
 		}
 
-		.mobile-navbar {
+		.narrow-navbar {
 			display: unset;
 		}
 	}
