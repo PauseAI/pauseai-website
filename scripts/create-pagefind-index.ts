@@ -3,11 +3,14 @@ import * as pagefind from 'pagefind'
 import type { Post } from '../src/lib/types'
 
 const POSTS_PATH = 'build/prerendered/api/posts'
-const INPUT_PATH = 'build'
+const INPUT_PATH = 'build/prerendered'
 const STATIC_PATH = 'static/pagefind'
 const BUILD_PATH = 'build/pagefind'
 
-const { index, errors } = await pagefind.createIndex({})
+const { index, errors } = await pagefind.createIndex({
+	rootSelector: 'html',
+	excludeSelectors: ['[data-pagefind-ignore]']
+})
 if (!index) throw new Error(errors.toString())
 
 // Index dynamic pages

@@ -9,6 +9,7 @@
 	export let narrow = false
 	export let active = false
 	export let external = false
+	export let target: string | undefined = undefined
 
 	$: localizedHref = href && !external ? localizeHref(href) : href
 
@@ -25,6 +26,7 @@
 	class:narrow
 	class:active
 	aria-label={ariaLabel}
+	{target}
 >
 	<slot />
 </a>
