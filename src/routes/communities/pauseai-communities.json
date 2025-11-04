@@ -492,6 +492,85 @@
 			"lon": 147.123323,
 			"link": "$$DISCORD_GLOBAL$$",
 			"parent_name": "PauseAI Australia"
+		},
+		{
+			"name": "Rostock",
+			"lat": 54.18,
+			"lon": 12.08,
+			"link": "$$DISCORD_GLOBAL$$",
+			"parent_name": "PauseAI Germany"
+		},
+		{
+			"name": "Manila",
+			"lat": 14.60,
+			"lon": 120.98,
+			"link": "$$DISCORD_GLOBAL$$"
+		},
+		{
+			"name": "Helsinki",
+			"lat": 60.17,
+			"lon": 24.95,
+			"link": "$$DISCORD_GLOBAL$$"
+		},
+		{
+			"name": "Boston",
+			"lat": 42.36,
+			"lon": -71.06,
+			"link": "$$DISCORD_US$$",
+			"parent_name": "PauseAI US"
+		},
+		{
+			"name": "Osaka",
+			"lat": 34.69,
+			"lon": 135.50,
+			"link": "$$DISCORD_GLOBAL$$"
+		},
+		{
+			"name": "Brussels",
+			"lat": 50.85,
+			"lon": 4.35,
+			"link": "$$DISCORD_GLOBAL$$"
+		},
+		{
+			"name": "Nashua",
+			"lat": 42.76,
+			"lon": -71.46,
+			"link": "$$DISCORD_US$$",
+			"parent_name": "PauseAI US"
+		},
+		{
+			"name": "Cleveland",
+			"lat": 41.50,
+			"lon": -81.69,
+			"link": "$$DISCORD_US$$",
+			"parent_name": "PauseAI US"
+		},
+		{
+			"name": "Peoria",
+			"lat": 40.69,
+			"lon": -89.59,
+			"link": "$$DISCORD_US$$",
+			"parent_name": "PauseAI US"
+		},
+		{
+			"name": "Réunion Island",
+			"lat": -21.115,
+			"lon": 55.533,
+			"link": "$$DISCORD_GLOBAL$$",
+			"parent_name": "PauseAI France"
+		},
+		{
+			"name": "Veszprém",
+			"lat": 47.10,
+			"lon": 17.91,
+			"link": "$$DISCORD_GLOBAL$$"
+		},
+		{
+			"name": "Boise",
+			"lat": 43.616,
+			"lon": -116.202,
+			"link": "$$DISCORD_US$$",
+			"parent_name": "PauseAI US"
 		}
 	]
 }
