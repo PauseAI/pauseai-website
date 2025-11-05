@@ -73,6 +73,7 @@
 		"@fontsource/roboto-slab": "^5.2.8",
 		"@fontsource/saira-condensed": "^5.2.8",
 		"@glidejs/glide": "~3.6.2",
+		"@number-flow/svelte": "^0.3.9",
 		"@pagefind/default-ui": "^1.4.0",
 		"@prgm/sveltekit-progress-bar": "^2.0.0",
 		"@remix-run/headers": "^0.12.0",
