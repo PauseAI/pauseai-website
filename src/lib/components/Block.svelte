@@ -1,5 +1,4 @@
 <script lang="ts">
-	import Fly from '$lib/components/Fly.svelte'
 	import Link from '$lib/components/Link.svelte'
 
 	let visible = false
@@ -7,19 +6,17 @@
 	export let linkText: string
 </script>
 
-<Fly>
-	<div class="block-wrapper" class:fade-in={visible}>
-		<Link {href}>
-			<div class="text">
-				<h2 class="title"><slot name="title" /></h2>
-				<p>
-					<slot />
-				</p>
-				<span class="c2a">{linkText} ></span>
-			</div>
-		</Link>
-	</div>
-</Fly>
+<div class="block-wrapper" class:fade-in={visible}>
+	<Link {href}>
+		<div class="text">
+			<h2 class="title"><slot name="title" /></h2>
+			<p>
+				<slot />
+			</p>
+			<span class="c2a">{linkText} ></span>
+		</div>
+	</Link>
+</div>
 
 <style>
 	.block-wrapper {

@@ -89,9 +89,6 @@ importers:
       svelte-french-toast:
         specifier: ^1.2.0
         version: 1.2.0(svelte@4.2.20)
-      svelte-inview:
-        specifier: ^4.0.4
-        version: 4.0.4(svelte@4.2.20)
       svelte-markdown:
         specifier: ^0.4.1
         version: 0.4.1(svelte@4.2.20)
@@ -3054,11 +3051,6 @@ packages:
     engines: {node: ^12.20 || ^14.13.1 || >= 16}
     peerDependencies:
       svelte: ^3.19.0 || ^4.0.0
-
-  svelte-inview@4.0.4:
-    resolution: {integrity: sha512-PlXNSHHijvQ6MhmSYUj6cMyS+39NttoTffk7W5WYF8T2tsyLgJnKhyuAF+/hSujbY0vpsmqXaMd2nolEKvR8Kw==}
-    peerDependencies:
-      svelte: ^3.0.0 || ^4.0.0 || ^5.0.0 || ^5.0.0-next
 
   svelte-markdown@0.4.1:
     resolution: {integrity: sha512-pOlLY6EruKJaWI9my/2bKX8PdTeP5CM0s4VMmwmC2prlOkjAf+AOmTM4wW/l19Y6WZ87YmP8+ZCJCCwBChWjYw==}
@@ -6263,10 +6255,6 @@ snapshots:
       svelte-writable-derived: 3.1.1(svelte@4.2.20)
 
   svelte-hmr@0.16.0(svelte@4.2.20):
-    dependencies:
-      svelte: 4.2.20
-
-  svelte-inview@4.0.4(svelte@4.2.20):
     dependencies:
       svelte: 4.2.20
 
