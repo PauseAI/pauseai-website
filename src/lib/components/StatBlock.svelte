@@ -14,7 +14,7 @@
 	})
 </script>
 
-<SvelteIntersectionObserver bind:isIntersecting>
+<SvelteIntersectionObserver bind:isIntersecting disconnectOnIntersect>
 	<div class="stat-block">
 		<div class="percentage">
 			<a href={link} class="number">

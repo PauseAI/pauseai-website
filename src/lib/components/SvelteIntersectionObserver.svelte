@@ -4,6 +4,7 @@
 	export let isIntersecting: boolean = false
 	export let rootMargin: string = '0px'
 	export let threshold: number | number[] = 0
+	export let disconnectOnIntersect = false
 
 	let element: HTMLElement
 	let observer: IntersectionObserver
@@ -12,6 +13,7 @@
 		observer = new IntersectionObserver(
 			(entries) => {
 				isIntersecting = entries[0].isIntersecting
+				if (disconnectOnIntersect && isIntersecting) observer.disconnect()
 			},
 			{ rootMargin, threshold }
 		)
