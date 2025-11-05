@@ -11,14 +11,20 @@ description: Sign up to join the PauseAI movement
     import Banner from '$lib/components/Banner.svelte'
     import { detectAndStoreCollagenUid } from '$lib/collagen'
 
+    const campaign = 'sayno' // Campaign name for collagen tracking
+
     let userHasUid = false
     let subscribeEmail = ''
     let newsletterEmail = ''
     let subscribeClicked = false
+    let hideSharing = false
 
     onMount(async () => {
         // Check for collagen UID in URL params - this sets the cookie and triggers auto-subscribe
-        userHasUid = detectAndStoreCollagenUid('sayno', $page.url.searchParams)
+        userHasUid = detectAndStoreCollagenUid(campaign, $page.url.searchParams)
+
+        // Check if x002 experiment parameter is present (control = hide sharing)
+        hideSharing = $page.url.searchParams.has('x002')
 
         // Get the email parameter if provided (should be present when userHasUid is true)
         subscribeEmail = $page.url.searchParams.get('subscribe-email') || ''
@@ -53,6 +59,12 @@ description: Sign up to join the PauseAI movement
 <div on:click={handleNewsletterClick}>
 <NewsletterSignup bind:email={newsletterEmail} />
 </div>
+
+{#if !hideSharing}
+
+<p><strong>Help us grow:</strong> <a href="/{campaign}/share">Share the {campaign} campaign with your networks</a></p>
+{/if}
+
 {:else if userHasUid && !subscribeEmail}
 <Banner id="join-error">
 <strong>Sorry!</strong> We couldn't complete your subscription automatically. Please enter your email below to subscribe.
