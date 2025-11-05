@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { onMount, onDestroy } from 'svelte'
+	import { onMount } from 'svelte'
 
 	export let isIntersecting: boolean = false
 	export let rootMargin: string = '0px'
@@ -16,10 +16,7 @@
 			{ rootMargin, threshold }
 		)
 		observer.observe(element)
-	})
-
-	onDestroy(() => {
-		observer.disconnect()
+		return () => observer.disconnect()
 	})
 </script>
 
