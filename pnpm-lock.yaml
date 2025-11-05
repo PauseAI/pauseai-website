@@ -20,9 +20,6 @@ importers:
       '@glidejs/glide':
         specifier: ~3.6.2
         version: 3.6.2
-      '@number-flow/svelte':
-        specifier: ^0.3.9
-        version: 0.3.9(svelte@4.2.20)
       '@pagefind/default-ui':
         specifier: ^1.4.0
         version: 1.4.0
@@ -1025,11 +1022,6 @@ packages:
   '@nodelib/fs.walk@1.2.8':
     resolution: {integrity: sha512-oGB+UxlgWcgQkgwo8GcEGwemoTFt3FIO9ababBmaGwXIoBKZ+GTy0pP185beGg7Llih/NSHSV2XAs1lnznocSg==}
     engines: {node: '>= 8'}
-
-  '@number-flow/svelte@0.3.9':
-    resolution: {integrity: sha512-CTw1+e0074GzbPX2IHcNCaK8nqxGNCOIUnQUjEjhcmBwBxOAhN3GYLQ6cJHvhQnWwplVe4eQ3z+c25Vttr2stQ==}
-    peerDependencies:
-      svelte: ^4 || ^5
 
   '@oxc-resolver/binding-android-arm-eabi@11.12.0':
     resolution: {integrity: sha512-/IfGWLNdmS1kVYM2g+Xw4qXNWtCPZ/i5YMprflA8FC3vAjT4N0VucQcDxUPHxatQwre4qnhbFFWqRa1mz6Cgkw==}
@@ -2665,9 +2657,6 @@ packages:
     resolution: {integrity: sha512-ppwTtiJZq0O/ai0z7yfudtBpWIoxM8yE6nHi1X47eFR2EWORqfbu6CnPlNsjeN683eT0qG6H/Pyf9fCcvjnnnQ==}
     engines: {node: ^12.20.0 || ^14.13.1 || >=16.0.0}
 
-  number-flow@0.5.8:
-    resolution: {integrity: sha512-FPr1DumWyGi5Nucoug14bC6xEz70A1TnhgSHhKyfqjgji2SOTz+iLJxKtv37N5JyJbteGYCm6NQ9p1O4KZ7iiA==}
-
   onetime@6.0.0:
     resolution: {integrity: sha512-1FlR+gjXK7X+AsAHso35MnyN5KqGwJRi/31ft6x0M194ht7S+rWAvd7PHss9xSKMzE0asv1pyIHaJYq+BbacAQ==}
     engines: {node: '>=12'}
@@ -4034,12 +4023,6 @@ snapshots:
     dependencies:
       '@nodelib/fs.scandir': 2.1.5
       fastq: 1.19.1
-
-  '@number-flow/svelte@0.3.9(svelte@4.2.20)':
-    dependencies:
-      esm-env: 1.2.2
-      number-flow: 0.5.8
-      svelte: 4.2.20
 
   '@oxc-resolver/binding-android-arm-eabi@11.12.0':
     optional: true
@@ -5832,10 +5815,6 @@ snapshots:
   npm-run-path@5.3.0:
     dependencies:
       path-key: 4.0.0
-
-  number-flow@0.5.8:
-    dependencies:
-      esm-env: 1.2.2
 
   onetime@6.0.0:
     dependencies:
