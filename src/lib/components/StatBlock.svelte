@@ -1,6 +1,6 @@
 <script lang="ts">
 	import NumberFlow from '@number-flow/svelte'
-	import IntersectionObserver from '$lib/components/IntersectionObserver.svelte'
+	import SvelteIntersectionObserver from '$lib/components/SvelteIntersectionObserver.svelte'
 	import { onMount } from 'svelte'
 
 	export let percentage: number
@@ -14,7 +14,7 @@
 	})
 </script>
 
-<IntersectionObserver bind:isIntersecting>
+<SvelteIntersectionObserver bind:isIntersecting>
 	<div class="stat-block">
 		<div class="percentage">
 			<a href={link} class="number">
@@ -23,7 +23,7 @@
 		</div>
 		<p class="text">{text}</p>
 	</div>
-</IntersectionObserver>
+</SvelteIntersectionObserver>
 
 <style>
 	.stat-block {
