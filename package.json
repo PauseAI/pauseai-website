@@ -96,6 +96,7 @@
 		"remark-unwrap-images": "^3.0.1",
 		"snakecase-keys": "^8.1.0",
 		"svelte-french-toast": "^1.2.0",
+		"svelte-inview": "^4.0.4",
 		"svelte-markdown": "^0.4.1",
 		"svelte-toc": "^0.5.9",
 		"ua-parser-js": "^1.0.41"
