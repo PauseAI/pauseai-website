@@ -18,7 +18,8 @@
 	<div class="stat-block">
 		<div class="percentage">
 			<a href={link} class="number">
-				<NumberFlow value={isIntersecting ? percentage : 10} />% <!-- start with two digits -->
+				<NumberFlow value={isIntersecting ? percentage : 10} suffix="%" />
+				<!-- start with two digits -->
 			</a>
 		</div>
 		<p class="text">{text}</p>
