@@ -1,16 +1,19 @@
 <script lang="ts">
 	import Link from '$lib/components/Link.svelte'
 	import SvelteIntersectionObserver from '$lib/components/SvelteIntersectionObserver.svelte'
-	import { onMount } from 'svelte'
 
-	let isIntersecting = true // prerender with underline
-	onMount(() => (isIntersecting = false))
+	let isIntersecting: boolean
 
 	export let href: string
 	export let linkText: string
 </script>
 
-<SvelteIntersectionObserver bind:isIntersecting rootMargin="-10%" disconnectOnIntersect>
+<SvelteIntersectionObserver
+	bind:isIntersecting
+	rootMargin="-10%"
+	defaultToIntersecting
+	disconnectOnIntersect
+>
 	<div class="block-wrapper">
 		<Link {href}>
 			<div class="text">
