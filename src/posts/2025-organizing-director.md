@@ -38,7 +38,7 @@ You will be responsible to the PauseAI Global CEO.
 
 ### Conditions
 
-- Remote work or in-person in Utrecht.
+- Remote work. Maybe in the future an office in London or Paris.
 - Full-time position, 32 hours per week negotiable.
 - Salary range: 40k - 60k EUR per year, depending on experience.
 - Referral bonus: 500 EUR for a successful hire!
