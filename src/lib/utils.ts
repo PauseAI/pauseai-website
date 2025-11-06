@@ -19,3 +19,5 @@ export function generateCacheControlRecord(options: CacheControlInit): Record<st
 export function headersToRecord(headers: Headers): Record<string, string> {
 	return Object.fromEntries(headers.entries())
 }
+
+export const defaultTitle = 'Volunteer';
