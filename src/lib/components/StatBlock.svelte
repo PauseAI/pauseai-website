@@ -6,7 +6,6 @@
 	export let text: string
 	export let link: string
 
-	// prerender correct number
 	let isIntersecting: boolean
 </script>
 
