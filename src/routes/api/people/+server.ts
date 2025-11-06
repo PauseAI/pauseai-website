@@ -41,7 +41,7 @@ function recordToPerson(record: any): Person {
 }
 
 const filter = (p: Person) => {
-	return p.image && !p.privacy && p.checked
+	return p.image && !p.privacy && p.checked && p.title?.trim() !== '';
 }
 
 export async function GET({ fetch, setHeaders }) {
