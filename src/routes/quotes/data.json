@@ -1,6 +1,17 @@
 {
   "quotes": [
     {
+      "background": "si_statement",
+      "color": "white",
+      "text": "We call for a **prohibition on the development of superintelligence, not lifted before there is broad scientific consensus that it will be done safely and controllably, and strong public buy-in**.",
+      "author": "Statement on Superintelligence,",
+      "author_description": "90,000+ signatories including political leaders, AI researchers, faith leaders, industry leaders, artists and media celebrities.",
+      "source": "https://superintelligence-statement.org/",
+      "padding": "2rem",
+      "notice": "“Steve Bannon” by Gage Skidmore. Modified and licensed under [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/).
+      “Prince Harry is challenged to take up the bow.” by SJOERD HILCKMANN. Modified and licensed under [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/)."
+    },
+    {
       "background": "summit_declaration",
       "color": "white",
       "text": "[About frontier AI:] Substantial risks may arise from potential intentional misuse or unintended issues of control relating to alignment with human intent. These issues are in part because those capabilities are not fully understood [...] There is potential for **serious, even catastrophic, harm, either deliberate or unintentional**, stemming from the most significant capabilities of these AI models.",
@@ -172,7 +183,7 @@
       "author": "Demis Hassabis",
       "author_description": "Co-Founder and CEO of DeepMind",
       "padding": "2rem",
-      "notice": "“File:PhotonQ-Demis Hassabis on Artificial Playful Intelligence (15366514658) (2)” by PhOtOnQuAnTiQuE from Earth France. Modified and licensed under CC BY-SA 2.0."
+      "notice": "“PhotonQ-Demis Hassabis on Artificial Playful Intelligence (15366514658) (2)” by PhOtOnQuAnTiQuE from Earth France. Modified and licensed under CC BY-SA 2.0."
     },
     {
       "background": "amodei",
@@ -250,7 +261,7 @@
       "author": "Yoshua Bengio",
       "author_description": "2nd/3rd most cited scientist ever, Godfather of modern AI, Turing Award Recipient",
       "padding": "1rem",
-      "notice": "“File:Yoshua Bengio (36468299790)” by Jérémy Barande. Modified and licensed under CC BY-SA 2.0."
+      "notice": "“Yoshua Bengio (36468299790)” by Jérémy Barande. Modified and licensed under CC BY-SA 2.0."
     },
     {
       "background": "lecun",
