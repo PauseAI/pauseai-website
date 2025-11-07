@@ -13,9 +13,11 @@ This Privacy Policy outlines how [Stichting PauseAI](/legal) ("we," "us," "our")
 ## 2. Information We Collect
 
 ### a. Personal Information
+
 - When you [join](/join) as a member, we collect your name, email address, and any other information you provide during registration.
 
 ### b. Usage Information
+
 - We use Google Analytics to track and analyze visitor interactions with our website. This includes information about how you use our website, the pages you visit, the time spent on those pages, and other related statistics.
 
 ## 3. How We Use Your Information
@@ -23,24 +25,29 @@ This Privacy Policy outlines how [Stichting PauseAI](/legal) ("we," "us," "our")
 We use the collected information for the following purposes:
 
 ### a. Providing and Improving Our Services
+
 - To manage your membership and provide you with relevant information and updates.
 - To improve our website and services based on the usage data we collect.
 
 ### b. Communication
+
 - To reach out to members using Airtable for internal communications and updates about PauseAI events, activities, and other relevant information.
-- If you agree to subscribe to our newsletter, we add your email to substack as a subscriber to [our newsletter](https://pauseai.substack.com/). 
+- If you agree to subscribe to our newsletter, we add your email to substack as a subscriber to [our newsletter](https://pauseai.substack.com/).
 
 ## 4. Disclosure of Your Information
 
 We do not sell, trade, or otherwise transfer your personal information to outside parties. However, we may share your information in the following circumstances:
 
 ### a. Service Providers
+
 We may share your information with third-party service providers, such as Airtable, Substack and Google Analytics, to assist us in operating our website and conducting our activities.
 
 ### b. Legal Requirements
+
 We may disclose your information if required to do so by law or in response to valid requests by public authorities.
 
 ### c. Chapter leaders
+
 We may share your contact information of the PauseAI national chapter leader of your country.
 
 ## 5. Data Security

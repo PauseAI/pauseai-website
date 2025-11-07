@@ -1,3 +1,4 @@
+import type { ComponentType } from 'svelte'
 import Dutch from './Dutch.svelte'
 import English from './English.svelte'
 
@@ -6,7 +7,7 @@ export type Country = {
 	/** Where can you find the list of representatives? */
 	url: string
 	// Svelte component
-	mail: any
+	mail: ComponentType
 }
 
 export const countries: Country[] = [

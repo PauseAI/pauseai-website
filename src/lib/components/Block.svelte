@@ -1,22 +1,31 @@
 <script lang="ts">
-	import Link from '$lib/components/custom/a.svelte'
+	import Link from '$lib/components/Link.svelte'
+	import SvelteIntersectionObserver from '$lib/components/SvelteIntersectionObserver.svelte'
 
-	let visible = false
+	let isIntersecting: boolean
+
 	export let href: string
 	export let linkText: string
 </script>
 
-<div class="block-wrapper" class:fade-in={visible}>
-	<Link {href}>
-		<div class="text">
-			<h2 class="title"><slot name="title" /></h2>
-			<p>
-				<slot />
-			</p>
-			<span class="c2a">{linkText} ></span>
-		</div>
-	</Link>
-</div>
+<SvelteIntersectionObserver
+	bind:isIntersecting
+	rootMargin="-10%"
+	defaultToIntersecting
+	disconnectOnIntersect
+>
+	<div class="block-wrapper">
+		<Link {href}>
+			<div class="text">
+				<h2 class="title" class:underline={isIntersecting}><slot name="title" /></h2>
+				<p>
+					<slot />
+				</p>
+				<span class="c2a">{linkText} ></span>
+			</div>
+		</Link>
+	</div>
+</SvelteIntersectionObserver>
 
 <style>
 	.block-wrapper {
@@ -73,8 +82,15 @@
 	}
 
 	.title :global(u) {
-		text-decoration-color: var(--brand);
-		text-decoration-thickness: 4px;
-		text-underline-offset: 2.5px;
+		text-decoration: none;
+		background: linear-gradient(var(--brand) 0%);
+		background-size: 0 0.15em;
+		background-position: 0 90%;
+		background-repeat: no-repeat;
+		transition: background-size 400ms;
+	}
+
+	.title.underline :global(u) {
+		background-size: 100% 0.15em;
 	}
 </style>

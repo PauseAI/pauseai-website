@@ -1,7 +1,7 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-import type { Signatory } from '$lib/types.js'
+import type { AirtableSignatory, Signatory } from '$lib/types.js'
 import { json } from '@sveltejs/kit'
-import { fetchAllPages } from '$lib/airtable.js'
+import { fetchAllPages, type AirtableRecord } from '$lib/airtable.js'
+import { generateCacheControlRecord } from '$lib/utils'
 
 /**
  * Fallback people data to use in development if Airtable fetch fails
@@ -23,30 +23,29 @@ const fallbackSignatories: Signatory[] = [
 	}
 ]
 
-function recordToSignatory(record: any): Signatory {
+function recordToSignatory(record: AirtableRecord<AirtableSignatory>): Signatory {
 	return {
 		private: record.fields.private || false,
 		name: record.fields.private ? 'Anonymous' : record.fields.name, // Anonymize private signatories
 		country: record.fields.country,
 		bio: record.fields.bio,
-		date: record.fields.created
+		date: record.fields.date
 	}
 }
 
 export async function GET({ fetch, setHeaders }) {
 	const url = `https://api.airtable.com/v0/appWPTGqZmUcs3NWu/tbl2emfOWNWoVz1kW`
-	setHeaders({
-		'cache-control': 'public, max-age=3600' // 1 hour in seconds
-	})
+	setHeaders(generateCacheControlRecord({ public: true, maxAge: 60 * 60 }))
 
 	try {
 		// Fetch all records from Airtable
-		const records = await fetchAllPages(fetch, url)
+		const records = await fetchAllPages<AirtableSignatory>(fetch, url)
 
-		// Filter to only include records where email_verified is explicitly true
+		// Filter to only include records where email_verified is explicitly true and not a duplicate
 		const verifiedRecords = records.filter((record) => {
 			const emailVerified = record.fields.email_verified
-			return emailVerified === true
+			const duplicate = record.fields.duplicate
+			return emailVerified === true && !duplicate
 		})
 
 		console.log(`Total records: ${records.length}, Verified records: ${verifiedRecords.length}`)

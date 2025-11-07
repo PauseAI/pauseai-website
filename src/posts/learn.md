@@ -5,25 +5,30 @@ description: Educational resources (videos, articles, books) about AI risks and 
 
 <script>
 import NewsletterSignup from '$lib/components/NewsletterSignup.svelte';
+import IconBullets from '$lib/components/IconBullets.svelte'
+import * as m from '$lib/paraglide/messages'
+import { CirclePause, CircleQuestionMark, Cog, Earth, Footprints, MessageSquareQuote, Skull, TriangleAlert } from 'lucide-svelte';
 </script>
 
 <NewsletterSignup />
 
 ## On this website
 
-- [Risks](/risks). A summary of the risks of AI.
-- [X-risk](/xrisk). Why AI is an existential risk.
-- [Takeover](/ai-takeover). How AI could take over the world.
-- [Quotes](/quotes). Quotes on AI risks and governance.
-- [Feasiblity of a Pause](/feasibility). The feasibility of a pause in AI development.
-- [Building the Pause button](/building-the-pause-button). What it takes to pause AI.
-- [FAQ](/faq). Commonly asked questions about AI safety and PauseAI.
-- [Action](/action). What you can do to help (with links to many action-related guides)
+<IconBullets items={[
+[TriangleAlert, m.learn_risks],
+[Skull, m.learn_xrisk],
+[Earth, m.learn_ai_takeover],
+[MessageSquareQuote, m.learn_quotes],
+[Cog, m.learn_feasibility],
+[CirclePause, m.learn_building_the_pause_button],
+[CircleQuestionMark, m.learn_faq],
+[Footprints, m.learn_action],
+]} />
 
 ## Other websites
 
 - [The Compendium](https://www.thecompendium.ai/). A highly comprehensive bundle of knowledge on why the current AI race is so dangerous, and what we can do about it.
-- [A Narrow Path](https://www.narrowpath.co/). A detailed plan on the steps that we need to take to increase our odds at surviving the next decadesa.
+- [A Narrow Path](https://www.narrowpath.co/). A detailed plan on the steps that we need to take to increase our odds at surviving the next decades.
 - [Keep the Future Human](https://keepthefuturehuman.ai/). An article by FLI's Anthony Aguirre on why & how we can keep the future human. (check [chapter 8: How To Not Build AGI](https://keepthefuturehuman.ai/chapter-8-how-to-not-build-agi/))
 - [AISafety.com](https://www.aisafety.com) & [AISafety.info](https://aisafety.info). The landing pages for AI Safety. Learn about the risks, communities, events, jobs, courses, ideas for how to mitigate the risks and more!
 - [Existential Safety](https://existentialsafety.org/). A comprehensive list of actions that we can take to increase our existential safety from AI.
@@ -98,7 +103,7 @@ I haven't heard good things about it yet -->
 - [If Anyone Builds It, Everyone Dies](https://ifanyonebuildsit.com/) (Eliezer Yudkowsky & Nate Soares, 2025)
 - [Uncontrollable: The Threat of Artificial Superintelligence and the Race to Save the World](https://www.goodreads.com/book/show/202416160-uncontrollable) (Darren McKee, 2023). Get it for [free](https://impactbooks.store/cart/47288196366640:1?discount=UNCON-P3SFRS)!
 <!-- - [The Precipice: Existential Risk and the Future of Humanity](https://www.goodreads.com/en/book/show/50485582-the-precipice) (Toby Ord, 2020)
-I love this book, but just a fraction of it is about AI --> 
+I love this book, but just a fraction of it is about AI -->
 - [The Alignment Problem](https://www.goodreads.com/book/show/50489349-the-alignment-problem) (Brian Christian, 2020)
 - [Human Compatible: Artificial Intelligence and the Problem of Control](https://www.goodreads.com/en/book/show/44767248) (Stuart Russell, 2019)
 - [Life 3.0: Being Human in the Age of Artificial Intelligence](https://www.goodreads.com/en/book/show/34272565) (Max Tegmark, 2017)

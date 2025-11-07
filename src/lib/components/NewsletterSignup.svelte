@@ -1,5 +1,6 @@
 <script lang="ts">
 	import * as m from '$lib/paraglide/messages.js'
+	import { tick } from 'svelte'
 
 	// Localizable text
 	export let placeholderText = m.newsletter_email_placeholder()
@@ -7,43 +8,27 @@
 	export let headingText = m.newsletter_heading()
 	export let descriptionText = m.newsletter_description()
 
-	// State variables
-	let email = ''
-	let subscribeStatus: 'idle' | 'loading' | 'success' | 'error' = 'idle'
-	let errorMessage = ''
-	let substackUrl = ''
+	// State variable for email binding (for external use)
+	export let email = ''
 
-	// Handle form submission - direct to Substack's subscribe page
-	const handleSubmit = () => {
-		if (!email) return
+	// State for showing success message
+	let showSuccess = false
+	let formElement: HTMLFormElement
 
-		try {
-			// Open in new tab and show success in our UI
-			window.open(substackUrl.toString(), '_blank')
+	const handleSubmit = async (e: Event) => {
+		e.preventDefault()
 
-			// Show success UI
-			subscribeStatus = 'success'
-			email = '' // Clear the email input
-		} catch (error) {
-			subscribeStatus = 'error'
-			errorMessage = m.newsletter_error_network()
-			console.error('Newsletter redirect error:', error)
-		}
-	}
+		// Show success message immediately
+		showSuccess = true
 
-	$: {
-		// This is Substack's recommended way for free tier publications
-		// Open the subscribe page with the email pre-filled
-		const url = new URL('https://pauseai.substack.com/subscribe')
-		url.searchParams.set('email', email)
-		url.searchParams.set('utm_source', 'website')
-		substackUrl = url.href
-	}
+		// Clear the email field
+		email = ''
 
-	// Reset error state when email changes
-	$: if (email && subscribeStatus === 'error') {
-		subscribeStatus = 'idle'
-		errorMessage = ''
+		// Wait for Svelte to render the success message
+		await tick()
+
+		// Now submit the form to open new tab
+		formElement.submit()
 	}
 </script>
 
@@ -52,7 +37,14 @@
 		<h3>{headingText}</h3>
 		<p>{descriptionText}</p>
 
-		<form on:submit|preventDefault={handleSubmit}>
+		<!-- Direct POST to Substack API in new tab -->
+		<form
+			bind:this={formElement}
+			action="https://pauseai.substack.com/api/v1/free"
+			method="POST"
+			target="_blank"
+			on:submit={handleSubmit}
+		>
 			<div class="input-group">
 				<input
 					type="email"
@@ -63,23 +55,16 @@
 					required
 					enterkeyhint="done"
 				/>
-				<a href={substackUrl} target="_blank">
-					<button type="submit">{buttonText}</button>
-				</a>
+				<input type="hidden" name="source" value="pauseai_website" />
+				<button type="submit">{buttonText}</button>
 			</div>
-
-			<p class="note">{m.newsletter_disclaimer()}</p>
-
-			{#if subscribeStatus === 'success'}
-				<div class="message success">
-					{m.newsletter_success()}
-				</div>
-			{:else if subscribeStatus === 'error'}
-				<div class="message error">
-					{errorMessage}
-				</div>
-			{/if}
 		</form>
+
+		{#if showSuccess}
+			<div class="message success">
+				{m.newsletter_success()}
+			</div>
+		{/if}
 	</div>
 </div>
 
@@ -112,13 +97,6 @@
 		display: flex;
 		flex-wrap: wrap;
 		gap: 8px;
-	}
-
-	.note {
-		font-size: 0.85rem;
-		margin-top: 0.5rem;
-		opacity: 0.8;
-		font-style: italic;
 	}
 
 	input {
@@ -160,11 +138,6 @@
 	.success {
 		background-color: #e6f7e6;
 		color: #2e7d32;
-	}
-
-	.error {
-		background-color: #fdecea;
-		color: #d50000;
 	}
 
 	@media (max-width: 600px) {

@@ -37,9 +37,8 @@
 	<meta property="twitter:description" content={description} />
 	<meta property="twitter:site" content="@PauseAI" />
 	<meta property="twitter:creator" content="@PauseAI" />
-	{@html `<script type="application/ld+json">
-        ${JSON.stringify(schemaOrgMarkup)}
-    </script>`}
+	<!-- eslint-disable-next-line svelte/no-at-html-tags (static content) @typescript-eslint/no-unused-expressions (false positive) -->
+	{@html '<script type="application/ld+json">' + JSON.stringify(schemaOrgMarkup) + '</script>'}
 </svelte:head>
 
 <div style="display: none;" data-pagefind-index-attrs="data-content" data-content={description} />

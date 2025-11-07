@@ -1,37 +1,47 @@
-import { options } from '$lib/api.js'
 import { isDev, getDevContext } from '$lib/env'
+import { AIRTABLE_API_KEY } from '$env/static/private'
 
-type AirtableRecord = {
-	id: string
-	fields: Record<string, unknown>
+/** Fetch options for getting data from Airtable */
+const OPTIONS = {
+	method: 'GET',
+	headers: {
+		Authorization: `Bearer ${AIRTABLE_API_KEY}`,
+		'Content-Type': 'application/json'
+	}
 }
 
-type AirtableResponse = {
-	records: AirtableRecord[]
+export type AirtableRecord<T> = {
+	id: string
+	fields: T
+}
+
+type AirtableResponse<T> = {
+	records: AirtableRecord<T>[]
 	offset: number
 }
 
 /**
  * Fetches all pages from Airtable API (which is limited to 100 items per page)
+ * @template T The type of the records' fields
  * @param customFetch The fetch function
  * @param url The Airtable API URL
  * @param fallbackData Optional data to return if the fetch fails (only used in development mode)
  * @returns All records from all pages, or fallbackData if in development mode and fetch fails
  */
-export async function fetchAllPages(
+export async function fetchAllPages<T = Record<string, unknown>>(
 	customFetch: typeof fetch,
 	url: string,
-	fallbackData: AirtableRecord[] = []
-) {
-	let allRecords: AirtableRecord[] = []
+	fallbackData: AirtableRecord<T>[] = []
+): Promise<AirtableRecord<T>[]> {
+	let allRecords: AirtableRecord<T>[] = []
 	// https://airtable.com/developers/web/api/list-records#query-pagesize
 	let offset
 
 	// Check if we have the API key configured
 	const apiKeyConfigured =
-		options.headers.Authorization &&
-		options.headers.Authorization !== 'Bearer undefined' &&
-		options.headers.Authorization !== 'Bearer '
+		OPTIONS.headers.Authorization &&
+		OPTIONS.headers.Authorization !== 'Bearer undefined' &&
+		OPTIONS.headers.Authorization !== 'Bearer '
 
 	// If API key is not configured
 	if (!apiKeyConfigured) {
@@ -49,7 +59,7 @@ export async function fetchAllPages(
 			const fullUrl = offset ? `${url}?offset=${offset}` : url
 			if (isDev()) console.log('Fetching from URL:', fullUrl)
 
-			const response = await customFetch(fullUrl, options)
+			const response = await customFetch(fullUrl, OPTIONS)
 			if (!response.ok) {
 				const errorText = await response.text()
 				console.error(
@@ -68,7 +78,7 @@ export async function fetchAllPages(
 				)
 			}
 
-			const data: AirtableResponse = await response.json()
+			const data: AirtableResponse<T> = await response.json()
 			allRecords = allRecords.concat(data.records)
 			offset = data.offset
 		} while (offset)

@@ -1,5 +1,5 @@
 <script lang="ts">
-	import ExternalLink from '$lib/components/custom/a.svelte'
+	import ExternalLink from '$lib/components/Link.svelte'
 	import { page } from '$app/stores'
 	import * as m from '$lib/paraglide/messages.js'
 	import { getLocale } from '$lib/paraglide/runtime.js'
@@ -12,8 +12,8 @@
 	const svelteFiles = import.meta.glob('../../routes/**/+page.svelte')
 
 	$: pathname = $page.url.pathname
-	$: currentLocale = getLocale()
-	$: isTranslatedPage = currentLocale != 'en'
+	const currentLocale = getLocale()
+	const isTranslatedPage = currentLocale != 'en'
 
 	let editUrl: string | null = null
 	let translationIssueUrl: string | null = null
@@ -83,7 +83,7 @@
 	</div>
 {:else if editUrl}
 	<ExternalLink href={editUrl}>
-		Edit{#if editUrl.startsWith(GITHUB_BASE_URL)}&nbsp;on GitHub{/if}
+		Edit page{#if editUrl.startsWith(GITHUB_BASE_URL)}&nbsp;on GitHub{/if}
 	</ExternalLink>
 {/if}
 

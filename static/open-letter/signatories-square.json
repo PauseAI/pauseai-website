@@ -1,0 +1,678 @@
+[
+	{
+		"name": "Dr Rosena Allin-Khan",
+		"displayName": "Dr Rosena Allin-Khan",
+		"type": "MP",
+		"portrait": "/portraits/signatories/commons/rosena_allin_khan.jpg",
+		"memberId": 4573,
+		"party": "Labour",
+		"format": "square",
+		"source": "square-highres",
+		"fileSize": 1653155,
+		"status": "success"
+	},
+	{
+		"name": "Lee Barron",
+		"displayName": "Lee Barron",
+		"type": "MP",
+		"portrait": "/portraits/signatories/commons/lee_barron.jpg",
+		"party": "Labour",
+		"format": "square",
+		"source": "square-highres",
+		"fileSize": 42779,
+		"status": "success"
+	},
+	{
+		"name": "Siân Berry",
+		"displayName": "Siân Berry",
+		"type": "MP",
+		"portrait": "/portraits/signatories/commons/si_n_berry.jpg",
+		"memberId": 5314,
+		"party": "Green Party",
+		"format": "square",
+		"source": "square-highres",
+		"fileSize": 1218212,
+		"status": "success"
+	},
+	{
+		"name": "Ellie Chowns",
+		"displayName": "Ellie Chowns",
+		"type": "MP",
+		"portrait": "/portraits/signatories/commons/ellie_chowns.jpg",
+		"memberId": 5249,
+		"party": "Green Party",
+		"format": "square",
+		"source": "square-highres",
+		"fileSize": 1877079,
+		"status": "success"
+	},
+	{
+		"name": "Ann Davies",
+		"displayName": "Ann Davies",
+		"type": "MP",
+		"portrait": "/portraits/signatories/commons/ann_davies.jpg",
+		"memberId": 5177,
+		"party": "Plaid Cymru",
+		"format": "square",
+		"source": "square-highres",
+		"fileSize": 1999922,
+		"status": "success"
+	},
+	{
+		"name": "Carla Denyer",
+		"displayName": "Carla Denyer",
+		"type": "MP",
+		"portrait": "/portraits/signatories/commons/carla_denyer.jpg",
+		"memberId": 5102,
+		"party": "Green Party",
+		"format": "square",
+		"source": "square-highres",
+		"fileSize": 1628030,
+		"status": "success"
+	},
+	{
+		"name": "Ben Lake",
+		"displayName": "Ben Lake",
+		"type": "MP",
+		"portrait": "/portraits/signatories/commons/ben_lake.jpg",
+		"memberId": 4630,
+		"party": "Plaid Cymru",
+		"format": "square",
+		"source": "square-highres",
+		"fileSize": 1310652,
+		"status": "success"
+	},
+	{
+		"name": "Llinos Medi",
+		"displayName": "Llinos Medi",
+		"type": "MP",
+		"portrait": "/portraits/signatories/commons/llinos_medi.jpg",
+		"memberId": 5085,
+		"party": "Plaid Cymru",
+		"format": "square",
+		"source": "square-highres",
+		"fileSize": 1983758,
+		"status": "success"
+	},
+	{
+		"name": "Iqbal Mohamed",
+		"displayName": "Iqbal Mohamed",
+		"type": "MP",
+		"portrait": "/portraits/signatories/commons/iqbal_mohamed.jpg",
+		"memberId": 5268,
+		"party": "Independent",
+		"format": "square",
+		"source": "square-highres",
+		"fileSize": 1219588,
+		"status": "success"
+	},
+	{
+		"name": "Yasmin Qureshi",
+		"displayName": "Yasmin Qureshi",
+		"type": "MP",
+		"portrait": "/portraits/signatories/commons/yasmin_qureshi.jpg",
+		"memberId": 3924,
+		"party": "Labour",
+		"format": "square",
+		"source": "square-highres",
+		"fileSize": 993544,
+		"status": "success"
+	},
+	{
+		"name": "Adrian Ramsay",
+		"displayName": "Adrian Ramsay",
+		"type": "MP",
+		"portrait": "/portraits/signatories/commons/adrian_ramsay.jpg",
+		"memberId": 5320,
+		"party": "Green Party",
+		"format": "square",
+		"source": "square-highres",
+		"fileSize": 1864303,
+		"status": "success"
+	},
+	{
+		"name": "Liz Saville Roberts",
+		"displayName": "Liz Saville Roberts",
+		"type": "MP",
+		"portrait": "/portraits/signatories/commons/liz_saville_roberts.jpg",
+		"memberId": 4521,
+		"party": "Plaid Cymru",
+		"format": "square",
+		"source": "square-highres",
+		"fileSize": 1475241,
+		"status": "success"
+	},
+	{
+		"name": "Sir Desmond Swayne",
+		"displayName": "Sir Desmond Swayne",
+		"type": "MP",
+		"portrait": "/portraits/signatories/commons/desmond_swayne.jpg",
+		"memberId": 55,
+		"party": "Conservative",
+		"format": "square",
+		"source": "square-highres",
+		"fileSize": 1972208,
+		"status": "success"
+	},
+	{
+		"name": "Lord Browne of Ladyton",
+		"displayName": "Lord Browne of Ladyton",
+		"type": "Lord",
+		"portrait": "/portraits/signatories/lords/browne.jpg",
+		"memberId": 620,
+		"party": "Labour",
+		"format": "square",
+		"source": "square-highres",
+		"fileSize": 2108378,
+		"status": "success"
+	},
+	{
+		"name": "Lord Campbell-Savours",
+		"displayName": "Lord Campbell-Savours",
+		"type": "Lord",
+		"portrait": "/portraits/signatories/lords/campbell_savours.jpg",
+		"memberId": 499,
+		"party": "Labour",
+		"format": "square",
+		"source": "square-highres",
+		"fileSize": 888742,
+		"status": "success"
+	},
+	{
+		"name": "Lord Cashman",
+		"displayName": "Lord Cashman",
+		"type": "Lord",
+		"portrait": "/portraits/signatories/lords/cashman.jpg",
+		"memberId": 4340,
+		"party": "Non-affiliated",
+		"format": "square",
+		"source": "square-highres",
+		"fileSize": 2196452,
+		"status": "success"
+	},
+	{
+		"name": "Baroness Chakrabarti",
+		"displayName": "Baroness Chakrabarti",
+		"type": "Baroness",
+		"portrait": "/portraits/signatories/lords/chakrabarti.jpg",
+		"memberId": 4579,
+		"party": "Labour",
+		"format": "square",
+		"source": "square-highres",
+		"fileSize": 801804,
+		"status": "success"
+	},
+	{
+		"name": "Viscount Colville of Culross",
+		"displayName": "Viscount Colville of Culross",
+		"type": "Lord",
+		"portrait": "/portraits/signatories/lords/colville.jpg",
+		"memberId": 3421,
+		"status": "success",
+		"reason": "No square portrait available"
+	},
+	{
+		"name": "Baroness D'Souza",
+		"displayName": "Baroness D'Souza",
+		"type": "Baroness",
+		"portrait": "/portraits/signatories/lords/d_souza.jpg",
+		"memberId": 3709,
+		"party": "Crossbench",
+		"format": "square",
+		"source": "square-highres",
+		"fileSize": 2152516,
+		"status": "success"
+	},
+	{
+		"name": "Baroness Featherstone",
+		"displayName": "Baroness Featherstone",
+		"type": "Baroness",
+		"portrait": "/portraits/signatories/lords/featherstone.jpg",
+		"memberId": 1531,
+		"party": "Liberal Democrat",
+		"format": "square",
+		"source": "square-highres",
+		"fileSize": 1953826,
+		"status": "success"
+	},
+	{
+		"name": "Baroness Foster of Aghadrumsee",
+		"displayName": "Baroness Foster of Aghadrumsee",
+		"type": "Baroness",
+		"portrait": "/portraits/signatories/lords/foster.jpg",
+		"memberId": 4969,
+		"party": "Non-affiliated",
+		"format": "square",
+		"source": "square-highres",
+		"fileSize": 1812775,
+		"status": "success"
+	},
+	{
+		"name": "Baroness Harris of Richmond",
+		"displayName": "Baroness Harris of Richmond",
+		"type": "Baroness",
+		"portrait": "/portraits/signatories/lords/harris.jpg",
+		"memberId": 2505,
+		"party": "Liberal Democrat",
+		"format": "square",
+		"source": "square-highres",
+		"fileSize": 1684848,
+		"status": "success"
+	},
+	{
+		"name": "Baroness Kennedy of The Shaws",
+		"displayName": "Baroness Kennedy of The Shaws",
+		"type": "Baroness",
+		"portrait": "/portraits/signatories/lords/kennedy.jpg",
+		"memberId": 1987,
+		"party": "Labour",
+		"format": "square",
+		"source": "square-highres",
+		"fileSize": 2008211,
+		"status": "success"
+	},
+	{
+		"name": "Baroness Kidron",
+		"displayName": "Baroness Kidron",
+		"type": "Baroness",
+		"portrait": "/portraits/signatories/lords/kidron.jpg",
+		"memberId": 4258,
+		"party": "Crossbench",
+		"format": "square",
+		"source": "square-highres",
+		"fileSize": 1834980,
+		"status": "success"
+	},
+	{
+		"name": "Lord Knight of Weymouth",
+		"displayName": "Lord Knight of Weymouth",
+		"type": "Lord",
+		"portrait": "/portraits/signatories/lords/knight.jpg",
+		"memberId": 4160,
+		"party": "Labour",
+		"format": "square",
+		"source": "square-highres",
+		"fileSize": 836476,
+		"status": "success"
+	},
+	{
+		"name": "The Lord Bishop of Leeds",
+		"displayName": "The Lord Bishop of Leeds",
+		"type": "Bishop",
+		"portrait": "/portraits/signatories/lords/leeds.jpg",
+		"memberId": 4349,
+		"party": "Bishops",
+		"format": "square",
+		"source": "square-highres",
+		"fileSize": 1170384,
+		"status": "success"
+	},
+	{
+		"name": "Lord McNally",
+		"displayName": "Lord McNally",
+		"type": "Lord",
+		"portrait": "/portraits/signatories/lords/mcnally.jpg",
+		"memberId": 919,
+		"party": "Liberal Democrat",
+		"format": "square",
+		"source": "square-highres",
+		"fileSize": 999732,
+		"status": "success"
+	},
+	{
+		"name": "Baroness Miller of Chilthorne Domer",
+		"displayName": "Baroness Miller of Chilthorne Domer",
+		"type": "Baroness",
+		"portrait": "/portraits/signatories/lords/miller.jpg",
+		"memberId": 1934,
+		"party": "Liberal Democrat",
+		"format": "square",
+		"source": "square-highres",
+		"fileSize": 2218468,
+		"status": "success"
+	},
+	{
+		"name": "Baroness Morris of Yardley",
+		"displayName": "Baroness Morris of Yardley",
+		"type": "Baroness",
+		"portrait": "/portraits/signatories/lords/morris.jpg",
+		"memberId": 305,
+		"party": "Labour",
+		"format": "square",
+		"source": "square-highres",
+		"fileSize": 1941888,
+		"status": "success"
+	},
+	{
+		"name": "The Lord Bishop of Oxford",
+		"displayName": "The Lord Bishop of Oxford",
+		"type": "Bishop",
+		"portrait": "/portraits/signatories/lords/oxford.jpg",
+		"memberId": 3204,
+		"status": "success",
+		"reason": "No square portrait available"
+	},
+	{
+		"name": "Baroness Prashar",
+		"displayName": "Baroness Prashar",
+		"type": "Baroness",
+		"portrait": "/portraits/signatories/lords/prashar.jpg",
+		"memberId": 2476,
+		"party": "Crossbench",
+		"format": "square",
+		"source": "square-highres",
+		"fileSize": 1626159,
+		"status": "success"
+	},
+	{
+		"name": "Baroness Ritchie of Downpatrick",
+		"displayName": "Baroness Ritchie of Downpatrick",
+		"type": "Baroness",
+		"portrait": "/portraits/signatories/lords/ritchie.jpg",
+		"memberId": 4130,
+		"party": "Labour",
+		"format": "square",
+		"source": "square-highres",
+		"fileSize": 1922370,
+		"status": "success"
+	},
+	{
+		"name": "Lord Singh of Wimbledon",
+		"displayName": "Lord Singh of Wimbledon",
+		"type": "Lord",
+		"portrait": "/portraits/signatories/lords/singh.jpg",
+		"memberId": 4251,
+		"party": "Crossbench",
+		"format": "square",
+		"source": "square-highres",
+		"fileSize": 871946,
+		"status": "success"
+	},
+	{
+		"name": "Lord Strasburger",
+		"displayName": "Lord Strasburger",
+		"type": "Lord",
+		"portrait": "/portraits/signatories/lords/strasburger.jpg",
+		"memberId": 4204,
+		"party": "Liberal Democrat",
+		"format": "square",
+		"source": "square-highres",
+		"fileSize": 1233805,
+		"status": "success"
+	},
+	{
+		"name": "Baroness Uddin",
+		"displayName": "Baroness Uddin",
+		"type": "Baroness",
+		"portrait": "/portraits/signatories/lords/uddin.jpg",
+		"memberId": 1827,
+		"party": "Non-affiliated",
+		"format": "square",
+		"source": "square-highres",
+		"fileSize": 1838166,
+		"status": "success"
+	},
+	{
+		"name": "Clare Adamson",
+		"type": "MSP",
+		"portrait": "/portraits/signatories/scotland/clare_adamson.jpg",
+		"status": "success",
+		"chamber": "scotland",
+		"error": "HTTP 403",
+		"fileSize": 121779,
+		"source": "wikipedia"
+	},
+	{
+		"name": "Miles Briggs",
+		"type": "MSP",
+		"portrait": "/portraits/signatories/scotland/miles_briggs.jpg",
+		"status": "success",
+		"chamber": "scotland",
+		"error": "HTTP 403",
+		"fileSize": 648578,
+		"source": "wikipedia"
+	},
+	{
+		"name": "Ariane Burgess",
+		"type": "MSP",
+		"portrait": "/portraits/signatories/scotland/ariane_burgess.jpg",
+		"status": "success",
+		"chamber": "scotland",
+		"error": "HTTP 403",
+		"fileSize": 306089,
+		"source": "wikipedia"
+	},
+	{
+		"name": "Finlay Carson",
+		"type": "MSP",
+		"portrait": "/portraits/signatories/scotland/finlay_carson.jpg",
+		"status": "success",
+		"chamber": "scotland",
+		"error": "HTTP 403",
+		"fileSize": 126040,
+		"source": "wikipedia"
+	},
+	{
+		"name": "Alex Cole-Hamilton",
+		"type": "MSP",
+		"portrait": "/portraits/signatories/scotland/alex_cole_hamilton.jpg",
+		"status": "success",
+		"chamber": "scotland",
+		"error": "HTTP 403",
+		"fileSize": 206383,
+		"source": "wikipedia"
+	},
+	{
+		"name": "Bill Kidd",
+		"type": "MSP",
+		"portrait": "/portraits/signatories/scotland/bill_kidd.jpg",
+		"status": "success",
+		"chamber": "scotland",
+		"error": "HTTP 403",
+		"fileSize": 19665,
+		"source": "wikipedia"
+	},
+	{
+		"name": "Stuart McMillan",
+		"type": "MSP",
+		"portrait": "/portraits/signatories/scotland/stuart_mcmillan.jpg",
+		"status": "success",
+		"chamber": "scotland",
+		"error": "HTTP 403",
+		"fileSize": 20958,
+		"source": "wikipedia"
+	},
+	{
+		"name": "Willie Rennie",
+		"type": "MSP",
+		"portrait": "/portraits/signatories/scotland/willie_rennie.jpg",
+		"status": "success",
+		"chamber": "scotland",
+		"error": "HTTP 403",
+		"fileSize": 56223,
+		"source": "wikipedia"
+	},
+	{
+		"name": "Michelle Thomson",
+		"type": "MSP",
+		"portrait": "/portraits/signatories/scotland/michelle_thomson.jpg",
+		"status": "success",
+		"chamber": "scotland",
+		"error": "HTTP 403",
+		"fileSize": 76394,
+		"source": "wikipedia"
+	},
+	{
+		"name": "Elena Whitham",
+		"type": "MSP",
+		"portrait": "/portraits/signatories/scotland/elena_whitham.jpg",
+		"status": "success",
+		"chamber": "scotland",
+		"error": "HTTP 403",
+		"fileSize": 15383312,
+		"source": "wikipedia"
+	},
+	{
+		"name": "Doug Beattie MC",
+		"type": "MLA",
+		"portrait": "/portraits/signatories/ni/doug_beattie.jpg",
+		"status": "success",
+		"chamber": "ni"
+	},
+	{
+		"name": "Keith Buchanan",
+		"type": "MLA",
+		"portrait": "/portraits/signatories/ni/keith-buchanan.jpg",
+		"status": "success",
+		"chamber": "ni"
+	},
+	{
+		"name": "Gerry Carroll",
+		"type": "MLA",
+		"portrait": "/portraits/signatories/ni/gerry_carroll.jpg",
+		"status": "success",
+		"chamber": "ni"
+	},
+	{
+		"name": "Stewart Dickson",
+		"type": "MLA",
+		"portrait": "/portraits/signatories/ni/stewart_dickson.jpg",
+		"status": "success",
+		"chamber": "ni"
+	},
+	{
+		"name": "Connie Egan",
+		"type": "MLA",
+		"portrait": "/portraits/signatories/ni/connie_egan.jpg",
+		"status": "success",
+		"chamber": "ni"
+	},
+	{
+		"name": "Deborah Erskine",
+		"type": "MLA",
+		"portrait": "/portraits/signatories/ni/deborah_erskine.jpg",
+		"status": "success",
+		"chamber": "ni"
+	},
+	{
+		"name": "Harry Harvey",
+		"type": "MLA",
+		"portrait": "/portraits/signatories/ni/harry_harvey.jpg",
+		"status": "success",
+		"chamber": "ni"
+	},
+	{
+		"name": "Naomi Long",
+		"type": "MLA",
+		"portrait": "/portraits/signatories/ni/naomi_long.jpg",
+		"status": "success",
+		"chamber": "ni"
+	},
+	{
+		"name": "Peter Martin",
+		"type": "MLA",
+		"portrait": "/portraits/signatories/ni/peter_martin.jpg",
+		"status": "success",
+		"chamber": "ni"
+	},
+	{
+		"name": "Sinéad McLaughlin",
+		"type": "MLA",
+		"portrait": "/portraits/signatories/ni/sinead_mclaughlin.jpg",
+		"status": "success",
+		"chamber": "ni"
+	},
+	{
+		"name": "Luke Fletcher",
+		"type": "MS",
+		"portrait": "/portraits/signatories/senedd/luke_fletcher.jpg",
+		"status": "success",
+		"chamber": "wales",
+		"fileSize": 8657950
+	},
+	{
+		"name": "Heledd Fychan",
+		"type": "MS",
+		"portrait": "/portraits/signatories/senedd/heledd_fychan.jpg",
+		"status": "success",
+		"chamber": "wales",
+		"fileSize": 4041112
+	},
+	{
+		"name": "Mike Hedges",
+		"type": "MS",
+		"portrait": "/portraits/signatories/senedd/mike_hedges.jpg",
+		"status": "success",
+		"chamber": "wales",
+		"fileSize": 947073
+	},
+	{
+		"name": "Delyth Jewell",
+		"type": "MS",
+		"portrait": "/portraits/signatories/senedd/delyth_jewell.jpg",
+		"status": "success",
+		"chamber": "wales"
+	},
+	{
+		"name": "George Freeman",
+		"type": "MP",
+		"portrait": "/portraits/signatories/commons/george_freeman.jpg",
+		"status": "success",
+		"chamber": "commons",
+		"fileSize": 1041640
+	},
+	{
+		"name": "Jenny Rathbone",
+		"type": "MS",
+		"portrait": "/portraits/signatories/senedd/jenny_rathbone.jpg",
+		"status": "success",
+		"chamber": "wales",
+		"fileSize": 3854657
+	},
+	{
+		"name": "Carolyn Thomas",
+		"type": "MS",
+		"portrait": "/portraits/signatories/senedd/carolyn_thomas.jpg",
+		"status": "success",
+		"chamber": "wales",
+		"fileSize": 77322
+	},
+	{
+		"name": "Lee Waters",
+		"type": "MS",
+		"portrait": "/portraits/signatories/senedd/lee_waters.jpg",
+		"status": "success",
+		"chamber": "wales",
+		"fileSize": 1041640
+	},
+	{
+		"name": "PauseAI Global",
+		"type": "Organization",
+		"portrait": null,
+		"status": "organization"
+	},
+	{
+		"name": "Open Rights Group",
+		"type": "Organization",
+		"portrait": null,
+		"status": "organization"
+	},
+	{
+		"name": "Connected by Data",
+		"type": "Organization",
+		"portrait": null,
+		"status": "organization"
+	},
+	{
+		"name": "Open Data Manchester",
+		"type": "Organization",
+		"portrait": null,
+		"status": "organization"
+	},
+	{
+		"name": "Safe AI for Children Alliance",
+		"type": "Organization",
+		"portrait": null,
+		"status": "organization"
+	}
+]
