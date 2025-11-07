@@ -1,6 +1,6 @@
 <script lang="ts">
 	import Button from '$lib/components/Button.svelte'
-	import ExternalLink from '$lib/components/custom/a.svelte'
+	import ExternalLink from '$lib/components/Link.svelte'
 	import consent from '$lib/components/widget-consent/WidgetConsentStore'
 	import loadTwitter from '$lib/components/widget-consent/loadTwitter'
 
@@ -9,8 +9,8 @@
 	$: {
 		if (wrapper) {
 			loadTwitter()
-			;(window as any).twttr.ready(() => {
-				if (wrapper) (window as any).twttr.load(wrapper)
+			window.twttr?.ready(() => {
+				if (wrapper) window.twttr?.load(wrapper)
 			})
 		}
 	}

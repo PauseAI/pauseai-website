@@ -1,8 +1,61 @@
-# PauseAI.info website
+# PauseAI.info Website
 
 [![Netlify Status](https://api.netlify.com/api/v1/badges/628797a4-8d5a-4b5f-94d7-236b4604b23c/deploy-status)](https://app.netlify.com/sites/pauseai/deploys)
 
-SvelteKit website for [PauseAI.info](https://pauseai.info/).
+A SvelteKit website for [PauseAI.info](https://pauseai.info/) with automatic localization (l10n) support.
+
+## What is Localization (L10n)?
+
+Localization goes beyond simple translation — it adapts content for specific locales (e.g., `en`, `de`, sometimes more complicated combinations such as `en-US` or `fr-CA`). While translating text between languages is a major part of l10n, true localization also considers cultural context, regional preferences, and local conventions. This project can use LLMs to automatically generate locale-appropriate content.
+
+If you are not yourself developing/changing the l10n system, you can let it run automatically.
+
+## Quick Start
+
+```bash
+# Clone the repository
+git clone git@github.com:PauseAI/pauseai-website.git
+cd pauseai-website
+
+# Install dependencies (we use pnpm, but npm or yarn also work)
+pnpm install
+
+# Start development server (en-only mode)
+pnpm dev
+
+# Open http://localhost:37572
+```
+
+That's it! By default, all commands run in English-only mode for maximum speed. No API keys or special setup required.
+
+## Development Commands
+
+| Command        | Description                                  |
+| -------------- | -------------------------------------------- |
+| `pnpm dev`     | Start development server                     |
+| `pnpm build`   | Build for production                         |
+| `pnpm preview` | Preview production build                     |
+| `pnpm test`    | Run test suite                               |
+| `pnpm lint`    | Check code style                             |
+| `pnpm format`  | Auto-fix code style                          |
+| `pnpm clean`   | Clean build artifacts and caches             |
+| `pnpm l10n`    | Run l10n manually (see [L10N.md](./L10N.md)) |
+| `pnpm netlify` | Show Netlify preview options                 |
+
+## Environment Setup - for l10n and some dynamic pages
+
+To make some development choices, including seeing dynamic pages or l10ns locally, you'll have to set up your development environment.
+
+- But **no `.env` is needed** for basic development
+- **Dynamic content** (teams, chat, geo, email validation, write features) needs API keys but has fallbacks
+- **Multiple locales** needs `PARAGLIDE_LOCALES` set, while **developing the l10n system itself** usually also needs an OpenRouter API key
+
+Just start by copying the environment template. Comments in the template explain more about each option.
+
+```bash
+cp template.env .env
+# then edit .env to add API keys and configure locales if required
+```
 
 ## Creating Articles
 
@@ -31,47 +84,81 @@ You can create and edit most content using [Decap CMS](https://pauseai-cms.netli
    - **Ready**: The article is ready to be published.
 8. Decap CMS will automatically create a pull request on GitHub to submit your changes for review.
 
-The article will be published (and localized) automatically after approval.
+The article (and automatic l10ns of same) will be previewable.
 
-If you are sufficiently changing prominent text, consider inspecting the relevant automatic localizations/translations as a preview.
+If you are sufficiently changing prominent text, consider inspecting relevant l10ns as well as the original.
 
-## Running locally
+### Image Optimization
 
-```bash
-  git clone git@github.com:PauseAI/pauseai-website.git
+To improve performance, images are automatically processed and delivered in multiple formats (e.g., WebP, AVIF) and resolutions. This is handled by the `Image` Svelte component, which optimizes images located in the `src/assets/images` directory.
 
-  # Instead of pnpm you could use npm or yarn
+#### Usage
 
-  # Install dependencies
-  pnpm install
+To use optimized images, first, ensure your image file (e.g., `my-image.png`) is located within the `src/assets/images` directory. Then, choose one of the following methods to embed it:
 
-  # Start development server. If it needs to, it will perform some further development setup before it runs.
-  pnpm dev
+- **In Markdown Files:** Use standard Markdown image syntax. The system will automatically process the image through the `Image` component. The path in the Markdown should be relative to `src/assets/images` and start with a forward slash `/`.
 
-  # Open http://localhost:37572
+  Example:
+
+  ```markdown
+  ![A description of my image](/my-image.png)
+  ```
+
+  If your image is in a subdirectory, for example `src/assets/images/illustrations/another-image.jpg`, the path would be:
+
+  ```markdown
+  ![Another image description](/illustrations/another-image.jpg)
+  ```
+
+- **In Svelte Components:** If you need to use the `Image` component directly in a Svelte component, import it and pass the `src` prop relative to `src/assets/images` and starting with a forward slash `/`.
+
+  Example:
+
+  ```svelte
+  <script>
+  	import Image from '$lib/components/Image.svelte'
+  </script>
+
+  <Image src="/my-image.png" alt="A description of my image" />
+  ```
+
+## Redirects
+
+The `src/lib/redirects.ts` file defines server-side redirects for specific paths. This is useful for handling cases like old URLs or vanity URLs.
+
+The `REDIRECTS` object maps incoming paths to their target paths. When a request comes in for a path defined in `REDIRECTS`, the `handleRedirects` function issues a 301 (Moved Permanently) redirect to the specified target.
+
+Example:
+
+```typescript
+const REDIRECTS: Record<string, string> = {
+	'/old-path': '/new-path',
+	'/legacy-page': '/current-page'
+}
 ```
 
-## Working with locales and other features
-
-To make other development choices, including building locally rather than running under dev, you'll have to set up your development environment.
-
-Start by copying the environment template.
-
-```bash
-cp template.env .env
-```
-
-The setup script and copied template explain more.
-
-Briefly, some dynamic pages need API keys for service calls, and website translations require more opting in.
-
-We cache content for other locales in a [git repository](https://github.com/PauseAI/paraglide) that you clone locally. That's enough to access existing translations for other locales during local development - set the ones you want in your environment. New/changed translations are generated using LLMs, and you can further opt in to test that locally and even add new locales in `project.inlang/settings.json`, but for day-to-day content changes it is easier to wait for any updated translations to be automatically generated by our pre-production build, and previewed.
+To add a new redirect, simply add a new entry to the `REDIRECTS` object in `src/lib/redirects.ts`.
 
 ## Deployment
 
 The contents of the repository are continuously deployed to Netlify when code is pushed.
 
 You can track the deployment status [here](https://app.netlify.com/sites/pauseai/deploys).
+
+## Troubleshooting
+
+### Windows Developer Mode (for symlinks)
+
+If you are developing on Windows and encounter permission errors when creating symlinks (e.g., during the build process), you may need to enable Windows Developer Mode. This is required for certain operations, including the creation of symbolic links.
+
+To enable Developer Mode:
+
+1.  Go to **Settings** > **Privacy & security** > **For developers**.
+2.  Toggle the **Developer Mode** option to **On**.
+
+### Node.js Version
+
+Ensure you are using the correct Node.js version as specified in `.nvmrc`. Even if you have the correct version installed via `nvm`, you may need to enable it for your current shell session using `nvm use`.
 
 ## Collaboration
 

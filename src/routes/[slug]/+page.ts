@@ -1,4 +1,3 @@
-import type { FrontmatterMeta } from '$lib/types'
 import { error } from '@sveltejs/kit'
 import { getLocale } from '$lib/paraglide/runtime'
 import type { PageLoad } from './$types'
@@ -14,7 +13,7 @@ export const load: PageLoad = async ({ params: { slug }, depends }) => {
 			meta,
 			slug
 		}
-	} catch (e) {
+	} catch {
 		throw error(404, `Could not find ${slug}`)
 	}
 }
@@ -25,7 +24,7 @@ async function importMarkdown(locale: string, slug: string) {
 		return await import(`../../posts/${slug}.md`)
 	} else {
 		try {
-			return await import(`../../temp/translations/md/${locale}/${slug}.md`)
+			return await import(`../../../l10n-cage/md/${locale}/${slug}.md`)
 		} catch (error) {
 			if (import.meta.env.DEV) {
 				return {

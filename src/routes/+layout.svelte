@@ -4,7 +4,7 @@
 	import Hero from '$lib/components/Hero.svelte'
 	import NearbyEvent from '$lib/components/NearbyEvent.svelte'
 	import Toc from '$lib/components/Toc.svelte'
-	import ExternalLink from '$lib/components/custom/a.svelte'
+	import ExternalLink from '$lib/components/Link.svelte'
 	import { deLocalizeHref } from '$lib/paraglide/runtime'
 	import '@fontsource/roboto-slab/300.css'
 	import '@fontsource/roboto-slab/500.css'
@@ -17,6 +17,7 @@
 	import Footer from './footer.svelte'
 	import Header from './header.svelte'
 	import PageTransition from './transition.svelte'
+	import type { GeoApiResponse } from '$api/geo/+server'
 
 	export let data
 
@@ -24,6 +25,7 @@
 	// This prevents "undefined" issues during navigation
 
 	let eventFound: boolean
+	let geo: GeoApiResponse | null
 	// Show the hero on the homepage, but nowhere else
 	$: hero = deLocalizeHref($page.url.pathname) === '/'
 </script>
@@ -42,15 +44,33 @@
 	</Banner>
 {/if}
 
-<NearbyEvent contrast={hero} bind:eventFound />
+<NearbyEvent contrast={hero} bind:eventFound bind:geo />
 {#if !eventFound}
-	<Banner contrast={hero}>
-		Join us at <ExternalLink href="https://pausecon.org/">PauseCon London</ExternalLink> from June 27th
-		to 30th!
-	</Banner>
+	{#if geo?.country?.code === 'US' && geo?.subdivision?.code === 'CA' && false}
+		<Banner>
+			<b
+				>HELP US SAVE CALIFORNIA'S AI SAFETY BILL BEFORE WEDNESDAY | <ExternalLink
+					href="https://mailchi.mp/b8cf67a40299/join-us-tomorrow-for-our-fast-action-workshop-17457535"
+					>ACT NOW »</ExternalLink
+				></b
+			>
+		</Banner>
+	{:else}
+		<Banner contrast={hero} hidden={true}>
+			Join us at <ExternalLink href="https://pausecon.org/">PauseCon London</ExternalLink> from June
+			27th to 30th!
+		</Banner>
+	{/if}
 {/if}
 
 <div class="layout" class:with-hero={hero}>
+	{#if $page.route.id === '/sayno'}
+		<!-- Dynamic import and render the selfie UX component -->
+		{#await import('./sayno/SelfieUX.svelte') then module}
+			<svelte:component this={module.default} />
+		{/await}
+	{/if}
+
 	{#if hero}
 		<Hero />
 	{/if}
@@ -75,7 +95,7 @@
 	}}
 />
 
-{#if !['/', '/outcomes', '/pdoom', '/quotes'].includes(deLocalizeHref($page.url.pathname))}
+{#if !['/', '/outcomes', '/pdoom', '/quotes', '/dear-sir-demis-2025'].includes(deLocalizeHref($page.url.pathname))}
 	<Toc />
 {/if}
 

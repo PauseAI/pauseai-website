@@ -1,6 +1,7 @@
 <script lang="ts">
 	import PostMeta from '$lib/components/PostMeta.svelte'
-	import ExternalLink from '$lib/components/custom/a.svelte'
+	import ExternalLink from '$lib/components/Link.svelte'
+	import CommunitiesList from './CommunitiesList.svelte'
 	import type { GeoApiResponse } from '$api/geo/+server'
 	import type * as maplibregl from 'maplibre-gl'
 	import { GeolocateControl, Map, Marker, Popup } from 'maplibre-gl'
@@ -12,6 +13,8 @@
 
 	export let data
 
+	const LOCATED_ZOOM = 4
+
 	let { title, description, date } = communitiesMeta
 
 	let map: maplibregl.Map
@@ -20,12 +23,11 @@
 	let lat: number
 	let zoom: number
 
-	let userLng: number | undefined
-	let userLat: number | undefined
-
 	lng = -71.224518
 	lat = 42.213995
 	zoom = 1
+
+	console.log('communities page.svelte', communities)
 
 	function updateData() {
 		zoom = map.getZoom()
@@ -38,20 +40,27 @@
 			const response = await fetch('/api/geo')
 			if (response.ok) {
 				const geoData: GeoApiResponse = await response.json()
-				userLng = geoData.longitude
-				userLat = geoData.latitude
+				return {
+					userLng: geoData.longitude,
+					userLat: geoData.latitude
+				}
 			} else {
 				console.error('Failed to fetch user location:', response.statusText)
 			}
 		} catch (error) {
 			console.error('Error fetching user location:', error)
 		}
+		return {}
 	}
 
 	onMount(async () => {
-		await fetchUserLocation()
+		const { userLng, userLat } = await fetchUserLocation()
 
-		const initialState = { lng: userLng || lng, lat: userLat || lat, zoom: zoom }
+		const initialState = {
+			lng: userLng || lng,
+			lat: userLat || lat,
+			zoom: userLat && userLng ? LOCATED_ZOOM : zoom
+		}
 
 		map = new Map({
 			container: mapContainer,
@@ -88,7 +97,12 @@
 		map.on('load', () => {
 			communities.map((community) => {
 				new Marker({
-					color: community.adjacent ? 'rgba(0,0,0,.5)' : 'rgb(255, 148, 22)',
+					color:
+						community.type === 'adjacent'
+							? 'rgba(0,0,0,.5)'
+							: community.type === 'national'
+								? 'rgb(0, 150, 255)'
+								: 'rgb(255, 148, 22)',
 					opacityWhenCovered: '0'
 				})
 					.setPopup(
@@ -128,6 +142,7 @@
 		<div class="map" bind:this={mapContainer} />
 	</div>
 </div>
+<CommunitiesList {communities} />
 
 <style>
 	.map-wrap {

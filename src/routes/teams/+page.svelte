@@ -1,6 +1,6 @@
 <script lang="ts">
 	import PostMeta from '$lib/components/PostMeta.svelte'
-	import A from '$lib/components/custom/a.svelte'
+	import Link from '$lib/components/Link.svelte'
 	import { meta } from './meta'
 	import Team from './team.svelte'
 	import SvelteMarkdown from 'svelte-markdown'
@@ -24,7 +24,7 @@ Other than that, Teams are free to choose how they want to work.
 Check out the [vacancies](/vacancies) to see some specific roles that you could take.
 If you want to create a new team, reach out to the Oversight team leader (see below).
 `}
-	renderers={{ link: A }}
+	renderers={{ link: Link }}
 />
 
 <section data-pagefind-ignore>
@@ -40,8 +40,8 @@ If you want to create a new team, reach out to the Oversight team leader (see be
 <h2>Become a volunteer</h2>
 
 <p>
-	If you want to join one of the teams, reach out to the team leader and <A
-		href="https://pauseai.info/join">sign up as a volunteer!</A
+	If you want to join one of the teams, reach out to the team leader and <Link
+		href="https://pauseai.info/join">sign up as a volunteer!</Link
 	>
 </p>
 

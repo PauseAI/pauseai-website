@@ -7,6 +7,6 @@ if (!USE_EDGE_FUNCTIONS) {
 }
 
 const manifest = await readEdgeManifest()
-const renderFunction = await searchRenderFunction(manifest)
+const renderFunction = searchRenderFunction(manifest)!
 renderFunction.cache = 'manual'
 await writeEdgeManifest(manifest)

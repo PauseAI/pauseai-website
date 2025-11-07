@@ -4,15 +4,18 @@ import dotenv from 'dotenv'
 import fs from 'fs'
 import path from 'path'
 import { defineConfig } from 'vite'
+import lucidePreprocess from 'vite-plugin-lucide-preprocess'
+import { importRuntimeWithoutVite } from './scripts/l10n/utils'
 import { isDev } from './src/lib/env'
 import { MARKDOWN_L10NS } from './src/lib/l10n'
-import { locales as compiledLocales } from './src/lib/paraglide/runtime'
+
+const { locales: compiledLocales } = await importRuntimeWithoutVite()
 
 function getLocaleExcludePatterns(): RegExp[] {
 	const md = path.resolve(MARKDOWN_L10NS)
-	const reposLocales = fs
-		.readdirSync(md)
-		.filter((item) => fs.statSync(path.join(md, item)).isDirectory())
+	const reposLocales = fs.existsSync(md)
+		? fs.readdirSync(md).filter((item) => fs.statSync(path.join(md, item)).isDirectory())
+		: [] // the directory may not exist when running tests
 	//  console.debug(`📁 Locale directories found in repos: ${reposLocales.join(', ')}`)
 	const locales: readonly string[] = compiledLocales
 	const toExclude = reposLocales.filter((locale) => !locales.includes(locale))
@@ -25,7 +28,7 @@ function getLocaleExcludePatterns(): RegExp[] {
 	})
 }
 
-export default defineConfig(({ command, mode }) => {
+export default defineConfig(() => {
 	// Guarantees server can see .env (on e.g. hot restart)
 	dotenv.config({ override: true })
 
@@ -36,7 +39,11 @@ export default defineConfig(({ command, mode }) => {
 		},
 
 		server: {
-			port: 37572
+			port: 37572,
+			fs: {
+				// Allow serving files from l10n-cage directory
+				allow: [MARKDOWN_L10NS]
+			}
 		},
 
 		// Improve build performance and reduce log output
@@ -57,7 +64,7 @@ export default defineConfig(({ command, mode }) => {
 			rollupOptions: {
 				external: getLocaleExcludePatterns()
 			}
-		},
-		plugins: [enhancedImages(), sveltekit()]
+		} as const,
+		plugins: [lucidePreprocess(), enhancedImages(), sveltekit()]
 	}
 })

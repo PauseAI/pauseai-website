@@ -7,6 +7,6 @@ export const ssr = false
 
 export async function load({ fetch }) {
 	const res = await fetch(STYLE_URL)
-	const style = (await res.json()) as StyleSpecification
+	const style: StyleSpecification = await res.json()
 	return { style }
 }

@@ -18,7 +18,7 @@
 	import '@glidejs/glide/dist/css/glide.core.css'
 	import { onMount } from 'svelte'
 	import * as m from '$lib/paraglide/messages'
-	import Link from '$lib/components/custom/a.svelte'
+	import Link from '$lib/components/Link.svelte'
 
 	const MOBILE_NAVIGATION_DISTANCE_THRESHOLD = 10
 	const AUTOPLAY_INTERVAL = 10_000
@@ -85,9 +85,7 @@
 		addEventListener('touchstart', (event) => (interactionStart = event.changedTouches[0]))
 		addEventListener('mousedown', (event) => (interactionStart = event))
 
-		const touchNavigationButtons = document.getElementsByClassName(
-			'touch-navigation'
-		) as HTMLCollectionOf<HTMLElement>
+		const touchNavigationButtons = document.getElementsByClassName('touch-navigation')
 		window.addEventListener('click', (event) => {
 			if (!interactionStart) return
 			for (const touchNavigationButton of touchNavigationButtons) {

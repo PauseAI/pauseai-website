@@ -1,13 +1,15 @@
 <script lang="ts">
 	import distance from '@turf/distance'
 	import { onMount } from 'svelte'
-	import type { Platform } from '$lib/netlify'
 	import Banner from './Banner.svelte'
-	import ExternalLink from '$lib/components/custom/a.svelte'
+	import ExternalLink from '$lib/components/Link.svelte'
 	import type { CalendarResponse, Event } from '../../routes/api/calendar/+server'
+	import type { GeoApiResponse } from '$api/geo/+server'
 
 	export let contrast: boolean
 	export let eventFound = false
+	/** Geo data from Netlify for external use */
+	export let geo: GeoApiResponse | null = null
 
 	const FORMAT = new Intl.DateTimeFormat('en', { day: 'numeric', month: 'long' })
 	const MAX_DISTANCE_KM = 100
@@ -17,9 +19,10 @@
 	$: eventFound = !!nearbyEvent
 
 	onMount(async () => {
-		const [geo, events] = await Promise.all([fetchGeo(), fetchLuma()])
+		const [geoResult, events] = await Promise.all([fetchGeo(), fetchLuma()])
+		geo = geoResult
 
-		const { latitude: userLatitude, longitude: userLongitude } = geo
+		const { latitude: userLatitude, longitude: userLongitude } = geoResult
 		if (!userLatitude || !userLongitude) return
 
 		const userCoords = [userLatitude, userLongitude]
@@ -27,19 +30,19 @@
 		const isNearby = (event: Event): boolean => {
 			const { geo_latitude, geo_longitude } = event
 			if (!geo_latitude || !geo_longitude) return false
-			const eventCoords = [geo_latitude, geo_longitude].map(Number.parseFloat)
+			const eventCoords = [geo_latitude, geo_longitude]
 			return distance(userCoords, eventCoords, { units: 'kilometers' }) <= MAX_DISTANCE_KM
 		}
 
 		nearbyEvent = events.entries.map((entry) => entry.event).find(isNearby) ?? null
 	})
 
-	function fetchGeo() {
-		return fetch('/api/geo').then((res) => res.json()) as Promise<Platform['context']['geo']>
+	async function fetchGeo(): Promise<GeoApiResponse> {
+		return fetch('/api/geo').then((res) => res.json())
 	}
 
-	function fetchLuma() {
-		return fetch('/api/calendar').then((res) => res.json()) as Promise<CalendarResponse>
+	async function fetchLuma(): Promise<CalendarResponse> {
+		return fetch('/api/calendar').then((res) => res.json())
 	}
 </script>
 

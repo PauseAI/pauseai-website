@@ -1,58 +1,72 @@
-import type { NationalGroup } from '$lib/types.js'
+import type { AirtableNationalGroup, NationalGroup } from '$lib/types.js'
 import { json } from '@sveltejs/kit'
-import { fetchAllPages } from '$lib/airtable.js'
+import { fetchAllPages, type AirtableRecord } from '$lib/airtable.js'
+import { generateCacheControlRecord } from '$lib/utils'
 
 const AIRTABLE_URL = 'https://api.airtable.com/v0/appWPTGqZmUcs3NWu/tblCwP5K6ENpR5qrd'
 
 // Fallback data to use in development if Airtable fetch fails
-const fallbackNationalGroups: NationalGroup[] = [
+const FALLBACK_NATIONAL_GROUPS: AirtableRecord<AirtableNationalGroup>[] = [
 	{
 		id: 'fallback-stub1',
-		name: '[FALLBACK DATA] Example Group 1',
-		notes: 'This is placeholder data shown when Airtable API is unavailable',
-		leader: 'Fall McBack',
-		discordUsername: 'noone',
-		email: 'fall.mcback@example.com',
-		legalEntity: false,
-		overseer: 'anthony@pauseai.info',
-		xLink: '',
-		discordLink: '',
-		whatsappLink: '',
-		website: 'http://example.com',
-		linktreeLink: '',
-		instagramLink: '',
-		tiktokLink: '',
-		facebookLink: '',
-		public: true
+		fields: {
+			Name: '[FALLBACK DATA] Example Group 1',
+			Notes: 'This is placeholder data shown when Airtable API is unavailable',
+			Leader: ['Fall McBack'],
+			discord_username: ['noone'],
+			onboarding_email: 'fall.mcback@example.com',
+			'Legal entity': 'No',
+			Overseer: ['anthony@pauseai.info'],
+			X: '',
+			Discord: '',
+			Whatsapp: '',
+			website: 'http://example.com',
+			linktree: '',
+			instagram: '',
+			tiktok: '',
+			Facebook: '',
+			youtube: '',
+			linkedin: '',
+			luma: ''
+		}
 	},
 	{
 		id: 'fallback-stub2',
-		name: '[FALLBACK DATA] Example Group 2',
-		notes: 'etc',
-		leader: 'etc',
-		discordUsername: '',
-		email: '',
-		legalEntity: true,
-		overseer: 'etc',
-		xLink: '',
-		discordLink: '',
-		whatsappLink: '',
-		website: '',
-		linktreeLink: '',
-		instagramLink: '',
-		tiktokLink: '',
-		facebookLink: '',
-		public: true
+		fields: {
+			Name: '[FALLBACK DATA] Example Group 2',
+			Notes: 'etc',
+			Leader: ['etc'],
+			discord_username: [],
+			onboarding_email: '',
+			'Legal entity': 'Yes',
+			Overseer: ['etc'],
+			X: '',
+			Discord: '',
+			Whatsapp: '',
+			website: '',
+			linktree: '',
+			instagram: '',
+			tiktok: '',
+			Facebook: '',
+			youtube: '',
+			linkedin: '',
+			luma: ''
+		}
 	}
 ]
 
 /**
  * Converts an Airtable record to a NationalGroup object
  */
-function recordToNationalGroup(record: any): NationalGroup {
+function recordToNationalGroup(record: AirtableRecord<AirtableNationalGroup>): NationalGroup {
 	// Only log in development to avoid cluttering production logs
 	if (import.meta.env.DEV) {
-		console.log('Record fields for', record.fields.Name, ':', Object.keys(record.fields))
+		console.log(
+			'Record fields for',
+			record.fields.Name,
+			':',
+			JSON.stringify(record.fields, null, 2)
+		)
 	}
 
 	return {
@@ -66,11 +80,7 @@ function recordToNationalGroup(record: any): NationalGroup {
 				? 'Yes'
 				: 'No',
 		// The discord_username field name may vary
-		discordUsername: record.fields.discord_username
-			? record.fields.discord_username[0]
-			: record.fields['discord_username (from Leader)']
-				? record.fields['discord_username (from Leader)'][0]
-				: '',
+		discordUsername: record.fields.discord_username ? record.fields.discord_username[0] : '',
 		// Include email if available
 		email: record.fields.onboarding_email ? record.fields.onboarding_email : '',
 		legalEntity: record.fields['Legal entity'] === 'Yes',
@@ -82,41 +92,23 @@ function recordToNationalGroup(record: any): NationalGroup {
 		website: record.fields.website || '',
 		linktreeLink: record.fields.linktree || '',
 		// Add Instagram and TikTok links
-		instagramLink: record.fields.Instagram || record.fields.instagram || '',
-		tiktokLink: record.fields.TikTok || record.fields.Tiktok || record.fields.tiktok || '',
-		facebookLink: record.fields.Facebook || record.fields.facebook,
+		instagramLink: record.fields.instagram || '',
+		tiktokLink: record.fields.tiktok || '',
+		facebookLink: record.fields.Facebook || '',
+		youtubeLink: record.fields.youtube || '',
+		linkedinLink: record.fields.linkedin || '',
+		lumaLink: record.fields.luma || '',
 		public: true // Assuming all records are public by default
 	}
 }
 
 export async function GET({ fetch, setHeaders }) {
-	setHeaders({
-		'cache-control': 'public, max-age=3600' // 1 hour in seconds
-	})
+	setHeaders(generateCacheControlRecord({ public: true, maxAge: 60 * 60 }))
 
-	const records = await fetchAllPages(
+	const records = await fetchAllPages<AirtableNationalGroup>(
 		fetch,
 		AIRTABLE_URL,
-		fallbackNationalGroups.map((group) => ({
-			id: group.id,
-			fields: {
-				Name: group.name,
-				Notes: group.notes,
-				Leader: group.leader === 'Yes',
-				discord_username: [group.discordUsername],
-				email: [group.email],
-				'Legal entity': group.legalEntity ? 'Yes' : 'No',
-				Overseer: group.overseer === 'Yes',
-				X: group.xLink,
-				Discord: group.discordLink,
-				Whatsapp: group.whatsappLink,
-				website: group.website,
-				linktree: group.linktreeLink,
-				Instagram: group.instagramLink,
-				TikTok: group.tiktokLink,
-				Facebook: group.facebookLink
-			}
-		}))
+		FALLBACK_NATIONAL_GROUPS
 	)
 
 	const out: NationalGroup[] = records
