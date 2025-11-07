@@ -41,12 +41,11 @@ function recordToPerson(record: any): Person {
 }
 
 const filter = (p: Person) => {
-	return p.image && !p.privacy && p.checked && p.title?.trim() !== '';
-}
+	return p.image && !p.privacy && p.checked && p.title?.trim() !== '' && p.title !== 'Volunteer';
+};
 
 export async function GET({ fetch, setHeaders }) {
 	const url = `https://api.airtable.com/v0/appWPTGqZmUcs3NWu/tblZhQc49PkCz3yHd`
-	//const url = `https://api.airtable.com/v0/NEW_APP_ID/NEW_TABLE_ID`
     setHeaders({
 		'cache-control': 'public, max-age=3600' // 1 hour in seconds
 	})
