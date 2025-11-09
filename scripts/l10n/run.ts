@@ -228,9 +228,17 @@ const languageNamesInEnglish = new Intl.DisplayNames('en', { type: 'language' })
 				const markdownPathsFromRoot = markdownPathsFromBase.map((file) =>
 					path.join(MARKDOWN_SOURCE, file)
 				)
+				// Filter out directories, only keep files
+				const markdownFilePaths = []
+				for (const filePath of markdownPathsFromRoot) {
+					const stats = await fs.stat(filePath)
+					if (stats.isFile()) {
+						markdownFilePaths.push(filePath)
+					}
+				}
 				return await retrieveMarkdown(
 					{
-						sourcePaths: markdownPathsFromRoot,
+						sourcePaths: markdownFilePaths,
 						sourceBaseDir: MARKDOWN_SOURCE,
 						locales: targetLocales,
 						l10nPromptGenerator: generateMarkdownPrompt,
