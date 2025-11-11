@@ -34,10 +34,10 @@ function recordToPerson(record: any): Person {
 		name: record.fields['Full name'],
 		bio: record.fields.Bio2,
 		title: record.fields.Title || defaultTitle,
-		image: record.fields.Photo && record.fields.image[0].thumbnails.large.url,
+		image: record.fields.Photo && record.fields.Photo[0].thumbnails.large.url,
 		privacy: record.fields.Privacy,
 		checked: record.fields.About,
-        duplicate: record.fields.Duplicate
+        duplicate: record.fields.duplicate
 	}
 }
 
