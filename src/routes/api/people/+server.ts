@@ -50,7 +50,7 @@ const filter = (p: Person) => {
 };
 
 export async function GET({ fetch, setHeaders }) {
-	const url = `https://api.airtable.com/v0/appWPTGqZmUcs3NWu/tblZhQc49PkCz3yHd`
+	const url = `https://api.airtable.com/v0/appWPTGqZmUcs3NWu/tblL1icZBhTV1gQ9o`
     setHeaders({
 		'cache-control': 'public, max-age=3600' // 1 hour in seconds
 	})
