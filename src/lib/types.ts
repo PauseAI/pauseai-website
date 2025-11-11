@@ -44,6 +44,7 @@ export type Person = {
 	/** Doesn't want to be visible on the /people page */
 	privacy?: boolean
 	checked?: boolean
+	duplicate?: boolean
 }
 
 export type Team = {

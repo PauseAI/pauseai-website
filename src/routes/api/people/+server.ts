@@ -31,17 +31,22 @@ const fallbackPeople: Person[] = [
 function recordToPerson(record: any): Person {
 	return {
 		id: record.id || 'noId',
-		name: record.fields.Name,
-		bio: record.fields.bio,
-		title: record.fields.title || defaultTitle,
-		image: record.fields.image && record.fields.image[0].thumbnails.large.url,
-		privacy: record.fields.privacy,
-		checked: record.fields.checked
+		name: record.fields['Full name'],
+		bio: record.fields.Bio2,
+		title: record.fields.Title || defaultTitle,
+		image: record.fields.Photo && record.fields.image[0].thumbnails.large.url,
+		privacy: record.fields.Privacy,
+		checked: record.fields.About,
+        duplicate: record.fields.Duplicate
 	}
 }
 
 const filter = (p: Person) => {
-	return p.image && !p.privacy && p.checked && p.title?.trim() !== '' && p.title !== 'Volunteer';
+	return p.image && 
+    !p.privacy && 
+    p.checked && 
+    p.title?.trim() !== '' && p.title !== 'Volunteer' &&
+    !p.duplicate;
 };
 
 export async function GET({ fetch, setHeaders }) {
