@@ -13,7 +13,7 @@ import rehypeSlug from 'rehype-slug'
 import settings from './project.inlang/settings.json' with { type: 'json' }
 
 // Export configuration flags for use in build scripts
-export const USE_EDGE_FUNCTIONS = true
+export const USE_EDGE_FUNCTIONS = false
 
 /** @type {import('mdsvex').MdsvexOptions} */
 const mdsvexOptions = {
