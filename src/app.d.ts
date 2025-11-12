@@ -1,5 +1,5 @@
 import type { Locale } from '$lib/paraglide/runtime.js'
-import type { Context } from '@netlify/edge-functions'
+import type { HandlerContext } from '@netlify/functions'
 // See https://kit.svelte.dev/docs/types#app
 // for information about these interfaces
 declare global {
@@ -10,7 +10,7 @@ declare global {
 		}
 		// interface PageData {}
 		interface Platform {
-			context: Context
+			context: HandlerContext
 		}
 	}
 

@@ -111,6 +111,9 @@ importers:
       '@netlify/edge-functions':
         specifier: ^2.19.0
         version: 2.19.0
+      '@netlify/functions':
+        specifier: ^5.1.0
+        version: 5.1.0
       '@sveltejs/adapter-netlify':
         specifier: ^5.2.4
         version: 5.2.4(@sveltejs/kit@2.48.4(@sveltejs/vite-plugin-svelte@3.1.2(svelte@4.2.20)(vite@5.4.21(@types/node@24.9.2)))(svelte@4.2.20)(vite@5.4.21(@types/node@24.9.2)))
@@ -1006,12 +1009,20 @@ packages:
     resolution: {integrity: sha512-OsTi1Ch59MRmr0/8QUqPADbtpcoGapBU7NLScfax1tKi43tTIleZRynIKlY4fx2X7orJc4tzU+zErf1JXOQZ8A==}
     engines: {node: '>=18.0.0'}
 
+  '@netlify/functions@5.1.0':
+    resolution: {integrity: sha512-LZtiQtf/QzPHIeNDZuIBxx04kmU7lCipWqZ26ejX7mYSB3yj2wvpZfF49kD8B8FoKTydSvgFmBpIcCO5FvpEXA==}
+    engines: {node: '>=18.0.0'}
+
   '@netlify/runtime-utils@2.2.0':
     resolution: {integrity: sha512-K3kWIxIMucibzQsATU2xw2JI+OpS9PZfPW/a+81gmeLC8tLv5YAxTVT0NFY/3imk1kcOJb9g7658jPLqDJaiAw==}
     engines: {node: ^18.14.0 || >=20}
 
   '@netlify/types@2.1.0':
     resolution: {integrity: sha512-ktUb5d58pt1lQGXO5E9S0F1ljM0g+CoQuGTVII0IxBc0apmPq5RI0o3OWLY7U3ZERRiYTg5UfjiMihBEzuZsuw==}
+    engines: {node: ^18.14.0 || >=20}
+
+  '@netlify/types@2.2.0':
+    resolution: {integrity: sha512-XOWlZ2wPpdRKkAOcQbjIf/Qz7L4RjcSVINVNQ9p3F6U8V6KSEOsB3fPrc6Ly8EOeJioHUepRPuzHzJE/7V5EsA==}
     engines: {node: ^18.14.0 || >=20}
 
   '@nodelib/fs.scandir@2.1.5':
@@ -4019,9 +4030,15 @@ snapshots:
       '@netlify/types': 2.1.0
       get-port: 7.1.0
 
+  '@netlify/functions@5.1.0':
+    dependencies:
+      '@netlify/types': 2.2.0
+
   '@netlify/runtime-utils@2.2.0': {}
 
   '@netlify/types@2.1.0': {}
+
+  '@netlify/types@2.2.0': {}
 
   '@nodelib/fs.scandir@2.1.5':
     dependencies:

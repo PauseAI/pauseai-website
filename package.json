@@ -30,6 +30,7 @@
 		"@eslint/markdown": "^7.5.0",
 		"@inlang/paraglide-js": "^2.4.0",
 		"@netlify/edge-functions": "^2.19.0",
+		"@netlify/functions": "^5.1.0",
 		"@sveltejs/adapter-netlify": "^5.2.4",
 		"@sveltejs/kit": "^2.48.4",
 		"@sveltejs/vite-plugin-svelte": "^3.1.2",
