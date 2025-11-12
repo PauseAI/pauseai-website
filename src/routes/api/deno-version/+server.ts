@@ -4,8 +4,16 @@ export const config = {
 	runtime: 'edge'
 }
 
+// TypeScript doesn't know about Deno globals - these only exist at runtime in edge functions
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+declare const Deno: any
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+declare const window: any
+
 export const GET = async () => {
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	const info: Record<string, any> = {
+		endpoint_version: 'v2-with-declarations',
 		timestamp: new Date().toISOString(),
 		deno_version: typeof Deno !== 'undefined' ? Deno.version : 'Deno not available',
 		window_exists: typeof window !== 'undefined',
