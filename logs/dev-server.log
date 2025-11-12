@@ -1,0 +1,72 @@
+
+> pause-ai@ dev /home/anthony/repos/pauseai-l10n/notes/references/pauseai-website
+> tsx scripts/l10n/run --dryRun && vite dev --host 0.0.0.0
+
+Regenerating inlang settings...
+Using locales: en, de
+Generated settings.json with 2 locales
+🔄 Compiling Paraglide runtime from settings...
+✅ Paraglide runtime compiled successfully!
+
+ WARN  [paraglide-js] PluginImportError: Couldn't import the plugin "https://cdn.jsdelivr.net/npm/@inlang/plugin-paraglide-js-adapter@latest/dist/index.js":
+
+SyntaxError: Unexpected identifier 'to'
+
+🌐 L10n Mode: dry-run: Reading cage investigate/500s, no LLM calls, no writes
+💡 Tip: Use --verbose to see detailed file-by-file status
+
+Using target locales from compiled runtime: [de]
+  ℹ️  Using l10n branch: investigate/500s
+  ✓ L10n cage already exists, pulling latest changes...
+Already up to date.
+  ✓ Updated l10n cage
+  🔧 Configured remote with token authentication
+Already on 'investigate/500s'
+Your branch is up to date with 'origin/investigate/500s'.
+  ✓ Switched to investigate/500s branch
+Starting git log retrieval for website commit dates...
+Authentication status: SUCCESS
+Starting git log retrieval for cage commit dates...
+
+=== DRY RUN L10N SUMMARY ===
+Model: meta-llama/llama-3.1-405b-instruct
+L10ns to capture: 28
+Files using cache: 57
+Content word count: 24,324
+Overhead word count: 12,063 (prompt instructions and formatting)
+Total word count: 97,098 (includes two-pass l10n)
+L10n workload: 97.10 thousand-word units
+Estimated cost: $0.74
+
+By language:
+  de: 28 files, 97.10 thousand-word units, $0.74
+
+Note: This is a dry run - no l10ns were captured
+===================================
+
+
+  VITE v5.4.19  ready in 2281 ms
+
+  ➜  Local:   http://localhost:37572/
+  ➜  Network: http://192.168.178.22:37572/
+  ➜  Network: http://192.168.8.125:37572/
+  ➜  press h + enter to show help
+
+<--- Last few GCs --->
+
+[341526:0x29fb4000]   567356 ms: Scavenge 4059.9 (4083.5) -> 4047.2 (4117.2) MB, pooled: 0 MB, 17.04 / 0.00 ms  (average mu = 0.385, current mu = 0.400) allocation failure; 
+[341526:0x29fb4000]   573801 ms: Mark-Compact (reduce) 4079.4 (4119.2) -> 4038.9 (4053.7) MB, pooled: 0 MB, 3241.93 / 0.00 ms  (+ 2645.8 ms in 513 steps since start of marking, biggest step 9.7 ms, walltime since start of marking 6445 ms) (average mu = 0.
+FATAL ERROR: Ineffective mark-compacts near heap limit Allocation failed - JavaScript heap out of memory
+----- Native stack trace -----
+
+ 1: 0xf1eeef node::OOMErrorHandler(char const*, v8::OOMDetails const&) [node]
+ 2: 0x1351da0 v8::Utils::ReportOOMFailure(v8::internal::Isolate*, char const*, v8::OOMDetails const&) [node]
+ 3: 0x1351e8f v8::internal::V8::FatalProcessOutOfMemory(v8::internal::Isolate*, char const*, v8::OOMDetails const&) [node]
+ 4: 0x15e8505  [node]
+ 5: 0x15e8532  [node]
+ 6: 0x15e882a v8::internal::Heap::RecomputeLimits(v8::internal::GarbageCollector, v8::base::TimeTicks) [node]
+ 7: 0x15f8d4a  [node]
+ 8: 0x15fd0f0  [node]
+ 9: 0x208d671  [node]
+Aborted (core dumped)
+ ELIFECYCLE  Command failed with exit code 134.

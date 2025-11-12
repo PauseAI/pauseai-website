@@ -1,0 +1,19 @@
+
+> pause-ai@ dev /home/anthony/repos/pauseai-l10n/notes/references/pauseai-website
+> tsx scripts/l10n/run --dryRun && vite dev --host 0.0.0.0
+
+🌐 L10n Mode: en-only: Can copy English files to build directory
+
+▲ [WARNING] Cannot find base config file "./.svelte-kit/tsconfig.json" [tsconfig.json]
+
+    tsconfig.json:2:12:
+      2 │   "extends": "./.svelte-kit/tsconfig.json",
+        ╵              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+  VITE v5.4.19  ready in 1446 ms
+
+  ➜  Local:   http://localhost:37572/
+  ➜  Network: http://192.168.0.129:37572/
+  ➜  press h + enter to show help
+Skipping geo lookup in dev mode

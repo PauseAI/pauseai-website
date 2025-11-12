@@ -1,0 +1,8 @@
+Collage Notification Send Log
+Started: 2025-09-30T19:04:21.774Z
+Sender: anthony@pauseai.info
+Subject: Your photo is in the collage for press release that bootstraps the "sayno" campaign.
+=====================================
+
+[2025-09-30T19:04:21.775Z] TEST SEND to test@anthonybailey.net
+[2025-09-30T19:04:22.775Z] ✓ Sent to test@anthonybailey.net (Message ID: <d66b1de7-4200-a737-f1ee-b97f93b4d3b7@pauseai.info>)

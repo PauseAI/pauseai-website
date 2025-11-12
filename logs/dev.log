@@ -1,0 +1,19 @@
+
+> pause-ai@ dev /home/anthony/repos/pauseai-l10n/notes/references/pauseai-website
+> tsx scripts/l10n/run --dryRun && vite dev --host 0.0.0.0
+
+Regenerating inlang settings...
+Using locales: en
+Generated settings.json with 1 locales
+🔄 Compiling Paraglide runtime from settings...
+✅ Paraglide runtime compiled successfully!
+🌐 L10n Mode: en-only: Can copy English files to build directory
+
+
+  VITE v5.4.20  ready in 1485 ms
+
+  ➜  Local:   http://localhost:37572/
+  ➜  Network: http://192.168.0.153:37572/
+  ➜  press h + enter to show help
+Skipping geo lookup, Platform not available in this environment
+Skipping geo lookup, Platform not available in this environment

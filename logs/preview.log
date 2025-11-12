@@ -1,0 +1,118 @@
+
+> pause-ai@ preview /home/anthony/repos/pauseai-l10n/notes/references/pauseai-website
+> vite preview
+
+  ➜  Local:   http://localhost:4173/
+  ➜  Network: use --host to expose
+  ➜  press h + enter to show help
+TypeError: Cannot read properties of undefined (reading 'context')
+    at c (file:///home/anthony/repos/pauseai-l10n/notes/references/pauseai-website/.svelte-kit/output/server/entries/endpoints/api/geo/_server.ts.js:1:60)
+    at file:///home/anthony/repos/pauseai-l10n/notes/references/pauseai-website/.svelte-kit/output/server/index.js:1:4503
+    at AsyncLocalStorage.run (node:internal/async_local_storage/async_hooks:91:14)
+    at K (file:///home/anthony/repos/pauseai-l10n/notes/references/pauseai-website/.svelte-kit/output/server/index.js:1:1434)
+    at Er (file:///home/anthony/repos/pauseai-l10n/notes/references/pauseai-website/.svelte-kit/output/server/index.js:1:4495)
+    at $ (file:///home/anthony/repos/pauseai-l10n/notes/references/pauseai-website/.svelte-kit/output/server/index.js:75:14464)
+    at async Object.run (file:///home/anthony/repos/pauseai-l10n/notes/references/pauseai-website/.svelte-kit/output/server/chunks/hooks.server.js:1:629)
+    at async m (file:///home/anthony/repos/pauseai-l10n/notes/references/pauseai-website/.svelte-kit/output/server/chunks/hooks.server.js:1:388)
+    at async Yt (file:///home/anthony/repos/pauseai-l10n/notes/references/pauseai-website/.svelte-kit/output/server/index.js:75:13085)
+    at async file:///home/anthony/repos/pauseai-l10n/notes/references/pauseai-website/node_modules/.pnpm/@sveltejs+kit@2.21.2_@sveltejs+vite-plugin-svelte@3.1.2_svelte@4.2.20_vite@5.4.19_@types+node_frp3ppm6sw6gslr2wymigy5zbi/node_modules/@sveltejs/kit/src/exports/vite/preview/index.js:197:5
+✏️ write: Starting new email generation
+✏️ write: Detected workflow type 1: Find Target Only
+✏️ write: Continuing from step start (workflow 1)
+✏️ write:findTarget system prompt:
+---
+You are a helpful AI assistant.
+
+Note: Some fields in the information may begin with a robot emoji (🤖). This indicates the field was automatically generated during research. You can use this information normally, just ignore the emoji marker.
+Please use your internet search capability to find individuals involved with AI safety who match the following description.
+
+CRITICAL: You MUST format your response EXACTLY as shown below. Do NOT provide a conversational response or numbered list. Use ONLY this format:
+
+**Target 1: [Person's Full Name]**
+- **Name:** [Person's Full Name]
+- **Role:** [Current Position/Title]
+- **Organization:** [Organization/Affiliation]
+- **Relevance:** [Why they're relevant to AI safety]
+- **Stance:** [Brief note on their public stance on AI safety, or "Unknown" if unclear]
+
+**Target 2: [Person's Full Name]**
+- **Name:** [Person's Full Name]
+- **Role:** [Current Position/Title]
+- **Organization:** [Organization/Affiliation]
+- **Relevance:** [Why they're relevant to AI safety]
+- **Stance:** [Brief note on their public stance on AI safety, or "Unknown" if unclear]
+
+Continue this exact pattern for 3-5 people. Do NOT include any other text, explanations, or formatting. Output ONLY the structured target information in the format above.
+
+---
+✏️ write:findTarget user content:
+---
+Hello! Please help me find a person to contact!If you have certain institutions in mind, mention those. Otherwise, mention where you are and what sort of person you're looking for. Input does not carry over past finding a target.:
+Edinburgh AI safety contacts
+---
+✏️ write:findTarget using model: claude-3-5-haiku-latest
+🔍 ✏️ write:findTarget: Tools enabled for this step
+✏️ write:findTarget requestId: msg_01TQWqVFupxtXkRyNmETfNdF
+🔍 ✏️ write:findTarget: Web search executed - web_search
+🔍 ✏️ write:findTarget: Received web search results
+🔍 ✏️ write:findTarget: Used 1 web searches
+✏️ write:findTarget full response:
+---
+**Target 1: Shannon Vallor**
+- **Name:** Shannon Vallor
+- **Role:** Baillie Gifford Professor of the Ethics of Data and Artificial Intelligence, Director of the Centre for Technomoral Futures at the Edinburgh Futures Institute
+- **Organization:** University of Edinburgh
+- **Relevance:** She emphasizes the importance of understanding AI safety beyond narrow technical approaches, focusing on whose safety is prioritized and how to secure a future worth wanting
+- **Stance:** Critically examines the broader ethical implications of AI safety
+
+**Target 2: Sotirios Tsaftaris**
+- **Name:** Sotirios Tsaftaris
+- **Role:** Canon Medical/RAEng Chair in Healthcare AI
+- **Organization:** University of Edinburgh
+- **Relevance:** Leads the CHAI (AI Hub for Causality in Healthcare AI with Real Data) which aims to develop AI that can improve decision-making tools for early disease prediction, diagnosis, and prevention, with a focus on technology safety in healthcare
+- **Stance:** Focused on responsible AI development in healthcare
+
+**Target 3: Themis Prodromakis**
+- **Name:** Themis Prodromakis
+- **Role:** Edinburgh's Regius Chair of Engineering
+- **Organization:** University of Edinburgh
+- **Relevance:** Leads the APRIL (AI Hub for Productive Research and Innovation in Electronics) focusing on developing AI tools to accelerate the development of semiconductor materials, microchip designs, and system architectures
+- **Stance:** Interested in practical AI applications for technological innovation
+
+**Target 4: Ewa Luger**
+- **Name:** Ewa Luger
+- **Role:** Personal Chair in Human-Data Interaction, Co-Director of Institute of Design Informatics
+- **Organization:** Edinburgh College of Art, University of Edinburgh
+- **Relevance:** Co-Director of BRAID (Bridging Responsible AI Divides)
+- **Stance:** Focused on responsible and ethical AI development
+
+**Target 5: Adam**
+- **Name:** Adam
+- **Role:** MSc Student in AI
+- **Organization:** Edinburgh University
+- **Relevance:** Part of the local AI safety community
+- **Stance:** Unknown
+---
+✏️ write:findTarget: 17.211s
+TypeError: Cannot read properties of undefined (reading 'context')
+    at c (file:///home/anthony/repos/pauseai-l10n/notes/references/pauseai-website/.svelte-kit/output/server/entries/endpoints/api/geo/_server.ts.js:1:60)
+    at file:///home/anthony/repos/pauseai-l10n/notes/references/pauseai-website/.svelte-kit/output/server/index.js:1:4503
+    at AsyncLocalStorage.run (node:internal/async_local_storage/async_hooks:91:14)
+    at K (file:///home/anthony/repos/pauseai-l10n/notes/references/pauseai-website/.svelte-kit/output/server/index.js:1:1434)
+    at Er (file:///home/anthony/repos/pauseai-l10n/notes/references/pauseai-website/.svelte-kit/output/server/index.js:1:4495)
+    at $ (file:///home/anthony/repos/pauseai-l10n/notes/references/pauseai-website/.svelte-kit/output/server/index.js:75:14464)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async Object.run (file:///home/anthony/repos/pauseai-l10n/notes/references/pauseai-website/.svelte-kit/output/server/chunks/hooks.server.js:1:629)
+    at async m (file:///home/anthony/repos/pauseai-l10n/notes/references/pauseai-website/.svelte-kit/output/server/chunks/hooks.server.js:1:388)
+    at async Yt (file:///home/anthony/repos/pauseai-l10n/notes/references/pauseai-website/.svelte-kit/output/server/index.js:75:13085)
+TypeError: Cannot read properties of undefined (reading 'context')
+    at c (file:///home/anthony/repos/pauseai-l10n/notes/references/pauseai-website/.svelte-kit/output/server/entries/endpoints/api/geo/_server.ts.js:1:60)
+    at file:///home/anthony/repos/pauseai-l10n/notes/references/pauseai-website/.svelte-kit/output/server/index.js:1:4503
+    at AsyncLocalStorage.run (node:internal/async_local_storage/async_hooks:91:14)
+    at K (file:///home/anthony/repos/pauseai-l10n/notes/references/pauseai-website/.svelte-kit/output/server/index.js:1:1434)
+    at Er (file:///home/anthony/repos/pauseai-l10n/notes/references/pauseai-website/.svelte-kit/output/server/index.js:1:4495)
+    at $ (file:///home/anthony/repos/pauseai-l10n/notes/references/pauseai-website/.svelte-kit/output/server/index.js:75:14464)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async Object.run (file:///home/anthony/repos/pauseai-l10n/notes/references/pauseai-website/.svelte-kit/output/server/chunks/hooks.server.js:1:629)
+    at async m (file:///home/anthony/repos/pauseai-l10n/notes/references/pauseai-website/.svelte-kit/output/server/chunks/hooks.server.js:1:388)
+    at async Yt (file:///home/anthony/repos/pauseai-l10n/notes/references/pauseai-website/.svelte-kit/output/server/index.js:75:13085)

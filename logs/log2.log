@@ -1,0 +1,27 @@
+
+> pause-ai@ dev /home/anthony/repos/pauseai-l10n/notes/references/pauseai-website
+> tsx scripts/l10n/run --dryRun && vite dev --host 0.0.0.0
+
+🌐 L10n Mode: en-only: Can copy English files to build directory
+
+▲ [WARNING] Cannot find base config file "./.svelte-kit/tsconfig.json" [tsconfig.json]
+
+    tsconfig.json:2:12:
+      2 │   "extends": "./.svelte-kit/tsconfig.json",
+        ╵              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+ENOENT: no such file or directory, stat '/home/anthony/repos/pauseai-l10n/notes/references/pauseai-website/src/routes/api/write/.#+server.ts'
+
+  VITE v5.4.19  ready in 1428 ms
+
+  ➜  Local:   http://localhost:37572/
+  ➜  Network: http://192.168.0.129:37572/
+  ➜  press h + enter to show help
+11:39:36 PM [vite] Pre-transform error: Failed to load url __SERVER__/internal.js (resolved id: /home/anthony/repos/pauseai-l10n/notes/references/pauseai-website/.svelte-kit/generated/server/internal.js) in /home/anthony/repos/pauseai-l10n/notes/references/pauseai-website/node_modules/.pnpm/@sveltejs+kit@2.21.2_@sveltejs+vite-plugin-svelte@3.1.2_svelte@4.2.20_vite@5.4.19_@types+node_frp3ppm6sw6gslr2wymigy5zbi/node_modules/@sveltejs/kit/src/runtime/server/index.js. Does the file exist?
+11:39:36 PM [vite] Error when evaluating SSR module /node_modules/.pnpm/@sveltejs+kit@2.21.2_@sveltejs+vite-plugin-svelte@3.1.2_svelte@4.2.20_vite@5.4.19_@types+node_frp3ppm6sw6gslr2wymigy5zbi/node_modules/@sveltejs/kit/src/runtime/server/index.js: failed to import "__SERVER__/internal.js"
+|- Error: Cannot find module '__SERVER__/internal.js' imported from '/home/anthony/repos/pauseai-l10n/notes/references/pauseai-website/node_modules/.pnpm/@sveltejs+kit@2.21.2_@sveltejs+vite-plugin-svelte@3.1.2_svelte@4.2.20_vite@5.4.19_@types+node_frp3ppm6sw6gslr2wymigy5zbi/node_modules/@sveltejs/kit/src/runtime/server/index.js'
+    at nodeImport (file:///home/anthony/repos/pauseai-l10n/notes/references/pauseai-website/node_modules/.pnpm/vite@5.4.19_@types+node@24.0.3/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:53095:19)
+    at ssrImport (file:///home/anthony/repos/pauseai-l10n/notes/references/pauseai-website/node_modules/.pnpm/vite@5.4.19_@types+node@24.0.3/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:52962:22)
+    at eval (/home/anthony/repos/pauseai-l10n/notes/references/pauseai-website/node_modules/.pnpm/@sveltejs+kit@2.21.2_@sveltejs+vite-plugin-svelte@3.1.2_svelte@4.2.20_vite@5.4.19_@types+node_frp3ppm6sw6gslr2wymigy5zbi/node_modules/@sveltejs/kit/src/runtime/server/index.js:5:37)
+    at async instantiateModule (file:///home/anthony/repos/pauseai-l10n/notes/references/pauseai-website/node_modules/.pnpm/vite@5.4.19_@types+node@24.0.3/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:53020:5)
+

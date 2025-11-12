@@ -1,0 +1,76 @@
+{
+	"localStorage": {
+		"widget-consent": "null",
+		"_gcl_ls": "{\"schema\":\"gcl\",\"version\":1,\"gcl_ctr\":{\"value\":{\"value\":0,\"creationTimeMs\":1752083296097},\"expires\":1759859296097}}",
+		"user-theme": "dark",
+		"write": "{\"messages\":[{\"role\":\"user\",\"content\":\"Hello! Please help me find a person to contact!\\nContact Search:\\nGlasgow AI safety academics\\n\"},{\"role\":\"assistant\",\"content\":\"Let me do another search to find specific AI safety researchers.Based on the search results, I'll compile the contact information:\\n\\n**Contact 1: Professor Chris Pearce**\\n- **Name:** Chris Pearce\\n- **Role:** Vice-Principal for Research & Knowledge Exchange\\n- **Organization:** University of Glasgow\\n- **Relevance:** Involved with the University's new Centre for Data Science and AI, and participated in discussions during the UK Government's AI Safety Summit 2023\\n- **Stance:** Engaged with AI safety discussions\\n\\n**Contact 2: Dr. Jennifer Boyle**\\n- **Name:** Jennifer Boyle\\n- **Role:** Academic Researcher\\n- **Organization:** University of Glasgow\\n- **Relevance:** Involved in research ethics and digital tools workshops related to AI\\n- **Stance:** Supports ethical and critical approach to AI, focusing on understanding AI's potential responsibly\\n\\n**Contact 3: Dr. Andrew Struan**\\n- **Name:** Andrew Struan\\n- **Role:** Academic Researcher\\n- **Organization:** University of Glasgow\\n- **Relevance:** Participant in research ethics and AI-related workshops\\n- **Stance:** Interested in responsible AI research\\n\\n**Contact 4: Dr. Scott Ramsay**\\n- **Name:** Scott Ramsay\\n- **Role:** Academic Researcher\\n- **Organization:** University of Glasgow\\n- **Relevance:** Involved in research ethics and AI-related discussions\\n- **Stance:** Focused on ethical AI approaches\\n\\n**Contact 5: Dr. Edmond S. L. Ho**\\n- **Name:** Edmond S. L. Ho\\n- **Role:** Senior Lecturer in Machine Learning\\n- **Organization:** University of Glasgow\\n- **Relevance:** Machine Learning specialist\\n- **Stance:** Unknown\"}],\"state\":\"{\\\"fields\\\":{\\\"Contact Search\\\":\\\"Glasgow AI safety academics\\\"},\\\"info\\\":{\\\"discover\\\":{\\\"search\\\":\\\"Glasgow AI safety academics\\\"}},\\\"contacts\\\":[{\\\"name\\\":\\\"Professor Chris Pearce\\\",\\\"role\\\":\\\"Vice-Principal for Research & Knowledge Exchange\\\",\\\"organization\\\":\\\"University of Glasgow\\\"},{\\\"name\\\":\\\"Dr. Jennifer Boyle\\\",\\\"role\\\":\\\"Academic Researcher\\\",\\\"organization\\\":\\\"University of Glasgow\\\"},{\\\"name\\\":\\\"Dr. Andrew Struan\\\",\\\"role\\\":\\\"Academic Researcher\\\",\\\"organization\\\":\\\"University of Glasgow\\\"},{\\\"name\\\":\\\"Dr. Scott Ramsay\\\",\\\"role\\\":\\\"Academic Researcher\\\",\\\"organization\\\":\\\"University of Glasgow\\\"},{\\\"name\\\":\\\"Dr. Edmond S. L. Ho\\\",\\\"role\\\":\\\"Senior Lecturer in Machine Learning\\\",\\\"organization\\\":\\\"University of Glasgow\\\"}],\\\"timedRounds\\\":[{\\\"name\\\":\\\"discover\\\",\\\"description\\\":\\\"Search for potential contacts (using web search)\\\",\\\"stage\\\":\\\"discoverContacts\\\",\\\"durationSec\\\":18.592}],\\\"round\\\":\\\"complete\\\",\\\"stage\\\":\\\"discoverContacts\\\",\\\"email\\\":\\\"\\\",\\\"information\\\":\\\"Contact Search:\\\\nGlasgow AI safety academics\\\\n\\\",\\\"lastDialog\\\":{\\\"prompt\\\":\\\"Hello! Please help me find a person to contact!\\\\nContact Search:\\\\nGlasgow AI safety academics\\\\n\\\",\\\"response\\\":\\\"Let me do another search to find specific AI safety researchers.Based on the search results, I'll compile the contact information:\\\\n\\\\n**Contact 1: Professor Chris Pearce**\\\\n- **Name:** Chris Pearce\\\\n- **Role:** Vice-Principal for Research & Knowledge Exchange\\\\n- **Organization:** University of Glasgow\\\\n- **Relevance:** Involved with the University's new Centre for Data Science and AI, and participated in discussions during the UK Government's AI Safety Summit 2023\\\\n- **Stance:** Engaged with AI safety discussions\\\\n\\\\n**Contact 2: Dr. Jennifer Boyle**\\\\n- **Name:** Jennifer Boyle\\\\n- **Role:** Academic Researcher\\\\n- **Organization:** University of Glasgow\\\\n- **Relevance:** Involved in research ethics and digital tools workshops related to AI\\\\n- **Stance:** Supports ethical and critical approach to AI, focusing on understanding AI's potential responsibly\\\\n\\\\n**Contact 3: Dr. Andrew Struan**\\\\n- **Name:** Andrew Struan\\\\n- **Role:** Academic Researcher\\\\n- **Organization:** University of Glasgow\\\\n- **Relevance:** Participant in research ethics and AI-related workshops\\\\n- **Stance:** Interested in responsible AI research\\\\n\\\\n**Contact 4: Dr. Scott Ramsay**\\\\n- **Name:** Scott Ramsay\\\\n- **Role:** Academic Researcher\\\\n- **Organization:** University of Glasgow\\\\n- **Relevance:** Involved in research ethics and AI-related discussions\\\\n- **Stance:** Focused on ethical AI approaches\\\\n\\\\n**Contact 5: Dr. Edmond S. L. Ho**\\\\n- **Name:** Edmond S. L. Ho\\\\n- **Role:** Senior Lecturer in Machine Learning\\\\n- **Organization:** University of Glasgow\\\\n- **Relevance:** Machine Learning specialist\\\\n- **Stance:** Unknown\\\"}}\",\"ux\":{\"selectedContactIndex\":-1,\"showContactDetails\":false,\"showAskDetails\":false,\"debugMode\":false,\"processError\":\"\",\"workflowId\":\"\"}}",
+		"color-scheme": "dark"
+	},
+	"messages": [
+		{
+			"role": "user",
+			"content": "Hello! Please help me find a person to contact!\nContact Search:\nGlasgow AI safety academics\n"
+		},
+		{
+			"role": "assistant",
+			"content": "Let me do another search to find specific AI safety researchers.Based on the search results, I'll compile the contact information:\n\n**Contact 1: Professor Chris Pearce**\n- **Name:** Chris Pearce\n- **Role:** Vice-Principal for Research & Knowledge Exchange\n- **Organization:** University of Glasgow\n- **Relevance:** Involved with the University's new Centre for Data Science and AI, and participated in discussions during the UK Government's AI Safety Summit 2023\n- **Stance:** Engaged with AI safety discussions\n\n**Contact 2: Dr. Jennifer Boyle**\n- **Name:** Jennifer Boyle\n- **Role:** Academic Researcher\n- **Organization:** University of Glasgow\n- **Relevance:** Involved in research ethics and digital tools workshops related to AI\n- **Stance:** Supports ethical and critical approach to AI, focusing on understanding AI's potential responsibly\n\n**Contact 3: Dr. Andrew Struan**\n- **Name:** Andrew Struan\n- **Role:** Academic Researcher\n- **Organization:** University of Glasgow\n- **Relevance:** Participant in research ethics and AI-related workshops\n- **Stance:** Interested in responsible AI research\n\n**Contact 4: Dr. Scott Ramsay**\n- **Name:** Scott Ramsay\n- **Role:** Academic Researcher\n- **Organization:** University of Glasgow\n- **Relevance:** Involved in research ethics and AI-related discussions\n- **Stance:** Focused on ethical AI approaches\n\n**Contact 5: Dr. Edmond S. L. Ho**\n- **Name:** Edmond S. L. Ho\n- **Role:** Senior Lecturer in Machine Learning\n- **Organization:** University of Glasgow\n- **Relevance:** Machine Learning specialist\n- **Stance:** Unknown"
+		}
+	],
+	"info": {
+		"discover": {
+			"search": "Glasgow AI safety academics"
+		}
+	},
+	"ux": {
+		"selectedContactIndex": -1,
+		"showContactDetails": false,
+		"showAskDetails": false,
+		"debugMode": false,
+		"processError": "",
+		"workflowId": ""
+	},
+	"forms": {
+		"form0": {}
+	},
+	"debugPanel": "",
+	"state": {
+		"currentStateToken": "{\"fields\":{\"Contact Search\":\"Glasgow AI safety academics\"},\"info\":{\"discover\":{\"search\":\"Glasgow AI safety academics\"}},\"contacts\":[{\"name\":\"Professor Chris Pearce\",\"role\":\"Vice-Principal for Research & Knowledge Exchange\",\"organization\":\"University of Glasgow\"},{\"name\":\"Dr. Jennifer Boyle\",\"role\":\"Academic Researcher\",\"organization\":\"University of Glasgow\"},{\"name\":\"Dr. Andrew Struan\",\"role\":\"Academic Researcher\",\"organization\":\"University of Glasgow\"},{\"name\":\"Dr. Scott Ramsay\",\"role\":\"Academic Researcher\",\"organization\":\"University of Glasgow\"},{\"name\":\"Dr. Edmond S. L. Ho\",\"role\":\"Senior Lecturer in Machine Learning\",\"organization\":\"University of Glasgow\"}],\"timedRounds\":[{\"name\":\"discover\",\"description\":\"Search for potential contacts (using web search)\",\"stage\":\"discoverContacts\",\"durationSec\":18.592}],\"round\":\"complete\",\"stage\":\"discoverContacts\",\"email\":\"\",\"information\":\"Contact Search:\\nGlasgow AI safety academics\\n\",\"lastDialog\":{\"prompt\":\"Hello! Please help me find a person to contact!\\nContact Search:\\nGlasgow AI safety academics\\n\",\"response\":\"Let me do another search to find specific AI safety researchers.Based on the search results, I'll compile the contact information:\\n\\n**Contact 1: Professor Chris Pearce**\\n- **Name:** Chris Pearce\\n- **Role:** Vice-Principal for Research & Knowledge Exchange\\n- **Organization:** University of Glasgow\\n- **Relevance:** Involved with the University's new Centre for Data Science and AI, and participated in discussions during the UK Government's AI Safety Summit 2023\\n- **Stance:** Engaged with AI safety discussions\\n\\n**Contact 2: Dr. Jennifer Boyle**\\n- **Name:** Jennifer Boyle\\n- **Role:** Academic Researcher\\n- **Organization:** University of Glasgow\\n- **Relevance:** Involved in research ethics and digital tools workshops related to AI\\n- **Stance:** Supports ethical and critical approach to AI, focusing on understanding AI's potential responsibly\\n\\n**Contact 3: Dr. Andrew Struan**\\n- **Name:** Andrew Struan\\n- **Role:** Academic Researcher\\n- **Organization:** University of Glasgow\\n- **Relevance:** Participant in research ethics and AI-related workshops\\n- **Stance:** Interested in responsible AI research\\n\\n**Contact 4: Dr. Scott Ramsay**\\n- **Name:** Scott Ramsay\\n- **Role:** Academic Researcher\\n- **Organization:** University of Glasgow\\n- **Relevance:** Involved in research ethics and AI-related discussions\\n- **Stance:** Focused on ethical AI approaches\\n\\n**Contact 5: Dr. Edmond S. L. Ho**\\n- **Name:** Edmond S. L. Ho\\n- **Role:** Senior Lecturer in Machine Learning\\n- **Organization:** University of Glasgow\\n- **Relevance:** Machine Learning specialist\\n- **Stance:** Unknown\"}}",
+		"timedRounds": [
+			{
+				"name": "discover",
+				"description": "Search for potential contacts (using web search)",
+				"stage": "discoverContacts",
+				"durationSec": 18.592
+			}
+		],
+		"parsedContacts": [
+			{
+				"name": "Professor Chris Pearce",
+				"role": "Vice-Principal for Research & Knowledge Exchange",
+				"organization": "University of Glasgow"
+			},
+			{
+				"name": "Dr. Jennifer Boyle",
+				"role": "Academic Researcher",
+				"organization": "University of Glasgow"
+			},
+			{
+				"name": "Dr. Andrew Struan",
+				"role": "Academic Researcher",
+				"organization": "University of Glasgow"
+			},
+			{
+				"name": "Dr. Scott Ramsay",
+				"role": "Academic Researcher",
+				"organization": "University of Glasgow"
+			},
+			{
+				"name": "Dr. Edmond S. L. Ho",
+				"role": "Senior Lecturer in Machine Learning",
+				"organization": "University of Glasgow"
+			}
+		],
+		"activeForm": "form1"
+	},
+	"timestamp": "2025-07-16T16:27:00.445Z"
+}

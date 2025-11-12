@@ -1,0 +1,187 @@
+◈ Injecting environment variable values for all scopes
+◈ Ignored general context env var: LANG (defined in process)
+◈ Injected .env file env var: AIRTABLE_API_KEY
+◈ Injected .env file env var: AIRTABLE_WRITE_API_KEY
+◈ Injected .env file env var: OPENAI_KEY
+◈ Injected .env file env var: ANTHROPIC_API_KEY_FOR_WRITE
+◈ Injected .env file env var: PARAGLIDE_LOCALES
+◈ Injected .env file env var: GITHUB_TOKEN
+◈ Injected .env file env var: PUBLIC_CLOUDINARY_CLOUD_NAME
+◈ Injected .env file env var: CLOUDINARY_API_KEY
+◈ Injected .env file env var: CLOUDINARY_API_SECRET
+◈ Using simple static server because '[dev.framework]' was set to '#static'
+◈ Running static server from "pauseai-website/build"
+◈ Building site for production
+◈ Changes will not be hot-reloaded, so if you need to rebuild your site you must exit and run 'netlify serve' again
+​
+Netlify Build                                                 
+────────────────────────────────────────────────────────────────
+​
+❯ Version
+  @netlify/build 30.1.1
+​
+❯ Flags
+  configPath: /home/anthony/repos/pauseai-l10n/notes/references/pauseai-website/netlify.toml
+  outputConfigPath: /home/anthony/repos/pauseai-l10n/notes/references/pauseai-website/.netlify/netlify.toml
+​
+❯ Current directory
+  /home/anthony/repos/pauseai-l10n/notes/references/pauseai-website
+​
+❯ Config file
+  /home/anthony/repos/pauseai-l10n/notes/references/pauseai-website/netlify.toml
+​
+❯ Context
+  production
+​
+build.command from netlify.toml                               
+────────────────────────────────────────────────────────────────
+​
+$ pnpm run build
+
+> pause-ai@ build /home/anthony/repos/pauseai-l10n/notes/references/pauseai-website
+> cross-env NODE_ENV=production node scripts/filter-build-log.js "tsx scripts/l10n/run && vite build --emptyOutDir=false && run-s _postbuild:*"
+
+Regenerating inlang settings...
+Using locales: en
+Generated settings.json with 1 locales
+🔄 Compiling Paraglide runtime from settings...
+✅ Paraglide runtime compiled successfully!
+🌐 L10n Mode: en-only: Can copy English files to build directory
+
+vite v5.4.21 building SSR bundle for production...
+transforming...
+node_modules/.pnpm/@sveltejs+kit@2.48.4_@sveltejs+vite-plugin-svelte@3.1.2_svelte@4.2.20_vite@5.4.21_@types+node_wafl7tdgngnsjmlnvxzd7w4yay/node_modules/@sveltejs/kit/src/runtime/client/client.js (6:23): "untrack" is not exported by "node_modules/.pnpm/svelte@4.2.20/node_modules/svelte/src/runtime/ssr.js", imported by "node_modules/.pnpm/@sveltejs+kit@2.48.4_@sveltejs+vite-plugin-svelte@3.1.2_svelte@4.2.20_vite@5.4.21_@types+node_wafl7tdgngnsjmlnvxzd7w4yay/node_modules/@sveltejs/kit/src/runtime/client/client.js".
+node_modules/.pnpm/@sveltejs+kit@2.48.4_@sveltejs+vite-plugin-svelte@3.1.2_svelte@4.2.20_vite@5.4.21_@types+node_wafl7tdgngnsjmlnvxzd7w4yay/node_modules/@sveltejs/kit/src/runtime/client/client.js (533:13): "fork" is not exported by "node_modules/.pnpm/svelte@4.2.20/node_modules/svelte/src/runtime/ssr.js", imported by "node_modules/.pnpm/@sveltejs+kit@2.48.4_@sveltejs+vite-plugin-svelte@3.1.2_svelte@4.2.20_vite@5.4.21_@types+node_wafl7tdgngnsjmlnvxzd7w4yay/node_modules/@sveltejs/kit/src/runtime/client/client.js".
+node_modules/.pnpm/@sveltejs+kit@2.48.4_@sveltejs+vite-plugin-svelte@3.1.2_svelte@4.2.20_vite@5.4.21_@types+node_wafl7tdgngnsjmlnvxzd7w4yay/node_modules/@sveltejs/kit/src/runtime/client/client.js (541:20): "fork" is not exported by "node_modules/.pnpm/svelte@4.2.20/node_modules/svelte/src/runtime/ssr.js", imported by "node_modules/.pnpm/@sveltejs+kit@2.48.4_@sveltejs+vite-plugin-svelte@3.1.2_svelte@4.2.20_vite@5.4.21_@types+node_wafl7tdgngnsjmlnvxzd7w4yay/node_modules/@sveltejs/kit/src/runtime/client/client.js".
+node_modules/.pnpm/@sveltejs+kit@2.48.4_@sveltejs+vite-plugin-svelte@3.1.2_svelte@4.2.20_vite@5.4.21_@types+node_wafl7tdgngnsjmlnvxzd7w4yay/node_modules/@sveltejs/kit/src/runtime/client/client.js (1739:27): "settled" is not exported by "node_modules/.pnpm/svelte@4.2.20/node_modules/svelte/src/runtime/ssr.js", imported by "node_modules/.pnpm/@sveltejs+kit@2.48.4_@sveltejs+vite-plugin-svelte@3.1.2_svelte@4.2.20_vite@5.4.21_@types+node_wafl7tdgngnsjmlnvxzd7w4yay/node_modules/@sveltejs/kit/src/runtime/client/client.js".
+✓ 691 modules transformed.
+rendering chunks...
+vite v5.4.21 building for production...
+transforming...
+node_modules/.pnpm/@sveltejs+kit@2.48.4_@sveltejs+vite-plugin-svelte@3.1.2_svelte@4.2.20_vite@5.4.21_@types+node_wafl7tdgngnsjmlnvxzd7w4yay/node_modules/@sveltejs/kit/src/runtime/client/client.js (6:23): "untrack" is not exported by "node_modules/.pnpm/svelte@4.2.20/node_modules/svelte/src/runtime/index.js", imported by "node_modules/.pnpm/@sveltejs+kit@2.48.4_@sveltejs+vite-plugin-svelte@3.1.2_svelte@4.2.20_vite@5.4.21_@types+node_wafl7tdgngnsjmlnvxzd7w4yay/node_modules/@sveltejs/kit/src/runtime/client/client.js".
+node_modules/.pnpm/@sveltejs+kit@2.48.4_@sveltejs+vite-plugin-svelte@3.1.2_svelte@4.2.20_vite@5.4.21_@types+node_wafl7tdgngnsjmlnvxzd7w4yay/node_modules/@sveltejs/kit/src/runtime/client/client.js (533:13): "fork" is not exported by "node_modules/.pnpm/svelte@4.2.20/node_modules/svelte/src/runtime/index.js", imported by "node_modules/.pnpm/@sveltejs+kit@2.48.4_@sveltejs+vite-plugin-svelte@3.1.2_svelte@4.2.20_vite@5.4.21_@types+node_wafl7tdgngnsjmlnvxzd7w4yay/node_modules/@sveltejs/kit/src/runtime/client/client.js".
+node_modules/.pnpm/@sveltejs+kit@2.48.4_@sveltejs+vite-plugin-svelte@3.1.2_svelte@4.2.20_vite@5.4.21_@types+node_wafl7tdgngnsjmlnvxzd7w4yay/node_modules/@sveltejs/kit/src/runtime/client/client.js (541:20): "fork" is not exported by "node_modules/.pnpm/svelte@4.2.20/node_modules/svelte/src/runtime/index.js", imported by "node_modules/.pnpm/@sveltejs+kit@2.48.4_@sveltejs+vite-plugin-svelte@3.1.2_svelte@4.2.20_vite@5.4.21_@types+node_wafl7tdgngnsjmlnvxzd7w4yay/node_modules/@sveltejs/kit/src/runtime/client/client.js".
+node_modules/.pnpm/@sveltejs+kit@2.48.4_@sveltejs+vite-plugin-svelte@3.1.2_svelte@4.2.20_vite@5.4.21_@types+node_wafl7tdgngnsjmlnvxzd7w4yay/node_modules/@sveltejs/kit/src/runtime/client/client.js (1739:27): "settled" is not exported by "node_modules/.pnpm/svelte@4.2.20/node_modules/svelte/src/runtime/index.js", imported by "node_modules/.pnpm/@sveltejs+kit@2.48.4_@sveltejs+vite-plugin-svelte@3.1.2_svelte@4.2.20_vite@5.4.21_@types+node_wafl7tdgngnsjmlnvxzd7w4yay/node_modules/@sveltejs/kit/src/runtime/client/client.js".
+✓ 757 modules transformed.
+rendering chunks...
+.svelte-kit/output/client/_app/immutable/assets/iabied-event.DJWPaZRZ.png              4,069.98 kB
+.svelte-kit/output/client/_app/immutable/assets/iabied-event.D4L5aNZT.png             13,866.81 kB
+✓ built in 1m 23s
+Fetching from URL: https://api.airtable.com/v0/appWPTGqZmUcs3NWu/tbl2emfOWNWoVz1kW
+Fetching from URL: https://api.airtable.com/v0/appWPTGqZmUcs3NWu/tbl2emfOWNWoVz1kW?offset=itrhYOaWL4VhtWmGh/rec55CgaOQhgtaeD3
+Fetching from URL: https://api.airtable.com/v0/appWPTGqZmUcs3NWu/tbl2emfOWNWoVz1kW?offset=itrhYOaWL4VhtWmGh/rec9mkG93jW7b4aev
+Fetching from URL: https://api.airtable.com/v0/appWPTGqZmUcs3NWu/tbl2emfOWNWoVz1kW?offset=itrhYOaWL4VhtWmGh/recEiy2UINpnYsIgr
+Fetching from URL: https://api.airtable.com/v0/appWPTGqZmUcs3NWu/tbl2emfOWNWoVz1kW?offset=itrhYOaWL4VhtWmGh/recIb7injluxmw2jE
+Fetching from URL: https://api.airtable.com/v0/appWPTGqZmUcs3NWu/tbl2emfOWNWoVz1kW?offset=itrhYOaWL4VhtWmGh/recOJqPXEjZbyM4tF
+Fetching from URL: https://api.airtable.com/v0/appWPTGqZmUcs3NWu/tbl2emfOWNWoVz1kW?offset=itrhYOaWL4VhtWmGh/recRsGKiTwkLZIGNC
+Fetching from URL: https://api.airtable.com/v0/appWPTGqZmUcs3NWu/tbl2emfOWNWoVz1kW?offset=itrhYOaWL4VhtWmGh/recX2fJ33Dl9vtfzD
+Fetching from URL: https://api.airtable.com/v0/appWPTGqZmUcs3NWu/tbl2emfOWNWoVz1kW?offset=itrhYOaWL4VhtWmGh/recc5cUVS68mRvifk
+Fetching from URL: https://api.airtable.com/v0/appWPTGqZmUcs3NWu/tbl2emfOWNWoVz1kW?offset=itrhYOaWL4VhtWmGh/recgJFt3za5kJTt2A
+Fetching from URL: https://api.airtable.com/v0/appWPTGqZmUcs3NWu/tbl2emfOWNWoVz1kW?offset=itrhYOaWL4VhtWmGh/reckntJDTXkVuYb0U
+Fetching from URL: https://api.airtable.com/v0/appWPTGqZmUcs3NWu/tbl2emfOWNWoVz1kW?offset=itrhYOaWL4VhtWmGh/recpkOenvlC4VWiel
+Fetching from URL: https://api.airtable.com/v0/appWPTGqZmUcs3NWu/tbl2emfOWNWoVz1kW?offset=itrhYOaWL4VhtWmGh/recuf4i4R8CEWgzOZ
+Fetching from URL: https://api.airtable.com/v0/appWPTGqZmUcs3NWu/tbl2emfOWNWoVz1kW?offset=itrhYOaWL4VhtWmGh/recz3c7p5KK0Pw2fi
+Total records: 1313, Verified records: 1118
+Fetching from URL: https://api.airtable.com/v0/appWPTGqZmUcs3NWu/tblYLOPzJ32QOdBLg
+
+[1;31m[404] GET /sayno/donate[0m
+  404 /sayno/donate (linked from /sayno/share)
+.svelte-kit/output/server/_app/immutable/assets/iabied-event.DJWPaZRZ.png              4,069.98 kB
+.svelte-kit/output/server/_app/immutable/assets/iabied-event.D4L5aNZT.png             13,866.81 kB
+✓ built in 2m 50s
+
+Run npm run preview to preview your production build locally.
+
+> Using @sveltejs/adapter-netlify
+  ✔ done
+
+> pause-ai@ _postbuild:pagefind /home/anthony/repos/pauseai-l10n/notes/references/pauseai-website
+> tsx scripts/create-pagefind-index.ts
+
+
+> pause-ai@ _postbuild:exclude /home/anthony/repos/pauseai-l10n/notes/references/pauseai-website
+> tsx scripts/exclude-from-edge-function.ts
+
+
+> pause-ai@ _postbuild:caching /home/anthony/repos/pauseai-l10n/notes/references/pauseai-website
+> tsx scripts/opt-in-to-caching.ts
+
+
+> pause-ai@ _postbuild:l10ntamer /home/anthony/repos/pauseai-l10n/notes/references/pauseai-website
+> tsx scripts/l10ntamer.ts
+
+⏭️  Skipping l10ntamer - English routes not prefixed
+
+📊 Complete build summary:
+   Client: 348 chunks (17952.89 kB)
+   Server: 333 chunks (14371.54 kB)
+   Total: 681 chunks (32324.43 kB)
+
+🏁 Build process completed with code 0
+​
+(build.command completed in 3m 57.5s)
+​
+Edge Functions bundling                                       
+────────────────────────────────────────────────────────────────
+​
+Packaging Edge Functions from .netlify/edge-functions directory:
+ - render
+​
+(Edge Functions bundling completed in 56s)
+​
+A "_redirects" file is present in the repository but is missing in the publish directory "build".
+​
+Netlify Build Complete                                        
+────────────────────────────────────────────────────────────────
+​
+(Netlify Build completed in 4m 53.7s)
+
+◈ Static server listening to 3999
+
+   ┌──────────────────────────────────────────────────┐
+   │                                                  │
+   │   ◈ Server now ready on http://localhost:37572   │
+   │                                                  │
+   └──────────────────────────────────────────────────┘
+
+◈ Loaded edge function render
+[render] Fetching from URL: https://api.airtable.com/v0/appWPTGqZmUcs3NWu/tblL1icZBhTV1gQ9o
+[render] Fetching from URL: https://api.airtable.com/v0/appWPTGqZmUcs3NWu/tblL1icZBhTV1gQ9o?offset=itrIedhhWDVDxbpJl/rec2tc8FsPrkfIZWO
+[render] Fetching from URL: https://api.airtable.com/v0/appWPTGqZmUcs3NWu/tblL1icZBhTV1gQ9o?offset=itrIedhhWDVDxbpJl/rec5vtF2jXhWWLAu9
+[render] Fetching from URL: https://api.airtable.com/v0/appWPTGqZmUcs3NWu/tblL1icZBhTV1gQ9o?offset=itrIedhhWDVDxbpJl/rec8lcA0oAuSv05CA
+[render] Fetching from URL: https://api.airtable.com/v0/appWPTGqZmUcs3NWu/tblL1icZBhTV1gQ9o?offset=itrIedhhWDVDxbpJl/recBcLoGQq8Kbl05t
+[render] Fetching from URL: https://api.airtable.com/v0/appWPTGqZmUcs3NWu/tblL1icZBhTV1gQ9o?offset=itrIedhhWDVDxbpJl/recF50KRuFrSqyFJm
+[render] Fetching from URL: https://api.airtable.com/v0/appWPTGqZmUcs3NWu/tblL1icZBhTV1gQ9o?offset=itrIedhhWDVDxbpJl/recI9myEcYDSYMfit
+[render] Fetching from URL: https://api.airtable.com/v0/appWPTGqZmUcs3NWu/tblL1icZBhTV1gQ9o?offset=itrIedhhWDVDxbpJl/recL6em9nssOc580q
+[render] Fetching from URL: https://api.airtable.com/v0/appWPTGqZmUcs3NWu/tblL1icZBhTV1gQ9o?offset=itrIedhhWDVDxbpJl/recO5d01vTaxSKMNG
+[render] Fetching from URL: https://api.airtable.com/v0/appWPTGqZmUcs3NWu/tblL1icZBhTV1gQ9o?offset=itrIedhhWDVDxbpJl/recREfreNVO4QKcBx
+[render] Fetching from URL: https://api.airtable.com/v0/appWPTGqZmUcs3NWu/tblL1icZBhTV1gQ9o?offset=itrIedhhWDVDxbpJl/recUov6OkVUvMlmvh
+[render] Fetching from URL: https://api.airtable.com/v0/appWPTGqZmUcs3NWu/tblL1icZBhTV1gQ9o?offset=itrIedhhWDVDxbpJl/recXwZa1ftdit0UrB
+[render] Fetching from URL: https://api.airtable.com/v0/appWPTGqZmUcs3NWu/tblL1icZBhTV1gQ9o?offset=itrIedhhWDVDxbpJl/recb6uduArAu0tVeW
+[render] Fetching from URL: https://api.airtable.com/v0/appWPTGqZmUcs3NWu/tblL1icZBhTV1gQ9o?offset=itrIedhhWDVDxbpJl/recdqDi7roFALG4DD
+[render] Fetching from URL: https://api.airtable.com/v0/appWPTGqZmUcs3NWu/tblL1icZBhTV1gQ9o?offset=itrIedhhWDVDxbpJl/recgyBETl2Dc5UB4L
+[render] Fetching from URL: https://api.airtable.com/v0/appWPTGqZmUcs3NWu/tblL1icZBhTV1gQ9o?offset=itrIedhhWDVDxbpJl/recjtHJn2IPmzqvbE
+[render] Fetching from URL: https://api.airtable.com/v0/appWPTGqZmUcs3NWu/tblL1icZBhTV1gQ9o?offset=itrIedhhWDVDxbpJl/recnKXBNeLLIxvqiN
+[render] Fetching from URL: https://api.airtable.com/v0/appWPTGqZmUcs3NWu/tblL1icZBhTV1gQ9o?offset=itrIedhhWDVDxbpJl/recqnSZ1FOltMejbB
+[render] Fetching from URL: https://api.airtable.com/v0/appWPTGqZmUcs3NWu/tblL1icZBhTV1gQ9o?offset=itrIedhhWDVDxbpJl/recuCiz4DVEf8cTTq
+[render] Fetching from URL: https://api.airtable.com/v0/appWPTGqZmUcs3NWu/tblL1icZBhTV1gQ9o?offset=itrIedhhWDVDxbpJl/recxWwbOZXxLBJETZ
+[render] Fetching from URL: https://api.airtable.com/v0/appWPTGqZmUcs3NWu/tblL1icZBhTV1gQ9o
+[render] Fetching from URL: https://api.airtable.com/v0/appWPTGqZmUcs3NWu/tblL1icZBhTV1gQ9o?offset=itraxw3XLJbQ35H3P/rec2tc8FsPrkfIZWO
+[render] Fetching from URL: https://api.airtable.com/v0/appWPTGqZmUcs3NWu/tblL1icZBhTV1gQ9o?offset=itraxw3XLJbQ35H3P/rec5vtF2jXhWWLAu9
+[render] Fetching from URL: https://api.airtable.com/v0/appWPTGqZmUcs3NWu/tblL1icZBhTV1gQ9o?offset=itraxw3XLJbQ35H3P/rec8lcA0oAuSv05CA
+[render] Fetching from URL: https://api.airtable.com/v0/appWPTGqZmUcs3NWu/tblL1icZBhTV1gQ9o?offset=itraxw3XLJbQ35H3P/recBcLoGQq8Kbl05t
+[render] Fetching from URL: https://api.airtable.com/v0/appWPTGqZmUcs3NWu/tblL1icZBhTV1gQ9o?offset=itraxw3XLJbQ35H3P/recF50KRuFrSqyFJm
+[render] Fetching from URL: https://api.airtable.com/v0/appWPTGqZmUcs3NWu/tblL1icZBhTV1gQ9o?offset=itraxw3XLJbQ35H3P/recI9myEcYDSYMfit
+[render] Fetching from URL: https://api.airtable.com/v0/appWPTGqZmUcs3NWu/tblL1icZBhTV1gQ9o?offset=itraxw3XLJbQ35H3P/recL6em9nssOc580q
+[render] Fetching from URL: https://api.airtable.com/v0/appWPTGqZmUcs3NWu/tblL1icZBhTV1gQ9o?offset=itraxw3XLJbQ35H3P/recO5d01vTaxSKMNG
+[render] Fetching from URL: https://api.airtable.com/v0/appWPTGqZmUcs3NWu/tblL1icZBhTV1gQ9o?offset=itraxw3XLJbQ35H3P/recREfreNVO4QKcBx
+[render] Fetching from URL: https://api.airtable.com/v0/appWPTGqZmUcs3NWu/tblL1icZBhTV1gQ9o?offset=itraxw3XLJbQ35H3P/recUov6OkVUvMlmvh
+[render] Fetching from URL: https://api.airtable.com/v0/appWPTGqZmUcs3NWu/tblL1icZBhTV1gQ9o?offset=itraxw3XLJbQ35H3P/recXwZa1ftdit0UrB
+[render] Fetching from URL: https://api.airtable.com/v0/appWPTGqZmUcs3NWu/tblL1icZBhTV1gQ9o?offset=itraxw3XLJbQ35H3P/recb6uduArAu0tVeW
+[render] Fetching from URL: https://api.airtable.com/v0/appWPTGqZmUcs3NWu/tblL1icZBhTV1gQ9o?offset=itraxw3XLJbQ35H3P/recdqDi7roFALG4DD
+[render] Fetching from URL: https://api.airtable.com/v0/appWPTGqZmUcs3NWu/tblL1icZBhTV1gQ9o?offset=itraxw3XLJbQ35H3P/recgyBETl2Dc5UB4L
+[render] Fetching from URL: https://api.airtable.com/v0/appWPTGqZmUcs3NWu/tblL1icZBhTV1gQ9o?offset=itraxw3XLJbQ35H3P/recjtHJn2IPmzqvbE
+[render] Fetching from URL: https://api.airtable.com/v0/appWPTGqZmUcs3NWu/tblL1icZBhTV1gQ9o?offset=itraxw3XLJbQ35H3P/recnKXBNeLLIxvqiN
+[render] Fetching from URL: https://api.airtable.com/v0/appWPTGqZmUcs3NWu/tblL1icZBhTV1gQ9o?offset=itraxw3XLJbQ35H3P/recqnSZ1FOltMejbB
+[render] Fetching from URL: https://api.airtable.com/v0/appWPTGqZmUcs3NWu/tblL1icZBhTV1gQ9o?offset=itraxw3XLJbQ35H3P/recuCiz4DVEf8cTTq
+[render] Fetching from URL: https://api.airtable.com/v0/appWPTGqZmUcs3NWu/tblL1icZBhTV1gQ9o?offset=itraxw3XLJbQ35H3P/recxWwbOZXxLBJETZ

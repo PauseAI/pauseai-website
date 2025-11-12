@@ -1,0 +1,12 @@
+=== Fri Jun 27 04:27:06 AM BST 2025 ===
+anthropic-ratelimit-input-tokens-remaining: 50000
+anthropic-ratelimit-output-tokens-remaining: 10000
+anthropic-ratelimit-requests-remaining: 49
+{
+  "input_tokens": 9,
+  "cache_creation_input_tokens": 0,
+  "cache_read_input_tokens": 0,
+  "output_tokens": 5,
+  "service_tier": "standard"
+}
+

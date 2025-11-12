@@ -1,0 +1,90 @@
+{
+	"localStorage": {
+		"widget-consent": "null",
+		"_gcl_ls": "{\"schema\":\"gcl\",\"version\":1,\"gcl_ctr\":{\"value\":{\"value\":0,\"creationTimeMs\":1752083296097},\"expires\":1759859296097}}",
+		"user-theme": "dark",
+		"write": "{\"messages\":[{\"role\":\"user\",\"content\":\"Hello! Please help me find a person to contact!\\nContact Search:\\nParis\\n\"},{\"role\":\"assistant\",\"content\":\"Based on the search results, I'll provide the contact information for AI safety experts in Paris:\\n\\n**Contact 1: Fateh Kaakai**\\n- **Name:** Fateh Kaakai\\n- **Role:** Safety Expert and AI Assurance Researcher at Thales CortAIx Labs\\n- **Organization:** Thales Group\\n- **Relevance:** Co-chairs the EUROCAE WG114 standardization group for AI-based critical aeronautical systems and worked on safe architectures for monitoring AI models\\n- **Stance:** Focused on trustworthy AI in civil and military domains\\n\\n**Contact 2: Martin Tisné**\\n- **Name:** Martin Tisné\\n- **Role:** Leader of Current AI, a groundbreaking initiative with $400 million initial investment\\n- **Organization:** Current AI\\n- **Relevance:** Involved in global AI development, managing AI transition, and aligning AI with humanist values\\n- **Stance:** Proactive in AI safety and responsible AI development\\n\\n**Contact 3: Yoshua Bengio**\\n- **Name:** Yoshua Bengio\\n- **Role:** Professor at Université de Montréal and Scientific Director of MILA, leading the International Scientific Report on AI Safety\\n- **Organization:** Université de Montréal\\n- **Relevance:** Prominent AI safety advocate who has raised concerns about AI risks, calling for better regulation and tracking of AI products\\n- **Stance:** Concerned about AI deception and goal misalignment, supports strong regulation and international collaboration to address AI risks\"},{\"role\":\"user\",\"content\":\"Hello! Please help me find a person to contact!\\nContact Search:\\nParis\\n\"},{\"role\":\"assistant\",\"content\":\"Based on the search results, I'll provide the contact information for AI safety experts in Paris:\\n\\n**Contact 1: Fateh Kaakai**\\n- **Name:** Fateh Kaakai\\n- **Role:** Safety Expert and AI Assurance Researcher at Thales CortAIx Labs\\n- **Organization:** Thales Group\\n- **Relevance:** Co-chairs the EUROCAE WG114 standardization group for AI-based critical aeronautical systems and worked on safe architectures for monitoring AI models\\n- **Stance:** Focused on trustworthy AI in civil and military domains\\n\\n**Contact 2: Martin Tisné**\\n- **Name:** Martin Tisné\\n- **Role:** Leader of Current AI, a groundbreaking initiative with $400 million initial investment\\n- **Organization:** Current AI\\n- **Relevance:** Involved in global AI development, managing AI transition, and aligning AI with humanist values\\n- **Stance:** Proactive in AI safety and responsible AI development\\n\\n**Contact 3: Yoshua Bengio**\\n- **Name:** Yoshua Bengio\\n- **Role:** Professor at Université de Montréal and Scientific Director of MILA, leading the International Scientific Report on AI Safety\\n- **Organization:** Université de Montréal\\n- **Relevance:** Prominent AI safety advocate who has raised concerns about AI risks, calling for better regulation and tracking of AI products\\n- **Stance:** Concerned about AI deception and goal misalignment, supports strong regulation and international collaboration to address AI risks\"}],\"state\":\"{\\\"fields\\\":{\\\"Person's Name\\\":\\\"Fateh Kaakai\\\",\\\"Current Role\\\":\\\"Safety Expert and AI Assurance Researcher at Thales CortAIx Labs\\\",\\\"Organization/Affiliation\\\":\\\"Thales Group\\\"},\\\"info\\\":{\\\"discover\\\":{\\\"search\\\":\\\"Paris\\\"},\\\"choose\\\":{},\\\"define\\\":{},\\\"write\\\":{},\\\"revise\\\":{}},\\\"contacts\\\":[{\\\"name\\\":\\\"Fateh Kaakai\\\",\\\"role\\\":\\\"Safety Expert and AI Assurance Researcher at Thales CortAIx Labs\\\",\\\"organization\\\":\\\"Thales Group\\\"},{\\\"name\\\":\\\"Martin Tisné\\\",\\\"role\\\":\\\"Leader of Current AI, a groundbreaking initiative with $400 million initial investment\\\",\\\"organization\\\":\\\"Current AI\\\"},{\\\"name\\\":\\\"Yoshua Bengio\\\",\\\"role\\\":\\\"Professor at Université de Montréal and Scientific Director of MILA, leading the International Scientific Report on AI Safety\\\",\\\"organization\\\":\\\"Université de Montréal\\\"}],\\\"timedRounds\\\":[{\\\"name\\\":\\\"discover\\\",\\\"description\\\":\\\"Search for potential contacts (using web search)\\\",\\\"stage\\\":\\\"discoverContacts\\\",\\\"durationSec\\\":15.587},{\\\"name\\\":\\\"research\\\",\\\"description\\\":\\\"Research selected contact (using web search)\\\",\\\"stage\\\":\\\"chooseContact\\\",\\\"durationSec\\\":2.807},{\\\"name\\\":\\\"address\\\",\\\"description\\\":\\\"Complete contact details\\\",\\\"stage\\\":\\\"chooseContact\\\"}],\\\"round\\\":\\\"research\\\",\\\"stage\\\":\\\"chooseContact\\\",\\\"email\\\":\\\"\\\",\\\"workflowId\\\":\\\"paris\\\",\\\"information\\\":\\\"I apologize, but \\\\\\\"Paris\\\\\\\" is a location, not a specific person. Could you please provide:\\\\n1. The full name of the person you want me to research\\\\n2. Their current role \\\\n3. Their organization/affiliation\\\\n\\\\nWithout a specific individual's name, I cannot conduct a meaningful professional background search. I'll need more precise details to help you find the information you're seeking.\\\",\\\"lastDialog\\\":{\\\"prompt\\\":\\\"Hello! Please help me find a person to contact!\\\\nContact Search:\\\\nParis\\\\n\\\",\\\"response\\\":\\\"Based on the search results, I'll provide the contact information for AI safety experts in Paris:\\\\n\\\\n**Contact 1: Fateh Kaakai**\\\\n- **Name:** Fateh Kaakai\\\\n- **Role:** Safety Expert and AI Assurance Researcher at Thales CortAIx Labs\\\\n- **Organization:** Thales Group\\\\n- **Relevance:** Co-chairs the EUROCAE WG114 standardization group for AI-based critical aeronautical systems and worked on safe architectures for monitoring AI models\\\\n- **Stance:** Focused on trustworthy AI in civil and military domains\\\\n\\\\n**Contact 2: Martin Tisné**\\\\n- **Name:** Martin Tisné\\\\n- **Role:** Leader of Current AI, a groundbreaking initiative with $400 million initial investment\\\\n- **Organization:** Current AI\\\\n- **Relevance:** Involved in global AI development, managing AI transition, and aligning AI with humanist values\\\\n- **Stance:** Proactive in AI safety and responsible AI development\\\\n\\\\n**Contact 3: Yoshua Bengio**\\\\n- **Name:** Yoshua Bengio\\\\n- **Role:** Professor at Université de Montréal and Scientific Director of MILA, leading the International Scientific Report on AI Safety\\\\n- **Organization:** Université de Montréal\\\\n- **Relevance:** Prominent AI safety advocate who has raised concerns about AI risks, calling for better regulation and tracking of AI products\\\\n- **Stance:** Concerned about AI deception and goal misalignment, supports strong regulation and international collaboration to address AI risks\\\"}}\",\"ux\":{\"selectedContactIndex\":0,\"showContactDetails\":false,\"showAskDetails\":false,\"debugMode\":false,\"processError\":\"Cached prompt mismatch for workflow paris/chooseContact-research. Expected: \\\"Hello! Please research this person!Contact Search:\\nParis\\n\\\", Got: \\\"Hello! Please update the list of information by replacing all instances of 'undefined' with something that belongs under their respective header based on the rest of the information provided. Thank you!\\\"\",\"workflowId\":\"paris\"}}",
+		"color-scheme": "dark"
+	},
+	"messages": [
+		{
+			"role": "user",
+			"content": "Hello! Please help me find a person to contact!\nContact Search:\nParis\n"
+		},
+		{
+			"role": "assistant",
+			"content": "Based on the search results, I'll provide the contact information for AI safety experts in Paris:\n\n**Contact 1: Fateh Kaakai**\n- **Name:** Fateh Kaakai\n- **Role:** Safety Expert and AI Assurance Researcher at Thales CortAIx Labs\n- **Organization:** Thales Group\n- **Relevance:** Co-chairs the EUROCAE WG114 standardization group for AI-based critical aeronautical systems and worked on safe architectures for monitoring AI models\n- **Stance:** Focused on trustworthy AI in civil and military domains\n\n**Contact 2: Martin Tisné**\n- **Name:** Martin Tisné\n- **Role:** Leader of Current AI, a groundbreaking initiative with $400 million initial investment\n- **Organization:** Current AI\n- **Relevance:** Involved in global AI development, managing AI transition, and aligning AI with humanist values\n- **Stance:** Proactive in AI safety and responsible AI development\n\n**Contact 3: Yoshua Bengio**\n- **Name:** Yoshua Bengio\n- **Role:** Professor at Université de Montréal and Scientific Director of MILA, leading the International Scientific Report on AI Safety\n- **Organization:** Université de Montréal\n- **Relevance:** Prominent AI safety advocate who has raised concerns about AI risks, calling for better regulation and tracking of AI products\n- **Stance:** Concerned about AI deception and goal misalignment, supports strong regulation and international collaboration to address AI risks"
+		},
+		{
+			"role": "user",
+			"content": "Hello! Please help me find a person to contact!\nContact Search:\nParis\n"
+		},
+		{
+			"role": "assistant",
+			"content": "Based on the search results, I'll provide the contact information for AI safety experts in Paris:\n\n**Contact 1: Fateh Kaakai**\n- **Name:** Fateh Kaakai\n- **Role:** Safety Expert and AI Assurance Researcher at Thales CortAIx Labs\n- **Organization:** Thales Group\n- **Relevance:** Co-chairs the EUROCAE WG114 standardization group for AI-based critical aeronautical systems and worked on safe architectures for monitoring AI models\n- **Stance:** Focused on trustworthy AI in civil and military domains\n\n**Contact 2: Martin Tisné**\n- **Name:** Martin Tisné\n- **Role:** Leader of Current AI, a groundbreaking initiative with $400 million initial investment\n- **Organization:** Current AI\n- **Relevance:** Involved in global AI development, managing AI transition, and aligning AI with humanist values\n- **Stance:** Proactive in AI safety and responsible AI development\n\n**Contact 3: Yoshua Bengio**\n- **Name:** Yoshua Bengio\n- **Role:** Professor at Université de Montréal and Scientific Director of MILA, leading the International Scientific Report on AI Safety\n- **Organization:** Université de Montréal\n- **Relevance:** Prominent AI safety advocate who has raised concerns about AI risks, calling for better regulation and tracking of AI products\n- **Stance:** Concerned about AI deception and goal misalignment, supports strong regulation and international collaboration to address AI risks"
+		}
+	],
+	"info": {
+		"discover": {
+			"search": "Paris"
+		},
+		"choose": {},
+		"define": {},
+		"write": {},
+		"revise": {}
+	},
+	"ux": {
+		"selectedContactIndex": 0,
+		"showContactDetails": false,
+		"showAskDetails": false,
+		"debugMode": false,
+		"processError": "Cached prompt mismatch for workflow paris/chooseContact-research. Expected: \"Hello! Please research this person!Contact Search:\nParis\n\", Got: \"Hello! Please update the list of information by replacing all instances of 'undefined' with something that belongs under their respective header based on the rest of the information provided. Thank you!\"",
+		"workflowId": "paris"
+	},
+	"forms": {
+		"form0": {}
+	},
+	"debugPanel": "",
+	"state": {
+		"stateJson": "{\"fields\":{\"Person's Name\":\"Fateh Kaakai\",\"Current Role\":\"Safety Expert and AI Assurance Researcher at Thales CortAIx Labs\",\"Organization/Affiliation\":\"Thales Group\"},\"info\":{\"discover\":{\"search\":\"Paris\"},\"choose\":{},\"define\":{},\"write\":{},\"revise\":{}},\"contacts\":[{\"name\":\"Fateh Kaakai\",\"role\":\"Safety Expert and AI Assurance Researcher at Thales CortAIx Labs\",\"organization\":\"Thales Group\"},{\"name\":\"Martin Tisné\",\"role\":\"Leader of Current AI, a groundbreaking initiative with $400 million initial investment\",\"organization\":\"Current AI\"},{\"name\":\"Yoshua Bengio\",\"role\":\"Professor at Université de Montréal and Scientific Director of MILA, leading the International Scientific Report on AI Safety\",\"organization\":\"Université de Montréal\"}],\"timedRounds\":[{\"name\":\"discover\",\"description\":\"Search for potential contacts (using web search)\",\"stage\":\"discoverContacts\",\"durationSec\":15.587},{\"name\":\"research\",\"description\":\"Research selected contact (using web search)\",\"stage\":\"chooseContact\",\"durationSec\":2.807},{\"name\":\"address\",\"description\":\"Complete contact details\",\"stage\":\"chooseContact\"}],\"round\":\"research\",\"stage\":\"chooseContact\",\"email\":\"\",\"workflowId\":\"paris\",\"information\":\"I apologize, but \\\"Paris\\\" is a location, not a specific person. Could you please provide:\\n1. The full name of the person you want me to research\\n2. Their current role \\n3. Their organization/affiliation\\n\\nWithout a specific individual's name, I cannot conduct a meaningful professional background search. I'll need more precise details to help you find the information you're seeking.\",\"lastDialog\":{\"prompt\":\"Hello! Please help me find a person to contact!\\nContact Search:\\nParis\\n\",\"response\":\"Based on the search results, I'll provide the contact information for AI safety experts in Paris:\\n\\n**Contact 1: Fateh Kaakai**\\n- **Name:** Fateh Kaakai\\n- **Role:** Safety Expert and AI Assurance Researcher at Thales CortAIx Labs\\n- **Organization:** Thales Group\\n- **Relevance:** Co-chairs the EUROCAE WG114 standardization group for AI-based critical aeronautical systems and worked on safe architectures for monitoring AI models\\n- **Stance:** Focused on trustworthy AI in civil and military domains\\n\\n**Contact 2: Martin Tisné**\\n- **Name:** Martin Tisné\\n- **Role:** Leader of Current AI, a groundbreaking initiative with $400 million initial investment\\n- **Organization:** Current AI\\n- **Relevance:** Involved in global AI development, managing AI transition, and aligning AI with humanist values\\n- **Stance:** Proactive in AI safety and responsible AI development\\n\\n**Contact 3: Yoshua Bengio**\\n- **Name:** Yoshua Bengio\\n- **Role:** Professor at Université de Montréal and Scientific Director of MILA, leading the International Scientific Report on AI Safety\\n- **Organization:** Université de Montréal\\n- **Relevance:** Prominent AI safety advocate who has raised concerns about AI risks, calling for better regulation and tracking of AI products\\n- **Stance:** Concerned about AI deception and goal misalignment, supports strong regulation and international collaboration to address AI risks\"}}",
+		"currentStage": "chooseContact",
+		"timedRounds": [
+			{
+				"name": "discover",
+				"description": "Search for potential contacts (using web search)",
+				"stage": "discoverContacts",
+				"durationSec": 15.587
+			},
+			{
+				"name": "research",
+				"description": "Research selected contact (using web search)",
+				"stage": "chooseContact",
+				"durationSec": 2.807
+			},
+			{
+				"name": "address",
+				"description": "Complete contact details",
+				"stage": "chooseContact"
+			}
+		],
+		"parsedContacts": [
+			{
+				"name": "Fateh Kaakai",
+				"role": "Safety Expert and AI Assurance Researcher at Thales CortAIx Labs",
+				"organization": "Thales Group"
+			},
+			{
+				"name": "Martin Tisné",
+				"role": "Leader of Current AI, a groundbreaking initiative with $400 million initial investment",
+				"organization": "Current AI"
+			},
+			{
+				"name": "Yoshua Bengio",
+				"role": "Professor at Université de Montréal and Scientific Director of MILA, leading the International Scientific Report on AI Safety",
+				"organization": "Université de Montréal"
+			}
+		],
+		"activeForm": "form2"
+	},
+	"timestamp": "2025-08-04T08:49:58.872Z"
+}

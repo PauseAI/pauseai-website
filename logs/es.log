@@ -1,0 +1,164 @@
+
+> pause-ai@ build /home/anthony/repos/pauseai-l10n/notes/references/pauseai-website
+> cross-env NODE_ENV=production node scripts/filter-build-log.js "tsx scripts/l10n/run && vite build --emptyOutDir=false && run-s _postbuild:*"
+
+Regenerating inlang settings...
+Using locales: en, es
+Generated settings.json with 2 locales
+🔄 Compiling Paraglide runtime from settings...
+✅ Paraglide runtime compiled successfully!
+
+ WARN  [paraglide-js] PluginImportError: Couldn't import the plugin "https://cdn.jsdelivr.net/npm/@inlang/plugin-paraglide-js-adapter@latest/dist/index.js":
+
+SyntaxError: Unexpected identifier
+
+🌐 L10n Mode: dry-run: Reading cage l10n-es, no LLM calls, no writes
+💡 Tip: Use --verbose to see detailed file-by-file status
+
+Using target locales from compiled runtime: [es]
+  ℹ️  Using l10n branch: l10n-es
+  ✓ L10n cage already exists, pulling latest changes...
+Already up to date.
+  ✓ Updated l10n cage
+  🔧 Configured remote with token authentication
+Already on 'l10n-es'
+Your branch is up to date with 'origin/l10n-es'.
+  ✓ Switched to l10n-es branch
+Starting git log retrieval for website commit dates...
+Authentication status: SUCCESS
+Starting git log retrieval for cage commit dates...
+
+=== DRY RUN L10N SUMMARY ===
+Model: meta-llama/llama-3.1-405b-instruct
+L10ns to capture: 0
+Files using cache: 85
+Content word count: 0
+Overhead word count: 0 (prompt instructions and formatting)
+Total word count: 0 (includes two-pass l10n)
+L10n workload: 0.00 thousand-word units
+Estimated cost: $0.00
+
+By language:
+
+Note: This is a dry run - no l10ns were captured
+===================================
+
+vite v5.4.19 building SSR bundle for production...
+transforming...
+node_modules/.pnpm/@sveltejs+kit@2.36.3_@sveltejs+vite-plugin-svelte@3.1.2_svelte@4.2.20_vite@5.4.19_@types+node_246x4hx5xt5tvfsqblmewa63w4/node_modules/@sveltejs/kit/src/runtime/client/client.js (6:23): "untrack" is not exported by "node_modules/.pnpm/svelte@4.2.20/node_modules/svelte/src/runtime/ssr.js", imported by "node_modules/.pnpm/@sveltejs+kit@2.36.3_@sveltejs+vite-plugin-svelte@3.1.2_svelte@4.2.20_vite@5.4.19_@types+node_246x4hx5xt5tvfsqblmewa63w4/node_modules/@sveltejs/kit/src/runtime/client/client.js".
+"join" is imported from external module "path" but never used in "src/routes/api/debug-export/+server.ts".
+✓ 712 modules transformed.
+rendering chunks...
+vite v5.4.19 building for production...
+transforming...
+node_modules/.pnpm/@sveltejs+kit@2.36.3_@sveltejs+vite-plugin-svelte@3.1.2_svelte@4.2.20_vite@5.4.19_@types+node_246x4hx5xt5tvfsqblmewa63w4/node_modules/@sveltejs/kit/src/runtime/client/client.js (6:23): "untrack" is not exported by "node_modules/.pnpm/svelte@4.2.20/node_modules/svelte/src/runtime/index.js", imported by "node_modules/.pnpm/@sveltejs+kit@2.36.3_@sveltejs+vite-plugin-svelte@3.1.2_svelte@4.2.20_vite@5.4.19_@types+node_246x4hx5xt5tvfsqblmewa63w4/node_modules/@sveltejs/kit/src/runtime/client/client.js".
+✓ 779 modules transformed.
+rendering chunks...
+✓ built in 35.21s
+Fetching from URL: https://api.airtable.com/v0/appWPTGqZmUcs3NWu/tbl2emfOWNWoVz1kW
+Fetching from URL: https://api.airtable.com/v0/appWPTGqZmUcs3NWu/tbl2emfOWNWoVz1kW?offset=itro4LQmYoOGA61jN/rec7NZp1a04lYkDQN
+Fetching from URL: https://api.airtable.com/v0/appWPTGqZmUcs3NWu/tbl2emfOWNWoVz1kW?offset=itro4LQmYoOGA61jN/recFiEjOkPAIf1SVm
+Fetching from URL: https://api.airtable.com/v0/appWPTGqZmUcs3NWu/tbl2emfOWNWoVz1kW?offset=itro4LQmYoOGA61jN/recOVQ8GGQm8lXUop
+Fetching from URL: https://api.airtable.com/v0/appWPTGqZmUcs3NWu/tbl2emfOWNWoVz1kW?offset=itro4LQmYoOGA61jN/recWV0xgrUAAYVbAM
+Fetching from URL: https://api.airtable.com/v0/appWPTGqZmUcs3NWu/tbl2emfOWNWoVz1kW?offset=itro4LQmYoOGA61jN/receSXmu8YxB02vYJ
+Fetching from URL: https://api.airtable.com/v0/appWPTGqZmUcs3NWu/tbl2emfOWNWoVz1kW?offset=itro4LQmYoOGA61jN/reclznHiIm8phl5yi
+Fetching from URL: https://api.airtable.com/v0/appWPTGqZmUcs3NWu/tbl2emfOWNWoVz1kW?offset=itro4LQmYoOGA61jN/recudgerlqSnCDffa
+Total records: 765, Verified records: 649
+Fetching from URL: https://api.airtable.com/v0/appWPTGqZmUcs3NWu/tblYLOPzJ32QOdBLg
+Fetching from URL: https://api.airtable.com/v0/appWPTGqZmUcs3NWu/tbl2emfOWNWoVz1kW
+Fetching from URL: https://api.airtable.com/v0/appWPTGqZmUcs3NWu/tbl2emfOWNWoVz1kW?offset=itrNTPXhsfRqJ01SG/rec7NZp1a04lYkDQN
+Fetching from URL: https://api.airtable.com/v0/appWPTGqZmUcs3NWu/tbl2emfOWNWoVz1kW?offset=itrNTPXhsfRqJ01SG/recFiEjOkPAIf1SVm
+Fetching from URL: https://api.airtable.com/v0/appWPTGqZmUcs3NWu/tbl2emfOWNWoVz1kW?offset=itrNTPXhsfRqJ01SG/recOVQ8GGQm8lXUop
+Fetching from URL: https://api.airtable.com/v0/appWPTGqZmUcs3NWu/tbl2emfOWNWoVz1kW?offset=itrNTPXhsfRqJ01SG/recWV0xgrUAAYVbAM
+Fetching from URL: https://api.airtable.com/v0/appWPTGqZmUcs3NWu/tbl2emfOWNWoVz1kW?offset=itrNTPXhsfRqJ01SG/receSXmu8YxB02vYJ
+Fetching from URL: https://api.airtable.com/v0/appWPTGqZmUcs3NWu/tbl2emfOWNWoVz1kW?offset=itrNTPXhsfRqJ01SG/reclznHiIm8phl5yi
+Fetching from URL: https://api.airtable.com/v0/appWPTGqZmUcs3NWu/tbl2emfOWNWoVz1kW?offset=itrNTPXhsfRqJ01SG/recudgerlqSnCDffa
+Total records: 765, Verified records: 649
+Fetching from URL: https://api.airtable.com/v0/appWPTGqZmUcs3NWu/tblYLOPzJ32QOdBLg
+
+[1;31m[404] GET /es/pdfs/PauseAI_Open_Letter_Background_Information.pdf[0m
+  404 /es/pdfs/PauseAI_Open_Letter_Background_Information.pdf (linked from /es/dear-sir-demis-2025)
+  404 /es/riesgos (linked from /es/learn)
+✓ built in 1m 1s
+
+Run npm run preview to preview your production build locally.
+
+[1;31m[404] GET /es/pdfs/donate[0m
+  404 /es/pdfs/donate (linked from /es/pdfs/PauseAI_Open_Letter_Background_Information.pdf)
+  404 /es/risgos (linked from /es/2023-oct)
+  404 /es/2025-febrero (linked from /es/protests)
+  404 /es/2024-noviembre (linked from /es/protests)
+  404 /es/2024-mayo (linked from /es/protests)
+  404 /es/2024-febrero (linked from /es/protests)
+  404 /es/2023-noviembre-uk (linked from /es/protests)
+  404 /es/2023-agosto-nl (linked from /es/protests)
+  404 /es/2023-julio-londres-18 (linked from /es/protests)
+  404 /es/2023-julio-londres-13 (linked from /es/protests)
+  404 /es/2023-junio-londres-oficina-para-ia (linked from /es/protests)
+  404 /es/2023-junio-melbourne (linked from /es/protests)
+  404 /es/2023-junio-londres (linked from /es/protests)
+  404 /es/2023-mayo-deepmind-londres (linked from /es/protests)
+  404 /riesgos (linked from /es/riesgos)
+
+[1;31m[404] GET /pdfs/donate[0m
+  404 /pdfs/donate (linked from /es/pdfs/donate)
+  404 /risgos (linked from /es/risgos)
+  404 /2025-febrero (linked from /es/2025-febrero)
+  404 /2024-noviembre (linked from /es/2024-noviembre)
+  404 /2024-mayo (linked from /es/2024-mayo)
+  404 /2024-febrero (linked from /es/2024-febrero)
+  404 /2023-noviembre-uk (linked from /es/2023-noviembre-uk)
+  404 /2023-agosto-nl (linked from /es/2023-agosto-nl)
+  404 /2023-julio-londres-18 (linked from /es/2023-julio-londres-18)
+  404 /2023-julio-londres-13 (linked from /es/2023-julio-londres-13)
+  404 /2023-junio-londres-oficina-para-ia (linked from /es/2023-junio-londres-oficina-para-ia)
+  404 /2023-junio-melbourne (linked from /es/2023-junio-melbourne)
+  404 /2023-junio-londres (linked from /es/2023-junio-londres)
+  404 /2023-mayo-deepmind-londres (linked from /es/2023-mayo-deepmind-londres)
+
+> Using @sveltejs/adapter-netlify
+  ✔ done
+
+> pause-ai@ _postbuild:pagefind /home/anthony/repos/pauseai-l10n/notes/references/pauseai-website
+> tsx scripts/create-pagefind-index.ts
+
+
+> pause-ai@ _postbuild:exclude /home/anthony/repos/pauseai-l10n/notes/references/pauseai-website
+> tsx scripts/exclude-from-edge-function.ts
+
+
+> pause-ai@ _postbuild:caching /home/anthony/repos/pauseai-l10n/notes/references/pauseai-website
+> tsx scripts/opt-in-to-caching.ts
+
+
+> pause-ai@ _postbuild:l10ntamer /home/anthony/repos/pauseai-l10n/notes/references/pauseai-website
+> tsx scripts/l10ntamer.ts
+
+🔍 Running l10ntamer in forced mode for local testing...
+🔍 Scanning prerendered HTML files...
+
+📊 UNLOCALIZED LINK AUDIT REPORT
+================================
+
+📈 Summary:
+   • HTML files with unlocalized links: 0
+   • Total unlocalized links found: 0
+
+🎯 Key metrics (the real problems):
+   • 🚨 Links from LOCALIZED pages: 0 (need fixing)
+   • ✅ Links from unlocalized pages: 0 (expected)
+   • 📊 Files with localized sources: 0
+   • 📊 Files with unlocalized sources: 0
+
+🔗 Most common unlocalized links FROM LOCALIZED PAGES (problems):
+
+📁 Sample LOCALIZED pages with unlocalized links (the real problems):
+
+📄 Detailed results written to: unlocalized-links-audit.json
+
+📊 Complete build summary:
+   Client: 369 chunks (10167.86 kB)
+   Server: 356 chunks (6445.37 kB)
+   Total: 725 chunks (16613.23 kB)
+
+🏁 Build process completed with code 0

@@ -1,0 +1,8 @@
+{
+	"selectedContactIndex": 0,
+	"showContactDetails": false,
+	"showAskDetails": false,
+	"debugMode": false,
+	"processError": "Cached prompt mismatch for workflow paris/chooseContact-research. Expected: \"Hello! Please research this person!Contact Search:\nParis\n\", Got: \"Hello! Please update the list of information by replacing all instances of 'undefined' with something that belongs under their respective header based on the rest of the information provided. Thank you!\"",
+	"workflowId": "paris"
+}

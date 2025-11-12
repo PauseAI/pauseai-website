@@ -1,0 +1,33 @@
+{
+	"localStorage": {
+		"widget-consent": "null",
+		"_gcl_ls": "{\"schema\":\"gcl\",\"version\":1,\"gcl_ctr\":{\"value\":{\"value\":0,\"creationTimeMs\":1752083296097},\"expires\":1759859296097}}",
+		"color-scheme": "dark"
+	},
+	"messages": [],
+	"info": {
+		"discover": {
+			"search": "MP and SMP representatives for Edinburgh EH6"
+		}
+	},
+	"ux": {
+		"selectedContactIndex": -1,
+		"showContactDetails": false,
+		"showAskDetails": false,
+		"debugMode": false,
+		"processError": "",
+		"workflowId": "msps"
+	},
+	"forms": {
+		"form0": {}
+	},
+	"debugPanel": "",
+	"state": {
+		"currentStateToken": "",
+		"timedRounds": [],
+		"parsedContacts": [],
+		"selectedContactIndex": -1,
+		"activeForm": "form1"
+	},
+	"timestamp": "2025-07-16T12:16:51.089Z"
+}

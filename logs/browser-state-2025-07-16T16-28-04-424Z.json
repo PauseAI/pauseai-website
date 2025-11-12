@@ -1,0 +1,80 @@
+{
+	"localStorage": {
+		"widget-consent": "null",
+		"_gcl_ls": "{\"schema\":\"gcl\",\"version\":1,\"gcl_ctr\":{\"value\":{\"value\":0,\"creationTimeMs\":1752083296097},\"expires\":1759859296097}}",
+		"user-theme": "dark",
+		"write": "{\"messages\":[{\"role\":\"user\",\"content\":\"Hello! Please help me find a person to contact!\\nContact Search:\\nGlasgow AI safety academics\\n\"},{\"role\":\"user\",\"content\":\"Hello! Please help me find a person to contact!\\nContact Search:\\nGlasgow AI safety academics\\n\"},{\"role\":\"assistant\",\"content\":\"I'll do another search to find more specific AI safety researchers:Based on the search results, I'll provide the contact information:\\n\\n**Contact 1: Dr. Jennifer Boyle**\\n- **Name:** Dr. Jennifer Boyle\\n- **Role:** Researcher involved in Research, Ethics, and AI discussions\\n- **Organization:** University of Glasgow\\n- **Relevance:** Involved in exploring AI's potential ethically, supporting critical and transparent use of AI tools\\n- **Stance:** Ethical AI development and responsible use\\n\\n**Contact 2: Dr. Andrew Struan**\\n- **Name:** Dr. Andrew Struan\\n- **Role:** Researcher involved in Research, Ethics, and AI discussions\\n- **Organization:** University of Glasgow\\n- **Relevance:** Part of the university's expert team in data science and artificial intelligence, with over 90 academics active in AI-related research\\n- **Stance:** Responsible AI research and development\\n\\n**Contact 3: Dr. Scott Ramsay**\\n- **Name:** Dr. Scott Ramsay\\n- **Role:** Researcher involved in Research, Ethics, and AI discussions\\n- **Organization:** University of Glasgow\\n- **Relevance:** Involved in developing AI systems that generate insights across diverse fields including environmental monitoring, technology, and consumer products\\n- **Stance:** Ethical AI application and innovation\\n\\n**Contact 4: Dr. Jenny August**\\n- **Name:** Dr. Jenny August\\n- **Role:** Researcher involved in Digital Tools for Maths\\n- **Organization:** University of Glasgow\\n- **Relevance:** Connected to the Glasgow Representation and Information Learning Lab, which aims to develop new methods for machine understanding of natural language text and data\\n- **Stance:** AI research and computational methods\\n\\n**Contact 5: Dr. Edmond S. L. Ho**\\n- **Name:** Dr. Edmond S. L. Ho\\n- **Role:** Senior Lecturer in Machine Learning\\n- **Organization:** University of Glasgow\\n- **Relevance:** Part of the academic team applying machine learning algorithms to produce AI systems that perform tasks requiring human intelligence\\n- **Stance:** Technical AI development and research\"}],\"state\":\"{\\\"fields\\\":{\\\"Person's Name\\\":\\\"Dr. Scott Ramsay\\\",\\\"Current Role\\\":\\\"Academic Researcher\\\",\\\"Organization/Affiliation\\\":\\\"University of Glasgow\\\"},\\\"info\\\":{\\\"discover\\\":{\\\"search\\\":\\\"Glasgow AI safety academics\\\"}},\\\"contacts\\\":[{\\\"name\\\":\\\"Dr. Jennifer Boyle\\\",\\\"role\\\":\\\"Researcher involved in Research, Ethics, and AI discussions\\\",\\\"organization\\\":\\\"University of Glasgow\\\"},{\\\"name\\\":\\\"Dr. Andrew Struan\\\",\\\"role\\\":\\\"Researcher involved in Research, Ethics, and AI discussions\\\",\\\"organization\\\":\\\"University of Glasgow\\\"},{\\\"name\\\":\\\"Dr. Scott Ramsay\\\",\\\"role\\\":\\\"Researcher involved in Research, Ethics, and AI discussions\\\",\\\"organization\\\":\\\"University of Glasgow\\\"},{\\\"name\\\":\\\"Dr. Jenny August\\\",\\\"role\\\":\\\"Researcher involved in Digital Tools for Maths\\\",\\\"organization\\\":\\\"University of Glasgow\\\"},{\\\"name\\\":\\\"Dr. Edmond S. L. Ho\\\",\\\"role\\\":\\\"Senior Lecturer in Machine Learning\\\",\\\"organization\\\":\\\"University of Glasgow\\\"}],\\\"timedRounds\\\":[{\\\"name\\\":\\\"discover\\\",\\\"description\\\":\\\"Search for potential contacts (using web search)\\\",\\\"stage\\\":\\\"discoverContacts\\\",\\\"durationSec\\\":20.949}],\\\"round\\\":\\\"complete\\\",\\\"stage\\\":\\\"discoverContacts\\\",\\\"email\\\":\\\"\\\",\\\"information\\\":\\\"Contact Search:\\\\nGlasgow AI safety academics\\\\n\\\",\\\"lastDialog\\\":{\\\"prompt\\\":\\\"Hello! Please help me find a person to contact!\\\\nContact Search:\\\\nGlasgow AI safety academics\\\\n\\\",\\\"response\\\":\\\"I'll do another search to find more specific AI safety researchers:Based on the search results, I'll provide the contact information:\\\\n\\\\n**Contact 1: Dr. Jennifer Boyle**\\\\n- **Name:** Dr. Jennifer Boyle\\\\n- **Role:** Researcher involved in Research, Ethics, and AI discussions\\\\n- **Organization:** University of Glasgow\\\\n- **Relevance:** Involved in exploring AI's potential ethically, supporting critical and transparent use of AI tools\\\\n- **Stance:** Ethical AI development and responsible use\\\\n\\\\n**Contact 2: Dr. Andrew Struan**\\\\n- **Name:** Dr. Andrew Struan\\\\n- **Role:** Researcher involved in Research, Ethics, and AI discussions\\\\n- **Organization:** University of Glasgow\\\\n- **Relevance:** Part of the university's expert team in data science and artificial intelligence, with over 90 academics active in AI-related research\\\\n- **Stance:** Responsible AI research and development\\\\n\\\\n**Contact 3: Dr. Scott Ramsay**\\\\n- **Name:** Dr. Scott Ramsay\\\\n- **Role:** Researcher involved in Research, Ethics, and AI discussions\\\\n- **Organization:** University of Glasgow\\\\n- **Relevance:** Involved in developing AI systems that generate insights across diverse fields including environmental monitoring, technology, and consumer products\\\\n- **Stance:** Ethical AI application and innovation\\\\n\\\\n**Contact 4: Dr. Jenny August**\\\\n- **Name:** Dr. Jenny August\\\\n- **Role:** Researcher involved in Digital Tools for Maths\\\\n- **Organization:** University of Glasgow\\\\n- **Relevance:** Connected to the Glasgow Representation and Information Learning Lab, which aims to develop new methods for machine understanding of natural language text and data\\\\n- **Stance:** AI research and computational methods\\\\n\\\\n**Contact 5: Dr. Edmond S. L. Ho**\\\\n- **Name:** Dr. Edmond S. L. Ho\\\\n- **Role:** Senior Lecturer in Machine Learning\\\\n- **Organization:** University of Glasgow\\\\n- **Relevance:** Part of the academic team applying machine learning algorithms to produce AI systems that perform tasks requiring human intelligence\\\\n- **Stance:** Technical AI development and research\\\"}}\",\"ux\":{\"selectedContactIndex\":3,\"showContactDetails\":true,\"showAskDetails\":false,\"debugMode\":false,\"processError\":\"\",\"workflowId\":\"\"}}",
+		"color-scheme": "dark"
+	},
+	"messages": [
+		{
+			"role": "user",
+			"content": "Hello! Please help me find a person to contact!\nContact Search:\nGlasgow AI safety academics\n"
+		},
+		{
+			"role": "user",
+			"content": "Hello! Please help me find a person to contact!\nContact Search:\nGlasgow AI safety academics\n"
+		},
+		{
+			"role": "assistant",
+			"content": "I'll do another search to find more specific AI safety researchers:Based on the search results, I'll provide the contact information:\n\n**Contact 1: Dr. Jennifer Boyle**\n- **Name:** Dr. Jennifer Boyle\n- **Role:** Researcher involved in Research, Ethics, and AI discussions\n- **Organization:** University of Glasgow\n- **Relevance:** Involved in exploring AI's potential ethically, supporting critical and transparent use of AI tools\n- **Stance:** Ethical AI development and responsible use\n\n**Contact 2: Dr. Andrew Struan**\n- **Name:** Dr. Andrew Struan\n- **Role:** Researcher involved in Research, Ethics, and AI discussions\n- **Organization:** University of Glasgow\n- **Relevance:** Part of the university's expert team in data science and artificial intelligence, with over 90 academics active in AI-related research\n- **Stance:** Responsible AI research and development\n\n**Contact 3: Dr. Scott Ramsay**\n- **Name:** Dr. Scott Ramsay\n- **Role:** Researcher involved in Research, Ethics, and AI discussions\n- **Organization:** University of Glasgow\n- **Relevance:** Involved in developing AI systems that generate insights across diverse fields including environmental monitoring, technology, and consumer products\n- **Stance:** Ethical AI application and innovation\n\n**Contact 4: Dr. Jenny August**\n- **Name:** Dr. Jenny August\n- **Role:** Researcher involved in Digital Tools for Maths\n- **Organization:** University of Glasgow\n- **Relevance:** Connected to the Glasgow Representation and Information Learning Lab, which aims to develop new methods for machine understanding of natural language text and data\n- **Stance:** AI research and computational methods\n\n**Contact 5: Dr. Edmond S. L. Ho**\n- **Name:** Dr. Edmond S. L. Ho\n- **Role:** Senior Lecturer in Machine Learning\n- **Organization:** University of Glasgow\n- **Relevance:** Part of the academic team applying machine learning algorithms to produce AI systems that perform tasks requiring human intelligence\n- **Stance:** Technical AI development and research"
+		}
+	],
+	"info": {
+		"discover": {
+			"search": "Glasgow AI safety academics"
+		}
+	},
+	"ux": {
+		"selectedContactIndex": 3,
+		"showContactDetails": true,
+		"showAskDetails": false,
+		"debugMode": false,
+		"processError": "",
+		"workflowId": ""
+	},
+	"forms": {
+		"form0": {}
+	},
+	"debugPanel": "",
+	"state": {
+		"currentStateToken": "{\"fields\":{\"Person's Name\":\"Dr. Scott Ramsay\",\"Current Role\":\"Academic Researcher\",\"Organization/Affiliation\":\"University of Glasgow\"},\"info\":{\"discover\":{\"search\":\"Glasgow AI safety academics\"}},\"contacts\":[{\"name\":\"Dr. Jennifer Boyle\",\"role\":\"Researcher involved in Research, Ethics, and AI discussions\",\"organization\":\"University of Glasgow\"},{\"name\":\"Dr. Andrew Struan\",\"role\":\"Researcher involved in Research, Ethics, and AI discussions\",\"organization\":\"University of Glasgow\"},{\"name\":\"Dr. Scott Ramsay\",\"role\":\"Researcher involved in Research, Ethics, and AI discussions\",\"organization\":\"University of Glasgow\"},{\"name\":\"Dr. Jenny August\",\"role\":\"Researcher involved in Digital Tools for Maths\",\"organization\":\"University of Glasgow\"},{\"name\":\"Dr. Edmond S. L. Ho\",\"role\":\"Senior Lecturer in Machine Learning\",\"organization\":\"University of Glasgow\"}],\"timedRounds\":[{\"name\":\"discover\",\"description\":\"Search for potential contacts (using web search)\",\"stage\":\"discoverContacts\",\"durationSec\":20.949}],\"round\":\"complete\",\"stage\":\"discoverContacts\",\"email\":\"\",\"information\":\"Contact Search:\\nGlasgow AI safety academics\\n\",\"lastDialog\":{\"prompt\":\"Hello! Please help me find a person to contact!\\nContact Search:\\nGlasgow AI safety academics\\n\",\"response\":\"I'll do another search to find more specific AI safety researchers:Based on the search results, I'll provide the contact information:\\n\\n**Contact 1: Dr. Jennifer Boyle**\\n- **Name:** Dr. Jennifer Boyle\\n- **Role:** Researcher involved in Research, Ethics, and AI discussions\\n- **Organization:** University of Glasgow\\n- **Relevance:** Involved in exploring AI's potential ethically, supporting critical and transparent use of AI tools\\n- **Stance:** Ethical AI development and responsible use\\n\\n**Contact 2: Dr. Andrew Struan**\\n- **Name:** Dr. Andrew Struan\\n- **Role:** Researcher involved in Research, Ethics, and AI discussions\\n- **Organization:** University of Glasgow\\n- **Relevance:** Part of the university's expert team in data science and artificial intelligence, with over 90 academics active in AI-related research\\n- **Stance:** Responsible AI research and development\\n\\n**Contact 3: Dr. Scott Ramsay**\\n- **Name:** Dr. Scott Ramsay\\n- **Role:** Researcher involved in Research, Ethics, and AI discussions\\n- **Organization:** University of Glasgow\\n- **Relevance:** Involved in developing AI systems that generate insights across diverse fields including environmental monitoring, technology, and consumer products\\n- **Stance:** Ethical AI application and innovation\\n\\n**Contact 4: Dr. Jenny August**\\n- **Name:** Dr. Jenny August\\n- **Role:** Researcher involved in Digital Tools for Maths\\n- **Organization:** University of Glasgow\\n- **Relevance:** Connected to the Glasgow Representation and Information Learning Lab, which aims to develop new methods for machine understanding of natural language text and data\\n- **Stance:** AI research and computational methods\\n\\n**Contact 5: Dr. Edmond S. L. Ho**\\n- **Name:** Dr. Edmond S. L. Ho\\n- **Role:** Senior Lecturer in Machine Learning\\n- **Organization:** University of Glasgow\\n- **Relevance:** Part of the academic team applying machine learning algorithms to produce AI systems that perform tasks requiring human intelligence\\n- **Stance:** Technical AI development and research\"}}",
+		"timedRounds": [
+			{
+				"name": "discover",
+				"description": "Search for potential contacts (using web search)",
+				"stage": "discoverContacts",
+				"durationSec": 20.949
+			}
+		],
+		"parsedContacts": [
+			{
+				"name": "Professor Chris Pearce",
+				"role": "Vice-Principal for Research & Knowledge Exchange",
+				"organization": "University of Glasgow"
+			},
+			{
+				"name": "Dr. Jennifer Boyle",
+				"role": "Academic Researcher",
+				"organization": "University of Glasgow"
+			},
+			{
+				"name": "Dr. Andrew Struan",
+				"role": "Academic Researcher",
+				"organization": "University of Glasgow"
+			},
+			{
+				"name": "Dr. Scott Ramsay",
+				"role": "Academic Researcher",
+				"organization": "University of Glasgow"
+			},
+			{
+				"name": "Dr. Edmond S. L. Ho",
+				"role": "Senior Lecturer in Machine Learning",
+				"organization": "University of Glasgow"
+			}
+		],
+		"activeForm": "form2"
+	},
+	"timestamp": "2025-07-16T16:28:04.396Z"
+}

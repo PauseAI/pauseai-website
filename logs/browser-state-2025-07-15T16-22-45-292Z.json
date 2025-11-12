@@ -1,0 +1,29 @@
+{
+	"localStorage": {
+		"widget-consent": "null",
+		"_gcl_ls": "{\"schema\":\"gcl\",\"version\":1,\"gcl_ctr\":{\"value\":{\"value\":0,\"creationTimeMs\":1752083296097},\"expires\":1759859296097}}",
+		"color-scheme": "dark"
+	},
+	"messages": [],
+	"info": {},
+	"ux": {
+		"selectedContactIndex": -1,
+		"showContactDetails": false,
+		"showAskDetails": false,
+		"debugMode": false,
+		"processError": "",
+		"workflowId": ""
+	},
+	"forms": {
+		"form0": {}
+	},
+	"debugPanel": "",
+	"state": {
+		"currentStateToken": "",
+		"timedRounds": [],
+		"parsedContacts": [],
+		"selectedContactIndex": -1,
+		"activeForm": "form1"
+	},
+	"timestamp": "2025-07-15T16:22:45.241Z"
+}

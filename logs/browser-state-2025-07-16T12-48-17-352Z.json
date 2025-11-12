@@ -1,0 +1,32 @@
+{
+	"localStorage": {
+		"widget-consent": "null",
+		"_gcl_ls": "{\"schema\":\"gcl\",\"version\":1,\"gcl_ctr\":{\"value\":{\"value\":0,\"creationTimeMs\":1752083296097},\"expires\":1759859296097}}",
+		"write": "{\"messages\":[],\"state\":\"\",\"ux\":{\"selectedContactIndex\":-1,\"showContactDetails\":false,\"showAskDetails\":false,\"debugMode\":false,\"processError\":\"\",\"workflowId\":\"msps\"}}",
+		"color-scheme": "dark"
+	},
+	"messages": [],
+	"info": {
+		"discover": {}
+	},
+	"ux": {
+		"selectedContactIndex": -1,
+		"showContactDetails": false,
+		"showAskDetails": false,
+		"debugMode": false,
+		"processError": "",
+		"workflowId": "msps"
+	},
+	"forms": {
+		"form0": {}
+	},
+	"debugPanel": "",
+	"state": {
+		"currentStateToken": "",
+		"timedRounds": [],
+		"parsedContacts": [],
+		"selectedContactIndex": -1,
+		"activeForm": "form1"
+	},
+	"timestamp": "2025-07-16T12:48:17.335Z"
+}

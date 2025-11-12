@@ -1,0 +1,33 @@
+
+> pause-ai@ build /home/anthony/repos/pauseai-l10n/notes/references/pauseai-website
+> cross-env NODE_ENV=production node scripts/filter-build-log.js "tsx scripts/l10n/run && vite build --emptyOutDir=false && run-s _postbuild:*"
+
+Regenerating inlang settings...
+Using locales: en, es
+Error cleaning up file l10n-cage/json/es.json: ENOENT: no such file or directory, open 'l10n-cage/json/es.json'
+Generated settings.json with 2 locales
+🔄 Compiling Paraglide runtime from settings...
+✅ Paraglide runtime compiled successfully!
+
+ WARN  [paraglide-js] PluginImportError: Couldn't import the plugin "https://cdn.jsdelivr.net/npm/@inlang/plugin-paraglide-js-adapter@latest/dist/index.js":
+
+SyntaxError: Unexpected identifier
+
+Everything up-to-date
+✅ Git push access verified
+🌐 L10n Mode: perform: Cage investigate/500s, can call LLM, update, and push
+
+Using target locales from compiled runtime: [es]
+  ℹ️  Using l10n branch: investigate/500s
+  ✓ L10n cage already exists, pulling latest changes...
+Already up to date.
+  ✓ Updated l10n cage
+  🔧 Configured remote with token authentication
+Already on 'investigate/500s'
+Your branch is up to date with 'origin/investigate/500s'.
+  ✓ Switched to investigate/500s branch
+Starting git log retrieval for website commit dates...
+Authentication status: SUCCESS
+Starting git log retrieval for cage commit dates...
+Completed first pass l10n to Spanish for 2023-july-nyc.md
+Completed first pass l10n to Spanish for 2023-july-london-13th.md

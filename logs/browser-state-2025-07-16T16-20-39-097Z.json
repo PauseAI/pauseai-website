@@ -1,0 +1,59 @@
+{
+	"localStorage": {
+		"widget-consent": "null",
+		"_gcl_ls": "{\"schema\":\"gcl\",\"version\":1,\"gcl_ctr\":{\"value\":{\"value\":0,\"creationTimeMs\":1752083296097},\"expires\":1759859296097}}",
+		"user-theme": "dark",
+		"write": "{\"messages\":[{\"role\":\"user\",\"content\":\"Hello! Please help me find a person to contact!\\nContact Search:\\nMP and SMP representatives for Edinburgh EH6\\n\"}],\"state\":\"{\\\"fields\\\":{\\\"Contact Search\\\":\\\"Glasgow AI safety academics\\\"},\\\"info\\\":{\\\"discover\\\":{\\\"search\\\":\\\"Glasgow AI safety academics\\\"}},\\\"contacts\\\":[{\\\"name\\\":\\\"Tracy Gilbert\\\",\\\"role\\\":\\\"Member of Parliament (MP)\\\",\\\"organization\\\":\\\"Scottish Labour Party\\\"},{\\\"name\\\":\\\"Miles Briggs\\\",\\\"role\\\":\\\"Member of the Scottish Parliament (MSP)\\\",\\\"organization\\\":\\\"Scottish Conservative and Unionist Party\\\"},{\\\"name\\\":\\\"Ben Macpherson\\\",\\\"role\\\":\\\"Member of the Scottish Parliament (MSP)\\\",\\\"organization\\\":\\\"Scottish National Party (SNP)\\\"}],\\\"timedRounds\\\":[{\\\"name\\\":\\\"discover\\\",\\\"description\\\":\\\"Search for potential contacts (using web search)\\\",\\\"stage\\\":\\\"discoverContacts\\\"}],\\\"round\\\":\\\"discover\\\",\\\"stage\\\":\\\"discoverContacts\\\",\\\"email\\\":\\\"\\\",\\\"workflowId\\\":\\\"eh6\\\",\\\"information\\\":\\\"Contact Search:\\\\nMP and SMP representatives for Edinburgh EH6\\\\n\\\",\\\"lastDialog\\\":{\\\"prompt\\\":\\\"Hello! Please help me find a person to contact!\\\\nContact Search:\\\\nMP and SMP representatives for Edinburgh EH6\\\\n\\\",\\\"response\\\":\\\"Based on the search results, I'll provide the contact information:\\\\n\\\\n**Contact 1: Tracy Gilbert**\\\\n- **Name:** Tracy Gilbert\\\\n- **Role:** Member of Parliament (MP)\\\\n- **Organization:** Scottish Labour Party\\\\n- **Relevance:** Elected MP for Edinburgh North & Leith in the 2024 UK Parliamentary General Election with a majority of 7,268 votes\\\\n- **Stance:** Labour Party representative\\\\n\\\\n**Contact 2: Miles Briggs**\\\\n- **Name:** Miles Briggs\\\\n- **Role:** Member of the Scottish Parliament (MSP)\\\\n- **Organization:** Scottish Conservative and Unionist Party\\\\n- **Relevance:** Lothian region MSP who has been active in various parliamentary discussions, including work on palliative care legislation\\\\n- **Stance:** Conservative Party representative\\\\n\\\\n**Contact 3: Ben Macpherson**\\\\n- **Name:** Ben Macpherson\\\\n- **Role:** Member of the Scottish Parliament (MSP)\\\\n- **Organization:** Scottish National Party (SNP)\\\\n- **Relevance:** MSP for Edinburgh Northern and Leith\\\\n- **Stance:** Scottish National Party representative\\\\n\\\\nNote: The Lothian region elects a total of 16 MSPs and is anchored by Edinburgh, so these are just a few of the representatives for the area.\\\"}}\",\"ux\":{\"workflowId\":\"\",\"processError\":\"Cached prompt mismatch for workflow eh6/discoverContacts-discover. Expected: \\\"Hello! Please help me find a person to contact!\\nContact Search:\\nMP and SMP representatives for Edinburgh EH6\\n\\\", Got: \\\"Hello! Please help me find a person to contact!\\nContact Search:\\nGlasgow AI safety academics\\n\\\"\",\"selectedContactIndex\":-1}}",
+		"color-scheme": "dark"
+	},
+	"messages": [
+		{
+			"role": "user",
+			"content": "Hello! Please help me find a person to contact!\nContact Search:\nMP and SMP representatives for Edinburgh EH6\n"
+		}
+	],
+	"info": {
+		"discover": {
+			"search": "Glasgow AI safety academics"
+		}
+	},
+	"ux": {
+		"workflowId": "",
+		"processError": "Cached prompt mismatch for workflow eh6/discoverContacts-discover. Expected: \"Hello! Please help me find a person to contact!\nContact Search:\nMP and SMP representatives for Edinburgh EH6\n\", Got: \"Hello! Please help me find a person to contact!\nContact Search:\nGlasgow AI safety academics\n\"",
+		"selectedContactIndex": -1
+	},
+	"forms": {
+		"form0": {}
+	},
+	"debugPanel": "",
+	"state": {
+		"currentStateToken": "{\"fields\":{\"Contact Search\":\"Glasgow AI safety academics\"},\"info\":{\"discover\":{\"search\":\"Glasgow AI safety academics\"}},\"contacts\":[{\"name\":\"Tracy Gilbert\",\"role\":\"Member of Parliament (MP)\",\"organization\":\"Scottish Labour Party\"},{\"name\":\"Miles Briggs\",\"role\":\"Member of the Scottish Parliament (MSP)\",\"organization\":\"Scottish Conservative and Unionist Party\"},{\"name\":\"Ben Macpherson\",\"role\":\"Member of the Scottish Parliament (MSP)\",\"organization\":\"Scottish National Party (SNP)\"}],\"timedRounds\":[{\"name\":\"discover\",\"description\":\"Search for potential contacts (using web search)\",\"stage\":\"discoverContacts\"}],\"round\":\"discover\",\"stage\":\"discoverContacts\",\"email\":\"\",\"workflowId\":\"eh6\",\"information\":\"Contact Search:\\nMP and SMP representatives for Edinburgh EH6\\n\",\"lastDialog\":{\"prompt\":\"Hello! Please help me find a person to contact!\\nContact Search:\\nMP and SMP representatives for Edinburgh EH6\\n\",\"response\":\"Based on the search results, I'll provide the contact information:\\n\\n**Contact 1: Tracy Gilbert**\\n- **Name:** Tracy Gilbert\\n- **Role:** Member of Parliament (MP)\\n- **Organization:** Scottish Labour Party\\n- **Relevance:** Elected MP for Edinburgh North & Leith in the 2024 UK Parliamentary General Election with a majority of 7,268 votes\\n- **Stance:** Labour Party representative\\n\\n**Contact 2: Miles Briggs**\\n- **Name:** Miles Briggs\\n- **Role:** Member of the Scottish Parliament (MSP)\\n- **Organization:** Scottish Conservative and Unionist Party\\n- **Relevance:** Lothian region MSP who has been active in various parliamentary discussions, including work on palliative care legislation\\n- **Stance:** Conservative Party representative\\n\\n**Contact 3: Ben Macpherson**\\n- **Name:** Ben Macpherson\\n- **Role:** Member of the Scottish Parliament (MSP)\\n- **Organization:** Scottish National Party (SNP)\\n- **Relevance:** MSP for Edinburgh Northern and Leith\\n- **Stance:** Scottish National Party representative\\n\\nNote: The Lothian region elects a total of 16 MSPs and is anchored by Edinburgh, so these are just a few of the representatives for the area.\"}}",
+		"currentStage": "discoverContacts",
+		"timedRounds": [
+			{
+				"name": "discover",
+				"description": "Search for potential contacts (using web search)",
+				"stage": "discoverContacts"
+			}
+		],
+		"parsedContacts": [
+			{
+				"name": "Tracy Gilbert",
+				"role": "Member of Parliament (MP)",
+				"organization": "Scottish Labour Party"
+			},
+			{
+				"name": "Miles Briggs",
+				"role": "Member of the Scottish Parliament (MSP)",
+				"organization": "Scottish Conservative and Unionist Party"
+			},
+			{
+				"name": "Ben Macpherson",
+				"role": "Member of the Scottish Parliament (MSP)",
+				"organization": "Scottish National Party (SNP)"
+			}
+		],
+		"activeForm": "form1"
+	},
+	"timestamp": "2025-07-16T16:20:39.016Z"
+}

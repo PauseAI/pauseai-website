@@ -1,0 +1,70 @@
+{
+	"localStorage": {
+		"widget-consent": "null",
+		"_gcl_ls": "{\"schema\":\"gcl\",\"version\":1,\"gcl_ctr\":{\"value\":{\"value\":0,\"creationTimeMs\":1752083296097},\"expires\":1759859296097}}",
+		"write": "{\"messages\":[{\"role\":\"user\",\"content\":\"Hello! Please help me find a person to contact!\\nContact Search:\\nMP and SMP representatives for Edinburgh EH6\\n\"},{\"role\":\"user\",\"content\":\"Hello! Please help me find a person to contact!\\nContact Search:\\nMP and SMP representatives for Edinburgh EH6\\n\"},{\"role\":\"assistant\",\"content\":\"I'll do another search to confirm the representatives for the specific EH6 postcode area.Based on the search results, I can provide the following information:\\n\\n**Contact 1: Tracy Gilbert**\\n- **Name:** Tracy Gilbert\\n- **Role:** Member of Parliament (MP)\\n- **Organization:** Scottish Labour Party\\n- **Relevance:** Represents Edinburgh North & Leith constituency, elected in the 2024 UK Parliamentary General Election with a majority of 7,268\\n- **Stance:** Labour Party representative\\n\\n**Contact 2: Ben Macpherson**\\n- **Name:** Ben Macpherson\\n- **Role:** Member of the Scottish Parliament (MSP)\\n- **Organization:** Scottish National Party (SNP)\\n- **Relevance:** Represents Edinburgh Northern and Leith, with an office at 34 Constitution Street, Leith\\n- **Stance:** Described as a hard-working and effective MSP, with experience as a Scottish Government Minister, championing local interests\\n\\n**Contact 3: Chris Murray**\\n- **Name:** Chris Murray\\n- **Role:** Member of Parliament (MP)\\n- **Organization:** Scottish Labour Party\\n- **Relevance:** Represents Edinburgh East & Musselburgh constituency, elected in the 2024 UK Parliamentary General Election with a majority of 3,715\\n- **Stance:** Labour Party representative\"}],\"state\":\"{\\\"fields\\\":{\\\"Contact Search\\\":\\\"MP and SMP representatives for Edinburgh EH6\\\"},\\\"info\\\":{\\\"discover\\\":{\\\"search\\\":\\\"MP and SMP representatives for Edinburgh EH6\\\"}},\\\"contacts\\\":[{\\\"name\\\":\\\"Tracy Gilbert\\\",\\\"role\\\":\\\"Member of Parliament (MP)\\\",\\\"organization\\\":\\\"Scottish Labour Party\\\"},{\\\"name\\\":\\\"Ben Macpherson\\\",\\\"role\\\":\\\"Member of the Scottish Parliament (MSP)\\\",\\\"organization\\\":\\\"Scottish National Party (SNP)\\\"},{\\\"name\\\":\\\"Chris Murray\\\",\\\"role\\\":\\\"Member of Parliament (MP)\\\",\\\"organization\\\":\\\"Scottish Labour Party\\\"}],\\\"timedRounds\\\":[{\\\"name\\\":\\\"discover\\\",\\\"description\\\":\\\"Search for potential contacts (using web search)\\\",\\\"stage\\\":\\\"discoverContacts\\\"}],\\\"round\\\":\\\"complete\\\",\\\"stage\\\":\\\"discoverContacts\\\",\\\"email\\\":\\\"\\\",\\\"workflowId\\\":\\\"msps\\\",\\\"information\\\":\\\"Contact Search:\\\\nMP and SMP representatives for Edinburgh EH6\\\\n\\\",\\\"lastDialog\\\":{\\\"prompt\\\":\\\"Hello! Please help me find a person to contact!\\\\nContact Search:\\\\nMP and SMP representatives for Edinburgh EH6\\\\n\\\",\\\"response\\\":\\\"I'll do another search to confirm the representatives for the specific EH6 postcode area.Based on the search results, I can provide the following information:\\\\n\\\\n**Contact 1: Tracy Gilbert**\\\\n- **Name:** Tracy Gilbert\\\\n- **Role:** Member of Parliament (MP)\\\\n- **Organization:** Scottish Labour Party\\\\n- **Relevance:** Represents Edinburgh North & Leith constituency, elected in the 2024 UK Parliamentary General Election with a majority of 7,268\\\\n- **Stance:** Labour Party representative\\\\n\\\\n**Contact 2: Ben Macpherson**\\\\n- **Name:** Ben Macpherson\\\\n- **Role:** Member of the Scottish Parliament (MSP)\\\\n- **Organization:** Scottish National Party (SNP)\\\\n- **Relevance:** Represents Edinburgh Northern and Leith, with an office at 34 Constitution Street, Leith\\\\n- **Stance:** Described as a hard-working and effective MSP, with experience as a Scottish Government Minister, championing local interests\\\\n\\\\n**Contact 3: Chris Murray**\\\\n- **Name:** Chris Murray\\\\n- **Role:** Member of Parliament (MP)\\\\n- **Organization:** Scottish Labour Party\\\\n- **Relevance:** Represents Edinburgh East & Musselburgh constituency, elected in the 2024 UK Parliamentary General Election with a majority of 3,715\\\\n- **Stance:** Labour Party representative\\\"}}\",\"ux\":{\"selectedContactIndex\":-1,\"showContactDetails\":false,\"showAskDetails\":false,\"debugMode\":false,\"processError\":\"\",\"workflowId\":\"msps\"}}",
+		"color-scheme": "dark"
+	},
+	"messages": [
+		{
+			"role": "user",
+			"content": "Hello! Please help me find a person to contact!\nContact Search:\nMP and SMP representatives for Edinburgh EH6\n"
+		},
+		{
+			"role": "user",
+			"content": "Hello! Please help me find a person to contact!\nContact Search:\nMP and SMP representatives for Edinburgh EH6\n"
+		},
+		{
+			"role": "assistant",
+			"content": "I'll do another search to confirm the representatives for the specific EH6 postcode area.Based on the search results, I can provide the following information:\n\n**Contact 1: Tracy Gilbert**\n- **Name:** Tracy Gilbert\n- **Role:** Member of Parliament (MP)\n- **Organization:** Scottish Labour Party\n- **Relevance:** Represents Edinburgh North & Leith constituency, elected in the 2024 UK Parliamentary General Election with a majority of 7,268\n- **Stance:** Labour Party representative\n\n**Contact 2: Ben Macpherson**\n- **Name:** Ben Macpherson\n- **Role:** Member of the Scottish Parliament (MSP)\n- **Organization:** Scottish National Party (SNP)\n- **Relevance:** Represents Edinburgh Northern and Leith, with an office at 34 Constitution Street, Leith\n- **Stance:** Described as a hard-working and effective MSP, with experience as a Scottish Government Minister, championing local interests\n\n**Contact 3: Chris Murray**\n- **Name:** Chris Murray\n- **Role:** Member of Parliament (MP)\n- **Organization:** Scottish Labour Party\n- **Relevance:** Represents Edinburgh East & Musselburgh constituency, elected in the 2024 UK Parliamentary General Election with a majority of 3,715\n- **Stance:** Labour Party representative"
+		}
+	],
+	"info": {
+		"discover": {
+			"search": "MP and SMP representatives for Edinburgh EH6"
+		}
+	},
+	"ux": {
+		"selectedContactIndex": -1,
+		"showContactDetails": false,
+		"showAskDetails": false,
+		"debugMode": false,
+		"processError": "",
+		"workflowId": "msps"
+	},
+	"forms": {
+		"form0": {}
+	},
+	"debugPanel": "",
+	"state": {
+		"currentStateToken": "{\"fields\":{\"Contact Search\":\"MP and SMP representatives for Edinburgh EH6\"},\"info\":{\"discover\":{\"search\":\"MP and SMP representatives for Edinburgh EH6\"}},\"contacts\":[{\"name\":\"Tracy Gilbert\",\"role\":\"Member of Parliament (MP)\",\"organization\":\"Scottish Labour Party\"},{\"name\":\"Ben Macpherson\",\"role\":\"Member of the Scottish Parliament (MSP)\",\"organization\":\"Scottish National Party (SNP)\"},{\"name\":\"Chris Murray\",\"role\":\"Member of Parliament (MP)\",\"organization\":\"Scottish Labour Party\"}],\"timedRounds\":[{\"name\":\"discover\",\"description\":\"Search for potential contacts (using web search)\",\"stage\":\"discoverContacts\"}],\"round\":\"complete\",\"stage\":\"discoverContacts\",\"email\":\"\",\"workflowId\":\"msps\",\"information\":\"Contact Search:\\nMP and SMP representatives for Edinburgh EH6\\n\",\"lastDialog\":{\"prompt\":\"Hello! Please help me find a person to contact!\\nContact Search:\\nMP and SMP representatives for Edinburgh EH6\\n\",\"response\":\"I'll do another search to confirm the representatives for the specific EH6 postcode area.Based on the search results, I can provide the following information:\\n\\n**Contact 1: Tracy Gilbert**\\n- **Name:** Tracy Gilbert\\n- **Role:** Member of Parliament (MP)\\n- **Organization:** Scottish Labour Party\\n- **Relevance:** Represents Edinburgh North & Leith constituency, elected in the 2024 UK Parliamentary General Election with a majority of 7,268\\n- **Stance:** Labour Party representative\\n\\n**Contact 2: Ben Macpherson**\\n- **Name:** Ben Macpherson\\n- **Role:** Member of the Scottish Parliament (MSP)\\n- **Organization:** Scottish National Party (SNP)\\n- **Relevance:** Represents Edinburgh Northern and Leith, with an office at 34 Constitution Street, Leith\\n- **Stance:** Described as a hard-working and effective MSP, with experience as a Scottish Government Minister, championing local interests\\n\\n**Contact 3: Chris Murray**\\n- **Name:** Chris Murray\\n- **Role:** Member of Parliament (MP)\\n- **Organization:** Scottish Labour Party\\n- **Relevance:** Represents Edinburgh East & Musselburgh constituency, elected in the 2024 UK Parliamentary General Election with a majority of 3,715\\n- **Stance:** Labour Party representative\"}}",
+		"timedRounds": [
+			{
+				"name": "discover",
+				"description": "Search for potential contacts (using web search)",
+				"stage": "discoverContacts",
+				"durationSec": 0.021
+			}
+		],
+		"parsedContacts": [
+			{
+				"name": "Tracy Gilbert",
+				"role": "Member of Parliament (MP)",
+				"organization": "Scottish Labour Party"
+			},
+			{
+				"name": "Ben Macpherson",
+				"role": "Member of the Scottish Parliament (MSP)",
+				"organization": "Scottish National Party (SNP)"
+			},
+			{
+				"name": "Chris Murray",
+				"role": "Member of Parliament (MP)",
+				"organization": "Scottish Labour Party"
+			}
+		],
+		"selectedContactIndex": -1,
+		"activeForm": "form1"
+	},
+	"timestamp": "2025-07-16T12:31:52.498Z"
+}

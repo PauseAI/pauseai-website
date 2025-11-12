@@ -1,0 +1,69 @@
+
+> pause-ai@ build /home/anthony/repos/pauseai-l10n/notes/references/pauseai-website
+> cross-env NODE_ENV=production node scripts/filter-build-log.js "tsx scripts/l10n/run && vite build --emptyOutDir=false && run-s _postbuild:*"
+
+(node:337800) [DEP0190] DeprecationWarning: Passing args to a child process with shell option true can lead to security vulnerabilities, as the arguments are not escaped, only concatenated.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+Regenerating inlang settings...
+Using locales: en
+Generated settings.json with 1 locales
+🔄 Compiling Paraglide runtime from settings...
+✅ Paraglide runtime compiled successfully!
+
+ WARN  [paraglide-js] PluginImportError: Couldn't import the plugin "https://cdn.jsdelivr.net/npm/@inlang/plugin-paraglide-js-adapter@latest/dist/index.js":
+
+SyntaxError: Unexpected identifier 'to'
+
+🌐 L10n Mode: en-only: Can copy English files to build directory
+
+vite v5.4.19 building SSR bundle for production...
+transforming...
+node_modules/.pnpm/@sveltejs+kit@2.36.3_@sveltejs+vite-plugin-svelte@3.1.2_svelte@4.2.20_vite@5.4.19_@types+node_246x4hx5xt5tvfsqblmewa63w4/node_modules/@sveltejs/kit/src/runtime/client/client.js (6:23): "untrack" is not exported by "node_modules/.pnpm/svelte@4.2.20/node_modules/svelte/src/runtime/ssr.js", imported by "node_modules/.pnpm/@sveltejs+kit@2.36.3_@sveltejs+vite-plugin-svelte@3.1.2_svelte@4.2.20_vite@5.4.19_@types+node_246x4hx5xt5tvfsqblmewa63w4/node_modules/@sveltejs/kit/src/runtime/client/client.js".
+"join" is imported from external module "path" but never used in "src/routes/api/debug-export/+server.ts".
+✓ 627 modules transformed.
+rendering chunks...
+vite v5.4.19 building for production...
+transforming...
+node_modules/.pnpm/@sveltejs+kit@2.36.3_@sveltejs+vite-plugin-svelte@3.1.2_svelte@4.2.20_vite@5.4.19_@types+node_246x4hx5xt5tvfsqblmewa63w4/node_modules/@sveltejs/kit/src/runtime/client/client.js (6:23): "untrack" is not exported by "node_modules/.pnpm/svelte@4.2.20/node_modules/svelte/src/runtime/index.js", imported by "node_modules/.pnpm/@sveltejs+kit@2.36.3_@sveltejs+vite-plugin-svelte@3.1.2_svelte@4.2.20_vite@5.4.19_@types+node_246x4hx5xt5tvfsqblmewa63w4/node_modules/@sveltejs/kit/src/runtime/client/client.js".
+✓ 694 modules transformed.
+rendering chunks...
+✓ built in 19.84s
+Fetching from URL: https://api.airtable.com/v0/appWPTGqZmUcs3NWu/tbl2emfOWNWoVz1kW
+Fetching from URL: https://api.airtable.com/v0/appWPTGqZmUcs3NWu/tbl2emfOWNWoVz1kW?offset=itrMUsQSScXclFiub/rec8m64fDXfzW2ciy
+Fetching from URL: https://api.airtable.com/v0/appWPTGqZmUcs3NWu/tbl2emfOWNWoVz1kW?offset=itrMUsQSScXclFiub/recHChZ1wq1AwugO0
+Fetching from URL: https://api.airtable.com/v0/appWPTGqZmUcs3NWu/tbl2emfOWNWoVz1kW?offset=itrMUsQSScXclFiub/recRQceRn2XeM8bWH
+Fetching from URL: https://api.airtable.com/v0/appWPTGqZmUcs3NWu/tbl2emfOWNWoVz1kW?offset=itrMUsQSScXclFiub/recaipbihJWJ5ddoO
+Fetching from URL: https://api.airtable.com/v0/appWPTGqZmUcs3NWu/tbl2emfOWNWoVz1kW?offset=itrMUsQSScXclFiub/reciiCoNgLCrdRhlA
+Fetching from URL: https://api.airtable.com/v0/appWPTGqZmUcs3NWu/tbl2emfOWNWoVz1kW?offset=itrMUsQSScXclFiub/recspsfSRpnEHqMd3
+Total records: 683, Verified records: 578
+Fetching from URL: https://api.airtable.com/v0/appWPTGqZmUcs3NWu/tblYLOPzJ32QOdBLg
+✓ built in 33.40s
+
+Run npm run preview to preview your production build locally.
+
+> Using @sveltejs/adapter-netlify
+  ✔ done
+
+> pause-ai@ _postbuild:pagefind /home/anthony/repos/pauseai-l10n/notes/references/pauseai-website
+> tsx scripts/create-pagefind-index.ts
+
+
+> pause-ai@ _postbuild:exclude /home/anthony/repos/pauseai-l10n/notes/references/pauseai-website
+> tsx scripts/exclude-from-edge-function.ts
+
+
+> pause-ai@ _postbuild:caching /home/anthony/repos/pauseai-l10n/notes/references/pauseai-website
+> tsx scripts/opt-in-to-caching.ts
+
+
+> pause-ai@ _postbuild:l10ntamer /home/anthony/repos/pauseai-l10n/notes/references/pauseai-website
+> tsx scripts/l10ntamer.ts
+
+⏭️  Skipping l10ntamer - English routes not prefixed
+
+📊 Complete build summary:
+   Client: 279 chunks (9341.17 kB)
+   Server: 266 chunks (5745.48 kB)
+   Total: 545 chunks (15086.65 kB)
+
+🏁 Build process completed with code 0

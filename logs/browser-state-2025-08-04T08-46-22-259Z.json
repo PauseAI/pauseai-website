@@ -1,0 +1,70 @@
+{
+	"localStorage": {
+		"widget-consent": "null",
+		"_gcl_ls": "{\"schema\":\"gcl\",\"version\":1,\"gcl_ctr\":{\"value\":{\"value\":0,\"creationTimeMs\":1752083296097},\"expires\":1759859296097}}",
+		"user-theme": "dark",
+		"write": "{\"messages\":[{\"role\":\"user\",\"content\":\"Hello! Please help me find a person to contact!\\nContact Search:\\nGlasgow\\n\"},{\"role\":\"assistant\",\"content\":\"I'll do another search to find more specific AI safety researchers from Glasgow:Based on the search results, I'll provide the contact information:\\n\\n**Contact 1: Chris Walsh**\\n- **Name:** Chris Walsh\\n- **Role:** Postdoctoral Researcher\\n- **Organization:** University of Glasgow\\n- **Relevance:** Postdoctoral Researcher interested in the application of deep learning and artificial intelligence to cancer histopathology\\n- **Stance:** Unknown\\n\\n**Contact 2: Ana Basiri**\\n- **Name:** Ana Basiri\\n- **Role:** Director of College of Science and Engineering\\n- **Organization:** University of Glasgow\\n- **Relevance:** Leads the Centre for Data Science, bringing together experts to tackle grand challenges using AI and data science, supporting research addressing issues like climate change and inequality\\n- **Stance:** Recognizes the significant potential and investment in AI technologies that will shape our future\\n\\n**Contact 3: Dr. Edmond S. L. Ho**\\n- **Name:** Dr. Edmond S. L. Ho\\n- **Role:** Senior Lecturer in Machine Learning\\n- **Organization:** University of Glasgow School of Computing Science\\n- **Relevance:** Part of a group of over 90 academics active in areas including machine learning, information retrieval, and computational inference\\n- **Stance:** Unknown\\n\\n**Additional Context:** The University has significant AI research funding (over £100m) across areas such as precision medicine, digital health, quantum computing, and climate change modeling. Their research spans six key programs including engineering, physical sciences, medical sciences, social sciences, arts, humanities, and fundamental AI research.\"}],\"state\":\"{\\\"fields\\\":{\\\"Contact Search\\\":\\\"Glasgow\\\"},\\\"info\\\":{\\\"discover\\\":{\\\"search\\\":\\\"Glasgow\\\"},\\\"choose\\\":{},\\\"define\\\":{},\\\"write\\\":{},\\\"revise\\\":{}},\\\"contacts\\\":[{\\\"name\\\":\\\"Chris Walsh\\\",\\\"role\\\":\\\"Postdoctoral Researcher\\\",\\\"organization\\\":\\\"University of Glasgow\\\"},{\\\"name\\\":\\\"Ana Basiri\\\",\\\"role\\\":\\\"Director of College of Science and Engineering\\\",\\\"organization\\\":\\\"University of Glasgow\\\"},{\\\"name\\\":\\\"Dr. Edmond S. L. Ho\\\",\\\"role\\\":\\\"Senior Lecturer in Machine Learning\\\",\\\"organization\\\":\\\"University of Glasgow School of Computing Science\\\"}],\\\"timedRounds\\\":[{\\\"name\\\":\\\"discover\\\",\\\"description\\\":\\\"Search for potential contacts (using web search)\\\",\\\"stage\\\":\\\"discoverContacts\\\",\\\"durationSec\\\":0.082}],\\\"round\\\":\\\"complete\\\",\\\"stage\\\":\\\"discoverContacts\\\",\\\"email\\\":\\\"\\\",\\\"workflowId\\\":\\\"glasgow\\\",\\\"information\\\":\\\"Contact Search:\\\\nGlasgow\\\\n\\\",\\\"lastDialog\\\":{\\\"prompt\\\":\\\"Hello! Please help me find a person to contact!\\\\nContact Search:\\\\nGlasgow\\\\n\\\",\\\"response\\\":\\\"I'll do another search to find more specific AI safety researchers from Glasgow:Based on the search results, I'll provide the contact information:\\\\n\\\\n**Contact 1: Chris Walsh**\\\\n- **Name:** Chris Walsh\\\\n- **Role:** Postdoctoral Researcher\\\\n- **Organization:** University of Glasgow\\\\n- **Relevance:** Postdoctoral Researcher interested in the application of deep learning and artificial intelligence to cancer histopathology\\\\n- **Stance:** Unknown\\\\n\\\\n**Contact 2: Ana Basiri**\\\\n- **Name:** Ana Basiri\\\\n- **Role:** Director of College of Science and Engineering\\\\n- **Organization:** University of Glasgow\\\\n- **Relevance:** Leads the Centre for Data Science, bringing together experts to tackle grand challenges using AI and data science, supporting research addressing issues like climate change and inequality\\\\n- **Stance:** Recognizes the significant potential and investment in AI technologies that will shape our future\\\\n\\\\n**Contact 3: Dr. Edmond S. L. Ho**\\\\n- **Name:** Dr. Edmond S. L. Ho\\\\n- **Role:** Senior Lecturer in Machine Learning\\\\n- **Organization:** University of Glasgow School of Computing Science\\\\n- **Relevance:** Part of a group of over 90 academics active in areas including machine learning, information retrieval, and computational inference\\\\n- **Stance:** Unknown\\\\n\\\\n**Additional Context:** The University has significant AI research funding (over £100m) across areas such as precision medicine, digital health, quantum computing, and climate change modeling. Their research spans six key programs including engineering, physical sciences, medical sciences, social sciences, arts, humanities, and fundamental AI research.\\\"}}\",\"ux\":{\"selectedContactIndex\":-1,\"showContactDetails\":false,\"showAskDetails\":false,\"debugMode\":false,\"processError\":\"\",\"workflowId\":\"glasgow\"}}",
+		"color-scheme": "dark"
+	},
+	"messages": [
+		{
+			"role": "user",
+			"content": "Hello! Please help me find a person to contact!\nContact Search:\nGlasgow\n"
+		},
+		{
+			"role": "assistant",
+			"content": "I'll do another search to find more specific AI safety researchers from Glasgow:Based on the search results, I'll provide the contact information:\n\n**Contact 1: Chris Walsh**\n- **Name:** Chris Walsh\n- **Role:** Postdoctoral Researcher\n- **Organization:** University of Glasgow\n- **Relevance:** Postdoctoral Researcher interested in the application of deep learning and artificial intelligence to cancer histopathology\n- **Stance:** Unknown\n\n**Contact 2: Ana Basiri**\n- **Name:** Ana Basiri\n- **Role:** Director of College of Science and Engineering\n- **Organization:** University of Glasgow\n- **Relevance:** Leads the Centre for Data Science, bringing together experts to tackle grand challenges using AI and data science, supporting research addressing issues like climate change and inequality\n- **Stance:** Recognizes the significant potential and investment in AI technologies that will shape our future\n\n**Contact 3: Dr. Edmond S. L. Ho**\n- **Name:** Dr. Edmond S. L. Ho\n- **Role:** Senior Lecturer in Machine Learning\n- **Organization:** University of Glasgow School of Computing Science\n- **Relevance:** Part of a group of over 90 academics active in areas including machine learning, information retrieval, and computational inference\n- **Stance:** Unknown\n\n**Additional Context:** The University has significant AI research funding (over £100m) across areas such as precision medicine, digital health, quantum computing, and climate change modeling. Their research spans six key programs including engineering, physical sciences, medical sciences, social sciences, arts, humanities, and fundamental AI research."
+		}
+	],
+	"info": {
+		"discover": {
+			"search": "Glasgow"
+		},
+		"choose": {},
+		"define": {},
+		"write": {},
+		"revise": {}
+	},
+	"ux": {
+		"selectedContactIndex": -1,
+		"showContactDetails": false,
+		"showAskDetails": false,
+		"debugMode": false,
+		"processError": "",
+		"workflowId": "glasgow"
+	},
+	"forms": {
+		"form0": {}
+	},
+	"debugPanel": "",
+	"state": {
+		"stateJson": "{\"fields\":{\"Contact Search\":\"Glasgow\"},\"info\":{\"discover\":{\"search\":\"Glasgow\"},\"choose\":{},\"define\":{},\"write\":{},\"revise\":{}},\"contacts\":[{\"name\":\"Chris Walsh\",\"role\":\"Postdoctoral Researcher\",\"organization\":\"University of Glasgow\"},{\"name\":\"Ana Basiri\",\"role\":\"Director of College of Science and Engineering\",\"organization\":\"University of Glasgow\"},{\"name\":\"Dr. Edmond S. L. Ho\",\"role\":\"Senior Lecturer in Machine Learning\",\"organization\":\"University of Glasgow School of Computing Science\"}],\"timedRounds\":[{\"name\":\"discover\",\"description\":\"Search for potential contacts (using web search)\",\"stage\":\"discoverContacts\",\"durationSec\":0.082}],\"round\":\"complete\",\"stage\":\"discoverContacts\",\"email\":\"\",\"workflowId\":\"glasgow\",\"information\":\"Contact Search:\\nGlasgow\\n\",\"lastDialog\":{\"prompt\":\"Hello! Please help me find a person to contact!\\nContact Search:\\nGlasgow\\n\",\"response\":\"I'll do another search to find more specific AI safety researchers from Glasgow:Based on the search results, I'll provide the contact information:\\n\\n**Contact 1: Chris Walsh**\\n- **Name:** Chris Walsh\\n- **Role:** Postdoctoral Researcher\\n- **Organization:** University of Glasgow\\n- **Relevance:** Postdoctoral Researcher interested in the application of deep learning and artificial intelligence to cancer histopathology\\n- **Stance:** Unknown\\n\\n**Contact 2: Ana Basiri**\\n- **Name:** Ana Basiri\\n- **Role:** Director of College of Science and Engineering\\n- **Organization:** University of Glasgow\\n- **Relevance:** Leads the Centre for Data Science, bringing together experts to tackle grand challenges using AI and data science, supporting research addressing issues like climate change and inequality\\n- **Stance:** Recognizes the significant potential and investment in AI technologies that will shape our future\\n\\n**Contact 3: Dr. Edmond S. L. Ho**\\n- **Name:** Dr. Edmond S. L. Ho\\n- **Role:** Senior Lecturer in Machine Learning\\n- **Organization:** University of Glasgow School of Computing Science\\n- **Relevance:** Part of a group of over 90 academics active in areas including machine learning, information retrieval, and computational inference\\n- **Stance:** Unknown\\n\\n**Additional Context:** The University has significant AI research funding (over £100m) across areas such as precision medicine, digital health, quantum computing, and climate change modeling. Their research spans six key programs including engineering, physical sciences, medical sciences, social sciences, arts, humanities, and fundamental AI research.\"}}",
+		"timedRounds": [
+			{
+				"name": "discover",
+				"description": "Search for potential contacts (using web search)",
+				"stage": "discoverContacts",
+				"durationSec": 0.082
+			}
+		],
+		"parsedContacts": [
+			{
+				"name": "Chris Walsh",
+				"role": "Postdoctoral Researcher",
+				"organization": "University of Glasgow"
+			},
+			{
+				"name": "Ana Basiri",
+				"role": "Director of College of Science and Engineering",
+				"organization": "University of Glasgow"
+			},
+			{
+				"name": "Dr. Edmond S. L. Ho",
+				"role": "Senior Lecturer in Machine Learning",
+				"organization": "University of Glasgow School of Computing Science"
+			}
+		],
+		"activeForm": "form1"
+	},
+	"timestamp": "2025-08-04T08:46:22.226Z"
+}

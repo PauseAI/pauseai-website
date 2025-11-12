@@ -1,0 +1,48 @@
+Script started on 2025-10-05 14:23:42+01:00 [COMMAND="netlify dev" TERM="xterm-256color" TTY="/dev/pts/1" COLUMNS="153" LINES="35"]
+[92m◈[39m [38;2;40;180;170mNetlify Dev[39m [92m◈[39m
+[92m◈[39m Injecting environment variable values for [33mall scopes[39m
+[2m[92m◈[39m Ignored [1m[3mgeneral context[23m[22m[2m env var: [33mLANG[39m (defined in [31mprocess[39m)[22m
+[92m◈[39m Injected [32m.env file[39m env var: [33mAIRTABLE_API_KEY[39m
+[92m◈[39m Injected [32m.env file[39m env var: [33mAIRTABLE_WRITE_API_KEY[39m
+[92m◈[39m Injected [32m.env file[39m env var: [33mOPENAI_KEY[39m
+[92m◈[39m Injected [32m.env file[39m env var: [33mANTHROPIC_API_KEY_FOR_WRITE[39m
+[92m◈[39m Injected [32m.env file[39m env var: [33mPARAGLIDE_LOCALES[39m
+[92m◈[39m Injected [32m.env file[39m env var: [33mGITHUB_TOKEN[39m
+[92m◈[39m Injected [32m.env file[39m env var: [33mPUBLIC_CLOUDINARY_CLOUD_NAME[39m
+[92m◈[39m Injected [32m.env file[39m env var: [33mCLOUDINARY_API_KEY[39m
+[92m◈[39m Injected [32m.env file[39m env var: [33mCLOUDINARY_API_SECRET[39m
+[93m◈[39m Setting up local development server
+[92m◈[39m Starting Netlify Dev with SvelteKit
+[?25l[1G[33m⠋[39m Waiting for framework port 5173. This can be configured using the 'targetPort' property in the netlify.toml[1G[2K[1G[?25h[1G
+[1G> pause-ai@ dev /home/anthony/repos/pauseai-l10n/notes/references/pauseai-website[1G
+[1G> tsx scripts/l10n/run --dryRun && vite dev --host 0.0.0.0[1G
+[1G
+[?25l[1G[33m⠙[39m Waiting for framework port 5173. This can be configured using the 'targetPort' property in the netlify.toml[?25l[1G[2K[1G[33m⠹[39m Waiting for framework port 5173. This can be configured using the 'targetPort' property in the netlify.toml[?25l[1G[2K[1G[33m⠸[39m Waiting for framework port 5173. This can be configured using the 'targetPort' property in the netlify.toml[?25l[1G[2K[1G[33m⠼[39m Waiting for framework port 5173. This can be configured using the 'targetPort' property in the netlify.toml[?25l[1G[2K[1G[33m⠴[39m Waiting for framework port 5173. This can be configured using the 'targetPort' property in the netlify.toml[?25l[1G[2K[1G[33m⠦[39m Waiting for framework port 5173. This can be configured using the 'targetPort' property in the netlify.toml[1G[2K[1GRegenerating inlang settings...[1G
+[?25l[1G[33m⠧[39m Waiting for framework port 5173. This can be configured using the 'targetPort' property in the netlify.toml[?25l[1G[2K[1G[33m⠇[39m Waiting for framework port 5173. This can be configured using the 'targetPort' property in the netlify.toml[1G[2K[1GUsing locales: en[1G
+[?25l[1G[33m⠏[39m Waiting for framework port 5173. This can be configured using the 'targetPort' property in the netlify.toml[?25l[1G[2K[1G[33m⠋[39m Waiting for framework port 5173. This can be configured using the 'targetPort' property in the netlify.toml[1G[2K[1GGenerated settings.json with 1 locales[1G
+[?25l[1G[33m⠙[39m Waiting for framework port 5173. This can be configured using the 'targetPort' property in the netlify.toml[?25l[1G[2K[1G[33m⠹[39m Waiting for framework port 5173. This can be configured using the 'targetPort' property in the netlify.toml[1G[2K[1G🔄 Compiling Paraglide runtime from settings...[1G
+[?25l[1G[33m⠸[39m Waiting for framework port 5173. This can be configured using the 'targetPort' property in the netlify.toml[?25l[1G[2K[1G[33m⠼[39m Waiting for framework port 5173. This can be configured using the 'targetPort' property in the netlify.toml[1G[2K[1G✅ Paraglide runtime compiled successfully![1G
+[?25l[1G[33m⠴[39m Waiting for framework port 5173. This can be configured using the 'targetPort' property in the netlify.toml[?25l[1G[2K[1G[33m⠦[39m Waiting for framework port 5173. This can be configured using the 'targetPort' property in the netlify.toml[1G[2K[1G🌐 L10n Mode: en-only: Can copy English files to build directory[1G
+[?25l[1G[33m⠧[39m Waiting for framework port 5173. This can be configured using the 'targetPort' property in the netlify.toml[?25l[1G[2K[1G[33m⠇[39m Waiting for framework port 5173. This can be configured using the 'targetPort' property in the netlify.toml[1G[2K[1G
+[?25l[1G[33m⠏[39m Waiting for framework port 5173. This can be configured using the 'targetPort' property in the netlify.toml[1G[2K[1G
+[1G  [32m[1mVITE[22m v5.4.20[39m  [2mready in [0m[1m1826[22m[2m[0m ms[22m[1G
+[1G
+[?25l[1G[33m⠋[39m Waiting for framework port 5173. This can be configured using the 'targetPort' property in the netlify.toml[?25l[1G[2K[1G[33m⠙[39m Waiting for framework port 5173. This can be configured using the 'targetPort' property in the netlify.toml[?25l[1G[2K[1G[33m⠹[39m Waiting for framework port 5173. This can be configured using the 'targetPort' property in the netlify.toml[?25l[1G[2K[1G[33m⠸[39m Waiting for framework port 5173. This can be configured using the 'targetPort' property in the netlify.toml[1G[2K[1G  [32m➜[39m  [1mLocal[22m:   [36mhttp://localhost:[1m37572[22m/[39m[1G
+[1G  [32m➜[39m  [1mNetwork[22m: [36mhttp://192.168.0.153:[1m37572[22m/[39m[1G
+[?25l[1G[33m⠼[39m Waiting for framework port 5173. This can be configured using the 'targetPort' property in the netlify.toml[?25l[1G[2K[1G[33m⠴[39m Waiting for framework port 5173. This can be configured using the 'targetPort' property in the netlify.toml[?25l[1G[2K[1G[33m⠦[39m Waiting for framework port 5173. This can be configured using the 'targetPort' property in the netlify.toml[?25l[1G[2K[1G[33m⠧[39m Waiting for framework port 5173. This can be configured using the 'targetPort' property in the netlify.toml[1G[2K[1GSkipping geo lookup, Platform not available in this environment[1G
+[?25l[1G[33m⠇[39m Waiting for framework port 5173. This can be configured using the 'targetPort' property in the netlify.toml[?25l[1G[2K[1G[33m⠏[39m Waiting for framework port 5173. This can be configured using the 'targetPort' property in the netlify.toml[1G[2K[1G(node:97957) Warning: An error event has already been emitted on the socket. Please use the destroy method on the socket while handling a 'clientError' event.[1G
+[1G(Use `node --trace-warnings ...` to show where the warning was created)[1G
+[?25l[1G[33m⠋[39m Waiting for framework port 5173. This can be configured using the 'targetPort' property in the netlify.toml[?25l[1G[2K[1G[33m⠙[39m Waiting for framework port 5173. This can be configured using the 'targetPort' property in the netlify.toml[?25l[1G[2K[1G[33m⠹[39m Waiting for framework port 5173. This can be configured using the 'targetPort' property in the netlify.toml[?25l[1G[2K[1G[33m⠸[39m Waiting for framework port 5173. This can be configured using the 'targetPort' property in the netlify.toml[1G[2K[1GSkipping geo lookup, Platform not available in this environment[1G
+[?25l[1G[33m⠼[39m Waiting for framework port 5173. This can be configured using the 'targetPort' property in the netlify.toml[?25l[1G[2K[1G[33m⠴[39m Waiting for framework port 5173. This can be configured using the 'targetPort' property in the netlify.toml[1G[2K[1GSkipping geo lookup, Platform not available in this environment[1G
+[?25l[1G[33m⠦[39m Waiting for framework port 5173. This can be configured using the 'targetPort' property in the netlify.toml[?25l[1G[2K[1G[33m⠧[39m Waiting for framework port 5173. This can be configured using the 'targetPort' property in the netlify.toml[1G[2K[1GSkipping geo lookup, Platform not available in this environment[1G
+[?25l[1G[33m⠇[39m Waiting for framework port 5173. This can be configured using the 'targetPort' property in the netlify.toml[?25l[1G[2K[1G[33m⠏[39m Waiting for framework port 5173. This can be configured using the 'targetPort' property in the netlify.toml[1G[2K[1GSkipping geo lookup, Platform not available in this environment[1G
+[?25l[1G[33m⠋[39m Waiting for framework port 5173. This can be configured using the 'targetPort' property in the netlify.toml[?25l[1G[2K[1G[33m⠙[39m Waiting for framework port 5173. This can be configured using the 'targetPort' property in the netlify.toml^[[A^[[B^[[A^C
+[33m   ╭────────────────────────────────────────╮[39m
+   [33m│[39m                                        [33m│[39m
+   [33m│[39m   Update available [2m20.0.0[22m[0m → [0m[32m23.9.1[39m     [33m│[39m
+   [33m│[39m   Run [36mnpm i -g netlify-cli[39m to update   [33m│[39m
+   [33m│[39m                                        [33m│[39m
+[33m   ╰────────────────────────────────────────╯[39m
+
+
+Script done on 2025-10-05 14:31:43+01:00 [COMMAND_EXIT_CODE="0"]

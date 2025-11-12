@@ -1,0 +1,27 @@
+{
+	"localStorage": {
+		"widget-consent": "null",
+		"_gcl_ls": "{\"schema\":\"gcl\",\"version\":1,\"gcl_ctr\":{\"value\":{\"value\":0,\"creationTimeMs\":1752083296097},\"expires\":1759859296097}}",
+		"write": "{\"messages\":[],\"state\":\"\",\"ux\":{\"workflowId\":\"eh6\",\"processError\":\"\"}}",
+		"color-scheme": "dark"
+	},
+	"messages": [],
+	"info": {
+		"discover": {}
+	},
+	"ux": {
+		"workflowId": "eh6",
+		"processError": ""
+	},
+	"forms": {
+		"form0": {}
+	},
+	"debugPanel": "",
+	"state": {
+		"currentStateToken": "",
+		"timedRounds": [],
+		"parsedContacts": [],
+		"activeForm": "form1"
+	},
+	"timestamp": "2025-07-16T14:31:12.211Z"
+}
