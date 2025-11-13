@@ -40,7 +40,6 @@ import {
 	MESSAGE_L10NS,
 	MESSAGE_SOURCE
 } from '../../src/lib/l10n'
-import { locales as runtimeLocales, baseLocale } from '../../src/lib/paraglide/runtime.js'
 
 // Load environment variables first
 dotenv.config()
@@ -71,12 +70,17 @@ if (unknownArgs.length > 0) {
 // Ensure inlang settings are current before importing runtime
 execSync('tsx scripts/inlang-settings.ts', { stdio: 'inherit' })
 
+// Dynamic import after runtime is generated (ESM scan happens before execSync)
+const runtime = await import('../../src/lib/paraglide/runtime.js')
+
 // Verify base locale assumption
-if (baseLocale !== 'en') {
-	throw new Error(`runtime.baseLocale set to ${baseLocale} but our code assumes and hardcodes 'en'`)
+if (runtime.baseLocale !== 'en') {
+	throw new Error(
+		`runtime.baseLocale set to ${runtime.baseLocale} but our code assumes and hardcodes 'en'`
+	)
 }
 
-const locales = runtimeLocales
+const locales = runtime.locales
 
 // Get API key early for mode determination
 const LLM_API_KEY = process.env.L10N_OPENROUTER_API_KEY
