@@ -5,11 +5,9 @@ import fs from 'fs'
 import path from 'path'
 import { defineConfig } from 'vite'
 import lucidePreprocess from 'vite-plugin-lucide-preprocess'
-import { importRuntimeWithoutVite } from './scripts/l10n/utils'
 import { isDev } from './src/lib/env'
 import { MARKDOWN_L10NS } from './src/lib/l10n'
-
-const { locales: compiledLocales } = await importRuntimeWithoutVite()
+import { locales as compiledLocales } from './src/lib/paraglide/runtime'
 
 function getLocaleExcludePatterns(): RegExp[] {
 	const md = path.resolve(MARKDOWN_L10NS)
