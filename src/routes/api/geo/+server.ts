@@ -6,7 +6,7 @@ export const prerender = false
 // re-export to hide implementation
 export type { GeoApiResponse } from '$netlify/edge-functions/geo'
 
-export function GET({ platform, setHeaders }) {
+export function GET({ platform }) {
 	if (!platform) {
 		console.warn('Skipping geo lookup, Platform not available in this environment')
 		return new Response('Geo lookup is not available in this environment', {
