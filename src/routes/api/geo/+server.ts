@@ -1,10 +1,10 @@
-import { generateCacheControlRecord } from '$lib/utils'
-import { json } from '@sveltejs/kit'
+import { error } from '@sveltejs/kit'
 import { StatusCodes } from 'http-status-codes'
 
-export type GeoApiResponse = App.Platform['context']['geo']
-
 export const prerender = false
+
+// re-export to hide implementation
+export type { GeoApiResponse } from '$netlify/edge-functions/geo'
 
 export function GET({ platform, setHeaders }) {
 	if (!platform) {
@@ -13,7 +13,6 @@ export function GET({ platform, setHeaders }) {
 			status: StatusCodes.NOT_IMPLEMENTED
 		})
 	}
-	const geo: GeoApiResponse = platform.context.geo
-	setHeaders(generateCacheControlRecord({ private: true, maxAge: 60 * 60 }))
-	return json(geo)
+	// Route should be served from netlify/edge-functions/geo.ts
+	return error(StatusCodes.INTERNAL_SERVER_ERROR)
 }

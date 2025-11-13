@@ -49,7 +49,8 @@ const config = {
 		}),
 		alias: {
 			$assets: 'src/assets',
-			$api: 'src/routes/api'
+			$api: 'src/routes/api',
+			$netlify: 'netlify'
 		},
 		prerender: {
 			// Allows dead links to be rendered
