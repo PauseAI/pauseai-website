@@ -13,6 +13,6 @@ export function GET({ platform }) {
 			status: StatusCodes.NOT_IMPLEMENTED
 		})
 	}
-	// Route should be served from netlify/edge-functions/geo.ts
+	console.error('/api/geo should be served from netlify/edge-functions/geo.ts')
 	return error(StatusCodes.INTERNAL_SERVER_ERROR)
 }
