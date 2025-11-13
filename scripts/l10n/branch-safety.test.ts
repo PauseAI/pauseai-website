@@ -1,5 +1,6 @@
 import { describe, it, expect, beforeEach, afterEach } from 'vitest'
 import { l10nCageBranch, validateBranchForWrite } from './branch-safety'
+import { setBundledCageOverride } from './cage-env'
 
 describe('Branch Safety', () => {
 	// Save original env values
@@ -16,6 +17,7 @@ describe('Branch Safety', () => {
 		delete process.env.L10N_BRANCH
 		delete process.env.BRANCH
 		delete process.env.REVIEW_ID
+		setBundledCageOverride(false)
 	})
 
 	afterEach(() => {
@@ -27,6 +29,7 @@ describe('Branch Safety', () => {
 				process.env[key] = value
 			}
 		})
+		setBundledCageOverride(undefined)
 	})
 
 	describe('L10N_BRANCH override', () => {
@@ -77,6 +80,11 @@ describe('Branch Safety', () => {
 			process.env.L10N_BRANCH = 'main'
 			const branch = l10nCageBranch()
 			expect(() => validateBranchForWrite(branch)).not.toThrow()
+		})
+
+		it('allows local development to write to main when cage is bundled', () => {
+			setBundledCageOverride(true)
+			expect(() => validateBranchForWrite('main')).not.toThrow()
 		})
 	})
 

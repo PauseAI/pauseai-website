@@ -4,6 +4,7 @@
  */
 
 import { l10nCageBranch, canPushToRemote } from './branch-safety'
+import { isBundledCageRepo } from './cage-env'
 import { L10N_CAGE_DIR } from '../../src/lib/l10n'
 
 /**
@@ -19,6 +20,7 @@ export interface ModeOptions {
 	isDryRun?: boolean
 	apiKey?: string
 	locales?: readonly string[]
+	baseLocale?: string
 	verbose?: boolean
 	force?: boolean
 	forceFiles?: string[]
@@ -36,10 +38,12 @@ export class Mode {
 	readonly reason: string
 	readonly isCI: boolean
 	readonly options: ModeOptions
+	readonly baseLocale: string
 
 	constructor(options: ModeOptions = {}) {
 		this.options = options
 		this.isCI = process.env.CI === 'true'
+		this.baseLocale = options.baseLocale || 'en'
 		const result = this.determine()
 		this.mode = result.mode
 		this.canReadCache = result.canReadCache
@@ -59,19 +63,21 @@ export class Mode {
 		reason: string
 	} {
 		const branch = this.options.branch || l10nCageBranch()
+		const cageBundled = isBundledCageRepo()
 
 		// Check if only English locale
 		if (
 			this.options.locales &&
 			this.options.locales.length === 1 &&
-			this.options.locales[0] === 'en'
+			this.options.locales[0] === this.baseLocale
 		) {
+			const baseLabel = this.baseLocale === 'en' ? 'English' : this.baseLocale
 			return {
 				mode: 'en-only',
 				canReadCache: false,
 				canWrite: false,
 				branch,
-				reason: 'Only English locale configured'
+				reason: `Only ${baseLabel} locale configured`
 			}
 		}
 
@@ -96,7 +102,7 @@ export class Mode {
 		// Full perform mode - check if allowed
 		const isMainBranch = branch === 'main'
 
-		if (!this.isCI && isMainBranch) {
+		if (!this.isCI && isMainBranch && !cageBundled) {
 			// This would write to main from local dev - not allowed
 			throw new Error(
 				'Cannot write to main branch of the l10n repos from local development.\n' +
@@ -124,7 +130,11 @@ export class Mode {
 			canReadCache: true,
 			canWrite: true,
 			branch,
-			reason: this.isCI ? `CI can write to ${branch}` : `Local development on ${branch} branch`
+			reason: this.isCI
+				? `CI can write to ${branch}`
+				: cageBundled
+					? `Bundled cage on ${branch} branch`
+					: `Local development on ${branch} branch`
 		}
 	}
 
@@ -135,7 +145,9 @@ export class Mode {
 		// Main mode announcement
 		switch (this.mode) {
 			case 'en-only':
-				console.log('🌐 L10n Mode: en-only: Can copy English files to build directory')
+				console.log(
+					`🌐 L10n Mode: base-only (${this.baseLocale}): Can copy base-locale files to build directory`
+				)
 				break
 
 			case 'dry-run':

@@ -1,46 +1,37 @@
-# PauseAI.info Website
+# PauseAI.es Website
 
-[![Netlify Status](https://api.netlify.com/api/v1/badges/628797a4-8d5a-4b5f-94d7-236b4604b23c/deploy-status)](https://app.netlify.com/sites/pauseai/deploys)
-
-A SvelteKit website for [PauseAI.info](https://pauseai.info/) with automatic localization (l10n) support.
-
-## What is Localization (L10n)?
-
-Localization goes beyond simple translation — it adapts content for specific locales (e.g., `en`, `de`, sometimes more complicated combinations such as `en-US` or `fr-CA`). While translating text between languages is a major part of l10n, true localization also considers cultural context, regional preferences, and local conventions. This project can use LLMs to automatically generate locale-appropriate content.
-
-If you are not yourself developing/changing the l10n system, you can let it run automatically.
+A SvelteKit website for [PauseAI.es](https://pauseai.es/).
 
 ## Quick Start
 
 ```bash
 # Clone the repository
-git clone git@github.com:PauseAI/pauseai-website.git
-cd pauseai-website
+git git@github.com:pauseai-en-espanol/pauseai-website-es.git
+cd pauseai-website-es
 
 # Install dependencies (we use pnpm, but npm or yarn also work)
 pnpm install
 
-# Start development server (en-only mode)
+# Start development server (es-only mode)
 pnpm dev
 
 # Open http://localhost:37572
 ```
 
-That's it! By default, all commands run in English-only mode for maximum speed. No API keys or special setup required.
+That's it! By default, all commands run in Spanish-only mode for maximum speed. No API keys or special setup required.
 
 ## Development Commands
 
-| Command        | Description                                  |
-| -------------- | -------------------------------------------- |
-| `pnpm dev`     | Start development server                     |
-| `pnpm build`   | Build for production                         |
-| `pnpm preview` | Preview production build                     |
-| `pnpm test`    | Run test suite                               |
-| `pnpm lint`    | Check code style                             |
-| `pnpm format`  | Auto-fix code style                          |
-| `pnpm clean`   | Clean build artifacts and caches             |
-| `pnpm l10n`    | Run l10n manually (see [L10N.md](./L10N.md)) |
-| `pnpm netlify` | Show Netlify preview options                 |
+| Command        | Description                      |
+| -------------- | -------------------------------- |
+| `pnpm dev`     | Start development server         |
+| `pnpm build`   | Build for production             |
+| `pnpm preview` | Preview production build         |
+| `pnpm test`    | Run test suite                   |
+| `pnpm lint`    | Check code style                 |
+| `pnpm format`  | Auto-fix code style              |
+| `pnpm clean`   | Clean build artifacts and caches |
+| `pnpm netlify` | Show Netlify preview options     |
 
 ## Docker
 
@@ -73,36 +64,11 @@ cp template.env .env
 # then edit .env to add API keys and configure locales if required
 ```
 
-## Creating Articles
+This fork vendors the Spanish cage inside the repo, so local workflows never talk to GitHub. When you need to refresh the cage from `github.com/PauseAI/paraglide`, run the l10n script with `L10N_REFRESH_REMOTE=1`:
 
-You can create and edit most content using [Decap CMS](https://pauseai-cms.netlify.app/), a user-friendly web interface for managing content.
-
-(Some special pages, including the homepage, require editing other Svelte content outside of the CMS.)
-
-### Steps to Create a New Article:
-
-1. Go to [pauseai-cms.netlify.app](https://pauseai-cms.netlify.app/).
-2. Log in with a GitHub account.
-3. If you are **not authorized to publish content independently**, Decap CMS will prompt you to **fork the repository** before making any changes. Confirm this to create your own copy of the content.
-4. Click **"New Post"**.
-5. Fill in the fields:
-   - **Title**: Enter the title of your post.
-   - **Slug**: Define a URL-friendly version of your title.
-   - **Description (Optional)**: Provide a brief summary of the post.
-   - **Image (Optional)**: Upload an image or insert an image URL.
-   - **Author (Optional)**: Add your name if applicable.
-   - **Date (Optional)**: Select the publication date, or use "Now" for the current date.
-   - **Body**: Enter the main content.
-6. Click **"Save"** to store your draft.
-7. Update the status as needed:
-   - **Draft**: The initial state, for work in progress.
-   - **In Review**: Submit the article for review and approval.
-   - **Ready**: The article is ready to be published.
-8. Decap CMS will automatically create a pull request on GitHub to submit your changes for review.
-
-The article (and automatic l10ns of same) will be previewable.
-
-If you are sufficiently changing prominent text, consider inspecting relevant l10ns as well as the original.
+```bash
+L10N_REFRESH_REMOTE=1 pnpm l10n --dry-run
+```
 
 ### Image Optimization
 

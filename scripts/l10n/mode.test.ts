@@ -1,5 +1,7 @@
 import { describe, it, expect, beforeEach, afterEach, vi, type MockInstance } from 'vitest'
 import { Mode } from './mode'
+import { setBundledCageOverride } from './cage-env'
+import * as branchSafety from './branch-safety'
 
 describe('Mode', () => {
 	// Save original environment
@@ -7,11 +9,14 @@ describe('Mode', () => {
 		CI: process.env.CI,
 		L10N_BRANCH: process.env.L10N_BRANCH
 	}
+	let canPushSpy: MockInstance<[string], boolean>
 
 	beforeEach(() => {
 		// Clean environment before each test
 		delete process.env.CI
 		delete process.env.L10N_BRANCH
+		setBundledCageOverride(false)
+		canPushSpy = vi.spyOn(branchSafety, 'canPushToRemote').mockReturnValue(true)
 	})
 
 	afterEach(() => {
@@ -23,6 +28,8 @@ describe('Mode', () => {
 				process.env[key] = value
 			}
 		})
+		setBundledCageOverride(undefined)
+		canPushSpy.mockRestore()
 	})
 
 	describe('English-only mode', () => {
@@ -153,6 +160,17 @@ describe('Mode', () => {
 			expect(mode.branch).toBe('main')
 			expect(mode.canReadCache).toBe(true)
 			expect(mode.canWrite).toBe(false)
+		})
+
+		it('allows local dev to write to main when cage is bundled', () => {
+			setBundledCageOverride(true)
+			process.env.L10N_BRANCH = 'main'
+			const mode = new Mode({
+				locales: ['en', 'de'],
+				apiKey: 'valid-api-key-thats-long-enough'
+			})
+			expect(mode.mode).toBe('perform')
+			expect(mode.reason).toContain('Bundled cage')
 		})
 	})
 

@@ -117,7 +117,7 @@ export function setupL10nCage(cageDir: string, verbose = false, branch?: string)
 		console.error('\n❌ FAILED TO SET UP L10N CAGE!')
 		console.error(`   Error accessing l10n cage: ${(error as Error).message}`)
 		console.error('\n   Options:')
-		console.error('   1. Continue with English-only: Edit .env to set PARAGLIDE_LOCALES=en')
+		console.error('   1. Continue with Spanish-only: Edit .env to set PARAGLIDE_LOCALES=es')
 		console.error('   2. Check your internet connection and try again')
 		console.error('   3. Contact the project maintainers if the issue persists')
 		return false

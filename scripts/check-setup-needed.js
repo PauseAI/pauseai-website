@@ -14,6 +14,7 @@ dotenv.config()
 
 const runtimeModule = await importRuntimeWithoutVite()
 let activeLocales = Array.from(runtimeModule.locales)
+const baseLocale = runtimeModule.baseLocale ?? 'en'
 let setupNeeded = false
 let reason = ''
 
@@ -22,9 +23,9 @@ if (!fs.existsSync(L10N_CAGE_DIR)) {
 	reason = `Basic setup directory not found (${L10N_CAGE_DIR})`
 }
 
-const nonEnglishLocales = activeLocales.filter((locale) => locale !== 'en')
-if (nonEnglishLocales.length > 0) {
-	// If we need non-English locales, check if directories exist
+const nonBaseLocales = activeLocales.filter((locale) => locale !== baseLocale)
+if (nonBaseLocales.length > 0) {
+	// If we need additional locales, check if directories exist
 	if (!fs.existsSync(MARKDOWN_L10NS)) {
 		setupNeeded = true
 		reason = `Translations directory not found (${MARKDOWN_L10NS})`
@@ -33,7 +34,7 @@ if (nonEnglishLocales.length > 0) {
 			.readdirSync(MARKDOWN_L10NS)
 			.filter((f) => fs.statSync(path.join(MARKDOWN_L10NS, f)).isDirectory())
 
-		const missingLocales = nonEnglishLocales.filter((locale) => !existingDirs.includes(locale))
+		const missingLocales = nonBaseLocales.filter((locale) => !existingDirs.includes(locale))
 		if (missingLocales.length > 0) {
 			setupNeeded = true
 			reason = `Missing locale directories: ${missingLocales.join(', ')}`
@@ -47,11 +48,11 @@ if (activeLocales.length > 1 && !fs.existsSync(path.join(L10N_CAGE_DIR, '.git'))
 	reason = 'Translation repository not found'
 }
 
-// Check if English messages file is available for Paraglide
-const enMessageTarget = path.join(L10N_CAGE_DIR, 'json', 'en.json')
-if (!fs.existsSync(enMessageTarget)) {
+// Check if base-locale messages file is available for Paraglide
+const baseMessageTarget = path.join(L10N_CAGE_DIR, 'json', `${baseLocale}.json`)
+if (!fs.existsSync(baseMessageTarget)) {
 	setupNeeded = true
-	reason = 'English messages file not found'
+	reason = `Base locale (${baseLocale}) messages file not found`
 }
 
 // Check for completely fresh installation - if SVelteKit dir doesn't exist, always run setup
@@ -68,11 +69,11 @@ console.log(
 	`- Base directory (${L10N_CAGE_DIR}): ${fs.existsSync(L10N_CAGE_DIR) ? 'exists ✓' : 'missing ❌'}`
 )
 console.log(
-	`- English messages (${enMessageTarget}): ${fs.existsSync(enMessageTarget) ? 'exists ✓' : 'missing ❌'}`
+	`- ${baseLocale} messages (${baseMessageTarget}): ${fs.existsSync(baseMessageTarget) ? 'exists ✓' : 'missing ❌'}`
 )
 
-if (nonEnglishLocales.length > 0) {
-	console.log(`- Non-English locales needed: ${nonEnglishLocales.join(', ')}`)
+if (nonBaseLocales.length > 0) {
+	console.log(`- Additional locales needed: ${nonBaseLocales.join(', ')}`)
 	if (fs.existsSync(MARKDOWN_L10NS)) {
 		const existingDirs = fs
 			.readdirSync(MARKDOWN_L10NS)

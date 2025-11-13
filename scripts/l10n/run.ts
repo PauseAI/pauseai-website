@@ -40,7 +40,13 @@ import {
 	MESSAGE_L10NS,
 	MESSAGE_SOURCE
 } from '../../src/lib/l10n'
-import { ensureDirectoryExists, importRuntimeWithoutVite, isL10nOffline } from './utils'
+import {
+	ensureDirectoryExists,
+	importRuntimeWithoutVite,
+	isL10nOffline,
+	readBooleanEnv
+} from './utils'
+import { isBundledCageRepo } from './cage-env'
 
 // Load environment variables first
 dotenv.config()
@@ -88,6 +94,9 @@ try {
 
 // Determine offline mode
 const isOffline = isL10nOffline()
+const cageBundled = isBundledCageRepo()
+const shouldRefreshRemote =
+	!isOffline && (!cageBundled || readBooleanEnv('L10N_REFRESH_REMOTE', false))
 
 // Get API key early for mode determination
 const LLM_API_KEY = process.env.L10N_OPENROUTER_API_KEY
@@ -105,7 +114,7 @@ const mode = new Mode({
 // Announce what we're going to do
 mode.announce()
 
-// Exit early for en-only mode
+// Exit early for base-only mode
 if (mode.mode === 'en-only') {
 	process.exit(0)
 }
@@ -165,6 +174,7 @@ const languageNamesInEnglish = new Intl.DisplayNames('en', { type: 'language' })
 
 		const options = {
 			isDryRun: !mode.canWrite,
+			bundledCage: cageBundled,
 			verbose: mode.options.verbose,
 			llmClient,
 			requestQueue,
@@ -183,10 +193,15 @@ const languageNamesInEnglish = new Intl.DisplayNames('en', { type: 'language' })
 
 		if (isOffline) {
 			console.log('🔒 L10n offline mode: using bundled cage assets without Git operations')
-			ensureDirectoryExists(L10N_CAGE_DIR, true)
-		} else {
-			await Promise.all([
-				(async () => {
+		} else if (!shouldRefreshRemote && cageBundled) {
+			console.log(
+				'📦 Bundled cage detected: skipping remote sync (set L10N_REFRESH_REMOTE=1 to refresh)'
+			)
+		}
+
+		await Promise.all([
+			(async () => {
+				if (shouldRefreshRemote) {
 					await initializeGitCage({
 						dir: L10N_CAGE_DIR,
 						token: GIT_TOKEN,
@@ -195,12 +210,15 @@ const languageNamesInEnglish = new Intl.DisplayNames('en', { type: 'language' })
 						email: GIT_CONFIG.EMAIL,
 						git: cageGit
 					})
-					options.cageLatestCommitDates = await getLatestCommitDates(cageGit, 'cage')
-				})(),
-				(async () =>
-					(options.websiteLatestCommitDates = await getLatestCommitDates(websiteGit, 'website')))()
-			])
-		}
+				} else {
+					ensureDirectoryExists(L10N_CAGE_DIR, true)
+					await cageGit.cwd(L10N_CAGE_DIR)
+				}
+				options.cageLatestCommitDates = await getLatestCommitDates(cageGit, 'cage')
+			})(),
+			(async () =>
+				(options.websiteLatestCommitDates = await getLatestCommitDates(websiteGit, 'website')))()
+		])
 
 		// Process both message files and markdown files in parallel
 		// Begin message l10n

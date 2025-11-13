@@ -10,6 +10,7 @@ import path from 'path'
 import { execSync } from 'child_process'
 import type { SimpleGit } from 'simple-git'
 import { cageUrl } from './git-ops'
+import { isBundledCageRepo } from './cage-env'
 import { isL10nOffline } from './utils'
 
 /**
@@ -62,7 +63,7 @@ export function l10nCageBranch(): string {
  * @throws Error if attempting to write to main from local development
  */
 export function validateBranchForWrite(branch: string): void {
-	if (isL10nOffline()) {
+	if (isL10nOffline() || isBundledCageRepo()) {
 		return
 	}
 

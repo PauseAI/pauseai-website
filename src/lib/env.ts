@@ -2,15 +2,13 @@
  * Gets the appropriate environment object based on context - both Node.js and browser environments
  */
 export function getEnvironment(): ImportMetaEnv | NodeJS.ProcessEnv {
-	if (typeof import.meta !== 'undefined' && import.meta.env) {
-		//	   	console.debug(`env from import.meta.env (browser context)`)
-		return import.meta.env
+	// Prefer process.env when available (Node.js / server-side)
+	if (typeof process !== 'undefined' && process.versions && process.versions.node) {
+		return process.env
 	}
 
-	// Node.js context
-	if (typeof process !== 'undefined' && process.versions && process.versions.node) {
-		//	   	console.debug(`env from process.env (Node.js context)`)
-		return process.env
+	if (typeof import.meta !== 'undefined' && import.meta.env) {
+		return import.meta.env
 	}
 
 	// Fallback (should never happen)
@@ -50,9 +48,13 @@ export function getDevContext(): string {
 /**
  * Process default settings plus env vars to determine which locales should be enabled
  */
-export function possiblyOverriddenLocales(defaults: { locales: string[] }): string[] {
+export function possiblyOverriddenLocales(defaults: {
+	locales: string[]
+	baseLocale?: string
+}): string[] {
 	const env = getEnvironment()
-	const envValue = (env.PARAGLIDE_LOCALES || (isDev() ? 'en' : 'all')).trim()
+	const preferredBase = defaults.baseLocale || defaults.locales[0] || 'en'
+	const envValue = (env.PARAGLIDE_LOCALES || (isDev() ? preferredBase : 'all')).trim()
 	const listedLocales = envValue.replace(/all|-/g, ',')
 	const inclusive = listedLocales === envValue
 	const namedLocales = listedLocales.split(',').map((locale: string) => locale.trim())

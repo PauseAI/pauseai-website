@@ -26,6 +26,8 @@ export type Targeting = (locale: string, sourcePath: string) => string
 export interface Options {
 	/** Whether to run in dry run mode (skip actual API calls) */
 	isDryRun: boolean
+	/** Whether the l10n cage is bundled inside the website repository */
+	bundledCage?: boolean
 	/** Whether to output verbose logs */
 	verbose?: boolean
 	/** Axios client for LLM API requests */
@@ -270,9 +272,19 @@ export async function retrieve(
 								.relative(params.cageWorkingDir, targetPath)
 								.replaceAll(/\\/g, '/')
 							const cageLatestCommitDate = options.cageLatestCommitDates.get(cageRelativePath)
-							if (!cageLatestCommitDate)
-								throw new Error(`Didn't prepare latest commit date for ${targetPath}`)
-							if (cageLatestCommitDate > sourceLatestCommitDate) {
+							if (!cageLatestCommitDate) {
+								if (options.bundledCage) {
+									if (options.verbose) {
+										log(
+											`[Bundled cage] No commit metadata for ${cageRelativePath}, assuming cached content`
+										)
+									}
+									useCachedL10n = true
+									cacheCount++
+								} else {
+									throw new Error(`Didn't prepare latest commit date for ${targetPath}`)
+								}
+							} else if (cageLatestCommitDate > sourceLatestCommitDate) {
 								useCachedL10n = true
 								cacheCount++
 							}

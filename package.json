@@ -6,10 +6,8 @@
 	"scripts": {
 		"clean": "tsx scripts/clean.ts",
 		"inlang:settings": "tsx scripts/inlang-settings.ts",
-		"l10n": "tsx scripts/l10n/run",
 		"dev": "tsx scripts/l10n/run --dryRun && vite dev --host 0.0.0.0",
 		"build": "cross-env NODE_ENV=production node scripts/filter-build-log.js \"tsx scripts/l10n/run && vite build --emptyOutDir=false && run-s _postbuild:*\"",
-		"netlify": "echo '📦 Netlify CLI vs Standard Preview:\n\n• Fast preview (no Netlify features):\n  pnpm build && pnpm preview\n\n• Test with Netlify runtime (edge functions, redirects):\n  netlify serve (rebuilds first!)\n\n• Development with Netlify features:\n  pnpm dev (terminal 1) + netlify dev (terminal 2)\n\nNote: Install with npm install -g netlify-cli'",
 		"_postbuild:pagefind": "tsx scripts/create-pagefind-index.ts",
 		"_postbuild:l10ntamer": "tsx scripts/l10ntamer.ts",
 		"test": "vitest",
