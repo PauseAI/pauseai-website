@@ -124,11 +124,9 @@ function regenerateSettings(verbose = false): void {
 			project: './project.inlang',
 			outdir: './src/lib/paraglide',
 			strategy: ['url', 'cookie', 'preferredLanguage', 'baseLocale'],
-			// Fix for Netlify Edge Functions (Deno runtime)
-			disableAsyncLocalStorage: true,
-			// Runtime check for browser capabilities instead of build-time SSR flag
-			// Works correctly in: Node.js (no window), Edge Functions (partial window), Browser (full window)
-			isServer: 'typeof window === "undefined" || typeof window.location === "undefined"'
+			// Required for serverless environments like Netlify Edge Functions
+			// Safe because each request runs in isolated execution context
+			disableAsyncLocalStorage: true
 		}
 
 		// Only set urlPatterns for prefix-all-locales strategy
