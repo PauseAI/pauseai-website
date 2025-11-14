@@ -84,7 +84,8 @@
 
 	.tagline p {
 		color: white;
-		margin: 0;
+		margin: 0 70px 0 70px;
+		text-align: center;
 		font-size: calc(2 * var(--cqw));
 		padding: calc(3.5 * var(--cqw));
 	}
