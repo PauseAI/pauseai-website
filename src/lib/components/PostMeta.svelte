@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { title as siteName, url } from '$lib/config'
+	import { title as siteName, url as rootUrl } from '$lib/config'
 	import type { BlogPosting, WithContext } from 'schema-dts'
 
 	export let title: string
@@ -7,7 +7,7 @@
 	export let date: string | undefined = undefined
 	/** URL or relative path to cover / preview image */
 	export let image = '/Cover.jpg'
-	const imageUrl = image.startsWith('/') ? `${url}${image}` : image
+	const imageUrl = image.startsWith('/') ? `${rootUrl}${image}` : image
 
 	const schemaOrgMarkup: WithContext<BlogPosting> = {
 		'@context': 'https://schema.org',
@@ -18,6 +18,11 @@
 		image: {
 			'@type': 'ImageObject',
 			url: imageUrl
+		},
+		publisher: {
+			'@type': 'Organization',
+			name: siteName,
+			url: rootUrl
 		}
 	}
 </script>
