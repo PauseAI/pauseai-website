@@ -34,6 +34,19 @@ export type AirtableSignatory = {
 	duplicate?: boolean
 }
 
+export type Person = {
+	id: string
+	name: string
+	/** URL to image file */
+	image?: string
+	bio: string
+	title?: string
+	/** Doesn't want to be visible on the /people page */
+	privacy?: boolean
+	checked?: boolean
+	duplicate?: boolean
+}
+
 export type Team = {
 	id: string
 	name: string
