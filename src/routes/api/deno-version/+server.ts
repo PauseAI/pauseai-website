@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { json } from '@sveltejs/kit'
 
 export const config = {
