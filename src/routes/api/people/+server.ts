@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import type { Person } from '$lib/types.js'
-import { defaultTitle } from '$lib/utils'
+import type { Person } from '$lib/types'
+import { defaultTitle } from '$lib/config'
 import { json } from '@sveltejs/kit'
-import { fetchAllPages } from '$lib/airtable.js'
+import { fetchAllPages } from '$lib/airtable'
 
 /**
  * Fallback people data to use in development if Airtable fetch fails
@@ -37,21 +37,24 @@ function recordToPerson(record: any): Person {
 		image: record.fields.Photo && record.fields.Photo[0].thumbnails.large.url,
 		privacy: record.fields.Privacy,
 		checked: record.fields.About,
-        duplicate: record.fields.duplicate
+		duplicate: record.fields.duplicate
 	}
 }
 
 const filter = (p: Person) => {
-	return p.image && 
-    !p.privacy && 
-    p.checked && 
-    p.title?.trim() !== '' && p.title !== 'Volunteer' &&
-    !p.duplicate;
-};
+	return (
+		p.image &&
+		!p.privacy &&
+		p.checked &&
+		p.title?.trim() !== '' &&
+		p.title !== 'Volunteer' &&
+		!p.duplicate
+	)
+}
 
 export async function GET({ fetch, setHeaders }) {
 	const url = `https://api.airtable.com/v0/appWPTGqZmUcs3NWu/tblL1icZBhTV1gQ9o`
-    setHeaders({
+	setHeaders({
 		'cache-control': 'public, max-age=3600' // 1 hour in seconds
 	})
 

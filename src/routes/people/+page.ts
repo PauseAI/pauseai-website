@@ -1,5 +1,5 @@
 import type { Person } from '$lib/types'
-import { defaultTitle } from '$lib/utils'
+import { defaultTitle } from '$lib/config'
 
 export const prerender = false
 
