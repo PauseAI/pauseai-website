@@ -73,6 +73,7 @@
 
 		// Skip upload UI initialization only if user just validated
 		if (userJustValidated) {
+			currentState.set('validated') // Special state to hide SelfieUX
 			return
 		}
 
@@ -233,12 +234,7 @@
 
 <!-- Standard page content -->
 <main class="selfie-page">
-	{#if userJustValidated}
-		<Banner id="sayno-validated">
-			<strong>Thanks for validating your email!</strong> You're part of our Say No collages, but won't
-			receive further updates by default.
-		</Banner>
-	{:else if userPreviouslyUploaded}
+	{#if userPreviouslyUploaded && !userJustValidated}
 		<Banner id="sayno-already-uploaded">
 			This device already submitted a photo, but by all means use it for new people.
 		</Banner>

@@ -89,6 +89,7 @@
 		display: grid;
 		grid-template-columns: repeat(3, 1fr);
 		height: 100vh;
+		min-height: var(--hero-min-height);
 		overflow: hidden;
 		position: relative;
 		max-width: 100vw;

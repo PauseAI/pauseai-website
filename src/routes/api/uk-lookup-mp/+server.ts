@@ -1,6 +1,7 @@
-import { json } from '@sveltejs/kit'
-import { ukLookupMPByPostcode } from '$lib/server/uk-postcode-to-mp.js'
 import { ukCheckMPContactHistory } from '$lib/server/uk-mp-contact-status.js'
+import { ukLookupMPByPostcode } from '$lib/server/uk-postcode-to-mp.js'
+import { json } from '@sveltejs/kit'
+import { StatusCodes } from 'http-status-codes'
 
 export const POST = async ({ request }) => {
 	try {
@@ -15,7 +16,7 @@ export const POST = async ({ request }) => {
 					error: 'Postcode is required',
 					type: 'validation'
 				},
-				{ status: 400 }
+				{ status: StatusCodes.BAD_REQUEST }
 			)
 		}
 
@@ -29,7 +30,7 @@ export const POST = async ({ request }) => {
 					error: result.error,
 					type: 'not_found'
 				},
-				{ status: 200 } // Use 200 for user-facing validation errors
+				{ status: StatusCodes.OK } // Use 200 for user-facing validation errors
 			)
 		}
 
@@ -57,7 +58,7 @@ export const POST = async ({ request }) => {
 				error: 'Internal server error. Please try again later.',
 				type: 'server_error'
 			},
-			{ status: 500 }
+			{ status: StatusCodes.INTERNAL_SERVER_ERROR }
 		)
 	}
 }

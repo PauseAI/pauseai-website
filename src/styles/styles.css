@@ -27,6 +27,8 @@ html {
 	--spacing-sm: 1rem;
 	--spacing-md: 2rem;
 	--spacing-lg: 4rem;
+
+	--hero-min-height: 500px;
 }
 
 :root {

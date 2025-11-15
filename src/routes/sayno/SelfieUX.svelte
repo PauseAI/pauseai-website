@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { page } from '$app/stores'
 	import Button from '$lib/components/Button.svelte'
 	import Link from '$lib/components/Link.svelte'
 	import {
@@ -32,13 +33,21 @@
 
 	$: emailValid = $userEmail && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test($userEmail)
 
+	// Check if x002 experiment parameter is present (control = hide sharing)
+	$: hideSharing = $page.url.searchParams.has('x002')
+
 	// Local UI state
 	let showTips = false
 </script>
 
 <!-- Compact capture UX above standard page header -->
 <section class="capture-ux">
-	{#if $currentState === 'preparing'}
+	{#if $currentState === 'validated'}
+		<div class="confirmation-section">
+			<h2>Thanks for validating your email!</h2>
+			<p>You're part of our Say No collages, but won't receive further updates by default.</p>
+		</div>
+	{:else if $currentState === 'preparing'}
 		<div class="loading-state">
 			<p>Loading...</p>
 		</div>
@@ -217,6 +226,16 @@
 			<p>
 				Thank you for standing with us for AI safety. Together, we're building a growing petition of
 				people who care about this critical issue.
+			</p>
+		</div>
+	{/if}
+
+	<!-- Share link visible for all states (unless x002 control) -->
+	{#if !hideSharing}
+		<div class="share-section">
+			<p>
+				<strong>Help us grow:</strong>
+				<Link href="/sayno/share" target="_blank">Share this campaign with your networks →</Link>
 			</p>
 		</div>
 	{/if}
@@ -509,6 +528,16 @@
 	}
 
 	/* Mobile adjustments */
+	.share-section {
+		margin-top: 1.5rem;
+		padding-top: 1rem;
+		border-top: 1px solid var(--border);
+	}
+
+	.share-section p {
+		margin: 0;
+	}
+
 	@media (max-width: 768px) {
 		.capture-ux {
 			margin: 0.5rem 0 1rem 0;

@@ -9,7 +9,7 @@ export const cloudinaryConfig = {
 }
 
 // State management
-type State = 'preparing' | 'ready' | 'options' | 'done'
+type State = 'preparing' | 'ready' | 'options' | 'done' | 'validated'
 
 // Create all the stores
 export const currentState = writable<State>('preparing')

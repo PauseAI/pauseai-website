@@ -83,7 +83,7 @@
 	</div>
 {:else if editUrl}
 	<ExternalLink href={editUrl}>
-		Edit{#if editUrl.startsWith(GITHUB_BASE_URL)}&nbsp;on GitHub{/if}
+		Edit page{#if editUrl.startsWith(GITHUB_BASE_URL)}&nbsp;on GitHub{/if}
 	</ExternalLink>
 {/if}
 

@@ -6,6 +6,7 @@
 	import Russell from '$assets/quote-profile/russell.jpg?enhanced'
 	import Bengio from '$assets/quote-profile/bengio.jpg?enhanced'
 	import CAIS from '$assets/quote-profile/cais_statement.jpg?enhanced'
+	import ASI_Statement from '$assets/quote-profile/asi_statement.jpg?enhanced'
 	import ArrowLeft from 'lucide-svelte/icons/arrow-left'
 	import ArrowRight from 'lucide-svelte/icons/arrow-right'
 	import Glide, {
@@ -27,6 +28,12 @@
 	let currentSlide: number | null = null
 
 	const quotes = [
+		{
+			text: m.home_quotes_asi_statement_text(),
+			author: m.home_quotes_asi_statement_author(),
+			title: m.home_quotes_asi_statement_title(),
+			image: ASI_Statement
+		},
 		{
 			text: m.home_quotes_cais_text(),
 			author: m.home_quotes_cais_author(),

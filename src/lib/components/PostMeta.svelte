@@ -1,5 +1,7 @@
 <script lang="ts">
-	import { url, title as siteName } from '$lib/config'
+	import { title as siteName, url as rootUrl } from '$lib/config'
+	import type { BlogPosting, WithContext } from 'schema-dts'
+
 	export let title: string
 	export let description: string
 	export let date: string | undefined = undefined
@@ -10,10 +12,10 @@
 	/** Alt text for the image (og:image:alt) */
 	export let imageAlt: string | undefined = undefined
 
-	const imageUrl = image.startsWith('/') ? `${url}${image}` : image
+	const imageUrl = image.startsWith('/') ? `${rootUrl}${image}` : image
 
-	const schemaOrgMarkup = {
-		'@context': 'https://schema.org/',
+	const schemaOrgMarkup: WithContext<BlogPosting> = {
+		'@context': 'https://schema.org',
 		'@type': 'BlogPosting',
 		headline: title,
 		abstract: description,
@@ -21,6 +23,11 @@
 		image: {
 			'@type': 'ImageObject',
 			url: imageUrl
+		},
+		publisher: {
+			'@type': 'Organization',
+			name: siteName,
+			url: rootUrl
 		}
 	}
 </script>

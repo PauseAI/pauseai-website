@@ -9,7 +9,7 @@
 	} from '$lib/paraglide/runtime.js'
 	import { page } from '$app/stores'
 	import Globe from 'lucide-svelte/icons/globe'
-	import Navlink from './Navlink.svelte'
+	import Navlink from '$lib/components/navbar/Navlink.svelte'
 	import { building } from '$app/environment'
 	import { onMount } from 'svelte'
 	import Card from '$lib/components/Card.svelte'
