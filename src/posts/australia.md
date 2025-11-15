@@ -8,7 +8,7 @@ description: the Australian chapter of PauseAI
 
 By 2030, artificial intelligence could be fully automated, self-improving and **smarter than humans at almost everything.** This isn't science fiction—it's the assessment of leading AI companies and researchers. When this happens, every aspect of life will change forever.
 
-**[Join our community](/join)** | [Email us](mailto:australia@pauseai.info) | [Connect on Facebook](https://www.facebook.com/groups/571590459293618) | [YouTube channel](https://www.youtube.com/channel/UCjjMieiOlSFf7jud0yhHQSg) | [LinkedIn](https://www.linkedin.com/company/pauseai-australia) | [Events](https://lu.ma/PauseAIAustralia)
+**[Join our community](/join)** | [Email us](mailto:australia@pauseai.info) | [Connect on Facebook](https://www.facebook.com/groups/571590459293618) | [YouTube channel](https://www.youtube.com/channel/UCjjMieiOlSFf7jud0yhHQSg) | [LinkedIn](https://www.linkedin.com/company/pauseai-australia) | [WhatsApp News/Action](https://chat.whatsapp.com/KLg8K9xSgfIJs8GQAHeI5b)|[Events](https://lu.ma/PauseAIAustralia)
 
 ### What risks are we facing?
 
@@ -86,4 +86,4 @@ In September 2025, PauseAI Australia responded to the interim report on _Harness
 
 #### Melbourne protest
 
-In February 2025, volunteers in Melbourne protested they missed opportunity of the Paris AI Action Summit. The protest received [coverage](https://www.smh.com.au/technology/most-dangerous-technology-ever-protesters-urge-ai-pause-20250207-p5laaq.html) in the nine newspapers.
+In February 2025, volunteers in Melbourne protested the missed opportunity of the Paris AI Action Summit. The protest received [coverage](https://www.smh.com.au/technology/most-dangerous-technology-ever-protesters-urge-ai-pause-20250207-p5laaq.html) in the Nine newspapers.
