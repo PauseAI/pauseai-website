@@ -44,9 +44,7 @@
 	{#if imageAlt}
 		<meta property="og:image:alt" content={imageAlt} />
 	{/if}
-	{#if pageUrl}
-		<meta property="og:url" content={pageUrl} />
-	{/if}
+	<meta property="og:url" content={pageUrl} />
 	<meta property="og:site_name" content={siteName} />
 	{#if date}
 		<meta property="article:published_time" content={date} />
