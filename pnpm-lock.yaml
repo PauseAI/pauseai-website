@@ -63,7 +63,7 @@ importers:
         specifier: ^0.536.0
         version: 0.536.0(svelte@4.2.20)
       maplibre-gl:
-        specifier: ^5.10.0
+        specifier: ~5.10.0
         version: 5.10.0
       maplibregl-mapbox-request-transformer:
         specifier: ^0.0.2
