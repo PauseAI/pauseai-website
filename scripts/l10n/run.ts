@@ -40,7 +40,6 @@ import {
 	MESSAGE_L10NS,
 	MESSAGE_SOURCE
 } from '../../src/lib/l10n'
-import { importRuntimeWithoutVite } from './utils'
 
 // Load environment variables first
 dotenv.config()
@@ -71,20 +70,17 @@ if (unknownArgs.length > 0) {
 // Ensure inlang settings are current before importing runtime
 execSync('tsx scripts/inlang-settings.ts', { stdio: 'inherit' })
 
-// This let / try / catch lets the ESM scan succeed in the absence of a runtime
-let locales: readonly string[]
-try {
-	const runtime = await importRuntimeWithoutVite()
-	locales = runtime.locales
-	if (runtime.baseLocale !== 'en')
-		throw new Error(
-			`runtime.baseLocale set to ${runtime.baseLocale} but our code assumes and hardcodes 'en'`
-		)
-} catch (error: unknown) {
-	if (error instanceof Error) console.error('Failed to import runtime:', error.message)
-	else console.error('Failed to import runtime with unknown error:', error)
-	process.exit(1)
+// Dynamic import after runtime is generated (ESM scan happens before execSync)
+const runtime = await import('../../src/lib/paraglide/runtime.js')
+
+// Verify base locale assumption
+if (runtime.baseLocale !== 'en') {
+	throw new Error(
+		`runtime.baseLocale set to ${runtime.baseLocale} but our code assumes and hardcodes 'en'`
+	)
 }
+
+const locales = runtime.locales
 
 // Get API key early for mode determination
 const LLM_API_KEY = process.env.L10N_OPENROUTER_API_KEY
