@@ -502,7 +502,7 @@
 		},
 		{
 			"name": "Manila",
-			"lat": 14.60,
+			"lat": 14.6,
 			"lon": 120.98,
 			"link": "$$DISCORD_GLOBAL$$"
 		},
@@ -522,7 +522,7 @@
 		{
 			"name": "Osaka",
 			"lat": 34.69,
-			"lon": 135.50,
+			"lon": 135.5,
 			"link": "$$DISCORD_GLOBAL$$"
 		},
 		{
@@ -540,7 +540,7 @@
 		},
 		{
 			"name": "Cleveland",
-			"lat": 41.50,
+			"lat": 41.5,
 			"lon": -81.69,
 			"link": "$$DISCORD_US$$",
 			"parent_name": "PauseAI US"
@@ -561,7 +561,7 @@
 		},
 		{
 			"name": "Veszprém",
-			"lat": 47.10,
+			"lat": 47.1,
 			"lon": 17.91,
 			"link": "$$DISCORD_GLOBAL$$"
 		},
