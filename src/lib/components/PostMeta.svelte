@@ -1,6 +1,8 @@
 <script lang="ts">
 	import { title as siteName, url as rootUrl } from '$lib/config'
 	import type { BlogPosting, WithContext } from 'schema-dts'
+	import { page } from '$app/stores'
+	import { deLocalizeHref } from '$lib/paraglide/runtime'
 
 	export let title: string
 	export let description: string
@@ -8,7 +10,7 @@
 	/** URL or relative path to cover / preview image */
 	export let image = '/Cover.jpg'
 	/** Canonical URL for this page (og:url) */
-	export let pageUrl: string | undefined = undefined
+	export let pageUrl: string = `${rootUrl}${deLocalizeHref($page.url.pathname)}`
 	/** Alt text for the image (og:image:alt) */
 	export let imageAlt: string | undefined = undefined
 
