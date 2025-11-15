@@ -25,7 +25,6 @@
 	const description =
 		"Please add your selfie to demand we end the race to build superintelligent AI. Join hundreds in the Pause AI 'Say No' petition! 'If Anyone Builds It, Everyone Dies'."
 	const collageImage = 'https://s3.amazonaws.com/pauseai-collagen/sayno/latest/1024.jpg'
-	const pageUrl = 'https://pauseai.info/sayno'
 	const imageAlt = 'Collage of hundreds of faces'
 
 	// Track user state for contextual messaging
@@ -228,7 +227,7 @@
 	}
 </script>
 
-<PostMeta {title} {description} image={collageImage} {pageUrl} {imageAlt} />
+<PostMeta {title} {description} image={collageImage} {imageAlt} />
 
 <!-- Capture UX is now rendered via the layout's prelude slot, configured in +page.ts -->
 
