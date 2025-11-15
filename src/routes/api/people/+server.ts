@@ -47,7 +47,7 @@ const filter = (p: Person) => {
 		!p.privacy &&
 		p.checked &&
 		p.title?.trim() !== '' &&
-		p.title !== 'Volunteer' &&
+		p.title !== defaultTitle &&
 		!p.duplicate
 	)
 }
