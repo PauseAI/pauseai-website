@@ -1,3 +1,5 @@
+import type { EnhancedImgAttributes } from '@sveltejs/enhanced-img'
+
 export type Categories = 'sveltekit' | 'svelte' | 'AI Safety' | 'Transparency' | 'Government'
 
 export type FrontmatterMeta = {
@@ -115,3 +117,12 @@ export type NationalGroupLink =
 	| 'youtubeLink'
 	| 'linkedinLink'
 	| 'lumaLink'
+
+export type Picture = Exclude<EnhancedImgAttributes['src'], string>
+
+export type CarouselQuote = {
+	text: string
+	author: string
+	title: string
+	image: Picture
+}

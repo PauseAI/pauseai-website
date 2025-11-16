@@ -20,6 +20,7 @@
 	import { onMount } from 'svelte'
 	import * as m from '$lib/paraglide/messages'
 	import Link from '$lib/components/Link.svelte'
+	import type { CarouselQuote } from '$lib/types'
 
 	const MOBILE_NAVIGATION_DISTANCE_THRESHOLD = 10
 	const AUTOPLAY_INTERVAL = 10_000
@@ -27,7 +28,7 @@
 	let glide: Glide
 	let currentSlide: number | null = null
 
-	const quotes = [
+	const quotes: CarouselQuote[] = [
 		{
 			text: m.home_quotes_asi_statement_text(),
 			author: m.home_quotes_asi_statement_author(),
