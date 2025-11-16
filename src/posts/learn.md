@@ -101,6 +101,7 @@ If you want to read what journalists have written about PauseAI, check out the l
 I haven't heard good things about it yet -->
 
 - [If Anyone Builds It, Everyone Dies](https://ifanyonebuildsit.com/) (Eliezer Yudkowsky & Nate Soares, 2025)
+- [Unexplainable, Unpredictable, Uncontrollable](https://www.taylorfrancis.com/books/mono/10.1201/9781003440260/ai-roman-yampolskiy) (Roman Yampolskiy, 2024)
 - [Uncontrollable: The Threat of Artificial Superintelligence and the Race to Save the World](https://www.goodreads.com/book/show/202416160-uncontrollable) (Darren McKee, 2023). Get it for [free](https://impactbooks.store/cart/47288196366640:1?discount=UNCON-P3SFRS)!
 <!-- - [The Precipice: Existential Risk and the Future of Humanity](https://www.goodreads.com/en/book/show/50485582-the-precipice) (Toby Ord, 2020)
 I love this book, but just a fraction of it is about AI -->
