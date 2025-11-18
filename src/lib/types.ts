@@ -45,6 +45,7 @@ export type Person = {
 	privacy?: boolean
 	checked?: boolean
 	duplicate?: boolean
+	order?: number
 }
 
 export type Team = {

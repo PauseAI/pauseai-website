@@ -15,7 +15,8 @@ const fallbackPeople: Person[] = [
 		title: 'Placeholder',
 		image: 'https://api.dicebear.com/7.x/bottts/svg?seed=fallback1',
 		privacy: false,
-		checked: true
+		checked: true,
+		order: 1
 	},
 	{
 		id: 'fallback-stub2',
@@ -24,7 +25,8 @@ const fallbackPeople: Person[] = [
 		title: 'of Plays',
 		image: 'https://api.dicebear.com/7.x/bottts/svg?seed=fallback2',
 		privacy: false,
-		checked: true
+		checked: true,
+		order: 2
 	}
 ]
 
@@ -37,7 +39,8 @@ function recordToPerson(record: any): Person {
 		image: record.fields.Photo && record.fields.Photo[0].thumbnails.large.url,
 		privacy: record.fields.Privacy,
 		checked: record.fields.About,
-		duplicate: record.fields.duplicate
+		duplicate: record.fields.duplicate,
+		order: record.fields['About order'] || 999
 	}
 }
 
@@ -69,7 +72,8 @@ export async function GET({ fetch, setHeaders }) {
 				Title: person.title,
 				Photo: [{ thumbnails: { large: { url: person.image } } }],
 				Privacy: person.privacy,
-				About: person.checked // Assuming 'About' maps to checked based on your code
+				About: person.checked, // Assuming 'About' maps to checked based on your code
+				'About order': person.order || 999
 			}
 		}))
 
@@ -77,8 +81,19 @@ export async function GET({ fetch, setHeaders }) {
 		const out: Person[] = records
 			.map(recordToPerson)
 			.filter(filter)
-			// Shuffle the array, although not truly random
-			.sort(() => 0.5 - Math.random())
+			.sort((a, b) => {
+				// Primary sort: numerical order field
+				const orderA = a.order || 999
+				const orderB = b.order || 999
+
+				if (orderA !== orderB) {
+					return orderA - orderB
+				}
+
+				// Secondary sort: alphabetical by name
+				return a.name.localeCompare(b.name)
+			})
+
 		return json(out)
 	} catch (e) {
 		console.error('Error fetching people:', e)
