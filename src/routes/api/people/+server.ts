@@ -63,12 +63,13 @@ export async function GET({ fetch, setHeaders }) {
 		const fallbackRecords = fallbackPeople.map((person) => ({
 			id: person.id,
 			fields: {
-				Name: person.name,
-				bio: person.bio,
-				title: person.title,
-				image: [{ thumbnails: { large: { url: person.image } } }],
-				privacy: person.privacy,
-				checked: person.checked
+				// These keys MUST match what recordToPerson expects
+				'Full name': person.name,
+				Bio2: person.bio,
+				Title: person.title,
+				Photo: [{ thumbnails: { large: { url: person.image } } }],
+				Privacy: person.privacy,
+				About: person.checked // Assuming 'About' maps to checked based on your code
 			}
 		}))
 
