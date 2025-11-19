@@ -51,12 +51,11 @@
 
 <NearbyEvent contrast={hero} bind:eventFound bind:geo />
 {#if !eventFound}
-	{#if geo?.country?.code === 'US' && geo?.subdivision?.code === 'CA' && false}
+	{#if geo?.country?.code === 'US'}
 		<Banner>
 			<b
-				>HELP US SAVE CALIFORNIA'S AI SAFETY BILL BEFORE WEDNESDAY | <ExternalLink
-					href="https://mailchi.mp/b8cf67a40299/join-us-tomorrow-for-our-fast-action-workshop-17457535"
-					>ACT NOW »</ExternalLink
+				>HELP US PROTECT STATE SOVEREIGNTY ON AI REGULATION | <ExternalLink
+					href="https://mstr.app/b09fa92b-1899-43a0-9d95-99cd99c9dfb2">ACT NOW »</ExternalLink
 				></b
 			>
 		</Banner>
