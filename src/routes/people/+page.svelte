@@ -26,8 +26,8 @@
 
 		{#if peopleGroups[groupName].length > 0}
 			<ul class="people">
-				{#each peopleGroups[groupName] as { name, image, title, bio }}
-					<Person {name} {image} bio={title} {title} />
+				{#each peopleGroups[groupName] as { name, image, title }}
+					<Person {name} {image} {title} />
 				{/each}
 			</ul>
 		{/if}
