@@ -2,16 +2,11 @@
 	import PostMeta from '$lib/components/PostMeta.svelte'
 	import { meta } from './meta'
 	import Person from './person.svelte'
-	// Ensure you update the type definition for 'people' in the data file
-	// or use a helper type if needed, as it is now Record<string, Person[]>.
+
 	export let data
 
-	// The 'people' variable now holds the grouped object: { [GroupName: string]: Person[] }
 	const peopleGroups = data.people as Record<string, Person[]>
 
-	// Convert the object keys into an array to ensure the order is respected
-	// when iterating. This is critical because the backend sorting placed
-	// the keys into the object in the correct order (e.g., Global Board first).
 	const groupKeys = Object.keys(peopleGroups)
 
 	const { title, description, date } = meta

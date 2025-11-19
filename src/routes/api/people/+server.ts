@@ -80,7 +80,6 @@ export async function GET({ fetch, setHeaders }) {
 		const fallbackRecords = fallbackPeople.map((person) => ({
 			id: person.id,
 			fields: {
-				// These keys MUST match what recordToPerson expects
 				'Full name': person.name,
 				Bio2: person.bio,
 				Title: person.title,

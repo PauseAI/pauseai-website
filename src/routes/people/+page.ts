@@ -1,21 +1,20 @@
 import type { Person } from '$lib/types'
-import { defaultTitle } from '$lib/config'
-
-export const prerender = false
 
 export const load = async ({ fetch, setHeaders }) => {
-	const response = await fetch('api/people')
-	const people: Person[] = await response.json()
+	const response = await fetch('/api/people')
+
+	if (!response.ok) {
+		console.error('Failed to load people data:', response.status, response.statusText)
+		throw new Error(`Failed to load people data: ${response.statusText}`)
+	}
+
+	const groupedPeople = (await response.json()) as Record<string, Person[]>
+
 	setHeaders({
 		'cache-control': 'public, max-age=3600' // 1 hour in seconds
 	})
-	// sort people, those who dont have "Volunteer" as title should be at the top
-	people.sort((a, b) => {
-		if (a.title === defaultTitle && b.title !== defaultTitle) return 1
-		if (a.title !== defaultTitle && b.title === defaultTitle) return -1
-		return 0
-	})
+
 	return {
-		people: people
+		people: groupedPeople
 	}
 }
