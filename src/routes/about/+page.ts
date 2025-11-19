@@ -1,7 +1,7 @@
 import type { Person } from '$lib/types'
 
 export const load = async ({ fetch, setHeaders }) => {
-	const response = await fetch('/api/people')
+	const response = await fetch('/api/about')
 
 	if (!response.ok) {
 		console.error('Failed to load people data:', response.status, response.statusText)

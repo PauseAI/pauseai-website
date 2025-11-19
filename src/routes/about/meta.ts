@@ -1,9 +1,9 @@
 import type { Post } from '$lib/types'
 
 export const meta: Post = {
-	title: 'People of PauseAI',
+	title: 'About Us',
 	description: 'Staff and contributors behind PauseAI',
 	date: '2025-11-06',
-	slug: 'people',
+	slug: 'about',
 	categories: []
 }
