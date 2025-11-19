@@ -3,9 +3,6 @@ import type { Person } from '$lib/types'
 import { defaultTitle } from '$lib/config'
 import { json } from '@sveltejs/kit'
 import { fetchAllPages } from '$lib/airtable'
-
-const TYPE_ORDER = ['Global Board', 'Global Leadership', 'National Chapter Leads'] //0-9, 10-29, 30+
-
 /**
  * Fallback people data to use in development if Airtable fetch fails
  */
@@ -62,8 +59,8 @@ const getGroupKey = (order: number | undefined): string => {
 	const personOrder = order || 999
 
 	if (personOrder <= 9) return 'Global Board'
-	if (personOrder >= 10 && personOrder <= 29) return 'Global Leadership'
-	if (personOrder >= 30) return 'National Chapter Leads'
+	if (personOrder >= 10 && personOrder <= 29) return 'Leadership Team'
+	if (personOrder >= 30) return 'National Chapters'
 
 	// Fallback for missing/unassigned order (999 default)
 	return 'National Chapter Leads'
