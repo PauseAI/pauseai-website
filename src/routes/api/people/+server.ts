@@ -4,6 +4,8 @@ import { defaultTitle } from '$lib/config'
 import { json } from '@sveltejs/kit'
 import { fetchAllPages } from '$lib/airtable'
 
+const TYPE_ORDER = ['Global Board', 'Global Leadership', 'National Chapter Leads'] //0-9, 10-29, 30+
+
 /**
  * Fallback people data to use in development if Airtable fetch fails
  */
@@ -55,6 +57,18 @@ const filter = (p: Person) => {
 	)
 }
 
+const getGroupKey = (order: number | undefined): string => {
+	// If order is missing or high default (e.g., 999), place in the lowest priority group
+	const personOrder = order || 999
+
+	if (personOrder <= 9) return 'Global Board'
+	if (personOrder >= 10 && personOrder <= 29) return 'Global Leadership'
+	if (personOrder >= 30) return 'National Chapter Leads'
+
+	// Fallback for missing/unassigned order (999 default)
+	return 'National Chapter Leads'
+}
+
 export async function GET({ fetch, setHeaders }) {
 	const url = `https://api.airtable.com/v0/appWPTGqZmUcs3NWu/tblL1icZBhTV1gQ9o`
 	setHeaders({
@@ -78,7 +92,8 @@ export async function GET({ fetch, setHeaders }) {
 		}))
 
 		const records = await fetchAllPages(fetch, url, fallbackRecords)
-		const out: Person[] = records
+
+		const sortedPeople = records
 			.map(recordToPerson)
 			.filter(filter)
 			.sort((a, b) => {
@@ -94,10 +109,36 @@ export async function GET({ fetch, setHeaders }) {
 				return a.name.localeCompare(b.name)
 			})
 
-		return json(out)
+		const groupedOut = sortedPeople.reduce(
+			(acc, person) => {
+				const key = getGroupKey(person.order)
+				if (!acc[key]) {
+					acc[key] = []
+				}
+				acc[key].push(person)
+				return acc
+			},
+			{} as Record<string, Person[]>
+		)
+
+		return json(groupedOut)
 	} catch (e) {
 		console.error('Error fetching people:', e)
-		// Return fallback data instead of error
-		return json(fallbackPeople.filter(filter))
+
+		const filteredFallback = fallbackPeople.filter(filter)
+
+		const groupedFallback = filteredFallback.reduce(
+			(acc, person) => {
+				const key = getGroupKey(person.order)
+				if (!acc[key]) {
+					acc[key] = []
+				}
+				acc[key].push(person)
+				return acc
+			},
+			{} as Record<string, Person[]>
+		)
+
+		return json(groupedFallback)
 	}
 }
