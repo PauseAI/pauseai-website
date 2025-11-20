@@ -1,7 +1,7 @@
 <script lang="ts">
 	import PostMeta from '$lib/components/PostMeta.svelte'
 	import { meta } from './meta'
-	import PersonCard from './Person.svelte'
+	import PersonCard from './person.svelte'
 
 	export let data
 
