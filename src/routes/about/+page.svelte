@@ -2,7 +2,8 @@
 	import PostMeta from '$lib/components/PostMeta.svelte'
 	import { meta } from './meta'
 	import PersonCard from './person.svelte'
-
+	import type { Person } from '$lib/types'
+	
 	export let data
 
 	const peopleGroups = data.people as Record<string, Person[]>
