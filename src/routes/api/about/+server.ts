@@ -3,7 +3,6 @@ import type { Person } from '$lib/types'
 import { defaultTitle } from '$lib/config'
 import { json } from '@sveltejs/kit'
 import { fetchAllPages } from '$lib/airtable'
-import Image from '$lib/components/Image.svelte'
 /**
  * Fallback people data to use in development if Airtable fetch fails
  */
