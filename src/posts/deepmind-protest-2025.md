@@ -1,5 +1,5 @@
 ---
-title: 'PauseAI presents: The Google DeepMind Protest'
+title: "PauseAI presents: The Google DeepMind Protest"
 slug: deepmind-protest-2025
 description: We are organising a protest to hold Google DeepMind to account for
   their broken promises.
@@ -12,7 +12,7 @@ PauseAI held its biggest protest yet outside Google DeepMind's London office.
 
 - [Business Insider](https://www.businessinsider.com/protesters-accuse-google-deepmind-breaking-promises-ai-safety-2025-6)
 - [Islignton Tribune](https://www.islingtontribune.co.uk/article/stark-warning-from-protesters-calling-for-ai-pause-its-going-to-turn-out-bad)
-- [Times of India](https://www.islingtontribune.co.uk/article/stark-warning-from-protesters-calling-for-ai-pause-its-going-to-turn-out-bad)
+- [Times of India](https://timesofindia.indiatimes.com/technology/tech-news/google-you-broke-your-word-on-shout-protestors-outside-google-deepminds-london-headquarters/articleshow/122203297.cms)
 - [Tech Times](https://www.techtimes.com/articles/311120/20250701/google-deepmind-slammed-protesters-over-broken-ai-safety-promise.htm)
 
 ## Google DeepMind have broken their promises
