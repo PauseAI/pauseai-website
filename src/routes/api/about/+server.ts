@@ -3,6 +3,7 @@ import type { Person } from '$lib/types'
 import { defaultTitle } from '$lib/config'
 import { json } from '@sveltejs/kit'
 import { fetchAllPages } from '$lib/airtable'
+import Image from '$lib/components/Image.svelte'
 /**
  * Fallback people data to use in development if Airtable fetch fails
  */
@@ -35,7 +36,7 @@ function recordToPerson(record: any): Person {
 		name: record.fields['Full name'],
 		bio: record.fields.Bio2,
 		title: record.fields.Title || defaultTitle,
-		image: record.fields.Photo && record.fields.Photo[0].thumbnails.large.url,
+		image: (record.fields.Photo && record.fields.Photo[0].thumbnails.large.url) || undefined,
 		privacy: record.fields.Privacy,
 		checked: record.fields.About,
 		duplicate: record.fields.duplicate,
@@ -45,12 +46,7 @@ function recordToPerson(record: any): Person {
 
 const filter = (p: Person) => {
 	return (
-		p.image &&
-		!p.privacy &&
-		p.checked &&
-		p.title?.trim() !== '' &&
-		p.title !== defaultTitle &&
-		!p.duplicate
+		!p.privacy && p.checked && p.title?.trim() !== '' && p.title !== defaultTitle && !p.duplicate
 	)
 }
 
