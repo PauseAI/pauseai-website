@@ -20,9 +20,9 @@ export type Community = RawCommunity & {
 }
 
 export const communitiesMeta: Post = {
-	title: 'PauseAI Local Communities',
+	title: 'Comunidades Locales de PauseAI',
 	description:
-		'A map of all the local PauseAI communities and people around the world. Also shows adjacent AI Safety communities.',
+		'Un mapa de todas las comunidades y personas locales de PauseAI en todo el mundo. También muestra las comunidades adyacentes de AI Safety.',
 	date: '2023-12-15',
 	slug: 'communities',
 	categories: []
@@ -65,7 +65,7 @@ for (const community of [...adjacentCommunities, ...pauseAICommunities, ...natio
 export const communities: Community[] = [
 	...adjacentCommunities.sort((a, b) => b.lat - a.lat),
 	...pauseAICommunities.sort((a, b) => b.lat - a.lat),
- ...nationalChapters.sort((a, b) => b.lat - a.lat)
+	...nationalChapters.sort((a, b) => b.lat - a.lat)
 ].map((community) => ({
 	...community,
 	link: (LINK_PLACEHOLDERS as Record<string, string>)[community.link] || community.link

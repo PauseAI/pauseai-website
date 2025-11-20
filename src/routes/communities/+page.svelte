@@ -94,26 +94,29 @@
 			updateData()
 		})
 
-map.on('load', () => {
-    communities.map((community) => {
-        new Marker({
-            color: community.type === 'adjacent' ? 'rgba(0,0,0,.5)' 
-                : community.type === 'national' ? 'rgb(0, 150, 255)' 
-                : 'rgb(255, 148, 22)',
-            opacityWhenCovered: '0'
-        })
-            .setPopup(
-                new Popup({ offset: [0, -15] }).setHTML(
-                    `<h3><a href="${community.link || 'https://discord.gg/CR5u5BTBwy'}">${
-                        community.name
-                    }</a></h3>`
-                )
-            )
-            .setLngLat([community.lon, community.lat])
-            .addTo(map)
+		map.on('load', () => {
+			communities.map((community) => {
+				new Marker({
+					color:
+						community.type === 'adjacent'
+							? 'rgba(0,0,0,.5)'
+							: community.type === 'national'
+								? 'rgb(0, 150, 255)'
+								: 'rgb(255, 148, 22)',
+					opacityWhenCovered: '0'
+				})
+					.setPopup(
+						new Popup({ offset: [0, -15] }).setHTML(
+							`<h3><a href="${community.link || 'https://discord.gg/CR5u5BTBwy'}">${
+								community.name
+							}</a></h3>`
+						)
+					)
+					.setLngLat([community.lon, community.lat])
+					.addTo(map)
+			})
 		})
-    })
-})
+	})
 
 	onDestroy(() => {
 		map?.remove()
@@ -125,13 +128,13 @@ map.on('load', () => {
 <h1>{title}</h1>
 <p>{description}</p>
 <p>
-	Do you want to add your location or a community? <ExternalLink
-		href="https://discord.gg/CR5u5BTBwy">Create a post</ExternalLink
-	> on our Discord!
+	¿Quieres agregar tu ubicación o una comunidad? <ExternalLink href="https://discord.gg/CR5u5BTBwy"
+		>Crear un hilo</ExternalLink
+	> en nuestro Discord!
 </p>
 <p>
-	Do you want to start a community? Check our <ExternalLink
-		href="https://pauseai.info/local-organizing">Guide on local organizing</ExternalLink
+	¿Quieres iniciar una comunidad? Consulte nuestra <ExternalLink
+		href="https://pauseai.es/local-organizing">Guía sobre organización local</ExternalLink
 	>
 </p>
 <div>
