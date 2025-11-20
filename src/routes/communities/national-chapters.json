@@ -71,6 +71,12 @@
 			"lat": 50,
 			"lon": 15,
 			"link": "https://discord.gg/4rZ2nGZB3r"
+		},
+		{
+			"name": "PauseAI Poland",
+			"lat": 52,
+			"lon": 19.5,
+			"link": "mailto:p.klimkiewicz@idealnywzrok.pl"
 		}
 	]
 }
