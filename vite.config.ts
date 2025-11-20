@@ -50,8 +50,6 @@ export default defineConfig(() => {
 			reportCompressedSize: false,
 			// Increase warning limit to reduce output
 			chunkSizeWarningLimit: 5000,
-			// Hide output for assets smaller than 1MB
-			assetsInlineLimit: 1024 * 1024,
 			// Enable multi-threading with esbuild for faster builds
 			minify: 'esbuild',
 			// Improve cache usage

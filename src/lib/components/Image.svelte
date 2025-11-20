@@ -1,13 +1,11 @@
 <script lang="ts">
-	import type { EnhancedImgAttributes } from '@sveltejs/enhanced-img'
+	import type { Picture } from '$lib/types'
 
 	export let src: string
 	export let alt: string | null = null
 	export let sizes: string | null = null
 	let className: string = ''
 	export { className as class }
-
-	type Picture = Exclude<EnhancedImgAttributes['src'], string>
 
 	// Use import.meta.glob to statically analyze all potential static assets
 	const pictureModules = import.meta.glob<Picture>(

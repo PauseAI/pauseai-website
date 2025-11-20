@@ -1,5 +1,7 @@
-<script>
-	export let quote
+<script lang="ts">
+	import type { CarouselQuote } from '$lib/types'
+
+	export let quote: CarouselQuote
 </script>
 
 <div class="quote-card">
