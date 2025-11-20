@@ -1,7 +1,7 @@
 <script lang="ts">
 	import PostMeta from '$lib/components/PostMeta.svelte'
 	import { meta } from './meta'
-	import Person from './person.svelte'
+	import PersonCard from './Person.svelte'
 
 	export let data
 
@@ -67,7 +67,7 @@
 		{#if peopleGroups[groupName].length > 0}
 			<ul class="people">
 				{#each peopleGroups[groupName] as { name, image, title }}
-					<Person {name} {image} {title} />
+					<PersonCard {name} {image} {title} />
 				{/each}
 			</ul>
 		{/if}
