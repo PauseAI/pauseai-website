@@ -3,7 +3,7 @@
 	import { meta } from './meta'
 	import PersonCard from './person.svelte'
 	import type { Person } from '$lib/types'
-	
+
 	export let data
 
 	const peopleGroups = data.people as Record<string, Person[]>
@@ -101,14 +101,25 @@
 		margin-bottom: 0.25rem;
 		border-bottom: 2px solid #ccc;
 	}
+
 	.group-divider {
 		margin: 1rem 0;
 		border: none;
 	}
+
 	.people {
 		display: grid;
 		gap: 1rem;
 		list-style: none;
 		padding: 0;
+		grid-template-columns: 1fr;
+		align-items: start;
+	}
+
+	@media (min-width: 768px) {
+		.people {
+			grid-template-columns: 1fr 1fr;
+			gap: 2rem 1rem;
+		}
 	}
 </style>
