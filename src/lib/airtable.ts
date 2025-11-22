@@ -69,10 +69,6 @@ export async function fetchAllPages<T = Record<string, unknown>>(
 					errorText
 				)
 
-				if (isDev() && fallbackData.length > 0) {
-					console.warn('⚠️ Using fallback data in development mode due to Airtable API error')
-					return fallbackData
-				}
 				throw new Error(
 					`Failed to fetch data from Airtable: ${response.statusText}. Details: ${errorText}`
 				)
