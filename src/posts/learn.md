@@ -129,7 +129,7 @@ not well rated + kind of old -->
 ## Organizations
 
 - [Future of Life Institute](https://futureoflife.org/cause-area/artificial-intelligence/) started the [open letter](https://futureoflife.org/open-letter/pause-giant-ai-experiments/), led by Max Tegmark.
-- [Center for AI Safety](https://www.safe.ai/) (CAIS) is a research center at the Czech Technical University in Prague, led by Dan Hendrycks.
+- [Center for AI Safety](https://www.safe.ai/) (CAIS) is a research center led by Dan Hendrycks.
 - [Conjecture](https://www.conjecture.dev/). Start-up that is working on AI alignment and AI policy, led by Connor Leahy.
 - [ControlAI](https://controlai.com/). NGO doing important lobby and campaigning work in the UK.
 - [Existential Risk Observatory](https://existentialriskobservatory.org/). Dutch organization that is informing the public on x-risks and studying communication strategies.
