@@ -14,15 +14,15 @@ import { CirclePause, CircleQuestionMark, Cog, Earth, Footprints, MessageSquareQ
 
 ## On this website
 
-<IconBullets items={\[
+<IconBullets items={[
 [TriangleAlert, m.learn_risks],
-\[Skull, m.learn_xrisk],
-\[Earth, m.learn_ai_takeover],
-\[MessageSquareQuote, m.learn_quotes],
-\[Cog, m.learn_feasibility],
-\[CirclePause, m.learn_building_the_pause_button],
-\[CircleQuestionMark, m.learn_faq],
-\[Footprints, m.learn_action],
+[Skull, m.learn_xrisk],
+[Earth, m.learn_ai_takeover],
+[MessageSquareQuote, m.learn_quotes],
+[Cog, m.learn_feasibility],
+[CirclePause, m.learn_building_the_pause_button],
+[CircleQuestionMark, m.learn_faq],
+[Footprints, m.learn_action],
 ]} />
 
 ## Other websites
@@ -35,6 +35,7 @@ import { CirclePause, CircleQuestionMark, Cog, Earth, Footprints, MessageSquareQ
 - [AISafety.dance](https://aisafety.dance). A more fun, friendly and interactive introduction to the AI catastrophic risks!
 - [AISafety.world](https://aisafety.world/tiles/). The whole AI Safety landscape with all the organizations, media outlets, forums, blogs, and other actors and resources.
 - [IncidentDatabase.ai](https://incidentdatabase.ai/). Database of incidents where AI systems caused harm.
+<!-- [NavigatingAIRisks.ai](https://www.navigatingrisks.ai/). A blog with various interesting articles. - [PauseAI.info](https://pauseai.info). Check out the rest of the PauseAI site here for loads of related infomation and [resources](/learn), useful [actions](/action), expert [quotes](/quotes), short one-pager [flyers](PauseAI_flyer.pdf), related [faqs](/faq), etc. -->
 - [LethalIntelligence.ai](https://lethalintelligence.ai/). A collection of resources on AI risks and AI alignment.
 
 ## Newsletters
@@ -46,18 +47,18 @@ import { CirclePause, CircleQuestionMark, Cog, Earth, Footprints, MessageSquareQ
 ## Videos
 
 <!-- Better to link to the playlist I think.
-- \[Kurzgesagt - A.I. ‐ Humanity's Final Invention?](https://www.youtube.com/watch?v=fa8k8IQ1_X0) (20 mins). The history of AI, and an introduction to the concept of superintelligence.
-- \[80k hours - Could AI wipe out humanity?](https://youtu.be/qzyEgZwfkKY?si=ief1l2PpkZ7_s6sq) (10 mins). A great introduction to the problem, from a down-to-earth perspective.
-- \[Superintelligent AI Should Worry You...](https://www.youtube.com/watch?v=xBqU1QxCao8) (1 min). The best super short introduction.
-- \[Don't look up - The Documentary: The Case For AI As An Existential Threat](https://www.youtube.com/watch?v=U1eyUjVRir4) (17 mins). Powerful and nicely edited documentary about the dangers of AI, with many expert quotes from interviews.
-- \[Countries create AI for reasons](https://youtu.be/-9V9cIixPbM?si=L9q6PF2D6h_EBEwF) (10 mins). Caricature of the race to a superintelligence and its dangers.
-- \[Max Tegmark | Ted Talk (2023)](https://www.youtube.com/watch?v=xUNx_PxNHrY) (15 mins). AI capabilities are improving quicker than expected.
-- \[Tristan Harris | Nobel Prize Summit 2023](https://www.youtube.com/watch?v=6lVBp2XjWsg) (15 mins). Talk in why we need to "Embrace our paleolithic brains, upgrade our medieval institutions and bind god-like technology".
-- \[Sam Harris | Can we build AI without losing control over it?](https://www.youtube.com/watch?v=8nt3edWLgIg) (15 mins). Ted talk about the crazy situation we're in.
-- \[Ilya: the AI scientist shaping the world](https://youtu.be/9iqn1HhFJ6c?si=WnzvpdsPtgCvqAZg) (12 mins). Co-founder and former Chief Scientist at OpenAI explains how AGI will take control over everything and that's why we must teach them to care for humans.
-- \[Exploring the dangers from Artificial Intelligence](https://www.youtube.com/watch?v=sPyu_dTSma0&t=1328s) (25 mins). Summary of cybersecurity, biohazard and power-seeking AI risks.
-- \[Why this top AI guru thinks we might be in extinction level trouble | The InnerView](https://youtu.be/YZjmZFDx-pA?si=Y7QUxTaJcuC6LVji) (26 mins). Interview with Connor Leahy on AI X-risks on television.
-- \[The AI Dilemma](https://www.youtube.com/watch?v=xoVJKj8lcNQ&t=1903s) (1hr). Presentation about the dangers of AI and the race which AI companies are stuck in.
+- [Kurzgesagt - A.I. ‐ Humanity's Final Invention?](https://www.youtube.com/watch?v=fa8k8IQ1_X0) (20 mins). The history of AI, and an introduction to the concept of superintelligence.
+- [80k hours - Could AI wipe out humanity?](https://youtu.be/qzyEgZwfkKY?si=ief1l2PpkZ7_s6sq) (10 mins). A great introduction to the problem, from a down-to-earth perspective.
+- [Superintelligent AI Should Worry You...](https://www.youtube.com/watch?v=xBqU1QxCao8) (1 min). The best super short introduction.
+- [Don't look up - The Documentary: The Case For AI As An Existential Threat](https://www.youtube.com/watch?v=U1eyUjVRir4) (17 mins). Powerful and nicely edited documentary about the dangers of AI, with many expert quotes from interviews.
+- [Countries create AI for reasons](https://youtu.be/-9V9cIixPbM?si=L9q6PF2D6h_EBEwF) (10 mins). Caricature of the race to a superintelligence and its dangers.
+- [Max Tegmark | Ted Talk (2023)](https://www.youtube.com/watch?v=xUNx_PxNHrY) (15 mins). AI capabilities are improving quicker than expected.
+- [Tristan Harris | Nobel Prize Summit 2023](https://www.youtube.com/watch?v=6lVBp2XjWsg) (15 mins). Talk in why we need to "Embrace our paleolithic brains, upgrade our medieval institutions and bind god-like technology".
+- [Sam Harris | Can we build AI without losing control over it?](https://www.youtube.com/watch?v=8nt3edWLgIg) (15 mins). Ted talk about the crazy situation we're in.
+- [Ilya: the AI scientist shaping the world](https://youtu.be/9iqn1HhFJ6c?si=WnzvpdsPtgCvqAZg) (12 mins). Co-founder and former Chief Scientist at OpenAI explains how AGI will take control over everything and that's why we must teach them to care for humans.
+- [Exploring the dangers from Artificial Intelligence](https://www.youtube.com/watch?v=sPyu_dTSma0&t=1328s) (25 mins). Summary of cybersecurity, biohazard and power-seeking AI risks.
+- [Why this top AI guru thinks we might be in extinction level trouble | The InnerView](https://youtu.be/YZjmZFDx-pA?si=Y7QUxTaJcuC6LVji) (26 mins). Interview with Connor Leahy on AI X-risks on television.
+- [The AI Dilemma](https://www.youtube.com/watch?v=xoVJKj8lcNQ&t=1903s) (1hr). Presentation about the dangers of AI and the race which AI companies are stuck in.
 -->
 
 - [PauseAI Playlist](https://www.youtube.com/playlist?list=PLI46NoubGtIJa0JVCBR-9CayxCOmU0EJt) is a YouTube playlist we compiled, featuring videos ranging from 1 minute to 1 hour in various formats and from diverse sources, and it doesn't require any prior knowledge.
@@ -84,6 +85,8 @@ Podcasts featuring PauseAI members can be found in the [media coverage](/press) 
 - [The Case for Slowing Down AI](https://www.vox.com/the-highlight/23621198/artificial-intelligence-chatgpt-openai-existential-risk-china-ai-safety-technology) (by Sigal Samuel)
 - [The AI Revolution: The Road to Superintelligence](https://waitbutwhy.com/2015/01/artificial-intelligence-revolution-1.html) (by WaitButWhy)
 - [How rogue AIs may arise](https://yoshuabengio.org/2023/05/22/how-rogue-ais-may-arise/) (by Yoshua Bengio)
+<!-- - [a casual intro to AI doom and alignment](https://carado.moe/ai-doom.html)
+I like it and the fact that is a more light reading, but I'm not sure if I want to put it because it defines alignment as just the technical stuff and redirects people to just do technical work -->
 - [Reasoning through arguments against taking AI safety seriously](https://yoshuabengio.org/2024/07/09/reasoning-through-arguments-against-taking-ai-safety-seriously/) (by Yoshua Bengio)
 - [The Compendium](https://www.thecompendium.ai/)
 - [A Narrow Path](https://www.narrowpath.co/)
@@ -94,16 +97,20 @@ If you want to read what journalists have written about PauseAI, check out the l
 
 ## Books
 
-<!-- - \[AI: Unexplainable, Unpredictable, Uncontrollable](https://www.goodreads.com/book/show/197554072-ai) (Roman Yampolskiy, 2024)
+<!-- - [AI: Unexplainable, Unpredictable, Uncontrollable](https://www.goodreads.com/book/show/197554072-ai) (Roman Yampolskiy, 2024)
 I haven't heard good things about it yet -->
 
 - [If Anyone Builds It, Everyone Dies](https://ifanyonebuildsit.com/) (Eliezer Yudkowsky & Nate Soares, 2025)
 - [Unexplainable, Unpredictable, Uncontrollable](https://www.taylorfrancis.com/books/mono/10.1201/9781003440260/ai-roman-yampolskiy) (Roman Yampolskiy, 2024)
 - [Uncontrollable: The Threat of Artificial Superintelligence and the Race to Save the World](https://www.goodreads.com/book/show/202416160-uncontrollable) (Darren McKee, 2023). Get it for [free](https://impactbooks.store/cart/47288196366640:1?discount=UNCON-P3SFRS)!
+<!-- - [The Precipice: Existential Risk and the Future of Humanity](https://www.goodreads.com/en/book/show/50485582-the-precipice) (Toby Ord, 2020)
+I love this book, but just a fraction of it is about AI -->
 - [The Alignment Problem](https://www.goodreads.com/book/show/50489349-the-alignment-problem) (Brian Christian, 2020)
 - [Human Compatible: Artificial Intelligence and the Problem of Control](https://www.goodreads.com/en/book/show/44767248) (Stuart Russell, 2019)
 - [Life 3.0: Being Human in the Age of Artificial Intelligence](https://www.goodreads.com/en/book/show/34272565) (Max Tegmark, 2017)
 - [Superintelligence: Paths, Dangers, Strategies](https://www.goodreads.com/en/book/show/20527133) (Nick Bostrom, 2014)
+<!-- - [Our Final Invention: Artificial Intelligence and the End of the Human Era](https://www.goodreads.com/en/book/show/17286699) (James Barrat, 2013)
+not well rated + kind of old -->
 
 ## Papers
 
@@ -124,8 +131,7 @@ I haven't heard good things about it yet -->
 - [Future of Life Institute](https://futureoflife.org/cause-area/artificial-intelligence/) started the [open letter](https://futureoflife.org/open-letter/pause-giant-ai-experiments/), led by Max Tegmark.
 - [Center for AI Safety](https://www.safe.ai/) (CAIS) is a research center at the Czech Technical University in Prague, led by Dan Hendrycks.
 - [Conjecture](https://www.conjecture.dev/). Start-up that is working on AI alignment and AI policy, led by Connor Leahy.
-- [ControlAI](https://controlai.com/). NGO doing important lobby and campaigning work in the UK.
-- [Existential Risk Observatory](https://existentialriskobservatory.org/). Dutch organization that is informing the public on x-risks and studying communication strategies. Their CEO (Otto Barten) is on our board.
+- [Existential Risk Observatory](https://existentialriskobservatory.org/). Dutch organization that is informing the public on x-risks and studying communication strategies.
 - [Centre for the Governance of AI](https://www.governance.ai/)
 - [FutureSociety](https://thefuturesociety.org/about-us/)
 - [Center for Human-Compatible Artificial Intelligence](https://humancompatible.ai/about/) (CHAI), led by Stuart Russell.
@@ -136,7 +142,6 @@ I haven't heard good things about it yet -->
 - [The Midas Project](https://www.themidasproject.com/) Corporate pressure campaigns for AI safety.
 - [The Human Survival Project](https://thehumansurvivalproject.org/)
 - [AI Safety World](https://aisafety.world/) Here's an overview of the AI Safety landscape.
-- [The Alliance for Secure AI](https://secureainow.org/staff/).
 
 ## If you are convinced and want to take action
 
