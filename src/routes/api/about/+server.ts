@@ -5,6 +5,10 @@ import type { Person } from '$lib/types'
 import { defaultTitle } from '$lib/config'
 import { json } from '@sveltejs/kit'
 import { fetchAllPages } from '$lib/airtable'
+
+// Export the response type for use in other endpoints
+export type AboutApiResponse = Record<string, Person[]>
+
 /**
  * Fallback people data to use in development if Airtable fetch fails
  */
@@ -102,7 +106,7 @@ export async function GET({ fetch, setHeaders }) {
 				return a.name.localeCompare(b.name)
 			})
 
-		const groupedOut = sortedPeople.reduce(
+		const groupedOut: AboutApiResponse = sortedPeople.reduce(
 			(acc, person) => {
 				const key = getGroupKey(person.order)
 				if (!acc[key]) {
@@ -120,7 +124,7 @@ export async function GET({ fetch, setHeaders }) {
 
 		const filteredFallback = fallbackPeople.filter(filter)
 
-		const groupedFallback = filteredFallback.reduce(
+		const groupedFallback: AboutApiResponse = filteredFallback.reduce(
 			(acc, person) => {
 				const key = getGroupKey(person.order)
 				if (!acc[key]) {
