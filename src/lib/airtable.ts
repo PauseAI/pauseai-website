@@ -30,7 +30,7 @@ type AirtableResponse<T> = {
  */
 export async function fetchAllPages<T = Record<string, unknown>>(
 	customFetch: typeof fetch,
-	url: string,
+	url: `https://api.airtable.com/v0/${string}/${string}`,
 	fallbackData: AirtableRecord<T>[] = []
 ): Promise<AirtableRecord<T>[]> {
 	let allRecords: AirtableRecord<T>[] = []
