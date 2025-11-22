@@ -1,5 +1,5 @@
 export const prerender = false
-import type { Person } from '$lib/types'
+import type { AboutApiResponse } from '$api/about/+server.js'
 import { generateCacheControlRecord } from '$lib/utils.js'
 
 export const load = async ({ fetch, setHeaders }) => {
@@ -10,7 +10,7 @@ export const load = async ({ fetch, setHeaders }) => {
 		throw new Error(`Failed to load people data: ${response.statusText}`)
 	}
 
-	const groupedPeople = (await response.json()) as Record<string, Person[]>
+	const groupedPeople: AboutApiResponse = await response.json()
 
 	setHeaders(generateCacheControlRecord({ public: true, maxAge: 60 * 60 }))
 
