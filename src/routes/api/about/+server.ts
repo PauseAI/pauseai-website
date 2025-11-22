@@ -5,6 +5,7 @@ import type { Person } from '$lib/types'
 import { defaultTitle } from '$lib/config'
 import { json } from '@sveltejs/kit'
 import { fetchAllPages } from '$lib/airtable'
+import { generateCacheControlRecord } from '$lib/utils'
 
 // Export the response type for use in other endpoints
 export type AboutApiResponse = Record<string, Person[]>
@@ -69,9 +70,7 @@ const getGroupKey = (order: number | undefined): string => {
 
 export async function GET({ fetch, setHeaders }) {
 	const url = `https://api.airtable.com/v0/appWPTGqZmUcs3NWu/tblL1icZBhTV1gQ9o`
-	setHeaders({
-		'cache-control': 'public, max-age=3600' // 1 hour in seconds
-	})
+	setHeaders(generateCacheControlRecord({ public: true, maxAge: 60 * 60 }))
 
 	try {
 		// Create fallback records in the expected Airtable format
