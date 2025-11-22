@@ -1,4 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+export const prerender = false
+
 import type { Person } from '$lib/types'
 import { defaultTitle } from '$lib/config'
 import { json } from '@sveltejs/kit'

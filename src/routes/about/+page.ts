@@ -1,3 +1,4 @@
+export const prerender = false
 import type { Person } from '$lib/types'
 
 export const load = async ({ fetch, setHeaders }) => {
