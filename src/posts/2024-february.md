@@ -42,7 +42,7 @@ According to their charter, “OpenAI’s mission is to ensure that artificial g
 
 - [Bloomberg](https://www.bloomberg.com/news/newsletters/2024-02-13/ai-protest-at-openai-hq-in-san-francisco-focuses-on-military-work)
 - [ReadWrite](https://readwrite.com/stop-working-with-pentagon-openai-staff-face-protests/)
-- [VentureBeat](https://venturebeat.com/ai/protesters-gather-outside-openai-office-opposing-military-ai-and-agi/)[](https://venturebeat.com/ai/protesters-gather-outside-openai-office-opposing-military-ai-and-agi/)
+- [VentureBeat](https://venturebeat.com/ai/protesters-gather-outside-openai-office-opposing-military-ai-and-agi/)
 
 ## Important Update (November 2025)
 
