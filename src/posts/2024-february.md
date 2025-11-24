@@ -44,9 +44,7 @@ According to their charter, “OpenAI’s mission is to ensure that artificial g
 - [ReadWrite](https://readwrite.com/stop-working-with-pentagon-openai-staff-face-protests/)
 - [VentureBeat](https://venturebeat.com/ai/protesters-gather-outside-openai-office-opposing-military-ai-and-agi/)[](https://venturebeat.com/ai/protesters-gather-outside-openai-office-opposing-military-ai-and-agi/)
 
-##
-
-Important Update (November 2025)
+## Important Update (November 2025)
 
 PauseAI is aware of recent security threats involving Sam Kirchner (StopAI/No AGI). PauseAI strictly condemns these actions and threats of violence.
 
