@@ -1,5 +1,5 @@
 ---
-title: "PauseAI presents: The Google DeepMind Protest"
+title: 'PauseAI presents: The Google DeepMind Protest'
 slug: deepmind-protest-2025
 description: We are organising a protest to hold Google DeepMind to account for
   their broken promises.
