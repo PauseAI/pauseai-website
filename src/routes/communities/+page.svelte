@@ -1,6 +1,6 @@
 <script lang="ts">
 	import PostMeta from '$lib/components/PostMeta.svelte'
-	import ExternalLink from '$lib/components/custom/a.svelte'
+	import ExternalLink from '$lib/components/Link.svelte'
 	import CommunitiesList from './CommunitiesList.svelte'
 	import type { GeoApiResponse } from '$api/geo/+server'
 	import type * as maplibregl from 'maplibre-gl'
@@ -23,9 +23,6 @@
 	let lat: number
 	let zoom: number
 
-	let userLng: number | undefined
-	let userLat: number | undefined
-
 	lng = -71.224518
 	lat = 42.213995
 	zoom = 1
@@ -43,18 +40,21 @@
 			const response = await fetch('/api/geo')
 			if (response.ok) {
 				const geoData: GeoApiResponse = await response.json()
-				userLng = geoData.longitude
-				userLat = geoData.latitude
+				return {
+					userLng: geoData.longitude,
+					userLat: geoData.latitude
+				}
 			} else {
 				console.error('Failed to fetch user location:', response.statusText)
 			}
 		} catch (error) {
 			console.error('Error fetching user location:', error)
 		}
+		return {}
 	}
 
 	onMount(async () => {
-		await fetchUserLocation()
+		const { userLng, userLat } = await fetchUserLocation()
 
 		const initialState = {
 			lng: userLng || lng,
@@ -97,7 +97,12 @@
 		map.on('load', () => {
 			communities.map((community) => {
 				new Marker({
-					color: community.adjacent ? 'rgba(0,0,0,.5)' : 'rgb(255, 148, 22)',
+					color:
+						community.type === 'adjacent'
+							? 'rgba(0,0,0,.5)'
+							: community.type === 'national'
+								? 'rgb(0, 150, 255)'
+								: 'rgb(255, 148, 22)',
 					opacityWhenCovered: '0'
 				})
 					.setPopup(

@@ -101,6 +101,7 @@ If you want to read what journalists have written about PauseAI, check out the l
 I haven't heard good things about it yet -->
 
 - [If Anyone Builds It, Everyone Dies](https://ifanyonebuildsit.com/) (Eliezer Yudkowsky & Nate Soares, 2025)
+- [Unexplainable, Unpredictable, Uncontrollable](https://www.taylorfrancis.com/books/mono/10.1201/9781003440260/ai-roman-yampolskiy) (Roman Yampolskiy, 2024)
 - [Uncontrollable: The Threat of Artificial Superintelligence and the Race to Save the World](https://www.goodreads.com/book/show/202416160-uncontrollable) (Darren McKee, 2023). Get it for [free](https://impactbooks.store/cart/47288196366640:1?discount=UNCON-P3SFRS)!
 <!-- - [The Precipice: Existential Risk and the Future of Humanity](https://www.goodreads.com/en/book/show/50485582-the-precipice) (Toby Ord, 2020)
 I love this book, but just a fraction of it is about AI -->
@@ -128,8 +129,9 @@ not well rated + kind of old -->
 ## Organizations
 
 - [Future of Life Institute](https://futureoflife.org/cause-area/artificial-intelligence/) started the [open letter](https://futureoflife.org/open-letter/pause-giant-ai-experiments/), led by Max Tegmark.
-- [Center for AI Safety](https://www.safe.ai/) (CAIS) is a research center at the Czech Technical University in Prague, led by Dan Hendrycks.
+- [Center for AI Safety](https://www.safe.ai/) (CAIS) is a research center led by Dan Hendrycks.
 - [Conjecture](https://www.conjecture.dev/). Start-up that is working on AI alignment and AI policy, led by Connor Leahy.
+- [ControlAI](https://controlai.com/). NGO doing important lobby and campaigning work in the UK.
 - [Existential Risk Observatory](https://existentialriskobservatory.org/). Dutch organization that is informing the public on x-risks and studying communication strategies.
 - [Centre for the Governance of AI](https://www.governance.ai/)
 - [FutureSociety](https://thefuturesociety.org/about-us/)
@@ -141,6 +143,7 @@ not well rated + kind of old -->
 - [The Midas Project](https://www.themidasproject.com/) Corporate pressure campaigns for AI safety.
 - [The Human Survival Project](https://thehumansurvivalproject.org/)
 - [AI Safety World](https://aisafety.world/) Here's an overview of the AI Safety landscape.
+- [The Alliance for Secure AI](https://secureainow.org/staff/).
 
 ## If you are convinced and want to take action
 

@@ -1,3 +1,5 @@
+import type { EnhancedImgAttributes } from '@sveltejs/enhanced-img'
+
 export type Categories = 'sveltekit' | 'svelte' | 'AI Safety' | 'Transparency' | 'Government'
 
 export type FrontmatterMeta = {
@@ -32,6 +34,20 @@ export type AirtableSignatory = {
 	date: string
 	email_verified?: boolean
 	duplicate?: boolean
+}
+
+export type Person = {
+	id: string
+	name: string
+	/** URL to image file */
+	image?: string
+	bio: string
+	title?: string
+	/** Doesn't want to be visible on the /people page */
+	privacy?: boolean
+	checked?: boolean
+	duplicate?: boolean
+	order?: number
 }
 
 export type Team = {
@@ -85,6 +101,9 @@ export type AirtableNationalGroup = {
 	instagram?: string
 	tiktok?: string
 	Facebook?: string
+	youtube?: string
+	linkedin?: string
+	luma?: string
 }
 
 export type NationalGroupLink =
@@ -96,3 +115,15 @@ export type NationalGroupLink =
 	| 'instagramLink'
 	| 'tiktokLink'
 	| 'facebookLink'
+	| 'youtubeLink'
+	| 'linkedinLink'
+	| 'lumaLink'
+
+export type Picture = Exclude<EnhancedImgAttributes['src'], string>
+
+export type CarouselQuote = {
+	text: string
+	author: string
+	title: string
+	image: Picture
+}

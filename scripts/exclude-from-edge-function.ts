@@ -6,10 +6,10 @@ if (!USE_EDGE_FUNCTIONS) {
 	process.exit(0)
 }
 
-const EXCLUDE_PATHS = ['/pagefind/*']
+const EXCLUDE_PATHS: `/${string}`[] = ['/pagefind/*']
 
 const manifest = await readEdgeManifest()
 const renderFunction = searchRenderFunction(manifest)!
 if (!renderFunction.excludedPath) renderFunction.excludedPath = []
-renderFunction.excludedPath = EXCLUDE_PATHS.concat(renderFunction.excludedPath) as `/${string}`[]
+renderFunction.excludedPath = EXCLUDE_PATHS.concat(renderFunction.excludedPath)
 await writeEdgeManifest(manifest)

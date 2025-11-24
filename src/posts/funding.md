@@ -4,12 +4,13 @@ description: A list of our largest donors.
 date: ''
 ---
 
-_Last update: 2025-07-27_
+_Last update: 2025-09-18_
 
-PauseAI has received about €312k in donations so far.
+PauseAI has received about €715k in donations so far.
 
 ## Largest donors
 
+- 422,961 (Future of Life Institute)
 - 95,000 (Greg Colbourn)
 - 80,000 ([Conjointly](https://conjointly.com/))
 - 36,952 (anonymous individual)

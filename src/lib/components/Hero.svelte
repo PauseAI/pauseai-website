@@ -5,7 +5,7 @@
 	import { onMount } from 'svelte'
 	import { emulateCqwIfNeeded } from '$lib/container-query-units'
 	import * as m from '$lib/paraglide/messages.js'
-	import Link from '$lib/components/custom/a.svelte'
+	import Link from '$lib/components/Link.svelte'
 
 	let currentImageIndex = 0
 	const images = [london, denHaag, sf]
@@ -89,6 +89,7 @@
 		display: grid;
 		grid-template-columns: repeat(3, 1fr);
 		height: 100vh;
+		min-height: var(--hero-min-height);
 		overflow: hidden;
 		position: relative;
 		max-width: 100vw;

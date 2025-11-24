@@ -4,7 +4,7 @@
 	import SignatoryCard from './SignatoryCard.svelte'
 	import QuoteHighlight from './QuoteHighlight.svelte'
 	import { theme } from '$lib/theme'
-	import Link from '$lib/components/custom/a.svelte'
+	import Link from '$lib/components/LinkWithoutIcon.svelte'
 
 	export let data
 
@@ -146,7 +146,7 @@
 					<div class="stat-label">Political Parties</div>
 				</div>
 				<div class="stat-card">
-					<div class="stat-number">60</div>
+					<div class="stat-number">63</div>
 					<div class="stat-label">Parliamentarians</div>
 				</div>
 			</div>
@@ -282,7 +282,7 @@
 	<section class="signatories-section">
 		<div class="signatories-header">
 			<h2 class="signatories-title">
-				<span class="title-number">60</span>
+				<span class="title-number">63</span>
 				<span class="title-text">Signatories</span>
 			</h2>
 			<p class="signatories-subtitle">United in calling for AI safety transparency</p>
@@ -307,7 +307,6 @@
 							target="_blank"
 							rel="noopener noreferrer"
 							class="organization-card organization-link"
-							hideIcon={true}
 						>
 							{#if organizationLogos[org.name]}
 								<img
@@ -342,7 +341,6 @@
 						href="/pdfs/PauseAI_Open_Letter_Background_Information.pdf"
 						target="_blank"
 						class="pdf-thumbnail"
-						hideIcon={true}
 					>
 						<img
 							src="/pdfs/PauseAI_Open_Letter_Background_Information_page-1.jpg"
@@ -368,7 +366,7 @@
 					Hassabis, calling for transparency in Google DeepMind's AI safety commitments.
 				</p>
 				<div class="campaign-cta">
-					<Link href="/uk-email-mp" class="cta-button" hideIcon={true}>
+					<Link href="/uk-email-mp" class="cta-button">
 						<span class="cta-text">Email Your MP</span>
 						<span class="cta-subtitle">Ask them to sign the letter</span>
 					</Link>
@@ -381,10 +379,8 @@
 	<section class="contact-section">
 		<div class="contact-container">
 			<p class="contact-text">
-				For enquiries contact <Link
-					href="mailto:joseph@pauseai.info"
-					class="contact-link"
-					hideIcon={true}>Joseph Miller at joseph@pauseai.info</Link
+				For enquiries contact <Link href="mailto:joseph@pauseai.info" class="contact-link"
+					>Joseph Miller at joseph@pauseai.info</Link
 				>
 			</p>
 		</div>

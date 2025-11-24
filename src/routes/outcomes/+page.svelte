@@ -15,7 +15,7 @@
 
 <div class="header">
 	<button class="reset-button" on:click={() => (intro = true)} bind:this={top}>
-		<h1>AI outcomes</h1>
+		<h1>{title}</h1>
 	</button>
 	{#if !intro}
 		<div class="headerbuttons">

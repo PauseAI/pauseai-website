@@ -1,5 +1,5 @@
 <script lang="ts">
-	import Link from '$lib/components/custom/a.svelte'
+	import Link from '$lib/components/Link.svelte'
 	import Toggle from '$lib/components/Toggle.svelte'
 	import Edit from '$lib/components/Edit.svelte'
 	import WithdrawWidgetConsent from '$lib/components/widget-consent/WithdrawWidgetConsent.svelte'
