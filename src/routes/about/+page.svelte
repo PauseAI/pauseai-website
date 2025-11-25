@@ -3,6 +3,7 @@
 	import { meta } from './meta'
 	import PersonCard from './person.svelte'
 	import type { Person } from '$lib/types'
+	import WidgetConsent from '$lib/components/widget-consent/WidgetConsent.svelte'
 
 	export let data
 
@@ -23,10 +24,33 @@
 		We were founded in Utrecht, Netherlands in May 2023 by Joep Meindertsma, who put his job on hold
 		because he couldn't ignore the existential risks from artificial intelligence any longer. We
 		began with our first public action, which was a protest outside Microsoft's Brussels lobbying
-		office in May 2023. What started as one person's call to action has grown into a global
-		grassroots movement with volunteers, national chapters, and local communities across the world,
-		all working toward the same goal: pausing frontier AI development until we can prove it's safe
-		and keep it under democratic control.
+		office.
+	</p>
+
+	<WidgetConsent>
+		<div>
+			<blockquote class="twitter-tweet">
+				<p lang="en" dir="ltr">
+					Today we gathered in Bruxelles. We're asking our governments to organize a summit to
+					discuss AI risks and to prevent the development of superintelligent AI. <a
+						href="https://twitter.com/hashtag/pauseai?src=hash&amp;ref_src=twsrc%5Etfw">#pauseai</a
+					>
+					(1/5) <a href="https://t.co/tXdeftTNAp">pic.twitter.com/tXdeftTNAp</a>
+				</p>
+				&mdash; Joep Meindertsma (@joepmeindertsma)
+				<a href="https://twitter.com/joepmeindertsma/status/1661047436905725953?ref_src=twsrc%5Etfw"
+					>May 23, 2023</a
+				>
+			</blockquote>
+			<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+		</div>
+	</WidgetConsent>
+
+	<p>
+		What started as one person's call to action has grown into a global grassroots movement with
+		volunteers, national chapters, and local communities across the world, all working toward the
+		same goal: pausing frontier AI development until we can prove it's safe and keep it under
+		democratic control.
 	</p>
 
 	<h2 class="milestones-header">Key Milestones</h2>
