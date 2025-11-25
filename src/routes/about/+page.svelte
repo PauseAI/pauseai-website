@@ -23,8 +23,9 @@
 	<p>
 		We were founded in Utrecht, Netherlands in May 2023 by Joep Meindertsma, who put his job on hold
 		because he couldn't ignore the existential risks from artificial intelligence any longer. We
-		began with our first public action, which was a protest outside Microsoft's Brussels lobbying
-		office.
+		began with our first public action, which was a protest outside <a
+			href="/brussels-microsoft-protest">Microsoft's Brussels lobbying office</a
+		>.
 	</p>
 
 	<WidgetConsent>
@@ -48,31 +49,37 @@
 
 	<p>
 		What started as one person's call to action has grown into a global grassroots movement with
-		volunteers, national chapters, and local communities across the world, all working toward the
-		same goal: pausing frontier AI development until we can prove it's safe and keep it under
-		democratic control.
+		volunteers, <a href="/national-groups">national chapters</a>, and
+		<a href="/local-communities">local communities</a> across the world, all working toward the same
+		goal: pausing frontier AI development until we can prove it's safe and keep it under democratic control.
 	</p>
 
 	<h2 class="milestones-header">Key Milestones</h2>
 	<ul class="milestones-list">
 		<li>
-			November 2023: Protested outside the inaugural <a
-				href="https://en.wikipedia.org/wiki/AI_Safety_Summit">AI Safety Summit at Bletchley Park</a
+			November 2023: Protested outside the inaugural <a href="/2023-november-uk"
+				>AI Safety Summit at Bletchley Park</a
 			>.
 		</li>
-		<li>February 2024: Gathered outside OpenAI's headquarters in San Francisco</li>
+		<li>
+			February 2024: <a href="/2024-february"
+				>Gathered outside OpenAI's headquarters in San Francisco</a
+			>
+		</li>
 		<li>
 			May 2024: Organized coordinated protests across thirteen countries—including the US, UK,
-			Brazil, Germany, Australia, and Norway ahead of the AI Seoul Summit
+			Brazil, Germany, Australia, and Norway ahead of the <a href="/2024-may">AI Seoul Summit</a>.
 		</li>
 		<li>
-			February 2025: Coordinated an event larger global protest for the French AI Summit, adding
-			Kenya and DRC to the mix.
+			February 2025: Coordinated an event larger global protest for the <a href="/2025-february"
+				>French AI Summit</a
+			>, adding Kenya and DRC to the mix.
 		</li>
 		<li>
-			June 2025: Led our biggest protest yet outside Google DeepMind's London office, holding them
-			accountable for breaking their safety commitments and hosted the first ever PauseCon training
-			event
+			June 2025: Led our <a href="/deepmind-protest-2025"
+				>biggest protest yet outside Google DeepMind's London office</a
+			>, holding them accountable for breaking their safety commitments and hosted the first ever
+			PauseCon training event.
 		</li>
 		<li>
 			Ongoing: Grew from a single-country initiative into a network with national organizations like
