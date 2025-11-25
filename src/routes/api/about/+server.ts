@@ -46,9 +46,7 @@ function recordToPerson(record: any): Person {
 }
 
 const filter = (p: Person) => {
-	return (
-		!p.privacy && p.checked && p.title?.trim() !== '' && p.title !== defaultTitle && !p.duplicate
-	)
+	return p.checked && p.title?.trim() !== '' && p.title !== defaultTitle && !p.duplicate
 }
 
 const getGroupKey = (order: number | undefined): string => {
@@ -100,6 +98,16 @@ export async function GET({ fetch, setHeaders }) {
 
 				// Secondary sort: alphabetical by name
 				return a.name.localeCompare(b.name)
+			})
+			.map((p) => {
+				if (p.privacy) {
+					return {
+						...p,
+						name: p.name.split(' ')[0],
+						image: undefined
+					}
+				}
+				return p
 			})
 
 		const groupedOut = sortedPeople.reduce(
