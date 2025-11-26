@@ -1,10 +1,15 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 export const prerender = false
 
-import type { Person } from '$lib/types'
-import { defaultTitle } from '$lib/config'
-import { json } from '@sveltejs/kit'
 import { fetchAllPages } from '$lib/airtable'
+import { defaultTitle } from '$lib/config'
+import type { Person } from '$lib/types'
+import { generateCacheControlRecord } from '$lib/utils'
+import { json } from '@sveltejs/kit'
+
+// Export the response type for use in other endpoints
+export type AboutApiResponse = Record<string, Person[]>
+
 /**
  * Fallback people data to use in development if Airtable fetch fails
  */
@@ -45,6 +50,8 @@ function recordToPerson(record: any): Person {
 	}
 }
 
+const AIRTABLE_FILTER = `{Title} != ""`
+
 const filter = (p: Person) => {
 	return p.checked && p.title?.trim() !== '' && p.title !== defaultTitle && !p.duplicate
 }
@@ -63,9 +70,7 @@ const getGroupKey = (order: number | undefined): string => {
 
 export async function GET({ fetch, setHeaders }) {
 	const url = `https://api.airtable.com/v0/appWPTGqZmUcs3NWu/tblL1icZBhTV1gQ9o`
-	setHeaders({
-		'cache-control': 'public, max-age=3600' // 1 hour in seconds
-	})
+	setHeaders(generateCacheControlRecord({ public: true, maxAge: 60 * 60 }))
 
 	try {
 		// Create fallback records in the expected Airtable format
@@ -82,7 +87,9 @@ export async function GET({ fetch, setHeaders }) {
 			}
 		}))
 
-		const records = await fetchAllPages(fetch, url, fallbackRecords)
+		const records = await fetchAllPages(fetch, url, fallbackRecords, {
+			filterByFormula: AIRTABLE_FILTER
+		})
 
 		const sortedPeople = records
 			.map(recordToPerson)
@@ -110,7 +117,7 @@ export async function GET({ fetch, setHeaders }) {
 				return p
 			})
 
-		const groupedOut = sortedPeople.reduce(
+		const groupedOut: AboutApiResponse = sortedPeople.reduce(
 			(acc, person) => {
 				const key = getGroupKey(person.order)
 				if (!acc[key]) {
@@ -128,7 +135,7 @@ export async function GET({ fetch, setHeaders }) {
 
 		const filteredFallback = fallbackPeople.filter(filter)
 
-		const groupedFallback = filteredFallback.reduce(
+		const groupedFallback: AboutApiResponse = filteredFallback.reduce(
 			(acc, person) => {
 				const key = getGroupKey(person.order)
 				if (!acc[key]) {

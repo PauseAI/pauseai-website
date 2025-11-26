@@ -77,6 +77,18 @@
 			"lat": 52,
 			"lon": 19.5,
 			"link": "mailto:p.klimkiewicz@idealnywzrok.pl"
+		},
+		{
+			"name": "PauseAI India",
+			"lat": 22,
+			"lon": 78.5,
+			"link": "mailto:amanagarwal263@gmail.com"
+		},
+		{
+			"name": "PauseAI Sweden",
+			"lat": 65,
+			"lon": 17,
+			"link": "mailto:larzzzon91@gmail.com"
 		}
 	]
 }

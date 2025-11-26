@@ -7,6 +7,7 @@ import { defineConfig, globalIgnores } from 'eslint/config'
 import globals from 'globals'
 import ts from 'typescript-eslint'
 import svelteConfig from './svelte.config.js'
+import emptyMarkdownLinks from './eslint/plugin-empty-markdown-links.js'
 
 export default defineConfig(
 	js.configs.recommended,
@@ -23,12 +24,16 @@ export default defineConfig(
 	{
 		files: ['**/*.md'],
 		extends: [markdown.configs.recommended],
+		plugins: {
+			emptyMarkdownLinks
+		},
 		rules: {
 			'markdown/fenced-code-language': 'off',
 			'markdown/no-missing-atx-heading-space': 'off', // rule is broken
 			'markdown/no-missing-label-refs': 'off',
 			'markdown/require-alt-text': 'warn',
-			'no-irregular-whitespace': 'off' // not supported by markdown parser
+			'no-irregular-whitespace': 'off', // not supported by markdown parser
+			'emptyMarkdownLinks/no-empty-link-text': 'error'
 		}
 	},
 	{
