@@ -111,10 +111,6 @@ export default defineConfig(
 		}
 	},
 	globalIgnores([
-		'.netlify/',
-		'.svelte-kit/',
-		'build/',
-		'static/',
 		// TODO remove when done
 		'src/routes/api/write',
 		'src/routes/write'
