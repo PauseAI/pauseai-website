@@ -51,7 +51,7 @@ We agree that there are many important issues facing Australia, but we won't be 
 
 ### Why isn't anything being done already?
 
-Australian politicians have looked at some of the smaller risks of AI, but not the big ones. As of the last election, [the major parties do not have a clear plan](https://www.australiansforaisafety.com.au/scorecard).
+Australian politicians have looked at some of the smaller risks of AI, but rarely acknowledge the big ones.
 
 We acknowledge that not everyone agrees about the risk of an AI catastrophe. We address some of the common objections [here](/faq). We don't claim to be 100% certain, but we think the probability of very bad outcomes is more than high enough to justify a pause.
 
