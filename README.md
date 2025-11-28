@@ -139,6 +139,61 @@ const REDIRECTS: Record<string, string> = {
 
 To add a new redirect, simply add a new entry to the `REDIRECTS` object in `src/lib/redirects.ts`.
 
+## API Routes Registration
+
+The [`/api/posts`](src/routes/api/posts/+server.ts) endpoint serves as a central registry for all content that needs to be available via API endpoints, including:
+
+- All Markdown posts from `src/posts/` directory
+- Hard-coded pages with metadata for SEO purposes
+
+### Adding New SvelteKit Routes
+
+When creating new SvelteKit routes (not Markdown posts) that need to be accessible via the API or included in site-wide functionality like sitemaps, RSS feeds, or search indexes, you **must** register them in the [`hardCodedPages`](src/routes/api/posts/+server.ts:15) array in [`src/routes/api/posts/+server.ts`](src/routes/api/posts/+server.ts).
+
+#### Steps to Register a New Route:
+
+1. **Create your SvelteKit route** in the `src/routes/` directory (e.g., `src/routes/my-page/+page.svelte`)
+
+2. **Create a metadata object** that follows the `Post` type interface. This should include:
+   - `title`: The page title
+   - `description`: A brief description
+   - `date`: Publication date (if applicable)
+   - `tags`: Relevant tags
+   - Any other fields required by the `Post` interface
+
+3. **Add a meta export** in your route's directory (e.g., `src/routes/my-page/meta.ts`)
+
+4. **Import and register the metadata** in [`src/routes/api/posts/+server.ts`](src/routes/api/posts/+server.ts):
+
+   ```typescript
+   import { meta as myPageMeta } from '../../my-page/meta'
+
+   const hardCodedPages: Post[] = [
+   	// ... existing entries
+   	myPageMeta
+   ]
+   ```
+
+#### Example Meta File:
+
+```typescript
+// src/routes/my-page/meta.ts
+export const meta = {
+	title: 'My New Page',
+	description: 'Description of my new page',
+	date: '2024-01-01',
+	tags: ['example', 'new-page']
+	// ... other Post interface fields
+}
+```
+
+This registration ensures your route is included in:
+
+- Sitemap generation ([`src/routes/sitemap.xml/+server.ts`](src/routes/sitemap.xml/+server.ts))
+- RSS feed generation ([`src/routes/rss.xml/+server.ts`](src/routes/rss.xml/+server.ts))
+- Posts listing ([`src/routes/posts/+page.ts`](src/routes/posts/+page.ts))
+- Search indexing and other site-wide functionality
+
 ## Deployment
 
 The contents of the repository are continuously deployed to Netlify when code is pushed.
