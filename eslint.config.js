@@ -99,6 +99,12 @@ export default defineConfig(
 		}
 	},
 	{
+		files: ['src/lib/components/Tabs.svelte'],
+		rules: {
+			'svelte/no-at-html-tags': 'off' // Allow {@html} in Tabs component for markdown content
+		}
+	},
+	{
 		rules: {
 			// configured
 			'@typescript-eslint/no-unused-vars': [
