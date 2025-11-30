@@ -24,7 +24,7 @@ export default defineConfig(
 		}
 	},
 	gitignore({
-		files: globbySync('**/.gitignore', { gitignore: true })
+		files: globbySync('**/.gitignore', { ignore: ['**/node_modules'] })
 	}),
 	{
 		files: ['**/*.md'],
