@@ -121,12 +121,3 @@ export default defineConfig(
 		'src/routes/write'
 	])
 )
-
-function findGitignores(dir) {
-	return fs.readdirSync(dir, { withFileTypes: true }).flatMap((entry) => {
-		const p = path.join(dir, entry.name)
-		if (entry.name === '.gitignore') return [p]
-		if (entry.isDirectory() && entry.name !== 'node_modules') return findGitignores(p)
-		return []
-	})
-}
