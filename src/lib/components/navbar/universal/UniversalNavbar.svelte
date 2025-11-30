@@ -116,4 +116,13 @@
 		flex-wrap: wrap;
 		justify-content: center;
 	}
+
+	/* Narrow viewport: more compact spacing (matches 600px breakpoint) */
+	:global(.narrow-navbar) nav {
+		padding-top: 1.5rem;
+	}
+
+	:global(.narrow-navbar) nav > * {
+		margin-bottom: 0.25rem;
+	}
 </style>
