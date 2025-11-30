@@ -7,6 +7,7 @@ import svelte from 'eslint-plugin-svelte'
 import { defineConfig, globalIgnores } from 'eslint/config'
 import fs from 'fs'
 import globals from 'globals'
+import { globbySync } from 'globby'
 import path from 'path'
 import ts from 'typescript-eslint'
 import emptyMarkdownLinks from './eslint/plugin-empty-markdown-links.js'
@@ -25,9 +26,7 @@ export default defineConfig(
 		}
 	},
 	gitignore({
-		files: fs
-			.readdirSync(process.cwd(), { recursive: true })
-			.filter((name) => path.basename(name) === '.gitignore')
+		files: globbySync('**/.gitignore', { gitignore: true })
 	}),
 	{
 		files: ['**/*.md'],
@@ -122,3 +121,12 @@ export default defineConfig(
 		'src/routes/write'
 	])
 )
+
+function findGitignores(dir) {
+	return fs.readdirSync(dir, { withFileTypes: true }).flatMap((entry) => {
+		const p = path.join(dir, entry.name)
+		if (entry.name === '.gitignore') return [p]
+		if (entry.isDirectory() && entry.name !== 'node_modules') return findGitignores(p)
+		return []
+	})
+}
