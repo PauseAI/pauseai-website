@@ -92,7 +92,6 @@
 
 	type Section = {
 		name: string
-		action: string
 		section: ComponentType
 	}
 </script>
