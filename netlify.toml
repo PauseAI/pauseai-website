@@ -24,3 +24,8 @@
 [dev]
   command = "pnpm dev"
   port = 37572
+
+[[redirects]]
+  from = "/littlehelpers"
+  to = "https://donorbox.org/pauseai-s-little-helpers"
+  status = 302
