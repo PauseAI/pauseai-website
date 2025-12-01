@@ -126,20 +126,31 @@ To use optimized images, first, ensure your image file (e.g., `my-image.png`) is
 
 ## Redirects
 
-The `src/lib/redirects.ts` file defines server-side redirects for specific paths. This is useful for handling cases like old URLs or vanity URLs.
+The `src/lib/redirects.ts` file defines server-side redirects for specific paths. This is useful for handling cases like old URLs, vanity URLs, or temporary campaign links.
 
-The `REDIRECTS` object maps incoming paths to their target paths. When a request comes in for a path defined in `REDIRECTS`, the `handleRedirects` function issues a 301 (Moved Permanently) redirect to the specified target.
+Two redirect types are supported:
+
+- **`REDIRECTS`** - Permanent (301) redirects for old/moved content
+- **`TEMPORARY_REDIRECTS`** - Temporary (302) redirects for campaigns, A/B tests, etc.
+
+Both support internal paths and external URLs.
 
 Example:
 
 ```typescript
+/** Permanent redirects (301) */
 const REDIRECTS: Record<string, string> = {
 	'/old-path': '/new-path',
 	'/legacy-page': '/current-page'
 }
+
+/** Temporary redirects (302) */
+const TEMPORARY_REDIRECTS: Record<string, string> = {
+	'/campaign': 'https://external-site.com/landing-page'
+}
 ```
 
-To add a new redirect, simply add a new entry to the `REDIRECTS` object in `src/lib/redirects.ts`.
+To add a new redirect, add an entry to the appropriate object in `src/lib/redirects.ts`.
 
 ## API Routes Registration
 
