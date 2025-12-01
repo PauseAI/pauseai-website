@@ -26,11 +26,9 @@ Apply [here](https://pauseai.info/2025-organizing-director).
 
 Apply [here](https://pauseai.info/pauseai-uk-director).
 
-## PauseIA France Director
+## PauseAI Communications Director
 
-- Implementation of PauseIA France's national strategy
-- Build PauseAI as a key voice in France's AI policy landscape
-- Grow, train, and coordinate PauseIA France's volunteer base
+As PauseAI Global’s Communications Director, you will architect and lead our communications function - the central nervous system of our organization. You will develop our communication strategy, build scalable systems for information processing and content production, and empower our global network of volunteers and chapters to communicate effectively and on-message.
 
 Apply [here](https://pauseai.info/pauseia-france-director).
 
