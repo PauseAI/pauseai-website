@@ -10,6 +10,8 @@ Localization goes beyond simple translation — it adapts content for specific l
 
 If you are not yourself developing/changing the l10n system, you can let it run automatically.
 
+If you make changes to translated components (e.g. footer, navbar), update the `messages` json files accordingly.
+
 ## Quick Start
 
 ```bash
