@@ -1,7 +1,6 @@
 <p>
 	I would like to ask you to work towards treaty negotiations for compute governance, which would
-	prevent the worst of the risks that AI poses. The upcoming San Francisco AI Safety Conference on
-	November 20th-22nd is a great opportunity to do so. One country should take the lead, and at this
+	prevent the worst of the risks that AI poses. One country should take the lead, and at this
 	moment, not a single one is doing so.
 </p>
 <p>

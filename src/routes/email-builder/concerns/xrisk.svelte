@@ -16,7 +16,7 @@
 	Turing-award winners and pioneers of the deep learning methods that are currently achieving the
 	most success. The existential risk of AI has been acknowledged by
 	<a href="https://www.safe.ai/statement-on-ai-risk">hundreds of scientists</a>, the
-	<a href="https://twitter.com/gcolbourn/status/1669104216307015680">UN</a>, the US and recently the
+	<a href="https://twitter.com/gcolbourn/status/1669104216307015680">UN</a>, the US and the
 	<a href="https://twitter.com/EU_Commission/status/1702295053668946148">EU</a>.
 </p>
 

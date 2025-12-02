@@ -10,6 +10,8 @@ Localization goes beyond simple translation — it adapts content for specific l
 
 If you are not yourself developing/changing the l10n system, you can let it run automatically.
 
+If you make changes to translated components (e.g. footer, navbar), update the `messages` json files accordingly.
+
 ## Quick Start
 
 ```bash
@@ -124,20 +126,86 @@ To use optimized images, first, ensure your image file (e.g., `my-image.png`) is
 
 ## Redirects
 
-The `src/lib/redirects.ts` file defines server-side redirects for specific paths. This is useful for handling cases like old URLs or vanity URLs.
+The `src/lib/redirects.ts` file defines server-side redirects for specific paths. This is useful for handling cases like old URLs, vanity URLs, or temporary campaign links.
 
-The `REDIRECTS` object maps incoming paths to their target paths. When a request comes in for a path defined in `REDIRECTS`, the `handleRedirects` function issues a 301 (Moved Permanently) redirect to the specified target.
+Two redirect types are supported:
+
+- **`REDIRECTS`** - Permanent (301) redirects for old/moved content
+- **`TEMPORARY_REDIRECTS`** - Temporary (302) redirects for campaigns, A/B tests, etc.
+
+Both support internal paths and external URLs.
 
 Example:
 
 ```typescript
+/** Permanent redirects (301) */
 const REDIRECTS: Record<string, string> = {
 	'/old-path': '/new-path',
 	'/legacy-page': '/current-page'
 }
+
+/** Temporary redirects (302) */
+const TEMPORARY_REDIRECTS: Record<string, string> = {
+	'/campaign': 'https://external-site.com/landing-page'
+}
 ```
 
-To add a new redirect, simply add a new entry to the `REDIRECTS` object in `src/lib/redirects.ts`.
+To add a new redirect, add an entry to the appropriate object in `src/lib/redirects.ts`.
+
+## API Routes Registration
+
+The [`/api/posts`](src/routes/api/posts/+server.ts) endpoint serves as a central registry for all content that needs to be available via API endpoints, including:
+
+- All Markdown posts from `src/posts/` directory
+- Hard-coded pages with metadata for SEO purposes
+
+### Adding New SvelteKit Routes
+
+When creating new SvelteKit routes (not Markdown posts) that need to be accessible via the API or included in site-wide functionality like sitemaps, RSS feeds, or search indexes, you **must** register them in the [`hardCodedPages`](src/routes/api/posts/+server.ts:15) array in [`src/routes/api/posts/+server.ts`](src/routes/api/posts/+server.ts).
+
+#### Steps to Register a New Route:
+
+1. **Create your SvelteKit route** in the `src/routes/` directory (e.g., `src/routes/my-page/+page.svelte`)
+
+2. **Create a metadata object** that follows the `Post` type interface. This should include:
+   - `title`: The page title
+   - `description`: A brief description
+   - `date`: Publication date (if applicable)
+   - `tags`: Relevant tags
+   - Any other fields required by the `Post` interface
+
+3. **Add a meta export** in your route's directory (e.g., `src/routes/my-page/meta.ts`)
+
+4. **Import and register the metadata** in [`src/routes/api/posts/+server.ts`](src/routes/api/posts/+server.ts):
+
+   ```typescript
+   import { meta as myPageMeta } from '../../my-page/meta'
+
+   const hardCodedPages: Post[] = [
+   	// ... existing entries
+   	myPageMeta
+   ]
+   ```
+
+#### Example Meta File:
+
+```typescript
+// src/routes/my-page/meta.ts
+export const meta = {
+	title: 'My New Page',
+	description: 'Description of my new page',
+	date: '2024-01-01',
+	tags: ['example', 'new-page']
+	// ... other Post interface fields
+}
+```
+
+This registration ensures your route is included in:
+
+- Sitemap generation ([`src/routes/sitemap.xml/+server.ts`](src/routes/sitemap.xml/+server.ts))
+- RSS feed generation ([`src/routes/rss.xml/+server.ts`](src/routes/rss.xml/+server.ts))
+- Posts listing ([`src/routes/posts/+page.ts`](src/routes/posts/+page.ts))
+- Search indexing and other site-wide functionality
 
 ## Deployment
 

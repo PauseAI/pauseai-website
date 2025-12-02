@@ -1,11 +1,14 @@
 /* https://sveltejs.github.io/eslint-plugin-svelte/user-guide/ */
 import js from '@eslint/js'
 import markdown from '@eslint/markdown'
+import gitignore from 'eslint-config-flat-gitignore'
 import prettier from 'eslint-config-prettier'
 import svelte from 'eslint-plugin-svelte'
 import { defineConfig, globalIgnores } from 'eslint/config'
 import globals from 'globals'
+import { globbySync } from 'globby'
 import ts from 'typescript-eslint'
+import emptyMarkdownLinks from './eslint/plugin-empty-markdown-links.js'
 import svelteConfig from './svelte.config.js'
 
 export default defineConfig(
@@ -20,15 +23,22 @@ export default defineConfig(
 			}
 		}
 	},
+	gitignore({
+		files: globbySync('**/.gitignore', { ignore: ['**/node_modules'] })
+	}),
 	{
 		files: ['**/*.md'],
 		extends: [markdown.configs.recommended],
+		plugins: {
+			emptyMarkdownLinks
+		},
 		rules: {
 			'markdown/fenced-code-language': 'off',
 			'markdown/no-missing-atx-heading-space': 'off', // rule is broken
 			'markdown/no-missing-label-refs': 'off',
 			'markdown/require-alt-text': 'warn',
-			'no-irregular-whitespace': 'off' // not supported by markdown parser
+			'no-irregular-whitespace': 'off', // not supported by markdown parser
+			'emptyMarkdownLinks/no-empty-link-text': 'error'
 		}
 	},
 	{
@@ -98,10 +108,6 @@ export default defineConfig(
 		}
 	},
 	globalIgnores([
-		'.netlify/',
-		'.svelte-kit/',
-		'build/',
-		'static/',
 		// TODO remove when done
 		'src/routes/api/write',
 		'src/routes/write'

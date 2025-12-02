@@ -92,9 +92,11 @@
 		min-height: var(--hero-min-height);
 		overflow: hidden;
 		position: relative;
-		max-width: 100vw;
-		margin-left: calc(-50vw + 50%);
-		margin-right: calc(-50vw + 50%);
+		/* Full-bleed: use transform-based centering instead of margin calc
+		   (fixes WebKit/iOS Safari rendering issue - see #562) */
+		width: 100vw;
+		left: 50%;
+		transform: translateX(-50%);
 	}
 
 	.overlay {

@@ -35,14 +35,20 @@ According to their charter, “OpenAI’s mission is to ensure that artificial g
 
 ## Contact
 
-- Holly Elmore ([Twitter](https://twitter.com/ilex_ulmus))
-- Sam Kirchner ([Twitter](https://twitter.com/No_AGI_))
+- Holly Elmore, PauseAI US Director ([Twitter](https://twitter.com/ilex_ulmus))
+- Sam Kirchner, No AGI ([Twitter](https://twitter.com/No_AGI_))
 
 ## Media Coverage
 
 - [Bloomberg](https://www.bloomberg.com/news/newsletters/2024-02-13/ai-protest-at-openai-hq-in-san-francisco-focuses-on-military-work)
 - [ReadWrite](https://readwrite.com/stop-working-with-pentagon-openai-staff-face-protests/)
 - [VentureBeat](https://venturebeat.com/ai/protesters-gather-outside-openai-office-opposing-military-ai-and-agi/)
+
+## Important Update (November 2025)
+
+PauseAI is aware of recent security threats involving Sam Kirchner (StopAI/No AGI). PauseAI strictly condemns these actions and threats of violence.
+
+**Clarification of Involvement:** This past event (Feb 2024) was a **coalition protest** involving separate organizations. Sam Kirchner participated solely as a representative of the external group "No AGI" (now StopAI). He has never been a member, volunteer, or leader within PauseAI. We have no affiliation with him or his organization.
 
 <WidgetConsent>
 <div>

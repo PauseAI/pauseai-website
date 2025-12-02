@@ -1,6 +1,8 @@
 import { AIRTABLE_API_KEY } from '$env/static/private'
 import { getDevContext, isDev } from '$lib/env'
-import Airtable from 'airtable'
+import Airtable, { type FieldSet, type Table } from 'airtable'
+
+type QueryParams = Parameters<Table<FieldSet>['select']>[0]
 
 /** Fetch options for getting data from Airtable */
 const OPTIONS = {
@@ -45,7 +47,8 @@ export function extractAirtableIds(url: string): { baseId: string; tableId: stri
 export async function fetchAllPages<T extends Record<string, unknown>>(
 	customFetch: typeof fetch,
 	url: `https://api.airtable.com/v0/${string}/${string}`,
-	fallbackData: AirtableRecord<T>[] = []
+	fallbackData: AirtableRecord<T>[] = [],
+	queryParams: QueryParams = undefined
 ): Promise<readonly AirtableRecord<T>[]> {
 	// Check if we have the API key configured
 	const apiKeyConfigured =
@@ -73,7 +76,7 @@ export async function fetchAllPages<T extends Record<string, unknown>>(
 		const base = new Airtable({ apiKey: AIRTABLE_API_KEY }).base(ids.baseId)
 		const table = base(ids.tableId)
 
-		const records = await table.select().all()
+		const records = await table.select(queryParams).all()
 		return records.map((record) => ({ id: record.id, fields: record.fields as T }))
 	} catch (error) {
 		console.error('Error in fetchAllPages:', error)

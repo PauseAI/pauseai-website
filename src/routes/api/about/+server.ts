@@ -1,11 +1,11 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 export const prerender = false
 
-import type { Person } from '$lib/types'
-import { defaultTitle } from '$lib/config'
-import { json } from '@sveltejs/kit'
 import { fetchAllPages } from '$lib/airtable'
+import { defaultTitle } from '$lib/config'
+import type { Person } from '$lib/types'
 import { generateCacheControlRecord } from '$lib/utils'
+import { json } from '@sveltejs/kit'
 
 // Export the response type for use in other endpoints
 export type AboutApiResponse = Record<string, Person[]>
@@ -50,10 +50,10 @@ function recordToPerson(record: any): Person {
 	}
 }
 
+const AIRTABLE_FILTER = `{Title} != ""`
+
 const filter = (p: Person) => {
-	return (
-		!p.privacy && p.checked && p.title?.trim() !== '' && p.title !== defaultTitle && !p.duplicate
-	)
+	return p.checked && p.title?.trim() !== '' && p.title !== defaultTitle && !p.duplicate
 }
 
 const getGroupKey = (order: number | undefined): string => {
@@ -87,7 +87,9 @@ export async function GET({ fetch, setHeaders }) {
 			}
 		}))
 
-		const records = await fetchAllPages(fetch, url, fallbackRecords)
+		const records = await fetchAllPages(fetch, url, fallbackRecords, {
+			filterByFormula: AIRTABLE_FILTER
+		})
 
 		const sortedPeople = records
 			.map(recordToPerson)
@@ -103,6 +105,16 @@ export async function GET({ fetch, setHeaders }) {
 
 				// Secondary sort: alphabetical by name
 				return a.name.localeCompare(b.name)
+			})
+			.map((p) => {
+				if (p.privacy) {
+					return {
+						...p,
+						name: p.name.split(' ')[0],
+						image: undefined
+					}
+				}
+				return p
 			})
 
 		const groupedOut: AboutApiResponse = sortedPeople.reduce(
