@@ -1,6 +1,6 @@
 import type { ComponentType } from 'svelte'
-import Dutch from './Dutch.svelte'
-import English from './English.svelte'
+// import Dutch from './Dutch.svelte'
+// import English from './English.svelte'
 
 export type Country = {
 	name: string
@@ -11,14 +11,14 @@ export type Country = {
 }
 
 export const countries: Country[] = [
-	{
+	/* { 
 		name: 'Nederland',
 		url: 'https://www.rijksoverheid.nl/onderwerpen/coronavirus-covid-19/algemene-coronaregels/aanpak-coronavirus-in-nederland',
 		mail: Dutch
-	},
+	}, 
 	{
 		name: 'Engeland',
 		url: 'https://www.rijksoverheid.nl/onderwerpen/coronavirus-covid-19/algemene-coronaregels/aanpak-coronavirus-in-nederland',
 		mail: English
-	}
+	} */
 ]
