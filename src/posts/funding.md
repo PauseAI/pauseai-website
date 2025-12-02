@@ -1,7 +1,7 @@
 ---
 title: PauseAI Funding & Donors
 description: A list of our largest donors.
-date: ""
+date: ''
 ---
 
 _Last update: 2025-12-02_

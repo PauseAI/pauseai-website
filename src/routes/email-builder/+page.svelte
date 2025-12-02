@@ -94,6 +94,27 @@
 		name: string
 		section: ComponentType
 	}
+
+	function handleClick(event: MouseEvent) {
+		const target = event.target as HTMLElement
+		const anchor = target.closest('a')
+
+		if (anchor) {
+			event.preventDefault()
+			window.open(anchor.href, '_blank')
+		}
+	}
+
+	function handleKeydown(event: KeyboardEvent) {
+		if (event.key === 'Enter') {
+			const target = event.target as HTMLElement
+			const anchor = target.closest('a')
+			if (anchor) {
+				event.preventDefault()
+				window.open(anchor.href, '_blank')
+			}
+		}
+	}
 </script>
 
 <PostMeta {title} {description} {date} />
@@ -222,7 +243,14 @@
 <p>You can edit the message directly in the browser.</p>
 <div>
 	<Card className="letter">
-		<div id={letterId} contenteditable="true">
+		<div
+			id={letterId}
+			contenteditable="true"
+			on:click={handleClick}
+			on:keydown={handleKeydown}
+			role="document"
+			tabindex="-1"
+		>
 			<p>Dear __NAME__,</p>
 			<p>
 				First of all, thank you very much for everything you have done for __THING__. I am emailing
@@ -336,13 +364,5 @@
 	.tag--selected:hover {
 		background-color: var(--brand-dark);
 		color: var(--bg);
-	}
-
-	input {
-		padding: 0.3rem 0.5rem;
-		border: var(--brand) 2px solid;
-		min-width: 8rem;
-		border-radius: 10px;
-		font-size: 0.8rem;
 	}
 </style>
