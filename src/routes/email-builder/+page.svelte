@@ -138,7 +138,8 @@
 		>.
 	</li>
 	<li>
-		<b>Enter their name:</b> <input bind:value={name} placeholder="Name of person" />
+		<b>Enter their name:</b>
+		<input class="email-builder-input" bind:value={name} placeholder="Name of person" />
 	</li>
 </ul>
 
@@ -331,7 +332,7 @@
 		color: var(--bg);
 	}
 
-	input {
+	.email-builder-input {
 		padding: 0.3rem 0.5rem;
 		border: var(--brand) 2px solid;
 		min-width: 8rem;
