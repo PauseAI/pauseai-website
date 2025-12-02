@@ -1,10 +1,10 @@
 ---
 title: PauseAI Funding & Donors
 description: A list of our largest donors.
-date: ''
+date: ""
 ---
 
-_Last update: 2025-09-18_
+_Last update: 2025-12-02_
 
 PauseAI has received about €715k in donations so far.
 
@@ -12,7 +12,7 @@ PauseAI has received about €715k in donations so far.
 
 - 422,961 (Future of Life Institute)
 - 95,000 (Greg Colbourn)
-- 80,000 ([Conjointly](https://conjointly.com/))
+- 83,000 ([Conjointly](https://conjointly.com/))
 - 36,952 (anonymous individual)
 - 27,528 (Lightspeed, through Greg Colbourn)
 - 18,410 ([Lightspeed](https://lightspeedgrants.org/))
