@@ -5,9 +5,8 @@ import gitignore from 'eslint-config-flat-gitignore'
 import prettier from 'eslint-config-prettier'
 import svelte from 'eslint-plugin-svelte'
 import { defineConfig, globalIgnores } from 'eslint/config'
-import fs from 'fs'
 import globals from 'globals'
-import path from 'path'
+import { globbySync } from 'globby'
 import ts from 'typescript-eslint'
 import emptyMarkdownLinks from './eslint/plugin-empty-markdown-links.js'
 import svelteConfig from './svelte.config.js'
@@ -25,9 +24,7 @@ export default defineConfig(
 		}
 	},
 	gitignore({
-		files: fs
-			.readdirSync(process.cwd(), { recursive: true })
-			.filter((name) => path.basename(name) === '.gitignore')
+		files: globbySync('**/.gitignore', { ignore: ['**/node_modules'] })
 	}),
 	{
 		files: ['**/*.md'],
@@ -96,12 +93,6 @@ export default defineConfig(
 					]
 				}
 			]
-		}
-	},
-	{
-		files: ['src/lib/components/Tabs.svelte'],
-		rules: {
-			'svelte/no-at-html-tags': 'off' // Allow {@html} in Tabs component for markdown content
 		}
 	},
 	{

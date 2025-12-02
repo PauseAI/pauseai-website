@@ -9,7 +9,21 @@
 
 	const peopleGroups = data.people as Record<string, Person[]>
 
-	const groupKeys = Object.keys(peopleGroups)
+	// Define the manual order for the groups
+	const groupOrder = [
+		'Leadership Team',
+		'National Chapters',
+		'National Chapter Leads',
+		'Global Board'
+	]
+
+	// Get all group keys and sort them according to the manual order
+	const allGroupKeys = Object.keys(peopleGroups)
+	const groupKeys = groupOrder.filter((group) => allGroupKeys.includes(group))
+
+	// Add any groups that weren't in the manual order (in case new ones appear)
+	const remainingGroups = allGroupKeys.filter((group) => !groupOrder.includes(group))
+	groupKeys.push(...remainingGroups)
 
 	const { title, description, date } = meta
 </script>

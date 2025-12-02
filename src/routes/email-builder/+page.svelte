@@ -205,8 +205,9 @@
 
 <h2>Last steps</h2>
 <p>
-	Before sending the email you have to manually replace "__THING__". "__COUNTRY__" and "__YOUR
-	NAME__". It can also be effective to further personalize the message. Here are some tips:
+	Before sending the email you need to manually replace the placeholders "__NAME__", "__THING__",
+	"__COUNTRY__" and "__YOUR NAME__". It can also be effective to further personalize the message.
+	Here are some tips:
 </p>
 <ul>
 	<li>

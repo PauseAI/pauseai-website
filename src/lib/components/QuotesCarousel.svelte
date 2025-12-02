@@ -147,7 +147,7 @@
 <style>
 	.glide__track {
 		position: relative;
-		margin: -20px;
+		inset: -20px;
 	}
 
 	.quote {

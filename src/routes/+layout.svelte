@@ -123,22 +123,22 @@
 		grid-template-rows: auto 1fr auto;
 		grid-auto-columns: 100%;
 		margin-inline: auto;
-		--padding-big: 3rem;
-		--padding-small: 1rem;
-		padding: 0 var(--padding-big) 0 var(--padding-big);
+		--padding-wide: 3rem;
+		--padding-narrow: 0.5rem;
+		padding: 0 var(--padding-wide) 0 var(--padding-wide);
 	}
 
-	/* Media query not strictily necessary */
-	@media (max-width: 750px) {
+	/* Transition to narrower padding at narrow viewports (matches navbar 600px breakpoint) */
+	@media (max-width: 600px) {
 		.layout {
-			--transition-padding-from: 750px;
+			--transition-padding-from: 600px;
 			--transition-padding-until: calc(
-				var(--transition-padding-from) - 2 * (var(--padding-big) - var(--padding-small))
+				var(--transition-padding-from) - 2 * (var(--padding-wide) - var(--padding-narrow))
 			);
 			--padding-left-right: clamp(
-				var(--padding-small),
-				calc(var(--padding-small) + (100vw - var(--transition-padding-until)) / 2),
-				var(--padding-big)
+				var(--padding-narrow),
+				calc(var(--padding-narrow) + (100vw - var(--transition-padding-until)) / 2),
+				var(--padding-wide)
 			);
 			padding-left: var(--padding-left-right);
 			padding-right: var(--padding-left-right);
@@ -148,6 +148,12 @@
 	main {
 		padding-block: 1rem;
 		margin-bottom: 5rem;
+	}
+
+	@media (max-width: 600px) {
+		main {
+			margin-bottom: 2rem;
+		}
 	}
 
 	/* @media (min-width: --page-width) {
