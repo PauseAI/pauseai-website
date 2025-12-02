@@ -13,10 +13,8 @@ const FALLBACK_NATIONAL_GROUPS: AirtableRecord<AirtableNationalGroup>[] = [
 			Name: '[FALLBACK DATA] Example Group 1',
 			Notes: 'This is placeholder data shown when Airtable API is unavailable',
 			Leader: ['Fall McBack'],
-			discord_username: ['noone'],
 			onboarding_email: 'fall.mcback@example.com',
 			'Legal entity': 'No',
-			Overseer: ['anthony@pauseai.info'],
 			X: '',
 			Discord: '',
 			Whatsapp: '',
@@ -36,10 +34,8 @@ const FALLBACK_NATIONAL_GROUPS: AirtableRecord<AirtableNationalGroup>[] = [
 			Name: '[FALLBACK DATA] Example Group 2',
 			Notes: 'etc',
 			Leader: ['etc'],
-			discord_username: [],
 			onboarding_email: '',
 			'Legal entity': 'Yes',
-			Overseer: ['etc'],
 			X: '',
 			Discord: '',
 			Whatsapp: '',
@@ -80,12 +76,9 @@ function recordToNationalGroup(record: AirtableRecord<AirtableNationalGroup>): N
 				? 'Yes'
 				: 'No',
 		// The discord_username field name may vary
-		discordUsername: record.fields.discord_username ? record.fields.discord_username[0] : '',
 		// Include email if available
 		email: record.fields.onboarding_email ? record.fields.onboarding_email : '',
 		legalEntity: record.fields['Legal entity'] === 'Yes',
-		// Overseer is an array of record IDs
-		overseer: record.fields.Overseer ? 'Yes' : 'No',
 		xLink: record.fields.X || '',
 		discordLink: record.fields.Discord || '',
 		whatsappLink: record.fields.Whatsapp || '',

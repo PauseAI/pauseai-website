@@ -77,6 +77,8 @@ export type NationalGroup = {
 	notes?: string
 	image?: string
 	id: string
+	legalEntity?: boolean
+	public: boolean
 } & Record<NationalGroupLink, string | undefined>
 
 export type AirtableNationalGroup = {
