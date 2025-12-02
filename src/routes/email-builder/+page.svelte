@@ -337,12 +337,4 @@
 		background-color: var(--brand-dark);
 		color: var(--bg);
 	}
-
-	.email-builder-input {
-		padding: 0.3rem 0.5rem;
-		border: var(--brand) 2px solid;
-		min-width: 8rem;
-		border-radius: 10px;
-		font-size: 0.8rem;
-	}
 </style>
