@@ -21,9 +21,7 @@ const REDIRECTS: Record<string, string> = {
 }
 
 /** Temporary redirects (302) - for time-limited campaigns, A/B tests, etc. */
-const TEMPORARY_REDIRECTS: Record<string, string> = {
-	'/littlehelpers': 'https://donorbox.org/pauseai-s-little-helpers'
-}
+const TEMPORARY_REDIRECTS: Record<string, string> = {}
 
 export function handleRedirects(path: string) {
 	const permanent = REDIRECTS[path]
