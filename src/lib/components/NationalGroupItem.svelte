@@ -7,21 +7,15 @@
 	export let nationalGroup: NationalGroup
 
 	// Helper function to sanitize names for image filenames
-	/* function sanitizeNameForImage(name: string): string {
+	function sanitizeNameForImage(name: string): string {
 		return name
-			.toLowerCase()
-			.replace(/[^a-z0-9\s-]/g, '') // Remove non-alphanumeric characters except spaces and hyphens
-			.replace(/\s+/g, '-') // Replace spaces with hyphens
-			.replace(/-+/g, '-'); // Replace multiple hyphens with a single hyphen
-	} */
+			.replace(/\s+/g, '-') // Replace one or more spaces with a single hyphen
+			.replace(/-+/g, '-') // Replace multiple hyphens with a single hyphen
+	}
 
 	const baseImagePath = '/images/national-groups/'
-	const sanitizedName = nationalGroup.name
-	const possibleImagePaths = [
-		`${baseImagePath}${sanitizedName}.png`
-		//`${baseImagePath}${sanitizedName}.jpg`,
-		//`${baseImagePath}${sanitizedName}.webp`,
-	]
+	const sanitizedName = sanitizeNameForImage(nationalGroup.name) // Use sanitized name
+	const possibleImagePaths = [`${baseImagePath}${sanitizedName}.png`]
 
 	let imageUrl: string | undefined
 
@@ -43,7 +37,7 @@
 				return
 			}
 		}
-		imageUrl = `${baseImagePath}default.png` // Fallback to default if no specific image is found
+		imageUrl = `${baseImagePath}default.png` // Fallback to default.png
 	})()
 
 	const nationalGroupLinkNames: Record<NationalGroupLink, string> = {
