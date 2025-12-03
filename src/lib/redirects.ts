@@ -5,13 +5,23 @@ const REDIRECTS: Record<string, string> = {
 	'/2025-feb': '/2025-february',
 	'/collages/manual_bootstrap.jpg': '/api/images/collages/manual_bootstrap.jpg',
 	'/selfie': '/sayno',
-	'/people': '/about'
+	'/people': '/about',
+	'/act': '/action',
+	'/actions': '/action',
+	'/local': '/communities',
+	'/local-communities': '/communities',
+	'/local-chapters': '/communities',
+	'/local-groups': '/communities',
+	'/map': '/communities',
+	'/national': 'national-groups',
+	'/national-communities': '/national-groups',
+	'/national-chapters': '/national-groups',
+	'/email': '/email-builder',
+	'/dangers': '/risks'
 }
 
 /** Temporary redirects (302) - for time-limited campaigns, A/B tests, etc. */
-const TEMPORARY_REDIRECTS: Record<string, string> = {
-	'/littlehelpers': 'https://donorbox.org/pauseai-s-little-helpers'
-}
+const TEMPORARY_REDIRECTS: Record<string, string> = {}
 
 export function handleRedirects(path: string) {
 	const permanent = REDIRECTS[path]
