@@ -6,6 +6,15 @@
 
 	export let nationalGroup: NationalGroup
 
+	// Helper function to sanitize names for image filenames
+	/* function sanitizeNameForImage(name: string): string {
+		return name
+			.toLowerCase()
+			.replace(/[^a-z0-9\s-]/g, '') // Remove non-alphanumeric characters except spaces and hyphens
+			.replace(/\s+/g, '-') // Replace spaces with hyphens
+			.replace(/-+/g, '-'); // Replace multiple hyphens with a single hyphen
+	} */
+
 	const baseImagePath = '/images/national-groups/'
 	const sanitizedName = nationalGroup.name
 	const possibleImagePaths = [
