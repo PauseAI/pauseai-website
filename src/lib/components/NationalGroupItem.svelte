@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { NationalGroup, NationalGroupLink, Picture } from '$lib/types'
+	import type { NationalGroup, NationalGroupLink } from '$lib/types'
 	import { typedEntries } from '$lib/utils'
 	import LinkWithoutIcon from '$lib/components/LinkWithoutIcon.svelte'
 
