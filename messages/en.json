@@ -51,7 +51,6 @@
 	"simpletoc_heading": "Table of contents",
 	"footer_join": "Join PauseAI >",
 	"footer_info": "Info",
-	"footer_info_about": "About",
 	"footer_info_faq": "FAQ",
 	"footer_info_proposal": "Proposal",
 	"footer_info_learn": "Learn",
@@ -105,5 +104,6 @@
 	"learn_feasibility": "[Feasibility of a Pause](/feasibility). The feasibility of a pause in AI development.",
 	"learn_building_the_pause_button": "[Building the Pause button](/building-the-pause-button). What it takes to pause AI.",
 	"learn_faq": "[FAQ](/faq). Commonly asked questions about AI safety and PauseAI.",
-	"learn_action": "[Action](/action). What you can do to help (with links to many action-related guides)"
+	"learn_action": "[Action](/action). What you can do to help (with links to many action-related guides)",
+	"footer_info_about": "About"
 }

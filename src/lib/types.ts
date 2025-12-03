@@ -70,14 +70,14 @@ export type AirtableTeam = {
 }
 
 export type NationalGroup = {
-	id: string
 	name: string
-	notes?: string
 	leader: string
-	discordUsername?: string
 	email?: string
-	legalEntity: boolean
-	overseer?: string
+	description?: string
+	notes?: string
+	image?: string
+	id: string
+	legalEntity?: boolean
 	public: boolean
 } & Record<NationalGroupLink, string | undefined>
 
