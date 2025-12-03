@@ -7,11 +7,14 @@ PauseAI Global is a [Dutch ANBI](/organization) (public-benefit charity). Tax be
 
 ## 🇺🇸 United States
 
-Direct donations to PauseAI Global are _not_ tax-deductible; US donors who want tax benefits should give via **[PauseAI US](https://www.pauseai-us.org/) (501(c)(3))**. If you specifically want to donate to PauseAI Global instead of PauseAI US, you can specify this in your transaction message.
+Direct donations to PauseAI Global are _not_ tax-deductible.
+PauseAI Global has an NGOsource Equivalency Determination, which allows US foundations and Donor-Advised Funds to grant to us efficiently.
+US donors who want tax benefits should consider donating to **[PauseAI US](https://www.pauseai-us.org/) (501(c)(3))**.
+If you prefer your donation to support PauseAI Global specifically, you may indicate this as a non-binding preference in your donation message to PauseAI US.
 
 ## 🇬🇧 United Kingdom
 
-Direct donations are _not_ Gift Aid–eligible; UK donors can use **[CAF](https://www.cafonline.org)** (Charities Aid Foundation) to donate tax-efficiently.
+Direct donations are _not_ Gift Aid–eligible; UK donors can use **[CAF](https://www.cafonline.org/home/donate/donate-overseas)** (Charities Aid Foundation) to donate tax-efficiently overseas.
 
 ## 🇫🇷 France
 
