@@ -5,7 +5,18 @@ const REDIRECTS: Record<string, string> = {
 	'/2025-feb': '/2025-february',
 	'/collages/manual_bootstrap.jpg': '/api/images/collages/manual_bootstrap.jpg',
 	'/selfie': '/sayno',
-	'/people': '/about'
+	'/people': '/about',
+	'/act': '/action',
+	'/local': '/communities',
+	'/local-communities': '/communities',
+	'/local-chapters': '/communities',
+	'/local-groups': '/communities',
+	'/map': '/communities',
+	'/national': 'national-groups',
+	'/national-communities': '/national-groups',
+	'/national-chapters': '/national-groups',
+	'/email': '/email-builder',
+	'/dangers': '/risks'
 }
 
 /** Temporary redirects (302) - for time-limited campaigns, A/B tests, etc. */
