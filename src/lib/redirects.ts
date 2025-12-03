@@ -7,6 +7,7 @@ const REDIRECTS: Record<string, string> = {
 	'/selfie': '/sayno',
 	'/people': '/about',
 	'/act': '/action',
+	'/actions': '/action',
 	'/local': '/communities',
 	'/local-communities': '/communities',
 	'/local-chapters': '/communities',
