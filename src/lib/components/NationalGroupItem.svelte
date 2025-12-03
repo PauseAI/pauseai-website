@@ -1,44 +1,12 @@
 <script lang="ts">
 	import type { NationalGroup, NationalGroupLink } from '$lib/types'
 	import { typedEntries } from '$lib/utils'
-	//import { sanitizeNameForImage } from '$lib/utils/imageUtils'	//
 	import LinkWithoutIcon from '$lib/components/LinkWithoutIcon.svelte'
 
 	export let nationalGroup: NationalGroup
 
-	// Helper function to sanitize names for image filenames
-	function sanitizeNameForImage(name: string): string {
-		return name
-			.replace(/\s+/g, '-') // Replace one or more spaces with a single hyphen
-			.replace(/-+/g, '-') // Replace multiple hyphens with a single hyphen
-	}
-
-	const baseImagePath = '/images/national-groups/'
-	const sanitizedName = sanitizeNameForImage(nationalGroup.name) // Use sanitized name
-	const possibleImagePaths = [`${baseImagePath}${sanitizedName}.png`]
-
-	let imageUrl: string | undefined
-
-	// A helper function to check if an image exists (client-side only)
-	async function checkImage(path: string): Promise<boolean> {
-		return new Promise((resolve) => {
-			const img = new Image()
-			img.onload = () => resolve(true)
-			img.onerror = () => resolve(false)
-			img.src = path
-		})
-	}
-
-	// Determine the correct image URL
-	;(async () => {
-		for (const path of possibleImagePaths) {
-			if (await checkImage(path)) {
-				imageUrl = path
-				return
-			}
-		}
-		imageUrl = `${baseImagePath}default.png` // Fallback to default.png
-	})()
+	const baseImagePath = '/images/'
+	const imageUrl = nationalGroup.image || `${baseImagePath}default.png` // Directly use nationalGroup.image or default
 
 	const nationalGroupLinkNames: Record<NationalGroupLink, string> = {
 		website: 'Website',
@@ -58,16 +26,16 @@
 </script>
 
 <li class="national-group">
-	<div class="image-and-name-container">
+	<div class="image-name-wrapper">
 		{#if imageUrl}
 			<img src={imageUrl} alt={nationalGroup.name} class="national-group-image" />
 		{/if}
 		<h3 class="name">{nationalGroup.name}</h3>
 	</div>
 
-	<div class="details-container">
+	<div class="details-wrapper">
 		{#if nationalGroup.leader !== 'No'}
-			<div class="row">
+			<div class="row leader-row">
 				<span class="label">Leader:</span>
 				{#if nationalGroup.email}
 					<LinkWithoutIcon href="mailto:{nationalGroup.email}" class="link">
@@ -80,7 +48,7 @@
 		{/if}
 
 		{#if linkEntries.some(([key]) => nationalGroup[key])}
-			<div class="row">
+			<div class="row links-row">
 				<span class="label">Links:</span>
 				<div class="links">
 					{#each linkEntries as [key, name]}
@@ -108,14 +76,14 @@
 		gap: 2rem; /* Space between image/name and details */
 	}
 
-	.image-and-name-container {
+	.image-name-wrapper {
 		display: flex;
 		align-items: center;
 		flex-shrink: 0; /* Prevent from shrinking */
-		width: 177px; /* Reduced width for more compact image/name container */
+		width: 177px; /* Fixed width for consistent alignment */
 	}
 
-	.details-container {
+	.details-wrapper {
 		flex-grow: 1; /* Allow to take up remaining space */
 		display: grid; /* Use grid for internal alignment of rows */
 		grid-template-columns: 70px 1fr; /* Fixed width for label column, 1fr for content */
@@ -125,15 +93,15 @@
 	.national-group-image {
 		width: 50px;
 		height: 50px;
-		margin-right: 0.5rem; /* Reduced space between image and name */
+		margin-right: 0.5rem;
 		object-fit: cover;
-		border-radius: 60%; /* User's preferred border-radius */
+		border-radius: 60%;
 	}
 
 	.name {
 		color: var(--text);
 		font-family: var(--font-heading);
-		font-size: 1.4rem; /* Increased font size for country name */
+		font-size: 1.4rem;
 		font-weight: bold;
 		margin: 0;
 		line-height: 1.2;
@@ -151,15 +119,15 @@
 
 	.label {
 		font-weight: 500;
-		/* margin-right: 0.5rem; */ /* Removed, handled by grid column-gap */
+		text-align: right; /* Align labels to the right of their column */
+		padding-right: 0.5rem; /* Small padding between label and content */
 	}
 
-	/* Direct children of .details-container for grid placement */
-	.details-container > .row > .label {
+	.details-wrapper > .row > .label {
 		grid-column: 1;
 	}
 
-	.details-container > .row > *:not(.label) {
+	.details-wrapper > .row > *:not(.label) {
 		grid-column: 2;
 	}
 

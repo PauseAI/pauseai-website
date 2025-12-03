@@ -104,6 +104,7 @@ export type AirtableNationalGroup = {
 	youtube?: string
 	linkedin?: string
 	luma?: string
+	image?: { url: string }[]
 }
 
 export type NationalGroupLink =

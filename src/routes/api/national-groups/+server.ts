@@ -63,6 +63,9 @@ function recordToNationalGroup(record: AirtableRecord<AirtableNationalGroup>): N
 			':',
 			JSON.stringify(record.fields, null, 2)
 		)
+		if (record.fields.image?.[0]?.url) {
+			console.log('🖼️ Airtable Image URL for', record.fields.Name, ':', record.fields.image[0].url)
+		}
 	}
 
 	return {
@@ -91,7 +94,8 @@ function recordToNationalGroup(record: AirtableRecord<AirtableNationalGroup>): N
 		youtubeLink: record.fields.youtube || '',
 		linkedinLink: record.fields.linkedin || '',
 		lumaLink: record.fields.luma || '',
-		public: true // Assuming all records are public by default
+		public: true, // Assuming all records are public by default
+		image: record.fields.image?.[0]?.url || undefined // Use direct URL for national groups images
 	}
 }
 
