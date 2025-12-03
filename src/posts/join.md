@@ -83,6 +83,11 @@ After signing up, join our onboarding session online or locally to learn about c
 
 <TallyEmbed formId="wbGvKe" />
 
+## After singing up
+
+Join one of our Member Community Welcome Meetings, or a local social event to find out more about PauseAI’s community: [Events](/events). 
+If you want to get kick-started into action straight away, check out our [list of them](/action).
+
 ## Stay Updated
 
 <NewsletterSignup bind:email={newsletterEmail} />
