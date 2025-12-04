@@ -51,7 +51,7 @@
 
 <NearbyEvent contrast={hero} bind:eventFound bind:geo />
 {#if !eventFound}
-	{#if geo?.country?.code === 'US'}
+	{#if geo?.country?.code === 'US' && false}
 		<Banner contrast={hero}>
 			<b
 				>HELP US PROTECT STATE SOVEREIGNTY ON AI REGULATION | <Link
