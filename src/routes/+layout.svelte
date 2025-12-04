@@ -67,6 +67,12 @@
 	{/if}
 {/if}
 
+<Banner contrast={hero} target="/littlehelpers">
+	<strong>🎄 Holiday Matching Campaign!</strong> Help fund volunteer stipends for PauseAI advocates. <ExternalLink
+		href="/littlehelpers">Join the Little Helpers campaign →</ExternalLink
+	>
+</Banner>
+
 <div class="layout" class:with-hero={hero}>
 	{#if $page.route.id === '/sayno'}
 		<!-- Dynamic import and render the selfie UX component -->
