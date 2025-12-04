@@ -2,7 +2,7 @@
 	import distance from '@turf/distance'
 	import { onMount } from 'svelte'
 	import Banner from './Banner.svelte'
-	import ExternalLink from '$lib/components/Link.svelte'
+	import Link from '$lib/components/Link.svelte'
 	import type { CalendarResponse, Event } from '../../routes/api/calendar/+server'
 	import type { GeoApiResponse } from '$api/geo/+server'
 
@@ -48,9 +48,9 @@
 
 {#if nearbyEvent}
 	<Banner {contrast}>
-		Next up in your area: <ExternalLink
+		Next up in your area: <Link
 			href={'https://lu.ma/' + nearbyEvent.url + '?utm_source=local-banner'}
-			>{nearbyEvent.name}</ExternalLink
+			>{nearbyEvent.name}</Link
 		> on {FORMAT.format(new Date(nearbyEvent.start_at))}
 	</Banner>
 {/if}

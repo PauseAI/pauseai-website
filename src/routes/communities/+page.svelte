@@ -1,6 +1,6 @@
 <script lang="ts">
 	import PostMeta from '$lib/components/PostMeta.svelte'
-	import ExternalLink from '$lib/components/Link.svelte'
+	import Link from '$lib/components/Link.svelte'
 	import CommunitiesList from './CommunitiesList.svelte'
 	import type { GeoApiResponse } from '$api/geo/+server'
 	import type * as maplibregl from 'maplibre-gl'
@@ -128,13 +128,13 @@
 <h1>{title}</h1>
 <p>{description}</p>
 <p>
-	Do you want to add your location or a community? <ExternalLink
-		href="https://discord.gg/CR5u5BTBwy">Create a post</ExternalLink
+	Do you want to add your location or a community? <Link href="https://discord.gg/CR5u5BTBwy"
+		>Create a post</Link
 	> on our Discord!
 </p>
 <p>
-	Do you want to start a community? Check our <ExternalLink
-		href="https://pauseai.info/local-organizing">Guide on local organizing</ExternalLink
+	Do you want to start a community? Check our <Link href="https://pauseai.info/local-organizing"
+		>Guide on local organizing</Link
 	>
 </p>
 <div>
