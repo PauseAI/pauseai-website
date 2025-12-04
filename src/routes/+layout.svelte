@@ -39,6 +39,7 @@
 	(Top)
 </h2>
 
+<!-- Make sure we only show one banner at a time-->
 {#if data.localeAlert}
 	<Banner
 		contrast={data.localeAlert.isDev}
@@ -47,23 +48,23 @@
 		<!-- eslint-disable-next-line svelte/no-at-html-tags not vulnerable against XSS -->
 		{@html data.localeAlert.message}
 	</Banner>
-{/if}
-
-<NearbyEvent contrast={hero} bind:eventFound bind:geo />
-{#if !eventFound}
-	{#if geo?.country?.code === 'US' && false}
-		<Banner contrast={hero}>
-			<b
-				>HELP US PROTECT STATE SOVEREIGNTY ON AI REGULATION | <Link
-					href="https://mstr.app/b09fa92b-1899-43a0-9d95-99cd99c9dfb2">ACT NOW »</Link
-				></b
-			>
-		</Banner>
-	{:else}
-		<Banner contrast={hero} target="/littlehelpers">
-			<strong>🎄 Holiday Matching Campaign!</strong> Help fund volunteer stipends for PauseAI
-			advocates. <Link href="/littlehelpers">Join the Little Helpers campaign →</Link>
-		</Banner>
+{:else}
+	<NearbyEvent contrast={hero} bind:eventFound bind:geo />
+	{#if !eventFound}
+		{#if geo?.country?.code === 'US' && false}
+			<Banner contrast={hero}>
+				<b
+					>HELP US PROTECT STATE SOVEREIGNTY ON AI REGULATION | <Link
+						href="https://mstr.app/b09fa92b-1899-43a0-9d95-99cd99c9dfb2">ACT NOW »</Link
+					></b
+				>
+			</Banner>
+		{:else}
+			<Banner contrast={hero} target="/littlehelpers">
+				<strong>🎄 Holiday Matching Campaign!</strong> Help fund volunteer stipends for PauseAI
+				advocates. <Link href="/littlehelpers">Join the Little Helpers campaign →</Link>
+			</Banner>
+		{/if}
 	{/if}
 {/if}
 
