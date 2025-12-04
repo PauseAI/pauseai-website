@@ -3,7 +3,7 @@
 	import { page } from '$app/stores'
 	import Banner from '$lib/components/Banner.svelte'
 	import Hero from '$lib/components/Hero.svelte'
-	import ExternalLink from '$lib/components/Link.svelte'
+	import Link from '$lib/components/Link.svelte'
 	import NearbyEvent from '$lib/components/NearbyEvent.svelte'
 	import PreloadFonts from '$lib/components/PreloadFonts.svelte'
 	import Toc from '$lib/components/Toc.svelte'
@@ -52,26 +52,20 @@
 <NearbyEvent contrast={hero} bind:eventFound bind:geo />
 {#if !eventFound}
 	{#if geo?.country?.code === 'US'}
-		<Banner>
+		<Banner contrast={hero}>
 			<b
-				>HELP US PROTECT STATE SOVEREIGNTY ON AI REGULATION | <ExternalLink
-					href="https://mstr.app/b09fa92b-1899-43a0-9d95-99cd99c9dfb2">ACT NOW »</ExternalLink
+				>HELP US PROTECT STATE SOVEREIGNTY ON AI REGULATION | <Link
+					href="https://mstr.app/b09fa92b-1899-43a0-9d95-99cd99c9dfb2">ACT NOW »</Link
 				></b
 			>
 		</Banner>
 	{:else}
-		<Banner contrast={hero} hidden={true}>
-			Join us at <ExternalLink href="https://pausecon.org/">PauseCon London</ExternalLink> from June
-			27th to 30th!
+		<Banner contrast={hero} target="/littlehelpers">
+			<strong>🎄 Holiday Matching Campaign!</strong> Help fund volunteer stipends for PauseAI
+			advocates. <Link href="/littlehelpers">Join the Little Helpers campaign →</Link>
 		</Banner>
 	{/if}
 {/if}
-
-<Banner contrast={hero} target="/littlehelpers">
-	<strong>🎄 Holiday Matching Campaign!</strong> Help fund volunteer stipends for PauseAI advocates. <ExternalLink
-		href="/littlehelpers">Join the Little Helpers campaign →</ExternalLink
-	>
-</Banner>
 
 <div class="layout" class:with-hero={hero}>
 	{#if $page.route.id === '/sayno'}
