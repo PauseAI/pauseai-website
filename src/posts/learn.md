@@ -5,7 +5,7 @@ description: Educational resources (videos, articles, books) about AI risks and 
 
 <script>
 import NewsletterSignup from '$lib/components/NewsletterSignup.svelte';
-import IconBullets from '$lib/components/IconBullets.svelte'
+import IconBullet from '$lib/components/IconBullet.svelte'
 import * as m from '$lib/paraglide/messages'
 import { CirclePause, CircleQuestionMark, Cog, Earth, Footprints, MessageSquareQuote, Skull, TriangleAlert } from 'lucide-svelte';
 </script>
@@ -14,16 +14,14 @@ import { CirclePause, CircleQuestionMark, Cog, Earth, Footprints, MessageSquareQ
 
 ## On this website
 
-<IconBullets items={[
-[TriangleAlert, m.learn_risks],
-[Skull, m.learn_xrisk],
-[Earth, m.learn_ai_takeover],
-[MessageSquareQuote, m.learn_quotes],
-[Cog, m.learn_feasibility],
-[CirclePause, m.learn_building_the_pause_button],
-[CircleQuestionMark, m.learn_faq],
-[Footprints, m.learn_action],
-]} />
+<IconBullet icon={TriangleAlert} content={m.learn_risks} />
+<IconBullet icon={Skull} content={m.learn_xrisk} />
+<IconBullet icon={Earth} content={m.learn_ai_takeover} />
+<IconBullet icon={MessageSquareQuote} content={m.learn_quotes} />
+<IconBullet icon={Cog} content={m.learn_feasibility} />
+<IconBullet icon={CirclePause} content={m.learn_building_the_pause_button} />
+<IconBullet icon={CircleQuestionMark} content={m.learn_faq} />
+<IconBullet icon={Footprints} content={m.learn_action} />
 
 ## Other websites
 
