@@ -31,6 +31,11 @@
 
 <h1>{title}</h1>
 
+<p class="intro">
+	This statement summarizes what PauseAI volunteers and supporters are seeking via the PauseAI
+	Campaign. Sign below to add your voice to our number and build our collective strength.
+</p>
+
 <blockquote class="statement">
 	We call on the governments of the world to sign an international treaty implementing a pause on
 	the training of the most powerful general AI systems, until we know how to build them safely and
@@ -68,10 +73,21 @@
 </section>
 
 <style>
+	/* Style for the intro paragraph */
+	.intro {
+		margin: 1rem auto 1.5rem auto;
+		font-size: 1.2rem;
+		line-height: 1.75;
+		color: var(--text);
+		font-weight: 200;
+		text-align: left;
+		max-width: 800px;
+	}
+
 	/* Style for the statement */
 	.statement {
-		margin: 2rem 0;
-		padding: 1rem;
+		margin: 1rem 0;
+		padding: 0.7rem 1.8rem;
 		font-weight: normal;
 		border-left: 4px solid var(--brand);
 		background-color: var(--text-subtle);
