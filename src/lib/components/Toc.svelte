@@ -10,8 +10,29 @@
 	let headings: HTMLHeadingElement[] | undefined
 </script>
 
+<!-- Mobile: Backdrop for popup -->
 <Backdrop {open} />
-<div class="toc-wrapper card" style={desktop ? 'display: none;' : ''}>
+
+<!-- Desktop: Fixed sidebar on the left -->
+{#if desktop}
+	<div class="desktop-toc-wrapper">
+		<Toc
+			headingSelector=":is(h2, h3, h4):not(.toc-exclude):not(footer *)"
+			title="Contents"
+			bind:headings
+			hide={(headings?.length ?? 0) <= 1}
+			open={true}
+			desktop={true}
+		>
+			<svelte:fragment slot="title">
+				<h2 class="toc-title-heading toc-exclude">Contents</h2>
+			</svelte:fragment>
+		</Toc>
+	</div>
+{/if}
+
+<!-- Mobile: Floating button with popup (hidden on desktop) -->
+<div class="toc-wrapper card" class:hidden-on-desktop={desktop}>
 	<Toc
 		headingSelector=":is(h2, h3, h4):not(.toc-exclude):not(footer *)"
 		title="Contents"
@@ -50,6 +71,76 @@
 		--toc-z-index: 10;
 	}
 
+	/* Desktop sidebar: fixed on left */
+	.desktop-toc-wrapper {
+		position: fixed;
+		left: 0;
+		top: 6rem; /* Push down to avoid header/banner */
+		/* transform: translateY(-50%);  Removed centering */
+		width: 220px;
+		max-height: calc(100vh - 7rem); /* Adjust height */
+		overflow-y: auto;
+		background-color: var(--bg);
+		border-right: 1px solid var(--bg-subtle);
+		box-shadow: 2px 0 10px rgba(0, 0, 0, 0.05);
+		z-index: 5;
+		padding: 1rem;
+		font-size: 0.85rem;
+
+		/* Hide scrollbar but allow scrolling */
+		scrollbar-width: none; /* Firefox */
+		-ms-overflow-style: none; /* IE and Edge */
+	}
+
+	.desktop-toc-wrapper::-webkit-scrollbar {
+		display: none; /* Chrome, Safari, Opera */
+	}
+
+	.desktop-toc-wrapper :global(.toc) {
+		background-color: transparent;
+	}
+
+	.desktop-toc-wrapper :global(.toc > nav) {
+		background-color: transparent;
+	}
+
+	.desktop-toc-wrapper :global(aside.toc > nav > ol) {
+		padding-left: 0;
+	}
+
+	.desktop-toc-wrapper :global(aside.toc > nav > ol > li) {
+		margin-bottom: 0.5rem;
+	}
+
+	/* Hide open button on desktop ToC */
+	.desktop-toc-wrapper :global(button.toc-icon) {
+		display: none;
+	}
+
+	/* Hide the arrows/navigation bar */
+	.desktop-toc-wrapper :global(.toc-title),
+	.desktop-toc-wrapper :global(.toc-nav),
+	.desktop-toc-wrapper :global(.toc-header) {
+		display: none !important;
+	}
+
+	/* Hide all buttons in desktop sidebar */
+	.desktop-toc-wrapper :global(button) {
+		display: none !important;
+	}
+
+	/* Remove inner scrollbar - only wrapper should scroll */
+	.desktop-toc-wrapper :global(nav) {
+		max-height: none;
+		overflow: visible;
+	}
+
+	/* Hide mobile wrapper on desktop */
+	.hidden-on-desktop {
+		display: none;
+	}
+
+	/* Mobile styles */
 	.toc-head {
 		position: sticky;
 		top: 0;
@@ -97,6 +188,9 @@
 
 	@media (hover: hover) {
 		.toc-wrapper :global(aside.toc > nav > ol > li:hover) {
+			text-decoration-line: underline;
+		}
+		.desktop-toc-wrapper :global(aside.toc > nav > ol > li:hover) {
 			text-decoration-line: underline;
 		}
 		.toc-close:hover {

@@ -110,6 +110,7 @@ h5 {
 	font-family: var(--font-heading);
 	font-weight: 700;
 	line-height: 1em;
+	scroll-margin-top: 5rem;
 }
 
 h1 {
