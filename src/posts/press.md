@@ -4,7 +4,7 @@ title: PauseAI Press materials & media coverage
 
 ## Contact
 
-Joep Meindertsma ([joep@pauseai.info](mailto:joep@pauseai.info))
+Maxime Fournes ([press@pauseai.info](mailto:press@pauseai.info))
 
 ## Logo, materials
 
