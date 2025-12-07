@@ -3,8 +3,8 @@
 	import Link from '$lib/components/Link.svelte'
 	import distance from '@turf/distance'
 	import { onMount } from 'svelte'
-	import type { CalendarResponse, Event } from '../../routes/api/calendar/+server'
-	import Banner from './Banner.svelte'
+	import type { CalendarResponse, Event } from '$api/calendar/+server'
+	import Banner from '$lib/components/Banner.svelte'
 
 	export let contrast: boolean
 	export let eventFound = false
