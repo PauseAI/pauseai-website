@@ -8,7 +8,7 @@ description: the Australian chapter of PauseAI
 
 By 2030, artificial intelligence could be fully automated, self-improving and **smarter than humans at almost everything.** This isn't science fiction—it's the assessment of leading AI companies and researchers. When this happens, every aspect of life will change forever.
 
-**[Join our community](/join)** | [Email us](mailto:australia@pauseai.info) | [Connect on Facebook](https://www.facebook.com/groups/571590459293618) | [YouTube channel](https://www.youtube.com/channel/UCjjMieiOlSFf7jud0yhHQSg) | [LinkedIn](https://www.linkedin.com/company/pauseai-australia) | [WhatsApp News/Action](https://chat.whatsapp.com/KLg8K9xSgfIJs8GQAHeI5b)|[Events](https://lu.ma/PauseAIAustralia)
+**[Join our community](/join)** | [Email us](mailto:australia@pauseai.info) | [Connect on Facebook](https://www.facebook.com/groups/571590459293618) | [YouTube channel](https://www.youtube.com/channel/UCjjMieiOlSFf7jud0yhHQSg) | [LinkedIn](https://www.linkedin.com/company/pauseai-australia) | [Instagram](https://www.instagram.com/pauseaiaustralia/)| [WhatsApp News/Action](https://chat.whatsapp.com/KLg8K9xSgfIJs8GQAHeI5b)|[Events](https://lu.ma/PauseAIAustralia)
 
 ### What risks are we facing?
 
