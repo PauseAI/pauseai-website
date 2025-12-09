@@ -8,6 +8,31 @@
 	let desktop: boolean | undefined
 	let open: boolean | undefined
 	let headings: HTMLHeadingElement[] | undefined
+
+	function autoScroll(node: HTMLElement) {
+		const observer = new MutationObserver((mutations) => {
+			for (const mutation of mutations) {
+				if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
+					const target = mutation.target as HTMLElement
+					if (target.classList.contains('active')) {
+						target.scrollIntoView({ block: 'center', behavior: 'smooth' })
+					}
+				}
+			}
+		})
+
+		observer.observe(node, {
+			attributes: true,
+			subtree: true,
+			attributeFilter: ['class']
+		})
+
+		return {
+			destroy() {
+				observer.disconnect()
+			}
+		}
+	}
 </script>
 
 <!-- Mobile: Backdrop for popup -->
@@ -15,7 +40,7 @@
 
 <!-- Desktop: Fixed sidebar on the left -->
 {#if desktop}
-	<div class="desktop-toc-wrapper">
+	<div class="desktop-toc-wrapper" use:autoScroll>
 		<Toc
 			headingSelector=":is(h2, h3, h4):not(.toc-exclude):not(footer *)"
 			title="Contents"
@@ -74,15 +99,12 @@
 	/* Desktop sidebar: fixed on left */
 	.desktop-toc-wrapper {
 		position: fixed;
-		left: 0;
-		top: 6rem; /* Push down to avoid header/banner */
-		/* transform: translateY(-50%);  Removed centering */
+		top: 6rem; /* Fixed offset */
+		/* margin-top: 5rem; Removed */
 		width: 220px;
-		max-height: calc(100vh - 7rem); /* Adjust height */
+		max-height: calc(100vh - 7rem);
 		overflow-y: auto;
-		background-color: var(--bg);
-		border-right: 1px solid var(--bg-subtle);
-		box-shadow: 2px 0 10px rgba(0, 0, 0, 0.05);
+		background-color: transparent;
 		z-index: 5;
 		padding: 1rem;
 		font-size: 0.85rem;
@@ -178,6 +200,8 @@
 
 	.toc-wrapper :global(.toc > nav) {
 		background-color: inherit;
+		border-radius: inherit;
+		box-shadow: inherit;
 	}
 
 	@media (hover: none) {
