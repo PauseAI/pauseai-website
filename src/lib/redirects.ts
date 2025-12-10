@@ -19,7 +19,8 @@ const REDIRECTS: Record<string, string> = {
 	'/email': '/email-builder',
 	'/dangers': '/risks',
 	'/polls': '/polls-and-surveys',
-	'/surveys': '/polls-and-surveys'
+	'/surveys': '/polls-and-surveys',
+	'/stipends': '/volunteer-stipends'
 }
 
 /** Temporary redirects (302) - for time-limited campaigns, A/B tests, etc. */
