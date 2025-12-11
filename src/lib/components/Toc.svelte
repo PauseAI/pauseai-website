@@ -45,7 +45,7 @@
 			headingSelector=":is(h2, h3, h4):not(.toc-exclude):not(footer *)"
 			title="Contents"
 			bind:headings
-			hide={(headings?.length ?? 0) <= 1}
+			hide={(headings?.length ?? 0) <= 2}
 			open={true}
 			desktop={true}
 		>
