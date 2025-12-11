@@ -15,9 +15,6 @@ If you're planning on doing a one-off large event, or a time-bound project, cons
 - Tax free in the Netherlands, but it could be that you have to pay taxes in your country of residence
 - For the complete and formal list of conditions, see [the Volunteer Stipend Agreement](https://docs.google.com/document/d/1HHgKsEj1fEpMEcYZXnZQ41tuXMLvwcbXqgrX1f2JxZc/edit)
 
-## Application process
+## Apply
 
-- [Sign up](/join) as a PauseAI volunteer
-- Make sure you're on the [PauseAI Discord](https://discord.gg/X9TYc3vs7j)
-- Copy [the Volunteer Stipend Agreement](https://docs.google.com/document/d/1HHgKsEj1fEpMEcYZXnZQ41tuXMLvwcbXqgrX1f2JxZc/edit)
-- Send it to [joep@pauseai.info](mailto:joep@pauseai.info)
+<iframe class="airtable-embed" src="https://airtable.com/embed/appWPTGqZmUcs3NWu/paglod3xTTBYJqnKg/form?layout=responsive" frameborder="0" onmousewheel="" width="100%" height="1965" style="background: transparent; border: 1px solid #ccc;"></iframe>
