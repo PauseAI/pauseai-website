@@ -24,29 +24,29 @@ Here's a list of examples:
 ## Criteria and rules
 
 1. Purpose and scope
-   a. Microgrants are one-off individual grants made from PauseAI Global’s budget.
-   b. They are used to cover the cost of resources and project investments.
-   c. They do not cover volunteer time or salaries. Our [volunteer stipend](/volunteer-stipends) system exists for this purpose.
-   d. Projects seeking microgrants must directly relate to PauseAI Global [Mission](/proposal), [Strategy](/theory-of-change) and Activities.
+   1. Microgrants are one-off individual grants made from PauseAI Global’s budget.
+   2. They are used to cover the cost of resources and project investments.
+   3. They do not cover volunteer time or salaries. Our [volunteer stipend](/volunteer-stipends) system exists for this purpose.
+   4. Projects seeking microgrants must directly relate to PauseAI Global [Mission](/proposal), [Strategy](/theory-of-change) and Activities.
 2. Eligibility requirements
-   a. Applicants must have joined PauseAI via the official Global [webform](/join) and signed the volunteer agreement, before applying.
-   b. Preference will be given to volunteers with a demonstrated history of PauseAI contributions.
-   c. Applicants who have previously received a microgrant cannot receive a second microgrant if the deliverables of the previous were not completed and reported.
-   d. Chapter applications will require a signed Memorandum of Understanding.
+   1. Applicants must have joined PauseAI via the official Global [webform](/join) and signed the volunteer agreement, before applying.
+   2. Preference will be given to volunteers with a demonstrated history of PauseAI contributions.
+   3. Applicants who have previously received a microgrant cannot receive a second microgrant if the deliverables of the previous were not completed and reported.
+   4. Chapter applications will require a signed Memorandum of Understanding.
 3. Process and Timeline
-   a. The form must be completed.
-   b. Payment timing:
-   i. Preferred - reimbursement following receiving the final completion form (and receipts).
-   ii. Advance payment is possible but requires greater notice.
-   c. Leadership team may reach out for a call if application lacks clarity.
-   d. Organizing Director and CEO (with leadership team consultation) make final decisions on allocation.
+   1. The form must be completed.
+   2. Payment timing:
+      1. Preferred - reimbursement following receiving the final completion form (and receipts).
+      2. Advance payment is possible but requires greater notice.
+   3. Leadership team may reach out for a call if application lacks clarity.
+   4. Organizing Director and CEO (with leadership team consultation) make final decisions on allocation.
 4. Strategic allocation
-   a. Typically microgrants should be under 2000 EUR.
-   b. Decisions made by leadership should align with the overall strategy and therefore funds may not be divided equitably across chapters.
-   c. Decisions will always be made subject to available funds and organizational priorities.
+   1. Typically microgrants should be under 2000 EUR.
+   2. Decisions made by leadership should align with the overall strategy and therefore funds may not be divided equitably across chapters.
+   3. Decisions will always be made subject to available funds and organizational priorities.
 5. Accountability
-   a. Within one month of project completion, the successful recipient must submit receipts and reporting.
-   b. Failure to comply will affect eligibility for future microgrants.
+   1. Within one month of project completion, the successful recipient must submit receipts and reporting.
+   2. Failure to comply will affect eligibility for future microgrants.
 
 ## Apply
 
