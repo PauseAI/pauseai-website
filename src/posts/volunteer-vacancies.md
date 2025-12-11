@@ -16,15 +16,6 @@ description: Open volunteer positions with PauseAI
 
 Interested? [Email Will](mailto:will.petillo@gmail.com)
 
-## Outreach team member
-
-- Help PauseAI reach new communities, attract members and spread awareness
-- This is something you can do independently in your spare time, with little need for coordination with others
-- Come up with campaigns of people you would like to reach out to, and contact them (whether by email, phone, DM, or in-person)
-- Please consider joining if you have a non traditional background or location - this could help us to reach new groups!
-
-Interested? [Email Diego](mailto:diego1605d@gmail.com)
-
 ## Software Team member
 
 - Empower everyone else, giving folk the help they need &amp; the freedom they want.
