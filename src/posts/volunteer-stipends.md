@@ -15,7 +15,7 @@ If you're planning on doing a one-off large event, or a time-bound project, cons
    3. The stipend covers volunteer time and expenses for things such as travel, materials or events. Any further cost reimbursement is not legally permitted.
 2. Eligibility Requirements
    1. This stipend is only available to
-      1. Volunteers who have signed up via our PauseAI Global [webform](/join)
+      1. Volunteers who have signed up via our PauseAI Global [webform](/join).
       2. Volunteers who are not US citizens or residents, [PauseAI US](https://www.pauseai-us.org/) manages volunteers separately from Global
       3. Volunteers who commit to averaging approximately 8 hours per week of volunteer work for a period of 6 months.
    2. Preference will be given to volunteers with a demonstrated history of consistent contributions to PauseAI Global.
@@ -25,10 +25,10 @@ If you're planning on doing a one-off large event, or a time-bound project, cons
       1. Allocations may not be distributed evenly across regions or chapters.
    3. Allocation priority will be given to volunteers whose work demonstrates high impact potential for the mission.
 4. Application Process
-   1. Applicants must fill out the complete form.
+   1. Applicants must fill out the form.
    2. Our Global leadership team will make final decisions and inform applicants within 1 month.
    3. Chapter-based stipends require coordination with chapter leadership and may require a signed chapter Memorandum of Understanding.
-   4. In case of approval of the application by Global leadership, applicants will need to sign the Stipend agreement.
+   4. In case of approval of the application by Global leadership, applicants must sign the Stipend agreement.
 5. Terms and conditions
    1. The stipend is tax-free in the Netherlands, but recipients are responsible for tax obligations in their country of residence.
    2. The stipend covers all volunteer costs and PauseAI Global cannot legally provide additional expense reimbursements.
