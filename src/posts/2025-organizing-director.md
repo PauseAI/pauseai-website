@@ -7,6 +7,8 @@ date: 2025-11-03T14:26:00.000+01:00
 
 # Organizing Director (Vacancy)
 
+Update: This vacancy is now closed.
+
 ## **Role description**
 
 As PauseAI Global’s Organizing Director, you will lead international implementation of strategy - including designing and operationalizing growth and retention plans for volunteers, build international campaigns and develop and mentor National Chapter Lead Organizers (volunteers and staff).
@@ -42,7 +44,3 @@ You will be responsible to the PauseAI Global CEO.
 - Full-time position, 32 hours per week negotiable.
 - Salary range: 40k - 60k EUR per year, depending on experience.
 - Referral bonus: 500 EUR for a successful hire!
-
-## Apply
-
-If you are interested in this vacancy, please send a short motivation letter and your CV to vacancies@pauseai.info
