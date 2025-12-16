@@ -4,6 +4,8 @@ slug: volunteer-vacancies
 description: Open volunteer positions with PauseAI
 ---
 
+One of the ways you can get involved conistently as a volunteer is by joining one of our Digital teams - Onboarding, Communications and Software. The roles below cover some of our core functions and by getting involved you can help us grow our reach, retain our volunteers or build the tools we need to win.
+
 - We work in [teams](/teams)
 - We collaborate mostly on our [Discord server](/discord)
 - Read more about our [organization](/organization)
@@ -36,9 +38,7 @@ Interested? Email our Organizing Director ella@pauseai.info[](mailto:will.petill
 
 Interested? Email our Organizing Director ella@pauseai.info
 
-## \
-
-Communications team member - Video Editor
+## Communications team member - Video Editor
 
 - Duration: 3 months
 - Time Commitment: 2-5 hours per week
