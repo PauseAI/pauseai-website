@@ -10,11 +10,59 @@ description: Open volunteer positions with PauseAI
 
 ## Onboarding team member
 
-- 2 to 4 hrs a week
-- Say hi to new members who join through the discord or the form.
-- Have one on one calls to find the right team
+- Minimum Duration: 3 months 
+- Time Commitment: 2-5 hours per week
+- Responsibilities:
+  - Host our Community Welcome Calls once a fortnight.
+  - Prepare introductory communications to new members on the PauseAI Global Discord, including follow-up. This may include one to one calls with new members, to discuss PauseAI’s mission and  assist them in finding out more about how they can contribute.
 
-Interested? [Email Will](mailto:will.petillo@gmail.com)
+- Key Skills:
+  - Friendly and welcoming. 
+  - Understands PauseAI’s mission. 
+  - A good social connector.
+
+Interested? Email our Organizing Director ella@pauseai.info[](mailto:will.petillo@gmail.com)
+
+## Communications team member - Writing and Editing Newsletter and LinkedIn posts
+
+- Duration: 3 months
+- Time Commitment: 2-5 hours per week
+- Responsibilities:
+  - Drafting content for the PauseAI Global monthly newsletter and regular LinkedIn posting; including searching for relevant news and interviewing contributors. 
+
+- Key Skills:
+  - Strong written skills, ability to capture PauseAI tone and simply communicate complex information.
+  - Proof-reading.
+
+Interested? Email our Organizing Director ella@pauseai.info
+
+## \
+
+Communications team member - Video Editor
+
+- Duration: 3 months
+- Time Commitment: 2-5 hours per week
+- Responsibilities:
+  - Creating video content for PauseAI Global's social media channels
+
+- Key Skills:
+  - Ability to capture PauseAI tone and simply communicate complex information.
+  - Video editing
+
+Interested? Email our Organizing Director ella@pauseai.info
+
+## Communications team member - Outreach to influencers and media
+
+- Duration: 3 months
+- Time Commitment: 2-5 hours per week
+- Responsibilities:
+  - Contacting key influencers and media contacts as a representative of PauseAI Global to secure pocast or video slots for CEO and National Directors.
+
+- Key Skills:
+  - Strong written skills, ability to capture PauseAI tone and simply persuasively.
+  - Charisma and the ability to build and sell an idea.
+
+Interested? Email our Organizing Director ella@pauseai.info
 
 ## Software Team member
 
