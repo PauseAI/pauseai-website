@@ -9,10 +9,10 @@ description: A list of upcoming and past protests.
 
 ## Past Protests
 
-### 2025[](https://pauseai.info/deepmind-protest-2025)
+### 2025
 
-- [13th of December, Amsterdam](https://pauseai.info/amsterdam-protest-2025-december)
-- [30th of June, London](https://pauseai.info/amsterdam-protest-2025-december)
+- [13th of December, Amsterdam](/amsterdam-protest-2025-december)
+- [30th of June, London](/deepmind-protest-2025)
 - [7th - 11th of February, 15+ cities](/2025-february)
 
 ### 2024
