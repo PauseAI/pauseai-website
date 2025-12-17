@@ -4,10 +4,34 @@
 	import List from 'lucide-svelte/icons/list'
 	import '$lib/components/Card.css'
 	import Backdrop from '$lib/components/Backdrop.svelte'
+	import { onMount } from 'svelte'
 
 	let desktop: boolean | undefined
 	let open: boolean | undefined
 	let headings: HTMLHeadingElement[] | undefined
+	let sidebarTop = 16 // Initial top offset in rem (below banner)
+
+	// Track scroll to adjust sidebar position
+	onMount(() => {
+		const bannerHeight = 275 // Scroll distance in pixels for full transition (higher = slower)
+		const minTop = 1 // Minimum top value in rem when scrolled past banner
+		const maxTop = 16 // Maximum top value in rem when at page top
+
+		function handleScroll() {
+			const scrollY = window.scrollY
+			// Calculate top value based on scroll position
+			// As user scrolls down, reduce the top value
+			const remValue = Math.max(minTop, maxTop - (scrollY / bannerHeight) * (maxTop - minTop))
+			sidebarTop = remValue
+		}
+
+		window.addEventListener('scroll', handleScroll, { passive: true })
+		handleScroll() // Initial call
+
+		return () => {
+			window.removeEventListener('scroll', handleScroll)
+		}
+	})
 
 	function autoScroll(node: HTMLElement) {
 		const observer = new MutationObserver((mutations) => {
@@ -40,7 +64,7 @@
 
 <!-- Desktop: Fixed sidebar on the left -->
 {#if desktop}
-	<div class="desktop-toc-wrapper" use:autoScroll>
+	<div class="desktop-toc-wrapper" style="top: {sidebarTop}rem;" use:autoScroll>
 		<Toc
 			headingSelector=":is(h2, h3, h4):not(.toc-exclude):not(footer *)"
 			title="Contents"
@@ -100,10 +124,9 @@
 	/* Desktop sidebar: fixed on left */
 	.desktop-toc-wrapper {
 		position: fixed;
-		top: 6rem; /* Fixed offset */
-		/* margin-top: 5rem; Removed */
+		/* top is set dynamically via inline style */
 		width: 220px;
-		max-height: calc(100vh - 7rem);
+		max-height: calc(100vh - 3rem); /* Extend nearly to bottom of viewport */
 		overflow-y: auto;
 		background-color: transparent;
 		z-index: 5;
