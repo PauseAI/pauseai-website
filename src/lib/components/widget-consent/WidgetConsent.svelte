@@ -1,6 +1,6 @@
 <script lang="ts">
 	import Button from '$lib/components/Button.svelte'
-	import ExternalLink from '$lib/components/Link.svelte'
+	import Link from '$lib/components/Link.svelte'
 	import consent from '$lib/components/widget-consent/WidgetConsentStore'
 	import loadTwitter from '$lib/components/widget-consent/loadTwitter'
 
@@ -24,7 +24,7 @@
 	<div class="widget-consent">
 		<div class="consent-text">
 			By enabling X (Twitter) widgets, you consent to your data being processed in accordance with
-			the <ExternalLink href="https://twitter.com/en/privacy">privacy policy of X</ExternalLink>.
+			the <Link href="https://twitter.com/en/privacy">privacy policy of X</Link>.
 		</div>
 		<Button
 			on:click={() => {

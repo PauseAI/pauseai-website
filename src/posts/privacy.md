@@ -1,5 +1,5 @@
 ---
-title: Privacy policy for PauseAI
+title: PauseAI Privacy Policy
 ---
 
 **Effective Date:** July 17th, 2024

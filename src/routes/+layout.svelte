@@ -3,7 +3,7 @@
 	import { page } from '$app/stores'
 	import Banner from '$lib/components/Banner.svelte'
 	import Hero from '$lib/components/Hero.svelte'
-	import ExternalLink from '$lib/components/Link.svelte'
+	import Link from '$lib/components/Link.svelte'
 	import NearbyEvent from '$lib/components/NearbyEvent.svelte'
 	import PreloadFonts from '$lib/components/PreloadFonts.svelte'
 	import Toc from '$lib/components/Toc.svelte'
@@ -15,6 +15,7 @@
 	import '@fontsource/saira-condensed/700.css'
 	import sairaCondensedLatin700 from '@fontsource/saira-condensed/files/saira-condensed-latin-700-normal.woff2'
 	import { ProgressBar } from '@prgm/sveltekit-progress-bar'
+	import { onMount } from 'svelte'
 	import { Toaster } from 'svelte-french-toast'
 	import '../styles/print.css'
 	import '../styles/styles.css'
@@ -28,9 +29,14 @@
 	// This prevents "undefined" issues during navigation
 
 	let eventFound: boolean
-	let geo: GeoApiResponse | null
+	let geo: GeoApiResponse | null = null
 	// Show the hero on the homepage, but nowhere else
 	$: hero = deLocalizeHref($page.url.pathname) === '/'
+
+	onMount(async () => {
+		const response = await fetch('/api/geo')
+		geo = await response.json()
+	})
 </script>
 
 <PreloadFonts urls={[robotoSlabLatin300, sairaCondensedLatin700]} />
@@ -39,6 +45,7 @@
 	(Top)
 </h2>
 
+<!-- Make sure we only show one banner at a time-->
 {#if data.localeAlert}
 	<Banner
 		contrast={data.localeAlert.isDev}
@@ -47,23 +54,23 @@
 		<!-- eslint-disable-next-line svelte/no-at-html-tags not vulnerable against XSS -->
 		{@html data.localeAlert.message}
 	</Banner>
-{/if}
-
-<NearbyEvent contrast={hero} bind:eventFound bind:geo />
-{#if !eventFound}
-	{#if geo?.country?.code === 'US'}
-		<Banner>
-			<b
-				>HELP US PROTECT STATE SOVEREIGNTY ON AI REGULATION | <ExternalLink
-					href="https://mstr.app/b09fa92b-1899-43a0-9d95-99cd99c9dfb2">ACT NOW »</ExternalLink
-				></b
-			>
-		</Banner>
-	{:else}
-		<Banner contrast={hero} hidden={true}>
-			Join us at <ExternalLink href="https://pausecon.org/">PauseCon London</ExternalLink> from June
-			27th to 30th!
-		</Banner>
+{:else}
+	<NearbyEvent contrast={hero} bind:eventFound {geo} />
+	{#if !eventFound}
+		{#if geo?.country?.code === 'US' && false}
+			<Banner contrast={hero}>
+				<b
+					>HELP US PROTECT STATE SOVEREIGNTY ON AI REGULATION | <Link
+						href="https://mstr.app/b09fa92b-1899-43a0-9d95-99cd99c9dfb2">ACT NOW »</Link
+					></b
+				>
+			</Banner>
+		{:else}
+			<Banner contrast={hero} target="/littlehelpers">
+				<strong>🎄 Holiday Matching Campaign!</strong> Help fund volunteer stipends for PauseAI
+				advocates. <Link href="/littlehelpers">Join the Little Helpers campaign →</Link>
+			</Banner>
+		{/if}
 	{/if}
 {/if}
 

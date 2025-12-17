@@ -21,18 +21,33 @@ Here's a list of examples:
 - **Write for media**, e.g. write an opinion piece for a national newspaper
 - **Set up a new organization** that aligns with our mission
 
-## Limitations
+## Criteria and rules
 
-- Do note that since we are a charity, we cannot provide a salary through this program.
-- Your project and its benefits to society should stand on its own - it is not a project for the benefit of PauseAI.
-- If you're planning on growing the PauseAI community by doing typical volunteer work, consider applying for a [volunteer stipend](/volunteer-stipends) instead.
+1. Purpose and scope
+   1. Microgrants are one-off individual grants made from PauseAI Global’s budget.
+   2. They are used to cover the cost of resources and project investments.
+   3. They do not cover volunteer time or salaries. Our [volunteer stipend](/volunteer-stipends) system exists for this purpose.
+   4. Projects seeking microgrants must directly relate to PauseAI Global [Mission](/proposal), [Strategy](/theory-of-change) and Activities.
+2. Eligibility requirements
+   1. Applicants must have joined PauseAI via the official Global [webform](/join) and signed the volunteer agreement, before applying.
+   2. Preference will be given to volunteers with a demonstrated history of PauseAI contributions.
+   3. Applicants who have previously received a microgrant cannot receive a second microgrant if the deliverables of the previous were not completed and reported.
+   4. Chapter applications will require a signed Memorandum of Understanding.
+3. Process and Timeline
+   1. The form must be completed.
+   2. Payment timing:
+      1. Preferred - reimbursement following receiving the final completion form (and receipts).
+      2. Advance payment is possible but requires greater notice.
+   3. Leadership team may reach out for a call if application lacks clarity.
+   4. Organizing Director and CEO (with leadership team consultation) make final decisions on allocation.
+4. Strategic allocation
+   1. Typically microgrants should be under 2000 EUR.
+   2. Decisions made by leadership should align with the overall strategy and therefore funds may not be divided equitably across chapters.
+   3. Decisions will always be made subject to available funds and organizational priorities.
+5. Accountability
+   1. Within one month of project completion, the successful recipient must submit receipts and reporting.
+   2. Failure to comply will affect eligibility for future microgrants.
 
-## The process
+## Apply
 
-- Describe your project in the `#💪projects` channel on our Discord server. Tell about the idea, what you want to do, where you want help and what amount of money you need. Mention `@microgrants` to notify the microgrants team!
-- Fill in the [MicroGrants Template](https://docs.google.com/document/d/1oPXezImarCY7MCYaT-lJb-uLNbbQ76O1FYNr-WTS6hI/edit?usp=sharing) and send it to [joep@pauseai.info](mailto:joep@pauseai.info).
-- We reach out to you. Either a) we give an OK right away, b) we want to see some changes/questions answered or c) give you a no.
-- Be sure to do this at least one month before you need the funds. Give us some time to discuss this in the team, give feedback or ask for clarification. Especially if the request is on the higher side.
-- We'll send you a Memorandum of Understanding (MoU) that you need to sign.
-- Get to work!
-- Tell us when you're done, and we'll send you the grant. If you need the money upfront, we can discuss that option, but it should not be the default.
+<iframe class="airtable-embed" src="https://airtable.com/embed/appWPTGqZmUcs3NWu/pagZEn4i6lgq9wnwh/form?layout=responsive" frameborder="0" onmousewheel="" width="100%" height="533" style="background: transparent; border: 1px solid #ccc;"></iframe>
