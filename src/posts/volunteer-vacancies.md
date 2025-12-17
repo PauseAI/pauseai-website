@@ -23,7 +23,7 @@ One of the ways you can get involved conistently as a volunteer is by joining on
   - Understands PauseAI’s mission. 
   - A good social connector.
 
-Interested? Email our Organizing Director ella@pauseai.info[](mailto:will.petillo@gmail.com)
+Interested? Email our Organizing Director ella@pauseai.info
 
 ## Communications team member - Writing and Editing Newsletter and LinkedIn posts
 
