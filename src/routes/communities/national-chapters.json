@@ -64,7 +64,7 @@
 			"name": "PauseAI US",
 			"lat": 39.5,
 			"lon": -98,
-			"link": "$$DISCORD_US$$"
+			"link": "$$WEBSITE_US$$"
 		},
 		{
 			"name": "PauseAI Czechia",
