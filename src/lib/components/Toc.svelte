@@ -61,7 +61,7 @@
 	<Toc
 		headingSelector=":is(h2, h3, h4):not(.toc-exclude):not(footer *)"
 		title="Contents"
-		breakpoint={1400}
+		breakpoint={1250}
 		bind:open
 		bind:desktop
 		bind:headings
