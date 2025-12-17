@@ -208,4 +208,4 @@ If you're not keen to go this far, our [local communities](https://pauseai.info/
 ## Quarterly Requirement
 
 8. Public Protest/Picket - Major visible action generating media attention. Photos shared with Global.
-9. Mapping - collect information about your volunteers and their networks. [](/organizing-a-protest)
+9. Mapping - collect information about your volunteers and their networks.
