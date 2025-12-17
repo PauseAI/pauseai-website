@@ -34,20 +34,20 @@ That's it! By default, all commands run in English-only mode for maximum speed. 
 
 | Command                | Description                                         |
 | ---------------------- | --------------------------------------------------- |
+| `pnpm clean`           | Clean build artifacts and caches                    |
+| `pnpm inlang:settings` | Regenerate inlang localization settings             |
+| `pnpm l10n`            | Run l10n manually (see [L10N.md](./L10N.md))        |
 | `pnpm dev`             | Start development server                            |
 | `pnpm build`           | Build for production                                |
-| `pnpm preview`         | Preview production build                            |
-| `pnpm test`            | Run test suite                                      |
-| `pnpm lint`            | Check code style                                    |
-| `pnpm format`          | Auto-fix code style                                 |
-| `pnpm clean`           | Clean build artifacts and caches                    |
-| `pnpm l10n`            | Run l10n manually (see [L10N.md](./L10N.md))        |
 | `pnpm netlify`         | Show Netlify preview options                        |
+| `pnpm test`            | Run test suite                                      |
+| `pnpm preview`         | Preview production build                            |
 | `pnpm check`           | Run type checking for SvelteKit and scripts         |
 | `pnpm check:watch`     | Watch and check SvelteKit code changes              |
-| `pnpm sync`            | Sync SvelteKit generated files                      |
-| `pnpm inlang:settings` | Regenerate inlang localization settings             |
+| `pnpm lint`            | Check code style                                    |
+| `pnpm format`          | Auto-fix code style                                 |
 | `pnpm prepare`         | Set up Git hooks (runs automatically after install) |
+| `pnpm sync`            | Sync SvelteKit generated files                      |
 
 ## Environment Setup - for l10n and some dynamic pages
 
