@@ -111,11 +111,11 @@
 
 <style>
 	:root {
-		--toc-active-color: var(--bg);
+		--toc-active-color: var(--brand);
 		--toc-li-hover-color: var(--brand);
 		--toc-li-color: var(--text);
 		--toc-mobile-bg: var(--bg);
-		--toc-active-bg: var(--brand);
+		--toc-active-bg: transparent;
 		--toc-max-height: 80vh;
 		--toc-padding: 0em 1em 1em;
 		--toc-z-index: 10;
