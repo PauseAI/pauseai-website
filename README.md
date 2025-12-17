@@ -32,17 +32,22 @@ That's it! By default, all commands run in English-only mode for maximum speed. 
 
 ## Development Commands
 
-| Command        | Description                                  |
-| -------------- | -------------------------------------------- |
-| `pnpm dev`     | Start development server                     |
-| `pnpm build`   | Build for production                         |
-| `pnpm preview` | Preview production build                     |
-| `pnpm test`    | Run test suite                               |
-| `pnpm lint`    | Check code style                             |
-| `pnpm format`  | Auto-fix code style                          |
-| `pnpm clean`   | Clean build artifacts and caches             |
-| `pnpm l10n`    | Run l10n manually (see [L10N.md](./L10N.md)) |
-| `pnpm netlify` | Show Netlify preview options                 |
+| Command                | Description                                         |
+| ---------------------- | --------------------------------------------------- |
+| `pnpm dev`             | Start development server                            |
+| `pnpm build`           | Build for production                                |
+| `pnpm preview`         | Preview production build                            |
+| `pnpm test`            | Run test suite                                      |
+| `pnpm lint`            | Check code style                                    |
+| `pnpm format`          | Auto-fix code style                                 |
+| `pnpm clean`           | Clean build artifacts and caches                    |
+| `pnpm l10n`            | Run l10n manually (see [L10N.md](./L10N.md))        |
+| `pnpm netlify`         | Show Netlify preview options                        |
+| `pnpm check`           | Run type checking for SvelteKit and scripts         |
+| `pnpm check:watch`     | Watch and check SvelteKit code changes              |
+| `pnpm sync`            | Sync SvelteKit generated files                      |
+| `pnpm inlang:settings` | Regenerate inlang localization settings             |
+| `pnpm prepare`         | Set up Git hooks (runs automatically after install) |
 
 ## Environment Setup - for l10n and some dynamic pages
 
