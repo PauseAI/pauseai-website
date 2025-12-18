@@ -28,4 +28,4 @@ Apply [here](https://pauseai.info/2025-communications-director).
 
 ## Volunteer Vacancies
 
-PauseAI is built upon our network of hundreds of volunteers across 13+ countries. You can join PauseAI [here](https://pauseai.info/join), or see our list of volunteer vacancies [here](/join#volunteer-vacancies).
+PauseAI is built upon our network of hundreds of volunteers across 13+ countries. You can ee our list of volunteer vacancies [here](/join#volunteer-vacancies).
