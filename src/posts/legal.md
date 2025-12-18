@@ -39,7 +39,7 @@ It is our goal to prevent catastrophic risks from AI. We aim to achieve this by 
 
 - Grow a community of volunteers to advocate for AI safety.
 - Inform the public through social media, writing articles, participating in [interviews/podcasts](/press), and organizing events.
-- Facilitate community [growth](/growth-strategy) by organizing social events.
+- Facilitate community growth by organizing social events.
 - Distribute [donations](/donate) to projects that align with our goals.
 - Organize [protests](/protests) and other forms of activism to raise awareness about the risks of AI.
 - Educate [volunteers](/join) on how to become more effective advocates.
