@@ -63,7 +63,7 @@ See our [Funding page](/funding)
 
 ## What are your plans?
 
-Focus on [growing the movement](/growth-strategy), organizing protests, lobbying politicians, and informing the public.
+Focus on growing the movement, organizing protests, lobbying politicians, and informing the public.
 
 Check out our [roadmap](/roadmap) for a detailed overview of our plans and what we could do with more funding.
 
