@@ -3,7 +3,6 @@
 	import { meta } from './meta'
 	import PersonCard from './person.svelte'
 	import type { Person } from '$lib/types'
-	import WidgetConsent from '$lib/components/widget-consent/WidgetConsent.svelte'
 
 	export let data
 
