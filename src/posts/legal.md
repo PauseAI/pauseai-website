@@ -33,7 +33,7 @@ To qualify for ANBI status, the charity must meet certain [requirements](https:/
 - No profit motive, money must be used for the goal of the charity.
 - Various publication requirements (such as this page).
 
-### Policy Plan 2024-2025 ("Beleidsplan")
+### Policy Plan 2026 ("Beleidsplan")
 
 It is our goal to prevent catastrophic risks from AI. We aim to achieve this by taking the following actions:
 
@@ -45,14 +45,19 @@ It is our goal to prevent catastrophic risks from AI. We aim to achieve this by 
 - Educate [volunteers](/join) on how to become more effective advocates.
 - Research policy measures and update [our proposal](/proposal) accordingly.
 
-#### Financial accountability ("Financieele paragraaf")
+#### Financial accountability ("Financiële paragraaf")
 
 We raise funds to support our activities through [donations](/donate), selling merchandise (through [the store](https://pauseai-shop.fourthwall.com/)) and applying for grants.
-The funds will be used to cover the costs of our activities, such as hiring people, travel expenses, materials for events, marketing expenses, and other costs related to our mission.
+
+The funds will be used to cover the costs of our activities, such as hiring staff or freelancers (excluding the board), travel expenses, materials for events, marketing expenses, and other costs related to our mission.
 We also expect to provide grants ("PauseAI MicroGrants") to volunteers who want to organize events, create content or otherwise contribute to our mission.
-Our first bookkeeping year is longer than one year - it starts from our founding date (13-02-2024) year ends on 31-12-2025, after which we will publish an annual report.
-Received funds are managed by the board and are used to cover the costs of our activities.
-If we receive more funds than we can spend, we will save the excess funds for future activities.
+
+Our first bookkeeping year is longer than one year - it starts from our founding date (13-02-2024) and ends on 31-12-2025, after which we will publish an annual report within 6 months.
+
+Received funds are managed by the board and are used to cover the costs of our activities. The foundation does not hold more capital than is reasonably necessary for the continuity of the planned activities. Any surplus is reserved solely to support future non-profit activities.
+
+The board members do not receive any remuneration for their work.
+They are entitled to reimbursement of the costs incurred by them in the performance of their duties.
 
 ### Report of activities
 
@@ -60,62 +65,8 @@ A list of [media appearances](/press) and [organized protests](/protests) can be
 Social media posts can primarily be found on [X](https://x.com/PauseAI).
 Our [Discord server](https://discord.gg/HWcPt5ccJN) is by far our most active community, averaging 100 messages per day.
 
-### Board
+### Board members
 
 - Joep Meindertsma (Voorzitter / Chairman)
 - Michiel van den Ingh (Penningmeester / Treasurer)
 - Otto Barten (Secretaris / Secretary)
-
-### Remuneration policy
-
-The board members do not receive any remuneration for their work.
-They are entitled to reimbursement of the costs incurred by them in the performance of their duties.
-
-### Financial accountability
-
-Our first annual report will be published after the first fiscal year ends on 31-12-2025.
-
-## PauseAI US
-
-- Name: PauseAI US
-- Nonprofit Corporation - CA - Public Benefit
-- Entity Number 501(c)(3): 6071248
-- Entity Number 501(c)(4): 99-3051616
-- Registration date: 01/24/2024
-- Formed in: California
-- Status: Active
-- Contact: [Holly Elmore](mailto:holly@pauseai.info)
-
-## PauseAI UK
-
-- Name: PauseAI UK Ltd
-- Incorporation date: 28th December 2023
-- Company number: 15373608
-- Director: [William Baird](mailto:william@pauseai.info)
-
-## PauseIA (France)
-
-- Name: PauseIA
-- It will be incorporated soon
-- Director: [Maxime Fournes](mailto:maxime@pauseai.info)
-
-## Relationship between entities
-
-PauseAI Global is responsible for:
-
-- Facilitating the growth of the movement.
-- Helping local PauseAI entities.
-- This website and the managing the online Discord community.
-- Volunteer management and growth.
-- Global social media.
-- Organizing digital events.
-- The global strategy and theory of change.
-- The global financials and fundraising.
-- [Microgrants](/microgrants).
-
-The national/local entities are responsible for:
-
-- Physical events and protests.
-- Getting local [media coverage](/).
-- Local social media channels (e.g. [PauseAI UK](https://twitter.com/PauseAI_UK) and [PauseAI US](https://twitter.com/PauseAIus) Twitter)
-- National-level policy work & feedback.
