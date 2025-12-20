@@ -19,7 +19,7 @@ The following contains information about the Dutch legal entity behind PauseAI:
 - Founding date: 13-02-2024
 - ANBI status: Yes, since 13-02-2024
 - Contact: [Joep Meindertsma](mailto:joep@pauseai.info)
-- Address: Skopjestraat 26, 3541ES Utrecht, The Netherlands
+- Address: Box C5957, Kwikstaartlaan 42, 3704GS Zeist, The Netherlands
 
 ### ANBI status
 
