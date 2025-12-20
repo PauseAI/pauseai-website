@@ -4,15 +4,6 @@ import Airtable, { type FieldSet, type Table } from 'airtable'
 
 type QueryParams = Parameters<Table<FieldSet>['select']>[0]
 
-/** Fetch options for getting data from Airtable */
-const OPTIONS = {
-	method: 'GET',
-	headers: {
-		Authorization: `Bearer ${AIRTABLE_API_KEY}`,
-		'Content-Type': 'application/json'
-	}
-}
-
 const AIRTABLE_URL_REGEX =
 	/^https:\/\/api\.airtable\.com\/v0\/(?<baseId>(\w|\d)+)\/(?<tableId>(\w|\d)+)\/?$/
 
@@ -39,25 +30,18 @@ export function extractAirtableIds(url: string): { baseId: string; tableId: stri
 /**
  * Fetches all pages from Airtable API (which is limited to 100 items per page)
  * @template T The type of the records' fields
- * @param customFetch The fetch function
+ * @param _customFetch The fetch function
  * @param url The Airtable API URL
  * @param fallbackData Optional data to return if the fetch fails (only used in development mode)
  * @returns All records from all pages, or fallbackData if in development mode and fetch fails
  */
 export async function fetchAllPages<T extends Record<string, unknown>>(
-	customFetch: typeof fetch,
+	_customFetch: typeof fetch,
 	url: `https://api.airtable.com/v0/${string}/${string}`,
 	fallbackData: AirtableRecord<T>[] = [],
 	queryParams: QueryParams = undefined
 ): Promise<readonly AirtableRecord<T>[]> {
-	// Check if we have the API key configured
-	const apiKeyConfigured =
-		OPTIONS.headers.Authorization &&
-		OPTIONS.headers.Authorization !== 'Bearer undefined' &&
-		OPTIONS.headers.Authorization !== 'Bearer '
-
-	// If API key is not configured
-	if (!apiKeyConfigured) {
+	if (!AIRTABLE_API_KEY) {
 		console.warn(`⚠️ Airtable API key not configured in ${getDevContext()}`)
 		if (isDev()) {
 			console.log('...but using fallback data in development mode.')
