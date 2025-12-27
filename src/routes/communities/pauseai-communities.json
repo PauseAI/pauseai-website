@@ -579,6 +579,12 @@
 			"lon": -122.3321,
 			"link": "$$WEBSITE_US$$",
 			"parent_name": "PauseAI US"
+		},
+		{
+			"name": "Astana",
+			"lat": 51.0866208,
+			"lon": 71.401397,
+			"link": "https://t.me/+1T0wEh49gbRhNGYy"
 		}
 	]
 }
