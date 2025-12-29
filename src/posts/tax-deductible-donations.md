@@ -1,5 +1,5 @@
 ---
-title: Tax-decuctible donations to PauseAI
+title: Tax-deductible donations to PauseAI
 date: '2025-12-03'
 ---
 
