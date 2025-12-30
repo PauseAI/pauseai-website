@@ -3,7 +3,6 @@
 	import { meta } from './meta'
 	import PersonCard from './person.svelte'
 	import type { Person } from '$lib/types'
-	import WidgetConsent from '$lib/components/widget-consent/WidgetConsent.svelte'
 
 	export let data
 
@@ -41,25 +40,6 @@
 			href="/brussels-microsoft-protest">Microsoft's Brussels lobbying office</a
 		>.
 	</p>
-
-	<WidgetConsent>
-		<div>
-			<blockquote class="twitter-tweet">
-				<p lang="en" dir="ltr">
-					Today we gathered in Bruxelles. We're asking our governments to organize a summit to
-					discuss AI risks and to prevent the development of superintelligent AI. <a
-						href="https://twitter.com/hashtag/pauseai?src=hash&amp;ref_src=twsrc%5Etfw">#pauseai</a
-					>
-					(1/5) <a href="https://t.co/tXdeftTNAp">pic.twitter.com/tXdeftTNAp</a>
-				</p>
-				&mdash; Joep Meindertsma (@joepmeindertsma)
-				<a href="https://twitter.com/joepmeindertsma/status/1661047436905725953?ref_src=twsrc%5Etfw"
-					>May 23, 2023</a
-				>
-			</blockquote>
-			<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
-		</div>
-	</WidgetConsent>
 
 	<p>
 		What started as one person's call to action has grown into a global grassroots movement with

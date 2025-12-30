@@ -16,9 +16,10 @@ description: Frequently asked questions about PauseAI and the risks of superinte
 
 ## Who are you?
 
-We are a community of volunteers and [local communities](/communities) coordinated by a [non-profit organization](/organization) that aims to mitigate the [risks of AI](/risks) (including the [risk of human extinction](/xrisk)).
+We are a community of volunteers and [local communities](/communities) coordinated by a [non-profit organization](/organization) that aims to mitigate the [risks of AI](/risks).
 We aim to convince our governments to step in and [pause the development of superhuman AI](/proposal).
 We do this by informing the public, talking to decision-makers, and organizing [events](/events).
+If you want to learn more about our history and the people behind PauseAI, check out our [about us](/about) page.
 
 ## Do you have social media?
 
@@ -63,7 +64,7 @@ See our [Funding page](/funding)
 
 ## What are your plans?
 
-Focus on [growing the movement](/growth-strategy), organizing protests, lobbying politicians, and informing the public.
+Focus on growing the movement, organizing protests, lobbying politicians, and informing the public.
 
 Check out our [roadmap](/roadmap) for a detailed overview of our plans and what we could do with more funding.
 
