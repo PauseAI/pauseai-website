@@ -44,8 +44,8 @@
 	<p>
 		What started as one person's call to action has grown into a global grassroots movement with
 		volunteers, <a href="/national-groups">national chapters</a>, and
-		<a href="/local-communities">local communities</a> across the world, all working toward the same
-		goal: pausing frontier AI development until we can prove it's safe and keep it under democratic control.
+		<a href="/local-communities">local communities</a> across the world, all working toward the same goal:
+		pausing frontier AI development until we can prove it's safe and keep it under democratic control.
 	</p>
 
 	<h2 class="milestones-header">Key Milestones</h2>
@@ -102,6 +102,18 @@
 	{/each}
 </section>
 
+<section class="essential-info">
+	<h2>Essential Information</h2>
+	<ul class="essential-info-list">
+		<li><a href="/privacy">Privacy Policy</a></li>
+		<li><a href="/legal">Legal Info</a></li>
+		<li><a href="/funding">Global Funding and Donors</a></li>
+		<li><a href="/roadmap">Roadmap</a></li>
+		<li><a href="/press">Press</a></li>
+		<li><a href="/vacancies">Vacancies</a></li>
+	</ul>
+</section>
+
 <style>
 	.introduction p,
 	.milestones-list {
@@ -145,6 +157,46 @@
 		.people {
 			grid-template-columns: 1fr 1fr;
 			gap: 2rem 1rem;
+		}
+	}
+
+	.essential-info {
+		margin-top: 3rem;
+		padding-top: 2rem;
+		border-top: 2px solid #ccc;
+	}
+
+	.essential-info h2 {
+		font-size: 2rem;
+		margin-top: 0;
+		margin-bottom: 1rem;
+	}
+
+	.essential-info-list {
+		list-style: none;
+		padding: 0;
+		margin: 0;
+		display: grid;
+		gap: 0.75rem;
+	}
+
+	.essential-info-list li {
+		margin: 0;
+	}
+
+	.essential-info-list a {
+		color: var(--brand-subtle);
+		text-decoration: underline;
+	}
+
+	.essential-info-list a:hover {
+		color: var(--brand);
+	}
+
+	@media (min-width: 768px) {
+		.essential-info-list {
+			grid-template-columns: repeat(2, 1fr);
+			gap: 1rem;
 		}
 	}
 </style>
