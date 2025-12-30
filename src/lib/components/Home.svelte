@@ -50,6 +50,8 @@
 	</Block>
 </section>
 
+<NewsletterSignup />
+
 <style>
 	.divider {
 		content: '';
