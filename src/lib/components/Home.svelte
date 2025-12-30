@@ -1,5 +1,6 @@
 <script lang="ts">
 	import Block from '$lib/components/Block.svelte'
+	import NewsletterSignup from '$lib/components/NewsletterSignup.svelte'
 	import PostMeta from '$lib/components/PostMeta.svelte'
 	import PreloadFonts from '$lib/components/PreloadFonts.svelte'
 	import QuotesCarousel from '$lib/components/QuotesCarousel.svelte'
