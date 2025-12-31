@@ -15,7 +15,7 @@
 <Navbar {inverted} {moveUp}>
 	<Navlink {inverted} first href="/learn">{m.header_learn()}</Navlink>
 	<Navlink {inverted} href="/proposal">{m.header_proposal()}</Navlink>
-	<Navlink {inverted} href="/events">{m.header_events()}</Navlink>
+	<Navlink {inverted} href="/communities">GROUPS</Navlink>
 	<Navlink {inverted} href="/faq">{m.header_faq()}</Navlink>
 	<Navlink {inverted} href="/action">{m.header_action()}</Navlink>
 	<Navlink {inverted} href="/donate">{m.header_donate()}</Navlink>

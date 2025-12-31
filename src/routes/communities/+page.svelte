@@ -144,6 +144,30 @@
 </div>
 <CommunitiesList {communities} />
 
+<h2>View all events <Link href="https://lu.ma/PauseAI">here</Link></h2>
+
+<iframe
+	src="https://lu.ma/embed/calendar/cal-E1qhLPs5IvlQr8S/events?"
+	height="450"
+	frameborder="0"
+	style="border: 1px solid #bfcbda88; border-radius: 4px; width: 100%;"
+	allowfullscreen
+	aria-hidden="false"
+	title="PauseAI Events Calendar"
+></iframe>
+
+<h2>Create an event</h2>
+
+<p>
+	If you want to organize an event, please <Link href="https://lu.ma/create"
+		>create an event on lu.ma</Link
+	> and press the "submit event" button on <Link href="https://lu.ma/PauseAI"
+		>our calendar page</Link
+	>.
+</p>
+
+<p>Read more about <Link href="/local-organizing">local organizing</Link>.</p>
+
 <style>
 	.map-wrap {
 		position: relative;
