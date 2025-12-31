@@ -140,7 +140,7 @@
 	}
 
 	.tab-contents {
-		padding: var(--spacing-md);
+		padding: var(--spacing-md) var(--spacing-md) var(--spacing-sm) var(--spacing-md);
 	}
 
 	.tab-content {
@@ -167,8 +167,18 @@
 		padding-left: var(--spacing-md);
 	}
 
+	.tab-content :global(ul:last-child),
+	.tab-content :global(ol:last-child),
+	.tab-content :global(p:last-child) {
+		margin-bottom: 0;
+	}
+
 	.tab-content :global(li) {
 		margin-bottom: var(--spacing-xs);
+	}
+
+	.tab-content :global(li:last-child) {
+		margin-bottom: 2;
 	}
 
 	.tab-content :global(a) {
