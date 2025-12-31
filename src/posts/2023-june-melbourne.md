@@ -32,7 +32,7 @@ A rapidly increasing number of AI experts [signed a statement](https://www.safe.
 
 This has been signed by virtually all AI labs (OpenAI, Google DeepMind, Anthropic) and hundreds of AI scientists including Geoffrey Hinton, the "Godfather of AI".
 
-AI safety researchers have not reached on consensus on how large the risk of human extinction will be.
+AI safety researchers have not reached consensus on how large the risk of human extinction will be.
 Results from the ["Existential risk from AI survey"](https://forum.effectivealtruism.org/posts/8CM9vZ2nnQsWJNsHx/existential-risk-from-ai-survey-results) show that estimates range from 2% to 98%, with an average of 30%.
 
 The protesters are urging the Australian government to take the lead on global AI safety and pause the development of more dangerous AI systems.
