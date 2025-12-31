@@ -82,10 +82,10 @@
 		{/await}
 	{/if}
 
+	<Header inverted={hero} />
 	{#if hero}
 		<Hero />
 	{/if}
-	<Header inverted={hero} moveUp={hero} />
 
 	<main>
 		<PageTransition url={$page.url.pathname}>

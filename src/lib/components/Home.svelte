@@ -17,12 +17,12 @@
 <PostMeta {title} {description} />
 <!-- The Hero image is in `+layout.svelte` -->
 
-<div style="height: 5rem;" />
+<div style="height: 2rem;" />
 
 <QuotesCarousel />
-<div class="divider" />
+<div class="divider" style="margin: 2rem 0;" />
 <Stats />
-<div class="divider" />
+<div class="divider" style="margin: 2rem 0;" />
 <section>
 	<Block linkText={m.home_risks_c2a()} href="/risks">
 		<!-- eslint-disable-next-line svelte/no-at-html-tags -- static content -->

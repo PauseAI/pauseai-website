@@ -147,11 +147,10 @@
 <style>
 	.glide__track {
 		position: relative;
-		inset: -20px;
 	}
 
 	.quote {
-		margin: 20px;
+		padding: 0.5rem 0;
 	}
 
 	.glide__slides {
@@ -179,7 +178,7 @@
 		align-items: center;
 		justify-content: center;
 		gap: 0.5rem;
-		margin-top: 1rem;
+		margin-top: 0.25rem;
 	}
 
 	.navigation :global(a) {
