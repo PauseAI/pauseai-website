@@ -96,7 +96,7 @@ content: `
 <li>Apply for a <a href="/microgrants">microgrant</a> to fund your own initiative</li>
 <li>Apply for a <a href="/volunteer-stipends">volunteer stipend</a> to support sustained involvement</li>
 <li><a href="/communities">Set up a local chapter</a> or get deeply involved in an existing one</li>
-<li>Check our <a href="/vacancies">paid</a> and <a href="/volunteer-vacancies">volunteer</a> vacancies for open roles</li>
+<li>Check our <a href="/vacancies">paid</a> and <a href="/join#volunteer-vacancies">volunteer</a> vacancies for open roles</li>
 </ul>
 	`
 }
