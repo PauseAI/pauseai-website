@@ -29,7 +29,16 @@
 
 <style>
 	.block-wrapper {
-		margin-bottom: 5rem;
+		margin-bottom: 2.5rem;
+		padding: 1.5rem;
+		border-left: 3px solid var(--brand);
+		background: linear-gradient(90deg, rgba(255, 148, 22, 0.05) 0%, transparent 100%);
+		transition: all 0.2s ease;
+	}
+
+	.block-wrapper:hover {
+		border-left-width: 5px;
+		background: linear-gradient(90deg, rgba(255, 148, 22, 0.08) 0%, transparent 100%);
 	}
 
 	.block-wrapper :global(a) {
@@ -42,12 +51,15 @@
 		color: var(--brand);
 		text-transform: uppercase;
 		text-decoration: none;
-		font-size: 1.2rem;
+		font-size: 0.9rem;
 		font-family: var(--font-heading);
 		font-weight: 700;
+		letter-spacing: 0.05em;
+		margin-top: 0.75rem;
+		display: inline-block;
 	}
 
-	.c2a:hover {
+	.block-wrapper:hover .c2a {
 		text-decoration: underline;
 	}
 
@@ -56,7 +68,7 @@
 	}
 
 	.text {
-		max-width: 30rem;
+		max-width: 40rem;
 		display: flex;
 		flex-direction: column;
 		justify-content: center;
@@ -65,19 +77,28 @@
 
 	p {
 		font-size: 1rem;
+		line-height: 1.6;
+		color: var(--text);
+		opacity: 0.85;
+		margin: 0.5rem 0 0 0;
 	}
 
 	h2 {
-		font-size: 1.5rem;
-		font-weight: 800;
+		font-size: 1.25rem;
+		font-weight: 700;
 		margin: 0;
 		text-transform: uppercase;
-		line-height: 1.2;
+		line-height: 1.3;
+		letter-spacing: 0.02em;
 	}
 
 	@media (min-width: 850px) {
 		h2 {
-			font-size: 1.5rem;
+			font-size: 1.35rem;
+		}
+
+		.block-wrapper {
+			padding: 1.75rem 2rem;
 		}
 	}
 

@@ -63,7 +63,7 @@
 	}
 
 	a.inverted {
-		color: white;
+		color: var(--brand);
 	}
 
 	a.inverted:hover {

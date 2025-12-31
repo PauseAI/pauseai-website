@@ -22,7 +22,7 @@
 		<div class="compensate-min-space-between" />
 		<div class="compensate-offset" />
 		<a href="/" class="logo">
-			<Logo animate={logo_animate} {inverted} />
+			<Logo animate={logo_animate} />
 		</a>
 		<div class="min-space-between" />
 		<div class="space-between" />
@@ -56,6 +56,21 @@
 	.inverted-header {
 		color: white;
 		z-index: 1;
+		position: relative;
+		--vspace: 1rem;
+	}
+
+	.inverted-header::before {
+		content: '';
+		position: absolute;
+		top: 0;
+		bottom: 0;
+		left: 50%;
+		transform: translateX(-50%);
+		width: 100vw;
+		background: white;
+		z-index: -1;
+		pointer-events: none;
 	}
 
 	nav {
@@ -73,8 +88,26 @@
 		height: 0;
 	}
 
+	nav.move-up.inverted-header {
+		height: auto;
+		overflow: visible;
+	}
+
 	nav > * {
 		margin-bottom: 0.25rem;
+	}
+
+	nav.inverted-header > * {
+		margin-bottom: 0;
+	}
+
+	.inverted-header .logo-container {
+		align-items: center;
+	}
+
+	.inverted-header .logo {
+		display: flex;
+		align-items: center;
 	}
 
 	.logo-container {

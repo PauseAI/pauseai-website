@@ -4,8 +4,8 @@
 	export let animate = false
 	export let fill: string | null = null
 	export let inverted = false
-	$: orange = inverted ? 'white' : '#FF9416'
-	$: modifiedFill = fill ?? (inverted ? 'black' : 'var(--text)')
+	$: orange = '#FF9416'
+	$: modifiedFill = fill ?? (inverted ? 'white' : 'var(--text)')
 </script>
 
 <svg

@@ -28,10 +28,10 @@
 <style>
 	.quote-card {
 		background: var(--color-background);
-		min-height: 18rem;
 		display: flex;
 		flex-direction: column;
 		justify-content: space-between;
+		gap: 1rem;
 	}
 
 	.quote-text {
