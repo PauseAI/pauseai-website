@@ -66,6 +66,7 @@ You can make a difference. Volunteers in Australia raise awareness, protest, lob
 - [Contact Australian politicians (using this easy tool)](https://www.australiansforaisafety.com.au/advocacy/contact-politicians?utm_source=pauseai-australia)
 - Talk to your friends and family about AI risk
 - Donate to support our work via **PayID 85692218938** (not tax-deductible)
+- [Or one of these ideas](https://docs.google.com/document/d/18ypsV5GkgiQQc7QitwsrNcaxuBPd_3t7AMuySBPJZMw/edit?usp=sharing)
 
 ### Campaigns
 
