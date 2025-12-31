@@ -176,7 +176,7 @@ Because acknowledging that _we are in fact in danger_ is a very, very scary thin
 ## Ok, I want to help! What can I do?
 
 There are many [things that you can do](/action).
-On your own, you can write a [letter](/writing-a-letter), post [flyers](/flyering), [learn](/learn) and inform others, join a [protest](/protests), ir [donating](/donate) some money!
+On your own, you can write a [letter](/writing-a-letter), post [flyers](/flyering), [learn](/learn) and inform others, join a [protest](/protests), or [donating](/donate) some money!
 But even more important: you can [join PauseAI](/join) and coordinate with others who are taking action.
 Check out if there are [local communities](/communities) in your area.
 If you want to contribute more, you can become a volunteer and join one of our [teams](/teams), or [set up a local community](/local-organizing)!

@@ -9,7 +9,7 @@ The recently published New York Times Bestseller [_If Anyone Builds It, Everyone
 
 ![A speaker reads from If Anyone Builds It, Everyone Dies to an audience in a brick-walled room with purple lighting.](/iabied-event.png)
 
-At PauseAI, we're organising a coordinated international response to the book by hosting events across 4 countries. These book readings will provide a space for people to learn more about the book's warning, and to begin use their voice to support an international treaty pausing frontier AI development.
+At PauseAI, we're organising a coordinated international response to the book by hosting events across 4 countries. These book readings will provide a space for people to learn more about the book's warning, and to begin to use their voice to support an international treaty pausing frontier AI development.
 
 ## List of book events:
 
