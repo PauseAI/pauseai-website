@@ -35,6 +35,7 @@ content: `
 <li>Check out our <a href="https://microcommit.io/onboarding?org=135fcd8d-8116-44af-b885-14df992f9a8c">microcommit page</a> for weekly bite-sized actions</li>
 <li>Make a <a href="/donate">donation</a> or pick up some gear from our <a href="https://pauseai-shop.fourthwall.com/">store</a></li>
 <li>Follow our <a href="https://linktr.ee/pauseai">social media channels</a> to stay updated—your local PauseAI chapter may have dedicated pages too</li>
+<li>Sign the petitions: <a href="/statement">PauseAI petition</a>, <a href="https://superintelligence-statement.org/">Statement on Superintelligence</a>, <a href="https://aitreaty.org">International AI Treaty</a>, <a href="https://www.change.org/p/artificial-intelligence-time-is-running-out-for-responsible-ai-development-91f0a02c-130a-46e1-9e55-70d6b274f4df">Demand Responsible AI</a></li>
 </ul>
 	`
 },
@@ -44,7 +45,6 @@ content: `
 <h3>I have an hour</h3>
 <p>Ready to go a bit deeper? Start conversations and add your voice:</p>
 <ul>
-<li>Sign the petitions: <a href="/statement">PauseAI petition</a>, <a href="https://superintelligence-statement.org/">Statement on Superintelligence</a>, <a href="https://aitreaty.org">International AI Treaty</a>, <a href="https://www.change.org/p/artificial-intelligence-time-is-running-out-for-responsible-ai-development-91f0a02c-130a-46e1-9e55-70d6b274f4df">Demand Responsible AI</a></li>
 <li>Talk to someone in your life about AI safety—a friend, neighbour, colleague, or family member. Our <a href="/counterarguments">counterarguments guide</a> can help you answer tough questions and encourage others to act</li>
 <li>Share about AI risk on your social media. One of <a href="https://www.youtube.com/watch?v=xBqU1QxCao8&list=PLI46NoubGtIJa0JVCBR-9CayxCOmU0EJt">these videos</a> or this website can be a good start. And don't forget to tag us in your posts</li>
 </ul>
