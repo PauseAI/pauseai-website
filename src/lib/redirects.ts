@@ -18,10 +18,12 @@ const REDIRECTS: Record<string, string> = {
 	'/national-chapters': '/national-groups',
 	'/email': '/email-builder',
 	'/dangers': '/risks',
+	'/events': '/communities',
 	'/polls': '/polls-and-surveys',
 	'/surveys': '/polls-and-surveys',
 	'/stipends': '/volunteer-stipends',
-	'/volunteer-vacancies': '/join#volunteer-vacancies'
+	'/volunteer-vacancies': '/join#volunteer-vacancies',
+	'/find-your-community': '/communities'
 }
 
 /** Temporary redirects (302) - for time-limited campaigns, A/B tests, etc. */

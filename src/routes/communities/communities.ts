@@ -21,9 +21,8 @@ export type Community = RawCommunity & {
 }
 
 export const communitiesMeta: Post = {
-	title: 'PauseAI Local Communities',
-	description:
-		'A map of all the local PauseAI communities and people around the world. Also shows adjacent AI Safety communities.',
+	title: 'Find your PauseAI Community',
+	description: 'A map of all PauseAI communities, people and events around the world.',
 	date: '2023-12-15',
 	slug: 'communities',
 	categories: []
