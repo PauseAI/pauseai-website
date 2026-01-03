@@ -21,7 +21,8 @@ const REDIRECTS: Record<string, string> = {
 	'/polls': '/polls-and-surveys',
 	'/surveys': '/polls-and-surveys',
 	'/stipends': '/volunteer-stipends',
-	'/volunteer-vacancies': '/join#volunteer-vacancies'
+	'/volunteer-vacancies': '/join#volunteer-vacancies',
+	'/contact-us': '/contact'
 }
 
 /** Temporary redirects (302) - for time-limited campaigns, A/B tests, etc. */

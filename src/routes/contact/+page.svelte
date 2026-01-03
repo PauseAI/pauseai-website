@@ -1,0 +1,269 @@
+<script lang="ts">
+	import { enhance } from '$app/forms'
+	import { toast } from 'svelte-french-toast'
+
+	let activeTab: 'standard' | 'media' = 'standard'
+	let loading = false
+
+	function handleEnhance() {
+		loading = true
+		return async ({ result, update }: { result: any; update: () => Promise<void> }) => {
+			loading = false
+			if (result.type === 'success') {
+				toast.success('Thank you for your message. We will get back to you soon.')
+				update() // Reset the form
+			} else if (result.type === 'failure') {
+				toast.error(result.data?.message || 'Failed to send message.')
+			} else {
+				toast.error('An unexpected error occurred.')
+			}
+		}
+	}
+</script>
+
+<svelte:head>
+	<title>Contact Us | PauseAI</title>
+	<meta name="description" content="Get in touch with the PauseAI team." />
+</svelte:head>
+
+<div class="contact-page">
+	<h1>Contact Us</h1>
+	<p class="intro">Get in touch with the PauseAI team.</p>
+
+	<div class="tabs">
+		<button
+			class="tab-button"
+			class:active={activeTab === 'standard'}
+			on:click={() => (activeTab = 'standard')}
+		>
+			General Inquiries
+		</button>
+		<button
+			class="tab-button"
+			class:active={activeTab === 'media'}
+			on:click={() => (activeTab = 'media')}
+		>
+			Media Enquiries
+		</button>
+	</div>
+
+	<div class="form-container">
+		{#if activeTab === 'standard'}
+			<section id="standard-contact">
+				<h2>General Inquiries</h2>
+				<p>Send a message to info@pauseai.org</p>
+				<form method="POST" action="?/standard" use:enhance={handleEnhance}>
+					<div class="field">
+						<label for="std-name">Name</label>
+						<input type="text" id="std-name" name="name" required placeholder="Your name" />
+					</div>
+					<div class="field">
+						<label for="std-email">Email</label>
+						<input type="email" id="std-email" name="email" required placeholder="your@email.com" />
+					</div>
+					<div class="field">
+						<label for="std-subject">Subject</label>
+						<input
+							type="text"
+							id="std-subject"
+							name="subject"
+							required
+							placeholder="What is this about?"
+						/>
+					</div>
+					<div class="field">
+						<label for="std-message">Message</label>
+						<textarea id="std-message" name="message" required placeholder="How can we help?"
+						></textarea>
+					</div>
+					<button type="submit" disabled={loading}>
+						{loading ? 'Sending...' : 'Send Message'}
+					</button>
+				</form>
+			</section>
+		{:else}
+			<section id="media-contact">
+				<h2>Media Enquiries</h2>
+				<p>For press and media related requests.</p>
+				<form method="POST" action="?/media" use:enhance={handleEnhance}>
+					<div class="field">
+						<label for="med-name">Name</label>
+						<input type="text" id="med-name" name="name" required placeholder="Your name" />
+					</div>
+					<div class="field">
+						<label for="med-email">Email</label>
+						<input type="email" id="med-email" name="email" required placeholder="your@email.com" />
+					</div>
+					<div class="field">
+						<label for="med-phone">Phone</label>
+						<input type="tel" id="med-phone" name="phone" placeholder="+1 234 567 890" />
+					</div>
+					<div class="field">
+						<label for="med-org">Organization</label>
+						<input
+							type="text"
+							id="med-org"
+							name="organization"
+							required
+							placeholder="News outlet, company, etc."
+						/>
+					</div>
+					<div class="field">
+						<label for="med-details">Request Details</label>
+						<textarea
+							id="med-details"
+							name="details"
+							required
+							placeholder="Please provide details about your request"
+						></textarea>
+					</div>
+					<button type="submit" disabled={loading}>
+						{loading ? 'Sending...' : 'Send Message'}
+					</button>
+				</form>
+			</section>
+		{/if}
+	</div>
+</div>
+
+<style>
+	.contact-page {
+		max-width: 800px;
+		margin: 0 auto;
+		padding: 2rem 0;
+		color: var(--text);
+	}
+
+	h1 {
+		font-family: var(--font-heading);
+		font-size: 2.5rem;
+		margin-bottom: 1rem;
+		text-align: center;
+	}
+
+	.intro {
+		text-align: center;
+		margin-bottom: 3rem;
+		font-size: 1.1rem;
+		opacity: 0.8;
+	}
+
+	.tabs {
+		display: flex;
+		gap: 1rem;
+		margin-bottom: 2rem;
+		justify-content: center;
+		border-bottom: 1px solid var(--brand-subtle);
+		padding-bottom: 1rem;
+	}
+
+	.tab-button {
+		background: none;
+		border: none;
+		padding: 0.5rem 1rem;
+		font-size: 1.1rem;
+		cursor: pointer;
+		color: var(--text);
+		opacity: 0.7;
+		font-family: var(--font-body);
+		transition: all 0.2s;
+		border-radius: 4px;
+	}
+
+	.tab-button:hover {
+		opacity: 1;
+		background-color: var(--bg-subtle);
+	}
+
+	.tab-button.active {
+		color: var(--brand);
+		opacity: 1;
+		font-weight: bold;
+		background-color: var(--bg-subtle);
+	}
+
+	.form-container {
+		background-color: var(--bg-subtle);
+		padding: 2rem;
+		border-radius: 12px;
+		box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+	}
+
+	section h2 {
+		margin-top: 0;
+		margin-bottom: 0.5rem;
+	}
+
+	section p {
+		margin-bottom: 2rem;
+		opacity: 0.8;
+	}
+
+	.field {
+		margin-bottom: 1.5rem;
+		display: flex;
+		flex-direction: column;
+		gap: 0.5rem;
+	}
+
+	label {
+		font-weight: 600;
+		font-size: 0.9rem;
+	}
+
+	input,
+	textarea {
+		padding: 0.75rem;
+		border: 1px solid var(--brand-subtle);
+		border-radius: 6px;
+		background-color: var(--bg);
+		color: var(--text);
+		font-family: var(--font-body);
+		font-size: 1rem;
+	}
+
+	input:focus,
+	textarea:focus {
+		outline: 2px solid var(--brand);
+		border-color: transparent;
+	}
+
+	textarea {
+		min-height: 150px;
+		resize: vertical;
+	}
+
+	button[type='submit'] {
+		background-color: var(--brand);
+		color: white;
+		border: none;
+		padding: 1rem 2rem;
+		border-radius: 6px;
+		font-weight: bold;
+		font-size: 1rem;
+		cursor: pointer;
+		transition: opacity 0.2s;
+		width: 100%;
+		margin-top: 1rem;
+	}
+
+	button[type='submit']:hover:not(:disabled) {
+		opacity: 0.9;
+	}
+
+	button[type='submit']:disabled {
+		opacity: 0.6;
+		cursor: not-allowed;
+	}
+
+	@media (max-width: 600px) {
+		.form-container {
+			padding: 1.5rem;
+		}
+
+		.tabs {
+			flex-direction: column;
+			gap: 0.5rem;
+		}
+	}
+</style>

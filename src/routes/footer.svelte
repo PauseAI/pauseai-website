@@ -20,6 +20,7 @@
 			<h2>{m.footer_info()}</h2>
 			<Link href="/about">{m.footer_info_about()}</Link>
 			<Link href="/faq">{m.footer_info_faq()}</Link>
+			<Link href="/contact">Contact</Link>
 			<Link href="/proposal">{m.footer_info_proposal()}</Link>
 			<Link href="/learn">{m.footer_info_learn()}</Link>
 			<Link href="/press">{m.footer_info_press()}</Link>
