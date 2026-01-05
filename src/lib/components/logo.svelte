@@ -4,7 +4,7 @@
 	export let animate = false
 	export let fill: string | null = null
 	export let inverted = false
-	$: orange = '#FF9416'
+	const orange = '#FF9416'
 	$: modifiedFill = fill ?? (inverted ? 'white' : 'var(--text)')
 </script>
 
