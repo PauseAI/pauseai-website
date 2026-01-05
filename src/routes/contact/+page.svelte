@@ -28,7 +28,7 @@
 
 <div class="contact-page">
 	<h1>Contact Us</h1>
-	<p class="intro">Get in touch with the PauseAI team.</p>
+	<p class="intro">Get in touch with the PauseAI team</p>
 
 	<div class="tabs">
 		<button
@@ -162,32 +162,46 @@
 
 	.form-container {
 		background-color: var(--bg-subtle);
-		padding: 2rem;
+		padding: 1.5rem 2rem;
 		border-radius: 12px;
 		box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
 	}
 
 	.field {
-		margin-bottom: 1.5rem;
+		margin-bottom: 1rem;
 		display: flex;
-		flex-direction: column;
-		gap: 0.5rem;
+		flex-direction: row;
+		align-items: center;
+		gap: 1.5rem;
+	}
+
+	.field:has(textarea) {
+		align-items: flex-start;
+	}
+
+	.field:has(textarea) label {
+		margin-top: 0.75rem;
 	}
 
 	label {
 		font-weight: 600;
 		font-size: 0.9rem;
+		width: 140px;
+		flex-shrink: 0;
+		text-align: right;
 	}
 
 	input,
 	textarea {
-		padding: 0.75rem;
+		flex: 1;
+		padding: 0.6rem 0.75rem;
 		border: 1px solid var(--brand-subtle);
 		border-radius: 6px;
 		background-color: var(--bg);
 		color: var(--text);
 		font-family: var(--font-body);
 		font-size: 1rem;
+		width: 100%;
 	}
 
 	input:focus,
@@ -197,7 +211,7 @@
 	}
 
 	textarea {
-		min-height: 150px;
+		min-height: 120px;
 		resize: vertical;
 	}
 
@@ -205,14 +219,15 @@
 		background-color: var(--brand);
 		color: white;
 		border: none;
-		padding: 1rem 2rem;
+		padding: 0.8rem 2rem;
 		border-radius: 6px;
 		font-weight: bold;
 		font-size: 1rem;
 		cursor: pointer;
 		transition: opacity 0.2s;
-		width: 100%;
-		margin-top: 1rem;
+		width: calc(100% - 140px - 1.5rem);
+		margin-left: calc(140px + 1.5rem);
+		margin-top: 0.5rem;
 	}
 
 	button[type='submit']:hover:not(:disabled) {
@@ -232,6 +247,27 @@
 		.tabs {
 			flex-direction: column;
 			gap: 0.5rem;
+		}
+
+		.field {
+			flex-direction: column;
+			align-items: flex-start;
+			gap: 0.4rem;
+			margin-bottom: 1.2rem;
+		}
+
+		.field:has(textarea) label {
+			margin-top: 0;
+		}
+
+		label {
+			width: auto;
+			text-align: left;
+		}
+
+		button[type='submit'] {
+			width: 100%;
+			margin-left: 0;
 		}
 	}
 </style>
