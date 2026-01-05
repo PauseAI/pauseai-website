@@ -43,38 +43,29 @@
 			class:active={activeTab === 'media'}
 			on:click={() => (activeTab = 'media')}
 		>
-			Media Enquiries
+			Media & Press Inquiries
 		</button>
 	</div>
 
 	<div class="form-container">
 		{#if activeTab === 'standard'}
 			<section id="standard-contact">
-				<h2>General Inquiries</h2>
-				<p>Send a message to info@pauseai.org</p>
 				<form method="POST" action="?/standard" use:enhance={handleEnhance}>
 					<div class="field">
-						<label for="std-name">Name</label>
-						<input type="text" id="std-name" name="name" required placeholder="Your name" />
+						<label for="std-name">Full Name</label>
+						<input type="text" id="std-name" name="name" required />
 					</div>
 					<div class="field">
 						<label for="std-email">Email</label>
-						<input type="email" id="std-email" name="email" required placeholder="your@email.com" />
+						<input type="email" id="std-email" name="email" required />
 					</div>
 					<div class="field">
 						<label for="std-subject">Subject</label>
-						<input
-							type="text"
-							id="std-subject"
-							name="subject"
-							required
-							placeholder="What is this about?"
-						/>
+						<input type="text" id="std-subject" name="subject" required />
 					</div>
 					<div class="field">
 						<label for="std-message">Message</label>
-						<textarea id="std-message" name="message" required placeholder="How can we help?"
-						></textarea>
+						<textarea id="std-message" name="message" required></textarea>
 					</div>
 					<button type="submit" disabled={loading}>
 						{loading ? 'Sending...' : 'Send Message'}
@@ -83,39 +74,26 @@
 			</section>
 		{:else}
 			<section id="media-contact">
-				<h2>Media Enquiries</h2>
-				<p>For press and media related requests.</p>
 				<form method="POST" action="?/media" use:enhance={handleEnhance}>
 					<div class="field">
-						<label for="med-name">Name</label>
-						<input type="text" id="med-name" name="name" required placeholder="Your name" />
+						<label for="med-name">Full Name</label>
+						<input type="text" id="med-name" name="name" required />
 					</div>
 					<div class="field">
 						<label for="med-email">Email</label>
-						<input type="email" id="med-email" name="email" required placeholder="your@email.com" />
+						<input type="email" id="med-email" name="email" required />
 					</div>
 					<div class="field">
-						<label for="med-phone">Phone</label>
-						<input type="tel" id="med-phone" name="phone" placeholder="+1 234 567 890" />
+						<label for="med-subject">Subject</label>
+						<input type="text" id="med-subject" name="subject" required />
 					</div>
 					<div class="field">
 						<label for="med-org">Organization</label>
-						<input
-							type="text"
-							id="med-org"
-							name="organization"
-							required
-							placeholder="News outlet, company, etc."
-						/>
+						<input type="text" id="med-org" name="organization" required />
 					</div>
 					<div class="field">
 						<label for="med-details">Request Details</label>
-						<textarea
-							id="med-details"
-							name="details"
-							required
-							placeholder="Please provide details about your request"
-						></textarea>
+						<textarea id="med-details" name="details" required></textarea>
 					</div>
 					<button type="submit" disabled={loading}>
 						{loading ? 'Sending...' : 'Send Message'}
@@ -130,7 +108,7 @@
 	.contact-page {
 		max-width: 800px;
 		margin: 0 auto;
-		padding: 2rem 0;
+		padding: 0.5rem 0 2rem 0;
 		color: var(--text);
 	}
 
@@ -143,7 +121,7 @@
 
 	.intro {
 		text-align: center;
-		margin-bottom: 3rem;
+		margin-bottom: 1.5rem;
 		font-size: 1.1rem;
 		opacity: 0.8;
 	}
@@ -151,7 +129,7 @@
 	.tabs {
 		display: flex;
 		gap: 1rem;
-		margin-bottom: 2rem;
+		margin-bottom: 1rem;
 		justify-content: center;
 		border-bottom: 1px solid var(--brand-subtle);
 		padding-bottom: 1rem;
@@ -187,16 +165,6 @@
 		padding: 2rem;
 		border-radius: 12px;
 		box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-	}
-
-	section h2 {
-		margin-top: 0;
-		margin-bottom: 0.5rem;
-	}
-
-	section p {
-		margin-bottom: 2rem;
-		opacity: 0.8;
 	}
 
 	.field {
