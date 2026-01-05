@@ -18,10 +18,10 @@ async function sendContactEmail(data: {
 	organization?: string
 }) {
 	const sentFrom = new Sender('info@pauseai.info', 'PauseAI Contact Form')
-	const recipients = [new Recipient('patricio@pauseai.info', 'PauseAI Team')]
+	const recipientEmail = data.type === 'Media' ? 'press@pauseai.info' : 'info@pauseai.info'
+	const recipients = [new Recipient(recipientEmail, 'PauseAI Team')]
 
 	let htmlContent = `
-		<p><strong>Type:</strong> ${data.type}</p>
 		<p><strong>Name:</strong> ${data.name}</p>
 		<p><strong>Email:</strong> ${data.email}</p>
 		<p><strong>Subject:</strong> ${data.subject}</p>
@@ -40,15 +40,24 @@ async function sendContactEmail(data: {
 		.setSubject(`[Contact Form] ${data.subject}`)
 		.setHtml(htmlContent)
 		.setText(
-			`Type: ${data.type}\nName: ${data.name}\nEmail: ${data.email}\nSubject: ${data.subject}${data.organization ? `\nOrganization: ${data.organization}` : ''}\n\nMessage:\n${data.message}`
+			`Name: ${data.name}\nEmail: ${data.email}\nSubject: ${data.subject}${data.organization ? `\nOrganization: ${data.organization}` : ''}\n\nMessage:\n${data.message}`
 		)
 
 	try {
-		await mailersend.email.send(emailParams)
+		const response = await mailersend.email.send(emailParams)
 		return { success: true }
-	} catch (error) {
-		console.error('MailerSend Error:', error)
-		return { success: false, error }
+	} catch (error: any) {
+		console.error('MailerSend Error:', JSON.stringify(error, null, 2))
+
+		// Extract specific error message if available from MailerSend
+		let errorMessage = 'Failed to send email. Please try again later.'
+		if (error.body?.message) {
+			errorMessage = error.body.message.replace('reply to.email', 'email')
+		} else if (error.message) {
+			errorMessage = error.message.replace('reply to.email', 'email')
+		}
+
+		return { success: false, message: errorMessage }
 	}
 }
 
@@ -73,7 +82,7 @@ export const actions: Actions = {
 		})
 
 		if (!result.success) {
-			return fail(500, { message: 'Failed to send email. Please try again later.' })
+			return fail(500, { message: result.message })
 		}
 
 		return { success: true }
@@ -100,7 +109,7 @@ export const actions: Actions = {
 		})
 
 		if (!result.success) {
-			return fail(500, { message: 'Failed to send email. Please try again later.' })
+			return fail(500, { message: result.message })
 		}
 
 		return { success: true }

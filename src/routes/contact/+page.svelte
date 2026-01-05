@@ -52,20 +52,16 @@
 			<section id="standard-contact">
 				<form method="POST" action="?/standard" use:enhance={handleEnhance}>
 					<div class="field">
-						<label for="std-name">Full Name</label>
-						<input type="text" id="std-name" name="name" required />
+						<input type="text" id="std-name" name="name" required placeholder="Full Name" />
 					</div>
 					<div class="field">
-						<label for="std-email">Email</label>
-						<input type="email" id="std-email" name="email" required />
+						<input type="email" id="std-email" name="email" required placeholder="Email" />
 					</div>
 					<div class="field">
-						<label for="std-subject">Subject</label>
-						<input type="text" id="std-subject" name="subject" required />
+						<input type="text" id="std-subject" name="subject" required placeholder="Subject" />
 					</div>
 					<div class="field">
-						<label for="std-message">Message</label>
-						<textarea id="std-message" name="message" required></textarea>
+						<textarea id="std-message" name="message" required placeholder="Message"></textarea>
 					</div>
 					<button type="submit" disabled={loading}>
 						{loading ? 'Sending...' : 'Send Message'}
@@ -76,24 +72,25 @@
 			<section id="media-contact">
 				<form method="POST" action="?/media" use:enhance={handleEnhance}>
 					<div class="field">
-						<label for="med-name">Full Name</label>
-						<input type="text" id="med-name" name="name" required />
+						<input type="text" id="med-name" name="name" required placeholder="Full Name" />
 					</div>
 					<div class="field">
-						<label for="med-email">Email</label>
-						<input type="email" id="med-email" name="email" required />
+						<input type="email" id="med-email" name="email" required placeholder="Email" />
 					</div>
 					<div class="field">
-						<label for="med-subject">Subject</label>
-						<input type="text" id="med-subject" name="subject" required />
+						<input type="text" id="med-subject" name="subject" required placeholder="Subject" />
 					</div>
 					<div class="field">
-						<label for="med-org">Organization</label>
-						<input type="text" id="med-org" name="organization" required />
+						<input
+							type="text"
+							id="med-org"
+							name="organization"
+							required
+							placeholder="Organization"
+						/>
 					</div>
 					<div class="field">
-						<label for="med-details">Request Details</label>
-						<textarea id="med-details" name="details" required></textarea>
+						<textarea id="med-details" name="details" required placeholder="Message"></textarea>
 					</div>
 					<button type="submit" disabled={loading}>
 						{loading ? 'Sending...' : 'Send Message'}
@@ -138,14 +135,14 @@
 	.tab-button {
 		background: none;
 		border: none;
-		padding: 0.5rem 1rem;
+		padding: 0.5rem 1.5rem;
 		font-size: 1.1rem;
 		cursor: pointer;
 		color: var(--text);
 		opacity: 0.7;
 		font-family: var(--font-body);
 		transition: all 0.2s;
-		border-radius: 4px;
+		border-radius: 30px;
 	}
 
 	.tab-button:hover {
@@ -162,46 +159,52 @@
 
 	.form-container {
 		background-color: var(--bg-subtle);
-		padding: 1.5rem 2rem;
-		border-radius: 12px;
+		padding: 2rem;
+		border-radius: 32px;
 		box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+		width: 100%;
+		box-sizing: border-box;
+		display: flex;
+		flex-direction: column;
+		align-items: stretch;
+	}
+
+	section,
+	form {
+		width: 100%;
+		max-width: none;
+		display: flex;
+		flex-direction: column;
+		align-items: stretch;
+		gap: 1rem;
 	}
 
 	.field {
-		margin-bottom: 1rem;
+		width: 100%;
 		display: flex;
-		flex-direction: row;
-		align-items: center;
-		gap: 1.5rem;
-	}
-
-	.field:has(textarea) {
-		align-items: flex-start;
-	}
-
-	.field:has(textarea) label {
-		margin-top: 0.75rem;
-	}
-
-	label {
-		font-weight: 600;
-		font-size: 0.9rem;
-		width: 140px;
-		flex-shrink: 0;
-		text-align: right;
+		flex-direction: column;
+		align-items: stretch;
 	}
 
 	input,
 	textarea {
-		flex: 1;
-		padding: 0.6rem 0.75rem;
+		width: 100%;
+		padding: 0.8rem 1.2rem;
 		border: 1px solid var(--brand-subtle);
-		border-radius: 6px;
+		border-radius: 20px;
 		background-color: var(--bg);
 		color: var(--text);
 		font-family: var(--font-body);
 		font-size: 1rem;
-		width: 100%;
+		font-weight: 300 !important;
+		box-sizing: border-box;
+		display: block;
+	}
+
+	input::placeholder,
+	textarea::placeholder {
+		font-weight: 300;
+		opacity: 0.6;
 	}
 
 	input:focus,
@@ -211,7 +214,7 @@
 	}
 
 	textarea {
-		min-height: 120px;
+		min-height: 200px;
 		resize: vertical;
 	}
 
@@ -219,15 +222,15 @@
 		background-color: var(--brand);
 		color: white;
 		border: none;
-		padding: 0.8rem 2rem;
-		border-radius: 6px;
+		padding: 0.8rem 3rem;
+		border-radius: 50px;
 		font-weight: bold;
-		font-size: 1rem;
+		font-size: 1.1rem;
 		cursor: pointer;
 		transition: opacity 0.2s;
-		width: calc(100% - 140px - 1.5rem);
-		margin-left: calc(140px + 1.5rem);
-		margin-top: 0.5rem;
+		width: fit-content;
+		align-self: center;
+		margin-top: 1rem;
 	}
 
 	button[type='submit']:hover:not(:disabled) {
@@ -247,27 +250,6 @@
 		.tabs {
 			flex-direction: column;
 			gap: 0.5rem;
-		}
-
-		.field {
-			flex-direction: column;
-			align-items: flex-start;
-			gap: 0.4rem;
-			margin-bottom: 1.2rem;
-		}
-
-		.field:has(textarea) label {
-			margin-top: 0;
-		}
-
-		label {
-			width: auto;
-			text-align: left;
-		}
-
-		button[type='submit'] {
-			width: 100%;
-			margin-left: 0;
 		}
 	}
 </style>
