@@ -22,7 +22,7 @@
 		<div class="compensate-min-space-between" />
 		<div class="compensate-offset" />
 		<a href="/" class="logo">
-			<Logo animate={logo_animate} />
+			<Logo animate={logo_animate} {inverted} />
 		</a>
 		<div class="min-space-between" />
 		<div class="space-between" />
