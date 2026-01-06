@@ -3,14 +3,17 @@
 	import { toast } from 'svelte-french-toast'
 	import { page } from '$app/stores'
 	import { onMount } from 'svelte'
+	import Link from '$lib/components/Link.svelte'
 
-	let activeTab: 'standard' | 'media' = 'standard'
+	let activeTab: 'standard' | 'media' | 'partnerships' = 'standard'
 	let loading = false
 
 	onMount(() => {
 		const tab = $page.url.searchParams.get('tab')
 		if (tab === 'media') {
 			activeTab = 'media'
+		} else if (tab === 'partnerships') {
+			activeTab = 'partnerships'
 		}
 	})
 
@@ -52,7 +55,14 @@
 			class:active={activeTab === 'media'}
 			on:click={() => (activeTab = 'media')}
 		>
-			Media & Press Inquiries
+			Press & Media
+		</button>
+		<button
+			class="tab-button"
+			class:active={activeTab === 'partnerships'}
+			on:click={() => (activeTab = 'partnerships')}
+		>
+			Partnerships
 		</button>
 	</div>
 
@@ -77,8 +87,13 @@
 					</button>
 				</form>
 			</section>
-		{:else}
+		{:else if activeTab === 'media'}
 			<section id="media-contact">
+				<p class="tab-intro">
+					Looking for press materials or media coverage? Check out our <Link href="/press"
+						>press page</Link
+					>.
+				</p>
 				<form method="POST" action="?/media" use:enhance={handleEnhance}>
 					<div class="field">
 						<input type="text" id="med-name" name="name" required placeholder="Full Name" />
@@ -100,6 +115,45 @@
 					</div>
 					<div class="field">
 						<textarea id="med-details" name="details" required placeholder="Message"></textarea>
+					</div>
+					<button type="submit" disabled={loading}>
+						{loading ? 'Sending...' : 'Send Message'}
+					</button>
+				</form>
+			</section>
+		{:else if activeTab === 'partnerships'}
+			<section id="partnerships-contact">
+				<p class="tab-intro">
+					Interested in collaborating? Read about our <Link href="/partnerships"
+						>partnership opportunities</Link
+					>.
+				</p>
+				<form method="POST" action="?/partnerships" use:enhance={handleEnhance}>
+					<div class="field">
+						<input type="text" id="part-name" name="name" required placeholder="Full Name" />
+					</div>
+					<div class="field">
+						<input type="email" id="part-email" name="email" required placeholder="Email" />
+					</div>
+					<div class="field">
+						<input
+							type="text"
+							id="part-org"
+							name="organization"
+							required
+							placeholder="Organization"
+						/>
+					</div>
+					<div class="field">
+						<input type="text" id="part-subject" name="subject" required placeholder="Subject" />
+					</div>
+					<div class="field">
+						<textarea
+							id="part-message"
+							name="message"
+							required
+							placeholder="How would you like to partner with us?"
+						></textarea>
 					</div>
 					<button type="submit" disabled={loading}>
 						{loading ? 'Sending...' : 'Send Message'}
@@ -176,6 +230,18 @@
 		display: flex;
 		flex-direction: column;
 		align-items: stretch;
+	}
+
+	.tab-intro {
+		margin-bottom: 1.5rem;
+		font-size: 0.95rem;
+		opacity: 0.9;
+		line-height: 1.4;
+	}
+
+	.tab-intro a {
+		color: var(--brand);
+		font-weight: 500;
 	}
 
 	section,
