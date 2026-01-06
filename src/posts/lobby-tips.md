@@ -56,9 +56,9 @@ But we cannot afford to mince words and tone everything down:
 ## After the meeting
 
 Keep your contact warm!
-Send them regulare updates on what's happening in the AI safety field.
-The field moves very fast, and this is your oppurtinuty to be their source of information.
-If you are knowledgeable about this field (which you probaly are compared to lots of people) you can become an advisor / source or knowledge.
+Send them regular updates on what's happening in the AI safety field.
+The field moves very fast, and this is your opportunity to be their source of information.
+If you are knowledgeable about this field (which you probably are compared to lots of people) you can become an advisor / source or knowledge.
 Ask them to introduce you to other people who might be interested in this topic.
 
 ## Get to it!

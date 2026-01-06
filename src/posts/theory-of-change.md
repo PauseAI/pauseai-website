@@ -21,7 +21,7 @@ However, there are some important reasons why we don't have a pause yet:
   The desire to be the first to develop a new AI is very strong, both for companies and for countries.
   Companies understand that the best-performing AI model can have a far higher price, and countries understand that they can get a lot of strategic and economic power by leading the race.
   The people within AI labs tend to understand the risks, but they have strong incentives to focus on capabilities rather than safety.
-  Politicians often are not sufficiently aware of the risks, but even if they were, they might still not want to slow down AI development in their countnry because of the economic and strategic benefits.
+  Politicians often are not sufficiently aware of the risks, but even if they were, they might still not want to slow down AI development in their country because of the economic and strategic benefits.
   We need an _international_ pause.
   That's the whole point of our movement.
 - **Lack of urgency**.
@@ -30,7 +30,7 @@ However, there are some important reasons why we don't have a pause yet:
 - **Our psychology**.
   Read more about how our [psychology makes it very difficult](/psychology-of-x-risk) for us to internalize how bad things can get.
 - **The Overton window**.
-  Even though public support for AI regulations and slowing down AI development is high (see [polls & surveys](/polls-and-surveys)), many of the topics we discuss is still outside of the "Overton window", which means that they are considered too extreme to discuss. In 2023 this window has shifted quite a bit (the FLI Pause letter, Geoffrey Hinton quitting, the Safe.ai statement), but it's still too much of a taboo in political elite cirtlces to seriously consider the possibility of pausing. Additionally, the existential risk from AI is still ridiculed by too many people. It is our job to move this overton window further.
+  Even though public support for AI regulations and slowing down AI development is high (see [polls & surveys](/polls-and-surveys)), many of the topics we discuss is still outside of the "Overton window", which means that they are considered too extreme to discuss. In 2023 this window has shifted quite a bit (the FLI Pause letter, Geoffrey Hinton quitting, the Safe.ai statement), but it's still too much of a taboo in political elite circles to seriously consider the possibility of pausing. Additionally, the existential risk from AI is still ridiculed by too many people. It is our job to move this overton window further.
 
 ## How do we pause?
 
