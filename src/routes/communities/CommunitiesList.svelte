@@ -110,7 +110,7 @@
 
 	.country-card {
 		border: 1px solid var(--text-subtle);
-		border-radius: 6px;
+		border-radius: 24px;
 		background: var(--bg);
 		overflow: hidden;
 		transition:
@@ -169,8 +169,8 @@
 	.count-badge {
 		background-color: var(--bg-subtle);
 		color: var(--brand);
-		padding: 0.2rem 0.5rem;
-		border-radius: 12px;
+		padding: 0.2rem 0.6rem;
+		border-radius: 999px;
 		font-size: 0.75rem;
 		font-weight: 600;
 		white-space: nowrap;
@@ -200,7 +200,7 @@
 		text-decoration: none;
 		color: var(--text);
 		font-size: 0.875rem;
-		border-radius: 4px;
+		border-radius: 8px;
 		transition:
 			background-color 0.2s,
 			color 0.2s;

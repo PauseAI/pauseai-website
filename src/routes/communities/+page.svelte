@@ -159,7 +159,7 @@
 	src="https://lu.ma/embed/calendar/cal-E1qhLPs5IvlQr8S/events?"
 	height="450"
 	frameborder="0"
-	style="border: 1px solid #bfcbda88; border-radius: 4px; width: 100%;"
+	style="border: 1px solid #bfcbda88; border-radius: 24px; width: 100%;"
 	allowfullscreen
 	aria-hidden="false"
 	title="PauseAI Events Calendar"
@@ -179,11 +179,33 @@
 		position: relative;
 		padding-bottom: 56.25%; /* 16:9 */
 		overflow: hidden;
+		border-radius: 24px;
+		border: 1px solid var(--text-subtle);
 	}
 
 	.map {
 		position: absolute;
 		width: 100%;
 		height: 100%;
+	}
+
+	:global(.maplibregl-ctrl-group) {
+		border-radius: 24px !important;
+		border: 1px solid var(--text-subtle) !important;
+		overflow: hidden;
+	}
+
+	:global(.maplibregl-ctrl-group button) {
+		border-radius: 0 !important;
+	}
+
+	:global(.maplibregl-ctrl-group button:first-child) {
+		border-top-left-radius: 24px !important;
+		border-top-right-radius: 24px !important;
+	}
+
+	:global(.maplibregl-ctrl-group button:last-child) {
+		border-bottom-left-radius: 24px !important;
+		border-bottom-right-radius: 24px !important;
 	}
 </style>
