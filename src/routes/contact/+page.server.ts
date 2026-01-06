@@ -18,14 +18,7 @@ async function sendContactEmail(data: {
 	organization?: string
 }) {
 	const sentFrom = new Sender('info@pauseai.info', 'PauseAI Contact Form')
-	const recipientEmail =
-		data.type === 'Media'
-			? 'press@pauseai.info'
-			: data.type === 'Partnerships'
-				? 'joep@pauseai.info'
-				: data.type === 'Feedback'
-					? 'tom@pauseai.info'
-					: 'info@pauseai.info'
+	const recipientEmail = 'patriciovercesi@gmail.com'
 	const recipients = [new Recipient(recipientEmail, 'PauseAI Team')]
 
 	let htmlContent = `
