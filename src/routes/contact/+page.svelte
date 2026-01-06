@@ -273,7 +273,7 @@
 		line-height: 1.4;
 	}
 
-	.tab-intro a {
+	.tab-intro :global(a) {
 		color: var(--brand);
 		font-weight: 500;
 	}

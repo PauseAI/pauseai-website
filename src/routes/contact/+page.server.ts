@@ -1,12 +1,12 @@
 import { fail } from '@sveltejs/kit'
 import type { Actions } from './$types'
-import { MAILERSEND_API_KEY } from '$env/static/private'
+import { env } from '$env/dynamic/private'
 import { MailerSend, EmailParams, Sender, Recipient } from 'mailersend'
 
 export const prerender = false
 
 const mailersend = new MailerSend({
-	apiKey: MAILERSEND_API_KEY
+	apiKey: env.MAILERSEND_API_KEY
 })
 // a
 async function sendContactEmail(data: {
