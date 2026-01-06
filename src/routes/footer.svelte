@@ -66,9 +66,7 @@
 			<Link href="https://creativecommons.org/licenses/by/4.0/" target="_blank"
 				>{m.footer_other_license()}</Link
 			>
-			<Link href="https://airtable.com/appWPTGqZmUcs3NWu/pagIvo9Sv6IDHaolu/form" target="_blank"
-				>{m.footer_other_feedback()}</Link
-			>
+			<Link href="/contact?tab=feedback">{m.footer_other_feedback()}</Link>
 		</div>
 	</div>
 </footer>

@@ -5,7 +5,7 @@
 	import { onMount } from 'svelte'
 	import Link from '$lib/components/Link.svelte'
 
-	let activeTab: 'standard' | 'media' | 'partnerships' = 'standard'
+	let activeTab: 'standard' | 'media' | 'partnerships' | 'feedback' = 'standard'
 	let loading = false
 
 	onMount(() => {
@@ -14,6 +14,8 @@
 			activeTab = 'media'
 		} else if (tab === 'partnerships') {
 			activeTab = 'partnerships'
+		} else if (tab === 'feedback') {
+			activeTab = 'feedback'
 		}
 	})
 
@@ -63,6 +65,13 @@
 			on:click={() => (activeTab = 'partnerships')}
 		>
 			Partnerships
+		</button>
+		<button
+			class="tab-button"
+			class:active={activeTab === 'feedback'}
+			on:click={() => (activeTab = 'feedback')}
+		>
+			Feedback
 		</button>
 	</div>
 
@@ -153,6 +162,31 @@
 							name="message"
 							required
 							placeholder="How would you like to partner with us?"
+						></textarea>
+					</div>
+					<button type="submit" disabled={loading}>
+						{loading ? 'Sending...' : 'Send Message'}
+					</button>
+				</form>
+			</section>
+		{:else if activeTab === 'feedback'}
+			<section id="feedback-contact">
+				<p class="tab-intro">
+					We value your feedback! Let us know how we can improve or what you think about our work.
+					Providing your name and email is optional.
+				</p>
+				<form method="POST" action="?/feedback" use:enhance={handleEnhance}>
+					<div class="field">
+						<input type="text" id="fb-name" name="name" placeholder="Full Name (Optional)" />
+					</div>
+					<div class="field">
+						<input type="email" id="fb-email" name="email" placeholder="Email (Optional)" />
+					</div>
+					<div class="field">
+						<input type="text" id="fb-subject" name="subject" required placeholder="Subject" />
+					</div>
+					<div class="field">
+						<textarea id="fb-message" name="message" required placeholder="Your Feedback"
 						></textarea>
 					</div>
 					<button type="submit" disabled={loading}>

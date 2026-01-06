@@ -14,7 +14,7 @@ async function sendContactEmail(data: {
 	email: string
 	subject: string
 	message: string
-	type: 'Standard' | 'Media' | 'Partnerships'
+	type: 'Standard' | 'Media' | 'Partnerships' | 'Feedback'
 	organization?: string
 }) {
 	const sentFrom = new Sender('info@pauseai.info', 'PauseAI Contact Form')
@@ -23,7 +23,9 @@ async function sendContactEmail(data: {
 			? 'press@pauseai.info'
 			: data.type === 'Partnerships'
 				? 'joep@pauseai.info'
-				: 'info@pauseai.info'
+				: data.type === 'Feedback'
+					? 'tom@pauseai.info'
+					: 'info@pauseai.info'
 	const recipients = [new Recipient(recipientEmail, 'PauseAI Team')]
 
 	let htmlContent = `
@@ -138,6 +140,31 @@ export const actions: Actions = {
 			subject,
 			message,
 			type: 'Partnerships'
+		})
+
+		if (!result.success) {
+			return fail(500, { message: result.message })
+		}
+
+		return { success: true }
+	},
+	feedback: async ({ request }) => {
+		const data = await request.formData()
+		const name = data.get('name')?.toString() || 'Anonymous'
+		const email = data.get('email')?.toString() || 'anonymous@pauseai.info'
+		const subject = data.get('subject')?.toString()
+		const message = data.get('message')?.toString()
+
+		if (!subject || !message) {
+			return fail(400, { message: 'Missing required fields' })
+		}
+
+		const result = await sendContactEmail({
+			name,
+			email,
+			subject,
+			message,
+			type: 'Feedback'
 		})
 
 		if (!result.success) {
