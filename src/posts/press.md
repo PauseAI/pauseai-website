@@ -2,7 +2,7 @@
 title: PauseAI Press materials & media coverage
 ---
 
-If you want to contact us, use our [Contact form](/contact?tab=media)
+If you want to contact us, use our [Contact form](/contact-us?tab=media)
 
 ## Logo, materials
 
