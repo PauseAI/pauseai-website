@@ -74,8 +74,10 @@
 
 				update() // Reset the form
 			} else if (result.type === 'failure') {
+				console.error('Submission failed:', result)
 				toast.error(result.data?.message || 'Failed to send message.')
 			} else {
+				console.error('Unexpected result:', result)
 				toast.error('An unexpected error occurred.')
 			}
 		}
