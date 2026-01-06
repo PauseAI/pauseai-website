@@ -36,12 +36,15 @@ async function sendContactEmail(data: {
 	const emailParams = new EmailParams()
 		.setFrom(sentFrom)
 		.setTo(recipients)
-		.setReplyTo(new Recipient(data.email, data.name))
 		.setSubject(`[Contact Form] ${data.subject}`)
 		.setHtml(htmlContent)
 		.setText(
 			`Name: ${data.name}\nEmail: ${data.email}\nSubject: ${data.subject}${data.organization ? `\nOrganization: ${data.organization}` : ''}\n\nMessage:\n${data.message}`
 		)
+
+	if (data.email) {
+		emailParams.setReplyTo(new Recipient(data.email, data.name))
+	}
 
 	try {
 		await mailersend.email.send(emailParams)
@@ -144,7 +147,7 @@ export const actions: Actions = {
 	feedback: async ({ request }) => {
 		const data = await request.formData()
 		const name = data.get('name')?.toString() || 'Anonymous'
-		const email = data.get('email')?.toString() || 'anonymous@pauseai.info'
+		const email = data.get('email')?.toString() || ''
 		const subject = data.get('subject')?.toString()
 		const message = data.get('message')?.toString()
 
