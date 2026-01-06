@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { browser } from '$app/environment'
 	import { enhance } from '$app/forms'
 	import { toast } from 'svelte-french-toast'
 	import { page } from '$app/stores'
@@ -7,6 +8,13 @@
 
 	let activeTab: 'standard' | 'media' | 'partnerships' | 'feedback' = 'standard'
 	let loading = false
+
+	let formData = {
+		standard: { name: '', email: '', subject: '', message: '' },
+		media: { name: '', email: '', subject: '', organization: '', details: '' },
+		partnerships: { name: '', email: '', organization: '', subject: '', message: '' },
+		feedback: { name: '', email: '', subject: '', message: '' }
+	}
 
 	onMount(() => {
 		const tab = $page.url.searchParams.get('tab')
@@ -17,7 +25,22 @@
 		} else if (tab === 'feedback') {
 			activeTab = 'feedback'
 		}
+
+		if (browser) {
+			const saved = localStorage.getItem('contactFormData')
+			if (saved) {
+				try {
+					formData = { ...formData, ...JSON.parse(saved) }
+				} catch (e) {
+					console.error('Failed to parse saved form data', e)
+				}
+			}
+		}
 	})
+
+	$: if (browser && formData) {
+		localStorage.setItem('contactFormData', JSON.stringify(formData))
+	}
 
 	function handleEnhance() {
 		loading = true
@@ -31,6 +54,24 @@
 			loading = false
 			if (result.type === 'success') {
 				toast.success('Thank you for your message. We will get back to you soon.')
+
+				// Clear the data for the successfully submitted tab
+				if (activeTab === 'standard') {
+					formData.standard = { name: '', email: '', subject: '', message: '' }
+				} else if (activeTab === 'media') {
+					formData.media = { name: '', email: '', subject: '', organization: '', details: '' }
+				} else if (activeTab === 'partnerships') {
+					formData.partnerships = {
+						name: '',
+						email: '',
+						organization: '',
+						subject: '',
+						message: ''
+					}
+				} else if (activeTab === 'feedback') {
+					formData.feedback = { name: '', email: '', subject: '', message: '' }
+				}
+
 				update() // Reset the form
 			} else if (result.type === 'failure') {
 				toast.error(result.data?.message || 'Failed to send message.')
@@ -86,16 +127,43 @@
 			<section id="standard-contact">
 				<form method="POST" action="?/standard" use:enhance={handleEnhance}>
 					<div class="field">
-						<input type="text" id="std-name" name="name" required placeholder="Full Name" />
+						<input
+							type="text"
+							id="std-name"
+							name="name"
+							required
+							placeholder="Full Name"
+							bind:value={formData.standard.name}
+						/>
 					</div>
 					<div class="field">
-						<input type="email" id="std-email" name="email" required placeholder="Email" />
+						<input
+							type="email"
+							id="std-email"
+							name="email"
+							required
+							placeholder="Email"
+							bind:value={formData.standard.email}
+						/>
 					</div>
 					<div class="field">
-						<input type="text" id="std-subject" name="subject" required placeholder="Subject" />
+						<input
+							type="text"
+							id="std-subject"
+							name="subject"
+							required
+							placeholder="Subject"
+							bind:value={formData.standard.subject}
+						/>
 					</div>
 					<div class="field">
-						<textarea id="std-message" name="message" required placeholder="Message"></textarea>
+						<textarea
+							id="std-message"
+							name="message"
+							required
+							placeholder="Message"
+							bind:value={formData.standard.message}
+						></textarea>
 					</div>
 					<button type="submit" disabled={loading}>
 						{loading ? 'Sending...' : 'Send Message'}
@@ -111,13 +179,34 @@
 				</p>
 				<form method="POST" action="?/media" use:enhance={handleEnhance}>
 					<div class="field">
-						<input type="text" id="med-name" name="name" required placeholder="Full Name" />
+						<input
+							type="text"
+							id="med-name"
+							name="name"
+							required
+							placeholder="Full Name"
+							bind:value={formData.media.name}
+						/>
 					</div>
 					<div class="field">
-						<input type="email" id="med-email" name="email" required placeholder="Email" />
+						<input
+							type="email"
+							id="med-email"
+							name="email"
+							required
+							placeholder="Email"
+							bind:value={formData.media.email}
+						/>
 					</div>
 					<div class="field">
-						<input type="text" id="med-subject" name="subject" required placeholder="Subject" />
+						<input
+							type="text"
+							id="med-subject"
+							name="subject"
+							required
+							placeholder="Subject"
+							bind:value={formData.media.subject}
+						/>
 					</div>
 					<div class="field">
 						<input
@@ -126,10 +215,17 @@
 							name="organization"
 							required
 							placeholder="Organization"
+							bind:value={formData.media.organization}
 						/>
 					</div>
 					<div class="field">
-						<textarea id="med-details" name="details" required placeholder="Message"></textarea>
+						<textarea
+							id="med-details"
+							name="details"
+							required
+							placeholder="Message"
+							bind:value={formData.media.details}
+						></textarea>
 					</div>
 					<button type="submit" disabled={loading}>
 						{loading ? 'Sending...' : 'Send Message'}
@@ -145,10 +241,24 @@
 				</p>
 				<form method="POST" action="?/partnerships" use:enhance={handleEnhance}>
 					<div class="field">
-						<input type="text" id="part-name" name="name" required placeholder="Full Name" />
+						<input
+							type="text"
+							id="part-name"
+							name="name"
+							required
+							placeholder="Full Name"
+							bind:value={formData.partnerships.name}
+						/>
 					</div>
 					<div class="field">
-						<input type="email" id="part-email" name="email" required placeholder="Email" />
+						<input
+							type="email"
+							id="part-email"
+							name="email"
+							required
+							placeholder="Email"
+							bind:value={formData.partnerships.email}
+						/>
 					</div>
 					<div class="field">
 						<input
@@ -157,10 +267,18 @@
 							name="organization"
 							required
 							placeholder="Organization"
+							bind:value={formData.partnerships.organization}
 						/>
 					</div>
 					<div class="field">
-						<input type="text" id="part-subject" name="subject" required placeholder="Subject" />
+						<input
+							type="text"
+							id="part-subject"
+							name="subject"
+							required
+							placeholder="Subject"
+							bind:value={formData.partnerships.subject}
+						/>
 					</div>
 					<div class="field">
 						<textarea
@@ -168,6 +286,7 @@
 							name="message"
 							required
 							placeholder="How would you like to partner with us?"
+							bind:value={formData.partnerships.message}
 						></textarea>
 					</div>
 					<button type="submit" disabled={loading}>
@@ -183,16 +302,40 @@
 				</p>
 				<form method="POST" action="?/feedback" use:enhance={handleEnhance}>
 					<div class="field">
-						<input type="text" id="fb-name" name="name" placeholder="Full Name (Optional)" />
+						<input
+							type="text"
+							id="fb-name"
+							name="name"
+							placeholder="Full Name (Optional)"
+							bind:value={formData.feedback.name}
+						/>
 					</div>
 					<div class="field">
-						<input type="email" id="fb-email" name="email" placeholder="Email (Optional)" />
+						<input
+							type="email"
+							id="fb-email"
+							name="email"
+							placeholder="Email (Optional)"
+							bind:value={formData.feedback.email}
+						/>
 					</div>
 					<div class="field">
-						<input type="text" id="fb-subject" name="subject" required placeholder="Subject" />
+						<input
+							type="text"
+							id="fb-subject"
+							name="subject"
+							required
+							placeholder="Subject"
+							bind:value={formData.feedback.subject}
+						/>
 					</div>
 					<div class="field">
-						<textarea id="fb-message" name="message" required placeholder="Your Feedback"
+						<textarea
+							id="fb-message"
+							name="message"
+							required
+							placeholder="Your Feedback"
+							bind:value={formData.feedback.message}
 						></textarea>
 					</div>
 					<button type="submit" disabled={loading}>
