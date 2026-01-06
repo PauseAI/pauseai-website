@@ -1,9 +1,18 @@
 <script lang="ts">
 	import { enhance } from '$app/forms'
 	import { toast } from 'svelte-french-toast'
+	import { page } from '$app/stores'
+	import { onMount } from 'svelte'
 
 	let activeTab: 'standard' | 'media' = 'standard'
 	let loading = false
+
+	onMount(() => {
+		const tab = $page.url.searchParams.get('tab')
+		if (tab === 'media') {
+			activeTab = 'media'
+		}
+	})
 
 	function handleEnhance() {
 		loading = true
