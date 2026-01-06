@@ -65,6 +65,11 @@
 					></b
 				>
 			</Banner>
+		{:else if false}
+			<Banner contrast={hero} target="/littlehelpers">
+				<strong>🎄 Holiday Matching Campaign!</strong> Help fund volunteer stipends for PauseAI
+				advocates. <Link href="/littlehelpers">Join the Little Helpers campaign →</Link>
+			</Banner>
 		{/if}
 	{/if}
 {/if}
