@@ -21,7 +21,13 @@
 
 	function handleEnhance() {
 		loading = true
-		return async ({ result, update }: { result: any; update: () => Promise<void> }) => {
+		return async ({
+			result,
+			update
+		}: {
+			result: import('@sveltejs/kit').ActionResult
+			update: () => Promise<void>
+		}) => {
 			loading = false
 			if (result.type === 'success') {
 				toast.success('Thank you for your message. We will get back to you soon.')

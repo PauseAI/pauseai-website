@@ -51,23 +51,23 @@ async function sendContactEmail(data: {
 		)
 
 	try {
-		const response = await mailersend.email.send(emailParams)
+		await mailersend.email.send(emailParams)
 		return { success: true }
-	} catch (error: any) {
+	} catch (error: unknown) {
 		console.error('MailerSend Error:', JSON.stringify(error, null, 2))
 
 		// Extract specific error message if available from MailerSend
 		let errorMessage = 'Failed to send email. Please try again later.'
-		if (error.body?.message) {
-			errorMessage = error.body.message.replace('reply to.email', 'email')
-		} else if (error.message) {
-			errorMessage = error.message.replace('reply to.email', 'email')
+		const err = error as { body?: { message?: string }; message?: string }
+		if (err.body?.message) {
+			errorMessage = err.body.message.replace('reply to.email', 'email')
+		} else if (err.message) {
+			errorMessage = err.message.replace('reply to.email', 'email')
 		}
 
 		return { success: false, message: errorMessage }
 	}
 }
-
 export const actions: Actions = {
 	standard: async ({ request }) => {
 		const data = await request.formData()
