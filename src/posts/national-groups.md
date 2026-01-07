@@ -34,7 +34,7 @@ _Focus: Connect with Global, define your vision, assign roles_
 
 ### **Connect with PauseAI Global**
 
-**Email the maxime@pauseai.info** to express interest in starting a chapter.
+**Email maxime@pauseai.info** to express interest in starting a chapter.
 
 We will:
 
@@ -175,7 +175,6 @@ If you're not keen to go this far, our [local communities](https://pauseai.info/
 1. Strategic Meeting - Core leadership plans and coordinates. Notes shared with Global.
 
 - Every month, National Chapter leaders meet with our Organizing Director to discuss their goals and progress and coordinate with other Chapters around key events.
-- Every two weeks, National Chapter leaders meet virtually.
 
 2. Growth Goal - Active recruitment via[ https://pauseai.info/join](https://pauseai.info/join) or national page
 
