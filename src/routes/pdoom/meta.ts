@@ -1,8 +1,9 @@
 import type { Post } from '$lib/types'
 
 export const meta: Post = {
-	title: 'List of p(doom) values',
-	description: 'How likely do AI various researchers believe AI will cause human extinction?',
+	title: 'Lista de valores de p(doom)',
+	description:
+		'¿Qué probabilidad creen varias figuras importantes e investigadores que la IA causará la extinción humana?',
 	date: '2023-12-18',
 	slug: 'pdoom',
 	categories: []
