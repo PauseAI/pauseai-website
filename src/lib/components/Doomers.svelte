@@ -205,7 +205,7 @@
 		{
 			name: 'Roman Yampolskiy',
 			title: 'Científico de seguridad de IA',
-			probability: '99.999999%',
+			probability: '99.99%',
 			number: 0.99999999,
 			source: 'https://twitter.com/romanyam/status/1767575356155027503'
 		}
