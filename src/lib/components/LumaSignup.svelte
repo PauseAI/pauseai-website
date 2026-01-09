@@ -1,4 +1,5 @@
 <script lang="ts">
+	import Link from '$lib/components/Link.svelte'
 	const BASE_URL = 'https://lu.ma'
 	const EMBED_BASE_URL = 'https://embed.lu.ma'
 
@@ -10,14 +11,14 @@
 </svelte:head>
 
 <div>
-	<a
+	<Link
 		href={BASE_URL + '/event/' + eventId}
 		class="luma-checkout--button"
 		data-luma-action="checkout"
 		data-luma-event-id={eventId}
 	>
 		<slot />
-	</a>
+	</Link>
 </div>
 
 <style>

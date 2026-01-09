@@ -3,10 +3,7 @@
 	import Navlink from '$lib/components/navbar/Navlink.svelte'
 	import LanguageSwitcher from '$lib/components/LanguageSwitcher.svelte'
 	import * as m from '$lib/paraglide/messages.js'
-	import { botName } from '$lib/config'
 	import SearchIcon from 'lucide-svelte/icons/search'
-
-	const enableBot = false
 
 	export let inverted = false
 	export let moveUp = false

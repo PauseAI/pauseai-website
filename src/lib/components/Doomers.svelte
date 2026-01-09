@@ -1,4 +1,5 @@
 <script lang="ts">
+	import LinkWithoutIcon from '$lib/components/LinkWithoutIcon.svelte'
 	type Doomer = {
 		name: string
 		title?: string
@@ -216,11 +217,11 @@
 	{#each doomers as doomer (doomer.name)}
 		<li class="doomer">
 			<div class="pdoom">
-				<a href={doomer.source}>
+				<LinkWithoutIcon href={doomer.source}>
 					<b>
 						{doomer.probability}
 					</b>
-				</a>
+				</LinkWithoutIcon>
 			</div>
 			<div class="details">
 				<h3 class="name">
@@ -296,7 +297,7 @@
 		flex-shrink: 0;
 	}
 
-	.pdoom a {
+	.pdoom :global(a) {
 		color: var(--brand);
 		text-decoration: none;
 	}
@@ -310,11 +311,11 @@
 		margin: 0;
 	}
 
-	.doomer a {
+	.doomer :global(a) {
 		text-decoration: none;
 	}
 
-	.doomer a:hover {
+	.doomer :global(a:hover) {
 		text-decoration: underline;
 	}
 </style>
