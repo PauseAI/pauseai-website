@@ -10,7 +10,7 @@ const FALLBACK_NATIONAL_GROUPS: AirtableRecord<AirtableNationalGroup>[] = [
 	{
 		id: 'fallback-stub1',
 		fields: {
-			Name: '[FALLBACK DATA] Example Group 1',
+			Name: 'United States',
 			Notes: 'This is placeholder data shown when Airtable API is unavailable',
 			Leader: ['Fall McBack'],
 			onboarding_email: 'fall.mcback@example.com',
@@ -31,7 +31,28 @@ const FALLBACK_NATIONAL_GROUPS: AirtableRecord<AirtableNationalGroup>[] = [
 	{
 		id: 'fallback-stub2',
 		fields: {
-			Name: '[FALLBACK DATA] Example Group 2',
+			Name: 'Nederland',
+			Notes: 'etc',
+			Leader: ['etc'],
+			onboarding_email: '',
+			'Legal entity': 'Yes',
+			X: '',
+			Discord: '',
+			Whatsapp: '',
+			website: '',
+			linktree: '',
+			instagram: '',
+			tiktok: '',
+			Facebook: '',
+			youtube: '',
+			linkedin: '',
+			luma: ''
+		}
+	},
+	{
+		id: 'fallback-stub3',
+		fields: {
+			Name: 'United Kingdom',
 			Notes: 'etc',
 			Leader: ['etc'],
 			onboarding_email: '',
