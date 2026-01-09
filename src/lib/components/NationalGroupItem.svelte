@@ -187,7 +187,7 @@
 
 	/* Override color for links */
 	:global(a.section-title) {
-		color: var(--primary) !important;
+		color: var(--brand) !important;
 		text-decoration: none;
 	}
 
@@ -203,7 +203,7 @@
 	}
 
 	:global(.link-item) {
-		color: var(--primary) !important;
+		color: var(--brand) !important;
 		text-decoration: none;
 	}
 
