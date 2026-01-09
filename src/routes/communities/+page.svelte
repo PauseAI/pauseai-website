@@ -149,7 +149,7 @@
 	>.
 </p>
 
-<h2>Events</h2>
+<h2 id="events">Events</h2>
 
 <p>Interested in attending a PauseAI community event? Find one below.</p>
 
