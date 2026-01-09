@@ -1,6 +1,5 @@
 <script>
 	import PayPal from '$assets/PayPal.svg?url'
-	import Link from '$lib/components/Link.svelte'
 
 	const WIDTH = 256
 	const ASPECT_RATIO = 45.67 / 11.69 // from viewBox property
@@ -9,9 +8,9 @@
 </script>
 
 <div>
-	<Link href="https://www.paypal.com/donate/?hosted_button_id=4TWZXY62EM5VE">
+	<a href="https://www.paypal.com/donate/?hosted_button_id=4TWZXY62EM5VE">
 		<img src={PayPal} alt="Donate now" width="256" {height} />
-	</Link>
+	</a>
 </div>
 
 <style>
@@ -20,15 +19,15 @@
 		justify-content: center;
 	}
 
-	:global(a) {
+	a {
 		transition: 0.1s;
 	}
 
-	:global(a:hover) {
+	a:hover {
 		transform: scale(1.05);
 	}
 
-	:global(a:active) {
+	a:active {
 		opacity: 0.9;
 	}
 </style>
