@@ -127,8 +127,8 @@
 
 <h1>{title}</h1>
 <p>
-	PauseAI Global has chapters and local communities across the world. These communities are groups
-	of individuals that care about the future and agree a <Link href="/proposal"
+	PauseAI Global has chapters and communities across the world. These communities are groups of
+	individuals that care about the future and agree a <Link href="/proposal"
 		>pause is the solution</Link
 	>. They work together to educate members of the public and their political representatives about
 	the <Link href="/risks">risks</Link>.

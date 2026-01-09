@@ -27,7 +27,7 @@
 		}
 	})
 
-	// Group local communities by their country/national community
+	// Group communities by their country/national community
 	const groupedCommunities = communities
 		.filter((community) => community.type === 'local')
 		.reduce(

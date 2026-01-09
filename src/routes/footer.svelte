@@ -11,20 +11,6 @@
 	<div class="joinbar">
 		<Link class="c2a" href="/join">{m.footer_join()}</Link>
 		<div class="socials">
-			<Socials />
-		</div>
-	</div>
-	<div class="bar" />
-	<div class="footer-links">
-		<div class="column">
-			<h2>{m.footer_info()}</h2>
-			<Link href="/about">{m.footer_info_about()}</Link>
-			<Link href="/faq">{m.footer_info_faq()}</Link>
-			<Link href="/proposal">{m.footer_info_proposal()}</Link>
-			<Link href="/learn">{m.footer_info_learn()}</Link>
-			<Link href="/press">{m.footer_info_press()}</Link>
-			<Link href="/teams">{m.footer_info_teams()}</Link>
-			<Link href="/partnerships">{m.footer_info_partnerships()}</Link>
 			<Link href="/privacy">{m.footer_info_privacy()}</Link>
 			<Link href="/legal"
 				>{m.footer_info_legal()} <br />
@@ -42,25 +28,6 @@
 			<Link href="/cybersecurity-risks">{m.footer_risks_cybersecurity()}</Link>
 			<Link href="/dangerous-capabilities">{m.footer_risks_capabilities()}</Link>
 			<Link href="/sota">{m.footer_risks_sota()}</Link>
-			<Link href="/urgency">{m.footer_risks_urgency()}</Link>
-		</div>
-		<div class="column">
-			<h2>{m.footer_action()}</h2>
-			<Link href="/join">{m.footer_action_join()}</Link>
-			<Link href="/action">{m.footer_action_help()}</Link>
-			<Link href="/communities">{m.footer_action_communities()}</Link>
-			<Link href="donate">{m.footer_action_donate()}</Link>
-			<Link href="https://pauseai-shop.fourthwall.com" target="_blank"
-				>{m.footer_action_merchandise()}</Link
-			>
-			<Link href="/events">{m.footer_action_events()}</Link>
-			<Link href="/vacancies">{m.footer_action_vacancies()}</Link>
-			<Link href="/email-builder">{m.footer_action_email()}</Link>
-			<Link href="/lobby-tips">{m.footer_action_lobby()}</Link>
-		</div>
-		<div class="column">
-			<h2>{m.footer_other()}</h2>
-			<Toggle />
 			<WithdrawWidgetConsent />
 			<Edit />
 			<Link href="/posts">{m.footer_other_pages()}</Link>
