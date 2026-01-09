@@ -21,10 +21,6 @@
 
 	onMount(async () => {
 		nationalGroups = await loadNationalGroups()
-		console.log('DEBUG: Real Data Loaded:', nationalGroups)
-		if (nationalGroups.length > 0) {
-			console.log('DEBUG: Sample Group:', nationalGroups[0].name, nationalGroups[0].image)
-		}
 	})
 
 	// Group communities by their country/national community

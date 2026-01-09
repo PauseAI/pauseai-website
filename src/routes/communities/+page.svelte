@@ -27,8 +27,6 @@
 	lat = 42.213995
 	zoom = 1
 
-	console.log('communities page.svelte', communities)
-
 	function updateData() {
 		zoom = map.getZoom()
 		lng = map.getCenter().lng
