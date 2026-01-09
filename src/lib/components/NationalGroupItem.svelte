@@ -3,27 +3,41 @@
 	import { typedEntries } from '$lib/utils'
 	import LinkWithoutIcon from '$lib/components/LinkWithoutIcon.svelte'
 
+	// Custom icons
+	import TikTok from '$lib/components/icons/tiktok.svelte'
+	import Instagram from '$lib/components/icons/instagram.svelte'
+	import Facebook from '$lib/components/icons/facebook.svelte'
+	import Youtube from '$lib/components/icons/youtube.svelte'
+	import Discord from '$lib/components/icons/discord.svelte'
+	import Linkedin from '$lib/components/icons/linkedin.svelte'
+	import X from '$lib/components/icons/x.svelte'
+	import Substack from '$lib/components/icons/substack.svelte'
+	import Whatsapp from '$lib/components/icons/whatsapp.svelte'
+
+	// Lucide icons for missing ones
+	import { Globe, Link, Calendar, Mail } from 'lucide-svelte'
+
 	export let nationalGroup: NationalGroup
 
 	const baseImagePath = '/images/'
 	const imageUrl = nationalGroup.image || `${baseImagePath}default.png` // Directly use nationalGroup.image or default
 
-	const nationalGroupLinkNames: Record<NationalGroupLink, string> = {
-		website: 'Website',
-		linktreeLink: 'Linktree',
-		instagramLink: 'Instagram',
-		tiktokLink: 'TikTok',
-		xLink: 'X',
-		discordLink: 'Discord',
-		whatsappLink: 'WhatsApp',
-		facebookLink: 'Facebook',
-		youtubeLink: 'YouTube',
-		linkedinLink: 'LinkedIn',
-		lumaLink: 'Luma',
-		substackLink: 'Substack'
+	const iconMap: Record<NationalGroupLink, any> = {
+		website: Globe,
+		linktreeLink: Link,
+		instagramLink: Instagram,
+		tiktokLink: TikTok,
+		xLink: X,
+		discordLink: Discord,
+		whatsappLink: Whatsapp,
+		facebookLink: Facebook,
+		youtubeLink: Youtube,
+		linkedinLink: Linkedin,
+		lumaLink: Calendar,
+		substackLink: Substack
 	}
 
-	const linkEntries = typedEntries(nationalGroupLinkNames)
+	const linkEntries = typedEntries(iconMap)
 
 	let isOpen = false
 
@@ -63,16 +77,16 @@
 		<div class="details-wrapper" on:click|stopPropagation>
 			{#if linkEntries.some(([key]) => nationalGroup[key])}
 				<div class="section">
-					<div class="list">
-						{#each linkEntries as [key, name]}
+					<div class="list-row">
+						{#each linkEntries as [key, Icon]}
 							{#if nationalGroup[key]}
 								<LinkWithoutIcon
 									href={nationalGroup[key]}
 									target="_blank"
 									rel="noopener noreferrer"
-									class="link-item"
+									class="link-item icon-link"
 								>
-									{name}
+									<Icon />
 								</LinkWithoutIcon>
 							{/if}
 						{/each}
@@ -84,6 +98,10 @@
 				<div class="section">
 					{#if nationalGroup.email}
 						<LinkWithoutIcon href="mailto:{nationalGroup.email}" class="section-title link">
+							<Mail
+								size={16}
+								style="margin-right: 0.25rem; display: inline-block; vertical-align: middle;"
+							/>
 							Leaders:
 						</LinkWithoutIcon>
 					{:else}
@@ -183,6 +201,8 @@
 		font-size: 0.9rem;
 		/* Default color for non-links */
 		color: var(--text-2);
+		display: flex;
+		align-items: center;
 	}
 
 	/* Override color for links */
@@ -202,12 +222,48 @@
 		font-size: 0.95rem;
 	}
 
+	.list-row {
+		display: flex;
+		flex-direction: row;
+		flex-wrap: wrap;
+		gap: 0.75rem;
+		align-items: center;
+	}
+
 	:global(.link-item) {
 		color: var(--brand) !important;
 		text-decoration: none;
+		display: flex;
+		align-items: center;
 	}
 
 	:global(.link-item:hover) {
-		text-decoration: underline;
+		opacity: 0.8;
+	}
+
+	:global(.icon-link) {
+		padding: 0.25rem;
+		border-radius: 4px;
+		transition: background-color 0.2s;
+	}
+
+	:global(.icon-link:hover) {
+		background-color: var(--bg-3);
+	}
+
+	/* Icon sizing and coloring */
+	:global(.icon-link svg) {
+		width: 20px;
+		height: 20px;
+	}
+
+	/* Custom icons use fill */
+	:global(.icon-link svg:not([class*='lucide'])) {
+		fill: currentColor;
+	}
+
+	/* Lucide icons use stroke, fill is usually none by default */
+	:global(.icon-link svg[class*='lucide']) {
+		stroke: currentColor;
 	}
 </style>
