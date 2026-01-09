@@ -53,7 +53,7 @@
 			<Link href="https://pauseai-shop.fourthwall.com" target="_blank"
 				>{m.footer_action_merchandise()}</Link
 			>
-			<Link href="/join#vacancies">{m.footer_action_vacancies()}</Link>
+			<Link href="/vacancies">{m.footer_action_vacancies()}</Link>
 			<Link href="/email-builder">{m.footer_action_email()}</Link>
 			<Link href="/lobby-tips">{m.footer_action_lobby()}</Link>
 		</div>
