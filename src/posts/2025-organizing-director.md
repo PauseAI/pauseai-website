@@ -23,7 +23,7 @@ You will be responsible to the PauseAI Global CEO.
 - Campaign Coordination and Project Management: Plan and execute international campaigns, demonstrations and advocacy efforts.
 - Chapter Development : Establish, support and manage national PauseAI groups.
 - Strategic Partnerships: Build productive and collaborative relationships with other AI safety organisations, academic institutions, and policy groups.
-- Fundraising: Secure grants and donations to continue supporting PauseAI Globals work.
+- Fundraising: Secure grants and donations to continue supporting PauseAI Global's work.
 - Resource Design and Creation: Designing training materials and organizing resources for volunteers, including those necessary to take collective action.
 - Mentorship, Facilitation and Training: Train and mentor volunteer leaders and the National Lead Organizers. Facilitation of training events, such as PauseCons, as well as online trainings.
 

@@ -3,71 +3,48 @@ import { json } from '@sveltejs/kit'
 import { fetchAllPages, type AirtableRecord } from '$lib/airtable.js'
 import { generateCacheControlRecord } from '$lib/utils'
 
-const AIRTABLE_URL = 'https://api.airtable.com/v0/appWPTGqZmUcs3NWu/tblCwP5K6ENpR5qrd'
+const AIRTABLE_URL = 'https://api.airtable.com/v0/appWPTGqZmUcs3NWu/tblEQJ26hxBAEkaP8'
 
 // Fallback data to use in development if Airtable fetch fails
 const FALLBACK_NATIONAL_GROUPS: AirtableRecord<AirtableNationalGroup>[] = [
 	{
 		id: 'fallback-stub1',
 		fields: {
-			Name: 'United States',
-			Notes: 'This is placeholder data shown when Airtable API is unavailable',
-			Leader: ['Fall McBack'],
-			onboarding_email: 'fall.mcback@example.com',
-			'Legal entity': 'No',
-			X: '',
-			Discord: '',
-			Whatsapp: '',
+			country: '[FALLBACK DATA] Example Group 1',
+			leaders_name: ['Fall McBack'],
+			website_email: 'fall.mcback@example.com',
+			x: '',
+			discord: '',
+			whatsapp: '',
 			website: 'http://example.com',
 			linktree: '',
 			instagram: '',
 			tiktok: '',
-			Facebook: '',
+			facebook: '',
 			youtube: '',
 			linkedin: '',
-			luma: ''
+			luma: '',
+			substack: ''
 		}
 	},
 	{
 		id: 'fallback-stub2',
 		fields: {
-			Name: 'Nederland',
-			Notes: 'etc',
-			Leader: ['etc'],
-			onboarding_email: '',
-			'Legal entity': 'Yes',
-			X: '',
-			Discord: '',
-			Whatsapp: '',
+			country: '[FALLBACK DATA] Example Group 2',
+			leaders_name: ['etc'],
+			website_email: '',
+			x: '',
+			discord: '',
+			whatsapp: '',
 			website: '',
 			linktree: '',
 			instagram: '',
 			tiktok: '',
-			Facebook: '',
+			facebook: '',
 			youtube: '',
 			linkedin: '',
-			luma: ''
-		}
-	},
-	{
-		id: 'fallback-stub3',
-		fields: {
-			Name: 'United Kingdom',
-			Notes: 'etc',
-			Leader: ['etc'],
-			onboarding_email: '',
-			'Legal entity': 'Yes',
-			X: '',
-			Discord: '',
-			Whatsapp: '',
-			website: '',
-			linktree: '',
-			instagram: '',
-			tiktok: '',
-			Facebook: '',
-			youtube: '',
-			linkedin: '',
-			luma: ''
+			luma: '',
+			substack: ''
 		}
 	}
 ]
@@ -78,43 +55,41 @@ const FALLBACK_NATIONAL_GROUPS: AirtableRecord<AirtableNationalGroup>[] = [
 function recordToNationalGroup(record: AirtableRecord<AirtableNationalGroup>): NationalGroup {
 	// Only log in development to avoid cluttering production logs
 	if (import.meta.env.DEV) {
-		console.log(
-			'Record fields for',
-			record.fields.Name,
-			':',
-			JSON.stringify(record.fields, null, 2)
-		)
 		if (record.fields.image?.[0]?.url) {
-			console.log('🖼️ Airtable Image URL for', record.fields.Name, ':', record.fields.image[0].url)
+			console.log(
+				'🖼️ Airtable Image URL for',
+				record.fields.country,
+				':',
+				record.fields.image[0].url
+			)
 		}
+	}
+
+	let leaderNames = 'No'
+	if (record.fields.leaders_name && record.fields.leaders_name.length > 0) {
+		leaderNames = record.fields.leaders_name.join(', ')
 	}
 
 	return {
 		id: record.id || 'noId',
-		name: record.fields.Name || '',
-		notes: record.fields.Notes || '',
-		// Use leader_name if available, otherwise just indicate if Leader exists
-		leader: record.fields.leader_name
-			? record.fields.leader_name[0]
-			: record.fields.Leader
-				? 'Yes'
-				: 'No',
+		name: record.fields.country || '',
+		leader: leaderNames,
 		// The discord_username field name may vary
 		// Include email if available
-		email: record.fields.onboarding_email ? record.fields.onboarding_email : '',
-		legalEntity: record.fields['Legal entity'] === 'Yes',
-		xLink: record.fields.X || '',
-		discordLink: record.fields.Discord || '',
-		whatsappLink: record.fields.Whatsapp || '',
+		email: record.fields.website_email ? record.fields.website_email : '',
+		xLink: record.fields.x || '',
+		discordLink: record.fields.discord || '',
+		whatsappLink: record.fields.whatsapp || '',
 		website: record.fields.website || '',
 		linktreeLink: record.fields.linktree || '',
 		// Add Instagram and TikTok links
 		instagramLink: record.fields.instagram || '',
 		tiktokLink: record.fields.tiktok || '',
-		facebookLink: record.fields.Facebook || '',
+		facebookLink: record.fields.facebook || '',
 		youtubeLink: record.fields.youtube || '',
 		linkedinLink: record.fields.linkedin || '',
 		lumaLink: record.fields.luma || '',
+		substackLink: record.fields.substack || '',
 		public: true, // Assuming all records are public by default
 		image: record.fields.image?.[0]?.url || undefined // Use direct URL for national groups images
 	}

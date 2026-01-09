@@ -34,7 +34,7 @@ _Focus: Connect with Global, define your vision, assign roles_
 
 ### **Connect with PauseAI Global**
 
-**Email the Organizing Director** at ella@pauseai.info to express interest in starting a chapter.
+**Email maxime@pauseai.info** to express interest in starting a chapter.
 
 We will:
 

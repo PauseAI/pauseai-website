@@ -74,7 +74,7 @@ description: Sign up to join the PauseAI movement
 
 This is our nuclear moment.
 Rapid AI advancement represents one of history's most consequential and dangerous technological shifts.
-We demand politicians and companies pause AGI development until international safety agreements are established.
+We demand that politicians and companies pause AGI development until international safety agreements are established.
 Join our global network standing for democratic oversight of AI.
 
 PauseAI Global unites concerned citizens—scientists, parents, students, workers, and community leaders—who believe transformative technologies require public input before they progress beyond human control.
@@ -83,14 +83,14 @@ After signing up, join our onboarding session online or locally to learn about c
 
 <TallyEmbed formId="wbGvKe" />
 
-## After singing up
+## After signing up
 
 Join one of our Member Community Welcome Meetings, or a local social event to find out more about PauseAI’s community: [Events](/events).
 If you want to get kick-started into action straight away, check out our [list of them](/action).
 
 ## Volunteer Vacancies
 
-One of the ways you can get involved conistently as a volunteer is by joining one of our Digital teams - Onboarding, Communications and Software. The roles below cover some of our core functions and by getting involved you can help us grow our reach, retain our volunteers or build the tools we need to win.
+One of the ways you can get involved consistently as a volunteer is by joining one of our Digital teams - Onboarding, Communications and Software. The roles below cover some of our core functions and by getting involved, you can help us grow our reach, retain our volunteers or build the tools we need to win.
 
 - We work in [teams](/teams)
 - We collaborate mostly on our [Discord server](/discord)
@@ -142,7 +142,7 @@ Interested? [Email Ella](mailto:ella@pauseai.info)
 - Duration: 3 months
 - Time Commitment: 2-5 hours per week
 - Responsibilities:
-  - Contacting key influencers and media contacts as a representative of PauseAI Global to secure pocast or video slots for CEO and National Directors.
+  - Contacting key influencers and media contacts as a representative of PauseAI Global to secure podcast or video slots for CEO and National Directors.
 
 - Key Skills:
   - Strong written skills, ability to capture PauseAI tone and simply persuasively.
