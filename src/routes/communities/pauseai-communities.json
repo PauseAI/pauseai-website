@@ -5,7 +5,7 @@
 			"lat": 52.09073739999999,
 			"lon": 5.081420100000023,
 			"link": "$$DISCORD_GLOBAL$$",
-			"parent_name": "Nederland"
+			"parent_name": "Netherlands"
 		},
 		{
 			"name": "Nottingham",
@@ -19,7 +19,7 @@
 			"lat": 53.1412,
 			"lon": 8.2146,
 			"link": "$$DISCORD_GLOBAL$$",
-			"parent_name": "Deutschland"
+			"parent_name": "Germany"
 		},
 		{
 			"name": "Edinburgh",
@@ -87,7 +87,7 @@
 			"lat": 59.3293,
 			"lon": 18.0686,
 			"link": "$$DISCORD_GLOBAL$$",
-			"parent_name": "Sverige"
+			"parent_name": "Sweden"
 		},
 		{
 			"name": "Marseille",
@@ -119,7 +119,7 @@
 			"lat": 52.52,
 			"lon": 13.405,
 			"link": "https://t.me/+12wemb6BZuQyNjVi",
-			"parent_name": "Deutschland"
+			"parent_name": "Germany"
 		},
 		{
 			"name": "Rome",
@@ -139,14 +139,14 @@
 			"lat": 52.378,
 			"lon": 4.8971,
 			"link": "https://chat.whatsapp.com/EOGvhoPCiCqDqwuf9JUxtB",
-			"parent_name": "Nederland"
+			"parent_name": "Netherlands"
 		},
 		{
 			"name": "Munich",
 			"lat": 48.1372,
 			"lon": 11.5761,
 			"link": "$$DISCORD_GERMANY$$",
-			"parent_name": "Deutschland"
+			"parent_name": "Germany"
 		},
 		{
 			"name": "Cambridge",
@@ -166,14 +166,14 @@
 			"lat": 54.5168,
 			"lon": 18.5419,
 			"link": "$$DISCORD_GLOBAL$$",
-			"parent_name": "Polska"
+			"parent_name": "Poland"
 		},
 		{
 			"name": "Madrid",
 			"lat": 40.4168,
 			"lon": -3.7038,
 			"link": "$$DISCORD_GLOBAL$$",
-			"parent_name": "España"
+			"parent_name": "Spain"
 		},
 		{
 			"name": "Blackpool",
@@ -201,7 +201,7 @@
 			"lat": 53.5511,
 			"lon": 9.9937,
 			"link": "$$DISCORD_GERMANY$$",
-			"parent_name": "Deutschland"
+			"parent_name": "Germany"
 		},
 		{
 			"name": "Zurich",
@@ -214,7 +214,7 @@
 			"lat": 52.2681,
 			"lon": 8.0566,
 			"link": "$$DISCORD_GERMANY$$",
-			"parent_name": "Deutschland"
+			"parent_name": "Germany"
 		},
 		{
 			"name": "Milan",
@@ -227,7 +227,7 @@
 			"lat": 50.0647,
 			"lon": 19.945,
 			"link": "$$DISCORD_GLOBAL$$",
-			"parent_name": "Polska"
+			"parent_name": "Poland"
 		},
 		{
 			"name": "Yaoundé",
@@ -283,21 +283,21 @@
 			"lat": 51.4872,
 			"lon": 11.9656,
 			"link": "https://t.me/+tobhhF27liwyMjhi",
-			"parent_name": "Deutschland"
+			"parent_name": "Germany"
 		},
 		{
 			"name": "Munster",
 			"lat": 51.9612,
 			"lon": 7.6282,
 			"link": "$$DISCORD_GERMANY$$",
-			"parent_name": "Deutschland"
+			"parent_name": "Germany"
 		},
 		{
 			"name": "Freiburg",
 			"lat": 48,
 			"lon": 7.8333,
 			"link": "$$DISCORD_GLOBAL$$",
-			"parent_name": "Deutschland"
+			"parent_name": "Germany"
 		},
 		{
 			"name": "Canberra",
@@ -324,7 +324,7 @@
 			"lat": 54.18,
 			"lon": 12.08,
 			"link": "$$DISCORD_GLOBAL$$",
-			"parent_name": "Deutschland"
+			"parent_name": "Germany"
 		},
 		{
 			"name": "Manila",

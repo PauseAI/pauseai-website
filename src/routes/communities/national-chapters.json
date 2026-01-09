@@ -1,13 +1,15 @@
 {
 	"communities": [
 		{
-			"name": "Nederland",
+			"name": "Netherlands",
+			"country_local": "Nederland",
 			"lat": 52,
 			"lon": 5.6,
 			"link": "https://chat.whatsapp.com/EOGvhoPCiCqDqwuf9JUxtB"
 		},
 		{
-			"name": "Srbija",
+			"name": "Serbia",
+			"country_local": "Srbija",
 			"lat": 44,
 			"lon": 21,
 			"link": "https://www.facebook.com/PauseAISerbia"
@@ -31,7 +33,8 @@
 			"link": "https://pauseai.ca/"
 		},
 		{
-			"name": "România",
+			"name": "Romania",
+			"country_local": "România",
 			"lat": 44.5,
 			"lon": 26,
 			"link": "https://www.facebook.com/people/Pause-AI-Romania/61581783381263/?rdid=LfnCxIeWHG9TL4Bp&share_url=https%3A%2F%2Fwww.facebook.com%2Fshare%2F19yinn6qj4%2F"
@@ -43,7 +46,8 @@
 			"link": "https://x.com/Pauseaikenya"
 		},
 		{
-			"name": "España",
+			"name": "Spain",
+			"country_local": "España",
 			"lat": 41.3,
 			"lon": -4,
 			"link": "https://chat.whatsapp.com/KEgD22LEo6xEVvjH4fD8br"
@@ -55,7 +59,8 @@
 			"link": "https://www.facebook.com/groups/571590459293618/"
 		},
 		{
-			"name": "Deutschland",
+			"name": "Germany",
+			"country_local": "Deutschland",
 			"lat": 51.1,
 			"lon": 10,
 			"link": "$$DISCORD_GERMANY$$"
@@ -73,7 +78,8 @@
 			"link": "https://discord.gg/4rZ2nGZB3r"
 		},
 		{
-			"name": "Polska",
+			"name": "Poland",
+			"country_local": "Polska",
 			"lat": 52,
 			"lon": 19.5,
 			"link": "mailto:patryk@pauseai.info"
@@ -85,7 +91,8 @@
 			"link": "https://chat.whatsapp.com/L4o2IiOX1HI2GWQi0J9ZJv"
 		},
 		{
-			"name": "Sverige",
+			"name": "Sweden",
+			"country_local": "Sverige",
 			"lat": 65,
 			"lon": 17,
 			"link": "mailto:carl@pauseai.info"

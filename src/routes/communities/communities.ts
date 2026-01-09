@@ -13,6 +13,8 @@ type RawCommunity = {
 	lon: number
 	/** Will default to PauseAI Discord */
 	link: string
+	parent_name?: string
+	country_local?: string
 }
 
 export type Community = RawCommunity & {
@@ -39,10 +41,11 @@ const LINK_PLACEHOLDERS = {
 }
 
 const pauseAICommunities: Community[] = (
-	pauseAICommunitiesJson satisfies CommunitiesConfiguration
+	pauseAICommunitiesJson as CommunitiesConfiguration
 ).communities.map((c) => ({
 	...c,
 	type: 'local',
+	country_local: c.country_local,
 	country:
 		nationalChaptersJson.communities.find((n) => c.parent_name?.includes(n.name))?.name || undefined // Use undefined instead of null
 }))

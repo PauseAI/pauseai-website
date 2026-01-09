@@ -1,7 +1,16 @@
 <script lang="ts">
 	import type { Community } from './communities'
-	import Link from '$lib/components/Link.svelte'
 	import LinkWithoutIcon from '$lib/components/LinkWithoutIcon.svelte'
+	import { Globe, Mail } from 'lucide-svelte'
+	import Discord from '$lib/components/icons/discord.svelte'
+	import Whatsapp from '$lib/components/icons/whatsapp.svelte'
+	import Facebook from '$lib/components/icons/facebook.svelte'
+	import Instagram from '$lib/components/icons/instagram.svelte'
+	import X from '$lib/components/icons/x.svelte'
+	import Linkedin from '$lib/components/icons/linkedin.svelte'
+	import Youtube from '$lib/components/icons/youtube.svelte'
+	import TikTok from '$lib/components/icons/tiktok.svelte'
+	import Substack from '$lib/components/icons/substack.svelte'
 	import { onMount } from 'svelte'
 	import { loadNationalGroups } from '$lib/stores/nationalGroups'
 	import type { NationalGroup } from '$lib/types'
@@ -12,6 +21,10 @@
 
 	onMount(async () => {
 		nationalGroups = await loadNationalGroups()
+		console.log('DEBUG: Real Data Loaded:', nationalGroups)
+		if (nationalGroups.length > 0) {
+			console.log('DEBUG: Sample Group:', nationalGroups[0].name, nationalGroups[0].image)
+		}
 	})
 
 	// Group local communities by their country/national community
@@ -63,23 +76,23 @@
 		}
 		expandedCountries = newSet
 	}
-
-	function getCountryImage(countryName: string): string {
-		const group = nationalGroups.find((g) => g.name.toLowerCase() === countryName.toLowerCase())
-		return group?.image || '/images/default.png'
-	}
 </script>
 
 <div class="communities-container">
 	<div class="grid">
 		{#each sortedNationalities as nationality}
 			{@const localCommunities = groupedCommunities[nationality] || []}
-			{@const imageUrl = getCountryImage(nationality)}
+			{@const group = nationalGroups.find(
+				(g) => g.name.toLowerCase() === nationality.toLowerCase()
+			)}
+			{@const imageUrl = group?.image || '/images/default.png'}
+			{@const nationalChapter = nationalChapters.find((c) => c.name === nationality)}
 			<div class="country-card">
 				<button
 					class="country-header"
 					class:expanded={expandedCountries.has(nationality)}
 					class:has-communities={localCommunities.length > 0}
+					disabled={localCommunities.length === 0}
 					on:click={() => toggleCountry(nationality)}
 				>
 					<div class="icon" class:is-open={expandedCountries.has(nationality)}>
@@ -106,12 +119,42 @@
 					<div class="image-name-wrapper">
 						<img src={imageUrl} alt={nationality} class="country-image" />
 						<span class="country-name">
-							{#if nationalLinks[nationality]}
-								<Link href={nationalLinks[nationality]}>{nationality}</Link>
-							{:else}
-								{nationality}
-							{/if}
+							{nationalChapter?.country_local || nationality}
 						</span>
+						{#if nationalLinks[nationality]}
+							{@const link = nationalLinks[nationality]}
+							<LinkWithoutIcon
+								href={link}
+								class="social-link"
+								target="_blank"
+								rel="noopener noreferrer"
+								on:click={(e) => e.stopPropagation()}
+							>
+								{#if link.includes('discord')}
+									<Discord />
+								{:else if link.includes('whatsapp')}
+									<Whatsapp />
+								{:else if link.includes('facebook')}
+									<Facebook />
+								{:else if link.includes('instagram')}
+									<Instagram />
+								{:else if link.includes('twitter') || link.includes('x.com')}
+									<X />
+								{:else if link.includes('linkedin')}
+									<Linkedin />
+								{:else if link.includes('youtube')}
+									<Youtube />
+								{:else if link.includes('tiktok')}
+									<TikTok />
+								{:else if link.includes('substack')}
+									<Substack />
+								{:else if link.includes('mailto:')}
+									<Mail size={18} />
+								{:else}
+									<Globe size={18} />
+								{/if}
+							</LinkWithoutIcon>
+						{/if}
 					</div>
 				</button>
 				{#if expandedCountries.has(nationality) && localCommunities.length > 0}
@@ -241,6 +284,38 @@
 
 	:global(.local-link:hover) {
 		text-decoration: underline;
+	}
+
+	:global(.social-link) {
+		display: flex;
+		align-items: center;
+		color: var(--text-2);
+		margin-left: auto;
+		padding: 0.25rem;
+		border-radius: 4px;
+		transition:
+			color 0.2s,
+			background-color 0.2s;
+	}
+
+	:global(.social-link:hover) {
+		color: var(--brand);
+		background-color: var(--bg-3);
+	}
+
+	:global(.social-link svg) {
+		width: 18px;
+		height: 18px;
+	}
+
+	/* Custom icons use fill */
+	:global(.social-link svg:not([class*='lucide'])) {
+		fill: currentColor;
+	}
+
+	/* Lucide icons use stroke */
+	:global(.social-link svg[class*='lucide']) {
+		stroke: currentColor;
 	}
 
 	@media (max-width: 768px) {
