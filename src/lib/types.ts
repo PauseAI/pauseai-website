@@ -74,36 +74,28 @@ export type NationalGroup = {
 	leader: string
 	email?: string
 	description?: string
-	notes?: string
 	image?: string
 	id: string
-	legalEntity?: boolean
 	public: boolean
 } & Record<NationalGroupLink, string | undefined>
 
 export type AirtableNationalGroup = {
-	Name?: string
-	Notes?: string
-	/** Airtable IDs */
-	Leader?: string[]
-	leader_name?: string[]
+	country?: string
+	leaders_name?: string[]
 	discord_username?: string[]
-	onboarding_email?: string
-	/** Interpreted as boolean ('Yes' => true) */
-	'Legal entity'?: string
-	/** Airtable IDs */
-	Overseer?: string[]
-	X?: string
-	Discord?: string
-	Whatsapp?: string
+	website_email?: string
+	x?: string
+	discord?: string
+	whatsapp?: string
 	website?: string
 	linktree?: string
 	instagram?: string
 	tiktok?: string
-	Facebook?: string
+	facebook?: string
 	youtube?: string
 	linkedin?: string
 	luma?: string
+	substack?: string
 	image?: { url: string }[]
 }
 
@@ -119,6 +111,7 @@ export type NationalGroupLink =
 	| 'youtubeLink'
 	| 'linkedinLink'
 	| 'lumaLink'
+	| 'substackLink'
 
 export type Picture = Exclude<EnhancedImgAttributes['src'], string>
 
