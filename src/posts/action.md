@@ -28,7 +28,7 @@ Choose an activity below depending on your interests or skills.
 
 - **Join or create a [local PauseAI community](/communities)**.
 - **Join the [Discord](https://discord.gg/T3YrWUJsJ5)**, where most of the collaboration happens.
-- **Protest or participate in [events](/events)**. If no protest is near you, consider [starting one](/organizing-a-protest).
+- **Protest or participate in [events](/communities#events)**. If no protest is near you, consider [starting one](/organizing-a-protest).
 - **Look over our [vacancies](/vacancies)** to see if any of your skills match our organizational needs. We're often looking for people with experience in social media, communications, organizing, outreach, and software. Some positions are compensated.
 - **[Sign up as a volunteer](/join)** so we can find projects in your interest areas.
 - **[Donate](/donate)** to PauseAI or buy some merchandise in our [store](https://pauseai-shop.fourthwall.com/).
