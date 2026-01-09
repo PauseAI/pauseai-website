@@ -93,7 +93,7 @@ We'll set you up with an official email address, help you add your social media 
 
 Make sure you send the info below to [patricio@pauseai.info](mailto:patricio@pauseai.info) to get started: 
 
-- The email address ending on @pauseai.info you want (usually [firstname@pauseai.info] or [fullname@pauseai.info]). You would be able to use this email for PauseAI related communications and access Google Drive files.
+- The email address ending on @pauseai.info you want (usually firstname@pauseai.info or fullname@pauseai.info). You would be able to use this email for PauseAI related communications and access Google Drive files.
 - The email address where you want to receive info about new people joining through <https://pauseai.info/join> from your country. Most people choose their @pauseai.info address.
 - (Optional) For <https://pauseai.info/national-groups>: any links to social media, internal chats, a website or an email address (if you want to link a different one than the one from the previous point). Also, which is the one you want linked in <https://pauseai.info/communities>.
 - (Optional) A head shot for <https://pauseai.info/about>.
