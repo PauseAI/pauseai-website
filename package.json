@@ -90,6 +90,7 @@
 		"html-to-image": "^1.11.13",
 		"http-status-codes": "^2.3.0",
 		"lucide-svelte": "^0.536.0",
+		"mailersend": "^2.6.0",
 		"maplibre-gl": "~5.10.0",
 		"maplibregl-mapbox-request-transformer": "^0.0.2",
 		"micromark": "^4.0.2",
