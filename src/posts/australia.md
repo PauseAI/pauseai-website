@@ -84,7 +84,7 @@ In September 2025, PauseAI Australia responded to the interim report on _Harness
 
 #### Investigate OpenAI
 
-[In July 2025](https://drive.google.com/file/d/1t9ntUlF2cZH4_f-1fsp0FFCf3RiGZ81g/view?usp=drive_link), volunteer Mark Brown brought OpenAI to the attention of the Australian Federal Police and the Attorney-General of Australia, alleging potential breaches of the _Crimes (Biological Weapons) Act 1976_. It was discussed in a [news story](https://ia.acs.org.au/article/2025/is-the-new-chatgpt-agent-really-a-weapons-risk-.html) and on [a video podcast](https://youtu.be/-YPhNdpA8Rk?si=dTBpGMfZaNWnldXa). We are still waiting for a response from the AFP and the Attorney-General.
+[In July 2025](https://drive.google.com/file/d/1t9ntUlF2cZH4_f-1fsp0FFCf3RiGZ81g/view?usp=drive_link), volunteer Mark Brown brought OpenAI to the attention of the Australian Federal Police and the Attorney-General of Australia, alleging potential breaches of the _Crimes (Biological Weapons) Act 1976_. It was discussed in a [news story](https://ia.acs.org.au/article/2025/is-the-new-chatgpt-agent-really-a-weapons-risk-.html) and on [a video podcast](https://youtu.be/-YPhNdpA8Rk). We are still waiting for a response from the AFP and the Attorney-General.
 
 #### Melbourne protest
 

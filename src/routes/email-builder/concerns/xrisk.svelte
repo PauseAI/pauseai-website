@@ -3,14 +3,14 @@
 		href="https://wiki.aiimpacts.org/ai_timelines/predictions_of_human-level_ai_timelines/ai_timeline_surveys/2023_expert_survey_on_progress_in_ai"
 		>believe</a
 	>
-	that there is a 10% or greater chance that the invention of artificial superintelligence will mean
-	the end of humanity. Among AI safety scientists, this chance is
+	that there is a 10% or greater chance that the invention of artificial superintelligence will mean the
+	end of humanity. Among AI safety scientists, this chance is
 	<a
 		href="https://forum.effectivealtruism.org/posts/8CM9vZ2nnQsWJNsHx/existential-risk-from-ai-survey-results"
 		>estimated</a
 	>
 	to be an average of 30%. Notable examples of individuals sounding the alarm are Prof.
-	<a href="https://youtu.be/Y6Sgp7y178k?si=OMDpZpCOsBiD7Z9R&t=489">Geoffrey Hinton</a>
+	<a href="https://youtu.be/Y6Sgp7y178k?t=489">Geoffrey Hinton</a>
 	and Prof.
 	<a href="https://yoshuabengio.org/2023/05/22/how-rogue-ais-may-arise/">Yoshua Bengio</a>, both
 	Turing-award winners and pioneers of the deep learning methods that are currently achieving the
