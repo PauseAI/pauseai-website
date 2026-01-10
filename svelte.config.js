@@ -54,6 +54,8 @@ const config = {
 		prerender: {
 			// Allows dead links to be rendered
 			handleHttpError: 'warn',
+			// Handle missing anchor IDs by warning instead of failing
+			handleMissingId: 'warn',
 			entries: ['*'].concat(settings.locales.map((locale) => '/' + locale))
 		}
 	}

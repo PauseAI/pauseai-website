@@ -54,16 +54,6 @@ const FALLBACK_NATIONAL_GROUPS: AirtableRecord<AirtableNationalGroup>[] = [
  */
 function recordToNationalGroup(record: AirtableRecord<AirtableNationalGroup>): NationalGroup {
 	// Only log in development to avoid cluttering production logs
-	if (import.meta.env.DEV) {
-		if (record.fields.image?.[0]?.url) {
-			console.log(
-				'🖼️ Airtable Image URL for',
-				record.fields.country,
-				':',
-				record.fields.image[0].url
-			)
-		}
-	}
 
 	let leaderNames = 'No'
 	if (record.fields.leaders_name && record.fields.leaders_name.length > 0) {

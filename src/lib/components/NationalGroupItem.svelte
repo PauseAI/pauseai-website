@@ -75,7 +75,7 @@
 	</div>
 
 	{#if isOpen}
-		<div class="details-wrapper" on:click|stopPropagation>
+		<div class="details-wrapper">
 			{#if linkEntries.some(([key]) => nationalGroup[key])}
 				<div class="section">
 					<div class="list-row">
