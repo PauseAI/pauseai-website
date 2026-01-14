@@ -3,7 +3,7 @@
 	import mashupMobile from '$assets/protests/mashup_mobile.jpg?enhanced'
 	import { onMount } from 'svelte'
 	import { emulateCqwIfNeeded } from '$lib/container-query-units'
-	import * as m from '$lib/paraglide/messages.js'
+
 	import Link from '$lib/components/Link.svelte'
 
 	let isMobile = false
@@ -87,6 +87,7 @@
 		width: 100vw;
 		left: 50%;
 		transform: translateX(-50%);
+		background-color: white;
 	}
 
 	.overlay {
