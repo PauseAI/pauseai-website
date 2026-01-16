@@ -35,7 +35,7 @@ content: `
 <li>Check out our <a href="https://microcommit.io/onboarding?org=135fcd8d-8116-44af-b885-14df992f9a8c">microcommit page</a> for weekly bite-sized actions</li>
 <li>Make a <a href="/donate">donation</a> or pick up some gear from our <a href="https://pauseai-shop.fourthwall.com/">store</a></li>
 <li>Follow our <a href="https://linktr.ee/pauseai">social media channels</a> to stay updated—your local PauseAI chapter may have dedicated pages too</li>
-<li>Sign the petitions: <a href="/statement">PauseAI petition</a>, <a href="https://superintelligence-statement.org/">Statement on Superintelligence</a>, <a href="https://aitreaty.org">International AI Treaty</a>, <a href="https://www.change.org/p/artificial-intelligence-time-is-running-out-for-responsible-ai-development-91f0a02c-130a-46e1-9e55-70d6b274f4df">Demand Responsible AI</a></li>
+<li>Sign the petitions: <a href="/statement">PauseAI Statement</a>, <a href="/sayno">Say No To Superintelligent AI</a>, <a href="https://superintelligence-statement.org/">Statement on Superintelligence</a>, <a href="https://aitreaty.org">International AI Treaty</a>, <a href="https://www.change.org/p/artificial-intelligence-time-is-running-out-for-responsible-ai-development-91f0a02c-130a-46e1-9e55-70d6b274f4df">Demand Responsible AI</a></li>
 </ul>
 	`
 },
@@ -56,13 +56,7 @@ content: `
 <h3>I have a few hours</h3>
 <p>Make your voice heard where it counts:</p>
 <ul>
-<li><strong>Write to your elected representatives</strong> using our email tools:
-	<ul>
-	<li><a href="/writing-a-letter">Writing a Letter</a></li>
-	<li><a href="/uk-email-mp">Emailing your UK MP</a></li>
-	<li><a href="/email-builder">Email Builder</a></li>
-	</ul>
-</li>
+<li><strong>Write to your elected representatives</strong> using our <a href="/email-builder">Email Builder</a></li>
 <li><strong>Call your politicians</strong>: Try calling legislators' offices while having a set of talking points in view so you stay on topic</li>
 <li>Follow up with a phone call, and when you secure a meeting, check out our <a href="/lobby-tips">lobby tips</a></li>
 <li>Take a deep dive into our <a href="/learn">educational materials</a> to build your knowledge</li>
