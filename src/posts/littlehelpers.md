@@ -9,15 +9,15 @@ description: Help fund volunteer stipends for PauseAI advocates working to addre
 
 ![PauseAI volunteers wearing Santa hats](/littlehelpers-banner.webp)
 
-Volunteers like Maxime, Raluca, and Mark are the heartbeat of PauseAI—from organizing protests in Paris to building chapters across four continents. This December, we're showcasing their work in daily videos.
+Volunteers like Maxime, Raluca, and Mark are the heartbeat of PauseAI—from organizing protests in Paris to building chapters across four continents.
 
 A €175/month stipend transforms a volunteer who can squeeze in a few hours on weekends into someone who can dedicate real time to this work. It's the difference between sending a few emails and leading a chapter, between attending one meeting and coordinating with policymakers.
 
-We're raising €21,000 to fund stipends for at least ten volunteers throughout 2026. Any funds beyond this goal will support volunteer microgrants.
+In December 2025, we showcased their work in videos - you'll find them on our social media channels, and with the help of generous donation matching we met our goal to raise €21,000 to fund stipends for at least ten volunteers throughout 2026.
 
-**Generous donors have pledged to match contributions through Christmas.**
+Thanks to all!
 
-Help us grow this movement. Give the gift of dedicated advocacy this holiday season—become a Little Helper yourself.
+[Although this campaign is over we continue to welcome your help!](/donate)
 
 <iframe
 	src="/api/donorbox-meter/pauseai-s-little-helpers"
@@ -26,10 +26,6 @@ Help us grow this movement. Give the gift of dedicated advocacy this holiday sea
 	style="max-width: 500px; min-width: 250px; min-height: 90px; border: none; display: block; margin: 2rem auto;"
 	title="Donation progress (with matching)"
 ></iframe>
-
-<DonorBoxEmbed campaignSlug="pauseai-s-little-helpers" />
-
-**Planning a larger contribution?** For donations of €1,000 or more, please [contact us](mailto:ella@pauseai.info) about IBAN transfers to minimize fees.
 
 ## Our Little Helpers
 
