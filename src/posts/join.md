@@ -155,16 +155,17 @@ Interested? [Email Ella](mailto:ella@pauseai.info)
 - Duration: 3 months
 - Time Commitment: 2-5 hours per week
 - Responsibilities:
-  - Fix bugs and build features for the PauseAI website.
-  - Advise and assist other teams on technology choices.
-  - Help keep our tools and infrastructure running smoothly.
+  - Build and maintain features for the PauseAI website and other parts of our technology stack (tooling etc.)
+  - Advise and assist other teams on technology choices. We have [unusual scaling requirements](https://tinyurl.com/pauseaitechandscaling), and we buy rather than build in most cases.
 
 - Key Skills:
-  - Web development (we use SvelteKit, TypeScript, Markdown).
-  - Comfortable with Git and GitHub.
-  - Self-directed and able to work asynchronously.
+  - (Any of these can be learned: none are blockers to signing up.)
+  - Web development (the main website is mostly static, using SvelteKit with clientside hydration, Node, Markdown, deployed through Netlify).
+  - Self-directed and able to work asynchronously. Bias for action and ideas - we'll validate choices in review. All the usual challenges of open source development are amplified in a volunteer org context - previous experience in those helps.
 
-Interested? [Email Anthony](mailto:mail@anthonybailey.net) (or DM anthonybailey.net on [Discord](/discord))
+Yes we are happy to use language models to accelerate our development.
+
+Interested? [Email Anthony](mailto:mail@anthonybailey.net) (or DM anthonybailey.net on [Discord](/discord)). Make sure you've signed the volunteer agreement!
 
 ## Stay Updated
 
