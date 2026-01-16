@@ -152,10 +152,17 @@ Interested? [Email Ella](mailto:ella@pauseai.info)
 
 ### Software Team member
 
-- Empower everyone else, giving folk the help they need &amp; the freedom they want.
-- Advise &amp; assist on the technology choices teams make, and keep things running.
-- Be strategic: keep things simple &amp; scalable, buy not build unless we have to...
-- ...but sometimes we have to! So step up devs: scratch an itch and save the world.
+- Duration: 3 months
+- Time Commitment: 2-5 hours per week
+- Responsibilities:
+  - Fix bugs and build features for the PauseAI website.
+  - Advise and assist other teams on technology choices.
+  - Help keep our tools and infrastructure running smoothly.
+
+- Key Skills:
+  - Web development (we use SvelteKit, TypeScript, Markdown).
+  - Comfortable with Git and GitHub.
+  - Self-directed and able to work asynchronously.
 
 Interested? [Email Anthony](mailto:mail@anthonybailey.net) (or DM anthonybailey.net on [Discord](/discord))
 
