@@ -152,12 +152,20 @@ Interested? [Email Ella](mailto:ella@pauseai.info)
 
 ### Software Team member
 
-- Empower everyone else, giving folk the help they need &amp; the freedom they want.
-- Advise &amp; assist on the technology choices teams make, and keep things running.
-- Be strategic: keep things simple &amp; scalable, buy not build unless we have to...
-- ...but sometimes we have to! So step up devs: scratch an itch and save the world.
+- Duration: 3 months
+- Time Commitment: 2-5 hours per week
+- Responsibilities:
+  - Build and maintain features for the PauseAI website and other parts of our technology stack (tooling etc.)
+  - Advise and assist other teams on technology choices. We have [unusual scaling requirements](https://tinyurl.com/pauseaitechandscaling), and we buy rather than build in most cases.
 
-Interested? [Email Anthony](mailto:mail@anthonybailey.net) (or DM anthonybailey.net on [Discord](/discord))
+- Key Skills:
+  - (Any of these can be learned: none are blockers to signing up.)
+  - Web development (the main website is mostly static, using SvelteKit with clientside hydration, Node, Markdown, deployed through Netlify).
+  - Self-directed and able to work asynchronously. Bias for action and ideas - we'll validate choices in review. All the usual challenges of open source development are amplified in a volunteer org context - previous experience in those helps.
+
+Yes we are happy to use language models to accelerate our development.
+
+Interested? [Email Anthony](mailto:mail@anthonybailey.net) (or DM anthonybailey.net on [Discord](/discord)). Make sure you've signed the volunteer agreement!
 
 ## Stay Updated
 

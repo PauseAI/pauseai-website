@@ -34,7 +34,7 @@
 
 <div class="newsletter-signup">
 	<div class="newsletter-content">
-		<h3>{headingText}</h3>
+		<h3 class="toc-exclude">{headingText}</h3>
 		<p>{descriptionText}</p>
 
 		<!-- Direct POST to Substack API in new tab -->

@@ -91,7 +91,10 @@ export async function GET({ fetch, setHeaders }) {
 	const records = await fetchAllPages<AirtableNationalGroup>(
 		fetch,
 		AIRTABLE_URL,
-		FALLBACK_NATIONAL_GROUPS
+		FALLBACK_NATIONAL_GROUPS,
+		{
+			filterByFormula: 'NOT({inactive})'
+		}
 	)
 
 	const out: NationalGroup[] = records

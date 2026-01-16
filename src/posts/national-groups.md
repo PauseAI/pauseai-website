@@ -89,16 +89,16 @@ _Focus: Create materials, set up platforms_
 
 ### **Website and Email Set Up**
 
-Our technical operations lead will set you up with an official email address, help you add your social media and website to our chapter list <https://pauseai.info/national-groups> & <https://pauseai.info/communities>, and get you on our about page <https://pauseai.info/about>. 
+We'll set you up with an official email address, help you add your social media and website to our chapter list <https://pauseai.info/national-groups> & <https://pauseai.info/communities>, and get you on our about us page <https://pauseai.info/about>. 
 
-Make sure you send the below to [patricio@pauseai.info](mailto:patricio@pauseai.info) to get started: 
+Make sure you send the info below to [patricio@pauseai.info](mailto:patricio@pauseai.info) to get started: 
 
-- Email address ending on @pauseai.info you want (usually [firstname@pauseai.info](mailto:name@pauseai.info) or [fullname@pauseai.info](mailto:fullname@pauseai.info)). You would be able to use this email for PauseAI related communications and access Google Drive files.
-- If you want emails with the info about the people from your country who fill out the webform at <https://pauseai.info/join> to go to this new email address or another one (specify which). It will also be linked on the national chapters page.
-- Any links to social media, internal chats or a website that you want to be public
-- (Optional) Discord username
-- (Optional) A head shot
-- (Optional) A logo of your chapter
+- The email address ending on @pauseai.info you want (usually firstname@pauseai.info or fullname@pauseai.info). You would be able to use this email for PauseAI related communications and access Google Drive files.
+- The email address where you want to receive info about new people joining through <https://pauseai.info/join> from your country. Most people choose their @pauseai.info address.
+- (Optional) For <https://pauseai.info/national-groups>: any links to social media, internal chats, a website or an email address (if you want to link a different one than the one from the previous point). Also, which is the one you want linked in <https://pauseai.info/communities>.
+- (Optional) A head shot for <https://pauseai.info/about>.
+- (Optional) A logo of your chapter.
+- (Optional) A Discord username to add you to the relevant channels.
 
 ### **Review Key Resources**
 
