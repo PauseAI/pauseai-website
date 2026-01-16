@@ -49,11 +49,10 @@
 			<Link href="/join">{m.footer_action_join()}</Link>
 			<Link href="/action">{m.footer_action_help()}</Link>
 			<Link href="/communities">{m.footer_action_communities()}</Link>
-			<Link href="donate">{m.footer_action_donate()}</Link>
+			<Link href="/donate">{m.footer_action_donate()}</Link>
 			<Link href="https://pauseai-shop.fourthwall.com" target="_blank"
 				>{m.footer_action_merchandise()}</Link
 			>
-			<Link href="/events">{m.footer_action_events()}</Link>
 			<Link href="/vacancies">{m.footer_action_vacancies()}</Link>
 			<Link href="/email-builder">{m.footer_action_email()}</Link>
 			<Link href="/lobby-tips">{m.footer_action_lobby()}</Link>

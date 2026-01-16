@@ -21,7 +21,7 @@ content: `
 <ol>
 <li><strong>Sign up via our <a href="/join">Join page</a></strong> so we can stay in touch and connect you with volunteer communities around the world.</li>
 <li><strong>Join the <a href="https://discord.gg/T3YrWUJsJ5">Discord</a></strong>, where most of our day-to-day collaboration happens.</li>
-<li><strong>Find the next Community Onboarding Call</strong> in our <a href="/events">event</a> calendar to meet others who have just joined and hear more about what we do.</li>
+<li><strong>Find the next Community Onboarding Call</strong> in our <a href="/communities#events">event</a> calendar to meet others who have just joined and hear more about what we do.</li>
 <li><strong><a href="/communities">Find your community</a></strong> and meet other local volunteers to find actions happening specifically in your country or city.</li>
 </ol>
 	`
@@ -69,7 +69,7 @@ content: `
 <h3>I have a day</h3>
 <p>Get out into the world and bring others along:</p>
 <ul>
-<li><strong>Attend one of our <a href="/events">upcoming events</a></strong>—or if there isn't one near you, organise your own:
+<li><strong>Attend one of our <a href="/communities#events">upcoming events</a></strong>—or if there isn't one near you, organise your own:
 	<ul>
 	<li><a href="/organizing-a-protest">Protests</a></li>
 	<li><a href="/local-organizing#letter-to-the-editor-writing-workshops">Workshops</a></li>

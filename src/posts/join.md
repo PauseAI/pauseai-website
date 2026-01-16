@@ -85,7 +85,7 @@ After signing up, join our onboarding session online or locally to learn about c
 
 ## After signing up
 
-Join one of our Member Community Welcome Meetings, or a local social event to find out more about PauseAI’s community: [Events](/events).
+Join one of our Member Community Welcome Meetings, or a local social event to find out more about PauseAI’s community: [Events](/communities#events).
 If you want to get kick-started into action straight away, check out our [list of them](/action).
 
 ## Volunteer Vacancies

@@ -56,7 +56,7 @@ Also, update the `protests.md` file to link to the protest.
 
 ### Create an Event page
 
-Add the event to [this website](/events), which can be then shared separately via Luma to invite people. Or use another RSVP tool like Facebook.
+Add the event to [this website](https://luma.com/PauseAI), which can be then shared separately via Luma to invite people. Or use another RSVP tool like Facebook.
 You can also decide to link to a Whatsapp group or something similar instead.
 The important bit is that you can keep people updated about what's going to happen.
 
