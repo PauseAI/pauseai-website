@@ -103,7 +103,7 @@ content: `
 title: 'Journalist or Creator',
 content: `
 
-<h3>If you work as a journalist or have a social media following</h3>
+<h3 class="toc-exclude">If you work as a journalist or have a social media following</h3>
 <ul>
 <li><strong>Create content</strong> about AI dangers or PauseAI. For more information, reach out to us through any of our <a href="/faq#do-you-have-social-media">communication channels</a>.</li>
 </ul>
@@ -112,7 +112,7 @@ content: `
 	{
 		title: 'Politician or Public Servant',
 		content: `
-<h3>If you are a politician or work in government</h3>
+<h3 class="toc-exclude">If you are a politician or work in government</h3>
 <ul>
 <li><strong>Prepare for the next <a href="/summit">AI safety summit</a></strong>. Form coalitions with other countries to share safety information and act quickly when harms arise. Work towards a global treaty.</li>
 <li><strong>Invite (or subpoena) AI lab leaders</strong> to parliamentary/congressional hearings to give their predictions and timelines of AI disasters.</li>
@@ -125,7 +125,7 @@ content: `
 	{
 		title: 'Legal or Policy Expert',
 		content: `
-<h3>If you have experience with (international) law</h3>
+<h3 class="toc-exclude">If you have experience with (international) law</h3>
 <ul>
 <li><strong>Help draft policy</strong>. <a href="https://www.campaignforaisafety.org/celebrating-the-winners-law-student-moratorium-treaty-competition/">Draft examples</a>. <a href="https://futureoflife.org/wp-content/uploads/2023/04/FLI_Policymaking_In_The_Pause.pdf">Some</a> <a href="https://www.openphilanthropy.org/research/12-tentative-ideas-for-us-ai-policy/">frameworks</a>.</li>
 <li><strong>Make submissions</strong> to government requests for comment on AI policy (<a href="https://ntia.gov/issues/artificial-intelligence/request-for-comments">example</a>).</li>
@@ -135,7 +135,7 @@ content: `
 	{
 		title: 'Academic or Educator',
 		content: `
-<h3>If you are a university professor or work in an academic institution</h3>
+<h3 class="toc-exclude">If you are a university professor or work in an academic institution</h3>
 <ul>
 <li><strong>Write op-eds</strong> and articles for media outlets</li>
 <li><strong>Mentor students</strong> who are interested in this topic</li>
@@ -147,7 +147,7 @@ content: `
 	{
 		title: 'AI Industry Professional',
 		content: `
-<h3>If you work in AI</h3>
+<h3 class="toc-exclude">If you work in AI</h3>
 <ul>
 <li><strong>Don't work towards better AI</strong>: Do not work for AI companies or capabilities research. And do not spread ideas on how we can make AI systems faster or smarter.</li>
 <li><strong>Talk to your management and colleagues</strong> about the risks. Get them to take an institutional position toward mitigating risk over profit. Encourage implementation of standard risk mitigation procedures and anonymous reporting.</li>
