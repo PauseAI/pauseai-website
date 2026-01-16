@@ -12,12 +12,6 @@ description: Job positions at PauseAI
 
 Apply [here](https://pauseai.info/policy-director-vacancy).
 
-## Organizing Director
-
-As PauseAI Global’s Organizing Director, you will lead international implementation of strategy - including designing and operationalizing growth and retention plans for volunteers, build international campaigns and develop and mentor National Chapter Lead Organizers (volunteers and staff).
-
-Apply [here](https://pauseai.info/2025-organizing-director).
-
 ## PauseAI UK Director
 
 - Design and implementation of PauseAI UK's national strategy
@@ -34,4 +28,4 @@ Apply [here](https://pauseai.info/2025-communications-director).
 
 ## Volunteer Vacancies
 
-PauseAI is built upon our network of hundreds of volunteers across 13+ countries. You can join PauseAI [here](https://pauseai.info/join), or see our list of volunteer vacancies [here](https://pauseai.info/volunteer-vacancies).
+PauseAI is built upon our network of hundreds of volunteers across 13+ countries. You can see our list of volunteer vacancies [here](/join#volunteer-vacancies).

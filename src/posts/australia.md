@@ -8,7 +8,7 @@ description: the Australian chapter of PauseAI
 
 By 2030, artificial intelligence could be fully automated, self-improving and **smarter than humans at almost everything.** This isn't science fiction—it's the assessment of leading AI companies and researchers. When this happens, every aspect of life will change forever.
 
-**[Join our community](/join)** | [Email us](mailto:australia@pauseai.info) | [Connect on Facebook](https://www.facebook.com/groups/571590459293618) | [YouTube channel](https://www.youtube.com/channel/UCjjMieiOlSFf7jud0yhHQSg) | [LinkedIn](https://www.linkedin.com/company/pauseai-australia) | [WhatsApp News/Action](https://chat.whatsapp.com/KLg8K9xSgfIJs8GQAHeI5b)|[Events](https://lu.ma/PauseAIAustralia)
+**[Join our community](/join)** | [Email us](mailto:australia@pauseai.info) | [Connect on Facebook](https://www.facebook.com/groups/571590459293618) | [YouTube channel](https://www.youtube.com/channel/UCjjMieiOlSFf7jud0yhHQSg) | [LinkedIn](https://www.linkedin.com/company/pauseai-australia) | [Instagram](https://www.instagram.com/pauseaiaustralia/)| [WhatsApp News/Action](https://chat.whatsapp.com/KLg8K9xSgfIJs8GQAHeI5b)|[Events](https://lu.ma/PauseAIAustralia)
 
 ### What risks are we facing?
 
@@ -31,7 +31,7 @@ Sure. Artificial Intelligence already has the potential to be a powerful tool. I
 
 New technologies have always brought change, but humans need time to adjust, safeguard, and plan for the future. For any other technology—whether aeroplanes, skyscrapers, or new medications—we insist on expertly designed safety measures before exposing the public to risks. This is not happening with AI.
 
-AI companies are in a race, fueled by billions of dollars of investment, to build superhuman AI first. When one company succeededs, your life and that of your loved ones will become radically different, and you won't have any say in what this future holds. This isn't just a tech issue— it will affect everyone.
+AI companies are in a race, fueled by billions of dollars of investment, to build superhuman AI first. When one company succeeds, your life and that of your loved ones will become radically different, and you won't have any say in what this future holds. This isn't just a tech issue— it will affect everyone.
 
 ### What can be done?
 
@@ -65,12 +65,14 @@ You can make a difference. Volunteers in Australia raise awareness, protest, lob
 - [Attend our next Australian online or in-person event](https://lu.ma/PauseAIAustralia)
 - [Contact Australian politicians (using this easy tool)](https://www.australiansforaisafety.com.au/advocacy/contact-politicians?utm_source=pauseai-australia)
 - Talk to your friends and family about AI risk
+- Donate to support our work via **PayID 85692218938** (not tax-deductible)
+- [Or one of these ideas](https://docs.google.com/document/d/18ypsV5GkgiQQc7QitwsrNcaxuBPd_3t7AMuySBPJZMw/edit?usp=sharing)
 
 ### Campaigns
 
 #### IABIED Canberra book launch
 
-On 7 October 2025, PauseAI Australia held a book launch and discussion event at Smith’s Alternative bookshop in Canberra to mark the release of [_If Anyone Builds It, Everyone Dies_](htts://www.penguin.com.au/books/if-anyone-builds-it-everyone-dies-9781847928931). Laura Nuttall, MLA, and Peter Cain, MLA, joined the discussion and read excerpts from the book.
+On 7 October 2025, PauseAI Australia held a book launch and discussion event at Smith’s Alternative bookshop in Canberra to mark the release of [_If Anyone Builds It, Everyone Dies_](https://www.penguin.com.au/books/if-anyone-builds-it-everyone-dies-9781847928931). Laura Nuttall, MLA, and Peter Cain, MLA, joined the discussion and read excerpts from the book.
 
 #### Petition to the House of Representatives
 
@@ -82,7 +84,7 @@ In September 2025, PauseAI Australia responded to the interim report on _Harness
 
 #### Investigate OpenAI
 
-[In July 2025](https://drive.google.com/file/d/1t9ntUlF2cZH4_f-1fsp0FFCf3RiGZ81g/view?usp=drive_link), volunteer Mark Brown brought OpenAI to the attention of the Australian Federal Police and the Attorney-General of Australia, alleging potential breaches of the _Crimes (Biological Weapons) Act 1976_. It was discussed in a [news story](https://ia.acs.org.au/article/2025/is-the-new-chatgpt-agent-really-a-weapons-risk-.html) and on [a video podcast](https://youtu.be/-YPhNdpA8Rk?si=dTBpGMfZaNWnldXa). We are still waiting for a response from the AFP and the Attorney-General.
+[In July 2025](https://drive.google.com/file/d/1t9ntUlF2cZH4_f-1fsp0FFCf3RiGZ81g/view?usp=drive_link), volunteer Mark Brown brought OpenAI to the attention of the Australian Federal Police and the Attorney-General of Australia, alleging potential breaches of the _Crimes (Biological Weapons) Act 1976_. It was discussed in a [news story](https://ia.acs.org.au/article/2025/is-the-new-chatgpt-agent-really-a-weapons-risk-.html) and on [a video podcast](https://youtu.be/-YPhNdpA8Rk). We are still waiting for a response from the AFP and the Attorney-General.
 
 #### Melbourne protest
 

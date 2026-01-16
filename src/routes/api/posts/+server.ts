@@ -5,7 +5,6 @@ import { communitiesMeta } from '../../communities/communities'
 import { meta as pdoomMeta } from '../../pdoom/meta'
 import { meta as quotesMeta } from '../../quotes/meta'
 import { meta as emailBuilderMeta } from '../../email-builder/meta'
-import { meta as peopleMeta } from '../../about/meta'
 import { meta as teamsMeta } from '../../teams/meta'
 import { meta as statementMeta } from '../../statement/meta'
 import { meta as dearSirDemisMeta } from '../../dear-sir-demis-2025/meta'
@@ -18,7 +17,6 @@ const hardCodedPages: Post[] = [
 	pdoomMeta,
 	quotesMeta,
 	emailBuilderMeta,
-	peopleMeta,
 	teamsMeta,
 	statementMeta,
 	dearSirDemisMeta,

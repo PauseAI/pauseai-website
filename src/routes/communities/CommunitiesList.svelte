@@ -19,23 +19,27 @@
 			{} as Record<string, Community[]>
 		)
 
+	const nationalChapters = communities.filter((community) => community.type === 'national')
+
+	const allNationalities = [
+		...new Set([...Object.keys(groupedCommunities), ...nationalChapters.map((c) => c.name)])
+	]
+
 	// Sort nationalities alphabetically, with "Other" at the end
-	const sortedNationalities = Object.keys(groupedCommunities).sort((a, b) => {
+	const sortedNationalities = allNationalities.sort((a, b) => {
 		if (a === 'Other') return 1
 		if (b === 'Other') return -1
 		return a.localeCompare(b)
 	})
 
 	// Find the link for each nationality
-	const nationalLinks = communities
-		.filter((community) => community.type === 'national')
-		.reduce(
-			(acc, community) => {
-				acc[community.name] = community.link
-				return acc
-			},
-			{} as Record<string, string>
-		)
+	const nationalLinks = nationalChapters.reduce(
+		(acc, community) => {
+			acc[community.name] = community.link
+			return acc
+		},
+		{} as Record<string, string>
+	)
 </script>
 
 <div class="prose">
@@ -49,13 +53,15 @@
 						{nationality}
 					{/if}
 				</strong>
-				<ul>
-					{#each groupedCommunities[nationality].sort( (a, b) => a.name.localeCompare(b.name) ) as localCommunity}
-						<li>
-							<Link href={localCommunity.link}>{localCommunity.name}</Link>
-						</li>
-					{/each}
-				</ul>
+				{#if groupedCommunities[nationality] && groupedCommunities[nationality].length > 0}
+					<ul>
+						{#each groupedCommunities[nationality].sort( (a, b) => a.name.localeCompare(b.name) ) as localCommunity}
+							<li>
+								<Link href={localCommunity.link}>{localCommunity.name}</Link>
+							</li>
+						{/each}
+					</ul>
+				{/if}
 			</li>
 		{/each}
 	</ul>

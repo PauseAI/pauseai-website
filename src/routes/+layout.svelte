@@ -15,6 +15,7 @@
 	import '@fontsource/saira-condensed/700.css'
 	import sairaCondensedLatin700 from '@fontsource/saira-condensed/files/saira-condensed-latin-700-normal.woff2'
 	import { ProgressBar } from '@prgm/sveltekit-progress-bar'
+	import { onMount } from 'svelte'
 	import { Toaster } from 'svelte-french-toast'
 	import '../styles/print.css'
 	import '../styles/styles.css'
@@ -28,9 +29,14 @@
 	// This prevents "undefined" issues during navigation
 
 	let eventFound: boolean
-	let geo: GeoApiResponse | null
+	let geo: GeoApiResponse | null = null
 	// Show the hero on the homepage, but nowhere else
 	$: hero = deLocalizeHref($page.url.pathname) === '/'
+
+	onMount(async () => {
+		const response = await fetch('/api/geo')
+		geo = await response.json()
+	})
 </script>
 
 <PreloadFonts urls={[robotoSlabLatin300, sairaCondensedLatin700]} />
@@ -49,7 +55,7 @@
 		{@html data.localeAlert.message}
 	</Banner>
 {:else}
-	<NearbyEvent contrast={hero} bind:eventFound bind:geo />
+	<NearbyEvent contrast={hero} bind:eventFound {geo} />
 	{#if !eventFound}
 		{#if geo?.country?.code === 'US' && false}
 			<Banner contrast={hero}>
@@ -59,7 +65,7 @@
 					></b
 				>
 			</Banner>
-		{:else}
+		{:else if false}
 			<Banner contrast={hero} target="/littlehelpers">
 				<strong>🎄 Holiday Matching Campaign!</strong> Help fund volunteer stipends for PauseAI
 				advocates. <Link href="/littlehelpers">Join the Little Helpers campaign →</Link>
