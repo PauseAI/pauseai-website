@@ -16,7 +16,7 @@ Everyone has a role to play in building a safer future. Whether you have five mi
 title: 'Start Here',
 content: `
 
-<h3>Connect</h3>
+<h3 class="toc-exclude">Connect</h3>
 <p>Before diving in, take these quick steps to connect with the movement:</p>
 <ol>
 <li><strong>Sign up via our <a href="/join">Join page</a></strong> so we can stay in touch and connect you with volunteer communities around the world.</li>
@@ -29,7 +29,7 @@ content: `
 {
 	title: '5 Minutes',
 	content: `
-<h3>I have 5 minutes</h3>
+<h3 class="toc-exclude">I have 5 minutes</h3>
 <p>Small actions add up. Here are quick ways to contribute:</p>
 <ul>
 <li>Check out our <a href="https://microcommit.io/onboarding?org=135fcd8d-8116-44af-b885-14df992f9a8c">microcommit page</a> for weekly bite-sized actions</li>
@@ -42,7 +42,7 @@ content: `
 {
 	title: '1 Hour',
 	content: `
-<h3>I have an hour</h3>
+<h3 class="toc-exclude">I have an hour</h3>
 <p>Ready to go a bit deeper? Start conversations and add your voice:</p>
 <ul>
 <li>Talk to someone in your life about AI safety—a friend, neighbour, colleague, or family member. Our <a href="/counterarguments">counterarguments guide</a> can help you answer tough questions and encourage others to act</li>
@@ -53,7 +53,7 @@ content: `
 {
 	title: 'A Few Hours',
 	content: `
-<h3>I have a few hours</h3>
+<h3 class="toc-exclude">I have a few hours</h3>
 <p>Make your voice heard where it counts:</p>
 <ul>
 <li><strong>Write to your elected representatives</strong> using our <a href="/email-builder">Email Builder</a></li>
@@ -66,7 +66,7 @@ content: `
 {
 	title: '1 Day',
 	content: `
-<h3>I have a day</h3>
+<h3 class="toc-exclude">I have a day</h3>
 <p>Get out into the world and bring others along:</p>
 <ul>
 <li><strong>Attend one of our <a href="/communities#events">upcoming events</a></strong>—or if there isn't one near you, organise your own:
@@ -84,7 +84,7 @@ content: `
 {
 	title: 'Go All In',
 	content: `
-<h3>I want to go all in</h3>
+<h3 class="toc-exclude">I want to go all in</h3>
 <p>Ready to make PauseAI a serious part of your life? We'd love to have you:</p>
 <ul>
 <li>Apply for a <a href="/microgrants">microgrant</a> to fund your own initiative</li>
