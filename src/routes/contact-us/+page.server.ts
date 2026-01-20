@@ -1,14 +1,9 @@
 import { fail } from '@sveltejs/kit'
 import type { Actions } from './$types'
 import { env } from '$env/dynamic/private'
-import { MailerSend, EmailParams, Sender, Recipient } from 'mailersend'
 
 export const prerender = false
 
-const mailersend = new MailerSend({
-	apiKey: env.MAILERSEND_API_KEY || ''
-})
-// a
 async function sendContactEmail(data: {
 	name: string
 	email: string
@@ -17,9 +12,15 @@ async function sendContactEmail(data: {
 	type: 'Standard' | 'Media' | 'Partnerships' | 'Feedback'
 	organization?: string
 }) {
-	const sentFrom = new Sender('info@pauseai.info', 'PauseAI Contact Form')
-	const recipientEmail = 'patriciovercesi@gmail.com'
-	const recipients = [new Recipient(recipientEmail, 'PauseAI Team')]
+	if (!env.MAILERSEND_API_KEY) {
+		console.error('MAILERSEND_API_KEY is not configured')
+		return {
+			success: false,
+			message: 'Email service is not configured. Please contact the administrator.'
+		}
+	}
+
+	const recipientEmail = 'patricio@pauseai.info'
 
 	let htmlContent = `
 		<p><strong>Name:</strong> ${data.name}</p>
@@ -33,37 +34,75 @@ async function sendContactEmail(data: {
 
 	htmlContent += `<p><strong>Message:</strong></p><p>${data.message.replace(/\n/g, '<br>')}</p>`
 
-	const emailParams = new EmailParams()
-		.setFrom(sentFrom)
-		.setTo(recipients)
-		.setSubject(`[Contact Form] ${data.subject}`)
-		.setHtml(htmlContent)
-		.setText(
-			`Name: ${data.name}\nEmail: ${data.email}\nSubject: ${data.subject}${data.organization ? `\nOrganization: ${data.organization}` : ''}\n\nMessage:\n${data.message}`
-		)
+	const textContent = `Name: ${data.name}\nEmail: ${data.email}\nSubject: ${data.subject}${data.organization ? `\nOrganization: ${data.organization}` : ''}\n\nMessage:\n${data.message}`
+
+	// Build the request body for MailerSend API
+	const emailBody: {
+		from: { email: string; name: string }
+		to: { email: string; name: string }[]
+		subject: string
+		html: string
+		text: string
+		reply_to?: { email: string; name: string }
+	} = {
+		from: {
+			email: 'info@pauseai.info',
+			name: 'PauseAI Contact Form'
+		},
+		to: [
+			{
+				email: recipientEmail,
+				name: 'PauseAI Team'
+			}
+		],
+		subject: `[Contact Form] ${data.subject}`,
+		html: htmlContent,
+		text: textContent
+	}
 
 	if (data.email) {
-		emailParams.setReplyTo(new Recipient(data.email, data.name))
+		emailBody.reply_to = {
+			email: data.email,
+			name: data.name
+		}
 	}
 
 	try {
-		await mailersend.email.send(emailParams)
+		const response = await fetch('https://api.mailersend.com/v1/email', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+				Authorization: `Bearer ${env.MAILERSEND_API_KEY}`
+			},
+			body: JSON.stringify(emailBody)
+		})
+
+		if (!response.ok) {
+			const errorData = await response.json().catch(() => ({}))
+			console.error('MailerSend Error:', response.status, JSON.stringify(errorData, null, 2))
+
+			let errorMessage = 'Failed to send email. Please try again later.'
+			if (errorData.message) {
+				errorMessage = errorData.message.replace('reply to.email', 'email')
+			}
+
+			return { success: false, message: errorMessage }
+		}
+
 		return { success: true }
 	} catch (error: unknown) {
-		console.error('MailerSend Error:', JSON.stringify(error, null, 2))
+		console.error('MailerSend Error:', error)
 
-		// Extract specific error message if available from MailerSend
 		let errorMessage = 'Failed to send email. Please try again later.'
-		const err = error as { body?: { message?: string }; message?: string }
-		if (err.body?.message) {
-			errorMessage = err.body.message.replace('reply to.email', 'email')
-		} else if (err.message) {
-			errorMessage = err.message.replace('reply to.email', 'email')
+		const err = error as { message?: string }
+		if (err.message) {
+			errorMessage = err.message
 		}
 
 		return { success: false, message: errorMessage }
 	}
 }
+
 export const actions: Actions = {
 	standard: async ({ request }) => {
 		const data = await request.formData()
