@@ -2,9 +2,7 @@
 title: PauseAI Press materials & media coverage
 ---
 
-## Contact
-
-Maxime Fournes ([press@pauseai.info](mailto:press@pauseai.info))
+If you want to contact us, use our [Contact form](/contact-us?tab=media)
 
 ## Logo, materials
 
