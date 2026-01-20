@@ -28,7 +28,7 @@ Since February 2024, PauseAI is a [registered non-profit foundation](/legal).
 - 1000+ people who have [joined](/join) PauseAI, many of whom are actively working on various projects
 - 100+ projects in our Discord server (websites, workshops, videos, responses to government consultations, etc.)
 - Organized 15+ [protests](/protests) in 7 countries.
-- 100+ other types of [events](/events) (lobby workshops, flyering sessions, action meetings, etc.)
+- 100+ other types of [events](/communities#events) (lobby workshops, flyering sessions, action meetings, etc.)
 - 30+ [Media appearances](/press) on major news outlets, podcasts, documentaries, TV and more.
 - Many meetings with politicians and other stakeholders.
 

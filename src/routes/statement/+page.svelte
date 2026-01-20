@@ -22,7 +22,7 @@
 	}
 
 	// Milestone goals for signatures
-	const milestones = [25, 50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 1000, 1500]
+	const milestones = [2000, 2500, 3000, 4000, 5000, 10000, 15000, 20000, 25000, 30000]
 	// Find the next milestone goal
 	const nextGoal = milestones.find((goal) => totalCount < goal) || milestones[milestones.length - 1]
 </script>

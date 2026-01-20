@@ -111,7 +111,7 @@ Be sure to include posts on upcoming events and share these with your network.
 Here are links to [PauseAI’s Facebook page](https://www.facebook.com/PauseAI) and [PauseAI NYC’s Eventbrite](https://www.eventbrite.com/e/pauseai-global-protest-nyc-tickets-886528309037) page for inspiration.
 You can use similar structures for your local group.
 
-You should also add events to our [Luma](https://lu.ma/PauseAI), so people can be notified and find it on our [Events page](/events).
+You should also add events to our [Luma](https://lu.ma/PauseAI), so people can be notified and find it on our [Groups page](/communities#events).
 
 ### One-on-one outreach
 
@@ -327,7 +327,7 @@ Here is a sample table of roles for inspiration:
 So, you have a well-organized group of volunteers, eager to get involved and with a clear sense of their responsibilities. Now what?
 
 There are many different ways to achieve your goals as a local group.
-Check out our [events page](/events) for ideas of the next events that are planned. Whenever you decide to organize one, don't forget to add it there!
+Check out our [events](/communities#events) for ideas of the next events that are planned. Whenever you decide to organize one, don't forget to add it there!
 In addition to them, the following list is not meant to be exhaustive, but rather to provide inspiration as you begin planning your campaign.
 
 ### Social events & having drinks

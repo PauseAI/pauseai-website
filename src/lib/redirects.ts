@@ -12,6 +12,8 @@ const REDIRECTS: Record<string, string> = {
 	'/local-communities': '/communities',
 	'/local-chapters': '/communities',
 	'/local-groups': '/communities',
+	'/events': '/communities#events',
+	'/groups': '/communities',
 	'/map': '/communities',
 	'/national': 'national-groups',
 	'/national-communities': '/national-groups',

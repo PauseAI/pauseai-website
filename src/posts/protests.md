@@ -5,7 +5,7 @@ description: A list of upcoming and past protests.
 
 ## Upcoming protest
 
-**See our [events](/events) for upcoming protests.**
+**See our [events](/communities#events) for upcoming protests.**
 
 ## Past Protests
 
