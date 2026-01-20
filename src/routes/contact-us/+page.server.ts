@@ -4,6 +4,14 @@ import { env } from '$env/dynamic/private'
 
 export const prerender = false
 
+// Configure recipient email addresses for each contact form type
+const CONTACT_RECIPIENTS = {
+	Standard: 'info@pauseai.info',
+	Media: 'press@pauseai.info',
+	Partnerships: 'info@pauseai.info',
+	Feedback: 'info@pauseai.info'
+} as const
+
 async function sendContactEmail(data: {
 	name: string
 	email: string
@@ -20,7 +28,7 @@ async function sendContactEmail(data: {
 		}
 	}
 
-	const recipientEmail = 'patricio@pauseai.info'
+	const recipientEmail = CONTACT_RECIPIENTS[data.type]
 
 	let htmlContent = `
 		<p><strong>Name:</strong> ${data.name}</p>
