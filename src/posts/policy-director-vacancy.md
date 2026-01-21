@@ -3,6 +3,8 @@ title: Policy Director (Vacancy)
 slug: policy-director-vacancy
 ---
 
+**This vacancy is now closed.**
+
 ## **Role description**
 
 As PauseAI Global’s Policy Lead, you will be the lead for Global on regulatory and policy analysis and development across the global AI governance landscape. 

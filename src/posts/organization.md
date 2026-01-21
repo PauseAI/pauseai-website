@@ -8,7 +8,7 @@ description: How the PauseAI organization is structured, and what resources are 
 - [Legal entities](/legal): PauseAI consists of one international entity (PauseAI Global), and several local / national legal entities. This website and the social media accounts are managed by the international entity.
 - [National groups](/national-groups): National PauseAI groups are hubs that typically manage their own local communities, and are responsible for national-level strategy and coordination. They typically have their own website, social media accounts and legal entity. National leaders meet regularly to coordinate their work.
 - [Teams](/teams): Teams are groups of volunteers who work on specific projects or tasks within PauseAI Global. Every team has its own leader, Discord channel, Drive folder and of course list of members. Reach out to a team leader to join a team!
-- [Local communities](/communities): Check if there already exists a community in your area. Most groups are communicating in our discord server. Some groups are using tools like WhatsApp or a separate Discord server.
+- [Communities](/communities): Check if there already exists a community in your area. Most groups are communicating in our discord server. Some groups are using tools like WhatsApp or a separate Discord server.
 
 ![Organagram](/org.png)
 

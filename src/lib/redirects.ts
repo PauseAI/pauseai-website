@@ -12,6 +12,8 @@ const REDIRECTS: Record<string, string> = {
 	'/local-communities': '/communities',
 	'/local-chapters': '/communities',
 	'/local-groups': '/communities',
+	'/events': '/communities#events',
+	'/groups': '/communities',
 	'/map': '/communities',
 	'/national': 'national-groups',
 	'/national-communities': '/national-groups',
@@ -21,7 +23,8 @@ const REDIRECTS: Record<string, string> = {
 	'/polls': '/polls-and-surveys',
 	'/surveys': '/polls-and-surveys',
 	'/stipends': '/volunteer-stipends',
-	'/volunteer-vacancies': '/join#volunteer-vacancies'
+	'/volunteer-vacancies': '/join#volunteer-vacancies',
+	'/contact': '/contact-us'
 }
 
 /** Temporary redirects (302) - for time-limited campaigns, A/B tests, etc. */
