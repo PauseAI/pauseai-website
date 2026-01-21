@@ -1,6 +1,6 @@
 <script lang="ts">
-	import mashupDesktop from '$assets/protests/mashup_desktop.jpg?enhanced'
-	import mashupMobile from '$assets/protests/mashup_mobile.jpg?enhanced'
+	import homeHeroDesktop from '$assets/protests/Home Hero - web.jpg?enhanced'
+	import homeHeroMobile from '$assets/protests/Home Hero - mobile.jpg?enhanced'
 	import { onMount } from 'svelte'
 	import { emulateCqwIfNeeded } from '$lib/container-query-units'
 
@@ -10,7 +10,7 @@
 	let tagline: HTMLDivElement
 
 	const checkMobile = () => {
-		isMobile = window.innerWidth <= 768
+		isMobile = window.innerWidth <= 768 || window.innerHeight > window.innerWidth
 	}
 
 	onMount(() => {
@@ -28,11 +28,10 @@
 
 <div class="hero">
 	{#if isMobile}
-		<enhanced:img src={mashupMobile} sizes="100vw" alt="" />
+		<enhanced:img src={homeHeroMobile} sizes="100vw" alt="" />
 	{:else}
-		<enhanced:img src={mashupDesktop} sizes="100vw" alt="" />
+		<enhanced:img src={homeHeroDesktop} sizes="100vw" alt="" />
 	{/if}
-	<div class="overlay"></div>
 	<div class="content" bind:this={tagline}>
 		<h2>Don’t let AI companies<br />gamble away our future</h2>
 		<div class="actions">
@@ -45,8 +44,8 @@
 <style>
 	.content {
 		position: absolute;
-		top: 50%;
-		left: 10%; /* Left aligned */
+		top: 45%;
+		left: 20%;
 		transform: translateY(-50%);
 		width: clamp(20rem, 60vw, 100%);
 		container-type: inline-size;
@@ -67,14 +66,26 @@
 		text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 	}
 
-	@media (max-width: 850px) {
+	@media (max-width: 850px), (orientation: portrait) {
 		.content {
+			top: 35%;
 			left: 5%;
 			width: 90%;
 		}
 
 		.content h2 {
-			font-size: calc(8 * var(--cqw));
+			font-size: calc(10 * var(--cqw));
+		}
+
+		.hero :global(img) {
+			object-fit: cover;
+			transform: none !important;
+		}
+	}
+
+	@media (min-width: 851px) and (orientation: landscape) {
+		.hero :global(img) {
+			transform: scale(0.95);
 		}
 	}
 
@@ -87,18 +98,7 @@
 		width: 100vw;
 		left: 50%;
 		transform: translateX(-50%);
-		background-color: white;
-	}
-
-	.overlay {
-		position: absolute;
-		top: 0;
-		left: 0;
-		width: 100%;
-		height: 100%;
-		opacity: 0.75;
-		background-color: var(--brand);
-		/*background: linear-gradient(90deg, var(--brand) 0%, rgba(252, 151, 0, 0.4) 100%);*/
+		background-color: #ff9416;
 	}
 
 	.actions {
@@ -145,7 +145,8 @@
 	.hero :global(img) {
 		width: 100%;
 		height: 100%;
-		object-fit: cover;
-		transform: scale(1) translateX(150px);
+		object-fit: contain;
+		object-position: center bottom;
+		transform-origin: center bottom;
 	}
 </style>
