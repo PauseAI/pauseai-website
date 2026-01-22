@@ -6,6 +6,7 @@ const REDIRECTS: Record<string, string> = {
 	'/collages/manual_bootstrap.jpg': '/api/images/collages/manual_bootstrap.jpg',
 	'/selfie': '/sayno',
 	'/people': '/about',
+	'/about-us': '/about',
 	'/act': '/action',
 	'/actions': '/action',
 	'/local': '/communities',
