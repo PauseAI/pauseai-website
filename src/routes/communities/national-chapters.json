@@ -10,25 +10,25 @@
 			"name": "PauseAI Serbia",
 			"lat": 44,
 			"lon": 21,
-			"link": "https://www.facebook.com/PauseAISerbia"
+			"link": "https://pauseai.rs/"
 		},
 		{
 			"name": "PauseAI UK",
 			"lat": 54.2,
 			"lon": -2.4,
-			"link": "https://x.com/PauseAI_UK"
+			"link": "https://pauseai.uk/"
 		},
 		{
 			"name": "PauseAI France",
 			"lat": 47.8,
 			"lon": 2.6,
-			"link": "$$DISCORD_FRANCE$$"
+			"link": "https://pauseia.fr"
 		},
 		{
 			"name": "PauseAI Canada",
 			"lat": 56,
 			"lon": -105,
-			"link": "https://pauseai.ca/"
+			"link": "https://pauseai.ca/en/"
 		},
 		{
 			"name": "PauseAI Romania",
@@ -46,13 +46,13 @@
 			"name": "PauseAI España",
 			"lat": 41.3,
 			"lon": -4,
-			"link": "https://chat.whatsapp.com/KEgD22LEo6xEVvjH4fD8br"
+			"link": "https://pauseai.es"
 		},
 		{
 			"name": "PauseAI Australia",
 			"lat": -25,
 			"lon": 134.5,
-			"link": "https://www.facebook.com/groups/571590459293618/"
+			"link": "https://pauseai.info/australia"
 		},
 		{
 			"name": "PauseAI Germany",
@@ -64,7 +64,7 @@
 			"name": "PauseAI US",
 			"lat": 39.5,
 			"lon": -98,
-			"link": "$$WEBSITE_US$$"
+			"link": "https://www.pauseai-us.org/"
 		},
 		{
 			"name": "PauseAI Czechia",
@@ -88,7 +88,7 @@
 			"name": "PauseAI Sweden",
 			"lat": 65,
 			"lon": 17,
-			"link": "mailto:larzzzon91@gmail.com"
+			"link": "https://pauseai.se/"
 		}
 	]
 }
