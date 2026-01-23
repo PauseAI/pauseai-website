@@ -48,7 +48,7 @@ description: How the PauseAI organization is structured, and what resources are 
 
 - [Free book on AI X-Risk: Uncontrollable](https://impactbooks.store/cart/47288196366640:1?discount=UNCON-P3SFRS)
 - [Google Calendar link](https://calendar.google.com/calendar/u/0?cid=Y19mNWE4YWYyMDZlNjM1ODc2NjVjNmU4MzAzOTgzZmVmYWYzYTBjNjE0NGRiMGFhNDljOTcwZWZhNTEwYTNkODY3QGdyb3VwLmNhbGVuZGFyLmdvb2dsZS5jb20)
-- [Anonymous feedback form](https://airtable.com/appWPTGqZmUcs3NWu/pagIvo9Sv6IDHaolu/form): If you want to share some critical thoughts with us while remaining anonymous.
+- [Anonymous feedback](https://pauseai.info/contact-us?tab=feedback): If you want to share some critical thoughts with us while remaining anonymous.
 - [Microgrants](/microgrants): If you want funding for your PauseAI related project / event
 
 ## Tools used
