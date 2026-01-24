@@ -12,28 +12,28 @@
 			"lat": 52.9548,
 			"lon": -1.1581,
 			"link": "$$DISCORD_GLOBAL$$",
-			"parent_name": "PauseAI UK"
+			"parent_name": "United Kingdom"
 		},
 		{
 			"name": "Oldenburg",
 			"lat": 53.1412,
 			"lon": 8.2146,
 			"link": "$$DISCORD_GLOBAL$$",
-			"parent_name": "PauseAI Germany"
+			"parent_name": "Germany"
 		},
 		{
 			"name": "Edinburgh",
 			"lat": 55.9533,
 			"lon": -3.1883,
 			"link": "$$DISCORD_GLOBAL$$",
-			"parent_name": "PauseAI UK"
+			"parent_name": "United Kingdom"
 		},
 		{
 			"name": "Manchester",
 			"lat": 53.4808,
 			"lon": -2.2426,
 			"link": "$$DISCORD_GLOBAL$$",
-			"parent_name": "PauseAI UK"
+			"parent_name": "United Kingdom"
 		},
 		{
 			"name": "Copenhagen",
@@ -46,7 +46,7 @@
 			"lat": 51.5073509,
 			"lon": -0.12775829999998223,
 			"link": "https://pauseai.uk/london/",
-			"parent_name": "PauseAI UK"
+			"parent_name": "United Kingdom"
 		},
 		{
 			"name": "Rosario",
@@ -59,42 +59,42 @@
 			"lat": 48.3705,
 			"lon": 10.8978,
 			"link": "$$DISCORD_GERMANY$$",
-			"parent_name": "PauseAI Germany"
+			"parent_name": "Germany"
 		},
 		{
 			"name": "Paris",
 			"lat": 48.8647,
 			"lon": 2.349,
 			"link": "$$DISCORD_FRANCE$$",
-			"parent_name": "PauseAI France"
+			"parent_name": "France"
 		},
 		{
 			"name": "Montreal",
 			"lat": 45.5088,
 			"lon": -73.5616,
 			"link": "https://pauseai.ca/fr/montreal.html",
-			"parent_name": "PauseAI Canada"
+			"parent_name": "Canada"
 		},
 		{
 			"name": "Nairobi",
 			"lat": -1.286389,
 			"lon": 36.817223,
 			"link": "$$DISCORD_GLOBAL$$",
-			"parent_name": "PauseAI Kenya"
+			"parent_name": "Kenya"
 		},
 		{
 			"name": "Stockholm",
 			"lat": 59.3293,
 			"lon": 18.0686,
 			"link": "$$DISCORD_GLOBAL$$",
-			"parent_name": "PauseAI Sweden"
+			"parent_name": "Sweden"
 		},
 		{
 			"name": "Marseille",
 			"lat": 43.2963,
 			"lon": 5.37,
 			"link": "$$DISCORD_FRANCE$$",
-			"parent_name": "PauseAI France"
+			"parent_name": "France"
 		},
 		{
 			"name": "São Paulo",
@@ -119,7 +119,7 @@
 			"lat": 52.52,
 			"lon": 13.405,
 			"link": "https://t.me/+12wemb6BZuQyNjVi",
-			"parent_name": "PauseAI Germany"
+			"parent_name": "Germany"
 		},
 		{
 			"name": "Rome",
@@ -132,7 +132,7 @@
 			"lat": 43.6511,
 			"lon": -79.347,
 			"link": "$$DISCORD_GLOBAL$$",
-			"parent_name": "PauseAI Canada"
+			"parent_name": "Canada"
 		},
 		{
 			"name": "Amsterdam",
@@ -146,14 +146,14 @@
 			"lat": 48.1372,
 			"lon": 11.5761,
 			"link": "$$DISCORD_GERMANY$$",
-			"parent_name": "PauseAI Germany"
+			"parent_name": "Germany"
 		},
 		{
 			"name": "Cambridge",
 			"lat": 52.2053,
 			"lon": 0.1192,
 			"link": "$$DISCORD_GLOBAL$$",
-			"parent_name": "PauseAI UK"
+			"parent_name": "United Kingdom"
 		},
 		{
 			"name": "Hanoi",
@@ -166,35 +166,35 @@
 			"lat": 54.5168,
 			"lon": 18.5419,
 			"link": "$$DISCORD_GLOBAL$$",
-			"parent_name": "PauseAI Poland"
+			"parent_name": "Poland"
 		},
 		{
 			"name": "Blackpool",
 			"lat": 53.8159,
 			"lon": -3.0553,
 			"link": "$$DISCORD_GLOBAL$$",
-			"parent_name": "PauseAI UK"
+			"parent_name": "United Kingdom"
 		},
 		{
 			"name": "Vancouver",
 			"lat": 49.2463,
 			"lon": -123.1162,
 			"link": "$$DISCORD_GLOBAL$$",
-			"parent_name": "PauseAI Canada"
+			"parent_name": "Canada"
 		},
 		{
 			"name": "Melbourne",
 			"lat": -37.8136,
 			"lon": 144.9631,
 			"link": "$$DISCORD_GLOBAL$$",
-			"parent_name": "PauseAI Australia"
+			"parent_name": "Australia"
 		},
 		{
 			"name": "Hamburg",
 			"lat": 53.5511,
 			"lon": 9.9937,
 			"link": "$$DISCORD_GERMANY$$",
-			"parent_name": "PauseAI Germany"
+			"parent_name": "Germany"
 		},
 		{
 			"name": "Zurich",
@@ -207,7 +207,7 @@
 			"lat": 52.2681,
 			"lon": 8.0566,
 			"link": "$$DISCORD_GERMANY$$",
-			"parent_name": "PauseAI Germany"
+			"parent_name": "Germany"
 		},
 		{
 			"name": "Milan",
@@ -220,7 +220,7 @@
 			"lat": 50.0647,
 			"lon": 19.945,
 			"link": "$$DISCORD_GLOBAL$$",
-			"parent_name": "PauseAI Poland"
+			"parent_name": "Poland"
 		},
 		{
 			"name": "Yaoundé",
@@ -257,7 +257,7 @@
 			"lat": 50.0755,
 			"lon": 14.4378,
 			"link": "https://discord.gg/4rZ2nGZB3r",
-			"parent_name": "PauseAI Czechia"
+			"parent_name": "Czechia"
 		},
 		{
 			"name": "Santiago",
@@ -276,28 +276,28 @@
 			"lat": 51.4872,
 			"lon": 11.9656,
 			"link": "https://t.me/+tobhhF27liwyMjhi",
-			"parent_name": "PauseAI Germany"
+			"parent_name": "Germany"
 		},
 		{
 			"name": "Münster",
 			"lat": 51.9612,
 			"lon": 7.6282,
 			"link": "$$DISCORD_GERMANY$$",
-			"parent_name": "PauseAI Germany"
+			"parent_name": "Germany"
 		},
 		{
 			"name": "Freiburg",
 			"lat": 48,
 			"lon": 7.8333,
 			"link": "$$DISCORD_GLOBAL$$",
-			"parent_name": "PauseAI Germany"
+			"parent_name": "Germany"
 		},
 		{
 			"name": "Canberra",
 			"lat": -35.2809,
 			"lon": 149.13,
 			"link": "$$DISCORD_GLOBAL$$",
-			"parent_name": "PauseAI Australia"
+			"parent_name": "Australia"
 		},
 		{
 			"name": "PauseAI en Español",
@@ -310,14 +310,14 @@
 			"lat": -41.433349,
 			"lon": 147.123323,
 			"link": "$$DISCORD_GLOBAL$$",
-			"parent_name": "PauseAI Australia"
+			"parent_name": "Australia"
 		},
 		{
 			"name": "Rostock",
 			"lat": 54.18,
 			"lon": 12.08,
 			"link": "$$DISCORD_GLOBAL$$",
-			"parent_name": "PauseAI Germany"
+			"parent_name": "Germany"
 		},
 		{
 			"name": "Manila",
@@ -348,7 +348,7 @@
 			"lat": -21.115,
 			"lon": 55.533,
 			"link": "$$DISCORD_GLOBAL$$",
-			"parent_name": "PauseAI France"
+			"parent_name": "France"
 		},
 		{
 			"name": "Veszprém",
@@ -361,224 +361,224 @@
 			"lat": 33.4484,
 			"lon": -112.074,
 			"link": "$$WEBSITE_US$$",
-			"parent_name": "PauseAI US"
+			"parent_name": "United States"
 		},
 		{
 			"name": "Las Positas College (Livermore)",
 			"lat": 37.6185,
 			"lon": -121.7639,
 			"link": "$$WEBSITE_US$$",
-			"parent_name": "PauseAI US"
+			"parent_name": "United States"
 		},
 		{
 			"name": "San Diego",
 			"lat": 32.7157,
 			"lon": -117.1611,
 			"link": "$$WEBSITE_US$$",
-			"parent_name": "PauseAI US"
+			"parent_name": "United States"
 		},
 		{
 			"name": "San Francisco",
 			"lat": 37.7749,
 			"lon": -122.4194,
 			"link": "$$WEBSITE_US$$",
-			"parent_name": "PauseAI US"
+			"parent_name": "United States"
 		},
 		{
 			"name": "UC Santa Barbara",
 			"lat": 34.414,
 			"lon": -119.8489,
 			"link": "$$WEBSITE_US$$",
-			"parent_name": "PauseAI US"
+			"parent_name": "United States"
 		},
 		{
 			"name": "Stanford",
 			"lat": 37.4275,
 			"lon": -122.1697,
 			"link": "$$WEBSITE_US$$",
-			"parent_name": "PauseAI US"
+			"parent_name": "United States"
 		},
 		{
 			"name": "UC Boulder",
 			"lat": 40.0076,
 			"lon": -105.2659,
 			"link": "$$WEBSITE_US$$",
-			"parent_name": "PauseAI US"
+			"parent_name": "United States"
 		},
 		{
 			"name": "Denver",
 			"lat": 39.7392,
 			"lon": -104.9903,
 			"link": "$$WEBSITE_US$$",
-			"parent_name": "PauseAI US"
+			"parent_name": "United States"
 		},
 		{
 			"name": "Hartford",
 			"lat": 41.7658,
 			"lon": -72.6734,
 			"link": "$$WEBSITE_US$$",
-			"parent_name": "PauseAI US"
+			"parent_name": "United States"
 		},
 		{
 			"name": "Washington DC",
 			"lat": 38.9072,
 			"lon": -77.0369,
 			"link": "$$WEBSITE_US$$",
-			"parent_name": "PauseAI US"
+			"parent_name": "United States"
 		},
 		{
 			"name": "Orlando",
 			"lat": 28.5383,
 			"lon": -81.3792,
 			"link": "$$WEBSITE_US$$",
-			"parent_name": "PauseAI US"
+			"parent_name": "United States"
 		},
 		{
 			"name": "Atlanta",
 			"lat": 33.749,
 			"lon": -84.388,
 			"link": "$$WEBSITE_US$$",
-			"parent_name": "PauseAI US"
+			"parent_name": "United States"
 		},
 		{
 			"name": "Boise",
 			"lat": 43.615,
 			"lon": -116.2023,
 			"link": "$$WEBSITE_US$$",
-			"parent_name": "PauseAI US"
+			"parent_name": "United States"
 		},
 		{
 			"name": "Lawrence",
 			"lat": 38.9717,
 			"lon": -95.2353,
 			"link": "$$WEBSITE_US$$",
-			"parent_name": "PauseAI US"
+			"parent_name": "United States"
 		},
 		{
 			"name": "Boston",
 			"lat": 42.3601,
 			"lon": -71.0589,
 			"link": "$$WEBSITE_US$$",
-			"parent_name": "PauseAI US"
+			"parent_name": "United States"
 		},
 		{
 			"name": "Queen Anne's County",
 			"lat": 39.0379,
 			"lon": -75.9577,
 			"link": "$$WEBSITE_US$$",
-			"parent_name": "PauseAI US"
+			"parent_name": "United States"
 		},
 		{
 			"name": "Grand Rapids",
 			"lat": 42.9634,
 			"lon": -85.6681,
 			"link": "$$WEBSITE_US$$",
-			"parent_name": "PauseAI US"
+			"parent_name": "United States"
 		},
 		{
 			"name": "Washington University (Saint Louis)",
 			"lat": 38.6488,
 			"lon": -90.3108,
 			"link": "$$WEBSITE_US$$",
-			"parent_name": "PauseAI US"
+			"parent_name": "United States"
 		},
 		{
 			"name": "Jersey City",
 			"lat": 40.7178,
 			"lon": -74.0431,
 			"link": "$$WEBSITE_US$$",
-			"parent_name": "PauseAI US"
+			"parent_name": "United States"
 		},
 		{
 			"name": "Reno",
 			"lat": 39.5296,
 			"lon": -119.8138,
 			"link": "$$WEBSITE_US$$",
-			"parent_name": "PauseAI US"
+			"parent_name": "United States"
 		},
 		{
 			"name": "New York City",
 			"lat": 40.7128,
 			"lon": -74.006,
 			"link": "$$WEBSITE_US$$",
-			"parent_name": "PauseAI US"
+			"parent_name": "United States"
 		},
 		{
 			"name": "Columbus",
 			"lat": 39.9612,
 			"lon": -82.9988,
 			"link": "$$WEBSITE_US$$",
-			"parent_name": "PauseAI US"
+			"parent_name": "United States"
 		},
 		{
 			"name": "Dayton",
 			"lat": 39.7589,
 			"lon": -84.1916,
 			"link": "$$WEBSITE_US$$",
-			"parent_name": "PauseAI US"
+			"parent_name": "United States"
 		},
 		{
 			"name": "Portland",
 			"lat": 45.5051,
 			"lon": -122.675,
 			"link": "$$WEBSITE_US$$",
-			"parent_name": "PauseAI US"
+			"parent_name": "United States"
 		},
 		{
 			"name": "Philadelphia",
 			"lat": 39.9526,
 			"lon": -75.1652,
 			"link": "$$WEBSITE_US$$",
-			"parent_name": "PauseAI US"
+			"parent_name": "United States"
 		},
 		{
 			"name": "Pittsburgh",
 			"lat": 40.4406,
 			"lon": -79.9959,
 			"link": "$$WEBSITE_US$$",
-			"parent_name": "PauseAI US"
+			"parent_name": "United States"
 		},
 		{
 			"name": "Providence",
 			"lat": 41.824,
 			"lon": -71.4128,
 			"link": "$$WEBSITE_US$$",
-			"parent_name": "PauseAI US"
+			"parent_name": "United States"
 		},
 		{
 			"name": "Vanderbilt University (Nashville)",
 			"lat": 36.1447,
 			"lon": -86.8027,
 			"link": "$$WEBSITE_US$$",
-			"parent_name": "PauseAI US"
+			"parent_name": "United States"
 		},
 		{
 			"name": "Austin",
 			"lat": 30.2672,
 			"lon": -97.7431,
 			"link": "$$WEBSITE_US$$",
-			"parent_name": "PauseAI US"
+			"parent_name": "United States"
 		},
 		{
 			"name": "Houston",
 			"lat": 29.7604,
 			"lon": -95.3698,
 			"link": "$$WEBSITE_US$$",
-			"parent_name": "PauseAI US"
+			"parent_name": "United States"
 		},
 		{
 			"name": "Seattle",
 			"lat": 47.6062,
 			"lon": -122.3321,
 			"link": "$$WEBSITE_US$$",
-			"parent_name": "PauseAI US"
+			"parent_name": "United States"
 		},
 		{
 			"name": "Leicester",
 			"lat": 52.6369,
 			"lon": -1.1398,
 			"link": "https://pauseai.uk/leicester/",
-			"parent_name": "PauseAI UK"
+			"parent_name": "United Kingdom"
 		},
 		{
 			"name": "Hyderabad",
@@ -597,7 +597,7 @@
 			"lat": 63.8258,
 			"lon": 20.263,
 			"link": "$$DISCORD_GLOBAL$$",
-			"parent_name": "PauseAI Sweden"
+			"parent_name": "Sweden"
 		},
 		{
 			"name": "Astana",
@@ -616,21 +616,21 @@
 			"lat": 50.7184,
 			"lon": -3.5339,
 			"link": "$$DISCORD_GLOBAL$$",
-			"parent_name": "PauseAI UK"
+			"parent_name": "United Kingdom"
 		},
 		{
 			"name": "Oxford",
 			"lat": 51.752,
 			"lon": -1.2577,
 			"link": "https://pauseai.uk/oxford/",
-			"parent_name": "PauseAI UK"
+			"parent_name": "United Kingdom"
 		},
 		{
 			"name": "Glasgow",
 			"lat": 55.8642,
 			"lon": -4.2518,
 			"link": "https://pauseai.uk/glasgow/",
-			"parent_name": "PauseAI UK"
+			"parent_name": "United Kingdom"
 		}
 	]
 }
