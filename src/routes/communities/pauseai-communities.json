@@ -45,7 +45,7 @@
 			"name": "London",
 			"lat": 51.5073509,
 			"lon": -0.12775829999998223,
-			"link": "https://chat.whatsapp.com/CkkycjLr6H96lEzJs2ezox",
+			"link": "https://pauseai.uk/london/",
 			"parent_name": "United Kingdom"
 		},
 		{
@@ -55,11 +55,11 @@
 			"link": "$$DISCORD_US$$"
 		},
 		{
-			"name": "Ausburg",
+			"name": "Augsburg",
 			"lat": 48.3705,
 			"lon": 10.8978,
 			"link": "$$DISCORD_GERMANY$$",
-			"parent_name": "Deutschland"
+			"parent_name": "Germany"
 		},
 		{
 			"name": "Paris",
@@ -167,13 +167,6 @@
 			"lon": 18.5419,
 			"link": "$$DISCORD_GLOBAL$$",
 			"parent_name": "Poland"
-		},
-		{
-			"name": "Madrid",
-			"lat": 40.4168,
-			"lon": -3.7038,
-			"link": "$$DISCORD_GLOBAL$$",
-			"parent_name": "Spain"
 		},
 		{
 			"name": "Blackpool",
@@ -286,7 +279,7 @@
 			"parent_name": "Germany"
 		},
 		{
-			"name": "Munster",
+			"name": "Münster",
 			"lat": 51.9612,
 			"lon": 7.6282,
 			"link": "$$DISCORD_GERMANY$$",
@@ -307,10 +300,10 @@
 			"parent_name": "Australia"
 		},
 		{
-			"name": "Hispanohablantes",
-			"lat": 23.6345,
-			"lon": 100.4515,
-			"link": "$$DISCORD_GLOBAL$$"
+			"name": "PauseAI en Español",
+			"lat": 40.4168,
+			"lon": -3.7038,
+			"link": "https://chat.whatsapp.com/KEgD22LEo6xEVvjH4fD8br"
 		},
 		{
 			"name": "Launceston",
@@ -579,6 +572,65 @@
 			"lon": -122.3321,
 			"link": "$$WEBSITE_US$$",
 			"parent_name": "United States"
+		},
+		{
+			"name": "Leicester",
+			"lat": 52.6369,
+			"lon": -1.1398,
+			"link": "https://pauseai.uk/leicester/",
+			"parent_name": "United Kingdom"
+		},
+		{
+			"name": "Hyderabad",
+			"lat": 17.385,
+			"lon": 78.4867,
+			"link": "$$DISCORD_GLOBAL$$"
+		},
+		{
+			"name": "Fukuoka",
+			"lat": 33.5904,
+			"lon": 130.4017,
+			"link": "https://line.me/ti/g2/rrV7AC9zmKz802Yk-BvJcyb7fHdppCtDQ1RGxQ?utm_source=invitation&utm_medium=link_copy&utm_campaign=default"
+		},
+		{
+			"name": "Umeå",
+			"lat": 63.8258,
+			"lon": 20.263,
+			"link": "$$DISCORD_GLOBAL$$",
+			"parent_name": "Sweden"
+		},
+		{
+			"name": "Astana",
+			"lat": 51.1694,
+			"lon": 71.4491,
+			"link": "$$DISCORD_GLOBAL$$"
+		},
+		{
+			"name": "Geneva",
+			"lat": 46.2044,
+			"lon": 6.1432,
+			"link": "$$DISCORD_GLOBAL$$"
+		},
+		{
+			"name": "Exeter",
+			"lat": 50.7184,
+			"lon": -3.5339,
+			"link": "$$DISCORD_GLOBAL$$",
+			"parent_name": "United Kingdom"
+		},
+		{
+			"name": "Oxford",
+			"lat": 51.752,
+			"lon": -1.2577,
+			"link": "https://pauseai.uk/oxford/",
+			"parent_name": "United Kingdom"
+		},
+		{
+			"name": "Glasgow",
+			"lat": 55.8642,
+			"lon": -4.2518,
+			"link": "https://pauseai.uk/glasgow/",
+			"parent_name": "United Kingdom"
 		}
 	]
 }
