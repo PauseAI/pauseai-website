@@ -27,7 +27,6 @@ const UNLOCALIZED_PATTERNS = [
 	'/action',
 	'/donate',
 	'/join',
-	'/events',
 	'/risks',
 	'/xrisk',
 	'/feasibility',

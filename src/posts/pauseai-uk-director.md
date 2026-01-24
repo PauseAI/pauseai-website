@@ -3,6 +3,8 @@ title: PauseAI UK Director (Vacancy)
 slug: pauseai-uk-director
 ---
 
+**This vacancy is now closed.**
+
 ## **Role description**
 
 As PauseAI’s UK Lead Organizer, you will be the point person for design and implementation of strategy in the UK, and leading growth and coordination of our volunteer base at a national level. You will be responsible for establishing PauseAI as a significant voice in the UK’s AI governance landscape while building a robust network of local chapters and activists. 

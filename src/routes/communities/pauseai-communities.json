@@ -5,7 +5,7 @@
 			"lat": 52.09073739999999,
 			"lon": 5.081420100000023,
 			"link": "$$DISCORD_GLOBAL$$",
-			"parent_name": "PauseAI Netherlands"
+			"parent_name": "Netherlands"
 		},
 		{
 			"name": "Nottingham",
@@ -72,7 +72,7 @@
 			"name": "Montreal",
 			"lat": 45.5088,
 			"lon": -73.5616,
-			"link": "https://pauseai.ca/fr/montreal.html",
+			"link": "https://pauseai.ca/montreal.html",
 			"parent_name": "Canada"
 		},
 		{
@@ -139,7 +139,7 @@
 			"lat": 52.378,
 			"lon": 4.8971,
 			"link": "https://chat.whatsapp.com/EOGvhoPCiCqDqwuf9JUxtB",
-			"parent_name": "PauseAI Netherlands"
+			"parent_name": "Netherlands"
 		},
 		{
 			"name": "Munich",
@@ -301,8 +301,8 @@
 		},
 		{
 			"name": "PauseAI en Español",
-			"lat": 23.6345,
-			"lon": 100.4515,
+			"lat": 40.4168,
+			"lon": -3.7038,
 			"link": "https://chat.whatsapp.com/KEgD22LEo6xEVvjH4fD8br"
 		},
 		{

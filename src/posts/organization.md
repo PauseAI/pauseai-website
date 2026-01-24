@@ -8,13 +8,15 @@ description: How the PauseAI organization is structured, and what resources are 
 - [Legal entities](/legal): PauseAI consists of one international entity (PauseAI Global), and several local / national legal entities. This website and the social media accounts are managed by the international entity.
 - [National groups](/national-groups): National PauseAI groups are hubs that typically manage their own local communities, and are responsible for national-level strategy and coordination. They typically have their own website, social media accounts and legal entity. National leaders meet regularly to coordinate their work.
 - [Teams](/teams): Teams are groups of volunteers who work on specific projects or tasks within PauseAI Global. Every team has its own leader, Discord channel, Drive folder and of course list of members. Reach out to a team leader to join a team!
-- [Local communities](/communities): Check if there already exists a community in your area. Most groups are communicating in our discord server, in the `#local-meetups` channel (If you want to create a new local group, post there!). Some groups are using tools like WhatsApp or a separate Discord server.
+- [Communities](/communities): Check if there already exists a community in your area. Most groups are communicating in our discord server. Some groups are using tools like WhatsApp or a separate Discord server.
 
 ![Organagram](/org.png)
 
+- [People](/about): Check out the individuals behind the board, international teams, and national groups.
+
 ## How teams work
 
-- Teams take on certain responsibilities within PauseAI. They always have a leader, a [Team Document](https://docs.google.com/document/d/1Y6yXUrmI7hU59oplJdYErvwFQFCvofLVCrjTamhwkKU/edit?tab=t.0#heading=h.2cl0wb8wji0o) (describing the team's responsibilities and processes), a Discord channel and a Drive folder. They typically regularly meet digitally to coordinate their work.
+- Teams take on certain responsibilities within PauseAI. They always have a leader, a Team Document (describing the team's responsibilities and processes), a Discord channel and a Drive folder. They typically regularly meet digitally to coordinate their work.
 - Read the [Team Lead Onboarding Document](https://docs.google.com/document/d/1obQTc4o3gSmTZ5WsvOWK9vG_7Ait6ZogDgrcj_ZKjPA/edit?tab=t.0#heading=h.1lwhibce68fa) to see what's expected of a team leader.
 - If you want to join a team, reach out to the team leader.
 
@@ -46,7 +48,7 @@ description: How the PauseAI organization is structured, and what resources are 
 
 - [Free book on AI X-Risk: Uncontrollable](https://impactbooks.store/cart/47288196366640:1?discount=UNCON-P3SFRS)
 - [Google Calendar link](https://calendar.google.com/calendar/u/0?cid=Y19mNWE4YWYyMDZlNjM1ODc2NjVjNmU4MzAzOTgzZmVmYWYzYTBjNjE0NGRiMGFhNDljOTcwZWZhNTEwYTNkODY3QGdyb3VwLmNhbGVuZGFyLmdvb2dsZS5jb20)
-- [Anonymous feedback form](https://airtable.com/appWPTGqZmUcs3NWu/pagIvo9Sv6IDHaolu/form): If you want to share some critical thoughts with us while remaining anonymous.
+- [Anonymous feedback](https://pauseai.info/contact-us?tab=feedback): If you want to share some critical thoughts with us while remaining anonymous.
 - [Microgrants](/microgrants): If you want funding for your PauseAI related project / event
 
 ## Tools used

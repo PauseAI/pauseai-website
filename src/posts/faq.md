@@ -16,9 +16,10 @@ description: Frequently asked questions about PauseAI and the risks of superinte
 
 ## Who are you?
 
-We are a community of volunteers and [local communities](/communities) coordinated by a [non-profit organization](/organization) that aims to mitigate the [risks of AI](/risks) (including the [risk of human extinction](/xrisk)).
+We are a community of volunteers and [local communities](/communities) coordinated by a [non-profit organization](/organization) that aims to mitigate the [risks of AI](/risks).
 We aim to convince our governments to step in and [pause the development of superhuman AI](/proposal).
-We do this by informing the public, talking to decision-makers, and organizing [events](/events).
+We do this by informing the public, talking to decision-makers, and organizing [events](/communities#events).
+If you want to learn more about our history and the people behind PauseAI, check out our [about us](/about) page.
 
 ## Do you have social media?
 
@@ -63,7 +64,7 @@ See our [Funding page](/funding)
 
 ## What are your plans?
 
-Focus on [growing the movement](/growth-strategy), organizing protests, lobbying politicians, and informing the public.
+Focus on growing the movement, organizing protests, lobbying politicians, and informing the public.
 
 Check out our [roadmap](/roadmap) for a detailed overview of our plans and what we could do with more funding.
 
@@ -175,7 +176,7 @@ Because acknowledging that _we are in fact in danger_ is a very, very scary thin
 ## Ok, I want to help! What can I do?
 
 There are many [things that you can do](/action).
-On your own, you can write a [letter](/writing-a-letter), post [flyers](/flyering), [learn](/learn) and inform others, join a [protest](/protests), ir [donating](/donate) some money!
+On your own, you can write a [letter](/writing-a-letter), post [flyers](/flyering), [learn](/learn) and inform others, join a [protest](/protests), or [donating](/donate) some money!
 But even more important: you can [join PauseAI](/join) and coordinate with others who are taking action.
 Check out if there are [local communities](/communities) in your area.
 If you want to contribute more, you can become a volunteer and join one of our [teams](/teams), or [set up a local community](/local-organizing)!

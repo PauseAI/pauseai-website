@@ -1,6 +1,6 @@
 ---
 title: Communications Director Vacancy at PauseAI Global (Vacancy closed)
-description: PauseAI is looking for an Communications Director to lead our Comms Team and Social Media accounts. Remote work or in-person in Utrecht, the Netherlands.
+description: PauseAI is looking for a Communications Director to lead our Comms Team and Social Media accounts. Remote work or in-person in Utrecht, the Netherlands.
 ---
 
 _Update 2025-03-24: This vacancy is now closed._
@@ -17,14 +17,14 @@ PauseAI started in April 2023 and has since grown to 2000 members, over 100 regi
 
 ## Your Role
 
-Although many volunteers contribute to PauseAI (some even full-time), PauseAI has one paid staff member ([Organizing Director](/2024-vacancy-organizing-director)
+Although many volunteers contribute to PauseAI (some even full-time), PauseAI has one paid staff member ([Organizing Director](/2024-vacancy-organizing-director))
 You will be the second hire and you will play a crucial role in how the organization grows and evolves.
 You will work closely with the founder, Joep Meindertsma.
 Be aware that PauseAI may grow very quickly in the near future, both in terms of members and funding.
 
 ### Tasks & Responsibilities
 
-- Lead the Comms [Team](/teams) (multiple volunteers with diverse relevant skills, some of who create and edit videos)
+- Lead the Comms [Team](/teams) (multiple volunteers with diverse relevant skills, some of whom create and edit videos)
 - Develop and execute a communication strategy
 - Set up an international communication pipeline for the various National Groups.
 - Run our Social Media accounts (Twitter, Facebook, TikTok, LinkedIn, YouTube, Instagram, SubStack)

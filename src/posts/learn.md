@@ -46,16 +46,16 @@ import { CirclePause, CircleQuestionMark, Cog, Earth, Footprints, MessageSquareQ
 
 <!-- Better to link to the playlist I think.
 - [Kurzgesagt - A.I. ‐ Humanity's Final Invention?](https://www.youtube.com/watch?v=fa8k8IQ1_X0) (20 mins). The history of AI, and an introduction to the concept of superintelligence.
-- [80k hours - Could AI wipe out humanity?](https://youtu.be/qzyEgZwfkKY?si=ief1l2PpkZ7_s6sq) (10 mins). A great introduction to the problem, from a down-to-earth perspective.
+- [80k hours - Could AI wipe out humanity?](https://youtu.be/qzyEgZwfkKY) (10 mins). A great introduction to the problem, from a down-to-earth perspective.
 - [Superintelligent AI Should Worry You...](https://www.youtube.com/watch?v=xBqU1QxCao8) (1 min). The best super short introduction.
 - [Don't look up - The Documentary: The Case For AI As An Existential Threat](https://www.youtube.com/watch?v=U1eyUjVRir4) (17 mins). Powerful and nicely edited documentary about the dangers of AI, with many expert quotes from interviews.
-- [Countries create AI for reasons](https://youtu.be/-9V9cIixPbM?si=L9q6PF2D6h_EBEwF) (10 mins). Caricature of the race to a superintelligence and its dangers.
+- [Countries create AI for reasons](https://youtu.be/-9V9cIixPbM) (10 mins). Caricature of the race to a superintelligence and its dangers.
 - [Max Tegmark | Ted Talk (2023)](https://www.youtube.com/watch?v=xUNx_PxNHrY) (15 mins). AI capabilities are improving quicker than expected.
 - [Tristan Harris | Nobel Prize Summit 2023](https://www.youtube.com/watch?v=6lVBp2XjWsg) (15 mins). Talk in why we need to "Embrace our paleolithic brains, upgrade our medieval institutions and bind god-like technology".
 - [Sam Harris | Can we build AI without losing control over it?](https://www.youtube.com/watch?v=8nt3edWLgIg) (15 mins). Ted talk about the crazy situation we're in.
-- [Ilya: the AI scientist shaping the world](https://youtu.be/9iqn1HhFJ6c?si=WnzvpdsPtgCvqAZg) (12 mins). Co-founder and former Chief Scientist at OpenAI explains how AGI will take control over everything and that's why we must teach them to care for humans.
+- [Ilya: the AI scientist shaping the world](https://youtu.be/9iqn1HhFJ6c) (12 mins). Co-founder and former Chief Scientist at OpenAI explains how AGI will take control over everything and that's why we must teach them to care for humans.
 - [Exploring the dangers from Artificial Intelligence](https://www.youtube.com/watch?v=sPyu_dTSma0&t=1328s) (25 mins). Summary of cybersecurity, biohazard and power-seeking AI risks.
-- [Why this top AI guru thinks we might be in extinction level trouble | The InnerView](https://youtu.be/YZjmZFDx-pA?si=Y7QUxTaJcuC6LVji) (26 mins). Interview with Connor Leahy on AI X-risks on television.
+- [Why this top AI guru thinks we might be in extinction level trouble | The InnerView](https://youtu.be/YZjmZFDx-pA) (26 mins). Interview with Connor Leahy on AI X-risks on television.
 - [The AI Dilemma](https://www.youtube.com/watch?v=xoVJKj8lcNQ&t=1903s) (1hr). Presentation about the dangers of AI and the race which AI companies are stuck in.
 -->
 
@@ -67,7 +67,7 @@ import { CirclePause, CircleQuestionMark, Cog, Earth, Footprints, MessageSquareQ
 
 - [DoomDebates](https://www.youtube.com/@DoomDebates) by Liron Shapira, completely focused on AI doom.
 - [For Humanity Podcast](https://www.youtube.com/@ForHumanityPodcast) by ex-news anchor John Sherman.
-- [Future of Life Institute | Connor Leahy on AI Safety and Why the World is Fragile](https://youtu.be/cSL3Zau1X8g?si=0X3EKoxZ80_HN9Rl&t=1803). Interview with Connor about the AI Safety strategies.
+- [Future of Life Institute | Connor Leahy on AI Safety and Why the World is Fragile](https://youtu.be/cSL3Zau1X8g?t=1803). Interview with Connor about the AI Safety strategies.
 - [Lex Fridman | Max Tegmark: The Case for Halting AI Development](https://youtu.be/VcVfceTsD0A?t=1547). Interview that dives into the details of our current dangerous situation.
 - [Sam Harris | Eliezer Yudkowsky: AI, Racing Toward the Brink](https://samharris.org/episode/SE60B0CF4B8). Conversation about the nature of intelligence, different types of AI, the alignment problem, Is vs Ought, and more. One of many episodes Making Sense has on AI Safety.
 - [Connor Leahy, AI Fire Alarm](https://youtu.be/pGjyiqJZPJo?t=2510). Talk about the intelligence explosion and why it would be the most important thing that could ever happen.

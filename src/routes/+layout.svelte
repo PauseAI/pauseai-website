@@ -42,7 +42,7 @@
 <PreloadFonts urls={[robotoSlabLatin300, sairaCondensedLatin700]} />
 
 <h2 style="width: 0; height: 0; margin: 0; padding: 0; visibility: hidden;" data-pagefind-ignore>
-	(Top)
+	Top
 </h2>
 
 <!-- Make sure we only show one banner at a time-->
@@ -65,7 +65,7 @@
 					></b
 				>
 			</Banner>
-		{:else}
+		{:else if false}
 			<Banner contrast={hero} target="/littlehelpers">
 				<strong>🎄 Holiday Matching Campaign!</strong> Help fund volunteer stipends for PauseAI
 				advocates. <Link href="/littlehelpers">Join the Little Helpers campaign →</Link>
