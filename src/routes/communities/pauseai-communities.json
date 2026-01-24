@@ -55,7 +55,7 @@
 			"link": "$$DISCORD_US$$"
 		},
 		{
-			"name": "Ausburg",
+			"name": "Augsburg",
 			"lat": 48.3705,
 			"lon": 10.8978,
 			"link": "$$DISCORD_GERMANY$$",
@@ -279,7 +279,7 @@
 			"parent_name": "PauseAI Germany"
 		},
 		{
-			"name": "Munster",
+			"name": "Münster",
 			"lat": 51.9612,
 			"lon": 7.6282,
 			"link": "$$DISCORD_GERMANY$$",
@@ -574,7 +574,7 @@
 			"parent_name": "PauseAI US"
 		},
 		{
-			"name": "Leicestershire",
+			"name": "Leicester",
 			"lat": 52.6369,
 			"lon": -1.1398,
 			"link": "https://pauseai.uk/leicester/",
