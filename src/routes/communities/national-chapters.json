@@ -96,6 +96,13 @@
 			"lat": 65,
 			"lon": 17,
 			"link": "https://pauseai.se/"
+		},
+		{
+			"name": "Italy",
+			"country_local": "Italia",
+			"lat": 42.5,
+			"lon": 12.5,
+			"link": "$$WHATSAPP_ITALY$$"
 		}
 	]
 }
