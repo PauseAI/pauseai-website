@@ -125,7 +125,8 @@
 			"name": "Rome",
 			"lat": 41.8967,
 			"lon": 12.482,
-			"link": "$$DISCORD_GLOBAL$$"
+			"link": "$$DISCORD_GLOBAL$$",
+			"parent_name": "Italy"
 		},
 		{
 			"name": "Toronto",
@@ -213,7 +214,8 @@
 			"name": "Milan",
 			"lat": 45.4642,
 			"lon": 9.19,
-			"link": "$$WHATSAPP_ITALY$$"
+			"link": "$$DISCORD_GLOBAL$$",
+			"parent_name": "Italy"
 		},
 		{
 			"name": "Kraków",
