@@ -633,6 +633,19 @@
 			"lon": -4.2518,
 			"link": "https://pauseai.uk/glasgow/",
 			"parent_name": "United Kingdom"
+		},
+		{
+			"name": "Porto",
+			"lat": 41.1579,
+			"lon": -8.6291,
+			"link": "mailto:vpinto970@proton.me"
+		},
+		{
+			"name": "Galesburg",
+			"lat": 40.9478,
+			"lon": -90.3712,
+			"link": "mailto:hartwagle@gmail.com",
+			"parent_name": "United States"
 		}
 	]
 }
