@@ -75,7 +75,7 @@
 		"@anthropic-ai/sdk": "^0.39.0",
 		"@fontsource/roboto-slab": "^5.2.8",
 		"@fontsource/saira-condensed": "^5.2.8",
-		"@glidejs/glide": "~3.6.2",
+		"@glidejs/glide": "^3.7.1",
 		"@number-flow/svelte": "^0.3.10",
 		"@pagefind/default-ui": "^1.4.0",
 		"@prgm/sveltekit-progress-bar": "^2.0.0",
