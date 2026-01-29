@@ -18,8 +18,8 @@ importers:
         specifier: ^5.2.8
         version: 5.2.8
       '@glidejs/glide':
-        specifier: ^3.7.1
-        version: 3.7.1
+        specifier: ~3.6.2
+        version: 3.6.2
       '@number-flow/svelte':
         specifier: ^0.3.10
         version: 0.3.10(svelte@4.2.20)
@@ -772,8 +772,8 @@ packages:
   '@fontsource/saira-condensed@5.2.8':
     resolution: {integrity: sha512-wRNl7O45JWSB5TUVRhJFXZ4QXD/rATKkM1XMUJvPIZjIqIqIzXdcZs55iAMZ8BV0GMHVpoQ3Oa1W4ydHrRrs3Q==}
 
-  '@glidejs/glide@3.7.1':
-    resolution: {integrity: sha512-8he0pZpLSqTesSFYiuWdhBmtdlYSPWxfPUCKtkkiX6ZmT8UdMdmoFPtJaOwLBXv4p2JiGxqbuPdiRGGo2e/htQ==}
+  '@glidejs/glide@3.6.2':
+    resolution: {integrity: sha512-oXw7In0IZV69PC0PChQakY+yh+UnqIb5+zfVuEIzub6Kkfl1foo7TAhr2PZXPzihOG9YS57t8wvdzBFEZ0aPVA==}
 
   '@humanfs/core@0.19.1':
     resolution: {integrity: sha512-5DyQ4+1JEUzejeK1JGICcideyfUbGixgS9jNgex5nqkW+cY7WZhxBigmieN5Qnw9ZosSNVC9KQKyb+GUaGyKUA==}
@@ -3824,7 +3824,7 @@ snapshots:
 
   '@fontsource/saira-condensed@5.2.8': {}
 
-  '@glidejs/glide@3.7.1': {}
+  '@glidejs/glide@3.6.2': {}
 
   '@humanfs/core@0.19.1': {}
 
