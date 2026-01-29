@@ -4,6 +4,7 @@
 	import PostMeta from '$lib/components/PostMeta.svelte'
 	import PreloadFonts from '$lib/components/PreloadFonts.svelte'
 	import QuotesCarousel from '$lib/components/QuotesCarousel.svelte'
+	import PressLogos from '$lib/components/PressLogos.svelte'
 	import Stats from '$lib/components/Stats.svelte'
 	import * as m from '$lib/paraglide/messages.js'
 	import robotoSlabLatin700 from '@fontsource/roboto-slab/files/roboto-slab-latin-700-normal.woff2'
@@ -15,8 +16,6 @@
 <PreloadFonts urls={[robotoSlabLatin700]} />
 
 <PostMeta {title} {description} />
-<!-- The Hero image is in `+layout.svelte` -->
-
 <div style="height: 5rem;" />
 
 <QuotesCarousel />
@@ -40,6 +39,8 @@
 		{m.home_action_content()}
 	</Block>
 </section>
+
+<PressLogos />
 
 <NewsletterSignup />
 
