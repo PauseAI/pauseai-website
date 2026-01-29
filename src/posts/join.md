@@ -55,7 +55,9 @@ description: Sign up to join the PauseAI movement
 </Banner>
 
 <!-- svelte-ignore a11y-click-events-have-key-events -->
+
 <!-- svelte-ignore a11y-no-static-element-interactions -->
+
 <div on:click={handleNewsletterClick}>
 <NewsletterSignup bind:email={newsletterEmail} />
 </div>
@@ -109,7 +111,7 @@ One of the ways you can get involved consistently as a volunteer is by joining o
   - Understands PauseAI’s mission. 
   - A good social connector.
 
-Interested? [Email Ella](mailto:ella@pauseai.info)
+Interested? [Email Irina](mailto:irina@pauseai.info)
 
 ### Communications team member - Writing and Editing Newsletter and LinkedIn posts
 
@@ -122,7 +124,7 @@ Interested? [Email Ella](mailto:ella@pauseai.info)
   - Strong written skills, ability to capture PauseAI tone and simply communicate complex information.
   - Proof-reading.
 
-Interested? [Email Ella](mailto:ella@pauseai.info)
+Interested? [Email Irina](mailto:irina@pauseai.info)
 
 ### Communications team member - Video Editor
 
@@ -135,7 +137,7 @@ Interested? [Email Ella](mailto:ella@pauseai.info)
   - Ability to capture PauseAI tone and simply communicate complex information.
   - Video editing
 
-Interested? [Email Ella](mailto:ella@pauseai.info)
+Interested? [Email Irina](mailto:irina@pauseai.info)
 
 ### Communications team member - Outreach to influencers and media
 
@@ -148,7 +150,7 @@ Interested? [Email Ella](mailto:ella@pauseai.info)
   - Strong written skills, ability to capture PauseAI tone and simply persuasively.
   - Charisma and the ability to build and sell an idea.
 
-Interested? [Email Ella](mailto:ella@pauseai.info)
+Interested? [Email Irina](mailto:irina@pauseai.info)
 
 ### Software Team member
 
