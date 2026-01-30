@@ -143,7 +143,13 @@ function regenerateSettings(verbose = false): void {
 			]
 		}
 
+		const gitignorePath = path.join(process.cwd(), 'project.inlang', '.gitignore')
+		const gitignoreContent = fs.readFileSync(gitignorePath, 'utf-8')
+
 		compile(compileOptions)
+
+		fs.writeFileSync(gitignorePath, gitignoreContent)
+
 		console.log(`\u2705 Paraglide runtime compiled successfully!`)
 	} catch (error) {
 		console.error('\u274c Failed to compile Paraglide runtime:', (error as Error).message)
