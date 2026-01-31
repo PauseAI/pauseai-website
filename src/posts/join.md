@@ -95,7 +95,7 @@ If you want to get kick-started into action straight away, check out our [list o
 One of the ways you can get involved consistently as a volunteer is by joining one of our Digital teams - Onboarding, Communications and Software. The roles below cover some of our core functions and by getting involved, you can help us grow our reach, retain our volunteers or build the tools we need to win.
 
 - We work in [teams](/teams)
-- We collaborate mostly on our [Discord server](/discord)
+- We collaborate mostly on our [Discord server](https://discord.gg/2XXWXvErfA)
 - Read more about our [organization](/organization)
 
 ### Onboarding team member
@@ -167,7 +167,7 @@ Interested? [Email Irina](mailto:irina@pauseai.info)
 
 Yes we are happy to use language models to accelerate our development.
 
-Interested? [Email Anthony](mailto:mail@anthonybailey.net) (or DM anthonybailey.net on [Discord](/discord)). Make sure you've signed the volunteer agreement!
+Interested? [Email Anthony](mailto:mail@anthonybailey.net) (or DM anthonybailey.net on [Discord](https://discord.gg/2XXWXvErfA). Make sure you've signed the volunteer agreement!
 
 ## Stay Updated
 
