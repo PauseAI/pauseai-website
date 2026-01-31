@@ -16,11 +16,14 @@
 <PreloadFonts urls={[robotoSlabLatin700]} />
 
 <PostMeta {title} {description} />
-<div style="height: 5rem;" />
+<div style="height: 4rem;" />
 
 <QuotesCarousel />
 <div class="divider" />
+
 <Stats />
+<div class="divider" />
+<PressLogos />
 <div class="divider" />
 <section>
 	<Block linkText={m.home_risks_c2a()} href="/risks">
@@ -39,8 +42,6 @@
 		{m.home_action_content()}
 	</Block>
 </section>
-
-<PressLogos />
 
 <NewsletterSignup />
 
