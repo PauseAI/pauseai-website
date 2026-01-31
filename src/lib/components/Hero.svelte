@@ -1,5 +1,5 @@
 <script lang="ts">
-	import homeHeroDesktop from '$assets/protests/Home Hero - web.jpg?enhanced'
+	import homeHeroDesktop from '$assets/protests/Home Hero - web - Faded.jpg?enhanced'
 	import homeHeroMobile from '$assets/protests/Home Hero - mobile.jpg?enhanced'
 	import { onMount } from 'svelte'
 	import { emulateCqwIfNeeded } from '$lib/container-query-units'
@@ -148,7 +148,5 @@
 		object-fit: contain;
 		object-position: center bottom;
 		transform-origin: center bottom;
-		mask-image: linear-gradient(to right, black 80%, transparent 100%);
-		-webkit-mask-image: linear-gradient(to right, black 80%, transparent 100%);
 	}
 </style>
