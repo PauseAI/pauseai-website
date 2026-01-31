@@ -11,10 +11,10 @@ html {
 	--page-width: 40rem; /* Please update in media queries and $lib/components/custom/img.svelte */
 
 	/* Colors */
-	--t-color-main: #ff9416; /* Default main color, approximately hsl(32, 100%, 54%)*/
+	--t-color-main: #f68b1e; /* Default main color - saturated orange */
 
 	/* dark */
-	--brand-dark: hsl(32, 100%, 44%);
+	--brand-dark: #f68b1e;
 
 	/* light */
 	--brand-light: var(--t-color-main);
