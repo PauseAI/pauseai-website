@@ -15,8 +15,62 @@
 
 	let formData = {
 		media: { name: '', email: '', subject: '', organization: '', details: '' },
-		partnerships: { name: '', email: '', organization: '', subject: '', message: '' },
+		partnerships: {
+			name: '',
+			email: '',
+			organization: '',
+			city_country: '',
+			partnership_type: '',
+			other_partnership_type: '',
+			message: ''
+		},
 		feedback: { name: '', email: '', subject: '', message: '' }
+	}
+
+	const partnershipOptions = [
+		'Mobilize grassroots support for PauseAI’s mission',
+		'Open a chapter in my city/country',
+		'Organize a public demonstration or protest',
+		'Support citizen lobbying efforts',
+		'Invite Pause AI to participate/speak at your local event/meeting',
+		'Test and refine policy proposals with policymakers',
+		'Amplify Pause AI campaign and/or proposal',
+		'Assist with surveys or qualitative data collection',
+		'Help disseminate research findings to the public',
+		'Connect Pause AI with experts',
+		'Share grassroots public sentiment data',
+		'Exchange volunteers for events or campaigns',
+		'Pool resources for joint campaigns or event',
+		'Collaborate on grant applications',
+		'Co-create educational or advocacy content',
+		'Mobilize volunteers for emergency response',
+		'Adapt messaging for local/international contexts',
+		'Connect with engaged volunteer base',
+		'Explore general partnership opportunities',
+		'Other'
+	]
+
+	function countWords(str: string) {
+		return str.trim().split(/\s+/).length
+	}
+
+	function validatePartnershipForm() {
+		if (activeTab !== 'partnerships') return true
+
+		if (
+			formData.partnerships.partnership_type === 'Other' &&
+			countWords(formData.partnerships.other_partnership_type) > 10
+		) {
+			toast.error('Other partnership type must be 10 words or less.')
+			return false
+		}
+
+		const messageWords = countWords(formData.partnerships.message)
+		if (messageWords > 200) {
+			toast.error(`Message must be 200 words or less. (Current: ${messageWords} words)`)
+			return false
+		}
+		return true
 	}
 
 	onMount(() => {
@@ -45,7 +99,19 @@
 		localStorage.setItem('contactFormData', JSON.stringify(formData))
 	}
 
-	function handleEnhance() {
+	function handleEnhance({ cancel }: { cancel: () => void }) {
+		if (activeTab === 'partnerships') {
+			// Manually validate because we can't easily use the form state inside the enhancer
+			// without potentially stale data if we just used `formData` variable.
+			// But `formData` variable IS bound to inputs, so it should be fine.
+			// However, `data` from the argument contains the actual FormData being submitted.
+
+			if (!validatePartnershipForm()) {
+				cancel()
+				return
+			}
+		}
+
 		loading = true
 		return async ({
 			result,
@@ -66,7 +132,9 @@
 						name: '',
 						email: '',
 						organization: '',
-						subject: '',
+						city_country: '',
+						partnership_type: '',
+						other_partnership_type: '',
 						message: ''
 					}
 				} else if (activeTab === 'feedback') {
@@ -119,9 +187,8 @@
 		{#if activeTab === 'partnerships'}
 			<section id="partnerships-contact">
 				<p class="tab-intro">
-					Interested in collaborating? Read about our <Link href="/partnerships"
-						>partnership opportunities</Link
-					>.
+					Ready to collaborate with PauseAI's network to build the momentum required to drive
+					meaningful change in AI policy? We would love to hear from you.
 				</p>
 				<form method="POST" action="?/partnerships" use:enhance={handleEnhance}>
 					<div class="field">
@@ -149,27 +216,57 @@
 							type="text"
 							id="part-org"
 							name="organization"
-							required
-							placeholder="Organization"
+							placeholder="Organization (Optional)"
 							bind:value={formData.partnerships.organization}
 						/>
 					</div>
 					<div class="field">
 						<input
 							type="text"
-							id="part-subject"
-							name="subject"
+							id="part-city"
+							name="city_country"
 							required
-							placeholder="Subject"
-							bind:value={formData.partnerships.subject}
+							placeholder="City, Country"
+							bind:value={formData.partnerships.city_country}
 						/>
 					</div>
 					<div class="field">
+						<label for="part-type" class="field-label"
+							>How would you like to partner with us? *</label
+						>
+						<select
+							id="part-type"
+							name="partnership_type"
+							required
+							bind:value={formData.partnerships.partnership_type}
+						>
+							<option value="" disabled selected>Select an option</option>
+							{#each partnershipOptions as option}
+								<option value={option}>{option}</option>
+							{/each}
+						</select>
+					</div>
+
+					{#if formData.partnerships.partnership_type === 'Other'}
+						<div class="field">
+							<input
+								type="text"
+								id="part-other"
+								name="other_partnership_type"
+								required
+								placeholder="Enter details (max 10 words)"
+								bind:value={formData.partnerships.other_partnership_type}
+							/>
+						</div>
+					{/if}
+
+					<div class="field">
+						<label for="part-message" class="field-label">Details (max 200 words) *</label>
 						<textarea
 							id="part-message"
 							name="message"
 							required
-							placeholder="How would you like to partner with us?"
+							placeholder="Provide additional details to how you would like to partner with us, particularly if related to a time sensitive matter."
 							bind:value={formData.partnerships.message}
 						></textarea>
 					</div>
@@ -455,5 +552,38 @@
 			flex-direction: column;
 			gap: 0.5rem;
 		}
+	}
+
+	select {
+		width: 100%;
+		padding: 0.8rem 1.2rem;
+		border: 1px solid var(--brand-subtle);
+		border-radius: 20px;
+		background-color: var(--bg);
+		color: var(--text);
+		font-family: var(--font-body);
+		font-size: 1rem;
+		font-weight: 300;
+		box-sizing: border-box;
+		display: block;
+		appearance: none;
+		background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+		background-repeat: no-repeat;
+		background-position: right 1rem center;
+		background-size: 1em;
+	}
+
+	select:focus {
+		outline: 2px solid var(--brand);
+		border-color: transparent;
+	}
+
+	.field-label {
+		margin-bottom: 0.5rem;
+		margin-left: 0.5rem;
+		font-size: 0.9rem;
+		font-weight: 500;
+		color: var(--text);
+		opacity: 0.9;
 	}
 </style>
