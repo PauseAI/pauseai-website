@@ -111,6 +111,58 @@ async function sendContactEmail(data: {
 	}
 }
 
+async function sendConfirmationEmail(data: {
+	name: string
+	email: string
+	type: keyof typeof CONTACT_RECIPIENTS
+}) {
+	if (!env.MAILERSEND_API_KEY || !data.email) return
+
+	const teamEmail = CONTACT_RECIPIENTS[data.type]
+
+	const emailBody = {
+		from: {
+			email: teamEmail,
+			name: 'PauseAI Team'
+		},
+		reply_to: {
+			email: teamEmail,
+			name: 'PauseAI Team'
+		},
+		to: [
+			{
+				email: data.email,
+				name: data.name
+			}
+		],
+		subject: 'Thank you for contacting PauseAI',
+		html: `
+			<p>Hello,</p>
+			<p>Thank you for your interest — we appreciate you reaching out.</p>
+			<p>We’ve received your inquiry, and a member of our team will respond promptly.</p>
+			<p>We are a small team, therefore we aim to get back to you within 3 – 4 business days.</p>
+			<p>Thanks again for your patience and interest.</p>
+			<br>
+			<p>Best regards,</p>
+			<p>Pause AI team</p>
+		`,
+		text: `Hello,\n\nThank you for your interest — we appreciate you reaching out.\n\nWe’ve received your inquiry, and a member of our team will respond promptly.\n\nWe are a small team, therefore we aim to get back to you within 3 – 4 business days.\n\nThanks again for your patience and interest.\n\n\nBest regards,\n\nPause AI team`
+	}
+
+	try {
+		await fetch('https://api.mailersend.com/v1/email', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+				Authorization: `Bearer ${env.MAILERSEND_API_KEY}`
+			},
+			body: JSON.stringify(emailBody)
+		})
+	} catch (error) {
+		console.error('Failed to send confirmation email:', error)
+	}
+}
+
 export const actions: Actions = {
 	standard: async ({ request }) => {
 		const data = await request.formData()
@@ -134,6 +186,8 @@ export const actions: Actions = {
 		if (!result.success) {
 			return fail(500, { message: result.message })
 		}
+
+		await sendConfirmationEmail({ name, email, type: 'Standard' })
 
 		return { success: true }
 	},
@@ -162,6 +216,8 @@ export const actions: Actions = {
 			return fail(500, { message: result.message })
 		}
 
+		await sendConfirmationEmail({ name, email, type: 'Media' })
+
 		return { success: true }
 	},
 	partnerships: async ({ request }) => {
@@ -189,6 +245,8 @@ export const actions: Actions = {
 			return fail(500, { message: result.message })
 		}
 
+		await sendConfirmationEmail({ name, email, type: 'Partnerships' })
+
 		return { success: true }
 	},
 	feedback: async ({ request }) => {
@@ -212,6 +270,10 @@ export const actions: Actions = {
 
 		if (!result.success) {
 			return fail(500, { message: result.message })
+		}
+
+		if (email) {
+			await sendConfirmationEmail({ name, email, type: 'Feedback' })
 		}
 
 		return { success: true }
