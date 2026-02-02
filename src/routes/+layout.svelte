@@ -57,7 +57,7 @@
 {:else if geo?.country?.code === 'UK'}
 	<Banner contrast={hero}>
 		<b
-			>PauseAI's largest ever protest will be on Saturday February 28th in London. | <Link
+			>PauseAI's largest ever protest will be on Saturday February 28th in London. <Link
 				href="https://luma.com/o0p4htmk">Sign up now!</Link
 			></b
 		>
