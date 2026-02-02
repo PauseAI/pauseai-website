@@ -10,11 +10,10 @@
 
 	const { title, description } = meta
 
-	let activeTab: 'standard' | 'media' | 'partnerships' | 'feedback' = 'standard'
+	let activeTab: 'media' | 'partnerships' | 'feedback' = 'partnerships'
 	let loading = false
 
 	let formData = {
-		standard: { name: '', email: '', subject: '', message: '' },
 		media: { name: '', email: '', subject: '', organization: '', details: '' },
 		partnerships: { name: '', email: '', organization: '', subject: '', message: '' },
 		feedback: { name: '', email: '', subject: '', message: '' }
@@ -62,9 +61,7 @@
 				)
 
 				// Clear the data for the successfully submitted tab
-				if (activeTab === 'standard') {
-					formData.standard = { name: '', email: '', subject: '', message: '' }
-				} else if (activeTab === 'media') {
+				if (activeTab === 'media') {
 					formData.media = { name: '', email: '', subject: '', organization: '', details: '' }
 				} else if (activeTab === 'partnerships') {
 					formData.partnerships = {
@@ -102,10 +99,10 @@
 	<div class="tabs">
 		<button
 			class="tab-button"
-			class:active={activeTab === 'standard'}
-			on:click={() => (activeTab = 'standard')}
+			class:active={activeTab === 'partnerships'}
+			on:click={() => (activeTab = 'partnerships')}
 		>
-			General Inquiries
+			Partnerships
 		</button>
 		<button
 			class="tab-button"
@@ -113,13 +110,6 @@
 			on:click={() => (activeTab = 'media')}
 		>
 			Press & Media
-		</button>
-		<button
-			class="tab-button"
-			class:active={activeTab === 'partnerships'}
-			on:click={() => (activeTab = 'partnerships')}
-		>
-			Partnerships
 		</button>
 		<button
 			class="tab-button"
@@ -131,46 +121,61 @@
 	</div>
 
 	<div class="form-container">
-		{#if activeTab === 'standard'}
-			<section id="standard-contact">
-				<form method="POST" action="?/standard" use:enhance={handleEnhance}>
+		{#if activeTab === 'partnerships'}
+			<section id="partnerships-contact">
+				<p class="tab-intro">
+					Interested in collaborating? Read about our <Link href="/partnerships"
+						>partnership opportunities</Link
+					>.
+				</p>
+				<form method="POST" action="?/partnerships" use:enhance={handleEnhance}>
 					<div class="field">
 						<input
 							type="text"
-							id="std-name"
+							id="part-name"
 							name="name"
 							required
 							placeholder="Full Name"
-							bind:value={formData.standard.name}
+							bind:value={formData.partnerships.name}
 						/>
 					</div>
 					<div class="field">
 						<input
 							type="email"
-							id="std-email"
+							id="part-email"
 							name="email"
 							required
 							placeholder="Email"
-							bind:value={formData.standard.email}
+							bind:value={formData.partnerships.email}
 						/>
 					</div>
 					<div class="field">
 						<input
 							type="text"
-							id="std-subject"
+							id="part-org"
+							name="organization"
+							required
+							placeholder="Organization"
+							bind:value={formData.partnerships.organization}
+						/>
+					</div>
+					<div class="field">
+						<input
+							type="text"
+							id="part-subject"
 							name="subject"
 							required
 							placeholder="Subject"
-							bind:value={formData.standard.subject}
+							bind:value={formData.partnerships.subject}
 						/>
 					</div>
 					<div class="field">
 						<textarea
-							id="std-message"
+							id="part-message"
 							name="message"
 							required
-							placeholder="Message"
-							bind:value={formData.standard.message}
+							placeholder="How would you like to partner with us?"
+							bind:value={formData.partnerships.message}
 						></textarea>
 					</div>
 					<button type="submit" disabled={loading}>
@@ -233,68 +238,6 @@
 							required
 							placeholder="Message"
 							bind:value={formData.media.details}
-						></textarea>
-					</div>
-					<button type="submit" disabled={loading}>
-						{loading ? 'Sending...' : 'Send Message'}
-					</button>
-				</form>
-			</section>
-		{:else if activeTab === 'partnerships'}
-			<section id="partnerships-contact">
-				<p class="tab-intro">
-					Interested in collaborating? Read about our <Link href="/partnerships"
-						>partnership opportunities</Link
-					>.
-				</p>
-				<form method="POST" action="?/partnerships" use:enhance={handleEnhance}>
-					<div class="field">
-						<input
-							type="text"
-							id="part-name"
-							name="name"
-							required
-							placeholder="Full Name"
-							bind:value={formData.partnerships.name}
-						/>
-					</div>
-					<div class="field">
-						<input
-							type="email"
-							id="part-email"
-							name="email"
-							required
-							placeholder="Email"
-							bind:value={formData.partnerships.email}
-						/>
-					</div>
-					<div class="field">
-						<input
-							type="text"
-							id="part-org"
-							name="organization"
-							required
-							placeholder="Organization"
-							bind:value={formData.partnerships.organization}
-						/>
-					</div>
-					<div class="field">
-						<input
-							type="text"
-							id="part-subject"
-							name="subject"
-							required
-							placeholder="Subject"
-							bind:value={formData.partnerships.subject}
-						/>
-					</div>
-					<div class="field">
-						<textarea
-							id="part-message"
-							name="message"
-							required
-							placeholder="How would you like to partner with us?"
-							bind:value={formData.partnerships.message}
 						></textarea>
 					</div>
 					<button type="submit" disabled={loading}>
