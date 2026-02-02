@@ -54,6 +54,14 @@
 		<!-- eslint-disable-next-line svelte/no-at-html-tags not vulnerable against XSS -->
 		{@html data.localeAlert.message}
 	</Banner>
+{:else if geo?.country?.code === 'UK'}
+	<Banner contrast={hero}>
+		<b
+			>PauseAI's largest ever protest will be on Saturday February 28th in London. | <Link
+				href="https://luma.com/o0p4htmk">Sign up now!</Link
+			></b
+		>
+	</Banner>
 {:else}
 	<NearbyEvent contrast={hero} bind:eventFound {geo} />
 	{#if !eventFound}
