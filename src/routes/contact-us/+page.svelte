@@ -5,6 +5,10 @@
 	import { page } from '$app/stores'
 	import { onMount } from 'svelte'
 	import Link from '$lib/components/Link.svelte'
+	import PostMeta from '$lib/components/PostMeta.svelte'
+	import { meta } from './meta'
+
+	const { title, description } = meta
 
 	let activeTab: 'standard' | 'media' | 'partnerships' | 'feedback' = 'standard'
 	let loading = false
@@ -53,7 +57,9 @@
 		}) => {
 			loading = false
 			if (result.type === 'success') {
-				toast.success('Thank you for your message. We will get back to you soon.')
+				toast.success(
+					"Thank you! We've received your message. We'll get back to you as soon as possible, usually within 3 to 4 working days."
+				)
 
 				// Clear the data for the successfully submitted tab
 				if (activeTab === 'standard') {
@@ -84,14 +90,14 @@
 	}
 </script>
 
-<svelte:head>
-	<title>Contact Us | PauseAI</title>
-	<meta name="description" content="Get in touch with the PauseAI team." />
-</svelte:head>
+<PostMeta {title} {description} />
 
 <div class="contact-page">
-	<h1>Contact Us</h1>
-	<p class="intro">Get in touch with the PauseAI team</p>
+	<h1>{title}</h1>
+	<p class="intro">
+		Get in touch with the PauseAI team. As we are a small team, please allow 3 to 4 working days for
+		a response.
+	</p>
 
 	<div class="tabs">
 		<button

@@ -6,10 +6,10 @@ export const prerender = false
 
 // Configure recipient email addresses for each contact form type
 const CONTACT_RECIPIENTS = {
-	Standard: 'info@pauseai.info',
+	Standard: 'contact@pauseai.info',
 	Media: 'press@pauseai.info',
-	Partnerships: 'info@pauseai.info',
-	Feedback: 'info@pauseai.info'
+	Partnerships: 'partnerships@pauseai.info',
+	Feedback: 'feedback@pauseai.info'
 } as const
 
 async function sendContactEmail(data: {

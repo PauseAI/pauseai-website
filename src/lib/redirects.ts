@@ -6,6 +6,7 @@ const REDIRECTS: Record<string, string> = {
 	'/collages/manual_bootstrap.jpg': '/api/images/collages/manual_bootstrap.jpg',
 	'/selfie': '/sayno',
 	'/people': '/about',
+	'/about-us': '/about',
 	'/act': '/action',
 	'/actions': '/action',
 	'/local': '/communities',
@@ -27,8 +28,13 @@ const REDIRECTS: Record<string, string> = {
 	'/contact': '/contact-us'
 }
 
+const OUR_XRISK_INTROS_YOUTUBE_PLAYLIST =
+	'https://www.youtube.com/watch?v=xBqU1QxCao8&list=PLI46NoubGtIJa0JVCBR-9CayxCOmU0EJt&index=1'
 /** Temporary redirects (302) - for time-limited campaigns, A/B tests, etc. */
-const TEMPORARY_REDIRECTS: Record<string, string> = {}
+const TEMPORARY_REDIRECTS: Record<string, string> = {
+	'/see-why': OUR_XRISK_INTROS_YOUTUBE_PLAYLIST,
+	'/cy': OUR_XRISK_INTROS_YOUTUBE_PLAYLIST
+}
 
 export function handleRedirects(path: string) {
 	const permanent = REDIRECTS[path]

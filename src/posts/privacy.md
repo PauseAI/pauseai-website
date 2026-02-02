@@ -56,7 +56,7 @@ We implement a variety of security measures to maintain the safety of your perso
 
 ## 6. Your Rights
 
-You have the right to access, correct, or delete your personal information. If you wish to exercise these rights or have any questions about our privacy practices, please contact us at [insert contact email].
+You have the right to access, correct, or delete your personal information. If you wish to exercise these rights or have any questions about our privacy practices, please contact us.
 
 ## 7. Changes to This Privacy Policy
 
@@ -67,6 +67,6 @@ We may update this Privacy Policy from time to time. Any changes will be posted 
 If you have any questions or concerns about this Privacy Policy, please contact us at:
 
 **Stichting PauseAI**
-[joep@pauseai.info](mailto:joep@pauseai.info)
+[maxime@pauseai.info](mailto:maxime@pauseai.info)
 
 By using our website and services, you consent to the terms outlined in this Privacy Policy.
