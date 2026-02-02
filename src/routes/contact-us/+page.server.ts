@@ -55,7 +55,7 @@ async function sendContactEmail(data: {
 	} = {
 		from: {
 			email: 'info@pauseai.info',
-			name: 'PauseAI Contact Form'
+			name: `PauseAI ${data.type} Form`
 		},
 		to: [
 			{
@@ -63,7 +63,7 @@ async function sendContactEmail(data: {
 				name: 'PauseAI Team'
 			}
 		],
-		subject: `[Contact Form] ${data.subject}`,
+		subject: `[${data.type} Form]: ${data.subject}`,
 		html: htmlContent,
 		text: textContent
 	}
