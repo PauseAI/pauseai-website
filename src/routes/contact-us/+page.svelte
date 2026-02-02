@@ -56,9 +56,7 @@
 		}) => {
 			loading = false
 			if (result.type === 'success') {
-				toast.success(
-					"Thank you! We've received your message. We'll get back to you as soon as possible, usually within 3 to 4 working days."
-				)
+				toast.success("Thank you! We've received your message.")
 
 				// Clear the data for the successfully submitted tab
 				if (activeTab === 'media') {
@@ -91,10 +89,7 @@
 
 <div class="contact-page">
 	<h1>{title}</h1>
-	<p class="intro">
-		Get in touch with the PauseAI team. As we are a small team, please allow 3 to 4 working days for
-		a response.
-	</p>
+	<p class="intro">Get in touch with the PauseAI team.</p>
 
 	<div class="tabs">
 		<button
