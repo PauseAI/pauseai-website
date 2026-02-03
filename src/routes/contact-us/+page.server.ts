@@ -19,6 +19,7 @@ async function sendContactEmail(data: {
 	message: string
 	type: 'Standard' | 'Media' | 'Partnerships' | 'Feedback'
 	organization?: string
+	city_country?: string
 }) {
 	if (!env.MAILERSEND_API_KEY) {
 		console.error('MAILERSEND_API_KEY is not configured')
@@ -40,9 +41,13 @@ async function sendContactEmail(data: {
 		htmlContent += `<p><strong>Organization:</strong> ${data.organization}</p>`
 	}
 
+	if (data.city_country) {
+		htmlContent += `<p><strong>City, Country:</strong> ${data.city_country}</p>`
+	}
+
 	htmlContent += `<p><strong>Message:</strong></p><p>${data.message.replace(/\n/g, '<br>')}</p>`
 
-	const textContent = `Name: ${data.name}\nEmail: ${data.email}\nSubject: ${data.subject}${data.organization ? `\nOrganization: ${data.organization}` : ''}\n\nMessage:\n${data.message}`
+	const textContent = `Name: ${data.name}\nEmail: ${data.email}\nSubject: ${data.subject}${data.organization ? `\nOrganization: ${data.organization}` : ''}${data.city_country ? `\nCity, Country: ${data.city_country}` : ''}\n\nMessage:\n${data.message}`
 
 	// Build the request body for MailerSend API
 	const emailBody: {
@@ -55,7 +60,7 @@ async function sendContactEmail(data: {
 	} = {
 		from: {
 			email: 'info@pauseai.info',
-			name: 'PauseAI Contact Form'
+			name: `PauseAI ${data.type} Form`
 		},
 		to: [
 			{
@@ -63,7 +68,7 @@ async function sendContactEmail(data: {
 				name: 'PauseAI Team'
 			}
 		],
-		subject: `[Contact Form] ${data.subject}`,
+		subject: `[${data.type} Form]: ${data.subject}`,
 		html: htmlContent,
 		text: textContent
 	}
@@ -225,10 +230,18 @@ export const actions: Actions = {
 		const name = data.get('name')?.toString()
 		const email = data.get('email')?.toString()
 		const organization = data.get('organization')?.toString()
-		const subject = data.get('subject')?.toString()
+		const city_country = data.get('city_country')?.toString()
+
+		let subject = data.get('partnership_type')?.toString() || ''
+		const other_type = data.get('other_partnership_type')?.toString()
+
+		if (subject === 'Other' && other_type) {
+			subject = `Other: ${other_type}`
+		}
+
 		const message = data.get('message')?.toString()
 
-		if (!name || !email || !organization || !subject || !message) {
+		if (!name || !email || !city_country || !subject || !message) {
 			return fail(400, { message: 'Missing required fields' })
 		}
 
@@ -236,6 +249,7 @@ export const actions: Actions = {
 			name,
 			email,
 			organization,
+			city_country,
 			subject,
 			message,
 			type: 'Partnerships'
