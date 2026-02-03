@@ -2,7 +2,7 @@
 	// Using ?url to ensure Vite gives us the static asset path
 	import time from '$assets/images/press/Time_Magazine_logo.svg?url'
 	import wired from '$assets/images/press/Wired_logo.svg.png?url'
-	import verge from '$assets/images/press/The_Verge_wordmark_2022.svg?url'
+	import verge from '$assets/images/press/The_Verge_wordmark_2022.svg.png?url'
 	import bloomberg from '$assets/images/press/Bloomberg-Logo.png?url'
 	import fortune from '$assets/images/press/960px-FORTUNE-LOGO-2016.png?url'
 	import politico from '$assets/images/press/POLITICOLOGO.svg.png?url'
