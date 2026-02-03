@@ -6,10 +6,10 @@ export const prerender = false
 
 // Configure recipient email addresses for each contact form type
 const CONTACT_RECIPIENTS = {
-	Standard: 'info@pauseai.info',
+	Standard: 'contact@pauseai.info',
 	Media: 'press@pauseai.info',
-	Partnerships: 'info@pauseai.info',
-	Feedback: 'info@pauseai.info'
+	Partnerships: 'partnerships@pauseai.info',
+	Feedback: 'feedback@pauseai.info'
 } as const
 
 async function sendContactEmail(data: {
@@ -19,6 +19,7 @@ async function sendContactEmail(data: {
 	message: string
 	type: 'Standard' | 'Media' | 'Partnerships' | 'Feedback'
 	organization?: string
+	city_country?: string
 }) {
 	if (!env.MAILERSEND_API_KEY) {
 		console.error('MAILERSEND_API_KEY is not configured')
@@ -40,9 +41,13 @@ async function sendContactEmail(data: {
 		htmlContent += `<p><strong>Organization:</strong> ${data.organization}</p>`
 	}
 
+	if (data.city_country) {
+		htmlContent += `<p><strong>City, Country:</strong> ${data.city_country}</p>`
+	}
+
 	htmlContent += `<p><strong>Message:</strong></p><p>${data.message.replace(/\n/g, '<br>')}</p>`
 
-	const textContent = `Name: ${data.name}\nEmail: ${data.email}\nSubject: ${data.subject}${data.organization ? `\nOrganization: ${data.organization}` : ''}\n\nMessage:\n${data.message}`
+	const textContent = `Name: ${data.name}\nEmail: ${data.email}\nSubject: ${data.subject}${data.organization ? `\nOrganization: ${data.organization}` : ''}${data.city_country ? `\nCity, Country: ${data.city_country}` : ''}\n\nMessage:\n${data.message}`
 
 	// Build the request body for MailerSend API
 	const emailBody: {
@@ -55,7 +60,7 @@ async function sendContactEmail(data: {
 	} = {
 		from: {
 			email: 'info@pauseai.info',
-			name: 'PauseAI Contact Form'
+			name: `PauseAI ${data.type} Form`
 		},
 		to: [
 			{
@@ -63,7 +68,7 @@ async function sendContactEmail(data: {
 				name: 'PauseAI Team'
 			}
 		],
-		subject: `[Contact Form] ${data.subject}`,
+		subject: `[${data.type} Form]: ${data.subject}`,
 		html: htmlContent,
 		text: textContent
 	}
@@ -111,6 +116,58 @@ async function sendContactEmail(data: {
 	}
 }
 
+async function sendConfirmationEmail(data: {
+	name: string
+	email: string
+	type: keyof typeof CONTACT_RECIPIENTS
+}) {
+	if (!env.MAILERSEND_API_KEY || !data.email) return
+
+	const teamEmail = CONTACT_RECIPIENTS[data.type]
+
+	const emailBody = {
+		from: {
+			email: teamEmail,
+			name: 'PauseAI Team'
+		},
+		reply_to: {
+			email: teamEmail,
+			name: 'PauseAI Team'
+		},
+		to: [
+			{
+				email: data.email,
+				name: data.name
+			}
+		],
+		subject: 'Thank you for contacting PauseAI',
+		html: `
+			<p>Hello,</p>
+			<p>Thank you for your interest — we appreciate you reaching out.</p>
+			<p>We’ve received your inquiry, and a member of our team will respond promptly.</p>
+			<p>We are a small team, therefore we aim to get back to you within 3 – 4 business days.</p>
+			<p>Thanks again for your patience and interest.</p>
+			<br>
+			<p>Best regards,</p>
+			<p>Pause AI team</p>
+		`,
+		text: `Hello,\n\nThank you for your interest — we appreciate you reaching out.\n\nWe’ve received your inquiry, and a member of our team will respond promptly.\n\nWe are a small team, therefore we aim to get back to you within 3 – 4 business days.\n\nThanks again for your patience and interest.\n\n\nBest regards,\n\nPause AI team`
+	}
+
+	try {
+		await fetch('https://api.mailersend.com/v1/email', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+				Authorization: `Bearer ${env.MAILERSEND_API_KEY}`
+			},
+			body: JSON.stringify(emailBody)
+		})
+	} catch (error) {
+		console.error('Failed to send confirmation email:', error)
+	}
+}
+
 export const actions: Actions = {
 	standard: async ({ request }) => {
 		const data = await request.formData()
@@ -134,6 +191,8 @@ export const actions: Actions = {
 		if (!result.success) {
 			return fail(500, { message: result.message })
 		}
+
+		await sendConfirmationEmail({ name, email, type: 'Standard' })
 
 		return { success: true }
 	},
@@ -162,6 +221,8 @@ export const actions: Actions = {
 			return fail(500, { message: result.message })
 		}
 
+		await sendConfirmationEmail({ name, email, type: 'Media' })
+
 		return { success: true }
 	},
 	partnerships: async ({ request }) => {
@@ -169,10 +230,18 @@ export const actions: Actions = {
 		const name = data.get('name')?.toString()
 		const email = data.get('email')?.toString()
 		const organization = data.get('organization')?.toString()
-		const subject = data.get('subject')?.toString()
+		const city_country = data.get('city_country')?.toString()
+
+		let subject = data.get('partnership_type')?.toString() || ''
+		const other_type = data.get('other_partnership_type')?.toString()
+
+		if (subject === 'Other' && other_type) {
+			subject = `Other: ${other_type}`
+		}
+
 		const message = data.get('message')?.toString()
 
-		if (!name || !email || !organization || !subject || !message) {
+		if (!name || !email || !city_country || !subject || !message) {
 			return fail(400, { message: 'Missing required fields' })
 		}
 
@@ -180,6 +249,7 @@ export const actions: Actions = {
 			name,
 			email,
 			organization,
+			city_country,
 			subject,
 			message,
 			type: 'Partnerships'
@@ -188,6 +258,8 @@ export const actions: Actions = {
 		if (!result.success) {
 			return fail(500, { message: result.message })
 		}
+
+		await sendConfirmationEmail({ name, email, type: 'Partnerships' })
 
 		return { success: true }
 	},
@@ -212,6 +284,10 @@ export const actions: Actions = {
 
 		if (!result.success) {
 			return fail(500, { message: result.message })
+		}
+
+		if (email) {
+			await sendConfirmationEmail({ name, email, type: 'Feedback' })
 		}
 
 		return { success: true }

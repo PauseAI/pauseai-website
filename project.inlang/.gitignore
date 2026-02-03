@@ -1,2 +1,4 @@
 cache
 .env-cache.json
+.meta.json
+README.md
