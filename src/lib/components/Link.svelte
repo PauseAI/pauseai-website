@@ -15,7 +15,7 @@
 	let type: Type
 </script>
 
-<Link {href} {target} {rel} class={className} bind:type>
+<Link {href} {target} {rel} class={className} bind:type {...$$restProps}>
 	<slot />{#if type != Type.Internal}
 		<span style="white-space: nowrap">
 			&nbsp;

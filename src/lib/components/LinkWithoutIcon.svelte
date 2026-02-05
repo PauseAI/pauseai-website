@@ -65,6 +65,6 @@
 </script>
 
 <!-- eslint-disable-next-line svelte/no-restricted-html-elements - Warning is about using this component -->
-<a {href} {target} {rel} class={className} bind:this={anchor}>
+<a {href} {target} {rel} class={className} bind:this={anchor} {...$$restProps}>
 	<slot />
 </a>

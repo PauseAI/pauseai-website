@@ -11,33 +11,105 @@
 	import Telegram from './icons/telegram.svelte'
 	import Bluesky from './icons/bluesky.svelte'
 	import Whatsapp from './icons/whatsapp.svelte'
+	import LinkWithoutIcon from '$lib/components/LinkWithoutIcon.svelte'
 </script>
 
 <div class="social">
-	<a href="https://www.facebook.com/PauseAI/" target="_blank" title="Facebook">
-		<Facebook />
-	</a>
-	<a href="https://discord.gg/2XXWXvErfA" target="_blank" title="Discord">
-		<Discord />
-	</a>
-	<a href="https://twitter.com/PauseAI" target="_blank" title="X / Twitter">
-		<X />
-	</a>
-	<a href="https://www.linkedin.com/company/pauseai" target="_blank" title="LinkedIn">
-		<Linkedin />
-	</a>
-	<a href="https://www.tiktok.com/@pauseai" target="_blank" title="TikTok"><TikTok /></a>
-	<a href="https://www.instagram.com/pause_ai/" target="_blank" title="Instagram">
-		<Instagram />
-	</a>
-	<a href="https://www.youtube.com/@PauseAI" target="_blank" title="YouTube"> <Youtube /></a>
-	<a href="https://substack.com/@pauseai" target="_blank" title="Substack"><Substack /></a>
-	<a href="https://www.reddit.com/r/PauseAI/" target="_blank" title="Reddit"><Reddit /></a>
-	<a href="https://t.me/+UeTsIsNkmt82ZmQ8" target="_blank" title="Telegram"><Telegram /></a>
-	<a href="https://chat.whatsapp.com/JgcAbjqRr8X3tvrXdeQvfj" target="_blank" title="Whatsapp"
-		><Whatsapp /></a
+	<LinkWithoutIcon
+		href="https://www.facebook.com/PauseAI/"
+		target="_blank"
+		title="Facebook"
+		class="social-link"
 	>
-	<a href="https://bsky.app/profile/pauseai.bsky.social"><Bluesky /></a>
+		<Facebook />
+	</LinkWithoutIcon>
+	<LinkWithoutIcon
+		href="https://discord.gg/2XXWXvErfA"
+		target="_blank"
+		title="Discord"
+		class="social-link"
+	>
+		<Discord />
+	</LinkWithoutIcon>
+	<LinkWithoutIcon
+		href="https://twitter.com/PauseAI"
+		target="_blank"
+		title="X / Twitter"
+		class="social-link"
+	>
+		<X />
+	</LinkWithoutIcon>
+	<LinkWithoutIcon
+		href="https://www.linkedin.com/company/pauseai"
+		target="_blank"
+		title="LinkedIn"
+		class="social-link"
+	>
+		<Linkedin />
+	</LinkWithoutIcon>
+	<LinkWithoutIcon
+		href="https://www.tiktok.com/@pauseai"
+		target="_blank"
+		title="TikTok"
+		class="social-link"
+	>
+		<TikTok />
+	</LinkWithoutIcon>
+	<LinkWithoutIcon
+		href="https://www.instagram.com/pause_ai/"
+		target="_blank"
+		title="Instagram"
+		class="social-link"
+	>
+		<Instagram />
+	</LinkWithoutIcon>
+	<LinkWithoutIcon
+		href="https://www.youtube.com/@PauseAI"
+		target="_blank"
+		title="YouTube"
+		class="social-link"
+	>
+		<Youtube />
+	</LinkWithoutIcon>
+	<LinkWithoutIcon
+		href="https://substack.com/@pauseai"
+		target="_blank"
+		title="Substack"
+		class="social-link"
+	>
+		<Substack />
+	</LinkWithoutIcon>
+	<LinkWithoutIcon
+		href="https://www.reddit.com/r/PauseAI/"
+		target="_blank"
+		title="Reddit"
+		class="social-link"
+	>
+		<Reddit />
+	</LinkWithoutIcon>
+	<LinkWithoutIcon
+		href="https://t.me/+UeTsIsNkmt82ZmQ8"
+		target="_blank"
+		title="Telegram"
+		class="social-link"
+	>
+		<Telegram />
+	</LinkWithoutIcon>
+	<LinkWithoutIcon
+		href="https://chat.whatsapp.com/JgcAbjqRr8X3tvrXdeQvfj"
+		target="_blank"
+		title="Whatsapp"
+		class="social-link"
+	>
+		<Whatsapp />
+	</LinkWithoutIcon>
+	<LinkWithoutIcon
+		href="https://bsky.app/profile/pauseai.bsky.social"
+		class="social-link"
+		title="Bluesky"
+	>
+		<Bluesky />
+	</LinkWithoutIcon>
 </div>
 
 <style>
@@ -48,7 +120,7 @@
 		flex-wrap: wrap;
 	}
 
-	.social a {
+	.social :global(.social-link) {
 		padding: 0.5rem;
 		width: 1rem;
 		height: 1rem;
@@ -56,7 +128,7 @@
 		fill: var(--text);
 	}
 
-	.social a:hover {
+	.social :global(.social-link):hover {
 		fill: var(--brand);
 	}
 </style>
