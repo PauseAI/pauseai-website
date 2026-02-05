@@ -4,7 +4,7 @@ slug: australia
 description: the Australian chapter of PauseAI
 ---
 
-# Calling all Australians. We need your help
+## Calling all Australians. We need your help
 
 <iframe
   src="https://luma.com/embed/event/evt-4k7XhiXHEEuu9qU/simple"
