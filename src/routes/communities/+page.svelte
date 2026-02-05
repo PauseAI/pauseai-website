@@ -3,6 +3,7 @@
 	import Link from '$lib/components/Link.svelte'
 	import CommunitiesList from './CommunitiesList.svelte'
 	import type { GeoApiResponse } from '$api/geo/+server'
+	import type { StyleSpecification } from 'maplibre-gl'
 	import maplibregl from 'maplibre-gl'
 	import 'maplibre-gl/dist/maplibre-gl.css'
 	import { isMapboxURL, transformMapboxUrl } from 'maplibregl-mapbox-request-transformer'
@@ -13,9 +14,9 @@
 	// maplibre-gl doesn't support named imports on the server
 	const { GeolocateControl, Map, Marker, Popup } = maplibregl
 
-	export let data
-
 	const LOCATED_ZOOM = 4
+	const STYLE_URL =
+		'https://api.mapbox.com/styles/v1/mapbox/outdoors-v11?access_token=' + MAPBOX_KEY
 
 	let { title, description, date } = communitiesMeta
 
@@ -33,6 +34,21 @@
 		zoom = map.getZoom()
 		lng = map.getCenter().lng
 		lat = map.getCenter().lat
+	}
+
+	async function fetchStyle() {
+		try {
+			const res = await fetch(STYLE_URL)
+			if (!res.ok) {
+				console.error('Failed to fetch map style:', res.statusText)
+				return null
+			}
+			const style: StyleSpecification = await res.json()
+			return style
+		} catch (error) {
+			console.error('Error fetching map style:', error)
+			return null
+		}
 	}
 
 	async function fetchUserLocation() {
@@ -54,6 +70,9 @@
 	}
 
 	onMount(async () => {
+		const style = await fetchStyle()
+		if (!style) return
+
 		const { userLng, userLat } = await fetchUserLocation()
 
 		const initialState = {
@@ -65,7 +84,7 @@
 		map = new Map({
 			container: mapContainer,
 			style: {
-				...data.style,
+				...style,
 				projection: {
 					type: 'globe'
 				}
