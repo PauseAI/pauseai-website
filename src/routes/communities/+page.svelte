@@ -3,13 +3,15 @@
 	import Link from '$lib/components/Link.svelte'
 	import CommunitiesList from './CommunitiesList.svelte'
 	import type { GeoApiResponse } from '$api/geo/+server'
-	import type * as maplibregl from 'maplibre-gl'
-	import { GeolocateControl, Map, Marker, Popup } from 'maplibre-gl'
+	import maplibregl from 'maplibre-gl'
 	import 'maplibre-gl/dist/maplibre-gl.css'
 	import { isMapboxURL, transformMapboxUrl } from 'maplibregl-mapbox-request-transformer'
 	import { onDestroy, onMount } from 'svelte'
 	import { communities, communitiesMeta } from './communities'
 	import { MAPBOX_KEY } from './constants'
+
+	// maplibre-gl doesn't support named imports on the server
+	const { GeolocateControl, Map, Marker, Popup } = maplibregl
 
 	export let data
 
