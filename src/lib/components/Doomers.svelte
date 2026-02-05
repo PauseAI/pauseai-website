@@ -304,14 +304,6 @@
 		opacity: 0.7;
 	}
 
-	.grounding-label {
-		font-size: 0.7rem;
-		font-weight: normal;
-		margin-left: 0.5rem;
-		opacity: 0.5;
-		font-style: normal;
-	}
-
 	.note {
 		font-size: 0.8rem;
 	}
