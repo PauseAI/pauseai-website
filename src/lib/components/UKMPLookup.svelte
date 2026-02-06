@@ -3,7 +3,7 @@
 	import Card from './Card.svelte'
 	import UKMPEmailForm from './UKMPEmailForm.svelte'
 	import LoadingSpinner from './LoadingSpinner.svelte'
-	import Link from '$lib/components/Link.svelte'
+	import LinkWithoutIcon from '$lib/components/LinkWithoutIcon.svelte'
 
 	interface MP {
 		email: string
@@ -158,9 +158,9 @@
 				<div class="mp-info">
 					<h3>{mp.name}</h3>
 					<p class="constituency">MP for {mp.constituency}</p>
-					<Link href={`mailto:${mp.email}`} class="email-link">
+					<LinkWithoutIcon href={`mailto:${mp.email}`} class="email-link">
 						{mp.email}
-					</Link>
+					</LinkWithoutIcon>
 				</div>
 			</Card>
 
