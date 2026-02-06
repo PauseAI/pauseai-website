@@ -1,7 +1,9 @@
 <script lang="ts">
 	import { page } from '$app/stores'
-	import { localizeHref } from '$lib/paraglide/runtime'
 	import LinkWithoutIcon from '$lib/components/LinkWithoutIcon.svelte'
+	import { localizeHref } from '$lib/paraglide/runtime'
+	import clsx from 'clsx'
+
 	export let href: string | undefined = undefined
 	export let c2a = false
 	export let ariaLabel: string | undefined = undefined
@@ -13,17 +15,6 @@
 
 	$: localizedHref = href && !external ? localizeHref(href) : href
 	$: resolvedHref = localizedHref ?? ''
-	$: className = Object.entries({
-		navlink: true,
-		first,
-		c2a,
-		inverted,
-		narrow,
-		active
-	})
-		.filter(([, enabled]) => enabled)
-		.map(([name]) => name)
-		.join(' ')
 
 	$: {
 		active = localizeHref($page.url.pathname) == localizedHref
@@ -31,7 +22,11 @@
 </script>
 
 <span>
-	<LinkWithoutIcon href={resolvedHref} class={className} aria-label={ariaLabel}>
+	<LinkWithoutIcon
+		href={resolvedHref}
+		class={clsx('navlink', { first, c2a, inverted, narrow, active })}
+		aria-label={ariaLabel}
+	>
 		<slot />
 	</LinkWithoutIcon>
 </span>

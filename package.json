@@ -85,6 +85,7 @@
 		"airtable": "^0.12.2",
 		"axios": "^1.13.4",
 		"clipboard-polyfill": "^4.1.1",
+		"clsx": "^2.1.1",
 		"escape-html": "^1.0.3",
 		"github-slugger": "^2.0.0",
 		"html-to-image": "^1.11.13",

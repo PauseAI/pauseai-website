@@ -47,6 +47,9 @@ importers:
       clipboard-polyfill:
         specifier: ^4.1.1
         version: 4.1.1
+      clsx:
+        specifier: ^2.1.1
+        version: 2.1.1
       escape-html:
         specifier: ^1.0.3
         version: 1.0.3
@@ -1760,6 +1763,10 @@ packages:
 
   clipboard-polyfill@4.1.1:
     resolution: {integrity: sha512-nbvNLrcX0zviek5QHLFRAaLrx8y/s8+RF2stH43tuS+kP5XlHMrcD0UGBWq43Hwp6WuuK7KefRMP56S45ibZkA==}
+
+  clsx@2.1.1:
+    resolution: {integrity: sha512-eYm0QWBtUrBWZWG0d386OGAw16Z995PiOVo2B7bjWSbHedGl5e0ZWaq65kOGgUSNesEIDkB9ISbTg/JK9dhCZA==}
+    engines: {node: '>=6'}
 
   code-red@1.0.4:
     resolution: {integrity: sha512-7qJWqItLA8/VPVlKJlFXU+NBlo/qyfs39aJcuMT/2ere32ZqvF5OSxgdM5xOfJJ7O429gg2HM47y8v9P+9wrNw==}
@@ -4794,6 +4801,8 @@ snapshots:
       string-width: 7.2.0
 
   clipboard-polyfill@4.1.1: {}
+
+  clsx@2.1.1: {}
 
   code-red@1.0.4:
     dependencies:
