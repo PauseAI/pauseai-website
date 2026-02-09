@@ -36,21 +36,6 @@
 		lat = map.getCenter().lat
 	}
 
-	async function fetchStyle() {
-		try {
-			const res = await fetch(STYLE_URL)
-			if (!res.ok) {
-				console.error('Failed to fetch map style:', res.statusText)
-				return null
-			}
-			const style: StyleSpecification = await res.json()
-			return style
-		} catch (error) {
-			console.error('Error fetching map style:', error)
-			return null
-		}
-	}
-
 	async function fetchUserLocation() {
 		try {
 			const response = await fetch('/api/geo')
@@ -70,9 +55,11 @@
 	}
 
 	onMount(async () => {
-		const style = await fetchStyle()
+		// Required, can throw
+		const style: StyleSpecification = await fetch(STYLE_URL).then((res) => res.json())
 		if (!style) return
 
+		// Optional, call with error handling
 		const { userLng, userLat } = await fetchUserLocation()
 
 		const initialState = {
