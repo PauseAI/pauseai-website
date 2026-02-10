@@ -2,7 +2,7 @@
 	"type": "module",
 	"name": "pause-ai",
 	"private": true,
-	"packageManager": "pnpm@9.14.4",
+	"packageManager": "pnpm@10.29.2",
 	"scripts": {
 		"clean": "tsx scripts/clean.ts",
 		"inlang:settings": "tsx scripts/inlang-settings.ts",
