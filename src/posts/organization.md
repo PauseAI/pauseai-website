@@ -31,11 +31,11 @@ Chapters typically have their own community, and may have their own website, soc
 
 Volunteers are the heart of the movement. At PauseAI Global, volunteers contribute through operational teams:
 
-| Team | Focus |
-|------|-------|
+| Team                | Focus                                                      |
+| ------------------- | ---------------------------------------------------------- |
 | **Operations Team** | Internal systems, website, tools, technical infrastructure |
-| **Onboarding Team** | Welcoming new volunteers and getting them active |
-| **Comms Team** | Content support, social media, newsletter |
+| **Onboarding Team** | Welcoming new volunteers and getting them active           |
+| **Comms Team**      | Content support, social media, newsletter                  |
 
 Each team is owned by a member of the paid staff, and may be led day-to-day by a dedicated volunteer.
 
@@ -68,12 +68,12 @@ The Advisory Council is a group of experienced, high-contribution volunteers who
 - [PauseAI Basics](/faq): FAQ, [our proposal](/proposal), [risks](/risks), [x-risk](/xrisk), [urgency](/urgency), [dangerous capabilities](/dangerous-capabilities)
 - [Flyering guide](/flyering): How to flyer effectively
 - [Counterarguments](/counterarguments)
-- [Organizing a protest](/protest-guide)
+- [Organizing a protest](/organizing-a-protest)
 - [Learn about AI safety](/learn)
 - [PauseAI in the media](/press)
 - [Email builder](/email-builder)
 - [US Lobby guide](/us-lobby-guide)
-- [Writing press releases](/press-releases)
+- [Writing press releases](/writing-press-releases)
 
 ## Strategy
 
