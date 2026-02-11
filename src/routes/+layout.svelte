@@ -2,6 +2,7 @@
 	import type { GeoApiResponse } from '$api/geo/+server'
 	import { page } from '$app/stores'
 	import Banner from '$lib/components/Banner.svelte'
+	import CampaignBanner from '$lib/components/CampaignBanner.svelte'
 	import Hero from '$lib/components/Hero.svelte'
 	import Link from '$lib/components/Link.svelte'
 	import NearbyEvent from '$lib/components/NearbyEvent.svelte'
@@ -81,6 +82,10 @@
 		{/if}
 	{/if}
 {/if}
+
+<CampaignBanner href="/india-summit-2026" id="india-summit-2026">
+	<strong>India AI Summit</strong> - World leaders meet Feb 16-20 to decide the future of AI governance. Make your voice heard.
+</CampaignBanner>
 
 <div class="layout" class:with-hero={hero}>
 	{#if $page.route.id === '/sayno'}
