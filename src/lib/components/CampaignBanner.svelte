@@ -3,6 +3,7 @@
 	import { browser } from '$app/environment'
 	import { onMount } from 'svelte'
 	import { fade } from 'svelte/transition'
+	import LinkWithoutIcon from '$lib/components/LinkWithoutIcon.svelte'
 
 	export let href: string
 	export let id = 'campaign'
@@ -37,12 +38,12 @@
 	<div class="campaign-banner" transition:fade={{ duration: 200 }}>
 		<div class="accent-line"></div>
 		<div class="campaign-content">
-			<a {href} class="campaign-link">
+			<LinkWithoutIcon href={href} class="campaign-link">
 				<span class="campaign-text">
 					<slot />
 				</span>
 				<span class="campaign-cta">Take action →</span>
-			</a>
+			</LinkWithoutIcon>
 		</div>
 		<button class="campaign-close" on:click|stopPropagation={close}>
 			<X size="1em" />
