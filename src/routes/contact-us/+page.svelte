@@ -12,6 +12,7 @@
 
 	let activeTab: 'media' | 'partnerships' | 'feedback' = 'partnerships'
 	let loading = false
+	let honeypot = ''
 
 	let formData = {
 		media: { name: '', email: '', subject: '', organization: '', details: '' },
@@ -585,5 +586,16 @@
 		font-weight: 500;
 		color: var(--text);
 		opacity: 0.9;
+	}
+
+	.honey {
+		display: none;
+		opacity: 0;
+		position: absolute;
+		left: -9999px;
+		height: 0;
+		width: 0;
+		overflow: hidden;
+		z-index: -1;
 	}
 </style>
