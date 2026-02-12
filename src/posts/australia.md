@@ -6,18 +6,7 @@ description: the Australian chapter of PauseAI
 
 ## Calling all Australians. We need your help
 
-AI Summits Need to Take Safety Seriously Again: [sign the petition](https://www.change.org/p/ai-summits-need-to-take-safety-seriously-again)
-
-<iframe
-  src="https://luma.com/embed/event/evt-4k7XhiXHEEuu9qU/simple"
-  width="100%"
-  height="450"
-  frameborder="0"
-  style="border: 1px solid #bfcbda88; border-radius: 4px;"
-  allow="fullscreen; payment"
-  aria-hidden="false"
-  tabindex="0"
-></iframe>
+AI Summits Need to Take Safety Seriously Again: [sign the petition](https://www.change.org/p/ai-summits-need-to-take-safety-seriously-again) unlock the door door
 
 **A message from PauseAI volunteers in Australia:**
 
