@@ -1,6 +1,9 @@
 <script lang="ts">
 	import { page } from '$app/stores'
+	import LinkWithoutIcon from '$lib/components/LinkWithoutIcon.svelte'
 	import { localizeHref } from '$lib/paraglide/runtime'
+	import clsx from 'clsx'
+
 	export let href: string | undefined = undefined
 	export let c2a = false
 	export let ariaLabel: string | undefined = undefined
@@ -11,26 +14,25 @@
 	export let external = false
 
 	$: localizedHref = href && !external ? localizeHref(href) : href
+	$: resolvedHref = localizedHref ?? ''
 
 	$: {
 		active = localizeHref($page.url.pathname) == localizedHref
 	}
 </script>
 
-<a
-	href={localizedHref}
-	class:first
-	class:c2a
-	class:inverted
-	class:narrow
-	class:active
-	aria-label={ariaLabel}
->
-	<slot />
-</a>
+<span>
+	<LinkWithoutIcon
+		href={resolvedHref}
+		class={clsx('navlink', { first, c2a, inverted, narrow, active })}
+		aria-label={ariaLabel}
+	>
+		<slot />
+	</LinkWithoutIcon>
+</span>
 
 <style>
-	a {
+	* :global(.navlink) {
 		padding-left: 0.5rem;
 		margin-left: 0.5rem;
 		padding-right: 0.5rem;
@@ -42,40 +44,40 @@
 		font-size: 1.1rem;
 	}
 
-	a.first {
+	* :global(.navlink.first) {
 		margin-left: -0.5rem;
 	}
 
-	a.c2a {
+	* :global(.navlink.c2a) {
 		color: var(--brand);
 	}
-	a.c2a.inverted {
+	* :global(.navlink.c2a.inverted) {
 		color: black;
 	}
 
-	a:hover {
+	* :global(.navlink:hover) {
 		color: var(--brand);
 		text-decoration: underline;
 	}
-	a.active,
-	a:active {
+	* :global(.navlink.active),
+	* :global(.navlink:active) {
 		color: var(--brand-subtle);
 	}
 
-	a.inverted {
+	* :global(.navlink.inverted) {
 		color: white;
 	}
 
-	a.inverted:hover {
+	* :global(.navlink.inverted:hover) {
 		color: black;
 		text-decoration: underline;
 	}
-	a.inverted.active,
-	a.inverted:active {
+	* :global(.navlink.inverted.active),
+	* :global(.navlink.inverted:active) {
 		color: black;
 	}
 
-	a.narrow {
+	* :global(.navlink.narrow) {
 		padding: 0;
 	}
 </style>

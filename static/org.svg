@@ -1,0 +1,280 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="1000" height="950" viewBox="0 0 1000 950" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+        <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+            <polygon points="0 0, 10 3.5, 0 7" fill="#333" />
+        </marker>
+        <style>
+            @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&amp;display=swap');
+
+            .node-box {
+                fill: #ffffff;
+                stroke: #333;
+                stroke-width: 2;
+            }
+
+            .node-box-staff {
+                fill: #000000;
+                stroke: #333;
+                stroke-width: 2;
+            }
+
+            .group-box {
+                fill: none;
+                stroke: #666;
+                stroke-width: 1.5;
+                stroke-dasharray: 5, 5;
+            }
+
+            .text-title {
+                font-family: 'Inter', sans-serif;
+                font-size: 16px;
+                font-weight: 600;
+                fill: #111;
+                text-anchor: middle;
+            }
+
+            .text-title-light {
+                font-family: 'Inter', sans-serif;
+                font-size: 16px;
+                font-weight: 600;
+                fill: #fff;
+                text-anchor: middle;
+            }
+
+            .text-subtitle {
+                font-family: 'Inter', sans-serif;
+                font-size: 14px;
+                fill: #444;
+                text-anchor: middle;
+            }
+
+            .text-subtitle-light {
+                font-family: 'Inter', sans-serif;
+                font-size: 14px;
+                fill: #ccc;
+                text-anchor: middle;
+            }
+
+            .text-list {
+                font-family: 'Inter', sans-serif;
+                font-size: 12px;
+                fill: #555;
+                text-anchor: start;
+            }
+
+            .text-label {
+                font-family: 'Inter', sans-serif;
+                font-size: 12px;
+                fill: #666;
+                font-style: italic;
+                text-anchor: middle;
+            }
+
+            .connector {
+                fill: none;
+                stroke: #333;
+                stroke-width: 1.5;
+                marker-end: url(#arrowhead);
+            }
+
+            .connector-no-arrow {
+                fill: none;
+                stroke: #333;
+                stroke-width: 1.5;
+            }
+        </style>
+    </defs>
+
+    <!-- Background -->
+    <rect width="1000" height="950" fill="white" rx="8"/>
+
+    <!-- Board (Top) -->
+    <g transform="translate(400, 30)">
+        <rect x="0" y="0" width="260" height="140" rx="4" class="node-box" />
+        <text x="130" y="30" class="text-title">BOARD</text>
+        <line x1="20" y1="50" x2="240" y2="50" stroke="#ddd" />
+
+        <circle cx="30" cy="70" r="2" fill="#555" />
+        <text x="40" y="75" class="text-list">Joep Meinderstma (President)</text>
+
+        <circle cx="30" cy="90" r="2" fill="#555" />
+        <text x="40" y="95" class="text-list">Michiel Van den Ingh (Treasurer)</text>
+
+        <circle cx="30" cy="110" r="2" fill="#555" />
+        <text x="40" y="115" class="text-list">Otto Barten</text>
+    </g>
+
+    <!-- Advisory Council (Left) -->
+    <g transform="translate(50, 250)">
+        <rect x="0" y="0" width="160" height="180" rx="4" class="node-box" />
+        <text x="80" y="30" class="text-title">Advisory Council</text>
+        <line x1="20" y1="50" x2="140" y2="50" stroke="#ddd" />
+        <circle cx="30" cy="70" r="2" fill="#555" />
+        <line x1="40" y1="70" x2="130" y2="70" stroke="#eee" />
+        <circle cx="30" cy="90" r="2" fill="#555" />
+        <line x1="40" y1="90" x2="130" y2="90" stroke="#eee" />
+        <circle cx="30" cy="110" r="2" fill="#555" />
+        <line x1="40" y1="110" x2="130" y2="110" stroke="#eee" />
+        <circle cx="30" cy="130" r="2" fill="#555" />
+        <line x1="40" y1="130" x2="130" y2="130" stroke="#eee" />
+    </g>
+
+    <!-- Exec Team Container -->
+    <g transform="translate(280, 220)">
+        <rect x="0" y="0" width="500" height="240" rx="4" class="group-box" />
+        <rect x="15" y="-10" width="100" height="20" fill="white" />
+        <text x="20" y="5" class="text-title" style="text-anchor: start;">EXEC TEAM</text>
+
+        <!-- CEO -->
+        <g transform="translate(150, 20)">
+            <rect x="0" y="0" width="200" height="70" rx="4" class="node-box-staff" />
+            <text x="100" y="30" class="text-title-light">CEO</text>
+            <text x="100" y="55" class="text-subtitle-light">Maxime Fournes</text>
+        </g>
+
+        <!-- Org Director -->
+        <g transform="translate(30, 140)">
+            <rect x="0" y="0" width="160" height="70" rx="4" class="node-box-staff" />
+            <text x="80" y="30" class="text-title-light">Org Director</text>
+            <text x="80" y="55" class="text-subtitle-light">Irina Tavera</text>
+        </g>
+
+        <!-- Comms Director -->
+        <g transform="translate(310, 140)">
+            <rect x="0" y="0" width="160" height="70" rx="4" class="node-box-staff" />
+            <text x="80" y="30" class="text-title-light">Comms Director</text>
+            <text x="80" y="55" class="text-subtitle-light">Jonathan Moody</text>
+        </g>
+    </g>
+
+
+    <!-- Sub-Teams -->
+    <!-- Onboarding -->
+    <g transform="translate(300, 520)">
+        <rect x="0" y="0" width="130" height="80" rx="4" class="node-box" />
+        <text x="65" y="25" class="text-title" style="font-size: 14px;">ONBOARDING</text>
+        <circle cx="20" cy="45" r="2" fill="#555" />
+        <line x1="30" y1="45" x2="110" y2="45" stroke="#eee" />
+        <circle cx="20" cy="65" r="2" fill="#555" />
+        <line x1="30" y1="65" x2="110" y2="65" stroke="#eee" />
+    </g>
+
+    <!-- Ops Team -->
+    <g transform="translate(460, 520)">
+        <rect x="0" y="0" width="130" height="80" rx="4" class="node-box" />
+        <text x="65" y="25" class="text-title" style="font-size: 14px;">OPERATIONS</text>
+        <circle cx="20" cy="45" r="2" fill="#555" />
+        <line x1="30" y1="45" x2="110" y2="45" stroke="#eee" />
+        <circle cx="20" cy="65" r="2" fill="#555" />
+        <line x1="30" y1="65" x2="110" y2="65" stroke="#eee" />
+    </g>
+
+    <!-- Comms Team -->
+    <g transform="translate(620, 520)">
+        <rect x="0" y="0" width="130" height="80" rx="4" class="node-box" />
+        <text x="65" y="25" class="text-title" style="font-size: 14px;">COMMS</text>
+        <circle cx="20" cy="45" r="2" fill="#555" />
+        <line x1="30" y1="45" x2="110" y2="45" stroke="#eee" />
+        <circle cx="20" cy="65" r="2" fill="#555" />
+        <line x1="30" y1="65" x2="110" y2="65" stroke="#eee" />
+    </g>
+
+    <rect x="280" y="490" width="500" height="150" rx="4" class="group-box" />
+    <rect x="295" y="630" width="160" height="20" fill="white" />
+    <text x="300" y="645" class="text-title" style="text-anchor: start;">VOLUNTEER TEAMS</text>
+
+
+    <!-- Chapter Leadership -->
+    <g transform="translate(280, 680)">
+        <rect x="0" y="0" width="500" height="180" rx="4" class="group-box" />
+        <rect x="15" y="-10" width="180" height="20" fill="white" />
+        <text x="20" y="5" class="text-title" style="text-anchor: start;">CHAPTER LEADERSHIP</text>
+
+        <!-- National Directors -->
+        <g transform="translate(30, 30)">
+            <rect x="0" y="0" width="220" height="120" rx="4" class="node-box-staff" />
+            <text x="110" y="30" class="text-title-light" style="font-size: 14px;">National Directors</text>
+
+            <text x="20" y="60" class="text-list" style="fill: #eee;">🇫🇷 Clemence Peyrot</text>
+            <text x="20" y="80" class="text-list" style="fill: #eee;">🇬🇧 Joseph Miller</text>
+            <text x="20" y="100" class="text-list" style="fill: #eee;">🇬🇧 Matilda da Rui (Deputy)</text>
+        </g>
+
+        <!-- Chapter Leads -->
+        <g transform="translate(270, 30)">
+            <rect x="0" y="0" width="180" height="120" rx="4" class="node-box" />
+            <text x="90" y="30" class="text-title" style="font-size: 14px;">Chapter Leads</text>
+            <circle cx="30" cy="60" r="2" fill="#555" />
+            <line x1="40" y1="60" x2="150" y2="60" stroke="#eee" />
+            <circle cx="30" cy="80" r="2" fill="#555" />
+            <line x1="40" y1="80" x2="150" y2="80" stroke="#eee" />
+            <circle cx="30" cy="100" r="2" fill="#555" />
+            <line x1="40" y1="100" x2="150" y2="100" stroke="#eee" />
+        </g>
+    </g>
+
+
+    <!-- CONNECTIONS -->
+
+    <!-- AC -> Board (escalates) -->
+    <path d="M 130 250 L 130 90 L 400 90" class="connector" />
+    <text x="275" y="85" class="text-label" style="text-anchor: middle;">escalates</text>
+
+    <!-- AC -> Exec (advises) -->
+    <path d="M 210 340 L 280 340" class="connector" />
+    <text x="245" y="335" class="text-label">advises</text>
+
+    <!-- Org Director -> AC (runs) -->
+    <path d="M 310 395 L 210 395" class="connector" />
+    <text x="260" y="390" class="text-label">runs</text>
+
+    <!-- CEO > Board (reports to) -->
+    <path d="M 530 240 L 530 170" class="connector" />
+    <rect x="495" y="195" width="70" height="15" fill="white" />
+    <text x="530" y="205" class="text-label" dy="0" style="text-anchor: middle;">reports to</text>
+
+    <!-- CEO > Org Director (manager) -->
+    <path d="M 530 310 L 530 330 L 390 330 L 390 360" class="connector" />
+    <text x="440" y="325" class="text-label">manages</text>
+
+    <!-- CEO > Comms Director (manager) -->
+    <path d="M 530 310 L 530 330 L 670 330 L 670 360" class="connector" />
+    <text x="620" y="325" class="text-label">manages</text>
+
+    <!-- CEO > Ops Team (owns) -->
+    <path d="M 530 310 L 530 520" class="connector" />
+    <rect x="510" y="440" width="40" height="20" fill="white" stroke="none" />
+    <text x="530" y="455" class="text-label">owns</text>
+
+    <!-- Org Director > Onboarding (owns) -->
+    <path d="M 390 430 L 365 520" class="connector" />
+    <rect x="355" y="470" width="40" height="20" fill="white" stroke="none" />
+    <text x="375" y="485" class="text-label">owns</text>
+
+    <!-- Comms Director > Comms Team (owns) -->
+    <path d="M 670 430 L 685 520" class="connector" />
+    <rect x="660" y="470" width="40" height="20" fill="white" stroke="none" />
+    <text x="680" y="485" class="text-label">owns</text>
+
+    <!-- Org Director -> Chapter Leadership (manages and coordinates) -->
+    <path d="M 310 395 L 250 395 L 250 770 L 280 770" class="connector" />
+    <text x="255" y="620" class="text-label" transform="rotate(-90 245 620)">manages and coordinates</text>
+
+    <!-- Comms Director -> Chapter Leadership (aligns communication) -->
+    <path d="M 750 395 L 810 395 L 810 770 L 780 770" class="connector" />
+    <text x="805" y="620" class="text-label" transform="rotate(90 815 620)">aligns communication</text>
+
+
+    <!-- LEGEND -->
+    <g transform="translate(420, 890)">
+        <rect x="0" y="0" width="20" height="20" rx="4" class="node-box-staff" />
+        <text x="30" y="15" class="text-list" style="font-size: 14px;">Staff</text>
+
+        <rect x="80" y="0" width="20" height="20" rx="4" class="node-box" />
+        <text x="110" y="15" class="text-list" style="font-size: 14px;">Volunteers</text>
+    </g>
+
+    <!-- Version -->
+    <text x="20" y="940" style="font-family: 'Inter', sans-serif; font-size: 10px; fill: #333; text-anchor: start;">PauseAI OrgChart v1.1</text>
+</svg>

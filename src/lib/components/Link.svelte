@@ -15,9 +15,10 @@
 	let type: Type
 </script>
 
-<Link {href} {target} {rel} class={className} bind:type>
+<Link {href} {target} {rel} class={className} bind:type {...$$restProps}>
 	<slot />{#if type != Type.Internal}
 		<span style="white-space: nowrap">
+			&nbsp;
 			<div class="icon">
 				{#if type == Type.External}
 					<ExternalLink {...ICON_PROPS} />
@@ -33,6 +34,6 @@
 	.icon {
 		display: inline-flex;
 		vertical-align: baseline;
-		margin-left: 0.1em;
+		margin-left: -0.4em;
 	}
 </style>

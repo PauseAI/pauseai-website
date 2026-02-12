@@ -3,6 +3,7 @@
 	import { meta } from './meta'
 	import PersonCard from './person.svelte'
 	import type { Person } from '$lib/types'
+	import Link from '$lib/components/Link.svelte'
 
 	export let data
 
@@ -36,42 +37,45 @@
 	<p>
 		We were founded in Utrecht, Netherlands in May 2023 by Joep Meindertsma, who put his job on hold
 		because he couldn't ignore the existential risks from artificial intelligence any longer. We
-		began with our first public action, which was a protest outside <a
-			href="/brussels-microsoft-protest">Microsoft's Brussels lobbying office</a
+		began with our first public action, which was a protest outside <Link
+			href="/brussels-microsoft-protest">Microsoft's Brussels lobbying office</Link
 		>.
 	</p>
 
 	<p>
 		What started as one person's call to action has grown into a global grassroots movement with
-		volunteers, <a href="/national-groups">national chapters</a>, and
-		<a href="/local-communities">local communities</a> across the world, all working toward the same goal:
-		pausing frontier AI development until we can prove it's safe and keep it under democratic control.
+		volunteers, <Link href="/national-groups">national chapters</Link>, and
+		<Link href="/local-communities">local communities</Link> across the world, all working toward the
+		same goal: pausing frontier AI development until we can prove it's safe and keep it under democratic
+		control.
 	</p>
 
 	<h2 class="milestones-header">Key Milestones</h2>
 	<ul class="milestones-list">
 		<li>
-			November 2023: Protested outside the inaugural <a href="/2023-november-uk"
-				>AI Safety Summit at Bletchley Park</a
+			November 2023: Protested outside the inaugural <Link href="/2023-november-uk"
+				>AI Safety Summit at Bletchley Park</Link
 			>.
 		</li>
 		<li>
-			February 2024: <a href="/2024-february"
-				>Gathered outside OpenAI's headquarters in San Francisco</a
+			February 2024: <Link href="/2024-february"
+				>Gathered outside OpenAI's headquarters in San Francisco</Link
 			>
 		</li>
 		<li>
 			May 2024: Organized coordinated protests across thirteen countries—including the US, UK,
-			Brazil, Germany, Australia, and Norway ahead of the <a href="/2024-may">AI Seoul Summit</a>.
+			Brazil, Germany, Australia, and Norway ahead of the <Link href="/2024-may"
+				>AI Seoul Summit</Link
+			>.
 		</li>
 		<li>
-			February 2025: Coordinated an event larger global protest for the <a href="/2025-february"
-				>French AI Summit</a
+			February 2025: Coordinated an event larger global protest for the <Link href="/2025-february"
+				>French AI Summit</Link
 			>, adding Kenya and DRC to the mix.
 		</li>
 		<li>
-			June 2025: Led our <a href="/deepmind-protest-2025"
-				>biggest protest yet outside Google DeepMind's London office</a
+			June 2025: Led our <Link href="/deepmind-protest-2025"
+				>biggest protest yet outside Google DeepMind's London office</Link
 			>, holding them accountable for breaking their safety commitments and hosted the first ever
 			PauseCon training event.
 		</li>
@@ -105,12 +109,12 @@
 <section class="essential-info">
 	<h2>Essential Information</h2>
 	<ul class="essential-info-list">
-		<li><a href="/privacy">Privacy Policy</a></li>
-		<li><a href="/legal">Legal Info</a></li>
-		<li><a href="/funding">Global Funding and Donors</a></li>
-		<li><a href="/roadmap">Roadmap</a></li>
-		<li><a href="/press">Press</a></li>
-		<li><a href="/vacancies">Vacancies</a></li>
+		<li><Link href="/privacy">Privacy Policy</Link></li>
+		<li><Link href="/legal">Legal Info</Link></li>
+		<li><Link href="/funding">Global Funding and Donors</Link></li>
+		<li><Link href="/roadmap">Roadmap</Link></li>
+		<li><Link href="/press">Press</Link></li>
+		<li><Link href="/vacancies">Vacancies</Link></li>
 	</ul>
 </section>
 
@@ -184,12 +188,12 @@
 		margin: 0;
 	}
 
-	.essential-info-list a {
+	.essential-info-list :global(a) {
 		color: var(--brand-subtle);
 		text-decoration: underline;
 	}
 
-	.essential-info-list a:hover {
+	.essential-info-list :global(a:hover) {
 		color: var(--brand);
 	}
 
