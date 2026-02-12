@@ -63,7 +63,7 @@
 			"country_local": "Deutschland",
 			"lat": 51.1,
 			"lon": 10,
-			"link": "$$DISCORD_GERMANY$$"
+			"link": "https://pause-ai.de/"
 		},
 		{
 			"name": "United States",
@@ -75,7 +75,7 @@
 			"name": "Czechia",
 			"lat": 50,
 			"lon": 15,
-			"link": "https://discord.gg/4rZ2nGZB3r"
+			"link": "https://www.pauseai.cz/"
 		},
 		{
 			"name": "Poland",

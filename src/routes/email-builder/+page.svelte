@@ -239,6 +239,9 @@
 	>.
 </p>
 
+<!-- eslint-disable svelte/no-restricted-html-elements -- 
+ No link l10n needed, Link component messes up the rich text -->
+
 <h2>Result</h2>
 <p>You can edit the message directly in the browser.</p>
 <div>
@@ -271,8 +274,7 @@
 				Now, AI is already writing
 				<a href="https://www.youtube.com/watch?t=1042&v=wUOjTR1511M&feature=youtu.be">up to 90%</a>
 				of the code at AI companies. At some point, possibly in the near future, AI will be able to directly
-				build more powerful AI, leading to a rapid increase in AI capabilities. Thousands of experts
-				have
+				build more powerful AI, leading to a rapid increase in AI capabilities. Thousands of experts have
 				<a href="https://futureoflife.org/open-letter/pause-giant-ai-experiments/"
 					>called for a pause</a
 				>
@@ -298,9 +300,9 @@
 				that regulation is needed, but it seems that companies are not willing to jeopardise their competitive
 				position by voluntarily halting development. A pause would need to be imposed by a government.
 				Unfortunately, the race dynamics don't just apply to companies: countries also have incentives
-				to not fall behind in AI capabilities, and prioritize growth over safety. These dynamics are
-				the reason why we urgently need an international solution. We need international coordination,
-				we need politicians to initialize treaty negotiations.
+				to not fall behind in AI capabilities, and prioritize growth over safety. These dynamics are the
+				reason why we urgently need an international solution. We need international coordination, we
+				need politicians to initialize treaty negotiations.
 			</p>
 
 			<svelte:component this={selectedAction.section} />

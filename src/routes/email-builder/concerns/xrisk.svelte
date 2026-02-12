@@ -1,3 +1,5 @@
+<!-- eslint-disable svelte/no-restricted-html-elements -- 
+ No link l10n needed, Link component messes up the rich text -->
 <p>
 	Half of AI researchers <a
 		href="https://wiki.aiimpacts.org/ai_timelines/predictions_of_human-level_ai_timelines/ai_timeline_surveys/2023_expert_survey_on_progress_in_ai"
