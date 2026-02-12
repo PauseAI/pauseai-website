@@ -42,7 +42,7 @@ Using our campaign tool, you can send a personalized email to the people who inf
 
 Don't see your country? If you speak the language of one of the countries listed above, you can still participate. And if you'd like to set up a campaign for your country, [get in touch with us](mailto:info@pauseai.info).
 
-### Share this campaign
+### Done those? Share this campaign!
 
 The most valuable thing you can do after signing and sending is to **share this page**. Send it to friends, post it on social media, forward it to group chats. Every additional person who participates makes this campaign harder to ignore.
 
