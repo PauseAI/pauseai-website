@@ -36,8 +36,8 @@ Using our campaign tool, you can send a personalized email to the people who inf
 - 🇨🇿 [Czechia](https://app.activoice.org/campaign/indian-ai-summit-cz/)
 - 🇸🇰 [Slovakia](https://app.activoice.org/campaign/indian-ai-summit-sr/)
 - 🇦🇺 [Australia](https://app.activoice.org/campaign/aus-ai-summit-india/)
-- �🇦 [Canada](https://app.activoice.org/campaign/make-your-voice-heard-at-the-india-ai-summit-pauseai-canada)
-- �🇳🇬 [Nigeria](https://app.activoice.org/campaign/india-ai-action-summit-call-for-a-binding-international-ai-safety-treaty/)
+- 🇨🇦 [Canada](https://app.activoice.org/campaign/make-your-voice-heard-at-the-india-ai-summit-pauseai-canada)
+- 🇳🇬 [Nigeria](https://app.activoice.org/campaign/india-ai-action-summit-call-for-a-binding-international-ai-safety-treaty/)
 - 🇩🇪 Germany - campaign in construction, coming soon!
 
 Don't see your country? If you speak the language of one of the countries listed above, you can still participate. And if you'd like to set up a campaign for your country, [get in touch with us](mailto:info@pauseai.info).
