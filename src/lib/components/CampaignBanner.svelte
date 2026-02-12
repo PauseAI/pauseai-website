@@ -1,21 +1,14 @@
 <script lang="ts">
-	import X from 'lucide-svelte/icons/x'
 	import { browser } from '$app/environment'
+	import { page } from '$app/stores'
+	import { deLocalizeHref } from '$lib/paraglide/runtime'
 	import { onMount } from 'svelte'
 	import { fade } from 'svelte/transition'
+	import X from 'lucide-svelte/icons/x'
 
 	export let href: string
 	export let id = 'campaign'
-	let hidden = false
-
-	function checkStoredState() {
-		if (browser && id) {
-			const storedState = localStorage.getItem(`campaign_banner_${id}_hidden`)
-			if (storedState === 'true') {
-				hidden = true
-			}
-		}
-	}
+	let hidden = browser && id && localStorage.getItem(`campaign_banner_${id}_hidden`) === 'true'
 
 	function close() {
 		hidden = true
@@ -29,15 +22,19 @@
 	}
 
 	onMount(() => {
-		checkStoredState()
+		// We still keep the reactive check for path changes
 	})
+
+	$: if (browser && deLocalizeHref($page.url.pathname) === href) {
+		close()
+	}
 </script>
 
 {#if !hidden}
 	<div class="campaign-banner" transition:fade={{ duration: 200 }}>
 		<div class="accent-line"></div>
 		<div class="campaign-content">
-			<a {href} class="campaign-link">
+			<a {href} class="campaign-link" on:click={close}>
 				<span class="campaign-text">
 					<slot />
 				</span>
