@@ -202,6 +202,17 @@
 							bind:value={formData.partnerships.name}
 						/>
 					</div>
+					<div class="field honey">
+						<label for="part-nickname">Nickname</label>
+						<input
+							type="text"
+							id="part-nickname"
+							name="nickname"
+							tabindex="-1"
+							autocomplete="off"
+							bind:value={honeypot}
+						/>
+					</div>
 					<div class="field">
 						<input
 							type="email"
@@ -294,6 +305,17 @@
 							bind:value={formData.media.name}
 						/>
 					</div>
+					<div class="field honey">
+						<label for="med-nickname">Nickname</label>
+						<input
+							type="text"
+							id="med-nickname"
+							name="nickname"
+							tabindex="-1"
+							autocomplete="off"
+							bind:value={honeypot}
+						/>
+					</div>
 					<div class="field">
 						<input
 							type="email"
@@ -352,6 +374,17 @@
 							name="name"
 							placeholder="Full Name (Optional)"
 							bind:value={formData.feedback.name}
+						/>
+					</div>
+					<div class="field honey">
+						<label for="fb-nickname">Nickname</label>
+						<input
+							type="text"
+							id="fb-nickname"
+							name="nickname"
+							tabindex="-1"
+							autocomplete="off"
+							bind:value={honeypot}
 						/>
 					</div>
 					<div class="field">
