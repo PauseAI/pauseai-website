@@ -3,6 +3,7 @@
 	import Card from './Card.svelte'
 	import UKMPEmailForm from './UKMPEmailForm.svelte'
 	import LoadingSpinner from './LoadingSpinner.svelte'
+	import LinkWithoutIcon from '$lib/components/LinkWithoutIcon.svelte'
 
 	interface MP {
 		email: string
@@ -157,9 +158,9 @@
 				<div class="mp-info">
 					<h3>{mp.name}</h3>
 					<p class="constituency">MP for {mp.constituency}</p>
-					<a href="mailto:{mp.email}" class="email-link">
+					<LinkWithoutIcon href={`mailto:${mp.email}`} class="email-link">
 						{mp.email}
-					</a>
+					</LinkWithoutIcon>
 				</div>
 			</Card>
 
@@ -348,14 +349,14 @@
 		font-size: 1.1rem;
 	}
 
-	.email-link {
+	* :global(.email-link) {
 		color: var(--brand);
 		text-decoration: none;
 		font-weight: 500;
 		word-break: break-all;
 	}
 
-	.email-link:hover {
+	* :global(.email-link:hover) {
 		text-decoration: underline;
 		color: var(--brand-dark);
 	}

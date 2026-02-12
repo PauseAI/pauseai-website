@@ -1,3 +1,5 @@
+<!-- eslint-disable svelte/no-restricted-html-elements -- 
+ No link l10n needed, Link component messes up the rich text -->
 <p>
 	The latest AI systems can already analyze and write software. They <a
 		href="https://betterprogramming.pub/i-used-gpt-3-to-find-213-security-vulnerabilities-in-a-single-codebase-cc3870ba9411"
