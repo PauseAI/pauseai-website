@@ -84,7 +84,8 @@
 {/if}
 
 <CampaignBanner href="/india-summit-2026" id="india-summit-2026">
-	<strong>India AI Summit</strong> - World leaders meet Feb 16-20 to decide the future of AI governance. Make your voice heard.
+	<strong>India AI Summit</strong> - World leaders meet Feb 16-20 to decide the future of AI governance.
+	Make your voice heard.
 </CampaignBanner>
 
 <div class="layout" class:with-hero={hero}>

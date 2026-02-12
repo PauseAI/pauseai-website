@@ -12,6 +12,7 @@
 
 	let activeTab: 'media' | 'partnerships' | 'feedback' = 'partnerships'
 	let loading = false
+	let honeypot = ''
 
 	let formData = {
 		media: { name: '', email: '', subject: '', organization: '', details: '' },
@@ -201,6 +202,17 @@
 							bind:value={formData.partnerships.name}
 						/>
 					</div>
+					<div class="field honey">
+						<label for="part-nickname">Nickname</label>
+						<input
+							type="text"
+							id="part-nickname"
+							name="nickname"
+							tabindex="-1"
+							autocomplete="off"
+							bind:value={honeypot}
+						/>
+					</div>
 					<div class="field">
 						<input
 							type="email"
@@ -293,6 +305,17 @@
 							bind:value={formData.media.name}
 						/>
 					</div>
+					<div class="field honey">
+						<label for="med-nickname">Nickname</label>
+						<input
+							type="text"
+							id="med-nickname"
+							name="nickname"
+							tabindex="-1"
+							autocomplete="off"
+							bind:value={honeypot}
+						/>
+					</div>
 					<div class="field">
 						<input
 							type="email"
@@ -351,6 +374,17 @@
 							name="name"
 							placeholder="Full Name (Optional)"
 							bind:value={formData.feedback.name}
+						/>
+					</div>
+					<div class="field honey">
+						<label for="fb-nickname">Nickname</label>
+						<input
+							type="text"
+							id="fb-nickname"
+							name="nickname"
+							tabindex="-1"
+							autocomplete="off"
+							bind:value={honeypot}
 						/>
 					</div>
 					<div class="field">
@@ -585,5 +619,16 @@
 		font-weight: 500;
 		color: var(--text);
 		opacity: 0.9;
+	}
+
+	.honey {
+		display: none;
+		opacity: 0;
+		position: absolute;
+		left: -9999px;
+		height: 0;
+		width: 0;
+		overflow: hidden;
+		z-index: -1;
 	}
 </style>

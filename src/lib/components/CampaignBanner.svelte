@@ -117,7 +117,9 @@
 		text-transform: uppercase;
 		letter-spacing: 0.05em;
 		white-space: nowrap;
-		transition: background 0.2s, color 0.2s;
+		transition:
+			background 0.2s,
+			color 0.2s;
 	}
 
 	.campaign-close {

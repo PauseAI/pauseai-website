@@ -175,6 +175,11 @@ export const actions: Actions = {
 		const email = data.get('email')?.toString()
 		const subject = data.get('subject')?.toString()
 		const message = data.get('message')?.toString()
+		const nickname = data.get('nickname')?.toString()
+
+		if (nickname) {
+			return { success: true }
+		}
 
 		if (!name || !email || !subject || !message) {
 			return fail(400, { message: 'Missing required fields' })
@@ -203,6 +208,11 @@ export const actions: Actions = {
 		const subject = data.get('subject')?.toString()
 		const organization = data.get('organization')?.toString()
 		const details = data.get('details')?.toString()
+		const nickname = data.get('nickname')?.toString()
+
+		if (nickname) {
+			return { success: true }
+		}
 
 		if (!name || !email || !subject || !organization || !details) {
 			return fail(400, { message: 'Missing required fields' })
@@ -240,6 +250,11 @@ export const actions: Actions = {
 		}
 
 		const message = data.get('message')?.toString()
+		const nickname = data.get('nickname')?.toString()
+
+		if (nickname) {
+			return { success: true }
+		}
 
 		if (!name || !email || !city_country || !subject || !message) {
 			return fail(400, { message: 'Missing required fields' })
@@ -269,6 +284,11 @@ export const actions: Actions = {
 		const email = data.get('email')?.toString() || ''
 		const subject = data.get('subject')?.toString()
 		const message = data.get('message')?.toString()
+		const nickname = data.get('nickname')?.toString()
+
+		if (nickname) {
+			return { success: true }
+		}
 
 		if (!subject || !message) {
 			return fail(400, { message: 'Missing required fields' })
