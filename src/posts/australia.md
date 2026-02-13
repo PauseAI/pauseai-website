@@ -8,17 +8,6 @@ description: the Australian chapter of PauseAI
 
 AI Summits Need to Take Safety Seriously Again: [sign the petition](https://www.change.org/p/ai-summits-need-to-take-safety-seriously-again)
 
-<iframe
-  src="https://luma.com/embed/event/evt-4k7XhiXHEEuu9qU/simple"
-  width="100%"
-  height="450"
-  frameborder="0"
-  style="border: 1px solid #bfcbda88; border-radius: 4px;"
-  allow="fullscreen; payment"
-  aria-hidden="false"
-  tabindex="0"
-></iframe>
-
 **A message from PauseAI volunteers in Australia:**
 
 By 2030, artificial intelligence could be fully automated, self-improving and **smarter than humans at almost everything.** This isn't science fiction—it's the assessment of leading AI companies and researchers. When this happens, every aspect of life will change forever.
