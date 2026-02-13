@@ -1,11 +1,10 @@
 <script lang="ts">
 	import { browser } from '$app/environment'
 	import { page } from '$app/stores'
-	import LinkWithoutIcon from '$lib/components/LinkWithoutIcon.svelte'
 	import { deLocalizeHref } from '$lib/paraglide/runtime'
-	import X from 'lucide-svelte/icons/x'
 	import { onMount } from 'svelte'
 	import { fade } from 'svelte/transition'
+	import X from 'lucide-svelte/icons/x'
 
 	export let href: string
 	export let id = 'campaign'
@@ -35,12 +34,12 @@
 	<div class="campaign-banner" transition:fade={{ duration: 200 }}>
 		<div class="accent-line"></div>
 		<div class="campaign-content">
-			<LinkWithoutIcon {href} class="campaign-link" on:click={close}>
+			<a {href} class="campaign-link" on:click={close}>
 				<span class="campaign-text">
 					<slot />
 				</span>
 				<span class="campaign-cta">Take action →</span>
-			</LinkWithoutIcon>
+			</a>
 		</div>
 		<button class="campaign-close" on:click|stopPropagation={close}>
 			<X size="1em" />
