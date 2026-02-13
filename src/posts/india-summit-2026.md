@@ -32,6 +32,7 @@ Using our campaign tool, you can send a personalized email to the people who inf
 - 🇳🇱 [Netherlands](https://app.activoice.org/campaign/laat-je-stem-horen-op-de-ai-impact-summit/)
 - 🇸🇪 [Sweden](https://app.activoice.org/campaign/gor-din-rost-hord-om-ai-sakerhet/)
 - 🇷🇴 [Romania](https://app.activoice.org/campaign/fa-ti-vocea-auzita-la-summitul-ia-din-india/)
+- 🇷🇸 [Serbia](https://app.activoice.org/campaign/world-leaders-meet-in-india-demand-binding-ai-safety-standards/)
 - 🇨🇿 [Czechia](https://app.activoice.org/campaign/indian-ai-summit-cz/)
 - 🇸🇰 [Slovakia](https://app.activoice.org/campaign/indian-ai-summit-sr/)
 - 🇦🇺 [Australia](https://app.activoice.org/campaign/aus-ai-summit-india/)
