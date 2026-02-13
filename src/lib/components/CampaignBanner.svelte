@@ -1,10 +1,11 @@
 <script lang="ts">
 	import { browser } from '$app/environment'
 	import { page } from '$app/stores'
+	import LinkWithoutIcon from '$lib/components/LinkWithoutIcon.svelte'
 	import { deLocalizeHref } from '$lib/paraglide/runtime'
+	import X from 'lucide-svelte/icons/x'
 	import { onMount } from 'svelte'
 	import { fade } from 'svelte/transition'
-	import X from 'lucide-svelte/icons/x'
 
 	export let href: string
 	export let id = 'campaign'
@@ -34,12 +35,12 @@
 	<div class="campaign-banner" transition:fade={{ duration: 200 }}>
 		<div class="accent-line"></div>
 		<div class="campaign-content">
-			<a {href} class="campaign-link" on:click={close}>
+			<LinkWithoutIcon {href} class="campaign-link" on:click={close}>
 				<span class="campaign-text">
 					<slot />
 				</span>
 				<span class="campaign-cta">Take action →</span>
-			</a>
+			</LinkWithoutIcon>
 		</div>
 		<button class="campaign-close" on:click|stopPropagation={close}>
 			<X size="1em" />
@@ -72,7 +73,7 @@
 		text-align: center;
 	}
 
-	.campaign-link {
+	* :global(.campaign-link) {
 		display: inline-flex;
 		align-items: center;
 		gap: 0.8em;
@@ -85,11 +86,11 @@
 		justify-content: center;
 	}
 
-	.campaign-link:hover {
+	* :global(.campaign-link:hover) {
 		color: white;
 	}
 
-	.campaign-link:hover .campaign-cta {
+	:global(.campaign-link:hover) .campaign-cta {
 		background: var(--brand, #ff9416);
 		color: black;
 	}
