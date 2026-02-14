@@ -24,3 +24,8 @@
 [dev]
   command = "pnpm dev"
   port = 37572
+
+# Spanish locale testing branch
+[context.l10n-es.environment]
+  PARAGLIDE_LOCALES = "es"
+

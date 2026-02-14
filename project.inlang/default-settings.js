@@ -7,7 +7,7 @@
 export default {
 	$schema: 'https://inlang.com/schema/project-settings',
 	baseLocale: 'en',
-	locales: ['en', 'de', 'nl'],
+	locales: ['en', 'es'],
 	modules: [
 		'https://cdn.jsdelivr.net/npm/@inlang/plugin-m-function-matcher@latest/dist/index.js',
 		'https://cdn.jsdelivr.net/npm/@inlang/plugin-message-format@latest/dist/index.js'
