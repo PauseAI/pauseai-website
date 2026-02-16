@@ -1,6 +1,11 @@
 import { fail } from '@sveltejs/kit'
 import type { Actions } from './$types'
 import { env } from '$env/dynamic/private'
+import { createRecord } from '$lib/airtable'
+
+// Airtable configuration (User to fill in later)
+const CONTACT_AIRTABLE_BASE_ID = 'appWPTGqZmUcs3NWu'
+const CONTACT_AIRTABLE_TABLE_ID = 'tblPP2kM7uTheBrpw'
 
 export const prerender = false
 
@@ -101,6 +106,12 @@ async function sendContactEmail(data: {
 
 			return { success: false, message: errorMessage }
 		}
+
+		// Save to Airtable - sending full content in the Message field
+		await createRecord(CONTACT_AIRTABLE_BASE_ID, CONTACT_AIRTABLE_TABLE_ID, {
+			Message: textContent,
+			Type: data.type
+		})
 
 		return { success: true }
 	} catch (error: unknown) {
