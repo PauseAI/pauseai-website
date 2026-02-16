@@ -1,10 +1,10 @@
 <script lang="ts">
-	import Logo from '$lib/components/logo.svelte'
 	import { page } from '$app/stores'
-	import { localizeHref } from '$lib/paraglide/runtime'
-	import { emulateCqwIfNeeded } from '$lib/container-query-units'
-	import { onMount } from 'svelte'
 	import Link from '$lib/components/Link.svelte'
+	import Logo from '$lib/components/logo.svelte'
+	import { emulateCqwIfNeeded } from '$lib/container-query-units'
+	import { localizeHref } from '$lib/paraglide/runtime'
+	import { onMount } from 'svelte'
 
 	export let inverted = false
 	export let moveUp = false
@@ -99,7 +99,7 @@
 		width: min(var(--wide-if-nav-wrapped), var(--logo-offset));
 	}
 
-	* :global(.logo) {
+	.logo-container > :global(.logo) {
 		width: clamp(var(--logo-width-small), var(--wide-if-nav-not-wrapped), var(--logo-width-big));
 		margin-left: calc(-1 * var(--logo-offset));
 		z-index: 1;

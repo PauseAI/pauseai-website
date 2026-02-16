@@ -27,12 +27,12 @@ Using our campaign tool, you can send a personalized email to the people who inf
 
 - 🇬🇧 [United Kingdom](https://app.activoice.org/campaign/india-ai-summit-pauseai-uk/)
 - 🇫🇷 [France](https://app.activoice.org/campaign/faites-entendre-votre-voix-au-sommet-de-lia-en-inde-pause-ia/)
-- 🇪🇸 [Spain](https://app.activoice.org/campaign/fa-ti-vocea-auzita-la-summitul-ia-din-india/)
+- 🇪🇸 [Spain](https://app.activoice.org/campaign/cumbre-ia-india-pauseai-spanish/)
 - 🇮🇹 [Italy](https://app.activoice.org/campaign/ai-impact-summit-india-2026/)
 - 🇳🇱 [Netherlands](https://app.activoice.org/campaign/laat-je-stem-horen-op-de-ai-impact-summit/)
 - 🇸🇪 [Sweden](https://app.activoice.org/campaign/gor-din-rost-hord-om-ai-sakerhet/)
 - 🇷🇴 [Romania](https://app.activoice.org/campaign/fa-ti-vocea-auzita-la-summitul-ia-din-india/)
-- 🇷🇸 [Serbia](https://app.activoice.org/campaign/fa-ti-vocea-auzita-la-summitul-ia-din-india/)
+- 🇷🇸 [Serbia](https://app.activoice.org/campaign/world-leaders-meet-in-india-demand-binding-ai-safety-standards/)
 - 🇨🇿 [Czechia](https://app.activoice.org/campaign/indian-ai-summit-cz/)
 - 🇸🇰 [Slovakia](https://app.activoice.org/campaign/indian-ai-summit-sr/)
 - 🇦🇺 [Australia](https://app.activoice.org/campaign/aus-ai-summit-india/)
@@ -42,7 +42,7 @@ Using our campaign tool, you can send a personalized email to the people who inf
 
 Don't see your country? If you speak the language of one of the countries listed above, you can still participate. And if you'd like to set up a campaign for your country, [get in touch with us](mailto:info@pauseai.info).
 
-### Share this campaign
+### Done those? Share this campaign!
 
 The most valuable thing you can do after signing and sending is to **share this page**. Send it to friends, post it on social media, forward it to group chats. Every additional person who participates makes this campaign harder to ignore.
 
