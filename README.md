@@ -157,6 +157,45 @@ const TEMPORARY_REDIRECTS: Record<string, string> = {
 
 To add a new redirect, add an entry to the appropriate object in `src/lib/redirects.ts`.
 
+## Latest News Section
+
+The homepage includes a "Latest News" section that automatically pulls content from two sources:
+
+1. **Internal posts** — Any Markdown post with `news: true` in its frontmatter
+2. **Substack RSS** — Automatically fetched from `https://pauseai.substack.com/feed`
+
+Items are merged, sorted by date (newest first), and displayed in a paginated 3-column grid.
+
+### Adding a Post to the News Section
+
+Add `news: true` to the post's frontmatter. Optionally include an `image` for the card thumbnail and post banner:
+
+```yaml
+---
+title: My News Post
+description: A brief summary shown as the card subtitle.
+date: 2026-02-18
+image: /my-image.png
+news: true
+---
+```
+
+- Place images in the `static/` directory and reference them with a leading `/`
+- Posts without an `image` display an orange gradient fallback in the news grid
+- The `description` field is used as the card subtitle
+- To remove a post from news, delete `news: true` or set it to `false`
+
+### News API
+
+The news data is served from `GET /api/news` and supports pagination:
+
+| Parameter  | Default | Description             |
+|------------|---------|-------------------------|
+| `page`     | `1`     | Page number (1-indexed) |
+| `pageSize` | `6`     | Items per page (max 12) |
+
+Response format: `{ items, total, page, pageSize, totalPages }`
+
 ## API Routes Registration
 
 The [`/api/posts`](src/routes/api/posts/+server.ts) endpoint serves as a central registry for all content that needs to be available via API endpoints, including:
