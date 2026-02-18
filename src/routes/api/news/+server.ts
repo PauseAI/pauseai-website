@@ -1,4 +1,5 @@
 import { json } from '@sveltejs/kit'
+import type { RequestHandler } from './$types'
 import type { NewsItem, Post } from '$lib/types'
 
 async function getInternalNews(): Promise<NewsItem[]> {
@@ -94,13 +95,20 @@ function extractCdata(xml: string, tag: string): string | null {
     return match ? match[1] : null
 }
 
-export async function GET() {
+export const GET: RequestHandler = async ({ url }) => {
+    const page = Math.max(1, parseInt(url.searchParams.get('page') || '1', 10))
+    const pageSize = Math.max(1, Math.min(12, parseInt(url.searchParams.get('pageSize') || '6', 10)))
+
     const [internal, substack] = await Promise.all([getInternalNews(), getSubstackNews()])
 
     const allNews = [...internal, ...substack].sort(
         (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
     )
 
-    // Return the 6 most recent items (3 columns × 2 rows)
-    return json(allNews.slice(0, 6))
+    const total = allNews.length
+    const totalPages = Math.ceil(total / pageSize)
+    const start = (page - 1) * pageSize
+    const items = allNews.slice(start, start + pageSize)
+
+    return json({ items, total, page, pageSize, totalPages })
 }
