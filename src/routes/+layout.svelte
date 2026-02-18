@@ -88,10 +88,10 @@
 	{/if}
 {/if}
 
-{#if deLocalizeHref($page.url.pathname) !== '/india-summit-2026'}
-	<CampaignBanner href="/india-summit-2026" id="india-summit-2026">
-		<strong>India AI Summit</strong> - World leaders meet Feb 16-20 to decide the future of AI governance.
-		Make your voice heard.
+{#if deLocalizeHref($page.url.pathname) !== '/brussels-ep-protest-2026'}
+	<CampaignBanner href="/brussels-ep-protest-2026" id="brussels-ep-protest-2026">
+		<strong>Brussels, Feb 23</strong> - Join us outside the European Parliament to call for a global treaty
+		to pause frontier AI development.
 	</CampaignBanner>
 {/if}
 
