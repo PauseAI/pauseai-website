@@ -27,15 +27,11 @@
 		{/if}
 	</hgroup>
 
-	<!-- <div class="tags">
-		{#if meta.categories && meta.categories.length > 0}
-			<div class="categories">
-				{#each meta.categories as category}
-					<span class="surface-4">&num;{category}</span>
-				{/each}
-			</div>
-		{/if}
-	</div> -->
+	{#if imageUrl}
+		<div class="banner">
+			<img src={imageUrl} alt={title} />
+		</div>
+	{/if}
 
 	<div class="prose">
 		<svelte:component this={data.content} />
@@ -50,6 +46,19 @@
 
 	h1 {
 		text-transform: capitalize;
+	}
+
+	.banner {
+		margin: 1.5rem 0 2rem;
+		border-radius: 12px;
+		overflow: hidden;
+	}
+
+	.banner img {
+		width: 100%;
+		max-height: 400px;
+		object-fit: cover;
+		display: block;
 	}
 
 	/* h1 + p {

@@ -1,5 +1,6 @@
 <script lang="ts">
 	import Block from '$lib/components/Block.svelte'
+	import LatestNews from '$lib/components/LatestNews.svelte'
 	import NewsletterSignup from '$lib/components/NewsletterSignup.svelte'
 	import PostMeta from '$lib/components/PostMeta.svelte'
 	import PreloadFonts from '$lib/components/PreloadFonts.svelte'
@@ -19,6 +20,8 @@
 
 <div style="height: 5rem;" />
 
+<LatestNews />
+<div class="divider" />
 <QuotesCarousel />
 <div class="divider" />
 <Stats />
