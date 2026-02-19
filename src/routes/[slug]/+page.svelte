@@ -1,7 +1,8 @@
 <script lang="ts">
+	import Image from '$lib/components/Image.svelte'
+	import Link from '$lib/components/Link.svelte'
 	import PostMeta from '$lib/components/PostMeta.svelte'
 	import { getAssetUrlOrStaticUrl } from '$lib/images.js'
-	import Link from '$lib/components/Link.svelte'
 
 	// don't destructure to maintain reactivity for invalidation after language detection
 	export let data
@@ -29,7 +30,7 @@
 
 	{#if imageUrl}
 		<div class="banner">
-			<img src={imageUrl} alt={title} />
+			<Image src={imageUrl} alt={title} />
 		</div>
 	{/if}
 
