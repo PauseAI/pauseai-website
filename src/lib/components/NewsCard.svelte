@@ -1,6 +1,9 @@
 <script lang="ts">
+	import Image from '$lib/components/Image.svelte'
 	import type { NewsItem } from '$lib/types'
 	import { formatDate } from '$lib/utils'
+
+	let isExternal: boolean
 
 	export let item: NewsItem
 
@@ -15,7 +18,7 @@
 >
 	<div class="image-container">
 		{#if item.image}
-			<img src={item.image} alt={item.title} loading="lazy" />
+			<Image src={item.image} alt={item.title} class="image" />
 		{:else}
 			<div class="image-placeholder" />
 		{/if}
@@ -57,7 +60,7 @@
 		overflow: hidden;
 	}
 
-	.image-container img {
+	.image-container :global(.image) {
 		width: 100%;
 		height: 100%;
 		object-fit: cover;
@@ -65,7 +68,7 @@
 		transition: transform 0.3s ease;
 	}
 
-	.news-card:hover .image-container img {
+	.news-card:hover .image-container :global(.image) {
 		transform: scale(1.03);
 	}
 

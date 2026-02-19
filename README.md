@@ -180,7 +180,8 @@ news: true
 ---
 ```
 
-- Place images in the `static/` directory and reference them with a leading `/`
+- **For optimized images**: Place images in `src/assets/images/` and reference them with a leading `/` (e.g., `/my-image.png`). These will be automatically optimized into multiple formats (WebP, AVIF) and resolutions.
+- **For static images**: Place images in the `static/` directory if they shouldn't be optimized.
 - Posts without an `image` display an orange gradient fallback in the news grid
 - The `description` field is used as the card subtitle
 - To remove a post from news, delete `news: true` or set it to `false`
@@ -190,7 +191,7 @@ news: true
 The news data is served from `GET /api/news` and supports pagination:
 
 | Parameter  | Default | Description             |
-|------------|---------|-------------------------|
+| ---------- | ------- | ----------------------- |
 | `page`     | `1`     | Page number (1-indexed) |
 | `pageSize` | `6`     | Items per page (max 12) |
 
