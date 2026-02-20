@@ -11,7 +11,7 @@
 	export let userHasUid = false
 	export let subscribeEmail = ''
 	export let newsletterEmail = ''
-	let subscribeClicked = false
+	let submitted = false
 	let hideSharing = false
 
 	onMount(async () => {
@@ -22,27 +22,18 @@
 			newsletterEmail = subscribeEmail
 		}
 	})
-
-	function handleNewsletterClick(e: MouseEvent) {
-		const target = e.target as HTMLElement
-		if ((target as HTMLInputElement).type === 'submit' || target.closest('button[type="submit"]')) {
-			subscribeClicked = true
-		}
-	}
 </script>
 
 {#if userHasUid && subscribeEmail}
 	<Banner id="join-subscribed">
-		{#if !subscribeClicked}
+		{#if !submitted}
 			<strong>Welcome collage member!</strong> Click Subscribe to join the newsletter.
 		{:else}
 			<strong>Thanks.</strong> Scroll down if you feel active already!
 		{/if}
 	</Banner>
 
-	<!-- svelte-ignore a11y-click-events-have-key-events -->
-	<!-- svelte-ignore a11y-no-static-element-interactions -->
-	<div on:click={handleNewsletterClick}>
+	<div on:submit={() => (submitted = true)}>
 		<NewsletterSignup bind:email={newsletterEmail} />
 	</div>
 
