@@ -1,6 +1,6 @@
 <script lang="ts">
 	import homeHeroDesktop from '$assets/protests/Home Hero - web - Faded.jpg?enhanced'
-	import homeHeroMobile from '$assets/protests/Home Hero - mobile.jpg?enhanced'
+	import homeHeroMobile from '$assets/protests/Home Hero - mobile - Faded.jpg?enhanced'
 	import { onMount } from 'svelte'
 	import { emulateCqwIfNeeded } from '$lib/container-query-units'
 
@@ -10,7 +10,7 @@
 	let tagline: HTMLDivElement
 
 	const checkMobile = () => {
-		isMobile = window.innerWidth <= 768 || window.innerHeight > window.innerWidth
+		isMobile = window.innerWidth <= 850 || window.innerHeight > window.innerWidth
 	}
 
 	onMount(() => {
@@ -66,20 +66,51 @@
 		text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 	}
 
+	.hero :global(img) {
+		width: 100%;
+		height: 100%;
+		object-fit: contain;
+		object-position: center bottom;
+		transform-origin: center bottom;
+	}
+
 	@media (max-width: 850px), (orientation: portrait) {
+		.hero :global(img) {
+			position: absolute !important;
+			bottom: var(--mobile-hero-img-pos, 0px) !important;
+			left: 0 !important;
+			width: 100% !important;
+			height: auto !important;
+			object-fit: initial !important;
+			transform: none !important;
+		}
+
 		.content {
-			top: 35%;
-			left: 5%;
+			top: auto;
+			bottom: 5vh;
+			left: 50%;
+			transform: translateX(-50%);
 			width: 90%;
+			text-align: center;
+			align-items: center;
+			z-index: 1;
 		}
 
 		.content h2 {
-			font-size: calc(10 * var(--cqw));
+			font-size: calc(9 * var(--cqw));
+			text-align: center;
 		}
 
-		.hero :global(img) {
-			object-fit: cover;
-			transform: none !important;
+		.actions {
+			justify-content: center;
+		}
+
+		.actions :global(a.btn-primary),
+		.actions :global(a.btn-secondary) {
+			background-color: transparent;
+			backdrop-filter: blur(2px);
+			border: 2px solid white;
+			color: white;
 		}
 	}
 
@@ -99,6 +130,9 @@
 		left: 50%;
 		transform: translateX(-50%);
 		background-color: #ff9416;
+
+		/* Adjust this to push the mobile image up or down (e.g., 0px, 10vh, -20px) */
+		--mobile-hero-img-pos: 215px;
 	}
 
 	.actions {
@@ -140,13 +174,5 @@
 
 	.actions :global(a:active) {
 		scale: 0.95;
-	}
-
-	.hero :global(img) {
-		width: 100%;
-		height: 100%;
-		object-fit: contain;
-		object-position: center bottom;
-		transform-origin: center bottom;
 	}
 </style>
