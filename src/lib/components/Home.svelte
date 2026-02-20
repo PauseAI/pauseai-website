@@ -5,6 +5,7 @@
 	import PostMeta from '$lib/components/PostMeta.svelte'
 	import PreloadFonts from '$lib/components/PreloadFonts.svelte'
 	import QuotesCarousel from '$lib/components/QuotesCarousel.svelte'
+	import PressLogos from '$lib/components/PressLogos.svelte'
 	import Stats from '$lib/components/Stats.svelte'
 	import * as m from '$lib/paraglide/messages.js'
 	import robotoSlabLatin700 from '@fontsource/roboto-slab/files/roboto-slab-latin-700-normal.woff2'
@@ -16,15 +17,16 @@
 <PreloadFonts urls={[robotoSlabLatin700]} />
 
 <PostMeta {title} {description} />
-<!-- The Hero image is in `+layout.svelte` -->
-
-<div style="height: 5rem;" />
+<div style="height: 4rem;" />
 
 <LatestNews />
 <div class="divider" />
 <QuotesCarousel />
 <div class="divider" />
+
 <Stats />
+<div class="divider" />
+<PressLogos />
 <div class="divider" />
 <section>
 	<Block linkText={m.home_risks_c2a()} href="/risks">
@@ -32,20 +34,10 @@
 		<span slot="title">{@html m.home_risks_title()}</span>
 		{m.home_risks_content()}
 	</Block>
-	<Block linkText={m.home_xrisk_c2a()} href="/xrisk">
-		<!-- eslint-disable-next-line svelte/no-at-html-tags -- static content -->
-		<span slot="title">{@html m.home_xrisk_title()}</span>
-		{m.home_xrisk_content()}
-	</Block>
 	<Block linkText={m.home_proposal_c2a()} href="/proposal">
 		<!-- eslint-disable-next-line svelte/no-at-html-tags -- static content -->
 		<span slot="title">{@html m.home_proposal_title()}</span>
 		{m.home_proposal_content()}
-	</Block>
-	<Block linkText={m.home_urgency_c2a()} href="/urgency">
-		<!-- eslint-disable-next-line svelte/no-at-html-tags -- static content -->
-		<span slot="title">{@html m.home_urgency_title()}</span>
-		{m.home_urgency_content()}
 	</Block>
 	<Block linkText={m.home_action_c2a()} href="/action">
 		<!-- eslint-disable-next-line svelte/no-at-html-tags -- static content -->
