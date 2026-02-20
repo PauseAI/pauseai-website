@@ -24,3 +24,7 @@
 [dev]
   command = "pnpm dev"
   port = 37572
+
+# Polish locale testing branch
+[context.l10n-pl.environment]
+  PARAGLIDE_LOCALES = "pl"
