@@ -152,22 +152,17 @@ Interested? [Email Irina](mailto:irina@pauseai.info)
 
 Interested? [Email Irina](mailto:irina@pauseai.info)
 
-### Software Team member
+### Operations Team member
 
-- Duration: 3 months
-- Time Commitment: 2-5 hours per week
+- Time Commitment: No minimum — one-off bug fixes are welcome. Active members typically contribute 2-5 hours per week.
 - Responsibilities:
-  - Build and maintain features for the PauseAI website and other parts of our technology stack (tooling etc.)
-  - Advise and assist other teams on technology choices. We have [unusual scaling requirements](https://tinyurl.com/pauseaitechandscaling), and we buy rather than build in most cases.
+  - Build and maintain the PauseAI website and other technology.
 
 - Key Skills:
-  - (Any of these can be learned: none are blockers to signing up.)
-  - Web development (the main website is mostly static, using SvelteKit with clientside hydration, Node, Markdown, deployed through Netlify).
-  - Self-directed and able to work asynchronously. Bias for action and ideas - we'll validate choices in review. All the usual challenges of open source development are amplified in a volunteer org context - previous experience in those helps.
+  - Web development (SvelteKit, Node, Markdown)
+  - Self-directed and able to work asynchronously
 
-Yes we are happy to use language models to accelerate our development.
-
-Interested? [Email Anthony](mailto:mail@anthonybailey.net) (or DM anthonybailey.net on [Discord](https://discord.gg/2XXWXvErfA). Make sure you've signed the volunteer agreement!
+Read more and find out how to get involved on the [Operations Team page](/join-operations).
 
 ## Stay Updated
 
