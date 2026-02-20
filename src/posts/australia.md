@@ -4,6 +4,10 @@ slug: australia
 description: the Australian chapter of PauseAI
 ---
 
+## Calling all Australians. We need your help
+
+AI Summits Need to Take Safety Seriously Again: [sign the petition](https://www.change.org/p/ai-summits-need-to-take-safety-seriously-again)
+
 **A message from PauseAI volunteers in Australia:**
 
 By 2030, artificial intelligence could be fully automated, self-improving and **smarter than humans at almost everything.** This isn't science fiction—it's the assessment of leading AI companies and researchers. When this happens, every aspect of life will change forever.

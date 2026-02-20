@@ -14,6 +14,8 @@ import {
 import { setupL10nCage } from './l10n/git-ops'
 import { cullCommentary, createSymlinkIfNeeded, ensureDirectoriesExist } from './l10n/utils'
 
+const INLANG_PROJECT_PATH_ELEMENTS = ['..', 'project.inlang']
+
 // Load environment variables from .env file
 dotenv.config()
 
@@ -143,7 +145,14 @@ function regenerateSettings(verbose = false): void {
 			]
 		}
 
+		const inlangProjectPath = path.join(import.meta.dirname, ...INLANG_PROJECT_PATH_ELEMENTS)
+		const gitignorePath = path.join(inlangProjectPath, '.gitignore')
+		const gitignoreContent = fs.readFileSync(gitignorePath, 'utf-8')
+
 		compile(compileOptions)
+
+		fs.writeFileSync(gitignorePath, gitignoreContent)
+
 		console.log(`\u2705 Paraglide runtime compiled successfully!`)
 	} catch (error) {
 		console.error('\u274c Failed to compile Paraglide runtime:', (error as Error).message)

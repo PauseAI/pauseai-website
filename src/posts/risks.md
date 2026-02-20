@@ -88,7 +88,7 @@ But having conversations with today’s increasingly capable AIs poses unexpecte
 Companies instruct their AI chatbots to agree with their users, encourage their ideas, and keep the conversation going.
 This can backfire horribly for users in mental health distress by causing people to develop “[AI psychosis](https://www.psychologytoday.com/us/blog/urban-survival/202507/the-emerging-problem-of-ai-psychosis)”.
 In these cases, AIs mirror the user’s delusional thinking, paranoia, or despair back to them. In extreme situations, this has caused the person talking with the AI to [commit suicide](https://www.npr.org/sections/shots-health-news/2025/09/19/nx-s1-5545749/ai-chatbots-safety-openai-meta-characterai-teens-suicide).
-More than a million users of ChatGPT are have signs of mental health distress.
+More than a million users of ChatGPT have signs of mental health distress.
 
 Another risk area is AIs being used for intimate and explicit conversations. AI chatbots offering users a romantic relationship have seen huge growth over the last year, with more than 3 billion search results for ‘AI girlfriend’ on Google.
 These AI relationship apps are [shown to be addictive](https://onlinelibrary.wiley.com/doi/10.1002/mar.21899), especially to “lonely vulnerable people”.

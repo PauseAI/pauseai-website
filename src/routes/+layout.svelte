@@ -1,7 +1,9 @@
 <script lang="ts">
+	import { browser } from '$app/environment'
 	import type { GeoApiResponse } from '$api/geo/+server'
 	import { page } from '$app/stores'
 	import Banner from '$lib/components/Banner.svelte'
+	import CampaignBanner from '$lib/components/CampaignBanner.svelte'
 	import Hero from '$lib/components/Hero.svelte'
 	import Link from '$lib/components/Link.svelte'
 	import NearbyEvent from '$lib/components/NearbyEvent.svelte'
@@ -33,6 +35,10 @@
 	// Show the hero on the homepage, but nowhere else
 	$: hero = deLocalizeHref($page.url.pathname) === '/'
 
+	$: if (browser && deLocalizeHref($page.url.pathname) === '/india-summit-2026') {
+		localStorage.setItem('campaign_banner_india-summit-2026_hidden', 'true')
+	}
+
 	onMount(async () => {
 		const response = await fetch('/api/geo')
 		geo = await response.json()
@@ -54,6 +60,14 @@
 		<!-- eslint-disable-next-line svelte/no-at-html-tags not vulnerable against XSS -->
 		{@html data.localeAlert.message}
 	</Banner>
+{:else if geo?.country?.code === 'GB'}
+	<Banner contrast={hero}>
+		<b
+			>PauseAI's largest ever protest will be on Saturday February 28th in London. <Link
+				href="https://luma.com/o0p4htmk">Sign up now!</Link
+			></b
+		>
+	</Banner>
 {:else}
 	<NearbyEvent contrast={hero} bind:eventFound {geo} />
 	{#if !eventFound}
@@ -72,6 +86,13 @@
 			</Banner>
 		{/if}
 	{/if}
+{/if}
+
+{#if deLocalizeHref($page.url.pathname) !== '/brussels-ep-protest-2026'}
+	<CampaignBanner href="/brussels-ep-protest-2026" id="brussels-ep-protest-2026">
+		<strong>Brussels, Feb 23</strong> - Join us outside the European Parliament to call for a global treaty
+		to pause frontier AI development.
+	</CampaignBanner>
 {/if}
 
 <div class="layout" class:with-hero={hero}>
@@ -106,7 +127,7 @@
 	}}
 />
 
-{#if !['/', '/outcomes', '/pdoom', '/quotes', '/dear-sir-demis-2025'].includes(deLocalizeHref($page.url.pathname))}
+{#if !['/', '/communities', '/outcomes', '/pdoom', '/quotes', '/dear-sir-demis-2025'].includes(deLocalizeHref($page.url.pathname))}
 	<Toc />
 {/if}
 

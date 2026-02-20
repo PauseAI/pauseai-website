@@ -1,8 +1,9 @@
 <script lang="ts">
-	import Logo from '$lib/components/logo.svelte'
 	import { page } from '$app/stores'
-	import { localizeHref } from '$lib/paraglide/runtime'
+	import Link from '$lib/components/Link.svelte'
+	import Logo from '$lib/components/logo.svelte'
 	import { emulateCqwIfNeeded } from '$lib/container-query-units'
+	import { localizeHref } from '$lib/paraglide/runtime'
 	import { onMount } from 'svelte'
 
 	export let inverted = false
@@ -21,9 +22,9 @@
 	<div class="logo-container">
 		<div class="compensate-min-space-between" />
 		<div class="compensate-offset" />
-		<a href="/" class="logo">
+		<Link href="/" class="logo">
 			<Logo animate={logo_animate} {inverted} />
-		</a>
+		</Link>
 		<div class="min-space-between" />
 		<div class="space-between" />
 	</div>
@@ -98,7 +99,7 @@
 		width: min(var(--wide-if-nav-wrapped), var(--logo-offset));
 	}
 
-	.logo {
+	.logo-container > :global(.logo) {
 		width: clamp(var(--logo-width-small), var(--wide-if-nav-not-wrapped), var(--logo-width-big));
 		margin-left: calc(-1 * var(--logo-offset));
 		z-index: 1;

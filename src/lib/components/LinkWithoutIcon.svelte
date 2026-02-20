@@ -41,9 +41,16 @@
 		(href.startsWith('http:') || href.startsWith('https:')) &&
 		!href.startsWith('https://pauseai.info/') &&
 		!(href.includes('s3.amazonaws') && href.includes('/pauseai-'))
-	)
+	) {
 		type = Type.External
-	else if (href.startsWith('mailto:')) type = Type.Mail
+		// Automatically open petition and action-specific tools in a new tab
+		if (!target && (href.includes('change.org') || href.includes('activoice.org'))) {
+			target = '_blank'
+			if (!rel) rel = 'noopener noreferrer'
+		}
+	} else if (href.startsWith('mailto:')) {
+		type = Type.Mail
+	}
 
 	href = processHref(href)
 
@@ -65,6 +72,6 @@
 </script>
 
 <!-- eslint-disable-next-line svelte/no-restricted-html-elements - Warning is about using this component -->
-<a {href} {target} {rel} class={className} bind:this={anchor}>
+<a {href} {target} {rel} class={className} bind:this={anchor} {...$$restProps}>
 	<slot />
 </a>

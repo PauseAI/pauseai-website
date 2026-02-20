@@ -11,11 +11,23 @@ export type FrontmatterMeta = {
 	date?: string
 	categories?: Categories[]
 	image?: string
+	/** If true, this post will appear in the Latest News section on the homepage */
+	news?: boolean
 }
 
 export type Post = FrontmatterMeta & {
 	/** Path in URL from root */
 	slug: string
+}
+
+export type NewsItem = {
+	title: string
+	subtitle: string
+	date: string
+	image?: string
+	/** URL to the article (internal path or external URL) */
+	href: string
+	source: 'internal' | 'substack'
 }
 
 export type Signatory = {

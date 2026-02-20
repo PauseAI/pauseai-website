@@ -1,4 +1,6 @@
 <script lang="ts">
+	import Image from '$lib/components/Image.svelte'
+	import Link from '$lib/components/Link.svelte'
 	import PostMeta from '$lib/components/PostMeta.svelte'
 	import { getAssetUrlOrStaticUrl } from '$lib/images.js'
 
@@ -14,7 +16,7 @@
 
 <article>
 	{#if parent}
-		<a href={`/${parent}`}>View all {parent}</a>
+		<Link href={`/${parent}`}>View all {parent}</Link>
 	{/if}
 	<hgroup>
 		<h1>{title}</h1>
@@ -26,15 +28,11 @@
 		{/if}
 	</hgroup>
 
-	<!-- <div class="tags">
-		{#if meta.categories && meta.categories.length > 0}
-			<div class="categories">
-				{#each meta.categories as category}
-					<span class="surface-4">&num;{category}</span>
-				{/each}
-			</div>
-		{/if}
-	</div> -->
+	{#if imageUrl}
+		<div class="banner">
+			<Image src={imageUrl} alt={title} />
+		</div>
+	{/if}
 
 	<div class="prose">
 		<svelte:component this={data.content} />
@@ -49,6 +47,19 @@
 
 	h1 {
 		text-transform: capitalize;
+	}
+
+	.banner {
+		margin: 1.5rem 0 2rem;
+		border-radius: 12px;
+		overflow: hidden;
+	}
+
+	.banner img {
+		width: 100%;
+		max-height: 400px;
+		object-fit: cover;
+		display: block;
 	}
 
 	/* h1 + p {

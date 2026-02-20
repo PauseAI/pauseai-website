@@ -12,25 +12,25 @@
 			"country_local": "Srbija",
 			"lat": 44,
 			"lon": 21,
-			"link": "https://www.facebook.com/PauseAISerbia"
+			"link": "https://pauseai.rs/"
 		},
 		{
 			"name": "United Kingdom",
 			"lat": 54.2,
 			"lon": -2.4,
-			"link": "https://x.com/PauseAI_UK"
+			"link": "https://pauseai.uk/"
 		},
 		{
 			"name": "France",
 			"lat": 47.8,
 			"lon": 2.6,
-			"link": "$$DISCORD_FRANCE$$"
+			"link": "https://pauseia.fr"
 		},
 		{
 			"name": "Canada",
 			"lat": 56,
 			"lon": -105,
-			"link": "https://pauseai.ca/"
+			"link": "https://pauseai.ca/en/"
 		},
 		{
 			"name": "Romania",
@@ -50,20 +50,20 @@
 			"country_local": "España",
 			"lat": 41.3,
 			"lon": -4,
-			"link": "https://chat.whatsapp.com/KEgD22LEo6xEVvjH4fD8br"
+			"link": "https://pauseai.es"
 		},
 		{
 			"name": "Australia",
 			"lat": -25,
 			"lon": 134.5,
-			"link": "https://www.facebook.com/groups/571590459293618/"
+			"link": "https://pauseai.info/australia"
 		},
 		{
 			"name": "Germany",
 			"country_local": "Deutschland",
 			"lat": 51.1,
 			"lon": 10,
-			"link": "$$DISCORD_GERMANY$$"
+			"link": "https://pause-ai.de/"
 		},
 		{
 			"name": "United States",
@@ -75,7 +75,7 @@
 			"name": "Czechia",
 			"lat": 50,
 			"lon": 15,
-			"link": "https://discord.gg/4rZ2nGZB3r"
+			"link": "https://www.pauseai.cz/"
 		},
 		{
 			"name": "Poland",
@@ -95,7 +95,14 @@
 			"country_local": "Sverige",
 			"lat": 65,
 			"lon": 17,
-			"link": "mailto:carl@pauseai.info"
+			"link": "https://pauseai.se/"
+		},
+		{
+			"name": "Italy",
+			"country_local": "Italia",
+			"lat": 42.5,
+			"lon": 12.5,
+			"link": "$$WHATSAPP_ITALY$$"
 		}
 	]
 }
