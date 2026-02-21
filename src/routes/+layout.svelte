@@ -51,49 +51,58 @@
 	Top
 </h2>
 
-<!-- Make sure we only show one banner at a time-->
-{#if data.localeAlert}
-	<Banner
-		contrast={data.localeAlert.isDev}
-		id={data.localeAlert.isDev ? undefined : 'locale-switch'}
-	>
-		<!-- eslint-disable-next-line svelte/no-at-html-tags not vulnerable against XSS -->
-		{@html data.localeAlert.message}
-	</Banner>
-{:else if geo?.country?.code === 'GB'}
-	<Banner contrast={hero}>
-		<b
-			>PauseAI's largest ever protest will be on Saturday February 28th in London. <Link
-				href="https://luma.com/o0p4htmk">Sign up now!</Link
-			></b
+<div class="page-top" class:with-hero={hero}>
+	<!-- Make sure we only show one banner at a time-->
+	{#if data.localeAlert}
+		<Banner
+			contrast={data.localeAlert.isDev}
+			id={data.localeAlert.isDev ? undefined : 'locale-switch'}
 		>
-	</Banner>
-{:else}
-	<NearbyEvent contrast={hero} bind:eventFound {geo} />
-	{#if !eventFound}
-		{#if geo?.country?.code === 'US' && false}
-			<Banner contrast={hero}>
-				<b
-					>HELP US PROTECT STATE SOVEREIGNTY ON AI REGULATION | <Link
-						href="https://mstr.app/b09fa92b-1899-43a0-9d95-99cd99c9dfb2">ACT NOW »</Link
-					></b
-				>
-			</Banner>
-		{:else if false}
-			<Banner contrast={hero} target="/littlehelpers">
-				<strong>🎄 Holiday Matching Campaign!</strong> Help fund volunteer stipends for PauseAI
-				advocates. <Link href="/littlehelpers">Join the Little Helpers campaign →</Link>
-			</Banner>
+			<!-- eslint-disable-next-line svelte/no-at-html-tags not vulnerable against XSS -->
+			{@html data.localeAlert.message}
+		</Banner>
+	{:else if geo?.country?.code === 'GB'}
+		<Banner contrast={hero}>
+			<b
+				>PauseAI's largest ever protest will be on Saturday February 28th in London. <Link
+					href="https://luma.com/o0p4htmk">Sign up now!</Link
+				></b
+			>
+		</Banner>
+	{:else}
+		<NearbyEvent contrast={hero} bind:eventFound {geo} />
+		{#if !eventFound}
+			{#if geo?.country?.code === 'US' && false}
+				<Banner contrast={hero}>
+					<b
+						>HELP US PROTECT STATE SOVEREIGNTY ON AI REGULATION | <Link
+							href="https://mstr.app/b09fa92b-1899-43a0-9d95-99cd99c9dfb2">ACT NOW »</Link
+						></b
+					>
+				</Banner>
+			{:else if false}
+				<Banner contrast={hero} target="/littlehelpers">
+					<strong>🎄 Holiday Matching Campaign!</strong> Help fund volunteer stipends for PauseAI
+					advocates. <Link href="/littlehelpers">Join the Little Helpers campaign →</Link>
+				</Banner>
+			{/if}
 		{/if}
 	{/if}
-{/if}
 
-{#if deLocalizeHref($page.url.pathname) !== '/brussels-ep-protest-2026'}
-	<CampaignBanner href="/brussels-ep-protest-2026" id="brussels-ep-protest-2026">
-		<strong>Brussels, Feb 23</strong> - Join us outside the European Parliament to call for a global treaty
-		to pause frontier AI development.
-	</CampaignBanner>
-{/if}
+	{#if deLocalizeHref($page.url.pathname) !== '/brussels-ep-protest-2026'}
+		<CampaignBanner href="/brussels-ep-protest-2026" id="brussels-ep-protest-2026">
+			<strong>Brussels, Feb 23</strong> - Join us outside the European Parliament to call for a global
+			treaty to pause frontier AI development.
+		</CampaignBanner>
+	{/if}
+
+	{#if hero}
+		<div class="hero-section">
+			<Hero />
+			<Header inverted />
+		</div>
+	{/if}
+</div>
 
 <div class="layout" class:with-hero={hero}>
 	{#if $page.route.id === '/sayno'}
@@ -103,12 +112,7 @@
 		{/await}
 	{/if}
 
-	{#if hero}
-		<div class="hero-section">
-			<Hero />
-			<Header inverted />
-		</div>
-	{:else}
+	{#if !hero}
 		<Header />
 	{/if}
 
@@ -147,6 +151,16 @@
 		margin: auto;
 	} */
 
+	.page-top.with-hero {
+		display: flex;
+		flex-direction: column;
+		height: 100dvh;
+	}
+
+	.page-top.with-hero .hero-section {
+		flex: 1;
+	}
+
 	.hero-section {
 		position: relative;
 	}
@@ -170,6 +184,10 @@
 		--padding-wide: 3rem;
 		--padding-narrow: 0.5rem;
 		padding: 0 var(--padding-wide) 0 var(--padding-wide);
+	}
+
+	.layout.with-hero {
+		grid-template-rows: 1fr auto;
 	}
 
 	/* Transition to narrower padding at narrow viewports (matches navbar 600px breakpoint) */
