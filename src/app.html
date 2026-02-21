@@ -24,7 +24,7 @@
 					if (!key || localStorage.getItem(key) !== 'true') continue
 					for (var j = 0; j < bannerTypes.length; j++) {
 						var m = key.match(bannerTypes[j].pattern)
-						if (m) css += '[' + bannerTypes[j].attr + '="' + m[1] + '"]{display:none!important}'
+						if (m) css += `[${bannerTypes[j].attr}="${m[1]}"]{display:none!important}`
 					}
 				}
 				if (css) {
