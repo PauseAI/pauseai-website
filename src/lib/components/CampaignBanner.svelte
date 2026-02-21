@@ -32,7 +32,7 @@
 </script>
 
 {#if !hidden}
-	<div class="campaign-banner" transition:fade={{ duration: 200 }}>
+	<div class="campaign-banner" data-campaign-banner-id={id} transition:fade={{ duration: 200 }}>
 		<div class="accent-line"></div>
 		<div class="campaign-content">
 			<LinkWithoutIcon {href} class="campaign-link" on:click={close}>

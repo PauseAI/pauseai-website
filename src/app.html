@@ -10,6 +10,27 @@
 			document.documentElement.setAttribute('color-scheme', 'dark')
 		</script>
 
+		<script>
+			try {
+				var css = ''
+				for (var i = 0; i < localStorage.length; i++) {
+					var key = localStorage.key(i)
+					if (!key || localStorage.getItem(key) !== 'true') continue
+					var m
+					if ((m = key.match(/^banner_(.+)_hidden$/))) {
+						css += '[data-banner-id="' + m[1] + '"]{display:none!important}'
+					} else if ((m = key.match(/^campaign_banner_(.+)_hidden$/))) {
+						css += '[data-campaign-banner-id="' + m[1] + '"]{display:none!important}'
+					}
+				}
+				if (css) {
+					var s = document.createElement('style')
+					s.textContent = css
+					document.head.appendChild(s)
+				}
+			} catch (e) {}
+		</script>
+
 		<!-- Google Tag Manager -->
 		<script>
 			;(function (w, d, s, l, i) {
