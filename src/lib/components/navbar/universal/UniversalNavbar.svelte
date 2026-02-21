@@ -70,8 +70,11 @@
 	}
 
 	nav.move-up {
-		margin-top: min(-100vh, calc(-1 * var(--hero-min-height)));
-		height: 0;
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		z-index: 1;
 	}
 
 	nav > * {

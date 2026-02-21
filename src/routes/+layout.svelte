@@ -104,9 +104,13 @@
 	{/if}
 
 	{#if hero}
-		<Hero />
+		<div class="hero-section">
+			<Hero />
+			<Header inverted moveUp />
+		</div>
+	{:else}
+		<Header />
 	{/if}
-	<Header inverted={hero} moveUp={hero} />
 
 	<main>
 		<PageTransition url={$page.url.pathname}>
@@ -142,6 +146,10 @@
 		max-width: 50rem;
 		margin: auto;
 	} */
+
+	.hero-section {
+		position: relative;
+	}
 
 	.layout {
 		height: 100%;
