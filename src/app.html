@@ -10,6 +10,9 @@
 			document.documentElement.setAttribute('color-scheme', 'dark')
 		</script>
 
+		<!-- Prevent dismissed banners from flashing on reload by hiding them before first paint,
+		     same technique as the color-scheme script above. Matches localStorage keys set by
+		     Banner.svelte (banner_<id>_hidden) and CampaignBanner.svelte (campaign_banner_<id>_hidden). -->
 		<script>
 			try {
 				var css = ''
