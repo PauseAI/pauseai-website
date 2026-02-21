@@ -11,19 +11,20 @@
 		</script>
 
 		<!-- Prevent dismissed banners from flashing on reload by hiding them before first paint,
-		     same technique as the color-scheme script above. Matches localStorage keys set by
-		     Banner.svelte (banner_<id>_hidden) and CampaignBanner.svelte (campaign_banner_<id>_hidden). -->
+		     same technique as the color-scheme script above. -->
 		<script>
 			try {
+				var bannerTypes = [
+					{ pattern: /^banner_(.+)_hidden$/, attr: 'data-banner-id' },
+					{ pattern: /^campaign_banner_(.+)_hidden$/, attr: 'data-campaign-banner-id' }
+				]
 				var css = ''
 				for (var i = 0; i < localStorage.length; i++) {
 					var key = localStorage.key(i)
 					if (!key || localStorage.getItem(key) !== 'true') continue
-					var m
-					if ((m = key.match(/^banner_(.+)_hidden$/))) {
-						css += '[data-banner-id="' + m[1] + '"]{display:none!important}'
-					} else if ((m = key.match(/^campaign_banner_(.+)_hidden$/))) {
-						css += '[data-campaign-banner-id="' + m[1] + '"]{display:none!important}'
+					for (var j = 0; j < bannerTypes.length; j++) {
+						var m = key.match(bannerTypes[j].pattern)
+						if (m) css += '[' + bannerTypes[j].attr + '="' + m[1] + '"]{display:none!important}'
 					}
 				}
 				if (css) {
