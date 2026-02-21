@@ -1,5 +1,5 @@
 import { json } from '@sveltejs/kit'
-import type { Post } from '$lib/types'
+import type { FrontmatterMeta, Post } from '$lib/types'
 import { outcomesMeta } from '../../outcomes/meta'
 import { communitiesMeta } from '../../communities/communities'
 import { meta as pdoomMeta } from '../../pdoom/meta'
@@ -41,7 +41,7 @@ async function getPosts() {
 			slug &&
 			!slug.startsWith('debug.')
 		) {
-			const metadata = file.metadata as Omit<Post, 'slug'>
+			const metadata = file.metadata as FrontmatterMeta
 			const post = { ...metadata, slug } satisfies Post
 			posts.push(post)
 		}
