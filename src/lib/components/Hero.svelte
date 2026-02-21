@@ -20,12 +20,7 @@
 <div class="hero">
 	<picture>
 		{#each Object.entries(homeHeroMobile.sources) as [format, srcset]}
-			<source
-				media="(max-width: 850px) and (orientation: portrait)"
-				{srcset}
-				sizes="100vw"
-				type={'image/' + format}
-			/>
+			<source media="(max-width: 850px)" {srcset} sizes="100vw" type={'image/' + format} />
 		{/each}
 		{#each Object.entries(homeHeroDesktop.sources) as [format, srcset]}
 			<source {srcset} sizes="100vw" type={'image/' + format} />
@@ -85,13 +80,13 @@
 		transform-origin: center bottom;
 	}
 
-	@media (min-width: 851px), (orientation: landscape) {
+	@media (min-width: 851px) {
 		.hero :global(img) {
 			transform: scale(0.95);
 		}
 	}
 
-	@media (max-width: 850px) and (orientation: portrait) {
+	@media (max-width: 850px) {
 		.hero :global(img) {
 			position: absolute !important;
 			bottom: var(--mobile-hero-img-pos, 0px) !important;
