@@ -170,9 +170,9 @@
 		top: 0;
 		left: 0;
 		right: 0;
-		/* Replicate .layout constraints: constrain to page-width minus its 3rem padding on each side,
-		   then center. This keeps --cqw container-query calculations identical to before. */
-		width: calc(min(100%, var(--page-width)) - 2 * 3rem);
+		/* Replicate the content-box width of .layout (box-sizing: content-box, max-inline-size: 40rem,
+		   padding: 0 3rem): content-box = min(page-width, viewport - 2*padding) */
+		width: min(var(--page-width), 100vw - 6rem);
 		margin-inline: auto;
 		z-index: 1;
 	}
