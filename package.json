@@ -54,7 +54,7 @@
 		"mdsvex": "^0.11.2",
 		"minimatch": "^9.0.5",
 		"minimist": "^1.2.8",
-		"npm-run-all2": "^6.2.6",
+		"npm-run-all2": "^8.0.4",
 		"p-queue": "^8.1.1",
 		"prettier": "^3.8.1",
 		"prettier-plugin-svelte": "^3.5.0",
