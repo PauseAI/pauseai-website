@@ -80,8 +80,15 @@
 	.hero :global(img) {
 		width: 100%;
 		height: 100%;
-		object-fit: cover;
+		object-fit: contain;
 		object-position: center bottom;
+		transform-origin: center bottom;
+	}
+
+	@media (min-width: 851px), (orientation: landscape) {
+		.hero :global(img) {
+			transform: scale(0.95);
+		}
 	}
 
 	@media (max-width: 850px) and (orientation: portrait) {
