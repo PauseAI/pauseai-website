@@ -170,6 +170,10 @@
 		top: 0;
 		left: 0;
 		right: 0;
+		/* Replicate .layout constraints: constrain to page-width minus its 3rem padding on each side,
+		   then center. This keeps --cqw container-query calculations identical to before. */
+		width: calc(min(100%, var(--page-width)) - 2 * 3rem);
+		margin-inline: auto;
 		z-index: 1;
 	}
 
