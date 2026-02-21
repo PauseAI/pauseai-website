@@ -170,8 +170,6 @@
 		top: 0;
 		left: 0;
 		right: 0;
-		/* Replicate the content-box width of .layout (box-sizing: content-box, max-inline-size: 40rem,
-		   padding: 0 3rem): content-box = min(page-width, viewport - 2*padding) */
 		width: min(var(--page-width), 100vw - 6rem);
 		margin-inline: auto;
 		z-index: 1;
