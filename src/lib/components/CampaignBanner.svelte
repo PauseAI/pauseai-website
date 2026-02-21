@@ -13,7 +13,9 @@
 	if (browser && id) {
 		try {
 			hidden = localStorage.getItem(`campaign_banner_${id}_hidden`) === 'true'
-		} catch (e) {}
+		} catch {
+			// SecurityError in storage-restricted contexts
+		}
 	}
 
 	function close() {
