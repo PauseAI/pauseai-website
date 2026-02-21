@@ -9,7 +9,12 @@
 
 	export let href: string
 	export let id = 'campaign'
-	let hidden = browser && id && localStorage.getItem(`campaign_banner_${id}_hidden`) === 'true'
+	let hidden = false
+	if (browser && id) {
+		try {
+			hidden = localStorage.getItem(`campaign_banner_${id}_hidden`) === 'true'
+		} catch (e) {}
+	}
 
 	function close() {
 		hidden = true

@@ -7,7 +7,12 @@
 	export let contrast = false
 	export let target: string | null = null
 	export let id: string | null = null
-	let hidden = browser && id ? localStorage.getItem(`banner_${id}_hidden`) === 'true' : false
+	let hidden = false
+	if (browser && id) {
+		try {
+			hidden = localStorage.getItem(`banner_${id}_hidden`) === 'true'
+		} catch (e) {}
+	}
 
 	function closeClick() {
 		hidden = true
