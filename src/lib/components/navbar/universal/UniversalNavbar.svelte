@@ -7,7 +7,6 @@
 	import { onMount } from 'svelte'
 
 	export let inverted = false
-	export let moveUp = false
 
 	$: logo_animate = localizeHref($page.url.pathname) != '/'
 
@@ -18,7 +17,7 @@
 	})
 </script>
 
-<nav class:inverted-header={inverted} class:move-up={moveUp} bind:this={nav}>
+<nav class:inverted-header={inverted} bind:this={nav}>
 	<div class="logo-container">
 		<div class="compensate-min-space-between" />
 		<div class="compensate-offset" />
@@ -67,14 +66,6 @@
 		flex-wrap: wrap;
 		container-type: inline-size;
 		padding: var(--vspace) 0;
-	}
-
-	nav.move-up {
-		position: absolute;
-		top: 0;
-		left: 0;
-		right: 0;
-		z-index: 1;
 	}
 
 	nav > * {

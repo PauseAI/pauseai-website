@@ -106,7 +106,7 @@
 	{#if hero}
 		<div class="hero-section">
 			<Hero />
-			<Header inverted moveUp />
+			<Header inverted />
 		</div>
 	{:else}
 		<Header />
@@ -149,6 +149,14 @@
 
 	.hero-section {
 		position: relative;
+	}
+
+	.hero-section :global(nav) {
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		z-index: 1;
 	}
 
 	.layout {
