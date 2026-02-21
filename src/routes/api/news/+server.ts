@@ -1,33 +1,21 @@
 import { json } from '@sveltejs/kit'
 import type { RequestHandler } from './$types'
-import type { FrontmatterMeta, NewsItem } from '$lib/types'
+import type { NewsItem, Post } from '$lib/types'
 
-async function getInternalNews(): Promise<NewsItem[]> {
-	const paths = import.meta.glob('/src/posts/*.md', { eager: true })
+async function getInternalNews(localFetch: typeof fetch): Promise<NewsItem[]> {
+	const posts: Post[] = await localFetch('/api/posts').then((res) => res.json())
 	const items: NewsItem[] = []
 
-	for (const path in paths) {
-		const file = paths[path]
-		const slug = path.split('/').at(-1)?.replace('.md', '')
-
-		if (
-			file &&
-			typeof file === 'object' &&
-			'metadata' in file &&
-			slug &&
-			!slug.startsWith('debug.')
-		) {
-			const metadata = file.metadata as FrontmatterMeta
-			if (metadata.news && metadata.date) {
-				items.push({
-					title: metadata.title,
-					subtitle: metadata.description || '',
-					date: metadata.date,
-					image: metadata.image,
-					href: `/${slug}`,
-					source: 'internal'
-				})
-			}
+	for (const post of posts) {
+		if (post.news && post.date) {
+			items.push({
+				title: post.title,
+				subtitle: post.description || '',
+				date: post.date,
+				image: post.image,
+				href: `/${post.slug}`,
+				source: 'internal'
+			})
 		}
 	}
 
@@ -95,11 +83,11 @@ function extractCdata(xml: string, tag: string): string | null {
 	return match ? match[1] : null
 }
 
-export const GET: RequestHandler = async ({ url }) => {
+export const GET: RequestHandler = async ({ fetch, url }) => {
 	const page = Math.max(1, parseInt(url.searchParams.get('page') || '1', 10))
 	const pageSize = Math.max(1, Math.min(12, parseInt(url.searchParams.get('pageSize') || '6', 10)))
 
-	const [internal, substack] = await Promise.all([getInternalNews(), getSubstackNews()])
+	const [internal, substack] = await Promise.all([getInternalNews(fetch), getSubstackNews()])
 
 	const allNews = [...internal, ...substack].sort(
 		(a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
