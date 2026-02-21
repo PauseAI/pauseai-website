@@ -1,36 +1,26 @@
 <script lang="ts">
 	import X from 'lucide-svelte/icons/x'
 	import { page } from '$app/stores'
-	import { onMount } from 'svelte'
 	import { browser } from '$app/environment'
 	import { fade } from 'svelte/transition'
 
 	export let contrast = false
 	export let target: string | null = null
 	export let id: string | null = null
-	export let hidden = false
-
-	// Function to check localStorage on mount
-	function checkStoredState() {
-		if (browser && id) {
-			const storedState = localStorage.getItem(`banner_${id}_hidden`)
-			if (storedState === 'true') {
-				hidden = true
-				console.log(`Banner ${id} restored from storage as hidden`)
-			}
+	let hidden = false
+	if (browser && id) {
+		try {
+			hidden = localStorage.getItem(`banner_${id}_hidden`) === 'true'
+		} catch {
+			// SecurityError in storage-restricted contexts
 		}
 	}
 
-	// Simplest possible click handler
 	function closeClick() {
-		console.log('Close button clicked! ' + new Date().toISOString())
 		hidden = true
-
-		// Save state if we have an ID
 		if (browser && id) {
 			try {
 				localStorage.setItem(`banner_${id}_hidden`, 'true')
-				console.log('Saved to localStorage')
 			} catch (e) {
 				console.error(e)
 			}
@@ -41,30 +31,10 @@
 		const path = $page.url.pathname
 		if (path === target) hidden = true
 	}
-
-	onMount(() => {
-		checkStoredState()
-
-		// Debug info
-		console.log('Banner component mounted')
-
-		// Extra safety - add global click handler in case event bubbling is an issue
-		if (browser) {
-			const closeBtn = document.querySelector('.banner-close-btn')
-			if (closeBtn) {
-				closeBtn.addEventListener('click', (e) => {
-					e.preventDefault()
-					e.stopPropagation()
-					console.log('Direct DOM click handler fired')
-					closeClick()
-				})
-			}
-		}
-	})
 </script>
 
 {#if !hidden}
-	<div class="banner" class:contrast transition:fade={{ duration: 200 }}>
+	<div class="banner" class:contrast data-banner-id={id} transition:fade={{ duration: 200 }}>
 		<span class="content">
 			<slot />
 		</span>
