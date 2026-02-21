@@ -51,7 +51,7 @@
 	Top
 </h2>
 
-<div class="page-top" class:with-hero={hero}>
+<div class="page-top" class:hero-page={hero}>
 	<!-- Make sure we only show one banner at a time-->
 	{#if data.localeAlert}
 		<Banner
@@ -104,7 +104,7 @@
 	{/if}
 </div>
 
-<div class="layout" class:with-hero={hero}>
+<div class="layout" class:hero-page={hero}>
 	{#if $page.route.id === '/sayno'}
 		<!-- Dynamic import and render the selfie UX component -->
 		{#await import('./sayno/SelfieUX.svelte') then module}
@@ -151,13 +151,13 @@
 		margin: auto;
 	} */
 
-	.page-top.with-hero {
+	.page-top.hero-page {
 		display: flex;
 		flex-direction: column;
 		height: 100dvh;
 	}
 
-	.page-top.with-hero .hero-section {
+	.page-top.hero-page .hero-section {
 		flex: 1;
 	}
 
@@ -188,7 +188,7 @@
 		padding: 0 var(--padding-wide) 0 var(--padding-wide);
 	}
 
-	.layout.with-hero {
+	.layout.hero-page {
 		grid-template-rows: 1fr auto;
 	}
 
