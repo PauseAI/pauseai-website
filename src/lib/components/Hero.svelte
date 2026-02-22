@@ -6,34 +6,34 @@
 
 	import Link from '$lib/components/Link.svelte'
 
-	let isMobile = false
 	let tagline: HTMLDivElement
 
-	const checkMobile = () => {
-		isMobile = window.innerWidth <= 850 || window.innerHeight > window.innerWidth
-	}
-
 	onMount(() => {
-		checkMobile()
-		window.addEventListener('resize', checkMobile)
-
 		const cleanupCqwEmulation = emulateCqwIfNeeded(tagline)
 
 		return () => {
-			window.removeEventListener('resize', checkMobile)
 			cleanupCqwEmulation?.()
 		}
 	})
 </script>
 
 <div class="hero">
-	{#if isMobile}
-		<enhanced:img src={homeHeroMobile} sizes="100vw" alt="" />
-	{:else}
-		<enhanced:img src={homeHeroDesktop} sizes="100vw" alt="" />
-	{/if}
+	<picture>
+		{#each Object.entries(homeHeroMobile.sources) as [format, srcset]}
+			<source media="(max-width: 850px)" {srcset} sizes="100vw" type={'image/' + format} />
+		{/each}
+		{#each Object.entries(homeHeroDesktop.sources) as [format, srcset]}
+			<source {srcset} sizes="100vw" type={'image/' + format} />
+		{/each}
+		<img
+			src={homeHeroDesktop.img.src}
+			width={homeHeroDesktop.img.w}
+			height={homeHeroDesktop.img.h}
+			alt=""
+		/>
+	</picture>
 	<div class="content" bind:this={tagline}>
-		<h2>Don’t let AI companies<br />gamble away our future</h2>
+		<h2>Don't let AI companies<br />gamble away our future</h2>
 		<div class="actions">
 			<Link href="/join" class="btn-primary">Get involved</Link>
 			<Link href="/donate" class="btn-secondary">Donate</Link>
@@ -66,6 +66,12 @@
 		text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 	}
 
+	.hero :global(picture) {
+		display: block;
+		width: 100%;
+		height: 100%;
+	}
+
 	.hero :global(img) {
 		width: 100%;
 		height: 100%;
@@ -74,7 +80,13 @@
 		transform-origin: center bottom;
 	}
 
-	@media (max-width: 850px), (orientation: portrait) {
+	@media (min-width: 851px) {
+		.hero :global(img) {
+			transform: scale(0.95);
+		}
+	}
+
+	@media (max-width: 850px) {
 		.hero :global(img) {
 			position: absolute !important;
 			bottom: var(--mobile-hero-img-pos, 0px) !important;
@@ -82,7 +94,6 @@
 			width: 100% !important;
 			height: auto !important;
 			object-fit: initial !important;
-			transform: none !important;
 		}
 
 		.content {
@@ -111,12 +122,6 @@
 			backdrop-filter: blur(2px);
 			border: 2px solid white;
 			color: white;
-		}
-	}
-
-	@media (min-width: 851px) and (orientation: landscape) {
-		.hero :global(img) {
-			transform: scale(0.95);
 		}
 	}
 
