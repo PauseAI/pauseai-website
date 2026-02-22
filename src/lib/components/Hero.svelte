@@ -1,6 +1,6 @@
 <script lang="ts">
-	import homeHeroDesktop from '$assets/protests/Home Hero - web - Faded.jpg?enhanced'
-	import homeHeroMobile from '$assets/protests/Home Hero - mobile - Faded.jpg?enhanced'
+	import homeHeroDesktop from '$assets/protests/Home Hero - web - No Background.png?enhanced'
+	import homeHeroMobile from '$assets/protests/Home Hero - mobile - No Background.png?enhanced'
 	import { onMount } from 'svelte'
 	import { emulateCqwIfNeeded } from '$lib/container-query-units'
 
@@ -72,6 +72,8 @@
 		object-fit: contain;
 		object-position: center bottom;
 		transform-origin: center bottom;
+		mix-blend-mode: soft-light;
+		mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
 	}
 
 	@media (max-width: 850px), (orientation: portrait) {
@@ -130,6 +132,7 @@
 		left: 50%;
 		transform: translateX(-50%);
 		background-color: #ff9416;
+		isolation: isolate;
 
 		/* Adjust this to push the mobile image up or down (e.g., 0px, 10vh, -20px) */
 		--mobile-hero-img-pos: 215px;
