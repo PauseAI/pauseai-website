@@ -45,6 +45,7 @@ content: `
 <h3 class="toc-exclude">I have an hour</h3>
 <p>Ready to go a bit deeper? Start conversations and add your voice:</p>
 <ul>
+<li><strong>Write to your elected representatives</strong> using our <a href="/email-builder">Email Builder</a></li>
 <li>Talk to someone in your life about AI safety—a friend, neighbour, colleague, or family member. Our <a href="/counterarguments">counterarguments guide</a> can help you answer tough questions and encourage others to act</li>
 <li>Share about AI risk on your social media. One of <a href="https://www.youtube.com/watch?v=xBqU1QxCao8&list=PLI46NoubGtIJa0JVCBR-9CayxCOmU0EJt">these videos</a> or this website can be a good start. And don't forget to tag us in your posts</li>
 </ul>
@@ -56,7 +57,6 @@ content: `
 <h3 class="toc-exclude">I have a few hours</h3>
 <p>Make your voice heard where it counts:</p>
 <ul>
-<li><strong>Write to your elected representatives</strong> using our <a href="/email-builder">Email Builder</a></li>
 <li><strong>Call your politicians</strong>: Try calling legislators' offices while having a set of talking points in view so you stay on topic</li>
 <li>Follow up with a phone call, and when you secure a meeting, check out our <a href="/lobby-tips">lobby tips</a></li>
 <li>Take a deep dive into our <a href="/learn">educational materials</a> to build your knowledge</li>
