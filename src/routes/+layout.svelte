@@ -157,8 +157,14 @@
 		height: 100dvh;
 	}
 
+	.page-top.hero-page > :global(.banner),
+	.page-top.hero-page > :global(.campaign-banner) {
+		flex-shrink: 0;
+	}
+
 	.page-top.hero-page .hero-section {
 		flex: 1;
+		min-height: 0;
 	}
 
 	.hero-section {
