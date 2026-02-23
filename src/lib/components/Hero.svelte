@@ -25,12 +25,7 @@
 		{#each Object.entries(homeHeroDesktop.sources) as [format, srcset]}
 			<source {srcset} sizes="100vw" type={'image/' + format} />
 		{/each}
-		<img
-			src={homeHeroDesktop.img.src}
-			width={homeHeroDesktop.img.w}
-			height={homeHeroDesktop.img.h}
-			alt=""
-		/>
+		<img src={homeHeroDesktop.img.src} alt="" />
 	</picture>
 	<div class="content" bind:this={tagline}>
 		<h2>Don't let AI companies<br />gamble away our future</h2>
