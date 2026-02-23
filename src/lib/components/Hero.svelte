@@ -67,24 +67,20 @@
 	}
 
 	.hero :global(img) {
-		width: 100%;
-		height: 100%;
-		object-fit: contain;
-		object-position: center bottom;
-		transform-origin: center bottom;
+		position: absolute;
+		bottom: 0;
+		left: 50%;
+		transform: translateX(-50%);
+		width: min(100%, calc(max(100vh, var(--hero-min-height)) * var(--hero-img-ar)));
+		height: auto;
 		mix-blend-mode: soft-light;
+		-webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
 		mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
 	}
 
 	@media (max-width: 850px), (orientation: portrait) {
 		.hero :global(img) {
-			position: absolute !important;
-			bottom: var(--mobile-hero-img-pos, 0px) !important;
-			left: 0 !important;
-			width: 100% !important;
-			height: auto !important;
-			object-fit: initial !important;
-			transform: none !important;
+			bottom: var(--mobile-hero-img-pos, 0px);
 		}
 
 		.content {
@@ -118,7 +114,8 @@
 
 	@media (min-width: 851px) and (orientation: landscape) {
 		.hero :global(img) {
-			transform: scale(0.95);
+			transform-origin: center bottom;
+			transform: translateX(-50%) scale(0.95);
 		}
 	}
 
@@ -136,6 +133,8 @@
 
 		/* Adjust this to push the mobile image up or down (e.g., 0px, 10vh, -20px) */
 		--mobile-hero-img-pos: 215px;
+		/* Desktop hero image aspect ratio (2880 / 1600) — update if image changes */
+		--hero-img-ar: 1.8;
 	}
 
 	.actions {
