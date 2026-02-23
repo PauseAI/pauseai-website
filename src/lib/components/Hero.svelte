@@ -65,7 +65,8 @@
 		position: absolute;
 		bottom: 0;
 		left: 50%;
-		transform: translateX(-50%);
+		--hero-scale: 1;
+		transform: translateX(-50%) scale(var(--hero-scale));
 		width: min(100%, calc(max(100vh, var(--hero-min-height)) * var(--hero-img-ar)));
 		height: auto;
 		mix-blend-mode: soft-light;
@@ -76,7 +77,7 @@
 	@media (min-width: 851px) {
 		.hero :global(img) {
 			transform-origin: center bottom;
-			transform: translateX(-50%) scale(0.95);
+			--hero-scale: 0.95;
 		}
 	}
 
@@ -126,10 +127,10 @@
 		background-color: #ff9416;
 		isolation: isolate;
 
-		/* Adjust this to push the mobile image up or down (e.g., 0px, 10vh, -20px) */
-		--mobile-hero-img-pos: 215px;
 		/* Desktop hero image aspect ratio (2880 / 1600) — update if image changes */
 		--hero-img-ar: 1.8;
+		/* Adjust this to push the mobile image up or down (e.g., 0px, 10vh, -20px) */
+		--mobile-hero-img-pos: 215px;
 	}
 
 	.actions {
