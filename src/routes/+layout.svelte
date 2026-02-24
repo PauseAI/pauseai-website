@@ -151,6 +151,23 @@
 		margin: auto;
 	} */
 
+	:global(:root) {
+		--gutter-max: 3rem;
+		--gutter-min: 0.5rem;
+		--page-gutter: var(--gutter-max);
+	}
+
+	/* Linearly interpolate from gutter-max (at 600px) down to gutter-min */
+	@media (max-width: 600px) {
+		:global(:root) {
+			--page-gutter: clamp(
+				var(--gutter-min),
+				calc(var(--gutter-min) + (100% - 600px + 2 * (var(--gutter-max) - var(--gutter-min))) / 2),
+				var(--gutter-max)
+			);
+		}
+	}
+
 	.page-top.hero-page {
 		display: flex;
 		flex-direction: column;
@@ -176,7 +193,7 @@
 		top: 0;
 		left: 0;
 		right: 0;
-		width: min(var(--page-width), 100vw - 6rem);
+		width: min(var(--page-width), 100% - 2 * var(--page-gutter));
 		margin-inline: auto;
 		z-index: 1;
 	}
@@ -189,30 +206,11 @@
 		grid-template-rows: auto 1fr auto;
 		grid-auto-columns: 100%;
 		margin-inline: auto;
-		--padding-wide: 3rem;
-		--padding-narrow: 0.5rem;
-		padding: 0 var(--padding-wide) 0 var(--padding-wide);
+		padding: 0 var(--page-gutter);
 	}
 
 	.layout.hero-page {
 		grid-template-rows: 1fr auto;
-	}
-
-	/* Transition to narrower padding at narrow viewports (matches navbar 600px breakpoint) */
-	@media (max-width: 600px) {
-		.layout {
-			--transition-padding-from: 600px;
-			--transition-padding-until: calc(
-				var(--transition-padding-from) - 2 * (var(--padding-wide) - var(--padding-narrow))
-			);
-			--padding-left-right: clamp(
-				var(--padding-narrow),
-				calc(var(--padding-narrow) + (100vw - var(--transition-padding-until)) / 2),
-				var(--padding-wide)
-			);
-			padding-left: var(--padding-left-right);
-			padding-right: var(--padding-left-right);
-		}
 	}
 
 	main {
