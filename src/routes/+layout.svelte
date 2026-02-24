@@ -181,7 +181,7 @@
 
 	.page-top.hero-page .hero-section {
 		flex: 1;
-		min-height: 0;
+		min-height: var(--hero-min-height);
 	}
 
 	.hero-section {
