@@ -117,7 +117,6 @@
 	.hero {
 		display: block;
 		height: 100%;
-		min-height: min(var(--hero-min-height), 100%);
 		overflow: hidden;
 		position: relative;
 		width: 100vw;
