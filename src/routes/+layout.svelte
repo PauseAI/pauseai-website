@@ -176,7 +176,7 @@
 		top: 0;
 		left: 0;
 		right: 0;
-		width: min(var(--page-width), 100vw - 6rem);
+		width: min(var(--page-width), 100vw - 4rem);
 		margin-inline: auto;
 		z-index: 1;
 	}
