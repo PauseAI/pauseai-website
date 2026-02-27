@@ -24,7 +24,7 @@ In comparison, the probability of a nuclear powerplant meltdown is around one in
 
 "This is not a fringe view: eight out of ten top AI researchers are convinced that the creation of artificial general intelligence (AGI) will lead to a loss of control," he asserted.
 
-![Stuart Russell addressing the European Parliament](/images/ep-pausecon-2026-russell.jpg)
+![Stuart Russell addressing the European Parliament](/ep-pausecon-2026-russell.jpg)
 
 Nobel prize winner Geoffrey Hinton is among countless AI experts to have warned that superintelligent AI could pose an existential threat to humanity. The [International AI Safety Report](https://www.gov.uk/government/publications/international-ai-safety-report-2025), released earlier this month, confirms that advanced AI systems pose risks ranging from severe to catastrophic. The CEOs of the largest AI companies – including OpenAI and Google DeepMind – have also recently spoken of the catastrophic risks of advanced AI systems.
 
@@ -64,7 +64,7 @@ When the discussion turned to AI-powered autonomous weapons, Russell explained: 
 
 ## From parliament to public support
 
-![Protesters outside the European Parliament in Brussels](/images/ep-pausecon-2026-protest.jpg)
+![Protesters outside the European Parliament in Brussels](/ep-pausecon-2026-protest.jpg)
 
 Following the meeting around 100 protesters demonstrated outside the European Parliament in Brussels calling on policy makers to take action.
 
