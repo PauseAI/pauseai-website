@@ -4,7 +4,7 @@
 	export let widths: number[] = [400, 800, 1200, 1600, 2400]
 	export let sizes: string = '(min-width: 1280px) 1200px, 100vw'
 	export let quality: number = 80
-	export let fit: 'cover' | 'contain' | 'fill' | 'inside' | 'outside' = 'cover'
+	export let fit: 'cover' | 'contain' | 'fill' | 'inside' | 'outside' = 'contain'
 
 	export let pictureClass: string | undefined = undefined
 	export let imgClass: string | undefined = undefined
