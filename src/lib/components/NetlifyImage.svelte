@@ -12,6 +12,16 @@
 	export let loading: 'lazy' | 'eager' = 'lazy'
 	export let decoding: 'async' | 'sync' | 'auto' = 'async'
 
+	let useFallback = false
+
+	function handleError(e: Event) {
+		const imgElement = e.target as HTMLImageElement
+		if (imgElement.src !== src) {
+			useFallback = true
+			console.warn(`NetlifyImage: Failed to load image ${src}, using fallback`)
+		}
+	}
+
 	function buildNetlifyUrl(
 		path: string,
 		options: {
@@ -50,16 +60,21 @@
 	})
 </script>
 
-<picture class={pictureClass} {style}>
-	<source type="image/avif" srcset={avifSrcSet} {sizes} />
-	<source type="image/webp" srcset={webpSrcSet} {sizes} />
-	<img
-		src={fallbackSrc}
-		{alt}
-		{sizes}
-		class={imgClass}
-		{loading}
-		{decoding}
-		width={widths[widths.length - 1]}
-	/>
-</picture>
+{#if useFallback}
+	<img {src} {alt} class={imgClass} {style} {loading} {decoding} />
+{:else}
+	<picture class={pictureClass} {style}>
+		<source type="image/avif" srcset={avifSrcSet} {sizes} />
+		<source type="image/webp" srcset={webpSrcSet} {sizes} />
+		<img
+			on:error={handleError}
+			src={fallbackSrc}
+			{alt}
+			{sizes}
+			class={imgClass}
+			{loading}
+			{decoding}
+			width={widths[widths.length - 1]}
+		/>
+	</picture>
+{/if}
