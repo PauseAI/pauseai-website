@@ -89,7 +89,7 @@
 		{/if}
 	{/if}
 
-	{#if deLocalizeHref($page.url.pathname) !== '/brussels-ep-protest-2026'}
+	{#if deLocalizeHref($page.url.pathname) !== '/brussels-ep-protest-2026' && false}
 		<CampaignBanner href="/brussels-ep-protest-2026" id="brussels-ep-protest-2026">
 			<strong>Brussels, Feb 23</strong> - Join us outside the European Parliament to call for a global
 			treaty to pause frontier AI development.
