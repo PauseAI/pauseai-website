@@ -2,6 +2,7 @@
 	import Image from '$lib/components/Image.svelte'
 	import type { NewsItem } from '$lib/types'
 	import { formatDate } from '$lib/utils'
+	import NetlifyImage from './NetlifyImage.svelte'
 
 	let isExternal: boolean
 
@@ -18,7 +19,11 @@
 >
 	<div class="image-container">
 		{#if item.image}
-			<Image src={item.image} alt={item.title} class="image" />
+			{#if isExternal}
+				<NetlifyImage src={item.image} alt={item.title} imgClass="image" />
+			{:else}
+				<Image src={item.image} alt={item.title} class="image" />
+			{/if}
 		{:else}
 			<div class="image-placeholder" />
 		{/if}
