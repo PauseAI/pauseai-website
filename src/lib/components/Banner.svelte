@@ -129,9 +129,9 @@
 
 	.close {
 		position: absolute;
-		top: 0;
+		top: 50%;
 		right: 0.75em;
-		bottom: 0;
+		transform: translateY(-50%);
 		display: flex;
 		align-items: center;
 		background: transparent;
