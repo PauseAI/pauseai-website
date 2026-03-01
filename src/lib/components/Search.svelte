@@ -23,8 +23,42 @@
 				}
 			}
 		})
-		const input = document.getElementsByClassName('pagefind-ui__search-input')[0] as HTMLElement
+
+		const container = document.getElementById('search')!
+		const input = container.getElementsByClassName(
+			'pagefind-ui__search-input'
+		)[0] as HTMLInputElement
 		input.focus()
+
+		// Pagefind highlights matches in excerpts but not in result titles.
+		// Re-runs after every DOM update to inject <mark> tags into title links.
+		const observer = new MutationObserver(() => {
+			const query = input.value.trim()
+			if (!query) return
+			const terms = query.split(/\s+/).sort((a, b) => b.length - a.length)
+			if (!terms.length) return
+			const termPattern = terms
+				.map((t) => t.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + '\\w*')
+				.join('|')
+			const regex = new RegExp(`\\b(${termPattern})`, 'gi')
+			for (const link of container.querySelectorAll<HTMLAnchorElement>(
+				'.pagefind-ui__result-link'
+			)) {
+				const text = link.textContent ?? ''
+				const highlighted = text
+					.split(regex)
+					.map((part, i) => {
+						const escaped = part.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+						return i % 2 === 1 ? `<mark>${escaped}</mark>` : escaped
+					})
+					.join('')
+				if (link.innerHTML !== highlighted) link.innerHTML = highlighted
+			}
+		})
+
+		observer.observe(container, { childList: true, subtree: true })
+
+		return () => observer.disconnect()
 	})
 </script>
 
