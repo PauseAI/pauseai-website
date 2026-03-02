@@ -39,7 +39,7 @@ No, only the development of the largest general-purpose AI systems, often called
 Almost all currently existing AI would be legal under [our proposal](/proposal), and most future AI models will remain legal, too.
 We're calling for a ban on more powerful general AI systems, until we know how to build provably safe AI, and we have them under democratic control.
 
-## Do you believe GPT-4 is going to kill us?
+## Do you believe ChatGPT is going to kill us?
 
 No, we don't think [current AI models](/sota) are an existential threat.
 It seems likely that most next AI models won't be as well.
