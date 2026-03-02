@@ -106,9 +106,18 @@ export function createSymlinkIfNeeded(targetPath: string, linkPath: string, verb
 		fsSync.unlinkSync(linkPath)
 	}
 
-	// Create symbolic link
-	fsSync.symlinkSync(path.relative(path.dirname(linkPath), targetPath), linkPath, 'file')
-	if (verbose) console.log(`  \u2713 Linked ${linkPath} to ${targetPath}`)
+	// Create symbolic link or fallback to copy
+	try {
+		fsSync.symlinkSync(path.relative(path.dirname(linkPath), targetPath), linkPath, 'file')
+		if (verbose) console.log(`  \u2713 Linked ${linkPath} to ${targetPath}`)
+	} catch (error: any) {
+		if (error.code === 'EPERM') {
+			fsSync.copyFileSync(targetPath, linkPath)
+			if (verbose) console.log(`  \u2713 Copied ${targetPath} to ${linkPath} (symlink fallback)`)
+		} else {
+			throw error
+		}
+	}
 }
 
 /**
