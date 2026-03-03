@@ -1,5 +1,5 @@
 ---
-title: PauseAI protest @ Bletchley Park - November 1st
+title: PauseAI Protest @ Bletchley Park - November 1st
 description: We are organising a protest at Bletchley Park, during the AI Safety Summit
 ---
 

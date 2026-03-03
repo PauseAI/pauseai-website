@@ -1,5 +1,5 @@
 ---
-title: State-of-the-art AI capabilities vs humans
+title: State-of-the-art AI Capabilities vs Humans
 description: How smart are the latest AI models compared to humans?
 ---
 

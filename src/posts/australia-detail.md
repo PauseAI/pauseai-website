@@ -1,5 +1,5 @@
 ---
-title: " PauseAI Australia (our campaigns)"
+title: PauseAI Australia (Our Campaigns)
 slug: australia-detail
 description: More information about the Australian chapter of PauseAI
 ---

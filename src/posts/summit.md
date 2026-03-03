@@ -1,5 +1,5 @@
 ---
-title: Why we need AI Safety Summits
+title: Why We Need AI Safety Summits
 description: Why we need the AI safety summit to happen, and what it should achieve.
 ---
 

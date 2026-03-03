@@ -46,7 +46,7 @@
 	}
 
 	h1 {
-		text-transform: capitalize;
+		text-transform: none;
 	}
 
 	.banner {
