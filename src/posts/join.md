@@ -94,7 +94,7 @@ If you want to get kick-started into action straight away, check out our [list o
 
 One of the ways you can get involved consistently as a volunteer is by joining one of our Digital teams - Onboarding, Communications and Software. The roles below cover some of our core functions and by getting involved, you can help us grow our reach, retain our volunteers or build the tools we need to win.
 
-- We work in [teams](/teams)
+- We work in teams
 - We collaborate mostly on our [Discord server](https://discord.gg/2XXWXvErfA)
 - Read more about our [organization](/organization)
 
