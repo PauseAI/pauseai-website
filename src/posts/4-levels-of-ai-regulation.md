@@ -1,5 +1,5 @@
 ---
-title: 4 Levels of AI safety regulation
+title: 4 Levels of AI Safety Regulation
 description: A framework for thinking about how to mitigate the risks from powerful AI systems
 image: /4levels.png
 ---

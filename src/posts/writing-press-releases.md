@@ -1,5 +1,5 @@
 ---
-title: Writing press releases for protests
+title: Writing Press Releases for Protests
 description: How to be effective at writing a press release to cover a protest.
 ---
 

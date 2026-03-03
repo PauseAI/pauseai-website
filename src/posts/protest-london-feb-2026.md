@@ -1,5 +1,5 @@
 ---
-title: PauseAI holds largest ever AI safety protest in London
+title: PauseAI Holds Largest Ever AI Safety Protest in London
 slug: protest-london-feb-2026
 description: Around 300 people marched through London demanding that AI CEOs publicly back a pause in frontier AI development, in the largest protest ever focused specifically on AI safety.
 date: '2026-02-28'

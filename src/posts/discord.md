@@ -1,5 +1,5 @@
 ---
-title: PauseAI Discord server
+title: PauseAI Discord Server
 description: Invitation link to PauseAI's Discord server
 ---
 

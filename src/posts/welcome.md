@@ -1,5 +1,5 @@
 ---
-title: Welcome to the PauseAI community!
+title: Welcome to the PauseAI Community!
 description: Thanks for joining and advice on checking inbox
 ---
 

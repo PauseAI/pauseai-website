@@ -1,5 +1,5 @@
 ---
-title: Incidents of dangerous AI behavior
+title: Incidents of Dangerous AI Behavior
 ---
 
 <script>
