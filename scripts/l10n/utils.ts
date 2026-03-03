@@ -110,8 +110,8 @@ export function createSymlinkIfNeeded(targetPath: string, linkPath: string, verb
 	try {
 		fsSync.symlinkSync(path.relative(path.dirname(linkPath), targetPath), linkPath, 'file')
 		if (verbose) console.log(`  \u2713 Linked ${linkPath} to ${targetPath}`)
-	} catch (error: any) {
-		if (error.code === 'EPERM') {
+	} catch (error: unknown) {
+		if (typeof error === 'object' && error && 'code' in error && error.code === 'EPERM') {
 			fsSync.copyFileSync(targetPath, linkPath)
 			if (verbose) console.log(`  \u2713 Copied ${targetPath} to ${linkPath} (symlink fallback)`)
 		} else {
