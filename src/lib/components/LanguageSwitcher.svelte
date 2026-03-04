@@ -165,6 +165,7 @@
 		<Card>
 			<div class="list">
 				<!-- Add Auto-detect option at the top -->
+				<!-- eslint-disable-next-line svelte/no-restricted-html-elements -->
 				<a
 					href={deLocalizeHref($page.url.pathname)}
 					hreflang="auto"
@@ -179,6 +180,7 @@
 
 				{#each locales as locale}
 					{@const href = localizeHref($page.url.pathname, { locale })}
+					<!-- eslint-disable-next-line svelte/no-restricted-html-elements -->
 					<a
 						{href}
 						hreflang={locale}

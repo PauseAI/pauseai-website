@@ -1,8 +1,4 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-export const prerender = false
-
-import { fetchAllPages } from '$lib/airtable'
-import { defaultTitle } from '$lib/config'
+import { fetchNotionPeople } from '$lib/server/notion-people'
 import type { Person } from '$lib/types'
 import { generateCacheControlRecord } from '$lib/utils'
 import { json } from '@sveltejs/kit'
@@ -11,13 +7,13 @@ import { json } from '@sveltejs/kit'
 export type AboutApiResponse = Record<string, Person[]>
 
 /**
- * Fallback people data to use in development if Airtable fetch fails
+ * Fallback people data to use in development if Notion fetch fails
  */
 const fallbackPeople: Person[] = [
 	{
 		id: 'fallback-stub1',
 		name: '[FALLBACK DATA] Example Person',
-		bio: 'I hold places when Airtable API is unavailable.',
+		bio: '',
 		title: 'Placeholder',
 		image: 'https://api.dicebear.com/7.x/bottts/svg?seed=fallback1',
 		privacy: false,
@@ -27,7 +23,7 @@ const fallbackPeople: Person[] = [
 	{
 		id: 'fallback-stub2',
 		name: '[FALLBACK DATA] Holdor',
-		bio: 'Thrown at games',
+		bio: '',
 		title: 'of Plays',
 		image: 'https://api.dicebear.com/7.x/bottts/svg?seed=fallback2',
 		privacy: false,
@@ -36,24 +32,8 @@ const fallbackPeople: Person[] = [
 	}
 ]
 
-function recordToPerson(record: any): Person {
-	return {
-		id: record.id || 'noId',
-		name: record.fields['Full name'],
-		bio: record.fields.Bio2,
-		title: record.fields.Title || defaultTitle,
-		image: (record.fields.Photo && record.fields.Photo[0].thumbnails.large.url) || undefined,
-		privacy: record.fields.Privacy,
-		checked: record.fields.About,
-		duplicate: record.fields.duplicate,
-		order: record.fields['About order'] || 999
-	}
-}
-
-const AIRTABLE_FILTER = `{Title} != ""`
-
 const filter = (p: Person) => {
-	return p.checked && p.title?.trim() !== '' && p.title !== defaultTitle && !p.duplicate
+	return p.checked && !p.duplicate
 }
 
 const getGroupKey = (order: number | undefined): string => {
@@ -68,31 +48,13 @@ const getGroupKey = (order: number | undefined): string => {
 	return 'National Chapter Leads'
 }
 
-export async function GET({ fetch, setHeaders }) {
-	const url = `https://api.airtable.com/v0/appWPTGqZmUcs3NWu/tblL1icZBhTV1gQ9o`
+export async function GET({ setHeaders }) {
 	setHeaders(generateCacheControlRecord({ public: true, maxAge: 60 * 60 }))
 
 	try {
-		// Create fallback records in the expected Airtable format
-		const fallbackRecords = fallbackPeople.map((person) => ({
-			id: person.id,
-			fields: {
-				'Full name': person.name,
-				Bio2: person.bio,
-				Title: person.title,
-				Photo: [{ thumbnails: { large: { url: person.image } } }],
-				Privacy: person.privacy,
-				About: person.checked, // Assuming 'About' maps to checked based on your code
-				'About order': person.order || 999
-			}
-		}))
+		const people = await fetchNotionPeople()
 
-		const records = await fetchAllPages(fetch, url, fallbackRecords, {
-			filterByFormula: AIRTABLE_FILTER
-		})
-
-		const sortedPeople = records
-			.map(recordToPerson)
+		const sortedPeople = people
 			.filter(filter)
 			.sort((a, b) => {
 				// Primary sort: numerical order field

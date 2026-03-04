@@ -106,6 +106,17 @@
 	{/each}
 </section>
 
+<section class="form-section" data-pagefind-ignore>
+	<iframe
+		src="https://pauseai-global.notion.site/ebd//318811439176805e9edef71080a593cb"
+		width="100%"
+		height="600"
+		frameborder="0"
+		allowfullscreen
+		title="Notion Form"
+	></iframe>
+</section>
+
 <section class="essential-info">
 	<h2>Essential Information</h2>
 	<ul class="essential-info-list">
