@@ -24,7 +24,7 @@ Be aware that PauseAI may grow very quickly in the near future, both in terms of
 
 ### Tasks & Responsibilities
 
-- Maintaining contact with and managing various volunteers and [teams](/teams) within PauseAI.
+- Maintaining contact with and managing various volunteers and teams within PauseAI.
 - Coaching and supporting teams and leaders of [local](/communities) and [national groups](/national-groups).
 - Designing and implementing an [organizational structure](/organization) and strategy for effective collaboration with local groups.
 - Developing and managing materials for local and national PauseAI groups.

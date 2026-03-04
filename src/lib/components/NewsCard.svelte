@@ -1,7 +1,9 @@
 <script lang="ts">
 	import Image from '$lib/components/Image.svelte'
+	import LinkWithoutIcon from '$lib/components/LinkWithoutIcon.svelte'
 	import type { NewsItem } from '$lib/types'
 	import { formatDate } from '$lib/utils'
+	import NetlifyImage from './NetlifyImage.svelte'
 
 	let isExternal: boolean
 
@@ -10,32 +12,38 @@
 	$: isExternal = item.source === 'substack'
 </script>
 
-<a
-	href={item.href}
-	class="news-card"
-	target={isExternal ? '_blank' : undefined}
-	rel={isExternal ? 'noopener noreferrer' : undefined}
->
-	<div class="image-container">
-		{#if item.image}
-			<Image src={item.image} alt={item.title} class="image" />
-		{:else}
-			<div class="image-placeholder" />
-		{/if}
-	</div>
-	<div class="card-content">
-		<h3 class="card-title toc-exclude">{item.title}</h3>
-		{#if item.subtitle}
-			<p class="card-subtitle">{item.subtitle}</p>
-		{/if}
-		{#if item.date}
-			<p class="card-date">{formatDate(item.date, 'long')}</p>
-		{/if}
-	</div>
-</a>
+<div>
+	<LinkWithoutIcon
+		href={item.href}
+		class="news-card"
+		target={isExternal ? '_blank' : undefined}
+		rel={isExternal ? 'noopener noreferrer' : undefined}
+	>
+		<div class="image-container">
+			{#if item.image}
+				{#if isExternal}
+					<NetlifyImage src={item.image} alt={item.title} imgClass="image" />
+				{:else}
+					<Image src={item.image} alt={item.title} class="image" />
+				{/if}
+			{:else}
+				<div class="image-placeholder" />
+			{/if}
+		</div>
+		<div class="card-content">
+			<h3 class="card-title toc-exclude">{item.title}</h3>
+			{#if item.subtitle}
+				<p class="card-subtitle">{item.subtitle}</p>
+			{/if}
+			{#if item.date}
+				<p class="card-date">{formatDate(item.date, 'long')}</p>
+			{/if}
+		</div>
+	</LinkWithoutIcon>
+</div>
 
 <style>
-	.news-card {
+	* :global(.news-card) {
 		display: flex;
 		flex-direction: column;
 		border-radius: 12px;
@@ -48,7 +56,7 @@
 			box-shadow 0.2s ease;
 	}
 
-	.news-card:hover {
+	* :global(.news-card:hover) {
 		transform: translateY(-3px);
 		box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
 		color: var(--text);
@@ -68,7 +76,7 @@
 		transition: transform 0.3s ease;
 	}
 
-	.news-card:hover .image-container :global(.image) {
+	* :global(.news-card:hover .image-container .image) {
 		transform: scale(1.03);
 	}
 
