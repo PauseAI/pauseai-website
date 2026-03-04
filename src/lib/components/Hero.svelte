@@ -1,6 +1,6 @@
 <script lang="ts">
-	import homeHeroDesktop from '$assets/protests/Home Hero - web - Faded.jpg?enhanced'
-	import homeHeroMobile from '$assets/protests/Home Hero - mobile - Faded.jpg?enhanced'
+	import homeHeroDesktop from '$assets/protests/Home Hero - web - No Background.png?enhanced'
+	import homeHeroMobile from '$assets/protests/Home Hero - mobile - No Background.png?enhanced'
 	import { onMount } from 'svelte'
 	import { emulateCqwIfNeeded } from '$lib/container-query-units'
 
@@ -62,27 +62,30 @@
 	}
 
 	.hero :global(img) {
-		width: 100%;
-		height: 100%;
-		object-fit: contain;
-		object-position: center bottom;
-		transform-origin: center bottom;
+		position: absolute;
+		bottom: 0;
+		left: 50%;
+		--hero-scale: 1;
+		transform: translateX(-50%) scale(var(--hero-scale));
+		width: min(100%, calc(max(100vh, var(--hero-min-height)) * var(--hero-img-ar)));
+		height: auto;
+		mix-blend-mode: soft-light;
 	}
 
 	@media (min-width: 851px) {
 		.hero :global(img) {
-			transform: scale(0.95);
+			transform-origin: center bottom;
+			--hero-scale: 0.95;
+			-webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+			mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
 		}
 	}
 
 	@media (max-width: 850px) {
 		.hero :global(img) {
-			position: absolute !important;
-			bottom: var(--mobile-hero-img-pos, 0px) !important;
-			left: 0 !important;
-			width: 100% !important;
-			height: auto !important;
-			object-fit: initial !important;
+			bottom: var(--mobile-hero-img-pos, 0px);
+			-webkit-mask-image: linear-gradient(to top, transparent, black 20%);
+			mask-image: linear-gradient(to top, transparent, black 20%);
 		}
 
 		.content {
@@ -123,7 +126,10 @@
 		left: 50%;
 		transform: translateX(-50%);
 		background-color: #ff9416;
+		isolation: isolate;
 
+		/* Desktop hero image aspect ratio (2880 / 1600) — update if image changes */
+		--hero-img-ar: 1.8;
 		/* Adjust this to push the mobile image up or down (e.g., 0px, 10vh, -20px) */
 		--mobile-hero-img-pos: 215px;
 	}
