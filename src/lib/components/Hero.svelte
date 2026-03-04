@@ -70,20 +70,22 @@
 		width: min(100%, calc(max(100vh, var(--hero-min-height)) * var(--hero-img-ar)));
 		height: auto;
 		mix-blend-mode: soft-light;
-		-webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
-		mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
 	}
 
 	@media (min-width: 851px) {
 		.hero :global(img) {
 			transform-origin: center bottom;
 			--hero-scale: 0.95;
+			-webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+			mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
 		}
 	}
 
 	@media (max-width: 850px) {
 		.hero :global(img) {
 			bottom: var(--mobile-hero-img-pos, 0px);
+			-webkit-mask-image: linear-gradient(to top, transparent, black 20%);
+			mask-image: linear-gradient(to top, transparent, black 20%);
 		}
 
 		.content {
