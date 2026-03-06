@@ -196,21 +196,6 @@ The technical knowledge required to modify these systems could be lacking in the
 
 The systems may achieve their goals, but those goals might not entirely encapsulate the values they were expected to. This problem is, to a certain extent, already happening today, but AIs could significantly amplify it.
 
-### Digital sentience
-
-As AI continues to advance, future systems may become incredibly sophisticated, replicating neural structures and functions that are more akin to the human brain.
-This increased complexity might lead to emergent properties like AI subjectivity and/or consciousness, which would make them deserving of moral considerations.
-
-The problem is that, given our present lack of knowledge about consciousness and the nature of neural networks, we won't have a way to determine whether some AIs would have any type of experience and what the quality of those experiences would depend on.
-If the AIs continue to be produced with only their capabilities in mind, through a process we don't fully understand, people will keep using them as tools ignoring what their desires could be, and that they could be actually enslaving "digital people".
-
-### Suffering risks
-
-It's not only that value lock-in could make us fail to achieve the best kind of worlds, but it could cause us to end up in dystopias worse than extinction that could extend through all spacetime.
-
-Possible locked-in dystopias with lots of suffering are called _S-risks_ and include worlds in which sentient beings are enslaved and forced to do horrible things.
-Those beings could be humans, animals, digital people or any other alien species that the AI could find in the cosmos. Given how difficult we think solving alignment completely is, how bad we humans treat each other sometimes, how bad we treat most animals, and how we treat present AIs, a future like this doesn't seem as unlikely as we'd hope.
-
 ## What can we do?
 
 For **all** the problems discussed above, the risk increases as AI capabilities improve.
