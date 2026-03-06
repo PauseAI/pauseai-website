@@ -92,7 +92,7 @@ More than a million users of ChatGPT have signs of mental health distress.
 
 Another risk area is AIs being used for intimate and explicit conversations. AI chatbots offering users a romantic relationship have seen huge growth over the last year, with more than 3 billion search results for ‘AI girlfriend’ on Google.
 These AI relationship apps are [shown to be addictive](https://onlinelibrary.wiley.com/doi/10.1002/mar.21899), especially to “lonely vulnerable people”.
-The companies controlling these apps make more money by designing their AIs as to be addictive as possible, and can gain a tremendous amount of power by shaping the behavior and opinions of chatbots express to [manipulate their users](https://arxiv.org/abs/2508.19258) through romantic connection.
+The companies controlling these apps make more money by designing their AIs to be as addictive as possible, and can gain a tremendous amount of power by shaping the behavior and opinions chatbots express to [manipulate their users](https://arxiv.org/abs/2508.19258) through romantic connection.
 
 We need time to better understand AIs to build in proper safeguards to protect our mental health, especially for vulnerable users.
 Pausing the development of powerful AI systems would give us time to research how AI conversations can be made safer when talking about difficult or sensitive subjects.
@@ -189,7 +189,7 @@ We'd be introducing a new species to the planet that could outsmart us and outco
 ### Human disempowerment
 
 Even if we manage to create only AI systems that we can control individually, we could lose our power to make important decisions incrementally each time one becomes incorporated to institutions or everyday life.
-Those process would end up having more input from AI systems than from humans, and, if we cannot coordinate quickly enough, or we lack crucial knowledge about the functioning of the systems, we could end up without control over our future.
+Those processes would end up having more input from AI systems than from humans, and, if we cannot coordinate quickly enough, or we lack crucial knowledge about the functioning of the systems, we could end up without control over our future.
 
 It would be a civilization in which each system is optimizing for different objectives, there is not a clear direction for where everything is heading, and there is no way of changing it.
 The technical knowledge required to modify these systems could be lacking in the first place or lost over time, as we become more and more dependent on technology, and the technology becomes more complex.
