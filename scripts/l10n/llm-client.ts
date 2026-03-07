@@ -151,6 +151,9 @@ export async function postChatCompletion(
 				throwOnTimeout: true
 			}
 		)
+		if (!response.data.choices?.length) {
+			throw new Error(`LLM returned no choices: ${JSON.stringify(response.data)}`)
+		}
 		return response.data.choices[0].message.content
 	} catch (error) {
 		if (!isAxiosError<OpenRouterError, CompletionPayload>(error)) throw error
