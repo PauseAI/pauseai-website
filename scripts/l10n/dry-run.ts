@@ -68,22 +68,40 @@ export const createDryRunStats = (): Stats => ({
 
 /**
  * Count words in a string using regex splitting
- * @param text - The text to count words in
- * @returns The word count
  */
-function countWords(text: string): number {
-	// Split on any non-word character sequence and filter out empty strings
+export function countWords(text: string): number {
 	return text.split(/\W+/).filter((word) => word.length > 0).length
 }
 
 /**
- * Track content that would be localized in dry run mode
- *
- * @param stats - The stats object to update
- * @param content - The content that would be localized
- * @param language - The target language
- * @param filePath - Optional file path for reporting
- * @param modelName - Optional model name to use (defaults to DEFAULT_MODEL)
+ * Estimate the cost of translating content with a given word count.
+ * Accounts for two-pass l10n (first pass + review) and prompt overhead.
+ */
+export function estimateItemCost(
+	contentWordCount: number,
+	modelName: string = DEFAULT_MODEL
+): { estimatedCost: number; overheadWords: number; totalWords: number } {
+	const modelConfig = MODEL_CONFIGS[modelName] || MODEL_CONFIGS[DEFAULT_MODEL]
+
+	const promptOverheadWords = modelConfig.PROMPT_OVERHEAD_WORDS
+	const markdownOverheadWords = Math.ceil(
+		contentWordCount * (modelConfig.MARKDOWN_OVERHEAD_PERCENT / 100)
+	)
+	const overheadWords = promptOverheadWords + markdownOverheadWords
+
+	// Two-pass: first pass + review pass
+	const firstPassWords = contentWordCount + overheadWords
+	const reviewPassWords = contentWordCount + overheadWords + contentWordCount
+	const totalWords = firstPassWords + reviewPassWords
+
+	const estimatedCost = (totalWords / 1000) * modelConfig.COST_PER_1000_WORDS
+
+	return { estimatedCost, overheadWords, totalWords }
+}
+
+/**
+ * Track content that would be localized in dry run mode.
+ * Uses estimateItemCost for the cost calculation.
  */
 export function trackL10n(
 	stats: Stats,
@@ -94,25 +112,7 @@ export function trackL10n(
 ): void {
 	const contentWordCount = countWords(content)
 	const fileName = filePath ? path.basename(filePath) : 'unknown'
-
-	// Get model configuration
-	const modelConfig = MODEL_CONFIGS[modelName] || MODEL_CONFIGS[DEFAULT_MODEL]
-
-	// Calculate overhead words
-	const promptOverheadWords = modelConfig.PROMPT_OVERHEAD_WORDS
-	const markdownOverheadWords = Math.ceil(
-		contentWordCount * (modelConfig.MARKDOWN_OVERHEAD_PERCENT / 100)
-	)
-	const totalOverheadWords = promptOverheadWords + markdownOverheadWords
-
-	// Calculate total words for the l10n task
-	// For two-pass l10n: original content + first pass + review
-	const firstPassWords = contentWordCount + totalOverheadWords
-	const reviewPassWords = contentWordCount + totalOverheadWords + contentWordCount
-	const totalWords = firstPassWords + reviewPassWords
-
-	// Calculate cost (in 1000-word units)
-	const estimatedCost = (totalWords / 1000) * modelConfig.COST_PER_1000_WORDS
+	const { estimatedCost, overheadWords, totalWords } = estimateItemCost(contentWordCount, modelName)
 
 	// Initialize language stats if needed
 	if (!stats.byLanguage[language]) {
@@ -125,7 +125,7 @@ export function trackL10n(
 
 	// Update statistics
 	stats.contentWordCount += contentWordCount
-	stats.overheadWordCount += totalOverheadWords
+	stats.overheadWordCount += overheadWords
 	stats.totalWordCount += totalWords
 	stats.estimatedCost += estimatedCost
 
