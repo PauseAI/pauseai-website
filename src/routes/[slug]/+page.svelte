@@ -55,7 +55,7 @@
 		overflow: hidden;
 	}
 
-	.banner img {
+	.banner :global(img) {
 		width: 100%;
 		max-height: 400px;
 		object-fit: cover;

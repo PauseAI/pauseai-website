@@ -23,8 +23,6 @@ The later in the pipeline we regulate, the higher the risks we face.
 If we want a high level of safety, we'll need to regulate earlier in the pipeline.
 That's why when we climb up the 4 levels of AI regulation, we walk back the AI creation pipeline.
 
-![4 Levels of AI safety regulation](/4levels.png)
-
 ## Level 1: Regulate usage
 
 Examples:

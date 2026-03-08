@@ -1,11 +1,10 @@
 import { json } from '@sveltejs/kit'
-import type { Post } from '$lib/types'
+import type { FrontmatterMeta, Post } from '$lib/types'
 import { outcomesMeta } from '../../outcomes/meta'
 import { communitiesMeta } from '../../communities/communities'
 import { meta as pdoomMeta } from '../../pdoom/meta'
 import { meta as quotesMeta } from '../../quotes/meta'
 import { meta as emailBuilderMeta } from '../../email-builder/meta'
-import { meta as teamsMeta } from '../../teams/meta'
 import { meta as statementMeta } from '../../statement/meta'
 import { meta as dearSirDemisMeta } from '../../dear-sir-demis-2025/meta'
 import { meta as aboutMeta } from '../../about/meta'
@@ -18,7 +17,6 @@ const hardCodedPages: Post[] = [
 	pdoomMeta,
 	quotesMeta,
 	emailBuilderMeta,
-	teamsMeta,
 	statementMeta,
 	dearSirDemisMeta,
 	aboutMeta,
@@ -41,7 +39,7 @@ async function getPosts() {
 			slug &&
 			!slug.startsWith('debug.')
 		) {
-			const metadata = file.metadata as Omit<Post, 'slug'>
+			const metadata = file.metadata as FrontmatterMeta
 			const post = { ...metadata, slug } satisfies Post
 			posts.push(post)
 		}

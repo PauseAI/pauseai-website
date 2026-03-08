@@ -21,7 +21,6 @@
 			<Link href="/about">{m.footer_info_about()}</Link>
 			<Link href="/contact-us">Contact Us</Link>
 			<Link href="/press">{m.footer_info_press()}</Link>
-			<Link href="/teams">{m.footer_info_teams()}</Link>
 			<Link href="/partnerships">{m.footer_info_partnerships()}</Link>
 			<Link href="/privacy">{m.footer_info_privacy()}</Link>
 			<Link href="/legal"
