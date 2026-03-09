@@ -154,7 +154,17 @@ export async function postChatCompletion(
 		if (!response.data.choices?.length) {
 			throw new Error(`LLM returned no choices: ${JSON.stringify(response.data)}`)
 		}
-		return response.data.choices[0].message.content
+		const choice = response.data.choices[0]
+		const finishReason = (choice as Record<string, unknown>).finish_reason
+		if (finishReason && finishReason !== 'stop') {
+			throw new Error(
+				`LLM response incomplete (finish_reason: ${finishReason}). Output may be truncated or filtered.`
+			)
+		}
+		if (!choice.message.content) {
+			throw new Error(`LLM returned empty content`)
+		}
+		return choice.message.content
 	} catch (error) {
 		if (!isAxiosError<OpenRouterError, CompletionPayload>(error)) throw error
 
