@@ -30,7 +30,8 @@
 </script>
 
 {#if picture}
-	<enhanced:img src={picture} {alt} class="enhanced {className}" loading="lazy" {sizes} />
+	<enhanced:img src={picture} {alt} class="enhanced {className}" loading="lazy" {sizes}
+	></enhanced:img>
 {:else}
 	<img {src} {alt} loading="lazy" class={className} />
 {/if}

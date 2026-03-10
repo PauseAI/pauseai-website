@@ -118,7 +118,7 @@
 
 	<main>
 		<PageTransition url={$page.url.pathname}>
-			<slot />
+			<slot></slot>
 		</PageTransition>
 	</main>
 

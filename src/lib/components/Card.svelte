@@ -5,5 +5,5 @@
 </script>
 
 <div class="card {className}">
-	<slot />
+	<slot></slot>
 </div>

@@ -27,7 +27,7 @@
 					<Image src={item.image} alt={item.title} class="image" />
 				{/if}
 			{:else}
-				<div class="image-placeholder" />
+				<div class="image-placeholder"></div>
 			{/if}
 		</div>
 		<div class="card-content">
