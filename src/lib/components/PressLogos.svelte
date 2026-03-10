@@ -103,7 +103,7 @@
 		height: 1.6rem;
 		width: auto;
 		max-width: 150px;
-		opacity: 0.85;
+		opacity: 0.6;
 		filter: grayscale(1) brightness(0);
 		transition:
 			opacity 0.2s ease,
