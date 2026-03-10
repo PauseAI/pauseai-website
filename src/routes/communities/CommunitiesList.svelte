@@ -104,7 +104,7 @@
 								stroke-linecap="round"
 								stroke-linejoin="round"
 							>
-								<polyline points="6 9 12 15 18 9"></polyline>
+								<polyline points="6 9 12 15 18 9" />
 							</svg>
 						{:else}
 							<!-- Placeholder for alignment if no communities/arrow -->

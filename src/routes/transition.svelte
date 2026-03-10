@@ -6,7 +6,7 @@
 
 {#key url}
 	<div class="transition" in:fade>
-		<slot />
+		<slot></slot>
 	</div>
 {/key}
 

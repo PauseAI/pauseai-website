@@ -37,7 +37,7 @@
 		<div class="campaign-content">
 			<LinkWithoutIcon {href} class="campaign-link" on:click={close}>
 				<span class="campaign-text">
-					<slot />
+					<slot></slot>
 				</span>
 				<span class="campaign-cta">Take action →</span>
 			</LinkWithoutIcon>

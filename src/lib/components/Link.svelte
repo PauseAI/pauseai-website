@@ -16,7 +16,7 @@
 </script>
 
 <Link {href} {target} {rel} class={className} bind:type {...$$restProps}>
-	<slot />{#if type != Type.Internal}
+	<slot></slot>{#if type != Type.Internal}
 		<span style="white-space: nowrap">
 			&nbsp;
 			<div class="icon">
