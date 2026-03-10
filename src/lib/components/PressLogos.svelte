@@ -40,6 +40,7 @@
 		<h2 class="section-title">Media Coverage</h2>
 		<div class="logos-row">
 			{#each publications as pub}
+				<!-- eslint-disable-next-line svelte/no-restricted-html-elements -->
 				<a href={pub.url} target="_blank" class="pub-link">
 					<!-- Visible on hover (Original Color) -->
 					<Image
@@ -51,6 +52,7 @@
 				</a>
 			{/each}
 
+			<!-- eslint-disable-next-line svelte/no-restricted-html-elements -->
 			<a href="/press" class="see-all"> See all coverage → </a>
 		</div>
 	</div>
