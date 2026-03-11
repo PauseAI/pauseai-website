@@ -19,13 +19,13 @@
 	<slot></slot>{#if type != Type.Internal}
 		<span style="white-space: nowrap">
 			&nbsp;
-			<div class="icon">
+			<span class="icon">
 				{#if type == Type.External}
 					<ExternalLink {...ICON_PROPS} />
 				{:else if type == Type.Mail}
 					<Mail {...ICON_PROPS} />
 				{/if}
-			</div>
+			</span>
 		</span>
 	{/if}
 </Link>
