@@ -9,10 +9,9 @@
 
 	const peopleGroups = data.people as Record<string, Person[]>
 
-	// Define the manual order for the groups
 	const groupOrder = [
-		'Leadership Team',
-		'National Chapters',
+		'Executive Team',
+		'National Leaders',
 		'National Chapter Leads',
 		'Global Board'
 	]
@@ -44,7 +43,7 @@
 
 	<p>
 		What started as one person's call to action has grown into a global grassroots movement with
-		volunteers, <Link href="/national-groups">national chapters</Link>, and
+		volunteers, <Link href="/national-groups">national leaders</Link>, and
 		<Link href="/local-communities">local communities</Link> across the world, all working toward the
 		same goal: pausing frontier AI development until we can prove it's safe and keep it under democratic
 		control.
