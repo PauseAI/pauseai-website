@@ -30,8 +30,8 @@ importers:
         specifier: ^1.4.0
         version: 1.4.0
       '@prgm/sveltekit-progress-bar':
-        specifier: ^2.0.0
-        version: 2.0.0(@sveltejs/kit@2.53.4(@sveltejs/vite-plugin-svelte@4.0.4(svelte@5.53.10)(vite@5.4.21(@types/node@24.12.0)))(svelte@5.53.10)(typescript@5.9.3)(vite@5.4.21(@types/node@24.12.0)))(svelte@5.53.10)
+        specifier: ^3.0.2
+        version: 3.0.2(@sveltejs/kit@2.53.4(@sveltejs/vite-plugin-svelte@4.0.4(svelte@5.53.10)(vite@5.4.21(@types/node@24.12.0)))(svelte@5.53.10)(typescript@5.9.3)(vite@5.4.21(@types/node@24.12.0)))(svelte@5.53.10)
       '@remix-run/headers':
         specifier: ^0.12.0
         version: 0.12.0
@@ -1183,12 +1183,12 @@ packages:
   '@polka/url@1.0.0-next.29':
     resolution: {integrity: sha512-wwQAWhWSuHaag8c4q/KN/vCoeOJYshAIvMQwD4GpSb3OiZklFfvAgmj0VCBBImRpuF/aFgIRzllXlVX93Jevww==}
 
-  '@prgm/sveltekit-progress-bar@2.0.0':
-    resolution: {integrity: sha512-N9SlYDfpqaY9MyG85Wk38R9/BipIUdTJ4U7LVPY5cFn5cwGZrVA1lsXC3I2kmGtwz+DF6v/DvySkYOWCPmJV4A==}
-    engines: {node: '>=18'}
+  '@prgm/sveltekit-progress-bar@3.0.2':
+    resolution: {integrity: sha512-RilKiPC2Lt/ahC1qmqvL5B8YJPmpwcz/PVebhOmGA7VRcU97xvbn83428r3pVfRNVlxKjHm9NatbIgQim/ccJA==}
+    engines: {node: ^20.5.0 || >=22.2.0}
     peerDependencies:
       '@sveltejs/kit': ^2.0.0
-      svelte: ^4.0.0
+      svelte: ^5.0.0
 
   '@remix-run/headers@0.12.0':
     resolution: {integrity: sha512-eqVSL5UOIyqVx0NTqgtNKMKVokE9jPchkZHl/N13KKPQYw/leS8VCoX5zRhkB1UvcLyfj113LX0OvEcuNbc5Hg==}
@@ -3900,7 +3900,7 @@ snapshots:
 
   '@polka/url@1.0.0-next.29': {}
 
-  '@prgm/sveltekit-progress-bar@2.0.0(@sveltejs/kit@2.53.4(@sveltejs/vite-plugin-svelte@4.0.4(svelte@5.53.10)(vite@5.4.21(@types/node@24.12.0)))(svelte@5.53.10)(typescript@5.9.3)(vite@5.4.21(@types/node@24.12.0)))(svelte@5.53.10)':
+  '@prgm/sveltekit-progress-bar@3.0.2(@sveltejs/kit@2.53.4(@sveltejs/vite-plugin-svelte@4.0.4(svelte@5.53.10)(vite@5.4.21(@types/node@24.12.0)))(svelte@5.53.10)(typescript@5.9.3)(vite@5.4.21(@types/node@24.12.0)))(svelte@5.53.10)':
     dependencies:
       '@sveltejs/kit': 2.53.4(@sveltejs/vite-plugin-svelte@4.0.4(svelte@5.53.10)(vite@5.4.21(@types/node@24.12.0)))(svelte@5.53.10)(typescript@5.9.3)(vite@5.4.21(@types/node@24.12.0))
       svelte: 5.53.10
