@@ -3,12 +3,13 @@
 
 import adapterNetlify from '@sveltejs/adapter-netlify'
 import { vitePreprocess } from '@sveltejs/vite-plugin-svelte'
-
 import { mdsvex } from 'mdsvex'
-import remarkUnwrapImages from 'remark-unwrap-images'
-import remarkToc from 'remark-toc'
-import remarkHeadingId from 'remark-heading-id'
+import { dirname } from 'node:path'
+import { fileURLToPath } from 'node:url'
 import rehypeSlug from 'rehype-slug'
+import remarkHeadingId from 'remark-heading-id'
+import remarkToc from 'remark-toc'
+import remarkUnwrapImages from 'remark-unwrap-images'
 
 import settings from './project.inlang/settings.json' with { type: 'json' }
 
@@ -19,7 +20,7 @@ export const USE_EDGE_FUNCTIONS = true
 const mdsvexOptions = {
 	extensions: ['.md'],
 	layout: {
-		_: './src/mdsvex.svelte'
+		_: dirname(fileURLToPath(import.meta.url)) + '/src/mdsvex.svelte'
 	},
 	remarkPlugins: [remarkUnwrapImages, [remarkToc, { tight: true }], remarkHeadingId],
 	rehypePlugins: [rehypeSlug]
@@ -28,7 +29,7 @@ const mdsvexOptions = {
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
 	extensions: ['.svelte', '.md'],
-	preprocess: [vitePreprocess(), mdsvex(mdsvexOptions)],
+	preprocess: [vitePreprocess({ script: true }), mdsvex(mdsvexOptions)],
 	// Custom warning handler to selectively filter out specific a11y warnings
 	onwarn(warning, handler) {
 		// Skip specific accessibility warnings

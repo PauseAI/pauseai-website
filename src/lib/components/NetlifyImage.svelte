@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { SvelteURLSearchParams } from 'svelte/reactivity'
+
 	export let src: string
 	export let alt: string
 	export let widths: number[] = [400, 800, 1200, 1600, 2400]
@@ -31,7 +33,7 @@
 			fit?: 'cover' | 'contain' | 'fill' | 'inside' | 'outside'
 		}
 	) {
-		const params = new URLSearchParams()
+		const params = new SvelteURLSearchParams()
 		params.set('url', path)
 		if (options.w) params.set('w', `${options.w}`)
 		if (options.q) params.set('q', `${options.q}`)
