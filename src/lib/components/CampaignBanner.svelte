@@ -9,7 +9,14 @@
 
 	export let href: string
 	export let id = 'campaign'
-	let hidden = browser && id && localStorage.getItem(`campaign_banner_${id}_hidden`) === 'true'
+	let hidden = false
+	if (browser && id) {
+		try {
+			hidden = localStorage.getItem(`campaign_banner_${id}_hidden`) === 'true'
+		} catch {
+			// SecurityError in storage-restricted contexts
+		}
+	}
 
 	function close() {
 		hidden = true
@@ -32,7 +39,7 @@
 </script>
 
 {#if !hidden}
-	<div class="campaign-banner" transition:fade={{ duration: 200 }}>
+	<div class="campaign-banner" data-campaign-banner-id={id} transition:fade={{ duration: 200 }}>
 		<div class="accent-line"></div>
 		<div class="campaign-content">
 			<LinkWithoutIcon {href} class="campaign-link" on:click={close}>

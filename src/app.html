@@ -10,6 +10,31 @@
 			document.documentElement.setAttribute('color-scheme', 'dark')
 		</script>
 
+		<!-- Prevent dismissed banners from flashing on reload by hiding them before first paint,
+		     same technique as the color-scheme script above. -->
+		<script>
+			try {
+				var bannerTypes = [
+					{ pattern: /^banner_(.+)_hidden$/, attr: 'data-banner-id' },
+					{ pattern: /^campaign_banner_(.+)_hidden$/, attr: 'data-campaign-banner-id' }
+				]
+				var css = ''
+				for (var i = 0; i < localStorage.length; i++) {
+					var key = localStorage.key(i)
+					if (!key || localStorage.getItem(key) !== 'true') continue
+					for (var j = 0; j < bannerTypes.length; j++) {
+						var m = key.match(bannerTypes[j].pattern)
+						if (m) css += `[${bannerTypes[j].attr}="${m[1]}"]{display:none!important}`
+					}
+				}
+				if (css) {
+					var s = document.createElement('style')
+					s.textContent = css
+					document.head.appendChild(s)
+				}
+			} catch (e) {}
+		</script>
+
 		<!-- Google Tag Manager -->
 		<script>
 			;(function (w, d, s, l, i) {
