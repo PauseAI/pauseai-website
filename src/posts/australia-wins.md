@@ -13,10 +13,15 @@ description: What the Australian chapter of PauseAI has been doing and needs hel
 
 ### 2026 March
 - We notified Aus Daily of an error in their episode on the Pentagon’s dispute with Anthropic
-- ![Volunteer taking part in CAPaD Community Assembly, Canberra.](/static/20260308_CAPaD_CommunityAssemblyRepresenting.jpg "Peter (volunteer in Canberra)")
+- We took part in CAPaD's Community Assembly in Canberra
+![Volunteer taking part in CAPaD Community Assembly, Canberra.](/static/20260308_CAPaD_CommunityAssemblyRepresenting.jpg "Peter (volunteer in Canberra)")
 - We reached out to 3 prominent Aussie figures thanking them for their sensible treatment of AI risk
 - We contacted 3 politicians about AI existential risk
 - We migrated some website things to Cloudflare for security
+
+### 2026 February
+- We did India Summit: details
+- 🚩Milestone: 70 subscribers to our newsletter!
 
 
 ## 2025
