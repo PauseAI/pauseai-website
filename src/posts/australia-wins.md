@@ -4,11 +4,20 @@ slug: australia-wins
 description: What the Australian chapter of PauseAI has been doing and needs help with
 ---
 ## 2026
+- We will do something in December for NeurIPS in Sydney
+- We may do something in July for the AI For Good summit
 
 ### 2026 April - help needed!
+- Join our meetup to ideate on how we use social media better
 - Help out with [evergreen tasks](/australia)
 
 ### 2026 March
+- We notified Aus Daily of an error in their episode on the Pentagon’s dispute with Anthropic
+- ![Volunteer taking part in CAPaD Community Assembly, Canberra.](/static/20260308_CAPaD_CommunityAssemblyRepresenting.jpg "Peter (volunteer in Canberra)")
+- We reached out to 3 prominent Aussie figures thanking them for their sensible treatment of AI risk
+- We contacted 3 politicians about AI existential risk
+- We migrated some website things to Cloudflare for security
+
 
 ## 2025
 ### 2025 December
