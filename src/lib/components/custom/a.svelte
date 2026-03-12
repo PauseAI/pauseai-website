@@ -9,5 +9,5 @@
 </script>
 
 <Link {href} {target} {rel} class={className}>
-	<slot />
+	<slot></slot>
 </Link>

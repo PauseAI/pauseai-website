@@ -15,7 +15,7 @@
 	import toast from 'svelte-french-toast'
 	import Link from '$lib/components/Link.svelte'
 	import Card from '$lib/components/Card.svelte'
-	import { type ComponentType } from 'svelte'
+	import { type Component } from 'svelte'
 
 	const { title, description, date } = meta
 
@@ -92,7 +92,7 @@
 
 	type Section = {
 		name: string
-		section: ComponentType
+		section: Component
 	}
 
 	function handleClick(event: MouseEvent) {

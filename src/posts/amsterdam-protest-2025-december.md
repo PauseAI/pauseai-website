@@ -9,8 +9,6 @@ image: /banner-all.jpeg
 
 On December 13, 2025, we held a protest in Amsterdam to urge both the Dutch government and the Netherlands-based company ASML to stop supplying to companies developing artificial superintelligence.
 
-![PauseAI protesters in Amsterdam](/banner-all.jpeg "PauseAI protesters in Amsterdam")
-
 Around 25 people came along to voice their opposition to the race to build superintelligence, and their support for international regulation to stop it.
 
 ## **Why the Netherlands? Why ASML? Why Now?**

@@ -3,5 +3,5 @@
 </script>
 
 <UniversalNavbar {...$$restProps}>
-	<slot />
+	<slot></slot>
 </UniversalNavbar>

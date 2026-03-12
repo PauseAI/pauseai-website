@@ -96,7 +96,7 @@
 		<button class="button" on:click={copy}>Copy chat</button>
 	{:else}
 		<form on:submit|preventDefault={sendMessage}>
-			<textarea placeholder="Type here" bind:value={input} on:keydown={handleKeyDown} />
+			<textarea placeholder="Type here" bind:value={input} on:keydown={handleKeyDown}></textarea>
 			<div class="buttons">
 				<button on:click={clear} class="button button--alt">Clear chat</button>
 				<button on:click={copy} class="button button--alt">Copy chat</button>

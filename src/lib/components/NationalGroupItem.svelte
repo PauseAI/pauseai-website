@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { ComponentType } from 'svelte'
+	import type { Component, ComponentType } from 'svelte'
 	import type { NationalGroup, NationalGroupLink } from '$lib/types'
 	import { typedEntries } from '$lib/utils'
 	import LinkWithoutIcon from '$lib/components/LinkWithoutIcon.svelte'
@@ -23,7 +23,7 @@
 	const baseImagePath = '/images/'
 	const imageUrl = nationalGroup.image || `${baseImagePath}default.png` // Directly use nationalGroup.image or default
 
-	const iconMap: Record<NationalGroupLink, ComponentType> = {
+	const iconMap: Record<NationalGroupLink, Component | ComponentType> = {
 		website: Globe,
 		linktreeLink: Link,
 		instagramLink: Instagram,
@@ -63,7 +63,7 @@
 				stroke-linecap="round"
 				stroke-linejoin="round"
 			>
-				<polyline points="6 9 12 15 18 9"></polyline>
+				<polyline points="6 9 12 15 18 9" />
 			</svg>
 		</div>
 		<div class="image-name-wrapper">

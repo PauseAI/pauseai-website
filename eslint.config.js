@@ -81,6 +81,7 @@ export default defineConfig(
 						'Use $lib/components/Link.svelte or $lib/components/LinkWithoutIcon.svelte instead'
 				}
 			],
+			'svelte/html-self-closing': 'warn',
 			'no-restricted-imports': [
 				'error',
 				{

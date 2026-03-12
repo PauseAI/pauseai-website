@@ -9,10 +9,9 @@
 	const enableBot = false
 
 	export let inverted = false
-	export let moveUp = false
 </script>
 
-<Navbar {inverted} {moveUp}>
+<Navbar {inverted}>
 	<Navlink {inverted} first href="/learn">{m.header_learn()}</Navlink>
 	<Navlink {inverted} href="/proposal">{m.header_proposal()}</Navlink>
 	<Navlink {inverted} href="/communities">{m.header_events()}</Navlink>

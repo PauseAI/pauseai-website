@@ -16,7 +16,7 @@
 				sizes="(max-width: 850px) 4rem, 7rem"
 				alt={quote.author}
 				class="author-image"
-			/>
+			></enhanced:img>
 		{/if}
 		<div class="author-info">
 			<h2 class="author-name">{quote.author}</h2>
