@@ -26,6 +26,12 @@ const mdsvexOptions = {
 	rehypePlugins: [rehypeSlug]
 }
 
+/** @type {[string, ((warning: import('@sveltejs/kit').Warning) => boolean) | undefined][]} */
+const skipWarnings = [
+	['a11y_missing_attribute', (warning) => warning.message.includes('title')], // Skip warnings about missing title attributes on iframes
+	['a11y_no_noninteractive_tabindex'] // Skip warnings about tabindex on non-interactive elements (like iframes)
+]
+
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
 	extensions: ['.svelte', '.md'],
@@ -33,13 +39,10 @@ const config = {
 	// Custom warning handler to selectively filter out specific a11y warnings
 	onwarn(warning, handler) {
 		// Skip specific accessibility warnings
-		if (warning.code === 'a11y-missing-attribute' && warning.message.includes('title')) {
-			// Skip warnings about missing title attributes on iframes
-			return
-		}
-		if (warning.code === 'a11y-no-noninteractive-tabindex') {
-			// Skip warnings about tabindex on non-interactive elements (like iframes)
-			return
+		for (const [code, filter] of skipWarnings) {
+			if (warning.code === code && (!filter || filter(warning))) {
+				return
+			}
 		}
 		// Call the default handler for all other warnings
 		handler(warning)
