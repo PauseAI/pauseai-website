@@ -27,7 +27,8 @@ description: What the Australian chapter of PauseAI has been doing and needs hel
 ## 2025
 ### 2025 December
 ### 2025 November
-
+- 5(?) people from Australia participated in the PauseAI photo petition
+![Photo petition001](/static/2025-11_PhotoPetition.jpg "Photo petition002")
 
 
 
