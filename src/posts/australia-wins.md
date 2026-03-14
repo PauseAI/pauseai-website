@@ -22,11 +22,16 @@ description: What the Australian chapter of PauseAI has been doing and needs hel
 ### 2026 February
 - We did India Summit: details
 - 🚩Milestone: 70 subscribers to our newsletter!
+- We publicly [asked Senator Pocock](https://www.youtube.com/live/SwDolSOMrac?si=GOtvYibfWyGuxK06&t=3820) how our government will deal with mass unemployment
+![20260225-1847_PocockTownhallAIQuestionHighted.jpg](/static/20260225-1847_PocockTownhallAIQuestionHighted.jpg)
+
 
 
 ## 2025
 ### 2025 December
 ### 2025 November
+- We publicly asked Senator Pocock to sign Superintelligence Statement, and [he agreed](https://youtu.be/SbqUEhJt5RU)!
+![202511_PocockTownhall_SelfiesPeterDavid.JPG](/static/202511_PocockTownhall_SelfiesPeterDavid.JPG)
 - 5(?) people from Australia participated in the PauseAI photo petition
 ![Photo petition001](/static/2025-11_PhotoPetition.jpg "Photo petition002")
 
