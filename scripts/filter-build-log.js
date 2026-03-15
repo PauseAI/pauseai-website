@@ -35,7 +35,7 @@ if (hasVerbose) {
 	let serverSize = 0
 
 	// Chunk pattern - match svelte-kit output chunks with size info
-	const chunkPattern = /\.svelte-kit\/output\/(client|server)\/.*\s+(\d+\.\d+)\s+kB/
+	const chunkPattern = /\.svelte-kit\/output\/(client|server)\/.*\s+([\d,]+\.\d+)\s+kB/
 
 	// Start the build process
 	const build = spawn(program, args, { shell: true, stdio: ['inherit', 'pipe', 'inherit'] })
@@ -53,7 +53,7 @@ if (hasVerbose) {
 		if (chunkMatch) {
 			// This is a chunk line - extract information but don't print it
 			const [_, type, sizeStr] = chunkMatch
-			const size = parseFloat(sizeStr)
+			const size = parseFloat(sizeStr.replace(/,/g, ''))
 
 			// Classify chunks solely based on their paths
 			if (type === 'client') {
