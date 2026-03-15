@@ -11,7 +11,7 @@ description: What the Australian chapter of PauseAI has been doing and needs hel
 - Reached out to 3 prominent Aussie figures thanking them for their sensible treatment of AI risk
 - Contacted 3 politicians about AI existential risk - can share more in the next few months!
 - Reached out to COSBOA and Canberra Business Chamber about Australians' trust in AI
-- Took part in CAPaD's Community Assembly in Canberra <img src="/static/20260308_CAPaD_CommunityAssemblyRepresenting.jpg" alt="Volunteer at CAPaD" width="500"/>
+- Took part in CAPaD's Community Assembly in Canberra. <img src="/static/20260308_CAPaD_CommunityAssemblyRepresenting.jpg" alt="Volunteer at CAPaD" width="500"/>
 - Migrated some website things to Cloudflare for security.
 - Reached out to correct an error in [The Daily Aus' reporting on the Pentagon’s dispute with Anthropic](https://thedailyaus.com.au/podcast/the-fight-over-how-ai-is-used-in-war) .
 - [Released a vid](https://www.youtube.com/shorts/L0vJxFJQz1o) on how Australia ignored the risks of AI at the India Summit and just talked about dividing winnings.
