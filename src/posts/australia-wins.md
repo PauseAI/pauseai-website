@@ -35,10 +35,16 @@ description: What the Australian chapter of PauseAI has been doing and needs hel
 - Met with Deborah Morris MLA about AI misalignment, deepfakes and bioweapon risks.
 - 🚩Milestone: 70 subscribers to our newsletter!
 
-## 2025 - coming soon!
+## 2025 - more coming soon!
 ### 2025 November
 - Publicly asked Senator Pocock to sign Superintelligence Statement, and [he agreed](https://youtu.be/SbqUEhJt5RU)! <br><img src="/static/202511_PocockTownhall_SelfiesPeterDavid.JPG" alt="202511_PocockTownhall_SelfiesPeterDavid.JPG" width="500" />
 - 5 people from Australia participated in the PauseAI photo petition. <br><img src="/static/2025-11_PhotoPetition.jpg" alt="2025-11_PhotoPetition.jpg" width="500" />
 
 ## Connect with PauseAI Australia
 [australia@pauseai.info](mailto:australia@pauseai.info) | [Facebook](https://www.facebook.com/groups/571590459293618) |  [YouTube](https://www.youtube.com/channel/UCjjMieiOlSFf7jud0yhHQSg) | [LinkedIn](https://www.linkedin.com/company/pauseai-australia) | [Instagram](https://www.instagram.com/pauseaiaustralia/) | [WhatsApp](https://chat.whatsapp.com/KLg8K9xSgfIJs8GQAHeI5b) | [Events](https://lu.ma/PauseAIAustralia)
+
+## 2024 - more coming soon!
+
+## 2023 - more coming soon!
+### 2023 February
+- Protested in Melbourne at Sam Altman's speaking event. <br><img src="/static/20230616_AusMelb_PauseAIProtestAltman_Michael.jpg" alt="20230616_AusMelb_PauseAIProtestAltman_Michael.jpg" width="500" />
