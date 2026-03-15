@@ -13,15 +13,16 @@ description: What the Australian chapter of PauseAI has been doing and needs hel
 - We reached out to COSBOA and Canberra Business Chamber about Australians' trust in AI
 - We took part in CAPaD's Community Assembly in Canberra
 <img src="/static/20260308_CAPaD_CommunityAssemblyRepresenting.jpg" alt="Volunteer at CAPaD" width="500" />
+
 - We migrated some website things to Cloudflare for security.
-- We reached out to The Daily Aus to correct an error in [their episode on the Pentagon’s dispute with Anthropic](https://thedailyaus.com.au/podcast/the-fight-over-how-ai-is-used-in-war) .
+- We reached out to correct an error in [The Daily Aus' reporting on the Pentagon’s dispute with Anthropic](https://thedailyaus.com.au/podcast/the-fight-over-how-ai-is-used-in-war) .
 - We [released a vid](https://www.youtube.com/shorts/L0vJxFJQz1o) on how Australia ignored the risks of AI at the India Summit and just talked about dividing winnings.
 
 ### 2026 February
 - 📢We campaigned for Australia to prioritise safety at India's AI Impact Summit: 2 vids [calling to action](https://www.youtube.com/shorts/gGbAGQ8vVcY) and [suggesting the perfect Valentine's](https://www.youtube.com/watch?v=OQytHYG7jH8), 70 emails sent to policymakers, and [70 signatures on our petition](https://www.change.org/p/ai-summits-need-to-take-safety-seriously-again), including to Minister Ayres and Assistant Minister Charlton.
-- 🚩Milestone: 70 subscribers to our newsletter!
 - We publicly [asked Senator Pocock](https://www.youtube.com/live/SwDolSOMrac?si=GOtvYibfWyGuxK06&t=3820) how our government will deal with mass unemployment
 <img src="/static/20260225-1847_PocockTownhallAIQuestionHighlighted.jpg" alt="20260225-1847_PocockTownhallAIQuestionHighlighted.jpg" width="500" />
+
 - We reached out to Fiona Carrick MLA and Thomas Emerson MLA about AI existential risk.
 - We reached out to the ACT Conservation Council and ACT Greens about their datacentre policies.
 - We asked Minister Orr about the ACT Government's datacentre policy at the ACT Conservation Council townhall
@@ -29,6 +30,7 @@ description: What the Australian chapter of PauseAI has been doing and needs hel
 
 ### 2026 January
 - We met with Deborah Morris MLA about AI misalignment, deepfakes and bioweapon risks.
+- 🚩Milestone: 70 subscribers to our newsletter!
 
 
 ## 2025
