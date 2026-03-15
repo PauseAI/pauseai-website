@@ -1,4 +1,4 @@
-import type { EnhancedImgAttributes } from '@sveltejs/enhanced-img'
+import type { SvelteHTMLElements } from 'svelte/elements'
 
 export type Categories = 'sveltekit' | 'svelte' | 'AI Safety' | 'Transparency' | 'Government'
 
@@ -106,7 +106,7 @@ export type NationalGroupLink =
 	| 'lumaLink'
 	| 'substackLink'
 
-export type Picture = Exclude<EnhancedImgAttributes['src'], string>
+export type Picture = Exclude<SvelteHTMLElements['enhanced:img']['src'], string>
 
 export type CarouselQuote = {
 	text: string
