@@ -24,9 +24,11 @@ description: What the Australian chapter of PauseAI has been doing and needs hel
   - Arranged for 4 Aussie experts and 3 international ones to co-sign [op-ed in France's biggest weekly, Nouvel Obs](https://www.nouvelobs.com/opinions/20260216.OBS112421/sommet-de-l-ia-face-aux-risques-remettre-la-securite-en-haut-de-l-agenda-international.html)
   - Sent media release to tech journalists
   - Hosted online and in-person workshops
+  - Postered in Canberra's Civic, Tuggeranong, Woden, and Waramanga
 - Publicly [asked Senator Pocock](https://www.youtube.com/live/SwDolSOMrac?si=GOtvYibfWyGuxK06&t=3820) how our government will deal with mass unemployment. <br><img src="/static/20260225-1847_PocockTownhallAIQuestionHighlighted.jpg" alt="20260225-1847_PocockTownhallAIQuestionHighlighted.jpg" width="500" />
-- Reached out to Fiona Carrick MLA and Thomas Emerson MLA about AI existential risk.
-- Reached out to the ACT Conservation Council and ACT Greens about their datacentre policies.
+- Publicly asked Andrew Leigh (Assistant Minister, MP) at his book event whether AI researcher predictions of existential risk mean Australia should sign onto red lines for AI development, he said yes!
+- Reached out to politicians: Fiona Carrick MLA, Thomas Emerson MLA, Jessie Price MP candidate about AI existential risk.
+- Reached out to organisations: ACT Conservation Council and ACT Greens about their datacentre policies.
 - Asked Minister Orr about the ACT Government's datacentre policy at the ACT Conservation Council townhall.<br> <img src="/static/20260218_MinisterOrrQuestionAtACTConservationCouncilTownhall.jpg" alt="20260218_MinisterOrrQuestionAtACTConservationCouncilTownhall.jpg" width="500" />
 - Attended Melbourne's presentation on Fixing Australian Philanthropy. <br><img src="/static/20260225_MELB_MarkAtDGRPresentation_Cropped.jpg" alt="20260225_MELB_MarkAtDGRPresentation_Cropped.jpg" width="500" />
 - Handed out flyers at University of Canberra's Open Day.
