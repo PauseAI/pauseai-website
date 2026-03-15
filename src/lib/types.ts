@@ -113,4 +113,5 @@ export type CarouselQuote = {
 	author: string
 	title: string
 	image: Picture
+	href?: string
 }
