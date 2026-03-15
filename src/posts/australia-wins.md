@@ -4,7 +4,7 @@ slug: australia-wins
 description: What the Australian chapter of PauseAI has been doing and needs help with
 ---
 ### 2026 April - help needed🙏
-- Join our meetup to ideate on how we use social media better
+- Join our meetup where we kickoff our next campaign! We also need ideas on how to use social media better.
 - Help out with [evergreen tasks](/australia)
 
 ### 2026 March 
@@ -18,25 +18,25 @@ description: What the Australian chapter of PauseAI has been doing and needs hel
 - Reached out to Matt Greg MP on AGI risks and the recent India Summit.
 
 ### 2026 February
-- 📢We campaigned for Australia to prioritise safety at India's AI Impact Summit: 2 vids [calling to action](https://www.youtube.com/shorts/gGbAGQ8vVcY) and [suggesting the perfect Valentine's](https://www.youtube.com/watch?v=OQytHYG7jH8), 70 emails sent to policymakers, and [70 signatures on our petition](https://www.change.org/p/ai-summits-need-to-take-safety-seriously-again), including to Minister Ayres and Assistant Minister Charlton.
-- We publicly [asked Senator Pocock](https://www.youtube.com/live/SwDolSOMrac?si=GOtvYibfWyGuxK06&t=3820) how our government will deal with mass unemployment. <img src="/static/20260225-1847_PocockTownhallAIQuestionHighlighted.jpg" alt="20260225-1847_PocockTownhallAIQuestionHighlighted.jpg" width="500" />
-- We reached out to Fiona Carrick MLA and Thomas Emerson MLA about AI existential risk.
-- We reached out to the ACT Conservation Council and ACT Greens about their datacentre policies.
-- We asked Minister Orr about the ACT Government's datacentre policy at the ACT Conservation Council townhall <img src="/static/20260218_MinisterOrrQuestionAtACTConservationCouncilTownhall.jpg" alt="20260218_MinisterOrrQuestionAtACTConservationCouncilTownhall.jpg" width="500" />
+- 📢We campaigned for Australia to prioritise safety at India's AI Impact Summit:
+  - 2 vids [calling to action](https://www.youtube.com/shorts/gGbAGQ8vVcY) and [suggesting the perfect Valentine's](https://www.youtube.com/watch?v=OQytHYG7jH8)
+  - 70 emails sent to policymakers, and [70 signatures on our petition](https://www.change.org/p/ai-summits-need-to-take-safety-seriously-again), including to Minister Ayres and Assistant Minister Charlton.
+  - Arranged for 4 Aussie experts and 3 international ones to co-sign [op-ed in France's biggest weekly, Nouvel Obs](https://www.nouvelobs.com/opinions/20260216.OBS112421/sommet-de-l-ia-face-aux-risques-remettre-la-securite-en-haut-de-l-agenda-international.html)
+- Publicly [asked Senator Pocock](https://www.youtube.com/live/SwDolSOMrac?si=GOtvYibfWyGuxK06&t=3820) how our government will deal with mass unemployment. <img src="/static/20260225-1847_PocockTownhallAIQuestionHighlighted.jpg" alt="20260225-1847_PocockTownhallAIQuestionHighlighted.jpg" width="500" />
+- Reached out to Fiona Carrick MLA and Thomas Emerson MLA about AI existential risk.
+- Reached out to the ACT Conservation Council and ACT Greens about their datacentre policies.
+- Asked Minister Orr about the ACT Government's datacentre policy at the ACT Conservation Council townhall <img src="/static/20260218_MinisterOrrQuestionAtACTConservationCouncilTownhall.jpg" alt="20260218_MinisterOrrQuestionAtACTConservationCouncilTownhall.jpg" width="500" />
+- Attended Melbourne's presentation on Fixing Australian Philanthropy <img src="/static/20260225_MELB_MarkAtDGRPresentation_Cropped.jpg" alt="20260225_MELB_MarkAtDGRPresentation_Cropped.jpg" width="500" />
 
 ### 2026 January
 - We met with Deborah Morris MLA about AI misalignment, deepfakes and bioweapon risks.
 - 🚩Milestone: 70 subscribers to our newsletter!
-
 
 ## 2025
 ### 2025 December
 ### 2025 November
 - We publicly asked Senator Pocock to sign Superintelligence Statement, and [he agreed](https://youtu.be/SbqUEhJt5RU)! <img src="/static/202511_PocockTownhall_SelfiesPeterDavid.JPG" alt="202511_PocockTownhall_SelfiesPeterDavid.JPG" width="500" />
 - 5 people from Australia participated in the PauseAI photo petition <img src="/static/2025-11_PhotoPetition.jpg" alt="2025-11_PhotoPetition.jpg" width="500" />
-
-
-
 
 
 
