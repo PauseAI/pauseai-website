@@ -12,19 +12,24 @@ description: What the Australian chapter of PauseAI has been doing and needs hel
 - Help out with [evergreen tasks](/australia)
 
 ### 2026 March
-- We notified Aus Daily of an error in their episode on the Pentagon’s dispute with Anthropic
+- We reached out to 3 prominent Aussie figures thanking them for their sensible treatment of AI risk
+- We contacted 3 politicians about AI existential risk - can share more in the next few months!
+- We reached out to COSBOA and Canberra Business Chamber about 
 - We took part in CAPaD's Community Assembly in Canberra
 ![Volunteer taking part in CAPaD Community Assembly, Canberra.](/static/20260308_CAPaD_CommunityAssemblyRepresenting.jpg "Peter (volunteer in Canberra)")
-- We reached out to 3 prominent Aussie figures thanking them for their sensible treatment of AI risk
-- We contacted 3 politicians about AI existential risk
 - We migrated some website things to Cloudflare for security
+- We reached out to The Daily Aus to correct an error in [their episode on the Pentagon’s dispute with Anthropic](https://thedailyaus.com.au/podcast/the-fight-over-how-ai-is-used-in-war)
+
 
 ### 2026 February
-- We did India Summit: details
+- 📢We campaigned for Australia to prioritise safety at India's AI Impact Summit: 70 emails sent to policymakers, and [70 signatures on our petition](https://www.change.org/p/ai-summits-need-to-take-safety-seriously-again)
 - 🚩Milestone: 70 subscribers to our newsletter!
 - We publicly [asked Senator Pocock](https://www.youtube.com/live/SwDolSOMrac?si=GOtvYibfWyGuxK06&t=3820) how our government will deal with mass unemployment
 ![20260225-1847_PocockTownhallAIQuestionHighlighted.jpg](/static/20260225-1847_PocockTownhallAIQuestionHighlighted.jpg)
+- We reached out to Fiona Carrick MLA and Thomas Emerson MLA about AI existential risk.
 
+### 2026 January
+- We met with Deborah Morris MLA about AI misalignment, deepfakes and bioweapon risks.
 
 
 ## 2025
