@@ -17,8 +17,12 @@ description: What the Australian chapter of PauseAI has been doing and needs hel
 - We reached out to COSBOA and Canberra Business Chamber about 
 - We took part in CAPaD's Community Assembly in Canberra
 ![Volunteer taking part in CAPaD Community Assembly, Canberra.](/static/20260308_CAPaD_CommunityAssemblyRepresenting.jpg "Peter (volunteer in Canberra)")
+<img src="/static/20260308_CAPaD_CommunityAssemblyRepresenting.jpg" alt="Volunteer at CAPaD" width="300" />
+
 - We migrated some website things to Cloudflare for security
 - We reached out to The Daily Aus to correct an error in [their episode on the Pentagon’s dispute with Anthropic](https://thedailyaus.com.au/podcast/the-fight-over-how-ai-is-used-in-war)
+
+- 
 
 
 ### 2026 February
