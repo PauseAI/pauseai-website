@@ -51,14 +51,14 @@ description: What the Australian chapter of PauseAI has been doing and needs hel
 ### 2025 November
 
 - Publicly asked Senator Pocock to sign Superintelligence Statement, and [he agreed](https://youtu.be/SbqUEhJt5RU)!
-  ![202511_PocockTownhall_SelfiesPeterDavid.JPG](/australia/202511_PocockTownhall_SelfiesPeterDavid.JPG)
+  ![202511_PocockTownhall_SelfiesPeterDavid.jpg](/australia/202511_PocockTownhall_SelfiesPeterDavid.jpg)
 - 5 people from Australia participated in the PauseAI photo petition.
   ![2025-11_PhotoPetition.jpg](/australia/2025-11_PhotoPetition.jpg)
 
 ### 2025 February
 
 - Protested in Melbourne on the Paris AI Action Summit.
-  ![20250208_144134_MelbProtest.JPG](/australia/20250208_144134_MelbProtest.JPG)
+  ![20250208_144134_MelbProtest.jpg](/australia/20250208_144134_MelbProtest.jpg)
 
 ## 2023 - more coming soon!
 
