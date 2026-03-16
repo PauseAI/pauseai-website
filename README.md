@@ -95,22 +95,20 @@ The article (and automatic l10ns of same) will be previewable.
 
 If you are sufficiently changing prominent text, consider inspecting relevant l10ns as well as the original.
 
-### Image Processing
+### Image Optimization
 
-To improve performance, images are automatically processed and delivered in multiple formats (e.g., WebP, AVIF) and resolutions. This is handled by the `Image` Svelte component, which processes images located in the `src/assets/images` directory.
-
-You can also pass `width` and `height` as query parameters in the `src` to set the rendered size. These parameters are stripped from the actual file path and applied as sizing on the rendered image. This is mainly for Markdown usage, where you can’t add attributes directly like you can in Svelte.
+To improve performance, images are automatically processed and delivered in multiple formats (e.g., WebP, AVIF) and resolutions. This is handled by the `Image` Svelte component, which optimizes images located in the `src/assets/images` directory.
 
 #### Usage
 
 To use optimized images, first, ensure your image file (e.g., `my-image.png`) is located within the `src/assets/images` directory. Then, choose one of the following methods to embed it:
 
-- **In Markdown Files:** Use standard Markdown image syntax. The system will automatically process the image through the `Image` component. The path in the Markdown should be relative to `src/assets/images` and start with a forward slash `/`. You can add `width` and `height` as query parameters in the image URL.
+- **In Markdown Files:** Use standard Markdown image syntax. The system will automatically process the image through the `Image` component. The path in the Markdown should be relative to `src/assets/images` and start with a forward slash `/`.
 
   Example:
 
   ```markdown
-  ![A description of my image](/my-image.png?width=320&height=240)
+  ![A description of my image](/my-image.png)
   ```
 
   If your image is in a subdirectory, for example `src/assets/images/illustrations/another-image.jpg`, the path would be:

@@ -1,6 +1,5 @@
 <script lang="ts">
 	import type { Picture } from '$lib/types'
-	import { SvelteURLSearchParams } from 'svelte/reactivity'
 
 	export let src: string
 	export let alt: string | null = null
@@ -8,32 +7,6 @@
 	export let sizes: string | null = null
 	let className: string = ''
 	export { className as class }
-
-	function normalizeDimension(value?: string) {
-		if (!value) return null
-		return /^\d+(\.\d+)?$/.test(value) ? `${value}px` : value
-	}
-
-	function extractDimensionParams(value: string) {
-		const [path, query = ''] = value.split('?')
-		const params = new SvelteURLSearchParams(query)
-		const width = params.get('width') ?? undefined
-		const height = params.get('height') ?? undefined
-
-		console.log({ path, width, height })
-
-		return { width, height, path }
-	}
-
-	$: ({ width, height, path } = extractDimensionParams(src))
-	$: widthStyle = normalizeDimension(width)
-	$: heightStyle = normalizeDimension(height)
-	$: enhancedStyle = [
-		widthStyle && `width: ${widthStyle};`,
-		heightStyle && `height: ${heightStyle};`
-	]
-		.filter(Boolean)
-		.join(' ')
 
 	// Use import.meta.glob to statically analyze all potential static assets
 	const pictureModules = import.meta.glob<Picture>(
@@ -55,32 +28,23 @@
 	let picture: Picture | null = null
 	let assetUrl: string | null = null
 
-	$: {
-		if (path.startsWith('/')) {
-			const fullPath = `../../assets/images${path}`
-			if (pictureModules[fullPath]) {
-				picture = pictureModules[fullPath]
-			} else if (assetUrlModules[fullPath]) {
-				assetUrl = assetUrlModules[fullPath]
-			}
+	if (src.startsWith('/')) {
+		const fullPath = `../../assets/images${src}`
+		if (pictureModules[fullPath]) {
+			picture = pictureModules[fullPath]
+		} else if (assetUrlModules[fullPath]) {
+			assetUrl = assetUrlModules[fullPath]
 		}
 	}
 </script>
 
 {#if picture}
-	<enhanced:img
-		src={picture}
-		{alt}
-		class="enhanced {className}"
-		loading="lazy"
-		{sizes}
-		{title}
-		style={enhancedStyle || undefined}
+	<enhanced:img src={picture} {alt} class="enhanced {className}" loading="lazy" {sizes} {title}
 	></enhanced:img>
 {:else if assetUrl}
-	<img src={assetUrl} {alt} {title} loading="lazy" class={className} {width} {height} />
+	<img src={assetUrl} {alt} {title} loading="lazy" class={className} />
 {:else}
-	<img src={path} {alt} {title} loading="lazy" class={className} {width} {height} />
+	<img {src} {alt} {title} loading="lazy" class={className} />
 {/if}
 
 <style>
