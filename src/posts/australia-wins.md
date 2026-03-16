@@ -15,7 +15,7 @@ description: What the Australian chapter of PauseAI has been doing and needs hel
 - Contacted 3 politicians about AI existential risk - can share more in the next few months!
 - Reached out to COSBOA and Canberra Business Chamber about Australians' trust in AI
 - Took part in CAPaD's Community Assembly in Canberra.
-  ![Volunteer at CAPaD](/20260308_CAPaD_CommunityAssemblyRepresenting.jpg)
+  ![Volunteer at CAPaD](/australia/20260308_CAPaD_CommunityAssemblyRepresenting.jpg)
 - Migrated some website things to Cloudflare for security.
 - Reached out to correct an error in [The Daily Aus' reporting on the Pentagon’s dispute with Anthropic](https://thedailyaus.com.au/podcast/the-fight-over-how-ai-is-used-in-war) .
 - [Released a vid](https://www.youtube.com/shorts/L0vJxFJQz1o) on how Australia ignored the risks of AI at the India Summit and just talked about dividing winnings.
@@ -31,14 +31,14 @@ description: What the Australian chapter of PauseAI has been doing and needs hel
   - Hosted online and in-person workshops
   - Postered in Canberra's Civic, Tuggeranong, Woden, and Waramanga
 - Publicly [asked Senator Pocock](https://www.youtube.com/live/SwDolSOMrac?si=GOtvYibfWyGuxK06&t=3820) how our government will deal with mass unemployment.
-  ![20260225-1847_PocockTownhallAIQuestionHighlighted.jpg](/20260225-1847_PocockTownhallAIQuestionHighlighted.jpg)
+  ![20260225-1847_PocockTownhallAIQuestionHighlighted.jpg](/australia/20260225-1847_PocockTownhallAIQuestionHighlighted.jpg)
 - Publicly asked Andrew Leigh (Assistant Minister, MP) at his book event whether AI researcher predictions of existential risk mean Australia should sign onto red lines for AI development, he said yes!
 - Reached out to politicians: Fiona Carrick MLA, Thomas Emerson MLA, Jessie Price MP candidate about AI existential risk.
 - Reached out to organisations: ACT Conservation Council and ACT Greens about their datacentre policies.
 - Asked Minister Orr about the ACT Government's datacentre policy at the ACT Conservation Council townhall.
-  ![20260218_MinisterOrrQuestionAtACTConservationCouncilTownhall.jpg](/20260218_MinisterOrrQuestionAtACTConservationCouncilTownhall.jpg)
+  ![20260218_MinisterOrrQuestionAtACTConservationCouncilTownhall.jpg](/australia/20260218_MinisterOrrQuestionAtACTConservationCouncilTownhall.jpg)
 - Attended Melbourne's presentation on Fixing Australian Philanthropy.
-  ![20260225_MELB_MarkAtDGRPresentation_Cropped.jpg](/20260225_MELB_MarkAtDGRPresentation_Cropped.jpg)
+  ![20260225_MELB_MarkAtDGRPresentation_Cropped.jpg](/australia/20260225_MELB_MarkAtDGRPresentation_Cropped.jpg)
 - Handed out flyers at University of Canberra's Open Day.
 
 ### 2026 January
@@ -51,21 +51,21 @@ description: What the Australian chapter of PauseAI has been doing and needs hel
 ### 2025 November
 
 - Publicly asked Senator Pocock to sign Superintelligence Statement, and [he agreed](https://youtu.be/SbqUEhJt5RU)!
-  ![202511_PocockTownhall_SelfiesPeterDavid.JPG](/202511_PocockTownhall_SelfiesPeterDavid.JPG)
+  ![202511_PocockTownhall_SelfiesPeterDavid.JPG](/australia/202511_PocockTownhall_SelfiesPeterDavid.JPG)
 - 5 people from Australia participated in the PauseAI photo petition.
-  ![2025-11_PhotoPetition.jpg](/2025-11_PhotoPetition.jpg)
+  ![2025-11_PhotoPetition.jpg](/australia/2025-11_PhotoPetition.jpg)
 
 ### 2025 February
 
 - Protested in Melbourne on the Paris AI Action Summit.
-  ![20250208_144134_MelbProtest.JPG](/20250208_144134_MelbProtest.JPG)
+  ![20250208_144134_MelbProtest.JPG](/australia/20250208_144134_MelbProtest.JPG)
 
 ## 2023 - more coming soon!
 
 ### 2023 February
 
 - Protested in Melbourne at Sam Altman's speaking event.
-  ![20230616_AusMelb_PauseAIProtestAltman_Michael.jpg](/20230616_AusMelb_PauseAIProtestAltman_Michael.jpg)
+  ![20230616_AusMelb_PauseAIProtestAltman_Michael.jpg](/australia/20230616_AusMelb_PauseAIProtestAltman_Michael.jpg)
 
 ## Connect with PauseAI Australia
 
