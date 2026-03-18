@@ -1,15 +1,19 @@
 <script lang="ts">
+	import type { GeoApiResponse } from '$api/geo/+server'
 	import { page } from '$app/stores'
 	import Banner from '$lib/components/Banner.svelte'
 	import Hero from '$lib/components/Hero.svelte'
+	import ExternalLink from '$lib/components/Link.svelte'
 	import NearbyEvent from '$lib/components/NearbyEvent.svelte'
+	import PreloadFonts from '$lib/components/PreloadFonts.svelte'
 	import Toc from '$lib/components/Toc.svelte'
-	import ExternalLink from '$lib/components/custom/a.svelte'
 	import { deLocalizeHref } from '$lib/paraglide/runtime'
 	import '@fontsource/roboto-slab/300.css'
 	import '@fontsource/roboto-slab/500.css'
 	import '@fontsource/roboto-slab/700.css'
+	import robotoSlabLatin300 from '@fontsource/roboto-slab/files/roboto-slab-latin-300-normal.woff2'
 	import '@fontsource/saira-condensed/700.css'
+	import sairaCondensedLatin700 from '@fontsource/saira-condensed/files/saira-condensed-latin-700-normal.woff2'
 	import { ProgressBar } from '@prgm/sveltekit-progress-bar'
 	import { Toaster } from 'svelte-french-toast'
 	import '../styles/print.css'
@@ -17,7 +21,6 @@
 	import Footer from './footer.svelte'
 	import Header from './header.svelte'
 	import PageTransition from './transition.svelte'
-	import type { GeoApiResponse } from '$api/geo/+server'
 
 	export let data
 
@@ -29,6 +32,8 @@
 	// Show the hero on the homepage, but nowhere else
 	$: hero = deLocalizeHref($page.url.pathname) === '/'
 </script>
+
+<PreloadFonts urls={[robotoSlabLatin300, sairaCondensedLatin700]} />
 
 <h2 style="width: 0; height: 0; margin: 0; padding: 0; visibility: hidden;" data-pagefind-ignore>
 	(Top)
@@ -46,12 +51,11 @@
 
 <NearbyEvent contrast={hero} bind:eventFound bind:geo />
 {#if !eventFound}
-	{#if geo?.country?.code === 'US' && geo?.subdivision?.code === 'CA' && false}
+	{#if geo?.country?.code === 'US'}
 		<Banner>
 			<b
-				>HELP US SAVE CALIFORNIA'S AI SAFETY BILL BEFORE WEDNESDAY | <ExternalLink
-					href="https://mailchi.mp/b8cf67a40299/join-us-tomorrow-for-our-fast-action-workshop-17457535"
-					>ACT NOW »</ExternalLink
+				>HELP US PROTECT STATE SOVEREIGNTY ON AI REGULATION | <ExternalLink
+					href="https://mstr.app/b09fa92b-1899-43a0-9d95-99cd99c9dfb2">ACT NOW »</ExternalLink
 				></b
 			>
 		</Banner>
@@ -64,6 +68,13 @@
 {/if}
 
 <div class="layout" class:with-hero={hero}>
+	{#if $page.route.id === '/sayno'}
+		<!-- Dynamic import and render the selfie UX component -->
+		{#await import('./sayno/SelfieUX.svelte') then module}
+			<svelte:component this={module.default} />
+		{/await}
+	{/if}
+
 	{#if hero}
 		<Hero />
 	{/if}

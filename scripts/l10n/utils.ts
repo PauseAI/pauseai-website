@@ -249,14 +249,3 @@ export function cullCommentary(filePath: string, verbose = false) {
 		)
 	}
 }
-
-export async function importRuntimeWithoutVite(): Promise<
-	typeof import('../../src/lib/paraglide/runtime.js')
-> {
-	const runtimeString = await fs.readFile('src/lib/paraglide/runtime.js', 'utf-8')
-	const patchedRuntime = runtimeString.replace('import.meta.env.SSR', 'true')
-	const runtime = await import(
-		'data:text/javascript;base64,' + Buffer.from(patchedRuntime).toString('base64')
-	)
-	return runtime
-}

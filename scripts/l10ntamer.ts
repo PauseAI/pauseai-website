@@ -11,9 +11,7 @@
 
 import fs from 'fs'
 import path from 'path'
-import { importRuntimeWithoutVite } from './l10n/utils.js'
-
-const { locales, localizeHref } = await importRuntimeWithoutVite()
+import { locales, localizeHref } from '../src/lib/paraglide/runtime.js'
 
 if (localizeHref('/test', { locale: 'en' }) === '/test') {
 	console.log('⏭️  Skipping l10ntamer - English routes not prefixed')
@@ -49,7 +47,7 @@ interface LinkAuditResult {
 }
 
 export function findFilesRecursively(dir: string, ext: string) {
-	const files = fs.readdirSync(dir, { recursive: true }) as string[]
+	const files = fs.readdirSync(dir, { recursive: true, encoding: 'utf-8' })
 	return files
 		.map((file) => path.join(dir, file))
 		.filter((file) => path.extname(file) === '.' + ext)
@@ -284,7 +282,7 @@ async function main() {
 		generateReport(results)
 
 		// Write detailed results to file
-		const reportPath = 'unlocalized-links-audit.json'
+		const reportPath = '.svelte-kit/unlocalized-links-audit.json'
 		fs.writeFileSync(reportPath, JSON.stringify(results, null, 2))
 		console.log(`\n📄 Detailed results written to: ${reportPath}`)
 	} catch (error) {

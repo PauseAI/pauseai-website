@@ -1,8 +1,9 @@
 export const prerender = false
 
-import Airtable from 'airtable'
 import { AIRTABLE_WRITE_API_KEY } from '$env/static/private'
 import { verificationParameter } from '$lib/config.js'
+import Airtable from 'airtable'
+import { StatusCodes } from 'http-status-codes'
 
 const TABLE_PARAMETER = 'table'
 const DEFAULT_TABLE = 'join'
@@ -31,11 +32,13 @@ const VERIFICATION_TABLES = new Map([
 export async function GET({ url }) {
 	const key = url.searchParams.get(verificationParameter)
 	if (!key) {
-		return new Response(`Parameter "${verificationParameter}" is required`, { status: 400 })
+		return new Response(`Parameter "${verificationParameter}" is required`, {
+			status: StatusCodes.BAD_REQUEST
+		})
 	}
 	if (!/^[a-zA-Z0-9]+$/.test(key)) {
 		return new Response(`Parameter "${verificationParameter}" must be alphanumeric`, {
-			status: 400
+			status: StatusCodes.BAD_REQUEST
 		})
 	}
 
@@ -43,7 +46,7 @@ export async function GET({ url }) {
 	const tableConfig = VERIFICATION_TABLES.get(tableName)
 
 	if (!tableConfig) {
-		return new Response(`Invalid table name "${tableName}"`, { status: 400 })
+		return new Response(`Invalid table name "${tableName}"`, { status: StatusCodes.BAD_REQUEST })
 	}
 
 	const table = new Airtable({ apiKey: AIRTABLE_WRITE_API_KEY })
@@ -55,7 +58,7 @@ export async function GET({ url }) {
 			filterByFormula: `{${tableConfig.keyFieldName}} = "${key}"`
 		})
 		.firstPage()
-	if (!records.length) return new Response('Record not found', { status: 404 })
+	if (!records.length) return new Response('Record not found', { status: StatusCodes.NOT_FOUND })
 	await records[0].patchUpdate(Object.fromEntries([[tableConfig.verifiedFieldName, true]]))
-	return new Response('OK', { status: 200 })
+	return new Response('OK', { status: StatusCodes.OK })
 }

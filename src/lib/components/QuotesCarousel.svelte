@@ -1,13 +1,15 @@
 <script lang="ts">
-	import QuoteContent from './QuoteContent.svelte'
-	import Hinton from '$assets/quote-profile/hinton.jpg?enhanced'
-	import Hawking from '$assets/quote-profile/hawking.jpg?enhanced'
-	import Turing from '$assets/quote-profile/turing.jpg?enhanced'
-	import Russell from '$assets/quote-profile/russell.jpg?enhanced'
+	import ASI_Statement from '$assets/quote-profile/asi_statement.jpg?enhanced'
 	import Bengio from '$assets/quote-profile/bengio.jpg?enhanced'
 	import CAIS from '$assets/quote-profile/cais_statement.jpg?enhanced'
-	import ArrowLeft from 'lucide-svelte/icons/arrow-left'
-	import ArrowRight from 'lucide-svelte/icons/arrow-right'
+	import Hawking from '$assets/quote-profile/hawking.jpg?enhanced'
+	import Hinton from '$assets/quote-profile/hinton.jpg?enhanced'
+	import Russell from '$assets/quote-profile/russell.jpg?enhanced'
+	import Turing from '$assets/quote-profile/turing.jpg?enhanced'
+	import Link from '$lib/components/Link.svelte'
+	import * as m from '$lib/paraglide/messages'
+	import type { CarouselQuote } from '$lib/types'
+	import '@glidejs/glide/dist/css/glide.core.css'
 	import Glide, {
 		Autoplay,
 		Controls,
@@ -15,10 +17,10 @@
 		Keyboard,
 		Swipe
 	} from '@glidejs/glide/dist/glide.modular.esm'
-	import '@glidejs/glide/dist/css/glide.core.css'
+	import ArrowLeft from 'lucide-svelte/icons/arrow-left'
+	import ArrowRight from 'lucide-svelte/icons/arrow-right'
 	import { onMount } from 'svelte'
-	import * as m from '$lib/paraglide/messages'
-	import Link from '$lib/components/custom/a.svelte'
+	import QuoteContent from './QuoteContent.svelte'
 
 	const MOBILE_NAVIGATION_DISTANCE_THRESHOLD = 10
 	const AUTOPLAY_INTERVAL = 10_000
@@ -26,7 +28,13 @@
 	let glide: Glide
 	let currentSlide: number | null = null
 
-	const quotes = [
+	const quotes: CarouselQuote[] = [
+		{
+			text: m.home_quotes_asi_statement_text(),
+			author: m.home_quotes_asi_statement_author(),
+			title: m.home_quotes_asi_statement_title(),
+			image: ASI_Statement
+		},
 		{
 			text: m.home_quotes_cais_text(),
 			author: m.home_quotes_cais_author(),
@@ -85,9 +93,7 @@
 		addEventListener('touchstart', (event) => (interactionStart = event.changedTouches[0]))
 		addEventListener('mousedown', (event) => (interactionStart = event))
 
-		const touchNavigationButtons = document.getElementsByClassName(
-			'touch-navigation'
-		) as HTMLCollectionOf<HTMLElement>
+		const touchNavigationButtons = document.getElementsByClassName('touch-navigation')
 		window.addEventListener('click', (event) => {
 			if (!interactionStart) return
 			for (const touchNavigationButton of touchNavigationButtons) {

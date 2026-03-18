@@ -207,6 +207,7 @@ ${userPostcode.toUpperCase()}`
 				<div class="email-tips">
 					<ul>
 						<li>Customize the email to you and your MP</li>
+						<li>Customize the sentence "I'm a resident of..." to make it sound natural.</li>
 						<li>MPs are very busy - keep it short!</li>
 					</ul>
 				</div>

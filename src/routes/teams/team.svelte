@@ -1,6 +1,6 @@
 <script lang="ts">
 	import SvelteMarkdown from 'svelte-markdown'
-	import A from '$lib/components/custom/a.svelte'
+	import Link from '$lib/components/Link.svelte'
 	import type { Team } from '$lib/types'
 	import ChevronDown from 'lucide-svelte/icons/chevron-down'
 	import { slide } from 'svelte/transition'
@@ -15,7 +15,7 @@
 		{team.name}
 	</div>
 	<div class="description prose">
-		<SvelteMarkdown source={team.description} renderers={{ link: A }} />
+		<SvelteMarkdown source={team.description} renderers={{ link: Link }} />
 	</div>
 
 	{#if collapsed}
@@ -34,7 +34,7 @@
 	{/if}
 	{#if !collapsed}
 		<div in:slide out:slide class="details">
-			<h3>Team lead: <A href={`mailto:${team.leadEmail}`}>{team.leadName}</A></h3>
+			<h3>Team lead: <Link href={`mailto:${team.leadEmail}`}>{team.leadName}</Link></h3>
 			<h3>Responsibilities</h3>
 			<ul class="responsibilities">
 				{#each team.responsibilities as r}

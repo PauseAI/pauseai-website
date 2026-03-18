@@ -1,15 +1,25 @@
 <script lang="ts">
-	export let percentage: string | number
+	import NumberFlow from '@number-flow/svelte'
+	import SvelteIntersectionObserver from '$lib/components/SvelteIntersectionObserver.svelte'
+
+	export let percentage: number
 	export let text: string
 	export let link: string
+
+	let isIntersecting: boolean
 </script>
 
-<div class="stat-block">
-	<div class="percentage">
-		<a href={link} class="number">{percentage}%</a>
+<SvelteIntersectionObserver bind:isIntersecting defaultToIntersecting disconnectOnIntersect>
+	<div class="stat-block">
+		<div class="percentage">
+			<a href={link} class="number">
+				<NumberFlow value={isIntersecting ? percentage : 20} suffix="%" />
+				<!-- start with two digits and wide first digit to avoid horizontal movement -->
+			</a>
+		</div>
+		<p class="text">{text}</p>
 	</div>
-	<p class="text">{text}</p>
-</div>
+</SvelteIntersectionObserver>
 
 <style>
 	.stat-block {
@@ -33,8 +43,18 @@
 		text-decoration: none;
 	}
 
-	a:hover {
-		text-decoration: underline;
+	a.number {
+		position: relative;
+	}
+
+	a.number:hover::after {
+		content: '';
+		position: absolute;
+		left: 0;
+		bottom: 0.8rem;
+		width: 100%;
+		height: 3px;
+		background-color: currentColor;
 	}
 
 	.text {

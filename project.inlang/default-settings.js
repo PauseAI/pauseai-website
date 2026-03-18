@@ -15,6 +15,7 @@ export default {
 	'plugin.inlang.messageFormat': {
 		pathPattern: './l10n-cage/json/{locale}.json'
 	},
+	// This is accessed from inlang-settings.ts despite the plugin not existing anymore
 	'plugin.paraglide-js-adapter': {
 		routing: {
 			strategy: 'prefix',

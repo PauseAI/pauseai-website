@@ -3,6 +3,8 @@ title: Test Link Localization
 description: Test page for verifying link localization behavior
 ---
 
+<!-- eslint-disable -->
+
 This page tests various link patterns to ensure proper localization behavior.
 
 ## Regular internal links (should be localized)

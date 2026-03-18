@@ -1,5 +1,5 @@
 <script lang="ts">
-	import Link from '../custom/a.svelte'
+	import Link from '../Link.svelte'
 
 	export let headings: Element[]
 

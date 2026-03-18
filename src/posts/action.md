@@ -13,7 +13,7 @@ Choose an activity below depending on your interests or skills.
 - **Write to your politicians**: We've found emails are surprisingly effective and take relatively little effort. If you don’t feel confident about what to write, [start with our email builder](/email-builder). When you get a meeting, you should check out our [lobby tips](/lobby-tips).
 - **Call your politicians**: Try calling legislators' offices while having a set of talking points in view so you stay on topic.
 - **Protest**: Join [one of the protests](https://pauseai.info/protests) or [organize one yourself](https://pauseai.info/organizing-a-protest).
-- **Sign petitions**: [**Ours**](/statement), [International AI Treaty](https://aitreaty.org), [Ban Superintelligence](https://chng.it/Djjfj2Gmpk), [Demand responsible AI](https://www.change.org/p/artificial-intelligence-time-is-running-out-for-responsible-ai-development-91f0a02c-130a-46e1-9e55-70d6b274f4df).
+- **Sign petitions**: [**Ours**](/statement), [Statement on Superintelligence](https://superintelligence-statement.org/), [International AI Treaty](https://aitreaty.org), [Demand responsible AI](https://www.change.org/p/artificial-intelligence-time-is-running-out-for-responsible-ai-development-91f0a02c-130a-46e1-9e55-70d6b274f4df).
 
 ### Inform people around you
 
@@ -28,7 +28,7 @@ Choose an activity below depending on your interests or skills.
 - **Join the [Discord](https://discord.gg/T3YrWUJsJ5)**, where most of the collaboration happens.
 - **Protest or participate in [events](/events)**. If no protest is near you, consider [starting one](/organizing-a-protest).
 - **Look over our [vacancies](/vacancies)** to see if any of your skills match our organizational needs. We're often looking for people with experience in social media, communications, organizing, outreach, and software. Some positions are compensated.
-- **[Sign up as a volunteer](/join)** so we can find projects in your interest areas).
+- **[Sign up as a volunteer](/join)** so we can find projects in your interest areas.
 - **[Donate](/donate)** to PauseAI or buy some merchandise in our [store](https://pauseai-shop.fourthwall.com/).
 - **Follow our [social media channels](https://linktr.ee/pauseai)** and stay updated. Your local PauseAI chapter may also have dedicated social media pages.
 

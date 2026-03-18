@@ -1,34 +1,39 @@
 ---
-title: Open (Volunteer) Vacancies for PauseAI
-description: Jobs & volunteer positions at PauseAI
+title: Vacancies at PauseAI
+description: Job positions at PauseAI
 ---
 
-- We work in [teams](/teams)
-- We collaborate mostly on our [Discord server](https://discord.gg/y9hdAjD83e)
-- Read more about our [organization](/organization)
+## Policy Director
 
-## Onboarding team member
+- Lead regulatory analysis across the global AI governance landscape
+- Development of comprehensive policy positions relevant to national contexts
+- Build relationships with key stakeholders
+- Support development of PauseAI Global and its chapters as key voices in AI policy discussions
 
-- 2 to 4 hrs a week
-- Say hi to new members who join through the discord or the form.
-- Have one on one calls to find the right team
+Apply [here](https://pauseai.info/policy-director-vacancy).
 
-Interested? [Email Will](mailto:will@pauseai.info)
+## Organizing Director
 
-## Outreach team member
+As PauseAI Global’s Organizing Director, you will lead international implementation of strategy - including designing and operationalizing growth and retention plans for volunteers, build international campaigns and develop and mentor National Chapter Lead Organizers (volunteers and staff).
 
-- Help PauseAI reach new communities, attract members and spread awareness
-- This is something you can do independently in your spare time, with little need for coordination with others
-- Come up with campaigns of people you would like to reach out to, and contact them (whether by email, phone, DM, or in-person)
-- Please consider joining if you have a non traditional background or location - this could help us to reach new groups!
+Apply [here](https://pauseai.info/2025-organizing-director).
 
-Interested? [Email Diego](mailto:diego@pauseai.info)
+## PauseAI UK Director
 
-## Software Team member
+- Design and implementation of PauseAI UK's national strategy
+- Build PauseAI as a key voice in the UK's AI policy landscape
+- Grow, train, and coordinate PauseAI UK's volunteer base
 
-- Empower everyone else, giving folk the help they need &amp; the freedom they want.
-- Advise &amp; assist on the technology choices teams make, and keep things running.
-- Be strategic: keep things simple &amp; scalable, buy not build unless we have to...
-- ...but sometimes we have to! So step up devs: scratch an itch and save the world.
+Apply [here](https://pauseai.info/pauseai-uk-director).
 
-Interested? [Email Anthony](mailto:anthony@pauseai.info) (or DM anthonybailey.net on [Discord](https://discord.gg/y9hdAjD83e))
+## PauseIA France Director
+
+- Implementation of PauseIA France's national strategy
+- Build PauseAI as a key voice in France's AI policy landscape
+- Grow, train, and coordinate PauseIA France's volunteer base
+
+Apply [here](https://pauseai.info/pauseia-france-director).
+
+## Volunteer Vacancies
+
+PauseAI is built upon our network of hundreds of volunteers across 13+ countries. You can join PauseAI [here](https://pauseai.info/join), or see our list of volunteer vacancies [here](https://pauseai.info/volunteer-vacancies).

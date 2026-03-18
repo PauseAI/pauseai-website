@@ -1,6 +1,8 @@
 <script lang="ts">
+	import Image from '../Image.svelte'
+
 	export let src: string
 	export let alt: string
 </script>
 
-<img {src} {alt} loading="lazy" />
+<Image {src} {alt} sizes="min(40rem, 100vw)" />

@@ -6,3 +6,4 @@ export const description =
 export const url = dev ? 'http://localhost:37572' : 'https://pauseai.info'
 export const botName = 'RogueGPT'
 export const verificationParameter = 'verificationKey'
+export const defaultTitle = 'Volunteer'

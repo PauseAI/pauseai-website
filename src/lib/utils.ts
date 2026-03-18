@@ -13,5 +13,9 @@ export function typedEntries<T extends Parameters<typeof Object.entries>[0]>(obj
 
 export function generateCacheControlRecord(options: CacheControlInit): Record<string, string> {
 	const headers = new Headers({ cacheControl: new CacheControl(options) })
+	return headersToRecord(headers)
+}
+
+export function headersToRecord(headers: Headers): Record<string, string> {
 	return Object.fromEntries(headers.entries())
 }

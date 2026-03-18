@@ -6,5 +6,5 @@
 		}
 	],
 	"eslint.useFlatConfig": true,
-	"eslint.validate": ["svelte"]
+	"eslint.validate": ["svelte", "markdown"]
 }

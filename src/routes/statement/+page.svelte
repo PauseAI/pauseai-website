@@ -32,9 +32,9 @@
 <h1>{title}</h1>
 
 <blockquote class="statement">
-	We call on the governments of the world to sign an international treaty implementing a temporary
-	pause on the training of the most powerful general AI systems, until we know how to build them
-	safely and keep them under democratic control.
+	We call on the governments of the world to sign an international treaty implementing a pause on
+	the training of the most powerful general AI systems, until we know how to build them safely and
+	keep them under democratic control.
 </blockquote>
 
 <!-- Signatories Counter and Goal -->

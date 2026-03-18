@@ -7,13 +7,12 @@ import fs from 'fs'
 import path from 'path'
 import dotenv from 'dotenv'
 import { execSync } from 'child_process'
-import { L10N_CAGE_DIR, MARKDOWN_L10NS } from '../src/lib/l10n'
-import { importRuntimeWithoutVite } from './l10n/utils'
+import { L10N_CAGE_DIR, MARKDOWN_L10NS } from '../src/lib/l10n.js'
 
 dotenv.config()
 
-const runtimeModule = await importRuntimeWithoutVite()
-let activeLocales = Array.from(runtimeModule.locales)
+import { locales } from '../src/lib/paraglide/runtime.js'
+let activeLocales = Array.from(locales)
 let setupNeeded = false
 let reason = ''
 

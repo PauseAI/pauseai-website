@@ -1,13 +1,17 @@
 <script lang="ts">
 	import Block from '$lib/components/Block.svelte'
 	import PostMeta from '$lib/components/PostMeta.svelte'
+	import PreloadFonts from '$lib/components/PreloadFonts.svelte'
 	import QuotesCarousel from '$lib/components/QuotesCarousel.svelte'
 	import Stats from '$lib/components/Stats.svelte'
 	import * as m from '$lib/paraglide/messages.js'
+	import robotoSlabLatin700 from '@fontsource/roboto-slab/files/roboto-slab-latin-700-normal.woff2'
 
 	const title = 'We need to Pause AI'
 	const description = 'We are risking human extinction. We need to pause AI development, right now.'
 </script>
+
+<PreloadFonts urls={[robotoSlabLatin700]} />
 
 <PostMeta {title} {description} />
 <!-- The Hero image is in `+layout.svelte` -->

@@ -1,5 +1,5 @@
 <script lang="ts">
-	import Link from './custom/a.svelte'
+	import Link from './Link.svelte'
 
 	/**
 	 * The `content` prop can contain HTML and markdown-style links.

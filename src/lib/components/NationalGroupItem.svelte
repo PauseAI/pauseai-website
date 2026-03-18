@@ -12,7 +12,10 @@
 		xLink: 'X',
 		discordLink: 'Discord',
 		whatsappLink: 'WhatsApp',
-		facebookLink: 'Facebook'
+		facebookLink: 'Facebook',
+		youtubeLink: 'YouTube',
+		linkedinLink: 'LinkedIn',
+		lumaLink: 'Luma'
 	}
 
 	const linkEntries = typedEntries(nationalGroupLinkNames)
