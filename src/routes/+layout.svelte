@@ -3,6 +3,7 @@
 	import { page } from '$app/stores'
 	import Banner from '$lib/components/Banner.svelte'
 	import CampaignBanner from '$lib/components/CampaignBanner.svelte'
+	import { isDateRangeActive } from '$lib/dateRange'
 	import Hero from '$lib/components/Hero.svelte'
 	import Link from '$lib/components/Link.svelte'
 	import NearbyEvent from '$lib/components/NearbyEvent.svelte'
@@ -62,8 +63,8 @@
 			<!-- eslint-disable-next-line svelte/no-at-html-tags not vulnerable against XSS -->
 			{@html data.localeAlert.message}
 		</Banner>
-	{:else if geo?.country?.code === 'GB' && false}
-		<Banner contrast={hero}>
+	{:else if geo?.country?.code === 'GB' && isDateRangeActive({ endsOn: '2025-02-28' })}
+		<Banner contrast={hero} id="gb-feb28-protest">
 			<b
 				>PauseAI's largest ever protest will be on Saturday February 28th in London. <Link
 					href="https://luma.com/o0p4htmk">Sign up now!</Link
@@ -73,16 +74,16 @@
 	{:else}
 		<NearbyEvent contrast={hero} bind:eventFound {geo} />
 		{#if !eventFound}
-			{#if geo?.country?.code === 'US' && false}
-				<Banner contrast={hero}>
+			{#if geo?.country?.code === 'US' && isDateRangeActive({ endsOn: '2025-02-28' })}
+				<Banner contrast={hero} id="us-state-sovereignty">
 					<b
 						>HELP US PROTECT STATE SOVEREIGNTY ON AI REGULATION | <Link
 							href="https://mstr.app/b09fa92b-1899-43a0-9d95-99cd99c9dfb2">ACT NOW »</Link
 						></b
 					>
 				</Banner>
-			{:else if false}
-				<Banner contrast={hero} target="/littlehelpers">
+			{:else if isDateRangeActive({ endsOn: '2024-12-31' })}
+				<Banner contrast={hero} id="holiday-littlehelpers" target="/littlehelpers">
 					<strong>🎄 Holiday Matching Campaign!</strong> Help fund volunteer stipends for PauseAI
 					advocates. <Link href="/littlehelpers">Join the Little Helpers campaign →</Link>
 				</Banner>
@@ -90,7 +91,7 @@
 		{/if}
 	{/if}
 
-	{#if deLocalizeHref($page.url.pathname) !== '/brussels-ep-protest-2026' && false}
+	{#if isDateRangeActive({ endsOn: '2026-02-23' })}
 		<CampaignBanner href="/brussels-ep-protest-2026" id="brussels-ep-protest-2026">
 			<strong>Brussels, Feb 23</strong> - Join us outside the European Parliament to call for a global
 			treaty to pause frontier AI development.

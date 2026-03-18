@@ -3,42 +3,34 @@
 	import { page } from '$app/stores'
 	import LinkWithoutIcon from '$lib/components/LinkWithoutIcon.svelte'
 	import { deLocalizeHref } from '$lib/paraglide/runtime'
+	import { getItem, setItem } from '$lib/localStorage'
 	import X from 'lucide-svelte/icons/x'
-	import { onMount } from 'svelte'
+	import { get } from 'svelte/store'
 	import { fade } from 'svelte/transition'
 
 	export let href: string
 	export let id = 'campaign'
-	let hidden = false
-	if (browser && id) {
-		try {
-			hidden = localStorage.getItem(`campaign_banner_${id}_hidden`) === 'true'
-		} catch {
-			// SecurityError in storage-restricted contexts
-		}
+
+	let dismissed = id ? getItem(`campaign_banner_${id}_hidden`) === 'true' : false
+	// Hide immediately if already on the target page (works during SSR and prevents flash)
+	if (deLocalizeHref(get(page).url.pathname) === href) {
+		dismissed = true
 	}
 
 	function close() {
-		hidden = true
-		if (browser && id) {
-			try {
-				localStorage.setItem(`campaign_banner_${id}_hidden`, 'true')
-			} catch (e) {
-				console.error(e)
-			}
+		dismissed = true
+		if (id) {
+			setItem(`campaign_banner_${id}_hidden`, 'true')
 		}
 	}
 
-	onMount(() => {
-		// We still keep the reactive check for path changes
-	})
-
+	// Dismiss on navigation to the target page
 	$: if (browser && deLocalizeHref($page.url.pathname) === href) {
 		close()
 	}
 </script>
 
-{#if !hidden}
+{#if !dismissed}
 	<div class="campaign-banner" data-campaign-banner-id={id} transition:fade={{ duration: 200 }}>
 		<div class="accent-line"></div>
 		<div class="campaign-content">
