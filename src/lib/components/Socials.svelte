@@ -1,4 +1,4 @@
-<script type="ts">
+<script lang="ts">
 	import TikTok from '$lib/components/icons/tiktok.svelte'
 	import Instagram from '$lib/components/icons/instagram.svelte'
 	import Facebook from '$lib/components/icons/facebook.svelte'

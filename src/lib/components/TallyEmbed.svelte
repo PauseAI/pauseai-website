@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { onMount } from 'svelte'
+	import { SvelteURLSearchParams } from 'svelte/reactivity'
 
 	// ─── REQUIRED ────────────────────────────────────────────────────────
 
@@ -30,10 +31,10 @@
 		? `${customDomain.replace(/\/+$/, '')}/${formId}`
 		: `https://tally.so/embed/${formId}`
 
-	let urlParams = new URLSearchParams()
+	let urlParams = new SvelteURLSearchParams()
 
 	$: {
-		urlParams = new URLSearchParams()
+		urlParams = new SvelteURLSearchParams()
 
 		if (alignLeft) urlParams.set('alignLeft', '1')
 		if (hideTitle) urlParams.set('hideTitle', '1')

@@ -19,17 +19,17 @@
 
 <nav class:inverted-header={inverted} bind:this={nav}>
 	<div class="logo-container">
-		<div class="compensate-min-space-between" />
-		<div class="compensate-offset" />
+		<div class="compensate-min-space-between"></div>
+		<div class="compensate-offset"></div>
 		<Link href="/" class="logo">
 			<Logo animate={logo_animate} {inverted} />
 		</Link>
-		<div class="min-space-between" />
-		<div class="space-between" />
+		<div class="min-space-between"></div>
+		<div class="space-between"></div>
 	</div>
 
 	<div class="nav-links">
-		<slot />
+		<slot></slot>
 	</div>
 </nav>
 

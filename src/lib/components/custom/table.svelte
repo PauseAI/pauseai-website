@@ -1,7 +1,7 @@
 <div class="table-container">
 	<div class="table-border">
 		<table>
-			<slot />
+			<slot></slot>
 		</table>
 	</div>
 </div>

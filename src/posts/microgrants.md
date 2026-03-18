@@ -63,4 +63,4 @@ Here are some examples of projects we might fund:
 
 ## Apply
 
-<iframe class="airtable-embed" src="https://airtable.com/embed/appWPTGqZmUcs3NWu/pagZEn4i6lgq9wnwh/form?layout=responsive" frameborder="0" onmousewheel="" width="100%" height="533" style="background: transparent; border: 1px solid #ccc;"></iframe>
+<iframe class="airtable-embed" src="https://airtable.com/embed/appWPTGqZmUcs3NWu/pagZEn4i6lgq9wnwh/form?layout=responsive" frameborder="0" width="100%" height="533" style="background: transparent; border: 1px solid #ccc;"></iframe>

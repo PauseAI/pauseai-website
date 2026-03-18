@@ -17,17 +17,17 @@
 <PreloadFonts urls={[robotoSlabLatin700]} />
 
 <PostMeta {title} {description} />
-<div style="height: 4rem;" />
+<div style="height: 4rem;"></div>
 
 <LatestNews />
-<div class="divider" />
+<div class="divider"></div>
 <QuotesCarousel />
-<div class="divider" />
+<div class="divider"></div>
 
 <Stats />
-<div class="divider" />
+<div class="divider"></div>
 <PressLogos />
-<div class="divider" />
+<div class="divider"></div>
 <section>
 	<Block linkText={m.home_risks_c2a()} href="/risks">
 		<!-- eslint-disable-next-line svelte/no-at-html-tags -- static content -->

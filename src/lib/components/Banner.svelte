@@ -66,7 +66,7 @@
 {#if !hidden}
 	<div class="banner" class:contrast transition:fade={{ duration: 200 }}>
 		<span class="content">
-			<slot />
+			<slot></slot>
 		</span>
 
 		<!-- Simple button with minimal attributes -->

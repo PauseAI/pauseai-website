@@ -14,7 +14,7 @@
 			<Socials />
 		</div>
 	</div>
-	<div class="bar" />
+	<div class="bar"></div>
 	<div class="footer-links">
 		<div class="column">
 			<h2>{m.footer_info()}</h2>
