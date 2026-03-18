@@ -11,7 +11,7 @@ import { fetchAndDisplayBilling, formatLlmErrorForLogging } from './llm-utils'
 // Default values for LLM client configuration
 export const LLM_DEFAULTS = {
 	BASE_URL: 'https://openrouter.ai/api/v1/',
-	MODEL: 'meta-llama/llama-3.1-405b-instruct',
+	MODEL: 'meta-llama/llama-3.3-70b-instruct',
 	PROVIDERS: ['Fireworks'],
 	REQUESTS_PER_SECOND: 1
 }

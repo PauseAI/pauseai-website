@@ -15,17 +15,17 @@ type ModelConfig = {
 type ModelName = (typeof MODELS)[keyof typeof MODELS]
 
 const MODELS = {
-	LLAMA_3_1: 'meta-llama/llama-3.1-405b-instruct'
+	LLAMA_3_3: 'meta-llama/llama-3.3-70b-instruct'
 }
 
 /**
  * Model configuration with pricing and estimation parameters
- * Pricing updated June 2025 based on actual usage data
+ * Pricing based on OpenRouter rates: $0.10/M in, $0.32/M out
  */
 export const MODEL_CONFIGS: Record<ModelName, ModelConfig> = {
-	[MODELS.LLAMA_3_1]: {
-		// Cost per 1000 words of content (based on actual usage: ~$0.70 for 92.36k words)
-		COST_PER_1000_WORDS: 0.0076,
+	[MODELS.LLAMA_3_3]: {
+		// Cost per 1000 words (~1333 tokens), weighted avg of in+out pricing
+		COST_PER_1000_WORDS: 0.0004,
 		// Fixed word overhead for prompt instructions
 		PROMPT_OVERHEAD_WORDS: 300,
 		// Markdown formatting overhead (percentage of content words)
@@ -37,7 +37,7 @@ export const MODEL_CONFIGS: Record<ModelName, ModelConfig> = {
 }
 
 // Default to the model specified in llm-client.ts
-const DEFAULT_MODEL = MODELS.LLAMA_3_1
+const DEFAULT_MODEL = MODELS.LLAMA_3_3
 
 // Type definitions for statistics collection
 export type Stats = {
