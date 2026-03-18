@@ -40,7 +40,7 @@ const WORK_DIR = path.join(L10N_CAGE_DIR, 'work')
 const TODO_PATH = path.join(WORK_DIR, 'todo.json')
 
 const DEFAULT_SPEND_LOCAL = 0.1
-const DEFAULT_SPEND_CI = 3.0
+const DEFAULT_SPEND_CI = 0.5
 
 // --- File I/O ---
 
