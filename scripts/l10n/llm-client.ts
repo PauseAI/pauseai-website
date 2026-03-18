@@ -11,7 +11,7 @@ import { fetchAndDisplayBilling, formatLlmErrorForLogging } from './llm-utils'
 // Default values for LLM client configuration
 export const LLM_DEFAULTS = {
 	BASE_URL: 'https://openrouter.ai/api/v1/',
-	MODEL: 'meta-llama/llama-3.1-405b-instruct',
+	MODEL: 'meta-llama/llama-3.3-70b-instruct',
 	PROVIDERS: ['Fireworks'],
 	REQUESTS_PER_SECOND: 1
 }
@@ -151,7 +151,20 @@ export async function postChatCompletion(
 				throwOnTimeout: true
 			}
 		)
-		return response.data.choices[0].message.content
+		if (!response.data.choices?.length) {
+			throw new Error(`LLM returned no choices: ${JSON.stringify(response.data)}`)
+		}
+		const choice = response.data.choices[0]
+		const finishReason = (choice as Record<string, unknown>).finish_reason
+		if (finishReason && finishReason !== 'stop') {
+			throw new Error(
+				`LLM response incomplete (finish_reason: ${finishReason}). Output may be truncated or filtered.`
+			)
+		}
+		if (!choice.message.content) {
+			throw new Error(`LLM returned empty content`)
+		}
+		return choice.message.content
 	} catch (error) {
 		if (!isAxiosError<OpenRouterError, CompletionPayload>(error)) throw error
 

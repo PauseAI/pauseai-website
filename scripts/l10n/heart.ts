@@ -12,7 +12,8 @@ import type { L10nPromptGenerator, ReviewPromptGenerator } from './prompts'
 import { postChatCompletion } from './llm-client'
 import { getCommitMessage } from './git-ops'
 import { preprocessMarkdown, postprocessMarkdown, placeInCage } from './utils'
-import { trackL10n, type Stats } from './dry-run'
+import { countWords, estimateItemCost, trackL10n, type Stats } from './dry-run'
+import type { WorkItem } from './work-plan'
 import type { AxiosInstance } from 'axios'
 
 /**
@@ -46,6 +47,10 @@ export interface Options {
 	dryRunStats: Stats
 	/** List of files to force re-l10n (ignore cache) */
 	forceFiles: string[]
+	/** When set, collect work items instead of calling LLM (plan generation mode) */
+	workItems?: WorkItem[]
+	/** Model name for cost estimation */
+	modelName?: string
 }
 
 /**
@@ -92,7 +97,11 @@ export async function l10nFromLLM(
 	}
 
 	// Regular API-based l10n for non-dry-run mode
+	const fileLabel = filePath ? ` for ${path.basename(filePath)}` : ''
+
 	// First pass: generate initial l10n
+	if (options.verbose) console.log(`First pass prompt to ${languageName}${fileLabel}:`, l10nPrompt)
+
 	const firstPass = await postChatCompletion(options.llmClient, options.requestQueue, [
 		{ role: 'user', content: l10nPrompt }
 	])
@@ -100,16 +109,15 @@ export async function l10nFromLLM(
 	if (!firstPass) throw new Error(`L10n to ${languageName} failed`)
 
 	if (options.verbose) {
-		console.log('First prompt: ', l10nPrompt)
-		console.log('First pass response:', firstPass)
+		console.log(`First pass response:`, firstPass)
 	} else {
-		console.log(
-			`Completed first pass l10n to ${languageName}${filePath ? ` for ${path.basename(filePath)}` : ''}`
-		)
+		console.log(`Completed first pass l10n to ${languageName}${fileLabel}`)
 	}
 
 	// Second pass: review and refine l10n with context
 	const reviewPrompt = reviewPromptGenerator(languageName)
+	if (options.verbose) console.log(`Review prompt to ${languageName}${fileLabel}:`, reviewPrompt)
+
 	const reviewed = await postChatCompletion(options.llmClient, options.requestQueue, [
 		{ role: 'user', content: l10nPrompt },
 		{ role: 'assistant', content: firstPass },
@@ -119,12 +127,9 @@ export async function l10nFromLLM(
 	if (!reviewed) throw new Error(`Review of ${languageName} l10n failed`)
 
 	if (options.verbose) {
-		console.log('Review prompt: ', reviewPrompt)
-		console.log('Review pass response:', reviewed)
+		console.log(`Review pass response:`, reviewed)
 	} else {
-		console.log(
-			`Completed review pass l10n to ${languageName}${filePath ? ` for ${path.basename(filePath)}` : ''}`
-		)
+		console.log(`Completed review pass l10n to ${languageName}${fileLabel}`)
 	}
 
 	return reviewed
@@ -230,101 +235,117 @@ export async function retrieve(
 	let total = 0
 	let cacheCount = 0
 
-	await Promise.all(
-		params.sourcePaths.map(async (sourcePath) => {
-			/** Backslash to forward slash to match Git log and for web path */
-			const processedSourcePath = path.relative('.', sourcePath).replaceAll(/\\/g, '/')
-			await Promise.all(
-				params.locales.map(async (locale) => {
-					const targetPath = params.locateTarget(locale, sourcePath)
-					let useCachedL10n = false
-					let fileExists = false
-
-					// Check if this file is being forced (skip cache)
-					const sourceFileName = path.basename(sourcePath)
-					const isForced = options.forceFiles.includes(sourceFileName)
-
-					// Check if target file exists (needed for commit messages)
-					if (fsSync.existsSync(targetPath)) {
-						fileExists = true
-					}
-
-					if (isForced) {
-						if (options.verbose) {
-							log(`🔄 Force mode: Skipping cache for ${sourceFileName}`)
-						}
-					}
-
-					// Check if we can use the cached l10n (unless forced)
-					if (!isForced && fileExists) {
-						const sourceLatestCommitDate = options.websiteLatestCommitDates.get(processedSourcePath)
-						if (!sourceLatestCommitDate) {
-							log(
-								`Didn't prepare latest commit date for ${processedSourcePath}, use Cached version`
-							)
-							useCachedL10n = true
-							cacheCount++ // PATCH: Count uncommitted files as cached
-						} else {
-							// Only compare dates if source has a commit date
-							const cageRelativePath = path
-								.relative(params.cageWorkingDir, targetPath)
-								.replaceAll(/\\/g, '/')
-							const cageLatestCommitDate = options.cageLatestCommitDates.get(cageRelativePath)
-							if (!cageLatestCommitDate)
-								throw new Error(`Didn't prepare latest commit date for ${targetPath}`)
-							if (cageLatestCommitDate > sourceLatestCommitDate) {
-								useCachedL10n = true
-								cacheCount++
-							}
-						}
-					}
-
-					// If we can't use cache, generate a new l10n
-					if (!useCachedL10n) {
-						total++
-						const content = await fs.readFile(sourcePath, 'utf-8')
-						const processedContent = preprocessMarkdown(content)
-
-						if (options.verbose) {
-							log(processedContent)
-						}
-
-						const promptAdditions = '' // Will be handled by the prompt generator
-
-						const capturedL10n = await l10nFromLLM(
-							processedContent,
-							params.l10nPromptGenerator,
-							params.reviewPromptGenerator,
-							locale,
-							promptAdditions,
-							options,
-							sourcePath
-						)
-
-						// Only perform actual file writes and Git operations in non-dry run mode
-						if (!options.isDryRun) {
-							const groomedL10n = postprocessMarkdown(processedContent, capturedL10n)
-							await placeInCage(targetPath, groomedL10n)
-
-							const message = getCommitMessage(sourceFileName, locale, fileExists)
-							try {
-								await options.gitQueue.add(() =>
-									(fileExists ? options.cageGit : options.cageGit.add('.')).commit(message, ['-a'])
-								)
-							} catch (e) {
-								if (e instanceof Error && e.message.includes('nothing to commit')) {
-									log(`${sourceFileName} in ${locale} didn't change`)
-								} else {
-									throw e
-								}
-							}
-							log(`${message} (${done++} / ${total})`)
-						}
-					}
-				})
-			)
-		})
+	const BATCH_SIZE = 5
+	const taskPairs = params.sourcePaths.flatMap((sourcePath) =>
+		params.locales.map((locale) => ({ sourcePath, locale }))
 	)
+
+	for (let i = 0; i < taskPairs.length; i += BATCH_SIZE) {
+		const batch = taskPairs.slice(i, i + BATCH_SIZE)
+		await Promise.all(
+			batch.map(async ({ sourcePath, locale }) => {
+				/** Backslash to forward slash to match Git log and for web path */
+				const processedSourcePath = path.relative('.', sourcePath).replaceAll(/\\/g, '/')
+				const targetPath = params.locateTarget(locale, sourcePath)
+				let useCachedL10n = false
+				let fileExists = false
+
+				// Check if this file is being forced (skip cache)
+				const sourceFileName = path.basename(sourcePath)
+				const isForced = options.forceFiles.includes(sourceFileName)
+
+				// Check if target file exists (needed for commit messages)
+				if (fsSync.existsSync(targetPath)) {
+					fileExists = true
+				}
+
+				if (isForced) {
+					if (options.verbose) {
+						log(`🔄 Force mode: Skipping cache for ${sourceFileName}`)
+					}
+				}
+
+				// Check if we can use the cached l10n (unless forced)
+				if (!isForced && fileExists) {
+					const sourceLatestCommitDate = options.websiteLatestCommitDates.get(processedSourcePath)
+					if (!sourceLatestCommitDate) {
+						log(`Didn't prepare latest commit date for ${processedSourcePath}, use Cached version`)
+						useCachedL10n = true
+						cacheCount++ // PATCH: Count uncommitted files as cached
+					} else {
+						// Only compare dates if source has a commit date
+						const cageRelativePath = path
+							.relative(params.cageWorkingDir, targetPath)
+							.replaceAll(/\\/g, '/')
+						const cageLatestCommitDate = options.cageLatestCommitDates.get(cageRelativePath)
+						if (!cageLatestCommitDate)
+							throw new Error(`Didn't prepare latest commit date for ${targetPath}`)
+						if (cageLatestCommitDate > sourceLatestCommitDate) {
+							useCachedL10n = true
+							cacheCount++
+						}
+					}
+				}
+
+				// If we can't use cache, this item needs work
+				if (!useCachedL10n) {
+					total++
+					const content = await fs.readFile(sourcePath, 'utf-8')
+					const processedContent = preprocessMarkdown(content)
+
+					// Plan generation mode: collect work item, skip LLM
+					if (options.workItems) {
+						const words = countWords(processedContent)
+						const { estimatedCost } = estimateItemCost(words, options.modelName)
+						options.workItems.push({
+							source: processedSourcePath,
+							locale,
+							reason: isForced ? 'forced' : fileExists ? 'outdated' : 'new',
+							estimatedCost,
+							contentWords: words
+						})
+						return
+					}
+
+					if (options.verbose) {
+						log(processedContent)
+					}
+
+					const promptAdditions = '' // Will be handled by the prompt generator
+
+					const capturedL10n = await l10nFromLLM(
+						processedContent,
+						params.l10nPromptGenerator,
+						params.reviewPromptGenerator,
+						locale,
+						promptAdditions,
+						options,
+						sourcePath
+					)
+
+					// Only perform actual file writes and Git operations in non-dry run mode
+					if (!options.isDryRun) {
+						const groomedL10n = postprocessMarkdown(processedContent, capturedL10n)
+						await placeInCage(targetPath, groomedL10n)
+
+						const message = getCommitMessage(sourceFileName, locale, fileExists)
+						try {
+							await options.gitQueue.add(() =>
+								(fileExists ? options.cageGit : options.cageGit.add('.')).commit(message, ['-a'])
+							)
+						} catch (e) {
+							if (e instanceof Error && e.message.includes('nothing to commit')) {
+								log(`${sourceFileName} in ${locale} didn't change`)
+							} else {
+								throw e
+							}
+						}
+						log(`${message} (${done++} / ${total})`)
+					}
+				}
+			})
+		)
+	}
 
 	// Total count of processed files is the count of source files multiplied by target languages
 	const totalProcessed = params.sourcePaths.length * params.locales.length
