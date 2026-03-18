@@ -3,36 +3,64 @@ title: PauseAI MicroGrants
 description: Our community fund to support projects that align with our mission.
 ---
 
-We have a huge list of projects that our community is working on.
-There's so much to do.
-And sometimes we need funds to be more effective.
-But getting funding can be a hassle - especially if you've never applied to a grant.
+We have a huge list of projects that our community is working on. There's so much to do. And sometimes we need funds to be more effective.
 
-This is where PauseAI MicroGrants come in handy!
-Small amounts of money (typically under 2000 EUR) for working on a project.
-We're pretty open about what types of projects could apply, as long as they align with our mission of mitigating catastrophic risks from AI.
+But getting funding can be a hassle — especially if you've never applied for a grant.
 
-Here's a list of examples:
+This is where PauseAI MicroGrants come in handy! Small grants (typically under €2,000) to fund a specific project that advances our mission of mitigating catastrophic risks from AI.
 
-- **Organize an event** (location rental, food & drinks)
-- **Make or promote videos** about why AI is dangerous or why we can pause it
-- **Work on a policy draft**, e.g. formalise our [proposal](/proposal)
-- **Perform market research**, e.g. a survey or message-testing study
-- **Write for media**, e.g. write an opinion piece for a national newspaper
+Here are some examples of projects we might fund:
+
+- **Organize an event** (venue rental, food & drinks, materials)
+- **Produce or promote videos** about AI risks or the case for pausing
+- **Develop a policy draft**, e.g. formalizing our [proposal](/proposal)
+- **Conduct research**, e.g. a survey or message-testing study
+- **Write for media**, e.g. an opinion piece for a national newspaper
 - **Set up a new organization** that aligns with our mission
 
-## Limitations
+## Criteria and Rules
 
-- Do note that since we are a charity, we cannot provide a salary through this program.
-- Your project and its benefits to society should stand on its own - it is not a project for the benefit of PauseAI.
-- If you're planning on growing the PauseAI community by doing typical volunteer work, consider applying for a [volunteer stipend](/volunteer-stipends) instead.
+### Purpose and Scope
 
-## The process
+- MicroGrants are one-off grants from PauseAI Global's budget to fund **specific projects with defined deliverables and a clear end date.**
+- They are not intended to compensate ongoing regular work for PauseAI. If you are looking for support for sustained volunteering, see our [Volunteer Stipend](/volunteer-stipends) program. If your proposal is effectively ongoing work rather than a bounded project, we may discuss a contractor arrangement instead.
+- Projects must directly relate to PauseAI Global's [mission](/proposal), [strategy](/theory-of-change), and activities.
 
-- Describe your project in the `#💪projects` channel on our Discord server. Tell about the idea, what you want to do, where you want help and what amount of money you need. Mention `@microgrants` to notify the microgrants team!
-- Fill in the [MicroGrants Template](https://docs.google.com/document/d/1oPXezImarCY7MCYaT-lJb-uLNbbQ76O1FYNr-WTS6hI/edit?usp=sharing) and send it to [joep@pauseai.info](mailto:joep@pauseai.info).
-- We reach out to you. Either a) we give an OK right away, b) we want to see some changes/questions answered or c) give you a no.
-- Be sure to do this at least one month before you need the funds. Give us some time to discuss this in the team, give feedback or ask for clarification. Especially if the request is on the higher side.
-- We'll send you a Memorandum of Understanding (MoU) that you need to sign.
-- Get to work!
-- Tell us when you're done, and we'll send you the grant. If you need the money upfront, we can discuss that option, but it should not be the default.
+### Eligibility Requirements
+
+- Applicants must have joined PauseAI via the official [Global webform](/join) and signed the volunteer agreement before applying.
+- Preference is given to volunteers with a demonstrated history of contributions to PauseAI.
+- Applicants who have previously received a microgrant cannot receive a second one if the deliverables of the first were not completed and reported.
+- Chapter applications require a signed Memorandum of Understanding.
+
+### Application Process
+
+1. Complete the application form below.
+2. The Organizing Director and CEO make final decisions on allocation. Someone may reach out for a call if the application needs clarification.
+3. Applicants will be informed of the decision within one month.
+4. **If approved, the recipient must sign a Grant Letter before any funds are disbursed.** The Grant Letter documents the grant's purpose, amount, expected deliverables, and timeline.
+
+### Payment
+
+- Payment is typically made as an advance after the Grant Letter is signed.
+- In some cases, reimbursement after project completion (with receipts) may be preferred.
+- The method will be agreed in the Grant Letter.
+
+### Strategic Allocation
+
+- Grants are typically under €2,000.
+- Allocation decisions are made in alignment with PauseAI Global's overall strategy and are subject to available funds and organizational priorities.
+- Funds may not be distributed evenly across regions or chapters.
+
+### Tax Responsibility
+
+**Grant recipients are solely responsible for understanding and meeting any tax obligations** that may apply to the grant in their country of residence. The Grant Letter will include an acknowledgment of this responsibility. PauseAI cannot provide tax advice.
+
+### Accountability and Reporting
+
+- Within one month of project completion, the recipient must submit a brief completion report and any relevant receipts.
+- Failure to comply will affect eligibility for future microgrants.
+
+## Apply
+
+<iframe class="airtable-embed" src="https://airtable.com/embed/appWPTGqZmUcs3NWu/pagZEn4i6lgq9wnwh/form?layout=responsive" frameborder="0" width="100%" height="533" style="background: transparent; border: 1px solid #ccc;"></iframe>

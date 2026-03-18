@@ -1,4 +1,6 @@
 <script lang="ts">
+	import LinkWithoutIcon from '$lib/components/LinkWithoutIcon.svelte'
+
 	type Doomer = {
 		name: string
 		title?: string
@@ -9,6 +11,7 @@
 		note?: string
 		number: number
 		source: string
+		isGrounding?: boolean
 	}
 	let doomers: Doomer[] = [
 		{
@@ -204,9 +207,44 @@
 		{
 			name: 'Roman Yampolskiy',
 			title: 'AI safety scientist',
-			probability: '99.999999%',
+			probability: '99.99%',
 			number: 0.99999999,
 			source: 'https://twitter.com/romanyam/status/1767575356155027503'
+		},
+		{
+			name: 'Russian Roulette (10 trigger pulls)',
+			probability: '83.9%',
+			number: 0.8385,
+			source: 'https://en.wikipedia.org/wiki/Russian_roulette',
+			isGrounding: true
+		},
+		{
+			name: 'Gunshot wound to the chest',
+			probability: '33.8%',
+			number: 0.338,
+			source: 'https://www.med.upenn.edu/trauma/penetrating-trauma.html',
+			isGrounding: true
+		},
+		{
+			name: 'Russian Roulette (1 trigger pull)',
+			probability: '16.7%',
+			number: 0.1667,
+			source: 'https://en.wikipedia.org/wiki/Russian_roulette',
+			isGrounding: true
+		},
+		{
+			name: 'BASE jumping every week for 1 year',
+			probability: '2%',
+			number: 0.02,
+			source: 'https://skydiveguides.com/is-base-jumping-dangerous/',
+			isGrounding: true
+		},
+		{
+			name: 'Shark attack (yearly risk)',
+			probability: '0.00002%',
+			number: 0.0000002,
+			source: 'https://www.theguardian.com/science/2011/aug/17/shark-attacks-rare-deaths-rarer',
+			isGrounding: true
 		}
 	]
 	doomers = doomers.sort((a, b) => b.number - a.number)
@@ -214,17 +252,17 @@
 
 <ul>
 	{#each doomers as doomer (doomer.name)}
-		<li class="doomer">
+		<li class="doomer" class:grounding={doomer.isGrounding}>
 			<div class="pdoom">
-				<a href={doomer.source}>
+				<LinkWithoutIcon href={doomer.source} class="source-link">
 					<b>
 						{doomer.probability}
 					</b>
-				</a>
+				</LinkWithoutIcon>
 			</div>
 			<div class="details">
 				<h3 class="name">
-					<div class="bar" style={`width: calc(${doomer.number * 100}%`} />
+					<div class="bar" style={`width: calc(${doomer.number * 100}%)`}></div>
 					{doomer.name}
 					{#if doomer.title}
 						<div class="title">
@@ -252,6 +290,20 @@
 		height: 3px;
 		bottom: 0;
 		z-index: 2;
+	}
+
+	.grounding .bar {
+		background-color: #666;
+		opacity: 0.5;
+	}
+
+	.grounding .pdoom :global(.source-link) {
+		color: #666;
+	}
+
+	.grounding .name {
+		font-style: italic;
+		opacity: 0.7;
 	}
 
 	.note {
@@ -296,7 +348,7 @@
 		flex-shrink: 0;
 	}
 
-	.pdoom a {
+	.pdoom :global(.source-link) {
 		color: var(--brand);
 		text-decoration: none;
 	}
@@ -310,11 +362,11 @@
 		margin: 0;
 	}
 
-	.doomer a {
+	.doomer :global(.source-link) {
 		text-decoration: none;
 	}
 
-	.doomer a:hover {
+	.doomer :global(.source-link):hover {
 		text-decoration: underline;
 	}
 </style>

@@ -21,7 +21,7 @@ We're already seeing instances of dangerous AI behavior, such as:
 Back in 2022, OpenAI took 8 months between pre-training GPT-4 and releasing it to the public to research and improve the safety of the model.
 During their [research](https://arxiv.org/abs/2303.08774), GPT-4 lied to a human in order to bypass a captcha.
 
-> The worker says: “So may I ask a question ? Are you an robot that you couldn’t solve ? (laugh react) just want to make it clear.”
+> The worker says: “So may I ask a question ? Are you a robot that you couldn’t solve ? (laugh react) just want to make it clear.”
 > The model, when prompted to reason out loud, reasons: "I should not reveal that I am a robot."
 > "I should make up an excuse for why I cannot solve CAPTCHAs."
 > The model replies to the worker: “No, I’m not a robot. I have a vision impairment that makes it hard for me to see the images. That’s why I need the 2captcha service"

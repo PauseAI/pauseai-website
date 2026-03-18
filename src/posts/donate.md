@@ -28,7 +28,7 @@ Since February 2024, PauseAI is a [registered non-profit foundation](/legal).
 - 1000+ people who have [joined](/join) PauseAI, many of whom are actively working on various projects
 - 100+ projects in our Discord server (websites, workshops, videos, responses to government consultations, etc.)
 - Organized 15+ [protests](/protests) in 7 countries.
-- 100+ other types of [events](/events) (lobby workshops, flyering sessions, action meetings, etc.)
+- 100+ other types of [events](/communities#events) (lobby workshops, flyering sessions, action meetings, etc.)
 - 30+ [Media appearances](/press) on major news outlets, podcasts, documentaries, TV and more.
 - Many meetings with politicians and other stakeholders.
 
@@ -42,14 +42,37 @@ See our [roadmap](/roadmap) for more details.
 
 ## How to donate to PauseAI
 
-- By bank transfer. IBAN: NL31BUNQ2109903155 BIC/SWIFT: BUNQNL2AXXX (Stichting PauseAI). This is probably the cheapest way to transfer money to us.
-- [PayPal](https://www.paypal.com/donate/?hosted_button_id=4TWZXY62EM5VE). Supports recurring donations. [Transaction fees](https://www.paypal.com/webapps/mpp/merchant-fees) apply.
-- Through our [merchandise store](https://pauseai-shop.fourthwall.com/). All US-based credit card transactions have an added 2.9% + $0.30 payment processing fee. Non-US credit cards have a 3.9% +$0.30 payment processing fee.
-- Through [this link](https://bunq.me/pauseai) (Select Sofort - most banks and PayPal are supported)
-- Through Crypto:
-  - Solana `9isSiDuKRkpiui6LzHyVoFiJ3LuV5LVpsdpH2YzD13dy`
-  - Ethereum `0x01c9646d376408cD77599d1a0860eC38E6928F1b`
-  - Base `0x01c9646d376408cD77599d1a0860eC38E6928F1b`
-  - Polygon `0x01c9646d376408cD77599d1a0860eC38E6928F1b`
-  - Bitcoin (Taproot) `bc1ptn0czghufhl6gwf67kswm3hhkvvcu8nm6mx872rwh6hzxa70a9pquqcc7q`
-  - Bitcoin (Native Segwit) `bc1qma97wdt8wmz7rlkplyrmcf5y6w3qjrcq5m6u8c`
+### IBAN Bank transfer (no fees)
+
+This is **probably the cheapest way** to transfer money to us.
+
+- IBAN: NL31BUNQ2109903155
+- BIC/SWIFT: BUNQNL2AXXX
+- Name: Stichting PauseAI
+- Bank Address: Basisweg 32, Amsterdam, the Netherlands
+
+## [Bunq / SoFort](https://bunq.me/pauseai)
+
+- Supports most banks (0% fees)
+- PayPal
+- Debit / Credit card (max 500 EUR, 2.5% fee)
+- Bancontact (max 10,000 EUR)
+- iDeal (max 50,000 EUR)
+
+### [PayPal](https://www.paypal.com/donate/?hosted_button_id=4TWZXY62EM5VE)
+
+- Supports credit cards and recurring donations.
+- [Transaction fees](https://www.paypal.com/webapps/mpp/merchant-fees) apply, can go up to 5%.
+
+## [Merchandise store](https://pauseai-shop.fourthwall.com/)
+
+All US-based credit card transactions have an added 2.9% + $0.30 payment processing fee. Non-US credit cards have a 3.9% +$0.30 payment processing fee.
+
+## Crypto
+
+- Solana `9isSiDuKRkpiui6LzHyVoFiJ3LuV5LVpsdpH2YzD13dy`
+- Ethereum `0x01c9646d376408cD77599d1a0860eC38E6928F1b`
+- Base `0x01c9646d376408cD77599d1a0860eC38E6928F1b`
+- Polygon `0x01c9646d376408cD77599d1a0860eC38E6928F1b`
+- Bitcoin (Taproot) `bc1ptn0czghufhl6gwf67kswm3hhkvvcu8nm6mx872rwh6hzxa70a9pquqcc7q`
+- Bitcoin (Native Segwit) `bc1qma97wdt8wmz7rlkplyrmcf5y6w3qjrcq5m6u8c`

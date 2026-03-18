@@ -53,9 +53,7 @@ function recordToPerson(record: any): Person {
 const AIRTABLE_FILTER = `{Title} != ""`
 
 const filter = (p: Person) => {
-	return (
-		!p.privacy && p.checked && p.title?.trim() !== '' && p.title !== defaultTitle && !p.duplicate
-	)
+	return p.checked && p.title?.trim() !== '' && p.title !== defaultTitle && !p.duplicate
 }
 
 const getGroupKey = (order: number | undefined): string => {
@@ -63,11 +61,11 @@ const getGroupKey = (order: number | undefined): string => {
 	const personOrder = order || 999
 
 	if (personOrder <= 9) return 'Global Board'
-	if (personOrder >= 10 && personOrder <= 29) return 'Leadership Team'
-	if (personOrder >= 30) return 'National Chapters'
+	if (personOrder >= 10 && personOrder <= 29) return 'Executive Team'
+	if (personOrder >= 30) return 'National Leaders'
 
 	// Fallback for missing/unassigned order (999 default)
-	return 'National Chapter Leads'
+	return 'National Leaders'
 }
 
 export async function GET({ fetch, setHeaders }) {
@@ -107,6 +105,16 @@ export async function GET({ fetch, setHeaders }) {
 
 				// Secondary sort: alphabetical by name
 				return a.name.localeCompare(b.name)
+			})
+			.map((p) => {
+				if (p.privacy) {
+					return {
+						...p,
+						name: p.name.split(' ')[0],
+						image: undefined
+					}
+				}
+				return p
 			})
 
 		const groupedOut: AboutApiResponse = sortedPeople.reduce(

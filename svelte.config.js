@@ -3,12 +3,13 @@
 
 import adapterNetlify from '@sveltejs/adapter-netlify'
 import { vitePreprocess } from '@sveltejs/vite-plugin-svelte'
-
 import { mdsvex } from 'mdsvex'
-import remarkUnwrapImages from 'remark-unwrap-images'
-import remarkToc from 'remark-toc'
-import remarkHeadingId from 'remark-heading-id'
+import { dirname } from 'node:path'
+import { fileURLToPath } from 'node:url'
 import rehypeSlug from 'rehype-slug'
+import remarkHeadingId from 'remark-heading-id'
+import remarkToc from 'remark-toc'
+import remarkUnwrapImages from 'remark-unwrap-images'
 
 import settings from './project.inlang/settings.json' with { type: 'json' }
 
@@ -19,26 +20,29 @@ export const USE_EDGE_FUNCTIONS = true
 const mdsvexOptions = {
 	extensions: ['.md'],
 	layout: {
-		_: './src/mdsvex.svelte'
+		_: dirname(fileURLToPath(import.meta.url)) + '/src/mdsvex.svelte'
 	},
 	remarkPlugins: [remarkUnwrapImages, [remarkToc, { tight: true }], remarkHeadingId],
 	rehypePlugins: [rehypeSlug]
 }
 
+/** @type {[string, ((warning: import('@sveltejs/kit').Warning) => boolean) | undefined][]} */
+const skipWarnings = [
+	['a11y_missing_attribute', (warning) => warning.message.includes('title')], // Skip warnings about missing title attributes on iframes
+	['a11y_no_noninteractive_tabindex'] // Skip warnings about tabindex on non-interactive elements (like iframes)
+]
+
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
 	extensions: ['.svelte', '.md'],
-	preprocess: [vitePreprocess(), mdsvex(mdsvexOptions)],
+	preprocess: [vitePreprocess({ script: true }), mdsvex(mdsvexOptions)],
 	// Custom warning handler to selectively filter out specific a11y warnings
 	onwarn(warning, handler) {
 		// Skip specific accessibility warnings
-		if (warning.code === 'a11y-missing-attribute' && warning.message.includes('title')) {
-			// Skip warnings about missing title attributes on iframes
-			return
-		}
-		if (warning.code === 'a11y-no-noninteractive-tabindex') {
-			// Skip warnings about tabindex on non-interactive elements (like iframes)
-			return
+		for (const [code, filter] of skipWarnings) {
+			if (warning.code === code && (!filter || filter(warning))) {
+				return
+			}
 		}
 		// Call the default handler for all other warnings
 		handler(warning)
@@ -54,6 +58,8 @@ const config = {
 		prerender: {
 			// Allows dead links to be rendered
 			handleHttpError: 'warn',
+			// Handle missing anchor IDs by warning instead of failing
+			handleMissingId: 'warn',
 			entries: ['*'].concat(settings.locales.map((locale) => '/' + locale))
 		}
 	}

@@ -15,17 +15,20 @@
 	import toast from 'svelte-french-toast'
 	import Link from '$lib/components/Link.svelte'
 	import Card from '$lib/components/Card.svelte'
-	import { type ComponentType } from 'svelte'
+	import { type Component } from 'svelte'
 
 	const { title, description, date } = meta
-
-	let name = ''
 
 	const letterId = 'letter'
 
 	function copyHTMLWithoutStyles() {
 		var element = document.getElementById(letterId)
 		var clonedElement = element?.cloneNode(true) as HTMLElement
+
+		// Check for unreplaced placeholders
+		const content = element?.textContent || ''
+		const placeholders = content.match(/__[A-Z\s]+__/g)
+
 		clipboard
 			.write([
 				new clipboard.ClipboardItem({
@@ -33,7 +36,17 @@
 				})
 			])
 			.then(() => {
-				toast.success('Letter copied to clipboard!')
+				if (placeholders && placeholders.length > 0) {
+					const uniquePlaceholders = [...new Set(placeholders)]
+					toast.error(
+						`Letter copied, but ${uniquePlaceholders.length} placeholder(s) still need to be replaced: ${uniquePlaceholders.join(', ')}`,
+						{
+							duration: 5000
+						}
+					)
+				} else {
+					toast.success('Letter copied to clipboard!')
+				}
 			})
 			.catch((err) => {
 				window.alert(`Failed to copy: ${err}`)
@@ -79,7 +92,28 @@
 
 	type Section = {
 		name: string
-		section: ComponentType
+		section: Component
+	}
+
+	function handleClick(event: MouseEvent) {
+		const target = event.target as HTMLElement
+		const anchor = target.closest('a')
+
+		if (anchor) {
+			event.preventDefault()
+			window.open(anchor.href, '_blank')
+		}
+	}
+
+	function handleKeydown(event: KeyboardEvent) {
+		if (event.key === 'Enter') {
+			const target = event.target as HTMLElement
+			const anchor = target.closest('a')
+			if (anchor) {
+				event.preventDefault()
+				window.open(anchor.href, '_blank')
+			}
+		}
 	}
 </script>
 
@@ -137,9 +171,6 @@
 			>Find their email address</Link
 		>.
 	</li>
-	<li>
-		<b>Enter their name:</b> <input bind:value={name} placeholder="Name of person" />
-	</li>
 </ul>
 
 <h2>Pick a concern</h2>
@@ -184,8 +215,9 @@
 
 <h2>Last steps</h2>
 <p>
-	Before sending the email you have to manually replace "__THING__" and "__COUNTRY__". It can also
-	be effective to further personalize the message. Here are some tips:
+	Before sending the email you need to manually replace the placeholders "__NAME__", "__THING__",
+	"__COUNTRY__" and "__YOUR NAME__". It can also be effective to further personalize the message.
+	Here are some tips:
 </p>
 <ul>
 	<li>
@@ -207,12 +239,22 @@
 	>.
 </p>
 
+<!-- eslint-disable svelte/no-restricted-html-elements -- 
+ No link l10n needed, Link component messes up the rich text -->
+
 <h2>Result</h2>
 <p>You can edit the message directly in the browser.</p>
 <div>
 	<Card className="letter">
-		<div id={letterId} contenteditable="true">
-			<p>Dear {name || '__ENTER_NAME__'},</p>
+		<div
+			id={letterId}
+			contenteditable="true"
+			on:click={handleClick}
+			on:keydown={handleKeydown}
+			role="document"
+			tabindex="-1"
+		>
+			<p>Dear __NAME__,</p>
 			<p>
 				First of all, thank you very much for everything you have done for __THING__. I am emailing
 				you today to bring an issue to your attention, in which I believe __COUNTRY__ and you in
@@ -228,44 +270,39 @@
 				<a href="https://www.metaculus.com/questions/3479/date-weakly-general-ai-is-publicly-known"
 					>estimated</a
 				>
-				that an AI would pass university entrance exams by 2050. This goal was achieved in March 2023
-				by the system GPT-4 from OpenAI. These massive, unexpected leaps have prompted many experts to
-				request a pause in AI development through an open letter to major AI companies. The
-				<a href="https://futureoflife.org/open-letter/pause-giant-ai-experiments/">letter</a>
-				has been signed over 33,000 times so far, including many AI researchers and tech figures.
-			</p>
-
-			<p>
-				Unfortunately, it seems that companies are not willing to jeopardise their competitive
-				position by voluntarily halting development. A pause would need to be imposed by a
-				government. Luckily, there seems to be broad support for slowing down AI development. A
-				recent
+				that an AI would pass university entrance exams by 2050. This goal was achieved in March 2023.
+				Now, AI is already writing
+				<a href="https://www.youtube.com/watch?t=1042&v=wUOjTR1511M&feature=youtu.be">up to 90%</a>
+				of the code at AI companies. At some point, possibly in the near future, AI will be able to directly
+				build more powerful AI, leading to a rapid increase in AI capabilities. Thousands of experts have
+				<a href="https://futureoflife.org/open-letter/pause-giant-ai-experiments/"
+					>called for a pause</a
+				>
+				in frontier AI development, and there seems to be broad support for slowing down AI development
+				among the public, too. A
 				<a
 					href="https://www.vox.com/future-perfect/2023/9/19/23879648/americans-artificial-general-intelligence-ai-policy-poll"
 					>poll</a
 				>
 				indicates that 63% of American support regulations to prevent AI companies from building superintelligent
-				AI. At the national level, a pause is also challenging because countries have incentives to not
-				fall behind in AI capabilities. That's why we need an international solution.
+				AI. Over 100.000 people (including the most cited AI researchers) have signed a
+				<a href="https://superintelligence-statement.org/"
+					>statement on banning the development of superintelligence</a
+				>.
 			</p>
 
 			<p>
-				The UK organised an AI Safety Summit on November 1st and 2nd at Bletchley Park. We hoped
-				that during this summit, leaders will work towards sensible solutions that prevent the very
-				worst of the risks that AI poses. The Summit did not lead to any international agreement or
-				policy. We have seen proposals being written by the
-				<a href="https://twitter.com/SenBlumenthal/status/1700147410880569475">US Senate</a>, and
-				even among AI company CEOs, there is
+				Even among AI company CEOs, there is
 				<a
 					href="https://www.pbs.org/newshour/politics/watch-overwhelming-consensus-for-artificial-intelligence-regulation-musk-says-after-senate-tech-meeting"
 					>“overwhelming consensus”</a
 				>
-				that regulation is needed. Unfortunately,
-				<a href="https://twitter.com/DanielColson6/status/1704976418596352342">none</a>
-				of the existing proposals would do anything to slow down or prevent a superintelligent AI from
-				being created. We cannot expect that individual countries implement regulations that would slow
-				down AI development, as the incentives to race ahead are too high. We need international coordination,
-				we need politicians to initialize treaty negotiations.
+				that regulation is needed, but it seems that companies are not willing to jeopardise their competitive
+				position by voluntarily halting development. A pause would need to be imposed by a government.
+				Unfortunately, the race dynamics don't just apply to companies: countries also have incentives
+				to not fall behind in AI capabilities, and prioritize growth over safety. These dynamics are the
+				reason why we urgently need an international solution. We need international coordination, we
+				need politicians to initialize treaty negotiations.
 			</p>
 
 			<svelte:component this={selectedAction.section} />
@@ -329,13 +366,5 @@
 	.tag--selected:hover {
 		background-color: var(--brand-dark);
 		color: var(--bg);
-	}
-
-	input {
-		padding: 0.3rem 0.5rem;
-		border: var(--brand) 2px solid;
-		min-width: 8rem;
-		border-radius: 10px;
-		font-size: 0.8rem;
 	}
 </style>

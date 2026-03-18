@@ -1,12 +1,12 @@
 <script lang="ts">
-	import Logo from '$lib/components/logo.svelte'
 	import { page } from '$app/stores'
-	import { localizeHref } from '$lib/paraglide/runtime'
+	import Link from '$lib/components/Link.svelte'
+	import Logo from '$lib/components/logo.svelte'
 	import { emulateCqwIfNeeded } from '$lib/container-query-units'
+	import { localizeHref } from '$lib/paraglide/runtime'
 	import { onMount } from 'svelte'
 
 	export let inverted = false
-	export let moveUp = false
 
 	$: logo_animate = localizeHref($page.url.pathname) != '/'
 
@@ -17,19 +17,19 @@
 	})
 </script>
 
-<nav class:inverted-header={inverted} class:move-up={moveUp} bind:this={nav}>
+<nav class:inverted-header={inverted} bind:this={nav}>
 	<div class="logo-container">
-		<div class="compensate-min-space-between" />
-		<div class="compensate-offset" />
-		<a href="/" class="logo">
+		<div class="compensate-min-space-between"></div>
+		<div class="compensate-offset"></div>
+		<Link href="/" class="logo">
 			<Logo animate={logo_animate} {inverted} />
-		</a>
-		<div class="min-space-between" />
-		<div class="space-between" />
+		</Link>
+		<div class="min-space-between"></div>
+		<div class="space-between"></div>
 	</div>
 
 	<div class="nav-links">
-		<slot />
+		<slot></slot>
 	</div>
 </nav>
 
@@ -41,6 +41,16 @@
 		--min-space-between: 1rem;
 
 		--cqw: 1cqw;
+
+		/* Vertical spacing: smooth transition from max→min below 600px viewport width */
+		--vspace-max: 3rem;
+		--vspace-min: 1.5rem;
+		--vspace-threshold: 600px;
+		--vspace: clamp(
+			var(--vspace-min),
+			calc(var(--vspace-min) + (100vw - var(--vspace-threshold)) / 2),
+			var(--vspace-max)
+		);
 	}
 
 	.inverted-header {
@@ -55,16 +65,11 @@
 		justify-content: center;
 		flex-wrap: wrap;
 		container-type: inline-size;
-		padding-top: 3rem;
-	}
-
-	nav.move-up {
-		margin-top: min(-100vh, calc(-1 * var(--hero-min-height)));
-		height: 0;
+		padding: var(--vspace) 0;
 	}
 
 	nav > * {
-		margin-bottom: 1rem;
+		margin-bottom: 0.25rem;
 	}
 
 	.logo-container {
@@ -73,28 +78,23 @@
 		flex-wrap: wrap;
 		justify-content: center;
 
-		--big-number: 9999;
-		/** 1px if desktop, 0px if mobile */
-		--check-desktop: clamp(0px, calc(var(--big-number) * (100 * var(--cqw) - 105%)), 1px);
-		--check-mobile: calc(1px - var(--check-desktop));
+		/* 0px or 9999px: wide value when nav wraps, else 0 */
+		--wide-if-nav-wrapped: clamp(0px, calc(9999 * (105% - 100 * var(--cqw))), 9999px);
+		--wide-if-nav-not-wrapped: calc(9999px - var(--wide-if-nav-wrapped));
 		--max-space-between-compensation: calc((100 * var(--cqw) - var(--logo-width)) / 2);
 	}
 
 	.compensate-min-space-between {
-		width: min(calc(var(--big-number) * var(--check-mobile)), var(--min-space-between));
+		width: min(var(--wide-if-nav-wrapped), var(--min-space-between));
 		max-width: var(--max-space-between-compensation);
 	}
 
 	.compensate-offset {
-		width: min(calc(var(--big-number) * var(--check-mobile)), var(--logo-offset));
+		width: min(var(--wide-if-nav-wrapped), var(--logo-offset));
 	}
 
-	.logo {
-		width: clamp(
-			var(--logo-width-small),
-			calc(var(--big-number) * var(--check-desktop)),
-			var(--logo-width-big)
-		);
+	.logo-container > :global(.logo) {
+		width: clamp(var(--logo-width-small), var(--wide-if-nav-not-wrapped), var(--logo-width-big));
 		margin-left: calc(-1 * var(--logo-offset));
 		z-index: 1;
 	}
@@ -106,7 +106,7 @@
 
 	.space-between {
 		flex-grow: 1;
-		max-width: calc(var(--big-number) * var(--check-desktop));
+		max-width: var(--wide-if-nav-not-wrapped);
 	}
 
 	.nav-links {

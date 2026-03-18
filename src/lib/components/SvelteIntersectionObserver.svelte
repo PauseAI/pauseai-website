@@ -25,5 +25,5 @@
 </script>
 
 <div bind:this={element}>
-	<slot />
+	<slot></slot>
 </div>

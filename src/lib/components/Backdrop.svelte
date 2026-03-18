@@ -5,7 +5,7 @@
 </script>
 
 {#if open}
-	<div transition:fade={{ duration: 100 }} class="backdrop" />
+	<div transition:fade={{ duration: 100 }} class="backdrop"></div>
 {/if}
 
 <style>

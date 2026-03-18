@@ -4,7 +4,7 @@
 </script>
 
 <button on:click class:subtle class:disabled>
-	<slot />
+	<slot></slot>
 </button>
 
 <style>

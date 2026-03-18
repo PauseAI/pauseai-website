@@ -40,9 +40,9 @@ Additionally, we only propose to ban the development of very specific kinds of m
 ## Centralization of AI might make takeover risks worse
 
 We don't propose a centralization of AI development in a single organization. That would make AI development more controllable but it would also create a single point of failure, which human greed and stupidity could take advantage of.
-Deciding if a CERN/ Apollo/ Manhattan type project would be good or not should be discussed multilaterally, once we had already collaborated in a pause and are outside a race.
+Deciding if a CERN/ Apollo/ Manhattan type project would be good or not should be discussed multilaterally, once we have already collaborated in a pause and are outside a race.
 
-## Descentralization will cause less safety-minded actors to lead the race
+## Decentralization will cause less safety-minded actors to lead the race
 
 If you dive into the history of OpenAI, DeepMind and Anthropic, you will find that all of them have been founded by people who are quite worried about AI risks.
 In a way, we are lucky that the biggest AI companies right now have AI safety as part of their culture.

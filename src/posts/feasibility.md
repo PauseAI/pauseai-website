@@ -106,7 +106,7 @@ That's why it's important to not base our potential to succeed on short-term res
 
 ## Collateral benefits
 
-Advocating for a pause has other positive impacts outside achieve it.
+Advocating for a pause has other positive impacts outside achieving it.
 Informing the public, tech people and politicians of the risks helps other interventions that aim to make safe AIs and AIs safe.
 It causes people to give more importance to the technical, political and communicational work that goes into AI Safety and AI ethics, which ultimately means more funding and jobs going into them, expecting better results.
 

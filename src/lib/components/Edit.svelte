@@ -1,5 +1,5 @@
 <script lang="ts">
-	import ExternalLink from '$lib/components/Link.svelte'
+	import Link from '$lib/components/Link.svelte'
 	import { page } from '$app/stores'
 	import * as m from '$lib/paraglide/messages.js'
 	import { getLocale } from '$lib/paraglide/runtime.js'
@@ -71,20 +71,20 @@
 {#if isTranslatedPage}
 	<div class="edit-options">
 		{#if editUrl}
-			<ExternalLink href={editUrl}>
+			<Link href={editUrl}>
 				{m.footer_other_edit()}
-			</ExternalLink>
+			</Link>
 		{/if}
 		{#if translationIssueUrl}
-			<ExternalLink href={translationIssueUrl}>
+			<Link href={translationIssueUrl}>
 				{m.footer_other_l10n()}
-			</ExternalLink>
+			</Link>
 		{/if}
 	</div>
 {:else if editUrl}
-	<ExternalLink href={editUrl}>
+	<Link href={editUrl}>
 		Edit page{#if editUrl.startsWith(GITHUB_BASE_URL)}&nbsp;on GitHub{/if}
-	</ExternalLink>
+	</Link>
 {/if}
 
 <style>

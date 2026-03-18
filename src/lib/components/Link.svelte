@@ -15,16 +15,17 @@
 	let type: Type
 </script>
 
-<Link {href} {target} {rel} class={className} bind:type>
-	<slot />{#if type != Type.Internal}
+<Link {href} {target} {rel} class={className} bind:type {...$$restProps}>
+	<slot></slot>{#if type != Type.Internal}
 		<span style="white-space: nowrap">
-			<div class="icon">
+			&nbsp;
+			<span class="icon">
 				{#if type == Type.External}
 					<ExternalLink {...ICON_PROPS} />
 				{:else if type == Type.Mail}
 					<Mail {...ICON_PROPS} />
 				{/if}
-			</div>
+			</span>
 		</span>
 	{/if}
 </Link>
@@ -33,6 +34,6 @@
 	.icon {
 		display: inline-flex;
 		vertical-align: baseline;
-		margin-left: 0.1em;
+		margin-left: -0.4em;
 	}
 </style>

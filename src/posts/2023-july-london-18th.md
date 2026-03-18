@@ -20,7 +20,7 @@ title: PauseAI protest @ FCDO, London, July 18th
 
 ## Contact
 
-- Alistair Steward ([twitter](https://twitter.com/alistair___s))
+- Alistair Stewart ([twitter](https://twitter.com/alistair___s))
 
 ## Press Release: PauseAI protests Foreign Office ahead of UN Security Council meeting on AI Risk
 

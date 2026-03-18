@@ -26,3 +26,5 @@ deno.lock
 /l10n-cage
 
 /static/open-letter/portraits/original
+CLAUDE.md
+.claude/

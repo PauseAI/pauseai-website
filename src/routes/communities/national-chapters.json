@@ -1,94 +1,108 @@
 {
 	"communities": [
 		{
-			"name": "PauseAI Netherlands",
+			"name": "Netherlands",
+			"country_local": "Nederland",
 			"lat": 52,
 			"lon": 5.6,
 			"link": "https://chat.whatsapp.com/EOGvhoPCiCqDqwuf9JUxtB"
 		},
 		{
-			"name": "PauseAI Serbia",
+			"name": "Serbia",
+			"country_local": "Srbija",
 			"lat": 44,
 			"lon": 21,
-			"link": "https://www.facebook.com/PauseAISerbia"
+			"link": "https://pauseai.rs/"
 		},
 		{
-			"name": "PauseAI UK",
+			"name": "United Kingdom",
 			"lat": 54.2,
 			"lon": -2.4,
-			"link": "https://x.com/PauseAI_UK"
+			"link": "https://pauseai.uk/"
 		},
 		{
-			"name": "PauseAI France",
+			"name": "France",
 			"lat": 47.8,
 			"lon": 2.6,
-			"link": "$$DISCORD_FRANCE$$"
+			"link": "https://pauseia.fr"
 		},
 		{
-			"name": "PauseAI Canada",
+			"name": "Canada",
 			"lat": 56,
 			"lon": -105,
-			"link": "https://pauseai.ca/"
+			"link": "https://pauseai.ca/en/"
 		},
 		{
-			"name": "PauseAI Romania",
+			"name": "Romania",
+			"country_local": "România",
 			"lat": 44.5,
 			"lon": 26,
 			"link": "https://www.facebook.com/people/Pause-AI-Romania/61581783381263/?rdid=LfnCxIeWHG9TL4Bp&share_url=https%3A%2F%2Fwww.facebook.com%2Fshare%2F19yinn6qj4%2F"
 		},
 		{
-			"name": "PauseAI Kenya",
+			"name": "Kenya",
 			"lat": 0.5,
 			"lon": 38,
 			"link": "https://x.com/Pauseaikenya"
 		},
 		{
-			"name": "PauseAI España",
+			"name": "Spain",
+			"country_local": "España",
 			"lat": 41.3,
 			"lon": -4,
-			"link": "https://chat.whatsapp.com/KEgD22LEo6xEVvjH4fD8br"
+			"link": "https://pauseai.es"
 		},
 		{
-			"name": "PauseAI Australia",
+			"name": "Australia",
 			"lat": -25,
 			"lon": 134.5,
-			"link": "https://www.facebook.com/groups/571590459293618/"
+			"link": "https://pauseai.info/australia"
 		},
 		{
-			"name": "PauseAI Germany",
+			"name": "Germany",
+			"country_local": "Deutschland",
 			"lat": 51.1,
 			"lon": 10,
-			"link": "$$DISCORD_GERMANY$$"
+			"link": "https://pause-ai.de/"
 		},
 		{
-			"name": "PauseAI US",
+			"name": "United States",
 			"lat": 39.5,
 			"lon": -98,
-			"link": "$$DISCORD_US$$"
+			"link": "$$WEBSITE_US$$"
 		},
 		{
-			"name": "PauseAI Czechia",
+			"name": "Czechia",
 			"lat": 50,
 			"lon": 15,
-			"link": "https://discord.gg/4rZ2nGZB3r"
+			"link": "https://www.pauseai.cz/"
 		},
 		{
-			"name": "PauseAI Poland",
+			"name": "Poland",
+			"country_local": "Polska",
 			"lat": 52,
 			"lon": 19.5,
-			"link": "mailto:p.klimkiewicz@idealnywzrok.pl"
+			"link": "mailto:patryk@pauseai.info"
 		},
 		{
-			"name": "PauseAI India",
-			"lat": 22,
-			"lon": 78.5,
-			"link": "mailto:amanagarwal263@gmail.com"
+			"name": "Nigeria",
+			"lat": 9.5,
+			"lon": 8,
+			"link": "https://chat.whatsapp.com/L4o2IiOX1HI2GWQi0J9ZJv"
 		},
 		{
-			"name": "PauseAI Sweden",
+			"name": "Sweden",
+			"country_local": "Sverige",
 			"lat": 65,
 			"lon": 17,
-			"link": "mailto:larzzzon91@gmail.com"
+			"link": "https://pauseai.se/"
+		},
+		{
+			"name": "Italy",
+			"country_local": "Italia",
+			"lat": 42.5,
+			"lon": 12.5,
+			"link": "$$WHATSAPP_ITALY$$"
 		}
 	]
 }

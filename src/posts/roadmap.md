@@ -51,7 +51,6 @@ We have around €90k in the bank.
 
 ## Related documents
 
-- [Growth strategy](/growth-strategy)
 - [Proposal](/proposal)
 - [Values](/values)
 - [Donate](/donate)

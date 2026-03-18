@@ -1,19 +1,22 @@
 <script lang="ts">
 	import PostMeta from '$lib/components/PostMeta.svelte'
-	import ExternalLink from '$lib/components/Link.svelte'
+	import Link from '$lib/components/Link.svelte'
 	import CommunitiesList from './CommunitiesList.svelte'
 	import type { GeoApiResponse } from '$api/geo/+server'
-	import type * as maplibregl from 'maplibre-gl'
-	import { GeolocateControl, Map, Marker, Popup } from 'maplibre-gl'
+	import type { StyleSpecification } from 'maplibre-gl'
+	import maplibregl from 'maplibre-gl'
 	import 'maplibre-gl/dist/maplibre-gl.css'
 	import { isMapboxURL, transformMapboxUrl } from 'maplibregl-mapbox-request-transformer'
 	import { onDestroy, onMount } from 'svelte'
 	import { communities, communitiesMeta } from './communities'
 	import { MAPBOX_KEY } from './constants'
 
-	export let data
+	// maplibre-gl doesn't support named imports on the server
+	const { GeolocateControl, Map, Marker, Popup } = maplibregl
 
 	const LOCATED_ZOOM = 4
+	const STYLE_URL =
+		'https://api.mapbox.com/styles/v1/mapbox/outdoors-v11?access_token=' + MAPBOX_KEY
 
 	let { title, description, date } = communitiesMeta
 
@@ -26,8 +29,6 @@
 	lng = -71.224518
 	lat = 42.213995
 	zoom = 1
-
-	console.log('communities page.svelte', communities)
 
 	function updateData() {
 		zoom = map.getZoom()
@@ -54,6 +55,11 @@
 	}
 
 	onMount(async () => {
+		// Required, can throw
+		const style: StyleSpecification = await fetch(STYLE_URL).then((res) => res.json())
+		if (!style) return
+
+		// Optional, call with error handling
 		const { userLng, userLat } = await fetchUserLocation()
 
 		const initialState = {
@@ -65,7 +71,7 @@
 		map = new Map({
 			container: mapContainer,
 			style: {
-				...data.style,
+				...style,
 				projection: {
 					type: 'globe'
 				}
@@ -126,34 +132,86 @@
 <PostMeta {title} {description} {date} />
 
 <h1>{title}</h1>
-<p>{description}</p>
 <p>
-	Do you want to add your location or a community? <ExternalLink
-		href="https://discord.gg/CR5u5BTBwy">Create a post</ExternalLink
-	> on our Discord!
+	PauseAI Global has chapters and communities across the world. These communities are groups of
+	individuals that care about the future and agree a <Link href="/proposal"
+		>pause is the solution</Link
+	>. They work together to educate members of the public and their political representatives about
+	the <Link href="/risks">risks</Link>.
 </p>
+
 <p>
-	Do you want to start a community? Check our <ExternalLink
-		href="https://pauseai.info/local-organizing">Guide on local organizing</ExternalLink
-	>
+	If you're looking for a group closer to home, check out our map below to find the people nearest
+	to you. The map also includes adjacent AI Safety communities in grey.
 </p>
 <div>
 	<div class="map-wrap">
-		<div class="map" bind:this={mapContainer} />
+		<div class="map" bind:this={mapContainer}></div>
 	</div>
 </div>
 <CommunitiesList {communities} />
+
+<p>
+	Can't find a community near you and want to lead the way? Learn how to do it <Link
+		href="/national-groups#how-to-set-up-a-pauseai-national-group">here</Link
+	>.
+</p>
+
+<h2 id="events">Events</h2>
+
+<p>Interested in attending a PauseAI community event? Find one below.</p>
+
+<iframe
+	src="https://lu.ma/embed/calendar/cal-E1qhLPs5IvlQr8S/events?"
+	height="450"
+	frameborder="0"
+	style="border: 1px solid #bfcbda88; border-radius: 24px; width: 100%;"
+	allowfullscreen
+	aria-hidden="false"
+	title="PauseAI Events Calendar"
+></iframe>
+
+<p>
+	Find the full list of events <Link href="https://lu.ma/PauseAI">here</Link>.
+</p>
+
+<p>
+	If you want to organize an event, please create an event on Luma and press the "submit event"
+	button on <Link href="https://lu.ma/PauseAI">our calendar page</Link>.
+</p>
 
 <style>
 	.map-wrap {
 		position: relative;
 		padding-bottom: 56.25%; /* 16:9 */
 		overflow: hidden;
+		border-radius: 24px;
+		border: 1px solid var(--text-subtle);
 	}
 
 	.map {
 		position: absolute;
 		width: 100%;
 		height: 100%;
+	}
+
+	:global(.maplibregl-ctrl-group) {
+		border-radius: 24px !important;
+		border: 1px solid var(--text-subtle) !important;
+		overflow: hidden;
+	}
+
+	:global(.maplibregl-ctrl-group button) {
+		border-radius: 0 !important;
+	}
+
+	:global(.maplibregl-ctrl-group button:first-child) {
+		border-top-left-radius: 24px !important;
+		border-top-right-radius: 24px !important;
+	}
+
+	:global(.maplibregl-ctrl-group button:last-child) {
+		border-bottom-left-radius: 24px !important;
+		border-bottom-right-radius: 24px !important;
 	}
 </style>

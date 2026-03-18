@@ -131,4 +131,4 @@ Stickers and pin badges
 
 ## Contact
 
-Alistair Steward ([email](mailto:achoto@protonmail.com), [twitter](https://twitter.com/alistair___s))
+Alistair Stewart ([email](mailto:achoto@protonmail.com), [twitter](https://twitter.com/alistair___s))

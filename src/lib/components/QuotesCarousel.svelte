@@ -131,13 +131,14 @@
 				</li>
 			{/each}
 		</ul>
-		<button class="reset-button touch-navigation left" on:click={() => glide.go('<')} />
-		<button class="reset-button touch-navigation right" on:click={() => glide.go('>')} />
+		<button class="reset-button touch-navigation left" on:click={() => glide.go('<')}></button>
+		<button class="reset-button touch-navigation right" on:click={() => glide.go('>')}></button>
 	</div>
 	<div class="navigation" data-glide-el="controls">
 		<button class="nav-button" data-glide-dir="<"><ArrowLeft size="1em" /></button>
 		{#each Array(totalSlides) as _, i}
-			<button class="dot reset-button" class:active={currentSlide === i} data-glide-dir={`=${i}`} />
+			<button class="dot reset-button" class:active={currentSlide === i} data-glide-dir={`=${i}`}
+			></button>
 		{/each}
 		<button class="nav-button" data-glide-dir=">"><ArrowRight size="1em" /></button>
 		<Link href="/quotes">{m.home_quotes_all()}</Link>
@@ -147,7 +148,7 @@
 <style>
 	.glide__track {
 		position: relative;
-		margin: -20px;
+		inset: -20px;
 	}
 
 	.quote {

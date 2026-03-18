@@ -7,7 +7,7 @@ One of the concerns of AI scientists is that a superintelligence could take over
 You can see it in [papers](/learn#papers), [surveys](/polls-and-surveys) and individual [predictions](/pdoom) & [statements](/quotes).
 This does not necessarily mean that everyone dies, but it does mean that (almost) all humans will lose control over our future.
 
-We discuss the basics of x-risk mostly in [an other article](/xrisk).
+We discuss the basics of x-risk mostly in [another article](/xrisk).
 In this article here, we will argue that this takeover risk is not only real but that it is very likely to happen _if we build a superintelligence_.
 
 ## The argument
@@ -25,7 +25,7 @@ Some [state-of-the-art AI models](/sota) already have superhuman capabilities in
 As AI capabilities improve due to innovations in training architectures, runtime environments, and larger scale, we can expect that an AI will eventually surpass humans in virtually every domain.
 
 Not all AI systems are agents.
-An agent an entity that is capable of making decisions and taking actions to achieve a goal.
+An agent is an entity that is capable of making decisions and taking actions to achieve a goal.
 A large language model, for example, does not pursue any objective on its own.
 However, runtime environments can easily turn a non-agentic AI into an agentic AI.
 An example of this is AutoGPT, which recursively lets a language model generate its next input.
@@ -49,7 +49,7 @@ This first reason is likely to happen at some point if we wait long enough, but 
 The sub-goal of _maximizing control_ over the world could be likely to occur due to _instrumental convergence_: the tendency of sub-goals to converge on power-grabbing, self-preservation, and resource acquisition:
 
 - The more control you have, the harder it will be from any other agent to prevent you from achieving your goal.
-- The more control you have, the more resources you have to achieve your goal. (For example, an AI tasked with calculating pi might conclude that it would be beneficial to use all computers on the world to calculate pi.
+- The more control you have, the more resources you have to achieve your goal. (For example, an AI tasked with calculating pi might conclude that it would be beneficial to use all computers on the world to calculate pi.)
 
 There are already [proof](https://www.anthropic.com/research/alignment-faking)[s](https://www.transformernews.ai/p/openais-new-model-tried-to-avoid) of AIs developing such behavior.
 

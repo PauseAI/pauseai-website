@@ -66,7 +66,7 @@ We recommend reading [the Zvi's article](https://thezvi.substack.com/p/the-paris
 ## Coming Summits
 
 - India co-hosted the Paris summit and will host the next one. Unfortunately, we expect it to lack any meaningful safety / regulation discussions.
-- The UN organizes The [AI For Good summit](https://aiforgood.itu.int/) in Switzerland, July 2025.
+- The UN organizes The [AI For Good summit](https://aiforgood.itu.int/) in Switzerland, July 2026.
 
 ## What we're missing
 

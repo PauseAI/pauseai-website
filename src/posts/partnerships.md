@@ -100,6 +100,4 @@ PauseAI offers unique benefits to a variety of organizations and individuals, en
 - **Grassroots Feedback:** Gather ground-level feedback on AI safety programs.
 - **Cross-border Collaboration:** Connect local activists with global initiatives.
 
-## Interested in exploring partnership opportunities?
-
-Send an email to [joep@pauseai.info](mailto:joep@pauseai.info).
+Interested in exploring partnership opportunities? Check out our [Contact form](/contact-us?tab=partnerships).

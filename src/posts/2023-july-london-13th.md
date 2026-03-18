@@ -11,7 +11,7 @@ description: PauseAI protest, urging the United Nations Security Council to
 
 ## Contact
 
-- Alistair Steward ([twitter](https://twitter.com/alistair___s))
+- Alistair Stewart ([twitter](https://twitter.com/alistair___s))
 
 ## Press Release: PauseAI protests Foreign Office ahead of UN Security Council meeting on AI Risk
 

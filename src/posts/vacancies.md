@@ -3,37 +3,12 @@ title: Vacancies at PauseAI
 description: Job positions at PauseAI
 ---
 
-## Policy Director
+## Current Openings
 
-- Lead regulatory analysis across the global AI governance landscape
-- Development of comprehensive policy positions relevant to national contexts
-- Build relationships with key stakeholders
-- Support development of PauseAI Global and its chapters as key voices in AI policy discussions
+There are currently no open paid positions at PauseAI.
 
-Apply [here](https://pauseai.info/policy-director-vacancy).
+## Spontaneous Applications
 
-## Organizing Director
+While we currently have no open positions, we welcome spontaneous applications. If you're passionate about our mission and believe you could contribute to PauseAI in a paid role, please send your CV and a brief cover letter to [vacancies@pauseai.info](mailto:vacancies@pauseai.info).
 
-As PauseAI Global’s Organizing Director, you will lead international implementation of strategy - including designing and operationalizing growth and retention plans for volunteers, build international campaigns and develop and mentor National Chapter Lead Organizers (volunteers and staff).
-
-Apply [here](https://pauseai.info/2025-organizing-director).
-
-## PauseAI UK Director
-
-- Design and implementation of PauseAI UK's national strategy
-- Build PauseAI as a key voice in the UK's AI policy landscape
-- Grow, train, and coordinate PauseAI UK's volunteer base
-
-Apply [here](https://pauseai.info/pauseai-uk-director).
-
-## PauseIA France Director
-
-- Implementation of PauseIA France's national strategy
-- Build PauseAI as a key voice in France's AI policy landscape
-- Grow, train, and coordinate PauseIA France's volunteer base
-
-Apply [here](https://pauseai.info/pauseia-france-director).
-
-## Volunteer Vacancies
-
-PauseAI is built upon our network of hundreds of volunteers across 13+ countries. You can join PauseAI [here](https://pauseai.info/join), or see our list of volunteer vacancies [here](https://pauseai.info/volunteer-vacancies).
+Please note: We cannot guarantee a response to spontaneous applications, but we will keep them on file and consider them when we next open positions.

@@ -7,6 +7,8 @@ date: 2025-11-03T14:26:00.000+01:00
 
 # Organizing Director (Vacancy)
 
+Update: This vacancy is now closed.
+
 ## **Role description**
 
 As PauseAI Global’s Organizing Director, you will lead international implementation of strategy - including designing and operationalizing growth and retention plans for volunteers, build international campaigns and develop and mentor National Chapter Lead Organizers (volunteers and staff).
@@ -21,7 +23,7 @@ You will be responsible to the PauseAI Global CEO.
 - Campaign Coordination and Project Management: Plan and execute international campaigns, demonstrations and advocacy efforts.
 - Chapter Development : Establish, support and manage national PauseAI groups.
 - Strategic Partnerships: Build productive and collaborative relationships with other AI safety organisations, academic institutions, and policy groups.
-- Fundraising: Secure grants and donations to continue supporting PauseAI Globals work.
+- Fundraising: Secure grants and donations to continue supporting PauseAI Global's work.
 - Resource Design and Creation: Designing training materials and organizing resources for volunteers, including those necessary to take collective action.
 - Mentorship, Facilitation and Training: Train and mentor volunteer leaders and the National Lead Organizers. Facilitation of training events, such as PauseCons, as well as online trainings.
 
@@ -42,7 +44,3 @@ You will be responsible to the PauseAI Global CEO.
 - Full-time position, 32 hours per week negotiable.
 - Salary range: 40k - 60k EUR per year, depending on experience.
 - Referral bonus: 500 EUR for a successful hire!
-
-## Apply
-
-If you are interested in this vacancy, please send a short motivation letter and your CV to vacancies@pauseai.info

@@ -1,4 +1,4 @@
-import type { EnhancedImgAttributes } from '@sveltejs/enhanced-img'
+import type { SvelteHTMLElements } from 'svelte/elements'
 
 export type Categories = 'sveltekit' | 'svelte' | 'AI Safety' | 'Transparency' | 'Government'
 
@@ -11,11 +11,23 @@ export type FrontmatterMeta = {
 	date?: string
 	categories?: Categories[]
 	image?: string
+	/** If true, this post will appear in the Latest News section on the homepage */
+	news?: boolean
 }
 
 export type Post = FrontmatterMeta & {
 	/** Path in URL from root */
 	slug: string
+}
+
+export type NewsItem = {
+	title: string
+	subtitle: string
+	date: string
+	image?: string
+	/** URL to the article (internal path or external URL) */
+	href: string
+	source: 'internal' | 'substack'
 }
 
 export type Signatory = {
@@ -50,60 +62,34 @@ export type Person = {
 	order?: number
 }
 
-export type Team = {
-	id: string
-	name: string
-	description: string
-	leadName: string
-	leadEmail: string
-	public: boolean
-	responsibilities: string[]
-}
-
-export type AirtableTeam = {
-	name: string
-	mission: string
-	name_from_lead: string
-	email_address_from_lead: string
-	responsibilities_names: string[]
-	public: boolean
-}
-
 export type NationalGroup = {
-	id: string
 	name: string
-	notes?: string
 	leader: string
-	discordUsername?: string
 	email?: string
-	legalEntity: boolean
-	overseer?: string
+	description?: string
+	image?: string
+	id: string
 	public: boolean
 } & Record<NationalGroupLink, string | undefined>
 
 export type AirtableNationalGroup = {
-	Name?: string
-	Notes?: string
-	/** Airtable IDs */
-	Leader?: string[]
-	leader_name?: string[]
+	country?: string
+	leaders_name?: string[]
 	discord_username?: string[]
-	onboarding_email?: string
-	/** Interpreted as boolean ('Yes' => true) */
-	'Legal entity'?: string
-	/** Airtable IDs */
-	Overseer?: string[]
-	X?: string
-	Discord?: string
-	Whatsapp?: string
+	website_email?: string
+	x?: string
+	discord?: string
+	whatsapp?: string
 	website?: string
 	linktree?: string
 	instagram?: string
 	tiktok?: string
-	Facebook?: string
+	facebook?: string
 	youtube?: string
 	linkedin?: string
 	luma?: string
+	substack?: string
+	image?: { url: string }[]
 }
 
 export type NationalGroupLink =
@@ -118,8 +104,9 @@ export type NationalGroupLink =
 	| 'youtubeLink'
 	| 'linkedinLink'
 	| 'lumaLink'
+	| 'substackLink'
 
-export type Picture = Exclude<EnhancedImgAttributes['src'], string>
+export type Picture = Exclude<SvelteHTMLElements['enhanced:img']['src'], string>
 
 export type CarouselQuote = {
 	text: string

@@ -57,10 +57,20 @@
 		{
 			"background": "biden",
 			"color": "white",
-			"text": "Artificial Intelligence is one of the most powerful tools of our time, but to seize its opportunities, **we must first mitigate its risks.** [...] Social media has shown us the harm that powerful technology can do without the right safeguards in place [...] we must be clear-eyed and vigilant about the threats emerging — of emerging technologies that can pose — don’t have to, but can pose — to our democracy and our values.",
+			"text": "**Artificial Intelligence is one of the most powerful tools of our time, but to seize its opportunities, we must first mitigate its risks.** [...] Social media has shown us the harm that powerful technology can do without the right safeguards in place [...] we must be clear-eyed and vigilant about the threats emerging — of emerging technologies that can pose — don’t have to, but can pose — to our democracy and our values.",
 			"author": "Joe Biden",
 			"author_description": "46th President of the United States",
 			"padding": "2rem"
+		},
+		{
+			"background": "sanders",
+			"color": "black",
+			"text": "**I will be pushing for a moratorium on the construction of data centers that are powering the unregulated sprint to develop and deploy AI. The moratorium will give democracy a chance to catch up**, and ensure that the benefits of technology work for all of us, not just the 1%.",
+			"author": "Bernie Sanders",
+			"author_description": "United States Senator from Vermont",
+			"source": "https://x.com/SenSanders/status/2001057004370948131",
+			"padding": "",
+			"notice": "“Bernie Sanders July 2019” by Gage Skidmore (Original photo) and Wugapodes (Retouching). Modified and licensed under CC BY-SA 2.0."
 		},
 		{
 			"background": "putin",

@@ -52,7 +52,7 @@ The organizers of the Paris summit have created an agenda that will cover public
 - The rapid advancement of AI capabilities in recent years makes it urgently required that world leaders start collaborating on mitigating the serious and [existential risks](https://www.safe.ai/work/statement-on-ai-risk) posed by increasingly powerful AI-systems to ensure our common future
 - AI Safety needs to be the focus at the Paris AI Action Summit!
 
-**We propose that the organizers and the government delegates at the summit makes AI Safety the focus of the summit by working on the following:**
+**We propose that the organizers and the government delegates at the summit make AI Safety the focus of the summit by working on the following:**
 
 - Collaborating on creating global treaties and regulations to mitigate serious and existential risks from AI, and reign in the companies and organizations racing to build ever more capable and dangerous AI systems.
 - Planning the establishment of international bodies to enforce such treaties and regulations

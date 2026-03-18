@@ -13,6 +13,8 @@ type RawCommunity = {
 	lon: number
 	/** Will default to PauseAI Discord */
 	link: string
+	parent_name?: string
+	country_local?: string
 }
 
 export type Community = RawCommunity & {
@@ -21,9 +23,8 @@ export type Community = RawCommunity & {
 }
 
 export const communitiesMeta: Post = {
-	title: 'PauseAI Local Communities',
-	description:
-		'A map of all the local PauseAI communities and people around the world. Also shows adjacent AI Safety communities.',
+	title: 'Find your PauseAI Community',
+	description: 'A map of all PauseAI communities, people and events around the world.',
 	date: '2023-12-15',
 	slug: 'communities',
 	categories: []
@@ -35,14 +36,16 @@ const LINK_PLACEHOLDERS = {
 	$$DISCORD_US$$: 'https://discord.gg/TmpmYejE3e',
 	$$DISCORD_GERMANY$$: 'https://discord.gg/VuVVyJQ37M',
 	$$DISCORD_FRANCE$$: 'https://discord.gg/vyXGd7AeGc',
-	$$WHATSAPP_ITALY$$: 'https://chat.whatsapp.com/Cue9aeK6kpJFoDxT3xV9Zx'
+	$$WHATSAPP_ITALY$$: 'https://chat.whatsapp.com/Cue9aeK6kpJFoDxT3xV9Zx',
+	$$WEBSITE_US$$: 'https://www.pauseai-us.org/local-groups/'
 }
 
 const pauseAICommunities: Community[] = (
-	pauseAICommunitiesJson satisfies CommunitiesConfiguration
+	pauseAICommunitiesJson as CommunitiesConfiguration
 ).communities.map((c) => ({
 	...c,
 	type: 'local',
+	country_local: c.country_local,
 	country:
 		nationalChaptersJson.communities.find((n) => c.parent_name?.includes(n.name))?.name || undefined // Use undefined instead of null
 }))

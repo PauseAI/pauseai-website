@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { micromark } from 'micromark'
 	import LoadingSpinner from './LoadingSpinner.svelte'
+	import Link from '$lib/components/Link.svelte'
 
 	export let mp: {
 		name: string
@@ -253,8 +254,8 @@ ${userPostcode.toUpperCase()}`
 				<div class="attachments-section">
 					<h4>Attachments:</h4>
 					<div class="pdf-attachments">
-						<a
-							href="/pdfs/PauseAI_Open_Letter_to_Google_DeepMind.pdf"
+						<Link
+							href="/pdfs/PauseAI_Open_Letter_to_Google_DeepMind.pdf#no-localize"
 							target="_blank"
 							class="pdf-thumbnail"
 						>
@@ -267,9 +268,9 @@ ${userPostcode.toUpperCase()}`
 								<span class="pdf-title">PauseAI Open Letter</span>
 								<span class="pdf-subtitle">to Google DeepMind</span>
 							</div>
-						</a>
-						<a
-							href="/pdfs/Background_on_Googles_violation_of_Frontier_AI_Safety_Commitments.pdf"
+						</Link>
+						<Link
+							href="/pdfs/Background_on_Googles_violation_of_Frontier_AI_Safety_Commitments.pdf#no-localize"
 							target="_blank"
 							class="pdf-thumbnail"
 						>
@@ -282,7 +283,7 @@ ${userPostcode.toUpperCase()}`
 								<span class="pdf-title">Background Information</span>
 								<span class="pdf-subtitle">on Google's Safety Violations</span>
 							</div>
-						</a>
+						</Link>
 					</div>
 				</div>
 			</div>
@@ -496,7 +497,7 @@ ${userPostcode.toUpperCase()}`
 		flex-wrap: wrap;
 	}
 
-	.pdf-thumbnail {
+	* :global(.pdf-thumbnail) {
 		display: flex;
 		flex-direction: column;
 		align-items: center;
@@ -514,14 +515,14 @@ ${userPostcode.toUpperCase()}`
 		max-width: 150px;
 	}
 
-	.pdf-thumbnail:hover {
+	* :global(.pdf-thumbnail:hover) {
 		border-color: var(--brand);
 		background: var(--bg-subtle);
 		transform: translateY(-2px);
 		box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 	}
 
-	.pdf-thumbnail img {
+	* :global(.pdf-thumbnail img) {
 		width: 100%;
 		height: auto;
 		border-radius: 4px;

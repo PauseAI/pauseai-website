@@ -110,8 +110,8 @@
 						playsinline
 						muted
 						class="video-feed"
-					/>
-					<canvas bind:this={canvasElement} style="display: none;" />
+					></video>
+					<canvas bind:this={canvasElement} style="display: none;"></canvas>
 				</div>
 				<button class="capture-button primary" on:click={captureFromCamera} disabled={$isCapturing}>
 					{#if $isCapturing}

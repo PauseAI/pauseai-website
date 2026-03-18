@@ -57,7 +57,7 @@ Read more about [how good the best AI models are](/sota).
 ## Why would an AI hate humans and want to kill us?
 
 It doesn’t have to be evil or hate humans to be dangerous to humans.
-We don’t hate chimpansees, but we still destroy their forests.
+We don’t hate chimpanzees, but we still destroy their forests.
 We want palm oil, so we take their forest. We’re smarter, so chimps can’t stop us.
 An AI might want more compute power to be better at achieving some other goal, so it destroys our environment to build a better computer.
 This is called _instrumental convergence_, [this video explains it very nicely](https://www.youtube.com/watch?v=ZeecOKBus3Q).
@@ -65,7 +65,7 @@ This is called _instrumental convergence_, [this video explains it very nicely](
 ## The AIs that I know don’t have a will of their own - they just do what they’re asked
 
 Even if it has no goals of its own, and it just follows order, someone is going to do something dangerous with it eventually.
-There even was a bot called ChaosGPT which was tasked explicitly to do as much as possible to humans.
+There even was a bot called ChaosGPT which was tasked explicitly to make humanity extinct.
 It was autonomously searching for weapons of mass-destruction on google, but it didn’t get very further than that.
 The thing is, the only thing that is protecting us right now is that AI isn’t very smart yet.
 
