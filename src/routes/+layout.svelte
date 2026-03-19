@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { browser } from '$app/environment'
 	import type { GeoApiResponse } from '$api/geo/+server'
 	import { page } from '$app/stores'
 	import Banner from '$lib/components/Banner.svelte'
@@ -24,6 +23,7 @@
 	import Footer from './footer.svelte'
 	import Header from './header.svelte'
 	import PageTransition from './transition.svelte'
+	import blocking from './blocking.cjs?raw'
 
 	export let data
 
@@ -35,15 +35,16 @@
 	// Show the hero on the homepage, but nowhere else
 	$: hero = deLocalizeHref($page.url.pathname) === '/'
 
-	$: if (browser && deLocalizeHref($page.url.pathname) === '/india-summit-2026') {
-		localStorage.setItem('campaign_banner_india-summit-2026_hidden', 'true')
-	}
-
 	onMount(async () => {
 		const response = await fetch('/api/geo')
 		geo = await response.json()
 	})
 </script>
+
+<svelte:head>
+	<!-- eslint-disable-next-line svelte/no-at-html-tags not vulnerable against XSS -->
+	{@html `<${'script'}>${blocking}</script>`}
+</svelte:head>
 
 <PreloadFonts urls={[robotoSlabLatin300, sairaCondensedLatin700]} />
 
