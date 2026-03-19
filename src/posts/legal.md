@@ -1,5 +1,5 @@
 ---
-title: Legal information
+title: Legal Information
 description: Information required by law about PauseAI.
 ---
 

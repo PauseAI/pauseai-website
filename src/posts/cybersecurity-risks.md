@@ -1,5 +1,5 @@
 ---
-title: Cybersecurity risks from frontier AI models
+title: Cybersecurity Risks from Frontier AI Models
 description: How AI could be used to hack all devices.
 ---
 

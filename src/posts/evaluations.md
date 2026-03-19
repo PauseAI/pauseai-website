@@ -1,5 +1,5 @@
 ---
-title: How AI Safety Evaluations & Benchmarks can aid in AI governance
+title: How AI Safety Evaluations & Benchmarks Can Aid in AI Governance
 description: What are AI safety evals, and how can they contribute to preventing catastrophic risks?
 ---
 

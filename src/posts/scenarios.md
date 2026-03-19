@@ -1,5 +1,5 @@
 ---
-title: Concrete scenarios for catastrophic AI risks
+title: Concrete Scenarios for Catastrophic AI Risks
 description: How superintelligent AI could cause human extinction.
 ---
 

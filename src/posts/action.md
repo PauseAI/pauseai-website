@@ -1,5 +1,5 @@
 ---
-title: Take action
+title: Take Action
 description: Ways to help reduce AI risk.
 ---
 

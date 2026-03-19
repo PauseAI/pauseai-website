@@ -1,5 +1,5 @@
 ---
-title: Risks of artificial intelligence
+title: Risks of Artificial Intelligence
 description: AI threatens our democracy, our technology, and our species.
 ---
 

@@ -1,5 +1,5 @@
 ---
-title: PauseAI Press materials & media coverage
+title: PauseAI Press Materials & Media Coverage
 ---
 
 If you want to contact us, use our [Contact form](/contact-us?tab=media)

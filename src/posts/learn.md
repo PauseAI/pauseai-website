@@ -1,5 +1,5 @@
 ---
-title: Learn why AI safety matters
+title: Learn Why AI Safety Matters
 description: Educational resources (videos, articles, books) about AI risks and AI alignment
 ---
 
