@@ -1,9 +1,11 @@
 ---
 title: PauseAI holds largest ever AI safety protest in London
 slug: protest-london-feb-2026
-description: Around 300 people marched through London demanding that AI CEOs publicly back a pause in frontier AI development, in the largest protest ever focused specifically on AI safety.
-date: '2026-02-28'
+description: Around 500 people marched through London demanding that AI CEOs
+  publicly back a pause in frontier AI development, in the largest protest ever
+  focused specifically on AI safety.
 image: /protest-london-feb-2026.jpg
+date: 2026-02-28
 news: true
 ---
 
@@ -13,7 +15,7 @@ _PauseAI UK joined other organisations on Saturday to demand CEOs publicly back 
 
 ---
 
-Around 300 people marched through London today – from OpenAI's London office through the King's Cross area to the offices of Google and Meta – to demand that the CEOs of leading AI companies publicly support a pause in the development of advanced AI. This would be the first step towards binding international regulation.
+Around 500 people marched through London today – from OpenAI's London office through the King's Cross area to the offices of Google and Meta – to demand that the CEOs of leading AI companies publicly support a pause in the development of advanced AI. This would be the first step towards binding international regulation.
 
 The protest, organised by [PauseAI UK](https://pauseai.uk/), [Pull the Plug](https://pulltheplug.uk/) and other grassroots organisations, was the largest ever protest focused specifically on AI as concerns over the new technology grow.
 
