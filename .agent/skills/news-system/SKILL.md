@@ -53,10 +53,10 @@ Simply remove `news: true` from the post's frontmatter (or set it to `false`). T
 
 **`GET /api/news`**
 
-| Param      | Default | Description                        |
-|------------|---------|------------------------------------|
-| `page`     | `1`     | Page number (1-indexed)            |
-| `pageSize` | `6`     | Items per page (max 12)            |
+| Param      | Default | Description             |
+| ---------- | ------- | ----------------------- |
+| `page`     | `1`     | Page number (1-indexed) |
+| `pageSize` | `6`     | Items per page (max 12) |
 
 The endpoint decodes HTML entities from Substack RSS (e.g., `&#8217;` → `'`).
 
@@ -72,6 +72,7 @@ The endpoint decodes HTML entities from Substack RSS (e.g., `&#8217;` → `'`).
 ## Substack Integration
 
 The Substack feed is fetched server-side from `https://pauseai.substack.com/feed`. Items are parsed from RSS XML using regex extraction for:
+
 - `<title>` → card title
 - `<description>` → card subtitle
 - `<link>` → card href

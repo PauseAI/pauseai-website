@@ -28,6 +28,6 @@
 [images]
   remote_images = ["https://substackcdn.com/.*", "https://substack-post-media.s3.amazonaws.com/.*"]
 
-# Polish locale testing branch
-[context.l10n-pl.environment]
-  PARAGLIDE_LOCALES = "pl"
+# Spanish locale testing branch
+[context.l10n-es.environment]
+  PARAGLIDE_LOCALES = "es"

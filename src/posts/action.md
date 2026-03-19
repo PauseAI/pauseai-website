@@ -1,6 +1,6 @@
 ---
 title: Take action
-description: Ways you can help reduce AI risk.
+description: Ways to help reduce AI risk.
 ---
 
 <script>

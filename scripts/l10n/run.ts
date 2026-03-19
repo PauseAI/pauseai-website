@@ -190,14 +190,14 @@ const logMessage = (msg: string) => {
 		const planOptions = {
 			isDryRun: true,
 			verbose: mode.options.verbose,
-			llmClient: null as any, // not used in plan generation
-			requestQueue: null as any, // not used in plan generation
-			gitQueue: null as any, // not used in plan generation
+			llmClient: null,
+			requestQueue: null,
+			gitQueue: null,
 			languageNameGenerator: languageNamesInEnglish,
 			cageGit,
 			cageLatestCommitDates,
 			websiteLatestCommitDates,
-			dryRunStats: null as any, // not used — workItems replaces Stats
+			dryRunStats: null,
 			forceFiles,
 			workItems,
 			modelName: LLM_DEFAULTS.MODEL
@@ -294,12 +294,11 @@ const logMessage = (msg: string) => {
 		cageGit,
 		cageLatestCommitDates,
 		websiteLatestCommitDates,
-		dryRunStats: null as any, // not used in perform mode
+		dryRunStats: null,
 		forceFiles
 	}
 
 	// Filter source paths to only files in the plan
-	const planSources = new Set(plan.items.map((item) => item.source))
 	const planLocales = [...new Set(plan.items.map((item) => item.locale))]
 
 	const hasMessageItems = plan.items.some((item) => item.source.startsWith('messages/'))

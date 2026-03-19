@@ -29,12 +29,12 @@ export interface Options {
 	isDryRun: boolean
 	/** Whether to output verbose logs */
 	verbose?: boolean
-	/** Axios client for LLM API requests */
-	llmClient: AxiosInstance
-	/** Queue for managing API request rate limiting */
-	requestQueue: PQueue
-	/** Queue for Git operations to prevent concurrency issues */
-	gitQueue: PQueue
+	/** Axios client for LLM API requests (null during plan generation) */
+	llmClient: AxiosInstance | null
+	/** Queue for managing API request rate limiting (null during plan generation) */
+	requestQueue: PQueue | null
+	/** Queue for Git operations to prevent concurrency issues (null during plan generation) */
+	gitQueue: PQueue | null
 	/** Function to generate language names from language codes */
 	languageNameGenerator: Intl.DisplayNames
 	/** Git client for the l10n cage */
@@ -43,8 +43,8 @@ export interface Options {
 	cageLatestCommitDates: Map<string, Date>
 	/** Map of latest commit dates in the website repository */
 	websiteLatestCommitDates: Map<string, Date>
-	/** Statistics object for dry run mode */
-	dryRunStats: Stats
+	/** Statistics object for dry run mode (null when using work plan) */
+	dryRunStats: Stats | null
 	/** List of files to force re-l10n (ignore cache) */
 	forceFiles: string[]
 	/** When set, collect work items instead of calling LLM (plan generation mode) */
@@ -84,7 +84,7 @@ export async function l10nFromLLM(
 	// In dry run mode, collect statistics instead of making API calls
 	if (options.isDryRun) {
 		// Track what would be localized for reporting
-		trackL10n(options.dryRunStats, content, locale, filePath)
+		if (options.dryRunStats) trackL10n(options.dryRunStats, content, locale, filePath)
 
 		if (options.verbose) {
 			console.log(
@@ -102,7 +102,7 @@ export async function l10nFromLLM(
 	// First pass: generate initial l10n
 	if (options.verbose) console.log(`First pass prompt to ${languageName}${fileLabel}:`, l10nPrompt)
 
-	const firstPass = await postChatCompletion(options.llmClient, options.requestQueue, [
+	const firstPass = await postChatCompletion(options.llmClient!, options.requestQueue!, [
 		{ role: 'user', content: l10nPrompt }
 	])
 
@@ -118,7 +118,7 @@ export async function l10nFromLLM(
 	const reviewPrompt = reviewPromptGenerator(languageName)
 	if (options.verbose) console.log(`Review prompt to ${languageName}${fileLabel}:`, reviewPrompt)
 
-	const reviewed = await postChatCompletion(options.llmClient, options.requestQueue, [
+	const reviewed = await postChatCompletion(options.llmClient!, options.requestQueue!, [
 		{ role: 'user', content: l10nPrompt },
 		{ role: 'assistant', content: firstPass },
 		{ role: 'user', content: reviewPrompt }
@@ -330,7 +330,7 @@ export async function retrieve(
 
 						const message = getCommitMessage(sourceFileName, locale, fileExists)
 						try {
-							await options.gitQueue.add(() =>
+							await options.gitQueue!.add(() =>
 								(fileExists ? options.cageGit : options.cageGit.add('.')).commit(message, ['-a'])
 							)
 						} catch (e) {
