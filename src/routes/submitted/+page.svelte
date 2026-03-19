@@ -2,6 +2,7 @@
 	import { goto } from '$app/navigation'
 	import { page } from '$app/stores'
 	import { onMount } from 'svelte'
+	import { SvelteURLSearchParams } from 'svelte/reactivity'
 
 	const STRIPE_PAYMENT_LINK_BASE_URL = 'https://donate.stripe.com/6oU14n1RD0So1oGftCd7q01'
 	const INTERNAL_REDIRECT_PATH = '/welcome'
@@ -9,7 +10,7 @@
 
 	onMount(() => {
 		const url = $page.url
-		const params = new URLSearchParams(url.search)
+		const params = new SvelteURLSearchParams(url.search)
 		const paymentAnswer = params.get('payment')
 		const redirectToPayment = paymentAnswer && PAYMENT_ANSWER_REGEX.test(paymentAnswer)
 

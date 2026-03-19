@@ -12,5 +12,5 @@
 </script>
 
 <UniversalNavlink {href} {c2a} {ariaLabel} {inverted} {first} {narrow} {active} {external}>
-	<slot />
+	<slot></slot>
 </UniversalNavlink>

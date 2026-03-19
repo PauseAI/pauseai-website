@@ -14,12 +14,12 @@
 
 <span class="wide-navlink">
 	<WideNavlink {href} {c2a} {ariaLabel} {inverted} {first} {narrow} {active} {external}>
-		<slot />
+		<slot></slot>
 	</WideNavlink>
 </span>
 <span class="narrow-navlink">
 	<NarrowNavlink {href} {c2a} {ariaLabel} {inverted} {first} {narrow} {active} {external}>
-		<slot />
+		<slot></slot>
 	</NarrowNavlink>
 </span>
 

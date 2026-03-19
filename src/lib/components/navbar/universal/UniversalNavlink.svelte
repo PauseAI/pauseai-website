@@ -27,7 +27,7 @@
 		class={clsx('navlink', { first, c2a, inverted, narrow, active })}
 		aria-label={ariaLabel}
 	>
-		<slot />
+		<slot></slot>
 	</LinkWithoutIcon>
 </span>
 

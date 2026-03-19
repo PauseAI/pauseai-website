@@ -7,12 +7,12 @@
 
 <div class="wide-navbar">
 	<WideNavbar {inverted}>
-		<slot />
+		<slot></slot>
 	</WideNavbar>
 </div>
 <div class="narrow-navbar">
 	<NarrowNavbar {inverted}>
-		<slot />
+		<slot></slot>
 	</NarrowNavbar>
 </div>
 
