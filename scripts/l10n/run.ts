@@ -284,6 +284,14 @@ const logMessage = (msg: string) => {
 	const requestQueue = createRateLimitingQueue(LLM_DEFAULTS.REQUESTS_PER_SECOND)
 	const gitQueue = createConcurrencyQueue(1)
 
+	const pushAfterBatch = async () => {
+		try {
+			await pushWithUpstream(cageGit, mode.options.verbose)
+		} catch (e) {
+			console.warn('⚠️  Incremental push failed:', (e as Error).message)
+		}
+	}
+
 	const executeOptions = {
 		isDryRun: false,
 		verbose: mode.options.verbose,
@@ -295,7 +303,9 @@ const logMessage = (msg: string) => {
 		cageLatestCommitDates,
 		websiteLatestCommitDates,
 		dryRunStats: null,
-		forceFiles
+		forceFiles,
+		isCI: mode.isCI,
+		pushAfterBatch
 	}
 
 	// Filter source paths to only files in the plan
