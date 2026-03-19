@@ -1,5 +1,5 @@
 ---
-title: Running a Local PauseAI Community: A Guide to Local Organizing
+title: 'Running a Local PauseAI Community: A Guide to Local Organizing'
 description: How can you set up a community and make an impact, locally?
 ---
 
