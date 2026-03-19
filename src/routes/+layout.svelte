@@ -23,7 +23,7 @@
 	import Footer from './footer.svelte'
 	import Header from './header.svelte'
 	import PageTransition from './transition.svelte'
-	import blocking from './blocking.cts?raw'
+	import blocking from './blocking.cjs?raw'
 
 	export let data
 
@@ -90,7 +90,7 @@
 		{/if}
 	{/if}
 
-	{#if deLocalizeHref($page.url.pathname) !== '/brussels-ep-protest-2026' && false}
+	{#if deLocalizeHref($page.url.pathname) !== '/brussels-ep-protest-2026'}
 		<CampaignBanner href="/brussels-ep-protest-2026" id="brussels-ep-protest-2026">
 			<strong>Brussels, Feb 23</strong> - Join us outside the European Parliament to call for a global
 			treaty to pause frontier AI development.
