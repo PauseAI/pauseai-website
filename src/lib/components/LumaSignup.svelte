@@ -18,7 +18,7 @@
 		data-luma-action="checkout"
 		data-luma-event-id={eventId}
 	>
-		<slot />
+		<slot></slot>
 	</LinkWithoutIcon>
 </div>
 

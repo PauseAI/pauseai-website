@@ -28,7 +28,7 @@
 	})
 </script>
 
-<div id="search" />
+<div id="search"></div>
 
 <style>
 	:root {

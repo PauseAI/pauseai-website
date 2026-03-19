@@ -44,7 +44,7 @@
 		<div class="campaign-content">
 			<LinkWithoutIcon {href} class="campaign-link" on:click={close}>
 				<span class="campaign-text">
-					<slot />
+					<slot></slot>
 				</span>
 				<span class="campaign-cta">Take action →</span>
 			</LinkWithoutIcon>
@@ -129,9 +129,9 @@
 
 	.campaign-close {
 		position: absolute;
-		top: 0;
+		top: 50%;
 		right: 0.5em;
-		bottom: 0;
+		transform: translateY(-50%);
 		display: flex;
 		align-items: center;
 		background: transparent;

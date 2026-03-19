@@ -61,11 +61,11 @@ const getGroupKey = (order: number | undefined): string => {
 	const personOrder = order || 999
 
 	if (personOrder <= 9) return 'Global Board'
-	if (personOrder >= 10 && personOrder <= 29) return 'Leadership Team'
-	if (personOrder >= 30) return 'National Chapters'
+	if (personOrder >= 10 && personOrder <= 29) return 'Executive Team'
+	if (personOrder >= 30) return 'National Leaders'
 
 	// Fallback for missing/unassigned order (999 default)
-	return 'National Chapter Leads'
+	return 'National Leaders'
 }
 
 export async function GET({ fetch, setHeaders }) {

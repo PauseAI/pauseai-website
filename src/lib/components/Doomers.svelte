@@ -262,7 +262,7 @@
 			</div>
 			<div class="details">
 				<h3 class="name">
-					<div class="bar" style={`width: calc(${doomer.number * 100}%)`} />
+					<div class="bar" style={`width: calc(${doomer.number * 100}%)`}></div>
 					{doomer.name}
 					{#if doomer.title}
 						<div class="title">

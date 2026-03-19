@@ -146,7 +146,7 @@
 </p>
 <div>
 	<div class="map-wrap">
-		<div class="map" bind:this={mapContainer} />
+		<div class="map" bind:this={mapContainer}></div>
 	</div>
 </div>
 <CommunitiesList {communities} />

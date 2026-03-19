@@ -1,39 +1,34 @@
 <script lang="ts">
-	import homeHeroDesktop from '$assets/protests/Home Hero - web - Faded.jpg?enhanced'
-	import homeHeroMobile from '$assets/protests/Home Hero - mobile - Faded.jpg?enhanced'
+	import homeHeroDesktop from '$assets/protests/Home Hero - web - No Background.png?enhanced'
+	import homeHeroMobile from '$assets/protests/Home Hero - mobile - No Background.png?enhanced'
 	import { onMount } from 'svelte'
 	import { emulateCqwIfNeeded } from '$lib/container-query-units'
 
 	import Link from '$lib/components/Link.svelte'
 
-	let isMobile = false
 	let tagline: HTMLDivElement
 
-	const checkMobile = () => {
-		isMobile = window.innerWidth <= 850 || window.innerHeight > window.innerWidth
-	}
-
 	onMount(() => {
-		checkMobile()
-		window.addEventListener('resize', checkMobile)
-
 		const cleanupCqwEmulation = emulateCqwIfNeeded(tagline)
 
 		return () => {
-			window.removeEventListener('resize', checkMobile)
 			cleanupCqwEmulation?.()
 		}
 	})
 </script>
 
 <div class="hero">
-	{#if isMobile}
-		<enhanced:img src={homeHeroMobile} sizes="100vw" alt="" />
-	{:else}
-		<enhanced:img src={homeHeroDesktop} sizes="100vw" alt="" />
-	{/if}
+	<picture>
+		{#each Object.entries(homeHeroMobile.sources) as [format, srcset]}
+			<source media="(max-width: 850px)" {srcset} sizes="100vw" type={'image/' + format} />
+		{/each}
+		{#each Object.entries(homeHeroDesktop.sources) as [format, srcset]}
+			<source {srcset} sizes="100vw" type={'image/' + format} />
+		{/each}
+		<img src={homeHeroDesktop.img.src} alt="" />
+	</picture>
 	<div class="content" bind:this={tagline}>
-		<h2>Don’t let AI companies<br />gamble away our future</h2>
+		<h2>Don't let AI companies<br />gamble away our future</h2>
 		<div class="actions">
 			<Link href="/join" class="btn-primary">Get involved</Link>
 			<Link href="/donate" class="btn-secondary">Donate</Link>
@@ -67,22 +62,30 @@
 	}
 
 	.hero :global(img) {
-		width: 100%;
-		height: 100%;
-		object-fit: contain;
-		object-position: center bottom;
-		transform-origin: center bottom;
+		position: absolute;
+		bottom: 0;
+		left: 50%;
+		--hero-scale: 1;
+		transform: translateX(-50%) scale(var(--hero-scale));
+		width: min(100%, calc(max(100vh, var(--hero-min-height)) * var(--hero-img-ar)));
+		height: auto;
+		mix-blend-mode: soft-light;
 	}
 
-	@media (max-width: 850px), (orientation: portrait) {
+	@media (min-width: 851px) {
 		.hero :global(img) {
-			position: absolute !important;
-			bottom: var(--mobile-hero-img-pos, 0px) !important;
-			left: 0 !important;
-			width: 100% !important;
-			height: auto !important;
-			object-fit: initial !important;
-			transform: none !important;
+			transform-origin: center bottom;
+			--hero-scale: 0.95;
+			-webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+			mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+		}
+	}
+
+	@media (max-width: 850px) {
+		.hero :global(img) {
+			bottom: var(--mobile-hero-img-pos, 0px);
+			-webkit-mask-image: linear-gradient(to top, transparent, black 20%);
+			mask-image: linear-gradient(to top, transparent, black 20%);
 		}
 
 		.content {
@@ -114,23 +117,19 @@
 		}
 	}
 
-	@media (min-width: 851px) and (orientation: landscape) {
-		.hero :global(img) {
-			transform: scale(0.95);
-		}
-	}
-
 	.hero {
 		display: block;
-		height: 100vh;
-		min-height: var(--hero-min-height);
+		height: 100%;
 		overflow: hidden;
 		position: relative;
 		width: 100vw;
 		left: 50%;
 		transform: translateX(-50%);
 		background-color: #ff9416;
+		isolation: isolate;
 
+		/* Desktop hero image aspect ratio (2880 / 1600) — update if image changes */
+		--hero-img-ar: 1.8;
 		/* Adjust this to push the mobile image up or down (e.g., 0px, 10vh, -20px) */
 		--mobile-hero-img-pos: 215px;
 	}

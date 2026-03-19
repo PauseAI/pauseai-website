@@ -24,7 +24,7 @@ Be aware that PauseAI may grow very quickly in the near future, both in terms of
 
 ### Tasks & Responsibilities
 
-- Lead the Comms [Team](/teams) (multiple volunteers with diverse relevant skills, some of whom create and edit videos)
+- Lead the Comms Team (multiple volunteers with diverse relevant skills, some of whom create and edit videos)
 - Develop and execute a communication strategy
 - Set up an international communication pipeline for the various National Groups.
 - Run our Social Media accounts (Twitter, Facebook, TikTok, LinkedIn, YouTube, Instagram, SubStack)
