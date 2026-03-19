@@ -51,6 +51,10 @@ export interface Options {
 	workItems?: WorkItem[]
 	/** Model name for cost estimation */
 	modelName?: string
+	/** Whether running in CI environment */
+	isCI?: boolean
+	/** Push function to call after each batch (for incremental pushes) */
+	pushAfterBatch?: () => Promise<void>
 }
 
 /**
@@ -235,13 +239,15 @@ export async function retrieve(
 	let total = 0
 	let cacheCount = 0
 
-	const BATCH_SIZE = 5
+	const BATCH_SIZE = options.isCI ? 10 : 5
 	const taskPairs = params.sourcePaths.flatMap((sourcePath) =>
 		params.locales.map((locale) => ({ sourcePath, locale }))
 	)
+	const startTime = Date.now()
 
 	for (let i = 0; i < taskPairs.length; i += BATCH_SIZE) {
 		const batch = taskPairs.slice(i, i + BATCH_SIZE)
+		const batchStart = Date.now()
 		await Promise.all(
 			batch.map(async ({ sourcePath, locale }) => {
 				/** Backslash to forward slash to match Git log and for web path */
@@ -345,6 +351,18 @@ export async function retrieve(
 				}
 			})
 		)
+
+		// Batch complete — log timing and push incrementally
+		const batchElapsed = ((Date.now() - batchStart) / 1000).toFixed(1)
+		const totalElapsed = ((Date.now() - startTime) / 1000).toFixed(1)
+		const batchEnd = Math.min(i + BATCH_SIZE, taskPairs.length)
+		log(
+			`⏱️  Batch ${Math.floor(i / BATCH_SIZE) + 1}: ${batchElapsed}s (${totalElapsed}s total, ${batchEnd}/${taskPairs.length} tasks)`
+		)
+
+		if (!options.isDryRun && options.pushAfterBatch) {
+			await options.pushAfterBatch()
+		}
 	}
 
 	// Total count of processed files is the count of source files multiplied by target languages
