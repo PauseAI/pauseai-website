@@ -16,7 +16,7 @@
 		dismissed = true
 	}
 
-	function closeClick() {
+	function close() {
 		dismissed = true
 		if (id) {
 			setItem(`banner_${id}_hidden`, 'true')
@@ -24,9 +24,8 @@
 	}
 
 	// Hide on navigation to the target page
-	$: {
-		const path = deLocalizeHref($page.url.pathname)
-		if (path === target) dismissed = true
+	$: if (target && deLocalizeHref($page.url.pathname) === target) {
+		dismissed = true
 	}
 </script>
 
@@ -36,7 +35,7 @@
 			<slot></slot>
 		</span>
 
-		<button class="close banner-close-btn" on:click={closeClick}>
+		<button class="close banner-close-btn" on:click={close}>
 			<X size="1.2em" />
 			<span class="sr-only">Close</span>
 		</button>
