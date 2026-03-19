@@ -23,6 +23,7 @@
 	import Footer from './footer.svelte'
 	import Header from './header.svelte'
 	import PageTransition from './transition.svelte'
+	import blocking from './blocking.cts?raw'
 
 	export let data
 
@@ -39,6 +40,11 @@
 		geo = await response.json()
 	})
 </script>
+
+<svelte:head>
+	<!-- eslint-disable-next-line svelte/no-at-html-tags not vulnerable against XSS -->
+	{@html `<${'script'}>${blocking}</script>`}
+</svelte:head>
 
 <PreloadFonts urls={[robotoSlabLatin300, sairaCondensedLatin700]} />
 
