@@ -7,6 +7,8 @@ PauseAI is a community united by a shared mission. We want everyone, regardless 
 
 If you believe someone is violating this Code of Conduct, please report it to the Designated Safeguarding Contact (DSC) at [safeguarding@pauseai.info](mailto:safeguarding@pauseai.info).
 
+For protest-specific conduct guidelines, please also see our [Protesters Code of Conduct](/protesters-code-of-conduct).
+
 ## Encouraged Behaviours
 
 - Be welcoming, patient, and considerate, especially toward people who are new.
