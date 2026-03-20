@@ -15,4 +15,4 @@ As a participant in a PauseAI protest, I commit to adhering to the following Cod
 
 By adhering to this Code of Conduct, I pledge to be an ambassador for the PauseAI movement and its mission to promote the responsible development and use of artificial intelligence. Together, we can create a powerful and positive force for change.
 
-_Related: our [Values](/values)_
+_Related: our [Values](/values) and our community-wide [Code of Conduct](/code-of-conduct)_

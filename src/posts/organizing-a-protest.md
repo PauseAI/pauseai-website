@@ -19,6 +19,10 @@ However, you can have more impact by scaling up and doing more things, and we're
 
 ## Preparation
 
+### Review the Code of Conduct
+
+Make sure all participants are aware of our [Code of Conduct](/code-of-conduct) and [Protesters Code of Conduct](/protesters-code-of-conduct). Event organisers should also familiarise themselves with our [Safeguarding Protocol](/safeguarding-protocol).
+
 ### Ask for help
 
 Check if there's already a [local community near you](/communities).

@@ -391,7 +391,7 @@ Please read our [Flyering Guide](/flyering) for more information on how to do th
 Many PauseAI chapters have already organized protests, especially in response to specific events and developments around AI.
 These can be a great way to promote PauseAI and gain media coverage for the cause.
 
-Please read our [Guide to Organizing a Protest](/organizing-a-protest) to learn how to do this.
+Please read our [Guide to Organizing a Protest](/organizing-a-protest) to learn how to do this. Make sure all participants are aware of the [Protesters Code of Conduct](/protesters-code-of-conduct).
 
 ### Meetings with Congressional Offices (US)
 
@@ -420,6 +420,10 @@ There are several ways to procure free or cheap meeting spaces, as long as you p
 - **Parks and Outdoor Venues**: For less formal meetings or gatherings, consider a local park. Ensure you check if you need a permit, especially for larger groups or special setups.
 
 When using free spaces, it’s good etiquette to leave the space as you found it and to thank the provider. This maintains a good relationship and increases the likelihood that the space will be available for future use.
+
+### Note: Safeguarding and Code of Conduct
+
+All event organisers should be familiar with PauseAI's [Code of Conduct](/code-of-conduct) and [Safeguarding Protocol](/safeguarding-protocol). Make sure participants are informed about the Code of Conduct, reporting contacts are visible, and you know how to handle a disclosure. See the [Event Operations Checklist](/safeguarding-protocol#14-event-operations-checklist) in the Safeguarding Protocol for a full pre-event checklist.
 
 ### Note: Best practices for event planning
 
