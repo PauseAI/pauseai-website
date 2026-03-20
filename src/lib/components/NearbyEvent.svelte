@@ -28,14 +28,14 @@
 
 	function findNearbyEvent(geo: GeoApiResponse, events: CalendarResponse) {
 		const { latitude: userLatitude, longitude: userLongitude } = geo
-		if (!userLatitude || !userLongitude) return null
+		if (userLatitude == null || userLongitude == null) return null
 
-		const userCoords = [userLatitude, userLongitude]
+		const userCoords: [number, number] = [userLongitude, userLatitude]
 
 		const isNearby = (event: Event): boolean => {
 			const { geo_latitude, geo_longitude } = event
-			if (!geo_latitude || !geo_longitude) return false
-			const eventCoords = [geo_latitude, geo_longitude]
+			if (geo_latitude == null || geo_longitude == null) return false
+			const eventCoords: [number, number] = [geo_longitude, geo_latitude]
 			return distance(userCoords, eventCoords, { units: 'kilometers' }) <= MAX_DISTANCE_KM
 		}
 
