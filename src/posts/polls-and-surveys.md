@@ -1,5 +1,5 @@
 ---
-title: Polls & surveys
+title: Polls & Surveys
 description: How much do regular people and experts worry about AI risks and governance?
 ---
 

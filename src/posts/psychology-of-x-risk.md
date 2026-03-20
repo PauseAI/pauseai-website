@@ -1,5 +1,5 @@
 ---
-title: The difficult psychology of existential risk
+title: The Difficult Psychology of Existential Risk
 description: Thinking about the end of the world is hard.
 ---
 

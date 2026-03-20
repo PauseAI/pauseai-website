@@ -1,5 +1,5 @@
 ---
-title: Environmental impact of AI
+title: Environmental Impact of AI
 description: AI's environmental impact is a problem not just because of the immediate human cost, but because robots are fantastically energy-hungry and thus accelerate the unsustainable, insupportable damage we are doing to Earth.
 ---
 

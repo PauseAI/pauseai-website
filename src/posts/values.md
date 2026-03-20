@@ -1,5 +1,5 @@
 ---
-title: PauseAI values
+title: PauseAI Values
 description: How does PauseAI plan to achieve its mission?
 ---
 

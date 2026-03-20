@@ -1,5 +1,5 @@
 ---
-title: Organizing a PauseAI protest
+title: Organizing a PauseAI Protest
 description: It's not very hard!
 ---
 

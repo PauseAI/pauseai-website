@@ -1,5 +1,5 @@
 ---
-title: Pausing AI development might go wrong. How to mitigate the risks?
+title: Pausing AI Development Might Go Wrong. How to Mitigate the Risks?
 description: This article addresses some of the risks of pausing AI development, and how to mitigate them.
 ---
 

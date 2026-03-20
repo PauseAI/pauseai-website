@@ -1,5 +1,5 @@
 ---
-title: PauseAI candlelit vigil @ UN HQ NYC, 3rd of June
+title: PauseAI Candlelit Vigil @ UN HQ NYC, 3rd of June
 ---
 
 - Candlelit vigil to raise awareness about the existential risk of AI.
