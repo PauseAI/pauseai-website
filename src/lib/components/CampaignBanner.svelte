@@ -1,21 +1,15 @@
 <script lang="ts">
-	import { browser } from '$app/environment'
 	import { page } from '$app/stores'
 	import LinkWithoutIcon from '$lib/components/LinkWithoutIcon.svelte'
 	import { deLocalizeHref } from '$lib/paraglide/runtime'
-	import { getItem, setItem } from '$lib/localStorage'
+	import { setItem } from '$lib/localStorage'
 	import X from 'lucide-svelte/icons/x'
-	import { get } from 'svelte/store'
 	import { fade } from 'svelte/transition'
 
 	export let href: string
 	export let id = 'campaign'
 
-	let dismissed = id ? getItem(`campaign_banner_${id}_hidden`) === 'true' : false
-	// Hide immediately if already on the target page (works during SSR and prevents flash)
-	if (deLocalizeHref(get(page).url.pathname) === href) {
-		dismissed = true
-	}
+	let dismissed = false
 
 	function close() {
 		dismissed = true
@@ -24,11 +18,18 @@
 		}
 	}
 
-	// Dismiss on navigation to the target page
-	$: if (browser && deLocalizeHref($page.url.pathname) === href) {
-		close()
+	// Hide on navigation to the target page
+	$: if (deLocalizeHref($page.url.pathname) === href) {
+		dismissed = true
 	}
 </script>
+
+<svelte:head>
+	{#if id}
+		<!-- eslint-disable-next-line svelte/no-at-html-tags -->
+		{@html `<style>html[data-active-campaign-banner="${id}"] [data-campaign-banner-id="${id}"]{display:block!important}</style>`}
+	{/if}
+</svelte:head>
 
 {#if !dismissed}
 	<div class="campaign-banner" data-campaign-banner-id={id} transition:fade={{ duration: 200 }}>

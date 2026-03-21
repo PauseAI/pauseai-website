@@ -1,9 +1,9 @@
 <script lang="ts">
 	import type { GeoApiResponse } from '$api/geo/+server'
+	import { browser } from '$app/environment'
 	import { page } from '$app/stores'
 	import Banner from '$lib/components/Banner.svelte'
 	import CampaignBanner from '$lib/components/CampaignBanner.svelte'
-	import { isDateRangeActive } from '$lib/dateRange'
 	import Hero from '$lib/components/Hero.svelte'
 	import Link from '$lib/components/Link.svelte'
 	import NearbyEvent from '$lib/components/NearbyEvent.svelte'
@@ -24,27 +24,32 @@
 	import Footer from './footer.svelte'
 	import Header from './header.svelte'
 	import PageTransition from './transition.svelte'
-	import blocking from './blocking.cjs?raw'
+	import bannerOrchestration from './banner-orchestration.cjs?raw'
 
 	export let data
 
-	// We use $page store instead of data prop for more reliable navigation
-	// This prevents "undefined" issues during navigation
-
 	let eventFound: boolean
 	let geo: GeoApiResponse | null = null
-	// Show the hero on the homepage, but nowhere else
 	$: hero = deLocalizeHref($page.url.pathname) === '/'
 
 	onMount(async () => {
+		// Skip geo fetch if a geo banner is already active (NearbyEvent not needed)
+		const active = document.documentElement.dataset.activeBanner
+		if (active === 'gb-feb28-protest' || active === 'us-state-sovereignty') return
+
 		const response = await fetch('/api/geo')
 		geo = await response.json()
 	})
+
+	// NearbyEvent overrides non-geo exclusive banners
+	$: if (browser && eventFound) {
+		delete document.documentElement.dataset.activeBanner
+	}
 </script>
 
 <svelte:head>
 	<!-- eslint-disable-next-line svelte/no-at-html-tags not vulnerable against XSS -->
-	{@html `<${'script'}>${blocking}</script>`}
+	{@html `<${'script'}>${bannerOrchestration}</script>`}
 </svelte:head>
 
 <PreloadFonts urls={[robotoSlabLatin300, sairaCondensedLatin700]} />
@@ -54,7 +59,7 @@
 </h2>
 
 <div class="page-top" class:hero-page={hero}>
-	<!-- Make sure we only show one banner at a time-->
+	<!-- Dev-only locale mismatch warning. No id when isDev, so not affected by banner orchestration CSS. -->
 	{#if data.localeAlert}
 		<Banner
 			contrast={data.localeAlert.isDev}
@@ -63,40 +68,34 @@
 			<!-- eslint-disable-next-line svelte/no-at-html-tags not vulnerable against XSS -->
 			{@html data.localeAlert.message}
 		</Banner>
-	{:else if geo?.country?.code === 'GB' && isDateRangeActive({ endsOn: '2025-02-28' })}
-		<Banner contrast={hero} id="gb-feb28-protest">
-			<b
-				>PauseAI's largest ever protest will be on Saturday February 28th in London. <Link
-					href="https://luma.com/o0p4htmk">Sign up now!</Link
-				></b
-			>
-		</Banner>
-	{:else}
-		<NearbyEvent contrast={hero} bind:eventFound {geo} />
-		{#if !eventFound}
-			{#if geo?.country?.code === 'US' && isDateRangeActive({ endsOn: '2025-02-28' })}
-				<Banner contrast={hero} id="us-state-sovereignty">
-					<b
-						>HELP US PROTECT STATE SOVEREIGNTY ON AI REGULATION | <Link
-							href="https://mstr.app/b09fa92b-1899-43a0-9d95-99cd99c9dfb2">ACT NOW »</Link
-						></b
-					>
-				</Banner>
-			{:else if isDateRangeActive({ endsOn: '2024-12-31' })}
-				<Banner contrast={hero} id="holiday-littlehelpers" target="/littlehelpers">
-					<strong>🎄 Holiday Matching Campaign!</strong> Help fund volunteer stipends for PauseAI
-					advocates. <Link href="/littlehelpers">Join the Little Helpers campaign →</Link>
-				</Banner>
-			{/if}
-		{/if}
 	{/if}
 
-	{#if isDateRangeActive({ endsOn: '2026-02-23' })}
-		<CampaignBanner href="/brussels-ep-protest-2026" id="brussels-ep-protest-2026">
-			<strong>Brussels, Feb 23</strong> - Join us outside the European Parliament to call for a global
-			treaty to pause frontier AI development.
-		</CampaignBanner>
-	{/if}
+	<!-- All banners rendered, hidden by default. Blocking script reveals the active main/campaign banner. -->
+	<Banner contrast={hero} id="gb-feb28-protest">
+		<b
+			>PauseAI's largest ever protest will be on Saturday February 28th in London. <Link
+				href="https://luma.com/o0p4htmk">Sign up now!</Link
+			></b
+		>
+	</Banner>
+	<Banner contrast={hero} id="us-state-sovereignty">
+		<b
+			>HELP US PROTECT STATE SOVEREIGNTY ON AI REGULATION | <Link
+				href="https://mstr.app/b09fa92b-1899-43a0-9d95-99cd99c9dfb2">ACT NOW »</Link
+			></b
+		>
+	</Banner>
+	<Banner contrast={hero} id="holiday-littlehelpers" target="/littlehelpers">
+		<strong>🎄 Holiday Matching Campaign!</strong> Help fund volunteer stipends for PauseAI
+		advocates. <Link href="/littlehelpers">Join the Little Helpers campaign →</Link>
+	</Banner>
+
+	<NearbyEvent contrast={hero} bind:eventFound {geo} />
+
+	<CampaignBanner href="/brussels-ep-protest-2026" id="brussels-ep-protest-2026">
+		<strong>Brussels, Feb 23</strong> - Join us outside the European Parliament to call for a global treaty
+		to pause frontier AI development.
+	</CampaignBanner>
 
 	{#if hero}
 		<div class="hero-section">
@@ -144,14 +143,12 @@
 <ProgressBar color="var(--brand)" />
 
 <style>
-	/* @import url('$lib/reset.css');
-	@import url('$lib/theme.css'); */
-
-	/* .wrapper {
-		color: var(--t-text);
-		max-width: 50rem;
-		margin: auto;
-	} */
+	/* Hide all orchestrated banners by default.
+	   Each Banner/CampaignBanner self-registers its reveal rule via <svelte:head>. */
+	:global([data-banner-id]),
+	:global([data-campaign-banner-id]) {
+		display: none !important;
+	}
 
 	:global(:root) {
 		--gutter-max: 3rem;

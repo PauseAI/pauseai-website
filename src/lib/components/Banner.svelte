@@ -3,18 +3,13 @@
 	import { page } from '$app/stores'
 	import { fade } from 'svelte/transition'
 	import { deLocalizeHref } from '$lib/paraglide/runtime'
-	import { getItem, setItem } from '$lib/localStorage'
-	import { get } from 'svelte/store'
+	import { setItem } from '$lib/localStorage'
 
 	export let contrast = false
 	export let target: string | null = null
 	export let id: string | null = null
 
-	let dismissed = id ? getItem(`banner_${id}_hidden`) === 'true' : false
-	// Hide immediately if already on the target page (works during SSR and prevents flash)
-	if (target && deLocalizeHref(get(page).url.pathname) === target) {
-		dismissed = true
-	}
+	let dismissed = false
 
 	function close() {
 		dismissed = true
@@ -28,6 +23,13 @@
 		dismissed = true
 	}
 </script>
+
+<svelte:head>
+	{#if id}
+		<!-- eslint-disable-next-line svelte/no-at-html-tags -->
+		{@html `<style>html[data-active-banner="${id}"] [data-banner-id="${id}"]{display:flex!important}</style>`}
+	{/if}
+</svelte:head>
 
 {#if !dismissed}
 	<div class="banner" class:contrast data-banner-id={id} transition:fade={{ duration: 200 }}>
