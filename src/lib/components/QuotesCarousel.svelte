@@ -33,13 +33,15 @@
 			text: m.home_quotes_asi_statement_text(),
 			author: m.home_quotes_asi_statement_author(),
 			title: m.home_quotes_asi_statement_title(),
-			image: ASI_Statement
+			image: ASI_Statement,
+			href: 'https://superintelligence-statement.org/'
 		},
 		{
 			text: m.home_quotes_cais_text(),
 			author: m.home_quotes_cais_author(),
 			title: m.home_quotes_cais_title(),
-			image: CAIS
+			image: CAIS,
+			href: 'https://www.theguardian.com/technology/2023/may/30/risk-of-extinction-by-ai-should-be-global-priority-say-tech-experts'
 		},
 		{
 			text: m.home_quotes_hinton_text(),
@@ -51,7 +53,8 @@
 			text: m.home_quotes_hawking_text(),
 			author: 'Stephen Hawking',
 			title: m.home_quotes_hawking_title(),
-			image: Hawking
+			image: Hawking,
+			href: 'https://www.bbc.com/news/technology-30290540'
 		},
 		{
 			text: m.home_quotes_turing_text(),
