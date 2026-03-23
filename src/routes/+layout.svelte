@@ -29,13 +29,13 @@
 	export let data
 
 	let eventFound: boolean
-	let geo: GeoApiResponse | null = null
+	let geoForNearbyEvent: GeoApiResponse | null = null
 	$: hero = deLocalizeHref($page.url.pathname) === '/'
 
 	onMount(async () => {
 		const response = await fetch('/api/geo')
 		if (!response.ok) return
-		geo = await response.json()
+		const geo = await response.json()
 
 		// Keep geo cookie in sync with actual location.
 		// Re-run selectBanners if country changed or cookie not yet set.
@@ -45,9 +45,14 @@
 			// @ts-expect-error selectBanners is injected by banner-selection.cjs
 			window.selectBanners()
 		}
+
+		// Don't show NearbyEvent if a geo banner is active (geo banners take priority)
+		if (!document.documentElement.dataset.isActiveBannerGeo) {
+			geoForNearbyEvent = geo
+		}
 	})
 
-	// NearbyEvent overrides non-geo exclusive banners
+	// NearbyEvent overrides the main banner
 	$: if (browser && eventFound) {
 		delete document.documentElement.dataset.activeBanner
 	}
@@ -96,7 +101,7 @@
 		advocates. <Link href="/littlehelpers">Join the Little Helpers campaign →</Link>
 	</Banner>
 
-	<NearbyEvent contrast={hero} bind:eventFound {geo} />
+	<NearbyEvent contrast={hero} bind:eventFound geo={geoForNearbyEvent} />
 
 	<CampaignBanner href="/brussels-ep-protest-2026" id="brussels-ep-protest-2026">
 		<strong>Brussels, Feb 23</strong> - Join us outside the European Parliament to call for a global treaty

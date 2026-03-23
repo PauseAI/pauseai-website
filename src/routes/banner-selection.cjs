@@ -1,5 +1,6 @@
 // Banner selection: picks the active main banner and campaign banner before first paint.
-// Reads geo from cookie, checks dates + dismissals, sets data attributes on <html>.
+// Reads geo from cookie, checks dates + dismissals, sets data-active-banner,
+// data-is-active-banner-geo, and data-active-campaign-banner on <html>.
 // Exposed as window.selectBanners to allow re-runs.
 window.selectBanners = function () {
 	var now = new Date()
@@ -29,23 +30,28 @@ window.selectBanners = function () {
 	}
 
 	// Main banner: first matching rule wins
+	delete document.documentElement.dataset.activeBanner
+	delete document.documentElement.dataset.isActiveBannerGeo
 	if (
 		country === 'GB' &&
 		inDateRange(null, '2025-02-28') &&
 		!dismissed('banner', 'gb-feb28-protest')
 	) {
 		document.documentElement.dataset.activeBanner = 'gb-feb28-protest'
+		document.documentElement.dataset.isActiveBannerGeo = 'true'
 	} else if (
 		country === 'US' &&
 		inDateRange(null, '2025-02-28') &&
 		!dismissed('banner', 'us-state-sovereignty')
 	) {
 		document.documentElement.dataset.activeBanner = 'us-state-sovereignty'
+		document.documentElement.dataset.isActiveBannerGeo = 'true'
 	} else if (inDateRange(null, '2024-12-31') && !dismissed('banner', 'holiday-littlehelpers')) {
 		document.documentElement.dataset.activeBanner = 'holiday-littlehelpers'
 	}
 
 	// Campaign banner: shown if eligible
+	delete document.documentElement.dataset.activeCampaignBanner
 	if (
 		inDateRange(null, '2026-02-23') &&
 		!dismissed('campaign_banner', 'brussels-ep-protest-2026')
