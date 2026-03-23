@@ -24,7 +24,7 @@
 	import Footer from './footer.svelte'
 	import Header from './header.svelte'
 	import PageTransition from './transition.svelte'
-	import bannerOrchestration from './banner-orchestration.cjs?raw'
+	import bannerSelection from './banner-selection.cjs?raw'
 
 	export let data
 
@@ -33,12 +33,18 @@
 	$: hero = deLocalizeHref($page.url.pathname) === '/'
 
 	onMount(async () => {
-		// Skip geo fetch if a geo banner is already active (NearbyEvent not needed)
-		const active = document.documentElement.dataset.activeBanner
-		if (active === 'gb-feb28-protest' || active === 'us-state-sovereignty') return
-
 		const response = await fetch('/api/geo')
+		if (!response.ok) return
 		geo = await response.json()
+
+		// Keep geo cookie in sync with actual location.
+		// Re-run selectBanners if country changed or cookie not yet set.
+		const cookieMatch = document.cookie.match(/(?:^|; )geo_country=([^;]*)/)
+		if (geo?.country && geo.country !== cookieMatch?.[1]) {
+			document.cookie = `geo_country=${geo.country}; path=/; max-age=31536000; SameSite=Lax` // 1 year
+			// @ts-expect-error selectBanners is injected by banner-selection.cjs
+			window.selectBanners()
+		}
 	})
 
 	// NearbyEvent overrides non-geo exclusive banners
@@ -49,7 +55,7 @@
 
 <svelte:head>
 	<!-- eslint-disable-next-line svelte/no-at-html-tags not vulnerable against XSS -->
-	{@html `<${'script'}>${bannerOrchestration}</script>`}
+	{@html `<${'script'}>${bannerSelection}</script>`}
 </svelte:head>
 
 <PreloadFonts urls={[robotoSlabLatin300, sairaCondensedLatin700]} />

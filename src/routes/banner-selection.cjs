@@ -1,7 +1,7 @@
-// Banner orchestration: picks the active main banner and campaign banner before first paint.
+// Banner selection: picks the active main banner and campaign banner before first paint.
 // Reads geo from cookie, checks dates + dismissals, sets data attributes on <html>.
-// Each banner self-registers its reveal CSS via <svelte:head>.
-;(function () {
+// Exposed as window.selectBanners to allow re-runs.
+window.selectBanners = function () {
 	var now = new Date()
 
 	var country = ''
@@ -52,4 +52,5 @@
 	) {
 		document.documentElement.dataset.activeCampaignBanner = 'brussels-ep-protest-2026'
 	}
-})()
+}
+window.selectBanners()
