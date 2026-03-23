@@ -33,10 +33,14 @@
 		const userCoords: [number, number] = [userLongitude, userLatitude]
 
 		const isNearby = (event: Event): boolean => {
-			const { geo_latitude, geo_longitude } = event
+			const { geo_latitude, geo_longitude, url } = event
 			if (geo_latitude == null || geo_longitude == null) return false
 			const eventCoords: [number, number] = [geo_longitude, geo_latitude]
-			return distance(userCoords, eventCoords, { units: 'kilometers' }) <= MAX_DISTANCE_KM
+
+			// Override for specific D.C. (Capitol Hill) event to include users up to 250 miles away
+			const maxDistance = url === 'jogj70dj' ? 402 : MAX_DISTANCE_KM
+
+			return distance(userCoords, eventCoords, { units: 'kilometers' }) <= maxDistance
 		}
 
 		return events.entries.map((entry) => entry.event).find(isNearby) ?? null
