@@ -49,7 +49,6 @@
 				maxAge: 31536000,
 				sameSite: 'Lax'
 			}).toString() // 1 year
-			// @ts-expect-error selectBanners is injected by banner-selection.cjs
 			window.selectBanners()
 		}
 
