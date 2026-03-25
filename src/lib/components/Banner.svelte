@@ -1,46 +1,43 @@
 <script lang="ts">
 	import X from 'lucide-svelte/icons/x'
 	import { page } from '$app/stores'
-	import { browser } from '$app/environment'
 	import { fade } from 'svelte/transition'
+	import { deLocalizeHref } from '$lib/paraglide/runtime'
+	import { setItem } from '$lib/localStorage'
 
 	export let contrast = false
 	export let target: string | null = null
 	export let id: string | null = null
-	let hidden = false
-	if (browser && id) {
-		try {
-			hidden = localStorage.getItem(`banner_${id}_hidden`) === 'true'
-		} catch {
-			// SecurityError in storage-restricted contexts
+
+	let dismissed = false
+
+	function close() {
+		dismissed = true
+		if (id) {
+			setItem(`banner_${id}_hidden`, 'true')
 		}
 	}
 
-	function closeClick() {
-		hidden = true
-		if (browser && id) {
-			try {
-				localStorage.setItem(`banner_${id}_hidden`, 'true')
-			} catch (e) {
-				console.error(e)
-			}
-		}
-	}
-
-	$: {
-		const path = $page.url.pathname
-		if (path === target) hidden = true
+	// Hide on navigation to the target page
+	$: if (target && deLocalizeHref($page.url.pathname) === target) {
+		dismissed = true
 	}
 </script>
 
-{#if !hidden}
+<svelte:head>
+	{#if id}
+		<!-- eslint-disable-next-line svelte/no-at-html-tags -->
+		{@html `<style>html[data-active-banner="${id}"] [data-banner-id="${id}"]{display:flex!important}</style>`}
+	{/if}
+</svelte:head>
+
+{#if !dismissed}
 	<div class="banner" class:contrast data-banner-id={id} transition:fade={{ duration: 200 }}>
 		<span class="content">
 			<slot></slot>
 		</span>
 
-		<!-- Simple button with minimal attributes -->
-		<button class="close banner-close-btn" on:click={closeClick}>
+		<button class="close banner-close-btn" on:click={close}>
 			<X size="1.2em" />
 			<span class="sr-only">Close</span>
 		</button>
