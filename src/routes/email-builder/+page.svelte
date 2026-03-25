@@ -1,121 +1,37 @@
 <script lang="ts">
+	import { onMount } from 'svelte'
 	import PostMeta from '$lib/components/PostMeta.svelte'
-	import Button from '$lib/components/Button.svelte'
-	// Risks
-	import Xrisk from './concerns/xrisk.svelte'
-	/* import Bio from './concerns/bio.svelte' */
-	import Cyber from './concerns/cyber.svelte'
-	// Actions
-	import Meeting from './actions/meeting.svelte'
-	import Debate from './actions/debate.svelte'
-	import Treaty from './actions/treaty.svelte'
-	import Acknowledge from './actions/acknowledge.svelte'
-	import { meta } from './meta'
-	import * as clipboard from 'clipboard-polyfill'
-	import toast from 'svelte-french-toast'
 	import Link from '$lib/components/Link.svelte'
-	import Card from '$lib/components/Card.svelte'
-	import { type Component } from 'svelte'
+	import { meta } from './meta'
 
 	const { title, description, date } = meta
 
-	const letterId = 'letter'
-
-	function copyHTMLWithoutStyles() {
-		var element = document.getElementById(letterId)
-		var clonedElement = element?.cloneNode(true) as HTMLElement
-
-		// Check for unreplaced placeholders
-		const content = element?.textContent || ''
-		const placeholders = content.match(/__[A-Z\s]+__/g)
-
-		clipboard
-			.write([
-				new clipboard.ClipboardItem({
-					'text/html': new Blob([clonedElement?.outerHTML], { type: 'text/html' })
-				})
-			])
-			.then(() => {
-				if (placeholders && placeholders.length > 0) {
-					const uniquePlaceholders = [...new Set(placeholders)]
-					toast.error(
-						`Letter copied, but ${uniquePlaceholders.length} placeholder(s) still need to be replaced: ${uniquePlaceholders.join(', ')}`,
-						{
-							duration: 5000
-						}
+	onMount(() => {
+		const initActivoice = () => {
+			// @ts-expect-error - Activoice is loaded externally
+			if (window.Activoice) {
+				// @ts-expect-error - Activoice is loaded externally
+				window.Activoice.bootstrap().then(() => {
+					const inlineEmbed = document.getElementById(
+						'activoice-inline-c6f322b3_a310_4ecb_a8e0_3f86392512df'
 					)
-				} else {
-					toast.success('Letter copied to clipboard!')
-				}
-			})
-			.catch((err) => {
-				window.alert(`Failed to copy: ${err}`)
-			})
-	}
-
-	const concerns: Section[] = [
-		{
-			name: 'Existential risk',
-			section: Xrisk
-		},
-		// {
-		// 	name: 'Bio risk',
-		// 	section: Bio
-		// },
-		{
-			name: 'Cybersecurity risk',
-			section: Cyber
-		}
-	]
-
-	const actions: Section[] = [
-		{
-			name: 'Prepare treaty for summit',
-			section: Treaty
-		},
-		{
-			name: 'Acknowledge x-risk',
-			section: Acknowledge
-		},
-		{
-			name: 'Have a meeting with you',
-			section: Meeting
-		},
-		{
-			name: 'Organize a debate',
-			section: Debate
-		}
-	]
-
-	let selectedAction = actions[0]
-	let selectedConcern = concerns[0]
-
-	type Section = {
-		name: string
-		section: Component
-	}
-
-	function handleClick(event: MouseEvent) {
-		const target = event.target as HTMLElement
-		const anchor = target.closest('a')
-
-		if (anchor) {
-			event.preventDefault()
-			window.open(anchor.href, '_blank')
-		}
-	}
-
-	function handleKeydown(event: KeyboardEvent) {
-		if (event.key === 'Enter') {
-			const target = event.target as HTMLElement
-			const anchor = target.closest('a')
-			if (anchor) {
-				event.preventDefault()
-				window.open(anchor.href, '_blank')
+					if (inlineEmbed) {
+						inlineEmbed.addEventListener('loaded', () => {
+							console.log('Activoice inline embed loaded')
+						})
+					}
+				})
+			} else {
+				setTimeout(initActivoice, 100)
 			}
 		}
-	}
+		initActivoice()
+	})
 </script>
+
+<svelte:head>
+	<script src="https://activoice.online/embed/activoice-12.0.0.js"></script>
+</svelte:head>
 
 <PostMeta {title} {description} {date} />
 
@@ -152,219 +68,12 @@
 	</li>
 </ul>
 
-<h2>Who to send to</h2>
-<ul>
-	<li>
-		<b>Ideally, someone who might visit the next Summit. </b> The next AI Safety Summit will be attended
-		by many countries. Who is likely to represent your country? Maybe a minister of foreign affairs or
-		science?
-	</li>
-	<li>
-		<b>Someone who is likely to act.</b> Is there a politician who's often at the forefront of discussing
-		new digital / science topics? Perhaps even someone who's already shared concerns about AI? Or someone
-		who's just good at pitching new, controversial topics and convincing others?
-	</li>
-	<li>
-		<b>Someone who politically represents you.</b> Maybe a politician in parliament from the party
-		that you voted for. <Link
-			href="https://github.com/Campaign-for-AI-Safety-archive/.github/tree/main/email-templates#email-your-politician"
-			>Find their email address</Link
-		>.
-	</li>
-</ul>
-
-<h2>Pick a concern</h2>
-<ul>
-	<li>
-		<b>What are you most concerned about?</b> Don't be afraid of being judged for your concerns. It's
-		the job of politicians to represent you - including the things that you worry about.
-	</li>
-	<li>
-		<b>Consider the person</b> who you're writing to, and what they may already believe. If you're writing
-		to someone who's already worked on IT and cybersecurity issues before, consider focsing on that particular
-		issue.
-	</li>
-	<li>
-		<b>Select one:</b>
-		{#each concerns as section}
-			<button
-				class={selectedConcern == section ? 'tag tag--selected' : 'tag'}
-				on:click={() => (selectedConcern = section)}>{section.name}</button
-			>&nbsp;
-		{/each}
-	</li>
-</ul>
-
-<h2>Pick an action</h2>
-<ul>
-	<li>
-		What do you want the recipient to do after receiving your mail? Prepare for the summit, organize
-		a debate, have a meeting? As with every section, you can replace the suggested text if you have
-		a better idea.
-	</li>
-	<li>
-		<b>Select one:</b>
-		{#each actions as section}
-			<button
-				class={selectedAction == section ? 'tag tag--selected' : 'tag'}
-				on:click={() => (selectedAction = section)}>{section.name}</button
-			>&nbsp;
-		{/each}
-	</li>
-</ul>
-
-<h2>Last steps</h2>
-<p>
-	Before sending the email you need to manually replace the placeholders "__NAME__", "__THING__",
-	"__COUNTRY__" and "__YOUR NAME__". It can also be effective to further personalize the message.
-	Here are some tips:
-</p>
-<ul>
-	<li>
-		<b>Know your audience.</b> Read up about the person you're sending a letter to. What are they working
-		on? How do they think about AI? What has happened in their professional life the last weeks?
-	</li>
-	<li>
-		<b>Share something about yourself.</b> Why do you care about AI safety? Why did you take the time
-		to send this letter?
-	</li>
-	<li>
-		<b>Make it newsworthy.</b> The mail template is not always up-to-date. Make sure you mention recent
-		AI policy advancements (especially local ones).
-	</li>
-</ul>
-<p>
-	For more information, you can take a look at our page on <Link href="/writing-a-letter"
-		>how to write a letter or email to someone in power</Link
-	>.
-</p>
-
-<!-- eslint-disable svelte/no-restricted-html-elements -- 
- No link l10n needed, Link component messes up the rich text -->
-
-<h2>Result</h2>
-<p>You can edit the message directly in the browser.</p>
-<div>
-	<Card className="letter">
-		<div
-			id={letterId}
-			contenteditable="true"
-			on:click={handleClick}
-			on:keydown={handleKeydown}
-			role="document"
-			tabindex="-1"
-		>
-			<p>Dear __NAME__,</p>
-			<p>
-				First of all, thank you very much for everything you have done for __THING__. I am emailing
-				you today to bring an issue to your attention, in which I believe __COUNTRY__ and you in
-				particular can play a very important role. The issue is the existential threat of artificial
-				intelligence.
-			</p>
-
-			<svelte:component this={selectedConcern.section} />
-
-			<p>
-				The advancements in the AI landscape have progressed much faster than anticipated. In 2020,
-				it was
-				<a href="https://www.metaculus.com/questions/3479/date-weakly-general-ai-is-publicly-known"
-					>estimated</a
-				>
-				that an AI would pass university entrance exams by 2050. This goal was achieved in March 2023.
-				Now, AI is already writing
-				<a href="https://www.youtube.com/watch?t=1042&v=wUOjTR1511M&feature=youtu.be">up to 90%</a>
-				of the code at AI companies. At some point, possibly in the near future, AI will be able to directly
-				build more powerful AI, leading to a rapid increase in AI capabilities. Thousands of experts have
-				<a href="https://futureoflife.org/open-letter/pause-giant-ai-experiments/"
-					>called for a pause</a
-				>
-				in frontier AI development, and there seems to be broad support for slowing down AI development
-				among the public, too. A
-				<a
-					href="https://www.vox.com/future-perfect/2023/9/19/23879648/americans-artificial-general-intelligence-ai-policy-poll"
-					>poll</a
-				>
-				indicates that 63% of American support regulations to prevent AI companies from building superintelligent
-				AI. Over 100.000 people (including the most cited AI researchers) have signed a
-				<a href="https://superintelligence-statement.org/"
-					>statement on banning the development of superintelligence</a
-				>.
-			</p>
-
-			<p>
-				Even among AI company CEOs, there is
-				<a
-					href="https://www.pbs.org/newshour/politics/watch-overwhelming-consensus-for-artificial-intelligence-regulation-musk-says-after-senate-tech-meeting"
-					>“overwhelming consensus”</a
-				>
-				that regulation is needed, but it seems that companies are not willing to jeopardise their competitive
-				position by voluntarily halting development. A pause would need to be imposed by a government.
-				Unfortunately, the race dynamics don't just apply to companies: countries also have incentives
-				to not fall behind in AI capabilities, and prioritize growth over safety. These dynamics are the
-				reason why we urgently need an international solution. We need international coordination, we
-				need politicians to initialize treaty negotiations.
-			</p>
-
-			<svelte:component this={selectedAction.section} />
-
-			<p>Best regards,</p>
-
-			<p>__YOUR NAME__</p>
-		</div>
-	</Card>
+<div
+	id="activoice-inline-container-c6f322b3_a310_4ecb_a8e0_3f86392512df"
+	style="width: 100%; margin-top: 2rem;"
+>
+	<activoice-inline
+		id="activoice-inline-c6f322b3_a310_4ecb_a8e0_3f86392512df"
+		campaign-id="c6f322b3-a310-4ecb-a8e0-3f86392512df"
+	></activoice-inline>
 </div>
-
-<div class="actionBar">
-	<Button on:click={() => copyHTMLWithoutStyles()}>Copy</Button>
-</div>
-
-<style>
-	ul {
-		list-style: disc;
-		margin-left: 2rem;
-	}
-
-	div :global(.letter) {
-		/* Edit mouse cursor, indicate editable */
-		cursor: text;
-		/* make it lookt like a letter! */
-		padding: 1rem;
-		margin: 1rem;
-		/* shadow */
-		font-family: 'Times New Roman', Times, serif;
-	}
-
-	.actionBar {
-		display: flex;
-		align-items: center;
-		margin-bottom: 1rem;
-		gap: 1rem;
-		justify-content: end;
-	}
-
-	.tag {
-		padding: 0.3rem 0.5rem;
-		border-radius: 10px;
-		border: var(--brand) 2px solid;
-		background-color: var(--bg);
-
-		color: var(--brand);
-		cursor: pointer;
-		font-size: 0.8rem;
-		margin-bottom: 0.3rem;
-	}
-	.tag:hover {
-		color: var(--brand-dark);
-		border-color: var(--brand-dark);
-	}
-
-	.tag--selected {
-		color: var(--bg);
-		background-color: var(--brand);
-	}
-
-	.tag--selected:hover {
-		background-color: var(--brand-dark);
-		color: var(--bg);
-	}
-</style>
