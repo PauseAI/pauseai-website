@@ -1,3 +1,4 @@
+/* global mainBannerRules, campaignBannerRules */
 // Banner selection: picks the active main banner and campaign banner before first paint.
 // Reads geo from cookie, checks dates + dismissals, sets data-active-banner,
 // data-is-active-banner-geo, and data-active-campaign-banner on <html>.
@@ -28,31 +29,6 @@ window.selectBanners = function () {
 		}
 		return true
 	}
-
-	var mainBannerRules = [
-		{
-			id: 'gb-feb28-protest',
-			countries: ['GB'],
-			dateRange: [null, '2025-02-28']
-		},
-		{
-			id: 'us-state-sovereignty',
-			countries: ['US'],
-			dateRange: [null, '2025-02-28']
-		},
-		{
-			id: 'holiday-littlehelpers',
-			countries: null,
-			dateRange: [null, '2024-12-31']
-		}
-	]
-
-	var campaignBannerRules = [
-		{
-			id: 'brussels-ep-protest-2026',
-			dateRange: [null, '2026-02-23']
-		}
-	]
 
 	function findActiveBannerRule(rules, dismissalPrefix) {
 		return rules.find(function (rule) {
