@@ -65,6 +65,33 @@
 </script>
 
 <svelte:head>
+	<script>
+		var mainBannerRules = [
+			{
+				id: 'gb-feb28-protest',
+				countries: ['GB'],
+				dateRange: [null, '2025-02-28']
+			},
+			{
+				id: 'us-state-sovereignty',
+				countries: ['US'],
+				dateRange: [null, '2025-02-28']
+			},
+			{
+				id: 'holiday-littlehelpers',
+				countries: null,
+				dateRange: [null, '2024-12-31']
+			}
+		]
+
+		var campaignBannerRules = [
+			{
+				id: 'brussels-ep-protest-2026',
+				dateRange: [null, '2026-02-23']
+			}
+		]
+	</script>
+
 	<!-- eslint-disable-next-line svelte/no-at-html-tags not vulnerable against XSS -->
 	{@html `<${'script'}>${bannerSelection}</script>`}
 </svelte:head>
