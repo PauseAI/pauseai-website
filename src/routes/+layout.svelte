@@ -17,6 +17,7 @@
 	import '@fontsource/saira-condensed/700.css'
 	import sairaCondensedLatin700 from '@fontsource/saira-condensed/files/saira-condensed-latin-700-normal.woff2'
 	import { ProgressBar } from '@prgm/sveltekit-progress-bar'
+	import { Cookie, SetCookie } from '@remix-run/headers'
 	import { onMount } from 'svelte'
 	import { Toaster } from 'svelte-french-toast'
 	import '../styles/print.css'
@@ -39,9 +40,15 @@
 
 		// Keep geo cookie in sync with actual location.
 		// Re-run selectBanners if country changed or cookie not yet set.
-		const cookieMatch = document.cookie.match(/(?:^|; )geo_country=([^;]*)/)
-		if (geo?.country && geo.country !== cookieMatch?.[1]) {
-			document.cookie = `geo_country=${geo.country}; path=/; max-age=31536000; SameSite=Lax` // 1 year
+		const geoCountryCookie = new Cookie(document.cookie).get('geo_country')
+		if (geo?.country && geo.country !== geoCountryCookie) {
+			document.cookie = new SetCookie({
+				name: 'geo_country',
+				value: geo.country,
+				path: '/',
+				maxAge: 31536000,
+				sameSite: 'Lax'
+			}).toString() // 1 year
 			// @ts-expect-error selectBanners is injected by banner-selection.cjs
 			window.selectBanners()
 		}
