@@ -11,6 +11,7 @@ export type FrontmatterMeta = {
 	date?: string
 	categories?: Categories[]
 	image?: string
+	showImage?: boolean
 	/** If true, this post will appear in the Latest News section on the homepage */
 	news?: boolean
 }
