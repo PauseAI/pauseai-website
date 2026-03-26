@@ -36,15 +36,15 @@
 	onMount(async () => {
 		const response = await fetch('/api/geo')
 		if (!response.ok) return
-		const geo = await response.json()
+		const geo: GeoApiResponse = await response.json()
 
 		// Keep geo cookie in sync with actual location.
 		// Re-run selectBanners if country changed or cookie not yet set.
 		const geoCountryCookie = new Cookie(document.cookie).get('geo_country')
-		if (geo?.country && geo.country !== geoCountryCookie) {
+		if (geo?.country?.code && geo.country.code !== geoCountryCookie) {
 			document.cookie = new SetCookie({
 				name: 'geo_country',
-				value: geo.country,
+				value: geo.country.code,
 				path: '/',
 				maxAge: 31536000,
 				sameSite: 'Lax'
