@@ -158,7 +158,10 @@
 
 <div class="contact-page">
 	<h1>{title}</h1>
-	<p class="intro">Get in touch with the PauseAI team.</p>
+	<p class="intro">
+		Get in touch with the PauseAI team.<br />
+		Based in the US? Reach out to <Link href="https://www.pauseai-us.org/">PauseAI US</Link> directly.
+	</p>
 
 	<div class="tabs">
 		<button
@@ -290,8 +293,9 @@
 		{:else if activeTab === 'media'}
 			<section id="media-contact">
 				<p class="tab-intro">
-					Looking for press materials or media coverage? Check out our <Link href="/press"
-						>press page</Link
+					Are you a journalist or media professional? We'd love to hear from you! Reach out for
+					interviews, comments, or inquiries. For press materials, you can also check out our <Link
+						href="/press">press page</Link
 					>.
 				</p>
 				<form method="POST" action="?/media" use:enhance={handleEnhance}>

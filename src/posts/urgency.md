@@ -1,5 +1,5 @@
 ---
-title: Why we might have superintelligence sooner than most think
+title: Why We Might Have Superintelligence Sooner Than Most Think
 description: We're underestimating the progress of AI, and there is a small but realistic chance that we are very close to a superintelligence.
 date: '2023-05-04'
 ---

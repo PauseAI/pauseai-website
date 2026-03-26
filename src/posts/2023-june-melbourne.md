@@ -1,5 +1,5 @@
 ---
-title: PauseAI protest @ Melbourne - June 16th
+title: PauseAI Protest @ Melbourne - June 16th
 description: Join PauseAI for an upcoming peaceful protest at the Melbourne Convention and Exhibition Centre (MCEC) where Sam Altman will be having a talk in Melbourne.
 ---
 

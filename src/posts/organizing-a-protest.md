@@ -1,5 +1,5 @@
 ---
-title: Organizing a PauseAI protest
+title: Organizing a PauseAI Protest
 description: It's not very hard!
 ---
 
@@ -18,6 +18,10 @@ However, you can have more impact by scaling up and doing more things, and we're
 - Check out [this amazing article](https://forum.effectivealtruism.org/posts/4ez3nvEmozwPwARr9/a-case-for-the-effectiveness-of-protest) for more insights on why protesting works
 
 ## Preparation
+
+### Review the Code of Conduct
+
+Make sure all participants are aware of our [Code of Conduct](/code-of-conduct) and [Protesters Code of Conduct](/protesters-code-of-conduct). Event organisers should also familiarise themselves with our [Safeguarding Protocol](/safeguarding-protocol).
 
 ### Ask for help
 

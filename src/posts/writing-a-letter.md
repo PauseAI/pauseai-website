@@ -1,5 +1,5 @@
 ---
-title: How to write a letter or email to someone in power
+title: How to Write a Letter or Email to Someone in Power
 description: A guide on how to write a lobby letter
 ---
 

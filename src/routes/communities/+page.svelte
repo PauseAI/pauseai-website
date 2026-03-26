@@ -63,9 +63,9 @@
 		const { userLng, userLat } = await fetchUserLocation()
 
 		const initialState = {
-			lng: userLng || lng,
-			lat: userLat || lat,
-			zoom: userLat && userLng ? LOCATED_ZOOM : zoom
+			lng: userLng ?? lng,
+			lat: userLat ?? lat,
+			zoom: userLat != null && userLng != null ? LOCATED_ZOOM : zoom
 		}
 
 		map = new Map({
