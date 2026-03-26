@@ -12,7 +12,7 @@ import { fetchAndDisplayBilling, formatLlmErrorForLogging } from './llm-utils'
 export const LLM_DEFAULTS = {
 	BASE_URL: 'https://openrouter.ai/api/v1/',
 	MODEL: 'meta-llama/llama-3.3-70b-instruct',
-	PROVIDERS: ['Fireworks'],
+	PROVIDERS: [] as string[],
 	REQUESTS_PER_SECOND: 1
 }
 
@@ -96,12 +96,11 @@ export function createLlmClient(options: {
 	created.interceptors.request.use((config) => {
 		// Only modify data for requests that have a body (POST, PUT, etc.)
 		if (config.data) {
-			Object.assign(config.data, {
-				model: options.model,
-				provider: {
-					order: options.providers
-				}
-			})
+			const extra: Record<string, unknown> = { model: options.model }
+			if (options.providers.length > 0) {
+				extra.provider = { order: options.providers }
+			}
+			Object.assign(config.data, extra)
 		}
 		return config
 	})
