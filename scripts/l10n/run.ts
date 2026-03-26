@@ -174,7 +174,10 @@ const logMessage = (msg: string) => {
 			for (const [k, v] of dates) cageLatestCommitDates.set(k, v)
 		})(),
 		(async () => {
-			const dates = await getLatestCommitDates(websiteGit, 'website')
+			const dates = await getLatestCommitDates(websiteGit, 'website', [
+				'messages/en.json',
+				'src/posts'
+			])
 			for (const [k, v] of dates) websiteLatestCommitDates.set(k, v)
 		})()
 	])
