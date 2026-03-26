@@ -161,6 +161,7 @@ export async function retrieveMessages(
 ): Promise<{ cacheCount: number; totalProcessed: number }> {
 	const result = await retrieve(
 		{
+			label: 'Messages',
 			sourcePaths: [params.sourcePath],
 			locales: params.locales,
 			l10nPromptGenerator: params.l10nPromptGenerator,
@@ -197,6 +198,7 @@ export async function retrieveMarkdown(
 ): Promise<{ cacheCount: number; totalProcessed: number }> {
 	const result = await retrieve(
 		{
+			label: 'Markdown',
 			sourcePaths: params.sourcePaths,
 			locales: params.locales,
 			l10nPromptGenerator: params.l10nPromptGenerator,
@@ -223,6 +225,7 @@ export async function retrieveMarkdown(
  */
 async function retrieve(
 	params: {
+		label: string
 		sourcePaths: string[]
 		locales: string[]
 		l10nPromptGenerator: L10nPromptGenerator
@@ -245,9 +248,12 @@ async function retrieve(
 	)
 	const startTime = Date.now()
 
+	let workBatchNum = 0
+
 	for (let i = 0; i < taskPairs.length; i += BATCH_SIZE) {
 		const batch = taskPairs.slice(i, i + BATCH_SIZE)
 		const batchStart = Date.now()
+		let batchWorkCount = 0
 		await Promise.all(
 			batch.map(async ({ sourcePath, locale }) => {
 				/** Backslash to forward slash to match Git log and for web path */
@@ -296,6 +302,7 @@ async function retrieve(
 				// If we can't use cache, this item needs work
 				if (!useCachedL10n) {
 					total++
+					batchWorkCount++
 					const content = await fs.readFile(sourcePath, 'utf-8')
 					const processedContent = preprocessMarkdown(content)
 
@@ -319,15 +326,21 @@ async function retrieve(
 
 					const promptAdditions = '' // Will be handled by the prompt generator
 
-					const capturedL10n = await l10nFromLLM(
-						processedContent,
-						params.l10nPromptGenerator,
-						params.reviewPromptGenerator,
-						locale,
-						promptAdditions,
-						options,
-						sourcePath
-					)
+					let capturedL10n: string
+					try {
+						capturedL10n = await l10nFromLLM(
+							processedContent,
+							params.l10nPromptGenerator,
+							params.reviewPromptGenerator,
+							locale,
+							promptAdditions,
+							options,
+							sourcePath
+						)
+					} catch (e) {
+						log(`⚠️  Skipping ${sourceFileName} (${locale}): ${(e as Error).message}`)
+						return
+					}
 
 					// Only perform actual file writes and Git operations in non-dry run mode
 					if (!options.isDryRun) {
@@ -352,20 +365,24 @@ async function retrieve(
 			})
 		)
 
-		// Batch complete — log timing and push incrementally
-		const batchElapsed = ((Date.now() - batchStart) / 1000).toFixed(1)
-		const totalElapsed = ((Date.now() - startTime) / 1000).toFixed(1)
-		const batchEnd = Math.min(i + BATCH_SIZE, taskPairs.length)
-		log(
-			`⏱️  Batch ${Math.floor(i / BATCH_SIZE) + 1}: ${batchElapsed}s (${totalElapsed}s total, ${batchEnd}/${taskPairs.length} tasks)`
-		)
+		// Batch complete — log timing and push only for batches that did LLM work
+		if (batchWorkCount > 0 && !options.workItems) {
+			workBatchNum++
+			const batchElapsed = ((Date.now() - batchStart) / 1000).toFixed(1)
+			const totalElapsed = ((Date.now() - startTime) / 1000).toFixed(1)
+			log(
+				`⏱️  Batch ${workBatchNum}: ${batchElapsed}s (${totalElapsed}s total, ${batchWorkCount} items)`
+			)
 
-		if (!options.isDryRun && options.pushAfterBatch) {
-			await options.pushAfterBatch()
+			if (!options.isDryRun && options.pushAfterBatch) {
+				await options.pushAfterBatch()
+			}
 		}
 	}
 
-	// Total count of processed files is the count of source files multiplied by target languages
 	const totalProcessed = params.sourcePaths.length * params.locales.length
+	if (cacheCount > 0 || total > 0) {
+		console.log(`${params.label}: ${cacheCount} cached, ${total} need translation`)
+	}
 	return { cacheCount, totalProcessed }
 }
