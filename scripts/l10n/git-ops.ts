@@ -174,26 +174,35 @@ export async function initializeGitCage(options: {
  *
  * @param git - The SimpleGit instance used to retrieve the log.
  * @param repoType - Description of the repository type for logging
+ * @param pathFilters - Optional array of paths to limit the git log query to
  * @returns A Promise that resolves to a Map where keys are file paths and values are the latest commit dates.
  */
 export async function getLatestCommitDates(
 	git: SimpleGit,
-	repoType: string
+	repoType: string,
+	pathFilters?: string[]
 ): Promise<Map<string, Date>> {
-	console.log(`Starting git log retrieval for ${repoType} commit dates...`)
+	const filterDesc = pathFilters ? ` (filtered: ${pathFilters.join(', ')})` : ''
+	console.log(`Starting git log retrieval for ${repoType} commit dates...${filterDesc}`)
 	const latestCommitDatesMap = new Map<string, Date>()
-	const log = await git.log({
-		'--stat': 4096
-	})
-	for (const entry of log.all) {
-		const files = entry.diff?.files
-		if (!files) continue
-		for (const file of files) {
-			if (!latestCommitDatesMap.has(file.file)) {
-				latestCommitDatesMap.set(file.file, new Date(entry.date))
-			}
+	const args = ['log', '--name-only', '--format=%H %aI']
+	if (pathFilters) {
+		args.push('--', ...pathFilters)
+	}
+	const raw = await git.raw(args)
+	let currentDate: string | null = null
+	for (const line of raw.split('\n')) {
+		const headerMatch = line.match(/^[0-9a-f]{40} (.+)$/)
+		if (headerMatch) {
+			currentDate = headerMatch[1]
+			continue
+		}
+		const file = line.trim()
+		if (file && currentDate && !latestCommitDatesMap.has(file)) {
+			latestCommitDatesMap.set(file, new Date(currentDate))
 		}
 	}
+	console.log(`  ${repoType}: ${latestCommitDatesMap.size} files found in git log`)
 	return latestCommitDatesMap
 }
 
