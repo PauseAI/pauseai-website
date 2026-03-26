@@ -2,17 +2,18 @@
 	import Image from '$lib/components/Image.svelte'
 	import Link from '$lib/components/Link.svelte'
 	import PostMeta from '$lib/components/PostMeta.svelte'
-	import { getAssetUrlOrStaticUrl } from '$lib/images.js'
+	import { getPostMetaImageUrl, isLocalAssetPath, resolveImageUrl } from '$lib/images.js'
 
 	// don't destructure to maintain reactivity for invalidation after language detection
 	export let data
 	$: meta = data.meta
 	$: ({ title = data.slug, date, description, image, author } = meta)
 	$: parent = data.slug.split('/').slice(0, -1).join('/')
-	$: imageUrl = getAssetUrlOrStaticUrl(image)
+	$: bannerImage = !image ? image : isLocalAssetPath(image) ? image : resolveImageUrl(image)
+	$: metaImageUrl = getPostMetaImageUrl(image)
 </script>
 
-<PostMeta {title} {description} {date} image={imageUrl} />
+<PostMeta {title} {description} {date} image={metaImageUrl} />
 
 <article>
 	{#if parent}
@@ -28,9 +29,9 @@
 		{/if}
 	</hgroup>
 
-	{#if imageUrl}
+	{#if bannerImage}
 		<div class="banner">
-			<Image src={imageUrl} alt={title} />
+			<Image src={bannerImage} alt={title} />
 		</div>
 	{/if}
 
