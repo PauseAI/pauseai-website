@@ -151,7 +151,8 @@ export async function postChatCompletion(
 			}
 		)
 		if (!response.data.choices?.length) {
-			throw new Error(`LLM returned no choices: ${JSON.stringify(response.data)}`)
+			const body = JSON.stringify(response.data).replace(/(\s{10})\s+/g, '$1\\s...')
+			throw new Error(`LLM returned no choices: ${body}`)
 		}
 		const choice = response.data.choices[0]
 		const finishReason = (choice as Record<string, unknown>).finish_reason
