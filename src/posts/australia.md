@@ -24,7 +24,6 @@ If you’re in Australia, you can help:
 - [Contact Australian politicians](https://www.australiansforaisafety.com.au/advocacy/contact-politicians?utm_source=pauseai-australia)
 - Talk to your friends and family about AI risk
 - Donate to support our work via **PayID 85692218938**
-- [Or one of these ideas](https://docs.google.com/document/d/18ypsV5GkgiQQc7QitwsrNcaxuBPd_3t7AMuySBPJZMw/edit?usp=sharing)
 
 ## Connect with PauseAI Australia
 
