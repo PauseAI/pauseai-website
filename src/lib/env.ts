@@ -48,11 +48,28 @@ export function getDevContext(): string {
 }
 
 /**
+ * Derive locale from branch name for l10n-xx branches (e.g. l10n-es → "es")
+ */
+function branchLocale(env: ImportMetaEnv | NodeJS.ProcessEnv): string | undefined {
+	const branch = (env.BRANCH as string) || (env.HEAD as string) || ''
+	const match = branch.match(/^l10n-([a-z]{2})$/)
+	return match ? match[1] : undefined
+}
+
+/**
  * Process default settings plus env vars to determine which locales should be enabled
  */
 export function possiblyOverriddenLocales(defaults: { locales: string[] }): string[] {
 	const env = getEnvironment()
-	const envValue = (env.PARAGLIDE_LOCALES || (isDev() ? 'en' : 'all')).trim()
+	const fromEnv = env.PARAGLIDE_LOCALES as string | undefined
+	const fromBranch = branchLocale(env)
+	const fallback = isDev() ? 'en' : 'all'
+	const envValue = (fromEnv || fromBranch || fallback).trim()
+	const source = fromEnv
+		? `PARAGLIDE_LOCALES="${fromEnv}"`
+		: fromBranch
+			? `branch "${(env.BRANCH as string) || env.HEAD}"`
+			: `default (${fallback})`
 	const listedLocales = envValue.replace(/all|-/g, ',')
 	const inclusive = listedLocales === envValue
 	const namedLocales = listedLocales.split(',').map((locale: string) => locale.trim())
@@ -60,7 +77,18 @@ export function possiblyOverriddenLocales(defaults: { locales: string[] }): stri
 		inclusive ? namedLocales.includes(locale) : !namedLocales.includes(locale)
 	)
 	if (!result.includes('en')) result.push('en')
-	//	console.debug(`defaults: ${JSON.stringify(defaults)}`)
-	//	console.log(`PARAGLIDE_LOCALES: ${env.PARAGLIDE_LOCALES} (${getDevContext()}) => envValue: ${envValue} => result: ${result}`)
+	if (inclusive) {
+		const unknown = namedLocales.filter((l: string) => l !== 'all' && !defaults.locales.includes(l))
+		if (unknown.length > 0) {
+			console.error(
+				`Error: ${source} requests "${unknown.join(', ')}" but default-settings.js only has [${defaults.locales.join(', ')}].`
+			)
+			console.error(
+				`Add the locale(s) to default-settings.js or fix your .env / PARAGLIDE_LOCALES.`
+			)
+			process.exit(1)
+		}
+	}
+	console.log(`Locale source: ${source} → [${result.join(', ')}]`)
 	return result
 }
