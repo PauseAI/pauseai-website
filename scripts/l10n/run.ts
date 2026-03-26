@@ -27,6 +27,7 @@ import {
 	createRateLimitingQueue,
 	LLM_DEFAULTS
 } from './llm-client'
+import { fetchAndDisplayBilling } from './llm-utils'
 import { Mode } from './mode'
 import { generateJsonPrompt, generateMarkdownPrompt, generateReviewPrompt } from './prompts'
 import { retrieveMarkdown, retrieveMessages } from './heart'
@@ -185,7 +186,7 @@ const logMessage = (msg: string) => {
 	// --- Phase 1: Plan ---
 
 	// Check for existing work plan
-	let plan = readTodo()
+	let plan = readTodo(targetLocales)
 
 	if (!plan) {
 		// Generate plan by running retrieve in work-item collection mode
@@ -243,7 +244,7 @@ const logMessage = (msg: string) => {
 		plan = createPlan(mode.branch, LLM_DEFAULTS.MODEL)
 		plan.items = workItems
 
-		writeTodo(plan)
+		writeTodo(plan, targetLocales)
 		printPlanSummary(plan, mode.options.verbose === true)
 
 		if (plan.items.length === 0) {
@@ -263,7 +264,7 @@ const logMessage = (msg: string) => {
 	}
 
 	const spendLimit = getSpendLimit(spendArg, mode.isCI)
-	const spendError = checkSpendLimit(plan, spendLimit)
+	const spendError = checkSpendLimit(plan, spendLimit, targetLocales)
 	if (spendError) {
 		console.log(spendError)
 		process.exit(0)
@@ -282,6 +283,13 @@ const logMessage = (msg: string) => {
 		apiKey: LLM_API_KEY!,
 		model: LLM_DEFAULTS.MODEL,
 		providers: LLM_DEFAULTS.PROVIDERS
+	})
+
+	// Log spend on exit (including timeout via SIGTERM)
+	process.on('SIGTERM', async () => {
+		console.log('\n⏰ Build timeout — logging spend before exit:')
+		await fetchAndDisplayBilling(llmClient)
+		process.exit(143)
 	})
 
 	const requestQueue = createRateLimitingQueue(LLM_DEFAULTS.REQUESTS_PER_SECOND)
@@ -363,7 +371,7 @@ const logMessage = (msg: string) => {
 
 	// Record completion
 	recordCompletion(plan.items, plan)
-	emptyTodo(mode.branch, LLM_DEFAULTS.MODEL)
+	emptyTodo(targetLocales, mode.branch, LLM_DEFAULTS.MODEL)
 
 	// Summary and push
 	console.log(`\n📦 L10n summary:`)
@@ -378,6 +386,9 @@ const logMessage = (msg: string) => {
 	} else {
 		console.log(`\nNo new l10ns to push to remote cage - skipping Git push.`)
 	}
+
+	// Log spend after execution
+	await fetchAndDisplayBilling(llmClient)
 
 	// Clean up Git secrets in CI environments
 	if (mode.isCI) {
