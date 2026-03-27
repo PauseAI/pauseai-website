@@ -9,7 +9,6 @@
 	$: meta = data.meta
 	$: ({ title = data.slug, date, description, image, author, showImage = true } = meta)
 	$: parent = data.slug.split('/').slice(0, -1).join('/')
-	$: bannerImage = image
 	$: metaImageUrl = getPostMetaImageUrl(image)
 </script>
 
@@ -29,9 +28,9 @@
 		{/if}
 	</hgroup>
 
-	{#if bannerImage && showImage !== false}
+	{#if image && showImage !== false}
 		<div class="banner">
-			<Image src={bannerImage} alt={title} />
+			<Image src={image} alt={title} />
 		</div>
 	{/if}
 
