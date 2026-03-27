@@ -8,6 +8,7 @@ description: What the Australian chapter of PauseAI has been doing and needs hel
 
 - Join our meetup where we kickoff our next campaign! We also need ideas on how to use social media better.
 - Help out with [evergreen tasks](/australia)
+- Tell us [what you did](mailto:australia@pauseai.info?subject=Aussie%20Win) so we can add it, or [what you have cooking](mailto:australia@pauseai.info?subject=Things%20Cooking) so we can support you!
 
 ### 2026 March
 
@@ -16,13 +17,16 @@ description: What the Australian chapter of PauseAI has been doing and needs hel
 - Reached out to COSBOA and Canberra Business Chamber about Australians' trust in AI
 - Took part in CAPaD's Community Assembly in Canberra.
   ![Volunteer at CAPaD](/australia/20260308_CAPaD_CommunityAssemblyRepresenting.jpg)
-- Reached out to correct an error in [The Daily Aus' reporting on the Pentagon’s dispute with Anthropic](https://thedailyaus.com.au/podcast/the-fight-over-how-ai-is-used-in-war) .
+- Reached out to correct an error in [The Daily Aus' reporting on the Pentagon’s dispute with Anthropic](https://thedailyaus.com.au/podcast/the-fight-over-how-ai-is-used-in-war).
 - [Released a vid](https://www.youtube.com/shorts/L0vJxFJQz1o) on how Australia ignored the risks of AI at the India Summit and just talked about dividing winnings.
 - Reached out to Matt Greg MP on AGI risks and the recent India Summit.
+- Attended Parliamentary Innovation Showcase, met many interesting people and informed them about x-risk! Got a few things cooking that we'll share in coming weeks.
+
+  ![Talking to Microsoft](/australia/20260326_InnovationShowcase.jpg) ![Talking to Prof Chubb](/australia/20260323_ParlInnovShowcase_ProfChubbPeter.jpg) ![Talking to Prof Chubb](/australia/20260326_InnovationShowcase_MSOpenAIBoothDavidPeter.jpg)
 
 ### 2026 February
 
-- 📢Campaigned for Australia to prioritise safety at India's AI Impact Summit:
+- 📢**Campaigned for Australia to prioritise safety at India's AI Impact Summit**
   - 2 vids [calling to action](https://www.youtube.com/shorts/gGbAGQ8vVcY) and [suggesting the perfect Valentine's](https://www.youtube.com/watch?v=OQytHYG7jH8)
   - 70 emails sent to policymakers, and [70 signatures on our petition](https://www.change.org/p/ai-summits-need-to-take-safety-seriously-again), including to Minister Ayres and Assistant Minister Charlton.
   - Arranged for 4 Aussie experts and 3 international ones to co-sign [op-ed in France's biggest weekly, Nouvel Obs](https://www.nouvelobs.com/opinions/20260216.OBS112421/sommet-de-l-ia-face-aux-risques-remettre-la-securite-en-haut-de-l-agenda-international.html)
@@ -53,6 +57,7 @@ description: What the Australian chapter of PauseAI has been doing and needs hel
   ![202511_PocockTownhall_SelfiesPeterDavid.jpg](/australia/202511_PocockTownhall_SelfiesPeterDavid.jpg)
 - 5 people from Australia participated in the PauseAI photo petition.
   ![2025-11_PhotoPetition.jpg](/australia/2025-11_PhotoPetition.jpg)
+- AI Inspector character prepared, has yet to be deployed
 
 ### 2025 February
 

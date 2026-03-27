@@ -81,3 +81,5 @@ In September 2025, PauseAI Australia responded to the interim report on _Harness
 #### Melbourne protest
 
 In February 2025, volunteers in Melbourne protested the missed opportunity of the Paris AI Action Summit. The protest received [coverage](https://www.smh.com.au/technology/most-dangerous-technology-ever-protesters-urge-ai-pause-20250207-p5laaq.html) in the Nine newspapers.
+
+[Back to the main Australia page](/australia).
