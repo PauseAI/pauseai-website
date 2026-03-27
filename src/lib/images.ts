@@ -21,14 +21,6 @@ function toAssetModulePath(imagePath: string) {
 	return BASE + imagePath
 }
 
-export function isLocalAssetPath(imagePath: string | undefined): imagePath is string {
-	return (
-		typeof imagePath === 'string' &&
-		imagePath.startsWith('/') &&
-		!!IMAGE_URLS[toAssetModulePath(imagePath)]
-	)
-}
-
 export function resolveImageUrl(imagePath: string) {
 	const relativePath = toAssetModulePath(imagePath)
 	if (IMAGE_URLS[relativePath]) {
@@ -44,8 +36,10 @@ export function getPostMetaImageUrl(imagePath: string | undefined) {
 		return imagePath
 	}
 
-	if (isLocalAssetPath(imagePath)) {
-		return METADATA_IMAGE_URLS[toAssetModulePath(imagePath)]
+	const relativePath = toAssetModulePath(imagePath)
+	const metadataImageUrl = METADATA_IMAGE_URLS[relativePath]
+	if (metadataImageUrl) {
+		return metadataImageUrl
 	}
 
 	return resolveImageUrl(imagePath)
