@@ -12,6 +12,7 @@
 import { spawn } from 'child_process'
 import readline from 'readline'
 
+// eslint-disable-next-line no-control-regex
 const ANSI_ESCAPE_PATTERN = /\u001b\[[0-9;]*m/g
 const CHUNK_PATTERN = /\.svelte-kit\/output\/(client|server)\/.*\s+([\d,]+\.\d+)\s+kB/
 
