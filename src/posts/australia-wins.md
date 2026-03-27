@@ -74,3 +74,6 @@ description: What the Australian chapter of PauseAI has been doing and needs hel
 ## Connect with PauseAI Australia
 
 [australia@pauseai.info](mailto:australia@pauseai.info) | [Facebook](https://www.facebook.com/groups/571590459293618) | [YouTube](https://www.youtube.com/channel/UCjjMieiOlSFf7jud0yhHQSg) | [LinkedIn](https://www.linkedin.com/company/pauseai-australia) | [Instagram](https://www.instagram.com/pauseaiaustralia/) | [WhatsApp](https://chat.whatsapp.com/KLg8K9xSgfIJs8GQAHeI5b) | [Events](https://lu.ma/PauseAIAustralia)
+
+<a href="https://pauseai.info/australia" style="display:inline-block; background-color:
+#e67e22; color:white; padding:10px 20px; border-radius:5px; text-decoration:none; font-weight:bold;">Back to Australia homepage></a>
