@@ -37,16 +37,21 @@
 		const searchString = window.location.search
 		const response = await fetch('/api/geo' + searchString)
 		if (!response.ok) return
-		const geo = await response.json()
+		const geo: GeoApiResponse = await response.json()
 
 		// Keep geo cookie in sync with actual location.
 		// Re-run selectBanners if country changed or cookie not yet set.
 		const geoCountryCookie = new Cookie(document.cookie).get('geo_country')
-		const countryCode = typeof geo?.country === 'string' ? geo.country : geo?.country?.code
-		if (countryCode && countryCode !== geoCountryCookie) {
+
+		// geo.country is an object { code: 'US' } from Netlify, SetCookie needs a string
+		const countryString = (
+			typeof geo?.country === 'object' ? geo?.country?.code : geo?.country
+		) as string
+
+		if (countryString && countryString !== geoCountryCookie) {
 			document.cookie = new SetCookie({
 				name: 'geo_country',
-				value: countryCode,
+				value: countryString,
 				path: '/',
 				maxAge: 31536000,
 				sameSite: 'Lax'
