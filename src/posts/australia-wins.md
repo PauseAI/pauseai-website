@@ -22,7 +22,7 @@ description: What the Australian chapter of PauseAI has been doing and needs hel
 - Reached out to Matt Greg MP on AGI risks and the recent India Summit.
 - Attended Parliamentary Innovation Showcase, met many interesting people and informed them about x-risk! Got a few things cooking that we'll share in coming weeks.
 
-  ![Talking to Microsoft](/australia/20260326_InnovationShowcase.jpg) ![Talking to Prof Chubb](/australia/20260323_ParlInnovShowcase_ProfChubbPeter.jpg) ![Talking to Prof Chubb](/australia/20260326_InnovationShowcase_MSOpenAIBoothDavidPeter.jpg)
+  ![Talking to Microsoft](/australia/20260326_InnovationShowcase.jpg) ![Talking to Prof Chubb](/australia/20260323_ParlInnovShowcase_ProfChubbPeter.jpg) ![At Microsoft and OpenAI booths](/australia/20260326_InnovationShowcase_MSOpenAIBoothDavidPeter.jpg)
 
 ### 2026 February
 
