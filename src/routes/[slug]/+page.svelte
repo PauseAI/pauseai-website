@@ -49,6 +49,10 @@
 		text-transform: none;
 	}
 
+	hgroup {
+		margin-top: 0;
+	}
+
 	.banner {
 		margin: 1.5rem 0 2rem;
 		border-radius: 12px;
