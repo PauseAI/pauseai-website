@@ -7,7 +7,7 @@
 	// don't destructure to maintain reactivity for invalidation after language detection
 	export let data
 	$: meta = data.meta
-	$: ({ title = data.slug, date, description, image, author } = meta)
+	$: ({ title = data.slug, date, description, image, author, showImage = true } = meta)
 	$: parent = data.slug.split('/').slice(0, -1).join('/')
 	$: bannerImage = !image ? image : isLocalAssetPath(image) ? image : resolveImageUrl(image)
 	$: metaImageUrl = getPostMetaImageUrl(image)
@@ -29,7 +29,7 @@
 		{/if}
 	</hgroup>
 
-	{#if bannerImage}
+	{#if bannerImage && showImage !== false}
 		<div class="banner">
 			<Image src={bannerImage} alt={title} />
 		</div>
@@ -58,7 +58,7 @@
 
 	.banner :global(img) {
 		width: 100%;
-		max-height: 400px;
+		aspect-ratio: 1200 / 628;
 		object-fit: cover;
 		display: block;
 	}

@@ -4,7 +4,7 @@ slug: amsterdam-protest-2025-december
 description: Protest in Amsterdam to urge the Dutch government and
   Netherlands-based company ASML to stop supplying to companies developing
   artificial superintelligence.
-image: /banner-all.jpeg
+image: /banner-all-cropped.jpeg
 ---
 
 On December 13, 2025, we held a protest in Amsterdam to urge both the Dutch government and the Netherlands-based company ASML to stop supplying to companies developing artificial superintelligence.
