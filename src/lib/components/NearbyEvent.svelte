@@ -12,6 +12,9 @@
 
 	const FORMAT = new Intl.DateTimeFormat('en', { day: 'numeric', month: 'long' })
 	const MAX_DISTANCE_KM = 100
+	const DISTANCE_OVERRIDES: Record<string, number> = {
+		jogj70dj: 480 // Override for specific D.C. (Capitol Hill) event to include users up to 250 miles away
+	}
 
 	let events: CalendarResponse | null = null
 	let nearbyEvent: Event | null = null
@@ -28,15 +31,18 @@
 
 	function findNearbyEvent(geo: GeoApiResponse, events: CalendarResponse) {
 		const { latitude: userLatitude, longitude: userLongitude } = geo
-		if (!userLatitude || !userLongitude) return null
+		if (userLatitude == null || userLongitude == null) return null
 
-		const userCoords = [userLatitude, userLongitude]
+		const userCoords: [number, number] = [userLongitude, userLatitude]
 
 		const isNearby = (event: Event): boolean => {
-			const { geo_latitude, geo_longitude } = event
-			if (!geo_latitude || !geo_longitude) return false
-			const eventCoords = [geo_latitude, geo_longitude]
-			return distance(userCoords, eventCoords, { units: 'kilometers' }) <= MAX_DISTANCE_KM
+			const { geo_latitude, geo_longitude, url } = event
+			if (geo_latitude == null || geo_longitude == null) return false
+			const eventCoords: [number, number] = [geo_longitude, geo_latitude]
+
+			const maxDistance = DISTANCE_OVERRIDES[url] ?? MAX_DISTANCE_KM
+
+			return distance(userCoords, eventCoords, { units: 'kilometers' }) <= maxDistance
 		}
 
 		return events.entries.map((entry) => entry.event).find(isNearby) ?? null

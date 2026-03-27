@@ -21,6 +21,7 @@ declare global {
 
 	interface Window {
 		twttr?: Twttr
+		selectBanners(): void
 	}
 }
 

@@ -53,8 +53,9 @@ description: What the Australian chapter of PauseAI has been doing and needs hel
 ## 2025 - more coming soon!
 
 ### 2025 December
+
 - Emails from PauseAI Australia volunteers and a question at a live townhall event prompted five politicians to sign the [Future of Life Institute Superintelligence Statement](https://www.linkedin.com/feed/update/urn:li:activity:7408047524902572032).
-Watch the moment at the townhall [on YouTube](https://youtu.be/SbqUEhJt5RU?si=CSVML0vatdW-GBEh).
+  Watch the moment at the townhall [on YouTube](https://youtu.be/SbqUEhJt5RU?si=CSVML0vatdW-GBEh).
 
 ### 2025 November
 
@@ -65,13 +66,16 @@ Watch the moment at the townhall [on YouTube](https://youtu.be/SbqUEhJt5RU?si=CS
 - AI Inspector character prepared, has yet to be deployed
 
 ### 2025 October
+
 - On 7 October 2025, PauseAI Australia held a book launch and discussion event at Smith's Alternative bookshop in Canberra to mark the release of [_If Anyone Builds It, Everyone Dies_](https://www.penguin.com.au/books/if-anyone-builds-it-everyone-dies-9781847928931). Laura Nuttall, MLA, and Peter Cain, MLA, joined the discussion and read excerpts from the book.
 
 ### 2025 September
+
 - [e-petition EN7777 ](https://www.aph.gov.au/e-petitions/petition/EN7777) to the Australian House of Representatives was open for 30 days and collected 168 signatures. The petition asked the House to legislate that all future frontier artificial intelligence systems must pass rigorous independent safety evaluations, and further asked the House to advocate proactively for an international treaty to pause frontier AI development until global safety mechanisms are in place. The Minister gave an official response.
 - In September 2025, PauseAI Australia responded to the interim report on _Harnessing Data and Digital Technology_ with [this submission](https://drive.google.com/file/d/1Ea9I3jXCZAMdGAcN2D-UMRPyE2MzGB7k/view). Volunteers also made individual submissions ([David](https://docs.google.com/document/d/1DenTOorlnqQ02PJEEdRvsceFmfvvfTXxGubozjfx-yE/edit?usp=sharing), [Peter](https://docs.google.com/document/d/1aQcC5DYq3feyWyHAPFGcEvwgrX0vXSbgMNDBEYWA61E/edit?tab=t.0#heading=h.4hsb6c6hjc5f), [Michael](https://drive.google.com/file/d/1lWdtIiLatF1DOPvdjQSaonO9dEqFCFSV/view?usp=drive_link)).
 
 ### 2025 July
+
 - Volunteer Mark Brown [brought OpenAI to the attention of the Australian Federal Police and the Attorney-General of Australia](https://drive.google.com/file/d/1t9ntUlF2cZH4_f-1fsp0FFCf3RiGZ81g/view?usp=drive_link), alleging potential breaches of the _Crimes (Biological Weapons) Act 1976_. It was discussed in a [news story](https://ia.acs.org.au/article/2025/is-the-new-chatgpt-agent-really-a-weapons-risk-.html) and on [a video podcast](https://youtu.be/-YPhNdpA8Rk).
 
 ### 2025 February

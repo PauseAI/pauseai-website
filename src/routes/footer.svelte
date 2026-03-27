@@ -23,6 +23,7 @@
 			<Link href="/press">{m.footer_info_press()}</Link>
 			<Link href="/partnerships">{m.footer_info_partnerships()}</Link>
 			<Link href="/privacy">{m.footer_info_privacy()}</Link>
+			<Link href="/safeguarding-protocol">Safeguarding</Link>
 			<Link href="/legal"
 				>{m.footer_info_legal()} <br />
 				{m.footer_info_legal_foundation()} <br />

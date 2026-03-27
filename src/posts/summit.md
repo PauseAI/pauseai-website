@@ -63,9 +63,13 @@ We [protested](/2025-february) the missing safety focus of the summit.
 The summit has been widely criticized by the AI safety community.
 We recommend reading [the Zvi's article](https://thezvi.substack.com/p/the-paris-ai-anti-safety-summit) about the ["Anti-AI Safety Summit"](https://thezvi.substack.com/p/the-paris-ai-anti-safety-summit).
 
+### 2026 India AI Impact Summit (February 16th-20th)
+
+The third major international AI summit, following Bletchley Park and Paris, was held in New Delhi from February 16-20, 2026.
+Ahead of the summit, we launched an [international campaign](/india-summit-2026) calling on world leaders to enact mandatory safety evaluations and international oversight.
+
 ## Coming Summits
 
-- India co-hosted the Paris summit and will host the next one. Unfortunately, we expect it to lack any meaningful safety / regulation discussions.
 - The UN organizes The [AI For Good summit](https://aiforgood.itu.int/) in Switzerland, July 2026.
 
 ## What we're missing

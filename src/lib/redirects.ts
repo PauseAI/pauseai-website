@@ -25,7 +25,9 @@ const REDIRECTS: Record<string, string> = {
 	'/surveys': '/polls-and-surveys',
 	'/stipends': '/volunteer-stipends',
 	'/volunteer-vacancies': '/join#volunteer-vacancies',
-	'/contact': '/contact-us'
+	'/contact': '/contact-us',
+	'/summits': '/summit',
+	'/privacy-policy': '/privacy'
 }
 
 const OUR_XRISK_INTROS_YOUTUBE_PLAYLIST =

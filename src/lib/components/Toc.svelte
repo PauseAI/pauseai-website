@@ -64,9 +64,14 @@
 
 <!-- Desktop: Fixed sidebar on the left -->
 {#if desktop}
-	<div class="desktop-toc-wrapper" style="top: {sidebarTop}rem;" use:autoScroll>
+	<div
+		class="desktop-toc-wrapper"
+		class:hidden={(headings?.length ?? 0) <= 2}
+		style="top: {sidebarTop}rem;"
+		use:autoScroll
+	>
 		<Toc
-			headingSelector=":is(h2, h3, h4):not(.toc-exclude):not(footer *)"
+			headingSelector=":is(h2, h3, h4):not(.toc-exclude):not(footer *):not(.tabs *):not(.tab-content *)"
 			title="Contents"
 			bind:headings
 			hide={(headings?.length ?? 0) <= 2}
@@ -81,9 +86,13 @@
 {/if}
 
 <!-- Mobile: Floating button with popup (hidden on desktop) -->
-<div class="toc-wrapper card" class:hidden-on-desktop={desktop}>
+<div
+	class="toc-wrapper card"
+	class:hidden-on-desktop={desktop}
+	class:hidden={(headings?.length ?? 0) <= 1}
+>
 	<Toc
-		headingSelector=":is(h2, h3, h4):not(.toc-exclude):not(footer *)"
+		headingSelector=":is(h2, h3, h4):not(.toc-exclude):not(footer *):not(.tabs *):not(.tab-content *)"
 		title="Contents"
 		breakpoint={1250}
 		bind:open
@@ -184,6 +193,10 @@
 	/* Hide mobile wrapper on desktop */
 	.hidden-on-desktop {
 		display: none;
+	}
+
+	.hidden {
+		display: none !important;
 	}
 
 	/* Mobile styles */
