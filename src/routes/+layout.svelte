@@ -34,17 +34,24 @@
 	$: hero = deLocalizeHref($page.url.pathname) === '/'
 
 	onMount(async () => {
-		const response = await fetch('/api/geo')
+		const searchString = window.location.search
+		const response = await fetch('/api/geo' + searchString)
 		if (!response.ok) return
 		const geo: GeoApiResponse = await response.json()
 
 		// Keep geo cookie in sync with actual location.
 		// Re-run selectBanners if country changed or cookie not yet set.
 		const geoCountryCookie = new Cookie(document.cookie).get('geo_country')
-		if (geo?.country?.code && geo.country.code !== geoCountryCookie) {
+
+		// geo.country is an object { code: 'US' } from Netlify, SetCookie needs a string
+		const countryString = (
+			typeof geo?.country === 'object' ? geo?.country?.code : geo?.country
+		) as string
+
+		if (countryString && countryString !== geoCountryCookie) {
 			document.cookie = new SetCookie({
 				name: 'geo_country',
-				value: geo.country.code,
+				value: countryString,
 				path: '/',
 				maxAge: 31536000,
 				sameSite: 'Lax'
