@@ -34,17 +34,19 @@
 	$: hero = deLocalizeHref($page.url.pathname) === '/'
 
 	onMount(async () => {
-		const response = await fetch('/api/geo')
+		const searchString = window.location.search
+		const response = await fetch('/api/geo' + searchString)
 		if (!response.ok) return
 		const geo = await response.json()
 
 		// Keep geo cookie in sync with actual location.
 		// Re-run selectBanners if country changed or cookie not yet set.
 		const geoCountryCookie = new Cookie(document.cookie).get('geo_country')
-		if (geo?.country && geo.country !== geoCountryCookie) {
+		const countryCode = typeof geo?.country === 'string' ? geo.country : geo?.country?.code
+		if (countryCode && countryCode !== geoCountryCookie) {
 			document.cookie = new SetCookie({
 				name: 'geo_country',
-				value: geo.country,
+				value: countryCode,
 				path: '/',
 				maxAge: 31536000,
 				sameSite: 'Lax'
