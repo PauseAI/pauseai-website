@@ -69,7 +69,7 @@ description: What the Australian chapter of PauseAI has been doing and needs hel
 - Asked Minister Orr about the ACT Government's datacentre policy at the ACT Conservation Council townhall.
   ![20260218_MinisterOrrQuestionAtACTConservationCouncilTownhall.jpg](/australia/20260218_MinisterOrrQuestionAtACTConservationCouncilTownhall.jpg)
 - Attended Melbourne's presentation on Fixing Australian Philanthropy.
-  ![20260225_MELB_MarkAtDGRPresentation_Cropped.jpg](/australia/20260225_MELB_MarkAtDGRPresentation_Cropped.jpg)
+  ![20260225_MELB_MarkAtDGRPresentation_Cropped.jpg](/australia/20260225_MELB_MarkAtDGRPresentation.jpg)
 - Handed out flyers at University of Canberra's Open Day.
 
 ### 2026 January
