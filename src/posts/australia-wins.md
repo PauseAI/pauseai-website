@@ -16,7 +16,11 @@ description: What the Australian chapter of PauseAI has been doing and needs hel
 - Contacted 3 politicians about AI existential risk - can share more in the next few months!
 - Reached out to COSBOA and Canberra Business Chamber about Australians' trust in AI
 - Took part in CAPaD's Community Assembly in Canberra.
-  ![Volunteer at CAPaD](/australia/20260308_CAPaD_CommunityAssemblyRepresenting.jpg)
+<div style="max-width:80%; margin:1rem auto;">
+
+![Volunteer at CAPaD](/australia/20260308_CAPaD_CommunityAssemblyRepresenting.jpg)
+
+</div>
 - Reached out to correct an error in [The Daily Aus' reporting on the Pentagon’s dispute with Anthropic](https://thedailyaus.com.au/podcast/the-fight-over-how-ai-is-used-in-war).
 - [Released a vid](https://www.youtube.com/shorts/L0vJxFJQz1o) on how Australia ignored the risks of AI at the India Summit and just talked about dividing winnings.
 - Reached out to Matt Greg MP on AGI risks and the recent India Summit.
@@ -34,7 +38,9 @@ description: What the Australian chapter of PauseAI has been doing and needs hel
   - Hosted online and in-person workshops
   - Postered in Canberra's Civic, Tuggeranong, Woden, and Waramanga
 - Publicly [asked Senator Pocock](https://www.youtube.com/live/SwDolSOMrac?si=GOtvYibfWyGuxK06&t=3820) how our government will deal with mass unemployment.
-  <img src="/australia/20260225-1847_PocockTownhallAIQuestionHighlighted.jpg" alt="alt" style="max-width:80%; display:block; margin:1rem auto;" />
+<div style="max-width:80%; margin:1rem auto;">
+  <img src="/australia/20260225-1847_PocockTownhallAIQuestionHighlighted.jpg" alt="20260225-1847_PocockTownhallAIQuestionHighlighted.jpg" />
+</div>
 
 - Publicly asked Andrew Leigh (Assistant Minister, MP) at his book event whether AI researcher predictions of existential risk mean Australia should sign onto red lines for AI development, he said yes!
 - Reached out to politicians: Fiona Carrick MLA, Thomas Emerson MLA, Jessie Price MP candidate about AI existential risk.
