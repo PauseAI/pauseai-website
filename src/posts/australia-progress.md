@@ -134,4 +134,4 @@ description: What the Australian chapter of PauseAI has been doing and needs hel
 
 <div style="text-align:center; margin:2rem 0;">
 <a href="https://pauseai.info/australia" style="display:inline-block; background-color:#e67e22; color:white; padding:10px 20px; border-radius:5px; text-decoration:none; font-weight:bold;">Back to Australia homepage</a>
-</div>#e67e22; color:white; padding:10px 20px; border-radius:5px; text-decoration:none; font-weight:bold;">Back to Australia homepage></a>
+</div>
