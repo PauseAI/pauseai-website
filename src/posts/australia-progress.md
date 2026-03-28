@@ -54,7 +54,7 @@ description: What the Australian chapter of PauseAI has been doing and needs hel
   - Postered in Canberra's Civic, Tuggeranong, Woden, and Waramanga
 - Publicly [asked Senator Pocock](https://www.youtube.com/live/SwDolSOMrac?si=GOtvYibfWyGuxK06&t=3820) how our government will deal with mass unemployment.
 <div style="max-width:80%; margin:1rem auto;">
-  <img src="/australia/20260225-1847_PocockTownhallAIQuestionHighlighted.jpg" alt="20260225-1847_PocockTownhallAIQuestionHighlighted.jpg" />
+  ![](/australia/20260225-1847_PocockTownhallAIQuestionHighlighted.jpg)
 </div>
 
 - ✅Publicly asked Andrew Leigh (Assistant Minister, MP) at his book event whether AI researcher predictions of existential risk mean Australia should sign onto red lines for AI development, he said yes!
