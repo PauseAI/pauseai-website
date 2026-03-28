@@ -1,5 +1,5 @@
 title: PauseAI Australia Wins
-slug: australia-wins
+slug: australia-progress
 description: What the Australian chapter of PauseAI has been doing and needs help with
 ---
 
