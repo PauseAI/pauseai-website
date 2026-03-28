@@ -51,5 +51,5 @@ We acknowledge that not everyone agrees about the risk of an AI catastrophe. We 
 
 It is [psychologically difficult](/psychology-of-x-risk) to think about potential catastrophes. Many people assume that the risks are out of their control and therefore not worth worrying about. Yet, anyone can take action right now by speaking up. We think it's better to act than to simply worry.
 
-<a href="https://pauseai.info/australia" style="display:inline-block; background-color:
+<a href="/australia" style="display:inline-block; background-color:
 #e67e22; color:white; padding:10px 20px; border-radius:5px; text-decoration:none; font-weight:bold;">Back to Australia homepage></a>
