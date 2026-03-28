@@ -86,6 +86,22 @@ description: What the Australian chapter of PauseAI has been doing and needs hel
   ![2025-11_PhotoPetition.jpg](/australia/2025-11_PhotoPetition.jpg)
 - AI Inspector character prepared, has yet to be deployed
   ![20251100_AI-Inspector.jpg](/australia/20251100_AI-Inspector.jpg)
+- Ran a stall at SouthFest. 34 people stopped for >1min chat, 2 submitted selfies to our photo petition.
+
+<div style="display:flex; flex-wrap:wrap; gap:0.5rem; max-width:90%; margin:1rem auto;">
+<div style="flex:1; min-width:200px;">
+
+  ![20251115_SouthFestStall_PeterDavid.png](/australia/20251115_SouthFestStall_PeterDavid.png)
+
+</div>
+<div style="flex:1; min-width:200px;">
+
+  ![20251115_SouthFestStall_David.jpg](/australia/20251115_SouthFestStall_David.jpg)
+
+</div>
+
+</div>
+- Ran a stall at EAGxAustralasia
 
 ### 2025 October
 
