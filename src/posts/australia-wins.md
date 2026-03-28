@@ -1,4 +1,3 @@
-<img width="1243" height="1215" alt="image" src="https://github.com/user-attachments/assets/c9ba6749-80b0-4c44-b06c-acced02a0ec5" />---
 title: PauseAI Australia Wins
 slug: australia-wins
 description: What the Australian chapter of PauseAI has been doing and needs help with
@@ -82,10 +81,11 @@ description: What the Australian chapter of PauseAI has been doing and needs hel
 ### 2025 November
 
 - Publicly asked Senator Pocock to sign Superintelligence Statement, and [he agreed](https://youtu.be/SbqUEhJt5RU)!
-  ![202511_PocockTownhall_SelfiesPeterDavid.jpg](/australia/202511_PocockTownhall_SelfiesPeterDavid.jpg)
+  ![20251209_PocockTownhall_SelfiesPeterDavid.jpg](/australia/20251209_PocockTownhall_SelfiesPeterDavid.jpg)
 - 5 people from Australia participated in the PauseAI photo petition.
   ![2025-11_PhotoPetition.jpg](/australia/2025-11_PhotoPetition.jpg)
 - AI Inspector character prepared, has yet to be deployed
+  ![20251100_AI-Inspector.jpg](/australia/20251100_AI-Inspector.jpg)
 
 ### 2025 October
 
