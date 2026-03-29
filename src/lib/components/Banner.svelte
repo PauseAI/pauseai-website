@@ -32,16 +32,29 @@
 </svelte:head>
 
 {#if !dismissed}
-	<div class="banner" class:contrast data-banner-id={id} transition:fade={{ duration: 200 }}>
-		<span class="content">
-			<slot></slot>
-		</span>
+	{#if id}
+		<div class="banner" class:contrast data-banner-id={id} transition:fade={{ duration: 200 }}>
+			<span class="content">
+				<slot></slot>
+			</span>
 
-		<button class="close banner-close-btn" on:click={close}>
-			<X size="1.2em" />
-			<span class="sr-only">Close</span>
-		</button>
-	</div>
+			<button class="close banner-close-btn" on:click={close}>
+				<X size="1.2em" />
+				<span class="sr-only">Close</span>
+			</button>
+		</div>
+	{:else}
+		<div class="banner" class:contrast transition:fade={{ duration: 200 }}>
+			<span class="content">
+				<slot></slot>
+			</span>
+
+			<button class="close banner-close-btn" on:click={close}>
+				<X size="1.2em" />
+				<span class="sr-only">Close</span>
+			</button>
+		</div>
+	{/if}
 {/if}
 
 <style>

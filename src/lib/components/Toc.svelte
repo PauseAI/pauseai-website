@@ -9,13 +9,13 @@
 	let desktop: boolean | undefined
 	let open: boolean | undefined
 	let headings: HTMLHeadingElement[] | undefined
-	let sidebarTop = 16 // Initial top offset in rem (below banner)
+	const maxTop = 14
+	let sidebarTop = maxTop // Initial top offset in rem (below banner)
 
 	// Track scroll to adjust sidebar position
 	onMount(() => {
 		const bannerHeight = 275 // Scroll distance in pixels for full transition (higher = slower)
 		const minTop = 1 // Minimum top value in rem when scrolled past banner
-		const maxTop = 16 // Maximum top value in rem when at page top
 
 		function handleScroll() {
 			const scrollY = window.scrollY
