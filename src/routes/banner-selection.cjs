@@ -4,6 +4,7 @@
 // Exposed as window.selectBanners to allow re-runs.
 
 // @ts-check
+// eslint-disable-next-line @typescript-eslint/triple-slash-reference
 /// <reference path="../app.d.ts" />
 
 /**
