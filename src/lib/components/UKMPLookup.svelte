@@ -1,4 +1,5 @@
 <script lang="ts">
+	import type { UKLookupMPApiResponse } from '$api/uk-lookup-mp/+server'
 	import Button from './Button.svelte'
 	import Card from './Card.svelte'
 	import UKMPEmailForm from './UKMPEmailForm.svelte'
@@ -55,7 +56,7 @@
 				body: JSON.stringify({ postcode: trimmedPostcode })
 			})
 
-			const result = await response.json()
+			const result: UKLookupMPApiResponse = await response.json()
 
 			if (result.success) {
 				mp = result.mp

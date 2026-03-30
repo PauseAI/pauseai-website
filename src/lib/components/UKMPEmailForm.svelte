@@ -1,4 +1,5 @@
 <script lang="ts">
+	import type { UKSendMPEmailApiResponse } from '$api/uk-send-mp-email/+server'
 	import { micromark } from 'micromark'
 	import LoadingSpinner from './LoadingSpinner.svelte'
 	import Link from '$lib/components/Link.svelte'
@@ -152,7 +153,7 @@ ${userPostcode.toUpperCase()}`
 				})
 			})
 
-			const result = await response.json()
+			const result: UKSendMPEmailApiResponse = await response.json()
 
 			if (response.ok && result.success) {
 				submitStatus = 'success'

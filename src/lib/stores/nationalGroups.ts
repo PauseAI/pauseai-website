@@ -1,4 +1,5 @@
 import { writable } from 'svelte/store'
+import type { NationalGroupsApiResponse } from '$api/national-groups/+server.js'
 import type { NationalGroup } from '$lib/types'
 
 // Initialize with an empty array
@@ -11,7 +12,7 @@ export async function loadNationalGroups() {
 		if (!response.ok) {
 			throw new Error('Failed to fetch national groups')
 		}
-		const data = await response.json()
+		const data: NationalGroupsApiResponse = await response.json()
 		nationalGroups.set(data)
 		return data
 	} catch (error) {

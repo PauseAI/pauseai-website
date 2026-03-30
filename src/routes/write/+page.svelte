@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { botName } from '$lib/config'
-	import type { ChatResponse } from '../api/write/+server'
+	import type { ChatResponse, WriteApiAvailabilityResponse } from '$api/write/+server'
 	import { onMount } from 'svelte'
 
 	// Define local Message type to include 'progress' role and complete flag
@@ -238,7 +238,7 @@
 				body: JSON.stringify([{ content: input, role: 'user' }])
 			})
 
-			const initialData = await initialResponse.json()
+			const initialData: ChatResponse = await initialResponse.json()
 
 			// Add server-generated progress message with complete flag
 			messages = [
@@ -293,7 +293,7 @@
 			})
 
 			// Process the response
-			const data = await response.json()
+			const data: ChatResponse = await response.json()
 
 			// Update API availability
 			apiAvailable = data.apiAvailable !== false
@@ -379,7 +379,7 @@
 		// Check API availability on component mount
 		try {
 			const response = await fetch('api/write')
-			const data = await response.json()
+			const data: WriteApiAvailabilityResponse = await response.json()
 			apiAvailable = !!data.apiAvailable
 		} catch (error) {
 			console.error('Error checking API availability:', error)

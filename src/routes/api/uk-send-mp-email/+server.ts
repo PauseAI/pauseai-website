@@ -40,10 +40,27 @@ interface EmailRequest {
 	message: string
 }
 
+type UKSendMPEmailApiSuccessResponse = {
+	success: true
+	recordId: string
+}
+
+type UKSendMPEmailApiErrorResponse = {
+	error: 'server_error' | 'rate_limit' | 'validation'
+	message: string
+}
+
+export type UKSendMPEmailApiResponse =
+	| UKSendMPEmailApiSuccessResponse
+	| UKSendMPEmailApiErrorResponse
+
 export const POST: RequestHandler = async ({ request }) => {
 	if (!AIRTABLE_API_KEY || !AIRTABLE_WRITE_API_KEY) {
 		return json(
-			{ error: 'server_error', message: 'Email service not configured' },
+			{
+				error: 'server_error',
+				message: 'Email service not configured'
+			} satisfies UKSendMPEmailApiResponse,
 			{ status: StatusCodes.INTERNAL_SERVER_ERROR }
 		)
 	}
@@ -51,7 +68,10 @@ export const POST: RequestHandler = async ({ request }) => {
 	// Check rate limit
 	if (isRateLimited()) {
 		return json(
-			{ error: 'rate_limit', message: 'Too many requests. Please try again later.' },
+			{
+				error: 'rate_limit',
+				message: 'Too many requests. Please try again later.'
+			} satisfies UKSendMPEmailApiResponse,
 			{
 				status: StatusCodes.TOO_MANY_REQUESTS,
 				headers: {
@@ -74,7 +94,10 @@ export const POST: RequestHandler = async ({ request }) => {
 			!data.message
 		) {
 			return json(
-				{ error: 'validation', message: 'All fields are required' },
+				{
+					error: 'validation',
+					message: 'All fields are required'
+				} satisfies UKSendMPEmailApiResponse,
 				{ status: StatusCodes.BAD_REQUEST }
 			)
 		}
@@ -84,7 +107,10 @@ export const POST: RequestHandler = async ({ request }) => {
 		if (!validMPEmails.has(data.recipient)) {
 			console.warn(`Rejected email to unauthorized recipient: ${data.recipient}`)
 			return json(
-				{ error: 'validation', message: 'Invalid recipient email' },
+				{
+					error: 'validation',
+					message: 'Invalid recipient email'
+				} satisfies UKSendMPEmailApiResponse,
 				{ status: StatusCodes.BAD_REQUEST }
 			)
 		}
@@ -105,7 +131,10 @@ export const POST: RequestHandler = async ({ request }) => {
 			const errorText = await mpResponse.text()
 			console.error('MP lookup error:', mpResponse.status, mpResponse.statusText, errorText)
 			return json(
-				{ error: 'server_error', message: 'Failed to find MP record' },
+				{
+					error: 'server_error',
+					message: 'Failed to find MP record'
+				} satisfies UKSendMPEmailApiResponse,
 				{ status: StatusCodes.INTERNAL_SERVER_ERROR }
 			)
 		}
@@ -114,7 +143,10 @@ export const POST: RequestHandler = async ({ request }) => {
 		if (!mpData.records || mpData.records.length === 0) {
 			console.error(`MP record not found for email: ${data.recipient}`)
 			return json(
-				{ error: 'server_error', message: 'MP record not found' },
+				{
+					error: 'server_error',
+					message: 'MP record not found'
+				} satisfies UKSendMPEmailApiResponse,
 				{ status: StatusCodes.INTERNAL_SERVER_ERROR }
 			)
 		}
@@ -149,7 +181,10 @@ export const POST: RequestHandler = async ({ request }) => {
 			const errorText = await response.text()
 			console.error('Airtable API error:', response.status, response.statusText, errorText)
 			return json(
-				{ error: 'server_error', message: 'Failed to send email' },
+				{
+					error: 'server_error',
+					message: 'Failed to send email'
+				} satisfies UKSendMPEmailApiResponse,
 				{ status: StatusCodes.INTERNAL_SERVER_ERROR }
 			)
 		}
@@ -157,11 +192,14 @@ export const POST: RequestHandler = async ({ request }) => {
 		const result = await response.json()
 		console.log(`Email record created for ${data.senderEmail} -> ${data.recipient}`)
 
-		return json({ success: true, recordId: result.id })
+		return json({ success: true, recordId: result.id } satisfies UKSendMPEmailApiSuccessResponse)
 	} catch (error) {
 		console.error('Error sending MP email:', error)
 		return json(
-			{ error: 'server_error', message: 'Failed to send email' },
+			{
+				error: 'server_error',
+				message: 'Failed to send email'
+			} satisfies UKSendMPEmailApiResponse,
 			{ status: StatusCodes.INTERNAL_SERVER_ERROR }
 		)
 	}

@@ -49,6 +49,10 @@ export type Message = {
 	content: string
 }
 
+export type WriteApiAvailabilityResponse = {
+	apiAvailable: boolean
+}
+
 const System_Prompts: { [id: string]: string } = {}
 System_Prompts['Basic'] = `You are a helpful AI assistant.
 
@@ -189,7 +193,7 @@ const anthropic = IS_API_AVAILABLE
 	: null
 
 export const GET: RequestHandler = async () => {
-	return json({ apiAvailable: IS_API_AVAILABLE })
+	return json({ apiAvailable: IS_API_AVAILABLE } satisfies WriteApiAvailabilityResponse)
 }
 
 // Helper function to call Claude API with timing

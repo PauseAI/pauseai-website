@@ -11,6 +11,8 @@ import { meta as aboutMeta } from '../../about/meta'
 import { meta as contactMeta } from '../../contact-us/meta'
 import type { RequestHandler } from './$types'
 
+export type PostsApiResponse = Post[]
+
 /** When adding an extra route, make sure to add the metadata here for SEO purposes */
 const hardCodedPages: Post[] = [
 	outcomesMeta,
@@ -59,5 +61,5 @@ async function getPosts() {
 
 export const GET: RequestHandler = async () => {
 	const posts = await getPosts()
-	return json(posts)
+	return json(posts satisfies PostsApiResponse)
 }

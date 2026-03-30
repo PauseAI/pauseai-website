@@ -1,6 +1,7 @@
 export const prerender = true
 
 import { dev } from '$app/environment'
+import type { LocaleEnvApiResponse } from '$api/locale-env/+server.js'
 import { locales } from '$lib/paraglide/runtime'
 import { handleRedirects } from '$lib/redirects'
 import { redirect } from '@sveltejs/kit'
@@ -20,7 +21,7 @@ export const load: LayoutLoad = async ({ url: { host, pathname }, fetch }) => {
 		try {
 			// Fetch current server-side environment-calculated locales
 			const response = await fetch('/api/locale-env')
-			const serverData = await response.json()
+			const serverData: LocaleEnvApiResponse = await response.json()
 			// Get client-side runtime locales
 			const runtimeLocales = Array.from(locales)
 
