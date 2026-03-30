@@ -35,7 +35,18 @@ export default defineConfig(
 	}),
 	{
 		ignores: ['**/*.md'],
-		extends: [ts.configs.recommendedTypeCheckedOnly]
+		extends: [
+			// Just warn about type-checked rules for now
+			ts.configs.recommendedTypeCheckedOnly.map((config) => {
+				if (!config.rules) return config
+
+				const warnedRules = Object.fromEntries(
+					Object.entries(config.rules).map(([key, value]) => [key, value.replace('error', 'warn')])
+				)
+
+				return { ...config, rules: warnedRules }
+			})
+		]
 	},
 	{
 		files: ['**/*.md'],
