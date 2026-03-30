@@ -3,6 +3,6 @@ import type { PageLoad } from './$types'
 
 export const load: PageLoad = async ({ fetch }) => {
 	const response = await fetch('api/posts')
-	const posts: PostsApiResponse = await response.json()
+	const posts = (await response.json()) as PostsApiResponse
 	return { posts }
 }

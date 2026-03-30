@@ -6,7 +6,7 @@ export const prerender = true
 
 export const GET: RequestHandler = async ({ fetch }) => {
 	const response = await fetch('api/posts')
-	const posts: PostsApiResponse = await response.json()
+	const posts = (await response.json()) as PostsApiResponse
 	const website = url
 
 	const headers = { 'Content-Type': 'text/plain' }

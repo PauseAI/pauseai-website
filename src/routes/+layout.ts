@@ -21,7 +21,7 @@ export const load: LayoutLoad = async ({ url: { host, pathname }, fetch }) => {
 		try {
 			// Fetch current server-side environment-calculated locales
 			const response = await fetch('/api/locale-env')
-			const serverData: LocaleEnvApiResponse = await response.json()
+			const serverData = (await response.json()) as LocaleEnvApiResponse
 			// Get client-side runtime locales
 			const runtimeLocales = Array.from(locales)
 

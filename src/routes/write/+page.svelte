@@ -238,7 +238,7 @@
 				body: JSON.stringify([{ content: input, role: 'user' }])
 			})
 
-			const initialData: ChatResponse = await initialResponse.json()
+			const initialData = (await initialResponse.json()) as ChatResponse
 
 			// Add server-generated progress message with complete flag
 			messages = [
@@ -293,7 +293,7 @@
 			})
 
 			// Process the response
-			const data: ChatResponse = await response.json()
+			const data = (await response.json()) as ChatResponse
 
 			// Update API availability
 			apiAvailable = data.apiAvailable !== false
@@ -379,7 +379,7 @@
 		// Check API availability on component mount
 		try {
 			const response = await fetch('api/write')
-			const data: WriteApiAvailabilityResponse = await response.json()
+			const data = (await response.json()) as WriteApiAvailabilityResponse
 			apiAvailable = !!data.apiAvailable
 		} catch (error) {
 			console.error('Error checking API availability:', error)

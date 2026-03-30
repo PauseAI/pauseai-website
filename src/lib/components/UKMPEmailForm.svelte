@@ -153,7 +153,7 @@ ${userPostcode.toUpperCase()}`
 				})
 			})
 
-			const result: UKSendMPEmailApiResponse = await response.json()
+			const result = (await response.json()) as UKSendMPEmailApiResponse
 
 			if (response.ok && result.success) {
 				submitStatus = 'success'

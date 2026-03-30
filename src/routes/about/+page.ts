@@ -11,7 +11,7 @@ export const load: PageLoad = async ({ fetch, setHeaders }) => {
 		throw new Error(`Failed to load people data: ${response.statusText}`)
 	}
 
-	const groupedPeople: AboutApiResponse = await response.json()
+	const groupedPeople = (await response.json()) as AboutApiResponse
 
 	setHeaders(generateCacheControlRecord({ public: true, maxAge: 60 * 60 }))
 

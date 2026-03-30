@@ -56,7 +56,7 @@
 				body: JSON.stringify({ postcode: trimmedPostcode })
 			})
 
-			const result: UKLookupMPApiResponse = await response.json()
+			const result = (await response.json()) as UKLookupMPApiResponse
 
 			if (result.success) {
 				mp = result.mp

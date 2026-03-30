@@ -38,7 +38,7 @@
 		const searchString = window.location.search
 		const response = await fetch('/api/geo' + searchString)
 		if (!response.ok) return
-		const geo: GeoApiResponse = await response.json()
+		const geo = (await response.json()) as GeoApiResponse
 
 		// Keep geo cookie in sync with actual location.
 		// Re-run selectBanners if country changed or cookie not yet set.

@@ -12,7 +12,7 @@ export async function loadNationalGroups() {
 		if (!response.ok) {
 			throw new Error('Failed to fetch national groups')
 		}
-		const data: NationalGroupsApiResponse = await response.json()
+		const data = (await response.json()) as NationalGroupsApiResponse
 		nationalGroups.set(data)
 		return data
 	} catch (error) {

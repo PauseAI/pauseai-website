@@ -13,7 +13,7 @@ export type NewsApiResponse = {
 }
 
 async function getInternalNews(localFetch: typeof fetch): Promise<NewsItem[]> {
-	const posts: PostsApiResponse = await localFetch('/api/posts').then((res) => res.json())
+	const posts = (await localFetch('/api/posts').then((res) => res.json())) as PostsApiResponse
 	const items: NewsItem[] = []
 
 	for (const post of posts) {
