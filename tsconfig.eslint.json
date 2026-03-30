@@ -12,12 +12,6 @@
 		"src/**/*.cjs",
 		"src/**/*.ts",
 		"src/**/*.svelte",
-		"test/**/*.js",
-		"test/**/*.ts",
-		"test/**/*.svelte",
-		"tests/**/*.js",
-		"tests/**/*.ts",
-		"tests/**/*.svelte",
 		"vite.config.js",
 		"vite.config.ts"
 	]
