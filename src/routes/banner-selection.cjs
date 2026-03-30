@@ -9,7 +9,7 @@
 /**
  * @typedef {Object} BannerRule
  * @property {string} id
- * @property {[string | undefined, string | undefined]} dateRange
+ * @property {[string | null, string | null]} dateRange
  * @property {string[]=} countries
  */
 /** @type {BannerRule[]} */
@@ -38,8 +38,8 @@ window.selectBanners = function () {
 	}
 
 	/**
-	 * @param {string | undefined} startsOn
-	 * @param {string | undefined} endsOn
+	 * @param {string | null} startsOn
+	 * @param {string | null} endsOn
 	 * @returns {boolean}
 	 */
 	function inDateRange(startsOn, endsOn) {
