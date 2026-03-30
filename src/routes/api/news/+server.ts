@@ -1,9 +1,19 @@
-import type { NewsItem, Post } from '$lib/types'
+import type { NewsItem } from '$lib/types'
 import { generateCacheControlRecord } from '$lib/utils'
 import { json } from '@sveltejs/kit'
+import type { PostsApiResponse } from '$api/posts/+server.js'
+import type { RequestHandler } from './$types'
+
+export type NewsApiResponse = {
+	items: NewsItem[]
+	total: number
+	page: number
+	pageSize: number
+	totalPages: number
+}
 
 async function getInternalNews(localFetch: typeof fetch): Promise<NewsItem[]> {
-	const posts: Post[] = await localFetch('/api/posts').then((res) => res.json())
+	const posts = (await localFetch('/api/posts').then((res) => res.json())) as PostsApiResponse
 	const items: NewsItem[] = []
 
 	for (const post of posts) {
@@ -83,7 +93,7 @@ function extractCdata(xml: string, tag: string): string | null {
 	return match ? match[1] : null
 }
 
-export const GET = async ({ fetch, url, setHeaders }) => {
+export const GET: RequestHandler = async ({ fetch, url, setHeaders }) => {
 	const page = Math.max(1, parseInt(url.searchParams.get('page') || '1', 10))
 	const pageSize = Math.max(1, Math.min(12, parseInt(url.searchParams.get('pageSize') || '6', 10)))
 
@@ -103,5 +113,5 @@ export const GET = async ({ fetch, url, setHeaders }) => {
 		'Netlify-Vary': 'query'
 	}
 	setHeaders(headersRecord)
-	return json({ items, total, page, pageSize, totalPages })
+	return json({ items, total, page, pageSize, totalPages } satisfies NewsApiResponse)
 }

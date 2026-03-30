@@ -1,0 +1,24 @@
+{
+	"extends": "./tsconfig.json",
+	"include": [
+		"eslint.config.js",
+		"knip.config.ts",
+		"svelte.config.js",
+		"eslint/**/*.js",
+		"scripts/**/*.js",
+		"scripts/**/*.cjs",
+		"scripts/**/*.ts",
+		"src/**/*.js",
+		"src/**/*.cjs",
+		"src/**/*.ts",
+		"src/**/*.svelte",
+		"test/**/*.js",
+		"test/**/*.ts",
+		"test/**/*.svelte",
+		"tests/**/*.js",
+		"tests/**/*.ts",
+		"tests/**/*.svelte",
+		"vite.config.js",
+		"vite.config.ts"
+	]
+}

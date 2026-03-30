@@ -5,8 +5,9 @@
 	import QuoteHighlight from './QuoteHighlight.svelte'
 	import { theme } from '$lib/theme'
 	import Link from '$lib/components/LinkWithoutIcon.svelte'
+	import type { PageData } from './$types'
 
-	export let data
+	export let data: PageData
 
 	const { signatories } = data
 

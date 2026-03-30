@@ -3,8 +3,9 @@
 	import TallyEmbed from '$lib/components/TallyEmbed.svelte'
 	import { meta } from './meta'
 	import Signatory from './signatory.svelte'
+	import type { PageData } from './$types'
 
-	export let data
+	export let data: PageData
 
 	const { signatories, totalCount } = data
 	const { title, description, date } = meta

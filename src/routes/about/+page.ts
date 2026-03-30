@@ -1,8 +1,9 @@
 export const prerender = false
 import type { AboutApiResponse } from '$api/about/+server.js'
 import { generateCacheControlRecord } from '$lib/utils.js'
+import type { PageLoad } from './$types'
 
-export const load = async ({ fetch, setHeaders }) => {
+export const load: PageLoad = async ({ fetch, setHeaders }) => {
 	const response = await fetch('/api/about')
 
 	if (!response.ok) {
@@ -10,7 +11,7 @@ export const load = async ({ fetch, setHeaders }) => {
 		throw new Error(`Failed to load people data: ${response.statusText}`)
 	}
 
-	const groupedPeople: AboutApiResponse = await response.json()
+	const groupedPeople = (await response.json()) as AboutApiResponse
 
 	setHeaders(generateCacheControlRecord({ public: true, maxAge: 60 * 60 }))
 

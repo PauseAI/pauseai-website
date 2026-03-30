@@ -1,5 +1,6 @@
 import { error, json } from '@sveltejs/kit'
 import { env } from '$env/dynamic/private'
+import type { RequestHandler } from './$types'
 const openaiKey = env.OPENAI_KEY
 
 export type ChatResponse = {
@@ -36,7 +37,7 @@ function getInstruction(name: names) {
 	return `${sharedContext} ${personality.instruction}. Your name is ${name}`
 }
 
-export async function POST({ fetch, request }) {
+export const POST: RequestHandler = async ({ fetch, request }) => {
 	const messages = await request.json()
 
 	const apiUrl = 'https://api.openai.com/v1/chat/completions'
