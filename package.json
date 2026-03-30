@@ -82,6 +82,7 @@
 		"@fontsource/roboto-slab": "^5.2.8",
 		"@fontsource/saira-condensed": "^5.2.8",
 		"@glidejs/glide": "~3.6.2",
+		"@notionhq/client": "^2.2.15",
 		"@number-flow/svelte": "^0.3.13",
 		"@pagefind/default-ui": "^1.4.0",
 		"@prgm/sveltekit-progress-bar": "^3.0.2",
