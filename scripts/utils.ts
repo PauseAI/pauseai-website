@@ -4,7 +4,8 @@ import fs from 'fs/promises'
 const MANIFEST_PATH = '.netlify/edge-functions/manifest.json'
 
 export async function readEdgeManifest(): Promise<Manifest> {
-	return JSON.parse(await fs.readFile(MANIFEST_PATH, 'utf-8'))
+	const parsed = JSON.parse(await fs.readFile(MANIFEST_PATH, 'utf-8')) as Manifest
+	return parsed
 }
 
 export function searchRenderFunction(manifest: Manifest) {

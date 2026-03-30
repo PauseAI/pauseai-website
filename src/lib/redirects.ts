@@ -27,7 +27,8 @@ const REDIRECTS: Record<string, string> = {
 	'/volunteer-vacancies': '/join#volunteer-vacancies',
 	'/contact': '/contact-us',
 	'/summits': '/summit',
-	'/privacy-policy': '/privacy'
+	'/privacy-policy': '/privacy',
+	'/australia-wins': '/australia-progress' // moved
 }
 
 const OUR_XRISK_INTROS_YOUTUBE_PLAYLIST =

@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { botName } from '$lib/config'
-	import type { ChatResponse } from '../api/write/+server'
+	import type { ChatResponse, WriteApiAvailabilityResponse } from '$api/write/+server'
 	import { onMount } from 'svelte'
 
 	// Define local Message type to include 'progress' role and complete flag
@@ -238,25 +238,28 @@
 				body: JSON.stringify([{ content: input, role: 'user' }])
 			})
 
-			const initialData = await initialResponse.json()
+			const initialData = (await initialResponse.json()) as ChatResponse
 
-			// Add server-generated progress message with complete flag
-			messages = [
-				...messages,
-				{
-					content: initialData.progressString,
-					role: 'progress',
-					complete: initialData.complete // Track completion status
-				}
-			]
+			// TODO Check if progressString condition breaks behavior
+			// Add server-generated progress message with complete flag when present
+			if (initialData.progressString) {
+				messages = [
+					...messages,
+					{
+						content: initialData.progressString,
+						role: 'progress',
+						complete: initialData.complete // Track completion status
+					}
+				]
 
-			// Scroll to progress message
-			setTimeout(() => {
-				const progressMessage = document.querySelector('.message.progress')
-				if (progressMessage) {
-					progressMessage.scrollIntoView({ behavior: 'smooth', block: 'center' })
-				}
-			}, 100)
+				// Scroll to progress message
+				setTimeout(() => {
+					const progressMessage = document.querySelector('.message.progress')
+					if (progressMessage) {
+						progressMessage.scrollIntoView({ behavior: 'smooth', block: 'center' })
+					}
+				}, 100)
+			}
 
 			// Continue with the normal process, but pass the stateToken
 			await processSteps(null, initialData.stateToken)
@@ -275,7 +278,7 @@
 		}
 	}
 
-	async function processSteps(inputMessages: Message[] | null, stateToken = null) {
+	async function processSteps(inputMessages: Message[] | null, stateToken: string | null = null) {
 		// Set loading indicator
 		loading = true
 
@@ -293,7 +296,7 @@
 			})
 
 			// Process the response
-			const data = await response.json()
+			const data = (await response.json()) as ChatResponse
 
 			// Update API availability
 			apiAvailable = data.apiAvailable !== false
@@ -379,7 +382,7 @@
 		// Check API availability on component mount
 		try {
 			const response = await fetch('api/write')
-			const data = await response.json()
+			const data = (await response.json()) as WriteApiAvailabilityResponse
 			apiAvailable = !!data.apiAvailable
 		} catch (error) {
 			console.error('Error checking API availability:', error)

@@ -1,5 +1,7 @@
 #!/usr/bin/env node
 
+/* eslint-disable @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access, @typescript-eslint/prefer-promise-reject-errors */
+
 import https from 'https'
 import fs from 'fs'
 import path from 'path'

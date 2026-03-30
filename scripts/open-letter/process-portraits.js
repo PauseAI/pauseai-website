@@ -65,7 +65,7 @@ function validateImage(/** @type {string} */ imagePath) {
 	return { width, height }
 }
 
-async function main() {
+function main() {
 	const signatoryDir = path.join(path.dirname(__dirname), 'static', 'portraits', 'signatories')
 	const processedDir = path.join(path.dirname(__dirname), 'static', 'portraits', 'processed')
 
@@ -153,4 +153,4 @@ async function main() {
 	}
 }
 
-main().catch(console.error)
+main()
