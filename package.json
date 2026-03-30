@@ -20,7 +20,7 @@
 		"_check:svelte": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
 		"_check:scripts": "tsc --noEmit -p tsconfig.scripts.json",
 		"check:watch": "echo This commands only checks the SvelteKit code, not the build scripts. && svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
-		"lint": "knip && eslint .",
+		"lint": "knip && eslint . --max-warnings=239",
 		"format": "prettier --write .",
 		"prepare": "husky",
 		"sync": "svelte-kit sync"
