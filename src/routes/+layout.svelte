@@ -101,7 +101,7 @@
 	</script>
 
 	<!-- eslint-disable-next-line svelte/no-at-html-tags not vulnerable against XSS -->
-	{@html `<${'script'}>${bannerSelection}</script>`}
+	{@html `<${'script'}>${bannerSelection.replaceAll(/\/\*[\s\S]*?\*\//g, '')}</script>`}
 </svelte:head>
 
 <PreloadFonts urls={[robotoSlabLatin300, sairaCondensedLatin700]} />
