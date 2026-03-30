@@ -11,6 +11,9 @@ import ts from 'typescript-eslint'
 import emptyMarkdownLinks from './eslint/plugin-empty-markdown-links.js'
 import svelteConfig from './svelte.config.js'
 
+// See https://typescript-eslint.io/troubleshooting/typed-linting/performance#changes-to-extrafileextensions-with-projectservice
+const EXTRA_FILE_EXTENSIONS = ['.svelte']
+
 export default defineConfig(
 	js.configs.recommended,
 	...ts.configs.recommended,
@@ -20,12 +23,20 @@ export default defineConfig(
 			globals: {
 				...globals.browser,
 				...globals.node
+			},
+			parserOptions: {
+				extraFileExtensions: EXTRA_FILE_EXTENSIONS,
+				projectService: true
 			}
 		}
 	},
 	gitignore({
 		files: globbySync('**/.gitignore', { ignore: ['**/node_modules'] })
 	}),
+	{
+		ignores: ['**/*.md'],
+		extends: [ts.configs.recommendedTypeCheckedOnly]
+	},
 	{
 		files: ['**/*.md'],
 		extends: [markdown.configs.recommended],
@@ -48,7 +59,8 @@ export default defineConfig(
 		languageOptions: {
 			parserOptions: {
 				projectService: true,
-				extraFileExtensions: ['.svelte'], // Add support for additional file extensions, such as .svelte
+				// Defined globally instead:
+				// extraFileExtensions: ['.svelte'], // Add support for additional file extensions, such as .svelte
 				parser: ts.parser,
 				// Specify a parser for each language, if needed:
 				// parser: {
