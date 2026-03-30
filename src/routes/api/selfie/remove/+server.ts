@@ -21,7 +21,7 @@ export const POST: RequestHandler = async ({ request }) => {
 		const { public_id } = await request.json()
 
 		if (!public_id) {
-			return json({ error: 'Missing public_id' } satisfies SelfieRemoveApiErrorResponse, {
+			return json({ error: 'Missing public_id' } satisfies SelfieRemoveApiResponse, {
 				status: 400
 			})
 		}
