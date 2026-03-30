@@ -2,8 +2,9 @@ import { ukCheckMPContactHistory } from '$lib/server/uk-mp-contact-status.js'
 import { ukLookupMPByPostcode } from '$lib/server/uk-postcode-to-mp.js'
 import { json } from '@sveltejs/kit'
 import { StatusCodes } from 'http-status-codes'
+import type { RequestHandler } from './$types'
 
-export const POST = async ({ request }) => {
+export const POST: RequestHandler = async ({ request }) => {
 	try {
 		const body = await request.json()
 		const { postcode } = body

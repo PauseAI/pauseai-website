@@ -4,8 +4,9 @@
 	import { meta } from './meta'
 	import PostMeta from '$lib/components/PostMeta.svelte'
 	import GithubSlugger from 'github-slugger'
+	import type { PageData } from './$types'
 
-	export let data
+	export let data: PageData
 
 	const { quotes } = data
 </script>

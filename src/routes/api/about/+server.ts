@@ -6,6 +6,7 @@ import { defaultTitle } from '$lib/config'
 import type { Person } from '$lib/types'
 import { generateCacheControlRecord } from '$lib/utils'
 import { json } from '@sveltejs/kit'
+import type { RequestHandler } from './$types'
 
 // Export the response type for use in other endpoints
 export type AboutApiResponse = Record<string, Person[]>
@@ -68,7 +69,7 @@ const getGroupKey = (order: number | undefined): string => {
 	return 'National Leaders'
 }
 
-export async function GET({ fetch, setHeaders }) {
+export const GET: RequestHandler = async ({ fetch, setHeaders }) => {
 	const url = `https://api.airtable.com/v0/appWPTGqZmUcs3NWu/tblL1icZBhTV1gQ9o`
 	setHeaders(generateCacheControlRecord({ public: true, maxAge: 60 * 60 }))
 

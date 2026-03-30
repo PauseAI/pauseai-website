@@ -3,9 +3,11 @@
 	import Link from '$lib/components/Link.svelte'
 	import PostMeta from '$lib/components/PostMeta.svelte'
 	import { getPostMetaImageUrl } from '$lib/images.js'
+	import type { PageData } from './$types'
 
 	// don't destructure to maintain reactivity for invalidation after language detection
-	export let data
+	export let data: PageData
+
 	$: meta = data.meta
 	$: ({ title = data.slug, date, description, image, author, showImage = true } = meta)
 	$: parent = data.slug.split('/').slice(0, -1).join('/')

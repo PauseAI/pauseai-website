@@ -1,6 +1,7 @@
 import type { NewsItem, Post } from '$lib/types'
 import { generateCacheControlRecord } from '$lib/utils'
 import { json } from '@sveltejs/kit'
+import type { RequestHandler } from './$types'
 
 async function getInternalNews(localFetch: typeof fetch): Promise<NewsItem[]> {
 	const posts: Post[] = await localFetch('/api/posts').then((res) => res.json())
@@ -83,7 +84,7 @@ function extractCdata(xml: string, tag: string): string | null {
 	return match ? match[1] : null
 }
 
-export const GET = async ({ fetch, url, setHeaders }) => {
+export const GET: RequestHandler = async ({ fetch, url, setHeaders }) => {
 	const page = Math.max(1, parseInt(url.searchParams.get('page') || '1', 10))
 	const pageSize = Math.max(1, Math.min(12, parseInt(url.searchParams.get('pageSize') || '6', 10)))
 

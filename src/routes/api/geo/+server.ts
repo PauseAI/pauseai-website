@@ -1,12 +1,13 @@
 import { generateCacheControlRecord } from '$lib/utils'
 import { json } from '@sveltejs/kit'
 import { StatusCodes } from 'http-status-codes'
+import type { RequestHandler } from './$types'
 
 export type GeoApiResponse = App.Platform['context']['geo']
 
 export const prerender = false
 
-export function GET({ platform, setHeaders, url }) {
+export const GET: RequestHandler = ({ platform, setHeaders, url }) => {
 	const lat = url.searchParams.get('lat')
 	const lon = url.searchParams.get('lon')
 	const country = url.searchParams.get('country')

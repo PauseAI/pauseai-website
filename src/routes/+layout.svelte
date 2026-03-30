@@ -26,8 +26,9 @@
 	import Header from './header.svelte'
 	import PageTransition from './transition.svelte'
 	import bannerSelection from './banner-selection.cjs?raw'
+	import type { PageData } from './$types'
 
-	export let data
+	export let data: PageData
 
 	let eventFound: boolean
 	let geoForNearbyEvent: GeoApiResponse | null = null

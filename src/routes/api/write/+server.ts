@@ -1,6 +1,7 @@
 import { error, json } from '@sveltejs/kit'
 import { env } from '$env/dynamic/private'
 import Anthropic from '@anthropic-ai/sdk'
+import type { RequestHandler } from './$types'
 
 // Safely access the API key, will be undefined if not set
 const ANTHROPIC_API_KEY_FOR_WRITE = env.ANTHROPIC_API_KEY_FOR_WRITE || undefined
@@ -187,7 +188,7 @@ const anthropic = IS_API_AVAILABLE
 		})
 	: null
 
-export async function GET() {
+export const GET: RequestHandler = async () => {
 	return json({ apiAvailable: IS_API_AVAILABLE })
 }
 
@@ -452,7 +453,7 @@ async function processStep(state: WriteState): Promise<WriteState> {
 	return state
 }
 
-export async function POST({ fetch, request }) {
+export const POST: RequestHandler = async ({ fetch, request }) => {
 	// Check if API is available
 	if (!IS_API_AVAILABLE) {
 		return json({

@@ -4,6 +4,7 @@ import { AIRTABLE_WRITE_API_KEY } from '$env/static/private'
 import { verificationParameter } from '$lib/config.js'
 import Airtable from 'airtable'
 import { StatusCodes } from 'http-status-codes'
+import type { RequestHandler } from './$types'
 
 const TABLE_PARAMETER = 'table'
 const DEFAULT_TABLE = 'join'
@@ -29,7 +30,7 @@ const VERIFICATION_TABLES = new Map([
 	]
 ])
 
-export async function GET({ url }) {
+export const GET: RequestHandler = async ({ url }) => {
 	const key = url.searchParams.get(verificationParameter)
 	if (!key) {
 		return new Response(`Parameter "${verificationParameter}" is required`, {
