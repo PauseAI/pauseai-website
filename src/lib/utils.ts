@@ -1,5 +1,11 @@
 import Headers, { CacheControl, type CacheControlInit } from '@remix-run/headers'
 
+export type DeepPartial<T> = T extends object
+	? {
+			[P in keyof T]?: DeepPartial<T[P]>
+		}
+	: T
+
 type DateStyle = Intl.DateTimeFormatOptions['dateStyle']
 
 export function formatDate(date: string, dateStyle: DateStyle = 'medium', locales = 'en') {
