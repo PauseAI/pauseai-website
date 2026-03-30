@@ -1,6 +1,8 @@
 {
 	"extends": "./tsconfig.json",
 	"include": [
+		".svelte-kit/*.d.ts",
+		".svelte-kit/types/**/*.d.ts",
 		"eslint.config.js",
 		"knip.config.ts",
 		"svelte.config.js",
