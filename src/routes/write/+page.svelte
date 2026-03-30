@@ -240,23 +240,26 @@
 
 			const initialData = (await initialResponse.json()) as ChatResponse
 
-			// Add server-generated progress message with complete flag
-			messages = [
-				...messages,
-				{
-					content: initialData.progressString,
-					role: 'progress',
-					complete: initialData.complete // Track completion status
-				}
-			]
+			// TODO Check if progressString condition breaks behavior
+			// Add server-generated progress message with complete flag when present
+			if (initialData.progressString) {
+				messages = [
+					...messages,
+					{
+						content: initialData.progressString,
+						role: 'progress',
+						complete: initialData.complete // Track completion status
+					}
+				]
 
-			// Scroll to progress message
-			setTimeout(() => {
-				const progressMessage = document.querySelector('.message.progress')
-				if (progressMessage) {
-					progressMessage.scrollIntoView({ behavior: 'smooth', block: 'center' })
-				}
-			}, 100)
+				// Scroll to progress message
+				setTimeout(() => {
+					const progressMessage = document.querySelector('.message.progress')
+					if (progressMessage) {
+						progressMessage.scrollIntoView({ behavior: 'smooth', block: 'center' })
+					}
+				}, 100)
+			}
 
 			// Continue with the normal process, but pass the stateToken
 			await processSteps(null, initialData.stateToken)
