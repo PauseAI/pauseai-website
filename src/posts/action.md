@@ -108,6 +108,7 @@ content: `
 </div>
 </div>
 	`
+},
 {
 title: 'Connect',
 content: `
@@ -136,7 +137,6 @@ content: `
 </div>
 </div>
 	`
-},
 },
 {
 	title: 'Go All In',
