@@ -30,8 +30,9 @@
 		<h2>Logo, materials</h2>
 		<p>
 			Our logo and other material can be found in
-			<a href="https://drive.google.com/drive/folders/1bQ_MZ8giK-Mee4ABkO0BgcFInaXruNpa?usp=sharing"
-				>this Google Drive folder</a
+			<Link
+				href="https://drive.google.com/drive/folders/1bQ_MZ8giK-Mee4ABkO0BgcFInaXruNpa?usp=sharing"
+				>this Google Drive folder</Link
 			>.
 		</p>
 		<p>

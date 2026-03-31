@@ -23,7 +23,7 @@
 	) as string[]
 
 	// Sort them based on the schema order fetched directly from Notion
-	$: tabs = availableOutlets.sort((a, b) => {
+	$: tabs = [...availableOutlets].sort((a, b) => {
 		const indexA = outletOrder.indexOf(a)
 		const indexB = outletOrder.indexOf(b)
 		if (indexA !== -1 && indexB !== -1) return indexA - indexB
