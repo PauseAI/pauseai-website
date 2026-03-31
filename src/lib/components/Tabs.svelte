@@ -190,6 +190,66 @@
 		text-decoration: underline;
 	}
 
+	/* Action card grid layout */
+	.tab-content :global(.action-cards) {
+		display: grid;
+		grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+		gap: 1rem;
+		margin-top: 0.5rem;
+	}
+
+	.tab-content :global(.action-card) {
+		background: var(--bg-subtle);
+		border-radius: 12px;
+		padding: 1.25rem;
+		display: flex;
+		flex-direction: column;
+		gap: 0.5rem;
+		transition:
+			transform 0.2s ease,
+			box-shadow 0.2s ease;
+	}
+
+	.tab-content :global(.action-card:hover) {
+		transform: translateY(-3px);
+		box-shadow: 0 6px 20px rgba(0, 0, 0, 0.18);
+	}
+
+	.tab-content :global(.action-card-icon) {
+		width: 2.5rem;
+		height: 2.5rem;
+		background: var(--brand);
+		border-radius: 8px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		font-size: 1.2rem;
+		line-height: 1;
+		flex-shrink: 0;
+	}
+
+	.tab-content :global(.action-card-title) {
+		font-family: var(--font-heading);
+		font-weight: 700;
+		font-size: 1rem;
+		line-height: 1.2;
+		display: block;
+	}
+
+	.tab-content :global(.action-card-body) {
+		font-size: 0.9rem;
+		line-height: 1.55;
+		margin: 0;
+		color: var(--text);
+		opacity: 0.85;
+		flex: 1;
+	}
+
+	.tab-content :global(.action-card-body a) {
+		color: var(--brand);
+		text-decoration: underline;
+	}
+
 	/* Mobile-specific adjustments */
 	@media (max-width: 768px) {
 		.tab-button {

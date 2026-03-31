@@ -18,12 +18,28 @@ content: `
 
 <h3 class="toc-exclude">Connect</h3>
 <p>Before diving in, take these quick steps to connect with the movement:</p>
-<ol>
-<li><strong>Sign up via our <a href="/join">Join page</a></strong> so we can stay in touch and connect you with volunteer communities around the world.</li>
-<li><strong>Join the <a href="https://discord.gg/T3YrWUJsJ5">Discord</a></strong>, where most of our day-to-day collaboration happens.</li>
-<li><strong>Find the next Community Onboarding Call</strong> in our <a href="/communities#events">event</a> calendar to meet others who have just joined and hear more about what we do.</li>
-<li><strong><a href="/communities">Find your community</a></strong> and meet other local volunteers to find actions happening specifically in your country or city.</li>
-</ol>
+<div class="action-cards">
+<div class="action-card">
+<div class="action-card-icon">🔗</div>
+<strong class="action-card-title">Sign up</strong>
+<p class="action-card-body">Sign up via our <a href="/join">Join page</a> so we can stay in touch and connect you with volunteer communities around the world.</p>
+</div>
+<div class="action-card">
+<div class="action-card-icon">💬</div>
+<strong class="action-card-title">Join the Discord</strong>
+<p class="action-card-body">Join the <a href="https://discord.gg/T3YrWUJsJ5">Discord</a>, where most of our day-to-day collaboration happens.</p>
+</div>
+<div class="action-card">
+<div class="action-card-icon">📅</div>
+<strong class="action-card-title">Onboarding Call</strong>
+<p class="action-card-body">Find the next Community Onboarding Call in our <a href="/communities#events">event</a> calendar to meet others who have just joined and hear more about what we do.</p>
+</div>
+<div class="action-card">
+<div class="action-card-icon">🌍</div>
+<strong class="action-card-title">Find your community</strong>
+<p class="action-card-body"><a href="/communities">Find your community</a> and meet other local volunteers to find actions happening specifically in your country or city.</p>
+</div>
+</div>
 	`
 },
 {
@@ -31,12 +47,28 @@ content: `
 	content: `
 <h3 class="toc-exclude">I have 5 minutes</h3>
 <p>Small actions add up. Here are quick ways to contribute:</p>
-<ul>
-<li>Check out our <a href="https://microcommit.io/onboarding?org=135fcd8d-8116-44af-b885-14df992f9a8c">microcommit page</a> for weekly bite-sized actions</li>
-<li>Make a <a href="/donate">donation</a> or pick up some gear from our <a href="https://pauseai-shop.fourthwall.com/">store</a></li>
-<li>Follow our <a href="https://linktr.ee/pauseai">social media channels</a> to stay updated—your local PauseAI chapter may have dedicated pages too</li>
-<li>Sign the petitions: <a href="/statement">PauseAI Statement</a>, <a href="/sayno">Say No To Superintelligent AI</a>, <a href="https://superintelligence-statement.org/">Statement on Superintelligence</a>, <a href="https://aitreaty.org">International AI Treaty</a>, <a href="https://www.change.org/p/artificial-intelligence-time-is-running-out-for-responsible-ai-development-91f0a02c-130a-46e1-9e55-70d6b274f4df">Demand Responsible AI</a></li>
-</ul>
+<div class="action-cards">
+<div class="action-card">
+<div class="action-card-icon">⚡</div>
+<strong class="action-card-title">Microcommit</strong>
+<p class="action-card-body">Check out our <a href="https://microcommit.io/onboarding?org=135fcd8d-8116-44af-b885-14df992f9a8c">microcommit page</a> for weekly bite-sized actions you can do in under 5 minutes.</p>
+</div>
+<div class="action-card">
+<div class="action-card-icon">💰</div>
+<strong class="action-card-title">Make a donation</strong>
+<p class="action-card-body">Make a <a href="/donate">donation</a> or pick up some gear from our <a href="https://pauseai-shop.fourthwall.com/">store</a> to support the movement.</p>
+</div>
+<div class="action-card">
+<div class="action-card-icon">📣</div>
+<strong class="action-card-title">Follow us</strong>
+<p class="action-card-body">Follow our <a href="https://linktr.ee/pauseai">social media channels</a> to stay updated — your local PauseAI chapter may have dedicated pages too.</p>
+</div>
+<div class="action-card">
+<div class="action-card-icon">✍️</div>
+<strong class="action-card-title">Sign petitions</strong>
+<p class="action-card-body">Sign the petitions: <a href="/statement">PauseAI Statement</a>, <a href="/sayno">Say No To Superintelligent AI</a>, <a href="https://superintelligence-statement.org/">Statement on Superintelligence</a>, <a href="https://aitreaty.org">International AI Treaty</a>, <a href="https://www.change.org/p/artificial-intelligence-time-is-running-out-for-responsible-ai-development-91f0a02c-130a-46e1-9e55-70d6b274f4df">Demand Responsible AI</a>.</p>
+</div>
+</div>
 	`
 },
 {
@@ -44,11 +76,23 @@ content: `
 	content: `
 <h3 class="toc-exclude">I have an hour</h3>
 <p>Ready to go a bit deeper? Start conversations and add your voice:</p>
-<ul>
-<li><strong>Write to your elected representatives</strong> using our <a href="/email-builder">Email Builder</a></li>
-<li>Talk to someone in your life about AI safety—a friend, neighbour, colleague, or family member. Our <a href="/counterarguments">counterarguments guide</a> can help you answer tough questions and encourage others to act</li>
-<li>Share about AI risk on your social media. One of <a href="https://www.youtube.com/watch?v=xBqU1QxCao8&list=PLI46NoubGtIJa0JVCBR-9CayxCOmU0EJt">these videos</a> or this website can be a good start. And don't forget to tag us in your posts</li>
-</ul>
+<div class="action-cards">
+<div class="action-card">
+<div class="action-card-icon">✉️</div>
+<strong class="action-card-title">Write to your representatives</strong>
+<p class="action-card-body">Write to your elected representatives using our <a href="/email-builder">Email Builder</a> — it only takes a few minutes.</p>
+</div>
+<div class="action-card">
+<div class="action-card-icon">🗣️</div>
+<strong class="action-card-title">Talk to someone</strong>
+<p class="action-card-body">Talk to someone in your life about AI safety — a friend, neighbour, colleague, or family member. Our <a href="/counterarguments">counterarguments guide</a> can help you answer tough questions.</p>
+</div>
+<div class="action-card">
+<div class="action-card-icon">📱</div>
+<strong class="action-card-title">Share on social media</strong>
+<p class="action-card-body">Share about AI risk on your social media. One of <a href="https://www.youtube.com/watch?v=xBqU1QxCao8&list=PLI46NoubGtIJa0JVCBR-9CayxCOmU0EJt">these videos</a> or this website can be a good start. Don't forget to tag us.</p>
+</div>
+</div>
 	`
 },
 {
@@ -56,11 +100,18 @@ content: `
 	content: `
 <h3 class="toc-exclude">I have a few hours</h3>
 <p>Make your voice heard where it counts:</p>
-<ul>
-<li><strong>Call your politicians</strong>: Try calling legislators' offices while having a set of talking points in view so you stay on topic</li>
-<li>Follow up with a phone call, and when you secure a meeting, check out our <a href="/lobby-tips">lobby tips</a></li>
-<li>Take a deep dive into our <a href="/learn">educational materials</a> to build your knowledge</li>
-</ul>
+<div class="action-cards">
+<div class="action-card">
+<div class="action-card-icon">📞</div>
+<strong class="action-card-title">Call your politicians</strong>
+<p class="action-card-body">Try calling legislators' offices while having a set of talking points in view so you stay on topic. Follow up with a phone call, and check out our <a href="/lobby-tips">lobby tips</a> when you secure a meeting.</p>
+</div>
+<div class="action-card">
+<div class="action-card-icon">📚</div>
+<strong class="action-card-title">Educate yourself</strong>
+<p class="action-card-body">Take a deep dive into our <a href="/learn">educational materials</a> to build your knowledge and become a more effective advocate.</p>
+</div>
+</div>
 	`
 },
 {
@@ -68,17 +119,23 @@ content: `
 	content: `
 <h3 class="toc-exclude">I have a day</h3>
 <p>Get out into the world and bring others along:</p>
-<ul>
-<li><strong>Attend one of our <a href="/communities#events">upcoming events</a></strong>—or if there isn't one near you, organise your own:
-	<ul>
-	<li><a href="/organizing-a-protest">Protests</a></li>
-	<li><a href="/local-organizing#letter-to-the-editor-writing-workshops">Workshops</a></li>
-	<li><a href="/local-organizing#social-events--having-drinks">Social meetups</a></li>
-	</ul>
-</li>
-<li>Try <a href="/tabling">tabling</a> or <a href="/flyering">flyering</a>—great ways to reach many people in a short time</li>
-<li><strong>Attend local events</strong>: Many cities have (free / low-cost) events about AI & technology policy. Attending these events is a great way to network and share your concerns</li>
-</ul>
+<div class="action-cards">
+<div class="action-card">
+<div class="action-card-icon">🗓️</div>
+<strong class="action-card-title">Attend an event</strong>
+<p class="action-card-body">Attend one of our <a href="/communities#events">upcoming events</a> — or if there isn't one near you, organise your own <a href="/organizing-a-protest">protest</a>, <a href="/local-organizing#letter-to-the-editor-writing-workshops">workshop</a>, or <a href="/local-organizing#social-events--having-drinks">social meetup</a>.</p>
+</div>
+<div class="action-card">
+<div class="action-card-icon">📋</div>
+<strong class="action-card-title">Table or flyer</strong>
+<p class="action-card-body">Try <a href="/tabling">tabling</a> or <a href="/flyering">flyering</a> — great ways to reach many people in a short time.</p>
+</div>
+<div class="action-card">
+<div class="action-card-icon">🤝</div>
+<strong class="action-card-title">Attend local events</strong>
+<p class="action-card-body">Many cities have free or low-cost events about AI &amp; technology policy. Attending these is a great way to network and share your concerns.</p>
+</div>
+</div>
 	`
 },
 {
@@ -86,12 +143,28 @@ content: `
 	content: `
 <h3 class="toc-exclude">I want to go all in</h3>
 <p>Ready to make PauseAI a serious part of your life? We'd love to have you:</p>
-<ul>
-<li>Apply for a <a href="/microgrants">microgrant</a> to fund your own initiative</li>
-<li>Apply for a <a href="/volunteer-stipends">volunteer stipend</a> to support sustained involvement</li>
-<li><a href="/communities">Set up a local chapter</a> or get deeply involved in an existing one</li>
-<li>Check our <a href="/vacancies">paid</a> vacancies for open roles</li>
-</ul>
+<div class="action-cards">
+<div class="action-card">
+<div class="action-card-icon">💡</div>
+<strong class="action-card-title">Apply for a microgrant</strong>
+<p class="action-card-body">Apply for a <a href="/microgrants">microgrant</a> to fund your own initiative and get support for your local efforts.</p>
+</div>
+<div class="action-card">
+<div class="action-card-icon">🙌</div>
+<strong class="action-card-title">Volunteer stipend</strong>
+<p class="action-card-body">Apply for a <a href="/volunteer-stipends">volunteer stipend</a> to support sustained involvement and dedicate more time to the cause.</p>
+</div>
+<div class="action-card">
+<div class="action-card-icon">🏘️</div>
+<strong class="action-card-title">Build a local chapter</strong>
+<p class="action-card-body"><a href="/communities">Set up a local chapter</a> or get deeply involved in an existing one to grow the movement in your area.</p>
+</div>
+<div class="action-card">
+<div class="action-card-icon">💼</div>
+<strong class="action-card-title">Paid roles</strong>
+<p class="action-card-body">Check our <a href="/vacancies">paid vacancies</a> for open roles and turn your commitment into a career.</p>
+</div>
+</div>
 	`
 }
 ]} />
@@ -104,56 +177,120 @@ title: 'Journalist or Creator',
 content: `
 
 <h3 class="toc-exclude">If you work as a journalist or have a social media following</h3>
-<ul>
-<li><strong>Create content</strong> about AI dangers or PauseAI. For more information, reach out to us through any of our <a href="/faq#do-you-have-social-media">communication channels</a>.</li>
-</ul>
+<div class="action-cards">
+<div class="action-card">
+<div class="action-card-icon">🎥</div>
+<strong class="action-card-title">Create content</strong>
+<p class="action-card-body">Create content about AI dangers or PauseAI. For more information, reach out to us through any of our <a href="/faq#do-you-have-social-media">communication channels</a>.</p>
+</div>
+</div>
 		`
 	},
 	{
 		title: 'Politician or Public Servant',
 		content: `
 <h3 class="toc-exclude">If you are a politician or work in government</h3>
-<ul>
-<li><strong>Prepare for the next <a href="/summit">AI safety summit</a></strong>. Form coalitions with other countries to share safety information and act quickly when harms arise. Work towards a global treaty.</li>
-<li><strong>Invite (or subpoena) AI lab leaders</strong> to parliamentary/congressional hearings to give their predictions and timelines of AI disasters.</li>
-<li><strong>Establish a committee</strong> to investigate the <a href="/risks">risks of AI</a>. Publish the findings, if feasible.</li>
-<li><strong>Make AI safety a priority</strong> in your party's platform, your government's policy, or just make sure it's on the agenda.</li>
-<li><strong>Work with opposition politicians</strong> to demonstrate that AI safety affects us all, regardless of political beliefs.</li>
-</ul>
+<div class="action-cards">
+<div class="action-card">
+<div class="action-card-icon">🌐</div>
+<strong class="action-card-title">Prepare for the next summit</strong>
+<p class="action-card-body">Prepare for the next <a href="/summit">AI safety summit</a>. Form coalitions with other countries to share safety information and act quickly when harms arise. Work towards a global treaty.</p>
+</div>
+<div class="action-card">
+<div class="action-card-icon">🏛️</div>
+<strong class="action-card-title">Invite AI lab leaders</strong>
+<p class="action-card-body">Invite (or subpoena) AI lab leaders to parliamentary/congressional hearings to give their predictions and timelines of AI disasters.</p>
+</div>
+<div class="action-card">
+<div class="action-card-icon">🔍</div>
+<strong class="action-card-title">Establish a committee</strong>
+<p class="action-card-body">Establish a committee to investigate the <a href="/risks">risks of AI</a>. Publish the findings, if feasible.</p>
+</div>
+<div class="action-card">
+<div class="action-card-icon">📌</div>
+<strong class="action-card-title">Make AI safety a priority</strong>
+<p class="action-card-body">Make AI safety a priority in your party's platform, your government's policy, or just make sure it's on the agenda.</p>
+</div>
+<div class="action-card">
+<div class="action-card-icon">🤲</div>
+<strong class="action-card-title">Work across the aisle</strong>
+<p class="action-card-body">Work with opposition politicians to demonstrate that AI safety affects us all, regardless of political beliefs.</p>
+</div>
+</div>
 		`
 	},
 	{
-		title: 'Legal or Policy Expert',
+		title: 'Legal or Policy Expert',
 		content: `
 <h3 class="toc-exclude">If you have experience with (international) law</h3>
-<ul>
-<li><strong>Help draft policy</strong>. <a href="https://www.campaignforaisafety.org/celebrating-the-winners-law-student-moratorium-treaty-competition/">Draft examples</a>. <a href="https://futureoflife.org/wp-content/uploads/2023/04/FLI_Policymaking_In_The_Pause.pdf">Some</a> <a href="https://www.openphilanthropy.org/research/12-tentative-ideas-for-us-ai-policy/">frameworks</a>.</li>
-<li><strong>Make submissions</strong> to government requests for comment on AI policy (<a href="https://ntia.gov/issues/artificial-intelligence/request-for-comments">example</a>).</li>
-</ul>
+<div class="action-cards">
+<div class="action-card">
+<div class="action-card-icon">📝</div>
+<strong class="action-card-title">Help draft policy</strong>
+<p class="action-card-body">Help draft policy. See <a href="https://www.campaignforaisafety.org/celebrating-the-winners-law-student-moratorium-treaty-competition/">draft examples</a> and some <a href="https://futureoflife.org/wp-content/uploads/2023/04/FLI_Policymaking_In_The_Pause.pdf">frameworks</a> to get started.</p>
+</div>
+<div class="action-card">
+<div class="action-card-icon">📬</div>
+<strong class="action-card-title">Make submissions</strong>
+<p class="action-card-body">Make submissions to government requests for comment on AI policy (<a href="https://ntia.gov/issues/artificial-intelligence/request-for-comments">example</a>).</p>
+</div>
+</div>
 		`
 	},
 	{
 		title: 'Academic or Educator',
 		content: `
 <h3 class="toc-exclude">If you are a university professor or work in an academic institution</h3>
-<ul>
-<li><strong>Write op-eds</strong> and articles for media outlets</li>
-<li><strong>Mentor students</strong> who are interested in this topic</li>
-<li><strong>Organize a campus event</strong> about AI risk, or an academic conference, panel, or symposium</li>
-<li><strong>Submit a faculty senate resolution</strong> on AI risk, or craft a university position statement</li>
-</ul>
+<div class="action-cards">
+<div class="action-card">
+<div class="action-card-icon">✏️</div>
+<strong class="action-card-title">Write op-eds</strong>
+<p class="action-card-body">Write op-eds and articles for media outlets to raise awareness about AI risk among general audiences.</p>
+</div>
+<div class="action-card">
+<div class="action-card-icon">🎓</div>
+<strong class="action-card-title">Mentor students</strong>
+<p class="action-card-body">Mentor students who are interested in AI safety and help cultivate the next generation of advocates.</p>
+</div>
+<div class="action-card">
+<div class="action-card-icon">🏫</div>
+<strong class="action-card-title">Organize a campus event</strong>
+<p class="action-card-body">Organize a campus event about AI risk, or an academic conference, panel, or symposium.</p>
+</div>
+<div class="action-card">
+<div class="action-card-icon">🏫</div>
+<strong class="action-card-title">Submit a faculty resolution</strong>
+<p class="action-card-body">Submit a faculty senate resolution on AI risk, or craft a university position statement.</p>
+</div>
+</div>
 		`
 	},
 	{
 		title: 'AI Industry Professional',
 		content: `
 <h3 class="toc-exclude">If you work in AI</h3>
-<ul>
-<li><strong>Don't work towards better AI</strong>: Do not work for AI companies or capabilities research. And do not spread ideas on how we can make AI systems faster or smarter.</li>
-<li><strong>Talk to your management and colleagues</strong> about the risks. Get them to take an institutional position toward mitigating risk over profit. Encourage implementation of standard risk mitigation procedures and anonymous reporting.</li>
-<li><strong>Hold a seminar</strong> on AI safety at your workplace. Check out these <a href="https://drive.google.com/drive/u/1/folders/1p9VtopzMV6Xpk4p6EGYUTna4fLE6G8hd">slides</a> and <a href="https://www.youtube.com/playlist?list=PLI46NoubGtIJa0JVCBR-9CayxCOmU0EJt">talks and videos</a> for inspiration.</li>
-<li><strong>Sign</strong> the <a href="https://www.safe.ai/statement-on-ai-risk">Statement on AI Risk</a>.</li>
-</ul>
+<div class="action-cards">
+<div class="action-card">
+<div class="action-card-icon">🚫</div>
+<strong class="action-card-title">Don't work towards better AI</strong>
+<p class="action-card-body">Do not work for AI companies or capabilities research. And do not spread ideas on how we can make AI systems faster or smarter.</p>
+</div>
+<div class="action-card">
+<div class="action-card-icon">💬</div>
+<strong class="action-card-title">Talk to management</strong>
+<p class="action-card-body">Talk to your management and colleagues about the risks. Get them to take an institutional position toward mitigating risk over profit. Encourage anonymous reporting.</p>
+</div>
+<div class="action-card">
+<div class="action-card-icon">📊</div>
+<strong class="action-card-title">Hold a seminar</strong>
+<p class="action-card-body">Hold a seminar on AI safety at your workplace. Check out these <a href="https://drive.google.com/drive/u/1/folders/1p9VtopzMV6Xpk4p6EGYUTna4fLE6G8hd">slides</a> and <a href="https://www.youtube.com/playlist?list=PLI46NoubGtIJa0JVCBR-9CayxCOmU0EJt">talks and videos</a> for inspiration.</p>
+</div>
+<div class="action-card">
+<div class="action-card-icon">✍️</div>
+<strong class="action-card-title">Sign the statement</strong>
+<p class="action-card-body">Sign the <a href="https://www.safe.ai/statement-on-ai-risk">Statement on AI Risk</a> to add your voice to the growing consensus among AI professionals.</p>
+</div>
+</div>
 		`
 	}
 ]} />
