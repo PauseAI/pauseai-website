@@ -154,7 +154,7 @@ content: `
 <strong class="action-card-title">Volunteer stipend</strong>
 <p class="action-card-body">Apply for a volunteer stipend to support sustained involvement and dedicate more time to the cause.</p>
 </a>
-<a href="/communities" class="action-card action-card-link">
+<a href="mailto:irina@pauseai.info?subject=I%20want%20to%20start%20a%20local%20PauseAI%20chapter" class="action-card action-card-link">
 <div class="action-card-icon">🏘️</div>
 <strong class="action-card-title">Build a local chapter</strong>
 <p class="action-card-body">Set up a local chapter or get deeply involved in an existing one to grow the movement in your area.</p>
