@@ -1,3 +1,7 @@
+import type {
+	GetDatabaseResponse,
+	PageObjectResponse
+} from '@notionhq/client/build/src/api-endpoints'
 import { getNotionClient } from '$lib/server/notion'
 
 export interface PressCoverage {
@@ -9,6 +13,30 @@ export interface PressCoverage {
 	notes: string
 }
 
+type NotionPropertyValue = PageObjectResponse['properties'][string]
+
+function getString(prop: NotionPropertyValue | undefined): string {
+	if (!prop) return ''
+	if (prop.type === 'title') return prop.title[0]?.plain_text ?? ''
+	if (prop.type === 'rich_text') return prop.rich_text[0]?.plain_text ?? ''
+	if (prop.type === 'select') return prop.select?.name ?? ''
+	if (prop.type === 'url') return prop.url ?? ''
+	if (prop.type === 'date') return prop.date?.start ?? ''
+	return ''
+}
+
+function getTitleFromProps(props: PageObjectResponse['properties']): string {
+	const titleProp = Object.values(props).find((p) => p.type === 'title')
+	return getString(titleProp)
+}
+
+function getDateFromProps(propName: string, props: PageObjectResponse['properties']): string {
+	const namedProp = props[propName]
+	if (namedProp) return getString(namedProp)
+	const dateProp = Object.values(props).find((p) => p.type === 'date')
+	return getString(dateProp)
+}
+
 export async function fetchPressCoverage(): Promise<{
 	coverage: PressCoverage[]
 	outletOrder: string[]
@@ -18,10 +46,10 @@ export async function fetchPressCoverage(): Promise<{
 
 	let outletOrder: string[] = []
 	try {
-		const dbInfo = (await notion.databases.retrieve({ database_id: databaseId })) as any
+		const dbInfo: GetDatabaseResponse = await notion.databases.retrieve({ database_id: databaseId })
 		const outletProp = dbInfo.properties['Outlet']
-		if (outletProp && outletProp.select && outletProp.select.options) {
-			outletOrder = outletProp.select.options.map((opt: any) => opt.name)
+		if (outletProp?.type === 'select') {
+			outletOrder = outletProp.select.options.map((opt) => opt.name)
 		}
 	} catch (e) {
 		console.error('Failed to retrieve database schema for sorting tabs', e)
@@ -38,56 +66,30 @@ export async function fetchPressCoverage(): Promise<{
 			},
 			sorts: [
 				{
-					property: 'Date', // Assuming 'Date', fallback handling below
+					property: 'Date',
 					direction: 'descending'
 				}
 			]
 		})
-		.catch((e: any) => {
-			console.error('Notion API Error:', e.body || e.message || e)
-			return { results: [] }
+		.catch((e: unknown) => {
+			const err = e as { body?: string; message?: string }
+			console.error('Notion API Error:', err.body ?? err.message ?? e)
+			return { results: [] as PageObjectResponse[] }
 		})
 
-	const coverage = (response.results as any[]).map((page) => {
+	const coverage = (response.results as PageObjectResponse[]).map((page) => {
 		const props = page.properties
-
-		// Helper to extract text from various Notion property types
-		const getText = (propName: string): string => {
-			const prop = props[propName]
-			if (!prop) return ''
-			if (prop.type === 'title') return prop.title[0]?.plain_text || ''
-			if (prop.type === 'rich_text') return prop.rich_text[0]?.plain_text || ''
-			if (prop.type === 'select') return prop.select?.name || ''
-			return ''
-		}
-
-		const getTitleText = (): string => {
-			const prop = Object.values(props).find((p: any) => p.type === 'title') as any
-			if (!prop) return ''
-			return prop.title[0]?.plain_text || ''
-		}
-
-		const getUrl = (propName: string): string => {
-			const prop = props[propName] || props['Link']
-			if (!prop) return ''
-			if (prop.type === 'url') return prop.url || ''
-			return ''
-		}
-
-		const getDate = (propName: string): string => {
-			const prop = props[propName] || Object.values(props).find((p: any) => p.type === 'date')
-			if (!prop) return ''
-			if (prop.type === 'date') return prop.date?.start || ''
-			return ''
-		}
-
 		return {
 			id: page.id,
-			title: getText('Name') || getText('Title') || getTitleText(),
-			url: getUrl('URL'),
-			date: getDate('Date') || getDate('Published'),
-			outlet: getText('Outlet'),
-			notes: getText('Notes') || getText('Description') || getText('Abstract') || ''
+			title: getString(props['Name']) || getString(props['Title']) || getTitleFromProps(props),
+			url: getString(props['URL']),
+			date: getDateFromProps('Date', props) || getDateFromProps('Published', props),
+			outlet: getString(props['Outlet']),
+			notes:
+				getString(props['Notes']) ||
+				getString(props['Description']) ||
+				getString(props['Abstract']) ||
+				''
 		}
 	})
 
