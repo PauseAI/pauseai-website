@@ -1,4 +1,6 @@
 <script lang="ts">
+	import Link from '$lib/components/Link.svelte'
+
 	/** Emoji or short text to display as the icon */
 	export let icon: string = ''
 	/** Card title */
@@ -17,10 +19,10 @@
 	{/if}
 	<h3 class="card-title toc-exclude">{title}</h3>
 	<p class="card-body">
-		<slot />
+		<slot></slot>
 	</p>
 	{#if href && linkText}
-		<a class="card-cta" {href}>{linkText} →</a>
+		<Link class="card-cta" {href}>{linkText} →</Link>
 	{/if}
 </div>
 
@@ -82,7 +84,7 @@
 		text-decoration: underline;
 	}
 
-	.card-cta {
+	:global(.card-cta) {
 		color: var(--brand);
 		font-weight: 600;
 		font-size: 0.9rem;
@@ -90,7 +92,7 @@
 		margin-top: auto;
 	}
 
-	.card-cta:hover {
+	:global(.card-cta:hover) {
 		text-decoration: underline;
 	}
 </style>

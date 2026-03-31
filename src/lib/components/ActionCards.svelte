@@ -1,5 +1,5 @@
 <div class="action-cards-grid">
-	<slot />
+	<slot></slot>
 </div>
 
 <style>
