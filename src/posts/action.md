@@ -13,38 +13,9 @@ Everyone has a role to play in building a safer future. Whether you have five mi
 
 <Tabs tabs={[
 {
-title: 'Start Here',
+title: '5 Minutes',
 content: `
 
-<h3 class="toc-exclude">Connect</h3>
-<p>Before diving in, take these quick steps to connect with the movement:</p>
-<div class="action-cards">
-<div class="action-card">
-<div class="action-card-icon">🔗</div>
-<strong class="action-card-title">Sign up</strong>
-<p class="action-card-body">Sign up via our <a href="/join">Join page</a> so we can stay in touch and connect you with volunteer communities around the world.</p>
-</div>
-<div class="action-card">
-<div class="action-card-icon">💬</div>
-<strong class="action-card-title">Join the Discord</strong>
-<p class="action-card-body">Join the <a href="https://discord.gg/T3YrWUJsJ5">Discord</a>, where most of our day-to-day collaboration happens.</p>
-</div>
-<div class="action-card">
-<div class="action-card-icon">📅</div>
-<strong class="action-card-title">Onboarding Call</strong>
-<p class="action-card-body">Find the next Community Onboarding Call in our <a href="/communities#events">event</a> calendar to meet others who have just joined and hear more about what we do.</p>
-</div>
-<div class="action-card">
-<div class="action-card-icon">🌍</div>
-<strong class="action-card-title">Find your community</strong>
-<p class="action-card-body"><a href="/communities">Find your community</a> and meet other local volunteers to find actions happening specifically in your country or city.</p>
-</div>
-</div>
-	`
-},
-{
-	title: '5 Minutes',
-	content: `
 <h3 class="toc-exclude">I have 5 minutes</h3>
 <p>Small actions add up. Here are quick ways to contribute:</p>
 <div class="action-cards">
@@ -137,6 +108,35 @@ content: `
 </div>
 </div>
 	`
+{
+title: 'Connect',
+content: `
+<h3 class="toc-exclude">Connect</h3>
+<p>Before diving in, take these quick steps to connect with the movement:</p>
+<div class="action-cards">
+<div class="action-card">
+<div class="action-card-icon">🔗</div>
+<strong class="action-card-title">Sign up</strong>
+<p class="action-card-body">Sign up via our <a href="/join">Join page</a> so we can stay in touch and connect you with volunteer communities around the world.</p>
+</div>
+<div class="action-card">
+<div class="action-card-icon">💬</div>
+<strong class="action-card-title">Join the Discord</strong>
+<p class="action-card-body">Join the <a href="https://discord.gg/T3YrWUJsJ5">Discord</a>, where most of our day-to-day collaboration happens.</p>
+</div>
+<div class="action-card">
+<div class="action-card-icon">📅</div>
+<strong class="action-card-title">Onboarding Call</strong>
+<p class="action-card-body">Find the next Community Onboarding Call in our <a href="/communities#events">event</a> calendar to meet others who have just joined and hear more about what we do.</p>
+</div>
+<div class="action-card">
+<div class="action-card-icon">🌍</div>
+<strong class="action-card-title">Find your community</strong>
+<p class="action-card-body"><a href="/communities">Find your community</a> and meet other local volunteers to find actions happening specifically in your country or city.</p>
+</div>
+</div>
+	`
+},
 },
 {
 	title: 'Go All In',
