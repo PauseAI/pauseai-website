@@ -30,7 +30,7 @@
 	<div class="content" bind:this={tagline}>
 		<h2>Don't let AI companies<br />gamble away our future</h2>
 		<div class="actions">
-			<Link href="/join" class="btn-primary">Get involved</Link>
+			<Link href="/action" class="btn-primary">Get involved</Link>
 			<Link href="/donate" class="btn-secondary">Donate</Link>
 		</div>
 	</div>

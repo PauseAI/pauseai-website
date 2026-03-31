@@ -2,7 +2,7 @@
 	"$schema": "https://inlang.com/schema/inlang-message-format",
 	"header__instructions": "All translations prefixed with 'header_' should be as short as possible to fit the layout. Try to keep them at a single word while still being useful as links to the pages.",
 	"header_action__instructions": "German: Handeln",
-	"header_action": "Act",
+	"header_action": "Get Involved",
 	"header_donate": "Donate",
 	"header_events__instructions": "In some languages, 'calendar' or 'dates' might be better wordings for meeting the goal of a short translation. (German: Termine)",
 	"header_events": "Groups",

@@ -1,5 +1,5 @@
 ---
-title: Take Action
+title: Get Involved
 description: Ways to help reduce AI risk.
 ---
 
