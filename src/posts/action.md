@@ -19,21 +19,21 @@ content: `
 <h3 class="toc-exclude">I have 5 minutes</h3>
 <p>Small actions add up. Here are quick ways to contribute:</p>
 <div class="action-cards">
-<div class="action-card">
+<a href="https://microcommit.io/onboarding?org=135fcd8d-8116-44af-b885-14df992f9a8c" class="action-card action-card-link">
 <div class="action-card-icon">⚡</div>
 <strong class="action-card-title">Microcommit</strong>
-<p class="action-card-body">Check out our <a href="https://microcommit.io/onboarding?org=135fcd8d-8116-44af-b885-14df992f9a8c">microcommit page</a> for weekly bite-sized actions you can do in under 5 minutes.</p>
-</div>
+<p class="action-card-body">Check out our microcommit page for weekly bite-sized actions you can do in under 5 minutes.</p>
+</a>
 <div class="action-card">
 <div class="action-card-icon">💰</div>
 <strong class="action-card-title">Make a donation</strong>
 <p class="action-card-body">Make a <a href="/donate">donation</a> or pick up some gear from our <a href="https://pauseai-shop.fourthwall.com/">store</a> to support the movement.</p>
 </div>
-<div class="action-card">
+<a href="https://linktr.ee/pauseai" class="action-card action-card-link">
 <div class="action-card-icon">📣</div>
 <strong class="action-card-title">Follow us</strong>
-<p class="action-card-body">Follow our <a href="https://linktr.ee/pauseai">social media channels</a> to stay updated — your local PauseAI chapter may have dedicated pages too.</p>
-</div>
+<p class="action-card-body">Follow our social media channels to stay updated — your local PauseAI chapter may have dedicated pages too.</p>
+</a>
 <div class="action-card">
 <div class="action-card-icon">✍️</div>
 <strong class="action-card-title">Sign petitions</strong>
@@ -48,14 +48,14 @@ content: `
 <h3 class="toc-exclude">I have an hour</h3>
 <p>Ready to go a bit deeper? Start conversations and add your voice:</p>
 <div class="action-cards">
-<div class="action-card">
+<a href="/email-builder" class="action-card action-card-link">
 <div class="action-card-icon">✉️</div>
 <strong class="action-card-title">Write to your representatives</strong>
-<p class="action-card-body">Write to your elected representatives using our <a href="/email-builder">Email Builder</a> — it only takes a few minutes.</p>
-</div>
+<p class="action-card-body">Write to your elected representatives using our Email Builder — it only takes a few minutes.</p>
+</a>
 <div class="action-card">
 <div class="action-card-icon">🗣️</div>
-<strong class="action-card-title">Talk to someone</strong>
+<strong class="action-card-title">Talk to someone about AI safety</strong>
 <p class="action-card-body">Talk to someone in your life about AI safety — a friend, neighbour, colleague, or family member. Our <a href="/counterarguments">counterarguments guide</a> can help you answer tough questions.</p>
 </div>
 <div class="action-card">
@@ -77,11 +77,11 @@ content: `
 <strong class="action-card-title">Call your politicians</strong>
 <p class="action-card-body">Try calling legislators' offices while having a set of talking points in view so you stay on topic. Follow up with a phone call, and check out our <a href="/lobby-tips">lobby tips</a> when you secure a meeting.</p>
 </div>
-<div class="action-card">
+<a href="/learn" class="action-card action-card-link">
 <div class="action-card-icon">📚</div>
 <strong class="action-card-title">Educate yourself</strong>
-<p class="action-card-body">Take a deep dive into our <a href="/learn">educational materials</a> to build your knowledge and become a more effective advocate.</p>
-</div>
+<p class="action-card-body">Take a deep dive into our educational materials to build your knowledge and become a more effective advocate.</p>
+</a>
 </div>
 	`
 },
@@ -115,26 +115,26 @@ content: `
 <h3 class="toc-exclude">Connect</h3>
 <p>Before diving in, take these quick steps to connect with the movement:</p>
 <div class="action-cards">
-<div class="action-card">
+<a href="/join" class="action-card action-card-link">
 <div class="action-card-icon">🔗</div>
 <strong class="action-card-title">Sign up</strong>
-<p class="action-card-body">Sign up via our <a href="/join">Join page</a> so we can stay in touch and connect you with volunteer communities around the world.</p>
-</div>
-<div class="action-card">
+<p class="action-card-body">Sign up via our Join page so we can stay in touch and connect you with volunteer communities around the world.</p>
+</a>
+<a href="https://discord.gg/T3YrWUJsJ5" class="action-card action-card-link">
 <div class="action-card-icon">💬</div>
 <strong class="action-card-title">Join the Discord</strong>
-<p class="action-card-body">Join the <a href="https://discord.gg/T3YrWUJsJ5">Discord</a>, where most of our day-to-day collaboration happens.</p>
-</div>
-<div class="action-card">
+<p class="action-card-body">Join the Discord, where most of our day-to-day collaboration happens.</p>
+</a>
+<a href="/communities#events" class="action-card action-card-link">
 <div class="action-card-icon">📅</div>
 <strong class="action-card-title">Onboarding Call</strong>
-<p class="action-card-body">Find the next Community Onboarding Call in our <a href="/communities#events">event</a> calendar to meet others who have just joined and hear more about what we do.</p>
-</div>
-<div class="action-card">
+<p class="action-card-body">Find the next Community Onboarding Call in our event calendar to meet others who have just joined and hear more about what we do.</p>
+</a>
+<a href="/communities" class="action-card action-card-link">
 <div class="action-card-icon">🌍</div>
 <strong class="action-card-title">Find your community</strong>
-<p class="action-card-body"><a href="/communities">Find your community</a> and meet other local volunteers to find actions happening specifically in your country or city.</p>
-</div>
+<p class="action-card-body">Find your community and meet other local volunteers to find actions happening specifically in your country or city.</p>
+</a>
 </div>
 	`
 },
@@ -144,26 +144,26 @@ content: `
 <h3 class="toc-exclude">I want to go all in</h3>
 <p>Ready to make PauseAI a serious part of your life? We'd love to have you:</p>
 <div class="action-cards">
-<div class="action-card">
+<a href="/microgrants" class="action-card action-card-link">
 <div class="action-card-icon">💡</div>
 <strong class="action-card-title">Apply for a microgrant</strong>
-<p class="action-card-body">Apply for a <a href="/microgrants">microgrant</a> to fund your own initiative and get support for your local efforts.</p>
-</div>
-<div class="action-card">
+<p class="action-card-body">Apply for a microgrant to fund your own initiative and get support for your local efforts.</p>
+</a>
+<a href="/volunteer-stipends" class="action-card action-card-link">
 <div class="action-card-icon">🙌</div>
 <strong class="action-card-title">Volunteer stipend</strong>
-<p class="action-card-body">Apply for a <a href="/volunteer-stipends">volunteer stipend</a> to support sustained involvement and dedicate more time to the cause.</p>
-</div>
-<div class="action-card">
+<p class="action-card-body">Apply for a volunteer stipend to support sustained involvement and dedicate more time to the cause.</p>
+</a>
+<a href="/communities" class="action-card action-card-link">
 <div class="action-card-icon">🏘️</div>
 <strong class="action-card-title">Build a local chapter</strong>
-<p class="action-card-body"><a href="/communities">Set up a local chapter</a> or get deeply involved in an existing one to grow the movement in your area.</p>
-</div>
-<div class="action-card">
+<p class="action-card-body">Set up a local chapter or get deeply involved in an existing one to grow the movement in your area.</p>
+</a>
+<a href="/vacancies" class="action-card action-card-link">
 <div class="action-card-icon">💼</div>
 <strong class="action-card-title">Paid roles</strong>
-<p class="action-card-body">Check our <a href="/vacancies">paid vacancies</a> for open roles and turn your commitment into a career.</p>
-</div>
+<p class="action-card-body">Check our paid vacancies for open roles and turn your commitment into a career.</p>
+</a>
 </div>
 	`
 }
@@ -285,11 +285,11 @@ content: `
 <strong class="action-card-title">Hold a seminar</strong>
 <p class="action-card-body">Hold a seminar on AI safety at your workplace. Check out these <a href="https://drive.google.com/drive/u/1/folders/1p9VtopzMV6Xpk4p6EGYUTna4fLE6G8hd">slides</a> and <a href="https://www.youtube.com/playlist?list=PLI46NoubGtIJa0JVCBR-9CayxCOmU0EJt">talks and videos</a> for inspiration.</p>
 </div>
-<div class="action-card">
+<a href="https://www.safe.ai/statement-on-ai-risk" class="action-card action-card-link">
 <div class="action-card-icon">✍️</div>
 <strong class="action-card-title">Sign the statement</strong>
-<p class="action-card-body">Sign the <a href="https://www.safe.ai/statement-on-ai-risk">Statement on AI Risk</a> to add your voice to the growing consensus among AI professionals.</p>
-</div>
+<p class="action-card-body">Sign the Statement on AI Risk to add your voice to the growing consensus among AI professionals.</p>
+</a>
 </div>
 		`
 	}

@@ -205,9 +205,11 @@
 		display: flex;
 		flex-direction: column;
 		gap: 0.5rem;
+		border: 2px solid transparent;
 		transition:
 			transform 0.2s ease,
-			box-shadow 0.2s ease;
+			box-shadow 0.2s ease,
+			border-color 0.2s ease;
 	}
 
 	.tab-content :global(.action-card:hover) {
@@ -248,6 +250,19 @@
 	.tab-content :global(.action-card-body a) {
 		color: var(--brand);
 		text-decoration: underline;
+	}
+
+	/* Clickable card links — entire card acts as a link */
+	.tab-content :global(a.action-card-link) {
+		text-decoration: none;
+		color: inherit;
+		cursor: pointer;
+	}
+
+	.tab-content :global(a.action-card-link:hover) {
+		text-decoration: none;
+		border-color: var(--brand);
+		box-shadow: 0 6px 24px rgba(0, 0, 0, 0.22);
 	}
 
 	/* Mobile-specific adjustments */
