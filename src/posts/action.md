@@ -110,10 +110,10 @@ content: `
 	`
 },
 {
-title: 'Connect',
+title: 'Multiple Days',
 content: `
-<h3 class="toc-exclude">Connect</h3>
-<p>Before diving in, take these quick steps to connect with the movement:</p>
+<h3 class="toc-exclude">I have multiple days</h3>
+<p>Ready to commit more of your time? Get plugged in and start making a real difference:</p>
 <div class="action-cards">
 <a href="/join" class="action-card action-card-link">
 <div class="action-card-icon">🙋</div>
