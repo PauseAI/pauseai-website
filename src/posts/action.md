@@ -116,16 +116,16 @@ content: `
 <p>Before diving in, take these quick steps to connect with the movement:</p>
 <div class="action-cards">
 <a href="/join" class="action-card action-card-link">
-<div class="action-card-icon">🔗</div>
-<strong class="action-card-title">Sign up</strong>
-<p class="action-card-body">Sign up via our Join page so we can stay in touch and connect you with volunteer communities around the world.</p>
+<div class="action-card-icon">🙋</div>
+<strong class="action-card-title">Volunteer with us</strong>
+<p class="action-card-body">Sign up as a volunteer so we can stay in touch and connect you with others around the world.</p>
 </a>
 <a href="https://discord.gg/T3YrWUJsJ5" class="action-card action-card-link">
 <div class="action-card-icon">💬</div>
 <strong class="action-card-title">Join the Discord</strong>
 <p class="action-card-body">Join the Discord, where most of our day-to-day collaboration happens.</p>
 </a>
-<a href="/communities#events" class="action-card action-card-link">
+<a href="https://luma.com/PauseAI" class="action-card action-card-link">
 <div class="action-card-icon">📅</div>
 <strong class="action-card-title">Onboarding Call</strong>
 <p class="action-card-body">Find the next Community Onboarding Call in our event calendar to meet others who have just joined and hear more about what we do.</p>
@@ -133,7 +133,7 @@ content: `
 <a href="/communities" class="action-card action-card-link">
 <div class="action-card-icon">🌍</div>
 <strong class="action-card-title">Find your community</strong>
-<p class="action-card-body">Find your community and meet other local volunteers to find actions happening specifically in your country or city.</p>
+<p class="action-card-body">Find your community and meet others to know what's happening specifically in your country or city.</p>
 </a>
 </div>
 	`
