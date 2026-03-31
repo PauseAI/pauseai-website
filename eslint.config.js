@@ -132,8 +132,10 @@ export default defineConfig(
 			'no-restricted-syntax': [
 				'error',
 				{
-					selector: "CallExpression[callee.name='asError']:not(ThrowStatement > CallExpression)",
-					message: 'Use asError only as `throw asError(...)`.'
+					selector:
+						'CallExpression[callee.name=/^(asError|redirectAsError)$/]:not(ThrowStatement > CallExpression)',
+					message:
+						'Use asError and redirectAsError only as `throw asError(...)` or `throw redirectAsError(...)`.'
 				}
 			]
 		}
