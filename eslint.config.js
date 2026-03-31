@@ -128,6 +128,13 @@ export default defineConfig(
 					argsIgnorePattern: '^_',
 					destructuredArrayIgnorePattern: '^_'
 				}
+			],
+			'no-restricted-syntax': [
+				'error',
+				{
+					selector: "CallExpression[callee.name='asError']:not(ThrowStatement > CallExpression)",
+					message: 'Use asError only as `throw asError(...)`.'
+				}
 			]
 		}
 	},
