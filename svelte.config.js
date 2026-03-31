@@ -51,16 +51,28 @@ const config = {
 		adapter: adapterNetlify({
 			edge: USE_EDGE_FUNCTIONS
 		}),
+
 		alias: {
 			$assets: 'src/assets',
 			$api: 'src/routes/api'
 		},
+
 		prerender: {
 			// Allows dead links to be rendered
 			handleHttpError: 'warn',
 			// Handle missing anchor IDs by warning instead of failing
 			handleMissingId: 'warn',
 			entries: ['*'].concat(settings.locales.map((locale) => '/' + locale))
+		},
+
+		experimental: {
+			tracing: {
+				server: true
+			},
+
+			instrumentation: {
+				server: true
+			}
 		}
 	}
 }

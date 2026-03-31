@@ -1,3 +1,5 @@
+import { sequence } from '@sveltejs/kit/hooks'
+import * as Sentry from '@sentry/sveltekit'
 // Fix for Netlify's Deno edge runtime (not standard Deno)
 //
 // Netlify's Deno 2.3.1 provides a partial window stub (window exists but window.location
@@ -18,7 +20,7 @@ if (
 import { type Handle } from '@sveltejs/kit'
 import { paraglideMiddleware } from '$lib/paraglide/server.js'
 
-const handle: Handle = ({ event, resolve }) =>
+const paraglideHandle: Handle = ({ event, resolve }) =>
 	paraglideMiddleware(event.request, ({ request: localizedRequest, locale }) => {
 		event.request = localizedRequest
 		return resolve(event, {
@@ -26,4 +28,5 @@ const handle: Handle = ({ event, resolve }) =>
 		})
 	})
 
-export { handle }
+export const handleError = Sentry.handleErrorWithSentry()
+export const handle = sequence(Sentry.sentryHandle(), paraglideHandle)

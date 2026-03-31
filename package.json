@@ -86,6 +86,7 @@
 		"@pagefind/default-ui": "^1.4.0",
 		"@prgm/sveltekit-progress-bar": "^3.0.2",
 		"@remix-run/headers": "^0.12.0",
+		"@sentry/sveltekit": "^10.47.0",
 		"@sveltejs/enhanced-img": "^0.10.4",
 		"@turf/distance": "^7.3.4",
 		"airtable": "^0.12.2",

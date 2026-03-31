@@ -8,6 +8,7 @@ import lucidePreprocess from 'vite-plugin-lucide-preprocess'
 import { isDev } from './src/lib/env'
 import { MARKDOWN_L10NS } from './src/lib/l10n'
 import { locales as compiledLocales } from './src/lib/paraglide/runtime.js'
+import { sentrySvelteKit } from '@sentry/sveltekit'
 
 function getLocaleExcludePatterns(): RegExp[] {
 	const md = path.resolve(MARKDOWN_L10NS)
@@ -61,6 +62,14 @@ export default defineConfig(() => {
 				external: getLocaleExcludePatterns()
 			}
 		} as const,
-		plugins: [lucidePreprocess(), enhancedImages(), sveltekit()]
+		plugins: [
+			lucidePreprocess(),
+			enhancedImages(),
+			sentrySvelteKit({
+				org: 'pauseai',
+				project: 'javascript-sveltekit'
+			}),
+			sveltekit()
+		]
 	}
 })
