@@ -11,14 +11,11 @@
 			// @ts-expect-error - Activoice is loaded externally
 			if (window.Activoice) {
 				// @ts-expect-error - Activoice is loaded externally
-				window.Activoice.bootstrap().then(() => {
-					const inlineEmbed = document.getElementById(
-						'activoice-inline-c6f322b3_a310_4ecb_a8e0_3f86392512df'
-					)
-					if (inlineEmbed) {
-						inlineEmbed.addEventListener('loaded', () => {
-							console.log('Activoice inline embed loaded')
-						})
+				window.Activoice.init({
+					container: '#av-embed-container',
+					campaignId: 'c6f322b3-a310-4ecb-a8e0-3f86392512df',
+					embedOptions: {
+						spinnerColor: '#ff9416'
 					}
 				})
 			} else {
@@ -30,7 +27,7 @@
 </script>
 
 <svelte:head>
-	<script src="https://activoice.online/embed/activoice-12.0.0.js"></script>
+	<script src="https://beta.app.activoice.org/embed/v1/loader.js"></script>
 </svelte:head>
 
 <PostMeta {title} {description} {date} />
@@ -68,12 +65,4 @@
 	</li>
 </ul>
 
-<div
-	id="activoice-inline-container-c6f322b3_a310_4ecb_a8e0_3f86392512df"
-	style="width: 100%; margin-top: 2rem;"
->
-	<activoice-inline
-		id="activoice-inline-c6f322b3_a310_4ecb_a8e0_3f86392512df"
-		campaign-id="c6f322b3-a310-4ecb-a8e0-3f86392512df"
-	></activoice-inline>
-</div>
+<div id="av-embed-container" style="width: 100%; margin-top: 2rem;"></div>
