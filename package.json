@@ -55,13 +55,8 @@
 		"globals": "^16.5.0",
 		"globby": "^16.1.1",
 		"husky": "^9.1.7",
-<<<<<<< activoice
-		"knip": "^5.86.0",
-		"lint-staged": "^16.4.0",
-=======
 		"knip": "^5.88.1",
-		"lint-staged": "^15.5.2",
->>>>>>> main
+		"lint-staged": "^16.4.0",
 		"mdsvex": "^0.12.7",
 		"minimatch": "^9.0.9",
 		"minimist": "^1.2.8",
