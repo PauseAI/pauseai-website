@@ -265,6 +265,74 @@
 		box-shadow: 0 6px 24px rgba(0, 0, 0, 0.22);
 	}
 
+	/* Newsletter signup block inside tab content */
+	.tab-content :global(.newsletter-signup) {
+		background-color: var(--bg-subtle);
+		border-radius: 8px;
+		padding: 1.5rem;
+		margin-top: 1.5rem;
+		width: 100%;
+		box-sizing: border-box;
+	}
+
+	.tab-content :global(.newsletter-content) {
+		max-width: 500px;
+	}
+
+	.tab-content :global(.newsletter-content h3) {
+		margin-top: 0;
+		margin-bottom: 0.5rem;
+		font-family: var(--font-heading);
+	}
+
+	.tab-content :global(.newsletter-content p) {
+		margin-bottom: 1rem;
+	}
+
+	.tab-content :global(.newsletter-input-group) {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 8px;
+	}
+
+	.tab-content :global(.newsletter-input-group input[type='email']) {
+		flex: 1;
+		padding: 0.75rem 1rem;
+		border: 1px solid var(--border);
+		border-radius: 4px;
+		font-size: 1rem;
+		background-color: var(--bg);
+		color: var(--text);
+	}
+
+	.tab-content :global(.newsletter-input-group button) {
+		padding: 0.75rem 1.5rem;
+		border: none;
+		border-radius: 4px;
+		font-weight: bold;
+		cursor: pointer;
+		transition: opacity 0.2s;
+		font-size: 1rem;
+		background-color: var(--brand);
+		color: var(--bg);
+	}
+
+	.tab-content :global(.newsletter-input-group button:hover) {
+		opacity: 0.9;
+	}
+
+	@media (max-width: 600px) {
+		.tab-content :global(.newsletter-input-group) {
+			flex-direction: column;
+		}
+
+		.tab-content :global(.newsletter-input-group input[type='email']),
+		.tab-content :global(.newsletter-input-group button) {
+			box-sizing: border-box;
+			width: 100%;
+		}
+	}
+
 	/* Mobile-specific adjustments */
 	@media (max-width: 768px) {
 		.tab-button {

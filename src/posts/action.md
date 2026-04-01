@@ -40,6 +40,19 @@ content: `
 <p class="action-card-body">Sign the petitions: <a href="/statement">PauseAI Statement</a>, <a href="/sayno">Say No To Superintelligent AI</a>, <a href="https://superintelligence-statement.org/">Statement on Superintelligence</a>, <a href="https://aitreaty.org">International AI Treaty</a>, <a href="https://www.change.org/p/artificial-intelligence-time-is-running-out-for-responsible-ai-development-91f0a02c-130a-46e1-9e55-70d6b274f4df">Demand Responsible AI</a>.</p>
 </div>
 </div>
+<div class="newsletter-signup">
+<div class="newsletter-content">
+<h3 class="toc-exclude">Subscribe to our newsletter</h3>
+<p>Stay updated on our efforts to advocate for AI safety.</p>
+<form action="https://pauseai.substack.com/api/v1/free" method="POST" target="_blank">
+<div class="newsletter-input-group">
+<input type="email" name="email" placeholder="Your email" aria-label="Your email" required enterkeyhint="done" />
+<input type="hidden" name="source" value="pauseai_website" />
+<button type="submit">Subscribe</button>
+</div>
+</form>
+</div>
+</div>
 	`
 },
 {
