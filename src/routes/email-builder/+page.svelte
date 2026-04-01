@@ -6,12 +6,21 @@
 
 	const { title, description, date } = meta
 
+	interface Activoice {
+		init: (options: {
+			container: string
+			campaignId: string
+			embedOptions: {
+				spinnerColor: string
+			}
+		}) => void
+	}
+
 	onMount(() => {
 		const initActivoice = () => {
-			// @ts-expect-error - Activoice is loaded externally
-			if (window.Activoice) {
-				// @ts-expect-error - Activoice is loaded externally
-				window.Activoice.init({
+			const activoice = (window as Window & { Activoice?: Activoice }).Activoice
+			if (activoice) {
+				activoice.init({
 					container: '#av-embed-container',
 					campaignId: 'c6f322b3-a310-4ecb-a8e0-3f86392512df',
 					embedOptions: {
