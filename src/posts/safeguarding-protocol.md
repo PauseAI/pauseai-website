@@ -24,8 +24,8 @@ This protocol applies to:
 
 PauseAI designates a named Designated Safeguarding Contact (DSC) responsible for receiving and acting on all safeguarding concerns.
 
-- **Primary DSC:** To be confirmed
-- **Deputy DSC:** To be confirmed
+- **Primary DSC:** Maxime Fournes
+- **Deputy DSC:** Irina Tavera
 - **Contact:** [safeguarding@pauseai.info](mailto:safeguarding@pauseai.info)
 
 At in-person events of more than one day, the DSC or a nominated deputy must be present and clearly identified to attendees. For online spaces, the DSC's Discord handle should be pinned in a visible channel.

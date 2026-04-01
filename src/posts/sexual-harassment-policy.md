@@ -31,7 +31,7 @@ We recognise that sex and relationships aren't always straightforward. We aim to
 
 ## Reporting
 
-If you think you may have witnessed or experienced sexual harassment, please contact the Designated Safeguarding Contact (DSC) at [safeguarding@pauseai.info](mailto:safeguarding@pauseai.info). Alternatively, you may contact the Deputy DSC (contact details to be confirmed).
+If you think you may have witnessed or experienced sexual harassment, please contact the Designated Safeguarding Contact (DSC) or their deputy at [safeguarding@pauseai.info](mailto:safeguarding@pauseai.info).
 
 > **Alternative reporting route:** If your concern involves the DSC or a member of senior leadership, please contact the named external advisor / board contact (to be confirmed). An independent reporting route must always be available.
 

@@ -2,8 +2,9 @@
 	// import { formatDate } from '$lib/utils'
 	import { title } from '$lib/config'
 	import Link from '$lib/components/Link.svelte'
+	import type { PageData } from './$types'
 
-	export let data
+	export let data: PageData
 	const { posts } = data
 </script>
 

@@ -3,7 +3,7 @@ title: PauseAI Demonstration at the European Parliament - February 23rd, Brussel
 slug: brussels-ep-protest-2026
 description: Join us outside the European Parliament to call on the EU to initiate negotiations for a global treaty to pause the development of frontier AI systems.
 date: '2026-02-23'
-image: /protests-san-francisco.jpeg
+image: /protests-san-francisco-cropped.jpeg
 news: true
 ---
 

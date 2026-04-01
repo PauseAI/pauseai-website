@@ -1,4 +1,6 @@
-export async function GET({ url }) {
+import type { RequestHandler } from './$types'
+
+export const GET: RequestHandler = async ({ url }) => {
 	const delay = url.searchParams.get('delay') || '1'
 	const start = Date.now()
 

@@ -40,7 +40,7 @@
 		try {
 			const response = await fetch('/api/geo')
 			if (response.ok) {
-				const geoData: GeoApiResponse = await response.json()
+				const geoData = (await response.json()) as GeoApiResponse
 				return {
 					userLng: geoData.longitude,
 					userLat: geoData.latitude

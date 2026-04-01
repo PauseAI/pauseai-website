@@ -106,8 +106,8 @@ export function createLlmClient(options: {
 		return config
 	})
 	axiosRetry(created, {
-		retryDelay: axiosRetry.exponentialDelay,
-		retryCondition: axiosRetry.isRetryableError
+		retryDelay: (...args) => axiosRetry.exponentialDelay(...args),
+		retryCondition: (error) => axiosRetry.isRetryableError(error)
 	})
 	return created
 }

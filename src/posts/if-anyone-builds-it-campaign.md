@@ -2,7 +2,7 @@
 title: If Anyone Builds It, Everyone Dies
 slug: if-anyone-builds-it-campaign
 description: PauseAI events in support of If Anyone Builds It, Everyone Dies
-image: /iabied-event.png
+image: /iabied-event.jpg
 ---
 
 The recently published New York Times Bestseller [_If Anyone Builds It, Everyone Dies_](https://ifanyonebuildsit.com/) warns of the threat of human extinction if the race to build superintelligent AI is allowed to continue.

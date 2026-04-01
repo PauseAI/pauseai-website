@@ -157,6 +157,42 @@ const TEMPORARY_REDIRECTS: Record<string, string> = {
 
 To add a new redirect, add an entry to the appropriate object in `src/lib/redirects.ts`.
 
+## Banner Management
+
+The site has a small banner orchestration system that decides which main banner and campaign banner to show, then updates after geolocation is fetched.
+
+### How it works
+
+- Selection rules are in `src/routes/banner-selection.cjs`.
+- In `src/routes/+layout.svelte`, `banner-selection.cjs` is injected inline in `<head>`. That script defines `window.selectBanners()` and runs it immediately.
+- The same function is called again in `+layout.svelte` after `/api/geo` updates `geo_country`.
+- Banner components live in `src/routes/+layout.svelte` and are shown/hidden by data attributes on `<html>`.
+
+### State used
+
+- Cookie: `geo_country` (set in `+layout.svelte`).
+- `localStorage` dismissals:
+  - `banner_<id>_hidden = "true"`
+  - `campaign_banner_<id>_hidden = "true"`
+
+### Priority notes
+
+- Geo-targeted main banners suppress `NearbyEvent`.
+- If `NearbyEvent` is active, it replaces the main banner slot.
+- Campaign banners are managed separately from main banners.
+
+### Editing Rules Safely
+
+When adding/changing banners:
+
+1. Add/update the `<Banner id="...">` or `<CampaignBanner id="...">` in `src/routes/+layout.svelte`.
+2. Add/update the matching rule in `src/routes/banner-selection.cjs` with same `id`.
+3. Use date format `YYYY-MM-DD` in rule `dateRange`.
+4. Keep intended order: first matching rule wins.
+5. Treat banner IDs as source-of-truth values that must match in both places:
+   - the rule IDs in `mainBannerRules` / `campaignBannerRules` (`src/routes/banner-selection.cjs`)
+   - the `id="..."` props on `<Banner>` / `<CampaignBanner>` in `src/routes/+layout.svelte`
+
 ## Latest News Section
 
 The homepage includes a "Latest News" section that automatically pulls content from two sources:

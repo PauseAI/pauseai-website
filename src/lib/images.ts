@@ -6,10 +6,41 @@ const IMAGE_URLS = import.meta.glob<string>('../assets/images/**/*', {
 	query: { url: true }
 })
 
-export function getAssetUrlOrStaticUrl(path: string) {
-	const relativePath = BASE + path
+const METADATA_IMAGE_URLS = import.meta.glob<string>('../assets/images/**/*', {
+	eager: true,
+	import: 'default',
+	query: {
+		url: true,
+		w: '1200',
+		format: 'jpg',
+		quality: '80'
+	}
+})
+
+function toAssetModulePath(imagePath: string) {
+	return BASE + imagePath
+}
+
+export function resolveImageUrl(imagePath: string) {
+	const relativePath = toAssetModulePath(imagePath)
 	if (IMAGE_URLS[relativePath]) {
 		return IMAGE_URLS[relativePath]
 	}
-	return path
+	return imagePath
+}
+
+export function getPostMetaImageUrl(imagePath: string): string
+export function getPostMetaImageUrl(imagePath: undefined): undefined
+export function getPostMetaImageUrl(imagePath: string | undefined) {
+	if (!imagePath) {
+		return imagePath
+	}
+
+	const relativePath = toAssetModulePath(imagePath)
+	const metadataImageUrl = METADATA_IMAGE_URLS[relativePath]
+	if (metadataImageUrl) {
+		return metadataImageUrl
+	}
+
+	return resolveImageUrl(imagePath)
 }

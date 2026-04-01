@@ -11,6 +11,9 @@ import ts from 'typescript-eslint'
 import emptyMarkdownLinks from './eslint/plugin-empty-markdown-links.js'
 import svelteConfig from './svelte.config.js'
 
+// See https://typescript-eslint.io/troubleshooting/typed-linting/performance#changes-to-extrafileextensions-with-projectservice
+const EXTRA_FILE_EXTENSIONS = ['.svelte']
+
 export default defineConfig(
 	js.configs.recommended,
 	...ts.configs.recommended,
@@ -20,12 +23,31 @@ export default defineConfig(
 			globals: {
 				...globals.browser,
 				...globals.node
+			},
+			parserOptions: {
+				extraFileExtensions: EXTRA_FILE_EXTENSIONS,
+				project: ['./tsconfig.eslint.json']
 			}
 		}
 	},
 	gitignore({
 		files: globbySync('**/.gitignore', { ignore: ['**/node_modules'] })
 	}),
+	{
+		ignores: ['**/*.md'],
+		extends: [
+			// Just warn about type-checked rules for now
+			ts.configs.recommendedTypeCheckedOnly.map((config) => {
+				if (!config.rules) return config
+
+				const warnedRules = Object.fromEntries(
+					Object.entries(config.rules).map(([key, value]) => [key, value.replace('error', 'warn')])
+				)
+
+				return { ...config, rules: warnedRules }
+			})
+		]
+	},
 	{
 		files: ['**/*.md'],
 		extends: [markdown.configs.recommended],
@@ -47,8 +69,9 @@ export default defineConfig(
 		// See more details at: https://typescript-eslint.io/packages/parser/
 		languageOptions: {
 			parserOptions: {
-				projectService: true,
-				extraFileExtensions: ['.svelte'], // Add support for additional file extensions, such as .svelte
+				project: ['./tsconfig.eslint.json'],
+				// Defined globally instead:
+				// extraFileExtensions: ['.svelte'], // Add support for additional file extensions, such as .svelte
 				parser: ts.parser,
 				// Specify a parser for each language, if needed:
 				// parser: {
@@ -104,6 +127,15 @@ export default defineConfig(
 				{
 					argsIgnorePattern: '^_',
 					destructuredArrayIgnorePattern: '^_'
+				}
+			],
+			'no-restricted-syntax': [
+				'error',
+				{
+					selector:
+						'CallExpression[callee.name=/^(asError|redirectAsError)$/]:not(ThrowStatement > CallExpression)',
+					message:
+						'Use asError and redirectAsError only as `throw asError(...)` or `throw redirectAsError(...)`.'
 				}
 			]
 		}

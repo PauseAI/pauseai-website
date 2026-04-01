@@ -2,6 +2,20 @@ import { json } from '@sveltejs/kit'
 import type { RequestHandler } from './$types'
 import { hasCloudinaryCredentials, credentialsError, callCloudinaryAPI } from '$lib/cloudinary'
 
+type SelfieAddEmailApiSuccessResponse = {
+	success: true
+	message: string
+	public_id: string
+}
+
+type SelfieAddEmailApiErrorResponse = {
+	error: string
+}
+
+export type SelfieAddEmailApiResponse =
+	| SelfieAddEmailApiSuccessResponse
+	| SelfieAddEmailApiErrorResponse
+
 export const POST: RequestHandler = async ({ request }) => {
 	if (!hasCloudinaryCredentials()) return credentialsError()
 
@@ -9,12 +23,19 @@ export const POST: RequestHandler = async ({ request }) => {
 		const { public_id, email } = await request.json()
 
 		if (!public_id || !email) {
-			return json({ error: 'Missing public_id or email' }, { status: 400 })
+			return json(
+				{ error: 'Missing public_id or email' } satisfies SelfieAddEmailApiErrorResponse,
+				{
+					status: 400
+				}
+			)
 		}
 
 		// Basic email validation
 		if (!email.includes('@') || !email.includes('.')) {
-			return json({ error: 'Invalid email format' }, { status: 400 })
+			return json({ error: 'Invalid email format' } satisfies SelfieAddEmailApiErrorResponse, {
+				status: 400
+			})
 		}
 
 		// Add context (requires 'add' command)
@@ -37,9 +58,11 @@ export const POST: RequestHandler = async ({ request }) => {
 			success: true,
 			message: 'Email added successfully',
 			public_id: public_id
-		})
+		} satisfies SelfieAddEmailApiResponse)
 	} catch (error) {
 		console.error('Error adding email:', error)
-		return json({ error: 'Failed to add email' }, { status: 500 })
+		return json({ error: 'Failed to add email' } satisfies SelfieAddEmailApiResponse, {
+			status: 500
+		})
 	}
 }

@@ -1,5 +1,7 @@
 #!/usr/bin/env node
 
+/* eslint-disable @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access */
+
 import fs from 'fs'
 import path from 'path'
 import { fileURLToPath } from 'url'
@@ -7,7 +9,7 @@ import { fileURLToPath } from 'url'
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
 
-async function main() {
+function main() {
 	const jsonPath = path.join(
 		path.dirname(path.dirname(__dirname)),
 		'static',
@@ -74,4 +76,4 @@ async function main() {
 	console.log('JSON file updated successfully')
 }
 
-main().catch(console.error)
+main()

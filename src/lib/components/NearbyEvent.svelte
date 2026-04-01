@@ -12,6 +12,9 @@
 
 	const FORMAT = new Intl.DateTimeFormat('en', { day: 'numeric', month: 'long' })
 	const MAX_DISTANCE_KM = 100
+	const DISTANCE_OVERRIDES: Record<string, number> = {
+		jogj70dj: 480 // Override for specific D.C. (Capitol Hill) event to include users up to 250 miles away
+	}
 
 	let events: CalendarResponse | null = null
 	let nearbyEvent: Event | null = null
@@ -37,8 +40,7 @@
 			if (geo_latitude == null || geo_longitude == null) return false
 			const eventCoords: [number, number] = [geo_longitude, geo_latitude]
 
-			// Override for specific D.C. (Capitol Hill) event to include users up to 250 miles away
-			const maxDistance = url === 'jogj70dj' ? 402 : MAX_DISTANCE_KM
+			const maxDistance = DISTANCE_OVERRIDES[url] ?? MAX_DISTANCE_KM
 
 			return distance(userCoords, eventCoords, { units: 'kilometers' }) <= maxDistance
 		}
@@ -47,7 +49,8 @@
 	}
 
 	async function fetchLuma(): Promise<CalendarResponse> {
-		return fetch('/api/calendar').then((res) => res.json())
+		const response = await fetch('/api/calendar')
+		return (await response.json()) as CalendarResponse
 	}
 </script>
 
