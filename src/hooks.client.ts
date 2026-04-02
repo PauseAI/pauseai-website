@@ -1,13 +1,14 @@
 import * as Sentry from '@sentry/svelte'
+import type { HandleClientError } from '@sveltejs/kit'
 
-const dsn = import.meta.env.PUBLIC_SENTRY_DSN
+const dsn = import.meta.env.PUBLIC_SENTRY_DSN as string | undefined
 
 export const init = () => {
 	if (dsn) {
 		try {
 			Sentry.init({
 				dsn,
-				release: import.meta.env.SENTRY_RELEASE,
+				release: import.meta.env.SENTRY_RELEASE as string | undefined,
 				tracesSampleRate: 0
 			})
 		} catch (e) {
@@ -16,7 +17,7 @@ export const init = () => {
 	}
 }
 
-export const handleError = ({ error, event, status, message }) => {
+export const handleError: HandleClientError = ({ error, event, status, message }) => {
 	if (dsn) {
 		Sentry.captureException(error, {
 			extra: {

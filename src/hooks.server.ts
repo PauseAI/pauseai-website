@@ -27,7 +27,7 @@ export const init = async () => {
 			Sentry = await import('@sentry/deno')
 			Sentry.init({
 				dsn: env.PUBLIC_SENTRY_DSN,
-				release: import.meta.env.SENTRY_RELEASE,
+				release: import.meta.env.SENTRY_RELEASE as string | undefined,
 				tracesSampleRate: 0
 			})
 		} catch (e) {
