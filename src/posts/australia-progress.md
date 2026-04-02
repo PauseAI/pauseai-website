@@ -26,12 +26,12 @@ description: What the Australian chapter of PauseAI has been doing and needs hel
 - Reached out to correct an error in [The Daily Aus' reporting on the Pentagon’s dispute with Anthropic](https://thedailyaus.com.au/podcast/the-fight-over-how-ai-is-used-in-war).
 - [Released a vid](https://www.youtube.com/shorts/L0vJxFJQz1o) on how Australia ignored the risks of AI at the India Summit and just talked about dividing winnings.
 - Reached out to Matt Greg MP on AGI risks and the recent India Summit.
-- Attended Parliamentary Innovation Showcase, met many interesting people and informed them about x-risk! Got a few things cooking that we'll share in coming weeks.
+- Attended Parliamentary Innovation Showcase, spoke with representatives from OpenAI, Microsoft, Amazon, Tech Council, KPMG and Australia's former Chief Scientist Professor Chubbabout AI safety and x-risk. Got a few things cooking that we'll share in coming weeks.
 
 <div style="display:flex; flex-wrap:wrap; gap:0.5rem; max-width:90%; margin:1rem auto;">
 <div style="flex:1; min-width:200px;">
 
-![Talking to Microsoft](/australia/20260326_InnovationShowcase.jpg)
+![Talking to Microsoft](/australia/20260326_InnovationShowcase_MSBoothDavidPeter.jpg)
 
 </div>
 <div style="flex:1; min-width:200px;">
@@ -45,6 +45,7 @@ description: What the Australian chapter of PauseAI has been doing and needs hel
 
 </div>
 </div>
+- Presented PauseAI's position at the [Careers in AI, AI Research & AI Safety](https://luma.com/t6kfhnuw?tk=RF8PQY) event hosted by Responsible AI Development (RAID) & AI Safety Australia & New Zealand (AISANZ)
 
 ### 2026 February
 
@@ -55,6 +56,11 @@ description: What the Australian chapter of PauseAI has been doing and needs hel
   - Sent media release to tech journalists
   - Hosted online and in-person workshops
   - Postered in Canberra's Civic, Tuggeranong, Woden, and Waramanga
+<div style="max-width:80%; margin:1rem 1rem 1rem 0;">
+
+![202602_ACTWorkshopPeter.jpg](/australia/202602_ACTWorkshopPeter.jpg)
+
+</div>
 - Publicly [asked Senator Pocock](https://www.youtube.com/live/SwDolSOMrac?si=GOtvYibfWyGuxK06&t=3820) how our government will deal with mass unemployment.
 
 <div style="max-width:80%; margin:1rem auto;">
@@ -67,9 +73,21 @@ description: What the Australian chapter of PauseAI has been doing and needs hel
 - Reached out to politicians: Fiona Carrick MLA, Thomas Emerson MLA, Jessie Price MP candidate about AI existential risk.
 - Reached out to organisations: ACT Conservation Council and ACT Greens about their datacentre policies.
 - Asked Minister Orr about the ACT Government's datacentre policy at the ACT Conservation Council townhall.
-  ![20260218_MinisterOrrQuestionAtACTConservationCouncilTownhall.jpg](/australia/20260218_MinisterOrrQuestionAtACTConservationCouncilTownhall.jpg)
+
+<div style="max-width:80%; margin:1rem 1rem 1rem 0;">
+
+![20260218_MinisterOrrQuestionAtACTConservationCouncilTownhall.jpg](/australia/20260218_MinisterOrrQuestionAtACTConservationCouncilTownhall.jpg)
+
+</div>
+
 - Attended Melbourne's presentation on Fixing Australian Philanthropy.
-  ![20260225_MELB_MarkAtDGRPresentation_Cropped.jpg](/australia/20260225_MELB_MarkAtDGRPresentation.jpg)
+
+<div style="max-width:80%; margin:1rem 1rem 1rem 0;">
+
+![20260225_MELB_MarkAtDGRPresentation.jpg](/australia/20260225_MELB_MarkAtDGRPresentation.jpg)
+
+</div>
+
 - Handed out flyers at University of Canberra's Open Day.
 
 ### 2026 January
@@ -80,7 +98,7 @@ description: What the Australian chapter of PauseAI has been doing and needs hel
 ## 2025 - more coming soon!
 
 ### 2025 December
-
+- ✅Australian AI Safety Institute announced! This was one of our 3 main policy goals. Two to go: international AI treaty, and AI guardrails.
 - ✅Emails from PauseAI Australia volunteers and a question at a live townhall event prompted five politicians to sign the [Future of Life Institute Superintelligence Statement](https://www.linkedin.com/feed/update/urn:li:activity:7408047524902572032).
   Watch the moment at the townhall [on YouTube](https://youtu.be/SbqUEhJt5RU?si=CSVML0vatdW-GBEh).
 
@@ -90,8 +108,6 @@ description: What the Australian chapter of PauseAI has been doing and needs hel
   ![20251209_PocockTownhall_SelfiesPeterDavid.jpg](/australia/20251209_PocockTownhall_SelfiesPeterDavid.jpg)
 - 5 people from Australia participated in the PauseAI photo petition.
   ![2025-11_PhotoPetition.jpg](/australia/2025-11_PhotoPetition.jpg)
-- AI Inspector character prepared, has yet to be deployed
-  ![20251100_AI-Inspector.jpg](/australia/20251100_AI-Inspector.jpg)
 - Ran a stall at SouthFest. 34 people stopped for >1min chat, 2 submitted selfies to our photo petition.
 
 <div style="display:flex; flex-wrap:wrap; gap:0.5rem; max-width:90%; margin:1rem auto;">
@@ -111,12 +127,23 @@ description: What the Australian chapter of PauseAI has been doing and needs hel
 
 ### 2025 October
 
-- On 7 October 2025, PauseAI Australia held a book launch and discussion event at Smith's Alternative bookshop in Canberra to mark the release of [_If Anyone Builds It, Everyone Dies_](https://www.penguin.com.au/books/if-anyone-builds-it-everyone-dies-9781847928931). Laura Nuttall, MLA, and Peter Cain, MLA, joined the discussion and read excerpts from the book.
+- ✅On 7 October 2025, PauseAI Australia held a book launch and discussion event at Smith's Alternative bookshop in Canberra to mark the release of [_If Anyone Builds It, Everyone Dies_](https://www.penguin.com.au/books/if-anyone-builds-it-everyone-dies-9781847928931). Laura Nuttall, MLA, and Peter Cain, MLA, joined the discussion and read excerpts from the book.
+- We attended online the Australian Academy of Science webinar on “[AI in science: the promise, perils and path forward – AI and our safety](https://science.org.au/news-events/events/ai-science-promise-perils-path-forward-ai-our-safety)”, publicly asking why they weren’t mentioning existential risk.
 
 ### 2025 September
 
 - ✅[e-petition EN7777 ](https://www.aph.gov.au/e-petitions/petition/EN7777) to the Australian House of Representatives was open for 30 days and collected 168 signatures. The petition asked the House to legislate that all future frontier artificial intelligence systems must pass rigorous independent safety evaluations, and further asked the House to advocate proactively for an international treaty to pause frontier AI development until global safety mechanisms are in place. The Minister gave an official response.
 - In September 2025, PauseAI Australia responded to the interim report on _Harnessing Data and Digital Technology_ with [this submission](https://drive.google.com/file/d/1Ea9I3jXCZAMdGAcN2D-UMRPyE2MzGB7k/view). Volunteers also made individual submissions ([David](https://docs.google.com/document/d/1DenTOorlnqQ02PJEEdRvsceFmfvvfTXxGubozjfx-yE/edit?usp=sharing), [Peter](https://docs.google.com/document/d/1aQcC5DYq3feyWyHAPFGcEvwgrX0vXSbgMNDBEYWA61E/edit?tab=t.0#heading=h.4hsb6c6hjc5f), [Michael](https://drive.google.com/file/d/1lWdtIiLatF1DOPvdjQSaonO9dEqFCFSV/view?usp=drive_link)).
+- We attended online the Prevention United workshop on their Youth Ambassadors Group’s brief [Navigating Artificial Intelligence for Youth Mental Health](https://nest.greenant.net/s/YAzw3wbtrzc5gwo), asking advice on how teens can deal with predicted catastrophic outcomes from AI.
+
+
+### 2025 August
+- Met Caitlin Tough MLA and her advisor to discuss AI impacts on mental health & democracy. 
+<div style="max-width:80%; margin:1rem 1rem 1rem 0;">
+
+![20250825_PeterAboutToMeetCaitlinToughMLA.jpg](/australia/20250825_PeterAboutToMeetCaitlinToughMLA.jpg)
+
+</div>
 
 ### 2025 July
 
