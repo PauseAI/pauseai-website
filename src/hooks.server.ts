@@ -22,7 +22,7 @@ import { paraglideMiddleware } from '$lib/paraglide/server.js'
 let Sentry: typeof import('@sentry/deno') | undefined
 
 export const init = async () => {
-	if (env.PUBLIC_SENTRY_DSN) {
+	if (env.PUBLIC_SENTRY_DSN && typeof Deno !== 'undefined') {
 		try {
 			Sentry = await import('@sentry/deno')
 			Sentry.init({

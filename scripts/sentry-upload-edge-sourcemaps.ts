@@ -31,8 +31,9 @@ try {
 	process.exit(0)
 }
 
-console.log('📤 Uploading edge function source maps to Sentry...')
+console.log('📤 Injecting Debug IDs and uploading edge function source maps to Sentry...')
 try {
+	execSync(`npx @sentry/cli sourcemaps inject ${edgeFunctionsDir}`, { stdio: 'inherit' })
 	execSync(
 		`npx @sentry/cli sourcemaps upload --org ${process.env.SENTRY_ORG} --project ${process.env.SENTRY_PROJECT} --release ${release} ${edgeFunctionsDir}`,
 		{ stdio: 'inherit' }
