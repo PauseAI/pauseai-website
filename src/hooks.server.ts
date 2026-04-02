@@ -57,10 +57,7 @@ export const handleError: HandleServerError = ({ error, event, status, message }
 				method: event.request?.method
 			}
 		})
-		const context = event.platform?.context as { waitUntil?: (p: Promise<unknown>) => void }
-		if (context?.waitUntil) {
-			context.waitUntil(Sentry.flush(2000))
-		}
+		event.platform?.context.waitUntil(Sentry.flush(2000))
 	}
 	return { message: 'An unexpected error occurred.' }
 }
