@@ -1,5 +1,5 @@
-import { error } from '@sveltejs/kit'
 import type { RequestHandler } from './$types'
+import { asError } from '$lib/utils'
 
 /**
  * Proxies a DonorBox goal meter, applying matching donation logic.
@@ -43,7 +43,7 @@ export const GET: RequestHandler = async ({ params, fetch, setHeaders }) => {
 	const { slug } = params
 
 	if (!slug) {
-		throw error(400, 'Campaign slug is required')
+		throw asError(400, 'Campaign slug is required')
 	}
 
 	// Fetch the DonorBox goal meter embed
@@ -55,11 +55,11 @@ export const GET: RequestHandler = async ({ params, fetch, setHeaders }) => {
 		response = await fetch(donorboxUrl)
 	} catch (e) {
 		console.error('Failed to fetch DonorBox meter:', e)
-		throw error(502, 'Failed to fetch donation meter')
+		throw asError(502, 'Failed to fetch donation meter')
 	}
 
 	if (!response.ok) {
-		throw error(response.status, 'DonorBox returned an error')
+		throw asError(response.status, 'DonorBox returned an error')
 	}
 
 	let html = await response.text()
@@ -67,13 +67,13 @@ export const GET: RequestHandler = async ({ params, fetch, setHeaders }) => {
 	// Extract the goal meter section
 	const meterMatch = html.match(/<section class="goal-meter-widget">([\s\S]*?)<\/section>/)
 	if (!meterMatch) {
-		throw error(502, 'Could not parse DonorBox meter')
+		throw asError(502, 'Could not parse DonorBox meter')
 	}
 
 	// Extract current values from: <div class='total-raised'><b>4.219,87 €</b> / 21.000 €</div>
 	const raisedMatch = html.match(/<div class='total-raised'><b>([^<]+)<\/b>\s*\/\s*([^<]+)<\/div>/)
 	if (!raisedMatch) {
-		throw error(502, 'Could not parse raised/goal amounts')
+		throw asError(502, 'Could not parse raised/goal amounts')
 	}
 
 	const raisedText = raisedMatch[1].trim()
