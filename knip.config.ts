@@ -1,7 +1,8 @@
 import { KnipConfig } from 'knip'
 
 const config: KnipConfig = {
-	include: ['dependencies']
+	include: ['dependencies'],
+	ignoreDependencies: ['@sentry/cli']
 }
 
 export default config
