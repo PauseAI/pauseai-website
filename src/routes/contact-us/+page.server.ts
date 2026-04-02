@@ -1,6 +1,11 @@
 import { fail } from '@sveltejs/kit'
 import type { Actions } from './$types'
 import { env } from '$env/dynamic/private'
+import { createRecord } from '$lib/airtable'
+
+// Airtable configuration (User to fill in later)
+const CONTACT_AIRTABLE_BASE_ID = 'appWPTGqZmUcs3NWu'
+const CONTACT_AIRTABLE_TABLE_ID = 'tblPP2kM7uTheBrpw'
 
 export const prerender = false
 
@@ -12,16 +17,33 @@ const CONTACT_RECIPIENTS = {
 	Feedback: 'feedback@pauseai.info'
 } as const
 
+const mailerSendApiKey = env.MAILERSEND_API_KEY
+
+type ContactFormType = keyof typeof CONTACT_RECIPIENTS
+
+type MailerSendError = {
+	message?: string
+}
+
+function getFormString(formData: FormData, field: string): string | undefined {
+	const value = formData.get(field)
+	return typeof value === 'string' ? value : undefined
+}
+
+function isMailerSendError(value: unknown): value is MailerSendError {
+	return typeof value === 'object' && value !== null
+}
+
 async function sendContactEmail(data: {
 	name: string
 	email: string
 	subject: string
 	message: string
-	type: 'Standard' | 'Media' | 'Partnerships' | 'Feedback'
+	type: ContactFormType
 	organization?: string
 	city_country?: string
 }) {
-	if (!env.MAILERSEND_API_KEY) {
+	if (!mailerSendApiKey) {
 		console.error('MAILERSEND_API_KEY is not configured')
 		return {
 			success: false,
@@ -85,43 +107,44 @@ async function sendContactEmail(data: {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json',
-				Authorization: `Bearer ${env.MAILERSEND_API_KEY}`
+				Authorization: `Bearer ${mailerSendApiKey}`
 			},
 			body: JSON.stringify(emailBody)
 		})
 
 		if (!response.ok) {
-			const errorData = await response.json().catch(() => ({}))
+			const errorData: unknown = await response.json().catch((): unknown => ({}))
 			console.error('MailerSend Error:', response.status, JSON.stringify(errorData, null, 2))
 
 			let errorMessage = 'Failed to send email. Please try again later.'
-			if (errorData.message) {
+			if (isMailerSendError(errorData) && typeof errorData.message === 'string') {
 				errorMessage = errorData.message.replace('reply to.email', 'email')
 			}
 
 			return { success: false, message: errorMessage }
 		}
 
+		// Save to Airtable - sending full content in the Message field
+		await createRecord(CONTACT_AIRTABLE_BASE_ID, CONTACT_AIRTABLE_TABLE_ID, {
+			Message: textContent,
+			Type: data.type
+		})
+
 		return { success: true }
 	} catch (error: unknown) {
 		console.error('MailerSend Error:', error)
 
 		let errorMessage = 'Failed to send email. Please try again later.'
-		const err = error as { message?: string }
-		if (err.message) {
-			errorMessage = err.message
+		if (error instanceof Error && error.message) {
+			errorMessage = error.message
 		}
 
 		return { success: false, message: errorMessage }
 	}
 }
 
-async function sendConfirmationEmail(data: {
-	name: string
-	email: string
-	type: keyof typeof CONTACT_RECIPIENTS
-}) {
-	if (!env.MAILERSEND_API_KEY || !data.email) return
+async function sendConfirmationEmail(data: { name: string; email: string; type: ContactFormType }) {
+	if (!mailerSendApiKey || !data.email) return
 
 	const teamEmail = CONTACT_RECIPIENTS[data.type]
 
@@ -159,7 +182,7 @@ async function sendConfirmationEmail(data: {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json',
-				Authorization: `Bearer ${env.MAILERSEND_API_KEY}`
+				Authorization: `Bearer ${mailerSendApiKey}`
 			},
 			body: JSON.stringify(emailBody)
 		})
@@ -171,10 +194,15 @@ async function sendConfirmationEmail(data: {
 export const actions: Actions = {
 	standard: async ({ request }) => {
 		const data = await request.formData()
-		const name = data.get('name')?.toString()
-		const email = data.get('email')?.toString()
-		const subject = data.get('subject')?.toString()
-		const message = data.get('message')?.toString()
+		const name = getFormString(data, 'name')
+		const email = getFormString(data, 'email')
+		const subject = getFormString(data, 'subject')
+		const message = getFormString(data, 'message')
+		const nickname = getFormString(data, 'nickname')
+
+		if (nickname) {
+			return { success: true }
+		}
 
 		if (!name || !email || !subject || !message) {
 			return fail(400, { message: 'Missing required fields' })
@@ -198,11 +226,16 @@ export const actions: Actions = {
 	},
 	media: async ({ request }) => {
 		const data = await request.formData()
-		const name = data.get('name')?.toString()
-		const email = data.get('email')?.toString()
-		const subject = data.get('subject')?.toString()
-		const organization = data.get('organization')?.toString()
-		const details = data.get('details')?.toString()
+		const name = getFormString(data, 'name')
+		const email = getFormString(data, 'email')
+		const subject = getFormString(data, 'subject')
+		const organization = getFormString(data, 'organization')
+		const details = getFormString(data, 'details')
+		const nickname = getFormString(data, 'nickname')
+
+		if (nickname) {
+			return { success: true }
+		}
 
 		if (!name || !email || !subject || !organization || !details) {
 			return fail(400, { message: 'Missing required fields' })
@@ -227,19 +260,24 @@ export const actions: Actions = {
 	},
 	partnerships: async ({ request }) => {
 		const data = await request.formData()
-		const name = data.get('name')?.toString()
-		const email = data.get('email')?.toString()
-		const organization = data.get('organization')?.toString()
-		const city_country = data.get('city_country')?.toString()
+		const name = getFormString(data, 'name')
+		const email = getFormString(data, 'email')
+		const organization = getFormString(data, 'organization')
+		const city_country = getFormString(data, 'city_country')
 
-		let subject = data.get('partnership_type')?.toString() || ''
-		const other_type = data.get('other_partnership_type')?.toString()
+		let subject = getFormString(data, 'partnership_type') ?? ''
+		const other_type = getFormString(data, 'other_partnership_type')
 
 		if (subject === 'Other' && other_type) {
 			subject = `Other: ${other_type}`
 		}
 
-		const message = data.get('message')?.toString()
+		const message = getFormString(data, 'message')
+		const nickname = getFormString(data, 'nickname')
+
+		if (nickname) {
+			return { success: true }
+		}
 
 		if (!name || !email || !city_country || !subject || !message) {
 			return fail(400, { message: 'Missing required fields' })
@@ -265,10 +303,15 @@ export const actions: Actions = {
 	},
 	feedback: async ({ request }) => {
 		const data = await request.formData()
-		const name = data.get('name')?.toString() || 'Anonymous'
-		const email = data.get('email')?.toString() || ''
-		const subject = data.get('subject')?.toString()
-		const message = data.get('message')?.toString()
+		const name = getFormString(data, 'name') ?? 'Anonymous'
+		const email = getFormString(data, 'email') ?? ''
+		const subject = getFormString(data, 'subject')
+		const message = getFormString(data, 'message')
+		const nickname = getFormString(data, 'nickname')
+
+		if (nickname) {
+			return { success: true }
+		}
 
 		if (!subject || !message) {
 			return fail(400, { message: 'Missing required fields' })

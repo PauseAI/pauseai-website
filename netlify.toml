@@ -24,3 +24,6 @@
 [dev]
   command = "pnpm dev"
   port = 37572
+
+[images]
+  remote_images = ["https://substackcdn.com/.*", "https://substack-post-media.s3.amazonaws.com/.*"]

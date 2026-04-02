@@ -7,11 +7,13 @@
 	import Link from '$lib/components/Link.svelte'
 	import PostMeta from '$lib/components/PostMeta.svelte'
 	import { meta } from './meta'
+	import type { ActionResult } from '@sveltejs/kit'
 
 	const { title, description } = meta
 
 	let activeTab: 'media' | 'partnerships' | 'feedback' = 'partnerships'
 	let loading = false
+	let honeypot = ''
 
 	let formData = {
 		media: { name: '', email: '', subject: '', organization: '', details: '' },
@@ -25,6 +27,12 @@
 			message: ''
 		},
 		feedback: { name: '', email: '', subject: '', message: '' }
+	}
+
+	type ContactFormState = typeof formData
+
+	function isRecord(value: unknown): value is Record<string, unknown> {
+		return typeof value === 'object' && value !== null
 	}
 
 	const partnershipOptions = [
@@ -87,7 +95,10 @@
 			const saved = localStorage.getItem('contactFormData')
 			if (saved) {
 				try {
-					formData = { ...formData, ...JSON.parse(saved) }
+					const parsed: unknown = JSON.parse(saved)
+					if (isRecord(parsed)) {
+						formData = { ...formData, ...(parsed as Partial<ContactFormState>) }
+					}
 				} catch (e) {
 					console.error('Failed to parse saved form data', e)
 				}
@@ -113,13 +124,7 @@
 		}
 
 		loading = true
-		return async ({
-			result,
-			update
-		}: {
-			result: import('@sveltejs/kit').ActionResult
-			update: () => Promise<void>
-		}) => {
+		return async ({ result, update }: { result: ActionResult; update: () => Promise<void> }) => {
 			loading = false
 			if (result.type === 'success') {
 				toast.success("Thank you! We've received your message.")
@@ -141,10 +146,11 @@
 					formData.feedback = { name: '', email: '', subject: '', message: '' }
 				}
 
-				update() // Reset the form
+				await update() // Reset the form
 			} else if (result.type === 'failure') {
 				console.error('Submission failed:', result)
-				toast.error(result.data?.message || 'Failed to send message.')
+				const data: Record<string, unknown> | undefined = result.data
+				toast.error(String(data?.message) || 'Failed to send message.')
 			} else {
 				console.error('Unexpected result:', result)
 				toast.error('An unexpected error occurred.')
@@ -157,7 +163,10 @@
 
 <div class="contact-page">
 	<h1>{title}</h1>
-	<p class="intro">Get in touch with the PauseAI team.</p>
+	<p class="intro">
+		Get in touch with the PauseAI team.<br />
+		Based in the US? Reach out to <Link href="https://www.pauseai-us.org/">PauseAI US</Link> directly.
+	</p>
 
 	<div class="tabs">
 		<button
@@ -199,6 +208,17 @@
 							required
 							placeholder="Full Name"
 							bind:value={formData.partnerships.name}
+						/>
+					</div>
+					<div class="field honey">
+						<label for="part-nickname">Nickname</label>
+						<input
+							type="text"
+							id="part-nickname"
+							name="nickname"
+							tabindex="-1"
+							autocomplete="off"
+							bind:value={honeypot}
 						/>
 					</div>
 					<div class="field">
@@ -278,8 +298,9 @@
 		{:else if activeTab === 'media'}
 			<section id="media-contact">
 				<p class="tab-intro">
-					Looking for press materials or media coverage? Check out our <Link href="/press"
-						>press page</Link
+					Are you a journalist or media professional? We'd love to hear from you! Reach out for
+					interviews, comments, or inquiries. For press materials, you can also check out our <Link
+						href="/press">press page</Link
 					>.
 				</p>
 				<form method="POST" action="?/media" use:enhance={handleEnhance}>
@@ -291,6 +312,17 @@
 							required
 							placeholder="Full Name"
 							bind:value={formData.media.name}
+						/>
+					</div>
+					<div class="field honey">
+						<label for="med-nickname">Nickname</label>
+						<input
+							type="text"
+							id="med-nickname"
+							name="nickname"
+							tabindex="-1"
+							autocomplete="off"
+							bind:value={honeypot}
 						/>
 					</div>
 					<div class="field">
@@ -351,6 +383,17 @@
 							name="name"
 							placeholder="Full Name (Optional)"
 							bind:value={formData.feedback.name}
+						/>
+					</div>
+					<div class="field honey">
+						<label for="fb-nickname">Nickname</label>
+						<input
+							type="text"
+							id="fb-nickname"
+							name="nickname"
+							tabindex="-1"
+							autocomplete="off"
+							bind:value={honeypot}
 						/>
 					</div>
 					<div class="field">
@@ -585,5 +628,16 @@
 		font-weight: 500;
 		color: var(--text);
 		opacity: 0.9;
+	}
+
+	.honey {
+		display: none;
+		opacity: 0;
+		position: absolute;
+		left: -9999px;
+		height: 0;
+		width: 0;
+		overflow: hidden;
+		z-index: -1;
 	}
 </style>

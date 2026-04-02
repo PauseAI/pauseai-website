@@ -4,4 +4,4 @@
 	export { img, a, table }
 </script>
 
-<slot />
+<slot></slot>

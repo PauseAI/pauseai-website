@@ -14,16 +14,16 @@
 			<Socials />
 		</div>
 	</div>
-	<div class="bar" />
+	<div class="bar"></div>
 	<div class="footer-links">
 		<div class="column">
 			<h2>{m.footer_info()}</h2>
 			<Link href="/about">{m.footer_info_about()}</Link>
 			<Link href="/contact-us">Contact Us</Link>
 			<Link href="/press">{m.footer_info_press()}</Link>
-			<Link href="/teams">{m.footer_info_teams()}</Link>
 			<Link href="/partnerships">{m.footer_info_partnerships()}</Link>
 			<Link href="/privacy">{m.footer_info_privacy()}</Link>
+			<Link href="/safeguarding-protocol">Safeguarding</Link>
 			<Link href="/legal"
 				>{m.footer_info_legal()} <br />
 				{m.footer_info_legal_foundation()} <br />

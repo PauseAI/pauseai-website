@@ -1,3 +1,5 @@
+<!-- eslint-disable svelte/no-restricted-html-elements -- 
+ No link l10n needed, Link component messes up the rich text -->
 <p>
 	I would like to ask you to work towards treaty negotiations for compute governance, which would
 	prevent the worst of the risks that AI poses. One country should take the lead, and at this

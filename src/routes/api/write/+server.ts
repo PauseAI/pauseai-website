@@ -1,6 +1,7 @@
 import { error, json } from '@sveltejs/kit'
 import { env } from '$env/dynamic/private'
 import Anthropic from '@anthropic-ai/sdk'
+import type { RequestHandler } from './$types'
 
 // Safely access the API key, will be undefined if not set
 const ANTHROPIC_API_KEY_FOR_WRITE = env.ANTHROPIC_API_KEY_FOR_WRITE || undefined
@@ -46,6 +47,10 @@ export type ChatResponse = {
 export type Message = {
 	role: 'user' | 'assistant' | 'system'
 	content: string
+}
+
+export type WriteApiAvailabilityResponse = {
+	apiAvailable: boolean
 }
 
 const System_Prompts: { [id: string]: string } = {}
@@ -187,8 +192,8 @@ const anthropic = IS_API_AVAILABLE
 		})
 	: null
 
-export async function GET() {
-	return json({ apiAvailable: IS_API_AVAILABLE })
+export const GET: RequestHandler = async () => {
+	return json({ apiAvailable: IS_API_AVAILABLE } satisfies WriteApiAvailabilityResponse)
 }
 
 // Helper function to call Claude API with timing
@@ -452,7 +457,7 @@ async function processStep(state: WriteState): Promise<WriteState> {
 	return state
 }
 
-export async function POST({ fetch, request }) {
+export const POST: RequestHandler = async ({ fetch, request }) => {
 	// Check if API is available
 	if (!IS_API_AVAILABLE) {
 		return json({

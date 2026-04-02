@@ -1,15 +1,18 @@
 import { json } from '@sveltejs/kit'
-import type { Post } from '$lib/types'
+import type { FrontmatterMeta, Post } from '$lib/types'
 import { outcomesMeta } from '../../outcomes/meta'
 import { communitiesMeta } from '../../communities/communities'
 import { meta as pdoomMeta } from '../../pdoom/meta'
 import { meta as quotesMeta } from '../../quotes/meta'
 import { meta as emailBuilderMeta } from '../../email-builder/meta'
-import { meta as teamsMeta } from '../../teams/meta'
 import { meta as statementMeta } from '../../statement/meta'
 import { meta as dearSirDemisMeta } from '../../dear-sir-demis-2025/meta'
 import { meta as aboutMeta } from '../../about/meta'
 import { meta as contactMeta } from '../../contact-us/meta'
+import { meta as pressMeta } from '../../press/meta'
+import type { RequestHandler } from './$types'
+
+export type PostsApiResponse = Post[]
 
 /** When adding an extra route, make sure to add the metadata here for SEO purposes */
 const hardCodedPages: Post[] = [
@@ -18,11 +21,11 @@ const hardCodedPages: Post[] = [
 	pdoomMeta,
 	quotesMeta,
 	emailBuilderMeta,
-	teamsMeta,
 	statementMeta,
 	dearSirDemisMeta,
 	aboutMeta,
-	contactMeta
+	contactMeta,
+	pressMeta
 ]
 
 async function getPosts() {
@@ -41,7 +44,7 @@ async function getPosts() {
 			slug &&
 			!slug.startsWith('debug.')
 		) {
-			const metadata = file.metadata as Omit<Post, 'slug'>
+			const metadata = file.metadata as FrontmatterMeta
 			const post = { ...metadata, slug } satisfies Post
 			posts.push(post)
 		}
@@ -58,7 +61,7 @@ async function getPosts() {
 	return posts
 }
 
-export async function GET() {
+export const GET: RequestHandler = async () => {
 	const posts = await getPosts()
-	return json(posts)
+	return json(posts satisfies PostsApiResponse)
 }

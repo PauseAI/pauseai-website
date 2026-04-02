@@ -3,17 +3,16 @@
 	import NarrowNavbar from './narrow/NarrowNavbar.svelte'
 
 	export let inverted = false
-	export let moveUp = false
 </script>
 
 <div class="wide-navbar">
-	<WideNavbar {inverted} {moveUp}>
-		<slot />
+	<WideNavbar {inverted}>
+		<slot></slot>
 	</WideNavbar>
 </div>
 <div class="narrow-navbar">
-	<NarrowNavbar {inverted} {moveUp}>
-		<slot />
+	<NarrowNavbar {inverted}>
+		<slot></slot>
 	</NarrowNavbar>
 </div>
 

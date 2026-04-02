@@ -14,6 +14,7 @@
 	import { onMount } from 'svelte'
 	import { loadNationalGroups } from '$lib/stores/nationalGroups'
 	import type { NationalGroup } from '$lib/types'
+	import { SvelteSet } from 'svelte/reactivity'
 
 	export let communities: Community[] = []
 
@@ -64,7 +65,7 @@
 	let expandedCountries: Set<string> = new Set()
 
 	function toggleCountry(country: string) {
-		const newSet = new Set(expandedCountries)
+		const newSet = new SvelteSet(expandedCountries)
 		if (newSet.has(country)) {
 			newSet.delete(country)
 		} else {
@@ -104,7 +105,7 @@
 								stroke-linecap="round"
 								stroke-linejoin="round"
 							>
-								<polyline points="6 9 12 15 18 9"></polyline>
+								<polyline points="6 9 12 15 18 9" />
 							</svg>
 						{:else}
 							<!-- Placeholder for alignment if no communities/arrow -->

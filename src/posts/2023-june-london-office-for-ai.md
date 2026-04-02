@@ -1,5 +1,5 @@
 ---
-title: PauseAI protest @ Office for AI - June 29th
+title: PauseAI Protest @ Office for AI - June 29th
 ---
 
 - PauseAI protest, urging Rishi Sunak to implement a pause on AI development.

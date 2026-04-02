@@ -1,20 +1,24 @@
 <script lang="ts">
+	import Image from '$lib/components/Image.svelte'
+	import Link from '$lib/components/Link.svelte'
 	import PostMeta from '$lib/components/PostMeta.svelte'
-	import { getAssetUrlOrStaticUrl } from '$lib/images.js'
+	import { getPostMetaImageUrl } from '$lib/images.js'
+	import type { PageData } from './$types'
 
 	// don't destructure to maintain reactivity for invalidation after language detection
-	export let data
+	export let data: PageData
+
 	$: meta = data.meta
-	$: ({ title = data.slug, date, description, image, author } = meta)
+	$: ({ title = data.slug, date, description, image, author, showImage = true } = meta)
 	$: parent = data.slug.split('/').slice(0, -1).join('/')
-	$: imageUrl = getAssetUrlOrStaticUrl(image)
+	$: metaImageUrl = getPostMetaImageUrl(image)
 </script>
 
-<PostMeta {title} {description} {date} image={imageUrl} />
+<PostMeta {title} {description} {date} image={metaImageUrl} />
 
 <article>
 	{#if parent}
-		<a href={`/${parent}`}>View all {parent}</a>
+		<Link href={`/${parent}`}>View all {parent}</Link>
 	{/if}
 	<hgroup>
 		<h1>{title}</h1>
@@ -26,15 +30,11 @@
 		{/if}
 	</hgroup>
 
-	<!-- <div class="tags">
-		{#if meta.categories && meta.categories.length > 0}
-			<div class="categories">
-				{#each meta.categories as category}
-					<span class="surface-4">&num;{category}</span>
-				{/each}
-			</div>
-		{/if}
-	</div> -->
+	{#if image && showImage !== false}
+		<div class="banner">
+			<Image src={image} alt={title} />
+		</div>
+	{/if}
 
 	<div class="prose">
 		<svelte:component this={data.content} />
@@ -48,7 +48,24 @@
 	}
 
 	h1 {
-		text-transform: capitalize;
+		text-transform: none;
+	}
+
+	hgroup {
+		margin-top: 0;
+	}
+
+	.banner {
+		margin: 1.5rem 0 2rem;
+		border-radius: 12px;
+		overflow: hidden;
+	}
+
+	.banner :global(img) {
+		width: 100%;
+		aspect-ratio: 1200 / 628;
+		object-fit: cover;
+		display: block;
 	}
 
 	/* h1 + p {

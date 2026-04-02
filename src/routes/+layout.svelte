@@ -1,7 +1,9 @@
 <script lang="ts">
 	import type { GeoApiResponse } from '$api/geo/+server'
+	import { browser } from '$app/environment'
 	import { page } from '$app/stores'
 	import Banner from '$lib/components/Banner.svelte'
+	import CampaignBanner from '$lib/components/CampaignBanner.svelte'
 	import Hero from '$lib/components/Hero.svelte'
 	import Link from '$lib/components/Link.svelte'
 	import NearbyEvent from '$lib/components/NearbyEvent.svelte'
@@ -15,6 +17,7 @@
 	import '@fontsource/saira-condensed/700.css'
 	import sairaCondensedLatin700 from '@fontsource/saira-condensed/files/saira-condensed-latin-700-normal.woff2'
 	import { ProgressBar } from '@prgm/sveltekit-progress-bar'
+	import { Cookie, SetCookie } from '@remix-run/headers'
 	import { onMount } from 'svelte'
 	import { Toaster } from 'svelte-french-toast'
 	import '../styles/print.css'
@@ -22,22 +25,84 @@
 	import Footer from './footer.svelte'
 	import Header from './header.svelte'
 	import PageTransition from './transition.svelte'
+	import bannerSelection from './banner-selection.js?raw'
+	import type { PageData } from './$types'
 
-	export let data
-
-	// We use $page store instead of data prop for more reliable navigation
-	// This prevents "undefined" issues during navigation
+	export let data: PageData
 
 	let eventFound: boolean
-	let geo: GeoApiResponse | null = null
-	// Show the hero on the homepage, but nowhere else
+	let geoForNearbyEvent: GeoApiResponse | null = null
 	$: hero = deLocalizeHref($page.url.pathname) === '/'
 
 	onMount(async () => {
-		const response = await fetch('/api/geo')
-		geo = await response.json()
+		const searchString = window.location.search
+		const response = await fetch('/api/geo' + searchString)
+		if (!response.ok) return
+		const geo = (await response.json()) as GeoApiResponse
+
+		// Keep geo cookie in sync with actual location.
+		// Re-run selectBanners if country changed or cookie not yet set.
+		const geoCountryCookie = new Cookie(document.cookie).get('geo_country')
+
+		// geo.country is an object { code: 'US' } from Netlify, SetCookie needs a string
+		const countryString = (
+			typeof geo?.country === 'object' ? geo?.country?.code : geo?.country
+		) as string
+
+		if (countryString && countryString !== geoCountryCookie) {
+			document.cookie = new SetCookie({
+				name: 'geo_country',
+				value: countryString,
+				path: '/',
+				maxAge: 31536000,
+				sameSite: 'Lax'
+			}).toString() // 1 year
+			window.selectBanners()
+		}
+
+		// Don't show NearbyEvent if a geo banner is active (geo banners take priority)
+		if (!document.documentElement.dataset.isActiveBannerGeo) {
+			geoForNearbyEvent = geo
+		}
 	})
+
+	// NearbyEvent overrides the main banner
+	$: if (browser && eventFound) {
+		delete document.documentElement.dataset.activeBanner
+	}
 </script>
+
+<svelte:head>
+	<script>
+		var mainBannerRules = [
+			{
+				id: 'gb-feb28-protest',
+				countries: ['GB'],
+				dateRange: [null, '2025-02-28']
+			},
+			{
+				id: 'us-state-sovereignty',
+				countries: ['US'],
+				dateRange: [null, '2025-02-28']
+			},
+			{
+				id: 'holiday-littlehelpers',
+				countries: null,
+				dateRange: [null, '2024-12-31']
+			}
+		]
+
+		var campaignBannerRules = [
+			{
+				id: 'brussels-ep-protest-2026',
+				dateRange: [null, '2026-02-23']
+			}
+		]
+	</script>
+
+	<!-- eslint-disable-next-line svelte/no-at-html-tags not vulnerable against XSS -->
+	{@html `<${'script'}>${bannerSelection.replaceAll(/\/\*[\s\S]*?\*\//g, '')}</script>`}
+</svelte:head>
 
 <PreloadFonts urls={[robotoSlabLatin300, sairaCondensedLatin700]} />
 
@@ -45,44 +110,54 @@
 	Top
 </h2>
 
-<!-- Make sure we only show one banner at a time-->
-{#if data.localeAlert}
-	<Banner
-		contrast={data.localeAlert.isDev}
-		id={data.localeAlert.isDev ? undefined : 'locale-switch'}
-	>
-		<!-- eslint-disable-next-line svelte/no-at-html-tags not vulnerable against XSS -->
-		{@html data.localeAlert.message}
-	</Banner>
-{:else if geo?.country?.code === 'GB'}
-	<Banner contrast={hero}>
+<div class="page-top" class:hero-page={hero}>
+	<!-- Dev-only locale mismatch warning. No id when isDev, so not affected by banner orchestration CSS. -->
+	{#if data.localeAlert}
+		<Banner
+			contrast={data.localeAlert.isDev}
+			id={data.localeAlert.isDev ? undefined : 'locale-switch'}
+		>
+			<!-- eslint-disable-next-line svelte/no-at-html-tags not vulnerable against XSS -->
+			{@html data.localeAlert.message}
+		</Banner>
+	{/if}
+
+	<!-- All banners rendered, hidden by default. Blocking script reveals the active main/campaign banner. -->
+	<Banner contrast={hero} id="gb-feb28-protest">
 		<b
 			>PauseAI's largest ever protest will be on Saturday February 28th in London. <Link
 				href="https://luma.com/o0p4htmk">Sign up now!</Link
 			></b
 		>
 	</Banner>
-{:else}
-	<NearbyEvent contrast={hero} bind:eventFound {geo} />
-	{#if !eventFound}
-		{#if geo?.country?.code === 'US' && false}
-			<Banner contrast={hero}>
-				<b
-					>HELP US PROTECT STATE SOVEREIGNTY ON AI REGULATION | <Link
-						href="https://mstr.app/b09fa92b-1899-43a0-9d95-99cd99c9dfb2">ACT NOW »</Link
-					></b
-				>
-			</Banner>
-		{:else if false}
-			<Banner contrast={hero} target="/littlehelpers">
-				<strong>🎄 Holiday Matching Campaign!</strong> Help fund volunteer stipends for PauseAI
-				advocates. <Link href="/littlehelpers">Join the Little Helpers campaign →</Link>
-			</Banner>
-		{/if}
-	{/if}
-{/if}
+	<Banner contrast={hero} id="us-state-sovereignty">
+		<b
+			>HELP US PROTECT STATE SOVEREIGNTY ON AI REGULATION | <Link
+				href="https://mstr.app/b09fa92b-1899-43a0-9d95-99cd99c9dfb2">ACT NOW »</Link
+			></b
+		>
+	</Banner>
+	<Banner contrast={hero} id="holiday-littlehelpers" target="/littlehelpers">
+		<strong>🎄 Holiday Matching Campaign!</strong> Help fund volunteer stipends for PauseAI
+		advocates. <Link href="/littlehelpers">Join the Little Helpers campaign →</Link>
+	</Banner>
 
-<div class="layout" class:with-hero={hero}>
+	<NearbyEvent contrast={hero} bind:eventFound geo={geoForNearbyEvent} />
+
+	<CampaignBanner href="/brussels-ep-protest-2026" id="brussels-ep-protest-2026">
+		<strong>Brussels, Feb 23</strong> - Join us outside the European Parliament to call for a global treaty
+		to pause frontier AI development.
+	</CampaignBanner>
+
+	{#if hero}
+		<div class="hero-section">
+			<Hero />
+			<Header inverted />
+		</div>
+	{/if}
+</div>
+
+<div class="layout" class:hero-page={hero}>
 	{#if $page.route.id === '/sayno'}
 		<!-- Dynamic import and render the selfie UX component -->
 		{#await import('./sayno/SelfieUX.svelte') then module}
@@ -90,14 +165,13 @@
 		{/await}
 	{/if}
 
-	{#if hero}
-		<Hero />
+	{#if !hero}
+		<Header />
 	{/if}
-	<Header inverted={hero} moveUp={hero} />
 
 	<main>
 		<PageTransition url={$page.url.pathname}>
-			<slot />
+			<slot></slot>
 		</PageTransition>
 	</main>
 
@@ -121,14 +195,59 @@
 <ProgressBar color="var(--brand)" />
 
 <style>
-	/* @import url('$lib/reset.css');
-	@import url('$lib/theme.css'); */
+	/* Hide all orchestrated banners by default.
+	   Each Banner/CampaignBanner self-registers its reveal rule via <svelte:head>. */
+	:global([data-banner-id]),
+	:global([data-campaign-banner-id]) {
+		display: none !important;
+	}
 
-	/* .wrapper {
-		color: var(--t-text);
-		max-width: 50rem;
-		margin: auto;
-	} */
+	:global(:root) {
+		--gutter-max: 3rem;
+		--gutter-min: 0.5rem;
+		--page-gutter: var(--gutter-max);
+	}
+
+	/* Linearly interpolate from gutter-max (at 600px) down to gutter-min */
+	@media (max-width: 600px) {
+		:global(:root) {
+			--page-gutter: clamp(
+				var(--gutter-min),
+				calc(var(--gutter-min) + (100% - 600px + 2 * (var(--gutter-max) - var(--gutter-min))) / 2),
+				var(--gutter-max)
+			);
+		}
+	}
+
+	.page-top.hero-page {
+		display: flex;
+		flex-direction: column;
+		height: 100dvh;
+	}
+
+	.page-top.hero-page > :global(.banner),
+	.page-top.hero-page > :global(.campaign-banner) {
+		flex-shrink: 0;
+	}
+
+	.page-top.hero-page .hero-section {
+		flex: 1;
+		min-height: var(--hero-min-height);
+	}
+
+	.hero-section {
+		position: relative;
+	}
+
+	.hero-section :global(nav) {
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		width: min(var(--page-width), 100% - 2 * var(--page-gutter));
+		margin-inline: auto;
+		z-index: 1;
+	}
 
 	.layout {
 		height: 100%;
@@ -138,26 +257,11 @@
 		grid-template-rows: auto 1fr auto;
 		grid-auto-columns: 100%;
 		margin-inline: auto;
-		--padding-wide: 3rem;
-		--padding-narrow: 0.5rem;
-		padding: 0 var(--padding-wide) 0 var(--padding-wide);
+		padding: 0 var(--page-gutter);
 	}
 
-	/* Transition to narrower padding at narrow viewports (matches navbar 600px breakpoint) */
-	@media (max-width: 600px) {
-		.layout {
-			--transition-padding-from: 600px;
-			--transition-padding-until: calc(
-				var(--transition-padding-from) - 2 * (var(--padding-wide) - var(--padding-narrow))
-			);
-			--padding-left-right: clamp(
-				var(--padding-narrow),
-				calc(var(--padding-narrow) + (100vw - var(--transition-padding-until)) / 2),
-				var(--padding-wide)
-			);
-			padding-left: var(--padding-left-right);
-			padding-right: var(--padding-left-right);
-		}
+	.layout.hero-page {
+		grid-template-rows: 1fr auto;
 	}
 
 	main {

@@ -2,8 +2,10 @@ import type { AirtableNationalGroup, NationalGroup } from '$lib/types.js'
 import { json } from '@sveltejs/kit'
 import { fetchAllPages, type AirtableRecord } from '$lib/airtable.js'
 import { generateCacheControlRecord } from '$lib/utils'
+import type { RequestHandler } from './$types'
 
 const AIRTABLE_URL = 'https://api.airtable.com/v0/appWPTGqZmUcs3NWu/tblEQJ26hxBAEkaP8'
+export type NationalGroupsApiResponse = NationalGroup[]
 
 // Fallback data to use in development if Airtable fetch fails
 const FALLBACK_NATIONAL_GROUPS: AirtableRecord<AirtableNationalGroup>[] = [
@@ -85,7 +87,7 @@ function recordToNationalGroup(record: AirtableRecord<AirtableNationalGroup>): N
 	}
 }
 
-export async function GET({ fetch, setHeaders }) {
+export const GET: RequestHandler = async ({ fetch, setHeaders }) => {
 	setHeaders(generateCacheControlRecord({ public: true, maxAge: 60 * 60 }))
 
 	const records = await fetchAllPages<AirtableNationalGroup>(
@@ -102,5 +104,5 @@ export async function GET({ fetch, setHeaders }) {
 		// Sort alphabetically by name
 		.sort((a, b) => a.name.localeCompare(b.name))
 
-	return json(out)
+	return json(out satisfies NationalGroupsApiResponse)
 }

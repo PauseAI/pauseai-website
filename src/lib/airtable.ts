@@ -1,6 +1,9 @@
-import { AIRTABLE_API_KEY } from '$env/static/private'
+import { env } from '$env/dynamic/private'
 import { getDevContext, isDev } from '$lib/env'
 import Airtable, { type FieldSet, type Table } from 'airtable'
+
+const getApiKey = () => env.AIRTABLE_API_KEY
+const getWriteApiKey = () => env.AIRTABLE_WRITE_API_KEY || env.AIRTABLE_API_KEY
 
 type QueryParams = Parameters<Table<FieldSet>['select']>[0]
 
@@ -41,7 +44,8 @@ export async function fetchAllPages<T extends Record<string, unknown>>(
 	fallbackData: AirtableRecord<T>[] = [],
 	queryParams: QueryParams = undefined
 ): Promise<readonly AirtableRecord<T>[]> {
-	if (!AIRTABLE_API_KEY) {
+	const apiKey = getApiKey()
+	if (!apiKey) {
 		console.warn(`⚠️ Airtable API key not configured in ${getDevContext()}`)
 		if (isDev()) {
 			console.log('...but using fallback data in development mode.')
@@ -57,7 +61,7 @@ export async function fetchAllPages<T extends Record<string, unknown>>(
 		if (!ids) throw new Error('Invalid Airtable API URL: ' + url)
 		if (isDev()) console.log('Using Airtable SDK for:', url)
 
-		const base = new Airtable({ apiKey: AIRTABLE_API_KEY }).base(ids.baseId)
+		const base = new Airtable({ apiKey }).base(ids.baseId)
 		const table = base(ids.tableId)
 
 		const records = await table.select(queryParams).all()
@@ -71,5 +75,33 @@ export async function fetchAllPages<T extends Record<string, unknown>>(
 		}
 
 		throw error
+	}
+}
+
+/**
+ * Creates a record in Airtable
+ * @param baseId The Airtable Base ID
+ * @param tableId The Airtable Table ID
+ * @param fields The fields to create the record with
+ */
+export async function createRecord(
+	baseId: string,
+	tableId: string,
+	fields: FieldSet
+): Promise<void> {
+	const apiKey = getWriteApiKey()
+	if (!apiKey) {
+		console.warn(`⚠️ Airtable API key not configured. Skipping record creation.`)
+		return
+	}
+
+	try {
+		const base = new Airtable({ apiKey }).base(baseId)
+		const table = base(tableId)
+		await table.create([{ fields }])
+		console.log(`Successfully created record in Airtable table ${tableId}`)
+	} catch (error) {
+		console.error(`Error creating Airtable record in ${tableId}:`, error)
+		// We don't throw here to avoid failing the whole request if Airtable is down
 	}
 }

@@ -17,9 +17,9 @@
 	<div class="block-wrapper">
 		<Link {href}>
 			<div class="text">
-				<h2 class="title" class:underline={isIntersecting}><slot name="title" /></h2>
+				<h2 class="title" class:underline={isIntersecting}><slot name="title"></slot></h2>
 				<p>
-					<slot />
+					<slot></slot>
 				</p>
 				<span class="c2a">{linkText} ></span>
 			</div>

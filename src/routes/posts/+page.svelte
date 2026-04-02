@@ -1,8 +1,10 @@
 <script lang="ts">
 	// import { formatDate } from '$lib/utils'
 	import { title } from '$lib/config'
+	import Link from '$lib/components/Link.svelte'
+	import type { PageData } from './$types'
 
-	export let data
+	export let data: PageData
 	const { posts } = data
 </script>
 
@@ -14,7 +16,7 @@
 	<ul class="posts">
 		{#each posts as { slug, title, description }}
 			<li class="post">
-				<a href={slug} class="title">{title}</a>
+				<Link href={slug} class="title">{title}</Link>
 				<!-- <p class="date">{formatDate(date)}</p> -->
 				{#if description}
 					<p class="description">{description}</p>
@@ -30,7 +32,7 @@
 		gap: 1rem;
 	}
 
-	.title {
+	* :global(.title) {
 		color: var(--text);
 		font-family: var(--font-heading);
 		font-weight: bold;
@@ -39,7 +41,7 @@
 		text-transform: capitalize;
 	}
 
-	.title:hover {
+	* :global(.title:hover) {
 		text-decoration: underline;
 	}
 

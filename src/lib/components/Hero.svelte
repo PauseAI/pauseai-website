@@ -1,133 +1,170 @@
 <script lang="ts">
-	import london from '$assets/protests/london.jpeg?enhanced'
-	import denHaag from '$assets/protests/den-haag.jpeg?enhanced'
-	import sf from '$assets/protests/san-francisco.jpeg?enhanced'
+	import homeHeroDesktop from '$assets/protests/Home Hero - web - No Background.png?enhanced'
+	import homeHeroMobile from '$assets/protests/Home Hero - mobile - No Background.png?enhanced'
 	import { onMount } from 'svelte'
 	import { emulateCqwIfNeeded } from '$lib/container-query-units'
-	import * as m from '$lib/paraglide/messages.js'
+
 	import Link from '$lib/components/Link.svelte'
 
-	let currentImageIndex = 0
-	const images = [london, denHaag, sf]
-	let isMobile = false
 	let tagline: HTMLDivElement
 
-	const checkMobile = () => {
-		isMobile = window.innerWidth <= 768
-	}
-
 	onMount(() => {
-		checkMobile()
-		window.addEventListener('resize', checkMobile)
-
-		// Switch images every 5 seconds
-		const interval = setInterval(() => {
-			if (isMobile) {
-				currentImageIndex = (currentImageIndex + 1) % images.length
-			}
-		}, 5000)
-
 		const cleanupCqwEmulation = emulateCqwIfNeeded(tagline)
 
 		return () => {
-			clearInterval(interval)
-			window.removeEventListener('resize', checkMobile)
 			cleanupCqwEmulation?.()
 		}
 	})
 </script>
 
 <div class="hero">
-	{#if isMobile}
-		{#each images as image, i}
-			<enhanced:img src={image} sizes="100vw" alt="" class:active={currentImageIndex === i} />
+	<picture>
+		{#each Object.entries(homeHeroMobile.sources) as [format, srcset]}
+			<source media="(max-width: 850px)" {srcset} sizes="100vw" type={'image/' + format} />
 		{/each}
-	{:else}
-		<enhanced:img src={london} sizes="100vw" alt="" />
-		<enhanced:img src={denHaag} sizes="100vw" alt="" />
-		<enhanced:img src={sf} sizes="100vw" alt="" />
-	{/if}
-	<div class="overlay"></div>
-	<div class="tagline" bind:this={tagline}>
-		<h2>{m.home_hero()}</h2>
-	</div>
-	<div class="actions">
-		<Link href="/join">{m.header_join()}</Link>
-		<Link href="/donate">{m.header_donate()}</Link>
+		{#each Object.entries(homeHeroDesktop.sources) as [format, srcset]}
+			<source {srcset} sizes="100vw" type={'image/' + format} />
+		{/each}
+		<img src={homeHeroDesktop.img.src} alt="" />
+	</picture>
+	<div class="content" bind:this={tagline}>
+		<h2>Don't let AI companies<br />gamble away our future</h2>
+		<div class="actions">
+			<Link href="/join" class="btn-primary">Get involved</Link>
+			<Link href="/donate" class="btn-secondary">Donate</Link>
+		</div>
 	</div>
 </div>
 
 <style>
-	.tagline {
-		background-color: black;
+	.content {
 		position: absolute;
-		top: 50%;
-		left: 50%;
-		transform: translate(-50%, -50%);
-		width: clamp(20rem, 45vw, 100%);
+		top: 45%;
+		left: 20%;
+		transform: translateY(-50%);
+		width: clamp(20rem, 60vw, 100%);
 		container-type: inline-size;
 		--cqw: 1cqw;
+		display: flex;
+		flex-direction: column;
+		gap: 1.5rem;
 	}
 
-	.tagline h2 {
-		text-transform: uppercase;
+	.content h2 {
 		color: white;
-		font-size: calc(8.75 * var(--cqw));
-		text-align: center;
+		font-family: var(--font-heading);
+		font-weight: 700;
+		font-size: calc(6 * var(--cqw));
+		line-height: 1.1;
+		text-align: left;
 		margin: 0;
-		padding: calc(6.5 * var(--cqw));
+		text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+	}
+
+	.hero :global(img) {
+		position: absolute;
+		bottom: 0;
+		left: 50%;
+		--hero-scale: 1;
+		transform: translateX(-50%) scale(var(--hero-scale));
+		width: min(100%, calc(max(100vh, var(--hero-min-height)) * var(--hero-img-ar)));
+		height: auto;
+		mix-blend-mode: soft-light;
+	}
+
+	@media (min-width: 851px) {
+		.hero :global(img) {
+			transform-origin: center bottom;
+			--hero-scale: 0.95;
+			-webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+			mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+		}
 	}
 
 	@media (max-width: 850px) {
-		.tagline h2 {
-			font-size: calc(8.5 * var(--cqw));
-			padding: calc(7.5 * var(--cqw));
+		.hero :global(img) {
+			bottom: var(--mobile-hero-img-pos, 0px);
+			-webkit-mask-image: linear-gradient(to top, transparent, black 20%);
+			mask-image: linear-gradient(to top, transparent, black 20%);
+		}
+
+		.content {
+			top: auto;
+			bottom: 5vh;
+			left: 50%;
+			transform: translateX(-50%);
+			width: 90%;
+			text-align: center;
+			align-items: center;
+			z-index: 1;
+		}
+
+		.content h2 {
+			font-size: calc(9 * var(--cqw));
+			text-align: center;
+		}
+
+		.actions {
+			justify-content: center;
+		}
+
+		.actions :global(a.btn-primary),
+		.actions :global(a.btn-secondary) {
+			background-color: transparent;
+			backdrop-filter: blur(2px);
+			border: 2px solid white;
+			color: white;
 		}
 	}
 
 	.hero {
-		display: grid;
-		grid-template-columns: repeat(3, 1fr);
-		height: 100vh;
-		min-height: var(--hero-min-height);
+		display: block;
+		height: 100%;
 		overflow: hidden;
 		position: relative;
-		/* Full-bleed: use transform-based centering instead of margin calc
-		   (fixes WebKit/iOS Safari rendering issue - see #562) */
 		width: 100vw;
 		left: 50%;
 		transform: translateX(-50%);
-	}
+		background-color: #ff9416;
+		isolation: isolate;
 
-	.overlay {
-		position: absolute;
-		top: 0;
-		left: 0;
-		width: 100%;
-		height: 100%;
-		background-color: var(--brand);
-		opacity: 0.8;
+		/* Desktop hero image aspect ratio (2880 / 1600) — update if image changes */
+		--hero-img-ar: 1.8;
+		/* Adjust this to push the mobile image up or down (e.g., 0px, 10vh, -20px) */
+		--mobile-hero-img-pos: 215px;
 	}
 
 	.actions {
-		position: absolute;
-		bottom: 10%;
-		left: 50%;
-		transform: translateX(-50%);
 		display: flex;
 		gap: 1rem;
+		justify-content: flex-start;
 	}
 
+	/* Global styles for Link component when used here */
 	.actions :global(a) {
-		background-color: white;
 		font-family: var(--font-heading);
 		text-decoration: none;
-		font-size: 1.2rem;
-		color: black;
-		padding: 1rem 2rem;
+		font-size: 1rem;
+		padding: 0.6rem 1.6rem;
 		text-transform: uppercase;
 		transition: scale 0.1s;
 		cursor: pointer;
+		border-radius: 4px; /* Slight rounding if desired, or keep square */
+		font-weight: bold;
+		display: inline-block;
+		text-align: center;
+	}
+
+	.actions :global(a.btn-primary) {
+		background-color: #1a1a1a; /* Dark button */
+		color: white;
+		border: 2px solid #1a1a1a;
+	}
+
+	.actions :global(a.btn-secondary) {
+		background-color: white;
+		color: black;
+		border: 2px solid white;
 	}
 
 	.actions :global(a:hover) {
@@ -136,33 +173,5 @@
 
 	.actions :global(a:active) {
 		scale: 0.95;
-	}
-
-	.hero :global(img) {
-		/* 2x the blur */
-		width: calc(100% + 10px);
-		height: 100%;
-		object-fit: cover;
-		filter: blur(5px);
-	}
-
-	@media (max-width: 768px) {
-		.hero {
-			display: block;
-		}
-
-		.hero :global(img) {
-			position: absolute;
-			opacity: 0;
-			transition:
-				opacity 1s ease-in-out,
-				transform 10s ease-in-out;
-			transform: scale(1.1);
-		}
-
-		.hero :global(img.active) {
-			opacity: 1;
-			transform: scale(1);
-		}
 	}
 </style>

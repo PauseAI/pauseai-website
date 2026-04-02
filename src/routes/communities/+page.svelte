@@ -3,17 +3,20 @@
 	import Link from '$lib/components/Link.svelte'
 	import CommunitiesList from './CommunitiesList.svelte'
 	import type { GeoApiResponse } from '$api/geo/+server'
-	import type * as maplibregl from 'maplibre-gl'
-	import { GeolocateControl, Map, Marker, Popup } from 'maplibre-gl'
+	import type { StyleSpecification } from 'maplibre-gl'
+	import maplibregl from 'maplibre-gl'
 	import 'maplibre-gl/dist/maplibre-gl.css'
 	import { isMapboxURL, transformMapboxUrl } from 'maplibregl-mapbox-request-transformer'
 	import { onDestroy, onMount } from 'svelte'
 	import { communities, communitiesMeta } from './communities'
 	import { MAPBOX_KEY } from './constants'
 
-	export let data
+	// maplibre-gl doesn't support named imports on the server
+	const { GeolocateControl, Map, Marker, Popup } = maplibregl
 
 	const LOCATED_ZOOM = 4
+	const STYLE_URL =
+		'https://api.mapbox.com/styles/v1/mapbox/outdoors-v11?access_token=' + MAPBOX_KEY
 
 	let { title, description, date } = communitiesMeta
 
@@ -37,7 +40,7 @@
 		try {
 			const response = await fetch('/api/geo')
 			if (response.ok) {
-				const geoData: GeoApiResponse = await response.json()
+				const geoData = (await response.json()) as GeoApiResponse
 				return {
 					userLng: geoData.longitude,
 					userLat: geoData.latitude
@@ -52,18 +55,23 @@
 	}
 
 	onMount(async () => {
+		// Required, can throw
+		const style: StyleSpecification = await fetch(STYLE_URL).then((res) => res.json())
+		if (!style) return
+
+		// Optional, call with error handling
 		const { userLng, userLat } = await fetchUserLocation()
 
 		const initialState = {
-			lng: userLng || lng,
-			lat: userLat || lat,
-			zoom: userLat && userLng ? LOCATED_ZOOM : zoom
+			lng: userLng ?? lng,
+			lat: userLat ?? lat,
+			zoom: userLat != null && userLng != null ? LOCATED_ZOOM : zoom
 		}
 
 		map = new Map({
 			container: mapContainer,
 			style: {
-				...data.style,
+				...style,
 				projection: {
 					type: 'globe'
 				}
@@ -138,7 +146,7 @@
 </p>
 <div>
 	<div class="map-wrap">
-		<div class="map" bind:this={mapContainer} />
+		<div class="map" bind:this={mapContainer}></div>
 	</div>
 </div>
 <CommunitiesList {communities} />

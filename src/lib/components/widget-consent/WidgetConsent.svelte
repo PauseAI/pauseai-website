@@ -18,7 +18,7 @@
 
 {#if $consent}
 	<div bind:this={wrapper}>
-		<slot />
+		<slot></slot>
 	</div>
 {:else}
 	<div class="widget-consent">

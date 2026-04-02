@@ -1,6 +1,7 @@
 <script lang="ts">
 	import NumberFlow from '@number-flow/svelte'
 	import SvelteIntersectionObserver from '$lib/components/SvelteIntersectionObserver.svelte'
+	import Link from '$lib/components/Link.svelte'
 
 	export let percentage: number
 	export let text: string
@@ -10,22 +11,28 @@
 </script>
 
 <SvelteIntersectionObserver bind:isIntersecting defaultToIntersecting disconnectOnIntersect>
-	<div class="stat-block">
+	<Link href={link} class="stat-block-link">
 		<div class="percentage">
-			<a href={link} class="number">
-				<NumberFlow value={isIntersecting ? percentage : 20} suffix="%" />
-				<!-- start with two digits and wide first digit to avoid horizontal movement -->
-			</a>
+			<NumberFlow value={isIntersecting ? percentage : 20} suffix="%" />
+			<!-- start with two digits and wide first digit to avoid horizontal movement -->
 		</div>
 		<p class="text">{text}</p>
-	</div>
+	</Link>
 </SvelteIntersectionObserver>
 
 <style>
-	.stat-block {
+	:global(.stat-block-link) {
 		display: flex;
 		align-items: center;
 		gap: 1rem;
+		text-decoration: none;
+		color: inherit;
+		opacity: 0.9;
+		transition: opacity 0.2s ease;
+	}
+
+	:global(.stat-block-link:hover) {
+		opacity: 1;
 	}
 
 	.percentage {
@@ -38,28 +45,8 @@
 		line-height: 1em;
 	}
 
-	a {
-		color: var(--brand);
-		text-decoration: none;
-	}
-
-	a.number {
-		position: relative;
-	}
-
-	a.number:hover::after {
-		content: '';
-		position: absolute;
-		left: 0;
-		bottom: 0.8rem;
-		width: 100%;
-		height: 3px;
-		background-color: currentColor;
-	}
-
 	.text {
 		line-height: 1.4;
 		margin: 0;
-		opacity: 0.9;
 	}
 </style>

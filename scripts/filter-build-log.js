@@ -12,6 +12,10 @@
 import { spawn } from 'child_process'
 import readline from 'readline'
 
+// eslint-disable-next-line no-control-regex
+const ANSI_ESCAPE_PATTERN = /\u001b\[[0-9;]*m/g
+const CHUNK_PATTERN = /\.svelte-kit\/output\/(client|server)\/.*\s+([\d,]+\.\d+)\s+kB/
+
 // Check if --verbose is anywhere in the command line
 const hasVerbose = process.argv.includes('--verbose')
 
@@ -34,9 +38,6 @@ if (hasVerbose) {
 	let clientSize = 0
 	let serverSize = 0
 
-	// Chunk pattern - match svelte-kit output chunks with size info
-	const chunkPattern = /\.svelte-kit\/output\/(client|server)\/.*\s+(\d+\.\d+)\s+kB/
-
 	// Start the build process
 	const build = spawn(program, args, { shell: true, stdio: ['inherit', 'pipe', 'inherit'] })
 
@@ -48,12 +49,14 @@ if (hasVerbose) {
 
 	// Process each line
 	rl.on('line', (line) => {
+		const cleanLine = line.replace(ANSI_ESCAPE_PATTERN, '')
+
 		// Check if this is a chunk line
-		const chunkMatch = chunkPattern.exec(line)
+		const chunkMatch = CHUNK_PATTERN.exec(cleanLine)
 		if (chunkMatch) {
 			// This is a chunk line - extract information but don't print it
 			const [_, type, sizeStr] = chunkMatch
-			const size = parseFloat(sizeStr)
+			const size = parseFloat(sizeStr.replace(/,/g, ''))
 
 			// Classify chunks solely based on their paths
 			if (type === 'client') {

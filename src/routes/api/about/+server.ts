@@ -1,11 +1,12 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 export const prerender = false
 
-import { fetchAllPages } from '$lib/airtable'
+import { fetchAllPages, type AirtableRecord } from '$lib/airtable'
 import { defaultTitle } from '$lib/config'
-import type { Person } from '$lib/types'
+import type { AirtablePerson, Person } from '$lib/types'
 import { generateCacheControlRecord } from '$lib/utils'
 import { json } from '@sveltejs/kit'
+import type { RequestHandler } from './$types'
 
 // Export the response type for use in other endpoints
 export type AboutApiResponse = Record<string, Person[]>
@@ -13,7 +14,7 @@ export type AboutApiResponse = Record<string, Person[]>
 /**
  * Fallback people data to use in development if Airtable fetch fails
  */
-const fallbackPeople: Person[] = [
+const fallbackPeople = [
 	{
 		id: 'fallback-stub1',
 		name: '[FALLBACK DATA] Example Person',
@@ -34,15 +35,15 @@ const fallbackPeople: Person[] = [
 		checked: true,
 		order: 2
 	}
-]
+] satisfies Person[]
 
-function recordToPerson(record: any): Person {
+function recordToPerson(record: AirtableRecord<AirtablePerson>): Person {
 	return {
 		id: record.id || 'noId',
 		name: record.fields['Full name'],
 		bio: record.fields.Bio2,
 		title: record.fields.Title || defaultTitle,
-		image: (record.fields.Photo && record.fields.Photo[0].thumbnails.large.url) || undefined,
+		image: (record.fields.Photo && record.fields.Photo[0].thumbnails?.large?.url) || undefined,
 		privacy: record.fields.Privacy,
 		checked: record.fields.About,
 		duplicate: record.fields.duplicate,
@@ -61,20 +62,20 @@ const getGroupKey = (order: number | undefined): string => {
 	const personOrder = order || 999
 
 	if (personOrder <= 9) return 'Global Board'
-	if (personOrder >= 10 && personOrder <= 29) return 'Leadership Team'
-	if (personOrder >= 30) return 'National Chapters'
+	if (personOrder >= 10 && personOrder <= 29) return 'Executive Team'
+	if (personOrder >= 30) return 'National Leaders'
 
 	// Fallback for missing/unassigned order (999 default)
-	return 'National Chapter Leads'
+	return 'National Leaders'
 }
 
-export async function GET({ fetch, setHeaders }) {
+export const GET: RequestHandler = async ({ fetch, setHeaders }) => {
 	const url = `https://api.airtable.com/v0/appWPTGqZmUcs3NWu/tblL1icZBhTV1gQ9o`
 	setHeaders(generateCacheControlRecord({ public: true, maxAge: 60 * 60 }))
 
 	try {
 		// Create fallback records in the expected Airtable format
-		const fallbackRecords = fallbackPeople.map((person) => ({
+		const fallbackRecords: AirtableRecord<AirtablePerson>[] = fallbackPeople.map((person) => ({
 			id: person.id,
 			fields: {
 				'Full name': person.name,

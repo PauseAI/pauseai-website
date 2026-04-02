@@ -1,5 +1,5 @@
 ---
-title: Risks of artificial intelligence
+title: Risks of Artificial Intelligence
 description: AI threatens our democracy, our technology, and our species.
 ---
 
@@ -88,11 +88,11 @@ But having conversations with today’s increasingly capable AIs poses unexpecte
 Companies instruct their AI chatbots to agree with their users, encourage their ideas, and keep the conversation going.
 This can backfire horribly for users in mental health distress by causing people to develop “[AI psychosis](https://www.psychologytoday.com/us/blog/urban-survival/202507/the-emerging-problem-of-ai-psychosis)”.
 In these cases, AIs mirror the user’s delusional thinking, paranoia, or despair back to them. In extreme situations, this has caused the person talking with the AI to [commit suicide](https://www.npr.org/sections/shots-health-news/2025/09/19/nx-s1-5545749/ai-chatbots-safety-openai-meta-characterai-teens-suicide).
-More than a million users of ChatGPT are have signs of mental health distress.
+More than a million users of ChatGPT have signs of mental health distress.
 
 Another risk area is AIs being used for intimate and explicit conversations. AI chatbots offering users a romantic relationship have seen huge growth over the last year, with more than 3 billion search results for ‘AI girlfriend’ on Google.
 These AI relationship apps are [shown to be addictive](https://onlinelibrary.wiley.com/doi/10.1002/mar.21899), especially to “lonely vulnerable people”.
-The companies controlling these apps make more money by designing their AIs as to be addictive as possible, and can gain a tremendous amount of power by shaping the behavior and opinions of chatbots express to [manipulate their users](https://arxiv.org/abs/2508.19258) through romantic connection.
+The companies controlling these apps make more money by designing their AIs to be as addictive as possible, and can gain a tremendous amount of power by shaping the behavior and opinions chatbots express to [manipulate their users](https://arxiv.org/abs/2508.19258) through romantic connection.
 
 We need time to better understand AIs to build in proper safeguards to protect our mental health, especially for vulnerable users.
 Pausing the development of powerful AI systems would give us time to research how AI conversations can be made safer when talking about difficult or sensitive subjects.
@@ -189,27 +189,12 @@ We'd be introducing a new species to the planet that could outsmart us and outco
 ### Human disempowerment
 
 Even if we manage to create only AI systems that we can control individually, we could lose our power to make important decisions incrementally each time one becomes incorporated to institutions or everyday life.
-Those process would end up having more input from AI systems than from humans, and, if we cannot coordinate quickly enough, or we lack crucial knowledge about the functioning of the systems, we could end up without control over our future.
+Those processes would end up having more input from AI systems than from humans, and, if we cannot coordinate quickly enough, or we lack crucial knowledge about the functioning of the systems, we could end up without control over our future.
 
 It would be a civilization in which each system is optimizing for different objectives, there is not a clear direction for where everything is heading, and there is no way of changing it.
 The technical knowledge required to modify these systems could be lacking in the first place or lost over time, as we become more and more dependent on technology, and the technology becomes more complex.
 
 The systems may achieve their goals, but those goals might not entirely encapsulate the values they were expected to. This problem is, to a certain extent, already happening today, but AIs could significantly amplify it.
-
-### Digital sentience
-
-As AI continues to advance, future systems may become incredibly sophisticated, replicating neural structures and functions that are more akin to the human brain.
-This increased complexity might lead to emergent properties like AI subjectivity and/or consciousness, which would make them deserving of moral considerations.
-
-The problem is that, given our present lack of knowledge about consciousness and the nature of neural networks, we won't have a way to determine whether some AIs would have any type of experience and what the quality of those experiences would depend on.
-If the AIs continue to be produced with only their capabilities in mind, through a process we don't fully understand, people will keep using them as tools ignoring what their desires could be, and that they could be actually enslaving "digital people".
-
-### Suffering risks
-
-It's not only that value lock-in could make us fail to achieve the best kind of worlds, but it could cause us to end up in dystopias worse than extinction that could extend through all spacetime.
-
-Possible locked-in dystopias with lots of suffering are called _S-risks_ and include worlds in which sentient beings are enslaved and forced to do horrible things.
-Those beings could be humans, animals, digital people or any other alien species that the AI could find in the cosmos. Given how difficult we think solving alignment completely is, how bad we humans treat each other sometimes, how bad we treat most animals, and how we treat present AIs, a future like this doesn't seem as unlikely as we'd hope.
 
 ## What can we do?
 

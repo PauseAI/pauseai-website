@@ -1,5 +1,5 @@
 ---
-title: PauseAI protest @ FCDO, London, July 18th
+title: PauseAI Protest @ FCDO, London, July 18th
 ---
 
 <script>
