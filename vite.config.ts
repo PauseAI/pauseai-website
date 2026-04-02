@@ -88,7 +88,8 @@ export default defineConfig(() => {
 						sourcemaps: {
 							filesToDeleteAfterUpload: ['./build/**/*.map']
 						},
-						telemetry: false
+						telemetry: false,
+						silent: true
 					})
 				: null
 		].filter(Boolean)
