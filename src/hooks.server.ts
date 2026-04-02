@@ -28,7 +28,8 @@ export const init = async () => {
 			Sentry.init({
 				dsn: env.PUBLIC_SENTRY_DSN,
 				release: import.meta.env.SENTRY_RELEASE as string | undefined,
-				tracesSampleRate: 0
+				tracesSampleRate: 0,
+				enableLogs: true
 			})
 		} catch (e) {
 			console.error('Failed to initialize Sentry:', e)
