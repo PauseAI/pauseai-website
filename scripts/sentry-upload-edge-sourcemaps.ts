@@ -33,11 +33,31 @@ try {
 
 console.log('📤 Injecting Debug IDs and uploading edge function source maps to Sentry...')
 try {
-	execSync(`npx @sentry/cli sourcemaps inject ${edgeFunctionsDir}`, { stdio: 'inherit' })
-	execSync(
-		`npx @sentry/cli sourcemaps upload --org ${process.env.SENTRY_ORG} --project ${process.env.SENTRY_PROJECT} --release ${release} ${edgeFunctionsDir}`,
-		{ stdio: 'inherit' }
+	const injectRes = execSync(`npx @sentry/cli sourcemaps inject ${edgeFunctionsDir}`)
+		.toString()
+		.trim()
+		.split('\n')
+	if (injectRes.length > 10) {
+		console.log(
+			injectRes.slice(0, 5).join('\n') + '\n... truncated ...\n' + injectRes.slice(-5).join('\n')
+		)
+	} else {
+		console.log(injectRes.join('\n'))
+	}
+
+	const uploadRes = execSync(
+		`npx @sentry/cli sourcemaps upload --org ${process.env.SENTRY_ORG} --project ${process.env.SENTRY_PROJECT} --release ${release} ${edgeFunctionsDir}`
 	)
+		.toString()
+		.trim()
+		.split('\n')
+	if (uploadRes.length > 10) {
+		console.log(
+			uploadRes.slice(0, 5).join('\n') + '\n... truncated ...\n' + uploadRes.slice(-5).join('\n')
+		)
+	} else {
+		console.log(uploadRes.join('\n'))
+	}
 	console.log('✅ Edge function source maps uploaded')
 } catch (e) {
 	console.error('⚠️  Failed to upload edge source maps (non-fatal):', e)
