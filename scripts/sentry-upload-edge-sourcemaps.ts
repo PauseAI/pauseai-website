@@ -34,7 +34,7 @@ try {
 console.log('📤 Uploading edge function source maps to Sentry...')
 try {
 	execSync(
-		`npx sentry-cli sourcemaps upload --org ${process.env.SENTRY_ORG} --project ${process.env.SENTRY_PROJECT} --release ${release} ${edgeFunctionsDir}`,
+		`npx @sentry/cli sourcemaps upload --org ${process.env.SENTRY_ORG} --project ${process.env.SENTRY_PROJECT} --release ${release} ${edgeFunctionsDir}`,
 		{ stdio: 'inherit' }
 	)
 	console.log('✅ Edge function source maps uploaded')
