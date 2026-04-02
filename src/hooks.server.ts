@@ -47,7 +47,7 @@ const handle: Handle = ({ event, resolve }) =>
 
 export { handle }
 
-export const handleError: HandleServerError = async ({ error, event, status, message }) => {
+export const handleError: HandleServerError = ({ error, event, status, message }) => {
 	if (Sentry) {
 		Sentry.captureException(error, {
 			extra: {
@@ -57,7 +57,10 @@ export const handleError: HandleServerError = async ({ error, event, status, mes
 				method: event.request?.method
 			}
 		})
-		await Sentry.flush(2000)
+		const context = event.platform?.context as { waitUntil?: (p: Promise<unknown>) => void }
+		if (context?.waitUntil) {
+			context.waitUntil(Sentry.flush(2000))
+		}
 	}
 	return { message: 'An unexpected error occurred.' }
 }
