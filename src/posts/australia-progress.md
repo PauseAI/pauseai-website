@@ -1,5 +1,5 @@
 ---
-title: PauseAI Australia Wins
+title: PauseAI Australia Progress
 slug: australia-progress
 description: What the Australian chapter of PauseAI has been doing and needs help with
 ---
@@ -8,7 +8,7 @@ description: What the Australian chapter of PauseAI has been doing and needs hel
 
 - Join our meetup where we kickoff our next campaign! We also need ideas on how to use social media better.
 - Help out with [evergreen tasks](/australia)
-- Tell us [what you did](mailto:australia@pauseai.info?subject=Aussie%20Win) so we can add it, or [what you have cooking](mailto:australia@pauseai.info?subject=Things%20Cooking) so we can support you!
+- Tell us [what you did](mailto:australia@pauseai.info?subject=Aussie%20Did%20a%20Thing) so we can add it, or [what you have cooking](mailto:australia@pauseai.info?subject=Things%20Cooking) so we can support you!
 
 ### 2026 March
 
