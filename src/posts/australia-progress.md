@@ -63,7 +63,7 @@ description: What the Australian chapter of PauseAI has been doing and needs hel
 
 </div>
 
-- ✅Publicly asked Andrew Leigh (Assistant Minister, MP) at his book event whether AI researcher predictions of existential risk mean Australia should sign onto red lines for AI development, he said yes!
+- ✅Publicly asked Andrew Leigh (Assistant Minister, MP) at his book event whether AI researcher predictions of existential risk mean we should have red lines for AI development, [he said yes](https://podcasts.apple.com/au/podcast/discussing-the-shortest-history-of-innovation-with/id773694947)! (43m 40s - 46m 20s) 
 - Reached out to politicians: Fiona Carrick MLA, Thomas Emerson MLA, Jessie Price MP candidate about AI existential risk.
 - Reached out to organisations: ACT Conservation Council and ACT Greens about their datacentre policies.
 - Asked Minister Orr about the ACT Government's datacentre policy at the ACT Conservation Council townhall.
