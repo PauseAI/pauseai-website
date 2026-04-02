@@ -75,7 +75,7 @@
 					{/if}
 					<div class="card-footer">
 						<span class="card-date">{formatDate(item.date)}</span>
-						<span class="read-more">Read the release &rarr;</span>
+						<span class="read-more">Read the article &rarr;</span>
 					</div>
 				</LinkWithoutIcon>
 			{/each}
@@ -133,12 +133,12 @@
 	.coverage-cards {
 		display: flex;
 		flex-direction: column;
-		gap: 1.5rem;
+		gap: 0.75rem;
 	}
 
 	/* Make the LinkWithoutIcon display as a flexible block card */
 	:global(.coverage-card) {
-		background: var(--bg-card, var(--bg));
+		background: color-mix(in srgb, var(--text) 3%, var(--bg));
 		border: 1px solid var(--border);
 		border-radius: 8px;
 		padding: 1.5rem;
