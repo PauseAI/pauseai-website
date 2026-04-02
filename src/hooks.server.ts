@@ -48,6 +48,7 @@ const handle: Handle = ({ event, resolve }) =>
 export { handle }
 
 export const handleError: HandleServerError = ({ error, event, status, message }) => {
+	console.error(error)
 	if (Sentry) {
 		Sentry.captureException(error, {
 			extra: {
