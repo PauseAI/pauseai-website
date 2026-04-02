@@ -5,7 +5,17 @@ import fs from 'fs'
 import path from 'path'
 import { defineConfig } from 'vite'
 import lucidePreprocess from 'vite-plugin-lucide-preprocess'
+import { execSync } from 'child_process'
+import { sentryVitePlugin } from '@sentry/vite-plugin'
 import { isDev } from './src/lib/env'
+
+function getSentryRelease(): string | undefined {
+	try {
+		return process.env.COMMIT_REF || execSync('git rev-parse HEAD').toString().trim()
+	} catch {
+		return undefined
+	}
+}
 import { MARKDOWN_L10NS } from './src/lib/l10n'
 import { locales as compiledLocales } from './src/lib/paraglide/runtime.js'
 
@@ -33,7 +43,8 @@ export default defineConfig(() => {
 	return {
 		define: {
 			// Make PARAGLIDE_LOCALES accessible to browser code via import.meta.env
-			'import.meta.env.PARAGLIDE_LOCALES': JSON.stringify(process.env.PARAGLIDE_LOCALES)
+			'import.meta.env.PARAGLIDE_LOCALES': JSON.stringify(process.env.PARAGLIDE_LOCALES),
+			'import.meta.env.SENTRY_RELEASE': JSON.stringify(getSentryRelease())
 		},
 
 		server: {
@@ -61,6 +72,25 @@ export default defineConfig(() => {
 				external: getLocaleExcludePatterns()
 			}
 		} as const,
-		plugins: [lucidePreprocess(), enhancedImages(), sveltekit()]
+		plugins: [
+			lucidePreprocess(),
+			enhancedImages(),
+			sveltekit(),
+			!isDev() &&
+			process.env.SENTRY_AUTH_TOKEN &&
+			process.env.SENTRY_ORG &&
+			process.env.SENTRY_PROJECT
+				? sentryVitePlugin({
+						org: process.env.SENTRY_ORG,
+						project: process.env.SENTRY_PROJECT,
+						authToken: process.env.SENTRY_AUTH_TOKEN,
+						release: { name: getSentryRelease() },
+						sourcemaps: {
+							filesToDeleteAfterUpload: ['./build/**/*.map']
+						},
+						telemetry: false
+					})
+				: null
+		].filter(Boolean)
 	}
 })
