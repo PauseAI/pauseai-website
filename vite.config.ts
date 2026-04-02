@@ -1,13 +1,15 @@
 import { enhancedImages } from '@sveltejs/enhanced-img'
 import { sveltekit } from '@sveltejs/kit/vite'
+import { execSync } from 'child_process'
 import dotenv from 'dotenv'
 import fs from 'fs'
 import path from 'path'
 import { defineConfig } from 'vite'
 import lucidePreprocess from 'vite-plugin-lucide-preprocess'
-import { execSync } from 'child_process'
 import { sentryVitePlugin } from '@sentry/vite-plugin'
 import { isDev } from './src/lib/env'
+import { MARKDOWN_L10NS } from './src/lib/l10n'
+import { locales as compiledLocales } from './src/lib/paraglide/runtime.js'
 
 function getSentryRelease(): string | undefined {
 	try {
@@ -16,8 +18,6 @@ function getSentryRelease(): string | undefined {
 		return undefined
 	}
 }
-import { MARKDOWN_L10NS } from './src/lib/l10n'
-import { locales as compiledLocales } from './src/lib/paraglide/runtime.js'
 
 function getLocaleExcludePatterns(): RegExp[] {
 	const md = path.resolve(MARKDOWN_L10NS)
