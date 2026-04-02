@@ -646,6 +646,25 @@
 			"lon": -90.3712,
 			"link": "mailto:hartwagle@gmail.com",
 			"parent_name": "United States"
+		},
+		{
+			"name": "Dhaka",
+			"lat": 23.8103,
+			"lon": 90.4125,
+			"link": "$$DISCORD_GLOBAL$$"
+		},
+		{
+			"name": "Stuttgart-Tübingen",
+			"lat": 48.6487,
+			"lon": 9.1202,
+			"link": "$$DISCORD_GLOBAL$$",
+			"parent_name": "Germany"
+		},
+		{
+			"name": "Potchefstroom",
+			"lat": -26.7167,
+			"lon": 27.1,
+			"link": "$$DISCORD_GLOBAL$$"
 		}
 	]
 }

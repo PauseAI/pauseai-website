@@ -1,15 +1,19 @@
-import { error, json } from '@sveltejs/kit'
+import { json } from '@sveltejs/kit'
 import { env } from '$env/dynamic/private'
+import { asError } from '$lib/utils'
 import type { RequestHandler } from './$types'
-const openaiKey = env.OPENAI_KEY
 
-export type ChatResponse = {
-	response: string
-}
+const openaiKey = env.OPENAI_KEY
 
 export type Message = {
 	role: 'user' | 'assistant' | 'system'
 	content: string
+}
+
+export type ChatRequest = Message[]
+
+export type ChatResponse = {
+	response: string
 }
 
 export type Personality = {
@@ -37,8 +41,22 @@ function getInstruction(name: names) {
 	return `${sharedContext} ${personality.instruction}. Your name is ${name}`
 }
 
+type OpenAiSuccessResponse = {
+	choices: Array<{
+		message?: {
+			content?: string | null
+		}
+	}>
+}
+
+type OpenAiErrorResponse = {
+	error?: {
+		message?: string
+	}
+}
+
 export const POST: RequestHandler = async ({ fetch, request }) => {
-	const messages = await request.json()
+	const messages = (await request.json()) as ChatRequest
 
 	const apiUrl = 'https://api.openai.com/v1/chat/completions'
 	if (!openaiKey) throw new Error('OPENAI_KEY env not found')
@@ -63,12 +81,16 @@ export const POST: RequestHandler = async ({ fetch, request }) => {
 		})
 	})
 
-	const data = await response.json()
-	if (data.error) {
+	const data = (await response.json()) as OpenAiSuccessResponse | OpenAiErrorResponse
+	if ('error' in data && data.error) {
 		console.error(data.error)
-		return error(data.error.message)
+		throw asError(502, data.error.message)
 	}
-	const text = data.choices[0].message.content
 
-	return json({ response: text } as ChatResponse)
+	const text = 'choices' in data && data.choices[0]?.message?.content
+	if (!text) {
+		throw asError(502, 'Invalid upstream response')
+	}
+
+	return json({ response: text } satisfies ChatResponse)
 }

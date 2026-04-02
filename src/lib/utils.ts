@@ -1,4 +1,5 @@
 import Headers, { CacheControl, type CacheControlInit } from '@remix-run/headers'
+import { error as svelteKitError, redirect } from '@sveltejs/kit'
 
 export type DeepPartial<T> = T extends object
 	? {
@@ -24,4 +25,12 @@ export function generateCacheControlRecord(options: CacheControlInit): Record<st
 
 export function headersToRecord(headers: Headers): Record<string, string> {
 	return Object.fromEntries(headers.entries())
+}
+
+export function asError(...params: Parameters<typeof svelteKitError>): Error {
+	return svelteKitError(...params) as Error
+}
+
+export function redirectAsError(...params: Parameters<typeof redirect>): Error {
+	return redirect(...params) as Error
 }

@@ -1,6 +1,6 @@
-import { error } from '@sveltejs/kit'
 import { getLocale } from '$lib/paraglide/runtime'
 import type { PageLoad } from './$types'
+import { asError } from '$lib/utils'
 
 export const load: PageLoad = async ({ params: { slug }, depends }) => {
 	depends('paraglide:lang')
@@ -14,7 +14,7 @@ export const load: PageLoad = async ({ params: { slug }, depends }) => {
 			slug
 		}
 	} catch {
-		throw error(404, `Could not find ${slug}`)
+		throw asError(404, `Could not find ${slug}`)
 	}
 }
 
