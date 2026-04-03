@@ -1,9 +1,9 @@
 ---
-name: eslint-processor
+name: eslint-log-capture
 description: How to run ESLint and capture its output in a format that's easy for the AI agent to read and process, especially on Windows.
 ---
 
-# ESLint Processor Skill
+# ESLint Log Capture Skill
 
 When dealing with a large number of ESLint warnings or errors, direct terminal output can be truncated, messy, or encoded in a way that's difficult to process. This skill provides a reliable method to capture ESLint output to a file and read it using native tools.
 
