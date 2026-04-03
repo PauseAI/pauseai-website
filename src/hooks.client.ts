@@ -2,9 +2,10 @@ import * as Sentry from '@sentry/svelte'
 import type { HandleClientError } from '@sveltejs/kit'
 import { env } from '$env/dynamic/public'
 
-const dsn = env.PUBLIC_SENTRY_DSN
+let dsn: string | undefined
 
 export const init = () => {
+	dsn = env.PUBLIC_SENTRY_DSN
 	const release = import.meta.env.SENTRY_RELEASE as string | undefined
 
 	console.log(`[Sentry Client] dsn: ${dsn}, release: ${release}`)
