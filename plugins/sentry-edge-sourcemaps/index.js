@@ -15,6 +15,7 @@ export const onPostBuild = ({ constants }) => {
 		return
 	}
 
+	// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
 	const edgeDir = constants.EDGE_FUNCTIONS_DIST
 	if (!edgeDir || !existsSync(edgeDir)) {
 		console.log('⏭️  Skipping Sentry edge sourcemap upload — no edge functions directory')

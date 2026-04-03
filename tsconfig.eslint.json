@@ -7,6 +7,7 @@
 		"knip.config.ts",
 		"svelte.config.js",
 		"eslint/**/*.js",
+		"plugins/**/*.js",
 		"scripts/**/*.js",
 		"scripts/**/*.cjs",
 		"scripts/**/*.ts",
