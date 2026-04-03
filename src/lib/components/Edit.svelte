@@ -12,7 +12,7 @@
 	const svelteFiles = import.meta.glob('/src/routes/**/+page.svelte')
 
 	$: pathname = $page.url.pathname
-	const currentLocale = getLocale()
+	const currentLocale: string = getLocale() // broaden to avoid "never"
 	const isTranslatedPage = currentLocale != 'en'
 
 	let editUrl: string | null = null
