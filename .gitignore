@@ -28,3 +28,6 @@ deno.lock
 /static/open-letter/portraits/original
 CLAUDE.md
 .claude/
+
+# Sentry Config File
+.env.sentry-build-plugin
