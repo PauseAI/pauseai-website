@@ -1,4 +1,4 @@
-import { KnipConfig } from 'knip'
+import type { KnipConfig } from 'knip'
 
 const config: KnipConfig = {
 	include: ['dependencies']
