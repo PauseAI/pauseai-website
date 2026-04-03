@@ -22,18 +22,27 @@ import { paraglideMiddleware } from '$lib/paraglide/server.js'
 let Sentry: typeof import('@sentry/deno') | undefined
 
 export const init = async () => {
-	if (env.PUBLIC_SENTRY_DSN && typeof Deno !== 'undefined') {
+	const dsn = env.PUBLIC_SENTRY_DSN
+	const release = import.meta.env.SENTRY_RELEASE as string | undefined
+	const isDeno = typeof Deno !== 'undefined'
+
+	console.log(`[Sentry Server] dsn: ${dsn}, release: ${release}, isDeno: ${isDeno}`)
+
+	if (dsn && isDeno) {
 		try {
 			Sentry = await import('@sentry/deno')
 			Sentry.init({
-				dsn: env.PUBLIC_SENTRY_DSN,
-				release: import.meta.env.SENTRY_RELEASE as string | undefined,
+				dsn,
+				release,
 				tracesSampleRate: 0,
 				enableLogs: true
 			})
+			console.log('[Sentry Server] Initialized successfully')
 		} catch (e) {
-			console.error('Failed to initialize Sentry:', e)
+			console.error('[Sentry Server] Failed to initialize:', e)
 		}
+	} else {
+		console.log('[Sentry Server] Skipping initialization (missing DSN or not Deno environment)')
 	}
 }
 
