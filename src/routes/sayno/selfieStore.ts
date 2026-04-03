@@ -1,6 +1,7 @@
 import { writable, get } from 'svelte/store'
 import { dev } from '$app/environment'
 import toast from 'svelte-french-toast'
+import type { CloudinaryUploadResponse } from '$lib/cloudinary'
 
 // Cloudinary configuration - centralized
 export const cloudinaryConfig = {
@@ -240,8 +241,7 @@ export async function captureFromCamera() {
 		)
 
 		if (!response.ok) throw new Error('Upload failed')
-
-		const result = await response.json()
+		const result = (await response.json()) as CloudinaryUploadResponse
 
 		// Success - update state
 		currentState.set('options')

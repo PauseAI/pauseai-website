@@ -1,6 +1,16 @@
 import { json } from '@sveltejs/kit'
 import type { RequestHandler } from './$types'
-import { hasCloudinaryCredentials, credentialsError, callCloudinaryAPI } from '$lib/cloudinary'
+import {
+	hasCloudinaryCredentials,
+	credentialsError,
+	callCloudinaryAPI,
+	type CloudinarySimpleResponse
+} from '$lib/cloudinary'
+
+type AddEmailRequest = {
+	public_id: string
+	email: string
+}
 
 type SelfieAddEmailApiSuccessResponse = {
 	success: true
@@ -20,7 +30,7 @@ export const POST: RequestHandler = async ({ request }) => {
 	if (!hasCloudinaryCredentials()) return credentialsError()
 
 	try {
-		const { public_id, email } = await request.json()
+		const { public_id, email } = (await request.json()) as AddEmailRequest
 
 		if (!public_id || !email) {
 			return json(
@@ -40,7 +50,7 @@ export const POST: RequestHandler = async ({ request }) => {
 
 		// Add context (requires 'add' command)
 		// Note: public_ids parameter (plural) for the context endpoint
-		await callCloudinaryAPI('image/context', {
+		await callCloudinaryAPI<CloudinarySimpleResponse>('image/context', {
 			command: 'add',
 			public_ids: [public_id],
 			context: `email=${email}`
@@ -48,7 +58,7 @@ export const POST: RequestHandler = async ({ request }) => {
 
 		// Add tag separately
 		// Note: public_ids parameter (plural) for the tags endpoint
-		await callCloudinaryAPI('image/tags', {
+		await callCloudinaryAPI<CloudinarySimpleResponse>('image/tags', {
 			command: 'add',
 			public_ids: [public_id],
 			tag: 'has_email'
