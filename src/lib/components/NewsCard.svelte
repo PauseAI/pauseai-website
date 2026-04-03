@@ -8,14 +8,17 @@
 	let isExternal: boolean
 
 	export let item: NewsItem
+	/** Optional anchor id (e.g. for hash links from elsewhere) */
+	export let id: string | undefined = undefined
 
-	$: isExternal = item.source === 'substack'
+	$: isExternal = item.source === 'substack' || item.source === 'press'
 </script>
 
 <div>
 	<LinkWithoutIcon
 		href={item.href}
 		class="news-card"
+		{id}
 		target={isExternal ? '_blank' : undefined}
 		rel={isExternal ? 'noopener noreferrer' : undefined}
 	>

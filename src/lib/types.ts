@@ -30,7 +30,7 @@ export type NewsItem = {
 	image?: string
 	/** URL to the article (internal path or external URL) */
 	href: string
-	source: 'internal' | 'substack'
+	source: 'internal' | 'substack' | 'press'
 }
 
 export type Signatory = {

@@ -11,6 +11,8 @@ export interface PressCoverage {
 	date: string
 	outlet: string
 	notes: string
+	/** First file URL or image URL from Notion property `Image` */
+	image?: string
 }
 
 type NotionPropertyValue = PageObjectResponse['properties'][string]
@@ -35,6 +37,17 @@ function getDateFromProps(propName: string, props: PageObjectResponse['propertie
 	if (namedProp) return getString(namedProp)
 	const dateProp = Object.values(props).find((p) => p.type === 'date')
 	return getString(dateProp)
+}
+
+function getImageFromProps(prop: NotionPropertyValue | undefined): string {
+	if (!prop) return ''
+	if (prop.type === 'url') return prop.url ?? ''
+	if (prop.type === 'files' && prop.files?.length) {
+		const first = prop.files[0]
+		if (first && 'file' in first && first.file?.url) return first.file.url
+		if (first && 'external' in first && first.external?.url) return first.external.url
+	}
+	return ''
 }
 
 export async function fetchPressCoverage(): Promise<{
@@ -79,6 +92,7 @@ export async function fetchPressCoverage(): Promise<{
 
 	const coverage = (response.results as PageObjectResponse[]).map((page) => {
 		const props = page.properties
+		const imageUrl = getImageFromProps(props['Image'])
 		return {
 			id: page.id,
 			title: getString(props['Name']) || getString(props['Title']) || getTitleFromProps(props),
@@ -89,7 +103,8 @@ export async function fetchPressCoverage(): Promise<{
 				getString(props['Notes']) ||
 				getString(props['Description']) ||
 				getString(props['Abstract']) ||
-				''
+				'',
+			...(imageUrl ? { image: imageUrl } : {})
 		}
 	})
 
