@@ -34,6 +34,9 @@
 			{/if}
 		</div>
 		<div class="card-content">
+			{#if item.source === 'press' && item.outlet}
+				<p class="card-outlet">{item.outlet}</p>
+			{/if}
 			<h3 class="card-title toc-exclude">{item.title}</h3>
 			{#if item.subtitle}
 				<p class="card-subtitle">{item.subtitle}</p>
@@ -106,6 +109,16 @@
 		text-transform: none;
 	}
 
+	.card-outlet {
+		font-size: 0.8rem;
+		font-weight: 600;
+		letter-spacing: 0.02em;
+		text-transform: uppercase;
+		margin: 0;
+		color: var(--text);
+		opacity: 0.7;
+	}
+
 	.card-subtitle {
 		font-size: 0.85rem;
 		font-weight: 300;
@@ -115,6 +128,7 @@
 		opacity: 0.8;
 		display: -webkit-box;
 		-webkit-line-clamp: 2;
+		line-clamp: 2;
 		-webkit-box-orient: vertical;
 		overflow: hidden;
 	}

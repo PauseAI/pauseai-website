@@ -6,6 +6,7 @@
 	// Temporarily support the old 'publication' property if hot module reload hasn't caught the backend change yet
 	type CoverageItem = PressCoverage & { publication?: string }
 	export let coverage: CoverageItem[] = []
+	export let typeOrder: string[] = []
 	export let outletOrder: string[] = []
 
 	function toNewsItem(item: CoverageItem): NewsItem {
@@ -15,19 +16,19 @@
 			date: item.date,
 			image: item.image,
 			href: item.url,
-			source: 'press'
+			source: 'press',
+			outlet: item.outlet
 		}
 	}
 
-	// Extract unique outlet names
-	$: availableOutlets = Array.from(new Set(coverage.map((c) => c.outlet || c.publication))).filter(
-		Boolean
-	) as string[]
+	// Extract unique type names for tab labels
+	$: availableTypes = Array.from(new Set(coverage.map((c) => c.type))).filter(Boolean) as string[]
 
 	// Sort them based on the schema order fetched directly from Notion
-	$: tabs = [...availableOutlets].sort((a, b) => {
-		const indexA = outletOrder.indexOf(a)
-		const indexB = outletOrder.indexOf(b)
+	$: orderedTabs = typeOrder.length > 0 ? typeOrder : outletOrder
+	$: tabs = [...availableTypes].sort((a, b) => {
+		const indexA = orderedTabs.indexOf(a)
+		const indexB = orderedTabs.indexOf(b)
 		if (indexA !== -1 && indexB !== -1) return indexA - indexB
 		if (indexA !== -1) return -1
 		if (indexB !== -1) return 1
@@ -42,7 +43,7 @@
 		}
 	}
 
-	$: filteredCoverage = coverage.filter((c) => (c.outlet || c.publication) === activeTab)
+	$: filteredCoverage = coverage.filter((c) => c.type === activeTab)
 </script>
 
 <div class="coverage-layout">

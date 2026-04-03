@@ -28,6 +28,7 @@ export type NewsItem = {
 	subtitle: string
 	date: string
 	image?: string
+	outlet?: string
 	/** URL to the article (internal path or external URL) */
 	href: string
 	source: 'internal' | 'substack' | 'press'
