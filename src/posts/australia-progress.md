@@ -45,6 +45,7 @@ description: What the Australian chapter of PauseAI has been doing and needs hel
 
 </div>
 </div>
+
 - Presented PauseAI's position at the [Careers in AI, AI Research & AI Safety](https://luma.com/t6kfhnuw?tk=RF8PQY) event hosted by Responsible AI Development (RAID) & AI Safety Australia & New Zealand (AISANZ)
 
 ### 2026 February
@@ -56,11 +57,13 @@ description: What the Australian chapter of PauseAI has been doing and needs hel
   - Sent media release to tech journalists
   - Hosted online and in-person workshops
   - Postered in Canberra's Civic, Tuggeranong, Woden, and Waramanga
+
 <div style="max-width:80%; margin:1rem 1rem 1rem 0;">
 
 ![202602_ACTWorkshopPeter.jpg](/australia/202602_ACTWorkshopPeter.jpg)
 
 </div>
+
 - Publicly [asked Senator Pocock](https://www.youtube.com/live/SwDolSOMrac?si=GOtvYibfWyGuxK06&t=3820) how our government will deal with mass unemployment.
 
 <div style="max-width:80%; margin:1rem auto;">
@@ -69,7 +72,7 @@ description: What the Australian chapter of PauseAI has been doing and needs hel
 
 </div>
 
-- ✅Publicly asked Andrew Leigh (Assistant Minister, MP) at his book event whether AI researcher predictions of existential risk mean we should have red lines for AI development, [he said yes](https://podcasts.apple.com/au/podcast/discussing-the-shortest-history-of-innovation-with/id773694947)! (43m 40s - 46m 20s) 
+- ✅Publicly asked Andrew Leigh (Assistant Minister, MP) at his book event whether AI researcher predictions of existential risk mean we should have red lines for AI development, [he said yes](https://podcasts.apple.com/au/podcast/discussing-the-shortest-history-of-innovation-with/id773694947)! (43m 40s - 46m 20s)
 - Reached out to politicians: Fiona Carrick MLA, Thomas Emerson MLA, Jessie Price MP candidate about AI existential risk.
 - Reached out to organisations: ACT Conservation Council and ACT Greens about their datacentre policies.
 - Asked Minister Orr about the ACT Government's datacentre policy at the ACT Conservation Council townhall.
@@ -98,6 +101,7 @@ description: What the Australian chapter of PauseAI has been doing and needs hel
 ## 2025 - more coming soon!
 
 ### 2025 December
+
 - ✅Australian AI Safety Institute announced! This was one of our 3 main policy goals. Two to go: international AI treaty, and AI guardrails.
 - ✅Emails from PauseAI Australia volunteers and a question at a live townhall event prompted five politicians to sign the [Future of Life Institute Superintelligence Statement](https://www.linkedin.com/feed/update/urn:li:activity:7408047524902572032).
   Watch the moment at the townhall [on YouTube](https://youtu.be/SbqUEhJt5RU?si=CSVML0vatdW-GBEh).
@@ -123,6 +127,7 @@ description: What the Australian chapter of PauseAI has been doing and needs hel
 </div>
 
 </div>
+
 - Ran a stall at EAGxAustralasia
 
 ### 2025 October
@@ -136,9 +141,10 @@ description: What the Australian chapter of PauseAI has been doing and needs hel
 - In September 2025, PauseAI Australia responded to the interim report on _Harnessing Data and Digital Technology_ with [this submission](https://drive.google.com/file/d/1Ea9I3jXCZAMdGAcN2D-UMRPyE2MzGB7k/view). Volunteers also made individual submissions ([David](https://docs.google.com/document/d/1DenTOorlnqQ02PJEEdRvsceFmfvvfTXxGubozjfx-yE/edit?usp=sharing), [Peter](https://docs.google.com/document/d/1aQcC5DYq3feyWyHAPFGcEvwgrX0vXSbgMNDBEYWA61E/edit?tab=t.0#heading=h.4hsb6c6hjc5f), [Michael](https://drive.google.com/file/d/1lWdtIiLatF1DOPvdjQSaonO9dEqFCFSV/view?usp=drive_link)).
 - We attended online the Prevention United workshop on their Youth Ambassadors Group’s brief [Navigating Artificial Intelligence for Youth Mental Health](https://nest.greenant.net/s/YAzw3wbtrzc5gwo), asking advice on how teens can deal with predicted catastrophic outcomes from AI.
 
-
 ### 2025 August
-- Met Caitlin Tough MLA and her advisor to discuss AI impacts on mental health & democracy. 
+
+- Met Caitlin Tough MLA and her advisor to discuss AI impacts on mental health & democracy.
+
 <div style="max-width:80%; margin:1rem 1rem 1rem 0;">
 
 ![20250825_PeterAboutToMeetCaitlinToughMLA.jpg](/australia/20250825_PeterAboutToMeetCaitlinToughMLA.jpg)
