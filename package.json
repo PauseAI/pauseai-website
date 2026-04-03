@@ -14,7 +14,6 @@
 		"_postbuild:exclude": "tsx scripts/exclude-from-edge-function.ts",
 		"_postbuild:caching": "tsx scripts/opt-in-to-caching.ts",
 		"_postbuild:l10ntamer": "tsx scripts/l10ntamer.ts",
-		"_postbuild:sentry-sourcemaps": "tsx scripts/sentry-upload-edge-sourcemaps.ts",
 		"test": "vitest",
 		"preview": "vite preview",
 		"check": "run-s _check:*",

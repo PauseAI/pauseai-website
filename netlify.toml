@@ -25,5 +25,8 @@
   command = "pnpm dev"
   port = 37572
 
+[[plugins]]
+  package = "./plugins/sentry-edge-sourcemaps"
+
 [images]
   remote_images = ["https://substackcdn.com/.*", "https://substack-post-media.s3.amazonaws.com/.*"]
