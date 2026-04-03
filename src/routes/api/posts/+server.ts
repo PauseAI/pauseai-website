@@ -28,7 +28,7 @@ const hardCodedPages: Post[] = [
 	pressMeta
 ]
 
-async function getPosts() {
+function getPosts() {
 	let posts: Post[] = []
 
 	const paths = import.meta.glob('/src/posts/*.md', { eager: true })
@@ -61,7 +61,7 @@ async function getPosts() {
 	return posts
 }
 
-export const GET: RequestHandler = async () => {
-	const posts = await getPosts()
+export const GET: RequestHandler = () => {
+	const posts = getPosts()
 	return json(posts satisfies PostsApiResponse)
 }

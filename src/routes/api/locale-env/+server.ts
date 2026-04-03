@@ -11,7 +11,7 @@ export type LocaleEnvApiResponse = {
  * Simplified API endpoint that returns the defaults + env-overridden locales
  * This helps detect mismatches between environment settings and compiled runtime
  */
-export const GET: RequestHandler = async () => {
+export const GET: RequestHandler = () => {
 	const envLocales = possiblyOverriddenLocales(defaultSettings)
 	return json({ envLocales } satisfies LocaleEnvApiResponse) // returns value under key 'envLocales'
 }

@@ -84,7 +84,7 @@
 		document.body.appendChild(script)
 
 		// Check if camera permission was already granted (without prompting)
-		checkCameraPermission()
+		void checkCameraPermission()
 
 		// Initialize audio for shutter sound
 		initializeAudio()
@@ -146,7 +146,7 @@
 						}
 					}
 				},
-				async (error: Error | null, result: CloudinaryResult) => {
+				(error: Error | null, result: CloudinaryResult) => {
 					if (error) {
 						console.error('Upload error:', error)
 						toast.error('Upload failed. Please try again.')

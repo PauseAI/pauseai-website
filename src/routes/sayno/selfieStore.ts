@@ -351,7 +351,7 @@ export async function removeUpload() {
 		setTimeout(() => {
 			if (videoElement && stream) {
 				videoElement.srcObject = stream
-				videoElement.play()
+				void videoElement.play()
 			}
 		}, 100)
 	}

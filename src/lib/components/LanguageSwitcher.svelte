@@ -135,7 +135,7 @@
 		// Handle regular locale selection
 		if (targetLocale) {
 			// explicit reload seems necessary to interact correctly with SvelteKit client-side refresh
-			setLocale(targetLocale, { reload: true })
+			void setLocale(targetLocale, { reload: true })
 			// As a fallback, manually reload if we're still here after a short delay
 			// This handles cases where SvelteKit's client navigation might interfere
 			setTimeout(() => {
