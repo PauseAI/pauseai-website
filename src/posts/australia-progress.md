@@ -18,9 +18,7 @@ description: What the Australian chapter of PauseAI has been doing and needs hel
 - Took part in CAPaD's Community Assembly in Canberra.
 
 <div style="max-width:80%; margin:1rem auto;">
-
 ![Volunteer at CAPaD](/australia/20260308_CAPaD_CommunityAssemblyRepresenting.jpg)
-
 </div>
 
 - Reached out to correct an error in [The Daily Aus' reporting on the Pentagon’s dispute with Anthropic](https://thedailyaus.com.au/podcast/the-fight-over-how-ai-is-used-in-war).
@@ -30,19 +28,13 @@ description: What the Australian chapter of PauseAI has been doing and needs hel
 
 <div style="display:flex; flex-wrap:wrap; gap:0.5rem; max-width:90%; margin:1rem auto;">
 <div style="flex:1; min-width:200px;">
-
 ![Talking to Microsoft](/australia/20260326_InnovationShowcase_MSBoothDavidPeter.jpg)
-
 </div>
 <div style="flex:1; min-width:200px;">
-
 ![Talking to Prof Chubb](/australia/20260323_ParlInnovShowcase_ProfChubbPeter.jpg)
-
 </div>
 <div style="flex:1; min-width:200px;">
-
 ![At Microsoft and OpenAI booths](/australia/20260326_InnovationShowcase_MSOpenAIBoothDavidPeter.jpg)
-
 </div>
 </div>
 - Presented PauseAI's position at the [Careers in AI, AI Research & AI Safety](https://luma.com/t6kfhnuw?tk=RF8PQY) event hosted by Responsible AI Development (RAID) & AI Safety Australia & New Zealand (AISANZ)
@@ -57,16 +49,12 @@ description: What the Australian chapter of PauseAI has been doing and needs hel
   - Hosted online and in-person workshops
   - Postered in Canberra's Civic, Tuggeranong, Woden, and Waramanga
 <div style="max-width:80%; margin:1rem 1rem 1rem 0;">
-
 ![202602_ACTWorkshopPeter.jpg](/australia/202602_ACTWorkshopPeter.jpg)
-
 </div>
 - Publicly [asked Senator Pocock](https://www.youtube.com/live/SwDolSOMrac?si=GOtvYibfWyGuxK06&t=3820) how our government will deal with mass unemployment.
 
 <div style="max-width:80%; margin:1rem auto;">
-
 ![20260225-1847_PocockTownhallAIQuestionHighlighted.jpg](/australia/20260225-1847_PocockTownhallAIQuestionHighlighted.jpg)
-
 </div>
 
 - ✅Publicly asked Andrew Leigh (Assistant Minister, MP) at his book event whether AI researcher predictions of existential risk mean we should have red lines for AI development, [he said yes](https://podcasts.apple.com/au/podcast/discussing-the-shortest-history-of-innovation-with/id773694947)! (43m 40s - 46m 20s) 
@@ -75,17 +63,13 @@ description: What the Australian chapter of PauseAI has been doing and needs hel
 - Asked Minister Orr about the ACT Government's datacentre policy at the ACT Conservation Council townhall.
 
 <div style="max-width:80%; margin:1rem 1rem 1rem 0;">
-
 ![20260218_MinisterOrrQuestionAtACTConservationCouncilTownhall.jpg](/australia/20260218_MinisterOrrQuestionAtACTConservationCouncilTownhall.jpg)
-
 </div>
 
 - Attended Melbourne's presentation on Fixing Australian Philanthropy.
 
 <div style="max-width:80%; margin:1rem 1rem 1rem 0;">
-
 ![20260225_MELB_MarkAtDGRPresentation.jpg](/australia/20260225_MELB_MarkAtDGRPresentation.jpg)
-
 </div>
 
 - Handed out flyers at University of Canberra's Open Day.
@@ -112,16 +96,11 @@ description: What the Australian chapter of PauseAI has been doing and needs hel
 
 <div style="display:flex; flex-wrap:wrap; gap:0.5rem; max-width:90%; margin:1rem auto;">
 <div style="flex:1; min-width:200px;">
-
 ![20251115_SouthFestStall_PeterDavid.png](/australia/20251115_SouthFestStall_PeterDavid.png)
-
 </div>
 <div style="flex:1; min-width:200px;">
-
 ![20251115_SouthFestStall_David.jpg](/australia/20251115_SouthFestStall_David.jpg)
-
 </div>
-
 </div>
 - Ran a stall at EAGxAustralasia
 
@@ -140,9 +119,7 @@ description: What the Australian chapter of PauseAI has been doing and needs hel
 ### 2025 August
 - Met Caitlin Tough MLA and her advisor to discuss AI impacts on mental health & democracy. 
 <div style="max-width:80%; margin:1rem 1rem 1rem 0;">
-
 ![20250825_PeterAboutToMeetCaitlinToughMLA.jpg](/australia/20250825_PeterAboutToMeetCaitlinToughMLA.jpg)
-
 </div>
 
 ### 2025 July
