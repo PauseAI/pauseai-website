@@ -17,9 +17,12 @@ description: What the Australian chapter of PauseAI has been doing and needs hel
 - Reached out to COSBOA and Canberra Business Chamber about Australians' trust in AI
 - Took part in CAPaD's Community Assembly in Canberra.
 
-<div style="max-width:80%; margin:1rem auto;">
+<div style="display:flex; flex-wrap:wrap; gap:0.5rem; max-width:90%; margin:1rem auto;">
+<div style="flex:1; min-width:200px;">
 
 ![Volunteer at CAPaD](/australia/20260308_CAPaD_CommunityAssemblyRepresenting.jpg)
+
+</div>
 
 </div>
 
@@ -55,12 +58,15 @@ description: What the Australian chapter of PauseAI has been doing and needs hel
   - 70 emails sent to policymakers, and [70 signatures on our petition](https://www.change.org/p/ai-summits-need-to-take-safety-seriously-again), including to Minister Ayres and Assistant Minister Charlton.
   - ✅Collaborated with 14 other countries, such as adding 4 Aussie experts to a total 40 international experts co-signing [op-ed in France's biggest weekly, Nouvel Obs](https://www.nouvelobs.com/opinions/20260216.OBS112421/sommet-de-l-ia-face-aux-risques-remettre-la-securite-en-haut-de-l-agenda-international.html)
   - Sent media release to tech journalists
-  - Hosted online and in-person workshops
   - Postered in Canberra's Civic, Tuggeranong, Woden, and Waramanga
+  - Hosted online and in-person workshops
 
-<div style="max-width:80%; margin:1rem 1rem 1rem 0;">
+<div style="display:flex; flex-wrap:wrap; gap:0.5rem; max-width:90%; margin:1rem auto;">
+<div style="flex:1; min-width:200px;">
 
 ![202602_ACTWorkshopPeter.jpg](/australia/202602_ACTWorkshopPeter.jpg)
+
+</div>
 
 </div>
 
@@ -160,7 +166,7 @@ description: What the Australian chapter of PauseAI has been doing and needs hel
 - ✅Volunteers in Melbourne protested the missed opportunity of the Paris AI Action Summit. The protest received [coverage](https://www.smh.com.au/technology/most-dangerous-technology-ever-protesters-urge-ai-pause-20250207-p5laaq.html) in the Nine newspapers.
   ![20250208_144134_MelbProtest.jpg](/australia/20250208_144134_MelbProtest.jpg)
 
-## 2023 - more coming soon!
+## 2023
 
 ### 2023 February
 
