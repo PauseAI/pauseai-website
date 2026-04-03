@@ -8,8 +8,6 @@ export const init = () => {
 	dsn = env.PUBLIC_SENTRY_DSN
 	const release = import.meta.env.SENTRY_RELEASE as string | undefined
 
-	console.log(`[Sentry Client] dsn: ${dsn}, release: ${release}`)
-
 	if (dsn) {
 		try {
 			Sentry.init({
@@ -17,12 +15,9 @@ export const init = () => {
 				release,
 				tracesSampleRate: 0
 			})
-			console.log('[Sentry Client] Initialized successfully')
 		} catch (e) {
 			console.error('[Sentry Client] Failed to initialize:', e)
 		}
-	} else {
-		console.log('[Sentry Client] Skipping initialization (missing DSN)')
 	}
 }
 

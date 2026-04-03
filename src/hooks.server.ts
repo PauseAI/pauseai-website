@@ -26,8 +26,6 @@ export const init = async () => {
 	const release = import.meta.env.SENTRY_RELEASE as string | undefined
 	const isDeno = typeof Deno !== 'undefined'
 
-	console.log(`[Sentry Server] dsn: ${dsn}, release: ${release}, isDeno: ${isDeno}`)
-
 	if (dsn && isDeno) {
 		try {
 			Sentry = await import('@sentry/deno')
@@ -37,12 +35,9 @@ export const init = async () => {
 				tracesSampleRate: 0,
 				enableLogs: true
 			})
-			console.log('[Sentry Server] Initialized successfully')
 		} catch (e) {
 			console.error('[Sentry Server] Failed to initialize:', e)
 		}
-	} else {
-		console.log('[Sentry Server] Skipping initialization (missing DSN or not Deno environment)')
 	}
 }
 
