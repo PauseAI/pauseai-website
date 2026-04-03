@@ -1,7 +1,8 @@
 import * as Sentry from '@sentry/svelte'
 import type { HandleClientError } from '@sveltejs/kit'
+import { env } from '$env/dynamic/public'
 
-const dsn = import.meta.env.PUBLIC_SENTRY_DSN as string | undefined
+const dsn = env.PUBLIC_SENTRY_DSN
 
 export const init = () => {
 	if (dsn) {
