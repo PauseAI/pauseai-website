@@ -29,6 +29,14 @@ export const onPostBuild = ({ constants }) => {
 		return
 	}
 
+	// Log directory contents for debugging
+	try {
+		const files = execSync(`find ${edgeDir} -type f`).toString().trim()
+		console.log(`📂 Edge functions dist contents:\n${files}`)
+	} catch {
+		console.log('📂 Could not list edge functions dist contents')
+	}
+
 	console.log(`📤 Injecting Debug IDs and uploading edge function source maps to Sentry...`)
 	try {
 		execSync(`npx @sentry/cli sourcemaps inject ${edgeDir}`, { stdio: 'inherit' })
