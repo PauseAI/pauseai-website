@@ -26,7 +26,7 @@ export default defineConfig(
 			},
 			parserOptions: {
 				extraFileExtensions: EXTRA_FILE_EXTENSIONS,
-				project: ['./tsconfig.eslint.json']
+				project: ['./tsconfig.check.json']
 			}
 		}
 	},
