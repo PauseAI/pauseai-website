@@ -4,8 +4,12 @@
 	"rangeStrategy": "bump",
 	"packageRules": [
 		{
-			"matchManagers": ["github-actions", "nvm"],
+			"matchManagers": ["github-actions"],
 			"rangeStrategy": "replace"
+		},
+		{
+			"matchManagers": ["nvm"],
+			"enabled": false
 		},
 		{
 			"matchDepTypes": ["pnpm.overrides"],
@@ -14,14 +18,14 @@
 		{
 			"matchUpdateTypes": ["minor", "patch"],
 			"matchCurrentValue": "/^\\^/",
-			"groupName": "all non-major caret updates",
-			"groupSlug": "caret-minor-patch"
+			"groupName": "all non-major dependencies",
+			"groupSlug": "all-minor-patch"
 		},
 		{
 			"matchUpdateTypes": ["patch"],
 			"matchCurrentValue": "/^~/",
-			"groupName": "all tilde patch updates",
-			"groupSlug": "tilde-patch"
+			"groupName": "all non-major dependencies",
+			"groupSlug": "all-minor-patch"
 		},
 		{
 			"extends": ["packages:linters"],
