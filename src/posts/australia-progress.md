@@ -6,9 +6,20 @@ description: What the Australian chapter of PauseAI has been doing and needs hel
 
 ### 2026 April - help needed🙏
 
-- Join our meetup where we kickoff our next campaign! We also need ideas on how to use social media better.
-- Help out with [evergreen tasks](/australia)
-- Tell us [what you did](mailto:australia@pauseai.info?subject=Aussie%20Did%20a%20Thing) so we can add it, or [what you have cooking](mailto:australia@pauseai.info?subject=Things%20Cooking) so we can support you!
+- Upcoming
+   - Join our meetup where we kickoff our next campaign! We also need ideas on how to use social media better.
+   - Help out with [evergreen tasks](/australia)
+   - Tell us [what you did](mailto:australia@pauseai.info?subject=Aussie%20Did%20a%20Thing) so we can add it, or [what you have cooking](mailto:australia@pauseai.info?subject=Things%20Cooking) so we can support you!
+- Ashley takee on volunteer role of Digital Marketing
+<div style="display:flex; flex-wrap:wrap; gap:0.5rem; max-width:90%; margin:1rem auto;">
+<div style="flex:1; min-width:200px;">
+
+![20260403_AshleyVolunteerJoining](/australia/20260403_AshleyVolunteerJoining.jpg)
+
+</div>
+
+</div>
+- Tim takes on volunteer role of Brisbane community organiser.
 
 ### 2026 March
 
