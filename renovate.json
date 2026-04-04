@@ -33,8 +33,7 @@
 			"groupSlug": "all-minor-patch"
 		},
 		{
-			"extends": [":automergeLinters"],
-			"groupName": null
+			"extends": [":automergeLinters", "group:linters"]
 		}
 	]
 }
