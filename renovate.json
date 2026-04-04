@@ -38,6 +38,11 @@
 			"groupSlug": "all-minor-patch"
 		},
 		{
+			"matchManagers": ["npm"],
+			"matchUpdateTypes": ["major"],
+			"dependencyDashboardApproval": true
+		},
+		{
 			"extends": [":automergeLinters"],
 			"matchPackageNames": ["knip", "svelte-check"],
 			"minor": {
@@ -45,7 +50,8 @@
 			},
 			"patch": {
 				"extends": ["group:linters"]
-			}
+			},
+			"dependencyDashboardApproval": false
 		}
 	]
 }
