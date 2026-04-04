@@ -4,7 +4,7 @@
 	"rangeStrategy": "bump",
 	"packageRules": [
 		{
-			"matchManagers": ["github-actions"],
+			"matchManagers": ["github-actions", "nvm"],
 			"rangeStrategy": "replace"
 		},
 		{
