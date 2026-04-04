@@ -22,7 +22,7 @@
 		},
 		{
 			"matchUpdateTypes": ["minor", "patch"],
-			"matchCurrentValue": "/^\\^/",
+			"matchCurrentValue": "/^\\^[1-9]/",
 			"groupName": "all non-major dependencies",
 			"groupSlug": "all-minor-patch"
 		},
