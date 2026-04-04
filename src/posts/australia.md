@@ -20,7 +20,7 @@ If you’re in Australia, you can help:
 
 ## Connect with PauseAI Australia
 
-- [australia@pauseai.info](mailto:australia@pauseai.info)
+- [australia@pauseai.info](mailto:australia@pauseai.info?subject=Hello%20From%20The%20Homepage)
 - [Facebook](https://www.facebook.com/groups/571590459293618)
 - [YouTube](https://www.youtube.com/channel/UCjjMieiOlSFf7jud0yhHQSg)
 - [LinkedIn](https://www.linkedin.com/company/pauseai-australia)
