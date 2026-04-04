@@ -16,26 +16,30 @@ export const load: PageLoad = async ({ data, depends }) => {
 
 async function importIntro(locale: string) {
 	if (locale === 'en') {
-		// @ts-ignore
-		return await import('./intro.md')
+		// @ts-expect-error mdsvex files are not correctly typed in the local env
+		return (await import('./intro.md')) as { default: import('svelte').Component }
 	}
 	try {
-		return await import(`../../../l10n-cage/md/${locale}/funding-intro.md`)
+		return (await import(`../../../l10n-cage/md/${locale}/funding-intro.md`)) as {
+			default: import('svelte').Component
+		}
 	} catch {
-		// @ts-ignore
-		return await import('./intro.md')
+		// @ts-expect-error mdsvex files are not correctly typed in the local env
+		return (await import('./intro.md')) as { default: import('svelte').Component }
 	}
 }
 
 async function importAfterDonors(locale: string) {
 	if (locale === 'en') {
-		// @ts-ignore
-		return await import('./afterDonors.md')
+		// @ts-expect-error mdsvex files are not correctly typed in the local env
+		return (await import('./afterDonors.md')) as { default: import('svelte').Component }
 	}
 	try {
-		return await import(`../../../l10n-cage/md/${locale}/funding-afterDonors.md`)
+		return (await import(`../../../l10n-cage/md/${locale}/funding-afterDonors.md`)) as {
+			default: import('svelte').Component
+		}
 	} catch {
-		// @ts-ignore
-		return await import('./afterDonors.md')
+		// @ts-expect-error mdsvex files are not correctly typed in the local env
+		return (await import('./afterDonors.md')) as { default: import('svelte').Component }
 	}
 }
