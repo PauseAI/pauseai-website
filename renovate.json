@@ -1,7 +1,12 @@
 {
 	"$schema": "https://docs.renovatebot.com/renovate-schema.json",
 	"extends": ["config:recommended"],
+	"rangeStrategy": "bump",
 	"packageRules": [
+		{
+			"matchManagers": ["github-actions"],
+			"rangeStrategy": "replace"
+		},
 		{
 			"matchUpdateTypes": ["minor", "patch"],
 			"matchCurrentValue": "/^\\^/",
