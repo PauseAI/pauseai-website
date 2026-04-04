@@ -72,9 +72,12 @@ description: What the Australian chapter of PauseAI has been doing and needs hel
 
 - Publicly [asked Senator Pocock](https://www.youtube.com/live/SwDolSOMrac?si=GOtvYibfWyGuxK06&t=3820) how our government will deal with mass unemployment.
 
-<div style="max-width:80%; margin:1rem auto;">
-
+<div style="display:flex; flex-wrap:wrap; gap:0.5rem; max-width:90%; margin:1rem auto;">
+<div style="flex:1; min-width:200px;">
+  
 ![20260225-1847_PocockTownhallAIQuestionHighlighted.jpg](/australia/20260225-1847_PocockTownhallAIQuestionHighlighted.jpg)
+
+</div>
 
 </div>
 
@@ -83,17 +86,23 @@ description: What the Australian chapter of PauseAI has been doing and needs hel
 - Reached out to organisations: ACT Conservation Council and ACT Greens about their datacentre policies.
 - Asked Minister Orr about the ACT Government's datacentre policy at the ACT Conservation Council townhall.
 
-<div style="max-width:80%; margin:1rem 1rem 1rem 0;">
-
+<div style="display:flex; flex-wrap:wrap; gap:0.5rem; max-width:90%; margin:1rem auto;">
+<div style="flex:1; min-width:200px;">
+  
 ![20260218_MinisterOrrQuestionAtACTConservationCouncilTownhall.jpg](/australia/20260218_MinisterOrrQuestionAtACTConservationCouncilTownhall.jpg)
+
+</div>
 
 </div>
 
 - Attended Melbourne's presentation on Fixing Australian Philanthropy.
 
-<div style="max-width:80%; margin:1rem 1rem 1rem 0;">
-
+<div style="display:flex; flex-wrap:wrap; gap:0.5rem; max-width:90%; margin:1rem auto;">
+<div style="flex:1; min-width:200px;">
+  
 ![20260225_MELB_MarkAtDGRPresentation.jpg](/australia/20260225_MELB_MarkAtDGRPresentation.jpg)
+
+</div>
 
 </div>
 
@@ -109,15 +118,30 @@ description: What the Australian chapter of PauseAI has been doing and needs hel
 ### 2025 December
 
 - ✅Australian AI Safety Institute announced! This was one of our 3 main policy goals. Two to go: international AI treaty, and AI guardrails.
-- ✅Emails from PauseAI Australia volunteers and a question at a live townhall event prompted five politicians to sign the [Future of Life Institute Superintelligence Statement](https://www.linkedin.com/feed/update/urn:li:activity:7408047524902572032).
-  Watch the moment at the townhall [on YouTube](https://youtu.be/SbqUEhJt5RU?si=CSVML0vatdW-GBEh).
+- ✅Emails from PauseAI Australia volunteers and a [question at a live townhall](https://youtu.be/SbqUEhJt5RU?si=CSVML0vatdW-GBEh) prompted five politicians to sign the [Future of Life Institute's Superintelligence Statement](https://www.linkedin.com/feed/update/urn:li:activity:7408047524902572032).
 
 ### 2025 November
 
 - ✅Publicly asked Senator Pocock to sign Superintelligence Statement, and [he agreed](https://youtu.be/SbqUEhJt5RU)!
-  ![20251209_PocockTownhall_SelfiesPeterDavid.jpg](/australia/20251209_PocockTownhall_SelfiesPeterDavid.jpg)
+
+<div style="display:flex; flex-wrap:wrap; gap:0.5rem; max-width:90%; margin:1rem auto;">
+<div style="flex:1; min-width:200px;">
+  
+![20251209_PocockTownhall_SelfiesPeterDavid.jpg](/australia/20251209_PocockTownhall_SelfiesPeterDavid.jpg)
+
+</div>
+
+</div>
+
 - 5 people from Australia participated in the PauseAI photo petition.
-  ![2025-11_PhotoPetition.jpg](/australia/2025-11_PhotoPetition.jpg)
+
+<div style="display:flex; flex-wrap:wrap; gap:0.5rem; max-width:90%; margin:1rem auto;">
+<div style="flex:1; min-width:200px;">
+![2025-11_PhotoPetition.jpg](/australia/2025-11_PhotoPetition.jpg)
+</div>
+
+</div>
+
 - Ran a stall at SouthFest. 34 people stopped for >1min chat, 2 submitted selfies to our photo petition.
 
 <div style="display:flex; flex-wrap:wrap; gap:0.5rem; max-width:90%; margin:1rem auto;">
@@ -151,9 +175,12 @@ description: What the Australian chapter of PauseAI has been doing and needs hel
 
 - Met Caitlin Tough MLA and her advisor to discuss AI impacts on mental health & democracy.
 
-<div style="max-width:80%; margin:1rem 1rem 1rem 0;">
-
+<div style="display:flex; flex-wrap:wrap; gap:0.5rem; max-width:90%; margin:1rem auto;">
+<div style="flex:1; min-width:200px;">
+  
 ![20250825_PeterAboutToMeetCaitlinToughMLA.jpg](/australia/20250825_PeterAboutToMeetCaitlinToughMLA.jpg)
+
+</div>
 
 </div>
 
@@ -164,14 +191,28 @@ description: What the Australian chapter of PauseAI has been doing and needs hel
 ### 2025 February
 
 - ✅Volunteers in Melbourne protested the missed opportunity of the Paris AI Action Summit. The protest received [coverage](https://www.smh.com.au/technology/most-dangerous-technology-ever-protesters-urge-ai-pause-20250207-p5laaq.html) in the Nine newspapers.
-  ![20250208_144134_MelbProtest.jpg](/australia/20250208_144134_MelbProtest.jpg)
+
+<div style="display:flex; flex-wrap:wrap; gap:0.5rem; max-width:90%; margin:1rem auto;">
+<div style="flex:1; min-width:200px;">
+![20250208_144134_MelbProtest.jpg](/australia/20250208_144134_MelbProtest.jpg)
+  
+</div>
+
+</div>
 
 ## 2023
 
 ### 2023 February
 
 - Protested in Melbourne at Sam Altman's speaking event.
-  ![20230616_AusMelb_PauseAIProtestAltman_Michael.jpg](/australia/20230616_AusMelb_PauseAIProtestAltman_Michael.jpg)
+
+<div style="display:flex; flex-wrap:wrap; gap:0.5rem; max-width:90%; margin:1rem auto;">
+<div style="flex:1; min-width:200px;">
+![20230616_AusMelb_PauseAIProtestAltman_Michael.jpg](/australia/20230616_AusMelb_PauseAIProtestAltman_Michael.jpg)
+  
+</div>
+
+</div>
 
 ## Connect on social media
 
