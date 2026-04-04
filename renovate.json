@@ -21,14 +21,14 @@
 			"enabled": false
 		},
 		{
-			"matchUpdateTypes": ["minor", "patch"],
+			"matchUpdateTypes": ["minor"],
 			"matchCurrentValue": "/^\\^[1-9]/",
 			"groupName": "all non-major dependencies",
 			"groupSlug": "all-minor-patch"
 		},
 		{
 			"matchUpdateTypes": ["patch"],
-			"matchCurrentValue": "/^~/",
+			"matchCurrentValue": "/^[\\^~]/",
 			"groupName": "all non-major dependencies",
 			"groupSlug": "all-minor-patch"
 		},
