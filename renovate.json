@@ -3,6 +3,7 @@
 	"extends": ["config:recommended"],
 	"rangeStrategy": "bump",
 	"commitMessageSuffix": "[skip netlify]",
+	"labels": ["dependencies"],
 	"packageRules": [
 		{
 			"matchManagers": ["github-actions"],
