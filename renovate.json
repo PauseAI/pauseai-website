@@ -38,7 +38,7 @@
 		},
 		{
 			"matchUpdateTypes": ["patch"],
-			"matchCurrentValue": "/^[\\^~]/",
+			"matchCurrentValue": "/^[\\^~](?!0\\.0\\.)/",
 			"groupName": "all non-major dependencies",
 			"groupSlug": "all-minor-patch",
 			"dependencyDashboardApproval": false
