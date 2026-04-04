@@ -1,6 +1,23 @@
 {
-  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "extends": [
-    "config:recommended"
-  ]
+	"$schema": "https://docs.renovatebot.com/renovate-schema.json",
+	"extends": ["config:recommended"],
+	"packageRules": [
+		{
+			"matchUpdateTypes": ["minor", "patch"],
+			"matchCurrentValue": "/^\\^/",
+			"groupName": "all non-major caret updates",
+			"groupSlug": "caret-minor-patch"
+		},
+		{
+			"matchUpdateTypes": ["patch"],
+			"matchCurrentValue": "/^~/",
+			"groupName": "all tilde patch updates",
+			"groupSlug": "tilde-patch"
+		},
+		{
+			"extends": ["packages:linters"],
+			"automerge": true,
+			"groupName": null
+		}
+	]
 }
