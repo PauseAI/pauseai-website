@@ -26,21 +26,22 @@
 			"enabled": false
 		},
 		{
+			"matchManagers": ["npm"],
+			"dependencyDashboardApproval": true
+		},
+		{
 			"matchUpdateTypes": ["minor"],
 			"matchCurrentValue": "/^\\^[1-9]/",
 			"groupName": "all non-major dependencies",
-			"groupSlug": "all-minor-patch"
+			"groupSlug": "all-minor-patch",
+			"dependencyDashboardApproval": false
 		},
 		{
 			"matchUpdateTypes": ["patch"],
 			"matchCurrentValue": "/^[\\^~]/",
 			"groupName": "all non-major dependencies",
-			"groupSlug": "all-minor-patch"
-		},
-		{
-			"matchManagers": ["npm"],
-			"matchUpdateTypes": ["major"],
-			"dependencyDashboardApproval": true
+			"groupSlug": "all-minor-patch",
+			"dependencyDashboardApproval": false
 		},
 		{
 			"extends": [":automergeLinters"],
