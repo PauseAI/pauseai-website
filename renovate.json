@@ -4,7 +4,11 @@
 	"rangeStrategy": "bump",
 	"packageRules": [
 		{
-			"matchManagers": ["github-actions", "nvm", "pnpm.overrides"],
+			"matchManagers": ["github-actions", "nvm"],
+			"rangeStrategy": "replace"
+		},
+		{
+			"matchDepTypes": ["pnpm.overrides"],
 			"rangeStrategy": "replace"
 		},
 		{
