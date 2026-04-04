@@ -9,6 +9,10 @@
 			"rangeStrategy": "replace"
 		},
 		{
+			"matchFileNames": [".github/workflows/pnpm-check.yml"],
+			"automerge": true
+		},
+		{
 			"matchDepTypes": ["pnpm.overrides"],
 			"rangeStrategy": "replace"
 		},
@@ -35,6 +39,7 @@
 		{
 			"extends": [":automergeLinters"],
 			"matchPackageNames": ["knip", "svelte-check"],
+			"automerge": true,
 			"minor": {
 				"extends": ["group:linters"]
 			},
