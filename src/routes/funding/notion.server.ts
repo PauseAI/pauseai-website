@@ -128,5 +128,6 @@ export async function fetchTopPublicDonors(limit: number): Promise<PublicDonor[]
 	}
 
 	console.log(`Fetched ${mapped.length} public donors from Notion`)
+	mapped.sort((a, b) => b.amountEur - a.amountEur)
 	return mapped.slice(0, limit)
 }
