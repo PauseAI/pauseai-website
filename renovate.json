@@ -28,8 +28,7 @@
 			"groupSlug": "all-minor-patch"
 		},
 		{
-			"extends": ["packages:linters"],
-			"automerge": true,
+			"extends": [":automergeLinters"],
 			"groupName": null
 		}
 	]
