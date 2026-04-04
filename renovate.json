@@ -8,12 +8,16 @@
 			"rangeStrategy": "replace"
 		},
 		{
+			"matchDepTypes": ["pnpm.overrides"],
+			"rangeStrategy": "replace"
+		},
+		{
 			"matchManagers": ["nvm"],
 			"enabled": false
 		},
 		{
-			"matchDepTypes": ["pnpm.overrides"],
-			"rangeStrategy": "replace"
+			"matchDepTypes": ["packageManager"],
+			"enabled": false
 		},
 		{
 			"matchUpdateTypes": ["minor", "patch"],
