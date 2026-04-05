@@ -20,6 +20,7 @@ description: What the Australian chapter of PauseAI has been doing and needs hel
 
 </div>
 - Tim takes on volunteer role of Brisbane community organiser.
+- Released newsletter on how to get your MPs to sign Superintelligence Statement.
 
 ### 2026 March
 
