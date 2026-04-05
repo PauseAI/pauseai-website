@@ -42,8 +42,6 @@ export default defineConfig(() => {
 
 	return {
 		define: {
-			// Make PARAGLIDE_LOCALES accessible to browser code via import.meta.env
-			'import.meta.env.PARAGLIDE_LOCALES': JSON.stringify(process.env.PARAGLIDE_LOCALES),
 			'import.meta.env.SENTRY_RELEASE': JSON.stringify(getSentryRelease())
 		},
 
