@@ -101,7 +101,12 @@
 	</script>
 
 	<!-- eslint-disable-next-line svelte/no-at-html-tags not vulnerable against XSS -->
-	{@html `<${'script'}>${bannerSelection.replaceAll(/\/\*[\s\S]*?\*\//g, '')}</script>`}
+	{@html `<${'script'}>${
+		bannerSelection
+			.replaceAll(/\/\*[\s\S]*?\*\//g, '') // remove block comments
+			.replaceAll(/\/\/.*$/gm, '') // remove line comments
+			.replaceAll(/\n\s*(?=\n)/g, '') // remove empty lines
+	}</script>`}
 </svelte:head>
 
 <PreloadFonts urls={[robotoSlabLatin300, sairaCondensedLatin700]} />
