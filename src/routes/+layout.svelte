@@ -104,7 +104,7 @@
 	{@html `<${'script'}>${
 		bannerSelection
 			.replaceAll(/\/\*[\s\S]*?\*\//g, '') // remove block comments
-			.replaceAll(/\/\/.*$/gm, '') // remove line comments
+			.replaceAll(/\/\/[^"'`\n]*?$/gm, '') // remove line comments
 			.replaceAll(/\n\s*(?=\n)/g, '') // remove empty lines
 	}</script>`}
 </svelte:head>
