@@ -1,3 +1,4 @@
+import { dev } from '$app/environment'
 import { getLocale } from '$lib/paraglide/runtime'
 import type { PageLoad } from './$types'
 import { asError } from '$lib/utils'
@@ -26,7 +27,7 @@ async function importMarkdown(locale: string, slug: string) {
 		try {
 			return await import(`../../../l10n-cage/md/${locale}/${slug}.md`)
 		} catch (error) {
-			if (import.meta.env.DEV) {
+			if (dev) {
 				return {
 					default: `## Couldn't import translation!\n(This is only tolerated in development mode.)`
 				}

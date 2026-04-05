@@ -50,13 +50,8 @@ export function processParaglideLocales(options?: {
 	// Create settings with potentially filtered locales
 	const locales = [...defaultSettings.locales]
 
-	// Get env value - use provided value or process.env
-	const localesEnvValue =
-		options?.localesEnvValue !== undefined
-			? options.localesEnvValue
-			: typeof process !== 'undefined'
-				? process.env.PARAGLIDE_LOCALES
-				: null
+	// Get env value - use provided value
+	const localesEnvValue = options?.localesEnvValue || null
 
 	// Check if PARAGLIDE_LOCALES is set
 	if (localesEnvValue) {
