@@ -1,6 +1,6 @@
 import { json } from '@sveltejs/kit'
 import type { RequestHandler } from './$types'
-import { possiblyOverriddenLocales } from '$lib/env'
+import { possiblyOverriddenLocales } from '$lib/env.server'
 import defaultSettings from '$lib/generated/paraglide-defaults'
 
 export type LocaleEnvApiResponse = {
