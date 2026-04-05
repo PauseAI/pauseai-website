@@ -129,9 +129,27 @@ export default defineConfig(
 					argsIgnorePattern: '^_',
 					destructuredArrayIgnorePattern: '^_'
 				}
+			]
+		}
+	},
+	{
+		files: ['src/**/*'],
+		rules: {
+			'no-restricted-properties': [
+				'error',
+				{
+					object: 'process',
+					property: 'env',
+					message: 'Use $env/static/private or $env/dynamic/private (or $lib/env.server) instead'
+				}
 			],
 			'no-restricted-syntax': [
 				'error',
+				{
+					// selector for import.meta.env
+					selector: 'MemberExpression[object.type="MetaProperty"][property.name="env"]',
+					message: 'Use $env/static/public or $env/dynamic/public (or $lib/env) instead'
+				},
 				{
 					selector:
 						'CallExpression[callee.name=/^(asError|redirectAsError)$/]:not(ThrowStatement > CallExpression)',

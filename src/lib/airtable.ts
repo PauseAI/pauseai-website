@@ -1,5 +1,5 @@
 import { env } from '$env/dynamic/private'
-import { getDevContext, isDev } from '$lib/env'
+import { getDevContext, isDev } from '$lib/env.server'
 import Airtable, { type FieldSet, type Table } from 'airtable'
 
 const getApiKey = () => env.AIRTABLE_API_KEY
