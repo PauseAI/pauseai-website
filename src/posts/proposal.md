@@ -56,7 +56,7 @@ It may be possible that the AI alignment problem is very difficult and _not solv
 
 **Enforcement** of the treaty requires the US and China to back it with their economic and military power. If the leaders of both nations understand the severity of the risks of AI, they will see that the success of the treaty is in their own interests. If a safe superhuman AI is created, the AI itself will be used by the AISA to enforce the treaty.
 
-# Other measures that effectively slow down AI
+## Other measures that effectively slow down AI
 
 - **Ban training of AI systems on copyrighted material**. This helps with copyright issues, slows growing inequality and slows down progress towards superhuman AI.
 - **Hold AI model creators liable** for criminal acts committed using their AI systems. This gives model creators more incentives to make sure their models are safe.
