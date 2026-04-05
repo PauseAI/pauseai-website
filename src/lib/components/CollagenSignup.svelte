@@ -14,7 +14,7 @@
 	let submitted = false
 	let hideSharing = false
 
-	onMount(async () => {
+	onMount(() => {
 		userHasUid = detectAndStoreCollagenUid(campaign, $page.url.searchParams)
 		hideSharing = $page.url.searchParams.has('x002')
 		subscribeEmail = $page.url.searchParams.get('subscribe-email') || ''
