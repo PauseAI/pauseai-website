@@ -94,6 +94,7 @@ export default defineConfig(
 			// disabled
 			'svelte/no-navigation-without-resolve': 'off',
 			'svelte/require-each-key': 'off',
+			'no-useless-assignment': 'off', // False positive due to Svelte's reactive syntax
 
 			// enabled
 			'svelte/no-restricted-html-elements': [

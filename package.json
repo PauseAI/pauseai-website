@@ -31,7 +31,7 @@
 		}
 	},
 	"devDependencies": {
-		"@eslint/js": "^9.39.4",
+		"@eslint/js": "^10.0.1",
 		"@eslint/markdown": "^8.0.1",
 		"@inlang/paraglide-js": "^2.15.1",
 		"@netlify/edge-functions": "^3.0.6",
