@@ -4,13 +4,13 @@ description: Implement a temporary pause on the training of the most powerful
   general AI systems.
 ---
 
-**Implement a temporary pause on the training of the most powerful general AI systems**, until we know how to build them safely and keep them under democratic control. Many scientists and industry leaders [agree that a pause is necessary](), and the U.S. public also strongly supports a pause ([64%]()–[69%]()).
+**Implement a temporary pause on the training of the most powerful general AI systems**, until we know how to build them safely and keep them under democratic control. Many scientists and industry leaders [agree that a pause is necessary](https://futureoflife.org/open-letter/pause-giant-ai-experiments/), and the U.S. public also strongly supports a pause ([64%](https://www.campaignforaisafety.org/usa-ai-x-risk-perception-tracker/)–[69%](https://today.yougov.com/topics/technology/survey-results/daily/2023/04/03/ad825/2)).
 
 _Version: April 5th, 2026_
 
 We do not expect countries or companies to risk their competitive advantage by pausing AI training runs for a long time if other countries or companies do not do the same. This is why we need a **global pause**.
 
-Implementing a pause _can_ backfire if it is not done properly, but we believe our proposal would [mitigate the most serious downsides](). Let's dive into what is needed to get there.
+Implementing a pause _can_ backfire if it is not done properly, but we believe our proposal would [mitigate the most serious downsides](https://pauseai.info/mitigating-pause-failures). Let's dive into what is needed to get there.
 
 ## Getting to a Treaty
 
@@ -34,8 +34,8 @@ Inspired by the International Atomic Energy Agency (IAEA), this agency will be r
 
 1. Granting approval for major **deployments** and **training runs** of AIs that are judged not to pose a threat to humanity. This will include red-teaming and [model evaluations](/evaluations).
 2. Granting approval for the creation of more powerful AI **once sufficient progress has been made** on the technical problems of AI safety and control.
-3. Specifying requirements for the **[oversight of AI training runs]()**.
-4. **Verifying** that the decisions of the agency are being honored. This can be done in [numerous ways](): [tracking GPUs](), incentivizing whistleblowers, energy monitoring, data center inspections, financial intelligence, semiconductor manufacturing facility inspections, AI developer inspections, chip location tracking and chip-based reporting. For more details on how the highly centralized [AI chip supply chain](https://www.governance.ai/analysis/computing-power-and-the-governance-of-ai) can be used for global oversight of AI development, read [Building the Pause Button]().
+3. Specifying requirements for the **[oversight of AI training runs](https://www.alignmentforum.org/posts/Zfk6faYvcf5Ht7xDx/compute-thresholds-proposed-rules-to-mitigate-risk-of-a-lab)**.
+4. **Verifying** that the decisions of the agency are being honored. This can be done in [numerous ways](https://arxiv.org/abs/2408.16074): [tracking GPUs](https://arxiv.org/abs/2303.11341), incentivizing whistleblowers, energy monitoring, data center inspections, financial intelligence, semiconductor manufacturing facility inspections, AI developer inspections, chip location tracking and chip-based reporting. For more details on how the highly centralized [AI chip supply chain](https://www.governance.ai/analysis/computing-power-and-the-governance-of-ai) can be used for global oversight of AI development, read [Building the Pause Button](https://pauseai.info/building-the-pause-button).
 
 Such an agency would need to convene experts in order to make informed and cautious judgements. There may be substantial disagreement between experts and the agency would need to synthesize a range of different views and decide on an appropriate level of caution.
 
