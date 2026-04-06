@@ -1,6 +1,6 @@
 import type { PageObjectResponse } from '@notionhq/client/build/src/api-endpoints'
 import { getNotionClient } from '$lib/server/notion'
-import { env } from '$env/dynamic/private'
+import * as env from '$env/static/private'
 
 /** 32-char Notion database id (hyphens optional). Override with NOTION_FUNDING_DONORS_DATABASE_ID in deploy env. */
 const FUNDING_DONORS_DATABASE_ID = '185ce958adb5459eb1eedc7b72da5738'
@@ -55,7 +55,8 @@ function sourceFromProps(props: PageObjectResponse['properties']): string {
 /** Top public donors from Notion, sorted by amount (desc). */
 export async function fetchTopPublicDonors(limit: number): Promise<PublicDonor[]> {
 	const rawId = (
-		env.NOTION_FUNDING_DONORS_DATABASE_ID?.trim() || FUNDING_DONORS_DATABASE_ID
+		(env as Record<string, string | undefined>).NOTION_FUNDING_DONORS_DATABASE_ID?.trim() ||
+		FUNDING_DONORS_DATABASE_ID
 	).replace(/^["']|["']$/g, '')
 	if (!rawId) {
 		console.warn(

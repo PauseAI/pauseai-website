@@ -3,6 +3,8 @@ import type { PageServerLoad } from './$types'
 
 const TOP_DONOR_COUNT = 15
 
+export const prerender = true
+
 export const load: PageServerLoad = async () => {
 	try {
 		const donors = await fetchTopPublicDonors(TOP_DONOR_COUNT)

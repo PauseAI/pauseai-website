@@ -1,5 +1,5 @@
 import { Client } from '@notionhq/client'
-import { env } from '$env/dynamic/private'
+import * as env from '$env/static/private'
 
 let notion: Client | null = null
 
