@@ -7,7 +7,7 @@ description: What the Australian chapter of PauseAI has been doing and needs hel
 ### 2026 April - help needed🙏
 
 - Upcoming
-   - Join our meetup where we kickoff our next campaign! We also need ideas on how to use social media better.
+   - Join our [meetup](https://luma.com/PauseAIAustralia?e=evt-G4AIOYYBHfJUYhc) where we kickoff our next campaign! We also need help setting up Aussie designs for merch.
    - Help out with [evergreen tasks](/australia)
    - Tell us [what you did](mailto:australia@pauseai.info?subject=Aussie%20Did%20a%20Thing) so we can add it, or [what you have cooking](mailto:australia@pauseai.info?subject=Things%20Cooking) so we can support you!
 - Ashley takee on volunteer role of Digital Marketing
