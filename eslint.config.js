@@ -64,6 +64,18 @@ export default defineConfig(
 		}
 	},
 	{
+		files: ['src/posts/**/*.md'],
+		rules: {
+			'no-restricted-syntax': [
+				'error',
+				{
+					selector: 'heading[depth=1]',
+					message: 'h1 is disallowed in posts. The title is already provided in the frontmatter.'
+				}
+			]
+		}
+	},
+	{
 		files: ['**/*.svelte', '**/*.svelte.ts', '**/*.svelte.js'],
 		extends: [svelte.configs.recommended],
 		// See more details at: https://typescript-eslint.io/packages/parser/
