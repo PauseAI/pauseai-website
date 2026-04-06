@@ -21,4 +21,4 @@ jobs:
             exit 1
           fi
           echo "Triggering Netlify build hook..."
-          curl -X POST -d "{}" "$NETLIFY_BUILD_HOOK"
+          curl -X POST -d "{}" "$NETLIFY_BUILD_HOOK?trigger_title=Scheduled+rebuild"
