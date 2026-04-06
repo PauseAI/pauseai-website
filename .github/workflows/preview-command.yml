@@ -22,7 +22,7 @@ jobs:
       issues: write # Permissions for reactions and comments
     steps:
       - name: Trigger Netlify via Hook
-        uses: actions/github-script@v7
+        uses: actions/github-script@v8
         env:
           NETLIFY_BUILD_HOOK: ${{ secrets.NETLIFY_BUILD_HOOK }}
         with:
