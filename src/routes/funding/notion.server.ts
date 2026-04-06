@@ -24,18 +24,18 @@ function getString(prop: NotionPropertyValue | undefined): string {
 	if (prop.type === 'url') return prop.url ?? ''
 	if (prop.type === 'date') return prop.date?.start ?? ''
 	if (prop.type === 'number' && prop.number != null) return String(prop.number)
-	if (prop.type === 'formula') {
-		if (prop.formula.type === 'string') return prop.formula.string ?? ''
-		if (prop.formula.type === 'number' && prop.formula.number != null)
-			return String(prop.formula.number)
-	}
 	return ''
+}
+
+function getBoolean(prop: NotionPropertyValue | undefined): boolean {
+	if (!prop) return false
+	if (prop.type === 'checkbox') return prop.checkbox
+	return false
 }
 
 function getNumber(prop: NotionPropertyValue | undefined): number | null {
 	if (!prop) return null
 	if (prop.type === 'number') return prop.number
-	if (prop.type === 'formula' && prop.formula.type === 'number') return prop.formula.number
 	return null
 }
 
@@ -45,22 +45,11 @@ function getTitleFromProps(props: PageObjectResponse['properties']): string {
 }
 
 function amountFromProps(props: PageObjectResponse['properties']): number | null {
-	const keys = ['Amount', 'EUR', 'Total', 'Total (EUR)'] as const
-	for (const k of keys) {
-		const n = getNumber(props[k])
-		if (n != null) return n
-	}
-	return null
+	return getNumber(props['Amount'])
 }
 
 function sourceFromProps(props: PageObjectResponse['properties']): string {
-	return (
-		getString(props['Source']) ||
-		getString(props['Name']) ||
-		getString(props['Donor']) ||
-		getString(props['Title']) ||
-		getTitleFromProps(props)
-	)
+	return getString(props['Source'])
 }
 
 /** Top public donors from Notion, sorted by amount (desc). */
@@ -86,7 +75,7 @@ export async function fetchTopPublicDonors(limit: number): Promise<PublicDonor[]
 			const response = await notion.databases.query({
 				database_id: databaseId,
 				filter: {
-					property: 'Public',
+					property: 'Listed',
 					checkbox: {
 						equals: true
 					}
@@ -111,7 +100,13 @@ export async function fetchTopPublicDonors(limit: number): Promise<PublicDonor[]
 			console.debug(`Skipping donor ${page.id}: amount is ${amountEur}`)
 			continue
 		}
-		const source = sourceFromProps(props).trim()
+
+		let source = sourceFromProps(props).trim()
+		const isAnonymous = getBoolean(props['Anonymous'])
+		if (isAnonymous) {
+			source = 'anonymous individual'
+		}
+
 		if (!source) {
 			console.debug(`Skipping donor ${page.id}: source is empty`)
 			continue
@@ -121,9 +116,8 @@ export async function fetchTopPublicDonors(limit: number): Promise<PublicDonor[]
 			id: page.id,
 			amountEur,
 			source,
-			url: getString(props['URL']).trim(),
-			notes:
-				getString(props['Notes']) || getString(props['Detail']) || getString(props['Via']) || ''
+			url: isAnonymous ? '' : getString(props['URL']).trim(),
+			notes: isAnonymous ? '' : getString(props['Notes'])
 		})
 	}
 

@@ -30,13 +30,6 @@ function getTitleFromProps(props: PageObjectResponse['properties']): string {
 	return getString(titleProp)
 }
 
-function getDateFromProps(propName: string, props: PageObjectResponse['properties']): string {
-	const namedProp = props[propName]
-	if (namedProp) return getString(namedProp)
-	const dateProp = Object.values(props).find((p) => p.type === 'date')
-	return getString(dateProp)
-}
-
 export async function fetchPressCoverage(): Promise<{
 	coverage: PressCoverage[]
 	outletOrder: string[]
@@ -81,15 +74,11 @@ export async function fetchPressCoverage(): Promise<{
 		const props = page.properties
 		return {
 			id: page.id,
-			title: getString(props['Name']) || getString(props['Title']) || getTitleFromProps(props),
+			title: getTitleFromProps(props),
 			url: getString(props['URL']),
-			date: getDateFromProps('Date', props) || getDateFromProps('Published', props),
+			date: getString(props['Date']),
 			outlet: getString(props['Outlet']),
-			notes:
-				getString(props['Notes']) ||
-				getString(props['Description']) ||
-				getString(props['Abstract']) ||
-				''
+			notes: getString(props['Notes'])
 		}
 	})
 
