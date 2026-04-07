@@ -129,8 +129,9 @@ description: What the Australian chapter of PauseAI has been doing and needs hel
 
 ### 2025 December
 
-- ✅Australian AI Safety Institute announced! This was one of our 3 main policy goals. Two to go: international AI treaty, and AI guardrails.
+- ✅Australian AI Safety Institute (AISI) announced! This was one of our 3 main policy goals. Two to go: international AI treaty, and AI guardrails.
 - ✅Emails from PauseAI Australia volunteers and a [question at a live townhall](https://youtu.be/SbqUEhJt5RU?si=CSVML0vatdW-GBEh) prompted five politicians to sign the [Future of Life Institute's Superintelligence Statement](https://www.linkedin.com/feed/update/urn:li:activity:7408047524902572032).
+- Minister of Industry [responds to petition EN7777](https://epetitions.aph.gov.au/api/ministerialresponse/download/EN7777), declining to commit to mandatory independent safety evaluations nor to advocate for an international pause treaty, instead pointing to voluntary measures.
 
 ### 2025 November
 
@@ -171,6 +172,15 @@ description: What the Australian chapter of PauseAI has been doing and needs hel
 </div>
 
 - Ran a stall at EAGxAustralasia
+<div style="display:flex; flex-wrap:wrap; gap:0.5rem; max-width:90%; margin:1rem auto;">
+<div style="flex:1; min-width:200px;">
+  
+![20251128-1659_EAGxStallMichaelSetup.jpg](/australia/20251128-1659_EAGxStallMichaelSetup.jpg)
+
+</div>
+
+</div>
+
 
 ### 2025 October
 
