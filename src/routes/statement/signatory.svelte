@@ -1,6 +1,6 @@
 <script lang="ts">
-	export let name: string | 'Anonymous'
-	export let country: string | ''
+	export let name: string // defaults to 'Anonymous'
+	export let country: string // defaults to empty string
 	export let bio: string | undefined
 	export let expandAllBios: boolean = false
 	const len = 60

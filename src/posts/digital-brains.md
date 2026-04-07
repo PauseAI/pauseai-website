@@ -1,5 +1,5 @@
 ---
-title: AI models are unpredictable digital brains
+title: AI Models Are Unpredictable Digital Brains
 description: Nobody understands how AI models work, nobody can predict their behavior, and nobody will be able to control them.
 ---
 

@@ -91,12 +91,11 @@ execSync('tsx scripts/inlang-settings.ts', { stdio: 'inherit' })
 
 // Dynamic import after runtime is generated (ESM scan happens before execSync)
 const runtime = await import('../../src/lib/paraglide/runtime.js')
+const baseLocale = String(runtime.baseLocale)
 
 // Verify base locale assumption
-if (runtime.baseLocale !== 'en') {
-	throw new Error(
-		`runtime.baseLocale set to ${runtime.baseLocale} but our code assumes and hardcodes 'en'`
-	)
+if (baseLocale !== 'en') {
+	throw new Error(`runtime.baseLocale set to ${baseLocale} but our code assumes and hardcodes 'en'`)
 }
 
 const locales = runtime.locales

@@ -1,5 +1,5 @@
 ---
-title: Why an AI takeover could be very likely
+title: Why an AI Takeover Could Be Very Likely
 description: As AI surpasses human capabilities, the likelihood of an AI takeover becomes very high.
 ---
 

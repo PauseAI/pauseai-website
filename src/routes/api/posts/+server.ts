@@ -9,6 +9,10 @@ import { meta as statementMeta } from '../../statement/meta'
 import { meta as dearSirDemisMeta } from '../../dear-sir-demis-2025/meta'
 import { meta as aboutMeta } from '../../about/meta'
 import { meta as contactMeta } from '../../contact-us/meta'
+import { meta as pressMeta } from '../../press/meta'
+import type { RequestHandler } from './$types'
+
+export type PostsApiResponse = Post[]
 
 /** When adding an extra route, make sure to add the metadata here for SEO purposes */
 const hardCodedPages: Post[] = [
@@ -20,10 +24,11 @@ const hardCodedPages: Post[] = [
 	statementMeta,
 	dearSirDemisMeta,
 	aboutMeta,
-	contactMeta
+	contactMeta,
+	pressMeta
 ]
 
-async function getPosts() {
+function getPosts() {
 	let posts: Post[] = []
 
 	const paths = import.meta.glob('/src/posts/*.md', { eager: true })
@@ -56,7 +61,7 @@ async function getPosts() {
 	return posts
 }
 
-export async function GET() {
-	const posts = await getPosts()
-	return json(posts)
+export const GET: RequestHandler = () => {
+	const posts = getPosts()
+	return json(posts satisfies PostsApiResponse)
 }

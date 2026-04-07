@@ -1,15 +1,15 @@
 import type { PageLoad } from './$types'
+import type { Signatory } from './types'
 
 export const load: PageLoad = async ({ fetch }) => {
 	try {
 		// Load the signatories data from our static JSON file
 		const response = await fetch('/open-letter/signatories-square.json')
-		const signatories = await response.json()
+		const signatories = (await response.json()) as Signatory[]
 
 		// Filter only successful signatories with portraits or organizations
 		const validSignatories = signatories.filter(
-			(signatory: { status?: string; type?: string }) =>
-				signatory.status === 'success' || signatory.type === 'Organization'
+			(signatory: Signatory) => signatory.status === 'success' || signatory.type === 'Organization'
 		)
 
 		return {

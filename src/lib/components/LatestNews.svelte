@@ -1,5 +1,6 @@
 <script lang="ts">
 	import type { NewsItem } from '$lib/types'
+	import type { NewsApiResponse } from '$api/news/+server'
 	import NewsCard from '$lib/components/NewsCard.svelte'
 	import { onMount } from 'svelte'
 
@@ -13,7 +14,7 @@
 		loading = true
 		try {
 			const response = await fetch(`/api/news?page=${page}&pageSize=${pageSize}`)
-			const data = await response.json()
+			const data = (await response.json()) as NewsApiResponse
 			newsItems = data.items
 			currentPage = data.page
 			totalPages = data.totalPages
@@ -26,11 +27,11 @@
 
 	function goToPage(page: number) {
 		if (page >= 1 && page <= totalPages) {
-			loadPage(page)
+			void loadPage(page)
 		}
 	}
 
-	onMount(() => loadPage(1))
+	onMount(() => void loadPage(1))
 </script>
 
 <section class="latest-news" data-pagefind-ignore>

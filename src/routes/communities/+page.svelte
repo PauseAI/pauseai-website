@@ -40,7 +40,7 @@
 		try {
 			const response = await fetch('/api/geo')
 			if (response.ok) {
-				const geoData: GeoApiResponse = await response.json()
+				const geoData = (await response.json()) as GeoApiResponse
 				return {
 					userLng: geoData.longitude,
 					userLat: geoData.latitude
@@ -56,16 +56,16 @@
 
 	onMount(async () => {
 		// Required, can throw
-		const style: StyleSpecification = await fetch(STYLE_URL).then((res) => res.json())
+		const style = (await fetch(STYLE_URL).then((res) => res.json())) as StyleSpecification
 		if (!style) return
 
 		// Optional, call with error handling
 		const { userLng, userLat } = await fetchUserLocation()
 
 		const initialState = {
-			lng: userLng || lng,
-			lat: userLat || lat,
-			zoom: userLat && userLng ? LOCATED_ZOOM : zoom
+			lng: userLng ?? lng,
+			lat: userLat ?? lat,
+			zoom: userLat != null && userLng != null ? LOCATED_ZOOM : zoom
 		}
 
 		map = new Map({

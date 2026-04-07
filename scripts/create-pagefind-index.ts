@@ -11,7 +11,11 @@ const { index, errors } = await pagefind.createIndex({})
 if (!index) throw new Error(errors.toString())
 
 // Index dynamic pages
-const posts: Post[] = JSON.parse(fs.readFileSync(POSTS_PATH, 'utf-8'))
+function parsePosts(raw: string): Post[] {
+	return JSON.parse(raw) as Post[]
+}
+
+const posts = parsePosts(fs.readFileSync(POSTS_PATH, 'utf-8'))
 for (const post of posts) {
 	if (fs.existsSync(`build/${post.slug}.html`)) continue
 	await index.addCustomRecord({

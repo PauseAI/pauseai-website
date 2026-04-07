@@ -1,6 +1,7 @@
 import * as luma from '$lib/clients/luma'
 import { generateCacheControlRecord } from '$lib/utils.js'
 import { json } from '@sveltejs/kit'
+import type { RequestHandler } from './$types'
 
 export type CalendarResponse = {
 	entries: {
@@ -20,7 +21,7 @@ export const prerender = false
 
 const CALENDAR_ID = 'cal-E1qhLPs5IvlQr8S'
 
-export async function GET({ setHeaders }) {
+export const GET: RequestHandler = async ({ setHeaders }) => {
 	const items = await luma.Calendar.getItems({
 		calendarApiId: CALENDAR_ID,
 		period: 'future',

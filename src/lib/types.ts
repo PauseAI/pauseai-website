@@ -1,4 +1,6 @@
 import type { SvelteHTMLElements } from 'svelte/elements'
+import type { Attachment } from 'airtable'
+import type { DeepPartial } from './utils'
 
 export type Categories = 'sveltekit' | 'svelte' | 'AI Safety' | 'Transparency' | 'Government'
 
@@ -11,6 +13,7 @@ export type FrontmatterMeta = {
 	date?: string
 	categories?: Categories[]
 	image?: string
+	showImage?: boolean
 	/** If true, this post will appear in the Latest News section on the homepage */
 	news?: boolean
 }
@@ -46,6 +49,17 @@ export type AirtableSignatory = {
 	date: string
 	email_verified?: boolean
 	duplicate?: boolean
+}
+
+export type AirtablePerson = {
+	'Full name': string
+	Bio2: string
+	Title?: string
+	Photo?: ReadonlyArray<DeepPartial<Attachment>>
+	Privacy: boolean
+	About: boolean
+	duplicate?: boolean
+	'About order'?: number
 }
 
 export type Person = {
@@ -113,4 +127,5 @@ export type CarouselQuote = {
 	author: string
 	title: string
 	image: Picture
+	href?: string
 }

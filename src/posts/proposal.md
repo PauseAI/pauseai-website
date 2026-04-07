@@ -4,79 +4,72 @@ description: Implement a temporary pause on the training of the most powerful
   general AI systems.
 ---
 
-**Implement a temporary pause on the training of the most powerful general AI systems**, until we know how to build them safely and keep them under democratic control.
+**Implement a temporary pause on the training of the most powerful general AI systems**, until we know how to build them safely and keep them under democratic control. Many scientists and industry leaders [agree that a pause is necessary](https://futureoflife.org/open-letter/pause-giant-ai-experiments/), and the U.S. public also strongly supports a pause ([64%](https://www.campaignforaisafety.org/usa-ai-x-risk-perception-tracker/)–[69%](https://today.yougov.com/topics/technology/survey-results/daily/2023/04/03/ad825/2)).
 
-_Version: Feb 4th, 2025_
+_Version: April 5th, 2026_
 
-Individual countries can and should implement this measure _right now_.
-Especially the US (or California, specifically) should implement a Pause, since it is home to virtually all leading AI companies.
-Many scientists and industry leaders [agree that a Pause is necessary](https://futureoflife.org/open-letter/pause-giant-ai-experiments/), and the (US) public also strongly supports a pause ([64%](https://www.campaignforaisafety.org/usa-ai-x-risk-perception-tracker/) - [69%](https://today.yougov.com/topics/technology/survey-results/daily/2023/04/03/ad825/2)).
+We do not expect countries or companies to risk their competitive advantage by pausing AI training runs for a long time if other countries or companies do not do the same. This is why we need a **global pause**.
 
-However, we cannot expect countries or companies to risk their competitive advantage by pausing AI training runs for a long time if other countries or companies do not do the same.
-This is why we need a **global Pause**.
-
-Let's dive into what is needed to get there.
+Implementing a pause _can_ backfire if it is not done properly, but we believe our proposal would [mitigate the most serious downsides](https://pauseai.info/mitigating-pause-failures). Let's dive into what is needed to get there.
 
 ## Getting to a Treaty
 
-An international agreement is typically established through a summit, where leaders of countries meet to discuss the issue and make a decision.
-We have already had [three AI safety summits so far](/summit).
+An international agreement is typically established through a summit, where leaders of countries meet to discuss the issue and make a decision. We have already had [four AI summits so far](/summit).
 
-The primary end-goal of these summits should be a **treaty**.
-But up until now, the summits have not been effective at producing anything legally binding.
-And treaty building tends to be slow and prone to vetoes.
-We [may not have the time](/urgency) to wait for traditional treaty making processes.
+The primary end goal of these summits should be a **treaty**. Up until now, the summits have not been effective at producing anything legally binding. Treaty building tends to be slow and prone to vetoes but we [may not have the time](/urgency) for a protracted treaty-making processes.
 
-So we need a new **treaty making process**:
+Essential ingredients for a successful **pause treaty process**:
 
-- The involvement of both the **US and China** is crucial.
-- It needs to be **impervious to vetoes** by any single country.
-- It needs to be **fast**. Normal treaty making processes take years, and we [may not have that time](/urgency).
-- The scale of this treaty making process is unprecedented, and it needs buy-in from all countries.
+- The involvement of both the **US and China**.
+- **Speed**. Normal treaty processes take years, and we [might build superhuman AI very soon](/urgency).
+- The major players (especially the US and China) need to understand [the severity of the risk](https://pauseai.info/xrisk).
 
 The treaty itself should contain the following **measures**:
 
-### Treaty Measures
+## Treaty Measures
 
-- **Set up an international AI safety agency**, similar to the IAEA. This agency will be responsible for:
-  - Granting approval for _deployments_. This will include red-teaming / [model evaluations](/evaluations).
-  - Granting approval for _new training runs_ of AI models above a certain size (e.g. 1 billion parameters).
-  - Periodic meetings to discuss the progress of AI safety research.
+### Set up an international AI Safety Agency (AISA).
 
-- **Only allow training of general AI systems if their safety can be guaranteed**.
-  - By general AI models, we mean models that are either 1) larger than 10^12 parameters, 2) have more than 10^25 FLOPs used for training or 3) capabilities that are expected to exceed a score of 86% on the MMLU benchmark. Note that this does not target _narrow_ AI systems, like image recognition used for diagnosing cancer.
-  - It may be possible that the AI alignment problem is _never solved_ - it may be unsolvable. In that case, we should never allow training of such systems.
-  - **Verify** that these dangerous training runs are not taking place. This can be done in [numerous ways](https://arxiv.org/abs/2408.16074): [tracking GPUs](https://arxiv.org/abs/2303.11341), incentivising whistleblowers, energy monitoring, data center inspections, financial intelligence, semiconductor manufacturing facility inspections, AI developer inspections, chip location tracking and chip-based reporting. The [AI chip supply chain](https://www.governance.ai/post/computing-power-and-the-governance-of-ai) is highly centralized which enables global oversight.
-  - Require [oversight during training runs](https://www.alignmentforum.org/posts/Zfk6faYvcf5Ht7xDx/compute-thresholds-proposed-rules-to-mitigate-risk-of-a-lab).
-  - Even if we can build controllable, safe AI, only build and deploy such technology with **strong democratic control**. A superintelligence is too powerful to be controlled by a single company or country.
+Inspired by the International Atomic Energy Agency (IAEA), this agency will be responsible for:
 
-- **Only allow deployment of models after no [dangerous capabilities](/dangerous-capabilities) are present**. (Pre-deployment evaluation)
-  - We will need standards and independent red-teaming to determine whether a model has dangerous capabilities.
-  - The list of dangerous capabilities may change over time as AI capabilities grow.
-  - Note that fully relying on model evaluations [is not enough](/4-levels-of-ai-regulation).
+1. Granting approval for major **deployments** and **training runs** of AIs that are judged not to pose a threat to humanity. This will include red-teaming and [model evaluations](/evaluations).
+2. Granting approval for the creation of more powerful AI **once sufficient progress has been made** on the technical problems of AI safety and control.
+3. Specifying requirements for the **[oversight of AI training runs](https://www.alignmentforum.org/posts/Zfk6faYvcf5Ht7xDx/compute-thresholds-proposed-rules-to-mitigate-risk-of-a-lab)**.
+4. **Verifying** that the decisions of the agency are being honored. This can be done in [numerous ways](https://arxiv.org/abs/2408.16074): [tracking GPUs](https://arxiv.org/abs/2303.11341), incentivizing whistleblowers, energy monitoring, data center inspections, financial intelligence, semiconductor manufacturing facility inspections, AI developer inspections, chip location tracking and chip-based reporting. For more details on how the highly centralized [AI chip supply chain](https://www.governance.ai/analysis/computing-power-and-the-governance-of-ai) can be used for global oversight of AI development, read [Building the Pause Button](https://pauseai.info/building-the-pause-button).
 
-Implementing a pause _can_ backfire if it is not done properly.
-Read more about [how these risks can be mitigated](/mitigating-pause-failures).
+Such an agency would need to convene experts in order to make informed and cautious judgements. There may be substantial disagreement between experts and the agency would need to synthesize a range of different views and decide on an appropriate level of caution.
 
-For more details on how the AI chip supply chain can be used for global oversight, read [Building the Pause Button](/building-the-pause-button).
+### Signatory countries have additional veto powers over the deployment of safe superhuman AI.
 
-## Other measures that effectively slow down
+1. **A sufficiently large coalition** of opposing countries can veto any deployment of a safe superhuman AI system. This includes opposing details of a deployment such as the instructions given to a system or the values instilled in it.
+2. **Until a deployment is agreed**, the weights and access to the AI must be kept strictly **under the stewardship of the AISA.** The agency may use the AI to enforce the treaty against belligerent nations, but not for any other purpose.
 
-- **Ban training of AI systems on copyrighted material**. This helps with copyright issues, slows growing inequality and slows down progress towards superintelligence.
+If we can build controllable, safe AI, we must ensure that the benefits accrue to all of humanity. **No single company or country should be allowed to collect all of the surplus generated by AI.** If AI creates unprecedented abundance, no person should be left in poverty.
+
+If a group of countries feels that they will be excluded from the benefits of AI, they should be given a strong negotiating position with which to demand their fair share. Similarly, if a group of democratic countries believe that an authoritarian country will deploy AI to oppress their own people, they should be able to push for a deployment that empowers all citizens in every country.
+
+## Effects of a treaty
+
+The most dangerous models will be _general_ AI models that can understand language and complete a wide range of tasks across many different domains. The most general models that exist today are large language models such as ChatGPT and agentic systems such as Claude Code that are built on top of them. But this treaty would usually **not affect _narrow_ AI systems**, like image recognition systems used for diagnosing cancer.
+
+It may be possible that the AI alignment problem is very difficult and _not solved for a long time_. In that case, the treaty would prevent the creation of superhuman AI for a long time. That is the only way to ensure the safety of humanity.
+
+**Enforcement** of the treaty requires the US and China to back it with their economic and military power. If the leaders of both nations understand the severity of the risks of AI, they will see that the success of the treaty is in their own interests. If a safe superhuman AI is created, the AI itself will be used by the AISA to enforce the treaty.
+
+## Other measures that effectively slow down AI
+
+- **Ban training of AI systems on copyrighted material**. This helps with copyright issues, slows growing inequality and slows down progress towards superhuman AI.
 - **Hold AI model creators liable** for criminal acts committed using their AI systems. This gives model creators more incentives to make sure their models are safe.
 
 ## Long term policy
 
-At the time of writing, training a GPT-3 sized model costs millions of dollars.
-This makes it very difficult to train such models, and this makes it easier to enforce the control of training using GPU tracking.
-However, the cost of training a model is decreasing exponentially due to hardware improvements and new training algorithms.
+At the time of writing, training a GPT-5 level model costs many millions of dollars. This makes it very difficult to train such models, and makes it easier to enforce controls on training using GPU tracking. However, the cost of training a model is decreasing exponentially due to hardware improvements and new training algorithms.
 
-There will come a point where potentially superintelligent AI models can be trained for a few thousand dollars or less, perhaps even on consumer hardware.
-We need to be prepared for this.
-We should consider the following policies:
+There may come a point where potentially superhuman AI models can be trained for a few thousand dollars or less, perhaps even on consumer hardware.
+We need to be prepared for this and should consider the following additional safeguards:
 
-- **Limit publication of training algorithms / runtime improvements**. Sometimes a new algorithm is published that makes training much more efficient. The Transformer architecture, for example, enabled virtually all recent progress in AI. These types of capability jumps can happen at any time, and we should consider limiting the publication of such algorithms to minimize the risk of a sudden capability jump. There are also innovations that enable [decentralized training runs](https://www.primeintellect.ai/blog/opendiloco). Similarly, some runtime innovations could drastically change what can be done with existing models. Banning the publication of such algorithms can be implemented using similar means as how we ban other forms of information, such as illegal pornographic media.
-- **Limit capability advancements of computational resources**. If training a superintelligence becomes possible on consumer hardware, we are in trouble. We should consider limiting capability advances of hardware (e.g. through limitations on lithography, chip design, and novel computing paradigms such as photonic chips and quantum computing).
+- **Limit publication of training algorithms / runtime improvements**. Sometimes a new algorithm is published that makes training much more efficient. The Transformer architecture, for example, enabled virtually all recent progress in AI. These types of capability jumps can happen at any time, and we should consider limiting the publication of such algorithms to minimize the risk of a sudden capability jump. There are also innovations that enable [decentralized training runs](https://www.primeintellect.ai/blog/opendiloco). Similarly, some runtime innovations could drastically change what can be done with existing models. Limiting the publication of dangerous research has been done quite effectively in other fields such as biosecurity, where pathogen-enhancement methods are tightly controlled.
+- **Limit capability advancements of computational resources**. We should consider limiting capability advances of hardware (e.g. through limitations on lithography, chip design, and novel computing paradigms such as photonic chips and quantum computing).
 
 ## Help us achieve this
 

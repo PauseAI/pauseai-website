@@ -1,0 +1,92 @@
+name: Preview Deploy
+
+on:
+  issue_comment:
+    types: [created]
+
+env:
+  SITE_NAME: pauseai
+
+jobs:
+  deploy:
+    name: Trigger Netlify Preview
+    if: |
+      github.event.issue.pull_request &&
+      contains(github.event.comment.body, '/preview') &&
+      (github.event.comment.author_association == 'OWNER' || 
+       github.event.comment.author_association == 'MEMBER' || 
+       github.event.comment.author_association == 'COLLABORATOR')
+    runs-on: ubuntu-latest
+    permissions:
+      pull-requests: write
+    steps:
+      - name: Trigger Netlify via Hook
+        uses: actions/github-script@v8
+        env:
+          NETLIFY_BUILD_HOOK: ${{ secrets.NETLIFY_BUILD_HOOK }}
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            // 1. Get PR branch details
+            const prNumber = context.issue.number;
+            const { data: pr } = await github.rest.pulls.get({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              pull_number: prNumber
+            });
+            const branch = pr.head.ref;
+            console.log(`Triggering Netlify build for branch: ${branch}`);
+
+            // 2. Add reaction to the comment to acknowledge
+            await github.rest.reactions.createForIssueComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              comment_id: context.payload.comment.id,
+              content: 'rocket'
+            });
+
+            // 3. Trigger build hook
+            const hookUrl = process.env.NETLIFY_BUILD_HOOK;
+            if (!hookUrl) {
+              core.setFailed("NETLIFY_BUILD_HOOK secret is not set in GitHub repository settings.");
+              return;
+            }
+
+            // Build the URL with parameters
+            const url = new URL(hookUrl);
+            url.searchParams.append('trigger_branch', branch);
+            url.searchParams.append('trigger_title', `Preview from PR #${prNumber} by @${context.payload.comment.user.login}`);
+
+            console.log(`Triggering hook...`);
+
+            try {
+              const response = await fetch(url.toString(), { method: 'POST' });
+              if (!response.ok) {
+                core.setFailed(`Netlify hook failed with status ${response.status}`);
+                return;
+              }
+              console.log('Successfully triggered Netlify build');
+            } catch (error) {
+              core.setFailed(`Fetch error: ${error.message}`);
+              return;
+            }
+
+            // 4. Generate preview URL and post a response comment
+            // Netlify slugification: lowercase, everything not [a-z0-9] replaced with '-', no leading/trailing '-'
+            const slug = branch.toLowerCase()
+              .replace(/[^a-z0-9]/g, '-')
+              .replace(/-+/g, '-')
+              .replace(/^-|-$/g, '');
+            const siteName = process.env.SITE_NAME;
+            if (!siteName) {
+              core.setFailed("SITE_NAME environment variable is not set.");
+              return;
+            }
+            const previewUrl = `https://${slug}--${siteName}.netlify.app`;
+
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: prNumber,
+              body: `🚀 Deployment triggered for branch \`${branch}\`!\n\nOnce the build is finished, it will be available at:\n[${previewUrl}](${previewUrl})`
+            });

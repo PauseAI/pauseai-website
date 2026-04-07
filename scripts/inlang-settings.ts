@@ -31,17 +31,17 @@ function setupEnglishSupport(verbose: boolean): void {
 	}
 }
 
-function regenerateSettings(verbose = false): void {
+async function regenerateSettings(verbose = false): Promise<void> {
 	// Get default settings from our centralized config
 	const defaultSettings = getDefaultSettings()
 
 	// Process the PARAGLIDE_LOCALES environment variable to get active locales
 	const settings = { ...defaultSettings }
-	settings.locales = possiblyOverriddenLocales(defaultSettings)
+	settings.locales = possiblyOverriddenLocales(process.env, defaultSettings)
 
 	if (verbose) {
 		console.info(
-			`Env override [${process.env.PARAGLIDE_LOCALES}] (${getDevContext()}) yields ${settings.locales.join(', ')}`
+			`Env override [${process.env.PARAGLIDE_LOCALES}] (${getDevContext(process.env)}) yields ${settings.locales.join(', ')}`
 		)
 	} else {
 		console.log(`Using locales: ${settings.locales.join(', ')}`)
@@ -88,7 +88,9 @@ function regenerateSettings(verbose = false): void {
 	} else {
 		// Clone or update the l10n cage
 		if (verbose)
-			console.log(`\n\ud83d\udd04 Setting up l10n cage (need at least ${settings.locales}...`)
+			console.log(
+				`\n\ud83d\udd04 Setting up l10n cage (need at least ${String(settings.locales)}...`
+			)
 		setupL10nCage(L10N_CAGE_DIR, verbose)
 		if (verbose) console.log(`\n🧹 Cleaning up l10n files to remove LLM commentary...`)
 		for (const locale of settings.locales) {
@@ -149,7 +151,7 @@ function regenerateSettings(verbose = false): void {
 		const gitignorePath = path.join(inlangProjectPath, '.gitignore')
 		const gitignoreContent = fs.readFileSync(gitignorePath, 'utf-8')
 
-		compile(compileOptions)
+		await compile(compileOptions)
 
 		fs.writeFileSync(gitignorePath, gitignoreContent)
 
@@ -165,4 +167,4 @@ const verbose = process.argv.includes('--verbose')
 
 // Main execution logic - Always regenerate
 console.log('Regenerating inlang settings...')
-regenerateSettings(verbose)
+void regenerateSettings(verbose)

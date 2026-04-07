@@ -19,6 +19,7 @@
 	} from './selfieStore'
 	import Image from '$lib/components/Image.svelte'
 	import { detectAndStoreCollagenUid, hasCollagenUid } from '$lib/collagen'
+	import { env } from '$env/dynamic/public'
 
 	// Page metadata
 	const title = 'Stop Superintelligence'
@@ -84,7 +85,7 @@
 		document.body.appendChild(script)
 
 		// Check if camera permission was already granted (without prompting)
-		checkCameraPermission()
+		void checkCameraPermission()
 
 		// Initialize audio for shutter sound
 		initializeAudio()
@@ -107,7 +108,7 @@
 		if (typeof window !== 'undefined' && cloudinary) {
 			cloudinaryWidget = cloudinary.createUploadWidget(
 				{
-					cloudName: import.meta.env.PUBLIC_CLOUDINARY_CLOUD_NAME || 'dyjlw1syg',
+					cloudName: env.PUBLIC_CLOUDINARY_CLOUD_NAME || 'dyjlw1syg',
 					uploadPreset: 'selfie',
 					sources: ['camera', 'local', 'google_drive', 'dropbox'],
 					multiple: false,
@@ -146,7 +147,7 @@
 						}
 					}
 				},
-				async (error: Error | null, result: CloudinaryResult) => {
+				(error: Error | null, result: CloudinaryResult) => {
 					if (error) {
 						console.error('Upload error:', error)
 						toast.error('Upload failed. Please try again.')

@@ -4,10 +4,17 @@ slug: india-summit-2026
 description: World leaders meet in India on February 16-20 to shape the future of AI governance. Take action now - sign the petition and email your policymakers.
 date: 2026-02-11T12:00:00.000Z
 image: /india-summit-logo.png
+showImage: false
 news: true
 ---
 
 **World leaders meet in India on February 16-20 to shape the future of AI governance. Make sure they hear from you before they sit down at that table.**
+
+<div style="max-width: 500px">
+
+![India AI Impact Summit 2026](/india-summit-logo.png)
+
+</div>
 
 ## Take action
 

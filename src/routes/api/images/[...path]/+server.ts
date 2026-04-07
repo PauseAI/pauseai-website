@@ -1,11 +1,16 @@
-import { getAssetUrlOrStaticUrl } from '$lib/images'
+import { resolveImageUrl } from '$lib/images'
 import { headersToRecord } from '$lib/utils'
 import Headers from '@remix-run/headers'
 import { StatusCodes } from 'http-status-codes'
+import type { RequestHandler } from './$types'
 
-export const GET = ({ params }) => {
+export const GET: RequestHandler = ({ params }) => {
+	if (!params.path) {
+		return new Response(null, { status: StatusCodes.NOT_FOUND })
+	}
+
 	const headers = new Headers({
-		location: getAssetUrlOrStaticUrl('/' + params.path)
+		location: resolveImageUrl('/' + params.path)
 	})
 	return new Response(null, {
 		status: StatusCodes.TEMPORARY_REDIRECT,

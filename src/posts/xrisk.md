@@ -1,5 +1,5 @@
 ---
-title: The extinction risk of superintelligent AI
+title: The Extinction Risk of Superintelligent AI
 description: Why AI is a risk for the future of our existence, and why we need to pause development.
 ---
 

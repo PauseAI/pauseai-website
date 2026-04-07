@@ -1,5 +1,5 @@
 ---
-title: PauseAI protest @ Parliament Square - June 8th
+title: PauseAI Protest @ Parliament Square - June 8th
 description: We are organising a protest at Parliament Square to demand a summit to pause AI development.
 ---
 

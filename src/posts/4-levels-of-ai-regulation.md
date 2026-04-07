@@ -1,13 +1,20 @@
 ---
-title: 4 Levels of AI safety regulation
+title: 4 Levels of AI Safety Regulation
 description: A framework for thinking about how to mitigate the risks from powerful AI systems
 image: /4levels.png
+showImage: false
 ---
 
 As AI capabilities increase, the [risks](/risks) these systems pose to humanity increase as well.
 Many scientists have already warned about the [risk of human extinction](/xrisk).
 
 In this article, we'll look at our 4-levels framework for thinking about how AI safety can be regulated.
+
+<div style="max-width: 500px">
+
+![4 Levels of AI safety regulation](/4levels-cropped.png)
+
+</div>
 
 ## AI pipeline as a framework for safety governance
 

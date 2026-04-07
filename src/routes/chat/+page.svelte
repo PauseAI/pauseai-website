@@ -1,11 +1,13 @@
 <!-- FILEPATH: /Users/joep/dev/github/joepio/pauseai/src/routes/chat/+page.svelte -->
 <script lang="ts">
 	import { botName } from '$lib/config'
-	import type { ChatResponse, Message } from '../api/chat/+server'
+	import type { ChatRequest, ChatResponse, Message } from '$api/chat/+server'
 	import { onMount } from 'svelte'
 
 	let messages: Message[] =
-		typeof localStorage !== 'undefined' ? JSON.parse(localStorage.getItem('messages') || '[]') : []
+		typeof localStorage !== 'undefined'
+			? (JSON.parse(localStorage.getItem('messages') || '[]') as Message[])
+			: []
 
 	let input = ''
 	let loading = false
@@ -17,9 +19,9 @@
 	}
 
 	function copy() {
-		const role = (message: Message) => (message.role === 'user' ? 'You' : { botName })
+		const role = (message: Message) => (message.role === 'user' ? 'You' : botName)
 		const text = messages.map((message) => `${role(message)}:\n${message.content}`).join('\n\n')
-		navigator.clipboard.writeText(text)
+		void navigator.clipboard.writeText(text)
 		window.alert('Copied to clipboard!')
 	}
 
@@ -35,7 +37,7 @@
 			headers: {
 				'Content-Type': 'application/json'
 			},
-			body: JSON.stringify(messages)
+			body: JSON.stringify(messages satisfies ChatRequest)
 		})
 
 		const data = (await response.json()) as ChatResponse
@@ -55,7 +57,7 @@
 	function handleKeyDown(event: KeyboardEvent) {
 		if (event.key === 'Enter') {
 			event.preventDefault()
-			sendMessage()
+			void sendMessage()
 			input = ''
 		}
 	}

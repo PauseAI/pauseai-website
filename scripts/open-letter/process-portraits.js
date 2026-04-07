@@ -17,7 +17,8 @@ function getImageDimensions(/** @type {string} */ imagePath) {
 		return { width, height }
 	} catch (error) {
 		throw new Error(
-			`Failed to get dimensions: ${error instanceof Error ? error.message : String(error)}`
+			`Failed to get dimensions: ${error instanceof Error ? error.message : String(error)}`,
+			{ cause: error }
 		)
 	}
 }
@@ -33,7 +34,8 @@ function resizeImage(
 		return true
 	} catch (error) {
 		throw new Error(
-			`Failed to resize image: ${error instanceof Error ? error.message : String(error)}`
+			`Failed to resize image: ${error instanceof Error ? error.message : String(error)}`,
+			{ cause: error }
 		)
 	}
 }
@@ -65,7 +67,7 @@ function validateImage(/** @type {string} */ imagePath) {
 	return { width, height }
 }
 
-async function main() {
+function main() {
 	const signatoryDir = path.join(path.dirname(__dirname), 'static', 'portraits', 'signatories')
 	const processedDir = path.join(path.dirname(__dirname), 'static', 'portraits', 'processed')
 
@@ -153,4 +155,4 @@ async function main() {
 	}
 }
 
-main().catch(console.error)
+main()

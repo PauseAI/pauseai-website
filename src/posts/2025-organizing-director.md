@@ -5,8 +5,6 @@ description: Organizing Director Vacancy for PauseAI Global
 date: 2025-11-03T14:26:00.000+01:00
 ---
 
-# Organizing Director (Vacancy)
-
 Update: This vacancy is now closed.
 
 ## **Role description**

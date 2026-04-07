@@ -1,5 +1,5 @@
 ---
-title: Tips for effective lobbying
+title: Tips for Effective Lobbying
 description: How to convince your government that it needs to work towards a pause on AI training runs
 ---
 

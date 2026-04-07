@@ -1,5 +1,5 @@
 ---
-title: Rebutting skeptical arguments about AI existential risks
+title: Rebutting Skeptical Arguments About AI Existential Risks
 description: Why AI existential risks are real and deserve serious attention
 ---
 

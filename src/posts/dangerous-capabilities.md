@@ -1,5 +1,5 @@
 ---
-title: Regulating dangerous capabilities in AI
+title: Regulating Dangerous Capabilities in AI
 description: The more powerful AI becomes in specific domains, the larger the risks become. How do we prevent these dangerous capabilities from appearing or spreading?
 ---
 

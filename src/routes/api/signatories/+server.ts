@@ -2,6 +2,7 @@ import type { AirtableSignatory, Signatory } from '$lib/types.js'
 import { json } from '@sveltejs/kit'
 import { fetchAllPages, type AirtableRecord } from '$lib/airtable.js'
 import { generateCacheControlRecord } from '$lib/utils'
+import type { RequestHandler } from './$types'
 
 /**
  * Fallback people data to use in development if Airtable fetch fails
@@ -23,6 +24,11 @@ const fallbackSignatories: Signatory[] = [
 	}
 ]
 
+export type SignatoriesApiResponse = {
+	signatories: Signatory[]
+	totalCount: number
+}
+
 function recordToSignatory(record: AirtableRecord<AirtableSignatory>): Signatory {
 	return {
 		private: record.fields.private || false,
@@ -33,7 +39,7 @@ function recordToSignatory(record: AirtableRecord<AirtableSignatory>): Signatory
 	}
 }
 
-export async function GET({ fetch, setHeaders }) {
+export const GET: RequestHandler = async ({ fetch, setHeaders }) => {
 	const url = `https://api.airtable.com/v0/appWPTGqZmUcs3NWu/tbl2emfOWNWoVz1kW`
 	setHeaders(generateCacheControlRecord({ public: true, maxAge: 60 * 60 }))
 
@@ -57,16 +63,18 @@ export async function GET({ fetch, setHeaders }) {
 		signatories.sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime())
 
 		// Return both the visible signatories and the total count
-		return json({
+		const response: SignatoriesApiResponse = {
 			signatories: signatories,
 			totalCount: signatories.length
-		})
+		}
+		return json(response)
 	} catch (e) {
 		console.error('Error fetching signatories:', e)
 
-		return json({
+		const response: SignatoriesApiResponse = {
 			signatories: fallbackSignatories,
 			totalCount: 0
-		})
+		}
+		return json(response)
 	}
 }

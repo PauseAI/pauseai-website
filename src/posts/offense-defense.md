@@ -1,5 +1,5 @@
 ---
-title: Offense / Defense balance in AI safety
+title: Offense / Defense Balance in AI Safety
 description: How to think about the balance between offense and defense in AI safety
 ---
 

@@ -14,7 +14,7 @@
 			const response = await fetch(apiUrl)
 			if (response.ok) {
 				toast.success('Your email has been verified!')
-				goto('/')
+				void goto('/')
 			} else {
 				const errorText = await response.text()
 				throw new Error(`Verification failed: ${errorText || response.statusText}`)
