@@ -27,6 +27,7 @@ import {
 	createRateLimitingQueue,
 	LLM_DEFAULTS
 } from './llm-client'
+import { getBillingSnapshot } from './llm-utils'
 import { Mode } from './mode'
 import { generateJsonPrompt, generateMarkdownPrompt, generateReviewPrompt } from './prompts'
 import { retrieveMarkdown, retrieveMessages } from './heart'
@@ -310,72 +311,89 @@ const logMessage = (msg: string) => {
 		pushAfterBatch
 	}
 
-	// Filter source paths to only files in the plan
-	const planLocales = [...new Set(plan.items.map((item) => item.locale))]
+	// Snapshot OpenRouter billing before any LLM work, so we can report spend
+	// for this run regardless of whether it succeeds or throws.
+	const beforeBilling = await getBillingSnapshot(llmClient)
 
-	const hasMessageItems = plan.items.some((item) => item.source.startsWith('messages/'))
-	const markdownPlanPaths = plan.items
-		.filter((item) => !item.source.startsWith('messages/'))
-		.map((item) => item.source)
+	try {
+		// Filter source paths to only files in the plan
+		const planLocales = [...new Set(plan.items.map((item) => item.locale))]
 
-	// Execute plan items sequentially
-	const results: { cacheCount: number; totalProcessed: number }[] = []
+		const hasMessageItems = plan.items.some((item) => item.source.startsWith('messages/'))
+		const markdownPlanPaths = plan.items
+			.filter((item) => !item.source.startsWith('messages/'))
+			.map((item) => item.source)
 
-	if (hasMessageItems) {
-		results.push(
-			await retrieveMessages(
-				{
-					sourcePath: MESSAGE_SOURCE,
-					locales: planLocales,
-					l10nPromptGenerator: generateJsonPrompt,
-					reviewPromptGenerator: generateReviewPrompt,
-					targetDir: MESSAGE_L10NS,
-					cageWorkingDir: L10N_CAGE_DIR,
-					logMessageFn: logMessage
-				},
-				executeOptions
+		// Execute plan items sequentially
+		const results: { cacheCount: number; totalProcessed: number }[] = []
+
+		if (hasMessageItems) {
+			results.push(
+				await retrieveMessages(
+					{
+						sourcePath: MESSAGE_SOURCE,
+						locales: planLocales,
+						l10nPromptGenerator: generateJsonPrompt,
+						reviewPromptGenerator: generateReviewPrompt,
+						targetDir: MESSAGE_L10NS,
+						cageWorkingDir: L10N_CAGE_DIR,
+						logMessageFn: logMessage
+					},
+					executeOptions
+				)
 			)
-		)
-	}
+		}
 
-	if (markdownPlanPaths.length > 0) {
-		results.push(
-			await retrieveMarkdown(
-				{
-					sourcePaths: markdownPlanPaths,
-					sourceBaseDir: MARKDOWN_SOURCE,
-					locales: planLocales,
-					l10nPromptGenerator: generateMarkdownPrompt,
-					reviewPromptGenerator: generateReviewPrompt,
-					targetDir: MARKDOWN_L10NS,
-					cageWorkingDir: L10N_CAGE_DIR,
-					logMessageFn: logMessage
-				},
-				executeOptions
+		if (markdownPlanPaths.length > 0) {
+			results.push(
+				await retrieveMarkdown(
+					{
+						sourcePaths: markdownPlanPaths,
+						sourceBaseDir: MARKDOWN_SOURCE,
+						locales: planLocales,
+						l10nPromptGenerator: generateMarkdownPrompt,
+						reviewPromptGenerator: generateReviewPrompt,
+						targetDir: MARKDOWN_L10NS,
+						cageWorkingDir: L10N_CAGE_DIR,
+						logMessageFn: logMessage
+					},
+					executeOptions
+				)
 			)
-		)
-	}
+		}
 
-	const cacheCount = results.reduce((total, result) => total + result.cacheCount, 0)
-	const totalFiles = results.reduce((total, result) => total + result.totalProcessed, 0)
-	const newL10ns = totalFiles - cacheCount
+		const cacheCount = results.reduce((total, result) => total + result.cacheCount, 0)
+		const totalFiles = results.reduce((total, result) => total + result.totalProcessed, 0)
+		const newL10ns = totalFiles - cacheCount
 
-	// Record completion
-	recordCompletion(plan.items, plan)
-	emptyTodo(mode.branch, LLM_DEFAULTS.MODEL)
+		// Record completion
+		recordCompletion(plan.items, plan)
+		emptyTodo(mode.branch, LLM_DEFAULTS.MODEL)
 
-	// Summary and push
-	console.log(`\n📦 L10n summary:`)
-	if (cacheCount > 0) {
-		console.log(`   - ${cacheCount} files used cached l10ns`)
-	}
-	console.log(`   - ${newL10ns} files needed new l10ns`)
+		// Summary and push
+		console.log(`\n📦 L10n summary:`)
+		if (cacheCount > 0) {
+			console.log(`   - ${cacheCount} files used cached l10ns`)
+		}
+		console.log(`   - ${newL10ns} files needed new l10ns`)
 
-	if (newL10ns > 0) {
-		console.log(`\nPushing l10n changes to remote cage...`)
-		await pushWithUpstream(cageGit, mode.options.verbose)
-	} else {
-		console.log(`\nNo new l10ns to push to remote cage - skipping Git push.`)
+		if (newL10ns > 0) {
+			console.log(`\nPushing l10n changes to remote cage...`)
+			await pushWithUpstream(cageGit, mode.options.verbose)
+		} else {
+			console.log(`\nNo new l10ns to push to remote cage - skipping Git push.`)
+		}
+	} finally {
+		const afterBilling = await getBillingSnapshot(llmClient)
+		if (beforeBilling.limitRemaining !== null && afterBilling.limitRemaining !== null) {
+			const spent = beforeBilling.limitRemaining - afterBilling.limitRemaining
+			console.log(`\n💰 OpenRouter spend this run: $${spent.toFixed(4)}`)
+			console.log(
+				`   ($${beforeBilling.limitRemaining.toFixed(4)} → $${afterBilling.limitRemaining.toFixed(4)} remaining)`
+			)
+		} else {
+			console.log('\n💰 OpenRouter spend this run: unable to determine (billing query failed)')
+		}
 	}
 
 	// Clean up Git secrets in CI environments
