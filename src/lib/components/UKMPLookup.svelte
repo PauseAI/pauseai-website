@@ -1,4 +1,5 @@
 <script lang="ts">
+	import type { UKLookupMPApiResponse } from '$api/uk-lookup-mp/+server'
 	import Button from './Button.svelte'
 	import Card from './Card.svelte'
 	import UKMPEmailForm from './UKMPEmailForm.svelte'
@@ -55,7 +56,7 @@
 				body: JSON.stringify({ postcode: trimmedPostcode })
 			})
 
-			const result = await response.json()
+			const result = (await response.json()) as UKLookupMPApiResponse
 
 			if (result.success) {
 				mp = result.mp
@@ -89,7 +90,7 @@
 
 	function handleKeyPress(event: KeyboardEvent) {
 		if (event.key === 'Enter') {
-			lookupMP()
+			void lookupMP()
 		}
 	}
 </script>

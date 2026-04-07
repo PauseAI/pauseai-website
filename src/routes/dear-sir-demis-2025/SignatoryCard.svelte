@@ -1,12 +1,7 @@
 <script lang="ts">
-	export let signatory: {
-		name: string
-		displayName?: string
-		type: string
-		portrait?: string
-		party?: string
-		chamber?: string
-	}
+	import type { Signatory } from './types'
+
+	export let signatory: Signatory
 
 	// Determine the portrait path based on chamber and processed images
 	function getPortraitPath(signatory: { portrait?: string }) {

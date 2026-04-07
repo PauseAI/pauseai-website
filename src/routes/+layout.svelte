@@ -25,9 +25,10 @@
 	import Footer from './footer.svelte'
 	import Header from './header.svelte'
 	import PageTransition from './transition.svelte'
-	import bannerSelection from './banner-selection.cjs?raw'
+	import bannerSelection from './banner-selection.js?raw'
+	import type { PageData } from './$types'
 
-	export let data
+	export let data: PageData
 
 	let eventFound: boolean
 	let geoForNearbyEvent: GeoApiResponse | null = null
@@ -37,7 +38,7 @@
 		const searchString = window.location.search
 		const response = await fetch('/api/geo' + searchString)
 		if (!response.ok) return
-		const geo: GeoApiResponse = await response.json()
+		const geo = (await response.json()) as GeoApiResponse
 
 		// Keep geo cookie in sync with actual location.
 		// Re-run selectBanners if country changed or cookie not yet set.
@@ -100,7 +101,12 @@
 	</script>
 
 	<!-- eslint-disable-next-line svelte/no-at-html-tags not vulnerable against XSS -->
-	{@html `<${'script'}>${bannerSelection}</script>`}
+	{@html `<${'script'}>${
+		bannerSelection
+			.replaceAll(/\/\*[\s\S]*?\*\//g, '') // remove block comments
+			.replaceAll(/\/\/[^"'`\n]*?$/gm, '') // remove line comments
+			.replaceAll(/\n\s*(?=\n)/g, '') // remove empty lines
+	}</script>`}
 </svelte:head>
 
 <PreloadFonts urls={[robotoSlabLatin300, sairaCondensedLatin700]} />

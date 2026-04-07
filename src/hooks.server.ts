@@ -15,8 +15,32 @@ if (
 	delete (globalThis as { window?: Window }).window
 }
 
-import { type Handle } from '@sveltejs/kit'
+import { type Handle, type HandleServerError } from '@sveltejs/kit'
+import { env } from '$env/dynamic/public'
 import { paraglideMiddleware } from '$lib/paraglide/server.js'
+import { SENTRY_RELEASE } from '$lib/sentry'
+
+let Sentry: typeof import('@sentry/deno') | undefined
+
+export const init = async () => {
+	const dsn = env.PUBLIC_SENTRY_DSN
+	const release = SENTRY_RELEASE
+	const isDeno = typeof Deno !== 'undefined'
+
+	if (dsn && isDeno) {
+		try {
+			Sentry = await import('@sentry/deno')
+			Sentry.init({
+				dsn,
+				release,
+				tracesSampleRate: 0,
+				enableLogs: true
+			})
+		} catch (e) {
+			console.error('[Sentry Server] Failed to initialize:', e)
+		}
+	}
+}
 
 const handle: Handle = ({ event, resolve }) =>
 	paraglideMiddleware(event.request, ({ request: localizedRequest, locale }) => {
@@ -27,3 +51,19 @@ const handle: Handle = ({ event, resolve }) =>
 	})
 
 export { handle }
+
+export const handleError: HandleServerError = ({ error, event, status, message }) => {
+	console.error(error)
+	if (Sentry) {
+		Sentry.captureException(error, {
+			extra: {
+				status,
+				message,
+				url: event.url?.href,
+				method: event.request?.method
+			}
+		})
+		event.platform?.context.waitUntil(Sentry.flush(2000))
+	}
+	return { message: 'An unexpected error occurred.' }
+}

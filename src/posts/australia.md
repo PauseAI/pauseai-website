@@ -6,7 +6,7 @@ description: the Australian chapter of PauseAI
 
 Within a decade, artificial intelligence could become smarter than humans at almost everything — and able to improve itself without human control. If this happens without strong global safeguards, the consequences could be catastrophic.
 
-Australia should help stop that from happening. [Learn how](/australia-detail). [See how we're going](/australia-wins)!
+Australia should help stop that from happening. [Learn how](/australia-detail). [See how we're going](/australia-progress)!
 
 ## Get involved
 
@@ -20,7 +20,7 @@ If you’re in Australia, you can help:
 
 ## Connect with PauseAI Australia
 
-- [australia@pauseai.info](mailto:australia@pauseai.info)
+- [australia@pauseai.info](mailto:australia@pauseai.info?subject=Hello%20From%20The%20Homepage)
 - [Facebook](https://www.facebook.com/groups/571590459293618)
 - [YouTube](https://www.youtube.com/channel/UCjjMieiOlSFf7jud0yhHQSg)
 - [LinkedIn](https://www.linkedin.com/company/pauseai-australia)
@@ -41,4 +41,4 @@ Volunteers across Australia work to:
 
 PauseAI Australia Ltd is an incorporated not-for-profit.
 
-[Learn more about our campaigns in Australia](/australia-detail), and [see what we're doing month to month](/australia-wins)!
+[Learn more about our campaigns in Australia](/australia-detail), and [see what we're doing month to month](/australia-progress)!

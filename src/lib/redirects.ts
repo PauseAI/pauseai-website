@@ -1,4 +1,4 @@
-import { redirect } from '@sveltejs/kit'
+import { redirectAsError } from '$lib/utils'
 
 /** Permanent redirects (301) */
 const REDIRECTS: Record<string, string> = {
@@ -27,7 +27,8 @@ const REDIRECTS: Record<string, string> = {
 	'/volunteer-vacancies': '/join#volunteer-vacancies',
 	'/contact': '/contact-us',
 	'/summits': '/summit',
-	'/privacy-policy': '/privacy'
+	'/privacy-policy': '/privacy',
+	'/australia-wins': '/australia-progress' // moved
 }
 
 const OUR_XRISK_INTROS_YOUTUBE_PLAYLIST =
@@ -40,8 +41,8 @@ const TEMPORARY_REDIRECTS: Record<string, string> = {
 
 export function handleRedirects(path: string) {
 	const permanent = REDIRECTS[path]
-	if (permanent) throw redirect(301, permanent)
+	if (permanent) throw redirectAsError(301, permanent)
 
 	const temporary = TEMPORARY_REDIRECTS[path]
-	if (temporary) throw redirect(302, temporary)
+	if (temporary) throw redirectAsError(302, temporary)
 }

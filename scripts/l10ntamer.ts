@@ -52,7 +52,7 @@ export function findFilesRecursively(dir: string, ext: string) {
 		.filter((file) => path.extname(file) === '.' + ext)
 }
 
-async function findUnlocalizedLinks(): Promise<LinkAuditResult[]> {
+function findUnlocalizedLinks(): LinkAuditResult[] {
 	const results: LinkAuditResult[] = []
 
 	// 1. Audit prerendered HTML files
@@ -249,10 +249,10 @@ function generateReport(results: LinkAuditResult[]): void {
 }
 
 // Main execution
-async function main() {
+function main() {
 	try {
 		const isValidateMode = process.argv.includes('--validate')
-		const results = await findUnlocalizedLinks()
+		const results = findUnlocalizedLinks()
 
 		// In validate mode, be more concise and exit with error code if issues found
 		if (isValidateMode) {

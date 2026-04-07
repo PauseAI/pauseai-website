@@ -27,7 +27,7 @@ export function getCollagenUid(campaign: string): string | null {
  * @param campaign Campaign name (e.g., "sayno")
  * @param uid User's tracking UID
  */
-export function setCollagenUid(campaign: string, uid: string): void {
+function setCollagenUid(campaign: string, uid: string): void {
 	if (typeof localStorage === 'undefined') return
 
 	const key = `collagen_uid_${campaign}`

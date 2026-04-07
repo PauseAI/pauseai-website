@@ -134,10 +134,10 @@ async function fetchMemberData(name: string, chamber: string): Promise<MemberDat
 				res.on('data', (chunk) => (data += chunk))
 				res.on('end', () => {
 					try {
-						const json = JSON.parse(data)
+						const json = JSON.parse(data) as MemberData
 						resolve(json)
-					} catch (e) {
-						reject(e)
+					} catch (error: unknown) {
+						reject(error instanceof Error ? error : new Error(String(error)))
 					}
 				})
 			})
@@ -155,7 +155,7 @@ async function main() {
 
 	console.log('Fetching parliamentarian portraits...')
 
-	const results = []
+	const results: Array<Record<string, unknown>> = []
 
 	for (const signatory of signatories) {
 		console.log(`Processing ${signatory.name}...`)

@@ -1,11 +1,7 @@
 <script lang="ts">
-	export let quote: {
-		name: string
-		displayName?: string
-		quote: string
-		portrait?: string
-		title?: string
-	}
+	import type { Quote } from './types'
+
+	export let quote: Quote
 
 	const displayName = quote.displayName || quote.name
 </script>

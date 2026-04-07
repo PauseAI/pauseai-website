@@ -105,8 +105,8 @@ export function createLlmClient(options: {
 		return config
 	})
 	axiosRetry(created, {
-		retryDelay: axiosRetry.exponentialDelay,
-		retryCondition: axiosRetry.isRetryableError
+		retryDelay: (...args) => axiosRetry.exponentialDelay(...args),
+		retryCondition: (error) => axiosRetry.isRetryableError(error)
 	})
 	return created
 }
@@ -187,6 +187,6 @@ export async function postChatCompletion(
 
 		// Throw a cleaner error without the full response dump
 		const statusText = error.response?.statusText || 'Error'
-		throw new Error(`LLM API call failed: ${status} ${statusText}`)
+		throw new Error(`LLM API call failed: ${status} ${statusText}`, { cause: error })
 	}
 }

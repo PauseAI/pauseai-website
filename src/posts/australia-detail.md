@@ -1,5 +1,5 @@
 ---
-title: PauseAI Australia (Our Campaigns)
+title: Australia's role in pausing
 slug: australia-detail
 description: More information about the Australian chapter of PauseAI
 ---
@@ -51,35 +51,6 @@ We acknowledge that not everyone agrees about the risk of an AI catastrophe. We 
 
 It is [psychologically difficult](/psychology-of-x-risk) to think about potential catastrophes. Many people assume that the risks are out of their control and therefore not worth worrying about. Yet, anyone can take action right now by speaking up. We think it's better to act than to simply worry.
 
-### PauseAI Australia campaigns
-
-#### AI Summits Need to Take Safety Seriously Again
-
-In February 2026, PauseAI Australia joined with 14 other countries, urging delegates to the International AI Summit in India to prioritise AI safety. The [campaign petition](https://www.change.org/p/ai-summits-need-to-take-safety-seriously-again) gathered 2,000 signatures and sent 2,000 emails to policymakers, and resulted in an op-ed in France's top weekly—signed by five Australian AI experts.
-
-#### December: Politicians sign Superintelligence Statement
-
-Emails from PauseAI Australia volunteers and a question at a live townhall event prompted five politicians to sign the [Future of Life Institute Superintelligence Statement](https://www.linkedin.com/feed/update/urn:li:activity:7408047524902572032).
-Watch the moment at the townhall [on YouTube](https://youtu.be/SbqUEhJt5RU?si=CSVML0vatdW-GBEh).
-
-#### IABIED Canberra book launch
-
-On 7 October 2025, PauseAI Australia held a book launch and discussion event at Smith's Alternative bookshop in Canberra to mark the release of [_If Anyone Builds It, Everyone Dies_](https://www.penguin.com.au/books/if-anyone-builds-it-everyone-dies-9781847928931). Laura Nuttall, MLA, and Peter Cain, MLA, joined the discussion and read excerpts from the book.
-
-#### Petition to the House of Representatives
-
-In September 2025, [e-petition EN7777 ](https://www.aph.gov.au/e-petitions/petition/EN7777)to the Australian House of Representatives was open for 30 days and collected 168 signatures. The petition asked the House to legislate that all future frontier artificial intelligence systems must pass rigorous independent safety evaluations, and further asked the House to advocate proactively for an international treaty to pause frontier AI development until global safety mechanisms are in place. The Minister gave an official response.
-
-#### Productivity commission submission
-
-In September 2025, PauseAI Australia responded to the interim report on _Harnessing Data and Digital Technology_ with [this submission](https://drive.google.com/file/d/1Ea9I3jXCZAMdGAcN2D-UMRPyE2MzGB7k/view). Volunteers also made individual submissions ([David](https://docs.google.com/document/d/1DenTOorlnqQ02PJEEdRvsceFmfvvfTXxGubozjfx-yE/edit?usp=sharing), [Peter](https://docs.google.com/document/d/1aQcC5DYq3feyWyHAPFGcEvwgrX0vXSbgMNDBEYWA61E/edit?tab=t.0#heading=h.4hsb6c6hjc5f), [Michael](https://drive.google.com/file/d/1lWdtIiLatF1DOPvdjQSaonO9dEqFCFSV/view?usp=drive_link)).
-
-#### Investigate OpenAI
-
-[In July 2025](https://drive.google.com/file/d/1t9ntUlF2cZH4_f-1fsp0FFCf3RiGZ81g/view?usp=drive_link), volunteer Mark Brown brought OpenAI to the attention of the Australian Federal Police and the Attorney-General of Australia, alleging potential breaches of the _Crimes (Biological Weapons) Act 1976_. It was discussed in a [news story](https://ia.acs.org.au/article/2025/is-the-new-chatgpt-agent-really-a-weapons-risk-.html) and on [a video podcast](https://youtu.be/-YPhNdpA8Rk). We are still waiting for a response from the AFP and the Attorney-General.
-
-#### Melbourne protest
-
-In February 2025, volunteers in Melbourne protested the missed opportunity of the Paris AI Action Summit. The protest received [coverage](https://www.smh.com.au/technology/most-dangerous-technology-ever-protesters-urge-ai-pause-20250207-p5laaq.html) in the Nine newspapers.
-
-[Back to the main Australia page](/australia).
+<div style="text-align:center; margin:2rem 0;">
+<a href="/australia" style="display:inline-block; background-color:#e67e22; color:white; padding:10px 20px; border-radius:5px; text-decoration:none; font-weight:bold;">Back to Australia homepage</a>
+</div>

@@ -6,11 +6,11 @@ date: ''
 
 _Last update: 2025-12-02_
 
-PauseAI has received about €715k in donations so far.
+Since its launch in 2023, PauseAI has received €715k in donations.
 
 ## Largest donors
 
-- 422,961 (Future of Life Institute)
+- 422,961 (Future of Life Institute, 2025)
 - 95,000 (Greg Colbourn)
 - 83,000 ([Conjointly](https://conjointly.com/))
 - 36,952 (anonymous individual)
