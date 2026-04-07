@@ -20,7 +20,7 @@ export type AirtableRecord<T> = {
  * @param url The Airtable API URL
  * @returns Object containing baseId and tableId, or null if URL is invalid
  */
-export function extractAirtableIds(url: string): { baseId: string; tableId: string } | null {
+function extractAirtableIds(url: string): { baseId: string; tableId: string } | null {
 	const match = url.match(AIRTABLE_URL_REGEX)
 	if (!match || !match.groups) return null
 

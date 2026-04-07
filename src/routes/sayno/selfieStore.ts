@@ -48,7 +48,7 @@ export function setCanvasElement(el: HTMLCanvasElement | null) {
 	canvasElement = el
 }
 
-export function setStream(s: MediaStream | null) {
+function setStream(s: MediaStream | null) {
 	stream = s
 }
 
@@ -103,7 +103,7 @@ export async function checkCameraPermission() {
 }
 
 // Shared functions
-export async function initializeCamera() {
+async function initializeCamera() {
 	try {
 		// Check for HTTPS (required for getUserMedia except on localhost)
 		if (location.protocol !== 'https:' && location.hostname !== 'localhost') {

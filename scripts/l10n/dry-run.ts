@@ -22,7 +22,7 @@ const MODELS = {
  * Model configuration with pricing and estimation parameters
  * Pricing updated June 2025 based on actual usage data
  */
-export const MODEL_CONFIGS: Record<ModelName, ModelConfig> = {
+const MODEL_CONFIGS: Record<ModelName, ModelConfig> = {
 	[MODELS.LLAMA_3_1]: {
 		// Cost per 1000 words of content (based on actual usage: ~$0.70 for 92.36k words)
 		COST_PER_1000_WORDS: 0.0076,

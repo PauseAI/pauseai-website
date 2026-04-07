@@ -24,11 +24,6 @@ export function getDefaultSettings(): typeof defaultSettingsConfig {
 	return defaultSettingsConfig
 }
 
-// For l10n scripts that need to know target languages
-export function getTargetLocales(): string[] {
-	return getDefaultSettings().locales.filter((tag) => tag !== 'en')
-}
-
 /**
  * Write settings to the settings.json file
  * This preserves the full Inlang project settings format

@@ -81,7 +81,7 @@ export interface LlmErrorInfo {
  * @param requestData - The original request data for context
  * @returns Structured error information for logging
  */
-export function extractLlmErrorInfo(error: OpenRouterErrorResponse): LlmErrorInfo {
+function extractLlmErrorInfo(error: OpenRouterErrorResponse): LlmErrorInfo {
 	const response = error.response
 	const config = error.config
 
@@ -138,7 +138,7 @@ export function extractLlmErrorInfo(error: OpenRouterErrorResponse): LlmErrorInf
  * @param errorInfo - The extracted error information
  * @returns A formatted string suitable for console logging
  */
-export function formatLlmError(errorInfo: LlmErrorInfo): string {
+function formatLlmError(errorInfo: LlmErrorInfo): string {
 	const parts: string[] = []
 
 	// Basic error info

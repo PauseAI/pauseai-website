@@ -61,7 +61,7 @@ export interface Options {
  * @returns A Promise that resolves to the reviewed (final) l10n, or a placeholder in dry run mode.
  * @throws {Error} If either the l10n or review pass fails (in non-dry run mode).
  */
-export async function l10nFromLLM(
+async function l10nFromLLM(
 	content: string,
 	l10nPromptGenerator: L10nPromptGenerator,
 	reviewPromptGenerator: ReviewPromptGenerator,
@@ -212,7 +212,7 @@ export async function retrieveMarkdown(
  * @param l10nOptions - Global l10n configuration options
  * @returns A Promise that resolves with the results of the operation
  */
-export async function retrieve(
+async function retrieve(
 	params: {
 		sourcePaths: string[]
 		locales: string[]
