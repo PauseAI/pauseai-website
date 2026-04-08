@@ -12,7 +12,7 @@ import type { L10nPromptGenerator, ReviewPromptGenerator } from './prompts'
 import { postChatCompletion } from './llm-client'
 import { getCommitMessage } from './git-ops'
 import { preprocessMarkdown, postprocessMarkdown, placeInCage } from './utils'
-import { countWords, estimateItemCost, trackL10n, type Stats } from './dry-run'
+import { countWords, estimateItemCost } from './dry-run'
 import type { WorkItem } from './work-plan'
 import type { AxiosInstance } from 'axios'
 
@@ -43,8 +43,6 @@ export interface Options {
 	cageLatestCommitDates: Map<string, Date>
 	/** Map of latest commit dates in the website repository */
 	websiteLatestCommitDates: Map<string, Date>
-	/** Statistics object for dry run mode (null when using work plan) */
-	dryRunStats: Stats | null
 	/** List of files to force re-l10n (ignore cache) */
 	forceFiles: string[]
 	/** When set, collect work items instead of calling LLM (plan generation mode) */
@@ -87,9 +85,6 @@ async function l10nFromLLM(
 
 	// In dry run mode, collect statistics instead of making API calls
 	if (options.isDryRun) {
-		// Track what would be localized for reporting
-		if (options.dryRunStats) trackL10n(options.dryRunStats, content, locale, filePath)
-
 		if (options.verbose) {
 			console.log(
 				`🔍 [DRY RUN] Would localize ${content.length} characters to ${languageName}${filePath ? ` (${path.basename(filePath)})` : ''}`
