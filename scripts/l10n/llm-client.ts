@@ -159,7 +159,7 @@ export async function postChatCompletion(
 		}
 		const choice = response.data.choices[0]
 		const finishReason = (choice as Record<string, unknown>).finish_reason
-		if (finishReason && finishReason !== 'stop') {
+		if (typeof finishReason === 'string' && finishReason !== 'stop') {
 			throw new Error(
 				`LLM response incomplete (finish_reason: ${finishReason}). Output may be truncated or filtered.`
 			)

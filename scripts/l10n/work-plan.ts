@@ -58,7 +58,7 @@ export function readTodo(locales: string[]): WorkPlan | null {
 	const p = todoPath(locales)
 	if (!fs.existsSync(p)) return null
 	try {
-		const plan: WorkPlan = JSON.parse(fs.readFileSync(p, 'utf-8'))
+		const plan = JSON.parse(fs.readFileSync(p, 'utf-8')) as WorkPlan
 		if (!plan.items || plan.items.length === 0) return null
 		return plan
 	} catch {
@@ -122,7 +122,7 @@ export function getSpendLimit(spendArg: number | undefined, isCI: boolean): numb
 	return isCI ? DEFAULT_SPEND_CI : DEFAULT_SPEND_LOCAL
 }
 
-export function totalEstimatedCost(items: WorkItem[]): number {
+function totalEstimatedCost(items: WorkItem[]): number {
 	return items.reduce((sum, item) => sum + item.estimatedCost, 0)
 }
 
@@ -168,5 +168,3 @@ export function printPlanSummary(plan: WorkPlan, verbose: boolean): void {
 	}
 	console.log()
 }
-
-export { todoPath, WORK_DIR }
