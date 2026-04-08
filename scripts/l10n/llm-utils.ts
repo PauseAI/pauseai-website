@@ -186,6 +186,42 @@ export function formatLlmErrorForLogging(error: OpenRouterErrorResponse): string
 }
 
 /**
+ * A point-in-time snapshot of OpenRouter billing state.
+ */
+export interface BillingSnapshot {
+	limitRemaining: number | null
+	totalUsage: number | null
+}
+
+function toNumberOrNull(value: number | string | undefined): number | null {
+	if (typeof value === 'number') return value
+	if (typeof value === 'string') {
+		const n = Number(value)
+		return Number.isFinite(n) ? n : null
+	}
+	return null
+}
+
+/**
+ * Fetches OpenRouter billing as raw numbers without printing. For computing
+ * spend deltas across a run.
+ */
+export async function getBillingSnapshot(client: AxiosInstance): Promise<BillingSnapshot> {
+	try {
+		const [keyResponse, creditsResponse] = await Promise.all([
+			client.get<OpenRouterKeyResponse>('/auth/key').catch(() => null),
+			client.get<OpenRouterCreditsResponse>('/credits').catch(() => null)
+		])
+		return {
+			limitRemaining: toNumberOrNull(keyResponse?.data?.data?.limit_remaining),
+			totalUsage: toNumberOrNull(creditsResponse?.data?.total_usage)
+		}
+	} catch {
+		return { limitRemaining: null, totalUsage: null }
+	}
+}
+
+/**
  * Fetches and displays billing information for OpenRouter API key
  *
  * @param client - Axios client configured for the LLM API

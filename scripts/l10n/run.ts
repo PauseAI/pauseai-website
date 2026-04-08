@@ -27,7 +27,7 @@ import {
 	createRateLimitingQueue,
 	LLM_DEFAULTS
 } from './llm-client'
-import { fetchAndDisplayBilling } from './llm-utils'
+import { getBillingSnapshot } from './llm-utils'
 import { Mode } from './mode'
 import { generateJsonPrompt, generateMarkdownPrompt, generateReviewPrompt } from './prompts'
 import { retrieveMarkdown, retrieveMessages } from './heart'
@@ -284,10 +284,26 @@ const logMessage = (msg: string) => {
 		providers: LLM_DEFAULTS.PROVIDERS
 	})
 
-	// Log spend on exit (including timeout via SIGTERM)
+	// Snapshot OpenRouter billing before any LLM work, so we can report
+	// per-run spend on success, exception, or SIGTERM (Netlify build timeout).
+	const beforeBilling = await getBillingSnapshot(llmClient)
+
+	const printSpendDelta = async (): Promise<void> => {
+		const after = await getBillingSnapshot(llmClient)
+		if (beforeBilling.limitRemaining !== null && after.limitRemaining !== null) {
+			const spent = beforeBilling.limitRemaining - after.limitRemaining
+			console.log(`\n💰 OpenRouter spend this run: $${spent.toFixed(4)}`)
+			console.log(
+				`   ($${beforeBilling.limitRemaining.toFixed(4)} → $${after.limitRemaining.toFixed(4)} remaining)`
+			)
+		} else {
+			console.log('\n💰 OpenRouter spend this run: unable to determine (billing query failed)')
+		}
+	}
+
 	process.on('SIGTERM', async () => {
 		console.log('\n⏰ Build timeout — logging spend before exit:')
-		await fetchAndDisplayBilling(llmClient)
+		await printSpendDelta()
 		process.exit(143)
 	})
 
@@ -318,76 +334,77 @@ const logMessage = (msg: string) => {
 		pushAfterBatch
 	}
 
-	// Filter source paths to only files in the plan
-	const planLocales = [...new Set(plan.items.map((item) => item.locale))]
+	try {
+		// Filter source paths to only files in the plan
+		const planLocales = [...new Set(plan.items.map((item) => item.locale))]
 
-	const hasMessageItems = plan.items.some((item) => item.source.startsWith('messages/'))
-	const markdownPlanPaths = plan.items
-		.filter((item) => !item.source.startsWith('messages/'))
-		.map((item) => item.source)
+		const hasMessageItems = plan.items.some((item) => item.source.startsWith('messages/'))
+		const markdownPlanPaths = plan.items
+			.filter((item) => !item.source.startsWith('messages/'))
+			.map((item) => item.source)
 
-	// Execute plan items sequentially
-	const results: { cacheCount: number; totalProcessed: number }[] = []
+		// Execute plan items sequentially
+		const results: { cacheCount: number; totalProcessed: number }[] = []
 
-	if (hasMessageItems) {
-		results.push(
-			await retrieveMessages(
-				{
-					sourcePath: MESSAGE_SOURCE,
-					locales: planLocales,
-					l10nPromptGenerator: generateJsonPrompt,
-					reviewPromptGenerator: generateReviewPrompt,
-					targetDir: MESSAGE_L10NS,
-					cageWorkingDir: L10N_CAGE_DIR,
-					logMessageFn: logMessage
-				},
-				executeOptions
+		if (hasMessageItems) {
+			results.push(
+				await retrieveMessages(
+					{
+						sourcePath: MESSAGE_SOURCE,
+						locales: planLocales,
+						l10nPromptGenerator: generateJsonPrompt,
+						reviewPromptGenerator: generateReviewPrompt,
+						targetDir: MESSAGE_L10NS,
+						cageWorkingDir: L10N_CAGE_DIR,
+						logMessageFn: logMessage
+					},
+					executeOptions
+				)
 			)
-		)
-	}
+		}
 
-	if (markdownPlanPaths.length > 0) {
-		results.push(
-			await retrieveMarkdown(
-				{
-					sourcePaths: markdownPlanPaths,
-					sourceBaseDir: MARKDOWN_SOURCE,
-					locales: planLocales,
-					l10nPromptGenerator: generateMarkdownPrompt,
-					reviewPromptGenerator: generateReviewPrompt,
-					targetDir: MARKDOWN_L10NS,
-					cageWorkingDir: L10N_CAGE_DIR,
-					logMessageFn: logMessage
-				},
-				executeOptions
+		if (markdownPlanPaths.length > 0) {
+			results.push(
+				await retrieveMarkdown(
+					{
+						sourcePaths: markdownPlanPaths,
+						sourceBaseDir: MARKDOWN_SOURCE,
+						locales: planLocales,
+						l10nPromptGenerator: generateMarkdownPrompt,
+						reviewPromptGenerator: generateReviewPrompt,
+						targetDir: MARKDOWN_L10NS,
+						cageWorkingDir: L10N_CAGE_DIR,
+						logMessageFn: logMessage
+					},
+					executeOptions
+				)
 			)
-		)
+		}
+
+		const cacheCount = results.reduce((total, result) => total + result.cacheCount, 0)
+		const totalFiles = results.reduce((total, result) => total + result.totalProcessed, 0)
+		const newL10ns = totalFiles - cacheCount
+
+		// Record completion
+		recordCompletion(plan.items, plan)
+		emptyTodo(targetLocales, mode.branch, LLM_DEFAULTS.MODEL)
+
+		// Summary and push
+		console.log(`\n📦 L10n summary:`)
+		if (cacheCount > 0) {
+			console.log(`   - ${cacheCount} files used cached l10ns`)
+		}
+		console.log(`   - ${newL10ns} files needed new l10ns`)
+
+		if (newL10ns > 0) {
+			console.log(`\nPushing l10n changes to remote cage...`)
+			await pushWithUpstream(cageGit, mode.options.verbose)
+		} else {
+			console.log(`\nNo new l10ns to push to remote cage - skipping Git push.`)
+		}
+	} finally {
+		await printSpendDelta()
 	}
-
-	const cacheCount = results.reduce((total, result) => total + result.cacheCount, 0)
-	const totalFiles = results.reduce((total, result) => total + result.totalProcessed, 0)
-	const newL10ns = totalFiles - cacheCount
-
-	// Record completion
-	recordCompletion(plan.items, plan)
-	emptyTodo(targetLocales, mode.branch, LLM_DEFAULTS.MODEL)
-
-	// Summary and push
-	console.log(`\n📦 L10n summary:`)
-	if (cacheCount > 0) {
-		console.log(`   - ${cacheCount} files used cached l10ns`)
-	}
-	console.log(`   - ${newL10ns} files needed new l10ns`)
-
-	if (newL10ns > 0) {
-		console.log(`\nPushing l10n changes to remote cage...`)
-		await pushWithUpstream(cageGit, mode.options.verbose)
-	} else {
-		console.log(`\nNo new l10ns to push to remote cage - skipping Git push.`)
-	}
-
-	// Log spend after execution
-	await fetchAndDisplayBilling(llmClient)
 
 	// Clean up Git secrets in CI environments
 	if (mode.isCI) {

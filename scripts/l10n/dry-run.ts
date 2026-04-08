@@ -19,13 +19,17 @@ const MODELS = {
 }
 
 /**
- * Model configuration with pricing and estimation parameters
- * Pricing based on OpenRouter rates: $0.10/M in, $0.32/M out
+ * Model configuration with pricing and estimation parameters.
+ * COST_PER_1000_WORDS is empirical for the :nitro routing we actually use,
+ * not an OpenRouter list price (the :nitro provider mix is more expensive).
+ * Recalibrate when n grows or model changes.
  */
 export const MODEL_CONFIGS: Record<ModelName, ModelConfig> = {
 	[MODELS.LLAMA_3_3]: {
-		// Cost per 1000 words (~1333 tokens), weighted avg of in+out pricing
-		COST_PER_1000_WORDS: 0.0004,
+		// Empirical :nitro rate: ~$0.41 actual for $0.0954 estimated, n=1
+		// (l10n-es build 2026-04-07, 58 successful items, ratio 4.31x).
+		// Bumped from 0.0004 (theoretical list-price calculation).
+		COST_PER_1000_WORDS: 0.0017,
 		// Fixed word overhead for prompt instructions
 		PROMPT_OVERHEAD_WORDS: 300,
 		// Markdown formatting overhead (percentage of content words)
