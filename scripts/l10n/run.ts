@@ -185,7 +185,7 @@ const logMessage = (msg: string) => {
 	// --- Phase 1: Plan ---
 
 	// Check for existing work plan
-	let plan = readTodo()
+	let plan = readTodo(targetLocales)
 
 	if (!plan) {
 		// Generate plan by running retrieve in work-item collection mode
@@ -243,7 +243,7 @@ const logMessage = (msg: string) => {
 		plan = createPlan(mode.branch, LLM_DEFAULTS.MODEL)
 		plan.items = workItems
 
-		writeTodo(plan)
+		writeTodo(plan, targetLocales)
 		printPlanSummary(plan, mode.options.verbose === true)
 
 		if (plan.items.length === 0) {
@@ -263,7 +263,7 @@ const logMessage = (msg: string) => {
 	}
 
 	const spendLimit = getSpendLimit(spendArg, mode.isCI)
-	const spendError = checkSpendLimit(plan, spendLimit)
+	const spendError = checkSpendLimit(plan, spendLimit, targetLocales)
 	if (spendError) {
 		console.log(spendError)
 		process.exit(0)
@@ -282,6 +282,29 @@ const logMessage = (msg: string) => {
 		apiKey: LLM_API_KEY!,
 		model: LLM_DEFAULTS.MODEL,
 		providers: LLM_DEFAULTS.PROVIDERS
+	})
+
+	// Snapshot OpenRouter billing before any LLM work, so we can report
+	// per-run spend on success, exception, or SIGTERM (Netlify build timeout).
+	const beforeBilling = await getBillingSnapshot(llmClient)
+
+	const printSpendDelta = async (): Promise<void> => {
+		const after = await getBillingSnapshot(llmClient)
+		if (beforeBilling.limitRemaining !== null && after.limitRemaining !== null) {
+			const spent = beforeBilling.limitRemaining - after.limitRemaining
+			console.log(`\n💰 OpenRouter spend this run: $${spent.toFixed(4)}`)
+			console.log(
+				`   ($${beforeBilling.limitRemaining.toFixed(4)} → $${after.limitRemaining.toFixed(4)} remaining)`
+			)
+		} else {
+			console.log('\n💰 OpenRouter spend this run: unable to determine (billing query failed)')
+		}
+	}
+
+	process.on('SIGTERM', async () => {
+		console.log('\n⏰ Build timeout — logging spend before exit:')
+		await printSpendDelta()
+		process.exit(143)
 	})
 
 	const requestQueue = createRateLimitingQueue(LLM_DEFAULTS.REQUESTS_PER_SECOND)
@@ -310,10 +333,6 @@ const logMessage = (msg: string) => {
 		isCI: mode.isCI,
 		pushAfterBatch
 	}
-
-	// Snapshot OpenRouter billing before any LLM work, so we can report spend
-	// for this run regardless of whether it succeeds or throws.
-	const beforeBilling = await getBillingSnapshot(llmClient)
 
 	try {
 		// Filter source paths to only files in the plan
@@ -368,7 +387,7 @@ const logMessage = (msg: string) => {
 
 		// Record completion
 		recordCompletion(plan.items, plan)
-		emptyTodo(mode.branch, LLM_DEFAULTS.MODEL)
+		emptyTodo(targetLocales, mode.branch, LLM_DEFAULTS.MODEL)
 
 		// Summary and push
 		console.log(`\n📦 L10n summary:`)
@@ -384,16 +403,7 @@ const logMessage = (msg: string) => {
 			console.log(`\nNo new l10ns to push to remote cage - skipping Git push.`)
 		}
 	} finally {
-		const afterBilling = await getBillingSnapshot(llmClient)
-		if (beforeBilling.limitRemaining !== null && afterBilling.limitRemaining !== null) {
-			const spent = beforeBilling.limitRemaining - afterBilling.limitRemaining
-			console.log(`\n💰 OpenRouter spend this run: $${spent.toFixed(4)}`)
-			console.log(
-				`   ($${beforeBilling.limitRemaining.toFixed(4)} → $${afterBilling.limitRemaining.toFixed(4)} remaining)`
-			)
-		} else {
-			console.log('\n💰 OpenRouter spend this run: unable to determine (billing query failed)')
-		}
+		await printSpendDelta()
 	}
 
 	// Clean up Git secrets in CI environments

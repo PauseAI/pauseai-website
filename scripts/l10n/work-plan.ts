@@ -37,7 +37,10 @@ export interface WorkPlan {
 
 const PLAN_VERSION = 1
 const WORK_DIR = path.join(L10N_CAGE_DIR, 'work')
-const TODO_PATH = path.join(WORK_DIR, 'todo.json')
+function todoPath(locales: string[]): string {
+	const suffix = locales.slice().sort().join(',')
+	return path.join(WORK_DIR, `todo-${suffix}.json`)
+}
 
 const DEFAULT_SPEND_LOCAL = 0.1
 const DEFAULT_SPEND_CI = 0.5
@@ -51,10 +54,11 @@ function ensureWorkDir(): void {
 }
 
 /** Read the current todo. Returns null if file is missing or has no items. */
-export function readTodo(): WorkPlan | null {
-	if (!fs.existsSync(TODO_PATH)) return null
+export function readTodo(locales: string[]): WorkPlan | null {
+	const p = todoPath(locales)
+	if (!fs.existsSync(p)) return null
 	try {
-		const plan: WorkPlan = JSON.parse(fs.readFileSync(TODO_PATH, 'utf-8'))
+		const plan: WorkPlan = JSON.parse(fs.readFileSync(p, 'utf-8'))
 		if (!plan.items || plan.items.length === 0) return null
 		return plan
 	} catch {
@@ -62,21 +66,24 @@ export function readTodo(): WorkPlan | null {
 	}
 }
 
-/** Write a plan to todo.json. */
-export function writeTodo(plan: WorkPlan): void {
+/** Write a plan to the locale-specific todo file. */
+export function writeTodo(plan: WorkPlan, locales: string[]): void {
 	ensureWorkDir()
-	fs.writeFileSync(TODO_PATH, JSON.stringify(plan, null, '\t') + '\n')
+	fs.writeFileSync(todoPath(locales), JSON.stringify(plan, null, '\t') + '\n')
 }
 
-/** Write an empty plan to todo.json (the normal resting state). */
-export function emptyTodo(branch: string, model: string): void {
-	writeTodo({
-		version: PLAN_VERSION,
-		created: new Date().toISOString(),
-		branch,
-		model,
-		items: []
-	})
+/** Write an empty plan (the normal resting state). */
+export function emptyTodo(locales: string[], branch: string, model: string): void {
+	writeTodo(
+		{
+			version: PLAN_VERSION,
+			created: new Date().toISOString(),
+			branch,
+			model,
+			items: []
+		},
+		locales
+	)
 }
 
 /**
@@ -123,13 +130,13 @@ export function totalEstimatedCost(items: WorkItem[]): number {
  * Check whether the plan's cost is within the spend limit.
  * Returns null if OK, or a message string if over limit.
  */
-export function checkSpendLimit(plan: WorkPlan, limit: number): string | null {
+export function checkSpendLimit(plan: WorkPlan, limit: number, locales: string[]): string | null {
 	const cost = totalEstimatedCost(plan.items)
 	if (cost <= limit) return null
 	return (
 		`Estimated cost $${cost.toFixed(2)} exceeds spend limit $${limit.toFixed(2)}\n` +
 		`Use --spend ${Math.ceil(cost * 10) / 10} to authorize, or review the plan in:\n` +
-		`  ${TODO_PATH}`
+		`  ${todoPath(locales)}`
 	)
 }
 
@@ -162,4 +169,4 @@ export function printPlanSummary(plan: WorkPlan, verbose: boolean): void {
 	console.log()
 }
 
-export { TODO_PATH, WORK_DIR }
+export { todoPath, WORK_DIR }
