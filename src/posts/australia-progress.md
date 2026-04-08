@@ -20,7 +20,16 @@ description: What the Australian chapter of PauseAI has been doing and needs hel
 
 </div>
 - Tim takes on volunteer role of Brisbane community organiser.
-- Released newsletter on how to get your MPs to sign Superintelligence Statement.
+- Released newsletter on getting your MPs to sign Superintelligence Statement.
+- We attended the Canberra Innovation Network's book launch event. Chief Minister Andrew Barr raised the importance of managing risk when deploying AI in government. Afterwards we spoke to the book author John Howard, who agreed that guardrails are essential when deploying AI.
+<div style="display:flex; flex-wrap:wrap; gap:0.5rem; max-width:90%; margin:1rem auto;">
+<div style="flex:1; min-width:200px;">
+
+![20260408-1629_CBRIN_PeterWithJohnHoward.jpg](/australia/20260408-1629_CBRIN_PeterWithJohnHoward.jpg)
+
+</div>
+
+</div>
 
 ### 2026 March
 
