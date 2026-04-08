@@ -40,6 +40,7 @@ import {
 	printPlanSummary,
 	readTodo,
 	recordCompletion,
+	totalEstimatedCost,
 	writeTodo
 } from './work-plan'
 
@@ -286,17 +287,31 @@ const logMessage = (msg: string) => {
 	// Snapshot OpenRouter billing before any LLM work, so we can report
 	// per-run spend on success, exception, or SIGTERM (Netlify build timeout).
 	const beforeBilling = await getBillingSnapshot(llmClient)
+	const estimatedSpend = totalEstimatedCost(plan.items)
+
+	// Threshold above which we flag the cost estimator as drifting.
+	// Per-run noise is ~1.5x; 3x is well outside noise but not a hair-trigger.
+	const COST_DRIFT_RATIO = 3
 
 	const printSpendDelta = async (): Promise<void> => {
 		const after = await getBillingSnapshot(llmClient)
-		if (beforeBilling.limitRemaining !== null && after.limitRemaining !== null) {
-			const spent = beforeBilling.limitRemaining - after.limitRemaining
-			console.log(`\n💰 OpenRouter spend this run: $${spent.toFixed(4)}`)
-			console.log(
-				`   ($${beforeBilling.limitRemaining.toFixed(4)} → $${after.limitRemaining.toFixed(4)} remaining)`
-			)
-		} else {
+		if (beforeBilling.limitRemaining === null || after.limitRemaining === null) {
 			console.log('\n💰 OpenRouter spend this run: unable to determine (billing query failed)')
+			return
+		}
+		const spent = beforeBilling.limitRemaining - after.limitRemaining
+		console.log(`\n💰 OpenRouter spend this run: $${spent.toFixed(4)}`)
+		console.log(
+			`   ($${beforeBilling.limitRemaining.toFixed(4)} → $${after.limitRemaining.toFixed(4)} remaining)`
+		)
+
+		if (estimatedSpend > 0 && spent / estimatedSpend > COST_DRIFT_RATIO) {
+			const ratio = (spent / estimatedSpend).toFixed(1)
+			console.log(
+				`\n⚠️  COST CALIBRATION DRIFT: actual $${spent.toFixed(4)} is ${ratio}x estimate ($${estimatedSpend.toFixed(4)})`
+			)
+			console.log(`   The COST_PER_1000_WORDS constant in scripts/l10n/dry-run.ts may be stale.`)
+			console.log(`   See L10N.md → Cost Visibility → Estimator vs Actual.`)
 		}
 	}
 

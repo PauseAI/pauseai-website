@@ -122,7 +122,7 @@ export function getSpendLimit(spendArg: number | undefined, isCI: boolean): numb
 	return isCI ? DEFAULT_SPEND_CI : DEFAULT_SPEND_LOCAL
 }
 
-function totalEstimatedCost(items: WorkItem[]): number {
+export function totalEstimatedCost(items: WorkItem[]): number {
 	return items.reduce((sum, item) => sum + item.estimatedCost, 0)
 }
 
