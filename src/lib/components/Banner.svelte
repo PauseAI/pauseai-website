@@ -33,7 +33,13 @@
 
 {#if !dismissed}
 	{#if id}
-		<div class="banner" class:contrast data-banner-id={id} transition:fade={{ duration: 200 }}>
+		<div
+			class="banner"
+			class:contrast
+			data-banner-id={id}
+			data-pagefind-ignore
+			transition:fade={{ duration: 200 }}
+		>
 			<span class="content">
 				<slot></slot>
 			</span>
@@ -44,7 +50,7 @@
 			</button>
 		</div>
 	{:else}
-		<div class="banner" class:contrast transition:fade={{ duration: 200 }}>
+		<div class="banner" class:contrast data-pagefind-ignore transition:fade={{ duration: 200 }}>
 			<span class="content">
 				<slot></slot>
 			</span>
