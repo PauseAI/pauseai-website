@@ -595,13 +595,6 @@
 			"link": "https://line.me/ti/g2/rrV7AC9zmKz802Yk-BvJcyb7fHdppCtDQ1RGxQ?utm_source=invitation&utm_medium=link_copy&utm_campaign=default"
 		},
 		{
-			"name": "Umeå",
-			"lat": 63.8258,
-			"lon": 20.263,
-			"link": "$$DISCORD_GLOBAL$$",
-			"parent_name": "Sweden"
-		},
-		{
 			"name": "Astana",
 			"lat": 51.1694,
 			"lon": 71.4491,
