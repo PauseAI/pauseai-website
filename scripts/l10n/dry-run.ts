@@ -24,7 +24,7 @@ const MODELS = {
  * not an OpenRouter list price (the :nitro provider mix is more expensive).
  * Recalibrate when n grows or model changes.
  */
-export const MODEL_CONFIGS: Record<ModelName, ModelConfig> = {
+const MODEL_CONFIGS: Record<ModelName, ModelConfig> = {
 	[MODELS.LLAMA_3_3]: {
 		// Empirical :nitro rate: ~$0.41 actual for $0.0954 estimated, n=1
 		// (l10n-es build 2026-04-07, 58 successful items, ratio 4.31x).
@@ -59,16 +59,6 @@ export type Stats = {
 		}
 	>
 }
-
-// Initialize statistics object
-export const createDryRunStats = (): Stats => ({
-	l10nsToCapture: 0,
-	totalWordCount: 0,
-	contentWordCount: 0,
-	overheadWordCount: 0,
-	estimatedCost: 0,
-	byLanguage: {}
-})
 
 /**
  * Count words in a string using regex splitting
@@ -140,61 +130,4 @@ export function trackL10n(
 		stats.l10nsToCapture++
 		stats.byLanguage[language].files.push(fileName)
 	}
-}
-
-/**
- * Print a summary of the dry run statistics
- *
- * @param stats - The statistics object
- * @param verbose - Whether to print detailed information
- * @param cacheCount - Number of cached files (not needing l10n)
- * @param modelName - Optional model name to display (defaults to DEFAULT_MODEL)
- */
-export function printDryRunSummary(
-	stats: Stats,
-	verbose = false,
-	cacheCount = 0,
-	modelName: string = DEFAULT_MODEL
-): void {
-	const modelConfig = MODEL_CONFIGS[modelName] || MODEL_CONFIGS[DEFAULT_MODEL]
-
-	console.log('\n=== DRY RUN L10N SUMMARY ===')
-	console.log(`Model: ${modelName}`)
-	console.log(`L10ns to capture: ${stats.l10nsToCapture}`)
-	console.log(`Files using cache: ${cacheCount}`)
-
-	// Word count breakdown
-	console.log(`Content word count: ${stats.contentWordCount.toLocaleString()}`)
-	console.log(
-		`Overhead word count: ${stats.overheadWordCount.toLocaleString()} (prompt instructions and formatting)`
-	)
-	console.log(`Total word count: ${stats.totalWordCount.toLocaleString()} (includes two-pass l10n)`)
-
-	// Cost in 1000-word units
-	const wordUnits = stats.totalWordCount / 1000
-	console.log(`L10n workload: ${wordUnits.toFixed(2)} thousand-word units`)
-	console.log(`Estimated cost: $${stats.estimatedCost.toFixed(2)}`)
-
-	if (modelConfig.COST_PER_1000_WORDS === 0) {
-		console.log(`Note: This model appears to be free to use through current provider`)
-	}
-
-	// Print per-language statistics
-	console.log('\nBy language:')
-	Object.entries(stats.byLanguage).forEach(([lang, langStats]) => {
-		const langWordUnits = langStats.wordCount / 1000
-		console.log(
-			`  ${lang}: ${langStats.files.length} files, ${langWordUnits.toFixed(2)} thousand-word units, $${langStats.estimatedCost.toFixed(2)}`
-		)
-
-		if (verbose) {
-			console.log('    L10ns to capture:')
-			langStats.files.forEach((file) => {
-				console.log(`      - ${file}`)
-			})
-		}
-	})
-
-	console.log('\nNote: This is a dry run - no l10ns were captured')
-	console.log('===================================\n')
 }

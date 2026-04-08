@@ -81,7 +81,7 @@ if (unknownArgs.length > 0) {
 }
 
 // Parse spend limit
-const spendArg = argv.spend !== undefined ? parseFloat(argv.spend) : undefined
+const spendArg = argv.spend !== undefined ? parseFloat(String(argv.spend)) : undefined
 if (spendArg !== undefined && (isNaN(spendArg) || spendArg < 0)) {
 	console.error('❌ --spend must be a non-negative number')
 	process.exit(1)
@@ -301,10 +301,12 @@ const logMessage = (msg: string) => {
 		}
 	}
 
-	process.on('SIGTERM', async () => {
-		console.log('\n⏰ Build timeout — logging spend before exit:')
-		await printSpendDelta()
-		process.exit(143)
+	process.on('SIGTERM', () => {
+		void (async () => {
+			console.log('\n⏰ Build timeout — logging spend before exit:')
+			await printSpendDelta()
+			process.exit(143)
+		})()
 	})
 
 	const requestQueue = createRateLimitingQueue(LLM_DEFAULTS.REQUESTS_PER_SECOND)

@@ -21,7 +21,15 @@ if (!res.ok) {
 	process.exit(1)
 }
 
-const data = await res.json()
+type AuthKeyResponse = {
+	data?: {
+		label?: string
+		usage?: number
+		limit?: number | null
+	}
+}
+
+const data = (await res.json()) as AuthKeyResponse
 const usage = data.data?.usage
 const limit = data.data?.limit
 
