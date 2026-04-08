@@ -1,9 +1,6 @@
 /**
- * This file handles the dry run mode functionality for the l10n process.
- * It allows cost estimation and reporting without making actual API calls.
+ * Cost estimation helpers for the work-plan dry-run path.
  */
-
-import path from 'path'
 
 type ModelConfig = {
 	COST_PER_1000_WORDS: number
@@ -43,23 +40,6 @@ const MODEL_CONFIGS: Record<ModelName, ModelConfig> = {
 // Default to the model specified in llm-client.ts
 const DEFAULT_MODEL = MODELS.LLAMA_3_3
 
-// Type definitions for statistics collection
-export type Stats = {
-	l10nsToCapture: number
-	totalWordCount: number
-	contentWordCount: number
-	overheadWordCount: number
-	estimatedCost: number
-	byLanguage: Record<
-		string,
-		{
-			files: string[]
-			wordCount: number
-			estimatedCost: number
-		}
-	>
-}
-
 /**
  * Count words in a string using regex splitting
  */
@@ -91,43 +71,4 @@ export function estimateItemCost(
 	const estimatedCost = (totalWords / 1000) * modelConfig.COST_PER_1000_WORDS
 
 	return { estimatedCost, overheadWords, totalWords }
-}
-
-/**
- * Track content that would be localized in dry run mode.
- * Uses estimateItemCost for the cost calculation.
- */
-export function trackL10n(
-	stats: Stats,
-	content: string,
-	language: string,
-	filePath?: string,
-	modelName: string = DEFAULT_MODEL
-): void {
-	const contentWordCount = countWords(content)
-	const fileName = filePath ? path.basename(filePath) : 'unknown'
-	const { estimatedCost, overheadWords, totalWords } = estimateItemCost(contentWordCount, modelName)
-
-	// Initialize language stats if needed
-	if (!stats.byLanguage[language]) {
-		stats.byLanguage[language] = {
-			files: [],
-			wordCount: 0,
-			estimatedCost: 0
-		}
-	}
-
-	// Update statistics
-	stats.contentWordCount += contentWordCount
-	stats.overheadWordCount += overheadWords
-	stats.totalWordCount += totalWords
-	stats.estimatedCost += estimatedCost
-
-	stats.byLanguage[language].wordCount += totalWords
-	stats.byLanguage[language].estimatedCost += estimatedCost
-
-	if (filePath) {
-		stats.l10nsToCapture++
-		stats.byLanguage[language].files.push(fileName)
-	}
 }

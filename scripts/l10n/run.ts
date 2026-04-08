@@ -200,7 +200,6 @@ const logMessage = (msg: string) => {
 			cageGit,
 			cageLatestCommitDates,
 			websiteLatestCommitDates,
-			dryRunStats: null,
 			forceFiles,
 			workItems,
 			modelName: LLM_DEFAULTS.MODEL
@@ -330,7 +329,6 @@ const logMessage = (msg: string) => {
 		cageGit,
 		cageLatestCommitDates,
 		websiteLatestCommitDates,
-		dryRunStats: null,
 		forceFiles,
 		isCI: mode.isCI,
 		pushAfterBatch
