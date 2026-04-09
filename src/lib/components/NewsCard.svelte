@@ -10,6 +10,7 @@
 
 	export let item: NewsItem | undefined = undefined
 	export let loading: boolean = false
+	export let imageSizes: string | undefined = undefined
 
 	$: isExternal = item?.source === 'substack'
 </script>
@@ -28,7 +29,7 @@
 					{#if isExternal}
 						<NetlifyImage src={item.image} alt={item.title} imgClass="image" />
 					{:else}
-						<Image src={item.image} alt={item.title} class="image" />
+						<Image src={item.image} alt={item.title} sizes={imageSizes} class="image" />
 					{/if}
 				{:else}
 					<div class="image-placeholder"></div>

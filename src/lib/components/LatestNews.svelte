@@ -40,7 +40,7 @@
 	{#if newsItems.length > 0}
 		<div class="news-grid">
 			{#each newsItems as item}
-				<NewsCard {item} {loading} />
+				<NewsCard {item} {loading} imageSizes="500px" />
 			{/each}
 		</div>
 
