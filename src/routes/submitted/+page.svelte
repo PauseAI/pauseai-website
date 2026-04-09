@@ -21,7 +21,7 @@
 			window.location.href = stripePaymentLink
 		} else {
 			// Redirect to internal page without query parameters
-			goto(INTERNAL_REDIRECT_PATH)
+			void goto(INTERNAL_REDIRECT_PATH)
 		}
 	})
 </script>

@@ -90,7 +90,7 @@
 
 	function handleKeyPress(event: KeyboardEvent) {
 		if (event.key === 'Enter') {
-			lookupMP()
+			void lookupMP()
 		}
 	}
 </script>

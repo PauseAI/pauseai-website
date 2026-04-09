@@ -27,11 +27,11 @@
 
 	function goToPage(page: number) {
 		if (page >= 1 && page <= totalPages) {
-			loadPage(page)
+			void loadPage(page)
 		}
 	}
 
-	onMount(() => loadPage(1))
+	onMount(() => void loadPage(1))
 </script>
 
 <section class="latest-news" data-pagefind-ignore>

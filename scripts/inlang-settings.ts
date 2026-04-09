@@ -37,11 +37,11 @@ async function regenerateSettings(verbose = false): Promise<void> {
 
 	// Process the PARAGLIDE_LOCALES environment variable to get active locales
 	const settings = { ...defaultSettings }
-	settings.locales = possiblyOverriddenLocales(defaultSettings)
+	settings.locales = possiblyOverriddenLocales(process.env, defaultSettings)
 
 	if (verbose) {
 		console.info(
-			`Env override [${process.env.PARAGLIDE_LOCALES}] (${getDevContext()}) yields ${settings.locales.join(', ')}`
+			`Env override [${process.env.PARAGLIDE_LOCALES}] (${getDevContext(process.env)}) yields ${settings.locales.join(', ')}`
 		)
 	} else {
 		console.log(`Using locales: ${settings.locales.join(', ')}`)

@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 export const prerender = false
 
 import { fetchAllPages, type AirtableRecord } from '$lib/airtable'

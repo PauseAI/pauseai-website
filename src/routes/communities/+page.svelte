@@ -56,7 +56,7 @@
 
 	onMount(async () => {
 		// Required, can throw
-		const style: StyleSpecification = await fetch(STYLE_URL).then((res) => res.json())
+		const style = (await fetch(STYLE_URL).then((res) => res.json())) as StyleSpecification
 		if (!style) return
 
 		// Optional, call with error handling

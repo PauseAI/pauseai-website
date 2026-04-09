@@ -171,6 +171,6 @@ export async function postChatCompletion(
 
 		// Throw a cleaner error without the full response dump
 		const statusText = error.response?.statusText || 'Error'
-		throw new Error(`LLM API call failed: ${status} ${statusText}`)
+		throw new Error(`LLM API call failed: ${status} ${statusText}`, { cause: error })
 	}
 }

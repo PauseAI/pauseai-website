@@ -1,6 +1,6 @@
 import { json } from '@sveltejs/kit'
 import type { RequestHandler } from './$types'
-import { possiblyOverriddenLocales } from '$lib/env'
+import { possiblyOverriddenLocales } from '$lib/env.server'
 import defaultSettings from '$lib/generated/paraglide-defaults'
 
 export type LocaleEnvApiResponse = {
@@ -11,7 +11,7 @@ export type LocaleEnvApiResponse = {
  * Simplified API endpoint that returns the defaults + env-overridden locales
  * This helps detect mismatches between environment settings and compiled runtime
  */
-export const GET: RequestHandler = async () => {
+export const GET: RequestHandler = () => {
 	const envLocales = possiblyOverriddenLocales(defaultSettings)
 	return json({ envLocales } satisfies LocaleEnvApiResponse) // returns value under key 'envLocales'
 }

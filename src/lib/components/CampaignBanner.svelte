@@ -32,7 +32,12 @@
 </svelte:head>
 
 {#if !dismissed}
-	<div class="campaign-banner" data-campaign-banner-id={id} transition:fade={{ duration: 200 }}>
+	<div
+		class="campaign-banner"
+		data-campaign-banner-id={id}
+		data-pagefind-ignore
+		transition:fade={{ duration: 200 }}
+	>
 		<div class="accent-line"></div>
 		<div class="campaign-content">
 			<LinkWithoutIcon {href} class="campaign-link" on:click={close}>

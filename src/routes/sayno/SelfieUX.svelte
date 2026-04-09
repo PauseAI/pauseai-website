@@ -102,7 +102,7 @@
 							console.log('Video metadata loaded')
 							if (stream && videoElement && !videoElement.srcObject) {
 								videoElement.srcObject = stream
-								videoElement.play()
+								void videoElement.play()
 							}
 						}}
 						use:connectStream
@@ -141,7 +141,7 @@
 							placeholder="your@email.com"
 							on:keypress={(e) => {
 								if (e.key === 'Enter' && emailValid) {
-									finalizeSubmission()
+									void finalizeSubmission()
 								}
 							}}
 						/>

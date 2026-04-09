@@ -16,12 +16,23 @@ async function sha1(text: string): Promise<string> {
 	return hashHex
 }
 
+export type CloudinaryUploadResponse = {
+	secure_url: string
+	public_id: string
+	[key: string]: unknown
+}
+
+export type CloudinarySimpleResponse = {
+	result: string
+	[key: string]: unknown
+}
+
 // Generic Cloudinary REST API caller
-export async function callCloudinaryAPI(
+export async function callCloudinaryAPI<T>(
 	endpoint: string,
 	params: Record<string, unknown> = {},
 	requiresAuth: 'basic' | 'signature' = 'signature'
-) {
+): Promise<T> {
 	const url = `https://api.cloudinary.com/v1_1/${CLOUD_NAME}/${endpoint}`
 
 	if (requiresAuth === 'basic') {
@@ -32,7 +43,7 @@ export async function callCloudinaryAPI(
 			headers: { Authorization: `Basic ${auth}` }
 		})
 		if (!response.ok) throw new Error(`API call failed: ${response.status}`)
-		return response.json()
+		return response.json() as Promise<T>
 	}
 
 	// Upload/management APIs use signed form data
@@ -51,7 +62,7 @@ export async function callCloudinaryAPI(
 				k !== 'file' &&
 				k !== 'resource_type'
 		)
-		.map((k) => `${k}=${allParams[k]}`)
+		.map((k) => `${k}=${String(allParams[k])}`)
 		.join('&')
 
 	// Use Web Crypto API for SHA1 hashing (works in both Node.js 18+ and Deno)
@@ -65,15 +76,17 @@ export async function callCloudinaryAPI(
 			// Handle arrays by converting to comma-separated string
 			if (Array.isArray(value)) {
 				formData.append(key, value.join(','))
+			} else if (typeof value === 'object' && value !== null) {
+				formData.append(key, JSON.stringify(value))
 			} else {
-				formData.append(key, String(value))
+				formData.append(key, String(value as string | number | boolean))
 			}
 		}
 	})
 
 	const response = await fetch(url, { method: 'POST', body: formData })
 	if (!response.ok) throw new Error(`API call failed: ${response.status}`)
-	return response.json()
+	return response.json() as Promise<T>
 }
 
 // Check if we have the required secret configured

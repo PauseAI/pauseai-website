@@ -6,6 +6,7 @@
 	import { theme } from '$lib/theme'
 	import Link from '$lib/components/LinkWithoutIcon.svelte'
 	import type { PageData } from './$types'
+	import type { Signatory } from './types'
 
 	export let data: PageData
 
@@ -14,10 +15,9 @@
 	const { title, description, date } = meta
 
 	// Separate parliamentarians from organizations (excluding PauseAI)
-	const parliamentarians = signatories.filter((s: { type?: string }) => s.type !== 'Organization')
+	const parliamentarians = signatories.filter((s: Signatory) => s.type !== 'Organization')
 	const organizationsUnsorted = signatories.filter(
-		(s: { type?: string; name?: string }) =>
-			s.type === 'Organization' && s.name !== 'PauseAI Global'
+		(s: Signatory) => s.type === 'Organization' && s.name !== 'PauseAI Global'
 	)
 
 	// Custom order for organizations
@@ -29,7 +29,7 @@
 	]
 
 	const organizations: { name: string; type: string }[] = organizationsUnsorted.sort(
-		(a: { name: string }, b: { name: string }) => {
+		(a: Signatory, b: Signatory) => {
 			const aIndex = organizationOrder.indexOf(a.name)
 			const bIndex = organizationOrder.indexOf(b.name)
 			if (aIndex === -1) return 1
@@ -39,21 +39,19 @@
 	)
 
 	// Sort parliamentarians alphabetically by last name (as in the PDF)
-	const sortedParliamentarians = parliamentarians.sort(
-		(a: { name: string }, b: { name: string }) => {
-			const getLastName = (name: string) => {
-				// Handle titles and complex names
-				let cleanName = name
-					.replace(/^(Lord|Baroness|Right Revd Dr|Sir|Dame)\s+/, '')
-					.replace(/\s+(MC|TD|MP|MSP|MS|MLA)$/, '')
+	const sortedParliamentarians = parliamentarians.sort((a: Signatory, b: Signatory) => {
+		const getLastName = (name: string) => {
+			// Handle titles and complex names
+			let cleanName = name
+				.replace(/^(Lord|Baroness|Right Revd Dr|Sir|Dame)\s+/, '')
+				.replace(/\s+(MC|TD|MP|MSP|MS|MLA)$/, '')
 
-				const parts = cleanName.split(' ')
-				return parts[parts.length - 1].toLowerCase()
-			}
-
-			return getLastName(a.name).localeCompare(getLastName(b.name))
+			const parts = cleanName.split(' ')
+			return parts[parts.length - 1].toLowerCase()
 		}
-	)
+
+		return getLastName(a.name).localeCompare(getLastName(b.name))
+	})
 
 	// Map organization names to their logo files (theme-aware with cache busting)
 	$: organizationLogos = {

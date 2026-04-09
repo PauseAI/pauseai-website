@@ -1,13 +1,23 @@
 import { enhancedImages } from '@sveltejs/enhanced-img'
 import { sveltekit } from '@sveltejs/kit/vite'
+import { execSync } from 'child_process'
 import dotenv from 'dotenv'
 import fs from 'fs'
 import path from 'path'
 import { defineConfig } from 'vite'
 import lucidePreprocess from 'vite-plugin-lucide-preprocess'
+import { sentryVitePlugin } from '@sentry/vite-plugin'
 import { isDev } from './src/lib/env'
 import { MARKDOWN_L10NS } from './src/lib/l10n'
 import { locales as compiledLocales } from './src/lib/paraglide/runtime.js'
+
+function getSentryRelease(): string | undefined {
+	try {
+		return process.env.COMMIT_REF || execSync('git rev-parse HEAD').toString().trim()
+	} catch {
+		return undefined
+	}
+}
 
 function getLocaleExcludePatterns(): RegExp[] {
 	const md = path.resolve(MARKDOWN_L10NS)
@@ -32,8 +42,7 @@ export default defineConfig(() => {
 
 	return {
 		define: {
-			// Make PARAGLIDE_LOCALES accessible to browser code via import.meta.env
-			'import.meta.env.PARAGLIDE_LOCALES': JSON.stringify(process.env.PARAGLIDE_LOCALES)
+			'import.meta.env.SENTRY_RELEASE': JSON.stringify(getSentryRelease())
 		},
 
 		server: {
@@ -55,12 +64,32 @@ export default defineConfig(() => {
 			// Improve cache usage
 			cssCodeSplit: true,
 			// Generate sourcemaps in development, disable in production unless explicitly enabled
-			sourcemap: isDev() || !process.env.VITE_DISABLE_SOURCEMAPS,
+			sourcemap: isDev(process.env) || !process.env.VITE_DISABLE_SOURCEMAPS,
 			// Exclude repos locale paths not in runtime.locales
 			rollupOptions: {
 				external: getLocaleExcludePatterns()
 			}
 		} as const,
-		plugins: [lucidePreprocess(), enhancedImages(), sveltekit()]
+		plugins: [
+			lucidePreprocess(),
+			enhancedImages(),
+			sveltekit(),
+			!isDev(process.env) &&
+			process.env.SENTRY_AUTH_TOKEN &&
+			process.env.SENTRY_ORG &&
+			process.env.SENTRY_PROJECT
+				? sentryVitePlugin({
+						org: process.env.SENTRY_ORG,
+						project: process.env.SENTRY_PROJECT,
+						authToken: process.env.SENTRY_AUTH_TOKEN,
+						release: { name: getSentryRelease() },
+						sourcemaps: {
+							filesToDeleteAfterUpload: ['./build/**/*.map']
+						},
+						telemetry: false,
+						silent: true
+					})
+				: null
+		].filter(Boolean)
 	}
 })
