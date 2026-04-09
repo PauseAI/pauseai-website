@@ -40,13 +40,30 @@ export function getDevContext(env: EnvContext): string {
 }
 
 /**
+ * Derive locale from branch name for l10n-xx branches (e.g. l10n-es → "es")
+ */
+function branchLocale(env: EnvContext): string | undefined {
+	const branch = env.BRANCH || env.HEAD || ''
+	const match = branch.match(/^l10n-([a-z]{2})$/)
+	return match ? match[1] : undefined
+}
+
+/**
  * Process default settings plus env vars to determine which locales should be enabled.
  */
 export function possiblyOverriddenLocales(
 	env: EnvContext,
 	defaults: { locales: string[] }
 ): string[] {
-	const envValue = (env.PARAGLIDE_LOCALES ?? (isDev(env) ? 'en' : 'all')).trim()
+	const fromEnv = env.PARAGLIDE_LOCALES
+	const fromBranch = branchLocale(env)
+	const fallback = isDev(env) ? 'en' : 'all'
+	const envValue = (fromEnv || fromBranch || fallback).trim()
+	const source = fromEnv
+		? `PARAGLIDE_LOCALES="${fromEnv}"`
+		: fromBranch
+			? `branch "${env.BRANCH || env.HEAD}"`
+			: `default (${fallback})`
 	const listedLocales = envValue.replace(/all|-/g, ',')
 	const inclusive = listedLocales === envValue
 	const namedLocales = listedLocales.split(',').map((locale) => locale.trim())
@@ -54,5 +71,18 @@ export function possiblyOverriddenLocales(
 		inclusive ? namedLocales.includes(locale) : !namedLocales.includes(locale)
 	)
 	if (!result.includes('en')) result.push('en')
+	if (inclusive) {
+		const unknown = namedLocales.filter((l) => l !== 'all' && !defaults.locales.includes(l))
+		if (unknown.length > 0) {
+			console.error(
+				`Error: ${source} requests "${unknown.join(', ')}" but default-settings.js only has [${defaults.locales.join(', ')}].`
+			)
+			console.error(
+				`Add the locale(s) to default-settings.js or fix your .env / PARAGLIDE_LOCALES.`
+			)
+			process.exit(1)
+		}
+	}
+	console.log(`Locale source: ${source} → [${result.join(', ')}]`)
 	return result
 }
