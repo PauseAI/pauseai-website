@@ -2,7 +2,13 @@ import type {
 	GetDatabaseResponse,
 	PageObjectResponse
 } from '@notionhq/client/build/src/api-endpoints'
-import { getNotionClient, getString, getImageFromProps } from '$lib/server/notion'
+import {
+	getNotionClient,
+	getString,
+	getImageFromProps,
+	getTitleFromProps,
+	getDateFromProps
+} from '$lib/server/notion'
 
 export interface PressCoverage {
 	id: string
@@ -14,18 +20,6 @@ export interface PressCoverage {
 	notes: string
 	/** API proxy URL or fallback */
 	image?: string
-}
-
-function getTitleFromProps(props: PageObjectResponse['properties']): string {
-	const titleProp = Object.values(props).find((p) => p.type === 'title')
-	return getString(titleProp)
-}
-
-function getDateFromProps(propName: string, props: PageObjectResponse['properties']): string {
-	const namedProp = props[propName]
-	if (namedProp) return getString(namedProp)
-	const dateProp = Object.values(props).find((p) => p.type === 'date')
-	return getString(dateProp)
 }
 
 export async function fetchPressCoverage(): Promise<{

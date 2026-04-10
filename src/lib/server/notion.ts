@@ -14,7 +14,8 @@ export function getNotionClient() {
 	return notion
 }
 
-export type NotionPropertyValue = PageObjectResponse['properties'][string]
+type NotionProperties = PageObjectResponse['properties']
+type NotionPropertyValue = NotionProperties[string]
 
 /**
  * Extracts a string value from various Notion property types
@@ -41,4 +42,22 @@ export function getImageFromProps(prop: NotionPropertyValue | undefined): string
 		if (first && 'external' in first && first.external?.url) return first.external.url
 	}
 	return ''
+}
+
+/**
+ * Finds the first property of type 'title' and returns its string value
+ */
+export function getTitleFromProps(props: NotionProperties): string {
+	const titleProp = Object.values(props).find((p) => p.type === 'title')
+	return getString(titleProp)
+}
+
+/**
+ * Gets a date string from a named property, or falls back to the first 'date' property found
+ */
+export function getDateFromProps(propName: string, props: NotionProperties): string {
+	const namedProp = props[propName]
+	if (namedProp) return getString(namedProp)
+	const dateProp = Object.values(props).find((p) => p.type === 'date')
+	return getString(dateProp)
 }
