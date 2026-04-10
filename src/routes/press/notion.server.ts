@@ -64,7 +64,7 @@ async function fetchOgImage(url: string): Promise<string> {
 			return ogUrl
 		}
 		return ''
-	} catch (e) {
+	} catch {
 		return ''
 	}
 }

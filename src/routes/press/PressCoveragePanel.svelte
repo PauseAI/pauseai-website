@@ -21,6 +21,7 @@
 		}
 	}
 
+	let availableTypes: string[] = []
 	// Extract unique type names for tab labels
 	$: availableTypes = Array.from(new Set(coverage.map((c) => c.type))).filter(Boolean) as string[]
 
