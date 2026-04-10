@@ -21,7 +21,7 @@ jobs:
       pull-requests: write
     steps:
       - name: Trigger Netlify via Hook
-        uses: actions/github-script@v8
+        uses: actions/github-script@v9
         env:
           NETLIFY_BUILD_HOOK: ${{ secrets.NETLIFY_BUILD_HOOK }}
         with:

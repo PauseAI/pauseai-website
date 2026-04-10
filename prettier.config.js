@@ -1,0 +1,18 @@
+/** @type {import("prettier").Config} */
+export default {
+	semi: false,
+	useTabs: true,
+	singleQuote: true,
+	trailingComma: 'none',
+	printWidth: 100,
+	endOfLine: 'auto',
+	plugins: ['prettier-plugin-svelte'],
+	overrides: [
+		{
+			files: '*.svelte',
+			options: {
+				parser: 'svelte'
+			}
+		}
+	]
+}
