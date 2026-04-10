@@ -1,6 +1,10 @@
 import { getNegativeIgnores, getPositiveIgnores } from './scripts/ignores.js'
 
-const MANUAL_IGNORES = ['pnpm-lock.yaml', 'src/lib/components/widget-consent/loadTwitter.js']
+const MANUAL_IGNORES = [
+	'pnpm-lock.yaml',
+	'src/lib/components/widget-consent/loadTwitter.js',
+	'project.inlang/.meta.json' // not recognized from gitignore patterns
+]
 
 /** @type {import("prettier").Config} */
 export default {
