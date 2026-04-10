@@ -13,10 +13,8 @@
  * @property {string[]=} countries
  */
 /** @type {BannerRule[]} */
-// eslint-disable-next-line no-unassigned-vars -- Injected by +layout.svelte at runtime
 var mainBannerRules
 /** @type {BannerRule[]} */
-// eslint-disable-next-line no-unassigned-vars -- Injected by +layout.svelte at runtime
 var campaignBannerRules
 
 window.selectBanners = function () {

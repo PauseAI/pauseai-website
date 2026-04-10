@@ -14,6 +14,7 @@ const ignored = eslintConfigGitignore({
 const config: KnipConfig = {
 	include: ['dependencies', 'exports'],
 	ignore: ignored,
+	ignoreDependencies: ['lint-staged'],
 	entry: ADDITIONALLY_ENTRY_POINTS
 }
 
