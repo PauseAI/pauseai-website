@@ -1,5 +1,5 @@
 import { writeFileSync } from 'node:fs'
-import { getIgnores } from './ignores.js'
+import { getIgnores } from './utils/ignores.js'
 
 const MANUAL_IGNORES = ['pnpm-lock.yaml', 'src/lib/components/widget-consent/loadTwitter.js']
 

@@ -11,8 +11,8 @@ import {
 	MESSAGE_SOURCE,
 	writeSettingsFile
 } from '../src/lib/l10n'
-import { setupL10nCage } from './l10n/git-ops'
-import { cullCommentary, createSymlinkIfNeeded, ensureDirectoriesExist } from './l10n/utils'
+import { setupL10nCage } from './l10n/utils/git-ops'
+import { cullCommentary, createSymlinkIfNeeded, ensureDirectoriesExist } from './l10n/utils/utils'
 
 const INLANG_PROJECT_PATH_ELEMENTS = ['..', 'project.inlang']
 
