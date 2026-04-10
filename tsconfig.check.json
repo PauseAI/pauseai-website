@@ -5,6 +5,7 @@
 		".svelte-kit/types/**/*.d.ts",
 		"eslint.config.js",
 		"knip.config.ts",
+		"prettier.config.js",
 		"svelte.config.js",
 		"eslint/**/*.js",
 		"scripts/**/*.js",
