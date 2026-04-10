@@ -19,7 +19,11 @@ export type Event = {
 
 export const prerender = false
 
-const CALENDAR_IDS = ['cal-E1qhLPs5IvlQr8S', 'cal-Z327EhtiFdHuVie']
+const CALENDAR_IDS = [
+	'cal-E1qhLPs5IvlQr8S', // global
+	'cal-Z327EhtiFdHuVie', // UK
+	'cal-EvzL9fKA3SCSrOq' // US
+]
 
 export const GET: RequestHandler = async ({ setHeaders }) => {
 	const allItems = await Promise.all(
