@@ -17,7 +17,7 @@
 		"_postbuild:l10ntamer": "tsx scripts/l10ntamer.ts",
 		"test": "vitest",
 		"preview": "vite preview",
-		"check": "run-p _check:*",
+		"check": "run-s _check:*",
 		"_check:svelte": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
 		"_check:other": "tsc --noEmit -p tsconfig.check.json",
 		"check:watch": "echo This commands only checks the SvelteKit code, not the build scripts. && svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
