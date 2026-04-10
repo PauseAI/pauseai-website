@@ -33,6 +33,3 @@ CLAUDE.md
 .env.sentry-build-plugin
 
 .prettierignore
-
-# Press Coverage
-/static/press-coverage/
