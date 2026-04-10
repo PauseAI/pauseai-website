@@ -1,6 +1,10 @@
 import type { PageObjectResponse } from '@notionhq/client/build/src/api-endpoints'
-import { getNotionClient } from '$lib/server/notion'
-import * as env from '$env/static/private'
+import {
+	getNotionClient,
+	getString as getSharedString,
+	type NotionPropertyValue
+} from '$lib/server/notion'
+import { env } from '$env/dynamic/private'
 
 /** 32-char Notion database id (hyphens optional). Override with NOTION_FUNDING_DONORS_DATABASE_ID in deploy env. */
 const FUNDING_DONORS_DATABASE_ID = '185ce958adb5459eb1eedc7b72da5738'
@@ -14,17 +18,10 @@ export interface PublicDonor {
 	notes: string
 }
 
-type NotionPropertyValue = PageObjectResponse['properties'][string]
-
 function getString(prop: NotionPropertyValue | undefined): string {
 	if (!prop) return ''
-	if (prop.type === 'title') return prop.title[0]?.plain_text ?? ''
-	if (prop.type === 'rich_text') return prop.rich_text[0]?.plain_text ?? ''
-	if (prop.type === 'select') return prop.select?.name ?? ''
-	if (prop.type === 'url') return prop.url ?? ''
-	if (prop.type === 'date') return prop.date?.start ?? ''
 	if (prop.type === 'number' && prop.number != null) return String(prop.number)
-	return ''
+	return getSharedString(prop)
 }
 
 function getBoolean(prop: NotionPropertyValue | undefined): boolean {
@@ -37,11 +34,6 @@ function getNumber(prop: NotionPropertyValue | undefined): number | null {
 	if (!prop) return null
 	if (prop.type === 'number') return prop.number
 	return null
-}
-
-function getTitleFromProps(props: PageObjectResponse['properties']): string {
-	const titleProp = Object.values(props).find((p) => p.type === 'title')
-	return getString(titleProp)
 }
 
 function amountFromProps(props: PageObjectResponse['properties']): number | null {
