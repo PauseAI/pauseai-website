@@ -11,7 +11,7 @@ const prefersDark =
 
 const initialUserTheme = (browser ? localStorage.getItem(userThemeKey) : 'auto') as UserTheme
 const initialTheme =
-	initialUserTheme === 'auto' ? (prefersDark ? 'dark' : 'light') : (initialUserTheme as Theme)
+	initialUserTheme === 'auto' ? (prefersDark ? 'dark' : 'light') : initialUserTheme
 
 export const theme = writable<Theme>(initialTheme)
 export const userTheme = writable<UserTheme>(initialUserTheme)
