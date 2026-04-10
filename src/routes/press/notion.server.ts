@@ -35,8 +35,37 @@ async function downloadImageLocally(id: string, url: string): Promise<string> {
 
 		return `/press-coverage/${filename}`
 	} catch (e) {
-		console.error('Failed to download image from Notion', e)
+		console.error('Failed to download image from Notion/OG', e)
 		return url // Fallback to original
+	}
+}
+
+async function fetchOgImage(url: string): Promise<string> {
+	if (!url || !url.startsWith('http')) return ''
+	try {
+		const controller = new AbortController()
+		const timeoutId = setTimeout(() => controller.abort(), 4000)
+		const response = await fetch(url, { signal: controller.signal })
+		clearTimeout(timeoutId)
+
+		if (!response.ok) return ''
+		const html = await response.text()
+
+		const ogImageMatch =
+			html.match(/<meta[^>]*property=["']og:image["'][^>]*content=["']([^"']+)["']/i) ||
+			html.match(/<meta[^>]*content=["']([^"']+)["'][^>]*property=["']og:image["']/i)
+
+		if (ogImageMatch && ogImageMatch[1]) {
+			let ogUrl = ogImageMatch[1].replace(/&amp;/g, '&')
+			if (ogUrl.startsWith('/')) {
+				const urlObj = new URL(url)
+				ogUrl = `${urlObj.origin}${ogUrl}`
+			}
+			return ogUrl
+		}
+		return ''
+	} catch (e) {
+		return ''
 	}
 }
 
@@ -132,6 +161,11 @@ export async function fetchPressCoverage(): Promise<{
 		(response.results as PageObjectResponse[]).map(async (page) => {
 			const props = page.properties
 			let imageUrl = getImageFromProps(props['Image'])
+			const targetUrl = getString(props['URL'])
+
+			if (!imageUrl && targetUrl) {
+				imageUrl = await fetchOgImage(targetUrl)
+			}
 
 			if (imageUrl) {
 				imageUrl = await downloadImageLocally(page.id, imageUrl)
@@ -140,7 +174,7 @@ export async function fetchPressCoverage(): Promise<{
 			return {
 				id: page.id,
 				title: getString(props['Name']) || getString(props['Title']) || getTitleFromProps(props),
-				url: getString(props['URL']),
+				url: targetUrl,
 				date: getDateFromProps('Date', props) || getDateFromProps('Published', props),
 				type: getString(props['Type']),
 				outlet: getString(props['Outlet']),

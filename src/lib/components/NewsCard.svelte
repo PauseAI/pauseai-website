@@ -7,45 +7,60 @@
 
 	let isExternal: boolean
 
-	export let item: NewsItem
+	export let item: NewsItem | undefined = undefined
+	export let loading: boolean = false
+	export let imageSizes: string | undefined = undefined
 	/** Optional anchor id (e.g. for hash links from elsewhere) */
 	export let id: string | undefined = undefined
 
-	$: isExternal = item.source === 'substack' || item.source === 'press'
+	$: isExternal = item?.source === 'substack' || item?.source === 'press'
 </script>
 
 <div>
-	<LinkWithoutIcon
-		href={item.href}
-		class="news-card"
-		{id}
-		target={isExternal ? '_blank' : undefined}
-		rel={isExternal ? 'noopener noreferrer' : undefined}
-	>
-		<div class="image-container">
-			{#if item.image}
-				{#if isExternal && !item.image.startsWith('/')}
-					<NetlifyImage src={item.image} alt={item.title} imgClass="image" />
+	{#if item && !loading}
+		<LinkWithoutIcon
+			href={item.href}
+			class="news-card"
+			{id}
+			target={isExternal ? '_blank' : undefined}
+			rel={isExternal ? 'noopener noreferrer' : undefined}
+		>
+			<div class="image-container">
+				{#if item.image}
+					{#if isExternal && !item.image.startsWith('/')}
+						<NetlifyImage src={item.image} alt={item.title} imgClass="image" sizes={imageSizes} />
+					{:else}
+						<Image src={item.image} alt={item.title} class="image" sizes={imageSizes} />
+					{/if}
 				{:else}
-					<Image src={item.image} alt={item.title} class="image" />
+					<div class="image-placeholder"></div>
 				{/if}
-			{:else}
-				<div class="image-placeholder"></div>
-			{/if}
+			</div>
+			<div class="card-content">
+				{#if item.source === 'press' && item.outlet}
+					<p class="card-outlet">{item.outlet}</p>
+				{/if}
+				<h3 class="card-title toc-exclude">{item.title}</h3>
+				{#if item.subtitle}
+					<p class="card-subtitle">{item.subtitle}</p>
+				{/if}
+				{#if item.date}
+					<p class="card-date">{formatDate(item.date, 'long')}</p>
+				{/if}
+			</div>
+		</LinkWithoutIcon>
+	{:else}
+		<div class="news-card loading">
+			<div class="image-container">
+				<div class="image-placeholder animate-pulse"></div>
+			</div>
+			<div class="card-content">
+				<div class="loading-bar title"></div>
+				<div class="loading-bar subtitle"></div>
+				<div class="loading-bar date"></div>
+			</div>
 		</div>
-		<div class="card-content">
-			{#if item.source === 'press' && item.outlet}
-				<p class="card-outlet">{item.outlet}</p>
-			{/if}
-			<h3 class="card-title toc-exclude">{item.title}</h3>
-			{#if item.subtitle}
-				<p class="card-subtitle">{item.subtitle}</p>
-			{/if}
-			{#if item.date}
-				<p class="card-date">{formatDate(item.date, 'long')}</p>
-			{/if}
-		</div>
-	</LinkWithoutIcon>
+	{/if}
 </div>
 
 <style>
@@ -139,5 +154,43 @@
 		margin: 0;
 		color: var(--text);
 		opacity: 0.6;
+	}
+
+	/* LOADING STATE */
+	.animate-pulse {
+		animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+	}
+
+	@keyframes pulse {
+		0%,
+		100% {
+			opacity: 1;
+		}
+		50% {
+			opacity: 0.5;
+		}
+	}
+
+	.loading-bar {
+		height: 1rem;
+		background: var(--border);
+		border-radius: 4px;
+		margin: 0.2rem auto;
+		width: 100%;
+	}
+
+	.loading-bar.title {
+		height: 1.2rem;
+		width: 80%;
+		margin-bottom: 0.5rem;
+	}
+
+	.loading-bar.subtitle {
+		width: 90%;
+	}
+
+	.loading-bar.date {
+		width: 40%;
+		margin-top: 0.5rem;
 	}
 </style>
