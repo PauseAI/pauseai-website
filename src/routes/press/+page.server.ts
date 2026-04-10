@@ -1,6 +1,6 @@
 import { fetchPressCoverage } from './notion.server'
 import type { PageServerLoad } from './$types'
-import * as env from '$env/static/private'
+import { env } from '$env/dynamic/private'
 
 export const prerender = true
 export const load: PageServerLoad = async () => {
