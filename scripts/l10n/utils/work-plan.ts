@@ -8,7 +8,7 @@
 
 import fs from 'fs'
 import path from 'path'
-import { L10N_CAGE_DIR } from '../../src/lib/l10n'
+import { L10N_CAGE_DIR } from '../../../src/lib/l10n'
 
 // --- Types ---
 

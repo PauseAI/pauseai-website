@@ -3,7 +3,6 @@
 	import { browser } from '$app/environment'
 	import { page } from '$app/stores'
 	import Banner from '$lib/components/Banner.svelte'
-	import CampaignBanner from '$lib/components/CampaignBanner.svelte'
 	import Hero from '$lib/components/Hero.svelte'
 	import Link from '$lib/components/Link.svelte'
 	import NearbyEvent from '$lib/components/NearbyEvent.svelte'
@@ -26,6 +25,7 @@
 	import Header from './header.svelte'
 	import PageTransition from './transition.svelte'
 	import bannerSelection from './banner-selection.js?raw'
+	import themeSelection from './theme-selection.js?raw'
 	import type { PageData } from './$types'
 
 	export let data: PageData
@@ -70,6 +70,13 @@
 	$: if (browser && eventFound) {
 		delete document.documentElement.dataset.activeBanner
 	}
+
+	function sanitizeScript(code: string) {
+		return code
+			.replaceAll(/\/\*[\s\S]*?\*\//g, '') // remove block comments
+			.replaceAll(/\/\/[^"'`\n]*?$/gm, '') // remove line comments
+			.replaceAll(/\n\s*(?=\n)/g, '') // remove empty lines
+	}
 </script>
 
 <svelte:head>
@@ -101,12 +108,10 @@
 	</script>
 
 	<!-- eslint-disable-next-line svelte/no-at-html-tags not vulnerable against XSS -->
-	{@html `<${'script'}>${
-		bannerSelection
-			.replaceAll(/\/\*[\s\S]*?\*\//g, '') // remove block comments
-			.replaceAll(/\/\/[^"'`\n]*?$/gm, '') // remove line comments
-			.replaceAll(/\n\s*(?=\n)/g, '') // remove empty lines
-	}</script>`}
+	{@html `<${'script'}>${sanitizeScript(themeSelection)}</script>`}
+
+	<!-- eslint-disable-next-line svelte/no-at-html-tags not vulnerable against XSS -->
+	{@html `<${'script'}>${sanitizeScript(bannerSelection)}</script>`}
 </svelte:head>
 
 <PreloadFonts urls={[robotoSlabLatin300, sairaCondensedLatin700]} />
@@ -142,17 +147,17 @@
 			></b
 		>
 	</Banner>
-	<Banner contrast={hero} id="holiday-littlehelpers" target="/littlehelpers">
+	<Banner contrast={hero} id="holiday-littlehelpers" href="/littlehelpers">
 		<strong>🎄 Holiday Matching Campaign!</strong> Help fund volunteer stipends for PauseAI
 		advocates. <Link href="/littlehelpers">Join the Little Helpers campaign →</Link>
 	</Banner>
 
 	<NearbyEvent contrast={hero} bind:eventFound geo={geoForNearbyEvent} />
 
-	<CampaignBanner href="/brussels-ep-protest-2026" id="brussels-ep-protest-2026">
+	<Banner type="campaign" href="/brussels-ep-protest-2026" id="brussels-ep-protest-2026">
 		<strong>Brussels, Feb 23</strong> - Join us outside the European Parliament to call for a global treaty
 		to pause frontier AI development.
-	</CampaignBanner>
+	</Banner>
 
 	{#if hero}
 		<div class="hero-section">
@@ -230,8 +235,7 @@
 		height: 100dvh;
 	}
 
-	.page-top.hero-page > :global(.banner),
-	.page-top.hero-page > :global(.campaign-banner) {
+	.page-top.hero-page > :global(.banner) {
 		flex-shrink: 0;
 	}
 

@@ -7,7 +7,7 @@ import fs from 'fs'
 import path from 'path'
 import { execSync } from 'child_process'
 import simpleGit, { type SimpleGit, type SimpleGitOptions } from 'simple-git'
-import { L10N_CAGE_DIR } from '../../src/lib/l10n'
+import { L10N_CAGE_DIR } from '../../../src/lib/l10n'
 import { ensureDirectoryExists } from './utils'
 import { l10nCageBranch, validateBranchForWrite, setupBranchAndTracking } from './branch-safety'
 

@@ -7,11 +7,11 @@ import fs from 'fs'
 import path from 'path'
 import dotenv from 'dotenv'
 import { execSync } from 'child_process'
-import { L10N_CAGE_DIR, MARKDOWN_L10NS } from '../src/lib/l10n.js'
+import { L10N_CAGE_DIR, MARKDOWN_L10NS } from '../../src/lib/l10n.js'
 
 dotenv.config()
 
-import { locales } from '../src/lib/paraglide/runtime.js'
+import { locales } from '../../src/lib/paraglide/runtime.js'
 let activeLocales = Array.from(locales)
 let setupNeeded = false
 let reason = ''
