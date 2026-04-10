@@ -9,7 +9,7 @@
 		var userTheme = 'auto'
 		try {
 			userTheme = localStorage.getItem(userThemeKey) || 'auto'
-		} catch (e) {
+		} catch {
 			// localStorage might be unavailable
 		}
 
