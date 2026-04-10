@@ -2,7 +2,7 @@ import type {
 	GetDatabaseResponse,
 	PageObjectResponse
 } from '@notionhq/client/build/src/api-endpoints'
-import { getNotionClient } from '$lib/server/notion'
+import { getNotionClient, getString, getImageFromProps } from '$lib/server/notion'
 
 export interface PressCoverage {
 	id: string
@@ -16,18 +16,6 @@ export interface PressCoverage {
 	image?: string
 }
 
-type NotionPropertyValue = PageObjectResponse['properties'][string]
-
-function getString(prop: NotionPropertyValue | undefined): string {
-	if (!prop) return ''
-	if (prop.type === 'title') return prop.title[0]?.plain_text ?? ''
-	if (prop.type === 'rich_text') return prop.rich_text[0]?.plain_text ?? ''
-	if (prop.type === 'select') return prop.select?.name ?? ''
-	if (prop.type === 'url') return prop.url ?? ''
-	if (prop.type === 'date') return prop.date?.start ?? ''
-	return ''
-}
-
 function getTitleFromProps(props: PageObjectResponse['properties']): string {
 	const titleProp = Object.values(props).find((p) => p.type === 'title')
 	return getString(titleProp)
@@ -38,17 +26,6 @@ function getDateFromProps(propName: string, props: PageObjectResponse['propertie
 	if (namedProp) return getString(namedProp)
 	const dateProp = Object.values(props).find((p) => p.type === 'date')
 	return getString(dateProp)
-}
-
-function getImageFromProps(prop: NotionPropertyValue | undefined): string {
-	if (!prop) return ''
-	if (prop.type === 'url') return prop.url ?? ''
-	if (prop.type === 'files' && prop.files?.length) {
-		const first = prop.files[0]
-		if (first && 'file' in first && first.file?.url) return first.file.url
-		if (first && 'external' in first && first.external?.url) return first.external.url
-	}
-	return ''
 }
 
 export async function fetchPressCoverage(): Promise<{

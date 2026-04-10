@@ -1,30 +1,9 @@
 import { asError } from '$lib/utils'
-import { getNotionClient } from '$lib/server/notion'
+import { getNotionClient, getImageFromProps, getString } from '$lib/server/notion'
 import type { RequestHandler } from './$types'
 import type { PageObjectResponse } from '@notionhq/client/build/src/api-endpoints'
 
 const PRESS_DATABASE_ID = '212fd8030c4d42ff9de5710f92efecff'
-
-type NotionPropertyValue = PageObjectResponse['properties'][string]
-
-// Helper to extract image from props (reusing logic from notion.server.ts)
-function getImageFromProps(prop: NotionPropertyValue | undefined): string {
-	if (!prop) return ''
-	if (prop.type === 'url') return prop.url ?? ''
-	if (prop.type === 'files' && prop.files?.length) {
-		const first = prop.files[0]
-		if (first && 'file' in first && first.file?.url) return first.file.url
-		if (first && 'external' in first && first.external?.url) return first.external.url
-	}
-	return ''
-}
-
-function getString(prop: NotionPropertyValue | undefined): string {
-	if (!prop) return ''
-	if (prop.type === 'url') return prop.url ?? ''
-	if (prop.type === 'rich_text') return prop.rich_text[0]?.plain_text ?? ''
-	return ''
-}
 
 async function fetchOgImage(url: string): Promise<string> {
 	if (!url || !url.startsWith('http')) return ''
