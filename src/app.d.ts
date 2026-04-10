@@ -22,6 +22,7 @@ declare global {
 	interface Window {
 		twttr?: Twttr
 		selectBanners(): void
+		applyTheme(): void
 	}
 
 	declare module '*.md' {

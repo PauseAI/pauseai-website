@@ -9,19 +9,24 @@ const userThemeKey = 'user-theme'
 const prefersDark =
 	typeof matchMedia === 'undefined' ? false : matchMedia('(prefers-color-scheme: dark)').matches
 
+const initialUserTheme = (browser ? localStorage.getItem(userThemeKey) : 'auto') as UserTheme
+const initialTheme =
+	initialUserTheme === 'auto' ? (prefersDark ? 'dark' : 'light') : (initialUserTheme as Theme)
+
+export const theme = writable<Theme>(initialTheme)
+export const userTheme = writable<UserTheme>(initialUserTheme)
+
 if (typeof matchMedia !== 'undefined') {
 	matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (event) => {
 		const newColorScheme = event.matches ? 'dark' : 'light'
-		if (userTheme.subscribe((value) => value === 'auto')) {
-			theme.set(newColorScheme)
-		}
+		// Only update if user is on auto
+		userTheme.subscribe((value) => {
+			if (value === 'auto') {
+				theme.set(newColorScheme)
+			}
+		})()
 	})
 }
-
-export const theme = writable<Theme>('light')
-export const userTheme = writable<UserTheme>(
-	browser ? (localStorage.getItem(userThemeKey) as UserTheme) || 'auto' : 'auto'
-)
 
 userTheme.subscribe((value) => {
 	theme.set(value === 'auto' ? (prefersDark ? 'dark' : 'light') : value)

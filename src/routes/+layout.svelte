@@ -26,6 +26,7 @@
 	import Header from './header.svelte'
 	import PageTransition from './transition.svelte'
 	import bannerSelection from './banner-selection.js?raw'
+	import themeSelection from './theme-selection.js?raw'
 	import type { PageData } from './$types'
 
 	export let data: PageData
@@ -70,6 +71,13 @@
 	$: if (browser && eventFound) {
 		delete document.documentElement.dataset.activeBanner
 	}
+
+	function sanitizeScript(code: string) {
+		return code
+			.replaceAll(/\/\*[\s\S]*?\*\//g, '') // remove block comments
+			.replaceAll(/\/\/[^"'`\n]*?$/gm, '') // remove line comments
+			.replaceAll(/\n\s*(?=\n)/g, '') // remove empty lines
+	}
 </script>
 
 <svelte:head>
@@ -101,12 +109,10 @@
 	</script>
 
 	<!-- eslint-disable-next-line svelte/no-at-html-tags not vulnerable against XSS -->
-	{@html `<${'script'}>${
-		bannerSelection
-			.replaceAll(/\/\*[\s\S]*?\*\//g, '') // remove block comments
-			.replaceAll(/\/\/[^"'`\n]*?$/gm, '') // remove line comments
-			.replaceAll(/\n\s*(?=\n)/g, '') // remove empty lines
-	}</script>`}
+	{@html `<${'script'}>${sanitizeScript(themeSelection)}</script>`}
+
+	<!-- eslint-disable-next-line svelte/no-at-html-tags not vulnerable against XSS -->
+	{@html `<${'script'}>${sanitizeScript(bannerSelection)}</script>`}
 </svelte:head>
 
 <PreloadFonts urls={[robotoSlabLatin300, sairaCondensedLatin700]} />
