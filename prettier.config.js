@@ -1,14 +1,6 @@
-import gitignore from 'eslint-config-flat-gitignore'
-import { globbySync } from 'globby'
+import { getNegativeIgnores, getPositiveIgnores } from './scripts/ignores.js'
 
 const MANUAL_IGNORES = ['pnpm-lock.yaml', 'src/lib/components/widget-consent/loadTwitter.js']
-
-const ignored = [
-	...gitignore({
-		files: globbySync('**/.gitignore', { ignore: ['**/node_modules'] })
-	}).ignores.filter((p) => !p.startsWith('!')),
-	...MANUAL_IGNORES
-]
 
 /** @type {import("prettier").Config} */
 export default {
@@ -27,9 +19,15 @@ export default {
 			}
 		},
 		{
-			files: ignored,
+			files: [...getPositiveIgnores(), ...MANUAL_IGNORES],
 			options: {
 				requirePragma: true
+			}
+		},
+		{
+			files: getNegativeIgnores(),
+			options: {
+				requirePragma: false
 			}
 		}
 	]
