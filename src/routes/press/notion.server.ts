@@ -2,7 +2,7 @@ import type {
 	GetDatabaseResponse,
 	PageObjectResponse
 } from '@notionhq/client/build/src/api-endpoints'
-import { getNotionClient } from '$lib/server/notion'
+import { getNotionClient, getString, getImageFromProps } from '$lib/server/notion'
 
 export interface PressCoverage {
 	id: string
@@ -10,19 +10,10 @@ export interface PressCoverage {
 	url: string
 	date: string
 	type: string
+	outlet: string
 	notes: string
-}
-
-type NotionPropertyValue = PageObjectResponse['properties'][string]
-
-function getString(prop: NotionPropertyValue | undefined): string {
-	if (!prop) return ''
-	if (prop.type === 'title') return prop.title[0]?.plain_text ?? ''
-	if (prop.type === 'rich_text') return prop.rich_text[0]?.plain_text ?? ''
-	if (prop.type === 'select') return prop.select?.name ?? ''
-	if (prop.type === 'url') return prop.url ?? ''
-	if (prop.type === 'date') return prop.date?.start ?? ''
-	return ''
+	/** API proxy URL or fallback */
+	image?: string
 }
 
 function getTitleFromProps(props: PageObjectResponse['properties']): string {
@@ -40,6 +31,7 @@ function getDateFromProps(propName: string, props: PageObjectResponse['propertie
 export async function fetchPressCoverage(): Promise<{
 	coverage: PressCoverage[]
 	typeOrder: string[]
+	outletOrder: string[]
 }> {
 	const notion = getNotionClient()
 	const databaseId = '212fd8030c4d42ff9de5710f92efecff'
@@ -79,19 +71,27 @@ export async function fetchPressCoverage(): Promise<{
 
 	const coverage = (response.results as PageObjectResponse[]).map((page) => {
 		const props = page.properties
+		const targetUrl = getString(props['URL'])
+		const hasNotionImage = !!getImageFromProps(props['Image'])
+
+		// Provide the proxy URL if there's a Notion image or a target URL (likely has OG image)
+		const imageUrl = hasNotionImage || targetUrl ? `/api/notion-image/${page.id}` : undefined
+
 		return {
 			id: page.id,
 			title: getString(props['Name']) || getString(props['Title']) || getTitleFromProps(props),
-			url: getString(props['URL']),
+			url: targetUrl,
 			date: getDateFromProps('Date', props) || getDateFromProps('Published', props),
 			type: getString(props['Type']),
+			outlet: getString(props['Outlet']),
 			notes:
 				getString(props['Notes']) ||
 				getString(props['Description']) ||
 				getString(props['Abstract']) ||
-				''
+				'',
+			...(imageUrl ? { image: imageUrl } : {})
 		}
 	})
 
-	return { coverage, typeOrder }
+	return { coverage, typeOrder, outletOrder: typeOrder }
 }

@@ -1,31 +1,35 @@
 <script lang="ts">
 	import type { PressCoverage } from './notion.server'
-	import LinkWithoutIcon from '$lib/components/LinkWithoutIcon.svelte'
+	import NewsCard from '$lib/components/NewsCard.svelte'
+	import type { NewsItem } from '$lib/types'
 
 	// Temporarily support the old 'publication' property if hot module reload hasn't caught the backend change yet
 	type CoverageItem = PressCoverage & { publication?: string }
 	export let coverage: CoverageItem[] = []
 	export let typeOrder: string[] = []
+	export let outletOrder: string[] = []
 
-	const formatDate = (dateString: string) => {
-		if (!dateString) return ''
-		try {
-			const options: Intl.DateTimeFormatOptions = { year: 'numeric', month: 'long', day: 'numeric' }
-			return new Date(dateString).toLocaleDateString('en-US', options)
-		} catch {
-			return dateString
+	function toNewsItem(item: CoverageItem): NewsItem {
+		return {
+			title: item.title,
+			subtitle: item.notes?.trim() ?? '',
+			date: item.date,
+			image: item.image,
+			href: item.url,
+			source: 'press',
+			outlet: item.outlet
 		}
 	}
 
+	let availableTypes: string[] = []
 	// Extract unique type names for tab labels
-	$: availableTypes = Array.from(new Set(coverage.map((c) => c.type || c.publication))).filter(
-		Boolean
-	) as string[]
+	$: availableTypes = Array.from(new Set(coverage.map((c) => c.type))).filter(Boolean) as string[]
 
 	// Sort them based on the schema order fetched directly from Notion
+	$: orderedTabs = typeOrder.length > 0 ? typeOrder : outletOrder
 	$: tabs = [...availableTypes].sort((a, b) => {
-		const indexA = typeOrder.indexOf(a)
-		const indexB = typeOrder.indexOf(b)
+		const indexA = orderedTabs.indexOf(a)
+		const indexB = orderedTabs.indexOf(b)
 		if (indexA !== -1 && indexB !== -1) return indexA - indexB
 		if (indexA !== -1) return -1
 		if (indexB !== -1) return 1
@@ -40,7 +44,7 @@
 		}
 	}
 
-	$: filteredCoverage = coverage.filter((c) => (c.type || c.publication) === activeTab)
+	$: filteredCoverage = coverage.filter((c) => c.type === activeTab)
 </script>
 
 <div class="coverage-layout">
@@ -61,23 +65,7 @@
 
 		<div class="coverage-cards">
 			{#each filteredCoverage as item (item.id)}
-				<LinkWithoutIcon
-					class="coverage-card"
-					id={item.id}
-					href={item.url}
-					target="_blank"
-					rel="noopener noreferrer"
-					style="text-decoration: none;"
-				>
-					<h3 class="card-title">{item.title}</h3>
-					{#if item.notes && item.notes.trim()}
-						<p class="card-notes">{item.notes}</p>
-					{/if}
-					<div class="card-footer">
-						<span class="card-date">{formatDate(item.date)}</span>
-						<span class="read-more">Read the article &rarr;</span>
-					</div>
-				</LinkWithoutIcon>
+				<NewsCard id={item.id} item={toNewsItem(item)} />
 			{/each}
 		</div>
 	{/if}
@@ -129,80 +117,23 @@
 		background: color-mix(in srgb, var(--brand) 10%, transparent);
 	}
 
-	/* COVERAGE CARDS */
+	/* Same grid rhythm as Latest news */
 	.coverage-cards {
-		display: flex;
-		flex-direction: column;
-		gap: 0.5rem;
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+		gap: 1.5rem;
 	}
 
-	/* Make the LinkWithoutIcon display as a flexible block card */
-	:global(.coverage-card) {
-		background: color-mix(in srgb, var(--text) 3%, var(--bg));
-		border: 1px solid var(--border);
-		border-radius: 8px;
-		padding: 1.5rem;
-		display: flex !important;
-		flex-direction: column;
-		gap: 1rem;
-		transition:
-			border-color 0.2s,
-			background-color 0.2s,
-			transform 0.2s;
-		scroll-margin-top: 5rem;
-		cursor: pointer;
-		text-decoration: none !important;
+	@media (max-width: 850px) {
+		.coverage-cards {
+			grid-template-columns: repeat(2, 1fr);
+		}
 	}
 
-	:global(.coverage-card:hover) {
-		border-color: var(--brand);
-		background-color: color-mix(in srgb, var(--brand) 2%, transparent);
-		transform: translateY(-2px);
-	}
-
-	.card-title {
-		margin: 0;
-		font-size: 1.25rem;
-		font-weight: 600;
-		color: var(--text);
-		line-height: 1.3;
-	}
-
-	.card-notes {
-		margin: 0;
-		font-size: 0.95rem;
-		line-height: 1.6;
-		color: var(--text);
-		opacity: 0.75;
-	}
-
-	.card-footer {
-		display: flex;
-		justify-content: space-between;
-		align-items: center;
-		border-top: 1px solid var(--border);
-		padding-top: 1rem;
-		margin-top: 0.5rem;
-		flex-wrap: wrap;
-		gap: 1rem;
-	}
-
-	.card-date {
-		font-size: 0.9rem;
-		color: var(--text);
-		opacity: 0.8;
-	}
-
-	.read-more {
-		color: var(--brand);
-		font-weight: 600;
-		font-size: 0.95rem;
-		display: inline-flex;
-		align-items: center;
-	}
-
-	:global(.coverage-card:hover) .read-more {
-		text-decoration: underline;
+	@media (max-width: 500px) {
+		.coverage-cards {
+			grid-template-columns: 1fr;
+		}
 	}
 
 	/* Optional: Apply an explicit global margin style on the Press page for the branding section */
