@@ -5,7 +5,7 @@
 	// Temporarily support the old 'publication' property if hot module reload hasn't caught the backend change yet
 	type CoverageItem = PressCoverage & { publication?: string }
 	export let coverage: CoverageItem[] = []
-	export let outletOrder: string[] = []
+	export let typeOrder: string[] = []
 
 	const formatDate = (dateString: string) => {
 		if (!dateString) return ''
@@ -17,15 +17,15 @@
 		}
 	}
 
-	// Extract unique outlet names
-	$: availableOutlets = Array.from(new Set(coverage.map((c) => c.outlet || c.publication))).filter(
+	// Extract unique type names for tab labels
+	$: availableTypes = Array.from(new Set(coverage.map((c) => c.type || c.publication))).filter(
 		Boolean
 	) as string[]
 
 	// Sort them based on the schema order fetched directly from Notion
-	$: tabs = [...availableOutlets].sort((a, b) => {
-		const indexA = outletOrder.indexOf(a)
-		const indexB = outletOrder.indexOf(b)
+	$: tabs = [...availableTypes].sort((a, b) => {
+		const indexA = typeOrder.indexOf(a)
+		const indexB = typeOrder.indexOf(b)
 		if (indexA !== -1 && indexB !== -1) return indexA - indexB
 		if (indexA !== -1) return -1
 		if (indexB !== -1) return 1
@@ -40,7 +40,7 @@
 		}
 	}
 
-	$: filteredCoverage = coverage.filter((c) => (c.outlet || c.publication) === activeTab)
+	$: filteredCoverage = coverage.filter((c) => (c.type || c.publication) === activeTab)
 </script>
 
 <div class="coverage-layout">

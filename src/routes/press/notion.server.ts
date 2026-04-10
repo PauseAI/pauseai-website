@@ -9,7 +9,7 @@ export interface PressCoverage {
 	title: string
 	url: string
 	date: string
-	outlet: string
+	type: string
 	notes: string
 }
 
@@ -39,17 +39,17 @@ function getDateFromProps(propName: string, props: PageObjectResponse['propertie
 
 export async function fetchPressCoverage(): Promise<{
 	coverage: PressCoverage[]
-	outletOrder: string[]
+	typeOrder: string[]
 }> {
 	const notion = getNotionClient()
 	const databaseId = '212fd8030c4d42ff9de5710f92efecff'
 
-	let outletOrder: string[] = []
+	let typeOrder: string[] = []
 	try {
 		const dbInfo: GetDatabaseResponse = await notion.databases.retrieve({ database_id: databaseId })
-		const outletProp = dbInfo.properties['Outlet']
-		if (outletProp?.type === 'select') {
-			outletOrder = outletProp.select.options.map((opt) => opt.name)
+		const typeProp = dbInfo.properties['Type']
+		if (typeProp?.type === 'select') {
+			typeOrder = typeProp.select.options.map((opt) => opt.name)
 		}
 	} catch (e) {
 		console.error('Failed to retrieve database schema for sorting tabs', e)
@@ -84,7 +84,7 @@ export async function fetchPressCoverage(): Promise<{
 			title: getString(props['Name']) || getString(props['Title']) || getTitleFromProps(props),
 			url: getString(props['URL']),
 			date: getDateFromProps('Date', props) || getDateFromProps('Published', props),
-			outlet: getString(props['Outlet']),
+			type: getString(props['Type']),
 			notes:
 				getString(props['Notes']) ||
 				getString(props['Description']) ||
@@ -93,5 +93,5 @@ export async function fetchPressCoverage(): Promise<{
 		}
 	})
 
-	return { coverage, outletOrder }
+	return { coverage, typeOrder }
 }
