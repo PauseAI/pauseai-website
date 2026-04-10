@@ -29,7 +29,7 @@
 		<div class="image-container">
 			<Skeleton {loading} variant="rect" width="100%" height="100%">
 				{#if item?.image}
-					{#if isExternal && !item.image.startsWith('/')}
+					{#if isExternal}
 						<NetlifyImage src={item.image} alt={item.title} imgClass="image" sizes={imageSizes} />
 					{:else}
 						<Image src={item.image} alt={item.title} class="image" sizes={imageSizes} />
