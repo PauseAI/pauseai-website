@@ -3,7 +3,6 @@
 	import { browser } from '$app/environment'
 	import { page } from '$app/stores'
 	import Banner from '$lib/components/Banner.svelte'
-	import CampaignBanner from '$lib/components/CampaignBanner.svelte'
 	import Hero from '$lib/components/Hero.svelte'
 	import Link from '$lib/components/Link.svelte'
 	import NearbyEvent from '$lib/components/NearbyEvent.svelte'
@@ -148,17 +147,17 @@
 			></b
 		>
 	</Banner>
-	<Banner contrast={hero} id="holiday-littlehelpers" target="/littlehelpers">
+	<Banner contrast={hero} id="holiday-littlehelpers" href="/littlehelpers">
 		<strong>🎄 Holiday Matching Campaign!</strong> Help fund volunteer stipends for PauseAI
 		advocates. <Link href="/littlehelpers">Join the Little Helpers campaign →</Link>
 	</Banner>
 
 	<NearbyEvent contrast={hero} bind:eventFound geo={geoForNearbyEvent} />
 
-	<CampaignBanner href="/brussels-ep-protest-2026" id="brussels-ep-protest-2026">
+	<Banner type="campaign" href="/brussels-ep-protest-2026" id="brussels-ep-protest-2026">
 		<strong>Brussels, Feb 23</strong> - Join us outside the European Parliament to call for a global treaty
 		to pause frontier AI development.
-	</CampaignBanner>
+	</Banner>
 
 	{#if hero}
 		<div class="hero-section">
@@ -236,8 +235,7 @@
 		height: 100dvh;
 	}
 
-	.page-top.hero-page > :global(.banner),
-	.page-top.hero-page > :global(.campaign-banner) {
+	.page-top.hero-page > :global(.banner) {
 		flex-shrink: 0;
 	}
 
