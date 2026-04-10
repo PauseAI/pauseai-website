@@ -7,6 +7,7 @@
 	import Skeleton from './Skeleton.svelte'
 
 	let isExternal: boolean
+	let hasImageError = false
 
 	export let item: NewsItem | undefined = undefined
 	export let loading: boolean = false
@@ -15,6 +16,9 @@
 	export let id: string | undefined = undefined
 
 	$: isExternal = item?.source === 'substack' || item?.source === 'press'
+
+	// Reset error state if image changes
+	$: if (item?.image) hasImageError = false
 </script>
 
 <div>
@@ -28,9 +32,15 @@
 	>
 		<div class="image-container">
 			<Skeleton {loading} variant="rect" width="100%" height="100%">
-				{#if item?.image}
+				{#if item?.image && !hasImageError}
 					{#if isExternal}
-						<NetlifyImage src={item.image} alt={item.title} imgClass="image" sizes={imageSizes} />
+						<NetlifyImage
+							src={item.image}
+							alt={item.title}
+							imgClass="image"
+							sizes={imageSizes}
+							onFailed={() => (hasImageError = true)}
+						/>
 					{:else}
 						<Image src={item.image} alt={item.title} class="image" sizes={imageSizes} />
 					{/if}
