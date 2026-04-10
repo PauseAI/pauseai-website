@@ -1,4 +1,4 @@
-import { writable } from 'svelte/store'
+import { writable, get } from 'svelte/store'
 import { browser } from '$app/environment'
 
 /** What's being rendered */
@@ -6,25 +6,32 @@ type Theme = 'light' | 'dark'
 /** User selected status, defaults to `auto` */
 type UserTheme = Theme | 'auto'
 const userThemeKey = 'user-theme'
-const prefersDark =
-	typeof matchMedia === 'undefined' ? false : matchMedia('(prefers-color-scheme: dark)').matches
+
+const getSystemTheme = () =>
+	typeof matchMedia !== 'undefined' && matchMedia('(prefers-color-scheme: dark)').matches
+		? 'dark'
+		: 'light'
+
+const initialUserTheme = (
+	browser ? localStorage.getItem(userThemeKey) || 'auto' : 'auto'
+) as UserTheme
+const initialTheme = initialUserTheme === 'auto' ? getSystemTheme() : initialUserTheme
+
+export const theme = writable<Theme>(initialTheme)
+export const userTheme = writable<UserTheme>(initialUserTheme)
 
 if (typeof matchMedia !== 'undefined') {
 	matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (event) => {
 		const newColorScheme = event.matches ? 'dark' : 'light'
-		if (userTheme.subscribe((value) => value === 'auto')) {
+		// Only update if user is on auto
+		if (get(userTheme) === 'auto') {
 			theme.set(newColorScheme)
 		}
 	})
 }
 
-export const theme = writable<Theme>('light')
-export const userTheme = writable<UserTheme>(
-	browser ? (localStorage.getItem(userThemeKey) as UserTheme) || 'auto' : 'auto'
-)
-
 userTheme.subscribe((value) => {
-	theme.set(value === 'auto' ? (prefersDark ? 'dark' : 'light') : value)
+	theme.set(value === 'auto' ? getSystemTheme() : value)
 })
 
 theme.subscribe((value) => {

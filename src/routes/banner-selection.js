@@ -3,9 +3,6 @@
 // data-is-active-banner-geo, and data-active-campaign-banner on <html>.
 // Exposed as window.selectBanners to allow re-runs.
 
-// eslint-disable-next-line @typescript-eslint/triple-slash-reference
-/// <reference path="../app.d.ts" />
-
 /**
  * @typedef {Object} BannerRule
  * @property {string} id
