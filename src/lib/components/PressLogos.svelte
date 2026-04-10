@@ -1,5 +1,6 @@
 <script lang="ts">
 	import Image from '$lib/components/Image.svelte'
+	import LinkWithoutIcon from '$lib/components/LinkWithoutIcon.svelte'
 
 	const publications = [
 		{
@@ -40,7 +41,7 @@
 		<h2 class="section-title">Media Coverage</h2>
 		<div class="logos-row">
 			{#each publications as pub}
-				<a href={pub.url} target="_blank" class="pub-link">
+				<LinkWithoutIcon href={pub.url} target="_blank" class="pub-link">
 					<!-- Visible on hover (Original Color) -->
 					<Image
 						src={pub.src}
@@ -48,10 +49,10 @@
 						title={pub.name}
 						class="logo-img logo-{pub.name.toLowerCase().replace(' ', '-')}"
 					/>
-				</a>
+				</LinkWithoutIcon>
 			{/each}
 
-			<a href="/press" class="see-all"> See all coverage → </a>
+			<LinkWithoutIcon href="/press" class="see-all">See all coverage →</LinkWithoutIcon>
 		</div>
 	</div>
 </div>
@@ -85,7 +86,7 @@
 		justify-content: center;
 	}
 
-	.pub-link {
+	* :global(.pub-link) {
 		text-decoration: none;
 		display: flex;
 		align-items: center;
@@ -94,7 +95,7 @@
 		transition: transform 0.2s;
 	}
 
-	.pub-link:hover {
+	* :global(.pub-link:hover) {
 		transform: translateY(-2px);
 	}
 
@@ -112,7 +113,7 @@
 	}
 
 	/* Hover State */
-	.pub-link:hover :global(.logo-img) {
+	* :global(.pub-link:hover) :global(.logo-img) {
 		opacity: 1;
 		filter: none;
 	}
@@ -123,8 +124,8 @@
 	}
 
 	/* Dark mode hover: keep black logos visible */
-	:global([color-scheme='dark']) .pub-link:hover :global(.logo-wired),
-	:global([color-scheme='dark']) .pub-link:hover :global(.logo-bloomberg) {
+	:global([color-scheme='dark']) * :global(.pub-link:hover) :global(.logo-wired),
+	:global([color-scheme='dark']) * :global(.pub-link:hover) :global(.logo-bloomberg) {
 		filter: invert(1);
 	}
 
@@ -142,7 +143,7 @@
 		height: 1.2rem !important;
 	}
 
-	.see-all {
+	* :global(.see-all) {
 		font-size: 0.9rem;
 		color: var(--brand);
 		text-decoration: none;
@@ -155,7 +156,7 @@
 		text-transform: uppercase;
 	}
 
-	.see-all:hover {
+	* :global(.see-all:hover) {
 		opacity: 1;
 		text-decoration: underline;
 	}
@@ -171,7 +172,7 @@
 	}
 
 	@media (max-width: 600px) {
-		.see-all {
+		* :global(.see-all) {
 			width: 100%;
 			margin-left: 0;
 			margin-top: 1.5rem;

@@ -1,4 +1,4 @@
-import { readEdgeManifest, searchRenderFunction, writeEdgeManifest } from './utils'
+import { readEdgeManifest, searchRenderFunction, writeEdgeManifest } from './utils/utils'
 import { USE_EDGE_FUNCTIONS } from '../svelte.config.js'
 
 if (!USE_EDGE_FUNCTIONS) {

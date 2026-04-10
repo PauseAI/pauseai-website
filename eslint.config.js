@@ -1,12 +1,11 @@
 /* https://sveltejs.github.io/eslint-plugin-svelte/user-guide/ */
 import js from '@eslint/js'
 import markdown from '@eslint/markdown'
-import gitignore from 'eslint-config-flat-gitignore'
+import { getIgnores } from './scripts/utils/ignores.js'
 import prettier from 'eslint-config-prettier'
 import svelte from 'eslint-plugin-svelte'
 import { defineConfig, globalIgnores } from 'eslint/config'
 import globals from 'globals'
-import { globbySync } from 'globby'
 import ts from 'typescript-eslint'
 import emptyMarkdownLinks from './eslint/plugin-empty-markdown-links.js'
 import svelteConfig from './svelte.config.js'
@@ -30,9 +29,9 @@ export default defineConfig(
 			}
 		}
 	},
-	gitignore({
-		files: globbySync('**/.gitignore', { ignore: ['**/node_modules'] })
-	}),
+	{
+		ignores: getIgnores()
+	},
 	{
 		ignores: ['**/*.md'],
 		extends: [

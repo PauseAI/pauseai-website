@@ -7,29 +7,42 @@
 	import Skeleton from './Skeleton.svelte'
 
 	let isExternal: boolean
+	let hasImageError = false
 
 	export let item: NewsItem | undefined = undefined
 	export let loading: boolean = false
 	export let imageSizes: string | undefined = undefined
+	/** Optional anchor id (e.g. for hash links from elsewhere) */
+	export let id: string | undefined = undefined
 
-	$: isExternal = item?.source === 'substack'
+	$: isExternal = item?.source === 'substack' || item?.source === 'press'
+
+	// Reset error state if image changes
+	$: if (item?.image) hasImageError = false
 </script>
 
 <div>
 	<LinkWithoutIcon
 		href={item?.href ?? ''}
 		class="news-card"
+		{id}
 		target={isExternal ? '_blank' : undefined}
 		rel={isExternal ? 'noopener noreferrer' : undefined}
 		style={loading ? 'pointer-events: none' : ''}
 	>
 		<div class="image-container">
 			<Skeleton {loading} variant="rect" width="100%" height="100%">
-				{#if item?.image}
+				{#if item?.image && !hasImageError}
 					{#if isExternal}
-						<NetlifyImage src={item.image} alt={item.title} imgClass="image" />
+						<NetlifyImage
+							src={item.image}
+							alt={item.title}
+							imgClass="image"
+							sizes={imageSizes}
+							onFailed={() => (hasImageError = true)}
+						/>
 					{:else}
-						<Image src={item.image} alt={item.title} sizes={imageSizes} class="image" />
+						<Image src={item.image} alt={item.title} class="image" sizes={imageSizes} />
 					{/if}
 				{:else}
 					<div class="image-placeholder"></div>
@@ -37,6 +50,9 @@
 			</Skeleton>
 		</div>
 		<div class="card-content">
+			{#if item?.source === 'press' && item?.outlet}
+				<p class="card-outlet">{item.outlet}</p>
+			{/if}
 			<h3 class="card-title toc-exclude">
 				<Skeleton {loading} variant="text" count={2} width="80%">
 					{item?.title}
@@ -121,6 +137,16 @@
 		text-transform: none;
 	}
 
+	.card-outlet {
+		font-size: 0.8rem;
+		font-weight: 600;
+		letter-spacing: 0.02em;
+		text-transform: uppercase;
+		margin: 0;
+		color: var(--text);
+		opacity: 0.7;
+	}
+
 	.card-subtitle {
 		font-size: 0.85rem;
 		font-weight: 300;
@@ -130,6 +156,7 @@
 		opacity: 0.8;
 		display: -webkit-box;
 		-webkit-line-clamp: 2;
+		line-clamp: 2;
 		-webkit-box-orient: vertical;
 		overflow: hidden;
 	}
