@@ -12,26 +12,26 @@ import path from 'path'
 import { execSync } from 'child_process'
 
 // Import functionality from our own modules
-import { resolve as resolveForcePatterns, showForceHelp } from './force'
+import { resolve as resolveForcePatterns, showForceHelp } from './utils/force'
 import {
 	cleanUpGitSecrets,
 	createGitClient,
 	getLatestCommitDates,
 	GIT_CONFIG,
 	initializeGitCage
-} from './git-ops'
-import { pushWithUpstream } from './branch-safety'
+} from './utils/git-ops'
+import { pushWithUpstream } from './utils/branch-safety'
 import {
 	createConcurrencyQueue,
 	createLlmClient,
 	createRateLimitingQueue,
 	LLM_DEFAULTS
-} from './llm-client'
-import { getBillingSnapshot } from './llm-utils'
-import { Mode } from './mode'
-import { generateJsonPrompt, generateMarkdownPrompt, generateReviewPrompt } from './prompts'
-import { retrieveMarkdown, retrieveMessages } from './heart'
-import type { WorkItem } from './work-plan'
+} from './utils/llm-client'
+import { getBillingSnapshot } from './utils/llm-utils'
+import { Mode } from './utils/mode'
+import { generateJsonPrompt, generateMarkdownPrompt, generateReviewPrompt } from './utils/prompts'
+import { retrieveMarkdown, retrieveMessages } from './utils/heart'
+import type { WorkItem } from './utils/work-plan'
 import {
 	checkSpendLimit,
 	createPlan,
@@ -42,7 +42,7 @@ import {
 	recordCompletion,
 	totalEstimatedCost,
 	writeTodo
-} from './work-plan'
+} from './utils/work-plan'
 
 // Import from project modules
 import {

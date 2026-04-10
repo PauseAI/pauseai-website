@@ -4,7 +4,7 @@
  */
 
 import { l10nCageBranch, canPushToRemote } from './branch-safety'
-import { L10N_CAGE_DIR } from '../../src/lib/l10n'
+import { L10N_CAGE_DIR } from '../../../src/lib/l10n'
 
 /**
  * L10n operation modes

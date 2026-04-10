@@ -1,7 +1,7 @@
 /* https://sveltejs.github.io/eslint-plugin-svelte/user-guide/ */
 import js from '@eslint/js'
 import markdown from '@eslint/markdown'
-import { getIgnores } from './scripts/ignores.js'
+import { getIgnores } from './scripts/utils/ignores.js'
 import prettier from 'eslint-config-prettier'
 import svelte from 'eslint-plugin-svelte'
 import { defineConfig, globalIgnores } from 'eslint/config'
