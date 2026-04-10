@@ -24,7 +24,7 @@
 	>
 		<div class="image-container">
 			{#if item.image}
-				{#if isExternal}
+				{#if isExternal && !item.image.startsWith('/')}
 					<NetlifyImage src={item.image} alt={item.title} imgClass="image" />
 				{:else}
 					<Image src={item.image} alt={item.title} class="image" />
