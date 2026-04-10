@@ -1,5 +1,5 @@
 import type { KnipConfig } from 'knip'
-import { getIgnores } from './scripts/ignores.js'
+import { getIgnores } from './scripts/utils/ignores.js'
 
 const ADDITIONALLY_ENTRY_POINTS = [
 	'src/routes/sayno/SelfieUX.svelte', // dynamically imported
@@ -9,7 +9,6 @@ const ADDITIONALLY_ENTRY_POINTS = [
 const config: KnipConfig = {
 	include: ['dependencies', 'exports'],
 	ignore: getIgnores(),
-	ignoreDependencies: ['lint-staged'],
 	entry: ADDITIONALLY_ENTRY_POINTS
 }
 
