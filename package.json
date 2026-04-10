@@ -24,8 +24,8 @@
 		"lint": "run-s _lint:*",
 		"_lint:knip": "knip",
 		"_lint:eslint": "eslint . --format gha --max-warnings=55",
-		"_lint:prettier": "prettier --check .",
-		"format": "prettier --write .",
+		"_lint:prettier": "tsx scripts/generate-prettier-ignore.ts && prettier --check .",
+		"format": "tsx scripts/generate-prettier-ignore.ts && prettier --write .",
 		"prepare": "husky",
 		"sync": "svelte-kit sync"
 	},
