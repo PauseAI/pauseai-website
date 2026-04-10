@@ -9,7 +9,9 @@ const userThemeKey = 'user-theme'
 const prefersDark =
 	typeof matchMedia === 'undefined' ? false : matchMedia('(prefers-color-scheme: dark)').matches
 
-const initialUserTheme = (browser ? localStorage.getItem(userThemeKey) : 'auto') as UserTheme
+const initialUserTheme = (
+	browser ? localStorage.getItem(userThemeKey) || 'auto' : 'auto'
+) as UserTheme
 const initialTheme =
 	initialUserTheme === 'auto' ? (prefersDark ? 'dark' : 'light') : initialUserTheme
 
