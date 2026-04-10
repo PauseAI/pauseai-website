@@ -42,8 +42,6 @@ export default defineConfig(() => {
 
 	return {
 		define: {
-			// Make PARAGLIDE_LOCALES accessible to browser code via import.meta.env
-			'import.meta.env.PARAGLIDE_LOCALES': JSON.stringify(process.env.PARAGLIDE_LOCALES),
 			'import.meta.env.SENTRY_RELEASE': JSON.stringify(getSentryRelease())
 		},
 
@@ -66,7 +64,7 @@ export default defineConfig(() => {
 			// Improve cache usage
 			cssCodeSplit: true,
 			// Generate sourcemaps in development, disable in production unless explicitly enabled
-			sourcemap: isDev() || !process.env.VITE_DISABLE_SOURCEMAPS,
+			sourcemap: isDev(process.env) || !process.env.VITE_DISABLE_SOURCEMAPS,
 			// Exclude repos locale paths not in runtime.locales
 			rollupOptions: {
 				external: getLocaleExcludePatterns()
@@ -76,7 +74,7 @@ export default defineConfig(() => {
 			lucidePreprocess(),
 			enhancedImages(),
 			sveltekit(),
-			!isDev() &&
+			!isDev(process.env) &&
 			process.env.SENTRY_AUTH_TOKEN &&
 			process.env.SENTRY_ORG &&
 			process.env.SENTRY_PROJECT

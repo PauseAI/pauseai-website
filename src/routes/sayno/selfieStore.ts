@@ -1,5 +1,6 @@
 import { writable, get } from 'svelte/store'
 import { dev } from '$app/environment'
+import { env } from '$env/dynamic/public'
 import toast from 'svelte-french-toast'
 import type { CloudinaryUploadResponse } from '$lib/cloudinary'
 
@@ -47,7 +48,7 @@ export function setCanvasElement(el: HTMLCanvasElement | null) {
 	canvasElement = el
 }
 
-export function setStream(s: MediaStream | null) {
+function setStream(s: MediaStream | null) {
 	stream = s
 }
 
@@ -102,7 +103,7 @@ export async function checkCameraPermission() {
 }
 
 // Shared functions
-export async function initializeCamera() {
+async function initializeCamera() {
 	try {
 		// Check for HTTPS (required for getUserMedia except on localhost)
 		if (location.protocol !== 'https:' && location.hostname !== 'localhost') {
@@ -233,7 +234,7 @@ export async function captureFromCamera() {
 		formData.append('tags', [...cloudinaryConfig.tags, 'direct_capture'].join(','))
 
 		const response = await fetch(
-			`https://api.cloudinary.com/v1_1/${import.meta.env.PUBLIC_CLOUDINARY_CLOUD_NAME || 'dyjlw1syg'}/image/upload`,
+			`https://api.cloudinary.com/v1_1/${env.PUBLIC_CLOUDINARY_CLOUD_NAME || 'dyjlw1syg'}/image/upload`,
 			{
 				method: 'POST',
 				body: formData

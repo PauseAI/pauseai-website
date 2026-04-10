@@ -1,10 +1,11 @@
 <script lang="ts">
 	import type { Picture } from '$lib/types'
+	import { layoutWidth } from '$lib/config'
 
 	export let src: string
 	export let alt: string | null = null
 	export let title: string | null = null
-	export let sizes: string | null = null
+	export let sizes: string = `min(${layoutWidth}, 100vw)`
 	let className: string = ''
 	export { className as class }
 

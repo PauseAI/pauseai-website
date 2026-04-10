@@ -18,12 +18,13 @@ if (
 import { type Handle, type HandleServerError } from '@sveltejs/kit'
 import { env } from '$env/dynamic/public'
 import { paraglideMiddleware } from '$lib/paraglide/server.js'
+import { SENTRY_RELEASE } from '$lib/sentry'
 
 let Sentry: typeof import('@sentry/deno') | undefined
 
 export const init = async () => {
 	const dsn = env.PUBLIC_SENTRY_DSN
-	const release = import.meta.env.SENTRY_RELEASE as string | undefined
+	const release = SENTRY_RELEASE
 	const isDeno = typeof Deno !== 'undefined'
 
 	if (dsn && isDeno) {

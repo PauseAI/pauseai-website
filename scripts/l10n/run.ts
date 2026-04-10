@@ -12,7 +12,6 @@ import path from 'path'
 import { execSync } from 'child_process'
 
 // Import functionality from our own modules
-import { createDryRunStats, printDryRunSummary } from './dry-run'
 import { resolve as resolveForcePatterns, showForceHelp } from './force'
 import {
 	cleanUpGitSecrets,
@@ -28,9 +27,22 @@ import {
 	createRateLimitingQueue,
 	LLM_DEFAULTS
 } from './llm-client'
+import { getBillingSnapshot } from './llm-utils'
 import { Mode } from './mode'
 import { generateJsonPrompt, generateMarkdownPrompt, generateReviewPrompt } from './prompts'
 import { retrieveMarkdown, retrieveMessages } from './heart'
+import type { WorkItem } from './work-plan'
+import {
+	checkSpendLimit,
+	createPlan,
+	emptyTodo,
+	getSpendLimit,
+	printPlanSummary,
+	readTodo,
+	recordCompletion,
+	totalEstimatedCost,
+	writeTodo
+} from './work-plan'
 
 // Import from project modules
 import {
@@ -46,7 +58,8 @@ dotenv.config()
 
 // Parse command line arguments
 const argv = minimist(process.argv.slice(2), {
-	boolean: ['dryRun', 'verbose', 'force']
+	boolean: ['dryRun', 'verbose', 'force'],
+	string: ['spend']
 })
 
 // Handle --force with no patterns (show help)
@@ -56,7 +69,7 @@ if (argv.force && argv._.length === 0) {
 }
 
 // Validate arguments
-const validArgs = ['dryRun', 'verbose', 'force', '_']
+const validArgs = ['dryRun', 'verbose', 'force', 'spend', '_']
 const unknownArgs = Object.keys(argv).filter((arg) => !validArgs.includes(arg))
 if (unknownArgs.length > 0) {
 	console.error(`❌ Unknown argument(s): ${unknownArgs.join(', ')}`)
@@ -64,6 +77,14 @@ if (unknownArgs.length > 0) {
 	console.error('  --dryRun   Run without making changes')
 	console.error('  --verbose  Show detailed output')
 	console.error('  --force    Force re-l10n with patterns (see --force for help)')
+	console.error('  --spend N  Set spend limit in USD (default: $0.10 local, $3.00 CI)')
+	process.exit(1)
+}
+
+// Parse spend limit
+const spendArg = argv.spend !== undefined ? parseFloat(String(argv.spend)) : undefined
+if (spendArg !== undefined && (isNaN(spendArg) || spendArg < 0)) {
+	console.error('❌ --spend must be a non-negative number')
 	process.exit(1)
 }
 
@@ -102,11 +123,6 @@ if (mode.mode === 'en-only') {
 	process.exit(0)
 }
 
-// L10n options configuration
-
-// Initialize statistics tracking for dry run mode
-const dryRunStats = createDryRunStats()
-
 // Create Git clients
 const cageGit = createGitClient()
 const websiteGit = createGitClient()
@@ -115,153 +131,301 @@ const websiteGit = createGitClient()
 const GIT_REPO_PARAGLIDE = 'github.com/PauseAI/paraglide'
 const GIT_TOKEN = process.env.GITHUB_TOKEN
 
-// Configure LLM API client
-// For read-only/dry-run modes, we use a placeholder key
-const llmClient = createLlmClient({
-	baseUrl: LLM_DEFAULTS.BASE_URL,
-	apiKey: mode.canWrite ? LLM_API_KEY! : 'dry-run-placeholder',
-	model: LLM_DEFAULTS.MODEL,
-	providers: LLM_DEFAULTS.PROVIDERS
-})
-
-// Create request queues
-const requestQueue = createRateLimitingQueue(LLM_DEFAULTS.REQUESTS_PER_SECOND)
-const gitQueue = createConcurrencyQueue(1) // Only one git operation at a time
-
 const languageNamesInEnglish = new Intl.DisplayNames('en', { type: 'language' })
 
-// Main execution block
-{
-	// Track cached files count
-	let cacheCount = 0
+// Only output file-by-file messages in verbose mode or when writing
+const logMessage = (msg: string) => {
+	if (mode.options.verbose || mode.canWrite) {
+		console.log(msg)
+	}
+}
 
-	// Only output file-by-file messages in verbose mode or when writing
-	const logMessage = (msg: string) => {
-		if (mode.options.verbose || mode.canWrite) {
-			console.log(msg)
+// Main execution
+;(async () => {
+	// Resolve force patterns if force mode is enabled
+	let forceFiles: string[] = []
+	if (mode.options.force) {
+		forceFiles = await resolveForcePatterns(argv._, MARKDOWN_SOURCE)
+		if (forceFiles.length > 0) {
+			console.log(`🔄 Force mode: Will re-l10n [${forceFiles.join(', ')}]`)
+		} else {
+			console.warn(`⚠️  Force patterns matched no files: [${argv._.join(', ')}]`)
 		}
 	}
 
-	// Wrap the main execution in an async IIFE
-	;(async () => {
-		// Resolve force patterns if force mode is enabled
-		let forceFiles: string[] = []
-		if (mode.options.force) {
-			forceFiles = await resolveForcePatterns(argv._, MARKDOWN_SOURCE)
-			if (forceFiles.length > 0) {
-				console.log(`🔄 Force mode: Will re-l10n [${forceFiles.join(', ')}]`)
-			} else {
-				console.warn(`⚠️  Force patterns matched no files: [${argv._.join(', ')}]`)
-			}
-		}
+	// Get non-English languages directly from compiled runtime
+	const targetLocales = Array.from(locales).filter((locale: string) => locale !== 'en')
+	console.log(`Using target locales from compiled runtime: [${targetLocales.join(', ')}]`)
 
-		const options = {
-			isDryRun: !mode.canWrite,
+	// Initialize git cage and get commit dates (needed for both planning and execution)
+	const cageLatestCommitDates = new Map<string, Date>()
+	const websiteLatestCommitDates = new Map<string, Date>()
+
+	await Promise.all([
+		(async () => {
+			await initializeGitCage({
+				dir: L10N_CAGE_DIR,
+				token: GIT_TOKEN,
+				repo: GIT_REPO_PARAGLIDE,
+				username: GIT_CONFIG.USERNAME,
+				email: GIT_CONFIG.EMAIL,
+				git: cageGit
+			})
+			const dates = await getLatestCommitDates(cageGit, 'cage')
+			for (const [k, v] of dates) cageLatestCommitDates.set(k, v)
+		})(),
+		(async () => {
+			const dates = await getLatestCommitDates(websiteGit, 'website', [
+				'messages/en.json',
+				'src/posts'
+			])
+			for (const [k, v] of dates) websiteLatestCommitDates.set(k, v)
+		})()
+	])
+
+	// --- Phase 1: Plan ---
+
+	// Check for existing work plan
+	let plan = readTodo(targetLocales)
+
+	if (!plan) {
+		// Generate plan by running retrieve in work-item collection mode
+		const workItems: WorkItem[] = []
+		const planOptions = {
+			isDryRun: true,
 			verbose: mode.options.verbose,
-			llmClient,
-			requestQueue,
-			gitQueue,
+			llmClient: null,
+			requestQueue: null,
+			gitQueue: null,
 			languageNameGenerator: languageNamesInEnglish,
 			cageGit,
-			dryRunStats,
-			cageLatestCommitDates: new Map<string, Date>(),
-			websiteLatestCommitDates: new Map<string, Date>(),
-			forceFiles: forceFiles
+			cageLatestCommitDates,
+			websiteLatestCommitDates,
+			forceFiles,
+			workItems,
+			modelName: LLM_DEFAULTS.MODEL
 		}
 
-		// Get non-English languages directly from compiled runtime
-		const targetLocales = Array.from(locales).filter((locale) => locale !== 'en')
-		console.log(`Using target locales from compiled runtime: [${targetLocales.join(', ')}]`)
+		// Scan messages and markdown to collect work items
+		const markdownPathsFromBase = await fs.readdir(MARKDOWN_SOURCE, { recursive: true })
+		const markdownPathsFromRoot = markdownPathsFromBase.map((file) =>
+			path.join(MARKDOWN_SOURCE, file)
+		)
 
 		await Promise.all([
-			(async () => {
-				await initializeGitCage({
-					dir: L10N_CAGE_DIR,
-					token: GIT_TOKEN,
-					repo: GIT_REPO_PARAGLIDE,
-					username: GIT_CONFIG.USERNAME,
-					email: GIT_CONFIG.EMAIL,
-					git: cageGit
-				})
-				options.cageLatestCommitDates = await getLatestCommitDates(cageGit, 'cage')
-			})(),
-			(async () =>
-				(options.websiteLatestCommitDates = await getLatestCommitDates(websiteGit, 'website')))()
+			retrieveMessages(
+				{
+					sourcePath: MESSAGE_SOURCE,
+					locales: targetLocales,
+					l10nPromptGenerator: generateJsonPrompt,
+					reviewPromptGenerator: generateReviewPrompt,
+					targetDir: MESSAGE_L10NS,
+					cageWorkingDir: L10N_CAGE_DIR,
+					logMessageFn: logMessage
+				},
+				planOptions
+			),
+			retrieveMarkdown(
+				{
+					sourcePaths: markdownPathsFromRoot,
+					sourceBaseDir: MARKDOWN_SOURCE,
+					locales: targetLocales,
+					l10nPromptGenerator: generateMarkdownPrompt,
+					reviewPromptGenerator: generateReviewPrompt,
+					targetDir: MARKDOWN_L10NS,
+					cageWorkingDir: L10N_CAGE_DIR,
+					logMessageFn: logMessage
+				},
+				planOptions
+			)
 		])
 
-		// Process both message files and markdown files in parallel
-		// Begin message l10n
-		const results = await Promise.all([
-			(async () => {
-				const result = await retrieveMessages(
+		plan = createPlan(mode.branch, LLM_DEFAULTS.MODEL)
+		plan.items = workItems
+
+		writeTodo(plan, targetLocales)
+		printPlanSummary(plan, mode.options.verbose === true)
+
+		if (plan.items.length === 0) {
+			console.log('Nothing to do — all translations are cached.')
+			process.exit(0)
+		}
+	} else {
+		console.log('Found existing work plan:')
+		printPlanSummary(plan, mode.options.verbose === true)
+	}
+
+	// --- Phase 2: Spend gate ---
+
+	if (argv.dryRun) {
+		console.log('Dry run — not executing.')
+		process.exit(0)
+	}
+
+	const spendLimit = getSpendLimit(spendArg, mode.isCI)
+	const spendError = checkSpendLimit(plan, spendLimit, targetLocales)
+	if (spendError) {
+		console.log(spendError)
+		process.exit(0)
+	}
+
+	// --- Phase 3: Execute ---
+
+	if (!mode.canWrite) {
+		console.log('No API key — cannot execute. Use --dryRun to review the plan.')
+		process.exit(1)
+	}
+
+	// Configure LLM API client
+	const llmClient = createLlmClient({
+		baseUrl: LLM_DEFAULTS.BASE_URL,
+		apiKey: LLM_API_KEY!,
+		model: LLM_DEFAULTS.MODEL,
+		providers: LLM_DEFAULTS.PROVIDERS
+	})
+
+	// Snapshot OpenRouter billing before any LLM work, so we can report
+	// per-run spend on success, exception, or SIGTERM (Netlify build timeout).
+	const beforeBilling = await getBillingSnapshot(llmClient)
+	const estimatedSpend = totalEstimatedCost(plan.items)
+
+	// Threshold above which we flag the cost estimator as drifting.
+	// Per-run noise is ~1.5x; 3x is well outside noise but not a hair-trigger.
+	const COST_DRIFT_RATIO = 3
+
+	const printSpendDelta = async (): Promise<void> => {
+		const after = await getBillingSnapshot(llmClient)
+		if (beforeBilling.limitRemaining === null || after.limitRemaining === null) {
+			console.log('\n💰 OpenRouter spend this run: unable to determine (billing query failed)')
+			return
+		}
+		const spent = beforeBilling.limitRemaining - after.limitRemaining
+		console.log(`\n💰 OpenRouter spend this run: $${spent.toFixed(4)}`)
+		console.log(
+			`   ($${beforeBilling.limitRemaining.toFixed(4)} → $${after.limitRemaining.toFixed(4)} remaining)`
+		)
+
+		if (estimatedSpend > 0 && spent / estimatedSpend > COST_DRIFT_RATIO) {
+			const ratio = (spent / estimatedSpend).toFixed(1)
+			console.log(
+				`\n⚠️  COST CALIBRATION DRIFT: actual $${spent.toFixed(4)} is ${ratio}x estimate ($${estimatedSpend.toFixed(4)})`
+			)
+			console.log(`   The COST_PER_1000_WORDS constant in scripts/l10n/dry-run.ts may be stale.`)
+			console.log(`   See L10N.md → Cost Visibility → Estimator vs Actual.`)
+		}
+	}
+
+	process.on('SIGTERM', () => {
+		void (async () => {
+			console.log('\n⏰ Build timeout — logging spend before exit:')
+			await printSpendDelta()
+			process.exit(143)
+		})()
+	})
+
+	const requestQueue = createRateLimitingQueue(LLM_DEFAULTS.REQUESTS_PER_SECOND)
+	const gitQueue = createConcurrencyQueue(1)
+
+	const pushAfterBatch = async () => {
+		try {
+			await pushWithUpstream(cageGit, mode.options.verbose)
+		} catch (e) {
+			console.warn('⚠️  Incremental push failed:', (e as Error).message)
+		}
+	}
+
+	const executeOptions = {
+		isDryRun: false,
+		verbose: mode.options.verbose,
+		llmClient,
+		requestQueue,
+		gitQueue,
+		languageNameGenerator: languageNamesInEnglish,
+		cageGit,
+		cageLatestCommitDates,
+		websiteLatestCommitDates,
+		forceFiles,
+		isCI: mode.isCI,
+		pushAfterBatch
+	}
+
+	try {
+		// Filter source paths to only files in the plan
+		const planLocales = [...new Set(plan.items.map((item) => item.locale))]
+
+		const hasMessageItems = plan.items.some((item) => item.source.startsWith('messages/'))
+		const markdownPlanPaths = plan.items
+			.filter((item) => !item.source.startsWith('messages/'))
+			.map((item) => item.source)
+
+		// Execute plan items sequentially
+		const results: { cacheCount: number; totalProcessed: number }[] = []
+
+		if (hasMessageItems) {
+			results.push(
+				await retrieveMessages(
 					{
 						sourcePath: MESSAGE_SOURCE,
-						locales: targetLocales,
+						locales: planLocales,
 						l10nPromptGenerator: generateJsonPrompt,
 						reviewPromptGenerator: generateReviewPrompt,
 						targetDir: MESSAGE_L10NS,
 						cageWorkingDir: L10N_CAGE_DIR,
 						logMessageFn: logMessage
 					},
-					options
+					executeOptions
 				)
+			)
+		}
 
-				// Files are already in the correct location for paraglide to find them
-
-				return result
-			})(),
-			(async () => {
-				const markdownPathsFromBase = await fs.readdir(MARKDOWN_SOURCE, { recursive: true })
-				const markdownPathsFromRoot = markdownPathsFromBase.map((file) =>
-					path.join(MARKDOWN_SOURCE, file)
-				)
-				return await retrieveMarkdown(
+		if (markdownPlanPaths.length > 0) {
+			results.push(
+				await retrieveMarkdown(
 					{
-						sourcePaths: markdownPathsFromRoot,
+						sourcePaths: markdownPlanPaths,
 						sourceBaseDir: MARKDOWN_SOURCE,
-						locales: targetLocales,
+						locales: planLocales,
 						l10nPromptGenerator: generateMarkdownPrompt,
 						reviewPromptGenerator: generateReviewPrompt,
 						targetDir: MARKDOWN_L10NS,
 						cageWorkingDir: L10N_CAGE_DIR,
 						logMessageFn: logMessage
 					},
-					options
+					executeOptions
 				)
-			})()
-		])
+			)
+		}
 
-		// Sum up cache counts and calculate how many new l10ns were created
-		cacheCount = results.reduce((total, result) => total + result.cacheCount, 0)
+		const cacheCount = results.reduce((total, result) => total + result.cacheCount, 0)
 		const totalFiles = results.reduce((total, result) => total + result.totalProcessed, 0)
 		const newL10ns = totalFiles - cacheCount
 
-		// Only push changes in write mode
-		if (mode.canWrite) {
-			// Show a summary of cached l10ns
-			console.log(`\n📦 L10n summary:`)
-			if (cacheCount > 0) {
-				console.log(`   - ${cacheCount} files used cached l10ns`)
-			}
-			console.log(`   - ${newL10ns} files needed new l10ns`)
+		// Record completion
+		recordCompletion(plan.items, plan)
+		emptyTodo(targetLocales, mode.branch, LLM_DEFAULTS.MODEL)
 
-			if (newL10ns > 0) {
-				console.log(`\nPushing l10n changes to remote cage...`)
-				await pushWithUpstream(cageGit, mode.options.verbose)
-			} else {
-				console.log(`\nNo new l10ns to push to remote cage - skipping Git push.`)
-			}
+		// Summary and push
+		console.log(`\n📦 L10n summary:`)
+		if (cacheCount > 0) {
+			console.log(`   - ${cacheCount} files used cached l10ns`)
+		}
+		console.log(`   - ${newL10ns} files needed new l10ns`)
+
+		if (newL10ns > 0) {
+			console.log(`\nPushing l10n changes to remote cage...`)
+			await pushWithUpstream(cageGit, mode.options.verbose)
 		} else {
-			// Print summary for read-only/dry-run mode
-			printDryRunSummary(dryRunStats, mode.options.verbose, cacheCount)
+			console.log(`\nNo new l10ns to push to remote cage - skipping Git push.`)
 		}
+	} finally {
+		await printSpendDelta()
+	}
 
-		// Clean up Git secrets in CI environments to prevent secret persistence
-		if (mode.isCI) {
-			cleanUpGitSecrets()
-		}
-	})().catch((error) => {
-		console.error('L10n process failed:', error)
-		process.exit(1)
-	})
-}
+	// Clean up Git secrets in CI environments
+	if (mode.isCI) {
+		cleanUpGitSecrets()
+	}
+})().catch((error) => {
+	console.error('L10n process failed:', error)
+	process.exit(1)
+})

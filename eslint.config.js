@@ -26,7 +26,7 @@ export default defineConfig(
 			},
 			parserOptions: {
 				extraFileExtensions: EXTRA_FILE_EXTENSIONS,
-				project: ['./tsconfig.eslint.json']
+				project: ['./tsconfig.check.json']
 			}
 		}
 	},
@@ -64,12 +64,24 @@ export default defineConfig(
 		}
 	},
 	{
+		files: ['src/posts/**/*.md'],
+		rules: {
+			'no-restricted-syntax': [
+				'error',
+				{
+					selector: 'heading[depth=1]',
+					message: 'h1 is disallowed in posts. The title is already provided in the frontmatter.'
+				}
+			]
+		}
+	},
+	{
 		files: ['**/*.svelte', '**/*.svelte.ts', '**/*.svelte.js'],
 		extends: [svelte.configs.recommended],
 		// See more details at: https://typescript-eslint.io/packages/parser/
 		languageOptions: {
 			parserOptions: {
-				project: ['./tsconfig.eslint.json'],
+				project: ['./tsconfig.check.json'],
 				// Defined globally instead:
 				// extraFileExtensions: ['.svelte'], // Add support for additional file extensions, such as .svelte
 				parser: ts.parser,
@@ -94,6 +106,7 @@ export default defineConfig(
 			// disabled
 			'svelte/no-navigation-without-resolve': 'off',
 			'svelte/require-each-key': 'off',
+			'no-useless-assignment': 'off', // False positive due to Svelte's reactive syntax
 
 			// enabled
 			'svelte/no-restricted-html-elements': [
@@ -128,9 +141,27 @@ export default defineConfig(
 					argsIgnorePattern: '^_',
 					destructuredArrayIgnorePattern: '^_'
 				}
+			]
+		}
+	},
+	{
+		files: ['src/**/*'],
+		rules: {
+			'no-restricted-properties': [
+				'error',
+				{
+					object: 'process',
+					property: 'env',
+					message: 'Use $env/static/private or $env/dynamic/private (or $lib/env.server) instead'
+				}
 			],
 			'no-restricted-syntax': [
 				'error',
+				{
+					// selector for import.meta.env
+					selector: 'MemberExpression[object.type="MetaProperty"][property.name="env"]',
+					message: 'Use $env/static/public or $env/dynamic/public (or $lib/env) instead'
+				},
 				{
 					selector:
 						'CallExpression[callee.name=/^(asError|redirectAsError)$/]:not(ThrowStatement > CallExpression)',

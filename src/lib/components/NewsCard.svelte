@@ -4,39 +4,57 @@
 	import type { NewsItem } from '$lib/types'
 	import { formatDate } from '$lib/utils'
 	import NetlifyImage from './NetlifyImage.svelte'
+	import Skeleton from './Skeleton.svelte'
 
 	let isExternal: boolean
 
-	export let item: NewsItem
+	export let item: NewsItem | undefined = undefined
+	export let loading: boolean = false
+	export let imageSizes: string | undefined = undefined
 
-	$: isExternal = item.source === 'substack'
+	$: isExternal = item?.source === 'substack'
 </script>
 
 <div>
 	<LinkWithoutIcon
-		href={item.href}
+		href={item?.href ?? ''}
 		class="news-card"
 		target={isExternal ? '_blank' : undefined}
 		rel={isExternal ? 'noopener noreferrer' : undefined}
+		style={loading ? 'pointer-events: none' : ''}
 	>
 		<div class="image-container">
-			{#if item.image}
-				{#if isExternal}
-					<NetlifyImage src={item.image} alt={item.title} imgClass="image" />
+			<Skeleton {loading} variant="rect" width="100%" height="100%">
+				{#if item?.image}
+					{#if isExternal}
+						<NetlifyImage src={item.image} alt={item.title} imgClass="image" />
+					{:else}
+						<Image src={item.image} alt={item.title} sizes={imageSizes} class="image" />
+					{/if}
 				{:else}
-					<Image src={item.image} alt={item.title} class="image" />
+					<div class="image-placeholder"></div>
 				{/if}
-			{:else}
-				<div class="image-placeholder"></div>
-			{/if}
+			</Skeleton>
 		</div>
 		<div class="card-content">
-			<h3 class="card-title toc-exclude">{item.title}</h3>
-			{#if item.subtitle}
-				<p class="card-subtitle">{item.subtitle}</p>
+			<h3 class="card-title toc-exclude">
+				<Skeleton {loading} variant="text" count={2} width="80%">
+					{item?.title}
+				</Skeleton>
+			</h3>
+			{#if loading || item?.subtitle}
+				<p class="card-subtitle">
+					<Skeleton {loading} variant="text" count={2} width="100%">
+						{item?.subtitle}
+					</Skeleton>
+				</p>
 			{/if}
-			{#if item.date}
-				<p class="card-date">{formatDate(item.date, 'long')}</p>
+			{#if loading || item?.date}
+				<p class="card-date">
+					<Skeleton {loading} variant="text" width="40%">
+						{item?.date ? formatDate(item.date, 'long') : ''}
+					</Skeleton>
+				</p>
 			{/if}
 		</div>
 	</LinkWithoutIcon>
