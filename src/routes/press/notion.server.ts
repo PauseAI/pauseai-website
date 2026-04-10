@@ -3,71 +3,6 @@ import type {
 	PageObjectResponse
 } from '@notionhq/client/build/src/api-endpoints'
 import { getNotionClient } from '$lib/server/notion'
-import fs from 'node:fs'
-import path from 'node:path'
-
-async function downloadImageLocally(id: string, url: string): Promise<string> {
-	if (!url) return ''
-
-	try {
-		const response = await fetch(url)
-		if (!response.ok) throw new Error(`Failed to fetch image: ${response.statusText}`)
-		const buffer = await response.arrayBuffer()
-
-		const type = response.headers.get('content-type') || ''
-		let ext = '.jpg'
-		if (type.includes('png')) ext = '.png'
-		else if (type.includes('webp')) ext = '.webp'
-		else if (type.includes('gif')) ext = '.gif'
-		else if (url.includes('.avif')) ext = '.avif'
-
-		const filename = `${id}${ext}`
-
-		const staticDir = path.resolve('static', 'press-coverage')
-		if (!fs.existsSync(staticDir)) fs.mkdirSync(staticDir, { recursive: true })
-		fs.writeFileSync(path.join(staticDir, filename), Buffer.from(buffer))
-
-		const clientDir = path.resolve('.svelte-kit', 'output', 'client', 'press-coverage')
-		if (fs.existsSync(path.resolve('.svelte-kit', 'output', 'client'))) {
-			if (!fs.existsSync(clientDir)) fs.mkdirSync(clientDir, { recursive: true })
-			fs.writeFileSync(path.join(clientDir, filename), Buffer.from(buffer))
-		}
-
-		return `/press-coverage/${filename}`
-	} catch (e) {
-		console.error('Failed to download image from Notion/OG', e)
-		return url // Fallback to original
-	}
-}
-
-async function fetchOgImage(url: string): Promise<string> {
-	if (!url || !url.startsWith('http')) return ''
-	try {
-		const controller = new AbortController()
-		const timeoutId = setTimeout(() => controller.abort(), 4000)
-		const response = await fetch(url, { signal: controller.signal })
-		clearTimeout(timeoutId)
-
-		if (!response.ok) return ''
-		const html = await response.text()
-
-		const ogImageMatch =
-			html.match(/<meta[^>]*property=["']og:image["'][^>]*content=["']([^"']+)["']/i) ||
-			html.match(/<meta[^>]*content=["']([^"']+)["'][^>]*property=["']og:image["']/i)
-
-		if (ogImageMatch && ogImageMatch[1]) {
-			let ogUrl = ogImageMatch[1].replace(/&amp;/g, '&')
-			if (ogUrl.startsWith('/')) {
-				const urlObj = new URL(url)
-				ogUrl = `${urlObj.origin}${ogUrl}`
-			}
-			return ogUrl
-		}
-		return ''
-	} catch {
-		return ''
-	}
-}
 
 export interface PressCoverage {
 	id: string
@@ -77,7 +12,7 @@ export interface PressCoverage {
 	type: string
 	outlet: string
 	notes: string
-	/** First file URL or image URL from Notion property `Image` */
+	/** API proxy URL or fallback */
 	image?: string
 }
 
@@ -157,36 +92,29 @@ export async function fetchPressCoverage(): Promise<{
 			return { results: [] as PageObjectResponse[] }
 		})
 
-	const coverage = await Promise.all(
-		(response.results as PageObjectResponse[]).map(async (page) => {
-			const props = page.properties
-			let imageUrl = getImageFromProps(props['Image'])
-			const targetUrl = getString(props['URL'])
+	const coverage = (response.results as PageObjectResponse[]).map((page) => {
+		const props = page.properties
+		const targetUrl = getString(props['URL'])
+		const hasNotionImage = !!getImageFromProps(props['Image'])
 
-			if (!imageUrl && targetUrl) {
-				imageUrl = await fetchOgImage(targetUrl)
-			}
+		// Provide the proxy URL if there's a Notion image or a target URL (likely has OG image)
+		const imageUrl = hasNotionImage || targetUrl ? `/api/notion-image/${page.id}` : undefined
 
-			if (imageUrl) {
-				imageUrl = await downloadImageLocally(page.id, imageUrl)
-			}
-
-			return {
-				id: page.id,
-				title: getString(props['Name']) || getString(props['Title']) || getTitleFromProps(props),
-				url: targetUrl,
-				date: getDateFromProps('Date', props) || getDateFromProps('Published', props),
-				type: getString(props['Type']),
-				outlet: getString(props['Outlet']),
-				notes:
-					getString(props['Notes']) ||
-					getString(props['Description']) ||
-					getString(props['Abstract']) ||
-					'',
-				...(imageUrl ? { image: imageUrl } : {})
-			}
-		})
-	)
+		return {
+			id: page.id,
+			title: getString(props['Name']) || getString(props['Title']) || getTitleFromProps(props),
+			url: targetUrl,
+			date: getDateFromProps('Date', props) || getDateFromProps('Published', props),
+			type: getString(props['Type']),
+			outlet: getString(props['Outlet']),
+			notes:
+				getString(props['Notes']) ||
+				getString(props['Description']) ||
+				getString(props['Abstract']) ||
+				'',
+			...(imageUrl ? { image: imageUrl } : {})
+		}
+	})
 
 	return { coverage, typeOrder, outletOrder: typeOrder }
 }
