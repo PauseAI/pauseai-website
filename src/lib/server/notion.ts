@@ -14,8 +14,8 @@ export function getNotionClient() {
 	return notion
 }
 
-type NotionProperties = PageObjectResponse['properties']
-type NotionPropertyValue = NotionProperties[string]
+export type NotionProperties = PageObjectResponse['properties']
+export type NotionPropertyValue = NotionProperties[string]
 
 /**
  * Extracts a string value from various Notion property types
@@ -57,7 +57,10 @@ export function getTitleFromProps(props: NotionProperties): string {
  */
 export function getDateFromProps(propName: string, props: NotionProperties): string {
 	const namedProp = props[propName]
-	if (namedProp) return getString(namedProp)
+	if (namedProp) {
+		const val = getString(namedProp)
+		if (val) return val
+	}
 	const dateProp = Object.values(props).find((p) => p.type === 'date')
 	return getString(dateProp)
 }

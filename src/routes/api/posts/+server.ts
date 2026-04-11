@@ -10,6 +10,7 @@ import { meta as dearSirDemisMeta } from '../../dear-sir-demis-2025/meta'
 import { meta as aboutMeta } from '../../about/meta'
 import { meta as contactMeta } from '../../contact-us/meta'
 import { meta as pressMeta } from '../../press/meta'
+import { meta as fundingMeta } from '../../funding/meta'
 import type { RequestHandler } from './$types'
 
 export type PostsApiResponse = Post[]
@@ -25,7 +26,8 @@ const hardCodedPages: Post[] = [
 	dearSirDemisMeta,
 	aboutMeta,
 	contactMeta,
-	pressMeta
+	pressMeta,
+	fundingMeta
 ]
 
 function getPosts() {

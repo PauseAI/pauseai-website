@@ -2,6 +2,7 @@ import { fetchPressCoverage } from './notion.server'
 import type { PageServerLoad } from './$types'
 import { env } from '$env/dynamic/private'
 
+export const prerender = true
 export const load: PageServerLoad = async () => {
 	try {
 		console.log('NOTION_API_KEY present:', !!env.NOTION_API_KEY)

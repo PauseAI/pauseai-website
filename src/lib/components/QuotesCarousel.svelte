@@ -101,12 +101,20 @@
 		</ul>
 	</div>
 	<div class="navigation" data-glide-el="controls">
-		<button class="nav-button" data-glide-dir="<"><ArrowLeft size="1em" /></button>
+		<button class="nav-button" data-glide-dir="<" aria-label="Previous slide"
+			><ArrowLeft size="1em" /></button
+		>
 		{#each Array(totalSlides) as _, i}
-			<button class="dot reset-button" class:active={currentSlide === i} data-glide-dir={`=${i}`}
+			<button
+				class="dot reset-button"
+				class:active={currentSlide === i}
+				data-glide-dir={`=${i}`}
+				aria-label={`Go to slide ${i + 1}`}
 			></button>
 		{/each}
-		<button class="nav-button" data-glide-dir=">"><ArrowRight size="1em" /></button>
+		<button class="nav-button" data-glide-dir=">" aria-label="Next slide"
+			><ArrowRight size="1em" /></button
+		>
 		<Link href="/quotes">{m.home_quotes_all()}</Link>
 	</div>
 </div>
