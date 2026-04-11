@@ -4,6 +4,8 @@ import type { DeepPartial } from './utils'
 
 export type Categories = 'sveltekit' | 'svelte' | 'AI Safety' | 'Transparency' | 'Government'
 
+export type LinkType = 'internal' | 'external' | 'mail'
+
 export type FrontmatterMeta = {
 	title: string
 	/** Meta description for SEO */
