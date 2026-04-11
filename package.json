@@ -25,7 +25,7 @@
 		"_lint:knip": "knip",
 		"_lint:eslint": "eslint . --format gha --max-warnings=55",
 		"_lint:prettier": "tsx scripts/generate-prettier-ignore.ts && prettier --check .",
-		"format": "tsx scripts/generate-prettier-ignore.ts && prettier --write .",
+		"format": "tsx scripts/generate-prettier-ignore.ts && prettier --write --ignore-unknown",
 		"prepare": "husky",
 		"sync": "svelte-kit sync"
 	},
