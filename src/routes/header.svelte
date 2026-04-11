@@ -33,7 +33,7 @@
 	<Navlink {inverted} c2a href="/join">{m.header_join()}</Navlink>
 	<LanguageSwitcher {inverted} />
 	<span onclick={openSearch} role="none">
-		<Navlink {inverted} ariaLabel="Search">
+		<Navlink href="#" {inverted} ariaLabel="Search">
 			<SearchIcon size="0.8em" />
 		</Navlink>
 	</span>
