@@ -12,7 +12,7 @@
 	import { pushState } from '$app/navigation'
 	import { localizeHref, locales } from '$lib/paraglide/runtime'
 
-	export let href: string
+	export let href: string | null = null
 	export let target: string | null = null
 	let className: string = ''
 	export { className as class }
@@ -35,27 +35,27 @@
 	}
 
 	// Normalize and localize href
-	if (typeof href !== 'string') href = ''
-
-	if (
-		(href.startsWith('http:') || href.startsWith('https:')) &&
-		!href.startsWith('https://pauseai.info/') &&
-		!(href.includes('s3.amazonaws') && href.includes('/pauseai-'))
-	) {
-		type = Type.External
-		// Automatically open petition and action-specific tools in a new tab
-		if (!target && (href.includes('change.org') || href.includes('activoice.org'))) {
-			target = '_blank'
-			if (!rel) rel = 'noopener noreferrer'
+	if (href) {
+		if (
+			(href.startsWith('http:') || href.startsWith('https:')) &&
+			!href.startsWith('https://pauseai.info/') &&
+			!(href.includes('s3.amazonaws') && href.includes('/pauseai-'))
+		) {
+			type = Type.External
+			// Automatically open petition and action-specific tools in a new tab
+			if (!target && (href.includes('change.org') || href.includes('activoice.org'))) {
+				target = '_blank'
+				if (!rel) rel = 'noopener noreferrer'
+			}
+		} else if (href.startsWith('mailto:')) {
+			type = Type.Mail
 		}
-	} else if (href.startsWith('mailto:')) {
-		type = Type.Mail
+
+		href = processHref(href)
 	}
 
-	href = processHref(href)
-
 	onMount(() => {
-		if (href.startsWith('#') && anchor) {
+		if (href && href.startsWith('#') && anchor) {
 			anchor.addEventListener('click', (ev) => {
 				ev.preventDefault()
 				const url = $page.url

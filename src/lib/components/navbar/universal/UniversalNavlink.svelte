@@ -14,7 +14,6 @@
 	export let external = false
 
 	$: localizedHref = href && !external ? localizeHref(href) : href
-	$: resolvedHref = localizedHref ?? ''
 
 	$: {
 		active = localizeHref($page.url.pathname) == localizedHref
@@ -23,7 +22,7 @@
 
 <span>
 	<LinkWithoutIcon
-		href={resolvedHref}
+		href={localizedHref}
 		class={clsx('navlink', { first, c2a, inverted, narrow, active })}
 		aria-label={ariaLabel}
 	>
