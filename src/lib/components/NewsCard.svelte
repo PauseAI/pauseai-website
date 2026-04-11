@@ -23,7 +23,7 @@
 
 <div>
 	<LinkWithoutIcon
-		href={item?.href ?? ''}
+		href={item?.href}
 		class="news-card"
 		{id}
 		target={isExternal ? '_blank' : undefined}
