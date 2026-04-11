@@ -32,11 +32,11 @@
 	<!-- <NavLink href="/about">About</NavLink> -->
 	<Navlink {inverted} c2a href="/join">{m.header_join()}</Navlink>
 	<LanguageSwitcher {inverted} />
-	<span onclick={openSearch} role="none">
-		<Navlink {inverted} ariaLabel="Search">
+	<button onclick={openSearch} class="reset-button" aria-label="Search">
+		<Navlink {inverted}>
 			<SearchIcon size="0.8em" />
 		</Navlink>
-	</span>
+	</button>
 </Navbar>
 
 <SearchModal bind:open={searchOpen} />
