@@ -7,9 +7,9 @@ description: What the Australian chapter of PauseAI has been doing and needs hel
 ### 2026 April - help needed🙏
 
 - Upcoming
-   - Join our [meetup](https://luma.com/PauseAIAustralia?e=evt-G4AIOYYBHfJUYhc) where we kickoff our next campaign! We also need help setting up Aussie designs for merch.
-   - Help out with [evergreen tasks](/australia)
-   - Tell us [what you did](mailto:australia@pauseai.info?subject=Aussie%20Did%20a%20Thing) so we can add it, or [what you have cooking](mailto:australia@pauseai.info?subject=Things%20Cooking) so we can support you!
+  - Join our [meetup](https://luma.com/PauseAIAustralia?e=evt-G4AIOYYBHfJUYhc) where we kickoff our next campaign! We also need help setting up Aussie designs for merch.
+  - Help out with [evergreen tasks](/australia)
+  - Tell us [what you did](mailto:australia@pauseai.info?subject=Aussie%20Did%20a%20Thing) so we can add it, or [what you have cooking](mailto:australia@pauseai.info?subject=Things%20Cooking) so we can support you!
 - Ashley takee on volunteer role of Digital Marketing
 <div style="display:flex; flex-wrap:wrap; gap:0.5rem; max-width:90%; margin:1rem auto;">
 <div style="flex:1; min-width:200px;">
@@ -184,13 +184,12 @@ description: What the Australian chapter of PauseAI has been doing and needs hel
 - Ran a stall at EAGxAustralasia
 <div style="display:flex; flex-wrap:wrap; gap:0.5rem; max-width:90%; margin:1rem auto;">
 <div style="flex:1; min-width:200px;">
-  
+
 ![20251128-1659_EAGxStallMichaelSetup.jpg](/australia/20251128-1659_EAGxStallMichaelSetup.jpg)
 
 </div>
 
 </div>
-
 
 ### 2025 October
 
