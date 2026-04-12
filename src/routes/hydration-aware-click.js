@@ -10,7 +10,7 @@
 	/** @param {MouseEvent} e */
 	function handleClick(e) {
 		/** @type {HTMLElement | null} */
-		// @ts-ignore - target is EventTarget, but we know it's an Element in this context
+		// @ts-expect-error - target is EventTarget, but we know it's an Element in this context
 		var target = e.target.closest?.('[data-hydrate-click]')
 		if (target) {
 			clickedElement = target
