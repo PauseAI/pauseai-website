@@ -18,16 +18,20 @@
 	$: {
 		active = localizeHref($page.url.pathname) == localizedHref
 	}
+
+	$: classes = clsx('navlink', { first, c2a, inverted, narrow, active })
 </script>
 
 <span>
-	<LinkWithoutIcon
-		href={localizedHref}
-		class={clsx('navlink', { first, c2a, inverted, narrow, active })}
-		aria-label={ariaLabel}
-	>
-		<slot></slot>
-	</LinkWithoutIcon>
+	{#if href}
+		<LinkWithoutIcon href={localizedHref} class={classes} aria-label={ariaLabel}>
+			<slot></slot>
+		</LinkWithoutIcon>
+	{:else}
+		<span class={classes} aria-label={ariaLabel}>
+			<slot></slot>
+		</span>
+	{/if}
 </span>
 
 <style>
