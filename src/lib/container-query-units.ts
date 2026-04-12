@@ -4,7 +4,7 @@ export function emulateCqwIfNeeded(element: HTMLElement) {
 	return () => observer.disconnect()
 }
 
-export function initializeCqwResizeObserver(element: HTMLElement) {
+function initializeCqwResizeObserver(element: HTMLElement) {
 	const resizeObserver = new ResizeObserver((entries) => {
 		for (const entry of entries) {
 			const width = entry.contentRect.width

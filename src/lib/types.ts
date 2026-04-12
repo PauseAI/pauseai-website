@@ -4,6 +4,8 @@ import type { DeepPartial } from './utils'
 
 export type Categories = 'sveltekit' | 'svelte' | 'AI Safety' | 'Transparency' | 'Government'
 
+export type LinkType = 'internal' | 'external' | 'mail'
+
 export type FrontmatterMeta = {
 	title: string
 	/** Meta description for SEO */
@@ -28,9 +30,10 @@ export type NewsItem = {
 	subtitle: string
 	date: string
 	image?: string
+	outlet?: string
 	/** URL to the article (internal path or external URL) */
 	href: string
-	source: 'internal' | 'substack'
+	source: 'internal' | 'substack' | 'press'
 }
 
 export type Signatory = {

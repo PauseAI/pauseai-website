@@ -12,7 +12,7 @@
 	import TikTok from '$lib/components/icons/tiktok.svelte'
 	import Substack from '$lib/components/icons/substack.svelte'
 	import { onMount } from 'svelte'
-	import { loadNationalGroups } from '$lib/stores/nationalGroups'
+	import { fetchNationalGroups } from '$lib/nationalGroups'
 	import type { NationalGroup } from '$lib/types'
 	import { SvelteSet } from 'svelte/reactivity'
 
@@ -21,7 +21,7 @@
 	let nationalGroups: NationalGroup[] = []
 
 	onMount(async () => {
-		nationalGroups = await loadNationalGroups()
+		nationalGroups = await fetchNationalGroups()
 	})
 
 	// Group communities by their country/national community

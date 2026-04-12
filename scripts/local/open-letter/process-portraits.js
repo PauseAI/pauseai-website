@@ -17,7 +17,8 @@ function getImageDimensions(/** @type {string} */ imagePath) {
 		return { width, height }
 	} catch (error) {
 		throw new Error(
-			`Failed to get dimensions: ${error instanceof Error ? error.message : String(error)}`
+			`Failed to get dimensions: ${error instanceof Error ? error.message : String(error)}`,
+			{ cause: error }
 		)
 	}
 }
@@ -33,7 +34,8 @@ function resizeImage(
 		return true
 	} catch (error) {
 		throw new Error(
-			`Failed to resize image: ${error instanceof Error ? error.message : String(error)}`
+			`Failed to resize image: ${error instanceof Error ? error.message : String(error)}`,
+			{ cause: error }
 		)
 	}
 }

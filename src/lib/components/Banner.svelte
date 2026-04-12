@@ -4,57 +4,77 @@
 	import { fade } from 'svelte/transition'
 	import { deLocalizeHref } from '$lib/paraglide/runtime'
 	import { setItem } from '$lib/localStorage'
+	import LinkWithoutIcon from '$lib/components/LinkWithoutIcon.svelte'
 
-	export let contrast = false
-	export let target: string | null = null
+	export let type: 'main' | 'campaign' = 'main'
 	export let id: string | null = null
+	export let href: string | null = null
+	export let contrast = false
 
 	let dismissed = false
 
 	function close() {
 		dismissed = true
 		if (id) {
-			setItem(`banner_${id}_hidden`, 'true')
+			const prefix = type === 'campaign' ? 'campaign_banner' : 'banner'
+			setItem(`${prefix}_${id}_hidden`, 'true')
 		}
 	}
 
-	// Hide on navigation to the target page
-	$: if (target && deLocalizeHref($page.url.pathname) === target) {
+	// Hide on navigation to the target/href page
+	$: if (href && deLocalizeHref($page.url.pathname) === href) {
 		dismissed = true
 	}
+
+	$: isCampaign = type === 'campaign'
+	$: dataIdAttr = isCampaign ? 'data-campaign-banner-id' : 'data-banner-id'
 </script>
 
 <svelte:head>
 	{#if id}
+		{@const selector = isCampaign
+			? `html[data-active-campaign-banner="${id}"] [data-campaign-banner-id="${id}"]`
+			: `html[data-active-banner="${id}"] [data-banner-id="${id}"]`}
 		<!-- eslint-disable-next-line svelte/no-at-html-tags -->
-		{@html `<style>html[data-active-banner="${id}"] [data-banner-id="${id}"]{display:flex!important}</style>`}
+		{@html `<style>${selector}{display:flex!important}</style>`}
 	{/if}
 </svelte:head>
 
 {#if !dismissed}
-	{#if id}
-		<div class="banner" class:contrast data-banner-id={id} transition:fade={{ duration: 200 }}>
-			<span class="content">
-				<slot></slot>
-			</span>
+	<div
+		class="banner"
+		class:contrast
+		class:campaign={isCampaign}
+		{...{ [dataIdAttr]: id }}
+		data-pagefind-ignore
+		transition:fade={{ duration: 200 }}
+	>
+		{#if isCampaign}
+			<div class="accent-line"></div>
+		{/if}
 
-			<button class="close banner-close-btn" on:click={close}>
-				<X size="1.2em" />
-				<span class="sr-only">Close</span>
-			</button>
-		</div>
-	{:else}
-		<div class="banner" class:contrast transition:fade={{ duration: 200 }}>
-			<span class="content">
+		<span class="content">
+			{#if isCampaign && href}
+				<LinkWithoutIcon {href} class="campaign-link" on:click={close}>
+					<span class="campaign-text">
+						<slot></slot>
+					</span>
+					<span class="campaign-cta">Take action →</span>
+				</LinkWithoutIcon>
+			{:else}
 				<slot></slot>
-			</span>
+			{/if}
+		</span>
 
-			<button class="close banner-close-btn" on:click={close}>
-				<X size="1.2em" />
-				<span class="sr-only">Close</span>
-			</button>
-		</div>
-	{/if}
+		<button
+			class="close banner-close-btn"
+			class:campaign-close={isCampaign}
+			on:click|stopPropagation={close}
+		>
+			<X size={isCampaign ? '1em' : '1.2em'} />
+			<span class="sr-only">Close</span>
+		</button>
+	</div>
 {/if}
 
 <style>
@@ -66,6 +86,23 @@
 		background-color: var(--brand);
 		padding: 0.5em;
 		box-sizing: border-box;
+	}
+
+	.banner.campaign {
+		flex-direction: column;
+		padding: 0;
+		background: linear-gradient(135deg, hsl(0, 0%, 8%) 0%, hsl(25, 10%, 12%) 100%);
+		overflow: hidden;
+	}
+
+	.accent-line {
+		height: 3px;
+		background: linear-gradient(
+			90deg,
+			var(--brand, #ff9416) 0%,
+			hsl(20, 100%, 60%) 50%,
+			var(--brand, #ff9416) 100%
+		);
 	}
 
 	.banner.contrast {
@@ -96,9 +133,18 @@
 		margin-inline: 3rem;
 	}
 
+	.banner.campaign .content {
+		padding: 0.7em 3rem;
+		margin-inline: 0;
+	}
+
 	@media (max-width: 40rem) {
 		.content {
 			margin-left: 1rem;
+		}
+		.banner.campaign .content {
+			padding: 0.6em 2.5rem 0.6em 1rem;
+			margin-left: 0;
 		}
 	}
 
@@ -122,13 +168,69 @@
 		border-radius: 50%;
 	}
 
+	.close.campaign-close {
+		right: 0.5em;
+		color: hsl(0, 0%, 50%);
+		font-size: 0.9rem;
+	}
+
 	.close:hover {
 		opacity: 0.8;
 		background-color: rgba(0, 0, 0, 0.1);
 	}
 
+	.close.campaign-close:hover {
+		color: white;
+		background-color: rgba(255, 255, 255, 0.1);
+		opacity: 1;
+	}
+
 	.close:focus {
 		outline: 2px solid currentColor;
+	}
+
+	/* Campaign specific styles */
+	.banner.campaign :global(.campaign-link) {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.8em;
+		text-decoration: none;
+		color: white;
+		font-family: var(--font-body);
+		font-weight: 500;
+		font-size: 1rem;
+		flex-wrap: wrap;
+		justify-content: center;
+	}
+
+	:global(.campaign-link:hover) .campaign-cta {
+		background: var(--brand, #ff9416);
+		color: black;
+	}
+
+	.campaign-text {
+		line-height: 1.4;
+	}
+
+	.campaign-text :global(strong) {
+		color: var(--brand, #ff9416);
+	}
+
+	.campaign-cta {
+		display: inline-block;
+		padding: 0.25em 0.8em;
+		border: 1.5px solid var(--brand, #ff9416);
+		border-radius: 4px;
+		color: var(--brand, #ff9416);
+		font-family: var(--font-heading);
+		font-weight: 700;
+		font-size: 0.9em;
+		text-transform: uppercase;
+		letter-spacing: 0.05em;
+		white-space: nowrap;
+		transition:
+			background 0.2s,
+			color 0.2s;
 	}
 
 	/* Accessibility hidden text */

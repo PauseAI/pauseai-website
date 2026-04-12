@@ -81,7 +81,7 @@ export interface LlmErrorInfo {
  * @param requestData - The original request data for context
  * @returns Structured error information for logging
  */
-export function extractLlmErrorInfo(error: OpenRouterErrorResponse): LlmErrorInfo {
+function extractLlmErrorInfo(error: OpenRouterErrorResponse): LlmErrorInfo {
 	const response = error.response
 	const config = error.config
 
@@ -138,7 +138,7 @@ export function extractLlmErrorInfo(error: OpenRouterErrorResponse): LlmErrorInf
  * @param errorInfo - The extracted error information
  * @returns A formatted string suitable for console logging
  */
-export function formatLlmError(errorInfo: LlmErrorInfo): string {
+function formatLlmError(errorInfo: LlmErrorInfo): string {
 	const parts: string[] = []
 
 	// Basic error info
@@ -183,6 +183,42 @@ export function formatLlmError(errorInfo: LlmErrorInfo): string {
 export function formatLlmErrorForLogging(error: OpenRouterErrorResponse): string {
 	const errorInfo = extractLlmErrorInfo(error)
 	return formatLlmError(errorInfo)
+}
+
+/**
+ * A point-in-time snapshot of OpenRouter billing state.
+ */
+export interface BillingSnapshot {
+	limitRemaining: number | null
+	totalUsage: number | null
+}
+
+function toNumberOrNull(value: number | string | undefined): number | null {
+	if (typeof value === 'number') return value
+	if (typeof value === 'string') {
+		const n = Number(value)
+		return Number.isFinite(n) ? n : null
+	}
+	return null
+}
+
+/**
+ * Fetches OpenRouter billing as raw numbers without printing. For computing
+ * spend deltas across a run.
+ */
+export async function getBillingSnapshot(client: AxiosInstance): Promise<BillingSnapshot> {
+	try {
+		const [keyResponse, creditsResponse] = await Promise.all([
+			client.get<OpenRouterKeyResponse>('/auth/key').catch(() => null),
+			client.get<OpenRouterCreditsResponse>('/credits').catch(() => null)
+		])
+		return {
+			limitRemaining: toNumberOrNull(keyResponse?.data?.data?.limit_remaining),
+			totalUsage: toNumberOrNull(creditsResponse?.data?.total_usage)
+		}
+	} catch {
+		return { limitRemaining: null, totalUsage: null }
+	}
 }
 
 /**

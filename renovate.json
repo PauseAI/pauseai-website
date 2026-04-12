@@ -1,0 +1,57 @@
+{
+	"$schema": "https://docs.renovatebot.com/renovate-schema.json",
+	"extends": ["config:recommended"],
+	"rangeStrategy": "bump",
+	"labels": ["dependencies"],
+	"packageRules": [
+		{
+			"matchManagers": ["github-actions"],
+			"rangeStrategy": "replace"
+		},
+		{
+			"matchFileNames": [".github/workflows/pnpm-check.yml"],
+			"automerge": true
+		},
+		{
+			"matchDepTypes": ["pnpm.overrides"],
+			"rangeStrategy": "replace"
+		},
+		{
+			"matchManagers": ["nvm"],
+			"enabled": false
+		},
+		{
+			"matchDepTypes": ["packageManager"],
+			"enabled": false
+		},
+		{
+			"matchManagers": ["npm"],
+			"dependencyDashboardApproval": true
+		},
+		{
+			"matchUpdateTypes": ["minor"],
+			"matchCurrentValue": "/^\\^[1-9]/",
+			"groupName": "all non-major dependencies",
+			"groupSlug": "all-minor-patch",
+			"dependencyDashboardApproval": false
+		},
+		{
+			"matchUpdateTypes": ["patch"],
+			"matchCurrentValue": "/^[\\^~]([1-9]|0\\.[1-9])/",
+			"groupName": "all non-major dependencies",
+			"groupSlug": "all-minor-patch",
+			"dependencyDashboardApproval": false
+		},
+		{
+			"extends": [":automergeLinters"],
+			"matchPackageNames": ["knip", "svelte-check"],
+			"minor": {
+				"extends": ["group:linters"]
+			},
+			"patch": {
+				"extends": ["group:linters"]
+			},
+			"dependencyDashboardApproval": false
+		}
+	]
+}

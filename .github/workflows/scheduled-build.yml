@@ -1,0 +1,24 @@
+name: Scheduled Rebuild
+
+on:
+  schedule:
+    # Every 30 minutes
+    - cron: '*/30 * * * *'
+  workflow_dispatch:
+    # Allow manual triggering
+
+jobs:
+  rebuild:
+    name: Trigger Netlify Build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger Netlify via Hook
+        env:
+          NETLIFY_BUILD_HOOK: ${{ secrets.NETLIFY_BUILD_HOOK }}
+        run: |
+          if [ -z "$NETLIFY_BUILD_HOOK" ]; then
+            echo "Error: NETLIFY_BUILD_HOOK secret is not set."
+            exit 1
+          fi
+          echo "Triggering Netlify build hook..."
+          curl -X POST -d "{}" "$NETLIFY_BUILD_HOOK?trigger_title=Scheduled+rebuild"

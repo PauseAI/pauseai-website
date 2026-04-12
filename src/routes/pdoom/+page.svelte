@@ -13,8 +13,8 @@
 <p>
 	p(doom) is the probability of very bad outcomes (e.g. human extinction) as a result of AI. This
 	most often refers to the likelihood of <Link href="/ai-takeover">AI taking over</Link> from humanity,
-	but different scenarios can also constitute "doom". For example, a large portion of the population
-	dying due to a novel biological weapon created by AI, social collapse due to a
+	but different scenarios can also constitute "doom". For example, a large portion of the population dying
+	due to a novel biological weapon created by AI, social collapse due to a
 	<Link href="/cybersecurity-risks">large-scale cyber attack</Link>, or AI causing a nuclear war.
 	Note that not everyone is using the same definition when talking about their p(doom) values. Most
 	notably the time horizon is often not specified, which makes comparing a bit difficult.

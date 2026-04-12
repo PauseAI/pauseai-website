@@ -23,7 +23,7 @@
 	</p>
 	<div class="coverage-section">
 		<h2>Media Coverage</h2>
-		<PressCoveragePanel coverage={data.coverage} outletOrder={data.outletOrder} />
+		<PressCoveragePanel coverage={data.coverage} typeOrder={data.typeOrder} />
 	</div>
 
 	<div class="prose logo-materials">

@@ -14,13 +14,21 @@
 	export let loading: 'lazy' | 'eager' = 'lazy'
 	export let decoding: 'async' | 'sync' | 'auto' = 'async'
 
+	/** Callback when the image fails to load entirely (including fallback) */
+	export let onFailed: (() => void) | undefined = undefined
+
 	let useFallback = false
 
 	function handleError(e: Event) {
 		const imgElement = e.target as HTMLImageElement
-		if (imgElement.src !== src) {
+		// If we haven't used the fallback yet, try it
+		if (!useFallback && imgElement.src !== src) {
 			useFallback = true
-			console.warn(`NetlifyImage: Failed to load image ${src}, using fallback`)
+			console.warn(`NetlifyImage: Failed to load optimized image ${src}, trying fallback`)
+		} else {
+			// Both optimized and fallback failed, or we hit an error on the fallback itself
+			console.warn(`NetlifyImage: Failed to load image ${src} entirely`)
+			onFailed?.()
 		}
 	}
 
@@ -63,7 +71,7 @@
 </script>
 
 {#if useFallback}
-	<img {src} {alt} class={imgClass} {style} {loading} {decoding} />
+	<img on:error={handleError} {src} {alt} class={imgClass} {style} {loading} {decoding} />
 {:else}
 	<picture class={pictureClass} {style}>
 		<source type="image/avif" srcset={avifSrcSet} {sizes} />

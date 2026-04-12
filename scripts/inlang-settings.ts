@@ -11,8 +11,8 @@ import {
 	MESSAGE_SOURCE,
 	writeSettingsFile
 } from '../src/lib/l10n'
-import { setupL10nCage } from './l10n/git-ops'
-import { cullCommentary, createSymlinkIfNeeded, ensureDirectoriesExist } from './l10n/utils'
+import { setupL10nCage } from './l10n/utils/git-ops'
+import { cullCommentary, createSymlinkIfNeeded, ensureDirectoriesExist } from './l10n/utils/utils'
 
 const INLANG_PROJECT_PATH_ELEMENTS = ['..', 'project.inlang']
 
@@ -37,11 +37,11 @@ async function regenerateSettings(verbose = false): Promise<void> {
 
 	// Process the PARAGLIDE_LOCALES environment variable to get active locales
 	const settings = { ...defaultSettings }
-	settings.locales = possiblyOverriddenLocales(defaultSettings)
+	settings.locales = possiblyOverriddenLocales(process.env, defaultSettings)
 
 	if (verbose) {
 		console.info(
-			`Env override [${process.env.PARAGLIDE_LOCALES}] (${getDevContext()}) yields ${settings.locales.join(', ')}`
+			`Env override [${process.env.PARAGLIDE_LOCALES}] (${getDevContext(process.env)}) yields ${settings.locales.join(', ')}`
 		)
 	} else {
 		console.log(`Using locales: ${settings.locales.join(', ')}`)
