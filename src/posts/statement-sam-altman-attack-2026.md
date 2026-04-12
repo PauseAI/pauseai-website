@@ -1,6 +1,7 @@
 ---
 title: Statement on the Attack on Sam Altman's Residence
-description: PauseAI unequivocally condemns the attack on Sam Altman's home and all forms of violence, intimidation, and harassment.
+description: PauseAI unequivocally condemns the attack on Sam Altman's home and
+  all forms of violence, intimidation, and harassment.
 date: 2026-04-12
 ---
 
@@ -12,7 +13,7 @@ On 10 April 2026, the home of OpenAI's CEO, Sam Altman was attacked with an ince
 
 ### Suspect's connection to PauseAI
 
-A few online commentators have described the attacker as a "PauseAI activist." Here are the facts:
+A few online commentators have described the suspect as a "PauseAI activist." Here are the facts:
 
 - He joined our public Discord server approximately two years ago.
 - In that time, he posted a total of 34 messages.
