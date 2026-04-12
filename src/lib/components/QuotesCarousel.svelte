@@ -26,6 +26,7 @@
 
 	let glide: Glide
 	let currentSlide: number | null = null
+	let isSwiping = false
 
 	const quotes: CarouselQuote[] = [
 		{
@@ -80,15 +81,28 @@
 	onMount(() => {
 		glide = new Glide('.glide', {
 			autoplay: AUTOPLAY_INTERVAL
-		}).mount({ Controls, Images, Keyboard, Swipe, Autoplay })
-		currentSlide = glide.index
+		})
+
 		glide.on('move', () => {
 			currentSlide = glide.index
 		})
+
+		glide.on('swipe.move', () => {
+			isSwiping = true
+		})
+
+		glide.on('swipe.end', () => {
+			setTimeout(() => {
+				isSwiping = false
+			}, 50)
+		})
+
+		glide.mount({ Controls, Images, Keyboard, Swipe, Autoplay })
+		currentSlide = glide.index
 	})
 </script>
 
-<div class="glide">
+<div class="glide" class:is-swiping={isSwiping}>
 	<div class="glide__track" data-glide-el="track">
 		<ul class="glide__slides">
 			{#each quotes as quote}
@@ -182,5 +196,9 @@
 
 	.dot:not(.active):hover {
 		transform: scale(1.2);
+	}
+
+	.is-swiping .quote {
+		pointer-events: none;
 	}
 </style>
