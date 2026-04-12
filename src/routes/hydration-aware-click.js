@@ -9,10 +9,8 @@
 
 	/** @param {MouseEvent} e */
 	function handleClick(e) {
-		/** @type {HTMLElement | null} */
-		// @ts-expect-error - target is EventTarget, but we know it's an Element in this context
-		var target = e.target.closest?.('[data-hydrate-click]')
-		if (target) {
+		var target = e.target instanceof Element ? e.target.closest('[data-hydrate-click]') : null
+		if (target instanceof HTMLElement) {
 			clickedElement = target
 			clickedId = target.id || null
 			document.documentElement.setAttribute('data-waiting', 'true')
