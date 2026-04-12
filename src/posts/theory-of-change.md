@@ -1,7 +1,7 @@
 ---
 title: Theory of Change
 description: How does PauseAI expect to achieve its mission?
-date: '2024-02-26'
+date: 2024-02-26
 ---
 
 How does PauseAI plan to achieve its mission?
@@ -50,9 +50,9 @@ We can get there in two ways:
 
 ## What do we _not_ do?
 
-- **Tolerate violence**. We make it very clear to our members and the people joining our protests that we are a peaceful movement. We do not promote violence, and we do not tolerate it. We communicate this in our Protestor's Code of Conduct, our Discord rules, and our Volunteer agreement. The main reason for this is because we want to be the good guys, we want the public to be on our side.
-- **Take sides in other topics**. We are a movement that focuses on an AI Pause. We do not discuss and take sides in other topics, even if (short-term) opportunities arise that may make this tempting to do.
-- **Be dishonest**. We need people to trust what we say, so we must do everything to promote honesty.
+- **We don't tolerate violence**. We make it very clear to our members and the people joining our protests that we are a peaceful movement. We do not promote violence, and we do not tolerate it. We communicate this in our Protestor's Code of Conduct, our Discord rules, and our Volunteer agreement. The main reason for this is because we want to be the good guys, we want the public to be on our side.
+- **We don't take sides in other topics**. We are a movement that focuses on an AI Pause. We do not discuss and take sides in other topics, even if (short-term) opportunities arise that may make this tempting to do.
+- **We avoid dishonesty**. We need people to trust what we say, so we must do everything to promote honesty.
 
 ## Let's get to it
 
