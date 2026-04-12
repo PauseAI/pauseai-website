@@ -89,7 +89,7 @@
 		"@glidejs/glide": "~3.6.2",
 		"@notionhq/client": "^2.3.0",
 		"@number-flow/svelte": "^0.3.13",
-		"@pagefind/default-ui": "^1.5.0",
+		"@pagefind/component-ui": "^1.5.0",
 		"@prgm/sveltekit-progress-bar": "^3.0.2",
 		"@remix-run/headers": "^0.12.0",
 		"@sentry/deno": "^10.48.0",

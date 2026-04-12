@@ -29,7 +29,7 @@ importers:
       '@number-flow/svelte':
         specifier: ^0.3.13
         version: 0.3.13(svelte@5.55.3)
-      '@pagefind/default-ui':
+      '@pagefind/component-ui':
         specifier: ^1.5.0
         version: 1.5.0
       '@prgm/sveltekit-progress-bar':
@@ -1245,6 +1245,9 @@ packages:
     cpu: [x64]
     os: [win32]
 
+  '@pagefind/component-ui@1.5.0':
+    resolution: {integrity: sha512-lOyk1+7x5Ds0TkAXXR0o6XYITtzmx9QjtrhiPNxI7zuwmO6tr0fqaxTengz3LtvvhHoXawW/h8BEHaTaQMTegQ==}
+
   '@pagefind/darwin-arm64@1.5.0':
     resolution: {integrity: sha512-OXQVlxALU9+Lz/LxkAa+RvaxY1cnRKUDCuwl9o8PY5Lg/znP573y4WIbVOOIz8Bv7uj7r00TGy7pD+NSLMJGBw==}
     cpu: [arm64]
@@ -1254,9 +1257,6 @@ packages:
     resolution: {integrity: sha512-+LK1Xq5n/B0hHc08DW61SnfIlfLKyXZ1oKcbfZ1MimE7Rn0Q6R0VI/TlC04f/JDPm+67zAOwPGizzvefOi5vqQ==}
     cpu: [x64]
     os: [darwin]
-
-  '@pagefind/default-ui@1.5.0':
-    resolution: {integrity: sha512-C8VZ5pDz1Kc89GicXsWZiIlAwTVwUtFDOzh0RzJt5FmbkJzsmPVICPkLUfOsWgBCyFAH/vYR+lUTaGPDxZ4IXw==}
 
   '@pagefind/freebsd-x64@1.5.0':
     resolution: {integrity: sha512-kicDfUF9gn/z06NimTwNlZXF8z3pLsN3BIPPt6N8unuh0n55fr64tVs2p3a5RKYmQkJGjPfOE/C9GI5YTEpURg==}
@@ -1911,6 +1911,10 @@ packages:
     engines: {node: '>=0.4.0'}
     hasBin: true
 
+  adequate-little-templates@1.0.2:
+    resolution: {integrity: sha512-d0tFFG538l3Y4CElRKtticzrMr/OGohs32/nf3Ewn8rbTMBYwkVNe8mPdXWrDnMlz+ZVUFQjsTmsBD5zCtU4wg==}
+    engines: {node: '>=14'}
+
   agent-base@6.0.2:
     resolution: {integrity: sha512-RZNwNclF7+MS/8bDg70amg32dyeZGZxiDuQmZxKLAlQjr3jGyLx+4Kkk58UO7D2QdgFIQCovuSuZESne6RG6XQ==}
     engines: {node: '>= 6.0.0'}
@@ -1991,6 +1995,9 @@ packages:
     resolution: {integrity: sha512-fOVLPAsFTsQfuCkvahZkzq6nf8KvGWanlYoTh0SVA0A/PIUxQGU2AOZAoD95n2gFLVDW/jP6sbGLny95nmEuHA==}
     engines: {node: '>=6.0.0'}
     hasBin: true
+
+  bcp-47@2.1.0:
+    resolution: {integrity: sha512-9IIS3UPrvIa1Ej+lVDdDwO7zLehjqsaByECw0bu2RRGP73jALm6FYbzI5gWbgHLvNdkvfXB5YrSbocZdOS0c0w==}
 
   brace-expansion@2.0.3:
     resolution: {integrity: sha512-MCV/fYJEbqx68aE58kv2cA/kiky1G8vux3OR6/jbS+jIMe/6fJWa0DTzJU7dqijOWYwHi1t29FlfYI9uytqlpA==}
@@ -2551,9 +2558,18 @@ packages:
     resolution: {integrity: sha512-JmXMZ6wuvDmLiHEml9ykzqO6lwFbof0GG4IkcGaENdCRDDmMVnny7s5HsIgHCbaq0w2MyPhDqkhTUgS2LU2PHA==}
     engines: {node: '>=0.8.19'}
 
+  is-alphabetical@2.0.1:
+    resolution: {integrity: sha512-FWyyY60MeTNyeSRpkM2Iry0G9hpr7/9kD40mD/cGQEuilcZYS4okz8SN2Q6rLCJ8gbCt6fN+rC+6tMGS99LaxQ==}
+
+  is-alphanumerical@2.0.1:
+    resolution: {integrity: sha512-hmbYhX/9MUMF5uh7tOXyK/n0ZvWpad5caBA17GsC6vyuCqaWliRG5K1qS9inmUhEMaOBIW7/whAnSwveW/LtZw==}
+
   is-buffer@2.0.5:
     resolution: {integrity: sha512-i2R6zNFDwgEHJyQUtJEk0XFi1i0dPFn/oqjK3/vPCcDeJvW5NQ83V8QbicfF1SupOaB0h8ntgBC2YiE7dfyctQ==}
     engines: {node: '>=4'}
+
+  is-decimal@2.0.1:
+    resolution: {integrity: sha512-AAB9hiomQs5DXWcRB1rqsxGUstbRroFOPPVAomNk/3XHR5JyEZChOyTWe2oayKnsSsr/kcGqF+z6yuH6HHpN0A==}
 
   is-extglob@2.1.1:
     resolution: {integrity: sha512-SbKbANkN603Vi4jEZv49LeVJMn4yGwsbzZworEoyEiutsN3nJYdbO36zfhGJ6QEDpOZIFkDtnq5JRxmvl3jsoQ==}
@@ -4543,13 +4559,16 @@ snapshots:
   '@oxc-resolver/binding-win32-x64-msvc@11.19.1':
     optional: true
 
+  '@pagefind/component-ui@1.5.0':
+    dependencies:
+      adequate-little-templates: 1.0.2
+      bcp-47: 2.1.0
+
   '@pagefind/darwin-arm64@1.5.0':
     optional: true
 
   '@pagefind/darwin-x64@1.5.0':
     optional: true
-
-  '@pagefind/default-ui@1.5.0': {}
 
   '@pagefind/freebsd-x64@1.5.0':
     optional: true
@@ -5144,6 +5163,8 @@ snapshots:
 
   acorn@8.16.0: {}
 
+  adequate-little-templates@1.0.2: {}
+
   agent-base@6.0.2:
     dependencies:
       debug: 4.4.3
@@ -5221,6 +5242,12 @@ snapshots:
   balanced-match@4.0.4: {}
 
   baseline-browser-mapping@2.10.14: {}
+
+  bcp-47@2.1.0:
+    dependencies:
+      is-alphabetical: 2.0.1
+      is-alphanumerical: 2.0.1
+      is-decimal: 2.0.1
 
   brace-expansion@2.0.3:
     dependencies:
@@ -5794,7 +5821,16 @@ snapshots:
 
   imurmurhash@0.1.4: {}
 
+  is-alphabetical@2.0.1: {}
+
+  is-alphanumerical@2.0.1:
+    dependencies:
+      is-alphabetical: 2.0.1
+      is-decimal: 2.0.1
+
   is-buffer@2.0.5: {}
+
+  is-decimal@2.0.1: {}
 
   is-extglob@2.1.1: {}
 
