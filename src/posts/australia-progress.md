@@ -219,6 +219,8 @@ description: What the Australian chapter of PauseAI has been doing and needs hel
 ### 2025 July
 
 - ✅Volunteer Mark Brown [brought OpenAI to the attention of the Australian Federal Police and the Attorney-General of Australia](https://drive.google.com/file/d/1t9ntUlF2cZH4_f-1fsp0FFCf3RiGZ81g/view?usp=drive_link), alleging potential breaches of the _Crimes (Biological Weapons) Act 1976_. It was discussed in a [news story](https://ia.acs.org.au/article/2025/is-the-new-chatgpt-agent-really-a-weapons-risk-.html) and on [a video podcast](https://youtu.be/-YPhNdpA8Rk).
+- Met Laura Nuttall MLA to discuss researcher predictions of extinction risk from future AI.
+- Contacted Mark Parton MLA, who asked Minister Stephen-Smith & the Digital Canberra Directorate in a Budget Estimates Hearing about OpenAI’s admitting that their ChatGPT Agent could aid novices in the development of biological weapons.
 
 ### 2025 February
 
