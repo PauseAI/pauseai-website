@@ -11,6 +11,7 @@ description: What the Australian chapter of PauseAI has been doing and needs hel
   - Help out with [evergreen tasks](/australia)
   - Tell us [what you did](mailto:australia@pauseai.info?subject=Aussie%20Did%20a%20Thing) so we can add it, or [what you have cooking](mailto:australia@pauseai.info?subject=Things%20Cooking) so we can support you!
 - Ashley takee on volunteer role of Digital Marketing
+
 <div style="display:flex; flex-wrap:wrap; gap:0.5rem; max-width:90%; margin:1rem auto;">
 <div style="flex:1; min-width:200px;">
 
@@ -23,6 +24,7 @@ description: What the Australian chapter of PauseAI has been doing and needs hel
 - Released newsletter on getting your MPs to sign Superintelligence Statement.
 - Emailed all Liberal MPs and Senators advising them on x-risk.
 - We attended the Canberra Innovation Network's book launch event. Chief Minister Andrew Barr raised the importance of managing risk when deploying AI in government. Afterwards we spoke to the book author John Howard, who agreed that guardrails are essential when deploying AI.
+
 <div style="display:flex; flex-wrap:wrap; gap:0.5rem; max-width:90%; margin:1rem auto;">
 <div style="flex:1; min-width:200px;">
 
@@ -182,6 +184,7 @@ description: What the Australian chapter of PauseAI has been doing and needs hel
 </div>
 
 - Ran a stall at EAGxAustralasia
+
 <div style="display:flex; flex-wrap:wrap; gap:0.5rem; max-width:90%; margin:1rem auto;">
 <div style="flex:1; min-width:200px;">
 
