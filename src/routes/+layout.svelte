@@ -26,6 +26,7 @@
 	import PageTransition from './transition.svelte'
 	import bannerSelection from './banner-selection.js?raw'
 	import themeSelection from './theme-selection.js?raw'
+	import hydrationAwareClick from './hydration-aware-click.js?raw'
 	import type { PageData } from './$types'
 
 	export let data: PageData
@@ -35,6 +36,8 @@
 	$: hero = deLocalizeHref($page.url.pathname) === '/'
 
 	onMount(async () => {
+		document.documentElement.removeAttribute('data-waiting')
+
 		const searchString = window.location.search
 		const response = await fetch('/api/geo' + searchString)
 		if (!response.ok) return
@@ -109,6 +112,9 @@
 
 	<!-- eslint-disable-next-line svelte/no-at-html-tags not vulnerable against XSS -->
 	{@html `<${'script'}>${sanitizeScript(themeSelection)}</script>`}
+
+	<!-- eslint-disable-next-line svelte/no-at-html-tags not vulnerable against XSS -->
+	{@html `<${'script'}>${sanitizeScript(hydrationAwareClick)}</script>`}
 
 	<!-- eslint-disable-next-line svelte/no-at-html-tags not vulnerable against XSS -->
 	{@html `<${'script'}>${sanitizeScript(bannerSelection)}</script>`}

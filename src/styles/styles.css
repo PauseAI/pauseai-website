@@ -88,6 +88,16 @@ html {
 	font-size: 1.2rem;
 }
 
+html[data-waiting='true'],
+html[data-waiting='true'] * {
+	cursor: progress !important;
+}
+
+html[data-waiting='true'] body {
+	opacity: 0.85;
+	transition: opacity 0.2s ease-in-out;
+}
+
 img {
 	border-radius: var(--radius-3);
 }

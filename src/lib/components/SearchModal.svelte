@@ -8,8 +8,9 @@
 
 	let theme: 'light' | 'dark' = 'light'
 	let modalEl: PagefindModal | null = null
+	let ready = false
 
-	$: if (browser && open && modalEl) {
+	$: if (browser && open && modalEl && ready) {
 		modalEl.open()
 		open = false
 	}
@@ -54,6 +55,7 @@
 				// eslint-disable-next-line @typescript-eslint/no-unsafe-call -- Can't resolve PagefindModal
 				modalEl.register(instance)
 			}
+			ready = true
 		}
 		void init()
 

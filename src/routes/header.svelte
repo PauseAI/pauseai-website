@@ -32,7 +32,13 @@
 	<!-- <NavLink href="/about">About</NavLink> -->
 	<Navlink {inverted} c2a href="/join">{m.header_join()}</Navlink>
 	<LanguageSwitcher {inverted} />
-	<button onclick={openSearch} class="reset-button" aria-label="Search">
+	<button
+		id="search-button"
+		onclick={openSearch}
+		class="reset-button"
+		aria-label="Search"
+		data-hydrate-click
+	>
 		<Navlink {inverted}>
 			<SearchIcon size="0.8em" />
 		</Navlink>
