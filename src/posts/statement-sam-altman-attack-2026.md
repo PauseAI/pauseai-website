@@ -5,13 +5,11 @@ description: PauseAI unequivocally condemns the attack on Sam Altman's home and
 date: 2026-04-12
 ---
 
-## Statement on the Attack on Sam Altman's Residence
-
 On 10 April 2026, the home of OpenAI's CEO, Sam Altman was attacked with an incendiary weapon. A suspect has been arrested and is in police custody.
 
 **Pause AI unequivocally condemn this attack and all forms of violence, intimidation, and harassment.** We wish safety and peace to Sam Altman, his family, and everyone affected. PauseAI exists because we believe everyone deserves to be safe, including Sam Altman and his loved ones. Violence against anyone is antithetical to everything we stand for.
 
-### Suspect's connection to PauseAI
+## Suspect's connection to PauseAI
 
 A few online commentators have described the suspect as a "PauseAI activist." Here are the facts:
 
@@ -24,7 +22,7 @@ A few online commentators have described the suspect as a "PauseAI activist." He
 
 Our Discord server is a public community space. As with any open forum, people can join freely. We actively moderate our channels and take enforcement seriously, as our warning to this individual demonstrates. But we cannot predict or control the actions of every person who joins a public server; no organisation can.
 
-### Why PauseAI exists
+## Why PauseAI exists
 
 Concern about the risks of advanced AI is not a fringe position. As Professor Stuart Russell has observed, it constitutes the consensus view amongst the field's foremost experts. This position is shared by leading AI researchers, members of US Congress and UK Parliament, institutions like the Bank of England, and many of the very AI developers building these systems.
 
@@ -34,13 +32,13 @@ When people are genuinely afraid for their future, they look for ways to act. Pa
 
 The alternative to organised, peaceful movements is not silence. It is isolated, desperate individuals acting alone, without community, without accountability, and without anyone urging restraint or offering peaceful paths for action. That is a far more dangerous world, and it is exactly the world we are striving to prevent.
 
-### On those using this tragedy to discredit AI safety advocacy
+## On those using this tragedy to discredit AI safety advocacy
 
 We have noticed that a handful of commentators have seized on this incident to paint the broader movement for AI safety as dangerous or extremist. This is as opportunistic as it is wrong.
 
 Advocating for safety, regulation, and democratic oversight of powerful technologies is a legitimate and necessary part of public life. Attempting to discredit peaceful advocacy by associating it with the actions of a lone individual is a disservice to public discourse, and to the serious conversation the world needs to be having about AI.
 
-### Our commitment
+## Our commitment
 
 PauseAI will continue to build a peaceful, democratic, global movement advocating for the safe development of AI. We will continue to condemn violence in all its forms. We will continue to keep our community spaces moderated and our standards clear.
 
