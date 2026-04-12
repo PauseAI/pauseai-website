@@ -6,9 +6,31 @@ description: What the Australian chapter of PauseAI has been doing and needs hel
 
 ### 2026 April - help needed🙏
 
-- Join our meetup where we kickoff our next campaign! We also need ideas on how to use social media better.
-- Help out with [evergreen tasks](/australia)
-- Tell us [what you did](mailto:australia@pauseai.info?subject=Aussie%20Did%20a%20Thing) so we can add it, or [what you have cooking](mailto:australia@pauseai.info?subject=Things%20Cooking) so we can support you!
+- Upcoming
+  - Join our [meetup](https://luma.com/PauseAIAustralia?e=evt-G4AIOYYBHfJUYhc) where we kickoff our next campaign! We also need help setting up Aussie designs for merch.
+  - Help out with [evergreen tasks](/australia)
+  - Tell us [what you did](mailto:australia@pauseai.info?subject=Aussie%20Did%20a%20Thing) so we can add it, or [what you have cooking](mailto:australia@pauseai.info?subject=Things%20Cooking) so we can support you!
+- Ashley takee on volunteer role of Digital Marketing
+
+<div style="display:flex; flex-wrap:wrap; gap:0.5rem; max-width:90%; margin:1rem auto;">
+<div style="flex:1; min-width:200px;">
+
+![20260403_AshleyVolunteerJoining](/australia/20260403_AshleyVolunteerJoining.jpg)
+
+</div>
+</div>
+
+- Released newsletter on getting your MPs to sign Superintelligence Statement.
+- Emailed all Liberal MPs and Senators advising them on x-risk.
+- We attended the Canberra Innovation Network's book launch event. Chief Minister Andrew Barr raised the importance of managing risk when deploying AI in government. Afterwards we spoke to the book author John Howard, who agreed that guardrails are essential when deploying AI.
+
+<div style="display:flex; flex-wrap:wrap; gap:0.5rem; max-width:90%; margin:1rem auto;">
+<div style="flex:1; min-width:200px;">
+
+![20260408-1629_CBRIN_PeterWithJohnHoward.jpg](/australia/20260408-1629_CBRIN_PeterWithJohnHoward.jpg)
+
+</div>
+</div>
 
 ### 2026 March
 
@@ -23,7 +45,6 @@ description: What the Australian chapter of PauseAI has been doing and needs hel
 ![Volunteer at CAPaD](/australia/20260308_CAPaD_CommunityAssemblyRepresenting.jpg)
 
 </div>
-
 </div>
 
 - Reached out to correct an error in [The Daily Aus' reporting on the Pentagon’s dispute with Anthropic](https://thedailyaus.com.au/podcast/the-fight-over-how-ai-is-used-in-war).
@@ -67,15 +88,16 @@ description: What the Australian chapter of PauseAI has been doing and needs hel
 ![202602_ACTWorkshopPeter.jpg](/australia/202602_ACTWorkshopPeter.jpg)
 
 </div>
-
 </div>
 
 - Publicly [asked Senator Pocock](https://www.youtube.com/live/SwDolSOMrac?si=GOtvYibfWyGuxK06&t=3820) how our government will deal with mass unemployment.
 
-<div style="max-width:80%; margin:1rem auto;">
+<div style="display:flex; flex-wrap:wrap; gap:0.5rem; max-width:90%; margin:1rem auto;">
+<div style="flex:1; min-width:200px;">
 
 ![20260225-1847_PocockTownhallAIQuestionHighlighted.jpg](/australia/20260225-1847_PocockTownhallAIQuestionHighlighted.jpg)
 
+</div>
 </div>
 
 - ✅Publicly asked Andrew Leigh (Assistant Minister, MP) at his book event whether AI researcher predictions of existential risk mean we should have red lines for AI development, [he said yes](https://podcasts.apple.com/au/podcast/discussing-the-shortest-history-of-innovation-with/id773694947)! (43m 40s - 46m 20s)
@@ -83,18 +105,22 @@ description: What the Australian chapter of PauseAI has been doing and needs hel
 - Reached out to organisations: ACT Conservation Council and ACT Greens about their datacentre policies.
 - Asked Minister Orr about the ACT Government's datacentre policy at the ACT Conservation Council townhall.
 
-<div style="max-width:80%; margin:1rem 1rem 1rem 0;">
+<div style="display:flex; flex-wrap:wrap; gap:0.5rem; max-width:90%; margin:1rem auto;">
+<div style="flex:1; min-width:200px;">
 
 ![20260218_MinisterOrrQuestionAtACTConservationCouncilTownhall.jpg](/australia/20260218_MinisterOrrQuestionAtACTConservationCouncilTownhall.jpg)
 
 </div>
+</div>
 
 - Attended Melbourne's presentation on Fixing Australian Philanthropy.
 
-<div style="max-width:80%; margin:1rem 1rem 1rem 0;">
+<div style="display:flex; flex-wrap:wrap; gap:0.5rem; max-width:90%; margin:1rem auto;">
+<div style="flex:1; min-width:200px;">
 
 ![20260225_MELB_MarkAtDGRPresentation.jpg](/australia/20260225_MELB_MarkAtDGRPresentation.jpg)
 
+</div>
 </div>
 
 - Handed out flyers at University of Canberra's Open Day.
@@ -108,16 +134,32 @@ description: What the Australian chapter of PauseAI has been doing and needs hel
 
 ### 2025 December
 
-- ✅Australian AI Safety Institute announced! This was one of our 3 main policy goals. Two to go: international AI treaty, and AI guardrails.
-- ✅Emails from PauseAI Australia volunteers and a question at a live townhall event prompted five politicians to sign the [Future of Life Institute Superintelligence Statement](https://www.linkedin.com/feed/update/urn:li:activity:7408047524902572032).
-  Watch the moment at the townhall [on YouTube](https://youtu.be/SbqUEhJt5RU?si=CSVML0vatdW-GBEh).
+- ✅Australian AI Safety Institute (AISI) announced! This was one of our 3 main policy goals. Two to go: international AI treaty, and AI guardrails.
+- ✅Emails from PauseAI Australia volunteers and a [question at a live townhall](https://youtu.be/SbqUEhJt5RU?si=CSVML0vatdW-GBEh) prompted five politicians to sign the [Future of Life Institute's Superintelligence Statement](https://www.linkedin.com/feed/update/urn:li:activity:7408047524902572032).
+- Minister of Industry [responds to petition EN7777](https://epetitions.aph.gov.au/api/ministerialresponse/download/EN7777), declining to commit to mandatory independent safety evaluations nor to advocate for an international pause treaty, instead pointing to voluntary measures.
 
 ### 2025 November
 
 - ✅Publicly asked Senator Pocock to sign Superintelligence Statement, and [he agreed](https://youtu.be/SbqUEhJt5RU)!
-  ![20251209_PocockTownhall_SelfiesPeterDavid.jpg](/australia/20251209_PocockTownhall_SelfiesPeterDavid.jpg)
+
+<div style="display:flex; flex-wrap:wrap; gap:0.5rem; max-width:90%; margin:1rem auto;">
+<div style="flex:1; min-width:200px;">
+
+![20251209_PocockTownhall_SelfiesPeterDavid.jpg](/australia/20251209_PocockTownhall_SelfiesPeterDavid.jpg)
+
+</div>
+</div>
+
 - 5 people from Australia participated in the PauseAI photo petition.
-  ![2025-11_PhotoPetition.jpg](/australia/2025-11_PhotoPetition.jpg)
+
+<div style="display:flex; flex-wrap:wrap; gap:0.5rem; max-width:90%; margin:1rem auto;">
+<div style="flex:1; min-width:200px;">
+
+![2025-11_PhotoPetition.jpg](/australia/2025-11_PhotoPetition.jpg)
+
+</div>
+</div>
+
 - Ran a stall at SouthFest. 34 people stopped for >1min chat, 2 submitted selfies to our photo petition.
 
 <div style="display:flex; flex-wrap:wrap; gap:0.5rem; max-width:90%; margin:1rem auto;">
@@ -131,10 +173,17 @@ description: What the Australian chapter of PauseAI has been doing and needs hel
 ![20251115_SouthFestStall_David.jpg](/australia/20251115_SouthFestStall_David.jpg)
 
 </div>
-
 </div>
 
 - Ran a stall at EAGxAustralasia
+
+<div style="display:flex; flex-wrap:wrap; gap:0.5rem; max-width:90%; margin:1rem auto;">
+<div style="flex:1; min-width:200px;">
+
+![20251128-1659_EAGxStallMichaelSetup.jpg](/australia/20251128-1659_EAGxStallMichaelSetup.jpg)
+
+</div>
+</div>
 
 ### 2025 October
 
@@ -151,27 +200,45 @@ description: What the Australian chapter of PauseAI has been doing and needs hel
 
 - Met Caitlin Tough MLA and her advisor to discuss AI impacts on mental health & democracy.
 
-<div style="max-width:80%; margin:1rem 1rem 1rem 0;">
+<div style="display:flex; flex-wrap:wrap; gap:0.5rem; max-width:90%; margin:1rem auto;">
+<div style="flex:1; min-width:200px;">
 
 ![20250825_PeterAboutToMeetCaitlinToughMLA.jpg](/australia/20250825_PeterAboutToMeetCaitlinToughMLA.jpg)
 
+</div>
 </div>
 
 ### 2025 July
 
 - ✅Volunteer Mark Brown [brought OpenAI to the attention of the Australian Federal Police and the Attorney-General of Australia](https://drive.google.com/file/d/1t9ntUlF2cZH4_f-1fsp0FFCf3RiGZ81g/view?usp=drive_link), alleging potential breaches of the _Crimes (Biological Weapons) Act 1976_. It was discussed in a [news story](https://ia.acs.org.au/article/2025/is-the-new-chatgpt-agent-really-a-weapons-risk-.html) and on [a video podcast](https://youtu.be/-YPhNdpA8Rk).
+- Met Laura Nuttall MLA to discuss researcher predictions of extinction risk from future AI.
+- Contacted Mark Parton MLA, who asked Minister Stephen-Smith & the Digital Canberra Directorate in a Budget Estimates Hearing about OpenAI’s admitting that their ChatGPT Agent could aid novices in the development of biological weapons.
 
 ### 2025 February
 
 - ✅Volunteers in Melbourne protested the missed opportunity of the Paris AI Action Summit. The protest received [coverage](https://www.smh.com.au/technology/most-dangerous-technology-ever-protesters-urge-ai-pause-20250207-p5laaq.html) in the Nine newspapers.
-  ![20250208_144134_MelbProtest.jpg](/australia/20250208_144134_MelbProtest.jpg)
+
+<div style="display:flex; flex-wrap:wrap; gap:0.5rem; max-width:90%; margin:1rem auto;">
+<div style="flex:1; min-width:200px;">
+
+![20250208_144134_MelbProtest.jpg](/australia/20250208_144134_MelbProtest.jpg)
+
+</div>
+</div>
 
 ## 2023
 
 ### 2023 February
 
 - Protested in Melbourne at Sam Altman's speaking event.
-  ![20230616_AusMelb_PauseAIProtestAltman_Michael.jpg](/australia/20230616_AusMelb_PauseAIProtestAltman_Michael.jpg)
+
+<div style="display:flex; flex-wrap:wrap; gap:0.5rem; max-width:90%; margin:1rem auto;">
+<div style="flex:1; min-width:200px;">
+
+![20230616_AusMelb_PauseAIProtestAltman_Michael.jpg](/australia/20230616_AusMelb_PauseAIProtestAltman_Michael.jpg)
+
+</div>
+</div>
 
 ## Connect on social media
 
