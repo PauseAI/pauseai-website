@@ -18,7 +18,7 @@ if (
 import { type Handle, type HandleServerError } from '@sveltejs/kit'
 import { env } from '$env/dynamic/public'
 import { paraglideMiddleware } from '$lib/paraglide/server.js'
-import { SENTRY_RELEASE } from '$lib/sentry'
+import { SENTRY_RELEASE, isIgnored404 } from '$lib/sentry'
 
 let Sentry: typeof import('@sentry/deno') | undefined
 
@@ -54,7 +54,8 @@ export { handle }
 
 export const handleError: HandleServerError = ({ error, event, status, message }) => {
 	console.error(error)
-	if (Sentry) {
+	const isIgnored = status === 404 && isIgnored404(event.url.pathname)
+	if (Sentry && !isIgnored) {
 		Sentry.captureException(error, {
 			extra: {
 				status,
