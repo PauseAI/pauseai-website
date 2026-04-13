@@ -9,20 +9,17 @@ Globally halt frontier AI development until we know how to do it safely and unde
 
 ## What are our values?
 
-- **Humanity first**. We believe that AI should be developed in a way that benefits humanity, or not at all.
-- **Community**. A feeling of community doesn't just come from a shared goal (e.g. pausing AI) or values, but also from social activity. That's why it's important to get people to meet, organize events, have social gatherings and create IRL friendships. It's not just about constructive action, it's about making friends and feeling at home with a group.
-- **Anyone can contribute.** Many AI safety / AI governance organizations rely solely on their group of paid employees. This has its merits, but it leaves a gap of volunteers. That's where PauseAI is different. By fostering volunteers and encouraging action we can get stuff done even without a lot of funding.
-- **Transparency by default.** Do and discuss things publicly and openly, unless there's a good reason not to. Meetings are open to join, the website is open source, and the Discord server is joinable. Being approachable lowers the barrier to feel welcome and help out.
-- **Honesty.** We don't have any weird incentives (e.g. having a stake in an AI company), so we are free to say what we believe. We do not sugarcoat our message to make it more palatable.
-- **Diversity in risks, uniformity in desires.** Whether you're worried about x-risk, cybersecurity hazards or the impact of AI on our democracy: we are unified in our desire to pause AI development.
-- **No partisan politics**. Humans are tribal creatures, which causes us to bundle viewpoints into groups (left/right). AI safety is not _that_ partisan (yet), and we want to keep it that way. We do not let our other political views distract us from our combined goal.
-- **Using AI is ok**. Even though we want to halt frontier AI development, we're still OK with using AI in ways that helps us achieve our goals. AI models already translate our website and help to improve it technically. We don't want [purity spirals](https://en.wiktionary.org/wiki/purity_spiral) about being against AI.
+Our values are numbered in order of priority. When two values pull in different directions, the higher one wins. We expect anyone in the movement to respect them at all time, and be able to invoke them by number to resolve a disagreement.
 
-## What type of culture do we want to foster?
-
-- **Action-oriented**. We want to be a group that gets stuff done. The perfect is the enemy of the good. We cannot give in to the comfort of just talking about things. We need to act.
-- **Friendly**. We want to be a group that people like to be part of. We want to be welcoming to new members.
-- **Open**. We want to be open to new ideas, new people, new ways of doing things. We want to be open to criticism. Our goal is to prevent AI risks. We should be open to the possibility that we're wrong about how to do that.
-- **Reasonable**. Because our concerns are often dismissed as crazy, we need to be extra careful to not *look* crazy. Emphasize that many people in our group have technical backgrounds. Show that we know what we're talking about.
+1. **Non-violence.** We will never use, encourage, or tolerate violence, including property damage, threats, or jokes about violence. Our movement is strictly peaceful and legal. One violation anywhere damages everyone everywhere.
+2. **Humanity first.** AI should be developed in a way that benefits humanity, or not at all. This is why we exist.
+3. **Intellectual rigour.** We represent the state of knowledge as accurately as we can. We acknowledge uncertainty, and do not overstate claims to win arguments. We are open to criticism and to the possibility that we're wrong about how best to achieve our goals. Our credibility depends on this.
+4. **Honesty.** We have no hidden stakes or conflicts of interest, so we are free to say what we believe. We do not sugarcoat our message to make it more palatable.
+5. **Diversity in risks, unity in action.** Whether you are worried about existential risk, cybersecurity, job loss, or threats to democracy, we are united in our desire to pause frontier AI development. We set aside our differences to advance our shared goal.
+6. **No partisan politics.** AI safety is not yet a left/right issue and we intend to keep it that way. We do not let other political views distract from our mission.
+7. **Transparency by default.** We do and discuss things publicly and openly, unless there is a good reason not to. Our website is open source, our community spaces are joinable, and our reasoning is published. Being approachable lowers the barrier to joining.
+8. **Bias for action.** We do not wait for perfection before acting. We encourage initiative and get things done even without a great deal of funding. The perfect is the enemy of the good.
+9. **Community and inclusivity.** A movement runs on relationships. We are volunteer-driven, and anyone can contribute. We create welcoming spaces for people to meet, connect, and feel at home. Everyone, regardless of background, has their place here.
+10. **Using AI is acceptable.** Even though we want to halt frontier AI development, we are still comfortable using existing AI in ways that help us achieve our goals. We do not do purity spirals.
 
 _Related: our [Code of Conduct](/code-of-conduct) and [Protesters Code of Conduct](/protesters-code-of-conduct)_
