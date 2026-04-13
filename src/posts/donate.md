@@ -70,6 +70,8 @@ All US-based credit card transactions have an added 2.9% + $0.30 payment process
 
 ## Crypto
 
+We do not have an official token. Any coins branded with our name are unaffiliated with us. Please only donate native cryptocurrencies.
+
 - Solana `9isSiDuKRkpiui6LzHyVoFiJ3LuV5LVpsdpH2YzD13dy`
 - Ethereum `0x01c9646d376408cD77599d1a0860eC38E6928F1b`
 - Base `0x01c9646d376408cD77599d1a0860eC38E6928F1b`
