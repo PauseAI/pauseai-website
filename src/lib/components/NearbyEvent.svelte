@@ -49,7 +49,7 @@
 	}
 
 	async function fetchLuma(): Promise<CalendarResponse> {
-		const response = await fetch('/api/calendar')
+		const response = await fetch('/api/calendar?days=30')
 		return (await response.json()) as CalendarResponse
 	}
 </script>
