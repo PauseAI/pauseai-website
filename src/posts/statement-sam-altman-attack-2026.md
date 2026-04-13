@@ -30,18 +30,18 @@ That concern is growing because the risks are real. [Most people](https://future
 
 When people are genuinely afraid for their future, they look for ways to act. PauseAI exists to ensure they have a constructive, peaceful, and democratic pathway for action. We organise protests, petitions, policy advocacy, and public education. Every day, we work to channel growing public concern into nonviolent civic participation. We call on the world's decision makers to play their part in the democratic process in response to citizens choosing lawful, nonviolent engagement pathways.
 
-The alternative to organised, peaceful movements is not silence. It is isolated, desperate individuals acting alone, without community, without accountability, and without anyone urging restraint or offering peaceful paths for action. That is a far more dangerous world, and it is exactly the world we are striving to prevent.
+The alternative to organised, peaceful movements is not silence. It is isolated, desperate individuals acting alone, without community, without accountability and without anyone urging restraint or offering peaceful paths for action. That is a far more dangerous world and it is exactly the world we are striving to prevent.
 
 ## On those using this tragedy to discredit AI safety advocacy
 
 We have noticed that a handful of commentators have seized on this incident to paint the broader movement for AI safety as dangerous or extremist. This is as opportunistic as it is wrong.
 
-Advocating safety, regulation and democratic oversight of powerful technologies is a legitimate and necessary part of public life. Attempting to discredit peaceful advocacy by associating it with the actions of a lone individual is a disservice to public discourse, and to the serious conversation the world needs to be having about AI.
+Advocating safety, regulation and democratic oversight of powerful technologies is a legitimate and necessary part of public life. Attempting to discredit peaceful advocacy by associating it with the actions of a lone individual is a disservice to public discourse and to the serious conversation the world needs to be having about AI.
 
 ## Our commitment
 
 PauseAI will continue to build a peaceful, democratic, global movement advocating for the safe development of AI. We will continue to condemn violence in all its forms. We will continue to keep our community spaces moderated and our standards clear.
 
-We welcome scrutiny of our organisation, our methods, and our values. We have nothing to hide.
+We welcome scrutiny of our organisation, our methods and our values. We have nothing to hide.
 
-If any journalist, investigator, or member of the public would like to speak with us, we encourage you to reach out at press@pauseai.info.
+If any journalist, investigator or member of the public would like to speak with us, we encourage you to reach out at press@pauseai.info.
