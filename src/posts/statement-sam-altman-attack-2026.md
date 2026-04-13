@@ -40,7 +40,7 @@ Advocating safety, regulation and democratic oversight of powerful technologies 
 
 ## Our commitment
 
-PauseAI will continue to build a peaceful, democratic, global movement advocating for the safe development of AI. We will continue to condemn violence in all its forms. We will continue to keep our community spaces moderated and our standards clear.
+PauseAI will continue to build a peaceful, democratic, global movement advocating the safe development of AI. We will continue to condemn violence in all its forms. We will continue to keep our community spaces moderated and our standards clear.
 
 We welcome scrutiny of our organisation, our methods and our values. We have nothing to hide.
 
