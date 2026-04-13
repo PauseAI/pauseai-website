@@ -658,6 +658,12 @@
 			"lat": -26.7167,
 			"lon": 27.1,
 			"link": "$$DISCORD_GLOBAL$$"
+		},
+		{
+			"name": "Brno",
+			"link": "pauseai.cz",
+			"lat": 49.19522,
+			"lon": 16.60796
 		}
 	]
 }
