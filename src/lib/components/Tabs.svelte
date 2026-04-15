@@ -190,6 +190,149 @@
 		text-decoration: underline;
 	}
 
+	/* Action card grid layout */
+	.tab-content :global(.action-cards) {
+		display: grid;
+		grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+		gap: 1rem;
+		margin-top: 0.5rem;
+	}
+
+	.tab-content :global(.action-card) {
+		background: var(--bg-subtle);
+		border-radius: 12px;
+		padding: 1.25rem;
+		display: flex;
+		flex-direction: column;
+		gap: 0.5rem;
+		border: 2px solid transparent;
+		transition:
+			transform 0.2s ease,
+			box-shadow 0.2s ease,
+			border-color 0.2s ease;
+	}
+
+	.tab-content :global(.action-card:hover) {
+		transform: translateY(-3px);
+		box-shadow: 0 6px 20px rgba(0, 0, 0, 0.18);
+	}
+
+	.tab-content :global(.action-card-icon) {
+		width: 2.5rem;
+		height: 2.5rem;
+		background: var(--brand);
+		border-radius: 8px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		font-size: 1.2rem;
+		line-height: 1;
+		flex-shrink: 0;
+	}
+
+	.tab-content :global(.action-card-title) {
+		font-family: var(--font-heading);
+		font-weight: 700;
+		font-size: 1rem;
+		line-height: 1.2;
+		display: block;
+	}
+
+	.tab-content :global(.action-card-body) {
+		font-size: 0.9rem;
+		line-height: 1.55;
+		margin: 0;
+		color: var(--text);
+		opacity: 0.85;
+		flex: 1;
+	}
+
+	.tab-content :global(.action-card-body a) {
+		color: var(--brand);
+		text-decoration: underline;
+	}
+
+	/* Clickable card links — entire card acts as a link */
+	.tab-content :global(a.action-card-link) {
+		text-decoration: none;
+		color: inherit;
+		cursor: pointer;
+	}
+
+	.tab-content :global(a.action-card-link:hover) {
+		text-decoration: none;
+		border-color: var(--brand);
+		box-shadow: 0 6px 24px rgba(0, 0, 0, 0.22);
+	}
+
+	/* Newsletter signup block inside tab content */
+	.tab-content :global(.newsletter-signup) {
+		background-color: var(--bg-subtle);
+		border-radius: 8px;
+		padding: 1.5rem;
+		margin-top: 1.5rem;
+		width: 100%;
+		box-sizing: border-box;
+	}
+
+	.tab-content :global(.newsletter-content) {
+		max-width: 500px;
+	}
+
+	.tab-content :global(.newsletter-content h3) {
+		margin-top: 0;
+		margin-bottom: 0.5rem;
+		font-family: var(--font-heading);
+	}
+
+	.tab-content :global(.newsletter-content p) {
+		margin-bottom: 1rem;
+	}
+
+	.tab-content :global(.newsletter-input-group) {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 8px;
+	}
+
+	.tab-content :global(.newsletter-input-group input[type='email']) {
+		flex: 1;
+		padding: 0.75rem 1rem;
+		border: 1px solid var(--border);
+		border-radius: 4px;
+		font-size: 1rem;
+		background-color: var(--bg);
+		color: var(--text);
+	}
+
+	.tab-content :global(.newsletter-input-group button) {
+		padding: 0.75rem 1.5rem;
+		border: none;
+		border-radius: 4px;
+		font-weight: bold;
+		cursor: pointer;
+		transition: opacity 0.2s;
+		font-size: 1rem;
+		background-color: var(--brand);
+		color: var(--bg);
+	}
+
+	.tab-content :global(.newsletter-input-group button:hover) {
+		opacity: 0.9;
+	}
+
+	@media (max-width: 600px) {
+		.tab-content :global(.newsletter-input-group) {
+			flex-direction: column;
+		}
+
+		.tab-content :global(.newsletter-input-group input[type='email']),
+		.tab-content :global(.newsletter-input-group button) {
+			box-sizing: border-box;
+			width: 100%;
+		}
+	}
+
 	/* Mobile-specific adjustments */
 	@media (max-width: 768px) {
 		.tab-button {

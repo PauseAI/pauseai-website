@@ -24,13 +24,12 @@
 	<Navlink {inverted} href="/proposal">{m.header_proposal()}</Navlink>
 	<Navlink {inverted} href="/communities">{m.header_events()}</Navlink>
 	<Navlink {inverted} href="/faq">{m.header_faq()}</Navlink>
-	<Navlink {inverted} href="/action">{m.header_action()}</Navlink>
 	<Navlink {inverted} href="/donate">{m.header_donate()}</Navlink>
 	{#if enableBot}
 		<Navlink {inverted} href="/chat">{botName}</Navlink>
 	{/if}
 	<!-- <NavLink href="/about">About</NavLink> -->
-	<Navlink {inverted} c2a href="/join">{m.header_join()}</Navlink>
+	<Navlink {inverted} c2a href="/action">{m.header_action()}</Navlink>
 	<LanguageSwitcher {inverted} />
 	<button
 		id="search-button"
