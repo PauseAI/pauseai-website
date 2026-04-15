@@ -127,8 +127,8 @@ content: `
 		content: `
 <h3 class="toc-exclude">If you have experience with (international) law</h3>
 <ul>
-<li><strong>Help draft policy</strong>. <a href="https://www.campaignforaisafety.org/celebrating-the-winners-law-student-moratorium-treaty-competition/">Draft examples</a>. <a href="https://futureoflife.org/wp-content/uploads/2023/04/FLI_Policymaking_In_The_Pause.pdf">Some</a> <a href="https://www.openphilanthropy.org/research/12-tentative-ideas-for-us-ai-policy/">frameworks</a>.</li>
-<li><strong>Make submissions</strong> to government requests for comment on AI policy (<a href="https://ntia.gov/issues/artificial-intelligence/request-for-comments">example</a>).</li>
+<li><strong>Help draft policy</strong>. <a href="https://github.com/Campaign-for-AI-Safety-archive/.github/tree/main/moratorium-competition#">Draft examples</a>. <a href="https://futureoflife.org/wp-content/uploads/2023/04/FLI_Policymaking_In_The_Pause.pdf">Some</a> <a href="https://forum.effectivealtruism.org/posts/iiRGCydMX7aiEjvGm/12-tentative-ideas-for-us-ai-policy-luke-muehlhauser">frameworks</a>.</li>
+<li><strong>Make submissions</strong> to government requests for comment on AI policy (<a href="https://www.ntia.gov/issues/artificial-intelligence/stakeholder-engagement/request-for-comments">example</a>).</li>
 </ul>
 		`
 	},
