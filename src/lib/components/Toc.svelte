@@ -2,7 +2,7 @@
 	import Toc from 'svelte-toc'
 	import X from 'lucide-svelte/icons/x'
 	import List from 'lucide-svelte/icons/list'
-	import '$lib/components/Card.css'
+	import Card from '$lib/components/Card.svelte'
 	import Backdrop from '$lib/components/Backdrop.svelte'
 	import { onMount } from 'svelte'
 
@@ -87,35 +87,37 @@
 
 <!-- Mobile: Floating button with popup (hidden on desktop) -->
 <div
-	class="toc-wrapper card"
+	class="toc-wrapper"
 	class:hidden-on-desktop={desktop}
 	class:hidden={(headings?.length ?? 0) <= 1}
 >
-	<Toc
-		headingSelector=":is(h2, h3, h4):not(.toc-exclude):not(footer *):not(.tabs *):not(.tab-content *)"
-		title="Contents"
-		breakpoint={1250}
-		bind:open
-		bind:desktop
-		bind:headings
-		hide={(headings?.length ?? 0) <= 1}
-	>
-		<svelte:fragment slot="open-toc-icon">
-			<List size="2rem" />
-		</svelte:fragment>
-		<svelte:fragment slot="title">
-			<div class="toc-head">
-				<h2 class="toc-title-heading toc-exclude">Contents</h2>
-				<button
-					class="toc-close"
-					on:click={() => (open = false)}
-					aria-label="Close table of contents"
-				>
-					<X size="1.2rem" />
-				</button>
-			</div>
-		</svelte:fragment>
-	</Toc>
+	<Card>
+		<Toc
+			headingSelector=":is(h2, h3, h4):not(.toc-exclude):not(footer *):not(.tabs *):not(.tab-content *)"
+			title="Contents"
+			breakpoint={1250}
+			bind:open
+			bind:desktop
+			bind:headings
+			hide={(headings?.length ?? 0) <= 1}
+		>
+			<svelte:fragment slot="open-toc-icon">
+				<List size="2rem" />
+			</svelte:fragment>
+			<svelte:fragment slot="title">
+				<div class="toc-head">
+					<h2 class="toc-title-heading toc-exclude">Contents</h2>
+					<button
+						class="toc-close"
+						on:click={() => (open = false)}
+						aria-label="Close table of contents"
+					>
+						<X size="1.2rem" />
+					</button>
+				</div>
+			</svelte:fragment>
+		</Toc>
+	</Card>
 </div>
 
 <style>
