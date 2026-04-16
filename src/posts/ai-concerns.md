@@ -15,4 +15,4 @@ We are collecting perspectives from people from all walks of life about your top
 
 We know people have different comfort levels with sharing: you can choose whether PauseAI may contact you to clarify details, and whether your story (and any uploaded media) can be used publicly, either with your name, only anonymously, or not at all. If you give permission to follow up, we may reach out to confirm facts, details and consent, so we represent your story accurately.
 
-<NotionEmbed src="https://pauseai-global.notion.site/ebd//1fa23219e2e44eb9b2a3b01219bba793" title="AI Development Concerns Form" />
+<NotionEmbed src="https://pauseai-global.notion.site/ebd//1fa23219e2e44eb9b2a3b01219bba793" title="AI Development Concerns Form" height=2200 />
