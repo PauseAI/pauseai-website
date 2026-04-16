@@ -4,13 +4,12 @@ slug: australia-progress
 description: What the Australian chapter of PauseAI has been doing and needs help with
 ---
 
-### 2026 April - help needed🙏
+### 2026 April
 
 - Upcoming
-  - Join our [meetup](https://luma.com/PauseAIAustralia?e=evt-G4AIOYYBHfJUYhc) where we kickoff our next campaign! We also need help setting up Aussie designs for merch.
   - Help out with [evergreen tasks](/australia)
   - Tell us [what you did](mailto:australia@pauseai.info?subject=Aussie%20Did%20a%20Thing) so we can add it, or [what you have cooking](mailto:australia@pauseai.info?subject=Things%20Cooking) so we can support you!
-- Ashley takee on volunteer role of Digital Marketing
+- Ashley takes on volunteer role of Digital Marketing
 
 <div style="display:flex; flex-wrap:wrap; gap:0.5rem; max-width:90%; margin:1rem auto;">
 <div style="flex:1; min-width:200px;">
