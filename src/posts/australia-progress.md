@@ -188,6 +188,22 @@ description: What the Australian chapter of PauseAI has been doing and needs hel
 
 - ✅On 7 October 2025, PauseAI Australia held a book launch and discussion event at Smith's Alternative bookshop in Canberra to mark the release of [_If Anyone Builds It, Everyone Dies_](https://www.penguin.com.au/books/if-anyone-builds-it-everyone-dies-9781847928931). Laura Nuttall, MLA, and Peter Cain, MLA, joined the discussion and read excerpts from the book.
 - We attended online the Australian Academy of Science webinar on “[AI in science: the promise, perils and path forward – AI and our safety](https://science.org.au/news-events/events/ai-science-promise-perils-path-forward-ai-our-safety)”, publicly asking why they weren’t mentioning existential risk.
+- We trialled car magnets
+
+
+<div style="display:flex; flex-wrap:wrap; gap:0.5rem; max-width:90%; margin:1rem auto;">
+<div style="flex:1; min-width:200px;">
+
+![20251003_CarMagnetRace.webp](/australia/20251003_CarMagnetRace.webp)
+
+</div>
+<div style="flex:1; min-width:200px;">
+
+![20251003_CarMagnetBrakes.png](/australia/20251003_CarMagnetBrakes.png)
+
+</div>
+</div>
+
 
 ### 2025 September
 
