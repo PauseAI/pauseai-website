@@ -13,8 +13,8 @@ This Privacy Policy explains how [Stichting PauseAI](/legal) ("we," "us," "our")
 **Stichting PauseAI details:**
 
 - **Email:** [maxime@pauseai.info](mailto:maxime@pauseai.info)
-- **Address:** [Insert physical address of Stichting PauseAI]
-- **KVK Number:** [Insert Chamber of Commerce number]
+- **Address:** Box C5957, Kwikstaartlaan 42, 3704GS Zeist, The Netherlands
+- **KVK Number:** 92951031
 
 ## 2. Information We Collect
 
