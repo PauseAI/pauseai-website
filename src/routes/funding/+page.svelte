@@ -28,16 +28,8 @@
 		<ul>
 			{#each data.donors as d}
 				<li>
-					{d.amountEur.toLocaleString('en-US')} (
-					{#if d.url}
-						<Link href={d.url}>{d.source}</Link>
-					{:else}
-						{d.source}
-					{/if}
-					{#if donorSuffix(d)}
-						, {donorSuffix(d)}
-					{/if}
-					)
+					{d.amountEur.toLocaleString('en-US')} ({#if d.url}<Link href={d.url}>{d.source}</Link
+						>{:else}{d.source}{/if}{#if donorSuffix(d)}, {donorSuffix(d)}{/if})
 				</li>
 			{/each}
 		</ul>
