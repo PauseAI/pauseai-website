@@ -52,7 +52,7 @@
 		"axios-retry": "^4.5.0",
 		"cross-env": "^7.0.3",
 		"dotenv": "^16.6.1",
-		"eslint": "^10.2.0",
+		"eslint": "^10.2.1",
 		"eslint-config-flat-gitignore": "^2.3.0",
 		"eslint-config-prettier": "^10.1.8",
 		"eslint-formatter-gha": "^2.0.1",
