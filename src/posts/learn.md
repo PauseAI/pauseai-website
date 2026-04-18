@@ -63,6 +63,10 @@ import { CirclePause, CircleQuestionMark, Cog, Earth, Footprints, MessageSquareQ
 - [Robert Miles' YouTube](https://www.youtube.com/watch?v=tlS5Y2vm02c&list=PLfHsskCxi_g-c62a_dmsNuHynaXsRQm40) are a great place to start understanding the fundamentals of AI alignment.
 - [LethalIntelligence's YouTube](https://www.youtube.com/channel/UCLwop3J1O7wL-PNWGjQw8fg)
 
+## Documentaries
+
+- [The AI Doc: Or How I Became an Apocaloptimist](https://www.universalpicturesathome.com/movies/the-ai-doc-or-how-i-became-an-apocaloptimist). A documentary exploring AI risks and what it means to be cautiously hopeful about our future.
+
 ## Podcasts
 
 - [DoomDebates](https://www.youtube.com/@DoomDebates) by Liron Shapira, completely focused on AI doom.
