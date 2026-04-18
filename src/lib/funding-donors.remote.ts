@@ -4,5 +4,5 @@ import { fetchTopPublicDonors, type PublicDonor } from './server/notion-funding'
 const TOP_DONOR_COUNT = 15
 
 export const getTopPublicDonors = prerender(
-	async (): Promise<PublicDonor[]> => await fetchTopPublicDonors(TOP_DONOR_COUNT)
+	(): Promise<PublicDonor[]> => fetchTopPublicDonors(TOP_DONOR_COUNT)
 )
