@@ -36,6 +36,11 @@ const skipWarnings = [
 const config = {
 	extensions: ['.svelte', '.md'],
 	preprocess: [vitePreprocess({ script: true }), mdsvex(mdsvexOptions)],
+	compilerOptions: {
+		experimental: {
+			async: true
+		}
+	},
 	// Custom warning handler to selectively filter out specific a11y warnings
 	onwarn(warning, handler) {
 		// Skip specific accessibility warnings
@@ -61,6 +66,9 @@ const config = {
 			// Handle missing anchor IDs by warning instead of failing
 			handleMissingId: 'warn',
 			entries: ['*'].concat(settings.locales.map((locale) => '/' + locale))
+		},
+		experimental: {
+			remoteFunctions: true
 		}
 	}
 }
