@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { PressCoverage } from './notion.server'
+	import type { PressCoverage } from '$lib/press-coverage.remote'
 	import NewsCard from '$lib/components/NewsCard.svelte'
 	import type { NewsItem } from '$lib/types'
 
