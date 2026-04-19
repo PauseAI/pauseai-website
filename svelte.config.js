@@ -1,6 +1,7 @@
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- not designed for strong typing
 // @ts-nocheck
 
+import { parse, walk } from 'svelte/compiler'
 import adapterNetlify from '@sveltejs/adapter-netlify'
 import { vitePreprocess } from '@sveltejs/vite-plugin-svelte'
 import { mdsvex } from 'mdsvex'
@@ -35,7 +36,39 @@ const skipWarnings = [
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
 	extensions: ['.svelte', '.md'],
-	preprocess: [vitePreprocess({ script: true }), mdsvex(mdsvexOptions)],
+	preprocess: [
+		{
+			markup({ content }) {
+				let ast
+				try {
+					ast = parse(content)
+				} catch (err) {
+					return { code: content }
+				}
+
+				const comments = []
+				walk(ast.html, {
+					enter(node) {
+						if (node.type === 'Comment' && (!node.ignores || node.ignores.length === 0)) {
+							comments.push(node)
+						}
+					}
+				})
+
+				if (comments.length === 0) return { code: content }
+
+				let code = content
+				comments.sort((a, b) => b.start - a.start)
+				for (const comment of comments) {
+					code = code.slice(0, comment.start) + code.slice(comment.end)
+				}
+
+				return { code }
+			}
+		},
+		vitePreprocess({ script: true }),
+		mdsvex(mdsvexOptions)
+	],
 	// Custom warning handler to selectively filter out specific a11y warnings
 	onwarn(warning, handler) {
 		// Skip specific accessibility warnings
