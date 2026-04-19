@@ -1,7 +1,8 @@
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- not designed for strong typing
 // @ts-nocheck
 
-import { parse, walk } from 'svelte/compiler'
+import { walk } from 'estree-walker'
+import { parse } from 'svelte/compiler'
 import adapterNetlify from '@sveltejs/adapter-netlify'
 import { vitePreprocess } from '@sveltejs/vite-plugin-svelte'
 import { mdsvex } from 'mdsvex'

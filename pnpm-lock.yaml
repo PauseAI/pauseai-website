@@ -180,6 +180,9 @@ importers:
       eslint-plugin-svelte:
         specifier: ^3.17.0
         version: 3.17.0(eslint@10.2.1(jiti@2.6.1))(svelte@5.55.3)
+      estree-walker:
+        specifier: ^3.0.3
+        version: 3.0.3
       globals:
         specifier: ^16.5.0
         version: 16.5.0
