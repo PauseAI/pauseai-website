@@ -34,6 +34,7 @@
 	}
 </script>
 
+<!-- eslint-disable svelte/no-at-html-tags, @typescript-eslint/no-unused-expressions -->
 <svelte:head>
 	<title>{title}</title>
 	<meta name="description" content={description} />
@@ -55,9 +56,9 @@
 	<meta property="twitter:description" content={description} />
 	<meta property="twitter:site" content="@PauseAI" />
 	<meta property="twitter:creator" content="@PauseAI" />
-	<!-- eslint-disable-next-line svelte/no-at-html-tags (static content) @typescript-eslint/no-unused-expressions (false positive) -->
 	{@html '<script type="application/ld+json">' + JSON.stringify(schemaOrgMarkup) + '</script>'}
 </svelte:head>
+<!-- eslint-enable svelte/no-at-html-tags, @typescript-eslint/no-unused-expressions -->
 
 <div
 	style="display: none;"
