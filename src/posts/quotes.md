@@ -24,6 +24,7 @@ date: 2024-01-26
 {/each}
 
 {#if hasNotices}
+
 <h2>Background credits</h2>
 {#each quotes as quote}
 {#if quote.notice}
