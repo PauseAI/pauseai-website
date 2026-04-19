@@ -36,11 +36,6 @@ const skipWarnings = [
 const config = {
 	extensions: ['.svelte', '.md'],
 	preprocess: [vitePreprocess({ script: true }), mdsvex(mdsvexOptions)],
-	compilerOptions: {
-		experimental: {
-			async: true
-		}
-	},
 	// Custom warning handler to selectively filter out specific a11y warnings
 	onwarn(warning, handler) {
 		// Skip specific accessibility warnings
