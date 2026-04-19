@@ -2,7 +2,9 @@
 	import PressCoveragePanel from './PressCoveragePanel.svelte'
 	import { getPressCoverage } from '$lib/press-coverage.remote'
 
-	const { coverage, typeOrder, outletOrder } = await getPressCoverage()
+	const pressCoveragePromise = getPressCoverage()
 </script>
 
-<PressCoveragePanel {coverage} {typeOrder} {outletOrder} />
+{#await pressCoveragePromise then { coverage, typeOrder, outletOrder }}
+	<PressCoveragePanel {coverage} {typeOrder} {outletOrder} />
+{/await}
