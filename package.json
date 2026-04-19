@@ -110,6 +110,7 @@
 		"maplibregl-mapbox-request-transformer": "^0.0.2",
 		"micromark": "^4.0.2",
 		"pagefind": "^1.5.2",
+		"pure-rand": "^8.4.0",
 		"rehype-slug": "^5.1.0",
 		"remark-toc": "^9.0.0",
 		"remark-unwrap-images": "^3.0.1",

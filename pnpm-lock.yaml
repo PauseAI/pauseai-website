@@ -92,6 +92,9 @@ importers:
       pagefind:
         specifier: ^1.5.2
         version: 1.5.2
+      pure-rand:
+        specifier: ^8.4.0
+        version: 8.4.0
       rehype-slug:
         specifier: ^5.1.0
         version: 5.1.0
@@ -3221,6 +3224,9 @@ packages:
   punycode@2.3.1:
     resolution: {integrity: sha512-vYt7UD1U9Wg6138shLtLOvdAu+8DsC/ilFtEVHcH+wydcSpNE20AfSOduf6MkRFahL5FY7X1oU7nKVZFtfq8Fg==}
     engines: {node: '>=6'}
+
+  pure-rand@8.4.0:
+    resolution: {integrity: sha512-IoM8YF/jY0hiugFo/wOWqfmarlE6J0wc6fDK1PhftMk7MGhVZl88sZimmqBBFomLOCSmcCCpsfj7wXASCpvK9A==}
 
   queue-microtask@1.2.3:
     resolution: {integrity: sha512-NuaNSa6flKT5JaSYQzJok04JzTL1CA6aGhv5rfLW3PgqA+M2ChpZQnAC8h8i4ZFkBS8X5RqkDBHA7r4hej3K9A==}
@@ -6667,6 +6673,8 @@ snapshots:
   proxy-from-env@2.1.0: {}
 
   punycode@2.3.1: {}
+
+  pure-rand@8.4.0: {}
 
   queue-microtask@1.2.3: {}
 
