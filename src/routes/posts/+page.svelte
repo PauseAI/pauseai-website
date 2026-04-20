@@ -1,3 +1,4 @@
+<!-- @visualDiffEnabled: false — chronological listing; every new post would produce a noise diff -->
 <script lang="ts">
 	// import { formatDate } from '$lib/utils'
 	import { title } from '$lib/config'

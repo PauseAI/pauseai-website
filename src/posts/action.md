@@ -3,6 +3,8 @@ title: Take Action
 description: Ways to help reduce AI risk.
 ---
 
+<!-- @visualDiffEnabled: true — link-heavy post -->
+
 <script>
 import Tabs from '$lib/components/Tabs.svelte'
 </script>

@@ -15,6 +15,8 @@
 		"src/**/*.cjs",
 		"src/**/*.ts",
 		"src/**/*.svelte",
+		"tests/**/*.ts",
+		"playwright.config.ts",
 		"vite.config.js",
 		"vite.config.ts"
 	]

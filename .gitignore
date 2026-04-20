@@ -33,3 +33,12 @@ CLAUDE.md
 .env.sentry-build-plugin
 
 .prettierignore
+
+# Playwright
+/test-results
+/playwright-report
+
+# Chromatic (only produced by local CLI runs, not CI)
+/build-archive.log
+/chromatic.log
+/chromatic-diagnostics.json
