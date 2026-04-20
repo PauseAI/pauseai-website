@@ -79,7 +79,7 @@ export async function callCloudinaryAPI<T>(
 			} else if (typeof value === 'object' && value !== null) {
 				formData.append(key, JSON.stringify(value))
 			} else {
-				formData.append(key, String(value as string | number | boolean))
+				formData.append(key, String(value))
 			}
 		}
 	})
