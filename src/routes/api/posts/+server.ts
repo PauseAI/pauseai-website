@@ -2,7 +2,6 @@ import { json } from '@sveltejs/kit'
 import type { FrontmatterMeta, Post } from '$lib/types'
 import { outcomesMeta } from '../../outcomes/meta'
 import { communitiesMeta } from '../../communities/communities'
-import { meta as pdoomMeta } from '../../pdoom/meta'
 import { meta as quotesMeta } from '../../quotes/meta'
 import { meta as emailBuilderMeta } from '../../email-builder/meta'
 import { meta as statementMeta } from '../../statement/meta'
@@ -18,7 +17,6 @@ export type PostsApiResponse = Post[]
 const hardCodedPages: Post[] = [
 	outcomesMeta,
 	communitiesMeta,
-	pdoomMeta,
 	quotesMeta,
 	emailBuilderMeta,
 	statementMeta,
