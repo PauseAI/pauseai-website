@@ -3,7 +3,7 @@
 // prerendered HTML. Without this, component CSS inside .md files loads only
 // after hydration (dynamic chunk boundary), causing a flash of unstyled content.
 //
-// Manifest shape docs: https://vite.dev/guide/backend-integration.html
+// Manifest shape: https://vite.dev/guide/backend-integration.html
 import { readFileSync } from 'node:fs'
 import { join } from 'node:path'
 
@@ -20,8 +20,6 @@ let cachedManifest: Manifest | null | undefined
 function loadManifest(): Manifest | null {
 	if (cachedManifest !== undefined) return cachedManifest
 	try {
-		// kit.outDir defaults to .svelte-kit; Vite writes its manifest inside
-		// the client build output at .vite/manifest.json.
 		const path = join(process.cwd(), '.svelte-kit/output/client/.vite/manifest.json')
 		cachedManifest = JSON.parse(readFileSync(path, 'utf-8')) as Manifest
 	} catch {
@@ -31,19 +29,23 @@ function loadManifest(): Manifest | null {
 	return cachedManifest
 }
 
-export function cssForPost(postSrc: string): string[] {
+function manifestKey(slug: string, locale: string): string {
+	return locale === 'en' ? `src/posts/${slug}.md` : `l10n-cage/md/${locale}/${slug}.md`
+}
+
+export function cssForPost(slug: string, locale: string): string[] {
 	const manifest = loadManifest()
 	if (!manifest) return []
 	const seen = new Set<string>()
 	const css = new Set<string>()
-	function walk(key: string) {
-		if (seen.has(key)) return
-		seen.add(key)
-		const entry = manifest![key]
+	const walk = (k: string) => {
+		if (seen.has(k)) return
+		seen.add(k)
+		const entry = manifest[k]
 		if (!entry) return
-		for (const c of entry.css ?? []) css.add(c)
+		for (const c of entry.css ?? []) css.add(`/${c}`)
 		for (const imp of entry.imports ?? []) walk(imp)
 	}
-	walk(postSrc)
-	return [...css].map((c) => `/${c}`)
+	walk(manifestKey(slug, locale))
+	return [...css]
 }
