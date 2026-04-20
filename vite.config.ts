@@ -61,8 +61,7 @@ export default defineConfig(() => {
 			chunkSizeWarningLimit: 5000,
 			// Improve cache usage
 			cssCodeSplit: true,
-			// Generate sourcemaps in development, disable in production unless explicitly enabled
-			sourcemap: isDev(process.env) || !process.env.VITE_DISABLE_SOURCEMAPS,
+			sourcemap: true,
 			// Exclude repos locale paths not in runtime.locales
 			rollupOptions: {
 				external: getLocaleExcludePatterns()
