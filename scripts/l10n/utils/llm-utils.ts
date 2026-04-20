@@ -39,13 +39,13 @@ function parseRequestConfigData(configData: unknown): RequestConfigPayload | nul
 	if (typeof configData === 'string') {
 		try {
 			const parsed = JSON.parse(configData) as unknown
-			return isRecord(parsed) ? (parsed as RequestConfigPayload) : null
+			return isRecord(parsed) ? parsed : null
 		} catch {
 			return null
 		}
 	}
 
-	return isRecord(configData) ? (configData as RequestConfigPayload) : null
+	return isRecord(configData) ? configData : null
 }
 
 /**

@@ -74,7 +74,7 @@ export async function checkCameraPermission() {
 			try {
 				// Try to query camera permission status
 				// Note: This only works in Chrome/Edge and some other browsers
-				const permission = await navigator.permissions.query({ name: 'camera' as PermissionName })
+				const permission = await navigator.permissions.query({ name: 'camera' })
 
 				if (permission.state === 'granted') {
 					// Permission definitely already granted, safe to initialize

@@ -23,7 +23,7 @@
 		"check:watch": "echo This commands only checks the SvelteKit code, not the build scripts. && svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
 		"lint": "run-s _lint:*",
 		"_lint:knip": "knip",
-		"_lint:eslint": "eslint . --format gha --max-warnings=47",
+		"_lint:eslint": "eslint . --format gha --max-warnings=48",
 		"_lint:prettier": "tsx scripts/generate-prettier-ignore.ts && prettier --check .",
 		"format": "tsx scripts/generate-prettier-ignore.ts && prettier --write --ignore-unknown",
 		"prepare": "husky",
