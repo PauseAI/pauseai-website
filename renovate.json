@@ -45,6 +45,8 @@
 		{
 			"extends": [":automergeLinters"],
 			"matchPackageNames": ["knip", "svelte-check"],
+			"groupName": null,
+			"groupSlug": null,
 			"dependencyDashboardApproval": false
 		}
 	]
