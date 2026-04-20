@@ -14,6 +14,12 @@
 	$: metaImageUrl = getPostMetaImageUrl(image)
 </script>
 
+<svelte:head>
+	{#each data.cssUrls ?? [] as href}
+		<link rel="stylesheet" {href} />
+	{/each}
+</svelte:head>
+
 <PostMeta {title} {description} {date} image={metaImageUrl} />
 
 <article>

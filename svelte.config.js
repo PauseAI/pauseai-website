@@ -61,6 +61,9 @@ const config = {
 			// Handle missing anchor IDs by warning instead of failing
 			handleMissingId: 'warn',
 			entries: ['*'].concat(settings.locales.map((locale) => '/' + locale))
+		},
+		experimental: {
+			remoteFunctions: true
 		}
 	}
 }
