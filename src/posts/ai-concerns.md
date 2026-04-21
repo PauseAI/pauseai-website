@@ -13,7 +13,7 @@ PauseAI builds public understanding and political pressure so decision-makers ha
 
 Your input will contribute to a growing movement of people calling for responsible AI development and show policymakers that the public supports clear, practical safeguards, such as independent safety testing before release, greater transparency around risks, effective oversight, and enforceable standards to prevent irresponsible deployment.
 
-You can choose whether your input and any uploaded media) can be used publicly, either with your name, only anonymously, or not at all.
+You can choose whether your input (and any uploaded media) can be used publicly, either with your name, only anonymously, or not at all.
 
 Please note that if given permission to use your input in public communication, we may reach out to confirm the details of your story.
 
