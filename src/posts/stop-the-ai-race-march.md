@@ -1,9 +1,11 @@
 ---
-title: PauseAI Joined the March to Stop The AI Race
-description: We marched from Anthropic to OpenAI to xAI demanding a conditional pause on frontier AI development. It was the largest AI safety demonstration in U.S. history.
+title: PauseAI Joined the march to stop the AI race
+description: We marched from Anthropic to OpenAI to xAI demanding a conditional
+  pause on frontier AI development. It was the largest AI safety demonstration
+  in U.S. history.
+image: /stop-the-ai-race-march-cropped.jpg
 date: 2026-03-21
 news: true
-image: /stop-the-ai-race-march-cropped.jpg
 ---
 
 On March 21, 2026, concerned citizens marched from Anthropic's San Francisco office to OpenAI's to xAI's with a single demand: every major AI lab CEO must publicly commit to pausing frontier model development if every other major lab credibly does the same.

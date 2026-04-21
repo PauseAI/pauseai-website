@@ -2,20 +2,18 @@
 	import Navbar from '$lib/components/navbar/Navbar.svelte'
 	import Navlink from '$lib/components/navbar/Navlink.svelte'
 	import LanguageSwitcher from '$lib/components/LanguageSwitcher.svelte'
-	import SearchModal from '$lib/components/SearchModal.svelte'
 	import * as m from '$lib/paraglide/messages.js'
 	import { botName } from '$lib/config'
+	import { searchOpen } from '$lib/stores/searchModal'
 	import SearchIcon from 'lucide-svelte/icons/search'
 
 	const enableBot = false
 
 	export let inverted = false
 
-	let searchOpen = false
-
 	const openSearch = (e: MouseEvent) => {
 		e.preventDefault()
-		searchOpen = true
+		searchOpen.set(true)
 	}
 </script>
 
@@ -44,5 +42,3 @@
 		</Navlink>
 	</button>
 </Navbar>
-
-<SearchModal bind:open={searchOpen} />

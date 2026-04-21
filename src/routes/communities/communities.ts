@@ -41,11 +41,10 @@ const LINK_PLACEHOLDERS = {
 }
 
 const pauseAICommunities: Community[] = (
-	pauseAICommunitiesJson as CommunitiesConfiguration
+	pauseAICommunitiesJson satisfies CommunitiesConfiguration
 ).communities.map((c) => ({
 	...c,
 	type: 'local',
-	country_local: c.country_local,
 	country:
 		nationalChaptersJson.communities.find((n) => c.parent_name?.includes(n.name))?.name || undefined // Use undefined instead of null
 }))

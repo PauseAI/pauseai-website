@@ -7,7 +7,9 @@
 	import Link from '$lib/components/Link.svelte'
 	import NearbyEvent from '$lib/components/NearbyEvent.svelte'
 	import PreloadFonts from '$lib/components/PreloadFonts.svelte'
+	import SearchModal from '$lib/components/SearchModal.svelte'
 	import Toc from '$lib/components/Toc.svelte'
+	import { searchOpen } from '$lib/stores/searchModal'
 	import { deLocalizeHref } from '$lib/paraglide/runtime'
 	import '@fontsource/roboto-slab/300.css'
 	import '@fontsource/roboto-slab/500.css'
@@ -193,6 +195,8 @@
 
 	<Footer />
 </div>
+
+<SearchModal bind:open={$searchOpen} />
 
 <Toaster
 	toastOptions={{

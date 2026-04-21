@@ -45,12 +45,8 @@
 		{
 			"extends": [":automergeLinters"],
 			"matchPackageNames": ["knip", "svelte-check"],
-			"minor": {
-				"extends": ["group:linters"]
-			},
-			"patch": {
-				"extends": ["group:linters"]
-			},
+			"groupName": null,
+			"groupSlug": null,
 			"dependencyDashboardApproval": false
 		}
 	]
