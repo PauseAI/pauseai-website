@@ -19,7 +19,7 @@ async function getInternalNews(localFetch: typeof fetch): Promise<NewsItem[]> {
 	for (const post of posts) {
 		if (post.news && post.date) {
 			items.push({
-				title: post.title,
+				title: post.title ?? 'Untitled',
 				subtitle: post.description || '',
 				date: post.date,
 				image: post.image,

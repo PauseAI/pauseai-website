@@ -21,7 +21,7 @@ export const GET: RequestHandler = async ({ fetch }) => {
 					.map(
 						(post) => `
 						<item>
-							<title>${escapeXml(post.title)}</title>
+							<title>${escapeXml(post.title ?? 'Untitled')}</title>
 							<description>${post.description ? escapeXml(post.description) : ''}</description>
 							<link>${config.url}/${post.slug}</link>
 							<guid isPermaLink="true">${config.url}/${post.slug}</guid>

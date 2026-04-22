@@ -20,10 +20,15 @@ export type FrontmatterMeta = {
 	news?: boolean
 }
 
-export type Post = FrontmatterMeta & {
+/** Descriptive frontmatter where everything is optional (for markdown parsing) */
+export type DescriptiveFrontmatterMeta = Partial<FrontmatterMeta>
+
+export type Post<T = FrontmatterMeta> = T & {
 	/** Path in URL from root */
 	slug: string
 }
+
+export type DescriptivePost = Post<DescriptiveFrontmatterMeta>
 
 export type NewsItem = {
 	title: string
