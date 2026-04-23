@@ -1,0 +1,67 @@
+{
+	"records": [
+		{
+			"id": "rec_fixture_ng_1",
+			"createdTime": "2026-01-01T00:00:00.000Z",
+			"fields": {
+				"country": "PauseAI Example North",
+				"leaders_name": ["A. Example"],
+				"website_email": "north@example.org",
+				"website": "https://example.org/north",
+				"discord": "https://discord.gg/examplenorth",
+				"x": "https://x.com/examplenorth",
+				"whatsapp": "",
+				"linktree": "",
+				"instagram": "",
+				"tiktok": "",
+				"facebook": "",
+				"youtube": "",
+				"linkedin": "",
+				"luma": "",
+				"substack": ""
+			}
+		},
+		{
+			"id": "rec_fixture_ng_2",
+			"createdTime": "2026-01-01T00:00:00.000Z",
+			"fields": {
+				"country": "PauseAI Example South",
+				"leaders_name": ["B. Sample", "C. Fixture"],
+				"website_email": "south@example.org",
+				"website": "https://example.org/south",
+				"discord": "",
+				"x": "",
+				"whatsapp": "",
+				"linktree": "https://linktr.ee/examplesouth",
+				"instagram": "https://instagram.com/examplesouth",
+				"tiktok": "",
+				"facebook": "",
+				"youtube": "",
+				"linkedin": "",
+				"luma": "",
+				"substack": ""
+			}
+		},
+		{
+			"id": "rec_fixture_ng_3",
+			"createdTime": "2026-01-01T00:00:00.000Z",
+			"fields": {
+				"country": "PauseAI Example West",
+				"leaders_name": ["D. Example"],
+				"website_email": "west@example.org",
+				"website": "https://example.org/west",
+				"discord": "",
+				"x": "",
+				"whatsapp": "",
+				"linktree": "",
+				"instagram": "",
+				"tiktok": "",
+				"facebook": "",
+				"youtube": "https://youtube.com/@examplewest",
+				"linkedin": "",
+				"luma": "",
+				"substack": ""
+			}
+		}
+	]
+}

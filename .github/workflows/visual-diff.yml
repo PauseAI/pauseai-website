@@ -53,6 +53,18 @@ jobs:
         run: pnpm exec playwright install-deps chromium
       - name: Run Playwright tests
         run: pnpm exec playwright test
+        env:
+          VISUAL_TEST: '1'
+          # NPM_CONFIG_NODE_OPTIONS is the only way to propagate --import through
+          # pnpm: pnpm overwrites NODE_OPTIONS (with --experimental-global-webcrypto)
+          # when spawning scripts, but npm config values pass through untouched.
+          # See https://github.com/pnpm/pnpm/issues/6210
+          NPM_CONFIG_NODE_OPTIONS: '--import ./tests/visual/msw-setup.mjs'
+          # Fake keys so the SDKs actually make HTTP requests (they short-circuit
+          # to a "no key" error otherwise, bypassing MSW entirely). The real
+          # requests are intercepted by MSW and served from fixtures.
+          AIRTABLE_API_KEY: 'fake-visual-test-key'
+          NOTION_API_KEY: 'fake-visual-test-key'
       - name: Upload Playwright report
         if: always()
         uses: actions/upload-artifact@v4

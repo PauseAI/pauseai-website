@@ -1,27 +1,24 @@
 import { test } from '@chromatic-com/playwright'
 import { ROUTES } from './routes'
 
+// Third-party widget domains to block entirely. Fixture data is served
+// upstream by MSW-node (see msw-setup.mjs); these glob patterns live here
+// because the requests originate cross-origin in the browser and never
+// reach our Node process, so MSW-node can't see them.
+//
+// Blocking these keeps snapshots stable:
+// - tally.so (on /statement and /join): iframe reports async content height,
+//   producing ~20px deltas run-to-run.
+// - api.mapbox.com (on /communities): churny canvas-rendered tiles.
+// - lu.ma: iframe calendar / checkout button embeds.
+//
+// Each container has a fixed CSS size (explicit height or padding-bottom
+// aspect-ratio), so the surrounding layout stays stable.
+const ABORTED_HOSTS = ['**/tally.so/**', '**/api.mapbox.com/**', '**/lu.ma/**']
+
 test.describe('routes', () => {
 	test.beforeEach(async ({ page }) => {
-		// All fixture data is served upstream by MSW-node (see msw/setup.mjs);
-		// the routes here are only used to *abort* third-party widget requests
-		// whose rendering would otherwise churn the snapshots.
-
-		// Block Tally form embeds (used on /statement and /join). Tally's iframe
-		// reports its content height back to the parent async, producing ~20px
-		// height deltas between runs. With the iframe blocked, the container
-		// collapses to its CSS size — deterministic. We lose no coverage: the
-		// iframe content isn't visible to Chromatic anyway.
-		await page.route('**/tally.so/**', (route) => route.abort())
-		// Block Mapbox tiles/styles (used on /communities). Map tiles churn and
-		// are canvas-rendered, so Chromatic sees a blank canvas either way —
-		// aborting is deterministic. The .map-wrap container stays at its CSS
-		// size (padding-bottom 56.25%), so the surrounding layout still diffs.
-		await page.route('**/api.mapbox.com/**', (route) => route.abort())
-		// Block Luma iframe embeds (calendar on /communities, checkout button
-		// elsewhere). Iframes have fixed CSS height attrs, so aborting keeps
-		// the layout stable; Chromatic can't see iframe internals anyway.
-		await page.route('**/lu.ma/**', (route) => route.abort())
+		await Promise.all(ABORTED_HOSTS.map((pattern) => page.route(pattern, (route) => route.abort())))
 	})
 
 	for (const path of ROUTES) {
@@ -31,20 +28,23 @@ test.describe('routes', () => {
 			if (!response || !response.ok()) {
 				throw new Error(`${path} returned ${response?.status() ?? 'no response'}`)
 			}
-			await page.evaluate(() => document.fonts.ready)
-			// Force lazy-loaded images to fetch eagerly before the full-page
-			// screenshot. Playwright's fullPage capture scrolls the page, but the
-			// lazy-load trigger timing isn't reliably in sync with the screenshot
-			// frame — some images finish, others don't, and the diff flakes.
+			// Upgrade lazy images *before* waiting on fonts, so their new network
+			// requests race against font loads instead of starting serially after.
+			// Playwright's fullPage capture scrolls the page, but the native
+			// lazy-load trigger isn't reliably in sync with the screenshot frame
+			// — upgrading to eager makes loading deterministic.
 			await page.evaluate(() => {
 				for (const img of document.querySelectorAll<HTMLImageElement>('img[loading="lazy"]')) {
 					img.loading = 'eager'
 				}
 			})
-			await page.waitForLoadState('networkidle')
+			await Promise.all([
+				page.evaluate(() => document.fonts.ready),
+				page.waitForLoadState('networkidle')
+			])
 			// Self-validate the MSW Substack mock is actually being used — otherwise
 			// the suite would quietly capture live feed data. The homepage renders
-			// news items whose titles come from msw/fixtures/substack-feed.xml.
+			// news items whose titles come from fixtures/substack-feed.xml.
 			if (path === '/') {
 				await page
 					.getByText('Fixture Substack post one')
