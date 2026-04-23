@@ -3,7 +3,9 @@ title: Vacancies at PauseAI
 description: Job positions at PauseAI
 ---
 
-## Current Openings
+## Current openings
+
+There are currently no open vacancies.
 
 ## Spontaneous Applications
 
