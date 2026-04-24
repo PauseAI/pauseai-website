@@ -19,6 +19,18 @@ description: What the Australian chapter of PauseAI has been doing and needs hel
 - Upcoming
   - Help out with [evergreen tasks](/australia)
   - Tell us [what you did](mailto:australia@pauseai.info?subject=Aussie%20Did%20a%20Thing) so we can add it, or [what you have cooking](mailto:australia@pauseai.info?subject=Things%20Cooking) so we can support you!
+- Released newsletter on getting your MPs to sign Superintelligence Statement.
+- Emailed all Liberal MPs and Senators advising them on x-risk.
+- We attended the Canberra Innovation Network's book launch event. Chief Minister Andrew Barr raised the importance of managing risk when deploying AI in government. Afterwards we spoke to the book author John Howard, who agreed that guardrails are essential when deploying AI.
+- Supported Australians For AI Safety in their open letter "[Activate existing biosecurity powers to address AI-enabled risks](https://www.australiansforaisafety.com.au/letters/ai-bio-gene-synth-screening)", consider signing!
+
+<div style="display:flex; flex-wrap:wrap; gap:0.5rem; max-width:90%; margin:1rem auto;">
+<div style="flex:1; min-width:200px;">
+
+![20260408-1629_CBRIN_PeterWithJohnHoward.jpg](/australia/20260408-1629_CBRIN_PeterWithJohnHoward.jpg)
+
+</div>
+</div>
 - Ashley takes on volunteer role of Digital Marketing
 
 <div style="display:flex; flex-wrap:wrap; gap:0.5rem; max-width:90%; margin:1rem auto;">
@@ -29,21 +41,9 @@ description: What the Australian chapter of PauseAI has been doing and needs hel
 </div>
 </div>
 
-- Released newsletter on getting your MPs to sign Superintelligence Statement.
-- Emailed all Liberal MPs and Senators advising them on x-risk.
-- We attended the Canberra Innovation Network's book launch event. Chief Minister Andrew Barr raised the importance of managing risk when deploying AI in government. Afterwards we spoke to the book author John Howard, who agreed that guardrails are essential when deploying AI.
-
-<div style="display:flex; flex-wrap:wrap; gap:0.5rem; max-width:90%; margin:1rem auto;">
-<div style="flex:1; min-width:200px;">
-
-![20260408-1629_CBRIN_PeterWithJohnHoward.jpg](/australia/20260408-1629_CBRIN_PeterWithJohnHoward.jpg)
-
-</div>
-</div>
-
 ### 2026 March
 
-- Reached out to 3 prominent Aussie figures thanking them for their sensible treatment of AI risk
+- 📧8 AI decisionmaker emails, meetings with 👥3 of them, 📅2 events with 25 attendees.
 - Contacted 3 politicians about AI existential risk - can share more in the next few months!
 - Reached out to COSBOA and Canberra Business Chamber about Australians' trust in AI
 - Took part in CAPaD's Community Assembly in Canberra.
@@ -83,6 +83,7 @@ description: What the Australian chapter of PauseAI has been doing and needs hel
 
 ### 2026 February
 
+- 📧76 AI decisionmaker emails, meetings with 👥2 of them, 📅3 events with 17 attendees.
 - 📢**Campaigned for Australia to prioritise safety at India's AI Impact Summit**
   - 2 vids [calling to action](https://www.youtube.com/shorts/gGbAGQ8vVcY) and [suggesting the perfect Valentine's](https://www.youtube.com/watch?v=OQytHYG7jH8)
   - 70 emails sent to policymakers, and [70 signatures on our petition](https://www.change.org/p/ai-summits-need-to-take-safety-seriously-again), including to Minister Ayres and Assistant Minister Charlton.
@@ -136,8 +137,10 @@ description: What the Australian chapter of PauseAI has been doing and needs hel
 
 ### 2026 January
 
+- 📧1 AI decisionmaker email, meeting with 👥1, 📅1 events with 10 attendees.
 - Met with Deborah Morris MLA about AI misalignment, deepfakes and bioweapon risks.
 - ⭐Milestone: 70 subscribers to our newsletter!
+- Our volunteers are now donating over $400 / month!
 
 ## 2025 - more coming soon!
 
