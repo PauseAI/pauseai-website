@@ -150,6 +150,7 @@ description: What the Australian chapter of PauseAI has been doing and needs hel
 - ✅Australian AI Safety Institute (AISI) announced! This was one of our 3 main policy goals. Two to go: international AI treaty, and AI guardrails.
 - ✅Emails from PauseAI Australia volunteers and a [question at a live townhall](https://youtu.be/SbqUEhJt5RU?si=CSVML0vatdW-GBEh) prompted five politicians to sign the [Future of Life Institute's Superintelligence Statement](https://www.linkedin.com/feed/update/urn:li:activity:7408047524902572032).
 - Minister of Industry [responds to petition EN7777](https://epetitions.aph.gov.au/api/ministerialresponse/download/EN7777), declining to commit to mandatory independent safety evaluations nor to advocate for an international pause treaty, instead pointing to voluntary measures.
+- We co-signed [Urging an International AI Treaty: An Open Letter](https://aitreaty.org/)
 
 ### 2025 November
 
