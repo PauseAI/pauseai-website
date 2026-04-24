@@ -1,24 +1,28 @@
 import { test } from '@chromatic-com/playwright'
 import { ROUTES } from './routes'
 
-// Third-party widget domains to block entirely. Fixture data is served
-// upstream by MSW-node (see msw-setup.mjs); these glob patterns live here
-// because the requests originate cross-origin in the browser and never
-// reach our Node process, so MSW-node can't see them.
+// Cross-origin requests that can change independently of the page we're
+// snapshotting get aborted: third-party iframes (Tally forms, Luma calendars)
+// and cross-origin API calls (Mapbox tiles, widget fetches, analytics beacons).
+// Iframes render as empty containers at their CSS-fixed size — layout stays
+// stable; we don't diff into iframe content anyway. Server-side external
+// calls are handled separately by MSW-node (see msw-setup.mjs).
 //
-// Blocking these keeps snapshots stable:
-// - tally.so (on /statement and /join): iframe reports async content height,
-//   producing ~20px deltas run-to-run.
-// - api.mapbox.com (on /communities): churny canvas-rendered tiles.
-// - lu.ma: iframe calendar / checkout button embeds.
-//
-// Each container has a fixed CSS size (explicit height or padding-bottom
-// aspect-ratio), so the surrounding layout stays stable.
-const ABORTED_HOSTS = ['**/tally.so/**', '**/api.mapbox.com/**', '**/lu.ma/**']
+// Cross-origin *resources* — images (Cloudinary), fonts, scripts (inlang
+// CDN), stylesheets — pass through. They're assets the page chose to embed
+// and whose content is part of the rendered design we want to capture.
+const ABORTED_RESOURCE_TYPES = new Set(['document', 'xhr', 'fetch'])
 
 test.describe('routes', () => {
-	test.beforeEach(async ({ page }) => {
-		await Promise.all(ABORTED_HOSTS.map((pattern) => page.route(pattern, (route) => route.abort())))
+	test.beforeEach(async ({ page, baseURL }) => {
+		if (!baseURL) throw new Error('baseURL is not configured in playwright.config.ts')
+		const sameOrigin = new URL(baseURL).origin
+		await page.route('**/*', (route, request) => {
+			const url = new URL(request.url())
+			if (url.origin === sameOrigin) return route.continue()
+			if (ABORTED_RESOURCE_TYPES.has(request.resourceType())) return route.abort()
+			return route.continue()
+		})
 	})
 
 	for (const path of ROUTES) {
