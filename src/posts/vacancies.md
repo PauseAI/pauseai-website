@@ -5,13 +5,11 @@ description: Job positions at PauseAI
 
 ## Current openings
 
-There are currently no open vacancies.
-
 ### 1) Volunteer social media manager (5–10 hrs/week)
 
 **Purpose:** Support PauseAI Global’s campaigns and contribute to public awareness and engagement by producing high-quality social content.
 
-**Basic terms of reference (ToR)**
+**Basic terms of reference**
 
 - Create and manage a weekly content plan (posts, threads, short-form, campaign moments).
 - Write, edit and publish posts in PauseAI’s voice; adapt long-form content into short formats.
@@ -33,7 +31,7 @@ There are currently no open vacancies.
 
 **Purpose:** Produce compelling video content that supports campaigns, explains key ideas and highlights events/spokespersons
 
-**Basic terms of reference (ToRs)**
+**Basic terms of reference**
 
 - Edit short-form videos (15–90s) for social platforms, including captions and basic motion graphics.
 - Edit occasional longer pieces (interviews, talks, explainers, event footage).
@@ -43,7 +41,7 @@ There are currently no open vacancies.
 
 **Skills and requirements**
 
-- Proficiency with Premiere Pro / DaVinci Resolve / Final Cut / CapCut (or similar).
+- Proficiency with video software.
 - A track record of producing videos.
 - Comfortable iterating quickly from feedback.
 
@@ -53,7 +51,7 @@ There are currently no open vacancies.
 
 **Purpose:** Keep PauseAI’s Discord and Reddit spaces constructive and welcoming
 
-**Basic terms of reference (ToR)**
+**Basic terms of reference**
 
 - Enforce community rules consistently; remove spam, harassment and low-quality content.
 - De-escalate conflicts; escalate serious issues when needed.
@@ -85,8 +83,9 @@ Send an email to vacancies@pauseai.info with the following:
 2. Add a short note on why you’re a good fit (1 paragraph max)
 3. Attach your CV
 4. Include examples of your work
-   - Social media manager: add links to accounts you have managed and 3 posts
-   - Video editor: 3 examples
+   - Social media manager: add links to accounts you have managed and share three posts
+   - Video editor: share three examples of your work
+
 5. Tell us your time zone, how many hours you can dedicate per week and when you can start
 
 **Deadline: Sunday 3 May**
@@ -96,6 +95,6 @@ _We review applicants on a rolling basis and reserve the right to close the call
 
 ## Spontaneous applications
 
-While we currently have no open positions, we welcome spontaneous applications. If you're passionate about our mission and believe you could contribute to PauseAI in a paid role, please send your CV and a brief cover letter to [vacancies@pauseai.info](mailto:vacancies@pauseai.info).
+We welcome spontaneous applications. If you're passionate about our mission and believe you could contribute to PauseAI in a paid role, please send your CV and a brief cover letter to [vacancies@pauseai.info](mailto:vacancies@pauseai.info).
 
 Please note: We cannot guarantee a response to spontaneous applications, but we will keep them on file and consider them when we next open positions.
