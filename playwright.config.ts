@@ -24,7 +24,17 @@ export default defineConfig({
 		},
 		{
 			name: 'mobile',
-			use: { ...devices['Pixel 7'], viewport: { width: 412, height: 839 } }
+			// deviceScaleFactor override: devices['Pixel 7'] sets DPR=2.625, which
+			// multiplies the captured-pixel dimensions by ~2.6×. Full-page
+			// snapshots of long pages (e.g. /dear-sir-demis-2025, /posts, /learn)
+			// then blow past Chromatic's 25M-pixel cap. DPR=1 keeps the mobile
+			// viewport (412 CSS px wide) and its layout-relevant behavior, just
+			// captures at a lower resolution.
+			use: {
+				...devices['Pixel 7'],
+				viewport: { width: 412, height: 839 },
+				deviceScaleFactor: 1
+			}
 		}
 	],
 	webServer: {

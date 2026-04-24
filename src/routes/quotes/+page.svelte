@@ -1,4 +1,4 @@
-<!-- @visualDiffEnabled: false — ~22,000px tall, exceeds Chromatic's 25M-pixel snapshot cap -->
+<!-- @visualDiffEnabled: false — desktop snapshot is ~28M px, over Chromatic's 25M cap (mobile fits) -->
 <script lang="ts">
 	import { title } from '$lib/config'
 	import Quote from './Quote.svelte'
