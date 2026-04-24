@@ -1,6 +1,6 @@
-import type { Post } from '$lib/types'
+import type { StrictPost } from '$lib/types'
 
-export const outcomesMeta: Post = {
+export const outcomesMeta: StrictPost = {
 	title: 'AI Outcomes',
 	slug: 'outcomes',
 	description: 'What will happen if we continue to build AI?',

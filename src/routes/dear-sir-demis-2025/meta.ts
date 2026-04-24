@@ -1,6 +1,6 @@
-import type { Post } from '$lib/types'
+import type { StrictPost } from '$lib/types'
 
-export const meta: Post = {
+export const meta: StrictPost = {
 	title: 'Letter to Sir Demis Hassabis',
 	description:
 		'Parliamentarians from across the UK call on Google DeepMind to honour their AI safety commitments',

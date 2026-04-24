@@ -1,5 +1,5 @@
 import { json } from '@sveltejs/kit'
-import type { DescriptiveFrontmatterMeta, DescriptivePost, Post } from '$lib/types'
+import type { DescriptiveFrontmatterMeta, DescriptivePost, StrictPost } from '$lib/types'
 import { outcomesMeta } from '../../outcomes/meta'
 import { communitiesMeta } from '../../communities/communities'
 import { meta as quotesMeta } from '../../quotes/meta'
@@ -14,7 +14,7 @@ import type { RequestHandler } from './$types'
 export type PostsApiResponse = DescriptivePost[]
 
 /** When adding an extra route, make sure to add the metadata here for SEO purposes */
-const hardCodedPages: Post[] = [
+const hardCodedPages: StrictPost[] = [
 	outcomesMeta,
 	communitiesMeta,
 	quotesMeta,
