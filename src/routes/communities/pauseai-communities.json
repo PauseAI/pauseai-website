@@ -658,6 +658,12 @@
 			"lat": -26.7167,
 			"lon": 27.1,
 			"link": "$$DISCORD_GLOBAL$$"
+		},
+		{
+			"name": "Test",
+			"lat": 1,
+			"lon": 1,
+			"link": "https://example.org/"
 		}
 	]
 }
