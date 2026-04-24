@@ -13,23 +13,27 @@ Every PR gets a side-by-side visual diff via Playwright + Chromatic. The check i
 - **Languages other than `en`.** The CI build uses `PARAGLIDE_LOCALES=en` by default. Locale-dependent layout regressions are invisible.
 - **Individual post content.** A typo in a specific post's markdown won't show up — that's a content-review concern.
 - **Pages that opt out.** `grep -rn "@visualDiffEnabled: false" src/routes/` lists them with their per-page reasons (admin tools, form flows, token-dependent pages, etc.).
-- **Third-party widget internals.** Mapbox map tiles, Luma checkout, Tally forms — requests to these are aborted so their churny rendering doesn't produce noise. The _container_ and _surrounding layout_ are diffed; the widget contents are not.
-- **New browser-side third-party embeds.** A new iframe or CDN script added to a page isn't automatically flagged for review — only Node-side (SSR/build) external requests are tracked via MSW. Inspect diffs visually when adding them.
+- **Third-party widget internals.** Mapbox map tiles, Luma checkout, Tally forms — these are cross-origin documents/XHR/fetch and are default-denied at the browser boundary (see `smoke.spec.ts`), so their churny rendering doesn't produce noise. The _container_ and _surrounding layout_ are diffed; the widget contents are not. Cross-origin _resources_ (CDN scripts, fonts, Cloudinary images) pass through unchanged.
+- **New browser-side third-party widgets.** A new cross-origin iframe or XHR added to a page is auto-aborted and renders as an empty container — reviewers see the empty state, not a flag. Check the Netlify preview deploy to verify real rendering.
 
 ## External data in CI
 
 The workflow runs `pnpm build` without production secrets. Two interception mechanisms keep snapshots deterministic:
 
 - **MSW-node** (`msw-setup.mjs`, loaded via `NPM_CONFIG_NODE_OPTIONS=--import` in the workflow) intercepts outbound HTTP from the Node process — Notion, Airtable, and Substack RSS — and serves pinned fixtures from `fixtures/`. Covers both build-time prerender (press, funding) and request-time SSR (about, statement, national-groups, `/api/news`). Catch-all handlers for Airtable + Notion return empty results for un-fixtured endpoints so new tables/databases fail deterministically instead of producing flaky real-network 401s. The trade-off: a page that depends on a new external integration will silently render its empty state until an explicit handler + fixture is added — review `msw-handlers.ts` whenever an integration lands.
-- **Playwright `page.route()`** in `smoke.spec.ts` is reserved for **aborting** third-party widget requests (Tally, Mapbox, Luma) that originate in the browser and never touch our Node process. No fixture data is served at the browser boundary.
+- **Playwright `page.route()`** in `smoke.spec.ts` **default-denies** any cross-origin document / XHR / fetch originating in the browser (Tally, Mapbox, Luma, analytics, any new third-party widget added later). Cross-origin _resources_ (scripts, fonts, images from CDNs) pass through. No fixture data is served at the browser boundary — aborted requests just render as empty containers.
 
 **What this means for reviewers:** snapshots show the app rendering against _fixtures_ that look representative but are not live data. A green diff on `/about` means "no layout regression given the fixture people list," not "the Airtable integration works."
 
 When you change external-data shape (add/rename a field), update the matching fixture in `fixtures/` — otherwise the diff becomes misleading.
 
+## Scope comment on each PR
+
+A sticky PR comment (posted by `.github/workflows/visual-diff-comment.yml`) summarizes what the run covered — counts, per-category ratios, exclusions with reasons, and a link into the Chromatic review UI. If any un-fixtured external request hits the catch-all, the comment's `⚠️` section surfaces it with a "Fix" hint pointing back to `msw-handlers.ts`.
+
 ## When the diff shows N changes
 
-Open Chromatic from the PR's check. It offers side-by-side viewers; accept or deny per snapshot. Accepted snapshots become the new baseline once the PR merges to `main`.
+Open Chromatic from the PR's check (or the link in the scope comment). It offers side-by-side viewers; accept or deny per snapshot. Accepted snapshots become the new baseline once the PR merges to `main`.
 
 ## How to change what's covered
 
