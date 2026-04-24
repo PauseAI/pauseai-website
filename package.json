@@ -60,7 +60,7 @@
 		"globals": "^16.5.0",
 		"globby": "^16.2.0",
 		"husky": "^9.1.7",
-		"knip": "^6.6.2",
+		"knip": "^6.6.3",
 		"lint-staged": "^15.5.2",
 		"mdsvex": "^0.12.7",
 		"minimatch": "^9.0.9",
