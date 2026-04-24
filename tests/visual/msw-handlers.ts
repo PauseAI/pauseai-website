@@ -14,6 +14,13 @@ function loadText(name: string): string {
 	return readFileSync(join(fixturesDir, name), 'utf8')
 }
 
+// Server-level policy lives in msw-setup.mjs: `onUnhandledRequest: 'bypass'`
+// means a request to a wholly new host (no handler below) is logged via the
+// `request:unhandled` listener and then passed through to the real network.
+// The Airtable / Notion catch-alls below handle the softer case — request
+// reaches a known host but no per-table/db fixture — returning an empty
+// response instead of bypassing.
+//
 // When MSW_WARN_LOG is set, log any hit to a catch-all handler. Pairs with
 // the `request:unhandled` listener in msw-setup.mjs — together they let the
 // scope-comment surface endpoints that fell through without explicit fixtures.
