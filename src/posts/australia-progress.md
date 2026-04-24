@@ -141,6 +141,7 @@ description: What the Australian chapter of PauseAI has been doing and needs hel
 - Met with Deborah Morris MLA about AI misalignment, deepfakes and bioweapon risks.
 - ⭐Milestone: 70 subscribers to our newsletter!
 - Our volunteers are now donating over $400 / month. This covers our operating costs (insurance, web & email hosting, stall materials) and lets us plan more ambitious events!
+- Mark rolls off as national co-director to focus on Melbourne scene, Peter steps up.
 
 ## 2025 - more coming soon!
 
@@ -215,6 +216,22 @@ description: What the Australian chapter of PauseAI has been doing and needs hel
 <div style="flex:1; min-width:200px;">
 
 ![20251003_CarMagnetBrakes.png](/australia/20251003_CarMagnetBrakes.png)
+
+</div>
+</div>
+
+- Making It Official💍 After months of passionate collaboration, late-night strategising, and countless volunteer dates, the four of us take the next step in our relationship: We're thrilled to announce PauseAI Australia is officially incorporated! 
+
+
+<div style="display:flex; flex-wrap:wrap; gap:0.5rem; max-width:90%; margin:1rem auto;">
+<div style="flex:1; min-width:200px;">
+
+![20251003_CarMagnetRace.webp](/australia/20251003_CarMagnetRace.webp)
+
+</div>
+<div style="flex:1; min-width:200px;">
+
+![20251027_PauseAIAusIncorporated.png](/australia/20251027_PauseAIAusIncorporated.png)
 
 </div>
 </div>
