@@ -35,19 +35,39 @@
 			url: 'https://www.politico.eu/article/microsoft-brussels-elon-musk-anti-ai-protesters-well-five-of-them-descend-on-brussels/'
 		}
 	]
+
+	const containerVariants = {
+		hidden: { opacity: 0 },
+		visible: {
+			opacity: 1,
+			transition: {
+				staggerChildren: 0.1
+			}
+		}
+	}
+
+	const itemVariants = {
+		hidden: { opacity: 0, y: 20 },
+		visible: {
+			opacity: 1,
+			y: 0,
+			transition: { duration: 0.5 }
+		}
+	}
 </script>
 
 <div class="press-section">
 	<div class="container">
 		<h2 class="section-title">Media Coverage</h2>
-		<div class="logos-row">
+		<motion.div
+			class="logos-row"
+			variants={containerVariants}
+			initial="hidden"
+			whileInView="visible"
+			inViewOptions={{ once: true }}
+		>
 			{#each publications as pub, i}
-				<motion.div
-					initial={{ opacity: 0, y: 20 }}
-					whileInView={{ opacity: 1, y: 0 }}
-					transition={{ duration: 0.5, delay: i * 0.1 }}
-					inViewOptions={{ once: true }}
-				>
+				<motion.div variants={itemVariants}>
 					<LinkWithoutIcon href={pub.url} target="_blank" class="pub-link">
 						<Image
 							src={pub.src}
@@ -59,15 +79,10 @@
 				</motion.div>
 			{/each}
 
-			<motion.div
-				initial={{ opacity: 0, x: 10 }}
-				whileInView={{ opacity: 1, x: 0 }}
-				transition={{ duration: 0.5, delay: publications.length * 0.1 }}
-				inViewOptions={{ once: true }}
-			>
+			<motion.div variants={itemVariants}>
 				<LinkWithoutIcon href="/press" class="see-all">See all coverage →</LinkWithoutIcon>
 			</motion.div>
-		</div>
+		</motion.div>
 	</div>
 </div>
 
@@ -92,7 +107,7 @@
 		opacity: 0.6; /* Changed from 0.4 to match logos */
 	}
 
-	.logos-row {
+	* :global(.logos-row) {
 		display: flex;
 		flex-wrap: wrap;
 		gap: 2rem 3rem;
@@ -176,7 +191,7 @@
 	}
 
 	@media (max-width: 768px) {
-		.logos-row {
+		* :global(.logos-row) {
 			gap: 1.5rem 2.5rem;
 		}
 
