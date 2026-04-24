@@ -173,12 +173,6 @@ export default defineConfig(
 	globalIgnores([
 		// TODO remove when done
 		'src/routes/api/write',
-		'src/routes/write',
-		// .mjs bootstrap for MSW in visual-diff. Type-aware ESLint requires the
-		// file to be in tsconfig, but adding it there triggers TS5097 on its
-		// `import('./msw-handlers.ts')` call (can't import .ts without
-		// allowImportingTsExtensions). The file is 20 lines of boilerplate —
-		// skip it rather than deal with the tsconfig dance.
-		'tests/visual/msw-setup.mjs'
+		'src/routes/write'
 	])
 )

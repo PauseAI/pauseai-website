@@ -85,7 +85,7 @@ function renderUnhandled(entries: UnhandledEntry[]): string {
 		body.push(`  - ${e.count}× \`${e.method} ${e.url}\` (${label})`)
 	}
 	body.push(
-		'- **Fix:** add an explicit handler + fixture in `tests/visual/msw-handlers.ts` (so the page renders its populated layout against stable data), or exclude the page with `@visualDiffEnabled: false`.',
+		'- **Fix:** add an explicit handler + fixture in `tests/visual/msw-setup.ts` (so the page renders its populated layout against stable data), or exclude the page with `@visualDiffEnabled: false`.',
 		"- **Why it matters:** without a fixture, CI gets either a 401 (endpoint needs auth) or drifting live data, so the snapshot won't match production."
 	)
 	return [

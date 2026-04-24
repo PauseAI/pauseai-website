@@ -20,7 +20,7 @@ Every PR gets a side-by-side visual diff via Playwright + Chromatic. The check i
 
 The workflow runs `pnpm build` without production secrets. Two interception mechanisms keep snapshots deterministic:
 
-- **MSW-node** (`msw-setup.mjs`, loaded via `NPM_CONFIG_NODE_OPTIONS=--import` in the workflow) intercepts outbound HTTP from the Node process — Notion, Airtable, and Substack RSS — and serves pinned fixtures from `fixtures/`. Covers both build-time prerender (press, funding) and request-time SSR (about, statement, national-groups, `/api/news`). Catch-all handlers for Airtable + Notion return empty results for un-fixtured endpoints so new tables/databases fail deterministically instead of producing flaky real-network 401s. The trade-off: a page that depends on a new external integration will silently render its empty state until an explicit handler + fixture is added — review `msw-handlers.ts` whenever an integration lands.
+- **MSW-node** (`msw-setup.ts`, loaded via `NPM_CONFIG_NODE_OPTIONS=--import` in the workflow) intercepts outbound HTTP from the Node process — Notion, Airtable, and Substack RSS — and serves pinned fixtures from `fixtures/`. Covers both build-time prerender (press, funding) and request-time SSR (about, statement, national-groups, `/api/news`). Catch-all handlers for Airtable + Notion return empty results for un-fixtured endpoints so new tables/databases fail deterministically instead of producing flaky real-network 401s. The trade-off: a page that depends on a new external integration will silently render its empty state until an explicit handler + fixture is added — review `msw-setup.ts` whenever an integration lands.
 - **Playwright `page.route()`** in `smoke.spec.ts` **default-denies** any cross-origin document / XHR / fetch originating in the browser (Tally, Mapbox, Luma, analytics, any new third-party widget added later). Cross-origin _resources_ (scripts, fonts, images from CDNs) pass through. No fixture data is served at the browser boundary — aborted requests just render as empty containers.
 
 **What this means for reviewers:** snapshots show the app rendering against _fixtures_ that look representative but are not live data. A green diff on `/about` means "no layout regression given the fixture people list," not "the Airtable integration works."
@@ -29,7 +29,7 @@ When you change external-data shape (add/rename a field), update the matching fi
 
 ## Scope comment on each PR
 
-A sticky PR comment (posted by `.github/workflows/visual-diff-comment.yml`) summarizes what the run covered — counts, per-category ratios, exclusions with reasons, and a link into the Chromatic review UI. If any un-fixtured external request hits the catch-all, the comment's `⚠️` section surfaces it with a "Fix" hint pointing back to `msw-handlers.ts`.
+A sticky PR comment (posted by `.github/workflows/visual-diff-comment.yml`) summarizes what the run covered — counts, per-category ratios, exclusions with reasons, and a link into the Chromatic review UI. If any un-fixtured external request hits the catch-all, the comment's `⚠️` section surfaces it with a "Fix" hint pointing back to `msw-setup.ts`.
 
 ## When the diff shows N changes
 
@@ -40,4 +40,4 @@ Open Chromatic from the PR's check (or the link in the scope comment). It offers
 - **Add a new route:** nothing to do — it's auto-discovered when `+page.svelte` / `+page.ts` appears.
 - **Opt a page out:** add `<!-- @visualDiffEnabled: false — reason -->` (or `// @visualDiffEnabled: false — reason` in a `.ts` file) near the top of the page's source file. The comment lives with the page, so renames carry it along.
 - **Opt a post in:** add `<!-- @visualDiffEnabled: true — reason -->` just below the post's frontmatter in `src/posts/<slug>.md`. Posts default to excluded (100+ would be too many); sample only posts covering distinct layout variants.
-- **Add a new external-data integration:** add a handler in `msw-handlers.ts` with a fixture in `fixtures/`. Don't leave a new integration unmocked — without secrets in CI, it will either fail or produce non-deterministic snapshots. (`page.route()` is only for aborts, not for serving fixture data.)
+- **Add a new external-data integration:** add a handler in `msw-setup.ts` with a fixture in `fixtures/`. Don't leave a new integration unmocked — without secrets in CI, it will either fail or produce non-deterministic snapshots. (`page.route()` is only for aborts, not for serving fixture data.)

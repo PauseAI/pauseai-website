@@ -6,7 +6,7 @@ import { ROUTES } from './routes'
 // and cross-origin API calls (Mapbox tiles, widget fetches, analytics beacons).
 // Iframes render as empty containers at their CSS-fixed size — layout stays
 // stable; we don't diff into iframe content anyway. Server-side external
-// calls are handled separately by MSW-node (see msw-setup.mjs).
+// calls are handled separately by MSW-node (see msw-setup.ts).
 //
 // Cross-origin *resources* — images (Cloudinary), fonts, scripts (inlang
 // CDN), stylesheets — pass through. They're assets the page chose to embed

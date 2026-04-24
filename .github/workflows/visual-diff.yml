@@ -59,7 +59,7 @@ jobs:
           # pnpm: pnpm overwrites NODE_OPTIONS (with --experimental-global-webcrypto)
           # when spawning scripts, but npm config values pass through untouched.
           # See https://github.com/pnpm/pnpm/issues/6210
-          NPM_CONFIG_NODE_OPTIONS: '--import ./tests/visual/msw-setup.mjs'
+          NPM_CONFIG_NODE_OPTIONS: '--import ./tests/visual/msw-setup.ts'
           # Fake keys so the SDKs actually make HTTP requests (they short-circuit
           # to a "no key" error otherwise, bypassing MSW entirely). The real
           # requests are intercepted by MSW and served from fixtures.

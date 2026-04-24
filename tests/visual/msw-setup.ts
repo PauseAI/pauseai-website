@@ -1,4 +1,18 @@
+// MSW-node bootstrap for visual-diff runs. Loaded via NODE_OPTIONS=--import
+// from the visual-diff GitHub Actions step. No-op in normal dev/build.
+//
+// Intercepts outbound HTTP from `pnpm build` (prerender, remote prerender
+// functions) and `pnpm preview` (on-demand SSR) so snapshots render against
+// pinned fixtures instead of live APIs, keeping runs deterministic and free
+// of production secrets.
+//
+// When MSW_WARN_LOG is set, requests that fell through without an explicit
+// fixture — either a wholly new host (bypassed to the real network per
+// `onUnhandledRequest: 'bypass'` below) or a known host that hit a
+// per-table/db catch-all — are logged so the scope-comment can surface them.
+
 import { http, HttpResponse, passthrough, type JsonBodyType } from 'msw'
+import { setupServer } from 'msw/node'
 import { appendFileSync, readFileSync } from 'node:fs'
 import { dirname, join } from 'node:path'
 import { fileURLToPath } from 'node:url'
@@ -14,19 +28,16 @@ function loadText(name: string): string {
 	return readFileSync(join(fixturesDir, name), 'utf8')
 }
 
-// Server-level policy lives in msw-setup.mjs: `onUnhandledRequest: 'bypass'`
-// means a request to a wholly new host (no handler below) is logged via the
-// `request:unhandled` listener and then passed through to the real network.
-// The Airtable / Notion catch-alls below handle the softer case — request
-// reaches a known host but no per-table/db fixture — returning an empty
-// response instead of bypassing.
-//
-// When MSW_WARN_LOG is set, log any hit to a catch-all handler. Pairs with
-// the `request:unhandled` listener in msw-setup.mjs — together they let the
-// scope-comment surface endpoints that fell through without explicit fixtures.
 const warnLog = process.env.MSW_WARN_LOG
-function logCatchAll(kind: string, method: string, url: string): void {
+function logWarn(kind: string, method: string, url: string): void {
 	if (warnLog) appendFileSync(warnLog, `${kind} ${method} ${url}\n`)
+}
+
+function catchAll(kind: string, method: 'get' | 'post', pattern: string, body: JsonBodyType) {
+	return http[method](pattern, ({ request }) => {
+		logWarn(kind, request.method, request.url)
+		return HttpResponse.json(body)
+	})
 }
 
 // Load each fixture once at module init; handlers return the already-parsed
@@ -59,14 +70,11 @@ const AIRTABLE_TABLES: Array<[table: string, fixture: JsonBodyType]> = [
 const PRESS_DB = '212fd8030c4d42ff9de5710f92efecff'
 const FUNDING_DB = '185ce958adb5459eb1eedc7b72da5738'
 
-export const handlers = [
+const handlers = [
 	...AIRTABLE_TABLES.map(([table, fixture]) =>
 		http.get(`https://api.airtable.com/v0/*/${table}*`, () => HttpResponse.json(fixture))
 	),
-	http.get('https://api.airtable.com/v0/*', ({ request }) => {
-		logCatchAll('AIRTABLE_CATCH_ALL', request.method, request.url)
-		return HttpResponse.json(EMPTY_AIRTABLE)
-	}),
+	catchAll('AIRTABLE_CATCH_ALL', 'get', 'https://api.airtable.com/v0/*', EMPTY_AIRTABLE),
 
 	http.get(`https://api.notion.com/v1/databases/${PRESS_DB}`, () =>
 		HttpResponse.json(PRESS_DB_SCHEMA)
@@ -77,10 +85,12 @@ export const handlers = [
 	http.post(`https://api.notion.com/v1/databases/${FUNDING_DB}/query`, () =>
 		HttpResponse.json(FUNDING_QUERY)
 	),
-	http.post('https://api.notion.com/v1/databases/*/query', ({ request }) => {
-		logCatchAll('NOTION_CATCH_ALL', request.method, request.url)
-		return HttpResponse.json(EMPTY_NOTION_LIST)
-	}),
+	catchAll(
+		'NOTION_CATCH_ALL',
+		'post',
+		'https://api.notion.com/v1/databases/*/query',
+		EMPTY_NOTION_LIST
+	),
 
 	// /api/news/+server.ts parses this XML and merges items with internal
 	// posts flagged `news: true` before returning JSON to the client.
@@ -101,3 +111,17 @@ export const handlers = [
 	// real network while suppressing the un-fixtured warning.
 	http.get('https://cdn.jsdelivr.net/*', () => passthrough())
 ]
+
+if (process.env.VISUAL_TEST === '1') {
+	const server = setupServer(...handlers)
+
+	server.events.on('request:unhandled', ({ request }) => {
+		// Filter same-origin preview-server calls (the Node process making a
+		// fetch back to localhost:4173 for /api/posts etc.). These aren't
+		// un-fixtured external integrations.
+		if (request.url.startsWith('http://localhost:')) return
+		logWarn('UNHANDLED', request.method, request.url)
+	})
+
+	server.listen({ onUnhandledRequest: 'bypass' })
+}
