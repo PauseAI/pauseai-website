@@ -1,6 +1,7 @@
 <script lang="ts">
 	import Image from '$lib/components/Image.svelte'
 	import LinkWithoutIcon from '$lib/components/LinkWithoutIcon.svelte'
+	import { motion } from 'motion-sv'
 
 	const publications = [
 		{
@@ -40,19 +41,32 @@
 	<div class="container">
 		<h2 class="section-title">Media Coverage</h2>
 		<div class="logos-row">
-			{#each publications as pub}
-				<LinkWithoutIcon href={pub.url} target="_blank" class="pub-link">
-					<!-- Visible on hover (Original Color) -->
-					<Image
-						src={pub.src}
-						alt={pub.name}
-						title={pub.name}
-						class="logo-img logo-{pub.name.toLowerCase().replace(' ', '-')}"
-					/>
-				</LinkWithoutIcon>
+			{#each publications as pub, i}
+				<motion.div
+					initial={{ opacity: 0, y: 20 }}
+					whileInView={{ opacity: 1, y: 0 }}
+					transition={{ duration: 0.5, delay: i * 0.1 }}
+					inViewOptions={{ once: true }}
+				>
+					<LinkWithoutIcon href={pub.url} target="_blank" class="pub-link">
+						<Image
+							src={pub.src}
+							alt={pub.name}
+							title={pub.name}
+							class="logo-img logo-{pub.name.toLowerCase().replace(' ', '-')}"
+						/>
+					</LinkWithoutIcon>
+				</motion.div>
 			{/each}
 
-			<LinkWithoutIcon href="/press" class="see-all">See all coverage →</LinkWithoutIcon>
+			<motion.div
+				initial={{ opacity: 0, x: 10 }}
+				whileInView={{ opacity: 1, x: 0 }}
+				transition={{ duration: 0.5, delay: publications.length * 0.1 }}
+				inViewOptions={{ once: true }}
+			>
+				<LinkWithoutIcon href="/press" class="see-all">See all coverage →</LinkWithoutIcon>
+			</motion.div>
 		</div>
 	</div>
 </div>

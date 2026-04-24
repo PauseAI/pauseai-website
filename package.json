@@ -109,6 +109,7 @@
 		"maplibre-gl": "^5.23.0",
 		"maplibregl-mapbox-request-transformer": "^0.0.2",
 		"micromark": "^4.0.2",
+		"motion-sv": "^0.1.12",
 		"pagefind": "^1.5.2",
 		"pure-rand": "^8.4.0",
 		"rehype-slug": "^5.1.0",
