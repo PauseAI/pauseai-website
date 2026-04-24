@@ -1,0 +1,78 @@
+name: Visual diff scope comment
+
+# Posts (or updates) a sticky PR comment summarizing visual-diff coverage after
+# each successful run of the Visual diff workflow. Runs via `workflow_run` so it
+# executes in the base-repo context with write permissions, even for PRs from
+# forks — GITHUB_TOKEN on the source `pull_request` workflow is read-only for
+# forks.
+#
+# Safety: this workflow consumes an artifact produced by the fork's run, but
+# only treats it as data — it renders the Markdown body into a PR comment and
+# never executes any script from the fork's checkout. The PR number is derived
+# from `workflow_run.head_sha` via the trusted GitHub API (not from anything
+# the fork could tamper with), so a compromised artifact can't steer the
+# comment onto an arbitrary PR.
+
+on:
+  workflow_run:
+    workflows: [Visual diff (Chromatic)]
+    types: [completed]
+
+permissions:
+  # Setting permissions at workflow level makes every unlisted scope `none` —
+  # actions: read is needed for the cross-run artifact download below.
+  actions: read
+  pull-requests: write
+
+jobs:
+  comment:
+    runs-on: ubuntu-latest
+    if: >-
+      github.event.workflow_run.event == 'pull_request' &&
+      github.event.workflow_run.conclusion == 'success'
+    steps:
+      - name: Resolve PR from trusted workflow_run payload
+        id: pr
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const run = context.payload.workflow_run
+            const { data: prs } = await github.rest.repos.listPullRequestsAssociatedWithCommit({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              commit_sha: run.head_sha
+            })
+            // Narrow by trusted workflow_run fields — head_branch AND
+            // head_repository.id — so a commit shared between multiple open
+            // PRs (e.g. same fork branch targeting different bases, or a
+            // coincidental cross-fork SHA collision) routes the comment to
+            // the right one.
+            const match = prs.find((p) => {
+              if (p.state !== 'open') return false
+              if (run.head_branch && p.head.ref !== run.head_branch) return false
+              if (run.head_repository?.id && p.head.repo?.id !== run.head_repository.id) return false
+              return true
+            })
+            if (!match) {
+              core.info(`No open PR matches ${run.head_repository?.full_name}:${run.head_branch}@${run.head_sha}; skipping comment.`)
+              return ''
+            }
+            core.setOutput('number', String(match.number))
+            return String(match.number)
+      - name: Download scope artifact
+        id: download
+        if: steps.pr.outputs.number != ''
+        uses: actions/download-artifact@v4
+        continue-on-error: true
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          run-id: ${{ github.event.workflow_run.id }}
+          name: visual-diff-scope
+          path: scope
+      - name: Post or update sticky comment
+        if: steps.pr.outputs.number != '' && steps.download.outcome == 'success'
+        uses: marocchino/sticky-pull-request-comment@v2
+        with:
+          header: visual-diff-scope
+          number: ${{ steps.pr.outputs.number }}
+          path: scope/body.md

@@ -14,6 +14,7 @@ Every PR gets a side-by-side visual diff via Playwright + Chromatic. The check i
 - **Individual post content.** A typo in a specific post's markdown won't show up — that's a content-review concern.
 - **Pages that opt out.** `grep -rn "@visualDiffEnabled: false" src/routes/` lists them with their per-page reasons (admin tools, form flows, token-dependent pages, etc.).
 - **Third-party widget internals.** Mapbox map tiles, Luma checkout, Tally forms — requests to these are aborted so their churny rendering doesn't produce noise. The _container_ and _surrounding layout_ are diffed; the widget contents are not.
+- **New browser-side third-party embeds.** A new iframe or CDN script added to a page isn't automatically flagged for review — only Node-side (SSR/build) external requests are tracked via MSW. Inspect diffs visually when adding them.
 
 ## External data in CI
 

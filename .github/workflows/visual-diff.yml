@@ -65,6 +65,9 @@ jobs:
           # requests are intercepted by MSW and served from fixtures.
           AIRTABLE_API_KEY: 'fake-visual-test-key'
           NOTION_API_KEY: 'fake-visual-test-key'
+          # Log of un-fixtured outbound requests (catch-all hits + unhandled
+          # bypasses). Surfaced by the scope-comment companion workflow.
+          MSW_WARN_LOG: ${{ github.workspace }}/msw-warn.log
       - name: Upload Playwright report
         if: always()
         uses: actions/upload-artifact@v4
@@ -73,6 +76,7 @@ jobs:
           path: playwright-report/
           retention-days: 14
       - name: Publish to Chromatic
+        id: chromatic
         # Inlined plaintext token — Chromatic's own recommended pattern for fork-PR
         # support (forks can't read repo secrets). The token is a project-scoped
         # write credential (anyone with it can run builds and consume snapshot
@@ -85,3 +89,30 @@ jobs:
           projectToken: chpt_cefd614c783fb5c
           exitZeroOnChanges: true
           exitOnceUploaded: true
+      - name: Generate scope comment
+        # Only on successful test runs — the comment describes what was
+        # covered, and an early-failed run has nothing meaningful to report.
+        # Runs after Chromatic publish so the scope comment can link to the
+        # Chromatic build URL (where reviewers accept/deny snapshots).
+        if: success() && github.event_name == 'pull_request'
+        env:
+          MSW_WARN_LOG: ${{ github.workspace }}/msw-warn.log
+          # The head SHA of the PR. The runner's GITHUB_SHA on pull_request
+          # events points at the auto-generated merge-ref commit, and a
+          # step-level env override of GITHUB_SHA doesn't beat the runner
+          # injection, so pass through a distinct variable.
+          SCOPE_HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+          CHROMATIC_BUILD_URL: ${{ steps.chromatic.outputs.buildUrl }}
+        run: |
+          mkdir -p scope
+          node --experimental-strip-types tests/visual/scope-comment.ts > scope/body.md
+      - name: Upload scope comment artifact
+        # Fork PRs can't be trusted to write an honest pr-number.txt, so the
+        # companion workflow derives the PR number from the workflow_run
+        # payload's head_sha (trusted, served by the base repo's API) instead.
+        if: success() && github.event_name == 'pull_request'
+        uses: actions/upload-artifact@v4
+        with:
+          name: visual-diff-scope
+          path: scope/
+          retention-days: 1

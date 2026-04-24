@@ -1,5 +1,5 @@
-import { http, HttpResponse, type JsonBodyType } from 'msw'
-import { readFileSync } from 'node:fs'
+import { http, HttpResponse, passthrough, type JsonBodyType } from 'msw'
+import { appendFileSync, readFileSync } from 'node:fs'
 import { dirname, join } from 'node:path'
 import { fileURLToPath } from 'node:url'
 
@@ -12,6 +12,14 @@ function loadJson(name: string): JsonBodyType {
 
 function loadText(name: string): string {
 	return readFileSync(join(fixturesDir, name), 'utf8')
+}
+
+// When MSW_WARN_LOG is set, log any hit to a catch-all handler. Pairs with
+// the `request:unhandled` listener in msw-setup.mjs — together they let the
+// scope-comment surface endpoints that fell through without explicit fixtures.
+const warnLog = process.env.MSW_WARN_LOG
+function logCatchAll(kind: string, method: string, url: string): void {
+	if (warnLog) appendFileSync(warnLog, `${kind} ${method} ${url}\n`)
 }
 
 // Load each fixture once at module init; handlers return the already-parsed
@@ -48,7 +56,10 @@ export const handlers = [
 	...AIRTABLE_TABLES.map(([table, fixture]) =>
 		http.get(`https://api.airtable.com/v0/*/${table}*`, () => HttpResponse.json(fixture))
 	),
-	http.get('https://api.airtable.com/v0/*', () => HttpResponse.json(EMPTY_AIRTABLE)),
+	http.get('https://api.airtable.com/v0/*', ({ request }) => {
+		logCatchAll('AIRTABLE_CATCH_ALL', request.method, request.url)
+		return HttpResponse.json(EMPTY_AIRTABLE)
+	}),
 
 	http.get(`https://api.notion.com/v1/databases/${PRESS_DB}`, () =>
 		HttpResponse.json(PRESS_DB_SCHEMA)
@@ -59,11 +70,27 @@ export const handlers = [
 	http.post(`https://api.notion.com/v1/databases/${FUNDING_DB}/query`, () =>
 		HttpResponse.json(FUNDING_QUERY)
 	),
-	http.post('https://api.notion.com/v1/databases/*/query', () =>
-		HttpResponse.json(EMPTY_NOTION_LIST)
-	),
+	http.post('https://api.notion.com/v1/databases/*/query', ({ request }) => {
+		logCatchAll('NOTION_CATCH_ALL', request.method, request.url)
+		return HttpResponse.json(EMPTY_NOTION_LIST)
+	}),
 
 	// /api/news/+server.ts parses this XML and merges items with internal
 	// posts flagged `news: true` before returning JSON to the client.
-	http.get('https://pauseai.substack.com/feed', () => HttpResponse.xml(SUBSTACK_FEED))
+	http.get('https://pauseai.substack.com/feed', () => HttpResponse.xml(SUBSTACK_FEED)),
+
+	// Luma calendar — /api/calendar/+server.ts fetches this on every page load
+	// via NearbyEvent in the global layout. NearbyEvent only renders when the
+	// user has a geo match; CI geo lookup is disabled, so an empty entries
+	// list is enough to keep the layout stable without leaking live requests.
+	http.get('https://api.lu.ma/calendar/get-items', () => HttpResponse.json({ entries: [] })),
+
+	// Segment analytics — build-/preview-time batches that shouldn't actually
+	// be delivered. 204 No Content is what Segment itself returns on success.
+	http.post('https://api.segment.io/v1/*', () => new HttpResponse(null, { status: 204 })),
+
+	// jsDelivr is a legitimate build-time CDN for NPM packages (inlang
+	// plugins, etc.). Mocking would break the build, so pass through to the
+	// real network while suppressing the un-fixtured warning.
+	http.get('https://cdn.jsdelivr.net/*', () => passthrough())
 ]
