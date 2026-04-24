@@ -140,12 +140,13 @@ description: What the Australian chapter of PauseAI has been doing and needs hel
 - 📧1 AI decisionmaker email, meeting with 👥1, 📅1 events with 10 attendees.
 - Met with Deborah Morris MLA about AI misalignment, deepfakes and bioweapon risks.
 - ⭐Milestone: 70 subscribers to our newsletter!
-- Our volunteers are now donating over $400 / month!
+- Our volunteers are now donating over $400 / month. This covers our operating costs (insurance, web & email hosting, stall materials) and lets us plan more ambitious events!
 
 ## 2025 - more coming soon!
 
 ### 2025 December
 
+- 📧3 AI decisionmaker emails, 📅1 event with 11 attendees.
 - ✅Australian AI Safety Institute (AISI) announced! This was one of our 3 main policy goals. Two to go: international AI treaty, and AI guardrails.
 - ✅Emails from PauseAI Australia volunteers and a [question at a live townhall](https://youtu.be/SbqUEhJt5RU?si=CSVML0vatdW-GBEh) prompted five politicians to sign the [Future of Life Institute's Superintelligence Statement](https://www.linkedin.com/feed/update/urn:li:activity:7408047524902572032).
 - Minister of Industry [responds to petition EN7777](https://epetitions.aph.gov.au/api/ministerialresponse/download/EN7777), declining to commit to mandatory independent safety evaluations nor to advocate for an international pause treaty, instead pointing to voluntary measures.
