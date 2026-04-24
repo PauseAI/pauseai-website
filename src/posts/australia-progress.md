@@ -4,6 +4,16 @@ slug: australia-progress
 description: What the Australian chapter of PauseAI has been doing and needs help with
 ---
 
+<div style="aspect-ratio: 16 / 9; width: 90%;">
+  <iframe
+    src="https://www.youtube-nocookie.com/embed/Em0EzL7mr0c?si=tRRDrxh-rLG9YoWm"
+    title="PauseAI Australia introduction"
+    style="width: 100%; height: 100%; border: 0;"
+    allow="clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+    referrerpolicy="strict-origin-when-cross-origin"
+    allowfullscreen></iframe>
+</div>
+
 ### 2026 April
 
 - Upcoming
