@@ -66,7 +66,7 @@
 			whileInView="visible"
 			inViewOptions={{ once: true }}
 		>
-			{#each publications as pub, i}
+			{#each publications as pub}
 				<motion.div variants={itemVariants}>
 					<LinkWithoutIcon href={pub.url} target="_blank" class="pub-link">
 						<Image
