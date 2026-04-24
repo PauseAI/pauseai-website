@@ -1,3 +1,10 @@
+// The list of routes `smoke.spec.ts` iterates over — discovered at
+// test-startup time by walking `src/routes/` and `src/posts/` and reading
+// each file's `@visualDiffEnabled` annotation (see `annotations.ts`), so
+// renames carry the opt-in/out with the source file and there's no central
+// list to keep in sync. Throws if discovery returns implausibly few
+// results, in case the layout of `src/routes/` changes underneath us.
+
 import { dirname, join } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { classifyPages, classifyPosts } from './annotations.ts'

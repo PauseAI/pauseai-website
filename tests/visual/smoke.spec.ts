@@ -1,3 +1,10 @@
+// Visual-diff test entry point — navigates Playwright through every route
+// in `routes.ts` and attaches a fullPage screenshot per route for Chromatic
+// to diff. `@chromatic-com/playwright` captures HTML + assets per test; CI
+// uploads those to Chromatic, which re-renders and diffs server-side.
+// Cross-origin stability rules are applied in `beforeEach` — see the
+// comment at `ABORTED_RESOURCE_TYPES`.
+
 import { test } from '@chromatic-com/playwright'
 import { ROUTES } from './routes'
 

@@ -117,7 +117,7 @@ if (process.env.VISUAL_TEST === '1') {
 
 	server.events.on('request:unhandled', ({ request }) => {
 		// Filter same-origin preview-server calls (the Node process making a
-		// fetch back to localhost:4173 for /api/posts etc.). These aren't
+		// fetch back to its own localhost for /api/posts etc.). These aren't
 		// un-fixtured external integrations.
 		if (request.url.startsWith('http://localhost:')) return
 		logWarn('UNHANDLED', request.method, request.url)
