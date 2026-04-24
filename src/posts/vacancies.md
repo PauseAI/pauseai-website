@@ -98,3 +98,11 @@ _We review applicants on a rolling basis and reserve the right to close the call
 We welcome spontaneous applications. If you're passionate about our mission and believe you could contribute to PauseAI in a paid role, please send your CV and a brief cover letter to [vacancies@pauseai.info](mailto:vacancies@pauseai.info).
 
 Please note: We cannot guarantee a response to spontaneous applications, but we will keep them on file and consider them when we next open positions.
+
+Testing
+
+some text
+
+**And some formatting**
+
+# And a heading
