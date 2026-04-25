@@ -207,7 +207,6 @@ description: What the Australian chapter of PauseAI has been doing and needs hel
 - We attended online the Australian Academy of Science webinar on “[AI in science: the promise, perils and path forward – AI and our safety](https://science.org.au/news-events/events/ai-science-promise-perils-path-forward-ai-our-safety)”, publicly asking why they weren’t mentioning existential risk.
 - We trialled car magnets
 
-
 <div style="display:flex; flex-wrap:wrap; gap:0.5rem; max-width:90%; margin:1rem auto;">
 <div style="flex:1; min-width:200px;">
 
@@ -221,8 +220,7 @@ description: What the Australian chapter of PauseAI has been doing and needs hel
 </div>
 </div>
 
-- Making It Official💍 After months of passionate collaboration, late-night strategising, and countless volunteer dates, the four of us take the next step in our relationship: We're thrilled to announce PauseAI Australia is officially incorporated! 
-
+- Making It Official💍 After months of passionate collaboration, late-night strategising, and countless volunteer dates, the four of us take the next step in our relationship: We're thrilled to announce PauseAI Australia is officially incorporated!
 
 <div style="display:flex; flex-wrap:wrap; gap:0.5rem; max-width:90%; margin:1rem auto;">
 <div style="flex:1; min-width:200px;">
@@ -236,7 +234,6 @@ description: What the Australian chapter of PauseAI has been doing and needs hel
 
 </div>
 </div>
-
 
 ### 2025 September
 
