@@ -29,9 +29,9 @@ jobs:
               content: 'eyes'
             });
 
-      - name: Get PR branch
+      - name: Get PR details
         uses: actions/github-script@v9
-        id: get-branch
+        id: get-pr
         with:
           script: |
             const prNumber = context.issue.number;
@@ -40,13 +40,14 @@ jobs:
               repo: context.repo.repo,
               pull_number: prNumber
             });
-            return pr.head.ref;
-          result-encoding: string
+            core.setOutput('branch', pr.head.ref);
+            core.setOutput('repo', pr.head.repo.full_name);
 
       - name: Checkout PR branch
         uses: actions/checkout@v6
         with:
-          ref: ${{ steps.get-branch.outputs.result }}
+          repository: ${{ steps.get-pr.outputs.repo }}
+          ref: ${{ steps.get-pr.outputs.branch }}
           token: ${{ secrets.GITHUB_TOKEN }}
 
       - uses: pnpm/action-setup@v6
@@ -66,7 +67,7 @@ jobs:
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
           commit_message: 'style: format code with prettier'
-          branch: ${{ steps.get-branch.outputs.result }}
+          branch: ${{ steps.get-pr.outputs.branch }}
 
       - name: React to comment
         uses: actions/github-script@v9
