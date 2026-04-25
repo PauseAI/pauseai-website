@@ -64,7 +64,7 @@ jobs:
         run: pnpm format .
 
       - name: Commit and push changes
-        uses: stefanzweifel/git-auto-commit-action@v5
+        uses: stefanzweifel/git-auto-commit-action@v7
         with:
           commit_message: 'style: format code with prettier'
           branch: ${{ steps.get-pr.outputs.branch }}
