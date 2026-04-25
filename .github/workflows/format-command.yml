@@ -41,13 +41,14 @@ jobs:
               pull_number: prNumber
             });
             core.setOutput('branch', pr.head.ref);
+            core.setOutput('sha', pr.head.sha);
             core.setOutput('repo', pr.head.repo.full_name);
 
       - name: Checkout PR branch
         uses: actions/checkout@v6
         with:
           repository: ${{ steps.get-pr.outputs.repo }}
-          ref: ${{ steps.get-pr.outputs.branch }}
+          ref: ${{ steps.get-pr.outputs.sha }}
           token: ${{ secrets.GITHUB_TOKEN }}
 
       - uses: pnpm/action-setup@v6
