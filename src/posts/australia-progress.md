@@ -18,11 +18,11 @@ description: What the Australian chapter of PauseAI has been doing and needs hel
 
 - Upcoming
   - Help out with [evergreen tasks](/australia)
-  - Tell us [what you did](mailto:australia@pauseai.info?subject=Aussie%20Did%20a%20Thing) so we can add it, or [what you have cooking](mailto:australia@pauseai.info?subject=Things%20Cooking) so we can support you!
-- Released newsletter on getting your MPs to sign Superintelligence Statement.
+  - Tell us [what you did](mailto:australia@pauseai.info?subject=Aussie%20Did%20a%20Thing), or [what you have cooking](mailto:australia@pauseai.info?subject=Things%20Cooking) so we can support you!
+- Released newsletter on how you get your MPs to sign Superintelligence Statement.
 - Emailed all Liberal MPs and Senators advising them on x-risk.
 - We attended the Canberra Innovation Network's book launch event. Chief Minister Andrew Barr raised the importance of managing risk when deploying AI in government. Afterwards we spoke to the book author John Howard, who agreed that guardrails are essential when deploying AI.
-- Supported Australians For AI Safety in their open letter "[Activate existing biosecurity powers to address AI-enabled risks](https://www.australiansforaisafety.com.au/letters/ai-bio-gene-synth-screening)", consider signing!
+- Supported Australians For AI Safety in their open letter "[Activate existing biosecurity powers to address AI-enabled risks](https://www.australiansforaisafety.com.au/letters/ai-bio-gene-synth-screening)". Consider signing!
 
 <div style="display:flex; flex-wrap:wrap; gap:0.5rem; max-width:90%; margin:1rem auto;">
 <div style="flex:1; min-width:200px;">
@@ -140,7 +140,7 @@ description: What the Australian chapter of PauseAI has been doing and needs hel
 - 📧1 AI decisionmaker email, meeting with 👥1, 📅1 events with 10 attendees.
 - Met with Deborah Morris MLA about AI misalignment, deepfakes and bioweapon risks.
 - ⭐Milestone: 70 subscribers to our newsletter!
-- Our volunteers are now donating over $400 / month. This covers our operating costs (insurance, web & email hosting, stall materials) and lets us plan more ambitious events!
+- You are donating enough to cover our operating costs: insurance, web & email hosting, stall materials. We are all volunteers, so this frees us to plan more ambitious events!
 - Mark rolls off as national co-director to focus on Melbourne scene, Peter steps up.
 
 ## 2025 - more coming soon!
@@ -151,7 +151,8 @@ description: What the Australian chapter of PauseAI has been doing and needs hel
 - ✅Australian AI Safety Institute (AISI) announced! This was one of our 3 main policy goals. Two to go: international AI treaty, and AI guardrails.
 - ✅Emails from PauseAI Australia volunteers and a [question at a live townhall](https://youtu.be/SbqUEhJt5RU?si=CSVML0vatdW-GBEh) prompted five politicians to sign the [Future of Life Institute's Superintelligence Statement](https://www.linkedin.com/feed/update/urn:li:activity:7408047524902572032).
 - Minister of Industry [responds to petition EN7777](https://epetitions.aph.gov.au/api/ministerialresponse/download/EN7777), declining to commit to mandatory independent safety evaluations nor to advocate for an international pause treaty, instead pointing to voluntary measures.
-- We co-signed [Urging an International AI Treaty: An Open Letter](https://aitreaty.org/)
+- We co-signed [Urging an International AI Treaty: An Open Letter](https://aitreaty.org/).
+- We made a submission to the India AI Impact Summit working group for "Safe & Trusted AI".
 
 ### 2025 November
 
@@ -189,7 +190,7 @@ description: What the Australian chapter of PauseAI has been doing and needs hel
 
 </div>
 </div>
-
+- Ran a stall at the Canberra Organic Growers Society open day
 - Ran a stall at EAGxAustralasia
 
 <div style="display:flex; flex-wrap:wrap; gap:0.5rem; max-width:90%; margin:1rem auto;">
@@ -242,6 +243,7 @@ description: What the Australian chapter of PauseAI has been doing and needs hel
 - ✅[e-petition EN7777 ](https://www.aph.gov.au/e-petitions/petition/EN7777) to the Australian House of Representatives was open for 30 days and collected 168 signatures. The petition asked the House to legislate that all future frontier artificial intelligence systems must pass rigorous independent safety evaluations, and further asked the House to advocate proactively for an international treaty to pause frontier AI development until global safety mechanisms are in place. The Minister gave an official response.
 - In September 2025, PauseAI Australia responded to the interim report on _Harnessing Data and Digital Technology_ with [this submission](https://drive.google.com/file/d/1Ea9I3jXCZAMdGAcN2D-UMRPyE2MzGB7k/view). Volunteers also made individual submissions ([David](https://docs.google.com/document/d/1DenTOorlnqQ02PJEEdRvsceFmfvvfTXxGubozjfx-yE/edit?usp=sharing), [Peter](https://docs.google.com/document/d/1aQcC5DYq3feyWyHAPFGcEvwgrX0vXSbgMNDBEYWA61E/edit?tab=t.0#heading=h.4hsb6c6hjc5f), [Michael](https://drive.google.com/file/d/1lWdtIiLatF1DOPvdjQSaonO9dEqFCFSV/view?usp=drive_link)).
 - We attended online the Prevention United workshop on their Youth Ambassadors Group’s brief [Navigating Artificial Intelligence for Youth Mental Health](https://nest.greenant.net/s/YAzw3wbtrzc5gwo), asking advice on how teens can deal with predicted catastrophic outcomes from AI.
+- We ran a stall at the Kambah Spring Sustainability Fair.
 
 ### 2025 August
 
