@@ -225,11 +225,6 @@ description: What the Australian chapter of PauseAI has been doing and needs hel
 <div style="display:flex; flex-wrap:wrap; gap:0.5rem; max-width:90%; margin:1rem auto;">
 <div style="flex:1; min-width:200px;">
 
-![20251003_CarMagnetRace.webp](/australia/20251003_CarMagnetRace.webp)
-
-</div>
-<div style="flex:1; min-width:200px;">
-
 ![20251027_PauseAIAusIncorporated.png](/australia/20251027_PauseAIAusIncorporated.png)
 
 </div>
