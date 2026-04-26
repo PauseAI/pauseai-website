@@ -26,7 +26,7 @@
 		"_lint:eslint": "eslint . --format gha --max-warnings=47",
 		"_lint:prettier": "tsx scripts/generate-prettier-ignore.ts && prettier --check .",
 		"format": "tsx scripts/generate-prettier-ignore.ts && prettier --write --ignore-unknown",
-		"prepare": "husky",
+		"prepare": "lefthook install",
 		"sync": "svelte-kit sync"
 	},
 	"pnpm": {
@@ -59,9 +59,8 @@
 		"eslint-plugin-svelte": "^3.17.1",
 		"globals": "^16.5.0",
 		"globby": "^16.2.0",
-		"husky": "^9.1.7",
 		"knip": "^6.7.0",
-		"lint-staged": "^15.5.2",
+		"lefthook": "^2.1.6",
 		"mdsvex": "^0.12.7",
 		"minimatch": "^9.0.9",
 		"minimist": "^1.2.8",
