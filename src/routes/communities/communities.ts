@@ -1,4 +1,4 @@
-import type { Post } from '$lib/types'
+import type { StrictPost } from '$lib/types'
 import adjacentCommunitiesJson from './adjacent-communities.json'
 import pauseAICommunitiesJson from './pauseai-communities.json'
 import nationalChaptersJson from './national-chapters.json'
@@ -22,7 +22,7 @@ export type Community = RawCommunity & {
 	country?: string
 }
 
-export const communitiesMeta: Post = {
+export const communitiesMeta: StrictPost = {
 	title: 'Find your PauseAI Community',
 	description: 'A map of all PauseAI communities, people and events around the world.',
 	date: '2023-12-15',
@@ -41,11 +41,10 @@ const LINK_PLACEHOLDERS = {
 }
 
 const pauseAICommunities: Community[] = (
-	pauseAICommunitiesJson as CommunitiesConfiguration
+	pauseAICommunitiesJson satisfies CommunitiesConfiguration
 ).communities.map((c) => ({
 	...c,
 	type: 'local',
-	country_local: c.country_local,
 	country:
 		nationalChaptersJson.communities.find((n) => c.parent_name?.includes(n.name))?.name || undefined // Use undefined instead of null
 }))

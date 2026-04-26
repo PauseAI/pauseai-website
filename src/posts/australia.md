@@ -4,6 +4,8 @@ slug: australia
 description: the Australian chapter of PauseAI
 ---
 
+<iframe width="560" height="315" src="https://www.youtube.com/embed/Em0EzL7mr0c?si=tRRDrxh-rLG9YoWm" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
 Within a decade, artificial intelligence could become smarter than humans at almost everything — and able to improve itself without human control. If this happens without strong global safeguards, the consequences could be catastrophic.
 
 Australia should help stop that from happening. [Learn how](/australia-detail). [See how we're going](/australia-progress)!

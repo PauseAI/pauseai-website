@@ -1,6 +1,6 @@
-import type { Post } from '$lib/types'
+import type { StrictPost } from '$lib/types'
 
-export const meta: Post = {
+export const meta: StrictPost = {
 	title: 'Contact Us',
 	description:
 		'Get in touch with the PauseAI team for general inquiries, press and media requests, partnership opportunities, or feedback.',

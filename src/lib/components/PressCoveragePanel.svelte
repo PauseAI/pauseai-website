@@ -22,7 +22,7 @@
 
 	let availableTypes: string[] = []
 	// Extract unique type names for tab labels
-	$: availableTypes = Array.from(new Set(coverage.map((c) => c.type))).filter(Boolean) as string[]
+	$: availableTypes = Array.from(new Set(coverage.map((c) => c.type))).filter(Boolean)
 
 	// Sort them based on the schema order fetched directly from Notion
 	$: orderedTabs = typeOrder.length > 0 ? typeOrder : outletOrder

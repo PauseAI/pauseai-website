@@ -1,6 +1,6 @@
 import fs from 'fs'
 import * as pagefind from 'pagefind'
-import type { Post } from '../src/lib/types'
+import type { DescriptivePost } from '../src/lib/types'
 
 const POSTS_PATH = 'build/api/posts'
 const INPUT_PATH = 'build'
@@ -11,8 +11,8 @@ const { index, errors } = await pagefind.createIndex({})
 if (!index) throw new Error(errors.toString())
 
 // Index dynamic pages
-function parsePosts(raw: string): Post[] {
-	return JSON.parse(raw) as Post[]
+function parsePosts(raw: string): DescriptivePost[] {
+	return JSON.parse(raw) as DescriptivePost[]
 }
 
 const posts = parsePosts(fs.readFileSync(POSTS_PATH, 'utf-8'))
@@ -22,9 +22,11 @@ for (const post of posts) {
 		url: '/' + post.slug,
 		content: post.title + '. ' + (post.description ?? ''),
 		language: 'en',
-		meta: {
-			title: post.title
-		}
+		meta: post.title
+			? {
+					title: post.title
+				}
+			: undefined
 	})
 }
 

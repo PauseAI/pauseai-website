@@ -6,7 +6,7 @@ export type Categories = 'sveltekit' | 'svelte' | 'AI Safety' | 'Transparency' |
 
 export type LinkType = 'internal' | 'external' | 'mail'
 
-export type FrontmatterMeta = {
+type StrictFrontmatterMeta = {
 	title: string
 	/** Meta description for SEO */
 	description: string
@@ -20,10 +20,15 @@ export type FrontmatterMeta = {
 	news?: boolean
 }
 
-export type Post = FrontmatterMeta & {
+/** Descriptive frontmatter where everything is optional (for markdown parsing) */
+export type DescriptiveFrontmatterMeta = Partial<StrictFrontmatterMeta>
+
+export type StrictPost<T = StrictFrontmatterMeta> = T & {
 	/** Path in URL from root */
 	slug: string
 }
+
+export type DescriptivePost = StrictPost<DescriptiveFrontmatterMeta>
 
 export type NewsItem = {
 	title: string

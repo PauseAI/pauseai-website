@@ -1,4 +1,4 @@
-import * as luma from '$lib/clients/luma'
+import * as Calendar from '$lib/clients/luma/calendar'
 import { generateCacheControlRecord } from '$lib/utils.js'
 import { json } from '@sveltejs/kit'
 import type { RequestHandler } from './$types'
@@ -24,7 +24,8 @@ const CALENDAR_IDS = [
 	'cal-Z327EhtiFdHuVie', // UK
 	'cal-EvzL9fKA3SCSrOq', // US
 	'cal-gnpo62PdSdau7KQ', // AU
-	'cal-tsYv79s4aTQC16Q' // CA
+	'cal-tsYv79s4aTQC16Q', // CA
+	'cal-zalx0j0ZcHpAlEB' // DE
 ]
 
 export const GET: RequestHandler = async ({ url, setHeaders }) => {
@@ -33,7 +34,7 @@ export const GET: RequestHandler = async ({ url, setHeaders }) => {
 
 	const allItems = await Promise.all(
 		CALENDAR_IDS.map((id) =>
-			luma.Calendar.getItems({
+			Calendar.getItems({
 				calendarApiId: id,
 				period: 'future',
 				paginationLimit: 20
