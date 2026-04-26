@@ -12,7 +12,6 @@ description: What the Australian chapter of PauseAI has been doing and needs hel
 - Released newsletter on how you get your MPs to sign Superintelligence Statement.
 - Emailed all Liberal MPs and Senators advising them on x-risk.
 - We attended the Canberra Innovation Network's book launch event. Chief Minister Andrew Barr raised the importance of managing risk when deploying AI in government. Afterwards we spoke to the book author John Howard, who agreed that guardrails are essential when deploying AI.
-- Supported Australians For AI Safety in their open letter "[Activate existing biosecurity powers to address AI-enabled risks](https://www.australiansforaisafety.com.au/letters/ai-bio-gene-synth-screening)". Consider signing!
 
 <div style="display:flex; flex-wrap:wrap; gap:0.5rem; max-width:90%; margin:1rem auto;">
 <div style="flex:1; min-width:200px;">
@@ -21,6 +20,9 @@ description: What the Australian chapter of PauseAI has been doing and needs hel
 
 </div>
 </div>
+
+- Supported Australians For AI Safety in their open letter "[Activate existing biosecurity powers to address AI-enabled risks](https://www.australiansforaisafety.com.au/letters/ai-bio-gene-synth-screening)". Consider signing!
+
 - Ashley takes on volunteer role of Digital Marketing
 
 <div style="display:flex; flex-wrap:wrap; gap:0.5rem; max-width:90%; margin:1rem auto;">
