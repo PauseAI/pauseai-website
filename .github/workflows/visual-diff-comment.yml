@@ -37,22 +37,30 @@ jobs:
         with:
           script: |
             const run = context.payload.workflow_run
-            const { data: prs } = await github.rest.repos.listPullRequestsAssociatedWithCommit({
+            // Look up open PRs by head ref directly. We deliberately don't use
+            // `listPullRequestsAssociatedWithCommit` here: when the commit is
+            // on the repo's default branch, that endpoint only returns merged
+            // PRs, so an open PR whose head is at this commit gets filtered
+            // out (hit on a fork where the feature branch was the default).
+            // `pulls?head=` has no such quirk.
+            const headOwner = run.head_repository?.owner?.login
+            const headBranch = run.head_branch
+            const { data: prs } = await github.rest.pulls.list({
               owner: context.repo.owner,
               repo: context.repo.repo,
-              commit_sha: run.head_sha
+              state: 'open',
+              head: `${headOwner}:${headBranch}`
             })
-            // Narrow by trusted workflow_run fields — head_branch AND
-            // head_repository.id — so a commit shared between multiple open
-            // PRs routes the comment to the right one. Edge case we don't
-            // handle: same fork branch opened as TWO open PRs against
-            // different base branches simultaneously (rare). In that case
-            // `.find()` picks the first match and the comment may land on
-            // the wrong PR until one is closed.
+            // Narrow by trusted workflow_run fields — head_repository.id and
+            // head_sha — so a commit shared between multiple open PRs routes
+            // the comment to the right one. Edge case we don't handle: same
+            // fork branch opened as TWO open PRs against different base
+            // branches simultaneously (rare). In that case `.find()` picks
+            // the first match and the comment may land on the wrong PR
+            // until one is closed.
             const match = prs.find((p) => {
-              if (p.state !== 'open') return false
-              if (run.head_branch && p.head.ref !== run.head_branch) return false
               if (run.head_repository?.id && p.head.repo?.id !== run.head_repository.id) return false
+              if (p.head.sha !== run.head_sha) return false
               return true
             })
             if (!match) {
