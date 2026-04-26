@@ -16,7 +16,7 @@ description: the Australian chapter of PauseAI
 
 Within a decade, artificial intelligence could become smarter than humans at almost everything — and able to improve itself without human control. If this happens without strong global safeguards, the consequences could be catastrophic.
 
-Australia should help stop that from happening. 
+Australia should help stop that from happening.
 
 <div style="display:flex; flex-wrap:wrap; gap:0.5rem; max-width:90%; margin:1rem auto;">
 <div style="text-align:center; margin:2rem 0;">
@@ -27,7 +27,6 @@ Australia should help stop that from happening.
 <a href="/australia-progress" style="display:inline-block; background-color:#e67e22; color:white; padding:10px 20px; border-radius:5px; text-decoration:none; font-weight:bold;">See our progress</a>
 </div>
 </div>
-
 
 ## Get involved
 

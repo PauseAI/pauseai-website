@@ -156,7 +156,7 @@ description: What the Australian chapter of PauseAI has been doing and needs hel
 </div>
 </div>
 
-- 5 people from Australia participated in the PauseAI  petition.
+- 5 people from Australia participated in the PauseAI petition.
 
 <div style="display:flex; flex-wrap:wrap; gap:0.5rem; max-width:90%; margin:1rem auto;">
 <div style="flex:1; min-width:200px;">
