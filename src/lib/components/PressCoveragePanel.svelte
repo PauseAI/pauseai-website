@@ -1,15 +1,14 @@
 <script lang="ts">
-	import type { PressCoverage } from './notion.server'
+	import type { PressCoverage } from '$lib/press-coverage.remote'
 	import NewsCard from '$lib/components/NewsCard.svelte'
 	import type { NewsItem } from '$lib/types'
 
-	// Temporarily support the old 'publication' property if hot module reload hasn't caught the backend change yet
-	type CoverageItem = PressCoverage & { publication?: string }
-	export let coverage: CoverageItem[] = []
+	export let coverage: PressCoverage[] = []
 	export let typeOrder: string[] = []
 	export let outletOrder: string[] = []
+	export let loading: boolean = false
 
-	function toNewsItem(item: CoverageItem): NewsItem {
+	function toNewsItem(item: PressCoverage): NewsItem {
 		return {
 			title: item.title,
 			subtitle: item.notes?.trim() ?? '',
@@ -48,7 +47,13 @@
 </script>
 
 <div class="coverage-layout">
-	{#if coverage.length === 0}
+	{#if loading}
+		<div class="coverage-cards">
+			{#each Array(6) as _}
+				<NewsCard loading />
+			{/each}
+		</div>
+	{:else if coverage.length === 0}
 		<p class="empty-state">No press coverage found.</p>
 	{:else}
 		<div class="tabs-container">
@@ -134,10 +139,5 @@
 		.coverage-cards {
 			grid-template-columns: 1fr;
 		}
-	}
-
-	/* Optional: Apply an explicit global margin style on the Press page for the branding section */
-	:global(.logo-materials) {
-		margin-top: 4rem;
 	}
 </style>
