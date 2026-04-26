@@ -4,7 +4,7 @@ slug: australia-progress
 description: What the Australian chapter of PauseAI has been doing and needs help with
 ---
 
-<div style="aspect-ratio: 16 / 9; width: 90%;">
+<div style="aspect-ratio: 16 / 9; width: 95%;">
   <iframe
     src="https://www.youtube-nocookie.com/embed/Em0EzL7mr0c?si=tRRDrxh-rLG9YoWm"
     title="PauseAI Australia introduction"
@@ -140,7 +140,7 @@ description: What the Australian chapter of PauseAI has been doing and needs hel
 - 📧1 AI decisionmaker email, meeting with 👥1, 📅1 events with 10 attendees.
 - Met with Deborah Morris MLA about AI misalignment, deepfakes and bioweapon risks.
 - ⭐Milestone: 70 subscribers to our newsletter!
-- You are donating enough to cover our operating costs: insurance, web & email hosting, stall materials. We are all volunteers, so this frees us to plan more ambitious events!
+- ⭐Milestone: You are donating enough to cover our operating costs: insurance, web & email hosting, stall materials. We are all volunteers, so this frees us to plan more ambitious events!
 - Mark rolls off as national co-director to focus on Melbourne scene, Peter steps up.
 
 ## 2025 - more coming soon!
