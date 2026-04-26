@@ -6,6 +6,7 @@
 	export let coverage: PressCoverage[] = []
 	export let typeOrder: string[] = []
 	export let outletOrder: string[] = []
+	export let loading: boolean = false
 
 	function toNewsItem(item: PressCoverage): NewsItem {
 		return {
@@ -46,7 +47,13 @@
 </script>
 
 <div class="coverage-layout">
-	{#if coverage.length === 0}
+	{#if loading}
+		<div class="coverage-cards">
+			{#each Array(6) as _}
+				<NewsCard loading />
+			{/each}
+		</div>
+	{:else if coverage.length === 0}
 		<p class="empty-state">No press coverage found.</p>
 	{:else}
 		<div class="tabs-container">
