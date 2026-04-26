@@ -4,16 +4,6 @@ slug: australia-progress
 description: What the Australian chapter of PauseAI has been doing and needs help with
 ---
 
-<div style="aspect-ratio: 16 / 9; width: 90%;">
-  <iframe
-    src="https://www.youtube-nocookie.com/embed/Em0EzL7mr0c?si=tRRDrxh-rLG9YoWm"
-    title="PauseAI Australia introduction"
-    style="width: 100%; height: 100%; border: 0;"
-    allow="clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-    referrerpolicy="strict-origin-when-cross-origin"
-    allowfullscreen></iframe>
-</div>
-
 ### 2026 April
 
 - Upcoming
@@ -140,7 +130,7 @@ description: What the Australian chapter of PauseAI has been doing and needs hel
 - 📧1 AI decisionmaker email, meeting with 👥1, 📅1 events with 10 attendees.
 - Met with Deborah Morris MLA about AI misalignment, deepfakes and bioweapon risks.
 - ⭐Milestone: 70 subscribers to our newsletter!
-- You are donating enough to cover our operating costs: insurance, web & email hosting, stall materials. We are all volunteers, so this frees us to plan more ambitious events!
+- ⭐Milestone: You are donating enough to cover our operating costs: insurance, web & email hosting, stall materials. We are all volunteers, so this frees us to plan more ambitious events!
 - Mark rolls off as national co-director to focus on Melbourne scene, Peter steps up.
 
 ## 2025 - more coming soon!
@@ -166,12 +156,12 @@ description: What the Australian chapter of PauseAI has been doing and needs hel
 </div>
 </div>
 
-- 5 people from Australia participated in the PauseAI photo petition.
+- 5 people from Australia participated in the PauseAI petition.
 
 <div style="display:flex; flex-wrap:wrap; gap:0.5rem; max-width:90%; margin:1rem auto;">
 <div style="flex:1; min-width:200px;">
 
-![2025-11_PhotoPetition.jpg](/australia/2025-11_PhotoPetition.jpg)
+![20251000_PhotoPetition_AussiesBordered.jpg](/australia/20251000_PhotoPetition_AussiesBordered.jpg)
 
 </div>
 </div>
@@ -223,11 +213,6 @@ description: What the Australian chapter of PauseAI has been doing and needs hel
 - Making It Official💍 After months of passionate collaboration, late-night strategising, and countless volunteer dates, the four of us take the next step in our relationship: We're thrilled to announce PauseAI Australia is officially incorporated!
 
 <div style="display:flex; flex-wrap:wrap; gap:0.5rem; max-width:90%; margin:1rem auto;">
-<div style="flex:1; min-width:200px;">
-
-![20251003_CarMagnetRace.webp](/australia/20251003_CarMagnetRace.webp)
-
-</div>
 <div style="flex:1; min-width:200px;">
 
 ![20251027_PauseAIAusIncorporated.png](/australia/20251027_PauseAIAusIncorporated.png)
