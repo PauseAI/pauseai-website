@@ -3,6 +3,8 @@ title: FAQ
 description: Frequently asked questions about PauseAI and the risks of superintelligent AI.
 ---
 
+<!-- @visualDiffEnabled: true — long-form post with auto-generated table of contents -->
+
 <script>
     import SimpleToc from '$lib/components/simple-toc/SimpleToc.svelte'
 </script>
