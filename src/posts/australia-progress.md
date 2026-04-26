@@ -180,7 +180,22 @@ description: What the Australian chapter of PauseAI has been doing and needs hel
 
 </div>
 </div>
+
 - Ran a stall at the Canberra Organic Growers Society open day
+- 
+<div style="display:flex; flex-wrap:wrap; gap:0.5rem; max-width:90%; margin:1rem auto;">
+<div style="flex:1; min-width:200px;">
+
+![20251101_CogsKambahOpenDayStallFront.png](/australia/20251101_CogsKambahOpenDayStallFront.png)
+
+</div>
+<div style="flex:1; min-width:200px;">
+
+![20251101_CogsKambahOpenDayStallTop.jpg](/australia/20251101_CogsKambahOpenDayStallTop.jpg)
+
+</div>
+</div>
+
 - Ran a stall at EAGxAustralasia
 
 <div style="display:flex; flex-wrap:wrap; gap:0.5rem; max-width:90%; margin:1rem auto;">
@@ -190,6 +205,17 @@ description: What the Australian chapter of PauseAI has been doing and needs hel
 
 </div>
 </div>
+
+- Attended the Bad Bots event at the National Archives.
+- 
+<div style="display:flex; flex-wrap:wrap; gap:0.5rem; max-width:90%; margin:1rem auto;">
+<div style="flex:1; min-width:200px;">
+
+![20251005_PeterBadBotsEventNationalArchives.png](/australia/20251005_PeterBadBotsEventNationalArchives.png)
+
+</div>
+</div>
+
 
 ### 2025 October
 
@@ -225,7 +251,15 @@ description: What the Australian chapter of PauseAI has been doing and needs hel
 - ✅[e-petition EN7777 ](https://www.aph.gov.au/e-petitions/petition/EN7777) to the Australian House of Representatives was open for 30 days and collected 168 signatures. The petition asked the House to legislate that all future frontier artificial intelligence systems must pass rigorous independent safety evaluations, and further asked the House to advocate proactively for an international treaty to pause frontier AI development until global safety mechanisms are in place. The Minister gave an official response.
 - In September 2025, PauseAI Australia responded to the interim report on _Harnessing Data and Digital Technology_ with [this submission](https://drive.google.com/file/d/1Ea9I3jXCZAMdGAcN2D-UMRPyE2MzGB7k/view). Volunteers also made individual submissions ([David](https://docs.google.com/document/d/1DenTOorlnqQ02PJEEdRvsceFmfvvfTXxGubozjfx-yE/edit?usp=sharing), [Peter](https://docs.google.com/document/d/1aQcC5DYq3feyWyHAPFGcEvwgrX0vXSbgMNDBEYWA61E/edit?tab=t.0#heading=h.4hsb6c6hjc5f), [Michael](https://drive.google.com/file/d/1lWdtIiLatF1DOPvdjQSaonO9dEqFCFSV/view?usp=drive_link)).
 - We attended online the Prevention United workshop on their Youth Ambassadors Group’s brief [Navigating Artificial Intelligence for Youth Mental Health](https://nest.greenant.net/s/YAzw3wbtrzc5gwo), asking advice on how teens can deal with predicted catastrophic outcomes from AI.
-- We ran a stall at the Kambah Spring Sustainability Fair.
+- We ran a stall at the Kambah Spring Sustainability Fair, speaking to Laura Nuttall MLA (pictured) and Caitlin Tough MLA.
+
+<div style="display:flex; flex-wrap:wrap; gap:0.5rem; max-width:90%; margin:1rem auto;">
+<div style="flex:1; min-width:200px;">
+
+![20250921_KambahSpringSustainabilityFairXanderPeterLaura.jpg](/australia/20250921_KambahSpringSustainabilityFairXanderPeterLaura.jpg)
+
+</div>
+</div>
 
 ### 2025 August
 
