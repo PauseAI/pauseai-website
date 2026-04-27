@@ -187,9 +187,8 @@ description: What the Australian chapter of PauseAI has been doing and needs hel
 </div>
 
 - Ran a stall at the Canberra Organic Growers Society open day
-- 
-<div style="display:flex; flex-wrap:wrap; gap:0.5rem; max-width:90%; margin:1rem auto;">
-<div style="flex:1; min-width:200px;">
+- <div style="display:flex; flex-wrap:wrap; gap:0.5rem; max-width:90%; margin:1rem auto;">
+  <div style="flex:1; min-width:200px;">
 
 ![20251101_CogsKambahOpenDayStallFront.png](/australia/20251101_CogsKambahOpenDayStallFront.png)
 
@@ -212,15 +211,13 @@ description: What the Australian chapter of PauseAI has been doing and needs hel
 </div>
 
 - Attended the Bad Bots event at the National Archives.
-- 
-<div style="display:flex; flex-wrap:wrap; gap:0.5rem; max-width:90%; margin:1rem auto;">
-<div style="flex:1; min-width:200px;">
+- <div style="display:flex; flex-wrap:wrap; gap:0.5rem; max-width:90%; margin:1rem auto;">
+  <div style="flex:1; min-width:200px;">
 
 ![20251005_PeterBadBotsEventNationalArchives.png](/australia/20251005_PeterBadBotsEventNationalArchives.png)
 
 </div>
 </div>
-
 
 ### 2025 October
 
