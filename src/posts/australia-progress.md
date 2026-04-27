@@ -135,7 +135,7 @@ description: What the Australian chapter of PauseAI has been doing and needs hel
 - ⭐Milestone: You are donating enough to cover our operating costs: insurance, web & email hosting, stall materials. We are all volunteers, so this frees us to plan more ambitious events!
 - Mark rolls off as national co-director to focus on Melbourne scene, Peter steps up.
 
-## 2025 - more coming soon!
+## 2025
 
 ### 2025 December
 
