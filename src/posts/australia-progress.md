@@ -137,6 +137,9 @@ description: What the Australian chapter of PauseAI has been doing and needs hel
 
 ## 2025
 
+<details open>
+<summary style="cursor:pointer; font-weight:bold; margin:0.5em 0;">Show 2025 activities</summary>
+
 ### 2025 December
 
 - 📧3 AI decisionmaker emails, 📅1 event with 11 attendees.
@@ -301,6 +304,8 @@ description: What the Australian chapter of PauseAI has been doing and needs hel
 
 </div>
 </div>
+
+</details>
 
 ## 2023
 
