@@ -12,7 +12,6 @@ description: What the Australian chapter of PauseAI has been doing and needs hel
 - Released newsletter on how you get your MPs to sign Superintelligence Statement.
 - Emailed all Liberal MPs and Senators advising them on x-risk.
 - We attended the Canberra Innovation Network's book launch event. Chief Minister Andrew Barr raised the importance of managing risk when deploying AI in government. Afterwards we spoke to the book author John Howard, who agreed that guardrails are essential when deploying AI.
-- Supported Australians For AI Safety in their open letter "[Activate existing biosecurity powers to address AI-enabled risks](https://www.australiansforaisafety.com.au/letters/ai-bio-gene-synth-screening)". Consider signing!
 
 <div style="display:flex; flex-wrap:wrap; gap:0.5rem; max-width:90%; margin:1rem auto;">
 <div style="flex:1; min-width:200px;">
@@ -21,6 +20,9 @@ description: What the Australian chapter of PauseAI has been doing and needs hel
 
 </div>
 </div>
+
+- Supported Australians For AI Safety in their open letter "[Activate existing biosecurity powers to address AI-enabled risks](https://www.australiansforaisafety.com.au/letters/ai-bio-gene-synth-screening)". Consider signing!
+
 - Ashley takes on volunteer role of Digital Marketing
 
 <div style="display:flex; flex-wrap:wrap; gap:0.5rem; max-width:90%; margin:1rem auto;">
@@ -133,7 +135,10 @@ description: What the Australian chapter of PauseAI has been doing and needs hel
 - ⭐Milestone: You are donating enough to cover our operating costs: insurance, web & email hosting, stall materials. We are all volunteers, so this frees us to plan more ambitious events!
 - Mark rolls off as national co-director to focus on Melbourne scene, Peter steps up.
 
-## 2025 - more coming soon!
+## 2025
+
+<details open>
+<summary style="cursor:pointer; font-weight:bold; margin:0.5em 0;">Show 2025 activities</summary>
 
 ### 2025 December
 
@@ -180,7 +185,22 @@ description: What the Australian chapter of PauseAI has been doing and needs hel
 
 </div>
 </div>
+
 - Ran a stall at the Canberra Organic Growers Society open day
+
+<div style="display:flex; flex-wrap:wrap; gap:0.5rem; max-width:90%; margin:1rem auto;">
+<div style="flex:1; min-width:200px;">
+
+![20251101_CogsKambahOpenDayStallFront.jpg](/australia/20251101_CogsKambahOpenDayStallFront.jpg)
+
+</div>
+<div style="flex:1; min-width:200px;">
+
+![20251101_CogsKambahOpenDayStallTop.jpg](/australia/20251101_CogsKambahOpenDayStallTop.jpg)
+
+</div>
+</div>
+
 - Ran a stall at EAGxAustralasia
 
 <div style="display:flex; flex-wrap:wrap; gap:0.5rem; max-width:90%; margin:1rem auto;">
@@ -191,9 +211,28 @@ description: What the Australian chapter of PauseAI has been doing and needs hel
 </div>
 </div>
 
+- Attended the Bad Bots event at the National Archives.
+
+<div style="display:flex; flex-wrap:wrap; gap:0.5rem; max-width:90%; margin:1rem auto;">
+<div style="flex:1; min-width:200px;">
+
+![20251005_PeterBadBotsEventNationalArchives.jpg](/australia/20251005_PeterBadBotsEventNationalArchives.jpg)
+
+</div>
+</div>
+
 ### 2025 October
 
 - ✅On 7 October 2025, PauseAI Australia held a book launch and discussion event at Smith's Alternative bookshop in Canberra to mark the release of [_If Anyone Builds It, Everyone Dies_](https://www.penguin.com.au/books/if-anyone-builds-it-everyone-dies-9781847928931). Laura Nuttall, MLA, and Peter Cain, MLA, joined the discussion and read excerpts from the book.
+
+<div style="display:flex; flex-wrap:wrap; gap:0.5rem; max-width:90%; margin:1rem auto;">
+<div style="flex:1; min-width:200px;">
+
+![20251007_LauraNuttallMLA_PeterCainMLA_David_IABIED_2.jpg](/australia/20251007_LauraNuttallMLA_PeterCainMLA_David_IABIED_2.jpg)
+
+</div>
+</div>
+
 - We attended online the Australian Academy of Science webinar on “[AI in science: the promise, perils and path forward – AI and our safety](https://science.org.au/news-events/events/ai-science-promise-perils-path-forward-ai-our-safety)”, publicly asking why they weren’t mentioning existential risk.
 - We trialled car magnets
 
@@ -224,8 +263,17 @@ description: What the Australian chapter of PauseAI has been doing and needs hel
 
 - ✅[e-petition EN7777 ](https://www.aph.gov.au/e-petitions/petition/EN7777) to the Australian House of Representatives was open for 30 days and collected 168 signatures. The petition asked the House to legislate that all future frontier artificial intelligence systems must pass rigorous independent safety evaluations, and further asked the House to advocate proactively for an international treaty to pause frontier AI development until global safety mechanisms are in place. The Minister gave an official response.
 - In September 2025, PauseAI Australia responded to the interim report on _Harnessing Data and Digital Technology_ with [this submission](https://drive.google.com/file/d/1Ea9I3jXCZAMdGAcN2D-UMRPyE2MzGB7k/view). Volunteers also made individual submissions ([David](https://docs.google.com/document/d/1DenTOorlnqQ02PJEEdRvsceFmfvvfTXxGubozjfx-yE/edit?usp=sharing), [Peter](https://docs.google.com/document/d/1aQcC5DYq3feyWyHAPFGcEvwgrX0vXSbgMNDBEYWA61E/edit?tab=t.0#heading=h.4hsb6c6hjc5f), [Michael](https://drive.google.com/file/d/1lWdtIiLatF1DOPvdjQSaonO9dEqFCFSV/view?usp=drive_link)).
+- We attended the Tech Policy Design Institute’s Consultation on their draft AI Sovereignty Framework.
 - We attended online the Prevention United workshop on their Youth Ambassadors Group’s brief [Navigating Artificial Intelligence for Youth Mental Health](https://nest.greenant.net/s/YAzw3wbtrzc5gwo), asking advice on how teens can deal with predicted catastrophic outcomes from AI.
-- We ran a stall at the Kambah Spring Sustainability Fair.
+- We ran a stall at the Kambah Spring Sustainability Fair, speaking to Laura Nuttall MLA (pictured) and Caitlin Tough MLA.
+
+<div style="display:flex; flex-wrap:wrap; gap:0.5rem; max-width:90%; margin:1rem auto;">
+<div style="flex:1; min-width:200px;">
+
+![20250921_KambahSpringSustainabilityFairXanderPeterLaura.jpg](/australia/20250921_KambahSpringSustainabilityFairXanderPeterLaura.jpg)
+
+</div>
+</div>
 
 ### 2025 August
 
@@ -256,6 +304,8 @@ description: What the Australian chapter of PauseAI has been doing and needs hel
 
 </div>
 </div>
+
+</details>
 
 ## 2023
 
