@@ -15,14 +15,30 @@ const noScriptWithSrc = {
 	create(context) {
 		return {
 			html(node) {
-				const value = (node.value || '').trim()
-				// Only catch if the HTML block starts with <script
-				// and contains a src attribute.
-				if (value.toLowerCase().startsWith('<script') && /\bsrc\s*=/i.test(value)) {
-					context.report({
-						node,
-						messageId: 'noScriptWithSrc'
-					})
+				const value = (node.value || '').replace(/<!--[\s\S]*?-->/g, '')
+				const tagRegex = /<(\/?)([a-z0-9-]+)([^>]*?)(\/?)>/gi
+				let match
+				let depth = 0
+
+				while ((match = tagRegex.exec(value)) !== null) {
+					const [_, isClosing, tagName, attr, isSelfClosing] = match
+					const lowerTagName = tagName.toLowerCase()
+
+					if (lowerTagName === 'script' && !isClosing) {
+						if (depth === 0 && /\bsrc\s*=/i.test(attr)) {
+							context.report({
+								node,
+								messageId: 'noScriptWithSrc'
+							})
+							break
+						}
+					}
+
+					if (isClosing) {
+						depth = Math.max(0, depth - 1)
+					} else if (!isSelfClosing) {
+						depth++
+					}
 				}
 			}
 		}
