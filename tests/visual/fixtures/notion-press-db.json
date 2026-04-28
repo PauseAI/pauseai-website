@@ -1,0 +1,24 @@
+{
+	"object": "database",
+	"id": "212fd8030c4d42ff9de5710f92efecff",
+	"created_time": "2026-01-01T00:00:00.000Z",
+	"last_edited_time": "2026-01-01T00:00:00.000Z",
+	"title": [],
+	"description": [],
+	"is_inline": false,
+	"archived": false,
+	"properties": {
+		"Type": {
+			"id": "t",
+			"name": "Type",
+			"type": "select",
+			"select": {
+				"options": [
+					{ "id": "t1", "name": "News", "color": "blue" },
+					{ "id": "t2", "name": "Interview", "color": "green" },
+					{ "id": "t3", "name": "Opinion", "color": "orange" }
+				]
+			}
+		}
+	}
+}

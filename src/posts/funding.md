@@ -3,6 +3,8 @@ title: PauseAI Funding & Donors
 description: A list of our largest donors.
 ---
 
+<!-- @visualDiffEnabled: true — markdown post with embedded Svelte components -->
+
 <script>
 	import FundingDonorsList from '$lib/components/FundingDonorsList.svelte'
 </script>

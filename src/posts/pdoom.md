@@ -4,6 +4,8 @@ description: How likely do AI various researchers believe AI will cause human ex
 date: 2023-12-18
 ---
 
+<!-- @visualDiffEnabled: true — markdown post with embedded Svelte components -->
+
 <script>
 	import Doomers from '$lib/components/Doomers.svelte'
 </script>

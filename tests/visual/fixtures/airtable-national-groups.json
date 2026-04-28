@@ -1,0 +1,30 @@
+{
+	"records": [
+		{
+			"id": "rec_fixture_ng_1",
+			"createdTime": "2026-01-01T00:00:00.000Z",
+			"fields": {
+				"country": "France",
+				"leaders_name": ["A. Example"],
+				"website_email": "france@example.org",
+				"website": "https://example.org/france",
+				"discord": "https://discord.gg/examplefrance",
+				"x": "https://x.com/examplefrance",
+				"whatsapp": "",
+				"linktree": "",
+				"instagram": "",
+				"tiktok": "",
+				"facebook": "",
+				"youtube": "",
+				"linkedin": "",
+				"luma": "",
+				"substack": "",
+				"image": [
+					{
+						"url": "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 3 2'><rect width='1' height='2' fill='%230055A4'/><rect x='1' width='1' height='2' fill='%23fff'/><rect x='2' width='1' height='2' fill='%23EF4135'/></svg>"
+					}
+				]
+			}
+		}
+	]
+}

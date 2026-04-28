@@ -3,6 +3,8 @@ title: PauseAI Values
 description: How does PauseAI plan to achieve its mission?
 ---
 
+<!-- @visualDiffEnabled: true — plain long-form markdown -->
+
 ## What do we want?
 
 Globally halt frontier AI development until we know how to do it safely and under democratic control. See our [proposal](/proposal).

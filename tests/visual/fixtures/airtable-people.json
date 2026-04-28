@@ -1,0 +1,61 @@
+{
+	"records": [
+		{
+			"id": "rec_fixture_person_1",
+			"createdTime": "2026-01-01T00:00:00.000Z",
+			"fields": {
+				"Full name": "Alex Example",
+				"Bio2": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore.",
+				"Title": "Director",
+				"Photo": [
+					{
+						"thumbnails": {
+							"large": { "url": "https://api.dicebear.com/7.x/bottts/svg?seed=fixture1" }
+						}
+					}
+				],
+				"Privacy": false,
+				"About": true,
+				"About order": 1
+			}
+		},
+		{
+			"id": "rec_fixture_person_2",
+			"createdTime": "2026-01-01T00:00:00.000Z",
+			"fields": {
+				"Full name": "Jordan Sample",
+				"Bio2": "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat duis aute.",
+				"Title": "Volunteer Coordinator",
+				"Photo": [
+					{
+						"thumbnails": {
+							"large": { "url": "https://api.dicebear.com/7.x/bottts/svg?seed=fixture2" }
+						}
+					}
+				],
+				"Privacy": false,
+				"About": true,
+				"About order": 11
+			}
+		},
+		{
+			"id": "rec_fixture_person_3",
+			"createdTime": "2026-01-01T00:00:00.000Z",
+			"fields": {
+				"Full name": "Sam Fixture",
+				"Bio2": "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
+				"Title": "National Lead",
+				"Photo": [
+					{
+						"thumbnails": {
+							"large": { "url": "https://api.dicebear.com/7.x/bottts/svg?seed=fixture3" }
+						}
+					}
+				],
+				"Privacy": false,
+				"About": true,
+				"About order": 30
+			}
+		}
+	]
+}

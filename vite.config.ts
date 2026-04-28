@@ -37,8 +37,12 @@ function getLocaleExcludePatterns(): RegExp[] {
 }
 
 export default defineConfig(() => {
-	// Guarantees server can see .env (on e.g. hot restart)
-	dotenv.config({ override: true })
+	// Guarantees server can see .env (on e.g. hot restart). In visual-diff
+	// runs we flip `override` off so the shell-set fake API keys win over
+	// the empty values in .env (copied from template.env) — otherwise the
+	// Airtable/Notion SDKs short-circuit on empty key before making any
+	// request, and MSW never gets to intercept and serve the fixture.
+	dotenv.config({ override: process.env.VISUAL_TEST !== '1' })
 
 	return {
 		define: {
