@@ -228,7 +228,7 @@ description: What the Australian chapter of PauseAI has been doing and needs hel
 <div style="display:flex; flex-wrap:wrap; gap:0.5rem; max-width:90%; margin:1rem auto;">
 <div style="flex:1; min-width:200px;">
 
-![20251007_Laura_Nuttall_MLA_Peter_Cain_MLA_and_David_Gould_PauseAI_at_IABIED_event2.png](/australia/20251007_Laura_Nuttall_MLA_Peter_Cain_MLA_and_David_Gould_PauseAI_at_IABIED_event2.png)
+![20251007_LauraNuttallMLA_PeterCainMLA_David_IABIED_2.jpg](/australia/20251007_LauraNuttallMLA_PeterCainMLA_David_IABIED_2.jpg)
 
 </div>
 </div>
