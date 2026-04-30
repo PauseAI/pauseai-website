@@ -36,7 +36,7 @@ According to their charter, “OpenAI’s mission is to ensure that artificial g
 ## Contact
 
 - Holly Elmore, PauseAI US Director ([Twitter](https://twitter.com/ilex_ulmus))
-- Sam Kirchner, No AGI ([Twitter](https://twitter.com/No_AGI_))
+- Sam Kirchner, No AGI
 
 ## Media Coverage
 
