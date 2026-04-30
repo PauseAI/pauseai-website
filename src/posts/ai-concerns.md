@@ -1,5 +1,5 @@
 ---
-title: What are your concerns about AI development?
+title: "We want to hear from you: What are your concerns about AI development?"
 description: Share your perspective on the risks of advanced AI.
 ---
 
