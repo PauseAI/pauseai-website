@@ -6,6 +6,7 @@ description: PauseAI UK has criticised Technology Secretary Liz Kendall after
   talent and interests in a speech at the Royal United Services Institute on 28
   April.
 image: /13-may-2024-parliament-square-1-.jpg
+date: 2026-04-30T16:57:00.000+01:00
 news: true
 ---
 
