@@ -1,5 +1,5 @@
 ---
-title: "    UK Technology Secretary overlooks risks posed by AI"
+title: '    UK Technology Secretary overlooks risks posed by AI'
 slug: UK technology secretary
 description: PauseAI UK has criticised Technology Secretary Liz Kendall after
   she described calls to pause AI development as a “double betrayal” of British
