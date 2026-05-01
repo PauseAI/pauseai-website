@@ -151,6 +151,7 @@ description: What the Australian chapter of PauseAI has been doing and needs hel
 
 ### 2025 November
 
+- 📧2 AI decisionmaker emails, 📅1 event with 11 attendees.
 - ✅Publicly asked Senator Pocock to sign Superintelligence Statement, and [he agreed](https://youtu.be/SbqUEhJt5RU)!
 
 <div style="display:flex; flex-wrap:wrap; gap:0.5rem; max-width:90%; margin:1rem auto;">
@@ -221,9 +222,12 @@ description: What the Australian chapter of PauseAI has been doing and needs hel
 </div>
 </div>
 
+- We discussed the Superintelligence Statement with a major news outlet and referred them to prominent Australian signatories.
+
 ### 2025 October
 
 - ✅On 7 October 2025, PauseAI Australia held a book launch and discussion event at Smith's Alternative bookshop in Canberra to mark the release of [_If Anyone Builds It, Everyone Dies_](https://www.penguin.com.au/books/if-anyone-builds-it-everyone-dies-9781847928931). Laura Nuttall, MLA, and Peter Cain, MLA, joined the discussion and read excerpts from the book.
+   - Submitted the event to the National AI Centre's events calendar. NAIC declined, citing "sensational or emotive language," failure to use "plain language," and "promotional or commercial content." The [event description](https://luma.com/tw6clgd4) summarised findings from the AI Impacts 2023 survey of 2,778 published AI researchers and listed activities. We asked NAIC for specific excerpts they considered misleading, and how a free community event differs from the paid commercial workshops listed on the same calendar. After three weeks and a second followup, NAIC replied: "We are not in a position to engage in back-and-forth revisions or provide detailed feedback on individual submissions." [Full correspondence](/20251104_NAICCalendarRejection.pdf)
 
 <div style="display:flex; flex-wrap:wrap; gap:0.5rem; max-width:90%; margin:1rem auto;">
 <div style="flex:1; min-width:200px;">
