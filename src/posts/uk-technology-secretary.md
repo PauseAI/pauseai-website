@@ -6,7 +6,7 @@ description: PauseAI UK has criticised Technology Secretary Liz Kendall after
   talent and interests in a speech at the Royal United Services Institute on 28
   April.
 image: /13-may-2024-parliament-square-1-.jpg
-date: 2026-04-30T16:57:00.000+01:00
+date: 2026-04-30T15:57:00.000Z
 news: true
 ---
 
@@ -35,3 +35,5 @@ Professor Stuart Russell, the author of the standard textbook used in over 1,500
 A [House of Lords Library briefing](https://lordslibrary.parliament.uk/potential-future-risks-from-autonomous-ai-systems/) notes: “Passive loss of control could occur if humans stopped exercising appropriate oversight over AI systems. This could be because the AI decisions were too opaque, complex or fast to allow for meaningful oversight.”
 
 The next meeting of the international network of AI Security Institutes, chaired by the UK, will be held in July. “We hope to see AI safety prominent on the agenda. We speak for a growing number of concerned citizens who wish to see the UK government take a leading role in bringing us closer to an AI treaty that protects us all,” Miller said.
+
+test
