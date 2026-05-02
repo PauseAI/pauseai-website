@@ -10,7 +10,7 @@ description: share your story about AI
 
 PauseAI Australia is collaborating with 14 other PauseAI chapters to share how people are experiencing AI. Please share your story.
 
-<TallyEmbed formId="Gxo8AQ" height={1200} />
+<TallyEmbed formId="xX9pAE" transparentBackground={true} height={1200} />
 
 <style>
   :global(.tally-form-container) {
