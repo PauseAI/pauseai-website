@@ -4,16 +4,22 @@
 	import type { PagefindModal, PagefindSearchResult } from '@pagefind/component-ui'
 	import { onMount } from 'svelte'
 
-	export let open = false
-
-	let theme: 'light' | 'dark' = 'light'
-	let modalEl: PagefindModal | null = null
-	let ready = false
-
-	$: if (browser && open && modalEl && ready) {
-		modalEl.open()
-		open = false
+	interface Props {
+		open?: boolean
 	}
+
+	let { open = $bindable(false) }: Props = $props()
+
+	let theme: 'light' | 'dark' = $state('light')
+	let modalEl: PagefindModal | null = $state(null)
+	let ready = $state(false)
+
+	$effect(() => {
+		if (browser && open && modalEl && ready) {
+			modalEl.open()
+			open = false
+		}
+	})
 
 	onMount(() => {
 		const init = async () => {

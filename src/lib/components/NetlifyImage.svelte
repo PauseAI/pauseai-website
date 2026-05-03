@@ -1,23 +1,37 @@
 <script lang="ts">
 	import { SvelteURLSearchParams } from 'svelte/reactivity'
 
-	export let src: string
-	export let alt: string
-	export let widths: number[] = [400, 800, 1200, 1600, 2400]
-	export let sizes: string = '(min-width: 1280px) 1200px, 100vw'
-	export let quality: number = 80
-	export let fit: 'cover' | 'contain' | 'fill' | 'inside' | 'outside' = 'contain'
+	interface Props {
+		src: string
+		alt: string
+		widths?: number[]
+		sizes?: string
+		quality?: number
+		fit?: 'cover' | 'contain' | 'fill' | 'inside' | 'outside'
+		pictureClass?: string | undefined
+		imgClass?: string | undefined
+		style?: string | undefined
+		loading?: 'lazy' | 'eager'
+		decoding?: 'async' | 'sync' | 'auto'
+		onFailed?: (() => void) | undefined
+	}
 
-	export let pictureClass: string | undefined = undefined
-	export let imgClass: string | undefined = undefined
-	export let style: string | undefined = undefined
-	export let loading: 'lazy' | 'eager' = 'lazy'
-	export let decoding: 'async' | 'sync' | 'auto' = 'async'
+	let {
+		src,
+		alt,
+		widths = [400, 800, 1200, 1600, 2400],
+		sizes = '(min-width: 1280px) 1200px, 100vw',
+		quality = 80,
+		fit = 'contain',
+		pictureClass = undefined,
+		imgClass = undefined,
+		style = undefined,
+		loading = 'lazy',
+		decoding = 'async',
+		onFailed = undefined
+	}: Props = $props()
 
-	/** Callback when the image fails to load entirely (including fallback) */
-	export let onFailed: (() => void) | undefined = undefined
-
-	let useFallback = false
+	let useFallback = $state(false)
 
 	function handleError(e: Event) {
 		const imgElement = e.target as HTMLImageElement
@@ -62,22 +76,24 @@
 	const webpSrcSet = buildSrcSet('webp')
 
 	// Fallback to a jpeg
-	const fallbackSrc = buildNetlifyUrl(src, {
-		w: widths[0], // Smallest width for browsers that don't support srcset
-		q: quality,
-		fm: 'jpg',
-		fit
-	})
+	const fallbackSrc = $derived(
+		buildNetlifyUrl(src, {
+			w: widths[0], // Smallest width for browsers that don't support srcset
+			q: quality,
+			fm: 'jpg',
+			fit
+		})
+	)
 </script>
 
 {#if useFallback}
-	<img on:error={handleError} {src} {alt} class={imgClass} {style} {loading} {decoding} />
+	<img onerror={handleError} {src} {alt} class={imgClass} {style} {loading} {decoding} />
 {:else}
 	<picture class={pictureClass} {style}>
 		<source type="image/avif" srcset={avifSrcSet} {sizes} />
 		<source type="image/webp" srcset={webpSrcSet} {sizes} />
 		<img
-			on:error={handleError}
+			onerror={handleError}
 			src={fallbackSrc}
 			{alt}
 			{sizes}

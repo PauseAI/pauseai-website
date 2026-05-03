@@ -6,19 +6,17 @@
 	import NetlifyImage from './NetlifyImage.svelte'
 	import Skeleton from './Skeleton.svelte'
 
-	let isExternal: boolean
-	let hasImageError = false
+	interface Props {
+		item?: NewsItem
+		loading?: boolean
+		imageSizes?: string
+		id?: string
+	}
 
-	export let item: NewsItem | undefined = undefined
-	export let loading: boolean = false
-	export let imageSizes: string | undefined = undefined
-	/** Optional anchor id (e.g. for hash links from elsewhere) */
-	export let id: string | undefined = undefined
+	let { item, loading = false, imageSizes, id }: Props = $props()
 
-	$: isExternal = item?.source === 'substack' || item?.source === 'press'
-
-	// Reset error state if image changes
-	$: if (item?.image) hasImageError = false
+	let isExternal: boolean = $derived(item?.source === 'substack')
+	let hasImageError: boolean = $derived(Boolean(item?.image))
 </script>
 
 <div>
@@ -155,6 +153,7 @@
 		color: var(--text);
 		opacity: 0.8;
 		display: -webkit-box;
+		line-clamp: 2;
 		-webkit-line-clamp: 2;
 		line-clamp: 2;
 		-webkit-box-orient: vertical;

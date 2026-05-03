@@ -1,14 +1,14 @@
 <script lang="ts">
 	import { onMount } from 'svelte'
-	import { page } from '$app/stores'
+	import { page } from '$app/state'
 	import ShareButtons from '$lib/components/ShareButtons.svelte'
 	import { getCollagenUid } from '$lib/collagen'
 
-	let uid: string | null = null
+	let uid: string | null = $state(null)
 
 	onMount(() => {
 		// Try query param first, then localStorage
-		uid = $page.url.searchParams.get('uid') || getCollagenUid('sayno')
+		uid = page.url.searchParams.get('uid') || getCollagenUid('sayno')
 	})
 </script>
 

@@ -1,12 +1,16 @@
 <script lang="ts">
 	import Link from './Link.svelte'
 
-	/**
-	 * The `content` prop can contain HTML and markdown-style links.
-	 * It is only meant for static messages and should not be used for user-generated content.
-	 * @example "Hello <strong>world</strong>, visit [Svelte](https://svelte.dev) today!"
-	 */
-	export let content = ''
+	interface Props {
+		/**
+		 * The `content` prop can contain HTML and markdown-style links.
+		 * It is only meant for static messages and should not be used for user-generated content.
+		 * @example "Hello <strong>world</strong>, visit [Svelte](https://svelte.dev) today!"
+		 */
+		content?: string
+	}
+
+	let { content = '' }: Props = $props()
 
 	type LinkPart = {
 		type: 'link'
@@ -51,7 +55,7 @@
 	}
 
 	// Re-parse whenever content changes
-	$: parts = parseContent(content)
+	let parts = $derived(parseContent(content))
 </script>
 
 <!-- Render the parsed parts -->

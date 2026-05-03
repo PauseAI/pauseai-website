@@ -3,12 +3,12 @@
 	import PressCoveragePanel from './PressCoveragePanel.svelte'
 	import { getPressCoverage } from '$lib/press-coverage.remote'
 
-	let data: Awaited<ReturnType<typeof getPressCoverage>> = {
+	let data: Awaited<ReturnType<typeof getPressCoverage>> = $state({
 		coverage: [],
 		typeOrder: [],
 		outletOrder: []
-	}
-	let loading = true
+	})
+	let loading = $state(true)
 
 	onMount(async () => {
 		try {

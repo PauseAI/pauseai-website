@@ -1,17 +1,31 @@
 <script lang="ts">
-	import { page } from '$app/stores'
+	import { page } from '$app/state'
 	import { pushState } from '$app/navigation'
 	import { localizeHref, locales } from '$lib/paraglide/runtime'
 	import type { LinkType } from '$lib/types'
-	import type { Action } from 'svelte/action'
+	import type { Attachment } from 'svelte/attachments'
 
-	export let href: string | null = null
-	export let target: string | null = null
-	let className: string = ''
-	export { className as class }
-	export let rel: string | null = null
+	interface Props {
+		href?: string
+		target?: string | null
+		class?: string
+		rel?: string | null
+		type?: LinkType
+		onclick?: (event: MouseEvent) => void
+		children?: import('svelte').Snippet
+		[key: string]: unknown
+	}
 
-	export let type: LinkType = 'internal'
+	let {
+		href = $bindable(),
+		target = $bindable(null),
+		class: className = '',
+		rel = $bindable(null),
+		type = $bindable('internal'),
+		onclick,
+		children,
+		...rest
+	}: Props = $props()
 
 	// Localization helpers
 	const localePattern = new RegExp(`^/(${locales.join('|')})(/|$)`)
@@ -27,8 +41,9 @@
 	}
 
 	// Normalize and localize href
-	let resolvedHref: string | null = null
-	$: {
+	let resolvedHref: string | null = $state(null)
+
+	$effect(() => {
 		if (href) {
 			if (
 				(href.startsWith('http:') || href.startsWith('https:')) &&
@@ -47,35 +62,28 @@
 
 			resolvedHref = processHref(href)
 		}
-	}
+	})
 
 	/** Action for smooth scrolling to anchor links */
-	const smoothScroll: Action<HTMLAnchorElement, string | null> = (
-		node: HTMLAnchorElement,
-		h: string | null
-	) => {
-		const handleClick = (ev: MouseEvent) => {
-			if (h && h.startsWith('#')) {
-				ev.preventDefault()
-				const url = $page.url
-				url.hash = h
-				pushState(url, $page.state)
-				const targetEl = document.querySelector<HTMLElement>(h)
-				if (!targetEl) return
-				targetEl.scrollIntoView({ behavior: 'smooth' })
-				targetEl.tabIndex = -1
-				targetEl.focus({ preventScroll: true })
+	const smoothScroll: (h: string | null) => Attachment<HTMLAnchorElement> = (h: string | null) => {
+		return (node: HTMLAnchorElement) => {
+			const handleClick = (ev: MouseEvent) => {
+				if (h && h.startsWith('#')) {
+					ev.preventDefault()
+					const url = page.url
+					url.hash = h
+					pushState(url, page.state)
+					const targetEl = document.querySelector<HTMLElement>(h)
+					if (!targetEl) return
+					targetEl.scrollIntoView({ behavior: 'smooth' })
+					targetEl.tabIndex = -1
+					targetEl.focus({ preventScroll: true })
+				}
 			}
-		}
 
-		node.addEventListener('click', handleClick)
-		return {
-			update(newHref: string | null) {
-				h = newHref
-			},
-			destroy() {
-				node.removeEventListener('click', handleClick)
-			}
+			node.addEventListener('click', handleClick)
+
+			return () => node.removeEventListener('click', handleClick)
 		}
 	}
 </script>
@@ -86,8 +94,9 @@
 	{target}
 	{rel}
 	class={className}
-	use:smoothScroll={resolvedHref}
-	{...$$restProps}
+	{@attach smoothScroll(resolvedHref)}
+	{onclick}
+	{...rest}
 >
-	<slot></slot>
+	{@render children?.()}
 </a>

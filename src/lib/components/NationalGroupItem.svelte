@@ -18,10 +18,14 @@
 	// Lucide icons for missing ones
 	import { Globe, Link, Calendar, Mail } from 'lucide-svelte'
 
-	export let nationalGroup: NationalGroup
+	interface Props {
+		nationalGroup: NationalGroup
+	}
+
+	let { nationalGroup }: Props = $props()
 
 	const baseImagePath = '/images/'
-	const imageUrl = nationalGroup.image || `${baseImagePath}default.png` // Directly use nationalGroup.image or default
+	const imageUrl = $derived(nationalGroup.image ?? `${baseImagePath}default.png`) // Directly use nationalGroup.image or default
 
 	const iconMap: Record<NationalGroupLink, Component | ComponentType> = {
 		website: Globe,
@@ -40,16 +44,16 @@
 
 	const linkEntries = typedEntries(iconMap)
 
-	let isOpen = false
+	let isOpen = $state(false)
 
 	function toggleOpen() {
 		isOpen = !isOpen
 	}
 </script>
 
-<!-- svelte-ignore a11y-click-events-have-key-events -->
-<!-- svelte-ignore a11y-no-noninteractive-element-interactions -->
-<li class="national-group" on:click={toggleOpen} class:is-open={isOpen}>
+<!-- svelte-ignore a11y_click_events_have_key_events -->
+<!-- svelte-ignore a11y_no_noninteractive_element_interactions -->
+<li class="national-group" onclick={toggleOpen} class:is-open={isOpen}>
 	<div class="header">
 		<div class="icon" class:is-open={isOpen}>
 			<svg

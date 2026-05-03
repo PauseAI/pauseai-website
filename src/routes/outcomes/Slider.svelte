@@ -1,7 +1,11 @@
 <script lang="ts">
 	import Propability from './Propability.svelte'
-	export let probability = 0.5
 	import { fade } from 'svelte/transition'
+	interface Props {
+		probability?: number
+	}
+
+	let { probability = $bindable(0.5) }: Props = $props()
 </script>
 
 <div class="percentage-slider" in:fade={{ duration: 200 }}>

@@ -11,14 +11,14 @@
 	const markdownFiles = import.meta.glob('/src/posts/**/*.md')
 	const svelteFiles = import.meta.glob('/src/routes/**/+page.svelte')
 
-	$: pathname = $page.url.pathname
+	let pathname = $derived($page.url.pathname)
 	const currentLocale: string = getLocale() // broaden to avoid "never"
 	const isTranslatedPage = currentLocale != 'en'
 
-	let editUrl: string | null = null
-	let translationIssueUrl: string | null = null
+	let editUrl: string | null = $state(null)
+	let translationIssueUrl: string | null = $state(null)
 
-	$: {
+	$effect(() => {
 		editUrl = null
 		translationIssueUrl = null
 
@@ -65,7 +65,7 @@
 				editUrl = GITHUB_BASE_URL + rootPath
 			}
 		}
-	}
+	})
 </script>
 
 {#if isTranslatedPage}

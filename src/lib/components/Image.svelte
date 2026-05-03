@@ -2,12 +2,21 @@
 	import type { Picture } from '$lib/types'
 	import { layoutWidth } from '$lib/config'
 
-	export let src: string
-	export let alt: string | null = null
-	export let title: string | null = null
-	export let sizes: string = `min(${layoutWidth}, 100vw)`
-	let className: string = ''
-	export { className as class }
+	interface Props {
+		src: string
+		alt?: string | null
+		title?: string | null
+		sizes?: string | null
+		class?: string
+	}
+
+	let {
+		src,
+		alt = null,
+		title = null,
+		sizes = `min(${layoutWidth}, 100vw)`,
+		class: className = ''
+	}: Props = $props()
 
 	// Use import.meta.glob to statically analyze all potential static assets
 	const pictureModules = import.meta.glob<Picture>(
@@ -26,17 +35,19 @@
 		query: { url: true }
 	})
 
-	let picture: Picture | null = null
-	let assetUrl: string | null = null
+	let picture: Picture | null = $state(null)
+	let assetUrl: string | null = $state(null)
 
-	if (src.startsWith('/')) {
-		const fullPath = `../../assets/images${src}`
-		if (pictureModules[fullPath]) {
-			picture = pictureModules[fullPath]
-		} else if (assetUrlModules[fullPath]) {
-			assetUrl = assetUrlModules[fullPath]
+	$effect(() => {
+		if (src.startsWith('/')) {
+			const fullPath = `../../assets/images${src}`
+			if (pictureModules[fullPath]) {
+				picture = pictureModules[fullPath]
+			} else if (assetUrlModules[fullPath]) {
+				assetUrl = assetUrlModules[fullPath]
+			}
 		}
-	}
+	})
 </script>
 
 {#if picture}

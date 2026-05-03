@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { goto } from '$app/navigation'
-	import { page } from '$app/stores'
+	import { page } from '$app/state'
 	import { onMount } from 'svelte'
 	import { SvelteURLSearchParams } from 'svelte/reactivity'
 
@@ -9,7 +9,7 @@
 	const PAYMENT_ANSWER_REGEX = /Yes/
 
 	onMount(() => {
-		const url = $page.url
+		const url = page.url
 		const params = new SvelteURLSearchParams(url.search)
 		const paymentAnswer = params.get('payment')
 		const redirectToPayment = paymentAnswer && PAYMENT_ANSWER_REGEX.test(paymentAnswer)

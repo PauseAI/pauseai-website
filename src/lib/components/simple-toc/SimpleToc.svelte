@@ -5,7 +5,7 @@
 	import Node from './Node.svelte'
 
 	let heading: HTMLHeadingElement
-	let headingsBelow: Element[] | undefined
+	let headingsBelow: Element[] | undefined = $state()
 
 	onMount(() => {
 		const parent = heading.parentElement

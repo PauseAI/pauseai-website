@@ -1,7 +1,7 @@
 <script lang="ts">
 	import type { GeoApiResponse } from '$api/geo/+server'
 	import { browser } from '$app/environment'
-	import { page } from '$app/stores'
+	import { page } from '$app/state'
 	import Banner from '$lib/components/Banner.svelte'
 	import Hero from '$lib/components/Hero.svelte'
 	import Link from '$lib/components/Link.svelte'
@@ -31,12 +31,17 @@
 	import hydrationAwareClick from './hydration-aware-click.js?raw'
 	import type { PageData } from './$types'
 
-	export let data: PageData
+	interface Props {
+		data: PageData
+		children?: import('svelte').Snippet
+	}
 
-	let eventFound: boolean
-	let geoForNearbyEvent: GeoApiResponse | null = null
-	$: hero = deLocalizeHref($page.url.pathname) === '/'
-	$: embed = $page.route.id?.startsWith('/embed/') ?? false
+	let { data, children }: Props = $props()
+
+	let eventFound: boolean = $state(false)
+	let geoForNearbyEvent: GeoApiResponse | null = $state(null)
+	let hero = $derived(deLocalizeHref(page.url.pathname) === '/')
+	let embed = $derived(page.route.id?.startsWith('/embed/') ?? false)
 
 	onMount(async () => {
 		document.documentElement.removeAttribute('data-waiting')
@@ -73,9 +78,11 @@
 	})
 
 	// NearbyEvent overrides the main banner
-	$: if (browser && eventFound) {
-		delete document.documentElement.dataset.activeBanner
-	}
+	$effect(() => {
+		if (browser && eventFound) {
+			delete document.documentElement.dataset.activeBanner
+		}
+	})
 
 	function sanitizeScript(code: string) {
 		return code
@@ -179,10 +186,10 @@
 {/if}
 
 <div class="layout" class:hero-page={hero} class:embed>
-	{#if $page.route.id === '/sayno'}
+	{#if page.route.id === '/sayno'}
 		<!-- Dynamic import and render the selfie UX component -->
 		{#await import('./sayno/SelfieUX.svelte') then module}
-			<svelte:component this={module.default} />
+			<module.default />
 		{/await}
 	{/if}
 
@@ -191,8 +198,8 @@
 	{/if}
 
 	<main>
-		<PageTransition url={$page.url.pathname}>
-			<slot></slot>
+		<PageTransition url={page.url.pathname}>
+			{@render children?.()}
 		</PageTransition>
 	</main>
 
@@ -214,7 +221,7 @@
 		}}
 	/>
 
-	{#if !['/', '/communities', '/outcomes', '/pdoom', '/quotes', '/dear-sir-demis-2025'].includes(deLocalizeHref($page.url.pathname))}
+	{#if !['/', '/communities', '/outcomes', '/pdoom', '/quotes', '/dear-sir-demis-2025'].includes(deLocalizeHref(page.url.pathname))}
 		<Toc />
 	{/if}
 

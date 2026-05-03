@@ -1,7 +1,11 @@
 <script lang="ts">
 	import { fade } from 'svelte/transition'
 
-	export let open: boolean | undefined
+	interface Props {
+		open: boolean | undefined
+	}
+
+	let { open }: Props = $props()
 </script>
 
 {#if open}

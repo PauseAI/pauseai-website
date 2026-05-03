@@ -9,7 +9,11 @@
 
 	const enableBot = false
 
-	export let inverted = false
+	interface Props {
+		inverted?: boolean
+	}
+
+	let { inverted = false }: Props = $props()
 
 	const openSearch = (e: MouseEvent) => {
 		e.preventDefault()

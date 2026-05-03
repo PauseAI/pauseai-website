@@ -4,8 +4,12 @@
 	import Link from '$lib/components/Link.svelte'
 	import type { PageData } from './$types'
 
-	export let data: PageData
-	const { posts } = data
+	interface Props {
+		data: PageData
+	}
+
+	let { data }: Props = $props()
+	const { posts } = $derived(data)
 </script>
 
 <svelte:head>

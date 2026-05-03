@@ -1,8 +1,10 @@
 <script lang="ts">
-	export let probability = 0.5
-	$: num = probability * 100
-	$: decimals = num < 1 ? 2 : num < 10 ? 1 : 0
-	export let showLabel = false
+	interface Props {
+		probability?: number
+		showLabel?: boolean
+	}
+
+	let { probability = 0.5, showLabel = false }: Props = $props()
 	const label = (probability: number) => {
 		if (probability == 0) return 'impossible'
 		if (probability < 0.1) return 'unlikely'
@@ -13,6 +15,8 @@
 		if (probability == 1) return 'certain'
 		return 'very likely'
 	}
+	let num = $derived(probability * 100)
+	let decimals = $derived(num < 1 ? 2 : num < 10 ? 1 : 0)
 </script>
 
 {num.toFixed(decimals)}%

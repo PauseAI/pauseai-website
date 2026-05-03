@@ -1,5 +1,9 @@
 <script lang="ts">
-	export let urls: string[]
+	interface Props {
+		urls: string[]
+	}
+
+	let { urls }: Props = $props()
 </script>
 
 <svelte:head>

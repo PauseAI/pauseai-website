@@ -3,22 +3,27 @@
 	import Link from '$lib/components/Link.svelte'
 	import consent from '$lib/components/widget-consent/WidgetConsentStore'
 	import loadTwitter from '$lib/components/widget-consent/loadTwitter'
+	interface Props {
+		children?: import('svelte').Snippet
+	}
 
-	let wrapper: HTMLDivElement | undefined
+	let { children }: Props = $props()
 
-	$: {
+	let wrapper: HTMLDivElement | undefined = $state()
+
+	$effect(() => {
 		if (wrapper) {
 			loadTwitter()
 			window.twttr?.ready(() => {
 				if (wrapper) window.twttr?.load(wrapper)
 			})
 		}
-	}
+	})
 </script>
 
 {#if $consent}
 	<div bind:this={wrapper}>
-		<slot></slot>
+		{@render children?.()}
 	</div>
 {:else}
 	<div class="widget-consent">
@@ -27,7 +32,7 @@
 			the <Link href="https://twitter.com/en/privacy">privacy policy of X</Link>.
 		</div>
 		<Button
-			on:click={() => {
+			onclick={() => {
 				let wasSet = false
 				if ($consent != null) wasSet = true
 				$consent = true

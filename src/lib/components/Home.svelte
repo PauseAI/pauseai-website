@@ -30,18 +30,24 @@
 <div class="divider"></div>
 <section>
 	<Block linkText={m.home_risks_c2a()} href="/risks">
-		<!-- eslint-disable-next-line svelte/no-at-html-tags -- static content -->
-		<span slot="title">{@html m.home_risks_title()}</span>
+		{#snippet title()}
+			<!-- eslint-disable-next-line svelte/no-at-html-tags -- static content -->
+			<span>{@html m.home_risks_title()}</span>
+		{/snippet}
 		{m.home_risks_content()}
 	</Block>
 	<Block linkText={m.home_proposal_c2a()} href="/proposal">
-		<!-- eslint-disable-next-line svelte/no-at-html-tags -- static content -->
-		<span slot="title">{@html m.home_proposal_title()}</span>
+		{#snippet title()}
+			<!-- eslint-disable-next-line svelte/no-at-html-tags -- static content -->
+			<span>{@html m.home_proposal_title()}</span>
+		{/snippet}
 		{m.home_proposal_content()}
 	</Block>
 	<Block linkText={m.home_action_c2a()} href="/action">
-		<!-- eslint-disable-next-line svelte/no-at-html-tags -- static content -->
-		<span slot="title">{@html m.home_action_title()}</span>
+		{#snippet title()}
+			<!-- eslint-disable-next-line svelte/no-at-html-tags -- static content -->
+			<span>{@html m.home_action_title()}</span>
+		{/snippet}
 		{m.home_action_content()}
 	</Block>
 </section>

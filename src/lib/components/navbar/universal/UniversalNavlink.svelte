@@ -1,35 +1,51 @@
 <script lang="ts">
-	import { page } from '$app/stores'
+	import { page } from '$app/state'
 	import LinkWithoutIcon from '$lib/components/LinkWithoutIcon.svelte'
 	import { localizeHref } from '$lib/paraglide/runtime'
 	import clsx from 'clsx'
 
-	export let href: string | undefined = undefined
-	export let c2a = false
-	export let ariaLabel: string | undefined = undefined
-	export let inverted = false
-	export let first = false
-	export let narrow = false
-	export let active = false
-	export let external = false
-
-	$: localizedHref = href && !external ? localizeHref(href) : href
-
-	$: {
-		active = localizeHref($page.url.pathname) == localizedHref
+	interface Props {
+		href?: string | undefined
+		c2a?: boolean
+		ariaLabel?: string | undefined
+		inverted?: boolean
+		first?: boolean
+		narrow?: boolean
+		active?: boolean
+		external?: boolean
+		children?: import('svelte').Snippet
 	}
 
-	$: classes = clsx('navlink', { first, c2a, inverted, narrow, active })
+	let {
+		href = undefined,
+		c2a = false,
+		ariaLabel = undefined,
+		inverted = false,
+		first = false,
+		narrow = false,
+		active = $bindable(false),
+		external = false,
+		children
+	}: Props = $props()
+
+	let localizedHref = $derived(href && !external ? localizeHref(href) : href)
+	let resolvedHref = $derived(localizedHref ?? '')
+
+	$effect(() => {
+		active = localizeHref(page.url.pathname) == localizedHref
+	})
+
+	let classes = $derived(clsx('navlink', { first, c2a, inverted, narrow, active }))
 </script>
 
 <span>
 	{#if href}
-		<LinkWithoutIcon href={localizedHref} class={classes} aria-label={ariaLabel}>
-			<slot></slot>
+		<LinkWithoutIcon href={resolvedHref} class={classes} aria-label={ariaLabel}>
+			{@render children?.()}
 		</LinkWithoutIcon>
 	{:else}
 		<span class={classes} aria-label={ariaLabel}>
-			<slot></slot>
+			{@render children?.()}
 		</span>
 	{/if}
 </span>

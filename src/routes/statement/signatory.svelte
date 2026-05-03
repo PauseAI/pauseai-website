@@ -1,11 +1,15 @@
 <script lang="ts">
-	export let name: string // defaults to 'Anonymous'
-	export let country: string // defaults to empty string
-	export let bio: string | undefined
-	export let expandAllBios: boolean = false
+	interface Props {
+		name: string // defaults to 'Anonymous'
+		country: string // defaults to empty string
+		bio: string | undefined
+		expandAllBios?: boolean
+	}
+
+	let { name, country, bio, expandAllBios = false }: Props = $props()
 	const len = 60
-	let bioOpen = false
-	let bioTruncated = bio?.substring(0, len)
+	let bioOpen = $state(false)
+	let bioTruncated = $derived(bio?.substring(0, len))
 </script>
 
 <li class="person">
@@ -25,7 +29,7 @@
 				{:else}
 					{bioOpen ? bio : bioTruncated}
 					{#if !bioOpen && bio.length > len}
-						<button on:click={() => (bioOpen = !bioOpen)}>...</button>
+						<button onclick={() => (bioOpen = !bioOpen)}>...</button>
 					{/if}
 				{/if}
 			</div>

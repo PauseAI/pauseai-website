@@ -1,23 +1,30 @@
 <script lang="ts">
+	import { stopPropagation } from 'svelte/legacy'
+
 	import X from 'lucide-svelte/icons/x'
-	import { page } from '$app/stores'
+	import { page } from '$app/state'
 	import { fade } from 'svelte/transition'
 	import { deLocalizeHref } from '$lib/paraglide/runtime'
 	import { setItem } from '$lib/localStorage'
 	import LinkWithoutIcon from '$lib/components/LinkWithoutIcon.svelte'
 	import { onMount } from 'svelte'
 
-	export let type: 'main' | 'campaign' = 'main'
-	export let id: string | null = null
-	export let href: string | null = null
-	export let contrast = false
+	interface Props {
+		contrast?: boolean
+		href?: string | null
+		id?: string | null
+		type?: 'main' | 'campaign'
+		children?: import('svelte').Snippet
+	}
 
-	let dismissed = false
+	let { children, contrast = false, href = null, id = null, type = 'main' }: Props = $props()
+
+	let dismissed = $derived(href && deLocalizeHref(page.url.pathname) === href)
 	let bannerEl: HTMLDivElement
 
 	function pushGtmEvent(eventObj: Record<string, unknown>) {
 		if (typeof window !== 'undefined') {
-			window.dataLayer = window.dataLayer || []
+			window.dataLayer = window.dataLayer ?? []
 			window.dataLayer.push(eventObj)
 		}
 	}
@@ -48,13 +55,8 @@
 		}
 	}
 
-	// Hide on navigation to the target/href page
-	$: if (href && deLocalizeHref($page.url.pathname) === href) {
-		dismissed = true
-	}
-
-	$: isCampaign = type === 'campaign'
-	$: dataIdAttr = isCampaign ? 'data-campaign-banner-id' : 'data-banner-id'
+	let isCampaign = $derived(type === 'campaign')
+	let dataIdAttr = $derived(isCampaign ? 'data-campaign-banner-id' : 'data-banner-id')
 
 	onMount(() => {
 		if (dismissed) return
@@ -108,21 +110,21 @@
 
 		<span class="content">
 			{#if isCampaign && href}
-				<LinkWithoutIcon {href} class="campaign-link" on:click={close}>
+				<LinkWithoutIcon {href} class="campaign-link" onclick={close}>
 					<span class="campaign-text">
-						<slot></slot>
+						{@render children?.()}
 					</span>
 					<span class="campaign-cta">Take action →</span>
 				</LinkWithoutIcon>
 			{:else}
-				<slot></slot>
+				{@render children?.()}
 			{/if}
 		</span>
 
 		<button
 			class="close banner-close-btn"
 			class:campaign-close={isCampaign}
-			on:click|stopPropagation={close}
+			onclick={stopPropagation(close)}
 		>
 			<X size={isCampaign ? '1em' : '1.2em'} />
 			<span class="sr-only">Close</span>
