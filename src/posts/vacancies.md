@@ -88,7 +88,7 @@ Send an email to vacancies@pauseai.info with the following:
 
 5. Tell us your time zone, how many hours you can dedicate per week and when you can start
 
-**Deadline: Sunday 3 May**
+**Deadline: Sunday 10 May**
 _We review applicants on a rolling basis and reserve the right to close the call for applications early_
 
 ---
