@@ -24,11 +24,10 @@
 		}
 	}
 
-	let availableTypes: string[] = $derived([])
 	// Extract unique type names for tab labels
-	$effect(() => {
-		availableTypes = Array.from(new Set(coverage.map((c) => c.type))).filter(Boolean)
-	})
+	let availableTypes: string[] = $derived(
+		Array.from(new Set(coverage.map((c) => c.type))).filter(Boolean)
+	)
 
 	// Sort them based on the schema order fetched directly from Notion
 	let orderedTabs = $derived(typeOrder.length > 0 ? typeOrder : outletOrder)

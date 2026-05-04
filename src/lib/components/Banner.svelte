@@ -1,6 +1,4 @@
 <script lang="ts">
-	import { stopPropagation } from 'svelte/legacy'
-
 	import X from 'lucide-svelte/icons/x'
 	import { page } from '$app/state'
 	import { fade } from 'svelte/transition'
@@ -19,7 +17,7 @@
 
 	let { children, contrast = false, href = null, id = null, type = 'main' }: Props = $props()
 
-	let dismissed = $derived(href && deLocalizeHref(page.url.pathname) === href)
+	let dismissed = $derived(href !== null && deLocalizeHref(page.url.pathname) === href)
 	let bannerEl: HTMLDivElement
 
 	function pushGtmEvent(eventObj: Record<string, unknown>) {
@@ -29,7 +27,8 @@
 		}
 	}
 
-	function close() {
+	function close(ev: MouseEvent) {
+		ev.stopPropagation()
 		dismissed = true
 		if (id) {
 			const prefix = type === 'campaign' ? 'campaign_banner' : 'banner'
@@ -121,11 +120,7 @@
 			{/if}
 		</span>
 
-		<button
-			class="close banner-close-btn"
-			class:campaign-close={isCampaign}
-			onclick={stopPropagation(close)}
-		>
+		<button class="close banner-close-btn" class:campaign-close={isCampaign} onclick={close}>
 			<X size={isCampaign ? '1em' : '1.2em'} />
 			<span class="sr-only">Close</span>
 		</button>

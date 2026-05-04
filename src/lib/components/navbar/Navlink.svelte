@@ -3,9 +3,9 @@
 	import NarrowNavlink from './narrow/NarrowNavlink.svelte'
 
 	interface Props {
-		href?: string | undefined
+		href?: string
 		c2a?: boolean
-		ariaLabel?: string | undefined
+		ariaLabel?: string
 		inverted?: boolean
 		first?: boolean
 		narrow?: boolean
@@ -15,9 +15,9 @@
 	}
 
 	let {
-		href = undefined,
+		href,
 		c2a = false,
-		ariaLabel = undefined,
+		ariaLabel,
 		inverted = false,
 		first = false,
 		narrow = false,

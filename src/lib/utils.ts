@@ -1,4 +1,4 @@
-import { CacheControl, type CacheControlInit } from '@remix-run/headers'
+import Headers, { CacheControl, type CacheControlInit } from '@remix-run/headers'
 import { error as svelteKitError, redirect } from '@sveltejs/kit'
 
 export type DeepPartial<T> = T extends object
@@ -19,7 +19,7 @@ export function typedEntries<T extends Parameters<typeof Object.entries>[0]>(obj
 }
 
 export function generateCacheControlRecord(options: CacheControlInit): Record<string, string> {
-	const headers = new Headers({ 'Cache-Control': new CacheControl(options).toString() })
+	const headers = new Headers({ cacheControl: new CacheControl(options) })
 	return headersToRecord(headers)
 }
 

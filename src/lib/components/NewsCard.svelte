@@ -15,7 +15,7 @@
 
 	let { item, loading = false, imageSizes, id }: Props = $props()
 
-	let isExternal: boolean = $derived(item?.source === 'substack')
+	let isExternal: boolean = $derived(item?.source === 'substack' || item?.source === 'press')
 	let hasImageError: boolean = $derived(Boolean(item?.image))
 </script>
 
@@ -153,7 +153,6 @@
 		color: var(--text);
 		opacity: 0.8;
 		display: -webkit-box;
-		line-clamp: 2;
 		-webkit-line-clamp: 2;
 		line-clamp: 2;
 		-webkit-box-orient: vertical;

@@ -2,10 +2,6 @@
 	import { onMount } from 'svelte'
 	import { SvelteURLSearchParams } from 'svelte/reactivity'
 
-	// ─── REQUIRED ────────────────────────────────────────────────────────
-
-	// ─── OPTIONAL ────────────────────────────────────────────────────────
-
 	interface Props {
 		// ─── REQUIRED ────────────────────────────────────────────────────────
 		/** Tally form ID (required) */

@@ -8,7 +8,7 @@
 
 	onMount(() => {
 		// Try query param first, then localStorage
-		uid = page.url.searchParams.get('uid') || getCollagenUid('sayno')
+		uid = page.url.searchParams.get('uid') ?? getCollagenUid('sayno')
 	})
 </script>
 

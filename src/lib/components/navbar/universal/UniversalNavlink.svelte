@@ -5,9 +5,9 @@
 	import clsx from 'clsx'
 
 	interface Props {
-		href?: string | undefined
+		href?: string
 		c2a?: boolean
-		ariaLabel?: string | undefined
+		ariaLabel?: string
 		inverted?: boolean
 		first?: boolean
 		narrow?: boolean
@@ -17,9 +17,9 @@
 	}
 
 	let {
-		href = undefined,
+		href,
 		c2a = false,
-		ariaLabel = undefined,
+		ariaLabel,
 		inverted = false,
 		first = false,
 		narrow = false,
@@ -29,7 +29,6 @@
 	}: Props = $props()
 
 	let localizedHref = $derived(href && !external ? localizeHref(href) : href)
-	let resolvedHref = $derived(localizedHref ?? '')
 
 	$effect(() => {
 		active = localizeHref(page.url.pathname) == localizedHref
@@ -40,7 +39,7 @@
 
 <span>
 	{#if href}
-		<LinkWithoutIcon href={resolvedHref} class={classes} aria-label={ariaLabel}>
+		<LinkWithoutIcon href={localizedHref} class={classes} aria-label={ariaLabel}>
 			{@render children?.()}
 		</LinkWithoutIcon>
 	{:else}

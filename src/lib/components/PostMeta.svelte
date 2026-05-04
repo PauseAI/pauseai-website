@@ -7,22 +7,22 @@
 	interface Props {
 		title: string
 		description: string
-		date?: string | undefined
+		date?: string
 		/** URL or relative path to cover / preview image */
 		image?: string
 		/** Canonical URL for this page (og:url) */
 		pageUrl?: string
 		/** Alt text for the image (og:image:alt) */
-		imageAlt?: string | undefined
+		imageAlt?: string
 	}
 
 	let {
 		title,
 		description,
-		date = undefined,
+		date,
 		image = '/Cover.jpg',
 		pageUrl = `${rootUrl}${deLocalizeHref(page.url.pathname)}`,
-		imageAlt = undefined
+		imageAlt
 	}: Props = $props()
 
 	const imageUrl = $derived(image.startsWith('/') ? `${rootUrl}${image}` : image)
