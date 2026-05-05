@@ -40,21 +40,20 @@
 			: `https://tally.so/embed/${formId}`
 	)
 
-	let urlParams = new SvelteURLSearchParams()
+	let urlParams = $derived.by(() => {
+		const params = new SvelteURLSearchParams()
 
-	$effect(() => {
-		urlParams = new SvelteURLSearchParams()
-
-		if (alignLeft) urlParams.set('alignLeft', '1')
-		if (hideTitle) urlParams.set('hideTitle', '1')
-		if (transparentBackground) urlParams.set('transparentBackground', '1')
-		if (dynamicHeight) urlParams.set('dynamicHeight', '1')
+		if (alignLeft) params.set('alignLeft', '1')
+		if (hideTitle) params.set('hideTitle', '1')
+		if (transparentBackground) params.set('transparentBackground', '1')
+		if (dynamicHeight) params.set('dynamicHeight', '1')
 
 		for (const [key, value] of Object.entries(extraParams)) {
 			if (value != null && value !== '') {
-				urlParams.set(key, value.toString())
+				params.set(key, value.toString())
 			}
 		}
+		return params
 	})
 
 	let formSrc = $derived(`${baseUrl}?${urlParams.toString()}`)

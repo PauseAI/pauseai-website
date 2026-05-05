@@ -15,8 +15,8 @@
 
 	let { item, loading = false, imageSizes, id }: Props = $props()
 
-	let isExternal: boolean = $derived(item?.source === 'substack' || item?.source === 'press')
-	let hasImageError: boolean = $derived(Boolean(item?.image))
+	let isExternal = $derived(item?.source === 'substack' || item?.source === 'press')
+	let hasImageError = $derived(!item?.image)
 </script>
 
 <div>
