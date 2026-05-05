@@ -1,5 +1,5 @@
 ---
-title: '    UK Technology Secretary overlooks risks posed by AI'
+title: "    UK Technology Secretary overlooks risks posed by AI"
 slug: UK technology secretary
 description: PauseAI UK has criticised Technology Secretary Liz Kendall after
   she described calls to pause AI development as a “double betrayal” of British
@@ -10,13 +10,13 @@ date: 2026-04-30T16:57:00.000+01:00
 news: true
 ---
 
-PauseAI UK says the Secretary of State for Science, Innovation and Technology, Liz Kendall, is overlooking the risks posed by AI systems after she said that a pause would leave “this powerful technology to be exploited by other nations to their advantage and our disadvantage.”
+PauseAI UK says the Secretary of State for Science, Innovation and Technology, Liz Kendall, is overlooking the risks posed by AI systems after she said a pause would leave “this powerful technology to be exploited by other nations to their advantage and our disadvantage.”
 
 Pause advocates are not calling for Britain to abandon AI, nor for a unilateral halt while other countries race ahead. PauseAI is calling for an international agreement to pause the development of frontier systems until there is clear consensus that they can be built and governed safely. This would apply to only the most powerful AI systems, not systems designed for specific, narrow applications such as medical diagnoses. 
 
 Joseph Miller, Director of PauseAI UK, said:
 
-_No serious advocate is calling for Britain to shut down its AI industry unilaterally. We are calling for an international agreement and we expect the country that hosted the Bletchley Park Summit to lead it, not duck it.”_
+_No serious advocate is calling for Britain to shut down its AI industry unilaterally. We are calling for an international agreement and we expect the country that hosted the Bletchley Park Summit to lead it, not duck it._
 
 _The scientific problem of making advanced AI reliably do what its operators intend remains unsolved. Hundreds of researchers, including Turing Award winners Geoffrey Hinton and Yoshua Bengio, have publicly warned that mitigating the risk of extinction from AI should be a global priority alongside pandemics and nuclear war._
 
