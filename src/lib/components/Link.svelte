@@ -25,7 +25,7 @@
 	const ICON_PROPS = { size: '0.7em' }
 
 	// Link component determines the type
-	let type: LinkType = 'internal'
+	let type: LinkType = $state('internal')
 </script>
 
 <Link {href} {target} {rel} class={className} bind:type {...rest}>
