@@ -17,7 +17,15 @@
 
 	let { children, contrast = false, href = null, id = null, type = 'main' }: Props = $props()
 
-	let dismissed = $derived(href !== null && deLocalizeHref(page.url.pathname) === href)
+	let dismissed = $state(false)
+
+	// Hide on navigation to the target/href page
+	$effect(() => {
+		if (href !== null && deLocalizeHref(page.url.pathname) === href) {
+			dismissed = true
+		}
+	})
+
 	let bannerEl: HTMLDivElement
 
 	function pushGtmEvent(eventObj: Record<string, unknown>) {
@@ -101,7 +109,7 @@
 		data-pagefind-ignore
 		transition:fade={{ duration: 200 }}
 		bind:this={bannerEl}
-		on:click={handleBannerClick}
+		onclick={handleBannerClick}
 	>
 		{#if isCampaign}
 			<div class="accent-line"></div>
