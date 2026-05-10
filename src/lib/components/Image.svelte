@@ -1,6 +1,7 @@
 <script lang="ts">
 	import type { Picture } from '$lib/types'
 	import { layoutWidth } from '$lib/config'
+	import { run } from 'svelte/legacy'
 
 	interface Props {
 		src: string
@@ -38,7 +39,7 @@
 	let picture: Picture | null = $state(null)
 	let assetUrl: string | null = $state(null)
 
-	$effect(() => {
+	run(() => {
 		if (src.startsWith('/')) {
 			const fullPath = `../../assets/images${src}`
 			if (pictureModules[fullPath]) {
