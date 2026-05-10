@@ -32,7 +32,7 @@
 	// Sort them based on the schema order fetched directly from Notion
 	let orderedTabs = $derived(typeOrder.length > 0 ? typeOrder : outletOrder)
 	let tabs = $derived(
-		[...availableTypes].sort((a, b) => {
+		availableTypes.toSorted((a, b) => {
 			const indexA = orderedTabs.indexOf(a)
 			const indexB = orderedTabs.indexOf(b)
 			if (indexA !== -1 && indexB !== -1) return indexA - indexB
@@ -42,14 +42,12 @@
 		})
 	)
 
-	let activeTab = $state('')
-	$effect(() => {
-		// Set default to International if available, or first ordered tab
-		if (!tabs.includes(activeTab) && tabs.length > 0) {
-			activeTab = tabs.find((t) => t.includes('International')) ?? tabs[0]
-		}
-	})
-
+	let selectedTab = $state('')
+	let activeTab = $derived(
+		!tabs.includes(selectedTab) && tabs.length > 0
+			? (tabs.find((t) => t.includes('International')) ?? tabs[0])
+			: selectedTab
+	)
 	let filteredCoverage = $derived(coverage.filter((c) => c.type === activeTab))
 </script>
 
@@ -68,7 +66,7 @@
 				<button
 					class="tab-button"
 					class:active={activeTab === tab}
-					onclick={() => (activeTab = tab)}
+					onclick={() => (selectedTab = tab)}
 				>
 					{tab}
 				</button>

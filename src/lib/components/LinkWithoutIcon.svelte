@@ -4,9 +4,10 @@
 	import { localizeHref, locales } from '$lib/paraglide/runtime'
 	import type { LinkType } from '$lib/types'
 	import type { Attachment } from 'svelte/attachments'
+	import { getLinkType } from '$lib/link'
 
 	interface Props {
-		href?: string
+		href?: string | null
 		target?: string | null
 		class?: string
 		rel?: string | null
@@ -17,20 +18,22 @@
 	}
 
 	let {
-		href = $bindable(),
-		target = $bindable(null),
+		href = null,
+		target = null,
 		class: className = '',
-		rel = $bindable(null),
-		type = $bindable('internal'),
+		rel = null,
+		type,
 		onclick,
 		children,
 		...rest
 	}: Props = $props()
 
+	let resolvedType: LinkType = $derived(type ?? getLinkType(href))
+
 	// Localization helpers
 	const localePattern = new RegExp(`^/(${locales.join('|')})(/|$)`)
 	const shouldLocalizeHref = (h: string): boolean =>
-		type === 'internal' &&
+		resolvedType === 'internal' &&
 		h.startsWith('/') &&
 		!h.match(localePattern) &&
 		!h.includes('#no-localize')
@@ -40,29 +43,17 @@
 		return shouldLocalizeHref(h) ? localizeHref(cleaned) : cleaned
 	}
 
-	// Normalize and localize href
-	let resolvedHref: string | null = $derived.by(() => {
-		if (href) {
-			if (
-				(href.startsWith('http:') || href.startsWith('https:')) &&
-				!href.startsWith('https://pauseai.info/') &&
-				!(href.includes('s3.amazonaws') && href.includes('/pauseai-'))
-			) {
-				type = 'external'
-				// Automatically open petition and action-specific tools in a new tab
-				if (!target && (href.includes('change.org') || href.includes('activoice.org'))) {
-					target = '_blank'
-					if (!rel) rel = 'noopener noreferrer'
-				}
-			} else if (href.startsWith('mailto:')) {
-				type = 'mail'
-			}
+	// Automatically open petition and action-specific tools in a new tab
+	let isPetitionLink = $derived(
+		resolvedType === 'external' &&
+			href !== null &&
+			(href.includes('change.org') || href.includes('activoice.org'))
+	)
+	let resolvedTarget = $derived(target ?? (isPetitionLink ? '_blank' : null))
+	let resolvedRel = $derived(rel ?? (isPetitionLink ? 'noopener noreferrer' : null))
 
-			return processHref(href)
-		} else {
-			return null
-		}
-	})
+	// Normalize and localize href
+	let resolvedHref: string | null = $derived(href ? processHref(href) : null)
 
 	/** Action for smooth scrolling to anchor links */
 	const smoothScroll: (h: string | null) => Attachment<HTMLAnchorElement> = (h: string | null) => {
@@ -91,8 +82,8 @@
 <!-- eslint-disable-next-line svelte/no-restricted-html-elements - Warning is about using this component -->
 <a
 	href={resolvedHref}
-	{target}
-	{rel}
+	target={resolvedTarget}
+	rel={resolvedRel}
 	class={className}
 	{@attach smoothScroll(resolvedHref)}
 	{onclick}

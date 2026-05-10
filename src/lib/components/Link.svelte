@@ -3,6 +3,7 @@
 	import ExternalLink from 'lucide-svelte/icons/external-link'
 	import Mail from 'lucide-svelte/icons/mail'
 	import type { LinkType } from '$lib/types'
+	import { getLinkType } from '$lib/link'
 
 	interface Props {
 		href: string
@@ -25,10 +26,10 @@
 	const ICON_PROPS = { size: '0.7em' }
 
 	// Link component determines the type
-	let type: LinkType = $state('internal')
+	let type: LinkType = $derived(getLinkType(href))
 </script>
 
-<Link {href} {target} {rel} class={className} bind:type {...rest}>
+<Link {href} {target} {rel} class={className} {type} {...rest}>
 	{@render children?.()}{#if type != 'internal'}
 		<span style="white-space: nowrap">
 			&nbsp;

@@ -23,18 +23,16 @@
 		inverted = false,
 		first = false,
 		narrow = false,
-		active = $bindable(false),
+		active = false,
 		external = false,
 		children
 	}: Props = $props()
 
 	let localizedHref = $derived(href && !external ? localizeHref(href) : href)
 
-	$effect(() => {
-		active = localizeHref(page.url.pathname) == localizedHref
-	})
+	let resolvedActive = $derived(active || localizeHref(page.url.pathname) == localizedHref)
 
-	let classes = $derived(clsx('navlink', { first, c2a, inverted, narrow, active }))
+	let classes = $derived(clsx('navlink', { first, c2a, inverted, narrow, active: resolvedActive }))
 </script>
 
 <span>
