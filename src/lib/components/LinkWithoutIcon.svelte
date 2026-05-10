@@ -41,9 +41,7 @@
 	}
 
 	// Normalize and localize href
-	let resolvedHref: string | null = $state(null)
-
-	$effect(() => {
+	let resolvedHref: string | null = $derived.by(() => {
 		if (href) {
 			if (
 				(href.startsWith('http:') || href.startsWith('https:')) &&
@@ -60,7 +58,9 @@
 				type = 'mail'
 			}
 
-			resolvedHref = processHref(href)
+			return processHref(href)
+		} else {
+			return null
 		}
 	})
 
