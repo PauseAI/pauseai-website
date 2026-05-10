@@ -1,6 +1,6 @@
 <script lang="ts">
 	import Link from '$lib/components/Link.svelte'
-	import { page } from '$app/stores'
+	import { page } from '$app/state'
 	import * as m from '$lib/paraglide/messages.js'
 	import { getLocale } from '$lib/paraglide/runtime.js'
 
@@ -11,7 +11,7 @@
 	const markdownFiles = import.meta.glob('/src/posts/**/*.md')
 	const svelteFiles = import.meta.glob('/src/routes/**/+page.svelte')
 
-	let pathname = $derived($page.url.pathname)
+	let pathname = $derived(page.url.pathname)
 	const currentLocale: string = getLocale() // broaden to avoid "never"
 	const isTranslatedPage = currentLocale != 'en'
 
