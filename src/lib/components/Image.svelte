@@ -1,7 +1,6 @@
 <script lang="ts">
 	import type { Picture } from '$lib/types'
 	import { layoutWidth } from '$lib/config'
-	import { run } from 'svelte/legacy'
 
 	interface Props {
 		src: string
@@ -36,19 +35,9 @@
 		query: { url: true }
 	})
 
-	let picture: Picture | null = $state(null)
-	let assetUrl: string | null = $state(null)
-
-	run(() => {
-		if (src.startsWith('/')) {
-			const fullPath = `../../assets/images${src}`
-			if (pictureModules[fullPath]) {
-				picture = pictureModules[fullPath]
-			} else if (assetUrlModules[fullPath]) {
-				assetUrl = assetUrlModules[fullPath]
-			}
-		}
-	})
+	let fullPath = $derived(src.startsWith('/') ? `../../assets/images${src}` : null)
+	let picture: Picture | null = $derived(pictureModules[fullPath ?? ''] ?? null)
+	let assetUrl: string | null = $derived(assetUrlModules[fullPath ?? ''] ?? null)
 </script>
 
 {#if picture}
