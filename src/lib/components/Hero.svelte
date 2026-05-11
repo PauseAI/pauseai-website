@@ -8,7 +8,8 @@
 	const campaign = {
 		description:
 			'AI labs are explicitly racing to automate every job on the planet, including yours, within years. And job loss is only the tip of the iceberg.',
-		primary: { href: 'https://tally.so/r/GxBRr2', label: 'Share your story' }
+		primary: { href: 'https://tally.so/r/GxBRr2', label: 'Share your story' },
+		secondary: { href: '/ai-not-just-coming-for-your-job', label: 'Read more' }
 	}
 </script>
 
