@@ -242,7 +242,7 @@
 	.page-top.hero-page {
 		display: flex;
 		flex-direction: column;
-		height: 100dvh;
+		min-height: 100dvh;
 	}
 
 	.page-top.hero-page > :global(.banner) {
