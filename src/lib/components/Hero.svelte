@@ -6,13 +6,9 @@
 
 	// Current campaign. Update this block when the active campaign changes.
 	const campaign = {
-		label: 'Active campaign — May 2026',
-		title: '“AI is not just coming for your job”',
-		aboutHref: '/action',
 		description:
-			'Workers, parents and patients are feeling it first. Add your story to the public record and help us hold the labs accountable.',
-		primary: { href: 'https://tally.so/r/GxBRr2', label: 'Share your story' },
-		secondary: { href: '/proposal', label: 'Read the brief' }
+			'AI labs are explicitly racing to automate every job on the planet, including yours, within years. And job loss is only the tip of the iceberg.',
+		primary: { href: 'https://tally.so/r/GxBRr2', label: 'Share your story' }
 	}
 </script>
 
@@ -37,22 +33,19 @@
 		</div>
 	</div>
 
-	<div class="hero-band">
-		<div class="band-left">
-			<span class="band-dot" aria-hidden="true"></span>
-			<span class="band-label">{campaign.label}</span>
-			<span class="band-title">{campaign.title}</span>
-		</div>
-		<a href={campaign.aboutHref} class="band-link">About this campaign →</a>
-	</div>
-
 	<div class="hero-bottom">
 		<div class="hero-bottom-inner">
+			<span class="hero-badge">
+				<span class="hero-badge-dot" aria-hidden="true"></span>
+				Active campaign
+			</span>
 			<h2>AI is not <em>just</em> coming for your job.</h2>
 			<p class="hero-copy">{campaign.description}</p>
 			<div class="hero-buttons">
 				<Link href={campaign.primary.href} class="btn-dark">{campaign.primary.label}</Link>
-				<Link href={campaign.secondary.href} class="btn-light">{campaign.secondary.label}</Link>
+				{#if campaign.secondary}
+					<Link href={campaign.secondary.href} class="btn-light">{campaign.secondary.label}</Link>
+				{/if}
 			</div>
 		</div>
 	</div>
@@ -74,10 +67,8 @@
 		--mobile-hero-img-pos: 215px;
 	}
 
-	/* Full-hero protest photo — covers top + bottom sections behind the band.
-	   Soft-light blend tints the photo with the orange hero background.
-	   No z-index on the wrapper so the blend can reach the orange below;
-	   `isolation: isolate` on .hero keeps the blend scoped to the hero. */
+	/* Protest photo — spans the full hero behind both sections, soft-light
+	   blended into the orange background. */
 	.hero {
 		overflow: hidden;
 	}
@@ -123,7 +114,7 @@
 		}
 	}
 
-	/* TOP — generic slogan, sits over the shared photo. */
+	/* TOP — generic slogan, sits over the protest photo. */
 	.hero-top {
 		position: relative;
 	}
@@ -131,7 +122,8 @@
 	.hero-top-inner {
 		position: relative;
 		z-index: 1;
-		padding: 13rem clamp(1.5rem, 4vw, 3.5rem) 2.75rem;
+		padding-block: 10rem 3rem;
+		padding-inline: clamp(1.5rem, 20vw, 18rem);
 	}
 	.hero-top-inner h1 {
 		font-family: var(--font-heading);
@@ -152,28 +144,27 @@
 		margin-top: 1.5rem;
 	}
 
-	/* BAND — current campaign label */
-	.hero-band {
+	/* BADGE — small pill marking the active campaign */
+	.hero-badge {
 		position: relative;
-		z-index: 2;
+		z-index: 1;
+		align-self: flex-start;
+		display: inline-flex;
+		align-items: center;
+		gap: 0.5rem;
 		background: #111110;
 		color: white;
-		display: flex;
-		align-items: center;
-		justify-content: space-between;
-		gap: 1.5rem;
-		padding: 1rem clamp(1.5rem, 4vw, 3.5rem);
-		flex-wrap: wrap;
+		font-family: var(--font-heading);
+		font-weight: 700;
+		letter-spacing: 0.16em;
+		text-transform: uppercase;
+		font-size: 0.75rem;
+		padding: 0.5rem 0.875rem;
+		border-radius: 999px;
 	}
-	.band-left {
-		display: flex;
-		align-items: center;
-		gap: 1rem;
-		flex-wrap: wrap;
-	}
-	.band-dot {
-		width: 10px;
-		height: 10px;
+	.hero-badge-dot {
+		width: 8px;
+		height: 8px;
 		border-radius: 50%;
 		background: #fe9414;
 		flex-shrink: 0;
@@ -190,36 +181,6 @@
 			transform: scale(0.8);
 		}
 	}
-	.band-label {
-		font-family: var(--font-heading);
-		font-weight: 700;
-		letter-spacing: 0.18em;
-		text-transform: uppercase;
-		font-size: 0.8125rem;
-		color: #fe9414;
-	}
-	.band-title {
-		font-family: var(--font-heading);
-		font-weight: 700;
-		letter-spacing: 0.04em;
-		text-transform: uppercase;
-		font-size: 1.125rem;
-		color: white;
-	}
-	.band-link {
-		font-family: var(--font-heading);
-		font-weight: 700;
-		letter-spacing: 0.16em;
-		text-transform: uppercase;
-		font-size: 0.8125rem;
-		color: white;
-		opacity: 0.75;
-		text-decoration: none;
-		transition: opacity 0.15s;
-	}
-	.band-link:hover {
-		opacity: 1;
-	}
 
 	/* BOTTOM — current campaign content */
 	.hero-bottom {
@@ -227,7 +188,8 @@
 		min-height: 360px;
 	}
 	.hero-bottom-inner {
-		padding: 3.25rem clamp(1.5rem, 4vw, 3.5rem) 4rem;
+		padding-block: 3rem 5rem;
+		padding-inline: clamp(1.5rem, 20vw, 18rem);
 		display: flex;
 		flex-direction: column;
 		gap: 1.25rem;
@@ -252,6 +214,8 @@
 		line-height: 1.55;
 		max-width: 44rem;
 		margin: 0;
+		font-weight: 500;
+		text-shadow: 0 1px 2px rgba(0, 0, 0, 0.35);
 	}
 
 	/* Buttons — match live-site look: solid fills, square, condensed bold. */
@@ -305,20 +269,6 @@
 		.hero-top-inner h1 {
 			font-size: clamp(2rem, 9vw, 3rem);
 			max-width: none;
-		}
-
-		.hero-band {
-			padding: 0.875rem 1.5rem;
-			gap: 0.75rem;
-		}
-		.band-label {
-			font-size: 0.75rem;
-		}
-		.band-title {
-			font-size: 0.95rem;
-		}
-		.band-link {
-			display: none;
 		}
 
 		.hero-bottom {
