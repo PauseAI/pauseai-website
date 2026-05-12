@@ -252,6 +252,8 @@
 	.page-top.hero-page .hero-section {
 		flex: 1;
 		min-height: var(--hero-min-height);
+		display: flex;
+		flex-direction: column;
 	}
 
 	.hero-section {
