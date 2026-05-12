@@ -56,22 +56,16 @@
 	.hero {
 		position: relative;
 		width: 100vw;
+		flex: 1;
 		left: 50%;
 		transform: translateX(-50%);
 		background-color: #ff9416;
 		isolation: isolate;
+		overflow: hidden;
 		color: white;
 
-		/* Desktop hero image aspect ratio (2880 / 1600) — update if image changes */
-		--hero-img-ar: 1.8;
 		/* Adjust this to push the mobile image up or down (e.g., 0px, 10vh, -20px) */
 		--mobile-hero-img-pos: 215px;
-	}
-
-	/* Protest photo — spans the full hero behind both sections, soft-light
-	   blended into the orange background. */
-	.hero {
-		overflow: hidden;
 	}
 
 	.hero-photo {
@@ -170,6 +164,11 @@
 		background: #fe9414;
 		flex-shrink: 0;
 		animation: heroPulse 1.8s ease-in-out infinite;
+	}
+	@media (prefers-reduced-motion: reduce) {
+		.hero-badge-dot {
+			animation: none;
+		}
 	}
 	@keyframes heroPulse {
 		0%,
