@@ -46,9 +46,11 @@ This is not a campaign to save any one job. It is a campaign to make sure humans
 
 The labs will not slow down on their own. Public pressure is what changes that, and it starts with people like you taking one concrete step.
 
-- **Share your story :** Tell us how AI is affecting your work, your studies, your healthcare, your family, or what you fear is coming next. Your story is one of the most powerful tools we have to make decision makers listen. [](http://pauseai.info/stories)[Share your story]()
-  - [](http://pauseai.info/ai-concerns)Optional: record a short video of your concern and share it on social media. \[social buttons]
-- **Talk with friends and family:** Most people sense something is wrong but do not have the words for it. [](/Conversation-guide-to-bridging-ethics-to-safety-32f81143917680319712f1a043efbce3?pvs=24)​
+- **Share your story :** Tell us how AI is affecting your work, your studies, your healthcare, your family, or what you fear is coming next. Your story is one of the most powerful tools we have to make decision makers listen. [Share your story](https://tally.so/r/GxBRr2)
+- **Share your concern (5 minutes):** Add your voice to the growing public record of people calling for a pause. [pauseai.info/ai-concerns](http://pauseai.info/ai-concerns)
+  - Optional: record a short video of your concern and share it on social media.
+
+- **Talk with friends and family:** Most people sense something is wrong but do not have the words for it.
 - **Write to your elected official:** Politicians act when they hear from their constituents. It takes two minutes with our email builder. [pauseai.info/email-builder](http://pauseai.info/email-builder)
-- [](http://pauseai.info/email-builder)**Connect to your local chapter:** Find the people organising near you and join their next action. [pauseai.info/communities](http://pauseai.info/communities)
-- [](http://pauseai.info/communities)**Join PauseAI:** Become part of the global movement working to keep humans in charge of the future. [pauseai.info/join](http://pauseai.info/join)[](https://tally.so/r/GxBRr2)
+- **Connect to your local chapter:** Find the people organising near you and join their next action. [pauseai.info/communities](http://pauseai.info/communities)
+- **Join PauseAI:** Become part of the global movement working to keep humans in charge of the future. [pauseai.info/join](http://pauseai.info/join)
