@@ -46,8 +46,7 @@ This is not a campaign to save any one job. It is a campaign to make sure humans
 
 The labs will not slow down on their own. Public pressure is what changes that, and it starts with people like you taking one concrete step.
 
-- **Share your story :** Tell us how AI is affecting your work, your studies, your healthcare, your family, or what you fear is coming next. Your story is one of the most powerful tools we have to make decision makers listen. [Share your story](https://tally.so/r/GxBRr2)
-- **Share your concern (5 minutes):** Add your voice to the growing public record of people calling for a pause. [pauseai.info/ai-concerns](http://pauseai.info/ai-concerns)
+- **Share your story :** Tell us how AI is affecting your work, your studies, your healthcare, your family, or what you fear is coming next. Your story is one of the most powerful tools we have to make decision makers listen. [Share your story](https://pauseai.info/ai-concerns)
   - Optional: record a short video of your concern and share it on social media.
 
 - **Talk with friends and family:** Most people sense something is wrong but do not have the words for it.
