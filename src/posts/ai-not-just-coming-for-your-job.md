@@ -5,19 +5,19 @@ description: AI labs are explicitly racing to automate every job on the planet,
 date: 2026-05-11
 ---
 
-**AI labs are explicitly racing to automate every job on the planet, _including yours_. And job loss is only the tip of the iceberg.**
+**AI labs are explicitly racing to automate every job on the planet, _including yours_, within years. And job loss is only the tip of the iceberg.**
 
 ## AI is coming for your job
 
-This is not speculation. It is the stated goal.
+This is not speculation, and it is not a side effect. It is the stated goal.
 
-OpenAI defines its mission as building "highly autonomous systems that outperform humans at most economically valuable work." Anthropic, Google DeepMind, Meta and xAI are racing toward the same target and their leaders say they are only a few years away. They are pouring hundreds of billions of dollars into systems designed to do what you do but faster and more cheaply.
+OpenAI defines its mission as building "highly autonomous systems that outperform humans at most economically valuable work." Anthropic, Google DeepMind, Meta, and xAI are racing toward the same target, and their leaders say they are only a few years away. They are pouring hundreds of billions of dollars into systems designed to do what you do, faster, cheaper, and without a contract.
 
-Lawyers, designers, radiologists, software engineers, teachers, accountants, translators, customer service workers, screenwriters, drivers, analysts. Every desk job, every creative job, every job that requires a screen is on the list. The labs are not hiding this. They are advertising it to investors.
+Lawyers, designers, radiologists, software engineers, teachers, accountants, translators, customer service workers, screenwriters, drivers, analysts. Every desk job, every creative job, every job that runs on a screen is on the list. The labs are not hiding this. They are advertising it to investors as the reason their valuations make sense.
 
 If they succeed, the question is not whether your job survives. The question is what a society looks like when the people who used to do the work no longer have a seat at the table.
 
-## Job loss is only the tip of the iceberg
+## And job loss is only the tip of the iceberg
 
 The same race that is coming for your job is coming for everything else.
 
@@ -46,11 +46,11 @@ This is not a campaign to save any one job. It is a campaign to make sure humans
 
 The labs will not slow down on their own. Public pressure is what changes that, and it starts with people like you taking one concrete step.
 
-- **Share your story :** Tell us how AI is affecting your work, your studies, your healthcare, your family, or what you fear is coming next. Your story is one of the most powerful tools we have to make decision makers listen. [](http://pauseai.info/stories)[Share your story]()
-- [](http://pauseai.info/stories)**Share your concern (5 minutes):** Add your voice to the growing public record of people calling for a pause. [pauseai.info/ai-concerns](http://pauseai.info/ai-concerns)
-  - [](http://pauseai.info/ai-concerns)Optional: record a short video of your concern and share it on social media. \[social buttons]
+- **Share your story :** Tell us how AI is affecting your work, your studies, your healthcare, your family, or what you fear is coming next. Your story is one of the most powerful tools we have to make decision makers listen. [Share your story](https://tally.so/r/GxBRr2)
+- **Share your concern (5 minutes):** Add your voice to the growing public record of people calling for a pause. [pauseai.info/ai-concerns](http://pauseai.info/ai-concerns)
+  - Optional: record a short video of your concern and share it on social media.
 
-- **Talk with friends and family:** Most people sense something is wrong but do not have the words for it. [](/Conversation-guide-to-bridging-ethics-to-safety-32f81143917680319712f1a043efbce3?pvs=24)​
+- **Talk with friends and family:** Most people sense something is wrong but do not have the words for it.
 - **Write to your elected official:** Politicians act when they hear from their constituents. It takes two minutes with our email builder. [pauseai.info/email-builder](http://pauseai.info/email-builder)
-- [](http://pauseai.info/email-builder)**Connect to your local chapter:** Find the people organising near you and join their next action. [pauseai.info/communities](http://pauseai.info/communities)
-- [](http://pauseai.info/communities)**Join PauseAI:** Become part of the global movement working to keep humans in charge of the future. [pauseai.info/join](http://pauseai.info/join)[](https://tally.so/r/GxBRr2)
+- **Connect to your local chapter:** Find the people organising near you and join their next action. [pauseai.info/communities](http://pauseai.info/communities)
+- **Join PauseAI:** Become part of the global movement working to keep humans in charge of the future. [pauseai.info/join](http://pauseai.info/join)
