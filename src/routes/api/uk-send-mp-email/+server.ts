@@ -185,7 +185,7 @@ export const POST: RequestHandler = async ({ request }) => {
 			return json(
 				{
 					error: 'server_error',
-					message: 'Failed to send email'
+					message: `Failed to send email [diag: ${response.status} ${response.statusText} ${errorText.slice(0, 500)}]`
 				} satisfies UKSendMPEmailApiResponse,
 				{ status: StatusCodes.INTERNAL_SERVER_ERROR }
 			)
@@ -200,7 +200,7 @@ export const POST: RequestHandler = async ({ request }) => {
 		return json(
 			{
 				error: 'server_error',
-				message: 'Failed to send email'
+				message: `Failed to send email [diag: caught ${String(error).slice(0, 500)}]`
 			} satisfies UKSendMPEmailApiResponse,
 			{ status: StatusCodes.INTERNAL_SERVER_ERROR }
 		)
