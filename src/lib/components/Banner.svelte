@@ -5,6 +5,7 @@
 	import { deLocalizeHref } from '$lib/paraglide/runtime'
 	import { setItem } from '$lib/localStorage'
 	import LinkWithoutIcon from '$lib/components/LinkWithoutIcon.svelte'
+	import { onMount } from 'svelte'
 
 	export let type: 'main' | 'campaign' = 'main'
 	export let id: string | null = null
@@ -12,12 +13,38 @@
 	export let contrast = false
 
 	let dismissed = false
+	let bannerEl: HTMLDivElement
+
+	function pushGtmEvent(eventObj: Record<string, unknown>) {
+		if (typeof window !== 'undefined') {
+			window.dataLayer = window.dataLayer || []
+			window.dataLayer.push(eventObj)
+		}
+	}
 
 	function close() {
 		dismissed = true
 		if (id) {
 			const prefix = type === 'campaign' ? 'campaign_banner' : 'banner'
 			setItem(`${prefix}_${id}_hidden`, 'true')
+		}
+		pushGtmEvent({
+			event: 'banner_dismiss',
+			banner_id: id,
+			banner_type: type
+		})
+	}
+
+	function handleBannerClick(event: MouseEvent) {
+		const target = event.target as HTMLElement
+		const link = target.closest('a')
+		if (link) {
+			pushGtmEvent({
+				event: 'banner_click',
+				banner_id: id,
+				banner_type: type,
+				link_url: link.href
+			})
 		}
 	}
 
@@ -28,6 +55,30 @@
 
 	$: isCampaign = type === 'campaign'
 	$: dataIdAttr = isCampaign ? 'data-campaign-banner-id' : 'data-banner-id'
+
+	onMount(() => {
+		if (dismissed) return
+
+		const observer = new IntersectionObserver(
+			(entries) => {
+				entries.forEach((entry) => {
+					if (entry.isIntersecting) {
+						pushGtmEvent({
+							event: 'banner_show',
+							banner_id: id,
+							banner_type: type
+						})
+						observer.disconnect()
+					}
+				})
+			},
+			{ threshold: 0.1 }
+		)
+
+		if (bannerEl) observer.observe(bannerEl)
+
+		return () => observer.disconnect()
+	})
 </script>
 
 <svelte:head>
@@ -48,6 +99,8 @@
 		{...{ [dataIdAttr]: id }}
 		data-pagefind-ignore
 		transition:fade={{ duration: 200 }}
+		bind:this={bannerEl}
+		on:click={handleBannerClick}
 	>
 		{#if isCampaign}
 			<div class="accent-line"></div>

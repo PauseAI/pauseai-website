@@ -27,6 +27,7 @@ declare global {
 		twttr?: Twttr
 		selectBanners(): void
 		applyTheme(): void
+		dataLayer?: unknown[]
 	}
 
 	declare module '*.md' {
