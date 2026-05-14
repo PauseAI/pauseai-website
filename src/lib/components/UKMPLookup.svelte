@@ -168,7 +168,7 @@
 			{#if contactStatus?.responded}
 				<div class="contact-status">
 					<span class="status-icon">ℹ️</span>
-					<strong>Already contacted:</strong> This MP has already contacted us about the letter.
+					<strong>Already responded!</strong> This MP has already contacted us about the letter.
 				</div>
 			{:else}
 				<UKMPEmailForm {mp} userPostcode={postcode} {userName} />
