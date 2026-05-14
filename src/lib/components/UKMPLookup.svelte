@@ -299,12 +299,8 @@
 		display: flex;
 		align-items: center;
 		gap: 0.75rem;
-		border: 2px solid;
-	}
-
-	.contact-status:not(.signed):not(.declined) {
+		border: 2px solid #63b3ed;
 		background-color: #ebf8ff;
-		border-color: #63b3ed;
 		color: #2a4365;
 	}
 
