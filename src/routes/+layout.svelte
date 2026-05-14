@@ -36,6 +36,7 @@
 	let eventFound: boolean
 	let geoForNearbyEvent: GeoApiResponse | null = null
 	$: hero = deLocalizeHref($page.url.pathname) === '/'
+	$: embed = $page.route.id?.startsWith('/embed/') ?? false
 
 	onMount(async () => {
 		document.documentElement.removeAttribute('data-waiting')
@@ -128,54 +129,56 @@
 	Top
 </h2>
 
-<div class="page-top" class:hero-page={hero}>
-	<!-- Dev-only locale mismatch warning. No id when isDev, so not affected by banner orchestration CSS. -->
-	{#if data.localeAlert}
-		<Banner
-			contrast={data.localeAlert.isDev}
-			id={data.localeAlert.isDev ? undefined : 'locale-switch'}
-		>
-			<!-- eslint-disable-next-line svelte/no-at-html-tags not vulnerable against XSS -->
-			{@html data.localeAlert.message}
+{#if !embed}
+	<div class="page-top" class:hero-page={hero}>
+		<!-- Dev-only locale mismatch warning. No id when isDev, so not affected by banner orchestration CSS. -->
+		{#if data.localeAlert}
+			<Banner
+				contrast={data.localeAlert.isDev}
+				id={data.localeAlert.isDev ? undefined : 'locale-switch'}
+			>
+				<!-- eslint-disable-next-line svelte/no-at-html-tags not vulnerable against XSS -->
+				{@html data.localeAlert.message}
+			</Banner>
+		{/if}
+
+		<!-- All banners rendered, hidden by default. Blocking script reveals the active main/campaign banner. -->
+		<Banner contrast={hero} id="gb-feb28-protest">
+			<b
+				>PauseAI's largest ever protest will be on Saturday February 28th in London. <Link
+					href="https://luma.com/o0p4htmk">Sign up now!</Link
+				></b
+			>
 		</Banner>
-	{/if}
+		<Banner contrast={hero} id="us-state-sovereignty">
+			<b
+				>HELP US PROTECT STATE SOVEREIGNTY ON AI REGULATION | <Link
+					href="https://mstr.app/b09fa92b-1899-43a0-9d95-99cd99c9dfb2">ACT NOW »</Link
+				></b
+			>
+		</Banner>
+		<Banner contrast={hero} id="holiday-littlehelpers" href="/littlehelpers">
+			<strong>🎄 Holiday Matching Campaign!</strong> Help fund volunteer stipends for PauseAI
+			advocates. <Link href="/littlehelpers">Join the Little Helpers campaign →</Link>
+		</Banner>
 
-	<!-- All banners rendered, hidden by default. Blocking script reveals the active main/campaign banner. -->
-	<Banner contrast={hero} id="gb-feb28-protest">
-		<b
-			>PauseAI's largest ever protest will be on Saturday February 28th in London. <Link
-				href="https://luma.com/o0p4htmk">Sign up now!</Link
-			></b
-		>
-	</Banner>
-	<Banner contrast={hero} id="us-state-sovereignty">
-		<b
-			>HELP US PROTECT STATE SOVEREIGNTY ON AI REGULATION | <Link
-				href="https://mstr.app/b09fa92b-1899-43a0-9d95-99cd99c9dfb2">ACT NOW »</Link
-			></b
-		>
-	</Banner>
-	<Banner contrast={hero} id="holiday-littlehelpers" href="/littlehelpers">
-		<strong>🎄 Holiday Matching Campaign!</strong> Help fund volunteer stipends for PauseAI
-		advocates. <Link href="/littlehelpers">Join the Little Helpers campaign →</Link>
-	</Banner>
+		<NearbyEvent contrast={hero} bind:eventFound geo={geoForNearbyEvent} />
 
-	<NearbyEvent contrast={hero} bind:eventFound geo={geoForNearbyEvent} />
+		<Banner type="campaign" href="/brussels-ep-protest-2026" id="brussels-ep-protest-2026">
+			<strong>Brussels, Feb 23</strong> - Join us outside the European Parliament to call for a global
+			treaty to pause frontier AI development.
+		</Banner>
 
-	<Banner type="campaign" href="/brussels-ep-protest-2026" id="brussels-ep-protest-2026">
-		<strong>Brussels, Feb 23</strong> - Join us outside the European Parliament to call for a global treaty
-		to pause frontier AI development.
-	</Banner>
+		{#if hero}
+			<div class="hero-section">
+				<Hero />
+				<Header inverted />
+			</div>
+		{/if}
+	</div>
+{/if}
 
-	{#if hero}
-		<div class="hero-section">
-			<Hero />
-			<Header inverted />
-		</div>
-	{/if}
-</div>
-
-<div class="layout" class:hero-page={hero}>
+<div class="layout" class:hero-page={hero} class:embed>
 	{#if $page.route.id === '/sayno'}
 		<!-- Dynamic import and render the selfie UX component -->
 		{#await import('./sayno/SelfieUX.svelte') then module}
@@ -183,7 +186,7 @@
 		{/await}
 	{/if}
 
-	{#if !hero}
+	{#if !hero && !embed}
 		<Header />
 	{/if}
 
@@ -193,26 +196,30 @@
 		</PageTransition>
 	</main>
 
-	<Footer />
+	{#if !embed}
+		<Footer />
+	{/if}
 </div>
 
-<SearchModal bind:open={$searchOpen} />
+{#if !embed}
+	<SearchModal bind:open={$searchOpen} />
 
-<Toaster
-	toastOptions={{
-		style: 'background-color: var(--bg-subtle); color: var(--text)',
-		iconTheme: {
-			primary: 'var(--brand)',
-			secondary: 'white'
-		}
-	}}
-/>
+	<Toaster
+		toastOptions={{
+			style: 'background-color: var(--bg-subtle); color: var(--text)',
+			iconTheme: {
+				primary: 'var(--brand)',
+				secondary: 'white'
+			}
+		}}
+	/>
 
-{#if !['/', '/communities', '/outcomes', '/pdoom', '/quotes', '/dear-sir-demis-2025'].includes(deLocalizeHref($page.url.pathname))}
-	<Toc />
+	{#if !['/', '/communities', '/outcomes', '/pdoom', '/quotes', '/dear-sir-demis-2025'].includes(deLocalizeHref($page.url.pathname))}
+		<Toc />
+	{/if}
+
+	<ProgressBar color="var(--brand)" />
 {/if}
-
-<ProgressBar color="var(--brand)" />
 
 <style>
 	/* Hide all orchestrated banners by default.
@@ -283,6 +290,17 @@
 
 	.layout.hero-page {
 		grid-template-rows: 1fr auto;
+	}
+
+	.layout.embed {
+		grid-template-rows: 1fr;
+		padding: 0;
+		max-inline-size: none;
+	}
+
+	.layout.embed main {
+		padding-block: 0;
+		margin-bottom: 0;
 	}
 
 	main {
