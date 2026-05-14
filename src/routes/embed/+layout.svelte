@@ -31,5 +31,5 @@
 </svelte:head>
 
 <div bind:this={wrapper}>
-	<slot />
+	<slot></slot>
 </div>
