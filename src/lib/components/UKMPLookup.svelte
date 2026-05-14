@@ -168,7 +168,7 @@
 			{#if contactStatus?.responded}
 				<div class="contact-status">
 					<span class="status-icon">ℹ️</span>
-					<strong>Already contacted:</strong> This MP has already contacted us about the letter.
+					<strong>Already responded!</strong> This MP has already contacted us about the letter.
 				</div>
 			{:else}
 				<UKMPEmailForm {mp} userPostcode={postcode} {userName} />
@@ -299,12 +299,8 @@
 		display: flex;
 		align-items: center;
 		gap: 0.75rem;
-		border: 2px solid;
-	}
-
-	.contact-status:not(.signed):not(.declined) {
+		border: 2px solid #63b3ed;
 		background-color: #ebf8ff;
-		border-color: #63b3ed;
 		color: #2a4365;
 	}
 

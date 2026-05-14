@@ -15,14 +15,14 @@
 
 	let senderName = userName
 	let senderEmail = ''
-	let subject = `Request to co-sign letter on Google's breach of AI safety pledges`
+	let subject = `Request to co-sign letter on AI liability`
 	let message = `Dear ${mp.salutation},
 
-Would you be willing to co-sign an open letter urging Google DeepMind to honour the AI Safety Summit pledges?
+Would you be willing to sign this open letter supporting legislation to hold AI companies accountable when their models cause severe harm to our critical infrastructure?
 
-I’m a resident of ${mp.constituency} and I wanted to share with you an open letter from **PauseAI**, a grassroots network focused on preventing the catastrophic risks of AI. Last May at the AI Safety Summit, Google publicly committed to transparency in their safety testing of new AI models. Yet they now refuse to say which third parties are involved in testing their latest model - **a clear breach of their commitment**.
+I’m a resident of ${mp.constituency} and a supporter of **PauseAI**, a grassroots network focused on preventing the catastrophic risks of AI. I am very concerned that AI development is spiralling out of control without any protection for the public.
 
-AI will be the most powerful technology humanity ever creates. We must set a clear precedent now that reckless disregard for safety standards will not be tolerated.
+There now exist models which can autonomously hack into almost any computer system. Yet under the existing framework, it is doubtful whether AI companies can be held liable for even the most severe and foreseeable harms, including cases in which their models were clearly decisive in enabling the harm. Please help change that, before we face the next generation of AI models.
 
 Next steps
  - 30-min call. Let me know what time would work for you.
@@ -208,8 +208,7 @@ ${userPostcode.toUpperCase()}`
 
 				<div class="email-tips">
 					<ul>
-						<li>Customize the email to you and your MP</li>
-						<li>Customize the sentence "I'm a resident of..." to make it sound natural.</li>
+						<li>Customise the email to yourself and your MP</li>
 						<li>MPs are very busy - keep it short!</li>
 					</ul>
 				</div>
@@ -256,33 +255,33 @@ ${userPostcode.toUpperCase()}`
 					<h4>Attachments:</h4>
 					<div class="pdf-attachments">
 						<Link
-							href="/pdfs/PauseAI_Open_Letter_to_Google_DeepMind.pdf#no-localize"
+							href="/pdfs/AI%20Liability%20Open%20Letter.pdf#no-localize"
 							target="_blank"
 							class="pdf-thumbnail"
 						>
 							<img
-								src="/pdfs/PauseAI_Open_Letter_to_Google_DeepMind_page-1.jpg"
-								alt="PauseAI Open Letter thumbnail"
+								src="/pdfs/AI%20Liability%20Open%20Letter.jpg"
+								alt="AI Liability Open Letter thumbnail"
 								class="pdf-thumbnail-image"
 							/>
 							<div class="pdf-info">
-								<span class="pdf-title">PauseAI Open Letter</span>
-								<span class="pdf-subtitle">to Google DeepMind</span>
+								<span class="pdf-title">AI Liability</span>
+								<span class="pdf-subtitle">Open Letter</span>
 							</div>
 						</Link>
 						<Link
-							href="/pdfs/Background_on_Googles_violation_of_Frontier_AI_Safety_Commitments.pdf#no-localize"
+							href="/pdfs/AI%20Liability%20Policy%20Briefing.pdf#no-localize"
 							target="_blank"
 							class="pdf-thumbnail"
 						>
 							<img
-								src="/pdfs/Background_on_Googles_violation_of_Frontier_AI_Safety_Commitments_page-1.jpg"
-								alt="Background document thumbnail"
+								src="/pdfs/AI%20Liability%20Policy%20Briefing.jpg"
+								alt="AI Liability Policy Briefing thumbnail"
 								class="pdf-thumbnail-image"
 							/>
 							<div class="pdf-info">
-								<span class="pdf-title">Background Information</span>
-								<span class="pdf-subtitle">on Google's Safety Violations</span>
+								<span class="pdf-title">AI Liability</span>
+								<span class="pdf-subtitle">Policy Briefing</span>
 							</div>
 						</Link>
 					</div>
