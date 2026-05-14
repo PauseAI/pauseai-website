@@ -7,12 +7,10 @@
 		if (window.parent === window) return
 
 		const post = () => {
-			const height = Math.max(
-				wrapper.scrollHeight,
-				wrapper.offsetHeight,
-				document.body.scrollHeight,
-				document.documentElement.scrollHeight
-			)
+			// Only measure the wrapper. html/body are height:100% (global styles)
+			// so their scrollHeight is pinned to the iframe's current size and won't
+			// shrink when content collapses.
+			const height = Math.max(wrapper.scrollHeight, wrapper.offsetHeight)
 			window.parent.postMessage({ type: 'pauseai-embed-resize', height }, '*')
 		}
 
