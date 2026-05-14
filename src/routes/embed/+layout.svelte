@@ -9,8 +9,10 @@
 		const post = () => {
 			// Only measure the wrapper. html/body are height:100% (global styles)
 			// so their scrollHeight is pinned to the iframe's current size and won't
-			// shrink when content collapses.
-			const height = Math.max(wrapper.scrollHeight, wrapper.offsetHeight)
+			// shrink when content collapses. Ceil the subpixel rect height — if the
+			// real height is 234.4px, offsetHeight reports 234 and the parent's
+			// iframe.style.height=234 leaves 0.4px overflowing, showing a scrollbar.
+			const height = Math.ceil(wrapper.getBoundingClientRect().height)
 			window.parent.postMessage({ type: 'pauseai-embed-resize', height }, '*')
 		}
 
