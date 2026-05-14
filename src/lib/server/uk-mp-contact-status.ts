@@ -58,7 +58,7 @@ export async function ukCheckMPContactHistory(mpEmail: string): Promise<UKMPCont
 			return defaultResponse
 		}
 
-		const responded = Boolean(data.records[0].fields['Responded'])
+		const responded = Boolean(data.records[0].fields['Responded Liability Letter'])
 
 		console.log(`MP lookup success: ${mpEmail} - responded: ${responded}`)
 
