@@ -256,33 +256,33 @@ ${userPostcode.toUpperCase()}`
 					<h4>Attachments:</h4>
 					<div class="pdf-attachments">
 						<Link
-							href="/pdfs/PauseAI_Open_Letter_to_Google_DeepMind.pdf#no-localize"
+							href="/pdfs/AI%20Liability%20Open%20Letter.pdf#no-localize"
 							target="_blank"
 							class="pdf-thumbnail"
 						>
 							<img
-								src="/pdfs/PauseAI_Open_Letter_to_Google_DeepMind_page-1.jpg"
-								alt="PauseAI Open Letter thumbnail"
+								src="/pdfs/AI%20Liability%20Open%20Letter.jpg"
+								alt="AI Liability Open Letter thumbnail"
 								class="pdf-thumbnail-image"
 							/>
 							<div class="pdf-info">
-								<span class="pdf-title">PauseAI Open Letter</span>
-								<span class="pdf-subtitle">to Google DeepMind</span>
+								<span class="pdf-title">AI Liability</span>
+								<span class="pdf-subtitle">Open Letter</span>
 							</div>
 						</Link>
 						<Link
-							href="/pdfs/Background_on_Googles_violation_of_Frontier_AI_Safety_Commitments.pdf#no-localize"
+							href="/pdfs/AI%20Liability%20Policy%20Briefing.pdf#no-localize"
 							target="_blank"
 							class="pdf-thumbnail"
 						>
 							<img
-								src="/pdfs/Background_on_Googles_violation_of_Frontier_AI_Safety_Commitments_page-1.jpg"
-								alt="Background document thumbnail"
+								src="/pdfs/AI%20Liability%20Policy%20Briefing.jpg"
+								alt="AI Liability Policy Briefing thumbnail"
 								class="pdf-thumbnail-image"
 							/>
 							<div class="pdf-info">
-								<span class="pdf-title">Background Information</span>
-								<span class="pdf-subtitle">on Google's Safety Violations</span>
+								<span class="pdf-title">AI Liability</span>
+								<span class="pdf-subtitle">Policy Briefing</span>
 							</div>
 						</Link>
 					</div>
