@@ -17,11 +17,13 @@
 
 	let { children, contrast = false, href = null, id = null, type = 'main' }: Props = $props()
 
-	let dismissed = $state(false)
+	const isCurrentPage = (href: string | null) =>
+		href !== null && deLocalizeHref(page.url.pathname) === href
+	let dismissed = $state(isCurrentPage(href))
 
 	// Hide on navigation to the target/href page
 	$effect(() => {
-		if (href !== null && deLocalizeHref(page.url.pathname) === href) {
+		if (isCurrentPage(href)) {
 			dismissed = true
 		}
 	})
