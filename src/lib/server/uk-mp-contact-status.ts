@@ -1,4 +1,5 @@
 import { AIRTABLE_API_KEY } from '$env/static/private'
+import type { AirtableListResponse } from '$lib/airtable'
 import { validMPEmails } from './uk-postcode-to-mp'
 
 const MP_CONTACT_BASE_ID = 'appBInVvIm6opJ1Ob'
@@ -6,6 +7,10 @@ const UK_PARLIAMENTARIANS_TABLE_ID = 'tblH3ks9wqQHLpYx3'
 
 export interface UKMPContactStatus {
 	responded: boolean
+}
+
+type UKParliamentarianFields = {
+	'Responded Liability Letter'?: boolean | null
 }
 
 /**
@@ -49,8 +54,7 @@ export async function ukCheckMPContactHistory(mpEmail: string): Promise<UKMPCont
 			throw new Error(`Airtable API error: ${response.status} ${response.statusText}`)
 		}
 
-		const data = await response.json()
-
+		const data = (await response.json()) as AirtableListResponse<UKParliamentarianFields>
 		if (!data.records || data.records.length === 0) {
 			console.error(
 				`MP not found in Airtable: ${mpEmail}. All MPs should be pre-populated in the table.`

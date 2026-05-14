@@ -14,6 +14,10 @@ export type AirtableRecord<T> = {
 	fields: T
 }
 
+export type AirtableListResponse<T> = {
+	records: AirtableRecord<T>[]
+}
+
 /**
  * Extracts base ID and table ID from an Airtable URL
  * @param url The Airtable API URL

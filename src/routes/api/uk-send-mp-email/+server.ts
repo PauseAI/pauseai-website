@@ -1,4 +1,5 @@
 import { AIRTABLE_API_KEY, AIRTABLE_WRITE_API_KEY } from '$env/static/private'
+import type { AirtableListResponse, AirtableRecord } from '$lib/airtable'
 import { validMPEmails } from '$lib/server/uk-postcode-to-mp.js'
 import { json } from '@sveltejs/kit'
 import { StatusCodes } from 'http-status-codes'
@@ -139,7 +140,7 @@ export const POST: RequestHandler = async ({ request }) => {
 			)
 		}
 
-		const mpData = await mpResponse.json()
+		const mpData = (await mpResponse.json()) as AirtableListResponse<Record<string, unknown>>
 		if (!mpData.records || mpData.records.length === 0) {
 			console.error(`MP record not found for email: ${data.recipient}`)
 			return json(
@@ -190,7 +191,7 @@ export const POST: RequestHandler = async ({ request }) => {
 			)
 		}
 
-		const result = await response.json()
+		const result = (await response.json()) as AirtableRecord<Record<string, unknown>>
 		console.log(`Email record created for ${data.senderEmail} -> ${data.recipient}`)
 
 		return json({ success: true, recordId: result.id } satisfies UKSendMPEmailApiSuccessResponse)
