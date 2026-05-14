@@ -255,12 +255,12 @@ ${userPostcode.toUpperCase()}`
 					<h4>Attachments:</h4>
 					<div class="pdf-attachments">
 						<Link
-							href="/pdfs/AI%20Liability%20Open%20Letter.pdf#no-localize"
+							href="/pdfs/AI_Liability_Open_Letter.pdf#no-localize"
 							target="_blank"
 							class="pdf-thumbnail"
 						>
 							<img
-								src="/pdfs/AI%20Liability%20Open%20Letter.jpg"
+								src="/pdfs/AI_Liability_Open_Letter.jpg"
 								alt="AI Liability Open Letter thumbnail"
 								class="pdf-thumbnail-image"
 							/>
@@ -270,12 +270,12 @@ ${userPostcode.toUpperCase()}`
 							</div>
 						</Link>
 						<Link
-							href="/pdfs/AI%20Liability%20Policy%20Briefing.pdf#no-localize"
+							href="/pdfs/AI_Liability_Policy_Briefing.pdf#no-localize"
 							target="_blank"
 							class="pdf-thumbnail"
 						>
 							<img
-								src="/pdfs/AI%20Liability%20Policy%20Briefing.jpg"
+								src="/pdfs/AI_Liability_Policy_Briefing.jpg"
 								alt="AI Liability Policy Briefing thumbnail"
 								class="pdf-thumbnail-image"
 							/>
