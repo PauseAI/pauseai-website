@@ -1,6 +1,7 @@
 name: Scheduled Rebuild
 
-# on:
+on:
+  workflow_dispatch:
 #   schedule:
 #     # Every 30 minutes
 #     - cron: '*/30 * * * *'
