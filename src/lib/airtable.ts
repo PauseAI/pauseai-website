@@ -7,12 +7,15 @@ const getWriteApiKey = () => env.AIRTABLE_WRITE_API_KEY || env.AIRTABLE_API_KEY
 
 type QueryParams = Parameters<Table<FieldSet>['select']>[0]
 
-const AIRTABLE_URL_REGEX =
-	/^https:\/\/api\.airtable\.com\/v0\/(?<baseId>(\w|\d)+)\/(?<tableId>(\w|\d)+)\/?$/
+const AIRTABLE_URL_REGEX = /^https:\/\/api\.airtable\.com\/v0\/(?<baseId>\w+)\/(?<tableId>\w+)\/?$/
 
 export type AirtableRecord<T> = {
 	id: string
 	fields: T
+}
+
+export type AirtableListResponse<T> = {
+	records: AirtableRecord<T>[]
 }
 
 /**

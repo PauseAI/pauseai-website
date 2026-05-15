@@ -10,4 +10,4 @@ description: share your story about AI
 
 PauseAI Australia is collaborating with 14 other PauseAI chapters to share how people are experiencing AI. Please share your story.
 
-<TallyEmbed formId="GxBRr2" />
+<TallyEmbed formId="Gxo8AQ" />
