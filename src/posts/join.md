@@ -3,6 +3,8 @@ title: Join PauseAI
 description: Sign up to join the PauseAI movement
 ---
 
+<!-- @visualDiffEnabled: true — markdown post with embedded Svelte components -->
+
 <script>
     import TallyEmbed from '$lib/components/TallyEmbed.svelte'
     import NewsletterSignup from '$lib/components/NewsletterSignup.svelte'

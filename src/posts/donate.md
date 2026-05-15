@@ -3,6 +3,8 @@ title: Donate to PauseAI
 description: With your financial support we can have a bigger impact.
 ---
 
+<!-- @visualDiffEnabled: true — markdown post with embedded Svelte components -->
+
 <script>
     import Donate from '$lib/components/Donate.svelte'
 </script>

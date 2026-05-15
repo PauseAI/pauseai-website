@@ -1,3 +1,4 @@
+<!-- @visualDiffEnabled: false — ~28M-pixel desktop snapshot is over Chromatic's 25M cap -->
 <script lang="ts">
 	import { title } from '$lib/config'
 	import Quote from './Quote.svelte'

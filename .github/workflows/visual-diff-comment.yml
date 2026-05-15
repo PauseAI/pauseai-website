@@ -1,0 +1,88 @@
+name: Visual diff scope comment
+
+# Posts (or updates) a sticky PR comment summarizing visual-diff coverage after
+# each successful run of the Visual diff workflow. Runs via `workflow_run` so it
+# executes in the base-repo context with write permissions, even for PRs from
+# forks — GITHUB_TOKEN on the source `pull_request` workflow is read-only for
+# forks.
+#
+# Safety: this workflow consumes an artifact produced by the fork's run, but
+# only treats it as data — it renders the Markdown body into a PR comment and
+# never executes any script from the fork's checkout. The PR number is derived
+# from `workflow_run.head_sha` via the trusted GitHub API (not from anything
+# the fork could tamper with), so a compromised artifact can't steer the
+# comment onto an arbitrary PR.
+
+on:
+  workflow_run:
+    workflows: [Visual diff (Chromatic)]
+    types: [completed]
+
+permissions:
+  # Setting permissions at workflow level makes every unlisted scope `none` —
+  # actions: read is needed for the cross-run artifact download below.
+  actions: read
+  pull-requests: write
+
+jobs:
+  comment:
+    runs-on: ubuntu-latest
+    if: >-
+      github.event.workflow_run.event == 'pull_request' &&
+      github.event.workflow_run.conclusion == 'success'
+    steps:
+      - name: Resolve PR from trusted workflow_run payload
+        id: pr
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const run = context.payload.workflow_run
+            // Look up open PRs by head ref directly. We deliberately don't use
+            // `listPullRequestsAssociatedWithCommit` here: when the commit is
+            // on the repo's default branch, that endpoint only returns merged
+            // PRs, so an open PR whose head is at this commit gets filtered
+            // out (hit on a fork where the feature branch was the default).
+            // `pulls?head=` has no such quirk.
+            const headOwner = run.head_repository?.owner?.login
+            const headBranch = run.head_branch
+            const { data: prs } = await github.rest.pulls.list({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              state: 'open',
+              head: `${headOwner}:${headBranch}`
+            })
+            // Narrow by trusted workflow_run fields — head_repository.id and
+            // head_sha — so a commit shared between multiple open PRs routes
+            // the comment to the right one. Edge case we don't handle: same
+            // fork branch opened as TWO open PRs against different base
+            // branches simultaneously (rare). In that case `.find()` picks
+            // the first match and the comment may land on the wrong PR
+            // until one is closed.
+            const match = prs.find((p) => {
+              if (run.head_repository?.id && p.head.repo?.id !== run.head_repository.id) return false
+              if (p.head.sha !== run.head_sha) return false
+              return true
+            })
+            if (!match) {
+              core.info(`No open PR matches ${run.head_repository?.full_name}:${run.head_branch}@${run.head_sha}; skipping comment.`)
+              return ''
+            }
+            core.setOutput('number', String(match.number))
+            return String(match.number)
+      - name: Download scope artifact
+        id: download
+        if: steps.pr.outputs.number != ''
+        uses: actions/download-artifact@v4
+        continue-on-error: true
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          run-id: ${{ github.event.workflow_run.id }}
+          name: visual-diff-scope
+          path: scope
+      - name: Post or update sticky comment
+        if: steps.pr.outputs.number != '' && steps.download.outcome == 'success'
+        uses: marocchino/sticky-pull-request-comment@v2
+        with:
+          header: visual-diff-scope
+          number: ${{ steps.pr.outputs.number }}
+          path: scope/body.md

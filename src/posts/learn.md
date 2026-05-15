@@ -3,6 +3,8 @@ title: Learn Why AI Safety Matters
 description: Educational resources (videos, articles, books) about AI risks and AI alignment
 ---
 
+<!-- @visualDiffEnabled: true — long-form with many headings -->
+
 <script>
 import NewsletterSignup from '$lib/components/NewsletterSignup.svelte';
 import IconBullet from '$lib/components/IconBullet.svelte'

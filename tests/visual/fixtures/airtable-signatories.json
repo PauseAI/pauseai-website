@@ -1,0 +1,40 @@
+{
+	"records": [
+		{
+			"id": "rec_fixture_sig_1",
+			"createdTime": "2025-11-15T00:00:00.000Z",
+			"fields": {
+				"name": "Avery Example",
+				"private": false,
+				"bio": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+				"country": "United Kingdom",
+				"date": "2025-11-15",
+				"email_verified": true
+			}
+		},
+		{
+			"id": "rec_fixture_sig_2",
+			"createdTime": "2025-12-03T00:00:00.000Z",
+			"fields": {
+				"name": "Morgan Sample",
+				"private": true,
+				"bio": "Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+				"country": "Germany",
+				"date": "2025-12-03",
+				"email_verified": true
+			}
+		},
+		{
+			"id": "rec_fixture_sig_3",
+			"createdTime": "2026-01-07T00:00:00.000Z",
+			"fields": {
+				"name": "Rita Fixture",
+				"private": false,
+				"bio": "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.",
+				"country": "Nigeria",
+				"date": "2026-01-07",
+				"email_verified": true
+			}
+		}
+	]
+}
