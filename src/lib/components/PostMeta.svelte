@@ -6,7 +6,7 @@
 
 	interface Props {
 		title: string
-		description: string
+		description?: string
 		date?: string
 		/** URL or relative path to cover / preview image */
 		image?: string
@@ -18,7 +18,7 @@
 
 	let {
 		title,
-		description,
+		description = '',
 		date,
 		image = '/Cover.jpg',
 		pageUrl = `${rootUrl}${deLocalizeHref(page.url.pathname)}`,

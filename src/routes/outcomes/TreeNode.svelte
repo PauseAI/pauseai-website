@@ -34,7 +34,7 @@
 		}, 10)
 	}
 
-	let child: HTMLElement
+	let child: HTMLElement | undefined = $state()
 	const scrollToNextChild = () => {
 		setTimeout(() => {
 			if (child) {

@@ -13,13 +13,13 @@
 	let { data }: Props = $props()
 
 	let {
-		title = data.slug,
+		title,
 		date,
 		description,
 		image,
 		author,
 		showImage = true
-	} = $derived(data.meta)
+	} = $derived({ title: data.slug, ...data.meta })
 	let parent = $derived(data.slug.split('/').slice(0, -1).join('/'))
 	let metaImageUrl = $derived(getPostMetaImageUrl(image))
 </script>

@@ -17,8 +17,10 @@
 
 	let { children, contrast = false, href = null, id = null, type = 'main' }: Props = $props()
 
+	// Initialize dismissed state during SSR based on the current pathname
 	const isCurrentPage = (href: string | null) =>
 		href !== null && deLocalizeHref(page.url.pathname) === href
+	// svelte-ignore state_referenced_locally
 	let dismissed = $state(isCurrentPage(href))
 
 	// Hide on navigation to the target/href page
@@ -28,7 +30,7 @@
 		}
 	})
 
-	let bannerEl: HTMLDivElement
+	let bannerEl: HTMLDivElement | undefined = $state()
 
 	function pushGtmEvent(eventObj: Record<string, unknown>) {
 		if (typeof window !== 'undefined') {

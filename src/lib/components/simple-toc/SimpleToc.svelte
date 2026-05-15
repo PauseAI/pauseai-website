@@ -4,13 +4,13 @@
 	import * as m from '$lib/paraglide/messages.js'
 	import Node from './Node.svelte'
 
-	let heading: HTMLHeadingElement
+	let heading: HTMLHeadingElement | undefined = $state()
 	let headingsBelow: Element[] | undefined = $state()
 
 	onMount(() => {
-		const parent = heading.parentElement
+		const parent = heading?.parentElement
 		const siblings = parent?.children
-		if (!siblings) return
+		if (!heading || !siblings) return
 		const siblingsArray = Array.from(siblings)
 		const index = siblingsArray.indexOf(heading)
 		const siblingsBelow = siblingsArray.slice(index + 1)

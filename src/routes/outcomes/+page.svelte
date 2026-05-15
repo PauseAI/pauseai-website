@@ -7,7 +7,7 @@
 
 	let intro = $state(true)
 	let showProbabilities = $state(false)
-	let top: HTMLElement
+	let top: HTMLElement | undefined = $state()
 	let { title, description, date } = outcomesMeta
 </script>
 

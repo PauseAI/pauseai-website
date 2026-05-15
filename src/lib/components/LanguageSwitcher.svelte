@@ -29,8 +29,8 @@
 	const nativeLanguageNames: Record<string, Intl.DisplayNames> = {}
 
 	let open = $state(false)
-	let button: HTMLButtonElement
-	let dropdown: HTMLDivElement
+	let button: HTMLButtonElement | undefined = $state()
+	let dropdown: HTMLDivElement | undefined = $state()
 
 	// Get native name for a language
 	function getNativeLanguageName(locale: string): string {
@@ -96,7 +96,7 @@
 		if (showSwitcher) {
 			const clickListener = (event: MouseEvent) => {
 				const node = event.target as Node | null
-				if (open && !button.contains(node) && !dropdown.contains(node)) {
+				if (open && button && !button.contains(node) && dropdown && !dropdown.contains(node)) {
 					open = false
 				}
 			}

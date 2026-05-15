@@ -39,8 +39,8 @@ ${userName}
 
 ${userPostcode.toUpperCase()}`)
 
-	let messageTextarea: HTMLTextAreaElement
-	let subjectTextarea: HTMLTextAreaElement
+	let messageTextarea: HTMLTextAreaElement | undefined = $state()
+	let subjectTextarea: HTMLTextAreaElement | undefined = $state()
 	let isSubmitting = $state(false)
 	let submitStatus: 'idle' | 'success' | 'error' = $state('idle')
 	let errorMessage = $state('')
@@ -48,6 +48,7 @@ ${userPostcode.toUpperCase()}`)
 	let htmlPreview = $derived(micromark(message))
 
 	function insertMarkdown(before: string, after: string = '') {
+		if (!messageTextarea) return
 		const start = messageTextarea.selectionStart
 		const end = messageTextarea.selectionEnd
 		const selectedText = message.substring(start, end)
@@ -58,8 +59,8 @@ ${userPostcode.toUpperCase()}`)
 
 		// Move cursor to end of inserted text
 		setTimeout(() => {
-			messageTextarea.focus()
-			messageTextarea.setSelectionRange(
+			messageTextarea?.focus()
+			messageTextarea?.setSelectionRange(
 				start + before.length,
 				start + before.length + selectedText.length
 			)
@@ -67,6 +68,7 @@ ${userPostcode.toUpperCase()}`)
 	}
 
 	function insertBulletPoint() {
+		if (!messageTextarea) return
 		const start = messageTextarea.selectionStart
 		const end = messageTextarea.selectionEnd
 
@@ -91,9 +93,9 @@ ${userPostcode.toUpperCase()}`)
 
 			// Adjust cursor position to account for the removed "- "
 			setTimeout(() => {
-				messageTextarea.focus()
+				messageTextarea?.focus()
 				const adjustment = currentLine.length - bulletRemoved.length
-				messageTextarea.setSelectionRange(start - adjustment, end - adjustment)
+				messageTextarea?.setSelectionRange(start - adjustment, end - adjustment)
 			}, 0)
 		} else {
 			// Insert "- " at the beginning of the current line
@@ -102,8 +104,8 @@ ${userPostcode.toUpperCase()}`)
 
 			// Adjust cursor position to account for the inserted "- "
 			setTimeout(() => {
-				messageTextarea.focus()
-				messageTextarea.setSelectionRange(start + 2, end + 2)
+				messageTextarea?.focus()
+				messageTextarea?.setSelectionRange(start + 2, end + 2)
 			}, 0)
 		}
 	}
