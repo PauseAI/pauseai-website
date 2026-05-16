@@ -139,6 +139,13 @@
 		--toc-mobile-width: min(90vw, 18rem);
 		--toc-mobile-right: 1rem;
 		--toc-mobile-bottom: 1rem;
+		--title-font-size-base: 1.5rem;
+		--title-font-size: var(--title-font-size-base);
+	}
+
+	.desktop-toc-wrapper {
+		--toc-li-font-size-base: 0.85rem;
+		--title-font-size: calc(0.85 * var(--title-font-size-base));
 	}
 
 	/* Desktop sidebar: fixed on left */
@@ -215,7 +222,7 @@
 	}
 
 	.toc-title-heading {
-		font-size: 1.5rem;
+		font-size: var(--title-font-size);
 		padding: 0;
 		margin: 0;
 	}
