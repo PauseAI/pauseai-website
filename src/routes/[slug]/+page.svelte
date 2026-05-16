@@ -6,10 +6,10 @@
 	import type { PageData } from './$types'
 
 	interface Props {
-		// don't destructure to maintain reactivity for invalidation after language detection
 		data: PageData
 	}
 
+	// don't destructure to maintain reactivity for invalidation after language detection
 	let { data }: Props = $props()
 
 	let {

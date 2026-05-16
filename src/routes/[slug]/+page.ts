@@ -2,16 +2,7 @@ import { dev } from '$app/environment'
 import { getLocale } from '$lib/paraglide/runtime'
 import type { PageLoad } from './$types'
 import { asError } from '$lib/utils'
-
-interface PostMetadata {
-	title?: string
-	description?: string
-	date?: string
-	image?: string
-	author?: string
-	showImage?: boolean
-	[key: string]: unknown
-}
+import type { DescriptiveFrontmatterMeta } from '$lib/types'
 
 export const load: PageLoad = async ({ params: { slug }, depends, data: serverData }) => {
 	depends('paraglide:lang')
@@ -22,7 +13,7 @@ export const load: PageLoad = async ({ params: { slug }, depends, data: serverDa
 		return {
 			...serverData,
 			content,
-			meta: meta as PostMetadata,
+			meta: meta as DescriptiveFrontmatterMeta,
 			slug
 		}
 	} catch {
