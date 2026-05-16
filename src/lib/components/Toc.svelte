@@ -100,11 +100,12 @@
 			headingSelector=":is(h2, h3, h4):not(.toc-exclude):not(footer *):not(.tabs *):not(.tab-content *)"
 			title="Contents"
 			breakpoint={1250}
-			bind:open
+			open
 			bind:desktop
 			bind:headings
 			hide={(headings?.length ?? 0) <= 1}
 			openButtonClass="toc-icon"
+			onOpen={(event) => (open = event.open)}
 		>
 			{#snippet openTocIcon()}
 				<List size="2rem" />
