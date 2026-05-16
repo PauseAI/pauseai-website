@@ -117,6 +117,7 @@
 						onclick={() => (open = false)}
 						aria-label="Close table of contents"
 					>
+						<span class="toc-close-hitbox" aria-hidden="true"></span>
 						<X size="1.2rem" />
 					</button>
 				</div>
@@ -236,7 +237,11 @@
 		top: 0;
 		right: 0;
 		padding: inherit;
-		padding-left: 1rem;
+	}
+
+	.toc-close-hitbox {
+		position: absolute;
+		inset: -0.75rem;
 	}
 
 	.toc-wrapper :global(.toc) {
