@@ -4,9 +4,6 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
-overrides:
-  svelte-toc>svelte: '5'
-
 importers:
 
   .:

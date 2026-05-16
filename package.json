@@ -29,11 +29,6 @@
 		"prepare": "lefthook install",
 		"sync": "svelte-kit sync"
 	},
-	"pnpm": {
-		"overrides": {
-			"svelte-toc>svelte": "5"
-		}
-	},
 	"devDependencies": {
 		"@eslint/js": "^10.0.1",
 		"@eslint/markdown": "^8.0.1",
