@@ -4,9 +4,6 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
-overrides:
-  svelte-toc>svelte: '5'
-
 importers:
 
   .:
@@ -114,8 +111,8 @@ importers:
         specifier: ^1.2.0
         version: 1.2.0(svelte@5.55.7(@typescript-eslint/types@8.59.3))
       svelte-toc:
-        specifier: ^0.5.9
-        version: 0.5.9(@typescript-eslint/types@8.59.3)
+        specifier: ^0.6.3
+        version: 0.6.3(@typescript-eslint/types@8.59.3)
       ua-parser-js:
         specifier: ^1.0.41
         version: 1.0.41
@@ -3401,8 +3398,8 @@ packages:
     peerDependencies:
       svelte: ^3.0.0 || ^4.0.0 || ^5.0.0-next.1
 
-  svelte-toc@0.5.9:
-    resolution: {integrity: sha512-upnWdUWBhwjagRJ6/UQYAETUALsH3kfVTA3tyiCSKuGqMc5mckI1dqe2Rkg8SyatU0fqtd/f6X5VCd8829H9Tg==}
+  svelte-toc@0.6.3:
+    resolution: {integrity: sha512-3YO+oTqudOplkVJkvthdhHBC/0HPqN0FZBWFlHBp8LMI4gcKcBDF/IA1U5kewgEfvWZsyp8dS5R2N5SYqoWLcw==}
 
   svelte-writable-derived@3.1.1:
     resolution: {integrity: sha512-w4LR6/bYZEuCs7SGr+M54oipk/UQKtiMadyOhW0PTwAtJ/Ai12QS77sLngEcfBx2q4H8ZBQucc9ktSA5sUGZWw==}
@@ -6862,7 +6859,7 @@ snapshots:
     dependencies:
       svelte: 5.55.7(@typescript-eslint/types@8.59.3)
 
-  svelte-toc@0.5.9(@typescript-eslint/types@8.59.3):
+  svelte-toc@0.6.3(@typescript-eslint/types@8.59.3):
     dependencies:
       svelte: 5.55.7(@typescript-eslint/types@8.59.3)
     transitivePeerDependencies:
