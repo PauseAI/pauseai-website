@@ -169,10 +169,6 @@
 		padding-left: 0;
 	}
 
-	.desktop-toc-wrapper :global(aside.toc > nav > ol > li) {
-		margin-bottom: 0.5rem;
-	}
-
 	/* Hide open button on desktop ToC */
 	.desktop-toc-wrapper :global(button.toc-icon) {
 		display: none;
