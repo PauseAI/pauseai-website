@@ -79,7 +79,7 @@
 			desktop={true}
 		>
 			{#snippet titleSnippet()}
-				<h2 class="toc-title toc-title-heading toc-exclude">Contents</h2>
+				<h2 class="toc-title-heading toc-exclude">Contents</h2>
 			{/snippet}
 		</Toc>
 	</div>
