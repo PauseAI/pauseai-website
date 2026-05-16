@@ -6,11 +6,11 @@
 	import Backdrop from '$lib/components/Backdrop.svelte'
 	import { onMount } from 'svelte'
 
-	let desktop: boolean | undefined
-	let open: boolean | undefined
-	let headings: HTMLHeadingElement[] | undefined
+	let desktop = $state(false)
+	let open = $state(false)
+	let headings = $state<HTMLHeadingElement[]>([])
 	const maxTop = 14
-	let sidebarTop = maxTop // Initial top offset in rem (below banner)
+	let sidebarTop = $state(maxTop) // Initial top offset in rem (below banner)
 
 	// Track scroll to adjust sidebar position
 	onMount(() => {
@@ -78,9 +78,9 @@
 			open={true}
 			desktop={true}
 		>
-			<svelte:fragment slot="title">
-				<h2 class="toc-title-heading toc-exclude">Contents</h2>
-			</svelte:fragment>
+			{#snippet titleSnippet()}
+				<h2 class="toc-title toc-title-heading toc-exclude">Contents</h2>
+			{/snippet}
 		</Toc>
 	</div>
 {/if}
@@ -100,22 +100,23 @@
 			bind:desktop
 			bind:headings
 			hide={(headings?.length ?? 0) <= 1}
+			openButtonClass="toc-icon"
 		>
-			<svelte:fragment slot="open-toc-icon">
+			{#snippet openTocIcon()}
 				<List size="2rem" />
-			</svelte:fragment>
-			<svelte:fragment slot="title">
+			{/snippet}
+			{#snippet titleSnippet()}
 				<div class="toc-head">
-					<h2 class="toc-title-heading toc-exclude">Contents</h2>
+					<h2 class="toc-title toc-title-heading toc-exclude">Contents</h2>
 					<button
 						class="toc-close"
-						on:click={() => (open = false)}
+						onclick={() => (open = false)}
 						aria-label="Close table of contents"
 					>
 						<X size="1.2rem" />
 					</button>
 				</div>
-			</svelte:fragment>
+			{/snippet}
 		</Toc>
 	</Card>
 </div>
@@ -128,8 +129,11 @@
 		--toc-mobile-bg: var(--bg);
 		--toc-active-bg: transparent;
 		--toc-max-height: 80vh;
-		--toc-padding: 0em 1em 1em;
+		--toc-padding: 0.5em 1.5em 1.5em;
 		--toc-z-index: 10;
+		--toc-mobile-width: min(90vw, 18rem);
+		--toc-mobile-right: 1rem;
+		--toc-mobile-bottom: 1rem;
 	}
 
 	/* Desktop sidebar: fixed on left */
@@ -210,12 +214,18 @@
 	}
 
 	.toc-title-heading {
+		font-size: 1.5rem;
 		padding: 0;
 		margin: 0;
 	}
 
 	.toc-wrapper :global(aside.toc > nav) {
 		max-width: 90vw;
+	}
+
+	/** Fix likely svelte-toc bug */
+	.toc-wrapper :global(aside.toc.mobile > nav) {
+		right: 0;
 	}
 
 	.toc-close {
@@ -227,8 +237,6 @@
 		right: 0;
 		padding: inherit;
 		padding-left: 1rem;
-		padding-right: 1rem;
-		margin-right: -1rem;
 	}
 
 	.toc-wrapper :global(.toc) {
