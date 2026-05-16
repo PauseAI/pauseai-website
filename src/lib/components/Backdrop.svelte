@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { fade } from 'svelte/transition'
 
-	export let open: boolean | undefined
+	let { open = false }: { open?: boolean } = $props()
 </script>
 
 {#if open}
