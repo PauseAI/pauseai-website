@@ -16,7 +16,7 @@
 	import Whatsapp from '$lib/components/icons/whatsapp.svelte'
 
 	// Lucide icons for missing ones
-	import { Globe, Link, Calendar, Mail } from 'lucide-svelte'
+	import { Globe, Link, Calendar, Mail } from '@lucide/svelte'
 
 	interface Props {
 		nationalGroup: NationalGroup

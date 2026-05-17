@@ -75,7 +75,7 @@
 			center: [initialState.lng, initialState.lat],
 			zoom: initialState.zoom,
 			transformRequest: (url, resourceType) => {
-				if (isMapboxURL(url)) return transformMapboxUrl(url, resourceType ?? '', MAPBOX_KEY)
+				if (isMapboxURL(url)) return transformMapboxUrl(url, resourceType, MAPBOX_KEY)
 			}
 		})
 

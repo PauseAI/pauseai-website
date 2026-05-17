@@ -7,7 +7,7 @@ description: Educational resources (videos, articles, books) about AI risks and 
 import NewsletterSignup from '$lib/components/NewsletterSignup.svelte';
 import IconBullet from '$lib/components/IconBullet.svelte'
 import * as m from '$lib/paraglide/messages'
-import { CirclePause, CircleQuestionMark, Cog, Earth, Footprints, MessageSquareQuote, Skull, TriangleAlert } from 'lucide-svelte';
+import { CirclePause, CircleQuestionMark, Cog, Earth, Footprints, MessageSquareQuote, Skull, TriangleAlert } from '@lucide/svelte';
 </script>
 
 <NewsletterSignup />

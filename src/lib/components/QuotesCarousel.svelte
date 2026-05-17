@@ -17,8 +17,8 @@
 		Keyboard,
 		Swipe
 	} from '@glidejs/glide/dist/glide.modular.esm'
-	import ArrowLeft from 'lucide-svelte/icons/arrow-left'
-	import ArrowRight from 'lucide-svelte/icons/arrow-right'
+	import ArrowLeft from '@lucide/svelte/icons/arrow-left'
+	import ArrowRight from '@lucide/svelte/icons/arrow-right'
 	import { onMount } from 'svelte'
 	import QuoteContent from './QuoteContent.svelte'
 
