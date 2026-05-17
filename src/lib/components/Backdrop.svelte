@@ -14,7 +14,6 @@
 
 <style>
 	.backdrop {
-		-webkit-backdrop-filter: blur(10px) brightness(0.9) saturate(0.9);
 		backdrop-filter: blur(10px) brightness(0.9) saturate(0.9);
 		position: fixed;
 		top: 0;
