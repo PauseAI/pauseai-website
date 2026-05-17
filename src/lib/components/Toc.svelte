@@ -1,8 +1,4 @@
 <script lang="ts">
-	/*
-	 * This component uses runes mode because svelte-toc requires snippets.
-	 */
-
 	import Toc from 'svelte-toc'
 	import X from 'lucide-svelte/icons/x'
 	import List from 'lucide-svelte/icons/list'
