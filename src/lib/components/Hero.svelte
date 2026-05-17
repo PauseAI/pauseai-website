@@ -89,7 +89,6 @@
 
 	@media (min-width: 851px) {
 		.hero-photo :global(img) {
-			-webkit-mask-image: linear-gradient(to right, transparent, black 18%);
 			mask-image: linear-gradient(to right, transparent, black 18%);
 		}
 	}
@@ -104,7 +103,6 @@
 			width: calc(var(--mobile-hero-width-scale, 1.4) * 100%);
 			transform: translateX(-50%);
 			bottom: var(--mobile-hero-img-pos, 0px);
-			-webkit-mask-image: linear-gradient(to top, transparent, black 20%);
 			mask-image: linear-gradient(to top, transparent, black 20%);
 		}
 	}
