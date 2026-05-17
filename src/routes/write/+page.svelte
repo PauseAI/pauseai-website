@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { botName } from '$lib/config'
 	import type { ChatResponse, WriteApiAvailabilityResponse } from '$api/write/+server'
 	import { onMount } from 'svelte'
 
@@ -24,13 +23,14 @@
 	// Use a unique localStorage key to avoid conflicts with other pages
 	const STORAGE_KEY = 'email_writer_messages'
 
-	let messages: Message[] =
+	let messages: Message[] = $state(
 		typeof localStorage !== 'undefined' ? JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]') : []
+	)
 
 	// Array for form
-	let input_arr = new Array<string>(35)
-	let loading = false
-	let apiAvailable = true // Default to true, will be updated after first API call
+	let input_arr = $state(new Array<string>(35))
+	let loading = $state(false)
+	let apiAvailable = $state(true) // Default to true, will be updated after first API call
 	const maxMessages = 20
 
 	// Organizing the form questions into sections and subsections
@@ -458,19 +458,19 @@
 
 		<div class="control-buttons">
 			<button
-				on:click={sendMessage}
+				onclick={sendMessage}
 				disabled={!apiAvailable || loading}
 				class="button {!apiAvailable ? 'button--disabled' : ''}"
 			>
 				Write Content
 			</button>
-			<button on:click={runTest} class="button" disabled={!apiAvailable || loading}>
+			<button onclick={runTest} class="button" disabled={!apiAvailable || loading}>
 				(Demo for beta)
 			</button>
-			<button on:click={copy} class="button" disabled={loading || messages.length === 0}>
+			<button onclick={copy} class="button" disabled={loading || messages.length === 0}>
 				Copy Content
 			</button>
-			<button on:click={clear} class="button" disabled={loading || messages.length === 0}>
+			<button onclick={clear} class="button" disabled={loading || messages.length === 0}>
 				Reset All
 			</button>
 		</div>
@@ -496,10 +496,10 @@
 <footer>
 	{#if messages.length > maxMessages}
 		<p>You reached the maximum amount of messages, you can either copy or reset</p>
-		<button class="button" on:click={copy}>Copy Content</button>
-		<button class="button" on:click={clear}>Reset All</button>
+		<button class="button" onclick={copy}>Copy Content</button>
+		<button class="button" onclick={clear}>Reset All</button>
 	{:else}
-		<form on:submit|preventDefault>
+		<form onsubmit={(e) => e.preventDefault()}>
 			<!-- Render form sections using the structured data -->
 			{#each formSections as section, sectionIndex}
 				<h1>{section.title}</h1>
@@ -527,7 +527,7 @@
 						<textarea
 							placeholder="Type here (Question {globalIndex + 1})"
 							bind:value={input_arr[globalIndex]}
-							on:keydown={handleKeyDown}
+							onkeydown={handleKeyDown}
 						></textarea>
 					{/each}
 				{/each}

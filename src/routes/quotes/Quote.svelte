@@ -1,4 +1,4 @@
-<script lang="ts" context="module">
+<script lang="ts" module>
 	import { writable, type Writable } from 'svelte/store'
 
 	let isIos: Writable<boolean | null> = writable(null)
@@ -15,20 +15,33 @@
 
 	const DOWNLOAD_WIDTH = 2000
 
-	export let background = ''
-	export let text = ''
-	export let author = ''
-	export let author_description = ''
-	export let source: string | null = null
-	export let notice: string | null = null
-	export let color: string | null = null
-	export let padding: string | null = null
+	interface Props {
+		background?: string
+		text?: string
+		author?: string
+		author_description?: string
+		source?: string | null
+		notice?: string | null
+		color?: string | null
+		padding?: string | null
+	}
 
-	$: bg_url = new URL(`../../assets/quote-bg/${background}.jpg`, import.meta.url).href
-	$: color_style = color ? `color: ${color}` : ''
-	$: content_style = padding
-		? `padding: calc(var(--zoom) * ${padding}) 0 0 calc(var(--zoom) * ${padding});`
-		: ''
+	let {
+		background = '',
+		text = '',
+		author = '',
+		author_description = '',
+		source = null,
+		notice = null,
+		color = null,
+		padding = null
+	}: Props = $props()
+
+	let bg_url = $derived(new URL(`../../assets/quote-bg/${background}.jpg`, import.meta.url).href)
+	let color_style = $derived(color ? `color: ${color}` : '')
+	let content_style = $derived(
+		padding ? `padding: calc(var(--zoom) * ${padding}) 0 0 calc(var(--zoom) * ${padding});` : ''
+	)
 
 	let containerElement: HTMLDivElement
 	let quoteElement: HTMLDivElement
@@ -93,7 +106,7 @@
 	</div>
 	<div class="quote-below">
 		{#if !$isIos}
-			<Button subtle on:click={downloadQuote}>Download</Button>
+			<Button subtle onclick={downloadQuote}>Download</Button>
 		{/if}
 		{#if source}
 			<div class="reset-anchors">

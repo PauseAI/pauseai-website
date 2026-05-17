@@ -1,7 +1,18 @@
-<script context="module" lang="ts">
+<script module lang="ts">
 	// eslint-disable-next-line no-restricted-imports -- reserved for mdsvex
-	import { img, a, table } from '$lib/components/custom'
-	export { img, a, table }
+	import { img as MdsvexImg, a as MdsvexA, table as MdsvexTable } from '$lib/components/custom'
+
+	export const img = MdsvexImg
+	export const a = MdsvexA
+	export const table = MdsvexTable
 </script>
 
-<slot></slot>
+<script lang="ts">
+	interface Props {
+		children?: import('svelte').Snippet
+	}
+
+	let { children }: Props = $props()
+</script>
+
+{@render children?.()}

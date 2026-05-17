@@ -1,12 +1,17 @@
 <script lang="ts">
 	import { fade } from 'svelte/transition'
 
-	export let url: string
+	interface Props {
+		url: string
+		children?: import('svelte').Snippet
+	}
+
+	let { url, children }: Props = $props()
 </script>
 
 {#key url}
 	<div class="transition" in:fade>
-		<slot></slot>
+		{@render children?.()}
 	</div>
 {/key}
 

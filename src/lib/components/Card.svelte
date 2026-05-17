@@ -1,9 +1,14 @@
-<script>
-	export let className = ''
+<script lang="ts">
+	interface Props {
+		className?: string
+		children?: import('svelte').Snippet
+	}
+
+	let { className = '', children }: Props = $props()
 </script>
 
 <div class="card {className}">
-	<slot></slot>
+	{@render children?.()}
 </div>
 
 <style>

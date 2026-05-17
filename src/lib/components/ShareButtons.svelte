@@ -14,8 +14,12 @@
 	import Linkedin from '$lib/components/icons/linkedin.svelte'
 	import Reddit from '$lib/components/icons/reddit.svelte'
 
-	export let campaign: string // Campaign name (e.g., "sayno")
-	export let uid: string | null = null // Optional referral tracking ID
+	interface Props {
+		campaign: string // Campaign name (e.g., "sayno")
+		uid?: string | null // Optional referral tracking ID
+	}
+
+	let { campaign, uid = null }: Props = $props()
 
 	const COLLAGEN_BASE = 'https://collagen.pauseai.info'
 
@@ -39,11 +43,11 @@
 	{#each platforms as platform}
 		<button
 			class="share-button"
-			on:click={() => handleShare(platform.name)}
+			onclick={() => handleShare(platform.name)}
 			aria-label="Share on {platform.label}"
 		>
 			<span class="icon">
-				<svelte:component this={platform.component} />
+				<platform.component />
 			</span>
 			<span class="label">{platform.label}</span>
 		</button>

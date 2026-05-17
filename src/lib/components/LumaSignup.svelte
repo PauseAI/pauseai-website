@@ -4,7 +4,12 @@
 	const BASE_URL = 'https://lu.ma'
 	const EMBED_BASE_URL = 'https://embed.lu.ma'
 
-	export let eventId: string
+	interface Props {
+		eventId: string
+		children?: import('svelte').Snippet
+	}
+
+	let { eventId, children }: Props = $props()
 </script>
 
 <svelte:head>
@@ -18,7 +23,7 @@
 		data-luma-action="checkout"
 		data-luma-event-id={eventId}
 	>
-		<slot></slot>
+		{@render children?.()}
 	</LinkWithoutIcon>
 </div>
 

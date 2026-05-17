@@ -2,10 +2,16 @@
 	import Link from '$lib/components/Link.svelte'
 	import SvelteIntersectionObserver from '$lib/components/SvelteIntersectionObserver.svelte'
 
-	let isIntersecting: boolean
+	let isIntersecting: boolean = $state(false)
 
-	export let href: string
-	export let linkText: string
+	interface Props {
+		href: string
+		linkText: string
+		title?: import('svelte').Snippet
+		children?: import('svelte').Snippet
+	}
+
+	let { href, linkText, title, children }: Props = $props()
 </script>
 
 <SvelteIntersectionObserver
@@ -17,9 +23,9 @@
 	<div class="block-wrapper">
 		<Link {href}>
 			<div class="text">
-				<h2 class="title" class:underline={isIntersecting}><slot name="title"></slot></h2>
+				<h2 class="title" class:underline={isIntersecting}>{@render title?.()}</h2>
 				<p>
-					<slot></slot>
+					{@render children?.()}
 				</p>
 				<span class="c2a">{linkText} ></span>
 			</div>

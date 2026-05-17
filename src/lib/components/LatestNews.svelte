@@ -4,11 +4,11 @@
 	import NewsCard from '$lib/components/NewsCard.svelte'
 	import { onMount } from 'svelte'
 
-	let loading = true
-	let currentPage = 1
-	let totalPages = 1
 	const pageSize = 6
-	let newsItems: NewsItem[] = Array.from({ length: pageSize })
+	let newsItems: NewsItem[] = $state(Array.from({ length: pageSize }))
+	let loading = $state(true)
+	let currentPage = $state(1)
+	let totalPages = $state(1)
 
 	async function loadPage(page: number) {
 		loading = true
@@ -49,7 +49,7 @@
 				<button
 					class="page-btn"
 					disabled={currentPage <= 1}
-					on:click={() => goToPage(currentPage - 1)}
+					onclick={() => goToPage(currentPage - 1)}
 					aria-label="Previous page"
 				>
 					‹
@@ -59,7 +59,7 @@
 					<button
 						class="page-btn"
 						class:active={currentPage === i + 1}
-						on:click={() => goToPage(i + 1)}
+						onclick={() => goToPage(i + 1)}
 					>
 						{i + 1}
 					</button>
@@ -68,7 +68,7 @@
 				<button
 					class="page-btn"
 					disabled={currentPage >= totalPages}
-					on:click={() => goToPage(currentPage + 1)}
+					onclick={() => goToPage(currentPage + 1)}
 					aria-label="Next page"
 				>
 					›

@@ -1,5 +1,9 @@
 <script lang="ts">
-	export let errorMessage: string | undefined = undefined
+	interface Props {
+		errorMessage?: string | undefined
+	}
+
+	let { errorMessage = undefined }: Props = $props()
 </script>
 
 {#if errorMessage}

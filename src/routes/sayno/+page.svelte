@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { onMount } from 'svelte'
-	import { page } from '$app/stores'
+	import { page } from '$app/state'
 	import PostMeta from '$lib/components/PostMeta.svelte'
 	import Link from '$lib/components/Link.svelte'
 	import Banner from '$lib/components/Banner.svelte'
@@ -29,8 +29,8 @@
 	const imageAlt = 'Collage of hundreds of faces'
 
 	// Track user state for contextual messaging
-	let userJustValidated = false // UID in URL params (just clicked validate link)
-	let userPreviouslyUploaded = false // UID in localStorage (uploaded before on this device)
+	let userJustValidated = $state(false) // UID in URL params (just clicked validate link)
+	let userPreviouslyUploaded = $state(false) // UID in localStorage (uploaded before on this device)
 
 	interface CloudinaryWidget {
 		destroy(): void
@@ -61,7 +61,7 @@
 
 	onMount(() => {
 		// Check if UID in URL params (just validated email)
-		userJustValidated = detectAndStoreCollagenUid('sayno', $page.url.searchParams)
+		userJustValidated = detectAndStoreCollagenUid('sayno', page.url.searchParams)
 
 		// Check if UID exists from previous upload (but not in URL)
 		if (!userJustValidated) {

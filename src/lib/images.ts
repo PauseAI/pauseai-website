@@ -31,6 +31,7 @@ export function resolveImageUrl(imagePath: string) {
 
 export function getPostMetaImageUrl(imagePath: string): string
 export function getPostMetaImageUrl(imagePath: undefined): undefined
+export function getPostMetaImageUrl(imagePath: string | undefined): string | undefined
 export function getPostMetaImageUrl(imagePath: string | undefined) {
 	if (!imagePath) {
 		return imagePath

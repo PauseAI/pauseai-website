@@ -2,13 +2,19 @@
 	import type { Icon } from 'lucide-svelte'
 	import MessageWithLink from '$lib/components/MessageWithLink.svelte'
 
-	export let icon: typeof Icon
-	export let content: () => string
+	interface Props {
+		icon: typeof Icon
+		content: () => string
+	}
+
+	let { icon, content }: Props = $props()
+
+	const SvelteComponent = $derived(icon)
 </script>
 
 <div class="icon-bullet" role="listitem">
 	<span class="icon">
-		<svelte:component this={icon} size="1em" />
+		<SvelteComponent size="1em" />
 	</span>
 	<span>
 		<MessageWithLink content={content()} />

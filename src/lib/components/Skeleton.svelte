@@ -7,16 +7,31 @@
 	type Variant = 'text' | 'rect' | 'circle'
 	type Animation = 'shimmer' | 'pulse' | 'none'
 
-	let className = ''
-	export { className as class }
-	export let width: string = '100%'
-	export let height: string = '1em'
-	export let variant: Variant = 'text'
-	export let animation: Animation = 'shimmer'
-	export let count: number = 1
-	export let loading: boolean = true
-	export let random: boolean = false
-	export let seed: number = 0
+	interface Props {
+		class?: string
+		width?: string
+		height?: string
+		variant?: Variant
+		animation?: Animation
+		count?: number
+		loading?: boolean
+		random?: boolean
+		seed?: number
+		children?: import('svelte').Snippet
+	}
+
+	let {
+		class: className = '',
+		width = '100%',
+		height = '1em',
+		variant = 'text',
+		animation = 'shimmer',
+		count = 1,
+		loading = true,
+		random = false,
+		seed = 0,
+		children
+	}: Props = $props()
 
 	function isLastLineOfMultilineText(variant: Variant, index: number, totalCount: number) {
 		return variant === 'text' && index === totalCount - 1 && totalCount > 1
@@ -48,7 +63,7 @@
 		></span>
 	{/each}
 {:else}
-	<slot></slot>
+	{@render children?.()}
 {/if}
 
 <style>

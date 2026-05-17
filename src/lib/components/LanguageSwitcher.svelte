@@ -7,14 +7,18 @@
 		setLocale,
 		type Locale
 	} from '$lib/paraglide/runtime.js'
-	import { page } from '$app/stores'
+	import { page } from '$app/state'
 	import Globe from 'lucide-svelte/icons/globe'
 	import Navlink from '$lib/components/navbar/Navlink.svelte'
 	import { building } from '$app/environment'
 	import { onMount } from 'svelte'
 	import Card from '$lib/components/Card.svelte'
 
-	export let inverted = false
+	interface Props {
+		inverted?: boolean
+	}
+
+	let { inverted = false }: Props = $props()
 
 	// Check if we should show the language switcher (only show when multiple locales)
 	const showSwitcher = locales.length > 1
@@ -24,9 +28,9 @@
 	// Keep a map of locale-specific display names
 	const nativeLanguageNames: Record<string, Intl.DisplayNames> = {}
 
-	let open = false
-	let button: HTMLButtonElement
-	let dropdown: HTMLDivElement
+	let open = $state(false)
+	let button: HTMLButtonElement | undefined = $state()
+	let dropdown: HTMLDivElement | undefined = $state()
 
 	// Get native name for a language
 	function getNativeLanguageName(locale: string): string {
@@ -92,7 +96,7 @@
 		if (showSwitcher) {
 			const clickListener = (event: MouseEvent) => {
 				const node = event.target as Node | null
-				if (open && !button.contains(node) && !dropdown.contains(node)) {
+				if (open && button && !button.contains(node) && dropdown && !dropdown.contains(node)) {
 					open = false
 				}
 			}
@@ -151,7 +155,7 @@
 		<button
 			class="button reset-button"
 			bind:this={button}
-			on:click={(e) => {
+			onclick={(e) => {
 				e.preventDefault()
 				open = !open
 			}}
@@ -166,9 +170,9 @@
 			<div class="list">
 				<!-- Add Auto-detect option at the top -->
 				<a
-					href={deLocalizeHref($page.url.pathname)}
+					href={deLocalizeHref(page.url.pathname)}
 					hreflang="auto"
-					on:click={handleLanguageClick}
+					onclick={handleLanguageClick}
 					class="auto-detect"
 				>
 					<span class="auto-icon">🌐</span> <span class="auto-text">AUTO</span>
@@ -178,12 +182,12 @@
 				<div class="divider"></div>
 
 				{#each locales as locale}
-					{@const href = localizeHref($page.url.pathname, { locale })}
+					{@const href = localizeHref(page.url.pathname, { locale })}
 					<a
 						{href}
 						hreflang={locale}
 						aria-current={locale === getLocale() ? 'page' : undefined}
-						on:click={handleLanguageClick}
+						onclick={handleLanguageClick}
 					>
 						{getDualLanguageName(locale)}
 					</a>

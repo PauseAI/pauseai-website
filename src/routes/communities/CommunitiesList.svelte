@@ -16,53 +16,65 @@
 	import type { NationalGroup } from '$lib/types'
 	import { SvelteSet } from 'svelte/reactivity'
 
-	export let communities: Community[] = []
+	interface Props {
+		communities?: Community[]
+	}
 
-	let nationalGroups: NationalGroup[] = []
+	let { communities = [] }: Props = $props()
+
+	let nationalGroups: NationalGroup[] = $state([])
 
 	onMount(async () => {
 		nationalGroups = await fetchNationalGroups()
 	})
 
 	// Group communities by their country/national community
-	const groupedCommunities = communities
-		.filter((community) => community.type === 'local')
-		.reduce(
-			(acc, community) => {
-				const nationalName = community.country || 'Other'
-				if (!acc[nationalName]) {
-					acc[nationalName] = []
-				}
-				acc[nationalName].push(community)
-				return acc
-			},
-			{} as Record<string, Community[]>
-		)
+	const groupedCommunities = $derived(
+		communities
+			.filter((community) => community.type === 'local')
+			.reduce(
+				(acc, community) => {
+					const nationalName = community.country || 'Other'
+					if (!acc[nationalName]) {
+						acc[nationalName] = []
+					}
+					acc[nationalName].push(community)
+					return acc
+				},
+				{} as Record<string, Community[]>
+			)
+	)
 
-	const nationalChapters = communities.filter((community) => community.type === 'national')
+	const nationalChapters = $derived(
+		communities.filter((community) => community.type === 'national')
+	)
 
-	const allNationalities = [
+	const allNationalities = $derived([
 		...new Set([...Object.keys(groupedCommunities), ...nationalChapters.map((c) => c.name)])
-	]
+	])
 
 	// Sort nationalities alphabetically, with "Other" at the end
-	const sortedNationalities = allNationalities.sort((a, b) => {
-		if (a === 'Other') return 1
-		if (b === 'Other') return -1
-		return a.localeCompare(b)
-	})
+	const sortedNationalities = $derived(
+		allNationalities.sort((a, b) => {
+			if (a === 'Other') return 1
+			if (b === 'Other') return -1
+			return a.localeCompare(b)
+		})
+	)
 
 	// Find the link for each nationality
-	const nationalLinks = nationalChapters.reduce(
-		(acc, community) => {
-			acc[community.name] = community.link
-			return acc
-		},
-		{} as Record<string, string>
+	const nationalLinks = $derived(
+		nationalChapters.reduce(
+			(acc, community) => {
+				acc[community.name] = community.link
+				return acc
+			},
+			{} as Record<string, string>
+		)
 	)
 
 	// Start with all countries collapsed by default
-	let expandedCountries: Set<string> = new Set()
+	let expandedCountries: Set<string> = $state(new Set())
 
 	function toggleCountry(country: string) {
 		const newSet = new SvelteSet(expandedCountries)
@@ -90,7 +102,7 @@
 					class:expanded={expandedCountries.has(nationality)}
 					class:has-communities={localCommunities.length > 0}
 					disabled={localCommunities.length === 0}
-					on:click={() => toggleCountry(nationality)}
+					onclick={() => toggleCountry(nationality)}
 				>
 					<div class="icon" class:is-open={expandedCountries.has(nationality)}>
 						{#if localCommunities.length > 0}
@@ -125,7 +137,7 @@
 								class="social-link"
 								target="_blank"
 								rel="noopener noreferrer"
-								on:click={(e) => e.stopPropagation()}
+								onclick={(e: MouseEvent) => e.stopPropagation()}
 							>
 								{#if link.includes('discord')}
 									<Discord />

@@ -1,22 +1,33 @@
 <script lang="ts">
 	import { title as siteName, url as rootUrl } from '$lib/config'
 	import type { BlogPosting, WithContext } from 'schema-dts'
-	import { page } from '$app/stores'
+	import { page } from '$app/state'
 	import { deLocalizeHref } from '$lib/paraglide/runtime'
 
-	export let title: string
-	export let description: string
-	export let date: string | undefined = undefined
-	/** URL or relative path to cover / preview image */
-	export let image = '/Cover.jpg'
-	/** Canonical URL for this page (og:url) */
-	export let pageUrl: string = `${rootUrl}${deLocalizeHref($page.url.pathname)}`
-	/** Alt text for the image (og:image:alt) */
-	export let imageAlt: string | undefined = undefined
+	interface Props {
+		title: string
+		description?: string
+		date?: string
+		/** URL or relative path to cover / preview image */
+		image?: string
+		/** Canonical URL for this page (og:url) */
+		pageUrl?: string
+		/** Alt text for the image (og:image:alt) */
+		imageAlt?: string
+	}
 
-	const imageUrl = image.startsWith('/') ? `${rootUrl}${image}` : image
+	let {
+		title,
+		description = '',
+		date,
+		image = '/Cover.jpg',
+		pageUrl = `${rootUrl}${deLocalizeHref(page.url.pathname)}`,
+		imageAlt
+	}: Props = $props()
 
-	const schemaOrgMarkup: WithContext<BlogPosting> = {
+	const imageUrl = $derived(image.startsWith('/') ? `${rootUrl}${image}` : image)
+
+	const schemaOrgMarkup: WithContext<BlogPosting> = $derived({
 		'@context': 'https://schema.org',
 		'@type': 'BlogPosting',
 		headline: title,
@@ -31,7 +42,7 @@
 			name: siteName,
 			url: rootUrl
 		}
-	}
+	})
 </script>
 
 <svelte:head>

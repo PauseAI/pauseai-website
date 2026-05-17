@@ -1,14 +1,19 @@
 <script lang="ts">
-	import { page } from '$app/stores'
+	import { page } from '$app/state'
 	import Link from '$lib/components/Link.svelte'
 	import Logo from '$lib/components/logo.svelte'
 	import { emulateCqwIfNeeded } from '$lib/container-query-units'
 	import { localizeHref } from '$lib/paraglide/runtime'
 	import { onMount } from 'svelte'
 
-	export let inverted = false
+	interface Props {
+		inverted?: boolean
+		children?: import('svelte').Snippet
+	}
 
-	$: logo_animate = localizeHref($page.url.pathname) != '/'
+	let { inverted = false, children }: Props = $props()
+
+	let logo_animate = $derived(localizeHref(page.url.pathname) != '/')
 
 	let nav: HTMLElement
 
@@ -29,7 +34,7 @@
 	</div>
 
 	<div class="nav-links">
-		<slot></slot>
+		{@render children?.()}
 	</div>
 </nav>
 

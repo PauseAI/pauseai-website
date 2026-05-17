@@ -3,10 +3,14 @@
 	import NewsCard from '$lib/components/NewsCard.svelte'
 	import type { NewsItem } from '$lib/types'
 
-	export let coverage: PressCoverage[] = []
-	export let typeOrder: string[] = []
-	export let outletOrder: string[] = []
-	export let loading: boolean = false
+	interface Props {
+		coverage?: PressCoverage[]
+		typeOrder?: string[]
+		outletOrder?: string[]
+		loading?: boolean
+	}
+
+	let { coverage = [], typeOrder = [], outletOrder = [], loading = false }: Props = $props()
 
 	function toNewsItem(item: PressCoverage): NewsItem {
 		return {
@@ -20,30 +24,31 @@
 		}
 	}
 
-	let availableTypes: string[] = []
 	// Extract unique type names for tab labels
-	$: availableTypes = Array.from(new Set(coverage.map((c) => c.type))).filter(Boolean)
+	let availableTypes: string[] = $derived(
+		Array.from(new Set(coverage.map((c) => c.type))).filter(Boolean)
+	)
 
 	// Sort them based on the schema order fetched directly from Notion
-	$: orderedTabs = typeOrder.length > 0 ? typeOrder : outletOrder
-	$: tabs = [...availableTypes].sort((a, b) => {
-		const indexA = orderedTabs.indexOf(a)
-		const indexB = orderedTabs.indexOf(b)
-		if (indexA !== -1 && indexB !== -1) return indexA - indexB
-		if (indexA !== -1) return -1
-		if (indexB !== -1) return 1
-		return a.localeCompare(b)
-	})
+	let orderedTabs = $derived(typeOrder.length > 0 ? typeOrder : outletOrder)
+	let tabs = $derived(
+		availableTypes.toSorted((a, b) => {
+			const indexA = orderedTabs.indexOf(a)
+			const indexB = orderedTabs.indexOf(b)
+			if (indexA !== -1 && indexB !== -1) return indexA - indexB
+			if (indexA !== -1) return -1
+			if (indexB !== -1) return 1
+			return a.localeCompare(b)
+		})
+	)
 
-	let activeTab = ''
-	$: {
-		// Set default to International if available, or first ordered tab
-		if (!tabs.includes(activeTab) && tabs.length > 0) {
-			activeTab = tabs.find((t) => t.includes('International')) || tabs[0]
-		}
-	}
-
-	$: filteredCoverage = coverage.filter((c) => c.type === activeTab)
+	let selectedTab = $state('')
+	let activeTab = $derived(
+		!tabs.includes(selectedTab) && tabs.length > 0
+			? (tabs.find((t) => t.includes('International')) ?? tabs[0])
+			: selectedTab
+	)
+	let filteredCoverage = $derived(coverage.filter((c) => c.type === activeTab))
 </script>
 
 <div class="coverage-layout">
@@ -61,7 +66,7 @@
 				<button
 					class="tab-button"
 					class:active={activeTab === tab}
-					on:click={() => (activeTab = tab)}
+					onclick={() => (selectedTab = tab)}
 				>
 					{tab}
 				</button>

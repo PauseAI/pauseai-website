@@ -4,19 +4,24 @@
 	import LoadingSpinner from './LoadingSpinner.svelte'
 	import Link from '$lib/components/Link.svelte'
 
-	export let mp: {
-		name: string
-		email: string
-		salutation: string
-		constituency: string
+	interface Props {
+		mp: {
+			name: string
+			email: string
+			salutation: string
+			constituency: string
+		}
+		userPostcode: string
+		userName: string
+		onsubmit?: (e: SubmitEvent) => void
 	}
-	export let userPostcode: string
-	export let userName: string
 
-	let senderName = userName
-	let senderEmail = ''
-	let subject = `Request to co-sign letter on AI liability`
-	let message = `Dear ${mp.salutation},
+	let { mp, userPostcode, userName, onsubmit }: Props = $props()
+
+	let senderName = $derived(userName)
+	let senderEmail = $state('')
+	let subject = $state(`Request to co-sign letter on AI liability`)
+	let message = $derived(`Dear ${mp.salutation},
 
 Would you be willing to sign this open letter supporting legislation to hold AI companies accountable when their models cause severe harm to our critical infrastructure?
 
@@ -32,17 +37,18 @@ Thank you for your consideration,
 
 ${userName}
 
-${userPostcode.toUpperCase()}`
+${userPostcode.toUpperCase()}`)
 
-	let messageTextarea: HTMLTextAreaElement
-	let subjectTextarea: HTMLTextAreaElement
-	let isSubmitting = false
-	let submitStatus: 'idle' | 'success' | 'error' = 'idle'
-	let errorMessage = ''
+	let messageTextarea: HTMLTextAreaElement | undefined = $state()
+	let subjectTextarea: HTMLTextAreaElement | undefined = $state()
+	let isSubmitting = $state(false)
+	let submitStatus: 'idle' | 'success' | 'error' = $state('idle')
+	let errorMessage = $state('')
 
-	$: htmlPreview = micromark(message)
+	let htmlPreview = $derived(micromark(message))
 
 	function insertMarkdown(before: string, after: string = '') {
+		if (!messageTextarea) return
 		const start = messageTextarea.selectionStart
 		const end = messageTextarea.selectionEnd
 		const selectedText = message.substring(start, end)
@@ -53,8 +59,8 @@ ${userPostcode.toUpperCase()}`
 
 		// Move cursor to end of inserted text
 		setTimeout(() => {
-			messageTextarea.focus()
-			messageTextarea.setSelectionRange(
+			messageTextarea?.focus()
+			messageTextarea?.setSelectionRange(
 				start + before.length,
 				start + before.length + selectedText.length
 			)
@@ -62,6 +68,7 @@ ${userPostcode.toUpperCase()}`
 	}
 
 	function insertBulletPoint() {
+		if (!messageTextarea) return
 		const start = messageTextarea.selectionStart
 		const end = messageTextarea.selectionEnd
 
@@ -86,9 +93,9 @@ ${userPostcode.toUpperCase()}`
 
 			// Adjust cursor position to account for the removed "- "
 			setTimeout(() => {
-				messageTextarea.focus()
+				messageTextarea?.focus()
 				const adjustment = currentLine.length - bulletRemoved.length
-				messageTextarea.setSelectionRange(start - adjustment, end - adjustment)
+				messageTextarea?.setSelectionRange(start - adjustment, end - adjustment)
 			}, 0)
 		} else {
 			// Insert "- " at the beginning of the current line
@@ -97,8 +104,8 @@ ${userPostcode.toUpperCase()}`
 
 			// Adjust cursor position to account for the inserted "- "
 			setTimeout(() => {
-				messageTextarea.focus()
-				messageTextarea.setSelectionRange(start + 2, end + 2)
+				messageTextarea?.focus()
+				messageTextarea?.setSelectionRange(start + 2, end + 2)
 			}, 0)
 		}
 	}
@@ -118,14 +125,18 @@ ${userPostcode.toUpperCase()}`
 	}
 
 	// Auto-resize when message changes
-	$: if (messageTextarea && message) {
-		autoResize()
-	}
+	$effect(() => {
+		if (messageTextarea && message) {
+			autoResize()
+		}
+	})
 
 	// Auto-resize when subject changes
-	$: if (subjectTextarea && subject) {
-		autoResizeSubject()
-	}
+	$effect(() => {
+		if (subjectTextarea && subject) {
+			autoResizeSubject()
+		}
+	})
 
 	async function handleSubmit() {
 		if (!senderEmail.trim()) {
@@ -177,7 +188,12 @@ ${userPostcode.toUpperCase()}`
 			<p>✅ Your email has been sent to {mp.name}!</p>
 		</div>
 	{:else}
-		<form on:submit|preventDefault>
+		<form
+			onsubmit={(e) => {
+				e.preventDefault()
+				onsubmit?.(e)
+			}}
+		>
 			<div class="form-group">
 				<label for="sender-email">Your email</label>
 				<input
@@ -197,7 +213,7 @@ ${userPostcode.toUpperCase()}`
 					bind:value={subject}
 					required
 					placeholder="Email subject"
-					on:input={autoResizeSubject}
+					oninput={autoResizeSubject}
 					rows="1"
 					class="subject-textarea"
 				></textarea>
@@ -214,19 +230,19 @@ ${userPostcode.toUpperCase()}`
 				</div>
 
 				<div class="markdown-toolbar">
-					<button type="button" on:click={() => insertMarkdown('**', '**')} title="Bold">
+					<button type="button" onclick={() => insertMarkdown('**', '**')} title="Bold">
 						<strong>B</strong>
 					</button>
-					<button type="button" on:click={() => insertMarkdown('_', '_')} title="Italic">
+					<button type="button" onclick={() => insertMarkdown('_', '_')} title="Italic">
 						<em>i</em>
 					</button>
-					<button type="button" on:click={() => insertMarkdown('# ', '')} title="Heading">
+					<button type="button" onclick={() => insertMarkdown('# ', '')} title="Heading">
 						H1
 					</button>
-					<button type="button" on:click={() => insertMarkdown('## ', '')} title="Subheading">
+					<button type="button" onclick={() => insertMarkdown('## ', '')} title="Subheading">
 						H2
 					</button>
-					<button type="button" on:click={() => insertBulletPoint()} title="Bullet point">
+					<button type="button" onclick={() => insertBulletPoint()} title="Bullet point">
 						• List
 					</button>
 				</div>
@@ -238,7 +254,7 @@ ${userPostcode.toUpperCase()}`
 						bind:value={message}
 						required
 						placeholder="Your message to the MP"
-						on:input={autoResize}
+						oninput={autoResize}
 						rows="1"
 					></textarea>
 				</div>
@@ -294,7 +310,7 @@ ${userPostcode.toUpperCase()}`
 				</div>
 			{/if}
 
-			<button type="button" disabled={isSubmitting} class="submit-button" on:click={handleSubmit}>
+			<button type="button" disabled={isSubmitting} class="submit-button" onclick={handleSubmit}>
 				{#if isSubmitting}
 					Sending
 					<LoadingSpinner size="small" color="currentColor" />

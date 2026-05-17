@@ -1,28 +1,46 @@
 <script lang="ts">
 	import X from 'lucide-svelte/icons/x'
-	import { page } from '$app/stores'
+	import { page } from '$app/state'
 	import { fade } from 'svelte/transition'
 	import { deLocalizeHref } from '$lib/paraglide/runtime'
 	import { setItem } from '$lib/localStorage'
 	import LinkWithoutIcon from '$lib/components/LinkWithoutIcon.svelte'
 	import { onMount } from 'svelte'
 
-	export let type: 'main' | 'campaign' = 'main'
-	export let id: string | null = null
-	export let href: string | null = null
-	export let contrast = false
+	interface Props {
+		contrast?: boolean
+		href?: string | null
+		id?: string | null
+		type?: 'main' | 'campaign'
+		children?: import('svelte').Snippet
+	}
 
-	let dismissed = false
-	let bannerEl: HTMLDivElement
+	let { children, contrast = false, href = null, id = null, type = 'main' }: Props = $props()
+
+	// Initialize dismissed state during SSR based on the current pathname
+	const isCurrentPage = (href: string | null) =>
+		href !== null && deLocalizeHref(page.url.pathname) === href
+	// svelte-ignore state_referenced_locally
+	let dismissed = $state(isCurrentPage(href))
+
+	// Hide on navigation to the target/href page
+	$effect(() => {
+		if (isCurrentPage(href)) {
+			dismissed = true
+		}
+	})
+
+	let bannerEl: HTMLDivElement | undefined = $state()
 
 	function pushGtmEvent(eventObj: Record<string, unknown>) {
 		if (typeof window !== 'undefined') {
-			window.dataLayer = window.dataLayer || []
+			window.dataLayer = window.dataLayer ?? []
 			window.dataLayer.push(eventObj)
 		}
 	}
 
-	function close() {
+	function close(ev: MouseEvent) {
+		ev.stopPropagation()
 		dismissed = true
 		if (id) {
 			const prefix = type === 'campaign' ? 'campaign_banner' : 'banner'
@@ -48,13 +66,8 @@
 		}
 	}
 
-	// Hide on navigation to the target/href page
-	$: if (href && deLocalizeHref($page.url.pathname) === href) {
-		dismissed = true
-	}
-
-	$: isCampaign = type === 'campaign'
-	$: dataIdAttr = isCampaign ? 'data-campaign-banner-id' : 'data-banner-id'
+	let isCampaign = $derived(type === 'campaign')
+	let dataIdAttr = $derived(isCampaign ? 'data-campaign-banner-id' : 'data-banner-id')
 
 	onMount(() => {
 		if (dismissed) return
@@ -100,7 +113,7 @@
 		data-pagefind-ignore
 		transition:fade={{ duration: 200 }}
 		bind:this={bannerEl}
-		on:click={handleBannerClick}
+		onclick={handleBannerClick}
 	>
 		{#if isCampaign}
 			<div class="accent-line"></div>
@@ -108,22 +121,18 @@
 
 		<span class="content">
 			{#if isCampaign && href}
-				<LinkWithoutIcon {href} class="campaign-link" on:click={close}>
+				<LinkWithoutIcon {href} class="campaign-link" onclick={close}>
 					<span class="campaign-text">
-						<slot></slot>
+						{@render children?.()}
 					</span>
 					<span class="campaign-cta">Take action →</span>
 				</LinkWithoutIcon>
 			{:else}
-				<slot></slot>
+				{@render children?.()}
 			{/if}
 		</span>
 
-		<button
-			class="close banner-close-btn"
-			class:campaign-close={isCampaign}
-			on:click|stopPropagation={close}
-		>
+		<button class="close banner-close-btn" class:campaign-close={isCampaign} onclick={close}>
 			<X size={isCampaign ? '1em' : '1.2em'} />
 			<span class="sr-only">Close</span>
 		</button>
