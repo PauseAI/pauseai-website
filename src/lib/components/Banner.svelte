@@ -100,7 +100,7 @@
 			? `html[data-active-campaign-banner="${id}"] [data-campaign-banner-id="${id}"]`
 			: `html[data-active-banner="${id}"] [data-banner-id="${id}"]`}
 		<!-- eslint-disable-next-line svelte/no-at-html-tags -->
-		{@html `<style>${selector}{display:flex!important}</style>`}
+		{@html `<${'style'}>${selector}{display:flex!important}</${'style'}>`}
 	{/if}
 </svelte:head>
 
