@@ -64,7 +64,7 @@ ${userPostcode.toUpperCase()}`)
 				// before the signature line so we don't trample their edits.
 				const signatureMarker = '\nThank you for your consideration'
 				if (message.includes(signatureMarker)) {
-					message = message.replace(signatureMarker, `\n${VISIT_SENTENCE}${signatureMarker}`)
+					message = message.replace(signatureMarker, `\n${VISIT_SENTENCE}\n${signatureMarker}`)
 				} else {
 					message = `${message}\n\n${VISIT_SENTENCE}`
 				}
