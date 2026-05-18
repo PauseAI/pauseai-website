@@ -250,9 +250,14 @@ ${userPostcode.toUpperCase()}`)
 			</div>
 
 			<div class="form-group visit-group">
-				<label class="visit-label">
-					<input type="checkbox" bind:checked={attendingVisit} onchange={toggleVisit} />
-					<span>
+				<label class="visit-label" class:checked={attendingVisit}>
+					<input
+						type="checkbox"
+						class="visit-tickbox"
+						bind:checked={attendingVisit}
+						onchange={toggleVisit}
+					/>
+					<span class="visit-text">
 						I will be attending PauseAI UK's
 						<Link href="https://luma.com/q2wu0y59?utm_source=uk-email-builder" target="_blank"
 							>visit to Parliament</Link
@@ -465,19 +470,68 @@ ${userPostcode.toUpperCase()}`)
 	.visit-label {
 		display: flex;
 		align-items: flex-start;
-		gap: 0.6rem;
+		gap: 0.7rem;
 		cursor: pointer;
-		font-weight: normal;
-		line-height: 1.4;
+		padding: 0.85rem 1rem;
+		background: var(--bg);
+		border: 1px solid color-mix(in srgb, var(--brand) 28%, transparent);
+		border-radius: 8px;
+		font-weight: 400;
+		font-size: 0.95rem;
+		line-height: 1.45;
+		transition:
+			border-color 0.15s ease,
+			background-color 0.15s ease;
 	}
 
-	.visit-label input[type='checkbox'] {
-		width: auto;
-		margin: 0;
+	.visit-label:hover {
+		border-color: var(--brand);
+	}
+
+	.visit-label.checked {
+		border-color: var(--brand);
+		background: color-mix(in srgb, var(--brand) 10%, var(--bg));
+	}
+
+	.visit-tickbox {
+		appearance: none;
+		-webkit-appearance: none;
+		width: 1.15rem;
+		height: 1.15rem;
 		padding: 0;
+		margin: 0;
+		margin-top: 0.18rem;
 		flex-shrink: 0;
-		margin-top: 0.25rem;
+		border: 2px solid var(--brand);
+		border-radius: 4px;
+		background: var(--bg);
 		cursor: pointer;
+		display: grid;
+		place-content: center;
+	}
+
+	.visit-tickbox::before {
+		content: '';
+		width: 0.65rem;
+		height: 0.65rem;
+		transform: scale(0);
+		transition: transform 0.1s ease-in-out;
+		background: var(--brand);
+		clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%);
+	}
+
+	.visit-tickbox:checked::before {
+		transform: scale(1);
+	}
+
+	.visit-tickbox:focus-visible {
+		outline: 2px solid var(--brand);
+		outline-offset: 2px;
+	}
+
+	.visit-text {
+		flex: 1;
+		min-width: 0;
 	}
 
 	.email-tips {
