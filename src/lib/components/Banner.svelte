@@ -1,5 +1,5 @@
 <script lang="ts">
-	import X from 'lucide-svelte/icons/x'
+	import X from '@lucide/svelte/icons/x'
 	import { page } from '$app/state'
 	import { fade } from 'svelte/transition'
 	import { deLocalizeHref } from '$lib/paraglide/runtime'

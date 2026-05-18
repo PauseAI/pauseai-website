@@ -1,7 +1,7 @@
 <script lang="ts">
 	import type { Community } from './communities'
 	import LinkWithoutIcon from '$lib/components/LinkWithoutIcon.svelte'
-	import { Globe, Mail } from 'lucide-svelte'
+	import { Globe, Mail } from '@lucide/svelte'
 	import Discord from '$lib/components/icons/discord.svelte'
 	import Whatsapp from '$lib/components/icons/whatsapp.svelte'
 	import Facebook from '$lib/components/icons/facebook.svelte'

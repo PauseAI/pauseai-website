@@ -5,7 +5,7 @@
 	import * as m from '$lib/paraglide/messages.js'
 	import { botName } from '$lib/config'
 	import { searchOpen } from '$lib/stores/searchModal'
-	import SearchIcon from 'lucide-svelte/icons/search'
+	import SearchIcon from '@lucide/svelte/icons/search'
 
 	const enableBot = false
 

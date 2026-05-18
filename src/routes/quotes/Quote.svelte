@@ -11,7 +11,7 @@
 	import { toPng } from 'html-to-image'
 	import GithubSlugger from 'github-slugger'
 	import { onMount } from 'svelte'
-	import UAParser from 'ua-parser-js'
+	import { UAParser } from 'ua-parser-js'
 
 	const DOWNLOAD_WIDTH = 2000
 

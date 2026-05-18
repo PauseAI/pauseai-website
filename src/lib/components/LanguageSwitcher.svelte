@@ -8,7 +8,7 @@
 		type Locale
 	} from '$lib/paraglide/runtime.js'
 	import { page } from '$app/state'
-	import Globe from 'lucide-svelte/icons/globe'
+	import Globe from '@lucide/svelte/icons/globe'
 	import Navlink from '$lib/components/navbar/Navlink.svelte'
 	import { building } from '$app/environment'
 	import { onMount } from 'svelte'
