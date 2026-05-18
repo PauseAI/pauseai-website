@@ -45,6 +45,36 @@ ${userPostcode.toUpperCase()}`)
 	let submitStatus: 'idle' | 'success' | 'error' = $state('idle')
 	let errorMessage = $state('')
 
+	let attendingVisit = $state(false)
+	let messageBeforeVisit: string | null = $state(null)
+
+	const ORIGINAL_NEXT_STEPS = `Next steps
+ - 30-min call. Let me know what time would work for you.
+ - Alternatively, please review the letter and background information attached and send over any questions or concerns.`
+
+	const VISIT_SENTENCE = `**I will be visiting Parliament on Tuesday June 23rd. Will you meet with me to discuss the letter and your plan for addressing AI risks?**`
+
+	function toggleVisit() {
+		if (attendingVisit) {
+			messageBeforeVisit = message
+			if (message.includes(ORIGINAL_NEXT_STEPS)) {
+				message = message.replace(ORIGINAL_NEXT_STEPS, VISIT_SENTENCE)
+			} else {
+				// User has customised the Next steps section. Insert the visit sentence
+				// before the signature line so we don't trample their edits.
+				const signatureMarker = '\nThank you for your consideration'
+				if (message.includes(signatureMarker)) {
+					message = message.replace(signatureMarker, `\n${VISIT_SENTENCE}${signatureMarker}`)
+				} else {
+					message = `${message}\n\n${VISIT_SENTENCE}`
+				}
+			}
+		} else if (messageBeforeVisit !== null) {
+			message = messageBeforeVisit
+			messageBeforeVisit = null
+		}
+	}
+
 	let htmlPreview = $derived(micromark(message))
 
 	function insertMarkdown(before: string, after: string = '') {
@@ -217,6 +247,18 @@ ${userPostcode.toUpperCase()}`)
 					rows="1"
 					class="subject-textarea"
 				></textarea>
+			</div>
+
+			<div class="form-group visit-group">
+				<label class="visit-label">
+					<input type="checkbox" bind:checked={attendingVisit} onchange={toggleVisit} />
+					<span>
+						I will be attending PauseAI UK's
+						<Link href="https://luma.com/q2wu0y59?utm_source=uk-email-builder" target="_blank"
+							>visit to Parliament</Link
+						> to speak with my MP in person.
+					</span>
+				</label>
 			</div>
 
 			<div class="form-group">
@@ -414,6 +456,28 @@ ${userPostcode.toUpperCase()}`)
 		overflow: hidden;
 		white-space: pre-wrap;
 		word-wrap: break-word;
+	}
+
+	.visit-group {
+		padding-top: 1.5rem;
+	}
+
+	.visit-label {
+		display: flex;
+		align-items: flex-start;
+		gap: 0.6rem;
+		cursor: pointer;
+		font-weight: normal;
+		line-height: 1.4;
+	}
+
+	.visit-label input[type='checkbox'] {
+		width: auto;
+		margin: 0;
+		padding: 0;
+		flex-shrink: 0;
+		margin-top: 0.25rem;
+		cursor: pointer;
 	}
 
 	.email-tips {
