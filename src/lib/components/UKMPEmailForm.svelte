@@ -495,7 +495,6 @@ ${userPostcode.toUpperCase()}`)
 
 	.visit-tickbox {
 		appearance: none;
-		-webkit-appearance: none;
 		width: 1.15rem;
 		height: 1.15rem;
 		padding: 0;
