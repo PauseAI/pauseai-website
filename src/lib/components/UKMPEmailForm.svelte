@@ -23,15 +23,15 @@
 	let subject = $state(`Request to co-sign letter on AI liability`)
 	let message = $derived(`Dear ${mp.salutation},
 
-Would you be willing to sign this open letter supporting legislation to hold AI companies accountable when their models cause severe harm to our critical infrastructure?
+Would you be willing to sign this open letter supporting legislation to hold AI companies accountable when their models cause severe harm?
 
-I’m a resident of ${mp.constituency} and a supporter of **PauseAI**, a grassroots network focused on preventing the catastrophic risks of AI. I am very concerned that AI development is spiralling out of control without any protection for the public.
+I’m a resident of ${mp.constituency} and a supporter of **PauseAI**, a civic movement focused on minising the risks of advanced AI. I am very concerned that AI development is racing ahead without adequate protection for the public.
 
-There now exist models which can autonomously hack into almost any computer system. Yet under the existing framework, it is doubtful whether AI companies can be held liable for even the most severe and foreseeable harms, including cases in which their models were clearly decisive in enabling the harm. Please help change that, before we face the next generation of AI models.
+**Existing UK law does not reliably hold AI developers liable for damage or deaths caused by their models**, even when the danger is predictable, severe and uniquely enabled by the model. To ensure our safety, the incentives of AI developers must be aligned with the public interest.
 
 Next steps
  - 30-min call. Let me know what time would work for you.
- - Alternatively, please review the letter and background information attached and send over any questions or concerns.
+ - Alternatively, please review the letter and briefing attached and send over any questions or concerns.
 
 Thank you for your consideration,
 
@@ -50,7 +50,7 @@ ${userPostcode.toUpperCase()}`)
 
 	const ORIGINAL_NEXT_STEPS = `Next steps
  - 30-min call. Let me know what time would work for you.
- - Alternatively, please review the letter and background information attached and send over any questions or concerns.`
+ - Alternatively, please review the letter and briefing attached and send over any questions or concerns.`
 
 	const VISIT_SENTENCE = `**I will be visiting Parliament on Tuesday June 23rd. Will you meet with me to discuss the letter and your plan for addressing AI risks?**`
 
