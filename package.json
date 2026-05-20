@@ -32,7 +32,7 @@
 	},
 	"devDependencies": {
 		"@eslint/js": "^10.0.1",
-		"@eslint/markdown": "^8.0.1",
+		"@eslint/markdown": "^8.0.2",
 		"@inlang/paraglide-js": "^2.18.0",
 		"@netlify/edge-functions": "^3.0.7",
 		"@sveltejs/adapter-netlify": "^5.2.4",
