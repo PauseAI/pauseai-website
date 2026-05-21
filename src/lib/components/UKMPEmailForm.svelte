@@ -190,7 +190,8 @@ ${userPostcode.toUpperCase()}`)
 					senderPostcode: userPostcode,
 					recipient: mp.email,
 					subject: subject.trim(),
-					message: message.trim()
+					message: message.trim(),
+					attendingVisit
 				})
 			})
 
