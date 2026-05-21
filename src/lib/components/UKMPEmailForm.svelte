@@ -190,7 +190,8 @@ ${userPostcode.toUpperCase()}`)
 					senderPostcode: userPostcode,
 					recipient: mp.email,
 					subject: subject.trim(),
-					message: message.trim()
+					message: message.trim(),
+					attendingVisit
 				})
 			})
 
@@ -258,9 +259,9 @@ ${userPostcode.toUpperCase()}`)
 						onchange={toggleVisit}
 					/>
 					<span class="visit-text">
-						I will be attending PauseAI UK's
+						I will attend PauseAI UK's
 						<Link href="https://luma.com/q2wu0y59?utm_source=uk-email-builder" target="_blank"
-							>visit to Parliament</Link
+							>visit to Parliament on 23<sup>rd</sup> June</Link
 						> to speak with my MP in person.
 					</span>
 				</label>
