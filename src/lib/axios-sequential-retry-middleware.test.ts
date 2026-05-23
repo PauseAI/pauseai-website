@@ -87,4 +87,49 @@ describe('AxiosSequentialRetryMiddleware', () => {
 		})
 		expect(retriesStarted).toBe(2)
 	})
+
+	it('exhausts one failed request before retrying the next failed request', async () => {
+		vi.useFakeTimers()
+		const client = axios.create()
+		const mock = new MockAdapter(client)
+		new AxiosSequentialRetryMiddleware({
+			retries: 3,
+			retryCondition: isRetryableError,
+			retryDelay: () => 100
+		}).applyTo(client)
+
+		const callsByRequest = new Map<string, number>()
+		const requestSequence: string[] = []
+
+		mock.onGet('/items').reply((config) => {
+			const requestId = String(config.params.id)
+			const callCount = (callsByRequest.get(requestId) ?? 0) + 1
+			callsByRequest.set(requestId, callCount)
+			requestSequence.push(`${requestId}:${callCount}`)
+
+			return [429]
+		})
+
+		const requests = ['req1', 'req2', 'req3'].map((id) =>
+			client.get('/items', { params: { id } }).catch(() => undefined)
+		)
+
+		await vi.runAllTimersAsync()
+		await Promise.all(requests)
+
+		expect(requestSequence).toEqual([
+			'req1:1',
+			'req2:1',
+			'req3:1',
+			'req1:2',
+			'req1:3',
+			'req1:4',
+			'req2:2',
+			'req2:3',
+			'req2:4',
+			'req3:2',
+			'req3:3',
+			'req3:4'
+		])
+	})
 })
