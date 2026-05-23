@@ -1,5 +1,26 @@
 import { describe, it, expect, beforeEach, afterEach, vi, type MockInstance } from 'vitest'
+import { canPushToRemote } from './branch-safety'
 import { Mode } from './mode'
+
+// Keep these as unit tests for Mode: real branch detection shells out to git, and
+// real push checks can hit remote auth/network paths. branch-safety has its own tests.
+vi.mock('./branch-safety', async (importOriginal) => {
+	const actual = await importOriginal<typeof import('./branch-safety')>()
+
+	return {
+		...actual,
+		canPushToRemote: vi.fn(),
+		l10nCageBranch: vi.fn(() => {
+			if (process.env.L10N_BRANCH) return process.env.L10N_BRANCH
+			if (process.env.CI === 'true') {
+				if (process.env.REVIEW_ID) return `pr-${process.env.REVIEW_ID}`
+				if (process.env.BRANCH) return process.env.BRANCH
+				return 'main'
+			}
+			return 'test-branch'
+		})
+	}
+})
 
 describe('Mode', () => {
 	// Save original environment
@@ -12,6 +33,8 @@ describe('Mode', () => {
 		// Clean environment before each test
 		delete process.env.CI
 		delete process.env.L10N_BRANCH
+		vi.mocked(canPushToRemote).mockReset()
+		vi.mocked(canPushToRemote).mockReturnValue(true)
 	})
 
 	afterEach(() => {
