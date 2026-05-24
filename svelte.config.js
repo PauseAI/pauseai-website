@@ -9,7 +9,7 @@ import { fileURLToPath } from 'node:url'
 import rehypeSlug from 'rehype-slug'
 import remarkHeadingId from 'remark-heading-id'
 import remarkToc from 'remark-toc'
-import remarkUnwrapImages from 'remark-unwrap-images'
+import rehypeUnwrapImages from 'rehype-unwrap-images'
 
 import settings from './project.inlang/settings.json' with { type: 'json' }
 
@@ -22,8 +22,8 @@ const mdsvexOptions = {
 	layout: {
 		_: dirname(fileURLToPath(import.meta.url)) + '/src/mdsvex.svelte'
 	},
-	remarkPlugins: [remarkUnwrapImages, [remarkToc, { tight: true }], remarkHeadingId],
-	rehypePlugins: [rehypeSlug]
+	remarkPlugins: [[remarkToc, { tight: true }], remarkHeadingId],
+	rehypePlugins: [rehypeUnwrapImages, rehypeSlug]
 }
 
 /** @type {[string, ((warning: import('@sveltejs/kit').Warning) => boolean) | undefined][]} */
@@ -35,7 +35,7 @@ const skipWarnings = [
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
 	extensions: ['.svelte', '.md'],
-	preprocess: [vitePreprocess({ script: true }), mdsvex(mdsvexOptions)],
+	preprocess: [vitePreprocess(), mdsvex(mdsvexOptions)],
 	// Custom warning handler to selectively filter out specific a11y warnings
 	onwarn(warning, handler) {
 		// Skip specific accessibility warnings
@@ -61,6 +61,9 @@ const config = {
 			// Handle missing anchor IDs by warning instead of failing
 			handleMissingId: 'warn',
 			entries: ['*'].concat(settings.locales.map((locale) => '/' + locale))
+		},
+		experimental: {
+			remoteFunctions: true
 		}
 	}
 }

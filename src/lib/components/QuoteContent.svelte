@@ -1,7 +1,11 @@
 <script lang="ts">
 	import type { CarouselQuote } from '$lib/types'
 
-	export let quote: CarouselQuote
+	interface Props {
+		quote: CarouselQuote
+	}
+
+	let { quote }: Props = $props()
 </script>
 
 <svelte:element

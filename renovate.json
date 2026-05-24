@@ -1,6 +1,7 @@
 {
 	"$schema": "https://docs.renovatebot.com/renovate-schema.json",
 	"extends": ["config:recommended"],
+	"minimumReleaseAge": "1 day",
 	"rangeStrategy": "bump",
 	"labels": ["dependencies"],
 	"packageRules": [
@@ -45,12 +46,8 @@
 		{
 			"extends": [":automergeLinters"],
 			"matchPackageNames": ["knip", "svelte-check"],
-			"minor": {
-				"extends": ["group:linters"]
-			},
-			"patch": {
-				"extends": ["group:linters"]
-			},
+			"groupName": null,
+			"groupSlug": null,
 			"dependencyDashboardApproval": false
 		}
 	]

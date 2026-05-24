@@ -4,45 +4,81 @@
 	import LoadingSpinner from './LoadingSpinner.svelte'
 	import Link from '$lib/components/Link.svelte'
 
-	export let mp: {
-		name: string
-		email: string
-		salutation: string
-		constituency: string
+	interface Props {
+		mp: {
+			name: string
+			email: string
+			salutation: string
+			constituency: string
+		}
+		userPostcode: string
+		userName: string
+		onsubmit?: (e: SubmitEvent) => void
 	}
-	export let userPostcode: string
-	export let userName: string
 
-	let senderName = userName
-	let senderEmail = ''
-	let subject = `Request to co-sign letter on Google's breach of AI safety pledges`
-	let message = `Dear ${mp.salutation},
+	let { mp, userPostcode, userName, onsubmit }: Props = $props()
 
-Would you be willing to co-sign an open letter urging Google DeepMind to honour the AI Safety Summit pledges?
+	let senderName = $derived(userName)
+	let senderEmail = $state('')
+	let subject = $state(`Request to co-sign letter on AI liability`)
+	let message = $derived(`Dear ${mp.salutation},
 
-I’m a resident of ${mp.constituency} and I wanted to share with you an open letter from **PauseAI**, a grassroots network focused on preventing the catastrophic risks of AI. Last May at the AI Safety Summit, Google publicly committed to transparency in their safety testing of new AI models. Yet they now refuse to say which third parties are involved in testing their latest model - **a clear breach of their commitment**.
+Would you be willing to sign this open letter supporting legislation to hold AI companies accountable when their models cause severe harm?
 
-AI will be the most powerful technology humanity ever creates. We must set a clear precedent now that reckless disregard for safety standards will not be tolerated.
+I’m a resident of ${mp.constituency} and a supporter of **PauseAI**, a civic movement focused on minimising the risks of advanced AI. I am very concerned that AI development is racing ahead without adequate protection for the public.
+
+**Existing UK law does not reliably hold AI developers liable for damage or deaths caused by their models**, even when the danger is predictable, severe and uniquely enabled by the model. To ensure our safety, the incentives of AI developers must be aligned with the public interest.
 
 Next steps
  - 30-min call. Let me know what time would work for you.
- - Alternatively, please review the letter and background information attached and send over any questions or concerns.
+ - Alternatively, please review the letter and briefing attached and send over any questions or concerns.
 
 Thank you for your consideration,
 
 ${userName}
 
-${userPostcode.toUpperCase()}`
+${userPostcode.toUpperCase()}`)
 
-	let messageTextarea: HTMLTextAreaElement
-	let subjectTextarea: HTMLTextAreaElement
-	let isSubmitting = false
-	let submitStatus: 'idle' | 'success' | 'error' = 'idle'
-	let errorMessage = ''
+	let messageTextarea: HTMLTextAreaElement | undefined = $state()
+	let subjectTextarea: HTMLTextAreaElement | undefined = $state()
+	let isSubmitting = $state(false)
+	let submitStatus: 'idle' | 'success' | 'error' = $state('idle')
+	let errorMessage = $state('')
 
-	$: htmlPreview = micromark(message)
+	let attendingVisit = $state(false)
+	let messageBeforeVisit: string | null = $state(null)
+
+	const ORIGINAL_NEXT_STEPS = `Next steps
+ - 30-min call. Let me know what time would work for you.
+ - Alternatively, please review the letter and briefing attached and send over any questions or concerns.`
+
+	const VISIT_SENTENCE = `**I will be visiting Parliament on Tuesday June 23rd. Will you meet with me to discuss the letter and your plan for addressing AI risks?**`
+
+	function toggleVisit() {
+		if (attendingVisit) {
+			messageBeforeVisit = message
+			if (message.includes(ORIGINAL_NEXT_STEPS)) {
+				message = message.replace(ORIGINAL_NEXT_STEPS, VISIT_SENTENCE)
+			} else {
+				// User has customised the Next steps section. Insert the visit sentence
+				// before the signature line so we don't trample their edits.
+				const signatureMarker = '\nThank you for your consideration'
+				if (message.includes(signatureMarker)) {
+					message = message.replace(signatureMarker, `\n${VISIT_SENTENCE}\n${signatureMarker}`)
+				} else {
+					message = `${message}\n\n${VISIT_SENTENCE}`
+				}
+			}
+		} else if (messageBeforeVisit !== null) {
+			message = messageBeforeVisit
+			messageBeforeVisit = null
+		}
+	}
+
+	let htmlPreview = $derived(micromark(message))
 
 	function insertMarkdown(before: string, after: string = '') {
+		if (!messageTextarea) return
 		const start = messageTextarea.selectionStart
 		const end = messageTextarea.selectionEnd
 		const selectedText = message.substring(start, end)
@@ -53,8 +89,8 @@ ${userPostcode.toUpperCase()}`
 
 		// Move cursor to end of inserted text
 		setTimeout(() => {
-			messageTextarea.focus()
-			messageTextarea.setSelectionRange(
+			messageTextarea?.focus()
+			messageTextarea?.setSelectionRange(
 				start + before.length,
 				start + before.length + selectedText.length
 			)
@@ -62,6 +98,7 @@ ${userPostcode.toUpperCase()}`
 	}
 
 	function insertBulletPoint() {
+		if (!messageTextarea) return
 		const start = messageTextarea.selectionStart
 		const end = messageTextarea.selectionEnd
 
@@ -86,9 +123,9 @@ ${userPostcode.toUpperCase()}`
 
 			// Adjust cursor position to account for the removed "- "
 			setTimeout(() => {
-				messageTextarea.focus()
+				messageTextarea?.focus()
 				const adjustment = currentLine.length - bulletRemoved.length
-				messageTextarea.setSelectionRange(start - adjustment, end - adjustment)
+				messageTextarea?.setSelectionRange(start - adjustment, end - adjustment)
 			}, 0)
 		} else {
 			// Insert "- " at the beginning of the current line
@@ -97,8 +134,8 @@ ${userPostcode.toUpperCase()}`
 
 			// Adjust cursor position to account for the inserted "- "
 			setTimeout(() => {
-				messageTextarea.focus()
-				messageTextarea.setSelectionRange(start + 2, end + 2)
+				messageTextarea?.focus()
+				messageTextarea?.setSelectionRange(start + 2, end + 2)
 			}, 0)
 		}
 	}
@@ -118,14 +155,18 @@ ${userPostcode.toUpperCase()}`
 	}
 
 	// Auto-resize when message changes
-	$: if (messageTextarea && message) {
-		autoResize()
-	}
+	$effect(() => {
+		if (messageTextarea && message) {
+			autoResize()
+		}
+	})
 
 	// Auto-resize when subject changes
-	$: if (subjectTextarea && subject) {
-		autoResizeSubject()
-	}
+	$effect(() => {
+		if (subjectTextarea && subject) {
+			autoResizeSubject()
+		}
+	})
 
 	async function handleSubmit() {
 		if (!senderEmail.trim()) {
@@ -149,7 +190,8 @@ ${userPostcode.toUpperCase()}`
 					senderPostcode: userPostcode,
 					recipient: mp.email,
 					subject: subject.trim(),
-					message: message.trim()
+					message: message.trim(),
+					attendingVisit
 				})
 			})
 
@@ -177,7 +219,12 @@ ${userPostcode.toUpperCase()}`
 			<p>✅ Your email has been sent to {mp.name}!</p>
 		</div>
 	{:else}
-		<form on:submit|preventDefault>
+		<form
+			onsubmit={(e) => {
+				e.preventDefault()
+				onsubmit?.(e)
+			}}
+		>
 			<div class="form-group">
 				<label for="sender-email">Your email</label>
 				<input
@@ -197,10 +244,27 @@ ${userPostcode.toUpperCase()}`
 					bind:value={subject}
 					required
 					placeholder="Email subject"
-					on:input={autoResizeSubject}
+					oninput={autoResizeSubject}
 					rows="1"
 					class="subject-textarea"
 				></textarea>
+			</div>
+
+			<div class="form-group visit-group">
+				<label class="visit-label" class:checked={attendingVisit}>
+					<input
+						type="checkbox"
+						class="visit-tickbox"
+						bind:checked={attendingVisit}
+						onchange={toggleVisit}
+					/>
+					<span class="visit-text">
+						I will attend PauseAI UK's
+						<Link href="https://luma.com/q2wu0y59?utm_source=uk-email-builder" target="_blank"
+							>visit to Parliament on 23<sup>rd</sup> June</Link
+						> to speak with my MP in person.
+					</span>
+				</label>
 			</div>
 
 			<div class="form-group">
@@ -208,26 +272,25 @@ ${userPostcode.toUpperCase()}`
 
 				<div class="email-tips">
 					<ul>
-						<li>Customize the email to you and your MP</li>
-						<li>Customize the sentence "I'm a resident of..." to make it sound natural.</li>
+						<li>Customise the email to yourself and your MP</li>
 						<li>MPs are very busy - keep it short!</li>
 					</ul>
 				</div>
 
 				<div class="markdown-toolbar">
-					<button type="button" on:click={() => insertMarkdown('**', '**')} title="Bold">
+					<button type="button" onclick={() => insertMarkdown('**', '**')} title="Bold">
 						<strong>B</strong>
 					</button>
-					<button type="button" on:click={() => insertMarkdown('_', '_')} title="Italic">
+					<button type="button" onclick={() => insertMarkdown('_', '_')} title="Italic">
 						<em>i</em>
 					</button>
-					<button type="button" on:click={() => insertMarkdown('# ', '')} title="Heading">
+					<button type="button" onclick={() => insertMarkdown('# ', '')} title="Heading">
 						H1
 					</button>
-					<button type="button" on:click={() => insertMarkdown('## ', '')} title="Subheading">
+					<button type="button" onclick={() => insertMarkdown('## ', '')} title="Subheading">
 						H2
 					</button>
-					<button type="button" on:click={() => insertBulletPoint()} title="Bullet point">
+					<button type="button" onclick={() => insertBulletPoint()} title="Bullet point">
 						• List
 					</button>
 				</div>
@@ -239,7 +302,7 @@ ${userPostcode.toUpperCase()}`
 						bind:value={message}
 						required
 						placeholder="Your message to the MP"
-						on:input={autoResize}
+						oninput={autoResize}
 						rows="1"
 					></textarea>
 				</div>
@@ -256,33 +319,33 @@ ${userPostcode.toUpperCase()}`
 					<h4>Attachments:</h4>
 					<div class="pdf-attachments">
 						<Link
-							href="/pdfs/PauseAI_Open_Letter_to_Google_DeepMind.pdf#no-localize"
+							href="/pdfs/AI_Liability_Open_Letter.pdf#no-localize"
 							target="_blank"
 							class="pdf-thumbnail"
 						>
 							<img
-								src="/pdfs/PauseAI_Open_Letter_to_Google_DeepMind_page-1.jpg"
-								alt="PauseAI Open Letter thumbnail"
+								src="/pdfs/AI_Liability_Open_Letter.jpg"
+								alt="AI Liability Open Letter thumbnail"
 								class="pdf-thumbnail-image"
 							/>
 							<div class="pdf-info">
-								<span class="pdf-title">PauseAI Open Letter</span>
-								<span class="pdf-subtitle">to Google DeepMind</span>
+								<span class="pdf-title">AI Liability</span>
+								<span class="pdf-subtitle">Open Letter</span>
 							</div>
 						</Link>
 						<Link
-							href="/pdfs/Background_on_Googles_violation_of_Frontier_AI_Safety_Commitments.pdf#no-localize"
+							href="/pdfs/AI_Liability_Policy_Briefing.pdf#no-localize"
 							target="_blank"
 							class="pdf-thumbnail"
 						>
 							<img
-								src="/pdfs/Background_on_Googles_violation_of_Frontier_AI_Safety_Commitments_page-1.jpg"
-								alt="Background document thumbnail"
+								src="/pdfs/AI_Liability_Policy_Briefing.jpg"
+								alt="AI Liability Policy Briefing thumbnail"
 								class="pdf-thumbnail-image"
 							/>
 							<div class="pdf-info">
-								<span class="pdf-title">Background Information</span>
-								<span class="pdf-subtitle">on Google's Safety Violations</span>
+								<span class="pdf-title">AI Liability</span>
+								<span class="pdf-subtitle">Policy Briefing</span>
 							</div>
 						</Link>
 					</div>
@@ -295,7 +358,7 @@ ${userPostcode.toUpperCase()}`
 				</div>
 			{/if}
 
-			<button type="button" disabled={isSubmitting} class="submit-button" on:click={handleSubmit}>
+			<button type="button" disabled={isSubmitting} class="submit-button" onclick={handleSubmit}>
 				{#if isSubmitting}
 					Sending
 					<LoadingSpinner size="small" color="currentColor" />
@@ -399,6 +462,76 @@ ${userPostcode.toUpperCase()}`
 		overflow: hidden;
 		white-space: pre-wrap;
 		word-wrap: break-word;
+	}
+
+	.visit-group {
+		padding-top: 1.5rem;
+	}
+
+	.visit-label {
+		display: flex;
+		align-items: flex-start;
+		gap: 0.7rem;
+		cursor: pointer;
+		padding: 0.85rem 1rem;
+		background: var(--bg);
+		border: 1px solid color-mix(in srgb, var(--brand) 28%, transparent);
+		border-radius: 8px;
+		font-weight: 400;
+		font-size: 0.95rem;
+		line-height: 1.45;
+		transition:
+			border-color 0.15s ease,
+			background-color 0.15s ease;
+	}
+
+	.visit-label:hover {
+		border-color: var(--brand);
+	}
+
+	.visit-label.checked {
+		border-color: var(--brand);
+		background: color-mix(in srgb, var(--brand) 10%, var(--bg));
+	}
+
+	.visit-tickbox {
+		appearance: none;
+		width: 1.15rem;
+		height: 1.15rem;
+		padding: 0;
+		margin: 0;
+		margin-top: 0.18rem;
+		flex-shrink: 0;
+		border: 2px solid var(--brand);
+		border-radius: 4px;
+		background: var(--bg);
+		cursor: pointer;
+		display: grid;
+		place-content: center;
+	}
+
+	.visit-tickbox::before {
+		content: '';
+		width: 0.65rem;
+		height: 0.65rem;
+		transform: scale(0);
+		transition: transform 0.1s ease-in-out;
+		background: var(--brand);
+		clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%);
+	}
+
+	.visit-tickbox:checked::before {
+		transform: scale(1);
+	}
+
+	.visit-tickbox:focus-visible {
+		outline: 2px solid var(--brand);
+		outline-offset: 2px;
+	}
+
+	.visit-text {
+		flex: 1;
+		min-width: 0;
 	}
 
 	.email-tips {

@@ -1,9 +1,13 @@
 <script lang="ts">
 	import type { Quote } from './types'
 
-	export let quote: Quote
+	interface Props {
+		quote: Quote
+	}
 
-	const displayName = quote.displayName || quote.name
+	let { quote }: Props = $props()
+
+	const displayName = $derived(quote.displayName ?? quote.name)
 </script>
 
 <div class="quote-highlight">

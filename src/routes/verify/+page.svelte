@@ -1,15 +1,15 @@
 <script lang="ts">
 	import { onMount } from 'svelte'
 	import { goto } from '$app/navigation'
-	import { page } from '$app/stores'
+	import { page } from '$app/state'
 	import toast from 'svelte-french-toast'
 	import Processing from '$lib/components/Processing.svelte'
 
-	let errorMessage: string | undefined
+	let errorMessage: string | undefined = $state()
 
 	onMount(async () => {
 		try {
-			const apiUrl = `/api/verify${$page.url.search}`
+			const apiUrl = `/api/verify${page.url.search}`
 
 			const response = await fetch(apiUrl)
 			if (response.ok) {

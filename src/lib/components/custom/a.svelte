@@ -1,13 +1,17 @@
 <script lang="ts">
 	import Link from '$lib/components/Link.svelte'
 
-	export let href: string
-	export let target: string | null = null
-	let className: string = ''
-	export { className as class }
-	export let rel: string | null = null
+	interface Props {
+		href: string
+		target?: string | null
+		class?: string
+		rel?: string | null
+		children?: import('svelte').Snippet
+	}
+
+	let { href, target = null, class: className = '', rel = null, children }: Props = $props()
 </script>
 
 <Link {href} {target} {rel} class={className}>
-	<slot></slot>
+	{@render children?.()}
 </Link>

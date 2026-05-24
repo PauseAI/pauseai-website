@@ -1,0 +1,148 @@
+<script lang="ts">
+	import type { PressCoverage } from '$lib/press-coverage.remote'
+	import NewsCard from '$lib/components/NewsCard.svelte'
+	import type { NewsItem } from '$lib/types'
+
+	interface Props {
+		coverage?: PressCoverage[]
+		typeOrder?: string[]
+		outletOrder?: string[]
+		loading?: boolean
+	}
+
+	let { coverage = [], typeOrder = [], outletOrder = [], loading = false }: Props = $props()
+
+	function toNewsItem(item: PressCoverage): NewsItem {
+		return {
+			title: item.title,
+			subtitle: item.notes?.trim() ?? '',
+			date: item.date,
+			image: item.image,
+			href: item.url,
+			source: 'press',
+			outlet: item.outlet
+		}
+	}
+
+	// Extract unique type names for tab labels
+	let availableTypes: string[] = $derived(
+		Array.from(new Set(coverage.map((c) => c.type))).filter(Boolean)
+	)
+
+	// Sort them based on the schema order fetched directly from Notion
+	let orderedTabs = $derived(typeOrder.length > 0 ? typeOrder : outletOrder)
+	let tabs = $derived(
+		availableTypes.toSorted((a, b) => {
+			const indexA = orderedTabs.indexOf(a)
+			const indexB = orderedTabs.indexOf(b)
+			if (indexA !== -1 && indexB !== -1) return indexA - indexB
+			if (indexA !== -1) return -1
+			if (indexB !== -1) return 1
+			return a.localeCompare(b)
+		})
+	)
+
+	let selectedTab = $state('')
+	let activeTab = $derived(
+		!tabs.includes(selectedTab) && tabs.length > 0
+			? (tabs.find((t) => t.includes('International')) ?? tabs[0])
+			: selectedTab
+	)
+	let filteredCoverage = $derived(coverage.filter((c) => c.type === activeTab))
+</script>
+
+<div class="coverage-layout">
+	{#if loading}
+		<div class="coverage-cards">
+			{#each Array(6) as _}
+				<NewsCard loading />
+			{/each}
+		</div>
+	{:else if coverage.length === 0}
+		<p class="empty-state">No press coverage found.</p>
+	{:else}
+		<div class="tabs-container">
+			{#each tabs as tab}
+				<button
+					class="tab-button"
+					class:active={activeTab === tab}
+					onclick={() => (selectedTab = tab)}
+				>
+					{tab}
+				</button>
+			{/each}
+		</div>
+
+		<div class="coverage-cards">
+			{#each filteredCoverage as item (item.id)}
+				<NewsCard id={item.id} item={toNewsItem(item)} />
+			{/each}
+		</div>
+	{/if}
+</div>
+
+<style>
+	.coverage-layout {
+		margin: 1.5rem 0;
+	}
+
+	.empty-state {
+		text-align: center;
+		color: var(--text-subtle);
+		font-style: italic;
+	}
+
+	/* TABS */
+	.tabs-container {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.25rem;
+		margin-bottom: 2rem;
+		background: var(--bg-card, var(--bg));
+		padding: 0.5rem;
+		border-radius: 12px;
+		border: 1px solid var(--border);
+	}
+
+	.tab-button {
+		display: inline-flex;
+		align-items: center;
+		background: transparent;
+		border: none;
+		color: var(--text);
+		font-weight: 600;
+		font-size: 0.95rem;
+		padding: 0.6rem 1rem;
+		border-radius: 8px;
+		cursor: pointer;
+		transition: all 0.2s;
+	}
+
+	.tab-button:hover {
+		background: color-mix(in srgb, var(--text) 5%, transparent);
+	}
+
+	.tab-button.active {
+		color: var(--brand);
+		background: color-mix(in srgb, var(--brand) 10%, transparent);
+	}
+
+	/* Same grid rhythm as Latest news */
+	.coverage-cards {
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+		gap: 1.5rem;
+	}
+
+	@media (max-width: 850px) {
+		.coverage-cards {
+			grid-template-columns: repeat(2, 1fr);
+		}
+	}
+
+	@media (max-width: 500px) {
+		.coverage-cards {
+			grid-template-columns: 1fr;
+		}
+	}
+</style>

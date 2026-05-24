@@ -1,33 +1,97 @@
 <script lang="ts">
-	import X from 'lucide-svelte/icons/x'
-	import { page } from '$app/stores'
+	import X from '@lucide/svelte/icons/x'
+	import { page } from '$app/state'
 	import { fade } from 'svelte/transition'
 	import { deLocalizeHref } from '$lib/paraglide/runtime'
 	import { setItem } from '$lib/localStorage'
 	import LinkWithoutIcon from '$lib/components/LinkWithoutIcon.svelte'
+	import { onMount } from 'svelte'
 
-	export let type: 'main' | 'campaign' = 'main'
-	export let id: string | null = null
-	export let href: string | null = null
-	export let contrast = false
+	interface Props {
+		contrast?: boolean
+		href?: string | null
+		id?: string | null
+		type?: 'main' | 'campaign'
+		children?: import('svelte').Snippet
+	}
 
-	let dismissed = false
+	let { children, contrast = false, href = null, id = null, type = 'main' }: Props = $props()
 
-	function close() {
+	// Initialize dismissed state during SSR based on the current pathname
+	const isCurrentPage = (href: string | null) =>
+		href !== null && deLocalizeHref(page.url.pathname) === href
+	// svelte-ignore state_referenced_locally
+	let dismissed = $state(isCurrentPage(href))
+
+	// Hide on navigation to the target/href page
+	$effect(() => {
+		if (isCurrentPage(href)) {
+			dismissed = true
+		}
+	})
+
+	let bannerEl: HTMLDivElement | undefined = $state()
+
+	function pushGtmEvent(eventObj: Record<string, unknown>) {
+		if (typeof window !== 'undefined') {
+			window.dataLayer = window.dataLayer ?? []
+			window.dataLayer.push(eventObj)
+		}
+	}
+
+	function close(ev: MouseEvent) {
+		ev.stopPropagation()
 		dismissed = true
 		if (id) {
 			const prefix = type === 'campaign' ? 'campaign_banner' : 'banner'
 			setItem(`${prefix}_${id}_hidden`, 'true')
 		}
+		pushGtmEvent({
+			event: 'banner_dismiss',
+			banner_id: id,
+			banner_type: type
+		})
 	}
 
-	// Hide on navigation to the target/href page
-	$: if (href && deLocalizeHref($page.url.pathname) === href) {
-		dismissed = true
+	function handleBannerClick(event: MouseEvent) {
+		const target = event.target as HTMLElement
+		const link = target.closest('a')
+		if (link) {
+			pushGtmEvent({
+				event: 'banner_click',
+				banner_id: id,
+				banner_type: type,
+				link_url: link.href
+			})
+		}
 	}
 
-	$: isCampaign = type === 'campaign'
-	$: dataIdAttr = isCampaign ? 'data-campaign-banner-id' : 'data-banner-id'
+	let isCampaign = $derived(type === 'campaign')
+	let dataIdAttr = $derived(isCampaign ? 'data-campaign-banner-id' : 'data-banner-id')
+
+	onMount(() => {
+		if (dismissed) return
+
+		const observer = new IntersectionObserver(
+			(entries) => {
+				entries.forEach((entry) => {
+					if (entry.isIntersecting) {
+						pushGtmEvent({
+							event: 'banner_show',
+							banner_id: id,
+							banner_type: type
+						})
+						observer.disconnect()
+					}
+				})
+			},
+			{ threshold: 0.1 }
+		)
+
+		if (bannerEl) observer.observe(bannerEl)
+
+		return () => observer.disconnect()
+	})
 </script>
 
 <svelte:head>
@@ -36,7 +100,7 @@
 			? `html[data-active-campaign-banner="${id}"] [data-campaign-banner-id="${id}"]`
 			: `html[data-active-banner="${id}"] [data-banner-id="${id}"]`}
 		<!-- eslint-disable-next-line svelte/no-at-html-tags -->
-		{@html `<style>${selector}{display:flex!important}</style>`}
+		{@html `<${'style'}>${selector}{display:flex!important}</${'style'}>`}
 	{/if}
 </svelte:head>
 
@@ -48,6 +112,8 @@
 		{...{ [dataIdAttr]: id }}
 		data-pagefind-ignore
 		transition:fade={{ duration: 200 }}
+		bind:this={bannerEl}
+		onclick={handleBannerClick}
 	>
 		{#if isCampaign}
 			<div class="accent-line"></div>
@@ -55,22 +121,18 @@
 
 		<span class="content">
 			{#if isCampaign && href}
-				<LinkWithoutIcon {href} class="campaign-link" on:click={close}>
+				<LinkWithoutIcon {href} class="campaign-link" onclick={close}>
 					<span class="campaign-text">
-						<slot></slot>
+						{@render children?.()}
 					</span>
 					<span class="campaign-cta">Take action →</span>
 				</LinkWithoutIcon>
 			{:else}
-				<slot></slot>
+				{@render children?.()}
 			{/if}
 		</span>
 
-		<button
-			class="close banner-close-btn"
-			class:campaign-close={isCampaign}
-			on:click|stopPropagation={close}
-		>
+		<button class="close banner-close-btn" class:campaign-close={isCampaign} onclick={close}>
 			<X size={isCampaign ? '1em' : '1.2em'} />
 			<span class="sr-only">Close</span>
 		</button>

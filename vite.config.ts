@@ -59,12 +59,9 @@ export default defineConfig(() => {
 			reportCompressedSize: false,
 			// Increase warning limit to reduce output
 			chunkSizeWarningLimit: 5000,
-			// Enable multi-threading with esbuild for faster builds
-			minify: 'esbuild',
 			// Improve cache usage
 			cssCodeSplit: true,
-			// Generate sourcemaps in development, disable in production unless explicitly enabled
-			sourcemap: isDev(process.env) || !process.env.VITE_DISABLE_SOURCEMAPS,
+			sourcemap: true,
 			// Exclude repos locale paths not in runtime.locales
 			rollupOptions: {
 				external: getLocaleExcludePatterns()

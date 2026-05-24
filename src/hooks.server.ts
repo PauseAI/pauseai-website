@@ -54,7 +54,8 @@ export { handle }
 
 export const handleError: HandleServerError = ({ error, event, status, message }) => {
 	console.error(error)
-	if (Sentry) {
+	const isIgnored = status === 404
+	if (Sentry && !isIgnored) {
 		Sentry.captureException(error, {
 			extra: {
 				status,

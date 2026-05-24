@@ -19,7 +19,7 @@ async function getInternalNews(localFetch: typeof fetch): Promise<NewsItem[]> {
 	for (const post of posts) {
 		if (post.news && post.date) {
 			items.push({
-				title: post.title,
+				title: post.title ?? 'Untitled',
 				subtitle: post.description || '',
 				date: post.date,
 				image: post.image,
@@ -77,10 +77,10 @@ function decodeHtmlEntities(text: string): string {
 		.replace(/&#(\d+);/g, (_, dec) => String.fromCharCode(parseInt(dec, 10)))
 		.replace(/&#x([a-f\d]+);/gi, (_, hex) => String.fromCharCode(parseInt(hex, 16)))
 		.replace(/&quot;/g, '"')
-		.replace(/&amp;/g, '&')
 		.replace(/&lt;/g, '<')
 		.replace(/&gt;/g, '>')
 		.replace(/&apos;/g, "'")
+		.replace(/&amp;/g, '&')
 }
 
 function extractTag(xml: string, tag: string): string | null {

@@ -19,6 +19,12 @@ export interface UKMPLookupError {
 
 export type UKMPLookupResponse = UKMPLookupResult | UKMPLookupError
 
+type PostcodesIoLookupResponse = {
+	result?: {
+		parliamentary_constituency?: string | null
+	} | null
+}
+
 // Parse constituency → MP lookup table
 interface RawMPRecord {
 	Email: string
@@ -67,7 +73,7 @@ export async function ukLookupMPByPostcode(postcode: string): Promise<UKMPLookup
 			throw new Error(`Postcode API error: ${response.status}`)
 		}
 
-		const data = await response.json()
+		const data = (await response.json()) as PostcodesIoLookupResponse
 
 		if (!data.result || !data.result.parliamentary_constituency) {
 			return { success: false, error: 'No parliamentary constituency found for this postcode' }

@@ -5,17 +5,21 @@
 	import Signatory from './signatory.svelte'
 	import type { PageData } from './$types'
 
-	export let data: PageData
+	interface Props {
+		data: PageData
+	}
 
-	const { signatories, totalCount } = data
+	let { data }: Props = $props()
+
+	const { signatories, totalCount } = $derived(data)
 	const { title, description, date } = meta
 
 	// Variable to control how many signatories are shown
 	const shortListN = 5
-	let showAll = false
-	let expandAllBios = false
+	let showAll = $state(false)
+	let expandAllBios = $state(false)
 	// Reactive variable to determine the list of signatories to display
-	$: visibleSignatories = showAll ? signatories : signatories.slice(0, shortListN)
+	let visibleSignatories = $derived(showAll ? signatories : signatories.slice(0, shortListN))
 	// Function to toggle between limited and full list and bios
 	function toggleShowAll() {
 		showAll = !showAll
@@ -25,7 +29,7 @@
 	// Milestone goals for signatures
 	const milestones = [2000, 2500, 3000, 4000, 5000, 10000, 15000, 20000, 25000, 30000]
 	// Find the next milestone goal
-	const nextGoal = milestones.find((goal) => totalCount < goal) || milestones[milestones.length - 1]
+	const nextGoal = milestones.find((goal) => totalCount < goal) ?? milestones[milestones.length - 1]
 </script>
 
 <PostMeta {title} {description} {date} />
@@ -52,7 +56,7 @@
 
 <div class="signatories-header">
 	<h2>Signatories ({totalCount})</h2>
-	<button class="expand-all" on:click={toggleShowAll} aria-label="Expand all signatories and bios">
+	<button class="expand-all" onclick={toggleShowAll} aria-label="Expand all signatories and bios">
 		{showAll ? 'Collapse All' : 'Expand All'}
 	</button>
 </div>
@@ -68,7 +72,7 @@
 	</ul>
 
 	<!-- Button to toggle between limited and full list -->
-	<button on:click={toggleShowAll}>
+	<button onclick={toggleShowAll}>
 		{showAll ? 'Show Less' : 'Show All Signatories'}
 	</button>
 </section>

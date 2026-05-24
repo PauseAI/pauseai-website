@@ -1,20 +1,54 @@
 <script lang="ts">
 	import { clsx } from 'clsx'
+	import { uniformInt } from 'pure-rand/distribution/uniformInt'
+	import { mersenne } from 'pure-rand/generator/mersenne'
+	import { skipN } from 'pure-rand/utils/skipN'
 
 	type Variant = 'text' | 'rect' | 'circle'
 	type Animation = 'shimmer' | 'pulse' | 'none'
 
-	let className = ''
-	export { className as class }
-	export let width: string = '100%'
-	export let height: string = '1em'
-	export let variant: Variant = 'text'
-	export let animation: Animation = 'shimmer'
-	export let count: number = 1
-	export let loading: boolean = true
+	interface Props {
+		class?: string
+		width?: string
+		height?: string
+		variant?: Variant
+		animation?: Animation
+		count?: number
+		loading?: boolean
+		random?: boolean
+		seed?: number
+		children?: import('svelte').Snippet
+	}
+
+	let {
+		class: className = '',
+		width = '100%',
+		height = '1em',
+		variant = 'text',
+		animation = 'shimmer',
+		count = 1,
+		loading = true,
+		random = false,
+		seed = 0,
+		children
+	}: Props = $props()
 
 	function isLastLineOfMultilineText(variant: Variant, index: number, totalCount: number) {
 		return variant === 'text' && index === totalCount - 1 && totalCount > 1
+	}
+
+	function getEffectiveWidth(
+		indexInSkeleton: number,
+		width: string,
+		variant: Variant,
+		random: boolean,
+		seed: number
+	) {
+		if (!random || variant !== 'text') return width
+		let rng = mersenne(seed)
+		skipN(rng, indexInSkeleton)
+		const val = uniformInt(rng, 70, 110)
+		return `calc(${width} * ${val / 100})`
 	}
 </script>
 
@@ -22,12 +56,14 @@
 	{#each Array.from({ length: count }) as _, i}
 		<span
 			class={clsx('skeleton', variant, animation, className)}
-			style:width={isLastLineOfMultilineText(variant, i, count) ? `calc(0.8 * ${width})` : width}
+			style:width={isLastLineOfMultilineText(variant, i, count)
+				? `calc(0.8 * ${width})`
+				: getEffectiveWidth(i, width, variant, random, seed)}
 			style:height
 		></span>
 	{/each}
 {:else}
-	<slot></slot>
+	{@render children?.()}
 {/if}
 
 <style>

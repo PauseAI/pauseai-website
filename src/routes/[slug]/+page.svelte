@@ -5,14 +5,30 @@
 	import { getPostMetaImageUrl } from '$lib/images.js'
 	import type { PageData } from './$types'
 
-	// don't destructure to maintain reactivity for invalidation after language detection
-	export let data: PageData
+	interface Props {
+		data: PageData
+	}
 
-	$: meta = data.meta
-	$: ({ title = data.slug, date, description, image, author, showImage = true } = meta)
-	$: parent = data.slug.split('/').slice(0, -1).join('/')
-	$: metaImageUrl = getPostMetaImageUrl(image)
+	// don't destructure to maintain reactivity for invalidation after language detection
+	let { data }: Props = $props()
+
+	let {
+		title,
+		date,
+		description,
+		image,
+		author,
+		showImage = true
+	} = $derived({ title: data.slug, ...data.meta })
+	let parent = $derived(data.slug.split('/').slice(0, -1).join('/'))
+	let metaImageUrl = $derived(getPostMetaImageUrl(image))
 </script>
+
+<svelte:head>
+	{#each data.cssUrls ?? [] as href}
+		<link rel="stylesheet" {href} />
+	{/each}
+</svelte:head>
 
 <PostMeta {title} {description} {date} image={metaImageUrl} />
 
@@ -37,7 +53,7 @@
 	{/if}
 
 	<div class="prose">
-		<svelte:component this={data.content} />
+		<data.content />
 	</div>
 </article>
 

@@ -1,6 +1,6 @@
-import type { Post } from '$lib/types'
+import type { StrictPost } from '$lib/types'
 
-export const meta: Post = {
+export const meta: StrictPost = {
 	title: 'PauseAI Statement',
 	description: 'Sign the PauseAI Statement',
 	date: '2025-05-19',

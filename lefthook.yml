@@ -1,0 +1,6 @@
+pre-commit:
+  commands:
+    format:
+      glob: '*'
+      run: pnpm format {staged_files}
+      stage_fixed: true

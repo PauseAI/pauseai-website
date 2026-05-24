@@ -1,6 +1,10 @@
 <script lang="ts">
-	export let size: 'small' | 'medium' | 'large' = 'medium'
-	export let color: string = 'currentColor'
+	interface Props {
+		size?: 'small' | 'medium' | 'large'
+		color?: string
+	}
+
+	let { size = 'medium', color = 'currentColor' }: Props = $props()
 </script>
 
 <div class="spinner {size}" style="color: {color}">

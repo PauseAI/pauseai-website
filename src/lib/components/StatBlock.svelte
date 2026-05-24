@@ -3,11 +3,15 @@
 	import SvelteIntersectionObserver from '$lib/components/SvelteIntersectionObserver.svelte'
 	import Link from '$lib/components/Link.svelte'
 
-	export let percentage: number
-	export let text: string
-	export let link: string
+	interface Props {
+		percentage: number
+		text: string
+		link: string
+	}
 
-	let isIntersecting: boolean
+	let { percentage, text, link }: Props = $props()
+
+	let isIntersecting: boolean = $state(false)
 </script>
 
 <SvelteIntersectionObserver bind:isIntersecting defaultToIntersecting disconnectOnIntersect>

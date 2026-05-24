@@ -14,6 +14,10 @@ declare global {
 		}
 	}
 
+	interface Response {
+		json(): Promise<unknown> // Override "any"
+	}
+
 	interface Twttr {
 		ready: (callback: () => void) => void
 		load: (element: HTMLElement) => void
@@ -23,6 +27,7 @@ declare global {
 		twttr?: Twttr
 		selectBanners(): void
 		applyTheme(): void
+		dataLayer?: unknown[]
 	}
 
 	declare module '*.md' {

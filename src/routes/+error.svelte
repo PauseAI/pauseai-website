@@ -1,6 +1,6 @@
 <script>
-	import { page } from '$app/stores'
-	const { status, error } = $page
+	import { page } from '$app/state'
+	const { status, error } = page
 </script>
 
 <div class="error">

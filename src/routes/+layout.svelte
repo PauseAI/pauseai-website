@@ -1,13 +1,15 @@
 <script lang="ts">
 	import type { GeoApiResponse } from '$api/geo/+server'
 	import { browser } from '$app/environment'
-	import { page } from '$app/stores'
+	import { page } from '$app/state'
 	import Banner from '$lib/components/Banner.svelte'
 	import Hero from '$lib/components/Hero.svelte'
 	import Link from '$lib/components/Link.svelte'
 	import NearbyEvent from '$lib/components/NearbyEvent.svelte'
 	import PreloadFonts from '$lib/components/PreloadFonts.svelte'
+	import SearchModal from '$lib/components/SearchModal.svelte'
 	import Toc from '$lib/components/Toc.svelte'
+	import { searchOpen } from '$lib/stores/searchModal'
 	import { deLocalizeHref } from '$lib/paraglide/runtime'
 	import '@fontsource/roboto-slab/300.css'
 	import '@fontsource/roboto-slab/500.css'
@@ -29,11 +31,17 @@
 	import hydrationAwareClick from './hydration-aware-click.js?raw'
 	import type { PageData } from './$types'
 
-	export let data: PageData
+	interface Props {
+		data: PageData
+		children?: import('svelte').Snippet
+	}
 
-	let eventFound: boolean
-	let geoForNearbyEvent: GeoApiResponse | null = null
-	$: hero = deLocalizeHref($page.url.pathname) === '/'
+	let { data, children }: Props = $props()
+
+	let eventFound: boolean = $state(false)
+	let geoForNearbyEvent: GeoApiResponse | null = $state(null)
+	let hero = $derived(deLocalizeHref(page.url.pathname) === '/')
+	let embed = $derived(page.route.id?.startsWith('/embed/') ?? false)
 
 	onMount(async () => {
 		document.documentElement.removeAttribute('data-waiting')
@@ -70,9 +78,11 @@
 	})
 
 	// NearbyEvent overrides the main banner
-	$: if (browser && eventFound) {
-		delete document.documentElement.dataset.activeBanner
-	}
+	$effect(() => {
+		if (browser && eventFound) {
+			delete document.documentElement.dataset.activeBanner
+		}
+	})
 
 	function sanitizeScript(code: string) {
 		return code
@@ -126,89 +136,97 @@
 	Top
 </h2>
 
-<div class="page-top" class:hero-page={hero}>
-	<!-- Dev-only locale mismatch warning. No id when isDev, so not affected by banner orchestration CSS. -->
-	{#if data.localeAlert}
-		<Banner
-			contrast={data.localeAlert.isDev}
-			id={data.localeAlert.isDev ? undefined : 'locale-switch'}
-		>
-			<!-- eslint-disable-next-line svelte/no-at-html-tags not vulnerable against XSS -->
-			{@html data.localeAlert.message}
+{#if !embed}
+	<div class="page-top" class:hero-page={hero}>
+		<!-- Dev-only locale mismatch warning. No id when isDev, so not affected by banner orchestration CSS. -->
+		{#if data.localeAlert}
+			<Banner
+				contrast={data.localeAlert.isDev}
+				id={data.localeAlert.isDev ? undefined : 'locale-switch'}
+			>
+				<!-- eslint-disable-next-line svelte/no-at-html-tags not vulnerable against XSS -->
+				{@html data.localeAlert.message}
+			</Banner>
+		{/if}
+
+		<!-- All banners rendered, hidden by default. Blocking script reveals the active main/campaign banner. -->
+		<Banner contrast={hero} id="gb-feb28-protest">
+			<b
+				>PauseAI's largest ever protest will be on Saturday February 28th in London. <Link
+					href="https://luma.com/o0p4htmk">Sign up now!</Link
+				></b
+			>
 		</Banner>
-	{/if}
+		<Banner contrast={hero} id="us-state-sovereignty">
+			<b
+				>HELP US PROTECT STATE SOVEREIGNTY ON AI REGULATION | <Link
+					href="https://mstr.app/b09fa92b-1899-43a0-9d95-99cd99c9dfb2">ACT NOW »</Link
+				></b
+			>
+		</Banner>
+		<Banner contrast={hero} id="holiday-littlehelpers" href="/littlehelpers">
+			<strong>🎄 Holiday Matching Campaign!</strong> Help fund volunteer stipends for PauseAI
+			advocates. <Link href="/littlehelpers">Join the Little Helpers campaign →</Link>
+		</Banner>
 
-	<!-- All banners rendered, hidden by default. Blocking script reveals the active main/campaign banner. -->
-	<Banner contrast={hero} id="gb-feb28-protest">
-		<b
-			>PauseAI's largest ever protest will be on Saturday February 28th in London. <Link
-				href="https://luma.com/o0p4htmk">Sign up now!</Link
-			></b
-		>
-	</Banner>
-	<Banner contrast={hero} id="us-state-sovereignty">
-		<b
-			>HELP US PROTECT STATE SOVEREIGNTY ON AI REGULATION | <Link
-				href="https://mstr.app/b09fa92b-1899-43a0-9d95-99cd99c9dfb2">ACT NOW »</Link
-			></b
-		>
-	</Banner>
-	<Banner contrast={hero} id="holiday-littlehelpers" href="/littlehelpers">
-		<strong>🎄 Holiday Matching Campaign!</strong> Help fund volunteer stipends for PauseAI
-		advocates. <Link href="/littlehelpers">Join the Little Helpers campaign →</Link>
-	</Banner>
+		<NearbyEvent contrast={hero} bind:eventFound geo={geoForNearbyEvent} />
 
-	<NearbyEvent contrast={hero} bind:eventFound geo={geoForNearbyEvent} />
+		<Banner type="campaign" href="/brussels-ep-protest-2026" id="brussels-ep-protest-2026">
+			<strong>Brussels, Feb 23</strong> - Join us outside the European Parliament to call for a global
+			treaty to pause frontier AI development.
+		</Banner>
 
-	<Banner type="campaign" href="/brussels-ep-protest-2026" id="brussels-ep-protest-2026">
-		<strong>Brussels, Feb 23</strong> - Join us outside the European Parliament to call for a global treaty
-		to pause frontier AI development.
-	</Banner>
+		{#if hero}
+			<div class="hero-section">
+				<Hero />
+				<Header inverted />
+			</div>
+		{/if}
+	</div>
+{/if}
 
-	{#if hero}
-		<div class="hero-section">
-			<Hero />
-			<Header inverted />
-		</div>
-	{/if}
-</div>
-
-<div class="layout" class:hero-page={hero}>
-	{#if $page.route.id === '/sayno'}
+<div class="layout" class:hero-page={hero} class:embed>
+	{#if page.route.id === '/sayno'}
 		<!-- Dynamic import and render the selfie UX component -->
 		{#await import('./sayno/SelfieUX.svelte') then module}
-			<svelte:component this={module.default} />
+			<module.default />
 		{/await}
 	{/if}
 
-	{#if !hero}
+	{#if !hero && !embed}
 		<Header />
 	{/if}
 
 	<main>
-		<PageTransition url={$page.url.pathname}>
-			<slot></slot>
+		<PageTransition url={page.url.pathname}>
+			{@render children?.()}
 		</PageTransition>
 	</main>
 
-	<Footer />
+	{#if !embed}
+		<Footer />
+	{/if}
 </div>
 
-<Toaster
-	toastOptions={{
-		style: 'background-color: var(--bg-subtle); color: var(--text)',
-		iconTheme: {
-			primary: 'var(--brand)',
-			secondary: 'white'
-		}
-	}}
-/>
+{#if !embed}
+	<SearchModal bind:open={$searchOpen} />
 
-{#if !['/', '/communities', '/outcomes', '/pdoom', '/quotes', '/dear-sir-demis-2025'].includes(deLocalizeHref($page.url.pathname))}
-	<Toc />
+	<Toaster
+		toastOptions={{
+			style: 'background-color: var(--bg-subtle); color: var(--text)',
+			iconTheme: {
+				primary: 'var(--brand)',
+				secondary: 'white'
+			}
+		}}
+	/>
+
+	{#if !['/', '/communities', '/outcomes', '/pdoom', '/quotes', '/dear-sir-demis-2025'].includes(deLocalizeHref(page.url.pathname))}
+		<Toc />
+	{/if}
+
+	<ProgressBar color="var(--brand)" />
 {/if}
-
-<ProgressBar color="var(--brand)" />
 
 <style>
 	/* Hide all orchestrated banners by default.
@@ -238,7 +256,7 @@
 	.page-top.hero-page {
 		display: flex;
 		flex-direction: column;
-		height: 100dvh;
+		min-height: 100dvh;
 	}
 
 	.page-top.hero-page > :global(.banner) {
@@ -248,6 +266,8 @@
 	.page-top.hero-page .hero-section {
 		flex: 1;
 		min-height: var(--hero-min-height);
+		display: flex;
+		flex-direction: column;
 	}
 
 	.hero-section {
@@ -277,6 +297,17 @@
 
 	.layout.hero-page {
 		grid-template-rows: 1fr auto;
+	}
+
+	.layout.embed {
+		grid-template-rows: 1fr;
+		padding: 0;
+		max-inline-size: none;
+	}
+
+	.layout.embed main {
+		padding-block: 0;
+		margin-bottom: 0;
 	}
 
 	main {

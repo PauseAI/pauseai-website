@@ -2,12 +2,12 @@
 	import PostMeta from '$lib/components/PostMeta.svelte'
 	import { meta } from './meta'
 	import PersonCard from './person.svelte'
-	import type { Person } from '$lib/types'
 	import Link from '$lib/components/Link.svelte'
+	import type { PageProps } from './$types'
 
-	export let data
+	let { data }: PageProps = $props()
 
-	const peopleGroups = data.people as Record<string, Person[]>
+	const peopleGroups = $derived(data.people)
 
 	const groupOrder = [
 		'Executive Team',
@@ -17,12 +17,13 @@
 	]
 
 	// Get all group keys and sort them according to the manual order
-	const allGroupKeys = Object.keys(peopleGroups)
-	const groupKeys = groupOrder.filter((group) => allGroupKeys.includes(group))
+	const allGroupKeys = $derived(Object.keys(peopleGroups))
 
 	// Add any groups that weren't in the manual order (in case new ones appear)
-	const remainingGroups = allGroupKeys.filter((group) => !groupOrder.includes(group))
-	groupKeys.push(...remainingGroups)
+	const remainingGroups = $derived(allGroupKeys.filter((group) => !groupOrder.includes(group)))
+	const groupKeys = $derived(
+		groupOrder.filter((group) => allGroupKeys.includes(group)).concat(remainingGroups)
+	)
 
 	const { title, description, date } = meta
 </script>

@@ -1,8 +1,12 @@
 <script lang="ts">
 	import { onMount } from 'svelte'
 
-	export let tabs: { title: string; content: string }[] = []
-	export let activeTab = 0
+	interface Props {
+		tabs?: { title: string; content: string }[]
+		activeTab?: number
+	}
+
+	let { tabs = [], activeTab = $bindable(0) }: Props = $props()
 
 	let tabButtons: HTMLDivElement
 	let tabContents: HTMLDivElement
@@ -44,7 +48,7 @@
 <div class="tabs-container">
 	<div class="tab-buttons" class:tabs-6={tabs.length === 6} bind:this={tabButtons}>
 		{#each tabs as tab, i}
-			<button class="tab-button" class:active={i === activeTab} on:click={() => updateActiveTab(i)}>
+			<button class="tab-button" class:active={i === activeTab} onclick={() => updateActiveTab(i)}>
 				{tab.title}
 			</button>
 		{/each}

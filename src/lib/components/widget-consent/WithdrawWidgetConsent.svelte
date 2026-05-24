@@ -6,7 +6,7 @@
 <button
 	class="button-to-link"
 	title="Withdraw consent for social widgets"
-	on:click={() => {
+	onclick={() => {
 		if ($consent) {
 			$consent = false
 			toast.success('Consent for social widgets withdrawn!')

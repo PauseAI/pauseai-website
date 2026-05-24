@@ -1,11 +1,12 @@
 name: Scheduled Rebuild
 
 on:
-  schedule:
-    # Every 30 minutes
-    - cron: '*/30 * * * *'
   workflow_dispatch:
-    # Allow manual triggering
+#   schedule:
+#     # Every 30 minutes
+#     - cron: '*/30 * * * *'
+#   workflow_dispatch:
+#     # Allow manual triggering
 
 jobs:
   rebuild:

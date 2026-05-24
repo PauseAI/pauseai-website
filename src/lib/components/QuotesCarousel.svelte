@@ -17,16 +17,16 @@
 		Keyboard,
 		Swipe
 	} from '@glidejs/glide/dist/glide.modular.esm'
-	import ArrowLeft from 'lucide-svelte/icons/arrow-left'
-	import ArrowRight from 'lucide-svelte/icons/arrow-right'
+	import ArrowLeft from '@lucide/svelte/icons/arrow-left'
+	import ArrowRight from '@lucide/svelte/icons/arrow-right'
 	import { onMount } from 'svelte'
 	import QuoteContent from './QuoteContent.svelte'
 
 	const AUTOPLAY_INTERVAL = 10_000
 
 	let glide: Glide
-	let currentSlide: number | null = null
-	let isSwiping = false
+	let currentSlide: number | null = $state(null)
+	let isSwiping = $state(false)
 
 	const quotes: CarouselQuote[] = [
 		{

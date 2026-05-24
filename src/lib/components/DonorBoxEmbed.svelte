@@ -2,17 +2,21 @@
 	import { onMount } from 'svelte'
 	import { getLocale } from '$lib/paraglide/runtime'
 
-	/** DonorBox campaign slug (required) */
-	export let campaignSlug: string
+	interface Props {
+		/** DonorBox campaign slug (required) */
+		campaignSlug: string
+		/** iframe height in pixels */
+		height?: number
+		/** Whether to enable PayPal Express in the widget */
+		paypalExpress?: boolean
+	}
 
-	/** iframe height in pixels */
-	export let height = 685
-
-	/** Whether to enable PayPal Express in the widget */
-	export let paypalExpress = true
+	let { campaignSlug, height = 685, paypalExpress = true }: Props = $props()
 
 	const locale = getLocale()
-	$: embedSrc = `https://donorbox.org/embed/${campaignSlug}?hide_donation_meter=true&language=${locale}`
+	let embedSrc = $derived(
+		`https://donorbox.org/embed/${campaignSlug}?hide_donation_meter=true&language=${locale}`
+	)
 
 	onMount(() => {
 		const script = document.createElement('script')

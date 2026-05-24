@@ -2,7 +2,7 @@
 	import { userTheme, toggleTheme } from '$lib/theme'
 </script>
 
-<button class="button-to-link" on:click={toggleTheme} aria-label="Toggle theme"
+<button class="button-to-link" onclick={toggleTheme} aria-label="Toggle theme"
 	>{$userTheme} Theme</button
 >
 

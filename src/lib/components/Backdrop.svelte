@@ -1,7 +1,11 @@
 <script lang="ts">
 	import { fade } from 'svelte/transition'
 
-	export let open: boolean | undefined
+	interface Props {
+		open: boolean | undefined
+	}
+
+	let { open }: Props = $props()
 </script>
 
 {#if open}
@@ -11,11 +15,11 @@
 <style>
 	.backdrop {
 		backdrop-filter: blur(10px) brightness(0.9) saturate(0.9);
-		-webkit-backdrop-filter: blur(10px) brightness(0.9) saturate(0.9);
 		position: fixed;
 		top: 0;
 		right: 0;
 		bottom: 0;
 		left: 0;
+		z-index: 9;
 	}
 </style>

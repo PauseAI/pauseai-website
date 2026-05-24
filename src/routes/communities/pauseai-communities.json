@@ -15,13 +15,6 @@
 			"parent_name": "United Kingdom"
 		},
 		{
-			"name": "Oldenburg",
-			"lat": 53.1412,
-			"lon": 8.2146,
-			"link": "$$DISCORD_GLOBAL$$",
-			"parent_name": "Germany"
-		},
-		{
 			"name": "Edinburgh",
 			"lat": 55.9533,
 			"lon": -3.1883,
@@ -53,13 +46,6 @@
 			"lat": -32.9442,
 			"lon": -60.6505,
 			"link": "$$DISCORD_US$$"
-		},
-		{
-			"name": "Augsburg",
-			"lat": 48.3705,
-			"lon": 10.8978,
-			"link": "$$DISCORD_GERMANY$$",
-			"parent_name": "Germany"
 		},
 		{
 			"name": "Paris",
@@ -118,7 +104,7 @@
 			"name": "Berlin",
 			"lat": 52.52,
 			"lon": 13.405,
-			"link": "https://t.me/+12wemb6BZuQyNjVi",
+			"link": "https://www.pause-ai.de/lokalgruppen",
 			"parent_name": "Germany"
 		},
 		{
@@ -143,10 +129,10 @@
 			"parent_name": "Netherlands"
 		},
 		{
-			"name": "Munich",
-			"lat": 48.1372,
-			"lon": 11.5761,
-			"link": "$$DISCORD_GERMANY$$",
+			"name": "München",
+			"lat": 48.137,
+			"lon": 11.576,
+			"link": "https://www.pause-ai.de/lokalgruppen",
 			"parent_name": "Germany"
 		},
 		{
@@ -191,24 +177,10 @@
 			"parent_name": "Australia"
 		},
 		{
-			"name": "Hamburg",
-			"lat": 53.5511,
-			"lon": 9.9937,
-			"link": "$$DISCORD_GERMANY$$",
-			"parent_name": "Germany"
-		},
-		{
 			"name": "Zurich",
 			"lat": 47.3769,
 			"lon": 8.5417,
 			"link": "$$DISCORD_GLOBAL$$"
-		},
-		{
-			"name": "Osnabrück",
-			"lat": 52.2681,
-			"lon": 8.0566,
-			"link": "$$DISCORD_GERMANY$$",
-			"parent_name": "Germany"
 		},
 		{
 			"name": "Milan",
@@ -275,23 +247,44 @@
 		},
 		{
 			"name": "Halle (Saale)",
-			"lat": 51.4872,
-			"lon": 11.9656,
-			"link": "https://t.me/+tobhhF27liwyMjhi",
-			"parent_name": "Germany"
-		},
-		{
-			"name": "Münster",
-			"lat": 51.9612,
-			"lon": 7.6282,
-			"link": "$$DISCORD_GERMANY$$",
+			"lat": 51.482,
+			"lon": 11.97,
+			"link": "https://www.pause-ai.de/lokalgruppen",
 			"parent_name": "Germany"
 		},
 		{
 			"name": "Freiburg",
-			"lat": 48,
-			"lon": 7.8333,
-			"link": "$$DISCORD_GLOBAL$$",
+			"lat": 47.999,
+			"lon": 7.842,
+			"link": "https://www.pause-ai.de/lokalgruppen",
+			"parent_name": "Germany"
+		},
+		{
+			"name": "Würzburg",
+			"lat": 49.794,
+			"lon": 9.929,
+			"link": "https://www.pause-ai.de/lokalgruppen",
+			"parent_name": "Germany"
+		},
+		{
+			"name": "Bonn",
+			"lat": 50.735,
+			"lon": 7.1,
+			"link": "https://www.pause-ai.de/lokalgruppen",
+			"parent_name": "Germany"
+		},
+		{
+			"name": "Leipzig",
+			"lat": 51.34,
+			"lon": 12.375,
+			"link": "https://www.pause-ai.de/lokalgruppen",
+			"parent_name": "Germany"
+		},
+		{
+			"name": "Nürnberg",
+			"lat": 49.4543,
+			"lon": 11.0746,
+			"link": "https://www.pause-ai.de/lokalgruppen",
 			"parent_name": "Germany"
 		},
 		{
@@ -313,13 +306,6 @@
 			"lon": 147.123323,
 			"link": "$$DISCORD_GLOBAL$$",
 			"parent_name": "Australia"
-		},
-		{
-			"name": "Rostock",
-			"lat": 54.18,
-			"lon": 12.08,
-			"link": "$$DISCORD_GLOBAL$$",
-			"parent_name": "Germany"
 		},
 		{
 			"name": "Manila",
@@ -645,13 +631,6 @@
 			"lat": 23.8103,
 			"lon": 90.4125,
 			"link": "$$DISCORD_GLOBAL$$"
-		},
-		{
-			"name": "Stuttgart-Tübingen",
-			"lat": 48.6487,
-			"lon": 9.1202,
-			"link": "$$DISCORD_GLOBAL$$",
-			"parent_name": "Germany"
 		},
 		{
 			"name": "Potchefstroom",

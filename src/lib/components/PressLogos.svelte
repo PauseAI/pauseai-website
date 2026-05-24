@@ -1,6 +1,7 @@
 <script lang="ts">
 	import Image from '$lib/components/Image.svelte'
 	import LinkWithoutIcon from '$lib/components/LinkWithoutIcon.svelte'
+	import { motion } from 'motion-sv'
 
 	const publications = [
 		{
@@ -34,26 +35,54 @@
 			url: 'https://www.politico.eu/article/microsoft-brussels-elon-musk-anti-ai-protesters-well-five-of-them-descend-on-brussels/'
 		}
 	]
+
+	const containerVariants = {
+		hidden: { opacity: 0 },
+		visible: {
+			opacity: 1,
+			transition: {
+				staggerChildren: 0.1
+			}
+		}
+	}
+
+	const itemVariants = {
+		hidden: { opacity: 0, y: 20 },
+		visible: {
+			opacity: 1,
+			y: 0,
+			transition: { duration: 0.5 }
+		}
+	}
 </script>
 
 <div class="press-section">
 	<div class="container">
 		<h2 class="section-title">Media Coverage</h2>
-		<div class="logos-row">
+		<motion.div
+			class="logos-row"
+			variants={containerVariants}
+			initial="hidden"
+			whileInView="visible"
+			inViewOptions={{ once: true }}
+		>
 			{#each publications as pub}
-				<LinkWithoutIcon href={pub.url} target="_blank" class="pub-link">
-					<!-- Visible on hover (Original Color) -->
-					<Image
-						src={pub.src}
-						alt={pub.name}
-						title={pub.name}
-						class="logo-img logo-{pub.name.toLowerCase().replace(' ', '-')}"
-					/>
-				</LinkWithoutIcon>
+				<motion.div variants={itemVariants}>
+					<LinkWithoutIcon href={pub.url} target="_blank" class="pub-link">
+						<Image
+							src={pub.src}
+							alt={pub.name}
+							title={pub.name}
+							class="logo-img logo-{pub.name.toLowerCase().replace(' ', '-')}"
+						/>
+					</LinkWithoutIcon>
+				</motion.div>
 			{/each}
 
-			<LinkWithoutIcon href="/press" class="see-all">See all coverage →</LinkWithoutIcon>
-		</div>
+			<motion.div variants={itemVariants}>
+				<LinkWithoutIcon href="/press" class="see-all">See all coverage →</LinkWithoutIcon>
+			</motion.div>
+		</motion.div>
 	</div>
 </div>
 
@@ -78,7 +107,7 @@
 		opacity: 0.6; /* Changed from 0.4 to match logos */
 	}
 
-	.logos-row {
+	* :global(.logos-row) {
 		display: flex;
 		flex-wrap: wrap;
 		gap: 2rem 3rem;
@@ -162,7 +191,7 @@
 	}
 
 	@media (max-width: 768px) {
-		.logos-row {
+		* :global(.logos-row) {
 			gap: 1.5rem 2.5rem;
 		}
 

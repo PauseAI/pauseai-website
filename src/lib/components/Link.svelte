@@ -1,23 +1,36 @@
 <script lang="ts">
 	import Link from './LinkWithoutIcon.svelte'
-	import ExternalLink from 'lucide-svelte/icons/external-link'
-	import Mail from 'lucide-svelte/icons/mail'
+	import ExternalLink from '@lucide/svelte/icons/external-link'
+	import Mail from '@lucide/svelte/icons/mail'
 	import type { LinkType } from '$lib/types'
+	import { getLinkType } from '$lib/link'
 
-	export let href: string
-	export let target: string | null = null
-	let className: string = ''
-	export { className as class }
-	export let rel: string | null = null
+	interface Props {
+		href: string
+		target?: string | null
+		class?: string
+		rel?: string | null
+		children?: import('svelte').Snippet
+		[key: string]: unknown
+	}
+
+	let {
+		href,
+		target = null,
+		class: className = '',
+		rel = null,
+		children,
+		...rest
+	}: Props = $props()
 
 	const ICON_PROPS = { size: '0.7em' }
 
 	// Link component determines the type
-	let type: LinkType
+	let type: LinkType = $derived(getLinkType(href))
 </script>
 
-<Link {href} {target} {rel} class={className} bind:type {...$$restProps}>
-	<slot></slot>{#if type != 'internal'}
+<Link {href} {target} {rel} class={className} {type} {...rest}>
+	{@render children?.()}{#if type != 'internal'}
 		<span style="white-space: nowrap">
 			&nbsp;
 			<span class="icon">

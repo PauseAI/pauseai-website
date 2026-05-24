@@ -1,7 +1,15 @@
+<script lang="ts">
+	interface Props {
+		children?: import('svelte').Snippet
+	}
+
+	let { children }: Props = $props()
+</script>
+
 <div class="table-container">
 	<div class="table-border">
 		<table>
-			<slot></slot>
+			{@render children?.()}
 		</table>
 	</div>
 </div>

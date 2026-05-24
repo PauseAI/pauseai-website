@@ -1,18 +1,28 @@
 <script lang="ts">
 	import Button from '$lib/components/Button.svelte'
 	import Propability from './Propability.svelte'
-	export let selected: 'yes' | 'no' | undefined
-	export let probability: number
-	export let yes = false
-	export let showProbabilities: boolean
-	export let onClick: () => void
-	$: current = selected == (yes ? 'yes' : 'no')
+	interface Props {
+		selected: 'yes' | 'no' | undefined
+		probability: number
+		yes?: boolean
+		showProbabilities: boolean
+		onClick: () => void
+	}
+
+	let {
+		selected = $bindable(),
+		probability,
+		yes = false,
+		showProbabilities,
+		onClick
+	}: Props = $props()
+	let current = $derived(selected == (yes ? 'yes' : 'no'))
 </script>
 
 <div class="wrapper {current ? 'selected' : ''}">
 	<Button
 		subtle={selected && !current}
-		on:click={() => {
+		onclick={() => {
 			selected = yes ? 'yes' : 'no'
 			onClick()
 		}}

@@ -28,9 +28,9 @@ export function headersToRecord(headers: Headers): Record<string, string> {
 }
 
 export function asError(...params: Parameters<typeof svelteKitError>): Error {
-	return svelteKitError(...params) as Error
+	return svelteKitError(...params)
 }
 
 export function redirectAsError(...params: Parameters<typeof redirect>): Error {
-	return redirect(...params) as Error
+	return redirect(...params)
 }

@@ -7,7 +7,7 @@ description: Educational resources (videos, articles, books) about AI risks and 
 import NewsletterSignup from '$lib/components/NewsletterSignup.svelte';
 import IconBullet from '$lib/components/IconBullet.svelte'
 import * as m from '$lib/paraglide/messages'
-import { CirclePause, CircleQuestionMark, Cog, Earth, Footprints, MessageSquareQuote, Skull, TriangleAlert } from 'lucide-svelte';
+import { CirclePause, CircleQuestionMark, Cog, Earth, Footprints, MessageSquareQuote, Skull, TriangleAlert } from '@lucide/svelte';
 </script>
 
 <NewsletterSignup />
@@ -62,6 +62,10 @@ import { CirclePause, CircleQuestionMark, Cog, Earth, Footprints, MessageSquareQ
 - [PauseAI Playlist](https://www.youtube.com/playlist?list=PLI46NoubGtIJa0JVCBR-9CayxCOmU0EJt) is a YouTube playlist we compiled, featuring videos ranging from 1 minute to 1 hour in various formats and from diverse sources, and it doesn't require any prior knowledge.
 - [Robert Miles' YouTube](https://www.youtube.com/watch?v=tlS5Y2vm02c&list=PLfHsskCxi_g-c62a_dmsNuHynaXsRQm40) are a great place to start understanding the fundamentals of AI alignment.
 - [LethalIntelligence's YouTube](https://www.youtube.com/channel/UCLwop3J1O7wL-PNWGjQw8fg)
+
+## Documentaries
+
+- [The AI Doc: Or How I Became an Apocaloptimist](https://www.universalpicturesathome.com/movies/the-ai-doc-or-how-i-became-an-apocaloptimist). A documentary exploring AI risks and what it means to be cautiously hopeful about our future.
 
 ## Podcasts
 

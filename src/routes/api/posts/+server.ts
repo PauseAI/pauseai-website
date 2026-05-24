@@ -1,37 +1,31 @@
 import { json } from '@sveltejs/kit'
-import type { FrontmatterMeta, Post } from '$lib/types'
+import type { DescriptiveFrontmatterMeta, DescriptivePost, StrictPost } from '$lib/types'
 import { outcomesMeta } from '../../outcomes/meta'
 import { communitiesMeta } from '../../communities/communities'
-import { meta as pdoomMeta } from '../../pdoom/meta'
 import { meta as quotesMeta } from '../../quotes/meta'
 import { meta as emailBuilderMeta } from '../../email-builder/meta'
 import { meta as statementMeta } from '../../statement/meta'
 import { meta as dearSirDemisMeta } from '../../dear-sir-demis-2025/meta'
 import { meta as aboutMeta } from '../../about/meta'
 import { meta as contactMeta } from '../../contact-us/meta'
-import { meta as pressMeta } from '../../press/meta'
-import { meta as fundingMeta } from '../../funding/meta'
 import type { RequestHandler } from './$types'
 
-export type PostsApiResponse = Post[]
+export type PostsApiResponse = DescriptivePost[]
 
 /** When adding an extra route, make sure to add the metadata here for SEO purposes */
-const hardCodedPages: Post[] = [
+const hardCodedPages: StrictPost[] = [
 	outcomesMeta,
 	communitiesMeta,
-	pdoomMeta,
 	quotesMeta,
 	emailBuilderMeta,
 	statementMeta,
 	dearSirDemisMeta,
 	aboutMeta,
-	contactMeta,
-	pressMeta,
-	fundingMeta
+	contactMeta
 ]
 
 function getPosts() {
-	let posts: Post[] = []
+	let posts: DescriptivePost[] = []
 
 	const paths = import.meta.glob('/src/posts/*.md', { eager: true })
 
@@ -46,8 +40,11 @@ function getPosts() {
 			slug &&
 			!slug.startsWith('debug.')
 		) {
-			const metadata = file.metadata as FrontmatterMeta
-			const post = { ...metadata, slug } satisfies Post
+			const metadata = file.metadata as DescriptiveFrontmatterMeta
+			const post = {
+				...metadata,
+				slug
+			}
 			posts.push(post)
 		}
 	}

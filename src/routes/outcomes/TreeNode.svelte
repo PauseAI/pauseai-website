@@ -1,4 +1,5 @@
 <script lang="ts">
+	import TreeNode from './TreeNode.svelte'
 	import Slider from './Slider.svelte'
 	import Propability from './Propability.svelte'
 	import type { TreeNodeType } from './tree'
@@ -6,16 +7,26 @@
 	import Button from '$lib/components/Button.svelte'
 	import { fade } from 'svelte/transition'
 
-	export let node: TreeNodeType
-	export let parentProbability = 1
-	export let showProbabilities = false
-	export let top: HTMLElement
-	export let intro: boolean
-	let probability: number = node.probability
-	let showInfo = false
-	let selected: 'yes' | 'no' | undefined
-	$: selectedNode = selected == 'yes' ? node.yes : node.no
-	$: selectedProbability = selected == 'yes' ? probability : 1 - probability
+	interface Props {
+		node: TreeNodeType
+		parentProbability?: number
+		showProbabilities?: boolean
+		top: HTMLElement
+		intro: boolean
+	}
+
+	let {
+		node,
+		parentProbability = 1,
+		showProbabilities = $bindable(false),
+		top,
+		intro = $bindable()
+	}: Props = $props()
+	let probability: number = $derived(node.probability)
+	let showInfo = $state(false)
+	let selected: 'yes' | 'no' | undefined = $state()
+	let selectedNode = $derived(selected == 'yes' ? node.yes : node.no)
+	let selectedProbability = $derived(selected == 'yes' ? probability : 1 - probability)
 
 	const scrollToTop = () => {
 		setTimeout(() => {
@@ -23,7 +34,7 @@
 		}, 10)
 	}
 
-	let child: HTMLElement
+	let child: HTMLElement | undefined = $state()
 	const scrollToNextChild = () => {
 		setTimeout(() => {
 			if (child) {
@@ -38,7 +49,7 @@
 		<h2>
 			{node.text}
 		</h2>
-		<Button subtle on:click={() => (showInfo = !showInfo)}>Info</Button>
+		<Button subtle onclick={() => (showInfo = !showInfo)}>Info</Button>
 	</div>
 
 	{#if showInfo}
@@ -55,10 +66,10 @@
 		{#if showProbabilities}
 			<Slider bind:probability />
 			<!-- {#if probability !== node.probability && showInfo}
-				<Button subtle on:click={() => (probability = node.probability)}>Reset</Button>
+				<Button subtle onclick={() => (probability = node.probability)}>Reset</Button>
 			{/if} -->
 		{:else}
-			<!-- <Button subtle on:click={() => (showProbabilities = !showProbabilities)}>
+			<!-- <Button subtle onclick={() => (showProbabilities = !showProbabilities)}>
 				<Propability {probability} /> chance
 			</Button> -->
 		{/if}
@@ -83,11 +94,11 @@
 		{#key selectedNode.text}
 			<div class="child" in:fade={{ duration: 200 }} bind:this={child}>
 				{#if selectedNode.type == 'question'}
-					<svelte:self
+					<TreeNode
 						node={selectedNode}
 						parentProbability={parentProbability * selectedProbability}
+						{top}
 						bind:showProbabilities
-						bind:top
 						bind:intro
 					/>
 				{:else}
@@ -112,7 +123,7 @@
 					<div class="buttons">
 						<!--
 						<Button
-							on:click={() => {
+							onclick={() => {
 								showProbabilities = !showProbabilities
 								scrollToTop()
 							}}
@@ -121,7 +132,7 @@
 						</Button>-->
 						<Button
 							subtle
-							on:click={() => {
+							onclick={() => {
 								intro = true
 								scrollToTop()
 							}}>Restart</Button

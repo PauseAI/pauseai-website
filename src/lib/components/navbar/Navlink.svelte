@@ -2,24 +2,39 @@
 	import WideNavlink from './wide/WideNavlink.svelte'
 	import NarrowNavlink from './narrow/NarrowNavlink.svelte'
 
-	export let href: string | undefined = undefined
-	export let c2a = false
-	export let ariaLabel: string | undefined = undefined
-	export let inverted = false
-	export let first = false
-	export let narrow = false
-	export let active = false
-	export let external = false
+	interface Props {
+		href?: string
+		c2a?: boolean
+		ariaLabel?: string
+		inverted?: boolean
+		first?: boolean
+		narrow?: boolean
+		active?: boolean
+		external?: boolean
+		children?: import('svelte').Snippet
+	}
+
+	let {
+		href,
+		c2a = false,
+		ariaLabel,
+		inverted = false,
+		first = false,
+		narrow = false,
+		active = false,
+		external = false,
+		children
+	}: Props = $props()
 </script>
 
 <span class="wide-navlink">
 	<WideNavlink {href} {c2a} {ariaLabel} {inverted} {first} {narrow} {active} {external}>
-		<slot></slot>
+		{@render children?.()}
 	</WideNavlink>
 </span>
 <span class="narrow-navlink">
 	<NarrowNavlink {href} {c2a} {ariaLabel} {inverted} {first} {narrow} {active} {external}>
-		<slot></slot>
+		{@render children?.()}
 	</NarrowNavlink>
 </span>
 

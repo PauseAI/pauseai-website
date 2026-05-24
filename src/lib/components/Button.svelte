@@ -1,10 +1,16 @@
 <script lang="ts">
-	export let subtle = false
-	export let disabled = false
+	interface Props {
+		subtle?: boolean
+		disabled?: boolean
+		onclick?: (event: MouseEvent) => void
+		children?: import('svelte').Snippet
+	}
+
+	let { subtle = false, disabled = false, onclick, children }: Props = $props()
 </script>
 
-<button on:click class:subtle class:disabled>
-	<slot></slot>
+<button {onclick} class:subtle class:disabled>
+	{@render children?.()}
 </button>
 
 <style>

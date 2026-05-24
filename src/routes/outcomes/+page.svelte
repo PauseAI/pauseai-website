@@ -5,23 +5,23 @@
 	import { outcomesMeta } from './meta'
 	import PostMeta from '$lib/components/PostMeta.svelte'
 
-	let intro = true
-	let showProbabilities = false
-	let top: HTMLElement
+	let intro = $state(true)
+	let showProbabilities = $state(false)
+	let top: HTMLElement | undefined = $state()
 	let { title, description, date } = outcomesMeta
 </script>
 
 <PostMeta {title} {description} {date} />
 
 <div class="header">
-	<button class="reset-button" on:click={() => (intro = true)} bind:this={top}>
+	<button class="reset-button" onclick={() => (intro = true)} bind:this={top}>
 		<h1>{title}</h1>
 	</button>
 	{#if !intro}
 		<div class="headerbuttons">
-			<Button subtle on:click={() => (intro = true)}>Restart</Button>
+			<Button subtle onclick={() => (intro = true)}>Restart</Button>
 			<!--
-			<Button subtle on:click={() => (showProbabilities = !showProbabilities)}
+			<Button subtle onclick={() => (showProbabilities = !showProbabilities)}
 				>{showProbabilities ? 'Hide' : 'Show'} probabilities</Button> 
 			-->
 		</div>
@@ -36,14 +36,14 @@
 	</p>
 	<div class="wrapper">
 		<Button
-			on:click={() => {
+			onclick={() => {
 				intro = false
 				showProbabilities = false
 			}}>Start</Button
 		>
 	</div>
 {:else}
-	<TreeNode node={tree} bind:showProbabilities bind:top bind:intro />
+	<TreeNode node={tree} {top} bind:showProbabilities bind:intro />
 {/if}
 
 <style>

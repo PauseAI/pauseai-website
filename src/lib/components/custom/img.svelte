@@ -1,8 +1,12 @@
 <script lang="ts">
 	import Image from '../Image.svelte'
 
-	export let src: string
-	export let alt: string
+	interface Props {
+		src: string
+		alt: string
+	}
+
+	let { src, alt }: Props = $props()
 </script>
 
 <Image {src} {alt} />
