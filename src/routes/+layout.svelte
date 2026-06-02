@@ -43,6 +43,40 @@
 	let hero = $derived(deLocalizeHref(page.url.pathname) === '/')
 	let embed = $derived(page.route.id?.startsWith('/embed/') ?? false)
 
+	// Homepage hero: size the orange band behind the menu so the photo starts on a
+	// clean edge just below it — one row on desktop, wrapped rows on mobile. We
+	// measure the actual menu content (logo + links) and leave equal orange above
+	// and below it, so the menu is perfectly vertically centred in the band.
+	let heroSection: HTMLDivElement | undefined = $state()
+	$effect(() => {
+		const el = heroSection
+		if (!el) return
+		const navs = Array.from(el.querySelectorAll('nav')) as HTMLElement[]
+		if (!navs.length) return
+		const update = () => {
+			const nav = navs.find((n) => n.offsetHeight > 0)
+			if (!nav) return
+			const navTop = nav.getBoundingClientRect().top
+			let top = Infinity
+			let bottom = -Infinity
+			for (const child of Array.from(nav.children) as HTMLElement[]) {
+				const r = child.getBoundingClientRect()
+				if (r.height === 0) continue
+				top = Math.min(top, r.top)
+				bottom = Math.max(bottom, r.bottom)
+			}
+			if (!Number.isFinite(top)) return
+			const topGap = top - navTop
+			// band = orange-above + content + orange-below, with both gaps == topGap
+			const band = 2 * topGap + (bottom - top)
+			el.style.setProperty('--menu-orange', `${Math.round(band)}px`)
+		}
+		update()
+		const ro = new ResizeObserver(update)
+		navs.forEach((n) => ro.observe(n))
+		return () => ro.disconnect()
+	})
+
 	onMount(async () => {
 		document.documentElement.removeAttribute('data-waiting')
 
@@ -177,7 +211,7 @@
 		</Banner>
 
 		{#if hero}
-			<div class="hero-section">
+			<div class="hero-section" bind:this={heroSection}>
 				<Hero />
 				<Header inverted />
 			</div>
@@ -272,6 +306,14 @@
 
 	.hero-section {
 		position: relative;
+		/* SSR / pre-hydration fallback; refined to the exact nav height by JS. */
+		--menu-orange: 128px;
+	}
+
+	@media (max-width: 600px) {
+		.hero-section {
+			--menu-orange: 280px;
+		}
 	}
 
 	.hero-section :global(nav) {
@@ -282,6 +324,9 @@
 		width: min(var(--page-width), 100% - 2 * var(--page-gutter));
 		margin-inline: auto;
 		z-index: 1;
+		/* Tighter, balanced vertical padding behind the menu (was up to 3rem,
+		   which left too much orange above the links). */
+		--vspace: 1.85rem;
 	}
 
 	.layout {
