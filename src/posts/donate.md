@@ -46,10 +46,10 @@ See our [roadmap](/roadmap) for more details.
 
 This is **probably the cheapest way** to transfer money to us.
 
-- IBAN: NL31BUNQ2109903155
-- BIC/SWIFT: BUNQNL2AXXX
+- IBAN: NL08INGB0120125161
+- BIC/SWIFT: INGBNL2A
 - Name: Stichting PauseAI
-- Bank Address: Basisweg 32, Amsterdam, the Netherlands
+- Bank Address: ING Bank N.V., Foreign Operations, PO Box 1800, 1000 BV Amsterdam, Amsterdam, the Netherlands
 
 ## [Bunq / SoFort](https://bunq.me/pauseai)
 
