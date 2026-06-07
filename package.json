@@ -54,7 +54,7 @@
 		"eslint-plugin-svelte": "^3.19.0",
 		"globals": "^17.6.0",
 		"globby": "^16.2.0",
-		"knip": "^6.16.0",
+		"knip": "^6.16.1",
 		"lefthook": "^2.1.9",
 		"mdsvex": "^0.12.7",
 		"minimatch": "^10.2.5",
