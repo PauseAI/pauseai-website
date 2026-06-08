@@ -99,7 +99,7 @@
 	<div class="input-section">
 		<div class="input-group">
 			<div class="input-field">
-				<label for="name-input">Name</label>
+				<label for="name-input">Your Name</label>
 				<input
 					id="name-input"
 					type="text"
@@ -112,7 +112,7 @@
 				/>
 			</div>
 			<div class="input-field">
-				<label for="postcode-input">Postcode</label>
+				<label for="postcode-input">Your Postcode</label>
 				<input
 					id="postcode-input"
 					type="text"
