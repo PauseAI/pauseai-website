@@ -34,3 +34,4 @@ CLAUDE.md
 .env.sentry-build-plugin
 
 .prettierignore
+.playwright-mcp/
