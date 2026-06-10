@@ -50,7 +50,6 @@
 
 <style>
 	.hero {
-		position: relative;
 		flex: 1;
 		isolation: isolate;
 		display: flex;
@@ -67,7 +66,7 @@
 		min-height: 240px;
 		overflow: hidden;
 		/* Solid orange while the photo loads, matching the menu band above. */
-		background-color: #ff9416;
+		background-color: var(--hero-orange);
 		color: white;
 	}
 

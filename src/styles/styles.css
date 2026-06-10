@@ -14,6 +14,7 @@ html {
 
 	/* Colors */
 	--t-color-main: #f68b1e; /* Default main color - saturated orange */
+	--hero-orange: #ff9416; /* Home hero: menu band + photo-loading backdrop must match */
 
 	/* dark */
 	--brand-dark: #f68b1e;

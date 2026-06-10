@@ -5,6 +5,7 @@ import dotenv from 'dotenv'
 import { FontaineTransform } from 'fontaine'
 import fs from 'fs'
 import path from 'path'
+import discardDuplicates from 'postcss-discard-duplicates'
 import { defineConfig } from 'vite'
 import lucidePreprocess from 'vite-plugin-lucide-preprocess'
 import { sentryVitePlugin } from '@sentry/vite-plugin'
@@ -51,6 +52,14 @@ export default defineConfig(() => {
 			fs: {
 				// Allow serving files from l10n-cage directory
 				allow: [MARKDOWN_L10NS]
+			}
+		},
+
+		css: {
+			// Fontaine generates one fallback @font-face per src URL × unicode-range
+			// subset, which are metric-identical copies; collapse them.
+			postcss: {
+				plugins: [discardDuplicates()]
 			}
 		},
 

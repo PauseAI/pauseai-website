@@ -62,6 +62,7 @@
 		"minimist": "^1.2.8",
 		"npm-run-all2": "^8.0.4",
 		"p-queue": "^9.3.0",
+		"postcss-discard-duplicates": "^8.0.0",
 		"postcss-html": "^1.8.1",
 		"prettier": "^3.8.3",
 		"prettier-plugin-svelte": "^3.5.2",

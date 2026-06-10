@@ -273,21 +273,20 @@
 	}
 
 	/* Orange band behind the menu. The nav sits in normal document flow, so the
-	   band is exactly as tall as the menu content — in every locale and at every
-	   viewport width, with no measurement or hardcoded heights. */
+	   band is exactly as tall as the menu content. */
 	.menu-band {
-		background-color: #ff9416;
+		background-color: var(--hero-orange);
+		/* Paint above the .hero sibling so the language-switcher dropdown,
+		   which opens downward past the band, isn't covered by it. */
+		position: relative;
+		z-index: 1;
 	}
 
 	.menu-band :global(nav) {
 		width: min(var(--page-width), 100% - 2 * var(--page-gutter));
 		margin-inline: auto;
-		/* Tighter, balanced vertical padding behind the menu (was up to 3rem,
-		   which left too much orange above the links). The bottom padding is reduced
-		   by the 0.25rem wrap margin the nav's children carry, so the menu sits
-		   optically centred in the band. */
+		/* Tighter vertical padding than the component's responsive default. */
 		--vspace: 1.85rem;
-		padding-block: var(--vspace) calc(var(--vspace) - 0.25rem);
 	}
 
 	.layout {
