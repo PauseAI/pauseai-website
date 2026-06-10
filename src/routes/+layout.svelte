@@ -272,10 +272,6 @@
 		flex-direction: column;
 	}
 
-	.hero-section {
-		position: relative;
-	}
-
 	/* Orange band behind the menu. The nav sits in normal document flow, so the
 	   band is exactly as tall as the menu content — in every locale and at every
 	   viewport width, with no measurement or hardcoded heights. */
@@ -287,8 +283,11 @@
 		width: min(var(--page-width), 100% - 2 * var(--page-gutter));
 		margin-inline: auto;
 		/* Tighter, balanced vertical padding behind the menu (was up to 3rem,
-		   which left too much orange above the links). */
+		   which left too much orange above the links). The bottom padding is reduced
+		   by the 0.25rem wrap margin the nav's children carry, so the menu sits
+		   optically centred in the band. */
 		--vspace: 1.85rem;
+		padding-block: var(--vspace) calc(var(--vspace) - 0.25rem);
 	}
 
 	.layout {

@@ -51,10 +51,7 @@
 <style>
 	.hero {
 		position: relative;
-		width: 100vw;
 		flex: 1;
-		left: 50%;
-		transform: translateX(-50%);
 		isolation: isolate;
 		display: flex;
 		flex-direction: column;
