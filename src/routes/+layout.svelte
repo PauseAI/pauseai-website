@@ -43,40 +43,6 @@
 	let hero = $derived(deLocalizeHref(page.url.pathname) === '/')
 	let embed = $derived(page.route.id?.startsWith('/embed/') ?? false)
 
-	// Homepage hero: size the orange band behind the menu so the photo starts on a
-	// clean edge just below it — one row on desktop, wrapped rows on mobile. We
-	// measure the actual menu content (logo + links) and leave equal orange above
-	// and below it, so the menu is perfectly vertically centred in the band.
-	let heroSection: HTMLDivElement | undefined = $state()
-	$effect(() => {
-		const el = heroSection
-		if (!el) return
-		const navs = Array.from(el.querySelectorAll('nav')) as HTMLElement[]
-		if (!navs.length) return
-		const update = () => {
-			const nav = navs.find((n) => n.offsetHeight > 0)
-			if (!nav) return
-			const navTop = nav.getBoundingClientRect().top
-			let top = Infinity
-			let bottom = -Infinity
-			for (const child of Array.from(nav.children) as HTMLElement[]) {
-				const r = child.getBoundingClientRect()
-				if (r.height === 0) continue
-				top = Math.min(top, r.top)
-				bottom = Math.max(bottom, r.bottom)
-			}
-			if (!Number.isFinite(top)) return
-			const topGap = top - navTop
-			// band = orange-above + content + orange-below, with both gaps == topGap
-			const band = 2 * topGap + (bottom - top)
-			el.style.setProperty('--menu-orange', `${Math.round(band)}px`)
-		}
-		update()
-		const ro = new ResizeObserver(update)
-		navs.forEach((n) => ro.observe(n))
-		return () => ro.disconnect()
-	})
-
 	onMount(async () => {
 		document.documentElement.removeAttribute('data-waiting')
 
@@ -211,9 +177,11 @@
 		</Banner>
 
 		{#if hero}
-			<div class="hero-section" bind:this={heroSection}>
+			<div class="hero-section">
+				<div class="menu-band">
+					<Header inverted />
+				</div>
 				<Hero />
-				<Header inverted />
 			</div>
 		{/if}
 	</div>
@@ -306,32 +274,18 @@
 
 	.hero-section {
 		position: relative;
-		/* SSR / pre-hydration fallback; refined to the exact nav height by JS.
-		   Matches the measured band (for English nav labels) at each menu-wrap
-		   breakpoint, so the JS refinement doesn't visibly move the layout. */
-		--menu-orange: 142px;
 	}
 
-	@media (max-width: 825px) {
-		.hero-section {
-			--menu-orange: 180px;
-		}
+	/* Orange band behind the menu. The nav sits in normal document flow, so the
+	   band is exactly as tall as the menu content — in every locale and at every
+	   viewport width, with no measurement or hardcoded heights. */
+	.menu-band {
+		background-color: #ff9416;
 	}
 
-	@media (max-width: 600px) {
-		.hero-section {
-			--menu-orange: 213px;
-		}
-	}
-
-	.hero-section :global(nav) {
-		position: absolute;
-		top: 0;
-		left: 0;
-		right: 0;
+	.menu-band :global(nav) {
 		width: min(var(--page-width), 100% - 2 * var(--page-gutter));
 		margin-inline: auto;
-		z-index: 1;
 		/* Tighter, balanced vertical padding behind the menu (was up to 3rem,
 		   which left too much orange above the links). */
 		--vspace: 1.85rem;
