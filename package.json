@@ -52,6 +52,7 @@
 		"eslint-config-prettier": "^10.1.8",
 		"eslint-formatter-gha": "^2.0.1",
 		"eslint-plugin-svelte": "^3.19.0",
+		"fontaine": "^0.8.0",
 		"globals": "^17.6.0",
 		"globby": "^16.2.0",
 		"knip": "^6.16.1",

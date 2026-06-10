@@ -306,13 +306,21 @@
 
 	.hero-section {
 		position: relative;
-		/* SSR / pre-hydration fallback; refined to the exact nav height by JS. */
-		--menu-orange: 128px;
+		/* SSR / pre-hydration fallback; refined to the exact nav height by JS.
+		   Matches the measured band (for English nav labels) at each menu-wrap
+		   breakpoint, so the JS refinement doesn't visibly move the layout. */
+		--menu-orange: 142px;
+	}
+
+	@media (max-width: 825px) {
+		.hero-section {
+			--menu-orange: 180px;
+		}
 	}
 
 	@media (max-width: 600px) {
 		.hero-section {
-			--menu-orange: 280px;
+			--menu-orange: 213px;
 		}
 	}
 

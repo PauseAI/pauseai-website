@@ -68,7 +68,7 @@
 		   guarantees enough photo + headline room below the menu band (whose height,
 		   --menu-orange, is set by the layout to match the actual nav height). */
 		flex: 1;
-		min-height: calc(var(--menu-orange, 128px) + 240px);
+		min-height: calc(var(--menu-orange, 142px) + 240px);
 		overflow: hidden;
 		/* Solid orange behind the menu (like the previous hero); the photo starts
 		   on a clean edge just below it. */
@@ -78,7 +78,7 @@
 
 	.slogan-photo {
 		position: absolute;
-		inset: var(--menu-orange, 128px) 0 0 0;
+		inset: var(--menu-orange, 142px) 0 0 0;
 		pointer-events: none;
 		display: block;
 	}
@@ -95,7 +95,7 @@
 	   crowd and the PAUSE AI banner stay visible. */
 	.slogan-scrim {
 		position: absolute;
-		inset: var(--menu-orange, 128px) 0 0 0;
+		inset: var(--menu-orange, 142px) 0 0 0;
 		background:
 			linear-gradient(
 				to bottom,
@@ -112,7 +112,7 @@
 		width: 100%;
 		/* Top padding clears the orange menu band so the headline always sits
 		   cleanly on the photo, on any screen height. */
-		padding-block: calc(var(--menu-orange, 128px) + 1.75rem) 3rem;
+		padding-block: calc(var(--menu-orange, 142px) + 1.75rem) 3rem;
 		padding-inline: clamp(1.5rem, 20vw, 18rem);
 	}
 	.slogan-inner h1 {
@@ -240,10 +240,10 @@
 	/* ---------- RESPONSIVE ---------- */
 	@media (max-width: 850px) {
 		.slogan {
-			min-height: calc(var(--menu-orange, 280px) + 200px);
+			min-height: calc(var(--menu-orange, 213px) + 200px);
 		}
 		.slogan-inner {
-			padding: calc(var(--menu-orange, 280px) + 1.25rem) 1.5rem 2.25rem;
+			padding: calc(var(--menu-orange, 213px) + 1.25rem) 1.5rem 2.25rem;
 		}
 		.slogan-inner h1 {
 			font-size: clamp(2.25rem, 10vw, 3rem);

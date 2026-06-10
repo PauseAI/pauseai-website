@@ -2,6 +2,7 @@ import { enhancedImages } from '@sveltejs/enhanced-img'
 import { sveltekit } from '@sveltejs/kit/vite'
 import { execSync } from 'child_process'
 import dotenv from 'dotenv'
+import { FontaineTransform } from 'fontaine'
 import fs from 'fs'
 import path from 'path'
 import { defineConfig } from 'vite'
@@ -70,6 +71,16 @@ export default defineConfig(() => {
 		plugins: [
 			lucidePreprocess(),
 			enhancedImages(),
+			// Generates "<font> fallback" @font-face rules whose metrics match the webfonts,
+			// so text doesn't shift when they swap in (see --font-* variables in styles.css).
+			// Each list needs fonts that resolve via src:local() across platforms —
+			// Tinos/Arimo/Noto cover Linux, where Times/Georgia/Arial don't exist.
+			FontaineTransform.vite({
+				fallbacks: {
+					'Roboto Slab': ['Georgia', 'Times New Roman', 'Tinos', 'Noto Serif'],
+					'Saira Condensed': ['Arial', 'Arimo', 'Noto Sans']
+				}
+			}),
 			sveltekit(),
 			!isDev(process.env) &&
 			process.env.SENTRY_AUTH_TOKEN &&
