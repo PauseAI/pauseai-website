@@ -62,7 +62,7 @@
 		"npm-run-all2": "^8.0.4",
 		"p-queue": "^9.3.0",
 		"postcss-html": "^1.8.1",
-		"prettier": "^3.8.3",
+		"prettier": "^3.8.4",
 		"prettier-plugin-svelte": "^3.5.2",
 		"remark-heading-id": "^1.0.1",
 		"remove-markdown": "^0.6.4",
