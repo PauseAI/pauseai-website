@@ -25,9 +25,9 @@
 
 Would you be willing to sign this open letter supporting legislation to hold AI companies accountable when their models cause severe harm?
 
-I’m a resident of ${mp.constituency} and a supporter of **PauseAI**, a civic movement focused on minimising the risks of advanced AI. I am very concerned that AI development is racing ahead without adequate protection for the public.
+I’m a resident of ${mp.constituency} and a supporter of **PauseAI**, a civic movement focused on averting the risks of advanced AI. I am very concerned that AI development is racing ahead without adequate protection for the public.
 
-**Existing UK law does not reliably hold AI developers liable for damage or deaths caused by their models**, even when the danger is predictable, severe and uniquely enabled by the model. To ensure our safety, the incentives of AI developers must be aligned with the public interest.
+**Existing UK law does not reliably hold AI developers liable for damage or deaths caused by their models**, even when the danger is predictable, preventable and uniquely enabled by an AI model. To ensure our safety, the incentives of AI developers must be aligned with the public interest.
 
 Next steps
  - 30-min call. Let me know what time would work for you.
