@@ -9,6 +9,10 @@
 	interface Props {
 		item?: NewsItem
 		loading?: boolean
+		/**
+		 * Passed by the parent layout so responsive images download a variant close to the
+		 * card's rendered width instead of the image component's broad default.
+		 */
 		imageSizes?: string
 		id?: string
 	}
