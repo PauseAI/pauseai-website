@@ -1,9 +1,9 @@
-import { env } from '$env/dynamic/private'
 import { fail } from '@sveltejs/kit'
 import type { FieldSet } from 'airtable'
-import type { Actions, PageServerLoad } from './$types'
+import type { Actions } from './$types'
 import type { NationalGroupsApiResponse } from '$api/national-groups/+server.js'
 import { createRecord } from '$lib/airtable'
+import { isOnboardingLive } from '$lib/server/onboarding'
 import { recordStubSubmission } from '$lib/server/onboarding-stub'
 import { subscribeToSubstackNewsletter } from '$lib/server/substack'
 import {
@@ -24,11 +24,6 @@ export const prerender = false
 // table "Members".
 const AIRTABLE_BASE_ID = 'appWPTGqZmUcs3NWu'
 const MEMBERS_TABLE_ID = 'tblL1icZBhTV1gQ9o'
-
-// Stubbed by default for testing: would-be writes are captured for inspection at
-// /onboarding/stub. Set ONBOARDING_LIVE=true to write to Airtable and Substack for
-// real (Phase 2/3 launch; requires the Airtable fresh-fields batch to be done).
-const isLive = () => env.ONBOARDING_LIVE === 'true'
 
 const STORED_LANGUAGES = LANGUAGES.map((l) => l.stored)
 
@@ -63,10 +58,6 @@ async function lookupChapter(
 		console.error('Chapter lookup failed:', error)
 		return null
 	}
-}
-
-export const load: PageServerLoad = () => {
-	return { live: isLive() }
 }
 
 export const actions: Actions = {
@@ -165,7 +156,7 @@ export const actions: Actions = {
 		// Airtable process (plan decision 6).
 		const chapter = await lookupChapter(fetch, country)
 
-		if (isLive()) {
+		if (isOnboardingLive()) {
 			await createRecord(AIRTABLE_BASE_ID, MEMBERS_TABLE_ID, fields)
 			if (newsletter) {
 				await subscribeToSubstackNewsletter(email)

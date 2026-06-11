@@ -1,7 +1,9 @@
 <script lang="ts">
+	import { onMount } from 'svelte'
 	import { enhance } from '$app/forms'
 	import type { SubmitFunction } from '@sveltejs/kit'
 	import type { NationalGroupsApiResponse } from '$api/national-groups/+server.js'
+	import type { OnboardingModeApiResponse } from '$api/onboarding-mode/+server.js'
 	import { toast } from 'svelte-french-toast'
 	import Link from '$lib/components/Link.svelte'
 	import LinkWithoutIcon from '$lib/components/LinkWithoutIcon.svelte'
@@ -52,20 +54,25 @@
 
 	let {
 		initialEmail = '',
-		initialCountry = '',
-		live
-	}: { initialEmail?: string; initialCountry?: string; live?: boolean } = $props()
+		initialCountry = ''
+	}: { initialEmail?: string; initialCountry?: string } = $props()
 
-	// Surface stub/live mode in the browser console when the form loads.
-	// `live` is only known on routes with the server load (the /join markdown
-	// page is prerendered, so it can't read the runtime env).
-	$effect(() => {
-		if (live === undefined) return
-		console.log(
-			live
-				? 'Onboarding form: LIVE mode — submissions write to Airtable.'
-				: '🧪 Onboarding form: STUB mode — submissions are captured at /embed/onboarding-form/stub, no Airtable write or Substack subscription. Set ONBOARDING_LIVE=true to go live.'
-		)
+	// Surface stub/live mode in the browser console when the form loads. The
+	// pages embedding the form can be prerendered (e.g. /join), so the runtime
+	// env isn't available at render time — ask the server instead.
+	onMount(async () => {
+		try {
+			const response = await fetch('/api/onboarding-mode')
+			if (!response.ok) return
+			const { live } = (await response.json()) as OnboardingModeApiResponse
+			console.log(
+				live
+					? 'Onboarding form: LIVE mode — submissions write to Airtable.'
+					: '🧪 Onboarding form: STUB mode — submissions are captured at /embed/onboarding-form/stub, no Airtable write or Substack subscription. Set ONBOARDING_LIVE=true to go live.'
+			)
+		} catch {
+			// Mode logging is best-effort; never break the form over it.
+		}
 	})
 
 	let step: 1 | 2 | 3 | 4 = $state(1)

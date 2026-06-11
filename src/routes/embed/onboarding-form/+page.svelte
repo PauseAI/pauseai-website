@@ -3,8 +3,6 @@
 	import OnboardingFlow from '$lib/components/onboarding/OnboardingFlow.svelte'
 	import PostMeta from '$lib/components/PostMeta.svelte'
 
-	let { data } = $props()
-
 	const title = 'Get involved'
 	const description =
 		'Find the highest-impact way for you to help pause the development of superhuman AI.'
@@ -15,7 +13,7 @@
 <PostMeta {title} {description} />
 
 <div class="embed-wrap">
-	<OnboardingFlow {initialCountry} live={data.live} />
+	<OnboardingFlow {initialCountry} />
 </div>
 
 <style>
