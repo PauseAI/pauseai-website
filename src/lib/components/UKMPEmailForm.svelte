@@ -52,7 +52,7 @@ ${userPostcode.toUpperCase()}`)
  - 30-min call. Let me know what time would work for you.
  - Alternatively, please review the letter and briefing attached and send over any questions or concerns.`
 
-	const VISIT_SENTENCE = `**I will be visiting Parliament on Tuesday June 23rd. Will you meet with me to discuss the letter and your plan for addressing AI risks?**`
+	const VISIT_SENTENCE = `**I will be visiting Parliament on the afternoon of Tuesday June 23rd. Will you meet with me to discuss the letter and your plan for addressing AI risks?**`
 
 	function toggleVisit() {
 		if (attendingVisit) {
