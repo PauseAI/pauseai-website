@@ -25,7 +25,8 @@
 			eager: true,
 			import: 'default',
 			query: {
-				enhanced: true
+				enhanced: true,
+				w: '520;640;800;1280;1920;2560;3840'
 			}
 		}
 	)
