@@ -1,7 +1,7 @@
 <script lang="ts">
 	import Image from '$lib/components/Image.svelte'
 	import LinkWithoutIcon from '$lib/components/LinkWithoutIcon.svelte'
-	import { motion } from 'motion-sv'
+	import { LazyMotion, motion, domAnimation } from 'motion-sv'
 
 	const publications = [
 		{
@@ -59,30 +59,32 @@
 <div class="press-section">
 	<div class="container">
 		<h2 class="section-title">Media Coverage</h2>
-		<motion.div
-			class="logos-row"
-			variants={containerVariants}
-			initial="hidden"
-			whileInView="visible"
-			inViewOptions={{ once: true }}
-		>
-			{#each publications as pub}
-				<motion.div variants={itemVariants}>
-					<LinkWithoutIcon href={pub.url} target="_blank" class="pub-link">
-						<Image
-							src={pub.src}
-							alt={pub.name}
-							title={pub.name}
-							class="logo-img logo-{pub.name.toLowerCase().replace(' ', '-')}"
-						/>
-					</LinkWithoutIcon>
-				</motion.div>
-			{/each}
+		<LazyMotion features={domAnimation}>
+			<motion.div
+				class="logos-row"
+				variants={containerVariants}
+				initial="hidden"
+				whileInView="visible"
+				inViewOptions={{ once: true }}
+			>
+				{#each publications as pub}
+					<motion.div variants={itemVariants}>
+						<LinkWithoutIcon href={pub.url} target="_blank" class="pub-link">
+							<Image
+								src={pub.src}
+								alt={pub.name}
+								title={pub.name}
+								class="logo-img logo-{pub.name.toLowerCase().replace(' ', '-')}"
+							/>
+						</LinkWithoutIcon>
+					</motion.div>
+				{/each}
 
-			<motion.div variants={itemVariants}>
-				<LinkWithoutIcon href="/press" class="see-all">See all coverage →</LinkWithoutIcon>
+				<motion.div variants={itemVariants}>
+					<LinkWithoutIcon href="/press" class="see-all">See all coverage →</LinkWithoutIcon>
+				</motion.div>
 			</motion.div>
-		</motion.div>
+		</LazyMotion>
 	</div>
 </div>
 
