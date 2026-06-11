@@ -19,7 +19,11 @@
 	} from './selfieStore'
 	import Image from '$lib/components/Image.svelte'
 	import { detectAndStoreCollagenUid, hasCollagenUid } from '$lib/collagen'
-	import { env } from '$env/dynamic/public'
+	// Static env: dynamic public env in client code blocks prerendered pages'
+	// hydration on a runtime /_app/env.js fetch (see hooks.client.ts).
+	import * as publicEnv from '$env/static/public'
+
+	const env = publicEnv as Record<string, string | undefined>
 
 	// Page metadata
 	const title = 'Stop Superintelligence'
