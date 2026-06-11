@@ -136,7 +136,12 @@ export const actions: Actions = {
 			fields['Phone'] = getString(data, 'phone')
 			fields['Languages'] = languages
 			fields['Other languages'] = getString(data, 'languages_other')
-			fields['Discovery method of PAI'] = discovery
+			// The post-cleanup Discovery field is a multipleSelects (legacy comma
+			// combos restored losslessly); the form asks single-choice, so write
+			// a one-element array.
+			if (discovery) {
+				fields['Discovery method of PAI'] = [discovery]
+			}
 			fields['Discovery method of PAI (Other)'] = getString(data, 'discovery_specify')
 			fields['Motivation'] = motivations
 			fields['Motivation (Other)'] = getString(data, 'motivations_other')
