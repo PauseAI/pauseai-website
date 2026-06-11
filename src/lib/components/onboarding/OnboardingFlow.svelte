@@ -830,7 +830,7 @@
 				✉️ Email our Organizing Director
 			</LinkWithoutIcon>
 			<p>Please let her know the following:</p>
-			<ul>
+			<ul class="bulleted">
 				<li>Your name</li>
 				<li>Your country of residence</li>
 				<li>A few sentences on why you’d like to become a lead</li>
@@ -1306,6 +1306,19 @@
 	.role-description h3 {
 		font-size: 1.1rem;
 		margin-bottom: 0.25rem;
+	}
+
+	/* global reset strips list-style; restore bullets for content lists */
+	.role-description ul,
+	ul.bulleted {
+		list-style: disc;
+		padding-left: 1.5rem;
+		margin: 0.5rem 0 1rem;
+	}
+
+	.role-description li,
+	ul.bulleted li {
+		margin: 0.25rem 0;
 	}
 
 	.next-step {
