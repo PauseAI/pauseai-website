@@ -210,7 +210,6 @@
 		<input type="hidden" {name} value={single} />
 	{/if}
 	{#if open}
-		<!-- svelte-ignore a11y_no_noninteractive_element_interactions -->
 		<ul
 			id="{id}-listbox"
 			class="panel"
