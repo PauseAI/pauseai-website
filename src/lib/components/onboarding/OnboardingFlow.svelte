@@ -52,8 +52,21 @@
 
 	let {
 		initialEmail = '',
-		initialCountry = ''
-	}: { initialEmail?: string; initialCountry?: string } = $props()
+		initialCountry = '',
+		live
+	}: { initialEmail?: string; initialCountry?: string; live?: boolean } = $props()
+
+	// Surface stub/live mode in the browser console when the form loads.
+	// `live` is only known on routes with the server load (the /join markdown
+	// page is prerendered, so it can't read the runtime env).
+	$effect(() => {
+		if (live === undefined) return
+		console.log(
+			live
+				? 'Onboarding form: LIVE mode — submissions write to Airtable.'
+				: '🧪 Onboarding form: STUB mode — submissions are captured at /embed/onboarding-form/stub, no Airtable write or Substack subscription. Set ONBOARDING_LIVE=true to go live.'
+		)
+	})
 
 	let step: 1 | 2 | 3 | 4 = $state(1)
 	let flowEl: HTMLDivElement | undefined = $state()

@@ -1,7 +1,7 @@
 import { env } from '$env/dynamic/private'
 import { fail } from '@sveltejs/kit'
 import type { FieldSet } from 'airtable'
-import type { Actions } from './$types'
+import type { Actions, PageServerLoad } from './$types'
 import type { NationalGroupsApiResponse } from '$api/national-groups/+server.js'
 import { createRecord } from '$lib/airtable'
 import { recordStubSubmission } from '$lib/server/onboarding-stub'
@@ -63,6 +63,10 @@ async function lookupChapter(
 		console.error('Chapter lookup failed:', error)
 		return null
 	}
+}
+
+export const load: PageServerLoad = () => {
+	return { live: isLive() }
 }
 
 export const actions: Actions = {
