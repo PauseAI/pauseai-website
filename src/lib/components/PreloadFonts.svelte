@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { browser } from '$app/environment'
+
 	interface Props {
 		urls: string[]
 	}
@@ -7,7 +9,9 @@
 </script>
 
 <svelte:head>
-	{#each urls as url}
-		<link rel="preload" href={url} as="font" type="font/woff2" crossorigin="anonymous" />
-	{/each}
+	{#if !browser}
+		{#each urls as url}
+			<link rel="preload" href={url} as="font" type="font/woff2" crossorigin="anonymous" />
+		{/each}
+	{/if}
 </svelte:head>

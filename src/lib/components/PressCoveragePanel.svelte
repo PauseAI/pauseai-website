@@ -10,6 +10,11 @@
 		loading?: boolean
 	}
 
+	// Matches the 1/2/3-column grid below so browsers choose thumbnail-sized
+	// responsive image variants rather than downloading page-width images.
+	const newsCardImageSizes =
+		'(max-width: 500px) calc(100vw - 1rem), (max-width: 850px) calc((100vw - 3rem) / 2), 13rem'
+
 	let { coverage = [], typeOrder = [], outletOrder = [], loading = false }: Props = $props()
 
 	function toNewsItem(item: PressCoverage): NewsItem {
@@ -75,7 +80,7 @@
 
 		<div class="coverage-cards">
 			{#each filteredCoverage as item (item.id)}
-				<NewsCard id={item.id} item={toNewsItem(item)} />
+				<NewsCard id={item.id} item={toNewsItem(item)} imageSizes={newsCardImageSizes} />
 			{/each}
 		</div>
 	{/if}
