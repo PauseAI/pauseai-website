@@ -56,6 +56,20 @@
 	}: { initialEmail?: string; initialCountry?: string } = $props()
 
 	let step: 1 | 2 | 3 | 4 = $state(1)
+	let flowEl: HTMLDivElement | undefined = $state()
+
+	// Scroll back to the top of the flow on step changes — the volunteer form
+	// is long enough that the next screen would otherwise start mid-page.
+	// Skipped when the top is already in view, so short steps don't jump.
+	let previousStep: 1 | 2 | 3 | 4 = step
+	$effect(() => {
+		if (step !== previousStep) {
+			previousStep = step
+			if (flowEl && flowEl.getBoundingClientRect().top < 0) {
+				flowEl.scrollIntoView({ behavior: 'smooth', block: 'start' })
+			}
+		}
+	})
 	let mode: 'contact' | 'browse' = $state('contact')
 	let intent: IntentKey | null = $state(null)
 	let keepInformed = $state(false)
@@ -303,7 +317,7 @@
 	</div>
 {/snippet}
 
-<div class="onboarding-flow">
+<div class="onboarding-flow" bind:this={flowEl}>
 	{#if mode === 'browse' && !browseSignedUp}
 		<div class="browse-banner">
 			You're browsing without signing up — leave your email below so we can tell you when new
