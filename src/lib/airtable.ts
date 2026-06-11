@@ -101,7 +101,9 @@ export async function createRecord(
 	try {
 		const base = new Airtable({ apiKey }).base(baseId)
 		const table = base(tableId)
-		await table.create([{ fields }])
+		// typecast lets Airtable coerce strings and create missing select
+		// options; callers are expected to validate values before writing.
+		await table.create([{ fields }], { typecast: true })
 		console.log(`Successfully created record in Airtable table ${tableId}`)
 	} catch (error) {
 		console.error(`Error creating Airtable record in ${tableId}:`, error)
