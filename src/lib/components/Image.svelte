@@ -18,8 +18,6 @@
 		class: className = ''
 	}: Props = $props()
 
-	const optimizedResolutions = [320, 640, 800, 1280, 1920, 2560, 3840]
-
 	// Use import.meta.glob to statically analyze all potential static assets
 	const pictureModules = import.meta.glob<Picture>(
 		'../../assets/images/**/*.{avif,heif,gif,jpeg,jpg,png,tiff,webp}',
@@ -28,7 +26,7 @@
 			import: 'default',
 			query: {
 				enhanced: true,
-				w: optimizedResolutions.join(';')
+				w: '520;640;800;1280;1920;2560;3840'
 			}
 		}
 	)
