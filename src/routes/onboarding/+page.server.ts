@@ -1,0 +1,179 @@
+import { env } from '$env/dynamic/private'
+import { fail } from '@sveltejs/kit'
+import type { FieldSet } from 'airtable'
+import type { Actions } from './$types'
+import type { NationalGroupsApiResponse } from '$api/national-groups/+server.js'
+import { createRecord } from '$lib/airtable'
+import { recordStubSubmission } from '$lib/server/onboarding-stub'
+import { subscribeToSubstackNewsletter } from '$lib/server/substack'
+import {
+	COUNTRIES,
+	DISCOVERY_OPTIONS,
+	INTENTS,
+	LANGUAGES,
+	MOTIVATIONS,
+	SIGNUP_SOURCE,
+	SKILLS,
+	WEEKLY_HOURS,
+	type Intent
+} from '$lib/components/onboarding/options'
+
+export const prerender = false
+
+// Write target per the Plan of Action: base "PauseAI Volunteers & Actions",
+// table "Members".
+const AIRTABLE_BASE_ID = 'appWPTGqZmUcs3NWu'
+const MEMBERS_TABLE_ID = 'tblL1icZBhTV1gQ9o'
+
+// Stubbed by default for testing: would-be writes are captured for inspection at
+// /onboarding/stub. Set ONBOARDING_LIVE=true to write to Airtable and Substack for
+// real (Phase 2/3 launch; requires the Airtable fresh-fields batch to be done).
+const isLive = () => env.ONBOARDING_LIVE === 'true'
+
+const STORED_LANGUAGES = LANGUAGES.map((l) => l.stored)
+
+function getString(formData: FormData, field: string): string {
+	const value = formData.get(field)
+	return typeof value === 'string' ? value.trim() : ''
+}
+
+function getStrings(formData: FormData, field: string): string[] {
+	return formData
+		.getAll(field)
+		.filter((value): value is string => typeof value === 'string')
+		.map((value) => value.trim())
+		.filter(Boolean)
+}
+
+function isIntent(value: string): value is Intent {
+	return (INTENTS as readonly string[]).includes(value)
+}
+
+async function lookupChapter(
+	customFetch: typeof fetch,
+	country: string
+): Promise<{ name: string; leader: string } | null> {
+	try {
+		const response = await customFetch('/api/national-groups')
+		if (!response.ok) return null
+		const groups = (await response.json()) as NationalGroupsApiResponse
+		const match = groups.find((group) => group.name.toLowerCase() === country.toLowerCase())
+		return match ? { name: match.name, leader: match.leader } : null
+	} catch (error) {
+		console.error('Chapter lookup failed:', error)
+		return null
+	}
+}
+
+export const actions: Actions = {
+	submit: async ({ request, fetch }) => {
+		const data = await request.formData()
+
+		// Honeypot
+		if (getString(data, 'nickname')) {
+			return { success: true }
+		}
+
+		const fullName = getString(data, 'full_name')
+		const email = getString(data, 'email')
+		const country = getString(data, 'country')
+		const city = getString(data, 'city')
+		const intent = getString(data, 'intent')
+		const mode = getString(data, 'mode') === 'browse' ? 'browse' : 'contact'
+		const newsletter = data.get('newsletter') === 'on'
+
+		if (!fullName || !email || !country || !city) {
+			return fail(400, { message: 'Please fill in your name, email, country and city.' })
+		}
+		if (!/^\S+@\S+\.\S+$/.test(email)) {
+			return fail(400, { message: 'Please enter a valid email address.' })
+		}
+		if (!COUNTRIES.includes(country)) {
+			return fail(400, { message: 'Please select a country from the list.' })
+		}
+		if (!isIntent(intent)) {
+			return fail(400, { message: 'Please choose what brings you here.' })
+		}
+
+		const fields: FieldSet = {
+			'Full name': fullName,
+			Email: email,
+			Country: country,
+			City: city,
+			Intent: intent,
+			'Signup source': SIGNUP_SOURCE,
+			'Email subscription': newsletter
+		}
+
+		if (intent === 'Lead') {
+			fields['Chapter lead interest'] = data.get('chapter_lead_interest') === 'on'
+		}
+
+		if (intent === 'Volunteer') {
+			const languages = getStrings(data, 'languages').filter((l) => STORED_LANGUAGES.includes(l))
+			const motivations = getStrings(data, 'motivations').filter((m) => MOTIVATIONS.includes(m))
+			const skills = getStrings(data, 'skills').filter((s) => SKILLS.includes(s))
+			const discovery = getString(data, 'discovery')
+			const hours = getString(data, 'hours')
+
+			if (!WEEKLY_HOURS.includes(hours)) {
+				return fail(400, { message: 'Please tell us how much time you can commit weekly.' })
+			}
+			if (data.get('agree_privacy') !== 'on' || data.get('agree_volunteer') !== 'on') {
+				return fail(400, {
+					message: 'Please agree to the Privacy Policy and Volunteer Agreement.'
+				})
+			}
+			if (discovery && !DISCOVERY_OPTIONS.includes(discovery)) {
+				return fail(400, { message: 'Please select a valid option for how you found us.' })
+			}
+
+			fields['Discord Username'] = getString(data, 'discord_username')
+			fields['Phone'] = getString(data, 'phone')
+			fields['Languages'] = languages
+			fields['Other languages'] = getString(data, 'languages_other')
+			fields['Discovery method of PAI'] = discovery
+			fields['Discovery method of PAI (Other)'] = getString(data, 'discovery_specify')
+			fields['Motivation'] = motivations
+			fields['Motivation (Other)'] = getString(data, 'motivations_other')
+			fields['Skills & Interests'] = skills
+			fields['Skill & Interests (Other)'] = getString(data, 'skills_other')
+			fields['Projected weekly hours'] = hours
+			fields['Data privacy policy agreed'] = true
+			fields['Volunteer Agreement'] = true
+
+			if (country === 'United States') {
+				fields['Zip code'] = getString(data, 'zip_code')
+			}
+		}
+
+		// Chapter routing is recorded only; notifying the chapter stays a manual
+		// Airtable process (plan decision 6).
+		const chapter = await lookupChapter(fetch, country)
+
+		if (isLive()) {
+			await createRecord(AIRTABLE_BASE_ID, MEMBERS_TABLE_ID, fields)
+			if (newsletter) {
+				await subscribeToSubstackNewsletter(email)
+			}
+			return { success: true }
+		}
+
+		const submission = recordStubSubmission({
+			airtable: {
+				baseId: AIRTABLE_BASE_ID,
+				tableId: MEMBERS_TABLE_ID,
+				tableName: 'Members'
+			},
+			fields,
+			meta: {
+				mode,
+				chapterMatch: chapter,
+				wouldSubscribeToSubstackNewsletter: newsletter,
+				stubbed: 'No Airtable write or Substack subscription was performed.'
+			}
+		})
+
+		return { success: true, submission }
+	}
+}

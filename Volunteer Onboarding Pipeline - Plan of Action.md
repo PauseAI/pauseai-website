@@ -21,7 +21,7 @@ Answers to the former open questions, recorded verbatim-in-substance:
 3. **City — add to Step 1** alongside Country.
 4. **Tally pre-fill field keys — moot.** Pre-fill into Tally no longer happens (native form pre-fills trivially from Step 1 state). Residual task: extract the field list from form `wbGvKe` to use as the spec for the native volunteer form.
 5. **Luma calendar — dropped from scope.** Not relevant to the pipeline; remove the embed from the build.
-6. **Chapter notification — manual in Airtable.** No automation to duplicate, no server-side notification firing. We still do the `(country, city) → chapter` lookup to *record* routing, but notifying the chapter is an Airtable-side manual process. Out of build scope.
+6. **Chapter notification — manual in Airtable.** No automation to duplicate, no server-side notification firing. We still do the `(country, city) → chapter` lookup to _record_ routing, but notifying the chapter is an Airtable-side manual process. Out of build scope.
 7. **Native form + iframe for country sites.** Ideal end-state: pauseai.info exposes the onboarding form embeddable in an iframe with pre-filled country for country-level sites. Switchover is gradual — country sites keep Tally until they opt in. Adds Phase 4 below.
 
 ## Demo walkthrough findings (2026-05-27)
@@ -32,7 +32,7 @@ All paths verified live. Flow matches memo structure. Gaps found between demo an
 - **Tally form not pre-filled.** → Moot: Tally replaced by native form (Decision 2).
 - **City field inconsistent.** Contact Step 1 collects Country only. → Resolved: City added to Step 1 (Decision 3).
 - **Luma slug dead.** `cal-pauseai` 404s. → Resolved: Luma dropped (Decision 5).
-- **Lead Step 4 missing Microgrants link.** The memo (search: *"Learn more about our Microgrants"*) specifies a Microgrants link on the Lead confirmation; absent in demo. Add it.
+- **Lead Step 4 missing Microgrants link.** The memo (search: _"Learn more about our Microgrants"_) specifies a Microgrants link on the Lead confirmation; absent in demo. Add it.
 - **Demo is Next.js + Sentry** (Sentry 403s in console). Confirms full rebuild on SvelteKit, no code reuse from the demo.
 - Confirmed working: adaptive stepper (3 dots A/B, 4 dots C/D), browse skip-Step-2, intent-dependent button label (Submit vs Continue), browse inline-signup validation, Discord + 9 social links on all confirmations, Lead mailto prefill + "contact me" checkbox.
 
@@ -55,9 +55,9 @@ New route `src/routes/onboarding/+page.svelte` (client state machine, modelled o
 
 - State machine: Step 1 basic info → Step 2 intent (4 buttons) → Step 3 conditional (A keep-informed / B act-now / C volunteer / D lead) → Step 4 confirm (C + D only).
 - Step 1 fields: Full name, Email, Country, **City** (Decision 3), newsletter opt-in checkbox (default unchecked, Decision 1), legitimate-interest notice text near email. Country is required and must be a real country — no "Prefer not to say"/opt-out option (2026-06-10).
-- Adaptive stepper: 3 dots (A/B) vs 4 dots (C/D) — memo: *"Stepper / progress indicator"*.
-- Browse mode: Step 1 "act now" button → skip Step 2 → Act-now page with inline "Stay in the loop" block — memo: *"Browse mode (the only path browse users reach)"*. Inline block collects Full Name, Email, Country, City to match Step 1.
-- Strip demo-only chrome — memo: *"Demo-only chrome (remove before launch)"*: top banner, preview note, restart pill, "Start over (demo)" button.
+- Adaptive stepper: 3 dots (A/B) vs 4 dots (C/D) — memo: _"Stepper / progress indicator"_.
+- Browse mode: Step 1 "act now" button → skip Step 2 → Act-now page with inline "Stay in the loop" block — memo: _"Browse mode (the only path browse users reach)"_. Inline block collects Full Name, Email, Country, City to match Step 1.
+- Strip demo-only chrome — memo: _"Demo-only chrome (remove before launch)"_: top banner, preview note, restart pill, "Start over (demo)" button.
 - **Volunteer path C — native form** (replaces Tally embed): replicate the fields of Tally form `wbGvKe` per **`Tally wbGvKe Field Spec.md`** (extracted 2026-06-10): Discord username, phone, languages (31 options, English pre-selected; displayed in each language's own name, stored as English canonical values — display→value table in the spec file, finding 10), skills & interests (16), motivation (15), discovery method (collapse the `Event`/`Event/Presentation` dupe), weekly hours (6 options — 2026-06-10: Tally's `10+ hours` split into `10-20 hours` and `20+ hours`, plus escape hatch `None — I'd rather support in other ways`; picking it submits normally and the confirmation promotes the Donate card — never divert before capturing the record), Privacy Policy + Volunteer Agreement checkboxes, conditional "Please specify" inputs per Tally's triggers (2026-06-10: keep the wider discovery trigger — specify-box on Other, Event/Presentation, News article, and both social-media options, per the spec's conditional-logic table; motivation/skills/languages specify on Other). Specify text → existing `… (Other)` / `Other languages` fields. Public Statement signing + paying-member checkboxes NOT carried over — covered by confirmation action cards. Conditional zip-code field when Country = United States (only — follow-up 5, as in Tally). Pre-fill name/email/country/city from Step 1 state. On submit → advance to Step 4. No Tally postMessage listener needed. Pending: country-list choice (follow-up 6).
 - Lead Step 4: include Microgrants link (demo gap).
 - No Luma embed (Decision 5).
@@ -67,12 +67,12 @@ New route `src/routes/onboarding/+page.svelte` (client state machine, modelled o
 - `+page.server.ts` form action → `createRecord()` into Members; tag `Intent` + `Signup source` = `June 2026 onboarding flow` (all flow submissions). Browse-then-opt-in writes on inline submit. Volunteer path writes the full field set in the same action (single write path — Q2's "intercept Tally" problem disappears).
 - Newsletter checkbox → Substack (reuse NewsletterSignup logic) + set `Email subscription`.
 - Chapter routing: server-side `(country[, city]) → chapter` lookup via national-groups Airtable, recorded on the row if useful. **No notification firing** — chapter notification is manual in Airtable (Decision 6).
-- Lead path D: `mailto:Irina@pauseai.info` prefill + "contact me" flag (memo: *"Email our Organizing Director"*).
+- Lead path D: `mailto:Irina@pauseai.info` prefill + "contact me" flag (memo: _"Email our Organizing Director"_).
 
 ### Phase 3 — test + launch
 
 - Test 4 intents + browse. Verify Airtable writes (incl. native volunteer fields), newsletter opt-in, stepper.
-- Run V1 live 2 weeks → iterate (memo: *"build a V1, test it for two weeks, then iterate"*).
+- Run V1 live 2 weeks → iterate (memo: _"build a V1, test it for two weeks, then iterate"_).
 - Once stable: point `pauseai.info/join` at the new route / retire the Tally embed there.
 
 ### Phase 4 — country-site iframe embed (post-launch, gradual)
@@ -92,15 +92,15 @@ Audited live schema of base "PauseAI Volunteers & Actions" (`appWPTGqZmUcs3NWu`)
 
 ### New fields required (no existing equivalent)
 
-1. **`Intent`** — singleSelect: `Keep informed`, `Act now`, `Volunteer`, `Lead`. The core segmentation field; nothing today distinguishes volunteers from interest-only (memo: *"all of the information lands in airtable in one list … distinguished between volunteers and interest only"*). All downstream filtering (Irina's volunteer view, Comms mobilization list) depends on it.
-2. **`Chapter lead interest`** — checkbox. For Lead path (memo: *"Yes — please contact me about starting a chapter"*). Distinct from existing `Leading National Chapter` link, which marks people who *already* lead.
-3. **`Signup source`** — singleSelect. Decided 2026-06-10: every submission from the new flow gets the single value **`June 2026 onboarding flow`**; other sources stay as they are (legacy/country-site Tally rows taggable as `tally`, per-site values addable for Phase 4 embeds later). Within-flow path granularity (keep-informed vs browse vs volunteer vs lead) comes from `Intent`, not this field. Existing `Discovery method of PAI` records how they *heard*, not how they *entered*.
+1. **`Intent`** — singleSelect: `Keep informed`, `Act now`, `Volunteer`, `Lead`. The core segmentation field; nothing today distinguishes volunteers from interest-only (memo: _"all of the information lands in airtable in one list … distinguished between volunteers and interest only"_). All downstream filtering (Irina's volunteer view, Comms mobilization list) depends on it.
+2. **`Chapter lead interest`** — checkbox. For Lead path (memo: _"Yes — please contact me about starting a chapter"_). Distinct from existing `Leading National Chapter` link, which marks people who _already_ lead.
+3. **`Signup source`** — singleSelect. Decided 2026-06-10: every submission from the new flow gets the single value **`June 2026 onboarding flow`**; other sources stay as they are (legacy/country-site Tally rows taggable as `tally`, per-site values addable for Phase 4 embeds later). Within-flow path granularity (keep-informed vs browse vs volunteer vs lead) comes from `Intent`, not this field. Existing `Discovery method of PAI` records how they _heard_, not how they _entered_.
 
 ~~4. `Mobilization consent`~~ — **not needed** (Decision 1): mobilization rests on legitimate interest, not consent, so there is no consent state to record. `Email subscription` alone records the newsletter choice.
 
 ### Not new fields
 
-- Lead "why I want to lead" → sent via `mailto` (memo: *"Email our Organizing Director"*), not stored.
+- Lead "why I want to lead" → sent via `mailto` (memo: _"Email our Organizing Director"_), not stored.
 - Chapter routing → derived from `Country` lookup vs National Chapters; no member field needed unless we want to record which chapter applies (notification itself is manual — Decision 6).
 - Country/select reuse → not a missing field but a **value-pollution** problem (see cleanup pre-req below).
 
@@ -124,23 +124,28 @@ Audited live schema of base "PauseAI Volunteers & Actions" (`appWPTGqZmUcs3NWu`)
 
 ### OPEN — action needed
 
-1. **Legal copy** *(owner: legal/ops · needed before LAUNCH, not build)*
-   Write two pieces: (a) privacy-policy section documenting the **legitimate-interest basis** for critical-mobilization email (ideally backed by a Legitimate Interests Assessment); (b) the one-line **Step-1 notice** near the email field, e.g. *"We may contact you about critical mobilizations — see our privacy policy."*
+1. **Legal copy** _(owner: legal/ops · needed before LAUNCH, not build)_
+   Write two pieces: (a) privacy-policy section documenting the **legitimate-interest basis** for critical-mobilization email (ideally backed by a Legitimate Interests Assessment); (b) the one-line **Step-1 notice** near the email field, e.g. _"We may contact you about critical mobilizations — see our privacy policy."_
    → Suggestion: draft (b) now and iterate with legal; it's one sentence and unblocks final Step-1 UI copy.
 
-2. **Airtable fresh-fields batch** *(owner: Airtable admins — Nils DasSpieler / Anthony Bailey per memo · needed before PHASE 2 writes)*
+2. **Airtable fresh-fields batch** _(owner: Airtable admins — Nils DasSpieler / Anthony Bailey per memo · needed before PHASE 2 writes)_
    Execute `AirtableCleanup.md`: rename legacy fields to `X (legacy)`, create the new canonical fields (incl. `Intent`, `Chapter lead interest`, `Signup source`, text `Zip code`), run the backfill script per the mapping tables, repoint views.
    → Suggestion: the doc is decision-complete — this is now pure execution; the only in-flight verifications are the whitespace-dupe options (`1`, `2`, `Español`×3) and the zero-count check on `Friends / word of mouth, Other`.
 
-3. **Automation inventory** *(owner: ops/Airtable admins · needed before PHASE 3 launch; includes the email-verification check)*
-   List every Airtable automation that fires on Members record creation (`Follow-up email sent`, `Onboarder email`, Onboarding Events table imply several) and decide per automation whether pipeline rows should trigger it. **Specifically check the verification-email automation**: the repo's `/verify` → `/api/verify` click-side works for pipeline rows as-is, so if the send automation triggers on *any* new Members row, verification works for free; if it's Tally-filtered, widen the trigger.
+3. **Automation inventory** _(owner: ops/Airtable admins · needed before PHASE 3 launch; includes the email-verification check)_
+   List every Airtable automation that fires on Members record creation (`Follow-up email sent`, `Onboarder email`, Onboarding Events table imply several) and decide per automation whether pipeline rows should trigger it. **Specifically check the verification-email automation**: the repo's `/verify` → `/api/verify` click-side works for pipeline rows as-is, so if the send automation triggers on _any_ new Members row, verification works for free; if it's Tally-filtered, widen the trigger.
    → Suggestion: widen the verification trigger to all new Members rows rather than sending from the form action — keeps email sending in one place (Airtable) and the codebase stateless.
 
-4. **Country-site leads confirmation** *(owner: ops + site leads · needed before PHASE 4 only)*
+4. **Country-site leads confirmation** _(owner: ops + site leads · needed before PHASE 4 only)_
    One-line ask to each site lead: "does your site embed the Tally form `wbGvKe` anywhere not linked from the homepage?" The scan covered linked/common paths only.
    → Suggestion: batch it into whatever Phase-4 kickoff message goes to pauseai.uk (the only known migration).
 
-5. **Donate-path visibility** *(owner: Harry/design · revisit AFTER V1 data)*
+5. **Donate-path visibility** _(owner: Harry/design · revisit AFTER V1 data)_
    Context: 740/3,499 members (21%) said "None, I just want to provide support (financial or otherwise)" — donors with no pre-submit door (donation is the LAST confirmation action card). Decided so far: 6th hours option `None — I'd rather support in other ways`, capture-then-divert (submit first, then donate-promoted confirmation).
    Still open: (a) secondary "Just want to support us financially? → Donate" link on Step 2; (b) promoting the Donate card above petitions on confirmations.
    → Suggestion: ship V1 with (b) only for users who picked the 6th hours option (already implied by capture-then-divert), then decide (a) once V1 shows where donors actually land.
+
+6. **Other Tally forms — email usage audit + cross-capture idea** _(owner: Harry/ops · follow-on, post-V1; not part of the pipeline build)_
+   Context (verified live 2026-06-10): after the volunteer form's removal from `/join`, four Tally surfaces remain on pauseai.info, and **all four capture email as a required field**: `315xdg` "Sign the statement" (`/statement`), `J9k5NY` AI-concerns (`/ai-concerns`), `Gxo8AQ` AI-concerns Australia (`/australia-story`), `GxBRr2` AI-concerns (homepage Hero "Share your story" link). The three concerns forms are near-identical clones with separate inboxes.
+   To do: (a) investigate where these emails (and the other captured data) land and what they're used for — do they reach the Members table / mobilization list, or sit unused in Tally? (b) We don't want people who arrive with a "concern" to mistake these forms for signing up. Idea: check the submitted email against Airtable and, if it's not already known, prompt them to sign up via `/onboarding` after submitting. (c) If/when these forms go native, consolidate the three concerns clones into one intake with a source tag, mirroring the pipeline's `Signup source` approach.
+   → Suggestion: do (a) first — the right UX for (b) depends on whether these submissions already feed the central list or are a dead end.
