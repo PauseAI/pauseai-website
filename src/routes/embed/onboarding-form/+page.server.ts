@@ -81,6 +81,7 @@ export const actions: Actions = {
 		const intent = getString(data, 'intent')
 		const mode = getString(data, 'mode') === 'browse' ? 'browse' : 'contact'
 		const newsletter = data.get('newsletter') === 'on'
+		const keepInformed = data.get('keep_informed') === 'on'
 
 		if (!fullName || !email || !country || !city) {
 			return fail(400, { message: 'Please fill in your name, email, country and city.' })
@@ -102,11 +103,7 @@ export const actions: Actions = {
 			City: city,
 			Intent: intent,
 			'Signup source': SIGNUP_SOURCE,
-			'Email subscription': newsletter
-		}
-
-		if (intent === 'Lead') {
-			fields['Chapter lead interest'] = data.get('chapter_lead_interest') === 'on'
+			'Email subscription': keepInformed
 		}
 
 		if (intent === 'Volunteer') {
@@ -116,12 +113,19 @@ export const actions: Actions = {
 			const discovery = getString(data, 'discovery')
 			const hours = getString(data, 'hours')
 
+			if (!languages.length) {
+				return fail(400, { message: 'Please select at least one language you speak.' })
+			}
 			if (!WEEKLY_HOURS.includes(hours)) {
 				return fail(400, { message: 'Please tell us how much time you can commit weekly.' })
 			}
-			if (data.get('agree_privacy') !== 'on' || data.get('agree_volunteer') !== 'on') {
+			if (
+				data.get('agree_privacy') !== 'on' ||
+				data.get('agree_volunteer') !== 'on' ||
+				data.get('agree_conduct') !== 'on'
+			) {
 				return fail(400, {
-					message: 'Please agree to the Privacy Policy and Volunteer Agreement.'
+					message: 'Please agree to the Privacy Policy, Volunteer Agreement and Code of Conduct.'
 				})
 			}
 			if (discovery && !DISCOVERY_OPTIONS.includes(discovery)) {
@@ -141,6 +145,7 @@ export const actions: Actions = {
 			fields['Projected weekly hours'] = hours
 			fields['Data privacy policy agreed'] = true
 			fields['Volunteer Agreement'] = true
+			fields['Code of Conduct agreed'] = true
 
 			if (country === 'United States') {
 				fields['Zip code'] = getString(data, 'zip_code')

@@ -1,46 +1,35 @@
 <script lang="ts">
 	import { enhance } from '$app/forms'
 	import type { SubmitFunction } from '@sveltejs/kit'
+	import type { NationalGroupsApiResponse } from '$api/national-groups/+server.js'
 	import { toast } from 'svelte-french-toast'
 	import Link from '$lib/components/Link.svelte'
 	import LinkWithoutIcon from '$lib/components/LinkWithoutIcon.svelte'
 	import Socials from '$lib/components/Socials.svelte'
+	import Combobox from '$lib/components/Combobox.svelte'
 	import ActionCards from './ActionCards.svelte'
 	import Stepper from './Stepper.svelte'
 	import {
 		COUNTRIES,
+		COUNTRY_DIAL_CODES,
 		DISCOVERY_OPTIONS,
 		DISCOVERY_SPECIFY_TRIGGERS,
 		LANGUAGES,
 		MOTIVATIONS,
-		POPULAR_COUNTRIES,
 		SKILLS,
-		SUPPORT_ONLY_HOURS,
 		WEEKLY_HOURS,
 		type Intent
 	} from './options'
 
-	// The flow is embeddable on pages that already have their own h1 (e.g. /join),
-	// so the framing heading's level is configurable.
-	let { headingLevel = 1 }: { headingLevel?: 1 | 2 } = $props()
-	const headingTag = $derived(`h${headingLevel}`)
-
-	type IntentKey = 'keep-informed' | 'act-now' | 'volunteer' | 'lead'
+	type IntentKey = 'act-now' | 'volunteer' | 'lead'
 
 	const INTENT_VALUES: Record<IntentKey, Intent> = {
-		'keep-informed': 'Keep informed',
 		'act-now': 'Act now',
 		volunteer: 'Volunteer',
 		lead: 'Lead'
 	}
 
 	const intentOptions: { key: IntentKey; icon: string; label: string; sub: string }[] = [
-		{
-			key: 'keep-informed',
-			icon: '🔔',
-			label: 'Keep me informed',
-			sub: 'Connect me with my local PauseAI chapter and keep me updated on global campaigns.'
-		},
 		{
 			key: 'act-now',
 			icon: '✊',
@@ -61,9 +50,15 @@
 		}
 	]
 
+	let {
+		initialEmail = '',
+		initialCountry = ''
+	}: { initialEmail?: string; initialCountry?: string } = $props()
+
 	let step: 1 | 2 | 3 | 4 = $state(1)
 	let mode: 'contact' | 'browse' = $state('contact')
 	let intent: IntentKey | null = $state(null)
+	let keepInformed = $state(false)
 	let submitting = $state(false)
 	let browseSignedUp = $state(false)
 	let honeypot = $state('')
@@ -72,8 +67,8 @@
 	// volunteer form, which pre-fills from the same state)
 	let basics = $state({
 		fullName: '',
-		email: '',
-		country: '',
+		email: initialEmail,
+		country: initialCountry,
 		city: '',
 		newsletter: false
 	})
@@ -94,32 +89,94 @@
 		zipCode: ''
 	})
 
-	// Lead form (path D)
-	let chapterLeadInterest = $state(true)
+	let agreements = $state({ volunteer: false, privacy: false, conduct: false })
+
+	// Phone: dial code prefilled from country of residence, editable in case
+	// their phone is from elsewhere. Submitted combined via a hidden input.
+	let dialCode = $state('')
+	let dialCodeEdited = false
+
+	$effect(() => {
+		const code = COUNTRY_DIAL_CODES[basics.country]
+		if (!dialCodeEdited && code) dialCode = code
+	})
+
+	const fullPhone = $derived.by(() => {
+		const raw = volunteer.phone.trim()
+		if (!raw) return ''
+		// Already international — pass through as-is (minus separators).
+		if (raw.startsWith('+')) return raw.replace(/[\s().-]/g, '')
+		// National number: drop separators and the leading trunk 0.
+		const digits = raw.replace(/\D/g, '').replace(/^0+/, '')
+		if (!digits) return ''
+		return `${dialCode.trim()}${digits}`
+	})
+
+	const volunteerFormComplete = $derived(
+		volunteer.languages.length > 0 &&
+			!!volunteer.hours &&
+			agreements.volunteer &&
+			agreements.privacy &&
+			agreements.conduct
+	)
 
 	const stepperLabels = $derived(
 		intent === 'volunteer'
 			? ['About you', 'Intent', 'Volunteer form', 'Confirmed']
 			: intent === 'lead'
-				? ['About you', 'Intent', 'Apply', 'Confirmed']
+				? ['About you', 'Intent', 'Next steps']
 				: ['About you', 'Intent', 'Confirmed']
 	)
 
+	// Lead path: if the country already has a chapter, offer regional/city
+	// leadership instead of founding a national group. Fetched lazily when the
+	// lead intent is picked; on failure we fall back to the national copy.
+	let nationalGroupNames: string[] | null = $state(null)
+
+	$effect(() => {
+		if (intent === 'lead' && nationalGroupNames === null) {
+			nationalGroupNames = []
+			fetch('/api/national-groups')
+				.then((response) =>
+					response.ok ? (response.json() as Promise<NationalGroupsApiResponse>) : []
+				)
+				.then((groups) => {
+					nationalGroupNames = groups.map((group) => group.name)
+				})
+				.catch(() => {})
+		}
+	})
+
+	const countryHasChapter = $derived(
+		(nationalGroupNames ?? ([] as string[])).some(
+			(name) => name.toLowerCase() === basics.country.trim().toLowerCase()
+		)
+	)
+
+	const leadRole = $derived(countryHasChapter ? 'Regional Group Lead' : 'National Group Lead')
+
 	const leadMailto = $derived(
 		'mailto:Irina@pauseai.info' +
-			`?subject=${encodeURIComponent('Interested in becoming a PauseAI National Group Lead')}` +
+			`?subject=${encodeURIComponent(`Interested in becoming a PauseAI ${leadRole}`)}` +
 			`&body=${encodeURIComponent(
-				`Hi Irina,\n\nMy name is ${basics.fullName || '[your name]'} and I live in ${basics.country || '[your country]'}.\n\nI'd like to become a PauseAI National Group Lead because:\n\n`
+				`Hi Irina,\n\nMy name is ${basics.fullName || '[your name]'} and I live in ${basics.country || '[your country]'}.\n\nI'd like to become a PauseAI ${leadRole} because:\n\n`
 			)}`
 	)
 
+	const languageOptions = LANGUAGES.map((l) => ({ label: l.display, value: l.stored }))
+
 	const showDiscoverySpecify = $derived(DISCOVERY_SPECIFY_TRIGGERS.includes(volunteer.discovery))
-	const supportOnly = $derived(volunteer.hours === SUPPORT_ONLY_HOURS)
 
 	function startBrowse() {
 		mode = 'browse'
 		intent = 'act-now'
 		step = 3
+	}
+
+	function toggleIn(list: string[], value: string) {
+		const index = list.indexOf(value)
+		if (index >= 0) list.splice(index, 1)
+		else list.push(value)
 	}
 
 	function continueToIntent(event: SubmitEvent) {
@@ -159,19 +216,14 @@
 {/snippet}
 
 {#snippet countrySelect(id: string)}
-	<select {id} name="country" required bind:value={basics.country}>
-		<option value="" disabled>Select your country</option>
-		<optgroup label="Popular">
-			{#each POPULAR_COUNTRIES as option (option)}
-				<option value={option}>{option}</option>
-			{/each}
-		</optgroup>
-		<optgroup label="All countries">
-			{#each COUNTRIES as option (option)}
-				<option value={option}>{option}</option>
-			{/each}
-		</optgroup>
-	</select>
+	<Combobox
+		{id}
+		name="country"
+		options={COUNTRIES}
+		required
+		placeholder="Select your country"
+		bind:value={basics.country}
+	/>
 {/snippet}
 
 {#snippet hiddenBasics()}
@@ -181,6 +233,48 @@
 	<input type="hidden" name="city" value={basics.city} />
 	{#if basics.newsletter}
 		<input type="hidden" name="newsletter" value="on" />
+	{/if}
+{/snippet}
+
+{#snippet selectCards(name: string, options: string[], selectedList: string[])}
+	<div class="select-card-grid">
+		{#each options as option (option)}
+			<button
+				type="button"
+				class="select-card"
+				class:selected={selectedList.includes(option)}
+				role="checkbox"
+				aria-checked={selectedList.includes(option)}
+				onclick={() => toggleIn(selectedList, option)}
+			>
+				<span class="checkbox-box" aria-hidden="true">
+					{selectedList.includes(option) ? '✓' : ''}
+				</span>
+				{option}
+			</button>
+		{/each}
+	</div>
+	{#each selectedList as selectedValue (selectedValue)}
+		<input type="hidden" {name} value={selectedValue} />
+	{/each}
+{/snippet}
+
+{#snippet checkboxConfirmations()}
+	{#if keepInformed || basics.newsletter}
+		<ul class="signup-confirmations">
+			{#if keepInformed}
+				<li>
+					<span class="confirm-tick" aria-hidden="true">✓</span>
+					We'll connect you with your local PauseAI chapter and keep you updated on global campaigns.
+				</li>
+			{/if}
+			{#if basics.newsletter}
+				<li>
+					<span class="confirm-tick" aria-hidden="true">✓</span>
+					You're subscribed to our Substack newsletter for general news on AI.
+				</li>
+			{/if}
+		</ul>
 	{/if}
 {/snippet}
 
@@ -210,14 +304,6 @@
 {/snippet}
 
 <div class="onboarding-flow">
-	<svelte:element this={headingTag} class="framing">
-		Find the highest-impact way for you to help.
-	</svelte:element>
-	<p class="intro">
-		One door into one global movement. Whether you have five minutes or five hours a week, there's a
-		place for you.
-	</p>
-
 	{#if mode === 'browse' && !browseSignedUp}
 		<div class="browse-banner">
 			You're browsing without signing up — leave your email below so we can tell you when new
@@ -256,10 +342,10 @@
 						bind:value={basics.email}
 					/>
 					<p class="helper">Preferably Gmail if you have one.</p>
-					<p class="helper">
+					<!-- <p class="helper">
 						We may contact you about critical mobilizations — see our
 						<Link href="/privacy">privacy policy</Link>.
-					</p>
+					</p> -->
 				</div>
 				<div class="field">
 					<label class="field-label" for="ob-country">Country of residence *</label>
@@ -276,10 +362,6 @@
 						bind:value={basics.city}
 					/>
 				</div>
-				<label class="checkbox">
-					<input type="checkbox" bind:checked={basics.newsletter} />
-					Subscribe me to the PauseAI newsletter (Substack)
-				</label>
 				<button type="submit" class="primary">Continue →</button>
 				<div class="browse-option">
 					<button type="button" class="secondary" onclick={startBrowse}>
@@ -292,15 +374,61 @@
 			</form>
 		{:else if step === 2}
 			<!-- Step 2 — intent -->
-			<form method="POST" action="/onboarding?/submit" use:enhance={submitWith(() => (step = 3))}>
+			<form
+				method="POST"
+				action="/embed/onboarding-form?/submit"
+				use:enhance={submitWith(() => (step = 3))}
+			>
 				{@render hiddenBasics()}
 				{@render honeypotField('ob-nickname-2')}
 				<input type="hidden" name="mode" value="contact" />
-				{#if intent}
-					<input type="hidden" name="intent" value={INTENT_VALUES[intent]} />
+				<input
+					type="hidden"
+					name="intent"
+					value={intent ? INTENT_VALUES[intent] : 'Keep informed'}
+				/>
+				{#if keepInformed}
+					<input type="hidden" name="keep_informed" value="on" />
 				{/if}
 				<h2>What brings you here?</h2>
-				<div class="intent-grid" role="radiogroup" aria-label="What brings you here?">
+				<div class="intent-grid">
+					<button
+						type="button"
+						class="intent-option"
+						class:selected={keepInformed}
+						role="checkbox"
+						aria-checked={keepInformed}
+						onclick={() => (keepInformed = !keepInformed)}
+					>
+						<span class="intent-icon">
+							<span class="checkbox-box" aria-hidden="true">{keepInformed ? '✓' : ''}</span>
+							🔔
+						</span>
+						<span class="intent-label">Keep me informed</span>
+						<span class="intent-sub">
+							Connect me with my local PauseAI chapter and keep me updated on global campaigns.
+						</span>
+					</button>
+					<button
+						type="button"
+						class="intent-option"
+						class:selected={basics.newsletter}
+						role="checkbox"
+						aria-checked={basics.newsletter}
+						onclick={() => (basics.newsletter = !basics.newsletter)}
+					>
+						<span class="intent-icon">
+							<span class="checkbox-box" aria-hidden="true">{basics.newsletter ? '✓' : ''}</span>
+							📰
+						</span>
+						<span class="intent-label">Subscribe to our Substack</span>
+						<span class="intent-sub">
+							General news on AI, delivered via our Substack newsletter.
+						</span>
+					</button>
+				</div>
+				<p class="section-label">Want to do more? (optional)</p>
+				<div class="intent-stack" role="radiogroup" aria-label="Want to do more?">
 					{#each intentOptions as option (option.key)}
 						<button
 							type="button"
@@ -308,32 +436,38 @@
 							class:selected={intent === option.key}
 							role="radio"
 							aria-checked={intent === option.key}
-							onclick={() => (intent = option.key)}
+							onclick={() => (intent = intent === option.key ? null : option.key)}
 						>
-							<span class="intent-icon">{option.icon}</span>
+							<span class="intent-icon">
+								<span class="checkbox-box" aria-hidden="true">
+									{intent === option.key ? '✓' : ''}
+								</span>
+								{option.icon}
+							</span>
 							<span class="intent-label">{option.label}</span>
 							<span class="intent-sub">{option.sub}</span>
 						</button>
 					{/each}
 				</div>
-				{#if intent === 'volunteer' || intent === 'lead'}
+				{#if intent === 'volunteer'}
 					<button type="button" class="primary" onclick={() => (step = 3)}>Continue →</button>
 				{:else}
-					<button type="submit" class="primary" disabled={!intent || submitting}>
-						{submitting ? 'Submitting...' : 'Submit →'}
+					<button
+						type="submit"
+						class="primary"
+						disabled={(!intent && !keepInformed && !basics.newsletter) || submitting}
+					>
+						{submitting ? 'Submitting...' : intent === 'lead' ? 'Continue →' : 'Submit →'}
 					</button>
 				{/if}
 				<button type="button" class="back" onclick={() => (step = 1)}>← Back</button>
 			</form>
-		{:else if step === 3 && intent === 'keep-informed'}
+		{:else if step === 3 && !intent}
 			<!-- Path A — confirmation -->
 			<div class="confirmation">
 				<div class="checkmark">✓</div>
 				<h2>You're in.</h2>
-				<p>
-					We'll connect you with your local PauseAI chapter and keep you informed about our global
-					campaigns.
-				</p>
+				{@render checkboxConfirmations()}
 				{@render nextStepBlock()}
 				{@render confirmationFooter()}
 			</div>
@@ -344,6 +478,7 @@
 					<div class="checkmark">✓</div>
 					<h2>You're in — thanks for joining us.</h2>
 					<p>You're all set. Here are a few ways to make a difference today.</p>
+					{@render checkboxConfirmations()}
 				</div>
 			{:else}
 				<div class="browse-header">
@@ -355,19 +490,22 @@
 				</div>
 				{#if browseSignedUp}
 					<div class="inline-confirmation">
-						✓ You're signed up. We'll be in touch when new opportunities go live.
+						✓ You're in. We'll connect you with your local PauseAI chapter and keep you updated on
+						global campaigns.
 					</div>
 				{:else}
-					<div class="stay-in-loop">
-						<h3>Stay in the loop</h3>
+					<div class="keep-informed">
+						<h3>Keep me informed</h3>
+						<p>Connect me with my local PauseAI chapter and keep me updated on global campaigns.</p>
 						<form
 							method="POST"
-							action="/onboarding?/submit"
+							action="/embed/onboarding-form?/submit"
 							use:enhance={submitWith(() => (browseSignedUp = true))}
 						>
 							{@render honeypotField('ob-nickname-3')}
 							<input type="hidden" name="mode" value="browse" />
 							<input type="hidden" name="intent" value="Act now" />
+							<input type="hidden" name="keep_informed" value="on" />
 							<div class="field">
 								<label class="field-label" for="loop-name">Full name *</label>
 								<input
@@ -389,10 +527,10 @@
 									autocomplete="email"
 									bind:value={basics.email}
 								/>
-								<p class="helper">
+								<!-- <p class="helper">
 									We may contact you about critical mobilizations — see our
 									<Link href="/privacy">privacy policy</Link>.
-								</p>
+								</p> -->
 							</div>
 							<div class="field">
 								<label class="field-label" for="loop-country">Country of residence *</label>
@@ -409,10 +547,6 @@
 									bind:value={basics.city}
 								/>
 							</div>
-							<label class="checkbox">
-								<input type="checkbox" name="newsletter" bind:checked={basics.newsletter} />
-								Subscribe me to the PauseAI newsletter (Substack)
-							</label>
 							<button type="submit" class="primary" disabled={submitting}>
 								{submitting ? 'Signing up...' : 'Sign me up →'}
 							</button>
@@ -426,55 +560,20 @@
 		{:else if step === 3 && intent === 'volunteer'}
 			<!-- Path C — native volunteer form -->
 			<h2>Sign up to volunteer</h2>
-			<p class="path-intro">
-				Tell us a bit about yourself so we can find a role that fits. Your details from the previous
-				step are already filled in.
-			</p>
-			<form method="POST" action="/onboarding?/submit" use:enhance={submitWith(() => (step = 4))}>
+			<p class="path-intro">Tell us a bit about yourself so we can find a role that fits.</p>
+			{@render checkboxConfirmations()}
+			<form
+				method="POST"
+				action="/embed/onboarding-form?/submit"
+				use:enhance={submitWith(() => (step = 4))}
+			>
 				{@render honeypotField('ob-nickname-4')}
 				<input type="hidden" name="mode" value="contact" />
 				<input type="hidden" name="intent" value="Volunteer" />
-				{#if basics.newsletter}
-					<input type="hidden" name="newsletter" value="on" />
+				{#if keepInformed}
+					<input type="hidden" name="keep_informed" value="on" />
 				{/if}
-				<div class="field">
-					<label class="field-label" for="vol-name">Full name *</label>
-					<input
-						type="text"
-						id="vol-name"
-						name="full_name"
-						required
-						autocomplete="name"
-						bind:value={basics.fullName}
-					/>
-				</div>
-				<div class="field">
-					<label class="field-label" for="vol-email">Email *</label>
-					<input
-						type="email"
-						id="vol-email"
-						name="email"
-						required
-						autocomplete="email"
-						bind:value={basics.email}
-					/>
-					<p class="helper">Preferably Gmail if you have one.</p>
-				</div>
-				<div class="field">
-					<label class="field-label" for="vol-country">Country of residence *</label>
-					{@render countrySelect('vol-country')}
-				</div>
-				<div class="field">
-					<label class="field-label" for="vol-city">City / town of residence *</label>
-					<input
-						type="text"
-						id="vol-city"
-						name="city"
-						required
-						autocomplete="address-level2"
-						bind:value={basics.city}
-					/>
-				</div>
+				{@render hiddenBasics()}
 				{#if basics.country === 'United States'}
 					<div class="field">
 						<label class="field-label" for="vol-zip">Zip code</label>
@@ -505,24 +604,36 @@
 				</div>
 				<div class="field">
 					<label class="field-label" for="vol-phone">Phone number</label>
-					<input type="tel" id="vol-phone" name="phone" bind:value={volunteer.phone} />
-					<p class="helper">Please use international formatting.</p>
-				</div>
-				<fieldset class="field">
-					<legend class="field-label">What languages do you speak?</legend>
-					<div class="checkbox-grid">
-						{#each LANGUAGES as language (language.stored)}
-							<label class="checkbox">
-								<input
-									type="checkbox"
-									name="languages"
-									value={language.stored}
-									bind:group={volunteer.languages}
-								/>
-								{language.display}
-							</label>
-						{/each}
+					<div class="phone-row">
+						<input
+							type="text"
+							class="dial-code"
+							aria-label="International dialing code"
+							placeholder="+44"
+							bind:value={dialCode}
+							oninput={() => (dialCodeEdited = true)}
+						/>
+						<input
+							type="tel"
+							id="vol-phone"
+							class="phone-number"
+							placeholder="07123 456789"
+							bind:value={volunteer.phone}
+						/>
 					</div>
+					<input type="hidden" name="phone" value={fullPhone} />
+				</div>
+				<div class="field">
+					<label class="field-label" for="vol-languages">What languages do you speak? *</label>
+					<Combobox
+						id="vol-languages"
+						name="languages"
+						options={languageOptions}
+						multiple
+						required
+						placeholder="Select languages"
+						bind:value={volunteer.languages}
+					/>
 					{#if volunteer.languages.includes('Other')}
 						<input
 							type="text"
@@ -532,7 +643,7 @@
 							bind:value={volunteer.languagesOther}
 						/>
 					{/if}
-				</fieldset>
+				</div>
 				<div class="field">
 					<label class="field-label" for="vol-discovery">How did you find out about PauseAI?</label>
 					<select id="vol-discovery" name="discovery" bind:value={volunteer.discovery}>
@@ -551,20 +662,10 @@
 						/>
 					{/if}
 				</div>
-				<fieldset class="field">
-					<legend class="field-label">What motivated you to join?</legend>
-					<div class="checkbox-grid">
-						{#each MOTIVATIONS as motivation (motivation)}
-							<label class="checkbox">
-								<input
-									type="checkbox"
-									name="motivations"
-									value={motivation}
-									bind:group={volunteer.motivations}
-								/>
-								{motivation}
-							</label>
-						{/each}
+				<div class="field">
+					<span class="field-label" id="vol-motivations-label">What motivated you to join?</span>
+					<div role="group" aria-labelledby="vol-motivations-label">
+						{@render selectCards('motivations', MOTIVATIONS, volunteer.motivations)}
 					</div>
 					{#if volunteer.motivations.includes('Other')}
 						<input
@@ -575,16 +676,11 @@
 							bind:value={volunteer.motivationsOther}
 						/>
 					{/if}
-				</fieldset>
-				<fieldset class="field">
-					<legend class="field-label">Skills & interests</legend>
-					<div class="checkbox-grid">
-						{#each SKILLS as skill (skill)}
-							<label class="checkbox">
-								<input type="checkbox" name="skills" value={skill} bind:group={volunteer.skills} />
-								{skill}
-							</label>
-						{/each}
+				</div>
+				<div class="field">
+					<span class="field-label" id="vol-skills-label">Skills & interests</span>
+					<div role="group" aria-labelledby="vol-skills-label">
+						{@render selectCards('skills', SKILLS, volunteer.skills)}
 					</div>
 					{#if volunteer.skills.includes('Other')}
 						<input
@@ -595,149 +691,163 @@
 							bind:value={volunteer.skillsOther}
 						/>
 					{/if}
-				</fieldset>
-				<div class="field">
-					<label class="field-label" for="vol-hours">How much time can you commit weekly? *</label>
-					<select id="vol-hours" name="hours" required bind:value={volunteer.hours}>
-						<option value="" disabled>Select an option</option>
-						{#each WEEKLY_HOURS as option (option)}
-							<option value={option}>{option}</option>
-						{/each}
-					</select>
 				</div>
-				<label class="checkbox">
-					<input type="checkbox" name="agree_volunteer" required />
-					I agree with the <Link href="/volunteer-agreement">Volunteer Agreement</Link> *
+				<div class="field">
+					<span class="field-label" id="vol-hours-label"
+						>How much time can you commit weekly? *</span
+					>
+					<div class="select-card-grid" role="radiogroup" aria-labelledby="vol-hours-label">
+						{#each WEEKLY_HOURS as option (option)}
+							<button
+								type="button"
+								class="select-card"
+								class:selected={volunteer.hours === option}
+								role="radio"
+								aria-checked={volunteer.hours === option}
+								onclick={() => (volunteer.hours = option)}
+							>
+								<span class="checkbox-box" aria-hidden="true">
+									{volunteer.hours === option ? '✓' : ''}
+								</span>
+								{option}
+							</button>
+						{/each}
+					</div>
+					<input type="hidden" name="hours" value={volunteer.hours} />
+				</div>
+				<label class="agreement">
+					<input
+						type="checkbox"
+						name="agree_volunteer"
+						required
+						bind:checked={agreements.volunteer}
+					/>
+					<span class="checkbox-box" aria-hidden="true"></span>
+					<span
+						>I agree with the <Link href="/volunteer-agreement">Volunteer Agreement</Link> *</span
+					>
 				</label>
-				<label class="checkbox">
-					<input type="checkbox" name="agree_privacy" required />
-					I agree with the <Link href="/privacy">Privacy Policy</Link> *
+				<label class="agreement">
+					<input type="checkbox" name="agree_privacy" required bind:checked={agreements.privacy} />
+					<span class="checkbox-box" aria-hidden="true"></span>
+					<span>I agree with the <Link href="/privacy">Privacy Policy</Link> *</span>
 				</label>
-				<button type="submit" class="primary" disabled={submitting}>
+				<label class="agreement">
+					<input type="checkbox" name="agree_conduct" required bind:checked={agreements.conduct} />
+					<span class="checkbox-box" aria-hidden="true"></span>
+					<span>I agree with the <Link href="/code-of-conduct">Code of Conduct</Link> *</span>
+				</label>
+				<button type="submit" class="primary" disabled={!volunteerFormComplete || submitting}>
 					{submitting ? 'Submitting...' : 'Submit →'}
 				</button>
 				<button type="button" class="back" onclick={() => (step = 2)}>← Back</button>
 			</form>
 		{:else if step === 3 && intent === 'lead'}
 			<!-- Path D — lead -->
-			<h2>National Group Lead — Volunteer Description</h2>
+			<h2>{leadRole} — Volunteer Description</h2>
 			<p class="role-meta"><em>Part-time volunteer role · 5–15 hours/week</em></p>
+			{@render checkboxConfirmations()}
 			<div class="role-description">
 				<p>
-					PauseAI Global is looking for leaders around the world to run local organising efforts in
-					their respective countries and regions. Each group leader is responsible for planning
-					direct actions, mobilising volunteers, and coordinating with the Global PauseAI team.
+					Pause AI Global is looking for leaders around the world to run local groups that lead
+					organising efforts in their area. This is a part-time volunteer role requiring 5-15 hours
+					per week. Each group leader will be responsible for planning direct actions, mobilising
+					volunteers and coordinating with the Global PauseAI team.
 				</p>
-				<p>
-					<strong>First, check that your country doesn't already have a chapter:</strong>
-					<Link href="/communities">pauseai.info/communities</Link>. If you're based in the
-					<strong>United States</strong>, please apply through PauseAI US:
-					<Link href="https://form.asana.com/?k=RxWuTz8SYKME33V5nBvK1A&d=1208505553897008">
-						PauseAI US application form
-					</Link>.
-				</p>
+				{#if basics.country === 'United States'}
+					<p>
+						Since you're based in the <strong>United States</strong>, please apply through PauseAI
+						US:
+						<Link href="https://form.asana.com/?k=RxWuTz8SYKME33V5nBvK1A&d=1208505553897008">
+							PauseAI US application form
+						</Link>.
+					</p>
+				{:else if countryHasChapter}
+					<p>
+						<strong>{basics.country} already has a PauseAI chapter</strong> — so rather than
+						founding a national group, you could lead a regional or city group within it. Find your
+						chapter at
+						<Link href="/communities">pauseai.info/communities</Link>, or email our Organizing
+						Director below to talk it through.
+					</p>
+				{:else}
+					<p>
+						<strong>First, check that your country doesn't already have a chapter:</strong>
+						<Link href="/communities">pauseai.info/communities</Link>.
+					</p>
+				{/if}
 				<h3>What you'll do</h3>
 				<ul>
 					<li>
 						Recruit and grow your local group by welcoming new volunteers and organising events
-						together.
+						together. together.
 					</li>
-					<li>Engage local decision makers about AI safety and gain their support.</li>
 					<li>Build relationships with local activist groups and journalists.</li>
 					<li>
 						Meet monthly with PauseAI's Global team to swap ideas and stay coordinated with the
-						Global strategy and quarterly campaigns.
+						global strategy and quarterly campaigns.
 					</li>
 					<li>Share what your chapter is up to on social media and help promote events.</li>
 				</ul>
 				<h3>What we're looking for</h3>
 				<ul>
-					<li>Excited to bring people together for workshops, meet-ups, and public events.</li>
-					<li>Comfortable having conversations with all kinds of people.</li>
-					<li>Self-starter who also enjoys being part of a team.</li>
-					<li>Care about making AI safe and believe that we can make a difference.</li>
-					<li>Adhere to a non-violent, legal approach.</li>
+					<li>
+						Ability to plan and execute direct actions, including workshops and public events.
+					</li>
+					<li>Excellent communication skills, eager and able to engage diverse communities.</li>
+					<li>Self-motivated, with the ability to work independently and as part of a team.</li>
+					<li>Passion for AI safety and alignment with PauseAI’s mission.</li>
+					<li>Comfortable communicating in English</li>
+					<li>Adhere and practice to a non-violent, legal approach.</li>
+				</ul>
+				<h3>What would be nice to have</h3>
+				<ul>
+					<li>Strong organising skills and experience in grassroots activism.</li>
+					<li>Lobbying skills and policymaker engagement experience</li>
+					<li>Media and content writing experience</li>
 				</ul>
 				<p>
-					You don't need any prior activism experience. We'll provide training, resources, and a
-					community to lean on.
+					If you do not meet all of the requirements, we still want to hear from you. The commitment
+					to AI Safety and the belief we can make an impact is the most important factor; we can
+					provide training, resources and a community to lean on.
 				</p>
 				<h3>Support you'll get</h3>
 				<p>
-					A global network of organizers, monthly meetings, shared resources, and a fast-growing
-					movement.
+					You'll join a global network of organisers who are all figuring this out together. We meet
+					monthly, share resources across our chat platforms and help each other troubleshoot. It's
+					a great way to learn new skills, meet thoughtful people and be part of a fast-growing
+					movement that's working on one of the most important issues of our time.
 				</p>
 				<h3>Next steps</h3>
 				<p>
-					Contact our Organizing Director at
+					If you’d like to learn more, please contact our PauseAI Global organising director Irina
+					Tavera at
 					<Link href="mailto:Irina@pauseai.info">Irina@pauseai.info</Link> to schedule an informal exploratory
-					chat. Please include your name, country of residence, and a few sentences on why you'd like
-					to become a lead.
+					chat.
 				</p>
 			</div>
 			<LinkWithoutIcon class="mailto-button" href={leadMailto}>
 				✉️ Email our Organizing Director
 			</LinkWithoutIcon>
-			<form method="POST" action="/onboarding?/submit" use:enhance={submitWith(() => (step = 4))}>
-				{@render hiddenBasics()}
-				{@render honeypotField('ob-nickname-5')}
-				<input type="hidden" name="mode" value="contact" />
-				<input type="hidden" name="intent" value="Lead" />
-				<label class="checkbox">
-					<input type="checkbox" name="chapter_lead_interest" bind:checked={chapterLeadInterest} />
-					Yes — please contact me about starting a chapter
-				</label>
-				<p class="helper">
-					The Organizing Director will reach out to schedule an exploratory chat.
-				</p>
-				<button type="submit" class="primary" disabled={submitting}>
-					{submitting ? 'Submitting...' : 'Submit →'}
-				</button>
-				<button type="button" class="back" onclick={() => (step = 2)}>← Back</button>
-			</form>
+			<p>Please let her know the following:</p>
+			<ul>
+				<li>Your name</li>
+				<li>Your country of residence</li>
+				<li>A few sentences on why you’d like to become a lead</li>
+			</ul>
+			{@render confirmationFooter()}
 		{:else if step === 4 && intent === 'volunteer'}
 			<!-- Path C — confirmation -->
 			<div class="confirmation">
 				<div class="checkmark">✓</div>
 				<h2>Welcome to the team.</h2>
 				<p>You're on the volunteer list — we'll be in touch soon.</p>
-				{@render nextStepBlock()}
-				{#if supportOnly}
-					<div class="donate-promo">
-						<h3><Link href="/donate">Support PauseAI with a donation</Link></h3>
-						<p>
-							Since hands-on volunteering isn't your thing right now, a
-							<Link href="/donate">donation</Link> is the highest-impact way to support the movement —
-							or pick up some gear from our
-							<Link href="https://pauseai-shop.fourthwall.com/">store</Link>.
-						</p>
-					</div>
-				{/if}
-				{@render confirmationFooter()}
-			</div>
-		{:else if step === 4 && intent === 'lead'}
-			<!-- Path D — confirmation -->
-			<div class="confirmation">
-				<div class="checkmark">✓</div>
-				<h2>Thanks for stepping up.</h2>
-				<p>
-					We've got your note about leading a chapter — our Organizing Director will be in touch
-					soon.
-				</p>
-				<p>
-					Got a project in mind? Learn more about our
-					<Link href="/microgrants">Microgrants</Link>.
-				</p>
+				{@render checkboxConfirmations()}
 				{@render nextStepBlock()}
 				{@render confirmationFooter()}
 			</div>
 		{/if}
 	</div>
-
-	<p class="stub-note">
-		🧪 Test mode: submissions are not sent to Airtable. See what would be written on the
-		<Link href="/onboarding/stub">stub page</Link>.
-	</p>
 </div>
 
 <style>
@@ -748,24 +858,9 @@
 		color: var(--text);
 	}
 
-	.framing {
-		font-family: var(--font-heading);
-		font-size: 2.5rem;
-		margin-top: 0;
-		margin-bottom: 0.5rem;
-		text-align: center;
-	}
-
 	h2 {
 		font-family: var(--font-heading);
 		margin-top: 0;
-	}
-
-	.intro {
-		text-align: center;
-		margin-bottom: 1.5rem;
-		font-size: 1.1rem;
-		opacity: 0.8;
 	}
 
 	.browse-banner {
@@ -791,6 +886,8 @@
 		flex-direction: column;
 		align-items: stretch;
 		gap: 1rem;
+		width: 100%;
+		max-width: none;
 	}
 
 	.field {
@@ -848,24 +945,6 @@
 	.helper.centered {
 		margin: 0.25rem 0 0 0;
 		text-align: center;
-	}
-
-	.checkbox {
-		display: flex;
-		align-items: baseline;
-		gap: 0.5rem;
-		font-size: 0.95rem;
-		cursor: pointer;
-	}
-
-	.checkbox input {
-		flex-shrink: 0;
-	}
-
-	.checkbox-grid {
-		display: grid;
-		grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-		gap: 0.4rem 1rem;
 	}
 
 	button.primary {
@@ -938,6 +1017,12 @@
 		gap: 1rem;
 	}
 
+	.intent-stack {
+		display: flex;
+		flex-direction: column;
+		gap: 1rem;
+	}
+
 	.intent-option {
 		display: flex;
 		flex-direction: column;
@@ -963,7 +1048,123 @@
 	}
 
 	.intent-icon {
+		display: flex;
+		align-items: center;
+		gap: 0.6rem;
 		font-size: 1.5rem;
+	}
+
+	.checkbox-box {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		width: 1.3rem;
+		height: 1.3rem;
+		border: 2px solid var(--brand-subtle);
+		border-radius: 6px;
+		background-color: var(--bg);
+		color: var(--bg);
+		font-size: 0.95rem;
+		font-weight: 700;
+		line-height: 1;
+	}
+
+	.intent-option.selected .checkbox-box,
+	.select-card.selected .checkbox-box {
+		border-color: var(--brand);
+		background-color: var(--brand);
+	}
+
+	.select-card-grid {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		gap: 0.5rem;
+	}
+
+	.select-card {
+		display: flex;
+		align-items: center;
+		gap: 0.5rem;
+		padding: 0.5rem 0.75rem;
+		background-color: var(--bg);
+		border: 2px solid var(--brand-subtle);
+		border-radius: 12px;
+		cursor: pointer;
+		text-align: left;
+		font-family: var(--font-body);
+		font-size: 0.9rem;
+		color: var(--text);
+		transition: border-color 0.15s;
+	}
+
+	.select-card:hover {
+		border-color: var(--brand);
+	}
+
+	.select-card.selected {
+		border-color: var(--brand);
+	}
+
+	.select-card .checkbox-box {
+		flex-shrink: 0;
+		width: 1.1rem;
+		height: 1.1rem;
+		font-size: 0.8rem;
+	}
+
+	.phone-row {
+		display: flex;
+		gap: 0.5rem;
+	}
+
+	.phone-row .dial-code {
+		width: 5.5rem;
+		flex-shrink: 0;
+		text-align: center;
+	}
+
+	.phone-row .phone-number {
+		flex: 1;
+	}
+
+	.agreement {
+		position: relative;
+		display: flex;
+		/* global styles.css sets form label to flex-direction: column */
+		flex-direction: row;
+		align-items: center;
+		gap: 0.6rem;
+		cursor: pointer;
+		font-size: 0.95rem;
+	}
+
+	.agreement input {
+		position: absolute;
+		width: 1px;
+		height: 1px;
+		opacity: 0;
+		pointer-events: none;
+	}
+
+	.agreement .checkbox-box {
+		flex-shrink: 0;
+		width: 1.1rem;
+		height: 1.1rem;
+		font-size: 0.8rem;
+	}
+
+	.agreement input:checked + .checkbox-box {
+		border-color: var(--brand);
+		background-color: var(--brand);
+	}
+
+	.agreement input:checked + .checkbox-box::after {
+		content: '✓';
+	}
+
+	.agreement input:focus-visible + .checkbox-box {
+		outline: 2px solid var(--brand);
+		outline-offset: 1px;
 	}
 
 	.intent-label {
@@ -1055,7 +1256,7 @@
 		margin-bottom: 0.25rem;
 	}
 
-	.stay-in-loop {
+	.keep-informed {
 		border: 2px solid var(--brand);
 		border-radius: 16px;
 		padding: 1.25rem;
@@ -1063,9 +1264,30 @@
 		background-color: var(--bg);
 	}
 
-	.stay-in-loop h3 {
+	.keep-informed h3 {
 		margin-top: 0;
 		font-family: var(--font-heading);
+	}
+
+	.signup-confirmations {
+		margin: 1rem auto;
+		padding: 0;
+		max-width: 480px;
+		list-style: none;
+		text-align: left;
+	}
+
+	.signup-confirmations li {
+		display: flex;
+		align-items: baseline;
+		gap: 0.6rem;
+		padding: 0.4rem 0;
+	}
+
+	.confirm-tick {
+		flex-shrink: 0;
+		color: var(--brand);
+		font-weight: 700;
 	}
 
 	.inline-confirmation {
@@ -1111,34 +1333,6 @@
 		margin-bottom: 0;
 	}
 
-	.donate-promo {
-		border: 2px solid var(--brand);
-		border-radius: 16px;
-		padding: 1rem 1.25rem;
-		margin: 1.5rem auto;
-		max-width: 32rem;
-		text-align: left;
-		background-color: var(--bg);
-	}
-
-	.donate-promo h3 {
-		margin: 0 0 0.25rem 0;
-		font-family: var(--font-heading);
-		font-size: 1.1rem;
-	}
-
-	.donate-promo p {
-		margin: 0;
-		font-size: 0.95rem;
-	}
-
-	.stub-note {
-		text-align: center;
-		font-size: 0.9rem;
-		opacity: 0.8;
-		margin-top: 1.5rem;
-	}
-
 	.honey {
 		display: none;
 		opacity: 0;
@@ -1155,12 +1349,9 @@
 			padding: 1.5rem;
 		}
 
-		.intent-grid {
+		.intent-grid,
+		.select-card-grid {
 			grid-template-columns: 1fr;
-		}
-
-		.framing {
-			font-size: 1.8rem;
 		}
 	}
 </style>
