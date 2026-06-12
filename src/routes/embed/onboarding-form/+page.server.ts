@@ -2,7 +2,7 @@ import { fail } from '@sveltejs/kit'
 import type { FieldSet } from 'airtable'
 import type { Actions } from './$types'
 import type { NationalGroupsApiResponse } from '$api/national-groups/+server.js'
-import { createRecord } from '$lib/airtable'
+import { createRecord, updateRecord } from '$lib/airtable'
 import { isOnboardingLive } from '$lib/server/onboarding'
 import { recordStubSubmission } from '$lib/server/onboarding-stub'
 import { subscribeToSubstackNewsletter } from '$lib/server/substack'
@@ -77,6 +77,13 @@ export const actions: Actions = {
 		const mode = getString(data, 'mode') === 'browse' ? 'browse' : 'contact'
 		const newsletter = data.get('newsletter') === 'on'
 		const keepInformed = data.get('keep_informed') === 'on'
+		// Set when a step-2 submission already created the person's record:
+		// the later volunteer-form submission updates it instead of creating a
+		// duplicate. Step 2 sends every path through here, so the newsletter
+		// and Substack subscription happen right after step 2.
+		const existingRecordId = getString(data, 'record_id')
+		// The volunteer detail fields are only present on the step-3 form post.
+		const hasVolunteerDetails = data.get('volunteer_details') === 'on'
 
 		if (!fullName || !email || !country || !city) {
 			return fail(400, { message: 'Please fill in your name, email, country and city.' })
@@ -101,7 +108,7 @@ export const actions: Actions = {
 			'Email subscription': keepInformed
 		}
 
-		if (intent === 'Volunteer') {
+		if (intent === 'Volunteer' && hasVolunteerDetails) {
 			const languages = getStrings(data, 'languages').filter((l) => STORED_LANGUAGES.includes(l))
 			const motivations = getStrings(data, 'motivations').filter((m) => MOTIVATIONS.includes(m))
 			const skills = getStrings(data, 'skills').filter((s) => SKILLS.includes(s))
@@ -157,11 +164,18 @@ export const actions: Actions = {
 		const chapter = await lookupChapter(fetch, country)
 
 		if (isOnboardingLive()) {
-			await createRecord(AIRTABLE_BASE_ID, MEMBERS_TABLE_ID, fields)
-			if (newsletter) {
-				await subscribeToSubstackNewsletter(email)
+			let recordId: string | undefined = existingRecordId || undefined
+			if (recordId) {
+				await updateRecord(AIRTABLE_BASE_ID, MEMBERS_TABLE_ID, recordId, fields)
+			} else {
+				recordId = await createRecord(AIRTABLE_BASE_ID, MEMBERS_TABLE_ID, fields)
+				// Subscription happens on the initial (step 2) submission only;
+				// the volunteer-form update never re-subscribes.
+				if (newsletter) {
+					await subscribeToSubstackNewsletter(email)
+				}
 			}
-			return { success: true }
+			return { success: true, recordId }
 		}
 
 		const submission = recordStubSubmission({
@@ -173,12 +187,17 @@ export const actions: Actions = {
 			fields,
 			meta: {
 				mode,
+				updatesRecordId: existingRecordId || null,
 				chapterMatch: chapter,
-				wouldSubscribeToSubstackNewsletter: newsletter,
+				wouldSubscribeToSubstackNewsletter: newsletter && !existingRecordId,
 				stubbed: 'No Airtable write or Substack subscription was performed.'
 			}
 		})
 
-		return { success: true, submission }
+		return {
+			success: true,
+			recordId: existingRecordId || `stub-${submission.id}`,
+			submission
+		}
 	}
 }

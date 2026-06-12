@@ -86,16 +86,17 @@ export async function fetchAllPages<T extends Record<string, unknown>>(
  * @param baseId The Airtable Base ID
  * @param tableId The Airtable Table ID
  * @param fields The fields to create the record with
+ * @returns The created record's id, or undefined if the write failed
  */
 export async function createRecord(
 	baseId: string,
 	tableId: string,
 	fields: FieldSet
-): Promise<void> {
+): Promise<string | undefined> {
 	const apiKey = getWriteApiKey()
 	if (!apiKey) {
 		console.warn(`⚠️ Airtable API key not configured. Skipping record creation.`)
-		return
+		return undefined
 	}
 
 	try {
@@ -103,10 +104,42 @@ export async function createRecord(
 		const table = base(tableId)
 		// typecast lets Airtable coerce strings and create missing select
 		// options; callers are expected to validate values before writing.
-		await table.create([{ fields }], { typecast: true })
+		const records = await table.create([{ fields }], { typecast: true })
 		console.log(`Successfully created record in Airtable table ${tableId}`)
+		return records[0]?.id
 	} catch (error) {
 		console.error(`Error creating Airtable record in ${tableId}:`, error)
+		// We don't throw here to avoid failing the whole request if Airtable is down
+		return undefined
+	}
+}
+
+/**
+ * Updates an existing record in Airtable
+ * @param baseId The Airtable Base ID
+ * @param tableId The Airtable Table ID
+ * @param recordId The id of the record to update
+ * @param fields The fields to update on the record
+ */
+export async function updateRecord(
+	baseId: string,
+	tableId: string,
+	recordId: string,
+	fields: FieldSet
+): Promise<void> {
+	const apiKey = getWriteApiKey()
+	if (!apiKey) {
+		console.warn(`⚠️ Airtable API key not configured. Skipping record update.`)
+		return
+	}
+
+	try {
+		const base = new Airtable({ apiKey }).base(baseId)
+		const table = base(tableId)
+		await table.update([{ id: recordId, fields }], { typecast: true })
+		console.log(`Successfully updated record ${recordId} in Airtable table ${tableId}`)
+	} catch (error) {
+		console.error(`Error updating Airtable record ${recordId} in ${tableId}:`, error)
 		// We don't throw here to avoid failing the whole request if Airtable is down
 	}
 }

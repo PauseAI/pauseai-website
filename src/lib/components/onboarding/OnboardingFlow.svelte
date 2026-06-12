@@ -92,6 +92,9 @@
 	})
 	let mode: 'contact' | 'browse' = $state('contact')
 	let intent: IntentKey | null = $state(null)
+	// Airtable record id from the step-2 submission; later submissions send it
+	// back so the server updates the record instead of creating another.
+	let recordId = $state('')
 	let keepInformed = $state(false)
 	let submitting = $state(false)
 	let browseSignedUp = $state(false)
@@ -218,13 +221,18 @@
 		step = 2
 	}
 
-	function submitWith(onSuccess: () => void): SubmitFunction {
+	function submitWith(onSuccess: (data?: Record<string, unknown>) => void): SubmitFunction {
 		return () => {
 			submitting = true
 			return ({ result }) => {
 				submitting = false
 				if (result.type === 'success') {
-					onSuccess()
+					// Remember the created record so later submissions in the
+					// same flow update it rather than create a duplicate.
+					if (typeof result.data?.recordId === 'string') {
+						recordId = result.data.recordId
+					}
+					onSuccess(result.data)
 				} else if (result.type === 'failure') {
 					toast.error(String(result.data?.message ?? 'Something went wrong. Please try again.'))
 				} else {
@@ -416,6 +424,9 @@
 				{@render hiddenBasics()}
 				{@render honeypotField('ob-nickname-2')}
 				<input type="hidden" name="mode" value="contact" />
+				{#if recordId}
+					<input type="hidden" name="record_id" value={recordId} />
+				{/if}
 				<input
 					type="hidden"
 					name="intent"
@@ -483,17 +494,17 @@
 						</button>
 					{/each}
 				</div>
-				{#if intent === 'volunteer'}
-					<button type="button" class="primary" onclick={() => (step = 3)}>Continue →</button>
-				{:else}
-					<button
-						type="submit"
-						class="primary"
-						disabled={(!intent && !keepInformed && !basics.newsletter) || submitting}
-					>
-						{submitting ? 'Submitting...' : intent === 'lead' ? 'Continue →' : 'Submit →'}
-					</button>
-				{/if}
+				<button
+					type="submit"
+					class="primary"
+					disabled={(!intent && !keepInformed && !basics.newsletter) || submitting}
+				>
+					{submitting
+						? 'Submitting...'
+						: intent === 'volunteer' || intent === 'lead'
+							? 'Continue →'
+							: 'Submit →'}
+				</button>
 				<button type="button" class="back" onclick={() => (step = 1)}>← Back</button>
 			</form>
 		{:else if step === 3 && !intent}
@@ -604,6 +615,10 @@
 				{@render honeypotField('ob-nickname-4')}
 				<input type="hidden" name="mode" value="contact" />
 				<input type="hidden" name="intent" value="Volunteer" />
+				<input type="hidden" name="volunteer_details" value="on" />
+				{#if recordId}
+					<input type="hidden" name="record_id" value={recordId} />
+				{/if}
 				{#if keepInformed}
 					<input type="hidden" name="keep_informed" value="on" />
 				{/if}
