@@ -643,6 +643,12 @@
 			"link": "https://pauseai.cz",
 			"lat": 49.19522,
 			"lon": 16.60796
+		},
+		{
+			"link": "https://www.pause-ai.de/lokalgruppen",
+			"name": "Münster",
+			"lat": 51.58,
+			"lon": 7.38
 		}
 	]
 }
