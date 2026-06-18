@@ -398,7 +398,7 @@ ${userPostcode.toUpperCase()}`)
 								Sending
 								<LoadingSpinner size="small" color="currentColor" />
 							{:else}
-								Confirm &amp; send
+								Confirm &amp; Send
 							{/if}
 						</button>
 					</div>
