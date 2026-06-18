@@ -164,7 +164,7 @@ export const POST: RequestHandler = async ({ request }) => {
 				Recipient: [mpRecordId], // Array of record IDs for linked field
 				Subject: data.subject,
 				Message: data.message,
-				Campaign: 'Liability letter',
+				Campaign: 'Frontier AI letter',
 				'Attending Parliament 23 June 2026': data.attendingVisit ?? false
 			}
 		}
