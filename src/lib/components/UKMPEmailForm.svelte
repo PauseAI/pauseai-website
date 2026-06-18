@@ -20,16 +20,16 @@
 
 	let senderName = $derived(userName)
 	let senderEmail = $state('')
-	let subject = $state(`Request to co-sign letter on frontier AI`)
+	let subject = $state(`Request to co-sign letter on frontier AI risks`)
 	let message = $derived(`Dear ${mp.salutation},
 
-Would you be willing to sign this open letter supporting legislation to protect British people from the harms of AI?
+Would you be willing to sign this open letter supporting legislation to protect British people from the harms of frontier AI?
 
 I’m a resident of ${mp.constituency} and a supporter of **PauseAI**, a civic movement focused on averting the risks of advanced AI. I am very concerned that AI development is racing ahead without adequate protection for the public.
 
-**Existing UK law does not reliably hold AI developers liable for damage or deaths caused by their models**, even when the danger is predictable, preventable and uniquely enabled by an AI model. And the UK does not have legal standards or a regulator for AI systems. To ensure our safety, we need AI legislation now.
+**The UK has no specific legal standards for AI.** No regulator oversees frontier AI development. And UK law does not reliably hold developers liable for damage or deaths caused by their models, even when the danger is predictable, preventable and uniquely enabled by AI.
 
- - Alternatively, please review the letter and briefing attached and send over any questions or concerns.
+To ensure our safety, I believe that we need frontier AI legislation as soon as possible. Please could we arrange a short meeting to discuss this important matter?
 
 Thank you for your consideration,
 
@@ -46,7 +46,7 @@ ${userPostcode.toUpperCase()}`)
 	let attendingVisit = $state(false)
 	let messageBeforeVisit: string | null = $state(null)
 
-	const ORIGINAL_NEXT_STEPS = ` - Alternatively, please review the letter and briefing attached and send over any questions or concerns.`
+	const ORIGINAL_NEXT_STEPS = `Please could we arrange a short meeting to discuss this important matter?`
 
 	const VISIT_SENTENCE = `**I will be visiting Parliament on the afternoon of Tuesday June 23rd. Will you meet with me to discuss the letter and your plan for addressing AI risks?**`
 
@@ -325,8 +325,8 @@ ${userPostcode.toUpperCase()}`)
 								class="pdf-thumbnail-image"
 							/>
 							<div class="pdf-info">
-								<span class="pdf-title">Frontier AI</span>
-								<span class="pdf-subtitle">Open Letter</span>
+								<span class="pdf-title">Open Letter</span>
+								<span class="pdf-subtitle">To the Prime Minister</span>
 							</div>
 						</Link>
 						<Link
@@ -340,8 +340,8 @@ ${userPostcode.toUpperCase()}`)
 								class="pdf-thumbnail-image"
 							/>
 							<div class="pdf-info">
-								<span class="pdf-title">Frontier AI</span>
-								<span class="pdf-subtitle">Risks Policy Briefing</span>
+								<span class="pdf-title">Policy Briefing</span>
+								<span class="pdf-subtitle">On frontier AI risks</span>
 							</div>
 						</Link>
 					</div>
