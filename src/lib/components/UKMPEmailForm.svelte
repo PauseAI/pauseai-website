@@ -20,17 +20,15 @@
 
 	let senderName = $derived(userName)
 	let senderEmail = $state('')
-	let subject = $state(`Request to co-sign letter on AI liability`)
+	let subject = $state(`Request to co-sign letter on frontier AI`)
 	let message = $derived(`Dear ${mp.salutation},
 
-Would you be willing to sign this open letter supporting legislation to hold AI companies accountable when their models cause severe harm?
+Would you be willing to sign this open letter supporting legislation to protect British people from the harms of AI?
 
 I’m a resident of ${mp.constituency} and a supporter of **PauseAI**, a civic movement focused on averting the risks of advanced AI. I am very concerned that AI development is racing ahead without adequate protection for the public.
 
-**Existing UK law does not reliably hold AI developers liable for damage or deaths caused by their models**, even when the danger is predictable, preventable and uniquely enabled by an AI model. To ensure our safety, the incentives of AI developers must be aligned with the public interest.
+**Existing UK law does not reliably hold AI developers liable for damage or deaths caused by their models**, even when the danger is predictable, preventable and uniquely enabled by an AI model. And the UK does not have legal standards or a regulator for AI systems. To ensure our safety, we need AI legislation now.
 
-Next steps
- - 30-min call. Let me know what time would work for you.
  - Alternatively, please review the letter and briefing attached and send over any questions or concerns.
 
 Thank you for your consideration,
@@ -48,9 +46,7 @@ ${userPostcode.toUpperCase()}`)
 	let attendingVisit = $state(false)
 	let messageBeforeVisit: string | null = $state(null)
 
-	const ORIGINAL_NEXT_STEPS = `Next steps
- - 30-min call. Let me know what time would work for you.
- - Alternatively, please review the letter and briefing attached and send over any questions or concerns.`
+	const ORIGINAL_NEXT_STEPS = ` - Alternatively, please review the letter and briefing attached and send over any questions or concerns.`
 
 	const VISIT_SENTENCE = `**I will be visiting Parliament on the afternoon of Tuesday June 23rd. Will you meet with me to discuss the letter and your plan for addressing AI risks?**`
 
@@ -319,33 +315,33 @@ ${userPostcode.toUpperCase()}`)
 					<h4>Attachments:</h4>
 					<div class="pdf-attachments">
 						<Link
-							href="/pdfs/AI_Liability_Open_Letter.pdf#no-localize"
+							href="/pdfs/Frontier_AI_Open_Letter.pdf#no-localize"
 							target="_blank"
 							class="pdf-thumbnail"
 						>
 							<img
-								src="/pdfs/AI_Liability_Open_Letter.jpg"
-								alt="AI Liability Open Letter thumbnail"
+								src="/pdfs/Frontier_AI_Open_Letter.jpg"
+								alt="Frontier AI Open Letter thumbnail"
 								class="pdf-thumbnail-image"
 							/>
 							<div class="pdf-info">
-								<span class="pdf-title">AI Liability</span>
+								<span class="pdf-title">Frontier AI</span>
 								<span class="pdf-subtitle">Open Letter</span>
 							</div>
 						</Link>
 						<Link
-							href="/pdfs/AI_Liability_Policy_Briefing.pdf#no-localize"
+							href="/pdfs/Frontier_AI_Risks_Policy_Briefing.pdf#no-localize"
 							target="_blank"
 							class="pdf-thumbnail"
 						>
 							<img
-								src="/pdfs/AI_Liability_Policy_Briefing.jpg"
-								alt="AI Liability Policy Briefing thumbnail"
+								src="/pdfs/Frontier_AI_Risks_Policy_Briefing.jpg"
+								alt="Frontier AI Risks Policy Briefing thumbnail"
 								class="pdf-thumbnail-image"
 							/>
 							<div class="pdf-info">
-								<span class="pdf-title">AI Liability</span>
-								<span class="pdf-subtitle">Policy Briefing</span>
+								<span class="pdf-title">Frontier AI</span>
+								<span class="pdf-subtitle">Risks Policy Briefing</span>
 							</div>
 						</Link>
 					</div>
