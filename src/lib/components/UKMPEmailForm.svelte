@@ -3,6 +3,7 @@
 	import { micromark } from 'micromark'
 	import LoadingSpinner from './LoadingSpinner.svelte'
 	import Link from '$lib/components/Link.svelte'
+	import { slide } from 'svelte/transition'
 
 	interface Props {
 		mp: {
@@ -42,6 +43,7 @@ ${userPostcode.toUpperCase()}`)
 	let isSubmitting = $state(false)
 	let submitStatus: 'idle' | 'success' | 'error' = $state('idle')
 	let errorMessage = $state('')
+	let confirmingSend = $state(false)
 
 	let attendingVisit = $state(false)
 	let messageBeforeVisit: string | null = $state(null)
@@ -164,10 +166,28 @@ ${userPostcode.toUpperCase()}`)
 		}
 	})
 
+	// First click reveals the confirm/cancel buttons rather than sending,
+	// so people don't fire off an email by accident.
+	function requestSend() {
+		if (!senderEmail.trim()) {
+			errorMessage = 'Please fill in your email address'
+			submitStatus = 'error'
+			return
+		}
+		errorMessage = ''
+		submitStatus = 'idle'
+		confirmingSend = true
+	}
+
+	function cancelSend() {
+		confirmingSend = false
+	}
+
 	async function handleSubmit() {
 		if (!senderEmail.trim()) {
 			errorMessage = 'Please fill in your email address'
 			submitStatus = 'error'
+			confirmingSend = false
 			return
 		}
 
@@ -198,10 +218,12 @@ ${userPostcode.toUpperCase()}`)
 			} else {
 				submitStatus = 'error'
 				errorMessage = result.message || 'Failed to send email'
+				confirmingSend = false
 			}
 		} catch (error) {
 			submitStatus = 'error'
 			errorMessage = 'Network error - please try again'
+			confirmingSend = false
 			console.error('Email submission error:', error)
 		} finally {
 			isSubmitting = false
@@ -354,14 +376,43 @@ ${userPostcode.toUpperCase()}`)
 				</div>
 			{/if}
 
-			<button type="button" disabled={isSubmitting} class="submit-button" onclick={handleSubmit}>
-				{#if isSubmitting}
-					Sending
-					<LoadingSpinner size="small" color="currentColor" />
-				{:else}
+			{#if confirmingSend}
+				<div class="confirm-box" in:slide={{ duration: 250 }}>
+					<p class="confirm-prompt">Send this email to <strong>{mp.name}</strong>?</p>
+					<div class="confirm-actions">
+						<button
+							type="button"
+							class="cancel-button"
+							onclick={cancelSend}
+							disabled={isSubmitting}
+						>
+							Cancel
+						</button>
+						<button
+							type="button"
+							class="submit-button confirm-button"
+							disabled={isSubmitting}
+							onclick={handleSubmit}
+						>
+							{#if isSubmitting}
+								Sending
+								<LoadingSpinner size="small" color="currentColor" />
+							{:else}
+								Confirm &amp; Send
+							{/if}
+						</button>
+					</div>
+				</div>
+			{:else}
+				<button
+					type="button"
+					class="submit-button send-button"
+					onclick={requestSend}
+					in:slide={{ duration: 250 }}
+				>
 					Send Email
-				{/if}
-			</button>
+				</button>
+			{/if}
 		</form>
 	{/if}
 </div>
@@ -702,6 +753,75 @@ ${userPostcode.toUpperCase()}`)
 	.submit-button:disabled {
 		background: var(--text-muted);
 		cursor: not-allowed;
+	}
+
+	.confirm-box {
+		width: 100%;
+		margin-top: 1rem;
+		margin-bottom: 1rem;
+		padding: 1rem;
+		box-sizing: border-box;
+		border: 1px solid var(--brand);
+		border-radius: 8px;
+		background: var(--bg);
+		display: flex;
+		flex-direction: column;
+		gap: 0.75rem;
+	}
+
+	.confirm-prompt {
+		margin: 0;
+		text-align: center;
+		font-size: 0.95rem;
+		color: var(--text);
+	}
+
+	.confirm-actions {
+		display: flex;
+		align-items: stretch;
+		gap: 0.75rem;
+	}
+
+	.confirm-box .submit-button {
+		margin-top: 0;
+		margin-bottom: 0;
+	}
+
+	.confirm-button {
+		flex: 1;
+	}
+
+	/* While sending, keep the brand colour + full opacity (just show the spinner)
+	   instead of fading to the grey disabled style, which read as the button
+	   "fading out" right before the success swap. */
+	.confirm-button:disabled {
+		background: var(--brand);
+		opacity: 1;
+		cursor: wait;
+	}
+
+	.cancel-button {
+		flex: 1;
+		background: transparent;
+		color: var(--text);
+		border: 1px solid var(--border);
+		padding: 0.75rem 1.5rem;
+		border-radius: 4px;
+		font-size: 1rem;
+		cursor: pointer;
+		transition:
+			background-color 0.2s,
+			border-color 0.2s;
+	}
+
+	.cancel-button:hover:not(:disabled) {
+		background: var(--bg-subtle);
+		border-color: var(--brand);
+	}
+
+	.cancel-button:disabled {
+		cursor: not-allowed;
+		opacity: 0.6;
 	}
 
 	.success-message {
