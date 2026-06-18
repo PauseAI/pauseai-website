@@ -3,6 +3,7 @@
 	import { micromark } from 'micromark'
 	import LoadingSpinner from './LoadingSpinner.svelte'
 	import Link from '$lib/components/Link.svelte'
+	import { slide } from 'svelte/transition'
 
 	interface Props {
 		mp: {
@@ -376,26 +377,41 @@ ${userPostcode.toUpperCase()}`)
 			{/if}
 
 			{#if confirmingSend}
-				<div class="confirm-row">
-					<button type="button" class="cancel-button" onclick={cancelSend} disabled={isSubmitting}>
-						Cancel
-					</button>
-					<button
-						type="button"
-						class="submit-button confirm-button"
-						disabled={isSubmitting}
-						onclick={handleSubmit}
-					>
-						{#if isSubmitting}
-							Sending
-							<LoadingSpinner size="small" color="currentColor" />
-						{:else}
-							Confirm &amp; send
-						{/if}
-					</button>
+				<div class="confirm-box" in:slide={{ duration: 250 }}>
+					<p class="confirm-prompt">Send this email to <strong>{mp.name}</strong>?</p>
+					<div class="confirm-actions">
+						<button
+							type="button"
+							class="cancel-button"
+							onclick={cancelSend}
+							disabled={isSubmitting}
+						>
+							Cancel
+						</button>
+						<button
+							type="button"
+							class="submit-button confirm-button"
+							disabled={isSubmitting}
+							onclick={handleSubmit}
+						>
+							{#if isSubmitting}
+								Sending
+								<LoadingSpinner size="small" color="currentColor" />
+							{:else}
+								Confirm &amp; send
+							{/if}
+						</button>
+					</div>
 				</div>
 			{:else}
-				<button type="button" class="submit-button" onclick={requestSend}>Send Email</button>
+				<button
+					type="button"
+					class="submit-button send-button"
+					onclick={requestSend}
+					in:slide={{ duration: 250 }}
+				>
+					Send Email
+				</button>
 			{/if}
 		</form>
 	{/if}
@@ -739,15 +755,34 @@ ${userPostcode.toUpperCase()}`)
 		cursor: not-allowed;
 	}
 
-	.confirm-row {
+	.confirm-box {
+		width: 100%;
+		margin-top: 1rem;
+		margin-bottom: 1rem;
+		padding: 1rem;
+		box-sizing: border-box;
+		border: 1px solid var(--brand);
+		border-radius: 8px;
+		background: var(--bg);
+		display: flex;
+		flex-direction: column;
+		gap: 0.75rem;
+	}
+
+	.confirm-prompt {
+		margin: 0;
+		text-align: center;
+		font-size: 0.95rem;
+		color: var(--text);
+	}
+
+	.confirm-actions {
 		display: flex;
 		align-items: stretch;
 		gap: 0.75rem;
-		margin-top: 1rem;
-		margin-bottom: 1rem;
 	}
 
-	.confirm-row .submit-button {
+	.confirm-box .submit-button {
 		margin-top: 0;
 		margin-bottom: 0;
 	}
@@ -756,7 +791,17 @@ ${userPostcode.toUpperCase()}`)
 		flex: 1;
 	}
 
+	/* While sending, keep the brand colour + full opacity (just show the spinner)
+	   instead of fading to the grey disabled style, which read as the button
+	   "fading out" right before the success swap. */
+	.confirm-button:disabled {
+		background: var(--brand);
+		opacity: 1;
+		cursor: wait;
+	}
+
 	.cancel-button {
+		flex: 1;
 		background: transparent;
 		color: var(--text);
 		border: 1px solid var(--border);
