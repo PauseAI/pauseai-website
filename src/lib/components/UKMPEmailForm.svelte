@@ -50,7 +50,7 @@ ${userPostcode.toUpperCase()}`)
 
 	const ORIGINAL_NEXT_STEPS = `Please could we arrange a short meeting to discuss this important matter?`
 
-	const VISIT_SENTENCE = `**I will be visiting Parliament on the afternoon of Tuesday June 23rd. Will you meet with me to discuss the letter and your plan for addressing AI risks?**`
+	const VISIT_SENTENCE = `**I will be visiting Parliament on Tuesday June 23rd between 1pm and 4pm. Will you meet with me to discuss the letter and your plan for addressing AI risks?**`
 
 	function toggleVisit() {
 		if (attendingVisit) {
