@@ -14,7 +14,13 @@
 <div class="hero">
 	<!-- SLOGAN — the movement's permanent identity, over a full-bleed protest photo. -->
 	<section class="slogan">
-		<Image src="/protests/Home_Hero_-_London_June_2025.jpg" class="slogan-photo" sizes="200vw" />
+		<Image
+			src="/protests/Home_Hero_-_London_June_2025.jpg"
+			class="slogan-photo"
+			sizes="200vw"
+			loading="eager"
+			fetchpriority="high"
+		/>
 		<div class="slogan-scrim" aria-hidden="true"></div>
 
 		<div class="slogan-inner">
