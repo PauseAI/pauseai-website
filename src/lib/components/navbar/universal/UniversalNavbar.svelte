@@ -60,7 +60,6 @@
 
 	.inverted-header {
 		color: white;
-		z-index: 1;
 	}
 
 	nav {
@@ -69,12 +68,9 @@
 		align-items: center;
 		justify-content: center;
 		flex-wrap: wrap;
+		row-gap: 0.25rem;
 		container-type: inline-size;
 		padding: var(--vspace) 0;
-	}
-
-	nav > * {
-		margin-bottom: 0.25rem;
 	}
 
 	.logo-container {

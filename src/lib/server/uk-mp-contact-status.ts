@@ -10,7 +10,7 @@ export interface UKMPContactStatus {
 }
 
 type UKParliamentarianFields = {
-	'Responded Liability Letter'?: boolean | null
+	'Responded Frontier AI Letter'?: boolean | null
 }
 
 /**
@@ -62,7 +62,7 @@ export async function ukCheckMPContactHistory(mpEmail: string): Promise<UKMPCont
 			return defaultResponse
 		}
 
-		const responded = Boolean(data.records[0].fields['Responded Liability Letter'])
+		const responded = Boolean(data.records[0].fields['Responded Frontier AI Letter'])
 
 		console.log(`MP lookup success: ${mpEmail} - responded: ${responded}`)
 

@@ -3,6 +3,7 @@
 	import { micromark } from 'micromark'
 	import LoadingSpinner from './LoadingSpinner.svelte'
 	import Link from '$lib/components/Link.svelte'
+	import { slide } from 'svelte/transition'
 
 	interface Props {
 		mp: {
@@ -20,18 +21,16 @@
 
 	let senderName = $derived(userName)
 	let senderEmail = $state('')
-	let subject = $state(`Request to co-sign letter on AI liability`)
+	let subject = $state(`Request to co-sign letter on frontier AI risks`)
 	let message = $derived(`Dear ${mp.salutation},
 
-Would you be willing to sign this open letter supporting legislation to hold AI companies accountable when their models cause severe harm?
+Would you be willing to sign this open letter supporting legislation to protect British people from the harms of frontier AI?
 
 I’m a resident of ${mp.constituency} and a supporter of **PauseAI**, a civic movement focused on averting the risks of advanced AI. I am very concerned that AI development is racing ahead without adequate protection for the public.
 
-**Existing UK law does not reliably hold AI developers liable for damage or deaths caused by their models**, even when the danger is predictable, preventable and uniquely enabled by an AI model. To ensure our safety, the incentives of AI developers must be aligned with the public interest.
+**The UK has no specific legal standards for AI.** No regulator oversees frontier AI development. And UK law does not reliably hold developers liable for damage or deaths caused by their models, even when the danger is predictable, preventable and uniquely enabled by AI.
 
-Next steps
- - 30-min call. Let me know what time would work for you.
- - Alternatively, please review the letter and briefing attached and send over any questions or concerns.
+To ensure our safety, I believe that we need frontier AI legislation as soon as possible. Please could we arrange a short meeting to discuss this important matter?
 
 Thank you for your consideration,
 
@@ -44,15 +43,14 @@ ${userPostcode.toUpperCase()}`)
 	let isSubmitting = $state(false)
 	let submitStatus: 'idle' | 'success' | 'error' = $state('idle')
 	let errorMessage = $state('')
+	let confirmingSend = $state(false)
 
 	let attendingVisit = $state(false)
 	let messageBeforeVisit: string | null = $state(null)
 
-	const ORIGINAL_NEXT_STEPS = `Next steps
- - 30-min call. Let me know what time would work for you.
- - Alternatively, please review the letter and briefing attached and send over any questions or concerns.`
+	const ORIGINAL_NEXT_STEPS = `Please could we arrange a short meeting to discuss this important matter?`
 
-	const VISIT_SENTENCE = `**I will be visiting Parliament on Tuesday June 23rd. Will you meet with me to discuss the letter and your plan for addressing AI risks?**`
+	const VISIT_SENTENCE = `**I will be visiting Parliament on Tuesday June 23rd between 1pm and 4pm. Will you meet with me to discuss the letter and your plan for addressing AI risks?**`
 
 	function toggleVisit() {
 		if (attendingVisit) {
@@ -168,10 +166,28 @@ ${userPostcode.toUpperCase()}`)
 		}
 	})
 
+	// First click reveals the confirm/cancel buttons rather than sending,
+	// so people don't fire off an email by accident.
+	function requestSend() {
+		if (!senderEmail.trim()) {
+			errorMessage = 'Please fill in your email address'
+			submitStatus = 'error'
+			return
+		}
+		errorMessage = ''
+		submitStatus = 'idle'
+		confirmingSend = true
+	}
+
+	function cancelSend() {
+		confirmingSend = false
+	}
+
 	async function handleSubmit() {
 		if (!senderEmail.trim()) {
 			errorMessage = 'Please fill in your email address'
 			submitStatus = 'error'
+			confirmingSend = false
 			return
 		}
 
@@ -202,10 +218,12 @@ ${userPostcode.toUpperCase()}`)
 			} else {
 				submitStatus = 'error'
 				errorMessage = result.message || 'Failed to send email'
+				confirmingSend = false
 			}
 		} catch (error) {
 			submitStatus = 'error'
 			errorMessage = 'Network error - please try again'
+			confirmingSend = false
 			console.error('Email submission error:', error)
 		} finally {
 			isSubmitting = false
@@ -319,33 +337,33 @@ ${userPostcode.toUpperCase()}`)
 					<h4>Attachments:</h4>
 					<div class="pdf-attachments">
 						<Link
-							href="/pdfs/AI_Liability_Open_Letter.pdf#no-localize"
+							href="/pdfs/Frontier_AI_Open_Letter.pdf#no-localize"
 							target="_blank"
 							class="pdf-thumbnail"
 						>
 							<img
-								src="/pdfs/AI_Liability_Open_Letter.jpg"
-								alt="AI Liability Open Letter thumbnail"
+								src="/pdfs/Frontier_AI_Open_Letter.jpg"
+								alt="Frontier AI Open Letter thumbnail"
 								class="pdf-thumbnail-image"
 							/>
 							<div class="pdf-info">
-								<span class="pdf-title">AI Liability</span>
-								<span class="pdf-subtitle">Open Letter</span>
+								<span class="pdf-title">Open Letter</span>
+								<span class="pdf-subtitle">To the Prime Minister</span>
 							</div>
 						</Link>
 						<Link
-							href="/pdfs/AI_Liability_Policy_Briefing.pdf#no-localize"
+							href="/pdfs/Frontier_AI_Risks_Policy_Briefing.pdf#no-localize"
 							target="_blank"
 							class="pdf-thumbnail"
 						>
 							<img
-								src="/pdfs/AI_Liability_Policy_Briefing.jpg"
-								alt="AI Liability Policy Briefing thumbnail"
+								src="/pdfs/Frontier_AI_Risks_Policy_Briefing.jpg"
+								alt="Frontier AI Risks Policy Briefing thumbnail"
 								class="pdf-thumbnail-image"
 							/>
 							<div class="pdf-info">
-								<span class="pdf-title">AI Liability</span>
-								<span class="pdf-subtitle">Policy Briefing</span>
+								<span class="pdf-title">Policy Briefing</span>
+								<span class="pdf-subtitle">On frontier AI risks</span>
 							</div>
 						</Link>
 					</div>
@@ -358,14 +376,43 @@ ${userPostcode.toUpperCase()}`)
 				</div>
 			{/if}
 
-			<button type="button" disabled={isSubmitting} class="submit-button" onclick={handleSubmit}>
-				{#if isSubmitting}
-					Sending
-					<LoadingSpinner size="small" color="currentColor" />
-				{:else}
+			{#if confirmingSend}
+				<div class="confirm-box" in:slide={{ duration: 250 }}>
+					<p class="confirm-prompt">Send this email to <strong>{mp.name}</strong>?</p>
+					<div class="confirm-actions">
+						<button
+							type="button"
+							class="cancel-button"
+							onclick={cancelSend}
+							disabled={isSubmitting}
+						>
+							Cancel
+						</button>
+						<button
+							type="button"
+							class="submit-button confirm-button"
+							disabled={isSubmitting}
+							onclick={handleSubmit}
+						>
+							{#if isSubmitting}
+								Sending
+								<LoadingSpinner size="small" color="currentColor" />
+							{:else}
+								Confirm &amp; Send
+							{/if}
+						</button>
+					</div>
+				</div>
+			{:else}
+				<button
+					type="button"
+					class="submit-button send-button"
+					onclick={requestSend}
+					in:slide={{ duration: 250 }}
+				>
 					Send Email
-				{/if}
-			</button>
+				</button>
+			{/if}
 		</form>
 	{/if}
 </div>
@@ -706,6 +753,75 @@ ${userPostcode.toUpperCase()}`)
 	.submit-button:disabled {
 		background: var(--text-muted);
 		cursor: not-allowed;
+	}
+
+	.confirm-box {
+		width: 100%;
+		margin-top: 1rem;
+		margin-bottom: 1rem;
+		padding: 1rem;
+		box-sizing: border-box;
+		border: 1px solid var(--brand);
+		border-radius: 8px;
+		background: var(--bg);
+		display: flex;
+		flex-direction: column;
+		gap: 0.75rem;
+	}
+
+	.confirm-prompt {
+		margin: 0;
+		text-align: center;
+		font-size: 0.95rem;
+		color: var(--text);
+	}
+
+	.confirm-actions {
+		display: flex;
+		align-items: stretch;
+		gap: 0.75rem;
+	}
+
+	.confirm-box .submit-button {
+		margin-top: 0;
+		margin-bottom: 0;
+	}
+
+	.confirm-button {
+		flex: 1;
+	}
+
+	/* While sending, keep the brand colour + full opacity (just show the spinner)
+	   instead of fading to the grey disabled style, which read as the button
+	   "fading out" right before the success swap. */
+	.confirm-button:disabled {
+		background: var(--brand);
+		opacity: 1;
+		cursor: wait;
+	}
+
+	.cancel-button {
+		flex: 1;
+		background: transparent;
+		color: var(--text);
+		border: 1px solid var(--border);
+		padding: 0.75rem 1.5rem;
+		border-radius: 4px;
+		font-size: 1rem;
+		cursor: pointer;
+		transition:
+			background-color 0.2s,
+			border-color 0.2s;
+	}
+
+	.cancel-button:hover:not(:disabled) {
+		background: var(--bg-subtle);
+		border-color: var(--brand);
+	}
+
+	.cancel-button:disabled {
+		cursor: not-allowed;
+		opacity: 0.6;
 	}
 
 	.success-message {
