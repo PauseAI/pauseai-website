@@ -36,11 +36,8 @@
 		query: { url: true }
 	})
 
-	let isString = $derived(typeof src === 'string')
-	let fullPath = $derived(isString && src.startsWith('/') ? `../../assets/images${src}` : null)
-	let picture: Picture | null = $derived(
-		(!isString && src) ?? pictureModules[fullPath ?? ''] ?? null
-	)
+	let fullPath = $derived(src.startsWith('/') ? `../../assets/images${src}` : null)
+	let picture: Picture | null = $derived(pictureModules[fullPath ?? ''] ?? null)
 	let assetUrl: string | null = $derived(assetUrlModules[fullPath ?? ''] ?? null)
 </script>
 
