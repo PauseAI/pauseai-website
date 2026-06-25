@@ -17,7 +17,7 @@ Statements have been received from people across Europe, North America, Africa a
 
 These worries seem to be justified: [The International Monetary Fund (IMF) predicts](https://www.imf.org/en/blogs/articles/2024/01/14/ai-will-transform-the-global-economy-lets-make-sure-it-benefits-humanity) that 60 percent of roles in advanced economies will be impacted by AI.
 
-![I'm a university lecturer. It makes me quite angry and frightened to think that tech billionaires are rolling the  dice with humanity's future.](/shareable1.jpg "Simon, United Kingdom")
+![I'm a university lecturer. It makes me quite angry and frightened to think that tech billionaires are rolling the  dice with humanity's future.](/shareable1.jpg 'Simon, United Kingdom')
 
 **Economic disruption is the tip of the iceberg**
 
@@ -29,7 +29,7 @@ In the [largest-ever survey](https://blog.aiimpacts.org/p/2023-ai-survey-of-2778
 
 Hundreds of top AI researchers and the CEOs of OpenAI, Google DeepMind and Anthropic have signed an [open statement](https://aistatement.com/work/statement-on-ai-extinction-risk) declaring that "mitigating the risk of extinction from AI should be a global priority alongside other societal-scale risks such as pandemics and nuclear war."
 
-![I am facing the prospect that nine years of university study may soon be obsolete, with the corresponding loss of meaning and professional standing that this entails.  ](/shareable-2.jpg "Post-doc student, Spain")
+![I am facing the prospect that nine years of university study may soon be obsolete, with the corresponding loss of meaning and professional standing that this entails.  ](/shareable-2.jpg 'Post-doc student, Spain')
 
 **Coordinated events**
 
