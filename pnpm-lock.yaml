@@ -241,7 +241,7 @@ importers:
         specifier: ^5.56.3
         version: 5.56.3(@typescript-eslint/types@8.62.0)
       svelte-check:
-        specifier: ^4.7.0
+        specifier: ^4.7.1
         version: 4.7.1(picomatch@4.0.4)(svelte@5.56.3(@typescript-eslint/types@8.62.0))(typescript@6.0.3)
       tsx:
         specifier: ^4.22.4
