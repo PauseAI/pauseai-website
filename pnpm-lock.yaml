@@ -190,8 +190,8 @@ importers:
         specifier: ^16.2.0
         version: 16.2.0
       knip:
-        specifier: ^6.18.0
-        version: 6.18.0
+        specifier: ^6.20.0
+        version: 6.20.0
       lefthook:
         specifier: ^2.1.9
         version: 2.1.9
@@ -2793,8 +2793,8 @@ packages:
     resolution: {integrity: sha512-o+NO+8WrRiQEE4/7nwRJhN1HWpVmJm511pBHUxPLtp0BUISzlBplORYSmTclCnJvQq2tKu/sgl3xVpkc7ZWuQQ==}
     engines: {node: '>=6'}
 
-  knip@6.18.0:
-    resolution: {integrity: sha512-RlT6fK3epETsEUCVdlz96CiJN3DQJwuxOuQhEeAVWjNRuAUJHWwe+XolTL8vIiwLPZ38tTdPWJUgZyTdskOEog==}
+  knip@6.20.0:
+    resolution: {integrity: sha512-q+HYrS7FOERk32GM7g43IdTG7TurN7+YMLZrNpCxubZPYZyQwliBgd18yH4oYQL7YgGtOxP2fCqess3K2XaK2Q==}
     engines: {node: ^20.19.0 || >=22.12.0}
     hasBin: true
 
@@ -6323,7 +6323,7 @@ snapshots:
 
   kleur@4.1.5: {}
 
-  knip@6.18.0:
+  knip@6.20.0:
     dependencies:
       fdir: 6.5.0(picomatch@4.0.4)
       formatly: 0.3.0
