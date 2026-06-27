@@ -59,7 +59,7 @@
 
 	// Surface stub/live mode in the browser console when the form loads. The
 	// pages embedding the form can be prerendered (e.g. /join), so the runtime
-	// env isn't available at render time — ask the server instead.
+	// env isn't available at render time, ask the server instead.
 	onMount(async () => {
 		try {
 			const response = await fetch('/api/onboarding-mode')
@@ -67,8 +67,8 @@
 			const { live } = (await response.json()) as OnboardingModeApiResponse
 			console.log(
 				live
-					? 'Onboarding form: LIVE mode — submissions write to Airtable.'
-					: '🧪 Onboarding form: STUB mode — submissions are captured at /embed/onboarding-form/stub, no Airtable write or Substack subscription. Set ONBOARDING_LIVE=true to go live.'
+					? 'Onboarding form: LIVE mode. Submissions write to Airtable.'
+					: '🧪 Onboarding form: STUB mode. Submissions are captured at /embed/onboarding-form/stub, no Airtable write or Substack subscription. Set ONBOARDING_LIVE=true to go live.'
 			)
 		} catch {
 			// Mode logging is best-effort; never break the form over it.
@@ -78,7 +78,7 @@
 	let step: 1 | 2 | 3 | 4 = $state(1)
 	let flowEl: HTMLDivElement | undefined = $state()
 
-	// Scroll back to the top of the flow on step changes — the volunteer form
+	// Scroll back to the top of the flow on step changes. The volunteer form
 	// is long enough that the next screen would otherwise start mid-page.
 	// Skipped when the top is already in view, so short steps don't jump.
 	let previousStep: 1 | 2 | 3 | 4 = step
@@ -100,7 +100,7 @@
 	let browseSignedUp = $state(false)
 	let honeypot = $state('')
 
-	// Step 1 — basic info (shared with the browse-mode inline signup and the
+	// Step 1: basic info (shared with the browse-mode inline signup and the
 	// volunteer form, which pre-fills from the same state)
 	let basics = $state({
 		fullName: '',
@@ -141,7 +141,7 @@
 	const fullPhone = $derived.by(() => {
 		const raw = volunteer.phone.trim()
 		if (!raw) return ''
-		// Already international — pass through as-is (minus separators).
+		// Already international, pass through as-is (minus separators).
 		if (raw.startsWith('+')) return raw.replace(/[\s().-]/g, '')
 		// National number: drop separators and the leading trunk 0.
 		const digits = raw.replace(/\D/g, '').replace(/^0+/, '')
@@ -348,7 +348,7 @@
 <div class="onboarding-flow" bind:this={flowEl}>
 	{#if mode === 'browse' && !browseSignedUp}
 		<div class="browse-banner">
-			You're browsing without signing up — leave your email below so we can tell you when new
+			You're browsing without signing up, leave your email below so we can tell you when new
 			opportunities go live.
 		</div>
 	{/if}
@@ -359,7 +359,7 @@
 
 	<div class="form-card">
 		{#if step === 1}
-			<!-- Step 1 — basic info -->
+			<!-- Step 1: basic info -->
 			<form onsubmit={continueToIntent}>
 				<div class="field">
 					<label class="field-label" for="ob-name">Full name *</label>
@@ -385,7 +385,7 @@
 					/>
 					<p class="helper">Preferably Gmail if you have one.</p>
 					<!-- <p class="helper">
-						We may contact you about critical mobilizations — see our
+						We may contact you about critical mobilizations, see our
 						<Link href="/privacy">privacy policy</Link>.
 					</p> -->
 				</div>
@@ -415,7 +415,7 @@
 				</div>
 			</form>
 		{:else if step === 2}
-			<!-- Step 2 — intent -->
+			<!-- Step 2: intent -->
 			<form
 				method="POST"
 				action="/embed/onboarding-form?/submit"
@@ -508,7 +508,7 @@
 				<button type="button" class="back" onclick={() => (step = 1)}>← Back</button>
 			</form>
 		{:else if step === 3 && !intent}
-			<!-- Path A — confirmation -->
+			<!-- Path A: confirmation -->
 			<div class="confirmation">
 				<div class="checkmark">✓</div>
 				<h2>You're in.</h2>
@@ -517,11 +517,11 @@
 				{@render confirmationFooter()}
 			</div>
 		{:else if step === 3 && intent === 'act-now'}
-			<!-- Path B — act now (contact confirmation or browse landing) -->
+			<!-- Path B: act now (contact confirmation or browse landing) -->
 			{#if mode === 'contact'}
 				<div class="confirmation">
 					<div class="checkmark">✓</div>
-					<h2>You're in — thanks for joining us.</h2>
+					<h2>You're in, thanks for joining us.</h2>
 					<p>You're all set. Here are a few ways to make a difference today.</p>
 					{@render checkboxConfirmations()}
 				</div>
@@ -573,7 +573,7 @@
 									bind:value={basics.email}
 								/>
 								<!-- <p class="helper">
-									We may contact you about critical mobilizations — see our
+									We may contact you about critical mobilizations, see our
 									<Link href="/privacy">privacy policy</Link>.
 								</p> -->
 							</div>
@@ -603,7 +603,7 @@
 			<ActionCards />
 			{@render confirmationFooter()}
 		{:else if step === 3 && intent === 'volunteer'}
-			<!-- Path C — native volunteer form -->
+			<!-- Path C: native volunteer form -->
 			<h2>Sign up to volunteer</h2>
 			<p class="path-intro">Tell us a bit about yourself so we can find a role that fits.</p>
 			{@render checkboxConfirmations()}
@@ -688,7 +688,7 @@
 							type="text"
 							name="languages_other"
 							placeholder="Please specify"
-							aria-label="Other languages — please specify"
+							aria-label="Other languages, please specify"
 							bind:value={volunteer.languagesOther}
 						/>
 					{/if}
@@ -706,7 +706,7 @@
 							type="text"
 							name="discovery_specify"
 							placeholder="Please specify"
-							aria-label="How you found out about PauseAI — please specify"
+							aria-label="How you found out about PauseAI, please specify"
 							bind:value={volunteer.discoverySpecify}
 						/>
 					{/if}
@@ -721,7 +721,7 @@
 							type="text"
 							name="motivations_other"
 							placeholder="Please specify"
-							aria-label="Other motivation — please specify"
+							aria-label="Other motivation, please specify"
 							bind:value={volunteer.motivationsOther}
 						/>
 					{/if}
@@ -736,7 +736,7 @@
 							type="text"
 							name="skills_other"
 							placeholder="Please specify"
-							aria-label="Other skills — please specify"
+							aria-label="Other skills, please specify"
 							bind:value={volunteer.skillsOther}
 						/>
 					{/if}
@@ -792,8 +792,8 @@
 				<button type="button" class="back" onclick={() => (step = 2)}>← Back</button>
 			</form>
 		{:else if step === 3 && intent === 'lead'}
-			<!-- Path D — lead -->
-			<h2>{leadRole} — Volunteer Description</h2>
+			<!-- Path D: lead -->
+			<h2>{leadRole} Volunteer Description</h2>
 			<p class="role-meta"><em>Part-time volunteer role · 5–15 hours/week</em></p>
 			{@render checkboxConfirmations()}
 			<div class="role-description">
@@ -813,9 +813,9 @@
 					</p>
 				{:else if countryHasChapter}
 					<p>
-						<strong>{basics.country} already has a PauseAI chapter</strong> — so rather than
-						founding a national group, you could lead a regional or city group within it. Find your
-						chapter at
+						<strong>{basics.country} already has a PauseAI chapter</strong>, so rather than founding
+						a national group, you could lead a regional or city group within it. Find your chapter
+						at
 						<Link href="/communities">pauseai.info/communities</Link>, or email our Organizing
 						Director below to talk it through.
 					</p>
@@ -829,7 +829,7 @@
 				<ul>
 					<li>
 						Recruit and grow your local group by welcoming new volunteers and organising events
-						together. together.
+						together.
 					</li>
 					<li>Build relationships with local activist groups and journalists.</li>
 					<li>
@@ -886,11 +886,11 @@
 			</ul>
 			{@render confirmationFooter()}
 		{:else if step === 4 && intent === 'volunteer'}
-			<!-- Path C — confirmation -->
+			<!-- Path C: confirmation -->
 			<div class="confirmation">
 				<div class="checkmark">✓</div>
 				<h2>Welcome to the team.</h2>
-				<p>You're on the volunteer list — we'll be in touch soon.</p>
+				<p>You're on the volunteer list. We'll be in touch soon.</p>
 				{@render checkboxConfirmations()}
 				{@render nextStepBlock()}
 				{@render confirmationFooter()}
