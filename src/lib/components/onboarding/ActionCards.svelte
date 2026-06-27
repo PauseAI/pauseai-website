@@ -12,7 +12,7 @@
 		<p>Use our Email Builder for a pre-drafted message you can personalize and send.</p>
 	</li>
 	<li>
-		<h3><Link href="/lobby-tips">Call your elected officials</Link></h3>
+		<h3><Link href="/lobby-tips">Contact your elected officials</Link></h3>
 		<p>Our lobby tips walk you through what to say.</p>
 	</li>
 	<li>
