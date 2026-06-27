@@ -77,6 +77,10 @@ export const actions: Actions = {
 		const mode = getString(data, 'mode') === 'browse' ? 'browse' : 'contact'
 		const newsletter = data.get('newsletter') === 'on'
 		const keepInformed = data.get('keep_informed') === 'on'
+		// GDPR consent (bundled with local-chapter sharing) gates every
+		// record-creating submission. Step 3 volunteer posts update an existing
+		// record and carry no checkbox, so the check below exempts updates.
+		const gdprAgreed = data.get('agree_gdpr') === 'on'
 		// Set when a step-2 submission already created the person's record:
 		// the later volunteer-form submission updates it instead of creating a
 		// duplicate. Step 2 sends every path through here, so the newsletter
@@ -97,6 +101,11 @@ export const actions: Actions = {
 		if (!isIntent(intent)) {
 			return fail(400, { message: 'Please choose what brings you here.' })
 		}
+		// Updates (volunteer step 3) carry an existing record id and already
+		// consented at step 2; require consent only when creating a record.
+		if (!existingRecordId && !gdprAgreed) {
+			return fail(400, { message: 'Please agree to the data processing consent to continue.' })
+		}
 
 		const fields: FieldSet = {
 			'Full name': fullName,
@@ -105,7 +114,8 @@ export const actions: Actions = {
 			City: city,
 			Intent: intent,
 			'Signup source': SIGNUP_SOURCE,
-			'Email subscription': keepInformed
+			'Email subscription': keepInformed,
+			'Data privacy policy agreed': true
 		}
 
 		if (intent === 'Volunteer' && hasVolunteerDetails) {
@@ -121,13 +131,9 @@ export const actions: Actions = {
 			if (!WEEKLY_HOURS.includes(hours)) {
 				return fail(400, { message: 'Please tell us how much time you can commit weekly.' })
 			}
-			if (
-				data.get('agree_privacy') !== 'on' ||
-				data.get('agree_volunteer') !== 'on' ||
-				data.get('agree_conduct') !== 'on'
-			) {
+			if (data.get('agree_volunteer') !== 'on' || data.get('agree_conduct') !== 'on') {
 				return fail(400, {
-					message: 'Please agree to the Privacy Policy, Volunteer Agreement and Code of Conduct.'
+					message: 'Please agree to the Volunteer Agreement and Code of Conduct.'
 				})
 			}
 			if (discovery && !DISCOVERY_OPTIONS.includes(discovery)) {
@@ -150,7 +156,6 @@ export const actions: Actions = {
 			fields['Skills & Interests'] = skills
 			fields['Skill & Interests (Other)'] = getString(data, 'skills_other')
 			fields['Projected weekly hours'] = hours
-			fields['Data privacy policy agreed'] = true
 			fields['Volunteer Agreement'] = true
 			fields['Code of Conduct agreed'] = true
 

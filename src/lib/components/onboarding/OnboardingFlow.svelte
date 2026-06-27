@@ -126,7 +126,13 @@
 		zipCode: ''
 	})
 
-	let agreements = $state({ volunteer: false, privacy: false, conduct: false })
+	let agreements = $state({ volunteer: false, conduct: false })
+
+	// GDPR data-processing consent gating every record-creating submission
+	// (step 2 + browse). Chapter-sharing consent is not bundled here: it lives
+	// in the optional "Keep me informed" opt-in, since we only share details
+	// with a local chapter when the person asks to be connected to one.
+	let gdprConsent = $state(false)
 
 	// Phone: dial code prefilled from country of residence, editable in case
 	// their phone is from elsewhere. Submitted combined via a hidden input.
@@ -153,7 +159,6 @@
 		volunteer.languages.length > 0 &&
 			!!volunteer.hours &&
 			agreements.volunteer &&
-			agreements.privacy &&
 			agreements.conduct
 	)
 
@@ -320,6 +325,17 @@
 	{/if}
 {/snippet}
 
+{#snippet gdprConsentField()}
+	<label class="agreement">
+		<input type="checkbox" name="agree_gdpr" required bind:checked={gdprConsent} />
+		<span class="checkbox-box" aria-hidden="true"></span>
+		<span>
+			I consent to PauseAI processing my personal data in line with the
+			<Link href="/privacy">Privacy Policy</Link>.&nbsp;*
+		</span>
+	</label>
+{/snippet}
+
 {#snippet nextStepBlock()}
 	<div class="next-step">
 		<h3>★ Recommended next step</h3>
@@ -451,7 +467,8 @@
 						</span>
 						<span class="intent-label">Keep me informed</span>
 						<span class="intent-sub">
-							Connect me with my local PauseAI chapter and keep me updated on global campaigns.
+							Connect me with my local PauseAI chapter (which may be a separate entity to PauseAI
+							Global) and keep me updated on global campaigns.
 						</span>
 					</button>
 					<button
@@ -494,10 +511,11 @@
 						</button>
 					{/each}
 				</div>
+				{@render gdprConsentField()}
 				<button
 					type="submit"
 					class="primary"
-					disabled={(!intent && !keepInformed && !basics.newsletter) || submitting}
+					disabled={(!intent && !keepInformed && !basics.newsletter) || !gdprConsent || submitting}
 				>
 					{submitting
 						? 'Submitting...'
@@ -592,7 +610,8 @@
 									bind:value={basics.city}
 								/>
 							</div>
-							<button type="submit" class="primary" disabled={submitting}>
+							{@render gdprConsentField()}
+							<button type="submit" class="primary" disabled={!gdprConsent || submitting}>
 								{submitting ? 'Signing up...' : 'Sign me up →'}
 							</button>
 						</form>
@@ -773,18 +792,14 @@
 					/>
 					<span class="checkbox-box" aria-hidden="true"></span>
 					<span
-						>I agree with the <Link href="/volunteer-agreement">Volunteer Agreement</Link> *</span
+						>I agree with the <Link href="/volunteer-agreement">Volunteer Agreement</Link
+						>&nbsp;*</span
 					>
-				</label>
-				<label class="agreement">
-					<input type="checkbox" name="agree_privacy" required bind:checked={agreements.privacy} />
-					<span class="checkbox-box" aria-hidden="true"></span>
-					<span>I agree with the <Link href="/privacy">Privacy Policy</Link> *</span>
 				</label>
 				<label class="agreement">
 					<input type="checkbox" name="agree_conduct" required bind:checked={agreements.conduct} />
 					<span class="checkbox-box" aria-hidden="true"></span>
-					<span>I agree with the <Link href="/code-of-conduct">Code of Conduct</Link> *</span>
+					<span>I agree with the <Link href="/code-of-conduct">Code of Conduct</Link>&nbsp;*</span>
 				</label>
 				<button type="submit" class="primary" disabled={!volunteerFormComplete || submitting}>
 					{submitting ? 'Submitting...' : 'Submit →'}
