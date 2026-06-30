@@ -12,6 +12,7 @@ description: How much do regular people and experts worry about AI risks and gov
 
 ## Public opinion on catastrophic risks
 
+- **[US citizens, Yougov + Yahoo (2025)](https://www.yahoo.com/news/article/poll-most-americans-think-ai-will-destroy-humanity-someday-212132958.html)**: A majority of Americans (53%) think AI is likely to destroy humanity. 63% of Americans say it's somewhat or very likely that "AI will become so intellectually advanced that humans won't be able to control it anymore."
 - **[UK citizens, PublicFirst](https://publicfirst.co.uk/ai/)**: think there's a 9% probability humans will go extinct because of AI. About 50% say they're very or somewhat worried about this.
 - **[German citizens, Kira](https://www.zeit.de/digital/2023-04/ki-risiken-angst-umfrage-forschung-kira)**: Only 14% believe AI will have a positive influence on the world, 40% mixed, 40% negative.
 - **[US citizens, RethinkPriorities](https://rethinkpriorities.org/publications/us-public-perception-of-cais-statement-and-the-risk-of-extinction)**: agrees with (59%) and supports (58%) the x-risk statement. Disagreement (26%) and opposition (22%) were relatively low, and sizeable proportions of people remained neutral (12% and 18% for agreement and support formats, respectively).
