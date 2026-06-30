@@ -45,7 +45,7 @@ jobs:
             core.setOutput('repo', pr.head.repo.full_name);
 
       - name: Checkout PR branch
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
         with:
           repository: ${{ steps.get-pr.outputs.repo }}
           ref: ${{ steps.get-pr.outputs.sha }}

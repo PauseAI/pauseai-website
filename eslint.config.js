@@ -85,7 +85,7 @@ export default defineConfig(
 		// See more details at: https://typescript-eslint.io/packages/parser/
 		languageOptions: {
 			parserOptions: {
-				project: ['./tsconfig.check.json'],
+				project: ['./tsconfig.json'],
 				// Defined globally instead:
 				// extraFileExtensions: ['.svelte'], // Add support for additional file extensions, such as .svelte
 				parser: ts.parser,

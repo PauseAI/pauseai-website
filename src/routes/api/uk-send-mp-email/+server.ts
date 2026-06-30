@@ -39,7 +39,6 @@ interface EmailRequest {
 	recipient: string
 	subject: string
 	message: string
-	attendingVisit?: boolean
 }
 
 type UKSendMPEmailApiSuccessResponse = {
@@ -164,8 +163,7 @@ export const POST: RequestHandler = async ({ request }) => {
 				Recipient: [mpRecordId], // Array of record IDs for linked field
 				Subject: data.subject,
 				Message: data.message,
-				Campaign: 'Liability letter',
-				'Attending Parliament 23 June 2026': data.attendingVisit ?? false
+				Campaign: 'Frontier AI letter'
 			}
 		}
 

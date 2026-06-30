@@ -4,18 +4,22 @@
 
 	interface Props {
 		src: string
-		alt?: string | null
-		title?: string | null
-		sizes?: string | null
+		alt?: string
+		title?: string
+		sizes?: string
 		class?: string
+		loading?: 'eager' | 'lazy'
+		fetchpriority?: 'high' | 'low' | 'auto'
 	}
 
 	let {
 		src,
-		alt = null,
-		title = null,
+		alt,
+		title,
 		sizes = `min(${layoutWidth}, 100vw)`,
-		class: className = ''
+		class: className = '',
+		loading = 'lazy',
+		fetchpriority = 'auto'
 	}: Props = $props()
 
 	// Use import.meta.glob to statically analyze all potential static assets
@@ -42,12 +46,19 @@
 </script>
 
 {#if picture}
-	<enhanced:img src={picture} {alt} class="enhanced {className}" loading="lazy" {sizes} {title}
+	<enhanced:img
+		src={picture}
+		{alt}
+		class="enhanced {className}"
+		{loading}
+		{fetchpriority}
+		{sizes}
+		{title}
 	></enhanced:img>
 {:else if assetUrl}
-	<img src={assetUrl} {alt} {title} loading="lazy" class={className} />
+	<img src={assetUrl} {alt} {title} {loading} {fetchpriority} class={className} />
 {:else}
-	<img {src} {alt} {title} loading="lazy" class={className} />
+	<img {src} {alt} {title} {loading} {fetchpriority} class={className} />
 {/if}
 
 <style>

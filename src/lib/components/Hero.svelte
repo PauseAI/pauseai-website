@@ -1,6 +1,5 @@
 <script lang="ts">
-	import heroPhoto from '$assets/protests/Home Hero - London June 2025.jpg?enhanced'
-
+	import Image from '$lib/components/Image.svelte'
 	import Link from '$lib/components/Link.svelte'
 
 	// Current campaign. Update this block when the active campaign changes.
@@ -15,12 +14,13 @@
 <div class="hero">
 	<!-- SLOGAN — the movement's permanent identity, over a full-bleed protest photo. -->
 	<section class="slogan">
-		<picture class="slogan-photo">
-			{#each Object.entries(heroPhoto.sources) as [format, srcset]}
-				<source {srcset} sizes="100vw" type={'image/' + format} />
-			{/each}
-			<img src={heroPhoto.img.src} alt="" fetchpriority="high" />
-		</picture>
+		<Image
+			src="/protests/Home_Hero_-_London_June_2025.jpg"
+			class="slogan-photo"
+			sizes="200vw"
+			loading="eager"
+			fetchpriority="high"
+		/>
 		<div class="slogan-scrim" aria-hidden="true"></div>
 
 		<div class="slogan-inner">
@@ -70,18 +70,15 @@
 		color: white;
 	}
 
-	.slogan-photo {
+	.slogan :global(.slogan-photo) {
 		position: absolute;
 		inset: 0;
 		pointer-events: none;
 		display: block;
-	}
-	.slogan-photo :global(img) {
 		width: 100%;
 		height: 100%;
 		object-fit: cover;
 		object-position: 50% 35%;
-		display: block;
 	}
 
 	/* Dark scrim over the photo. Heavier on the top-left, where the headline sits;
