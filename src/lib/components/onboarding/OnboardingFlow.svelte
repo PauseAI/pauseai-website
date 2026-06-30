@@ -330,8 +330,9 @@
 		<input type="checkbox" name="agree_gdpr" required bind:checked={gdprConsent} />
 		<span class="checkbox-box" aria-hidden="true"></span>
 		<span>
-			I agree to share my details with my local PauseAI chapter (which may be a separate entity to
-			PauseAI Global) for local coordination.&nbsp;*
+			I agree to the <Link href="/privacy">Privacy Policy</Link>, including sharing my details with
+			my local PauseAI chapter (which may be a separate entity to PauseAI Global) for local
+			coordination.&nbsp;*
 		</span>
 	</label>
 {/snippet}

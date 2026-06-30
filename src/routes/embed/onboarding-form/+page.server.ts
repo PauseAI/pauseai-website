@@ -115,7 +115,10 @@ export const actions: Actions = {
 			Intent: intent,
 			'Signup source': SIGNUP_SOURCE,
 			'Email subscription': keepInformed,
-			'Data privacy policy agreed': true
+			// One required consent checkbox covers both: agreeing to the privacy
+			// policy and, as part of it, sharing details with the local chapter.
+			'Data privacy policy agreed': true,
+			'GDPR chapter share permission': true
 		}
 
 		if (intent === 'Volunteer' && hasVolunteerDetails) {
