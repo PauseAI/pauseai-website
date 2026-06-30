@@ -126,11 +126,11 @@ export async function updateRecord(
 	tableId: string,
 	recordId: string,
 	fields: FieldSet
-): Promise<void> {
+): Promise<boolean> {
 	const apiKey = getWriteApiKey()
 	if (!apiKey) {
 		console.warn(`⚠️ Airtable API key not configured. Skipping record update.`)
-		return
+		return false
 	}
 
 	try {
@@ -138,8 +138,11 @@ export async function updateRecord(
 		const table = base(tableId)
 		await table.update([{ id: recordId, fields }], { typecast: true })
 		console.log(`Successfully updated record ${recordId} in Airtable table ${tableId}`)
+		return true
 	} catch (error) {
 		console.error(`Error updating Airtable record ${recordId} in ${tableId}:`, error)
-		// We don't throw here to avoid failing the whole request if Airtable is down
+		// We don't throw here to avoid failing the whole request if Airtable is down;
+		// the caller decides whether to surface the failure to the user.
+		return false
 	}
 }
