@@ -330,8 +330,8 @@
 		<input type="checkbox" name="agree_gdpr" required bind:checked={gdprConsent} />
 		<span class="checkbox-box" aria-hidden="true"></span>
 		<span>
-			I consent to PauseAI processing my personal data in line with the
-			<Link href="/privacy">Privacy Policy</Link>.&nbsp;*
+			I agree to share my details with my local PauseAI chapter (which may be a separate entity to
+			PauseAI Global) for local coordination.&nbsp;*
 		</span>
 	</label>
 {/snippet}
@@ -467,8 +467,7 @@
 						</span>
 						<span class="intent-label">Keep me informed</span>
 						<span class="intent-sub">
-							Connect me with my local PauseAI chapter (which may be a separate entity to PauseAI
-							Global) and keep me updated on global campaigns.
+							Connect me with my local PauseAI chapter, and keep me updated on global campaigns.
 						</span>
 					</button>
 					<button
