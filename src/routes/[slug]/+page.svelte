@@ -14,6 +14,7 @@
 
 	let {
 		title,
+		metaTitle,
 		date,
 		description,
 		image,
@@ -30,7 +31,7 @@
 	{/each}
 </svelte:head>
 
-<PostMeta {title} {description} {date} image={metaImageUrl} />
+<PostMeta title={metaTitle ?? title} {description} {date} image={metaImageUrl} />
 
 <article>
 	{#if parent}
