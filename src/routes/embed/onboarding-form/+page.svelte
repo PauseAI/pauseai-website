@@ -3,10 +3,16 @@
 	import { page } from '$app/state'
 	import OnboardingFlow from '$lib/components/onboarding/OnboardingFlow.svelte'
 	import PostMeta from '$lib/components/PostMeta.svelte'
+	import * as m from '$lib/paraglide/messages.js'
+	import { isLocale, setLocale } from '$lib/paraglide/runtime'
 
-	const title = 'Get involved'
-	const description =
-		'Find the highest-impact way for you to help pause the development of superhuman AI.'
+	$effect(() => {
+		const locale = page.url.searchParams.get('locale')
+		if (locale && isLocale(locale)) setLocale(locale)
+	})
+
+	const title = $derived(m.onboarding_page_title())
+	const description = $derived(m.onboarding_page_description())
 
 	const initialCountry = $derived(page.url.searchParams.get('country') ?? '')
 
