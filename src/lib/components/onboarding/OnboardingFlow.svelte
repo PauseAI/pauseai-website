@@ -54,8 +54,15 @@
 
 	let {
 		initialEmail = '',
-		initialCountry = ''
-	}: { initialEmail?: string; initialCountry?: string } = $props()
+		initialCountry = '',
+		initialCity = '',
+		initialLanguages = [] as string[]
+	}: {
+		initialEmail?: string
+		initialCountry?: string
+		initialCity?: string
+		initialLanguages?: string[]
+	} = $props()
 
 	// Surface stub/live mode in the browser console when the form loads. The
 	// pages embedding the form can be prerendered (e.g. /join), so the runtime
@@ -106,15 +113,21 @@
 		fullName: '',
 		email: initialEmail,
 		country: initialCountry,
-		city: '',
+		city: initialCity,
 		newsletter: false
 	})
+
+	const validLanguageStored = new Set(LANGUAGES.map((l) => l.stored))
+	const defaultLanguages =
+		initialLanguages.length > 0
+			? initialLanguages.filter((l) => validLanguageStored.has(l))
+			: ['English']
 
 	// Volunteer form (path C)
 	let volunteer = $state({
 		discordUsername: '',
 		phone: '',
-		languages: ['English'],
+		languages: defaultLanguages,
 		languagesOther: '',
 		discovery: '',
 		discoverySpecify: '',
