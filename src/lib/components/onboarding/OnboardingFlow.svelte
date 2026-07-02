@@ -12,7 +12,7 @@
 	import Combobox from '$lib/components/Combobox.svelte'
 	import ActionCards from './ActionCards.svelte'
 	import Stepper from './Stepper.svelte'
-	import * as m from '$lib/paraglide/messages.js'
+	import { getMessages } from './i18n.svelte'
 	import {
 		COUNTRIES,
 		COUNTRY_DIAL_CODES,
@@ -33,7 +33,8 @@
 		lead: 'Lead'
 	}
 
-	const intentOptions = $derived(getIntentOptions())
+	const msgs = $derived(getMessages())
+	const intentOptions = $derived(getIntentOptions(msgs))
 
 	let {
 		initialEmail = '',
@@ -148,14 +149,14 @@
 	const stepperLabels = $derived(
 		intent === 'volunteer'
 			? [
-					m.onboarding_step_about(),
-					m.onboarding_step_intent(),
-					m.onboarding_step_volunteer_form(),
-					m.onboarding_step_confirmed()
+					msgs.onboarding_step_about,
+					msgs.onboarding_step_intent,
+					msgs.onboarding_step_volunteer_form,
+					msgs.onboarding_step_confirmed
 				]
 			: intent === 'lead'
-				? [m.onboarding_step_about(), m.onboarding_step_intent(), m.onboarding_step_next_steps()]
-				: [m.onboarding_step_about(), m.onboarding_step_intent(), m.onboarding_step_confirmed()]
+				? [msgs.onboarding_step_about, msgs.onboarding_step_intent, msgs.onboarding_step_next_steps]
+				: [msgs.onboarding_step_about, msgs.onboarding_step_intent, msgs.onboarding_step_confirmed]
 	)
 
 	// Lead path: if the country already has a chapter, offer regional/city
@@ -227,9 +228,9 @@
 					}
 					onSuccess(result.data)
 				} else if (result.type === 'failure') {
-					toast.error(String(result.data?.message ?? m.onboarding_error_generic()))
+					toast.error(String(result.data?.message ?? msgs.onboarding_error_generic))
 				} else {
-					toast.error(m.onboarding_error_unexpected())
+					toast.error(msgs.onboarding_error_unexpected)
 				}
 			}
 		}
@@ -256,7 +257,7 @@
 		name="country"
 		options={COUNTRIES}
 		required
-		placeholder={m.onboarding_placeholder_country()}
+		placeholder={msgs.onboarding_placeholder_country}
 		bind:value={basics.country}
 	/>
 {/snippet}
@@ -304,13 +305,13 @@
 			{#if keepInformed}
 				<li>
 					<span class="confirm-tick" aria-hidden="true">✓</span>
-					{m.onboarding_confirm_keep_informed()}
+					{msgs.onboarding_confirm_keep_informed}
 				</li>
 			{/if}
 			{#if basics.newsletter}
 				<li>
 					<span class="confirm-tick" aria-hidden="true">✓</span>
-					{m.onboarding_confirm_newsletter()}
+					{msgs.onboarding_confirm_newsletter}
 				</li>
 			{/if}
 		</ul>
@@ -321,25 +322,25 @@
 	<label class="agreement">
 		<input type="checkbox" name="agree_gdpr" required bind:checked={gdprConsent} />
 		<span class="checkbox-box" aria-hidden="true"></span>
-		<span>{@html safeHtml(m.onboarding_gdpr_consent())}</span>
+		<span>{@html safeHtml(msgs.onboarding_gdpr_consent)}</span>
 	</label>
 {/snippet}
 
 {#snippet nextStepBlock()}
 	<div class="next-step">
-		<h3>{m.onboarding_next_step_title()}</h3>
-		<p>{@html safeHtml(m.onboarding_next_step_p1())}</p>
-		<p>{@html safeHtml(m.onboarding_next_step_p2())}</p>
+		<h3>{msgs.onboarding_next_step_title}</h3>
+		<p>{@html safeHtml(msgs.onboarding_next_step_p1)}</p>
+		<p>{@html safeHtml(msgs.onboarding_next_step_p2)}</p>
 	</div>
 {/snippet}
 
 {#snippet confirmationFooter()}
 	<div class="confirmation-footer">
-		<p class="section-label">{m.onboarding_footer_join_conversation()}</p>
+		<p class="section-label">{msgs.onboarding_footer_join_conversation}</p>
 		<LinkWithoutIcon class="discord-button" href="https://discord.gg/2XXWXvErfA" target="_blank">
-			{m.onboarding_footer_discord_btn()}
+			{msgs.onboarding_footer_discord_btn}
 		</LinkWithoutIcon>
-		<p class="section-label">{m.onboarding_footer_follow_us()}</p>
+		<p class="section-label">{msgs.onboarding_footer_follow_us}</p>
 		<Socials />
 	</div>
 {/snippet}
@@ -347,7 +348,7 @@
 <div class="onboarding-flow" bind:this={flowEl}>
 	{#if mode === 'browse' && !browseSignedUp}
 		<div class="browse-banner">
-			{m.onboarding_browse_banner()}
+			{msgs.onboarding_browse_banner}
 		</div>
 	{/if}
 
@@ -360,55 +361,55 @@
 			<!-- Step 1: basic info -->
 			<form onsubmit={continueToIntent}>
 				<div class="field">
-					<label class="field-label" for="ob-name">{m.onboarding_field_full_name()}</label>
+					<label class="field-label" for="ob-name">{msgs.onboarding_field_full_name}</label>
 					<input
 						type="text"
 						id="ob-name"
 						required
-						placeholder={m.onboarding_placeholder_full_name()}
+						placeholder={msgs.onboarding_placeholder_full_name}
 						autocomplete="name"
 						bind:value={basics.fullName}
 					/>
 				</div>
 				{@render honeypotField('ob-nickname')}
 				<div class="field">
-					<label class="field-label" for="ob-email">{m.onboarding_field_email()}</label>
+					<label class="field-label" for="ob-email">{msgs.onboarding_field_email}</label>
 					<input
 						type="email"
 						id="ob-email"
 						required
-						placeholder={m.onboarding_placeholder_email()}
+						placeholder={msgs.onboarding_placeholder_email}
 						autocomplete="email"
 						bind:value={basics.email}
 					/>
-					<p class="helper">{m.onboarding_helper_email_gmail()}</p>
+					<p class="helper">{msgs.onboarding_helper_email_gmail}</p>
 					<!-- <p class="helper">
 						We may contact you about critical mobilizations, see our
 						<Link href="/privacy">privacy policy</Link>.
 					</p> -->
 				</div>
 				<div class="field">
-					<label class="field-label" for="ob-country">{m.onboarding_field_country()}</label>
+					<label class="field-label" for="ob-country">{msgs.onboarding_field_country}</label>
 					{@render countrySelect('ob-country')}
 				</div>
 				<div class="field">
-					<label class="field-label" for="ob-city">{m.onboarding_field_city()}</label>
+					<label class="field-label" for="ob-city">{msgs.onboarding_field_city}</label>
 					<input
 						type="text"
 						id="ob-city"
 						required
-						placeholder={m.onboarding_placeholder_city()}
+						placeholder={msgs.onboarding_placeholder_city}
 						autocomplete="address-level2"
 						bind:value={basics.city}
 					/>
 				</div>
-				<button type="submit" class="primary">{m.onboarding_btn_continue()}</button>
+				<button type="submit" class="primary">{msgs.onboarding_btn_continue}</button>
 				<div class="browse-option">
 					<button type="button" class="secondary" onclick={startBrowse}>
-						{m.onboarding_btn_browse()}
+						{msgs.onboarding_btn_browse}
 					</button>
 					<p class="helper centered">
-						{m.onboarding_browse_helper()}
+						{msgs.onboarding_browse_helper}
 					</p>
 				</div>
 			</form>
@@ -433,7 +434,7 @@
 				{#if keepInformed}
 					<input type="hidden" name="keep_informed" value="on" />
 				{/if}
-				<h2>{m.onboarding_step2_heading()}</h2>
+				<h2>{msgs.onboarding_step2_heading}</h2>
 				<div class="intent-grid">
 					<button
 						type="button"
@@ -447,9 +448,9 @@
 							<span class="checkbox-box" aria-hidden="true">{keepInformed ? '✓' : ''}</span>
 							🔔
 						</span>
-						<span class="intent-label">{m.onboarding_intent_keep_informed_label()}</span>
+						<span class="intent-label">{msgs.onboarding_intent_keep_informed_label}</span>
 						<span class="intent-sub">
-							{m.onboarding_intent_keep_informed_sub()}
+							{msgs.onboarding_intent_keep_informed_sub}
 						</span>
 					</button>
 					<button
@@ -464,13 +465,13 @@
 							<span class="checkbox-box" aria-hidden="true">{basics.newsletter ? '✓' : ''}</span>
 							📰
 						</span>
-						<span class="intent-label">{m.onboarding_intent_newsletter_label()}</span>
+						<span class="intent-label">{msgs.onboarding_intent_newsletter_label}</span>
 						<span class="intent-sub">
-							{m.onboarding_intent_newsletter_sub()}
+							{msgs.onboarding_intent_newsletter_sub}
 						</span>
 					</button>
 				</div>
-				<p class="section-label">{m.onboarding_intent_more_optional()}</p>
+				<p class="section-label">{msgs.onboarding_intent_more_optional}</p>
 				<div class="intent-stack" role="radiogroup" aria-label="Want to do more?">
 					{#each intentOptions as option (option.key)}
 						<button
@@ -499,20 +500,20 @@
 					disabled={(!intent && !keepInformed && !basics.newsletter) || !gdprConsent || submitting}
 				>
 					{submitting
-						? m.onboarding_btn_submitting()
+						? msgs.onboarding_btn_submitting
 						: intent === 'volunteer' || intent === 'lead'
-							? m.onboarding_btn_continue()
-							: m.onboarding_btn_submit()}
+							? msgs.onboarding_btn_continue
+							: msgs.onboarding_btn_submit}
 				</button>
 				<button type="button" class="back" onclick={() => (step = 1)}
-					>{m.onboarding_btn_back()}</button
+					>{msgs.onboarding_btn_back}</button
 				>
 			</form>
 		{:else if step === 3 && !intent}
 			<!-- Path A: confirmation -->
 			<div class="confirmation">
 				<div class="checkmark">✓</div>
-				<h2>{m.onboarding_confirm_a_title()}</h2>
+				<h2>{msgs.onboarding_confirm_a_title}</h2>
 				{@render checkboxConfirmations()}
 				{@render nextStepBlock()}
 				{@render confirmationFooter()}
@@ -522,25 +523,25 @@
 			{#if mode === 'contact'}
 				<div class="confirmation">
 					<div class="checkmark">✓</div>
-					<h2>{m.onboarding_confirm_b_title()}</h2>
-					<p>{m.onboarding_confirm_b_sub()}</p>
+					<h2>{msgs.onboarding_confirm_b_title}</h2>
+					<p>{msgs.onboarding_confirm_b_sub}</p>
 					{@render checkboxConfirmations()}
 				</div>
 			{:else}
 				<div class="browse-header">
-					<h2>{m.onboarding_browse_header_title()}</h2>
+					<h2>{msgs.onboarding_browse_header_title}</h2>
 					<p>
-						{m.onboarding_browse_header_sub()}
+						{msgs.onboarding_browse_header_sub}
 					</p>
 				</div>
 				{#if browseSignedUp}
 					<div class="inline-confirmation">
-						{m.onboarding_browse_signed_up()}
+						{msgs.onboarding_browse_signed_up}
 					</div>
 				{:else}
 					<div class="keep-informed">
-						<h3>{m.onboarding_browse_keep_informed_title()}</h3>
-						<p>{m.onboarding_browse_keep_informed_sub()}</p>
+						<h3>{msgs.onboarding_browse_keep_informed_title}</h3>
+						<p>{msgs.onboarding_browse_keep_informed_sub}</p>
 						<form
 							method="POST"
 							action="/embed/onboarding-form?/submit"
@@ -551,23 +552,23 @@
 							<input type="hidden" name="intent" value="Act now" />
 							<input type="hidden" name="keep_informed" value="on" />
 							<div class="field">
-								<label class="field-label" for="loop-name">{m.onboarding_field_full_name()}</label>
+								<label class="field-label" for="loop-name">{msgs.onboarding_field_full_name}</label>
 								<input
 									type="text"
 									id="loop-name"
 									required
-									placeholder={m.onboarding_placeholder_full_name()}
+									placeholder={msgs.onboarding_placeholder_full_name}
 									autocomplete="name"
 									bind:value={basics.fullName}
 								/>
 							</div>
 							<div class="field">
-								<label class="field-label" for="loop-email">{m.onboarding_field_email()}</label>
+								<label class="field-label" for="loop-email">{msgs.onboarding_field_email}</label>
 								<input
 									type="email"
 									id="loop-email"
 									required
-									placeholder={m.onboarding_placeholder_email()}
+									placeholder={msgs.onboarding_placeholder_email}
 									autocomplete="email"
 									bind:value={basics.email}
 								/>
@@ -577,35 +578,36 @@
 								</p> -->
 							</div>
 							<div class="field">
-								<label class="field-label" for="loop-country">{m.onboarding_field_country()}</label>
+								<label class="field-label" for="loop-country">{msgs.onboarding_field_country}</label
+								>
 								{@render countrySelect('loop-country')}
 							</div>
 							<div class="field">
-								<label class="field-label" for="loop-city">{m.onboarding_field_city()}</label>
+								<label class="field-label" for="loop-city">{msgs.onboarding_field_city}</label>
 								<input
 									type="text"
 									id="loop-city"
 									required
-									placeholder={m.onboarding_placeholder_city()}
+									placeholder={msgs.onboarding_placeholder_city}
 									autocomplete="address-level2"
 									bind:value={basics.city}
 								/>
 							</div>
 							{@render gdprConsentField()}
 							<button type="submit" class="primary" disabled={!gdprConsent || submitting}>
-								{submitting ? m.onboarding_btn_signing_up() : m.onboarding_btn_sign_me_up()}
+								{submitting ? msgs.onboarding_btn_signing_up : msgs.onboarding_btn_sign_me_up}
 							</button>
 						</form>
 					</div>
 				{/if}
-				<p class="section-label">{m.onboarding_section_ways_to_help()}</p>
+				<p class="section-label">{msgs.onboarding_section_ways_to_help}</p>
 			{/if}
 			<ActionCards />
 			{@render confirmationFooter()}
 		{:else if step === 3 && intent === 'volunteer'}
 			<!-- Path C: native volunteer form -->
-			<h2>{m.onboarding_volunteer_title()}</h2>
-			<p class="path-intro">{m.onboarding_volunteer_intro()}</p>
+			<h2>{msgs.onboarding_volunteer_title}</h2>
+			<p class="path-intro">{msgs.onboarding_volunteer_intro}</p>
 			{@render checkboxConfirmations()}
 			<form
 				method="POST"
@@ -625,37 +627,37 @@
 				{@render hiddenBasics()}
 				{#if basics.country === 'United States'}
 					<div class="field">
-						<label class="field-label" for="vol-zip">{m.onboarding_field_zip()}</label>
+						<label class="field-label" for="vol-zip">{msgs.onboarding_field_zip}</label>
 						<input
 							type="text"
 							id="vol-zip"
 							name="zip_code"
 							inputmode="numeric"
 							maxlength="5"
-							placeholder={m.onboarding_placeholder_zip()}
+							placeholder={msgs.onboarding_placeholder_zip}
 							bind:value={volunteer.zipCode}
 						/>
-						<p class="helper">{m.onboarding_helper_zip()}</p>
+						<p class="helper">{msgs.onboarding_helper_zip}</p>
 					</div>
 				{/if}
 				<div class="field">
-					<label class="field-label" for="vol-discord">{m.onboarding_field_discord()}</label>
+					<label class="field-label" for="vol-discord">{msgs.onboarding_field_discord}</label>
 					<input
 						type="text"
 						id="vol-discord"
 						name="discord_username"
 						bind:value={volunteer.discordUsername}
 					/>
-					<p class="helper">{@html safeHtml(m.onboarding_helper_discord())}</p>
+					<p class="helper">{@html safeHtml(msgs.onboarding_helper_discord)}</p>
 				</div>
 				<div class="field">
-					<label class="field-label" for="vol-phone">{m.onboarding_field_phone()}</label>
+					<label class="field-label" for="vol-phone">{msgs.onboarding_field_phone}</label>
 					<div class="phone-row">
 						<input
 							type="text"
 							class="dial-code"
 							aria-label="International dialing code"
-							placeholder={m.onboarding_placeholder_dial_code()}
+							placeholder={msgs.onboarding_placeholder_dial_code}
 							bind:value={dialCode}
 							oninput={() => (dialCodeEdited = true)}
 						/>
@@ -663,38 +665,38 @@
 							type="tel"
 							id="vol-phone"
 							class="phone-number"
-							placeholder={m.onboarding_placeholder_phone()}
+							placeholder={msgs.onboarding_placeholder_phone}
 							bind:value={volunteer.phone}
 						/>
 					</div>
 					<input type="hidden" name="phone" value={fullPhone} />
 				</div>
 				<div class="field">
-					<label class="field-label" for="vol-languages">{m.onboarding_field_languages()}</label>
+					<label class="field-label" for="vol-languages">{msgs.onboarding_field_languages}</label>
 					<Combobox
 						id="vol-languages"
 						name="languages"
 						options={languageOptions}
 						multiple
 						required
-						placeholder={m.onboarding_placeholder_languages()}
+						placeholder={msgs.onboarding_placeholder_languages}
 						bind:value={volunteer.languages}
 					/>
 					{#if volunteer.languages.includes('Other')}
 						<input
 							type="text"
 							name="languages_other"
-							placeholder={m.onboarding_placeholder_specify()}
-							aria-label={m.onboarding_placeholder_specify()}
+							placeholder={msgs.onboarding_placeholder_specify}
+							aria-label={msgs.onboarding_placeholder_specify}
 							bind:value={volunteer.languagesOther}
 						/>
 					{/if}
 				</div>
 				<div class="field">
-					<label class="field-label" for="vol-discovery">{m.onboarding_field_discovery()}</label>
+					<label class="field-label" for="vol-discovery">{msgs.onboarding_field_discovery}</label>
 					<select id="vol-discovery" name="discovery" bind:value={volunteer.discovery}>
-						<option value="">{m.onboarding_placeholder_discovery()}</option>
-						{#each getDiscoveryOptions() as option (option.value)}
+						<option value="">{msgs.onboarding_placeholder_discovery}</option>
+						{#each getDiscoveryOptions(msgs) as option (option.value)}
 							<option value={option.value}>{option.label}</option>
 						{/each}
 					</select>
@@ -702,7 +704,7 @@
 						<input
 							type="text"
 							name="discovery_specify"
-							placeholder={m.onboarding_placeholder_specify()}
+							placeholder={msgs.onboarding_placeholder_specify}
 							aria-label="How you found out about PauseAI, please specify"
 							bind:value={volunteer.discoverySpecify}
 						/>
@@ -710,40 +712,40 @@
 				</div>
 				<div class="field">
 					<span class="field-label" id="vol-motivations-label"
-						>{m.onboarding_field_motivations()}</span
+						>{msgs.onboarding_field_motivations}</span
 					>
 					<div role="group" aria-labelledby="vol-motivations-label">
-						{@render selectCards('motivations', getMotivations(), volunteer.motivations)}
+						{@render selectCards('motivations', getMotivations(msgs), volunteer.motivations)}
 					</div>
 					{#if volunteer.motivations.includes('Other')}
 						<input
 							type="text"
 							name="motivations_other"
-							placeholder={m.onboarding_placeholder_specify()}
+							placeholder={msgs.onboarding_placeholder_specify}
 							aria-label="Other motivation, please specify"
 							bind:value={volunteer.motivationsOther}
 						/>
 					{/if}
 				</div>
 				<div class="field">
-					<span class="field-label" id="vol-skills-label">{m.onboarding_field_skills()}</span>
+					<span class="field-label" id="vol-skills-label">{msgs.onboarding_field_skills}</span>
 					<div role="group" aria-labelledby="vol-skills-label">
-						{@render selectCards('skills', getSkills(), volunteer.skills)}
+						{@render selectCards('skills', getSkills(msgs), volunteer.skills)}
 					</div>
 					{#if volunteer.skills.includes('Other')}
 						<input
 							type="text"
 							name="skills_other"
-							placeholder={m.onboarding_placeholder_specify()}
+							placeholder={msgs.onboarding_placeholder_specify}
 							aria-label="Other skills, please specify"
 							bind:value={volunteer.skillsOther}
 						/>
 					{/if}
 				</div>
 				<div class="field">
-					<span class="field-label" id="vol-hours-label">{m.onboarding_field_hours()}</span>
+					<span class="field-label" id="vol-hours-label">{msgs.onboarding_field_hours}</span>
 					<div class="select-card-grid" role="radiogroup" aria-labelledby="vol-hours-label">
-						{#each getWeeklyHours() as option (option.value)}
+						{#each getWeeklyHours(msgs) as option (option.value)}
 							<button
 								type="button"
 								class="select-card"
@@ -769,78 +771,78 @@
 						bind:checked={agreements.volunteer}
 					/>
 					<span class="checkbox-box" aria-hidden="true"></span>
-					<span>{@html safeHtml(m.onboarding_agree_volunteer())}</span>
+					<span>{@html safeHtml(msgs.onboarding_agree_volunteer)}</span>
 				</label>
 				<label class="agreement">
 					<input type="checkbox" name="agree_conduct" required bind:checked={agreements.conduct} />
 					<span class="checkbox-box" aria-hidden="true"></span>
-					<span>{@html safeHtml(m.onboarding_agree_conduct())}</span>
+					<span>{@html safeHtml(msgs.onboarding_agree_conduct)}</span>
 				</label>
 				<button type="submit" class="primary" disabled={!volunteerFormComplete || submitting}>
-					{submitting ? m.onboarding_btn_submitting() : m.onboarding_btn_submit()}
+					{submitting ? msgs.onboarding_btn_submitting : msgs.onboarding_btn_submit}
 				</button>
 				<button type="button" class="back" onclick={() => (step = 2)}
-					>{m.onboarding_btn_back()}</button
+					>{msgs.onboarding_btn_back}</button
 				>
 			</form>
 		{:else if step === 3 && intent === 'lead'}
 			<!-- Path D: lead -->
-			<h2>{m.onboarding_lead_title({ role: leadRole })}</h2>
-			<p class="role-meta"><em>{m.onboarding_lead_meta()}</em></p>
+			<h2>{msgs.onboarding_lead_title(leadRole)}</h2>
+			<p class="role-meta"><em>{msgs.onboarding_lead_meta}</em></p>
 			{@render checkboxConfirmations()}
 			<div class="role-description">
-				<p>{m.onboarding_lead_intro()}</p>
+				<p>{msgs.onboarding_lead_intro}</p>
 				{#if basics.country === 'United States'}
-					<p>{@html safeHtml(m.onboarding_lead_us_branch())}</p>
+					<p>{@html safeHtml(msgs.onboarding_lead_us_branch)}</p>
 				{:else if countryHasChapter}
-					<p>{@html safeHtml(m.onboarding_lead_has_chapter({ country: basics.country }))}</p>
+					<p>{@html safeHtml(msgs.onboarding_lead_has_chapter(basics.country))}</p>
 				{:else}
-					<p>{@html safeHtml(m.onboarding_lead_check_chapter())}</p>
+					<p>{@html safeHtml(msgs.onboarding_lead_check_chapter)}</p>
 				{/if}
-				<h3>{m.onboarding_lead_what_you_do_title()}</h3>
+				<h3>{msgs.onboarding_lead_what_you_do_title}</h3>
 				<ul>
-					<li>{m.onboarding_lead_do_1()}</li>
-					<li>{m.onboarding_lead_do_2()}</li>
-					<li>{m.onboarding_lead_do_3()}</li>
-					<li>{m.onboarding_lead_do_4()}</li>
+					<li>{msgs.onboarding_lead_do_1}</li>
+					<li>{msgs.onboarding_lead_do_2}</li>
+					<li>{msgs.onboarding_lead_do_3}</li>
+					<li>{msgs.onboarding_lead_do_4}</li>
 				</ul>
-				<h3>{m.onboarding_lead_looking_for_title()}</h3>
+				<h3>{msgs.onboarding_lead_looking_for_title}</h3>
 				<ul>
-					<li>{m.onboarding_lead_looking_1()}</li>
-					<li>{m.onboarding_lead_looking_2()}</li>
-					<li>{m.onboarding_lead_looking_3()}</li>
-					<li>{m.onboarding_lead_looking_4()}</li>
-					<li>{m.onboarding_lead_looking_5()}</li>
-					<li>{m.onboarding_lead_looking_6()}</li>
+					<li>{msgs.onboarding_lead_looking_1}</li>
+					<li>{msgs.onboarding_lead_looking_2}</li>
+					<li>{msgs.onboarding_lead_looking_3}</li>
+					<li>{msgs.onboarding_lead_looking_4}</li>
+					<li>{msgs.onboarding_lead_looking_5}</li>
+					<li>{msgs.onboarding_lead_looking_6}</li>
 				</ul>
-				<h3>{m.onboarding_lead_nice_to_have_title()}</h3>
+				<h3>{msgs.onboarding_lead_nice_to_have_title}</h3>
 				<ul>
-					<li>{m.onboarding_lead_nice_1()}</li>
-					<li>{m.onboarding_lead_nice_2()}</li>
-					<li>{m.onboarding_lead_nice_3()}</li>
+					<li>{msgs.onboarding_lead_nice_1}</li>
+					<li>{msgs.onboarding_lead_nice_2}</li>
+					<li>{msgs.onboarding_lead_nice_3}</li>
 				</ul>
-				<p>{m.onboarding_lead_imperfect()}</p>
-				<h3>{m.onboarding_lead_support_title()}</h3>
-				<p>{m.onboarding_lead_support()}</p>
-				<h3>{m.onboarding_lead_next_steps_title()}</h3>
-				<p>{@html safeHtml(m.onboarding_lead_next_steps())}</p>
+				<p>{msgs.onboarding_lead_imperfect}</p>
+				<h3>{msgs.onboarding_lead_support_title}</h3>
+				<p>{msgs.onboarding_lead_support}</p>
+				<h3>{msgs.onboarding_lead_next_steps_title}</h3>
+				<p>{@html safeHtml(msgs.onboarding_lead_next_steps)}</p>
 			</div>
 			<LinkWithoutIcon class="mailto-button" href={leadMailto}>
-				{m.onboarding_lead_email_btn()}
+				{msgs.onboarding_lead_email_btn}
 			</LinkWithoutIcon>
-			<p>{m.onboarding_lead_please_mention()}</p>
+			<p>{msgs.onboarding_lead_please_mention}</p>
 			<ul class="bulleted">
-				<li>{m.onboarding_lead_mention_1()}</li>
-				<li>{m.onboarding_lead_mention_2()}</li>
-				<li>{m.onboarding_lead_mention_3()}</li>
+				<li>{msgs.onboarding_lead_mention_1}</li>
+				<li>{msgs.onboarding_lead_mention_2}</li>
+				<li>{msgs.onboarding_lead_mention_3}</li>
 			</ul>
 			{@render confirmationFooter()}
 		{:else if step === 4 && intent === 'volunteer'}
 			<!-- Path C: confirmation -->
 			<div class="confirmation">
 				<div class="checkmark">✓</div>
-				<h2>{m.onboarding_confirm_volunteer_title()}</h2>
-				<p>{m.onboarding_confirm_volunteer_sub()}</p>
+				<h2>{msgs.onboarding_confirm_volunteer_title}</h2>
+				<p>{msgs.onboarding_confirm_volunteer_sub}</p>
 				{@render checkboxConfirmations()}
 				{@render nextStepBlock()}
 				{@render confirmationFooter()}

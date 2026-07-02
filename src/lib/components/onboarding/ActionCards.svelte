@@ -1,37 +1,39 @@
 <script lang="ts">
 	import Link from '$lib/components/Link.svelte'
-	import * as m from '$lib/paraglide/messages.js'
+	import { getMessages } from './i18n.svelte'
 	import { safeHtml } from '$lib/sanitize'
+
+	const msgs = $derived(getMessages())
 </script>
 
 <ul class="action-cards">
 	<li>
-		<h3><Link href="/ai-concerns">{m.onboarding_action_ai_concerns_title()}</Link></h3>
-		<p>{m.onboarding_action_ai_concerns_sub()}</p>
+		<h3><Link href="/ai-concerns">{msgs.onboarding_action_ai_concerns_title}</Link></h3>
+		<p>{msgs.onboarding_action_ai_concerns_sub}</p>
 	</li>
 	<li>
-		<h3><Link href="/email-builder">{m.onboarding_action_email_reps_title()}</Link></h3>
-		<p>{m.onboarding_action_email_reps_sub()}</p>
+		<h3><Link href="/email-builder">{msgs.onboarding_action_email_reps_title}</Link></h3>
+		<p>{msgs.onboarding_action_email_reps_sub}</p>
 	</li>
 	<li>
-		<h3><Link href="/lobby-tips">{m.onboarding_action_lobby_title()}</Link></h3>
-		<p>{m.onboarding_action_lobby_sub()}</p>
+		<h3><Link href="/lobby-tips">{msgs.onboarding_action_lobby_title}</Link></h3>
+		<p>{msgs.onboarding_action_lobby_sub}</p>
 	</li>
 	<li>
-		<h3>{m.onboarding_action_talk_title()}</h3>
-		<p>{@html safeHtml(m.onboarding_action_talk_sub())}</p>
+		<h3>{msgs.onboarding_action_talk_title}</h3>
+		<p>{@html safeHtml(msgs.onboarding_action_talk_sub)}</p>
 	</li>
 	<li>
 		<h3>
 			<Link href="https://microcommit.io/onboarding?org=135fcd8d-8116-44af-b885-14df992f9a8c">
-				{m.onboarding_action_microcommit_title()}
+				{msgs.onboarding_action_microcommit_title}
 			</Link>
 		</h3>
-		<p>{m.onboarding_action_microcommit_sub()}</p>
+		<p>{msgs.onboarding_action_microcommit_sub}</p>
 	</li>
 	<li>
-		<h3>{m.onboarding_action_petitions_title()}</h3>
-		<p>{m.onboarding_action_petitions_sub()}</p>
+		<h3>{msgs.onboarding_action_petitions_title}</h3>
+		<p>{msgs.onboarding_action_petitions_sub}</p>
 		<ul class="petitions">
 			<li><Link href="/statement">PauseAI Statement</Link></li>
 			<li><Link href="/sayno">Say No To Superintelligent AI</Link></li>
@@ -49,8 +51,8 @@
 		</ul>
 	</li>
 	<li>
-		<h3>{m.onboarding_action_donate_title()}</h3>
-		<p>{@html safeHtml(m.onboarding_action_donate_sub())}</p>
+		<h3>{msgs.onboarding_action_donate_title}</h3>
+		<p>{@html safeHtml(msgs.onboarding_action_donate_sub)}</p>
 	</li>
 </ul>
 

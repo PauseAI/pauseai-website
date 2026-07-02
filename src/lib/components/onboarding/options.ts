@@ -1,6 +1,6 @@
 // Controlled vocabularies for the onboarding pipeline form.
 
-import * as m from '$lib/paraglide/messages.js'
+import type { OnboardingMessages } from './messages'
 
 export const INTENTS = ['Keep informed', 'Act now', 'Volunteer', 'Lead'] as const
 export type Intent = (typeof INTENTS)[number]
@@ -512,91 +512,93 @@ export const WEEKLY_HOURS = [
 	'20+ hours'
 ]
 
-export function getDiscoveryOptions(): { value: string; label: string }[] {
+export function getDiscoveryOptions(msgs: OnboardingMessages): { value: string; label: string }[] {
 	return [
-		{ value: 'PauseAI affiliated social media', label: m.onboarding_discovery_pauseai_social() },
-		{ value: 'Non-PauseAI affiliated social media', label: m.onboarding_discovery_other_social() },
-		{ value: 'Friend/Family referral', label: m.onboarding_discovery_referral() },
-		{ value: 'News article', label: m.onboarding_discovery_news() },
-		{ value: 'Event/Presentation', label: m.onboarding_discovery_event() },
-		{ value: 'Internet search', label: m.onboarding_discovery_search() },
-		{ value: 'Other', label: m.onboarding_discovery_other() }
+		{ value: 'PauseAI affiliated social media', label: msgs.onboarding_discovery_pauseai_social },
+		{ value: 'Non-PauseAI affiliated social media', label: msgs.onboarding_discovery_other_social },
+		{ value: 'Friend/Family referral', label: msgs.onboarding_discovery_referral },
+		{ value: 'News article', label: msgs.onboarding_discovery_news },
+		{ value: 'Event/Presentation', label: msgs.onboarding_discovery_event },
+		{ value: 'Internet search', label: msgs.onboarding_discovery_search },
+		{ value: 'Other', label: msgs.onboarding_discovery_other }
 	]
 }
 
-export function getMotivations(): { value: string; label: string }[] {
+export function getMotivations(msgs: OnboardingMessages): { value: string; label: string }[] {
 	return [
-		{ value: 'AI Safety', label: m.onboarding_motivation_ai_safety() },
+		{ value: 'AI Safety', label: msgs.onboarding_motivation_ai_safety },
 		{
 			value: 'Need for democratic oversight',
-			label: m.onboarding_motivation_democratic_oversight()
+			label: msgs.onboarding_motivation_democratic_oversight
 		},
-		{ value: 'Ethical technology', label: m.onboarding_motivation_ethical_tech() },
-		{ value: 'AI Governance', label: m.onboarding_motivation_ai_governance() },
-		{ value: 'Job Displacement', label: m.onboarding_motivation_job_displacement() },
-		{ value: 'Misinformation', label: m.onboarding_motivation_misinformation() },
-		{ value: 'Deepfake scams and harassment', label: m.onboarding_motivation_deepfakes() },
-		{ value: 'Concentration of power', label: m.onboarding_motivation_power() },
-		{ value: 'Privacy loss', label: m.onboarding_motivation_privacy() },
-		{ value: 'Environmental damage', label: m.onboarding_motivation_environment() },
-		{ value: 'Technology addiction', label: m.onboarding_motivation_addiction() },
-		{ value: 'Autonomous weapons', label: m.onboarding_motivation_weapons() },
-		{ value: 'Cyberattacks', label: m.onboarding_motivation_cyber() },
-		{ value: 'Bioweapons', label: m.onboarding_motivation_bioweapons() },
-		{ value: 'Other', label: m.onboarding_motivation_other() }
+		{ value: 'Ethical technology', label: msgs.onboarding_motivation_ethical_tech },
+		{ value: 'AI Governance', label: msgs.onboarding_motivation_ai_governance },
+		{ value: 'Job Displacement', label: msgs.onboarding_motivation_job_displacement },
+		{ value: 'Misinformation', label: msgs.onboarding_motivation_misinformation },
+		{ value: 'Deepfake scams and harassment', label: msgs.onboarding_motivation_deepfakes },
+		{ value: 'Concentration of power', label: msgs.onboarding_motivation_power },
+		{ value: 'Privacy loss', label: msgs.onboarding_motivation_privacy },
+		{ value: 'Environmental damage', label: msgs.onboarding_motivation_environment },
+		{ value: 'Technology addiction', label: msgs.onboarding_motivation_addiction },
+		{ value: 'Autonomous weapons', label: msgs.onboarding_motivation_weapons },
+		{ value: 'Cyberattacks', label: msgs.onboarding_motivation_cyber },
+		{ value: 'Bioweapons', label: msgs.onboarding_motivation_bioweapons },
+		{ value: 'Other', label: msgs.onboarding_motivation_other }
 	]
 }
 
-export function getSkills(): { value: string; label: string }[] {
+export function getSkills(msgs: OnboardingMessages): { value: string; label: string }[] {
 	return [
-		{ value: 'Software Development', label: m.onboarding_skill_software() },
-		{ value: 'Video Creation', label: m.onboarding_skill_video() },
-		{ value: 'Social Media Management', label: m.onboarding_skill_social_media() },
-		{ value: 'Event Organization', label: m.onboarding_skill_events() },
-		{ value: 'Public Speaking/ Presentation', label: m.onboarding_skill_speaking() },
-		{ value: 'Writing', label: m.onboarding_skill_writing() },
-		{ value: 'Graphic Design/ Visual Arts', label: m.onboarding_skill_design() },
-		{ value: 'Research', label: m.onboarding_skill_research() },
-		{ value: 'Communications/ PR', label: m.onboarding_skill_comms() },
-		{ value: 'Fundraising', label: m.onboarding_skill_fundraising() },
-		{ value: 'Community Organizing', label: m.onboarding_skill_community() },
-		{ value: 'Political Advocacy/ Lobbying', label: m.onboarding_skill_advocacy() },
-		{ value: 'Education/ Teaching', label: m.onboarding_skill_education() },
-		{ value: 'Administrative Support', label: m.onboarding_skill_admin() },
-		{ value: 'Legal Knowledge', label: m.onboarding_skill_legal() },
-		{ value: 'Other', label: m.onboarding_skill_other() }
+		{ value: 'Software Development', label: msgs.onboarding_skill_software },
+		{ value: 'Video Creation', label: msgs.onboarding_skill_video },
+		{ value: 'Social Media Management', label: msgs.onboarding_skill_social_media },
+		{ value: 'Event Organization', label: msgs.onboarding_skill_events },
+		{ value: 'Public Speaking/ Presentation', label: msgs.onboarding_skill_speaking },
+		{ value: 'Writing', label: msgs.onboarding_skill_writing },
+		{ value: 'Graphic Design/ Visual Arts', label: msgs.onboarding_skill_design },
+		{ value: 'Research', label: msgs.onboarding_skill_research },
+		{ value: 'Communications/ PR', label: msgs.onboarding_skill_comms },
+		{ value: 'Fundraising', label: msgs.onboarding_skill_fundraising },
+		{ value: 'Community Organizing', label: msgs.onboarding_skill_community },
+		{ value: 'Political Advocacy/ Lobbying', label: msgs.onboarding_skill_advocacy },
+		{ value: 'Education/ Teaching', label: msgs.onboarding_skill_education },
+		{ value: 'Administrative Support', label: msgs.onboarding_skill_admin },
+		{ value: 'Legal Knowledge', label: msgs.onboarding_skill_legal },
+		{ value: 'Other', label: msgs.onboarding_skill_other }
 	]
 }
 
-export function getWeeklyHours(): { value: string; label: string }[] {
+export function getWeeklyHours(msgs: OnboardingMessages): { value: string; label: string }[] {
 	return [
-		{ value: 'Less than 3 hours', label: m.onboarding_hours_under_3() },
-		{ value: '3-6 hours', label: m.onboarding_hours_3_6() },
-		{ value: '6-10 hours', label: m.onboarding_hours_6_10() },
-		{ value: '10-20 hours', label: m.onboarding_hours_10_20() },
-		{ value: '20+ hours', label: m.onboarding_hours_20_plus() }
+		{ value: 'Less than 3 hours', label: msgs.onboarding_hours_under_3 },
+		{ value: '3-6 hours', label: msgs.onboarding_hours_3_6 },
+		{ value: '6-10 hours', label: msgs.onboarding_hours_6_10 },
+		{ value: '10-20 hours', label: msgs.onboarding_hours_10_20 },
+		{ value: '20+ hours', label: msgs.onboarding_hours_20_plus }
 	]
 }
 
-export function getIntentOptions(): { key: IntentKey; icon: string; label: string; sub: string }[] {
+export function getIntentOptions(
+	msgs: OnboardingMessages
+): { key: IntentKey; icon: string; label: string; sub: string }[] {
 	return [
 		{
 			key: 'act-now',
 			icon: '✊',
-			label: m.onboarding_intent_act_now_label(),
-			sub: m.onboarding_intent_act_now_sub()
+			label: msgs.onboarding_intent_act_now_label,
+			sub: msgs.onboarding_intent_act_now_sub
 		},
 		{
 			key: 'volunteer',
 			icon: '🤝',
-			label: m.onboarding_intent_volunteer_label(),
-			sub: m.onboarding_intent_volunteer_sub()
+			label: msgs.onboarding_intent_volunteer_label,
+			sub: msgs.onboarding_intent_volunteer_sub
 		},
 		{
 			key: 'lead',
 			icon: '🚀',
-			label: m.onboarding_intent_lead_label(),
-			sub: m.onboarding_intent_lead_sub()
+			label: msgs.onboarding_intent_lead_label,
+			sub: msgs.onboarding_intent_lead_sub
 		}
 	]
 }

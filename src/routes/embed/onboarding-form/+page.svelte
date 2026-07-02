@@ -3,16 +3,20 @@
 	import { page } from '$app/state'
 	import OnboardingFlow from '$lib/components/onboarding/OnboardingFlow.svelte'
 	import PostMeta from '$lib/components/PostMeta.svelte'
-	import * as m from '$lib/paraglide/messages.js'
-	import { isLocale, setLocale } from '$lib/paraglide/runtime'
+	import {
+		isOnboardingLocale,
+		setOnboardingLocale,
+		getMessages
+	} from '$lib/components/onboarding/i18n.svelte'
 
 	$effect(() => {
 		const locale = page.url.searchParams.get('locale')
-		if (locale && isLocale(locale)) setLocale(locale)
+		if (locale && isOnboardingLocale(locale)) setOnboardingLocale(locale)
 	})
 
-	const title = $derived(m.onboarding_page_title())
-	const description = $derived(m.onboarding_page_description())
+	const msgs = $derived(getMessages())
+	const title = $derived(msgs.onboarding_page_title)
+	const description = $derived(msgs.onboarding_page_description)
 
 	const initialCountry = $derived(page.url.searchParams.get('country') ?? '')
 

@@ -74,20 +74,13 @@ export function possiblyOverriddenLocales(
 	if (inclusive) {
 		const unknown = namedLocales.filter((l) => l !== 'all' && !defaults.locales.includes(l))
 		if (unknown.length > 0) {
-			if (isDev(env)) {
-				console.warn(
-					`Warning: ${source} requests "${unknown.join(', ')}" which are not in default-settings.js. Adding for local dev only.`
-				)
-				result.push(...unknown)
-			} else {
-				console.error(
-					`Error: ${source} requests "${unknown.join(', ')}" but default-settings.js only has [${defaults.locales.join(', ')}].`
-				)
-				console.error(
-					`Add the locale(s) to default-settings.js or fix your .env / PARAGLIDE_LOCALES.`
-				)
-				process.exit(1)
-			}
+			console.error(
+				`Error: ${source} requests "${unknown.join(', ')}" but default-settings.js only has [${defaults.locales.join(', ')}].`
+			)
+			console.error(
+				`Add the locale(s) to default-settings.js or fix your .env / PARAGLIDE_LOCALES.`
+			)
+			process.exit(1)
 		}
 	}
 	console.log(`Locale source: ${source} → [${result.join(', ')}]`)

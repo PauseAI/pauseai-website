@@ -1,8 +1,6 @@
 import { fail } from '@sveltejs/kit'
-import * as m from '$lib/paraglide/messages.js'
 import type { FieldSet } from 'airtable'
-import type { Actions, PageServerLoad } from './$types'
-import { isLocale, setLocale } from '$lib/paraglide/runtime'
+import type { Actions } from './$types'
 import type { NationalGroupsApiResponse } from '$api/national-groups/+server.js'
 import { createRecord, updateRecord } from '$lib/airtable'
 import { isOnboardingLive } from '$lib/server/onboarding'
@@ -21,13 +19,6 @@ import {
 } from '$lib/components/onboarding/options'
 
 export const prerender = false
-
-export const load: PageServerLoad = ({ url }) => {
-	const locale = url.searchParams.get('locale')
-	if (locale && isLocale(locale)) {
-		setLocale(locale)
-	}
-}
 
 // Write target per the Plan of Action: base "PauseAI Volunteers & Actions",
 // table "Members".
@@ -99,21 +90,21 @@ export const actions: Actions = {
 		const hasVolunteerDetails = data.get('volunteer_details') === 'on'
 
 		if (!fullName || !email || !country || !city) {
-			return fail(400, { message: m.onboarding_error_missing_fields() })
+			return fail(400, { message: 'Please fill in your name, email, country and city.' })
 		}
 		if (!/^\S+@\S+\.\S+$/.test(email)) {
-			return fail(400, { message: m.onboarding_error_invalid_email() })
+			return fail(400, { message: 'Please enter a valid email address.' })
 		}
 		if (!COUNTRIES.includes(country)) {
-			return fail(400, { message: m.onboarding_error_invalid_country() })
+			return fail(400, { message: 'Please select a country from the list.' })
 		}
 		if (!isIntent(intent)) {
-			return fail(400, { message: m.onboarding_error_missing_intent() })
+			return fail(400, { message: 'Please choose what brings you here.' })
 		}
 		// Updates (volunteer step 3) carry an existing record id and already
 		// consented at step 2; require consent only when creating a record.
 		if (!existingRecordId && !gdprAgreed) {
-			return fail(400, { message: m.onboarding_error_missing_gdpr() })
+			return fail(400, { message: 'Please agree to the data processing consent to continue.' })
 		}
 
 		const fields: FieldSet = {
@@ -138,18 +129,18 @@ export const actions: Actions = {
 			const hours = getString(data, 'hours')
 
 			if (!languages.length) {
-				return fail(400, { message: m.onboarding_error_missing_languages() })
+				return fail(400, { message: 'Please select at least one language you speak.' })
 			}
 			if (!WEEKLY_HOURS.includes(hours)) {
-				return fail(400, { message: m.onboarding_error_missing_hours() })
+				return fail(400, { message: 'Please tell us how much time you can commit weekly.' })
 			}
 			if (data.get('agree_volunteer') !== 'on' || data.get('agree_conduct') !== 'on') {
 				return fail(400, {
-					message: m.onboarding_error_missing_agreements()
+					message: 'Please agree to the Volunteer Agreement and Code of Conduct.'
 				})
 			}
 			if (discovery && !DISCOVERY_OPTIONS.includes(discovery)) {
-				return fail(400, { message: m.onboarding_error_invalid_discovery() })
+				return fail(400, { message: 'Please select a valid option for how you found us.' })
 			}
 
 			fields['Discord Username'] = getString(data, 'discord_username')
@@ -185,14 +176,14 @@ export const actions: Actions = {
 			if (recordId) {
 				const updated = await updateRecord(AIRTABLE_BASE_ID, MEMBERS_TABLE_ID, recordId, fields)
 				if (!updated) {
-					return fail(502, { message: m.onboarding_error_save_failed() })
+					return fail(502, { message: 'Sorry, we could not save your details. Please try again.' })
 				}
 			} else {
 				recordId = await createRecord(AIRTABLE_BASE_ID, MEMBERS_TABLE_ID, fields)
 				// A failed write returns undefined; surface it instead of telling
 				// the user they're signed up when no record was created.
 				if (!recordId) {
-					return fail(502, { message: m.onboarding_error_save_failed() })
+					return fail(502, { message: 'Sorry, we could not save your details. Please try again.' })
 				}
 				// Subscription happens on the initial (step 2) submission only;
 				// the volunteer-form update never re-subscribes.
