@@ -1,7 +1,6 @@
 <script lang="ts">
 	import Link from '$lib/components/Link.svelte'
 	import { getMessages } from './i18n.svelte'
-	import { safeHtml } from '$lib/sanitize'
 
 	const msgs = $derived(getMessages())
 </script>
@@ -21,7 +20,7 @@
 	</li>
 	<li>
 		<h3>{msgs.onboarding_action_talk_title}</h3>
-		<p>{@html safeHtml(msgs.onboarding_action_talk_sub)}</p>
+		<p>{@html msgs.onboarding_action_talk_sub}</p>
 	</li>
 	<li>
 		<h3>
@@ -52,7 +51,7 @@
 	</li>
 	<li>
 		<h3>{msgs.onboarding_action_donate_title}</h3>
-		<p>{@html safeHtml(msgs.onboarding_action_donate_sub)}</p>
+		<p>{@html msgs.onboarding_action_donate_sub}</p>
 	</li>
 </ul>
 
