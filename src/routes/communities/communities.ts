@@ -62,13 +62,11 @@ const nationalChapters: Community[] = (
 }))
 
 for (const community of [...adjacentCommunities, ...pauseAICommunities, ...nationalChapters]) {
-	if (
-		!(
-			community.link.startsWith('http') ||
-			community.link.startsWith('mailto') ||
-			community.link in LINK_PLACEHOLDERS
-		)
-	) {
+	if (!(
+		community.link.startsWith('http') ||
+		community.link.startsWith('mailto') ||
+		community.link in LINK_PLACEHOLDERS
+	)) {
 		throw Error('Invalid link for community: ' + community.name)
 	}
 }

@@ -52,8 +52,7 @@ type UKSendMPEmailApiErrorResponse = {
 }
 
 export type UKSendMPEmailApiResponse =
-	| UKSendMPEmailApiSuccessResponse
-	| UKSendMPEmailApiErrorResponse
+	UKSendMPEmailApiSuccessResponse | UKSendMPEmailApiErrorResponse
 
 export const POST: RequestHandler = async ({ request }) => {
 	if (!AIRTABLE_API_KEY || !AIRTABLE_WRITE_API_KEY) {
