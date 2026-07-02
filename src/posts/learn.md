@@ -33,7 +33,7 @@ import { CirclePause, CircleQuestionMark, Cog, Earth, Footprints, MessageSquareQ
 - [AISafety.dance](https://aisafety.dance). A more fun, friendly and interactive introduction to the AI catastrophic risks!
 - [AISafety.world](https://aisafety.world/tiles/). The whole AI Safety landscape with all the organizations, media outlets, forums, blogs, and other actors and resources.
 - [IncidentDatabase.ai](https://incidentdatabase.ai/). Database of incidents where AI systems caused harm.
-<!-- [NavigatingAIRisks.ai](https://www.navigatingrisks.ai/). A blog with various interesting articles. - [PauseAI.info](https://pauseai.info). Check out the rest of the PauseAI site here for loads of related infomation and [resources](/learn), useful [actions](/action), expert [quotes](/quotes), short one-pager [flyers](PauseAI_flyer.pdf), related [faqs](/faq), etc. -->
+  <!-- [NavigatingAIRisks.ai](https://www.navigatingrisks.ai/). A blog with various interesting articles. - [PauseAI.info](https://pauseai.info). Check out the rest of the PauseAI site here for loads of related infomation and [resources](/learn), useful [actions](/action), expert [quotes](/quotes), short one-pager [flyers](PauseAI_flyer.pdf), related [faqs](/faq), etc. -->
 - [LethalIntelligence.ai](https://lethalintelligence.ai/). A collection of resources on AI risks and AI alignment.
 
 ## Newsletters
@@ -87,8 +87,8 @@ Podcasts featuring PauseAI members can be found in the [media coverage](/press) 
 - [The Case for Slowing Down AI](https://www.vox.com/the-highlight/23621198/artificial-intelligence-chatgpt-openai-existential-risk-china-ai-safety-technology) (by Sigal Samuel)
 - [The AI Revolution: The Road to Superintelligence](https://waitbutwhy.com/2015/01/artificial-intelligence-revolution-1.html) (by WaitButWhy)
 - [How rogue AIs may arise](https://yoshuabengio.org/2023/05/22/how-rogue-ais-may-arise/) (by Yoshua Bengio)
-<!-- - [a casual intro to AI doom and alignment](https://carado.moe/ai-doom.html)
-I like it and the fact that is a more light reading, but I'm not sure if I want to put it because it defines alignment as just the technical stuff and redirects people to just do technical work -->
+  <!-- - [a casual intro to AI doom and alignment](https://carado.moe/ai-doom.html)
+  I like it and the fact that is a more light reading, but I'm not sure if I want to put it because it defines alignment as just the technical stuff and redirects people to just do technical work -->
 - [Reasoning through arguments against taking AI safety seriously](https://yoshuabengio.org/2024/07/09/reasoning-through-arguments-against-taking-ai-safety-seriously/) (by Yoshua Bengio)
 - [The Compendium](https://www.thecompendium.ai/)
 - [A Narrow Path](https://www.narrowpath.co/)
@@ -99,21 +99,21 @@ If you want to read what journalists have written about PauseAI, check out the l
 
 ## Books
 
-<!-- - [AI: Unexplainable, Unpredictable, Uncontrollable](https://www.goodreads.com/book/show/197554072-ai) (Roman Yampolskiy, 2024)
-I haven't heard good things about it yet -->
+  <!-- - [AI: Unexplainable, Unpredictable, Uncontrollable](https://www.goodreads.com/book/show/197554072-ai) (Roman Yampolskiy, 2024)
+  I haven't heard good things about it yet -->
 
 - [If Anyone Builds It, Everyone Dies](https://ifanyonebuildsit.com/) (Eliezer Yudkowsky & Nate Soares, 2025)
 - [Introduction to AI Safety, Ethics, and Society](https://www.aisafetybook.com/) (Dan Hendrycks, 2024). Free book and online course.
 - [Unexplainable, Unpredictable, Uncontrollable](https://www.taylorfrancis.com/books/mono/10.1201/9781003440260/ai-roman-yampolskiy) (Roman Yampolskiy, 2024)
 - [Uncontrollable: The Threat of Artificial Superintelligence and the Race to Save the World](https://www.goodreads.com/book/show/202416160-uncontrollable) (Darren McKee, 2023). Get it for [free](https://impactbooks.store/cart/47288196366640:1?discount=UNCON-P3SFRS)!
-<!-- - [The Precipice: Existential Risk and the Future of Humanity](https://www.goodreads.com/en/book/show/50485582-the-precipice) (Toby Ord, 2020)
-I love this book, but just a fraction of it is about AI -->
+  <!-- - [The Precipice: Existential Risk and the Future of Humanity](https://www.goodreads.com/en/book/show/50485582-the-precipice) (Toby Ord, 2020)
+  I love this book, but just a fraction of it is about AI -->
 - [The Alignment Problem](https://www.goodreads.com/book/show/50489349-the-alignment-problem) (Brian Christian, 2020)
 - [Human Compatible: Artificial Intelligence and the Problem of Control](https://www.goodreads.com/en/book/show/44767248) (Stuart Russell, 2019)
 - [Life 3.0: Being Human in the Age of Artificial Intelligence](https://www.goodreads.com/en/book/show/34272565) (Max Tegmark, 2017)
 - [Superintelligence: Paths, Dangers, Strategies](https://www.goodreads.com/en/book/show/20527133) (Nick Bostrom, 2014)
-<!-- - [Our Final Invention: Artificial Intelligence and the End of the Human Era](https://www.goodreads.com/en/book/show/17286699) (James Barrat, 2013)
-not well rated + kind of old -->
+  <!-- - [Our Final Invention: Artificial Intelligence and the End of the Human Era](https://www.goodreads.com/en/book/show/17286699) (James Barrat, 2013)
+  not well rated + kind of old -->
 
 ## Papers
 
