@@ -206,7 +206,7 @@ const en: OnboardingMessages = {
 	onboarding_intent_lead_label: 'I want to lead',
 	onboarding_intent_lead_sub: "I'm ready to organize in my country or region.",
 	onboarding_gdpr_consent:
-		'I agree to the <a href="/privacy">Privacy Policy</a>, including sharing my details with my local PauseAI chapter (which may be a separate entity to PauseAI Global) for local coordination.&nbsp;*',
+		'I agree to the <a target="_blank" rel="noopener noreferrer" href="/privacy">Privacy Policy</a>, including sharing my details with my local PauseAI chapter (which may be a separate entity to PauseAI Global) for local coordination.&nbsp;*',
 	onboarding_btn_submit: 'Submit →',
 	onboarding_btn_submitting: 'Submitting...',
 	onboarding_btn_back: '← Back',
@@ -232,9 +232,9 @@ const en: OnboardingMessages = {
 	onboarding_section_ways_to_help: 'A few ways to help today',
 	onboarding_next_step_title: '★ Recommended next step',
 	onboarding_next_step_p1:
-		'Join one of our Member Community Welcome Meetings, or a local social event, to find out more about PauseAI\'s community: <a href="/communities#events">see upcoming events</a>.',
+		'Join one of our Member Community Welcome Meetings, or a local social event, to find out more about PauseAI\'s community: <a target="_blank" rel="noopener noreferrer" href="/communities#events">see upcoming events</a>.',
 	onboarding_next_step_p2:
-		'Want to get kick-started into action straight away? Check out our <a href="/action">list of actions</a>.',
+		'Want to get kick-started into action straight away? Check out our <a target="_blank" rel="noopener noreferrer" href="/action">list of actions</a>.',
 	onboarding_footer_join_conversation: 'Join the conversation',
 	onboarding_footer_discord_btn: 'Join PauseAI on Discord',
 	onboarding_footer_follow_us: 'Follow us',
@@ -250,7 +250,7 @@ const en: OnboardingMessages = {
 	onboarding_helper_zip: 'Your 5-digit zip code is used to find your Local Group.',
 	onboarding_field_discord: 'Discord username',
 	onboarding_helper_discord:
-		'If you don\'t have a Discord account, we encourage you to <a href="https://discord.com/register">create one here</a>.',
+		'If you don\'t have a Discord account, we encourage you to <a target="_blank" rel="noopener noreferrer" href="https://discord.com/register">create one here</a>.',
 	onboarding_field_phone: 'Phone number',
 	onboarding_placeholder_dial_code: '+1',
 	onboarding_placeholder_phone: '(555) 000-0000',
@@ -263,19 +263,19 @@ const en: OnboardingMessages = {
 	onboarding_field_hours: 'How much time can you commit weekly? *',
 	onboarding_placeholder_specify: 'Please specify',
 	onboarding_agree_volunteer:
-		'I agree with the <a href="/volunteer-agreement">Volunteer Agreement</a>&nbsp;*',
+		'I agree with the <a target="_blank" rel="noopener noreferrer" href="/volunteer-agreement">Volunteer Agreement</a>&nbsp;*',
 	onboarding_agree_conduct:
-		'I agree with the <a href="/code-of-conduct">Code of Conduct</a>&nbsp;*',
+		'I agree with the <a target="_blank" rel="noopener noreferrer" href="/code-of-conduct">Code of Conduct</a>&nbsp;*',
 	onboarding_lead_title: (role) => `${role} Volunteer Description`,
 	onboarding_lead_meta: 'Part-time volunteer role · 5–15 hours/week',
 	onboarding_lead_intro:
 		'Pause AI Global is looking for leaders around the world to run local groups that lead organising efforts in their area. This is a part-time volunteer role requiring 5-15 hours per week. Each group leader will be responsible for planning direct actions, mobilising volunteers and coordinating with the Global PauseAI team.',
 	onboarding_lead_us_branch:
-		'Since you\'re based in the <strong>United States</strong>, please apply through PauseAI US: <a href="https://form.asana.com/?k=RxWuTz8SYKME33V5nBvK1A&d=1208505553897008">PauseAI US application form</a>.',
+		'Since you\'re based in the <strong>United States</strong>, please apply through PauseAI US: <a target="_blank" rel="noopener noreferrer" href="https://form.asana.com/?k=RxWuTz8SYKME33V5nBvK1A&d=1208505553897008">PauseAI US application form</a>.',
 	onboarding_lead_has_chapter: (country) =>
-		`<strong>${country} already has a PauseAI chapter</strong>, so rather than founding a national group, you could lead a regional or city group within it. Find your chapter at <a href="/communities">pauseai.info/communities</a>, or email our Organizing Director below to talk it through.`,
+		`<strong>${country} already has a PauseAI chapter</strong>, so rather than founding a national group, you could lead a regional or city group within it. Find your chapter at <a target="_blank" rel="noopener noreferrer" href="/communities">pauseai.info/communities</a>, or email our Organizing Director below to talk it through.`,
 	onboarding_lead_check_chapter:
-		'<strong>First, check that your country doesn\'t already have a chapter:</strong> <a href="/communities">pauseai.info/communities</a>.',
+		'<strong>First, check that your country doesn\'t already have a chapter:</strong> <a target="_blank" rel="noopener noreferrer" href="/communities">pauseai.info/communities</a>.',
 	onboarding_lead_what_you_do_title: "What you'll do",
 	onboarding_lead_do_1:
 		'Recruit and grow your local group by welcoming new volunteers and organising events together.',
@@ -304,7 +304,7 @@ const en: OnboardingMessages = {
 		"You'll join a global network of organisers who are all figuring this out together. We meet monthly, share resources across our chat platforms and help each other troubleshoot. It's a great way to learn new skills, meet thoughtful people and be part of a fast-growing movement that's working on one of the most important issues of our time.",
 	onboarding_lead_next_steps_title: 'Next steps',
 	onboarding_lead_next_steps:
-		'If you\'d like to learn more, please contact our PauseAI Global organising director Irina Tavera at <a href="mailto:Irina@pauseai.info">Irina@pauseai.info</a> to schedule an informal exploratory chat.',
+		'If you\'d like to learn more, please contact our PauseAI Global organising director Irina Tavera at <a target="_blank" rel="noopener noreferrer" href="mailto:Irina@pauseai.info">Irina@pauseai.info</a> to schedule an informal exploratory chat.',
 	onboarding_lead_email_btn: '✉️ Email our Organizing Director',
 	onboarding_lead_please_mention: 'Please let her know the following:',
 	onboarding_lead_mention_1: 'Your name',
@@ -362,7 +362,7 @@ const en: OnboardingMessages = {
 	onboarding_action_lobby_sub: 'Our lobby tips walk you through what to say.',
 	onboarding_action_talk_title: 'Talk to someone in your life about AI safety',
 	onboarding_action_talk_sub:
-		'A friend, neighbour, colleague, or family member. Our <a href="/counterarguments">counterarguments guide</a> can help you answer tough questions and encourage others to act.',
+		'A friend, neighbour, colleague, or family member. Our <a target="_blank" rel="noopener noreferrer" href="/counterarguments">counterarguments guide</a> can help you answer tough questions and encourage others to act.',
 	onboarding_action_microcommit_title: 'Microcommit — weekly bite-sized actions',
 	onboarding_action_microcommit_sub:
 		'Pick from a list of small ongoing actions and track your contribution over time.',
@@ -371,7 +371,7 @@ const en: OnboardingMessages = {
 		'Add your name alongside thousands of others calling for safer AI.',
 	onboarding_action_donate_title: 'Donate or pick up some gear',
 	onboarding_action_donate_sub:
-		'Make a <a href="/donate">donation</a> or pick up some gear from our <a href="https://pauseai-shop.fourthwall.com/">store</a>.',
+		'Make a <a target="_blank" rel="noopener noreferrer" href="/donate">donation</a> or pick up some gear from our <a target="_blank" rel="noopener noreferrer" href="https://pauseai-shop.fourthwall.com/">store</a>.',
 	onboarding_error_generic: 'Something went wrong. Please try again.',
 	onboarding_error_unexpected: 'An unexpected error occurred. Please try again.'
 }
@@ -409,7 +409,7 @@ const de: OnboardingMessages = {
 	onboarding_intent_lead_label: 'Ich möchte leiten',
 	onboarding_intent_lead_sub: 'Ich bin bereit, in meinem Land oder meiner Region zu organisieren.',
 	onboarding_gdpr_consent:
-		'Ich stimme der <a href="/privacy">Datenschutzrichtlinie</a> zu, einschließlich der Weitergabe meiner Daten an mein lokales PauseAI-Kapitel (das eine separate Einheit von PauseAI Global sein kann) zur lokalen Koordination.&nbsp;*',
+		'Ich stimme der <a target="_blank" rel="noopener noreferrer" href="/privacy">Datenschutzrichtlinie</a> zu, einschließlich der Weitergabe meiner Daten an mein lokales PauseAI-Kapitel (das eine separate Einheit von PauseAI Global sein kann) zur lokalen Koordination.&nbsp;*',
 	onboarding_btn_submit: 'Absenden →',
 	onboarding_btn_submitting: 'Wird abgesendet...',
 	onboarding_btn_back: '← Zurück',
@@ -437,9 +437,9 @@ const de: OnboardingMessages = {
 	onboarding_section_ways_to_help: 'Einige Möglichkeiten zu helfen',
 	onboarding_next_step_title: '★ Empfohlener nächster Schritt',
 	onboarding_next_step_p1:
-		'Nimm an einem unserer Willkommensmeetings für Mitglieder oder an einem lokalen Event teil, um mehr über die PauseAI-Gemeinschaft zu erfahren: <a href="/communities#events">bevorstehende Events ansehen</a>.',
+		'Nimm an einem unserer Willkommensmeetings für Mitglieder oder an einem lokalen Event teil, um mehr über die PauseAI-Gemeinschaft zu erfahren: <a target="_blank" rel="noopener noreferrer" href="/communities#events">bevorstehende Events ansehen</a>.',
 	onboarding_next_step_p2:
-		'Möchtest du sofort aktiv werden? Sieh dir unsere <a href="/action">Aktionsliste</a> an.',
+		'Möchtest du sofort aktiv werden? Sieh dir unsere <a target="_blank" rel="noopener noreferrer" href="/action">Aktionsliste</a> an.',
 	onboarding_footer_join_conversation: 'An der Unterhaltung teilnehmen',
 	onboarding_footer_discord_btn: 'PauseAI auf Discord beitreten',
 	onboarding_footer_follow_us: 'Folge uns',
@@ -457,7 +457,7 @@ const de: OnboardingMessages = {
 		'Deine 5-stellige Postleitzahl wird verwendet, um deine lokale Gruppe zu finden.',
 	onboarding_field_discord: 'Discord-Benutzername',
 	onboarding_helper_discord:
-		'Wenn du noch kein Discord-Konto hast, empfehlen wir dir, <a href="https://discord.com/register">hier eines zu erstellen</a>.',
+		'Wenn du noch kein Discord-Konto hast, empfehlen wir dir, <a target="_blank" rel="noopener noreferrer" href="https://discord.com/register">hier eines zu erstellen</a>.',
 	onboarding_field_phone: 'Telefonnummer',
 	onboarding_placeholder_dial_code: '+49',
 	onboarding_placeholder_phone: '170 0000000',
@@ -470,19 +470,19 @@ const de: OnboardingMessages = {
 	onboarding_field_hours: 'Wie viel Zeit kannst du wöchentlich einbringen? *',
 	onboarding_placeholder_specify: 'Bitte angeben',
 	onboarding_agree_volunteer:
-		'Ich stimme der <a href="/volunteer-agreement">Freiwilligenvereinbarung</a> zu&nbsp;*',
+		'Ich stimme der <a target="_blank" rel="noopener noreferrer" href="/volunteer-agreement">Freiwilligenvereinbarung</a> zu&nbsp;*',
 	onboarding_agree_conduct:
-		'Ich stimme dem <a href="/code-of-conduct">Verhaltenskodex</a> zu&nbsp;*',
+		'Ich stimme dem <a target="_blank" rel="noopener noreferrer" href="/code-of-conduct">Verhaltenskodex</a> zu&nbsp;*',
 	onboarding_lead_title: (role) => `${role} – Freiwilligenbeschreibung`,
 	onboarding_lead_meta: 'Ehrenamtliche Teilzeitrolle · 5–15 Stunden/Woche',
 	onboarding_lead_intro:
 		'PauseAI Global sucht Leitungspersonen auf der ganzen Welt, die lokale Gruppen führen und Organisierungsmaßnahmen in ihrer Region koordinieren. Es handelt sich um eine ehrenamtliche Teilzeitrolle mit einem Aufwand von 5–15 Stunden pro Woche. Jede Gruppenleitung ist verantwortlich für die Planung von Aktionen, die Mobilisierung von Freiwilligen und die Koordination mit dem globalen PauseAI-Team.',
 	onboarding_lead_us_branch:
-		'Da du in den <strong>Vereinigten Staaten</strong> ansässig bist, bewirb dich bitte über PauseAI US: <a href="https://form.asana.com/?k=RxWuTz8SYKME33V5nBvK1A&d=1208505553897008">PauseAI US Bewerbungsformular</a>.',
+		'Da du in den <strong>Vereinigten Staaten</strong> ansässig bist, bewirb dich bitte über PauseAI US: <a target="_blank" rel="noopener noreferrer" href="https://form.asana.com/?k=RxWuTz8SYKME33V5nBvK1A&d=1208505553897008">PauseAI US Bewerbungsformular</a>.',
 	onboarding_lead_has_chapter: (country) =>
-		`<strong>${country} hat bereits ein PauseAI-Kapitel</strong>, daher könntest du statt einer nationalen Gruppe eine regionale oder städtische Gruppe leiten. Finde dein Kapitel unter <a href="/communities">pauseai.info/communities</a>, oder wende dich per E-Mail an unseren Organizing Director (siehe unten), um es zu besprechen.`,
+		`<strong>${country} hat bereits ein PauseAI-Kapitel</strong>, daher könntest du statt einer nationalen Gruppe eine regionale oder städtische Gruppe leiten. Finde dein Kapitel unter <a target="_blank" rel="noopener noreferrer" href="/communities">pauseai.info/communities</a>, oder wende dich per E-Mail an unseren Organizing Director (siehe unten), um es zu besprechen.`,
 	onboarding_lead_check_chapter:
-		'<strong>Überprüfe zunächst, ob dein Land bereits ein Kapitel hat:</strong> <a href="/communities">pauseai.info/communities</a>.',
+		'<strong>Überprüfe zunächst, ob dein Land bereits ein Kapitel hat:</strong> <a target="_blank" rel="noopener noreferrer" href="/communities">pauseai.info/communities</a>.',
 	onboarding_lead_what_you_do_title: 'Was du tun wirst',
 	onboarding_lead_do_1:
 		'Deine lokale Gruppe aufbauen und wachsen lassen, indem du neue Freiwillige willkommen heißt und gemeinsam Events organisierst.',
@@ -514,7 +514,7 @@ const de: OnboardingMessages = {
 		'Du trittst einem globalen Netzwerk von Organisator:innen bei, die gemeinsam an diesen Herausforderungen arbeiten. Wir treffen uns monatlich, teilen Ressourcen auf unseren Plattformen und helfen uns gegenseitig. Es ist eine großartige Möglichkeit, neue Fähigkeiten zu erlernen, nachdenkliche Menschen kennenzulernen und Teil einer schnell wachsenden Bewegung zu sein, die sich mit einem der wichtigsten Themen unserer Zeit befasst.',
 	onboarding_lead_next_steps_title: 'Nächste Schritte',
 	onboarding_lead_next_steps:
-		'Wenn du mehr erfahren möchtest, wende dich an Irina Tavera, die globale Organizing Director von PauseAI, unter <a href="mailto:Irina@pauseai.info">Irina@pauseai.info</a>, um ein informelles Gespräch zu vereinbaren.',
+		'Wenn du mehr erfahren möchtest, wende dich an Irina Tavera, die globale Organizing Director von PauseAI, unter <a target="_blank" rel="noopener noreferrer" href="mailto:Irina@pauseai.info">Irina@pauseai.info</a>, um ein informelles Gespräch zu vereinbaren.',
 	onboarding_lead_email_btn: '✉️ E-Mail an unsere Organizing Director',
 	onboarding_lead_please_mention: 'Bitte teile ihr Folgendes mit:',
 	onboarding_lead_mention_1: 'Deinen Namen',
@@ -574,7 +574,7 @@ const de: OnboardingMessages = {
 	onboarding_action_lobby_sub: 'Unsere Lobbying-Tipps helfen dir, das Richtige zu sagen.',
 	onboarding_action_talk_title: 'Mit jemandem in deinem Umfeld über KI-Sicherheit sprechen',
 	onboarding_action_talk_sub:
-		'Ein Freund, Nachbar, Kollege oder Familienmitglied. Unser <a href="/counterarguments">Leitfaden für Gegenargumente</a> hilft dir, schwierige Fragen zu beantworten und andere zum Handeln zu motivieren.',
+		'Ein Freund, Nachbar, Kollege oder Familienmitglied. Unser <a target="_blank" rel="noopener noreferrer" href="/counterarguments">Leitfaden für Gegenargumente</a> hilft dir, schwierige Fragen zu beantworten und andere zum Handeln zu motivieren.',
 	onboarding_action_microcommit_title: 'Mikroengagement – wöchentlich kleine Aktionen',
 	onboarding_action_microcommit_sub:
 		'Wähle aus einer Liste kleiner fortlaufender Aktionen und verfolge deinen Beitrag über Zeit.',
@@ -583,7 +583,7 @@ const de: OnboardingMessages = {
 		'Füge deinen Namen zu Tausenden hinzu, die für eine sicherere KI eintreten.',
 	onboarding_action_donate_title: 'Spenden oder Merchandise kaufen',
 	onboarding_action_donate_sub:
-		'Leiste eine <a href="/donate">Spende</a> oder entdecke unser Sortiment in unserem <a href="https://pauseai-shop.fourthwall.com/">Shop</a>.',
+		'Leiste eine <a target="_blank" rel="noopener noreferrer" href="/donate">Spende</a> oder entdecke unser Sortiment in unserem <a target="_blank" rel="noopener noreferrer" href="https://pauseai-shop.fourthwall.com/">Shop</a>.',
 	onboarding_error_generic: 'Ein Fehler ist aufgetreten. Bitte versuche es erneut.',
 	onboarding_error_unexpected: 'Ein unerwarteter Fehler ist aufgetreten. Bitte versuche es erneut.'
 }
