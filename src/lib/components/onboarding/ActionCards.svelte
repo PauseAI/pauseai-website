@@ -20,6 +20,7 @@
 	</li>
 	<li>
 		<h3>{msgs.onboarding_action_talk_title}</h3>
+		<!-- eslint-disable-next-line svelte/no-at-html-tags -->
 		<p>{@html msgs.onboarding_action_talk_sub}</p>
 	</li>
 	<li>
@@ -51,6 +52,7 @@
 	</li>
 	<li>
 		<h3>{msgs.onboarding_action_donate_title}</h3>
+		<!-- eslint-disable-next-line svelte/no-at-html-tags -->
 		<p>{@html msgs.onboarding_action_donate_sub}</p>
 	</li>
 </ul>

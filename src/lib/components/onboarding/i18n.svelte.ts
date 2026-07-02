@@ -8,12 +8,8 @@ export type OnboardingLocale = keyof typeof onboardingMessages
 
 let locale = $state<OnboardingLocale>('en')
 
-export function getLocale(): OnboardingLocale {
-	return locale
-}
-
 export function setOnboardingLocale(l: string) {
-	if (l in onboardingMessages) locale = l as OnboardingLocale
+	if (l in onboardingMessages) locale = l
 }
 
 export function isOnboardingLocale(s: string): s is OnboardingLocale {

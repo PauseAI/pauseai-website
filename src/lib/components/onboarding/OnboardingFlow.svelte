@@ -5,7 +5,6 @@
 	import type { NationalGroupsApiResponse } from '$api/national-groups/+server.js'
 	import type { OnboardingModeApiResponse } from '$api/onboarding-mode/+server.js'
 	import { toast } from 'svelte-french-toast'
-	import Link from '$lib/components/Link.svelte'
 	import LinkWithoutIcon from '$lib/components/LinkWithoutIcon.svelte'
 	import Socials from '$lib/components/Socials.svelte'
 	import Combobox from '$lib/components/Combobox.svelte'
@@ -321,6 +320,7 @@
 	<label class="agreement">
 		<input type="checkbox" name="agree_gdpr" required bind:checked={gdprConsent} />
 		<span class="checkbox-box" aria-hidden="true"></span>
+		<!-- eslint-disable-next-line svelte/no-at-html-tags -->
 		<span>{@html msgs.onboarding_gdpr_consent}</span>
 	</label>
 {/snippet}
@@ -328,7 +328,9 @@
 {#snippet nextStepBlock()}
 	<div class="next-step">
 		<h3>{msgs.onboarding_next_step_title}</h3>
+		<!-- eslint-disable-next-line svelte/no-at-html-tags -->
 		<p>{@html msgs.onboarding_next_step_p1}</p>
+		<!-- eslint-disable-next-line svelte/no-at-html-tags -->
 		<p>{@html msgs.onboarding_next_step_p2}</p>
 	</div>
 {/snippet}
@@ -647,6 +649,7 @@
 						name="discord_username"
 						bind:value={volunteer.discordUsername}
 					/>
+					<!-- eslint-disable-next-line svelte/no-at-html-tags -->
 					<p class="helper">{@html msgs.onboarding_helper_discord}</p>
 				</div>
 				<div class="field">
@@ -770,11 +773,13 @@
 						bind:checked={agreements.volunteer}
 					/>
 					<span class="checkbox-box" aria-hidden="true"></span>
+					<!-- eslint-disable-next-line svelte/no-at-html-tags -->
 					<span>{@html msgs.onboarding_agree_volunteer}</span>
 				</label>
 				<label class="agreement">
 					<input type="checkbox" name="agree_conduct" required bind:checked={agreements.conduct} />
 					<span class="checkbox-box" aria-hidden="true"></span>
+					<!-- eslint-disable-next-line svelte/no-at-html-tags -->
 					<span>{@html msgs.onboarding_agree_conduct}</span>
 				</label>
 				<button type="submit" class="primary" disabled={!volunteerFormComplete || submitting}>
@@ -792,10 +797,13 @@
 			<div class="role-description">
 				<p>{msgs.onboarding_lead_intro}</p>
 				{#if basics.country === 'United States'}
+					<!-- eslint-disable-next-line svelte/no-at-html-tags -->
 					<p>{@html msgs.onboarding_lead_us_branch}</p>
 				{:else if countryHasChapter}
+					<!-- eslint-disable-next-line svelte/no-at-html-tags -->
 					<p>{@html msgs.onboarding_lead_has_chapter(basics.country)}</p>
 				{:else}
+					<!-- eslint-disable-next-line svelte/no-at-html-tags -->
 					<p>{@html msgs.onboarding_lead_check_chapter}</p>
 				{/if}
 				<h3>{msgs.onboarding_lead_what_you_do_title}</h3>
@@ -824,6 +832,7 @@
 				<h3>{msgs.onboarding_lead_support_title}</h3>
 				<p>{msgs.onboarding_lead_support}</p>
 				<h3>{msgs.onboarding_lead_next_steps_title}</h3>
+				<!-- eslint-disable-next-line svelte/no-at-html-tags -->
 				<p>{@html msgs.onboarding_lead_next_steps}</p>
 			</div>
 			<LinkWithoutIcon class="mailto-button" href={leadMailto}>
