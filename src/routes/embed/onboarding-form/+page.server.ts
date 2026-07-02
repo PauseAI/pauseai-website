@@ -176,14 +176,14 @@ export const actions: Actions = {
 			if (recordId) {
 				const updated = await updateRecord(AIRTABLE_BASE_ID, MEMBERS_TABLE_ID, recordId, fields)
 				if (!updated) {
-					return fail(502, { message: "Sorry, we couldn't save your details. Please try again." })
+					return fail(502, { message: 'Sorry, we could not save your details. Please try again.' })
 				}
 			} else {
 				recordId = await createRecord(AIRTABLE_BASE_ID, MEMBERS_TABLE_ID, fields)
 				// A failed write returns undefined; surface it instead of telling
 				// the user they're signed up when no record was created.
 				if (!recordId) {
-					return fail(502, { message: "Sorry, we couldn't save your details. Please try again." })
+					return fail(502, { message: 'Sorry, we could not save your details. Please try again.' })
 				}
 				// Subscription happens on the initial (step 2) submission only;
 				// the volunteer-form update never re-subscribes.

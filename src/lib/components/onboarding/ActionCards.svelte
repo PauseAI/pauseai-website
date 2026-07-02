@@ -1,39 +1,39 @@
 <script lang="ts">
 	import Link from '$lib/components/Link.svelte'
+	import { getMessages } from './i18n.svelte'
+
+	const msgs = $derived(getMessages())
 </script>
 
 <ul class="action-cards">
 	<li>
-		<h3><Link href="/ai-concerns">Share your AI concerns</Link></h3>
-		<p>Tell your story and add your voice to the public record.</p>
+		<h3><Link href="/ai-concerns">{msgs.onboarding_action_ai_concerns_title}</Link></h3>
+		<p>{msgs.onboarding_action_ai_concerns_sub}</p>
 	</li>
 	<li>
-		<h3><Link href="/email-builder">Email your elected representatives</Link></h3>
-		<p>Use our Email Builder for a pre-drafted message you can personalize and send.</p>
+		<h3><Link href="/email-builder">{msgs.onboarding_action_email_reps_title}</Link></h3>
+		<p>{msgs.onboarding_action_email_reps_sub}</p>
 	</li>
 	<li>
-		<h3><Link href="/lobby-tips">Contact your elected officials</Link></h3>
-		<p>Our lobby tips walk you through what to say.</p>
+		<h3><Link href="/lobby-tips">{msgs.onboarding_action_lobby_title}</Link></h3>
+		<p>{msgs.onboarding_action_lobby_sub}</p>
 	</li>
 	<li>
-		<h3>Talk to someone in your life about AI safety</h3>
-		<p>
-			A friend, neighbour, colleague, or family member. Our
-			<Link href="/counterarguments">counterarguments guide</Link> can help you answer tough questions
-			and encourage others to act.
-		</p>
+		<h3>{msgs.onboarding_action_talk_title}</h3>
+		<!-- eslint-disable-next-line svelte/no-at-html-tags -->
+		<p>{@html msgs.onboarding_action_talk_sub}</p>
 	</li>
 	<li>
 		<h3>
 			<Link href="https://microcommit.io/onboarding?org=135fcd8d-8116-44af-b885-14df992f9a8c">
-				Microcommit — weekly bite-sized actions
+				{msgs.onboarding_action_microcommit_title}
 			</Link>
 		</h3>
-		<p>Pick from a list of small ongoing actions and track your contribution over time.</p>
+		<p>{msgs.onboarding_action_microcommit_sub}</p>
 	</li>
 	<li>
-		<h3>Sign the petitions</h3>
-		<p>Add your name alongside thousands of others calling for safer AI.</p>
+		<h3>{msgs.onboarding_action_petitions_title}</h3>
+		<p>{msgs.onboarding_action_petitions_sub}</p>
 		<ul class="petitions">
 			<li><Link href="/statement">PauseAI Statement</Link></li>
 			<li><Link href="/sayno">Say No To Superintelligent AI</Link></li>
@@ -51,11 +51,9 @@
 		</ul>
 	</li>
 	<li>
-		<h3>Donate or pick up some gear</h3>
-		<p>
-			Make a <Link href="/donate">donation</Link> or pick up some gear from our
-			<Link href="https://pauseai-shop.fourthwall.com/">store</Link>.
-		</p>
+		<h3>{msgs.onboarding_action_donate_title}</h3>
+		<!-- eslint-disable-next-line svelte/no-at-html-tags -->
+		<p>{@html msgs.onboarding_action_donate_sub}</p>
 	</li>
 </ul>
 
