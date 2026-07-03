@@ -8,7 +8,7 @@ news: true
 
 We are excited to announce the dates for the next PauseCon: PauseAI’s flagship training conference. If you want to make an impact in your community and grow the PauseAI movement, we encourage you to [apply](https://luma.com/4be2eqz9).
 
-**The deadline for applications is August 14.**
+**The deadline for applications is August 21.**
 
 **[Apply here.](https://luma.com/4be2eqz9)**
 
@@ -40,7 +40,7 @@ Become part of a community of talented, like-minded people who are extremely mot
 
 #### Practical information
 
-Participation and accommodation are free of charge: we do not want cost to be barrier to participation. However we do encourage participants to make a donation if they are able.
+Participation is free of charge and PauseAI can provide accommodation: we do not want cost to be barrier to participation. However we do encourage participants to make a donation if they are able.
 
 The conference will take place from 9am on Saturday 5 until Monday 7 September at 3pm. A parliamentary conference is being planned for Monday morning.
 
