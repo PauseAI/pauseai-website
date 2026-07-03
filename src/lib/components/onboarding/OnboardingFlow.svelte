@@ -53,12 +53,10 @@
 	]
 
 	let {
-		initialEmail = '',
 		initialCountry = '',
 		initialCity = '',
 		initialLanguages = [] as string[]
 	}: {
-		initialEmail?: string
 		initialCountry?: string
 		initialCity?: string
 		initialLanguages?: string[]
@@ -111,17 +109,16 @@
 	// volunteer form, which pre-fills from the same state)
 	let basics = $state({
 		fullName: '',
-		email: initialEmail,
+		email: '',
 		country: initialCountry,
 		city: initialCity,
 		newsletter: false
 	})
 
 	const validLanguageStored = new Set(LANGUAGES.map((l) => l.stored))
+	const filteredInitialLanguages = initialLanguages.filter((l) => validLanguageStored.has(l))
 	const defaultLanguages =
-		initialLanguages.length > 0
-			? initialLanguages.filter((l) => validLanguageStored.has(l))
-			: ['English']
+		filteredInitialLanguages.length > 0 ? filteredInitialLanguages : ['English']
 
 	// Volunteer form (path C)
 	let volunteer = $state({
