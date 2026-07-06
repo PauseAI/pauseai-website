@@ -44,7 +44,7 @@
 		{
 			key: 'act-now',
 			icon: '✊',
-			label: 'I want to take action now',
+			label: 'I just want to take action now',
 			sub: 'Show me what I can do today.'
 		},
 		{

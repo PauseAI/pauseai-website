@@ -36,7 +36,7 @@ That's it! By default, all commands run in English-only mode for maximum speed. 
 | ---------------------- | --------------------------------------------------- |
 | `pnpm clean`           | Clean build artifacts and caches                    |
 | `pnpm inlang:settings` | Regenerate inlang localization settings             |
-| `pnpm l10n`            | Run l10n manually (see [L10N.md](./L10N.md))        |
+| `pnpm l10n`            | Run l10n manually (see [L10N.md](./docs/L10N.md))   |
 | `pnpm dev`             | Start development server                            |
 | `pnpm build`           | Build for production                                |
 | `pnpm netlify`         | Show Netlify preview options                        |
