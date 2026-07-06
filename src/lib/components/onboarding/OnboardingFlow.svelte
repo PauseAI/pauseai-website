@@ -1,7 +1,7 @@
 <!--
 	OnboardingFlow — multi-step join form.
 
-	Flow documentation (step machine, server action, validation, live/stub mode):
+	Flow documentation (step machine, validation, live/stub mode):
 	docs/join-form-flow.md
 
 	When changing steps, intents, hidden fields, or the submit contract,
