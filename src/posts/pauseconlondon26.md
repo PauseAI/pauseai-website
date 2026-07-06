@@ -49,4 +49,4 @@ Accommodation will be provided for three nights: Friday, Saturday and Sunday. We
 
 [Find out more about PauseCon and apply to participate here](https://luma.com/4be2eqz9)
 
-For queries contact [info@pauseai.info](info@pauseai.info)[](mailito:info@pauseai.info)[](https://luma.com/4be2eqz9)
+For queries contact [info@pauseai.info](info@pauseai.info)
