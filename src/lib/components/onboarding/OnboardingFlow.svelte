@@ -446,7 +446,9 @@
 						onclick={() => (keepInformed = !keepInformed)}
 					>
 						<span class="intent-icon">
-							<span class="checkbox-box" aria-hidden="true">{keepInformed ? '✓' : ''}</span>
+							<span class="checkbox-box" aria-hidden="true">
+								{keepInformed ? '✓' : ''}
+							</span>
 							🔔
 						</span>
 						<span class="intent-label">{msgs.onboarding_intent_keep_informed_label}</span>
@@ -463,7 +465,9 @@
 						onclick={() => (basics.newsletter = !basics.newsletter)}
 					>
 						<span class="intent-icon">
-							<span class="checkbox-box" aria-hidden="true">{basics.newsletter ? '✓' : ''}</span>
+							<span class="checkbox-box" aria-hidden="true">
+								{basics.newsletter ? '✓' : ''}
+							</span>
 							📰
 						</span>
 						<span class="intent-label">{msgs.onboarding_intent_newsletter_label}</span>
@@ -484,8 +488,8 @@
 							onclick={() => (intent = intent === option.key ? null : option.key)}
 						>
 							<span class="intent-icon">
-								<span class="checkbox-box" aria-hidden="true">
-									{intent === option.key ? '✓' : ''}
+								<span class="radio-box" aria-hidden="true">
+									<span class="radio-dot"></span>
 								</span>
 								{option.icon}
 							</span>
@@ -1076,6 +1080,39 @@
 		font-size: 0.95rem;
 		font-weight: 700;
 		line-height: 1;
+	}
+
+	/* Radio variant: circular, with a filled inner dot for the selected
+	   option. Used for single-choice groups (e.g. "Want to do more?").
+	   The dot is a centered element rather than a glyph so it stays
+	   perfectly centered across fonts. */
+	.radio-box {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		width: 1.3rem;
+		height: 1.3rem;
+		border: 2px solid var(--brand-subtle);
+		border-radius: 50%;
+		background-color: var(--bg);
+		line-height: 1;
+	}
+
+	.radio-dot {
+		width: 0.6rem;
+		height: 0.6rem;
+		border-radius: 50%;
+		background-color: transparent;
+		transition: background-color 0.15s;
+	}
+
+	.intent-option.selected .radio-box {
+		border-color: var(--brand);
+		background-color: var(--brand);
+	}
+
+	.intent-option.selected .radio-dot {
+		background-color: var(--bg);
 	}
 
 	.intent-option.selected .checkbox-box,

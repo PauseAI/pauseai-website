@@ -1,5 +1,4 @@
 // Controlled vocabularies for the onboarding pipeline form.
-
 import type { OnboardingMessages } from './messages'
 
 export const INTENTS = ['Keep informed', 'Act now', 'Volunteer', 'Lead'] as const
