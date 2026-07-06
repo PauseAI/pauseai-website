@@ -49,8 +49,8 @@ stateDiagram-v2
     Step3Lead: Step 3 — Lead role description<br/>(mailto link to Organizing Director)
     Step3Lead --> [*]: No server submission<br/>(email hand-off)
 
-    Step3Confirm: Step 3 — Confirmation<br/>+ ActionCards
-    Step4: Step 4 — Volunteer confirmation
+    Step3Confirm: Step 3 — Confirmation<br/>+ ActionCards (inline)
+    Step4: Step 4 — Volunteer confirmation<br/>+ nextStepBlock (link to /action)
     Step3Confirm --> [*]
     Step4 --> [*]
     Browse --> [*]
