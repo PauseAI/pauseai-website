@@ -25,12 +25,12 @@ Both render `<OnboardingFlow />` from
 ```mermaid
 stateDiagram-v2
     [*] --> Step1
-    Step1: Step 1 — Basic info\n(name, email, country, city)
+    Step1: Step 1 — Basic info<br/>(name, email, country, city)
     Step1 --> Step2: Continue (client-side)
     Step1 --> Browse: "I just want to take action now"
-    Browse: Browse mode\n(act-now, no signup)
+    Browse: Browse mode<br/>(act-now, no signup)
 
-    Step2: Step 2 — Intent\n(keep informed / newsletter / act-now / volunteer / lead)
+    Step2: Step 2 — Intent<br/>(keep informed / newsletter / act-now / volunteer / lead)
     Step2 --> Step1: Back
     Step2 --> Submit2: Submit (POST /embed/onboarding-form?/submit)
     Submit2 --> Step3Confirm: intent = null OR act-now (contact)
@@ -38,18 +38,18 @@ stateDiagram-v2
     Submit2 --> Step3Lead: intent = lead
 
     Browse --> BrowseSignup: "Keep me informed" inline form
-    BrowseSignup: POST /embed/onboarding-form?/submit\n(mode=browse, intent=act-now)
+    BrowseSignup: POST /embed/onboarding-form?/submit<br/>(mode=browse, intent=act-now)
     BrowseSignup --> Browse: success → inline confirmation
 
-    Step3Volunteer: Step 3 — Volunteer form\n(languages, skills, hours, agreements)
+    Step3Volunteer: Step 3 — Volunteer form<br/>(languages, skills, hours, agreements)
     Step3Volunteer --> Step2: Back
     Step3Volunteer --> Submit3: Submit (POST, volunteer_details=on)
     Submit3 --> Step4: success
 
-    Step3Lead: Step 3 — Lead role description\n(mailto link to Organizing Director)
-    Step3Lead --> [*]: No server submission\n(email hand-off)
+    Step3Lead: Step 3 — Lead role description<br/>(mailto link to Organizing Director)
+    Step3Lead --> [*]: No server submission<br/>(email hand-off)
 
-    Step3Confirm: Step 3 — Confirmation\n+ ActionCards
+    Step3Confirm: Step 3 — Confirmation<br/>+ ActionCards
     Step4: Step 4 — Volunteer confirmation
     Step3Confirm --> [*]
     Step4 --> [*]
@@ -80,7 +80,7 @@ sequenceDiagram
     F->>F: continueToIntent() → step = 2 (no network)
 
     U->>F: Pick intent + GDPR consent, submit step 2
-    F->>S: POST /embed/onboarding-form?/submit\n(mode=contact, intent, basics, keep_informed, newsletter)
+    F->>S: POST /embed/onboarding-form?/submit<br/>(mode=contact, intent, basics, keep_informed, newsletter)
     S->>S: Validate required fields + email + country + intent
     S->>S: Honeypot check (nickname field)
     S->>NG: GET /api/national-groups (chapter lookup by country)
@@ -105,13 +105,13 @@ sequenceDiagram
         S-->>F: { success: true, recordId: existingRecordId | `stub-${id}` }
     end
 
-    F->>F: store recordId in state\n(later posts update instead of duplicate)
+    F->>F: store recordId in state<br/>(later posts update instead of duplicate)
     F->>F: advance step (→ 3, or → 4 for volunteer)
 
     opt intent = volunteer (step 3 volunteer form)
         U->>F: Fill volunteer details (languages, skills, hours, agreements)
-        F->>S: POST /embed/onboarding-form?/submit\n(volunteer_details=on, record_id, basics, volunteer fields)
-        S->>S: Validate volunteer-specific fields\n(languages, hours, agreements)
+        F->>S: POST /embed/onboarding-form?/submit<br/>(volunteer_details=on, record_id, basics, volunteer fields)
+        S->>S: Validate volunteer-specific fields<br/>(languages, hours, agreements)
         S->>NG: chapter lookup
         alt live
             S->>AS: updateRecord(recordId, volunteer fields)
@@ -122,7 +122,7 @@ sequenceDiagram
         F->>F: step = 4 (confirmation)
     end
 
-    note over F,OM: On mount, F also fetches /api/onboarding-mode\nand logs LIVE vs STUB to the console.
+    note over F,OM: On mount, F also fetches /api/onboarding-mode<br/>and logs LIVE vs STUB to the console.
 ```
 
 ## Data written to Airtable
