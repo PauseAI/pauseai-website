@@ -2,7 +2,7 @@
 title: PauseCon London ‘26
 slug: pauseconlondon26
 description: Apply now
-image: ""
+image: /pausecon-applynow.png
 news: true
 ---
 
@@ -42,8 +42,12 @@ Become part of a community of talented, like-minded people who are extremely mot
 
 Participation is free of charge and PauseAI can provide accommodation: we do not want cost to be barrier to participation. However we do encourage participants to make a donation if they are able.
 
-The conference will take place from 9am on Saturday 5 until Monday 7 September at 3pm. A parliamentary conference is being planned for Monday morning.
+The conference will take place over **Saturday 5 and Sunday 6 September**. **A panel discussion is being planned for the morning of Monday 7 Septembe**r; more information will follow.
 
 Accommodation will be provided for three nights: Friday, Saturday and Sunday. We recommend participants arrive on Friday night and plan to leave on Monday afternoon/evening.
 
 [Find out more about PauseCon and apply to participate here](https://luma.com/4be2eqz9)
+
+For queries contact [info@pauseai.info](info@pauseai.info)[](mailito:info@pauseai.info)
+
+[](https://luma.com/4be2eqz9)
