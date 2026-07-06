@@ -28,7 +28,7 @@ stateDiagram-v2
     Step1: Step 1 — Basic info<br/>(name, email, country, city)
     Step1 --> Step2: Continue (client-side)
     Step1 --> Browse: "I just want to take action now"
-    Browse: Browse mode<br/>(act-now, no signup)
+    Browse: Browse mode<br/>(act-now, no signup)<br/>includes ActionCards
 
     Step2: Step 2 — Intent<br/>(keep informed / newsletter / act-now / volunteer / lead)
     Step2 --> Step1: Back
