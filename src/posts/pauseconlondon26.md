@@ -3,6 +3,7 @@ title: PauseCon London ‘26
 slug: pauseconlondon26
 description: Apply now
 image: /pausecon-applynow.png
+date: 2026-07-06T16:56:00.000+01:00
 news: true
 ---
 
