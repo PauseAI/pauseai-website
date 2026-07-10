@@ -28,7 +28,7 @@
 	})
 </script>
 
-<div>
+<div class="news-card-wrapper">
 	<LinkWithoutIcon
 		href={item?.href}
 		class="news-card"
@@ -84,6 +84,10 @@
 </div>
 
 <style>
+	.news-card-wrapper {
+		display: flex;
+	}
+
 	* :global(.news-card) {
 		display: flex;
 		flex-direction: column;
@@ -95,6 +99,7 @@
 		transition:
 			transform 0.2s ease,
 			box-shadow 0.2s ease;
+		width: 100%;
 	}
 
 	* :global(.news-card:hover) {
@@ -133,6 +138,7 @@
 		display: flex;
 		flex-direction: column;
 		gap: 0.3rem;
+		flex: 1 1 auto;
 	}
 
 	.card-title {
@@ -172,6 +178,7 @@
 		font-size: 0.8rem;
 		font-weight: 300;
 		margin: 0;
+		margin-top: auto;
 		color: var(--text);
 		opacity: 0.6;
 	}
