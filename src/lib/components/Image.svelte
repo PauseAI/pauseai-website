@@ -55,12 +55,24 @@
 		return Math.max(1, imgAr / aspectRatio)
 	})
 
-	let effectiveSizes = $derived(
-		sizes ??
-			(coverFactor === 1
-				? `(max-width: ${layoutWidth}) 100vw, ${layoutWidth}`
-				: `(max-width: ${layoutWidth}) calc(100vw * ${coverFactor}), calc(${layoutWidth} * ${coverFactor})`)
-	)
+	// Apply the cover factor to each length in the sizes string. Entries with
+	// media conditions get their length wrapped in calc(); bare lengths too.
+	function scaleSizes(sizesStr: string, factor: number): string {
+		if (factor === 1) return sizesStr
+		return sizesStr
+			.split(/,(?![^()]*\))/)
+			.map((entry) => entry.trim())
+			.map((entry) => {
+				const match = entry.match(/^(\([^)]*\))\s+(.+)$/)
+				return match ? `${match[1]} calc(${match[2]} * ${factor})` : `calc(${entry} * ${factor})`
+			})
+			.join(', ')
+	}
+
+	let effectiveSizes = $derived.by(() => {
+		if (sizes) return scaleSizes(sizes, coverFactor)
+		return `calc(min(${layoutWidth}, 100vw) * ${coverFactor})`
+	})
 </script>
 
 {#if picture}

@@ -49,7 +49,13 @@
 							onFailed={() => (hasImageError = true)}
 						/>
 					{:else}
-						<Image src={item.image} alt={item.title} class="image" sizes={imageSizes} />
+						<Image
+							src={item.image}
+							alt={item.title}
+							class="image"
+							sizes={imageSizes}
+							aspectRatio={16 / 10}
+						/>
 					{/if}
 				{:else}
 					<div class="image-placeholder"></div>
