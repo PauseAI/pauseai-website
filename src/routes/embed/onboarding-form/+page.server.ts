@@ -1,3 +1,7 @@
+// Onboarding submit action — shared by step 2, browse signup, and step 3
+// volunteer update. See docs/join-form-flow.md for the full flow contract
+// (fields, validation, live/stub branches). Keep that document in sync when
+// changing the action's inputs or behavior.
 import { fail } from '@sveltejs/kit'
 import type { FieldSet } from 'airtable'
 import type { Actions } from './$types'

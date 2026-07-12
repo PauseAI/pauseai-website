@@ -1,3 +1,12 @@
+<!--
+	OnboardingFlow — multi-step join form.
+
+	Flow documentation (step machine, validation, live/stub mode):
+	docs/join-form-flow.md
+
+	When changing steps, intents, hidden fields, or the submit contract,
+	update that document so it stays in sync with the code.
+-->
 <script lang="ts">
 	import { onMount } from 'svelte'
 	import { enhance } from '$app/forms'

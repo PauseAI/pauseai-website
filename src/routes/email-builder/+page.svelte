@@ -188,7 +188,7 @@
 		<b>Select one:</b>
 		{#each concerns as section}
 			<button
-				class={selectedConcern == section ? 'tag tag--selected' : 'tag'}
+				class={selectedConcern.name == section.name ? 'tag tag--selected' : 'tag'}
 				onclick={() => (selectedConcern = section)}>{section.name}</button
 			>&nbsp;
 		{/each}
@@ -206,7 +206,7 @@
 		<b>Select one:</b>
 		{#each actions as section}
 			<button
-				class={selectedAction == section ? 'tag tag--selected' : 'tag'}
+				class={selectedAction.name == section.name ? 'tag tag--selected' : 'tag'}
 				onclick={() => (selectedAction = section)}>{section.name}</button
 			>&nbsp;
 		{/each}
