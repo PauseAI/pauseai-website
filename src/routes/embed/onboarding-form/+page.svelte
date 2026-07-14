@@ -3,10 +3,20 @@
 	import { page } from '$app/state'
 	import OnboardingFlow from '$lib/components/onboarding/OnboardingFlow.svelte'
 	import PostMeta from '$lib/components/PostMeta.svelte'
+	import {
+		isOnboardingLocale,
+		setOnboardingLocale,
+		getMessages
+	} from '$lib/components/onboarding/i18n.svelte'
 
-	const title = 'Get involved'
-	const description =
-		'Find the highest-impact way for you to help pause the development of superhuman AI.'
+	$effect(() => {
+		const locale = page.url.searchParams.get('locale')
+		if (locale && isOnboardingLocale(locale)) setOnboardingLocale(locale)
+	})
+
+	const msgs = $derived(getMessages())
+	const title = $derived(msgs.onboarding_page_title)
+	const description = $derived(msgs.onboarding_page_description)
 
 	const initialCountry = $derived(page.url.searchParams.get('country') ?? '')
 	const initialCity = $derived(page.url.searchParams.get('city') ?? '')
