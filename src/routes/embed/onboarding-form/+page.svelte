@@ -9,6 +9,13 @@
 		'Find the highest-impact way for you to help pause the development of superhuman AI.'
 
 	const initialCountry = $derived(page.url.searchParams.get('country') ?? '')
+	const initialCity = $derived(page.url.searchParams.get('city') ?? '')
+	const initialLanguages = $derived(
+		(page.url.searchParams.get('languages') ?? '')
+			.split(',')
+			.map((l) => l.trim())
+			.filter(Boolean)
+	)
 
 	// When iframed, report the rendered height to the host page so it can
 	// resize the iframe ({ height: number } via postMessage). '*' target is
@@ -51,7 +58,7 @@
 <PostMeta {title} {description} />
 
 <div class="embed-wrap" class:embedded style:background-color={background || undefined}>
-	<OnboardingFlow {initialCountry} />
+	<OnboardingFlow {initialCountry} {initialCity} {initialLanguages} />
 </div>
 
 <style>

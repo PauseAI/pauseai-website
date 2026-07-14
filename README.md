@@ -288,6 +288,10 @@ This registration ensures your route is included in:
 - Posts listing ([`src/routes/posts/+page.ts`](src/routes/posts/+page.ts))
 - Search indexing and other site-wide functionality
 
+## Onboarding Form Embed
+
+The `/embed/onboarding-form` route is an iframe-embeddable signup form for chapters/regional groups to prefill with country, city, and languages. See [ONBOARDING_EMBED.md](./ONBOARDING_EMBED.md).
+
 ## Deployment
 
 The contents of the repository are continuously deployed to Netlify when code is pushed.
