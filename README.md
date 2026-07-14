@@ -290,7 +290,7 @@ This registration ensures your route is included in:
 
 ## Onboarding Form Embed
 
-The `/embed/onboarding-form` route is an iframe-embeddable signup form for chapters/regional groups to prefill with country, city, and languages. See [ONBOARDING_EMBED.md](./ONBOARDING_EMBED.md).
+The `/embed/onboarding-form` route is an iframe-embeddable signup form for chapters/regional groups to prefill with country, city, and languages. See [ONBOARDING_EMBED.md](./docs/ONBOARDING_EMBED.md).
 
 ## Deployment
 
