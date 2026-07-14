@@ -83,37 +83,6 @@ export async function fetchAllPages<T extends Record<string, unknown>>(
 }
 
 /**
- * Finds the first record in a table where the Email field matches.
- * Returns the record id and Intent field, or undefined if not found or on error.
- */
-export async function findRecordByEmail(
-	baseId: string,
-	tableId: string,
-	email: string
-): Promise<{ id: string; intent: string } | undefined> {
-	const apiKey = getWriteApiKey()
-	if (!apiKey) return undefined
-
-	try {
-		const base = new Airtable({ apiKey }).base(baseId)
-		const table = base(tableId)
-		const records = await table
-			.select({
-				filterByFormula: `{Email} = "${email}"`,
-				maxRecords: 1,
-				fields: ['Email', 'Intent']
-			})
-			.all()
-		const record = records[0]
-		if (!record) return undefined
-		return { id: record.id, intent: String(record.fields['Intent'] ?? '') }
-	} catch (error) {
-		await reportError(error, { tableId, operation: 'findRecordByEmail' })
-		return undefined
-	}
-}
-
-/**
  * Creates a record in Airtable
  * @param baseId The Airtable Base ID
  * @param tableId The Airtable Table ID
