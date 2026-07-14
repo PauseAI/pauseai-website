@@ -58,6 +58,8 @@ The active mode is logged to the browser console on load.
 
 ## Related
 
+- Flow contract (step machine, validation, live/stub mode, data written):
+  [`docs/join-form-flow.md`](./join-form-flow.md)
 - Form component: `src/lib/components/onboarding/OnboardingFlow.svelte`
 - Embed route: `src/routes/embed/onboarding-form/+page.svelte`
 - Field options (languages, countries, motivations, etc.): `src/lib/components/onboarding/options.ts`
