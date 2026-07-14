@@ -180,11 +180,12 @@ export const actions: Actions = {
 					return fail(502, { message: 'Sorry, we could not save your details. Please try again.' })
 				}
 			} else {
-				// Upsert by email: if a record already exists (e.g. user retried
-				// after a network error), update it rather than creating a duplicate.
+				// Upsert by email only when intent matches: prevents duplicates from
+				// retries, but lets someone sign up under a different intent (e.g.
+				// volunteer then act-now) without overwriting their existing record.
 				const existingByEmail = await findRecordByEmail(AIRTABLE_BASE_ID, MEMBERS_TABLE_ID, email)
-				if (existingByEmail) {
-					recordId = existingByEmail
+				if (existingByEmail && existingByEmail.intent === intent) {
+					recordId = existingByEmail.id
 					const updated = await updateRecord(AIRTABLE_BASE_ID, MEMBERS_TABLE_ID, recordId, fields)
 					if (!updated) {
 						return fail(502, {
