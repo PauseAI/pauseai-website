@@ -6,7 +6,7 @@ import { fail } from '@sveltejs/kit'
 import type { FieldSet } from 'airtable'
 import type { Actions } from './$types'
 import type { NationalGroupsApiResponse } from '$api/national-groups/+server.js'
-import { createRecord, updateRecord } from '$lib/airtable'
+import { createRecord, findRecordByEmail, updateRecord } from '$lib/airtable'
 import { isOnboardingLive } from '$lib/server/onboarding'
 import { recordStubSubmission } from '$lib/server/onboarding-stub'
 import { subscribeToSubstackNewsletter } from '$lib/server/substack'
@@ -180,11 +180,24 @@ export const actions: Actions = {
 					return fail(502, { message: 'Sorry, we could not save your details. Please try again.' })
 				}
 			} else {
-				recordId = await createRecord(AIRTABLE_BASE_ID, MEMBERS_TABLE_ID, fields)
-				// A failed write returns undefined; surface it instead of telling
-				// the user they're signed up when no record was created.
-				if (!recordId) {
-					return fail(502, { message: 'Sorry, we could not save your details. Please try again.' })
+				// Upsert by email: if a record already exists (e.g. user retried
+				// after a network error), update it rather than creating a duplicate.
+				const existingByEmail = await findRecordByEmail(AIRTABLE_BASE_ID, MEMBERS_TABLE_ID, email)
+				if (existingByEmail) {
+					recordId = existingByEmail
+					const updated = await updateRecord(AIRTABLE_BASE_ID, MEMBERS_TABLE_ID, recordId, fields)
+					if (!updated) {
+						return fail(502, {
+							message: 'Sorry, we could not save your details. Please try again.'
+						})
+					}
+				} else {
+					recordId = await createRecord(AIRTABLE_BASE_ID, MEMBERS_TABLE_ID, fields)
+					if (!recordId) {
+						return fail(502, {
+							message: 'Sorry, we could not save your details. Please try again.'
+						})
+					}
 				}
 				// Subscription happens on the initial (step 2) submission only;
 				// the volunteer-form update never re-subscribes.
