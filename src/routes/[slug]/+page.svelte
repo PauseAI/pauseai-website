@@ -49,7 +49,7 @@
 
 	{#if image && showImage !== false}
 		<div class="banner">
-			<Image src={image} alt={title} />
+			<Image src={image} alt={title} aspectRatio={1200 / 628} />
 		</div>
 	{/if}
 

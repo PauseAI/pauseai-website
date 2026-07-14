@@ -7,6 +7,7 @@
 		alt?: string
 		title?: string
 		sizes?: string
+		aspectRatio?: number
 		class?: string
 		loading?: 'eager' | 'lazy'
 		fetchpriority?: 'high' | 'low' | 'auto'
@@ -16,7 +17,8 @@
 		src,
 		alt,
 		title,
-		sizes = `min(${layoutWidth}, 100vw)`,
+		sizes,
+		aspectRatio,
 		class: className = '',
 		loading = 'lazy',
 		fetchpriority = 'auto'
@@ -43,6 +45,34 @@
 	let fullPath = $derived(src.startsWith('/') ? `../../assets/images${src}` : null)
 	let picture: Picture | null = $derived(pictureModules[fullPath ?? ''] ?? null)
 	let assetUrl: string | null = $derived(assetUrlModules[fullPath ?? ''] ?? null)
+
+	// When using object-fit: cover with a target aspect ratio, the image is scaled
+	// to cover the container, so the effective source width may exceed the display
+	// width. The scaling factor is max(1, imgAr / targetAr).
+	let coverFactor = $derived.by(() => {
+		if (!picture || !aspectRatio) return 1
+		const imgAr = picture.img.w / picture.img.h
+		return Math.max(1, imgAr / aspectRatio)
+	})
+
+	// Apply the cover factor to each length in the sizes string. Entries with
+	// media conditions get their length wrapped in calc(); bare lengths too.
+	function scaleSizes(sizesStr: string, factor: number): string {
+		if (factor === 1) return sizesStr
+		return sizesStr
+			.split(/,(?![^()]*\))/)
+			.map((entry) => entry.trim())
+			.map((entry) => {
+				const match = entry.match(/^(\([^)]*\))\s+(.+)$/)
+				return match ? `${match[1]} calc(${match[2]} * ${factor})` : `calc(${entry} * ${factor})`
+			})
+			.join(', ')
+	}
+
+	let effectiveSizes = $derived.by(() => {
+		if (sizes) return scaleSizes(sizes, coverFactor)
+		return `calc(min(${layoutWidth}, 100vw) * ${coverFactor})`
+	})
 </script>
 
 {#if picture}
@@ -52,7 +82,7 @@
 		class="enhanced {className}"
 		{loading}
 		{fetchpriority}
-		{sizes}
+		sizes={effectiveSizes}
 		{title}
 	></enhanced:img>
 {:else if assetUrl}

@@ -6,12 +6,37 @@ import { FontaineTransform } from 'fontaine'
 import fs from 'fs'
 import path from 'path'
 import discardDuplicates from 'postcss-discard-duplicates'
-import { defineConfig } from 'vite'
+import { defineConfig, type Plugin } from 'vite'
 import lucidePreprocess from 'vite-plugin-lucide-preprocess'
 import { sentryVitePlugin } from '@sentry/vite-plugin'
 import { isDev } from './src/lib/env'
 import { MARKDOWN_L10NS } from './src/lib/l10n'
 import { locales as compiledLocales } from './src/lib/paraglide/runtime.js'
+
+/**
+ * Dev-only middleware: Netlify's `/.netlify/*` routes don't exist in the
+ * SvelteKit dev server. Without this, every such request logs a full stack
+ * trace. Intercept early and respond with a short console note instead.
+ */
+function suppressNetlifyRoute404s(): Plugin {
+	return {
+		name: 'pauseai:suppress-netlify-route-404s',
+		apply: 'serve',
+		configureServer(server) {
+			server.middlewares.use((req, res, next) => {
+				const url = req.url ?? ''
+				if (url.startsWith('/.netlify/')) {
+					console.warn(`[dev] 404 ${url} — Netlify routes are not served locally`)
+					res.statusCode = 404
+					res.setHeader('Content-Type', 'text/plain')
+					res.end('Not found: Netlify routes are not served in dev')
+					return
+				}
+				next()
+			})
+		}
+	}
+}
 
 function getSentryRelease(): string | undefined {
 	try {
@@ -78,6 +103,7 @@ export default defineConfig(() => {
 			}
 		} as const,
 		plugins: [
+			suppressNetlifyRoute404s(),
 			lucidePreprocess(),
 			enhancedImages(),
 			// Generates "<font> fallback" @font-face rules whose metrics match the webfonts,

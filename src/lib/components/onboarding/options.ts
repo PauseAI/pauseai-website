@@ -1,6 +1,6 @@
 // Controlled vocabularies for the onboarding pipeline form.
-// Sources: `Tally wbGvKe Field Spec.md` (extracted 2026-06-10) and
-// `Volunteer Onboarding Pipeline - Plan of Action.md` (decisions 2026-06-10).
+// Sources: `docs/Tally wbGvKe Field Spec.md` (extracted 2026-06-10) and
+// `docs/Volunteer Onboarding Pipeline - Plan of Action.md` (decisions 2026-06-10).
 
 export const INTENTS = ['Keep informed', 'Act now', 'Volunteer', 'Lead'] as const
 export type Intent = (typeof INTENTS)[number]
