@@ -243,9 +243,18 @@
 		step = 2
 	}
 
-	function submitWith(onSuccess: (data?: Record<string, unknown>) => void): SubmitFunction {
+	function submitWith<T>(
+		onStart: () => T,
+		onSuccess: (data: Record<string, unknown> | undefined, startValue: T) => void
+	): SubmitFunction {
 		return () => {
 			submitting = true
+			// Run the start callback synchronously, inside the user gesture,
+			// so callers can do things that require a gesture (e.g. opening a
+			// popup window before an async fetch resolves). The returned value
+			// is passed to onSuccess so it can act on it (e.g. navigate the
+			// already-opened popup to its final URL once the record id is known).
+			const startValue = onStart()
 			return ({ result }) => {
 				submitting = false
 				if (result.type === 'success') {
@@ -254,7 +263,7 @@
 					if (typeof result.data?.recordId === 'string') {
 						recordId = result.data.recordId
 					}
-					onSuccess(result.data)
+					onSuccess(result.data, startValue)
 				} else if (result.type === 'failure') {
 					toast.error(String(result.data?.message ?? msgs.onboarding_error_generic))
 				} else {
@@ -449,7 +458,10 @@
 			<form
 				method="POST"
 				action="/embed/onboarding-form?/submit"
-				use:enhance={submitWith(() => (step = 3))}
+				use:enhance={submitWith(
+					() => {},
+					() => (step = 3)
+				)}
 			>
 				{@render hiddenBasics()}
 				{@render honeypotField('ob-nickname-2')}
@@ -580,7 +592,10 @@
 						<form
 							method="POST"
 							action="/embed/onboarding-form?/submit"
-							use:enhance={submitWith(() => (browseSignedUp = true))}
+							use:enhance={submitWith(
+								() => {},
+								() => (browseSignedUp = true)
+							)}
 						>
 							{@render honeypotField('ob-nickname-3')}
 							<input type="hidden" name="mode" value="browse" />
@@ -647,16 +662,19 @@
 			<form
 				method="POST"
 				action="/embed/onboarding-form?/submit"
-				use:enhance={submitWith(() => {
-					if (becomePayingMember) {
-						const params = new URLSearchParams({
-							prefilled_email: basics.email,
-							client_reference_id: recordId
-						})
-						window.open(`${STRIPE_PAYMENT_LINK}?${params.toString()}`, '_blank')
+				use:enhance={submitWith(
+					() => (becomePayingMember ? window.open('', '_blank') : null),
+					(_, popup) => {
+						if (becomePayingMember && popup) {
+							const params = new URLSearchParams({
+								prefilled_email: basics.email,
+								client_reference_id: recordId
+							})
+							popup.location.href = `${STRIPE_PAYMENT_LINK}?${params.toString()}`
+						}
+						step = 4
 					}
-					step = 4
-				})}
+				)}
 			>
 				{@render honeypotField('ob-nickname-4')}
 				<input type="hidden" name="mode" value="contact" />
