@@ -238,19 +238,28 @@ The volunteer form (step 3) includes an optional "I want to become a paying
 member" checkbox (`become_paying_member`). It is **not** required, so it does
 not gate the submit button.
 
-When checked, the volunteer form's success handler opens the Stripe payment link
-in a new tab (`window.open(..., '_blank')`) with two query params, mirroring
-the legacy Tally form's `/submitted` contract:
+When checked, the volunteer form opens the Stripe payment link in a new tab
+with two query params, mirroring the legacy Tally form's `/submitted` contract:
 
-- `prefilled_email` — the volunteer's email from `basics.email`.
-- `client_reference_id` — the Airtable `recordId` returned by the submit
-  action (captured by `submitWith`), replacing Tally's submission id.
+- `prefilled_email` — the volunteer's email.
+- `client_reference_id` — the Airtable record id, replacing Tally's submission id.
+
+The popup is opened synchronously during the submit gesture (so iOS Safari
+and Chrome on iOS allow it), then navigated to the final Stripe URL once the
+record has been saved.
 
 The user stays in the onboarding flow: the form advances to the step-4
 volunteer confirmation regardless of whether the checkbox was checked. The
 `/submitted` route is **not** used by this path — it remains for the legacy
-Tally form only. The Stripe link constant lives in `OnboardingFlow.svelte`
-(`STRIPE_PAYMENT_LINK`) and matches the one in `src/routes/submitted/+page.svelte`.
+Tally form only.
+
+### Stripe success redirect (`/close`)
+
+After completing payment, Stripe redirects the popup to [`/close`](../src/routes/close/+page.svelte),
+which closes the tab automatically. If the browser blocks the close (e.g. the
+user navigated manually), a brief "Thanks for your donation!" message is
+shown as a fallback. The Stripe success URL must be configured to
+`https://pauseai.info/close`.
 
 ## Related documents
 
