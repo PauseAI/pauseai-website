@@ -98,7 +98,7 @@ duplicate.
 
 - `step` (`1 → 4`), `mode` (`'contact' | 'browse'`), `intent`
   (`'act-now' | 'volunteer' | 'lead' | null`), and the `basics` / `volunteer` /
-  `agreements` / `gdprConsent` state objects.
+  `agreements` / `gdprConsent` / `becomePayingMember` state.
 - All form markup for steps 1–4, including the browse-mode inline signup and
   the lead-path `mailto:` hand-off (no submission).
 - A `submitWith(onSuccess)` helper that wraps SvelteKit's `enhance` to manage
@@ -169,9 +169,10 @@ stateDiagram-v2
     BrowseSignup: POST /embed/onboarding-form?/submit<br/>(mode=browse, intent=act-now)
     BrowseSignup --> Browse: success → inline confirmation
 
-    Step3Volunteer: Step 3 — Volunteer form<br/>(languages, skills, hours, agreements)
+    Step3Volunteer: Step 3 — Volunteer form<br/>(languages, skills, hours, agreements,<br/>optional paying-member opt-in)
     Step3Volunteer --> Step2: Back
     Step3Volunteer --> Submit3: Submit (POST, volunteer_details=on)
+    Submit3 --> Stripe: success + become_paying_member<br/>(opens Stripe in new tab)
     Submit3 --> Step4: success
 
     Step3Lead: Step 3 — Lead role description<br/>(mailto link to Organizing Director)
@@ -230,6 +231,26 @@ to the Organizing Director (Irina@pauseai.info). The country is checked against
 `/api/national-groups` to decide between "National Group Lead" (no existing
 chapter) and "Regional Group Lead" (chapter exists). No POST is made; the
 hand-off happens off-platform via email.
+
+## Paying member opt-in (volunteer step)
+
+The volunteer form (step 3) includes an optional "I want to become a paying
+member" checkbox (`become_paying_member`). It is **not** required, so it does
+not gate the submit button.
+
+When checked, the volunteer form's success handler opens the Stripe payment link
+in a new tab (`window.open(..., '_blank')`) with two query params, mirroring
+the legacy Tally form's `/submitted` contract:
+
+- `prefilled_email` — the volunteer's email from `basics.email`.
+- `client_reference_id` — the Airtable `recordId` returned by the submit
+  action (captured by `submitWith`), replacing Tally's submission id.
+
+The user stays in the onboarding flow: the form advances to the step-4
+volunteer confirmation regardless of whether the checkbox was checked. The
+`/submitted` route is **not** used by this path — it remains for the legacy
+Tally form only. The Stripe link constant lives in `OnboardingFlow.svelte`
+(`STRIPE_PAYMENT_LINK`) and matches the one in `src/routes/submitted/+page.svelte`.
 
 ## Related documents
 

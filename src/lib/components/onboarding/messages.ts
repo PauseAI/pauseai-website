@@ -81,6 +81,7 @@ export interface OnboardingMessages {
 	onboarding_placeholder_specify: string
 	onboarding_agree_volunteer: string
 	onboarding_agree_conduct: string
+	onboarding_become_paying_member: string
 	onboarding_lead_title: (role: string) => string
 	onboarding_lead_meta: string
 	onboarding_lead_intro: string
@@ -266,6 +267,8 @@ const en: OnboardingMessages = {
 		'I agree with the <a target="_blank" rel="noopener noreferrer" href="/volunteer-agreement">Volunteer Agreement</a>&nbsp;*',
 	onboarding_agree_conduct:
 		'I agree with the <a target="_blank" rel="noopener noreferrer" href="/code-of-conduct">Code of Conduct</a>&nbsp;*',
+	onboarding_become_paying_member:
+		'I want to become a paying member — open the donation page after submitting.',
 	onboarding_lead_title: (role) => `${role} Volunteer Description`,
 	onboarding_lead_meta: 'Part-time volunteer role · 5–15 hours/week',
 	onboarding_lead_intro:
@@ -473,6 +476,8 @@ const de: OnboardingMessages = {
 		'Ich stimme der <a target="_blank" rel="noopener noreferrer" href="/volunteer-agreement">Freiwilligenvereinbarung</a> zu&nbsp;*',
 	onboarding_agree_conduct:
 		'Ich stimme dem <a target="_blank" rel="noopener noreferrer" href="/code-of-conduct">Verhaltenskodex</a> zu&nbsp;*',
+	onboarding_become_paying_member:
+		'Ich möchte zahlendes Mitglied werden — nach dem Absenden die Spendenseite öffnen.',
 	onboarding_lead_title: (role) => `${role} – Freiwilligenbeschreibung`,
 	onboarding_lead_meta: 'Ehrenamtliche Teilzeitrolle · 5–15 Stunden/Woche',
 	onboarding_lead_intro:

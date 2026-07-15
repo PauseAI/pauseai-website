@@ -129,6 +129,17 @@
 
 	let agreements = $state({ volunteer: false, conduct: false })
 
+	// Stripe payment link used when a volunteer opts in to becoming a paying
+	// member on the volunteer step. Same link as /submitted uses.
+	const STRIPE_PAYMENT_LINK = 'https://donate.stripe.com/6oU14n1RD0So1oGftCd7q01'
+
+	// Volunteer step: optional opt-in to become a paying member. When checked,
+	// the success handler opens Stripe in a new tab (prefilled with the email
+	// and the Airtable record id as client_reference_id, mirroring the legacy
+	// Tally form's query params) and advances to the confirmation step so the
+	// user stays in the flow.
+	let becomePayingMember = $state(false)
+
 	// GDPR data-processing consent gating every record-creating submission
 	// (step 2 + browse). Chapter-sharing consent is not bundled here: it lives
 	// in the optional "Keep me informed" opt-in, since we only share details
@@ -636,7 +647,16 @@
 			<form
 				method="POST"
 				action="/embed/onboarding-form?/submit"
-				use:enhance={submitWith(() => (step = 4))}
+				use:enhance={submitWith(() => {
+					if (becomePayingMember) {
+						const params = new URLSearchParams({
+							prefilled_email: basics.email,
+							client_reference_id: recordId
+						})
+						window.open(`${STRIPE_PAYMENT_LINK}?${params.toString()}`, '_blank')
+					}
+					step = 4
+				})}
 			>
 				{@render honeypotField('ob-nickname-4')}
 				<input type="hidden" name="mode" value="contact" />
@@ -804,6 +824,12 @@
 					<span class="checkbox-box" aria-hidden="true"></span>
 					<!-- eslint-disable-next-line svelte/no-at-html-tags -->
 					<span>{@html msgs.onboarding_agree_conduct}</span>
+				</label>
+				<label class="agreement">
+					<input type="checkbox" name="become_paying_member" bind:checked={becomePayingMember} />
+					<span class="checkbox-box" aria-hidden="true"></span>
+					<!-- eslint-disable-next-line svelte/no-at-html-tags -->
+					<span>{@html msgs.onboarding_become_paying_member}</span>
 				</label>
 				<button type="submit" class="primary" disabled={!volunteerFormComplete || submitting}>
 					{submitting ? msgs.onboarding_btn_submitting : msgs.onboarding_btn_submit}
