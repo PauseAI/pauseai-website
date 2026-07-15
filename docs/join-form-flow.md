@@ -138,6 +138,8 @@ flowchart LR
     Action -- "ONBOARDING_LIVE != true" --> Stub["recordStubSubmission()<br/>/embed/onboarding-form/stub"]
     Action -- "newsletter + create" --> Substack["Substack subscription"]
     Action -- "{ success, recordId }" --> Flow
+    Flow -- "become_paying_member" --> Stripe["Stripe donation page<br/>(new tab)"]
+    Stripe -- "success URL" --> Close["/close<br/>(closes the tab)"]
 ```
 
 Both entry points converge on the same component and the same action, so
@@ -173,6 +175,8 @@ stateDiagram-v2
     Step3Volunteer --> Step2: Back
     Step3Volunteer --> Submit3: Submit (POST, volunteer_details=on)
     Submit3 --> Stripe: success + become_paying_member<br/>(opens Stripe in new tab)
+    Stripe --> Close: payment complete<br/>(Stripe success URL → /close)
+    Close: /close<br/>(closes the tab)
     Submit3 --> Step4: success
 
     Step3Lead: Step 3 — Lead role description<br/>(mailto link to Organizing Director)
