@@ -60,7 +60,7 @@
 		"mdsvex": "^0.12.7",
 		"minimatch": "^10.2.5",
 		"minimist": "^1.2.8",
-		"npm-run-all2": "^8.0.4",
+		"npm-run-all2": "^9.0.2",
 		"p-queue": "^9.3.1",
 		"postcss-discard-duplicates": "^8.0.1",
 		"postcss-html": "^1.8.1",
