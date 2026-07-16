@@ -849,9 +849,14 @@
 					<!-- eslint-disable-next-line svelte/no-at-html-tags -->
 					<span>{@html msgs.onboarding_become_paying_member}</span>
 				</label>
-				<button type="submit" class="primary" disabled={!volunteerFormComplete || submitting}>
-					{submitting ? msgs.onboarding_btn_submitting : msgs.onboarding_btn_submit}
-				</button>
+				<div class="submit-group">
+					<button type="submit" class="primary" disabled={!volunteerFormComplete || submitting}>
+						{submitting ? msgs.onboarding_btn_submitting : msgs.onboarding_btn_submit}
+					</button>
+					{#if becomePayingMember}
+						<p class="submit-disclaimer">{msgs.onboarding_become_paying_member_disclaimer}</p>
+					{/if}
+				</div>
 				<button type="button" class="back" onclick={() => (step = 2)}
 					>{msgs.onboarding_btn_back}</button
 				>
@@ -1085,6 +1090,19 @@
 	button.back:hover {
 		opacity: 1;
 		text-decoration: underline;
+	}
+
+	.submit-group {
+		display: flex;
+		flex-direction: column;
+		align-items: stretch;
+	}
+
+	.submit-disclaimer {
+		margin: 0.5rem 0 0;
+		text-align: center;
+		font-size: 0.85rem;
+		opacity: 0.7;
 	}
 
 	.intent-grid {
