@@ -817,8 +817,8 @@
 								aria-checked={volunteer.hours === option.value}
 								onclick={() => (volunteer.hours = option.value)}
 							>
-								<span class="checkbox-box" aria-hidden="true">
-									{volunteer.hours === option.value ? '✓' : ''}
+								<span class="radio-box" aria-hidden="true">
+									<span class="radio-dot"></span>
 								</span>
 								{option.label}
 							</button>
@@ -1187,12 +1187,14 @@
 		transition: background-color 0.15s;
 	}
 
-	.intent-option.selected .radio-box {
+	.intent-option.selected .radio-box,
+	.select-card.selected .radio-box {
 		border-color: var(--brand);
 		background-color: var(--brand);
 	}
 
-	.intent-option.selected .radio-dot {
+	.intent-option.selected .radio-dot,
+	.select-card.selected .radio-dot {
 		background-color: var(--bg);
 	}
 
