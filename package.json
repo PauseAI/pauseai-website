@@ -47,7 +47,6 @@
 		"@types/remark-heading-id": "^1.0.0",
 		"axios-mock-adapter": "^2.1.0",
 		"axios-retry": "^4.5.0",
-		"chromatic": "^18.0.1",
 		"cross-env": "^10.1.0",
 		"dotenv": "^17.4.2",
 		"eslint": "^10.7.0",
