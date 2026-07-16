@@ -44,7 +44,7 @@ Example — a French-speaking regional chapter embed:
 
 Country/city/languages are things a chapter can reasonably know in advance about its audience — who's filling the form out, they can't. Personal fields (name, email, phone, intent, discovery source, etc.) are intentionally **not** prefillable via URL:
 
-- Consent checkboxes (GDPR, volunteer agreement, code of conduct, newsletter/keep-informed opt-ins) must be actively given by the visitor — prefilling them via a shareable URL would be a dark pattern.
+- Consent checkboxes (GDPR, volunteer agreement, code of conduct, newsletter/keep-informed opt-ins) must be actively given by the visitor — prefilling them via a shareable URL would be a dark pattern. The volunteer step's "become a paying member" opt-in is also not prefillable today, though this is less deliberate than the consent-box exclusion.
 - Contact details (name, email, phone, Discord username) have no legitimate source when the same embed link is shared broadly to an unknown audience.
 
 ## Mode: stub vs. live

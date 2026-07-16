@@ -98,7 +98,7 @@ duplicate.
 
 - `step` (`1 → 4`), `mode` (`'contact' | 'browse'`), `intent`
   (`'act-now' | 'volunteer' | 'lead' | null`), and the `basics` / `volunteer` /
-  `agreements` / `gdprConsent` state objects.
+  `agreements` / `gdprConsent` / `becomePayingMember` state.
 - All form markup for steps 1–4, including the browse-mode inline signup and
   the lead-path `mailto:` hand-off (no submission).
 - A `submitWith(onSuccess)` helper that wraps SvelteKit's `enhance` to manage
@@ -138,6 +138,8 @@ flowchart LR
     Action -- "ONBOARDING_LIVE != true" --> Stub["recordStubSubmission()<br/>/embed/onboarding-form/stub"]
     Action -- "newsletter + create" --> Substack["Substack subscription"]
     Action -- "{ success, recordId }" --> Flow
+    Flow -- "become_paying_member" --> Stripe["Stripe donation page<br/>(new tab)"]
+    Stripe -- "success URL" --> Close["/close<br/>(closes the tab)"]
 ```
 
 Both entry points converge on the same component and the same action, so
@@ -169,9 +171,12 @@ stateDiagram-v2
     BrowseSignup: POST /embed/onboarding-form?/submit<br/>(mode=browse, intent=act-now)
     BrowseSignup --> Browse: success → inline confirmation
 
-    Step3Volunteer: Step 3 — Volunteer form<br/>(languages, skills, hours, agreements)
+    Step3Volunteer: Step 3 — Volunteer form<br/>(languages, skills, hours, agreements,<br/>optional paying-member opt-in)
     Step3Volunteer --> Step2: Back
     Step3Volunteer --> Submit3: Submit (POST, volunteer_details=on)
+    Submit3 --> Stripe: success + become_paying_member<br/>(opens Stripe in new tab)
+    Stripe --> Close: payment complete<br/>(Stripe success URL → /close)
+    Close: /close<br/>(closes the tab)
     Submit3 --> Step4: success
 
     Step3Lead: Step 3 — Lead role description<br/>(mailto link to Organizing Director)
@@ -230,6 +235,35 @@ to the Organizing Director (Irina@pauseai.info). The country is checked against
 `/api/national-groups` to decide between "National Group Lead" (no existing
 chapter) and "Regional Group Lead" (chapter exists). No POST is made; the
 hand-off happens off-platform via email.
+
+## Paying member opt-in (volunteer step)
+
+The volunteer form (step 3) includes an optional "I want to become a paying
+member" checkbox (`become_paying_member`). It is **not** required, so it does
+not gate the submit button.
+
+When checked, the volunteer form opens the Stripe payment link in a new tab
+with two query params, mirroring the legacy Tally form's `/submitted` contract:
+
+- `prefilled_email` — the volunteer's email.
+- `client_reference_id` — the Airtable record id, replacing Tally's submission id.
+
+The popup is opened synchronously during the submit gesture (so iOS Safari
+and Chrome on iOS allow it), then navigated to the final Stripe URL once the
+record has been saved.
+
+The user stays in the onboarding flow: the form advances to the step-4
+volunteer confirmation regardless of whether the checkbox was checked. The
+`/submitted` route is **not** used by this path — it remains for the legacy
+Tally form only.
+
+### Stripe success redirect (`/close`)
+
+After completing payment, Stripe redirects the popup to [`/close`](../src/routes/close/+page.svelte),
+which closes the tab automatically. If the browser blocks the close (e.g. the
+user navigated manually), a brief "Thanks for your donation!" message is
+shown as a fallback. The Stripe success URL must be configured to
+`https://pauseai.info/close`.
 
 ## Related documents
 

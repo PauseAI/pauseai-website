@@ -129,6 +129,17 @@
 
 	let agreements = $state({ volunteer: false, conduct: false })
 
+	// Stripe payment link used when a volunteer opts in to becoming a paying
+	// member on the volunteer step. Same link as /submitted uses.
+	const STRIPE_PAYMENT_LINK = 'https://donate.stripe.com/6oU14n1RD0So1oGftCd7q01'
+
+	// Volunteer step: optional opt-in to become a paying member. When checked,
+	// the success handler opens Stripe in a new tab (prefilled with the email
+	// and the Airtable record id as client_reference_id, mirroring the legacy
+	// Tally form's query params) and advances to the confirmation step so the
+	// user stays in the flow.
+	let becomePayingMember = $state(false)
+
 	// GDPR data-processing consent gating every record-creating submission
 	// (step 2 + browse). Chapter-sharing consent is not bundled here: it lives
 	// in the optional "Keep me informed" opt-in, since we only share details
@@ -232,9 +243,18 @@
 		step = 2
 	}
 
-	function submitWith(onSuccess: (data?: Record<string, unknown>) => void): SubmitFunction {
+	function submitWith<T>(
+		onStart: () => T,
+		onSuccess: (data: Record<string, unknown> | undefined, startValue: T) => void
+	): SubmitFunction {
 		return () => {
 			submitting = true
+			// Run the start callback synchronously, inside the user gesture,
+			// so callers can do things that require a gesture (e.g. opening a
+			// popup window before an async fetch resolves). The returned value
+			// is passed to onSuccess so it can act on it (e.g. navigate the
+			// already-opened popup to its final URL once the record id is known).
+			const startValue = onStart()
 			return ({ result }) => {
 				submitting = false
 				if (result.type === 'success') {
@@ -243,7 +263,7 @@
 					if (typeof result.data?.recordId === 'string') {
 						recordId = result.data.recordId
 					}
-					onSuccess(result.data)
+					onSuccess(result.data, startValue)
 				} else if (result.type === 'failure') {
 					toast.error(String(result.data?.message ?? msgs.onboarding_error_generic))
 				} else {
@@ -438,7 +458,10 @@
 			<form
 				method="POST"
 				action="/embed/onboarding-form?/submit"
-				use:enhance={submitWith(() => (step = 3))}
+				use:enhance={submitWith(
+					() => {},
+					() => (step = 3)
+				)}
 			>
 				{@render hiddenBasics()}
 				{@render honeypotField('ob-nickname-2')}
@@ -569,7 +592,10 @@
 						<form
 							method="POST"
 							action="/embed/onboarding-form?/submit"
-							use:enhance={submitWith(() => (browseSignedUp = true))}
+							use:enhance={submitWith(
+								() => {},
+								() => (browseSignedUp = true)
+							)}
 						>
 							{@render honeypotField('ob-nickname-3')}
 							<input type="hidden" name="mode" value="browse" />
@@ -636,7 +662,19 @@
 			<form
 				method="POST"
 				action="/embed/onboarding-form?/submit"
-				use:enhance={submitWith(() => (step = 4))}
+				use:enhance={submitWith(
+					() => (becomePayingMember ? window.open('', '_blank') : null),
+					(_, popup) => {
+						if (becomePayingMember && popup) {
+							const params = new URLSearchParams({
+								prefilled_email: basics.email,
+								client_reference_id: recordId
+							})
+							popup.location.href = `${STRIPE_PAYMENT_LINK}?${params.toString()}`
+						}
+						step = 4
+					}
+				)}
 			>
 				{@render honeypotField('ob-nickname-4')}
 				<input type="hidden" name="mode" value="contact" />
@@ -805,9 +843,20 @@
 					<!-- eslint-disable-next-line svelte/no-at-html-tags -->
 					<span>{@html msgs.onboarding_agree_conduct}</span>
 				</label>
-				<button type="submit" class="primary" disabled={!volunteerFormComplete || submitting}>
-					{submitting ? msgs.onboarding_btn_submitting : msgs.onboarding_btn_submit}
-				</button>
+				<label class="agreement">
+					<input type="checkbox" name="become_paying_member" bind:checked={becomePayingMember} />
+					<span class="checkbox-box" aria-hidden="true"></span>
+					<!-- eslint-disable-next-line svelte/no-at-html-tags -->
+					<span>{@html msgs.onboarding_become_paying_member}</span>
+				</label>
+				<div class="submit-group">
+					<button type="submit" class="primary" disabled={!volunteerFormComplete || submitting}>
+						{submitting ? msgs.onboarding_btn_submitting : msgs.onboarding_btn_submit}
+					</button>
+					{#if becomePayingMember}
+						<p class="submit-disclaimer">{msgs.onboarding_become_paying_member_disclaimer}</p>
+					{/if}
+				</div>
 				<button type="button" class="back" onclick={() => (step = 2)}
 					>{msgs.onboarding_btn_back}</button
 				>
@@ -1041,6 +1090,19 @@
 	button.back:hover {
 		opacity: 1;
 		text-decoration: underline;
+	}
+
+	.submit-group {
+		display: flex;
+		flex-direction: column;
+		align-items: stretch;
+	}
+
+	.submit-disclaimer {
+		margin: 0.5rem 0 0;
+		text-align: center;
+		font-size: 0.85rem;
+		opacity: 0.7;
 	}
 
 	.intent-grid {
