@@ -1,10 +1,18 @@
-import { describe, it, expect, vi } from 'vitest'
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 import axios from 'axios'
 import MockAdapter from 'axios-mock-adapter'
 
 describe('luma client', () => {
+	beforeEach(() => {
+		vi.resetModules()
+	})
+
+	afterEach(() => {
+		vi.restoreAllMocks()
+	})
+
 	it('sends a request with snake_cased URL parameters to api.lu.ma', async () => {
-		const originalCreate = axios.create
+		const originalCreate = axios.create.bind(axios)
 		let mock: MockAdapter
 		vi.spyOn(axios, 'create').mockImplementation((...args) => {
 			const axios = originalCreate(...args)

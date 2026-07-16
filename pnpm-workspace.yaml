@@ -1,0 +1,7 @@
+allowBuilds:
+  '@sentry/cli': true
+  esbuild: true
+  lefthook: true
+  msw: true
+  sharp: true
+minimumReleaseAge: 0

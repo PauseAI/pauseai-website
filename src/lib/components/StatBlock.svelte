@@ -1,19 +1,33 @@
 <script lang="ts">
-	import NumberFlow from '@number-flow/svelte'
+	import { type Component } from 'svelte'
+	import AsyncComponent from '$lib/components/AsyncComponent.svelte'
 	import SvelteIntersectionObserver from '$lib/components/SvelteIntersectionObserver.svelte'
 	import Link from '$lib/components/Link.svelte'
 
-	export let percentage: number
-	export let text: string
-	export let link: string
+	let numberFlowPromise = import('@number-flow/svelte').then(
+		(m) => m.default as unknown as Component
+	)
 
-	let isIntersecting: boolean
+	interface Props {
+		percentage: number
+		text: string
+		link: string
+	}
+
+	let { percentage, text, link }: Props = $props()
+
+	let isIntersecting: boolean = $state(false)
 </script>
 
 <SvelteIntersectionObserver bind:isIntersecting defaultToIntersecting disconnectOnIntersect>
 	<Link href={link} class="stat-block-link">
 		<div class="percentage">
-			<NumberFlow value={isIntersecting ? percentage : 20} suffix="%" />
+			<AsyncComponent
+				component={numberFlowPromise}
+				props={{ value: isIntersecting ? percentage : 20, suffix: '%' }}
+			>
+				{percentage}%
+			</AsyncComponent>
 			<!-- start with two digits and wide first digit to avoid horizontal movement -->
 		</div>
 		<p class="text">{text}</p>

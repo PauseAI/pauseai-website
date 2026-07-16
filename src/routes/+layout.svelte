@@ -1,7 +1,7 @@
 <script lang="ts">
 	import type { GeoApiResponse } from '$api/geo/+server'
 	import { browser } from '$app/environment'
-	import { page } from '$app/stores'
+	import { page } from '$app/state'
 	import Banner from '$lib/components/Banner.svelte'
 	import Hero from '$lib/components/Hero.svelte'
 	import Link from '$lib/components/Link.svelte'
@@ -31,15 +31,21 @@
 	import hydrationAwareClick from './hydration-aware-click.js?raw'
 	import type { PageData } from './$types'
 
-	export let data: PageData
+	interface Props {
+		data: PageData
+		children?: import('svelte').Snippet
+	}
 
-	let eventFound: boolean
-	let geoForNearbyEvent: GeoApiResponse | null = null
-	$: hero = deLocalizeHref($page.url.pathname) === '/'
-	$: embed = $page.route.id?.startsWith('/embed/') ?? false
+	let { data, children }: Props = $props()
+
+	let eventFound: boolean = $state(false)
+	let geoForNearbyEvent: GeoApiResponse | null = $state(null)
+	let hero = $derived(deLocalizeHref(page.url.pathname) === '/')
+	let embed = $derived(page.route.id?.startsWith('/embed/') ?? false)
 
 	onMount(async () => {
 		document.documentElement.removeAttribute('data-waiting')
+		document.documentElement.setAttribute('data-hydrated', 'true')
 
 		const searchString = window.location.search
 		const response = await fetch('/api/geo' + searchString)
@@ -73,9 +79,11 @@
 	})
 
 	// NearbyEvent overrides the main banner
-	$: if (browser && eventFound) {
-		delete document.documentElement.dataset.activeBanner
-	}
+	$effect(() => {
+		if (browser && eventFound) {
+			delete document.documentElement.dataset.activeBanner
+		}
+	})
 
 	function sanitizeScript(code: string) {
 		return code
@@ -171,18 +179,20 @@
 
 		{#if hero}
 			<div class="hero-section">
+				<div class="menu-band">
+					<Header inverted />
+				</div>
 				<Hero />
-				<Header inverted />
 			</div>
 		{/if}
 	</div>
 {/if}
 
 <div class="layout" class:hero-page={hero} class:embed>
-	{#if $page.route.id === '/sayno'}
+	{#if page.route.id === '/sayno'}
 		<!-- Dynamic import and render the selfie UX component -->
 		{#await import('./sayno/SelfieUX.svelte') then module}
-			<svelte:component this={module.default} />
+			<module.default />
 		{/await}
 	{/if}
 
@@ -191,8 +201,8 @@
 	{/if}
 
 	<main>
-		<PageTransition url={$page.url.pathname}>
-			<slot></slot>
+		<PageTransition url={page.url.pathname}>
+			{@render children?.()}
 		</PageTransition>
 	</main>
 
@@ -214,7 +224,7 @@
 		}}
 	/>
 
-	{#if !['/', '/communities', '/outcomes', '/pdoom', '/quotes', '/dear-sir-demis-2025'].includes(deLocalizeHref($page.url.pathname))}
+	{#if !['/', '/communities', '/outcomes', '/pdoom', '/quotes', '/dear-sir-demis-2025'].includes(deLocalizeHref(page.url.pathname))}
 		<Toc />
 	{/if}
 
@@ -263,18 +273,21 @@
 		flex-direction: column;
 	}
 
-	.hero-section {
+	/* Orange band behind the menu. The nav sits in normal document flow, so the
+	   band is exactly as tall as the menu content. */
+	.menu-band {
+		background-color: var(--hero-orange);
+		/* Paint above the .hero sibling so the language-switcher dropdown,
+		   which opens downward past the band, isn't covered by it. */
 		position: relative;
+		z-index: 1;
 	}
 
-	.hero-section :global(nav) {
-		position: absolute;
-		top: 0;
-		left: 0;
-		right: 0;
+	.menu-band :global(nav) {
 		width: min(var(--page-width), 100% - 2 * var(--page-gutter));
 		margin-inline: auto;
-		z-index: 1;
+		/* Tighter vertical padding than the component's responsive default. */
+		--vspace: 1.85rem;
 	}
 
 	.layout {

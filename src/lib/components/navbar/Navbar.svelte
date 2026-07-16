@@ -2,17 +2,22 @@
 	import WideNavbar from './wide/WideNavbar.svelte'
 	import NarrowNavbar from './narrow/NarrowNavbar.svelte'
 
-	export let inverted = false
+	interface Props {
+		inverted?: boolean
+		children?: import('svelte').Snippet
+	}
+
+	let { inverted = false, children }: Props = $props()
 </script>
 
 <div class="wide-navbar">
 	<WideNavbar {inverted}>
-		<slot></slot>
+		{@render children?.()}
 	</WideNavbar>
 </div>
 <div class="narrow-navbar">
 	<NarrowNavbar {inverted}>
-		<slot></slot>
+		{@render children?.()}
 	</NarrowNavbar>
 </div>
 

@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { onMount } from 'svelte'
-	import { page } from '$app/stores'
+	import { page } from '$app/state'
 	import PostMeta from '$lib/components/PostMeta.svelte'
 	import Link from '$lib/components/Link.svelte'
 	import Banner from '$lib/components/Banner.svelte'
@@ -19,7 +19,11 @@
 	} from './selfieStore'
 	import Image from '$lib/components/Image.svelte'
 	import { detectAndStoreCollagenUid, hasCollagenUid } from '$lib/collagen'
-	import { env } from '$env/dynamic/public'
+	// Static env: dynamic public env in client code blocks prerendered pages'
+	// hydration on a runtime /_app/env.js fetch (see hooks.client.ts).
+	import * as publicEnv from '$env/static/public'
+
+	const env = publicEnv as Record<string, string | undefined>
 
 	// Page metadata
 	const title = 'Stop Superintelligence'
@@ -29,8 +33,8 @@
 	const imageAlt = 'Collage of hundreds of faces'
 
 	// Track user state for contextual messaging
-	let userJustValidated = false // UID in URL params (just clicked validate link)
-	let userPreviouslyUploaded = false // UID in localStorage (uploaded before on this device)
+	let userJustValidated = $state(false) // UID in URL params (just clicked validate link)
+	let userPreviouslyUploaded = $state(false) // UID in localStorage (uploaded before on this device)
 
 	interface CloudinaryWidget {
 		destroy(): void
@@ -61,7 +65,7 @@
 
 	onMount(() => {
 		// Check if UID in URL params (just validated email)
-		userJustValidated = detectAndStoreCollagenUid('sayno', $page.url.searchParams)
+		userJustValidated = detectAndStoreCollagenUid('sayno', page.url.searchParams)
 
 		// Check if UID exists from previous upload (but not in URL)
 		if (!userJustValidated) {

@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { onMount } from 'svelte'
-	import { page } from '$app/stores'
+	import { page } from '$app/state'
 	import NewsletterSignup from '$lib/components/NewsletterSignup.svelte'
 	import Banner from '$lib/components/Banner.svelte'
 	import Link from '$lib/components/Link.svelte'
@@ -8,16 +8,24 @@
 
 	const campaign = 'sayno'
 
-	export let userHasUid = false
-	export let subscribeEmail = ''
-	export let newsletterEmail = ''
-	let submitted = false
-	let hideSharing = false
+	interface Props {
+		userHasUid?: boolean
+		subscribeEmail?: string
+		newsletterEmail?: string
+	}
+
+	let {
+		userHasUid = $bindable(false),
+		subscribeEmail = $bindable(''),
+		newsletterEmail = $bindable('')
+	}: Props = $props()
+	let submitted = $state(false)
+	let hideSharing = $state(false)
 
 	onMount(() => {
-		userHasUid = detectAndStoreCollagenUid(campaign, $page.url.searchParams)
-		hideSharing = $page.url.searchParams.has('x002')
-		subscribeEmail = $page.url.searchParams.get('subscribe-email') || ''
+		userHasUid = detectAndStoreCollagenUid(campaign, page.url.searchParams)
+		hideSharing = page.url.searchParams.has('x002')
+		subscribeEmail = page.url.searchParams.get('subscribe-email') || ''
 		if (userHasUid && subscribeEmail) {
 			newsletterEmail = subscribeEmail
 		}
@@ -33,7 +41,7 @@
 		{/if}
 	</Banner>
 
-	<div on:submit={() => (submitted = true)}>
+	<div onsubmit={() => (submitted = true)}>
 		<NewsletterSignup bind:email={newsletterEmail} />
 	</div>
 

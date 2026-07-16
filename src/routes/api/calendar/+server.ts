@@ -25,7 +25,7 @@ const CALENDAR_IDS = [
 	'cal-EvzL9fKA3SCSrOq', // US
 	'cal-gnpo62PdSdau7KQ', // AU
 	'cal-tsYv79s4aTQC16Q', // CA
-	'cal-zalx0j0ZcHpAlEB' // DE
+	'cal-B1ELepcLXLcAqMf' // DE
 ]
 
 export const GET: RequestHandler = async ({ url, setHeaders }) => {

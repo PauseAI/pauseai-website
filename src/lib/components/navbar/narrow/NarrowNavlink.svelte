@@ -1,16 +1,22 @@
 <script lang="ts">
 	import UniversalNavlink from '../universal/UniversalNavlink.svelte'
 
-	export let href: string | undefined
-	export let c2a: boolean
-	export let ariaLabel: string | undefined
-	export let inverted: boolean
-	export let first: boolean
-	export let narrow: boolean
-	export let active: boolean
-	export let external: boolean
+	interface Props {
+		href: string | undefined
+		c2a: boolean
+		ariaLabel: string | undefined
+		inverted: boolean
+		first: boolean
+		narrow: boolean
+		active: boolean
+		external: boolean
+		children?: import('svelte').Snippet
+	}
+
+	let { href, c2a, ariaLabel, inverted, first, narrow, active, external, children }: Props =
+		$props()
 </script>
 
 <UniversalNavlink {href} {c2a} {ariaLabel} {inverted} {first} {narrow} {active} {external}>
-	<slot></slot>
+	{@render children?.()}
 </UniversalNavlink>

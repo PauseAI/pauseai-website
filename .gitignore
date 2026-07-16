@@ -13,6 +13,7 @@ vite.config.ts.timestamp-*
 .env
 
 # alternative package managers
+bun.lock
 bun.lockb
 deno.lock
 
@@ -33,6 +34,7 @@ CLAUDE.md
 .env.sentry-build-plugin
 
 .prettierignore
+.playwright-mcp/
 
 # Playwright
 /test-results

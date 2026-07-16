@@ -8,16 +8,20 @@
 	import type { PageData } from './$types'
 	import type { Signatory } from './types'
 
-	export let data: PageData
+	interface Props {
+		data: PageData
+	}
 
-	const { signatories } = data
+	let { data }: Props = $props()
+
+	const { signatories } = $derived(data)
 
 	const { title, description, date } = meta
 
 	// Separate parliamentarians from organizations (excluding PauseAI)
-	const parliamentarians = signatories.filter((s: Signatory) => s.type !== 'Organization')
-	const organizationsUnsorted = signatories.filter(
-		(s: Signatory) => s.type === 'Organization' && s.name !== 'PauseAI Global'
+	const parliamentarians = $derived(signatories.filter((s: Signatory) => s.type !== 'Organization'))
+	const organizationsUnsorted = $derived(
+		signatories.filter((s: Signatory) => s.type === 'Organization' && s.name !== 'PauseAI Global')
 	)
 
 	// Custom order for organizations
@@ -28,38 +32,40 @@
 		'Open Data Manchester'
 	]
 
-	const organizations: { name: string; type: string }[] = organizationsUnsorted.sort(
-		(a: Signatory, b: Signatory) => {
+	const organizations: { name: string; type: string }[] = $derived(
+		organizationsUnsorted.sort((a: Signatory, b: Signatory) => {
 			const aIndex = organizationOrder.indexOf(a.name)
 			const bIndex = organizationOrder.indexOf(b.name)
 			if (aIndex === -1) return 1
 			if (bIndex === -1) return -1
 			return aIndex - bIndex
-		}
+		})
 	)
 
 	// Sort parliamentarians alphabetically by last name (as in the PDF)
-	const sortedParliamentarians = parliamentarians.sort((a: Signatory, b: Signatory) => {
-		const getLastName = (name: string) => {
-			// Handle titles and complex names
-			let cleanName = name
-				.replace(/^(Lord|Baroness|Right Revd Dr|Sir|Dame)\s+/, '')
-				.replace(/\s+(MC|TD|MP|MSP|MS|MLA)$/, '')
+	const sortedParliamentarians = $derived(
+		parliamentarians.sort((a: Signatory, b: Signatory) => {
+			const getLastName = (name: string) => {
+				// Handle titles and complex names
+				let cleanName = name
+					.replace(/^(Lord|Baroness|Right Revd Dr|Sir|Dame)\s+/, '')
+					.replace(/\s+(MC|TD|MP|MSP|MS|MLA)$/, '')
 
-			const parts = cleanName.split(' ')
-			return parts[parts.length - 1].toLowerCase()
-		}
+				const parts = cleanName.split(' ')
+				return parts[parts.length - 1].toLowerCase()
+			}
 
-		return getLastName(a.name).localeCompare(getLastName(b.name))
-	})
+			return getLastName(a.name).localeCompare(getLastName(b.name))
+		})
+	)
 
 	// Map organization names to their logo files (theme-aware with cache busting)
-	$: organizationLogos = {
+	let organizationLogos = $derived({
 		'Open Rights Group': `/open-letter/civil_society_logos/${$theme === 'dark' ? 'white' : 'black'}/open_rights_group.png?theme=${$theme}`,
 		'Connected by Data': `/open-letter/civil_society_logos/${$theme === 'dark' ? 'white' : 'black'}/connected_by_data.png?theme=${$theme}`,
 		'Open Data Manchester': `/open-letter/civil_society_logos/${$theme === 'dark' ? 'white' : 'black'}/open_data_manchester.png?theme=${$theme}`,
 		'Safe AI for Children Alliance': `/open-letter/civil_society_logos/${$theme === 'dark' ? 'white' : 'black'}/safe_ai_for_children_alliance.png?theme=${$theme}`
-	} as Record<string, string>
+	} as Record<string, string>)
 
 	function getOrganizationWebsite(name: string): string {
 		const websites = {
@@ -990,7 +996,6 @@
 		font-size: clamp(3rem, 5vw, 4rem);
 		font-weight: 900;
 		background: linear-gradient(135deg, var(--brand) 0%, #ff6600 100%);
-		-webkit-background-clip: text;
 		-webkit-text-fill-color: transparent;
 		background-clip: text;
 		line-height: 1.1;

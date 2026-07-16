@@ -1,7 +1,11 @@
 <script lang="ts">
-	export let image: string | undefined
-	export let name: string | undefined
-	export let title: string | undefined
+	interface Props {
+		image: string | undefined
+		name: string | undefined
+		title: string | undefined
+	}
+
+	let { image, name, title }: Props = $props()
 </script>
 
 <li class="person">

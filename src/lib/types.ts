@@ -8,6 +8,8 @@ export type LinkType = 'internal' | 'external' | 'mail'
 
 type StrictFrontmatterMeta = {
 	title: string
+	/** Overrides title in the page <title> / social meta tags when the on-page H1 should differ */
+	metaTitle?: string
 	/** Meta description for SEO */
 	description: string
 	author?: string

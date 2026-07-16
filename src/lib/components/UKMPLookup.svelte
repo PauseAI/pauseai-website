@@ -17,13 +17,13 @@
 		responded: boolean
 	}
 
-	let postcode = ''
-	let userName = ''
-	let mp: MP | null = null
-	let contactStatus: MPContactStatus | null = null
-	let loading = false
-	let errorMessage = ''
-	let errorType: 'validation' | 'not_found' | 'server_error' | 'network' | '' = ''
+	let postcode = $state('')
+	let userName = $state('')
+	let mp: MP | null = $state(null)
+	let contactStatus: MPContactStatus | null = $state(null)
+	let loading = $state(false)
+	let errorMessage = $state('')
+	let errorType: 'validation' | 'not_found' | 'server_error' | 'network' | '' = $state('')
 
 	async function lookupMP() {
 		const trimmedPostcode = postcode.trim()
@@ -99,7 +99,7 @@
 	<div class="input-section">
 		<div class="input-group">
 			<div class="input-field">
-				<label for="name-input">Name</label>
+				<label for="name-input">Your Name</label>
 				<input
 					id="name-input"
 					type="text"
@@ -107,12 +107,12 @@
 					placeholder="Alex Morgan"
 					class="name-input"
 					class:error={errorMessage}
-					on:keypress={handleKeyPress}
+					onkeypress={handleKeyPress}
 					disabled={loading}
 				/>
 			</div>
 			<div class="input-field">
-				<label for="postcode-input">Postcode</label>
+				<label for="postcode-input">Your Postcode</label>
 				<input
 					id="postcode-input"
 					type="text"
@@ -120,13 +120,13 @@
 					placeholder="SW1A 1AA"
 					class="postcode-input"
 					class:error={errorMessage}
-					on:keypress={handleKeyPress}
+					onkeypress={handleKeyPress}
 					disabled={loading}
 				/>
 			</div>
 		</div>
 		<div class="button-row">
-			<Button on:click={lookupMP} disabled={loading || !postcode.trim() || !userName.trim()}>
+			<Button onclick={lookupMP} disabled={loading || !postcode.trim() || !userName.trim()}>
 				<span class="button-content">
 					{#if loading}
 						Looking up

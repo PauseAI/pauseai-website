@@ -87,8 +87,8 @@
 		}
 	]
 
-	let selectedAction = actions[0]
-	let selectedConcern = concerns[0]
+	let selectedAction = $state(actions[0])
+	let selectedConcern = $state(concerns[0])
 
 	type Section = {
 		name: string
@@ -188,8 +188,8 @@
 		<b>Select one:</b>
 		{#each concerns as section}
 			<button
-				class={selectedConcern == section ? 'tag tag--selected' : 'tag'}
-				on:click={() => (selectedConcern = section)}>{section.name}</button
+				class={selectedConcern.name == section.name ? 'tag tag--selected' : 'tag'}
+				onclick={() => (selectedConcern = section)}>{section.name}</button
 			>&nbsp;
 		{/each}
 	</li>
@@ -206,8 +206,8 @@
 		<b>Select one:</b>
 		{#each actions as section}
 			<button
-				class={selectedAction == section ? 'tag tag--selected' : 'tag'}
-				on:click={() => (selectedAction = section)}>{section.name}</button
+				class={selectedAction.name == section.name ? 'tag tag--selected' : 'tag'}
+				onclick={() => (selectedAction = section)}>{section.name}</button
 			>&nbsp;
 		{/each}
 	</li>
@@ -249,8 +249,8 @@
 		<div
 			id={letterId}
 			contenteditable="true"
-			on:click={handleClick}
-			on:keydown={handleKeydown}
+			onclick={handleClick}
+			onkeydown={handleKeydown}
 			role="document"
 			tabindex="-1"
 		>
@@ -262,7 +262,7 @@
 				intelligence.
 			</p>
 
-			<svelte:component this={selectedConcern.section} />
+			<selectedConcern.section />
 
 			<p>
 				The advancements in the AI landscape have progressed much faster than anticipated. In 2020,
@@ -305,7 +305,7 @@
 				need politicians to initialize treaty negotiations.
 			</p>
 
-			<svelte:component this={selectedAction.section} />
+			<selectedAction.section />
 
 			<p>Best regards,</p>
 
@@ -315,7 +315,7 @@
 </div>
 
 <div class="actionBar">
-	<Button on:click={() => copyHTMLWithoutStyles()}>Copy</Button>
+	<Button onclick={() => copyHTMLWithoutStyles()}>Copy</Button>
 </div>
 
 <style>

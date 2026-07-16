@@ -22,13 +22,9 @@
 
 	let map: maplibregl.Map
 	let mapContainer: HTMLDivElement
-	let lng: number
-	let lat: number
-	let zoom: number
-
-	lng = -71.224518
-	lat = 42.213995
-	zoom = 1
+	let lng: number = $state(-71.224518)
+	let lat: number = $state(42.213995)
+	let zoom: number = $state(1)
 
 	function updateData() {
 		zoom = map.getZoom()
@@ -79,7 +75,7 @@
 			center: [initialState.lng, initialState.lat],
 			zoom: initialState.zoom,
 			transformRequest: (url, resourceType) => {
-				if (isMapboxURL(url)) return transformMapboxUrl(url, resourceType ?? '', MAPBOX_KEY)
+				if (isMapboxURL(url)) return transformMapboxUrl(url, resourceType, MAPBOX_KEY)
 			}
 		})
 

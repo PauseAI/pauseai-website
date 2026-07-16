@@ -7,9 +7,13 @@
 	import GithubSlugger from 'github-slugger'
 	import type { PageData } from './$types'
 
-	export let data: PageData
+	interface Props {
+		data: PageData
+	}
 
-	const { quotes } = data
+	let { data }: Props = $props()
+
+	const { quotes } = $derived(data)
 </script>
 
 <svelte:head>

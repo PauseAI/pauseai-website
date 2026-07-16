@@ -4,7 +4,11 @@
 	import NationalGroupItem from '$lib/components/NationalGroupItem.svelte'
 	import { fetchNationalGroups } from '$lib/nationalGroups'
 
-	export let nationalGroups: NationalGroup[] = []
+	interface Props {
+		nationalGroups?: NationalGroup[]
+	}
+
+	let { nationalGroups = $bindable([]) }: Props = $props()
 
 	onMount(async () => {
 		if (nationalGroups.length === 0) {

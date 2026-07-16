@@ -3,46 +3,52 @@
 	import { micromark } from 'micromark'
 	import LoadingSpinner from './LoadingSpinner.svelte'
 	import Link from '$lib/components/Link.svelte'
+	import { slide } from 'svelte/transition'
 
-	export let mp: {
-		name: string
-		email: string
-		salutation: string
-		constituency: string
+	interface Props {
+		mp: {
+			name: string
+			email: string
+			salutation: string
+			constituency: string
+		}
+		userPostcode: string
+		userName: string
+		onsubmit?: (e: SubmitEvent) => void
 	}
-	export let userPostcode: string
-	export let userName: string
 
-	let senderName = userName
-	let senderEmail = ''
-	let subject = `Request to co-sign letter on AI liability`
-	let message = `Dear ${mp.salutation},
+	let { mp, userPostcode, userName, onsubmit }: Props = $props()
 
-Would you be willing to sign this open letter supporting legislation to hold AI companies accountable when their models cause severe harm to our critical infrastructure?
+	let senderName = $derived(userName)
+	let senderEmail = $state('')
+	let subject = $state(`Request to co-sign letter on frontier AI risks`)
+	let message = $derived(`Dear ${mp.salutation},
 
-I’m a resident of ${mp.constituency} and a supporter of **PauseAI**, a grassroots network focused on preventing the catastrophic risks of AI. I am very concerned that AI development is spiralling out of control without any protection for the public.
+Would you be willing to sign this open letter supporting legislation to protect British people from the harms of frontier AI?
 
-There now exist models which can autonomously hack into almost any computer system. Yet under the existing framework, it is doubtful whether AI companies can be held liable for even the most severe and foreseeable harms, including cases in which their models were clearly decisive in enabling the harm. Please help change that, before we face the next generation of AI models.
+I’m a resident of ${mp.constituency} and a supporter of **PauseAI**, a civic movement focused on averting the risks of advanced AI. I am very concerned that AI development is racing ahead without adequate protection for the public.
 
-Next steps
- - 30-min call. Let me know what time would work for you.
- - Alternatively, please review the letter and background information attached and send over any questions or concerns.
+**The UK has no specific legal standards for AI.** No regulator oversees frontier AI development. And UK law does not reliably hold developers liable for damage or deaths caused by their models, even when the danger is predictable, preventable and uniquely enabled by AI.
+
+To ensure our safety, I believe that we need frontier AI legislation as soon as possible. Please could we arrange a short meeting to discuss this important matter?
 
 Thank you for your consideration,
 
 ${userName}
 
-${userPostcode.toUpperCase()}`
+${userPostcode.toUpperCase()}`)
 
-	let messageTextarea: HTMLTextAreaElement
-	let subjectTextarea: HTMLTextAreaElement
-	let isSubmitting = false
-	let submitStatus: 'idle' | 'success' | 'error' = 'idle'
-	let errorMessage = ''
+	let messageTextarea: HTMLTextAreaElement | undefined = $state()
+	let subjectTextarea: HTMLTextAreaElement | undefined = $state()
+	let isSubmitting = $state(false)
+	let submitStatus: 'idle' | 'success' | 'error' = $state('idle')
+	let errorMessage = $state('')
+	let confirmingSend = $state(false)
 
-	$: htmlPreview = micromark(message)
+	let htmlPreview = $derived(micromark(message))
 
 	function insertMarkdown(before: string, after: string = '') {
+		if (!messageTextarea) return
 		const start = messageTextarea.selectionStart
 		const end = messageTextarea.selectionEnd
 		const selectedText = message.substring(start, end)
@@ -53,8 +59,8 @@ ${userPostcode.toUpperCase()}`
 
 		// Move cursor to end of inserted text
 		setTimeout(() => {
-			messageTextarea.focus()
-			messageTextarea.setSelectionRange(
+			messageTextarea?.focus()
+			messageTextarea?.setSelectionRange(
 				start + before.length,
 				start + before.length + selectedText.length
 			)
@@ -62,6 +68,7 @@ ${userPostcode.toUpperCase()}`
 	}
 
 	function insertBulletPoint() {
+		if (!messageTextarea) return
 		const start = messageTextarea.selectionStart
 		const end = messageTextarea.selectionEnd
 
@@ -86,9 +93,9 @@ ${userPostcode.toUpperCase()}`
 
 			// Adjust cursor position to account for the removed "- "
 			setTimeout(() => {
-				messageTextarea.focus()
+				messageTextarea?.focus()
 				const adjustment = currentLine.length - bulletRemoved.length
-				messageTextarea.setSelectionRange(start - adjustment, end - adjustment)
+				messageTextarea?.setSelectionRange(start - adjustment, end - adjustment)
 			}, 0)
 		} else {
 			// Insert "- " at the beginning of the current line
@@ -97,8 +104,8 @@ ${userPostcode.toUpperCase()}`
 
 			// Adjust cursor position to account for the inserted "- "
 			setTimeout(() => {
-				messageTextarea.focus()
-				messageTextarea.setSelectionRange(start + 2, end + 2)
+				messageTextarea?.focus()
+				messageTextarea?.setSelectionRange(start + 2, end + 2)
 			}, 0)
 		}
 	}
@@ -118,19 +125,41 @@ ${userPostcode.toUpperCase()}`
 	}
 
 	// Auto-resize when message changes
-	$: if (messageTextarea && message) {
-		autoResize()
-	}
+	$effect(() => {
+		if (messageTextarea && message) {
+			autoResize()
+		}
+	})
 
 	// Auto-resize when subject changes
-	$: if (subjectTextarea && subject) {
-		autoResizeSubject()
+	$effect(() => {
+		if (subjectTextarea && subject) {
+			autoResizeSubject()
+		}
+	})
+
+	// First click reveals the confirm/cancel buttons rather than sending,
+	// so people don't fire off an email by accident.
+	function requestSend() {
+		if (!senderEmail.trim()) {
+			errorMessage = 'Please fill in your email address'
+			submitStatus = 'error'
+			return
+		}
+		errorMessage = ''
+		submitStatus = 'idle'
+		confirmingSend = true
+	}
+
+	function cancelSend() {
+		confirmingSend = false
 	}
 
 	async function handleSubmit() {
 		if (!senderEmail.trim()) {
 			errorMessage = 'Please fill in your email address'
 			submitStatus = 'error'
+			confirmingSend = false
 			return
 		}
 
@@ -160,10 +189,12 @@ ${userPostcode.toUpperCase()}`
 			} else {
 				submitStatus = 'error'
 				errorMessage = result.message || 'Failed to send email'
+				confirmingSend = false
 			}
 		} catch (error) {
 			submitStatus = 'error'
 			errorMessage = 'Network error - please try again'
+			confirmingSend = false
 			console.error('Email submission error:', error)
 		} finally {
 			isSubmitting = false
@@ -177,7 +208,12 @@ ${userPostcode.toUpperCase()}`
 			<p>✅ Your email has been sent to {mp.name}!</p>
 		</div>
 	{:else}
-		<form on:submit|preventDefault>
+		<form
+			onsubmit={(e) => {
+				e.preventDefault()
+				onsubmit?.(e)
+			}}
+		>
 			<div class="form-group">
 				<label for="sender-email">Your email</label>
 				<input
@@ -197,7 +233,7 @@ ${userPostcode.toUpperCase()}`
 					bind:value={subject}
 					required
 					placeholder="Email subject"
-					on:input={autoResizeSubject}
+					oninput={autoResizeSubject}
 					rows="1"
 					class="subject-textarea"
 				></textarea>
@@ -214,19 +250,19 @@ ${userPostcode.toUpperCase()}`
 				</div>
 
 				<div class="markdown-toolbar">
-					<button type="button" on:click={() => insertMarkdown('**', '**')} title="Bold">
+					<button type="button" onclick={() => insertMarkdown('**', '**')} title="Bold">
 						<strong>B</strong>
 					</button>
-					<button type="button" on:click={() => insertMarkdown('_', '_')} title="Italic">
+					<button type="button" onclick={() => insertMarkdown('_', '_')} title="Italic">
 						<em>i</em>
 					</button>
-					<button type="button" on:click={() => insertMarkdown('# ', '')} title="Heading">
+					<button type="button" onclick={() => insertMarkdown('# ', '')} title="Heading">
 						H1
 					</button>
-					<button type="button" on:click={() => insertMarkdown('## ', '')} title="Subheading">
+					<button type="button" onclick={() => insertMarkdown('## ', '')} title="Subheading">
 						H2
 					</button>
-					<button type="button" on:click={() => insertBulletPoint()} title="Bullet point">
+					<button type="button" onclick={() => insertBulletPoint()} title="Bullet point">
 						• List
 					</button>
 				</div>
@@ -238,7 +274,7 @@ ${userPostcode.toUpperCase()}`
 						bind:value={message}
 						required
 						placeholder="Your message to the MP"
-						on:input={autoResize}
+						oninput={autoResize}
 						rows="1"
 					></textarea>
 				</div>
@@ -255,33 +291,33 @@ ${userPostcode.toUpperCase()}`
 					<h4>Attachments:</h4>
 					<div class="pdf-attachments">
 						<Link
-							href="/pdfs/AI_Liability_Open_Letter.pdf#no-localize"
+							href="/pdfs/Frontier_AI_Open_Letter.pdf#no-localize"
 							target="_blank"
 							class="pdf-thumbnail"
 						>
 							<img
-								src="/pdfs/AI_Liability_Open_Letter.jpg"
-								alt="AI Liability Open Letter thumbnail"
+								src="/pdfs/Frontier_AI_Open_Letter.jpg"
+								alt="Frontier AI Open Letter thumbnail"
 								class="pdf-thumbnail-image"
 							/>
 							<div class="pdf-info">
-								<span class="pdf-title">AI Liability</span>
-								<span class="pdf-subtitle">Open Letter</span>
+								<span class="pdf-title">Open Letter</span>
+								<span class="pdf-subtitle">To the Prime Minister</span>
 							</div>
 						</Link>
 						<Link
-							href="/pdfs/AI_Liability_Policy_Briefing.pdf#no-localize"
+							href="/pdfs/Frontier_AI_Risks_Policy_Briefing.pdf#no-localize"
 							target="_blank"
 							class="pdf-thumbnail"
 						>
 							<img
-								src="/pdfs/AI_Liability_Policy_Briefing.jpg"
-								alt="AI Liability Policy Briefing thumbnail"
+								src="/pdfs/Frontier_AI_Risks_Policy_Briefing.jpg"
+								alt="Frontier AI Risks Policy Briefing thumbnail"
 								class="pdf-thumbnail-image"
 							/>
 							<div class="pdf-info">
-								<span class="pdf-title">AI Liability</span>
-								<span class="pdf-subtitle">Policy Briefing</span>
+								<span class="pdf-title">Policy Briefing</span>
+								<span class="pdf-subtitle">On frontier AI risks</span>
 							</div>
 						</Link>
 					</div>
@@ -294,14 +330,43 @@ ${userPostcode.toUpperCase()}`
 				</div>
 			{/if}
 
-			<button type="button" disabled={isSubmitting} class="submit-button" on:click={handleSubmit}>
-				{#if isSubmitting}
-					Sending
-					<LoadingSpinner size="small" color="currentColor" />
-				{:else}
+			{#if confirmingSend}
+				<div class="confirm-box" in:slide={{ duration: 250 }}>
+					<p class="confirm-prompt">Send this email to <strong>{mp.name}</strong>?</p>
+					<div class="confirm-actions">
+						<button
+							type="button"
+							class="cancel-button"
+							onclick={cancelSend}
+							disabled={isSubmitting}
+						>
+							Cancel
+						</button>
+						<button
+							type="button"
+							class="submit-button confirm-button"
+							disabled={isSubmitting}
+							onclick={handleSubmit}
+						>
+							{#if isSubmitting}
+								Sending
+								<LoadingSpinner size="small" color="currentColor" />
+							{:else}
+								Confirm &amp; Send
+							{/if}
+						</button>
+					</div>
+				</div>
+			{:else}
+				<button
+					type="button"
+					class="submit-button send-button"
+					onclick={requestSend}
+					in:slide={{ duration: 250 }}
+				>
 					Send Email
-				{/if}
-			</button>
+				</button>
+			{/if}
 		</form>
 	{/if}
 </div>
@@ -572,6 +637,75 @@ ${userPostcode.toUpperCase()}`
 	.submit-button:disabled {
 		background: var(--text-muted);
 		cursor: not-allowed;
+	}
+
+	.confirm-box {
+		width: 100%;
+		margin-top: 1rem;
+		margin-bottom: 1rem;
+		padding: 1rem;
+		box-sizing: border-box;
+		border: 1px solid var(--brand);
+		border-radius: 8px;
+		background: var(--bg);
+		display: flex;
+		flex-direction: column;
+		gap: 0.75rem;
+	}
+
+	.confirm-prompt {
+		margin: 0;
+		text-align: center;
+		font-size: 0.95rem;
+		color: var(--text);
+	}
+
+	.confirm-actions {
+		display: flex;
+		align-items: stretch;
+		gap: 0.75rem;
+	}
+
+	.confirm-box .submit-button {
+		margin-top: 0;
+		margin-bottom: 0;
+	}
+
+	.confirm-button {
+		flex: 1;
+	}
+
+	/* While sending, keep the brand colour + full opacity (just show the spinner)
+	   instead of fading to the grey disabled style, which read as the button
+	   "fading out" right before the success swap. */
+	.confirm-button:disabled {
+		background: var(--brand);
+		opacity: 1;
+		cursor: wait;
+	}
+
+	.cancel-button {
+		flex: 1;
+		background: transparent;
+		color: var(--text);
+		border: 1px solid var(--border);
+		padding: 0.75rem 1.5rem;
+		border-radius: 4px;
+		font-size: 1rem;
+		cursor: pointer;
+		transition:
+			background-color 0.2s,
+			border-color 0.2s;
+	}
+
+	.cancel-button:hover:not(:disabled) {
+		background: var(--bg-subtle);
+		border-color: var(--brand);
+	}
+
+	.cancel-button:disabled {
+		cursor: not-allowed;
+		opacity: 0.6;
 	}
 
 	.success-message {

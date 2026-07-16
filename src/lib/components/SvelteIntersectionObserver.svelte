@@ -1,11 +1,23 @@
 <script lang="ts">
 	import { onMount } from 'svelte'
 
-	export let defaultToIntersecting = false
-	export let disconnectOnIntersect = false
-	export let isIntersecting: boolean = defaultToIntersecting
-	export let rootMargin: string = '0px'
-	export let threshold: number | number[] = 0
+	interface Props {
+		defaultToIntersecting?: boolean
+		disconnectOnIntersect?: boolean
+		isIntersecting?: boolean
+		rootMargin?: string
+		threshold?: number | number[]
+		children?: import('svelte').Snippet
+	}
+
+	let {
+		defaultToIntersecting = false,
+		disconnectOnIntersect = false,
+		isIntersecting = $bindable(defaultToIntersecting),
+		rootMargin = '0px',
+		threshold = 0,
+		children
+	}: Props = $props()
 
 	let element: HTMLElement
 	let observer: IntersectionObserver
@@ -25,5 +37,5 @@
 </script>
 
 <div bind:this={element}>
-	<slot></slot>
+	{@render children?.()}
 </div>

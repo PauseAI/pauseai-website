@@ -1,7 +1,11 @@
 <script lang="ts">
 	import type { Signatory } from './types'
 
-	export let signatory: Signatory
+	interface Props {
+		signatory: Signatory
+	}
+
+	let { signatory }: Props = $props()
 
 	// Determine the portrait path based on chamber and processed images
 	function getPortraitPath(signatory: { portrait?: string }) {
@@ -16,8 +20,8 @@
 		return null
 	}
 
-	const portraitPath = getPortraitPath(signatory)
-	const displayName = signatory.displayName || signatory.name
+	const portraitPath = $derived(getPortraitPath(signatory))
+	const displayName = $derived(signatory.displayName ?? signatory.name)
 
 	// Convert Lord/Baroness to Peer for display
 	function getDisplayType(type: string) {
@@ -27,7 +31,7 @@
 		return type
 	}
 
-	const displayType = getDisplayType(signatory.type)
+	const displayType = $derived(getDisplayType(signatory.type))
 </script>
 
 <div class="signatory-card">

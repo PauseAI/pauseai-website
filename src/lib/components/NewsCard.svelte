@@ -6,22 +6,29 @@
 	import NetlifyImage from './NetlifyImage.svelte'
 	import Skeleton from './Skeleton.svelte'
 
-	let isExternal: boolean
-	let hasImageError = false
+	interface Props {
+		item?: NewsItem
+		loading?: boolean
+		/**
+		 * Passed by the parent layout so responsive images download a variant close to the
+		 * card's rendered width instead of the image component's broad default.
+		 */
+		imageSizes?: string
+		id?: string
+	}
 
-	export let item: NewsItem | undefined = undefined
-	export let loading: boolean = false
-	export let imageSizes: string | undefined = undefined
-	/** Optional anchor id (e.g. for hash links from elsewhere) */
-	export let id: string | undefined = undefined
+	let { item, loading = false, imageSizes, id }: Props = $props()
 
-	$: isExternal = item?.source === 'substack' || item?.source === 'press'
+	let isExternal = $derived(item?.source === 'substack' || item?.source === 'press')
+	let hasImageError = $state(false)
 
-	// Reset error state if image changes
-	$: if (item?.image) hasImageError = false
+	// Reset error state when item changes and new item has image
+	$effect(() => {
+		if (item?.image) hasImageError = false
+	})
 </script>
 
-<div>
+<div class="news-card-wrapper">
 	<LinkWithoutIcon
 		href={item?.href}
 		class="news-card"
@@ -42,7 +49,13 @@
 							onFailed={() => (hasImageError = true)}
 						/>
 					{:else}
-						<Image src={item.image} alt={item.title} class="image" sizes={imageSizes} />
+						<Image
+							src={item.image}
+							alt={item.title}
+							class="image"
+							sizes={imageSizes}
+							aspectRatio={16 / 10}
+						/>
 					{/if}
 				{:else}
 					<div class="image-placeholder"></div>
@@ -77,6 +90,10 @@
 </div>
 
 <style>
+	.news-card-wrapper {
+		display: flex;
+	}
+
 	* :global(.news-card) {
 		display: flex;
 		flex-direction: column;
@@ -88,6 +105,7 @@
 		transition:
 			transform 0.2s ease,
 			box-shadow 0.2s ease;
+		width: 100%;
 	}
 
 	* :global(.news-card:hover) {
@@ -126,6 +144,7 @@
 		display: flex;
 		flex-direction: column;
 		gap: 0.3rem;
+		flex: 1 1 auto;
 	}
 
 	.card-title {
@@ -165,6 +184,7 @@
 		font-size: 0.8rem;
 		font-weight: 300;
 		margin: 0;
+		margin-top: auto;
 		color: var(--text);
 		opacity: 0.6;
 	}

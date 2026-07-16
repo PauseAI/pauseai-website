@@ -2,17 +2,26 @@
 	import * as m from '$lib/paraglide/messages.js'
 	import { tick } from 'svelte'
 
-	// Localizable text
-	export let placeholderText = m.newsletter_email_placeholder()
-	export let buttonText = m.newsletter_button()
-	export let headingText = m.newsletter_heading()
-	export let descriptionText = m.newsletter_description()
+	interface Props {
+		// Localizable text
+		placeholderText?: m.LocalizedString
+		buttonText?: m.LocalizedString
+		headingText?: m.LocalizedString
+		descriptionText?: m.LocalizedString
+		// State variable for email binding (for external use)
+		email?: string
+	}
 
-	// State variable for email binding (for external use)
-	export let email = ''
+	let {
+		placeholderText = m.newsletter_email_placeholder(),
+		buttonText = m.newsletter_button(),
+		headingText = m.newsletter_heading(),
+		descriptionText = m.newsletter_description(),
+		email = $bindable('')
+	}: Props = $props()
 
 	// State for showing success message
-	let showSuccess = false
+	let showSuccess = $state(false)
 	let formElement: HTMLFormElement
 
 	const handleSubmit = async (e: Event) => {
@@ -43,7 +52,7 @@
 			action="https://pauseai.substack.com/api/v1/free"
 			method="POST"
 			target="_blank"
-			on:submit={handleSubmit}
+			onsubmit={handleSubmit}
 		>
 			<div class="input-group">
 				<input

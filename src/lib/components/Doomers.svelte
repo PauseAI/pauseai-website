@@ -246,8 +246,7 @@
 			source: 'https://www.theguardian.com/science/2011/aug/17/shark-attacks-rare-deaths-rarer',
 			isGrounding: true
 		}
-	]
-	doomers = doomers.sort((a, b) => b.number - a.number)
+	].sort((a, b) => b.number - a.number)
 </script>
 
 <ul>

@@ -2,12 +2,27 @@
 	import type { Picture } from '$lib/types'
 	import { layoutWidth } from '$lib/config'
 
-	export let src: string
-	export let alt: string | null = null
-	export let title: string | null = null
-	export let sizes: string = `min(${layoutWidth}, 100vw)`
-	let className: string = ''
-	export { className as class }
+	interface Props {
+		src: string
+		alt?: string
+		title?: string
+		sizes?: string
+		aspectRatio?: number
+		class?: string
+		loading?: 'eager' | 'lazy'
+		fetchpriority?: 'high' | 'low' | 'auto'
+	}
+
+	let {
+		src,
+		alt,
+		title,
+		sizes,
+		aspectRatio,
+		class: className = '',
+		loading = 'lazy',
+		fetchpriority = 'auto'
+	}: Props = $props()
 
 	// Use import.meta.glob to statically analyze all potential static assets
 	const pictureModules = import.meta.glob<Picture>(
@@ -16,7 +31,8 @@
 			eager: true,
 			import: 'default',
 			query: {
-				enhanced: true
+				enhanced: true,
+				w: '520;640;800;1280;1920;2560;3840'
 			}
 		}
 	)
@@ -26,26 +42,53 @@
 		query: { url: true }
 	})
 
-	let picture: Picture | null = null
-	let assetUrl: string | null = null
+	let fullPath = $derived(src.startsWith('/') ? `../../assets/images${src}` : null)
+	let picture: Picture | null = $derived(pictureModules[fullPath ?? ''] ?? null)
+	let assetUrl: string | null = $derived(assetUrlModules[fullPath ?? ''] ?? null)
 
-	if (src.startsWith('/')) {
-		const fullPath = `../../assets/images${src}`
-		if (pictureModules[fullPath]) {
-			picture = pictureModules[fullPath]
-		} else if (assetUrlModules[fullPath]) {
-			assetUrl = assetUrlModules[fullPath]
-		}
+	// When using object-fit: cover with a target aspect ratio, the image is scaled
+	// to cover the container, so the effective source width may exceed the display
+	// width. The scaling factor is max(1, imgAr / targetAr).
+	let coverFactor = $derived.by(() => {
+		if (!picture || !aspectRatio) return 1
+		const imgAr = picture.img.w / picture.img.h
+		return Math.max(1, imgAr / aspectRatio)
+	})
+
+	// Apply the cover factor to each length in the sizes string. Entries with
+	// media conditions get their length wrapped in calc(); bare lengths too.
+	function scaleSizes(sizesStr: string, factor: number): string {
+		if (factor === 1) return sizesStr
+		return sizesStr
+			.split(/,(?![^()]*\))/)
+			.map((entry) => entry.trim())
+			.map((entry) => {
+				const match = entry.match(/^(\([^)]*\))\s+(.+)$/)
+				return match ? `${match[1]} calc(${match[2]} * ${factor})` : `calc(${entry} * ${factor})`
+			})
+			.join(', ')
 	}
+
+	let effectiveSizes = $derived.by(() => {
+		if (sizes) return scaleSizes(sizes, coverFactor)
+		return `calc(min(${layoutWidth}, 100vw) * ${coverFactor})`
+	})
 </script>
 
 {#if picture}
-	<enhanced:img src={picture} {alt} class="enhanced {className}" loading="lazy" {sizes} {title}
+	<enhanced:img
+		src={picture}
+		{alt}
+		class="enhanced {className}"
+		{loading}
+		{fetchpriority}
+		sizes={effectiveSizes}
+		{title}
 	></enhanced:img>
 {:else if assetUrl}
-	<img src={assetUrl} {alt} {title} loading="lazy" class={className} />
+	<img src={assetUrl} {alt} {title} {loading} {fetchpriority} class={className} />
 {:else}
-	<img {src} {alt} {title} loading="lazy" class={className} />
+	<img {src} {alt} {title} {loading} {fetchpriority} class={className} />
 {/if}
 
 <style>

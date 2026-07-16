@@ -4,11 +4,15 @@
 	import NewsCard from '$lib/components/NewsCard.svelte'
 	import { onMount } from 'svelte'
 
-	let loading = true
-	let currentPage = 1
-	let totalPages = 1
 	const pageSize = 6
-	let newsItems: NewsItem[] = Array.from({ length: pageSize })
+	// Matches the 1/2/3-column grid below so browsers choose thumbnail-sized
+	// responsive image variants rather than downloading page-width images.
+	const newsCardImageSizes =
+		'(max-width: 500px) calc(100vw - 1rem), (max-width: 850px) calc((100vw - 3rem) / 2), 13rem'
+	let newsItems: NewsItem[] = $state(Array.from({ length: pageSize }))
+	let loading = $state(true)
+	let currentPage = $state(1)
+	let totalPages = $state(1)
 
 	async function loadPage(page: number) {
 		loading = true
@@ -40,7 +44,7 @@
 	{#if newsItems.length > 0}
 		<div class="news-grid">
 			{#each newsItems as item}
-				<NewsCard {item} {loading} imageSizes="500px" />
+				<NewsCard {item} {loading} imageSizes={newsCardImageSizes} />
 			{/each}
 		</div>
 
@@ -49,7 +53,7 @@
 				<button
 					class="page-btn"
 					disabled={currentPage <= 1}
-					on:click={() => goToPage(currentPage - 1)}
+					onclick={() => goToPage(currentPage - 1)}
 					aria-label="Previous page"
 				>
 					‹
@@ -59,7 +63,7 @@
 					<button
 						class="page-btn"
 						class:active={currentPage === i + 1}
-						on:click={() => goToPage(i + 1)}
+						onclick={() => goToPage(i + 1)}
 					>
 						{i + 1}
 					</button>
@@ -68,7 +72,7 @@
 				<button
 					class="page-btn"
 					disabled={currentPage >= totalPages}
-					on:click={() => goToPage(currentPage + 1)}
+					onclick={() => goToPage(currentPage + 1)}
 					aria-label="Next page"
 				>
 					›

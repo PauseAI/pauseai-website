@@ -6,6 +6,7 @@
 		"eslint.config.js",
 		"knip.config.ts",
 		"prettier.config.js",
+		"stylelint.config.js",
 		"svelte.config.js",
 		"eslint/**/*.js",
 		"scripts/**/*.js",

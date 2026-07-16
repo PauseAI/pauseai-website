@@ -5,11 +5,15 @@
 	import * as m from '$lib/paraglide/messages.js'
 	import { botName } from '$lib/config'
 	import { searchOpen } from '$lib/stores/searchModal'
-	import SearchIcon from 'lucide-svelte/icons/search'
+	import SearchIcon from '@lucide/svelte/icons/search'
 
 	const enableBot = false
 
-	export let inverted = false
+	interface Props {
+		inverted?: boolean
+	}
+
+	let { inverted = false }: Props = $props()
 
 	const openSearch = (e: MouseEvent) => {
 		e.preventDefault()
@@ -22,7 +26,6 @@
 	<Navlink {inverted} href="/proposal">{m.header_proposal()}</Navlink>
 	<Navlink {inverted} href="/communities">{m.header_events()}</Navlink>
 	<Navlink {inverted} href="/faq">{m.header_faq()}</Navlink>
-	<Navlink {inverted} href="/action">{m.header_action()}</Navlink>
 	<Navlink {inverted} href="/donate">{m.header_donate()}</Navlink>
 	{#if enableBot}
 		<Navlink {inverted} href="/chat">{botName}</Navlink>

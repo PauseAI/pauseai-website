@@ -6,9 +6,13 @@
 	import type { CalendarResponse, Event } from '$api/calendar/+server'
 	import Banner from '$lib/components/Banner.svelte'
 
-	export let contrast: boolean
-	export let eventFound = false
-	export let geo: GeoApiResponse | null = null
+	interface Props {
+		contrast: boolean
+		eventFound?: boolean
+		geo?: GeoApiResponse | null
+	}
+
+	let { contrast, eventFound = $bindable(false), geo = null }: Props = $props()
 
 	const FORMAT = new Intl.DateTimeFormat('en', { day: 'numeric', month: 'long' })
 	const MAX_DISTANCE_KM = 100
@@ -16,18 +20,12 @@
 		jogj70dj: 480 // Override for specific D.C. (Capitol Hill) event to include users up to 250 miles away
 	}
 
-	let events: CalendarResponse | null = null
-	let nearbyEvent: Event | null = null
-
-	$: eventFound = !!nearbyEvent
+	let events: CalendarResponse | null = $state(null)
+	let nearbyEvent: Event | null = $derived(geo && events ? findNearbyEvent(geo, events) : null)
 
 	onMount(async () => {
 		events = await fetchLuma()
 	})
-
-	$: if (geo && events) {
-		nearbyEvent = findNearbyEvent(geo, events)
-	}
 
 	function findNearbyEvent(geo: GeoApiResponse, events: CalendarResponse) {
 		const { latitude: userLatitude, longitude: userLongitude } = geo
@@ -52,6 +50,10 @@
 		const response = await fetch('/api/calendar?days=30')
 		return (await response.json()) as CalendarResponse
 	}
+
+	$effect(() => {
+		eventFound = !!nearbyEvent
+	})
 </script>
 
 {#if nearbyEvent}
