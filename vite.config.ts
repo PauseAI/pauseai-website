@@ -12,6 +12,7 @@ import { sentryVitePlugin } from '@sentry/vite-plugin'
 import { isDev } from './src/lib/env'
 import { MARKDOWN_L10NS } from './src/lib/l10n'
 import { locales as compiledLocales } from './src/lib/paraglide/runtime.js'
+import { configDefaults } from 'vitest/config'
 
 /**
  * Dev-only middleware: Netlify's `/.netlify/*` routes don't exist in the
@@ -106,6 +107,20 @@ export default defineConfig(() => {
 				external: getLocaleExcludePatterns()
 			}
 		} as const,
+
+		// Vitest config — `pnpm test` runs Vitest, which by default would
+		// also pick up `tests/visual/smoke.spec.ts`. That file imports
+		// `test` from `@chromatic-com/playwright` (a Playwright test runner
+		// wrapper), and Playwright's `test.describe()` throws
+		// "did not expect test.describe() to be called here" when invoked
+		// outside the Playwright runner. The visual suite is launched
+		// separately via `playwright.config.ts` (and Chromatic), so exclude
+		// it from Vitest's discovery. `exclude` replaces Vitest's defaults,
+		// so spread `configDefaults.exclude` to keep node_modules / dist /
+		// cypress / config files filtered out.
+		test: {
+			exclude: [...configDefaults.exclude, 'tests/visual/**']
+		},
 		plugins: [
 			suppressNetlifyRoute404s(),
 			lucidePreprocess(),
