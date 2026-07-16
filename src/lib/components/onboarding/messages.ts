@@ -201,7 +201,7 @@ const en: OnboardingMessages = {
 	onboarding_intent_newsletter_label: 'Subscribe to our Substack',
 	onboarding_intent_newsletter_sub: 'General news on AI, delivered via our Substack newsletter.',
 	onboarding_intent_more_optional: 'Want to do more? (optional)',
-	onboarding_intent_act_now_label: 'I want to take action now',
+	onboarding_intent_act_now_label: 'I just want to take action now',
 	onboarding_intent_act_now_sub: 'Show me what I can do today.',
 	onboarding_intent_volunteer_label: 'I want to volunteer regularly',
 	onboarding_intent_volunteer_sub: 'Help me find a role that fits.',
