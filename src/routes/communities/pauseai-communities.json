@@ -649,6 +649,12 @@
 			"name": "Münster",
 			"lat": 51.96,
 			"lon": 7.62
+		},
+		{
+			"name": "Olomouc",
+			"link": "https://chat.whatsapp.com/D8j1ci4PDonJJ8Rk15wKnb",
+			"lat": 49.5925739,
+			"lon": 17.2496039
 		}
 	]
 }

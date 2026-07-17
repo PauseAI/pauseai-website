@@ -1,5 +1,6 @@
 import { env } from '$env/dynamic/private'
 import { getDevContext, isDev } from '$lib/env.server'
+import { reportError } from '$lib/server/sentry'
 import Airtable, { type FieldSet, type Table } from 'airtable'
 
 const getApiKey = () => env.AIRTABLE_API_KEY
@@ -109,6 +110,10 @@ export async function createRecord(
 		return records[0]?.id
 	} catch (error) {
 		console.error(`Error creating Airtable record in ${tableId}:`, error)
+		// Report to Sentry even though we swallow the error: the caller surfaces
+		// a generic "could not save" message via `fail()`, which never reaches
+		// `handleError`, so without this the outage would be invisible.
+		await reportError(error, { tableId, operation: 'createRecord' })
 		// We don't throw here to avoid failing the whole request if Airtable is down
 		return undefined
 	}
@@ -141,6 +146,10 @@ export async function updateRecord(
 		return true
 	} catch (error) {
 		console.error(`Error updating Airtable record ${recordId} in ${tableId}:`, error)
+		// Report to Sentry even though we swallow the error: the caller surfaces
+		// a generic "could not save" message via `fail()`, which never reaches
+		// `handleError`, so without this the outage would be invisible.
+		await reportError(error, { tableId, recordId, operation: 'updateRecord' })
 		// We don't throw here to avoid failing the whole request if Airtable is down;
 		// the caller decides whether to surface the failure to the user.
 		return false

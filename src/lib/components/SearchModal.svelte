@@ -3,6 +3,7 @@
 	import { onNavigate } from '$app/navigation'
 	import type { PagefindModal, PagefindSearchResult } from '@pagefind/component-ui'
 	import { onMount } from 'svelte'
+	import { searchOpen } from '$lib/stores/searchModal'
 
 	interface Props {
 		open?: boolean
@@ -65,6 +66,31 @@
 		}
 		void init()
 
+		// Open the search modal when "/" is pressed.
+		const handleKeydown = (event: KeyboardEvent) => {
+			// Ignore when the modal is open (it has its own keyboard handling)
+			if ($searchOpen) return
+
+			// Ignore when the user is typing in a field, editing text, or using modifiers
+			const target = event.target as HTMLElement | null
+			if (
+				target?.isContentEditable ||
+				target instanceof HTMLInputElement ||
+				target instanceof HTMLTextAreaElement ||
+				target instanceof HTMLSelectElement
+			) {
+				return
+			}
+
+			// event.key is the produced character, so "/" works across keyboard layouts
+			if (event.key === '/') {
+				event.preventDefault()
+				searchOpen.set(true)
+			}
+		}
+
+		window.addEventListener('keydown', handleKeydown)
+
 		// Theme synchronization logic for Pagefind's built-in dark mode
 		const setPagefindTheme = () => {
 			const currentTheme =
@@ -85,6 +111,7 @@
 
 		return () => {
 			observer.disconnect()
+			window.removeEventListener('keydown', handleKeydown)
 		}
 	})
 
