@@ -3,6 +3,7 @@
 	import Navlink from '$lib/components/navbar/Navlink.svelte'
 	import LanguageSwitcher from '$lib/components/LanguageSwitcher.svelte'
 	import { getNavItems } from '$lib/components/navbar/navItems'
+	import * as m from '$lib/paraglide/messages.js'
 	import { searchOpen } from '$lib/stores/searchModal'
 	import SearchIcon from '@lucide/svelte/icons/search'
 
@@ -35,4 +36,35 @@
 			</Navlink>
 		</button>
 	{/snippet}
+
+	{#snippet panelExtras(closePanel: () => void)}
+		<button
+			class="reset-button panel-search"
+			onclick={(e) => {
+				closePanel()
+				openSearch(e)
+			}}
+		>
+			<SearchIcon size="1em" />
+			<span>{m.header_search()}</span>
+		</button>
+		<LanguageSwitcher />
+	{/snippet}
 </Navbar>
+
+<style>
+	.panel-search {
+		display: flex;
+		align-items: center;
+		gap: 0.5rem;
+		padding: 0.75rem;
+		border-radius: 4px;
+		cursor: pointer;
+		text-transform: uppercase;
+	}
+
+	.panel-search:hover {
+		background: var(--bg);
+		color: var(--brand);
+	}
+</style>

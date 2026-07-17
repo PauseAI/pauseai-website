@@ -14,10 +14,10 @@
 	interface Props {
 		items: NavItem[]
 		inverted?: boolean
-		extras?: import('svelte').Snippet
+		panelExtras?: import('svelte').Snippet<[() => void]>
 	}
 
-	let { items, inverted = false, extras }: Props = $props()
+	let { items, inverted = false, panelExtras }: Props = $props()
 
 	let open = $state(false)
 
@@ -93,9 +93,9 @@
 				{/if}
 			{/each}
 
-			{#if extras}
+			{#if panelExtras}
 				<div class="extras">
-					{@render extras()}
+					{@render panelExtras(() => (open = false))}
 				</div>
 			{/if}
 		</div>
@@ -204,12 +204,13 @@
 	}
 
 	.extras {
+		/* Anchor for the language switcher's absolutely-positioned dropdown. */
+		position: relative;
 		display: flex;
-		align-items: center;
-		gap: 0.5rem;
-		flex-wrap: wrap;
-		padding: 0.75rem;
+		flex-direction: column;
+		align-items: stretch;
 		margin-top: 0.25rem;
+		padding-top: 0.25rem;
 		border-top: 1px solid var(--bg);
 		text-transform: none;
 	}

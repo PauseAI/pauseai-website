@@ -6,18 +6,21 @@
 	interface Props {
 		items: NavItem[]
 		inverted?: boolean
-		/** Trailing controls (language switcher, search) rendered after the menu. */
+		/** Trailing controls (language switcher, search) rendered after the wide menu. */
 		extras?: import('svelte').Snippet
+		/** Controls rendered at the bottom of the narrow (mobile) panel.
+		 *  Receives a callback that closes the panel. */
+		panelExtras?: import('svelte').Snippet<[() => void]>
 	}
 
-	let { items, inverted = false, extras }: Props = $props()
+	let { items, inverted = false, extras, panelExtras }: Props = $props()
 </script>
 
 <div class="wide-navbar">
 	<WideNavbar {items} {inverted} {extras} />
 </div>
 <div class="narrow-navbar">
-	<NarrowNavbar {items} {inverted} {extras} />
+	<NarrowNavbar {items} {inverted} {panelExtras} />
 </div>
 
 <style>
