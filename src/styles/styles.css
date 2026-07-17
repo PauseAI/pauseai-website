@@ -233,7 +233,7 @@ textarea:focus {
 
 .reset-button,
 .button-to-link {
-	border: inherit;
+	border: unset;
 	background: inherit;
 	text-align: inherit;
 	font: inherit;
