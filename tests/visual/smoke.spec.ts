@@ -62,23 +62,24 @@ test.describe('routes', () => {
 			// grows — it asserts the fixture is reachable, not where it sorts.
 			if (path === '/') {
 				let found = false
-				let pageNum = 1
-				let totalPages = 1
-				do {
+				// A for-loop (condition checked before the first body) rather than a
+				// do-while, so the `found` / `totalPages` initialisers are read before
+				// being reassigned — otherwise eslint's no-useless-assignment fires.
+				for (let pageNum = 1, totalPages = 1; !found && pageNum <= totalPages; pageNum++) {
 					// Fetch from inside the page (same-origin, so beforeEach's route
 					// handler lets it through) rather than via page.request, whose
 					// separate context isn't covered by page.route.
 					const body = await page.evaluate(async (p) => {
 						const res = await fetch(`/api/news?page=${p}&pageSize=12`)
-						return (await res.json()) as { items: Array<{ title: string }>; totalPages: number }
+						if (!res.ok) throw new Error(`/api/news returned ${res.status}`)
+						return (await res.json()) as { items?: Array<{ title?: string }>; totalPages?: number }
 					}, pageNum)
-					totalPages = body.totalPages
-					found = body.items.some((item) => item.title.startsWith('Fixture Substack post'))
-					pageNum++
-				} while (!found && pageNum <= totalPages)
+					totalPages = body.totalPages ?? 0
+					found = (body.items ?? []).some((item) => item.title?.startsWith('Fixture Substack post'))
+				}
 				if (!found) {
 					throw new Error(
-						'MSW Substack fixture missing from /api/news — the live feed may have leaked into the run'
+						'Fixture Substack post not found in /api/news — the MSW handler is broken or the live feed leaked into the run'
 					)
 				}
 			}

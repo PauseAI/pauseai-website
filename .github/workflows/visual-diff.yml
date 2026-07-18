@@ -63,7 +63,9 @@ jobs:
           # NB: must be NODE_OPTIONS, not NPM_CONFIG_NODE_OPTIONS — pnpm 10
           # translated the latter into the former, but pnpm 11 (bumped here in
           # the July merge) ignores it, so the preload silently never ran.
-          NODE_OPTIONS: '--import ./tests/visual/msw-setup.ts'
+          # Absolute path: --import resolves relative specifiers against each
+          # process's cwd, and not every spawned step runs from the repo root.
+          NODE_OPTIONS: '--import ${{ github.workspace }}/tests/visual/msw-setup.ts'
           # Fake keys so the SDKs actually make HTTP requests (they short-circuit
           # to a "no key" error otherwise, bypassing MSW entirely). The real
           # requests are intercepted by MSW and served from fixtures.
