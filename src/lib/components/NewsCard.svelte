@@ -68,7 +68,7 @@
 			{/if}
 			<h3 class="card-title toc-exclude">
 				<Skeleton {loading} variant="text" count={2} width="80%">
-					{item?.title}
+					<span class="card-title-text">{item?.title}</span>
 				</Skeleton>
 			</h3>
 			{#if loading || item?.subtitle}
@@ -170,6 +170,23 @@
 		line-height: 1.2;
 		margin: 0;
 		text-transform: none;
+		/* Reserve a fixed two-line area and center the title within it, so every
+		   card's subtitle starts at the same height regardless of title length,
+		   and short one-line titles don't leave a gap above the subtitle. */
+		min-height: calc(1.1rem * 1.2 * 2);
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+
+	/* Clamp lives on the inner element because -webkit-line-clamp needs
+	   display: -webkit-box, which can't coexist with the flex centering above. */
+	.card-title-text {
+		display: -webkit-box;
+		-webkit-line-clamp: 2;
+		line-clamp: 2;
+		-webkit-box-orient: vertical;
+		overflow: hidden;
 	}
 
 	.card-outlet {
