@@ -58,6 +58,7 @@
 		color: var(--text);
 		text-decoration: none;
 		font-size: 1.1rem;
+		white-space: nowrap;
 	}
 
 	* :global(.navlink.first) {

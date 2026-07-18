@@ -138,6 +138,8 @@ Transition caveat: until step 4, rows arriving via Tally have only legacy values
 
 ## 2. `Discovery method of PAI` (singleSelect — 22 options)
 
+> **Status note (2026-07-14):** The field type has **not yet been changed** to `multipleSelects` in Airtable — it is still a `singleSelect`. The canonical option list, mapping rules, and backfill plan below describe the intended end state; the conversion is pending.
+
 **New field type: `multipleSelects`** (decided 2026-06-10). The legacy comma combos are old multi-select answers forced into a singleSelect — a multi-select new field restores them losslessly: backfill splits on comma and maps each part (no per-row pass needed). The native form still asks single-choice and writes one tag; the field accepting multiple is storage-side only, plus a canonical `Podcast` backfill-only option.
 
 **Canonical (8 = 7 form options + `Podcast`, after collapsing the Event dupe):**

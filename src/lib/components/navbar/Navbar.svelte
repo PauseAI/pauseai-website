@@ -1,24 +1,26 @@
 <script lang="ts">
 	import WideNavbar from './wide/WideNavbar.svelte'
 	import NarrowNavbar from './narrow/NarrowNavbar.svelte'
+	import type { NavItem } from './navItems'
 
 	interface Props {
+		items: NavItem[]
 		inverted?: boolean
-		children?: import('svelte').Snippet
+		/** Trailing controls (language switcher, search) rendered after the wide menu. */
+		extras?: import('svelte').Snippet
+		/** Controls rendered at the bottom of the narrow (mobile) panel.
+		 *  Receives a callback that closes the panel. */
+		panelExtras?: import('svelte').Snippet<[() => void]>
 	}
 
-	let { inverted = false, children }: Props = $props()
+	let { items, inverted = false, extras, panelExtras }: Props = $props()
 </script>
 
 <div class="wide-navbar">
-	<WideNavbar {inverted}>
-		{@render children?.()}
-	</WideNavbar>
+	<WideNavbar {items} {inverted} {extras} />
 </div>
 <div class="narrow-navbar">
-	<NarrowNavbar {inverted}>
-		{@render children?.()}
-	</NarrowNavbar>
+	<NarrowNavbar {items} {inverted} {panelExtras} />
 </div>
 
 <style>

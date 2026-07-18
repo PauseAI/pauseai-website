@@ -151,11 +151,8 @@ export const actions: Actions = {
 			fields['Phone'] = getString(data, 'phone')
 			fields['Languages'] = languages
 			fields['Other languages'] = getString(data, 'languages_other')
-			// The post-cleanup Discovery field is a multipleSelects (legacy comma
-			// combos restored losslessly); the form asks single-choice, so write
-			// a one-element array.
 			if (discovery) {
-				fields['Discovery method of PAI'] = [discovery]
+				fields['Discovery method of PAI'] = discovery
 			}
 			fields['Discovery method of PAI (Other)'] = getString(data, 'discovery_specify')
 			fields['Motivation'] = motivations
@@ -165,6 +162,7 @@ export const actions: Actions = {
 			fields['Projected weekly hours'] = hours
 			fields['Volunteer Agreement'] = true
 			fields['Code of Conduct agreed'] = true
+			fields['Paying Interest'] = data.get('become_paying_member') === 'on'
 
 			if (country === 'United States') {
 				fields['Zip code'] = getString(data, 'zip_code')
@@ -180,14 +178,14 @@ export const actions: Actions = {
 			if (recordId) {
 				const updated = await updateRecord(AIRTABLE_BASE_ID, MEMBERS_TABLE_ID, recordId, fields)
 				if (!updated) {
-					return fail(502, { message: "Sorry, we couldn't save your details. Please try again." })
+					return fail(502, { message: 'Sorry, we could not save your details. Please try again.' })
 				}
 			} else {
 				recordId = await createRecord(AIRTABLE_BASE_ID, MEMBERS_TABLE_ID, fields)
 				// A failed write returns undefined; surface it instead of telling
 				// the user they're signed up when no record was created.
 				if (!recordId) {
-					return fail(502, { message: "Sorry, we couldn't save your details. Please try again." })
+					return fail(502, { message: 'Sorry, we could not save your details. Please try again.' })
 				}
 				// Subscription happens on the initial (step 2) submission only;
 				// the volunteer-form update never re-subscribes.

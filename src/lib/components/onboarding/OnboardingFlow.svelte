@@ -14,25 +14,25 @@
 	import type { NationalGroupsApiResponse } from '$api/national-groups/+server.js'
 	import type { OnboardingModeApiResponse } from '$api/onboarding-mode/+server.js'
 	import { toast } from 'svelte-french-toast'
-	import Link from '$lib/components/Link.svelte'
 	import LinkWithoutIcon from '$lib/components/LinkWithoutIcon.svelte'
 	import Socials from '$lib/components/Socials.svelte'
 	import Combobox from '$lib/components/Combobox.svelte'
 	import ActionCards from './ActionCards.svelte'
 	import Stepper from './Stepper.svelte'
+	import { getMessages } from './i18n.svelte'
 	import {
 		COUNTRIES,
 		COUNTRY_DIAL_CODES,
-		DISCOVERY_OPTIONS,
 		DISCOVERY_SPECIFY_TRIGGERS,
 		LANGUAGES,
-		MOTIVATIONS,
-		SKILLS,
-		WEEKLY_HOURS,
-		type Intent
+		getDiscoveryOptions,
+		getMotivations,
+		getSkills,
+		getWeeklyHours,
+		getIntentOptions,
+		type Intent,
+		type IntentKey
 	} from './options'
-
-	type IntentKey = 'act-now' | 'volunteer' | 'lead'
 
 	const INTENT_VALUES: Record<IntentKey, Intent> = {
 		'act-now': 'Act now',
@@ -40,31 +40,18 @@
 		lead: 'Lead'
 	}
 
-	const intentOptions: { key: IntentKey; icon: string; label: string; sub: string }[] = [
-		{
-			key: 'act-now',
-			icon: '✊',
-			label: 'I just want to take action now',
-			sub: 'Show me what I can do today.'
-		},
-		{
-			key: 'volunteer',
-			icon: '🤝',
-			label: 'I want to volunteer regularly',
-			sub: 'Help me find a role that fits.'
-		},
-		{
-			key: 'lead',
-			icon: '🚀',
-			label: 'I want to lead',
-			sub: "I'm ready to organize in my country or region."
-		}
-	]
+	const msgs = $derived(getMessages())
+	const intentOptions = $derived(getIntentOptions(msgs))
 
 	let {
-		initialEmail = '',
-		initialCountry = ''
-	}: { initialEmail?: string; initialCountry?: string } = $props()
+		initialCountry = '',
+		initialCity = '',
+		initialLanguages = [] as string[]
+	}: {
+		initialCountry?: string
+		initialCity?: string
+		initialLanguages?: string[]
+	} = $props()
 
 	// Surface stub/live mode in the browser console when the form loads. The
 	// pages embedding the form can be prerendered (e.g. /join), so the runtime
@@ -113,17 +100,22 @@
 	// volunteer form, which pre-fills from the same state)
 	let basics = $state({
 		fullName: '',
-		email: initialEmail,
+		email: '',
 		country: initialCountry,
-		city: '',
+		city: initialCity,
 		newsletter: false
 	})
+
+	const validLanguageStored = new Set(LANGUAGES.map((l) => l.stored))
+	const filteredInitialLanguages = initialLanguages.filter((l) => validLanguageStored.has(l))
+	const defaultLanguages =
+		filteredInitialLanguages.length > 0 ? filteredInitialLanguages : ['English']
 
 	// Volunteer form (path C)
 	let volunteer = $state({
 		discordUsername: '',
 		phone: '',
-		languages: ['English'],
+		languages: defaultLanguages,
 		languagesOther: '',
 		discovery: '',
 		discoverySpecify: '',
@@ -136,6 +128,17 @@
 	})
 
 	let agreements = $state({ volunteer: false, conduct: false })
+
+	// Stripe payment link used when a volunteer opts in to becoming a paying
+	// member on the volunteer step. Same link as /submitted uses.
+	const STRIPE_PAYMENT_LINK = 'https://donate.stripe.com/6oU14n1RD0So1oGftCd7q01'
+
+	// Volunteer step: optional opt-in to become a paying member. When checked,
+	// the success handler opens Stripe in a new tab (prefilled with the email
+	// and the Airtable record id as client_reference_id, mirroring the legacy
+	// Tally form's query params) and advances to the confirmation step so the
+	// user stays in the flow.
+	let becomePayingMember = $state(false)
 
 	// GDPR data-processing consent gating every record-creating submission
 	// (step 2 + browse). Chapter-sharing consent is not bundled here: it lives
@@ -173,10 +176,15 @@
 
 	const stepperLabels = $derived(
 		intent === 'volunteer'
-			? ['About you', 'Intent', 'Volunteer form', 'Confirmed']
+			? [
+					msgs.onboarding_step_about,
+					msgs.onboarding_step_intent,
+					msgs.onboarding_step_volunteer_form,
+					msgs.onboarding_step_confirmed
+				]
 			: intent === 'lead'
-				? ['About you', 'Intent', 'Next steps']
-				: ['About you', 'Intent', 'Confirmed']
+				? [msgs.onboarding_step_about, msgs.onboarding_step_intent, msgs.onboarding_step_next_steps]
+				: [msgs.onboarding_step_about, msgs.onboarding_step_intent, msgs.onboarding_step_confirmed]
 	)
 
 	// Lead path: if the country already has a chapter, offer regional/city
@@ -235,9 +243,18 @@
 		step = 2
 	}
 
-	function submitWith(onSuccess: (data?: Record<string, unknown>) => void): SubmitFunction {
+	function submitWith<T>(
+		onStart: () => T,
+		onSuccess: (data: Record<string, unknown> | undefined, startValue: T) => void
+	): SubmitFunction {
 		return () => {
 			submitting = true
+			// Run the start callback synchronously, inside the user gesture,
+			// so callers can do things that require a gesture (e.g. opening a
+			// popup window before an async fetch resolves). The returned value
+			// is passed to onSuccess so it can act on it (e.g. navigate the
+			// already-opened popup to its final URL once the record id is known).
+			const startValue = onStart()
 			return ({ result }) => {
 				submitting = false
 				if (result.type === 'success') {
@@ -246,11 +263,11 @@
 					if (typeof result.data?.recordId === 'string') {
 						recordId = result.data.recordId
 					}
-					onSuccess(result.data)
+					onSuccess(result.data, startValue)
 				} else if (result.type === 'failure') {
-					toast.error(String(result.data?.message ?? 'Something went wrong. Please try again.'))
+					toast.error(String(result.data?.message ?? msgs.onboarding_error_generic))
 				} else {
-					toast.error('An unexpected error occurred. Please try again.')
+					toast.error(msgs.onboarding_error_unexpected)
 				}
 			}
 		}
@@ -277,7 +294,7 @@
 		name="country"
 		options={COUNTRIES}
 		required
-		placeholder="Select your country"
+		placeholder={msgs.onboarding_placeholder_country}
 		bind:value={basics.country}
 	/>
 {/snippet}
@@ -292,21 +309,25 @@
 	{/if}
 {/snippet}
 
-{#snippet selectCards(name: string, options: string[], selectedList: string[])}
+{#snippet selectCards(
+	name: string,
+	options: { value: string; label: string }[],
+	selectedList: string[]
+)}
 	<div class="select-card-grid">
-		{#each options as option (option)}
+		{#each options as option (option.value)}
 			<button
 				type="button"
 				class="select-card"
-				class:selected={selectedList.includes(option)}
+				class:selected={selectedList.includes(option.value)}
 				role="checkbox"
-				aria-checked={selectedList.includes(option)}
-				onclick={() => toggleIn(selectedList, option)}
+				aria-checked={selectedList.includes(option.value)}
+				onclick={() => toggleIn(selectedList, option.value)}
 			>
 				<span class="checkbox-box" aria-hidden="true">
-					{selectedList.includes(option) ? '✓' : ''}
+					{selectedList.includes(option.value) ? '✓' : ''}
 				</span>
-				{option}
+				{option.label}
 			</button>
 		{/each}
 	</div>
@@ -321,13 +342,13 @@
 			{#if keepInformed}
 				<li>
 					<span class="confirm-tick" aria-hidden="true">✓</span>
-					We'll connect you with your local PauseAI chapter and keep you updated on global campaigns.
+					{msgs.onboarding_confirm_keep_informed}
 				</li>
 			{/if}
 			{#if basics.newsletter}
 				<li>
 					<span class="confirm-tick" aria-hidden="true">✓</span>
-					You're subscribed to our Substack newsletter for general news on AI.
+					{msgs.onboarding_confirm_newsletter}
 				</li>
 			{/if}
 		</ul>
@@ -338,35 +359,28 @@
 	<label class="agreement">
 		<input type="checkbox" name="agree_gdpr" required bind:checked={gdprConsent} />
 		<span class="checkbox-box" aria-hidden="true"></span>
-		<span>
-			I agree to the <Link href="/privacy">Privacy Policy</Link>, including sharing my details with
-			my local PauseAI chapter (which may be a separate entity to PauseAI Global) for local
-			coordination.&nbsp;*
-		</span>
+		<!-- eslint-disable-next-line svelte/no-at-html-tags -->
+		<span>{@html msgs.onboarding_gdpr_consent}</span>
 	</label>
 {/snippet}
 
 {#snippet nextStepBlock()}
 	<div class="next-step">
-		<h3>★ Recommended next step</h3>
-		<p>
-			Join one of our Member Community Welcome Meetings, or a local social event, to find out more
-			about PauseAI's community: <Link href="/communities#events">see upcoming events</Link>.
-		</p>
-		<p>
-			Want to get kick-started into action straight away? Check out our
-			<Link href="/action">list of actions</Link>.
-		</p>
+		<h3>{msgs.onboarding_next_step_title}</h3>
+		<!-- eslint-disable-next-line svelte/no-at-html-tags -->
+		<p>{@html msgs.onboarding_next_step_p1}</p>
+		<!-- eslint-disable-next-line svelte/no-at-html-tags -->
+		<p>{@html msgs.onboarding_next_step_p2}</p>
 	</div>
 {/snippet}
 
 {#snippet confirmationFooter()}
 	<div class="confirmation-footer">
-		<p class="section-label">Join the conversation</p>
+		<p class="section-label">{msgs.onboarding_footer_join_conversation}</p>
 		<LinkWithoutIcon class="discord-button" href="https://discord.gg/2XXWXvErfA" target="_blank">
-			Join PauseAI on Discord
+			{msgs.onboarding_footer_discord_btn}
 		</LinkWithoutIcon>
-		<p class="section-label">Follow us</p>
+		<p class="section-label">{msgs.onboarding_footer_follow_us}</p>
 		<Socials />
 	</div>
 {/snippet}
@@ -374,8 +388,7 @@
 <div class="onboarding-flow" bind:this={flowEl}>
 	{#if mode === 'browse' && !browseSignedUp}
 		<div class="browse-banner">
-			You're browsing without signing up, leave your email below so we can tell you when new
-			opportunities go live.
+			{msgs.onboarding_browse_banner}
 		</div>
 	{/if}
 
@@ -388,55 +401,55 @@
 			<!-- Step 1: basic info -->
 			<form onsubmit={continueToIntent}>
 				<div class="field">
-					<label class="field-label" for="ob-name">Full name *</label>
+					<label class="field-label" for="ob-name">{msgs.onboarding_field_full_name}</label>
 					<input
 						type="text"
 						id="ob-name"
 						required
-						placeholder="Full name"
+						placeholder={msgs.onboarding_placeholder_full_name}
 						autocomplete="name"
 						bind:value={basics.fullName}
 					/>
 				</div>
 				{@render honeypotField('ob-nickname')}
 				<div class="field">
-					<label class="field-label" for="ob-email">Email *</label>
+					<label class="field-label" for="ob-email">{msgs.onboarding_field_email}</label>
 					<input
 						type="email"
 						id="ob-email"
 						required
-						placeholder="Email"
+						placeholder={msgs.onboarding_placeholder_email}
 						autocomplete="email"
 						bind:value={basics.email}
 					/>
-					<p class="helper">Preferably Gmail if you have one.</p>
+					<p class="helper">{msgs.onboarding_helper_email_gmail}</p>
 					<!-- <p class="helper">
 						We may contact you about critical mobilizations, see our
 						<Link href="/privacy">privacy policy</Link>.
 					</p> -->
 				</div>
 				<div class="field">
-					<label class="field-label" for="ob-country">Country of residence *</label>
+					<label class="field-label" for="ob-country">{msgs.onboarding_field_country}</label>
 					{@render countrySelect('ob-country')}
 				</div>
 				<div class="field">
-					<label class="field-label" for="ob-city">City / town of residence *</label>
+					<label class="field-label" for="ob-city">{msgs.onboarding_field_city}</label>
 					<input
 						type="text"
 						id="ob-city"
 						required
-						placeholder="City / town"
+						placeholder={msgs.onboarding_placeholder_city}
 						autocomplete="address-level2"
 						bind:value={basics.city}
 					/>
 				</div>
-				<button type="submit" class="primary">Continue →</button>
+				<button type="submit" class="primary">{msgs.onboarding_btn_continue}</button>
 				<div class="browse-option">
 					<button type="button" class="secondary" onclick={startBrowse}>
-						👀 I just want to take action now
+						{msgs.onboarding_btn_browse}
 					</button>
 					<p class="helper centered">
-						Skip ahead to see the actions you can take today, no email required.
+						{msgs.onboarding_browse_helper}
 					</p>
 				</div>
 			</form>
@@ -445,7 +458,10 @@
 			<form
 				method="POST"
 				action="/embed/onboarding-form?/submit"
-				use:enhance={submitWith(() => (step = 3))}
+				use:enhance={submitWith(
+					() => {},
+					() => (step = 3)
+				)}
 			>
 				{@render hiddenBasics()}
 				{@render honeypotField('ob-nickname-2')}
@@ -461,7 +477,7 @@
 				{#if keepInformed}
 					<input type="hidden" name="keep_informed" value="on" />
 				{/if}
-				<h2>What brings you here?</h2>
+				<h2>{msgs.onboarding_step2_heading}</h2>
 				<div class="intent-grid">
 					<button
 						type="button"
@@ -477,9 +493,9 @@
 							</span>
 							🔔
 						</span>
-						<span class="intent-label">Keep me informed</span>
+						<span class="intent-label">{msgs.onboarding_intent_keep_informed_label}</span>
 						<span class="intent-sub">
-							Connect me with my local PauseAI chapter, and keep me updated on global campaigns.
+							{msgs.onboarding_intent_keep_informed_sub}
 						</span>
 					</button>
 					<button
@@ -496,13 +512,13 @@
 							</span>
 							📰
 						</span>
-						<span class="intent-label">Subscribe to our Substack</span>
+						<span class="intent-label">{msgs.onboarding_intent_newsletter_label}</span>
 						<span class="intent-sub">
-							General news on AI, delivered via our Substack newsletter.
+							{msgs.onboarding_intent_newsletter_sub}
 						</span>
 					</button>
 				</div>
-				<p class="section-label">Want to do more? (optional)</p>
+				<p class="section-label">{msgs.onboarding_intent_more_optional}</p>
 				<div class="intent-stack" role="radiogroup" aria-label="Want to do more?">
 					{#each intentOptions as option (option.key)}
 						<button
@@ -531,18 +547,20 @@
 					disabled={(!intent && !keepInformed && !basics.newsletter) || !gdprConsent || submitting}
 				>
 					{submitting
-						? 'Submitting...'
+						? msgs.onboarding_btn_submitting
 						: intent === 'volunteer' || intent === 'lead'
-							? 'Continue →'
-							: 'Submit →'}
+							? msgs.onboarding_btn_continue
+							: msgs.onboarding_btn_submit}
 				</button>
-				<button type="button" class="back" onclick={() => (step = 1)}>← Back</button>
+				<button type="button" class="back" onclick={() => (step = 1)}
+					>{msgs.onboarding_btn_back}</button
+				>
 			</form>
 		{:else if step === 3 && !intent}
 			<!-- Path A: confirmation -->
 			<div class="confirmation">
 				<div class="checkmark">✓</div>
-				<h2>You're in.</h2>
+				<h2>{msgs.onboarding_confirm_a_title}</h2>
 				{@render checkboxConfirmations()}
 				{@render nextStepBlock()}
 				{@render confirmationFooter()}
@@ -552,54 +570,55 @@
 			{#if mode === 'contact'}
 				<div class="confirmation">
 					<div class="checkmark">✓</div>
-					<h2>You're in, thanks for joining us.</h2>
-					<p>You're all set. Here are a few ways to make a difference today.</p>
+					<h2>{msgs.onboarding_confirm_b_title}</h2>
+					<p>{msgs.onboarding_confirm_b_sub}</p>
 					{@render checkboxConfirmations()}
 				</div>
 			{:else}
 				<div class="browse-header">
-					<h2>Take action right now.</h2>
+					<h2>{msgs.onboarding_browse_header_title}</h2>
 					<p>
-						Below are some actions you can take right now. The best way to stay informed about new
-						opportunities is to sign up below.
+						{msgs.onboarding_browse_header_sub}
 					</p>
 				</div>
 				{#if browseSignedUp}
 					<div class="inline-confirmation">
-						✓ You're in. We'll connect you with your local PauseAI chapter and keep you updated on
-						global campaigns.
+						{msgs.onboarding_browse_signed_up}
 					</div>
 				{:else}
 					<div class="keep-informed">
-						<h3>Keep me informed</h3>
-						<p>Connect me with my local PauseAI chapter and keep me updated on global campaigns.</p>
+						<h3>{msgs.onboarding_browse_keep_informed_title}</h3>
+						<p>{msgs.onboarding_browse_keep_informed_sub}</p>
 						<form
 							method="POST"
 							action="/embed/onboarding-form?/submit"
-							use:enhance={submitWith(() => (browseSignedUp = true))}
+							use:enhance={submitWith(
+								() => {},
+								() => (browseSignedUp = true)
+							)}
 						>
 							{@render honeypotField('ob-nickname-3')}
 							<input type="hidden" name="mode" value="browse" />
 							<input type="hidden" name="intent" value="Act now" />
 							<input type="hidden" name="keep_informed" value="on" />
 							<div class="field">
-								<label class="field-label" for="loop-name">Full name *</label>
+								<label class="field-label" for="loop-name">{msgs.onboarding_field_full_name}</label>
 								<input
 									type="text"
 									id="loop-name"
 									required
-									placeholder="Full name"
+									placeholder={msgs.onboarding_placeholder_full_name}
 									autocomplete="name"
 									bind:value={basics.fullName}
 								/>
 							</div>
 							<div class="field">
-								<label class="field-label" for="loop-email">Email *</label>
+								<label class="field-label" for="loop-email">{msgs.onboarding_field_email}</label>
 								<input
 									type="email"
 									id="loop-email"
 									required
-									placeholder="Email"
+									placeholder={msgs.onboarding_placeholder_email}
 									autocomplete="email"
 									bind:value={basics.email}
 								/>
@@ -609,40 +628,53 @@
 								</p> -->
 							</div>
 							<div class="field">
-								<label class="field-label" for="loop-country">Country of residence *</label>
+								<label class="field-label" for="loop-country">{msgs.onboarding_field_country}</label
+								>
 								{@render countrySelect('loop-country')}
 							</div>
 							<div class="field">
-								<label class="field-label" for="loop-city">City / town of residence *</label>
+								<label class="field-label" for="loop-city">{msgs.onboarding_field_city}</label>
 								<input
 									type="text"
 									id="loop-city"
 									required
-									placeholder="City / town"
+									placeholder={msgs.onboarding_placeholder_city}
 									autocomplete="address-level2"
 									bind:value={basics.city}
 								/>
 							</div>
 							{@render gdprConsentField()}
 							<button type="submit" class="primary" disabled={!gdprConsent || submitting}>
-								{submitting ? 'Signing up...' : 'Sign me up →'}
+								{submitting ? msgs.onboarding_btn_signing_up : msgs.onboarding_btn_sign_me_up}
 							</button>
 						</form>
 					</div>
 				{/if}
-				<p class="section-label">A few ways to help today</p>
+				<p class="section-label">{msgs.onboarding_section_ways_to_help}</p>
 			{/if}
 			<ActionCards />
 			{@render confirmationFooter()}
 		{:else if step === 3 && intent === 'volunteer'}
 			<!-- Path C: native volunteer form -->
-			<h2>Sign up to volunteer</h2>
-			<p class="path-intro">Tell us a bit about yourself so we can find a role that fits.</p>
+			<h2>{msgs.onboarding_volunteer_title}</h2>
+			<p class="path-intro">{msgs.onboarding_volunteer_intro}</p>
 			{@render checkboxConfirmations()}
 			<form
 				method="POST"
 				action="/embed/onboarding-form?/submit"
-				use:enhance={submitWith(() => (step = 4))}
+				use:enhance={submitWith(
+					() => (becomePayingMember ? window.open('', '_blank') : null),
+					(_, popup) => {
+						if (becomePayingMember && popup) {
+							const params = new URLSearchParams({
+								prefilled_email: basics.email,
+								client_reference_id: recordId
+							})
+							popup.location.href = `${STRIPE_PAYMENT_LINK}?${params.toString()}`
+						}
+						step = 4
+					}
+				)}
 			>
 				{@render honeypotField('ob-nickname-4')}
 				<input type="hidden" name="mode" value="contact" />
@@ -657,40 +689,38 @@
 				{@render hiddenBasics()}
 				{#if basics.country === 'United States'}
 					<div class="field">
-						<label class="field-label" for="vol-zip">Zip code</label>
+						<label class="field-label" for="vol-zip">{msgs.onboarding_field_zip}</label>
 						<input
 							type="text"
 							id="vol-zip"
 							name="zip_code"
 							inputmode="numeric"
 							maxlength="5"
-							placeholder="e.g. 02134"
+							placeholder={msgs.onboarding_placeholder_zip}
 							bind:value={volunteer.zipCode}
 						/>
-						<p class="helper">Your 5-digit zip code is used to find your Local Group.</p>
+						<p class="helper">{msgs.onboarding_helper_zip}</p>
 					</div>
 				{/if}
 				<div class="field">
-					<label class="field-label" for="vol-discord">Discord username</label>
+					<label class="field-label" for="vol-discord">{msgs.onboarding_field_discord}</label>
 					<input
 						type="text"
 						id="vol-discord"
 						name="discord_username"
 						bind:value={volunteer.discordUsername}
 					/>
-					<p class="helper">
-						If you don't have a Discord account, we encourage you to
-						<Link href="https://discord.com/register">create one here</Link>.
-					</p>
+					<!-- eslint-disable-next-line svelte/no-at-html-tags -->
+					<p class="helper">{@html msgs.onboarding_helper_discord}</p>
 				</div>
 				<div class="field">
-					<label class="field-label" for="vol-phone">Phone number</label>
+					<label class="field-label" for="vol-phone">{msgs.onboarding_field_phone}</label>
 					<div class="phone-row">
 						<input
 							type="text"
 							class="dial-code"
 							aria-label="International dialing code"
-							placeholder="+44"
+							placeholder={msgs.onboarding_placeholder_dial_code}
 							bind:value={dialCode}
 							oninput={() => (dialCodeEdited = true)}
 						/>
@@ -698,99 +728,99 @@
 							type="tel"
 							id="vol-phone"
 							class="phone-number"
-							placeholder="07123 456789"
+							placeholder={msgs.onboarding_placeholder_phone}
 							bind:value={volunteer.phone}
 						/>
 					</div>
 					<input type="hidden" name="phone" value={fullPhone} />
 				</div>
 				<div class="field">
-					<label class="field-label" for="vol-languages">What languages do you speak? *</label>
+					<label class="field-label" for="vol-languages">{msgs.onboarding_field_languages}</label>
 					<Combobox
 						id="vol-languages"
 						name="languages"
 						options={languageOptions}
 						multiple
 						required
-						placeholder="Select languages"
+						placeholder={msgs.onboarding_placeholder_languages}
 						bind:value={volunteer.languages}
 					/>
 					{#if volunteer.languages.includes('Other')}
 						<input
 							type="text"
 							name="languages_other"
-							placeholder="Please specify"
-							aria-label="Other languages, please specify"
+							placeholder={msgs.onboarding_placeholder_specify}
+							aria-label={msgs.onboarding_placeholder_specify}
 							bind:value={volunteer.languagesOther}
 						/>
 					{/if}
 				</div>
 				<div class="field">
-					<label class="field-label" for="vol-discovery">How did you find out about PauseAI?</label>
+					<label class="field-label" for="vol-discovery">{msgs.onboarding_field_discovery}</label>
 					<select id="vol-discovery" name="discovery" bind:value={volunteer.discovery}>
-						<option value="">Select an option</option>
-						{#each DISCOVERY_OPTIONS as option (option)}
-							<option value={option}>{option}</option>
+						<option value="">{msgs.onboarding_placeholder_discovery}</option>
+						{#each getDiscoveryOptions(msgs) as option (option.value)}
+							<option value={option.value}>{option.label}</option>
 						{/each}
 					</select>
 					{#if showDiscoverySpecify}
 						<input
 							type="text"
 							name="discovery_specify"
-							placeholder="Please specify"
+							placeholder={msgs.onboarding_placeholder_specify}
 							aria-label="How you found out about PauseAI, please specify"
 							bind:value={volunteer.discoverySpecify}
 						/>
 					{/if}
 				</div>
 				<div class="field">
-					<span class="field-label" id="vol-motivations-label">What motivated you to join?</span>
+					<span class="field-label" id="vol-motivations-label"
+						>{msgs.onboarding_field_motivations}</span
+					>
 					<div role="group" aria-labelledby="vol-motivations-label">
-						{@render selectCards('motivations', MOTIVATIONS, volunteer.motivations)}
+						{@render selectCards('motivations', getMotivations(msgs), volunteer.motivations)}
 					</div>
 					{#if volunteer.motivations.includes('Other')}
 						<input
 							type="text"
 							name="motivations_other"
-							placeholder="Please specify"
+							placeholder={msgs.onboarding_placeholder_specify}
 							aria-label="Other motivation, please specify"
 							bind:value={volunteer.motivationsOther}
 						/>
 					{/if}
 				</div>
 				<div class="field">
-					<span class="field-label" id="vol-skills-label">Skills & interests</span>
+					<span class="field-label" id="vol-skills-label">{msgs.onboarding_field_skills}</span>
 					<div role="group" aria-labelledby="vol-skills-label">
-						{@render selectCards('skills', SKILLS, volunteer.skills)}
+						{@render selectCards('skills', getSkills(msgs), volunteer.skills)}
 					</div>
 					{#if volunteer.skills.includes('Other')}
 						<input
 							type="text"
 							name="skills_other"
-							placeholder="Please specify"
+							placeholder={msgs.onboarding_placeholder_specify}
 							aria-label="Other skills, please specify"
 							bind:value={volunteer.skillsOther}
 						/>
 					{/if}
 				</div>
 				<div class="field">
-					<span class="field-label" id="vol-hours-label"
-						>How much time can you commit weekly? *</span
-					>
+					<span class="field-label" id="vol-hours-label">{msgs.onboarding_field_hours}</span>
 					<div class="select-card-grid" role="radiogroup" aria-labelledby="vol-hours-label">
-						{#each WEEKLY_HOURS as option (option)}
+						{#each getWeeklyHours(msgs) as option (option.value)}
 							<button
 								type="button"
 								class="select-card"
-								class:selected={volunteer.hours === option}
+								class:selected={volunteer.hours === option.value}
 								role="radio"
-								aria-checked={volunteer.hours === option}
-								onclick={() => (volunteer.hours = option)}
+								aria-checked={volunteer.hours === option.value}
+								onclick={() => (volunteer.hours = option.value)}
 							>
-								<span class="checkbox-box" aria-hidden="true">
-									{volunteer.hours === option ? '✓' : ''}
+								<span class="radio-box" aria-hidden="true">
+									<span class="radio-dot"></span>
 								</span>
-								{option}
+								{option.label}
 							</button>
 						{/each}
 					</div>
@@ -804,121 +834,95 @@
 						bind:checked={agreements.volunteer}
 					/>
 					<span class="checkbox-box" aria-hidden="true"></span>
-					<span
-						>I agree with the <Link href="/volunteer-agreement">Volunteer Agreement</Link
-						>&nbsp;*</span
-					>
+					<!-- eslint-disable-next-line svelte/no-at-html-tags -->
+					<span>{@html msgs.onboarding_agree_volunteer}</span>
 				</label>
 				<label class="agreement">
 					<input type="checkbox" name="agree_conduct" required bind:checked={agreements.conduct} />
 					<span class="checkbox-box" aria-hidden="true"></span>
-					<span>I agree with the <Link href="/code-of-conduct">Code of Conduct</Link>&nbsp;*</span>
+					<!-- eslint-disable-next-line svelte/no-at-html-tags -->
+					<span>{@html msgs.onboarding_agree_conduct}</span>
 				</label>
-				<button type="submit" class="primary" disabled={!volunteerFormComplete || submitting}>
-					{submitting ? 'Submitting...' : 'Submit →'}
-				</button>
-				<button type="button" class="back" onclick={() => (step = 2)}>← Back</button>
+				<label class="agreement">
+					<input type="checkbox" name="become_paying_member" bind:checked={becomePayingMember} />
+					<span class="checkbox-box" aria-hidden="true"></span>
+					<!-- eslint-disable-next-line svelte/no-at-html-tags -->
+					<span>{@html msgs.onboarding_become_paying_member}</span>
+				</label>
+				<div class="submit-group">
+					<button type="submit" class="primary" disabled={!volunteerFormComplete || submitting}>
+						{submitting ? msgs.onboarding_btn_submitting : msgs.onboarding_btn_submit}
+					</button>
+					{#if becomePayingMember}
+						<p class="submit-disclaimer">{msgs.onboarding_become_paying_member_disclaimer}</p>
+					{/if}
+				</div>
+				<button type="button" class="back" onclick={() => (step = 2)}
+					>{msgs.onboarding_btn_back}</button
+				>
 			</form>
 		{:else if step === 3 && intent === 'lead'}
 			<!-- Path D: lead -->
-			<h2>{leadRole} Volunteer Description</h2>
-			<p class="role-meta"><em>Part-time volunteer role · 5–15 hours/week</em></p>
+			<h2>{msgs.onboarding_lead_title(leadRole)}</h2>
+			<p class="role-meta"><em>{msgs.onboarding_lead_meta}</em></p>
 			{@render checkboxConfirmations()}
 			<div class="role-description">
-				<p>
-					Pause AI Global is looking for leaders around the world to run local groups that lead
-					organising efforts in their area. This is a part-time volunteer role requiring 5-15 hours
-					per week. Each group leader will be responsible for planning direct actions, mobilising
-					volunteers and coordinating with the Global PauseAI team.
-				</p>
+				<p>{msgs.onboarding_lead_intro}</p>
 				{#if basics.country === 'United States'}
-					<p>
-						Since you're based in the <strong>United States</strong>, please apply through PauseAI
-						US:
-						<Link href="https://form.asana.com/?k=RxWuTz8SYKME33V5nBvK1A&d=1208505553897008">
-							PauseAI US application form
-						</Link>.
-					</p>
+					<!-- eslint-disable-next-line svelte/no-at-html-tags -->
+					<p>{@html msgs.onboarding_lead_us_branch}</p>
 				{:else if countryHasChapter}
-					<p>
-						<strong>{basics.country} already has a PauseAI chapter</strong>, so rather than founding
-						a national group, you could lead a regional or city group within it. Find your chapter
-						at
-						<Link href="/communities">pauseai.info/communities</Link>, or email our Organizing
-						Director below to talk it through.
-					</p>
+					<!-- eslint-disable-next-line svelte/no-at-html-tags -->
+					<p>{@html msgs.onboarding_lead_has_chapter(basics.country)}</p>
 				{:else}
-					<p>
-						<strong>First, check that your country doesn't already have a chapter:</strong>
-						<Link href="/communities">pauseai.info/communities</Link>.
-					</p>
+					<!-- eslint-disable-next-line svelte/no-at-html-tags -->
+					<p>{@html msgs.onboarding_lead_check_chapter}</p>
 				{/if}
-				<h3>What you'll do</h3>
+				<h3>{msgs.onboarding_lead_what_you_do_title}</h3>
 				<ul>
-					<li>
-						Recruit and grow your local group by welcoming new volunteers and organising events
-						together.
-					</li>
-					<li>Build relationships with local activist groups and journalists.</li>
-					<li>
-						Meet monthly with PauseAI's Global team to swap ideas and stay coordinated with the
-						global strategy and quarterly campaigns.
-					</li>
-					<li>Share what your chapter is up to on social media and help promote events.</li>
+					<li>{msgs.onboarding_lead_do_1}</li>
+					<li>{msgs.onboarding_lead_do_2}</li>
+					<li>{msgs.onboarding_lead_do_3}</li>
+					<li>{msgs.onboarding_lead_do_4}</li>
 				</ul>
-				<h3>What we're looking for</h3>
+				<h3>{msgs.onboarding_lead_looking_for_title}</h3>
 				<ul>
-					<li>
-						Ability to plan and execute direct actions, including workshops and public events.
-					</li>
-					<li>Excellent communication skills, eager and able to engage diverse communities.</li>
-					<li>Self-motivated, with the ability to work independently and as part of a team.</li>
-					<li>Passion for AI safety and alignment with PauseAI’s mission.</li>
-					<li>Comfortable communicating in English</li>
-					<li>Adhere and practice to a non-violent, legal approach.</li>
+					<li>{msgs.onboarding_lead_looking_1}</li>
+					<li>{msgs.onboarding_lead_looking_2}</li>
+					<li>{msgs.onboarding_lead_looking_3}</li>
+					<li>{msgs.onboarding_lead_looking_4}</li>
+					<li>{msgs.onboarding_lead_looking_5}</li>
+					<li>{msgs.onboarding_lead_looking_6}</li>
 				</ul>
-				<h3>What would be nice to have</h3>
+				<h3>{msgs.onboarding_lead_nice_to_have_title}</h3>
 				<ul>
-					<li>Strong organising skills and experience in grassroots activism.</li>
-					<li>Lobbying skills and policymaker engagement experience</li>
-					<li>Media and content writing experience</li>
+					<li>{msgs.onboarding_lead_nice_1}</li>
+					<li>{msgs.onboarding_lead_nice_2}</li>
+					<li>{msgs.onboarding_lead_nice_3}</li>
 				</ul>
-				<p>
-					If you do not meet all of the requirements, we still want to hear from you. The commitment
-					to AI Safety and the belief we can make an impact is the most important factor; we can
-					provide training, resources and a community to lean on.
-				</p>
-				<h3>Support you'll get</h3>
-				<p>
-					You'll join a global network of organisers who are all figuring this out together. We meet
-					monthly, share resources across our chat platforms and help each other troubleshoot. It's
-					a great way to learn new skills, meet thoughtful people and be part of a fast-growing
-					movement that's working on one of the most important issues of our time.
-				</p>
-				<h3>Next steps</h3>
-				<p>
-					If you’d like to learn more, please contact our PauseAI Global organising director Irina
-					Tavera at
-					<Link href="mailto:Irina@pauseai.info">Irina@pauseai.info</Link> to schedule an informal exploratory
-					chat.
-				</p>
+				<p>{msgs.onboarding_lead_imperfect}</p>
+				<h3>{msgs.onboarding_lead_support_title}</h3>
+				<p>{msgs.onboarding_lead_support}</p>
+				<h3>{msgs.onboarding_lead_next_steps_title}</h3>
+				<!-- eslint-disable-next-line svelte/no-at-html-tags -->
+				<p>{@html msgs.onboarding_lead_next_steps}</p>
 			</div>
 			<LinkWithoutIcon class="mailto-button" href={leadMailto}>
-				✉️ Email our Organizing Director
+				{msgs.onboarding_lead_email_btn}
 			</LinkWithoutIcon>
-			<p>Please let her know the following:</p>
+			<p>{msgs.onboarding_lead_please_mention}</p>
 			<ul class="bulleted">
-				<li>Your name</li>
-				<li>Your country of residence</li>
-				<li>A few sentences on why you’d like to become a lead</li>
+				<li>{msgs.onboarding_lead_mention_1}</li>
+				<li>{msgs.onboarding_lead_mention_2}</li>
+				<li>{msgs.onboarding_lead_mention_3}</li>
 			</ul>
 			{@render confirmationFooter()}
 		{:else if step === 4 && intent === 'volunteer'}
 			<!-- Path C: confirmation -->
 			<div class="confirmation">
 				<div class="checkmark">✓</div>
-				<h2>Welcome to the team.</h2>
-				<p>You're on the volunteer list. We'll be in touch soon.</p>
+				<h2>{msgs.onboarding_confirm_volunteer_title}</h2>
+				<p>{msgs.onboarding_confirm_volunteer_sub}</p>
 				{@render checkboxConfirmations()}
 				{@render nextStepBlock()}
 				{@render confirmationFooter()}
@@ -1088,6 +1092,19 @@
 		text-decoration: underline;
 	}
 
+	.submit-group {
+		display: flex;
+		flex-direction: column;
+		align-items: stretch;
+	}
+
+	.submit-disclaimer {
+		margin: 0.5rem 0 0;
+		text-align: center;
+		font-size: 0.85rem;
+		opacity: 0.7;
+	}
+
 	.intent-grid {
 		display: grid;
 		grid-template-columns: 1fr 1fr;
@@ -1170,12 +1187,14 @@
 		transition: background-color 0.15s;
 	}
 
-	.intent-option.selected .radio-box {
+	.intent-option.selected .radio-box,
+	.select-card.selected .radio-box {
 		border-color: var(--brand);
 		background-color: var(--brand);
 	}
 
-	.intent-option.selected .radio-dot {
+	.intent-option.selected .radio-dot,
+	.select-card.selected .radio-dot {
 		background-color: var(--bg);
 	}
 

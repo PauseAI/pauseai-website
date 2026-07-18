@@ -45,6 +45,7 @@
 
 	onMount(async () => {
 		document.documentElement.removeAttribute('data-waiting')
+		document.documentElement.setAttribute('data-hydrated', 'true')
 
 		const searchString = window.location.search
 		const response = await fetch('/api/geo' + searchString)

@@ -342,11 +342,16 @@
 
 	.option.highlighted {
 		background-color: var(--brand-subtle);
+		color: var(--bg);
 	}
 
 	.check {
 		color: var(--brand);
 		font-weight: 600;
+	}
+
+	.option.highlighted .check {
+		color: var(--bg);
 	}
 
 	.empty {
