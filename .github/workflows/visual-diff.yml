@@ -89,7 +89,9 @@ jobs:
         # quota for this project), rotatable from the Chromatic UI. See
         # https://www.chromatic.com/docs/github-actions/ for the full rationale
         # and any capability/scope details.
-        uses: chromaui/action@v16
+        # SHA-pinned (a mutable tag on an action that receives the project
+        # token could be moved to hostile code). Bump the SHA + comment together.
+        uses: chromaui/action@1bbb5819252d9782cb7d77122d9becae467def18 # v16
         with:
           playwright: true
           projectToken: chpt_cefd614c783fb5c

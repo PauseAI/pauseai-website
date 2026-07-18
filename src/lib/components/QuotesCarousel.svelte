@@ -82,8 +82,13 @@
 			Swipe
 		} = await import('@glidejs/glide/dist/glide.modular.esm')
 
+		// Auto-advancing on a timer is motion; skip it when the visitor asked for
+		// reduced motion. This also keeps timer-based visual-diff snapshots
+		// deterministic (Playwright runs with prefers-reduced-motion: reduce).
+		const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+
 		glide = new Glide('.glide', {
-			autoplay: AUTOPLAY_INTERVAL
+			autoplay: prefersReducedMotion ? false : AUTOPLAY_INTERVAL
 		})
 
 		glide.on('move', () => {
