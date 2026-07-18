@@ -598,4 +598,221 @@ const de: OnboardingMessages = {
 	onboarding_error_unexpected: 'Ein unerwarteter Fehler ist aufgetreten. Bitte versuche es erneut.'
 }
 
-export const onboardingMessages: Record<string, OnboardingMessages> = { en, de }
+const fr: OnboardingMessages = {
+	onboarding_page_title: 'Participer',
+	onboarding_page_description:
+		"Trouve le moyen le plus efficace pour toi d'aider à mettre en pause le développement de l'IA surhumaine.",
+	onboarding_browse_banner:
+		"Tu navigues sans t'inscrire. Laisse ton e-mail ci-dessous pour être informé·e des nouvelles opportunités.",
+	onboarding_field_full_name: 'Nom complet *',
+	onboarding_placeholder_full_name: 'Nom complet',
+	onboarding_field_email: 'E-mail *',
+	onboarding_placeholder_email: 'E-mail',
+	onboarding_helper_email_gmail: 'De préférence Gmail si tu en as un.',
+	onboarding_field_country: 'Pays de résidence *',
+	onboarding_placeholder_country: 'Sélectionne ton pays',
+	onboarding_field_city: 'Ville / commune de résidence *',
+	onboarding_placeholder_city: 'Ville / commune',
+	onboarding_btn_continue: 'Continuer →',
+	onboarding_btn_browse: '👀 Je veux juste agir maintenant',
+	onboarding_browse_helper:
+		"Passe directement aux actions que tu peux entreprendre aujourd'hui, sans e-mail requis.",
+	onboarding_step2_heading: "Qu'est-ce qui t'amène ici ?",
+	onboarding_intent_keep_informed_label: 'Me tenir informé·e',
+	onboarding_intent_keep_informed_sub:
+		'Me mettre en relation avec mon chapitre PauseAI local et me tenir informé·e des campagnes mondiales.',
+	onboarding_intent_newsletter_label: "S'abonner à notre Substack",
+	onboarding_intent_newsletter_sub:
+		"Actualités générales sur l'IA, livrées via notre newsletter Substack.",
+	onboarding_intent_more_optional: 'Tu veux en faire plus ? (facultatif)',
+	onboarding_intent_act_now_label: 'Je veux juste agir maintenant',
+	onboarding_intent_act_now_sub: "Montre-moi ce que je peux faire aujourd'hui.",
+	onboarding_intent_volunteer_label: 'Je veux être bénévole régulièrement',
+	onboarding_intent_volunteer_sub: 'Aide-moi à trouver un rôle qui me correspond.',
+	onboarding_intent_lead_label: 'Je veux prendre la tête',
+	onboarding_intent_lead_sub: 'Je suis prêt·e à organiser dans mon pays ou ma région.',
+	onboarding_gdpr_consent:
+		'J\'accepte la <a target="_blank" rel="noopener noreferrer" href="/privacy">Politique de confidentialité</a>, y compris le partage de mes données avec mon chapitre PauseAI local (qui peut être une entité distincte de PauseAI Global) à des fins de coordination locale.&nbsp;*',
+	onboarding_btn_submit: 'Envoyer →',
+	onboarding_btn_submitting: 'Envoi en cours...',
+	onboarding_btn_back: '← Retour',
+	onboarding_confirm_keep_informed:
+		'Nous te mettrons en relation avec ton chapitre PauseAI local et te tiendrons informé·e des campagnes mondiales.',
+	onboarding_confirm_newsletter:
+		"Tu es abonné·e à notre newsletter Substack pour les actualités générales sur l'IA.",
+	onboarding_confirm_a_title: "C'est fait.",
+	onboarding_confirm_b_title: "C'est fait, merci de nous rejoindre.",
+	onboarding_confirm_b_sub:
+		"Tout est prêt. Voici quelques moyens de faire la différence dès aujourd'hui.",
+	onboarding_confirm_volunteer_title: "Bienvenue dans l'équipe.",
+	onboarding_confirm_volunteer_sub:
+		'Tu es sur la liste des bénévoles. Nous te contacterons bientôt.',
+	onboarding_browse_header_title: 'Agis dès maintenant.',
+	onboarding_browse_header_sub:
+		"Voici quelques actions que tu peux entreprendre dès maintenant. Le meilleur moyen de rester informé·e des nouvelles opportunités est de t'inscrire ci-dessous.",
+	onboarding_browse_signed_up:
+		"✓ C'est fait. Nous te mettrons en relation avec ton chapitre PauseAI local et te tiendrons informé·e des campagnes mondiales.",
+	onboarding_browse_keep_informed_title: 'Me tenir informé·e',
+	onboarding_browse_keep_informed_sub:
+		'Me mettre en relation avec mon chapitre PauseAI local et me tenir informé·e des campagnes mondiales.',
+	onboarding_btn_sign_me_up: "M'inscrire →",
+	onboarding_btn_signing_up: 'Inscription en cours...',
+	onboarding_section_ways_to_help: "Quelques moyens d'aider dès aujourd'hui",
+	onboarding_next_step_title: '★ Prochaine étape recommandée',
+	onboarding_next_step_p1:
+		'Rejoins l\'une de nos réunions d\'accueil de la communauté des membres, ou un événement social local, pour en savoir plus sur la communauté PauseAI : <a target="_blank" rel="noopener noreferrer" href="/communities#events">voir les événements à venir</a>.',
+	onboarding_next_step_p2:
+		'Tu veux passer à l\'action tout de suite ? Consulte notre <a target="_blank" rel="noopener noreferrer" href="/action">liste d\'actions</a>.',
+	onboarding_footer_join_conversation: 'Rejoindre la conversation',
+	onboarding_footer_discord_btn: 'Rejoindre PauseAI sur Discord',
+	onboarding_footer_follow_us: 'Suis-nous',
+	onboarding_step_about: 'À propos de toi',
+	onboarding_step_intent: 'Intention',
+	onboarding_step_volunteer_form: 'Formulaire de bénévolat',
+	onboarding_step_confirmed: 'Confirmé',
+	onboarding_step_next_steps: 'Prochaines étapes',
+	onboarding_volunteer_title: "S'inscrire comme bénévole",
+	onboarding_volunteer_intro:
+		'Parle-nous un peu de toi afin que nous puissions trouver un rôle qui te correspond.',
+	onboarding_field_zip: 'Code postal',
+	onboarding_placeholder_zip: 'ex. 75001',
+	onboarding_helper_zip: 'Ton code postal permet de trouver ton groupe local.',
+	onboarding_field_discord: "Nom d'utilisateur Discord",
+	onboarding_helper_discord:
+		'Si tu n\'as pas de compte Discord, nous t\'encourageons à en <a target="_blank" rel="noopener noreferrer" href="https://discord.com/register">créer un ici</a>.',
+	onboarding_field_phone: 'Numéro de téléphone',
+	onboarding_placeholder_dial_code: '+33',
+	onboarding_placeholder_phone: '06 00 00 00 00',
+	onboarding_field_languages: 'Quelles langues parles-tu ? *',
+	onboarding_placeholder_languages: 'Sélectionne les langues',
+	onboarding_field_discovery: 'Comment as-tu découvert PauseAI ?',
+	onboarding_placeholder_discovery: 'Sélectionne une option',
+	onboarding_field_motivations: "Qu'est-ce qui t'a motivé·e à nous rejoindre ?",
+	onboarding_field_skills: 'Compétences & intérêts',
+	onboarding_field_hours: 'Combien de temps peux-tu consacrer par semaine ? *',
+	onboarding_placeholder_specify: 'Merci de préciser',
+	onboarding_agree_volunteer:
+		'J\'accepte l\'<a target="_blank" rel="noopener noreferrer" href="/volunteer-agreement">Accord de bénévolat</a>&nbsp;*',
+	onboarding_agree_conduct:
+		'J\'accepte le <a target="_blank" rel="noopener noreferrer" href="/code-of-conduct">Code de conduite</a>&nbsp;*',
+	onboarding_become_paying_member:
+		'Je souhaite devenir membre payant — ouvrir la page de don après envoi.',
+	onboarding_become_paying_member_disclaimer:
+		"Le prestataire de paiement (Stripe) s'ouvrira dans un nouvel onglet lors de l'envoi.",
+	onboarding_lead_title: (role) => `Description du rôle bénévole : ${role}`,
+	onboarding_lead_meta: 'Rôle bénévole à temps partiel · 5 à 15 heures/semaine',
+	onboarding_lead_intro:
+		"PauseAI Global recherche des responsables partout dans le monde pour diriger des groupes locaux qui mènent les efforts d'organisation dans leur région. Il s'agit d'un rôle bénévole à temps partiel nécessitant 5 à 15 heures par semaine. Chaque responsable de groupe sera chargé·e de planifier des actions directes, de mobiliser des bénévoles et de coordonner avec l'équipe PauseAI Global.",
+	onboarding_lead_us_branch:
+		'Comme tu résides aux <strong>États-Unis</strong>, merci de postuler via PauseAI US : <a target="_blank" rel="noopener noreferrer" href="https://form.asana.com/?k=RxWuTz8SYKME33V5nBvK1A&d=1208505553897008">formulaire de candidature PauseAI US</a>.',
+	onboarding_lead_has_chapter: (country) =>
+		`<strong>${country} a déjà un chapitre PauseAI</strong>, donc plutôt que de fonder un groupe national, tu pourrais diriger un groupe régional ou local au sein de celui-ci. Trouve ton chapitre sur <a target="_blank" rel="noopener noreferrer" href="/communities">pauseai.info/communities</a>, ou écris à notre Directrice de l'organisation ci-dessous pour en discuter.`,
+	onboarding_lead_check_chapter:
+		'<strong>Vérifie d\'abord que ton pays n\'a pas déjà de chapitre :</strong> <a target="_blank" rel="noopener noreferrer" href="/communities">pauseai.info/communities</a>.',
+	onboarding_lead_what_you_do_title: 'Ce que tu feras',
+	onboarding_lead_do_1:
+		'Recruter et développer ton groupe local en accueillant de nouveaux bénévoles et en organisant des événements ensemble.',
+	onboarding_lead_do_2:
+		'Construire des relations avec des groupes militants locaux et des journalistes.',
+	onboarding_lead_do_3:
+		"Rencontrer chaque mois l'équipe Global de PauseAI pour échanger des idées et rester coordonné·e avec la stratégie mondiale et les campagnes trimestrielles.",
+	onboarding_lead_do_4:
+		'Partager les activités de ton chapitre sur les réseaux sociaux et aider à promouvoir les événements.',
+	onboarding_lead_looking_for_title: 'Ce que nous recherchons',
+	onboarding_lead_looking_1:
+		'Capacité à planifier et exécuter des actions directes, y compris des ateliers et des événements publics.',
+	onboarding_lead_looking_2:
+		"D'excellentes compétences en communication, avec l'envie et la capacité d'engager des communautés diverses.",
+	onboarding_lead_looking_3:
+		'Autonomie, avec la capacité de travailler de manière indépendante et en équipe.',
+	onboarding_lead_looking_4:
+		"Passion pour la sécurité de l'IA et adhésion à la mission de PauseAI.",
+	onboarding_lead_looking_5: "À l'aise pour communiquer en anglais",
+	onboarding_lead_looking_6: 'Respecter et pratiquer une approche non violente et légale.',
+	onboarding_lead_nice_to_have_title: 'Ce qui serait un plus',
+	onboarding_lead_nice_1:
+		"De solides compétences d'organisation et de l'expérience en activisme de terrain.",
+	onboarding_lead_nice_2:
+		"Compétences de lobbying et expérience d'engagement avec des décideurs politiques",
+	onboarding_lead_nice_3: 'Expérience en médias et en rédaction de contenu',
+	onboarding_lead_imperfect:
+		"Si tu ne remplis pas tous les critères, nous voulons quand même avoir de tes nouvelles. L'engagement pour la sécurité de l'IA et la conviction que nous pouvons avoir un impact sont les facteurs les plus importants ; nous pouvons fournir formation, ressources et une communauté sur laquelle s'appuyer.",
+	onboarding_lead_support_title: 'Le soutien que tu recevras',
+	onboarding_lead_support:
+		"Tu rejoindras un réseau mondial d'organisateur·rices qui apprennent tous ensemble. Nous nous réunissons chaque mois, partageons des ressources sur nos plateformes de discussion et nous entraidons pour résoudre les problèmes. C'est une excellente façon d'apprendre de nouvelles compétences, de rencontrer des personnes réfléchies et de faire partie d'un mouvement en pleine croissance qui œuvre sur l'un des enjeux les plus importants de notre époque.",
+	onboarding_lead_next_steps_title: 'Prochaines étapes',
+	onboarding_lead_next_steps:
+		'Si tu souhaites en savoir plus, contacte notre directrice de l\'organisation chez PauseAI Global, Irina Tavera, à <a target="_blank" rel="noopener noreferrer" href="mailto:Irina@pauseai.info">Irina@pauseai.info</a> pour planifier une discussion informelle.',
+	onboarding_lead_email_btn: "✉️ Écrire à notre Directrice de l'organisation",
+	onboarding_lead_please_mention: 'Merci de lui indiquer les informations suivantes :',
+	onboarding_lead_mention_1: 'Ton nom',
+	onboarding_lead_mention_2: 'Ton pays de résidence',
+	onboarding_lead_mention_3:
+		'Quelques phrases sur les raisons pour lesquelles tu souhaites devenir responsable',
+	onboarding_discovery_pauseai_social: 'Réseaux sociaux affiliés à PauseAI',
+	onboarding_discovery_other_social: 'Réseaux sociaux non affiliés à PauseAI',
+	onboarding_discovery_referral: "Recommandation d'un ami ou de la famille",
+	onboarding_discovery_news: 'Article de presse',
+	onboarding_discovery_event: 'Événement/Présentation',
+	onboarding_discovery_search: 'Recherche sur Internet',
+	onboarding_discovery_other: 'Autre',
+	onboarding_motivation_ai_safety: "Sécurité de l'IA",
+	onboarding_motivation_democratic_oversight: "Besoin d'un contrôle démocratique",
+	onboarding_motivation_ethical_tech: 'Technologie éthique',
+	onboarding_motivation_ai_governance: "Gouvernance de l'IA",
+	onboarding_motivation_job_displacement: "Suppression d'emplois",
+	onboarding_motivation_misinformation: 'Désinformation',
+	onboarding_motivation_deepfakes: 'Deepfakes, arnaques et harcèlement',
+	onboarding_motivation_power: 'Concentration du pouvoir',
+	onboarding_motivation_privacy: 'Perte de vie privée',
+	onboarding_motivation_environment: 'Dommages environnementaux',
+	onboarding_motivation_addiction: 'Dépendance technologique',
+	onboarding_motivation_weapons: 'Armes autonomes',
+	onboarding_motivation_cyber: 'Cyberattaques',
+	onboarding_motivation_bioweapons: 'Armes biologiques',
+	onboarding_motivation_other: 'Autre',
+	onboarding_skill_software: 'Développement logiciel',
+	onboarding_skill_video: 'Création vidéo',
+	onboarding_skill_social_media: 'Gestion des réseaux sociaux',
+	onboarding_skill_events: "Organisation d'événements",
+	onboarding_skill_speaking: 'Prise de parole en public / Présentation',
+	onboarding_skill_writing: 'Rédaction',
+	onboarding_skill_design: 'Design graphique / Arts visuels',
+	onboarding_skill_research: 'Recherche',
+	onboarding_skill_comms: 'Communication / RP',
+	onboarding_skill_fundraising: 'Collecte de fonds',
+	onboarding_skill_community: 'Organisation communautaire',
+	onboarding_skill_advocacy: 'Plaidoyer politique / Lobbying',
+	onboarding_skill_education: 'Éducation / Enseignement',
+	onboarding_skill_admin: 'Support administratif',
+	onboarding_skill_legal: 'Connaissances juridiques',
+	onboarding_skill_other: 'Autre',
+	onboarding_hours_under_3: 'Moins de 3 heures',
+	onboarding_hours_3_6: '3 à 6 heures',
+	onboarding_hours_6_10: '6 à 10 heures',
+	onboarding_hours_10_20: '10 à 20 heures',
+	onboarding_hours_20_plus: '20 heures ou plus',
+	onboarding_action_ai_concerns_title: "Partage tes préoccupations sur l'IA",
+	onboarding_action_ai_concerns_sub: 'Raconte ton histoire et ajoute ta voix au dossier public.',
+	onboarding_action_email_reps_title: 'Écris à tes représentant·es élu·es',
+	onboarding_action_email_reps_sub:
+		"Utilise notre générateur d'e-mails pour un message pré-rédigé que tu peux personnaliser et envoyer.",
+	onboarding_action_lobby_title: 'Contacte tes élu·es',
+	onboarding_action_lobby_sub: "Nos conseils de lobbying te guident sur ce qu'il faut dire.",
+	onboarding_action_talk_title: "Parle à quelqu'un de ton entourage de la sécurité de l'IA",
+	onboarding_action_talk_sub:
+		'Un ami, un voisin, un collègue ou un membre de la famille. Notre <a target="_blank" rel="noopener noreferrer" href="/counterarguments">guide des contre-arguments</a> peut t\'aider à répondre aux questions difficiles et à encourager les autres à agir.',
+	onboarding_action_microcommit_title: 'Micro-engagement — actions hebdomadaires de courte durée',
+	onboarding_action_microcommit_sub:
+		'Choisis parmi une liste de petites actions continues et suis ta contribution au fil du temps.',
+	onboarding_action_petitions_title: 'Signe les pétitions',
+	onboarding_action_petitions_sub:
+		"Ajoute ton nom à ceux de milliers d'autres personnes appelant à une IA plus sûre.",
+	onboarding_action_donate_title: 'Fais un don ou procure-toi des articles',
+	onboarding_action_donate_sub:
+		'Fais un <a target="_blank" rel="noopener noreferrer" href="/donate">don</a> ou procure-toi des articles sur notre <a target="_blank" rel="noopener noreferrer" href="https://pauseai-shop.fourthwall.com/">boutique</a>.',
+	onboarding_error_generic: "Une erreur s'est produite. Merci de réessayer.",
+	onboarding_error_unexpected: "Une erreur inattendue s'est produite. Merci de réessayer."
+}
+
+export const onboardingMessages: Record<string, OnboardingMessages> = { en, de, fr }
