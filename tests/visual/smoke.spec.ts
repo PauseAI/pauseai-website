@@ -54,12 +54,33 @@ test.describe('routes', () => {
 				page.waitForLoadState('networkidle')
 			])
 			// Self-validate the MSW Substack mock is actually being used — otherwise
-			// the suite would quietly capture live feed data. The homepage renders
-			// news items whose titles come from fixtures/substack-feed.xml.
+			// the suite would quietly capture live feed data. /api/news merges the
+			// fixture Substack items with dated internal `news:` posts and sorts by
+			// date, so a fixture post drops to a later page as newer internal posts
+			// accrue (it no longer reliably lands on the rendered first page). Page
+			// through the API instead, so this check doesn't silently rot as content
+			// grows — it asserts the fixture is reachable, not where it sorts.
 			if (path === '/') {
-				await page
-					.getByText('Fixture Substack post one')
-					.waitFor({ state: 'visible', timeout: 5000 })
+				let found = false
+				let pageNum = 1
+				let totalPages = 1
+				do {
+					// Fetch from inside the page (same-origin, so beforeEach's route
+					// handler lets it through) rather than via page.request, whose
+					// separate context isn't covered by page.route.
+					const body = await page.evaluate(async (p) => {
+						const res = await fetch(`/api/news?page=${p}&pageSize=12`)
+						return (await res.json()) as { items: Array<{ title: string }>; totalPages: number }
+					}, pageNum)
+					totalPages = body.totalPages
+					found = body.items.some((item) => item.title.startsWith('Fixture Substack post'))
+					pageNum++
+				} while (!found && pageNum <= totalPages)
+				if (!found) {
+					throw new Error(
+						'MSW Substack fixture missing from /api/news — the live feed may have leaked into the run'
+					)
+				}
 			}
 			const screenshot = await page.screenshot({ fullPage: true })
 			await testInfo.attach('full-page', { body: screenshot, contentType: 'image/png' })
