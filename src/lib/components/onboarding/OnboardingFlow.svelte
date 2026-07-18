@@ -826,29 +826,45 @@
 					</div>
 					<input type="hidden" name="hours" value={volunteer.hours} />
 				</div>
-				<label class="agreement">
-					<input
-						type="checkbox"
-						name="agree_volunteer"
-						required
-						bind:checked={agreements.volunteer}
-					/>
-					<span class="checkbox-box" aria-hidden="true"></span>
+				<div class="paying-member-info">
+					<span class="field-label">{msgs.onboarding_paying_member_heading}</span>
 					<!-- eslint-disable-next-line svelte/no-at-html-tags -->
-					<span>{@html msgs.onboarding_agree_volunteer}</span>
-				</label>
-				<label class="agreement">
-					<input type="checkbox" name="agree_conduct" required bind:checked={agreements.conduct} />
-					<span class="checkbox-box" aria-hidden="true"></span>
-					<!-- eslint-disable-next-line svelte/no-at-html-tags -->
-					<span>{@html msgs.onboarding_agree_conduct}</span>
-				</label>
+					<p>{@html msgs.onboarding_paying_member_description}</p>
+				</div>
 				<label class="agreement">
 					<input type="checkbox" name="become_paying_member" bind:checked={becomePayingMember} />
 					<span class="checkbox-box" aria-hidden="true"></span>
-					<!-- eslint-disable-next-line svelte/no-at-html-tags -->
-					<span>{@html msgs.onboarding_become_paying_member}</span>
+					<span class="agreement-text">
+						<!-- eslint-disable-next-line svelte/no-at-html-tags -->
+						<span>{@html msgs.onboarding_become_paying_member}</span>
+						<!-- eslint-disable-next-line svelte/no-at-html-tags -->
+						<span class="agreement-sub">{@html msgs.onboarding_paying_member_donate_notice}</span>
+					</span>
 				</label>
+				<div class="agreements-group">
+					<label class="agreement">
+						<input
+							type="checkbox"
+							name="agree_volunteer"
+							required
+							bind:checked={agreements.volunteer}
+						/>
+						<span class="checkbox-box" aria-hidden="true"></span>
+						<!-- eslint-disable-next-line svelte/no-at-html-tags -->
+						<span>{@html msgs.onboarding_agree_volunteer}</span>
+					</label>
+					<label class="agreement">
+						<input
+							type="checkbox"
+							name="agree_conduct"
+							required
+							bind:checked={agreements.conduct}
+						/>
+						<span class="checkbox-box" aria-hidden="true"></span>
+						<!-- eslint-disable-next-line svelte/no-at-html-tags -->
+						<span>{@html msgs.onboarding_agree_conduct}</span>
+					</label>
+				</div>
 				<div class="submit-group">
 					<button type="submit" class="primary" disabled={!volunteerFormComplete || submitting}>
 						{submitting ? msgs.onboarding_btn_submitting : msgs.onboarding_btn_submit}
@@ -1267,6 +1283,29 @@
 		font-size: 0.95rem;
 	}
 
+	.agreement-text {
+		display: flex;
+		flex-direction: column;
+		gap: 0.2rem;
+	}
+
+	.agreement-sub {
+		font-size: 0.8rem;
+		opacity: 0.75;
+		line-height: 1.4;
+	}
+
+	.agreements-group {
+		display: flex;
+		flex-direction: column;
+		gap: 0.75rem;
+		margin-top: 0.5rem;
+		padding: 1rem 1.25rem;
+		background-color: var(--bg-subtle);
+		border: 1px solid var(--brand-subtle);
+		border-radius: 12px;
+	}
+
 	.agreement input {
 		position: absolute;
 		width: 1px;
@@ -1308,6 +1347,26 @@
 
 	.path-intro {
 		opacity: 0.85;
+	}
+
+	.paying-member-info {
+		margin: 0.5rem 0 0;
+		padding: 1rem 1.25rem;
+		background-color: var(--bg-subtle);
+		border: 1px solid var(--brand-subtle);
+		border-radius: 12px;
+	}
+
+	.paying-member-info .field-label {
+		display: block;
+		margin: 0 0 0.5rem;
+	}
+
+	.paying-member-info p {
+		margin: 0;
+		font-size: 0.9rem;
+		line-height: 1.5;
+		opacity: 0.9;
 	}
 
 	.confirmation {
