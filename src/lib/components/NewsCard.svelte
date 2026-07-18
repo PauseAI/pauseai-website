@@ -130,7 +130,10 @@
 		object-fit: contain;
 	}
 
-	* :global(.news-card:hover .image-container .image) {
+	/* Only zoom cover-cropped (internal) images on hover. Zooming a contained
+	   image would re-crop it under the container's overflow:hidden, defeating
+	   the point of showing it in full. */
+	* :global(.news-card:hover .image-container .image-cover) {
 		transform: scale(1.03);
 	}
 
