@@ -44,12 +44,12 @@
 						<NetlifyImage
 							src={item.image}
 							alt={item.title}
-							imgClass="image"
+							imgClass="image image-contain"
 							sizes={imageSizes}
 							onFailed={() => (hasImageError = true)}
 						/>
 					{:else}
-						<Image src={item.image} alt={item.title} class="image" sizes={imageSizes} />
+						<Image src={item.image} alt={item.title} class="image image-cover" sizes={imageSizes} />
 					{/if}
 				{:else}
 					<div class="image-placeholder"></div>
@@ -105,16 +105,29 @@
 
 	.image-container {
 		width: 100%;
-		aspect-ratio: 16 / 10;
+		/* Match the 1200/628 post-banner crop so curated banner images fill the
+		   card the same way they frame the post header. */
+		aspect-ratio: 1200 / 628;
 		overflow: hidden;
+		background: var(--bg-subtle);
 	}
 
 	.image-container :global(.image) {
 		width: 100%;
 		height: 100%;
-		object-fit: cover;
 		border-radius: 0;
 		transition: transform 0.3s ease;
+	}
+
+	/* Internal post images are curated to frame well at the banner ratio, so
+	   cover-crop them. Substack/press images are arbitrary shapes we don't
+	   control, so contain them to avoid cutting off charts, posters, etc. */
+	.image-container :global(.image-cover) {
+		object-fit: cover;
+	}
+
+	.image-container :global(.image-contain) {
+		object-fit: contain;
 	}
 
 	* :global(.news-card:hover .image-container .image) {
