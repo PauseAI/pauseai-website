@@ -175,6 +175,7 @@
 		   and short one-line titles don't leave a gap above the subtitle. */
 		min-height: calc(1.1rem * 1.2 * 2);
 		display: flex;
+		flex-direction: column;
 		align-items: center;
 		justify-content: center;
 	}
