@@ -162,6 +162,7 @@ export const actions: Actions = {
 			fields['Projected weekly hours'] = hours
 			fields['Volunteer Agreement'] = true
 			fields['Code of Conduct agreed'] = true
+			fields['Paying Interest'] = data.get('become_paying_member') === 'on'
 
 			if (country === 'United States') {
 				fields['Zip code'] = getString(data, 'zip_code')
