@@ -12,6 +12,7 @@ import { sentryVitePlugin } from '@sentry/vite-plugin'
 import { isDev } from './src/lib/env'
 import { MARKDOWN_L10NS } from './src/lib/l10n'
 import { locales as compiledLocales } from './src/lib/paraglide/runtime.js'
+import { configDefaults } from 'vitest/config'
 
 /**
  * Dev-only middleware: Netlify's `/.netlify/*` routes don't exist in the
@@ -64,8 +65,12 @@ function getLocaleExcludePatterns(): RegExp[] {
 }
 
 export default defineConfig(() => {
-	// Guarantees server can see .env (on e.g. hot restart)
-	dotenv.config({ override: true })
+	// Guarantees server can see .env (on e.g. hot restart). In visual-diff
+	// runs we flip `override` off so the shell-set fake API keys win over
+	// the empty values in .env (copied from template.env) — otherwise the
+	// Airtable/Notion SDKs short-circuit on empty key before making any
+	// request, and MSW never gets to intercept and serve the fixture.
+	dotenv.config({ override: process.env.VISUAL_TEST !== '1' })
 
 	return {
 		define: {
@@ -102,6 +107,20 @@ export default defineConfig(() => {
 				external: getLocaleExcludePatterns()
 			}
 		} as const,
+
+		// Vitest config — `pnpm test` runs Vitest, which by default would
+		// also pick up `tests/visual/smoke.spec.ts`. That file imports
+		// `test` from `@chromatic-com/playwright` (a Playwright test runner
+		// wrapper), and Playwright's `test.describe()` throws
+		// "did not expect test.describe() to be called here" when invoked
+		// outside the Playwright runner. The visual suite is launched
+		// separately via `playwright.config.ts` (and Chromatic), so exclude
+		// it from Vitest's discovery. `exclude` replaces Vitest's defaults,
+		// so spread `configDefaults.exclude` to keep node_modules / dist /
+		// cypress / config files filtered out.
+		test: {
+			exclude: [...configDefaults.exclude, 'tests/visual/**']
+		},
 		plugins: [
 			suppressNetlifyRoute404s(),
 			lucidePreprocess(),

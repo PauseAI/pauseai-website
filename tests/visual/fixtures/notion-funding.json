@@ -1,0 +1,114 @@
+{
+	"object": "list",
+	"results": [
+		{
+			"object": "page",
+			"id": "notion-funding-1",
+			"created_time": "2026-01-01T00:00:00.000Z",
+			"last_edited_time": "2026-01-01T00:00:00.000Z",
+			"archived": false,
+			"url": "",
+			"properties": {
+				"Amount": { "id": "a", "type": "number", "number": 50000 },
+				"Source": {
+					"id": "s",
+					"type": "rich_text",
+					"rich_text": [
+						{
+							"type": "text",
+							"text": { "content": "Example Foundation", "link": null },
+							"plain_text": "Example Foundation",
+							"annotations": {
+								"bold": false,
+								"italic": false,
+								"strikethrough": false,
+								"underline": false,
+								"code": false,
+								"color": "default"
+							},
+							"href": null
+						}
+					]
+				},
+				"Listed": { "id": "l", "type": "checkbox", "checkbox": true },
+				"Anonymous": { "id": "an", "type": "checkbox", "checkbox": false },
+				"URL": { "id": "u", "type": "url", "url": "https://example.org" },
+				"Notes": {
+					"id": "n",
+					"type": "rich_text",
+					"rich_text": [
+						{
+							"type": "text",
+							"text": { "content": "multi-year grant", "link": null },
+							"plain_text": "multi-year grant",
+							"annotations": {
+								"bold": false,
+								"italic": false,
+								"strikethrough": false,
+								"underline": false,
+								"code": false,
+								"color": "default"
+							},
+							"href": null
+						}
+					]
+				}
+			}
+		},
+		{
+			"object": "page",
+			"id": "notion-funding-2",
+			"created_time": "2026-01-01T00:00:00.000Z",
+			"last_edited_time": "2026-01-01T00:00:00.000Z",
+			"archived": false,
+			"url": "",
+			"properties": {
+				"Amount": { "id": "a", "type": "number", "number": 12500 },
+				"Source": {
+					"id": "s",
+					"type": "rich_text",
+					"rich_text": [
+						{
+							"type": "text",
+							"text": { "content": "Example Trust", "link": null },
+							"plain_text": "Example Trust",
+							"annotations": {
+								"bold": false,
+								"italic": false,
+								"strikethrough": false,
+								"underline": false,
+								"code": false,
+								"color": "default"
+							},
+							"href": null
+						}
+					]
+				},
+				"Listed": { "id": "l", "type": "checkbox", "checkbox": true },
+				"Anonymous": { "id": "an", "type": "checkbox", "checkbox": false },
+				"URL": { "id": "u", "type": "url", "url": "" },
+				"Notes": { "id": "n", "type": "rich_text", "rich_text": [] }
+			}
+		},
+		{
+			"object": "page",
+			"id": "notion-funding-3",
+			"created_time": "2026-01-01T00:00:00.000Z",
+			"last_edited_time": "2026-01-01T00:00:00.000Z",
+			"archived": false,
+			"url": "",
+			"properties": {
+				"Amount": { "id": "a", "type": "number", "number": 7500 },
+				"Source": { "id": "s", "type": "rich_text", "rich_text": [] },
+				"Listed": { "id": "l", "type": "checkbox", "checkbox": true },
+				"Anonymous": { "id": "an", "type": "checkbox", "checkbox": true },
+				"URL": { "id": "u", "type": "url", "url": "" },
+				"Notes": { "id": "n", "type": "rich_text", "rich_text": [] }
+			}
+		}
+	],
+	"next_cursor": null,
+	"has_more": false,
+	"type": "page_or_database",
+	"page_or_database": {}
+}

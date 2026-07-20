@@ -1,6 +1,10 @@
 {
 	"extends": "./.svelte-kit/tsconfig.json",
 	"compilerOptions": {
+		// tests/visual/*.ts are executed by Node's --experimental-strip-types,
+		// which requires explicit .ts extensions on relative imports. Safe
+		// because the tsconfig is noEmit via the extended SvelteKit config.
+		"allowImportingTsExtensions": true,
 		"allowJs": true,
 		"checkJs": true,
 		"esModuleInterop": true,

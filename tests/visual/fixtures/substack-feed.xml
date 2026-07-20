@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0">
+	<channel>
+		<title>PauseAI Substack (fixture)</title>
+		<link>https://example.com/substack</link>
+		<description>Visual-diff fixture feed. Not a real Substack.</description>
+
+		<item>
+			<title><![CDATA[Fixture Substack post one]]></title>
+			<description><![CDATA[Lorem ipsum dolor sit amet, consectetur adipiscing elit.]]></description>
+			<link>https://example.com/substack/one</link>
+			<pubDate>Sat, 10 Jan 2026 00:00:00 GMT</pubDate>
+			<enclosure url="https://example.com/cover.jpg" length="1" type="image/jpeg"/>
+		</item>
+
+		<item>
+			<title><![CDATA[Fixture Substack post two]]></title>
+			<description><![CDATA[Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.]]></description>
+			<link>https://example.com/substack/two</link>
+			<pubDate>Thu, 08 Jan 2026 00:00:00 GMT</pubDate>
+			<enclosure url="https://example.com/cover.jpg" length="1" type="image/jpeg"/>
+		</item>
+
+		<item>
+			<title><![CDATA[Fixture Substack post three]]></title>
+			<description><![CDATA[Duis aute irure dolor in reprehenderit in voluptate velit esse cillum.]]></description>
+			<link>https://example.com/substack/three</link>
+			<pubDate>Tue, 06 Jan 2026 00:00:00 GMT</pubDate>
+		</item>
+	</channel>
+</rss>

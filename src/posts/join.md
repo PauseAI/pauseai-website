@@ -4,6 +4,8 @@ metaTitle: Join PauseAI
 description: Sign up to join the PauseAI movement
 ---
 
+<!-- @visualDiffEnabled: true — markdown post with embedded Svelte components -->
+
 <script>
     import CollagenSignup from '$lib/components/CollagenSignup.svelte'
     import OnboardingFlow from '$lib/components/onboarding/OnboardingFlow.svelte'
