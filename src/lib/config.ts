@@ -7,4 +7,4 @@ export const url = dev ? 'http://localhost:37572' : 'https://pauseai.info'
 export const botName = 'RogueGPT'
 export const verificationParameter = 'verificationKey'
 export const defaultTitle = 'Volunteer'
-export const layoutWidth = '40rem'
+export const layoutWidth = '768px' /** 40rem in px, required for "sizes" attribute **/
