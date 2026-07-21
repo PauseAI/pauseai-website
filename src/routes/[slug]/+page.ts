@@ -5,7 +5,7 @@ import { asError } from '$lib/utils'
 import type { DescriptiveFrontmatterMeta } from '$lib/types'
 
 type MarkdownModule = {
-	default: import('svelte').SvelteComponent
+	default: import('svelte').Component
 	metadata: DescriptiveFrontmatterMeta
 }
 
