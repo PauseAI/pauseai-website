@@ -178,8 +178,8 @@ importers:
         specifier: ^2.0.1
         version: 2.0.1
       eslint-plugin-svelte:
-        specifier: ^3.21.0
-        version: 3.21.0(eslint@10.7.0(jiti@2.7.0))(svelte@5.56.5(@typescript-eslint/types@8.64.0))
+        specifier: ^3.22.0
+        version: 3.22.0(eslint@10.7.0(jiti@2.7.0))(svelte@5.56.5(@typescript-eslint/types@8.64.0))
       fontaine:
         specifier: ^0.8.0
         version: 0.8.0
@@ -2247,8 +2247,8 @@ packages:
     resolution: {integrity: sha512-FlhMRUiDUHztGj+bhm3pYo5DJ6Gbjh/FGPClcDENme7f9+Sc3+HZg6wMq80KJmRD8/oj/Ib6gy4D/ppjmHfGVA==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
 
-  eslint-plugin-svelte@3.21.0:
-    resolution: {integrity: sha512-2dkuAk77FzQn5Ad5bJvcS6gU9iRCjywzQv6wVBR7RNseZzDsxfaIu+yzah/hTBB2znDd8Hl4oOISdhQuNyjTdQ==}
+  eslint-plugin-svelte@3.22.0:
+    resolution: {integrity: sha512-O3qn0NePTWta+1o25dIThqeEP/hEQ3VxDK2LVO8SQ5wG9umLMvulK+m1yQ4JGOb2Pkl8IB0G1lpRV/HXDXSLTQ==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
     peerDependencies:
       eslint: ^8.57.1 || ^9.0.0 || ^10.0.0
@@ -5768,7 +5768,7 @@ snapshots:
       strip-ansi: 6.0.1
       text-table: 0.2.0
 
-  eslint-plugin-svelte@3.21.0(eslint@10.7.0(jiti@2.7.0))(svelte@5.56.5(@typescript-eslint/types@8.64.0)):
+  eslint-plugin-svelte@3.22.0(eslint@10.7.0(jiti@2.7.0))(svelte@5.56.5(@typescript-eslint/types@8.64.0)):
     dependencies:
       '@eslint-community/eslint-utils': 4.9.1(eslint@10.7.0(jiti@2.7.0))
       '@jridgewell/sourcemap-codec': 1.5.5
