@@ -173,7 +173,7 @@
 		/* Reserve a fixed two-line area and center the title within it, so every
 		   card's subtitle starts at the same height regardless of title length,
 		   and short one-line titles don't leave a gap above the subtitle. */
-		min-height: calc(1.1rem * 1.2 * 2);
+		min-height: calc(1.1rem * 1.2 * 3);
 		display: flex;
 		flex-direction: column;
 		align-items: center;
@@ -184,8 +184,8 @@
 	   display: -webkit-box, which can't coexist with the flex centering above. */
 	.card-title-text {
 		display: -webkit-box;
-		-webkit-line-clamp: 2;
-		line-clamp: 2;
+		-webkit-line-clamp: 3;
+		line-clamp: 3;
 		-webkit-box-orient: vertical;
 		overflow: hidden;
 	}
