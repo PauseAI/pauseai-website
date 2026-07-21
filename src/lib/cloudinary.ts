@@ -78,9 +78,16 @@ export async function callCloudinaryAPI<T>(
 				formData.append(key, value.join(','))
 			} else if (typeof value === 'object' && value !== null) {
 				formData.append(key, JSON.stringify(value))
-			} else {
+			} else if (value === null) {
+				formData.append(key, 'null')
+			} else if (
+				typeof value === 'string' ||
+				typeof value === 'number' ||
+				typeof value === 'boolean'
+			) {
 				formData.append(key, String(value))
 			}
+			// Other types (symbol, bigint, function) are not valid Cloudinary params and are ignored
 		}
 	})
 

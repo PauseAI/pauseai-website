@@ -82,7 +82,7 @@ export const POST: RequestHandler = async ({ request }) => {
 	}
 
 	try {
-		const data: EmailRequest = await request.json()
+		const data = (await request.json()) as EmailRequest
 
 		// Basic validation
 		if (

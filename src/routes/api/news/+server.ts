@@ -74,8 +74,8 @@ async function getSubstackNews(): Promise<NewsItem[]> {
 
 function decodeHtmlEntities(text: string): string {
 	return text
-		.replace(/&#(\d+);/g, (_, dec) => String.fromCharCode(parseInt(dec, 10)))
-		.replace(/&#x([a-f\d]+);/gi, (_, hex) => String.fromCharCode(parseInt(hex, 16)))
+		.replace(/&#(\d+);/g, (_, dec: string) => String.fromCharCode(parseInt(dec, 10)))
+		.replace(/&#x([a-f\d]+);/gi, (_, hex: string) => String.fromCharCode(parseInt(hex, 16)))
 		.replace(/&quot;/g, '"')
 		.replace(/&lt;/g, '<')
 		.replace(/&gt;/g, '>')

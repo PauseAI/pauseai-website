@@ -4,6 +4,11 @@ import type { PageLoad } from './$types'
 import { asError } from '$lib/utils'
 import type { DescriptiveFrontmatterMeta } from '$lib/types'
 
+type MarkdownModule = {
+	default: import('svelte').SvelteComponent
+	metadata: DescriptiveFrontmatterMeta
+}
+
 export const load: PageLoad = async ({ params: { slug }, depends, data: serverData }) => {
 	depends('paraglide:lang')
 	try {
@@ -13,7 +18,7 @@ export const load: PageLoad = async ({ params: { slug }, depends, data: serverDa
 		return {
 			...serverData,
 			content,
-			meta: meta as DescriptiveFrontmatterMeta,
+			meta,
 			slug
 		}
 	} catch {
@@ -21,18 +26,18 @@ export const load: PageLoad = async ({ params: { slug }, depends, data: serverDa
 	}
 }
 
-async function importMarkdown(locale: string, slug: string) {
+async function importMarkdown(locale: string, slug: string): Promise<MarkdownModule> {
 	// For English (source language), import directly from source
 	if (locale === 'en') {
-		return await import(`../../posts/${slug}.md`)
+		return (await import(`../../posts/${slug}.md`)) as MarkdownModule
 	} else {
 		try {
-			return await import(`../../../l10n-cage/md/${locale}/${slug}.md`)
+			return (await import(`../../../l10n-cage/md/${locale}/${slug}.md`)) as MarkdownModule
 		} catch (error) {
 			if (dev) {
 				return {
 					default: `## Couldn't import translation!\n(This is only tolerated in development mode.)`
-				}
+				} as unknown as MarkdownModule // The string default doesn't match the SvelteComponent type, but this is a dev-only fallback
 			}
 			throw error
 		}

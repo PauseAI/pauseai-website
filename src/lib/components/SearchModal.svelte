@@ -17,6 +17,7 @@
 
 	$effect(() => {
 		if (browser && open && modalEl && ready) {
+			// eslint-disable-next-line @typescript-eslint/no-unsafe-call -- PagefindModal type cannot be resolved
 			modalEl.open()
 			open = false
 		}
