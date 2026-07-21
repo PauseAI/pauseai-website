@@ -110,15 +110,15 @@
 				id: 'holiday-littlehelpers',
 				countries: null,
 				dateRange: [null, '2024-12-31']
+			},
+			{
+				id: 'pausecon-london-2026',
+				countries: null,
+				dateRange: [null, '2026-08-21']
 			}
 		]
 
-		var campaignBannerRules = [
-			{
-				id: 'brussels-ep-protest-2026',
-				dateRange: [null, '2026-02-23']
-			}
-		]
+		var campaignBannerRules = []
 	</script>
 
 	<!-- eslint-disable-next-line svelte/no-at-html-tags not vulnerable against XSS -->
@@ -172,9 +172,10 @@
 
 		<NearbyEvent contrast={hero} bind:eventFound geo={geoForNearbyEvent} />
 
-		<Banner type="campaign" href="/brussels-ep-protest-2026" id="brussels-ep-protest-2026">
-			<strong>Brussels, Feb 23</strong> - Join us outside the European Parliament to call for a global
-			treaty to pause frontier AI development.
+		<Banner contrast={hero} id="pausecon-london-2026">
+			<strong>PauseCon London 2026</strong>: Apply now to join our September organising conference. <Link
+				href="https://luma.com/4be2eqz9">Apply here!</Link
+			>
 		</Banner>
 
 		{#if hero}

@@ -826,6 +826,21 @@
 					</div>
 					<input type="hidden" name="hours" value={volunteer.hours} />
 				</div>
+				<div class="paying-member-info">
+					<span class="field-label">{msgs.onboarding_paying_member_heading}</span>
+					<!-- eslint-disable-next-line svelte/no-at-html-tags -->
+					<p>{@html msgs.onboarding_paying_member_description}</p>
+					<label class="agreement">
+						<input type="checkbox" name="become_paying_member" bind:checked={becomePayingMember} />
+						<span class="checkbox-box" aria-hidden="true"></span>
+						<span class="agreement-text">
+							<!-- eslint-disable-next-line svelte/no-at-html-tags -->
+							<span>{@html msgs.onboarding_become_paying_member}</span>
+							<!-- eslint-disable-next-line svelte/no-at-html-tags -->
+							<span class="agreement-sub">{@html msgs.onboarding_paying_member_donate_notice}</span>
+						</span>
+					</label>
+				</div>
 				<label class="agreement">
 					<input
 						type="checkbox"
@@ -842,12 +857,6 @@
 					<span class="checkbox-box" aria-hidden="true"></span>
 					<!-- eslint-disable-next-line svelte/no-at-html-tags -->
 					<span>{@html msgs.onboarding_agree_conduct}</span>
-				</label>
-				<label class="agreement">
-					<input type="checkbox" name="become_paying_member" bind:checked={becomePayingMember} />
-					<span class="checkbox-box" aria-hidden="true"></span>
-					<!-- eslint-disable-next-line svelte/no-at-html-tags -->
-					<span>{@html msgs.onboarding_become_paying_member}</span>
 				</label>
 				<div class="submit-group">
 					<button type="submit" class="primary" disabled={!volunteerFormComplete || submitting}>
@@ -1267,6 +1276,22 @@
 		font-size: 0.95rem;
 	}
 
+	.agreement-text {
+		display: flex;
+		flex-direction: column;
+		gap: 0.2rem;
+	}
+
+	.agreement-sub {
+		font-size: 0.8rem;
+		opacity: 0.75;
+		line-height: 1.4;
+	}
+
+	.paying-member-info .agreement {
+		margin-top: 0.75rem;
+	}
+
 	.agreement input {
 		position: absolute;
 		width: 1px;
@@ -1308,6 +1333,26 @@
 
 	.path-intro {
 		opacity: 0.85;
+	}
+
+	.paying-member-info {
+		margin: 0.5rem 0 0;
+		padding: 1rem 1.25rem;
+		background-color: var(--bg-subtle);
+		border: 1px solid var(--brand-subtle);
+		border-radius: 12px;
+	}
+
+	.paying-member-info .field-label {
+		display: block;
+		margin: 0 0 0.5rem;
+	}
+
+	.paying-member-info p {
+		margin: 0;
+		font-size: 0.9rem;
+		line-height: 1.5;
+		opacity: 0.9;
 	}
 
 	.confirmation {
