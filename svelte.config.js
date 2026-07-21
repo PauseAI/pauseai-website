@@ -26,7 +26,7 @@ const mdsvexOptions = {
 	rehypePlugins: [rehypeUnwrapImages, rehypeSlug]
 }
 
-/** @type {[string, ((warning: import('@sveltejs/kit').Warning) => boolean) | undefined][]} */
+/** @type {[string, ((warning: { code: string; message: string }) => boolean) | undefined][]} */
 const skipWarnings = [
 	['a11y_missing_attribute', (warning) => warning.message.includes('title')], // Skip warnings about missing title attributes on iframes
 	['a11y_no_noninteractive_tabindex'] // Skip warnings about tabindex on non-interactive elements (like iframes)
