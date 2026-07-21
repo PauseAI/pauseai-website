@@ -83,6 +83,9 @@ export interface OnboardingMessages {
 	onboarding_agree_conduct: string
 	onboarding_become_paying_member: string
 	onboarding_become_paying_member_disclaimer: string
+	onboarding_paying_member_heading: string
+	onboarding_paying_member_description: string
+	onboarding_paying_member_donate_notice: string
 	onboarding_lead_title: (role: string) => string
 	onboarding_lead_meta: string
 	onboarding_lead_intro: string
@@ -272,6 +275,11 @@ const en: OnboardingMessages = {
 		'I want to become a paying member — open the donation page after submitting.',
 	onboarding_become_paying_member_disclaimer:
 		'The payment processor (Stripe) will open in a new tab when you submit.',
+	onboarding_paying_member_heading: 'Would you like to become a paying member of PauseAI Global?',
+	onboarding_paying_member_description:
+		'By contributing a $5 monthly fee, you can support the work of PauseAI Global volunteers to protest, lobby and coordinate for a global pause on the development of Artificial General Intelligence. To unsubscribe, message us at <a href="mailto:unsubscribe@pauseai.info">unsubscribe@pauseai.info</a>.',
+	onboarding_paying_member_donate_notice:
+		'You can also make a larger contribution to PauseAI Global by donating to us <a target="_blank" rel="noopener noreferrer" href="https://pauseai.info/donate">here</a>.',
 	onboarding_lead_title: (role) => `${role} Volunteer Description`,
 	onboarding_lead_meta: 'Part-time volunteer role · 5–15 hours/week',
 	onboarding_lead_intro:
@@ -483,6 +491,11 @@ const de: OnboardingMessages = {
 		'Ich möchte zahlendes Mitglied werden — nach dem Absenden die Spendenseite öffnen.',
 	onboarding_become_paying_member_disclaimer:
 		'Der Zahlungsanbieter (Stripe) wird beim Absenden in einem neuen Tab geöffnet.',
+	onboarding_paying_member_heading: 'Möchtest du zahlendes Mitglied von PauseAI Global werden?',
+	onboarding_paying_member_description:
+		'Mit einem monatlichen Beitrag von 5 $ kannst du die Arbeit der Freiwilligen von PauseAI Global unterstützen — für Proteste, Lobbyarbeit und Koordination für eine globale Pause der Entwicklung Künstlicher Allgemeiner Intelligenz. Zum Abbestellen schreibe uns an <a href="mailto:unsubscribe@pauseai.info">unsubscribe@pauseai.info</a>.',
+	onboarding_paying_member_donate_notice:
+		'Du kannst PauseAI Global auch mit einer größeren Spende unterstützen, <a target="_blank" rel="noopener noreferrer" href="https://pauseai.info/donate">hier</a>.',
 	onboarding_lead_title: (role) => `${role} – Freiwilligenbeschreibung`,
 	onboarding_lead_meta: 'Ehrenamtliche Teilzeitrolle · 5–15 Stunden/Woche',
 	onboarding_lead_intro:
@@ -699,6 +712,11 @@ const fr: OnboardingMessages = {
 		'Je souhaite devenir membre payant — ouvrir la page de don après envoi.',
 	onboarding_become_paying_member_disclaimer:
 		"Le prestataire de paiement (Stripe) s'ouvrira dans un nouvel onglet lors de l'envoi.",
+	onboarding_paying_member_heading: 'Souhaites-tu devenir membre payant de PauseAI Global ?',
+	onboarding_paying_member_description:
+		'Avec une cotisation mensuelle de 5 $, tu peux soutenir le travail des bénévoles de PauseAI Global — protestations, plaidoyer et coordination pour une pause mondiale du développement de l\'Intelligence Artificielle Générale. Pour te désabonner, écris-nous à <a href="mailto:unsubscribe@pauseai.info">unsubscribe@pauseai.info</a>.',
+	onboarding_paying_member_donate_notice:
+		'Tu peux aussi apporter une contribution plus importante à PauseAI Global en faisant un don <a target="_blank" rel="noopener noreferrer" href="https://pauseai.info/donate">ici</a>.',
 	onboarding_lead_title: (role) => `Description du rôle bénévole : ${role}`,
 	onboarding_lead_meta: 'Rôle bénévole à temps partiel · 5 à 15 heures/semaine',
 	onboarding_lead_intro:
