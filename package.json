@@ -70,7 +70,7 @@
 		"remove-markdown": "^0.6.4",
 		"schema-dts": "^2.0.0",
 		"simple-git": "^3.36.0",
-		"stylelint": "^17.14.0",
+		"stylelint": "^17.14.1",
 		"svelte": "^5.56.4",
 		"svelte-check": "^4.7.3",
 		"tsx": "^4.23.1",
