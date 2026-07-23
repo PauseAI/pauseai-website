@@ -44,7 +44,7 @@
 						<NetlifyImage
 							src={item.image}
 							alt={item.title}
-							imgClass="image"
+							imgClass="image image-contain"
 							sizes={imageSizes}
 							onFailed={() => (hasImageError = true)}
 						/>
@@ -52,9 +52,9 @@
 						<Image
 							src={item.image}
 							alt={item.title}
-							class="image"
+							class="image image-cover"
 							sizes={imageSizes}
-							aspectRatio={16 / 10}
+							aspectRatio={1200 / 628}
 						/>
 					{/if}
 				{:else}
@@ -68,7 +68,7 @@
 			{/if}
 			<h3 class="card-title toc-exclude">
 				<Skeleton {loading} variant="text" count={2} width="80%">
-					{item?.title}
+					<span class="card-title-text">{item?.title}</span>
 				</Skeleton>
 			</h3>
 			{#if loading || item?.subtitle}
@@ -116,19 +116,35 @@
 
 	.image-container {
 		width: 100%;
-		aspect-ratio: 16 / 10;
+		/* Match the 1200/628 post-banner crop so curated banner images fill the
+		   card the same way they frame the post header. */
+		aspect-ratio: 1200 / 628;
 		overflow: hidden;
+		background: var(--bg-subtle);
 	}
 
 	.image-container :global(.image) {
 		width: 100%;
 		height: 100%;
-		object-fit: cover;
 		border-radius: 0;
 		transition: transform 0.3s ease;
 	}
 
-	* :global(.news-card:hover .image-container .image) {
+	/* Internal post images are curated to frame well at the banner ratio, so
+	   cover-crop them. Substack/press images are arbitrary shapes we don't
+	   control, so contain them to avoid cutting off charts, posters, etc. */
+	.image-container :global(.image-cover) {
+		object-fit: cover;
+	}
+
+	.image-container :global(.image-contain) {
+		object-fit: contain;
+	}
+
+	/* Only zoom cover-cropped (internal) images on hover. Zooming a contained
+	   image would re-crop it under the container's overflow:hidden, defeating
+	   the point of showing it in full. */
+	* :global(.news-card:hover .image-container .image-cover) {
 		transform: scale(1.03);
 	}
 
@@ -154,6 +170,24 @@
 		line-height: 1.2;
 		margin: 0;
 		text-transform: none;
+		/* Reserve a fixed two-line area and center the title within it, so every
+		   card's subtitle starts at the same height regardless of title length,
+		   and short one-line titles don't leave a gap above the subtitle. */
+		min-height: calc(1.1rem * 1.2 * 3);
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+	}
+
+	/* Clamp lives on the inner element because -webkit-line-clamp needs
+	   display: -webkit-box, which can't coexist with the flex centering above. */
+	.card-title-text {
+		display: -webkit-box;
+		-webkit-line-clamp: 3;
+		line-clamp: 3;
+		-webkit-box-orient: vertical;
+		overflow: hidden;
 	}
 
 	.card-outlet {
