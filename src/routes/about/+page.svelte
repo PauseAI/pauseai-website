@@ -43,7 +43,7 @@
 	</p>
 
 	<p>
-		What started as one person's call to action has grown into a global grassroots movement with
+		What started as one person's call to action has grown into a global <strong>peaceful</strong> grassroots movement with
 		volunteers, <Link href="/national-groups">national leaders</Link>, and
 		<Link href="/local-communities">local communities</Link> across the world, all working toward the
 		same goal: pausing frontier AI development until we can prove it's safe and keep it under democratic
