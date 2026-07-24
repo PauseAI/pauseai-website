@@ -422,7 +422,6 @@
 						autocomplete="email"
 						bind:value={basics.email}
 					/>
-					<p class="helper">{msgs.onboarding_helper_email_gmail}</p>
 					<!-- <p class="helper">
 						We may contact you about critical mobilizations, see our
 						<Link href="/privacy">privacy policy</Link>.
