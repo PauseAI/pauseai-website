@@ -11,7 +11,6 @@ export interface OnboardingMessages {
 	onboarding_placeholder_full_name: string
 	onboarding_field_email: string
 	onboarding_placeholder_email: string
-	onboarding_helper_email_gmail: string
 	onboarding_field_country: string
 	onboarding_placeholder_country: string
 	onboarding_field_city: string
@@ -189,7 +188,6 @@ const en: OnboardingMessages = {
 	onboarding_placeholder_full_name: 'Full name',
 	onboarding_field_email: 'Email *',
 	onboarding_placeholder_email: 'Email',
-	onboarding_helper_email_gmail: 'Preferably Gmail if you have one.',
 	onboarding_field_country: 'Country of residence *',
 	onboarding_placeholder_country: 'Select your country',
 	onboarding_field_city: 'City / town of residence *',
@@ -400,7 +398,6 @@ const de: OnboardingMessages = {
 	onboarding_placeholder_full_name: 'Vollständiger Name',
 	onboarding_field_email: 'E-Mail *',
 	onboarding_placeholder_email: 'E-Mail',
-	onboarding_helper_email_gmail: 'Falls vorhanden, bevorzugt Gmail.',
 	onboarding_field_country: 'Wohnsitzland *',
 	onboarding_placeholder_country: 'Land auswählen',
 	onboarding_field_city: 'Stadt / Gemeinde *',
@@ -621,7 +618,6 @@ const fr: OnboardingMessages = {
 	onboarding_placeholder_full_name: 'Nom complet',
 	onboarding_field_email: 'E-mail *',
 	onboarding_placeholder_email: 'E-mail',
-	onboarding_helper_email_gmail: 'De préférence Gmail si tu en as un.',
 	onboarding_field_country: 'Pays de résidence *',
 	onboarding_placeholder_country: 'Sélectionne ton pays',
 	onboarding_field_city: 'Ville / commune de résidence *',
