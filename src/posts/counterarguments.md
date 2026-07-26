@@ -100,7 +100,7 @@ Read more about [feasibility](/feasibility).
 ## A Pause would be bad, because...
 
 Some ways in which a pause could be bad and how we could prevent those scenarios are explained on [this page](/mitigating-pause-failures).
-But if the article doesn't cover your worries you can tell us about them [here](https://airtable.com/appWPTGqZmUcs3NWu/pagIvo9Sv6IDHaolu/form).
+But if the article doesn't cover your worries you can tell us about them [here](/contact-us?tab=feedback).
 
 ## Nobody wants a Pause
 
