@@ -67,7 +67,7 @@ jobs:
       - name: Commit and push changes
         uses: stefanzweifel/git-auto-commit-action@v7
         with:
-          commit_message: 'style: format code with prettier'
+          commit_message: 'Format code with Prettier'
           branch: ${{ steps.get-pr.outputs.branch }}
 
       - name: React to comment
