@@ -88,5 +88,5 @@ jobs:
               owner: context.repo.owner,
               repo: context.repo.repo,
               issue_number: prNumber,
-              body: `🚀 Deployment triggered for branch \`${branch}\`!\n\nOnce the build is finished, it will be available at:\n[${previewUrl}](${previewUrl})`
+              body: `🚀 Deployment triggered for branch \`${branch}\`!\n\nOnce the build is finished, it will be available at:\n[${previewUrl}](${previewUrl})\n\nYou can check the deployment status here:\n[Netlify deploys list](https://app.netlify.com/projects/${siteName}/deploys)`
             });
