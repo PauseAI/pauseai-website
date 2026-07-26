@@ -87,7 +87,7 @@
 		"@glidejs/glide": "~3.6.2",
 		"@lucide/svelte": "^1.26.0",
 		"@notionhq/client": "^2.3.0",
-		"@number-flow/svelte": "^0.3.13",
+		"@number-flow/svelte": "^0.4.2",
 		"@pagefind/component-ui": "^1.5.2",
 		"@prgm/sveltekit-progress-bar": "^3.0.2",
 		"@remix-run/headers": "^0.21.1",
