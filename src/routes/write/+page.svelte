@@ -527,8 +527,7 @@
 						<textarea
 							placeholder="Type here (Question {globalIndex + 1})"
 							bind:value={input_arr[globalIndex]}
-							onkeydown={handleKeyDown}
-						></textarea>
+							onkeydown={handleKeyDown}></textarea>
 					{/each}
 				{/each}
 			{/each}

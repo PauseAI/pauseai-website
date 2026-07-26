@@ -235,8 +235,7 @@ ${userPostcode.toUpperCase()}`)
 					placeholder="Email subject"
 					oninput={autoResizeSubject}
 					rows="1"
-					class="subject-textarea"
-				></textarea>
+					class="subject-textarea"></textarea>
 			</div>
 
 			<div class="form-group">
@@ -275,8 +274,7 @@ ${userPostcode.toUpperCase()}`)
 						required
 						placeholder="Your message to the MP"
 						oninput={autoResize}
-						rows="1"
-					></textarea>
+						rows="1"></textarea>
 				</div>
 
 				<div class="preview-section">
