@@ -173,9 +173,8 @@
 		<NearbyEvent contrast={hero} bind:eventFound geo={geoForNearbyEvent} />
 
 		<Banner contrast={hero} id="pausecon-london-2026">
-			<strong>PauseCon London 2026</strong>: Apply now to join our September organising conference. <Link
-				href="https://luma.com/4be2eqz9">Apply here!</Link
-			>
+			<strong>PauseCon London 2026</strong>: Apply now to join our September organising conference.
+			<strong><Link href="https://luma.com/4be2eqz9">Apply here!</Link></strong>
 		</Banner>
 
 		{#if hero}
