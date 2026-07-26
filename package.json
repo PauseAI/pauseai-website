@@ -94,7 +94,7 @@
 		"@sentry/deno": "^10.68.0",
 		"@sentry/svelte": "^10.68.0",
 		"@sentry/vite-plugin": "^5.4.0",
-		"@sveltejs/enhanced-img": "^0.10.4",
+		"@sveltejs/enhanced-img": "^0.11.0",
 		"@turf/distance": "^7.3.5",
 		"airtable": "^0.12.2",
 		"axios": "^1.18.1",
