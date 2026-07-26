@@ -4,12 +4,17 @@
 	import CommunitiesList from './CommunitiesList.svelte'
 	import type { GeoApiResponse } from '$api/geo/+server'
 	import type { StyleSpecification } from 'maplibre-gl'
-	import maplibregl from 'maplibre-gl'
+	import * as maplibregl from 'maplibre-gl'
 	import 'maplibre-gl/dist/maplibre-gl.css'
+	import workerUrl from 'maplibre-gl/dist/maplibre-gl-worker.mjs?worker&url'
 	import { isMapboxURL, transformMapboxUrl } from 'maplibregl-mapbox-request-transformer'
 	import { onDestroy, onMount } from 'svelte'
 	import { communities, communitiesMeta } from './communities'
 	import { MAPBOX_KEY } from './constants'
+
+	// maplibre-gl v6 is ESM-only; the worker URL must be set explicitly under
+	// bundlers like Vite (see v5→v6 migration guide).
+	maplibregl.setWorkerUrl(workerUrl)
 
 	// maplibre-gl doesn't support named imports on the server
 	const { GeolocateControl, Map, Marker, Popup } = maplibregl
