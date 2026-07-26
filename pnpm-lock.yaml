@@ -27,8 +27,8 @@ importers:
         specifier: ^2.3.0
         version: 2.3.0
       '@number-flow/svelte':
-        specifier: ^0.3.13
-        version: 0.3.13(svelte@5.56.8(@typescript-eslint/types@8.65.0))
+        specifier: ^0.4.2
+        version: 0.4.2(svelte@5.56.8(@typescript-eslint/types@8.65.0))
       '@pagefind/component-ui':
         specifier: ^1.5.2
         version: 1.5.2
@@ -1093,8 +1093,8 @@ packages:
     resolution: {integrity: sha512-l7WqTCpQqC+HibkB9chghONQTYcxNQT0/rOJemBfmuKQRTu2vuV8B3yA395iKaUdDo7HI+0KvQaz9687Xskzkw==}
     engines: {node: '>=12'}
 
-  '@number-flow/svelte@0.3.13':
-    resolution: {integrity: sha512-mvbxDeSFa1o/E4vGhrWuawAFCgcn5qTQ/s++FIoD88es5+JQa/aMQUypTy7qXIreTtTvncpIbkKdw9DMnweaSw==}
+  '@number-flow/svelte@0.4.2':
+    resolution: {integrity: sha512-svlhRTdBXl1MKfRcrCllqvSZkb2qt0Ep+qEh3TUAcv8E4pnf9wJfhKzx5ISKZcFbpS117i+257U4LHyuTYdTuA==}
     peerDependencies:
       svelte: ^4 || ^5
 
@@ -3224,8 +3224,8 @@ packages:
     engines: {node: ^22.22.2 || ^24.15.0 || >=26.0.0, npm: '>= 10'}
     hasBin: true
 
-  number-flow@0.5.12:
-    resolution: {integrity: sha512-CIs21h2JkfYG4rfgERaUNAk0Cz+Ef14fNJfSCbGGhgRgconQc9b7rcCQfi9SZ36kNjVXmsl2BrzDbjGtEgumAA==}
+  number-flow@0.6.2:
+    resolution: {integrity: sha512-MCnImG4Q5vPwhSXnov56nOuyyKn6LC+Qd7II1UiKc+ACRtug5iAtn0+CwXNxM38AC5lSowEY+oYEtZX2qMnUyw==}
 
   obug@2.1.1:
     resolution: {integrity: sha512-uTqF9MuPraAQ+IsnPf366RG4cP9RtUi7MLO1N3KEc+wb0a6yKpeL0lmk2IB1jY5KHPAlTc6T/JRdC/YqxHNwkQ==}
@@ -4722,10 +4722,10 @@ snapshots:
     transitivePeerDependencies:
       - encoding
 
-  '@number-flow/svelte@0.3.13(svelte@5.56.8(@typescript-eslint/types@8.65.0))':
+  '@number-flow/svelte@0.4.2(svelte@5.56.8(@typescript-eslint/types@8.65.0))':
     dependencies:
       esm-env: 1.2.2
-      number-flow: 0.5.12
+      number-flow: 0.6.2
       svelte: 5.56.8(@typescript-eslint/types@8.65.0)
 
   '@opentelemetry/api@1.9.1': {}
@@ -6897,7 +6897,7 @@ snapshots:
       shell-quote: 1.10.0
       which: 7.0.0
 
-  number-flow@0.5.12:
+  number-flow@0.6.2:
     dependencies:
       esm-env: 1.2.2
 
