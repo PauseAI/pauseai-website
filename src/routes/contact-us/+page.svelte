@@ -289,8 +289,7 @@
 							name="message"
 							required
 							placeholder="Provide additional details to how you would like to partner with us, particularly if related to a time sensitive matter."
-							bind:value={formData.partnerships.message}
-						></textarea>
+							bind:value={formData.partnerships.message}></textarea>
 					</div>
 					<button type="submit" disabled={loading}>
 						{loading ? 'Sending...' : 'Send Message'}
@@ -363,8 +362,7 @@
 							name="details"
 							required
 							placeholder="Message"
-							bind:value={formData.media.details}
-						></textarea>
+							bind:value={formData.media.details}></textarea>
 					</div>
 					<button type="submit" disabled={loading}>
 						{loading ? 'Sending...' : 'Send Message'}
@@ -423,8 +421,7 @@
 							name="message"
 							required
 							placeholder="Your Feedback"
-							bind:value={formData.feedback.message}
-						></textarea>
+							bind:value={formData.feedback.message}></textarea>
 					</div>
 					<button type="submit" disabled={loading}>
 						{loading ? 'Sending...' : 'Send Message'}
