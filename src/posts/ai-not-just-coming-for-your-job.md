@@ -46,7 +46,7 @@ This is not a campaign to save any one job. It is a campaign to make sure humans
 
 The labs will not slow down on their own. Public pressure is what changes that, and it starts with people like you taking one concrete step.
 
-- **Coordinate your own Week of Action event:** Join the Global Week of Action this September by organising a peaceful local event calling for greater public accountability and binding international safeguards for advanced AI. Approved events will be featured on the campaign website, promoted through our social media channels, eligible for micro-grants and have access to our branded materials.[ ](/p/751b6352893f4022b1f96f4b3917ff44?pvs=25)[Submit your Week of Action event](https://tally.so/forms/pb6BgP/edit)
+- **Coordinate your own Week of Action event:** Join the Global Week of Action this September by organising a peaceful local event calling for greater public accountability and binding international safeguards for advanced AI. Approved events will be featured on the campaign website, promoted through our social media channels, eligible for micro-grants and have access to our branded materials. [Submit your Week of Action event](https://tally.so/forms/pb6BgP/edit)
 - **Share your story :** Tell us how AI is affecting your work, your studies, your healthcare, your family, or what you fear is coming next. Your story is one of the most powerful tools we have to make decision makers listen. [Share your story](https://pauseai.info/ai-concerns)
 
   - Optional: record a short video of your concern and share it on social media.
