@@ -38,7 +38,7 @@ Over the coming months, PauseAI chapters around the world are:
 - Collecting stories from workers, students, parents, patients and creatives about how AI is already changing their lives, and what they fear is coming next
 - Building coalitions with unions, student groups, parent associations, healthcare workers and creative industries who are seeing the same pattern from different angles
 - Meeting with elected officials and decision makers to demand binding limits on frontier AI development, backed by international coordination
-- Preparing for a global day of action this summer to put public pressure on governments to act before it is too late
+- Preparing for a global week of action this autumn to put public pressure on governments to act before it is too late
 
 This is not a campaign to save any one job. It is a campaign to make sure humans stay in charge of their future.
 
@@ -46,9 +46,9 @@ This is not a campaign to save any one job. It is a campaign to make sure humans
 
 The labs will not slow down on their own. Public pressure is what changes that, and it starts with people like you taking one concrete step.
 
+- **Coordinate your own Week of Action event:** Join the Global Week of Action this September by organising a peaceful local event calling for greater public accountability and binding international safeguards for advanced AI. Approved events will be featured on the campaign website, promoted through our social media channels, eligible for micro-grants and have access to our branded materials.[ ](/p/751b6352893f4022b1f96f4b3917ff44?pvs=25)[Submit your Week of Action event](https://tally.so/forms/pb6BgP/edit)
 - **Share your story :** Tell us how AI is affecting your work, your studies, your healthcare, your family, or what you fear is coming next. Your story is one of the most powerful tools we have to make decision makers listen. [Share your story](https://pauseai.info/ai-concerns)
-  - Optional: record a short video of your concern and share it on social media.
-
+- Optional: record a short video of your concern and share it on social media.
 - **Talk with friends and family:** Most people sense something is wrong but do not have the words for it.
 - **Write to your elected official:** Politicians act when they hear from their constituents. It takes two minutes with our email builder. [pauseai.info/email-builder](http://pauseai.info/email-builder)
 - **Connect to your local chapter:** Find the people organising near you and join their next action. [pauseai.info/communities](http://pauseai.info/communities)
