@@ -84,6 +84,9 @@
 			PauseAI US, each running their own campaigns while we coordinate globally.
 		</li>
 	</ul>
+
+	<h2>Non-violence</h2>
+	<p>We are committed to a peaceful approach to our advocacy.</p>
 </div>
 
 <section data-pagefind-ignore>
