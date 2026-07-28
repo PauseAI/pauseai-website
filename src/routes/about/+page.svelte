@@ -86,9 +86,7 @@
 	</ul>
 
 	<h2>Non-violence</h2>
-	<p>
-		We are committed to a peaceful approach to our advocacy.
-	</p>
+	<p>We are committed to a peaceful approach to our advocacy.</p>
 </div>
 
 <section data-pagefind-ignore>
