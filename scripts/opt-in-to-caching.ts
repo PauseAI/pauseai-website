@@ -1,4 +1,4 @@
-import { readEdgeManifest, searchRenderFunction, writeEdgeManifest } from './utils/utils'
+import { readEdgeConfig, searchRenderFunction, writeEdgeConfig } from './utils/utils'
 import { USE_EDGE_FUNCTIONS } from '../svelte.config.js'
 
 if (!USE_EDGE_FUNCTIONS) {
@@ -6,7 +6,7 @@ if (!USE_EDGE_FUNCTIONS) {
 	process.exit(0)
 }
 
-const manifest = await readEdgeManifest()
-const renderFunction = searchRenderFunction(manifest)!
+const config = await readEdgeConfig()
+const renderFunction = searchRenderFunction(config)!
 renderFunction.cache = 'manual'
-await writeEdgeManifest(manifest)
+await writeEdgeConfig(config)
