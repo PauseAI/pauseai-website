@@ -655,6 +655,12 @@
 			"link": "https://chat.whatsapp.com/D8j1ci4PDonJJ8Rk15wKnb",
 			"lat": 49.5925739,
 			"lon": 17.2496039
+		},
+		{
+			"name": "West of England/Bristol",
+			"lat": 512727.4,
+			"lon": 23501.4,
+			"link": "https://pauseai.uk/west-of-england"
 		}
 	]
 }
