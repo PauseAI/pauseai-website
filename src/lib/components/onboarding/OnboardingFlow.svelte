@@ -422,10 +422,8 @@
 						autocomplete="email"
 						bind:value={basics.email}
 					/>
-					<!-- <p class="helper">
-						We may contact you about critical mobilizations, see our
-						<Link href="/privacy">privacy policy</Link>.
-					</p> -->
+					<!-- eslint-disable-next-line svelte/no-at-html-tags -->
+					<p class="helper">{@html msgs.onboarding_email_critical_notice}</p>
 				</div>
 				<div class="field">
 					<label class="field-label" for="ob-country">{msgs.onboarding_field_country}</label>
@@ -621,10 +619,8 @@
 									autocomplete="email"
 									bind:value={basics.email}
 								/>
-								<!-- <p class="helper">
-									We may contact you about critical mobilizations, see our
-									<Link href="/privacy">privacy policy</Link>.
-								</p> -->
+								<!-- eslint-disable-next-line svelte/no-at-html-tags -->
+								<p class="helper">{@html msgs.onboarding_email_critical_notice}</p>
 							</div>
 							<div class="field">
 								<label class="field-label" for="loop-country">{msgs.onboarding_field_country}</label
