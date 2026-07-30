@@ -1,7 +1,7 @@
 <!-- See docs/image-processing.md for the full image-processing architecture. -->
 <script lang="ts">
 	import Image from '../images/Image.svelte'
-	import { getPostPictures } from './post-pictures-context.svelte'
+	import { getPostPictures } from '$lib/post-pictures-context.svelte'
 
 	interface Props {
 		src: string

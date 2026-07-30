@@ -1,6 +1,6 @@
 // See docs/image-processing.md for the full image-processing architecture.
 import { getPostMetaImageUrl, resolveImageUrl, resolvePicture } from '$lib/image.server'
-import type { ResolvedImage } from '$lib/components/custom/post-pictures-context.svelte'
+import type { ResolvedImage } from '$lib/post-pictures-context.svelte'
 import { importMarkdown } from './markdown'
 
 export interface PostImages {
