@@ -1,4 +1,5 @@
 // See docs/image-processing.md for the full image-processing architecture.
+import { dev } from '$app/environment'
 import { getPostMetaImageUrl, resolveImageUrl, resolvePicture } from '$lib/image.server'
 import type { ResolvedImage } from '$lib/post-pictures-context.svelte'
 import { importMarkdown } from './markdown'
@@ -33,9 +34,10 @@ export async function imagesForPost(locale: string, slug: string): Promise<PostI
 
 		// Body images collected by remark-collect-images
 		pictures = resolveBodyPictures(metadata._images)
-	} catch {
+	} catch (error) {
 		// If the markdown can't be imported (e.g. missing translation in prod),
 		// the client load will surface the 404 — no pictures to resolve here.
+		if (dev) console.error(`imagesForPost: failed to resolve images for ${locale}/${slug}`, error)
 	}
 
 	return { pictures, banner, metaImageUrl }
