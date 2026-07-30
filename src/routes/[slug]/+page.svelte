@@ -25,7 +25,9 @@
 
 	// Expose server-resolved Picture objects to the markdown <img> renderer so
 	// it can use Image directly instead of bundling the glob resolver.
-	$effect(() => setPostPictures(data.pictures ?? {}))
+	// setContext must run during component init (not in $effect) so children
+	// can read it during their own init; data.pictures is set per-navigation.
+	setPostPictures(data.pictures ?? {})
 </script>
 
 <svelte:head>
