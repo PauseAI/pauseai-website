@@ -402,7 +402,7 @@ const de: OnboardingMessages = {
 	onboarding_field_email: 'E-Mail *',
 	onboarding_placeholder_email: 'E-Mail',
 	onboarding_email_critical_notice:
-		'Wir senden dir gelegentlich eine kritische Warnung, auch wenn du dich für nichts anderes anmeldest. Siehe unsere <a target="_blank" rel="noopener noreferrer" href="/privacy">Datenschutzrichtlinie</a>.',
+		'Wir können dir gelegentlich eine kritische Warnung senden, auch wenn du dich für nichts anderes anmeldest. Siehe unsere <a target="_blank" rel="noopener noreferrer" href="/privacy">Datenschutzrichtlinie</a>.',
 	onboarding_field_country: 'Wohnsitzland *',
 	onboarding_placeholder_country: 'Land auswählen',
 	onboarding_field_city: 'Stadt / Gemeinde *',
