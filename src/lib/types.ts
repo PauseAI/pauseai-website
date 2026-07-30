@@ -4,6 +4,15 @@ import type { DeepPartial } from './utils'
 
 export type { Picture }
 
+/**
+ * Like `Picture`, but with optional intrinsic dimensions so callers that
+ * don't know the image size (e.g. NetlifyImage) don't have to fabricate
+ * width/height values.
+ */
+export type LoosePicture = Omit<Picture, 'img'> & {
+	img: Partial<Picture['img']> & Pick<Picture['img'], 'src'>
+}
+
 export type Categories = 'sveltekit' | 'svelte' | 'AI Safety' | 'Transparency' | 'Government'
 
 export type LinkType = 'internal' | 'external' | 'mail'

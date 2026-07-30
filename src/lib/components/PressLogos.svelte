@@ -20,31 +20,31 @@
 		{
 			name: 'Wired',
 			picture: wiredLogo,
-			assetUrl: null,
+			assetUrl: undefined,
 			url: 'https://www.wired.com/story/pause-ai-existential-risk/'
 		},
 		{
 			name: 'The Verge',
 			picture: vergeLogo,
-			assetUrl: null,
+			assetUrl: undefined,
 			url: 'https://www.theverge.com/2023/5/24/23735982/sam-altman-openai-superintelligent-benefits-talk-london-ucl-protests'
 		},
 		{
 			name: 'Bloomberg',
 			picture: bloombergLogo,
-			assetUrl: null,
+			assetUrl: undefined,
 			url: 'https://www.bloomberg.com/news/newsletters/2024-02-13/ai-protest-at-openai-hq-in-san-francisco-focuses-on-military-work'
 		},
 		{
 			name: 'Fortune',
 			picture: fortuneLogo,
-			assetUrl: null,
+			assetUrl: undefined,
 			url: 'https://fortune.com/2023/05/24/openai-ceo-sam-altman-credits-elon-musk-with-teaching-him-the-importance-of-deep-tech-investing-but-he-has-no-interest-in-living-on-mars/'
 		},
 		{
 			name: 'Politico',
 			picture: politicoLogo,
-			assetUrl: null,
+			assetUrl: undefined,
 			url: 'https://www.politico.eu/article/microsoft-brussels-elon-musk-anti-ai-protesters-well-five-of-them-descend-on-brussels/'
 		}
 	]

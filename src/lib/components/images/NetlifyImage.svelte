@@ -2,7 +2,7 @@
 <script lang="ts">
 	import { SvelteURLSearchParams } from 'svelte/reactivity'
 	import Picture from './Picture.svelte'
-	import type { Picture as PictureType } from '$lib/types'
+	import type { LoosePicture } from '$lib/types'
 
 	interface Props {
 		src: string
@@ -89,7 +89,7 @@
 	)
 
 	// Build a Picture-shaped object so we can reuse the shared Picture component.
-	const picture = $derived<PictureType>({
+	const picture = $derived<LoosePicture>({
 		sources: {
 			avif: avifSrcSet,
 			webp: webpSrcSet

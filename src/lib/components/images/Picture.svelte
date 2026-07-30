@@ -1,15 +1,6 @@
 <!-- See docs/image-processing.md for the full image-processing architecture. -->
 <script lang="ts">
-	import type { Picture } from '$lib/types'
-
-	/**
-	 * Like `Picture`, but with optional intrinsic dimensions so callers that
-	 * don't know the image size (e.g. NetlifyImage) don't have to fabricate
-	 * width/height values.
-	 */
-	type LoosePicture = Omit<Picture, 'img'> & {
-		img: Partial<Picture['img']> & Pick<Picture['img'], 'src'>
-	}
+	import type { LoosePicture } from '$lib/types'
 
 	interface Props {
 		/** vite-imagetools Picture object (sources + img fallback). */

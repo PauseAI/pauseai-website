@@ -1,11 +1,11 @@
 <!-- See docs/image-processing.md for the full image-processing architecture. -->
 <script lang="ts">
 	import Picture from './Picture.svelte'
-	import type { Picture as PictureType } from '$lib/types'
+	import type { LoosePicture } from '$lib/types'
 	import { layoutWidth } from '$lib/config'
 
 	interface Props {
-		picture?: PictureType | null
+		picture?: LoosePicture | null
 		/** Fallback <img> src when no picture is available (external URL or Vite-resolved asset URL). */
 		src?: string
 		alt?: string
@@ -33,7 +33,7 @@
 	// to cover the container, so the effective source width may exceed the display
 	// width. The scaling factor is max(1, imgAr / targetAr).
 	let coverFactor = $derived.by(() => {
-		if (!picture || !aspectRatio) return 1
+		if (!picture || !aspectRatio || !picture.img.w || !picture.img.h) return 1
 		const imgAr = picture.img.w / picture.img.h
 		return Math.max(1, imgAr / aspectRatio)
 	})
