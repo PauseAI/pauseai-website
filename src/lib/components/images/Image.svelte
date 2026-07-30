@@ -67,13 +67,8 @@
 		{loading}
 		{fetchpriority}
 		sizes={effectiveSizes}
+		imgStyle="height: auto"
 	/>
 {:else}
-	<img {src} {alt} {title} {loading} {fetchpriority} class={className} />
+	<img {src} {alt} {title} {loading} {fetchpriority} class={className} style="height: auto" />
 {/if}
-
-<style>
-	.enhanced {
-		height: auto;
-	}
-</style>

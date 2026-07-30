@@ -14,6 +14,8 @@
 		pictureClass?: string
 		/** Inline style applied to the <picture> wrapper. */
 		style?: string
+		/** Inline style applied to the inner <img>. */
+		imgStyle?: string
 		loading?: 'eager' | 'lazy'
 		fetchpriority?: 'high' | 'low' | 'auto'
 		decoding?: 'async' | 'sync' | 'auto'
@@ -28,6 +30,7 @@
 		class: className = '',
 		pictureClass = '',
 		style = undefined,
+		imgStyle = undefined,
 		loading = 'lazy',
 		fetchpriority = 'auto',
 		decoding = 'async',
@@ -47,6 +50,7 @@
 		{title}
 		{sizes}
 		class={className}
+		style={imgStyle}
 		{loading}
 		{fetchpriority}
 		{decoding}
