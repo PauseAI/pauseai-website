@@ -1,8 +1,6 @@
-import type { Picture } from 'vite-imagetools'
+import type { SvelteHTMLElements } from 'svelte/elements'
 import type { Attachment } from 'airtable'
 import type { DeepPartial } from './utils'
-
-export type { Picture }
 
 export type Categories = 'sveltekit' | 'svelte' | 'AI Safety' | 'Transparency' | 'Government'
 
@@ -22,11 +20,6 @@ type StrictFrontmatterMeta = {
 	showImage?: boolean
 	/** If true, this post will appear in the Latest News section on the homepage */
 	news?: boolean
-	/**
-	 * List of all image URLs referenced in the markdown body, injected by the
-	 * `remark-collect-images` plugin. Not authored in frontmatter.
-	 */
-	_images?: string[]
 }
 
 /** Descriptive frontmatter where everything is optional (for markdown parsing) */
@@ -44,12 +37,6 @@ export type NewsItem = {
 	subtitle: string
 	date: string
 	image?: string
-	/**
-	 * Resolved enhanced-image Picture object for internal news items whose `image`
-	 * points at a static asset. Resolved server-side by /api/news so the client
-	 * bundle doesn't need the import.meta.glob resolver.
-	 */
-	picture?: Picture | null
 	outlet?: string
 	/** URL to the article (internal path or external URL) */
 	href: string
@@ -142,6 +129,8 @@ export type NationalGroupLink =
 	| 'linkedinLink'
 	| 'lumaLink'
 	| 'substackLink'
+
+export type Picture = Exclude<SvelteHTMLElements['enhanced:img']['src'], string>
 
 export type CarouselQuote = {
 	text: string

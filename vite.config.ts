@@ -1,3 +1,4 @@
+import { enhancedImages } from '@sveltejs/enhanced-img'
 import { sveltekit } from '@sveltejs/kit/vite'
 import { execSync } from 'child_process'
 import dotenv from 'dotenv'
@@ -8,7 +9,6 @@ import discardDuplicates from 'postcss-discard-duplicates'
 import { defineConfig, type Plugin } from 'vite'
 import lucidePreprocess from 'vite-plugin-lucide-preprocess'
 import { sentryVitePlugin } from '@sentry/vite-plugin'
-import { imagetools } from 'vite-imagetools'
 import { isDev } from './src/lib/env'
 import { MARKDOWN_L10NS } from './src/lib/l10n'
 import { locales as compiledLocales } from './src/lib/paraglide/runtime.js'
@@ -105,22 +105,7 @@ export default defineConfig(() => {
 		plugins: [
 			suppressNetlifyRoute404s(),
 			lucidePreprocess(),
-			// Additional imagetools instance: the `?picture` shorthand returns a JS
-			// object ({ sources, img }) for rendering a <picture> tag with avif +
-			// webp <source>s and a jpeg/png fallback (png when alpha is present).
-			// Default widths match NetlifyImage's defaults for consistent srcset sizing.
-			imagetools({
-				defaultDirectives: (url) => {
-					if (url.searchParams.has('picture')) {
-						return new URLSearchParams({
-							as: 'picture',
-							format: 'avif;webp;jpeg;png',
-							w: '400;800;1200;1600;2400'
-						})
-					}
-					return new URLSearchParams()
-				}
-			}),
+			enhancedImages(),
 			// Generates "<font> fallback" @font-face rules whose metrics match the webfonts,
 			// so text doesn't shift when they swap in (see --font-* variables in styles.css).
 			// Each list needs fonts that resolve via src:local() across platforms —

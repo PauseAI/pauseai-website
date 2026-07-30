@@ -1,7 +1,6 @@
 <script lang="ts">
-	import Image from '$lib/components/images/Image.svelte'
+	import Image from '$lib/components/Image.svelte'
 	import Link from '$lib/components/Link.svelte'
-	import heroPicture from '$assets/images/protests/Home_Hero_-_London_June_2025.jpg?picture'
 
 	// Current campaign. Update this block when the active campaign changes.
 	const campaign = {
@@ -16,7 +15,7 @@
 	<!-- SLOGAN — the movement's permanent identity, over a full-bleed protest photo. -->
 	<section class="slogan">
 		<Image
-			picture={heroPicture}
+			src="/protests/Home_Hero_-_London_June_2025.jpg"
 			class="slogan-photo"
 			sizes="200vw"
 			loading="eager"

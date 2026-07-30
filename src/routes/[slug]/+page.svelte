@@ -1,8 +1,8 @@
 <script lang="ts">
-	import Image from '$lib/components/images/Image.svelte'
+	import Image from '$lib/components/Image.svelte'
 	import Link from '$lib/components/Link.svelte'
 	import PostMeta from '$lib/components/PostMeta.svelte'
-	import { setPostPictures } from '$lib/components/custom/post-pictures-context.svelte'
+	import { getPostMetaImageUrl } from '$lib/images.js'
 	import type { PageData } from './$types'
 
 	interface Props {
@@ -22,10 +22,7 @@
 		showImage = true
 	} = $derived({ title: data.slug, ...data.meta })
 	let parent = $derived(data.slug.split('/').slice(0, -1).join('/'))
-
-	// Expose server-resolved Picture objects to the markdown <img> renderer so
-	// it can use Image directly instead of bundling the glob resolver.
-	setPostPictures(data.pictures ?? {})
+	let metaImageUrl = $derived(getPostMetaImageUrl(image))
 </script>
 
 <svelte:head>
@@ -34,7 +31,7 @@
 	{/each}
 </svelte:head>
 
-<PostMeta title={metaTitle ?? title} {description} {date} image={data.metaImageUrl} />
+<PostMeta title={metaTitle ?? title} {description} {date} image={metaImageUrl} />
 
 <article>
 	{#if parent}
@@ -52,12 +49,7 @@
 
 	{#if image && showImage !== false}
 		<div class="banner">
-			<Image
-				picture={data.banner?.picture ?? null}
-				src={data.banner?.assetUrl ?? image}
-				alt={title}
-				aspectRatio={1200 / 628}
-			/>
+			<Image src={image} alt={title} aspectRatio={1200 / 628} />
 		</div>
 	{/if}
 

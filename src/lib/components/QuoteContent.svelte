@@ -1,5 +1,4 @@
 <script lang="ts">
-	import Picture from './images/Picture.svelte'
 	import type { CarouselQuote } from '$lib/types'
 
 	interface Props {
@@ -22,12 +21,12 @@
 
 	<div class="author-section">
 		{#if quote.image !== undefined}
-			<Picture
-				picture={quote.image}
+			<enhanced:img
+				src={quote.image}
 				sizes="(max-width: 850px) 4rem, 7rem"
 				alt={quote.author}
 				class="author-image"
-			/>
+			></enhanced:img>
 		{/if}
 		<div class="author-info">
 			<h2 class="author-name">{quote.author}</h2>
@@ -69,7 +68,7 @@
 		gap: var(--spacing-sm);
 	}
 
-	* :global(.author-image) {
+	.author-image {
 		width: 7rem;
 		height: 7rem;
 		border-radius: 50%;
@@ -88,7 +87,7 @@
 	}
 
 	@media (max-width: 850px) {
-		* :global(.author-image) {
+		.author-image {
 			width: 4rem;
 			height: 4rem;
 		}

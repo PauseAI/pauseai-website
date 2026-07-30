@@ -1,50 +1,37 @@
 <script lang="ts">
-	import Image from '$lib/components/images/Image.svelte'
+	import Image from '$lib/components/Image.svelte'
 	import LinkWithoutIcon from '$lib/components/LinkWithoutIcon.svelte'
 	import { domAnimation, LazyMotion, m } from 'motion-sv'
-	// SVG can't be processed by sharp/imagetools, so use a plain URL import.
-	import timeLogo from '$assets/images/press/Time_Magazine_logo.svg?url'
-	import wiredLogo from '$assets/images/press/Wired_logo.svg.png?picture'
-	import vergeLogo from '$assets/images/press/The_Verge_wordmark_2022.svg.png?picture'
-	import bloombergLogo from '$assets/images/press/Bloomberg-Logo.png?picture'
-	import fortuneLogo from '$assets/images/press/960px-FORTUNE-LOGO-2016.png?picture'
-	import politicoLogo from '$assets/images/press/POLITICOLOGO.svg.png?picture'
 
 	const publications = [
 		{
 			name: 'Time',
-			picture: null,
-			assetUrl: timeLogo,
+			src: '/press/Time_Magazine_logo.svg',
 			url: 'https://time.com/6295879/ai-pause-is-humanitys-best-bet-for-preventing-extinction/'
 		},
 		{
 			name: 'Wired',
-			picture: wiredLogo,
-			assetUrl: null,
+			src: '/press/Wired_logo.svg.png',
 			url: 'https://www.wired.com/story/pause-ai-existential-risk/'
 		},
 		{
 			name: 'The Verge',
-			picture: vergeLogo,
-			assetUrl: null,
+			src: '/press/The_Verge_wordmark_2022.svg.png',
 			url: 'https://www.theverge.com/2023/5/24/23735982/sam-altman-openai-superintelligent-benefits-talk-london-ucl-protests'
 		},
 		{
 			name: 'Bloomberg',
-			picture: bloombergLogo,
-			assetUrl: null,
+			src: '/press/Bloomberg-Logo.png',
 			url: 'https://www.bloomberg.com/news/newsletters/2024-02-13/ai-protest-at-openai-hq-in-san-francisco-focuses-on-military-work'
 		},
 		{
 			name: 'Fortune',
-			picture: fortuneLogo,
-			assetUrl: null,
+			src: '/press/960px-FORTUNE-LOGO-2016.png',
 			url: 'https://fortune.com/2023/05/24/openai-ceo-sam-altman-credits-elon-musk-with-teaching-him-the-importance-of-deep-tech-investing-but-he-has-no-interest-in-living-on-mars/'
 		},
 		{
 			name: 'Politico',
-			picture: politicoLogo,
-			assetUrl: null,
+			src: '/press/POLITICOLOGO.svg.png',
 			url: 'https://www.politico.eu/article/microsoft-brussels-elon-musk-anti-ai-protesters-well-five-of-them-descend-on-brussels/'
 		}
 	]
@@ -84,8 +71,7 @@
 					<m.div variants={itemVariants}>
 						<LinkWithoutIcon href={pub.url} target="_blank" class="pub-link">
 							<Image
-								picture={pub.picture}
-								src={pub.assetUrl}
+								src={pub.src}
 								alt={pub.name}
 								title={pub.name}
 								class="logo-img logo-{pub.name.toLowerCase().replace(' ', '-')}"

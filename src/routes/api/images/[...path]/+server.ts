@@ -1,4 +1,4 @@
-import { resolveImageUrl } from '$lib/image.server'
+import { resolveImageUrl } from '$lib/images'
 import { headersToRecord } from '$lib/utils'
 import Headers from '@remix-run/headers'
 import { StatusCodes } from 'http-status-codes'
