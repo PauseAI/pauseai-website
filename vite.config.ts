@@ -9,6 +9,7 @@ import { defineConfig, type Plugin } from 'vite'
 import lucidePreprocess from 'vite-plugin-lucide-preprocess'
 import { sentryVitePlugin } from '@sentry/vite-plugin'
 import { imagetools } from 'vite-imagetools'
+import { imageFormats, imageWidths, metaImageWidth, imageQuality } from './src/lib/image-config'
 import { isDev } from './src/lib/env'
 import { MARKDOWN_L10NS } from './src/lib/l10n'
 import { locales as compiledLocales } from './src/lib/paraglide/runtime.js'
@@ -114,8 +115,16 @@ export default defineConfig(() => {
 					if (url.searchParams.has('picture')) {
 						return new URLSearchParams({
 							as: 'picture',
-							format: 'avif;webp;jpeg;png',
-							w: '400;800;1200;1600;2400'
+							format: imageFormats.join(';'),
+							w: imageWidths.join(';')
+						})
+					}
+					if (url.searchParams.has('meta')) {
+						return new URLSearchParams({
+							url: 'true',
+							w: String(metaImageWidth),
+							format: 'jpg',
+							quality: String(imageQuality)
 						})
 					}
 					return new URLSearchParams()

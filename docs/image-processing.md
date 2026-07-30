@@ -35,16 +35,23 @@ variant (`LoosePicture`, also defined in `src/lib/types.ts`) makes `img.w` /
 `NetlifyImage`) don't have to fabricate them. `LoosePicture` is the type
 accepted by `Picture.svelte`, `Image.svelte`, and `NetlifyImage.svelte`.
 
+## Shared image config: `src/lib/image-config.ts`
+
+Widths, formats, meta-image width, and quality are centralized here so the
+Vite `?picture` and `?meta` pipelines and `NetlifyImage.svelte` stay in
+sync. The file has no SvelteKit dependencies, so it can be imported from
+`vite.config.ts` as well as app code.
+
 ## Server-only asset resolution: `src/lib/image.server.ts`
 
 This module is `.server`-only. It uses three `import.meta.glob` calls over
 `src/assets/images/**/*`:
 
-| Glob                  | Query                               | Returns                                                                    |
-| --------------------- | ----------------------------------- | -------------------------------------------------------------------------- |
-| `IMAGE_URLS`          | `?url`                              | The Vite-resolved URL string for any asset                                 |
-| `PICTURES`            | `?picture`                          | A `Picture` object (avif/webp/jpeg/png, widths 400–2400) for raster images |
-| `METADATA_IMAGE_URLS` | `?url&w=1200&format=jpg&quality=80` | A single downscaled JPEG for social/SEO meta tags                          |
+| Glob                  | Query      | Returns                                                                    |
+| --------------------- | ---------- | -------------------------------------------------------------------------- |
+| `IMAGE_URLS`          | `?url`     | The Vite-resolved URL string for any asset                                 |
+| `PICTURES`            | `?picture` | A `Picture` object (avif/webp/jpeg/png, widths 400–2400) for raster images |
+| `METADATA_IMAGE_URLS` | `?meta`    | A single downscaled JPEG for social/SEO meta tags                          |
 
 It exposes three resolvers:
 
@@ -143,10 +150,15 @@ handler.
 ## Vite configuration
 
 `vite.config.ts` registers a `vite-imagetools` instance with a
-`defaultDirectives` hook: any import whose query contains `picture` is
-expanded to `as=picture&format=avif;webp;jpeg;png&w=400;800;1200;1600;2400`.
-This is what the `?picture` glob in `image.server.ts` resolves against. The
-width list matches `NetlifyImage`'s defaults so the two pipelines emit
+`defaultDirectives` hook. Two query shorthands are supported, both driven by
+`image-config.ts`:
+
+- `?picture` → `as=picture` with `imageFormats` and `imageWidths` (for
+  responsive `<picture>` rendering).
+- `?meta` → a single `metaImageWidth`-wide JPEG at `imageQuality` (for
+  social/SEO meta tags).
+
+The width list matches `NetlifyImage`'s defaults so the two pipelines emit
 comparable srcsets.
 
 ## News API

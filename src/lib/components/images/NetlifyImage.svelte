@@ -3,6 +3,7 @@
 	import { SvelteURLSearchParams } from 'svelte/reactivity'
 	import Picture from './Picture.svelte'
 	import type { LoosePicture } from '$lib/types'
+	import { imageQuality, imageWidths } from '$lib/image-config'
 
 	interface Props {
 		src: string
@@ -22,9 +23,9 @@
 	let {
 		src,
 		alt,
-		widths = [400, 800, 1200, 1600, 2400],
+		widths = [...imageWidths],
 		sizes = '(min-width: 1280px) 1200px, 100vw',
-		quality = 80,
+		quality = imageQuality,
 		fit = 'contain',
 		pictureClass = undefined,
 		imgClass = undefined,

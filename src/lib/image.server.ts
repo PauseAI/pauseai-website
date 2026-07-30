@@ -28,10 +28,7 @@ const METADATA_IMAGE_URLS = import.meta.glob<string>('../assets/images/**/*', {
 	eager: true,
 	import: 'default',
 	query: {
-		url: true,
-		w: '1200',
-		format: 'jpg',
-		quality: '80'
+		meta: true
 	}
 })
 
