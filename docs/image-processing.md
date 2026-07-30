@@ -29,10 +29,11 @@ type Picture = {
 }
 ```
 
-This is the single shape every image path eventually produces. `Picture.svelte`
-accepts a _loose_ variant (`LoosePicture`) where `img.w` / `img.h` are
-optional, so callers that don't know intrinsic dimensions (e.g.
-`NetlifyImage`) don't have to fabricate them.
+This is the single shape every image path eventually produces. A _loose_
+variant (`LoosePicture`, also defined in `src/lib/types.ts`) makes `img.w` /
+`img.h` optional, so callers that don't know intrinsic dimensions (e.g.
+`NetlifyImage`) don't have to fabricate them. `LoosePicture` is the type
+accepted by `Picture.svelte`, `Image.svelte`, and `NetlifyImage.svelte`.
 
 ## Server-only asset resolution: `src/lib/image.server.ts`
 
@@ -121,9 +122,9 @@ The shared primitive. Takes a `LoosePicture` and renders:
 ### `Image.svelte`
 
 The general-purpose entry point. Accepts either a pre-resolved `picture`
-_or_ a plain `src` (external URL / already-resolved asset URL). When a
-`picture` is present it delegates to `<Picture>`; otherwise it renders a
-bare `<img>`.
+(a `LoosePicture`) _or_ a plain `src` (external URL / already-resolved
+asset URL). When a `picture` is present it delegates to `<Picture>`;
+otherwise it renders a bare `<img>`.
 
 It also handles the `aspectRatio` + `object-fit: cover` case: when a target
 aspect ratio is supplied, it scales the `sizes` attribute by
