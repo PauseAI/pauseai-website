@@ -25,7 +25,7 @@
 
 	// Expose server-resolved Picture objects to the markdown <img> renderer so
 	// it can use Image directly instead of bundling the glob resolver.
-	setPostPictures(data.pictures ?? {})
+	$effect(() => setPostPictures(data.pictures ?? {}))
 </script>
 
 <svelte:head>
