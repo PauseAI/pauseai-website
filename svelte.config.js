@@ -10,7 +10,7 @@ import rehypeSlug from 'rehype-slug'
 import remarkHeadingId from 'remark-heading-id'
 import remarkToc from 'remark-toc'
 import rehypeUnwrapImages from 'rehype-unwrap-images'
-import remarkCollectImages from './remark/remark-collect-images.js'
+import remarkCollectImages from './plugins/remark-collect-images.js'
 
 import settings from './project.inlang/settings.json' with { type: 'json' }
 

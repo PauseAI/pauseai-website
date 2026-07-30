@@ -74,7 +74,7 @@ reference images in two ways:
 - The frontmatter `image` field (the banner).
 - Inline `![alt](/path/to/asset)` images in the body.
 
-### Collecting body images: `remark/remark-collect-images.js`
+### Collecting body images: `plugins/remark-collect-images.js`
 
 A remark plugin registered in `svelte.config.js`. It walks the MDAST tree,
 collects every `image` node's URL, dedupes them, and writes the list to
