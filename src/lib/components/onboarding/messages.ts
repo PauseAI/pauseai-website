@@ -624,7 +624,7 @@ const fr: OnboardingMessages = {
 	onboarding_field_email: 'E-mail *',
 	onboarding_placeholder_email: 'E-mail',
 	onboarding_email_critical_notice:
-		'Nous pouvons occasionnellement vous envoyer une alerte critique, même si vous n\'en sélectionnez aucune. Voir notre <a target="_blank" rel="noopener noreferrer" href="/privacy">politique de confidentialité</a>.',
+		'Nous pouvons occasionnellement t\'envoyer une alerte urgente, même si tu ne sélectionnes aucune de ces options. Consulte notre <a target="_blank" rel="noopener noreferrer" href="/privacy">politique de confidentialité</a>.',
 	onboarding_field_country: 'Pays de résidence *',
 	onboarding_placeholder_country: 'Sélectionne ton pays',
 	onboarding_field_city: 'Ville / commune de résidence *',
