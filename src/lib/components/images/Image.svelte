@@ -63,12 +63,20 @@
 		{picture}
 		{alt}
 		{title}
-		class={className}
+		class={`${className} enhanced-img`}
 		{loading}
 		{fetchpriority}
 		sizes={effectiveSizes}
-		imgStyle="height: auto"
 	/>
 {:else}
-	<img {src} {alt} {title} {loading} {fetchpriority} class={className} style="height: auto" />
+	<img {src} {alt} {title} {loading} {fetchpriority} class={`${className} enhanced-img`} />
 {/if}
+
+<style>
+	/* The intrinsic width/height attributes can overrule CSS aspect ratios,
+	   so default height to auto. Uses a global class (specificity 0,1,0) so
+	   caller classes can still override it. */
+	:global(.enhanced-img) {
+		height: auto;
+	}
+</style>
