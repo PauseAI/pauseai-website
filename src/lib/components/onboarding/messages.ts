@@ -190,7 +190,7 @@ const en: OnboardingMessages = {
 	onboarding_field_email: 'Email *',
 	onboarding_placeholder_email: 'Email',
 	onboarding_email_critical_notice:
-		'We may occasionally send you a critical alert, even if you don\'t opt into anything else. See our <a target="_blank" rel="noopener noreferrer" href="/privacy">privacy policy</a>.',
+		'We may occasionally send you a critical alert, even if you don\'t opt into any of these. See our <a target="_blank" rel="noopener noreferrer" href="/privacy">privacy policy</a>.',
 	onboarding_field_country: 'Country of residence *',
 	onboarding_placeholder_country: 'Select your country',
 	onboarding_field_city: 'City / town of residence *',
@@ -402,7 +402,7 @@ const de: OnboardingMessages = {
 	onboarding_field_email: 'E-Mail *',
 	onboarding_placeholder_email: 'E-Mail',
 	onboarding_email_critical_notice:
-		'Wir können dir gelegentlich eine kritische Warnung senden, auch wenn du dich für nichts anderes anmeldest. Siehe unsere <a target="_blank" rel="noopener noreferrer" href="/privacy">Datenschutzrichtlinie</a>.',
+		'Wir können dir gelegentlich eine kritische Warnung senden, auch wenn du nichts davon auswählst. Siehe unsere <a target="_blank" rel="noopener noreferrer" href="/privacy">Datenschutzrichtlinie</a>.',
 	onboarding_field_country: 'Wohnsitzland *',
 	onboarding_placeholder_country: 'Land auswählen',
 	onboarding_field_city: 'Stadt / Gemeinde *',
@@ -624,7 +624,7 @@ const fr: OnboardingMessages = {
 	onboarding_field_email: 'E-mail *',
 	onboarding_placeholder_email: 'E-mail',
 	onboarding_email_critical_notice:
-		'Nous pouvons occasionnellement vous envoyer une alerte critique, même si vous ne vous inscrivez à rien d\'autre. Voir notre <a target="_blank" rel="noopener noreferrer" href="/privacy">politique de confidentialité</a>.',
+		'Nous pouvons occasionnellement vous envoyer une alerte critique, même si vous n\'en sélectionnez aucune. Voir notre <a target="_blank" rel="noopener noreferrer" href="/privacy">politique de confidentialité</a>.',
 	onboarding_field_country: 'Pays de résidence *',
 	onboarding_placeholder_country: 'Sélectionne ton pays',
 	onboarding_field_city: 'Ville / commune de résidence *',

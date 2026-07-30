@@ -422,8 +422,6 @@
 						autocomplete="email"
 						bind:value={basics.email}
 					/>
-					<!-- eslint-disable-next-line svelte/no-at-html-tags -->
-					<p class="helper">{@html msgs.onboarding_email_critical_notice}</p>
 				</div>
 				<div class="field">
 					<label class="field-label" for="ob-country">{msgs.onboarding_field_country}</label>
@@ -515,6 +513,8 @@
 						</span>
 					</button>
 				</div>
+				<!-- eslint-disable-next-line svelte/no-at-html-tags -->
+				<p class="helper">{@html msgs.onboarding_email_critical_notice}</p>
 				<p class="section-label">{msgs.onboarding_intent_more_optional}</p>
 				<div class="intent-stack" role="radiogroup" aria-label="Want to do more?">
 					{#each intentOptions as option (option.key)}
@@ -619,8 +619,6 @@
 									autocomplete="email"
 									bind:value={basics.email}
 								/>
-								<!-- eslint-disable-next-line svelte/no-at-html-tags -->
-								<p class="helper">{@html msgs.onboarding_email_critical_notice}</p>
 							</div>
 							<div class="field">
 								<label class="field-label" for="loop-country">{msgs.onboarding_field_country}</label
