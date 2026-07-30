@@ -17,7 +17,6 @@
 		cloudinaryConfig,
 		returningUidMessage
 	} from './selfieStore'
-	import Image from '$lib/components/Image.svelte'
 	import { detectAndStoreCollagenUid, hasCollagenUid } from '$lib/collagen'
 	// Static env: dynamic public env in client code blocks prerendered pages'
 	// hydration on a runtime /_app/env.js fetch (see hooks.client.ts).
@@ -261,7 +260,7 @@
 				measures. Your selfie adds to the growing collage of concerned citizens worldwide.
 			</p>
 			<Link href="https://s3.amazonaws.com/pauseai-collagen/sayno/latest/4096.jpg" target="_blank">
-				<Image
+				<img
 					src="https://s3.amazonaws.com/pauseai-collagen/sayno/latest/400.jpg"
 					alt="Collage of hundreds of people standing up to superintelligent AI development"
 					class="collage-thumbnail"

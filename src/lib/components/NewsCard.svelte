@@ -1,9 +1,9 @@
 <script lang="ts">
-	import Image from '$lib/components/Image.svelte'
+	import Image from '$lib/components/images/Image.svelte'
 	import LinkWithoutIcon from '$lib/components/LinkWithoutIcon.svelte'
 	import type { NewsItem } from '$lib/types'
 	import { formatDate } from '$lib/utils'
-	import NetlifyImage from './NetlifyImage.svelte'
+	import NetlifyImage from './images/NetlifyImage.svelte'
 	import Skeleton from './Skeleton.svelte'
 
 	interface Props {
@@ -50,7 +50,8 @@
 						/>
 					{:else}
 						<Image
-							src={item.image}
+							picture={item.picture}
+							src={item.image ?? ''}
 							alt={item.title}
 							class="image"
 							sizes={imageSizes}

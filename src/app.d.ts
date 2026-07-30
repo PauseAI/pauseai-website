@@ -1,5 +1,6 @@
 import type { Locale } from '$lib/paraglide/runtime.js'
 import type { Context } from '@netlify/edge-functions'
+import type { Picture } from 'vite-imagetools'
 // See https://kit.svelte.dev/docs/types#app
 // for information about these interfaces
 declare global {
@@ -37,5 +38,12 @@ declare global {
 			$$prop_def: Record<string, never>
 		}
 		export const metadata: Record<string, unknown>
+	}
+
+	// vite-imagetools `?picture` shorthand — returns a Picture object
+	// ({ sources, img }) for rendering a <picture> tag.
+	declare module '*?picture' {
+		const value: Picture
+		export default value
 	}
 }
