@@ -1,5 +1,6 @@
 import type { NewsItem } from '$lib/types'
 import { generateCacheControlRecord } from '$lib/utils'
+import { resolvePicture } from '$lib/image.server'
 import { json } from '@sveltejs/kit'
 import type { PostsApiResponse } from '$api/posts/+server.js'
 import type { RequestHandler } from './$types'
@@ -23,6 +24,7 @@ async function getInternalNews(localFetch: typeof fetch): Promise<NewsItem[]> {
 				subtitle: post.description || '',
 				date: post.date,
 				image: post.image,
+				picture: post.image ? resolvePicture(post.image) : null,
 				href: `/${post.slug}`,
 				source: 'internal'
 			})
