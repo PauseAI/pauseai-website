@@ -4,27 +4,39 @@ slug: australia-progress
 description: What the Australian chapter of PauseAI has been doing and needs help with
 ---
 Metrics since we founded
-📧### AI decisionmaker emails, meetings with 👥## of them, 📅## events with ### attendees.
+📧27+ AI decisionmaker emails, meetings with 👥5+ of them, 📅5+ events with 80+ attendees.
 
 ### 2026 August
-Upcoming:
+
+**Upcoming**
+- Tell us [what you did](mailto:australia@pauseai.info?subject=Aussie%20Did%20a%20Thing), or [what you have cooking](mailto:australia@pauseai.info?subject=Things%20Cooking) so we can support you!
+- Meetings with 👥1 AI decisionmaker, 📅2 [events](https://luma.com/PauseAIAustralia).
 - Sunyal is attending Government Cyber Security Showcase Western Australia 2026 as a representative of PauseAI
 - We are preparing a submission to the consultation on [Artificial intelligence and data centres](https://www.aph.gov.au/Parliamentary_Business/Committees/Senate/Environment_and_Communications/AIdatacentres48P) (due 1 September, make sure to submit your own!)
-Done:
+**Done**
+- 📧2 AI decisionmaker emails
 - Our correspondence submission got accepted for Quarterly Essay 102: The God We Made! Look out for it in the next edition.
 
 ### 2026 July
-- 
+
+- 📧27 AI decisionmaker emails, meetings with 👥5 of them, 📅5 events with 80 attendees.
+- ⭐Milestone: Sunyal started local group in Perth!
+- We reached out to the Australian Information Security Association in Perth, Western Australia Greens, and Western Australia Conservation Council, and Western Australia AI Hub.
 
 ### 2026 June
 
+- 📧5 AI decisionmaker emails, meetings with 👥3 of them, 📅1 events with 15 attendees.
+
+
 ### 2026 May
+
+- 📧3 AI decisionmaker emails, meetings with 👥3 of them, 📅3 events with 37 attendees.
+- ⭐Milestone: Scott started local group in Sydney! He also did a door knock survey of AI attitudes in his local neighbourhoods.
+
 
 ### 2026 April
 
-- Upcoming
-  - Help out with [evergreen tasks](/australia)
-  - Tell us [what you did](mailto:australia@pauseai.info?subject=Aussie%20Did%20a%20Thing), or [what you have cooking](mailto:australia@pauseai.info?subject=Things%20Cooking) so we can support you!
+- 📧3 AI decisionmaker emails, meetings with 👥3 of them, 📅3 events with 37 attendees.
 - Released newsletter on how you get your MPs to sign Superintelligence Statement.
 - Emailed all Liberal MPs and Senators advising them on x-risk.
 - We attended the Canberra Innovation Network's book launch event. Chief Minister Andrew Barr raised the importance of managing risk when deploying AI in government. Afterwards we spoke to the book author John Howard, who agreed that guardrails are essential when deploying AI.
