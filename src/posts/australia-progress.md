@@ -3,6 +3,22 @@ title: PauseAI Australia Progress
 slug: australia-progress
 description: What the Australian chapter of PauseAI has been doing and needs help with
 ---
+Metrics since we founded
+📧### AI decisionmaker emails, meetings with 👥## of them, 📅## events with ### attendees.
+
+### 2026 August
+Upcoming:
+- Sunyal is attending Government Cyber Security Showcase Western Australia 2026 as a representative of PauseAI
+- We are preparing a submission to the consultation on [Artificial intelligence and data centres](https://www.aph.gov.au/Parliamentary_Business/Committees/Senate/Environment_and_Communications/AIdatacentres48P) (due 1 September, make sure to submit your own!)
+Done:
+- Our correspondence submission got accepted for Quarterly Essay 102: The God We Made! Look out for it in the next edition.
+
+### 2026 July
+- 
+
+### 2026 June
+
+### 2026 May
 
 ### 2026 April
 
