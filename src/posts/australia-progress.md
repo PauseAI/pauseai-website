@@ -4,7 +4,7 @@ slug: australia-progress
 description: What the Australian chapter of PauseAI has been doing and needs help with
 ---
 Metrics since we founded
-📧27+ AI decisionmaker emails, meetings with 👥5+ of them, 📅5+ events with 80+ attendees.
+📧147 AI decisionmaker emails, meetings with 👥22 of them, 📅20 events with 231 attendees.
 
 ### 2026 August
 
@@ -36,7 +36,7 @@ Metrics since we founded
 
 ### 2026 April
 
-- 📧3 AI decisionmaker emails, meetings with 👥3 of them, 📅3 events with 37 attendees.
+- 📧14 AI decisionmaker emails, meetings with 👥1 of them, 📅2 events with 19 attendees.
 - Released newsletter on how you get your MPs to sign Superintelligence Statement.
 - Emailed all Liberal MPs and Senators advising them on x-risk.
 - We attended the Canberra Innovation Network's book launch event. Chief Minister Andrew Barr raised the importance of managing risk when deploying AI in government. Afterwards we spoke to the book author John Howard, who agreed that guardrails are essential when deploying AI.
