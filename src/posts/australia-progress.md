@@ -15,23 +15,29 @@ Metrics since we founded
 - We are preparing a submission to the consultation on [Artificial intelligence and data centres](https://www.aph.gov.au/Parliamentary_Business/Committees/Senate/Environment_and_Communications/AIdatacentres48P) (due 1 September, make sure to submit your own!)
 **Done**
 - 📧2 AI decisionmaker emails
-- Our correspondence submission got accepted for Quarterly Essay 102: The God We Made! Look out for it in the next edition.
+- One of our two correspondence submissions got accepted for Quarterly Essay 102: The God We Made! Look out for it in the next edition.
 
 ### 2026 July
 
 - 📧27 AI decisionmaker emails, meetings with 👥5 of them, 📅5 events with 80 attendees.
 - ⭐Milestone: Sunyal started local group in Perth!
+- We presented a talk on [Pausing The Frontier](https://www.aisafetyforum.au/events/2026-forum/program/cmq94xwvq000z05jrmwe0spmg) at this year's AI Safety Forum!
 - We reached out to the Australian Information Security Association in Perth, Western Australia Greens, and Western Australia Conservation Council, and Western Australia AI Hub.
+- Our Sydney group lead Scott did a door knock survey of AI attitudes in his local neighbourhoods, gathering 95 responses.
+- Attended AI Safety Symposium's event on AI & Robots in Melbourne.
 
 ### 2026 June
 
 - 📧5 AI decisionmaker emails, meetings with 👥3 of them, 📅1 events with 15 attendees.
+- ⭐Milestone: Scott started local group in Brisbane! 
+- Attended the Canberra Alliance For Participatory Democracy's workshop on the ACT Assembly. 
 
 
 ### 2026 May
 
 - 📧3 AI decisionmaker emails, meetings with 👥3 of them, 📅3 events with 37 attendees.
-- ⭐Milestone: Scott started local group in Sydney! He also did a door knock survey of AI attitudes in his local neighbourhoods.
+- ⭐Milestone: Scott started local group in Sydney!
+- Contacted Australian Ethical, Hostplus, and Vanguard Australia asking how AI-related risks factor into their responsible investment and screening frameworks.
 
 
 ### 2026 April
