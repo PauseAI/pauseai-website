@@ -92,6 +92,11 @@
 	// back so the server updates the record instead of creating another.
 	let recordId = $state('')
 	let keepInformed = $state(false)
+	// V2 prototype (two-axis model): the "Keep me informed" checkbox is the
+	// INFORMATIONAL opt-in (global + local-chapter updates). Higher involvement
+	// tiers (Volunteer / Lead) imply it, so we don't ask them about it separately.
+	const informationalHighTier = $derived(intent === 'volunteer' || intent === 'lead')
+	const informationalOptIn = $derived(keepInformed || informationalHighTier)
 	let submitting = $state(false)
 	let browseSignedUp = $state(false)
 	let honeypot = $state('')
@@ -337,9 +342,9 @@
 {/snippet}
 
 {#snippet checkboxConfirmations()}
-	{#if keepInformed || basics.newsletter}
+	{#if informationalOptIn || basics.newsletter}
 		<ul class="signup-confirmations">
-			{#if keepInformed}
+			{#if informationalOptIn}
 				<li>
 					<span class="confirm-tick" aria-hidden="true">✓</span>
 					{msgs.onboarding_confirm_keep_informed}
@@ -473,7 +478,7 @@
 					name="intent"
 					value={intent ? INTENT_VALUES[intent] : 'Keep informed'}
 				/>
-				{#if keepInformed}
+				{#if informationalOptIn}
 					<input type="hidden" name="keep_informed" value="on" />
 				{/if}
 				<h2>{msgs.onboarding_step2_heading}</h2>
@@ -481,20 +486,26 @@
 					<button
 						type="button"
 						class="intent-option"
-						class:selected={keepInformed}
+						class:selected={informationalOptIn}
 						role="checkbox"
-						aria-checked={keepInformed}
-						onclick={() => (keepInformed = !keepInformed)}
+						aria-checked={informationalOptIn}
+						aria-describedby="critical-alert-notice"
+						onclick={() => {
+							if (!informationalHighTier) keepInformed = !keepInformed
+						}}
 					>
 						<span class="intent-icon">
 							<span class="checkbox-box" aria-hidden="true">
-								{keepInformed ? '✓' : ''}
+								{informationalOptIn ? '✓' : ''}
 							</span>
 							🔔
 						</span>
 						<span class="intent-label">{msgs.onboarding_intent_keep_informed_label}</span>
 						<span class="intent-sub">
-							{msgs.onboarding_intent_keep_informed_sub}
+							Get global campaign updates and news from your local PauseAI chapter.
+							{#if informationalHighTier}
+								<br /><em>Included with your selection below.</em>
+							{/if}
 						</span>
 					</button>
 					<button
@@ -517,7 +528,12 @@
 						</span>
 					</button>
 				</div>
-				<p class="section-label">{msgs.onboarding_intent_more_optional}</p>
+				<p class="helper" id="critical-alert-notice">
+						You can sign up without ticking any of these. We may still occasionally send
+						you a critical alert, and you can unsubscribe from any list at any time. See our
+						<a target="_blank" rel="noopener noreferrer" href="/privacy">privacy policy</a>.
+					</p>
+					<p class="section-label">{msgs.onboarding_intent_more_optional}</p>
 				<div class="intent-stack" role="radiogroup" aria-label="Want to do more?">
 					{#each intentOptions as option (option.key)}
 						<button
@@ -543,7 +559,7 @@
 				<button
 					type="submit"
 					class="primary"
-					disabled={(!intent && !keepInformed && !basics.newsletter) || !gdprConsent || submitting}
+					disabled={!gdprConsent || submitting}
 				>
 					{submitting
 						? msgs.onboarding_btn_submitting
