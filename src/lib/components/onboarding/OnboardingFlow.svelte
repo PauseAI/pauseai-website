@@ -523,8 +523,8 @@
 					</button>
 				</div>
 				<p class="helper" id="critical-alert-notice">
-						You can sign up without ticking any of these. We may still occasionally send
-						you a critical alert, and you can unsubscribe from any list at any time. See our
+						We may occasionally send you a critical alert, even if you don't opt into any
+						of these. See our
 						<a target="_blank" rel="noopener noreferrer" href="/privacy">privacy policy</a>.
 					</p>
 					<p class="section-label">{msgs.onboarding_intent_more_optional}</p>
