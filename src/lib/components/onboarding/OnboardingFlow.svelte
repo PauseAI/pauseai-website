@@ -145,9 +145,9 @@
 	let becomePayingMember = $state(false)
 
 	// GDPR data-processing consent gating every record-creating submission
-	// (step 2 + browse). Chapter-sharing consent is not bundled here: it lives
-	// in the optional "Keep me informed" opt-in, since we only share details
-	// with a local chapter when the person asks to be connected to one.
+	// (step 2 + browse). NB: the server also hardcodes chapter-sharing consent
+	// on every record today — whether that should instead follow the involvement
+	// axis / bell rather than a forced checkbox is an open question (see PR body).
 	let gdprConsent = $state(false)
 
 	// Phone: dial code prefilled from country of residence, editable in case
@@ -481,6 +481,7 @@
 					<input type="hidden" name="keep_informed" value="on" />
 				{/if}
 				<h2>{msgs.onboarding_step2_heading}</h2>
+				<p class="section-label">Stay in the loop</p>
 				<div class="intent-grid">
 					<button
 						type="button"
@@ -499,7 +500,7 @@
 						</span>
 						<span class="intent-label">{msgs.onboarding_intent_keep_informed_label}</span>
 						<span class="intent-sub">
-							Get global campaign updates and news from your local PauseAI chapter.
+							Get global campaign updates, plus news from your local PauseAI chapter.
 						</span>
 					</button>
 					<button
