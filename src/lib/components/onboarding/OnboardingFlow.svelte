@@ -523,11 +523,11 @@
 					</button>
 				</div>
 				<p class="helper" id="critical-alert-notice">
-						We may occasionally send you a critical alert, even if you don't opt into any
-						of these. You can unsubscribe from any list at any time. See our
-						<a target="_blank" rel="noopener noreferrer" href="/privacy">privacy policy</a>.
-					</p>
-					<p class="section-label">{msgs.onboarding_intent_more_optional}</p>
+					We may occasionally send you a critical alert, even if you don't opt into any of these.
+					You can unsubscribe from any list at any time. See our
+					<a target="_blank" rel="noopener noreferrer" href="/privacy">privacy policy</a>.
+				</p>
+				<p class="section-label">{msgs.onboarding_intent_more_optional}</p>
 				<div class="intent-stack" role="radiogroup" aria-label="Want to do more?">
 					{#each intentOptions as option (option.key)}
 						<button
@@ -550,11 +550,7 @@
 					{/each}
 				</div>
 				{@render gdprConsentField()}
-				<button
-					type="submit"
-					class="primary"
-					disabled={!gdprConsent || submitting}
-				>
+				<button type="submit" class="primary" disabled={!gdprConsent || submitting}>
 					{submitting
 						? msgs.onboarding_btn_submitting
 						: intent === 'volunteer' || intent === 'lead'
