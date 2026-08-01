@@ -91,12 +91,11 @@
 	// Airtable record id from the step-2 submission; later submissions send it
 	// back so the server updates the record instead of creating another.
 	let recordId = $state('')
+	// V2 prototype: "Keep me informed" is the INFORMATIONAL opt-in (global +
+	// local-chapter updates). It is a genuine opt-in for everyone including
+	// Volunteers/Leads — never pre-checked or forced (marketing consent must be
+	// freely given); operational volunteer comms ride legitimate interest instead.
 	let keepInformed = $state(false)
-	// V2 prototype (two-axis model): the "Keep me informed" checkbox is the
-	// INFORMATIONAL opt-in (global + local-chapter updates). Higher involvement
-	// tiers (Volunteer / Lead) imply it, so we don't ask them about it separately.
-	const informationalHighTier = $derived(intent === 'volunteer' || intent === 'lead')
-	const informationalOptIn = $derived(keepInformed || informationalHighTier)
 	let submitting = $state(false)
 	let browseSignedUp = $state(false)
 	let honeypot = $state('')
@@ -342,9 +341,9 @@
 {/snippet}
 
 {#snippet checkboxConfirmations()}
-	{#if informationalOptIn || basics.newsletter}
+	{#if keepInformed || basics.newsletter}
 		<ul class="signup-confirmations">
-			{#if informationalOptIn}
+			{#if keepInformed}
 				<li>
 					<span class="confirm-tick" aria-hidden="true">✓</span>
 					{msgs.onboarding_confirm_keep_informed}
@@ -478,7 +477,7 @@
 					name="intent"
 					value={intent ? INTENT_VALUES[intent] : 'Keep informed'}
 				/>
-				{#if informationalOptIn}
+				{#if keepInformed}
 					<input type="hidden" name="keep_informed" value="on" />
 				{/if}
 				<h2>{msgs.onboarding_step2_heading}</h2>
@@ -486,26 +485,21 @@
 					<button
 						type="button"
 						class="intent-option"
-						class:selected={informationalOptIn}
+						class:selected={keepInformed}
 						role="checkbox"
-						aria-checked={informationalOptIn}
+						aria-checked={keepInformed}
 						aria-describedby="critical-alert-notice"
-						onclick={() => {
-							if (!informationalHighTier) keepInformed = !keepInformed
-						}}
+						onclick={() => (keepInformed = !keepInformed)}
 					>
 						<span class="intent-icon">
 							<span class="checkbox-box" aria-hidden="true">
-								{informationalOptIn ? '✓' : ''}
+								{keepInformed ? '✓' : ''}
 							</span>
 							🔔
 						</span>
 						<span class="intent-label">{msgs.onboarding_intent_keep_informed_label}</span>
 						<span class="intent-sub">
 							Get global campaign updates and news from your local PauseAI chapter.
-							{#if informationalHighTier}
-								<br /><em>Included with your selection below.</em>
-							{/if}
 						</span>
 					</button>
 					<button
