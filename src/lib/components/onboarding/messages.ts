@@ -209,7 +209,7 @@ const en: OnboardingMessages = {
 	onboarding_intent_lead_label: 'I want to lead',
 	onboarding_intent_lead_sub: "I'm ready to organize in my country or region.",
 	onboarding_gdpr_consent:
-		'I agree to the <a target="_blank" rel="noopener noreferrer" href="/privacy">Privacy Policy</a>, including sharing my details with my local PauseAI chapter (which may be a separate entity to PauseAI Global) for local coordination.&nbsp;*',
+		'I agree to the <a target="_blank" rel="noopener noreferrer" href="/privacy">Privacy Policy</a>. I understand my details will be shared with my local PauseAI chapter (which may be a separate entity to PauseAI Global) for local coordination.&nbsp;*',
 	onboarding_btn_submit: 'Submit →',
 	onboarding_btn_submitting: 'Submitting...',
 	onboarding_btn_back: '← Back',
