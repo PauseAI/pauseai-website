@@ -15,7 +15,9 @@ Metrics since we founded
 - Meetings with 👥1 AI decisionmaker, 📅2 [events](https://luma.com/PauseAIAustralia).
 - Sunyal is attending Government Cyber Security Showcase Western Australia 2026 as a representative of PauseAI
 - We are preparing a submission to the consultation on [Artificial intelligence and data centres](https://www.aph.gov.au/Parliamentary_Business/Committees/Senate/Environment_and_Communications/AIdatacentres48P) (due 1 September, make sure to submit your own!)
-  **Done**
+
+**Done**
+
 - 📧2 AI decisionmaker emails
 - One of our two correspondence submissions got accepted for Quarterly Essay 102: The God We Made! Look out for it in the next edition.
 
