@@ -481,7 +481,7 @@
 					<input type="hidden" name="keep_informed" value="on" />
 				{/if}
 				<h2>{msgs.onboarding_step2_heading}</h2>
-				<p class="section-label">Stay in the loop</p>
+				<p class="section-label">Want to hear from us?</p>
 				<div class="intent-grid">
 					<button
 						type="button"
