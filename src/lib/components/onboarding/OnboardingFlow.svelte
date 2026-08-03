@@ -956,7 +956,7 @@
 
 	h2 {
 		font-family: var(--font-heading);
-		margin-top: 0;
+		margin: 0;
 	}
 
 	.browse-banner {
@@ -981,7 +981,7 @@
 		display: flex;
 		flex-direction: column;
 		align-items: stretch;
-		gap: 1rem;
+		gap: 0.75rem;
 		width: 100%;
 		max-width: none;
 	}
@@ -1399,7 +1399,7 @@
 		text-transform: uppercase;
 		letter-spacing: 0.05em;
 		opacity: 0.7;
-		margin: 1.5rem 0 0.5rem 0;
+		margin: 0.75rem 0 0.5rem 0;
 	}
 
 	.confirmation-footer :global(.discord-button) {
