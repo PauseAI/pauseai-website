@@ -200,7 +200,7 @@ const en: OnboardingMessages = {
 	onboarding_intent_keep_informed_sub:
 		'Connect me with my local PauseAI chapter, and keep me updated on global campaigns.',
 	onboarding_intent_newsletter_label: 'Subscribe to our Substack',
-	onboarding_intent_newsletter_sub: 'General news on AI, delivered via our Substack newsletter.',
+	onboarding_intent_newsletter_sub: "AI news from the PauseAI team's perspective.",
 	onboarding_intent_more_optional: 'Want to do more? (optional)',
 	onboarding_intent_act_now_label: 'I just want to take action now',
 	onboarding_intent_act_now_sub: 'Show me what I can do today.',
@@ -216,7 +216,7 @@ const en: OnboardingMessages = {
 	onboarding_confirm_keep_informed:
 		"We'll connect you with your local PauseAI chapter and keep you updated on global campaigns.",
 	onboarding_confirm_newsletter:
-		"You're subscribed to our Substack newsletter for general news on AI.",
+		"You're subscribed to our Substack: AI news from the PauseAI team's perspective, delivered by email.",
 	onboarding_confirm_a_title: "You're in.",
 	onboarding_confirm_b_title: "You're in, thanks for joining us.",
 	onboarding_confirm_b_sub: "You're all set. Here are a few ways to make a difference today.",
