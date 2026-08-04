@@ -4,19 +4,18 @@ slug: australia-progress
 description: What the Australian chapter of PauseAI has been doing and needs help with
 ---
 
-Metrics since we founded
-📧147 AI decisionmaker emails, meetings with 👥22 of them, 📅20 events with 231 attendees.
+Metrics since we founded: 📧147 AI decisionmaker emails, meetings with 👥22 of them, 📅20 events with 231 attendees.
 
 ### 2026 August
 
-**Upcoming**
+Upcoming
 
 - Tell us [what you did](mailto:australia@pauseai.info?subject=Aussie%20Did%20a%20Thing), or [what you have cooking](mailto:australia@pauseai.info?subject=Things%20Cooking) so we can support you!
 - Meetings with 👥1 AI decisionmaker, 📅2 [events](https://luma.com/PauseAIAustralia).
 - Sunyal is attending Government Cyber Security Showcase Western Australia 2026 as a representative of PauseAI
 - We are preparing a submission to the consultation on [Artificial intelligence and data centres](https://www.aph.gov.au/Parliamentary_Business/Committees/Senate/Environment_and_Communications/AIdatacentres48P) (due 1 September, make sure to submit your own!)
 
-**Done**
+Done
 
 - 📧2 AI decisionmaker emails
 - One of our two correspondence submissions got accepted for Quarterly Essay 102: The God We Made! Look out for it in the next edition.
