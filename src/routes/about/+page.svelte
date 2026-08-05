@@ -3,11 +3,9 @@
 	import { meta } from './meta'
 	import PersonCard from './person.svelte'
 	import Link from '$lib/components/Link.svelte'
-	import type { PageProps } from './$types'
-
-	let { data }: PageProps = $props()
-
-	const peopleGroups = $derived(data.people)
+	import type { AboutApiResponse } from '$api/about/+server.js'
+	import type { Person } from '$lib/types'
+	import { onMount } from 'svelte'
 
 	const groupOrder = [
 		'Executive Team',
@@ -15,6 +13,21 @@
 		'National Chapter Leads',
 		'Global Board'
 	]
+
+	let peopleGroups = $state<Record<string, Person[]>>({})
+	let loading = $state(true)
+
+	onMount(async () => {
+		try {
+			const response = await fetch('/api/about')
+			if (!response.ok) {
+				throw new Error(`Failed to load people data: ${response.status} ${response.statusText}`)
+			}
+			peopleGroups = (await response.json()) as AboutApiResponse
+		} finally {
+			loading = false
+		}
+	})
 
 	// Get all group keys and sort them according to the manual order
 	const allGroupKeys = $derived(Object.keys(peopleGroups))
@@ -90,23 +103,33 @@
 </div>
 
 <section data-pagefind-ignore>
-	{#if groupKeys.length === 0}
-		<p>No team members found</p>
-	{/if}
-
-	{#each groupKeys as groupName}
-		<h2 class="group-header">{groupName}</h2>
-
-		{#if peopleGroups[groupName].length > 0}
+	{#if loading}
+		{#each ['Executive Team', 'National Leaders'] as groupName}
+			<h2 class="group-header">{groupName}</h2>
 			<ul class="people">
-				{#each peopleGroups[groupName] as { name, image, title }}
-					<PersonCard {name} {image} {title} />
+				{#each Array(4) as _}
+					<PersonCard loading image={undefined} name={undefined} title={undefined} />
 				{/each}
 			</ul>
-		{/if}
+			<hr class="group-divider" />
+		{/each}
+	{:else if groupKeys.length === 0}
+		<p>No team members found</p>
+	{:else}
+		{#each groupKeys as groupName}
+			<h2 class="group-header">{groupName}</h2>
 
-		<hr class="group-divider" />
-	{/each}
+			{#if peopleGroups[groupName].length > 0}
+				<ul class="people">
+					{#each peopleGroups[groupName] as { name, image, title }}
+						<PersonCard {name} {image} {title} />
+					{/each}
+				</ul>
+			{/if}
+
+			<hr class="group-divider" />
+		{/each}
+	{/if}
 </section>
 
 <section class="essential-info">
