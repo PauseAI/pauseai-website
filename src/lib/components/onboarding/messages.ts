@@ -206,10 +206,10 @@ const en: OnboardingMessages = {
 	onboarding_intent_act_now_sub: 'Show me what I can do today.',
 	onboarding_intent_volunteer_label: 'I want to volunteer regularly',
 	onboarding_intent_volunteer_sub:
-		'Help me find a role that fits (includes local chapter updates).',
+		'Help me find a role that fits. (Includes local chapter updates.)',
 	onboarding_intent_lead_label: 'I want to lead',
 	onboarding_intent_lead_sub:
-		"I'm ready to organize in my country or region (includes local chapter updates).",
+		"I'm ready to organize in my country or region. (Includes local chapter updates.)",
 	onboarding_gdpr_consent:
 		'I agree to the <a target="_blank" rel="noopener noreferrer" href="/privacy">Privacy Policy</a>. I understand my details will be shared with my local PauseAI chapter (which may be a separate entity to PauseAI Global) for local coordination.&nbsp;*',
 	onboarding_btn_submit: 'Submit →',
