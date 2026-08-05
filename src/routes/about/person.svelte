@@ -1,15 +1,20 @@
 <script lang="ts">
+	import Skeleton from '$lib/components/Skeleton.svelte'
+
 	interface Props {
 		image: string | undefined
 		name: string | undefined
 		title: string | undefined
+		loading?: boolean
 	}
 
-	let { image, name, title }: Props = $props()
+	let { image, name, title, loading = false }: Props = $props()
 </script>
 
 <li class="person">
-	{#if image}
+	{#if loading}
+		<Skeleton {loading} variant="circle" width="100px" height="100%" />
+	{:else if image}
 		<div class="image" style="background-image: url({image})"></div>
 	{:else}
 		<div class="image placeholder">
@@ -23,13 +28,17 @@
 	<div class="details">
 		<div class="name-title">
 			<div class="name">
-				{name}
+				<Skeleton {loading} variant="text" width="150px">
+					{name}
+				</Skeleton>
 			</div>
 		</div>
 
-		{#if title}
+		{#if loading || title}
 			<div class="title">
-				{title}
+				<Skeleton {loading} variant="text" width="100px">
+					{title}
+				</Skeleton>
 			</div>
 		{/if}
 	</div>
