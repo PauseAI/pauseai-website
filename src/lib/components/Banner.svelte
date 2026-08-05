@@ -5,6 +5,8 @@
 	import { deLocalizeHref } from '$lib/paraglide/runtime'
 	import { setItem } from '$lib/localStorage'
 	import LinkWithoutIcon from '$lib/components/LinkWithoutIcon.svelte'
+	import type { BannerRule } from '$lib/types'
+	import { inDateRange } from '../../routes/inDateRange'
 	import { onMount } from 'svelte'
 
 	interface Props {
@@ -12,10 +14,32 @@
 		href?: string | null
 		id?: string | null
 		type?: 'main' | 'campaign'
+		rules?: BannerRule[] | null
 		children?: import('svelte').Snippet
 	}
 
-	let { children, contrast = false, href = null, id = null, type = 'main' }: Props = $props()
+	let {
+		children,
+		contrast = false,
+		href = null,
+		id = null,
+		type = 'main',
+		rules = null
+	}: Props = $props()
+
+	// Skip rendering on the server when this banner's rule is outside its
+	// date range (not yet started or already expired).
+	// The inline blocking script still re-checks on the client to handle
+	// dismissals and geo, but out-of-range banners never enter the SSR HTML.
+	function ruleOutOfDateRange(): boolean {
+		if (!id || !rules) return false
+		const activeRules: BannerRule[] = rules
+		const rule = activeRules.find((r) => r.id === id)
+		if (!rule) return false
+		return !inDateRange(new Date(), rule.dateRange[0], rule.dateRange[1])
+	}
+
+	let outOfDateRange = $derived(ruleOutOfDateRange())
 
 	// Initialize dismissed state during SSR based on the current pathname
 	const isCurrentPage = (href: string | null) =>
@@ -104,7 +128,7 @@
 	{/if}
 </svelte:head>
 
-{#if !dismissed}
+{#if !dismissed && !outOfDateRange}
 	<div
 		class="banner"
 		class:contrast

@@ -2,19 +2,19 @@
 // Reads geo from cookie, checks dates + dismissals, sets data-active-banner,
 // data-is-active-banner-geo, and data-active-campaign-banner on <html>.
 // Exposed as window.selectBanners to allow re-runs.
+//
+// `inDateRange` is injected as a global by +layout.svelte before this script runs.
 
-/**
- * @typedef {Object} BannerRule
- * @property {string} id
- * @property {[string | null, string | null]} dateRange
- * @property {string[]=} countries
- */
+/** @typedef {import('$lib/types').BannerRule} BannerRule */
 /** @type {BannerRule[]} */
 // eslint-disable-next-line no-unassigned-vars -- Injected by +layout.svelte at runtime
 var mainBannerRules
 /** @type {BannerRule[]} */
 // eslint-disable-next-line no-unassigned-vars -- Injected by +layout.svelte at runtime
 var campaignBannerRules
+/** @type {(now: Date, startsOn: string | null, endsOn: string | null) => boolean} */
+// eslint-disable-next-line no-unassigned-vars -- Injected by +layout.svelte at runtime
+var inDateRange
 
 window.selectBanners = function () {
 	var now = new Date()
@@ -37,25 +37,6 @@ window.selectBanners = function () {
 	}
 
 	/**
-	 * @param {string | null} startsOn
-	 * @param {string | null} endsOn
-	 * @returns {boolean}
-	 */
-	function inDateRange(startsOn, endsOn) {
-		if (startsOn) {
-			/** @type {string[]} */
-			var s = startsOn.split('-')
-			if (now < new Date(+s[0], +s[1] - 1, +s[2])) return false
-		}
-		if (endsOn) {
-			/** @type {string[]} */
-			var e = endsOn.split('-')
-			if (now > new Date(+e[0], +e[1] - 1, +e[2], 23, 59, 59, 999)) return false
-		}
-		return true
-	}
-
-	/**
 	 * @param {BannerRule[]} rules
 	 * @param {string} dismissalPrefix
 	 * @returns {BannerRule | undefined}
@@ -65,7 +46,7 @@ window.selectBanners = function () {
 			var countryMatches = !rule.countries || rule.countries.indexOf(country) !== -1
 			if (
 				countryMatches &&
-				inDateRange(...rule.dateRange) &&
+				inDateRange(now, rule.dateRange[0], rule.dateRange[1]) &&
 				!dismissed(dismissalPrefix, rule.id)
 			) {
 				return true
