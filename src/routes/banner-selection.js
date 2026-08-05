@@ -13,7 +13,7 @@ var mainBannerRules
 // eslint-disable-next-line no-unassigned-vars -- Injected by +layout.svelte at runtime
 var campaignBannerRules
 /** @type {(now: Date, startsOn: string | null, endsOn: string | null) => boolean} */
-// eslint-disable-next-line no-undef -- Injected by +layout.svelte at runtime
+// eslint-disable-next-line no-unassigned-vars -- Injected by +layout.svelte at runtime
 var inDateRange
 
 window.selectBanners = function () {
