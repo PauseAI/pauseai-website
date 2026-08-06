@@ -11,6 +11,7 @@ export interface OnboardingMessages {
 	onboarding_placeholder_full_name: string
 	onboarding_field_email: string
 	onboarding_placeholder_email: string
+	onboarding_email_critical_notice: string
 	onboarding_field_country: string
 	onboarding_placeholder_country: string
 	onboarding_field_city: string
@@ -188,6 +189,8 @@ const en: OnboardingMessages = {
 	onboarding_placeholder_full_name: 'Full name',
 	onboarding_field_email: 'Email *',
 	onboarding_placeholder_email: 'Email',
+	onboarding_email_critical_notice:
+		'We may occasionally send you a critical alert, even if you don\'t opt into any of these. See our <a target="_blank" rel="noopener noreferrer" href="/privacy">privacy policy</a>.',
 	onboarding_field_country: 'Country of residence *',
 	onboarding_placeholder_country: 'Select your country',
 	onboarding_field_city: 'City / town of residence *',
@@ -398,6 +401,8 @@ const de: OnboardingMessages = {
 	onboarding_placeholder_full_name: 'Vollständiger Name',
 	onboarding_field_email: 'E-Mail *',
 	onboarding_placeholder_email: 'E-Mail',
+	onboarding_email_critical_notice:
+		'In dringenden Fällen könnten wir dir eine Nachricht senden, auch wenn du keine dieser Optionen wählst. Siehe unsere <a target="_blank" rel="noopener noreferrer" href="/privacy">Datenschutzrichtlinie</a>.',
 	onboarding_field_country: 'Wohnsitzland *',
 	onboarding_placeholder_country: 'Land auswählen',
 	onboarding_field_city: 'Stadt / Gemeinde *',
@@ -618,6 +623,8 @@ const fr: OnboardingMessages = {
 	onboarding_placeholder_full_name: 'Nom complet',
 	onboarding_field_email: 'E-mail *',
 	onboarding_placeholder_email: 'E-mail',
+	onboarding_email_critical_notice:
+		'Nous pouvons occasionnellement t\'envoyer une alerte urgente, même si tu ne sélectionnes aucune de ces options. Consulte notre <a target="_blank" rel="noopener noreferrer" href="/privacy">politique de confidentialité</a>.',
 	onboarding_field_country: 'Pays de résidence *',
 	onboarding_placeholder_country: 'Sélectionne ton pays',
 	onboarding_field_city: 'Ville / commune de résidence *',

@@ -422,10 +422,6 @@
 						autocomplete="email"
 						bind:value={basics.email}
 					/>
-					<!-- <p class="helper">
-						We may contact you about critical mobilizations, see our
-						<Link href="/privacy">privacy policy</Link>.
-					</p> -->
 				</div>
 				<div class="field">
 					<label class="field-label" for="ob-country">{msgs.onboarding_field_country}</label>
@@ -483,6 +479,7 @@
 						class="intent-option"
 						class:selected={keepInformed}
 						role="checkbox"
+						aria-describedby="critical-alert-notice"
 						aria-checked={keepInformed}
 						onclick={() => (keepInformed = !keepInformed)}
 					>
@@ -502,6 +499,7 @@
 						class="intent-option"
 						class:selected={basics.newsletter}
 						role="checkbox"
+						aria-describedby="critical-alert-notice"
 						aria-checked={basics.newsletter}
 						onclick={() => (basics.newsletter = !basics.newsletter)}
 					>
@@ -517,6 +515,10 @@
 						</span>
 					</button>
 				</div>
+				<p class="helper" id="critical-alert-notice">
+					<!-- eslint-disable-next-line svelte/no-at-html-tags -->
+					{@html msgs.onboarding_email_critical_notice}
+				</p>
 				<p class="section-label">{msgs.onboarding_intent_more_optional}</p>
 				<div class="intent-stack" role="radiogroup" aria-label="Want to do more?">
 					{#each intentOptions as option (option.key)}
@@ -621,10 +623,6 @@
 									autocomplete="email"
 									bind:value={basics.email}
 								/>
-								<!-- <p class="helper">
-									We may contact you about critical mobilizations, see our
-									<Link href="/privacy">privacy policy</Link>.
-								</p> -->
 							</div>
 							<div class="field">
 								<label class="field-label" for="loop-country">{msgs.onboarding_field_country}</label
