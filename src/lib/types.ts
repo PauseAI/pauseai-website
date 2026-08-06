@@ -17,6 +17,8 @@ export type Categories = 'sveltekit' | 'svelte' | 'AI Safety' | 'Transparency' |
 
 export type LinkType = 'internal' | 'external' | 'mail'
 
+export type FrontmatterDataSources = Record<string, string>
+
 /**
  * A banner selection rule. `dateRange` is `[startsOn, endsOn]` in `YYYY-MM-DD`
  * format; either bound may be `null` for unbounded. `countries` is `null` for
@@ -42,6 +44,8 @@ type StrictFrontmatterMeta = {
 	showImage?: boolean
 	/** If false, this post will be dynamically rendered instead of prerendered at build time */
 	prerender?: boolean
+	/** Named URLs to fetch server-side and pass to the mdsvex component as a `data` prop */
+	data?: FrontmatterDataSources
 	/** If true, this post will appear in the Latest News section on the homepage */
 	news?: boolean
 	/**

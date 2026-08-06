@@ -1,5 +1,6 @@
 import { getLocale } from '$lib/paraglide/runtime'
 import type { DescriptiveFrontmatterMeta } from '$lib/types'
+import { dataForPost } from './frontmatter-data.server'
 import { cssForPost } from './post-css.server'
 import { imagesForPost } from './post-images.server'
 import type { EntryGenerator, PageServerLoad } from './$types'
@@ -19,12 +20,15 @@ export const entries: EntryGenerator = () =>
 
 export const prerender = 'auto'
 
-export const load: PageServerLoad = async ({ params: { slug } }) => {
+export const load: PageServerLoad = async ({ params: { slug }, fetch }) => {
 	const locale = getLocale()
 	const cssUrls = cssForPost(slug, locale)
-	const { pictures, banner, metaImageUrl } = await imagesForPost(locale, slug)
+	const [{ pictures, banner, metaImageUrl }, frontmatterData] = await Promise.all([
+		imagesForPost(locale, slug),
+		dataForPost(locale, slug, fetch)
+	])
 
-	return { cssUrls, pictures, banner, metaImageUrl }
+	return { cssUrls, pictures, banner, metaImageUrl, frontmatterData }
 }
 
 function slugFromPostPath(path: string): string {

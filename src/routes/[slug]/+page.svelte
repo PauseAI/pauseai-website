@@ -64,7 +64,7 @@
 	{/if}
 
 	<div class="prose">
-		<data.content />
+		<data.content data={data.frontmatterData ?? {}} />
 	</div>
 </article>
 

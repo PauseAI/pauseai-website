@@ -95,6 +95,42 @@ The article (and automatic l10ns of same) will be previewable.
 
 If you are sufficiently changing prominent text, consider inspecting relevant l10ns as well as the original.
 
+### Loading Data in Markdown Posts
+
+Markdown posts can fetch URL-backed data on the server by adding a `data` map to frontmatter. This is most useful for internal API routes:
+
+```markdown
+---
+title: Example
+description: Example post
+data:
+  news: /api/news?page=1&pageSize=3
+---
+
+<script lang="ts">
+	export let data
+</script>
+
+{#each data.news.items as item}
+<h2>{item.title}</h2>
+<p>{item.subtitle}</p>
+{/each}
+```
+
+Each value in the `data` map must be a URL. JSON responses are parsed and all other responses are passed through as text. The loaded values are passed into the mdsvex component as the `data` prop.
+
+By default, Markdown posts are prerendered, so these URLs are fetched during the production build and the result is baked into static HTML. Combine `data` with `prerender: false` when the data should be fetched at request time, such as for frequently changing API responses or routes that depend on runtime environment:
+
+```yaml
+---
+title: Live Example
+description: Example post with request-time data.
+prerender: false
+data:
+  news: /api/news?page=1&pageSize=3
+---
+```
+
 ### Image Optimization
 
 Images are processed at build time by [`vite-imagetools`](https://github.com/JonasKruckenberg/imagetools) and delivered in multiple formats (AVIF, WebP) and resolutions via a `<picture>` element. Remote or arbitrary images are optimized at request time by the [Netlify image CDN](https://docs.netlify.com/image-cdn/).
