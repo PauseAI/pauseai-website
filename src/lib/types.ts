@@ -40,6 +40,8 @@ type StrictFrontmatterMeta = {
 	categories?: Categories[]
 	image?: string
 	showImage?: boolean
+	/** If false, this post will be dynamically rendered instead of prerendered at build time */
+	prerender?: boolean
 	/** If true, this post will appear in the Latest News section on the homepage */
 	news?: boolean
 	/**
