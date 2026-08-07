@@ -91,6 +91,10 @@
 	// Airtable record id from the step-2 submission; later submissions send it
 	// back so the server updates the record instead of creating another.
 	let recordId = $state('')
+	// V2 prototype: "Keep me informed" is the INFORMATIONAL opt-in (global +
+	// local-chapter updates). It is a genuine opt-in for everyone including
+	// Volunteers/Leads — never pre-checked or forced (marketing consent must be
+	// freely given); operational volunteer comms ride legitimate interest instead.
 	let keepInformed = $state(false)
 	let submitting = $state(false)
 	let browseSignedUp = $state(false)
@@ -141,9 +145,9 @@
 	let becomePayingMember = $state(false)
 
 	// GDPR data-processing consent gating every record-creating submission
-	// (step 2 + browse). Chapter-sharing consent is not bundled here: it lives
-	// in the optional "Keep me informed" opt-in, since we only share details
-	// with a local chapter when the person asks to be connected to one.
+	// (step 2 + browse). NB: the server also hardcodes chapter-sharing consent
+	// on every record today — whether that should instead follow the involvement
+	// axis / bell rather than a forced checkbox is an open question (see PR body).
 	let gdprConsent = $state(false)
 
 	// Phone: dial code prefilled from country of residence, editable in case
@@ -477,6 +481,7 @@
 					<input type="hidden" name="keep_informed" value="on" />
 				{/if}
 				<h2>{msgs.onboarding_step2_heading}</h2>
+				<p class="section-label">Want to hear from us?</p>
 				<div class="intent-grid">
 					<button
 						type="button"
@@ -484,6 +489,7 @@
 						class:selected={keepInformed}
 						role="checkbox"
 						aria-checked={keepInformed}
+						aria-describedby="critical-alert-notice"
 						onclick={() => (keepInformed = !keepInformed)}
 					>
 						<span class="intent-icon">
@@ -494,7 +500,7 @@
 						</span>
 						<span class="intent-label">{msgs.onboarding_intent_keep_informed_label}</span>
 						<span class="intent-sub">
-							{msgs.onboarding_intent_keep_informed_sub}
+							Get global campaign updates, plus news from your local PauseAI chapter.
 						</span>
 					</button>
 					<button
@@ -517,6 +523,11 @@
 						</span>
 					</button>
 				</div>
+				<p class="helper" id="critical-alert-notice">
+					We may occasionally send you a critical alert, even if you don't opt into any of these.
+					You can unsubscribe from any list at any time. See our
+					<LinkWithoutIcon href="/privacy" target="_blank">privacy policy</LinkWithoutIcon>.
+				</p>
 				<p class="section-label">{msgs.onboarding_intent_more_optional}</p>
 				<div class="intent-stack" role="radiogroup" aria-label="Want to do more?">
 					{#each intentOptions as option (option.key)}
@@ -540,11 +551,7 @@
 					{/each}
 				</div>
 				{@render gdprConsentField()}
-				<button
-					type="submit"
-					class="primary"
-					disabled={(!intent && !keepInformed && !basics.newsletter) || !gdprConsent || submitting}
-				>
+				<button type="submit" class="primary" disabled={!gdprConsent || submitting}>
 					{submitting
 						? msgs.onboarding_btn_submitting
 						: intent === 'volunteer' || intent === 'lead'
@@ -949,7 +956,7 @@
 
 	h2 {
 		font-family: var(--font-heading);
-		margin-top: 0;
+		margin: 0;
 	}
 
 	.browse-banner {
@@ -974,7 +981,7 @@
 		display: flex;
 		flex-direction: column;
 		align-items: stretch;
-		gap: 1rem;
+		gap: 0.75rem;
 		width: 100%;
 		max-width: none;
 	}
@@ -1392,7 +1399,7 @@
 		text-transform: uppercase;
 		letter-spacing: 0.05em;
 		opacity: 0.7;
-		margin: 1.5rem 0 0.5rem 0;
+		margin: 0.75rem 0 0.5rem 0;
 	}
 
 	.confirmation-footer :global(.discord-button) {

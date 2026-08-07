@@ -198,25 +198,27 @@ const en: OnboardingMessages = {
 	onboarding_step2_heading: 'What brings you here?',
 	onboarding_intent_keep_informed_label: 'Keep me informed',
 	onboarding_intent_keep_informed_sub:
-		'Connect me with my local PauseAI chapter, and keep me updated on global campaigns.',
+		'Get global campaign updates, plus news from your local PauseAI chapter.',
 	onboarding_intent_newsletter_label: 'Subscribe to our Substack',
-	onboarding_intent_newsletter_sub: 'General news on AI, delivered via our Substack newsletter.',
+	onboarding_intent_newsletter_sub: "AI news from the PauseAI team's perspective.",
 	onboarding_intent_more_optional: 'Want to do more? (optional)',
 	onboarding_intent_act_now_label: 'I just want to take action now',
 	onboarding_intent_act_now_sub: 'Show me what I can do today.',
 	onboarding_intent_volunteer_label: 'I want to volunteer regularly',
-	onboarding_intent_volunteer_sub: 'Help me find a role that fits.',
+	onboarding_intent_volunteer_sub:
+		'Help me find a role that fits. (Includes local chapter updates.)',
 	onboarding_intent_lead_label: 'I want to lead',
-	onboarding_intent_lead_sub: "I'm ready to organize in my country or region.",
+	onboarding_intent_lead_sub:
+		"I'm ready to organize in my country or region. (Includes local chapter updates.)",
 	onboarding_gdpr_consent:
-		'I agree to the <a target="_blank" rel="noopener noreferrer" href="/privacy">Privacy Policy</a>, including sharing my details with my local PauseAI chapter (which may be a separate entity to PauseAI Global) for local coordination.&nbsp;*',
+		'I agree to the <a target="_blank" rel="noopener noreferrer" href="/privacy">Privacy Policy</a>. I understand my details will be shared with my local PauseAI chapter (which may be a separate entity to PauseAI Global) for local coordination.&nbsp;*',
 	onboarding_btn_submit: 'Submit →',
 	onboarding_btn_submitting: 'Submitting...',
 	onboarding_btn_back: '← Back',
 	onboarding_confirm_keep_informed:
-		"We'll connect you with your local PauseAI chapter and keep you updated on global campaigns.",
+		"You'll get global campaign updates and news from your local PauseAI chapter.",
 	onboarding_confirm_newsletter:
-		"You're subscribed to our Substack newsletter for general news on AI.",
+		"You're subscribed to our Substack: AI news from the PauseAI team's perspective, delivered by email.",
 	onboarding_confirm_a_title: "You're in.",
 	onboarding_confirm_b_title: "You're in, thanks for joining us.",
 	onboarding_confirm_b_sub: "You're all set. Here are a few ways to make a difference today.",
@@ -226,10 +228,10 @@ const en: OnboardingMessages = {
 	onboarding_browse_header_sub:
 		'Below are some actions you can take right now. The best way to stay informed about new opportunities is to sign up below.',
 	onboarding_browse_signed_up:
-		"✓ You're in. We'll connect you with your local PauseAI chapter and keep you updated on global campaigns.",
+		"✓ You're in. You'll get global campaign updates and news from your local PauseAI chapter.",
 	onboarding_browse_keep_informed_title: 'Keep me informed',
 	onboarding_browse_keep_informed_sub:
-		'Connect me with my local PauseAI chapter and keep me updated on global campaigns.',
+		'Get global campaign updates, plus news from your local PauseAI chapter.',
 	onboarding_btn_sign_me_up: 'Sign me up →',
 	onboarding_btn_signing_up: 'Signing up...',
 	onboarding_section_ways_to_help: 'A few ways to help today',
