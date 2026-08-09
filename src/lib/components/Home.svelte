@@ -52,7 +52,11 @@
 	</Block>
 </section>
 
-<NewsletterSignup joinHandoff />
+<NewsletterSignup
+	joinHandoff
+	headingText={m.home_newsletter_heading()}
+	buttonText={m.home_newsletter_button()}
+/>
 
 <style>
 	.divider {
