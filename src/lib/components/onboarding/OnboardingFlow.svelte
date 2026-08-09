@@ -44,10 +44,12 @@
 	const intentOptions = $derived(getIntentOptions(msgs))
 
 	let {
+		initialEmail = '',
 		initialCountry = '',
 		initialCity = '',
 		initialLanguages = [] as string[]
 	}: {
+		initialEmail?: string
 		initialCountry?: string
 		initialCity?: string
 		initialLanguages?: string[]
@@ -100,10 +102,17 @@
 	// volunteer form, which pre-fills from the same state)
 	let basics = $state({
 		fullName: '',
-		email: '',
+		email: initialEmail,
 		country: initialCountry,
 		city: initialCity,
 		newsletter: false
+	})
+
+	// A newsletter signup elsewhere (e.g. the homepage box) can hand off here
+	// via ?subscribe-email=...; that email arrives after mount, so prefill it
+	// once it's available without clobbering anything the visitor has typed.
+	$effect(() => {
+		if (initialEmail && !basics.email) basics.email = initialEmail
 	})
 
 	const validLanguageStored = new Set(LANGUAGES.map((l) => l.stored))

@@ -52,7 +52,7 @@
 	</Block>
 </section>
 
-<NewsletterSignup />
+<NewsletterSignup joinHandoff />
 
 <style>
 	.divider {

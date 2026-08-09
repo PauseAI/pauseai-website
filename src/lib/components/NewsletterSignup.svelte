@@ -1,6 +1,7 @@
 <script lang="ts">
 	import * as m from '$lib/paraglide/messages.js'
 	import { tick } from 'svelte'
+	import { goto } from '$app/navigation'
 
 	interface Props {
 		// Localizable text
@@ -10,6 +11,8 @@
 		descriptionText?: m.LocalizedString
 		// State variable for email binding (for external use)
 		email?: string
+		/** Route to the /join movement signup (email prefilled) instead of Substack. */
+		joinHandoff?: boolean
 	}
 
 	let {
@@ -17,7 +20,8 @@
 		buttonText = m.newsletter_button(),
 		headingText = m.newsletter_heading(),
 		descriptionText = m.newsletter_description(),
-		email = $bindable('')
+		email = $bindable(''),
+		joinHandoff = false
 	}: Props = $props()
 
 	// State for showing success message
@@ -26,6 +30,15 @@
 
 	const handleSubmit = async (e: Event) => {
 		e.preventDefault()
+
+		// Newsletter entry that feeds the CRM: hand off to the /join flow with the
+		// email prefilled, rather than subscribing to Substack directly.
+		if (joinHandoff) {
+			const dest = `/join?subscribe-email=${encodeURIComponent(email)}`
+			email = ''
+			void goto(dest)
+			return
+		}
 
 		// Show success message immediately
 		showSuccess = true
