@@ -1,5 +1,5 @@
 ---
-title: Get updates
+title: Get PauseAI updates
 metaTitle: Get PauseAI updates
 description: Sign up to get updates from PauseAI.
 ---
