@@ -6,6 +6,7 @@
 	import Logo from '$lib/components/logo.svelte'
 	import { localizeHref } from '$lib/paraglide/runtime'
 	import Menu from '@lucide/svelte/icons/menu'
+	import Mail from '@lucide/svelte/icons/mail'
 	import X from '@lucide/svelte/icons/x'
 	import ChevronDown from '@lucide/svelte/icons/chevron-down'
 	import { onMount } from 'svelte'
@@ -82,6 +83,15 @@
 							{/each}
 						</div>
 					</details>
+				{:else if item.mail}
+					<LinkWithoutIcon
+						href={item.href}
+						class="panel-link get-updates"
+						aria-current={isCurrent(item) ? 'page' : undefined}
+					>
+						<span>{item.label}</span>
+						<Mail size="1em" />
+					</LinkWithoutIcon>
 				{:else}
 					<LinkWithoutIcon
 						href={item.href}
@@ -152,6 +162,12 @@
 		color: var(--text);
 		text-decoration: none;
 		border-radius: 4px;
+	}
+
+	.panel :global(.panel-link.get-updates) {
+		display: flex;
+		align-items: center;
+		gap: 0.5rem;
 	}
 
 	.panel :global(.panel-link.c2a) {

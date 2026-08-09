@@ -7,6 +7,8 @@ export interface NavItem {
 	external?: boolean
 	/** Render as a call-to-action (brand-coloured) link. */
 	c2a?: boolean
+	/** Show a leading mail icon; the newsletter / updates entry. */
+	mail?: boolean
 	/** Sub-items shown in a dropdown (desktop) / accordion (mobile). */
 	children?: NavItem[]
 }
@@ -43,6 +45,7 @@ export function getNavItems(): NavItem[] {
 				{ label: m.header_start_group(), href: '/national-groups' }
 			]
 		},
+		{ label: m.header_get_updates(), href: '/join', mail: true },
 		{ label: m.header_donate(), href: '/donate', c2a: true }
 	]
 }
