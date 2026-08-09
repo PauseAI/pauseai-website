@@ -259,8 +259,8 @@ importers:
         specifier: ^8.2.1
         version: 8.2.1(@types/node@24.13.3)(esbuild@0.28.0)(jiti@2.7.0)(tsx@4.23.11)(yaml@2.9.0)
       vite-imagetools:
-        specifier: ^10.0.1
-        version: 10.0.1(@types/node@24.13.3)(vite@8.2.1(@types/node@24.13.3)(esbuild@0.28.0)(jiti@2.7.0)(tsx@4.23.11)(yaml@2.9.0))
+        specifier: ^11.0.0
+        version: 11.0.0(@types/node@24.13.3)(vite@8.2.1(@types/node@24.13.3)(esbuild@0.28.0)(jiti@2.7.0)(tsx@4.23.11)(yaml@2.9.0))
       vite-plugin-lucide-preprocess:
         specifier: ^1.5.3
         version: 1.5.3(rolldown@1.2.1)(vite@8.2.1(@types/node@24.13.3)(esbuild@0.28.0)(jiti@2.7.0)(tsx@4.23.11)(yaml@2.9.0))
@@ -2628,8 +2628,8 @@ packages:
     resolution: {integrity: sha512-Hs59xBNfUIunMFgWAbGX5cq6893IbWg4KnrjbYwX3tx0ztorVgTDA6B2sxf8ejHJ4wz8BqGUMYlnzNBer5NvGg==}
     engines: {node: '>= 4'}
 
-  imagetools-core@10.0.0:
-    resolution: {integrity: sha512-wirG+oESU1QTORt+fqR6DAsVMgW5CXgrRaGgf1lo4hu/3q6269GfHBmYpVWzmMIuHM/H01QcaWrHR6kHCC7bOw==}
+  imagetools-core@11.0.0:
+    resolution: {integrity: sha512-BaNX7im/o7PqGmck3/wElRx4xugnJYIMtPfOIAHEd2ZV1ZyalewE0H9nm/czZcjdtsgxVW7IzL0oJQn6J8kZuA==}
     engines: {node: '>=22.0.0'}
 
   import-fresh@3.3.1:
@@ -3837,11 +3837,11 @@ packages:
   vfile@6.0.3:
     resolution: {integrity: sha512-KzIbH/9tXat2u30jf+smMwFCsno4wHVdNmzFyL+T/L3UGqqk6JKfVqOFOZEpZSHADH1k40ab6NUIXZq422ov3Q==}
 
-  vite-imagetools@10.0.1:
-    resolution: {integrity: sha512-JfM1rUSLQoPAA+8RB9TFxxpfSjmBpLTkU5zaSFPlWYlgfc3g2gFfYH+u+HghqNy+6HCw6zJBmq+2exx6pMJFOg==}
+  vite-imagetools@11.0.0:
+    resolution: {integrity: sha512-9mMuI/gum/hg7OT2VUfVJvolmACJbc1kStMmm0ydoUHX+3jsj1zvsbmI0DYt2K8u2Tex6kiTuj86xDuIYNgV2A==}
     engines: {node: '>=22.0.0'}
     peerDependencies:
-      vite: '>=7.0.0'
+      vite: '>=8.0.0'
 
   vite-plugin-lucide-preprocess@1.5.3:
     resolution: {integrity: sha512-RF6OFB++zM9P36dkBQqO1iNzd8t9BqQTY19OArrlqhJye4lyTWjZpHTg3EM0oy1slU6YEy75J0INFi4zazqNbw==}
@@ -6163,7 +6163,7 @@ snapshots:
 
   ignore@7.0.5: {}
 
-  imagetools-core@10.0.0: {}
+  imagetools-core@11.0.0: {}
 
   import-fresh@3.3.1:
     dependencies:
@@ -7641,10 +7641,10 @@ snapshots:
       '@types/unist': 3.0.3
       vfile-message: 4.0.3
 
-  vite-imagetools@10.0.1(@types/node@24.13.3)(vite@8.2.1(@types/node@24.13.3)(esbuild@0.28.0)(jiti@2.7.0)(tsx@4.23.11)(yaml@2.9.0)):
+  vite-imagetools@11.0.0(@types/node@24.13.3)(vite@8.2.1(@types/node@24.13.3)(esbuild@0.28.0)(jiti@2.7.0)(tsx@4.23.11)(yaml@2.9.0)):
     dependencies:
       '@rollup/pluginutils': 5.3.0
-      imagetools-core: 10.0.0
+      imagetools-core: 11.0.0
       sharp: 0.35.3(@types/node@24.13.3)
       vite: 8.2.1(@types/node@24.13.3)(esbuild@0.28.0)(jiti@2.7.0)(tsx@4.23.11)(yaml@2.9.0)
     transitivePeerDependencies:
