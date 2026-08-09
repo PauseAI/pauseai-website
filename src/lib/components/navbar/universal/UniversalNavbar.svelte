@@ -144,4 +144,8 @@
 	.nav-links :global(.get-updates:hover) {
 		color: var(--brand);
 	}
+
+	.nav-links :global(.get-updates.active) {
+		color: var(--brand-subtle);
+	}
 </style>

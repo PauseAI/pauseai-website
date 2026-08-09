@@ -11,8 +11,8 @@
 		descriptionText?: m.LocalizedString
 		// State variable for email binding (for external use)
 		email?: string
-		/** Route to the /join movement signup (email prefilled) instead of Substack. */
-		joinHandoff?: boolean
+		/** When set, submit routes to this signup path with the email prefilled, instead of Substack. */
+		handoffHref?: string
 	}
 
 	let {
@@ -21,7 +21,7 @@
 		headingText = m.newsletter_heading(),
 		descriptionText = m.newsletter_description(),
 		email = $bindable(''),
-		joinHandoff = false
+		handoffHref = undefined
 	}: Props = $props()
 
 	// State for showing success message
@@ -31,10 +31,10 @@
 	const handleSubmit = async (e: Event) => {
 		e.preventDefault()
 
-		// Newsletter entry that feeds the CRM: hand off to the /join flow with the
+		// Newsletter entry that feeds the CRM: hand off to the signup flow with the
 		// email prefilled, rather than subscribing to Substack directly.
-		if (joinHandoff) {
-			const dest = `/join?subscribe-email=${encodeURIComponent(email)}`
+		if (handoffHref) {
+			const dest = `${handoffHref}?subscribe-email=${encodeURIComponent(email)}`
 			email = ''
 			void goto(dest)
 			return

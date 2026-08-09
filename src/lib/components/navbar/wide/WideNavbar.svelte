@@ -4,6 +4,8 @@
 	import NavDropdown from '../NavDropdown.svelte'
 	import MailIcon from '@lucide/svelte/icons/mail'
 	import LinkWithoutIcon from '$lib/components/LinkWithoutIcon.svelte'
+	import { page } from '$app/state'
+	import { localizeHref } from '$lib/paraglide/runtime'
 	import type { NavItem } from '../navItems'
 
 	interface Props {
@@ -20,7 +22,11 @@
 		{#if item.children}
 			<NavDropdown {item} {inverted} />
 		{:else if item.mail}
-			<LinkWithoutIcon href={item.href} class={inverted ? 'get-updates inverted' : 'get-updates'}>
+			{@const active = !!item.href && localizeHref(page.url.pathname) === localizeHref(item.href)}
+			<LinkWithoutIcon
+				href={item.href}
+				class="get-updates{inverted ? ' inverted' : ''}{active ? ' active' : ''}"
+			>
 				<MailIcon size="0.85em" />
 				<span>{item.label}</span>
 			</LinkWithoutIcon>

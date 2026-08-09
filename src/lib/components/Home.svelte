@@ -53,7 +53,7 @@
 </section>
 
 <NewsletterSignup
-	joinHandoff
+	handoffHref="/subscribe"
 	headingText={m.home_newsletter_heading()}
 	buttonText={m.home_newsletter_button()}
 />
