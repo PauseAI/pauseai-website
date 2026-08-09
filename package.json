@@ -64,7 +64,7 @@
 		"npm-run-all2": "^9.0.3",
 		"p-queue": "^9.3.3",
 		"postcss-discard-duplicates": "^8.0.2",
-		"postcss-html": "^1.8.1",
+		"postcss-html": "^2.0.0",
 		"prettier": "^3.9.6",
 		"prettier-plugin-svelte": "^4.1.1",
 		"remark-heading-id": "^1.0.1",
