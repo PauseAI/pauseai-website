@@ -2,7 +2,6 @@ import { fail } from '@sveltejs/kit'
 import type { Actions } from './$types'
 import { env } from '$env/dynamic/private'
 import { createRecord } from '$lib/airtable'
-import { TURNSTILE_FIELD } from '$lib/turnstile'
 import { checkNotSpam } from '$lib/server/turnstile-verify'
 import { partnershipOptions } from './partnership-options'
 
