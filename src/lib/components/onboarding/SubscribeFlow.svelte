@@ -117,7 +117,7 @@
 			</div>
 
 			<div class="field">
-				<label class="field-label" for="sub-email">Email</label>
+				<label class="field-label" for="sub-email">Email *</label>
 				<input
 					type="email"
 					id="sub-email"
@@ -156,8 +156,8 @@
 			<label class="opt-in">
 				<input type="checkbox" name="chapter_share" bind:checked={wantsChapter} />
 				<span>
-					<span class="opt-in-label">Also send me updates from my local group</span>
-					<span class="opt-in-sub">We'll connect you with your nearest PauseAI group.</span>
+					<span class="opt-in-label">Also send me updates from my local chapter</span>
+					<span class="opt-in-sub">We'll connect you with your local PauseAI chapter.</span>
 				</span>
 			</label>
 
