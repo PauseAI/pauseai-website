@@ -28,7 +28,7 @@ function getFormString(formData: FormData, field: string): string | undefined {
  * matters — the honeypot only catches bots that render the page, whereas most
  * spam POSTs directly to the form action.
  */
-export async function verifyTurnstile(
+async function verifyTurnstile(
 	token: string | undefined,
 	expectedHostname: string
 ): Promise<{ ok: true } | { ok: false; message: string }> {
