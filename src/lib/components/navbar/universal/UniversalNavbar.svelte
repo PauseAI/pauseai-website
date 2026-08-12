@@ -116,36 +116,5 @@
 		text-transform: uppercase;
 		flex-wrap: wrap;
 		justify-content: center;
-		align-items: center;
-	}
-
-	/* The "Get updates" nav item (WideNavbar) is a bare link, not a Navlink, so it
-	   needs its own colour/spacing here where .nav-links is in scope: matches the
-	   .navlink rhythm and overrides the global `a` colour. */
-	.nav-links :global(.get-updates) {
-		display: inline-flex;
-		align-items: center;
-		gap: 0.35rem;
-		font-family: var(--font-heading);
-		font-weight: 700;
-		font-size: 1.1rem;
-		color: var(--text);
-		text-decoration: none;
-		white-space: nowrap;
-		padding: 0 0.5rem;
-		margin-left: 0.5rem;
-		margin-right: -0.5rem;
-	}
-
-	.nav-links :global(.get-updates.inverted) {
-		color: white;
-	}
-
-	.nav-links :global(.get-updates:hover) {
-		color: var(--brand);
-	}
-
-	.nav-links :global(.get-updates.active) {
-		color: var(--brand-subtle);
 	}
 </style>
