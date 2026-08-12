@@ -24,6 +24,14 @@ const mailerSendApiKey = env.MAILERSEND_API_KEY
 const TURNSTILE_VERIFY_URL = 'https://challenges.cloudflare.com/turnstile/v0/siteverify'
 
 /**
+ * Cloudflare's dummy test secrets (1x…/2x…/3x… followed by zeros), which pass or fail
+ * every token regardless of the challenge. Real secrets begin "0x".
+ * We reject the known-bad prefixes rather than requiring a known-good format, so a
+ * future change to Cloudflare's real key format cannot lock legitimate senders out.
+ */
+const TURNSTILE_TEST_SECRET = /^[123]x0{10}/
+
+/**
  * Maximum characters accepted per field. The client shows softer hints, but these
  * are the limits that count: bots POST straight to the action and never run our JS.
  */
@@ -46,7 +54,7 @@ type MailerSendError = {
 	message?: string
 }
 
-type TurnstileVerification = { success?: boolean; 'error-codes'?: unknown }
+type TurnstileVerification = { success?: boolean; hostname?: unknown; 'error-codes'?: unknown }
 
 function getFormString(formData: FormData, field: string): string | undefined {
 	const value = formData.get(field)
@@ -91,7 +99,8 @@ function findOversizedField(formData: FormData): string | undefined {
  * spam POSTs directly to the form action.
  */
 async function verifyTurnstile(
-	token: string | undefined
+	token: string | undefined,
+	expectedHostname: string
 ): Promise<{ ok: true } | { ok: false; message: string }> {
 	const secret = env.TURNSTILE_SECRET_KEY
 
@@ -112,6 +121,17 @@ async function verifyTurnstile(
 		}
 	}
 
+	// Fail closed on a *wrong* secret as well as a missing one. A test secret accepts
+	// every token, which would silently turn the form back into an open mail relay
+	// while every health check still looked green.
+	if (!dev && TURNSTILE_TEST_SECRET.test(secret)) {
+		console.error('TURNSTILE_SECRET_KEY is a Cloudflare test key — refusing it outside dev')
+		return {
+			ok: false,
+			message: 'Spam protection is misconfigured. Please email contact@pauseai.info instead.'
+		}
+	}
+
 	if (!token) {
 		return {
 			ok: false,
@@ -129,6 +149,19 @@ async function verifyTurnstile(
 		const result: unknown = await response.json()
 
 		if (isTurnstileVerification(result) && result.success === true) {
+			// Reject a token minted on another origin (a deploy preview, say) and replayed
+			// here. Only reject when Turnstile actually reports a different hostname — an
+			// absent or unexpected field must never lock out legitimate senders.
+			const hostname = typeof result.hostname === 'string' ? result.hostname : undefined
+			if (!dev && hostname && hostname !== expectedHostname) {
+				console.warn(
+					`Turnstile token was issued for ${hostname}, but submitted to ${expectedHostname}`
+				)
+				return {
+					ok: false,
+					message: 'The anti-spam check failed. Please reload the page and try again.'
+				}
+			}
 			return { ok: true }
 		}
 
@@ -313,22 +346,23 @@ async function sendConfirmationEmail(data: { name: string; email: string; type: 
  * `drop` means silently pretend success, so a bot does not learn it was caught.
  */
 async function checkNotSpam(
-	data: FormData
+	data: FormData,
+	expectedHostname: string
 ): Promise<{ drop: true } | { drop: false; message?: string }> {
 	// Hidden field that only an automated form-filler completes.
 	if (getFormString(data, 'nickname')) return { drop: true }
 
-	const verification = await verifyTurnstile(getFormString(data, TURNSTILE_FIELD))
+	const verification = await verifyTurnstile(getFormString(data, TURNSTILE_FIELD), expectedHostname)
 	if (!verification.ok) return { drop: false, message: verification.message }
 
 	return { drop: false }
 }
 
 export const actions: Actions = {
-	media: async ({ request }) => {
+	media: async ({ request, url }) => {
 		const data = await request.formData()
 
-		const spam = await checkNotSpam(data)
+		const spam = await checkNotSpam(data, url.hostname)
 		if (spam.drop) return { success: true }
 		if (spam.message) return fail(403, { message: spam.message })
 
@@ -366,10 +400,10 @@ export const actions: Actions = {
 
 		return { success: true }
 	},
-	partnerships: async ({ request }) => {
+	partnerships: async ({ request, url }) => {
 		const data = await request.formData()
 
-		const spam = await checkNotSpam(data)
+		const spam = await checkNotSpam(data, url.hostname)
 		if (spam.drop) return { success: true }
 		if (spam.message) return fail(403, { message: spam.message })
 
@@ -431,10 +465,10 @@ export const actions: Actions = {
 
 		return { success: true }
 	},
-	feedback: async ({ request }) => {
+	feedback: async ({ request, url }) => {
 		const data = await request.formData()
 
-		const spam = await checkNotSpam(data)
+		const spam = await checkNotSpam(data, url.hostname)
 		if (spam.drop) return { success: true }
 		if (spam.message) return fail(403, { message: spam.message })
 
