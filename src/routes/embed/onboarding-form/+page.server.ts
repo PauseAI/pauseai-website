@@ -1,7 +1,3 @@
-// Onboarding submit action — shared by step 2, browse signup, and step 3
-// volunteer update. See docs/join-form-flow.md for the full flow contract
-// (fields, validation, live/stub branches). Keep that document in sync when
-// changing the action's inputs or behavior.
 import { fail } from '@sveltejs/kit'
 import type { FieldSet } from 'airtable'
 import type { Actions } from './$types'
@@ -10,6 +6,7 @@ import { createRecord, updateRecord } from '$lib/airtable'
 import { isOnboardingLive } from '$lib/server/onboarding'
 import { recordStubSubmission } from '$lib/server/onboarding-stub'
 import { subscribeToSubstackNewsletter } from '$lib/server/substack'
+import { checkNotSpam } from '$lib/server/turnstile-verify'
 import {
 	COUNTRIES,
 	DISCOVERY_OPTIONS,
@@ -65,13 +62,18 @@ async function lookupChapter(
 }
 
 export const actions: Actions = {
-	submit: async ({ request, fetch }) => {
+	submit: async ({ request, fetch, url }) => {
 		const data = await request.formData()
 
 		// Honeypot
 		if (getString(data, 'nickname')) {
 			return { success: true }
 		}
+
+		// Turnstile bot protection
+		const spam = await checkNotSpam(data, url.hostname)
+		if (spam.drop) return { success: true }
+		if (spam.message) return fail(403, { message: spam.message })
 
 		const fullName = getString(data, 'full_name')
 		const email = getString(data, 'email')
