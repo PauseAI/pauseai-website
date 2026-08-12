@@ -191,6 +191,10 @@
 
 <style>
 	.subscribe-card {
+		/* Inputs set width:100% with their own padding; the site's reset doesn't
+		   cover form controls, so make width include padding or they overflow the
+		   card on narrow screens. */
+		box-sizing: border-box;
 		background-color: var(--bg-subtle);
 		border-radius: 32px;
 		width: 100%;
@@ -198,6 +202,13 @@
 		margin: 2.5rem auto 0;
 		padding: 2.25rem;
 		box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+	}
+
+	@media (max-width: 600px) {
+		.subscribe-card {
+			padding: 1.5rem;
+			border-radius: 24px;
+		}
 	}
 
 	form {
@@ -220,6 +231,7 @@
 	}
 
 	.field input {
+		box-sizing: border-box;
 		border: 1px solid var(--brand-subtle);
 		background-color: var(--bg);
 		width: 100%;
