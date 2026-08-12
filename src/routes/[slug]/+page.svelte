@@ -19,7 +19,8 @@
 		description,
 		image,
 		author,
-		showImage = true
+		showImage = true,
+		showTitle = true
 	} = $derived({ title: data.slug, ...data.meta })
 	let parent = $derived(data.slug.split('/').slice(0, -1).join('/'))
 
@@ -42,15 +43,17 @@
 	{#if parent}
 		<Link href={`/${parent}`}>View all {parent}</Link>
 	{/if}
-	<hgroup>
-		<h1>{title}</h1>
-		{#if author}
-			<p>{author}</p>
-		{/if}
-		{#if date}
-			<!-- <p>Published at {formatDate(date)}</p> -->
-		{/if}
-	</hgroup>
+	{#if showTitle !== false}
+		<hgroup>
+			<h1>{title}</h1>
+			{#if author}
+				<p>{author}</p>
+			{/if}
+			{#if date}
+				<!-- <p>Published at {formatDate(date)}</p> -->
+			{/if}
+		</hgroup>
+	{/if}
 
 	{#if image && showImage !== false}
 		<div class="banner">

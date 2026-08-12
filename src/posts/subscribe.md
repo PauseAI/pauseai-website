@@ -2,6 +2,7 @@
 title: Subscribe
 metaTitle: Subscribe to PauseAI
 description: Sign up to get updates from PauseAI.
+showTitle: false
 ---
 
 <script>
@@ -14,7 +15,5 @@ description: Sign up to get updates from PauseAI.
 		subscribeEmail = page.url.searchParams.get('subscribe-email') ?? ''
 	})
 </script>
-
-Sign up to our newsletter and receive updates about how to support our movement, from getting involved in the current campaign to taking part in a local event.
 
 <SubscribeFlow initialEmail={subscribeEmail} />

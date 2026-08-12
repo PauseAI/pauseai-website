@@ -65,6 +65,19 @@
 	}
 </script>
 
+<!-- The page-template h1 is suppressed (showTitle: false in subscribe.md) so the
+     heading can track the phase: "Subscribe" for the signup, "Get involved" once
+     they choose to do more (which reuses the /join flow). -->
+<div class="subscribe-head">
+	<h1>{phase === 'more' ? 'Get involved' : 'Subscribe'}</h1>
+	{#if phase === 'form'}
+		<p class="subscribe-intro">
+			Sign up to our newsletter and receive updates about how to support our movement, from getting
+			involved in the current campaign to taking part in a local event.
+		</p>
+	{/if}
+</div>
+
 {#if phase === 'form'}
 	<div class="subscribe-card">
 		<form method="POST" action="/embed/onboarding-form?/submit" use:enhance={submit}>
@@ -190,6 +203,21 @@
 {/if}
 
 <style>
+	/* Replaces the suppressed page-template hgroup; the global h1 rule supplies
+	   the font/size, so only spacing lives here. */
+	.subscribe-head {
+		margin: 2.5rem 0 1.5rem;
+	}
+
+	.subscribe-head h1 {
+		margin: 0;
+	}
+
+	.subscribe-intro {
+		margin: 1rem 0 0;
+		max-width: 40rem;
+	}
+
 	.subscribe-card {
 		/* Inputs set width:100% with their own padding; the site's reset doesn't
 		   cover form controls, so make width include padding or they overflow the

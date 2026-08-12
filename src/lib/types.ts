@@ -40,6 +40,8 @@ type StrictFrontmatterMeta = {
 	categories?: Categories[]
 	image?: string
 	showImage?: boolean
+	/** If false, the page-template h1 is not rendered (the page supplies its own heading) */
+	showTitle?: boolean
 	/** If true, this post will appear in the Latest News section on the homepage */
 	news?: boolean
 	/**

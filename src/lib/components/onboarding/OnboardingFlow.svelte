@@ -205,18 +205,30 @@
 			agreements.conduct
 	)
 
-	const stepperLabels = $derived(
-		intent === 'volunteer'
-			? [
-					msgs.onboarding_step_about,
-					msgs.onboarding_step_intent,
-					msgs.onboarding_step_volunteer_form,
-					msgs.onboarding_step_confirmed
-				]
-			: intent === 'lead'
-				? [msgs.onboarding_step_about, msgs.onboarding_step_intent, msgs.onboarding_step_next_steps]
-				: [msgs.onboarding_step_about, msgs.onboarding_step_intent, msgs.onboarding_step_confirmed]
-	)
+	const stepperLabels = $derived.by(() => {
+		const labels =
+			intent === 'volunteer'
+				? [
+						msgs.onboarding_step_about,
+						msgs.onboarding_step_intent,
+						msgs.onboarding_step_volunteer_form,
+						msgs.onboarding_step_confirmed
+					]
+				: intent === 'lead'
+					? [
+							msgs.onboarding_step_about,
+							msgs.onboarding_step_intent,
+							msgs.onboarding_step_next_steps
+						]
+					: [
+							msgs.onboarding_step_about,
+							msgs.onboarding_step_intent,
+							msgs.onboarding_step_confirmed
+						]
+		// The /subscribe continuation begins after the subscribe form, so it never
+		// showed an "About you" step — drop it and start the stepper at Intent.
+		return isContinuation ? labels.slice(1) : labels
+	})
 
 	// Lead path: if the country already has a chapter, offer regional/city
 	// leadership instead of founding a national group. Fetched lazily when the
@@ -424,7 +436,7 @@
 	{/if}
 
 	{#if mode === 'contact'}
-		<Stepper labels={stepperLabels} current={step - 1} />
+		<Stepper labels={stepperLabels} current={isContinuation ? step - 2 : step - 1} />
 	{/if}
 
 	<div class="form-card">
