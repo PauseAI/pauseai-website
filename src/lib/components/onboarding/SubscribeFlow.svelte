@@ -286,6 +286,9 @@
 
 	.opt-in {
 		display: flex;
+		/* Override the global `form label { flex-direction: column }` so the
+		   checkbox sits beside its label, not above it. */
+		flex-direction: row;
 		align-items: flex-start;
 		gap: 0.6rem;
 		cursor: pointer;
