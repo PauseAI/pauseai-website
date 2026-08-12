@@ -1,7 +1,10 @@
 import { fail } from '@sveltejs/kit'
 import type { Actions } from './$types'
+import { dev } from '$app/environment'
 import { env } from '$env/dynamic/private'
 import { createRecord } from '$lib/airtable'
+import { TURNSTILE_FIELD } from '$lib/turnstile'
+import { partnershipOptions } from './partnership-options'
 
 // Airtable configuration (User to fill in later)
 const CONTACT_AIRTABLE_BASE_ID = 'appWPTGqZmUcs3NWu'
@@ -11,7 +14,6 @@ export const prerender = false
 
 // Configure recipient email addresses for each contact form type
 const CONTACT_RECIPIENTS = {
-	Standard: 'contact@pauseai.info',
 	Media: 'press@pauseai.info',
 	Partnerships: 'partnerships@pauseai.info',
 	Feedback: 'feedback@pauseai.info'
@@ -19,11 +21,32 @@ const CONTACT_RECIPIENTS = {
 
 const mailerSendApiKey = env.MAILERSEND_API_KEY
 
+const TURNSTILE_VERIFY_URL = 'https://challenges.cloudflare.com/turnstile/v0/siteverify'
+
+/**
+ * Maximum characters accepted per field. The client shows softer hints, but these
+ * are the limits that count: bots POST straight to the action and never run our JS.
+ */
+const MAX_LENGTHS: Record<string, number> = {
+	name: 100,
+	email: 254,
+	subject: 200,
+	organization: 200,
+	city_country: 200,
+	message: 5000,
+	details: 5000,
+	other_partnership_type: 200
+}
+
+const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+
 type ContactFormType = keyof typeof CONTACT_RECIPIENTS
 
 type MailerSendError = {
 	message?: string
 }
+
+type TurnstileVerification = { success?: boolean; 'error-codes'?: unknown }
 
 function getFormString(formData: FormData, field: string): string | undefined {
 	const value = formData.get(field)
@@ -32,6 +55,98 @@ function getFormString(formData: FormData, field: string): string | undefined {
 
 function isMailerSendError(value: unknown): value is MailerSendError {
 	return typeof value === 'object' && value !== null
+}
+
+function isTurnstileVerification(value: unknown): value is TurnstileVerification {
+	return typeof value === 'object' && value !== null
+}
+
+function escapeHtml(value: string): string {
+	return value
+		.replace(/&/g, '&amp;')
+		.replace(/</g, '&lt;')
+		.replace(/>/g, '&gt;')
+		.replace(/"/g, '&quot;')
+		.replace(/'/g, '&#39;')
+}
+
+function countWords(value: string): number {
+	return value.trim().split(/\s+/).filter(Boolean).length
+}
+
+/** Returns an error message if any submitted field exceeds its cap. */
+function findOversizedField(formData: FormData): string | undefined {
+	for (const [field, max] of Object.entries(MAX_LENGTHS)) {
+		const value = getFormString(formData, field)
+		if (value && value.length > max) {
+			return `The ${field.replace(/_/g, ' ')} field is too long (maximum ${max} characters).`
+		}
+	}
+	return undefined
+}
+
+/**
+ * Verifies the Cloudflare Turnstile token server-side. This is the check that
+ * matters — the honeypot only catches bots that render the page, whereas most
+ * spam POSTs directly to the form action.
+ */
+async function verifyTurnstile(
+	token: string | undefined
+): Promise<{ ok: true } | { ok: false; message: string }> {
+	const secret = env.TURNSTILE_SECRET_KEY
+
+	if (!secret) {
+		// `dev` (not isDev()) on purpose: it is compiled to a constant false in any
+		// build, so whether we fail closed does not depend on which env vars the
+		// runtime happens to expose. isDev() keys off CI at request time, which is
+		// too fragile a basis for a security decision.
+		if (dev) {
+			console.warn('⚠️ TURNSTILE_SECRET_KEY not set — skipping anti-spam check in development')
+			return { ok: true }
+		}
+		// Fail closed: a misconfigured deploy must not silently reopen the form to bots.
+		console.error('TURNSTILE_SECRET_KEY is not configured')
+		return {
+			ok: false,
+			message: 'Spam protection is unavailable. Please email contact@pauseai.info instead.'
+		}
+	}
+
+	if (!token) {
+		return {
+			ok: false,
+			message: 'Please wait for the anti-spam check to complete, then send your message again.'
+		}
+	}
+
+	try {
+		const response = await fetch(TURNSTILE_VERIFY_URL, {
+			method: 'POST',
+			headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+			body: new URLSearchParams({ secret, response: token })
+		})
+
+		const result: unknown = await response.json()
+
+		if (isTurnstileVerification(result) && result.success === true) {
+			return { ok: true }
+		}
+
+		console.warn(
+			'Turnstile rejected a submission:',
+			isTurnstileVerification(result) ? result['error-codes'] : result
+		)
+		return {
+			ok: false,
+			message: 'The anti-spam check failed. Please reload the page and try again.'
+		}
+	} catch (error) {
+		console.error('Turnstile verification error:', error)
+		return {
+			ok: false,
+			message: 'Could not complete the anti-spam check. Please try again in a moment.'
+		}
+	}
 }
 
 async function sendContactEmail(data: {
@@ -53,21 +168,23 @@ async function sendContactEmail(data: {
 
 	const recipientEmail = CONTACT_RECIPIENTS[data.type]
 
+	// Everything interpolated below is attacker-controlled, so it is escaped:
+	// unescaped input let spammers inject live links into the team's inbox.
 	let htmlContent = `
-		<p><strong>Name:</strong> ${data.name}</p>
-		<p><strong>Email:</strong> ${data.email}</p>
-		<p><strong>Subject:</strong> ${data.subject}</p>
+		<p><strong>Name:</strong> ${escapeHtml(data.name)}</p>
+		<p><strong>Email:</strong> ${escapeHtml(data.email)}</p>
+		<p><strong>Subject:</strong> ${escapeHtml(data.subject)}</p>
 	`
 
 	if (data.organization) {
-		htmlContent += `<p><strong>Organization:</strong> ${data.organization}</p>`
+		htmlContent += `<p><strong>Organization:</strong> ${escapeHtml(data.organization)}</p>`
 	}
 
 	if (data.city_country) {
-		htmlContent += `<p><strong>City, Country:</strong> ${data.city_country}</p>`
+		htmlContent += `<p><strong>City, Country:</strong> ${escapeHtml(data.city_country)}</p>`
 	}
 
-	htmlContent += `<p><strong>Message:</strong></p><p>${data.message.replace(/\n/g, '<br>')}</p>`
+	htmlContent += `<p><strong>Message:</strong></p><p>${escapeHtml(data.message).replace(/\n/g, '<br>')}</p>`
 
 	const textContent = `Name: ${data.name}\nEmail: ${data.email}\nSubject: ${data.subject}${data.organization ? `\nOrganization: ${data.organization}` : ''}${data.city_country ? `\nCity, Country: ${data.city_country}` : ''}\n\nMessage:\n${data.message}`
 
@@ -191,54 +308,45 @@ async function sendConfirmationEmail(data: { name: string; email: string; type: 
 	}
 }
 
+/**
+ * The anti-bot gate shared by every form, cheapest check first.
+ * `drop` means silently pretend success, so a bot does not learn it was caught.
+ */
+async function checkNotSpam(
+	data: FormData
+): Promise<{ drop: true } | { drop: false; message?: string }> {
+	// Hidden field that only an automated form-filler completes.
+	if (getFormString(data, 'nickname')) return { drop: true }
+
+	const verification = await verifyTurnstile(getFormString(data, TURNSTILE_FIELD))
+	if (!verification.ok) return { drop: false, message: verification.message }
+
+	return { drop: false }
+}
+
 export const actions: Actions = {
-	standard: async ({ request }) => {
-		const data = await request.formData()
-		const name = getFormString(data, 'name')
-		const email = getFormString(data, 'email')
-		const subject = getFormString(data, 'subject')
-		const message = getFormString(data, 'message')
-		const nickname = getFormString(data, 'nickname')
-
-		if (nickname) {
-			return { success: true }
-		}
-
-		if (!name || !email || !subject || !message) {
-			return fail(400, { message: 'Missing required fields' })
-		}
-
-		const result = await sendContactEmail({
-			name,
-			email,
-			subject,
-			message,
-			type: 'Standard'
-		})
-
-		if (!result.success) {
-			return fail(500, { message: result.message })
-		}
-
-		await sendConfirmationEmail({ name, email, type: 'Standard' })
-
-		return { success: true }
-	},
 	media: async ({ request }) => {
 		const data = await request.formData()
+
+		const spam = await checkNotSpam(data)
+		if (spam.drop) return { success: true }
+		if (spam.message) return fail(403, { message: spam.message })
+
+		const oversized = findOversizedField(data)
+		if (oversized) return fail(400, { message: oversized })
+
 		const name = getFormString(data, 'name')
 		const email = getFormString(data, 'email')
 		const subject = getFormString(data, 'subject')
 		const organization = getFormString(data, 'organization')
 		const details = getFormString(data, 'details')
-		const nickname = getFormString(data, 'nickname')
-
-		if (nickname) {
-			return { success: true }
-		}
 
 		if (!name || !email || !subject || !organization || !details) {
 			return fail(400, { message: 'Missing required fields' })
+		}
+
+		if (!EMAIL_PATTERN.test(email)) {
+			return fail(400, { message: 'Please enter a valid email address.' })
 		}
 
 		const result = await sendContactEmail({
@@ -260,27 +368,49 @@ export const actions: Actions = {
 	},
 	partnerships: async ({ request }) => {
 		const data = await request.formData()
+
+		const spam = await checkNotSpam(data)
+		if (spam.drop) return { success: true }
+		if (spam.message) return fail(403, { message: spam.message })
+
+		const oversized = findOversizedField(data)
+		if (oversized) return fail(400, { message: oversized })
+
 		const name = getFormString(data, 'name')
 		const email = getFormString(data, 'email')
 		const organization = getFormString(data, 'organization')
 		const city_country = getFormString(data, 'city_country')
-
-		let subject = getFormString(data, 'partnership_type') ?? ''
-		const other_type = getFormString(data, 'other_partnership_type')
-
-		if (subject === 'Other' && other_type) {
-			subject = `Other: ${other_type}`
-		}
-
 		const message = getFormString(data, 'message')
-		const nickname = getFormString(data, 'nickname')
 
-		if (nickname) {
-			return { success: true }
+		// The form offers a fixed list, so anything else was not sent by our UI.
+		const partnershipType = getFormString(data, 'partnership_type') ?? ''
+		if (!partnershipOptions.includes(partnershipType)) {
+			return fail(400, { message: 'Please choose how you would like to partner with us.' })
 		}
 
-		if (!name || !email || !city_country || !subject || !message) {
+		let subject = partnershipType
+		if (partnershipType === 'Other') {
+			const otherType = getFormString(data, 'other_partnership_type')
+			if (!otherType) {
+				return fail(400, { message: 'Please describe the type of partnership.' })
+			}
+			if (countWords(otherType) > 10) {
+				return fail(400, { message: 'Other partnership type must be 10 words or less.' })
+			}
+			subject = `Other: ${otherType}`
+		}
+
+		if (!name || !email || !city_country || !message) {
 			return fail(400, { message: 'Missing required fields' })
+		}
+
+		if (!EMAIL_PATTERN.test(email)) {
+			return fail(400, { message: 'Please enter a valid email address.' })
+		}
+
+		const messageWords = countWords(message)
+		if (messageWords > 200) {
+			return fail(400, { message: `Message must be 200 words or less. (Sent: ${messageWords})` })
 		}
 
 		const result = await sendContactEmail({
@@ -303,18 +433,26 @@ export const actions: Actions = {
 	},
 	feedback: async ({ request }) => {
 		const data = await request.formData()
+
+		const spam = await checkNotSpam(data)
+		if (spam.drop) return { success: true }
+		if (spam.message) return fail(403, { message: spam.message })
+
+		const oversized = findOversizedField(data)
+		if (oversized) return fail(400, { message: oversized })
+
 		const name = getFormString(data, 'name') ?? 'Anonymous'
 		const email = getFormString(data, 'email') ?? ''
 		const subject = getFormString(data, 'subject')
 		const message = getFormString(data, 'message')
-		const nickname = getFormString(data, 'nickname')
-
-		if (nickname) {
-			return { success: true }
-		}
 
 		if (!subject || !message) {
 			return fail(400, { message: 'Missing required fields' })
+		}
+
+		// Email is optional here, but must look real if given.
+		if (email && !EMAIL_PATTERN.test(email)) {
+			return fail(400, { message: 'Please enter a valid email address.' })
 		}
 
 		const result = await sendContactEmail({
