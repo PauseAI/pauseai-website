@@ -1,13 +1,13 @@
 ---
-title: Get PauseAI updates
-metaTitle: Get PauseAI updates
+title: Subscribe
+metaTitle: Subscribe to PauseAI
 description: Sign up to get updates from PauseAI.
 ---
 
 <script>
 	import { onMount } from 'svelte'
 	import { page } from '$app/state'
-	import OnboardingFlow from '$lib/components/onboarding/OnboardingFlow.svelte'
+	import SubscribeFlow from '$lib/components/onboarding/SubscribeFlow.svelte'
 
 	let subscribeEmail = ''
 	onMount(() => {
@@ -15,6 +15,6 @@ description: Sign up to get updates from PauseAI.
 	})
 </script>
 
-Sign up to get PauseAI's campaign updates, actions, and news from your local group. You can also choose to get more involved.
+Sign up to our newsletter and receive updates about how to support our movement, from getting involved in the current campaign to taking part in a local event.
 
-<OnboardingFlow initialEmail={subscribeEmail} />
+<SubscribeFlow initialEmail={subscribeEmail} />

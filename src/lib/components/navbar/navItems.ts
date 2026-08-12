@@ -45,7 +45,7 @@ export function getNavItems(): NavItem[] {
 				{ label: m.header_start_group(), href: '/national-groups' }
 			]
 		},
-		{ label: m.header_get_updates(), href: '/subscribe', mail: true },
+		{ label: m.header_subscribe(), href: '/subscribe', mail: true },
 		{ label: m.header_donate(), href: '/donate', c2a: true }
 	]
 }

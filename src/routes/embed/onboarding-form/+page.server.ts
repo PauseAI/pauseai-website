@@ -92,14 +92,32 @@ export const actions: Actions = {
 		const existingRecordId = getString(data, 'record_id')
 		// The volunteer detail fields are only present on the step-3 form post.
 		const hasVolunteerDetails = data.get('volunteer_details') === 'on'
+		// The lightweight /subscribe newsletter form. It only strictly needs an
+		// email; name and city are optional, and country matters only when the
+		// person opts into local-chapter updates (it's what routes them to a
+		// chapter). It also decouples chapter sharing from the privacy consent:
+		// the full /join form keeps bundling the two, this one shares only on an
+		// explicit tick.
+		const isSubscribeForm = data.get('subscribe_form') === '1'
+		const wantsChapter = data.get('chapter_share') === 'on'
 
-		if (!fullName || !email || !country || !city) {
+		if (isSubscribeForm) {
+			if (!email) {
+				return fail(400, { message: 'Please enter your email address.' })
+			}
+			if (wantsChapter && !country) {
+				return fail(400, {
+					message: 'Please select your country so we can connect you with your local group.'
+				})
+			}
+		} else if (!fullName || !email || !country || !city) {
 			return fail(400, { message: 'Please fill in your name, email, country and city.' })
 		}
 		if (!/^\S+@\S+\.\S+$/.test(email)) {
 			return fail(400, { message: 'Please enter a valid email address.' })
 		}
-		if (!COUNTRIES.includes(country)) {
+		// Country is optional on the subscribe form, so only validate it when set.
+		if (country && !COUNTRIES.includes(country)) {
 			return fail(400, { message: 'Please select a country from the list.' })
 		}
 		if (!isIntent(intent)) {
@@ -111,6 +129,19 @@ export const actions: Actions = {
 			return fail(400, { message: 'Please agree to the data processing consent to continue.' })
 		}
 
+		// Chapter sharing:
+		//  - /join create bundles it into the single privacy checkbox -> true
+		//  - /subscribe create shares only when they tick the local-updates box
+		//  - an update (the /subscribe "do more" hand-off, or the volunteer step)
+		//    leaves the signup-time choice alone, except Volunteer/Lead, whose
+		//    local involvement means they hear from a chapter regardless
+		let chapterShare: boolean | undefined
+		if (existingRecordId) {
+			if (intent === 'Volunteer' || intent === 'Lead') chapterShare = true
+		} else {
+			chapterShare = isSubscribeForm ? wantsChapter : true
+		}
+
 		const fields: FieldSet = {
 			'Full name': fullName,
 			Email: email,
@@ -119,10 +150,12 @@ export const actions: Actions = {
 			Intent: intent,
 			'Signup source': SIGNUP_SOURCE,
 			'Email subscription': keepInformed,
-			// One required consent checkbox covers both: agreeing to the privacy
-			// policy and, as part of it, sharing details with the local chapter.
-			'Data privacy policy agreed': true,
-			'GDPR chapter share permission': true
+			// Signing up is itself the privacy-policy consent: the /join checkbox
+			// and the /subscribe microcopy both link it.
+			'Data privacy policy agreed': true
+		}
+		if (chapterShare !== undefined) {
+			fields['GDPR chapter share permission'] = chapterShare
 		}
 
 		if (intent === 'Volunteer' && hasVolunteerDetails) {

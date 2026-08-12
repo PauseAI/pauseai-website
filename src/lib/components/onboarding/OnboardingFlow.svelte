@@ -47,12 +47,24 @@
 		initialEmail = '',
 		initialCountry = '',
 		initialCity = '',
-		initialLanguages = [] as string[]
+		initialFullName = '',
+		initialLanguages = [] as string[],
+		initialRecordId = '',
+		startStep = 1,
+		initialKeepInformed = false
 	}: {
 		initialEmail?: string
 		initialCountry?: string
 		initialCity?: string
+		initialFullName?: string
 		initialLanguages?: string[]
+		// The /subscribe flow creates the record up front and then hands off here
+		// to let people go further. It seeds the created record id and starts at
+		// the intent step, so this submission updates that record instead of
+		// creating a duplicate, and pre-sets the newsletter opt-in they already made.
+		initialRecordId?: string
+		startStep?: 1 | 2
+		initialKeepInformed?: boolean
 	} = $props()
 
 	// Surface stub/live mode in the browser console when the form loads. The
@@ -73,7 +85,7 @@
 		}
 	})
 
-	let step: 1 | 2 | 3 | 4 = $state(1)
+	let step: 1 | 2 | 3 | 4 = $state(startStep)
 	let flowEl: HTMLDivElement | undefined = $state()
 
 	// Scroll back to the top of the flow on step changes. The volunteer form
@@ -91,9 +103,10 @@
 	let mode: 'contact' | 'browse' = $state('contact')
 	let intent: IntentKey | null = $state(null)
 	// Airtable record id from the step-2 submission; later submissions send it
-	// back so the server updates the record instead of creating another.
-	let recordId = $state('')
-	let keepInformed = $state(false)
+	// back so the server updates the record instead of creating another. When the
+	// /subscribe flow hands off, it's seeded with the record already created there.
+	let recordId = $state(initialRecordId)
+	let keepInformed = $state(initialKeepInformed)
 	let submitting = $state(false)
 	let browseSignedUp = $state(false)
 	let honeypot = $state('')
@@ -101,7 +114,7 @@
 	// Step 1: basic info (shared with the browse-mode inline signup and the
 	// volunteer form, which pre-fills from the same state)
 	let basics = $state({
-		fullName: '',
+		fullName: initialFullName,
 		email: initialEmail,
 		country: initialCountry,
 		city: initialCity,
@@ -149,11 +162,19 @@
 	// user stays in the flow.
 	let becomePayingMember = $state(false)
 
+	// The /subscribe "do more" hand-off: we start at the intent step with a record
+	// already created and its email opt-ins already chosen. In that mode the step
+	// only asks how involved they want to be — the opt-in cards and a second
+	// consent are hidden so it can't re-ask (or silently undo) what they already
+	// picked on the subscribe form.
+	const isContinuation = $derived(startStep === 2 && !!initialRecordId)
+
 	// GDPR data-processing consent gating every record-creating submission
 	// (step 2 + browse). Chapter-sharing consent is not bundled here: it lives
 	// in the optional "Keep me informed" opt-in, since we only share details
-	// with a local chapter when the person asks to be connected to one.
-	let gdprConsent = $state(false)
+	// with a local chapter when the person asks to be connected to one. The
+	// continuation already consented on the subscribe form, so it starts satisfied.
+	let gdprConsent = $state(startStep === 2 && !!initialRecordId)
 
 	// Phone: dial code prefilled from country of residence, editable in case
 	// their phone is from elsewhere. Submitted combined via a hidden input.
@@ -486,47 +507,49 @@
 					<input type="hidden" name="keep_informed" value="on" />
 				{/if}
 				<h2>{msgs.onboarding_step2_heading}</h2>
-				<div class="intent-grid">
-					<button
-						type="button"
-						class="intent-option"
-						class:selected={keepInformed}
-						role="checkbox"
-						aria-checked={keepInformed}
-						onclick={() => (keepInformed = !keepInformed)}
-					>
-						<span class="intent-icon">
-							<span class="checkbox-box" aria-hidden="true">
-								{keepInformed ? '✓' : ''}
+				{#if !isContinuation}
+					<div class="intent-grid">
+						<button
+							type="button"
+							class="intent-option"
+							class:selected={keepInformed}
+							role="checkbox"
+							aria-checked={keepInformed}
+							onclick={() => (keepInformed = !keepInformed)}
+						>
+							<span class="intent-icon">
+								<span class="checkbox-box" aria-hidden="true">
+									{keepInformed ? '✓' : ''}
+								</span>
+								🔔
 							</span>
-							🔔
-						</span>
-						<span class="intent-label">{msgs.onboarding_intent_keep_informed_label}</span>
-						<span class="intent-sub">
-							{msgs.onboarding_intent_keep_informed_sub}
-						</span>
-					</button>
-					<button
-						type="button"
-						class="intent-option"
-						class:selected={basics.newsletter}
-						role="checkbox"
-						aria-checked={basics.newsletter}
-						onclick={() => (basics.newsletter = !basics.newsletter)}
-					>
-						<span class="intent-icon">
-							<span class="checkbox-box" aria-hidden="true">
-								{basics.newsletter ? '✓' : ''}
+							<span class="intent-label">{msgs.onboarding_intent_keep_informed_label}</span>
+							<span class="intent-sub">
+								{msgs.onboarding_intent_keep_informed_sub}
 							</span>
-							📰
-						</span>
-						<span class="intent-label">{msgs.onboarding_intent_newsletter_label}</span>
-						<span class="intent-sub">
-							{msgs.onboarding_intent_newsletter_sub}
-						</span>
-					</button>
-				</div>
-				<p class="section-label">{msgs.onboarding_intent_more_optional}</p>
+						</button>
+						<button
+							type="button"
+							class="intent-option"
+							class:selected={basics.newsletter}
+							role="checkbox"
+							aria-checked={basics.newsletter}
+							onclick={() => (basics.newsletter = !basics.newsletter)}
+						>
+							<span class="intent-icon">
+								<span class="checkbox-box" aria-hidden="true">
+									{basics.newsletter ? '✓' : ''}
+								</span>
+								📰
+							</span>
+							<span class="intent-label">{msgs.onboarding_intent_newsletter_label}</span>
+							<span class="intent-sub">
+								{msgs.onboarding_intent_newsletter_sub}
+							</span>
+						</button>
+					</div>
+					<p class="section-label">{msgs.onboarding_intent_more_optional}</p>
+				{/if}
 				<div class="intent-stack" role="radiogroup" aria-label="Want to do more?">
 					{#each intentOptions as option (option.key)}
 						<button
@@ -548,7 +571,9 @@
 						</button>
 					{/each}
 				</div>
-				{@render gdprConsentField()}
+				{#if !isContinuation}
+					{@render gdprConsentField()}
+				{/if}
 				<button
 					type="submit"
 					class="primary"
