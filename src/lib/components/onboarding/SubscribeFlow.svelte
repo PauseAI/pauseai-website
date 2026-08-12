@@ -35,13 +35,19 @@
 	let recordId = $state('')
 
 	// A newsletter signup elsewhere (e.g. the homepage box) hands off here via
-	// ?subscribe-email=...; that email arrives after mount, so prefill it once
-	// available without clobbering anything the visitor has typed.
+	// ?subscribe-email=...; that email arrives after mount. Apply it once into an
+	// empty field, then never again — so it neither clobbers typed input nor
+	// snaps back when the visitor clears it to fix a typo.
+	let prefillApplied = $state(false)
 	$effect(() => {
-		if (initialEmail && !email) email = initialEmail
+		if (prefillApplied || !initialEmail) return
+		if (!email) email = initialEmail
+		prefillApplied = true
 	})
 
 	const canSubmit = $derived(!submitting && !!email.trim() && !(wantsChapter && !country.trim()))
+
+	const ERROR_MESSAGE = 'Something went wrong. Please try again.'
 
 	const submit: SubmitFunction = () => {
 		submitting = true
@@ -51,9 +57,9 @@
 				if (typeof result.data.recordId === 'string') recordId = result.data.recordId
 				phase = 'thanks'
 			} else if (result.type === 'failure') {
-				toast.error(String(result.data?.message ?? 'Something went wrong. Please try again.'))
+				toast.error(String(result.data?.message ?? ERROR_MESSAGE))
 			} else {
-				toast.error('Something went wrong. Please try again.')
+				toast.error(ERROR_MESSAGE)
 			}
 		}
 	}

@@ -172,9 +172,10 @@
 	// GDPR data-processing consent gating every record-creating submission
 	// (step 2 + browse). Chapter-sharing consent is not bundled here: it lives
 	// in the optional "Keep me informed" opt-in, since we only share details
-	// with a local chapter when the person asks to be connected to one. The
-	// continuation already consented on the subscribe form, so it starts satisfied.
-	let gdprConsent = $state(startStep === 2 && !!initialRecordId)
+	// with a local chapter when the person asks to be connected to one.
+	// Stays false so it never pre-checks a visible consent box; the continuation
+	// already consented on the subscribe form and is exempted at the submit gate.
+	let gdprConsent = $state(false)
 
 	// Phone: dial code prefilled from country of residence, editable in case
 	// their phone is from elsewhere. Submitted combined via a hidden input.
@@ -577,7 +578,9 @@
 				<button
 					type="submit"
 					class="primary"
-					disabled={(!intent && !keepInformed && !basics.newsletter) || !gdprConsent || submitting}
+					disabled={(!intent && !keepInformed && !basics.newsletter) ||
+						(!isContinuation && !gdprConsent) ||
+						submitting}
 				>
 					{submitting
 						? msgs.onboarding_btn_submitting
@@ -585,9 +588,11 @@
 							? msgs.onboarding_btn_continue
 							: msgs.onboarding_btn_submit}
 				</button>
-				<button type="button" class="back" onclick={() => (step = 1)}
-					>{msgs.onboarding_btn_back}</button
-				>
+				{#if !isContinuation}
+					<button type="button" class="back" onclick={() => (step = 1)}
+						>{msgs.onboarding_btn_back}</button
+					>
+				{/if}
 			</form>
 		{:else if step === 3 && !intent}
 			<!-- Path A: confirmation -->

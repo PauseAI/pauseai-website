@@ -110,7 +110,11 @@ export const actions: Actions = {
 					message: 'Please select your country so we can connect you with your local group.'
 				})
 			}
-		} else if (!fullName || !email || !country || !city) {
+		} else if (!existingRecordId && (!fullName || !email || !country || !city)) {
+			// Updates (the volunteer step, and the /subscribe "do more" hand-off)
+			// patch an existing record, so they must not re-require fields the
+			// original create may have left blank — a /subscribe signup can omit
+			// name/city/country entirely.
 			return fail(400, { message: 'Please fill in your name, email, country and city.' })
 		}
 		if (!/^\S+@\S+\.\S+$/.test(email)) {
@@ -202,10 +206,6 @@ export const actions: Actions = {
 			}
 		}
 
-		// Chapter routing is recorded only; notifying the chapter stays a manual
-		// Airtable process (plan decision 6).
-		const chapter = await lookupChapter(fetch, country)
-
 		if (isOnboardingLive()) {
 			let recordId: string | undefined = existingRecordId || undefined
 			if (recordId) {
@@ -229,6 +229,10 @@ export const actions: Actions = {
 			return { success: true, recordId }
 		}
 
+		// Chapter routing is recorded only for stub inspection; notifying the
+		// chapter stays a manual Airtable process (plan decision 6). The live
+		// branch never reads it, so it's resolved here rather than on every submit.
+		const chapter = await lookupChapter(fetch, country)
 		const submission = recordStubSubmission({
 			airtable: {
 				baseId: AIRTABLE_BASE_ID,
