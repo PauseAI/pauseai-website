@@ -45,7 +45,9 @@
 		prefillApplied = true
 	})
 
-	const canSubmit = $derived(!submitting && !!email.trim() && !(wantsChapter && !country.trim()))
+	const canSubmit = $derived(
+		!submitting && !!fullName.trim() && !!email.trim() && !!country.trim() && !!city.trim()
+	)
 
 	const ERROR_MESSAGE = 'Something went wrong. Please try again.'
 
@@ -105,13 +107,14 @@
 			</div>
 
 			<div class="field">
-				<label class="field-label" for="sub-name">Name</label>
+				<label class="field-label" for="sub-name">Name *</label>
 				<input
 					type="text"
 					id="sub-name"
 					name="full_name"
 					placeholder="Your name"
 					autocomplete="name"
+					required
 					bind:value={fullName}
 				/>
 			</div>
@@ -130,25 +133,26 @@
 			</div>
 
 			<div class="field">
-				<label class="field-label" for="sub-country">Country</label>
+				<label class="field-label" for="sub-country">Country *</label>
 				<Combobox
 					id="sub-country"
 					name="country"
 					options={COUNTRIES}
-					required={wantsChapter}
+					required
 					placeholder="Select your country"
 					bind:value={country}
 				/>
 			</div>
 
 			<div class="field">
-				<label class="field-label" for="sub-city">City</label>
+				<label class="field-label" for="sub-city">City *</label>
 				<input
 					type="text"
 					id="sub-city"
 					name="city"
 					placeholder="Your city"
 					autocomplete="address-level2"
+					required
 					bind:value={city}
 				/>
 			</div>

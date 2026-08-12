@@ -92,35 +92,21 @@ export const actions: Actions = {
 		const existingRecordId = getString(data, 'record_id')
 		// The volunteer detail fields are only present on the step-3 form post.
 		const hasVolunteerDetails = data.get('volunteer_details') === 'on'
-		// The lightweight /subscribe newsletter form. It only strictly needs an
-		// email; name and city are optional, and country matters only when the
-		// person opts into local-chapter updates (it's what routes them to a
-		// chapter). It also decouples chapter sharing from the privacy consent:
-		// the full /join form keeps bundling the two, this one shares only on an
-		// explicit tick.
+		// The /subscribe newsletter form. It requires the same four fields as /join,
+		// but decouples chapter sharing from the privacy consent: the /join form
+		// bundles the two, this one shares only on an explicit local-chapter tick.
 		const isSubscribeForm = data.get('subscribe_form') === '1'
 		const wantsChapter = data.get('chapter_share') === 'on'
 
-		if (isSubscribeForm) {
-			if (!email) {
-				return fail(400, { message: 'Please enter your email address.' })
-			}
-			if (wantsChapter && !country) {
-				return fail(400, {
-					message: 'Please select your country so we can connect you with your local group.'
-				})
-			}
-		} else if (!existingRecordId && (!fullName || !email || !country || !city)) {
-			// Updates (the volunteer step, and the /subscribe "do more" hand-off)
-			// patch an existing record, so they must not re-require fields the
-			// original create may have left blank — a /subscribe signup can omit
-			// name/city/country entirely.
+		// Creates (both forms) require all four fields; an update (the volunteer
+		// step, or the subscribe "do more" hand-off) patches an existing record and
+		// skips the check, so it can't re-require what the original create collected.
+		if (!existingRecordId && (!fullName || !email || !country || !city)) {
 			return fail(400, { message: 'Please fill in your name, email, country and city.' })
 		}
 		if (!/^\S+@\S+\.\S+$/.test(email)) {
 			return fail(400, { message: 'Please enter a valid email address.' })
 		}
-		// Country is optional on the subscribe form, so only validate it when set.
 		if (country && !COUNTRIES.includes(country)) {
 			return fail(400, { message: 'Please select a country from the list.' })
 		}
