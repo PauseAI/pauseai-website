@@ -77,8 +77,6 @@ function findOversizedField(formData: FormData): string | undefined {
 	return undefined
 }
 
-
-
 async function sendContactEmail(data: {
 	name: string
 	email: string
@@ -237,8 +235,6 @@ async function sendConfirmationEmail(data: { name: string; email: string; type: 
 		console.error('Failed to send confirmation email:', error)
 	}
 }
-
-
 
 export const actions: Actions = {
 	media: async ({ request, url }) => {

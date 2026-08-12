@@ -110,14 +110,14 @@ duplicate.
 
 It delegates rendering to a few child components and snippets:
 
-| Child                                                                                                                                                         | Used for                                                                 |
-| ------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------ |
-| `Stepper.svelte`                                                                                                                                              | The numbered step indicator above the form (contact mode only).          |
-| `ActionCards.svelte`                                                                                                                                          | The "ways to help" card grid shown on the act-now confirmation / browse. |
-| `Combobox.svelte`                                                                                                                                             | The searchable country dropdown (used in step 1 and browse signup).      |
+| Child                                                                                                                                                         | Used for                                                                   |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------- |
+| `Stepper.svelte`                                                                                                                                              | The numbered step indicator above the form (contact mode only).            |
+| `ActionCards.svelte`                                                                                                                                          | The "ways to help" card grid shown on the act-now confirmation / browse.   |
+| `Combobox.svelte`                                                                                                                                             | The searchable country dropdown (used in step 1 and browse signup).        |
 | `Turnstile.svelte`                                                                                                                                            | The Cloudflare Turnstile anti-bot widget rendered before every submission. |
-| `LinkWithoutIcon.svelte`, `Socials.svelte`                                                                                                                    | Footer links on confirmation screens.                                    |
-| Snippets: `honeypotField`, `countrySelect`, `hiddenBasics`, `selectCards`, `checkboxConfirmations`, `gdprConsentField`, `nextStepBlock`, `confirmationFooter` | Reusable markup fragments shared across steps.                           |
+| `LinkWithoutIcon.svelte`, `Socials.svelte`                                                                                                                    | Footer links on confirmation screens.                                      |
+| Snippets: `honeypotField`, `countrySelect`, `hiddenBasics`, `selectCards`, `checkboxConfirmations`, `gdprConsentField`, `nextStepBlock`, `confirmationFooter` | Reusable markup fragments shared across steps.                             |
 
 On mount, the component fetches `GET /api/onboarding-mode` and logs whether the
 form is live or stubbed to the browser console. This is needed because the
