@@ -22,6 +22,7 @@ We only collect information that we need to organize our volunteer network and i
 
 - **Personal Information:** When you fill out our [join form](/join), we collect your name, email address, country of residence, and any other details or skills you choose to share with us.
 - **Usage Information:** We use Google Analytics to understand how visitors interact with our website. This includes data on the pages you visit and the time spent on them.
+- **Spam Protection Information:** When you submit a form, we use Cloudflare Turnstile to distinguish human visitors from automated bots. This may collect limited technical information such as your IP address, browser and device characteristics, and interaction data with the challenge widget. You can find more details in [Cloudflare's Privacy Policy](https://www.cloudflare.com/privacypolicy/).
 
 ## 3. How and Why We Use Your Information
 
@@ -33,6 +34,8 @@ Under the GDPR, we must have a "legal basis" for using your data. Here is why we
   - _Legal basis:_ **Your explicit consent**.
 - **To Improve our Website:** We analyze website traffic to make our site better.
   - _Legal basis:_ **Legitimate interest**.
+- **To Protect Against Spam:** We use Cloudflare Turnstile on our forms to distinguish human visitors from automated bots and prevent abuse.
+  - _Legal basis:_ **Legitimate interest** (to keep our forms usable and protect our systems from spam and abuse).
 
 ## 4. Who Has Access to Your Data?
 
@@ -40,7 +43,7 @@ We never sell or trade your personal information. However, we do share it in the
 
 - **Authorized PauseAI Volunteers:** Your data may be accessed by certain PauseAI volunteers who help manage our operations. Any volunteer granted access to this data is required to sign a strict confidentiality agreement.
 - **Your National Chapter:** Because PauseAI is a global movement, we may share your contact information with the PauseAI national chapter in your country so they can coordinate local volunteer efforts with you. Please note that these national chapters are sometimes legally separate entities from Stichting PauseAI.
-- **Service Providers:** We use trusted third-party tools to run our operations, including Airtable (for our database), Substack (for our newsletter), and Google Analytics.
+- **Service Providers:** We use trusted third-party tools to run our operations, including Airtable (for our database), Substack (for our newsletter), Google Analytics, and Cloudflare (for spam protection via Turnstile).
 - **Legal Requirements:** We may disclose your information if legally required to do so by public authorities.
 
 ## 5. International Data Transfers
