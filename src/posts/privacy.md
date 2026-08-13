@@ -2,7 +2,7 @@
 title: PauseAI Privacy Policy
 ---
 
-**Effective Date:** April 17th, 2026
+**Effective Date:** August 13th, 2026
 
 ## 1. Introduction
 
