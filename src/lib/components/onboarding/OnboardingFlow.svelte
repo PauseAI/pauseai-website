@@ -51,7 +51,8 @@
 		initialLanguages = [] as string[],
 		initialRecordId = '',
 		startStep = 1,
-		initialKeepInformed = false
+		initialKeepInformed = false,
+		initialChapterShare = false
 	}: {
 		initialEmail?: string
 		initialCountry?: string
@@ -65,6 +66,9 @@
 		initialRecordId?: string
 		startStep?: 1 | 2
 		initialKeepInformed?: boolean
+		// The chapter-updates choice made on the subscribe form, reposted so backing
+		// out of Volunteer/Lead restores it instead of leaving the escalation.
+		initialChapterShare?: boolean
 	} = $props()
 
 	// Surface stub/live mode in the browser console when the form loads. The
@@ -522,6 +526,14 @@
 				/>
 				{#if keepInformed}
 					<input type="hidden" name="keep_informed" value="on" />
+				{/if}
+				{#if isContinuation}
+					<!-- Tells the server this update knows the signup-time chapter choice,
+					     so it restores it when the intent no longer escalates. -->
+					<input type="hidden" name="subscribe_form" value="1" />
+					{#if initialChapterShare}
+						<input type="hidden" name="chapter_share" value="on" />
+					{/if}
 				{/if}
 				<h2>{msgs.onboarding_step2_heading}</h2>
 				{#if !isContinuation}

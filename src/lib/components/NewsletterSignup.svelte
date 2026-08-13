@@ -2,6 +2,7 @@
 	import * as m from '$lib/paraglide/messages.js'
 	import { tick } from 'svelte'
 	import { goto } from '$app/navigation'
+	import { localizeHref } from '$lib/paraglide/runtime'
 
 	interface Props {
 		// Localizable text
@@ -34,7 +35,7 @@
 		// Newsletter entry that feeds the CRM: hand off to the signup flow with the
 		// email prefilled, rather than subscribing to Substack directly.
 		if (handoffHref) {
-			const dest = `${handoffHref}?subscribe-email=${encodeURIComponent(email)}`
+			const dest = `${localizeHref(handoffHref)}?subscribe-email=${encodeURIComponent(email)}`
 			email = ''
 			void goto(dest)
 			return
@@ -65,7 +66,7 @@
 		     subscribing straight to Substack. -->
 		<form
 			bind:this={formElement}
-			action={handoffHref ?? 'https://pauseai.substack.com/api/v1/free'}
+			action={handoffHref ? localizeHref(handoffHref) : 'https://pauseai.substack.com/api/v1/free'}
 			method={handoffHref ? 'GET' : 'POST'}
 			target={handoffHref ? undefined : '_blank'}
 			onsubmit={handleSubmit}

@@ -203,6 +203,7 @@
 		initialCountry={country}
 		initialCity={city}
 		initialKeepInformed={true}
+		initialChapterShare={wantsChapter}
 	/>
 {/if}
 

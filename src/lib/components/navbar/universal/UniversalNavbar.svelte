@@ -143,6 +143,14 @@
 
 	.nav-links :global(.get-updates:hover) {
 		color: var(--brand);
+		text-decoration: underline;
+	}
+
+	/* Must come after the :hover rule (equal specificity): on the hero's orange
+	   band the brand-coloured hover would otherwise be invisible. Matches
+	   .navlink.inverted:hover. */
+	.nav-links :global(.get-updates.inverted:hover) {
+		color: black;
 	}
 
 	.nav-links :global(.get-updates.active) {

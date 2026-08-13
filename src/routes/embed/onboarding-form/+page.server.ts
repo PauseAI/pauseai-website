@@ -128,15 +128,15 @@ export const actions: Actions = {
 		let chapterShare: boolean | undefined
 		if (existingRecordId) {
 			if (intent === 'Volunteer' || intent === 'Lead') chapterShare = true
+			// The subscribe "do more" step reposts the signup-time choice, so backing
+			// out of Volunteer/Lead restores it rather than leaving the escalation.
+			else if (isSubscribeForm) chapterShare = wantsChapter
 		} else {
 			chapterShare = isSubscribeForm ? wantsChapter : true
 		}
 
 		const fields: FieldSet = {
-			'Full name': fullName,
 			Email: email,
-			Country: country,
-			City: city,
 			Intent: intent,
 			'Signup source': SIGNUP_SOURCE,
 			'Email subscription': keepInformed,
@@ -144,6 +144,12 @@ export const actions: Actions = {
 			// and the /subscribe microcopy both link it.
 			'Data privacy policy agreed': true
 		}
+		// A create always writes the basics (they're validated above). An update only
+		// overwrites them when non-empty, so a partial post can't blank what the
+		// create collected.
+		if (!existingRecordId || fullName) fields['Full name'] = fullName
+		if (!existingRecordId || country) fields.Country = country
+		if (!existingRecordId || city) fields.City = city
 		if (chapterShare !== undefined) {
 			fields['GDPR chapter share permission'] = chapterShare
 		}
