@@ -59,25 +59,30 @@
 		<h3 class="toc-exclude">{headingText}</h3>
 		<p>{descriptionText}</p>
 
-		<!-- Direct POST to Substack API in new tab -->
+		<!-- Direct POST to Substack API in new tab, unless handing off to the signup
+		     flow — then the native target mirrors the hydrated goto(), so submitting
+		     before hydration (or without JS) still lands on the flow rather than
+		     subscribing straight to Substack. -->
 		<form
 			bind:this={formElement}
-			action="https://pauseai.substack.com/api/v1/free"
-			method="POST"
-			target="_blank"
+			action={handoffHref ?? 'https://pauseai.substack.com/api/v1/free'}
+			method={handoffHref ? 'GET' : 'POST'}
+			target={handoffHref ? undefined : '_blank'}
 			onsubmit={handleSubmit}
 		>
 			<div class="input-group">
 				<input
 					type="email"
-					name="email"
+					name={handoffHref ? 'subscribe-email' : 'email'}
 					bind:value={email}
 					placeholder={placeholderText}
 					aria-label={placeholderText}
 					required
 					enterkeyhint="done"
 				/>
-				<input type="hidden" name="source" value="pauseai_website" />
+				{#if !handoffHref}
+					<input type="hidden" name="source" value="pauseai_website" />
+				{/if}
 				<button type="submit">{buttonText}</button>
 			</div>
 		</form>

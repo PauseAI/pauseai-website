@@ -122,10 +122,14 @@
 	})
 
 	// A newsletter signup elsewhere (e.g. the homepage box) can hand off here
-	// via ?subscribe-email=...; that email arrives after mount, so prefill it
-	// once it's available without clobbering anything the visitor has typed.
+	// via ?subscribe-email=...; that email arrives after mount. Apply it once into
+	// an empty field, then never again — so it neither clobbers typed input nor
+	// snaps back when the visitor clears it to fix a typo.
+	let prefillApplied = $state(false)
 	$effect(() => {
-		if (initialEmail && !basics.email) basics.email = initialEmail
+		if (prefillApplied || !initialEmail) return
+		if (!basics.email) basics.email = initialEmail
+		prefillApplied = true
 	})
 
 	const validLanguageStored = new Set(LANGUAGES.map((l) => l.stored))
