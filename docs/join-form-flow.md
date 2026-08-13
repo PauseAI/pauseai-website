@@ -99,21 +99,25 @@ duplicate.
 - `step` (`1 → 4`), `mode` (`'contact' | 'browse'`), `intent`
   (`'act-now' | 'volunteer' | 'lead' | null`), and the `basics` / `volunteer` /
   `agreements` / `gdprConsent` / `becomePayingMember` state.
+- **Anti-bot protection state:** `turnstileToken`, `turnstileNonce` (manages
+  widget remounts after each submission), and the derived `canSubmit` flag
+  (gates submit buttons until Turnstile verification is complete).
 - All form markup for steps 1–4, including the browse-mode inline signup and
   the lead-path `mailto:` hand-off (no submission).
 - A `submitWith(onSuccess)` helper that wraps SvelteKit's `enhance` to manage
-  the `submitting` flag, capture the returned `recordId`, and surface errors
-  via `svelte-french-toast`.
+  the `submitting` flag, reset the Turnstile widget after submission, capture
+  the returned `recordId`, and surface errors via `svelte-french-toast`.
 
 It delegates rendering to a few child components and snippets:
 
-| Child                                                                                                                                                         | Used for                                                                 |
-| ------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------ |
-| `Stepper.svelte`                                                                                                                                              | The numbered step indicator above the form (contact mode only).          |
-| `ActionCards.svelte`                                                                                                                                          | The "ways to help" card grid shown on the act-now confirmation / browse. |
-| `Combobox.svelte`                                                                                                                                             | The searchable country dropdown (used in step 1 and browse signup).      |
-| `LinkWithoutIcon.svelte`, `Socials.svelte`                                                                                                                    | Footer links on confirmation screens.                                    |
-| Snippets: `honeypotField`, `countrySelect`, `hiddenBasics`, `selectCards`, `checkboxConfirmations`, `gdprConsentField`, `nextStepBlock`, `confirmationFooter` | Reusable markup fragments shared across steps.                           |
+| Child                                                                                                                                                         | Used for                                                                   |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------- |
+| `Stepper.svelte`                                                                                                                                              | The numbered step indicator above the form (contact mode only).            |
+| `ActionCards.svelte`                                                                                                                                          | The "ways to help" card grid shown on the act-now confirmation / browse.   |
+| `Combobox.svelte`                                                                                                                                             | The searchable country dropdown (used in step 1 and browse signup).        |
+| `Turnstile.svelte`                                                                                                                                            | The Cloudflare Turnstile anti-bot widget rendered before every submission. |
+| `LinkWithoutIcon.svelte`, `Socials.svelte`                                                                                                                    | Footer links on confirmation screens.                                      |
+| Snippets: `honeypotField`, `countrySelect`, `hiddenBasics`, `selectCards`, `checkboxConfirmations`, `gdprConsentField`, `nextStepBlock`, `confirmationFooter` | Reusable markup fragments shared across steps.                             |
 
 On mount, the component fetches `GET /api/onboarding-mode` and logs whether the
 form is live or stubbed to the browser console. This is needed because the
@@ -208,6 +212,17 @@ Target: base `appWPTGqZmUcs3NWu`, table `tblL1icZBhTV1gQ9o` ("Members").
 
 Enforced in the `submit` action before any write:
 
+### Bot protection (performed before all other validation)
+
+- **Honeypot:** a non-empty `nickname` field (a client-side hidden field) silently
+  returns success with no write — catches bots that render the page.
+- **Turnstile verification:** server-side CAPTCHA check via Cloudflare. The token
+  is validated against `TURNSTILE_SECRET_KEY`, the token's hostname is verified to
+  match the request origin, and test/invalid tokens are rejected. Bots that POST
+  directly to the endpoint (bypassing the honeypot) are blocked here.
+
+### Field validation
+
 - Required: `full_name`, `email`, `country`, `city`.
 - `email` must match `^\S+@\S+\.\S+$`.
 - `country` must be in `COUNTRIES`.
@@ -216,8 +231,31 @@ Enforced in the `submit` action before any write:
   volunteer updates are exempt because consent was captured at step 2.
 - Volunteer path additionally requires: ≥1 language, a valid `hours` value, and
   both `agree_volunteer` and `agree_conduct` checkboxes.
-- Honeypot: a non-empty `nickname` field silently returns success (bot caught,
-  no write performed).
+
+## Bot protection details
+
+The form implements a two-layer bot defense:
+
+1. **Client-side honeypot:** A hidden `nickname` input field that only bots render
+   and complete. When non-empty, the submission silently succeeds without writing
+   to Airtable or Substack, so bots learn nothing.
+
+2. **Server-side Turnstile verification:** Cloudflare CAPTCHA tokens are verified
+   on the server (function `checkNotSpam()` in `src/lib/server/turnstile-verify.ts`).
+   The verification checks:
+   - The `TURNSTILE_SECRET_KEY` is configured and is not a test key
+   - The token is valid and successfully verified by Cloudflare
+   - The token's hostname matches the request origin (prevents token replay from
+     other origins like deploy previews)
+   - In development, verification is skipped if the secret is missing; in production,
+     a missing or test secret causes the form to fail closed
+
+   Tokens are single-use and expire after 5 minutes. After each submission
+   (success or failure), the frontend remounts the Turnstile widget via the
+   `turnstileNonce` state variable so a new token can be obtained for a retry.
+
+This combination blocks both bots that render the page (honeypot) and bots that
+POST directly to the endpoint (Turnstile verification).
 
 ## Live vs. stub mode
 
@@ -226,7 +264,8 @@ Enforced in the `submit` action before any write:
 in-memory by `recordStubSubmission()` and rendered at
 `/embed/onboarding-form/stub` for inspection — no Airtable write and no Substack
 subscription occur. The component surfaces the current mode in the browser
-console via `GET /api/onboarding-mode`.
+console via `GET /api/onboarding-mode`. Bot protection (Turnstile verification)
+runs regardless of live/stub mode.
 
 ## Lead path (no submission)
 
