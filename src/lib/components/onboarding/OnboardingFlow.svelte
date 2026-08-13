@@ -458,12 +458,7 @@
 						bind:value={basics.city}
 					/>
 				</div>
-				{#key turnstileNonce}
-					<Turnstile bind:token={turnstileToken} />
-				{/key}
-				<button type="submit" class="primary" disabled={!canSubmit}
-					>{msgs.onboarding_btn_continue}</button
-				>
+				<button type="submit" class="primary">{msgs.onboarding_btn_continue}</button>
 				<div class="browse-option">
 					<button type="button" class="secondary" onclick={startBrowse}>
 						{msgs.onboarding_btn_browse}
@@ -561,10 +556,13 @@
 					{/each}
 				</div>
 				{@render gdprConsentField()}
+				{#key turnstileNonce}
+					<Turnstile bind:token={turnstileToken} />
+				{/key}
 				<button
 					type="submit"
 					class="primary"
-					disabled={(!intent && !keepInformed && !basics.newsletter) || !gdprConsent || submitting}
+					disabled={(!intent && !keepInformed && !basics.newsletter) || !gdprConsent || !canSubmit}
 				>
 					{submitting
 						? msgs.onboarding_btn_submitting
