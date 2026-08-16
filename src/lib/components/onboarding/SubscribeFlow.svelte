@@ -231,7 +231,9 @@
 		background-color: var(--bg-subtle);
 		border-radius: 32px;
 		width: 100%;
-		max-width: 560px;
+		/* Matches OnboardingFlow's width: the "do more" step swaps this card for
+		   that one in place, so a different width would jump mid-flow. */
+		max-width: 800px;
 		margin: 2.5rem auto 0;
 		padding: 2.25rem;
 		box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
@@ -248,6 +250,10 @@
 		display: flex;
 		flex-direction: column;
 		gap: 1.1rem;
+		width: 100%;
+		/* The global `form` rule caps at 30rem, which would leave the card's extra
+		   width empty. */
+		max-width: none;
 	}
 
 	.field {
