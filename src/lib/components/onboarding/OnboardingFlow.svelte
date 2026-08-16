@@ -615,7 +615,7 @@
 				>
 					{submitting
 						? msgs.onboarding_btn_submitting
-						: intent === 'volunteer' || intent === 'lead'
+						: isContinuation || intent === 'volunteer' || intent === 'lead'
 							? msgs.onboarding_btn_continue
 							: msgs.onboarding_btn_submit}
 				</button>
