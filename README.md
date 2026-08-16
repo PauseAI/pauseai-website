@@ -97,13 +97,15 @@ If you are sufficiently changing prominent text, consider inspecting relevant l1
 
 ### Image Optimization
 
-To improve performance, images are automatically processed and delivered in multiple formats (e.g., WebP, AVIF) and resolutions. This is handled by the `Image` Svelte component, which optimizes images located in the `src/assets/images` directory.
+Images are processed at build time by [`vite-imagetools`](https://github.com/JonasKruckenberg/imagetools) and delivered in multiple formats (AVIF, WebP) and resolutions via a `<picture>` element. Remote or arbitrary images are optimized at request time by the [Netlify image CDN](https://docs.netlify.com/image-cdn/).
+
+See [`docs/image-processing.md`](./docs/image-processing.md) for the full architecture: how the server-only asset resolver, the post image pipeline, and the `Image` / `Picture` / `NetlifyImage` components fit together.
 
 #### Usage
 
 To use optimized images, first, ensure your image file (e.g., `my-image.png`) is located within the `src/assets/images` directory. Then, choose one of the following methods to embed it:
 
-- **In Markdown Files:** Use standard Markdown image syntax. The system will automatically process the image through the `Image` component. The path in the Markdown should be relative to `src/assets/images` and start with a forward slash `/`.
+- **In Markdown Files:** Use standard Markdown image syntax. The path in the Markdown should be relative to `src/assets/images` and start with a forward slash `/`. Body images are collected by the `remark-collect-images` plugin and resolved server-side, so the client never bundles the asset resolver.
 
   Example:
 
@@ -117,16 +119,17 @@ To use optimized images, first, ensure your image file (e.g., `my-image.png`) is
   ![Another image description](/illustrations/another-image.jpg)
   ```
 
-- **In Svelte Components:** If you need to use the `Image` component directly in a Svelte component, import it and pass the `src` prop relative to `src/assets/images` and starting with a forward slash `/`.
+- **In Svelte Components:** Import the asset with the `?picture` query (returns a `Picture` object) and pass it to the `Image` component.
 
   Example:
 
   ```svelte
   <script>
-  	import Image from '$lib/components/Image.svelte'
+  	import myImage from '$assets/images/my-image.png?picture'
+  	import Image from '$lib/components/images/Image.svelte'
   </script>
 
-  <Image src="/my-image.png" alt="A description of my image" />
+  <Image picture={myImage} alt="A description of my image" />
   ```
 
 ## Redirects
@@ -163,10 +166,10 @@ The site has a small banner orchestration system that decides which main banner 
 
 ### How it works
 
-- Selection rules are in `src/routes/banner-selection.cjs`.
-- In `src/routes/+layout.svelte`, `banner-selection.cjs` is injected inline in `<head>`. That script defines `window.selectBanners()` and runs it immediately.
-- The same function is called again in `+layout.svelte` after `/api/geo` updates `geo_country`.
-- Banner components live in `src/routes/+layout.svelte` and are shown/hidden by data attributes on `<html>`.
+- Selection rules live in the `mainBannerRules` / `campaignBannerRules` consts in `src/routes/+layout.svelte`. They are the single source of truth.
+- `+layout.svelte` injects them into `<head>` as globals (`var mainBannerRules` / `var campaignBannerRules`) before the blocking `banner-selection.js` runs.
+- `banner-selection.js` defines `window.selectBanners()` and runs it immediately; it is called again in `+layout.svelte` after `/api/geo` updates `geo_country`.
+- Banner components live in `src/routes/+layout.svelte`. Each orchestrated `<Banner>` receives `rules={mainBannerRules}` so `Banner.svelte` can skip server-rendering expired banners (the inline script still re-checks on the client to handle dismissals and geo). Banners are shown/hidden by data attributes on `<html>`.
 
 ### State used
 
@@ -185,13 +188,11 @@ The site has a small banner orchestration system that decides which main banner 
 
 When adding/changing banners:
 
-1. Add/update the `<Banner id="...">` or `<CampaignBanner id="...">` in `src/routes/+layout.svelte`.
-2. Add/update the matching rule in `src/routes/banner-selection.cjs` with same `id`.
+1. Add/update the `<Banner id="...">` or `<CampaignBanner id="...">` in `src/routes/+layout.svelte`, passing `rules={mainBannerRules}` (or `rules={campaignBannerRules}`).
+2. Add/update the matching entry in the `mainBannerRules` / `campaignBannerRules` const in `src/routes/+layout.svelte` with the same `id`.
 3. Use date format `YYYY-MM-DD` in rule `dateRange`.
 4. Keep intended order: first matching rule wins.
-5. Treat banner IDs as source-of-truth values that must match in both places:
-   - the rule IDs in `mainBannerRules` / `campaignBannerRules` (`src/routes/banner-selection.cjs`)
-   - the `id="..."` props on `<Banner>` / `<CampaignBanner>` in `src/routes/+layout.svelte`
+5. Banner IDs must match between the rule entries and the `id="..."` props on `<Banner>` / `<CampaignBanner>`. Both now live in `src/routes/+layout.svelte`.
 
 ## Latest News Section
 

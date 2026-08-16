@@ -1,10 +1,32 @@
-import type { SvelteHTMLElements } from 'svelte/elements'
+import type { Picture } from 'vite-imagetools'
 import type { Attachment } from 'airtable'
 import type { DeepPartial } from './utils'
+
+export type { Picture }
+
+/**
+ * Like `Picture`, but with optional intrinsic dimensions so callers that
+ * don't know the image size (e.g. NetlifyImage) don't have to fabricate
+ * width/height values.
+ */
+export type LoosePicture = Omit<Picture, 'img'> & {
+	img: Partial<Picture['img']> & Pick<Picture['img'], 'src'>
+}
 
 export type Categories = 'sveltekit' | 'svelte' | 'AI Safety' | 'Transparency' | 'Government'
 
 export type LinkType = 'internal' | 'external' | 'mail'
+
+/**
+ * A banner selection rule. `dateRange` is `[startsOn, endsOn]` in `YYYY-MM-DD`
+ * format; either bound may be `null` for unbounded. `countries` is `null` for
+ * a global banner, or a list of ISO country codes for geo-targeted banners.
+ */
+export type BannerRule = {
+	id: string
+	dateRange: [string | null, string | null]
+	countries?: string[] | null
+}
 
 type StrictFrontmatterMeta = {
 	title: string
@@ -20,6 +42,11 @@ type StrictFrontmatterMeta = {
 	showImage?: boolean
 	/** If true, this post will appear in the Latest News section on the homepage */
 	news?: boolean
+	/**
+	 * List of all image URLs referenced in the markdown body, injected by the
+	 * `remark-collect-images` plugin. Not authored in frontmatter.
+	 */
+	_images?: string[]
 }
 
 /** Descriptive frontmatter where everything is optional (for markdown parsing) */
@@ -37,6 +64,12 @@ export type NewsItem = {
 	subtitle: string
 	date: string
 	image?: string
+	/**
+	 * Resolved enhanced-image Picture object for internal news items whose `image`
+	 * points at a static asset. Resolved server-side by /api/news so the client
+	 * bundle doesn't need the import.meta.glob resolver.
+	 */
+	picture?: Picture | null
 	outlet?: string
 	/** URL to the article (internal path or external URL) */
 	href: string
@@ -129,8 +162,6 @@ export type NationalGroupLink =
 	| 'linkedinLink'
 	| 'lumaLink'
 	| 'substackLink'
-
-export type Picture = Exclude<SvelteHTMLElements['enhanced:img']['src'], string>
 
 export type CarouselQuote = {
 	text: string

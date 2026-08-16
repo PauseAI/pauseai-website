@@ -10,6 +10,7 @@ import rehypeSlug from 'rehype-slug'
 import remarkHeadingId from 'remark-heading-id'
 import remarkToc from 'remark-toc'
 import rehypeUnwrapImages from 'rehype-unwrap-images'
+import remarkCollectImages from './plugins/remark-collect-images.js'
 
 import settings from './project.inlang/settings.json' with { type: 'json' }
 
@@ -22,7 +23,7 @@ const mdsvexOptions = {
 	layout: {
 		_: dirname(fileURLToPath(import.meta.url)) + '/src/mdsvex.svelte'
 	},
-	remarkPlugins: [[remarkToc, { tight: true }], remarkHeadingId],
+	remarkPlugins: [remarkCollectImages, [remarkToc, { tight: true }], remarkHeadingId],
 	rehypePlugins: [rehypeUnwrapImages, rehypeSlug]
 }
 

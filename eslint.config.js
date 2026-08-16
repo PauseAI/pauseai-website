@@ -7,8 +7,8 @@ import svelte from 'eslint-plugin-svelte'
 import { defineConfig, globalIgnores } from 'eslint/config'
 import globals from 'globals'
 import ts from 'typescript-eslint'
-import emptyMarkdownLinks from './eslint/plugin-empty-markdown-links.js'
-import markdownScripts from './eslint/plugin-markdown-scripts.js'
+import emptyMarkdownLinks from './plugins/eslint-empty-markdown-links.js'
+import markdownScripts from './plugins/eslint-markdown-scripts.js'
 import svelteConfig from './svelte.config.js'
 
 // See https://typescript-eslint.io/troubleshooting/typed-linting/performance#changes-to-extrafileextensions-with-projectservice

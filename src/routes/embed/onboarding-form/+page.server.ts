@@ -10,6 +10,7 @@ import { createRecord, updateRecord } from '$lib/airtable'
 import { isOnboardingLive } from '$lib/server/onboarding'
 import { recordStubSubmission } from '$lib/server/onboarding-stub'
 import { subscribeToSubstackNewsletter } from '$lib/server/substack'
+import { checkNotSpam } from '$lib/server/turnstile-verify'
 import {
 	COUNTRIES,
 	DISCOVERY_OPTIONS,
@@ -65,12 +66,23 @@ async function lookupChapter(
 }
 
 export const actions: Actions = {
-	submit: async ({ request, fetch }) => {
+	submit: async ({ request, fetch, url }) => {
 		const data = await request.formData()
 
 		// Honeypot
 		if (getString(data, 'nickname')) {
 			return { success: true }
+		}
+
+		// Read once, so the check below and the writes at the end can't disagree.
+		const live = isOnboardingLive()
+
+		// Only when the submission writes: a preview can't produce a token at all
+		// (its hostname isn't allowed by the site key), and stub mode writes nothing.
+		if (live) {
+			const spam = await checkNotSpam(data, url.hostname)
+			if (spam.drop) return { success: true }
+			if (spam.message) return fail(403, { message: spam.message })
 		}
 
 		const fullName = getString(data, 'full_name')
@@ -173,7 +185,7 @@ export const actions: Actions = {
 		// Airtable process (plan decision 6).
 		const chapter = await lookupChapter(fetch, country)
 
-		if (isOnboardingLive()) {
+		if (live) {
 			let recordId: string | undefined = existingRecordId || undefined
 			if (recordId) {
 				const updated = await updateRecord(AIRTABLE_BASE_ID, MEMBERS_TABLE_ID, recordId, fields)

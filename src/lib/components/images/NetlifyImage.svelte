@@ -1,5 +1,9 @@
+<!-- See docs/image-processing.md for the full image-processing architecture. -->
 <script lang="ts">
 	import { SvelteURLSearchParams } from 'svelte/reactivity'
+	import Picture from './Picture.svelte'
+	import type { LoosePicture } from '$lib/types'
+	import { imageQuality, imageWidths } from '$lib/image-config'
 
 	interface Props {
 		src: string
@@ -19,9 +23,9 @@
 	let {
 		src,
 		alt,
-		widths = [400, 800, 1200, 1600, 2400],
+		widths = [...imageWidths],
 		sizes = '(min-width: 1280px) 1200px, 100vw',
-		quality = 80,
+		quality = imageQuality,
 		fit = 'contain',
 		pictureClass = undefined,
 		imgClass = undefined,
@@ -59,8 +63,8 @@
 		params.set('url', path)
 		if (options.w) params.set('w', `${options.w}`)
 		if (options.q) params.set('q', `${options.q}`)
-		if (options.fm) params.set('fm', options.fm)
-		if (options.fit) params.set('fit', options.fit)
+		if (options.fm) params.set('fm', `${options.fm}`)
+		if (options.fit) params.set('fit', `${options.fit}`)
 		return `/.netlify/images?${params.toString()}`
 	}
 
@@ -84,23 +88,31 @@
 			fit
 		})
 	)
+
+	// Build a Picture-shaped object so we can reuse the shared Picture component.
+	const picture = $derived<LoosePicture>({
+		sources: {
+			avif: avifSrcSet,
+			webp: webpSrcSet
+		},
+		img: {
+			src: fallbackSrc
+		}
+	})
 </script>
 
 {#if useFallback}
 	<img onerror={handleError} {src} {alt} class={imgClass} {style} {loading} {decoding} />
 {:else}
-	<picture class={pictureClass} {style}>
-		<source type="image/avif" srcset={avifSrcSet} {sizes} />
-		<source type="image/webp" srcset={webpSrcSet} {sizes} />
-		<img
-			onerror={handleError}
-			src={fallbackSrc}
-			{alt}
-			{sizes}
-			class={imgClass}
-			{loading}
-			{decoding}
-			width={widths[widths.length - 1]}
-		/>
-	</picture>
+	<Picture
+		{picture}
+		{alt}
+		{sizes}
+		class={imgClass}
+		{pictureClass}
+		{style}
+		{loading}
+		{decoding}
+		onerror={handleError}
+	/>
 {/if}

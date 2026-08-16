@@ -17,9 +17,11 @@
 	import LinkWithoutIcon from '$lib/components/LinkWithoutIcon.svelte'
 	import Socials from '$lib/components/Socials.svelte'
 	import Combobox from '$lib/components/Combobox.svelte'
+	import Turnstile from '$lib/components/Turnstile.svelte'
 	import ActionCards from './ActionCards.svelte'
 	import Stepper from './Stepper.svelte'
 	import { getMessages } from './i18n.svelte'
+	import { turnstileSiteKey } from '$lib/turnstile'
 	import {
 		COUNTRIES,
 		COUNTRY_DIAL_CODES,
@@ -53,6 +55,12 @@
 		initialLanguages?: string[]
 	} = $props()
 
+	// Starts true so an unanswered request keeps the anti-spam check required.
+	let onboardingLive = $state(true)
+	// The widget waits for the answer: mounting it first makes a preview flash
+	// Turnstile's "could not load" error before it's removed again.
+	let onboardingModeKnown = $state(false)
+
 	// Surface stub/live mode in the browser console when the form loads. The
 	// pages embedding the form can be prerendered (e.g. /join), so the runtime
 	// env isn't available at render time, ask the server instead.
@@ -61,6 +69,8 @@
 			const response = await fetch('/api/onboarding-mode')
 			if (!response.ok) return
 			const { live } = (await response.json()) as OnboardingModeApiResponse
+			// Only an explicit false relaxes the check; a malformed response must not.
+			onboardingLive = live !== false
 			console.log(
 				live
 					? 'Onboarding form: LIVE mode. Submissions write to Airtable.'
@@ -68,6 +78,9 @@
 			)
 		} catch {
 			// Mode logging is best-effort; never break the form over it.
+		} finally {
+			// Also on failure: the check stays required, so the widget has to appear.
+			onboardingModeKnown = true
 		}
 	})
 
@@ -99,6 +112,18 @@
 	let submitting = $state(false)
 	let browseSignedUp = $state(false)
 	let honeypot = $state('')
+	let turnstileToken = $state('')
+
+	// Bumped after each submission to remount the widget: Turnstile tokens are
+	// single-use and expire after five minutes.
+	let turnstileNonce = $state(0)
+
+	// Without a configured site key (e.g. local development) there is no widget
+	// to wait for, and the server decides whether to accept the submission.
+	// Nor when the submission doesn't write, matching the server.
+	const canSubmit = $derived(
+		!submitting && (!turnstileSiteKey || turnstileToken !== '' || !onboardingLive)
+	)
 
 	// Step 1: basic info (shared with the browse-mode inline signup and the
 	// volunteer form, which pre-fills from the same state)
@@ -267,8 +292,13 @@
 					if (typeof result.data?.recordId === 'string') {
 						recordId = result.data.recordId
 					}
+					turnstileToken = ''
+					turnstileNonce += 1
 					onSuccess(result.data, startValue)
 				} else if (result.type === 'failure') {
+					// Reset Turnstile widget on failure so user can retry
+					turnstileToken = ''
+					turnstileNonce += 1
 					toast.error(String(result.data?.message ?? msgs.onboarding_error_generic))
 				} else {
 					toast.error(msgs.onboarding_error_unexpected)
@@ -551,7 +581,12 @@
 					{/each}
 				</div>
 				{@render gdprConsentField()}
-				<button type="submit" class="primary" disabled={!gdprConsent || submitting}>
+				{#if onboardingLive && onboardingModeKnown}
+					{#key turnstileNonce}
+						<Turnstile bind:token={turnstileToken} />
+					{/key}
+				{/if}
+				<button type="submit" class="primary" disabled={!gdprConsent || !canSubmit}>
 					{submitting
 						? msgs.onboarding_btn_submitting
 						: intent === 'volunteer' || intent === 'lead'
@@ -650,7 +685,12 @@
 								/>
 							</div>
 							{@render gdprConsentField()}
-							<button type="submit" class="primary" disabled={!gdprConsent || submitting}>
+							{#if onboardingLive && onboardingModeKnown}
+								{#key turnstileNonce}
+									<Turnstile bind:token={turnstileToken} />
+								{/key}
+							{/if}
+							<button type="submit" class="primary" disabled={!gdprConsent || !canSubmit}>
 								{submitting ? msgs.onboarding_btn_signing_up : msgs.onboarding_btn_sign_me_up}
 							</button>
 						</form>
@@ -864,8 +904,13 @@
 					<!-- eslint-disable-next-line svelte/no-at-html-tags -->
 					<span>{@html msgs.onboarding_agree_conduct}</span>
 				</label>
+				{#if onboardingLive && onboardingModeKnown}
+					{#key turnstileNonce}
+						<Turnstile bind:token={turnstileToken} />
+					{/key}
+				{/if}
 				<div class="submit-group">
-					<button type="submit" class="primary" disabled={!volunteerFormComplete || submitting}>
+					<button type="submit" class="primary" disabled={!volunteerFormComplete || !canSubmit}>
 						{submitting ? msgs.onboarding_btn_submitting : msgs.onboarding_btn_submit}
 					</button>
 					{#if becomePayingMember}
