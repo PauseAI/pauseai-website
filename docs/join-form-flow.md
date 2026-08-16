@@ -273,10 +273,11 @@ form untestable on deploy previews, whose hostname the Turnstile site key does
 not allow (the widget refuses to render, so no token can exist). The client
 mirrors this, and assumes live until `/api/onboarding-mode` says otherwise.
 
-`ONBOARDING_LIVE=true` therefore has to be scoped to the **Production** context
-in Netlify. Set site-wide it would also make deploy previews live, which both
-brings the untestable-preview problem back and lets a preview run write real
-Airtable and Substack data.
+`ONBOARDING_LIVE=true` therefore has to stay scoped to the **Production**
+context in Netlify, as it is today (production reports `live: true`, deploy
+previews `live: false`). Set site-wide it would also make previews live, which
+both brings the untestable-preview problem back and lets a preview run write
+real Airtable and Substack data.
 
 ## Lead path (no submission)
 
