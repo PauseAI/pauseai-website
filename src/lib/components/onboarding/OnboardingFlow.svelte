@@ -67,7 +67,9 @@
 			const response = await fetch('/api/onboarding-mode')
 			if (!response.ok) return
 			const { live } = (await response.json()) as OnboardingModeApiResponse
-			onboardingLive = live
+			// Only an explicit false relaxes the check, so a malformed response can't
+			// drop it by being falsy.
+			onboardingLive = live !== false
 			console.log(
 				live
 					? 'Onboarding form: LIVE mode. Submissions write to Airtable.'

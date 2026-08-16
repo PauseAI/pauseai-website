@@ -74,12 +74,16 @@ export const actions: Actions = {
 			return { success: true }
 		}
 
+		// Read once and use for both the check below and the writes at the end, so the
+		// two cannot disagree even in principle.
+		const live = isOnboardingLive()
+
 		// Turnstile bot protection. Only when submissions actually write: in stub mode
 		// there is no record, no subscription and no mail to protect, and requiring it
 		// there makes the form untestable on deploy previews, whose hostname the
 		// Turnstile site key does not allow (the widget refuses to render, so no token
 		// can exist). Live deploys are unaffected — they always verify.
-		if (isOnboardingLive()) {
+		if (live) {
 			const spam = await checkNotSpam(data, url.hostname)
 			if (spam.drop) return { success: true }
 			if (spam.message) return fail(403, { message: spam.message })
@@ -185,7 +189,7 @@ export const actions: Actions = {
 		// Airtable process (plan decision 6).
 		const chapter = await lookupChapter(fetch, country)
 
-		if (isOnboardingLive()) {
+		if (live) {
 			let recordId: string | undefined = existingRecordId || undefined
 			if (recordId) {
 				const updated = await updateRecord(AIRTABLE_BASE_ID, MEMBERS_TABLE_ID, recordId, fields)

@@ -264,8 +264,19 @@ POST directly to the endpoint (Turnstile verification).
 in-memory by `recordStubSubmission()` and rendered at
 `/embed/onboarding-form/stub` for inspection — no Airtable write and no Substack
 subscription occur. The component surfaces the current mode in the browser
-console via `GET /api/onboarding-mode`. Bot protection (Turnstile verification)
-runs regardless of live/stub mode.
+console via `GET /api/onboarding-mode`.
+
+Bot protection follows the same switch. The honeypot runs on every submission,
+but Turnstile verification runs only in live mode: in stub mode there is no
+record, no subscription and no mail to protect, and requiring it would make the
+form untestable on deploy previews, whose hostname the Turnstile site key does
+not allow (the widget refuses to render, so no token can exist). The client
+mirrors this, and assumes live until `/api/onboarding-mode` says otherwise.
+
+`ONBOARDING_LIVE=true` therefore has to be scoped to the **Production** context
+in Netlify. Set site-wide it would also make deploy previews live, which both
+brings the untestable-preview problem back and lets a preview run write real
+Airtable and Substack data.
 
 ## Lead path (no submission)
 
