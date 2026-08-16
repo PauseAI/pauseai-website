@@ -55,8 +55,7 @@
 		initialLanguages?: string[]
 	} = $props()
 
-	// Assume live until the server says otherwise, so an unanswered request keeps the
-	// anti-spam check required rather than dropping it.
+	// Starts true so an unanswered request keeps the anti-spam check required.
 	let onboardingLive = $state(true)
 
 	// Surface stub/live mode in the browser console when the form loads. The
@@ -67,8 +66,7 @@
 			const response = await fetch('/api/onboarding-mode')
 			if (!response.ok) return
 			const { live } = (await response.json()) as OnboardingModeApiResponse
-			// Only an explicit false relaxes the check, so a malformed response can't
-			// drop it by being falsy.
+			// Only an explicit false relaxes the check; a malformed response must not.
 			onboardingLive = live !== false
 			console.log(
 				live
@@ -112,10 +110,7 @@
 
 	// Without a configured site key (e.g. local development) there is no widget
 	// to wait for, and the server decides whether to accept the submission.
-	// The token is only required when the submission writes — matching the server,
-	// which skips the check in stub mode. Without this the widget's failure on a
-	// deploy preview (its hostname isn't allowed by the site key) would leave the
-	// button disabled with no way forward.
+	// Nor when the submission doesn't write, matching the server.
 	const canSubmit = $derived(
 		!submitting && (!turnstileSiteKey || turnstileToken !== '' || !onboardingLive)
 	)

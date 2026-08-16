@@ -74,15 +74,11 @@ export const actions: Actions = {
 			return { success: true }
 		}
 
-		// Read once and use for both the check below and the writes at the end, so the
-		// two cannot disagree even in principle.
+		// Read once, so the check below and the writes at the end can't disagree.
 		const live = isOnboardingLive()
 
-		// Turnstile bot protection. Only when submissions actually write: in stub mode
-		// there is no record, no subscription and no mail to protect, and requiring it
-		// there makes the form untestable on deploy previews, whose hostname the
-		// Turnstile site key does not allow (the widget refuses to render, so no token
-		// can exist). Live deploys are unaffected — they always verify.
+		// Only when the submission writes: a preview can't produce a token at all
+		// (its hostname isn't allowed by the site key), and stub mode writes nothing.
 		if (live) {
 			const spam = await checkNotSpam(data, url.hostname)
 			if (spam.drop) return { success: true }
