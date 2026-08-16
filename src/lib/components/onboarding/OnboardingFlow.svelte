@@ -55,6 +55,12 @@
 		initialLanguages?: string[]
 	} = $props()
 
+	// Starts true so an unanswered request keeps the anti-spam check required.
+	let onboardingLive = $state(true)
+	// The widget waits for the answer: mounting it first makes a preview flash
+	// Turnstile's "could not load" error before it's removed again.
+	let onboardingModeKnown = $state(false)
+
 	// Surface stub/live mode in the browser console when the form loads. The
 	// pages embedding the form can be prerendered (e.g. /join), so the runtime
 	// env isn't available at render time, ask the server instead.
@@ -63,6 +69,8 @@
 			const response = await fetch('/api/onboarding-mode')
 			if (!response.ok) return
 			const { live } = (await response.json()) as OnboardingModeApiResponse
+			// Only an explicit false relaxes the check; a malformed response must not.
+			onboardingLive = live !== false
 			console.log(
 				live
 					? 'Onboarding form: LIVE mode. Submissions write to Airtable.'
@@ -70,6 +78,9 @@
 			)
 		} catch {
 			// Mode logging is best-effort; never break the form over it.
+		} finally {
+			// Also on failure: the check stays required, so the widget has to appear.
+			onboardingModeKnown = true
 		}
 	})
 
@@ -105,7 +116,10 @@
 
 	// Without a configured site key (e.g. local development) there is no widget
 	// to wait for, and the server decides whether to accept the submission.
-	const canSubmit = $derived(!submitting && (!turnstileSiteKey || turnstileToken !== ''))
+	// Nor when the submission doesn't write, matching the server.
+	const canSubmit = $derived(
+		!submitting && (!turnstileSiteKey || turnstileToken !== '' || !onboardingLive)
+	)
 
 	// Step 1: basic info (shared with the browse-mode inline signup and the
 	// volunteer form, which pre-fills from the same state)
@@ -556,9 +570,11 @@
 					{/each}
 				</div>
 				{@render gdprConsentField()}
-				{#key turnstileNonce}
-					<Turnstile bind:token={turnstileToken} />
-				{/key}
+				{#if onboardingLive && onboardingModeKnown}
+					{#key turnstileNonce}
+						<Turnstile bind:token={turnstileToken} />
+					{/key}
+				{/if}
 				<button
 					type="submit"
 					class="primary"
@@ -662,9 +678,11 @@
 								/>
 							</div>
 							{@render gdprConsentField()}
-							{#key turnstileNonce}
-								<Turnstile bind:token={turnstileToken} />
-							{/key}
+							{#if onboardingLive && onboardingModeKnown}
+								{#key turnstileNonce}
+									<Turnstile bind:token={turnstileToken} />
+								{/key}
+							{/if}
 							<button type="submit" class="primary" disabled={!gdprConsent || !canSubmit}>
 								{submitting ? msgs.onboarding_btn_signing_up : msgs.onboarding_btn_sign_me_up}
 							</button>
@@ -879,9 +897,11 @@
 					<!-- eslint-disable-next-line svelte/no-at-html-tags -->
 					<span>{@html msgs.onboarding_agree_conduct}</span>
 				</label>
-				{#key turnstileNonce}
-					<Turnstile bind:token={turnstileToken} />
-				{/key}
+				{#if onboardingLive && onboardingModeKnown}
+					{#key turnstileNonce}
+						<Turnstile bind:token={turnstileToken} />
+					{/key}
+				{/if}
 				<div class="submit-group">
 					<button type="submit" class="primary" disabled={!volunteerFormComplete || !canSubmit}>
 						{submitting ? msgs.onboarding_btn_submitting : msgs.onboarding_btn_submit}
