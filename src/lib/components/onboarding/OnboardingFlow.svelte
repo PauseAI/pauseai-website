@@ -17,9 +17,11 @@
 	import LinkWithoutIcon from '$lib/components/LinkWithoutIcon.svelte'
 	import Socials from '$lib/components/Socials.svelte'
 	import Combobox from '$lib/components/Combobox.svelte'
+	import Turnstile from '$lib/components/Turnstile.svelte'
 	import ActionCards from './ActionCards.svelte'
 	import Stepper from './Stepper.svelte'
 	import { getMessages } from './i18n.svelte'
+	import { turnstileSiteKey } from '$lib/turnstile'
 	import {
 		COUNTRIES,
 		COUNTRY_DIAL_CODES,
@@ -114,6 +116,15 @@
 	let submitting = $state(false)
 	let browseSignedUp = $state(false)
 	let honeypot = $state('')
+	let turnstileToken = $state('')
+
+	// Bumped after each submission to remount the widget: Turnstile tokens are
+	// single-use and expire after five minutes.
+	let turnstileNonce = $state(0)
+
+	// Without a configured site key (e.g. local development) there is no widget
+	// to wait for, and the server decides whether to accept the submission.
+	const canSubmit = $derived(!submitting && (!turnstileSiteKey || turnstileToken !== ''))
 
 	// Step 1: basic info (shared with the browse-mode inline signup and the
 	// volunteer form, which pre-fills from the same state)
@@ -314,8 +325,13 @@
 					if (typeof result.data?.recordId === 'string') {
 						recordId = result.data.recordId
 					}
+					turnstileToken = ''
+					turnstileNonce += 1
 					onSuccess(result.data, startValue)
 				} else if (result.type === 'failure') {
+					// Reset Turnstile widget on failure so user can retry
+					turnstileToken = ''
+					turnstileNonce += 1
 					toast.error(String(result.data?.message ?? msgs.onboarding_error_generic))
 				} else {
 					toast.error(msgs.onboarding_error_unexpected)
@@ -606,12 +622,15 @@
 				{#if !isContinuation}
 					{@render gdprConsentField()}
 				{/if}
+				{#key turnstileNonce}
+					<Turnstile bind:token={turnstileToken} />
+				{/key}
 				<button
 					type="submit"
 					class="primary"
 					disabled={(isContinuation ? !intent : !intent && !keepInformed && !basics.newsletter) ||
 						(!isContinuation && !gdprConsent) ||
-						submitting}
+						!canSubmit}
 				>
 					{submitting
 						? msgs.onboarding_btn_submitting
@@ -720,7 +739,10 @@
 								/>
 							</div>
 							{@render gdprConsentField()}
-							<button type="submit" class="primary" disabled={!gdprConsent || submitting}>
+							{#key turnstileNonce}
+								<Turnstile bind:token={turnstileToken} />
+							{/key}
+							<button type="submit" class="primary" disabled={!gdprConsent || !canSubmit}>
 								{submitting ? msgs.onboarding_btn_signing_up : msgs.onboarding_btn_sign_me_up}
 							</button>
 						</form>
@@ -934,8 +956,11 @@
 					<!-- eslint-disable-next-line svelte/no-at-html-tags -->
 					<span>{@html msgs.onboarding_agree_conduct}</span>
 				</label>
+				{#key turnstileNonce}
+					<Turnstile bind:token={turnstileToken} />
+				{/key}
 				<div class="submit-group">
-					<button type="submit" class="primary" disabled={!volunteerFormComplete || submitting}>
+					<button type="submit" class="primary" disabled={!volunteerFormComplete || !canSubmit}>
 						{submitting ? msgs.onboarding_btn_submitting : msgs.onboarding_btn_submit}
 					</button>
 					{#if becomePayingMember}

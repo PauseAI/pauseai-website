@@ -1,4 +1,5 @@
 import type { Locale } from '$lib/paraglide/runtime.js'
+import type { TurnstileApi } from '$lib/turnstile'
 import type { Context } from '@netlify/edge-functions'
 import type { Picture } from 'vite-imagetools'
 // See https://kit.svelte.dev/docs/types#app
@@ -29,6 +30,8 @@ declare global {
 		selectBanners(): void
 		applyTheme(): void
 		dataLayer?: unknown[]
+		turnstile?: TurnstileApi
+		onPauseAITurnstileLoad?: () => void
 	}
 
 	declare module '*.md' {

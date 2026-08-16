@@ -14,7 +14,9 @@
 	import { toast } from 'svelte-french-toast'
 	import Combobox from '$lib/components/Combobox.svelte'
 	import LinkWithoutIcon from '$lib/components/LinkWithoutIcon.svelte'
+	import Turnstile from '$lib/components/Turnstile.svelte'
 	import OnboardingFlow from './OnboardingFlow.svelte'
+	import { turnstileSiteKey } from '$lib/turnstile'
 	import { COUNTRIES } from './options'
 
 	let {
@@ -34,6 +36,11 @@
 	let wantsSubstack = $state(false)
 	let honeypot = $state('')
 	let recordId = $state('')
+
+	// Bot protection: the shared submit action verifies this token server-side and
+	// 403s without it. Bumped after each submission because tokens are single-use.
+	let turnstileToken = $state('')
+	let turnstileNonce = $state(0)
 
 	// Navigating to this page from itself — i.e. clicking "Subscribe" in the nav
 	// while already here — would otherwise leave the finished flow on screen and
@@ -65,7 +72,13 @@
 	})
 
 	const canSubmit = $derived(
-		!submitting && !!fullName.trim() && !!email.trim() && !!country.trim() && !!city.trim()
+		!submitting &&
+			!!fullName.trim() &&
+			!!email.trim() &&
+			!!country.trim() &&
+			!!city.trim() &&
+			// No widget to wait for without a configured site key (e.g. local dev).
+			(!turnstileSiteKey || turnstileToken !== '')
 	)
 
 	const ERROR_MESSAGE = 'Something went wrong. Please try again.'
@@ -74,6 +87,7 @@
 		submitting = true
 		return ({ result }) => {
 			submitting = false
+			turnstileNonce += 1
 			if (result.type === 'success' && result.data?.success) {
 				if (typeof result.data.recordId === 'string') recordId = result.data.recordId
 				phase = 'thanks'
@@ -191,6 +205,10 @@
 					<span class="opt-in-sub">AI news from the PauseAI team's perspective.</span>
 				</span>
 			</label>
+
+			{#key turnstileNonce}
+				<Turnstile bind:token={turnstileToken} />
+			{/key}
 
 			<div class="submit-group">
 				<button class="primary" type="submit" disabled={!canSubmit}>
