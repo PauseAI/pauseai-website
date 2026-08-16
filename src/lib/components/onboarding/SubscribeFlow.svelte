@@ -33,6 +33,9 @@
 	// Assume live until the server says otherwise, so an unanswered request keeps
 	// the anti-spam check required rather than dropping it. See OnboardingFlow.
 	let onboardingLive = $state(true)
+	// The widget waits for the answer, so a preview doesn't flash Turnstile's
+	// "could not load" error before it's removed again.
+	let onboardingModeKnown = $state(false)
 	onMount(async () => {
 		try {
 			const response = await fetch('/api/onboarding-mode')
@@ -41,6 +44,9 @@
 			onboardingLive = live !== false
 		} catch {
 			// Best-effort; never break the form over it.
+		} finally {
+			// Also on failure: the check stays required, so the widget has to appear.
+			onboardingModeKnown = true
 		}
 	})
 
@@ -215,7 +221,7 @@
 				</span>
 			</label>
 
-			{#if onboardingLive}
+			{#if onboardingLive && onboardingModeKnown}
 				{#key turnstileNonce}
 					<Turnstile bind:token={turnstileToken} />
 				{/key}

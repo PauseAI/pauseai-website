@@ -73,9 +73,11 @@
 		initialChapterShare?: boolean
 	} = $props()
 
-	// Assume live until the server says otherwise, so an unanswered request keeps the
-	// anti-spam check required rather than dropping it.
+	// Starts true so an unanswered request keeps the anti-spam check required.
 	let onboardingLive = $state(true)
+	// The widget waits for the answer: mounting it first makes a preview flash
+	// Turnstile's "could not load" error before it's removed again.
+	let onboardingModeKnown = $state(false)
 
 	// Surface stub/live mode in the browser console when the form loads. The
 	// pages embedding the form can be prerendered (e.g. /join), so the runtime
@@ -85,8 +87,7 @@
 			const response = await fetch('/api/onboarding-mode')
 			if (!response.ok) return
 			const { live } = (await response.json()) as OnboardingModeApiResponse
-			// Only an explicit false relaxes the check, so a malformed response can't
-			// drop it by being falsy.
+			// Only an explicit false relaxes the check; a malformed response must not.
 			onboardingLive = live !== false
 			console.log(
 				live
@@ -95,6 +96,9 @@
 			)
 		} catch {
 			// Mode logging is best-effort; never break the form over it.
+		} finally {
+			// Also on failure: the check stays required, so the widget has to appear.
+			onboardingModeKnown = true
 		}
 	})
 
@@ -131,10 +135,7 @@
 
 	// Without a configured site key (e.g. local development) there is no widget
 	// to wait for, and the server decides whether to accept the submission.
-	// The token is only required when the submission writes — matching the server,
-	// which skips the check in stub mode. Without this the widget's failure on a
-	// deploy preview (its hostname isn't allowed by the site key) would leave the
-	// button disabled with no way forward.
+	// Nor when the submission doesn't write, matching the server.
 	const canSubmit = $derived(
 		!submitting && (!turnstileSiteKey || turnstileToken !== '' || !onboardingLive)
 	)
@@ -635,7 +636,7 @@
 				{#if !isContinuation}
 					{@render gdprConsentField()}
 				{/if}
-				{#if onboardingLive}
+				{#if onboardingLive && onboardingModeKnown}
 					{#key turnstileNonce}
 						<Turnstile bind:token={turnstileToken} />
 					{/key}
@@ -754,7 +755,7 @@
 								/>
 							</div>
 							{@render gdprConsentField()}
-							{#if onboardingLive}
+							{#if onboardingLive && onboardingModeKnown}
 								{#key turnstileNonce}
 									<Turnstile bind:token={turnstileToken} />
 								{/key}
@@ -973,7 +974,7 @@
 					<!-- eslint-disable-next-line svelte/no-at-html-tags -->
 					<span>{@html msgs.onboarding_agree_conduct}</span>
 				</label>
-				{#if onboardingLive}
+				{#if onboardingLive && onboardingModeKnown}
 					{#key turnstileNonce}
 						<Turnstile bind:token={turnstileToken} />
 					{/key}
