@@ -73,6 +73,10 @@
 		initialChapterShare?: boolean
 	} = $props()
 
+	// Assume live until the server says otherwise, so an unanswered request keeps the
+	// anti-spam check required rather than dropping it.
+	let onboardingLive = $state(true)
+
 	// Surface stub/live mode in the browser console when the form loads. The
 	// pages embedding the form can be prerendered (e.g. /join), so the runtime
 	// env isn't available at render time, ask the server instead.
@@ -81,6 +85,9 @@
 			const response = await fetch('/api/onboarding-mode')
 			if (!response.ok) return
 			const { live } = (await response.json()) as OnboardingModeApiResponse
+			// Only an explicit false relaxes the check, so a malformed response can't
+			// drop it by being falsy.
+			onboardingLive = live !== false
 			console.log(
 				live
 					? 'Onboarding form: LIVE mode. Submissions write to Airtable.'
@@ -124,7 +131,13 @@
 
 	// Without a configured site key (e.g. local development) there is no widget
 	// to wait for, and the server decides whether to accept the submission.
-	const canSubmit = $derived(!submitting && (!turnstileSiteKey || turnstileToken !== ''))
+	// The token is only required when the submission writes — matching the server,
+	// which skips the check in stub mode. Without this the widget's failure on a
+	// deploy preview (its hostname isn't allowed by the site key) would leave the
+	// button disabled with no way forward.
+	const canSubmit = $derived(
+		!submitting && (!turnstileSiteKey || turnstileToken !== '' || !onboardingLive)
+	)
 
 	// Step 1: basic info (shared with the browse-mode inline signup and the
 	// volunteer form, which pre-fills from the same state)

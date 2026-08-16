@@ -8,9 +8,11 @@
 	created here, so continuing updates that same record.
 -->
 <script lang="ts">
+	import { onMount } from 'svelte'
 	import { enhance } from '$app/forms'
 	import { afterNavigate } from '$app/navigation'
 	import type { SubmitFunction } from '@sveltejs/kit'
+	import type { OnboardingModeApiResponse } from '$api/onboarding-mode/+server.js'
 	import { toast } from 'svelte-french-toast'
 	import Combobox from '$lib/components/Combobox.svelte'
 	import LinkWithoutIcon from '$lib/components/LinkWithoutIcon.svelte'
@@ -27,6 +29,20 @@
 	type Phase = 'form' | 'thanks' | 'more'
 	let phase = $state<Phase>('form')
 	let submitting = $state(false)
+
+	// Assume live until the server says otherwise, so an unanswered request keeps
+	// the anti-spam check required rather than dropping it. See OnboardingFlow.
+	let onboardingLive = $state(true)
+	onMount(async () => {
+		try {
+			const response = await fetch('/api/onboarding-mode')
+			if (!response.ok) return
+			const { live } = (await response.json()) as OnboardingModeApiResponse
+			onboardingLive = live !== false
+		} catch {
+			// Best-effort; never break the form over it.
+		}
+	})
 
 	// One object so the reset below can't drift out of step with the fields.
 	const blankFields = () => ({
@@ -76,7 +92,9 @@
 			!!fields.country.trim() &&
 			!!fields.city.trim() &&
 			// No widget to wait for without a configured site key (e.g. local dev).
-			(!turnstileSiteKey || turnstileToken !== '')
+			// Required only when the submission writes, matching the server — otherwise
+			// the widget's failure on a deploy preview would leave this disabled.
+			(!turnstileSiteKey || turnstileToken !== '' || !onboardingLive)
 	)
 
 	const ERROR_MESSAGE = 'Something went wrong. Please try again.'
