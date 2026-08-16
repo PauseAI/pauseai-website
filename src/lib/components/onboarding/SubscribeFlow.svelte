@@ -215,9 +215,11 @@
 				</span>
 			</label>
 
-			{#key turnstileNonce}
-				<Turnstile bind:token={turnstileToken} />
-			{/key}
+			{#if onboardingLive}
+				{#key turnstileNonce}
+					<Turnstile bind:token={turnstileToken} />
+				{/key}
+			{/if}
 
 			<div class="submit-group">
 				<button class="primary" type="submit" disabled={!canSubmit}>
