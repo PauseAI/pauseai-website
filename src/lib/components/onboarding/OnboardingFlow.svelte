@@ -57,6 +57,9 @@
 
 	// Starts true so an unanswered request keeps the anti-spam check required.
 	let onboardingLive = $state(true)
+	// The widget waits for the answer: mounting it first makes a preview flash
+	// Turnstile's "could not load" error before it's removed again.
+	let onboardingModeKnown = $state(false)
 
 	// Surface stub/live mode in the browser console when the form loads. The
 	// pages embedding the form can be prerendered (e.g. /join), so the runtime
@@ -75,6 +78,9 @@
 			)
 		} catch {
 			// Mode logging is best-effort; never break the form over it.
+		} finally {
+			// Also on failure: the check stays required, so the widget has to appear.
+			onboardingModeKnown = true
 		}
 	})
 
@@ -564,7 +570,7 @@
 					{/each}
 				</div>
 				{@render gdprConsentField()}
-				{#if onboardingLive}
+				{#if onboardingLive && onboardingModeKnown}
 					{#key turnstileNonce}
 						<Turnstile bind:token={turnstileToken} />
 					{/key}
@@ -672,7 +678,7 @@
 								/>
 							</div>
 							{@render gdprConsentField()}
-							{#if onboardingLive}
+							{#if onboardingLive && onboardingModeKnown}
 								{#key turnstileNonce}
 									<Turnstile bind:token={turnstileToken} />
 								{/key}
@@ -891,7 +897,7 @@
 					<!-- eslint-disable-next-line svelte/no-at-html-tags -->
 					<span>{@html msgs.onboarding_agree_conduct}</span>
 				</label>
-				{#if onboardingLive}
+				{#if onboardingLive && onboardingModeKnown}
 					{#key turnstileNonce}
 						<Turnstile bind:token={turnstileToken} />
 					{/key}
