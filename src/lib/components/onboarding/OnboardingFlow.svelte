@@ -569,9 +569,11 @@
 					{/each}
 				</div>
 				{@render gdprConsentField()}
-				{#key turnstileNonce}
-					<Turnstile bind:token={turnstileToken} />
-				{/key}
+				{#if onboardingLive}
+					{#key turnstileNonce}
+						<Turnstile bind:token={turnstileToken} />
+					{/key}
+				{/if}
 				<button
 					type="submit"
 					class="primary"
@@ -675,9 +677,11 @@
 								/>
 							</div>
 							{@render gdprConsentField()}
-							{#key turnstileNonce}
-								<Turnstile bind:token={turnstileToken} />
-							{/key}
+							{#if onboardingLive}
+								{#key turnstileNonce}
+									<Turnstile bind:token={turnstileToken} />
+								{/key}
+							{/if}
 							<button type="submit" class="primary" disabled={!gdprConsent || !canSubmit}>
 								{submitting ? msgs.onboarding_btn_signing_up : msgs.onboarding_btn_sign_me_up}
 							</button>
@@ -892,9 +896,11 @@
 					<!-- eslint-disable-next-line svelte/no-at-html-tags -->
 					<span>{@html msgs.onboarding_agree_conduct}</span>
 				</label>
-				{#key turnstileNonce}
-					<Turnstile bind:token={turnstileToken} />
-				{/key}
+				{#if onboardingLive}
+					{#key turnstileNonce}
+						<Turnstile bind:token={turnstileToken} />
+					{/key}
+				{/if}
 				<div class="submit-group">
 					<button type="submit" class="primary" disabled={!volunteerFormComplete || !canSubmit}>
 						{submitting ? msgs.onboarding_btn_submitting : msgs.onboarding_btn_submit}
