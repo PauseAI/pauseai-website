@@ -629,7 +629,10 @@
 			<!-- Path A: confirmation -->
 			<div class="confirmation">
 				<div class="checkmark">✓</div>
-				<h2>{msgs.onboarding_confirm_a_title}</h2>
+				{#if !isContinuation}
+					<!-- As on path B: the continuation already thanked them for signing up. -->
+					<h2>{msgs.onboarding_confirm_a_title}</h2>
+				{/if}
 				{@render checkboxConfirmations()}
 				{@render nextStepBlock()}
 				{@render confirmationFooter()}
