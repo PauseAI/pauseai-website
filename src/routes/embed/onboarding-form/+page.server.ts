@@ -18,6 +18,7 @@ import {
 	LANGUAGES,
 	MOTIVATIONS,
 	SIGNUP_SOURCE,
+	SUBSCRIBE_SIGNUP_SOURCE,
 	SKILLS,
 	WEEKLY_HOURS,
 	type Intent
@@ -144,11 +145,16 @@ export const actions: Actions = {
 		const fields: FieldSet = {
 			Email: email,
 			Intent: intent,
-			'Signup source': SIGNUP_SOURCE,
 			'Email subscription': keepInformed,
 			// Signing up is itself the privacy-policy consent: the /join checkbox
 			// and the /subscribe microcopy both link it.
 			'Data privacy policy agreed': true
+		}
+		// Which form produced the row — provenance, so it's written once at create and
+		// never on an update, or the volunteer step (which carries no subscribe marker)
+		// would rewrite a /subscribe row as a /join one.
+		if (!existingRecordId) {
+			fields['Signup source'] = isSubscribeForm ? SUBSCRIBE_SIGNUP_SOURCE : SIGNUP_SOURCE
 		}
 		// A create always writes the basics (they're validated above). An update only
 		// overwrites them when non-empty, so a partial post can't blank what the

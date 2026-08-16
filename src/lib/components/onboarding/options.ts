@@ -7,6 +7,13 @@ export type IntentKey = 'act-now' | 'volunteer' | 'lead'
 
 export const SIGNUP_SOURCE = 'June 2026 onboarding flow'
 
+// The /subscribe newsletter form, told apart from /join because the two ask for
+// chapter consent differently and nothing else in the row says which form wrote
+// it. The CRM's OPTIN_FORM_SOURCES should list this too: it also classifies on a
+// non-empty Intent, so the newsletter opt-in gate holds either way, but a source
+// it doesn't know trips the import's drift canary.
+export const SUBSCRIBE_SIGNUP_SOURCE = 'June 2026 subscribe form'
+
 // Full 196-country list from the Tally form.
 export const COUNTRIES = [
 	'Afghanistan',
