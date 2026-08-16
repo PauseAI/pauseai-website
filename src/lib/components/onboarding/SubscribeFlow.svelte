@@ -9,6 +9,7 @@
 -->
 <script lang="ts">
 	import { enhance } from '$app/forms'
+	import { afterNavigate } from '$app/navigation'
 	import type { SubmitFunction } from '@sveltejs/kit'
 	import { toast } from 'svelte-french-toast'
 	import Combobox from '$lib/components/Combobox.svelte'
@@ -33,6 +34,24 @@
 	let wantsSubstack = $state(false)
 	let honeypot = $state('')
 	let recordId = $state('')
+
+	// Navigating to this page from itself — i.e. clicking "Subscribe" in the nav
+	// while already here — would otherwise leave the finished flow on screen and
+	// look like a dead link. Start over instead, cleared, so a second signup is a
+	// deliberate act rather than one click away from duplicating the last one.
+	// Only same-path navigations: arriving from elsewhere mounts this fresh, and
+	// resetting there would wipe the ?subscribe-email hand-off.
+	afterNavigate((nav) => {
+		if (!nav.from || nav.from.url.pathname !== nav.to?.url.pathname) return
+		phase = 'form'
+		recordId = ''
+		fullName = ''
+		email = ''
+		country = ''
+		city = ''
+		wantsChapter = false
+		wantsSubstack = false
+	})
 
 	// A newsletter signup elsewhere (e.g. the homepage box) hands off here via
 	// ?subscribe-email=...; that email arrives after mount. Apply it once into an

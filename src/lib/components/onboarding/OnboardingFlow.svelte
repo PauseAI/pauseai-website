@@ -609,7 +609,7 @@
 				<button
 					type="submit"
 					class="primary"
-					disabled={(!intent && !keepInformed && !basics.newsletter) ||
+					disabled={(isContinuation ? !intent : !intent && !keepInformed && !basics.newsletter) ||
 						(!isContinuation && !gdprConsent) ||
 						submitting}
 				>
