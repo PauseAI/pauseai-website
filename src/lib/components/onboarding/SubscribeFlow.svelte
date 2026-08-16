@@ -28,13 +28,16 @@
 	let phase = $state<Phase>('form')
 	let submitting = $state(false)
 
-	let fullName = $state('')
-	let email = $state(initialEmail)
-	let country = $state(initialCountry)
-	let city = $state('')
-	let wantsChapter = $state(false)
-	let wantsSubstack = $state(false)
-	let honeypot = $state('')
+	// One object so the reset below can't drift out of step with the fields.
+	const blankFields = () => ({
+		fullName: '',
+		email: '',
+		country: '',
+		city: '',
+		wantsChapter: false,
+		wantsSubstack: false
+	})
+	let fields = $state({ ...blankFields(), email: initialEmail, country: initialCountry })
 	let recordId = $state('')
 
 	// Bot protection: the shared submit action verifies this token server-side and
@@ -52,12 +55,7 @@
 		if (!nav.from || nav.from.url.pathname !== nav.to?.url.pathname) return
 		phase = 'form'
 		recordId = ''
-		fullName = ''
-		email = ''
-		country = ''
-		city = ''
-		wantsChapter = false
-		wantsSubstack = false
+		fields = blankFields()
 	})
 
 	// A newsletter signup elsewhere (e.g. the homepage box) hands off here via
@@ -67,16 +65,16 @@
 	let prefillApplied = $state(false)
 	$effect(() => {
 		if (prefillApplied || !initialEmail) return
-		if (!email) email = initialEmail
+		if (!fields.email) fields.email = initialEmail
 		prefillApplied = true
 	})
 
 	const canSubmit = $derived(
 		!submitting &&
-			!!fullName.trim() &&
-			!!email.trim() &&
-			!!country.trim() &&
-			!!city.trim() &&
+			!!fields.fullName.trim() &&
+			!!fields.email.trim() &&
+			!!fields.country.trim() &&
+			!!fields.city.trim() &&
 			// No widget to wait for without a configured site key (e.g. local dev).
 			(!turnstileSiteKey || turnstileToken !== '')
 	)
@@ -129,14 +127,7 @@
 			<!-- Honeypot: real people leave this empty. -->
 			<div class="field honey" aria-hidden="true">
 				<label for="sub-nickname">Nickname</label>
-				<input
-					type="text"
-					id="sub-nickname"
-					name="nickname"
-					tabindex="-1"
-					autocomplete="off"
-					bind:value={honeypot}
-				/>
+				<input type="text" id="sub-nickname" name="nickname" tabindex="-1" autocomplete="off" />
 			</div>
 
 			<div class="field">
@@ -148,7 +139,7 @@
 					placeholder="Your name"
 					autocomplete="name"
 					required
-					bind:value={fullName}
+					bind:value={fields.fullName}
 				/>
 			</div>
 
@@ -161,7 +152,7 @@
 					placeholder="you@example.com"
 					autocomplete="email"
 					required
-					bind:value={email}
+					bind:value={fields.email}
 				/>
 			</div>
 
@@ -173,7 +164,7 @@
 					options={COUNTRIES}
 					required
 					placeholder="Select your country"
-					bind:value={country}
+					bind:value={fields.country}
 				/>
 			</div>
 
@@ -186,12 +177,12 @@
 					placeholder="Your city"
 					autocomplete="address-level2"
 					required
-					bind:value={city}
+					bind:value={fields.city}
 				/>
 			</div>
 
 			<label class="opt-in">
-				<input type="checkbox" name="chapter_share" bind:checked={wantsChapter} />
+				<input type="checkbox" name="chapter_share" bind:checked={fields.wantsChapter} />
 				<span>
 					<span class="opt-in-label">Also send me updates from my local chapter</span>
 					<span class="opt-in-sub">We'll connect you with your local PauseAI chapter.</span>
@@ -199,7 +190,7 @@
 			</label>
 
 			<label class="opt-in">
-				<input type="checkbox" name="newsletter" bind:checked={wantsSubstack} />
+				<input type="checkbox" name="newsletter" bind:checked={fields.wantsSubstack} />
 				<span>
 					<span class="opt-in-label">Also subscribe me to the PauseAI Substack</span>
 					<span class="opt-in-sub">AI news from the PauseAI team's perspective.</span>
@@ -235,12 +226,12 @@
 	<OnboardingFlow
 		startStep={2}
 		initialRecordId={recordId}
-		initialFullName={fullName}
-		initialEmail={email}
-		initialCountry={country}
-		initialCity={city}
+		initialFullName={fields.fullName}
+		initialEmail={fields.email}
+		initialCountry={fields.country}
+		initialCity={fields.city}
 		initialKeepInformed={true}
-		initialChapterShare={wantsChapter}
+		initialChapterShare={fields.wantsChapter}
 	/>
 {/if}
 
