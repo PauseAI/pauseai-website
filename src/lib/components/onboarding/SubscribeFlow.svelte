@@ -210,8 +210,11 @@
 <style>
 	/* Replaces the suppressed page-template hgroup; the global h1 rule supplies
 	   the font/size, so only spacing lives here. */
+	/* Mirrors the page template's hgroup rhythm (which subscribe.md suppresses via
+	   showTitle), so the heading sits like every other page's: no space above, the
+	   hgroup gap under the title, and the body text close to what follows. */
 	.subscribe-head {
-		margin: 2.5rem 0 1.5rem;
+		margin: 0 0 1rem;
 	}
 
 	.subscribe-head h1 {
@@ -219,7 +222,7 @@
 	}
 
 	.subscribe-intro {
-		margin: 1rem 0 0;
+		margin: calc(0.83 * 3rem) 0 0;
 		max-width: 40rem;
 	}
 
@@ -234,7 +237,7 @@
 		/* Matches OnboardingFlow's width: the "do more" step swaps this card for
 		   that one in place, so a different width would jump mid-flow. */
 		max-width: 800px;
-		margin: 2.5rem auto 0;
+		margin: 0 auto;
 		padding: 2.25rem;
 		box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
 	}

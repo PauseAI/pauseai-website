@@ -388,7 +388,10 @@
 {/snippet}
 
 {#snippet checkboxConfirmations()}
-	{#if keepInformed || basics.newsletter}
+	<!-- Not on the /subscribe continuation: those opt-ins were made and confirmed
+	     on the subscribe form, and this copy would restate them wrongly — it claims
+	     chapter contact, which there depends on a checkbox they may have declined. -->
+	{#if !isContinuation && (keepInformed || basics.newsletter)}
 		<ul class="signup-confirmations">
 			{#if keepInformed}
 				<li>
@@ -636,7 +639,11 @@
 			{#if mode === 'contact'}
 				<div class="confirmation">
 					<div class="checkmark">✓</div>
-					<h2>{msgs.onboarding_confirm_b_title}</h2>
+					{#if !isContinuation}
+						<!-- The continuation already thanked them for signing up; don't
+						     thank them for joining a second time. -->
+						<h2>{msgs.onboarding_confirm_b_title}</h2>
+					{/if}
 					<p>{msgs.onboarding_confirm_b_sub}</p>
 					{@render checkboxConfirmations()}
 				</div>
