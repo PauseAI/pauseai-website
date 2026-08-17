@@ -216,8 +216,8 @@
 			<label class="opt-in">
 				<input type="checkbox" name="newsletter" bind:checked={fields.wantsSubstack} />
 				<span>
-					<span class="opt-in-label">Also subscribe me to the PauseAI Substack</span>
-					<span class="opt-in-sub">AI news from the PauseAI team's perspective.</span>
+					<span class="opt-in-label">Also sign me up to the PauseAI Substack</span>
+					<span class="opt-in-sub">Expert analysis on AI developments.</span>
 				</span>
 			</label>
 

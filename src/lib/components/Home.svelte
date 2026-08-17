@@ -55,6 +55,7 @@
 <NewsletterSignup
 	handoffHref="/subscribe"
 	headingText={m.home_newsletter_heading()}
+	descriptionText={m.home_newsletter_description()}
 	buttonText={m.home_newsletter_button()}
 />
 
