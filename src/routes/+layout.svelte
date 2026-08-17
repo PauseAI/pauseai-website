@@ -57,6 +57,11 @@
 			dateRange: [null, '2024-12-31']
 		},
 		{
+			id: 'de-webinar-luisa-neubauer',
+			countries: ['DE'],
+			dateRange: [null, '2026-08-25']
+		},
+		{
 			id: 'pausecon-london-2026',
 			countries: null,
 			dateRange: [null, '2026-08-21']
@@ -184,6 +189,12 @@
 		</Banner>
 
 		<NearbyEvent contrast={hero} bind:eventFound geo={geoForNearbyEvent} />
+
+		<Banner contrast={hero} id="de-webinar-luisa-neubauer" rules={mainBannerRules}>
+			<strong>Bedroht KI unsere Zukunft?</strong> PauseAI-Webinar mit Luisa Neubauer am 25. August,
+			18:00 Uhr.
+			<strong><Link href="https://luma.com/b8ht854p">Jetzt anmelden!</Link></strong>
+		</Banner>
 
 		<Banner contrast={hero} id="pausecon-london-2026" rules={mainBannerRules}>
 			<strong>PauseCon London 2026</strong>: Apply now to join our September organising conference.
