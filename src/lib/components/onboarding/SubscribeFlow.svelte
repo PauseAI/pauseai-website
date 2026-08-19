@@ -1,7 +1,7 @@
 <!--
 	SubscribeFlow — the lightweight newsletter entry at /subscribe.
 
-	A single-step signup (global newsletter) with an optional local-group opt-in
+	A single-step signup (global newsletter) with an optional local-chapter opt-in
 	and an optional Substack opt-in. On success it offers to go further: rather
 	than linking out to /join (which would create a second, duplicate record), it
 	hands off to OnboardingFlow seeded at the intent step with the record already
@@ -141,7 +141,7 @@
 			<!-- Fixed for the newsletter entry: global newsletter opt-in, and the
 			     privacy-policy consent is the act of signing up (see the microcopy
 			     below). subscribe_form=1 tells the server to share with a chapter
-			     only when the local-group box is ticked. -->
+			     only when the local-chapter box is ticked. -->
 			<input type="hidden" name="subscribe_form" value="1" />
 			<input type="hidden" name="mode" value="contact" />
 			<input type="hidden" name="intent" value="Keep informed" />
@@ -209,7 +209,6 @@
 				<input type="checkbox" name="chapter_share" bind:checked={fields.wantsChapter} />
 				<span>
 					<span class="opt-in-label">Also send me updates from my local chapter</span>
-					<span class="opt-in-sub">We'll connect you with your local PauseAI chapter.</span>
 				</span>
 			</label>
 
