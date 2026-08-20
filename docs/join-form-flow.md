@@ -2,14 +2,18 @@
 
 This document describes the flow of the PauseAI join / onboarding form, from the
 landing page through to the Airtable write (or stub capture) and optional
-Substack subscription.
+Substack subscription. It also covers `/subscribe`, the newsletter-only signup,
+which is a different form with a different consent model but posts to the same
+endpoint.
 
 ## Entry points and how they interact
 
-The same `OnboardingFlow.svelte` component is mounted from two routes that wrap
-it differently. Both routes share a single submit endpoint
-(`/embed/onboarding-form?/submit`), so the server-side validation, Airtable
-write, and stub capture logic live in exactly one place.
+There are three entry points. Two mount the same `OnboardingFlow.svelte`
+component with different wrappers; the third mounts `SubscribeFlow.svelte`, a
+separate single-page form that can hand off to `OnboardingFlow` mid-flow. All
+three share a single submit endpoint (`/embed/onboarding-form?/submit`), so the
+server-side validation, Airtable write, and stub capture logic live in exactly
+one place.
 
 ### Route 1 — `/join` (standalone page)
 
@@ -35,11 +39,9 @@ Flow on `/join`:
    `initialLanguages` here — those are left at their defaults (empty / empty /
    `['English']`). Prefilling by geography is an embed-only feature (see below).
 
-> Note: `join.md` passes `initialEmail={subscribeEmail}`, but the current
-> `OnboardingFlow` props are `initialCountry`, `initialCity`, and
-> `initialLanguages` only — there is no `initialEmail` prop yet. The email field
-> in step 1 is therefore not prefilled from Collagen today. If you wire that
-> prop up, update this section and the component's `Props` block together.
+> Note: `OnboardingFlow` now does accept `initialEmail`, so the Collagen prefill
+> described above works. The prop was added for the `/subscribe` hand-off (see
+> Route 3), which needs to seed every basic field at once.
 
 ### Route 2 — `/embed/onboarding-form` (iframeable embed)
 
@@ -69,6 +71,41 @@ The embed wrapper does four things the `/join` route does not:
    drops its `min-height: 100dvh` in embedded mode so the reported height can
    shrink as well as grow.
 
+### Route 3 — `/subscribe` (newsletter-only signup)
+
+| File                                                 | Role                                                                                                                                 |
+| ---------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------ |
+| `src/posts/subscribe.md`                             | Markdown post, `showTitle: false` so `SubscribeFlow` can own the heading. Reads `?subscribe-email=` and passes it as `initialEmail`. |
+| `src/lib/components/onboarding/SubscribeFlow.svelte` | The single-page signup form, its thanks screen, and the hand-off into `OnboardingFlow`.                                              |
+
+This route exists so someone who only wants the newsletter can finish in one
+screen instead of walking the four-step join flow. It asks for the same four
+basics (name, email, country, city) plus two opt-ins, and posts hidden
+`subscribe_form=1`, `mode=contact`, `intent=Keep informed`, `keep_informed=on`
+and `agree_gdpr=on`.
+
+`SubscribeFlow` is a three-phase machine rather than a step counter:
+
+- `form` — the signup itself.
+- `thanks` — confirmation, with a "Get involved" button.
+- `more` — renders `OnboardingFlow` seeded from the row that was just created,
+  so choosing to do more **updates** that record rather than creating a second
+  one. The seed is `startStep={2}`, `initialRecordId={recordId}`,
+  `initialKeepInformed={true}` and `initialChapterShare={fields.wantsChapter}`,
+  plus the four basics.
+
+Navigating to `/subscribe` while already on it resets the machine to `form` and
+clears every field, so a second visitor on a shared device does not see the
+previous person's details.
+
+**Entry points into this route.** The header carries a "Subscribe" item, and the
+homepage box (`Home.svelte`) passes `handoffHref="/subscribe"` to
+`NewsletterSignup`. With that prop set, `NewsletterSignup` stops posting to
+Substack and instead navigates to `/subscribe?subscribe-email=…`, both in its
+hydrated `goto()` and in its native form `action`, so the hand-off also works
+without JavaScript. Note that `?subscribe-email=` is the same parameter the
+Collagen banner on `/join` reads; the two uses are independent.
+
 ### The shared submit endpoint
 
 Both routes' forms `POST` to the same action:
@@ -90,7 +127,17 @@ The action returns `{ success: true, recordId }` on a create, or
 `OnboardingFlow` stores the returned `recordId` in component state and sends it
 back as a hidden `record_id` input on the step-3 volunteer form, so the
 volunteer details update the existing Airtable record instead of creating a
-duplicate.
+duplicate. `SubscribeFlow` does the same for its "Get involved" hand-off.
+
+**Create versus update is the axis most of the action's behaviour turns on**, so
+it is worth stating once: a post carrying `record_id` is an update, and
+everything else is a create. Updates skip the required-field check, never
+rewrite `Signup source`, and only overwrite a basic field when the post supplies
+a non-empty value, so a partial post cannot blank what the create collected.
+
+**Which form posted** is carried by `subscribe_form=1`. Only `/subscribe` sets
+it, and the action uses it for exactly two decisions: which `Signup source` to
+stamp on a create, and how to treat chapter sharing (below).
 
 ### Component overview
 
@@ -119,7 +166,15 @@ It delegates rendering to a few child components and snippets:
 | `LinkWithoutIcon.svelte`, `Socials.svelte`                                                                                                                    | Footer links on confirmation screens.                                      |
 | Snippets: `honeypotField`, `countrySelect`, `hiddenBasics`, `selectCards`, `checkboxConfirmations`, `gdprConsentField`, `nextStepBlock`, `confirmationFooter` | Reusable markup fragments shared across steps.                             |
 
-On mount, the component fetches `GET /api/onboarding-mode` and logs whether the
+`SubscribeFlow.svelte` is deliberately much smaller: one screen of fields, the
+same honeypot and Turnstile protection, and the phase machine described under
+Route 3. It shares `Turnstile.svelte`, `Combobox.svelte` and the options in
+`options.ts` with `OnboardingFlow`, but not the step machine or the intent
+cards. It keeps its fields in a single object so the same helper both
+initialises them and resets them on same-page navigation, which stops the two
+from drifting apart.
+
+On mount, both components fetch `GET /api/onboarding-mode` and log whether the
 form is live or stubbed to the browser console. This is needed because the
 pages embedding the form can be prerendered (e.g. `/join`), so the runtime env
 isn't available at render time.
@@ -137,6 +192,9 @@ isn't available at render time.
 flowchart LR
     Join["/join<br/>(join.md + CollagenSignup)"] --> Flow
     Embed["/embed/onboarding-form<br/>(+page.svelte wrapper)"] --> Flow
+    Subscribe["/subscribe<br/>(subscribe.md)"] --> SubFlow
+    SubFlow["SubscribeFlow.svelte<br/>(phase machine)"] -- "POST ?/submit<br/>subscribe_form=1" --> Action
+    SubFlow -- "Get involved<br/>(seeded, startStep=2)" --> Flow
     Flow["OnboardingFlow.svelte<br/>(step machine)"] -- "POST /embed/onboarding-form?/submit" --> Action["+page.server.ts<br/>submit action"]
     Action -- "ONBOARDING_LIVE=true" --> Airtable["Airtable Members table"]
     Action -- "ONBOARDING_LIVE != true" --> Stub["recordStubSubmission()<br/>/embed/onboarding-form/stub"]
@@ -146,9 +204,8 @@ flowchart LR
     Stripe -- "success URL" --> Close["/close<br/>(closes the tab)"]
 ```
 
-Both entry points converge on the same component and the same action, so
-validation rules, field allowlists, and the live/stub switch only need to be
-maintained in one place.
+Every entry point converges on the same action, so validation rules, field
+allowlists, and the live/stub switch only need to be maintained in one place.
 
 ## Step machine
 
@@ -197,9 +254,14 @@ stateDiagram-v2
 
 Target: base `appWPTGqZmUcs3NWu`, table `tblL1icZBhTV1gQ9o` ("Members").
 
-**Step 2 / browse signup (create):** `Full name`, `Email`, `Country`, `City`,
-`Intent`, `Signup source`, `Email subscription` (keep_informed),
-`Data privacy policy agreed`, `GDPR chapter share permission`.
+**Step 2 / browse signup / subscribe form (create):** `Full name`, `Email`,
+`Country`, `City`, `Intent`, `Signup source`, `Email subscription`
+(keep_informed), `Data privacy policy agreed`, `GDPR chapter share permission`.
+
+`Signup source` is provenance, so it is written **once at create and never on an
+update**: `June 2026 subscribe form` for `/subscribe`, `June 2026 onboarding
+flow` otherwise. Without that rule the volunteer step, which carries no
+subscribe marker, would rewrite a subscribe row as a join row.
 
 **Step 3 volunteer (update, only when `volunteer_details=on`):** adds
 `Discord Username`, `Phone`, `Languages`, `Other languages`,
@@ -207,6 +269,30 @@ Target: base `appWPTGqZmUcs3NWu`, table `tblL1icZBhTV1gQ9o` ("Members").
 `Motivation (Other)`, `Skills & Interests`, `Skill & Interests (Other)`,
 `Projected weekly hours`, `Volunteer Agreement`, `Code of Conduct agreed`, and
 `Zip code` (US only).
+
+### Chapter sharing
+
+`GDPR chapter share permission` records whether the person agreed to be
+connected with their local PauseAI chapter. **The two forms capture that
+agreement differently, which is the single most important difference between
+them:**
+
+|              | how it is captured                                                                    | resulting value       |
+| ------------ | ------------------------------------------------------------------------------------- | --------------------- |
+| `/join`      | bundled into the required privacy checkbox, whose copy names chapter sharing outright | `true` on every row   |
+| `/subscribe` | a separate, optional "Also send me updates from my local chapter" tick                | `true` only if ticked |
+
+On an update the signup-time choice is left alone, with one exception: an intent
+of `Volunteer` or `Lead` sets it to `true`, because organising locally means
+hearing from a chapter regardless. The `/subscribe` hand-off reposts the
+signup-time choice on every update, so backing out of `Volunteer` restores the
+original answer instead of leaving the escalation in place.
+
+This field is not only stored. The Airtable automations on the Members table
+read it to decide whether a signup is handed to their national chapter's leader
+or to the global onboarding address, and whether a US signup is copied into the
+sheet shared with PauseAI US. Leaving it unticked is therefore a real routing
+decision, not a preference flag.
 
 ## Validation rules
 
@@ -223,12 +309,17 @@ Enforced in the `submit` action before any write:
 
 ### Field validation
 
-- Required: `full_name`, `email`, `country`, `city`.
+- Required **on a create**: `full_name`, `email`, `country`, `city`. An update
+  (the volunteer step, or the `/subscribe` hand-off) skips this check, so it
+  cannot re-demand what the create already collected. Requiring them on updates
+  broke the hand-off for anyone whose row was created with fewer fields.
 - `email` must match `^\S+@\S+\.\S+$`.
 - `country` must be in `COUNTRIES`.
 - `intent` must be one of `INTENTS` (`Act now` | `Volunteer` | `Lead` | `Keep informed`).
-- GDPR consent (`agree_gdpr`) required **only on the create path** — step-3
-  volunteer updates are exempt because consent was captured at step 2.
+- GDPR consent (`agree_gdpr`) required **only on the create path**. Updates are
+  exempt because consent was captured when the record was created. `/subscribe`
+  posts it as a hidden field, since signing up on that form is itself the
+  privacy-policy consent, which its microcopy links.
 - Volunteer path additionally requires: ≥1 language, a valid `hours` value, and
   both `agree_volunteer` and `agree_conduct` checkboxes.
 
