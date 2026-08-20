@@ -308,10 +308,18 @@
 	}
 
 	.menu-band :global(nav) {
-		width: min(var(--page-width), 100% - 2 * var(--page-gutter));
+		width: min(var(--header-width), 100% - 2 * var(--page-gutter));
 		margin-inline: auto;
 		/* Tighter vertical padding than the component's responsive default. */
 		--vspace: 1.85rem;
+	}
+
+	/* The header on non-hero pages sits inside .layout, whose max-inline-size is
+	   the (narrower) content width. Let it use the wider header width so all
+	   top-level nav items fit on one row beside the logo. */
+	.layout > :global(.wide-navbar) {
+		width: min(var(--header-width), 100dvw - 2 * var(--page-gutter));
+		justify-self: center;
 	}
 
 	.layout {
