@@ -1,7 +1,6 @@
 ---
 title: PauseAI Volunteer Stipends
-description: The PauseAI volunteer stipend program supports volunteers who
-  contribute regularly to the PauseAI community.
+description: The PauseAI volunteer stipend program supports volunteers who contribute regularly to the PauseAI community.
 ---
 
 The PauseAI volunteer stipend program supports volunteers who contribute regularly to the PauseAI community. It is not a salary or wage—it is a contribution toward the costs associated with volunteering (such as internet, travel, materials, or event costs).
