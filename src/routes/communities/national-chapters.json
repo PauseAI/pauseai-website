@@ -66,12 +66,6 @@
 			"link": "https://pause-ai.de/"
 		},
 		{
-			"name": "United States",
-			"lat": 39.5,
-			"lon": -98,
-			"link": "$$WEBSITE_US$$"
-		},
-		{
 			"name": "Czechia",
 			"lat": 50,
 			"lon": 15,
