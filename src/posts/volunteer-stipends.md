@@ -1,9 +1,10 @@
 ---
 title: PauseAI Volunteer Stipends
-description: The PauseAI volunteer stipend program supports volunteers who contribute regularly to the PauseAI Global community.
+description: The PauseAI volunteer stipend program supports volunteers who
+  contribute regularly to the PauseAI community.
 ---
 
-The PauseAI volunteer stipend program supports volunteers who contribute regularly to the PauseAI Global community. It is not a salary or wage—it is a contribution toward the costs associated with volunteering (such as internet, travel, materials, or event costs).
+The PauseAI volunteer stipend program supports volunteers who contribute regularly to the PauseAI community. It is not a salary or wage—it is a contribution toward the costs associated with volunteering (such as internet, travel, materials, or event costs).
 
 If you're planning a one-off project or event, consider applying for a [Microgrant](/microgrants) instead.
 
@@ -17,14 +18,13 @@ If you're planning a one-off project or event, consider applying for a [Microgra
 ### Eligibility Requirements
 
 - Volunteers must have signed up via our [PauseAI Global webform](/join).
-- Volunteers who are US citizens or residents should contact [PauseAI US](https://www.pauseai-us.org/), which manages volunteers separately.
 - Volunteers should be contributing regularly to PauseAI Global activities.
 - Preference is given to volunteers with a demonstrated history of consistent contributions.
 
 ### Strategic Allocation
 
-- Stipend positions are limited by PauseAI Global's available budget.
-- Allocation decisions are made in alignment with PauseAI Global's overall strategy.
+- Stipend positions are limited by PauseAI's available budget.
+- Allocation decisions are made in alignment with PauseAI's overall strategy.
 - Allocations may not be distributed evenly across regions or chapters.
 - Priority is given to volunteers whose work demonstrates high impact potential for the mission.
 
