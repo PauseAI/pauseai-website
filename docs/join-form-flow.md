@@ -372,12 +372,11 @@ so that a missing field cannot lock out legitimate senders, and the comparison
 is hostname against hostname rather than a full origin match. Note that dev and
 `ONBOARDING_LIVE` are independent, so a live-mode dev build skips the check.
 
-Tokens are single-use and expire after five minutes, so the client remounts the
-widget through the `turnstileNonce` state variable once a submission resolves.
-That is a cross-file contract: drop the remount and a retry posts a spent token.
-`SubscribeFlow` remounts on every result; `OnboardingFlow` remounts on success
-and on a validation failure, but not on the unexpected-error branch, so a retry
-after one of those reposts a spent token.
+Tokens are single-use and expire after five minutes, so both forms remount the
+widget through a `turnstileNonce` state variable once a submission resolves, on
+every result rather than only the successful ones: verification spends the token
+whether or not the write succeeded. That is a cross-file contract, and dropping
+the remount on any branch leaves a retry reposting a spent token.
 
 Turnstile runs in live mode only, for the reasons under "Live vs. stub mode".
 
