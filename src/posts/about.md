@@ -1,6 +1,6 @@
 ---
 title: About Us
-description: Staff behind PauseAI
+description: PauseAI's staff
 date: 2025-11-06
 ---
 
@@ -21,7 +21,7 @@ What started as one person's call to action has grown into a global grassroots m
 - May 2024: Organized coordinated protests across thirteen countries—including the US, UK, Brazil, Germany, Australia, and Norway ahead of the [AI Seoul Summit](/2024-may).
 - February 2025: Coordinated an event larger global protest for the [French AI Summit](/2025-february), adding Kenya and DRC to the mix.
 - June 2025: Led our [biggest protest yet outside Google DeepMind's London office](/deepmind-protest-2025), holding them accountable for breaking their safety commitments and hosted the first ever PauseCon training event.
-- Ongoing: Grew from a single-country initiative into a network with national organizations like PauseAI US, each running their own campaigns while we coordinate globally.
+- Ongoing: Grew from a single-country initiative into a network with national organizations like PauseAI France, each running their own campaigns while we coordinate globally.
 
 ## Non-violence
 
