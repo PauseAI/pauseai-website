@@ -39,16 +39,12 @@ Flow on `/join`:
    `initialLanguages` here — those are left at their defaults (empty / empty /
    `['English']`). Prefilling by geography is an embed-only feature (see below).
 
-> Note: `OnboardingFlow` now does accept `initialEmail`, so the Collagen prefill
-> described above works. The prop was added for the `/subscribe` hand-off (see
-> Route 3), which needs to seed every basic field at once.
-
 ### Route 2 — `/embed/onboarding-form` (iframeable embed)
 
 | File                                                    | Role                                                                                                                                          |
 | ------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
 | `src/routes/embed/onboarding-form/+page.svelte`         | Thin wrapper around `OnboardingFlow`. Reads query params, sets the locale, applies the background color, and reports height to the host page. |
-| `src/routes/embed/onboarding-form/+page.server.ts`      | Houses the `submit` action shared by **both** routes (see "Submit endpoint" below).                                                           |
+| `src/routes/embed/onboarding-form/+page.server.ts`      | Houses the `submit` action shared by **all three** entry points (see "Submit endpoint" below).                                                |
 | `src/routes/embed/onboarding-form/stub/+page.svelte`    | Stub inspection page rendered when `ONBOARDING_LIVE` is not `true`.                                                                           |
 | `src/routes/embed/onboarding-form/stub/+page.server.ts` | `load` function returning in-memory stub submissions.                                                                                         |
 
@@ -108,7 +104,7 @@ Collagen banner on `/join` reads; the two uses are independent.
 
 ### The shared submit endpoint
 
-Both routes' forms `POST` to the same action:
+All three entry points `POST` to the same action:
 
 ```
 action="/embed/onboarding-form?/submit"
@@ -131,9 +127,18 @@ duplicate. `SubscribeFlow` does the same for its "Get involved" hand-off.
 
 **Create versus update is the axis most of the action's behaviour turns on**, so
 it is worth stating once: a post carrying `record_id` is an update, and
-everything else is a create. Updates skip the required-field check, never
-rewrite `Signup source`, and only overwrite a basic field when the post supplies
-a non-empty value, so a partial post cannot blank what the create collected.
+everything else is a create. Updates skip the required-field presence check,
+never rewrite `Signup source`, and only overwrite `Full name`, `Country` and
+`City` when the post supplies a non-empty value, so a partial post cannot blank
+what the create collected.
+
+That guard covers those three fields and no others. `Email`, `Intent`,
+`Email subscription` and `Data privacy policy agreed` are written from the post
+on **every** call, updates included, so an update that omits `keep_informed`
+writes `Email subscription: false`. The client reposts it from state today (a
+hidden input on the step-2 form, guarded by `{#if keepInformed}`), which is the
+only thing standing between a dropped hidden input and silently clearing
+people's subscription flag with no other symptom.
 
 **Which form posted** is carried by `subscribe_form=1`. Only `/subscribe` sets
 it, and the action uses it for exactly two decisions: which `Signup source` to
@@ -174,8 +179,9 @@ cards. It keeps its fields in a single object so the same helper both
 initialises them and resets them on same-page navigation, which stops the two
 from drifting apart.
 
-On mount, both components fetch `GET /api/onboarding-mode` and log whether the
-form is live or stubbed to the browser console. This is needed because the
+On mount, both components fetch `GET /api/onboarding-mode`. `OnboardingFlow`
+logs the answer to the browser console; both use it to decide whether the
+Turnstile widget renders and whether a token is required to submit. This is needed because the
 pages embedding the form can be prerendered (e.g. `/join`), so the runtime env
 isn't available at render time.
 
@@ -250,6 +256,27 @@ stateDiagram-v2
     Browse --> [*]
 ```
 
+### Continuation mode
+
+The diagram above describes a fresh `/join` visit. When `OnboardingFlow` is
+mounted by the `/subscribe` hand-off it runs in **continuation mode**, which
+`isContinuation` derives from `startStep === 2 && !!initialRecordId`. The person
+has already given their details and consent, so step 2 becomes a single
+question, "what do you want to do", rather than a signup:
+
+- The keep-informed and Substack opt-in cards are hidden, as is the GDPR
+  consent checkbox, because both were answered on the subscribe form.
+- Picking an intent becomes **required** to submit; on a fresh visit an opt-in
+  alone is enough.
+- The stepper drops its first label and the Back button is gone, since there is
+  no step 1 to return to.
+- The submit button reads "Continue" rather than "Submit", because the record
+  already exists and this post updates it.
+- The two hidden inputs described under "Chapter sharing" are added.
+
+So the `Step2 --> Step1: Back` edge and the opt-in-only submit path in the
+diagram do not exist in this mode.
+
 ## Data written to Airtable
 
 Target: base `appWPTGqZmUcs3NWu`, table `tblL1icZBhTV1gQ9o` ("Members").
@@ -284,9 +311,13 @@ them:**
 
 On an update the signup-time choice is left alone, with one exception: an intent
 of `Volunteer` or `Lead` sets it to `true`, because organising locally means
-hearing from a chapter regardless. The `/subscribe` hand-off reposts the
-signup-time choice on every update, so backing out of `Volunteer` restores the
-original answer instead of leaving the escalation in place.
+hearing from a chapter regardless. So that backing out of `Volunteer` restores
+the original answer rather than leaving the escalation in place, the hand-off
+reposts the signup-time choice. Note where that lives: it is a pair of hidden
+inputs on **`OnboardingFlow`'s step-2 form**, guarded by `isContinuation`, not
+anything in `SubscribeFlow`. The step-3 volunteer form carries neither, which is
+harmless only because it always posts `intent=Volunteer` and so takes the
+escalation branch anyway.
 
 This field is not only stored. The Airtable automations on the Members table
 read it to decide whether a signup is handed to their national chapter's leader
@@ -310,9 +341,12 @@ Enforced in the `submit` action before any write:
 ### Field validation
 
 - Required **on a create**: `full_name`, `email`, `country`, `city`. An update
-  (the volunteer step, or the `/subscribe` hand-off) skips this check, so it
-  cannot re-demand what the create already collected. Requiring them on updates
-  broke the hand-off for anyone whose row was created with fewer fields.
+  (the volunteer step, or the `/subscribe` hand-off) skips the presence check,
+  so it cannot re-demand what the create already collected.
+- The email regex and the `intent` enum below still run on **every** post,
+  updates included, so an update carrying neither is rejected even though the
+  presence check was skipped. Only the country check was relaxed, to run when a
+  country is supplied.
 - `email` must match `^\S+@\S+\.\S+$`.
 - `country` must be in `COUNTRIES`.
 - `intent` must be one of `INTENTS` (`Act now` | `Volunteer` | `Lead` | `Keep informed`).
