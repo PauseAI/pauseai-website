@@ -1,5 +1,6 @@
 // Onboarding submit action, shared by /join (step 2, browse signup, step 3
-// volunteer update) and /subscribe (signup, then its "do more" hand-off).
+// volunteer update), /embed/onboarding-form (the iframeable wrapper around the
+// same component) and /subscribe (signup, then its "do more" hand-off).
 //
 // docs/join-form-flow.md maps the routes and collects the contracts this action
 // takes part in, including the cross-file and cross-system ones no single file
@@ -101,14 +102,13 @@ export const actions: Actions = {
 		const mode = getString(data, 'mode') === 'browse' ? 'browse' : 'contact'
 		const newsletter = data.get('newsletter') === 'on'
 		const keepInformed = data.get('keep_informed') === 'on'
-		// GDPR consent (bundled with local-chapter sharing) gates every
-		// record-creating submission. Step 3 volunteer posts update an existing
-		// record and carry no checkbox, so the check below exempts updates.
+		// GDPR consent gates every record-creating submission. /join bundles it with
+		// local-chapter sharing in one checkbox; /subscribe asks the two separately.
+		// Updates carry no checkbox, so the check below exempts them.
 		const gdprAgreed = data.get('agree_gdpr') === 'on'
-		// Set when a step-2 submission already created the person's record:
-		// the later volunteer-form submission updates it instead of creating a
-		// duplicate. Step 2 sends every path through here, so the newsletter
-		// and Substack subscription happen right after step 2.
+		// Set when an earlier submission already created the person's record, so
+		// this one updates it instead of creating a duplicate: /join step 2 then the
+		// volunteer form, or /subscribe then its "do more" hand-off.
 		const existingRecordId = getString(data, 'record_id')
 		// The volunteer detail fields are only present on the step-3 form post.
 		const hasVolunteerDetails = data.get('volunteer_details') === 'on'
@@ -239,8 +239,8 @@ export const actions: Actions = {
 				if (!recordId) {
 					return fail(502, { message: 'Sorry, we could not save your details. Please try again.' })
 				}
-				// Subscription happens on the initial (step 2) submission only;
-				// the volunteer-form update never re-subscribes.
+				// Subscription happens on the create only, which for /subscribe is its own
+				// signup rather than a step 2. No update re-subscribes.
 				if (newsletter) {
 					await subscribeToSubstackNewsletter(email)
 				}

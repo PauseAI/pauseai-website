@@ -76,10 +76,12 @@ The embed wrapper does four things the `/join` route does not:
 
 This route exists so someone who only wants the newsletter can finish in one
 screen instead of walking the multi-step join flow. It asks for the same four
-basics (name, email, country, city) plus two opt-ins. Three of its hidden inputs
+basics (name, email, country, city) plus two opt-ins. Four of its hidden inputs
 carry meaning: `subscribe_form=1` is the discriminator, `agree_gdpr=on` records
-that signing up here is itself the consent, and `keep_informed=on` is posted
-unconditionally, so every completed submission subscribes.
+that signing up here is itself the consent, `keep_informed=on` is posted
+unconditionally so every completed submission subscribes, and
+`intent=Keep informed` is fixed, so every row this route creates starts at that
+intent whatever the person later chooses.
 
 `SubscribeFlow` is a three-phase machine rather than a step counter:
 
@@ -365,14 +367,17 @@ Two layers, catching different bots:
 
 One Turnstile property is easy to over-assume, so it is worth stating here: the
 token's hostname is compared against the request hostname **only when Turnstile
-reports one**. An absent hostname is accepted by design, so that a missing field
-cannot lock out legitimate senders, and the comparison is hostname against
-hostname rather than a full origin match.
+reports one, and only outside dev**. An absent hostname is accepted by design,
+so that a missing field cannot lock out legitimate senders, and the comparison
+is hostname against hostname rather than a full origin match. Note that dev and
+`ONBOARDING_LIVE` are independent, so a live-mode dev build skips the check.
 
 Tokens are single-use and expire after five minutes, so the client remounts the
-widget through the `turnstileNonce` state variable after every submission,
-success or failure. That is a cross-file contract: drop the remount and a retry
-posts a spent token.
+widget through the `turnstileNonce` state variable once a submission resolves.
+That is a cross-file contract: drop the remount and a retry posts a spent token.
+`SubscribeFlow` remounts on every result; `OnboardingFlow` remounts on success
+and on a validation failure, but not on the unexpected-error branch, so a retry
+after one of those reposts a spent token.
 
 Turnstile runs in live mode only, for the reasons under "Live vs. stub mode".
 
