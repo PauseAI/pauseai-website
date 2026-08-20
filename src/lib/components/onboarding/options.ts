@@ -2,9 +2,8 @@
 import type { OnboardingMessages } from './messages'
 
 // 'None' is what /join step 2 submits when nothing is picked; /subscribe keeps
-// writing 'Keep informed' (coming to subscribe IS that choice), and legacy rows
-// carry 'Keep informed' for both. Each value must exist as an Airtable Intent
-// select option and in the CRM's member_intent vocabulary.
+// writing 'Keep informed'. Each value must exist as an Airtable Intent select
+// option and in the CRM's member_intent vocabulary.
 export const INTENTS = ['None', 'Keep informed', 'Act now', 'Volunteer', 'Lead'] as const
 export type Intent = (typeof INTENTS)[number]
 export type IntentKey = 'act-now' | 'volunteer' | 'lead'

@@ -125,7 +125,6 @@
 	let recordId = $state(initialRecordId)
 	// Never pre-checked on /join: marketing consent must be freely given, for
 	// Volunteers/Leads too (operational volunteer comms ride legitimate interest).
-	// The /subscribe hand-off seeds the choice already made on that form.
 	let keepInformed = $state(initialKeepInformed)
 	let submitting = $state(false)
 	let browseSignedUp = $state(false)
@@ -616,8 +615,6 @@
 							</span>
 						</button>
 					</div>
-					<!-- A disclosure, not a hint: linked from both opt-ins via aria-describedby
-					     so screen readers don't tab straight past it. -->
 					<p class="helper" id="critical-alert-notice">
 						<!-- eslint-disable-next-line svelte/no-at-html-tags -->
 						{@html msgs.onboarding_email_critical_notice}
