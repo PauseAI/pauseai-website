@@ -46,13 +46,31 @@
 	const intentOptions = $derived(getIntentOptions(msgs))
 
 	let {
+		initialEmail = '',
 		initialCountry = '',
 		initialCity = '',
-		initialLanguages = [] as string[]
+		initialFullName = '',
+		initialLanguages = [] as string[],
+		initialRecordId = '',
+		startStep = 1,
+		initialKeepInformed = false,
+		initialChapterShare = false
 	}: {
+		initialEmail?: string
 		initialCountry?: string
 		initialCity?: string
+		initialFullName?: string
 		initialLanguages?: string[]
+		// The /subscribe flow creates the record up front and then hands off here
+		// to let people go further. It seeds the created record id and starts at
+		// the intent step, so this submission updates that record instead of
+		// creating a duplicate, and pre-sets the newsletter opt-in they already made.
+		initialRecordId?: string
+		startStep?: 1 | 2
+		initialKeepInformed?: boolean
+		// The chapter-updates choice made on the subscribe form, reposted so backing
+		// out of Volunteer/Lead restores it instead of leaving the escalation.
+		initialChapterShare?: boolean
 	} = $props()
 
 	// Starts true so an unanswered request keeps the anti-spam check required.
@@ -84,7 +102,7 @@
 		}
 	})
 
-	let step: 1 | 2 | 3 | 4 = $state(1)
+	let step: 1 | 2 | 3 | 4 = $state(startStep)
 	let flowEl: HTMLDivElement | undefined = $state()
 
 	// Scroll back to the top of the flow on step changes. The volunteer form
@@ -102,13 +120,13 @@
 	let mode: 'contact' | 'browse' = $state('contact')
 	let intent: IntentKey | null = $state(null)
 	// Airtable record id from the step-2 submission; later submissions send it
-	// back so the server updates the record instead of creating another.
-	let recordId = $state('')
-	// V2 prototype: "Keep me informed" is the INFORMATIONAL opt-in (global +
-	// local-chapter updates). It is a genuine opt-in for everyone including
-	// Volunteers/Leads — never pre-checked or forced (marketing consent must be
-	// freely given); operational volunteer comms ride legitimate interest instead.
-	let keepInformed = $state(false)
+	// back so the server updates the record instead of creating another. When the
+	// /subscribe flow hands off, it's seeded with the record already created there.
+	let recordId = $state(initialRecordId)
+	// Never pre-checked on /join: marketing consent must be freely given, for
+	// Volunteers/Leads too (operational volunteer comms ride legitimate interest).
+	// The /subscribe hand-off seeds the choice already made on that form.
+	let keepInformed = $state(initialKeepInformed)
 	let submitting = $state(false)
 	let browseSignedUp = $state(false)
 	let honeypot = $state('')
@@ -128,11 +146,22 @@
 	// Step 1: basic info (shared with the browse-mode inline signup and the
 	// volunteer form, which pre-fills from the same state)
 	let basics = $state({
-		fullName: '',
-		email: '',
+		fullName: initialFullName,
+		email: initialEmail,
 		country: initialCountry,
 		city: initialCity,
 		newsletter: false
+	})
+
+	// A newsletter signup elsewhere (e.g. the homepage box) can hand off here
+	// via ?subscribe-email=...; that email arrives after mount. Apply it once into
+	// an empty field, then never again — so it neither clobbers typed input nor
+	// snaps back when the visitor clears it to fix a typo.
+	let prefillApplied = $state(false)
+	$effect(() => {
+		if (prefillApplied || !initialEmail) return
+		if (!basics.email) basics.email = initialEmail
+		prefillApplied = true
 	})
 
 	const validLanguageStored = new Set(LANGUAGES.map((l) => l.stored))
@@ -169,10 +198,19 @@
 	// user stays in the flow.
 	let becomePayingMember = $state(false)
 
+	// The /subscribe "do more" hand-off: we start at the intent step with a record
+	// already created and its email opt-ins already chosen. In that mode the step
+	// only asks how involved they want to be — the opt-in cards and a second
+	// consent are hidden so it can't re-ask (or silently undo) what they already
+	// picked on the subscribe form.
+	const isContinuation = $derived(startStep === 2 && !!initialRecordId)
+
 	// GDPR data-processing consent gating every record-creating submission
-	// (step 2 + browse). NB: the server also hardcodes chapter-sharing consent
-	// on every record today — whether that should instead follow the involvement
-	// axis / bell rather than a forced checkbox is an open question (see PR body).
+	// (step 2 + browse). On /join this checkbox also carries chapter sharing:
+	// the server writes share permission on every /join create. /subscribe asks
+	// for chapter sharing as its own checkbox instead.
+	// Stays false so it never pre-checks a visible consent box; the continuation
+	// already consented on the subscribe form and is exempted at the submit gate.
 	let gdprConsent = $state(false)
 
 	// Phone: dial code prefilled from country of residence, editable in case
@@ -203,18 +241,30 @@
 			agreements.conduct
 	)
 
-	const stepperLabels = $derived(
-		intent === 'volunteer'
-			? [
-					msgs.onboarding_step_about,
-					msgs.onboarding_step_intent,
-					msgs.onboarding_step_volunteer_form,
-					msgs.onboarding_step_confirmed
-				]
-			: intent === 'lead'
-				? [msgs.onboarding_step_about, msgs.onboarding_step_intent, msgs.onboarding_step_next_steps]
-				: [msgs.onboarding_step_about, msgs.onboarding_step_intent, msgs.onboarding_step_confirmed]
-	)
+	const stepperLabels = $derived.by(() => {
+		const labels =
+			intent === 'volunteer'
+				? [
+						msgs.onboarding_step_about,
+						msgs.onboarding_step_intent,
+						msgs.onboarding_step_volunteer_form,
+						msgs.onboarding_step_confirmed
+					]
+				: intent === 'lead'
+					? [
+							msgs.onboarding_step_about,
+							msgs.onboarding_step_intent,
+							msgs.onboarding_step_next_steps
+						]
+					: [
+							msgs.onboarding_step_about,
+							msgs.onboarding_step_intent,
+							msgs.onboarding_step_confirmed
+						]
+		// The /subscribe continuation begins after the subscribe form, so it never
+		// showed an "About you" step — drop it and start the stepper at Intent.
+		return isContinuation ? labels.slice(1) : labels
+	})
 
 	// Lead path: if the country already has a chapter, offer regional/city
 	// leadership instead of founding a national group. Fetched lazily when the
@@ -371,7 +421,10 @@
 {/snippet}
 
 {#snippet checkboxConfirmations()}
-	{#if keepInformed || basics.newsletter}
+	<!-- Not on the /subscribe continuation: those opt-ins were made and confirmed
+	     on the subscribe form, and this copy would restate them wrongly — it claims
+	     chapter contact, which there depends on a checkbox they may have declined. -->
+	{#if !isContinuation && (keepInformed || basics.newsletter)}
 		<ul class="signup-confirmations">
 			{#if keepInformed}
 				<li>
@@ -427,7 +480,7 @@
 	{/if}
 
 	{#if mode === 'contact'}
-		<Stepper labels={stepperLabels} current={step - 1} />
+		<Stepper labels={stepperLabels} current={isContinuation ? step - 2 : step - 1} />
 	{/if}
 
 	<div class="form-card">
@@ -502,63 +555,70 @@
 				{#if recordId}
 					<input type="hidden" name="record_id" value={recordId} />
 				{/if}
-				<input
-					type="hidden"
-					name="intent"
-					value={intent ? INTENT_VALUES[intent] : 'Keep informed'}
-				/>
+				<input type="hidden" name="intent" value={intent ? INTENT_VALUES[intent] : 'None'} />
 				{#if keepInformed}
 					<input type="hidden" name="keep_informed" value="on" />
 				{/if}
+				{#if isContinuation}
+					<!-- Tells the server this update knows the signup-time chapter choice,
+					     so it restores it when the intent no longer escalates. -->
+					<input type="hidden" name="subscribe_form" value="1" />
+					{#if initialChapterShare}
+						<input type="hidden" name="chapter_share" value="on" />
+					{/if}
+				{/if}
 				<h2>{msgs.onboarding_step2_heading}</h2>
-				<p class="section-label">Want to hear from us?</p>
-				<div class="intent-grid">
-					<button
-						type="button"
-						class="intent-option"
-						class:selected={keepInformed}
-						role="checkbox"
-						aria-checked={keepInformed}
-						aria-describedby="critical-alert-notice"
-						onclick={() => (keepInformed = !keepInformed)}
-					>
-						<span class="intent-icon">
-							<span class="checkbox-box" aria-hidden="true">
-								{keepInformed ? '✓' : ''}
+				{#if !isContinuation}
+					<p class="section-label">{msgs.onboarding_optins_heading}</p>
+					<div class="intent-grid">
+						<button
+							type="button"
+							class="intent-option"
+							class:selected={keepInformed}
+							role="checkbox"
+							aria-checked={keepInformed}
+							aria-describedby="critical-alert-notice"
+							onclick={() => (keepInformed = !keepInformed)}
+						>
+							<span class="intent-icon">
+								<span class="checkbox-box" aria-hidden="true">
+									{keepInformed ? '✓' : ''}
+								</span>
+								🔔
 							</span>
-							🔔
-						</span>
-						<span class="intent-label">{msgs.onboarding_intent_keep_informed_label}</span>
-						<span class="intent-sub">
-							Get global campaign updates, plus news from your local PauseAI chapter.
-						</span>
-					</button>
-					<button
-						type="button"
-						class="intent-option"
-						class:selected={basics.newsletter}
-						role="checkbox"
-						aria-checked={basics.newsletter}
-						onclick={() => (basics.newsletter = !basics.newsletter)}
-					>
-						<span class="intent-icon">
-							<span class="checkbox-box" aria-hidden="true">
-								{basics.newsletter ? '✓' : ''}
+							<span class="intent-label">{msgs.onboarding_intent_keep_informed_label}</span>
+							<span class="intent-sub">
+								{msgs.onboarding_intent_keep_informed_sub}
 							</span>
-							📰
-						</span>
-						<span class="intent-label">{msgs.onboarding_intent_newsletter_label}</span>
-						<span class="intent-sub">
-							{msgs.onboarding_intent_newsletter_sub}
-						</span>
-					</button>
-				</div>
-				<p class="helper" id="critical-alert-notice">
-					We may occasionally send you a critical alert, even if you don't opt into any of these.
-					You can unsubscribe from any list at any time. See our
-					<LinkWithoutIcon href="/privacy" target="_blank">privacy policy</LinkWithoutIcon>.
-				</p>
-				<p class="section-label">{msgs.onboarding_intent_more_optional}</p>
+						</button>
+						<button
+							type="button"
+							class="intent-option"
+							class:selected={basics.newsletter}
+							role="checkbox"
+							aria-checked={basics.newsletter}
+							aria-describedby="critical-alert-notice"
+							onclick={() => (basics.newsletter = !basics.newsletter)}
+						>
+							<span class="intent-icon">
+								<span class="checkbox-box" aria-hidden="true">
+									{basics.newsletter ? '✓' : ''}
+								</span>
+								📰
+							</span>
+							<span class="intent-label">{msgs.onboarding_intent_newsletter_label}</span>
+							<span class="intent-sub">
+								{msgs.onboarding_intent_newsletter_sub}
+							</span>
+						</button>
+					</div>
+					<!-- A disclosure, not a hint: linked from both opt-ins via aria-describedby
+					     so screen readers don't tab straight past it. -->
+					<p class="helper" id="critical-alert-notice">
+						{@html msgs.onboarding_email_critical_notice}
+					</p>
+					<p class="section-label">{msgs.onboarding_intent_more_optional}</p>
+				{/if}
 				<div class="intent-stack" role="radiogroup" aria-label="Want to do more?">
 					{#each intentOptions as option (option.key)}
 						<button
@@ -580,28 +640,39 @@
 						</button>
 					{/each}
 				</div>
-				{@render gdprConsentField()}
+				{#if !isContinuation}
+					{@render gdprConsentField()}
+				{/if}
 				{#if onboardingLive && onboardingModeKnown}
 					{#key turnstileNonce}
 						<Turnstile bind:token={turnstileToken} />
 					{/key}
 				{/if}
-				<button type="submit" class="primary" disabled={!gdprConsent || !canSubmit}>
+				<button
+					type="submit"
+					class="primary"
+					disabled={(isContinuation ? !intent : !gdprConsent) || !canSubmit}
+				>
 					{submitting
 						? msgs.onboarding_btn_submitting
-						: intent === 'volunteer' || intent === 'lead'
+						: isContinuation || intent === 'volunteer' || intent === 'lead'
 							? msgs.onboarding_btn_continue
 							: msgs.onboarding_btn_submit}
 				</button>
-				<button type="button" class="back" onclick={() => (step = 1)}
-					>{msgs.onboarding_btn_back}</button
-				>
+				{#if !isContinuation}
+					<button type="button" class="back" onclick={() => (step = 1)}
+						>{msgs.onboarding_btn_back}</button
+					>
+				{/if}
 			</form>
 		{:else if step === 3 && !intent}
 			<!-- Path A: confirmation -->
 			<div class="confirmation">
 				<div class="checkmark">✓</div>
-				<h2>{msgs.onboarding_confirm_a_title}</h2>
+				{#if !isContinuation}
+					<!-- As on path B: the continuation already thanked them for signing up. -->
+					<h2>{msgs.onboarding_confirm_a_title}</h2>
+				{/if}
 				{@render checkboxConfirmations()}
 				{@render nextStepBlock()}
 				{@render confirmationFooter()}
@@ -611,7 +682,11 @@
 			{#if mode === 'contact'}
 				<div class="confirmation">
 					<div class="checkmark">✓</div>
-					<h2>{msgs.onboarding_confirm_b_title}</h2>
+					{#if !isContinuation}
+						<!-- The continuation already thanked them for signing up; don't
+						     thank them for joining a second time. -->
+						<h2>{msgs.onboarding_confirm_b_title}</h2>
+					{/if}
 					<p>{msgs.onboarding_confirm_b_sub}</p>
 					{@render checkboxConfirmations()}
 				</div>

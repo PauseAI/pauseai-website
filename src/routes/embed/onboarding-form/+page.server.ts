@@ -18,6 +18,7 @@ import {
 	LANGUAGES,
 	MOTIVATIONS,
 	SIGNUP_SOURCE,
+	SUBSCRIBE_SIGNUP_SOURCE,
 	SKILLS,
 	WEEKLY_HOURS,
 	type Intent
@@ -104,14 +105,22 @@ export const actions: Actions = {
 		const existingRecordId = getString(data, 'record_id')
 		// The volunteer detail fields are only present on the step-3 form post.
 		const hasVolunteerDetails = data.get('volunteer_details') === 'on'
+		// The /subscribe newsletter form. It requires the same four fields as /join,
+		// but decouples chapter sharing from the privacy consent: the /join form
+		// bundles the two, this one shares only on an explicit local-chapter tick.
+		const isSubscribeForm = data.get('subscribe_form') === '1'
+		const wantsChapter = data.get('chapter_share') === 'on'
 
-		if (!fullName || !email || !country || !city) {
+		// Creates (both forms) require all four fields; an update (the volunteer
+		// step, or the subscribe "do more" hand-off) patches an existing record and
+		// skips the check, so it can't re-require what the original create collected.
+		if (!existingRecordId && (!fullName || !email || !country || !city)) {
 			return fail(400, { message: 'Please fill in your name, email, country and city.' })
 		}
 		if (!/^\S+@\S+\.\S+$/.test(email)) {
 			return fail(400, { message: 'Please enter a valid email address.' })
 		}
-		if (!COUNTRIES.includes(country)) {
+		if (country && !COUNTRIES.includes(country)) {
 			return fail(400, { message: 'Please select a country from the list.' })
 		}
 		if (!isIntent(intent)) {
@@ -123,18 +132,44 @@ export const actions: Actions = {
 			return fail(400, { message: 'Please agree to the data processing consent to continue.' })
 		}
 
+		// Chapter sharing:
+		//  - /join create bundles it into the single privacy checkbox -> true
+		//  - /subscribe create shares only when they tick the local-updates box
+		//  - an update (the /subscribe "do more" hand-off, or the volunteer step)
+		//    leaves the signup-time choice alone, except Volunteer/Lead, whose
+		//    local involvement means they hear from a chapter regardless
+		let chapterShare: boolean | undefined
+		if (existingRecordId) {
+			if (intent === 'Volunteer' || intent === 'Lead') chapterShare = true
+			// The subscribe "do more" step reposts the signup-time choice, so backing
+			// out of Volunteer/Lead restores it rather than leaving the escalation.
+			else if (isSubscribeForm) chapterShare = wantsChapter
+		} else {
+			chapterShare = isSubscribeForm ? wantsChapter : true
+		}
+
 		const fields: FieldSet = {
-			'Full name': fullName,
 			Email: email,
-			Country: country,
-			City: city,
 			Intent: intent,
-			'Signup source': SIGNUP_SOURCE,
 			'Email subscription': keepInformed,
-			// One required consent checkbox covers both: agreeing to the privacy
-			// policy and, as part of it, sharing details with the local chapter.
-			'Data privacy policy agreed': true,
-			'GDPR chapter share permission': true
+			// Signing up is itself the privacy-policy consent: the /join checkbox
+			// and the /subscribe microcopy both link it.
+			'Data privacy policy agreed': true
+		}
+		// Which form produced the row — provenance, so it's written once at create and
+		// never on an update, or the volunteer step (which carries no subscribe marker)
+		// would rewrite a /subscribe row as a /join one.
+		if (!existingRecordId) {
+			fields['Signup source'] = isSubscribeForm ? SUBSCRIBE_SIGNUP_SOURCE : SIGNUP_SOURCE
+		}
+		// A create always writes the basics (they're validated above). An update only
+		// overwrites them when non-empty, so a partial post can't blank what the
+		// create collected.
+		if (!existingRecordId || fullName) fields['Full name'] = fullName
+		if (!existingRecordId || country) fields.Country = country
+		if (!existingRecordId || city) fields.City = city
+		if (chapterShare !== undefined) {
+			fields['GDPR chapter share permission'] = chapterShare
 		}
 
 		if (intent === 'Volunteer' && hasVolunteerDetails) {
@@ -181,10 +216,6 @@ export const actions: Actions = {
 			}
 		}
 
-		// Chapter routing is recorded only; notifying the chapter stays a manual
-		// Airtable process (plan decision 6).
-		const chapter = await lookupChapter(fetch, country)
-
 		if (live) {
 			let recordId: string | undefined = existingRecordId || undefined
 			if (recordId) {
@@ -208,6 +239,10 @@ export const actions: Actions = {
 			return { success: true, recordId }
 		}
 
+		// Chapter routing is recorded only for stub inspection; notifying the
+		// chapter stays a manual Airtable process (plan decision 6). The live
+		// branch never reads it, so it's resolved here rather than on every submit.
+		const chapter = await lookupChapter(fetch, country)
 		const submission = recordStubSubmission({
 			airtable: {
 				baseId: AIRTABLE_BASE_ID,

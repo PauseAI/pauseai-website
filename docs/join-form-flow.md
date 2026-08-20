@@ -164,7 +164,7 @@ stateDiagram-v2
     Step1 --> Browse: "I just want to take action now" (mode=browse)
     Browse: Browse mode<br/>(act-now, no signup)<br/>includes ActionCards
 
-    Step2: Step 2 — Intent<br/>(keep informed / newsletter / act-now / volunteer / lead)
+    Step2: Step 2 — Opt-ins + intent<br/>(opt-ins: keep informed / newsletter;<br/>intent: act-now / volunteer / lead)
     Step2 --> Step1: Back
     Step2 --> Submit2: Submit (POST /embed/onboarding-form?/submit)
     Submit2 --> Step3Confirm: intent = null OR act-now (contact)
@@ -192,6 +192,11 @@ stateDiagram-v2
     Step4 --> [*]
     Browse --> [*]
 ```
+
+Step 2 shows the two email opt-ins above the intent cards, with a
+critical-alert disclosure under the opt-ins (`aria-describedby` on both, so
+screen readers reach it). Nothing on the step is required: a submission with no
+opt-in and no intent is valid and lands on the critical-alerts tier only.
 
 ## Data written to Airtable
 
@@ -226,7 +231,9 @@ Enforced in the `submit` action before any write:
 - Required: `full_name`, `email`, `country`, `city`.
 - `email` must match `^\S+@\S+\.\S+$`.
 - `country` must be in `COUNTRIES`.
-- `intent` must be one of `INTENTS` (`Act now` | `Volunteer` | `Lead` | `Keep informed`).
+- `intent` must be one of `INTENTS` (`None` | `Keep informed` | `Act now` |
+  `Volunteer` | `Lead`). Step 2 submits `None` when no intent is picked; the
+  browse signup hardcodes `Act now`; `/subscribe` hardcodes `Keep informed`.
 - GDPR consent (`agree_gdpr`) required **only on the create path** — step-3
   volunteer updates are exempt because consent was captured at step 2.
 - Volunteer path additionally requires: ≥1 language, a valid `hours` value, and
