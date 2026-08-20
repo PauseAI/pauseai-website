@@ -1,11 +1,14 @@
 // Onboarding submit action, shared by /join (step 2, browse signup, step 3
 // volunteer update) and /subscribe (signup, then its "do more" hand-off).
 //
-// docs/join-form-flow.md maps the routes and owns what no single file can show:
-// the cross-file contracts between those forms and this action, and the
-// cross-system ones with Airtable, Substack and Netlify. A rule that lives at
-// one site belongs in a comment there, as below, rather than copied into the
-// document, which is how that document came to need correcting three times.
+// docs/join-form-flow.md maps the routes and collects the contracts this action
+// takes part in, including the cross-file and cross-system ones no single file
+// can show. Update it when this action's inputs or behaviour change.
+//
+// Stating a rule in both places is fine where it earns its keep: one worth
+// writing down there is usually worth a comment at the site it governs too, so
+// whoever edits that line sees it without opening the document. What does not
+// work is the document alone, which is how it came to need correcting.
 import { fail } from '@sveltejs/kit'
 import type { FieldSet } from 'airtable'
 import type { Actions } from './$types'
