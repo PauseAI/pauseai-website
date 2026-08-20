@@ -76,9 +76,10 @@ The embed wrapper does four things the `/join` route does not:
 
 This route exists so someone who only wants the newsletter can finish in one
 screen instead of walking the multi-step join flow. It asks for the same four
-basics (name, email, country, city) plus two opt-ins, and posts hidden
-`subscribe_form=1`, `mode=contact`, `intent=Keep informed`, `keep_informed=on`
-and `agree_gdpr=on`.
+basics (name, email, country, city) plus two opt-ins. Three of its hidden inputs
+carry meaning: `subscribe_form=1` is the discriminator, `agree_gdpr=on` records
+that signing up here is itself the consent, and `keep_informed=on` is posted
+unconditionally, so every completed submission subscribes.
 
 `SubscribeFlow` is a three-phase machine rather than a step counter:
 
@@ -94,13 +95,12 @@ Navigating to `/subscribe` while already on it resets the machine to `form` and
 clears every field, so a second visitor on a shared device does not see the
 previous person's details.
 
-**Entry points into this route.** The header carries a "Subscribe" item, and the
-homepage box (`Home.svelte`) passes `handoffHref="/subscribe"` to
-`NewsletterSignup`. With that prop set, `NewsletterSignup` stops posting to
-Substack and instead navigates to `/subscribe?subscribe-email=…`, both in its
-hydrated `goto()` and in its native form `action`, so the hand-off also works
-without JavaScript. Note that `?subscribe-email=` is the same parameter the
-Collagen banner on `/join` reads; the two uses are independent.
+**Entry points into this route.** `handoffHref` is the switch: given that prop,
+`NewsletterSignup` stops posting to Substack and instead navigates to
+`/subscribe?subscribe-email=…`, in both its hydrated `goto()` and its native
+form `action`, so the hand-off survives without JavaScript. The homepage box
+sets it; the Collagen banner on `/join` does not, which is why that one still
+posts to Substack. `?subscribe-email=` therefore has two independent consumers.
 
 ### The shared submit endpoint
 
@@ -112,46 +112,20 @@ action="/embed/onboarding-form?/submit"
 
 This is intentional: the `submit` action in
 `src/routes/embed/onboarding-form/+page.server.ts` is the single source of
-truth for validation, Airtable writes, and stub capture. It is not the only
-route to a Substack subscription: a `NewsletterSignup` rendered without
-`handoffHref`, as the Collagen banner on `/join` does, posts straight to
-Substack and never reaches this action.
+truth for validation, Airtable writes, and stub capture. The one exception
+worth knowing: a `NewsletterSignup` rendered without `handoffHref`, as the
+Collagen banner on `/join` does, posts straight to Substack and never reaches
+this action.
+
 The `/join` route has **no** `+page.server.ts` with a `submit` action of its
-own — it relies entirely on the embed route's action. SvelteKit's form actions
-are addressed by URL, so a form rendered on `/join` can post to
-`/embed/onboarding-form?/submit` without any special wiring.
+own. SvelteKit's form actions are addressed by URL, so a form rendered on
+`/join` can post to `/embed/onboarding-form?/submit` without any special
+wiring.
 
 The action returns `{ success: true, recordId }` in live mode and
-`{ success: true, recordId, submission }` in stub mode. The split is live
-versus stub, not create versus update: both branches return the same shape for
-either.
-`OnboardingFlow` stores the returned `recordId` in component state and sends it
-back as a hidden `record_id` input on the step-3 volunteer form, so the
-volunteer details update the existing Airtable record instead of creating a
-duplicate. `SubscribeFlow` does the same for its "Get involved" hand-off.
-
-**Create versus update is the axis most of the action's behaviour turns on**, so
-it is worth stating once: a post carrying `record_id` is an update, and
-everything else is a create. Updates skip the required-field presence check,
-never rewrite `Signup source`, and only overwrite `Full name`, `Country` and
-`City` when the post supplies a non-empty value, so a partial post cannot blank
-what the create collected.
-
-That guard covers those three fields and no others. `Email`, `Intent` and
-`Email subscription` are taken from the post on **every** call, updates
-included, and `Data privacy policy agreed` is hard-coded to `true` on every
-call whether or not the post carries `agree_gdpr`.
-
-The consequence worth knowing: an update that omits `keep_informed` writes
-`Email subscription: false`. Nothing on the server preserves it. What preserves
-it is the client reposting it from state, through **two** separate
-`{#if keepInformed}` hidden inputs in `OnboardingFlow`, one on the step-2 intent
-form and one on the step-3 volunteer form. Dropping either one silently clears
-that person's subscription flag, with no error and no other symptom.
-
-**Which form posted** is carried by `subscribe_form=1`. Only `/subscribe` sets
-it, and the action uses it for exactly two decisions: which `Signup source` to
-stamp on a create, and how to treat chapter sharing (below).
+`{ success: true, recordId, submission }` in stub mode. Both components store
+that `recordId` and repost it as a hidden `record_id` input, which is what
+makes a later submission an update instead of a duplicate.
 
 ### Component overview
 
@@ -171,20 +145,16 @@ stamp on a create, and how to treat chapter sharing (below).
 
 It delegates rendering to a few child components and snippets:
 
-| Child                                                                                                                                                         | Used for                                                                   |
-| ------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------- |
-| `Stepper.svelte`                                                                                                                                              | The numbered step indicator above the form (contact mode only).            |
-| `ActionCards.svelte`                                                                                                                                          | The "ways to help" card grid shown on the act-now confirmation / browse.   |
-| `Combobox.svelte`                                                                                                                                             | The searchable country dropdown (used in step 1 and browse signup).        |
-| `Turnstile.svelte`                                                                                                                                            | The Cloudflare Turnstile anti-bot widget rendered before every submission. |
-| `LinkWithoutIcon.svelte`, `Socials.svelte`                                                                                                                    | Footer links on confirmation screens.                                      |
-| Snippets: `honeypotField`, `countrySelect`, `hiddenBasics`, `selectCards`, `checkboxConfirmations`, `gdprConsentField`, `nextStepBlock`, `confirmationFooter` | Reusable markup fragments shared across steps.                             |
+| Child                                      | Used for                                                                   |
+| ------------------------------------------ | -------------------------------------------------------------------------- |
+| `Stepper.svelte`                           | The numbered step indicator above the form (contact mode only).            |
+| `ActionCards.svelte`                       | The "ways to help" card grid shown on the act-now confirmation / browse.   |
+| `Combobox.svelte`                          | The searchable country dropdown (used in step 1 and browse signup).        |
+| `Turnstile.svelte`                         | The Cloudflare Turnstile anti-bot widget rendered before every submission. |
+| `LinkWithoutIcon.svelte`, `Socials.svelte` | Footer links on confirmation screens.                                      |
 
-`SubscribeFlow.svelte` is deliberately much smaller: one screen of fields, the
-same honeypot and Turnstile protection, and the phase machine described under
-Route 3. It shares `Turnstile.svelte`, `Combobox.svelte` and the options in
-`options.ts` with `OnboardingFlow`, but not the step machine or the intent
-cards.
+`SubscribeFlow.svelte` is one screen of fields with the same honeypot and
+Turnstile protection, plus the phase machine described under Route 3.
 
 On mount, both components fetch `GET /api/onboarding-mode`. `OnboardingFlow`
 logs the answer to the browser console; both use it to decide whether the
@@ -273,16 +243,50 @@ question, "what do you want to do", rather than a signup:
 
 - The keep-informed and Substack opt-in cards are hidden, as is the GDPR
   consent checkbox, because both were answered on the subscribe form.
-- Picking an intent becomes **required** to submit; on a fresh visit an opt-in
-  alone is enough.
-- The stepper drops its first label and the Back button is gone, since there is
-  no step 1 to return to.
-- The submit button reads "Continue" rather than "Submit", because the record
-  already exists and this post updates it.
+- Picking an intent becomes **required** to submit. On a fresh visit an opt-in
+  alone is enough, so this is a different submit gate, not just a different
+  layout.
 - The two hidden inputs described under "Chapter sharing" are added.
 
 So the `Step2 --> Step1: Back` edge and the opt-in-only submit path in the
 diagram do not exist in this mode.
+
+## Create versus update
+
+A post carrying `record_id` is an **update**; anything else is a **create**.
+This is the axis most of the action's behaviour turns on, and its rules
+otherwise scatter across the write and the validation, so they are collected
+here.
+
+On an update:
+
+- The required-field presence check is skipped, so it cannot re-demand what the
+  create already collected. The `email` regex and the `intent` enum still run,
+  so an update carrying neither is rejected anyway.
+- `Signup source` is never rewritten. It is provenance, stamped once at create:
+  `June 2026 subscribe form` for `/subscribe`, `June 2026 onboarding flow`
+  otherwise. Without that rule the volunteer step, which carries no subscribe
+  marker, would rewrite a subscribe row as a join row.
+- GDPR consent is not required, because it was captured at create.
+- `Full name`, `Country` and `City` are overwritten only when the post supplies
+  a non-empty value, so a partial post cannot blank what the create collected.
+
+That last guard covers those three fields and no others. `Email`, `Intent` and
+`Email subscription` are taken from the post on every call, and
+`Data privacy policy agreed` is hard-coded to `true` on every call whether or
+not the post carries `agree_gdpr`.
+
+**The hazard that follows.** An update omitting `keep_informed` writes
+`Email subscription: false`, and nothing on the server preserves it. What
+preserves it is the client reposting it from state, through **two** separate
+`{#if keepInformed}` hidden inputs in `OnboardingFlow`, one on the step-2
+intent form and one on the step-3 volunteer form. Dropping either silently
+clears that person's subscription flag, with no error and no other symptom.
+Both inputs carry a comment saying so.
+
+Which form posted is carried by `subscribe_form=1`, set only by `/subscribe`.
+The action reads it for exactly two decisions: which `Signup source` to stamp
+on a create, and how to treat chapter sharing.
 
 ## Data written to Airtable
 
@@ -291,18 +295,13 @@ Target: base `appWPTGqZmUcs3NWu`, table `tblL1icZBhTV1gQ9o` ("Members").
 **Step 2 / browse signup / subscribe form (create):** `Full name`, `Email`,
 `Country`, `City`, `Intent`, `Signup source`, `Email subscription`
 (keep_informed), `Data privacy policy agreed`, `GDPR chapter share permission`.
+Every field there has a rule under "Create versus update" above or "Chapter
+sharing" below, so treat this list as the index to those rules.
 
-`Signup source` is provenance, so it is written **once at create and never on an
-update**: `June 2026 subscribe form` for `/subscribe`, `June 2026 onboarding
-flow` otherwise. Without that rule the volunteer step, which carries no
-subscribe marker, would rewrite a subscribe row as a join row.
-
-**Step 3 volunteer (update, only when `volunteer_details=on`):** adds
-`Discord Username`, `Phone`, `Languages`, `Other languages`,
-`Discovery method of PAI`, `Discovery method of PAI (Other)`, `Motivation`,
-`Motivation (Other)`, `Skills & Interests`, `Skill & Interests (Other)`,
-`Projected weekly hours`, `Volunteer Agreement`, `Code of Conduct agreed`,
-`Paying Interest`, and `Zip code` (US only).
+**Step 3 volunteer (update, only when `volunteer_details=on`):** the volunteer
+detail fields, written by the `intent === 'Volunteer' && hasVolunteerDetails`
+block in the action. That block is the list. Copying it here only creates a
+second one to keep in sync, which is how it came to be missing a field.
 
 ### Chapter sharing
 
@@ -332,71 +331,50 @@ or to the global onboarding address, and whether a US signup is copied into the
 sheet shared with PauseAI US. Leaving it unticked is therefore a real routing
 decision, not a preference flag.
 
-Those automations live in Airtable, not in this repository, so nothing here
-proves that behaviour. They are documented in the `pauseai-civicrm` repository
-under `notes/airtable-onboarder-automation-plan.md`, along with the field ids
-each condition reads.
+Those automations live in Airtable, not in this repository, so nothing here can
+prove that behaviour. Read them in the base's automation editor if you need the
+exact conditions.
 
 ## Validation rules
 
-Enforced in the `submit` action before any write:
+Enforced in the `submit` action before any write. Bot protection runs before
+all field validation; see "Bot protection" below. Which of these are relaxed on
+an update is in "Create versus update" above.
 
-### Bot protection (performed before all other validation)
-
-- **Honeypot:** a non-empty `nickname` field (a client-side hidden field) silently
-  returns success with no write — catches bots that render the page.
-- **Turnstile verification:** server-side CAPTCHA check via Cloudflare. The token
-  is validated against `TURNSTILE_SECRET_KEY`, a hostname Turnstile reports is
-  checked against the request hostname, and test/invalid tokens are rejected. Bots that POST
-  directly to the endpoint (bypassing the honeypot) are blocked here.
-
-### Field validation
-
-- Required **on a create**: `full_name`, `email`, `country`, `city`. An update
-  (the volunteer step, or the `/subscribe` hand-off) skips the presence check,
-  so it cannot re-demand what the create already collected.
-- The email regex and the `intent` enum below still run on **every** post,
-  updates included, so an update carrying neither is rejected even though the
-  presence check was skipped. Only the country check was relaxed, to run when a
-  country is supplied.
+- Required: `full_name`, `email`, `country`, `city`.
 - `email` must match `^\S+@\S+\.\S+$`.
-- `country` must be in `COUNTRIES`.
+- `country` must be in `COUNTRIES`, checked only when one is supplied.
 - `intent` must be one of `INTENTS` (`Act now` | `Volunteer` | `Lead` | `Keep informed`).
-- GDPR consent (`agree_gdpr`) required **only on the create path**. Updates are
-  exempt because consent was captured when the record was created. `/subscribe`
-  posts it as a hidden field, since signing up on that form is itself the
-  privacy-policy consent, which its microcopy links.
+- GDPR consent (`agree_gdpr`). `/subscribe` posts it as a hidden field, since
+  signing up on that form is itself the privacy-policy consent, which its
+  microcopy links.
 - Volunteer path additionally requires: ≥1 language, a valid `hours` value, and
   both `agree_volunteer` and `agree_conduct` checkboxes.
 
-## Bot protection details
+## Bot protection
 
-The form implements a two-layer bot defense:
+Two layers, catching different bots:
 
-1. **Client-side honeypot:** A hidden `nickname` input field that only bots render
-   and complete. When non-empty, the submission silently succeeds without writing
-   to Airtable or Substack, so bots learn nothing.
+1. **Client-side honeypot:** a hidden `nickname` input that only bots render and
+   complete. When non-empty the submission silently succeeds without writing
+   anything, so bots learn nothing. This catches bots that render the page.
+2. **Server-side Turnstile verification:** `checkNotSpam()` in
+   `src/lib/server/turnstile-verify.ts`, which is commented in full and is the
+   place to read the exact checks. This catches bots that POST directly to the
+   endpoint, bypassing the honeypot.
 
-2. **Server-side Turnstile verification:** Cloudflare CAPTCHA tokens are verified
-   on the server (function `checkNotSpam()` in `src/lib/server/turnstile-verify.ts`).
-   The verification checks:
-   - The `TURNSTILE_SECRET_KEY` is configured and is not a test key
-   - The token is valid and successfully verified by Cloudflare
-   - The hostname Turnstile reports for the token matches the request hostname,
-     which blocks a token minted on another origin (a deploy preview, say) and
-     replayed here. Note this is deliberately not a hard requirement: when
-     Turnstile reports no hostname the token is still accepted, so that a
-     missing field cannot lock out legitimate senders. It compares the hostname
-     only, not the full origin.
-   - In development, verification is skipped if the secret is missing; in production,
-     a missing or test secret causes the form to fail closed
+One Turnstile property is easy to over-assume, so it is worth stating here: the
+token's hostname is compared against the request hostname **only when Turnstile
+reports one**. An absent hostname is accepted by design, so that a missing field
+cannot lock out legitimate senders, and the comparison is hostname against
+hostname rather than a full origin match.
 
-   Tokens are single-use and expire after 5 minutes. After each submission
-   (success or failure), the frontend remounts the Turnstile widget via the
-   `turnstileNonce` state variable so a new token can be obtained for a retry.
+Tokens are single-use and expire after five minutes, so the client remounts the
+widget through the `turnstileNonce` state variable after every submission,
+success or failure. That is a cross-file contract: drop the remount and a retry
+posts a spent token.
 
-This combination blocks both bots that render the page (honeypot) and bots that
-POST directly to the endpoint (Turnstile verification).
+Turnstile runs in live mode only, for the reasons under "Live vs. stub mode".
 
 ## Live vs. stub mode
 

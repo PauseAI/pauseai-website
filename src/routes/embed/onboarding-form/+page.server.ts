@@ -151,6 +151,8 @@ export const actions: Actions = {
 		const fields: FieldSet = {
 			Email: email,
 			Intent: intent,
+			// Taken from the post on every call, updates included, so an update that
+			// omits keep_informed clears it. The forms repost it from state.
 			'Email subscription': keepInformed,
 			// Signing up is itself the privacy-policy consent: the /join checkbox
 			// and the /subscribe microcopy both link it.
