@@ -555,7 +555,11 @@
 				{#if recordId}
 					<input type="hidden" name="record_id" value={recordId} />
 				{/if}
-				<input type="hidden" name="intent" value={intent ? INTENT_VALUES[intent] : 'None'} />
+				<input
+					type="hidden"
+					name="intent"
+					value={intent ? INTENT_VALUES[intent] : isContinuation ? 'Keep informed' : 'None'}
+				/>
 				{#if keepInformed}
 					<input type="hidden" name="keep_informed" value="on" />
 				{/if}

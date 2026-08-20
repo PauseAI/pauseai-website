@@ -195,8 +195,10 @@ stateDiagram-v2
 
 Step 2 shows the two email opt-ins above the intent cards, with a
 critical-alert disclosure under the opt-ins (`aria-describedby` on both, so
-screen readers reach it). Nothing on the step is required: a submission with no
-opt-in and no intent is valid and lands on the critical-alerts tier only.
+screen readers reach it). On `/join`, nothing on the step is required: a
+submission with no opt-in and no intent is valid and lands on the
+critical-alerts tier only. The `/subscribe` "Get involved" continuation still
+requires picking an intent — it exists only to escalate an existing signup.
 
 ## Data written to Airtable
 
