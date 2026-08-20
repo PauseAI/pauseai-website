@@ -14,8 +14,16 @@ const noEmptyLinkText = {
 	create(context) {
 		return {
 			link(node) {
-				// Check if the link has no text content
-				if (!node.children || node.children.length === 0) {
+				// Check if the link has no text content or only whitespace
+				const isEmpty =
+					!node.children ||
+					node.children.length === 0 ||
+					node.children.every(
+						(child) =>
+							child.type === 'text' && typeof child.value === 'string' && child.value.trim() === ''
+					)
+
+				if (isEmpty) {
 					context.report({
 						node,
 						messageId: 'emptyLinkText',
