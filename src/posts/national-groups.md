@@ -16,7 +16,7 @@ description: What does it mean to be a National Group in the PauseAI network?
 - Are responsible for national-level strategy and coordination.
 - Typically have their own website, social media accounts and legal entity.
 - Do national-level lobbying and media outreach.
-- At this point, most national groups are _volunteer-run,_ exceptions are the USA, France and the United Kingdom.
+- At this point, most national groups are _volunteer-run;_ exceptions are the France and the United Kingdom.
 
 ## What PauseAI Global provides
 
@@ -69,13 +69,12 @@ _Focus: Create materials, set up platforms_
 ### **Create Materials**
 
 - **Logo**: Use the[ PauseAI Figma template](https://www.figma.com/design/iQ4PHQTi1vAVmT9Lckazqt/PauseAI-designs---editable) (includes country examples)
-- **Flyers**: Adapt from Figma or[ public Drive templates](https://drive.google.com/drive/folders/1bQ_MZ8giK-Mee4ABkO0BgcFInaXruNpa)
+- **Flyers**: Adapt from Figma or [ public Drive templates](https://drive.google.com/drive/folders/1bQ_MZ8giK-Mee4ABkO0BgcFInaXruNpa)
 - **Website**: Choose one approach:
-- - Page on pauseai.info (e.g.,[ ](https://claude.ai/nyc-action)[PauseAI Australia](https://pauseai.info/australia))
 
-  - Clone the[ GitHub repo](https://github.com/PauseAI/pauseai-website) and translate
-
-  - Custom site (like[ PauseIA France](https://pauseia.fr/))
+  - Page on pauseai.info (e.g., [ ](https://claude.ai/nyc-action)[PauseAI Australia](https://pauseai.info/australia))
+  - Clone the [ GitHub repo](https://github.com/PauseAI/pauseai-website) and translate
+  - Custom site (like [ PauseIA France](https://pauseia.fr/))
 
 ### **Set Up Communication Channels**
 
@@ -96,7 +95,7 @@ Make sure you send the info below to [patricio@pauseai.info](mailto:patricio@pau
 - The email address ending on @pauseai.info you want (usually firstname@pauseai.info or fullname@pauseai.info). You would be able to use this email for PauseAI related communications and access Google Drive files.
 - The email address where you want to receive info about new people joining through <https://pauseai.info/join> from your country. Most people choose their @pauseai.info address.
 - (Optional) For <https://pauseai.info/national-groups>: any links to social media, internal chats, a website or an email address (if you want to link a different one than the one from the previous point). Also, which is the one you want linked in <https://pauseai.info/communities>.
-- (Optional) A head shot for <https://pauseai.info/about>.
+- (Optional) A headshot for <https://pauseai.info/about>.
 - (Optional) A logo of your chapter.
 - (Optional) A Discord username to add you to the relevant channels.
 
@@ -114,14 +113,14 @@ _Focus: Plan recruitment, schedule first activities_
 
 ### **Plan Recruitment**
 
-**Target communities:**
+**Relevant communities:**
 
 - EA and AI safety groups
 - University students and faculty
 - Tech industry professionals
 - Climate and other advocacy groups
 
-**Recruitment methods:**
+**Outreach options:**
 
 - Networking events
 - Flyering and tabling (especially at student fairs)
@@ -183,9 +182,7 @@ If you're not keen to go this far, our [local communities](https://pauseai.info/
 - Large (50+): 20+ signups/month
 
 3. Signature Collection - Minimum 20 signatures to[ https://pauseai.info/statement](https://pauseai.info/statement) or approved national alternative
-
 4. Social Event - Community building (pub meetup, coffee, video call). 
-
 5. Campaign Action - One quality action aligned with:
 
 - Education: Tabling, flyering, presentations, social media
