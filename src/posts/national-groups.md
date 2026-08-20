@@ -68,13 +68,13 @@ _Focus: Create materials, set up platforms_
 
 ### **Create Materials**
 
-- **Logo**: Use the[ PauseAI Figma template](https://www.figma.com/design/iQ4PHQTi1vAVmT9Lckazqt/PauseAI-designs---editable) (includes country examples)
-- **Flyers**: Adapt from Figma or [ public Drive templates](https://drive.google.com/drive/folders/1bQ_MZ8giK-Mee4ABkO0BgcFInaXruNpa)
+- **Logo**: Use the [PauseAI Figma template](https://www.figma.com/design/iQ4PHQTi1vAVmT9Lckazqt/PauseAI-designs---editable) (includes country examples)
+- **Flyers**: Adapt from Figma or [public Drive templates](https://drive.google.com/drive/folders/1bQ_MZ8giK-Mee4ABkO0BgcFInaXruNpa)
 - **Website**: Choose one approach:
 
-  - Page on pauseai.info (e.g., [ ](https://claude.ai/nyc-action)[PauseAI Australia](https://pauseai.info/australia))
-  - Clone the [ GitHub repo](https://github.com/PauseAI/pauseai-website) and translate
-  - Custom site (like [ PauseIA France](https://pauseia.fr/))
+  - Page on pauseai.info (e.g., [PauseAI Australia](https://pauseai.info/australia))
+  - Clone the [GitHub repo](https://github.com/PauseAI/pauseai-website) and translate
+  - Custom site (like [PauseIA France](https://pauseia.fr/))
 
 ### **Set Up Communication Channels**
 
@@ -124,7 +124,7 @@ _Focus: Plan recruitment, schedule first activities_
 
 - Networking events
 - Flyering and tabling (especially at student fairs)
-- Launch event (rent a venue, invite speakers — costs reimbursable via[ ](https://claude.ai/microgrants)Microgrant)
+- Launch event (rent a venue, invite speakers — costs reimbursable via [Microgrant](/microgrants))
 
 ### **Schedule First Month Activities**
 
