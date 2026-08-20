@@ -75,7 +75,7 @@ The embed wrapper does four things the `/join` route does not:
 | `src/lib/components/onboarding/SubscribeFlow.svelte` | The single-page signup form, its thanks screen, and the hand-off into `OnboardingFlow`.                                              |
 
 This route exists so someone who only wants the newsletter can finish in one
-screen instead of walking the four-step join flow. It asks for the same four
+screen instead of walking the multi-step join flow. It asks for the same four
 basics (name, email, country, city) plus two opt-ins, and posts hidden
 `subscribe_form=1`, `mode=contact`, `intent=Keep informed`, `keep_informed=on`
 and `agree_gdpr=on`.
@@ -104,7 +104,7 @@ Collagen banner on `/join` reads; the two uses are independent.
 
 ### The shared submit endpoint
 
-All three entry points `POST` to the same action:
+All three entry points' onboarding forms `POST` to the same action:
 
 ```
 action="/embed/onboarding-form?/submit"
@@ -112,14 +112,19 @@ action="/embed/onboarding-form?/submit"
 
 This is intentional: the `submit` action in
 `src/routes/embed/onboarding-form/+page.server.ts` is the single source of
-truth for validation, Airtable writes, Substack subscription, and stub capture.
+truth for validation, Airtable writes, and stub capture. It is not the only
+route to a Substack subscription: a `NewsletterSignup` rendered without
+`handoffHref`, as the Collagen banner on `/join` does, posts straight to
+Substack and never reaches this action.
 The `/join` route has **no** `+page.server.ts` with a `submit` action of its
 own — it relies entirely on the embed route's action. SvelteKit's form actions
 are addressed by URL, so a form rendered on `/join` can post to
 `/embed/onboarding-form?/submit` without any special wiring.
 
-The action returns `{ success: true, recordId }` on a create, or
-`{ success: true, recordId: existingRecordId, submission }` in stub mode.
+The action returns `{ success: true, recordId }` in live mode and
+`{ success: true, recordId, submission }` in stub mode. The split is live
+versus stub, not create versus update: both branches return the same shape for
+either.
 `OnboardingFlow` stores the returned `recordId` in component state and sends it
 back as a hidden `record_id` input on the step-3 volunteer form, so the
 volunteer details update the existing Airtable record instead of creating a
@@ -132,13 +137,17 @@ never rewrite `Signup source`, and only overwrite `Full name`, `Country` and
 `City` when the post supplies a non-empty value, so a partial post cannot blank
 what the create collected.
 
-That guard covers those three fields and no others. `Email`, `Intent`,
-`Email subscription` and `Data privacy policy agreed` are written from the post
-on **every** call, updates included, so an update that omits `keep_informed`
-writes `Email subscription: false`. The client reposts it from state today (a
-hidden input on the step-2 form, guarded by `{#if keepInformed}`), which is the
-only thing standing between a dropped hidden input and silently clearing
-people's subscription flag with no other symptom.
+That guard covers those three fields and no others. `Email`, `Intent` and
+`Email subscription` are taken from the post on **every** call, updates
+included, and `Data privacy policy agreed` is hard-coded to `true` on every
+call whether or not the post carries `agree_gdpr`.
+
+The consequence worth knowing: an update that omits `keep_informed` writes
+`Email subscription: false`. Nothing on the server preserves it. What preserves
+it is the client reposting it from state, through **two** separate
+`{#if keepInformed}` hidden inputs in `OnboardingFlow`, one on the step-2 intent
+form and one on the step-3 volunteer form. Dropping either one silently clears
+that person's subscription flag, with no error and no other symptom.
 
 **Which form posted** is carried by `subscribe_form=1`. Only `/subscribe` sets
 it, and the action uses it for exactly two decisions: which `Signup source` to
@@ -175,9 +184,7 @@ It delegates rendering to a few child components and snippets:
 same honeypot and Turnstile protection, and the phase machine described under
 Route 3. It shares `Turnstile.svelte`, `Combobox.svelte` and the options in
 `options.ts` with `OnboardingFlow`, but not the step machine or the intent
-cards. It keeps its fields in a single object so the same helper both
-initialises them and resets them on same-page navigation, which stops the two
-from drifting apart.
+cards.
 
 On mount, both components fetch `GET /api/onboarding-mode`. `OnboardingFlow`
 logs the answer to the browser console; both use it to decide whether the
@@ -294,8 +301,8 @@ subscribe marker, would rewrite a subscribe row as a join row.
 `Discord Username`, `Phone`, `Languages`, `Other languages`,
 `Discovery method of PAI`, `Discovery method of PAI (Other)`, `Motivation`,
 `Motivation (Other)`, `Skills & Interests`, `Skill & Interests (Other)`,
-`Projected weekly hours`, `Volunteer Agreement`, `Code of Conduct agreed`, and
-`Zip code` (US only).
+`Projected weekly hours`, `Volunteer Agreement`, `Code of Conduct agreed`,
+`Paying Interest`, and `Zip code` (US only).
 
 ### Chapter sharing
 
@@ -325,6 +332,11 @@ or to the global onboarding address, and whether a US signup is copied into the
 sheet shared with PauseAI US. Leaving it unticked is therefore a real routing
 decision, not a preference flag.
 
+Those automations live in Airtable, not in this repository, so nothing here
+proves that behaviour. They are documented in the `pauseai-civicrm` repository
+under `notes/airtable-onboarder-automation-plan.md`, along with the field ids
+each condition reads.
+
 ## Validation rules
 
 Enforced in the `submit` action before any write:
@@ -334,8 +346,8 @@ Enforced in the `submit` action before any write:
 - **Honeypot:** a non-empty `nickname` field (a client-side hidden field) silently
   returns success with no write — catches bots that render the page.
 - **Turnstile verification:** server-side CAPTCHA check via Cloudflare. The token
-  is validated against `TURNSTILE_SECRET_KEY`, the token's hostname is verified to
-  match the request origin, and test/invalid tokens are rejected. Bots that POST
+  is validated against `TURNSTILE_SECRET_KEY`, a hostname Turnstile reports is
+  checked against the request hostname, and test/invalid tokens are rejected. Bots that POST
   directly to the endpoint (bypassing the honeypot) are blocked here.
 
 ### Field validation
@@ -370,8 +382,12 @@ The form implements a two-layer bot defense:
    The verification checks:
    - The `TURNSTILE_SECRET_KEY` is configured and is not a test key
    - The token is valid and successfully verified by Cloudflare
-   - The token's hostname matches the request origin (prevents token replay from
-     other origins like deploy previews)
+   - The hostname Turnstile reports for the token matches the request hostname,
+     which blocks a token minted on another origin (a deploy preview, say) and
+     replayed here. Note this is deliberately not a hard requirement: when
+     Turnstile reports no hostname the token is still accepted, so that a
+     missing field cannot lock out legitimate senders. It compares the hostname
+     only, not the full origin.
    - In development, verification is skipped if the secret is missing; in production,
      a missing or test secret causes the form to fail closed
 
