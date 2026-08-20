@@ -16,7 +16,7 @@ description: What does it mean to be a National Group in the PauseAI network?
 - Are responsible for national-level strategy and coordination.
 - Typically have their own website, social media accounts and legal entity.
 - Do national-level lobbying and media outreach.
-- At this point, most national groups are _volunteer-run;_ exceptions are the France and the United Kingdom.
+- At this point, most national groups are _volunteer-run;_ exceptions are France and the United Kingdom.
 
 ## What PauseAI Global provides
 
