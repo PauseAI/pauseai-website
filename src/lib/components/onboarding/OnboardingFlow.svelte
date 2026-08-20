@@ -333,19 +333,19 @@
 			const startValue = onStart()
 			return ({ result }) => {
 				submitting = false
+				// Every result, including the unexpected branch: verification spends the
+				// token whether or not the write succeeded, so a retry needs a fresh
+				// widget or it reposts a spent one.
+				turnstileToken = ''
+				turnstileNonce += 1
 				if (result.type === 'success') {
 					// Remember the created record so later submissions in the
 					// same flow update it rather than create a duplicate.
 					if (typeof result.data?.recordId === 'string') {
 						recordId = result.data.recordId
 					}
-					turnstileToken = ''
-					turnstileNonce += 1
 					onSuccess(result.data, startValue)
 				} else if (result.type === 'failure') {
-					// Reset Turnstile widget on failure so user can retry
-					turnstileToken = ''
-					turnstileNonce += 1
 					toast.error(String(result.data?.message ?? msgs.onboarding_error_generic))
 				} else {
 					toast.error(msgs.onboarding_error_unexpected)
@@ -557,6 +557,9 @@
 					name="intent"
 					value={intent ? INTENT_VALUES[intent] : 'Keep informed'}
 				/>
+				<!-- The server writes Email subscription from this post every time, so a
+				     post without this input clears the flag. Both forms that can update
+				     the record have to carry it. -->
 				{#if keepInformed}
 					<input type="hidden" name="keep_informed" value="on" />
 				{/if}
@@ -799,6 +802,9 @@
 				{#if recordId}
 					<input type="hidden" name="record_id" value={recordId} />
 				{/if}
+				<!-- The server writes Email subscription from this post every time, so a
+				     post without this input clears the flag. Both forms that can update
+				     the record have to carry it. -->
 				{#if keepInformed}
 					<input type="hidden" name="keep_informed" value="on" />
 				{/if}

@@ -1,7 +1,15 @@
-// Onboarding submit action — shared by step 2, browse signup, and step 3
-// volunteer update. See docs/join-form-flow.md for the full flow contract
-// (fields, validation, live/stub branches). Keep that document in sync when
-// changing the action's inputs or behavior.
+// Onboarding submit action, shared by /join (step 2, browse signup, step 3
+// volunteer update), /embed/onboarding-form (the iframeable wrapper around the
+// same component) and /subscribe (signup, then its "do more" hand-off).
+//
+// docs/join-form-flow.md maps the routes and collects the contracts this action
+// takes part in, including the cross-file and cross-system ones no single file
+// can show. Update it when this action's inputs or behaviour change.
+//
+// Stating a rule in both places is fine where it earns its keep: one worth
+// writing down there is usually worth a comment at the site it governs too, so
+// whoever edits that line sees it without opening the document. What does not
+// work is the document alone, which is how it came to need correcting.
 import { fail } from '@sveltejs/kit'
 import type { FieldSet } from 'airtable'
 import type { Actions } from './$types'
@@ -94,14 +102,13 @@ export const actions: Actions = {
 		const mode = getString(data, 'mode') === 'browse' ? 'browse' : 'contact'
 		const newsletter = data.get('newsletter') === 'on'
 		const keepInformed = data.get('keep_informed') === 'on'
-		// GDPR consent (bundled with local-chapter sharing) gates every
-		// record-creating submission. Step 3 volunteer posts update an existing
-		// record and carry no checkbox, so the check below exempts updates.
+		// GDPR consent gates every record-creating submission. /join bundles it with
+		// local-chapter sharing in one checkbox; /subscribe asks the two separately.
+		// Updates carry no checkbox, so the check below exempts them.
 		const gdprAgreed = data.get('agree_gdpr') === 'on'
-		// Set when a step-2 submission already created the person's record:
-		// the later volunteer-form submission updates it instead of creating a
-		// duplicate. Step 2 sends every path through here, so the newsletter
-		// and Substack subscription happen right after step 2.
+		// Set when an earlier submission already created the person's record, so
+		// this one updates it instead of creating a duplicate: /join step 2 then the
+		// volunteer form, or /subscribe then its "do more" hand-off.
 		const existingRecordId = getString(data, 'record_id')
 		// The volunteer detail fields are only present on the step-3 form post.
 		const hasVolunteerDetails = data.get('volunteer_details') === 'on'
@@ -151,6 +158,8 @@ export const actions: Actions = {
 		const fields: FieldSet = {
 			Email: email,
 			Intent: intent,
+			// Taken from the post on every call, updates included, so an update that
+			// omits keep_informed clears it. The forms repost it from state.
 			'Email subscription': keepInformed,
 			// Signing up is itself the privacy-policy consent: the /join checkbox
 			// and the /subscribe microcopy both link it.
@@ -230,8 +239,8 @@ export const actions: Actions = {
 				if (!recordId) {
 					return fail(502, { message: 'Sorry, we could not save your details. Please try again.' })
 				}
-				// Subscription happens on the initial (step 2) submission only;
-				// the volunteer-form update never re-subscribes.
+				// Subscription happens on the create only, which for /subscribe is its own
+				// signup rather than a step 2. No update re-subscribes.
 				if (newsletter) {
 					await subscribeToSubstackNewsletter(email)
 				}
@@ -239,9 +248,10 @@ export const actions: Actions = {
 			return { success: true, recordId }
 		}
 
-		// Chapter routing is recorded only for stub inspection; notifying the
-		// chapter stays a manual Airtable process (plan decision 6). The live
-		// branch never reads it, so it's resolved here rather than on every submit.
+		// Recorded only for stub inspection, so it is resolved here rather than on
+		// every submit. The live branch has no use for it: the Airtable automations
+		// run their own country-to-chapter lookup, and decide who hears about the
+		// signup from the chapter-share field written above.
 		const chapter = await lookupChapter(fetch, country)
 		const submission = recordStubSubmission({
 			airtable: {
