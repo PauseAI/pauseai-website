@@ -161,7 +161,6 @@
 	<h1>{title}</h1>
 	<p class="intro">
 		Get in touch with the PauseAI team.<br />
-		Based in the US? Reach out to <Link href="https://www.pauseai-us.org/">PauseAI US</Link> directly.
 	</p>
 
 	<div class="tabs">
