@@ -1,6 +1,6 @@
 ---
 title: Tax-deductible Donations to PauseAI
-date: '2025-12-03'
+date: 2025-12-03
 ---
 
 PauseAI Global is a [Dutch ANBI](/organization) (public-benefit charity). Tax benefits differ by country; in many cases donors must give through a **local** registered charity to receive deductions.
@@ -9,8 +9,6 @@ PauseAI Global is a [Dutch ANBI](/organization) (public-benefit charity). Tax be
 
 Direct donations to PauseAI Global are _not_ tax-deductible.
 PauseAI Global has an NGOsource Equivalency Determination, which allows US foundations and Donor-Advised Funds to grant to us efficiently.
-US donors who want tax benefits should consider donating to **[PauseAI US](https://www.pauseai-us.org/) (501(c)(3))**.
-If you prefer your donation to support PauseAI Global specifically, you may indicate this as a non-binding preference in your donation message to PauseAI US.
 
 ## 🇬🇧 United Kingdom
 
@@ -38,7 +36,7 @@ Direct donations are not deductible; donors needing tax benefits can give throug
 
 ## 🇳🇴 Norway
 
-Norway does _not_ grant deductions for foreign charities; only donations to **approved Norwegian organisations** qualify.  
+Norway does _not_ grant deductions for foreign charities; only donations to **approved Norwegian organisations** qualify.\
 See **[Skatteetaten](https://www.skatteetaten.no)**.
 
 ## 🇸🇪 Sweden

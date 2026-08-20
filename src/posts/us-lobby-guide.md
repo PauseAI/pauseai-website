@@ -1,6 +1,9 @@
 ---
 title: US Lobbying Guide
-description: The goal of this guide is to empower people – everyday citizens who lack any background in lobbying or advocacy, but who are concerned about AI – to meet with their elected officials directly and make their concerns heard as effectively as possible.
+description: The goal of this guide is to empower people – everyday citizens who
+  lack any background in lobbying or advocacy, but who are concerned about AI –
+  to meet with their elected officials directly and make their concerns heard as
+  effectively as possible.
 ---
 
 The goal of this guide is to **empower people** – everyday citizens who lack any background in lobbying or advocacy, but who are concerned about AI – to meet with their elected officials directly and make their concerns heard as effectively as possible.
@@ -46,10 +49,10 @@ All U.S. Congressional offices have both a Washington, D.C. office and a local d
 - If you are unable to visit your D.C. office in person, some offices do offer **scheduled meetings online** (though this is more likely for Democratic offices rather than Republican ones). Requesting a Zoom meeting with your D.C. office can be a good bet.
   **Options for scheduling meetings, ranked:**
 
-1.  In-person meeting with D.C. office
-2.  Online meeting with D.C. office
-3.  In-person meeting with district office
-4.  Online meeting with district office
+1. In-person meeting with D.C. office
+2. Online meeting with D.C. office
+3. In-person meeting with district office
+4. Online meeting with district office
 
 ### Step 2: Do your research
 
@@ -59,17 +62,25 @@ Some **questions to answer** include:
 
 - What statements has my legislator made about AI? A quick google search, e.g. “Sen. Peters on AI risk” can go a long way.
 - Does my legislator serve on any relevant committees? You can [find committee assignments here](https://www.congress.gov/members).
+
   - Relevant House committees:
+
     - Homeland Security
     - Education and the Workforce
     - Space, Science, and Technology
+
   - Relevant Senate committees
+
     - Homeland Security and Governmental Affairs
     - Health, Education, Labor, and Pensions
     - Commerce, Science, and Transportation
+
 - Has my legislator cosponsored or signed any bills related to AI?
+
   - Database of relevant bills
+
 - What are my legislator’s policy priorities? How do these relate to AI?
+
   - You can typically find your legislator’s policy priorities on the “issues” section of their website ([example](https://www.peters.senate.gov/about/issues)).
   - Different policy priorities may relate to AI in different ways. For instance, labor priorities may lead to concerns about job loss/displacement. National security priorities may lead to concerns about malicious actors using AI, etc.
 
@@ -86,26 +97,31 @@ Typically, **lobby meetings last ~30 minutes** and follow a **concrete agenda**.
 - Introduce yourself, describe your background and the issue you’re meeting to discuss, and thank staffers for their time.
 - Make sure to leave time for staffers to introduce themselves.
   **Describe issue of concern (10 minutes)**:
-
 - **Tell a story** with the following structure:
+
   - Context
   - Problem
+
     - Personal story: How this affects you as a constituent.
+
   - Solution
   - What lawmakers can do about it.
+
 - Sample story: - Context: In recent years, AI capabilities have skyrocketed, taking many researchers by surprise. - Problem: Many experts worry that future AIs could pose an existential risk to humanity. We’ve seen growing constituent concern that AI could be used to manufacture pathogens or hack into nuclear launch systems. - Personal story: As a parent, I am frightened about my child’s future, and I want to make sure he grows up in a world where his life is not in danger. - Solution: There need to be safeguards on AI development, such as mandatory [third-party evaluations](/evaluations) to ensure AI systems aren’t capable of malicious use. - What lawmakers can do: That’s why we support H.R. XXX, sponsored by Rep. XYZ, to establish mandatory evaluations for all AI systems above a certain capabilities threshold.
   **Your ask (5 minutes)**:
-
 - Now that you’ve explained the issue, you need to make a clear ask.
 - Sample ask: Can we count on Representative XYZ to co-sponsor/support the bill?
+
   - The staffer likely won’t have a definitive answer, but will say something like ‘I can’t speak for the Congressman, but will get back to you.’
+
 - Note: if you don’t have a specific bill you’re supporting, it still helps to make a specific ‘ask.’ This could be e.g. “Congressman X should make AI safety a priority and talk to his colleagues.”
   **Fact-finding and Relationship-building (10 minutes)**: Ask questions to better understand your Congressperson’s perspective on the issue and related issues.
-
 - Possible questions include:
+
   - What other movement in Congress have you seen around this issue?
   - What positions does your Congressperson have on AI and technology policy more broadly?
   - What are your Congressperson’s top priorities this legislative session?
+
 - Thank them again for their time & tell them you’ll follow up.
 
 ### Best practices when meeting
@@ -148,4 +164,4 @@ The thing to remember is that Congressional staff want to hear from you. It is t
 
 Be persistent. If nobody gets back to you, call their office and schedule a meeting over the phone. Follow up as needed. If you’re persistent enough, you will get a meeting.
 
-_Credit to Felix De Simone, PauseAI's organizing director_
+_Credit to Felix De Simone._
