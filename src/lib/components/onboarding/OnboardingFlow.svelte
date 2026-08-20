@@ -573,8 +573,8 @@
 				{/if}
 				<h2>{msgs.onboarding_step2_heading}</h2>
 				{#if !isContinuation}
-					<p class="section-label">{msgs.onboarding_optins_heading}</p>
-					<div class="intent-grid">
+					<p class="section-label" id="optins-heading">{msgs.onboarding_optins_heading}</p>
+					<div class="intent-grid" role="group" aria-labelledby="optins-heading">
 						<button
 							type="button"
 							class="intent-option"
@@ -624,7 +624,11 @@
 					</p>
 					<p class="section-label">{msgs.onboarding_intent_more_optional}</p>
 				{/if}
-				<div class="intent-stack" role="radiogroup" aria-label="Want to do more?">
+				<div
+					class="intent-stack"
+					role="radiogroup"
+					aria-label={msgs.onboarding_intent_more_optional}
+				>
 					{#each intentOptions as option (option.key)}
 						<button
 							type="button"
