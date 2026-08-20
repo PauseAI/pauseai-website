@@ -1,7 +1,11 @@
-// Onboarding submit action — shared by step 2, browse signup, and step 3
-// volunteer update. See docs/join-form-flow.md for the full flow contract
-// (fields, validation, live/stub branches). Keep that document in sync when
-// changing the action's inputs or behavior.
+// Onboarding submit action, shared by /join (step 2, browse signup, step 3
+// volunteer update) and /subscribe (signup, then its "do more" hand-off).
+//
+// docs/join-form-flow.md maps the routes and owns what no single file can show:
+// the cross-file contracts between those forms and this action, and the
+// cross-system ones with Airtable, Substack and Netlify. A rule that lives at
+// one site belongs in a comment there, as below, rather than copied into the
+// document, which is how that document came to need correcting three times.
 import { fail } from '@sveltejs/kit'
 import type { FieldSet } from 'airtable'
 import type { Actions } from './$types'
@@ -241,9 +245,10 @@ export const actions: Actions = {
 			return { success: true, recordId }
 		}
 
-		// Chapter routing is recorded only for stub inspection; notifying the
-		// chapter stays a manual Airtable process (plan decision 6). The live
-		// branch never reads it, so it's resolved here rather than on every submit.
+		// Recorded only for stub inspection, so it is resolved here rather than on
+		// every submit. The live branch has no use for it: the Airtable automations
+		// run their own country-to-chapter lookup, and decide who hears about the
+		// signup from the chapter-share field written above.
 		const chapter = await lookupChapter(fetch, country)
 		const submission = recordStubSubmission({
 			airtable: {
