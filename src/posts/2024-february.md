@@ -33,22 +33,12 @@ AI is rapidly becoming more powerful, far faster than virtually any AI scientist
 
 According to their charter, “OpenAI’s mission is to ensure that artificial general intelligence (AGI)—by which we mean highly autonomous systems that outperform humans at all economically valuable work—benefits all of humanity.” But many humans value their work and find meaning in it, and hence do not want their jobs to be done by an AGI instead. What protest co-organizer Sam Kirchner of No AGI calls “the Psychological Threat” applies even if AGI doesn't kill us.
 
-## Contact
-
-- Holly Elmore, PauseAI US Director ([Twitter](https://twitter.com/ilex_ulmus))
-- Sam Kirchner, No AGI
-
 ## Media Coverage
 
 - [Bloomberg](https://www.bloomberg.com/news/newsletters/2024-02-13/ai-protest-at-openai-hq-in-san-francisco-focuses-on-military-work)
 - [ReadWrite](https://readwrite.com/stop-working-with-pentagon-openai-staff-face-protests/)
 - [VentureBeat](https://venturebeat.com/ai/protesters-gather-outside-openai-office-opposing-military-ai-and-agi/)
 
-## Important Update (November 2025)
-
-PauseAI is aware of recent security threats involving Sam Kirchner (StopAI/No AGI). PauseAI strictly condemns these actions and threats of violence.
-
-**Clarification of Involvement:** This past event (Feb 2024) was a **coalition protest** involving separate organizations. Sam Kirchner participated solely as a representative of the external group "No AGI" (now StopAI). He has never been a member, volunteer, or leader within PauseAI. We have no affiliation with him or his organization.
 
 <WidgetConsent>
 <div>
