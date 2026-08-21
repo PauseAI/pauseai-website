@@ -354,8 +354,9 @@ an update is in "Create versus update" above.
 - `country` must be in `COUNTRIES`, checked only when one is supplied.
 - `intent` must be one of `INTENTS` (`None` | `Keep informed` | `Act now` |
   `Volunteer` | `Lead`). Step 2 submits `None` when no intent is picked; the
-  browse signup hardcodes `Act now`; `/subscribe` hardcodes `None`. Nothing writes
-  `Keep informed` any more; it remains a valid value only for rows already carrying it.
+  browse signup hardcodes `Act now`; `/subscribe` hardcodes `None`. No form emits
+  `Keep informed` any more, but it stays in `INTENTS` so a post carrying it is still
+  accepted rather than rejected.
 - GDPR consent (`agree_gdpr`) required **only on the create path** — step-3
   volunteer updates are exempt because consent was captured at step 2.
   `/subscribe` posts it as a hidden field, since signing up on that form is
