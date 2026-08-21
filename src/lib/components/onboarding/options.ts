@@ -1,9 +1,11 @@
 // Controlled vocabularies for the onboarding pipeline form.
 import type { OnboardingMessages } from './messages'
 
-// 'None' is what /join step 2 submits when nothing is picked; /subscribe keeps
-// writing 'Keep informed'. Each value must exist as an Airtable Intent select
-// option and in the CRM's member_intent vocabulary.
+// 'None' is what both forms submit when the person picked no intent: /join step 2
+// offers Act now / Volunteer / Lead, and /subscribe never asks. 'Keep informed' is
+// no longer written by anything, and stays only so historical rows typecheck.
+// Each value must exist as an Airtable Intent select option and in the CRM's
+// member_intent vocabulary.
 export const INTENTS = ['None', 'Keep informed', 'Act now', 'Volunteer', 'Lead'] as const
 export type Intent = (typeof INTENTS)[number]
 export type IntentKey = 'act-now' | 'volunteer' | 'lead'
