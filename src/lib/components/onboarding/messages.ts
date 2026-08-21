@@ -211,10 +211,10 @@ const en: OnboardingMessages = {
 	onboarding_intent_act_now_sub: 'Show me what I can do today.',
 	onboarding_intent_volunteer_label: 'I want to volunteer regularly',
 	onboarding_intent_volunteer_sub:
-		'Help me find a role that fits. (Includes local chapter updates.)',
+		'Help me find a role that fits. (Your local chapter will be in touch.)',
 	onboarding_intent_lead_label: 'I want to lead',
 	onboarding_intent_lead_sub:
-		"I'm ready to organize in my country or region. (Includes local chapter updates.)",
+		"I'm ready to organize in my country or region. (Your local chapter will be in touch.)",
 	onboarding_gdpr_consent:
 		'I agree to the <a target="_blank" rel="noopener noreferrer" href="/privacy">Privacy Policy</a>. I understand my details will be shared with my local PauseAI chapter (which may be a separate entity to PauseAI Global) for local coordination.&nbsp;*',
 	onboarding_btn_submit: 'Submit →',
@@ -426,10 +426,10 @@ const de: OnboardingMessages = {
 	onboarding_intent_act_now_sub: 'Zeig mir, was ich heute tun kann.',
 	onboarding_intent_volunteer_label: 'Ich möchte regelmäßig freiwillig tätig sein',
 	onboarding_intent_volunteer_sub:
-		'Hilf mir, eine passende Rolle zu finden. (Inklusive Updates aus der lokalen Gruppe.)',
+		'Hilf mir, eine passende Rolle zu finden. (Deine lokale Gruppe meldet sich bei dir.)',
 	onboarding_intent_lead_label: 'Ich möchte leiten',
 	onboarding_intent_lead_sub:
-		'Ich bin bereit, in meinem Land oder meiner Region zu organisieren. (Inklusive Updates aus der lokalen Gruppe.)',
+		'Ich bin bereit, in meinem Land oder meiner Region zu organisieren. (Deine lokale Gruppe meldet sich bei dir.)',
 	onboarding_gdpr_consent:
 		'Ich stimme der <a target="_blank" rel="noopener noreferrer" href="/privacy">Datenschutzrichtlinie</a> zu. Mir ist bewusst, dass meine Daten zur lokalen Koordination an meine lokale PauseAI-Gruppe weitergegeben werden (die eine von PauseAI Global getrennte Einheit sein kann).&nbsp;*',
 	onboarding_btn_submit: 'Absenden →',
@@ -651,10 +651,10 @@ const fr: OnboardingMessages = {
 	onboarding_intent_act_now_sub: "Montre-moi ce que je peux faire aujourd'hui.",
 	onboarding_intent_volunteer_label: 'Je veux être bénévole régulièrement',
 	onboarding_intent_volunteer_sub:
-		'Aide-moi à trouver un rôle qui me correspond. (Inclut les nouvelles du groupe local.)',
+		'Aide-moi à trouver un rôle qui me correspond. (Ton groupe local te contactera.)',
 	onboarding_intent_lead_label: 'Je veux prendre la tête',
 	onboarding_intent_lead_sub:
-		'Je suis prêt·e à organiser dans mon pays ou ma région. (Inclut les nouvelles du groupe local.)',
+		'Je suis prêt·e à organiser dans mon pays ou ma région. (Ton groupe local te contactera.)',
 	onboarding_gdpr_consent:
 		'J\'accepte la <a target="_blank" rel="noopener noreferrer" href="/privacy">Politique de confidentialité</a>. Je comprends que mes données seront partagées avec mon groupe PauseAI local (qui peut être une entité distincte de PauseAI Global) à des fins de coordination locale.&nbsp;*',
 	onboarding_btn_submit: 'Envoyer →',
