@@ -206,7 +206,7 @@ stateDiagram-v2
     Step1 --> Browse: "I just want to take action now" (mode=browse)
     Browse: Browse mode<br/>(act-now, no signup)<br/>includes ActionCards
 
-    Step2: Step 2 — Intent<br/>(keep informed / newsletter / act-now / volunteer / lead)
+    Step2: Step 2 — Opt-ins + intent<br/>(opt-ins: keep informed / newsletter;<br/>intent: act-now / volunteer / lead)
     Step2 --> Step1: Back
     Step2 --> Submit2: Submit (POST /embed/onboarding-form?/submit)
     Submit2 --> Step3Confirm: intent = null OR act-now (contact)
@@ -235,6 +235,12 @@ stateDiagram-v2
     Browse --> [*]
 ```
 
+Step 2 shows the two email opt-ins above the intent cards, with a
+critical-alert disclosure under the opt-ins (`aria-describedby` on both, so
+screen readers reach it). On `/join`, neither the opt-ins nor an intent is
+required: a submission carrying only the GDPR consent is valid and lands on
+the critical-alerts tier only.
+
 ### Continuation mode
 
 The diagram above describes a fresh `/join` visit. When `OnboardingFlow` is
@@ -245,9 +251,9 @@ question, "what do you want to do", rather than a signup:
 
 - The keep-informed and Substack opt-in cards are hidden, as is the GDPR
   consent checkbox, because both were answered on the subscribe form.
-- Picking an intent becomes **required** to submit. On a fresh visit an opt-in
-  alone is enough, so this is a different submit gate, not just a different
-  layout.
+- Picking an intent becomes **required** to submit. On a fresh visit nothing
+  beyond the GDPR consent is required, so this is a different submit gate, not
+  just a different layout.
 - The two hidden inputs described under "Chapter sharing" are added.
 
 So the `Step2 --> Step1: Back` edge and the opt-in-only submit path in the
@@ -346,10 +352,13 @@ an update is in "Create versus update" above.
 - Required: `full_name`, `email`, `country`, `city`.
 - `email` must match `^\S+@\S+\.\S+$`.
 - `country` must be in `COUNTRIES`, checked only when one is supplied.
-- `intent` must be one of `INTENTS` (`Act now` | `Volunteer` | `Lead` | `Keep informed`).
-- GDPR consent (`agree_gdpr`). `/subscribe` posts it as a hidden field, since
-  signing up on that form is itself the privacy-policy consent, which its
-  microcopy links.
+- `intent` must be one of `INTENTS` (`None` | `Keep informed` | `Act now` |
+  `Volunteer` | `Lead`). Step 2 submits `None` when no intent is picked; the
+  browse signup hardcodes `Act now`; `/subscribe` hardcodes `Keep informed`.
+- GDPR consent (`agree_gdpr`) required **only on the create path** — step-3
+  volunteer updates are exempt because consent was captured at step 2.
+  `/subscribe` posts it as a hidden field, since signing up on that form is
+  itself the privacy-policy consent, which its microcopy links.
 - Volunteer path additionally requires: ≥1 language, a valid `hours` value, and
   both `agree_volunteer` and `agree_conduct` checkboxes.
 

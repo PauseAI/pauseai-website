@@ -123,6 +123,8 @@
 	// back so the server updates the record instead of creating another. When the
 	// /subscribe flow hands off, it's seeded with the record already created there.
 	let recordId = $state(initialRecordId)
+	// Never pre-checked on /join: marketing consent must be freely given, for
+	// Volunteers/Leads too (operational volunteer comms ride legitimate interest).
 	let keepInformed = $state(initialKeepInformed)
 	let submitting = $state(false)
 	let browseSignedUp = $state(false)
@@ -203,9 +205,9 @@
 	const isContinuation = $derived(startStep === 2 && !!initialRecordId)
 
 	// GDPR data-processing consent gating every record-creating submission
-	// (step 2 + browse). Chapter-sharing consent is not bundled here: it lives
-	// in the optional "Keep me informed" opt-in, since we only share details
-	// with a local chapter when the person asks to be connected to one.
+	// (step 2 + browse). On /join this checkbox also carries chapter sharing:
+	// the server writes share permission on every /join create. /subscribe asks
+	// for chapter sharing as its own checkbox instead.
 	// Stays false so it never pre-checks a visible consent box; the continuation
 	// already consented on the subscribe form and is exempted at the submit gate.
 	let gdprConsent = $state(false)
@@ -555,7 +557,7 @@
 				<input
 					type="hidden"
 					name="intent"
-					value={intent ? INTENT_VALUES[intent] : 'Keep informed'}
+					value={intent ? INTENT_VALUES[intent] : isContinuation ? 'Keep informed' : 'None'}
 				/>
 				<!-- The server writes Email subscription from this post every time, so a
 				     post without this input clears the flag. Both forms that can update
@@ -573,13 +575,15 @@
 				{/if}
 				<h2>{msgs.onboarding_step2_heading}</h2>
 				{#if !isContinuation}
-					<div class="intent-grid">
+					<p class="section-label" id="optins-heading">{msgs.onboarding_optins_heading}</p>
+					<div class="intent-grid" role="group" aria-labelledby="optins-heading">
 						<button
 							type="button"
 							class="intent-option"
 							class:selected={keepInformed}
 							role="checkbox"
 							aria-checked={keepInformed}
+							aria-describedby="critical-alert-notice"
 							onclick={() => (keepInformed = !keepInformed)}
 						>
 							<span class="intent-icon">
@@ -599,6 +603,7 @@
 							class:selected={basics.newsletter}
 							role="checkbox"
 							aria-checked={basics.newsletter}
+							aria-describedby="critical-alert-notice"
 							onclick={() => (basics.newsletter = !basics.newsletter)}
 						>
 							<span class="intent-icon">
@@ -613,9 +618,17 @@
 							</span>
 						</button>
 					</div>
+					<p class="helper" id="critical-alert-notice">
+						<!-- eslint-disable-next-line svelte/no-at-html-tags -->
+						{@html msgs.onboarding_email_critical_notice}
+					</p>
 					<p class="section-label">{msgs.onboarding_intent_more_optional}</p>
 				{/if}
-				<div class="intent-stack" role="radiogroup" aria-label="Want to do more?">
+				<div
+					class="intent-stack"
+					role="radiogroup"
+					aria-label={msgs.onboarding_intent_more_optional}
+				>
 					{#each intentOptions as option (option.key)}
 						<button
 							type="button"
@@ -647,9 +660,7 @@
 				<button
 					type="submit"
 					class="primary"
-					disabled={(isContinuation ? !intent : !intent && !keepInformed && !basics.newsletter) ||
-						(!isContinuation && !gdprConsent) ||
-						!canSubmit}
+					disabled={(isContinuation ? !intent : !gdprConsent) || !canSubmit}
 				>
 					{submitting
 						? msgs.onboarding_btn_submitting
@@ -1077,7 +1088,7 @@
 
 	h2 {
 		font-family: var(--font-heading);
-		margin-top: 0;
+		margin: 0;
 	}
 
 	.browse-banner {
@@ -1102,7 +1113,7 @@
 		display: flex;
 		flex-direction: column;
 		align-items: stretch;
-		gap: 1rem;
+		gap: 0.75rem;
 		width: 100%;
 		max-width: none;
 	}
@@ -1520,7 +1531,7 @@
 		text-transform: uppercase;
 		letter-spacing: 0.05em;
 		opacity: 0.7;
-		margin: 1.5rem 0 0.5rem 0;
+		margin: 0.75rem 0 0.5rem 0;
 	}
 
 	.confirmation-footer :global(.discord-button) {
