@@ -80,8 +80,8 @@ basics (name, email, country, city) plus two opt-ins. Four of its hidden inputs
 carry meaning: `subscribe_form=1` is the discriminator, `agree_gdpr=on` records
 that signing up here is itself the consent, `keep_informed=on` is posted
 unconditionally so every completed submission subscribes, and
-`intent=Keep informed` is fixed, so every row this route creates starts at that
-intent whatever the person later chooses.
+`intent=None` is fixed, because the form never asks about intent: the row records
+no intent until the person picks one in the "Get involved" continuation.
 
 `SubscribeFlow` is a three-phase machine rather than a step counter:
 
@@ -354,7 +354,8 @@ an update is in "Create versus update" above.
 - `country` must be in `COUNTRIES`, checked only when one is supplied.
 - `intent` must be one of `INTENTS` (`None` | `Keep informed` | `Act now` |
   `Volunteer` | `Lead`). Step 2 submits `None` when no intent is picked; the
-  browse signup hardcodes `Act now`; `/subscribe` hardcodes `Keep informed`.
+  browse signup hardcodes `Act now`; `/subscribe` hardcodes `None`. Nothing writes
+  `Keep informed` any more; it remains a valid value only for rows already carrying it.
 - GDPR consent (`agree_gdpr`) required **only on the create path** — step-3
   volunteer updates are exempt because consent was captured at step 2.
   `/subscribe` posts it as a hidden field, since signing up on that form is
