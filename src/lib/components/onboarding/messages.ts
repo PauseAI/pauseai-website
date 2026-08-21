@@ -203,7 +203,7 @@ const en: OnboardingMessages = {
 		'We may occasionally send you a critical alert, even if you don\'t opt into any of these. You can unsubscribe from any list at any time. See our <a target="_blank" rel="noopener noreferrer" href="/privacy">privacy policy</a>.',
 	onboarding_intent_keep_informed_label: 'Keep me informed',
 	onboarding_intent_keep_informed_sub:
-		'Get global campaign updates, plus news from your local PauseAI chapter.',
+		'Get global campaign updates, plus news and ways to help from your local PauseAI chapter.',
 	onboarding_intent_newsletter_label: 'Subscribe to our Substack',
 	onboarding_intent_newsletter_sub: "AI news from the PauseAI team's perspective.",
 	onboarding_intent_more_optional: 'Want to do more? (optional)',
@@ -221,7 +221,7 @@ const en: OnboardingMessages = {
 	onboarding_btn_submitting: 'Submitting...',
 	onboarding_btn_back: '← Back',
 	onboarding_confirm_keep_informed:
-		"You'll get global campaign updates and news from your local PauseAI chapter.",
+		"You'll get global campaign updates, plus news and ways to help from your local PauseAI chapter.",
 	onboarding_confirm_newsletter:
 		"You're subscribed to our Substack: AI news from the PauseAI team's perspective, delivered by email.",
 	onboarding_confirm_a_title: "You're in.",
@@ -233,10 +233,10 @@ const en: OnboardingMessages = {
 	onboarding_browse_header_sub:
 		'Below are some actions you can take right now. The best way to stay informed about new opportunities is to sign up below.',
 	onboarding_browse_signed_up:
-		"✓ You're in. You'll get global campaign updates and news from your local PauseAI chapter.",
+		"✓ You're in. You'll get global campaign updates, plus news and ways to help from your local PauseAI chapter.",
 	onboarding_browse_keep_informed_title: 'Keep me informed',
 	onboarding_browse_keep_informed_sub:
-		'Get global campaign updates, plus news from your local PauseAI chapter.',
+		'Get global campaign updates, plus news and ways to help from your local PauseAI chapter.',
 	onboarding_btn_sign_me_up: 'Sign me up →',
 	onboarding_btn_signing_up: 'Signing up...',
 	onboarding_section_ways_to_help: 'A few ways to help today',
@@ -418,7 +418,7 @@ const de: OnboardingMessages = {
 		'Wir können dir gelegentlich eine kritische Warnung schicken, auch wenn du keine dieser Optionen ankreuzt. Du kannst dich jederzeit von jeder Liste abmelden. Siehe unsere <a target="_blank" rel="noopener noreferrer" href="/privacy">Datenschutzrichtlinie</a>.',
 	onboarding_intent_keep_informed_label: 'Auf dem Laufenden bleiben',
 	onboarding_intent_keep_informed_sub:
-		'Erhalte Updates zu globalen Kampagnen und Neuigkeiten aus deiner lokalen PauseAI-Gruppe.',
+		'Erhalte Updates zu globalen Kampagnen sowie Neuigkeiten und Mitmach-Möglichkeiten aus deiner lokalen PauseAI-Gruppe.',
 	onboarding_intent_newsletter_label: 'Unseren Substack abonnieren',
 	onboarding_intent_newsletter_sub: 'KI-Nachrichten aus der Perspektive des PauseAI-Teams.',
 	onboarding_intent_more_optional: 'Möchtest du mehr tun? (optional)',
@@ -436,7 +436,7 @@ const de: OnboardingMessages = {
 	onboarding_btn_submitting: 'Wird abgesendet...',
 	onboarding_btn_back: '← Zurück',
 	onboarding_confirm_keep_informed:
-		'Du erhältst Updates zu globalen Kampagnen und Neuigkeiten aus deiner lokalen PauseAI-Gruppe.',
+		'Du erhältst Updates zu globalen Kampagnen sowie Neuigkeiten und Mitmach-Möglichkeiten aus deiner lokalen PauseAI-Gruppe.',
 	onboarding_confirm_newsletter:
 		'Du hast unseren Substack abonniert: KI-Nachrichten aus der Perspektive des PauseAI-Teams, per E-Mail.',
 	onboarding_confirm_a_title: 'Du bist dabei.',
@@ -450,10 +450,10 @@ const de: OnboardingMessages = {
 	onboarding_browse_header_sub:
 		'Im Folgenden findest du Aktionen, die du sofort ergreifen kannst. Am besten bleibst du über neue Möglichkeiten informiert, indem du dich unten anmeldest.',
 	onboarding_browse_signed_up:
-		'✓ Du bist dabei. Du erhältst Updates zu globalen Kampagnen und Neuigkeiten aus deiner lokalen PauseAI-Gruppe.',
+		'✓ Du bist dabei. Du erhältst Updates zu globalen Kampagnen sowie Neuigkeiten und Mitmach-Möglichkeiten aus deiner lokalen PauseAI-Gruppe.',
 	onboarding_browse_keep_informed_title: 'Auf dem Laufenden bleiben',
 	onboarding_browse_keep_informed_sub:
-		'Erhalte Updates zu globalen Kampagnen und Neuigkeiten aus deiner lokalen PauseAI-Gruppe.',
+		'Erhalte Updates zu globalen Kampagnen sowie Neuigkeiten und Mitmach-Möglichkeiten aus deiner lokalen PauseAI-Gruppe.',
 	onboarding_btn_sign_me_up: 'Anmelden →',
 	onboarding_btn_signing_up: 'Wird angemeldet...',
 	onboarding_section_ways_to_help: 'Einige Möglichkeiten zu helfen',
@@ -643,7 +643,7 @@ const fr: OnboardingMessages = {
 		'Nous pouvons occasionnellement t\'envoyer une alerte critique, même si tu ne coches aucune de ces options. Tu peux te désinscrire de n\'importe quelle liste à tout moment. Voir notre <a target="_blank" rel="noopener noreferrer" href="/privacy">politique de confidentialité</a>.',
 	onboarding_intent_keep_informed_label: 'Me tenir informé·e',
 	onboarding_intent_keep_informed_sub:
-		'Reçois les actualités des campagnes mondiales, ainsi que les nouvelles de ton groupe PauseAI local.',
+		"Reçois les actualités des campagnes mondiales, ainsi que les nouvelles et les occasions d'agir de ton groupe PauseAI local.",
 	onboarding_intent_newsletter_label: "S'abonner à notre Substack",
 	onboarding_intent_newsletter_sub: "L'actualité de l'IA vue par l'équipe PauseAI.",
 	onboarding_intent_more_optional: 'Tu veux en faire plus ? (facultatif)',
@@ -661,7 +661,7 @@ const fr: OnboardingMessages = {
 	onboarding_btn_submitting: 'Envoi en cours...',
 	onboarding_btn_back: '← Retour',
 	onboarding_confirm_keep_informed:
-		'Tu recevras les actualités des campagnes mondiales et les nouvelles de ton groupe PauseAI local.',
+		"Tu recevras les actualités des campagnes mondiales, ainsi que les nouvelles et les occasions d'agir de ton groupe PauseAI local.",
 	onboarding_confirm_newsletter:
 		"Tu es abonné·e à notre Substack : l'actualité de l'IA vue par l'équipe PauseAI, par e-mail.",
 	onboarding_confirm_a_title: "C'est fait.",
@@ -675,10 +675,10 @@ const fr: OnboardingMessages = {
 	onboarding_browse_header_sub:
 		"Voici quelques actions que tu peux entreprendre dès maintenant. Le meilleur moyen de rester informé·e des nouvelles opportunités est de t'inscrire ci-dessous.",
 	onboarding_browse_signed_up:
-		"✓ C'est fait. Tu recevras les actualités des campagnes mondiales et les nouvelles de ton groupe PauseAI local.",
+		"✓ C'est fait. Tu recevras les actualités des campagnes mondiales, ainsi que les nouvelles et les occasions d'agir de ton groupe PauseAI local.",
 	onboarding_browse_keep_informed_title: 'Me tenir informé·e',
 	onboarding_browse_keep_informed_sub:
-		'Reçois les actualités des campagnes mondiales, ainsi que les nouvelles de ton groupe PauseAI local.',
+		"Reçois les actualités des campagnes mondiales, ainsi que les nouvelles et les occasions d'agir de ton groupe PauseAI local.",
 	onboarding_btn_sign_me_up: "M'inscrire →",
 	onboarding_btn_signing_up: 'Inscription en cours...',
 	onboarding_section_ways_to_help: "Quelques moyens d'aider dès aujourd'hui",
