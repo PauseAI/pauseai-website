@@ -554,11 +554,7 @@
 				{#if recordId}
 					<input type="hidden" name="record_id" value={recordId} />
 				{/if}
-				<input
-					type="hidden"
-					name="intent"
-					value={intent ? INTENT_VALUES[intent] : isContinuation ? 'Keep informed' : 'None'}
-				/>
+				<input type="hidden" name="intent" value={intent ? INTENT_VALUES[intent] : 'None'} />
 				<!-- The server writes Email subscription from this post every time, so a
 				     post without this input clears the flag. Both forms that can update
 				     the record have to carry it. -->

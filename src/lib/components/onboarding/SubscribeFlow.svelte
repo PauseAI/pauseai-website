@@ -144,7 +144,7 @@
 			     only when the local-chapter box is ticked. -->
 			<input type="hidden" name="subscribe_form" value="1" />
 			<input type="hidden" name="mode" value="contact" />
-			<input type="hidden" name="intent" value="Keep informed" />
+			<input type="hidden" name="intent" value="None" />
 			<input type="hidden" name="keep_informed" value="on" />
 			<input type="hidden" name="agree_gdpr" value="on" />
 
