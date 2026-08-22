@@ -1,6 +1,8 @@
 import { AIRTABLE_API_KEY, AIRTABLE_WRITE_API_KEY } from '$env/static/private'
 import type { AirtableListResponse, AirtableRecord } from '$lib/airtable'
 import { validMPEmails } from '$lib/server/uk-postcode-to-mp.js'
+import { checkNotSpam } from '$lib/server/turnstile-verify'
+import { TURNSTILE_FIELD } from '$lib/turnstile'
 import { json } from '@sveltejs/kit'
 import { StatusCodes } from 'http-status-codes'
 import type { RequestHandler } from './$types'
@@ -39,6 +41,8 @@ interface EmailRequest {
 	recipient: string
 	subject: string
 	message: string
+	nickname?: string
+	turnstileToken?: string
 }
 
 type UKSendMPEmailApiSuccessResponse = {
@@ -54,7 +58,7 @@ type UKSendMPEmailApiErrorResponse = {
 export type UKSendMPEmailApiResponse =
 	UKSendMPEmailApiSuccessResponse | UKSendMPEmailApiErrorResponse
 
-export const POST: RequestHandler = async ({ request }) => {
+export const POST: RequestHandler = async ({ request, url }) => {
 	if (!AIRTABLE_API_KEY || !AIRTABLE_WRITE_API_KEY) {
 		return json(
 			{
@@ -83,6 +87,23 @@ export const POST: RequestHandler = async ({ request }) => {
 
 	try {
 		const data = (await request.json()) as EmailRequest
+
+		// The endpoint is JSON-based rather than a form action, so the honeypot and
+		// Turnstile token are wrapped into a FormData shim for the shared spam check.
+		const spamCheckData = new FormData()
+		if (data.nickname) spamCheckData.set('nickname', data.nickname)
+		if (data.turnstileToken) spamCheckData.set(TURNSTILE_FIELD, data.turnstileToken)
+
+		const spam = await checkNotSpam(spamCheckData, url.hostname)
+		if (spam.drop) {
+			return json({ success: true, recordId: '' } satisfies UKSendMPEmailApiResponse)
+		}
+		if (spam.message) {
+			return json(
+				{ error: 'validation', message: spam.message } satisfies UKSendMPEmailApiResponse,
+				{ status: StatusCodes.FORBIDDEN }
+			)
+		}
 
 		// Basic validation
 		if (
