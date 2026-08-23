@@ -44,9 +44,7 @@ If you’re in Australia, you can help:
 
 ## What we do
 
-We are the Australian national chapter of the PauseAI movement.
-
-Volunteers across Australia work to:
+We are the Australian chapter of the PauseAI movement. Volunteers work to:
 
 - Raise public awareness of AI risks
 - Advocate to politicians and policymakers
