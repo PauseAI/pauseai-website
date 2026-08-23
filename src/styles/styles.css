@@ -11,6 +11,9 @@ html {
 
 	/* Major theme stuff */
 	--page-width: 40rem; /* Please update in media queries and $lib/config.ts */
+	/* The header/nav gets a little more room than the content column so all
+	   top-level items fit on one row beside the logo (see +layout.svelte). */
+	--header-width: 48rem;
 
 	/* Colors */
 	--t-color-main: #f68b1e; /* Default main color - saturated orange */

@@ -1,4 +1,4 @@
-import { readEdgeConfig, searchRenderFunction, writeEdgeConfig } from './utils/utils'
+import { readEdgeManifest, searchRenderFunction, writeEdgeManifest } from './utils/utils'
 import { USE_EDGE_FUNCTIONS } from '../svelte.config.js'
 
 if (!USE_EDGE_FUNCTIONS) {
@@ -8,8 +8,8 @@ if (!USE_EDGE_FUNCTIONS) {
 
 const EXCLUDE_PATHS: `/${string}`[] = ['/pagefind/*']
 
-const config = await readEdgeConfig()
-const renderFunction = searchRenderFunction(config)!
+const manifest = await readEdgeManifest()
+const renderFunction = searchRenderFunction(manifest)!
 if (!renderFunction.excludedPath) renderFunction.excludedPath = []
 renderFunction.excludedPath = EXCLUDE_PATHS.concat(renderFunction.excludedPath)
-await writeEdgeConfig(config)
+await writeEdgeManifest(manifest)

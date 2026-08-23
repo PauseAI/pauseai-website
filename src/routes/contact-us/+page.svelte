@@ -6,7 +6,10 @@
 	import { onMount } from 'svelte'
 	import Link from '$lib/components/Link.svelte'
 	import PostMeta from '$lib/components/PostMeta.svelte'
+	import Turnstile from '$lib/components/Turnstile.svelte'
+	import { turnstileSiteKey } from '$lib/turnstile'
 	import { meta } from './meta'
+	import { partnershipOptions } from './partnership-options'
 	import type { ActionResult } from '@sveltejs/kit'
 
 	const { title, description } = meta
@@ -14,6 +17,15 @@
 	let activeTab: 'media' | 'partnerships' | 'feedback' = $state('partnerships')
 	let loading = $state(false)
 	let honeypot = $state('')
+	let turnstileToken = $state('')
+
+	// Bumped after each submission to remount the widget: Turnstile tokens are
+	// single-use, so a resubmit with the same token would be rejected.
+	let turnstileNonce = $state(0)
+
+	// Without a configured site key (e.g. local development) there is no widget
+	// to wait for, and the server decides whether to accept the submission.
+	const canSubmit = $derived(!loading && (!turnstileSiteKey || turnstileToken !== ''))
 
 	let formData = $state({
 		media: { name: '', email: '', subject: '', organization: '', details: '' },
@@ -34,29 +46,6 @@
 	function isRecord(value: unknown): value is Record<string, unknown> {
 		return typeof value === 'object' && value !== null
 	}
-
-	const partnershipOptions = [
-		'Mobilize grassroots support for PauseAI’s mission',
-		'Open a chapter in my city/country',
-		'Organize a public demonstration or protest',
-		'Support citizen lobbying efforts',
-		'Invite Pause AI to participate/speak at your local event/meeting',
-		'Test and refine policy proposals with policymakers',
-		'Amplify Pause AI campaign and/or proposal',
-		'Assist with surveys or qualitative data collection',
-		'Help disseminate research findings to the public',
-		'Connect Pause AI with experts',
-		'Share grassroots public sentiment data',
-		'Exchange volunteers for events or campaigns',
-		'Pool resources for joint campaigns or event',
-		'Collaborate on grant applications',
-		'Co-create educational or advocacy content',
-		'Mobilize volunteers for emergency response',
-		'Adapt messaging for local/international contexts',
-		'Connect with engaged volunteer base',
-		'Explore general partnership opportunities',
-		'Other'
-	]
 
 	function countWords(str: string) {
 		return str.trim().split(/\s+/).length
@@ -128,6 +117,11 @@
 		loading = true
 		return async ({ result, update }: { result: ActionResult; update: () => Promise<void> }) => {
 			loading = false
+
+			// The token has now been spent (or rejected) either way — get a fresh one.
+			turnstileToken = ''
+			turnstileNonce += 1
+
 			if (result.type === 'success') {
 				toast.success("Thank you! We've received your message.")
 
@@ -167,7 +161,6 @@
 	<h1>{title}</h1>
 	<p class="intro">
 		Get in touch with the PauseAI team.<br />
-		Based in the US? Reach out to <Link href="https://www.pauseai-us.org/">PauseAI US</Link> directly.
 	</p>
 
 	<div class="tabs">
@@ -291,7 +284,10 @@
 							placeholder="Provide additional details to how you would like to partner with us, particularly if related to a time sensitive matter."
 							bind:value={formData.partnerships.message}></textarea>
 					</div>
-					<button type="submit" disabled={loading}>
+					{#key turnstileNonce}
+						<Turnstile bind:token={turnstileToken} />
+					{/key}
+					<button type="submit" disabled={!canSubmit}>
 						{loading ? 'Sending...' : 'Send Message'}
 					</button>
 				</form>
@@ -364,7 +360,10 @@
 							placeholder="Message"
 							bind:value={formData.media.details}></textarea>
 					</div>
-					<button type="submit" disabled={loading}>
+					{#key turnstileNonce}
+						<Turnstile bind:token={turnstileToken} />
+					{/key}
+					<button type="submit" disabled={!canSubmit}>
 						{loading ? 'Sending...' : 'Send Message'}
 					</button>
 				</form>
@@ -423,7 +422,10 @@
 							placeholder="Your Feedback"
 							bind:value={formData.feedback.message}></textarea>
 					</div>
-					<button type="submit" disabled={loading}>
+					{#key turnstileNonce}
+						<Turnstile bind:token={turnstileToken} />
+					{/key}
+					<button type="submit" disabled={!canSubmit}>
 						{loading ? 'Sending...' : 'Send Message'}
 					</button>
 				</form>

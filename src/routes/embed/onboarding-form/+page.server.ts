@@ -1,7 +1,15 @@
-// Onboarding submit action — shared by step 2, browse signup, and step 3
-// volunteer update. See docs/join-form-flow.md for the full flow contract
-// (fields, validation, live/stub branches). Keep that document in sync when
-// changing the action's inputs or behavior.
+// Onboarding submit action, shared by /join (step 2, browse signup, step 3
+// volunteer update), /embed/onboarding-form (the iframeable wrapper around the
+// same component) and /subscribe (signup, then its "do more" hand-off).
+//
+// docs/join-form-flow.md maps the routes and collects the contracts this action
+// takes part in, including the cross-file and cross-system ones no single file
+// can show. Update it when this action's inputs or behaviour change.
+//
+// Stating a rule in both places is fine where it earns its keep: one worth
+// writing down there is usually worth a comment at the site it governs too, so
+// whoever edits that line sees it without opening the document. What does not
+// work is the document alone, which is how it came to need correcting.
 import { fail } from '@sveltejs/kit'
 import type { FieldSet } from 'airtable'
 import type { Actions } from './$types'
@@ -10,6 +18,7 @@ import { createRecord, updateRecord } from '$lib/airtable'
 import { isOnboardingLive } from '$lib/server/onboarding'
 import { recordStubSubmission } from '$lib/server/onboarding-stub'
 import { subscribeToSubstackNewsletter } from '$lib/server/substack'
+import { checkNotSpam } from '$lib/server/turnstile-verify'
 import {
 	COUNTRIES,
 	DISCOVERY_OPTIONS,
@@ -17,6 +26,7 @@ import {
 	LANGUAGES,
 	MOTIVATIONS,
 	SIGNUP_SOURCE,
+	SUBSCRIBE_SIGNUP_SOURCE,
 	SKILLS,
 	WEEKLY_HOURS,
 	type Intent
@@ -65,12 +75,23 @@ async function lookupChapter(
 }
 
 export const actions: Actions = {
-	submit: async ({ request, fetch }) => {
+	submit: async ({ request, fetch, url }) => {
 		const data = await request.formData()
 
 		// Honeypot
 		if (getString(data, 'nickname')) {
 			return { success: true }
+		}
+
+		// Read once, so the check below and the writes at the end can't disagree.
+		const live = isOnboardingLive()
+
+		// Only when the submission writes: a preview can't produce a token at all
+		// (its hostname isn't allowed by the site key), and stub mode writes nothing.
+		if (live) {
+			const spam = await checkNotSpam(data, url.hostname)
+			if (spam.drop) return { success: true }
+			if (spam.message) return fail(403, { message: spam.message })
 		}
 
 		const fullName = getString(data, 'full_name')
@@ -81,25 +102,32 @@ export const actions: Actions = {
 		const mode = getString(data, 'mode') === 'browse' ? 'browse' : 'contact'
 		const newsletter = data.get('newsletter') === 'on'
 		const keepInformed = data.get('keep_informed') === 'on'
-		// GDPR consent (bundled with local-chapter sharing) gates every
-		// record-creating submission. Step 3 volunteer posts update an existing
-		// record and carry no checkbox, so the check below exempts updates.
+		// GDPR consent gates every record-creating submission. /join bundles it with
+		// local-chapter sharing in one checkbox; /subscribe asks the two separately.
+		// Updates carry no checkbox, so the check below exempts them.
 		const gdprAgreed = data.get('agree_gdpr') === 'on'
-		// Set when a step-2 submission already created the person's record:
-		// the later volunteer-form submission updates it instead of creating a
-		// duplicate. Step 2 sends every path through here, so the newsletter
-		// and Substack subscription happen right after step 2.
+		// Set when an earlier submission already created the person's record, so
+		// this one updates it instead of creating a duplicate: /join step 2 then the
+		// volunteer form, or /subscribe then its "do more" hand-off.
 		const existingRecordId = getString(data, 'record_id')
 		// The volunteer detail fields are only present on the step-3 form post.
 		const hasVolunteerDetails = data.get('volunteer_details') === 'on'
+		// The /subscribe newsletter form. It requires the same four fields as /join,
+		// but decouples chapter sharing from the privacy consent: the /join form
+		// bundles the two, this one shares only on an explicit local-chapter tick.
+		const isSubscribeForm = data.get('subscribe_form') === '1'
+		const wantsChapter = data.get('chapter_share') === 'on'
 
-		if (!fullName || !email || !country || !city) {
+		// Creates (both forms) require all four fields; an update (the volunteer
+		// step, or the subscribe "do more" hand-off) patches an existing record and
+		// skips the check, so it can't re-require what the original create collected.
+		if (!existingRecordId && (!fullName || !email || !country || !city)) {
 			return fail(400, { message: 'Please fill in your name, email, country and city.' })
 		}
 		if (!/^\S+@\S+\.\S+$/.test(email)) {
 			return fail(400, { message: 'Please enter a valid email address.' })
 		}
-		if (!COUNTRIES.includes(country)) {
+		if (country && !COUNTRIES.includes(country)) {
 			return fail(400, { message: 'Please select a country from the list.' })
 		}
 		if (!isIntent(intent)) {
@@ -111,18 +139,46 @@ export const actions: Actions = {
 			return fail(400, { message: 'Please agree to the data processing consent to continue.' })
 		}
 
+		// Chapter sharing:
+		//  - /join create bundles it into the single privacy checkbox -> true
+		//  - /subscribe create shares only when they tick the local-updates box
+		//  - an update (the /subscribe "do more" hand-off, or the volunteer step)
+		//    leaves the signup-time choice alone, except Volunteer/Lead, whose
+		//    local involvement means they hear from a chapter regardless
+		let chapterShare: boolean | undefined
+		if (existingRecordId) {
+			if (intent === 'Volunteer' || intent === 'Lead') chapterShare = true
+			// The subscribe "do more" step reposts the signup-time choice, so backing
+			// out of Volunteer/Lead restores it rather than leaving the escalation.
+			else if (isSubscribeForm) chapterShare = wantsChapter
+		} else {
+			chapterShare = isSubscribeForm ? wantsChapter : true
+		}
+
 		const fields: FieldSet = {
-			'Full name': fullName,
 			Email: email,
-			Country: country,
-			City: city,
 			Intent: intent,
-			'Signup source': SIGNUP_SOURCE,
+			// Taken from the post on every call, updates included, so an update that
+			// omits keep_informed clears it. The forms repost it from state.
 			'Email subscription': keepInformed,
-			// One required consent checkbox covers both: agreeing to the privacy
-			// policy and, as part of it, sharing details with the local chapter.
-			'Data privacy policy agreed': true,
-			'GDPR chapter share permission': true
+			// Signing up is itself the privacy-policy consent: the /join checkbox
+			// and the /subscribe microcopy both link it.
+			'Data privacy policy agreed': true
+		}
+		// Which form produced the row — provenance, so it's written once at create and
+		// never on an update, or the volunteer step (which carries no subscribe marker)
+		// would rewrite a /subscribe row as a /join one.
+		if (!existingRecordId) {
+			fields['Signup source'] = isSubscribeForm ? SUBSCRIBE_SIGNUP_SOURCE : SIGNUP_SOURCE
+		}
+		// A create always writes the basics (they're validated above). An update only
+		// overwrites them when non-empty, so a partial post can't blank what the
+		// create collected.
+		if (!existingRecordId || fullName) fields['Full name'] = fullName
+		if (!existingRecordId || country) fields.Country = country
+		if (!existingRecordId || city) fields.City = city
+		if (chapterShare !== undefined) {
+			fields['GDPR chapter share permission'] = chapterShare
 		}
 
 		if (intent === 'Volunteer' && hasVolunteerDetails) {
@@ -169,11 +225,7 @@ export const actions: Actions = {
 			}
 		}
 
-		// Chapter routing is recorded only; notifying the chapter stays a manual
-		// Airtable process (plan decision 6).
-		const chapter = await lookupChapter(fetch, country)
-
-		if (isOnboardingLive()) {
+		if (live) {
 			let recordId: string | undefined = existingRecordId || undefined
 			if (recordId) {
 				const updated = await updateRecord(AIRTABLE_BASE_ID, MEMBERS_TABLE_ID, recordId, fields)
@@ -187,8 +239,8 @@ export const actions: Actions = {
 				if (!recordId) {
 					return fail(502, { message: 'Sorry, we could not save your details. Please try again.' })
 				}
-				// Subscription happens on the initial (step 2) submission only;
-				// the volunteer-form update never re-subscribes.
+				// Subscription happens on the create only, which for /subscribe is its own
+				// signup rather than a step 2. No update re-subscribes.
 				if (newsletter) {
 					await subscribeToSubstackNewsletter(email)
 				}
@@ -196,6 +248,11 @@ export const actions: Actions = {
 			return { success: true, recordId }
 		}
 
+		// Recorded only for stub inspection, so it is resolved here rather than on
+		// every submit. The live branch has no use for it: the Airtable automations
+		// run their own country-to-chapter lookup, and decide who hears about the
+		// signup from the chapter-share field written above.
+		const chapter = await lookupChapter(fetch, country)
 		const submission = recordStubSubmission({
 			airtable: {
 				baseId: AIRTABLE_BASE_ID,

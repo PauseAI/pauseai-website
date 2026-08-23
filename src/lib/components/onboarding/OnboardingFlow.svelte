@@ -17,9 +17,11 @@
 	import LinkWithoutIcon from '$lib/components/LinkWithoutIcon.svelte'
 	import Socials from '$lib/components/Socials.svelte'
 	import Combobox from '$lib/components/Combobox.svelte'
+	import Turnstile from '$lib/components/Turnstile.svelte'
 	import ActionCards from './ActionCards.svelte'
 	import Stepper from './Stepper.svelte'
 	import { getMessages } from './i18n.svelte'
+	import { turnstileSiteKey } from '$lib/turnstile'
 	import {
 		COUNTRIES,
 		COUNTRY_DIAL_CODES,
@@ -44,14 +46,38 @@
 	const intentOptions = $derived(getIntentOptions(msgs))
 
 	let {
+		initialEmail = '',
 		initialCountry = '',
 		initialCity = '',
-		initialLanguages = [] as string[]
+		initialFullName = '',
+		initialLanguages = [] as string[],
+		initialRecordId = '',
+		startStep = 1,
+		initialKeepInformed = false,
+		initialChapterShare = false
 	}: {
+		initialEmail?: string
 		initialCountry?: string
 		initialCity?: string
+		initialFullName?: string
 		initialLanguages?: string[]
+		// The /subscribe flow creates the record up front and then hands off here
+		// to let people go further. It seeds the created record id and starts at
+		// the intent step, so this submission updates that record instead of
+		// creating a duplicate, and pre-sets the newsletter opt-in they already made.
+		initialRecordId?: string
+		startStep?: 1 | 2
+		initialKeepInformed?: boolean
+		// The chapter-updates choice made on the subscribe form, reposted so backing
+		// out of Volunteer/Lead restores it instead of leaving the escalation.
+		initialChapterShare?: boolean
 	} = $props()
+
+	// Starts true so an unanswered request keeps the anti-spam check required.
+	let onboardingLive = $state(true)
+	// The widget waits for the answer: mounting it first makes a preview flash
+	// Turnstile's "could not load" error before it's removed again.
+	let onboardingModeKnown = $state(false)
 
 	// Surface stub/live mode in the browser console when the form loads. The
 	// pages embedding the form can be prerendered (e.g. /join), so the runtime
@@ -61,6 +87,8 @@
 			const response = await fetch('/api/onboarding-mode')
 			if (!response.ok) return
 			const { live } = (await response.json()) as OnboardingModeApiResponse
+			// Only an explicit false relaxes the check; a malformed response must not.
+			onboardingLive = live !== false
 			console.log(
 				live
 					? 'Onboarding form: LIVE mode. Submissions write to Airtable.'
@@ -68,10 +96,13 @@
 			)
 		} catch {
 			// Mode logging is best-effort; never break the form over it.
+		} finally {
+			// Also on failure: the check stays required, so the widget has to appear.
+			onboardingModeKnown = true
 		}
 	})
 
-	let step: 1 | 2 | 3 | 4 = $state(1)
+	let step: 1 | 2 | 3 | 4 = $state(startStep)
 	let flowEl: HTMLDivElement | undefined = $state()
 
 	// Scroll back to the top of the flow on step changes. The volunteer form
@@ -89,21 +120,47 @@
 	let mode: 'contact' | 'browse' = $state('contact')
 	let intent: IntentKey | null = $state(null)
 	// Airtable record id from the step-2 submission; later submissions send it
-	// back so the server updates the record instead of creating another.
-	let recordId = $state('')
-	let keepInformed = $state(false)
+	// back so the server updates the record instead of creating another. When the
+	// /subscribe flow hands off, it's seeded with the record already created there.
+	let recordId = $state(initialRecordId)
+	// Never pre-checked on /join: marketing consent must be freely given, for
+	// Volunteers/Leads too (operational volunteer comms ride legitimate interest).
+	let keepInformed = $state(initialKeepInformed)
 	let submitting = $state(false)
 	let browseSignedUp = $state(false)
 	let honeypot = $state('')
+	let turnstileToken = $state('')
+
+	// Bumped after each submission to remount the widget: Turnstile tokens are
+	// single-use and expire after five minutes.
+	let turnstileNonce = $state(0)
+
+	// Without a configured site key (e.g. local development) there is no widget
+	// to wait for, and the server decides whether to accept the submission.
+	// Nor when the submission doesn't write, matching the server.
+	const canSubmit = $derived(
+		!submitting && (!turnstileSiteKey || turnstileToken !== '' || !onboardingLive)
+	)
 
 	// Step 1: basic info (shared with the browse-mode inline signup and the
 	// volunteer form, which pre-fills from the same state)
 	let basics = $state({
-		fullName: '',
-		email: '',
+		fullName: initialFullName,
+		email: initialEmail,
 		country: initialCountry,
 		city: initialCity,
 		newsletter: false
+	})
+
+	// A newsletter signup elsewhere (e.g. the homepage box) can hand off here
+	// via ?subscribe-email=...; that email arrives after mount. Apply it once into
+	// an empty field, then never again — so it neither clobbers typed input nor
+	// snaps back when the visitor clears it to fix a typo.
+	let prefillApplied = $state(false)
+	$effect(() => {
+		if (prefillApplied || !initialEmail) return
+		if (!basics.email) basics.email = initialEmail
+		prefillApplied = true
 	})
 
 	const validLanguageStored = new Set(LANGUAGES.map((l) => l.stored))
@@ -140,10 +197,19 @@
 	// user stays in the flow.
 	let becomePayingMember = $state(false)
 
+	// The /subscribe "do more" hand-off: we start at the intent step with a record
+	// already created and its email opt-ins already chosen. In that mode the step
+	// only asks how involved they want to be — the opt-in cards and a second
+	// consent are hidden so it can't re-ask (or silently undo) what they already
+	// picked on the subscribe form.
+	const isContinuation = $derived(startStep === 2 && !!initialRecordId)
+
 	// GDPR data-processing consent gating every record-creating submission
-	// (step 2 + browse). Chapter-sharing consent is not bundled here: it lives
-	// in the optional "Keep me informed" opt-in, since we only share details
-	// with a local chapter when the person asks to be connected to one.
+	// (step 2 + browse). On /join this checkbox also carries chapter sharing:
+	// the server writes share permission on every /join create. /subscribe asks
+	// for chapter sharing as its own checkbox instead.
+	// Stays false so it never pre-checks a visible consent box; the continuation
+	// already consented on the subscribe form and is exempted at the submit gate.
 	let gdprConsent = $state(false)
 
 	// Phone: dial code prefilled from country of residence, editable in case
@@ -174,18 +240,30 @@
 			agreements.conduct
 	)
 
-	const stepperLabels = $derived(
-		intent === 'volunteer'
-			? [
-					msgs.onboarding_step_about,
-					msgs.onboarding_step_intent,
-					msgs.onboarding_step_volunteer_form,
-					msgs.onboarding_step_confirmed
-				]
-			: intent === 'lead'
-				? [msgs.onboarding_step_about, msgs.onboarding_step_intent, msgs.onboarding_step_next_steps]
-				: [msgs.onboarding_step_about, msgs.onboarding_step_intent, msgs.onboarding_step_confirmed]
-	)
+	const stepperLabels = $derived.by(() => {
+		const labels =
+			intent === 'volunteer'
+				? [
+						msgs.onboarding_step_about,
+						msgs.onboarding_step_intent,
+						msgs.onboarding_step_volunteer_form,
+						msgs.onboarding_step_confirmed
+					]
+				: intent === 'lead'
+					? [
+							msgs.onboarding_step_about,
+							msgs.onboarding_step_intent,
+							msgs.onboarding_step_next_steps
+						]
+					: [
+							msgs.onboarding_step_about,
+							msgs.onboarding_step_intent,
+							msgs.onboarding_step_confirmed
+						]
+		// The /subscribe continuation begins after the subscribe form, so it never
+		// showed an "About you" step — drop it and start the stepper at Intent.
+		return isContinuation ? labels.slice(1) : labels
+	})
 
 	// Lead path: if the country already has a chapter, offer regional/city
 	// leadership instead of founding a national group. Fetched lazily when the
@@ -257,6 +335,11 @@
 			const startValue = onStart()
 			return ({ result }) => {
 				submitting = false
+				// Every result, including the unexpected branch: verification spends the
+				// token whether or not the write succeeded, so a retry needs a fresh
+				// widget or it reposts a spent one.
+				turnstileToken = ''
+				turnstileNonce += 1
 				if (result.type === 'success') {
 					// Remember the created record so later submissions in the
 					// same flow update it rather than create a duplicate.
@@ -337,7 +420,10 @@
 {/snippet}
 
 {#snippet checkboxConfirmations()}
-	{#if keepInformed || basics.newsletter}
+	<!-- Not on the /subscribe continuation: those opt-ins were made and confirmed
+	     on the subscribe form, and this copy would restate them wrongly — it claims
+	     chapter contact, which there depends on a checkbox they may have declined. -->
+	{#if !isContinuation && (keepInformed || basics.newsletter)}
 		<ul class="signup-confirmations">
 			{#if keepInformed}
 				<li>
@@ -393,7 +479,7 @@
 	{/if}
 
 	{#if mode === 'contact'}
-		<Stepper labels={stepperLabels} current={step - 1} />
+		<Stepper labels={stepperLabels} current={isContinuation ? step - 2 : step - 1} />
 	{/if}
 
 	<div class="form-card">
@@ -471,54 +557,78 @@
 				<input
 					type="hidden"
 					name="intent"
-					value={intent ? INTENT_VALUES[intent] : 'Keep informed'}
+					value={intent ? INTENT_VALUES[intent] : isContinuation ? 'Keep informed' : 'None'}
 				/>
+				<!-- The server writes Email subscription from this post every time, so a
+				     post without this input clears the flag. Both forms that can update
+				     the record have to carry it. -->
 				{#if keepInformed}
 					<input type="hidden" name="keep_informed" value="on" />
 				{/if}
+				{#if isContinuation}
+					<!-- Tells the server this update knows the signup-time chapter choice,
+					     so it restores it when the intent no longer escalates. -->
+					<input type="hidden" name="subscribe_form" value="1" />
+					{#if initialChapterShare}
+						<input type="hidden" name="chapter_share" value="on" />
+					{/if}
+				{/if}
 				<h2>{msgs.onboarding_step2_heading}</h2>
-				<div class="intent-grid">
-					<button
-						type="button"
-						class="intent-option"
-						class:selected={keepInformed}
-						role="checkbox"
-						aria-checked={keepInformed}
-						onclick={() => (keepInformed = !keepInformed)}
-					>
-						<span class="intent-icon">
-							<span class="checkbox-box" aria-hidden="true">
-								{keepInformed ? '✓' : ''}
+				{#if !isContinuation}
+					<p class="section-label" id="optins-heading">{msgs.onboarding_optins_heading}</p>
+					<div class="intent-grid" role="group" aria-labelledby="optins-heading">
+						<button
+							type="button"
+							class="intent-option"
+							class:selected={keepInformed}
+							role="checkbox"
+							aria-checked={keepInformed}
+							aria-describedby="critical-alert-notice"
+							onclick={() => (keepInformed = !keepInformed)}
+						>
+							<span class="intent-icon">
+								<span class="checkbox-box" aria-hidden="true">
+									{keepInformed ? '✓' : ''}
+								</span>
+								🔔
 							</span>
-							🔔
-						</span>
-						<span class="intent-label">{msgs.onboarding_intent_keep_informed_label}</span>
-						<span class="intent-sub">
-							{msgs.onboarding_intent_keep_informed_sub}
-						</span>
-					</button>
-					<button
-						type="button"
-						class="intent-option"
-						class:selected={basics.newsletter}
-						role="checkbox"
-						aria-checked={basics.newsletter}
-						onclick={() => (basics.newsletter = !basics.newsletter)}
-					>
-						<span class="intent-icon">
-							<span class="checkbox-box" aria-hidden="true">
-								{basics.newsletter ? '✓' : ''}
+							<span class="intent-label">{msgs.onboarding_intent_keep_informed_label}</span>
+							<span class="intent-sub">
+								{msgs.onboarding_intent_keep_informed_sub}
 							</span>
-							📰
-						</span>
-						<span class="intent-label">{msgs.onboarding_intent_newsletter_label}</span>
-						<span class="intent-sub">
-							{msgs.onboarding_intent_newsletter_sub}
-						</span>
-					</button>
-				</div>
-				<p class="section-label">{msgs.onboarding_intent_more_optional}</p>
-				<div class="intent-stack" role="radiogroup" aria-label="Want to do more?">
+						</button>
+						<button
+							type="button"
+							class="intent-option"
+							class:selected={basics.newsletter}
+							role="checkbox"
+							aria-checked={basics.newsletter}
+							aria-describedby="critical-alert-notice"
+							onclick={() => (basics.newsletter = !basics.newsletter)}
+						>
+							<span class="intent-icon">
+								<span class="checkbox-box" aria-hidden="true">
+									{basics.newsletter ? '✓' : ''}
+								</span>
+								📰
+							</span>
+							<span class="intent-label">{msgs.onboarding_intent_newsletter_label}</span>
+							<span class="intent-sub">
+								{msgs.onboarding_intent_newsletter_sub}
+							</span>
+						</button>
+					</div>
+					<p class="helper" id="critical-alert-notice">
+						<!-- eslint-disable-next-line svelte/no-at-html-tags -->
+						{@html msgs.onboarding_email_critical_notice}
+					</p>
+					<p class="section-label">{msgs.onboarding_intent_more_optional}</p>
+				{/if}
+				<div
+					class="intent-stack"
+					role="radiogroup"
+					aria-label={msgs.onboarding_intent_more_optional}
+				>
 					{#each intentOptions as option (option.key)}
 						<button
 							type="button"
@@ -539,27 +649,39 @@
 						</button>
 					{/each}
 				</div>
-				{@render gdprConsentField()}
+				{#if !isContinuation}
+					{@render gdprConsentField()}
+				{/if}
+				{#if onboardingLive && onboardingModeKnown}
+					{#key turnstileNonce}
+						<Turnstile bind:token={turnstileToken} />
+					{/key}
+				{/if}
 				<button
 					type="submit"
 					class="primary"
-					disabled={(!intent && !keepInformed && !basics.newsletter) || !gdprConsent || submitting}
+					disabled={(isContinuation ? !intent : !gdprConsent) || !canSubmit}
 				>
 					{submitting
 						? msgs.onboarding_btn_submitting
-						: intent === 'volunteer' || intent === 'lead'
+						: isContinuation || intent === 'volunteer' || intent === 'lead'
 							? msgs.onboarding_btn_continue
 							: msgs.onboarding_btn_submit}
 				</button>
-				<button type="button" class="back" onclick={() => (step = 1)}
-					>{msgs.onboarding_btn_back}</button
-				>
+				{#if !isContinuation}
+					<button type="button" class="back" onclick={() => (step = 1)}
+						>{msgs.onboarding_btn_back}</button
+					>
+				{/if}
 			</form>
 		{:else if step === 3 && !intent}
 			<!-- Path A: confirmation -->
 			<div class="confirmation">
 				<div class="checkmark">✓</div>
-				<h2>{msgs.onboarding_confirm_a_title}</h2>
+				{#if !isContinuation}
+					<!-- As on path B: the continuation already thanked them for signing up. -->
+					<h2>{msgs.onboarding_confirm_a_title}</h2>
+				{/if}
 				{@render checkboxConfirmations()}
 				{@render nextStepBlock()}
 				{@render confirmationFooter()}
@@ -569,7 +691,11 @@
 			{#if mode === 'contact'}
 				<div class="confirmation">
 					<div class="checkmark">✓</div>
-					<h2>{msgs.onboarding_confirm_b_title}</h2>
+					{#if !isContinuation}
+						<!-- The continuation already thanked them for signing up; don't
+						     thank them for joining a second time. -->
+						<h2>{msgs.onboarding_confirm_b_title}</h2>
+					{/if}
 					<p>{msgs.onboarding_confirm_b_sub}</p>
 					{@render checkboxConfirmations()}
 				</div>
@@ -643,7 +769,12 @@
 								/>
 							</div>
 							{@render gdprConsentField()}
-							<button type="submit" class="primary" disabled={!gdprConsent || submitting}>
+							{#if onboardingLive && onboardingModeKnown}
+								{#key turnstileNonce}
+									<Turnstile bind:token={turnstileToken} />
+								{/key}
+							{/if}
+							<button type="submit" class="primary" disabled={!gdprConsent || !canSubmit}>
 								{submitting ? msgs.onboarding_btn_signing_up : msgs.onboarding_btn_sign_me_up}
 							</button>
 						</form>
@@ -682,6 +813,9 @@
 				{#if recordId}
 					<input type="hidden" name="record_id" value={recordId} />
 				{/if}
+				<!-- The server writes Email subscription from this post every time, so a
+				     post without this input clears the flag. Both forms that can update
+				     the record have to carry it. -->
 				{#if keepInformed}
 					<input type="hidden" name="keep_informed" value="on" />
 				{/if}
@@ -857,8 +991,13 @@
 					<!-- eslint-disable-next-line svelte/no-at-html-tags -->
 					<span>{@html msgs.onboarding_agree_conduct}</span>
 				</label>
+				{#if onboardingLive && onboardingModeKnown}
+					{#key turnstileNonce}
+						<Turnstile bind:token={turnstileToken} />
+					{/key}
+				{/if}
 				<div class="submit-group">
-					<button type="submit" class="primary" disabled={!volunteerFormComplete || submitting}>
+					<button type="submit" class="primary" disabled={!volunteerFormComplete || !canSubmit}>
 						{submitting ? msgs.onboarding_btn_submitting : msgs.onboarding_btn_submit}
 					</button>
 					{#if becomePayingMember}
@@ -949,7 +1088,7 @@
 
 	h2 {
 		font-family: var(--font-heading);
-		margin-top: 0;
+		margin: 0;
 	}
 
 	.browse-banner {
@@ -974,7 +1113,7 @@
 		display: flex;
 		flex-direction: column;
 		align-items: stretch;
-		gap: 1rem;
+		gap: 0.75rem;
 		width: 100%;
 		max-width: none;
 	}
@@ -1392,7 +1531,7 @@
 		text-transform: uppercase;
 		letter-spacing: 0.05em;
 		opacity: 0.7;
-		margin: 1.5rem 0 0.5rem 0;
+		margin: 0.75rem 0 0.5rem 0;
 	}
 
 	.confirmation-footer :global(.discord-button) {

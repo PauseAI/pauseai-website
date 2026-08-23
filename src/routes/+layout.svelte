@@ -11,6 +11,7 @@
 	import Toc from '$lib/components/Toc.svelte'
 	import { searchOpen } from '$lib/stores/searchModal'
 	import { deLocalizeHref } from '$lib/paraglide/runtime'
+	import type { BannerRule } from '$lib/types'
 	import '@fontsource/roboto-slab/300.css'
 	import '@fontsource/roboto-slab/500.css'
 	import '@fontsource/roboto-slab/700.css'
@@ -29,6 +30,7 @@
 	import bannerSelection from './banner-selection.js?raw'
 	import themeSelection from './theme-selection.js?raw'
 	import hydrationAwareClick from './hydration-aware-click.js?raw'
+	import { inDateRange } from './inDateRange'
 	import type { PageData } from './$types'
 
 	interface Props {
@@ -37,6 +39,35 @@
 	}
 
 	let { data, children }: Props = $props()
+
+	const mainBannerRules: BannerRule[] = [
+		{
+			id: 'gb-feb28-protest',
+			countries: ['GB'],
+			dateRange: [null, '2025-02-28']
+		},
+		{
+			id: 'us-state-sovereignty',
+			countries: ['US'],
+			dateRange: [null, '2025-02-28']
+		},
+		{
+			id: 'holiday-littlehelpers',
+			countries: null,
+			dateRange: [null, '2024-12-31']
+		},
+		{
+			id: 'de-webinar-luisa-neubauer',
+			countries: ['DE'],
+			dateRange: [null, '2026-08-25']
+		},
+		{
+			id: 'pausecon-london-2026',
+			countries: null,
+			dateRange: [null, '2026-08-21']
+		}
+	]
+	const campaignBannerRules: BannerRule[] = []
 
 	let eventFound: boolean = $state(false)
 	let geoForNearbyEvent: GeoApiResponse | null = $state(null)
@@ -94,32 +125,14 @@
 </script>
 
 <svelte:head>
-	<script>
-		var mainBannerRules = [
-			{
-				id: 'gb-feb28-protest',
-				countries: ['GB'],
-				dateRange: [null, '2025-02-28']
-			},
-			{
-				id: 'us-state-sovereignty',
-				countries: ['US'],
-				dateRange: [null, '2025-02-28']
-			},
-			{
-				id: 'holiday-littlehelpers',
-				countries: null,
-				dateRange: [null, '2024-12-31']
-			},
-			{
-				id: 'pausecon-london-2026',
-				countries: null,
-				dateRange: [null, '2026-08-21']
-			}
-		]
-
-		var campaignBannerRules = []
-	</script>
+	<!-- eslint-disable-next-line svelte/no-unused-svelte-ignore -- doesn't warn at compile time -->
+	<!-- svelte-ignore hydration_html_changed -- the stringified function looks different on client and server -->
+	<!-- eslint-disable-next-line svelte/no-at-html-tags -- not vulnerable against XSS -->
+	{@html `<${'script'}>${sanitizeScript(
+		`var mainBannerRules = ${JSON.stringify(mainBannerRules)}
+		var campaignBannerRules = ${JSON.stringify(campaignBannerRules)}
+		var inDateRange = ${inDateRange.toString()}`
+	)}</script>`}
 
 	<!-- eslint-disable-next-line svelte/no-at-html-tags not vulnerable against XSS -->
 	{@html `<${'script'}>${sanitizeScript(themeSelection)}</script>`}
@@ -151,28 +164,39 @@
 		{/if}
 
 		<!-- All banners rendered, hidden by default. Blocking script reveals the active main/campaign banner. -->
-		<Banner contrast={hero} id="gb-feb28-protest">
+		<Banner contrast={hero} id="gb-feb28-protest" rules={mainBannerRules}>
 			<b
 				>PauseAI's largest ever protest will be on Saturday February 28th in London. <Link
 					href="https://luma.com/o0p4htmk">Sign up now!</Link
 				></b
 			>
 		</Banner>
-		<Banner contrast={hero} id="us-state-sovereignty">
+		<Banner contrast={hero} id="us-state-sovereignty" rules={mainBannerRules}>
 			<b
 				>HELP US PROTECT STATE SOVEREIGNTY ON AI REGULATION | <Link
 					href="https://mstr.app/b09fa92b-1899-43a0-9d95-99cd99c9dfb2">ACT NOW »</Link
 				></b
 			>
 		</Banner>
-		<Banner contrast={hero} id="holiday-littlehelpers" href="/littlehelpers">
+		<Banner
+			contrast={hero}
+			id="holiday-littlehelpers"
+			href="/littlehelpers"
+			rules={mainBannerRules}
+		>
 			<strong>🎄 Holiday Matching Campaign!</strong> Help fund volunteer stipends for PauseAI
 			advocates. <Link href="/littlehelpers">Join the Little Helpers campaign →</Link>
 		</Banner>
 
 		<NearbyEvent contrast={hero} bind:eventFound geo={geoForNearbyEvent} />
 
-		<Banner contrast={hero} id="pausecon-london-2026">
+		<Banner contrast={hero} id="de-webinar-luisa-neubauer" rules={mainBannerRules}>
+			<strong>Bedroht KI unsere Zukunft?</strong> PauseAI-Webinar mit Luisa Neubauer am 25. August,
+			18:00 Uhr.
+			<strong><Link href="https://luma.com/b8ht854p">Jetzt anmelden!</Link></strong>
+		</Banner>
+
+		<Banner contrast={hero} id="pausecon-london-2026" rules={mainBannerRules}>
 			<strong>PauseCon London 2026</strong>: Apply now to join our September organising conference.
 			<strong><Link href="https://luma.com/4be2eqz9">Apply here!</Link></strong>
 		</Banner>
@@ -284,10 +308,18 @@
 	}
 
 	.menu-band :global(nav) {
-		width: min(var(--page-width), 100% - 2 * var(--page-gutter));
+		width: min(var(--header-width), 100% - 2 * var(--page-gutter));
 		margin-inline: auto;
 		/* Tighter vertical padding than the component's responsive default. */
 		--vspace: 1.85rem;
+	}
+
+	/* The header on non-hero pages sits inside .layout, whose max-inline-size is
+	   the (narrower) content width. Let it use the wider header width so all
+	   top-level nav items fit on one row beside the logo. */
+	.layout > :global(.wide-navbar) {
+		width: min(var(--header-width), 100dvw - 2 * var(--page-gutter));
+		justify-self: center;
 	}
 
 	.layout {

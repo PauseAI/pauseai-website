@@ -17,6 +17,17 @@ export type Categories = 'sveltekit' | 'svelte' | 'AI Safety' | 'Transparency' |
 
 export type LinkType = 'internal' | 'external' | 'mail'
 
+/**
+ * A banner selection rule. `dateRange` is `[startsOn, endsOn]` in `YYYY-MM-DD`
+ * format; either bound may be `null` for unbounded. `countries` is `null` for
+ * a global banner, or a list of ISO country codes for geo-targeted banners.
+ */
+export type BannerRule = {
+	id: string
+	dateRange: [string | null, string | null]
+	countries?: string[] | null
+}
+
 type StrictFrontmatterMeta = {
 	title: string
 	/** Overrides title in the page <title> / social meta tags when the on-page H1 should differ */
@@ -29,6 +40,8 @@ type StrictFrontmatterMeta = {
 	categories?: Categories[]
 	image?: string
 	showImage?: boolean
+	/** If false, the page-template h1 is not rendered (the page supplies its own heading) */
+	showTitle?: boolean
 	/** If true, this post will appear in the Latest News section on the homepage */
 	news?: boolean
 	/**
