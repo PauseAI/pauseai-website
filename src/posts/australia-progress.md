@@ -11,13 +11,13 @@ Metrics since we founded: 📧147 AI decisionmaker emails, meetings with 👥22 
 Upcoming
 
 - Tell us [what you did](mailto:australia@pauseai.info?subject=Aussie%20Did%20a%20Thing), or [what you have cooking](mailto:australia@pauseai.info?subject=Things%20Cooking) so we can support you!
-- Meetings with 👥1 AI decisionmaker, 📅2 [events](https://luma.com/PauseAIAustralia).
 - Sunyal is attending Government Cyber Security Showcase Western Australia 2026 as a representative of PauseAI
+- We are [staging an AI race](https://luma.com/4jqbp20b) for the Australia AI Summit
 - We are preparing a submission to the consultation on [Artificial intelligence and data centres](https://www.aph.gov.au/Parliamentary_Business/Committees/Senate/Environment_and_Communications/AIdatacentres48P) (due 1 September, make sure to submit your own!)
 
 Done
 
-- 📧2 AI decisionmaker emails
+- 📧8 AI decisionmaker emails, meetings with 👥2 of them, 📅4 events with 45 attendees.
 - One of our two correspondence submissions got accepted for Quarterly Essay 102: The God We Made! Look out for it in the next edition.
 
 ### 2026 July
