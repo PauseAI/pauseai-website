@@ -40,7 +40,7 @@ If you’re in Australia, you can help:
 
 ## Connect with PauseAI Australia
 
-- [australia@pauseai.info](mailto:australia@pauseai.info?subject=Hello%20From%20The%20Homepage) | [Events](https://lu.ma/PauseAIAustralia) | [Instagram](https://www.instagram.com/pauseaiaustralia/) | [Facebook](https://www.facebook.com/groups/571590459293618) | [LinkedIn](https://www.linkedin.com/company/pauseai-australia) | [WhatsApp](https://chat.whatsapp.com/KLg8K9xSgfIJs8GQAHeI5b) | [YouTube](https://www.youtube.com/channel/UCjjMieiOlSFf7jud0yhHQSg)
+[australia@pauseai.info](mailto:australia@pauseai.info?subject=Hello%20From%20The%20Homepage) | [Events](https://lu.ma/PauseAIAustralia) | [Instagram](https://www.instagram.com/pauseaiaustralia/) | [Facebook](https://www.facebook.com/groups/571590459293618) | [LinkedIn](https://www.linkedin.com/company/pauseai-australia) | [WhatsApp](https://chat.whatsapp.com/KLg8K9xSgfIJs8GQAHeI5b) | [YouTube](https://www.youtube.com/channel/UCjjMieiOlSFf7jud0yhHQSg)
 
 ## What we do
 
