@@ -1,6 +1,8 @@
 <script lang="ts">
 	import * as m from '$lib/paraglide/messages.js'
 	import { tick } from 'svelte'
+	import { goto } from '$app/navigation'
+	import { localizeHref } from '$lib/paraglide/runtime'
 
 	interface Props {
 		// Localizable text
@@ -10,6 +12,8 @@
 		descriptionText?: m.LocalizedString
 		// State variable for email binding (for external use)
 		email?: string
+		/** When set, submit routes to this signup path with the email prefilled, instead of Substack. */
+		handoffHref?: string
 	}
 
 	let {
@@ -17,7 +21,8 @@
 		buttonText = m.newsletter_button(),
 		headingText = m.newsletter_heading(),
 		descriptionText = m.newsletter_description(),
-		email = $bindable('')
+		email = $bindable(''),
+		handoffHref = undefined
 	}: Props = $props()
 
 	// State for showing success message
@@ -26,6 +31,15 @@
 
 	const handleSubmit = async (e: Event) => {
 		e.preventDefault()
+
+		// Newsletter entry that feeds the CRM: hand off to the signup flow with the
+		// email prefilled, rather than subscribing to Substack directly.
+		if (handoffHref) {
+			const dest = `${localizeHref(handoffHref)}?subscribe-email=${encodeURIComponent(email)}`
+			email = ''
+			void goto(dest)
+			return
+		}
 
 		// Show success message immediately
 		showSuccess = true
@@ -46,25 +60,30 @@
 		<h3 class="toc-exclude">{headingText}</h3>
 		<p>{descriptionText}</p>
 
-		<!-- Direct POST to Substack API in new tab -->
+		<!-- Direct POST to Substack API in new tab, unless handing off to the signup
+		     flow — then the native target mirrors the hydrated goto(), so submitting
+		     before hydration (or without JS) still lands on the flow rather than
+		     subscribing straight to Substack. -->
 		<form
 			bind:this={formElement}
-			action="https://pauseai.substack.com/api/v1/free"
-			method="POST"
-			target="_blank"
+			action={handoffHref ? localizeHref(handoffHref) : 'https://pauseai.substack.com/api/v1/free'}
+			method={handoffHref ? 'GET' : 'POST'}
+			target={handoffHref ? undefined : '_blank'}
 			onsubmit={handleSubmit}
 		>
 			<div class="input-group">
 				<input
 					type="email"
-					name="email"
+					name={handoffHref ? 'subscribe-email' : 'email'}
 					bind:value={email}
 					placeholder={placeholderText}
 					aria-label={placeholderText}
 					required
 					enterkeyhint="done"
 				/>
-				<input type="hidden" name="source" value="pauseai_website" />
+				{#if !handoffHref}
+					<input type="hidden" name="source" value="pauseai_website" />
+				{/if}
 				<button type="submit">{buttonText}</button>
 			</div>
 		</form>

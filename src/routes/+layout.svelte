@@ -57,6 +57,11 @@
 			dateRange: [null, '2024-12-31']
 		},
 		{
+			id: 'de-webinar-luisa-neubauer',
+			countries: ['DE'],
+			dateRange: [null, '2026-08-25']
+		},
+		{
 			id: 'pausecon-london-2026',
 			countries: null,
 			dateRange: [null, '2026-08-21']
@@ -185,6 +190,12 @@
 
 		<NearbyEvent contrast={hero} bind:eventFound geo={geoForNearbyEvent} />
 
+		<Banner contrast={hero} id="de-webinar-luisa-neubauer" rules={mainBannerRules}>
+			<strong>Bedroht KI unsere Zukunft?</strong> PauseAI-Webinar mit Luisa Neubauer am 25. August,
+			18:00 Uhr.
+			<strong><Link href="https://luma.com/b8ht854p">Jetzt anmelden!</Link></strong>
+		</Banner>
+
 		<Banner contrast={hero} id="pausecon-london-2026" rules={mainBannerRules}>
 			<strong>PauseCon London 2026</strong>: Apply now to join our September organising conference.
 			<strong><Link href="https://luma.com/4be2eqz9">Apply here!</Link></strong>
@@ -297,10 +308,18 @@
 	}
 
 	.menu-band :global(nav) {
-		width: min(var(--page-width), 100% - 2 * var(--page-gutter));
+		width: min(var(--header-width), 100% - 2 * var(--page-gutter));
 		margin-inline: auto;
 		/* Tighter vertical padding than the component's responsive default. */
 		--vspace: 1.85rem;
+	}
+
+	/* The header on non-hero pages sits inside .layout, whose max-inline-size is
+	   the (narrower) content width. Let it use the wider header width so all
+	   top-level nav items fit on one row beside the logo. */
+	.layout > :global(.wide-navbar) {
+		width: min(var(--header-width), 100dvw - 2 * var(--page-gutter));
+		justify-self: center;
 	}
 
 	.layout {

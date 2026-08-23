@@ -4,21 +4,20 @@ slug: australia-progress
 description: What the Australian chapter of PauseAI has been doing and needs help with
 ---
 
-Metrics since we founded
-📧147 AI decisionmaker emails, meetings with 👥22 of them, 📅20 events with 231 attendees.
+Metrics since we founded: 📧147 AI decisionmaker emails, meetings with 👥22 of them, 📅20 events with 231 attendees.
 
 ### 2026 August
 
-**Upcoming**
+Upcoming
 
 - Tell us [what you did](mailto:australia@pauseai.info?subject=Aussie%20Did%20a%20Thing), or [what you have cooking](mailto:australia@pauseai.info?subject=Things%20Cooking) so we can support you!
-- Meetings with 👥1 AI decisionmaker, 📅2 [events](https://luma.com/PauseAIAustralia).
 - Sunyal is attending Government Cyber Security Showcase Western Australia 2026 as a representative of PauseAI
+- We are [staging an AI race](https://luma.com/4jqbp20b) for the Australia AI Summit
 - We are preparing a submission to the consultation on [Artificial intelligence and data centres](https://www.aph.gov.au/Parliamentary_Business/Committees/Senate/Environment_and_Communications/AIdatacentres48P) (due 1 September, make sure to submit your own!)
 
-**Done**
+Done
 
-- 📧2 AI decisionmaker emails
+- 📧8 AI decisionmaker emails, meetings with 👥2 of them, 📅4 events with 45 attendees.
 - One of our two correspondence submissions got accepted for Quarterly Essay 102: The God We Made! Look out for it in the next edition.
 
 ### 2026 July
@@ -181,7 +180,7 @@ Metrics since we founded
 - 📧3 AI decisionmaker emails, 📅1 event with 11 attendees.
 - ✅Australian AI Safety Institute (AISI) announced! This was one of our 3 main policy goals. Two to go: international AI treaty, and AI guardrails.
 - ✅Emails from PauseAI Australia volunteers and a [question at a live townhall](https://youtu.be/SbqUEhJt5RU?si=CSVML0vatdW-GBEh) prompted five politicians to sign the [Future of Life Institute's Superintelligence Statement](https://www.linkedin.com/feed/update/urn:li:activity:7408047524902572032).
-- Minister of Industry [responds to petition EN7777](https://epetitions.aph.gov.au/api/ministerialresponse/download/EN7777), declining to commit to mandatory independent safety evaluations nor to advocate for an international pause treaty, instead pointing to voluntary measures.
+- Minister of Industry [responds to petition EN7777](https://epetitions.aph.gov.au/api/ministerialresponse/download/EN7777), not addressing either our request for independent safety evaluations or our request that they advocate for an international pause treaty. Instead the Minister pointed to voluntary measures.
 - We co-signed [Urging an International AI Treaty: An Open Letter](https://aitreaty.org/).
 - We made a submission to the India AI Impact Summit working group for "Safe & Trusted AI".
 
