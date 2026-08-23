@@ -60,6 +60,7 @@ Volunteers across Australia work to:
 - Strengthen the global PauseAI movement
 
 PauseAI Australia Ltd is an incorporated not-for-profit.
+Last month's progress includes 📧27 AI decisionmaker emails, meetings with 👥5 of them, 📅5 events with 80 attendees.
 
 <div style="display:flex; flex-wrap:wrap; gap:0.5rem; max-width:90%; margin:1rem auto;">
 <div style="text-align:center; margin:2rem 0;">
