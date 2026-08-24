@@ -3,6 +3,8 @@
 	import { micromark } from 'micromark'
 	import LoadingSpinner from './LoadingSpinner.svelte'
 	import Link from '$lib/components/Link.svelte'
+	import Turnstile from '$lib/components/Turnstile.svelte'
+	import { turnstileSiteKey } from '$lib/turnstile'
 	import { slide } from 'svelte/transition'
 
 	interface Props {
@@ -44,6 +46,16 @@ ${userPostcode.toUpperCase()}`)
 	let submitStatus: 'idle' | 'success' | 'error' = $state('idle')
 	let errorMessage = $state('')
 	let confirmingSend = $state(false)
+	let honeypot = $state('')
+	let turnstileToken = $state('')
+
+	// Bumped after each submission to remount the widget: Turnstile tokens are
+	// single-use, so a resubmit with the same token would be rejected.
+	let turnstileNonce = $state(0)
+
+	// Without a configured site key (e.g. local development) there is no widget
+	// to wait for, and the server decides whether to accept the submission.
+	const canSubmit = $derived(!isSubmitting && (!turnstileSiteKey || turnstileToken !== ''))
 
 	let htmlPreview = $derived(micromark(message))
 
@@ -178,7 +190,9 @@ ${userPostcode.toUpperCase()}`)
 					senderPostcode: userPostcode,
 					recipient: mp.email,
 					subject: subject.trim(),
-					message: message.trim()
+					message: message.trim(),
+					nickname: honeypot,
+					turnstileToken
 				})
 			})
 
@@ -198,6 +212,10 @@ ${userPostcode.toUpperCase()}`)
 			console.error('Email submission error:', error)
 		} finally {
 			isSubmitting = false
+
+			// The token has now been spent (or rejected) either way — get a fresh one.
+			turnstileToken = ''
+			turnstileNonce += 1
 		}
 	}
 </script>
@@ -214,6 +232,18 @@ ${userPostcode.toUpperCase()}`)
 				onsubmit?.(e)
 			}}
 		>
+			<div class="form-group honey">
+				<label for="mp-nickname">Nickname</label>
+				<input
+					type="text"
+					id="mp-nickname"
+					name="nickname"
+					tabindex="-1"
+					autocomplete="off"
+					bind:value={honeypot}
+				/>
+			</div>
+
 			<div class="form-group">
 				<label for="sender-email">Your email</label>
 				<input
@@ -331,6 +361,9 @@ ${userPostcode.toUpperCase()}`)
 			{#if confirmingSend}
 				<div class="confirm-box" in:slide={{ duration: 250 }}>
 					<p class="confirm-prompt">Send this email to <strong>{mp.name}</strong>?</p>
+					{#key turnstileNonce}
+						<Turnstile bind:token={turnstileToken} />
+					{/key}
 					<div class="confirm-actions">
 						<button
 							type="button"
@@ -343,7 +376,7 @@ ${userPostcode.toUpperCase()}`)
 						<button
 							type="button"
 							class="submit-button confirm-button"
-							disabled={isSubmitting}
+							disabled={!canSubmit}
 							onclick={handleSubmit}
 						>
 							{#if isSubmitting}
@@ -387,6 +420,17 @@ ${userPostcode.toUpperCase()}`)
 		display: flex;
 		flex-direction: column;
 		padding-top: 1.5rem;
+	}
+
+	.honey {
+		display: none;
+		opacity: 0;
+		position: absolute;
+		left: -9999px;
+		height: 0;
+		width: 0;
+		overflow: hidden;
+		z-index: -1;
 	}
 
 	label {
