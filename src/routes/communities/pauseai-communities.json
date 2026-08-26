@@ -173,7 +173,7 @@
 			"name": "Melbourne",
 			"lat": -37.8136,
 			"lon": 144.9631,
-			"link": "$$DISCORD_GLOBAL$$",
+			"link": "https://www.pauseai.org.au",
 			"parent_name": "Australia"
 		},
 		{
@@ -291,9 +291,37 @@
 			"name": "Canberra",
 			"lat": -35.2809,
 			"lon": 149.13,
-			"link": "$$DISCORD_GLOBAL$$",
+			"link": "https://www.pauseai.org.au",
 			"parent_name": "Australia"
 		},
+		{
+			"name": "Sydney",
+			"lat": -33.8688,
+			"lon": 151.2093,
+			"link": "https://www.pauseai.org.au",
+			"parent_name": "Australia"
+		},
+		{
+			"name": "Brisbane",
+			"lat": -27.4698,
+			"lon": 153.0251,
+			"link": "https://www.pauseai.org.au",
+			"parent_name": "Australia"
+		},
+		{
+			"name": "Perth",
+			"lat": -31.9523,
+			"lon": 115.8613,
+			"link": "https://www.pauseai.org.au",
+			"parent_name": "Australia"
+		},
+		{
+			"name": "Adelaide",
+			"lat": -34.9285,
+			"lon": 138.6007,
+			"link": "https://www.pauseai.org.au",
+			"parent_name": "Australia"
+		}
 		{
 			"name": "PauseAI en Español",
 			"lat": 40.4168,
@@ -304,7 +332,7 @@
 			"name": "Launceston",
 			"lat": -41.433349,
 			"lon": 147.123323,
-			"link": "$$DISCORD_GLOBAL$$",
+			"link": "https://www.pauseai.org.au",
 			"parent_name": "Australia"
 		},
 		{
