@@ -135,7 +135,7 @@
 		{
 			"name": "AI Safety Melbourne",
 			"lat": -37.8136,
-			"lon": 144.9631,
+			"lon": 145.0031,
 			"link": "https://www.facebook.com/groups/503645528219169"
 		},
 		{
@@ -165,8 +165,14 @@
 		{
 			"name": "AI Safety Sydney",
 			"lat": -33.8688,
-			"lon": 151.2093,
+			"lon": 151.2493,
 			"link": "https://www.facebook.com/groups/4642042999234413"
+		},
+		{
+			"name": "AI Safety Australia & New Zealand - Christchurch",
+			"lat": -43.5321,
+			"lon": 172.6362,
+			"link": "https://www.aisafetyanz.com.au/network"
 		}
 	]
 }
