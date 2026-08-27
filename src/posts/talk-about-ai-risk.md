@@ -111,7 +111,7 @@ What are your interlocutor's concerns? Perhaps they're concerned about climate c
 
 Besides, there are many ways that AI risks and harms may already show up in their lives, and they are all part of the bigger picture: AI is being introduced everywhere, without accountability or democratic consent, and we don't know how to keep it safe and serving human interests. It's introducing massive changes to most aspects of society, and this is only the beginning of what we should expect as these systems become more and more powerful and less and less controllable. If your colleague, friend or aunt are concerned about job losses or AI psychosis, that's not mutually exclusive from the catastrophe/extinction risks we're beginning to face, and those are genuine human problems that deserve consideration and compassion. **They're facets of the same picture**, and they all warrant a global pause while we work out how to protect human interests and what AIs we might be able to safely build.
 
-#### Two worked examples
+### Two worked examples
 
 If you're talking to your property developer/builder uncle, explaining that AIs don't have to "want" to destroy humanity to do so by using the metaphor of "when humans build houses, they kill ants in the ground below not because they want to, but because their priority is building houses; if AI becomes able to do more than humans, that's the situation we end up in by default" could land quite intuitively for them.
 
@@ -190,6 +190,14 @@ If you find such conversations daunting, you can focus on pointing your interloc
 	details[open] summary {
 		border-bottom: 1px solid var(--bg-subtle);
 		margin-bottom: var(--spacing-xs);
+	}
+
+	/* Each pillar's <summary> acts as its heading but isn't a heading element,
+	   so this h3 is the first real rung under the section's h2. Sized down to
+	   sit below the summary rather than compete with it. */
+	details h3 {
+		font-size: 1.05rem;
+		margin-top: var(--spacing-sm);
 	}
 
 	.tier-label {
