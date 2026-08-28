@@ -49,7 +49,7 @@
 		"cross-env": "^10.1.0",
 		"dotenv": "^17.4.2",
 		"eslint": "^10.9.1",
-		"eslint-config-flat-gitignore": "^2.3.0",
+		"eslint-config-flat-gitignore": "^2.4.0",
 		"eslint-config-prettier": "^10.1.8",
 		"eslint-formatter-gha": "^2.0.1",
 		"eslint-plugin-svelte": "^3.23.0",
