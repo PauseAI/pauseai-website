@@ -48,20 +48,29 @@ Flow on `/join`:
 | `src/routes/embed/onboarding-form/stub/+page.svelte`    | Stub inspection page rendered when `ONBOARDING_LIVE` is not `true`.                                                                           |
 | `src/routes/embed/onboarding-form/stub/+page.server.ts` | `load` function returning in-memory stub submissions.                                                                                         |
 
-The embed wrapper does four things the `/join` route does not:
+The embed wrapper does five things the `/join` route does not:
 
 1. **Query-param prefill** — reads `?country=`, `?city=`, `?languages=` and
    passes them to `OnboardingFlow` as `initialCountry` / `initialCity` /
    `initialLanguages`. Unmatched language values are silently dropped against
    the stored values in `options.ts`. See `docs/ONBOARDING_EMBED.md` for the
    full param table and the rationale for which fields are not prefillable.
-2. **Locale** — reads `?locale=` and calls `setOnboardingLocale()` from
+1. **Source attribution** — sets `initialSource` on `OnboardingFlow`, which
+   posts it as a hidden `source` field on the create forms. It is `?source=` if
+   present, else — when iframed — the host page URL from `document.referrer`
+   (set in `onMount`, since `document.referrer` is not available during SSR).
+   First-party pages (`/join`, `/subscribe`) pass nothing and the submit action
+   falls back to the same-origin `Referer` path instead. Whatever arrives is
+   sanitised and appended to the base `Signup source` on a create, e.g.
+   `June 2026 onboarding flow - example.org/join`. See "Signup source" under
+   _Create versus update_ for the full resolution order.
+1. **Locale** — reads `?locale=` and calls `setOnboardingLocale()` from
    `src/lib/components/onboarding/i18n.svelte.ts` so partner sites can render
    the form in a supported language.
-3. **Background color** — reads `?bg=` (hex with or without `#`, or a CSS color
+1. **Background color** — reads `?bg=` (hex with or without `#`, or a CSS color
    name) and applies it as `style:background-color` on the wrapper so the embed
    blends into the host page.
-4. **Height reporting** — when `window.self !== window.top` (i.e. iframed), a
+1. **Height reporting** — when `window.self !== window.top` (i.e. iframed), a
    `ResizeObserver` posts `{ height: number }` to the parent via `postMessage`
    on every layout change so the host can resize the iframe. The wrapper also
    drops its `min-height: 100dvh` in embedded mode so the reported height can
@@ -273,8 +282,14 @@ On an update:
   so an update carrying neither is rejected anyway.
 - `Signup source` is never rewritten. It is provenance, stamped once at create:
   `June 2026 subscribe form` for `/subscribe`, `June 2026 onboarding flow`
-  otherwise. Without that rule the volunteer step, which carries no subscribe
-  marker, would rewrite a subscribe row as a join row.
+  otherwise. `resolveSourceSuffix` then appends ` - <source>`, taking the first
+  of: the hidden `source` field (an embed's `?source=`, or the host page URL the
+  embed wrapper read from `document.referrer`); else this request's `Referer`
+  path when it is same-origin and not `/embed/onboarding-form*` (first-party
+  `/join` etc. → `pauseai.info/join`); else nothing. The result is sanitised to
+  a host/path slug (word chars, spaces, dashes, dots, slashes; max 80). Without
+  the "create only" rule the volunteer step, which carries no subscribe marker,
+  would rewrite a subscribe row as a join row.
 - GDPR consent is not required, because it was captured at create.
 - `Full name`, `Country` and `City` are overwritten only when the post supplies
   a non-empty value, so a partial post cannot blank what the create collected.

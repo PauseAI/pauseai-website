@@ -20,6 +20,15 @@
 
 	const initialCountry = $derived(page.url.searchParams.get('country') ?? '')
 	const initialCity = $derived(page.url.searchParams.get('city') ?? '')
+	// Signup-source attribution, appended to the base Signup source on the server
+	// (create only; the server sanitises it, so it's passed through untouched):
+	//  - explicit ?source= always wins — how a partner labels its embed
+	//  - otherwise, when iframed, fall back to the host page from document.referrer
+	//    (`example.org/join`), so an embed self-attributes with no param at all.
+	//    Set in onMount because document.referrer isn't available during SSR.
+	const explicitSource = $derived(page.url.searchParams.get('source') ?? '')
+	let referrerSource = $state('')
+	const initialSource = $derived(explicitSource || referrerSource)
 	const initialLanguages = $derived(
 		(page.url.searchParams.get('languages') ?? '')
 			.split(',')
@@ -37,6 +46,24 @@
 	onMount(() => {
 		embedded = window.self !== window.top
 		if (!embedded) return
+
+		// The host page's URL, for source attribution when no ?source= was given.
+		// A cross-origin parent can't be read via script, but the browser still
+		// exposes its URL here as a plain string (unless the host sends
+		// Referrer-Policy: no-referrer, in which case this is empty and the
+		// submission keeps just the base source).
+		if (document.referrer) {
+			try {
+				const ref = new URL(document.referrer)
+				// Ignore a referrer that is this embed route itself (a redirect chain,
+				// or the page linking to itself) — it says nothing about the host.
+				if (!ref.pathname.startsWith('/embed/onboarding-form')) {
+					referrerSource = `${ref.host}${ref.pathname}`.replace(/\/$/, '')
+				}
+			} catch {
+				// Unparseable referrer — leave attribution to ?source= or nothing.
+			}
+		}
 
 		const sendHeight = () => {
 			window.parent.postMessage({ height: Math.ceil(document.documentElement.scrollHeight) }, '*')
@@ -68,7 +95,7 @@
 <PostMeta {title} {description} />
 
 <div class="embed-wrap" class:embedded style:background-color={background || undefined}>
-	<OnboardingFlow {initialCountry} {initialCity} {initialLanguages} />
+	<OnboardingFlow {initialCountry} {initialCity} {initialLanguages} {initialSource} />
 </div>
 
 <style>

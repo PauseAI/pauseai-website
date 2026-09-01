@@ -25,18 +25,19 @@ The page reports its rendered height to the host via `postMessage` (`{ height: n
 
 ## Query params
 
-| Param       | Effect                                                                                                                                                                                             |
-| ----------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `country`   | Prefills country of residence                                                                                                                                                                      |
-| `city`      | Prefills city / town of residence                                                                                                                                                                  |
-| `languages` | Prefills the volunteer form's language selector. Comma-separated, matched against the stored language values in `src/lib/components/onboarding/options.ts` (unmatched values are silently ignored) |
-| `bg`        | Sets the embed's background color, so it blends into the host page. Accepts a hex value (`bg=fff` or `bg=%23fff`) or a CSS color name (`bg=white`). Anything else is ignored                       |
+| Param       | Effect                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
+| ----------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `country`   | Prefills country of residence                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
+| `city`      | Prefills city / town of residence                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
+| `languages` | Prefills the volunteer form's language selector. Comma-separated, matched against the stored language values in `src/lib/components/onboarding/options.ts` (unmatched values are silently ignored)                                                                                                                                                                                                                                                                                                                                                                           |
+| `bg`        | Sets the embed's background color, so it blends into the host page. Accepts a hex value (`bg=fff` or `bg=%23fff`) or a CSS color name (`bg=white`). Anything else is ignored                                                                                                                                                                                                                                                                                                                                                                                                 |
+| `source`    | Overrides the auto-detected attribution. Sanitised server-side (word chars, spaces, dashes, dots, slashes; max 80 — e.g. `pauseai.uk/join`) and appended to the `Signup source` field on new records, e.g. `June 2026 onboarding flow - pauseai.uk/join`. Applies to new signups only, not updates. **Usually unneeded**: an embed already self-attributes from the host page URL (`document.referrer`), and first-party pages from the request `Referer`. Pass it only to force a specific label, or when the host sends `Referrer-Policy: no-referrer` (which blanks both) |
 
 Example — a French-speaking regional chapter embed:
 
 ```html
 <iframe
-	src="https://pauseai.info/embed/onboarding-form?country=France&city=Paris&languages=French,English&bg=fff"
+	src="https://pauseai.info/embed/onboarding-form?country=France&city=Paris&languages=French,English&bg=fff&source=pauseai.fr/join"
 ></iframe>
 ```
 
@@ -46,6 +47,38 @@ Country/city/languages are things a chapter can reasonably know in advance about
 
 - Consent checkboxes (GDPR, volunteer agreement, code of conduct, newsletter/keep-informed opt-ins) must be actively given by the visitor — prefilling them via a shareable URL would be a dark pattern. The volunteer step's "become a paying member" opt-in is also not prefillable today, though this is less deliberate than the consent-box exclusion.
 - Contact details (name, email, phone, Discord username) have no legitimate source when the same embed link is shared broadly to an unknown audience.
+
+## Attribution (`Signup source`)
+
+Every new record gets a base `Signup source` (`June 2026 onboarding flow`, or
+`June 2026 subscribe form` from `/subscribe`) with a ` - <where>` suffix. The
+suffix is resolved server-side, first match wins:
+
+1. the `source` query param, if given (sanitised);
+2. else, for an iframe embed, the host page from `document.referrer`;
+3. else, for a first-party page, its own path from the request `Referer`
+   (`pauseai.info/join`);
+4. else nothing — just the base value.
+
+**What the referrer gives you (case 2).** Under the browser default referrer
+policy, a cross-origin iframe only sees the host's **origin**, so a plain
+`<iframe src=".../embed/onboarding-form">` on `example.org/join` records
+`June 2026 onboarding flow - example.org` — domain, not page. To get the full
+path (`example.org/join`), the host must loosen the policy on the iframe tag:
+
+```html
+<iframe
+	src="https://pauseai.info/embed/onboarding-form"
+	referrerpolicy="no-referrer-when-downgrade"
+></iframe>
+```
+
+(`no-referrer-when-downgrade` sends the full URL between HTTPS origins; the
+query string is dropped on our side. `Referrer-Policy: no-referrer` on the host
+blanks case 2 entirely — use `?source=` then.) For an exact, policy-independent
+label, pass `?source=` and skip all of this.
+
+Updates never rewrite `Signup source` — it is stamped once, at record creation.
 
 ## Mode: stub vs. live
 

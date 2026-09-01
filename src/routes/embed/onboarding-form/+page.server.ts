@@ -58,6 +58,42 @@ function isIntent(value: string): value is Intent {
 	return (INTENTS as readonly string[]).includes(value)
 }
 
+// A short host/path-style slug: word chars, spaces, dashes, dots and slashes
+// (e.g. `pauseai.uk/join`), capped so a hand-edited value can't bloat the field.
+function cleanSource(value: string): string {
+	return value
+		.replace(/[^\w \-./]/g, '')
+		.replace(/\s+/g, ' ')
+		.trim()
+		.slice(0, 80)
+}
+
+// The ` - <source>` suffix appended to the base Signup source on a create, so a
+// row records where the signup came from. Two ways in, explicit first:
+//  1. ?source= on the embed URL (threaded through as a hidden `source` field) —
+//     how a partner site attributes its own iframe.
+//  2. otherwise, for a first-party submission, the page it was posted from, read
+//     from the same-origin Referer (e.g. `pauseai.info/join`). The embed wrapper
+//     itself is excluded: an iframe with no ?source= stays unattributed rather
+//     than being tagged as the wrapper route.
+// Returns '' when neither applies.
+function resolveSourceSuffix(data: FormData, request: Request, selfUrl: URL): string {
+	const explicit = cleanSource(getString(data, 'source'))
+	if (explicit) return explicit
+
+	const referer = request.headers.get('referer')
+	if (!referer) return ''
+	let ref: URL
+	try {
+		ref = new URL(referer)
+	} catch {
+		return ''
+	}
+	if (ref.host !== selfUrl.host) return ''
+	if (ref.pathname.startsWith('/embed/onboarding-form')) return ''
+	return cleanSource(`${ref.host}${ref.pathname}`)
+}
+
 async function lookupChapter(
 	customFetch: typeof fetch,
 	country: string
@@ -168,8 +204,17 @@ export const actions: Actions = {
 		// Which form produced the row — provenance, so it's written once at create and
 		// never on an update, or the volunteer step (which carries no subscribe marker)
 		// would rewrite a /subscribe row as a /join one.
+		//
+		// The base value is appended to, not swapped, so the row still records which
+		// flow it came from. The suffix is either an embed's explicit ?source= or the
+		// first-party page it was posted from — see resolveSourceSuffix. Both inputs
+		// are attacker-influenced (a URL param, a spoofable-looking Referer), so the
+		// helper constrains the result to a short host/path slug. `Signup source` is
+		// free text, so no option needs to exist for a new value.
 		if (!existingRecordId) {
-			fields['Signup source'] = isSubscribeForm ? SUBSCRIBE_SIGNUP_SOURCE : SIGNUP_SOURCE
+			const base = isSubscribeForm ? SUBSCRIBE_SIGNUP_SOURCE : SIGNUP_SOURCE
+			const suffix = resolveSourceSuffix(data, request, url)
+			fields['Signup source'] = suffix ? `${base} - ${suffix}` : base
 		}
 		// A create always writes the basics (they're validated above). An update only
 		// overwrites them when non-empty, so a partial post can't blank what the
