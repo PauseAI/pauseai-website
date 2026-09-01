@@ -61,8 +61,8 @@ The embed wrapper does five things the `/join` route does not:
    (set in `onMount`, since `document.referrer` is not available during SSR).
    First-party pages (`/join`, `/subscribe`) pass nothing and the submit action
    falls back to the same-origin `Referer` path instead. Whatever arrives is
-   sanitised and appended to the base `Signup source` on a create, e.g.
-   `June 2026 onboarding flow - example.org/join`. See "Signup source" under
+   sanitised and written to the `Source page` field on a create, e.g.
+   `example.org/join`; `Signup source` is untouched. See "Signup source" under
    _Create versus update_ for the full resolution order.
 1. **Locale** — reads `?locale=` and calls `setOnboardingLocale()` from
    `src/lib/components/onboarding/i18n.svelte.ts` so partner sites can render
@@ -282,14 +282,16 @@ On an update:
   so an update carrying neither is rejected anyway.
 - `Signup source` is never rewritten. It is provenance, stamped once at create:
   `June 2026 subscribe form` for `/subscribe`, `June 2026 onboarding flow`
-  otherwise. `resolveSourceSuffix` then appends ` - <source>`, taking the first
-  of: the hidden `source` field (an embed's `?source=`, or the host page URL the
-  embed wrapper read from `document.referrer`); else this request's `Referer`
-  path when it is same-origin and not `/embed/onboarding-form*` (first-party
-  `/join` etc. → `pauseai.info/join`); else nothing. The result is sanitised to
-  a host/path slug (word chars, spaces, dashes, dots, slashes; max 80). Without
-  the "create only" rule the volunteer step, which carries no subscribe marker,
-  would rewrite a subscribe row as a join row.
+  otherwise. It stays a stable literal — no suffix — so views and automations can
+  match it exactly. Without the "create only" rule the volunteer step, which
+  carries no subscribe marker, would rewrite a subscribe row as a join row.
+- `Source page` is written next to it, also create-only, recording where the
+  signup came from. `resolveSourcePage` takes the first of: the hidden `source`
+  field (an embed's `?source=`, or the host page URL the embed wrapper read from
+  `document.referrer`); else this request's `Referer` path when it is same-origin
+  and not `/embed/onboarding-form*` (first-party `/join` etc. → `pauseai.info/join`);
+  else nothing (field left unset). The result is sanitised to a host/path slug
+  (word chars, spaces, dashes, dots, slashes; max 80).
 - GDPR consent is not required, because it was captured at create.
 - `Full name`, `Country` and `City` are overwritten only when the post supplies
   a non-empty value, so a partial post cannot blank what the create collected.
@@ -316,8 +318,9 @@ on a create, and how to treat chapter sharing.
 Target: base `appWPTGqZmUcs3NWu`, table `tblL1icZBhTV1gQ9o` ("Members").
 
 **Step 2 / browse signup / subscribe form (create):** `Full name`, `Email`,
-`Country`, `City`, `Intent`, `Signup source`, `Email subscription`
-(keep_informed), `Data privacy policy agreed`, `GDPR chapter share permission`.
+`Country`, `City`, `Intent`, `Signup source`, `Source page` (when resolved),
+`Email subscription` (keep_informed), `Data privacy policy agreed`,
+`GDPR chapter share permission`.
 Every field there has a rule under "Create versus update" above or "Chapter
 sharing" below, so treat this list as the index to those rules.
 

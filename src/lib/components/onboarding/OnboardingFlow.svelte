@@ -63,8 +63,8 @@
 		initialFullName?: string
 		initialLanguages?: string[]
 		// Per-embed attribution from /embed/onboarding-form?source=. Posted as a
-		// hidden `source` on the create forms; the server sanitises it and appends
-		// it to the base Signup source. Ignored on updates (which never rewrite it).
+		// hidden `source` on the create forms; the server sanitises it and writes
+		// it to the `Source page` field. Ignored on updates (create-only field).
 		initialSource?: string
 		// The /subscribe flow creates the record up front and then hands off here
 		// to let people go further. It seeds the created record id and starts at
@@ -395,7 +395,7 @@
 	{#if basics.newsletter}
 		<input type="hidden" name="newsletter" value="on" />
 	{/if}
-	<!-- Per-embed attribution. The server appends it to Signup source on a create
+	<!-- Per-embed attribution. The server writes it to `Source page` on a create
 	     and ignores it on an update, so it is safe on every form that renders this. -->
 	{#if initialSource}
 		<input type="hidden" name="source" value={initialSource} />

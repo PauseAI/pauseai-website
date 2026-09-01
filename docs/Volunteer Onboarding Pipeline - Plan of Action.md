@@ -79,7 +79,7 @@ New route `src/routes/onboarding/+page.svelte` (client state machine, modelled o
 
 - Expose the onboarding form embeddable in an iframe (dedicated minimal-chrome route or query param, e.g. `/onboarding?embed=1&country=GB`), with **pre-filled country** per Decision 7.
 - Cross-origin plumbing: postMessage for iframe resize + submit/advance signalling.
-- Set `Signup source` (or a per-site value) so embedded submissions are attributable.
+- Per-site attribution lands in `Source page` (`?source=` param, or the host page's `Referer`); `Signup source` stays the flow literal. Built 2026-09 — see `docs/ONBOARDING_EMBED.md`.
 - Switchover is gradual and opt-in per site; pauseai.uk is the reference Tally-using site. Coordinate with country-site leads. Tally form `wbGvKe` stays live until the last site migrates.
 
 ## Data model (Airtable)
@@ -94,9 +94,10 @@ Audited live schema of base "PauseAI Volunteers & Actions" (`appWPTGqZmUcs3NWu`)
 
 1. **`Intent`** — singleSelect: `Keep informed`, `Act now`, `Volunteer`, `Lead`. The core segmentation field; nothing today distinguishes volunteers from interest-only (memo: _"all of the information lands in airtable in one list … distinguished between volunteers and interest only"_). All downstream filtering (Irina's volunteer view, Comms mobilization list) depends on it.
 2. **`Chapter lead interest`** — checkbox. For Lead path (memo: _"Yes — please contact me about starting a chapter"_). Distinct from existing `Leading National Chapter` link, which marks people who _already_ lead.
-3. **`Signup source`** — single line text (the field was built as free text, not a singleSelect as first planned). Decided 2026-06-10: every submission from the new flow gets the value **`June 2026 onboarding flow`**; other sources stay as they are (legacy/country-site Tally rows taggable as `tally`). Since 2026-09 the base value gets a ` - <slug>` suffix: an embed's `?source=` param, or for first-party submissions the posting page's path from the `Referer` (e.g. `June 2026 onboarding flow - pauseai.info/join`). See `docs/ONBOARDING_EMBED.md`. Within-flow path granularity (keep-informed vs browse vs volunteer vs lead) comes from `Intent`, not this field. Existing `Discovery method of PAI` records how they _heard_, not how they _entered_.
+3. **`Signup source`** — single line text (the field was built as free text, not a singleSelect as first planned). Decided 2026-06-10: every submission from the new flow gets the value **`June 2026 onboarding flow`** (`June 2026 subscribe form` from `/subscribe`); other sources stay as they are (legacy/country-site Tally rows taggable as `tally`). It stays a stable literal — match it exactly. Within-flow path granularity (keep-informed vs browse vs volunteer vs lead) comes from `Intent`, not this field. Existing `Discovery method of PAI` records how they _heard_, not how they _entered_.
+4. **`Source page`** — single line text. Added 2026-09: where the signup came from, as a host/path slug (`pauseai.info/join`, `example.org/join`). Set on create only, never rewritten. Filled from an embed's `?source=` param, else the posting page's path from the `Referer`; empty when neither resolves. Sanitised server-side (word chars, spaces, dashes, dots, slashes; max 80). See `docs/ONBOARDING_EMBED.md`.
 
-~~4. `Mobilization consent`~~ — **not needed** (Decision 1): mobilization rests on legitimate interest, not consent, so there is no consent state to record. `Email subscription` alone records the newsletter choice.
+~~5. `Mobilization consent`~~ — **not needed** (Decision 1): mobilization rests on legitimate interest, not consent, so there is no consent state to record. `Email subscription` alone records the newsletter choice.
 
 ### Not new fields
 
