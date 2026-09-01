@@ -7,9 +7,16 @@
 ```html
 <iframe
 	src="https://pauseai.info/embed/onboarding-form"
+	referrerpolicy="no-referrer-when-downgrade"
 	style="width: 100%; border: none;"
 ></iframe>
 ```
+
+`referrerpolicy="no-referrer-when-downgrade"` is **recommended**: without it a
+cross-origin iframe only passes its host origin, so signups are attributed to
+the bare domain instead of the page (see [Attribution](#attribution-signup-source--source-page)).
+It sends the full URL only between HTTPS origins, and the query string is
+dropped on our side.
 
 The page reports its rendered height to the host via `postMessage` (`{ height: number }`) so the host can resize the iframe as the form's steps change. Listen for it:
 
@@ -67,20 +74,15 @@ Two fields, written once at record creation and never on an update:
 **What the referrer gives you (case 2).** Under the browser default referrer
 policy, a cross-origin iframe only sees the host's **origin**, so a plain
 `<iframe src=".../embed/onboarding-form">` on `example.org/join` records
-`Source page` = `example.org` — domain, not page. To get the full path
-(`example.org/join`), the host must loosen the policy on the iframe tag:
+`Source page` = `example.org` — domain, not page. Set
+`referrerpolicy="no-referrer-when-downgrade"` on the iframe tag (recommended, and
+already in the [basic embed](#basic-embed) snippet) to record the full path
+`example.org/join`. It sends the full URL only between HTTPS origins, and the
+query string is dropped on our side.
 
-```html
-<iframe
-	src="https://pauseai.info/embed/onboarding-form"
-	referrerpolicy="no-referrer-when-downgrade"
-></iframe>
-```
-
-(`no-referrer-when-downgrade` sends the full URL between HTTPS origins; the
-query string is dropped on our side. `Referrer-Policy: no-referrer` on the host
-blanks case 2 entirely — use `?source=` then.) For an exact, policy-independent
-label, pass `?source=` and skip all of this.
+`Referrer-Policy: no-referrer` on the host page blanks case 2 entirely — use
+`?source=` then. For an exact, policy-independent label, pass `?source=` and skip
+all of this.
 
 ## Mode: stub vs. live
 
