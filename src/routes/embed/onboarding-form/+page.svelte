@@ -20,6 +20,20 @@
 
 	const initialCountry = $derived(page.url.searchParams.get('country') ?? '')
 	const initialCity = $derived(page.url.searchParams.get('city') ?? '')
+	// Signup-source attribution, written to `Source page` on the server (create
+	// only; the server sanitises it again, so this is only a precedence filter):
+	//  - explicit ?source= wins — how a partner labels its embed
+	//  - otherwise, when iframed, fall back to the host page from document.referrer
+	//    (`example.org/join`), so an embed self-attributes with no param at all.
+	//    Set in onMount because document.referrer isn't available during SSR.
+	// The strip mirrors the server's accepted charset (see cleanSource): a
+	// ?source= that is all punctuation / non-Latin sanitises to nothing there, so
+	// don't let it shadow the document.referrer fallback here.
+	const explicitSource = $derived(
+		(page.url.searchParams.get('source') ?? '').replace(/[^\w \-./]/g, '').trim()
+	)
+	let referrerSource = $state('')
+	const initialSource = $derived(explicitSource || referrerSource)
 	const initialLanguages = $derived(
 		(page.url.searchParams.get('languages') ?? '')
 			.split(',')
@@ -37,6 +51,27 @@
 	onMount(() => {
 		embedded = window.self !== window.top
 		if (!embedded) return
+
+		// The host page's URL, for source attribution when no ?source= was given.
+		// A cross-origin parent can't be read via script, but the browser still
+		// exposes its URL here as a plain string (unless the host sends
+		// Referrer-Policy: no-referrer, in which case this is empty and the
+		// submission records no `Source page`).
+		if (document.referrer) {
+			try {
+				const ref = new URL(document.referrer)
+				// Ignore a referrer that is our own embed route (a redirect chain, or
+				// the page linking to itself) — it says nothing about the host. The
+				// host check keeps a real partner page at a similar path usable.
+				const isSelfEmbed =
+					ref.host === window.location.host && ref.pathname.startsWith('/embed/onboarding-form')
+				if (!isSelfEmbed) {
+					referrerSource = `${ref.host}${ref.pathname}`.replace(/\/+$/, '')
+				}
+			} catch {
+				// Unparseable referrer — leave attribution to ?source= or nothing.
+			}
+		}
 
 		const sendHeight = () => {
 			window.parent.postMessage({ height: Math.ceil(document.documentElement.scrollHeight) }, '*')
@@ -68,7 +103,7 @@
 <PostMeta {title} {description} />
 
 <div class="embed-wrap" class:embedded style:background-color={background || undefined}>
-	<OnboardingFlow {initialCountry} {initialCity} {initialLanguages} />
+	<OnboardingFlow {initialCountry} {initialCity} {initialLanguages} {initialSource} />
 </div>
 
 <style>
