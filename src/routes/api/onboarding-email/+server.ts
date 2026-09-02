@@ -1,6 +1,6 @@
 export const prerender = false
 
-import { ONBOARDING_EMAIL_RENDER_SECRET } from '$env/static/private'
+import { env } from '$env/dynamic/private'
 import { renderOnboardingEmail } from '$lib/server/onboardingEmail/index.js'
 import { json } from '@sveltejs/kit'
 import { StatusCodes } from 'http-status-codes'
@@ -26,10 +26,14 @@ function isNonEmptyString(value: unknown): value is string {
 }
 
 export const POST: RequestHandler = async ({ request }) => {
+	// Dynamic (not static) private env: the secret isn't set in every deploy
+	// environment (e.g. deploy previews), and $env/static/private fails the build
+	// when an imported member is missing rather than resolving it at runtime.
+	const secret = env.ONBOARDING_EMAIL_RENDER_SECRET
 	const authHeader = request.headers.get('authorization') ?? ''
-	const expected = `Bearer ${ONBOARDING_EMAIL_RENDER_SECRET}`
+	const expected = `Bearer ${secret}`
 	// Guard against an unset secret matching an unset header (both `Bearer `).
-	if (!ONBOARDING_EMAIL_RENDER_SECRET || authHeader !== expected) {
+	if (!secret || authHeader !== expected) {
 		return new Response('Unauthorized', { status: StatusCodes.UNAUTHORIZED })
 	}
 
