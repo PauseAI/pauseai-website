@@ -58,6 +58,51 @@ function isIntent(value: string): value is Intent {
 	return (INTENTS as readonly string[]).includes(value)
 }
 
+// A short host/path-style slug: word chars, spaces, dashes, dots and slashes
+// (e.g. `pauseai.uk/join`), collapsed and capped so a hand-edited value can't
+// bloat the field or carry markup. Non-ASCII path segments strip to nothing —
+// acceptable for an attribution slug. `\w` is ASCII-only here on purpose.
+function cleanSource(value: string): string {
+	return (
+		value
+			.replace(/[^\w \-./]/g, '')
+			.replace(/\s+/g, ' ')
+			.replace(/\/{2,}/g, '/')
+			.trim()
+			.slice(0, 80)
+			// A slice landing mid-token, or a stripped trailing segment, can leave a
+			// dangling separator; drop it so the value stays a clean host/path.
+			.replace(/[\s\-./]+$/, '')
+	)
+}
+
+// The `Source page` value written on a create, recording where the signup came
+// from. Never set on an update. Two ways in, explicit first:
+//  1. ?source= on the embed URL (threaded through as a hidden `source` field) —
+//     how a partner site attributes its own iframe, and how the embed passes on
+//     the host page it read from document.referrer.
+//  2. otherwise, for a first-party submission, the page it was posted from, read
+//     from the same-origin Referer (e.g. `pauseai.info/join`). The embed wrapper
+//     itself is excluded: an iframe with no ?source= stays unattributed rather
+//     than being tagged as the wrapper route.
+// Returns '' when neither applies.
+function resolveSourcePage(data: FormData, request: Request, selfUrl: URL): string {
+	const explicit = cleanSource(getString(data, 'source'))
+	if (explicit) return explicit
+
+	const referer = request.headers.get('referer')
+	if (!referer) return ''
+	let ref: URL
+	try {
+		ref = new URL(referer)
+	} catch {
+		return ''
+	}
+	if (ref.host !== selfUrl.host) return ''
+	if (ref.pathname.startsWith('/embed/onboarding-form')) return ''
+	return cleanSource(`${ref.host}${ref.pathname}`)
+}
+
 async function lookupChapter(
 	customFetch: typeof fetch,
 	country: string
@@ -167,9 +212,19 @@ export const actions: Actions = {
 		}
 		// Which form produced the row — provenance, so it's written once at create and
 		// never on an update, or the volunteer step (which carries no subscribe marker)
-		// would rewrite a /subscribe row as a /join one.
+		// would rewrite a /subscribe row as a /join one. Kept a stable literal so
+		// views/automations can still match it exactly; the where-from detail goes in
+		// `Source page` alongside it, never folded into this value.
+		//
+		// `Source page` is either an embed's explicit ?source= or the first-party
+		// page it was posted from — see resolveSourcePage. Both inputs are
+		// attacker-influenced (a URL param, a spoofable-looking Referer), so the
+		// helper constrains the result to a short host/path slug. Both fields are
+		// free text, so no option needs to exist for a new value.
 		if (!existingRecordId) {
 			fields['Signup source'] = isSubscribeForm ? SUBSCRIBE_SIGNUP_SOURCE : SIGNUP_SOURCE
+			const sourcePage = resolveSourcePage(data, request, url)
+			if (sourcePage) fields['Source page'] = sourcePage
 		}
 		// A create always writes the basics (they're validated above). An update only
 		// overwrites them when non-empty, so a partial post can't blank what the

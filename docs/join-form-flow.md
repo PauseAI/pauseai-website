@@ -48,20 +48,29 @@ Flow on `/join`:
 | `src/routes/embed/onboarding-form/stub/+page.svelte`    | Stub inspection page rendered when `ONBOARDING_LIVE` is not `true`.                                                                           |
 | `src/routes/embed/onboarding-form/stub/+page.server.ts` | `load` function returning in-memory stub submissions.                                                                                         |
 
-The embed wrapper does four things the `/join` route does not:
+The embed wrapper does five things the `/join` route does not:
 
 1. **Query-param prefill** — reads `?country=`, `?city=`, `?languages=` and
    passes them to `OnboardingFlow` as `initialCountry` / `initialCity` /
    `initialLanguages`. Unmatched language values are silently dropped against
    the stored values in `options.ts`. See `docs/ONBOARDING_EMBED.md` for the
    full param table and the rationale for which fields are not prefillable.
-2. **Locale** — reads `?locale=` and calls `setOnboardingLocale()` from
+1. **Source attribution** — sets `initialSource` on `OnboardingFlow`, which
+   posts it as a hidden `source` field on the create forms. It is `?source=` if
+   present, else — when iframed — the host page URL from `document.referrer`
+   (set in `onMount`, since `document.referrer` is not available during SSR).
+   First-party pages (`/join`, `/subscribe`) pass nothing and the submit action
+   falls back to the same-origin `Referer` path instead. Whatever arrives is
+   sanitised and written to the `Source page` field on a create, e.g.
+   `example.org/join`; `Signup source` is untouched. See "Signup source" under
+   _Create versus update_ for the full resolution order.
+1. **Locale** — reads `?locale=` and calls `setOnboardingLocale()` from
    `src/lib/components/onboarding/i18n.svelte.ts` so partner sites can render
    the form in a supported language.
-3. **Background color** — reads `?bg=` (hex with or without `#`, or a CSS color
+1. **Background color** — reads `?bg=` (hex with or without `#`, or a CSS color
    name) and applies it as `style:background-color` on the wrapper so the embed
    blends into the host page.
-4. **Height reporting** — when `window.self !== window.top` (i.e. iframed), a
+1. **Height reporting** — when `window.self !== window.top` (i.e. iframed), a
    `ResizeObserver` posts `{ height: number }` to the parent via `postMessage`
    on every layout change so the host can resize the iframe. The wrapper also
    drops its `min-height: 100dvh` in embedded mode so the reported height can
@@ -80,8 +89,8 @@ basics (name, email, country, city) plus two opt-ins. Four of its hidden inputs
 carry meaning: `subscribe_form=1` is the discriminator, `agree_gdpr=on` records
 that signing up here is itself the consent, `keep_informed=on` is posted
 unconditionally so every completed submission subscribes, and
-`intent=Keep informed` is fixed, so every row this route creates starts at that
-intent whatever the person later chooses.
+`intent=None` is fixed, because the form never asks about intent: the row records
+no intent until the person picks one in the "Get involved" continuation.
 
 `SubscribeFlow` is a three-phase machine rather than a step counter:
 
@@ -273,8 +282,16 @@ On an update:
   so an update carrying neither is rejected anyway.
 - `Signup source` is never rewritten. It is provenance, stamped once at create:
   `June 2026 subscribe form` for `/subscribe`, `June 2026 onboarding flow`
-  otherwise. Without that rule the volunteer step, which carries no subscribe
-  marker, would rewrite a subscribe row as a join row.
+  otherwise. It stays a stable literal — no suffix — so views and automations can
+  match it exactly. Without the "create only" rule the volunteer step, which
+  carries no subscribe marker, would rewrite a subscribe row as a join row.
+- `Source page` is written next to it, also create-only, recording where the
+  signup came from. `resolveSourcePage` takes the first of: the hidden `source`
+  field (an embed's `?source=`, or the host page URL the embed wrapper read from
+  `document.referrer`); else this request's `Referer` path when it is same-origin
+  and not `/embed/onboarding-form*` (first-party `/join` etc. → `pauseai.info/join`);
+  else nothing (field left unset). The result is sanitised to a host/path slug
+  (word chars, spaces, dashes, dots, slashes; max 80).
 - GDPR consent is not required, because it was captured at create.
 - `Full name`, `Country` and `City` are overwritten only when the post supplies
   a non-empty value, so a partial post cannot blank what the create collected.
@@ -301,8 +318,9 @@ on a create, and how to treat chapter sharing.
 Target: base `appWPTGqZmUcs3NWu`, table `tblL1icZBhTV1gQ9o` ("Members").
 
 **Step 2 / browse signup / subscribe form (create):** `Full name`, `Email`,
-`Country`, `City`, `Intent`, `Signup source`, `Email subscription`
-(keep_informed), `Data privacy policy agreed`, `GDPR chapter share permission`.
+`Country`, `City`, `Intent`, `Signup source`, `Source page` (when resolved),
+`Email subscription` (keep_informed), `Data privacy policy agreed`,
+`GDPR chapter share permission`.
 Every field there has a rule under "Create versus update" above or "Chapter
 sharing" below, so treat this list as the index to those rules.
 
@@ -354,7 +372,9 @@ an update is in "Create versus update" above.
 - `country` must be in `COUNTRIES`, checked only when one is supplied.
 - `intent` must be one of `INTENTS` (`None` | `Keep informed` | `Act now` |
   `Volunteer` | `Lead`). Step 2 submits `None` when no intent is picked; the
-  browse signup hardcodes `Act now`; `/subscribe` hardcodes `Keep informed`.
+  browse signup hardcodes `Act now`; `/subscribe` hardcodes `None`. No form emits
+  `Keep informed` any more, but it stays in `INTENTS` so a post carrying it is still
+  accepted rather than rejected.
 - GDPR consent (`agree_gdpr`) required **only on the create path** — step-3
   volunteer updates are exempt because consent was captured at step 2.
   `/subscribe` posts it as a hidden field, since signing up on that form is
