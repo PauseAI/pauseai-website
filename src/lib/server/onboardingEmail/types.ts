@@ -19,6 +19,10 @@ export type OnboardingEmailParams = {
 	intent?: string
 	/** Airtable `Languages` multipleSelects value. */
 	languages?: string[] | string
+	/** Testing/preview only: force the email language, skipping the country +
+	 *  languages detection in resolveOnboardingEmailLanguage. The production render
+	 *  endpoint never sets this. */
+	languageOverride?: OnboardingEmailLanguage
 	/** Used to build the verification and unsubscribe links. */
 	airtable_id: string
 }

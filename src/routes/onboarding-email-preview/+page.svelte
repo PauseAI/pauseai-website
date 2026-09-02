@@ -12,14 +12,22 @@
 		formEl?.requestSubmit()
 	}
 
-	let selectedLanguages = $derived(new Set(data.form.languages))
+	const LANGUAGE_LABELS: Record<string, string> = {
+		en: 'English',
+		es: 'Español',
+		fr: 'Français'
+	}
 </script>
 
 <svelte:head>
 	<title>Onboarding email preview (dev only)</title>
 </svelte:head>
 
-<div style="font-family: sans-serif; padding: 16px; max-width: 1100px; margin: 0 auto;">
+<!-- Force a light scheme: this is a QA tool with hardcoded light panel backgrounds,
+	and the site's dark theme would otherwise leave light text on them. -->
+<div
+	style="color-scheme: light; background: #fff; color: #222; font-family: sans-serif; padding: 16px; max-width: 1100px; margin: 0 auto; min-height: 100vh;"
+>
 	<h1 style="font-size: 20px;">Onboarding email preview</h1>
 	<p style="color: #666; font-size: 14px;">
 		Dev-only QA tool for <code>src/lib/server/onboardingEmail</code>. Not linked from the site, 404s
@@ -40,25 +48,21 @@
 			style="font-size: 13px; padding: 6px 8px; border: 1px solid #ccc; border-radius: 4px;"
 		/>
 
-		<label for="country" style="font-size: 13px; padding-top: 6px;">Country</label>
-		<div>
-			<input
-				id="country"
-				name="country"
-				list="country-list"
-				value={data.form.country}
-				placeholder="(empty → global fallback)"
-				onchange={submitNow}
-				style="width: 100%; font-size: 13px; padding: 6px 8px; border: 1px solid #ccc; border-radius: 4px;"
-			/>
-			<datalist id="country-list">
-				{#each data.options.countries as c}
-					<option value={c}></option>
-				{/each}
-			</datalist>
-			<span style="font-size: 12px; color: #888;">
-				Free text — matches a National Groups record by exact (case-insensitive) name.
-			</span>
+		<span style="font-size: 13px; padding-top: 6px;">Language</span>
+		<div style="display: flex; flex-wrap: wrap; gap: 4px 16px; padding-top: 6px;">
+			{#each data.options.languages as lang}
+				<label style="font-size: 13px; display: flex; gap: 4px; align-items: center;">
+					<input
+						type="radio"
+						name="language"
+						value={lang}
+						checked={data.form.language === lang}
+						onchange={submitNow}
+					/>
+					{LANGUAGE_LABELS[lang]}
+					<span style="color: #999;">({lang})</span>
+				</label>
+			{/each}
 		</div>
 
 		<label for="intent" style="font-size: 13px; padding-top: 6px;">Intent</label>
@@ -75,21 +79,24 @@
 			{/each}
 		</select>
 
-		<span style="font-size: 13px; padding-top: 6px;">Languages</span>
-		<div style="display: flex; flex-wrap: wrap; gap: 4px 12px;">
-			{#each data.options.languages as l}
-				<label style="font-size: 13px; display: flex; gap: 4px; align-items: center;">
-					<input
-						type="checkbox"
-						name="languages"
-						value={l.stored}
-						checked={selectedLanguages.has(l.stored)}
-						onchange={submitNow}
-					/>
-					{l.display}
-					<span style="color: #999;">({l.stored})</span>
-				</label>
-			{/each}
+		<label for="country" style="font-size: 13px; padding-top: 6px;">Country</label>
+		<div>
+			<select
+				id="country"
+				name="country"
+				value={data.form.country}
+				onchange={submitNow}
+				style="width: 100%; font-size: 13px; padding: 6px 8px; border: 1px solid #ccc; border-radius: 4px;"
+			>
+				<option value="">— none (global fallback) —</option>
+				{#each data.options.countries as c}
+					<option value={c}>{c}</option>
+				{/each}
+			</select>
+			<span style="font-size: 12px; color: #888;">
+				Active National Groups records ({data.options.countries.length}). Sets the chapter block
+				only; language is chosen above. Any other country takes the global fallback.
+			</span>
 		</div>
 
 		<span></span>
@@ -102,11 +109,10 @@
 	</form>
 
 	<div
-		style="font-size: 13px; background: #f0f4f8; padding: 10px 12px; border-radius: 6px; margin-bottom: 12px;"
+		style="font-size: 13px; background: #f0f4f8; color: #222; padding: 10px 12px; border-radius: 6px; margin-bottom: 12px;"
 	>
 		<strong>Resolved:</strong>
-		language <code>{data.resolved.language}</code>
-		· intent bucket <code>{data.resolved.intentBucket}</code>
+		intent bucket <code>{data.resolved.intentBucket}</code>
 		· chapter
 		{#if data.resolved.chapterIsGlobalFallback}
 			<code>Global fallback</code> (no National Groups match)
@@ -132,7 +138,7 @@
 
 	{#if showText}
 		<pre
-			style="white-space: pre-wrap; background: #f6f6f6; padding: 16px; border-radius: 6px; font-size: 13px; line-height: 1.5;">{data
+			style="white-space: pre-wrap; background: #f6f6f6; color: #222; padding: 16px; border-radius: 6px; font-size: 13px; line-height: 1.5;">{data
 				.rendered.text}</pre>
 	{:else}
 		<iframe

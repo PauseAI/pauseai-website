@@ -97,3 +97,20 @@ export async function getChapterForOnboardingEmail(
 
 	return match ? recordToChapterBlock(match) : GLOBAL_FALLBACK
 }
+
+/**
+ * The `country` values that currently resolve to a real chapter block (active
+ * National Groups records), sorted. Anything not in this list — plus the empty
+ * string — takes the global fallback. Exposed for the onboarding-email preview
+ * tool's country picker; the render path itself matches free-text, not this list.
+ */
+export async function listActiveChapterCountries(): Promise<string[]> {
+	const records = await fetchAllPages<AirtableNationalGroup>(fetch, AIRTABLE_URL, [], {
+		filterByFormula: 'NOT({inactive})'
+	})
+
+	return records
+		.map((record) => (record.fields.country ?? '').trim())
+		.filter((country) => country.length > 0)
+		.sort((a, b) => a.localeCompare(b))
+}

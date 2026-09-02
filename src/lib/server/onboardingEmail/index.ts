@@ -29,7 +29,8 @@ export async function renderOnboardingEmail(
 	const verificationLink = `${url}/verify?table=join&${verificationParameter}=${params.airtable_id}`
 	const unsubscribeLink = `${url}/api/unsubscribe?${verificationParameter}=${params.airtable_id}`
 
-	const language = resolveOnboardingEmailLanguage(params.country, params.languages)
+	const language =
+		params.languageOverride ?? resolveOnboardingEmailLanguage(params.country, params.languages)
 	const copy = LANGUAGE_COPY[language]
 	const bucket = resolveIntentBucket(params.intent)
 	const chapter = await getChapterForOnboardingEmail(params.country)
