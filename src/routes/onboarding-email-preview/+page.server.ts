@@ -7,9 +7,13 @@ import type { PageServerLoad } from './$types'
 
 // Internal QA tool for eyeballing the onboarding-email render output across a useful
 // sample of intent x chapter x language combos before this ships. Not linked from
-// anywhere in the site nav, and 404s outside dev so it can't be stumbled onto in
-// production. (Chapter data is public National Groups info, not PII, so this is
-// safe to leave dev-only rather than adding real auth.)
+// anywhere in the site nav. Available in dev and on Netlify deploy previews
+// (*.netlify.app), 404s on the production domain so it can't be stumbled onto there.
+// (Chapter data is public National Groups info, not PII, so this is safe to expose
+// on preview URLs rather than adding real auth.)
+function isAllowedHost(hostname: string): boolean {
+	return hostname === 'localhost' || hostname === '127.0.0.1' || hostname.endsWith('.netlify.app')
+}
 const SAMPLE_PARAMS: {
 	label: string
 	country: string
@@ -73,8 +77,8 @@ const SAMPLE_PARAMS: {
 	}
 ]
 
-export const load: PageServerLoad = async () => {
-	if (!dev) error(404, 'Not found')
+export const load: PageServerLoad = async ({ url }) => {
+	if (!dev && !isAllowedHost(url.hostname)) error(404, 'Not found')
 
 	const results = []
 	for (const sample of SAMPLE_PARAMS) {
