@@ -81,7 +81,7 @@
 		"vite": "^8.2.2",
 		"vite-imagetools": "^12.0.1",
 		"vite-plugin-lucide-preprocess": "^1.5.4",
-		"vitest": "^4.1.11"
+		"vitest": "^5.0.0"
 	},
 	"dependencies": {
 		"@anthropic-ai/sdk": "^0.124.0",
