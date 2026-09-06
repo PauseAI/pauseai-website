@@ -87,7 +87,7 @@
 		"@anthropic-ai/sdk": "^0.39.0",
 		"@fontsource/roboto-slab": "^5.3.0",
 		"@fontsource/saira-condensed": "^5.3.0",
-		"@glidejs/glide": "~3.6.2",
+		"@glidejs/glide": "~3.7.1",
 		"@lucide/svelte": "^1.40.0",
 		"@notionhq/client": "^2.3.0",
 		"@number-flow/svelte": "^0.4.2",
