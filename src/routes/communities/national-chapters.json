@@ -97,6 +97,12 @@
 			"lat": 42.5,
 			"lon": 12.5,
 			"link": "$$WHATSAPP_ITALY$$"
+		},
+		{
+			"name": "Switzerland",
+			"link": "luma.com/pauseai-ch",
+			"lat": 47.4,
+			"lon": 8.5
 		}
 	]
 }
