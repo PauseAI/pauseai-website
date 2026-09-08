@@ -79,7 +79,7 @@ async function geocodeCountry(
 		// the app; add From as recommended for API consumers. No accept-language:
 		// without one, Nominatim serves the plain OSM `name` tag, which follows
 		// the local convention (Deutschland, Česko, ...).
-		headers: { 'User-Agent': NOMINATIM_USER_AGENT, From: 'tech@pauseai.info' }
+		headers: { 'User-Agent': NOMINATIM_USER_AGENT, From: 'info@pauseai.info' }
 	})
 	if (!response.ok) {
 		console.warn(`  ⚠ Geocoding ${country} failed: HTTP ${response.status}`)
