@@ -28,7 +28,8 @@
 		"_lint:prettier": "tsx scripts/generate-prettier-ignore.ts && prettier --check .",
 		"format": "tsx scripts/generate-prettier-ignore.ts && prettier --write --ignore-unknown",
 		"prepare": "lefthook install",
-		"sync": "svelte-kit sync"
+		"sync": "svelte-kit sync",
+		"sync:national-chapters": "tsx scripts/sync-national-chapters.ts"
 	},
 	"devDependencies": {
 		"@eslint/js": "^10.0.1",
