@@ -13,7 +13,10 @@
  *   one request per second, honoring their fair-use policy) to get map
  *   coordinates.
  * - Entries that are not countries (e.g. the "Legal" entity) fail geocoding
- *   and are skipped with a warning.
+ *   and are skipped with a warning. Countries whose English name already is
+ *   the local name (Kenya, Australia, ...) and countries with multiple
+ *   official languages (Belgium, Switzerland, ...) are added without
+ *   country_local.
  * - Countries removed from the JSON (e.g. "United States", see PR #1056) are
  *   not re-added; pass --allow "United States" to opt back in explicitly.
  *
@@ -62,23 +65,44 @@ type Chapter = (typeof nationalChaptersJson.communities)[number]
 
 const sleep = (ms: number): Promise<void> => new Promise((resolve) => setTimeout(resolve, ms))
 
-/** Resolves a country name to [lat, lon] using Nominatim, or null if unknown. */
-async function geocodeCountry(country: string): Promise<[number, number] | null> {
+/**
+ * Resolves a country name to coordinates and local name using Nominatim,
+ * or null if unknown.
+ */
+async function geocodeCountry(
+	country: string
+): Promise<{ coords: [number, number]; localName?: string } | null> {
 	const url = `${NOMINATIM_URL}?country=${encodeURIComponent(country)}&format=json&limit=1`
 	await sleep(NOMINATIM_MIN_INTERVAL_MS)
 	const response = await fetch(url, {
 		// Nominatim's usage policy requires a descriptive User-Agent identifying
-		// the app; add From as recommended for API consumers.
+		// the app; add From as recommended for API consumers. No accept-language:
+		// without one, Nominatim serves the plain OSM `name` tag, which follows
+		// the local convention (Deutschland, Česko, ...).
 		headers: { 'User-Agent': NOMINATIM_USER_AGENT, From: 'tech@pauseai.info' }
 	})
 	if (!response.ok) {
 		console.warn(`  ⚠ Geocoding ${country} failed: HTTP ${response.status}`)
 		return null
 	}
-	const results = (await response.json()) as { lat: string; lon: string; addresstype?: string }[]
+	const results = (await response.json()) as {
+		lat: string
+		lon: string
+		name?: string
+		addresstype?: string
+	}[]
 	const match = results.find((r) => r.addresstype === 'country') ?? results[0]
 	if (!match) return null
-	return [Number(match.lat), Number(match.lon)]
+	// Multi-language countries carry all names joined with "/" in the default
+	// name tag; without an authoritative pick, omit country_local rather than
+	// guessing one. English-identical names (Kenya, Australia, ...) carry no
+	// information and are omitted too.
+	const name = match.name?.trim() || undefined
+	const localName =
+		!name || name.includes('/') || name.toLowerCase() === country.trim().toLowerCase()
+			? undefined
+			: name
+	return { coords: [Number(match.lat), Number(match.lon)], localName }
 }
 
 /**
@@ -170,15 +194,21 @@ for (const group of groups) {
 	}
 
 	const link = primaryLink(group)
-	const coords = await geocodeCountry(group.name.trim())
-	if (!coords) {
+	const geocoded = await geocodeCountry(group.name.trim())
+	if (!geocoded) {
 		skipped.push(name)
 		console.warn(`  ⚠ Could not geocode "${name}" — is it a real country? Skipping.`)
 		continue
 	}
 
-	console.log(`  + Adding new country: ${name}`)
-	chapters.push({ name, lat: coords[0], lon: coords[1], link })
+	const local = geocoded.localName ? { country_local: geocoded.localName } : {}
+	if (!geocoded.localName) {
+		console.log(`  – "${name}" has no distinct local name; adding without country_local`)
+	}
+	console.log(
+		`  + Adding new country: ${name}${geocoded.localName ? ` (${geocoded.localName})` : ''}`
+	)
+	chapters.push({ name, lat: geocoded.coords[0], lon: geocoded.coords[1], link, ...local })
 }
 
 if (skipped.length > 0) {

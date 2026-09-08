@@ -67,6 +67,7 @@
 		},
 		{
 			"name": "Czechia",
+			"country_local": "Česko",
 			"lat": 50,
 			"lon": 15,
 			"link": "https://www.pauseai.cz/"
