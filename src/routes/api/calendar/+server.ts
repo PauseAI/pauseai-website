@@ -22,7 +22,6 @@ export const prerender = false
 const CALENDAR_IDS = [
 	'cal-E1qhLPs5IvlQr8S', // global
 	'cal-Z327EhtiFdHuVie', // UK
-	'cal-EvzL9fKA3SCSrOq', // US
 	'cal-gnpo62PdSdau7KQ', // AU
 	'cal-tsYv79s4aTQC16Q', // CA
 	'cal-B1ELepcLXLcAqMf' // DE
