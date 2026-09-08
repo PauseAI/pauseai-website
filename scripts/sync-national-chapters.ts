@@ -57,13 +57,8 @@ const NOMINATIM_USER_AGENT =
 	'PauseAI-website-national-chapters-sync (github.com/PauseAI/pauseai-website)'
 const NOMINATIM_MIN_INTERVAL_MS = 1000
 
-type Chapter = {
-	name: string
-	lat: number
-	lon: number
-	link: string
-	country_local?: string
-}
+// Inferred from the JSON so the type can't drift from the data it describes.
+type Chapter = (typeof nationalChaptersJson.communities)[number]
 
 const sleep = (ms: number): Promise<void> => new Promise((resolve) => setTimeout(resolve, ms))
 
