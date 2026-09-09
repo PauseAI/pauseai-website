@@ -29,10 +29,39 @@
 	style="color-scheme: light; background: #fff; color: #222; font-family: sans-serif; padding: 16px; max-width: 1100px; margin: 0 auto; min-height: 100vh;"
 >
 	<h1 style="font-size: 20px;">Onboarding email preview</h1>
-	<p style="color: #666; font-size: 14px;">
-		Dev-only QA tool for <code>src/lib/server/onboardingEmail</code>. Not linked from the site, 404s
-		on the production domain. Adjust any input to re-render.
-	</p>
+	<div style="color: #666; font-size: 14px; max-width: 640px;">
+		<p>
+			Renders the welcome email that the Airtable onboarding automation sends via
+			<code>/api/onboarding-email</code> (code in <code>src/lib/server/onboardingEmail</code>). Set
+			each input by hand and the email re-renders on change — use it to eyeball copy, layout and
+			links for any point in the matrix without creating a real signup.
+		</p>
+		<ul style="margin: 8px 0; padding-left: 18px;">
+			<li><strong>First name / Intent</strong> — verbatim from the Members record.</li>
+			<li>
+				<strong>Language</strong> — forces the hand-maintained en/es/fr copy (production instead detects
+				it from country + languages).
+			</li>
+			<li>
+				<strong>Country</strong> — selects the chapter block; only active National Groups countries are
+				listed, anything else takes the global fallback.
+			</li>
+			<li>
+				<strong>Style</strong> — <em>Auto</em> shows what production sends (PauseAI UK → plain
+				layout, everyone else → rich card); <em>Force</em> overrides it for comparison.
+			</li>
+		</ul>
+		<p>
+			The panel under the form shows what the inputs resolved to (intent bucket, chapter). Toggle
+			HTML / plain text with the button below it. See
+			<a href="/onboarding-email-compare">/onboarding-email-compare</a> to check a render against the
+			pre-migration MailerSend template it replaces.
+		</p>
+		<p>
+			Dev tool: not linked from the site, available on <code>localhost</code> and Netlify deploy previews
+			only, 404s on the production domain. Chapter data shown is public National Groups info, not PII.
+		</p>
+	</div>
 
 	<form
 		bind:this={formEl}

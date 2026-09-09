@@ -36,13 +36,38 @@
 	style="color-scheme: light; background: #fff; color: #222; font-family: sans-serif; padding: 16px; box-sizing: border-box; width: 94vw; max-width: 94vw; position: relative; left: 50%; margin-left: -47vw; min-height: 100vh;"
 >
 	<h1 style="font-size: 20px;">Onboarding email compare</h1>
-	<p style="color: #666; font-size: 14px;">
-		Dev-only. Pick a pre-migration MailerSend template on the left; the right shows the new
-		<code>src/lib/server/onboardingEmail</code> render for the country/language that template was
-		sent for. Intent is adjustable to see how it shifts the new copy against the fixed old baseline.
-		Not linked from the site, 404s on the production domain. See
-		<a href="/onboarding-email-preview">/onboarding-email-preview</a> for the free-input version.
-	</p>
+	<div style="color: #666; font-size: 14px; max-width: 900px;">
+		<p>
+			Side-by-side check of the new render against the email it replaces. <strong>Left</strong> is
+			one of the seven pre-migration MailerSend templates (raw exports in
+			<code>/email-templates</code>), picked from the dropdown. <strong>Right</strong> is the new
+			<code>src/lib/server/onboardingEmail</code> render for that template's canonical signup — the
+			country / language / intent combo the old routing (see
+			<code>email-templates/ROUTING.md</code>) sent it for. Use it to confirm nothing in tone,
+			content or links was lost in the migration.
+		</p>
+		<ul style="margin: 8px 0; padding-left: 18px;">
+			<li>
+				The left template is fixed once chosen — its body never varied by intent. Only the right
+				render responds to the <strong>Intent</strong> control, so you can see how that axis shifts the
+				new copy against a stable baseline. Switching template resets intent to that template's canonical
+				value.
+			</li>
+			<li>
+				<strong>New render style</strong>: <em>Auto</em> is what production sends (PauseAI UK →
+				plain layout, everyone else → rich card); <em>Force rich / plain</em> overrides it.
+			</li>
+			<li>
+				The "New render inputs" panel shows the resolved bucket and chapter for the right side.
+			</li>
+		</ul>
+		<p>
+			See <a href="/onboarding-email-preview">/onboarding-email-preview</a> to drive the new render
+			off arbitrary inputs instead. Dev tool: not linked from the site, available on
+			<code>localhost</code> and Netlify deploy previews only, 404s on the production domain. Template
+			and chapter data are public, not PII.
+		</p>
+	</div>
 
 	<form
 		bind:this={formEl}
