@@ -24,7 +24,8 @@ function renderBlock(block: EmailBlock): string {
 						`<li style="margin: 0 0 6px 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; font-size: 15px; line-height: 1.6; color: ${TEXT};">${mdLineToHtml(item, ACCENT)}</li>`
 				)
 				.join('')
-			return `<tr><td style="padding: 6px 0;"><ul style="margin: 0; padding-left: 20px;">${items}</ul></td></tr>`
+			const tag = block.ordered ? 'ol' : 'ul'
+			return `<tr><td style="padding: 6px 0;"><${tag} style="margin: 0; padding-left: 20px;">${items}</${tag}></td></tr>`
 		}
 		case 'links': {
 			const links = block.items

@@ -99,6 +99,22 @@
 			</span>
 		</div>
 
+		<span style="font-size: 13px; padding-top: 6px;">Style</span>
+		<div style="display: flex; flex-wrap: wrap; gap: 4px 16px; padding-top: 6px;">
+			{#each [['auto', 'Auto (per chapter)'], ['rich', 'Force rich'], ['plain', 'Force plain']] as [value, label]}
+				<label style="font-size: 13px; display: flex; gap: 4px; align-items: center;">
+					<input
+						type="radio"
+						name="style"
+						{value}
+						checked={data.form.style === value}
+						onchange={submitNow}
+					/>
+					{label}
+				</label>
+			{/each}
+		</div>
+
 		<span></span>
 		<button
 			type="submit"

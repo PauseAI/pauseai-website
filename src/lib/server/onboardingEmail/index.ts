@@ -3,14 +3,17 @@ import { getChapterForOnboardingEmail } from './chapter.js'
 import { resolveOnboardingEmailLanguage } from './language.js'
 import { LANGUAGE_COPY } from './copy.js'
 import { buildEmailBlocks, resolveIntentBucket } from './blocks.js'
+import { getChapterOverride } from './chapterOverrides.js'
 import { renderHtml } from './html.js'
+import { renderHtmlPlain } from './htmlPlain.js'
 import { renderText } from './text.js'
 import type { OnboardingEmailParams, RenderedOnboardingEmail } from './types.js'
 
 export type {
 	OnboardingEmailParams,
 	RenderedOnboardingEmail,
-	OnboardingEmailLanguage
+	OnboardingEmailLanguage,
+	OnboardingEmailHtmlStyle
 } from './types.js'
 
 /**
@@ -35,11 +38,29 @@ export async function renderOnboardingEmail(
 	const bucket = resolveIntentBucket(params.intent)
 	const chapter = await getChapterForOnboardingEmail(params.country)
 
-	const blocks = buildEmailBlocks(params, copy, chapter, verificationLink, bucket)
+	// A matching chapter override (currently just PauseAI UK) swaps in its own
+	// hand-written copy + subject in place of the generic multi-section blocks.
+	const override = getChapterOverride(params.country, language)
+	const blocks = override
+		? override.buildBlocks({ firstName: params.firstName, verificationLink, bucket })
+		: buildEmailBlocks(params, copy, chapter, verificationLink, bucket)
+	const subject = override ? override.subject(params.firstName) : copy.subject(params.firstName)
+
+	// static/pauseai-logo-email.png — the PauseAI wordmark from the pre-migration
+	// PauseAI UK template, re-hosted in the repo. Must be an absolute URL for email.
+	const logoUrl = `${url}/pauseai-logo-email.png`
+
+	// Style precedence: an explicit caller override (the preview/compare pages) wins;
+	// otherwise the matched chapter decides (UK -> plain); otherwise rich.
+	const htmlStyle = params.htmlStyle ?? override?.htmlStyle ?? 'rich'
+	const html =
+		htmlStyle === 'plain'
+			? renderHtmlPlain(blocks, copy, unsubscribeLink, logoUrl)
+			: renderHtml(blocks, copy, unsubscribeLink)
 
 	return {
-		subject: copy.subject(params.firstName),
-		html: renderHtml(blocks, copy, unsubscribeLink),
+		subject,
+		html,
 		text: renderText(blocks, copy, unsubscribeLink)
 	}
 }

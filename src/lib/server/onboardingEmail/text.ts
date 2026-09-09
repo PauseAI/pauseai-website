@@ -19,7 +19,11 @@ export function renderText(
 				parts.push(block.text)
 				break
 			case 'list':
-				parts.push(block.items.map((item) => `- ${item}`).join('\n'))
+				parts.push(
+					block.items
+						.map((item, i) => (block.ordered ? `${i + 1}. ${item}` : `- ${item}`))
+						.join('\n')
+				)
 				break
 			case 'links':
 				parts.push(block.items.map((item) => `[${item.label}](${item.url})`).join('\t'))

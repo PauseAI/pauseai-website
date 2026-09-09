@@ -6,6 +6,13 @@ export type { Intent }
  *  the site's Paraglide/inlang pipeline isn't used here (build-time only). */
 export type OnboardingEmailLanguage = 'en' | 'es' | 'fr'
 
+/** HTML presentation style. `rich` (default) is the branded card layout in
+ *  html.ts; `plain` is the stripped-down single-column layout in htmlPlain.ts,
+ *  modelled on the PauseAI UK MailerLite template — narrow table, system serif-y
+ *  sans, no card/hero/wordmark chrome, so it reads closer to a hand-written note.
+ *  Same blocks and copy either way; only the wrapper differs. */
+export type OnboardingEmailHtmlStyle = 'rich' | 'plain'
+
 /**
  * Input to the render function. Field names mirror the Airtable automation's
  * `input.config()` fields (minus `to_email`/`reply_to_email`/`onboarding_email`,
@@ -23,6 +30,11 @@ export type OnboardingEmailParams = {
 	 *  languages detection in resolveOnboardingEmailLanguage. The production render
 	 *  endpoint never sets this. */
 	languageOverride?: OnboardingEmailLanguage
+	/** Force the HTML wrapper (see OnboardingEmailHtmlStyle). Left unset — as the
+	 *  production render endpoint does — the matched chapter decides: PauseAI UK
+	 *  ships `plain`, everything else `rich`. The preview/compare pages set this to
+	 *  force one for QA. */
+	htmlStyle?: OnboardingEmailHtmlStyle
 	/** Used to build the verification and unsubscribe links. */
 	airtable_id: string
 }

@@ -6,7 +6,7 @@ import type { ChapterBlockData } from './types.js'
 export type EmailBlock =
 	| { type: 'heading'; text: string }
 	| { type: 'paragraph'; text: string }
-	| { type: 'list'; items: string[] }
+	| { type: 'list'; items: string[]; ordered?: boolean }
 	| { type: 'links'; items: ChapterLink[] }
 
 const KNOWN_INTENTS = new Set(['Act now', 'Keep informed', 'Volunteer', 'Lead'])

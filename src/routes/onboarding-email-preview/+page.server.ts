@@ -8,7 +8,10 @@ import {
 } from '$lib/server/onboardingEmail/chapter.js'
 import { resolveIntentBucket } from '$lib/server/onboardingEmail/blocks.js'
 import { renderOnboardingEmail } from '$lib/server/onboardingEmail/index.js'
-import type { OnboardingEmailLanguage } from '$lib/server/onboardingEmail/types.js'
+import type {
+	OnboardingEmailHtmlStyle,
+	OnboardingEmailLanguage
+} from '$lib/server/onboardingEmail/types.js'
 import { error } from '@sveltejs/kit'
 import type { PageServerLoad } from './$types'
 
@@ -48,12 +51,18 @@ export const load: PageServerLoad = async ({ url }) => {
 	const language = parseLanguage(params.get('language'))
 	const country = hasQuery ? (params.get('country') ?? '') : DEFAULTS.country
 	const intent = hasQuery ? (params.get('intent') ?? '') : DEFAULTS.intent
+	// 'auto' (or unset) = let the renderer pick per chapter (UK -> plain, rest ->
+	// rich), matching the production endpoint. 'rich'/'plain' force it.
+	const styleParam = params.get('style')
+	const htmlStyle: OnboardingEmailHtmlStyle | undefined =
+		styleParam === 'plain' || styleParam === 'rich' ? styleParam : undefined
 
 	const rendered = await renderOnboardingEmail({
 		firstName,
 		country,
 		intent,
 		languageOverride: language,
+		htmlStyle,
 		airtable_id: 'previewRecordId123'
 	})
 
@@ -71,7 +80,7 @@ export const load: PageServerLoad = async ({ url }) => {
 	}
 
 	return {
-		form: { firstName, language, country, intent },
+		form: { firstName, language, country, intent, style: htmlStyle ?? 'auto' },
 		options: {
 			languages: LANGUAGES,
 			countries: chapterCountries,
