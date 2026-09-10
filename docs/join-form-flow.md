@@ -373,12 +373,14 @@ an update is in "Create versus update" above.
 - `email` must match `^\S+@\S+\.\S+$`.
 - `country` must be in `COUNTRIES`, checked only when one is supplied.
 - UK postcode (`zip_code`) is required on a **create** when `country` is
-  `United Kingdom`, and must match `UK_POSTCODE_PATTERN` — the outward code alone
-  (`SW1A`) or a full postcode (`SW1A 1AA`). Collected on step 1 and the browse
-  signup, stored normalised (uppercased, single-spaced) in Airtable's `Zip code`
-  field. Not re-checked on an update; the volunteer step reposts it from state.
-  For a non-UK country the field is ignored. The US volunteer ZIP uses the same
-  `zip_code` field on the step-3 form (see below).
+  `United Kingdom`, and must match `UK_POSTCODE_PATTERN` — a **full** postcode
+  (`SW1A 1AA`), inward half included, since the outward code alone can't identify
+  a parliamentary constituency. A missing or repeated inner space is tolerated.
+  Collected on step 1 and the browse signup, stored normalised (uppercased, one
+  inner space) in Airtable's `Zip code` field. Not re-checked on an update; the
+  volunteer step reposts it from state. For a non-UK country the field is
+  ignored. The US volunteer ZIP uses the same `zip_code` field on the step-3
+  form (see below).
 - `intent` must be one of `INTENTS` (`None` | `Keep informed` | `Act now` |
   `Volunteer` | `Lead`). Step 2 submits `None` when no intent is picked; the
   browse signup hardcodes `Act now`; `/subscribe` hardcodes `None`. No form emits

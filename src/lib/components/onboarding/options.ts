@@ -221,20 +221,25 @@ export const COUNTRIES = [
 ]
 
 // UK postcode, collected on step 1 for every "United Kingdom" signup and stored
-// in the same Airtable `Zip code` field the US volunteer ZIP uses. People are
-// told the outward code alone (e.g. "SW1A") is enough, so the inward half is
-// optional; the pattern accepts either that or a full postcode ("SW1A 1AA").
-// Case-insensitive, and tolerant of the space between the two halves.
-export const UK_POSTCODE_PATTERN = /^[A-Za-z]{1,2}\d[A-Za-z\d]?(\s*\d[A-Za-z]{2})?$/
+// in the same Airtable `Zip code` field the US volunteer ZIP uses. The full
+// postcode is required — the outward code alone ("SW1A") is not enough to
+// identify a parliamentary constituency, which is what downstream routing needs.
+// So the inward half (digit + two letters) is mandatory. Case-insensitive, and
+// tolerant of a missing or repeated space between the two halves.
+export const UK_POSTCODE_PATTERN = /^[A-Za-z]{1,2}\d[A-Za-z\d]?\s*\d[A-Za-z]{2}$/
 
 export function isValidUKPostcode(value: string): boolean {
 	return UK_POSTCODE_PATTERN.test(value.trim())
 }
 
-// Uppercased, single-spaced. What we send to Airtable so rows are consistent
-// regardless of how the visitor typed it.
+// Uppercased, with exactly one space before the inward code ("SW1A 1AA"),
+// however the visitor typed it. What we send to Airtable so rows are consistent.
+// A value too short to split is returned compacted and left for validation to
+// reject.
 export function normaliseUKPostcode(value: string): string {
-	return value.trim().toUpperCase().replace(/\s+/g, ' ')
+	const compact = value.trim().toUpperCase().replace(/\s+/g, '')
+	if (compact.length < 5) return compact
+	return `${compact.slice(0, -3)} ${compact.slice(-3)}`
 }
 
 // International dialing code per country, keyed by the COUNTRIES names above.

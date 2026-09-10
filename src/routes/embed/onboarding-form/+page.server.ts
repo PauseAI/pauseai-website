@@ -185,7 +185,7 @@ export const actions: Actions = {
 		const ukPostcode = isUK ? normaliseUKPostcode(getString(data, 'zip_code')) : ''
 		if (isUK && !existingRecordId && !isValidUKPostcode(ukPostcode)) {
 			return fail(400, {
-				message: 'Please enter a UK postcode (the first part, e.g. SW1A, is enough).'
+				message: 'Please enter your full UK postcode, e.g. SW1A 1AA.'
 			})
 		}
 		if (!isIntent(intent)) {

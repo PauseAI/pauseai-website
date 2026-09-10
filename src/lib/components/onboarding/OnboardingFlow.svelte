@@ -156,9 +156,10 @@
 		email: initialEmail,
 		country: initialCountry,
 		city: initialCity,
-		// UK only: collected on step 1 (and the browse signup) for every "United
-		// Kingdom" signup, posted as `zip_code` — the same field the US volunteer
-		// ZIP uses. Empty and unvalidated for every other country.
+		// UK only: the full postcode, collected on step 1 (and the browse signup)
+		// for every "United Kingdom" signup and posted as `zip_code` — the same
+		// field the US volunteer ZIP uses. Empty and unvalidated for every other
+		// country.
 		postcode: '',
 		newsletter: false
 	})
