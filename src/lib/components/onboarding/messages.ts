@@ -261,7 +261,7 @@ const en: OnboardingMessages = {
 	onboarding_field_zip: 'Zip code',
 	onboarding_placeholder_zip: 'e.g. 02134',
 	onboarding_helper_zip: 'Your 5-digit zip code is used to find your Local Group.',
-	onboarding_field_uk_postcode: 'Postcode',
+	onboarding_field_uk_postcode: 'Postcode *',
 	onboarding_placeholder_uk_postcode: 'e.g. SW1A',
 	onboarding_helper_uk_postcode:
 		"Just the first part is fine. We use it to connect you with your MP's constituency and your nearest local group.",
@@ -484,7 +484,7 @@ const de: OnboardingMessages = {
 	onboarding_placeholder_zip: 'z. B. 02134',
 	onboarding_helper_zip:
 		'Deine 5-stellige Postleitzahl wird verwendet, um deine lokale Gruppe zu finden.',
-	onboarding_field_uk_postcode: 'Postleitzahl (UK)',
+	onboarding_field_uk_postcode: 'Postleitzahl (UK) *',
 	onboarding_placeholder_uk_postcode: 'z. B. SW1A',
 	onboarding_helper_uk_postcode:
 		'Der erste Teil genügt. Wir nutzen ihn, um dich deinem Wahlkreis und der nächsten lokalen Gruppe zuzuordnen.',
@@ -712,7 +712,7 @@ const fr: OnboardingMessages = {
 	onboarding_field_zip: 'Code postal',
 	onboarding_placeholder_zip: 'ex. 75001',
 	onboarding_helper_zip: 'Ton code postal permet de trouver ton groupe local.',
-	onboarding_field_uk_postcode: 'Code postal (UK)',
+	onboarding_field_uk_postcode: 'Code postal (UK) *',
 	onboarding_placeholder_uk_postcode: 'ex. SW1A',
 	onboarding_helper_uk_postcode:
 		'La première partie suffit. Elle nous permet de te rattacher à ta circonscription et au groupe local le plus proche.',
