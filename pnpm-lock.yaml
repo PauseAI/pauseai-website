@@ -190,7 +190,7 @@ importers:
         specifier: ^16.2.4
         version: 16.2.4
       knip:
-        specifier: ^6.35.0
+        specifier: ^6.35.1
         version: 6.35.1
       lefthook:
         specifier: ^2.1.12
