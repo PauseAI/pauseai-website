@@ -220,6 +220,23 @@ export const COUNTRIES = [
 	'Zimbabwe'
 ]
 
+// UK postcode, collected on step 1 for every "United Kingdom" signup and stored
+// in the same Airtable `Zip code` field the US volunteer ZIP uses. People are
+// told the outward code alone (e.g. "SW1A") is enough, so the inward half is
+// optional; the pattern accepts either that or a full postcode ("SW1A 1AA").
+// Case-insensitive, and tolerant of the space between the two halves.
+export const UK_POSTCODE_PATTERN = /^[A-Za-z]{1,2}\d[A-Za-z\d]?(\s*\d[A-Za-z]{2})?$/
+
+export function isValidUKPostcode(value: string): boolean {
+	return UK_POSTCODE_PATTERN.test(value.trim())
+}
+
+// Uppercased, single-spaced. What we send to Airtable so rows are consistent
+// regardless of how the visitor typed it.
+export function normaliseUKPostcode(value: string): string {
+	return value.trim().toUpperCase().replace(/\s+/g, ' ')
+}
+
 // International dialing code per country, keyed by the COUNTRIES names above.
 // Used to prefill the phone field's dial code from the country of residence.
 export const COUNTRY_DIAL_CODES: Record<string, string> = {

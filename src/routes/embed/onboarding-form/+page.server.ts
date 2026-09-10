@@ -29,6 +29,8 @@ import {
 	SUBSCRIBE_SIGNUP_SOURCE,
 	SKILLS,
 	WEEKLY_HOURS,
+	isValidUKPostcode,
+	normaliseUKPostcode,
 	type Intent
 } from '$lib/components/onboarding/options'
 
@@ -175,6 +177,17 @@ export const actions: Actions = {
 		if (country && !COUNTRIES.includes(country)) {
 			return fail(400, { message: 'Please select a country from the list.' })
 		}
+		// UK postcode: collected on step 1 (and the browse signup) for every UK
+		// signup, posted through the same `zip_code` field the US volunteer ZIP
+		// uses. Required on a create; an update (the volunteer step) reposts it
+		// from state but is not re-checked, matching how the other basics behave.
+		const isUK = country === 'United Kingdom'
+		const ukPostcode = isUK ? normaliseUKPostcode(getString(data, 'zip_code')) : ''
+		if (isUK && !existingRecordId && !isValidUKPostcode(ukPostcode)) {
+			return fail(400, {
+				message: 'Please enter a UK postcode (the first part, e.g. SW1A, is enough).'
+			})
+		}
 		if (!isIntent(intent)) {
 			return fail(400, { message: 'Please choose what brings you here.' })
 		}
@@ -232,6 +245,10 @@ export const actions: Actions = {
 		if (!existingRecordId || fullName) fields['Full name'] = fullName
 		if (!existingRecordId || country) fields.Country = country
 		if (!existingRecordId || city) fields.City = city
+		// UK postcode shares Airtable's `Zip code` field with the US volunteer ZIP
+		// (written further down, in the volunteer block). Only ever set when
+		// non-empty, so a partial repost can't blank it.
+		if (isUK && ukPostcode) fields['Zip code'] = ukPostcode
 		if (chapterShare !== undefined) {
 			fields['GDPR chapter share permission'] = chapterShare
 		}
