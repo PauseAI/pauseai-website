@@ -18,7 +18,8 @@
 			"name": "United Kingdom",
 			"lat": 54.2,
 			"lon": -2.4,
-			"link": "https://pauseai.uk/"
+			"link": "https://pauseai.uk/",
+			"lumaCalendarId": "cal-Z327EhtiFdHuVie"
 		},
 		{
 			"name": "France",
@@ -30,7 +31,8 @@
 			"name": "Canada",
 			"lat": 56,
 			"lon": -105,
-			"link": "https://pauseai.ca/en/"
+			"link": "https://pauseai.ca/en/",
+			"lumaCalendarId": "cal-tsYv79s4aTQC16Q"
 		},
 		{
 			"name": "Romania",
@@ -63,7 +65,8 @@
 			"country_local": "Deutschland",
 			"lat": 51.1,
 			"lon": 10,
-			"link": "https://www.pause-ai.de/"
+			"link": "https://www.pause-ai.de/",
+			"lumaCalendarId": "cal-B1ELepcLXLcAqMf"
 		},
 		{
 			"name": "Czechia",
