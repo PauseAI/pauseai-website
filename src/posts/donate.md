@@ -42,6 +42,8 @@ See our [roadmap](/roadmap) for more details.
 
 ## How to donate to PauseAI
 
+Tax benefits differ per country — see [tax-deductible donations](/tax-deductible-donations) to find the most tax-efficient way to give from where you live.
+
 ### IBAN Bank transfer (no fees)
 
 This is **probably the cheapest way** to transfer money to us.
