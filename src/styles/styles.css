@@ -22,10 +22,10 @@ html {
 	   would be a visual change. "Xpt" below is RGB Euclidean distance to the named
 	   token: under ~25pt reads as the same colour side by side; 40+ is the same vivid-
 	   orange family but a genuinely distinct shade. Worth a design pass later. --- */
-	--t-color-main: #f68b1e; /* identical to --brand-dark (same value, kept separate for dark/light-mode naming) */
+	--t-color-main: #f68b1e; /* Default main color - saturated orange */
 	--hero-orange: #ff9416; /* Home hero: menu band + photo-loading backdrop must match; close to --t-color-main/--brand-dark (15pt) and --brand-glow (23pt) */
 	--hero-orange-rgb: 255, 148, 22; /* RGB triplet of --hero-orange, for rgba() compositing */
-	--brand-dark: #f68b1e; /* identical to --t-color-main */
+	--brand-dark: #f68b1e;
 	--brand-light: var(--t-color-main);
 	--brand-gradient-mid: #ff6600; /* dear-sir-demis-2025 gradient stop; same vivid-orange family as --brand-glow/--accent-orange, each a distinct shade (40-55pt apart) */
 	--brand-glow: #ff8c00; /* dear-sir-demis-2025 gradient midpoint; close to --hero-orange (23pt) */
@@ -57,7 +57,7 @@ html {
 	   colour, a bigger change than a rename), but --grey-600/--grey-800 are real
 	   candidates for a future merge. --- */
 	--grey-600: hsl(0, 0%, 15%); /* close to --banner-dark-2 (13pt) and --grey-800 (21pt) */
-	--grey-800: #1a1a1a; /* close to --banner-dark-1 (10pt) and --banner-dark-2 (9pt); also used for Hero.svelte's hover text, merged from a near-identical --grey-warm-dark */
+	--grey-800: #1a1a1a; /* close to --banner-dark-1 (10pt) and --banner-dark-2 (9pt); also used for Hero.svelte's hover text */
 	--banner-dark-1: hsl(0, 0%, 8%); /* Banner campaign gradient start; close to --grey-800 (10pt) */
 	--banner-dark-2: hsl(
 		25,
@@ -88,7 +88,7 @@ html {
 	--success-bg: #d4edda;
 	--success-border: #c3e6cb;
 	--success-text: #155724; /* same green family as --status-success-text-alt, a distinct darker shade (48pt) — not merged */
-	--error-bg: #f8d7da; /* merged from a near-identical --lookup-error-bg (7pt) — UKMPLookup's error banner now shares this */
+	--error-bg: #f8d7da; /* also used by UKMPLookup's error banner */
 	--error-border: #f5c6cb;
 	--error-text: #721c24;
 
