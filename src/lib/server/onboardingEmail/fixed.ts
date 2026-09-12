@@ -51,14 +51,16 @@ const es: FixedCopy = {
 		'Si te suscribiste, te mantendremos al día. En cualquier caso, es posible que ocasionalmente te enviemos una alerta crítica.'
 }
 
-// DRAFT, awaiting review by PauseAI Sweden: nobody fluent has read these yet.
+// Ours, not the chapter's: the two lines the skeleton adds around their own words. Machine
+// drafted and not yet read by anyone fluent, which is worth less than it sounds against the
+// alternative, which is these readers getting the English email.
 const sv: FixedCopy = {
 	confirm: (link) =>
 		`Bekräfta din e-postadress genom att klicka på [den här länken](${link}). Om du inte har anmält dig kan du bortse från det här meddelandet.`,
 	newsletter: () =>
-		'Om du har valt att prenumerera håller vi dig uppdaterad om nyheter, kampanjer och sätt att engagera dig. Oavsett det kan vi ibland skicka dig en kritisk varning.',
+		'Om du har valt att prenumerera håller vi dig uppdaterad om nyheter, kampanjer och sätt att engagera dig. Oavsett vilket kan vi ibland skicka dig en kritisk varning.',
 	newsletterInOwnWords:
-		'Om du har valt att prenumerera håller vi dig uppdaterad. Oavsett det kan vi ibland skicka dig en kritisk varning.'
+		'Om du har valt att prenumerera håller vi dig uppdaterad. Oavsett vilket kan vi ibland skicka dig en kritisk varning.'
 }
 
 export const FIXED_COPY: Record<OnboardingEmailLanguage, FixedCopy> = { en, es, sv }
