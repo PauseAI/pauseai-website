@@ -1,11 +1,9 @@
 export const prerender = false
 
 import { dev } from '$app/environment'
-import { INTENTS } from '$lib/components/onboarding/options.js'
-import { getChapterForOnboardingEmail } from '$lib/server/onboardingEmail/chapter.js'
-import { resolveIntentBucket } from '$lib/server/onboardingEmail/blocks.js'
 import {
 	renderOnboardingEmail,
+	resolveOnboardingEmail,
 	type OnboardingEmailHtmlStyle
 } from '$lib/server/onboardingEmail/index.js'
 import {
@@ -31,6 +29,13 @@ function isAllowedHost(hostname: string): boolean {
 const DEFAULT_TEMPLATE_KEY: LegacyTemplateKey = 'DEFAULT'
 const PREVIEW_RECORD_ID = 'previewRecordId123'
 
+// The renderer builds absolute asset URLs on pauseai.info, where these images only exist
+// once this is merged and deployed. Point them at whatever origin is serving this page so
+// the preview shows the real logo on a deploy preview too.
+function withLocalAssets(html: string, origin: string): string {
+	return html.replaceAll('https://pauseai.info/pauseai-', `${origin}/pauseai-`)
+}
+
 export const load: PageServerLoad = async ({ url }) => {
 	if (!dev && !isAllowedHost(url.hostname)) error(404, 'Not found')
 
@@ -53,38 +58,29 @@ export const load: PageServerLoad = async ({ url }) => {
 	const intentParam = params.get('intent')
 	const intent = intentParam === null ? legacy.canonical.intent : intentParam
 
-	// 'auto' (or unset) = let the renderer pick per chapter (UK -> plain, rest ->
+	// 'auto' (or unset) = let the email's content pick (the UK override -> plain, rest ->
 	// rich), i.e. what the production endpoint does. 'rich'/'plain' force it.
 	const styleParam = params.get('style')
 	const htmlStyle: OnboardingEmailHtmlStyle | undefined =
 		styleParam === 'plain' || styleParam === 'rich' ? styleParam : undefined
 
-	const rendered = await renderOnboardingEmail({
+	const renderParams = {
 		firstName,
 		country,
 		intent,
 		languageOverride: language,
 		htmlStyle,
 		airtable_id: PREVIEW_RECORD_ID
-	})
-
-	const chapter = await getChapterForOnboardingEmail(country)
+	}
+	const rendered = await renderOnboardingEmail(renderParams)
+	rendered.html = withLocalAssets(rendered.html, url.origin)
 
 	return {
 		form: { firstName, templateKey, intent, style: htmlStyle ?? 'auto' },
-		newInputs: {
-			country,
-			language,
-			intent,
-			intentBucket: resolveIntentBucket(intent),
-			chapterName: chapter.name,
-			chapterLeader: chapter.leader,
-			chapterIsGlobalFallback: chapter.isGlobalFallback,
-			chapterLinkCount: chapter.links.length
-		},
+		newInputs: { country, intent },
+		resolved: await resolveOnboardingEmail(renderParams),
 		options: {
-			templates: LEGACY_TEMPLATE_OPTIONS,
-			intents: INTENTS
+			templates: LEGACY_TEMPLATE_OPTIONS
 		},
 		legacy,
 		rendered

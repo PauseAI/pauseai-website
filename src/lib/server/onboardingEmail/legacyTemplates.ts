@@ -7,7 +7,7 @@
 // template is instead picked by hand from a dropdown, paired with the
 // country/language/intent combo it used to be sent for.
 
-import type { OnboardingEmailLanguage } from './types.js'
+import type { BaseLanguage } from './types.js'
 
 type RawTemplate = {
 	id: string
@@ -34,13 +34,7 @@ function rawByFilePrefix(prefix: string): RawTemplate {
 }
 
 export type LegacyTemplateKey =
-	| 'DEFAULT'
-	| 'SPANISH'
-	| 'UK'
-	| 'CANADA_EN'
-	| 'CANADA_FR'
-	| 'NOT_VOLUNTEERING'
-	| 'UK_NON_VOLUNTEERING'
+	'DEFAULT' | 'SPANISH' | 'UK' | 'CANADA_EN' | 'NOT_VOLUNTEERING' | 'UK_NON_VOLUNTEERING'
 
 type LegacyTemplateDef = {
 	key: LegacyTemplateKey
@@ -50,16 +44,28 @@ type LegacyTemplateDef = {
 	 *  can be overridden there. */
 	canonical: {
 		country: string
-		language: OnboardingEmailLanguage
+		language: BaseLanguage
 		intent: string
 	}
 }
 
+// Ordered for the compare page's picker: the two global ones first, then each country's
+// templates together.
 const DEFS: LegacyTemplateDef[] = [
 	{
 		key: 'DEFAULT',
 		filePrefix: 'default-',
 		canonical: { country: '', language: 'en', intent: 'Volunteer' }
+	},
+	{
+		key: 'NOT_VOLUNTEERING',
+		filePrefix: 'no-intent-',
+		canonical: { country: '', language: 'en', intent: 'None' }
+	},
+	{
+		key: 'CANADA_EN',
+		filePrefix: 'canada-en-',
+		canonical: { country: 'Canada', language: 'en', intent: 'Volunteer' }
 	},
 	{
 		key: 'SPANISH',
@@ -72,24 +78,9 @@ const DEFS: LegacyTemplateDef[] = [
 		canonical: { country: 'United Kingdom', language: 'en', intent: 'Volunteer' }
 	},
 	{
-		key: 'CANADA_EN',
-		filePrefix: 'canada-en-',
-		canonical: { country: 'Canada', language: 'en', intent: 'Volunteer' }
-	},
-	{
-		key: 'CANADA_FR',
-		filePrefix: 'canada-fr-',
-		canonical: { country: 'Canada', language: 'fr', intent: 'Volunteer' }
-	},
-	{
-		key: 'NOT_VOLUNTEERING',
-		filePrefix: 'not-volunteering-',
-		canonical: { country: '', language: 'en', intent: 'Keep informed' }
-	},
-	{
 		key: 'UK_NON_VOLUNTEERING',
 		filePrefix: 'uk-non-volunteering-',
-		canonical: { country: 'United Kingdom', language: 'en', intent: 'Keep informed' }
+		canonical: { country: 'United Kingdom', language: 'en', intent: 'None' }
 	}
 ]
 

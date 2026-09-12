@@ -1,22 +1,18 @@
-import type { LanguageCopy } from './copy.js'
+import { ADDRESS_LINE } from './fixed.js'
+import { stripBold } from './markdown.js'
 import type { EmailBlock } from './blocks.js'
+import type { ChapterLink } from './types.js'
 
 /** Renders blocks + footer to plain text, matching the `[label](url)` markdown-link
  *  style already used in the existing templates' `plain_text` fields. */
-export function renderText(
-	blocks: EmailBlock[],
-	copy: LanguageCopy,
-	unsubscribeUrl: string
-): string {
+export function renderText(blocks: EmailBlock[], socials: ChapterLink[] = []): string {
 	const parts: string[] = []
 
 	for (const block of blocks) {
 		switch (block.type) {
 			case 'heading':
-				parts.push(block.text)
-				break
 			case 'paragraph':
-				parts.push(block.text)
+				parts.push(stripBold(block.text))
 				break
 			case 'list':
 				parts.push(
@@ -25,14 +21,22 @@ export function renderText(
 						.join('\n')
 				)
 				break
+			case 'button':
+				parts.push(`[${block.text}](${block.url})`)
+				break
+			case 'signoff':
+				parts.push(block.lines.map(stripBold).join('\n'))
+				break
+			case 'rule':
+				break
 			case 'links':
 				parts.push(block.items.map((item) => `[${item.label}](${item.url})`).join('\t'))
 				break
 		}
 	}
 
-	parts.push(copy.unsubscribeLine(unsubscribeUrl))
-	parts.push(copy.addressLine)
+	if (socials.length) parts.push(socials.map((item) => `[${item.label}](${item.url})`).join('\t'))
+	parts.push(ADDRESS_LINE)
 
 	return parts.join('\n\n')
 }

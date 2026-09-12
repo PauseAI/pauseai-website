@@ -22,3 +22,13 @@ Each `.json` file here = raw payload from `https://app.mailersend.com/templates/
 - **Personalization payload is fixed:** script only ever sends `first_name` and `verification_link`. Any template variable outside those two won't get filled — check `variables.personalization` in each JSON for surprises.
 - **UK volunteer vs UK non-volunteer** (`uk-jy7zpl97rdrg5vx6` vs `uk-non-volunteering-zr6ke4nyyomgon12`) are likely near-duplicates once both are filled in — candidate for a shared base + variant slot instead of two fully separate bodies.
 - **Images**: at least one template (UK non-volunteer) has a footer image hosted on MailerSend's own CDN (`bucket.mailersendapp.com`). Those need re-hosting in the repo if templates get retired.
+
+## What these exports are worth
+
+They are a record of the migration, refreshed where we can.
+
+- **Current**: `default-3z0vkloo5v1l7qrx.json` and `no-intent-7dnvo4dyjd345r86.json`, taken from the team's published previews on 2026-09-12, and `canada-en-x2p0347j3r94zdrn.json`, verified against the editor the same day.
+- **Stale**: `uk-jy7zpl97rdrg5vx6.json`, from a 2026-07-15 snapshot. Real sends carry the WhatsApp invite `F0nj2RjLNeB1P1hyoDFsTz`, not the revoked `BesRzGOwnfNHuQM9fLIr0J`, and the conditional "If you opted in to our newsletter" line rather than "You're now on our mailing list". That template also runs a split test: version 1 is the long styled email, version 2 the same short note the UK non-volunteer template sends, so UK volunteers get one or the other at random.
+- **Unverified**: the Spanish and UK non-volunteer exports, also from that snapshot.
+
+**Refreshing one takes the editor or a published preview.** `https://app.mailersend.com/templates/<id>/` can serve a persistently frozen payload: the UK volunteer template's `updated_at` stayed at 2026-07-15 through an edit made on 2026-09-12. The public API is no help either, since `GET /v1/templates/<id>` returns metadata only and no HTML. In a refreshed export the preview's sample values are put back as `{{first_name}}` and `{{verification_link}}`, and its links stay wrapped in MailerSend click tracking.
