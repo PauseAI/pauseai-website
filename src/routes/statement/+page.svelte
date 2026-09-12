@@ -93,7 +93,7 @@
 	.statement {
 		margin: 1rem 0;
 		padding: 0.7rem 1.8rem;
-		font-weight: normal;
+		font-weight: 500;
 		border-left: 4px solid var(--brand);
 		background-color: var(--bg-subtle);
 		font-size: 1rem;
