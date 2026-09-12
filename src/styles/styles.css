@@ -57,7 +57,7 @@ html {
 	   colour, a bigger change than a rename), but --grey-600/--grey-800 are real
 	   candidates for a future merge. --- */
 	--grey-600: hsl(0, 0%, 15%); /* close to --banner-dark-2 (13pt) and --grey-800 (21pt) */
-	--grey-800: #1a1a1a; /* close to --banner-dark-1 (10pt) and --banner-dark-2 (9pt); also used for Hero.svelte's hover text */
+	--grey-800: #1a1a1a; /* close to --banner-dark-1 (10pt) and --banner-dark-2 (9pt) */
 	--banner-dark-1: hsl(0, 0%, 8%); /* Banner campaign gradient start; close to --grey-800 (10pt) */
 	--banner-dark-2: hsl(
 		25,
@@ -88,7 +88,7 @@ html {
 	--success-bg: #d4edda;
 	--success-border: #c3e6cb;
 	--success-text: #155724; /* same green family as --status-success-text-alt, a distinct darker shade (48pt) — not merged */
-	--error-bg: #f8d7da; /* also used by UKMPLookup's error banner */
+	--error-bg: #f8d7da;
 	--error-border: #f5c6cb;
 	--error-text: #721c24;
 
