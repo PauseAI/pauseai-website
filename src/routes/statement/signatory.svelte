@@ -107,7 +107,7 @@
 		font-weight: normal;
 		font-family: var(--font-body);
 		font-size: 0.9rem; /* Slightly smaller than name */
-		color: var(--text-muted); /* More muted color */
+		color: var(--text-subtle); /* More muted color */
 		opacity: 0.8; /* Subtle opacity difference */
 	}
 	@media (min-width: 1024px) {
