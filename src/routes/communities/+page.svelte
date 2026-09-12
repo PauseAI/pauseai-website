@@ -11,6 +11,7 @@
 	import { onDestroy, onMount } from 'svelte'
 	import { communities, communitiesMeta } from './communities'
 	import { MAPBOX_KEY } from './constants'
+	import { HERO_ORANGE } from '$lib/colors'
 
 	// maplibre-gl v6 is ESM-only; the worker URL must be set explicitly under
 	// bundlers like Vite (see v5→v6 migration guide).
@@ -109,7 +110,7 @@
 							? 'rgba(0,0,0,.5)'
 							: community.type === 'national'
 								? 'rgb(0, 150, 255)'
-								: 'rgb(255, 148, 22)',
+								: HERO_ORANGE,
 					opacityWhenCovered: '0'
 				})
 					.setPopup(
@@ -166,7 +167,7 @@
 	src="https://lu.ma/embed/calendar/cal-E1qhLPs5IvlQr8S/events?"
 	height="450"
 	frameborder="0"
-	style="border: 1px solid #bfcbda88; border-radius: 24px; width: 100%;"
+	style="border: 1px solid var(--border-luma-embed); border-radius: 24px; width: 100%;"
 	allowfullscreen
 	aria-hidden="false"
 	title="PauseAI Events Calendar"

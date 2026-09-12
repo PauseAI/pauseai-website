@@ -1179,7 +1179,7 @@
 		background-color: var(--bg-subtle);
 		padding: 2rem;
 		border-radius: 32px;
-		box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+		box-shadow: 0 4px 20px rgba(var(--black-rgb), 0.1);
 		width: 100%;
 		box-sizing: border-box;
 	}
@@ -1611,7 +1611,7 @@
 
 	.confirmation-footer :global(.discord-button) {
 		display: inline-block;
-		background-color: #5865f2;
+		background-color: var(--discord-blue);
 		color: white;
 		font-weight: bold;
 		padding: 0.8rem 2rem;

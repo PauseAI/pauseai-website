@@ -561,20 +561,20 @@
 	.warning-box {
 		margin: 0.5rem 0;
 		padding: 0.75rem 1.25rem;
-		background-color: #fff3cd;
-		border: 1px solid #ffeeba;
+		background-color: var(--status-warning-bg);
+		border: 1px solid var(--status-warning-border);
 		border-radius: 0.25rem;
 	}
 
 	.warning {
-		color: #856404;
+		color: var(--status-warning-text);
 		margin: 0.5rem 0;
 	}
 
 	.warning.error {
-		color: #721c24;
-		background-color: #f8d7da;
-		border-color: #f5c6cb;
+		color: var(--status-error-text);
+		background-color: var(--status-error-bg);
+		border-color: var(--status-error-border);
 	}
 
 	.top-buttons {
@@ -589,9 +589,9 @@
 		opacity: 0.5;
 		cursor: not-allowed;
 		pointer-events: none; /* Prevents hover effects */
-		background-color: #cccccc !important; /* Override other background colors */
-		color: #666666 !important; /* Darker text */
-		border: 1px solid #999999;
+		background-color: var(--grey-100) !important; /* Override other background colors */
+		color: var(--grey-400) !important; /* Darker text */
+		border: 1px solid var(--grey-300);
 	}
 
 	form {
@@ -717,9 +717,9 @@
 	.progress.completed {
 		animation: none;
 		background-image: none;
-		background-color: #c0ffc0; /* Light green background */
-		border-color: #c3e6cb;
-		color: #155724;
+		background-color: var(--status-success-bg-light); /* Light green background */
+		border-color: var(--status-success-border);
+		color: var(--status-success-text);
 	}
 
 	.loading {

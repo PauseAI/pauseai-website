@@ -74,7 +74,7 @@
 		font-size: 2rem;
 		margin-top: 1rem;
 		margin-bottom: 0.25rem;
-		border-bottom: 2px solid #ccc;
+		border-bottom: 2px solid var(--grey-100);
 	}
 
 	.group-divider {

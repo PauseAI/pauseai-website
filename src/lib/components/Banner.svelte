@@ -177,7 +177,7 @@
 	.banner.campaign {
 		flex-direction: column;
 		padding: 0;
-		background: linear-gradient(135deg, hsl(0, 0%, 8%) 0%, hsl(25, 10%, 12%) 100%);
+		background: linear-gradient(135deg, var(--banner-dark-1) 0%, var(--banner-dark-2) 100%);
 		overflow: hidden;
 	}
 
@@ -185,9 +185,9 @@
 		height: 3px;
 		background: linear-gradient(
 			90deg,
-			var(--brand, #ff9416) 0%,
-			hsl(20, 100%, 60%) 50%,
-			var(--brand, #ff9416) 100%
+			var(--brand) 0%,
+			var(--accent-orange) 50%,
+			var(--brand) 100%
 		);
 	}
 
@@ -256,18 +256,18 @@
 
 	.close.campaign-close {
 		right: 0.5em;
-		color: hsl(0, 0%, 50%);
+		color: var(--grey-700);
 		font-size: 0.9rem;
 	}
 
 	.close:hover {
 		opacity: 0.8;
-		background-color: rgba(0, 0, 0, 0.1);
+		background-color: rgba(var(--black-rgb), 0.1);
 	}
 
 	.close.campaign-close:hover {
 		color: white;
-		background-color: rgba(255, 255, 255, 0.1);
+		background-color: rgba(var(--white-rgb), 0.1);
 		opacity: 1;
 	}
 
@@ -290,7 +290,7 @@
 	}
 
 	:global(.campaign-link:hover) .campaign-cta {
-		background: var(--brand, #ff9416);
+		background: var(--brand);
 		color: black;
 	}
 
@@ -299,15 +299,15 @@
 	}
 
 	.campaign-text :global(strong) {
-		color: var(--brand, #ff9416);
+		color: var(--brand);
 	}
 
 	.campaign-cta {
 		display: inline-block;
 		padding: 0.25em 0.8em;
-		border: 1.5px solid var(--brand, #ff9416);
+		border: 1.5px solid var(--brand);
 		border-radius: 4px;
-		color: var(--brand, #ff9416);
+		color: var(--brand);
 		font-family: var(--font-heading);
 		font-weight: 700;
 		font-size: 0.9em;

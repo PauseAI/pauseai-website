@@ -461,7 +461,7 @@ ${userPostcode.toUpperCase()}`)
 	textarea:focus {
 		outline: none;
 		border-color: var(--brand);
-		box-shadow: 0 0 0 2px rgba(0, 122, 204, 0.1);
+		box-shadow: 0 0 0 2px rgba(var(--focus-glow-rgb), 0.1);
 	}
 
 	textarea {
@@ -626,7 +626,7 @@ ${userPostcode.toUpperCase()}`)
 		border-color: var(--brand);
 		background: var(--bg-subtle);
 		transform: translateY(-2px);
-		box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+		box-shadow: 0 4px 12px rgba(var(--black-rgb), 0.1);
 	}
 
 	* :global(.pdf-thumbnail img) {
@@ -634,7 +634,7 @@ ${userPostcode.toUpperCase()}`)
 		height: auto;
 		border-radius: 4px;
 		margin-bottom: 0.5rem;
-		box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+		box-shadow: 0 2px 8px rgba(var(--black-rgb), 0.1);
 	}
 
 	.pdf-info {
@@ -750,6 +750,11 @@ ${userPostcode.toUpperCase()}`)
 		opacity: 0.6;
 	}
 
+	/* --success- and --error- vars are referenced but never defined anywhere in the
+	   codebase — these hex values are what actually render today via the var()
+	   fallback. Left as-is; fixing the orphaned tokens is tracked separately from
+	   this colour-token cleanup, since some fallback values differ by call site. */
+	/* stylelint-disable color-no-hex */
 	.success-message {
 		background: var(--success-bg, #d4edda);
 		color: var(--success-text, #155724);
@@ -768,4 +773,5 @@ ${userPostcode.toUpperCase()}`)
 		border: 1px solid var(--error-border, #f5c6cb);
 		margin-top: 1rem;
 	}
+	/* stylelint-enable color-no-hex */
 </style>

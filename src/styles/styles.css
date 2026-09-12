@@ -18,12 +18,86 @@ html {
 	/* Colors */
 	--t-color-main: #f68b1e; /* Default main color - saturated orange */
 	--hero-orange: #ff9416; /* Home hero: menu band + photo-loading backdrop must match */
+	--hero-orange-rgb: 255, 148, 22; /* RGB triplet of --hero-orange, for rgba() compositing */
 
 	/* dark */
 	--brand-dark: #f68b1e;
 
 	/* light */
 	--brand-light: var(--t-color-main);
+
+	/* Other oranges found hardcoded around the site (the "six oranges" problem) —
+	   preserved as their own tokens rather than merged into --brand/--hero-orange,
+	   since even a 1-value merge would be a visual change. Worth a design pass later. */
+	--brand-gradient-mid: #ff6600; /* dear-sir-demis-2025 gradient stop */
+	--brand-glow: #ff8c00; /* dear-sir-demis-2025 gradient midpoint */
+	--brand-gradient-light: hsl(32, 80%, 65%); /* NewsCard image-placeholder gradient end */
+	--accent-orange: hsl(20, 100%, 60%); /* Banner campaign accent line */
+	--brand-glow-rgb: 255, 138, 0; /* dear-sir-demis-2025 background washes */
+	--brand-warm-rgb: 255, 100, 0; /* dear-sir-demis-2025 background washes */
+
+	/* Fixed neutrals — always literally white/black, unlike --bg/--text which flip
+	   with color-scheme. Do not use these to "soften" pure black/white; that's a
+	   deliberate design decision for later, not a side effect of tokenizing. */
+	--white: #fff;
+	--black: #000;
+	--white-rgb: 255, 255, 255;
+	--black-rgb: 0, 0, 0;
+	--grey-mid-rgb: 128, 128, 128; /* Button.svelte disabled-state shadow */
+
+	/* Greys — each a distinct shade actually in use; not a designed scale */
+	--grey-100: #ccc; /* also written #cccccc */
+	--grey-150: #ddd;
+	--grey-300: #999; /* also written #999999 */
+	--grey-400: #666; /* also written #666666 */
+	--grey-500: #333;
+	--grey-600: hsl(0, 0%, 15%);
+	--grey-700: hsl(0, 0%, 50%);
+	--grey-800: #1a1a1a;
+	--grey-warm-dark: #111110;
+	--cream: #f0ebe2;
+	--border-subtle: #e5e7eb;
+	--border-luma-embed: #bfcbda88; /* communities page Luma calendar iframe */
+	--text-secondary: #6c757d;
+	--banner-dark-1: hsl(0, 0%, 8%);
+	--banner-dark-2: hsl(25, 10%, 12%);
+
+	/* Status colors — near-duplicate shades kept distinct (not merged) to avoid
+	   changing what currently renders; a good target for a follow-up design pass.
+	   Named --status-* rather than --success- or --error-, because those names are
+	   already referenced (but never defined) elsewhere as var(--error-bg, #hex)
+	   fallbacks — defining them here would silently change what those call sites
+	   resolve to, which is explicitly out of scope for this change. */
+	--status-success-bg: #d4edda; /* write page (border/text only) */
+	--status-success-border: #c3e6cb; /* write page */
+	--status-success-text: #155724; /* write page */
+	--status-success-bg-alt: #e6f7e6; /* NewsletterSignup */
+	--status-success-text-alt: #2e7d32; /* NewsletterSignup */
+	--status-success-bg-light: #c0ffc0; /* write page */
+	--status-error-bg: #f8d7da; /* write page */
+	--status-error-border: #f5c6cb; /* write page */
+	--status-error-text: #721c24; /* write page */
+	--status-warning-bg: #fff3cd; /* write page */
+	--status-warning-border: #ffeeba; /* write page */
+	--status-warning-text: #856404; /* write page */
+	--focus-glow-rgb: 0, 122, 204;
+
+	/* UK MP lookup widget's own mini status palette */
+	--lookup-error: #e53e3e;
+	--lookup-error-bg: #fed7d7;
+	--lookup-error-border: #fc8181;
+	--lookup-warning: #d69e2e;
+	--lookup-warning-bg: #fef7e0;
+	--lookup-warning-border: #f6ad55;
+	--lookup-info: #63b3ed;
+	--lookup-info-bg: #ebf8ff;
+	--lookup-info-text: #2a4365;
+	--lookup-neutral-text: #4a5568;
+	--lookup-neutral-bg: #f7fafc;
+	--lookup-neutral-border: #cbd5e0;
+
+	/* Third-party brand colors */
+	--discord-blue: #5865f2;
 
 	/* We can't use these in media queries... */
 	--breakpoint: 900px;
@@ -81,7 +155,7 @@ html,
 body {
 	height: 100%;
 	font-family: var(--font-body);
-	font-weight: 300;
+	font-weight: 400;
 	background-color: var(--bg);
 }
 
@@ -166,7 +240,7 @@ a:hover {
 }
 
 p {
-	font-weight: 300;
+	font-weight: 400;
 }
 
 .prose {

@@ -107,6 +107,10 @@
 		font-weight: normal;
 		font-family: var(--font-body);
 		font-size: 0.9rem; /* Slightly smaller than name */
+		/* --text-muted is referenced but never defined anywhere in the codebase —
+		   this hex value is what actually renders today via the var() fallback.
+		   Left as-is; tracked separately from this colour-token cleanup. */
+		/* stylelint-disable-next-line color-no-hex */
 		color: var(--text-muted, #666); /* More muted color */
 		opacity: 0.8; /* Subtle opacity difference */
 	}

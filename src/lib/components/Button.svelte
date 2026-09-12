@@ -43,7 +43,7 @@
 		background-color: var(--brand);
 	}
 	button.disabled {
-		background-color: rgba(128, 128, 128, 0.5);
+		background-color: rgba(var(--grey-mid-rgb), 0.5);
 		cursor: default;
 	}
 </style>

@@ -243,7 +243,7 @@
 
 	.name-input.error,
 	.postcode-input.error {
-		border-color: #e53e3e;
+		border-color: var(--lookup-error);
 	}
 
 	.name-input:disabled,
@@ -263,28 +263,28 @@
 	}
 
 	.error-message.validation-error {
-		color: #d69e2e;
-		background-color: #fef7e0;
-		border: 1px solid #f6ad55;
+		color: var(--lookup-warning);
+		background-color: var(--lookup-warning-bg);
+		border: 1px solid var(--lookup-warning-border);
 	}
 
 	.error-message.server-error {
-		color: #e53e3e;
-		background-color: #fed7d7;
-		border: 1px solid #fc8181;
+		color: var(--lookup-error);
+		background-color: var(--lookup-error-bg);
+		border: 1px solid var(--lookup-error-border);
 	}
 
 	.error-message.network-error {
-		color: #e53e3e;
-		background-color: #fed7d7;
-		border: 1px solid #fc8181;
+		color: var(--lookup-error);
+		background-color: var(--lookup-error-bg);
+		border: 1px solid var(--lookup-error-border);
 	}
 
 	/* Default error styling for not_found errors */
 	.error-message:not(.validation-error):not(.server-error):not(.network-error) {
-		color: #4a5568;
-		background-color: #f7fafc;
-		border: 1px solid #cbd5e0;
+		color: var(--lookup-neutral-text);
+		background-color: var(--lookup-neutral-bg);
+		border: 1px solid var(--lookup-neutral-border);
 	}
 
 	.error-icon {
@@ -299,9 +299,9 @@
 		display: flex;
 		align-items: center;
 		gap: 0.75rem;
-		border: 2px solid #63b3ed;
-		background-color: #ebf8ff;
-		color: #2a4365;
+		border: 2px solid var(--lookup-info);
+		background-color: var(--lookup-info-bg);
+		color: var(--lookup-info-text);
 	}
 
 	.status-icon {

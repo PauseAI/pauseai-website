@@ -494,7 +494,7 @@
 		background-color: var(--bg-subtle);
 		padding: 2rem;
 		border-radius: 32px;
-		box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+		box-shadow: 0 4px 20px rgba(var(--black-rgb), 0.1);
 		width: 100%;
 		box-sizing: border-box;
 		display: flex;
@@ -541,14 +541,14 @@
 		color: var(--text);
 		font-family: var(--font-body);
 		font-size: 1rem;
-		font-weight: 300 !important;
+		font-weight: 400 !important;
 		box-sizing: border-box;
 		display: block;
 	}
 
 	input::placeholder,
 	textarea::placeholder {
-		font-weight: 300;
+		font-weight: 400;
 		opacity: 0.6;
 	}
 
@@ -607,7 +607,7 @@
 		color: var(--text);
 		font-family: var(--font-body);
 		font-size: 1rem;
-		font-weight: 300;
+		font-weight: 400;
 		box-sizing: border-box;
 		display: block;
 		appearance: none;
