@@ -32,7 +32,7 @@
 	}
 
 	p {
-		color: #6c757d;
+		color: var(--text-subtle);
 		margin-bottom: 2rem;
 	}
 </style>

@@ -292,12 +292,12 @@
 	}
 
 	.grounding .bar {
-		background-color: #666;
+		background-color: var(--text-subtle);
 		opacity: 0.5;
 	}
 
 	.grounding .pdoom :global(.source-link) {
-		color: #666;
+		color: var(--text-subtle);
 	}
 
 	.grounding .name {

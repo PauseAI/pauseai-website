@@ -454,14 +454,13 @@ ${userPostcode.toUpperCase()}`)
 	input::placeholder,
 	textarea::placeholder {
 		color: var(--text-muted);
-		opacity: 0.2;
 	}
 
 	input:focus,
 	textarea:focus {
 		outline: none;
 		border-color: var(--brand);
-		box-shadow: 0 0 0 2px rgba(0, 122, 204, 0.1);
+		box-shadow: 0 0 0 2px rgba(var(--focus-glow-rgb), 0.1);
 	}
 
 	textarea {
@@ -519,7 +518,7 @@ ${userPostcode.toUpperCase()}`)
 	.email-tips ul {
 		margin: 0;
 		padding-left: 1.5rem;
-		color: var(--text-muted);
+		color: var(--text-subtle);
 		list-style-type: disc;
 	}
 
@@ -626,7 +625,7 @@ ${userPostcode.toUpperCase()}`)
 		border-color: var(--brand);
 		background: var(--bg-subtle);
 		transform: translateY(-2px);
-		box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+		box-shadow: 0 4px 12px rgba(var(--black-rgb), 0.1);
 	}
 
 	* :global(.pdf-thumbnail img) {
@@ -634,7 +633,7 @@ ${userPostcode.toUpperCase()}`)
 		height: auto;
 		border-radius: 4px;
 		margin-bottom: 0.5rem;
-		box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+		box-shadow: 0 2px 8px rgba(var(--black-rgb), 0.1);
 	}
 
 	.pdf-info {
@@ -652,7 +651,7 @@ ${userPostcode.toUpperCase()}`)
 	.pdf-subtitle {
 		display: block;
 		font-size: 0.7rem;
-		color: var(--text-muted);
+		color: var(--text-subtle);
 	}
 
 	.submit-button {
@@ -751,21 +750,21 @@ ${userPostcode.toUpperCase()}`)
 	}
 
 	.success-message {
-		background: var(--success-bg, #d4edda);
-		color: var(--success-text, #155724);
+		background: var(--success-bg);
+		color: var(--success-text);
 		padding: 1rem;
 		border-radius: 4px;
-		border: 1px solid var(--success-border, #c3e6cb);
+		border: 1px solid var(--success-border);
 		margin-top: 1rem;
 		margin-bottom: 1rem;
 	}
 
 	.error-message {
-		background: var(--error-bg, #f8d7da);
-		color: var(--error-text, #721c24);
+		background: var(--error-bg);
+		color: var(--error-text);
 		padding: 0.75rem;
 		border-radius: 4px;
-		border: 1px solid var(--error-border, #f5c6cb);
+		border: 1px solid var(--error-border);
 		margin-top: 1rem;
 	}
 </style>

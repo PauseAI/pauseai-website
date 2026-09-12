@@ -292,7 +292,7 @@
 		max-width: 800px;
 		margin: 0 auto;
 		padding: 2.25rem;
-		box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+		box-shadow: 0 4px 20px rgba(var(--black-rgb), 0.1);
 	}
 
 	@media (max-width: 600px) {
@@ -389,7 +389,7 @@
 
 	button.primary {
 		background-color: var(--brand);
-		color: #fff;
+		color: var(--white);
 		font-size: 1.1rem;
 		font-weight: 700;
 		font-family: var(--font-body);

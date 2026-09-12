@@ -16,14 +16,136 @@ html {
 	--header-width: 48rem;
 
 	/* Colors */
+
+	/* --- Brand orange family (the "six oranges" problem) — several near-identical
+	   shades kept as their own tokens rather than merged, since even a 1-value merge
+	   would be a visual change. "Xpt" below is RGB Euclidean distance to the named
+	   token: under ~25pt reads as the same colour side by side; 40+ is the same vivid-
+	   orange family but a genuinely distinct shade. Worth a design pass later. --- */
 	--t-color-main: #f68b1e; /* Default main color - saturated orange */
-	--hero-orange: #ff9416; /* Home hero: menu band + photo-loading backdrop must match */
-
-	/* dark */
+	--hero-orange: #ff9416; /* Home hero: menu band + photo-loading backdrop must match; close to --t-color-main/--brand-dark (15pt) and --brand-glow (23pt) */
+	--hero-orange-rgb: 255, 148, 22; /* RGB triplet of --hero-orange, for rgba() compositing */
 	--brand-dark: #f68b1e;
-
-	/* light */
 	--brand-light: var(--t-color-main);
+	--brand-gradient-mid: #ff6600; /* dear-sir-demis-2025 gradient stop; same vivid-orange family as --brand-glow/--accent-orange, each a distinct shade (40-55pt apart) */
+	--brand-glow: #ff8c00; /* dear-sir-demis-2025 gradient midpoint; close to --hero-orange (23pt) */
+	--brand-gradient-light: hsl(
+		32,
+		80%,
+		65%
+	); /* NewsCard image-placeholder gradient end — a lighter tint of the same 32° hue as --t-color-main/--hero-orange */
+	--accent-orange: hsl(
+		20,
+		100%,
+		60%
+	); /* Banner campaign accent line; same vivid-orange family as --brand-gradient-mid/--brand-glow, distinct shade */
+	--brand-glow-rgb: 255, 138, 0; /* dear-sir-demis-2025 background washes */
+	--brand-warm-rgb: 255, 100, 0; /* dear-sir-demis-2025 background washes */
+
+	/* Fixed neutrals — always literally white/black, unlike --bg/--text which flip
+	   with color-scheme. Do not use these to "soften" pure black/white; that's a
+	   deliberate design decision for later, not a side effect of tokenizing. */
+	--white: #fff;
+	--black: #000;
+	--white-rgb: 255, 255, 255;
+	--black-rgb: 0, 0, 0;
+	--grey-mid-rgb: 128, 128, 128; /* Button.svelte disabled-state shadow */
+
+	/* --- Near-black cluster — four different components independently landed on
+	   "almost black" within an 8-15% lightness band. --banner-dark-1/2 are two stops
+	   of one gradient (merging them into each other would flatten it to a flat
+	   colour, a bigger change than a rename), but --grey-600/--grey-800 are real
+	   candidates for a future merge. --- */
+	--grey-600: hsl(0, 0%, 15%); /* close to --banner-dark-2 (13pt) and --grey-800 (21pt) */
+	--grey-800: #1a1a1a; /* close to --banner-dark-1 (10pt) and --banner-dark-2 (9pt) */
+	--banner-dark-1: hsl(0, 0%, 8%); /* Banner campaign gradient start; close to --grey-800 (10pt) */
+	--banner-dark-2: hsl(
+		25,
+		10%,
+		12%
+	); /* Banner campaign gradient end; close to --grey-800 (9pt) and --grey-600 (13pt) */
+
+	/* --- Light-grey / border cluster — four components each invented their own
+	   "light grey divider" shade, all within ~20-30pt of each other. --- */
+	--grey-100: #ccc; /* also written #cccccc; close to --border-luma-embed (19pt) and --lookup-neutral-border (22pt) */
+	--grey-150: #ddd; /* close to --border-subtle (19pt) and --lookup-neutral-border (20pt) */
+	--border-subtle: #e5e7eb; /* close to --grey-150 (19pt) */
+	--border-luma-embed: #bfcbda88; /* communities page Luma calendar iframe; close to --grey-100 (19pt) */
+
+	/* Other greys — each a distinct mid-tone shade actually in use */
+	--grey-300: #999; /* also written #999999 */
+	--grey-400: #666; /* also written #666666 */
+	--grey-500: #333; /* close to --grey-600 (23pt) */
+	--cream: #f0ebe2;
+
+	/* Onboarding-email QA tool (onboarding-email-preview/-compare) — these dev-only
+	   pages force color-scheme: light and paint their own fixed panels regardless of
+	   site theme, so they don't reuse --bg/--text/--grey-800 (each a close but
+	   distinct shade); every other color on those pages is one of the fixed neutrals
+	   or --hero-orange above. */
+	--qa-text: #222;
+	--qa-text-muted: #555;
+	--qa-panel-bg: #f0f4f8;
+	--qa-code-bg: #f6f6f6;
+	--qa-link: #a04b00;
+
+	/* Status colors. --success-bg/border/text and --error-bg/border/text were
+	   previously referenced (but never defined) in UKMPEmailForm.svelte as
+	   var(--success-bg, #d4edda) etc — always falling through to that hex,
+	   since the token didn't exist. Defined here with the exact same values,
+	   so nothing changes visually, just resolves via the token instead of the
+	   fallback now. write page's own success/error block used the identical
+	   values as plain literals (not var() at all), so it now shares these too. */
+	--success-bg: #d4edda;
+	--success-border: #c3e6cb;
+	--success-text: #155724; /* same green family as --status-success-text-alt, a distinct darker shade (48pt) — not merged */
+	--error-bg: #f8d7da;
+	--error-border: #f5c6cb;
+	--error-text: #721c24;
+
+	/* Near-duplicate status shades kept distinct (not merged) to avoid changing
+	   what currently renders — a good follow-up design pass. */
+	--status-success-bg-alt: #e6f7e6; /* NewsletterSignup */
+	--status-success-text-alt: #2e7d32; /* NewsletterSignup; same green family as --success-text, distinct shade */
+	--status-success-bg-light: #c0ffc0; /* write page */
+	--status-warning-bg: #fff3cd; /* write page; close to --lookup-warning-bg (19pt) */
+	--status-warning-border: #ffeeba; /* write page */
+	--status-warning-text: #856404; /* write page */
+	--focus-glow-rgb: 0, 122, 204;
+
+	/* UK MP lookup widget's own mini status palette */
+	--lookup-error: #e53e3e;
+	--lookup-error-border: #fc8181;
+	--lookup-warning: #d69e2e;
+	--lookup-warning-bg: #fef7e0; /* close to --status-warning-bg (19pt), a separate widget's near-identical pale yellow */
+	--lookup-warning-border: #f6ad55;
+	--lookup-info: #63b3ed;
+	--lookup-info-bg: #ebf8ff; /* close to this widget's own --lookup-neutral-bg (13pt) */
+	--lookup-info-text: #2a4365;
+	--lookup-neutral-text: #4a5568;
+	--lookup-neutral-bg: #f7fafc; /* close to --lookup-info-bg (13pt) */
+	--lookup-neutral-border: #cbd5e0; /* close to --grey-150 (20pt) and --grey-100 (22pt) */
+
+	/* Previously-orphaned tokens — referenced across several files but never
+	   defined anywhere, so the declarations using them were silent no-ops
+	   (missing card backgrounds/borders, invisible link colors, square image
+	   corners, etc). Wired up to existing tokens rather than new hex values,
+	   fixing real (if small) rendering gaps rather than just renaming things. */
+	--link: var(--brand); /* accent-color on checkboxes/radios/sliders sitewide */
+	--radius-3: 8px; /* img border-radius sitewide; matches existing card radii */
+	--primary: var(--brand); /* CommunitiesList .local-link */
+	--border: var(--brand-subtle); /* NationalGroupItem, PressCoveragePanel, SelfieUX cards */
+	--bg-2: var(--bg-secondary); /* NationalGroupItem card surface */
+	--bg-3: var(--bg-subtle); /* NationalGroupItem/CommunitiesList hover surface */
+	--bg-card: var(--bg-secondary); /* PressCoveragePanel, SelfieUX cards */
+	--text-muted: var(--grey-400); /* matches the one real fallback found, #666 */
+	--text-1: var(--text); /* NationalGroupItem/CommunitiesList icon color */
+	--text-2: var(--grey-400); /* secondary/muted text, several files */
+	--text-dark: var(--grey-500); /* PersonCard placeholder SVG fill */
+	--size-3: var(--spacing-sm); /* posts/+page.svelte .description margin-top */
+
+	/* Third-party brand colors */
+	--discord-blue: #5865f2;
 
 	/* We can't use these in media queries... */
 	--breakpoint: 900px;
@@ -43,7 +165,7 @@ html {
 	--brand: var(--brand-light);
 	--brand-subtle: hsl(32, 20%, 30%);
 	--text: black;
-	--text-subtle: hsl(32, 0%, 97%);
+	--text-subtle: hsl(32, 0%, 15%);
 	--bg: white;
 	--bg-subtle: hsl(32, 100%, 90%);
 }
@@ -64,7 +186,7 @@ html {
 	--text: white;
 	--bg: black;
 	--bg-subtle: hsl(32, 100%, 20%);
-	--text-subtle: hsl(32, 0%, 15%);
+	--text-subtle: hsl(32, 0%, 97%);
 	--bg-secondary: hsl(0, 0%, 10%);
 }
 
@@ -74,6 +196,7 @@ html {
 	--brand: var(--brand-light);
 	--brand-subtle: hsl(32, 100%, 35%);
 	--text: black;
+	--text-subtle: hsl(32, 0%, 15%);
 	--bg-secondary: white;
 }
 
@@ -81,7 +204,7 @@ html,
 body {
 	height: 100%;
 	font-family: var(--font-body);
-	font-weight: 300;
+	font-weight: 400;
 	background-color: var(--bg);
 }
 
@@ -89,8 +212,6 @@ html {
 	overflow-x: hidden;
 	color: var(--text);
 	accent-color: var(--link);
-	background-image: var(--background);
-	background-attachment: fixed;
 	font-size: 1.2rem;
 }
 
@@ -166,7 +287,7 @@ a:hover {
 }
 
 p {
-	font-weight: 300;
+	font-weight: 400;
 }
 
 .prose {

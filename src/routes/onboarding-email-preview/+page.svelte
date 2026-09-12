@@ -58,10 +58,10 @@
 	and the site's dark theme would otherwise leave light text on them. -->
 <div
 	class="qa-tool"
-	style="color-scheme: light; background: #fff; color: #222; font-family: sans-serif; padding: 16px; max-width: 1100px; margin: 0 auto; min-height: 100vh;"
+	style="color-scheme: light; background: var(--white); color: var(--qa-text); font-family: sans-serif; padding: 16px; max-width: 1100px; margin: 0 auto; min-height: 100vh;"
 >
 	<h1 style="font-size: 20px;">Onboarding email preview</h1>
-	<div style="color: #333; font-size: 14px; max-width: 640px;">
+	<div style="color: var(--grey-500); font-size: 14px; max-width: 640px;">
 		<p>
 			Renders the welcome email that the Airtable onboarding automation sends via
 			<code>/api/onboarding-email</code> (code in <code>src/lib/server/onboardingEmail</code>). Set
@@ -103,7 +103,7 @@
 		bind:this={formEl}
 		method="GET"
 		onsubmit={rerender}
-		style="display: grid; grid-template-columns: 120px 1fr; gap: 8px 12px; align-items: start; margin-bottom: 16px; padding: 12px; border: 1px solid #ddd; border-radius: 6px; max-width: 640px;"
+		style="display: grid; grid-template-columns: 120px 1fr; gap: 8px 12px; align-items: start; margin-bottom: 16px; padding: 12px; border: 1px solid var(--grey-150); border-radius: 6px; max-width: 640px;"
 	>
 		<label for="firstName" style="font-size: 13px; padding-top: 6px;">First name</label>
 		<input
@@ -111,7 +111,7 @@
 			name="firstName"
 			value={data.form.firstName}
 			onchange={rerender}
-			style="font-size: 13px; padding: 6px 8px; border: 1px solid #ccc; border-radius: 4px;"
+			style="font-size: 13px; padding: 6px 8px; border: 1px solid var(--grey-100); border-radius: 4px;"
 		/>
 
 		<span style="font-size: 13px; padding-top: 6px;">Language</span>
@@ -126,7 +126,7 @@
 						onchange={rerender}
 					/>
 					{LANGUAGE_LABELS[lang]}
-					<span style="color: #666;">({lang})</span>
+					<span style="color: var(--grey-400);">({lang})</span>
 				</label>
 			{/each}
 		</div>
@@ -137,7 +137,7 @@
 			name="intent"
 			value={data.form.intent === 'Lead' ? 'Volunteer' : data.form.intent}
 			onchange={rerender}
-			style="font-size: 13px; padding: 6px 8px; border: 1px solid #ccc; border-radius: 4px;"
+			style="font-size: 13px; padding: 6px 8px; border: 1px solid var(--grey-100); border-radius: 4px;"
 		>
 			{#each INTENT_OPTIONS as option}
 				<option value={option.value}>{option.label}</option>
@@ -151,14 +151,14 @@
 				name="country"
 				value={data.form.country}
 				onchange={rerender}
-				style="width: 100%; font-size: 13px; padding: 6px 8px; border: 1px solid #ccc; border-radius: 4px;"
+				style="width: 100%; font-size: 13px; padding: 6px 8px; border: 1px solid var(--grey-100); border-radius: 4px;"
 			>
 				<option value="">— none (no chapter) —</option>
 				{#each data.options.countries as c}
 					<option value={c.name}>{c.name}{c.override ? ` — ${c.override}` : ''}</option>
 				{/each}
 			</select>
-			<span style="font-size: 12px; color: #555;">
+			<span style="font-size: 12px; color: var(--qa-text-muted);">
 				Active National Groups records ({data.options.countries.length}). Sets the chapter block
 				only; language is chosen above. Any other country gets no chapter block.
 			</span>
@@ -184,14 +184,14 @@
 		<button
 			class="primary"
 			type="submit"
-			style="justify-self: start; font-size: 13px; padding: 6px 14px; border-radius: 4px; border: 1px solid #ccc; cursor: pointer; background: #ff9416; color: #fff;"
+			style="justify-self: start; font-size: 13px; padding: 6px 14px; border-radius: 4px; border: 1px solid var(--grey-100); cursor: pointer; background: var(--hero-orange); color: var(--white);"
 		>
 			Render
 		</button>
 	</form>
 
 	<div
-		style="font-size: 13px; background: #f0f4f8; color: #222; padding: 10px 12px; border-radius: 6px; margin-bottom: 12px;"
+		style="font-size: 13px; background: var(--qa-panel-bg); color: var(--qa-text); padding: 10px 12px; border-radius: 6px; margin-bottom: 12px;"
 	>
 		<strong>Resolved:</strong>
 		<ResolvedSummary resolved={data.resolved} />
@@ -213,14 +213,14 @@
 
 	{#if showText}
 		<pre
-			style="white-space: pre-wrap; background: #f6f6f6; color: #222; padding: 16px; border-radius: 6px; font-size: 13px; line-height: 1.5;">{data
+			style="white-space: pre-wrap; background: var(--qa-code-bg); color: var(--qa-text); padding: 16px; border-radius: 6px; font-size: 13px; line-height: 1.5;">{data
 				.rendered.text}</pre>
 	{:else}
 		<iframe
 			title="Email HTML preview"
 			srcdoc={data.rendered.html}
 			onload={fitToContent}
-			style="display: block; width: 100%; height: 600px; border: 1px solid #ccc; border-radius: 6px;"
+			style="display: block; width: 100%; height: 600px; border: 1px solid var(--grey-100); border-radius: 6px;"
 		></iframe>
 	{/if}
 </div>
@@ -246,23 +246,23 @@
 
 	.qa-tool,
 	.qa-tool :is(p, li, ul, label, h1, span, code, strong, em, div, pre) {
-		color: #222 !important;
+		color: var(--qa-text) !important;
 	}
 
 	.qa-tool :is(input, select, option, button) {
-		color: #222 !important;
-		background: #fff !important;
-		border: 1px solid #ccc;
+		color: var(--qa-text) !important;
+		background: var(--white) !important;
+		border: 1px solid var(--grey-100);
 	}
 
 	.qa-tool button.primary {
-		color: #fff !important;
-		background: #ff9416 !important;
-		border-color: #ff9416;
+		color: var(--white) !important;
+		background: var(--hero-orange) !important;
+		border-color: var(--hero-orange);
 	}
 
 	.qa-tool a {
-		color: #a04b00 !important;
+		color: var(--qa-link) !important;
 		text-decoration: underline;
 	}
 </style>

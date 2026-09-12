@@ -103,7 +103,7 @@
 		flex-wrap: wrap;
 		gap: 0.25rem;
 		margin-bottom: 2rem;
-		background: var(--bg-card, var(--bg));
+		background: var(--bg-card);
 		padding: 0.5rem;
 		border-radius: 12px;
 		border: 1px solid var(--border);
