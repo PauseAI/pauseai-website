@@ -1,5 +1,7 @@
-import type { LanguageCopy } from './copy.js'
+import type { OnboardingEmailLanguage } from './types.js'
 import type { EmailBlock } from './blocks.js'
+import type { ChapterLink } from './types.js'
+import { ADDRESS_LINE } from './fixed.js'
 import { escapeHtml, mdLineToHtml } from './markdown.js'
 
 // A deliberately plain alternative to html.ts: no card, no rounded corners, no
@@ -30,37 +32,50 @@ function renderBlock(block: EmailBlock): string {
 			const tag = block.ordered ? 'ol' : 'ul'
 			return `<${tag} style="font-family: ${FONT}; color: ${TEXT}; font-size: 14px; line-height: 1.5; margin: 0 0 20px 0; padding-left: 20px;">${items}</${tag}>`
 		}
+		case 'button':
+			// The plain layout reads as a typed note, so a button would be out of place.
+			return `<p style="${P_STYLE}">${mdLineToHtml(`[${block.text}](${block.url})`, LINK)}</p>`
+		case 'signoff':
+			return `<p style="${P_STYLE} margin-top: 28px;">${block.lines.map((line) => mdLineToHtml(line, LINK)).join('<br>')}</p>`
+		case 'rule':
+			return ''
 		case 'links': {
 			const links = block.items
 				.map(
 					(item) =>
-						`<a href="${item.url}" style="color: ${LINK}; text-decoration: none;">${escapeHtml(item.label)}</a>`
+						`<a href="${escapeHtml(item.url)}" style="display: inline-block; margin: 0 18px 6px 0; color: ${LINK}; text-decoration: none; white-space: nowrap;">${escapeHtml(item.label)}</a>`
 				)
-				.join('&nbsp;&nbsp;&middot;&nbsp;&nbsp;')
-			return `<p style="${P_STYLE}">${links}</p>`
+				.join('')
+			return `<p style="${P_STYLE} margin-bottom: 14px;">${links}</p>`
 		}
 	}
 }
 
 /** Plain-text-feel HTML wrapper. Table layout is kept (email-client width control)
  *  but carries no visual styling of its own. A small PauseAI wordmark sits at the
- *  foot, above the unsubscribe/address lines — same placement as the pre-migration
+ *  foot, above the address line — same placement as the pre-migration
  *  PauseAI UK template. `logoUrl` must be absolute (email clients don't resolve
  *  relative paths); pass '' to omit it. */
 export function renderHtmlPlain(
 	blocks: EmailBlock[],
-	copy: LanguageCopy,
-	unsubscribeUrl: string,
-	logoUrl: string
+	language: OnboardingEmailLanguage,
+	assetBaseUrl: string,
+	socials: ChapterLink[] = []
 ): string {
 	const body = blocks.map(renderBlock).join('\n')
 
-	const logo = logoUrl
-		? `<p style="margin: 24px 0 20px 0;"><img src="${logoUrl}" width="180" alt="PauseAI" style="display: block; width: 180px; max-width: 60%; height: auto; border: 0;"></p>`
+	const socialRow = socials.length
+		? `<p style="font-family: ${FONT}; color: ${MUTED}; font-size: 12px; line-height: 1.5; margin: 0 0 8px 0;">${socials
+				.map(
+					(item) =>
+						`<a href="${escapeHtml(item.url)}" style="color: ${MUTED}; margin-right: 12px;">${escapeHtml(item.label)}</a>`
+				)
+				.join('')}</p>`
 		: ''
+	const logo = `<p style="margin: 24px 0 20px 0;"><img src="${assetBaseUrl}/pauseai-logo-email.png" width="180" alt="PauseAI" style="display: block; width: 180px; max-width: 60%; height: auto; border: 0;"></p>`
 
 	return `<!doctype html>
-<html lang="en">
+<html lang="${language}">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -76,8 +91,8 @@ export function renderHtmlPlain(
 <td>
 ${body}
 ${logo}
-<p style="font-family: ${FONT}; color: ${MUTED}; font-size: 12px; line-height: 1.5; margin: ${logo ? '0' : '28px'} 0 4px 0;">${mdLineToHtml(copy.unsubscribeLine(unsubscribeUrl), MUTED)}</p>
-<p style="font-family: ${FONT}; color: ${MUTED}; font-size: 12px; line-height: 1.5; margin: 0;">${escapeHtml(copy.addressLine)}</p>
+${socialRow}
+<p style="font-family: ${FONT}; color: ${MUTED}; font-size: 12px; line-height: 1.5; margin: 0 0 0 0;">${escapeHtml(ADDRESS_LINE)}</p>
 </td>
 </tr>
 </table>
