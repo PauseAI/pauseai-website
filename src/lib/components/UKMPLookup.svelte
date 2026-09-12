@@ -269,13 +269,13 @@
 
 	.error-message.server-error {
 		color: var(--lookup-error);
-		background-color: var(--lookup-error-bg);
+		background-color: var(--error-bg);
 		border: 1px solid var(--lookup-error-border);
 	}
 
 	.error-message.network-error {
 		color: var(--lookup-error);
-		background-color: var(--lookup-error-bg);
+		background-color: var(--error-bg);
 		border: 1px solid var(--lookup-error-border);
 	}
 

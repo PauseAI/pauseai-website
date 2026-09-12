@@ -211,7 +211,7 @@
 	.hero-buttons :global(a.btn-on-photo) {
 		background: white;
 		border-color: white;
-		color: var(--grey-warm-dark);
+		color: var(--grey-800);
 	}
 	.hero-buttons :global(a.btn-on-photo:hover) {
 		background: var(--cream);
