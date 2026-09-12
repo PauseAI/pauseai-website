@@ -607,7 +607,6 @@
 		border: solid 1px var(--text);
 		border-radius: 10px;
 		padding: 10px;
-		font-size: var(--font-size);
 		box-sizing: border-box;
 		font-family: var(--font-body);
 		max-width: 100%;
@@ -628,7 +627,6 @@
 		border: none;
 		border-radius: 10px;
 		padding: 10px;
-		font-size: var(--font-size);
 		font-family: var(--font-body);
 		cursor: pointer;
 		display: flex;

@@ -133,7 +133,6 @@
 		border: solid 1px var(--text);
 		border-radius: 10px;
 		padding: 10px;
-		font-size: var(--font-size);
 		box-sizing: border-box;
 		font-family: var(--font-body);
 		margin-top: 1rem;
@@ -150,11 +149,9 @@
 
 	button {
 		background-color: var(--brand);
-		color: var(--background);
 		border: none;
 		border-radius: 10px;
 		padding: 10px;
-		font-size: var(--font-size);
 		font-family: var(--font-body);
 		cursor: pointer;
 		display: flex;
@@ -164,7 +161,7 @@
 	}
 
 	.button--alt {
-		background-color: var(--background);
+		background-color: var(--bg);
 		color: var(--text);
 	}
 

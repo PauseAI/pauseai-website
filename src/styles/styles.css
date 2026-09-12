@@ -99,6 +99,25 @@ html {
 	--lookup-neutral-bg: #f7fafc;
 	--lookup-neutral-border: #cbd5e0;
 
+	/* Previously-orphaned tokens — referenced across several files but never
+	   defined anywhere, so the declarations using them were silent no-ops
+	   (missing card backgrounds/borders, invisible link colors, square image
+	   corners, etc). Wired up to existing tokens rather than new hex values,
+	   fixing real (if small) rendering gaps rather than just renaming things. */
+	--link: var(--brand); /* accent-color on checkboxes/radios/sliders sitewide */
+	--radius-3: 8px; /* img border-radius sitewide; matches existing card radii */
+	--primary: var(--brand); /* CommunitiesList .local-link */
+	--border: var(--brand-subtle); /* NationalGroupItem, PressCoveragePanel, SelfieUX cards */
+	--bg-2: var(--bg-secondary); /* NationalGroupItem card surface */
+	--bg-3: var(--bg-subtle); /* NationalGroupItem/CommunitiesList hover surface */
+	--bg-card: var(--bg-secondary); /* PressCoveragePanel, SelfieUX cards */
+	--color-background: var(--bg-secondary); /* QuoteContent card */
+	--text-muted: var(--grey-400); /* matches the one real fallback found, #666 */
+	--text-1: var(--text); /* NationalGroupItem/CommunitiesList icon color */
+	--text-2: var(--grey-400); /* secondary/muted text, several files */
+	--text-dark: var(--grey-500); /* PersonCard placeholder SVG fill */
+	--size-3: var(--spacing-sm); /* posts/+page.svelte .description margin-top */
+
 	/* Third-party brand colors */
 	--discord-blue: #5865f2;
 
@@ -166,8 +185,6 @@ html {
 	overflow-x: hidden;
 	color: var(--text);
 	accent-color: var(--link);
-	background-image: var(--background);
-	background-attachment: fixed;
 	font-size: 1.2rem;
 }
 
