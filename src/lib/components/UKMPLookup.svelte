@@ -231,7 +231,7 @@
 
 	.name-input::placeholder,
 	.postcode-input::placeholder {
-		color: var(--text-subtle);
+		color: var(--text-muted);
 	}
 
 	.name-input:focus,
