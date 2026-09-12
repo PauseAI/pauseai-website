@@ -95,7 +95,7 @@
 		padding: 0.7rem 1.8rem;
 		font-weight: normal;
 		border-left: 4px solid var(--brand);
-		background-color: var(--text-subtle);
+		background-color: var(--bg-subtle);
 		font-size: 1rem;
 		line-height: 1.8;
 		color: var(--text);
