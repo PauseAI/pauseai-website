@@ -453,7 +453,7 @@ ${userPostcode.toUpperCase()}`)
 
 	input::placeholder,
 	textarea::placeholder {
-		color: var(--text-muted);
+		color: var(--text-subtle);
 	}
 
 	input:focus,
@@ -518,7 +518,7 @@ ${userPostcode.toUpperCase()}`)
 	.email-tips ul {
 		margin: 0;
 		padding-left: 1.5rem;
-		color: var(--text-muted);
+		color: var(--text-subtle);
 		list-style-type: disc;
 	}
 
@@ -651,7 +651,7 @@ ${userPostcode.toUpperCase()}`)
 	.pdf-subtitle {
 		display: block;
 		font-size: 0.7rem;
-		color: var(--text-muted);
+		color: var(--text-subtle);
 	}
 
 	.submit-button {

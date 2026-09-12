@@ -231,7 +231,7 @@
 
 	.name-input::placeholder,
 	.postcode-input::placeholder {
-		color: var(--text-muted);
+		color: var(--text-subtle);
 	}
 
 	.name-input:focus,
@@ -341,7 +341,7 @@
 
 	.constituency {
 		margin: 0 0 0.5rem 0;
-		color: var(--text-muted);
+		color: var(--text-subtle);
 		font-size: 1.1rem;
 	}
 
