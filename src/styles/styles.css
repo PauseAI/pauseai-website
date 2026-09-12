@@ -16,23 +16,29 @@ html {
 	--header-width: 48rem;
 
 	/* Colors */
-	--t-color-main: #f68b1e; /* Default main color - saturated orange */
-	--hero-orange: #ff9416; /* Home hero: menu band + photo-loading backdrop must match */
+
+	/* --- Brand orange family (the "six oranges" problem) — several near-identical
+	   shades kept as their own tokens rather than merged, since even a 1-value merge
+	   would be a visual change. "Xpt" below is RGB Euclidean distance to the named
+	   token: under ~25pt reads as the same colour side by side; 40+ is the same vivid-
+	   orange family but a genuinely distinct shade. Worth a design pass later. --- */
+	--t-color-main: #f68b1e; /* identical to --brand-dark (same value, kept separate for dark/light-mode naming) */
+	--hero-orange: #ff9416; /* Home hero: menu band + photo-loading backdrop must match; close to --t-color-main/--brand-dark (15pt) and --brand-glow (23pt) */
 	--hero-orange-rgb: 255, 148, 22; /* RGB triplet of --hero-orange, for rgba() compositing */
-
-	/* dark */
-	--brand-dark: #f68b1e;
-
-	/* light */
+	--brand-dark: #f68b1e; /* identical to --t-color-main */
 	--brand-light: var(--t-color-main);
-
-	/* Other oranges found hardcoded around the site (the "six oranges" problem) —
-	   preserved as their own tokens rather than merged into --brand/--hero-orange,
-	   since even a 1-value merge would be a visual change. Worth a design pass later. */
-	--brand-gradient-mid: #ff6600; /* dear-sir-demis-2025 gradient stop */
-	--brand-glow: #ff8c00; /* dear-sir-demis-2025 gradient midpoint */
-	--brand-gradient-light: hsl(32, 80%, 65%); /* NewsCard image-placeholder gradient end */
-	--accent-orange: hsl(20, 100%, 60%); /* Banner campaign accent line */
+	--brand-gradient-mid: #ff6600; /* dear-sir-demis-2025 gradient stop; same vivid-orange family as --brand-glow/--accent-orange, each a distinct shade (40-55pt apart) */
+	--brand-glow: #ff8c00; /* dear-sir-demis-2025 gradient midpoint; close to --hero-orange (23pt) */
+	--brand-gradient-light: hsl(
+		32,
+		80%,
+		65%
+	); /* NewsCard image-placeholder gradient end — a lighter tint of the same 32° hue as --t-color-main/--hero-orange */
+	--accent-orange: hsl(
+		20,
+		100%,
+		60%
+	); /* Banner campaign accent line; same vivid-orange family as --brand-gradient-mid/--brand-glow, distinct shade */
 	--brand-glow-rgb: 255, 138, 0; /* dear-sir-demis-2025 background washes */
 	--brand-warm-rgb: 255, 100, 0; /* dear-sir-demis-2025 background washes */
 
@@ -45,19 +51,32 @@ html {
 	--black-rgb: 0, 0, 0;
 	--grey-mid-rgb: 128, 128, 128; /* Button.svelte disabled-state shadow */
 
-	/* Greys — each a distinct shade actually in use; not a designed scale */
-	--grey-100: #ccc; /* also written #cccccc */
-	--grey-150: #ddd;
+	/* --- Near-black cluster — four different components independently landed on
+	   "almost black" within an 8-15% lightness band. --banner-dark-1/2 are two stops
+	   of one gradient (merging them into each other would flatten it to a flat
+	   colour, a bigger change than a rename), but --grey-600/--grey-800 are real
+	   candidates for a future merge. --- */
+	--grey-600: hsl(0, 0%, 15%); /* close to --banner-dark-2 (13pt) and --grey-800 (21pt) */
+	--grey-800: #1a1a1a; /* close to --banner-dark-1 (10pt) and --banner-dark-2 (9pt); also used for Hero.svelte's hover text, merged from a near-identical --grey-warm-dark */
+	--banner-dark-1: hsl(0, 0%, 8%); /* Banner campaign gradient start; close to --grey-800 (10pt) */
+	--banner-dark-2: hsl(
+		25,
+		10%,
+		12%
+	); /* Banner campaign gradient end; close to --grey-800 (9pt) and --grey-600 (13pt) */
+
+	/* --- Light-grey / border cluster — four components each invented their own
+	   "light grey divider" shade, all within ~20-30pt of each other. --- */
+	--grey-100: #ccc; /* also written #cccccc; close to --border-luma-embed (19pt) and --lookup-neutral-border (22pt) */
+	--grey-150: #ddd; /* close to --border-subtle (19pt) and --lookup-neutral-border (20pt) */
+	--border-subtle: #e5e7eb; /* close to --grey-150 (19pt) */
+	--border-luma-embed: #bfcbda88; /* communities page Luma calendar iframe; close to --grey-100 (19pt) */
+
+	/* Other greys — each a distinct mid-tone shade actually in use */
 	--grey-300: #999; /* also written #999999 */
 	--grey-400: #666; /* also written #666666 */
-	--grey-500: #333;
-	--grey-600: hsl(0, 0%, 15%);
-	--grey-800: #1a1a1a; /* also used for Hero.svelte's near-black hover text — merged from a near-identical --grey-warm-dark */
+	--grey-500: #333; /* close to --grey-600 (23pt) */
 	--cream: #f0ebe2;
-	--border-subtle: #e5e7eb;
-	--border-luma-embed: #bfcbda88; /* communities page Luma calendar iframe */
-	--banner-dark-1: hsl(0, 0%, 8%);
-	--banner-dark-2: hsl(25, 10%, 12%);
 
 	/* Status colors. --success-bg/border/text and --error-bg/border/text were
 	   previously referenced (but never defined) in UKMPEmailForm.svelte as
@@ -65,19 +84,20 @@ html {
 	   since the token didn't exist. Defined here with the exact same values,
 	   so nothing changes visually, just resolves via the token instead of the
 	   fallback now. write page's own success/error block used the identical
-	   values as plain literals (not var() at all), so it now shares these too.
-	   The remaining near-duplicate shades below are kept distinct (not merged)
-	   to avoid changing what currently renders — a good follow-up design pass. */
+	   values as plain literals (not var() at all), so it now shares these too. */
 	--success-bg: #d4edda;
 	--success-border: #c3e6cb;
-	--success-text: #155724;
-	--error-bg: #f8d7da;
+	--success-text: #155724; /* same green family as --status-success-text-alt, a distinct darker shade (48pt) — not merged */
+	--error-bg: #f8d7da; /* merged from a near-identical --lookup-error-bg (7pt) — UKMPLookup's error banner now shares this */
 	--error-border: #f5c6cb;
 	--error-text: #721c24;
+
+	/* Near-duplicate status shades kept distinct (not merged) to avoid changing
+	   what currently renders — a good follow-up design pass. */
 	--status-success-bg-alt: #e6f7e6; /* NewsletterSignup */
-	--status-success-text-alt: #2e7d32; /* NewsletterSignup */
+	--status-success-text-alt: #2e7d32; /* NewsletterSignup; same green family as --success-text, distinct shade */
 	--status-success-bg-light: #c0ffc0; /* write page */
-	--status-warning-bg: #fff3cd; /* write page */
+	--status-warning-bg: #fff3cd; /* write page; close to --lookup-warning-bg (19pt) */
 	--status-warning-border: #ffeeba; /* write page */
 	--status-warning-text: #856404; /* write page */
 	--focus-glow-rgb: 0, 122, 204;
@@ -86,14 +106,14 @@ html {
 	--lookup-error: #e53e3e;
 	--lookup-error-border: #fc8181;
 	--lookup-warning: #d69e2e;
-	--lookup-warning-bg: #fef7e0;
+	--lookup-warning-bg: #fef7e0; /* close to --status-warning-bg (19pt), a separate widget's near-identical pale yellow */
 	--lookup-warning-border: #f6ad55;
 	--lookup-info: #63b3ed;
-	--lookup-info-bg: #ebf8ff;
+	--lookup-info-bg: #ebf8ff; /* close to this widget's own --lookup-neutral-bg (13pt) */
 	--lookup-info-text: #2a4365;
 	--lookup-neutral-text: #4a5568;
-	--lookup-neutral-bg: #f7fafc;
-	--lookup-neutral-border: #cbd5e0;
+	--lookup-neutral-bg: #f7fafc; /* close to --lookup-info-bg (13pt) */
+	--lookup-neutral-border: #cbd5e0; /* close to --grey-150 (20pt) and --grey-100 (22pt) */
 
 	/* Previously-orphaned tokens — referenced across several files but never
 	   defined anywhere, so the declarations using them were silent no-ops
