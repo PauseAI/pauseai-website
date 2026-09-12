@@ -138,7 +138,7 @@ html {
 	--brand: var(--brand-light);
 	--brand-subtle: hsl(32, 20%, 30%);
 	--text: black;
-	--text-subtle: hsl(32, 0%, 97%);
+	--text-subtle: hsl(32, 0%, 15%);
 	--bg: white;
 	--bg-subtle: hsl(32, 100%, 90%);
 }
@@ -159,7 +159,7 @@ html {
 	--text: white;
 	--bg: black;
 	--bg-subtle: hsl(32, 100%, 20%);
-	--text-subtle: hsl(32, 0%, 15%);
+	--text-subtle: hsl(32, 0%, 97%);
 	--bg-secondary: hsl(0, 0%, 10%);
 }
 
@@ -169,6 +169,7 @@ html {
 	--brand: var(--brand-light);
 	--brand-subtle: hsl(32, 100%, 35%);
 	--text: black;
+	--text-subtle: hsl(32, 0%, 15%);
 	--bg-secondary: white;
 }
 
