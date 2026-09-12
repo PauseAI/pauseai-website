@@ -78,6 +78,17 @@ html {
 	--grey-500: #333; /* close to --grey-600 (23pt) */
 	--cream: #f0ebe2;
 
+	/* Onboarding-email QA tool (onboarding-email-preview/-compare) — these dev-only
+	   pages force color-scheme: light and paint their own fixed panels regardless of
+	   site theme, so they don't reuse --bg/--text/--grey-800 (each a close but
+	   distinct shade); every other color on those pages is one of the fixed neutrals
+	   or --hero-orange above. */
+	--qa-text: #222;
+	--qa-text-muted: #555;
+	--qa-panel-bg: #f0f4f8;
+	--qa-code-bg: #f6f6f6;
+	--qa-link: #a04b00;
+
 	/* Status colors. --success-bg/border/text and --error-bg/border/text were
 	   previously referenced (but never defined) in UKMPEmailForm.svelte as
 	   var(--success-bg, #d4edda) etc — always falling through to that hex,

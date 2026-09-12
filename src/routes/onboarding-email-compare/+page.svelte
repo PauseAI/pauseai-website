@@ -68,10 +68,10 @@
 	site's dark theme would otherwise leave light text on them. -->
 <div
 	class="qa-tool"
-	style="color-scheme: light; background: #fff; color: #222; font-family: sans-serif; padding: 16px; box-sizing: border-box; width: 94vw; max-width: 94vw; position: relative; left: 50%; margin-left: -47vw; min-height: 100vh;"
+	style="color-scheme: light; background: var(--white); color: var(--qa-text); font-family: sans-serif; padding: 16px; box-sizing: border-box; width: 94vw; max-width: 94vw; position: relative; left: 50%; margin-left: -47vw; min-height: 100vh;"
 >
 	<h1 style="font-size: 20px;">Onboarding email compare</h1>
-	<div style="color: #333; font-size: 14px; max-width: 900px;">
+	<div style="color: var(--grey-500); font-size: 14px; max-width: 900px;">
 		<p>
 			Side-by-side check of the new render against the email it replaces. <strong>Left</strong> is
 			one of the seven pre-migration MailerSend templates (raw exports in
@@ -112,7 +112,7 @@
 		bind:this={formEl}
 		method="GET"
 		onsubmit={rerender}
-		style="display: grid; grid-template-columns: 130px 1fr; gap: 8px 12px; align-items: start; margin-bottom: 12px; padding: 12px; border: 1px solid #ddd; border-radius: 6px; max-width: 720px;"
+		style="display: grid; grid-template-columns: 130px 1fr; gap: 8px 12px; align-items: start; margin-bottom: 12px; padding: 12px; border: 1px solid var(--grey-150); border-radius: 6px; max-width: 720px;"
 	>
 		<label for="firstName" style="font-size: 13px; padding-top: 6px;">First name</label>
 		<input
@@ -120,7 +120,7 @@
 			name="firstName"
 			value={data.form.firstName}
 			onchange={resubmit}
-			style="font-size: 13px; padding: 6px 8px; border: 1px solid #ccc; border-radius: 4px;"
+			style="font-size: 13px; padding: 6px 8px; border: 1px solid var(--grey-100); border-radius: 4px;"
 		/>
 
 		<label for="template" style="font-size: 13px; padding-top: 6px;">Previous template</label>
@@ -129,7 +129,7 @@
 			name="template"
 			value={data.form.templateKey}
 			onchange={onTemplateChange}
-			style="font-size: 13px; padding: 6px 8px; border: 1px solid #ccc; border-radius: 4px;"
+			style="font-size: 13px; padding: 6px 8px; border: 1px solid var(--grey-100); border-radius: 4px;"
 		>
 			{#each data.options.templates as t}
 				<option value={t.key}>
@@ -147,13 +147,15 @@
 					name="intent"
 					value={data.form.intent}
 					onchange={resubmit}
-					style="font-size: 13px; padding: 6px 8px; border: 1px solid #ccc; border-radius: 4px;"
+					style="font-size: 13px; padding: 6px 8px; border: 1px solid var(--grey-100); border-radius: 4px;"
 				>
 					{#each intentChoices as option}
 						<option value={option.value}>{option.label}</option>
 					{/each}
 				</select>
-				<span style="font-size: 12px; color: #555; display: block; margin-top: 4px;">
+				<span
+					style="font-size: 12px; color: var(--qa-text-muted); display: block; margin-top: 4px;"
+				>
 					This template served both, and the new render tells them apart. Only the right side
 					changes; the old body is fixed.
 				</span>
@@ -178,7 +180,7 @@
 	</form>
 
 	<div
-		style="font-size: 13px; background: #f0f4f8; color: #222; padding: 10px 12px; border-radius: 6px; margin-bottom: 12px;"
+		style="font-size: 13px; background: var(--qa-panel-bg); color: var(--qa-text); padding: 10px 12px; border-radius: 6px; margin-bottom: 12px;"
 	>
 		<strong>New render inputs:</strong>
 		country <code>{data.newInputs.country || '—'}</code>
@@ -199,7 +201,7 @@
 		<div>
 			<div style="font-size: 13px; font-weight: bold; margin-bottom: 4px;">
 				Previous — MailerSend template
-				<span style="font-weight: normal; color: #555;">
+				<span style="font-weight: normal; color: var(--qa-text-muted);">
 					<!-- eslint-disable-next-line svelte/no-restricted-html-elements -- dev-only QA page, not site chrome -->
 					<a
 						href="https://app.mailersend.com/templates/{data.legacy.id}/edit"
@@ -217,14 +219,14 @@
 			</div>
 			{#if showText}
 				<pre
-					style="white-space: pre-wrap; background: #f6f6f6; color: #222; padding: 16px; border-radius: 6px; font-size: 13px; line-height: 1.5;">{data
+					style="white-space: pre-wrap; background: var(--qa-code-bg); color: var(--qa-text); padding: 16px; border-radius: 6px; font-size: 13px; line-height: 1.5;">{data
 						.legacy.text}</pre>
 			{:else}
 				<iframe
 					title="Previous MailerSend email"
 					srcdoc={data.legacy.html}
 					onload={fitToContent}
-					style="display: block; width: 100%; height: 600px; border: 1px solid #ccc; border-radius: 6px;"
+					style="display: block; width: 100%; height: 600px; border: 1px solid var(--grey-100); border-radius: 6px;"
 				></iframe>
 			{/if}
 		</div>
@@ -239,14 +241,14 @@
 			</div>
 			{#if showText}
 				<pre
-					style="white-space: pre-wrap; background: #f6f6f6; color: #222; padding: 16px; border-radius: 6px; font-size: 13px; line-height: 1.5;">{data
+					style="white-space: pre-wrap; background: var(--qa-code-bg); color: var(--qa-text); padding: 16px; border-radius: 6px; font-size: 13px; line-height: 1.5;">{data
 						.rendered.text}</pre>
 			{:else}
 				<iframe
 					title="New email HTML preview"
 					srcdoc={data.rendered.html}
 					onload={fitToContent}
-					style="display: block; width: 100%; height: 600px; border: 1px solid #ccc; border-radius: 6px;"
+					style="display: block; width: 100%; height: 600px; border: 1px solid var(--grey-100); border-radius: 6px;"
 				></iframe>
 			{/if}
 		</div>
@@ -274,17 +276,17 @@
 
 	.qa-tool,
 	.qa-tool :is(p, li, ul, label, h1, span, code, strong, em, div, pre) {
-		color: #222 !important;
+		color: var(--qa-text) !important;
 	}
 
 	.qa-tool :is(input, select, option, button) {
-		color: #222 !important;
-		background: #fff !important;
-		border: 1px solid #ccc;
+		color: var(--qa-text) !important;
+		background: var(--white) !important;
+		border: 1px solid var(--grey-100);
 	}
 
 	.qa-tool a {
-		color: #a04b00 !important;
+		color: var(--qa-link) !important;
 		text-decoration: underline;
 	}
 </style>

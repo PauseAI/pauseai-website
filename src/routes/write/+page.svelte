@@ -467,10 +467,18 @@
 			<button onclick={runTest} class="button" disabled={!apiAvailable || loading}>
 				(Demo for beta)
 			</button>
-			<button onclick={copy} class="button" disabled={loading || messages.length === 0}>
+			<button
+				onclick={copy}
+				class="button button--subtle"
+				disabled={loading || messages.length === 0}
+			>
 				Copy Content
 			</button>
-			<button onclick={clear} class="button" disabled={loading || messages.length === 0}>
+			<button
+				onclick={clear}
+				class="button button--subtle"
+				disabled={loading || messages.length === 0}
+			>
 				Reset All
 			</button>
 		</div>
@@ -592,6 +600,13 @@
 		background-color: var(--bg-subtle) !important; /* Override other background colors */
 		color: var(--text-subtle) !important; /* Darker text */
 		border: 1px solid var(--brand-subtle);
+	}
+
+	/* Copy Content / Reset All: disabled just means "nothing to act on yet", not an
+	   error or blocked state, so skip the opacity fade above and rely on the muted
+	   bg/text/border it already sets — a subtle disabled look rather than faded out. */
+	button.button--subtle[disabled] {
+		opacity: 1;
 	}
 
 	form {
