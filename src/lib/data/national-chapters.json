@@ -18,7 +18,8 @@
 			"name": "United Kingdom",
 			"lat": 54.2,
 			"lon": -2.4,
-			"link": "https://pauseai.uk/"
+			"link": "https://pauseai.uk/",
+			"lumaCalendarId": "cal-Z327EhtiFdHuVie"
 		},
 		{
 			"name": "France",
@@ -30,14 +31,15 @@
 			"name": "Canada",
 			"lat": 56,
 			"lon": -105,
-			"link": "https://pauseai.ca/en/"
+			"link": "https://pauseai.ca/en/",
+			"lumaCalendarId": "cal-tsYv79s4aTQC16Q"
 		},
 		{
 			"name": "Romania",
 			"country_local": "România",
 			"lat": 44.5,
 			"lon": 26,
-			"link": "https://www.facebook.com/people/Pause-AI-Romania/61581783381263/?rdid=LfnCxIeWHG9TL4Bp&share_url=https%3A%2F%2Fwww.facebook.com%2Fshare%2F19yinn6qj4%2F"
+			"link": "https://pauseai.ro/"
 		},
 		{
 			"name": "Kenya",
@@ -56,17 +58,20 @@
 			"name": "Australia",
 			"lat": -25,
 			"lon": 134.5,
-			"link": "https://pauseai.info/australia"
+			"link": "https://pauseai.info/australia",
+			"lumaCalendarId": "cal-gnpo62PdSdau7KQ"
 		},
 		{
 			"name": "Germany",
 			"country_local": "Deutschland",
 			"lat": 51.1,
 			"lon": 10,
-			"link": "https://pause-ai.de/"
+			"link": "https://www.pause-ai.de/",
+			"lumaCalendarId": "cal-B1ELepcLXLcAqMf"
 		},
 		{
 			"name": "Czechia",
+			"country_local": "Česko",
 			"lat": 50,
 			"lon": 15,
 			"link": "https://www.pauseai.cz/"
@@ -76,7 +81,7 @@
 			"country_local": "Polska",
 			"lat": 52,
 			"lon": 19.5,
-			"link": "mailto:patryk@pauseai.info"
+			"link": "https://pauseai.pl/"
 		},
 		{
 			"name": "Nigeria",
@@ -96,7 +101,33 @@
 			"country_local": "Italia",
 			"lat": 42.5,
 			"lon": 12.5,
-			"link": "$$WHATSAPP_ITALY$$"
+			"link": "https://www.pauseai.it/"
+		},
+		{
+			"name": "Belgium",
+			"lat": 50.6402809,
+			"lon": 4.6667145,
+			"link": "https://luma.com/PauseAI.be",
+			"lumaCalendarId": "cal-UGDktH7dp8kRqiv"
+		},
+		{
+			"name": "Ghana",
+			"lat": 8.0300284,
+			"lon": -1.0800271,
+			"link": "mailto:ewura@pauseai.info"
+		},
+		{
+			"name": "Ireland",
+			"lat": 52.865196,
+			"lon": -7.9794599,
+			"link": "mailto:katiemartin@pauseai.info"
+		},
+		{
+			"name": "Switzerland",
+			"lat": 46.7985624,
+			"lon": 8.2319736,
+			"link": "https://chat.whatsapp.com/BKt0uKPVLDKFLomW4CrTVH",
+			"lumaCalendarId": "cal-lMws4StD94Vb02J"
 		}
 	]
 }

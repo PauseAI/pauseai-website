@@ -67,6 +67,9 @@ export interface OnboardingMessages {
 	onboarding_field_zip: string
 	onboarding_placeholder_zip: string
 	onboarding_helper_zip: string
+	onboarding_field_uk_postcode: string
+	onboarding_placeholder_uk_postcode: string
+	onboarding_helper_uk_postcode: string
 	onboarding_field_discord: string
 	onboarding_helper_discord: string
 	onboarding_field_phone: string
@@ -258,6 +261,10 @@ const en: OnboardingMessages = {
 	onboarding_field_zip: 'Zip code',
 	onboarding_placeholder_zip: 'e.g. 02134',
 	onboarding_helper_zip: 'Your 5-digit zip code is used to find your Local Group.',
+	onboarding_field_uk_postcode: 'Postcode *',
+	onboarding_placeholder_uk_postcode: 'e.g. SW1A 1AA',
+	onboarding_helper_uk_postcode:
+		"Your full postcode. We use it to connect you with your MP's constituency and your nearest local group.",
 	onboarding_field_discord: 'Discord username',
 	onboarding_helper_discord:
 		'If you don\'t have a Discord account, we encourage you to <a target="_blank" rel="noopener noreferrer" href="https://discord.com/register">create one here</a>.',
@@ -477,6 +484,10 @@ const de: OnboardingMessages = {
 	onboarding_placeholder_zip: 'z. B. 02134',
 	onboarding_helper_zip:
 		'Deine 5-stellige Postleitzahl wird verwendet, um deine lokale Gruppe zu finden.',
+	onboarding_field_uk_postcode: 'Postleitzahl (UK) *',
+	onboarding_placeholder_uk_postcode: 'z. B. SW1A 1AA',
+	onboarding_helper_uk_postcode:
+		'Deine vollständige Postleitzahl. Wir nutzen sie, um dich deinem Wahlkreis und der nächsten lokalen Gruppe zuzuordnen.',
 	onboarding_field_discord: 'Discord-Benutzername',
 	onboarding_helper_discord:
 		'Wenn du noch kein Discord-Konto hast, empfehlen wir dir, <a target="_blank" rel="noopener noreferrer" href="https://discord.com/register">hier eines zu erstellen</a>.',
@@ -701,6 +712,10 @@ const fr: OnboardingMessages = {
 	onboarding_field_zip: 'Code postal',
 	onboarding_placeholder_zip: 'ex. 75001',
 	onboarding_helper_zip: 'Ton code postal permet de trouver ton groupe local.',
+	onboarding_field_uk_postcode: 'Code postal (UK) *',
+	onboarding_placeholder_uk_postcode: 'ex. SW1A 1AA',
+	onboarding_helper_uk_postcode:
+		'Ton code postal complet. Il nous permet de te rattacher à ta circonscription et au groupe local le plus proche.',
 	onboarding_field_discord: "Nom d'utilisateur Discord",
 	onboarding_helper_discord:
 		'Si tu n\'as pas de compte Discord, nous t\'encourageons à en <a target="_blank" rel="noopener noreferrer" href="https://discord.com/register">créer un ici</a>.',

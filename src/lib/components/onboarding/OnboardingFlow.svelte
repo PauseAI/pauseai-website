@@ -27,6 +27,8 @@
 		COUNTRY_DIAL_CODES,
 		DISCOVERY_SPECIFY_TRIGGERS,
 		LANGUAGES,
+		UK_POSTCODE_PATTERN,
+		isValidUKPostcode,
 		getDiscoveryOptions,
 		getMotivations,
 		getSkills,
@@ -154,8 +156,25 @@
 		email: initialEmail,
 		country: initialCountry,
 		city: initialCity,
+		// UK only: the full postcode, collected on step 1 (and the browse signup)
+		// for every "United Kingdom" signup and posted as `zip_code` — the same
+		// field the US volunteer ZIP uses. Empty and unvalidated for every other
+		// country.
+		postcode: '',
 		newsletter: false
 	})
+
+	// Blocks the step-1 / browse submit when a UK signup hasn't given a usable
+	// postcode. The `pattern` + `required` attributes on the input enforce the
+	// same thing natively; this guard also disables the browse button, which is
+	// gated on other checks too.
+	const ukPostcodeValid = $derived(
+		basics.country !== 'United Kingdom' || isValidUKPostcode(basics.postcode)
+	)
+
+	// `pattern` attribute form of UK_POSTCODE_PATTERN: HTML anchors the match
+	// itself, so strip the leading ^ and trailing $.
+	const ukPostcodeInputPattern = UK_POSTCODE_PATTERN.source.replace(/^\^/, '').replace(/\$$/, '')
 
 	// A newsletter signup elsewhere (e.g. the homepage box) can hand off here
 	// via ?subscribe-email=...; that email arrives after mount. Apply it once into
@@ -392,6 +411,11 @@
 	<input type="hidden" name="email" value={basics.email} />
 	<input type="hidden" name="country" value={basics.country} />
 	<input type="hidden" name="city" value={basics.city} />
+	<!-- UK postcode rides the same `zip_code` field as the US volunteer ZIP. Only
+	     posted for a UK signup; the server ignores it for any other country. -->
+	{#if basics.country === 'United Kingdom' && basics.postcode.trim()}
+		<input type="hidden" name="zip_code" value={basics.postcode.trim()} />
+	{/if}
 	{#if basics.newsletter}
 		<input type="hidden" name="newsletter" value="on" />
 	{/if}
@@ -538,6 +562,25 @@
 						bind:value={basics.city}
 					/>
 				</div>
+				{#if basics.country === 'United Kingdom'}
+					<div class="field">
+						<label class="field-label" for="ob-postcode">{msgs.onboarding_field_uk_postcode}</label>
+						<input
+							type="text"
+							id="ob-postcode"
+							required
+							pattern={ukPostcodeInputPattern}
+							placeholder={msgs.onboarding_placeholder_uk_postcode}
+							autocomplete="postal-code"
+							autocapitalize="characters"
+							bind:value={basics.postcode}
+						/>
+						<p class="helper">{msgs.onboarding_helper_uk_postcode}</p>
+					</div>
+				{/if}
+				<!-- Step 1 gates entirely on native validation (required + pattern),
+				     like the name/email/city fields above it — no disabled button, so
+				     the browser can explain an invalid postcode on submit. -->
 				<button type="submit" class="primary">{msgs.onboarding_btn_continue}</button>
 				<div class="browse-option">
 					<button type="button" class="secondary" onclick={startBrowse}>
@@ -777,13 +820,36 @@
 									bind:value={basics.city}
 								/>
 							</div>
+							{#if basics.country === 'United Kingdom'}
+								<div class="field">
+									<label class="field-label" for="loop-postcode"
+										>{msgs.onboarding_field_uk_postcode}</label
+									>
+									<input
+										type="text"
+										id="loop-postcode"
+										name="zip_code"
+										required
+										pattern={ukPostcodeInputPattern}
+										placeholder={msgs.onboarding_placeholder_uk_postcode}
+										autocomplete="postal-code"
+										autocapitalize="characters"
+										bind:value={basics.postcode}
+									/>
+									<p class="helper">{msgs.onboarding_helper_uk_postcode}</p>
+								</div>
+							{/if}
 							{@render gdprConsentField()}
 							{#if onboardingLive && onboardingModeKnown}
 								{#key turnstileNonce}
 									<Turnstile bind:token={turnstileToken} />
 								{/key}
 							{/if}
-							<button type="submit" class="primary" disabled={!gdprConsent || !canSubmit}>
+							<button
+								type="submit"
+								class="primary"
+								disabled={!gdprConsent || !ukPostcodeValid || !canSubmit}
+							>
 								{submitting ? msgs.onboarding_btn_signing_up : msgs.onboarding_btn_sign_me_up}
 							</button>
 						</form>
