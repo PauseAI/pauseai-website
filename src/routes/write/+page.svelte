@@ -572,9 +572,9 @@
 	}
 
 	.warning.error {
-		color: var(--status-error-text);
-		background-color: var(--status-error-bg);
-		border-color: var(--status-error-border);
+		color: var(--error-text);
+		background-color: var(--error-bg);
+		border-color: var(--error-border);
 	}
 
 	.top-buttons {
@@ -718,8 +718,8 @@
 		animation: none;
 		background-image: none;
 		background-color: var(--status-success-bg-light); /* Light green background */
-		border-color: var(--status-success-border);
-		color: var(--status-success-text);
+		border-color: var(--success-border);
+		color: var(--success-text);
 	}
 
 	.loading {

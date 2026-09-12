@@ -62,21 +62,24 @@ html {
 	--banner-dark-1: hsl(0, 0%, 8%);
 	--banner-dark-2: hsl(25, 10%, 12%);
 
-	/* Status colors — near-duplicate shades kept distinct (not merged) to avoid
-	   changing what currently renders; a good target for a follow-up design pass.
-	   Named --status-* rather than --success- or --error-, because those names are
-	   already referenced (but never defined) elsewhere as var(--error-bg, #hex)
-	   fallbacks — defining them here would silently change what those call sites
-	   resolve to, which is explicitly out of scope for this change. */
-	--status-success-bg: #d4edda; /* write page (border/text only) */
-	--status-success-border: #c3e6cb; /* write page */
-	--status-success-text: #155724; /* write page */
+	/* Status colors. --success-bg/border/text and --error-bg/border/text were
+	   previously referenced (but never defined) in UKMPEmailForm.svelte as
+	   var(--success-bg, #d4edda) etc — always falling through to that hex,
+	   since the token didn't exist. Defined here with the exact same values,
+	   so nothing changes visually, just resolves via the token instead of the
+	   fallback now. write page's own success/error block used the identical
+	   values as plain literals (not var() at all), so it now shares these too.
+	   The remaining near-duplicate shades below are kept distinct (not merged)
+	   to avoid changing what currently renders — a good follow-up design pass. */
+	--success-bg: #d4edda;
+	--success-border: #c3e6cb;
+	--success-text: #155724;
+	--error-bg: #f8d7da;
+	--error-border: #f5c6cb;
+	--error-text: #721c24;
 	--status-success-bg-alt: #e6f7e6; /* NewsletterSignup */
 	--status-success-text-alt: #2e7d32; /* NewsletterSignup */
 	--status-success-bg-light: #c0ffc0; /* write page */
-	--status-error-bg: #f8d7da; /* write page */
-	--status-error-border: #f5c6cb; /* write page */
-	--status-error-text: #721c24; /* write page */
 	--status-warning-bg: #fff3cd; /* write page */
 	--status-warning-border: #ffeeba; /* write page */
 	--status-warning-text: #856404; /* write page */
