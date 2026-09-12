@@ -256,7 +256,10 @@
 
 	.close.campaign-close {
 		right: 0.5em;
-		color: var(--text-subtle);
+		/* Fixed, not theme-aware: the campaign banner's own background is
+		   always dark regardless of site theme, so the close button needs
+		   consistent contrast rather than a token that follows site theme. */
+		color: var(--grey-150);
 		font-size: 0.9rem;
 	}
 
