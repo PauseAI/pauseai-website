@@ -52,13 +52,11 @@ html {
 	--grey-400: #666; /* also written #666666 */
 	--grey-500: #333;
 	--grey-600: hsl(0, 0%, 15%);
-	--grey-700: hsl(0, 0%, 50%);
 	--grey-800: #1a1a1a;
 	--grey-warm-dark: #111110;
 	--cream: #f0ebe2;
 	--border-subtle: #e5e7eb;
 	--border-luma-embed: #bfcbda88; /* communities page Luma calendar iframe */
-	--text-secondary: #6c757d;
 	--banner-dark-1: hsl(0, 0%, 8%);
 	--banner-dark-2: hsl(25, 10%, 12%);
 

@@ -256,7 +256,7 @@
 
 	.close.campaign-close {
 		right: 0.5em;
-		color: var(--grey-700);
+		color: var(--text-subtle);
 		font-size: 0.9rem;
 	}
 

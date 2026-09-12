@@ -589,9 +589,9 @@
 		opacity: 0.5;
 		cursor: not-allowed;
 		pointer-events: none; /* Prevents hover effects */
-		background-color: var(--grey-100) !important; /* Override other background colors */
-		color: var(--grey-400) !important; /* Darker text */
-		border: 1px solid var(--grey-300);
+		background-color: var(--bg-subtle) !important; /* Override other background colors */
+		color: var(--text-subtle) !important; /* Darker text */
+		border: 1px solid var(--brand-subtle);
 	}
 
 	form {

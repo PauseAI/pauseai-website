@@ -32,7 +32,7 @@
 	}
 
 	p {
-		color: var(--text-secondary);
+		color: var(--text-subtle);
 		margin-bottom: 2rem;
 	}
 </style>
