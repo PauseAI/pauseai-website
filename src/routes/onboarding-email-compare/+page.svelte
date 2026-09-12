@@ -1,28 +1,62 @@
 <script lang="ts">
+	import { goto } from '$app/navigation'
 	import type { PageData } from './$types'
+	import ResolvedSummary from '../onboarding-email-preview/ResolvedSummary.svelte'
 
 	let { data }: { data: PageData } = $props()
 
 	let showText = $state(false)
 
 	let formEl: HTMLFormElement | undefined = $state()
-	let intentEl: HTMLSelectElement | undefined = $state()
 
-	// Changing the template picks a different canonical country/language/intent, so
-	// drop the current intent override and let the server apply the new template's
-	// default (a disabled control isn't submitted). Changing intent alone keeps it.
+	function rerender(event?: Event, drop?: string) {
+		event?.preventDefault()
+		if (!formEl) return
+		const entries = [...new FormData(formEl)] as [string, string][]
+		const params = new URLSearchParams(entries.filter(([key]) => key !== drop))
+		void goto(`?${params}`, { replaceState: true, keepFocus: true, noScroll: true })
+	}
+
+	// Each template was sent for one intent, so switching template drops the intent
+	// override and the server applies that template's own. Changing intent alone keeps it.
 	function onTemplateChange() {
-		if (intentEl) intentEl.disabled = true
-		formEl?.requestSubmit()
+		rerender(undefined, 'intent')
 	}
 	function resubmit() {
-		formEl?.requestSubmit()
+		rerender()
 	}
+
+	// One option per version of the email: Lead renders the same one as Volunteer, and
+	// 'Keep informed' is gone, since no form writes it and it renders the same as None.
+	// srcdoc iframes are same-origin, so the frame can be sized to the email it holds
+	// instead of a fixed height that leaves a long blank gap under a short one. Images
+	// land after load, hence the second measurement.
+	function fitToContent(event: Event) {
+		const frame = event.currentTarget as HTMLIFrameElement
+		const measure = () => {
+			const doc = frame.contentDocument
+			if (!doc) return
+			// scrollHeight can't fall below the frame's own height, so a frame left tall by a
+			// longer email would keep that height forever. Collapse it first, then measure.
+			frame.style.height = '0px'
+			frame.style.height = `${Math.max(240, doc.documentElement.scrollHeight)}px`
+		}
+		measure()
+		setTimeout(measure, 500)
+	}
+
+	// Each template was sent to one audience, so offering an intent from the other one would
+	// pair a non-volunteer template with the volunteer email. Only the non-volunteer templates
+	// have a choice at all: the no-intent version or the Act now one.
+	const NON_VOLUNTEER_CHOICES = [
+		{ value: 'None', label: 'None' },
+		{ value: 'Act now', label: 'Act now' }
+	]
+	const intentChoices = $derived(data.newInputs.intent === 'Volunteer' ? [] : NON_VOLUNTEER_CHOICES)
 
 	const LANGUAGE_LABELS: Record<string, string> = {
 		en: 'English',
-		es: 'Español',
-		fr: 'Français'
+		es: 'Español'
 	}
 </script>
 
@@ -33,10 +67,11 @@
 <!-- Force a light scheme: QA tool with hardcoded light panel backgrounds; the
 	site's dark theme would otherwise leave light text on them. -->
 <div
+	class="qa-tool"
 	style="color-scheme: light; background: #fff; color: #222; font-family: sans-serif; padding: 16px; box-sizing: border-box; width: 94vw; max-width: 94vw; position: relative; left: 50%; margin-left: -47vw; min-height: 100vh;"
 >
 	<h1 style="font-size: 20px;">Onboarding email compare</h1>
-	<div style="color: #666; font-size: 14px; max-width: 900px;">
+	<div style="color: #333; font-size: 14px; max-width: 900px;">
 		<p>
 			Side-by-side check of the new render against the email it replaces. <strong>Left</strong> is
 			one of the seven pre-migration MailerSend templates (raw exports in
@@ -44,7 +79,9 @@
 			<code>src/lib/server/onboardingEmail</code> render for that template's canonical signup — the
 			country / language / intent combo the old routing (see
 			<code>email-templates/ROUTING.md</code>) sent it for. Use it to confirm nothing in tone,
-			content or links was lost in the migration.
+			content or links was lost in the migration. Treat the left pane as indicative: the exports are
+			a 2026-07-15 snapshot, and at least the UK volunteer one has since drifted from what
+			MailerSend actually sends.
 		</p>
 		<ul style="margin: 8px 0; padding-left: 18px;">
 			<li>
@@ -62,8 +99,10 @@
 			</li>
 		</ul>
 		<p>
-			See <a href="/onboarding-email-preview">/onboarding-email-preview</a> to drive the new render
-			off arbitrary inputs instead. Dev tool: not linked from the site, available on
+			See
+			<!-- eslint-disable-next-line svelte/no-restricted-html-elements -- dev-only QA page, not site chrome -->
+			<a href="/onboarding-email-preview">/onboarding-email-preview</a> to drive the new render off
+			arbitrary inputs instead. Dev tool: not linked from the site, available on
 			<code>localhost</code> and Netlify deploy previews only, 404s on the production domain. Template
 			and chapter data are public, not PII.
 		</p>
@@ -72,6 +111,7 @@
 	<form
 		bind:this={formEl}
 		method="GET"
+		onsubmit={rerender}
 		style="display: grid; grid-template-columns: 130px 1fr; gap: 8px 12px; align-items: start; margin-bottom: 12px; padding: 12px; border: 1px solid #ddd; border-radius: 6px; max-width: 720px;"
 	>
 		<label for="firstName" style="font-size: 13px; padding-top: 6px;">First name</label>
@@ -93,32 +133,32 @@
 		>
 			{#each data.options.templates as t}
 				<option value={t.key}>
-					{t.name} — {t.canonical.country || 'Global'} / {LANGUAGE_LABELS[t.canonical.language]} / {t
-						.canonical.intent}
+					{t.canonical.country || 'Global'} / {LANGUAGE_LABELS[t.canonical.language]} / {t.canonical
+						.intent}
 				</option>
 			{/each}
 		</select>
 
-		<label for="intent" style="font-size: 13px; padding-top: 6px;">Intent (new render)</label>
-		<div>
-			<select
-				bind:this={intentEl}
-				id="intent"
-				name="intent"
-				value={data.form.intent}
-				onchange={resubmit}
-				style="font-size: 13px; padding: 6px 8px; border: 1px solid #ccc; border-radius: 4px;"
-			>
-				<option value="">(empty / unrecognised)</option>
-				{#each data.options.intents as i}
-					<option value={i}>{i}</option>
-				{/each}
-			</select>
-			<span style="font-size: 12px; color: #888; display: block; margin-top: 4px;">
-				Resets to the template's canonical intent when you switch template. Only the new render
-				varies with this — the old template's body is fixed.
-			</span>
-		</div>
+		{#if intentChoices.length > 1}
+			<label for="intent" style="font-size: 13px; padding-top: 6px;">Intent (new render)</label>
+			<div>
+				<select
+					id="intent"
+					name="intent"
+					value={data.form.intent}
+					onchange={resubmit}
+					style="font-size: 13px; padding: 6px 8px; border: 1px solid #ccc; border-radius: 4px;"
+				>
+					{#each intentChoices as option}
+						<option value={option.value}>{option.label}</option>
+					{/each}
+				</select>
+				<span style="font-size: 12px; color: #555; display: block; margin-top: 4px;">
+					This template served both, and the new render tells them apart. Only the right side
+					changes; the old body is fixed.
+				</span>
+			</div>
+		{/if}
 
 		<span style="font-size: 13px; padding-top: 6px;">New render style</span>
 		<div style="display: flex; flex-wrap: wrap; gap: 4px 16px; padding-top: 6px;">
@@ -142,16 +182,8 @@
 	>
 		<strong>New render inputs:</strong>
 		country <code>{data.newInputs.country || '—'}</code>
-		· language <code>{data.newInputs.language}</code>
 		· intent <code>{data.newInputs.intent || '(empty)'}</code>
-		→ bucket <code>{data.newInputs.intentBucket}</code>
-		· chapter
-		{#if data.newInputs.chapterIsGlobalFallback}
-			<code>Global fallback</code>
-		{:else}
-			<code>{data.newInputs.chapterName}</code> — leader {data.newInputs.chapterLeader},
-			{data.newInputs.chapterLinkCount} link{data.newInputs.chapterLinkCount === 1 ? '' : 's'}
-		{/if}
+		→ <ResolvedSummary resolved={data.resolved} />
 	</div>
 
 	<div style="margin-bottom: 8px;">
@@ -167,8 +199,16 @@
 		<div>
 			<div style="font-size: 13px; font-weight: bold; margin-bottom: 4px;">
 				Previous — MailerSend template
-				<span style="font-weight: normal; color: #888;">
-					{data.legacy.name} ({data.legacy.id})
+				<span style="font-weight: normal; color: #555;">
+					<!-- eslint-disable-next-line svelte/no-restricted-html-elements -- dev-only QA page, not site chrome -->
+					<a
+						href="https://app.mailersend.com/templates/{data.legacy.id}/edit"
+						target="_blank"
+						rel="noreferrer"
+					>
+						{data.legacy.name}
+					</a>
+					— what it sends today, which the export beside it may no longer match
 				</span>
 			</div>
 			<div style="font-size: 13px; margin-bottom: 8px;">
@@ -183,7 +223,8 @@
 				<iframe
 					title="Previous MailerSend email"
 					srcdoc={data.legacy.html}
-					style="width: 100%; height: 1400px; border: 1px solid #ccc; border-radius: 6px;"
+					onload={fitToContent}
+					style="display: block; width: 100%; height: 600px; border: 1px solid #ccc; border-radius: 6px;"
 				></iframe>
 			{/if}
 		</div>
@@ -204,9 +245,46 @@
 				<iframe
 					title="New email HTML preview"
 					srcdoc={data.rendered.html}
-					style="width: 100%; height: 1400px; border: 1px solid #ccc; border-radius: 6px;"
+					onload={fitToContent}
+					style="display: block; width: 100%; height: 600px; border: 1px solid #ccc; border-radius: 6px;"
 				></iframe>
 			{/if}
 		</div>
 	</div>
 </div>
+
+<style>
+	/* This tool paints its own light panels, so it has to set every colour itself:
+	   otherwise a browser that forces a dark scheme on pages (Zen, high-contrast mode,
+	   reader-style extensions) leaves light text on them. `!important` and
+	   forced-color-adjust are what survive those, and are safe here because nothing else
+	   styles this page. */
+	.qa-tool {
+		forced-color-adjust: none;
+	}
+
+	/* The site's body font is light-weight, which reads as thin grey text on these panels,
+	   and thinner still in browsers that render their own way. */
+	.qa-tool,
+	.qa-tool :is(p, li, ul, label, span, div, code, pre, input, select, option, button) {
+		font-weight: 400 !important;
+		font-family:
+			-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+	}
+
+	.qa-tool,
+	.qa-tool :is(p, li, ul, label, h1, span, code, strong, em, div, pre) {
+		color: #222 !important;
+	}
+
+	.qa-tool :is(input, select, option, button) {
+		color: #222 !important;
+		background: #fff !important;
+		border: 1px solid #ccc;
+	}
+
+	.qa-tool a {
+		color: #a04b00 !important;
+		text-decoration: underline;
+	}
+</style>
