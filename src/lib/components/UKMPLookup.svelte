@@ -232,7 +232,6 @@
 	.name-input::placeholder,
 	.postcode-input::placeholder {
 		color: var(--text-muted);
-		opacity: 0.2;
 	}
 
 	.name-input:focus,

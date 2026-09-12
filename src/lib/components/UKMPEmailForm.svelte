@@ -454,7 +454,6 @@ ${userPostcode.toUpperCase()}`)
 	input::placeholder,
 	textarea::placeholder {
 		color: var(--text-muted);
-		opacity: 0.2;
 	}
 
 	input:focus,
