@@ -2,15 +2,18 @@ import type { Intent } from '$lib/components/onboarding/options.js'
 
 export type { Intent }
 
-/** Languages this renderer hand-maintains copy for. See docs/L10N.md for why
- *  the site's Paraglide/inlang pipeline isn't used here (build-time only). */
-export type OnboardingEmailLanguage = 'en' | 'es' | 'fr'
+/** Languages the shared copy exists in. See docs/L10N.md for why the site's
+ *  Paraglide/inlang pipeline isn't used here (build-time only). */
+export type BaseLanguage = 'en' | 'es'
+
+/** Every language an email can go out in: the shared copy's, plus those only a chapter
+ *  override is written in. Each needs its fixed lines in fixed.ts. */
+export type OnboardingEmailLanguage = BaseLanguage | 'sv'
 
 /** HTML presentation style. `rich` (default) is the branded card layout in
  *  html.ts; `plain` is the stripped-down single-column layout in htmlPlain.ts,
- *  modelled on the PauseAI UK MailerLite template — narrow table, system serif-y
- *  sans, no card/hero/wordmark chrome, so it reads closer to a hand-written note.
- *  Same blocks and copy either way; only the wrapper differs. */
+ *  modelled on the PauseAI UK MailerLite template, so it reads closer to a
+ *  hand-written note. Same blocks either way; only the wrapper differs. */
 export type OnboardingEmailHtmlStyle = 'rich' | 'plain'
 
 /**
@@ -22,20 +25,19 @@ export type OnboardingEmailParams = {
 	firstName: string
 	/** Free-text country name, as stored on the Members record. May be empty/undefined. */
 	country?: string
-	/** Airtable `Intent` single-select value, e.g. "Volunteer". Unknown/empty falls back to non-volunteer framing. */
+	/** Airtable `Intent` single-select value, e.g. "Volunteer". Unknown/empty falls back to the no-intent copy. */
 	intent?: string
 	/** Airtable `Languages` multipleSelects value. */
 	languages?: string[] | string
-	/** Testing/preview only: force the email language, skipping the country +
+	/** Testing/preview only: force the shared copy's language, skipping the country +
 	 *  languages detection in resolveOnboardingEmailLanguage. The production render
 	 *  endpoint never sets this. */
-	languageOverride?: OnboardingEmailLanguage
-	/** Force the HTML wrapper (see OnboardingEmailHtmlStyle). Left unset — as the
-	 *  production render endpoint does — the matched chapter decides: PauseAI UK
-	 *  ships `plain`, everything else `rich`. The preview/compare pages set this to
-	 *  force one for QA. */
+	languageOverride?: BaseLanguage
+	/** Force the HTML wrapper (see OnboardingEmailHtmlStyle). Left unset, as the
+	 *  production render endpoint does, the email's own content decides. The
+	 *  preview/compare pages set this to force one for QA. */
 	htmlStyle?: OnboardingEmailHtmlStyle
-	/** Used to build the verification and unsubscribe links. */
+	/** Used to build the verification link. */
 	airtable_id: string
 }
 
@@ -45,8 +47,14 @@ export type RenderedOnboardingEmail = {
 	text: string
 }
 
-/** The four intent buckets the email copy varies over. Anything else (empty, 'None', unrecognised) falls back to `keep-informed`, matching the old script's non-volunteer fallback. */
-export type IntentBucket = 'act-now' | 'keep-informed' | 'volunteer' | 'lead'
+/** The three versions the copy varies over, matching the live templates. Anything
+ *  that is not Act now, Volunteer or Lead (empty, 'None', 'Keep informed',
+ *  unrecognised) gets `none`, the one version that asserts nothing about why the
+ *  reader signed up. */
+export type IntentBucket = 'none' | 'act-now' | 'volunteer'
+
+/** Chapter overrides vary by group at most, never by the finer bucket. */
+export type IntentGroup = 'volunteer' | 'non-volunteer'
 
 /** A single link rendered in the chapter's link/social row. */
 export type ChapterLink = {
@@ -55,12 +63,8 @@ export type ChapterLink = {
 }
 
 export type ChapterBlockData = {
-	/** True when this is the hardcoded global fallback (no National Groups match). */
-	isGlobalFallback: boolean
-	/** Chapter/country display name, e.g. "France", or "Global" for the fallback. */
+	/** Chapter/country display name, e.g. "France". */
 	name: string
-	/** Leader name(s), joined with " and ". */
-	leader: string
-	/** Non-empty social/community links for this chapter, in a fixed display order. */
+	/** The chapter's public links, in a fixed display order. May be empty. */
 	links: ChapterLink[]
 }

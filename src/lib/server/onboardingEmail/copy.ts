@@ -1,206 +1,224 @@
-import type { IntentBucket, OnboardingEmailLanguage } from './types.js'
+import type { EmailBlock, EmailContent } from './blocks.js'
+import {
+	ACTION_PAGE_URL,
+	GLOBAL_DISCORD_URL,
+	GLOBAL_SOCIALS,
+	PROPOSAL_URL,
+	VIDEO_URL,
+	WELCOME_CALLS_URL
+} from './brand.js'
+import type { BaseLanguage, ChapterBlockData, IntentBucket } from './types.js'
 
-// Hand-maintained en/es/fr copy for the onboarding welcome email. NOT routed through
-// the site's Paraglide/inlang pipeline (build-time only, not live in prod — see
-// docs/L10N.md). Adapted from the org's existing reviewed copy in
-// email-templates/*.json (see ROUTING.md for which template each block came from),
-// not invented from scratch, EXCEPT where a comment below says otherwise.
-//
-// Markdown-style `[label](url)` links are used throughout (matching the `plain_text`
-// style already used in the existing MailerSend templates) and are converted to
-// `<a>` tags for HTML by src/lib/server/onboardingEmail/markdown.ts.
+// The shared copy, ported from what the live MailerSend templates send so that the switch to
+// this renderer changes as little as possible:
+//  - no intent / Act now: Irina's confirmation copy (templates 7dnvo4dyjd345r86 and
+//    ynrw7gy8z1n42k8e), English only, as today
+//  - Volunteer and Lead, English: the Global volunteer template (3z0vkloo5v1l7qrx), with its
+//    "Chapter Lead of your country" paragraph replaced by the chapter block
+//  - Volunteer and Lead, Spanish: the Spanish template (o65qngkj1mjlwr12) as it is
+// The fixed lines (confirm link, newsletter line) are in fixed.ts. Markdown-style
+// `[label](url)` links and `**bold**` are converted by markdown.ts.
 
-const VIDEO_URL = 'https://www.youtube.com/watch?v=ZHxJwv4TdJo'
-const ACTION_PAGE_URL = 'https://pauseai.info/action'
+const GLOBAL_SIGNATURE = 'Maxime and The PauseAI Global Team'
 
-export type LanguageCopy = {
-	subject: (firstName: string) => string
-	greeting: (firstName: string) => string
-	verifyLine: (verificationLink: string) => string
-	ignoreNote: string
-	/** Intent-acknowledgement sentence, echoing the join-form copy in
-	 *  src/lib/components/onboarding/messages.ts (~L204-217). */
-	intent: Record<IntentBucket, string>
-	videoIntro: string
-	videoLinkText: string
-	howWeCreateChangeHeading: string
-	howWeCreateChangeIntro: string
-	/** Differs slightly depending on whether the reader opted into volunteering. */
-	howWeCreateChangeVolunteerLine: string
-	howWeCreateChangeNonVolunteerLine: string
-	howWeCreateChangeListItems: string[]
-	howWeCreateChangeClosing: string
-	connectHeading: string
-	connectFoundIntro: (chapterName: string, leader: string) => string
-	connectFallbackIntro: string
-	welcomeCallsLine: (url: string) => string
-	whatsNextHeading: string
-	whatsNextP1: string
-	whatsNextP2: string
-	whatsNextClosing: string
-	signoffFound: (leader: string, chapterName: string) => string
-	signoffFallback: string
-	linksHeading: string
-	unsubscribeLine: (url: string) => string
-	addressLine: string
+function greeting(firstName: string): EmailBlock[] {
+	return [{ type: 'heading', level: 1, text: `Welcome to PauseAI, ${firstName}!` }]
 }
 
-const en: LanguageCopy = {
-	subject: (firstName) => `Welcome to PauseAI, ${firstName}!`,
-	greeting: (firstName) => `Welcome to PauseAI, ${firstName}!`,
-	verifyLine: (link) => `To verify your email address, click [this link](${link}).`,
-	ignoreNote: 'If you did not request to join, you can ignore this message.',
-	intent: {
-		'keep-informed':
-			"You told us you want to keep informed — you'll get global campaign updates, plus news and ways to help from your local chapter.",
-		'act-now': "You told us you just want to take action now — here's what you can do today.",
-		volunteer:
-			"You told us you want to volunteer regularly — we'll help you find a role that fits, and your local chapter will be in touch.",
-		lead: "You told us you want to lead — you're ready to organize in your country or region, and your local chapter will be in touch."
-	},
-	videoIntro: 'Watch our video below for a summary of the Pause position:',
-	videoLinkText: 'Video Introduction',
-	howWeCreateChangeHeading: 'How We Create Change',
-	howWeCreateChangeIntro: 'At PauseAI, we believe in the power of collective action.',
-	howWeCreateChangeVolunteerLine: "As a volunteer, you'll have opportunities to participate in:",
-	howWeCreateChangeNonVolunteerLine: 'There are lots of ways to take part:',
-	howWeCreateChangeListItems: [
-		'Online actions (petitions, social media campaigns, letter-writing to officials)',
-		'Offline activities (local protests, community meetings, awareness events)',
-		'Local chapter initiatives.'
-	],
-	howWeCreateChangeClosing:
-		'Your participation, whether big or small, matters greatly in our collective effort to ensure AI development proceeds safely and ethically.',
-	connectHeading: 'Connect With Your Community',
-	connectFoundIntro: (chapterName, leader) =>
-		`You're part of the PauseAI ${chapterName} chapter, led by ${leader}. They'll be in touch to help you get plugged in locally.`,
-	connectFallbackIntro:
-		"There's no local PauseAI chapter in your country yet, so for now you're part of the PauseAI Global community. Our Global Onboarding team will be in touch.",
-	welcomeCallsLine: (url) =>
-		`In the meantime, join one of our [Welcome Calls](${url}) to meet other new members and hear more about what we do.`,
-	whatsNextHeading: "What's Next",
-	whatsNextP1:
-		"If you opted in to our newsletter, you'll receive the PauseAI monthly update on upcoming actions and events.",
-	whatsNextP2: `After meeting with the community via our Welcome meetings or through your National Chapter, you'll be informed of the next action, but if you're looking for a step to take right now, check out our [Action page](${ACTION_PAGE_URL}).`,
-	whatsNextClosing:
-		'Welcome aboard! Together, we can take action to prevent the catastrophic impacts of the development of Artificial Intelligence.',
-	signoffFound: (leader, chapterName) => `${leader} and the PauseAI ${chapterName} Team`,
-	signoffFallback: 'Maxime and The PauseAI Global Team',
-	linksHeading: 'Follow along',
-	unsubscribeLine: (url) => `Don't want to receive these emails? [Unsubscribe here](${url}).`,
-	addressLine: 'PauseAI, Box C5957, Kwikstaartlaan 42, 3704GS Zeist, The Netherlands'
+// Non-volunteers get no personal follow-up, so the block only points at the chapter's public
+// links and promises nothing. It is left out when the chapter has no links to show.
+function chapterLinksBlock(chapter: ChapterBlockData | null): EmailBlock[] {
+	if (!chapter || chapter.links.length === 0) return []
+	return [
+		{
+			type: 'paragraph',
+			text: `**There's a PauseAI chapter in ${chapter.name}.** You're welcome to join them:`
+		},
+		{ type: 'links', items: chapter.links }
+	]
 }
 
-// Adapted from email-templates/canada-fr-*.json, with Canada/Montréal-specific
-// content and the pauseia.fr/fr/agir stand-in link dropped (France is now a real
-// chapter reached via the normal lookup — see ROUTING.md and the decision record).
-// Register: "vous" throughout, matching that template's tone — NOT the "tu" register
-// used on the live /join form's fr copy in messages.ts. The intent-acknowledgement
-// sentences below were translated from messages.ts's "tu" copy into "vous" to keep
-// the whole email in one consistent register; flagging this register choice for
-// human review since it means the email doesn't literally quote the join-form copy.
-const fr: LanguageCopy = {
-	subject: (firstName) => `Bienvenue à PauseAI, ${firstName} !`,
-	greeting: (firstName) => `Bienvenue à PauseAI, ${firstName} !`,
-	verifyLine: (link) => `Pour vérifier votre adresse e-mail, [cliquez sur ce lien](${link}).`,
-	ignoreNote: "Si vous n'avez pas demandé à nous rejoindre, vous pouvez ignorer ce message.",
-	intent: {
-		'keep-informed':
-			"Vous nous avez dit vouloir rester informé·e — vous recevrez les actualités des campagnes mondiales, ainsi que les nouvelles et les occasions d'agir de votre groupe local.",
-		'act-now':
-			"Vous nous avez dit vouloir agir dès maintenant — voici ce que vous pouvez faire dès aujourd'hui.",
-		volunteer:
-			'Vous nous avez dit vouloir être bénévole régulièrement — nous allons vous aider à trouver un rôle qui vous correspond, et votre groupe local vous contactera.',
-		lead: 'Vous nous avez dit vouloir prendre la tête — vous êtes prêt·e à organiser dans votre pays ou votre région, et votre groupe local vous contactera.'
-	},
-	videoIntro: 'Regardez notre vidéo ci-dessous pour un résumé de la position de PauseAI :',
-	videoLinkText: 'Introduction vidéo',
-	howWeCreateChangeHeading: 'Comment nous faisons bouger les choses',
-	howWeCreateChangeIntro: "Chez PauseAI, nous croyons au pouvoir de l'action collective.",
-	howWeCreateChangeVolunteerLine: "En tant que bénévole, vous aurez l'occasion de participer à :",
-	howWeCreateChangeNonVolunteerLine: 'Il existe de nombreuses façons de participer :',
-	howWeCreateChangeListItems: [
-		'Des actions en ligne (pétitions, campagnes sur les réseaux sociaux, envoi de lettres aux responsables)',
-		'Des activités hors ligne (manifestations locales, réunions communautaires, événements de sensibilisation)',
-		'Des initiatives des sections locales.'
-	],
-	howWeCreateChangeClosing:
-		"Votre participation, quelle que soit son ampleur, joue un rôle essentiel dans notre effort collectif visant à garantir que le développement de l'IA se déroule de manière sûre et éthique.",
-	connectHeading: 'Connectez-vous avec votre communauté',
-	connectFoundIntro: (chapterName, leader) =>
-		`Vous faites partie de la section PauseAI ${chapterName}, dirigée par ${leader}. Elle vous contactera pour vous aider à vous impliquer localement.`,
-	connectFallbackIntro:
-		"Il n'existe pas encore de section locale de PauseAI dans votre pays, vous faites donc partie de la communauté PauseAI Global pour l'instant. Notre équipe d'accueil mondiale vous contactera.",
-	welcomeCallsLine: (url) =>
-		`En attendant, rejoignez l'un de nos [appels de bienvenue](${url}) pour rencontrer d'autres nouveaux membres et en savoir plus sur ce que nous faisons.`,
-	whatsNextHeading: 'Et maintenant ?',
-	whatsNextP1:
-		"Si vous avez choisi de vous abonner, vous recevrez l'infolettre mensuelle de PauseAI, qui vous tiendra informé des actions et événements à venir.",
-	whatsNextP2: `Après avoir rencontré la communauté lors de nos réunions de bienvenue ou par l'intermédiaire de votre section nationale, vous serez informé de la prochaine action à mener, mais si vous souhaitez agir dès maintenant, consultez notre page [Action](${ACTION_PAGE_URL}).`,
-	whatsNextClosing:
-		"Bienvenue parmi nous ! Ensemble, nous pouvons agir pour prévenir les conséquences catastrophiques du développement de l'intelligence artificielle.",
-	signoffFound: (leader, chapterName) => `${leader} et l'équipe PauseAI ${chapterName}`,
-	signoffFallback: "Maxime et l'équipe PauseAI Global",
-	linksHeading: 'Suivez-nous',
-	unsubscribeLine: (url) =>
-		`Vous ne souhaitez plus recevoir ces e-mails ? [Se désabonner ici](${url}).`,
-	addressLine: 'PauseAI, Box C5957, Kwikstaartlaan 42, 3704GS Zeist, Pays-Bas'
+function enNonVolunteer(
+	bucket: IntentBucket,
+	chapter: ChapterBlockData | null,
+	firstName: string
+): EmailContent {
+	const actNow = bucket === 'act-now'
+	return {
+		subject: actNow ? 'Thanks for taking action with PauseAI' : 'Thanks for signing up to PauseAI',
+		greeting: greeting(firstName),
+		body: [
+			{
+				type: 'paragraph',
+				text: actNow ? 'Thanks for choosing to take action with PauseAI.' : 'Thanks for signing up.'
+			},
+			{
+				type: 'paragraph',
+				text: `We are cultivating a global movement calling for a pause on the development of advanced AI systems until they can be made safe and democratically governed. You can read more about what we are calling for in [our proposal](${PROPOSAL_URL}).`
+			},
+			...chapterLinksBlock(chapter)
+		],
+		signoff: [
+			{
+				type: 'paragraph',
+				text: "We're glad you're with us, and look forward to getting connected."
+			},
+			{ type: 'signoff', lines: [actNow ? 'Thanks again,' : 'Best,', GLOBAL_SIGNATURE] }
+		],
+		socials: GLOBAL_SOCIALS
+	}
 }
 
-// Adapted from email-templates/spanish-*.json for the shared sections. The intent
-// acknowledgement sentences, the fallback/found "connect with your community" copy,
-// and the non-volunteer variant of "how we create change" have NO equivalent in any
-// existing template or in messages.ts (which has no `es` locale) — these are
-// newly-written Spanish copy and should get native-speaker review before shipping.
-const es: LanguageCopy = {
-	subject: (firstName) => `¡Bienvenido/a a PauseAI, ${firstName}!`,
-	greeting: (firstName) => `¡Bienvenido/a a PauseAI, ${firstName}!`,
-	verifyLine: (link) => `Para verificar tu dirección de email, haz clic en [este enlace](${link}).`,
-	ignoreNote: 'Si no solicitaste unirte, puedes ignorar este mensaje.',
-	intent: {
-		'keep-informed':
-			'Nos dijiste que quieres mantenerte informado/a — recibirás actualizaciones de campañas globales, además de noticias y formas de ayudar desde tu capítulo local.',
-		'act-now':
-			'Nos dijiste que solo quieres pasar a la acción ahora — esto es lo que puedes hacer hoy mismo.',
-		volunteer:
-			'Nos dijiste que quieres ser voluntario/a de forma regular — te ayudaremos a encontrar un rol que encaje contigo, y tu capítulo local se pondrá en contacto.',
-		lead: 'Nos dijiste que quieres liderar — estás listo/a para organizar en tu país o región, y tu capítulo local se pondrá en contacto.'
-	},
-	videoIntro:
-		'Mira nuestro vídeo a continuación para obtener un resumen de la posición de PauseAI:',
-	videoLinkText: 'Video Introductorio',
-	howWeCreateChangeHeading: 'Cómo creamos el cambio',
-	howWeCreateChangeIntro: 'En PauseAI creemos en el poder de la acción colectiva.',
-	howWeCreateChangeVolunteerLine: 'Como voluntario/a, tendrás oportunidades de participar en:',
-	howWeCreateChangeNonVolunteerLine: 'Hay muchas maneras de participar:',
-	howWeCreateChangeListItems: [
-		'Acciones online: peticiones, campañas en redes sociales, envío de emails a funcionarios.',
-		'Actividades presenciales: protestas locales, reuniones comunitarias, eventos de concientización.',
-		'Iniciativas de los capítulos locales.'
-	],
-	howWeCreateChangeClosing:
-		'Tu participación, ya sea grande o pequeña, es muy importante en nuestro esfuerzo colectivo para garantizar que el desarrollo de la IA avance de forma segura y ética.',
-	connectHeading: 'Conecta con tu comunidad',
-	connectFoundIntro: (chapterName, leader) =>
-		`Formas parte del capítulo de PauseAI en ${chapterName}, liderado por ${leader}. Se pondrán en contacto contigo para ayudarte a integrarte a nivel local.`,
-	connectFallbackIntro:
-		'Todavía no hay un capítulo local de PauseAI en tu país, así que por ahora formas parte de la comunidad global de PauseAI. Nuestro equipo global de incorporación se pondrá en contacto contigo.',
-	welcomeCallsLine: (url) =>
-		`Mientras tanto, únete a una de nuestras [llamadas de bienvenida](${url}) para conocer a otros nuevos miembros y saber más sobre lo que hacemos.`,
-	whatsNextHeading: '¿Y ahora qué?',
-	whatsNextP1:
-		'Si te suscribiste a nuestra lista de correo, recibirás el boletín mensual de PauseAI que te mantendrá al día sobre las próximas acciones y eventos.',
-	whatsNextP2: `Después de reunirte con la comunidad a través de nuestras reuniones de bienvenida o a través de tu Capítulo nacional, se te informará sobre la próxima acción, pero si estás buscando un paso a seguir ahora mismo, consulta nuestra página de [Acción](${ACTION_PAGE_URL}).`,
-	whatsNextClosing:
-		'¡Bienvenido/a a bordo! Juntos, podemos tomar medidas para prevenir los impactos catastróficos del desarrollo de la Inteligencia Artificial.',
-	signoffFound: (leader, chapterName) => `${leader} y el equipo de PauseAI ${chapterName}`,
-	signoffFallback: 'Maxime y el equipo de PauseAI Global',
-	linksHeading: 'Síguenos',
-	unsubscribeLine: (url) =>
-		`¿No quieres recibir estos correos? [Cancelar suscripción aquí](${url}).`,
-	addressLine: 'PauseAI, Box C5957, Kwikstaartlaan 42, 3704GS Zeist, Países Bajos'
+// Picking Volunteer or Lead includes consent to share details with the chapter, so where there
+// is one it is the chapter that follows up.
+function volunteerContactBlock(chapter: ChapterBlockData | null): EmailBlock[] {
+	if (!chapter) return [{ type: 'paragraph', text: 'Our onboarding team will be in touch.' }]
+	const blocks: EmailBlock[] = [
+		{
+			type: 'paragraph',
+			text: `**PauseAI ${chapter.name}** will be in touch to invite you to meet your local community at meetings and events.`
+		}
+	]
+	if (chapter.links.length > 0) blocks.push({ type: 'links', items: chapter.links })
+	return blocks
 }
 
-export const LANGUAGE_COPY: Record<OnboardingEmailLanguage, LanguageCopy> = { en, fr, es }
+function enVolunteer(chapter: ChapterBlockData | null, firstName: string): EmailContent {
+	return {
+		subject: `Welcome to PauseAI, ${firstName}!`,
+		greeting: greeting(firstName),
+		body: [
+			{
+				type: 'paragraph',
+				text: "We're thrilled to have you join our growing global volunteer network. Your decision to stand with us demonstrates that you share our commitment to ensuring artificial intelligence is developed slowly and safely in a way that benefits all of humanity, and isn't left to the whims of for-profit companies in a reckless race to smarter-than-human AI. Watch our video below for a summary of the Pause position:"
+			},
+			{ type: 'button', text: 'Video Introduction', url: VIDEO_URL },
+			{ type: 'heading', text: 'First Steps to Get Involved:' },
+			{ type: 'paragraph', text: '**1. Join Our Welcome Calls**' },
+			{
+				type: 'paragraph',
+				text: `Join us for an introduction to the PauseAI community. You'll meet other new volunteers, learn about our current initiatives, and find ways to get involved immediately. Check out our list of upcoming welcome calls [here](${WELCOME_CALLS_URL}).`
+			},
+			{ type: 'paragraph', text: '**2. Connect With Your Community**' },
+			{
+				type: 'paragraph',
+				text: `Please join us on our global [Discord server](${GLOBAL_DISCORD_URL}).`
+			},
+			...volunteerContactBlock(chapter),
+			{ type: 'heading', text: 'How We Create Change' },
+			{ type: 'paragraph', text: 'At PauseAI, we believe in the power of collective action.' },
+			{
+				type: 'paragraph',
+				text: 'By coming together as concerned citizens to protest, persuade the public, and write to our decision-makers we can influence the necessary change to advocate for a pause on the most advanced AI development.'
+			},
+			{
+				type: 'paragraph',
+				text: "As a volunteer, you'll have opportunities to participate in:"
+			},
+			{
+				type: 'list',
+				items: [
+					'Online actions (petitions, social media campaigns, letter-writing to officials)',
+					'Offline activities (local protests, community meetings, awareness events)',
+					'Local chapter initiatives.'
+				]
+			},
+			{
+				type: 'paragraph',
+				text: 'Your participation, whether big or small, matters greatly in our collective effort to ensure AI development proceeds safely and ethically.'
+			},
+			{ type: 'heading', text: "What's Next" },
+			{
+				type: 'paragraph',
+				text: `After meeting with the community via our Welcome meetings or through your National Chapter, you'll be informed of the next action, but if you're looking for a step to take right now, check out our [Action page](${ACTION_PAGE_URL}).`
+			}
+		],
+		signoff: [
+			{
+				type: 'paragraph',
+				text: 'Welcome aboard! Together, we can take action to prevent the catastrophic impacts of the development of Artificial Intelligence.'
+			},
+			{ type: 'signoff', lines: ['Best regards,', GLOBAL_SIGNATURE] }
+		],
+		socials: GLOBAL_SOCIALS
+	}
+}
 
-export const SHARED = { VIDEO_URL, ACTION_PAGE_URL }
+// No chapter block: this email already describes PauseAI en Español, the community every
+// Spanish-speaking country shares, and a chapter block would single out Spain.
+function esVolunteer(firstName: string): EmailContent {
+	return {
+		subject: `¡Bienvenido a PauseAI, ${firstName}!`,
+		greeting: [{ type: 'heading', level: 1, text: `¡Bienvenido a PauseAI, ${firstName}!` }],
+		body: [
+			{
+				type: 'paragraph',
+				text: 'Estamos encantados de que te unas a nuestra creciente red global de voluntarios. Tu decisión de apoyarnos demuestra que compartes nuestro compromiso de garantizar que la inteligencia artificial se desarrolle de forma pausada y segura, beneficiando a todos en lugar de quedar a merced de los caprichos de empresas con fines de lucro en una carrera imprudente hacia una IA más inteligente que la humana. Mira nuestro vídeo a continuación para obtener un resumen de la posición de PauseAI:'
+			},
+			{ type: 'button', text: 'Video Introductorio', url: VIDEO_URL },
+			{ type: 'heading', text: 'Primeros pasos para involucrarse en las comunidades' },
+			{ type: 'paragraph', text: '**PauseAI en Español**' },
+			{
+				type: 'paragraph',
+				text: 'Voluntarios de España e Hispanoamérica nos hemos unido bajo el nombre de PauseAI en Español, con el objetivo de paliar la falta de información sobre el tema en nuestro idioma y desarrollar iniciativas útiles.'
+			},
+			{
+				type: 'paragraph',
+				text: 'Contamos con un [WhatsApp](https://chat.whatsapp.com/KEgD22LEo6xEVvjH4fD8br) donde coordinamos llamadas grupales mensuales y una página [web propia](https://pauseai.es/). En la web encontrarás una sección de artículos en profundidad sobre [los riesgos de la IA](https://pauseai.es/riesgos), información sobre la necesidad de una pausa y consejos para escribir a los políticos, entre otros contenidos. También tenemos un [Substack en español](https://pauseaispanish.substack.com/) donde publicamos un boletín mensual de noticias.'
+			},
+			{
+				type: 'paragraph',
+				text: 'Con el apoyo de voluntarios como tú esperamos poner en marcha muchos más proyectos de comunicación y activismo, estamos abiertos a tus sugerencias.'
+			},
+			{ type: 'paragraph', text: '**PauseAI Global**' },
+			{
+				type: 'paragraph',
+				text: `Por fuera de eso, puedes unirte a nuestro [servidor de Discord](${GLOBAL_DISCORD_URL}) y las [llamadas de bienvenida](${WELCOME_CALLS_URL}) para personas de cualquier parte del mundo. Ambas en inglés.`
+			},
+			{ type: 'heading', text: 'Cómo creamos el cambio' },
+			{ type: 'paragraph', text: 'En PauseAI creemos en el poder de la acción colectiva.' },
+			{
+				type: 'paragraph',
+				text: 'Al unirnos como ciudadanos preocupados para protestar, persuadir al público y escribir a quienes toman las decisiones, podemos influir en el cambio necesario para abogar por una pausa en el desarrollo más avanzado de la IA.'
+			},
+			{ type: 'paragraph', text: 'Como voluntario, tendrás oportunidades de participar en:' },
+			{
+				type: 'list',
+				items: [
+					'Acciones online: peticiones, campañas en redes sociales, envío de emails a funcionarios.',
+					'Actividades presenciales: protestas locales, reuniones comunitarias, eventos de concientización.',
+					'Iniciativas de los capítulos locales.'
+				]
+			},
+			{
+				type: 'paragraph',
+				text: 'Tu participación, ya sea grande o pequeña, es muy importante en nuestro esfuerzo colectivo para garantizar que el desarrollo de la IA avance de forma segura y ética.'
+			},
+			{ type: 'heading', text: '¿Y ahora qué?' },
+			{
+				type: 'paragraph',
+				text: `Después de reunirte con la comunidad a través de nuestras reuniones de bienvenida o a través de tu Capítulo nacional, se te informará sobre la próxima acción, pero si estás buscando un paso a seguir ahora mismo, consulta nuestra página de [Acción](${ACTION_PAGE_URL}).`
+			}
+		],
+		signoff: [
+			{
+				type: 'paragraph',
+				text: '¡Bienvenido a bordo! Juntos, podemos tomar medidas para prevenir los impactos catastróficos del desarrollo de la Inteligencia Artificial.'
+			},
+			{ type: 'signoff', lines: ['Saludos cordiales,', 'Maxime y el equipo de PauseAI Global'] }
+		],
+		socials: GLOBAL_SOCIALS
+	}
+}
+
+/** The shared copy for a signup with no chapter override. Only English has a non-volunteer
+ *  version, so the caller passes `en` for every non-volunteer, as the live templates do. */
+export function baseContent(
+	language: BaseLanguage,
+	bucket: IntentBucket,
+	chapter: ChapterBlockData | null,
+	firstName: string
+): EmailContent {
+	if (bucket !== 'volunteer') return enNonVolunteer(bucket, chapter, firstName)
+	return language === 'es' ? esVolunteer(firstName) : enVolunteer(chapter, firstName)
+}
