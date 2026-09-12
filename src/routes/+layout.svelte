@@ -12,7 +12,6 @@
 	import { searchOpen } from '$lib/stores/searchModal'
 	import { deLocalizeHref } from '$lib/paraglide/runtime'
 	import type { BannerRule } from '$lib/types'
-	import '@fontsource/roboto-slab/300.css'
 	import '@fontsource/roboto-slab/400.css'
 	import '@fontsource/roboto-slab/500.css'
 	import '@fontsource/roboto-slab/700.css'
