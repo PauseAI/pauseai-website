@@ -99,7 +99,9 @@ export function renderHtml(
 					const href = escapeHtml(item.url)
 					if (!SOCIAL_ICONS.has(slug))
 						return `<a href="${href}" style="display: inline-block; margin: 0 6px; color: ${MUTED}; font-size: 12px; text-decoration: underline;">${escapeHtml(item.label)}</a>`
-					return `<a href="${href}" style="display: inline-block; margin: 0 5px;"><img src="${assetBaseUrl}/email-social/${slug}.png" width="18" height="18" alt="${escapeHtml(item.label)}" style="display: block; width: 18px; height: 18px; border: 0;"></a>`
+					// Width only, and no display: block. A client that blocks images then shows the
+					// label at a readable size instead of clipping it into an 18px box.
+					return `<a href="${href}" style="display: inline-block; margin: 0 5px; color: ${MUTED}; font-size: 13px; text-decoration: none;"><img src="${assetBaseUrl}/email-social/${slug}.png" width="18" alt="${escapeHtml(item.label)}" style="width: 18px; border: 0;"></a>`
 				})
 				.join('')}</td></tr>`
 		: ''
