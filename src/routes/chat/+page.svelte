@@ -133,6 +133,7 @@
 		border: solid 1px var(--text);
 		border-radius: 10px;
 		padding: 10px;
+		font-size: inherit;
 		box-sizing: border-box;
 		font-family: var(--font-body);
 		margin-top: 1rem;
@@ -152,6 +153,7 @@
 		border: none;
 		border-radius: 10px;
 		padding: 10px;
+		font-size: inherit;
 		font-family: var(--font-body);
 		cursor: pointer;
 		display: flex;

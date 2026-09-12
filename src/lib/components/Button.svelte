@@ -19,6 +19,7 @@
 		border: none;
 		border-radius: 10px;
 		padding: 10px;
+		font-size: inherit;
 		font-family: var(--font-body);
 		cursor: pointer;
 		display: flex;
