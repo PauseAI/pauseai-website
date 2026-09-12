@@ -13,9 +13,10 @@
 	import { deLocalizeHref } from '$lib/paraglide/runtime'
 	import type { BannerRule } from '$lib/types'
 	import '@fontsource/roboto-slab/300.css'
+	import '@fontsource/roboto-slab/400.css'
 	import '@fontsource/roboto-slab/500.css'
 	import '@fontsource/roboto-slab/700.css'
-	import robotoSlabLatin300 from '@fontsource/roboto-slab/files/roboto-slab-latin-300-normal.woff2'
+	import robotoSlabLatin400 from '@fontsource/roboto-slab/files/roboto-slab-latin-400-normal.woff2'
 	import '@fontsource/saira-condensed/700.css'
 	import sairaCondensedLatin700 from '@fontsource/saira-condensed/files/saira-condensed-latin-700-normal.woff2'
 	import { ProgressBar } from '@prgm/sveltekit-progress-bar'
@@ -144,7 +145,7 @@
 	{@html `<${'script'}>${sanitizeScript(bannerSelection)}</script>`}
 </svelte:head>
 
-<PreloadFonts urls={[robotoSlabLatin300, sairaCondensedLatin700]} />
+<PreloadFonts urls={[robotoSlabLatin400, sairaCondensedLatin700]} />
 
 <h2 style="width: 0; height: 0; margin: 0; padding: 0; visibility: hidden;" data-pagefind-ignore>
 	Top
