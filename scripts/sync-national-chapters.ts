@@ -31,6 +31,10 @@
  *   pnpm sync:national-chapters -- --check      (exit 1 if the file would change; for CI)
  *   pnpm sync:national-chapters -- --dry-run    (print the would-be output, write nothing)
  *   pnpm sync:national-chapters -- --allow "United States"   (re-add an excluded country)
+ *   pnpm sync:national-chapters -- --summary <path>          (write a PR body listing
+ *     what changed — per chapter, old → new links and calendar URLs — to <path>;
+ *     used by the sync workflow so reviewers don't have to eyeball raw
+ *     lumaCalendarId values in the diff or construct calendar URLs by hand)
  */
 import fs from 'node:fs'
 import { fileURLToPath } from 'node:url'
@@ -210,14 +214,16 @@ async function fetchNationalGroups(): Promise<NationalGroup[]> {
 	return (await response.json()) as NationalGroup[]
 }
 
-const argv = minimist<{ allow: string | string[]; check?: boolean; 'dry-run'?: boolean }>(
-	process.argv.slice(2),
-	{
-		string: ['allow'],
-		boolean: ['check', 'dry-run'],
-		default: { allow: [] }
-	}
-)
+const argv = minimist<{
+	allow: string | string[]
+	check?: boolean
+	'dry-run'?: boolean
+	summary?: string
+}>(process.argv.slice(2), {
+	string: ['allow', 'summary'],
+	boolean: ['check', 'dry-run'],
+	default: { allow: [] }
+})
 const allow = new Set<string>(
 	(Array.isArray(argv.allow) ? argv.allow : [argv.allow]).map((c) => c.toLowerCase())
 )
@@ -233,6 +239,20 @@ const groupName = (group: NationalGroup): string =>
 const chapters: Chapter[] = []
 const skipped: string[] = []
 
+// What this run changed, for the PR body summary (--summary).
+type ChapterChange =
+	| {
+			kind: 'updated'
+			name: string
+			oldLink: string
+			newLink: string
+			oldLumaId?: string
+			newLumaId?: string
+	  }
+	| { kind: 'added'; name: string; link: string; lumaId?: string }
+	| { kind: 'removed'; name: string; oldLink: string; oldLumaId?: string }
+const changes: ChapterChange[] = []
+
 // Existing chapters keep their position in the file; only update their link
 // or lumaCalendarId when it changed, or drop them when the API no longer
 // lists them.
@@ -240,6 +260,12 @@ for (const chapter of existing) {
 	const group = groups.find((g) => groupName(g) === chapter.name)
 	if (!group) {
 		console.log(`  – Removing ${chapter.name}: no longer listed as an active national group`)
+		changes.push({
+			kind: 'removed',
+			name: chapter.name,
+			oldLink: chapter.link,
+			oldLumaId: chapter.lumaCalendarId
+		})
 		continue
 	}
 	const link = primaryLink(group)
@@ -257,6 +283,14 @@ for (const chapter of existing) {
 		if (lumaCalendarId) nextChapter.lumaCalendarId = lumaCalendarId
 		else delete nextChapter.lumaCalendarId // group lost its Luma page or ID
 		chapters.push(nextChapter)
+		changes.push({
+			kind: 'updated',
+			name: chapter.name,
+			oldLink: chapter.link,
+			newLink: link,
+			oldLumaId: chapter.lumaCalendarId,
+			newLumaId: lumaCalendarId
+		})
 	} else {
 		chapters.push(chapter)
 	}
@@ -303,6 +337,7 @@ for (const group of groups) {
 		...(lumaCalendarId ? { lumaCalendarId } : {}),
 		...local
 	})
+	changes.push({ kind: 'added', name, link, lumaId: lumaCalendarId })
 }
 
 if (skipped.length > 0) {
@@ -311,6 +346,51 @@ if (skipped.length > 0) {
 console.log(`  ${existing.length} existing chapters, ${chapters.length} chapters in output`)
 
 const next = JSON.stringify({ communities: chapters }, null, '\t') + '\n'
+
+/**
+ * Builds the sync PR body: the workflow's intro text plus a table of what this
+ * run changed. Luma calendar IDs are rendered as their public calendar URL
+ * (https://lu.ma/calendar/<id>, which redirects to the calendar's vanity page)
+ * so reviewers can check them without constructing a URL by hand.
+ */
+function buildPrBody(changes: ChapterChange[]): string {
+	const lumaUrl = (id?: string): string => (id ? `https://lu.ma/calendar/${id}` : '—')
+	const cell = (oldValue: string, newValue: string): string =>
+		oldValue === newValue ? oldValue : `${oldValue} → ${newValue}`
+
+	const lines = [
+		'This PR was automatically created by the **Sync national chapters** workflow.',
+		'',
+		'The committed `national-chapters.json` was out of sync with the',
+		'national groups served by pauseai.info. It has been regenerated',
+		'with `pnpm sync:national-chapters` — review the link/coordinate',
+		'changes before merging.',
+		'',
+		'## Changes in this run',
+		'',
+		"Luma calendar links are constructed from the synced `lumaCalendarId` (`https://lu.ma/calendar/<id>` redirects to the calendar's public page).",
+		'',
+		'| Chapter | Link | Luma calendar |',
+		'| ------- | ---- | ------------- |'
+	]
+	if (changes.length === 0) {
+		lines.push('_No chapter changes in this run._')
+	}
+	for (const change of changes) {
+		if (change.kind === 'updated') {
+			lines.push(
+				`| ${change.name} | ${cell(change.oldLink, change.newLink)} | ${cell(lumaUrl(change.oldLumaId), lumaUrl(change.newLumaId))} |`
+			)
+		} else if (change.kind === 'added') {
+			lines.push(`| ${change.name} | added: ${change.link} | ${lumaUrl(change.lumaId)} |`)
+		} else {
+			lines.push(
+				`| ${change.name} | removed (was ${change.oldLink}) | ${lumaUrl(change.oldLumaId)} |`
+			)
+		}
+	}
+	return lines.join('\n') + '\n'
+}
 
 // The repo has no .gitattributes for JSON, so on Windows checkouts git may
 // materialize the file with CRLF. Normalize before comparing (writing still
@@ -328,4 +408,11 @@ if (normalize(next) === normalize(current)) {
 } else {
 	fs.writeFileSync(TARGET_FILE, next)
 	console.log('✓ Updated national-chapters.json')
+}
+
+// Write the PR body for the sync workflow even when the JSON is already in
+// sync: create-pull-request simply won't touch the PR when there is no diff.
+if (argv.summary && !argv['dry-run'] && !argv.check) {
+	fs.writeFileSync(argv.summary, buildPrBody(changes))
+	console.log(`✓ Wrote PR body summary to ${argv.summary}`)
 }
