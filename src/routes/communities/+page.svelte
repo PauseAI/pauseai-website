@@ -253,7 +253,7 @@
 
 	/* Maplibre popups stay white for contrast against the dark-mode map; force dark text on it */
 	:global(.maplibregl-popup-content) {
-		color: #333;
+		color: var(--grey-500);
 		text-align: center;
 	}
 
