@@ -150,7 +150,7 @@ html {
 	--discord-blue: #5865f2;
 
 	/* Communities map: event markers (distinct from national-chapter blue and community orange) */
-	--event-marker: #e0409b;
+	--event-marker: #00c853; /* vivid green so events pop beside the grey/blue chapter pins */
 
 	/* We can't use these in media queries... */
 	--breakpoint: 900px;

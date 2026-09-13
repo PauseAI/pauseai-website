@@ -178,7 +178,7 @@
 <p>
 	If you're looking for a group closer to home, check out our map below to find the people nearest
 	to you. The map also includes adjacent AI Safety communities in grey, and upcoming events (next 30
-	days) in pink.
+	days) in green.
 </p>
 <div>
 	<div class="map-wrap">
