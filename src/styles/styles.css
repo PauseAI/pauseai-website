@@ -138,9 +138,11 @@ html {
 	--bg-2: var(--bg-secondary); /* NationalGroupItem card surface */
 	--bg-3: var(--bg-subtle); /* NationalGroupItem/CommunitiesList hover surface */
 	--bg-card: var(--bg-secondary); /* PressCoveragePanel, SelfieUX cards */
-	--text-muted: var(--grey-400); /* matches the one real fallback found, #666 */
+	--text-muted: var(
+		--text-2
+	); /* matches the pre-token fallback #666 in light mode; now dark-mode safe via --text-2 */
 	--text-1: var(--text); /* NationalGroupItem/CommunitiesList icon color */
-	--text-2: var(--grey-400); /* secondary/muted text, several files */
+	--text-2: hsl(32, 0%, 25%); /* secondary/muted text, several files; light-mode muted text */
 	--text-dark: var(--grey-500); /* PersonCard placeholder SVG fill */
 	--size-3: var(--spacing-sm); /* posts/+page.svelte .description margin-top */
 
@@ -188,6 +190,7 @@ html {
 	--bg-subtle: hsl(32, 100%, 20%);
 	--text-subtle: hsl(32, 0%, 97%);
 	--bg-secondary: hsl(0, 0%, 10%);
+	--text-2: hsl(32, 0%, 67%); /* muted text legible on black; base #404040 would be ~3.7:1 */
 }
 
 [color-scheme='light'] {
