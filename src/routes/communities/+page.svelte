@@ -3,7 +3,7 @@
 	import Link from '$lib/components/Link.svelte'
 	import CommunitiesList from './CommunitiesList.svelte'
 	import type { GeoApiResponse } from '$api/geo/+server'
-	import type { CalendarResponse, Event } from '$api/calendar/+server'
+	import type { CalendarResponse } from '$api/calendar/+server'
 	import type { StyleSpecification } from 'maplibre-gl'
 	import * as maplibregl from 'maplibre-gl'
 	import 'maplibre-gl/dist/maplibre-gl.css'
