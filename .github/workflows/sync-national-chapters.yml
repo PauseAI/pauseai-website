@@ -31,20 +31,16 @@ jobs:
         run: pnpm install --frozen-lockfile
 
       - name: Run sync
-        run: pnpm sync:national-chapters
+        # The summary file is the PR body for create-pull-request; it lives in
+        # the runner temp dir so it is never committed.
+        run: pnpm sync:national-chapters -- --summary "$RUNNER_TEMP/national-chapters-pr-body.md"
 
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v8
         with:
           commit-message: 'Sync national chapters with pauseai.info'
           title: 'Sync national chapters with pauseai.info'
-          body: |
-            This PR was automatically created by the **Sync national chapters** workflow.
-
-            The committed `national-chapters.json` was out of sync with the
-            national groups served by pauseai.info. It has been regenerated
-            with `pnpm sync:national-chapters` — review the link/coordinate
-            changes before merging.
+          body-path: ${{ runner.temp }}/national-chapters-pr-body.md
           branch: sync-national-chapters
           base: main
           delete-branch: true
