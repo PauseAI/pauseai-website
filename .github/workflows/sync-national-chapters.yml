@@ -31,16 +31,26 @@ jobs:
         run: pnpm install --frozen-lockfile
 
       - name: Run sync
-        # The summary file is the PR body for create-pull-request; it lives in
-        # the runner temp dir so it is never committed.
-        run: pnpm sync:national-chapters -- --summary "$RUNNER_TEMP/national-chapters-pr-body.md"
+        # The summary file is created and consumed within this step; its
+        # content is handed to create-pull-request via a job-level env var
+        # (multiline-safe via the delimiter syntax), so no file has to
+        # survive between steps.
+        run: |
+          summary="$RUNNER_TEMP/national-chapters-pr-body.md"
+          pnpm exec tsx scripts/sync-national-chapters.ts --summary "$summary"
+          test -f "$summary" || { echo "::error::sync script did not write $summary"; exit 1; }
+          {
+            echo "pr_body<<PAUSEAI_PR_BODY_EOF"
+            cat "$summary"
+            echo "PAUSEAI_PR_BODY_EOF"
+          } >> "$GITHUB_ENV"
 
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v8
         with:
           commit-message: 'Sync national chapters with pauseai.info'
           title: 'Sync national chapters with pauseai.info'
-          body-path: ${{ runner.temp }}/national-chapters-pr-body.md
+          body: ${{ env.pr_body }}
           branch: sync-national-chapters
           base: main
           delete-branch: true
