@@ -58,9 +58,9 @@ const sv: FixedCopy = {
 	confirm: (link) =>
 		`Bekräfta din e-postadress genom att klicka på [den här länken](${link}). Om du inte har anmält dig kan du bortse från det här meddelandet.`,
 	newsletter: () =>
-		'Om du har valt att prenumerera håller vi dig uppdaterad om nyheter, kampanjer och sätt att engagera dig. Oavsett vilket kan vi ibland skicka dig en kritisk varning.',
+		'Om du har valt att prenumerera håller vi dig uppdaterad om nyheter, kampanjer och sätt att engagera dig. Även om du inte prenumererar kan vi ibland skicka ett viktigt och brådskande meddelande.',
 	newsletterInOwnWords:
-		'Om du har valt att prenumerera håller vi dig uppdaterad. Oavsett vilket kan vi ibland skicka dig en kritisk varning.'
+		'Om du har valt att prenumerera håller vi dig uppdaterad. Även om du inte prenumererar kan vi ibland skicka ett viktigt och brådskande meddelande.'
 }
 
 export const FIXED_COPY: Record<OnboardingEmailLanguage, FixedCopy> = { en, es, sv }

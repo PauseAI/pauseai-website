@@ -1,5 +1,5 @@
 import type { EmailBlock, EmailContent } from './blocks.js'
-import { GLOBAL_DISCORD_URL, GLOBAL_SOCIALS, VIDEO_URL } from './brand.js'
+import { GLOBAL_DISCORD_URL, GLOBAL_SOCIALS, VIDEO_URL, WELCOME_CALLS_URL } from './brand.js'
 import type {
 	ChapterBlockData,
 	ChapterLink,
@@ -297,11 +297,18 @@ const swedenContent: ChapterContent = (firstName, chapter) => {
 		type: 'paragraph',
 		text: `Skriv gärna på [vår namninsamling](${SWEDEN_PETITION}) och kika på [vår hemsida](${SWEDEN_ACTION_PAGE}) för att få fler tips på vad du kan göra.`
 	})
+	// A chapter's own email replaces the shared next steps, so its readers hear about PauseAI
+	// Global only if the chapter says so. Theirs to keep or drop, like the rest of this copy.
+	body.push({
+		type: 'paragraph',
+		text: `Du är också välkommen till PauseAI Globals [välkomstmöten](${WELCOME_CALLS_URL}) för nya volontärer och till deras [Discord-server](${GLOBAL_DISCORD_URL}). Båda är på engelska.`
+	})
 
 	return {
 		subject: `Välkommen till PauseAI Sverige, ${firstName}!`,
-		htmlStyle: 'plain',
-		greeting: [{ type: 'paragraph', text: `Hej ${firstName} och välkommen till PauseAI Sverige!` }],
+		greeting: [
+			{ type: 'heading', level: 1, text: `Hej ${firstName} och välkommen till PauseAI Sverige!` }
+		],
 		body,
 		signoff: [{ type: 'signoff', lines: ['Mvh', 'Carl, PauseAI Sverige'] }]
 	}
