@@ -102,7 +102,8 @@ describe('AxiosSequentialRetryMiddleware', () => {
 		const requestSequence: string[] = []
 
 		mock.onGet('/items').reply((config) => {
-			const requestId = String(config.params.id)
+			const params = config.params as { id: string }
+			const requestId = String(params.id)
 			const callCount = (callsByRequest.get(requestId) ?? 0) + 1
 			callsByRequest.set(requestId, callCount)
 			requestSequence.push(`${requestId}:${callCount}`)

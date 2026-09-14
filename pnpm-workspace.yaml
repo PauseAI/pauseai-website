@@ -4,3 +4,4 @@ allowBuilds:
   lefthook: true
   sharp: true
 minimumReleaseAge: 0
+engineStrict: true

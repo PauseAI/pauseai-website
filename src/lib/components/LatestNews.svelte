@@ -5,6 +5,10 @@
 	import { onMount } from 'svelte'
 
 	const pageSize = 6
+	// Matches the 1/2/3-column grid below so browsers choose thumbnail-sized
+	// responsive image variants rather than downloading page-width images.
+	const newsCardImageSizes =
+		'(max-width: 500px) calc(100vw - 1rem), (max-width: 850px) calc((100vw - 3rem) / 2), 13rem'
 	let newsItems: NewsItem[] = $state(Array.from({ length: pageSize }))
 	let loading = $state(true)
 	let currentPage = $state(1)
@@ -40,7 +44,7 @@
 	{#if newsItems.length > 0}
 		<div class="news-grid">
 			{#each newsItems as item}
-				<NewsCard {item} {loading} imageSizes="500px" />
+				<NewsCard {item} {loading} imageSizes={newsCardImageSizes} />
 			{/each}
 		</div>
 

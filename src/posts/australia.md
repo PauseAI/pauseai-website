@@ -40,19 +40,11 @@ If you’re in Australia, you can help:
 
 ## Connect with PauseAI Australia
 
-- [australia@pauseai.info](mailto:australia@pauseai.info?subject=Hello%20From%20The%20Homepage)
-- [Facebook](https://www.facebook.com/groups/571590459293618)
-- [YouTube](https://www.youtube.com/channel/UCjjMieiOlSFf7jud0yhHQSg)
-- [LinkedIn](https://www.linkedin.com/company/pauseai-australia)
-- [Instagram](https://www.instagram.com/pauseaiaustralia/)
-- [WhatsApp](https://chat.whatsapp.com/KLg8K9xSgfIJs8GQAHeI5b)
-- [Events](https://lu.ma/PauseAIAustralia)
+[australia@pauseai.info](mailto:australia@pauseai.info?subject=Hello%20From%20The%20Homepage) | [Events](https://lu.ma/PauseAIAustralia) | [Instagram](https://www.instagram.com/pauseaiaustralia/) | [Facebook](https://www.facebook.com/groups/571590459293618) | [LinkedIn](https://www.linkedin.com/company/pauseai-australia) | [WhatsApp](https://chat.whatsapp.com/KLg8K9xSgfIJs8GQAHeI5b) | [YouTube](https://www.youtube.com/channel/UCjjMieiOlSFf7jud0yhHQSg)
 
 ## What we do
 
-We are the Australian national chapter of the PauseAI movement.
-
-Volunteers across Australia work to:
+We are the Australian chapter of the PauseAI movement. Volunteers work to:
 
 - Raise public awareness of AI risks
 - Advocate to politicians and policymakers
@@ -60,6 +52,7 @@ Volunteers across Australia work to:
 - Strengthen the global PauseAI movement
 
 PauseAI Australia Ltd is an incorporated not-for-profit.
+Last month's progress includes 📧27 AI decisionmaker emails, meetings with 👥5 of them, 📅5 events with 80 attendees.
 
 <div style="display:flex; flex-wrap:wrap; gap:0.5rem; max-width:90%; margin:1rem auto;">
 <div style="text-align:center; margin:2rem 0;">

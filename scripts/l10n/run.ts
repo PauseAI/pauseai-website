@@ -311,7 +311,7 @@ const logMessage = (msg: string) => {
 				`\n⚠️  COST CALIBRATION DRIFT: actual $${spent.toFixed(4)} is ${ratio}x estimate ($${estimatedSpend.toFixed(4)})`
 			)
 			console.log(`   The COST_PER_1000_WORDS constant in scripts/l10n/dry-run.ts may be stale.`)
-			console.log(`   See L10N.md → Cost Visibility → Estimator vs Actual.`)
+			console.log(`   See docs/L10N.md → Cost Visibility → Estimator vs Actual.`)
 		}
 	}
 

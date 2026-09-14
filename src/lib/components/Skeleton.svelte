@@ -71,11 +71,11 @@
 		display: inline-block;
 		position: relative;
 		overflow: hidden;
-		background-color: rgba(255, 255, 255, 0.15);
+		background-color: rgba(var(--white-rgb), 0.15);
 	}
 
 	:global([color-scheme='light']) .skeleton {
-		background-color: rgba(0, 0, 0, 0.1);
+		background-color: rgba(var(--black-rgb), 0.1);
 	}
 
 	.text {
@@ -99,7 +99,7 @@
 		background: linear-gradient(
 			90deg,
 			transparent 0%,
-			rgba(255, 255, 255, 0.1) 50%,
+			rgba(var(--white-rgb), 0.1) 50%,
 			transparent 100%
 		);
 		animation: shimmer 1.5s infinite;
@@ -109,7 +109,7 @@
 		background: linear-gradient(
 			90deg,
 			transparent 0%,
-			rgba(255, 255, 255, 0.5) 50%,
+			rgba(var(--white-rgb), 0.5) 50%,
 			transparent 100%
 		);
 	}

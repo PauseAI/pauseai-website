@@ -7,8 +7,8 @@ import svelte from 'eslint-plugin-svelte'
 import { defineConfig, globalIgnores } from 'eslint/config'
 import globals from 'globals'
 import ts from 'typescript-eslint'
-import emptyMarkdownLinks from './eslint/plugin-empty-markdown-links.js'
-import markdownScripts from './eslint/plugin-markdown-scripts.js'
+import emptyMarkdownLinks from './plugins/eslint-empty-markdown-links.js'
+import markdownScripts from './plugins/eslint-markdown-scripts.js'
 import svelteConfig from './svelte.config.js'
 
 // See https://typescript-eslint.io/troubleshooting/typed-linting/performance#changes-to-extrafileextensions-with-projectservice
@@ -35,18 +35,7 @@ export default defineConfig(
 	},
 	{
 		ignores: ['**/*.md'],
-		extends: [
-			// Just warn about type-checked rules for now
-			ts.configs.recommendedTypeCheckedOnly.map((config) => {
-				if (!config.rules) return config
-
-				const warnedRules = Object.fromEntries(
-					Object.entries(config.rules).map(([key, value]) => [key, value.replace('error', 'warn')])
-				)
-
-				return { ...config, rules: warnedRules }
-			})
-		]
+		extends: ts.configs.recommendedTypeCheckedOnly
 	},
 	{
 		files: ['**/*.md'],
@@ -85,7 +74,7 @@ export default defineConfig(
 		// See more details at: https://typescript-eslint.io/packages/parser/
 		languageOptions: {
 			parserOptions: {
-				project: ['./tsconfig.check.json'],
+				project: ['./tsconfig.json'],
 				// Defined globally instead:
 				// extraFileExtensions: ['.svelte'], // Add support for additional file extensions, such as .svelte
 				parser: ts.parser,
@@ -178,6 +167,10 @@ export default defineConfig(
 	globalIgnores([
 		// TODO remove when done
 		'src/routes/api/write',
-		'src/routes/write'
+		'src/routes/write',
+		// Airtable automation script: runs in Airtable's script runtime (input.config(),
+		// input.secret() globals), not in this repo's build. Kept here as source of truth
+		// but not covered by tsconfig.check.json, so typed linting can't parse it.
+		'airtable-mailersend-emails.js'
 	])
 )

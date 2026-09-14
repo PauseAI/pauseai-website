@@ -62,7 +62,7 @@
 		background: var(--bg-subtle);
 		border-radius: 20px;
 		padding: 1.25rem 0.75rem;
-		border: 1px solid var(--border-color, rgba(0, 0, 0, 0.1));
+		border: 1px solid var(--border-color, rgba(var(--black-rgb), 0.1));
 		transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 		display: flex;
 		flex-direction: column;
@@ -80,16 +80,16 @@
 		left: 0;
 		right: 0;
 		bottom: 0;
-		background: radial-gradient(circle at center, rgba(255, 255, 255, 0.05) 0%, transparent 70%);
+		background: radial-gradient(circle at center, rgba(var(--white-rgb), 0.05) 0%, transparent 70%);
 		opacity: 0;
 		transition: opacity 0.3s ease;
 	}
 
 	.signatory-card:hover {
 		transform: translateY(-2px);
-		box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+		box-shadow: 0 8px 24px rgba(var(--black-rgb), 0.3);
 		border-color: var(--brand);
-		background: rgba(255, 255, 255, 0.08);
+		background: rgba(var(--white-rgb), 0.08);
 	}
 
 	.signatory-card:hover::before {
@@ -107,14 +107,14 @@
 		height: 140px;
 		border-radius: 50%;
 		object-fit: cover;
-		box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+		box-shadow: 0 4px 15px rgba(var(--black-rgb), 0.2);
 	}
 
 	.portrait-placeholder {
 		width: 140px;
 		height: 140px;
 		border-radius: 50%;
-		background: rgba(255, 255, 255, 0.1);
+		background: rgba(var(--white-rgb), 0.1);
 		display: flex;
 		align-items: center;
 		justify-content: center;

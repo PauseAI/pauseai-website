@@ -84,7 +84,7 @@
 
 	table td,
 	table th {
-		border: 1px solid #ddd;
+		border: 1px solid var(--grey-150);
 		padding: 8px;
 	}
 }

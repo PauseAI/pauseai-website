@@ -1,0 +1,118 @@
+<!-- See docs/image-processing.md for the full image-processing architecture. -->
+<script lang="ts">
+	import { SvelteURLSearchParams } from 'svelte/reactivity'
+	import Picture from './Picture.svelte'
+	import type { LoosePicture } from '$lib/types'
+	import { imageQuality, imageWidths } from '$lib/image-config'
+
+	interface Props {
+		src: string
+		alt: string
+		widths?: number[]
+		sizes?: string
+		quality?: number
+		fit?: 'cover' | 'contain' | 'fill' | 'inside' | 'outside'
+		pictureClass?: string | undefined
+		imgClass?: string | undefined
+		style?: string | undefined
+		loading?: 'lazy' | 'eager'
+		decoding?: 'async' | 'sync' | 'auto'
+		onFailed?: (() => void) | undefined
+	}
+
+	let {
+		src,
+		alt,
+		widths = [...imageWidths],
+		sizes = '(min-width: 1280px) 1200px, 100vw',
+		quality = imageQuality,
+		fit = 'contain',
+		pictureClass = undefined,
+		imgClass = undefined,
+		style = undefined,
+		loading = 'lazy',
+		decoding = 'async',
+		onFailed = undefined
+	}: Props = $props()
+
+	let useFallback = $state(false)
+
+	function handleError(e: Event) {
+		const imgElement = e.target as HTMLImageElement
+		// If we haven't used the fallback yet, try it
+		if (!useFallback && imgElement.src !== src) {
+			useFallback = true
+			console.warn(`NetlifyImage: Failed to load optimized image ${src}, trying fallback`)
+		} else {
+			// Both optimized and fallback failed, or we hit an error on the fallback itself
+			console.warn(`NetlifyImage: Failed to load image ${src} entirely`)
+			onFailed?.()
+		}
+	}
+
+	function buildNetlifyUrl(
+		path: string,
+		options: {
+			w?: number
+			q?: number
+			fm?: string
+			fit?: 'cover' | 'contain' | 'fill' | 'inside' | 'outside'
+		}
+	) {
+		const params = new SvelteURLSearchParams()
+		params.set('url', path)
+		if (options.w) params.set('w', `${options.w}`)
+		if (options.q) params.set('q', `${options.q}`)
+		if (options.fm) params.set('fm', `${options.fm}`)
+		if (options.fit) params.set('fit', `${options.fit}`)
+		return `/.netlify/images?${params.toString()}`
+	}
+
+	function buildSrcSet(format: string) {
+		return widths
+			.map(
+				(width) => `${buildNetlifyUrl(src, { w: width, q: quality, fm: format, fit })} ${width}w`
+			)
+			.join(', ')
+	}
+
+	const avifSrcSet = buildSrcSet('avif')
+	const webpSrcSet = buildSrcSet('webp')
+
+	// Fallback to a jpeg
+	const fallbackSrc = $derived(
+		buildNetlifyUrl(src, {
+			w: widths[0], // Smallest width for browsers that don't support srcset
+			q: quality,
+			fm: 'jpg',
+			fit
+		})
+	)
+
+	// Build a Picture-shaped object so we can reuse the shared Picture component.
+	const picture = $derived<LoosePicture>({
+		sources: {
+			avif: avifSrcSet,
+			webp: webpSrcSet
+		},
+		img: {
+			src: fallbackSrc
+		}
+	})
+</script>
+
+{#if useFallback}
+	<img onerror={handleError} {src} {alt} class={imgClass} {style} {loading} {decoding} />
+{:else}
+	<Picture
+		{picture}
+		{alt}
+		{sizes}
+		class={imgClass}
+		{pictureClass}
+		{style}
+		{loading}
+		{decoding}
+		onerror={handleError}
+	/>
+{/if}

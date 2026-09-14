@@ -23,8 +23,7 @@ type SelfieAddEmailApiErrorResponse = {
 }
 
 export type SelfieAddEmailApiResponse =
-	| SelfieAddEmailApiSuccessResponse
-	| SelfieAddEmailApiErrorResponse
+	SelfieAddEmailApiSuccessResponse | SelfieAddEmailApiErrorResponse
 
 export const POST: RequestHandler = async ({ request }) => {
 	if (!hasCloudinaryCredentials()) return credentialsError()
