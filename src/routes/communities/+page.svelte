@@ -150,7 +150,7 @@
 						.setLngLat([event.geo_longitude!, event.geo_latitude!])
 						.setPopup(
 							new Popup({ offset: [0, -15] }).setHTML(
-								`<h3><a href="${escape(event.url)}">${escape(event.name)}</a></h3>` +
+								`<h3><a href="${escape(`https://lu.ma/${event.url}`)}">${escape(event.name)}</a></h3>` +
 									`<p>${new Intl.DateTimeFormat('en', { day: 'numeric', month: 'long' }).format(new Date(event.start_at))}</p>`
 							)
 						)
