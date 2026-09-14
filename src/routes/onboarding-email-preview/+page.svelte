@@ -85,6 +85,11 @@
 				<strong>Style</strong> — <em>Auto</em> shows what production sends (PauseAI UK → plain
 				layout, everyone else → rich card); <em>Force</em> overrides it for comparison.
 			</li>
+			<li>
+				<strong>Subscribed</strong> — the Members "Email subscription" checkbox. <em>Unknown</em>
+				shows the old hedged "if you opted in" wording (what an unwired caller gets);
+				<em>Yes</em>/<em>No</em> force the definite newsletter line.
+			</li>
 		</ul>
 		<p>
 			The panel under the form shows what the inputs resolved to (intent bucket, chapter). Toggle
@@ -173,6 +178,22 @@
 						name="style"
 						{value}
 						checked={data.form.style === value}
+						onchange={rerender}
+					/>
+					{label}
+				</label>
+			{/each}
+		</div>
+
+		<span style="font-size: 13px; padding-top: 6px;">Subscribed</span>
+		<div style="display: flex; flex-wrap: wrap; gap: 4px 16px; padding-top: 6px;">
+			{#each [['unknown', 'Unknown (hedged)'], ['yes', 'Yes'], ['no', 'No']] as [value, label]}
+				<label style="font-size: 13px; display: flex; gap: 4px; align-items: center;">
+					<input
+						type="radio"
+						name="subscribed"
+						{value}
+						checked={data.form.subscribed === value}
 						onchange={rerender}
 					/>
 					{label}

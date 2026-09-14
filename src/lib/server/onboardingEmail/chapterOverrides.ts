@@ -1,11 +1,6 @@
 import type { EmailBlock, EmailContent } from './blocks.js'
 import { GLOBAL_DISCORD_URL, GLOBAL_SOCIALS, VIDEO_URL, WELCOME_CALLS_URL } from './brand.js'
-import type {
-	ChapterBlockData,
-	ChapterLink,
-	IntentGroup,
-	OnboardingEmailLanguage
-} from './types.js'
+import type { ChapterBlockData, IntentGroup, OnboardingEmailLanguage } from './types.js'
 
 // Chapters that send their own email instead of the shared copy. An override supplies the
 // subject, greeting, body and sign-off; composeBlocks() still adds the fixed lines, in the
@@ -41,25 +36,6 @@ function chapterLink(chapter: ChapterBlockData | null, label: string): string | 
 // calendar come from the chapter's row.
 const UK_INTRO_CALL = 'https://calendar.app.google/w5t7EgCFwCGKcnAS7'
 
-const UK_SOCIALS: ChapterLink[] = [
-	{ label: 'YouTube', url: 'https://www.youtube.com/@PauseAI-UK' },
-	{ label: 'Discord', url: 'https://discord.gg/2XXWXvErfA' },
-	{ label: 'Instagram', url: 'https://www.instagram.com/pauseai_uk' },
-	{ label: 'X', url: 'https://x.com/pauseai_uk' },
-	{ label: 'Bluesky', url: 'https://bsky.app/profile/pauseai.bsky.social' },
-	{ label: 'TikTok', url: 'https://www.tiktok.com/@pauseai_uk' },
-	{ label: 'Facebook', url: 'https://www.facebook.com/profile.php?id=61587358827177' }
-]
-
-/** The UK's WhatsApp sentences, dropped when the chapter's row has no WhatsApp link. */
-function whatsappLine(
-	chapter: ChapterBlockData | null,
-	sentence: (whatsapp: string) => string
-): EmailBlock[] {
-	const whatsapp = chapterLink(chapter, 'WhatsApp')
-	return whatsapp ? [{ type: 'paragraph', text: sentence(whatsapp) }] : []
-}
-
 /** "Join the community" step, naming whichever of the two links the row has. */
 function ukCommunityStep(chapter: ChapterBlockData | null): string {
 	const whatsapp = chapterLink(chapter, 'WhatsApp')
@@ -75,59 +51,43 @@ const uk: ChapterOverride = {
 	name: 'PauseAI UK',
 	language: 'en',
 	content: {
-		// From version 1 of jy7zpl97rdrg5vx6, which runs a MailerSend split test: version 2 is
-		// the short note below, so UK volunteers currently get one or the other at random. The
-		// composed path sends one email, so this reproduces version 1 until PauseAI UK says which
-		// of the two they want.
+		// Restyled onto the short, plain note the non-volunteer version below already used
+		// (ported from zr6ke4nyyomgon12), replacing the old rich/video version so UK volunteers
+		// and UK non-volunteers read as one consistent chapter voice. Keeps the video and global
+		// Discord mention, which volunteers get and non-volunteers don't, as one more plain line
+		// rather than a card/button.
 		volunteer: (firstName, chapter) => ({
 			subject: `Welcome to PauseAI UK ${firstName}!`,
+			htmlStyle: 'plain',
 			greeting: [
-				{ type: 'heading', level: 1, text: `Welcome to PauseAI UK, ${firstName}.` },
-				{
-					type: 'paragraph',
-					text: "**Let's work together to stop the development of dangerous AI**"
-				}
+				{ type: 'paragraph', text: `Hey ${firstName},` },
+				{ type: 'paragraph', text: 'Welcome to our growing volunteer network!' }
 			],
 			body: [
+				{ type: 'paragraph', text: "Here's how you can get involved in PauseAI UK:" },
+				{
+					type: 'list',
+					ordered: true,
+					items: [
+						ukCommunityStep(chapter),
+						`If you'd like, [book a short call](${UK_INTRO_CALL}) with Joseph, PauseAI UK's director, so he can say hi and introduce you to the community.`
+					].filter((item) => item.length > 0)
+				},
 				{
 					type: 'paragraph',
-					text: "We're thrilled to have you join our growing volunteer network. We are committed to ensuring that artificial intelligence is developed slowly and safely in a way that benefits all of humanity. And that it isn't left to the whims of companies in a reckless race to build AI that can replace humans. Watch our video below for a summary of the Pause position:"
-				},
-				{ type: 'button', text: 'Video Introduction', url: VIDEO_URL },
-				{ type: 'heading', text: 'Connect With Your Community' },
-				...whatsappLine(
-					chapter,
-					(whatsapp) =>
-						`Join the [PauseAI UK WhatsApp community](${whatsapp}) to keep up with our events.`
-				),
-				{
-					type: 'paragraph',
-					text: `You can also join the PauseAI Global [Discord server](${GLOBAL_DISCORD_URL}) to meet the international PauseAI community.`
-				},
-				{ type: 'heading', text: 'Next steps' },
-				{
-					type: 'paragraph',
-					text: `Please [book a 10 minute call](${UK_INTRO_CALL}) with Joseph, the Director of PauseAI UK, so he can say hi and introduce you to the community. Or reply to this email if you have a question.`
-				},
-				...whatsappLine(
-					chapter,
-					(whatsapp) => `New events will be announced in the [WhatsApp community](${whatsapp}).`
-				)
+					text: `Watch our [video introduction](${VIDEO_URL}) for a summary of the Pause position, and join the PauseAI Global [Discord server](${GLOBAL_DISCORD_URL}) to meet the international community.`
+				}
 			],
 			signoff: [
 				{
-					type: 'paragraph',
-					text: 'Welcome aboard! At PauseAI, we believe in the power of collective action. Together, we can take action to prevent the catastrophic impacts of the development of Artificial Intelligence.'
-				},
-				{
 					type: 'signoff',
 					lines: [
-						'Best wishes,',
-						'[Joseph](mailto:joseph@pauseai.info) and [Matilda](mailto:matilda@pauseai.info), The PauseAI UK Team'
+						'Looking forward to meeting you,',
+						'[Joseph](mailto:joseph@pauseai.uk) and [Matilda](mailto:matilda@pauseai.uk), the PauseAI UK Team'
 					]
-				}
-			],
-			socials: UK_SOCIALS
+				},
+				{ type: 'paragraph', text: 'PS: if you have questions, just hit reply.' }
+			]
 		}),
 		// From zr6ke4nyyomgon12, minus its first step, which was the confirm link.
 		'non-volunteer': (firstName, chapter) => ({

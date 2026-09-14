@@ -55,12 +55,20 @@ export const load: PageServerLoad = async ({ url }) => {
 	const htmlStyle: OnboardingEmailHtmlStyle | undefined =
 		styleParam === 'plain' || styleParam === 'rich' ? styleParam : undefined
 
+	// 'unknown' (or unset) leaves the newsletter line hedged, matching a caller that hasn't
+	// wired the Members "Email subscription" checkbox through; 'yes'/'no' force it so the
+	// two definite versions can be eyeballed too.
+	const subscribedParam = params.get('subscribed')
+	const subscribed: boolean | undefined =
+		subscribedParam === 'yes' ? true : subscribedParam === 'no' ? false : undefined
+
 	const renderParams = {
 		firstName,
 		country,
 		intent,
 		languageOverride: language,
 		htmlStyle,
+		subscribed,
 		airtable_id: 'previewRecordId123'
 	}
 	const rendered = await renderOnboardingEmail(renderParams)
@@ -77,7 +85,14 @@ export const load: PageServerLoad = async ({ url }) => {
 	const resolved = await resolveOnboardingEmail(renderParams)
 
 	return {
-		form: { firstName, language, country, intent, style: htmlStyle ?? 'auto' },
+		form: {
+			firstName,
+			language,
+			country,
+			intent,
+			style: htmlStyle ?? 'auto',
+			subscribed: subscribedParam === 'yes' ? 'yes' : subscribedParam === 'no' ? 'no' : 'unknown'
+		},
 		options: {
 			languages: LANGUAGES,
 			countries: chapterCountries
