@@ -19,6 +19,7 @@ type RequestBody = {
 	intent?: unknown
 	languages?: unknown
 	airtable_id?: unknown
+	email_subscription?: unknown
 }
 
 function isNonEmptyString(value: unknown): value is string {
@@ -61,7 +62,8 @@ export const POST: RequestHandler = async ({ request }) => {
 			country: typeof body.country === 'string' ? body.country : undefined,
 			intent: typeof body.intent === 'string' ? body.intent : undefined,
 			languages,
-			airtable_id: body.airtable_id
+			airtable_id: body.airtable_id,
+			subscribed: typeof body.email_subscription === 'boolean' ? body.email_subscription : undefined
 		})
 		return json(rendered)
 	} catch (error) {

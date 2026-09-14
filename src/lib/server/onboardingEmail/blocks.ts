@@ -53,7 +53,10 @@ export function composeBlocks(
 	bucket: IntentBucket,
 	verificationLink: string,
 	/** True for an email a chapter wrote, which gets the shorter promise. */
-	ownWords = false
+	ownWords = false,
+	/** The Members record's own "Email subscription" checkbox. Undefined when the caller
+	 *  hasn't wired it through, which keeps the old hedged "if you opted in" wording. */
+	subscribed?: boolean
 ): EmailBlock[] {
 	return [
 		...content.greeting,
@@ -63,7 +66,7 @@ export function composeBlocks(
 		...content.body,
 		{
 			type: 'paragraph',
-			text: ownWords ? fixed.newsletterInOwnWords : fixed.newsletter(bucket)
+			text: ownWords ? fixed.newsletterInOwnWords(subscribed) : fixed.newsletter(bucket, subscribed)
 		},
 		...content.signoff
 	]

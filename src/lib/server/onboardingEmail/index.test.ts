@@ -51,6 +51,16 @@ function renderSpeaking(country: string, intent: string, languages: string[]) {
 	})
 }
 
+function renderSubscribed(country: string, intent: string, subscribed: boolean | undefined) {
+	return renderOnboardingEmail({
+		firstName: 'Alex',
+		country,
+		intent,
+		subscribed,
+		airtable_id: RECORD_ID
+	})
+}
+
 describe('renderOnboardingEmail', () => {
 	// The live script falls back to a template when the link is missing, so a regression here
 	// would not strand anyone, but it would silently stop the composed path.
@@ -118,6 +128,27 @@ describe('renderOnboardingEmail', () => {
 		expect((await render('', 'Volunteer')).text).toContain('the PauseAI monthly update')
 	})
 
+	it('states the newsletter promise instead of hedging once subscribed status is known', async () => {
+		const subscribedShared = await renderSubscribed('', 'Volunteer', true)
+		expect(subscribedShared.text).toContain("You'll receive the PauseAI monthly update")
+		expect(subscribedShared.text).not.toContain('If you opted in')
+
+		const notSubscribedShared = await renderSubscribed('', 'Volunteer', false)
+		expect(notSubscribedShared.text).toContain("You didn't opt in to our newsletter")
+		expect(notSubscribedShared.text).not.toContain('If you opted in')
+
+		const subscribedChapter = await renderSubscribed('United Kingdom', 'Volunteer', true)
+		expect(subscribedChapter.text).toContain(
+			"We'll keep you posted about our news and any critical alerts."
+		)
+		expect(subscribedChapter.text).not.toContain('If you opted in')
+
+		// A chapter's own-words line stays hedged when we know they didn't subscribe: it's not
+		// worth spelling out the "no" to someone reading their own chapter's welcome note.
+		const notSubscribedChapter = await renderSubscribed('United Kingdom', 'Volunteer', false)
+		expect(notSubscribedChapter.text).toContain("If you opted in, we'll keep you posted.")
+	})
+
 	it('treats every Spanish-speaking country alike', async () => {
 		for (const country of ['Spain', 'Mexico']) {
 			const volunteer = await render(country, 'Volunteer')
@@ -142,7 +173,9 @@ describe('renderOnboardingEmail', () => {
 			expect(email.subject).toBe('Welcome to PauseAI UK Alex!')
 			expect(email.text).toContain('F0nj2RjLNeB1P1hyoDFsTz')
 		}
-		expect((await render('United Kingdom', 'Volunteer')).text).toContain('book a 10 minute call')
+		expect((await render('United Kingdom', 'Volunteer')).text).toContain(
+			'PS: if you have questions'
+		)
 		expect((await render('United Kingdom', 'None')).text).toContain('PS: if you have questions')
 	})
 

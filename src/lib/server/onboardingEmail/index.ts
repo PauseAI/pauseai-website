@@ -81,7 +81,14 @@ export async function renderOnboardingEmail(
 		? override.content(firstName, chapter)
 		: baseContent(language === 'es' ? 'es' : 'en', bucket, chapter, firstName)
 	const fixed = FIXED_COPY[language]
-	const blocks = composeBlocks(content, fixed, bucket, verificationLink, override !== null)
+	const blocks = composeBlocks(
+		content,
+		fixed,
+		bucket,
+		verificationLink,
+		override !== null,
+		params.subscribed
+	)
 
 	const htmlStyle = params.htmlStyle ?? content.htmlStyle ?? 'rich'
 	const html =

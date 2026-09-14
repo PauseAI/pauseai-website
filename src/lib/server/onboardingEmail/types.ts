@@ -29,6 +29,10 @@ export type OnboardingEmailParams = {
 	intent?: string
 	/** Airtable `Languages` multipleSelects value. */
 	languages?: string[] | string
+	/** Airtable `Email subscription` checkbox, forwarded by the automation as
+	 *  `email_subscription`. Undefined keeps the old hedged "if you opted in" wording rather
+	 *  than guessing. */
+	subscribed?: boolean
 	/** Testing/preview only: force the shared copy's language, skipping the country +
 	 *  languages detection in resolveOnboardingEmailLanguage. The production render
 	 *  endpoint never sets this. */
