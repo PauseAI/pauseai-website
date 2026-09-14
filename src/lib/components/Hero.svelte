@@ -1,7 +1,7 @@
 <script lang="ts">
-	import heroPhoto from '$assets/protests/Home Hero - London June 2025.jpg?enhanced'
-
+	import Image from '$lib/components/images/Image.svelte'
 	import Link from '$lib/components/Link.svelte'
+	import heroPicture from '$assets/images/protests/Home_Hero_-_London_June_2025.jpg?picture'
 
 	// Current campaign. Update this block when the active campaign changes.
 	const campaign = {
@@ -15,12 +15,13 @@
 <div class="hero">
 	<!-- SLOGAN — the movement's permanent identity, over a full-bleed protest photo. -->
 	<section class="slogan">
-		<picture class="slogan-photo">
-			{#each Object.entries(heroPhoto.sources) as [format, srcset]}
-				<source {srcset} sizes="100vw" type={'image/' + format} />
-			{/each}
-			<img src={heroPhoto.img.src} alt="" fetchpriority="high" />
-		</picture>
+		<Image
+			picture={heroPicture}
+			class="slogan-photo"
+			sizes="200vw"
+			loading="eager"
+			fetchpriority="high"
+		/>
 		<div class="slogan-scrim" aria-hidden="true"></div>
 
 		<div class="slogan-inner">
@@ -50,11 +51,7 @@
 
 <style>
 	.hero {
-		position: relative;
-		width: 100vw;
 		flex: 1;
-		left: 50%;
-		transform: translateX(-50%);
 		isolation: isolate;
 		display: flex;
 		flex-direction: column;
@@ -63,56 +60,53 @@
 	/* ---------- SLOGAN ---------- */
 	.slogan {
 		position: relative;
-		/* Slogan + campaign together fill the viewport; the slogan flexes to take
-		   whatever height is left after the (compact) campaign band. The min-height
-		   guarantees enough photo + headline room below the menu band (whose height,
-		   --menu-orange, is set by the layout to match the actual nav height). */
+		/* Menu band + slogan + campaign together fill the viewport; the slogan
+		   flexes to take whatever height is left after the (compact) campaign band.
+		   The min-height guarantees enough photo + headline room. */
 		flex: 1;
-		min-height: calc(var(--menu-orange, 128px) + 240px);
+		min-height: 240px;
 		overflow: hidden;
-		/* Solid orange behind the menu (like the previous hero); the photo starts
-		   on a clean edge just below it. */
-		background-color: #ff9416;
+		/* Solid orange while the photo loads, matching the menu band above. */
+		background-color: var(--hero-orange);
 		color: white;
 	}
 
-	.slogan-photo {
+	.slogan :global(.slogan-photo) {
 		position: absolute;
-		inset: var(--menu-orange, 128px) 0 0 0;
+		inset: 0;
 		pointer-events: none;
 		display: block;
-	}
-	.slogan-photo :global(img) {
 		width: 100%;
 		height: 100%;
 		object-fit: cover;
 		object-position: 50% 35%;
-		display: block;
 	}
 
-	/* Dark scrim over the photo only (starts below the orange menu band).
-	   Heavier on the top-left, where the headline sits; lighter on the right so the
-	   crowd and the PAUSE AI banner stay visible. */
+	/* Dark scrim over the photo. Heavier on the top-left, where the headline sits;
+	   lighter on the right so the crowd and the PAUSE AI banner stay visible. */
 	.slogan-scrim {
 		position: absolute;
-		inset: var(--menu-orange, 128px) 0 0 0;
+		inset: 0;
 		background:
 			linear-gradient(
 				to bottom,
-				rgba(0, 0, 0, 0.62) 0%,
-				rgba(0, 0, 0, 0.12) 55%,
-				rgba(0, 0, 0, 0.32) 100%
+				rgba(var(--black-rgb), 0.62) 0%,
+				rgba(var(--black-rgb), 0.12) 55%,
+				rgba(var(--black-rgb), 0.32) 100%
 			),
-			linear-gradient(to right, rgba(0, 0, 0, 0.62) 0%, rgba(0, 0, 0, 0.18) 60%, transparent 100%);
+			linear-gradient(
+				to right,
+				rgba(var(--black-rgb), 0.62) 0%,
+				rgba(var(--black-rgb), 0.18) 60%,
+				transparent 100%
+			);
 	}
 
 	.slogan-inner {
 		position: relative;
 		z-index: 1;
 		width: 100%;
-		/* Top padding clears the orange menu band so the headline always sits
-		   cleanly on the photo, on any screen height. */
-		padding-block: calc(var(--menu-orange, 128px) + 1.75rem) 3rem;
+		padding-block: 1.75rem 3rem;
 		padding-inline: clamp(1.5rem, 20vw, 18rem);
 	}
 	.slogan-inner h1 {
@@ -124,7 +118,7 @@
 		margin: 0 0 1.5rem;
 		max-width: 16ch;
 		letter-spacing: 0.005em;
-		text-shadow: 0 2px 12px rgba(0, 0, 0, 0.4);
+		text-shadow: 0 2px 12px rgba(var(--black-rgb), 0.4);
 	}
 	.slogan-inner h1 em {
 		color: var(--brand);
@@ -217,11 +211,11 @@
 	.hero-buttons :global(a.btn-on-photo) {
 		background: white;
 		border-color: white;
-		color: #111110;
+		color: var(--grey-800);
 	}
 	.hero-buttons :global(a.btn-on-photo:hover) {
-		background: #f0ebe2;
-		border-color: #f0ebe2;
+		background: var(--cream);
+		border-color: var(--cream);
 	}
 	/* Secondary CTA on the light campaign band — outlined so it stays quiet. */
 	.hero-buttons :global(a.btn-outline) {
@@ -240,10 +234,10 @@
 	/* ---------- RESPONSIVE ---------- */
 	@media (max-width: 850px) {
 		.slogan {
-			min-height: calc(var(--menu-orange, 280px) + 200px);
+			min-height: 200px;
 		}
 		.slogan-inner {
-			padding: calc(var(--menu-orange, 280px) + 1.25rem) 1.5rem 2.25rem;
+			padding: 1.25rem 1.5rem 2.25rem;
 		}
 		.slogan-inner h1 {
 			font-size: clamp(2.25rem, 10vw, 3rem);

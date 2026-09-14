@@ -46,6 +46,6 @@ This page tests various link patterns to ensure proper localization behavior.
 
 ## Edge cases
 
-- [Empty href]()
+- [Empty href](<>)
 - [Just slash](/)
 - [Double slash start](//not-a-locale)

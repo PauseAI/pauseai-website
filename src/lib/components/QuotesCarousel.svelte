@@ -1,22 +1,16 @@
 <script lang="ts">
-	import ASI_Statement from '$assets/quote-profile/asi_statement.jpg?enhanced'
-	import Bengio from '$assets/quote-profile/bengio.jpg?enhanced'
-	import CAIS from '$assets/quote-profile/cais_statement.jpg?enhanced'
-	import Hawking from '$assets/quote-profile/hawking.jpg?enhanced'
-	import Hinton from '$assets/quote-profile/hinton.jpg?enhanced'
-	import Russell from '$assets/quote-profile/russell.jpg?enhanced'
-	import Turing from '$assets/quote-profile/turing.jpg?enhanced'
+	import ASI_Statement from '$assets/quote-profile/asi_statement.jpg?picture'
+	import Bengio from '$assets/quote-profile/bengio.jpg?picture'
+	import CAIS from '$assets/quote-profile/cais_statement.jpg?picture'
+	import Hawking from '$assets/quote-profile/hawking.jpg?picture'
+	import Hinton from '$assets/quote-profile/hinton.jpg?picture'
+	import Russell from '$assets/quote-profile/russell.jpg?picture'
+	import Turing from '$assets/quote-profile/turing.jpg?picture'
 	import Link from '$lib/components/Link.svelte'
 	import * as m from '$lib/paraglide/messages'
 	import type { CarouselQuote } from '$lib/types'
 	import '@glidejs/glide/dist/css/glide.core.css'
-	import Glide, {
-		Autoplay,
-		Controls,
-		Images,
-		Keyboard,
-		Swipe
-	} from '@glidejs/glide/dist/glide.modular.esm'
+	import type Glide from '@glidejs/glide'
 	import ArrowLeft from '@lucide/svelte/icons/arrow-left'
 	import ArrowRight from '@lucide/svelte/icons/arrow-right'
 	import { onMount } from 'svelte'
@@ -78,7 +72,16 @@
 
 	const totalSlides = quotes.length
 
-	onMount(() => {
+	onMount(async () => {
+		const {
+			default: Glide,
+			Autoplay,
+			Controls,
+			Images,
+			Keyboard,
+			Swipe
+		} = await import('@glidejs/glide/dist/glide.modular.esm')
+
 		glide = new Glide('.glide', {
 			autoplay: AUTOPLAY_INTERVAL
 		})

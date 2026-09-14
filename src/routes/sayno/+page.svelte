@@ -17,9 +17,13 @@
 		cloudinaryConfig,
 		returningUidMessage
 	} from './selfieStore'
-	import Image from '$lib/components/Image.svelte'
 	import { detectAndStoreCollagenUid, hasCollagenUid } from '$lib/collagen'
-	import { env } from '$env/dynamic/public'
+	import { HERO_ORANGE } from '$lib/colors'
+	// Static env: dynamic public env in client code blocks prerendered pages'
+	// hydration on a runtime /_app/env.js fetch (see hooks.client.ts).
+	import * as publicEnv from '$env/static/public'
+
+	const env = publicEnv as Record<string, string | undefined>
 
 	// Page metadata
 	const title = 'Stop Superintelligence'
@@ -128,15 +132,15 @@
 						palette: {
 							window: '#FFFFFF',
 							windowBorder: '#E0E0E0',
-							tabIcon: '#ff9416', // PauseAI orange
+							tabIcon: HERO_ORANGE, // PauseAI orange
 							menuIcons: '#5A616A',
 							textDark: '#000000',
 							textLight: '#FFFFFF',
-							link: '#ff9416', // PauseAI orange
-							action: '#ff9416', // PauseAI orange
+							link: HERO_ORANGE, // PauseAI orange
+							action: HERO_ORANGE, // PauseAI orange
 							inactiveTabIcon: '#90A0B3',
 							error: '#F44235',
-							inProgress: '#ff9416', // PauseAI orange
+							inProgress: HERO_ORANGE, // PauseAI orange
 							complete: '#20B832',
 							sourceBg: '#FFF4E6' // Light orange tint
 						},
@@ -257,7 +261,7 @@
 				measures. Your selfie adds to the growing collage of concerned citizens worldwide.
 			</p>
 			<Link href="https://s3.amazonaws.com/pauseai-collagen/sayno/latest/4096.jpg" target="_blank">
-				<Image
+				<img
 					src="https://s3.amazonaws.com/pauseai-collagen/sayno/latest/400.jpg"
 					alt="Collage of hundreds of people standing up to superintelligent AI development"
 					class="collage-thumbnail"

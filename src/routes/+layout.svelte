@@ -11,10 +11,11 @@
 	import Toc from '$lib/components/Toc.svelte'
 	import { searchOpen } from '$lib/stores/searchModal'
 	import { deLocalizeHref } from '$lib/paraglide/runtime'
-	import '@fontsource/roboto-slab/300.css'
+	import type { BannerRule } from '$lib/types'
+	import '@fontsource/roboto-slab/400.css'
 	import '@fontsource/roboto-slab/500.css'
 	import '@fontsource/roboto-slab/700.css'
-	import robotoSlabLatin300 from '@fontsource/roboto-slab/files/roboto-slab-latin-300-normal.woff2'
+	import robotoSlabLatin400 from '@fontsource/roboto-slab/files/roboto-slab-latin-400-normal.woff2'
 	import '@fontsource/saira-condensed/700.css'
 	import sairaCondensedLatin700 from '@fontsource/saira-condensed/files/saira-condensed-latin-700-normal.woff2'
 	import { ProgressBar } from '@prgm/sveltekit-progress-bar'
@@ -29,6 +30,7 @@
 	import bannerSelection from './banner-selection.js?raw'
 	import themeSelection from './theme-selection.js?raw'
 	import hydrationAwareClick from './hydration-aware-click.js?raw'
+	import { inDateRange } from './inDateRange'
 	import type { PageData } from './$types'
 
 	interface Props {
@@ -38,47 +40,43 @@
 
 	let { data, children }: Props = $props()
 
+	const mainBannerRules: BannerRule[] = [
+		{
+			id: 'gb-feb28-protest',
+			countries: ['GB'],
+			dateRange: [null, '2025-02-28']
+		},
+		{
+			id: 'us-state-sovereignty',
+			countries: ['US'],
+			dateRange: [null, '2025-02-28']
+		},
+		{
+			id: 'holiday-littlehelpers',
+			countries: null,
+			dateRange: [null, '2024-12-31']
+		},
+		{
+			id: 'de-webinar-luisa-neubauer',
+			countries: ['DE'],
+			dateRange: [null, '2026-08-25']
+		},
+		{
+			id: 'pausecon-london-2026',
+			countries: null,
+			dateRange: [null, '2026-08-21']
+		}
+	]
+	const campaignBannerRules: BannerRule[] = []
+
 	let eventFound: boolean = $state(false)
 	let geoForNearbyEvent: GeoApiResponse | null = $state(null)
 	let hero = $derived(deLocalizeHref(page.url.pathname) === '/')
 	let embed = $derived(page.route.id?.startsWith('/embed/') ?? false)
 
-	// Homepage hero: size the orange band behind the menu so the photo starts on a
-	// clean edge just below it — one row on desktop, wrapped rows on mobile. We
-	// measure the actual menu content (logo + links) and leave equal orange above
-	// and below it, so the menu is perfectly vertically centred in the band.
-	let heroSection: HTMLDivElement | undefined = $state()
-	$effect(() => {
-		const el = heroSection
-		if (!el) return
-		const navs = Array.from(el.querySelectorAll('nav')) as HTMLElement[]
-		if (!navs.length) return
-		const update = () => {
-			const nav = navs.find((n) => n.offsetHeight > 0)
-			if (!nav) return
-			const navTop = nav.getBoundingClientRect().top
-			let top = Infinity
-			let bottom = -Infinity
-			for (const child of Array.from(nav.children) as HTMLElement[]) {
-				const r = child.getBoundingClientRect()
-				if (r.height === 0) continue
-				top = Math.min(top, r.top)
-				bottom = Math.max(bottom, r.bottom)
-			}
-			if (!Number.isFinite(top)) return
-			const topGap = top - navTop
-			// band = orange-above + content + orange-below, with both gaps == topGap
-			const band = 2 * topGap + (bottom - top)
-			el.style.setProperty('--menu-orange', `${Math.round(band)}px`)
-		}
-		update()
-		const ro = new ResizeObserver(update)
-		navs.forEach((n) => ro.observe(n))
-		return () => ro.disconnect()
-	})
-
 	onMount(async () => {
 		document.documentElement.removeAttribute('data-waiting')
+		document.documentElement.setAttribute('data-hydrated', 'true')
 
 		const searchString = window.location.search
 		const response = await fetch('/api/geo' + searchString)
@@ -127,32 +125,14 @@
 </script>
 
 <svelte:head>
-	<script>
-		var mainBannerRules = [
-			{
-				id: 'gb-feb28-protest',
-				countries: ['GB'],
-				dateRange: [null, '2025-02-28']
-			},
-			{
-				id: 'us-state-sovereignty',
-				countries: ['US'],
-				dateRange: [null, '2025-02-28']
-			},
-			{
-				id: 'holiday-littlehelpers',
-				countries: null,
-				dateRange: [null, '2024-12-31']
-			}
-		]
-
-		var campaignBannerRules = [
-			{
-				id: 'brussels-ep-protest-2026',
-				dateRange: [null, '2026-02-23']
-			}
-		]
-	</script>
+	<!-- eslint-disable-next-line svelte/no-unused-svelte-ignore -- doesn't warn at compile time -->
+	<!-- svelte-ignore hydration_html_changed -- the stringified function looks different on client and server -->
+	<!-- eslint-disable-next-line svelte/no-at-html-tags -- not vulnerable against XSS -->
+	{@html `<${'script'}>${sanitizeScript(
+		`var mainBannerRules = ${JSON.stringify(mainBannerRules)}
+		var campaignBannerRules = ${JSON.stringify(campaignBannerRules)}
+		var inDateRange = ${inDateRange.toString()}`
+	)}</script>`}
 
 	<!-- eslint-disable-next-line svelte/no-at-html-tags not vulnerable against XSS -->
 	{@html `<${'script'}>${sanitizeScript(themeSelection)}</script>`}
@@ -164,7 +144,7 @@
 	{@html `<${'script'}>${sanitizeScript(bannerSelection)}</script>`}
 </svelte:head>
 
-<PreloadFonts urls={[robotoSlabLatin300, sairaCondensedLatin700]} />
+<PreloadFonts urls={[robotoSlabLatin400, sairaCondensedLatin700]} />
 
 <h2 style="width: 0; height: 0; margin: 0; padding: 0; visibility: hidden;" data-pagefind-ignore>
 	Top
@@ -184,36 +164,49 @@
 		{/if}
 
 		<!-- All banners rendered, hidden by default. Blocking script reveals the active main/campaign banner. -->
-		<Banner contrast={hero} id="gb-feb28-protest">
+		<Banner contrast={hero} id="gb-feb28-protest" rules={mainBannerRules}>
 			<b
 				>PauseAI's largest ever protest will be on Saturday February 28th in London. <Link
 					href="https://luma.com/o0p4htmk">Sign up now!</Link
 				></b
 			>
 		</Banner>
-		<Banner contrast={hero} id="us-state-sovereignty">
+		<Banner contrast={hero} id="us-state-sovereignty" rules={mainBannerRules}>
 			<b
 				>HELP US PROTECT STATE SOVEREIGNTY ON AI REGULATION | <Link
 					href="https://mstr.app/b09fa92b-1899-43a0-9d95-99cd99c9dfb2">ACT NOW »</Link
 				></b
 			>
 		</Banner>
-		<Banner contrast={hero} id="holiday-littlehelpers" href="/littlehelpers">
+		<Banner
+			contrast={hero}
+			id="holiday-littlehelpers"
+			href="/littlehelpers"
+			rules={mainBannerRules}
+		>
 			<strong>🎄 Holiday Matching Campaign!</strong> Help fund volunteer stipends for PauseAI
 			advocates. <Link href="/littlehelpers">Join the Little Helpers campaign →</Link>
 		</Banner>
 
 		<NearbyEvent contrast={hero} bind:eventFound geo={geoForNearbyEvent} />
 
-		<Banner type="campaign" href="/brussels-ep-protest-2026" id="brussels-ep-protest-2026">
-			<strong>Brussels, Feb 23</strong> - Join us outside the European Parliament to call for a global
-			treaty to pause frontier AI development.
+		<Banner contrast={hero} id="de-webinar-luisa-neubauer" rules={mainBannerRules}>
+			<strong>Bedroht KI unsere Zukunft?</strong> PauseAI-Webinar mit Luisa Neubauer am 25. August,
+			18:00 Uhr.
+			<strong><Link href="https://luma.com/b8ht854p">Jetzt anmelden!</Link></strong>
+		</Banner>
+
+		<Banner contrast={hero} id="pausecon-london-2026" rules={mainBannerRules}>
+			<strong>PauseCon London 2026</strong>: Apply now to join our September organising conference.
+			<strong><Link href="https://luma.com/4be2eqz9">Apply here!</Link></strong>
 		</Banner>
 
 		{#if hero}
-			<div class="hero-section" bind:this={heroSection}>
+			<div class="hero-section">
+				<div class="menu-band">
+					<Header inverted />
+				</div>
 				<Hero />
-				<Header inverted />
 			</div>
 		{/if}
 	</div>
@@ -304,29 +297,29 @@
 		flex-direction: column;
 	}
 
-	.hero-section {
+	/* Orange band behind the menu. The nav sits in normal document flow, so the
+	   band is exactly as tall as the menu content. */
+	.menu-band {
+		background-color: var(--hero-orange);
+		/* Paint above the .hero sibling so the language-switcher dropdown,
+		   which opens downward past the band, isn't covered by it. */
 		position: relative;
-		/* SSR / pre-hydration fallback; refined to the exact nav height by JS. */
-		--menu-orange: 128px;
-	}
-
-	@media (max-width: 600px) {
-		.hero-section {
-			--menu-orange: 280px;
-		}
-	}
-
-	.hero-section :global(nav) {
-		position: absolute;
-		top: 0;
-		left: 0;
-		right: 0;
-		width: min(var(--page-width), 100% - 2 * var(--page-gutter));
-		margin-inline: auto;
 		z-index: 1;
-		/* Tighter, balanced vertical padding behind the menu (was up to 3rem,
-		   which left too much orange above the links). */
+	}
+
+	.menu-band :global(nav) {
+		width: min(var(--header-width), 100% - 2 * var(--page-gutter));
+		margin-inline: auto;
+		/* Tighter vertical padding than the component's responsive default. */
 		--vspace: 1.85rem;
+	}
+
+	/* The header on non-hero pages sits inside .layout, whose max-inline-size is
+	   the (narrower) content width. Let it use the wider header width so all
+	   top-level nav items fit on one row beside the logo. */
+	.layout > :global(.wide-navbar) {
+		width: min(var(--header-width), 100dvw - 2 * var(--page-gutter));
+		justify-self: center;
 	}
 
 	.layout {

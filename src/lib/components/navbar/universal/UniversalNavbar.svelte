@@ -60,7 +60,6 @@
 
 	.inverted-header {
 		color: white;
-		z-index: 1;
 	}
 
 	nav {
@@ -69,12 +68,9 @@
 		align-items: center;
 		justify-content: center;
 		flex-wrap: wrap;
+		row-gap: 0.25rem;
 		container-type: inline-size;
 		padding: var(--vspace) 0;
-	}
-
-	nav > * {
-		margin-bottom: 0.25rem;
 	}
 
 	.logo-container {
@@ -120,5 +116,43 @@
 		text-transform: uppercase;
 		flex-wrap: wrap;
 		justify-content: center;
+		align-items: center;
+	}
+
+	/* The "Get updates" nav item (WideNavbar) is a bare link, not a Navlink, so it
+	   needs its own colour/spacing here where .nav-links is in scope: matches the
+	   .navlink rhythm and overrides the global `a` colour. */
+	.nav-links :global(.get-updates) {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.35rem;
+		font-family: var(--font-heading);
+		font-weight: 700;
+		font-size: 1.1rem;
+		color: var(--text);
+		text-decoration: none;
+		white-space: nowrap;
+		padding: 0 0.5rem;
+		margin-left: 0.5rem;
+		margin-right: -0.5rem;
+	}
+
+	.nav-links :global(.get-updates.inverted) {
+		color: white;
+	}
+
+	.nav-links :global(.get-updates:hover) {
+		color: var(--brand);
+		text-decoration: underline;
+	}
+
+	/* On the hero's orange band the brand-coloured hover would be invisible.
+	   Matches .navlink.inverted:hover. */
+	.nav-links :global(.get-updates.inverted:hover) {
+		color: black;
+	}
+
+	.nav-links :global(.get-updates.active) {
+		color: var(--brand-subtle);
 	}
 </style>

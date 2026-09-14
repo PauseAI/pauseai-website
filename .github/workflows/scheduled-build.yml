@@ -8,6 +8,8 @@ on:
 #   workflow_dispatch:
 #     # Allow manual triggering
 
+permissions: {}
+
 jobs:
   rebuild:
     name: Trigger Netlify Build

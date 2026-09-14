@@ -1,7 +1,7 @@
 import type { StrictPost } from '$lib/types'
 import adjacentCommunitiesJson from './adjacent-communities.json'
 import pauseAICommunitiesJson from './pauseai-communities.json'
-import nationalChaptersJson from './national-chapters.json'
+import nationalChaptersJson from '$lib/data/national-chapters.json'
 
 export type CommunitiesConfiguration = {
 	communities: RawCommunity[]
@@ -62,13 +62,11 @@ const nationalChapters: Community[] = (
 }))
 
 for (const community of [...adjacentCommunities, ...pauseAICommunities, ...nationalChapters]) {
-	if (
-		!(
-			community.link.startsWith('http') ||
-			community.link.startsWith('mailto') ||
-			community.link in LINK_PLACEHOLDERS
-		)
-	) {
+	if (!(
+		community.link.startsWith('http') ||
+		community.link.startsWith('mailto') ||
+		community.link in LINK_PLACEHOLDERS
+	)) {
 		throw Error('Invalid link for community: ' + community.name)
 	}
 }

@@ -1,6 +1,10 @@
 import { writable, get } from 'svelte/store'
 import { dev } from '$app/environment'
-import { env } from '$env/dynamic/public'
+// Static env: dynamic public env in client code blocks prerendered pages'
+// hydration on a runtime /_app/env.js fetch (see hooks.client.ts).
+import * as publicEnv from '$env/static/public'
+
+const env = publicEnv as Record<string, string | undefined>
 import toast from 'svelte-french-toast'
 import type { CloudinaryUploadResponse } from '$lib/cloudinary'
 

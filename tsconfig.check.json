@@ -8,7 +8,7 @@
 		"prettier.config.js",
 		"stylelint.config.js",
 		"svelte.config.js",
-		"eslint/**/*.js",
+		"plugins/**/*.js",
 		"scripts/**/*.js",
 		"scripts/**/*.cjs",
 		"scripts/**/*.ts",

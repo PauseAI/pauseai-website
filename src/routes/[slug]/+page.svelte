@@ -1,8 +1,8 @@
 <script lang="ts">
-	import Image from '$lib/components/Image.svelte'
+	import Image from '$lib/components/images/Image.svelte'
 	import Link from '$lib/components/Link.svelte'
 	import PostMeta from '$lib/components/PostMeta.svelte'
-	import { getPostMetaImageUrl } from '$lib/images.js'
+	import { setPostPictures } from '$lib/post-pictures-context.svelte'
 	import type { PageData } from './$types'
 
 	interface Props {
@@ -14,14 +14,21 @@
 
 	let {
 		title,
+		metaTitle,
 		date,
 		description,
 		image,
 		author,
-		showImage = true
+		showImage = true,
+		showTitle = true
 	} = $derived({ title: data.slug, ...data.meta })
 	let parent = $derived(data.slug.split('/').slice(0, -1).join('/'))
-	let metaImageUrl = $derived(getPostMetaImageUrl(image))
+
+	// Expose server-resolved Picture objects to the markdown <img> renderer so
+	// it can use Image directly instead of bundling the glob resolver.
+	// setContext must run during component init (not in $effect) so children
+	// can read it during their own init; data.pictures is set per-navigation.
+	setPostPictures(data.pictures ?? {})
 </script>
 
 <svelte:head>
@@ -30,25 +37,32 @@
 	{/each}
 </svelte:head>
 
-<PostMeta {title} {description} {date} image={metaImageUrl} />
+<PostMeta title={metaTitle ?? title} {description} {date} image={data.metaImageUrl} />
 
 <article>
 	{#if parent}
 		<Link href={`/${parent}`}>View all {parent}</Link>
 	{/if}
-	<hgroup>
-		<h1>{title}</h1>
-		{#if author}
-			<p>{author}</p>
-		{/if}
-		{#if date}
-			<!-- <p>Published at {formatDate(date)}</p> -->
-		{/if}
-	</hgroup>
+	{#if showTitle !== false}
+		<hgroup>
+			<h1>{title}</h1>
+			{#if author}
+				<p>{author}</p>
+			{/if}
+			{#if date}
+				<!-- <p>Published at {formatDate(date)}</p> -->
+			{/if}
+		</hgroup>
+	{/if}
 
 	{#if image && showImage !== false}
 		<div class="banner">
-			<Image src={image} alt={title} />
+			<Image
+				picture={data.banner?.picture ?? null}
+				src={data.banner?.assetUrl ?? image}
+				alt={title}
+				aspectRatio={1200 / 628}
+			/>
 		</div>
 	{/if}
 

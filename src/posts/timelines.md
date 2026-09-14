@@ -7,8 +7,8 @@ description: How long do people expect it will take for AGI or superintelligent
 How long do people expect it will take for AGI or superintelligent AI to be developed?
 
 - [**Metaculus Weak AGI estimate**](https://www.metaculus.com/questions/3479/date-weakly-general-ai-is-publicly-known/): It predicts a 50% chance of a weak AGI being publicly known by **2027**.
-<!-- - **AI Expert Survey** (2023): A 2023 survey that predicts a 50% probability of reaching human-level machine intelligence by the year 2047.
- -->
+  <!-- - **AI Expert Survey** (2023): A 2023 survey that predicts a 50% probability of reaching human-level machine intelligence by the year 2047.
+  -->
 - **Yoshua Bengio** (Turing award winner): [2028 to 2043, 90% confidence interval](https://yoshuabengio.org/2023/08/12/personal-and-psychological-dimensions-of-ai-researchers-confronting-ai-catastrophic-risks/). Also asks himself: "And what if it was, indeed, just a few years? "
 - **Geoffrey Hinton** (Turing award winner): [2028 to 2053](https://twitter.com/geoffreyhinton/status/1653687894534504451?lang=en) (he first thought it would take "at least" till 2070)
   <!--- [**AI 2027**](https://ai-2027.com/research/timelines-forecast): is a scenario based on studies that predicts how a General AI could be achieved around the year 2027. It is written by a researcher who resigned from OpenAI due to the lack of importance they give to safety and who has a good track record of predictions in AI.

@@ -5,7 +5,7 @@ const KEY = 'widget-consent'
 
 const DEFAULT = 'null'
 const initialValue = browser ? (localStorage.getItem(KEY) ?? DEFAULT) : DEFAULT
-const consent = writable<boolean | null>(JSON.parse(initialValue))
+const consent = writable<boolean | null>(JSON.parse(initialValue) as boolean | null)
 
 consent.subscribe((value) => {
 	if (!browser) return

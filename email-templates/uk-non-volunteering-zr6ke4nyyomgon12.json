@@ -1,0 +1,85 @@
+{
+	"data": {
+		"id": "zr6ke4nyyomgon12",
+		"account_id": "0p7kx4xzq1vg9yjr",
+		"builder_id": 1082941,
+		"name": "UK Non-Volunteer Welcome",
+		"description": "",
+		"type": "rt",
+		"filename": "krmcaeDCyr1VQeD4kXwMBbWEWrWNAZCaHpV1JzDa.gz",
+		"deleted_at": null,
+		"created_at": "2026-07-27T05:24:12.000000Z",
+		"updated_at": "2026-07-28T07:47:45.000000Z",
+		"filename_txt": "nSdUUmRPNoLInLDQi4EchcIlRci7lJwQaOA6iDg4.gz",
+		"image_path": "https://storage.googleapis.com/mailersend-screenshots/screenshots/template_zr6ke4nyyomgon12.png",
+		"settings": {
+			"send_defaults": true,
+			"email_subject": "Welcome to PauseAI UK {{first_name}}!",
+			"sender_name": "PauseAI UK",
+			"sender_email": "hello@pauseai.uk",
+			"reply_to_email": "hello@pauseai.uk",
+			"reply_to_name": "PauseAI UK",
+			"tags": [],
+			"test_data": "{}",
+			"test_data_draft": "{}",
+			"auto_generate": true
+		},
+		"preview_url": "https://app.mailersend.com/templates/zr6ke4nyyomgon12/preview",
+		"source_code": "<!DOCTYPE html PUBLIC \"-//W3C//DTD HTML 3.2//EN\">\n<html>\n<head><!--{{head_top}}-->\n\t<!--[if gte mso 9]>\n\t\t<xml>\n\t\t\t<o:OfficeDocumentsettings>\n\t\t\t<o:AllowPNG/>\n\t\t\t<o:PixelsPerInch>96</o:PixelsPerInch>\n\t\t\t</o:OfficeDocumentsettings>\n\t\t</xml>\n\t<![endif]-->\n\t<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\">\n\t<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n\t<meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\">\n\t<meta name=\"format-detection\" content=\"address=no\">\n\t<meta name=\"format-detection\" content=\"telephone=no\">\n\t<meta name=\"format-detection\" content=\"email=no\">\n\t<meta name=\"x-apple-disable-message-reformatting\">\n\t<!--[if !mso]><!-->\n\t<style type=\"text/css\">@import url(\"https://assets.mlcdn.com/fonts.css?version=1785148\");</style>\n\t<!--<![endif]-->\n    <style type=\"text/css\">\n  .ReadMsgBody { width: 100%; }\n  .ExternalClass{ width: 100%; }\n  .ExternalClass * { line-height: 100%; }\n  .ExternalClass, .ExternalClass p, .ExternalClass td, .ExternalClass div, .ExternalClass span, .ExternalClass font { line-height:100%; }\n  body { margin: 0; padding: 0; }\n  body, table, td, p, a, li { -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; }\n  table td { border-collapse: collapse; }\n  table { border-spacing: 0; border-collapse: collapse; }\n  p, a, li, td, blockquote { mso-line-height-rule: exactly; }\n  p, a, li, td, body, table, blockquote { -ms-text-size-adjust: 100%; -webkit-text-size-adjust: 100%; }\n  img, a img { border: 0; outline: none; text-decoration: none; }\n  img { -ms-interpolation-mode: bicubic; }\n  * img[tabindex=\"0\"] + div { display: none !important; }\n  a[href^=tel],a[href^=sms],a[href^=mailto], a[href^=date] { color: inherit; cursor: pointer; text-decoration: none; }\n  a[x-apple-data-detectors]{ color: inherit!important; text-decoration: none!important; font-size: inherit!important; font-family: inherit!important; font-weight: inherit!important; line-height: inherit!important; }\n  #MessageViewBody a { color: inherit; text-decoration: none; font-size: inherit; font-family: inherit; font-weight: inherit; line-height: inherit; }\n  #MessageViewBody { width: 100% !important; }\n  #MessageWebViewDiv { width: 100% !important; }\n\n  .mlMainContent ol ol {\n    list-style-type: lower-alpha;\n  }\n  .mlMainContent ol ol ol {\n    list-style-type: lower-roman;\n  }\n\n  @-moz-document url-prefix() {\n    .bodyText p a, .bodyTitle p a {\n      word-break: break-word;\n    }\n  }\n\n    @media screen {\n      body {\n        font-family: Helvetica, sans-serif;\n      }\n      * {\n        direction: ltr;\n      }\n    }\n\n    @media only screen and (max-width: 640px) {\n      .mlTemplateContainer{\n        padding: 10px 10px 0 10px !important;\n      }\n      /* -- */\n      .mlTemplateAd{\n        padding: 0 10px 0 10px !important;\n      }\n      /* -- */\n      .mlMainContent {\n        width: 100%!important;\n        min-width: 10%!important;\n        margin: 0!important;\n        float: none!important;\n      }\n      /* -- */\n      .mlContentTable{\n        width: 100%!important;\n        min-width: 10%!important;\n        margin: 0!important;\n        float: none!important;\n      }\n      /* -- */\n      .marginBottom{\n        margin-bottom: 15px!important;\n      }\n      /* -- */\n      .mobileHide{\n        display: none!important;\n      }\n      /* -- */\n      body{\n        margin: 0px!important;\n        padding: 0px!important;\n      }\n      /* -- */\n      body, table, td, p, a, li, blockquote{\n        -webkit-text-size-adjust: none!important;\n      }\n      /* -- */\n    }\n  </style>\n<style type=\"text/css\">\n    @media only screen and (max-width: 640px){\n      #imageBlock-18 img {\n        max-width: 234.28571428571428px!important;\n        width: 100%!important;\n      }\n    }\n  </style><style type=\"text/css\">\n  @media (max-width: 680px) {\n    .ml-rte-table h1,\n    .ml-rte-table p {\n      word-break: normal!important;\n    }\n  }\n  @media only screen and (max-width: 640px) {\n    .mlContentButton a{\n      display: block!important;\n      width: auto!important;\n    }\n  }\n</style><!--{{head_bottom}}--></head>\n\n<body style=\"background-color: #ffffff; padding: 0; margin: 0; -webkit-font-smoothing:antialiased; -webkit-text-size-adjust:none;\"><!--{{body_top}}-->\n\n  \n\n  <table role=\"article\" aria-roledescription=\"email\" aria-label=\"\" align=\"center\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" width=\"680\" style=\"width: 680px; min-width: 680px;\" class=\"mlMainContent\" dir=\"ltr\">\n    <tr>\n      <td class=\"mlTemplateContainer\" style=\"padding: 20px 20px 0px 20px;\">\n\n      \n\n  \n\n  \n\n  \n\n  \n\n  \n    \n    \n    \n    \n    \n    \n  \n\n  \n    \n    \n    \n    \n    \n  \n\n  \n    \n    \n    \n    \n  \n\n  \n    \n    \n  \n\n  \n\n    \n    \n    \n    \n    \n    \n    \n    \n    \n    \n  \n\n  \n    \n    \n    \n    \n  \n\n\n\n\n  \n    \n    \n    \n    \n    \n  \n\n  \n    \n    \n    \n  \n\n  \n  \n\n\n\n\n\n\n\n\n\n\n      <table border=\"0\" cellpadding=\"0\" cellspacing=\"\" width=\"100%\" class=\"mlMainContent\">\n        <tr>\n          <td>\n\n            \n  <div class=\"ml-rte-text\">\n    <p style=\"font-family: Helvetica, sans-serif; color: #121212; font-size: 14px; line-height: 125%; margin: 0px 0px 20px 0px;\">Hey {{ first_name }},</p>\n\n  </div>\n\n  <div class=\"ml-rte-text\">\n    <p style=\"font-family: Helvetica, sans-serif; color: #121212; font-size: 14px; line-height: 125%; margin: 0px 0px 20px 0px;\">Welcome to our community! <br><br>Here's how you can get involved in PauseAI UK:<br><br>1. <a href=\"{{verification_link}}\" target=\"_blank\" style=\"color: #1966ff; text-decoration: none;\">Confirm your email address</a> so that we can confirm it’s really you signing up</p>\n\n  </div>\n\n  <div class=\"ml-rte-text\">\n    <p style=\"font-family: Helvetica, sans-serif; color: #121212; font-size: 14px; line-height: 125%; margin: 0px 0px 20px 0px;\">2. Join the <a target=\"_blank\" href=\"https://chat.whatsapp.com/F0nj2RjLNeB1P1hyoDFsTz\" style=\"color: #1966ff; text-decoration: none;\">PauseAI UK WhatsApp community</a> and subscribe to our <a href=\"https://luma.com/pauseai.uk\" target=\"_blank\" style=\"color: #1966ff; text-decoration: none;\">UK events calendar.</a></p>\n\n  </div>\n\n  <div class=\"ml-rte-text\">\n    <p style=\"font-family: Helvetica, sans-serif; color: #121212; font-size: 14px; line-height: 125%; margin: 0px 0px 20px 0px;\">3. If you'd like, <a target=\"_blank\" href=\"https://calendar.app.google/w5t7EgCFwCGKcnAS7\" style=\"color: #1966ff; text-decoration: none;\">book a short call</a> with Joseph, PauseAI UK's director, so he can say hi and introduce you to the community. Looking forward to meeting you,</p>\n\n  </div>\n\n  <div class=\"ml-rte-text\">\n    <p style=\"font-family: Helvetica, sans-serif; color: #121212; font-size: 14px; line-height: 125%; margin: 0px 0px 20px 0px;\"><a target=\"_blank\" href=\"mailto:joseph@pauseai.uk\" style=\"color: #1966ff; text-decoration: none;\">﻿Joseph</a> and <a target=\"_blank\" href=\"mailto:matilda@pauseai.uk\" style=\"color: #1966ff; text-decoration: none;\">Matilda</a>, the PauseAI UK Team</p>\n\n  </div>\n\n  <div class=\"ml-rte-text\">\n    <p style=\"font-family: Helvetica, sans-serif; color: #121212; font-size: 14px; line-height: 125%; margin: 0px 0px 20px 0px;\">PS:  if you have questions, just hit reply.</p>\n\n  </div>\n\n  <div class=\"ml-rte-text\">\n    <p style=\"font-family: Helvetica, sans-serif; color: #121212; font-size: 14px; line-height: 125%; margin: 0px 0px 20px 0px;\"><br></p>\n\n  </div>\n\n  \n\n\n\n\n  \n  \n  \n\n    \n\n  \n  \n  \n  \n  \n  \n  \n  \n\n  \n\n  \n  \n\n  \n\n  <table role=\"presentation\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\" align=\"center\" width=\"100%\" class=\"\">\n    <tr>\n      <td align=\"left\" id=\"imageBlock-18\" class=\"ml-rte-image\" style=\"padding: 0 0 20px 0;\">\n\n        <img src=\"https://bucket.mailersendapp.com/z3m5jgr8emldpyo6/0p7kx4xzq1vg9yjr/images/a1a71c1a-7e50-4631-9823-ccf55d25e5db.png\" width=\"234.28571428571428\" border=\"0\" style=\"display: block;\">\n      </td>\n    </tr>\n  </table>\n  \n\n\n\n\n          </td>\n        </tr>\n      </table>\n\n      <table role=\"presentation\" border=\"0\" cellpadding=\"0\" cellspacing=\"\" width=\"100%\">\n  \n  \n  \n</table>\n\n\n\n\n\n        \n\n      </td>\n    </tr>\n  </table>\n\n<!--{{body_bottom}}--></body>\n</html>\n",
+		"plain_text": "Hey {{ first_name }},\n\nWelcome to our community!\n\nHere's how you can get involved in PauseAI UK:\n\n1. [Confirm your email address]({{verification_link}}) so that we can confirm it’s really you signing up\n\n2. Join the [PauseAI UK WhatsApp community](https://chat.whatsapp.com/F0nj2RjLNeB1P1hyoDFsTz) and subscribe to our [UK events calendar.](https://luma.com/pauseai.uk)\n\n3. If you'd like, [book a short call](https://calendar.app.google/w5t7EgCFwCGKcnAS7) with Joseph, PauseAI UK's director, so he can say hi and introduce you to the community. Looking forward to meeting you,\n\n[﻿Joseph](mailto:joseph@pauseai.uk) and [Matilda](mailto:matilda@pauseai.uk), the PauseAI UK Team\n\nPS: if you have questions, just hit reply.",
+		"draft_source_code": null,
+		"draft_plain_text": null,
+		"published_at": "2026-07-28T07:47:45.000000Z",
+		"drafted_at": null,
+		"split_testing": false,
+		"split_testing_enabled": false,
+		"split_testing_enabled_at": null,
+		"split_main": false,
+		"split_parent_id": "",
+		"template_stats": {
+			"total": 94,
+			"queued": 0,
+			"sent": 0,
+			"rejected": 0,
+			"delivered": 94,
+			"opened": 32,
+			"open_rate": "34",
+			"clicked": 24,
+			"click_rate": "26",
+			"unsubscribed": 0,
+			"unsubscribe_rate": "0",
+			"complained": 0,
+			"complain_rate": "0",
+			"last_email_sent_at": "2026-08-25T16:14:50.000000Z"
+		},
+		"variables": {
+			"variables": [],
+			"personalization": {
+				"first_name": "",
+				"verification_link": ""
+			}
+		},
+		"draft_variables": {
+			"variables": [],
+			"personalization": []
+		},
+		"compile_errors": {
+			"base": null,
+			"draft": null,
+			"subject": null,
+			"base_txt": null,
+			"draft_txt": null,
+			"encoding_error": null,
+			"original_filename": null,
+			"simple_personalization_variables": null
+		},
+		"can": {
+			"manage": true,
+			"createVersion": true,
+			"createSplitTest": false
+		},
+		"split_winner_id": null,
+		"has_survey": false,
+		"origin": "app"
+	}
+}

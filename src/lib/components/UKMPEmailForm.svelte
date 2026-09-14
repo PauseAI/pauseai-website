@@ -3,6 +3,9 @@
 	import { micromark } from 'micromark'
 	import LoadingSpinner from './LoadingSpinner.svelte'
 	import Link from '$lib/components/Link.svelte'
+	import Turnstile from '$lib/components/Turnstile.svelte'
+	import { turnstileSiteKey } from '$lib/turnstile'
+	import { slide } from 'svelte/transition'
 
 	interface Props {
 		mp: {
@@ -20,18 +23,16 @@
 
 	let senderName = $derived(userName)
 	let senderEmail = $state('')
-	let subject = $state(`Request to co-sign letter on AI liability`)
+	let subject = $state(`Request to co-sign letter on frontier AI risks`)
 	let message = $derived(`Dear ${mp.salutation},
 
-Would you be willing to sign this open letter supporting legislation to hold AI companies accountable when their models cause severe harm?
+Would you be willing to sign this open letter supporting legislation to protect British people from the harms of frontier AI?
 
-I’m a resident of ${mp.constituency} and a supporter of **PauseAI**, a civic movement focused on minimising the risks of advanced AI. I am very concerned that AI development is racing ahead without adequate protection for the public.
+I’m a resident of ${mp.constituency} and a supporter of **PauseAI**, a civic movement focused on averting the risks of advanced AI. I am very concerned that AI development is racing ahead without adequate protection for the public.
 
-**Existing UK law does not reliably hold AI developers liable for damage or deaths caused by their models**, even when the danger is predictable, severe and uniquely enabled by the model. To ensure our safety, the incentives of AI developers must be aligned with the public interest.
+**The UK has no specific legal standards for AI.** No regulator oversees frontier AI development. And UK law does not reliably hold developers liable for damage or deaths caused by their models, even when the danger is predictable, preventable and uniquely enabled by AI.
 
-Next steps
- - 30-min call. Let me know what time would work for you.
- - Alternatively, please review the letter and briefing attached and send over any questions or concerns.
+To ensure our safety, I believe that we need frontier AI legislation as soon as possible. Please could we arrange a short meeting to discuss this important matter?
 
 Thank you for your consideration,
 
@@ -44,36 +45,17 @@ ${userPostcode.toUpperCase()}`)
 	let isSubmitting = $state(false)
 	let submitStatus: 'idle' | 'success' | 'error' = $state('idle')
 	let errorMessage = $state('')
+	let confirmingSend = $state(false)
+	let honeypot = $state('')
+	let turnstileToken = $state('')
 
-	let attendingVisit = $state(false)
-	let messageBeforeVisit: string | null = $state(null)
+	// Bumped after each submission to remount the widget: Turnstile tokens are
+	// single-use, so a resubmit with the same token would be rejected.
+	let turnstileNonce = $state(0)
 
-	const ORIGINAL_NEXT_STEPS = `Next steps
- - 30-min call. Let me know what time would work for you.
- - Alternatively, please review the letter and briefing attached and send over any questions or concerns.`
-
-	const VISIT_SENTENCE = `**I will be visiting Parliament on Tuesday June 23rd. Will you meet with me to discuss the letter and your plan for addressing AI risks?**`
-
-	function toggleVisit() {
-		if (attendingVisit) {
-			messageBeforeVisit = message
-			if (message.includes(ORIGINAL_NEXT_STEPS)) {
-				message = message.replace(ORIGINAL_NEXT_STEPS, VISIT_SENTENCE)
-			} else {
-				// User has customised the Next steps section. Insert the visit sentence
-				// before the signature line so we don't trample their edits.
-				const signatureMarker = '\nThank you for your consideration'
-				if (message.includes(signatureMarker)) {
-					message = message.replace(signatureMarker, `\n${VISIT_SENTENCE}\n${signatureMarker}`)
-				} else {
-					message = `${message}\n\n${VISIT_SENTENCE}`
-				}
-			}
-		} else if (messageBeforeVisit !== null) {
-			message = messageBeforeVisit
-			messageBeforeVisit = null
-		}
-	}
+	// Without a configured site key (e.g. local development) there is no widget
+	// to wait for, and the server decides whether to accept the submission.
+	const canSubmit = $derived(!isSubmitting && (!turnstileSiteKey || turnstileToken !== ''))
 
 	let htmlPreview = $derived(micromark(message))
 
@@ -168,10 +150,28 @@ ${userPostcode.toUpperCase()}`)
 		}
 	})
 
+	// First click reveals the confirm/cancel buttons rather than sending,
+	// so people don't fire off an email by accident.
+	function requestSend() {
+		if (!senderEmail.trim()) {
+			errorMessage = 'Please fill in your email address'
+			submitStatus = 'error'
+			return
+		}
+		errorMessage = ''
+		submitStatus = 'idle'
+		confirmingSend = true
+	}
+
+	function cancelSend() {
+		confirmingSend = false
+	}
+
 	async function handleSubmit() {
 		if (!senderEmail.trim()) {
 			errorMessage = 'Please fill in your email address'
 			submitStatus = 'error'
+			confirmingSend = false
 			return
 		}
 
@@ -191,7 +191,8 @@ ${userPostcode.toUpperCase()}`)
 					recipient: mp.email,
 					subject: subject.trim(),
 					message: message.trim(),
-					attendingVisit
+					nickname: honeypot,
+					turnstileToken
 				})
 			})
 
@@ -202,13 +203,19 @@ ${userPostcode.toUpperCase()}`)
 			} else {
 				submitStatus = 'error'
 				errorMessage = result.message || 'Failed to send email'
+				confirmingSend = false
 			}
 		} catch (error) {
 			submitStatus = 'error'
 			errorMessage = 'Network error - please try again'
+			confirmingSend = false
 			console.error('Email submission error:', error)
 		} finally {
 			isSubmitting = false
+
+			// The token has now been spent (or rejected) either way — get a fresh one.
+			turnstileToken = ''
+			turnstileNonce += 1
 		}
 	}
 </script>
@@ -225,6 +232,18 @@ ${userPostcode.toUpperCase()}`)
 				onsubmit?.(e)
 			}}
 		>
+			<div class="form-group honey">
+				<label for="mp-nickname">Nickname</label>
+				<input
+					type="text"
+					id="mp-nickname"
+					name="nickname"
+					tabindex="-1"
+					autocomplete="off"
+					bind:value={honeypot}
+				/>
+			</div>
+
 			<div class="form-group">
 				<label for="sender-email">Your email</label>
 				<input
@@ -246,25 +265,7 @@ ${userPostcode.toUpperCase()}`)
 					placeholder="Email subject"
 					oninput={autoResizeSubject}
 					rows="1"
-					class="subject-textarea"
-				></textarea>
-			</div>
-
-			<div class="form-group visit-group">
-				<label class="visit-label" class:checked={attendingVisit}>
-					<input
-						type="checkbox"
-						class="visit-tickbox"
-						bind:checked={attendingVisit}
-						onchange={toggleVisit}
-					/>
-					<span class="visit-text">
-						I will attend PauseAI UK's
-						<Link href="https://luma.com/q2wu0y59?utm_source=uk-email-builder" target="_blank"
-							>visit to Parliament on 23<sup>rd</sup> June</Link
-						> to speak with my MP in person.
-					</span>
-				</label>
+					class="subject-textarea"></textarea>
 			</div>
 
 			<div class="form-group">
@@ -303,8 +304,7 @@ ${userPostcode.toUpperCase()}`)
 						required
 						placeholder="Your message to the MP"
 						oninput={autoResize}
-						rows="1"
-					></textarea>
+						rows="1"></textarea>
 				</div>
 
 				<div class="preview-section">
@@ -319,33 +319,33 @@ ${userPostcode.toUpperCase()}`)
 					<h4>Attachments:</h4>
 					<div class="pdf-attachments">
 						<Link
-							href="/pdfs/AI_Liability_Open_Letter.pdf#no-localize"
+							href="/pdfs/Frontier_AI_Open_Letter.pdf#no-localize"
 							target="_blank"
 							class="pdf-thumbnail"
 						>
 							<img
-								src="/pdfs/AI_Liability_Open_Letter.jpg"
-								alt="AI Liability Open Letter thumbnail"
+								src="/pdfs/Frontier_AI_Open_Letter.jpg"
+								alt="Frontier AI Open Letter thumbnail"
 								class="pdf-thumbnail-image"
 							/>
 							<div class="pdf-info">
-								<span class="pdf-title">AI Liability</span>
-								<span class="pdf-subtitle">Open Letter</span>
+								<span class="pdf-title">Open Letter</span>
+								<span class="pdf-subtitle">To the Prime Minister</span>
 							</div>
 						</Link>
 						<Link
-							href="/pdfs/AI_Liability_Policy_Briefing.pdf#no-localize"
+							href="/pdfs/Frontier_AI_Risks_Policy_Briefing.pdf#no-localize"
 							target="_blank"
 							class="pdf-thumbnail"
 						>
 							<img
-								src="/pdfs/AI_Liability_Policy_Briefing.jpg"
-								alt="AI Liability Policy Briefing thumbnail"
+								src="/pdfs/Frontier_AI_Risks_Policy_Briefing.jpg"
+								alt="Frontier AI Risks Policy Briefing thumbnail"
 								class="pdf-thumbnail-image"
 							/>
 							<div class="pdf-info">
-								<span class="pdf-title">AI Liability</span>
-								<span class="pdf-subtitle">Policy Briefing</span>
+								<span class="pdf-title">Policy Briefing</span>
+								<span class="pdf-subtitle">On frontier AI risks</span>
 							</div>
 						</Link>
 					</div>
@@ -358,14 +358,46 @@ ${userPostcode.toUpperCase()}`)
 				</div>
 			{/if}
 
-			<button type="button" disabled={isSubmitting} class="submit-button" onclick={handleSubmit}>
-				{#if isSubmitting}
-					Sending
-					<LoadingSpinner size="small" color="currentColor" />
-				{:else}
+			{#if confirmingSend}
+				<div class="confirm-box" in:slide={{ duration: 250 }}>
+					<p class="confirm-prompt">Send this email to <strong>{mp.name}</strong>?</p>
+					{#key turnstileNonce}
+						<Turnstile bind:token={turnstileToken} />
+					{/key}
+					<div class="confirm-actions">
+						<button
+							type="button"
+							class="cancel-button"
+							onclick={cancelSend}
+							disabled={isSubmitting}
+						>
+							Cancel
+						</button>
+						<button
+							type="button"
+							class="submit-button confirm-button"
+							disabled={!canSubmit}
+							onclick={handleSubmit}
+						>
+							{#if isSubmitting}
+								Sending
+								<LoadingSpinner size="small" color="currentColor" />
+							{:else}
+								Confirm &amp; Send
+							{/if}
+						</button>
+					</div>
+				</div>
+			{:else}
+				<button
+					type="button"
+					class="submit-button send-button"
+					onclick={requestSend}
+					in:slide={{ duration: 250 }}
+				>
 					Send Email
-				{/if}
-			</button>
+				</button>
+			{/if}
 		</form>
 	{/if}
 </div>
@@ -390,6 +422,17 @@ ${userPostcode.toUpperCase()}`)
 		padding-top: 1.5rem;
 	}
 
+	.honey {
+		display: none;
+		opacity: 0;
+		position: absolute;
+		left: -9999px;
+		height: 0;
+		width: 0;
+		overflow: hidden;
+		z-index: -1;
+	}
+
 	label {
 		font-weight: 500;
 		color: var(--text);
@@ -411,14 +454,13 @@ ${userPostcode.toUpperCase()}`)
 	input::placeholder,
 	textarea::placeholder {
 		color: var(--text-muted);
-		opacity: 0.2;
 	}
 
 	input:focus,
 	textarea:focus {
 		outline: none;
 		border-color: var(--brand);
-		box-shadow: 0 0 0 2px rgba(0, 122, 204, 0.1);
+		box-shadow: 0 0 0 2px rgba(var(--focus-glow-rgb), 0.1);
 	}
 
 	textarea {
@@ -464,76 +506,6 @@ ${userPostcode.toUpperCase()}`)
 		word-wrap: break-word;
 	}
 
-	.visit-group {
-		padding-top: 1.5rem;
-	}
-
-	.visit-label {
-		display: flex;
-		align-items: flex-start;
-		gap: 0.7rem;
-		cursor: pointer;
-		padding: 0.85rem 1rem;
-		background: var(--bg);
-		border: 1px solid color-mix(in srgb, var(--brand) 28%, transparent);
-		border-radius: 8px;
-		font-weight: 400;
-		font-size: 0.95rem;
-		line-height: 1.45;
-		transition:
-			border-color 0.15s ease,
-			background-color 0.15s ease;
-	}
-
-	.visit-label:hover {
-		border-color: var(--brand);
-	}
-
-	.visit-label.checked {
-		border-color: var(--brand);
-		background: color-mix(in srgb, var(--brand) 10%, var(--bg));
-	}
-
-	.visit-tickbox {
-		appearance: none;
-		width: 1.15rem;
-		height: 1.15rem;
-		padding: 0;
-		margin: 0;
-		margin-top: 0.18rem;
-		flex-shrink: 0;
-		border: 2px solid var(--brand);
-		border-radius: 4px;
-		background: var(--bg);
-		cursor: pointer;
-		display: grid;
-		place-content: center;
-	}
-
-	.visit-tickbox::before {
-		content: '';
-		width: 0.65rem;
-		height: 0.65rem;
-		transform: scale(0);
-		transition: transform 0.1s ease-in-out;
-		background: var(--brand);
-		clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%);
-	}
-
-	.visit-tickbox:checked::before {
-		transform: scale(1);
-	}
-
-	.visit-tickbox:focus-visible {
-		outline: 2px solid var(--brand);
-		outline-offset: 2px;
-	}
-
-	.visit-text {
-		flex: 1;
-		min-width: 0;
-	}
-
 	.email-tips {
 		background: var(--bg-subtle);
 		border: 1px solid var(--border);
@@ -546,7 +518,7 @@ ${userPostcode.toUpperCase()}`)
 	.email-tips ul {
 		margin: 0;
 		padding-left: 1.5rem;
-		color: var(--text-muted);
+		color: var(--text-subtle);
 		list-style-type: disc;
 	}
 
@@ -653,7 +625,7 @@ ${userPostcode.toUpperCase()}`)
 		border-color: var(--brand);
 		background: var(--bg-subtle);
 		transform: translateY(-2px);
-		box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+		box-shadow: 0 4px 12px rgba(var(--black-rgb), 0.1);
 	}
 
 	* :global(.pdf-thumbnail img) {
@@ -661,7 +633,7 @@ ${userPostcode.toUpperCase()}`)
 		height: auto;
 		border-radius: 4px;
 		margin-bottom: 0.5rem;
-		box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+		box-shadow: 0 2px 8px rgba(var(--black-rgb), 0.1);
 	}
 
 	.pdf-info {
@@ -679,7 +651,7 @@ ${userPostcode.toUpperCase()}`)
 	.pdf-subtitle {
 		display: block;
 		font-size: 0.7rem;
-		color: var(--text-muted);
+		color: var(--text-subtle);
 	}
 
 	.submit-button {
@@ -708,22 +680,91 @@ ${userPostcode.toUpperCase()}`)
 		cursor: not-allowed;
 	}
 
+	.confirm-box {
+		width: 100%;
+		margin-top: 1rem;
+		margin-bottom: 1rem;
+		padding: 1rem;
+		box-sizing: border-box;
+		border: 1px solid var(--brand);
+		border-radius: 8px;
+		background: var(--bg);
+		display: flex;
+		flex-direction: column;
+		gap: 0.75rem;
+	}
+
+	.confirm-prompt {
+		margin: 0;
+		text-align: center;
+		font-size: 0.95rem;
+		color: var(--text);
+	}
+
+	.confirm-actions {
+		display: flex;
+		align-items: stretch;
+		gap: 0.75rem;
+	}
+
+	.confirm-box .submit-button {
+		margin-top: 0;
+		margin-bottom: 0;
+	}
+
+	.confirm-button {
+		flex: 1;
+	}
+
+	/* While sending, keep the brand colour + full opacity (just show the spinner)
+	   instead of fading to the grey disabled style, which read as the button
+	   "fading out" right before the success swap. */
+	.confirm-button:disabled {
+		background: var(--brand);
+		opacity: 1;
+		cursor: wait;
+	}
+
+	.cancel-button {
+		flex: 1;
+		background: transparent;
+		color: var(--text);
+		border: 1px solid var(--border);
+		padding: 0.75rem 1.5rem;
+		border-radius: 4px;
+		font-size: 1rem;
+		cursor: pointer;
+		transition:
+			background-color 0.2s,
+			border-color 0.2s;
+	}
+
+	.cancel-button:hover:not(:disabled) {
+		background: var(--bg-subtle);
+		border-color: var(--brand);
+	}
+
+	.cancel-button:disabled {
+		cursor: not-allowed;
+		opacity: 0.6;
+	}
+
 	.success-message {
-		background: var(--success-bg, #d4edda);
-		color: var(--success-text, #155724);
+		background: var(--success-bg);
+		color: var(--success-text);
 		padding: 1rem;
 		border-radius: 4px;
-		border: 1px solid var(--success-border, #c3e6cb);
+		border: 1px solid var(--success-border);
 		margin-top: 1rem;
 		margin-bottom: 1rem;
 	}
 
 	.error-message {
-		background: var(--error-bg, #f8d7da);
-		color: var(--error-text, #721c24);
+		background: var(--error-bg);
+		color: var(--error-text);
 		padding: 0.75rem;
 		border-radius: 4px;
-		border: 1px solid var(--error-border, #f5c6cb);
+		border: 1px solid var(--error-border);
 		margin-top: 1rem;
 	}
 </style>

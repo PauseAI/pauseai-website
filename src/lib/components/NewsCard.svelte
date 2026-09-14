@@ -1,14 +1,18 @@
 <script lang="ts">
-	import Image from '$lib/components/Image.svelte'
+	import Image from '$lib/components/images/Image.svelte'
 	import LinkWithoutIcon from '$lib/components/LinkWithoutIcon.svelte'
 	import type { NewsItem } from '$lib/types'
 	import { formatDate } from '$lib/utils'
-	import NetlifyImage from './NetlifyImage.svelte'
+	import NetlifyImage from './images/NetlifyImage.svelte'
 	import Skeleton from './Skeleton.svelte'
 
 	interface Props {
 		item?: NewsItem
 		loading?: boolean
+		/**
+		 * Passed by the parent layout so responsive images download a variant close to the
+		 * card's rendered width instead of the image component's broad default.
+		 */
 		imageSizes?: string
 		id?: string
 	}
@@ -24,7 +28,7 @@
 	})
 </script>
 
-<div>
+<div class="news-card-wrapper">
 	<LinkWithoutIcon
 		href={item?.href}
 		class="news-card"
@@ -45,7 +49,14 @@
 							onFailed={() => (hasImageError = true)}
 						/>
 					{:else}
-						<Image src={item.image} alt={item.title} class="image" sizes={imageSizes} />
+						<Image
+							picture={item.picture}
+							src={item.image ?? ''}
+							alt={item.title}
+							class="image"
+							sizes={imageSizes}
+							aspectRatio={16 / 10}
+						/>
 					{/if}
 				{:else}
 					<div class="image-placeholder"></div>
@@ -80,6 +91,10 @@
 </div>
 
 <style>
+	.news-card-wrapper {
+		display: flex;
+	}
+
 	* :global(.news-card) {
 		display: flex;
 		flex-direction: column;
@@ -91,11 +106,12 @@
 		transition:
 			transform 0.2s ease,
 			box-shadow 0.2s ease;
+		width: 100%;
 	}
 
 	* :global(.news-card:hover) {
 		transform: translateY(-3px);
-		box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
+		box-shadow: 0 6px 20px rgba(var(--black-rgb), 0.12);
 		color: var(--text);
 	}
 
@@ -120,7 +136,7 @@
 	.image-placeholder {
 		width: 100%;
 		height: 100%;
-		background: linear-gradient(135deg, var(--brand) 0%, hsl(32, 80%, 65%) 100%);
+		background: linear-gradient(135deg, var(--brand) 0%, var(--brand-gradient-light) 100%);
 	}
 
 	.card-content {
@@ -129,6 +145,7 @@
 		display: flex;
 		flex-direction: column;
 		gap: 0.3rem;
+		flex: 1 1 auto;
 	}
 
 	.card-title {
@@ -152,7 +169,7 @@
 
 	.card-subtitle {
 		font-size: 0.85rem;
-		font-weight: 300;
+		font-weight: 400;
 		line-height: 1.3;
 		margin: 0;
 		color: var(--text);
@@ -166,8 +183,9 @@
 
 	.card-date {
 		font-size: 0.8rem;
-		font-weight: 300;
+		font-weight: 400;
 		margin: 0;
+		margin-top: auto;
 		color: var(--text);
 		opacity: 0.6;
 	}

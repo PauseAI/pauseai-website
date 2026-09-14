@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { HERO_ORANGE } from '$lib/colors'
+
 	interface Props {
 		width?: number
 		height?: number
@@ -14,7 +16,7 @@
 		fill = null,
 		inverted = false
 	}: Props = $props()
-	let orange = $derived(inverted ? 'white' : '#FF9416')
+	let orange = $derived(inverted ? 'white' : HERO_ORANGE)
 	let modifiedFill = $derived(fill ?? (inverted ? 'black' : 'var(--text)'))
 </script>
 

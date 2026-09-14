@@ -24,11 +24,11 @@ export type UKLookupMPApiResponse = UKLookupMPApiSuccessResponse | UKLookupMPApi
 
 export const POST: RequestHandler = async ({ request }) => {
 	try {
-		const body = await request.json()
+		const body = (await request.json()) as { postcode?: unknown }
 		const { postcode } = body
 
 		// Validate request body
-		if (!postcode) {
+		if (!postcode || typeof postcode !== 'string') {
 			return json(
 				{
 					success: false,
