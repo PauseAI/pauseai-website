@@ -68,6 +68,8 @@ Their DUV machines are [still stuck at 28nm](https://www.scmp.com/tech/big-tech/
 So SMEE is not able to produce modern AI chips.
 
 In other words: ASML is a fundamental choke point in the AI chip supply chain.
+Read [The Dutch Pause Button](/asml-pause-button) for our proposal on how the Netherlands can use ASML export licenses to enforce a treaty.
+Read [The US-China Pause Button](/us-china-pause-button) for how this fits the negotiations between the two largest AI powers.
 
 #### Optics: Zeiss
 
