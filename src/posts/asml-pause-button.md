@@ -169,8 +169,13 @@ The EU's [Anti-Coercion Instrument](https://iep.unibocconi.eu/why-asml-eus-most-
 And as Hurst argues, even under retaliation Europe does not fall further behind, because the whole race slows down.
 
 **China will catch up, so the lever will become worthless.**
-That is an argument for speed, not for waiting.
-EUV remains the only path to the newest nodes for years to come, and SMIC's multi-patterning has low yields.
+Not soon.
+China's first domestically built immersion DUV tool, delivered in 2026 at about [five units a year](https://asiatimes.com/2026/07/chinas-duv-lithography-still-lags-asml-by-four-generations/), matches an ASML machine from 2008, still imports 70% of its components, and has not yet run in a commercial fab.
+The Shenzhen EUV prototype that Reuters revealed in December 2025 [produces light but no chips](https://www.engadget.com/big-tech/china-reportedly-has-a-prototype-euv-machine-built-by-ex-asml-employees-235833756.html), with 2030 as the insiders' own target.
+A [June 2026 forecast](https://blog.aifutures.org/p/a-forecast-of-chinese-duv-and-euv) puts commercial-scale Chinese DUV for 7nm in the mid-2030s and EUV for 5nm in the late 2030s.
+Until then, China's advanced chips come off [several hundred ASML DUV machines](https://www.aei.org/research-products/report/the-lithography-loophole-how-china-is-printing-its-way-to-chip-self-sufficiency/) that ASML services roughly every six months, with 5nm yields [as low as 20%](https://www.aei.org/research-products/report/the-lithography-loophole-how-china-is-printing-its-way-to-chip-self-sufficiency/) and costs 40 to 50% above TSMC's.
+So the lever reaches China too, for years rather than months, though AI itself could shorten that.
+That is a window, not a permanent condition, which is the argument for using it now.
 
 **A unilateral Dutch pause does not work.**
 Correct, for a blunt export stop.
@@ -180,14 +185,14 @@ What slows down is the exponential growth.
 The Netherlands supplies the enforcement module, not the whole solution.
 
 **It will cost ASML billions and the Netherlands jobs.**
-ASML has [44,000 employees in the Netherlands](https://www.talosnetwork.org/perspectives/boosting-the-eus-position-in-ai-through-third-places-diplomacy-9ym5d) and €16 billion in supplier spending.
-Non-AI demand stays.
-The [AI Policy Bulletin](https://www.aipolicybulletin.org/articles/bargaining-chips-could-the-eu-leverage-asml-to-influence-u-s-ai-policy) and Talos Network both propose a compensation fund, which belongs in this proposal.
-For comparison: the MATCH Act would hit [about a fifth](https://www.dutchnews.nl/2026/06/netherlands-joins-us-chip-pact-while-fighting-asml-export-curbs/) of ASML's expected 2026 revenue, and the Dutch government treats that as unavoidable.
+That assumes an export stop, which is not what we're proposing.
+With our proposal, the cost falls on whoever refuses it: a fab that registers its output and admits inspectors keeps buying machines.
+ASML already cannot meet demand, so a cap on AI-bound tools shifts orders rather than cancelling them, and service revenue from installed machines continues.
+The comparison is not with zero but with the MATCH Act, which would hit [about a fifth](https://www.dutchnews.nl/2026/06/netherlands-joins-us-chip-pact-while-fighting-asml-export-curbs/) of ASML's expected 2026 revenue and which the Dutch government already treats as unavoidable.
+Where there is real cost, a compensation fund belongs in the proposal; the Netherlands put [€2.5 billion](https://www.france24.com/en/live-news/20240328-operation-beethoven-dutch-2-5bn-euro-charm-offensive-to-keep-asml) into the Eindhoven region in 2024 to keep ASML, so the precedent exists.
 
 **Export controls always fail.**
-[Tim Worstall](https://www.timworstall.com/2026/09/weird-weird-ideas/) made this argument in response to the Guardian piece.
-But the EUV ban on China has held since 2019, and the [Institute for AI Policy and Strategy](https://www.iaps.ai/research/semiconductor-manufacturing-equipment-export-controls) calls it largely effective.
+The EUV ban on China has held since 2019, and the [Institute for AI Policy and Strategy](https://www.iaps.ai/research/semiconductor-manufacturing-equipment-export-controls) calls it largely effective.
 What fails are controls without a maintenance ban and without allies.
 Both are in this proposal.
 
