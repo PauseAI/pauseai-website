@@ -20,6 +20,9 @@ description: How much do regular people and experts worry about AI risks and gov
 
 ## Public opinion on regulations & governance
 
+- **[US voters, Data for Progress (September 2026)](https://www.dataforprogress.org/datasets/polling-on-ai-development-regulation)**: 68% support a bill to temporarily pause advanced AI development and permanently ban superintelligent AI, 25% oppose. Support is bipartisan: 72% of Democrats, 70% of independents and 63% of Republicans. Polled after the [Ban Artificial Superintelligence Act](https://www.sanders.senate.gov/press-releases/news-sanders-casar-introduce-legislation-to-ban-artificial-superintelligence-and-temporarily-pause-advanced-ai-development/) was announced.
+- **[US voters, AI Policy Institute (June 2026)](https://theaipi.org/poll-ai-safety-majority/)**: 86% want a guaranteed off switch for the most powerful AI systems. 82% say companies should not build superhuman AI without proof they can control it. Given a forced choice between a ban and no regulation, 63% choose the ban.
+- **[US adults, Rutgers National AI Opinion Monitor (August 2026)](https://dailycaller.com/2026/09/13/americans-ai-use-making-decisions-rutgers-survey/)**: 59% want governments to regulate AI because of its risks, 25% want limited regulation to foster innovation. Fewer than 1 in 10 would let AI make final decisions on hiring, loans or parole without human oversight.
 - **[UK citizens, YouGov](https://time.com/7213096/uk-public-ai-law-poll/)**: 87% of Brits would back a law requiring AI developers to prove their systems are safe before release, with 60% in favor of outlawing the development of “smarter-than-human” AI models.
 - **[US citizens, RethinkPriorities](https://forum.effectivealtruism.org/posts/ConFiY9cRmg37fs2p/us-public-opinion-of-ai-policy-and-risk)**: 50% support a pause, 25% oppose a pause.
 - **[US citizens, YouGov](https://www.vox.com/future-perfect/2023/8/18/23836362/ai-slow-down-poll-regulation)**: 72% want AI to slow down, 8% want to speed up. 83% of voters believe AI could accidentally cause a catastrophic event
@@ -35,5 +38,5 @@ description: How much do regular people and experts worry about AI risks and gov
 
 ## [Timelines](/timelines)
 
-- **[Metaculus Weak AGI](https://www.metaculus.com/questions/3479/date-weakly-general-ai-is-publicly-known/)** before 2026: 25% chance, AGI by 2027: 50% chance (updated on 2024-11-05).
-- **[Metaculus full AGI](https://www.metaculus.com/questions/5121/date-of-artificial-general-intelligence/)** before 2028: 25% chance, full AGI by 2032: 50% chance (updated on 2024-11-05).
+- **[Metaculus Weak AGI](https://www.metaculus.com/questions/3479/date-weakly-general-ai-is-publicly-known/)**: community estimate September 2027 (as of 2026-09-14).
+- **[Metaculus full AGI](https://www.metaculus.com/questions/5121/date-of-artificial-general-intelligence/)**: community estimate August 2031 (as of 2026-09-14).
