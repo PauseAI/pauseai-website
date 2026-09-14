@@ -36,15 +36,6 @@ function chapterLink(chapter: ChapterBlockData | null, label: string): string | 
 // calendar come from the chapter's row.
 const UK_INTRO_CALL = 'https://calendar.app.google/w5t7EgCFwCGKcnAS7'
 
-/** The UK's WhatsApp sentences, dropped when the chapter's row has no WhatsApp link. */
-function whatsappLine(
-	chapter: ChapterBlockData | null,
-	sentence: (whatsapp: string) => string
-): EmailBlock[] {
-	const whatsapp = chapterLink(chapter, 'WhatsApp')
-	return whatsapp ? [{ type: 'paragraph', text: sentence(whatsapp) }] : []
-}
-
 /** "Join the community" step, naming whichever of the two links the row has. */
 function ukCommunityStep(chapter: ChapterBlockData | null): string {
 	const whatsapp = chapterLink(chapter, 'WhatsApp')
