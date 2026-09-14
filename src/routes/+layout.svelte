@@ -5,6 +5,7 @@
 	import Banner from '$lib/components/Banner.svelte'
 	import Hero from '$lib/components/Hero.svelte'
 	import Link from '$lib/components/Link.svelte'
+	import LinkWithoutIcon from '$lib/components/LinkWithoutIcon.svelte'
 	import NearbyEvent from '$lib/components/NearbyEvent.svelte'
 	import PreloadFonts from '$lib/components/PreloadFonts.svelte'
 	import SearchModal from '$lib/components/SearchModal.svelte'
@@ -65,6 +66,11 @@
 			id: 'pausecon-london-2026',
 			countries: null,
 			dateRange: [null, '2026-08-21']
+		},
+		{
+			id: 'dc-protest-2026-09-19',
+			countries: null,
+			dateRange: [null, '2026-09-19']
 		}
 	]
 	const campaignBannerRules: BannerRule[] = []
@@ -199,6 +205,13 @@
 		<Banner contrast={hero} id="pausecon-london-2026" rules={mainBannerRules}>
 			<strong>PauseCon London 2026</strong>: Apply now to join our September organising conference.
 			<strong><Link href="https://luma.com/4be2eqz9">Apply here!</Link></strong>
+		</Banner>
+
+		<Banner contrast={hero} id="dc-protest-2026-09-19" rules={mainBannerRules}>
+			<strong>Protest in Washington DC, Friday 19 Sept</strong> by
+			<LinkWithoutIcon href="https://peopleforapause.org/">People for a Pause</LinkWithoutIcon>:
+			tell Trump and Xi to make an AI pause deal. Bring friends, or forward to someone in DC.
+			<strong><Link href="https://luma.com/ucnncf7s">Sign up!</Link></strong>
 		</Banner>
 
 		{#if hero}
