@@ -25,7 +25,7 @@ Luckily for us, the compute supply chain has various chokepoints.
 The hardware needed to train the biggest models (specialized GPUs) is being produced by [just 1 or 3 companies](https://assets-global.website-files.com/614b70a71b9f71c9c240c7a7/65cb86a0341180453f268f38_SpwF1cBT0AS-m_n20TBXzCF6YprIVM4YRb9PMYWURseU1KtVkSAZJ735esGxNenwVO4Q4wlSUP-_MV3E-SEKp4SIgo1-oNe14CeDHtrb3PLXpJMym5qpWEDbXcf3maEi4yQYfQ-3NP7XgUmkO_4Zekw.jpeg).
 There are multiple monopolies in the supply chain for AI training hardware:
 
-- ASML is the only company that produces EUV lithography machines
+- ASML is the only company that produces EUV lithography machines (see [The Dutch Pause Button](/asml-pause-button))
 - TSMC is the only company that can manufacture the most advanced chips
 - NVidia is the only company that designs the most advanced GPUs
 

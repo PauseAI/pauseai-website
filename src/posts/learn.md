@@ -20,6 +20,8 @@ import { CirclePause, CircleQuestionMark, Cog, Earth, Footprints, MessageSquareQ
 <IconBullet icon={MessageSquareQuote} content={m.learn_quotes} />
 <IconBullet icon={Cog} content={m.learn_feasibility} />
 <IconBullet icon={CirclePause} content={m.learn_building_the_pause_button} />
+<IconBullet icon={CirclePause} content={m.learn_asml_pause_button} />
+<IconBullet icon={CirclePause} content={m.learn_us_china_pause_button} />
 <IconBullet icon={CircleQuestionMark} content={m.learn_faq} />
 <IconBullet icon={Footprints} content={m.learn_action} />
 

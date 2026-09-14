@@ -35,7 +35,7 @@ Inspired by the International Atomic Energy Agency (IAEA), this agency will be r
 1. Granting approval for major **deployments** and **training runs** of AIs that are judged not to pose a threat to humanity. This will include red-teaming and [model evaluations](/evaluations).
 2. Granting approval for the creation of more powerful AI **once sufficient progress has been made** on the technical problems of AI safety and control.
 3. Specifying requirements for the **[oversight of AI training runs](https://www.alignmentforum.org/posts/Zfk6faYvcf5Ht7xDx/compute-thresholds-proposed-rules-to-mitigate-risk-of-a-lab)**.
-4. **Verifying** that the decisions of the agency are being honored. This can be done in [numerous ways](https://arxiv.org/abs/2408.16074): [tracking GPUs](https://arxiv.org/abs/2303.11341), incentivizing whistleblowers, energy monitoring, data center inspections, financial intelligence, semiconductor manufacturing facility inspections, AI developer inspections, chip location tracking and chip-based reporting. For more details on how the highly centralized [AI chip supply chain](https://www.governance.ai/analysis/computing-power-and-the-governance-of-ai) can be used for global oversight of AI development, read [Building the Pause Button](https://pauseai.info/building-the-pause-button).
+4. **Verifying** that the decisions of the agency are being honored. This can be done in [numerous ways](https://arxiv.org/abs/2408.16074): [tracking GPUs](https://arxiv.org/abs/2303.11341), incentivizing whistleblowers, energy monitoring, data center inspections, financial intelligence, semiconductor manufacturing facility inspections, AI developer inspections, chip location tracking and chip-based reporting. For more details on how the highly centralized [AI chip supply chain](https://www.governance.ai/analysis/computing-power-and-the-governance-of-ai) can be used for global oversight of AI development, read [Building the Pause Button](/building-the-pause-button). For how the Netherlands can enforce this through ASML, read [The Dutch Pause Button](/asml-pause-button).
 
 Such an agency would need to convene experts in order to make informed and cautious judgements. There may be substantial disagreement between experts and the agency would need to synthesize a range of different views and decide on an appropriate level of caution.
 
@@ -54,7 +54,8 @@ The most dangerous models will be _general_ AI models that can understand langua
 
 It may be possible that the AI alignment problem is very difficult and _not solved for a long time_. In that case, the treaty would prevent the creation of superhuman AI for a long time. That is the only way to ensure the safety of humanity.
 
-**Enforcement** of the treaty requires the US and China to back it with their economic and military power. If the leaders of both nations understand the severity of the risks of AI, they will see that the success of the treaty is in their own interests. If a safe superhuman AI is created, the AI itself will be used by the AISA to enforce the treaty.
+**Enforcement** of the treaty requires the US and China to back it with their economic and military power.
+Read [The US-China Pause Button](/us-china-pause-button) for where both governments stand and what would let them agree. If the leaders of both nations understand the severity of the risks of AI, they will see that the success of the treaty is in their own interests. If a safe superhuman AI is created, the AI itself will be used by the AISA to enforce the treaty.
 
 ## Other measures that effectively slow down AI
 
