@@ -94,6 +94,7 @@ We can regulate it by regulating chips.
 Training AI models require very specialized hardware, which is only created by one company, TSMC.
 That company uses machines that are created by yet another company, ASML.
 The supply chain for AI chips is very fragile and can be regulated.
+Read [Building the Pause Button](/building-the-pause-button) and [The Dutch Pause Button](/asml-pause-button) for how.
 
 Read more about [feasibility](/feasibility).
 

@@ -3,6 +3,7 @@
 	import Link from '$lib/components/Link.svelte'
 	import CommunitiesList from './CommunitiesList.svelte'
 	import type { GeoApiResponse } from '$api/geo/+server'
+	import type { CalendarResponse } from '$api/calendar/+server'
 	import type { StyleSpecification } from 'maplibre-gl'
 	import * as maplibregl from 'maplibre-gl'
 	import 'maplibre-gl/dist/maplibre-gl.css'
@@ -11,6 +12,8 @@
 	import { onDestroy, onMount } from 'svelte'
 	import { communities, communitiesMeta } from './communities'
 	import { MAPBOX_KEY } from './constants'
+	import { HERO_ORANGE } from '$lib/colors'
+	import escape from 'escape-html'
 
 	// maplibre-gl v6 is ESM-only; the worker URL must be set explicitly under
 	// bundlers like Vite (see v5→v6 migration guide).
@@ -37,6 +40,20 @@
 		lat = map.getCenter().lat
 	}
 
+	async function fetchEvents() {
+		try {
+			const response = await fetch('/api/calendar?days=30')
+			if (response.ok) {
+				const data = (await response.json()) as CalendarResponse
+				return data.entries.map((entry) => entry.event)
+			}
+			console.error('Failed to fetch events:', response.statusText)
+		} catch (error) {
+			console.error('Error fetching events:', error)
+		}
+		return []
+	}
+
 	async function fetchUserLocation() {
 		try {
 			const response = await fetch('/api/geo')
@@ -61,7 +78,7 @@
 		if (!style) return
 
 		// Optional, call with error handling
-		const { userLng, userLat } = await fetchUserLocation()
+		const [{ userLng, userLat }, events] = await Promise.all([fetchUserLocation(), fetchEvents()])
 
 		const initialState = {
 			lng: userLng ?? lng,
@@ -109,7 +126,7 @@
 							? 'rgba(0,0,0,.5)'
 							: community.type === 'national'
 								? 'rgb(0, 150, 255)'
-								: 'rgb(255, 148, 22)',
+								: HERO_ORANGE,
 					opacityWhenCovered: '0'
 				})
 					.setPopup(
@@ -122,6 +139,23 @@
 					.setLngLat([community.lon, community.lat])
 					.addTo(map)
 			})
+
+			events
+				.filter((event) => event.geo_latitude != null && event.geo_longitude != null)
+				.forEach((event) => {
+					new Marker({
+						color: 'var(--event-marker)',
+						opacityWhenCovered: '0'
+					})
+						.setLngLat([event.geo_longitude!, event.geo_latitude!])
+						.setPopup(
+							new Popup({ offset: [0, -15] }).setHTML(
+								`<h3><a href="${escape(`https://lu.ma/${event.url}`)}">${escape(event.name)}</a></h3>` +
+									`<p>${new Intl.DateTimeFormat('en', { day: 'numeric', month: 'long' }).format(new Date(event.start_at))}</p>`
+							)
+						)
+						.addTo(map)
+				})
 		})
 	})
 
@@ -143,7 +177,8 @@
 
 <p>
 	If you're looking for a group closer to home, check out our map below to find the people nearest
-	to you. The map also includes adjacent AI Safety communities in grey.
+	to you. The map also includes adjacent AI Safety communities in grey, and upcoming events in
+	green.
 </p>
 <div>
 	<div class="map-wrap">
@@ -166,7 +201,7 @@
 	src="https://lu.ma/embed/calendar/cal-E1qhLPs5IvlQr8S/events?"
 	height="450"
 	frameborder="0"
-	style="border: 1px solid #bfcbda88; border-radius: 24px; width: 100%;"
+	style="border: 1px solid var(--border-luma-embed); border-radius: 24px; width: 100%;"
 	allowfullscreen
 	aria-hidden="false"
 	title="PauseAI Events Calendar"
@@ -214,5 +249,15 @@
 	:global(.maplibregl-ctrl-group button:last-child) {
 		border-bottom-left-radius: 24px !important;
 		border-bottom-right-radius: 24px !important;
+	}
+
+	/* Maplibre popups stay white for contrast against the dark-mode map; force dark text on it */
+	:global(.maplibregl-popup-content) {
+		color: var(--grey-500);
+		text-align: center;
+	}
+
+	:global(.maplibregl-popup-content p) {
+		font-family: var(--font-body);
 	}
 </style>

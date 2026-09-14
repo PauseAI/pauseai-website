@@ -327,7 +327,7 @@
 		background-color: var(--bg);
 		border: 1px solid var(--brand-subtle);
 		border-radius: 12px;
-		box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
+		box-shadow: 0 6px 20px rgba(var(--black-rgb), 0.12);
 	}
 
 	.option {

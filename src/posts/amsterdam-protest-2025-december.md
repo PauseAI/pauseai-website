@@ -27,4 +27,4 @@ Require ASML to supply only customers who:
 
 This preserves beneficial AI including medical research, climate modeling, scientific discovery while preventing the reckless race toward uncontrolled superintelligence.
 
-To learn more about the chip supply chain, and ASML's unique position, see our [Building the Pause Button](https://pauseai.info/building-the-pause-button) page.
+To learn more about the chip supply chain, and ASML's unique position, see our [Building the Pause Button](/building-the-pause-button) page. Our full proposal for the Dutch government is at [The Dutch Pause Button](/asml-pause-button).

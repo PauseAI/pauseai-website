@@ -90,11 +90,16 @@
 		background:
 			linear-gradient(
 				to bottom,
-				rgba(0, 0, 0, 0.62) 0%,
-				rgba(0, 0, 0, 0.12) 55%,
-				rgba(0, 0, 0, 0.32) 100%
+				rgba(var(--black-rgb), 0.62) 0%,
+				rgba(var(--black-rgb), 0.12) 55%,
+				rgba(var(--black-rgb), 0.32) 100%
 			),
-			linear-gradient(to right, rgba(0, 0, 0, 0.62) 0%, rgba(0, 0, 0, 0.18) 60%, transparent 100%);
+			linear-gradient(
+				to right,
+				rgba(var(--black-rgb), 0.62) 0%,
+				rgba(var(--black-rgb), 0.18) 60%,
+				transparent 100%
+			);
 	}
 
 	.slogan-inner {
@@ -113,7 +118,7 @@
 		margin: 0 0 1.5rem;
 		max-width: 16ch;
 		letter-spacing: 0.005em;
-		text-shadow: 0 2px 12px rgba(0, 0, 0, 0.4);
+		text-shadow: 0 2px 12px rgba(var(--black-rgb), 0.4);
 	}
 	.slogan-inner h1 em {
 		color: var(--brand);
@@ -206,11 +211,11 @@
 	.hero-buttons :global(a.btn-on-photo) {
 		background: white;
 		border-color: white;
-		color: #111110;
+		color: var(--grey-800);
 	}
 	.hero-buttons :global(a.btn-on-photo:hover) {
-		background: #f0ebe2;
-		border-color: #f0ebe2;
+		background: var(--cream);
+		border-color: var(--cream);
 	}
 	/* Secondary CTA on the light campaign band — outlined so it stays quiet. */
 	.hero-buttons :global(a.btn-outline) {

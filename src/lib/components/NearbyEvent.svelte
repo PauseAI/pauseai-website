@@ -17,7 +17,7 @@
 	const FORMAT = new Intl.DateTimeFormat('en', { day: 'numeric', month: 'long' })
 	const MAX_DISTANCE_KM = 100
 	const DISTANCE_OVERRIDES: Record<string, number> = {
-		jogj70dj: 480 // Override for specific D.C. (Capitol Hill) event to include users up to 250 miles away
+		ucnncf7s: 480 // Override for specific D.C. (White House) event to include users up to 250 miles away
 	}
 
 	let events: CalendarResponse | null = $state(null)

@@ -24,6 +24,8 @@ import { Bomb, CirclePause, CircleQuestionMark, Cog, Earth, Footprints, MessageS
 <IconBullet icon={Scale} content={m.learn_skepticism} />
 <IconBullet icon={Cog} content={m.learn_feasibility} />
 <IconBullet icon={CirclePause} content={m.learn_building_the_pause_button} />
+<IconBullet icon={CirclePause} content={m.learn_asml_pause_button} />
+<IconBullet icon={CirclePause} content={m.learn_us_china_pause_button} />
 <IconBullet icon={CircleQuestionMark} content={m.learn_faq} />
 <IconBullet icon={Footprints} content={m.learn_action} />
 

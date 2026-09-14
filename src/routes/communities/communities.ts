@@ -1,7 +1,7 @@
 import type { StrictPost } from '$lib/types'
 import adjacentCommunitiesJson from './adjacent-communities.json'
 import pauseAICommunitiesJson from './pauseai-communities.json'
-import nationalChaptersJson from './national-chapters.json'
+import nationalChaptersJson from '$lib/data/national-chapters.json'
 
 export type CommunitiesConfiguration = {
 	communities: RawCommunity[]
