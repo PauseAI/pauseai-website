@@ -27,12 +27,11 @@ But this is not the only time that we've been warned about the existential / ext
 - **Geoffrey Hinton**, the "Godfather of AI" and Turing Award winner, [left Google](https://fortune.com/2023/05/01/godfather-ai-geoffrey-hinton-quit-google-regrets-lifes-work-bad-actors/) to warn people of AI: ["This is an existential risk"](https://www.reuters.com/technology/ai-pioneer-says-its-threat-world-may-be-more-urgent-than-climate-change-2023-05-05/)
 - **Eliezer Yudkowsky**, founder of MIRI and conceptual father of the AI safety field: ["If we go ahead on this everyone will die"](https://time.com/6266923/ai-eliezer-yudkowsky-open-letter-not-enough/).
 
-In September 2026, after AI agents [escaped their test environments and hacked real companies](/cybersecurity-risks), the people building these systems said it out loud:
+In 2026, after AI agents [escaped their test environments and hacked real companies](/cybersecurity-risks), the people building these systems said it out loud:
 
-- **Dario Amodei**, CEO of Anthropic: ["We must slow the pace at which we improve the capabilities of AI models."](https://www.axios.com/2026/09/12/anthropic-ai-amodei-pacing) Sam Altman agreed the same day; Elon Musk replied "Dario is right."
+- **OpenAI**, in its [incident report](https://openai.com/index/hugging-face-incident-and-the-road-ahead/): "highly capable AI agents are now able to work around technical controls, collaborate through unapproved channels, and take dangerous actions that no human directed."
 - **Evan Hubinger**, Anthropic's alignment lead: ["We really do believe AI could kill everyone. My own view is that the chance of this happening in the next ten years is more than 10 percent."](https://en.cryptonomist.ch/2026/09/09/ai-extinction-risk-anthropic/) And: "We don't currently have a plan to solve alignment for superintelligence."
-- **1,178 employees** of OpenAI, Anthropic, Google DeepMind and Meta [asked the US government](https://aiweekly.co/alerts/openai-anthropic-staff-ask-us-to-pace-frontier-ai-progress) for the tools "to deliberately pace the frontier of automated AI development". OpenAI and Anthropic endorsed the letter as companies.
-- **Bill Gates**: ["If someone had a credible plan for slowing down AI advances globally, I would likely support it."](https://edition.cnn.com/2026/08/26/business/bill-gates-wants-limits-on-ai)
+- **1,178 employees** of OpenAI, Anthropic, Google DeepMind and Meta, in an [open letter](https://aiweekly.co/alerts/openai-anthropic-staff-ask-us-to-pace-frontier-ai-progress): "there is a real risk that capability development rapidly accelerates beyond our ability to understand or control the resulting systems."
 
 They had been warning us for years:
 
