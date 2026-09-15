@@ -1120,6 +1120,7 @@
 		max-width: 90%;
 		height: 60px;
 		width: auto;
+		border-radius: 0;
 		object-fit: contain;
 		position: relative;
 		z-index: 1;
