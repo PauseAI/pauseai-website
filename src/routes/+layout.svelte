@@ -208,7 +208,7 @@
 		</Banner>
 
 		<Banner contrast={hero} id="dc-protest-2026-09-19" rules={mainBannerRules}>
-			<strong>Protest in Washington DC, Friday 19 Sept</strong> by
+			<strong>Protest in Washington DC, Saturday 19 Sept</strong> by
 			<LinkWithoutIcon href="https://peopleforapause.org/">People for a Pause</LinkWithoutIcon>:
 			tell Trump and Xi to make an AI pause deal. Bring friends, or forward to someone in DC.
 			<strong><Link href="https://luma.com/ucnncf7s">Sign up!</Link></strong>
