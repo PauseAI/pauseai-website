@@ -140,8 +140,10 @@
 					.addTo(map)
 			})
 
+			// Sort descending so earlier events' markers are added last and render on top
 			events
 				.filter((event) => event.geo_latitude != null && event.geo_longitude != null)
+				.sort((a, b) => new Date(b.start_at).getTime() - new Date(a.start_at).getTime())
 				.forEach((event) => {
 					new Marker({
 						color: 'var(--event-marker)',
