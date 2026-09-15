@@ -82,12 +82,10 @@
 		/* 0px or 9999px: wide value when nav wraps, else 0 */
 		--wide-if-nav-wrapped: clamp(0px, calc(9999 * (105% - 100 * var(--cqw))), 9999px);
 		--wide-if-nav-not-wrapped: calc(9999px - var(--wide-if-nav-wrapped));
-		--max-space-between-compensation: calc((100 * var(--cqw) - var(--logo-width)) / 2);
 	}
 
 	.compensate-min-space-between {
 		width: min(var(--wide-if-nav-wrapped), var(--min-space-between));
-		max-width: var(--max-space-between-compensation);
 	}
 
 	.compensate-offset {
@@ -102,7 +100,6 @@
 
 	.min-space-between {
 		width: var(--min-space-between);
-		max-width: var(--max-space-between-compensation);
 	}
 
 	.space-between {
