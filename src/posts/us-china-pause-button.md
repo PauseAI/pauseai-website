@@ -11,7 +11,9 @@ With both of them, almost everything else follows.
 This page describes where the two governments stand, what the treaty literature proposes, and why the missing piece is not political will alone but a way for each side to _check_ that the other has stopped.
 It builds on [Building the Pause Button](/building-the-pause-button) and [The Dutch Pause Button](/asml-pause-button).
 
-_This page is a work in progress. Last updated September 2026, ten days before Xi Jinping's visit to Washington._
+_This page is a work in progress. Last updated September 2026, days before Xi Jinping's visit to Washington._
+
+**On 19 September, five days before the summit, we are [protesting near the White House](https://luma.com/ucnncf7s) with one demand: Trump and Xi, make an AI pause deal.** Sign-making from noon. [Join us](https://luma.com/ucnncf7s).
 
 ## Contents
 
@@ -115,6 +117,7 @@ It can produce the first three steps toward one:
 
 ## What you can do
 
+- **Come to Washington on 19 September.** [People for a Pause](https://luma.com/ucnncf7s) is protesting near the White House five days before Xi arrives, asking Trump and Xi to make an AI pause deal. Sign-making starts at noon; the exact spot is sent to registrants.
 - If you are in the US, ask your representative to support the Ban Artificial Superintelligence Act and to demand that the September summit produce a joint statement on loss of control. See our [US lobby guide](/us-lobby-guide).
 - If you are in the Netherlands, read [The Dutch Pause Button](/asml-pause-button) and ask your representative why ASML licenses are used only against China.
 - Anywhere else: [join PauseAI](/join). The supplier states need to hear from their own citizens that this is what their chokepoint is for.
