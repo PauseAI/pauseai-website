@@ -125,10 +125,10 @@ this should be something that China will want to see as well.
 
 We applaud [OpenAI](https://openai.com/blog/governance-of-superintelligence) and [Google](https://www.ft.com/content/8be1a975-e5e0-417d-af51-78af17ef4b79) for their calls for international regulation of AI.
 However, we believe that the current proposals are not enough to prevent an AI catastrophe.
-Google and Microsoft have not yet publicly stated anything about the existential risk of AI.
-Only OpenAI [explicitly mentions the risk of extinction](https://openai.com/blog/governance-of-superintelligence), and again we applaud them for taking this risk seriously.
-However, their strategy is quite explicit: a Pause is impossible, we need to get to superintelligence first.
-The problem with this, however, is that they [do not believe they have solved the alignment problem](https://youtu.be/L_Guz73e6fw?t=1478).
+The leaders of OpenAI, Google DeepMind and Anthropic all [signed the statement](https://www.safe.ai/statement-on-ai-risk) that extinction from AI should be a global priority, and in September 2026 the CEOs of Anthropic, OpenAI and xAI [called for slowing down](https://www.axios.com/2026/09/12/anthropic-ai-amodei-pacing).
+We applaud that too.
+But none of them has stopped, and their strategy remains the same: a unilateral pause is impossible, so we need to get to superintelligence first.
+The problem with this is that they [do not believe they have solved the alignment problem](https://en.cryptonomist.ch/2026/09/09/ai-extinction-risk-anthropic/).
 The AI companies are locked in a race to the bottom, where AI safety is sacrificed for competitive advantage.
 This is simply the result of market dynamics.
 We need governments to step in and implement policies (at an international level) that [prevent the worst outcomes](/proposal).
@@ -143,6 +143,7 @@ Eliezer Yudkowsky, Nick Bostrom, Stuart Russell, Max Tegmark, and many others.
 They had no AI tech to push - they were simply concerned about the future of humanity.
 
 The AI companies never mentioned x-risk until very recently.
+In September 2026, after their own agents [hacked real companies](/cybersecurity-risks), the CEOs of Anthropic, OpenAI and xAI [called for slowing down](https://www.axios.com/2026/09/12/anthropic-ai-amodei-pacing).
 
 Sam Altman is an interesting exception.
 He wrote about existential AI risk [back in 2015, on his private blog](https://blog.samaltman.com/machine-intelligence-part-1), before founding OpenAI.
