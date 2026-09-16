@@ -34,8 +34,8 @@
 		border-radius: 20px;
 		overflow: hidden;
 		transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-		box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-		border: 1px solid rgba(255, 148, 22, 0.1);
+		box-shadow: 0 4px 20px rgba(var(--black-rgb), 0.08);
+		border: 1px solid rgba(var(--hero-orange-rgb), 0.1);
 		height: 100%;
 		display: flex;
 		flex-direction: column;
@@ -50,7 +50,7 @@
 		left: 0;
 		right: 0;
 		bottom: 0;
-		background: linear-gradient(145deg, rgba(255, 148, 22, 0.05) 0%, transparent 60%);
+		background: linear-gradient(145deg, rgba(var(--hero-orange-rgb), 0.05) 0%, transparent 60%);
 		border-radius: 20px;
 		pointer-events: none;
 		opacity: 0;
@@ -59,7 +59,7 @@
 
 	.quote-highlight:hover {
 		transform: translateY(-5px);
-		box-shadow: 0 12px 35px rgba(255, 148, 22, 0.15);
+		box-shadow: 0 12px 35px rgba(var(--hero-orange-rgb), 0.15);
 		border-color: var(--brand);
 	}
 
@@ -85,15 +85,15 @@
 		height: 100px;
 		border-radius: 50%;
 		object-fit: cover;
-		box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+		box-shadow: 0 4px 15px rgba(var(--black-rgb), 0.15);
 		border: 3px solid var(--bg);
 		transition: all 0.3s ease;
 	}
 
 	.quote-highlight:hover .portrait {
 		transform: scale(1.05);
-		box-shadow: 0 6px 20px rgba(255, 148, 22, 0.2);
-		border-color: rgba(255, 148, 22, 0.3);
+		box-shadow: 0 6px 20px rgba(var(--hero-orange-rgb), 0.2);
+		border-color: rgba(var(--hero-orange-rgb), 0.3);
 	}
 
 	.text-container {
@@ -163,7 +163,7 @@
 		color: var(--brand);
 		font-size: 1rem;
 		font-style: normal;
-		text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+		text-shadow: 0 1px 2px rgba(var(--black-rgb), 0.1);
 	}
 
 	@media (max-width: 768px) {

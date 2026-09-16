@@ -2,6 +2,7 @@ import * as Calendar from '$lib/clients/luma/calendar'
 import { generateCacheControlRecord } from '$lib/utils.js'
 import { json } from '@sveltejs/kit'
 import type { RequestHandler } from './$types'
+import nationalChaptersJson from '$lib/data/national-chapters.json'
 
 export type CalendarResponse = {
 	entries: {
@@ -19,12 +20,15 @@ export type Event = {
 
 export const prerender = false
 
+// The global calendar stays hardcoded; national chapter calendars are synced
+// from Airtable into national-chapters.json by scripts/sync-national-chapters.ts
+// (lumaCalendarId, resolved from each chapter's Luma page at sync time).
+const GLOBAL_CALENDAR_ID = 'cal-E1qhLPs5IvlQr8S'
 const CALENDAR_IDS = [
-	'cal-E1qhLPs5IvlQr8S', // global
-	'cal-Z327EhtiFdHuVie', // UK
-	'cal-gnpo62PdSdau7KQ', // AU
-	'cal-tsYv79s4aTQC16Q', // CA
-	'cal-B1ELepcLXLcAqMf' // DE
+	GLOBAL_CALENDAR_ID,
+	...nationalChaptersJson.communities
+		.map((c) => c.lumaCalendarId)
+		.filter((id): id is string => id != null)
 ]
 
 export const GET: RequestHandler = async ({ url, setHeaders }) => {

@@ -164,8 +164,8 @@
 	}
 
 	.success {
-		background-color: #e6f7e6;
-		color: #2e7d32;
+		background-color: var(--status-success-bg-alt);
+		color: var(--status-success-text-alt);
 	}
 
 	@media (max-width: 600px) {

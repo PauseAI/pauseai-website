@@ -111,7 +111,7 @@
 
 	* :global(.news-card:hover) {
 		transform: translateY(-3px);
-		box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
+		box-shadow: 0 6px 20px rgba(var(--black-rgb), 0.12);
 		color: var(--text);
 	}
 
@@ -136,7 +136,7 @@
 	.image-placeholder {
 		width: 100%;
 		height: 100%;
-		background: linear-gradient(135deg, var(--brand) 0%, hsl(32, 80%, 65%) 100%);
+		background: linear-gradient(135deg, var(--brand) 0%, var(--brand-gradient-light) 100%);
 	}
 
 	.card-content {
@@ -169,7 +169,7 @@
 
 	.card-subtitle {
 		font-size: 0.85rem;
-		font-weight: 300;
+		font-weight: 400;
 		line-height: 1.3;
 		margin: 0;
 		color: var(--text);
@@ -183,7 +183,7 @@
 
 	.card-date {
 		font-size: 0.8rem;
-		font-weight: 300;
+		font-weight: 400;
 		margin: 0;
 		margin-top: auto;
 		color: var(--text);
