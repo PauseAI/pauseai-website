@@ -36,9 +36,10 @@ export function escapeHtml(text: string): string {
  * Escapes `text` for safe HTML output, then converts `[label](url)` markdown
  * links into `<a>` tags and newlines into `<br>`. The URL itself is escaped but not
  * otherwise validated — callers control every URL that reaches this (chapter links,
- * static copy).
+ * static copy). Links are coloured `linkColor`, or left to the mail client's default
+ * when it is omitted.
  */
-export function mdLineToHtml(text: string, linkColor: string): string {
+export function mdLineToHtml(text: string, linkColor?: string): string {
 	const anchors: string[] = []
 	// Anchors are parked while the bold pass runs: a chapter's URL is free text and one
 	// containing `**` would otherwise have a <strong> written into its href.
@@ -47,9 +48,8 @@ export function mdLineToHtml(text: string, linkColor: string): string {
 		// a value can arrive carrying its own markdown. Anything that is not a plain web or mail
 		// link is left as text rather than written into an href.
 		if (!/^(https?:|mailto:)/i.test(url)) return match
-		anchors.push(
-			`<a href="${url}" style="color: ${linkColor}; text-decoration: underline;">${label}</a>`
-		)
+		const style = linkColor ? ` style="color: ${linkColor}; text-decoration: underline;"` : ''
+		anchors.push(`<a href="${url}"${style}>${label}</a>`)
 		return `${ANCHOR_MARK}${anchors.length - 1}${ANCHOR_MARK}`
 	})
 	return parked
