@@ -13,7 +13,7 @@
 		contrast?: boolean
 		href?: string | null
 		id?: string | null
-		type?: 'main' | 'campaign'
+		type?: 'main' | 'campaign' | 'nearby_event'
 		rules?: BannerRule[] | null
 		children?: import('svelte').Snippet
 	}
