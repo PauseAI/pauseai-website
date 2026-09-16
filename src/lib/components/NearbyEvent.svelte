@@ -57,7 +57,7 @@
 </script>
 
 {#if nearbyEvent}
-	<Banner {contrast}>
+	<Banner {contrast} type="nearby_event">
 		Next up in your area: <Link
 			href={'https://lu.ma/' + nearbyEvent.url + '?utm_source=local-banner'}
 			>{nearbyEvent.name}</Link
