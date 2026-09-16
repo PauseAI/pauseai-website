@@ -9,15 +9,15 @@ const CHAPTERS: Record<string, ChapterBlockData> = {
 	},
 	belgium: { name: 'Belgium', links: [] },
 	spain: { name: 'Spain', links: [{ label: 'Website', url: 'https://pauseai.es' }] },
-	sweden: { name: 'Sweden', links: [{ label: 'Website', url: 'https://pauseai.se/' }] },
-	// The chapters whose own emails draw their links from these rows.
-	'united kingdom': {
-		name: 'United Kingdom',
+	// The chapters whose own emails draw their links from these rows. The UK's email has its
+	// links fixed in code, so it needs no row here.
+	sweden: {
+		name: 'Sweden',
 		links: [
-			// Carries markdown of its own: a row value is free text, and the UK's email splices
+			{ label: 'Website', url: 'https://pauseai.se/' },
+			// Carries markdown of its own: a row value is free text, and the Swedish email splices
 			// it into a sentence rather than rendering it as a bare link.
-			{ label: 'WhatsApp', url: 'https://chat.whatsapp.com/F0nj2RjLNeB1P1hyoDFsTz/**x**' },
-			{ label: 'Events', url: 'https://lu.ma/pauseai.uk' }
+			{ label: 'WhatsApp', url: 'https://chat.whatsapp.com/example/**x**' }
 		]
 	},
 	canada: {
@@ -111,11 +111,11 @@ describe('renderOnboardingEmail', () => {
 	})
 
 	it('leaves a chapter link alone when it carries markdown of its own', async () => {
-		const email = await render('United Kingdom', 'Volunteer')
-		expect(email.html).toContain('href="https://chat.whatsapp.com/F0nj2RjLNeB1P1hyoDFsTz/**x**"')
+		const email = await render('Sweden', 'Volunteer')
+		expect(email.html).toContain('href="https://chat.whatsapp.com/example/**x**"')
 	})
 
-	it('keeps a chapter its own email and its own links when the signup also speaks Spanish', async () => {
+	it('keeps a chapter its own email when the signup also speaks Spanish', async () => {
 		const email = await renderSpeaking('United Kingdom', 'Volunteer', ['English', 'Spanish'])
 		expect(email.subject).toBe('Welcome to PauseAI UK Alex!')
 		expect(email.text).toContain('F0nj2RjLNeB1P1hyoDFsTz')
@@ -172,11 +172,22 @@ describe('renderOnboardingEmail', () => {
 			const email = await render('United Kingdom', intent)
 			expect(email.subject).toBe('Welcome to PauseAI UK Alex!')
 			expect(email.text).toContain('F0nj2RjLNeB1P1hyoDFsTz')
+			expect(email.text).toContain('Mass lobby day in Parliament')
+			expect(email.text).toContain('PS: if you have questions')
 		}
-		expect((await render('United Kingdom', 'Volunteer')).text).toContain(
-			'PS: if you have questions'
-		)
-		expect((await render('United Kingdom', 'None')).text).toContain('PS: if you have questions')
+		// Volunteers are asked to join WhatsApp up front; everyone else hears of it in the footer.
+		const volunteer = await render('United Kingdom', 'Volunteer')
+		expect(volunteer.text).toContain('find your local group chat')
+		const nonVolunteer = await render('United Kingdom', 'None')
+		expect(nonVolunteer.text).not.toContain('find your local group chat')
+		expect(nonVolunteer.text).toContain('protect yourself and your loved ones')
+	})
+
+	it('keeps a two-line list item on two lines, without bold markers in the text', async () => {
+		const email = await render('United Kingdom', 'Volunteer')
+		expect(email.html).toContain('<br><a href="https://luma.com/pauseai-dec26?tk=UEvEYj"')
+		expect(email.text).toContain('1. Saturday 5th December: The march. We are putting on')
+		expect(email.text).toContain('\nJoseph Miller\nDirector of PauseAI UK')
 	})
 
 	it('gives Canada its own volunteer email but the shared copy otherwise', async () => {

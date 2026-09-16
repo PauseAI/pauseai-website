@@ -1,6 +1,11 @@
 import type { EmailBlock, EmailContent } from './blocks.js'
 import { GLOBAL_DISCORD_URL, GLOBAL_SOCIALS, VIDEO_URL, WELCOME_CALLS_URL } from './brand.js'
-import type { ChapterBlockData, IntentGroup, OnboardingEmailLanguage } from './types.js'
+import type {
+	ChapterBlockData,
+	ChapterLink,
+	IntentGroup,
+	OnboardingEmailLanguage
+} from './types.js'
 
 // Chapters that send their own email instead of the shared copy. An override supplies the
 // subject, greeting, body and sign-off; composeBlocks() still adds the fixed lines, in the
@@ -31,93 +36,126 @@ function chapterLink(chapter: ChapterBlockData | null, label: string): string | 
 	return chapter?.links.find((link) => link.label === label)?.url ?? null
 }
 
-// Both UK emails are ported from the live PauseAI UK templates. The booking call is the only
-// UK link with no National Groups field to hold it; the WhatsApp community and the events
-// calendar come from the chapter's row.
+// Both UK emails are ported from the welcome emails PauseAI UK's director sent as MailerSend
+// tests on 2026-09-15, wording kept as written. Every link is fixed here at the chapter's
+// request rather than drawn from the National Groups row, which this section does not read,
+// so keeping the WhatsApp invite and the calendar current is an edit to this file.
+const UK_WHATSAPP_URL = 'https://chat.whatsapp.com/F0nj2RjLNeB1P1hyoDFsTz'
+const UK_EVENTS_CALENDAR_URL = 'https://luma.com/pauseai.uk'
 const UK_INTRO_CALL = 'https://calendar.app.google/w5t7EgCFwCGKcnAS7'
+const UK_CAMPAIGNS_URL = 'https://pauseai.uk/campaigns'
 
-/** "Join the community" step, naming whichever of the two links the row has. */
-function ukCommunityStep(chapter: ChapterBlockData | null): string {
-	const whatsapp = chapterLink(chapter, 'WhatsApp')
-	const calendar = chapterLink(chapter, 'Events')
-	const parts = [
-		whatsapp && `Join the [PauseAI UK WhatsApp community](${whatsapp})`,
-		calendar && `subscribe to our [UK events calendar](${calendar})`
-	].filter(Boolean)
-	return parts.length ? `${parts.join(' and ')}.` : ''
+/** The footer row of the UK emails. The labels are the chapter's own, hence Twitter, not X. */
+const UK_SOCIALS: ChapterLink[] = [
+	{ label: 'Instagram', url: 'https://instagram.com/pauseai_uk' },
+	{ label: 'LinkedIn', url: 'https://www.linkedin.com/company/pauseai-uk/' },
+	{ label: 'Twitter', url: 'https://x.com/pauseai_uk' },
+	{ label: 'TikTok', url: 'https://tiktok.com/@pauseai_uk' },
+	{ label: 'Facebook', url: 'https://www.facebook.com/people/Pause-AI-UK/61587358827177/' }
+]
+
+// TIME-SENSITIVE. The chapter's next events, in the order the chapter lists them (biggest
+// first). Nothing here checks the date, so each one has to be removed once it has happened.
+// The Luma links carry the `tk` keys the chapter's own emails use.
+const UK_LOBBY_DAY_URL = 'https://luma.com/pauseai-0g9r?tk=PTH5F0'
+const UK_EVENTS = [
+	{
+		when: 'Saturday 5th December',
+		title: 'The march.',
+		text: "We are putting on the biggest ever demonstration for AI safety. We need it to grab the world's attention.",
+		url: 'https://luma.com/pauseai-dec26?tk=UEvEYj'
+	},
+	{
+		when: 'Tuesday 20th October',
+		title: 'Mass lobby day in Parliament.',
+		text: "Having an actual conversation with your MP is probably the single best way to improve AI policy. So we're going to Parliament to meet with MPs and talk about this problem.",
+		url: UK_LOBBY_DAY_URL
+	},
+	{
+		when: 'Saturday 26th September',
+		title: 'Flyering and tabling.',
+		text: "What would you expect to see if the world were in severe peril? You would expect to see people on the street warning you about it. Let's be those people.",
+		url: 'https://luma.com/pauseai-c9wb?tk=U5PkA7'
+	}
+]
+
+/** The events list and the two lines after it, shared by both UK emails. The chapter's own
+ *  email reached the lobby day again through a CiviCRM click-tracking redirect; the page it
+ *  redirects to is linked directly. */
+function ukActionBlocks(): EmailBlock[] {
+	return [
+		{
+			type: 'list',
+			ordered: true,
+			items: UK_EVENTS.map(
+				(event) => `**${event.when}: ${event.title}** ${event.text}\n[RSVP here](${event.url})`
+			)
+		},
+		{
+			type: 'paragraph',
+			text: `If you can't make it to London, don't worry. [RSVP to the lobby day on Luma](${UK_LOBBY_DAY_URL}) and click the option on the sign-up form to be sent local opportunities to contact your MP.`
+		},
+		{
+			type: 'paragraph',
+			text: `And finally, the most crucial thing that every single person can do is to send an email to their MP every two weeks to call for AI regulation: [pauseai.uk/campaigns](${UK_CAMPAIGNS_URL})`
+		}
+	]
+}
+
+/** Signature, PS and the community line, shared by both UK emails apart from the closing
+ *  line(s) and whether the footer mentions WhatsApp: volunteers were asked to join it up
+ *  front, everyone else hears of it only here. */
+function ukSignoff(closing: string[], withWhatsApp: boolean): EmailBlock[] {
+	const communityLine = withWhatsApp
+		? `Join the [PauseAI UK WhatsApp community](${UK_WHATSAPP_URL}) and subscribe to our [events calendar](${UK_EVENTS_CALENDAR_URL}).`
+		: `Subscribe to our [events calendar](${UK_EVENTS_CALENDAR_URL}).`
+	return [
+		{ type: 'signoff', lines: closing },
+		{ type: 'paragraph', text: 'Joseph Miller\nDirector of PauseAI UK' },
+		{
+			type: 'paragraph',
+			text: `PS: if you have questions, just hit reply or [book a short call](${UK_INTRO_CALL}) with Joseph.`
+		},
+		{ type: 'paragraph', text: communityLine }
+	]
 }
 
 const uk: ChapterOverride = {
 	name: 'PauseAI UK',
 	language: 'en',
 	content: {
-		// Restyled onto the short, plain note the non-volunteer version below already used
-		// (ported from zr6ke4nyyomgon12), replacing the old rich/video version so UK volunteers
-		// and UK non-volunteers read as one consistent chapter voice. Keeps the video and global
-		// Discord mention, which volunteers get and non-volunteers don't, as one more plain line
-		// rather than a card/button.
-		volunteer: (firstName, chapter) => ({
+		volunteer: (firstName) => ({
 			subject: `Welcome to PauseAI UK ${firstName}!`,
 			htmlStyle: 'plain',
-			greeting: [
-				{ type: 'paragraph', text: `Hey ${firstName},` },
-				{ type: 'paragraph', text: 'Welcome to our growing volunteer network!' }
-			],
+			greeting: [{ type: 'paragraph', text: `Welcome to PauseAI UK, ${firstName}!` }],
 			body: [
-				{ type: 'paragraph', text: "Here's how you can get involved in PauseAI UK:" },
-				{
-					type: 'list',
-					ordered: true,
-					items: [
-						ukCommunityStep(chapter),
-						`If you'd like, [book a short call](${UK_INTRO_CALL}) with Joseph, PauseAI UK's director, so he can say hi and introduce you to the community.`
-					].filter((item) => item.length > 0)
-				},
+				{ type: 'heading', text: 'Join the community' },
 				{
 					type: 'paragraph',
-					text: `Watch our [video introduction](${VIDEO_URL}) for a summary of the Pause position, and join the PauseAI Global [Discord server](${GLOBAL_DISCORD_URL}) to meet the international community.`
-				}
-			],
-			signoff: [
-				{
-					type: 'signoff',
-					lines: [
-						'Looking forward to meeting you,',
-						'[Joseph](mailto:joseph@pauseai.uk) and [Matilda](mailto:matilda@pauseai.uk), the PauseAI UK Team'
-					]
+					text: `If you're interested in volunteering for PauseAI, please join the [PauseAI UK WhatsApp community](${UK_WHATSAPP_URL}), find your local group chat (or suggest a new one) and introduce yourself.`
 				},
-				{ type: 'paragraph', text: 'PS: if you have questions, just hit reply.' }
-			]
+				{ type: 'heading', text: 'Upcoming events' },
+				...ukActionBlocks()
+			],
+			signoff: ukSignoff(['Best wishes,', 'Joseph'], false),
+			socials: UK_SOCIALS
 		}),
-		// From zr6ke4nyyomgon12, minus its first step, which was the confirm link.
-		'non-volunteer': (firstName, chapter) => ({
+		'non-volunteer': (firstName) => ({
 			subject: `Welcome to PauseAI UK ${firstName}!`,
 			htmlStyle: 'plain',
 			greeting: [
 				{ type: 'paragraph', text: `Hey ${firstName},` },
-				{ type: 'paragraph', text: 'Welcome to our community!' }
+				{ type: 'paragraph', text: 'Welcome to PauseAI!' }
 			],
 			body: [
-				{ type: 'paragraph', text: "Here's how you can get involved in PauseAI UK:" },
 				{
-					type: 'list',
-					ordered: true,
-					items: [
-						ukCommunityStep(chapter),
-						`If you'd like, [book a short call](${UK_INTRO_CALL}) with Joseph, PauseAI UK's director, so he can say hi and introduce you to the community.`
-					].filter((item) => item.length > 0)
-				}
-			],
-			signoff: [
-				{
-					type: 'signoff',
-					lines: [
-						'Looking forward to meeting you,',
-						'[Joseph](mailto:joseph@pauseai.uk) and [Matilda](mailto:matilda@pauseai.uk), the PauseAI UK Team'
-					]
+					type: 'heading',
+					text: "Here's how you can help to protect yourself and your loved ones from uncontrolled superhuman AI:"
 				},
-				{ type: 'paragraph', text: 'PS: if you have questions, just hit reply.' }
-			]
+				...ukActionBlocks()
+			],
+			signoff: ukSignoff(['Joseph'], true),
+			socials: UK_SOCIALS
 		})
 	}
 }

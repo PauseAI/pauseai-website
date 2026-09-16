@@ -17,7 +17,9 @@ export function renderText(blocks: EmailBlock[], socials: ChapterLink[] = []): s
 			case 'list':
 				parts.push(
 					block.items
-						.map((item, i) => (block.ordered ? `${i + 1}. ${item}` : `- ${item}`))
+						.map((item, i) =>
+							block.ordered ? `${i + 1}. ${stripBold(item)}` : `- ${stripBold(item)}`
+						)
 						.join('\n')
 				)
 				break

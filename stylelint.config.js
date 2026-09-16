@@ -4,6 +4,9 @@ import { getIgnores } from './scripts/utils/ignores.js'
 export default {
 	// extends: ['stylelint-config-standard'],
 	ignoreFiles: getIgnores(),
+	// Provide custom properties defined anywhere in src (styles.css tokens,
+	// component-level props) to rules like no-unknown-custom-properties.
+	referenceFiles: ['src/styles/**/*.css'],
 	overrides: [
 		{
 			files: ['**/*.svelte'],
@@ -33,6 +36,7 @@ export default {
 		'at-rule-no-vendor-prefix': true,
 		'selector-no-vendor-prefix': true,
 		'media-feature-name-no-vendor-prefix': true,
+		'no-unknown-custom-properties': true,
 
 		// Colors belong in src/styles/styles.css as custom properties, referenced
 		// via var(--token). This bans raw hex outright, and raw rgb()/hsl() component

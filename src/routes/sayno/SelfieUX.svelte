@@ -397,7 +397,6 @@
 	}
 
 	.upload-success {
-		color: var(--success);
 		font-weight: 600;
 		margin: 0.5rem 0;
 	}
