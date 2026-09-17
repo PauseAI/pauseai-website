@@ -6,6 +6,8 @@
 	let { data }: { data: PageData } = $props()
 
 	let showText = $state(false)
+	let previewWidth: 'desktop' | 'phone' = $state('desktop')
+	let copied: 'text' | 'html' | 'failed' | '' = $state('')
 
 	// Re-render on any control change, without a page load: goto() re-runs the server
 	// load and swaps the data in, so only the email changes. Falls back to a plain GET
@@ -18,29 +20,62 @@
 		void goto(`?${params}`, { replaceState: true, keepFocus: true, noScroll: true })
 	}
 
-	// One option per version of the email: Lead renders the same one as Volunteer, and
-	// 'Keep informed' is gone, since no form writes it and it renders the same as None.
-	// srcdoc iframes are same-origin, so the frame can be sized to the email it holds
-	// instead of a fixed height that leaves a long blank gap under a short one. Images
-	// land after load, hence the second measurement.
-	function fitToContent(event: Event) {
-		const frame = event.currentTarget as HTMLIFrameElement
-		const measure = () => {
-			const doc = frame.contentDocument
-			if (!doc) return
-			// scrollHeight can't fall below the frame's own height, so a frame left tall by a
-			// longer email would keep that height forever. Collapse it first, then measure.
-			frame.style.height = '0px'
-			frame.style.height = `${Math.max(240, doc.documentElement.scrollHeight)}px`
-		}
-		measure()
-		setTimeout(measure, 500)
+	// An example sets the axes it is about and leaves the reader's own name and opt-in
+	// setting alone, so flipping between examples doesn't undo what they typed.
+	function showExample(example: Example) {
+		const params = new URLSearchParams({
+			firstName: data.form.firstName,
+			language: example.language,
+			intent: example.intent,
+			country: example.country,
+			subscribed: data.form.subscribed,
+			style: 'auto'
+		})
+		void goto(`?${params}`, { replaceState: true, noScroll: true })
 	}
 
+	// srcdoc iframes are same-origin, so the frame can be sized to the email it holds
+	// instead of a fixed height that leaves a long blank gap under a short one.
+	let frameEl: HTMLIFrameElement | undefined = $state()
+	function measure() {
+		const doc = frameEl?.contentDocument
+		if (!frameEl || !doc) return
+		// scrollHeight can't fall below the frame's own height, so a frame left tall by a
+		// longer email would keep that height forever. Collapse it first, then measure.
+		frameEl.style.height = '0px'
+		frameEl.style.height = `${Math.max(240, doc.documentElement.scrollHeight)}px`
+	}
+	function onFrameLoad() {
+		measure()
+		// Images land after load, hence the second measurement.
+		setTimeout(measure, 500)
+	}
+	function remeasureAfterLayout() {
+		requestAnimationFrame(measure)
+	}
+
+	async function copyEmail(kind: 'text' | 'html') {
+		const payload =
+			kind === 'text'
+				? `Subject: ${data.rendered.subject}\n\n${data.rendered.text}`
+				: data.rendered.html
+		try {
+			await navigator.clipboard.writeText(payload)
+			copied = kind
+			setTimeout(() => {
+				if (copied === kind) copied = ''
+			}, 2500)
+		} catch {
+			copied = 'failed'
+		}
+	}
+
+	// One option per version of the email: Lead renders the same one as Volunteer, and
+	// 'Keep informed' is gone, since no form writes it and it renders the same as None.
 	const INTENT_OPTIONS = [
-		{ value: 'None', label: 'None' },
-		{ value: 'Act now', label: 'Act now' },
-		{ value: 'Volunteer', label: 'Volunteer / Lead' }
+		{ value: 'None', label: "They didn't say" },
+		{ value: 'Act now', label: 'They want to act now' },
+		{ value: 'Volunteer', label: 'They want to volunteer or lead' }
 	]
 
 	const LANGUAGE_LABELS: Record<string, string> = {
@@ -48,202 +83,322 @@
 		es: 'Español',
 		fr: 'Français'
 	}
+
+	const LANGUAGE_NAMES: Record<string, string> = {
+		en: 'English',
+		es: 'Spanish',
+		sv: 'Swedish'
+	}
+
+	const EMAIL_FOR: Record<string, string> = {
+		none: 'the general welcome email',
+		'act-now': 'the welcome email for people who want to act now',
+		volunteer: 'the welcome email for people who want to volunteer'
+	}
+
+	type Example = { label: string; country: string; intent: string; language: string }
+
+	type CountryOption = (typeof data.options.countries)[number]
+
+	function overrideNote(override: CountryOption['override']): string {
+		if (!override) return ''
+		if (override.scope === 'all') return `${override.name} writes its own`
+		if (override.scope === 'volunteer') return `${override.name} writes its own, for volunteers`
+		return `${override.name} writes its own, for non-volunteers`
+	}
+
+	const ownEmailCountries = $derived(data.options.countries.filter((c) => c.override))
+	const sharedCopyExample = $derived(data.options.countries.find((c) => !c.override))
+
+	const examples: Example[] = $derived([
+		{
+			label: 'No chapter — the email on its own',
+			country: '',
+			intent: 'Volunteer',
+			language: 'en'
+		},
+		...(sharedCopyExample
+			? [
+					{
+						label: `Shared email + a chapter block (${sharedCopyExample.name})`,
+						country: sharedCopyExample.name,
+						intent: 'Volunteer',
+						language: 'en'
+					}
+				]
+			: []),
+		{ label: 'Someone just keeping informed', country: '', intent: 'None', language: 'en' },
+		{ label: 'In Spanish', country: '', intent: 'Volunteer', language: 'es' },
+		...ownEmailCountries.map((c) => ({
+			label: `${c.override?.name} — its own email`,
+			country: c.name,
+			intent: 'Volunteer',
+			language: 'en'
+		}))
+	])
+
+	const who = $derived(data.form.firstName.trim() || 'Someone')
+
+	const summary = $derived.by(() => {
+		const { override, chapter, bucket, language } = data.resolved
+		const languageName = LANGUAGE_NAMES[language] ?? language
+		if (override) {
+			return `${who} gets ${override}'s own email, written by the chapter, in ${languageName}.`
+		}
+		const opening = `${who} gets ${EMAIL_FOR[bucket]}, in ${languageName}.`
+		if (chapter) {
+			const count = chapter.links.length
+			return `${opening} It ends with a short block about PauseAI in ${chapter.name}, listing ${count} link${count === 1 ? '' : 's'} from the chapter directory.`
+		}
+		if (language === 'es') {
+			return `${opening} The Spanish email points everyone to PauseAI en Español, so it carries no country chapter block.`
+		}
+		return `${opening} No chapter block — that's what a signup from a country without an active PauseAI chapter sees.`
+	})
 </script>
 
 <svelte:head>
-	<title>Onboarding email preview (dev only)</title>
+	<title>PauseAI welcome email preview</title>
 </svelte:head>
 
-<!-- Force a light scheme: this is a QA tool with hardcoded light panel backgrounds,
-	and the site's dark theme would otherwise leave light text on them. -->
-<div
-	class="qa-tool"
-	style="color-scheme: light; background: var(--white); color: var(--qa-text); font-family: sans-serif; padding: 16px; max-width: 1100px; margin: 0 auto; min-height: 100vh;"
->
-	<h1 style="font-size: 20px;">Onboarding email preview</h1>
-	<div style="color: var(--grey-500); font-size: 14px; max-width: 640px;">
+<!-- Force a light scheme: this page paints its own light panels, and the site's dark theme
+	would otherwise leave light text on them. -->
+<div class="qa-tool">
+	<h1>PauseAI welcome email preview</h1>
+	<p class="lead">
+		This is the email a new supporter receives the moment they sign up on pauseai.info. Change who
+		is signing up and the email updates, so you can read exactly what lands in their inbox.
+	</p>
+
+	<div class="intro">
 		<p>
-			Renders the welcome email that the Airtable onboarding automation sends via
-			<code>/api/onboarding-email</code> (code in <code>src/lib/server/onboardingEmail</code>). Set
-			each input by hand and the email re-renders on change — use it to eyeball copy, layout and
-			links for any point in the matrix without creating a real signup.
+			Most countries get one <strong>shared email</strong>, written centrally in English or Spanish,
+			ending with a short block about the local chapter. A few chapters
+			<strong>write their own email</strong> instead, and it replaces the shared text entirely.
 		</p>
-		<ul style="margin: 8px 0; padding-left: 18px;">
-			<li><strong>First name / Intent</strong> — verbatim from the Members record.</li>
-			<li>
-				<strong>Language</strong> — forces the shared copy's language, en or es (production instead detects
-				it from country + languages). Non-volunteers get English either way, and a chapter override is
-				always in its own language.
-			</li>
-			<li>
-				<strong>Country</strong> — selects the chapter block; only active National Groups countries are
-				listed, anything else gets no chapter block. A chapter that writes its own email replaces the
-				shared copy entirely: PauseAI UK for everyone, PauseAI Canada for volunteers. The panel under
-				the form says which one a given combination resolved to.
-			</li>
-			<li>
-				<strong>Style</strong> — <em>Auto</em> shows what production sends (PauseAI UK → plain
-				layout, everyone else → rich card); <em>Force</em> overrides it for comparison.
-			</li>
-			<li>
-				<strong>Subscribed</strong> — the Members "Email subscription" checkbox. <em>Unknown</em>
-				shows the old hedged "if you opted in" wording (what an unwired caller gets);
-				<em>Yes</em>/<em>No</em> force the definite newsletter line.
-			</li>
-		</ul>
-		<p>
-			The panel under the form shows what the inputs resolved to (intent bucket, chapter). Toggle
-			HTML / plain text with the button below it. See
-			<!-- eslint-disable-next-line svelte/no-restricted-html-elements -- dev-only QA page, not site chrome -->
-			<a href="/onboarding-email-compare">/onboarding-email-compare</a> to check a render against the
-			pre-migration MailerSend template it replaces.
-		</p>
-		<p>
-			Dev tool: not linked from the site, available on <code>localhost</code> and Netlify deploy previews
-			only, 404s on the production domain. Chapter data shown is public National Groups info, not PII.
+		<p class="muted">
+			Nothing here is sent to anyone, and no signup is created — it is a preview of the real
+			wording, rendered by the same code that sends the live emails.
 		</p>
 	</div>
 
-	<form
-		bind:this={formEl}
-		method="GET"
-		onsubmit={rerender}
-		style="display: grid; grid-template-columns: 120px 1fr; gap: 8px 12px; align-items: start; margin-bottom: 16px; padding: 12px; border: 1px solid var(--grey-150); border-radius: 6px; max-width: 640px;"
-	>
-		<label for="firstName" style="font-size: 13px; padding-top: 6px;">First name</label>
-		<input
-			id="firstName"
-			name="firstName"
-			value={data.form.firstName}
-			onchange={rerender}
-			style="font-size: 13px; padding: 6px 8px; border: 1px solid var(--grey-100); border-radius: 4px;"
-		/>
+	<h2>Start from an example</h2>
+	<div class="examples">
+		{#each examples as example}
+			<button type="button" class="chip" onclick={() => showExample(example)}>
+				{example.label}
+			</button>
+		{/each}
+	</div>
 
-		<span style="font-size: 13px; padding-top: 6px;">Language</span>
-		<div style="display: flex; flex-wrap: wrap; gap: 4px 16px; padding-top: 6px;">
-			{#each data.options.languages as lang}
-				<label style="font-size: 13px; display: flex; gap: 4px; align-items: center;">
-					<input
-						type="radio"
-						name="language"
-						value={lang}
-						checked={data.form.language === lang}
-						onchange={rerender}
-					/>
-					{LANGUAGE_LABELS[lang]}
-					<span style="color: var(--grey-400);">({lang})</span>
-				</label>
-			{/each}
+	<h2>Or set it yourself</h2>
+	<form bind:this={formEl} method="GET" onsubmit={rerender} class="controls">
+		<label for="firstName">Their first name</label>
+		<div>
+			<input id="firstName" name="firstName" value={data.form.firstName} onchange={rerender} />
 		</div>
 
-		<label for="intent" style="font-size: 13px; padding-top: 6px;">Intent</label>
-		<select
-			id="intent"
-			name="intent"
-			value={data.form.intent === 'Lead' ? 'Volunteer' : data.form.intent}
-			onchange={rerender}
-			style="font-size: 13px; padding: 6px 8px; border: 1px solid var(--grey-100); border-radius: 4px;"
-		>
-			{#each INTENT_OPTIONS as option}
-				<option value={option.value}>{option.label}</option>
-			{/each}
-		</select>
-
-		<label for="country" style="font-size: 13px; padding-top: 6px;">Country</label>
+		<label for="country">Their country</label>
 		<div>
-			<select
-				id="country"
-				name="country"
-				value={data.form.country}
-				onchange={rerender}
-				style="width: 100%; font-size: 13px; padding: 6px 8px; border: 1px solid var(--grey-100); border-radius: 4px;"
-			>
-				<option value="">— none (no chapter) —</option>
+			<select id="country" name="country" value={data.form.country} onchange={rerender}>
+				<option value="">— no chapter in their country —</option>
 				{#each data.options.countries as c}
-					<option value={c.name}>{c.name}{c.override ? ` — ${c.override}` : ''}</option>
+					<option value={c.name}
+						>{c.name}{c.override ? ` — ${overrideNote(c.override)}` : ''}</option
+					>
 				{/each}
 			</select>
-			<span style="font-size: 12px; color: var(--qa-text-muted);">
-				Active National Groups records ({data.options.countries.length}). Sets the chapter block
-				only; language is chosen above. Any other country gets no chapter block.
+			<span class="hint muted">
+				{#if data.options.countries.length}
+					The {data.options.countries.length} countries with an active PauseAI chapter. Signups from anywhere
+					else get the email without a chapter block.
+				{:else}
+					The chapter directory couldn't be reached, so only the version without a chapter block is
+					available right now.
+				{/if}
 			</span>
 		</div>
 
-		<span style="font-size: 13px; padding-top: 6px;">Style</span>
-		<div style="display: flex; flex-wrap: wrap; gap: 4px 16px; padding-top: 6px;">
-			{#each [['auto', 'Auto (per chapter)'], ['rich', 'Force rich'], ['plain', 'Force plain']] as [value, label]}
-				<label style="font-size: 13px; display: flex; gap: 4px; align-items: center;">
-					<input
-						type="radio"
-						name="style"
-						{value}
-						checked={data.form.style === value}
-						onchange={rerender}
-					/>
-					{label}
-				</label>
-			{/each}
+		<label for="intent">Why they signed up</label>
+		<div>
+			<select
+				id="intent"
+				name="intent"
+				value={data.form.intent === 'Lead' ? 'Volunteer' : data.form.intent}
+				onchange={rerender}
+			>
+				{#each INTENT_OPTIONS as option}
+					<option value={option.value}>{option.label}</option>
+				{/each}
+			</select>
+			<span class="hint muted"
+				>What they picked on the sign-up form. Each gets its own wording.</span
+			>
 		</div>
 
-		<span style="font-size: 13px; padding-top: 6px;">Subscribed</span>
-		<div style="display: flex; flex-wrap: wrap; gap: 4px 16px; padding-top: 6px;">
-			{#each [['unknown', 'Unknown (hedged)'], ['yes', 'Yes'], ['no', 'No']] as [value, label]}
-				<label style="font-size: 13px; display: flex; gap: 4px; align-items: center;">
-					<input
-						type="radio"
-						name="subscribed"
-						{value}
-						checked={data.form.subscribed === value}
-						onchange={rerender}
-					/>
-					{label}
-				</label>
-			{/each}
+		<span class="field-label">Language</span>
+		<div>
+			<div class="radios">
+				{#each data.options.languages as lang}
+					<label class="radio">
+						<input
+							type="radio"
+							name="language"
+							value={lang}
+							checked={data.form.language === lang}
+							onchange={rerender}
+						/>
+						{LANGUAGE_LABELS[lang]}
+					</label>
+				{/each}
+			</div>
+			<span class="hint muted">
+				Which language the shared email is written in. A chapter that writes its own email always
+				sends it in that chapter's language, so this makes no difference there.
+			</span>
+		</div>
+
+		<span class="field-label">Newsletter opt-in</span>
+		<div>
+			<div class="radios">
+				{#each [['unknown', 'Not known'], ['yes', 'They opted in'], ['no', "They didn't"]] as [value, label]}
+					<label class="radio">
+						<input
+							type="radio"
+							name="subscribed"
+							{value}
+							checked={data.form.subscribed === value}
+							onchange={rerender}
+						/>
+						{label}
+					</label>
+				{/each}
+			</div>
+			<span class="hint muted">
+				Whether they ticked the newsletter box, which changes the one-line promise just before the
+				sign-off. <em>Not known</em> is the hedged "if you opted in" wording, which is what goes out until
+				the sign-up form passes the answer through.
+			</span>
+		</div>
+
+		<span class="field-label">Layout</span>
+		<div>
+			<div class="radios">
+				{#each [['auto', 'As actually sent'], ['rich', 'Branded card'], ['plain', 'Plain note']] as [value, label]}
+					<label class="radio">
+						<input
+							type="radio"
+							name="style"
+							{value}
+							checked={data.form.style === value}
+							onchange={rerender}
+						/>
+						{label}
+					</label>
+				{/each}
+			</div>
+			<span class="hint muted">
+				Each chapter gets one or the other; switch to compare the same words in both.
+			</span>
 		</div>
 
 		<span></span>
-		<button
-			class="primary"
-			type="submit"
-			style="justify-self: start; font-size: 13px; padding: 6px 14px; border-radius: 4px; border: 1px solid var(--grey-100); cursor: pointer; background: var(--hero-orange); color: var(--white);"
-		>
-			Render
-		</button>
+		<div>
+			<button class="primary" type="submit">Update preview</button>
+		</div>
 	</form>
 
-	<div
-		style="font-size: 13px; background: var(--qa-panel-bg); color: var(--qa-text); padding: 10px 12px; border-radius: 6px; margin-bottom: 12px;"
-	>
-		<strong>Resolved:</strong>
-		<ResolvedSummary resolved={data.resolved} />
-	</div>
+	<div class="summary">{summary}</div>
 
-	<div style="margin-bottom: 8px; font-size: 14px;">
-		<strong>Subject:</strong>
-		{data.rendered.subject}
-	</div>
-
-	<div style="margin-bottom: 8px;">
-		<button
-			onclick={() => (showText = !showText)}
-			style="font-size: 13px; padding: 4px 8px; cursor: pointer;"
-		>
-			{showText ? 'Show HTML preview' : 'Show plain text'}
-		</button>
+	<div class="preview-bar">
+		<div class="subject"><span class="muted">Subject</span> {data.rendered.subject}</div>
+		<div class="preview-actions">
+			<button type="button" onclick={() => (showText = !showText)}>
+				{showText ? 'Show the email' : 'Show plain text'}
+			</button>
+			{#if !showText}
+				<div class="radios">
+					{#each [['desktop', 'Desktop'], ['phone', 'Phone']] as [value, label]}
+						<label class="radio">
+							<input
+								type="radio"
+								name="previewWidth"
+								{value}
+								bind:group={previewWidth}
+								onchange={remeasureAfterLayout}
+							/>
+							{label}
+						</label>
+					{/each}
+				</div>
+			{/if}
+			<button type="button" onclick={() => copyEmail('text')}>Copy text</button>
+			<button type="button" onclick={() => copyEmail('html')}>Copy HTML</button>
+			{#if copied === 'text'}
+				<span class="copied">Text copied</span>
+			{:else if copied === 'html'}
+				<span class="copied">HTML copied</span>
+			{:else if copied === 'failed'}
+				<span class="copied">Couldn't copy — select the text instead</span>
+			{/if}
+		</div>
 	</div>
 
 	{#if showText}
-		<pre
-			style="white-space: pre-wrap; background: var(--qa-code-bg); color: var(--qa-text); padding: 16px; border-radius: 6px; font-size: 13px; line-height: 1.5;">{data
-				.rendered.text}</pre>
+		<pre class="plain-text">{data.rendered.text}</pre>
 	{:else}
-		<iframe
-			title="Email HTML preview"
-			srcdoc={data.rendered.html}
-			onload={fitToContent}
-			style="display: block; width: 100%; height: 600px; border: 1px solid var(--grey-100); border-radius: 6px;"
-		></iframe>
+		<div class="frame-wrap" class:phone={previewWidth === 'phone'}>
+			<iframe
+				bind:this={frameEl}
+				title="Email preview"
+				srcdoc={data.rendered.html}
+				onload={onFrameLoad}
+			></iframe>
+		</div>
 	{/if}
+
+	<details class="panel">
+		<summary>Writing or translating your chapter's own email</summary>
+		<p>
+			Use <strong>Copy text</strong> above to take the current wording as a starting point: translate
+			it, or rewrite it in your chapter's voice.
+		</p>
+		<p>You supply the subject line, the opening, the body, the sign-off and your social links.</p>
+		<p>
+			Two lines are always added for you, in your language, wherever your text goes: the line asking
+			the reader to confirm their email address, and a one-line promise about what we will send
+			them. Please don't write your own versions of those — a welcome email that loses the
+			confirmation link leaves the reader unconfirmed.
+		</p>
+		<p>
+			Your chapter's links can either be pulled from your entry in the chapter directory, so that
+			keeping that entry current keeps the email current, or written into the email text, if your
+			chapter would rather control them itself. PauseAI UK does the latter, PauseAI Canada the
+			former.
+		</p>
+		<p>
+			Chapters can't edit this text themselves yet: send your version to PauseAI global and we will
+			put it in. Self-service editing is planned as part of the CRM.
+		</p>
+	</details>
+
+	<details class="panel">
+		<summary>For developers</summary>
+		<p>
+			Rendered by <code>/api/onboarding-email</code>, which the Airtable onboarding automation
+			calls; the copy and layout live in <code>src/lib/server/onboardingEmail</code>. This page is
+			not linked from the site: it runs on <code>localhost</code> and Netlify deploy previews, and 404s
+			on the production domain. Chapter data shown is public National Groups info, not PII.
+		</p>
+		<p>
+			Resolved: <ResolvedSummary resolved={data.resolved} />
+		</p>
+		<p>
+			<!-- eslint-disable-next-line svelte/no-restricted-html-elements -- dev-only QA page, not site chrome -->
+			<a href="/onboarding-email-compare">/onboarding-email-compare</a> checks a render against the pre-migration
+			MailerSend template it replaces.
+		</p>
+	</details>
 </div>
 
 <style>
@@ -254,20 +409,34 @@
 	   styles this page. */
 	.qa-tool {
 		forced-color-adjust: none;
+		color-scheme: light;
+		background: var(--white);
+		padding: 16px;
+		max-width: 1100px;
+		margin: 0 auto;
+		min-height: 100vh;
+		font-size: 14px;
+		line-height: 1.5;
 	}
 
 	/* The site's body font is light-weight, which reads as thin grey text on these panels,
 	   and thinner still in browsers that render their own way. */
 	.qa-tool,
-	.qa-tool :is(p, li, ul, label, span, div, code, pre, input, select, option, button) {
+	.qa-tool
+		:is(p, label, span, div, code, pre, input, select, option, button, summary, details, em) {
 		font-weight: 400 !important;
 		font-family:
 			-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
 	}
 
 	.qa-tool,
-	.qa-tool :is(p, li, ul, label, h1, span, code, strong, em, div, pre) {
+	.qa-tool :is(p, label, h1, h2, span, code, strong, em, div, pre, summary) {
 		color: var(--qa-text) !important;
+	}
+
+	/* Wins over the blanket colour above, which is `!important` for the reason given there. */
+	.qa-tool :is(.muted, .muted span, .muted em, .hint, .copied) {
+		color: var(--qa-text-muted) !important;
 	}
 
 	.qa-tool :is(input, select, option, button) {
@@ -276,14 +445,203 @@
 		border: 1px solid var(--grey-100);
 	}
 
-	.qa-tool button.primary {
+	.qa-tool a {
+		color: var(--qa-link) !important;
+		text-decoration: underline;
+	}
+
+	h1 {
+		font-size: 22px;
+		margin: 0 0 4px;
+	}
+
+	h2 {
+		font-size: 15px;
+		margin: 24px 0 8px;
+	}
+
+	.lead {
+		font-size: 15px;
+		max-width: 640px;
+		margin: 0 0 12px;
+	}
+
+	.intro {
+		max-width: 640px;
+		border-left: 3px solid var(--hero-orange);
+		padding: 2px 0 2px 12px;
+	}
+
+	.intro p {
+		margin: 6px 0;
+	}
+
+	.examples {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 8px;
+		max-width: 780px;
+	}
+
+	.chip {
+		font-size: 13px;
+		padding: 6px 12px;
+		border-radius: 999px;
+		cursor: pointer;
+	}
+
+	.chip:hover {
+		border-color: var(--hero-orange);
+	}
+
+	.controls {
+		display: grid;
+		grid-template-columns: 150px minmax(0, 1fr);
+		gap: 10px 12px;
+		align-items: start;
+		margin-bottom: 16px;
+		padding: 12px;
+		border: 1px solid var(--grey-150);
+		border-radius: 6px;
+		max-width: 680px;
+	}
+
+	.controls :is(label, .field-label) {
+		font-size: 13px;
+		padding-top: 7px;
+	}
+
+	.controls :is(input:not([type]), select) {
+		font-size: 13px;
+		padding: 6px 8px;
+		border-radius: 4px;
+		width: 100%;
+		max-width: 420px;
+	}
+
+	.hint {
+		display: block;
+		font-size: 12px;
+		margin-top: 3px;
+		max-width: 420px;
+	}
+
+	.radios {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 4px 16px;
+		padding-top: 6px;
+	}
+
+	.radio {
+		font-size: 13px;
+		display: flex;
+		gap: 4px;
+		align-items: center;
+		padding-top: 0;
+	}
+
+	button.primary {
+		font-size: 13px;
+		padding: 6px 14px;
+		border-radius: 4px;
+		cursor: pointer;
 		color: var(--white) !important;
 		background: var(--hero-orange) !important;
 		border-color: var(--hero-orange);
 	}
 
-	.qa-tool a {
-		color: var(--qa-link) !important;
-		text-decoration: underline;
+	.summary {
+		font-size: 14px;
+		background: var(--qa-panel-bg);
+		padding: 10px 12px;
+		border-radius: 6px;
+		margin-bottom: 12px;
+		max-width: 780px;
+	}
+
+	.preview-bar {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 8px 16px;
+		align-items: baseline;
+		justify-content: space-between;
+		margin-bottom: 8px;
+	}
+
+	.subject {
+		font-size: 14px;
+	}
+
+	.subject .muted {
+		font-size: 12px;
+		text-transform: uppercase;
+		letter-spacing: 0.04em;
+		margin-right: 4px;
+	}
+
+	.preview-actions {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 8px 12px;
+		align-items: center;
+	}
+
+	.preview-actions button {
+		font-size: 13px;
+		padding: 4px 10px;
+		border-radius: 4px;
+		cursor: pointer;
+	}
+
+	.preview-actions .radios {
+		padding-top: 0;
+	}
+
+	.copied {
+		font-size: 12px;
+	}
+
+	.frame-wrap {
+		margin: 0 auto;
+	}
+
+	.frame-wrap.phone {
+		max-width: 390px;
+	}
+
+	.frame-wrap iframe {
+		display: block;
+		width: 100%;
+		height: 600px;
+		border: 1px solid var(--grey-100);
+		border-radius: 6px;
+	}
+
+	.plain-text {
+		white-space: pre-wrap;
+		background: var(--qa-code-bg);
+		padding: 16px;
+		border-radius: 6px;
+		font-size: 13px;
+		line-height: 1.5;
+	}
+
+	.panel {
+		margin-top: 16px;
+		border: 1px solid var(--grey-150);
+		border-radius: 6px;
+		padding: 10px 12px;
+		max-width: 680px;
+	}
+
+	.panel summary {
+		cursor: pointer;
+		font-size: 14px;
+	}
+
+	.panel p {
+		font-size: 13px;
+		margin: 10px 0;
 	}
 </style>

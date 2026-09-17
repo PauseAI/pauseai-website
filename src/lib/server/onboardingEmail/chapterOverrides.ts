@@ -25,6 +25,12 @@ type ChapterOverride = {
 
 type ChapterContent = (firstName: string, chapter: ChapterBlockData | null) => EmailContent
 
+export type ChapterOverrideSummary = {
+	name: string
+	/** Who in that country gets the chapter's own email rather than the shared copy. */
+	scope: 'all' | 'volunteer' | 'non-volunteer'
+}
+
 export type ResolvedOverride = {
 	name: string
 	language: OnboardingEmailLanguage
@@ -335,13 +341,13 @@ export function getChapterOverride(
 	return override && content ? { name: override.name, language: override.language, content } : null
 }
 
-/** How a country's own email is described in the preview picker, or null when it gets the
- *  shared copy. */
-export function describeChapterOverride(country: string): string | null {
+/** The chapter whose own email a country gets, and who it covers, or null when the country
+ *  gets the shared copy. Labels the preview page's country picker. */
+export function describeChapterOverride(country: string): ChapterOverrideSummary | null {
 	const volunteer = getChapterOverride(country, 'volunteer')
 	const nonVolunteer = getChapterOverride(country, 'non-volunteer')
-	if (volunteer && nonVolunteer) return 'own email'
-	if (volunteer) return 'own email for volunteers'
-	if (nonVolunteer) return 'own email for non-volunteers'
-	return null
+	const name = (volunteer ?? nonVolunteer)?.name
+	if (!name) return null
+	if (volunteer && nonVolunteer) return { name, scope: 'all' }
+	return { name, scope: volunteer ? 'volunteer' : 'non-volunteer' }
 }

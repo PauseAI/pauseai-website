@@ -8,13 +8,15 @@ import type { BaseLanguage, OnboardingEmailHtmlStyle } from '$lib/server/onboard
 import { error } from '@sveltejs/kit'
 import type { PageServerLoad } from './$types'
 
-// Internal QA tool for eyeballing the onboarding-email render output. Every axis the
-// email varies over (language, intent, country/chapter) is an individual control on
-// the page; the query string holds the current values so a given preview is
-// shareable/bookmarkable. Not linked from the site nav. Available in dev and on
-// Netlify deploy previews (*.netlify.app), 404s on the production domain so it can't
-// be stumbled onto there. (Chapter data is public National Groups info, not PII, so
-// this is safe to expose on preview URLs rather than adding real auth.)
+// Reads the onboarding email for any point in the matrix. Written for the chapter leads
+// and organisers who review and adapt this copy, not only for developers, so the page
+// itself avoids code detail; deploy-preview URLs are handed out to them directly. Every
+// axis the email varies over (language, intent, country/chapter) is an individual control;
+// the query string holds the current values so a given preview is shareable/bookmarkable.
+// Not linked from the site nav. Available in dev and on Netlify deploy previews
+// (*.netlify.app), 404s on the production domain so it can't be stumbled onto there.
+// (Chapter data is public National Groups info, not PII, so this is safe to expose on
+// preview URLs rather than adding real auth.)
 function isAllowedHost(hostname: string): boolean {
 	return hostname === 'localhost' || hostname === '127.0.0.1' || hostname.endsWith('.netlify.app')
 }
