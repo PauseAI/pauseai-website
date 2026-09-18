@@ -290,43 +290,24 @@
 	{/if}
 
 	<details class="panel">
-		<summary>Writing or translating your chapter's own email</summary>
+		<summary>Writing your chapter's own email</summary>
 		<p>
-			Pick your country above, set Intent to the version you want to adapt, and use
-			<strong>Copy text</strong> to take it as your base. Then translate it, or rewrite it in your chapter's
-			voice.
+			You can translate the shared email (<strong>Copy text</strong> copies the version on screen), or
+			write your own from scratch, as PauseAI UK and PauseAI Sverige did; pick their countries above to
+			read them. One email for everyone is fine, or one for volunteers and one for everyone else.
 		</p>
 		<p>
-			You can write one email for everyone, or two. For a volunteer email, start from
-			<em>Volunteer / Lead</em>. For everyone else, start from <em>None</em>: <em>Act now</em>
-			differs only in its subject, first line and closing, and your chapter's email would go to both.
-			To see a finished chapter email, pick one of the countries named at the top of this page.
-		</p>
-		<p>You supply the subject line, the opening, the body, the sign-off and your social links.</p>
-		<p>
-			Two lines are always added for you, in your language, wherever your text goes: the line asking
-			the reader to confirm their email address, and a one-line promise about what we will send
-			them. Please don't write your own versions of those — a welcome email that loses the
-			confirmation link leaves the reader unconfirmed.
+			Leave out the line asking people to confirm their email address and the note about what we
+			will send them: we add both for you, in your language.
 		</p>
 		<p>
-			Your chapter's links can either be pulled from the details listed for your chapter on
-			pauseai.info/communities, so that keeping those current keeps the email current, or written
-			into the email text, if your chapter would rather control them itself. PauseAI UK does the
-			latter, PauseAI Canada the former.
-		</p>
-		<p>
-			Please also point new volunteers to PauseAI Global: its
+			Please point new volunteers to PauseAI Global's
 			<!-- eslint-disable-next-line svelte/no-restricted-html-elements -- dev-only QA page, not site chrome -->
-			<a href={data.globalLinks.welcomeCalls}>welcome calls</a> for new volunteers and the
+			<a href={data.globalLinks.welcomeCalls}>welcome calls</a> and
 			<!-- eslint-disable-next-line svelte/no-restricted-html-elements -- dev-only QA page, not site chrome -->
-			<a href={data.globalLinks.discord}>global Discord</a>. If your email isn't in English, mention
-			that both are. PauseAI Sverige's email does this in one sentence; pick Sweden above to see it.
+			<a href={data.globalLinks.discord}>Discord</a> (both in English), as PauseAI Sverige does.
 		</p>
-		<p>
-			Chapters can't edit this text themselves yet: send your version to PauseAI global and we will
-			put it in.
-		</p>
+		<p>Send your text and your chapter's social links to PauseAI Global, and we will put it in.</p>
 	</details>
 
 	<details class="panel">
