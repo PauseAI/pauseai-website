@@ -32,7 +32,7 @@ export const ADDRESS_LINE = 'PauseAI, Box C5957, Zeist, 3704 GS, Netherlands'
 const NONE_SUBSCRIBED =
 	"We'll keep you informed about important news, campaign updates, and opportunities to take a more active role in this movement, including local opportunities where there's an active chapter near you. We may also occasionally send you a critical alert."
 const NONE_NOT_SUBSCRIBED =
-	"You didn't opt in to our newsletter, so we won't add you to it — but we may still occasionally send you a critical alert."
+	"You didn't opt in to our newsletter, so we won't add you to it. We may still occasionally send you a critical alert."
 const ACT_NOW_SUBSCRIBED =
 	"We'll keep you in the loop about future actions, campaign updates, and other opportunities to support the PauseAI movement, including local opportunities where there's an active chapter near you. We may also occasionally send you a critical alert."
 const VOLUNTEER_SUBSCRIBED =
