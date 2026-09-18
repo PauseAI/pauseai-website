@@ -147,7 +147,7 @@
 		const opening = `${who} gets ${EMAIL_FOR[bucket]}, in ${languageName}.`
 		if (chapter) {
 			const count = chapter.links.length
-			return `${opening} It ends with a short block about PauseAI in ${chapter.name}, listing ${count} link${count === 1 ? '' : 's'} — the same ones listed for it on pauseai.info/communities.`
+			return `${opening} It ends with a short block about PauseAI in ${chapter.name}, listing ${count} link${count === 1 ? '' : 's'}, as shown for it on pauseai.info/communities.`
 		}
 		if (language === 'es') {
 			return `${opening} The Spanish email points everyone to PauseAI en Español, so it carries no country chapter block.`
