@@ -128,7 +128,7 @@ describe('renderOnboardingEmail', () => {
 		expect((await render('', 'Volunteer')).text).toContain('the PauseAI monthly update')
 	})
 
-	it('states the newsletter promise instead of hedging once subscribed status is known', async () => {
+	it('states the shared newsletter promise instead of hedging once subscribed status is known', async () => {
 		const subscribedShared = await renderSubscribed('', 'Volunteer', true)
 		expect(subscribedShared.text).toContain("You'll receive the PauseAI monthly update")
 		expect(subscribedShared.text).not.toContain('If you opted in')
@@ -136,17 +136,15 @@ describe('renderOnboardingEmail', () => {
 		const notSubscribedShared = await renderSubscribed('', 'Volunteer', false)
 		expect(notSubscribedShared.text).toContain("You didn't opt in to our newsletter")
 		expect(notSubscribedShared.text).not.toContain('If you opted in')
+	})
 
-		const subscribedChapter = await renderSubscribed('United Kingdom', 'Volunteer', true)
-		expect(subscribedChapter.text).toContain(
-			"We'll keep you posted about our news and any critical alerts."
-		)
-		expect(subscribedChapter.text).not.toContain('If you opted in')
-
-		// A chapter's own-words line stays hedged when we know they didn't subscribe: it's not
-		// worth spelling out the "no" to someone reading their own chapter's welcome note.
-		const notSubscribedChapter = await renderSubscribed('United Kingdom', 'Volunteer', false)
-		expect(notSubscribedChapter.text).toContain("If you opted in, we'll keep you posted.")
+	it("gives a chapter's own email one newsletter line, whatever the signup chose", async () => {
+		for (const subscribed of [true, false, undefined]) {
+			const uk = await renderSubscribed('United Kingdom', 'Volunteer', subscribed)
+			expect(uk.text).toContain("If you opted in, we'll keep you posted.")
+			const sweden = await renderSubscribed('Sweden', 'Volunteer', subscribed)
+			expect(sweden.text).toContain('Om du har valt att prenumerera håller vi dig uppdaterad.')
+		}
 	})
 
 	it('treats every Spanish-speaking country alike', async () => {
