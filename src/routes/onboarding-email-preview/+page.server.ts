@@ -1,6 +1,7 @@
 export const prerender = false
 
 import { dev } from '$app/environment'
+import { groupOf, resolveIntentBucket } from '$lib/server/onboardingEmail/blocks.js'
 import { listActiveChapterCountries } from '$lib/server/onboardingEmail/chapter.js'
 import { describeChapterOverride } from '$lib/server/onboardingEmail/chapterOverrides.js'
 import { resolveOnboardingEmailLanguage } from '$lib/server/onboardingEmail/language.js'
@@ -37,13 +38,6 @@ function parseLanguage(value: string | null): BaseLanguage {
 	return LANGUAGES.includes(value as BaseLanguage) ? (value as BaseLanguage) : DEFAULTS.language
 }
 
-// The renderer builds absolute asset URLs on pauseai.info, where these images only exist
-// once this is merged and deployed. Point them at whatever origin is serving this page so
-// the preview shows the real logo on a deploy preview too.
-function withLocalAssets(html: string, origin: string): string {
-	return html.replaceAll('https://pauseai.info/pauseai-', `${origin}/pauseai-`)
-}
-
 export const load: PageServerLoad = async ({ url }) => {
 	if (!dev && !isAllowedHost(url.hostname)) error(404, 'Not found')
 
@@ -52,11 +46,18 @@ export const load: PageServerLoad = async ({ url }) => {
 
 	const firstName = params.get('firstName')?.trim() || 'Alex'
 	const country = hasQuery ? (params.get('country') ?? '') : DEFAULTS.country
+	const intent = (hasQuery ? (params.get('intent') ?? '') : DEFAULTS.intent).trim()
 	// A signup from a Spanish-speaking country gets Spanish whatever languages they listed, so
-	// the choice only means something elsewhere, where it stands in for having listed Spanish.
+	// the choice only means something for a volunteer elsewhere, where it stands in for having
+	// listed Spanish. A non-volunteer elsewhere is routed to English, although one who listed
+	// Spanish would lose the chapter part: the page locks that control, so a Spanish route kept
+	// from an earlier choice would change the email with nothing on screen saying why.
 	const spanishCountry = resolveOnboardingEmailLanguage(country, undefined) === 'es'
-	const language = spanishCountry ? 'es' : parseLanguage(params.get('language'))
-	const intent = hasQuery ? (params.get('intent') ?? '') : DEFAULTS.intent
+	const language: BaseLanguage = spanishCountry
+		? 'es'
+		: groupOf(resolveIntentBucket(intent)) === 'non-volunteer'
+			? 'en'
+			: parseLanguage(params.get('language'))
 	// 'auto' (or unset) = let the email's content pick (the UK override -> plain, rest ->
 	// rich), matching the production endpoint. 'rich'/'plain' force it.
 	const styleParam = params.get('style')
@@ -107,8 +108,6 @@ export const load: PageServerLoad = async ({ url }) => {
 		// The language the shared copy was routed to, before a non-volunteer falls back to English:
 		// a Spanish route drops the country chapter even then.
 		routedLanguage: language,
-		rendered,
-		// Copy HTML takes `rendered.html`: these asset URLs die with the deploy preview.
-		previewHtml: withLocalAssets(rendered.html, url.origin)
+		rendered
 	}
 }

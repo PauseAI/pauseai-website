@@ -7,12 +7,13 @@ import type { Action } from 'svelte/action'
  */
 export const fitFrame: Action<HTMLIFrameElement> = (frame) => {
 	function measure() {
-		const doc = frame.contentDocument
-		if (!doc) return
+		// Null while a new srcdoc is still loading; the load event measures it once it's there.
+		const root = frame.contentDocument?.documentElement
+		if (!root) return
 		// scrollHeight can't fall below the frame's own height, so a frame left tall by a
 		// longer email would keep that height forever. Collapse it first, then measure.
 		frame.style.height = '0px'
-		frame.style.height = `${Math.max(240, doc.documentElement.scrollHeight)}px`
+		frame.style.height = `${Math.max(240, root.scrollHeight)}px`
 	}
 
 	function onLoad() {

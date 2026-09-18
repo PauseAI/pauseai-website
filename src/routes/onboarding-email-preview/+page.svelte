@@ -113,7 +113,7 @@
 		// "A, B, and C for volunteers".
 		const names = data.options.countries
 			.flatMap(({ override }) => (override ? [override] : []))
-			.toSorted((a, b) => Number(a.scope !== 'all') - Number(b.scope !== 'all'))
+			.sort((a, b) => Number(a.scope !== 'all') - Number(b.scope !== 'all'))
 			.map((o) => (o.scope === 'all' ? o.name : `${o.name} for ${AUDIENCE[o.scope]}`))
 		const shown =
 			names.length > MAX_NAMED_OWN_EMAIL_CHAPTERS
@@ -133,7 +133,7 @@
 
 	const summary = $derived.by(() => {
 		const { override, chapter, bucket, group, language } = data.resolved
-		const who = data.form.firstName.trim() || 'Someone'
+		const who = data.form.firstName
 		const inLanguage = `in ${languageName(language)}`
 		if (override)
 			return `${who} gets ${override}'s own email, written by the chapter, ${inLanguage}.`
@@ -147,7 +147,7 @@
 				: `${opening} The email for non-volunteers only exists in English, and Spanish-speaking signups get no country chapter part.`
 		}
 		if (!chapter) {
-			return `${opening} It has no chapter part: that's what a signup from a country without an active PauseAI chapter gets.`
+			return `${opening} It has no chapter part, as for any signup from a country not in the list above.`
 		}
 		const count = chapter.links.length
 		const links = `${count} link${count === 1 ? '' : 's'} from pauseai.info/communities`
@@ -166,7 +166,7 @@
 
 {#snippet radioGroup(
 	name: string,
-	options: readonly { value: string; label: string; disabled?: boolean }[],
+	options: readonly { value: string; label: string }[],
 	current: string
 )}
 	<div
@@ -182,7 +182,6 @@
 					{name}
 					value={option.value}
 					checked={current === option.value}
-					disabled={option.disabled}
 					onchange={rerender}
 				/>
 				{option.label}
@@ -262,8 +261,9 @@
 			</select>
 			<span class="hint" id="country-hint">
 				{#if data.options.countries.length}
-					The {data.options.countries.length} countries with an active PauseAI chapter. Signups from anywhere
-					else get the email without a chapter part.
+					The {data.options.countries.length} countries whose chapter PauseAI Global points new signups
+					to. Signups from anywhere else get the email without a chapter part, including the US: PauseAI
+					US welcomes its own members.
 				{:else}
 					The list of chapters couldn't be loaded, so you can't pick another country right now. Try
 					reloading the page.
@@ -292,15 +292,17 @@
 
 		<span class="field-label" id="language-label">Language</span>
 		<div>
-			{@render radioGroup(
-				'language',
-				data.options.languages.map((lang) => ({
-					value: lang,
-					label: LANGUAGE_LABELS[lang],
-					disabled: data.form.languageLock !== null
-				})),
-				data.form.language
-			)}
+			{#if data.form.languageLock}
+				<span class="locked-value" aria-describedby="language-hint"
+					>{languageName(data.form.language)}</span
+				>
+			{:else}
+				{@render radioGroup(
+					'language',
+					data.options.languages.map((lang) => ({ value: lang, label: LANGUAGE_LABELS[lang] })),
+					data.form.language
+				)}
+			{/if}
 			<span class="hint" id="language-hint">
 				{#if data.form.languageLock === 'own-email'}
 					{data.resolved.override} writes its own email, in {languageName(data.resolved.language)}.
@@ -311,8 +313,8 @@
 					Volunteers from {data.form.country} always get the Spanish version, whatever languages they
 					listed.
 				{:else}
-					Which language the shared email is written in. Signups from Spain and Latin America always
-					get Spanish; anyone else gets it if they listed Spanish among their languages.
+					Which language the shared email is written in. Signups from Spanish-speaking countries
+					always get Spanish; anyone else gets it if they listed Spanish among their languages.
 				{/if}
 			</span>
 		</div>
@@ -360,7 +362,7 @@
 		<pre class="plain-text">{data.rendered.text}</pre>
 	{:else}
 		<div class="frame-wrap" class:phone={previewWidth === 'phone'}>
-			<iframe title="Email preview" srcdoc={data.previewHtml} use:fitFrame></iframe>
+			<iframe title="Email preview" srcdoc={data.rendered.html} use:fitFrame></iframe>
 		</div>
 	{/if}
 
@@ -506,6 +508,12 @@
 		flex-wrap: wrap;
 		gap: 4px 16px;
 		padding-top: 6px;
+	}
+
+	.locked-value {
+		display: inline-block;
+		font-size: 13px;
+		padding-top: 7px;
 	}
 
 	.radio {
