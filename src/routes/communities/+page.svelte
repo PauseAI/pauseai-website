@@ -2,6 +2,7 @@
 	import PostMeta from '$lib/components/PostMeta.svelte'
 	import Link from '$lib/components/Link.svelte'
 	import CommunitiesList from './CommunitiesList.svelte'
+	import UpcomingEvents from '$lib/components/UpcomingEvents.svelte'
 	import type { GeoApiResponse } from '$api/geo/+server'
 	import type { CalendarResponse } from '$api/calendar/+server'
 	import type { StyleSpecification } from 'maplibre-gl'
@@ -199,15 +200,7 @@
 
 <p>Interested in attending a PauseAI community event? Find one below.</p>
 
-<iframe
-	src="https://lu.ma/embed/calendar/cal-E1qhLPs5IvlQr8S/events?"
-	height="450"
-	frameborder="0"
-	style="border: 1px solid var(--border-luma-embed); border-radius: 24px; width: 100%;"
-	allowfullscreen
-	aria-hidden="false"
-	title="PauseAI Events Calendar"
-></iframe>
+<UpcomingEvents />
 
 <p>
 	Find the full list of events <Link href="https://lu.ma/PauseAI">here</Link>.
