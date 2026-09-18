@@ -138,12 +138,10 @@
 
 	const summary = $derived.by(() => {
 		const { override, chapter, bucket, group, language } = data.resolved
-		const who = data.form.firstName
 		const inLanguage = `in ${languageName(language)}`
-		if (override)
-			return `${who} gets ${override}'s own email, written by the chapter, ${inLanguage}.`
+		if (override) return `This is ${override}'s own email, written by the chapter, ${inLanguage}.`
 
-		const opening = `${who} gets ${EMAIL_FOR[bucket]}, ${inLanguage}.`
+		const opening = `This is ${EMAIL_FOR[bucket]}, ${inLanguage}.`
 		// The Spanish route leaves out country chapters, and only volunteers have a Spanish
 		// version, so a Spanish non-volunteer is resolved as English with no chapter.
 		if (data.routedLanguage === 'es') {
