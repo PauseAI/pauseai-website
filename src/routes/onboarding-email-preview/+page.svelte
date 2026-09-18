@@ -143,7 +143,7 @@
 			Most countries get one <strong>shared email</strong>, written centrally in English or Spanish,
 			ending with a short block about the local chapter. A few chapters
 			<strong>write their own email</strong>
-			instead{#if ownEmailChapters}{' '}({ownEmailChapters}){/if}, and it replaces the shared text
+			instead{ownEmailChapters ? ` (${ownEmailChapters})` : ''}, and it replaces the shared text
 			entirely.
 		</p>
 		<p class="muted">
