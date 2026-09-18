@@ -152,12 +152,12 @@
 		if (!chapter) {
 			return `${opening} It has no chapter part, as for any signup from a country not in the list above.`
 		}
-		const count = chapter.links.length
-		const links = `${count} link${count === 1 ? '' : 's'} from pauseai.info/communities`
+		const hasLinks = chapter.links.length > 0
+		const links = "the chapter's links, the same ones as on pauseai.info/communities"
 		if (group === 'volunteer') {
-			return `${opening} It says PauseAI ${chapter.name} will be in touch${count ? `, and lists ${links}` : ''}.`
+			return `${opening} It says PauseAI ${chapter.name} will be in touch${hasLinks ? `, and lists ${links}` : ''}.`
 		}
-		return count
+		return hasLinks
 			? `${opening} It includes a short part about PauseAI in ${chapter.name}, with ${links}.`
 			: `${opening} It has no chapter part, because PauseAI ${chapter.name} has no links on pauseai.info/communities yet.`
 	})
