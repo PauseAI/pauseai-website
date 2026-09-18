@@ -165,8 +165,9 @@
 <div class="qa-tool">
 	<h1>PauseAI welcome email preview</h1>
 	<p class="lead">
-		This is the email a new supporter receives the moment they sign up on pauseai.info. Change who
-		is signing up and the email updates, so you can read exactly what lands in their inbox.
+		This is the email a new supporter receives the moment they sign up on pauseai.info. Pick an
+		example below, or set the supporter's name, country and intent yourself, to see exactly what
+		they would receive.
 	</p>
 
 	<div class="intro">
