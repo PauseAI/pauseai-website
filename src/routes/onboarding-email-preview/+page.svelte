@@ -208,6 +208,10 @@
 			<strong>write their own email</strong>
 			instead{ownEmailChapters ? ` (${ownEmailChapters})` : ''}, and it replaces the shared text.
 		</p>
+		<p>
+			The chapter part lists your chapter's links, the same ones as on pauseai.info/national-groups.
+			To change them, send the new ones to PauseAI Global.
+		</p>
 		<p class="muted">
 			Nothing here is sent to anyone, and no signup is created — it is a preview of the real
 			wording, rendered by the same code that sends the live emails.
