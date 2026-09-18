@@ -165,7 +165,7 @@
 
 {#snippet radioGroup(
 	name: string,
-	options: readonly { value: string; label: string }[],
+	options: readonly { value: string; label: string; disabled?: boolean }[],
 	current: string
 )}
 	<div
@@ -181,6 +181,7 @@
 					{name}
 					value={option.value}
 					checked={current === option.value}
+					disabled={option.disabled}
 					onchange={rerender}
 				/>
 				{option.label}
@@ -292,13 +293,22 @@
 		<div>
 			{@render radioGroup(
 				'language',
-				data.options.languages.map((lang) => ({ value: lang, label: LANGUAGE_LABELS[lang] })),
+				data.options.languages.map((lang) => ({
+					value: lang,
+					label: LANGUAGE_LABELS[lang],
+					disabled: data.form.languageForced && lang !== 'es'
+				})),
 				data.form.language
 			)}
 			<span class="hint" id="language-hint">
-				Which language the shared email is written in. For real signups it is chosen from their
-				country and the languages they gave. A chapter that writes its own email always uses its own
-				language.
+				{#if data.form.languageForced}
+					Signups from {data.form.country} always get the Spanish version. Only the volunteer email has
+					one: None and Act now are in English.
+				{:else}
+					Which language the shared email is written in. Signups from Spain and Latin America always
+					get Spanish; anyone else gets it if they listed Spanish among their languages.
+				{/if}
+				A chapter that writes its own email always uses its own language.
 			</span>
 		</div>
 

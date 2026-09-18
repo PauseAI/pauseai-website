@@ -3,6 +3,7 @@ export const prerender = false
 import { dev } from '$app/environment'
 import { listActiveChapterCountries } from '$lib/server/onboardingEmail/chapter.js'
 import { describeChapterOverride } from '$lib/server/onboardingEmail/chapterOverrides.js'
+import { resolveOnboardingEmailLanguage } from '$lib/server/onboardingEmail/language.js'
 import { GLOBAL_DISCORD_URL, WELCOME_CALLS_URL } from '$lib/server/onboardingEmail/brand.js'
 import { renderOnboardingEmail, resolveOnboardingEmail } from '$lib/server/onboardingEmail/index.js'
 import type { BaseLanguage, OnboardingEmailHtmlStyle } from '$lib/server/onboardingEmail/types.js'
@@ -50,8 +51,11 @@ export const load: PageServerLoad = async ({ url }) => {
 	const hasQuery = [...params.keys()].length > 0
 
 	const firstName = params.get('firstName')?.trim() || 'Alex'
-	const language = parseLanguage(params.get('language'))
 	const country = hasQuery ? (params.get('country') ?? '') : DEFAULTS.country
+	// A signup from a Spanish-speaking country gets Spanish whatever languages they listed, so
+	// the choice only means something elsewhere, where it stands in for having listed Spanish.
+	const languageForced = resolveOnboardingEmailLanguage(country, undefined) === 'es'
+	const language = languageForced ? 'es' : parseLanguage(params.get('language'))
 	const intent = hasQuery ? (params.get('intent') ?? '') : DEFAULTS.intent
 	// 'auto' (or unset) = let the email's content pick (the UK override -> plain, rest ->
 	// rich), matching the production endpoint. 'rich'/'plain' force it.
@@ -77,6 +81,7 @@ export const load: PageServerLoad = async ({ url }) => {
 		form: {
 			firstName,
 			language,
+			languageForced,
 			country,
 			intent: INTENT_CHOICES.includes(intent) ? intent : 'None',
 			style: htmlStyle ?? 'auto'
