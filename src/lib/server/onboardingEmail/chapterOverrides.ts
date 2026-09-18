@@ -28,7 +28,7 @@ type ChapterContent = (firstName: string, chapter: ChapterBlockData | null) => E
 export type ChapterOverrideSummary = {
 	name: string
 	/** Who in that country gets the chapter's own email rather than the shared copy. */
-	scope: 'all' | 'volunteer' | 'non-volunteer'
+	scope: IntentGroup | 'all'
 }
 
 export type ResolvedOverride = {

@@ -9,15 +9,11 @@ import type { BaseLanguage, OnboardingEmailHtmlStyle } from '$lib/server/onboard
 import { error } from '@sveltejs/kit'
 import type { PageServerLoad } from './$types'
 
-// Reads the onboarding email for any point in the matrix. Written for the chapter leads
-// and organisers who review and adapt this copy, not only for developers, so the page
-// itself avoids code detail; deploy-preview URLs are handed out to them directly. Every
-// axis the email varies over (language, intent, country/chapter) is an individual control;
-// the query string holds the current values so a given preview is shareable/bookmarkable.
-// Not linked from the site nav. Available in dev and on Netlify deploy previews
-// (*.netlify.app), 404s on the production domain so it can't be stumbled onto there.
-// (Chapter data is public National Groups info, not PII, so this is safe to expose on
-// preview URLs rather than adding real auth.)
+// Deploy-preview URLs of this page are handed to chapter leads, not only developers, so the
+// page itself avoids code detail. The query string is the whole state, so a preview can be
+// shared or bookmarked. Available in dev and on Netlify deploy previews (*.netlify.app),
+// 404s on the production domain. (Chapter data is public National Groups info, not PII, so
+// this is safe to expose on preview URLs rather than adding real auth.)
 function isAllowedHost(hostname: string): boolean {
 	return hostname === 'localhost' || hostname === '127.0.0.1' || hostname.endsWith('.netlify.app')
 }
@@ -27,9 +23,14 @@ const LANGUAGES: BaseLanguage[] = ['en', 'es']
 
 const DEFAULTS = {
 	language: 'en' as BaseLanguage,
-	country: 'United Kingdom',
+	// The shared email, which is what most countries get, rather than one chapter's own.
+	country: '',
 	intent: 'Volunteer'
 }
+
+// The page's intent select offers these. Any other value renders as None, so the select
+// shows None rather than going blank.
+const INTENT_CHOICES = ['None', 'Act now', 'Volunteer', 'Lead']
 
 function parseLanguage(value: string | null): BaseLanguage {
 	return LANGUAGES.includes(value as BaseLanguage) ? (value as BaseLanguage) : DEFAULTS.language
@@ -48,7 +49,7 @@ export const load: PageServerLoad = async ({ url }) => {
 	const params = url.searchParams
 	const hasQuery = [...params.keys()].length > 0
 
-	const firstName = params.get('firstName') ?? 'Alex'
+	const firstName = params.get('firstName')?.trim() || 'Alex'
 	const language = parseLanguage(params.get('language'))
 	const country = hasQuery ? (params.get('country') ?? '') : DEFAULTS.country
 	const intent = hasQuery ? (params.get('intent') ?? '') : DEFAULTS.intent
@@ -58,51 +59,38 @@ export const load: PageServerLoad = async ({ url }) => {
 	const htmlStyle: OnboardingEmailHtmlStyle | undefined =
 		styleParam === 'plain' || styleParam === 'rich' ? styleParam : undefined
 
-	// 'unknown' (or unset) leaves the newsletter line hedged, matching a caller that hasn't
-	// wired the Members "Email subscription" checkbox through; 'yes'/'no' force it so the
-	// two definite versions can be eyeballed too.
-	const subscribedParam = params.get('subscribed')
-	const subscribed: boolean | undefined =
-		subscribedParam === 'yes' ? true : subscribedParam === 'no' ? false : undefined
-
 	const renderParams = {
 		firstName,
 		country,
 		intent,
 		languageOverride: language,
 		htmlStyle,
-		subscribed,
 		airtable_id: 'previewRecordId123'
 	}
-	const rendered = await renderOnboardingEmail(renderParams)
-	rendered.html = withLocalAssets(rendered.html, url.origin)
-
-	// Flagged in the picker so it is obvious which countries replace the shared copy.
-	const chapterCountries = (await listActiveChapterCountries()).map((name) => ({
-		name,
-		override: describeChapterOverride(name)
-	}))
-
-	// Surfaced in a small "what the inputs resolved to" panel so it's obvious which
-	// branch of the matrix produced the email on screen.
-	const resolved = await resolveOnboardingEmail(renderParams)
+	const [rendered, countryNames, resolved] = await Promise.all([
+		renderOnboardingEmail(renderParams),
+		listActiveChapterCountries(),
+		resolveOnboardingEmail(renderParams)
+	])
 
 	return {
 		form: {
 			firstName,
 			language,
 			country,
-			intent,
-			style: htmlStyle ?? 'auto',
-			subscribed: subscribedParam === 'yes' ? 'yes' : subscribedParam === 'no' ? 'no' : 'unknown'
+			intent: INTENT_CHOICES.includes(intent) ? intent : 'None',
+			style: htmlStyle ?? 'auto'
 		},
 		options: {
 			languages: LANGUAGES,
-			countries: chapterCountries
+			// Flagged in the picker so it is obvious which countries replace the shared copy.
+			countries: countryNames.map((name) => ({ name, override: describeChapterOverride(name) }))
 		},
 		// For the page's advice to chapters, from the constants the emails themselves use.
 		globalLinks: { welcomeCalls: WELCOME_CALLS_URL, discord: GLOBAL_DISCORD_URL },
 		resolved,
-		rendered
+		rendered,
+		// Copy HTML takes `rendered.html`: these asset URLs die with the deploy preview.
+		previewHtml: withLocalAssets(rendered.html, url.origin)
 	}
 }

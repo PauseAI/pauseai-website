@@ -1,13 +1,18 @@
 <script lang="ts">
 	import { goto } from '$app/navigation'
+	import { navigating } from '$app/state'
 	import type { PageData } from './$types'
+	import { fitFrame } from './fitFrame.js'
 	import ResolvedSummary from './ResolvedSummary.svelte'
 
 	let { data }: { data: PageData } = $props()
 
+	type Language = PageData['options']['languages'][number]
+	type Resolved = PageData['resolved']
+	type OverrideSummary = NonNullable<PageData['options']['countries'][number]['override']>
+
 	let showText = $state(false)
 	let previewWidth: 'desktop' | 'phone' = $state('desktop')
-	let copied: 'text' | 'html' | 'failed' | '' = $state('')
 
 	// Re-render on any control change, without a page load: goto() re-runs the server
 	// load and swaps the data in, so only the email changes. Falls back to a plain GET
@@ -20,41 +25,40 @@
 		void goto(`?${params}`, { replaceState: true, keepFocus: true, noScroll: true })
 	}
 
-	// srcdoc iframes are same-origin, so the frame can be sized to the email it holds
-	// instead of a fixed height that leaves a long blank gap under a short one.
-	let frameEl: HTMLIFrameElement | undefined = $state()
-	function measure() {
-		const doc = frameEl?.contentDocument
-		if (!frameEl || !doc) return
-		// scrollHeight can't fall below the frame's own height, so a frame left tall by a
-		// longer email would keep that height forever. Collapse it first, then measure.
-		frameEl.style.height = '0px'
-		frameEl.style.height = `${Math.max(240, doc.documentElement.scrollHeight)}px`
-	}
-	function onFrameLoad() {
-		measure()
-		// Images land after load, hence the second measurement.
-		setTimeout(measure, 500)
-	}
-	function remeasureAfterLayout() {
-		requestAnimationFrame(measure)
-	}
+	// Until the server load returns, `data.rendered` is still the previous email.
+	const updating = $derived(navigating.to !== null)
+
+	const COPY_STATUS = {
+		text: 'Text copied',
+		html: 'HTML copied',
+		'failed-text': "Couldn't copy: your browser blocked it. Select the text below instead.",
+		'failed-html': "Couldn't copy: your browser blocked it."
+	} as const
+	// Tied to the render it was about, so the message goes once the email changes. Raw, so the
+	// identity check against `data.rendered` isn't defeated by a state proxy.
+	let copied: { status: keyof typeof COPY_STATUS; rendered: PageData['rendered'] } | null =
+		$state.raw(null)
+	let copyTimer: ReturnType<typeof setTimeout> | undefined
 
 	async function copyEmail(kind: 'text' | 'html') {
+		const { rendered } = data
 		const payload =
-			kind === 'text'
-				? `Subject: ${data.rendered.subject}\n\n${data.rendered.text}`
-				: data.rendered.html
+			kind === 'text' ? `Subject: ${rendered.subject}\n\n${rendered.text}` : rendered.html
+		clearTimeout(copyTimer)
 		try {
 			await navigator.clipboard.writeText(payload)
-			copied = kind
-			setTimeout(() => {
-				if (copied === kind) copied = ''
-			}, 2500)
+			copied = { status: kind, rendered }
+			copyTimer = setTimeout(() => (copied = null), 2500)
 		} catch {
-			copied = 'failed'
+			copied = { status: `failed-${kind}`, rendered }
+			if (kind === 'text') showText = true
 		}
 	}
+
+	const status = $derived.by(() => {
+		if (updating) return 'Updating preview…'
+		return copied?.rendered === data.rendered ? COPY_STATUS[copied.status] : ''
+	})
 
 	// One option per version of the email: Lead renders the same one as Volunteer, and
 	// 'Keep informed' is gone, since no form writes it and it renders the same as None.
@@ -64,45 +68,52 @@
 		{ value: 'Volunteer', label: 'Volunteer / Lead' }
 	]
 
-	const LANGUAGE_LABELS: Record<string, string> = {
+	const LANGUAGE_LABELS: Record<Language, string> = {
 		en: 'English',
-		es: 'Español',
-		fr: 'Français'
+		es: 'Español'
 	}
 
-	const LANGUAGE_NAMES: Record<string, string> = {
-		en: 'English',
-		es: 'Spanish',
-		sv: 'Swedish'
-	}
+	const STYLE_OPTIONS = [
+		{ value: 'auto', label: 'As actually sent' },
+		{ value: 'rich', label: 'Branded card' },
+		{ value: 'plain', label: 'Plain note' }
+	]
 
-	const EMAIL_FOR: Record<string, string> = {
+	const WIDTH_OPTIONS = [
+		{ value: 'desktop', label: 'Desktop' },
+		{ value: 'phone', label: 'Phone' }
+	] as const
+
+	const languageNames = new Intl.DisplayNames('en', { type: 'language' })
+
+	const EMAIL_FOR: Record<Resolved['bucket'], string> = {
 		none: 'the general welcome email',
 		'act-now': 'the welcome email for people who want to act now',
 		volunteer: 'the welcome email for people who want to volunteer'
 	}
 
-	type CountryOption = (typeof data.options.countries)[number]
-
-	function overrideNote(override: CountryOption['override']): string {
-		if (!override) return ''
-		if (override.scope === 'all') return `${override.name} writes its own`
-		if (override.scope === 'volunteer') return `${override.name} writes its own, for volunteers`
-		return `${override.name} writes its own, for non-volunteers`
+	const AUDIENCE: Record<Exclude<OverrideSummary['scope'], 'all'>, string> = {
+		volunteer: 'volunteers',
+		'non-volunteer': 'non-volunteers'
 	}
 
-	const ownEmailCountries = $derived(data.options.countries.filter((c) => c.override))
+	function overrideNote(override: OverrideSummary): string {
+		return override.scope === 'all'
+			? `${override.name} writes its own`
+			: `${override.name} writes its own, for ${AUDIENCE[override.scope]}`
+	}
+
 	// Past this many the intro sentence turns into a list, so it names the first few and counts
 	// the rest; every one is still marked in the country picker.
 	const MAX_NAMED_OWN_EMAIL_CHAPTERS = 4
 
-	// Scope first, so a chapter covering only some signups reads last: "A, B, and C for volunteers".
 	const ownEmailChapters = $derived.by(() => {
-		const names = ownEmailCountries
-			.toSorted((a, b) => Number(a.override?.scope !== 'all') - Number(b.override?.scope !== 'all'))
-			.map(({ override }) =>
-				override?.scope === 'all' ? override.name : `${override?.name} for ${override?.scope}s`
-			)
+		// Whole-country chapters first, so one covering only some signups reads last:
+		// "A, B, and C for volunteers".
+		const names = data.options.countries
+			.flatMap(({ override }) => (override ? [override] : []))
+			.toSorted((a, b) => Number(a.scope !== 'all') - Number(b.scope !== 'all'))
+			.map((o) => (o.scope === 'all' ? o.name : `${o.name} for ${AUDIENCE[o.scope]}`))
 		const shown =
 			names.length > MAX_NAMED_OWN_EMAIL_CHAPTERS
 				? [
@@ -113,23 +124,38 @@
 		return new Intl.ListFormat('en', { type: 'conjunction' }).format(shown)
 	})
 
-	const who = $derived(data.form.firstName.trim() || 'Someone')
+	// A bookmarked country, or the default one when the chapter list failed to load, still
+	// needs an option, or the select shows a different country from the one being previewed.
+	const countryMissing = $derived(
+		data.form.country !== '' && !data.options.countries.some((c) => c.name === data.form.country)
+	)
 
 	const summary = $derived.by(() => {
-		const { override, chapter, bucket, language } = data.resolved
-		const languageName = LANGUAGE_NAMES[language] ?? language
-		if (override) {
-			return `${who} gets ${override}'s own email, written by the chapter, in ${languageName}.`
+		const { override, chapter, bucket, group, language } = data.resolved
+		const who = data.form.firstName.trim() || 'Someone'
+		const inLanguage = `in ${languageNames.of(language) ?? language}`
+		if (override)
+			return `${who} gets ${override}'s own email, written by the chapter, ${inLanguage}.`
+
+		const opening = `${who} gets ${EMAIL_FOR[bucket]}, ${inLanguage}.`
+		// The Spanish route leaves out country chapters, and only volunteers have a Spanish
+		// version, so a Spanish non-volunteer is resolved as English with no chapter.
+		if (data.form.language === 'es') {
+			return group === 'volunteer'
+				? `${opening} The Spanish email points everyone to PauseAI en Español, so it has no country chapter part.`
+				: `${opening} The email for non-volunteers only exists in English, and Spanish-speaking signups get no country chapter part.`
 		}
-		const opening = `${who} gets ${EMAIL_FOR[bucket]}, in ${languageName}.`
-		if (chapter) {
-			const count = chapter.links.length
-			return `${opening} It ends with a short block about PauseAI in ${chapter.name}, listing ${count} link${count === 1 ? '' : 's'}, as shown for it on pauseai.info/communities.`
+		if (!chapter) {
+			return `${opening} It has no chapter part: that's what a signup from a country without an active PauseAI chapter gets.`
 		}
-		if (language === 'es') {
-			return `${opening} The Spanish email points everyone to PauseAI en Español, so it carries no country chapter block.`
+		const count = chapter.links.length
+		const links = `${count} link${count === 1 ? '' : 's'} from pauseai.info/communities`
+		if (group === 'volunteer') {
+			return `${opening} It says PauseAI ${chapter.name} will be in touch${count ? `, and lists ${links}` : ''}.`
 		}
-		return `${opening} No chapter block — that's what a signup from a country without an active PauseAI chapter sees.`
+		return count
+			? `${opening} It includes a short part about PauseAI in ${chapter.name}, with ${links}.`
+			: `${opening} It has no chapter part, because PauseAI ${chapter.name} has no links on pauseai.info/communities yet.`
 	})
 </script>
 
@@ -137,19 +163,44 @@
 	<title>PauseAI welcome email preview</title>
 </svelte:head>
 
-<!-- Force a light scheme: this page paints its own light panels, and the site's dark theme
-	would otherwise leave light text on them. -->
+{#snippet radioGroup(
+	name: string,
+	options: readonly { value: string; label: string }[],
+	current: string
+)}
+	<div
+		class="radios"
+		role="radiogroup"
+		aria-labelledby="{name}-label"
+		aria-describedby="{name}-hint"
+	>
+		{#each options as option}
+			<label class="radio">
+				<input
+					type="radio"
+					{name}
+					value={option.value}
+					checked={current === option.value}
+					onchange={rerender}
+				/>
+				{option.label}
+			</label>
+		{/each}
+	</div>
+{/snippet}
+
+<!-- eslint-disable svelte/no-restricted-html-elements -- standalone preview tool with its own light styling; the site's Link component adds site chrome it doesn't want -->
 <div class="qa-tool">
 	<h1>PauseAI welcome email preview</h1>
 	<p class="lead">
 		This is the email a new supporter receives the moment they sign up on pauseai.info. Set the
-		supporter's name, country and intent below to see exactly what they would receive.
+		supporter's name, country and intent below to see what they would receive.
 	</p>
 
 	<div class="intro">
 		<p>
 			Most countries get one <strong>shared email</strong>, written centrally in English or Spanish,
-			ending with a short block about the local chapter. A few chapters
+			with a short part about the local chapter. A few chapters
 			<strong>write their own email</strong>
 			instead{ownEmailChapters ? ` (${ownEmailChapters})` : ''}, and it replaces the shared text
 			entirely.
@@ -174,9 +225,7 @@
 		</p>
 		<p>
 			Please mention PauseAI Global's
-			<!-- eslint-disable-next-line svelte/no-restricted-html-elements -- dev-only QA page, not site chrome -->
 			<a href={data.globalLinks.welcomeCalls}>welcome calls</a> for new volunteers and its
-			<!-- eslint-disable-next-line svelte/no-restricted-html-elements -- dev-only QA page, not site chrome -->
 			<a href={data.globalLinks.discord}>Discord</a>, and that both are in English.
 		</p>
 		<p>
@@ -188,27 +237,34 @@
 
 	<form bind:this={formEl} method="GET" onsubmit={rerender} class="controls">
 		<label for="firstName">Their first name</label>
-		<div>
-			<input id="firstName" name="firstName" value={data.form.firstName} onchange={rerender} />
-		</div>
+		<input id="firstName" name="firstName" value={data.form.firstName} onchange={rerender} />
 
 		<label for="country">Their country</label>
 		<div>
-			<select id="country" name="country" value={data.form.country} onchange={rerender}>
+			<select
+				id="country"
+				name="country"
+				value={data.form.country}
+				onchange={rerender}
+				aria-describedby="country-hint"
+			>
 				<option value="">— no chapter in their country —</option>
+				{#if countryMissing}
+					<option value={data.form.country}>{data.form.country}</option>
+				{/if}
 				{#each data.options.countries as c}
 					<option value={c.name}
 						>{c.name}{c.override ? ` — ${overrideNote(c.override)}` : ''}</option
 					>
 				{/each}
 			</select>
-			<span class="hint muted">
+			<span class="hint" id="country-hint">
 				{#if data.options.countries.length}
 					The {data.options.countries.length} countries with an active PauseAI chapter. Signups from anywhere
-					else get the email without a chapter block.
+					else get the email without a chapter part.
 				{:else}
-					The list of chapters couldn't be loaded, so only the email without a chapter block can be
-					shown. Try reloading the page.
+					The list of chapters couldn't be loaded, so you can't pick another country right now. Try
+					reloading the page.
 				{/if}
 			</span>
 		</div>
@@ -220,56 +276,38 @@
 				name="intent"
 				value={data.form.intent === 'Lead' ? 'Volunteer' : data.form.intent}
 				onchange={rerender}
+				aria-describedby="intent-hint"
 			>
 				{#each INTENT_OPTIONS as option}
 					<option value={option.value}>{option.label}</option>
 				{/each}
 			</select>
-			<span class="hint muted"
-				>What they picked on the sign-up form. Each gets its own wording.</span
-			>
-		</div>
-
-		<span class="field-label">Language</span>
-		<div>
-			<div class="radios">
-				{#each data.options.languages as lang}
-					<label class="radio">
-						<input
-							type="radio"
-							name="language"
-							value={lang}
-							checked={data.form.language === lang}
-							onchange={rerender}
-						/>
-						{LANGUAGE_LABELS[lang]}
-					</label>
-				{/each}
-			</div>
-			<span class="hint muted">
-				Which language the shared email is written in. A chapter that writes its own email always
-				sends it in that chapter's language, so this makes no difference there.
+			<span class="hint" id="intent-hint">
+				What they picked on the sign-up form. Volunteer and Lead get the same email, and a chapter's
+				own email can be the same whatever they picked.
 			</span>
 		</div>
 
-		<span class="field-label">Layout</span>
+		<span class="field-label" id="language-label">Language</span>
 		<div>
-			<div class="radios">
-				{#each [['auto', 'As actually sent'], ['rich', 'Branded card'], ['plain', 'Plain note']] as [value, label]}
-					<label class="radio">
-						<input
-							type="radio"
-							name="style"
-							{value}
-							checked={data.form.style === value}
-							onchange={rerender}
-						/>
-						{label}
-					</label>
-				{/each}
-			</div>
-			<span class="hint muted">
-				Each chapter gets one or the other; switch to compare the same words in both.
+			{@render radioGroup(
+				'language',
+				data.options.languages.map((lang) => ({ value: lang, label: LANGUAGE_LABELS[lang] })),
+				data.form.language
+			)}
+			<span class="hint" id="language-hint">
+				Which language the shared email is written in. For real signups it is chosen from their
+				country and the languages they gave. A chapter that writes its own email always uses its own
+				language.
+			</span>
+		</div>
+
+		<span class="field-label" id="style-label">Layout</span>
+		<div>
+			{@render radioGroup('style', STYLE_OPTIONS, data.form.style)}
+			<span class="hint" id="style-hint">
+				The shared email always uses the branded card; a chapter's own email can use either. Switch
+				to compare the same words in both.
 			</span>
 		</div>
 	</form>
@@ -280,33 +318,26 @@
 		<div class="subject"><span class="muted">Subject</span> {data.rendered.subject}</div>
 		<div class="preview-actions">
 			<button type="button" onclick={() => (showText = !showText)}>
-				{showText ? 'Show the email' : 'Show plain text'}
+				{showText ? 'Show as email' : 'Show as text'}
 			</button>
 			{#if !showText}
-				<div class="radios">
-					{#each [['desktop', 'Desktop'], ['phone', 'Phone']] as [value, label]}
+				<div class="radios" role="radiogroup" aria-label="Preview width">
+					{#each WIDTH_OPTIONS as option}
 						<label class="radio">
 							<input
 								type="radio"
 								name="previewWidth"
-								{value}
+								value={option.value}
 								bind:group={previewWidth}
-								onchange={remeasureAfterLayout}
 							/>
-							{label}
+							{option.label}
 						</label>
 					{/each}
 				</div>
 			{/if}
-			<button type="button" onclick={() => copyEmail('text')}>Copy text</button>
-			<button type="button" onclick={() => copyEmail('html')}>Copy HTML</button>
-			{#if copied === 'text'}
-				<span class="copied">Text copied</span>
-			{:else if copied === 'html'}
-				<span class="copied">HTML copied</span>
-			{:else if copied === 'failed'}
-				<span class="copied">Couldn't copy — select the text instead</span>
-			{/if}
+			<button type="button" disabled={updating} onclick={() => copyEmail('text')}>Copy text</button>
+			<button type="button" disabled={updating} onclick={() => copyEmail('html')}>Copy HTML</button>
+			<span class="copied" role="status">{status}</span>
 		</div>
 	</div>
 
@@ -314,12 +345,7 @@
 		<pre class="plain-text">{data.rendered.text}</pre>
 	{:else}
 		<div class="frame-wrap" class:phone={previewWidth === 'phone'}>
-			<iframe
-				bind:this={frameEl}
-				title="Email preview"
-				srcdoc={data.rendered.html}
-				onload={onFrameLoad}
-			></iframe>
+			<iframe title="Email preview" srcdoc={data.previewHtml} use:fitFrame></iframe>
 		</div>
 	{/if}
 
@@ -335,7 +361,6 @@
 			Resolved: <ResolvedSummary resolved={data.resolved} />
 		</p>
 		<p>
-			<!-- eslint-disable-next-line svelte/no-restricted-html-elements -- dev-only QA page, not site chrome -->
 			<a href="/onboarding-email-compare">/onboarding-email-compare</a> checks a render against the pre-migration
 			MailerSend template it replaces.
 		</p>
@@ -343,11 +368,11 @@
 </div>
 
 <style>
-	/* This tool paints its own light panels, so it has to set every colour itself:
-	   otherwise a browser that forces a dark scheme on pages (Zen, high-contrast mode,
-	   reader-style extensions) leaves light text on them. `!important` and
-	   forced-color-adjust are what survive those, and are safe here because nothing else
-	   styles this page. */
+	/* This tool paints its own light panels, so it has to set every colour itself, and forces
+	   color-scheme: light: otherwise the site's dark theme, or a browser that forces a dark
+	   scheme on pages (Zen, high-contrast mode, reader-style extensions), leaves light text on
+	   them. `!important` and forced-color-adjust are what survive those, and are safe here
+	   because nothing else styles this page. */
 	.qa-tool {
 		forced-color-adjust: none;
 		color-scheme: light;
@@ -375,7 +400,7 @@
 	}
 
 	/* Wins over the blanket colour above, which is `!important` for the reason given there. */
-	.qa-tool :is(.muted, .muted span, .hint, .copied) {
+	.qa-tool :is(.muted, .hint, .copied) {
 		color: var(--qa-text-muted) !important;
 	}
 
@@ -412,6 +437,23 @@
 		margin: 6px 0;
 	}
 
+	.guide {
+		max-width: 680px;
+		margin-bottom: 20px;
+		padding: 12px 14px;
+		background: var(--qa-panel-bg);
+		border-radius: 6px;
+	}
+
+	.guide h2 {
+		font-size: 15px;
+		margin: 0 0 6px;
+	}
+
+	.guide p {
+		margin: 8px 0;
+	}
+
 	.controls {
 		display: grid;
 		grid-template-columns: 150px minmax(0, 1fr);
@@ -424,7 +466,7 @@
 		max-width: 680px;
 	}
 
-	.controls :is(label, .field-label) {
+	.controls :is(label:not(.radio), .field-label) {
 		font-size: 13px;
 		padding-top: 7px;
 	}
@@ -456,7 +498,6 @@
 		display: flex;
 		gap: 4px;
 		align-items: center;
-		padding-top: 0;
 	}
 
 	.summary {
@@ -502,6 +543,11 @@
 		cursor: pointer;
 	}
 
+	.preview-actions button:disabled {
+		cursor: default;
+		opacity: 0.5;
+	}
+
 	.preview-actions .radios {
 		padding-top: 0;
 	}
@@ -528,6 +574,7 @@
 
 	.plain-text {
 		white-space: pre-wrap;
+		overflow-wrap: anywhere;
 		background: var(--qa-code-bg);
 		padding: 16px;
 		border-radius: 6px;
@@ -553,20 +600,21 @@
 		margin: 10px 0;
 	}
 
-	.guide {
-		max-width: 680px;
-		margin-bottom: 20px;
-		padding: 12px 14px;
-		background: var(--qa-panel-bg);
-		border-radius: 6px;
-	}
+	/* One column on phones: beside a 150px label column the controls get about 100px. */
+	@media (max-width: 600px) {
+		.controls {
+			grid-template-columns: minmax(0, 1fr);
+			gap: 4px;
+		}
 
-	.guide h2 {
-		font-size: 15px;
-		margin: 0 0 6px;
-	}
+		.controls :is(label:not(.radio), .field-label) {
+			padding-top: 10px;
+		}
 
-	.guide p {
-		margin: 8px 0;
+		/* Below 16px, iOS Safari zooms the page when a field gets focus. */
+		.controls :is(input:not([type]), select) {
+			font-size: 16px;
+			max-width: none;
+		}
 	}
 </style>
