@@ -114,8 +114,7 @@ export const load: PageServerLoad = async ({ url }) => {
 		// a chapter translating them works from the wording that is actually sent.
 		fixedLines: {
 			confirm: plainLinks(FIXED_COPY.en.confirm('#')),
-			newsletterSubscribed: FIXED_COPY.en.newsletterInOwnWords(true),
-			newsletterOtherwise: FIXED_COPY.en.newsletterInOwnWords(undefined)
+			newsletter: FIXED_COPY.en.newsletterInOwnWords
 		},
 		resolved,
 		// The language the shared copy was routed to, before a non-volunteer falls back to English:

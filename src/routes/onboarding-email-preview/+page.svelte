@@ -229,13 +229,7 @@
 		</p>
 		<ul class="fixed-lines">
 			<li>{data.fixedLines.confirm}</li>
-			<li>
-				{data.fixedLines.newsletterSubscribed}
-				<span class="muted">(for people who signed up for the newsletter)</span>
-			</li>
-			<li>
-				{data.fixedLines.newsletterOtherwise} <span class="muted">(for everyone else)</span>
-			</li>
+			<li>{data.fixedLines.newsletter}</li>
 		</ul>
 		<p>
 			Please mention PauseAI Global's

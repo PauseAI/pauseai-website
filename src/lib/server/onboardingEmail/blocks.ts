@@ -66,7 +66,7 @@ export function composeBlocks(
 		...content.body,
 		{
 			type: 'paragraph',
-			text: ownWords ? fixed.newsletterInOwnWords(subscribed) : fixed.newsletter(bucket, subscribed)
+			text: ownWords ? fixed.newsletterInOwnWords : fixed.newsletter(bucket, subscribed)
 		},
 		...content.signoff
 	]
