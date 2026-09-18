@@ -224,8 +224,8 @@
 			them. One email for everyone is fine, or one for volunteers and one for non-volunteers.
 		</p>
 		<p>
-			Every email also includes these lines. If you are writing in another language, please include
-			your translation of them too:
+			Every chapter's own email also includes these two lines. If you are writing in another
+			language, please include your translation of them too:
 		</p>
 		<ul class="fixed-lines">
 			<li>{data.fixedLines.confirm}</li>

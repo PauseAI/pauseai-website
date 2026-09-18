@@ -140,8 +140,10 @@ describe('renderOnboardingEmail', () => {
 
 	it("gives a chapter's own email one newsletter line, whatever the signup chose", async () => {
 		for (const subscribed of [true, false, undefined]) {
-			const email = await renderSubscribed('United Kingdom', 'Volunteer', subscribed)
-			expect(email.text).toContain("If you opted in, we'll keep you posted.")
+			const uk = await renderSubscribed('United Kingdom', 'Volunteer', subscribed)
+			expect(uk.text).toContain("If you opted in, we'll keep you posted.")
+			const sweden = await renderSubscribed('Sweden', 'Volunteer', subscribed)
+			expect(sweden.text).toContain('Om du har valt att prenumerera håller vi dig uppdaterad.')
 		}
 	})
 

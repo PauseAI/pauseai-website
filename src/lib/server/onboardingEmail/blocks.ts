@@ -54,8 +54,8 @@ export function composeBlocks(
 	verificationLink: string,
 	/** True for an email a chapter wrote, which gets the shorter promise. */
 	ownWords = false,
-	/** The Members record's own "Email subscription" checkbox. Undefined when the caller
-	 *  hasn't wired it through, which keeps the old hedged "if you opted in" wording. */
+	/** The Members record's own "Email subscription" checkbox. Only the shared email's line
+	 *  depends on it; undefined keeps that line's hedged "if you opted in" wording. */
 	subscribed?: boolean
 ): EmailBlock[] {
 	return [
