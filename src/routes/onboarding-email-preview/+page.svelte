@@ -85,6 +85,7 @@
 	] as const
 
 	const languageNames = new Intl.DisplayNames('en', { type: 'language' })
+	const languageName = (code: string) => languageNames.of(code) ?? code
 
 	const EMAIL_FOR: Record<Resolved['bucket'], string> = {
 		none: 'the general welcome email',
@@ -133,14 +134,14 @@
 	const summary = $derived.by(() => {
 		const { override, chapter, bucket, group, language } = data.resolved
 		const who = data.form.firstName.trim() || 'Someone'
-		const inLanguage = `in ${languageNames.of(language) ?? language}`
+		const inLanguage = `in ${languageName(language)}`
 		if (override)
 			return `${who} gets ${override}'s own email, written by the chapter, ${inLanguage}.`
 
 		const opening = `${who} gets ${EMAIL_FOR[bucket]}, ${inLanguage}.`
 		// The Spanish route leaves out country chapters, and only volunteers have a Spanish
 		// version, so a Spanish non-volunteer is resolved as English with no chapter.
-		if (data.form.language === 'es') {
+		if (data.routedLanguage === 'es') {
 			return group === 'volunteer'
 				? `${opening} The Spanish email points everyone to PauseAI en Español, so it has no country chapter part.`
 				: `${opening} The email for non-volunteers only exists in English, and Spanish-speaking signups get no country chapter part.`
@@ -296,19 +297,21 @@
 				data.options.languages.map((lang) => ({
 					value: lang,
 					label: LANGUAGE_LABELS[lang],
-					disabled: data.form.languageForced && lang !== 'es'
+					disabled: data.form.languageLock !== null
 				})),
 				data.form.language
 			)}
 			<span class="hint" id="language-hint">
-				{#if data.form.languageForced}
-					Signups from {data.form.country} always get the Spanish version. Only the volunteer email has
-					one: None and Act now are in English.
+				{#if data.form.languageLock === 'own-email'}
+					{data.resolved.override} writes its own email, in {languageName(data.resolved.language)}.
+				{:else if data.form.languageLock === 'english-only'}
+					The email for None and Act now only exists in English.
+				{:else if data.form.languageLock === 'spanish-country'}
+					Signups from {data.form.country} always get the Spanish email.
 				{:else}
 					Which language the shared email is written in. Signups from Spain and Latin America always
 					get Spanish; anyone else gets it if they listed Spanish among their languages.
 				{/if}
-				A chapter that writes its own email always uses its own language.
 			</span>
 		</div>
 

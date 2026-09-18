@@ -54,8 +54,8 @@ export const load: PageServerLoad = async ({ url }) => {
 	const country = hasQuery ? (params.get('country') ?? '') : DEFAULTS.country
 	// A signup from a Spanish-speaking country gets Spanish whatever languages they listed, so
 	// the choice only means something elsewhere, where it stands in for having listed Spanish.
-	const languageForced = resolveOnboardingEmailLanguage(country, undefined) === 'es'
-	const language = languageForced ? 'es' : parseLanguage(params.get('language'))
+	const spanishCountry = resolveOnboardingEmailLanguage(country, undefined) === 'es'
+	const language = spanishCountry ? 'es' : parseLanguage(params.get('language'))
 	const intent = hasQuery ? (params.get('intent') ?? '') : DEFAULTS.intent
 	// 'auto' (or unset) = let the email's content pick (the UK override -> plain, rest ->
 	// rich), matching the production endpoint. 'rich'/'plain' force it.
@@ -77,11 +77,21 @@ export const load: PageServerLoad = async ({ url }) => {
 		resolveOnboardingEmail(renderParams)
 	])
 
+	// Why the language isn't the reader's to choose, if it isn't. The select then shows the
+	// language the email is actually in, rather than the one that was asked for.
+	const languageLock = resolved.override
+		? 'own-email'
+		: resolved.group === 'non-volunteer'
+			? 'english-only'
+			: spanishCountry
+				? 'spanish-country'
+				: null
+
 	return {
 		form: {
 			firstName,
-			language,
-			languageForced,
+			language: languageLock ? resolved.language : language,
+			languageLock,
 			country,
 			intent: INTENT_CHOICES.includes(intent) ? intent : 'None',
 			style: htmlStyle ?? 'auto'
@@ -94,6 +104,9 @@ export const load: PageServerLoad = async ({ url }) => {
 		// For the page's advice to chapters, from the constants the emails themselves use.
 		globalLinks: { welcomeCalls: WELCOME_CALLS_URL, discord: GLOBAL_DISCORD_URL },
 		resolved,
+		// The language the shared copy was routed to, before a non-volunteer falls back to English:
+		// a Spanish route drops the country chapter even then.
+		routedLanguage: language,
 		rendered,
 		// Copy HTML takes `rendered.html`: these asset URLs die with the deploy preview.
 		previewHtml: withLocalAssets(rendered.html, url.origin)
