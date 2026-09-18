@@ -292,12 +292,15 @@
 	<details class="panel">
 		<summary>Writing or translating your chapter's own email</summary>
 		<p>
-			To start, pick your country above and set Intent to <em>Volunteer / Lead</em>: that is the
-			email your chapter's volunteers get today. Use <strong>Copy text</strong> to take it as your
-			base, then translate it or rewrite it in your chapter's voice. You can write one email for
-			everyone, or two: one for <em>Volunteer / Lead</em> and one for everyone else (<em>None</em>
-			and <em>Act now</em>). To see a finished chapter email, pick one of the countries named at the
-			top of this page.
+			Pick your country above, set Intent to the version you want to adapt, and use
+			<strong>Copy text</strong> to take it as your base. Then translate it, or rewrite it in your chapter's
+			voice.
+		</p>
+		<p>
+			You can write one email for everyone, or two. For a volunteer email, start from
+			<em>Volunteer / Lead</em>. For everyone else, start from <em>None</em>: <em>Act now</em>
+			differs only in its subject, first line and closing, and your chapter's email would go to both.
+			To see a finished chapter email, pick one of the countries named at the top of this page.
 		</p>
 		<p>You supply the subject line, the opening, the body, the sign-off and your social links.</p>
 		<p>
