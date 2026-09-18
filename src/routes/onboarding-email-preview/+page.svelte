@@ -20,19 +20,6 @@
 		void goto(`?${params}`, { replaceState: true, keepFocus: true, noScroll: true })
 	}
 
-	// An example sets the axes it is about and leaves the reader's own name alone, so
-	// flipping between examples doesn't undo what they typed.
-	function showExample(example: Example) {
-		const params = new URLSearchParams({
-			firstName: data.form.firstName,
-			language: example.language,
-			intent: example.intent,
-			country: example.country,
-			style: 'auto'
-		})
-		void goto(`?${params}`, { replaceState: true, noScroll: true })
-	}
-
 	// srcdoc iframes are same-origin, so the frame can be sized to the email it holds
 	// instead of a fixed height that leaves a long blank gap under a short one.
 	let frameEl: HTMLIFrameElement | undefined = $state()
@@ -95,8 +82,6 @@
 		volunteer: 'the welcome email for people who want to volunteer'
 	}
 
-	type Example = { label: string; country: string; intent: string; language: string }
-
 	type CountryOption = (typeof data.options.countries)[number]
 
 	function overrideNote(override: CountryOption['override']): string {
@@ -107,34 +92,18 @@
 	}
 
 	const ownEmailCountries = $derived(data.options.countries.filter((c) => c.override))
-	const sharedCopyExample = $derived(data.options.countries.find((c) => !c.override))
-
-	const examples: Example[] = $derived([
-		{
-			label: 'No chapter — the email on its own',
-			country: '',
-			intent: 'Volunteer',
-			language: 'en'
-		},
-		...(sharedCopyExample
-			? [
-					{
-						label: `Shared email + a chapter block (${sharedCopyExample.name})`,
-						country: sharedCopyExample.name,
-						intent: 'Volunteer',
-						language: 'en'
-					}
-				]
-			: []),
-		{ label: 'Someone just keeping informed', country: '', intent: 'None', language: 'en' },
-		{ label: 'In Spanish', country: '', intent: 'Volunteer', language: 'es' },
-		...ownEmailCountries.map((c) => ({
-			label: `${c.override?.name} — its own email`,
-			country: c.name,
-			intent: 'Volunteer',
-			language: 'en'
-		}))
-	])
+	// Scope first, so a chapter covering only some signups reads last: "A, B, and C for volunteers".
+	const ownEmailChapters = $derived(
+		new Intl.ListFormat('en', { type: 'conjunction' }).format(
+			ownEmailCountries
+				.toSorted(
+					(a, b) => Number(a.override?.scope !== 'all') - Number(b.override?.scope !== 'all')
+				)
+				.map(({ override }) =>
+					override?.scope === 'all' ? override.name : `${override?.name} for ${override?.scope}s`
+				)
+		)
+	)
 
 	const who = $derived(data.form.firstName.trim() || 'Someone')
 
@@ -165,16 +134,17 @@
 <div class="qa-tool">
 	<h1>PauseAI welcome email preview</h1>
 	<p class="lead">
-		This is the email a new supporter receives the moment they sign up on pauseai.info. Pick an
-		example below, or set the supporter's name, country and intent yourself, to see exactly what
-		they would receive.
+		This is the email a new supporter receives the moment they sign up on pauseai.info. Set the
+		supporter's name, country and intent below to see exactly what they would receive.
 	</p>
 
 	<div class="intro">
 		<p>
 			Most countries get one <strong>shared email</strong>, written centrally in English or Spanish,
 			ending with a short block about the local chapter. A few chapters
-			<strong>write their own email</strong> instead, and it replaces the shared text entirely.
+			<strong>write their own email</strong>
+			instead{#if ownEmailChapters}{' '}({ownEmailChapters}){/if}, and it replaces the shared text
+			entirely.
 		</p>
 		<p class="muted">
 			Nothing here is sent to anyone, and no signup is created — it is a preview of the real
@@ -182,16 +152,6 @@
 		</p>
 	</div>
 
-	<h2>Start from an example</h2>
-	<div class="examples">
-		{#each examples as example}
-			<button type="button" class="chip" onclick={() => showExample(example)}>
-				{example.label}
-			</button>
-		{/each}
-	</div>
-
-	<h2>Or set it yourself</h2>
 	<form bind:this={formEl} method="GET" onsubmit={rerender} class="controls">
 		<label for="firstName">Their first name</label>
 		<div>
@@ -401,7 +361,7 @@
 	}
 
 	.qa-tool,
-	.qa-tool :is(p, label, h1, h2, span, code, strong, div, pre, summary) {
+	.qa-tool :is(p, label, h1, span, code, strong, div, pre, summary) {
 		color: var(--qa-text) !important;
 	}
 
@@ -426,11 +386,6 @@
 		margin: 0 0 4px;
 	}
 
-	h2 {
-		font-size: 15px;
-		margin: 24px 0 8px;
-	}
-
 	.lead {
 		font-size: 15px;
 		max-width: 640px;
@@ -439,30 +394,13 @@
 
 	.intro {
 		max-width: 640px;
+		margin-bottom: 20px;
 		border-left: 3px solid var(--hero-orange);
 		padding: 2px 0 2px 12px;
 	}
 
 	.intro p {
 		margin: 6px 0;
-	}
-
-	.examples {
-		display: flex;
-		flex-wrap: wrap;
-		gap: 8px;
-		max-width: 780px;
-	}
-
-	.chip {
-		font-size: 13px;
-		padding: 6px 12px;
-		border-radius: 999px;
-		cursor: pointer;
-	}
-
-	.chip:hover {
-		border-color: var(--hero-orange);
 	}
 
 	.controls {
