@@ -152,6 +152,28 @@
 		</p>
 	</div>
 
+	<section class="guide">
+		<h2>Writing your chapter's own email</h2>
+		<p>
+			You can translate the shared email (<strong>Copy text</strong> below copies the version on screen),
+			or write your own from scratch, as PauseAI UK and PauseAI Sverige did; pick their countries below
+			to read them. One email for everyone is fine, or one for volunteers and one for non-volunteers.
+		</p>
+		<p>
+			Every email also has a line asking people to confirm their email address and a note about what
+			we will send them. If you are writing in another language, please include your translation of
+			those too.
+		</p>
+		<p>
+			Please mention PauseAI Global's
+			<!-- eslint-disable-next-line svelte/no-restricted-html-elements -- dev-only QA page, not site chrome -->
+			<a href={data.globalLinks.welcomeCalls}>welcome calls</a> for new volunteers and its
+			<!-- eslint-disable-next-line svelte/no-restricted-html-elements -- dev-only QA page, not site chrome -->
+			<a href={data.globalLinks.discord}>Discord</a>, and that both are in English.
+		</p>
+		<p>Send your text and your chapter's social links to PauseAI Global, and we will put it in.</p>
+	</section>
+
 	<form bind:this={formEl} method="GET" onsubmit={rerender} class="controls">
 		<label for="firstName">Their first name</label>
 		<div>
@@ -290,27 +312,6 @@
 	{/if}
 
 	<details class="panel">
-		<summary>Writing your chapter's own email</summary>
-		<p>
-			You can translate the shared email (<strong>Copy text</strong> copies the version on screen), or
-			write your own from scratch, as PauseAI UK and PauseAI Sverige did; pick their countries above to
-			read them. One email for everyone is fine, or one for volunteers and one for everyone else.
-		</p>
-		<p>
-			Leave out the line asking people to confirm their email address and the note about what we
-			will send them: we add both for you, in your language.
-		</p>
-		<p>
-			Please point new volunteers to PauseAI Global's
-			<!-- eslint-disable-next-line svelte/no-restricted-html-elements -- dev-only QA page, not site chrome -->
-			<a href={data.globalLinks.welcomeCalls}>welcome calls</a> and
-			<!-- eslint-disable-next-line svelte/no-restricted-html-elements -- dev-only QA page, not site chrome -->
-			<a href={data.globalLinks.discord}>Discord</a> (both in English), as PauseAI Sverige does.
-		</p>
-		<p>Send your text and your chapter's social links to PauseAI Global, and we will put it in.</p>
-	</details>
-
-	<details class="panel">
 		<summary>For developers</summary>
 		<p>
 			Rendered by <code>/api/onboarding-email</code>, which the Airtable onboarding automation
@@ -357,7 +358,7 @@
 	}
 
 	.qa-tool,
-	.qa-tool :is(p, label, h1, span, code, strong, div, pre, summary) {
+	.qa-tool :is(p, label, h1, h2, span, code, strong, div, pre, summary) {
 		color: var(--qa-text) !important;
 	}
 
@@ -538,5 +539,22 @@
 	.panel p {
 		font-size: 13px;
 		margin: 10px 0;
+	}
+
+	.guide {
+		max-width: 680px;
+		margin-bottom: 20px;
+		padding: 12px 14px;
+		background: var(--qa-panel-bg);
+		border-radius: 6px;
+	}
+
+	.guide h2 {
+		font-size: 15px;
+		margin: 0 0 6px;
+	}
+
+	.guide p {
+		margin: 8px 0;
 	}
 </style>
