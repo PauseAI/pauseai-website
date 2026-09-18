@@ -2,8 +2,9 @@
 	import PostMeta from '$lib/components/PostMeta.svelte'
 	import Link from '$lib/components/Link.svelte'
 	import CommunitiesList from './CommunitiesList.svelte'
+	import UpcomingEvents from '$lib/components/UpcomingEvents.svelte'
 	import type { GeoApiResponse } from '$api/geo/+server'
-	import type { CalendarResponse, Event } from '$api/calendar/+server'
+	import type { CalendarResponse } from '$api/calendar/+server'
 	import type { StyleSpecification } from 'maplibre-gl'
 	import * as maplibregl from 'maplibre-gl'
 	import 'maplibre-gl/dist/maplibre-gl.css'
@@ -34,19 +35,6 @@
 	let lat: number = $state(42.213995)
 	let zoom: number = $state(1)
 
-	// The map has always shown only the next month of events; the Events list
-	// below wants the whole calendar, so the window is applied to the markers
-	// rather than to the request.
-	const MAP_EVENT_WINDOW_DAYS = 30
-	const EVENT_DATE_FORMAT = new Intl.DateTimeFormat('en', {
-		weekday: 'short',
-		day: 'numeric',
-		month: 'long'
-	})
-
-	let upcomingEvents: Event[] = $state([])
-	let eventsLoaded = $state(false)
-
 	function updateData() {
 		zoom = map.getZoom()
 		lng = map.getCenter().lng
@@ -55,9 +43,7 @@
 
 	async function fetchEvents() {
 		try {
-			// No days parameter: /api/calendar merges the global calendar with every
-			// national chapter calendar, and the full set feeds the Events list below.
-			const response = await fetch('/api/calendar')
+			const response = await fetch('/api/calendar?days=30')
 			if (response.ok) {
 				const data = (await response.json()) as CalendarResponse
 				return data.entries.map((entry) => entry.event)
@@ -88,15 +74,12 @@
 	}
 
 	onMount(async () => {
-		// Optional, call with error handling. Fetched before the map style so the
-		// Events list still renders if the style request fails.
-		const [{ userLng, userLat }, events] = await Promise.all([fetchUserLocation(), fetchEvents()])
-		upcomingEvents = events
-		eventsLoaded = true
-
 		// Required, can throw
 		const style = (await fetch(STYLE_URL).then((res) => res.json())) as StyleSpecification
 		if (!style) return
+
+		// Optional, call with error handling
+		const [{ userLng, userLat }, events] = await Promise.all([fetchUserLocation(), fetchEvents()])
 
 		const initialState = {
 			lng: userLng ?? lng,
@@ -158,17 +141,9 @@
 					.addTo(map)
 			})
 
-			const now = new Date()
-			const mapWindowEnd = new Date()
-			mapWindowEnd.setDate(now.getDate() + MAP_EVENT_WINDOW_DAYS)
-
 			// Sort descending so earlier events' markers are added last and render on top
 			events
 				.filter((event) => event.geo_latitude != null && event.geo_longitude != null)
-				.filter((event) => {
-					const startAt = new Date(event.start_at)
-					return startAt >= now && startAt <= mapWindowEnd
-				})
 				.sort((a, b) => new Date(b.start_at).getTime() - new Date(a.start_at).getTime())
 				.forEach((event) => {
 					new Marker({
@@ -225,25 +200,7 @@
 
 <p>Interested in attending a PauseAI community event? Find one below.</p>
 
-{#if !eventsLoaded}
-	<p class="events-status">Loading events...</p>
-{:else if upcomingEvents.length === 0}
-	<p class="events-status">
-		Nothing is listed at the moment. Our <Link href="https://lu.ma/PauseAI">calendar page</Link> has the
-		latest.
-	</p>
-{:else}
-	<ul class="events">
-		{#each upcomingEvents as event (event.url)}
-			<li>
-				<time datetime={new Date(event.start_at).toISOString()}>
-					{EVENT_DATE_FORMAT.format(new Date(event.start_at))}
-				</time>
-				<Link href={`https://lu.ma/${event.url}`}>{event.name}</Link>
-			</li>
-		{/each}
-	</ul>
-{/if}
+<UpcomingEvents />
 
 <p>
 	Find the full list of events <Link href="https://lu.ma/PauseAI">here</Link>.
@@ -255,46 +212,6 @@
 </p>
 
 <style>
-	.events {
-		list-style: none;
-		margin: 0;
-		padding: 0;
-		border: 1px solid var(--border-luma-embed);
-		border-radius: 24px;
-		overflow: hidden;
-	}
-
-	.events li {
-		display: flex;
-		gap: 1rem;
-		padding: 0.75rem 1.25rem;
-	}
-
-	.events li + li {
-		border-top: 1px solid var(--border-luma-embed);
-	}
-
-	.events time {
-		flex: 0 0 10rem;
-		color: var(--text-subtle);
-		font-variant-numeric: tabular-nums;
-	}
-
-	.events-status {
-		color: var(--text-subtle);
-	}
-
-	@media (max-width: 480px) {
-		.events li {
-			flex-direction: column;
-			gap: 0.25rem;
-		}
-
-		.events time {
-			flex: none;
-		}
-	}
-
 	.map-wrap {
 		position: relative;
 		padding-bottom: 56.25%; /* 16:9 */
