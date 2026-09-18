@@ -213,8 +213,8 @@
 			To change them, send the new ones to PauseAI Global.
 		</p>
 		<p class="muted">
-			Nothing here is sent to anyone, and no signup is created — it is a preview of the real
-			wording, rendered by the same code that sends the live emails.
+			Nothing here is sent to anyone, and no signup is created. It is a preview of the real wording,
+			rendered by the same code that sends the live emails.
 		</p>
 	</div>
 
