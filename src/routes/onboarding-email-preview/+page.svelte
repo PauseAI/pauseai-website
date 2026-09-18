@@ -55,10 +55,15 @@
 		}
 	}
 
+	const HTML_STATUSES: (keyof typeof COPY_STATUS)[] = ['html', 'failed-html']
+	const currentCopy = $derived.by(() => (copied?.rendered === data.rendered ? copied.status : null))
 	const status = $derived.by(() => {
 		if (updating) return 'Updating preview…'
-		return copied?.rendered === data.rendered ? COPY_STATUS[copied.status] : ''
+		return currentCopy && !HTML_STATUSES.includes(currentCopy) ? COPY_STATUS[currentCopy] : ''
 	})
+	const htmlStatus = $derived(
+		currentCopy && HTML_STATUSES.includes(currentCopy) ? COPY_STATUS[currentCopy] : ''
+	)
 
 	// One option per version of the email: Lead renders the same one as Volunteer, and
 	// 'Keep informed' is gone, since no form writes it and it renders the same as None.
@@ -203,8 +208,7 @@
 			Most countries get one <strong>shared email</strong>, written centrally in English or Spanish,
 			with a short part about the local chapter. A few chapters
 			<strong>write their own email</strong>
-			instead{ownEmailChapters ? ` (${ownEmailChapters})` : ''}, and it replaces the shared text
-			entirely.
+			instead{ownEmailChapters ? ` (${ownEmailChapters})` : ''}, and it replaces the shared text.
 		</p>
 		<p class="muted">
 			Nothing here is sent to anyone, and no signup is created — it is a preview of the real
@@ -216,14 +220,23 @@
 		<h2>Writing your chapter's own email</h2>
 		<p>
 			You can translate the shared email (<strong>Copy text</strong> below copies the version on screen),
-			or write your own from scratch, as PauseAI UK and PauseAI Sverige did; pick their countries below
-			to read them. One email for everyone is fine, or one for volunteers and one for non-volunteers.
+			or write your own from scratch, as the chapters named above did; pick their countries below to read
+			them. One email for everyone is fine, or one for volunteers and one for non-volunteers.
 		</p>
 		<p>
-			Every email also has a line asking people to confirm their email address and a note about what
-			we will send them. If you are writing in another language, please include your translation of
-			those too.
+			Every email also includes these lines. If you are writing in another language, please include
+			your translation of them too:
 		</p>
+		<ul class="fixed-lines">
+			<li>{data.fixedLines.confirm}</li>
+			<li>
+				{data.fixedLines.newsletterSubscribed}
+				<span class="muted">(for people who signed up for the newsletter)</span>
+			</li>
+			<li>
+				{data.fixedLines.newsletterOtherwise} <span class="muted">(for everyone else)</span>
+			</li>
+		</ul>
 		<p>
 			Please mention PauseAI Global's
 			<a href={data.globalLinks.welcomeCalls}>welcome calls</a> for new volunteers and its
@@ -353,7 +366,6 @@
 				</div>
 			{/if}
 			<button type="button" disabled={updating} onclick={() => copyEmail('text')}>Copy text</button>
-			<button type="button" disabled={updating} onclick={() => copyEmail('html')}>Copy HTML</button>
 			<span class="copied" role="status">{status}</span>
 		</div>
 	</div>
@@ -376,6 +388,10 @@
 		</p>
 		<p>
 			Resolved: <ResolvedSummary resolved={data.resolved} />
+		</p>
+		<p class="dev-copy">
+			<button type="button" disabled={updating} onclick={() => copyEmail('html')}>Copy HTML</button>
+			<span class="copied" role="status">{htmlStatus}</span>
 		</p>
 		<p>
 			<a href="/onboarding-email-compare">/onboarding-email-compare</a> checks a render against the pre-migration
@@ -405,14 +421,15 @@
 	/* The site's body font is light-weight, which reads as thin grey text on these panels,
 	   and thinner still in browsers that render their own way. */
 	.qa-tool,
-	.qa-tool :is(p, label, span, div, code, pre, input, select, option, button, summary, details) {
+	.qa-tool
+		:is(p, li, label, span, div, code, pre, input, select, option, button, summary, details) {
 		font-weight: 400 !important;
 		font-family:
 			-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
 	}
 
 	.qa-tool,
-	.qa-tool :is(p, label, h1, h2, span, code, strong, div, pre, summary) {
+	.qa-tool :is(p, li, label, h1, h2, span, code, strong, div, pre, summary) {
 		color: var(--qa-text) !important;
 	}
 
@@ -621,6 +638,33 @@
 	.panel p {
 		font-size: 13px;
 		margin: 10px 0;
+	}
+
+	.dev-copy {
+		display: flex;
+		gap: 12px;
+		align-items: center;
+	}
+
+	.dev-copy button {
+		font-size: 13px;
+		padding: 4px 10px;
+		border-radius: 4px;
+		cursor: pointer;
+	}
+
+	.dev-copy button:disabled {
+		cursor: default;
+		opacity: 0.5;
+	}
+
+	.fixed-lines {
+		margin: 6px 0;
+		padding-left: 20px;
+	}
+
+	.fixed-lines li {
+		margin: 4px 0;
 	}
 
 	/* One column on phones: beside a 150px label column the controls get about 100px. */

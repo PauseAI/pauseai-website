@@ -6,6 +6,7 @@ import { listActiveChapterCountries } from '$lib/server/onboardingEmail/chapter.
 import { describeChapterOverride } from '$lib/server/onboardingEmail/chapterOverrides.js'
 import { resolveOnboardingEmailLanguage } from '$lib/server/onboardingEmail/language.js'
 import { GLOBAL_DISCORD_URL, WELCOME_CALLS_URL } from '$lib/server/onboardingEmail/brand.js'
+import { FIXED_COPY } from '$lib/server/onboardingEmail/fixed.js'
 import { renderOnboardingEmail, resolveOnboardingEmail } from '$lib/server/onboardingEmail/index.js'
 import type { BaseLanguage, OnboardingEmailHtmlStyle } from '$lib/server/onboardingEmail/types.js'
 import { error } from '@sveltejs/kit'
@@ -33,6 +34,11 @@ const DEFAULTS = {
 // The page's intent select offers these. Any other value renders as None, so the select
 // shows None rather than going blank.
 const INTENT_CHOICES = ['None', 'Act now', 'Volunteer', 'Lead']
+
+/** "[this link](url)" -> "this link", for quoting a line outside the email. */
+function plainLinks(markdown: string): string {
+	return markdown.replace(/\[([^\]]+)\]\([^)]*\)/g, '$1')
+}
 
 function parseLanguage(value: string | null): BaseLanguage {
 	return LANGUAGES.includes(value as BaseLanguage) ? (value as BaseLanguage) : DEFAULTS.language
@@ -104,6 +110,13 @@ export const load: PageServerLoad = async ({ url }) => {
 		},
 		// For the page's advice to chapters, from the constants the emails themselves use.
 		globalLinks: { welcomeCalls: WELCOME_CALLS_URL, discord: GLOBAL_DISCORD_URL },
+		// The lines composeBlocks() adds to a chapter's own email, quoted in the page's advice so
+		// a chapter translating them works from the wording that is actually sent.
+		fixedLines: {
+			confirm: plainLinks(FIXED_COPY.en.confirm('#')),
+			newsletterSubscribed: FIXED_COPY.en.newsletterInOwnWords(true),
+			newsletterOtherwise: FIXED_COPY.en.newsletterInOwnWords(undefined)
+		},
 		resolved,
 		// The language the shared copy was routed to, before a non-volunteer falls back to English:
 		// a Spanish route drops the country chapter even then.
