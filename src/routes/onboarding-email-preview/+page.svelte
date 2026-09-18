@@ -179,6 +179,10 @@
 			<!-- eslint-disable-next-line svelte/no-restricted-html-elements -- dev-only QA page, not site chrome -->
 			<a href={data.globalLinks.discord}>Discord</a>, and that both are in English.
 		</p>
+		<p>
+			Your email goes out in the branded card layout unless you ask for the plain note instead; use
+			<strong>Layout</strong> below to compare the two.
+		</p>
 		<p>Send your text and your chapter's social links to PauseAI Global, and we will put it in.</p>
 	</section>
 
