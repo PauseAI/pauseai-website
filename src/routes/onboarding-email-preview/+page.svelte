@@ -305,9 +305,11 @@
 				{#if data.form.languageLock === 'own-email'}
 					{data.resolved.override} writes its own email, in {languageName(data.resolved.language)}.
 				{:else if data.form.languageLock === 'english-only'}
-					The email for None and Act now only exists in English.
+					Only the &ldquo;Volunteer / Lead&rdquo; email has a Spanish version, so this one is always
+					in English.
 				{:else if data.form.languageLock === 'spanish-country'}
-					Signups from {data.form.country} always get the Spanish email.
+					Volunteers from {data.form.country} always get the Spanish version, whatever languages they
+					listed.
 				{:else}
 					Which language the shared email is written in. Signups from Spain and Latin America always
 					get Spanish; anyone else gets it if they listed Spanish among their languages.
