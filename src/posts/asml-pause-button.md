@@ -1,5 +1,5 @@
 ---
-title: 'The Dutch Pause Button: How the Netherlands Can Use ASML to Enforce an AI Treaty'
+title: "The Dutch Pause Button: How the Netherlands Can Use ASML to Enforce an AI Treaty"
 description: The Netherlands already licenses every export of ASML's EUV lithography machines. Here is how those licenses could become the enforcement mechanism for a global pause on superintelligence.
 ---
 
@@ -156,16 +156,17 @@ That is not a problem here, because no advanced AI fab is located in the EU.
 
 ## Objections
 
-**The US will retaliate through the Foreign Direct Product Rule.**
+**"The US will retaliate through the Foreign Direct Product Rule."**
 It can, and it has before.
 About [10% of EUV technology is American](https://www.talosnetwork.org/perspectives/boosting-the-eus-position-in-ai-through-third-places-diplomacy-9ym5d), the light source is built by Cymer in San Diego, and the US [applies a 0% de minimis threshold](https://www.ejiltalk.org/the-discomfort-of-extraterritoriality-us-semiconductor-export-controls-and-why-their-chokehold-on-dutch-photolithography-machines-matter/) to claim jurisdiction over ASML's products.
 [TechPolicy.press](https://www.techpolicy.press/why-asmls-semiconductor-monopoly-doesnt-give-europe-strategic-control/) concludes that "the one country that can turn the screw on Europe's most valuable company is not the Netherlands. It is the United States."
-Our answer: the US is using this power against the Netherlands already, regardless of what the Netherlands does.
-A Dutch regime aimed at AI safety is not an attack on the US but an invitation to shared criteria.
-The EU's [Anti-Coercion Instrument](https://iep.unibocconi.eu/why-asml-eus-most-important-bargaining-chip) exists as a shield.
-And as Hurst argues, even under retaliation Europe does not fall further behind, because the whole race slows down.
+That screw is already turning.
+The [MATCH Act](https://nltimes.nl/2026/08/20/us-preparing-force-netherlands-ban-asml-selling-china) would write the same threat into law: 150 days to adopt American criteria, or the rule is extended to every machine containing American parts.
+The Netherlands faces that pressure whether or not it sets conditions of its own.
+Setting them is an invitation to shared criteria rather than a challenge to Washington, and the EU's [Anti-Coercion Instrument](https://iep.unibocconi.eu/why-asml-eus-most-important-bargaining-chip) exists as a shield if Washington reads it otherwise.
+Hurst adds that even under retaliation Europe does not fall further behind, because the whole race slows down.
 
-**China will catch up, so the lever will become worthless.**
+**"China will catch up, so the lever will become worthless."**
 Not for years.
 China's first domestically built immersion DUV tool, delivered in 2026 at about [five units a year](https://asiatimes.com/2026/07/chinas-duv-lithography-still-lags-asml-by-four-generations/), matches an ASML machine from 2008, still imports 70% of its components, and has not yet run in a commercial fab.
 The Shenzhen EUV prototype that Reuters revealed in December 2025 [produces light but no chips](https://www.engadget.com/big-tech/china-reportedly-has-a-prototype-euv-machine-built-by-ex-asml-employees-235833756.html), with 2030 as the insiders' own target.
@@ -174,25 +175,19 @@ Until then, China's advanced chips come off [several hundred ASML DUV machines](
 So the instrument reaches China too, for years rather than months, though AI itself could shorten that.
 The window will close. That is the argument for using it now.
 
-**A unilateral Dutch pause does not work.**
-That is true of a blunt export stop, which is why this proposal is conditional, phased, and aimed at treaty accession.
-The existing stock of chips and machines stays.
-What slows down is the exponential growth.
-The Netherlands supplies the enforcement module, not the whole solution.
-
-**It will cost ASML billions and the Netherlands jobs.**
+**"It will cost ASML billions."**
 That assumes an export stop, which is not what we're proposing.
 With our proposal, the cost falls on whoever refuses it: a fab that registers its output and admits inspectors keeps buying machines.
 ASML already cannot meet demand, so a cap on AI-bound tools shifts orders rather than cancelling them, and service revenue from installed machines continues.
 The comparison is not with zero but with the MATCH Act, which would hit [about a fifth](https://www.dutchnews.nl/2026/06/netherlands-joins-us-chip-pact-while-fighting-asml-export-curbs/) of ASML's expected 2026 revenue and which the Dutch government already treats as unavoidable.
 Where there is real cost, a compensation fund belongs in the proposal; the Netherlands put [€2.5 billion](https://www.france24.com/en/live-news/20240328-operation-beethoven-dutch-2-5bn-euro-charm-offensive-to-keep-asml) into the Eindhoven region in 2024 to keep ASML, so the precedent exists.
 
-**Export controls always fail.**
+**"Export controls always fail."**
 The EUV ban on China has held since 2019, and the [Institute for AI Policy and Strategy](https://www.iaps.ai/research/semiconductor-manufacturing-equipment-export-controls) calls it largely effective.
 What fails are controls without a maintenance ban and without allies.
 Both are in this proposal.
 
-**This is a job for the EU, not for the Netherlands.**
+**"This is a job for the EU, not for the Netherlands."**
 Export control is a national competence, as the Dutch government itself insists towards Washington.
 The Netherlands can start, and other member states can join under Article 9.
 Waiting for EU consensus means waiting until the window is shut.
