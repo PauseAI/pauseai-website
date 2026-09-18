@@ -92,18 +92,26 @@
 	}
 
 	const ownEmailCountries = $derived(data.options.countries.filter((c) => c.override))
+	// Past this many the intro sentence turns into a list, so it names the first few and counts
+	// the rest; every one is still marked in the country picker.
+	const MAX_NAMED_OWN_EMAIL_CHAPTERS = 4
+
 	// Scope first, so a chapter covering only some signups reads last: "A, B, and C for volunteers".
-	const ownEmailChapters = $derived(
-		new Intl.ListFormat('en', { type: 'conjunction' }).format(
-			ownEmailCountries
-				.toSorted(
-					(a, b) => Number(a.override?.scope !== 'all') - Number(b.override?.scope !== 'all')
-				)
-				.map(({ override }) =>
-					override?.scope === 'all' ? override.name : `${override?.name} for ${override?.scope}s`
-				)
-		)
-	)
+	const ownEmailChapters = $derived.by(() => {
+		const names = ownEmailCountries
+			.toSorted((a, b) => Number(a.override?.scope !== 'all') - Number(b.override?.scope !== 'all'))
+			.map(({ override }) =>
+				override?.scope === 'all' ? override.name : `${override?.name} for ${override?.scope}s`
+			)
+		const shown =
+			names.length > MAX_NAMED_OWN_EMAIL_CHAPTERS
+				? [
+						...names.slice(0, MAX_NAMED_OWN_EMAIL_CHAPTERS - 1),
+						`${names.length - (MAX_NAMED_OWN_EMAIL_CHAPTERS - 1)} others`
+					]
+				: names
+		return new Intl.ListFormat('en', { type: 'conjunction' }).format(shown)
+	})
 
 	const who = $derived(data.form.firstName.trim() || 'Someone')
 
