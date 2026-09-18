@@ -3,6 +3,7 @@ export const prerender = false
 import { dev } from '$app/environment'
 import { listActiveChapterCountries } from '$lib/server/onboardingEmail/chapter.js'
 import { describeChapterOverride } from '$lib/server/onboardingEmail/chapterOverrides.js'
+import { GLOBAL_DISCORD_URL, WELCOME_CALLS_URL } from '$lib/server/onboardingEmail/brand.js'
 import { renderOnboardingEmail, resolveOnboardingEmail } from '$lib/server/onboardingEmail/index.js'
 import type { BaseLanguage, OnboardingEmailHtmlStyle } from '$lib/server/onboardingEmail/types.js'
 import { error } from '@sveltejs/kit'
@@ -99,6 +100,8 @@ export const load: PageServerLoad = async ({ url }) => {
 			languages: LANGUAGES,
 			countries: chapterCountries
 		},
+		// For the page's advice to chapters, from the constants the emails themselves use.
+		globalLinks: { welcomeCalls: WELCOME_CALLS_URL, discord: GLOBAL_DISCORD_URL },
 		resolved,
 		rendered
 	}

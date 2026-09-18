@@ -292,8 +292,12 @@
 	<details class="panel">
 		<summary>Writing or translating your chapter's own email</summary>
 		<p>
-			Use <strong>Copy text</strong> above to take the current wording as a starting point: translate
-			it, or rewrite it in your chapter's voice.
+			To start, pick your country above and set Intent to <em>Volunteer / Lead</em>: that is the
+			email your chapter's volunteers get today. Use <strong>Copy text</strong> to take it as your
+			base, then translate it or rewrite it in your chapter's voice. You can write one email for
+			everyone, or two: one for <em>Volunteer / Lead</em> and one for everyone else (<em>None</em>
+			and <em>Act now</em>). To see a finished chapter email, pick one of the countries named at the
+			top of this page.
 		</p>
 		<p>You supply the subject line, the opening, the body, the sign-off and your social links.</p>
 		<p>
@@ -309,8 +313,16 @@
 			latter, PauseAI Canada the former.
 		</p>
 		<p>
+			Please also point new volunteers to PauseAI Global: its
+			<!-- eslint-disable-next-line svelte/no-restricted-html-elements -- dev-only QA page, not site chrome -->
+			<a href={data.globalLinks.welcomeCalls}>welcome calls</a> for new volunteers and the
+			<!-- eslint-disable-next-line svelte/no-restricted-html-elements -- dev-only QA page, not site chrome -->
+			<a href={data.globalLinks.discord}>global Discord</a>. If your email isn't in English, mention
+			that both are. PauseAI Sverige's email does this in one sentence; pick Sweden above to see it.
+		</p>
+		<p>
 			Chapters can't edit this text themselves yet: send your version to PauseAI global and we will
-			put it in. Self-service editing is planned as part of the CRM.
+			put it in.
 		</p>
 	</details>
 
