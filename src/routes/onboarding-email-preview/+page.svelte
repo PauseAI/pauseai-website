@@ -20,15 +20,14 @@
 		void goto(`?${params}`, { replaceState: true, keepFocus: true, noScroll: true })
 	}
 
-	// An example sets the axes it is about and leaves the reader's own name and opt-in
-	// setting alone, so flipping between examples doesn't undo what they typed.
+	// An example sets the axes it is about and leaves the reader's own name alone, so
+	// flipping between examples doesn't undo what they typed.
 	function showExample(example: Example) {
 		const params = new URLSearchParams({
 			firstName: data.form.firstName,
 			language: example.language,
 			intent: example.intent,
 			country: example.country,
-			subscribed: data.form.subscribed,
 			style: 'auto'
 		})
 		void goto(`?${params}`, { replaceState: true, noScroll: true })
@@ -73,9 +72,9 @@
 	// One option per version of the email: Lead renders the same one as Volunteer, and
 	// 'Keep informed' is gone, since no form writes it and it renders the same as None.
 	const INTENT_OPTIONS = [
-		{ value: 'None', label: "They didn't say" },
-		{ value: 'Act now', label: 'They want to act now' },
-		{ value: 'Volunteer', label: 'They want to volunteer or lead' }
+		{ value: 'None', label: 'None' },
+		{ value: 'Act now', label: 'Act now' },
+		{ value: 'Volunteer', label: 'Volunteer / Lead' }
 	]
 
 	const LANGUAGE_LABELS: Record<string, string> = {
@@ -148,7 +147,7 @@
 		const opening = `${who} gets ${EMAIL_FOR[bucket]}, in ${languageName}.`
 		if (chapter) {
 			const count = chapter.links.length
-			return `${opening} It ends with a short block about PauseAI in ${chapter.name}, listing ${count} link${count === 1 ? '' : 's'} from the chapter directory.`
+			return `${opening} It ends with a short block about PauseAI in ${chapter.name}, listing ${count} link${count === 1 ? '' : 's'} — the same ones listed for it on pauseai.info/communities.`
 		}
 		if (language === 'es') {
 			return `${opening} The Spanish email points everyone to PauseAI en Español, so it carries no country chapter block.`
@@ -213,13 +212,13 @@
 					The {data.options.countries.length} countries with an active PauseAI chapter. Signups from anywhere
 					else get the email without a chapter block.
 				{:else}
-					The chapter directory couldn't be reached, so only the version without a chapter block is
-					available right now.
+					The list of chapters couldn't be loaded, so only the email without a chapter block can be
+					shown. Try reloading the page.
 				{/if}
 			</span>
 		</div>
 
-		<label for="intent">Why they signed up</label>
+		<label for="intent">Intent</label>
 		<div>
 			<select
 				id="intent"
@@ -258,29 +257,6 @@
 			</span>
 		</div>
 
-		<span class="field-label">Newsletter opt-in</span>
-		<div>
-			<div class="radios">
-				{#each [['unknown', 'Not known'], ['yes', 'They opted in'], ['no', "They didn't"]] as [value, label]}
-					<label class="radio">
-						<input
-							type="radio"
-							name="subscribed"
-							{value}
-							checked={data.form.subscribed === value}
-							onchange={rerender}
-						/>
-						{label}
-					</label>
-				{/each}
-			</div>
-			<span class="hint muted">
-				Whether they ticked the newsletter box, which changes the one-line promise just before the
-				sign-off. <em>Not known</em> is the hedged "if you opted in" wording, which is what goes out until
-				the sign-up form passes the answer through.
-			</span>
-		</div>
-
 		<span class="field-label">Layout</span>
 		<div>
 			<div class="radios">
@@ -300,11 +276,6 @@
 			<span class="hint muted">
 				Each chapter gets one or the other; switch to compare the same words in both.
 			</span>
-		</div>
-
-		<span></span>
-		<div>
-			<button class="primary" type="submit">Update preview</button>
 		</div>
 	</form>
 
@@ -371,10 +342,10 @@
 			confirmation link leaves the reader unconfirmed.
 		</p>
 		<p>
-			Your chapter's links can either be pulled from your entry in the chapter directory, so that
-			keeping that entry current keeps the email current, or written into the email text, if your
-			chapter would rather control them itself. PauseAI UK does the latter, PauseAI Canada the
-			former.
+			Your chapter's links can either be pulled from the details listed for your chapter on
+			pauseai.info/communities, so that keeping those current keeps the email current, or written
+			into the email text, if your chapter would rather control them itself. PauseAI UK does the
+			latter, PauseAI Canada the former.
 		</p>
 		<p>
 			Chapters can't edit this text themselves yet: send your version to PauseAI global and we will
@@ -422,20 +393,19 @@
 	/* The site's body font is light-weight, which reads as thin grey text on these panels,
 	   and thinner still in browsers that render their own way. */
 	.qa-tool,
-	.qa-tool
-		:is(p, label, span, div, code, pre, input, select, option, button, summary, details, em) {
+	.qa-tool :is(p, label, span, div, code, pre, input, select, option, button, summary, details) {
 		font-weight: 400 !important;
 		font-family:
 			-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
 	}
 
 	.qa-tool,
-	.qa-tool :is(p, label, h1, h2, span, code, strong, em, div, pre, summary) {
+	.qa-tool :is(p, label, h1, h2, span, code, strong, div, pre, summary) {
 		color: var(--qa-text) !important;
 	}
 
 	/* Wins over the blanket colour above, which is `!important` for the reason given there. */
-	.qa-tool :is(.muted, .muted span, .muted em, .hint, .copied) {
+	.qa-tool :is(.muted, .muted span, .hint, .copied) {
 		color: var(--qa-text-muted) !important;
 	}
 
@@ -539,16 +509,6 @@
 		gap: 4px;
 		align-items: center;
 		padding-top: 0;
-	}
-
-	button.primary {
-		font-size: 13px;
-		padding: 6px 14px;
-		border-radius: 4px;
-		cursor: pointer;
-		color: var(--white) !important;
-		background: var(--hero-orange) !important;
-		border-color: var(--hero-orange);
 	}
 
 	.summary {
