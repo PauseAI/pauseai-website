@@ -87,6 +87,16 @@
 		return () => observer.disconnect()
 	})
 
+	// Tell the host page a signup completed, so it can fire its own conversion
+	// tracking (a cross-origin host can't see inside the iframe). No form data in
+	// the payload; '*' is fine for the same reason as the height message. Keyed
+	// by `event`, so it never collides with the { height } messages.
+	function reportSignup() {
+		if (window.parent !== window) {
+			window.parent.postMessage({ event: 'onboarding_signup_complete', version: 1 }, '*')
+		}
+	}
+
 	// Optional ?bg= so the embed blends into the host page — hex (with or
 	// without #) or a CSS color name. Anything else is ignored, which also
 	// keeps arbitrary CSS out of the inline style.
@@ -103,7 +113,13 @@
 <PostMeta {title} {description} />
 
 <div class="embed-wrap" class:embedded style:background-color={background || undefined}>
-	<OnboardingFlow {initialCountry} {initialCity} {initialLanguages} {initialSource} />
+	<OnboardingFlow
+		{initialCountry}
+		{initialCity}
+		{initialLanguages}
+		{initialSource}
+		onSignup={reportSignup}
+	/>
 </div>
 
 <style>
