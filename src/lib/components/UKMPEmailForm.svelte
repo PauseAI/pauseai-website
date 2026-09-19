@@ -24,9 +24,13 @@
 	let senderName = $derived(userName)
 	let senderEmail = $state('')
 	let subject = $state(`Request to co-sign letter on frontier AI risks`)
-	let message = $derived(`Dear ${mp.salutation},
+	let message = $derived(`Dear ${mp.salutation}
 
-Would you be willing to sign this open letter supporting legislation to protect British people from the harms of frontier AI?
+AI now poses an extremely serious risk to our national security. Parliamentarians in the United Kingdom, and politicians around the globe are moving to answer the call from AI developers, Nobel Laureates and concerned citizens to regulate AI immediately.
+
+This is an urgent matter and your voice as my representative is critical.
+
+Please sign this open letter supporting legislation to protect British people from the harms of frontier AI.
 
 I’m a resident of ${mp.constituency} and a supporter of **PauseAI**, a civic movement focused on averting the risks of advanced AI. I am very concerned that AI development is racing ahead without adequate protection for the public.
 
