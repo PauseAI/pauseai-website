@@ -198,13 +198,14 @@
 	<h1>PauseAI welcome email preview</h1>
 	<p class="lead">
 		This is the email a new supporter receives the moment they sign up on pauseai.info. Set the
-		supporter's name, country and intent below to see what they would receive.
+		supporter's name, country and why they signed up (their intent) below to see what they would
+		receive.
 	</p>
 
 	<div class="intro">
 		<p>
-			Most countries get one <strong>shared email</strong>, written centrally in English or Spanish,
-			with a short part about the local chapter. A few chapters
+			Most countries get one <strong>shared email</strong>, written by PauseAI Global in English or
+			Spanish, with a short part about the local chapter. A few chapters
 			<strong>write their own email</strong>
 			instead{ownEmailChapters ? ` (${ownEmailChapters})` : ''}, and it replaces the shared text.
 		</p>
@@ -226,23 +227,25 @@
 			below to read theirs. One email for everyone is fine, or one for volunteers and one for non-volunteers.
 		</p>
 		<p>
-			Every chapter's own email also includes these two lines. If you are writing in another
-			language, please include your translation of them too:
+			We add these two lines to every chapter's own email. If you are writing in another language,
+			please include your translation of them too:
 		</p>
 		<ul class="fixed-lines">
 			<li>{data.fixedLines.confirm}</li>
 			<li>{data.fixedLines.newsletter}</li>
 		</ul>
 		<p>
-			Please mention PauseAI Global's
-			<a href={data.globalLinks.welcomeCalls}>welcome calls</a> for new volunteers and its
-			<a href={data.globalLinks.discord}>Discord</a>, and that both are in English.
+			In your email, please mention PauseAI Global's <a href={data.globalLinks.welcomeCalls}
+				>welcome calls</a
+			>
+			for new volunteers and its <a href={data.globalLinks.discord}>Discord</a>. If your email isn't
+			in English, say that both are in English.
 		</p>
 		<p>
 			Your email goes out in the branded card layout unless you ask for the plain note instead; use
 			<strong>Layout</strong> below to compare the two.
 		</p>
-		<p>Send your text and your chapter's social links to PauseAI Global, and we will put it in.</p>
+		<p>Send your text and your chapter's social links to PauseAI Global, and we will set it up.</p>
 	</section>
 
 	<form bind:this={formEl} method="GET" onsubmit={rerender} class="controls">
@@ -270,9 +273,9 @@
 			</select>
 			<span class="hint" id="country-hint">
 				{#if data.options.countries.length}
-					The {data.options.countries.length} countries whose chapter PauseAI Global points new signups
-					to. Signups from anywhere else get the email without a chapter part, including the US: PauseAI
-					US welcomes its own members.
+					Countries with a PauseAI chapter ({data.options.countries.length}). Signups from any other
+					country get the email without a chapter part. That includes the US, because PauseAI US
+					welcomes its own members.
 				{:else}
 					The list of chapters couldn't be loaded, so you can't pick another country right now. Try
 					reloading the page.
@@ -294,8 +297,8 @@
 				{/each}
 			</select>
 			<span class="hint" id="intent-hint">
-				What they picked on the sign-up form. Volunteer and Lead get the same email, and a chapter's
-				own email can be the same whatever they picked.
+				What they picked on the sign-up form. Volunteer and Lead get the same email. Some chapters
+				send the same email whatever the intent.
 			</span>
 		</div>
 
@@ -344,7 +347,7 @@
 		<div class="subject"><span class="muted">Subject</span> {data.rendered.subject}</div>
 		<div class="preview-actions">
 			<button type="button" onclick={() => (showText = !showText)}>
-				{showText ? 'Show as email' : 'Show as text'}
+				{showText ? 'Show email' : 'Show plain-text version'}
 			</button>
 			{#if !showText}
 				<div class="radios" role="radiogroup" aria-label="Preview width">
