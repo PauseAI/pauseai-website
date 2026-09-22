@@ -57,7 +57,8 @@
 		startStep = 1,
 		initialKeepInformed = false,
 		initialChapterShare = false,
-		initialSource = ''
+		initialSource = '',
+		onSignup
 	}: {
 		initialEmail?: string
 		initialCountry?: string
@@ -78,6 +79,10 @@
 		// The chapter-updates choice made on the subscribe form, reposted so backing
 		// out of Volunteer/Lead restores it instead of leaving the escalation.
 		initialChapterShare?: boolean
+		// Called once per new signup, when the server confirms it created a record.
+		// Not called for updates to an existing record (the volunteer step, or a
+		// /subscribe continuation) nor for silently dropped spam submissions.
+		onSignup?: () => void
 	} = $props()
 
 	// Starts true so an unanswered request keeps the anti-spam check required.
@@ -368,6 +373,9 @@
 					// Remember the created record so later submissions in the
 					// same flow update it rather than create a duplicate.
 					if (typeof result.data?.recordId === 'string') {
+						// A spam drop also reports success but carries no recordId, so
+						// this only fires on a real create.
+						if (!recordId) onSignup?.()
 						recordId = result.data.recordId
 					}
 					onSuccess(result.data, startValue)

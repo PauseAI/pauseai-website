@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { goto } from '$app/navigation'
 	import type { PageData } from './$types'
+	import { fitFrame } from '../onboarding-email-preview/fitFrame.js'
 	import ResolvedSummary from '../onboarding-email-preview/ResolvedSummary.svelte'
 
 	let { data }: { data: PageData } = $props()
@@ -24,25 +25,6 @@
 	}
 	function resubmit() {
 		rerender()
-	}
-
-	// One option per version of the email: Lead renders the same one as Volunteer, and
-	// 'Keep informed' is gone, since no form writes it and it renders the same as None.
-	// srcdoc iframes are same-origin, so the frame can be sized to the email it holds
-	// instead of a fixed height that leaves a long blank gap under a short one. Images
-	// land after load, hence the second measurement.
-	function fitToContent(event: Event) {
-		const frame = event.currentTarget as HTMLIFrameElement
-		const measure = () => {
-			const doc = frame.contentDocument
-			if (!doc) return
-			// scrollHeight can't fall below the frame's own height, so a frame left tall by a
-			// longer email would keep that height forever. Collapse it first, then measure.
-			frame.style.height = '0px'
-			frame.style.height = `${Math.max(240, doc.documentElement.scrollHeight)}px`
-		}
-		measure()
-		setTimeout(measure, 500)
 	}
 
 	// Each template was sent to one audience, so offering an intent from the other one would
@@ -225,7 +207,7 @@
 				<iframe
 					title="Previous MailerSend email"
 					srcdoc={data.legacy.html}
-					onload={fitToContent}
+					use:fitFrame
 					style="display: block; width: 100%; height: 600px; border: 1px solid var(--grey-100); border-radius: 6px;"
 				></iframe>
 			{/if}
@@ -247,7 +229,7 @@
 				<iframe
 					title="New email HTML preview"
 					srcdoc={data.rendered.html}
-					onload={fitToContent}
+					use:fitFrame
 					style="display: block; width: 100%; height: 600px; border: 1px solid var(--grey-100); border-radius: 6px;"
 				></iframe>
 			{/if}

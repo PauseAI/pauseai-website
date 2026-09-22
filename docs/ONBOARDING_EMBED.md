@@ -30,6 +30,19 @@ The page reports its rendered height to the host via `postMessage` (`{ height: n
 </script>
 ```
 
+When someone completes a new signup, the page also posts `{ event: 'onboarding_signup_complete', version: 1 }` to the host (e.g. so the host can fire a conversion tag). It carries no form data and fires once per new signup, when the server confirms the record was created. It does not fire for later updates to that record (the volunteer details step), for silently dropped spam, or on the standalone page (not iframed). Height messages are unchanged, so tell the two apart by shape:
+
+```html
+<script>
+	window.addEventListener('message', (event) => {
+		if (event.origin !== 'https://pauseai.info') return
+		if (event.data?.event === 'onboarding_signup_complete') {
+			// e.g. window.dataLayer?.push({ event: 'onboarding_signup_complete' })
+		}
+	})
+</script>
+```
+
 ## Query params
 
 | Param       | Effect                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |

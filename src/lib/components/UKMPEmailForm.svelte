@@ -24,15 +24,15 @@
 	let senderName = $derived(userName)
 	let senderEmail = $state('')
 	let subject = $state(`Request to co-sign letter on frontier AI risks`)
-	let message = $derived(`Dear ${mp.salutation},
+	let message = $derived(`Dear ${mp.salutation}
 
-Would you be willing to sign this open letter supporting legislation to protect British people from the harms of frontier AI?
+I’m a resident of ${mp.constituency} and a supporter of **PauseAI**, a civic movement focused on averting the risks of superhuman AI. I am very concerned that AI development is racing ahead without adequate protection for the public.
 
-I’m a resident of ${mp.constituency} and a supporter of **PauseAI**, a civic movement focused on averting the risks of advanced AI. I am very concerned that AI development is racing ahead without adequate protection for the public.
+AI now poses an extremely serious risk to our national security. Parliamentarians in the United Kingdom, and politicians around the globe are moving to answer the call from AI developers, Nobel Laureates and concerned citizens to regulate AI immediately.
 
-**The UK has no specific legal standards for AI.** No regulator oversees frontier AI development. And UK law does not reliably hold developers liable for damage or deaths caused by their models, even when the danger is predictable, preventable and uniquely enabled by AI.
+**The UK has no specific legal standards for frontier AI safety.** No regulator oversees frontier AI development. And UK law does not reliably hold developers liable for damage or deaths caused by their models, even when the danger is predictable, preventable and uniquely enabled by AI.
 
-To ensure our safety, I believe that we need frontier AI legislation as soon as possible. Please could we arrange a short meeting to discuss this important matter?
+Please could you add your name to PauseAI's open letter (attached) in support of frontier AI legislation? And could we arrange a short meeting to discuss this important matter?
 
 Thank you for your consideration,
 
