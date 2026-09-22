@@ -99,7 +99,7 @@ export const GET: RequestHandler = async ({ url, setHeaders }) => {
 				if (location) locations.add(location)
 			}
 		}
-		const coordinates = locations.size > 0 ? await geocodeAll([...locations]) : new Map()
+		const coordinates = await geocodeAll([...locations])
 		for (const { instances } of instanceRuns) {
 			for (const instance of instances) {
 				const location = GoogleCalendar.text(instance.event.location)
