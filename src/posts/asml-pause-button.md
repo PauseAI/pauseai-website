@@ -84,6 +84,7 @@ Each phase is defensible on its own, and each can be reversed.
 
 ### Phase 0: recognition and preparation
 
+- The Dutch government convenes ASML and other key companies in the AI chip supply chain, together with their governments, to prepare international treaty negotiations. The meeting should agree how access to chipmaking equipment, maintenance and chips can support verifiable treaty commitments, and set a timetable for bringing the US and China into negotiations.
 - The cabinet states in a letter to parliament that export and maintenance of EUV equipment is an instrument of **AI safety policy**, not only of China policy. The [government's own analysis](https://www.rijksoverheid.nl/documenten/kamerstukken/2024/12/09/tk-aanbieding-analyse-van-het-effect-van-ai-op-de-nationale-veiligheid) of AI's effect on national security (December 2024) provides the basis.
 - A technical working group (customs, export control team, AI safety expertise, intelligence services) maps which deliveries contribute to frontier AI capacity: EUV and High-NA, DUV immersion used for HBM, field upgrades and service contracts.
 - The Netherlands announces a date from which EUV licenses carry the Layer 1 conditions. This gives ASML and its customers time to adjust, as happened in 2023.
@@ -111,6 +112,11 @@ The Netherlands should do this together with Japan (photoresists, Tokyo Electron
 [Pax Silica](https://www.dutchnews.nl/2026/06/netherlands-joins-us-chip-pact-while-fighting-asml-export-curbs/), the chip alliance the Netherlands joined in June 2026, is an existing forum to put this on the table.
 
 ## Why now
+
+**The Netherlands has joined a call for international AI oversight.**
+On 21 September 2026, leaders and senior officials from 20 countries, including Dutch Prime Minister Rob Jetten, and the European Commission endorsed [A Call for Control of Frontier AI Models](https://www.presidentti.fi/en/a-call-for-control-of-frontier-ai-models/).
+It calls for exploring an international institution to set standards, enable verification and bring states together when AI capabilities cross agreed thresholds.
+The Netherlands should follow through by convening the AI chip supply chain and using access to ASML equipment and maintenance to help bring countries into treaty negotiations.
 
 **The US is already forcing the Netherlands to restrict ASML, on American terms.**
 The MATCH Act, on track to be attached to the US defense budget, would bar ASML from selling DUV machines to China and from [servicing machines already delivered](https://nltimes.nl/2026/08/20/us-preparing-force-netherlands-ban-asml-selling-china), and gives the Netherlands 150 days to comply or face sanctions.
@@ -195,7 +201,7 @@ Waiting for EU consensus means waiting until the window is shut.
 ## What you can do
 
 - If you are in the Netherlands, [write to your representative](/lobby-tips) and ask them to raise this in the MATCH Act debate: if the Netherlands introduces a maintenance license, it should carry AI safety criteria rather than country criteria alone.
-- Ask for a parliamentary hearing with ASML, the AI safety field, customs, and the authors of the [compute governance report](https://arxiv.org/abs/2506.20530) and the [MIRI treaty draft](https://arxiv.org/abs/2511.10783).
+- Ask the Dutch government to convene ASML, other key companies in the AI chip supply chain and their governments to initiate negotiations on an international AI treaty. The goal should be to use access to chipmaking equipment, maintenance and chips to secure participation and verifiable commitments, with a plan for bringing the US and China into the negotiations.
 - [Join PauseAI](/join) and help us build the coalition with Japan, Germany, Taiwan and South Korea.
 
 ## Open questions
