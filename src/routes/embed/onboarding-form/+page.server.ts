@@ -179,13 +179,14 @@ export const actions: Actions = {
 		}
 		// UK postcode: collected on step 1 (and the browse signup) for every UK
 		// signup, posted through the same `zip_code` field the US volunteer ZIP
-		// uses. Required on a create; an update (the volunteer step) reposts it
-		// from state but is not re-checked, matching how the other basics behave.
+		// uses. Optional, but whatever's entered must be a full valid postcode —
+		// the outward code alone isn't enough to identify a constituency, so a
+		// half-typed value is rejected rather than silently dropped.
 		const isUK = country === 'United Kingdom'
 		const ukPostcode = isUK ? normaliseUKPostcode(getString(data, 'zip_code')) : ''
-		if (isUK && !existingRecordId && !isValidUKPostcode(ukPostcode)) {
+		if (isUK && ukPostcode && !isValidUKPostcode(ukPostcode)) {
 			return fail(400, {
-				message: 'Please enter your full UK postcode, e.g. SW1A 1AA.'
+				message: 'Please enter a valid UK postcode, e.g. SW1A 1AA.'
 			})
 		}
 		if (!isIntent(intent)) {
