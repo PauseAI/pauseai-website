@@ -319,16 +319,17 @@
 			{/if}
 			<span class="hint" id="language-hint">
 				{#if data.form.languageLock === 'own-email'}
-					{data.resolved.override} writes its own email, in {languageName(data.resolved.language)}.
+					{data.resolved.override}'s own email is always in {languageName(data.resolved.language)}.
 				{:else if data.form.languageLock === 'english-only'}
 					Only the &ldquo;Volunteer / Lead&rdquo; email has a Spanish version, so this one is always
 					in English.
 				{:else if data.form.languageLock === 'spanish-country'}
-					Volunteers from {data.form.country} always get the Spanish version, whatever languages they
-					listed.
+					Volunteer / Lead signups from {data.form.country} always get the Spanish version, whatever languages
+					they speak.
 				{:else}
-					Which language the shared email is written in. Signups from Spanish-speaking countries
-					always get Spanish; anyone else gets it if they selected Spanish when signing up.
+					Pick which version to preview. Volunteer / Lead signups get Spanish if they said they
+					speak Spanish on the sign-up form or live in a Spanish-speaking country, and English
+					otherwise.
 				{/if}
 			</span>
 		</div>
