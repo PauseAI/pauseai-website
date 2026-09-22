@@ -31,8 +31,8 @@
 	const COPY_STATUS = {
 		text: 'Text copied',
 		html: 'HTML copied',
-		'failed-text': "Couldn't copy: your browser blocked it. Select the text below instead.",
-		'failed-html': "Couldn't copy: your browser blocked it."
+		'failed-text': "Couldn't copy automatically. Select the text below instead.",
+		'failed-html': "Couldn't copy automatically."
 	} as const
 	// Tied to the render it was about, so the message goes once the email changes. Raw, so the
 	// identity check against `data.rendered` isn't defeated by a state proxy.
@@ -146,8 +146,8 @@
 		// version, so a Spanish non-volunteer is resolved as English with no chapter.
 		if (data.routedLanguage === 'es') {
 			return group === 'volunteer'
-				? `${opening} The Spanish email points everyone to PauseAI en Español, so it has no country chapter part.`
-				: `${opening} The email for non-volunteers only exists in English, and Spanish-speaking signups get no country chapter part.`
+				? `${opening} The Spanish email points everyone to PauseAI en Español instead of a country's chapter.`
+				: `${opening} The shared email for None and Act now only exists in English, and Spanish-speaking signups get no chapter part.`
 		}
 		if (!chapter) {
 			return `${opening} It has no chapter part, as for any signup from a country not in the list above.`
@@ -159,7 +159,7 @@
 		}
 		return hasLinks
 			? `${opening} It includes a short part about PauseAI in ${chapter.name}, with ${links}.`
-			: `${opening} It has no chapter part, because PauseAI ${chapter.name} has no links on pauseai.info/national-groups yet.`
+			: `${opening} It has no chapter part, because PauseAI ${chapter.name} has no links on pauseai.info/national-groups.`
 	})
 </script>
 
@@ -205,7 +205,7 @@
 	<div class="intro">
 		<p>
 			Most countries get one <strong>shared email</strong>, written by PauseAI Global in English or
-			Spanish, with a short part about the local chapter. A few chapters
+			Spanish, with a short part about the local chapter where there is one. A few chapters
 			<strong>write their own email</strong>
 			instead{ownEmailChapters ? ` (${ownEmailChapters})` : ''}, and it replaces the shared text.
 		</p>
@@ -222,9 +222,11 @@
 	<section class="guide">
 		<h2>Writing your chapter's own email</h2>
 		<p>
-			You can translate the shared email (<strong>Copy text</strong> below copies the version on screen),
-			or write your own from scratch, as some chapters have: pick a country marked &ldquo;writes its own&rdquo;
-			below to read theirs. One email for everyone is fine, or one for volunteers and one for non-volunteers.
+			You can translate the shared email (<strong>Copy text</strong> below copies the subject and text
+			of the email shown), or write your own from scratch, as some chapters have: pick a country marked
+			&ldquo;writes its own&rdquo; below to read theirs, and if it says &ldquo;for volunteers&rdquo;,
+			set Intent to Volunteer / Lead. One email for everyone is fine, or one for Volunteer / Lead and
+			one for None / Act now.
 		</p>
 		<p>
 			We add these two lines to every chapter's own email. If you are writing in another language,
@@ -245,7 +247,7 @@
 			Your email goes out in the branded card layout unless you ask for the plain note instead; use
 			<strong>Layout</strong> below to compare the two.
 		</p>
-		<p>Send your text and your chapter's social links to PauseAI Global, and we will set it up.</p>
+		<p>Send your text and your chapter's links to PauseAI Global, and we will set it up.</p>
 	</section>
 
 	<form bind:this={formEl} method="GET" onsubmit={rerender} class="controls">
@@ -261,7 +263,7 @@
 				onchange={rerender}
 				aria-describedby="country-hint"
 			>
-				<option value="">— no chapter in their country —</option>
+				<option value="">— any other country (no chapter part) —</option>
 				{#if countryMissing}
 					<option value={data.form.country}>{data.form.country}</option>
 				{/if}
@@ -273,9 +275,9 @@
 			</select>
 			<span class="hint" id="country-hint">
 				{#if data.options.countries.length}
-					Countries with a PauseAI chapter ({data.options.countries.length}). Signups from any other
-					country get the email without a chapter part. That includes the US, because PauseAI US
-					welcomes its own members.
+					The {data.options.countries.length} countries whose chapter PauseAI Global connects new signups
+					with. Any other country gets the shared email without a chapter part. The US isn't listed, because
+					PauseAI US welcomes its own members.
 				{:else}
 					The list of chapters couldn't be loaded, so you can't pick another country right now. Try
 					reloading the page.
@@ -326,7 +328,7 @@
 					listed.
 				{:else}
 					Which language the shared email is written in. Signups from Spanish-speaking countries
-					always get Spanish; anyone else gets it if they listed Spanish among their languages.
+					always get Spanish; anyone else gets it if they selected Spanish when signing up.
 				{/if}
 			</span>
 		</div>
@@ -347,7 +349,7 @@
 		<div class="subject"><span class="muted">Subject</span> {data.rendered.subject}</div>
 		<div class="preview-actions">
 			<button type="button" onclick={() => (showText = !showText)}>
-				{showText ? 'Show email' : 'Show plain-text version'}
+				{showText ? 'Show formatted email' : 'Show text only'}
 			</button>
 			{#if !showText}
 				<div class="radios" role="radiogroup" aria-label="Preview width">
@@ -380,10 +382,10 @@
 	<details class="panel">
 		<summary>For developers</summary>
 		<p>
-			Rendered by <code>/api/onboarding-email</code>, which the Airtable onboarding automation
-			calls; the copy and layout live in <code>src/lib/server/onboardingEmail</code>. This page is
-			not linked from the site: it runs on <code>localhost</code> and Netlify deploy previews, and 404s
-			on the production domain. Chapter data shown is public National Groups info, not PII.
+			Uses the same renderer as <code>/api/onboarding-email</code>, which the Airtable onboarding
+			automation calls; the copy and layout live in <code>src/lib/server/onboardingEmail</code>.
+			This page is not linked from the site: it runs on <code>localhost</code> and Netlify deploy previews,
+			and 404s on the production domain. Chapter data shown is public National Groups info, not PII.
 		</p>
 		<p>
 			Resolved: <ResolvedSummary resolved={data.resolved} />
