@@ -169,12 +169,14 @@
 		newsletter: false
 	})
 
-	// Blocks the step-1 / browse submit when a UK signup hasn't given a usable
-	// postcode. The `pattern` + `required` attributes on the input enforce the
-	// same thing natively; this guard also disables the browse button, which is
-	// gated on other checks too.
+	// Blocks the step-1 / browse submit when a UK signup has typed a postcode
+	// that isn't a valid one. Optional field, so an empty value passes; the
+	// `pattern` attribute on the input enforces the same format check natively
+	// (browsers skip `pattern` on an empty, non-required value too).
 	const ukPostcodeValid = $derived(
-		basics.country !== 'United Kingdom' || isValidUKPostcode(basics.postcode)
+		basics.country !== 'United Kingdom' ||
+			basics.postcode.trim() === '' ||
+			isValidUKPostcode(basics.postcode)
 	)
 
 	// `pattern` attribute form of UK_POSTCODE_PATTERN: HTML anchors the match
@@ -576,7 +578,6 @@
 						<input
 							type="text"
 							id="ob-postcode"
-							required
 							pattern={ukPostcodeInputPattern}
 							placeholder={msgs.onboarding_placeholder_uk_postcode}
 							autocomplete="postal-code"
@@ -586,7 +587,7 @@
 						<p class="helper">{msgs.onboarding_helper_uk_postcode}</p>
 					</div>
 				{/if}
-				<!-- Step 1 gates entirely on native validation (required + pattern),
+				<!-- Step 1 gates entirely on native validation (pattern, optional),
 				     like the name/email/city fields above it — no disabled button, so
 				     the browser can explain an invalid postcode on submit. -->
 				<button type="submit" class="primary">{msgs.onboarding_btn_continue}</button>
@@ -837,7 +838,6 @@
 										type="text"
 										id="loop-postcode"
 										name="zip_code"
-										required
 										pattern={ukPostcodeInputPattern}
 										placeholder={msgs.onboarding_placeholder_uk_postcode}
 										autocomplete="postal-code"
