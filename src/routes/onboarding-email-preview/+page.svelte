@@ -222,8 +222,8 @@
 		<h2>Writing your chapter's own email</h2>
 		<p>
 			You can translate the shared email (<strong>Copy text</strong> below copies the version on screen),
-			or write your own from scratch, as the chapters named above did; pick their countries below to read
-			them. One email for everyone is fine, or one for volunteers and one for non-volunteers.
+			or write your own from scratch, as some chapters have: pick a country marked &ldquo;writes its own&rdquo;
+			below to read theirs. One email for everyone is fine, or one for volunteers and one for non-volunteers.
 		</p>
 		<p>
 			Every chapter's own email also includes these two lines. If you are writing in another
