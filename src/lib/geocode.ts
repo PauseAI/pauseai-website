@@ -2,14 +2,7 @@ import { MAPBOX_KEY } from '../routes/communities/constants.js'
 
 export type Coordinate = { latitude: number; longitude: number }
 
-/**
- * The site's Mapbox public token; used by the communities map in the browser
- * and by the calendar API for server-side geocoding of iCal LOCATION strings
- * (e.g. "Slovákova 359/10, 602 00 Brno-střed, Czechia").
- *
- * @see https://docs.mapbox.com/api/search/geocoding-v5/
- */
-export function geocodeUrl(searchText: string): string {
+function geocodeUrl(searchText: string): string {
 	return `https://api.mapbox.com/geocoding/v5/mapbox.places/${encodeURIComponent(
 		searchText
 	)}.json?access_token=${MAPBOX_KEY}&limit=10`
@@ -101,29 +94,4 @@ export async function geocode(location: string): Promise<Coordinate | undefined>
 		console.warn(`Mapbox geocoding failed: "${location}"`, error)
 		return undefined
 	}
-}
-
-/**
- * Bounded batch form of {@link geocode} with a concurrency limit: Mapbox
- * freely allows far more, but every calendar needs only a handful of
- * distinct lookups and staggering keeps cold-start bursts off the quota.
- */
-export async function geocodeAll(
-	locations: string[],
-	options: { concurrency?: number } = {}
-): Promise<Coordinate[]> {
-	const results: Coordinate[] = []
-	const concurrency = options.concurrency ?? 8
-	const queue = [...locations]
-
-	await Promise.all(
-		Array.from({ length: Math.min(concurrency, queue.length) }, async () => {
-			for (let i = queue.shift(); i !== undefined; i = queue.shift()) {
-				const coordinate = await geocode(i)
-				if (coordinate) results.push(coordinate)
-			}
-		})
-	)
-
-	return results
 }
