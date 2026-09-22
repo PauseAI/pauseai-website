@@ -1,6 +1,6 @@
 import * as Calendar from '$lib/clients/luma/calendar'
 import * as GoogleCalendar from '$lib/clients/ical'
-import { geocode } from '$lib/geocode.js'
+import { geocodeAll } from '$lib/geocode.js'
 import { generateCacheControlRecord } from '$lib/utils.js'
 import { json } from '@sveltejs/kit'
 import type { RequestHandler } from './$types'
@@ -44,8 +44,6 @@ const GOOGLE_CALENDAR_IDS = [
 // what is actually served; this only bounds how far expansion is meaningful.
 const GOOGLE_HORIZON_DAYS = 365
 
-type GoogleLocation = { latitude: number; longitude: number }
-
 export const GET: RequestHandler = async ({ url, setHeaders }) => {
 	const daysStr = url.searchParams.get('days')
 	const days = daysStr ? parseInt(daysStr) : null
@@ -85,26 +83,27 @@ export const GET: RequestHandler = async ({ url, setHeaders }) => {
 
 	for (const { calendarId, data } of googleCalendars) {
 		const vevents = Object.values(data).filter(GoogleCalendar.isVEVENT)
-		for (const vevent of vevents) {
-			const instances = GoogleCalendar.expandRecurringEvent(vevent, {
+		// Geocode each distinct location once, in one parallel wave — recurring
+		// occurrences share their venue, so repeat hits come from the cache.
+		const locations = new Set<string>()
+		const instanceRuns = vevents.map((vevent) => ({
+			vevent,
+			instances: GoogleCalendar.expandRecurringEvent(vevent, {
 				from: googleFrom,
 				to: googleTo
-			})
-			// Geocode each distinct location once — recurring occurrences share
-			// their venue, and the per-process cache in $lib/geocode turns the
-			// repeat hits into plain map lookups.
-			const locationCoordinates = new Map<string, GoogleLocation | undefined>()
+			}).filter((instance) => instance.event.status !== 'CANCELLED')
+		}))
+		for (const { instances } of instanceRuns) {
 			for (const instance of instances) {
 				const location = GoogleCalendar.text(instance.event.location)
-				if (!location || locationCoordinates.has(location)) continue
-				locationCoordinates.set(location, await geocode(location))
+				if (location) locations.add(location)
 			}
+		}
+		const coordinates = locations.size > 0 ? await geocodeAll([...locations]) : new Map()
+		for (const { instances } of instanceRuns) {
 			for (const instance of instances) {
-				// Google marks dropped occurrences with STATUS:CANCELLED on their
-				// RECURRENCE-ID override.
-				if (instance.event.status === 'CANCELLED') continue
 				const location = GoogleCalendar.text(instance.event.location)
-				const coords = location ? locationCoordinates.get(location) : undefined
+				const coords = location ? coordinates.get(location) : undefined
 				const uid = GoogleCalendar.text(instance.event.uid)
 				mergedEntries.push({
 					event: {

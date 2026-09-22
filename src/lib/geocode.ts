@@ -41,57 +41,79 @@ function cityOf(feature: MapboxFeature): string | undefined {
 const geocodeCache = new Map<string, Coordinate | undefined>()
 
 /**
- * Resolves a free-form location string to coordinates through the Mapbox
- * geocoding API. Results are cached per calendar process (Google feeds repeat
- * the same location string for every occurrence of a recurring event, so the
- * hit rate approaches 100%); queries and failures are cached alike so a
- * permanently unresolvable string cannot turn into an API exhaustion loop.
+ * Accepts/rejects the top of a single forward response, shared by single and
+ * batched callers: results below the relevance threshold or cross-city ties
+ * between the top and runner-up are rejected so ambiguous strings produce no
+ * coordinate instead of a wrong-city pin.
  */
-export async function geocode(location: string): Promise<Coordinate | undefined> {
-	const cached = geocodeCache.get(location)
-	if (cached !== undefined || geocodeCache.has(location)) return cached
-
-	try {
-		const response = await fetch(geocodeUrl(location))
-		if (!response.ok) {
-			console.warn(`Mapbox geocoding failed with HTTP ${response.status}: "${location}"`)
-			return undefined
-		}
-		const data = (await response.json()) as MapboxResponse
-		const features = data.features ?? []
-		const top = features[0]
-		// Mapbox feature centers are [lon, lat].
-		const coordinate: Coordinate | undefined =
-			top && (top.relevance ?? 0) >= MIN_RELEVANCE
-				? { latitude: top.center[1], longitude: top.center[0] }
-				: undefined
-		if (!coordinate) {
-			console.warn(
-				`Mapbox geocoding ${
-					top ? 'relevance ' + top.relevance + ' below threshold' : 'matched nothing'
-				} for "${location}"`
-			)
-			geocodeCache.set(location, undefined)
-			return undefined
-		}
-		const runnerUp = features[1]
-		if (
-			runnerUp &&
-			(runnerUp.relevance ?? 0) > (top.relevance ?? 0) - NEAR_TIE_GAP &&
-			cityOf(runnerUp) !== cityOf(top)
-		) {
-			console.warn(
-				`Mapbox geocoding ambiguous: "${location}" ties between "${cityOf(top)}" and "${cityOf(
-					runnerUp
-				)}" (relevances ${top.relevance} / ${runnerUp.relevance}); dropping all matches`
-			)
-			geocodeCache.set(location, undefined)
-			return undefined
-		}
-		geocodeCache.set(location, coordinate)
-		return coordinate
-	} catch (error) {
-		console.warn(`Mapbox geocoding failed: "${location}"`, error)
+function pickCoordinate(location: string, data: MapboxResponse): Coordinate | undefined {
+	const features = data.features ?? []
+	const top = features[0]
+	// Mapbox feature centers are [lon, lat].
+	const coordinate: Coordinate | undefined =
+		top && (top.relevance ?? 0) >= MIN_RELEVANCE
+			? { latitude: top.center[1], longitude: top.center[0] }
+			: undefined
+	if (!coordinate) {
+		console.warn(
+			`Mapbox geocoding ${
+				top ? 'relevance ' + top.relevance + ' below threshold' : 'matched nothing'
+			} for "${location}"`
+		)
 		return undefined
 	}
+	const runnerUp = features[1]
+	if (
+		runnerUp &&
+		(runnerUp.relevance ?? 0) > (top.relevance ?? 0) - NEAR_TIE_GAP &&
+		cityOf(runnerUp) !== cityOf(top)
+	) {
+		console.warn(
+			`Mapbox geocoding ambiguous: "${location}" ties between "${cityOf(top)}" and "${cityOf(
+				runnerUp
+			)}" (relevances ${top.relevance} / ${runnerUp.relevance}); dropping all matches`
+		)
+		return undefined
+	}
+	return coordinate
+}
+
+/**
+ * Resolves free-form location strings to coordinates through the Mapbox
+ * geocoding API. Uncached locations are fetched in one parallel wave
+ * (Mapbox v5 has no batch endpoint; v6's batch API serves no numeric
+ * relevance, which the ambiguity guard depends on). Results — hits and
+ * failures alike — are cached per calendar process, so the repeat occurrences
+ * of a recurring event cost nothing and an unresolvable string cannot turn
+ * into an API exhaustion loop.
+ */
+export async function geocodeAll(
+	locations: string[]
+): Promise<Map<string, Coordinate | undefined>> {
+	const results = new Map<string, Coordinate | undefined>()
+	const pending = [...new Set(locations)].filter((location) => {
+		if (geocodeCache.has(location)) {
+			results.set(location, geocodeCache.get(location))
+			return false
+		}
+		return true
+	})
+	await Promise.all(
+		pending.map(async (location) => {
+			let coordinate: Coordinate | undefined
+			try {
+				const response = await fetch(geocodeUrl(location))
+				if (response.ok) {
+					coordinate = pickCoordinate(location, (await response.json()) as MapboxResponse)
+				} else {
+					console.warn(`Mapbox geocoding failed with HTTP ${response.status}: "${location}"`)
+				}
+			} catch (error) {
+				console.warn(`Mapbox geocoding failed: "${location}"`, error)
+			}
+			geocodeCache.set(location, coordinate)
+			results.set(location, coordinate)
+		})
+	)
+	return results
 }
