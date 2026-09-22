@@ -1,5 +1,5 @@
 ---
-title: "The Dutch Pause Button: How the Netherlands Can Use ASML to Enforce an AI Treaty"
+title: 'The Dutch Pause Button: How the Netherlands Can Use ASML to Enforce an AI Treaty'
 description: The Netherlands already licenses every export of ASML's EUV lithography machines. Here is how those licenses could become the enforcement mechanism for a global pause on superintelligence.
 ---
 
