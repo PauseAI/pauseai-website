@@ -197,9 +197,8 @@
 <div class="qa-tool">
 	<h1>PauseAI welcome email preview</h1>
 	<p class="lead">
-		This is the email a new supporter receives the moment they sign up on pauseai.info. Set the
-		supporter's name, country and why they signed up (their intent) below to see what they would
-		receive.
+		This is the email a new supporter gets when they sign up on pauseai.info. Set their name,
+		country and why they signed up (their intent) below to see what they'd get.
 	</p>
 
 	<div class="intro">
@@ -214,19 +213,20 @@
 			To change them, send the new ones to PauseAI Global.
 		</p>
 		<p class="muted">
-			Nothing here is sent to anyone, and no signup is created. It is a preview of the real wording,
-			rendered by the same code that sends the live emails.
+			Nothing here is sent to anyone, and no signup is created. It shows the same wording the real
+			emails use.
 		</p>
 	</div>
 
 	<section class="guide">
 		<h2>Writing your chapter's own email</h2>
 		<p>
-			You can translate the shared email (<strong>Copy text</strong> below copies the subject and text
-			of the email shown), or write your own from scratch, as some chapters have: pick a country marked
-			&ldquo;writes its own&rdquo; below to read theirs, and if it says &ldquo;for volunteers&rdquo;,
-			set Intent to Volunteer / Lead. One email for everyone is fine, or one for Volunteer / Lead and
-			one for None / Act now.
+			Translate the shared email (<strong>Copy text</strong> below copies it), or write your own from
+			scratch. To read other chapters' own emails, pick a country marked &ldquo;writes its own&rdquo;
+			below; if it says &ldquo;for volunteers&rdquo;, also set Intent to Volunteer / Lead.
+		</p>
+		<p>
+			You can send one email for everyone, or one for Volunteer / Lead and one for None / Act now.
 		</p>
 		<p>
 			We add these two lines to every chapter's own email. If you are writing in another language,
@@ -244,8 +244,9 @@
 			in English, say that both are in English.
 		</p>
 		<p>
-			Your email goes out in the branded card layout unless you ask for the plain note instead; use
-			<strong>Layout</strong> below to compare the two.
+			Your email uses the branded card layout unless you ask for the plain note. Compare them under <strong
+				>Layout</strong
+			> below.
 		</p>
 		<p>Send your text and your chapter's links to PauseAI Global, and we will set it up.</p>
 	</section>
@@ -338,8 +339,8 @@
 		<div>
 			{@render radioGroup('style', STYLE_OPTIONS, data.form.style)}
 			<span class="hint" id="style-hint">
-				The shared email always uses the branded card; a chapter's own email can use either. Switch
-				to compare the same words in both.
+				Switch to compare the same words in both layouts. The shared email always uses the branded
+				card.
 			</span>
 		</div>
 	</form>
