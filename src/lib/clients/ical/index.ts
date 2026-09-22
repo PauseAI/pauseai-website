@@ -14,6 +14,14 @@ export function calendarUrl(calendarId: string): string {
 }
 
 /**
+ * Base64url without `Buffer`, since this code also runs in Netlify edge
+ * functions (Deno), which provide `btoa` instead.
+ */
+function base64Url(input: string): string {
+	return btoa(input).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '')
+}
+
+/**
  * Deep link that opens the event's detail page instead of the whole calendar
  * (the eid is Google's `base64url("<UID local part> <calendar ID>")` format).
  * For expands of a recurring series this opens the recurring-event view of
@@ -21,9 +29,7 @@ export function calendarUrl(calendarId: string): string {
  * occurrence.
  */
 export function eventUrl(uid: string, calendarId: string): string {
-	const eid = Buffer.from(`${uid.replace(/@google\.com$/, '')} ${calendarId}`, 'utf8').toString(
-		'base64url'
-	)
+	const eid = base64Url(`${uid.replace(/@google\.com$/, '')} ${calendarId}`)
 	return `https://calendar.google.com/event?eid=${eid}`
 }
 
