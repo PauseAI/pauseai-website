@@ -221,8 +221,8 @@
 	<section class="guide">
 		<h2>Writing your chapter's own email</h2>
 		<p>
-			Translate the shared email (<strong>Copy text</strong> below copies it), or write your own from
-			scratch. To read other chapters' own emails, pick a country marked &ldquo;writes its own&rdquo;
+			Translate the shared email or write your own from scratch (<strong>Copy text</strong> below copies
+			the email shown). To read other chapters' own emails, pick a country marked &ldquo;writes its own&rdquo;
 			below; if it says &ldquo;for volunteers&rdquo;, also set Intent to Volunteer / Lead.
 		</p>
 		<p>
@@ -339,8 +339,8 @@
 		<div>
 			{@render radioGroup('style', STYLE_OPTIONS, data.form.style)}
 			<span class="hint" id="style-hint">
-				Switch to compare the same words in both layouts. The shared email always uses the branded
-				card.
+				Switch to compare the same words in both layouts. The shared email is always sent in the
+				branded card.
 			</span>
 		</div>
 	</form>
