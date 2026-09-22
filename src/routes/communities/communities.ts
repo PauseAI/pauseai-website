@@ -65,7 +65,8 @@ for (const community of [...adjacentCommunities, ...pauseAICommunities, ...natio
 	if (!(
 		community.link.startsWith('http') ||
 		community.link.startsWith('mailto') ||
-		community.link in LINK_PLACEHOLDERS
+		community.link in LINK_PLACEHOLDERS ||
+		community.link.length === 0
 	)) {
 		throw Error('Invalid link for community: ' + community.name)
 	}
