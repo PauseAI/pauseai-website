@@ -84,7 +84,6 @@ export const GET: RequestHandler = async ({ url, setHeaders }) => {
 	)
 
 	for (const { calendarId, data } of googleCalendars) {
-		const webUrl = GoogleCalendar.calendarUrl(calendarId)
 		const vevents = Object.values(data).filter(GoogleCalendar.isVEVENT)
 		for (const vevent of vevents) {
 			const instances = GoogleCalendar.expandRecurringEvent(vevent, {
@@ -106,11 +105,16 @@ export const GET: RequestHandler = async ({ url, setHeaders }) => {
 				if (instance.event.status === 'CANCELLED') continue
 				const location = GoogleCalendar.text(instance.event.location)
 				const coords = location ? locationCoordinates.get(location) : undefined
+				const uid = GoogleCalendar.text(instance.event.uid)
 				mergedEntries.push({
 					event: {
 						name: GoogleCalendar.text(instance.summary),
-						// Feeds carry no per-event URL; link to the calendar itself.
-						url: webUrl,
+						// Feeds carry no per-event URL; deep-link to the owning event's
+						// detail page, falling back to the calendar itself when the
+						// feed omits the UID.
+						url: uid
+							? GoogleCalendar.eventUrl(uid, calendarId)
+							: GoogleCalendar.calendarUrl(calendarId),
 						geo_latitude: coords?.latitude,
 						geo_longitude: coords?.longitude,
 						start_at: new Date(instance.start)
