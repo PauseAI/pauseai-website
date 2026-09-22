@@ -1,4 +1,6 @@
 import * as Calendar from '$lib/clients/luma/calendar'
+import * as GoogleCalendar from '$lib/clients/ical'
+import { geocode } from '$lib/geocode.js'
 import { generateCacheControlRecord } from '$lib/utils.js'
 import { json } from '@sveltejs/kit'
 import type { RequestHandler } from './$types'
@@ -31,6 +33,19 @@ const CALENDAR_IDS = [
 		.filter((id): id is string => id != null)
 ]
 
+// Google Calendars are pulled through their public iCal feeds (node-ical).
+// `cid` share links carry the raw calendar ID.
+const GOOGLE_CALENDAR_IDS = [
+	'24db6e4f75a3f41c70a5001e1ec9eb278705a03491db2b4c436e21bb95e578ed@group.calendar.google.com'
+]
+
+// Recurring events have to be expanded into instances for a bounded window,
+// so Google feeds are read ~one year ahead. The `days` filter below narrows
+// what is actually served; this only bounds how far expansion is meaningful.
+const GOOGLE_HORIZON_DAYS = 365
+
+type GoogleLocation = { latitude: number; longitude: number }
+
 export const GET: RequestHandler = async ({ url, setHeaders }) => {
 	const daysStr = url.searchParams.get('days')
 	const days = daysStr ? parseInt(daysStr) : null
@@ -57,9 +72,64 @@ export const GET: RequestHandler = async ({ url, setHeaders }) => {
 		}))
 	)
 
-	// De-duplicate by URL
+	const googleFrom = new Date()
+	const googleTo = new Date()
+	googleTo.setDate(googleTo.getDate() + GOOGLE_HORIZON_DAYS)
+
+	const googleCalendars = await Promise.all(
+		GOOGLE_CALENDAR_IDS.map(async (calendarId) => ({
+			calendarId,
+			data: await GoogleCalendar.getCalendar({ calendarId })
+		}))
+	)
+
+	for (const { calendarId, data } of googleCalendars) {
+		const webUrl = GoogleCalendar.calendarUrl(calendarId)
+		const vevents = Object.values(data).filter(GoogleCalendar.isVEVENT)
+		for (const vevent of vevents) {
+			const instances = GoogleCalendar.expandRecurringEvent(vevent, {
+				from: googleFrom,
+				to: googleTo
+			})
+			// Geocode each distinct location once — recurring occurrences share
+			// their venue, and the per-process cache in $lib/geocode turns the
+			// repeat hits into plain map lookups.
+			const locationCoordinates = new Map<string, GoogleLocation | undefined>()
+			for (const instance of instances) {
+				const location = GoogleCalendar.text(instance.event.location)
+				if (!location || locationCoordinates.has(location)) continue
+				locationCoordinates.set(location, await geocode(location))
+			}
+			for (const instance of instances) {
+				// Google marks dropped occurrences with STATUS:CANCELLED on their
+				// RECURRENCE-ID override.
+				if (instance.event.status === 'CANCELLED') continue
+				const location = GoogleCalendar.text(instance.event.location)
+				const coords = location ? locationCoordinates.get(location) : undefined
+				mergedEntries.push({
+					event: {
+						name: GoogleCalendar.text(instance.summary),
+						// Feeds carry no per-event URL; link to the calendar itself.
+						url: webUrl,
+						geo_latitude: coords?.latitude,
+						geo_longitude: coords?.longitude,
+						start_at: new Date(instance.start)
+					}
+				})
+			}
+		}
+	}
+
+	// De-duplicate by URL + start time — Google feeds repeat the calendar's
+	// subscribe URL for every event, and the same Luma event can appear via
+	// several chapter calendars.
 	const uniqueEntries = Array.from(
-		new Map(mergedEntries.map((entry) => [entry.event.url, entry])).values()
+		new Map(
+			mergedEntries.map((entry) => [
+				`${entry.event.url}|${entry.event.start_at.toISOString()}|${entry.event.name}`,
+				entry
+			])
+		).values()
 	)
 
 	let filteredEntries = uniqueEntries

@@ -51,6 +51,12 @@
 		return (await response.json()) as CalendarResponse
 	}
 
+	// API consumers expect `url` to be an absolute URL when the event did not
+	// come from Luma.
+	function eventLink(event: Event): string {
+		return event.url.startsWith('https://') ? event.url : `https://lu.ma/${event.url}`
+	}
+
 	$effect(() => {
 		eventFound = !!nearbyEvent
 	})
@@ -58,8 +64,7 @@
 
 {#if nearbyEvent}
 	<Banner {contrast} type="nearby_event">
-		Next up in your area: <Link
-			href={'https://lu.ma/' + nearbyEvent.url + '?utm_source=local-banner'}
+		Next up in your area: <Link href={eventLink(nearbyEvent) + '?utm_source=local-banner'}
 			>{nearbyEvent.name}</Link
 		> on {FORMAT.format(new Date(nearbyEvent.start_at))}
 	</Banner>
