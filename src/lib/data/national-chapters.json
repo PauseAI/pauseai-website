@@ -121,7 +121,7 @@
 			"name": "Ireland",
 			"lat": 52.865196,
 			"lon": -7.9794599,
-			"link": "mailto:katiemartin@pauseai.info"
+			"link": "https://chat.whatsapp.com/KCA0ZFptOKS03dhqmnfDjn"
 		},
 		{
 			"name": "Switzerland",
@@ -129,6 +129,19 @@
 			"lon": 8.2319736,
 			"link": "https://chat.whatsapp.com/BKt0uKPVLDKFLomW4CrTVH",
 			"lumaCalendarId": "cal-lMws4StD94Vb02J"
+		},
+		{
+			"name": "Japan",
+			"lat": 36.5748441,
+			"lon": 139.2394179,
+			"link": "https://chat.whatsapp.com/Kgl95eeW4AiENrl9g5kBHh",
+			"country_local": "日本"
+		},
+		{
+			"name": "Uganda",
+			"lat": 1.5333554,
+			"lon": 32.2166578,
+			"link": ""
 		}
 	]
 }

@@ -31,8 +31,8 @@
 	const COPY_STATUS = {
 		text: 'Text copied',
 		html: 'HTML copied',
-		'failed-text': "Couldn't copy: your browser blocked it. Select the text below instead.",
-		'failed-html': "Couldn't copy: your browser blocked it."
+		'failed-text': "Couldn't copy automatically. Select the text below instead.",
+		'failed-html': "Couldn't copy automatically."
 	} as const
 	// Tied to the render it was about, so the message goes once the email changes. Raw, so the
 	// identity check against `data.rendered` isn't defeated by a state proxy.
@@ -146,8 +146,8 @@
 		// version, so a Spanish non-volunteer is resolved as English with no chapter.
 		if (data.routedLanguage === 'es') {
 			return group === 'volunteer'
-				? `${opening} The Spanish email points everyone to PauseAI en Español, so it has no country chapter part.`
-				: `${opening} The email for non-volunteers only exists in English, and Spanish-speaking signups get no country chapter part.`
+				? `${opening} The Spanish email points everyone to PauseAI en Español instead of a country's chapter.`
+				: `${opening} The shared email for None and Act now only exists in English, and Spanish-speaking signups get no chapter part.`
 		}
 		if (!chapter) {
 			return `${opening} It has no chapter part, as for any signup from a country not in the list above.`
@@ -159,7 +159,7 @@
 		}
 		return hasLinks
 			? `${opening} It includes a short part about PauseAI in ${chapter.name}, with ${links}.`
-			: `${opening} It has no chapter part, because PauseAI ${chapter.name} has no links on pauseai.info/national-groups yet.`
+			: `${opening} It has no chapter part, because PauseAI ${chapter.name} has no links on pauseai.info/national-groups.`
 	})
 </script>
 
@@ -197,14 +197,14 @@
 <div class="qa-tool">
 	<h1>PauseAI welcome email preview</h1>
 	<p class="lead">
-		This is the email a new supporter receives the moment they sign up on pauseai.info. Set the
-		supporter's name, country and intent below to see what they would receive.
+		This is the email a new supporter gets when they sign up on pauseai.info. Set their name,
+		country and why they signed up (their intent) below to see what they'd get.
 	</p>
 
 	<div class="intro">
 		<p>
-			Most countries get one <strong>shared email</strong>, written centrally in English or Spanish,
-			with a short part about the local chapter. A few chapters
+			Most countries get one <strong>shared email</strong>, written by PauseAI Global in English or
+			Spanish, with a short part about the local chapter where there is one. A few chapters
 			<strong>write their own email</strong>
 			instead{ownEmailChapters ? ` (${ownEmailChapters})` : ''}, and it replaces the shared text.
 		</p>
@@ -213,36 +213,42 @@
 			To change them, send the new ones to PauseAI Global.
 		</p>
 		<p class="muted">
-			Nothing here is sent to anyone, and no signup is created. It is a preview of the real wording,
-			rendered by the same code that sends the live emails.
+			Nothing here is sent to anyone, and no signup is created. It shows the same wording the real
+			emails use.
 		</p>
 	</div>
 
 	<section class="guide">
 		<h2>Writing your chapter's own email</h2>
 		<p>
-			You can translate the shared email (<strong>Copy text</strong> below copies the version on screen),
-			or write your own from scratch, as the chapters named above did; pick their countries below to read
-			them. One email for everyone is fine, or one for volunteers and one for non-volunteers.
+			Translate the shared email or write your own from scratch (<strong>Copy text</strong> below copies
+			the email shown). To read other chapters' own emails, pick a country marked &ldquo;writes its own&rdquo;
+			below; if it says &ldquo;for volunteers&rdquo;, also set Intent to Volunteer / Lead.
 		</p>
 		<p>
-			Every chapter's own email also includes these two lines. If you are writing in another
-			language, please include your translation of them too:
+			You can send one email for everyone, or one for Volunteer / Lead and one for None / Act now.
+		</p>
+		<p>
+			We add these two lines to every chapter's own email. If you are writing in another language,
+			please include your translation of them too:
 		</p>
 		<ul class="fixed-lines">
 			<li>{data.fixedLines.confirm}</li>
 			<li>{data.fixedLines.newsletter}</li>
 		</ul>
 		<p>
-			Please mention PauseAI Global's
-			<a href={data.globalLinks.welcomeCalls}>welcome calls</a> for new volunteers and its
-			<a href={data.globalLinks.discord}>Discord</a>, and that both are in English.
+			In your email, please mention PauseAI Global's <a href={data.globalLinks.welcomeCalls}
+				>welcome calls</a
+			>
+			for new volunteers and its <a href={data.globalLinks.discord}>Discord</a>. If your email isn't
+			in English, say that both are in English.
 		</p>
 		<p>
-			Your email goes out in the branded card layout unless you ask for the plain note instead; use
-			<strong>Layout</strong> below to compare the two.
+			Your email uses the branded card layout unless you ask for the plain note. Compare them under <strong
+				>Layout</strong
+			> below.
 		</p>
-		<p>Send your text and your chapter's social links to PauseAI Global, and we will put it in.</p>
+		<p>Send your text and your chapter's links to PauseAI Global, and we will set it up.</p>
 	</section>
 
 	<form bind:this={formEl} method="GET" onsubmit={rerender} class="controls">
@@ -258,7 +264,7 @@
 				onchange={rerender}
 				aria-describedby="country-hint"
 			>
-				<option value="">— no chapter in their country —</option>
+				<option value="">— any other country (no chapter part) —</option>
 				{#if countryMissing}
 					<option value={data.form.country}>{data.form.country}</option>
 				{/if}
@@ -270,9 +276,9 @@
 			</select>
 			<span class="hint" id="country-hint">
 				{#if data.options.countries.length}
-					The {data.options.countries.length} countries whose chapter PauseAI Global points new signups
-					to. Signups from anywhere else get the email without a chapter part, including the US: PauseAI
-					US welcomes its own members.
+					The {data.options.countries.length} countries whose chapter PauseAI Global connects new signups
+					with. Any other country gets the shared email without a chapter part. The US isn't listed, because
+					PauseAI US welcomes its own members.
 				{:else}
 					The list of chapters couldn't be loaded, so you can't pick another country right now. Try
 					reloading the page.
@@ -294,8 +300,8 @@
 				{/each}
 			</select>
 			<span class="hint" id="intent-hint">
-				What they picked on the sign-up form. Volunteer and Lead get the same email, and a chapter's
-				own email can be the same whatever they picked.
+				What they picked on the sign-up form. Volunteer and Lead get the same email. Some chapters
+				send the same email whatever the intent.
 			</span>
 		</div>
 
@@ -314,16 +320,17 @@
 			{/if}
 			<span class="hint" id="language-hint">
 				{#if data.form.languageLock === 'own-email'}
-					{data.resolved.override} writes its own email, in {languageName(data.resolved.language)}.
+					{data.resolved.override}'s own email is always in {languageName(data.resolved.language)}.
 				{:else if data.form.languageLock === 'english-only'}
 					Only the &ldquo;Volunteer / Lead&rdquo; email has a Spanish version, so this one is always
 					in English.
 				{:else if data.form.languageLock === 'spanish-country'}
-					Volunteers from {data.form.country} always get the Spanish version, whatever languages they
-					listed.
+					Volunteer / Lead signups from {data.form.country} always get the Spanish version, whatever languages
+					they speak.
 				{:else}
-					Which language the shared email is written in. Signups from Spanish-speaking countries
-					always get Spanish; anyone else gets it if they listed Spanish among their languages.
+					Pick which version to preview. Volunteer / Lead signups get Spanish if they said they
+					speak Spanish on the sign-up form or live in a Spanish-speaking country, and English
+					otherwise.
 				{/if}
 			</span>
 		</div>
@@ -332,8 +339,8 @@
 		<div>
 			{@render radioGroup('style', STYLE_OPTIONS, data.form.style)}
 			<span class="hint" id="style-hint">
-				The shared email always uses the branded card; a chapter's own email can use either. Switch
-				to compare the same words in both.
+				Switch to compare the same words in both layouts. The shared email is always sent in the
+				branded card.
 			</span>
 		</div>
 	</form>
@@ -344,7 +351,7 @@
 		<div class="subject"><span class="muted">Subject</span> {data.rendered.subject}</div>
 		<div class="preview-actions">
 			<button type="button" onclick={() => (showText = !showText)}>
-				{showText ? 'Show as email' : 'Show as text'}
+				{showText ? 'Show formatted email' : 'Show text only'}
 			</button>
 			{#if !showText}
 				<div class="radios" role="radiogroup" aria-label="Preview width">
@@ -377,10 +384,10 @@
 	<details class="panel">
 		<summary>For developers</summary>
 		<p>
-			Rendered by <code>/api/onboarding-email</code>, which the Airtable onboarding automation
-			calls; the copy and layout live in <code>src/lib/server/onboardingEmail</code>. This page is
-			not linked from the site: it runs on <code>localhost</code> and Netlify deploy previews, and 404s
-			on the production domain. Chapter data shown is public National Groups info, not PII.
+			Uses the same renderer as <code>/api/onboarding-email</code>, which the Airtable onboarding
+			automation calls; the copy and layout live in <code>src/lib/server/onboardingEmail</code>.
+			This page is not linked from the site: it runs on <code>localhost</code> and Netlify deploy previews,
+			and 404s on the production domain. Chapter data shown is public National Groups info, not PII.
 		</p>
 		<p>
 			Resolved: <ResolvedSummary resolved={data.resolved} />
