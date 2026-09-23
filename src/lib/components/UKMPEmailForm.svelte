@@ -361,6 +361,13 @@ ${userPostcode.toUpperCase()}`)
 				</div>
 			{/if}
 
+			<div class="consent-group">
+				<label class="consent">
+					<input type="checkbox" name="contact_consent" bind:checked={contactConsent} />
+					<span>Tell me about events where I can talk to my MP and ways to help PauseAI</span>
+				</label>
+			</div>
+
 			{#if confirmingSend}
 				<div class="confirm-box" in:slide={{ duration: 250 }}>
 					<p class="confirm-prompt">Send this email to <strong>{mp.name}</strong>?</p>
@@ -401,13 +408,6 @@ ${userPostcode.toUpperCase()}`)
 					Send Email
 				</button>
 			{/if}
-
-			<div class="consent-group">
-				<label class="consent">
-					<input type="checkbox" name="contact_consent" bind:checked={contactConsent} />
-					<span>Tell me about events where I can talk to my MP and ways to help PauseAI</span>
-				</label>
-			</div>
 		</form>
 	{/if}
 </div>
@@ -480,10 +480,10 @@ ${userPostcode.toUpperCase()}`)
 
 	/* A row, not the column the global form label rule and the width: 100% input rule
 	   above would make of it. */
-	/* Sits under the send button, which already carries a 1rem bottom margin. */
+	/* Spaced like a form group above; the send button below carries its own 1rem top margin. */
 	.consent-group {
 		width: 100%;
-		padding-bottom: 1.5rem;
+		padding-top: 1.5rem;
 	}
 
 	.consent {
