@@ -98,7 +98,8 @@
 			"name": "Lucerne",
 			"lat": 47.0502,
 			"lon": 8.3093,
-			"link": "$$DISCORD_GLOBAL$$"
+			"link": "$$DISCORD_GLOBAL$$",
+			"parent_name": "Switzerland"
 		},
 		{
 			"name": "Berlin",
@@ -180,7 +181,8 @@
 			"name": "Zurich",
 			"lat": 47.3769,
 			"lon": 8.5417,
-			"link": "$$DISCORD_GLOBAL$$"
+			"link": "$$DISCORD_GLOBAL$$",
+			"parent_name": "Switzerland"
 		},
 		{
 			"name": "Milan",
@@ -351,13 +353,15 @@
 			"name": "Osaka",
 			"lat": 34.69,
 			"lon": 135.5,
-			"link": "$$DISCORD_GLOBAL$$"
+			"link": "$$DISCORD_GLOBAL$$",
+			"parent_name": "Japan"
 		},
 		{
 			"name": "Brussels",
 			"lat": 50.85,
 			"lon": 4.35,
-			"link": "$$DISCORD_GLOBAL$$"
+			"link": "$$DISCORD_GLOBAL$$",
+			"parent_name": "Belgium"
 		},
 		{
 			"name": "Réunion Island",
@@ -389,7 +393,8 @@
 			"name": "Fukuoka",
 			"lat": 33.5904,
 			"lon": 130.4017,
-			"link": "https://line.me/ti/g2/rrV7AC9zmKz802Yk-BvJcyb7fHdppCtDQ1RGxQ?utm_source=invitation&utm_medium=link_copy&utm_campaign=default"
+			"link": "https://line.me/ti/g2/rrV7AC9zmKz802Yk-BvJcyb7fHdppCtDQ1RGxQ?utm_source=invitation&utm_medium=link_copy&utm_campaign=default",
+			"parent_name": "Japan"
 		},
 		{
 			"name": "Astana",
@@ -401,7 +406,8 @@
 			"name": "Geneva",
 			"lat": 46.2044,
 			"lon": 6.1432,
-			"link": "$$DISCORD_GLOBAL$$"
+			"link": "$$DISCORD_GLOBAL$$",
+			"parent_name": "Switzerland"
 		},
 		{
 			"name": "Exeter",
@@ -446,19 +452,22 @@
 			"name": "Brno",
 			"link": "https://pauseai.cz",
 			"lat": 49.19522,
-			"lon": 16.60796
+			"lon": 16.60796,
+			"parent_name": "Czechia"
 		},
 		{
 			"link": "https://www.pause-ai.de/lokalgruppen",
 			"name": "Münster",
 			"lat": 51.96,
-			"lon": 7.62
+			"lon": 7.62,
+			"parent_name": "Germany"
 		},
 		{
 			"name": "Olomouc",
 			"link": "https://chat.whatsapp.com/D8j1ci4PDonJJ8Rk15wKnb",
 			"lat": 49.5925739,
-			"lon": 17.2496039
+			"lon": 17.2496039,
+			"parent_name": "Czechia"
 		}
 	]
 }
