@@ -48,6 +48,8 @@ ${userPostcode.toUpperCase()}`)
 	let confirmingSend = $state(false)
 	let honeypot = $state('')
 	let turnstileToken = $state('')
+	// Opt-in, so unchecked by default; the server stores it on the Airtable email record.
+	let contactConsent = $state(false)
 
 	// Bumped after each submission to remount the widget: Turnstile tokens are
 	// single-use, so a resubmit with the same token would be rejected.
@@ -192,7 +194,8 @@ ${userPostcode.toUpperCase()}`)
 					subject: subject.trim(),
 					message: message.trim(),
 					nickname: honeypot,
-					turnstileToken
+					turnstileToken,
+					contactConsent
 				})
 			})
 
@@ -253,6 +256,13 @@ ${userPostcode.toUpperCase()}`)
 					required
 					placeholder="your.email@example.com"
 				/>
+			</div>
+
+			<div class="form-group">
+				<label class="consent">
+					<input type="checkbox" name="contact_consent" bind:checked={contactConsent} />
+					<span>Tell me about events where I can talk to my MP and ways to help pause AI</span>
+				</label>
 			</div>
 
 			<div class="form-group">
@@ -466,6 +476,27 @@ ${userPostcode.toUpperCase()}`)
 	textarea {
 		resize: vertical;
 		font-family: inherit;
+	}
+
+	/* A row, not the column the global form label rule and the width: 100% input rule
+	   above would make of it. */
+	.consent {
+		display: flex;
+		flex-direction: row;
+		align-items: flex-start;
+		gap: 0.6rem;
+		font-weight: normal;
+		font-size: 0.95rem;
+		cursor: pointer;
+	}
+
+	.consent input[type='checkbox'] {
+		width: 1.2rem;
+		height: 1.2rem;
+		flex-shrink: 0;
+		margin: 0.15rem 0 0;
+		padding: 0;
+		accent-color: var(--brand);
 	}
 
 	.markdown-toolbar {

@@ -9,6 +9,9 @@ import type { RequestHandler } from './$types'
 
 const MP_CONTACT_BASE_ID = 'appBInVvIm6opJ1Ob'
 const EMAIL_TABLE_ID = 'tblkzjrRHiZiqMDGR'
+// The single-select field on the Emails table that records the sender's opt-in: "Yes" or
+// "No" on every record the form creates, empty only on records from before it existed.
+const CONTACT_CONSENT_FIELD = 'Contact consent'
 
 // Rate limiting: 50 new emails per minute per server instance
 const RATE_LIMIT_REQUESTS = 50
@@ -43,6 +46,7 @@ interface EmailRequest {
 	message: string
 	nickname?: string
 	turnstileToken?: string
+	contactConsent?: boolean
 }
 
 type UKSendMPEmailApiSuccessResponse = {
@@ -183,7 +187,8 @@ export const POST: RequestHandler = async ({ request, url }) => {
 				Recipient: [mpRecordId], // Array of record IDs for linked field
 				Subject: data.subject,
 				Message: data.message,
-				Campaign: 'Frontier AI letter'
+				Campaign: 'Frontier AI letter',
+				[CONTACT_CONSENT_FIELD]: data.contactConsent === true ? 'Yes' : 'No'
 			}
 		}
 
