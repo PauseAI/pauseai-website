@@ -259,13 +259,6 @@ ${userPostcode.toUpperCase()}`)
 			</div>
 
 			<div class="form-group">
-				<label class="consent">
-					<input type="checkbox" name="contact_consent" bind:checked={contactConsent} />
-					<span>Tell me about events where I can talk to my MP and ways to help pause AI</span>
-				</label>
-			</div>
-
-			<div class="form-group">
 				<label for="subject">Subject</label>
 				<textarea
 					id="subject"
@@ -408,6 +401,13 @@ ${userPostcode.toUpperCase()}`)
 					Send Email
 				</button>
 			{/if}
+
+			<div class="consent-group">
+				<label class="consent">
+					<input type="checkbox" name="contact_consent" bind:checked={contactConsent} />
+					<span>Tell me about events where I can talk to my MP and ways to help PauseAI</span>
+				</label>
+			</div>
 		</form>
 	{/if}
 </div>
@@ -480,6 +480,12 @@ ${userPostcode.toUpperCase()}`)
 
 	/* A row, not the column the global form label rule and the width: 100% input rule
 	   above would make of it. */
+	/* Sits under the send button, which already carries a 1rem bottom margin. */
+	.consent-group {
+		width: 100%;
+		padding-bottom: 1.5rem;
+	}
+
 	.consent {
 		display: flex;
 		flex-direction: row;
