@@ -1,3 +1,9 @@
+/**
+ * Client for Google Calendar's public interface, on top of node-ical for ICS
+ * parsing. Google-specific because it keys everything by the calendar ID:
+ * fetching a calendar's iCal feed, its `cid` subscribe URL and per-event
+ * `eid` deep links all take that raw ID.
+ */
 import * as ical from 'node-ical'
 
 export type { CalendarResponse, EventInstance, VEvent } from 'node-ical'

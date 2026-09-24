@@ -1,5 +1,5 @@
 import * as Calendar from '$lib/clients/luma/calendar'
-import * as GoogleCalendar from '$lib/clients/ical'
+import * as GoogleCalendar from '$lib/clients/google-calendar'
 import { geocodeAll } from '$lib/geocode.js'
 import { generateCacheControlRecord } from '$lib/utils.js'
 import { json } from '@sveltejs/kit'
