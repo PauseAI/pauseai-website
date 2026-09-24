@@ -10,7 +10,7 @@
 	import workerUrl from 'maplibre-gl/dist/maplibre-gl-worker.mjs?worker&url'
 	import { isMapboxURL, transformMapboxUrl } from 'maplibregl-mapbox-request-transformer'
 	import { onDestroy, onMount } from 'svelte'
-	import { communities, communitiesMeta } from './communities'
+	import { communities, communitiesMeta, GLOBAL_DISCORD_URL } from './communities'
 	import { MAPBOX_KEY } from './constants'
 	import { HERO_ORANGE } from '$lib/colors'
 	import escape from 'escape-html'
@@ -137,9 +137,7 @@
 				})
 					.setPopup(
 						new Popup({ offset: [0, -15] }).setHTML(
-							`<h3><a href="${community.link || 'https://discord.gg/CR5u5BTBwy'}">${
-								community.name
-							}</a></h3>`
+							`<h3><a href="${community.link || GLOBAL_DISCORD_URL}">${community.name}</a></h3>`
 						)
 					)
 					.setLngLat([community.lon, community.lat])

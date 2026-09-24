@@ -22,6 +22,7 @@
 	import Stepper from './Stepper.svelte'
 	import { getMessages } from './i18n.svelte'
 	import { turnstileSiteKey } from '$lib/turnstile'
+	import { hasUniversities, isKnownUniversity, universityOptions } from '$lib/data/universities'
 	import {
 		COUNTRIES,
 		COUNTRY_DIAL_CODES,
@@ -166,7 +167,19 @@
 		// field the US volunteer ZIP uses. Empty and unvalidated for every other
 		// country.
 		postcode: '',
+		// Optional, for students. Only for a country with a list in
+		// $lib/data/universities; holds the plain university name.
+		university: '',
 		newsletter: false
+	})
+
+	const universities = $derived(universityOptions(basics.country))
+
+	// Drops a choice that no longer belongs to the selected country.
+	$effect(() => {
+		if (basics.university && !isKnownUniversity(basics.country, basics.university)) {
+			basics.university = ''
+		}
 	})
 
 	// Blocks the step-1 / browse submit when a UK signup has typed a postcode
@@ -416,6 +429,20 @@
 	/>
 {/snippet}
 
+{#snippet universityField(id: string)}
+	<div class="field">
+		<label class="field-label" for={id}>{msgs.onboarding_field_university}</label>
+		<Combobox
+			{id}
+			name="university"
+			options={universities}
+			placeholder={msgs.onboarding_placeholder_university}
+			bind:value={basics.university}
+		/>
+		<p class="helper">{msgs.onboarding_helper_university}</p>
+	</div>
+{/snippet}
+
 {#snippet hiddenBasics()}
 	<input type="hidden" name="full_name" value={basics.fullName} />
 	<input type="hidden" name="email" value={basics.email} />
@@ -425,6 +452,9 @@
 	     posted for a UK signup; the server ignores it for any other country. -->
 	{#if basics.country === 'United Kingdom' && basics.postcode.trim()}
 		<input type="hidden" name="zip_code" value={basics.postcode.trim()} />
+	{/if}
+	{#if basics.university}
+		<input type="hidden" name="university" value={basics.university} />
 	{/if}
 	{#if basics.newsletter}
 		<input type="hidden" name="newsletter" value="on" />
@@ -586,6 +616,9 @@
 						/>
 						<p class="helper">{msgs.onboarding_helper_uk_postcode}</p>
 					</div>
+				{/if}
+				{#if hasUniversities(basics.country)}
+					{@render universityField('ob-university')}
 				{/if}
 				<!-- Step 1 gates entirely on native validation (pattern, optional),
 				     like the name/email/city fields above it — no disabled button, so
@@ -846,6 +879,9 @@
 									/>
 									<p class="helper">{msgs.onboarding_helper_uk_postcode}</p>
 								</div>
+							{/if}
+							{#if hasUniversities(basics.country)}
+								{@render universityField('loop-university')}
 							{/if}
 							{@render gdprConsentField()}
 							{#if onboardingLive && onboardingModeKnown}

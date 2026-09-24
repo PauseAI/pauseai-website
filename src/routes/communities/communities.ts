@@ -11,7 +11,7 @@ type RawCommunity = {
 	name: string
 	lat: number
 	lon: number
-	/** Will default to PauseAI Discord */
+	/** Empty local-community links fall back to the parent national chapter, then to PauseAI Global's Discord */
 	link: string
 	parent_name?: string
 	country_local?: string
@@ -30,9 +30,11 @@ export const communitiesMeta: StrictPost = {
 	categories: []
 }
 
-// Map placeholders to actual links
+// Placeholders kept out of the JSON files; a community with a real link of its own points
+// there directly. PauseAI Global's own Discord invite.
+export const GLOBAL_DISCORD_URL = 'https://discord.gg/CR5u5BTBwy'
+
 const LINK_PLACEHOLDERS = {
-	$$DISCORD_GLOBAL$$: 'https://discord.gg/CR5u5BTBwy',
 	$$DISCORD_US$$: 'https://discord.gg/TmpmYejE3e',
 	$$DISCORD_GERMANY$$: 'https://discord.gg/VuVVyJQ37M',
 	$$DISCORD_FRANCE$$: 'https://discord.gg/vyXGd7AeGc',
@@ -61,6 +63,17 @@ const nationalChapters: Community[] = (
 	link: c.link // Ensure the link is passed through
 }))
 
+/**
+ * Where a local community's empty link points: the parent national chapter first,
+ * PauseAI Global's Discord when there is no chapter with a link of its own.
+ * National and adjacent communities keep their own (possibly empty) link.
+ */
+function resolveLink(community: Community): string {
+	if (community.link.length > 0 || community.type !== 'local') return community.link
+	const parent = nationalChapters.find((n) => community.parent_name?.includes(n.name))
+	return parent?.link.length ? parent.link : GLOBAL_DISCORD_URL
+}
+
 for (const community of [...adjacentCommunities, ...pauseAICommunities, ...nationalChapters]) {
 	if (!(
 		community.link.startsWith('http') ||
@@ -79,5 +92,5 @@ export const communities: Community[] = [
 	...nationalChapters.sort((a, b) => b.lat - a.lat)
 ].map((community) => ({
 	...community,
-	link: (LINK_PLACEHOLDERS as Record<string, string>)[community.link] || community.link
+	link: (LINK_PLACEHOLDERS as Record<string, string>)[community.link] || resolveLink(community)
 }))
