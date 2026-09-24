@@ -4,35 +4,35 @@
 			"name": "Utrecht",
 			"lat": 52.09073739999999,
 			"lon": 5.081420100000023,
-			"link": "$$DISCORD_GLOBAL$$",
+			"link": "",
 			"parent_name": "Netherlands"
 		},
 		{
 			"name": "Nottingham",
 			"lat": 52.9548,
 			"lon": -1.1581,
-			"link": "$$DISCORD_GLOBAL$$",
+			"link": "",
 			"parent_name": "United Kingdom"
 		},
 		{
 			"name": "Edinburgh",
 			"lat": 55.9533,
 			"lon": -3.1883,
-			"link": "$$DISCORD_GLOBAL$$",
+			"link": "",
 			"parent_name": "United Kingdom"
 		},
 		{
 			"name": "Manchester",
 			"lat": 53.4808,
 			"lon": -2.2426,
-			"link": "$$DISCORD_GLOBAL$$",
+			"link": "",
 			"parent_name": "United Kingdom"
 		},
 		{
 			"name": "Copenhagen",
 			"lat": 55.6761,
 			"lon": 12.5683,
-			"link": "$$DISCORD_GLOBAL$$"
+			"link": ""
 		},
 		{
 			"name": "London",
@@ -65,14 +65,14 @@
 			"name": "Nairobi",
 			"lat": -1.286389,
 			"lon": 36.817223,
-			"link": "$$DISCORD_GLOBAL$$",
+			"link": "",
 			"parent_name": "Kenya"
 		},
 		{
 			"name": "Stockholm",
 			"lat": 59.3293,
 			"lon": 18.0686,
-			"link": "$$DISCORD_GLOBAL$$",
+			"link": "",
 			"parent_name": "Sweden"
 		},
 		{
@@ -86,19 +86,19 @@
 			"name": "São Paulo",
 			"lat": -23.5338,
 			"lon": -46.6253,
-			"link": "$$DISCORD_GLOBAL$$"
+			"link": ""
 		},
 		{
 			"name": "Fredrikstad",
 			"lat": 59.2201,
 			"lon": 10.9299,
-			"link": "$$DISCORD_GLOBAL$$"
+			"link": ""
 		},
 		{
 			"name": "Lucerne",
 			"lat": 47.0502,
 			"lon": 8.3093,
-			"link": "$$DISCORD_GLOBAL$$",
+			"link": "",
 			"parent_name": "Switzerland"
 		},
 		{
@@ -112,14 +112,14 @@
 			"name": "Rome",
 			"lat": 41.8967,
 			"lon": 12.482,
-			"link": "$$DISCORD_GLOBAL$$",
+			"link": "",
 			"parent_name": "Italy"
 		},
 		{
 			"name": "Toronto",
 			"lat": 43.6511,
 			"lon": -79.347,
-			"link": "$$DISCORD_GLOBAL$$",
+			"link": "",
 			"parent_name": "Canada"
 		},
 		{
@@ -140,34 +140,34 @@
 			"name": "Cambridge",
 			"lat": 52.2053,
 			"lon": 0.1192,
-			"link": "$$DISCORD_GLOBAL$$",
+			"link": "",
 			"parent_name": "United Kingdom"
 		},
 		{
 			"name": "Hanoi",
 			"lat": 21.0285,
 			"lon": 105.8048,
-			"link": "$$DISCORD_GLOBAL$$"
+			"link": ""
 		},
 		{
 			"name": "Gdynia",
 			"lat": 54.5168,
 			"lon": 18.5419,
-			"link": "$$DISCORD_GLOBAL$$",
+			"link": "",
 			"parent_name": "Poland"
 		},
 		{
 			"name": "Blackpool",
 			"lat": 53.8159,
 			"lon": -3.0553,
-			"link": "$$DISCORD_GLOBAL$$",
+			"link": "",
 			"parent_name": "United Kingdom"
 		},
 		{
 			"name": "Vancouver",
 			"lat": 49.2463,
 			"lon": -123.1162,
-			"link": "$$DISCORD_GLOBAL$$",
+			"link": "",
 			"parent_name": "Canada"
 		},
 		{
@@ -181,21 +181,21 @@
 			"name": "Zurich",
 			"lat": 47.3769,
 			"lon": 8.5417,
-			"link": "$$DISCORD_GLOBAL$$",
+			"link": "",
 			"parent_name": "Switzerland"
 		},
 		{
 			"name": "Milan",
 			"lat": 45.4642,
 			"lon": 9.19,
-			"link": "$$DISCORD_GLOBAL$$",
+			"link": "",
 			"parent_name": "Italy"
 		},
 		{
 			"name": "Kraków",
 			"lat": 50.0647,
 			"lon": 19.945,
-			"link": "$$DISCORD_GLOBAL$$",
+			"link": "",
 			"parent_name": "Poland"
 		},
 		{
@@ -208,25 +208,25 @@
 			"name": "Mo i Rana",
 			"lat": 66.3149,
 			"lon": 14.1657,
-			"link": "$$DISCORD_GLOBAL$$"
+			"link": ""
 		},
 		{
 			"name": "Trondheim",
 			"lat": 63.4305,
 			"lon": 10.3951,
-			"link": "$$DISCORD_GLOBAL$$"
+			"link": ""
 		},
 		{
 			"name": "Honefoss",
 			"lat": 60.1002,
 			"lon": 10.0202,
-			"link": "$$DISCORD_GLOBAL$$"
+			"link": ""
 		},
 		{
 			"name": "Kristiansand",
 			"lat": 58.1556,
 			"lon": 8.0167,
-			"link": "$$DISCORD_GLOBAL$$"
+			"link": ""
 		},
 		{
 			"name": "Prague",
@@ -245,7 +245,7 @@
 			"name": "Vienna",
 			"lat": 48.2082,
 			"lon": 16.3738,
-			"link": "$$DISCORD_GLOBAL$$"
+			"link": ""
 		},
 		{
 			"name": "Halle (Saale)",
@@ -341,40 +341,40 @@
 			"name": "Manila",
 			"lat": 14.6,
 			"lon": 120.98,
-			"link": "$$DISCORD_GLOBAL$$"
+			"link": ""
 		},
 		{
 			"name": "Helsinki",
 			"lat": 60.17,
 			"lon": 24.95,
-			"link": "$$DISCORD_GLOBAL$$"
+			"link": ""
 		},
 		{
 			"name": "Osaka",
 			"lat": 34.69,
 			"lon": 135.5,
-			"link": "$$DISCORD_GLOBAL$$",
+			"link": "",
 			"parent_name": "Japan"
 		},
 		{
 			"name": "Brussels",
 			"lat": 50.85,
 			"lon": 4.35,
-			"link": "$$DISCORD_GLOBAL$$",
+			"link": "",
 			"parent_name": "Belgium"
 		},
 		{
 			"name": "Réunion Island",
 			"lat": -21.115,
 			"lon": 55.533,
-			"link": "$$DISCORD_GLOBAL$$",
+			"link": "",
 			"parent_name": "France"
 		},
 		{
 			"name": "Veszprém",
 			"lat": 47.1,
 			"lon": 17.91,
-			"link": "$$DISCORD_GLOBAL$$"
+			"link": ""
 		},
 		{
 			"name": "Leicester",
@@ -387,7 +387,7 @@
 			"name": "Hyderabad",
 			"lat": 17.385,
 			"lon": 78.4867,
-			"link": "$$DISCORD_GLOBAL$$"
+			"link": ""
 		},
 		{
 			"name": "Fukuoka",
@@ -400,20 +400,20 @@
 			"name": "Astana",
 			"lat": 51.1694,
 			"lon": 71.4491,
-			"link": "$$DISCORD_GLOBAL$$"
+			"link": ""
 		},
 		{
 			"name": "Geneva",
 			"lat": 46.2044,
 			"lon": 6.1432,
-			"link": "$$DISCORD_GLOBAL$$",
+			"link": "",
 			"parent_name": "Switzerland"
 		},
 		{
 			"name": "Exeter",
 			"lat": 50.7184,
 			"lon": -3.5339,
-			"link": "$$DISCORD_GLOBAL$$",
+			"link": "",
 			"parent_name": "United Kingdom"
 		},
 		{
@@ -440,13 +440,13 @@
 			"name": "Dhaka",
 			"lat": 23.8103,
 			"lon": 90.4125,
-			"link": "$$DISCORD_GLOBAL$$"
+			"link": ""
 		},
 		{
 			"name": "Potchefstroom",
 			"lat": -26.7167,
 			"lon": 27.1,
-			"link": "$$DISCORD_GLOBAL$$"
+			"link": ""
 		},
 		{
 			"name": "Brno",
