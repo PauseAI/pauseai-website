@@ -210,7 +210,7 @@ allowlists, and the live/stub switch only need to be maintained in one place.
 ```mermaid
 stateDiagram-v2
     [*] --> Step1
-    Step1: Step 1 — Basic info<br/>(name, email, country, city,<br/>UK postcode when country = United Kingdom)
+    Step1: Step 1 — Basic info<br/>(name, email, country, city,<br/>optional UK postcode and university<br/>when country = United Kingdom)
     Step1 --> Step2: Continue (client-side, mode=contact)
     Step1 --> Browse: "I just want to take action now" (mode=browse)
     Browse: Browse mode<br/>(act-now, no signup)<br/>includes ActionCards
@@ -321,8 +321,10 @@ Target: base `appWPTGqZmUcs3NWu`, table `tblL1icZBhTV1gQ9o` ("Members").
 `Country`, `City`, `Intent`, `Signup source`, `Source page` (when resolved),
 `Email subscription` (keep_informed), `Data privacy policy agreed`,
 `GDPR chapter share permission`, plus `Zip code` when `country` is
-`United Kingdom` (the step-1 UK postcode — see "Validation rules" — carried in
-the `zip_code` field, sharing it with the US volunteer ZIP below).
+`United Kingdom` and a postcode was entered (the optional step-1 UK postcode —
+see "Validation rules" — carried in the `zip_code` field, sharing it with the US
+volunteer ZIP below) and
+`University` when a university was chosen (see "Validation rules").
 Every field there has a rule under "Create versus update" above or "Chapter
 sharing" below, so treat this list as the index to those rules.
 
@@ -372,15 +374,23 @@ an update is in "Create versus update" above.
 - Required: `full_name`, `email`, `country`, `city`.
 - `email` must match `^\S+@\S+\.\S+$`.
 - `country` must be in `COUNTRIES`, checked only when one is supplied.
-- UK postcode (`zip_code`) is required on a **create** when `country` is
-  `United Kingdom`, and must match `UK_POSTCODE_PATTERN` — a **full** postcode
-  (`SW1A 1AA`), inward half included, since the outward code alone can't identify
-  a parliamentary constituency. A missing or repeated inner space is tolerated.
-  Collected on step 1 and the browse signup, stored normalised (uppercased, one
-  inner space) in Airtable's `Zip code` field. Not re-checked on an update; the
-  volunteer step reposts it from state. For a non-UK country the field is
-  ignored. The US volunteer ZIP uses the same `zip_code` field on the step-3
-  form (see below).
+- UK postcode (`zip_code`) is **optional** when `country` is `United Kingdom`.
+  When supplied, on a create or an update, it must match `UK_POSTCODE_PATTERN` —
+  a **full** postcode (`SW1A 1AA`), inward half included, since the outward code
+  alone can't identify a parliamentary constituency — else 400; a half-typed
+  value is rejected rather than dropped. A missing or repeated inner space is
+  tolerated. Collected on step 1 and the browse signup (the form blocks submit on
+  an invalid one but accepts an empty one), and reposted from state by the
+  volunteer step. Stored normalised (uppercased, one inner space) in Airtable's
+  `Zip code` field, only when non-empty, so a partial repost can't blank it. For
+  a non-UK country the field is ignored. The US volunteer ZIP uses the same
+  `zip_code` field on the step-3 form (see below).
+- `university` is optional, and only for a country with a list in
+  `src/lib/data/universities` (today `United Kingdom`). When present it must be
+  a `name` from that country's list, else 400; ignored for any other country.
+  Stored as the plain name (no abbreviation) in Airtable's `University` field,
+  only when non-empty. Collected on step 1 and the browse signup, and reposted
+  from state on step 2.
 - `intent` must be one of `INTENTS` (`None` | `Keep informed` | `Act now` |
   `Volunteer` | `Lead`). Step 2 submits `None` when no intent is picked; the
   browse signup hardcodes `Act now`; `/subscribe` hardcodes `None`. No form emits

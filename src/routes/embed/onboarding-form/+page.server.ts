@@ -19,6 +19,7 @@ import { isOnboardingLive } from '$lib/server/onboarding'
 import { recordStubSubmission } from '$lib/server/onboarding-stub'
 import { subscribeToSubstackNewsletter } from '$lib/server/substack'
 import { checkNotSpam } from '$lib/server/turnstile-verify'
+import { hasUniversities, isKnownUniversity } from '$lib/data/universities'
 import {
 	COUNTRIES,
 	DISCOVERY_OPTIONS,
@@ -189,6 +190,13 @@ export const actions: Actions = {
 				message: 'Please enter a valid UK postcode, e.g. SW1A 1AA.'
 			})
 		}
+		// University: optional, and only for a country with a list in
+		// $lib/data/universities. Must be a name from that list, so free text
+		// can't reach Airtable. Ignored for any other country.
+		const university = getString(data, 'university')
+		if (hasUniversities(country) && university && !isKnownUniversity(country, university)) {
+			return fail(400, { message: 'Please select a university from the list.' })
+		}
 		if (!isIntent(intent)) {
 			return fail(400, { message: 'Please choose what brings you here.' })
 		}
@@ -250,6 +258,8 @@ export const actions: Actions = {
 		// (written further down, in the volunteer block). Only ever set when
 		// non-empty, so a partial repost can't blank it.
 		if (isUK && ukPostcode) fields['Zip code'] = ukPostcode
+		// Like the postcode, only set when non-empty so a partial repost can't blank it.
+		if (hasUniversities(country) && university) fields.University = university
 		if (chapterShare !== undefined) {
 			fields['GDPR chapter share permission'] = chapterShare
 		}
