@@ -322,7 +322,8 @@ Target: base `appWPTGqZmUcs3NWu`, table `tblL1icZBhTV1gQ9o` ("Members").
 `Email subscription` (keep_informed), `Data privacy policy agreed`,
 `GDPR chapter share permission`, plus `Zip code` when `country` is
 `United Kingdom` (the step-1 UK postcode — see "Validation rules" — carried in
-the `zip_code` field, sharing it with the US volunteer ZIP below).
+the `zip_code` field, sharing it with the US volunteer ZIP below) and
+`University` when a university was chosen (see "Validation rules").
 Every field there has a rule under "Create versus update" above or "Chapter
 sharing" below, so treat this list as the index to those rules.
 
@@ -381,6 +382,12 @@ an update is in "Create versus update" above.
   volunteer step reposts it from state. For a non-UK country the field is
   ignored. The US volunteer ZIP uses the same `zip_code` field on the step-3
   form (see below).
+- `university` is optional, and only for a country with a list in
+  `src/lib/data/universities` (today `United Kingdom`). When present it must be
+  a `name` from that country's list, else 400; ignored for any other country.
+  Stored as the plain name (no abbreviation) in Airtable's `University` field,
+  only when non-empty. Collected on step 1 and the browse signup, and reposted
+  from state on step 2.
 - `intent` must be one of `INTENTS` (`None` | `Keep informed` | `Act now` |
   `Volunteer` | `Lead`). Step 2 submits `None` when no intent is picked; the
   browse signup hardcodes `Act now`; `/subscribe` hardcodes `None`. No form emits
