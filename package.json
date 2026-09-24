@@ -111,6 +111,7 @@
 		"maplibregl-mapbox-request-transformer": "^0.0.3",
 		"micromark": "^4.0.2",
 		"motion-sv": "^0.1.13",
+		"node-ical": "^0.27.2",
 		"pagefind": "^1.5.2",
 		"pure-rand": "^8.4.2",
 		"rehype-slug": "^6.0.0",
