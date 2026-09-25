@@ -90,6 +90,7 @@
 	] as const
 
 	const languageNames = new Intl.DisplayNames('en', { type: 'language' })
+	const andList = new Intl.ListFormat('en', { type: 'conjunction' })
 	const languageName = (code: string) => languageNames.of(code) ?? code
 
 	const EMAIL_FOR: Record<Resolved['bucket'], string> = {
@@ -98,15 +99,20 @@
 		volunteer: 'the welcome email for people who want to volunteer'
 	}
 
-	const AUDIENCE: Record<Exclude<OverrideSummary['scope'], 'all'>, string> = {
-		volunteer: 'volunteers',
-		'non-volunteer': 'non-volunteers'
+	const AUDIENCE: Record<Resolved['bucket'], string> = {
+		none: 'signups with no intent',
+		'act-now': 'people who want to act now',
+		volunteer: 'volunteers'
+	}
+
+	function audienceOf(scope: Exclude<OverrideSummary['scope'], 'all'>): string {
+		return andList.format(scope.map((bucket) => AUDIENCE[bucket]))
 	}
 
 	function overrideNote(override: OverrideSummary): string {
 		return override.scope === 'all'
 			? `${override.name} writes its own`
-			: `${override.name} writes its own, for ${AUDIENCE[override.scope]}`
+			: `${override.name} writes its own, for ${audienceOf(override.scope)}`
 	}
 
 	// Past this many the intro sentence turns into a list, so it names the first few and counts
@@ -119,7 +125,7 @@
 		const names = data.options.countries
 			.flatMap(({ override }) => (override ? [override] : []))
 			.sort((a, b) => Number(a.scope !== 'all') - Number(b.scope !== 'all'))
-			.map((o) => (o.scope === 'all' ? o.name : `${o.name} for ${AUDIENCE[o.scope]}`))
+			.map((o) => (o.scope === 'all' ? o.name : `${o.name} for ${audienceOf(o.scope)}`))
 		const shown =
 			names.length > MAX_NAMED_OWN_EMAIL_CHAPTERS
 				? [
@@ -127,7 +133,7 @@
 						`${names.length - (MAX_NAMED_OWN_EMAIL_CHAPTERS - 1)} others`
 					]
 				: names
-		return new Intl.ListFormat('en', { type: 'conjunction' }).format(shown)
+		return andList.format(shown)
 	})
 
 	// A bookmarked country, or the default one when the chapter list failed to load, still
@@ -223,10 +229,11 @@
 		<p>
 			Translate the shared email or write your own from scratch (<strong>Copy text</strong> below copies
 			the email shown). To read other chapters' own emails, pick a country marked &ldquo;writes its own&rdquo;
-			below; if it says &ldquo;for volunteers&rdquo;, also set Intent to Volunteer / Lead.
+			below; if it names who the email is for, also set Intent to match.
 		</p>
 		<p>
 			You can send one email for everyone, or one for Volunteer / Lead and one for None / Act now.
+			If you want, you can also write a separate email for each of the three intents.
 		</p>
 		<p>
 			We add these two lines to every chapter's own email. If you are writing in another language,

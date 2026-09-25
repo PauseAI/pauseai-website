@@ -1,10 +1,17 @@
 import type { FixedCopy } from './fixed.js'
 import type { ChapterLink, IntentBucket, IntentGroup, OnboardingEmailHtmlStyle } from './types.js'
 
+/** A list item, optionally with one level of unordered sub-items under it. */
+export type ListItem = string | { text: string; items: string[] }
+
+export function listItemParts(item: ListItem): { text: string; items: string[] } {
+	return typeof item === 'string' ? { text: item, items: [] } : item
+}
+
 export type EmailBlock =
 	| { type: 'heading'; text: string; level?: 1 | 2 }
 	| { type: 'paragraph'; text: string }
-	| { type: 'list'; items: string[]; ordered?: boolean }
+	| { type: 'list'; items: ListItem[]; ordered?: boolean }
 	| { type: 'links'; items: ChapterLink[] }
 	| { type: 'button'; text: string; url: string }
 	/** The closing line and signature, set as one block so the gap above it is wider

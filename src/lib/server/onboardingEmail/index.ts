@@ -2,7 +2,7 @@ import { url, verificationParameter } from '$lib/config.js'
 import { baseContent } from './copy.js'
 import { composeBlocks, groupOf, resolveIntentBucket } from './blocks.js'
 import { getChapterForOnboardingEmail } from './chapter.js'
-import { getChapterOverride } from './chapterOverrides.js'
+import { getChapterOverride, type ResolvedOverride } from './chapterOverrides.js'
 import { FIXED_COPY } from './fixed.js'
 import { renderHtml } from './html.js'
 import { renderHtmlPlain } from './htmlPlain.js'
@@ -39,9 +39,17 @@ export type OnboardingEmailResolution = {
 export async function resolveOnboardingEmail(
 	params: OnboardingEmailParams
 ): Promise<OnboardingEmailResolution> {
+	return (await resolve(params)).resolution
+}
+
+// The override's content is a function, so it stays out of the resolution, which the preview
+// page sends to the browser.
+async function resolve(
+	params: OnboardingEmailParams
+): Promise<{ resolution: OnboardingEmailResolution; override: ResolvedOverride | null }> {
 	const bucket = resolveIntentBucket(params.intent)
 	const group = groupOf(bucket)
-	const override = getChapterOverride(params.country, group)
+	const override = getChapterOverride(params.country, bucket)
 	const detected =
 		params.languageOverride ?? resolveOnboardingEmailLanguage(params.country, params.languages)
 
@@ -52,12 +60,15 @@ export async function resolveOnboardingEmail(
 		!override && detected === 'es' ? null : await getChapterForOnboardingEmail(params.country)
 
 	return {
-		bucket,
-		group,
-		// Only English has a non-volunteer version, so Spanish non-volunteers get it, as today.
-		language: override ? override.language : group === 'volunteer' ? detected : 'en',
-		override: override?.name ?? null,
-		chapter
+		resolution: {
+			bucket,
+			group,
+			// Only English has a non-volunteer version, so Spanish non-volunteers get it, as today.
+			language: override ? override.language : group === 'volunteer' ? detected : 'en',
+			override: override?.name ?? null,
+			chapter
+		},
+		override
 	}
 }
 
@@ -73,9 +84,8 @@ export async function renderOnboardingEmail(
 	}
 	const verificationLink = `${url}/verify?table=join&${verificationParameter}=${params.airtable_id}`
 
-	const resolution = await resolveOnboardingEmail(params)
-	const { bucket, group, language, chapter } = resolution
-	const override = getChapterOverride(params.country, group)
+	const { resolution, override } = await resolve(params)
+	const { bucket, language, chapter } = resolution
 	const firstName = stripMarkdown(params.firstName)
 	const content = override
 		? override.content(firstName, chapter)
