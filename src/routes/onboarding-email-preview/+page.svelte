@@ -230,10 +230,11 @@
 		<p>
 			Translate the shared email or write your own from scratch (<strong>Copy text</strong> below copies
 			the email shown). To read other chapters' own emails, pick a country marked &ldquo;writes its own&rdquo;
-			below; if it says &ldquo;for volunteers&rdquo;, also set Intent to Volunteer / Lead.
+			below; if it names who the email is for, also set Intent to match.
 		</p>
 		<p>
 			You can send one email for everyone, or one for Volunteer / Lead and one for None / Act now.
+			If you want, you can also write a separate email for each of the three intents.
 		</p>
 		<p>
 			We add these two lines to every chapter's own email. If you are writing in another language,
