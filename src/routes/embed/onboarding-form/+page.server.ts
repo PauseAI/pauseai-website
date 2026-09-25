@@ -51,6 +51,7 @@ const CACHE_VARY_PARAMS = ['locale', 'country', 'city', 'source', 'languages', '
 export const load: PageServerLoad = ({ setHeaders }) => {
 	setHeaders({
 		'cache-control': 'public, max-age=0, s-maxage=300, stale-while-revalidate=86400',
+		'netlify-cdn-cache-control': 'public, durable, max-age=300, stale-while-revalidate=86400',
 		'netlify-vary': `query=${CACHE_VARY_PARAMS.join('|')}`
 	})
 }
