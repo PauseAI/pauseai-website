@@ -1,4 +1,4 @@
-import type { EmailBlock } from './blocks.js'
+import { listItemParts, type EmailBlock } from './blocks.js'
 import type { ChapterLink, OnboardingEmailLanguage } from './types.js'
 import { ADDRESS_LINE } from './fixed.js'
 import { escapeHtml, mdLineToHtml } from './markdown.js'
@@ -17,7 +17,15 @@ function renderBlock(block: EmailBlock): string {
 		case 'paragraph':
 			return `<p>${mdLineToHtml(block.text)}</p>`
 		case 'list': {
-			const items = block.items.map((item) => `<li>${mdLineToHtml(item)}</li>`).join('')
+			const items = block.items
+				.map((item) => {
+					const { text, items: sub } = listItemParts(item)
+					const nested = sub.length
+						? `<ul>${sub.map((subItem) => `<li>${mdLineToHtml(subItem)}</li>`).join('')}</ul>`
+						: ''
+					return `<li>${mdLineToHtml(text)}${nested}</li>`
+				})
+				.join('')
 			const tag = block.ordered ? 'ol' : 'ul'
 			return `<${tag}>${items}</${tag}>`
 		}
