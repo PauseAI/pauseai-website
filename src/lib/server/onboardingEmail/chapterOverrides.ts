@@ -358,6 +358,7 @@ function swedenContent(
 				type: 'paragraph',
 				text: '**Tack för att du vill göra skillnad!**\nHör gärna av dig om du har frågor eller idéer.'
 			},
+			{ type: 'rule' },
 			{ type: 'signoff', lines: ['*Vänliga hälsningar*', '*Carl Stylin PauseAI Sverige*'] }
 		]
 	}
