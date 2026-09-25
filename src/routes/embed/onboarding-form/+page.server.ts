@@ -46,12 +46,13 @@ const CACHE_VARY_PARAMS = ['locale', 'country', 'city', 'source', 'languages', '
 // a cold start (~4s seen). The HTML holds nothing per-visitor (mode, Turnstile
 // and the referrer source are all resolved client-side), so let Netlify's edge
 // cache serve it (s-maxage; max-age=0 keeps browsers revalidating). A deploy
-// clears the cache. The form POST is not affected. Tried `durable` via
-// netlify-cdn-cache-control: no measurable gain on the deploy preview.
+// clears the cache. The form POST is not affected. Each edge node caches on its
+// own: Netlify's shared `durable` cache doesn't apply because the site runs
+// as Edge Functions (USE_EDGE_FUNCTIONS in svelte.config.js), so it was tried
+// and had no effect.
 export const load: PageServerLoad = ({ setHeaders }) => {
 	setHeaders({
 		'cache-control': 'public, max-age=0, s-maxage=300, stale-while-revalidate=86400',
-		'netlify-cdn-cache-control': 'public, durable, max-age=300, stale-while-revalidate=86400',
 		'netlify-vary': `query=${CACHE_VARY_PARAMS.join('|')}`
 	})
 }
