@@ -354,6 +354,7 @@ function swedenContent(
 		],
 		body: [...swedenOneOffActions(), ...involved, { type: 'rule' }],
 		signoff: [
+			{ type: 'rule' },
 			{
 				type: 'paragraph',
 				text: '**Tack för att du vill göra skillnad!**\nHör gärna av dig om du har frågor eller idéer.'
