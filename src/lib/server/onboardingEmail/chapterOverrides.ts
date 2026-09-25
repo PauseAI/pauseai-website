@@ -299,24 +299,27 @@ function swedenOneOffActions(): EmailBlock[] {
 			type: 'list',
 			items: [
 				`Använd våra [kontaktuppgifter, mall och tips för att skicka mejl](${SWEDEN_CONTACTS_DOC}).`,
-				`Du kan även använd en mejlbyggare (t.ex. [Jonas Von Essens verktyg](${SWEDEN_EMAIL_BUILDER})) för att skapa personliga mejl.\nVår Mejlbyggare är tyvärr under ombyggnation.`,
-				'Tips: Personifiera mejlmallar – även några meningar gör stor skillnad.'
+				{
+					text: `Du kan även använd en **mejlbyggare** (t.ex. [Jonas Von Essens verktyg](${SWEDEN_EMAIL_BUILDER})) för att skapa personliga mejl.`,
+					items: ['Vår Mejlbyggare är tyvärr under ombyggnation']
+				},
+				'**Tips:** Personifiera mejlmallar – även några meningar gör stor skillnad.'
 			]
 		},
 		{ type: 'paragraph', text: '**2️⃣ Ring politiker**' },
 		{
 			type: 'list',
 			items: [
-				'Att ringa är ofta väldigt effektivt, särskilt en vecka efter att du skickat ett mejl.',
-				`Kontaktuppgifter och samtalstips finns i [dokumentet](${SWEDEN_CONTACTS_DOC}).`
+				'Att ringa är ofta **väldigt effektivt**, särskilt en vecka efter att du skickat ett mejl.',
+				`*Kontaktuppgifter och samtalstips finns i [dokumentet](${SWEDEN_CONTACTS_DOC}).*`
 			]
 		},
 		{ type: 'paragraph', text: '**3️⃣ Tipsa nyhetsredaktioner**' },
 		{
 			type: 'list',
 			items: [
-				'Genom att tipsa om AI-riskrelaterade nyheter kan vi öka medvetenheten i samhället.',
-				`Kontaktuppgifter till Sveriges 25 största redaktioner finns i vår [Google Docs](${SWEDEN_CONTACTS_DOC}).`
+				'Genom att tipsa om AI-riskrelaterade nyheter kan vi **öka medvetenheten** i samhället.',
+				`*Kontaktuppgifter till Sveriges 25 största redaktioner finns i vår [Google Docs](${SWEDEN_CONTACTS_DOC}).*`
 			]
 		},
 		{ type: 'rule' }
@@ -327,7 +330,7 @@ function swedenWhatsApp(chapter: ChapterBlockData | null): string[] {
 	const whatsapp = chapterLink(chapter, 'WhatsApp')
 	return whatsapp
 		? [
-				`Gå med i vårat [Whatsapp community](${whatsapp}) – Majoriteten av samtalen sker via Whatsapp.`
+				`**Gå med i vårat [Whatsapp community](${whatsapp})** – Majoriteten av samtalen sker via Whatsapp.`
 			]
 		: []
 }
@@ -353,9 +356,9 @@ function swedenContent(
 		signoff: [
 			{
 				type: 'paragraph',
-				text: 'Tack för att du vill göra skillnad!\nHör gärna av dig om du har frågor eller idéer.'
+				text: '**Tack för att du vill göra skillnad!**\nHör gärna av dig om du har frågor eller idéer.'
 			},
-			{ type: 'signoff', lines: ['Vänliga hälsningar', 'Carl Stylin', 'PauseAI Sverige'] }
+			{ type: 'signoff', lines: ['*Vänliga hälsningar*', '*Carl Stylin*', '*PauseAI Sverige*'] }
 		]
 	}
 }
@@ -419,8 +422,8 @@ const sweden: ChapterOverride = {
 						type: 'list',
 						items: [
 							...swedenWhatsApp(chapter),
-							`Delta på ett intro- eller månadsmöte – perfekt för att lära känna våra projekt och gemenskapen.${swedenCalendarSentence(chapter)}`,
-							`Besök vår hemsida under fliken [Agera](${SWEDEN_ACTION_PAGE}) för mer information om hur du kan bidra.`
+							`**Delta på ett intro- eller månadsmöte** – perfekt för att lära känna våra projekt och gemenskapen.${swedenCalendarSentence(chapter)}`,
+							`**Besök vår hemsida** under fliken **[Agera](${SWEDEN_ACTION_PAGE})** för mer information om hur du kan bidra.`
 						]
 					}
 				]
@@ -437,8 +440,8 @@ const sweden: ChapterOverride = {
 						type: 'list',
 						items: [
 							...swedenWhatsApp(chapter),
-							`Välkommen till intro- och månadsmöte – Du kommer bli inbjuden till ett intromöte och våra månadsmöten.${swedenCalendarSentence(chapter)}`,
-							`Pågående projekt: vi har några projekt som pågår och andra som ligger i startgroparna. Du hittar fler av våra [gemensamma projekt](${SWEDEN_PROJECTS_SHEET}) med övriga AI-safety sfären i Sverige här. Registrera dig gärna på [Catalyse](${CATALYSE_PROJECTS}) för att se PauseAI specifika projekt.`
+							`**Välkommen till intro- och månadsmöte** – Du kommer bli inbjuden till ett intromöte och våra månadsmöten.${swedenCalendarSentence(chapter)}`,
+							`**Pågående projekt:** vi har några projekt som pågår och andra som ligger i startgroparna. Du hittar fler av våra [gemensamma projekt](${SWEDEN_PROJECTS_SHEET}) med övriga AI-safety sfären i Sverige här. Registrera dig gärna på [Catalyse](${CATALYSE_PROJECTS}) för att se PauseAI specifika projekt.`
 						]
 					}
 				]

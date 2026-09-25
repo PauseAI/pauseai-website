@@ -1,5 +1,5 @@
 import { ADDRESS_LINE } from './fixed.js'
-import { stripBold } from './markdown.js'
+import { stripEmphasis } from './markdown.js'
 import type { EmailBlock } from './blocks.js'
 import type { ChapterLink } from './types.js'
 
@@ -12,14 +12,17 @@ export function renderText(blocks: EmailBlock[], socials: ChapterLink[] = []): s
 		switch (block.type) {
 			case 'heading':
 			case 'paragraph':
-				parts.push(stripBold(block.text))
+				parts.push(stripEmphasis(block.text))
 				break
 			case 'list':
 				parts.push(
 					block.items
-						.map((item, i) =>
-							block.ordered ? `${i + 1}. ${stripBold(item)}` : `- ${stripBold(item)}`
-						)
+						.map((item, i) => {
+							const text = stripEmphasis(typeof item === 'string' ? item : item.text)
+							const line = block.ordered ? `${i + 1}. ${text}` : `- ${text}`
+							if (typeof item === 'string') return line
+							return [line, ...item.items.map((sub) => `  - ${stripEmphasis(sub)}`)].join('\n')
+						})
 						.join('\n')
 				)
 				break
@@ -27,7 +30,7 @@ export function renderText(blocks: EmailBlock[], socials: ChapterLink[] = []): s
 				parts.push(`[${block.text}](${block.url})`)
 				break
 			case 'signoff':
-				parts.push(block.lines.map(stripBold).join('\n'))
+				parts.push(block.lines.map(stripEmphasis).join('\n'))
 				break
 			case 'rule':
 				break

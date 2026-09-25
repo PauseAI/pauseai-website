@@ -212,6 +212,16 @@ describe('renderOnboardingEmail', () => {
 		expect(actNow.text).not.toContain('Catalyse')
 	})
 
+	it('renders italics and a sub-bullet, and leaves no markers in the plain text', async () => {
+		const email = await render('Sweden', 'Act now')
+		expect(email.html).toContain('<em>Vänliga hälsningar</em>')
+		expect(email.html).toContain('<strong>mejlbyggare</strong>')
+		expect(email.html).toMatch(/personliga mejl\.<ul[^>]*><li[^>]*>Vår Mejlbyggare/)
+		expect(email.text).toContain('för att skapa personliga mejl.\n  - Vår Mejlbyggare')
+		expect(email.text).toContain('\nVänliga hälsningar\n')
+		expect(email.text).not.toContain('*')
+	})
+
 	it("gives Swedish signups with no intent the chapter's shorter welcome", async () => {
 		const email = await render('Sweden', 'None')
 		expect(email.subject).toBe('Välkommen till PauseAI Sverige, Alex!')

@@ -1,19 +1,21 @@
 // Minimal markdown support: `[label](url)` links, matching the style already used in the
-// existing MailerSend templates' `plain_text` fields (see email-templates/*.json), and
-// `**bold**`. Plain text output keeps the link syntax verbatim; HTML output converts both.
-// A newline inside a block's text is a line break: HTML output writes a <br>, plain text
-// keeps the newline.
+// existing MailerSend templates' `plain_text` fields (see email-templates/*.json),
+// `**bold**` and `*italic*`. Plain text output keeps the link syntax verbatim; HTML output
+// converts all three. A newline inside a block's text is a line break: HTML output writes a
+// <br>, plain text keeps the newline.
 
 const LINK_PATTERN = /\[([^\]]+)\]\(([^)]+)\)/g
 const BOLD_PATTERN = /\*\*([^*]+)\*\*/g
+// Runs after the bold pass, so only single asterisks are left for it to pair.
+const ITALIC_PATTERN = /\*([^*\n]+)\*/g
 // Marks an anchor parked during the bold pass. Private-use character: it cannot appear in
 // copy, and escapeHtml has already run by the time one is written.
 const ANCHOR_MARK = '\uE000'
 const ANCHOR_PATTERN = /\uE000(\d+)\uE000/g
 
-/** Plain text has no bold, and the templates' own plain text carried no markers. */
-export function stripBold(text: string): string {
-	return text.replace(BOLD_PATTERN, '$1')
+/** Plain text has no bold or italics, and the templates' own plain text carried no markers. */
+export function stripEmphasis(text: string): string {
+	return text.replace(BOLD_PATTERN, '$1').replace(ITALIC_PATTERN, '$1')
 }
 
 /** For values a signup typed, interpolated into copy: without this a first name like
@@ -54,6 +56,7 @@ export function mdLineToHtml(text: string, linkColor?: string): string {
 	})
 	return parked
 		.replace(BOLD_PATTERN, '<strong>$1</strong>')
+		.replace(ITALIC_PATTERN, '<em>$1</em>')
 		.replace(ANCHOR_PATTERN, (_match, index: string) => anchors[Number(index)])
 		.replace(/\n/g, '<br>')
 }

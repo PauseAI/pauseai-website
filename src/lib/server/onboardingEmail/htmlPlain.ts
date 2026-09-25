@@ -17,7 +17,13 @@ function renderBlock(block: EmailBlock): string {
 		case 'paragraph':
 			return `<p>${mdLineToHtml(block.text)}</p>`
 		case 'list': {
-			const items = block.items.map((item) => `<li>${mdLineToHtml(item)}</li>`).join('')
+			const items = block.items
+				.map((item) => {
+					if (typeof item === 'string') return `<li>${mdLineToHtml(item)}</li>`
+					const sub = item.items.map((subItem) => `<li>${mdLineToHtml(subItem)}</li>`).join('')
+					return `<li>${mdLineToHtml(item.text)}<ul>${sub}</ul></li>`
+				})
+				.join('')
 			const tag = block.ordered ? 'ol' : 'ul'
 			return `<${tag}>${items}</${tag}>`
 		}

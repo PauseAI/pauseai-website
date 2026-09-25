@@ -48,11 +48,19 @@ function renderBlock(block: EmailBlock): string {
 		case 'paragraph':
 			return `<tr><td style="padding: 6px 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; font-size: 16px; line-height: 1.6; color: ${TEXT};">${mdLineToHtml(block.text, ACCENT)}</td></tr>`
 		case 'list': {
+			const li = (content: string, margin: string) =>
+				`<li style="margin: ${margin}; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; font-size: 16px; line-height: 1.6; color: ${TEXT};">${content}</li>`
 			const items = block.items
-				.map(
-					(item) =>
-						`<li style="margin: 0 0 6px 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; font-size: 16px; line-height: 1.6; color: ${TEXT};">${mdLineToHtml(item, ACCENT)}</li>`
-				)
+				.map((item) => {
+					if (typeof item === 'string') return li(mdLineToHtml(item, ACCENT), '0 0 6px 0')
+					const sub = item.items
+						.map((subItem) => li(mdLineToHtml(subItem, ACCENT), '4px 0 0 0'))
+						.join('')
+					return li(
+						`${mdLineToHtml(item.text, ACCENT)}<ul style="margin: 0; padding-left: 20px; list-style-type: circle;">${sub}</ul>`,
+						'0 0 6px 0'
+					)
+				})
 				.join('')
 			const tag = block.ordered ? 'ol' : 'ul'
 			return `<tr><td style="padding: 6px 0;"><${tag} style="margin: 0; padding-left: 20px;">${items}</${tag}></td></tr>`
