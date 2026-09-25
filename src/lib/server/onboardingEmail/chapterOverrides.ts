@@ -8,9 +8,9 @@ import type {
 } from './types.js'
 
 // Chapters that send their own email instead of the shared copy. An override supplies the
-// subject, greeting, body and sign-off; composeBlocks() still adds the confirm link and the
-// newsletter line, in the override's language, so the override cannot leave out either. It may
-// word the newsletter line itself, which must still say what we promise to send. Written by us from the chapter's own text and reviewed by the chapter. Changes
+// subject, greeting, body and sign-off; composeBlocks() still adds the fixed lines, in the
+// override's language, so the override cannot leave out the confirm link or what we promise
+// to send. Written by us from the chapter's own text and reviewed by the chapter. Changes
 // are expected to be rare: chapters editing their own text is planned for the CRM.
 
 type ChapterOverride = {
@@ -275,9 +275,8 @@ const canada: ChapterOverride = {
 // shipping a dead one. The calendar must stay the public Luma page: the chapter's own draft
 // linked Luma's admin view, which members cannot open.
 //
-// The chapter's own words. The lines the skeleton adds around them are our Swedish (only the
-// confirm line in the no-intent email, which words its own newsletter line) and nobody fluent
-// has read them yet, which beats the alternative for these readers: the
+// The chapter's own words. The lines the skeleton adds around them are our Swedish and nobody
+// fluent has read them yet, which beats the alternative for these readers: the
 // English email. Flip this back if the chapter would rather it waited.
 const SWEDISH_COPY_APPROVED = true
 
@@ -400,8 +399,7 @@ const SWEDEN_VOLUNTEER: SwedenCopy = {
 	last: `**Pågående projekt:** vi har några projekt som pågår och andra som ligger i startgroparna. Du hittar fler av våra [gemensamma projekt](${SWEDEN_PROJECTS_SHEET}) med övriga AI-safety sfären i Sverige här. Registrera dig gärna på [Catalyse](${CATALYSE_PROJECTS}) för att se PauseAI specifika projekt.`
 }
 
-/** The chapter's translation of the shared no-intent email. Its newsletter paragraph carries the
- *  fixed line's promise, so it takes that line's place rather than repeating it. */
+/** The chapter's translation of the shared no-intent email, newsletter line included. */
 const swedenNoIntent: ChapterContent = (firstName, chapter) => {
 	const whatsapp = chapterLink(chapter, 'WhatsApp')
 	const body: EmailBlock[] = [

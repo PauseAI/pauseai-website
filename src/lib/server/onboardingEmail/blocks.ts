@@ -55,9 +55,8 @@ export function groupOf(bucket: IntentBucket): IntentGroup {
 	return bucket === 'volunteer' ? 'volunteer' : 'non-volunteer'
 }
 
-/** The skeleton: greeting, confirm link, body, newsletter line, sign-off. The confirm link is
- *  always ours, so no content can leave it out. The newsletter line always has its place, but
- *  content may word it itself (`EmailContent.newsletter`). */
+/** The skeleton: greeting, confirm link, body, newsletter line, sign-off. No content can leave
+ *  out either fixed line; it may only reword the newsletter one. */
 export function composeBlocks(
 	content: EmailContent,
 	fixed: FixedCopy,
