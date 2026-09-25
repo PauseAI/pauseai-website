@@ -41,7 +41,7 @@ export async function resolveOnboardingEmail(
 ): Promise<OnboardingEmailResolution> {
 	const bucket = resolveIntentBucket(params.intent)
 	const group = groupOf(bucket)
-	const override = getChapterOverride(params.country, group)
+	const override = getChapterOverride(params.country, bucket)
 	const detected =
 		params.languageOverride ?? resolveOnboardingEmailLanguage(params.country, params.languages)
 
@@ -74,8 +74,8 @@ export async function renderOnboardingEmail(
 	const verificationLink = `${url}/verify?table=join&${verificationParameter}=${params.airtable_id}`
 
 	const resolution = await resolveOnboardingEmail(params)
-	const { bucket, group, language, chapter } = resolution
-	const override = getChapterOverride(params.country, group)
+	const { bucket, language, chapter } = resolution
+	const override = getChapterOverride(params.country, bucket)
 	const firstName = stripMarkdown(params.firstName)
 	const content = override
 		? override.content(firstName, chapter)

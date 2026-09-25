@@ -197,11 +197,30 @@ describe('renderOnboardingEmail', () => {
 		expect(nonVolunteer.subject).toBe('Thanks for taking action with PauseAI')
 	})
 
-	it('sends PauseAI Sverige their own email, in Swedish', async () => {
-		const email = await render('Sweden', 'Volunteer')
-		expect(email.subject).toBe('Välkommen till PauseAI Sverige, Alex!')
-		expect(email.text).toContain('Bekräfta din e-postadress')
-		expect(email.text).toContain('Mvh')
+	it('sends PauseAI Sverige their own email, in Swedish, one per intent', async () => {
+		for (const intent of ['Volunteer', 'Lead']) {
+			const volunteer = await render('Sweden', intent)
+			expect(volunteer.subject).toBe('PauseAI Sverige - Volontär/lead inom PauseAI')
+			expect(volunteer.text).toContain('Bekräfta din e-postadress')
+			expect(volunteer.text).toContain('Catalyse')
+			expect(volunteer.text).toContain('Vänliga hälsningar')
+		}
+
+		const actNow = await render('Sweden', 'Act now')
+		expect(actNow.subject).toBe('PauseAI Sverige - Så här kan du engagera dig för AI-säkerhet')
+		expect(actNow.text).toContain('Ta nästa steg')
+		expect(actNow.text).not.toContain('Catalyse')
+	})
+
+	it('gives Swedish signups with no intent the shared copy', async () => {
+		const email = await render('Sweden', 'None')
+		expect(email.subject).toBe('Thanks for signing up to PauseAI')
+	})
+
+	it('drops a Swedish sentence whose link the chapter row lacks', async () => {
+		const email = await render('Sweden', 'Act now')
+		expect(email.text).toContain('Whatsapp community')
+		expect(email.text).not.toContain('Kalendern')
 	})
 
 	it("does not let a signup's name render as a link", async () => {

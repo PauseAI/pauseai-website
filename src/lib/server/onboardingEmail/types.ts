@@ -57,7 +57,7 @@ export type RenderedOnboardingEmail = {
  *  reader signed up. */
 export type IntentBucket = 'none' | 'act-now' | 'volunteer'
 
-/** Chapter overrides vary by group at most, never by the finer bucket. */
+/** Whether the reader signed up to volunteer. Decides the shared copy's language. */
 export type IntentGroup = 'volunteer' | 'non-volunteer'
 
 /** A single link rendered in the chapter's link/social row. */

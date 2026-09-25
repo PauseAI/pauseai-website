@@ -1,9 +1,9 @@
 import type { EmailBlock, EmailContent } from './blocks.js'
-import { GLOBAL_DISCORD_URL, GLOBAL_SOCIALS, VIDEO_URL, WELCOME_CALLS_URL } from './brand.js'
+import { GLOBAL_SOCIALS, VIDEO_URL } from './brand.js'
 import type {
 	ChapterBlockData,
 	ChapterLink,
-	IntentGroup,
+	IntentBucket,
 	OnboardingEmailLanguage
 } from './types.js'
 
@@ -17,10 +17,10 @@ type ChapterOverride = {
 	/** For the preview page. */
 	name: string
 	language: OnboardingEmailLanguage
-	/** One version for everyone, or one per group. A group left out gets the shared copy.
+	/** A version per intent bucket. A bucket left out gets the shared copy.
 	 *  `chapter` is the live National Groups row, so an override can use the chapter's own
 	 *  links rather than repeating them here. */
-	content: Partial<Record<IntentGroup, ChapterContent>>
+	content: Partial<Record<IntentBucket, ChapterContent>>
 }
 
 type ChapterContent = (firstName: string, chapter: ChapterBlockData | null) => EmailContent
@@ -28,7 +28,7 @@ type ChapterContent = (firstName: string, chapter: ChapterBlockData | null) => E
 export type ChapterOverrideSummary = {
 	name: string
 	/** Who in that country gets the chapter's own email rather than the shared copy. */
-	scope: IntentGroup | 'all'
+	scope: IntentBucket[] | 'all'
 }
 
 export type ResolvedOverride = {
@@ -126,10 +126,30 @@ function ukSignoff(closing: string[], withWhatsApp: boolean): EmailBlock[] {
 	]
 }
 
+const ukNonVolunteer: ChapterContent = (firstName) => ({
+	subject: `Welcome to PauseAI UK ${firstName}!`,
+	htmlStyle: 'plain',
+	greeting: [
+		{ type: 'paragraph', text: `Hey ${firstName},` },
+		{ type: 'paragraph', text: 'Welcome to PauseAI!' }
+	],
+	body: [
+		{
+			type: 'heading',
+			text: "Here's how you can help to protect yourself and your loved ones from uncontrolled superhuman AI:"
+		},
+		...ukActionBlocks()
+	],
+	signoff: ukSignoff(['Joseph'], true),
+	socials: UK_SOCIALS
+})
+
 const uk: ChapterOverride = {
 	name: 'PauseAI UK',
 	language: 'en',
 	content: {
+		none: ukNonVolunteer,
+		'act-now': ukNonVolunteer,
 		volunteer: (firstName) => ({
 			subject: `Welcome to PauseAI UK ${firstName}!`,
 			htmlStyle: 'plain',
@@ -144,23 +164,6 @@ const uk: ChapterOverride = {
 				...ukActionBlocks()
 			],
 			signoff: ukSignoff(['Best wishes,', 'Joseph'], false),
-			socials: UK_SOCIALS
-		}),
-		'non-volunteer': (firstName) => ({
-			subject: `Welcome to PauseAI UK ${firstName}!`,
-			htmlStyle: 'plain',
-			greeting: [
-				{ type: 'paragraph', text: `Hey ${firstName},` },
-				{ type: 'paragraph', text: 'Welcome to PauseAI!' }
-			],
-			body: [
-				{
-					type: 'heading',
-					text: "Here's how you can help to protect yourself and your loved ones from uncontrolled superhuman AI:"
-				},
-				...ukActionBlocks()
-			],
-			signoff: ukSignoff(['Joseph'], true),
 			socials: UK_SOCIALS
 		})
 	}
@@ -265,70 +268,146 @@ const canada: ChapterOverride = {
 	}
 }
 
-// Adapted from the welcome email PauseAI Sverige's chapter lead sends by hand, with the
-// fixed lines added in Swedish. The wording is the chapter lead's own. Its links come from
-// the chapter's Airtable row where a field exists, so keeping them current is an Airtable
-// edit, and a sentence is dropped when its link is missing rather than shipping a dead one.
+// Ported from the two welcome emails PauseAI Sverige's chapter lead sent on 2026-09-25, one
+// for Act now and one for Volunteer/Lead, wording kept as written. Signups with no intent get
+// the shared copy, as the chapter asked. The WhatsApp and calendar links come from the
+// chapter's Airtable row, so keeping them current is an Airtable edit, and a sentence is
+// dropped when its link is missing rather than shipping a dead one. The calendar must stay
+// the public Luma page: the chapter's own draft linked Luma's admin view, which members
+// cannot open.
 //
 // The chapter's own words. The two lines the skeleton adds around them are our Swedish and
 // nobody fluent has read them yet, which beats the alternative for these readers: the
 // English email. Flip this back if the chapter would rather it waited.
 const SWEDISH_COPY_APPROVED = true
 
-// The two links the chapter's email uses that no National Groups field holds: an external
-// petition, and the action page rather than the site root the `website` field points at.
-const SWEDEN_PETITION = 'https://www.mittskifte.org/petitions/ta-riskerna-med-ai-pa-allvar'
+// Links the chapter's emails use that no National Groups field holds.
+const SWEDEN_CONTACTS_DOC =
+	'https://docs.google.com/document/d/1H9erkvaFwAmzqzx5VG28fQPUdg9UWM1__t6kP6DMReY/edit?usp=sharing'
+const SWEDEN_EMAIL_BUILDER = 'https://www.jonasvonessen.se/agera/'
 const SWEDEN_ACTION_PAGE = 'https://pauseai.se/action'
+const SWEDEN_PROJECTS_SHEET =
+	'https://docs.google.com/spreadsheets/d/1fy6qmMSBkxa2p-H0jix24kO0HmCbPuV3Bn2Hu3UALrA/edit?usp=sharing'
+const CATALYSE_PROJECTS = 'https://catalyse.up.railway.app/projects'
 
-const swedenContent: ChapterContent = (firstName, chapter) => {
-	const calendar = chapterLink(chapter, 'Events')
+/** The three one-off actions, the same in both emails. */
+function swedenOneOffActions(): EmailBlock[] {
+	return [
+		{ type: 'heading', text: '📌 Enkel engagemang: Punktinsatser' },
+		{ type: 'paragraph', text: '**1️⃣ Skicka mejl till politiker**' },
+		{
+			type: 'list',
+			items: [
+				`Använd våra [kontaktuppgifter, mall och tips för att skicka mejl](${SWEDEN_CONTACTS_DOC}).`,
+				`Du kan även använd en mejlbyggare (t.ex. [Jonas Von Essens verktyg](${SWEDEN_EMAIL_BUILDER})) för att skapa personliga mejl.\nVår Mejlbyggare är tyvärr under ombyggnation.`,
+				'Tips: Personifiera mejlmallar – även några meningar gör stor skillnad.'
+			]
+		},
+		{ type: 'paragraph', text: '**2️⃣ Ring politiker**' },
+		{
+			type: 'list',
+			items: [
+				'Att ringa är ofta väldigt effektivt, särskilt en vecka efter att du skickat ett mejl.',
+				`Kontaktuppgifter och samtalstips finns i [dokumentet](${SWEDEN_CONTACTS_DOC}).`
+			]
+		},
+		{ type: 'paragraph', text: '**3️⃣ Tipsa nyhetsredaktioner**' },
+		{
+			type: 'list',
+			items: [
+				'Genom att tipsa om AI-riskrelaterade nyheter kan vi öka medvetenheten i samhället.',
+				`Kontaktuppgifter till Sveriges 25 största redaktioner finns i vår [Google Docs](${SWEDEN_CONTACTS_DOC}).`
+			]
+		},
+		{ type: 'rule' }
+	]
+}
+
+function swedenWhatsApp(chapter: ChapterBlockData | null): string[] {
 	const whatsapp = chapterLink(chapter, 'WhatsApp')
-	const facebook = chapterLink(chapter, 'Facebook')
+	return whatsapp
+		? [
+				`Gå med i vårat [Whatsapp community](${whatsapp}) – Majoriteten av samtalen sker via Whatsapp.`
+			]
+		: []
+}
 
-	const body: EmailBlock[] = []
-	if (calendar) {
-		body.push({
-			type: 'paragraph',
-			text: `I [vår kalender](${calendar}) kan du hitta nästa intromöte.`
-		})
-	}
-	const channels = [
-		whatsapp && `Övrig kommunikation sker främst via [WhatsApp](${whatsapp}).`,
-		facebook && `Vi har även en [Facebook-grupp](${facebook}).`
-	].filter(Boolean)
-	if (channels.length) body.push({ type: 'paragraph', text: channels.join(' ') })
-	body.push({
-		type: 'paragraph',
-		text: `Skriv gärna på [vår namninsamling](${SWEDEN_PETITION}) och kika på [vår hemsida](${SWEDEN_ACTION_PAGE}) för att få fler tips på vad du kan göra.`
-	})
-	// A chapter's own email replaces the shared next steps, so its readers hear about PauseAI
-	// Global only if the chapter says so. Theirs to keep or drop, like the rest of this copy.
-	body.push({
-		type: 'paragraph',
-		text: `Du är också välkommen till PauseAI Globals [välkomstmöten](${WELCOME_CALLS_URL}) för nya volontärer och till deras [Discord-server](${GLOBAL_DISCORD_URL}). Båda är på engelska.`
-	})
+function swedenCalendarSentence(chapter: ChapterBlockData | null): string {
+	const calendar = chapterLink(chapter, 'Events')
+	return calendar ? ` [Kalendern](${calendar}) hittar du här.` : ''
+}
 
+function swedenContent(
+	subject: string,
+	firstName: string,
+	intro: string,
+	involved: EmailBlock[]
+): EmailContent {
 	return {
-		subject: `Välkommen till PauseAI Sverige, ${firstName}!`,
+		subject,
 		greeting: [
-			{ type: 'heading', level: 1, text: `Hej ${firstName} och välkommen till PauseAI Sverige!` }
+			{ type: 'heading', level: 1, text: `Hej ${firstName}!` },
+			{ type: 'paragraph', text: intro }
 		],
-		body,
-		signoff: [{ type: 'signoff', lines: ['Mvh', 'Carl, PauseAI Sverige'] }]
+		body: [...swedenOneOffActions(), ...involved, { type: 'rule' }],
+		signoff: [
+			{
+				type: 'paragraph',
+				text: 'Tack för att du vill göra skillnad!\nHör gärna av dig om du har frågor eller idéer.'
+			},
+			{ type: 'signoff', lines: ['Vänliga hälsningar', 'Carl Stylin', 'PauseAI Sverige'] }
+		]
 	}
 }
 
 const sweden: ChapterOverride = {
 	name: 'PauseAI Sverige',
 	language: 'sv',
-	content: { volunteer: swedenContent, 'non-volunteer': swedenContent }
+	content: {
+		'act-now': (firstName, chapter) =>
+			swedenContent(
+				'PauseAI Sverige - Så här kan du engagera dig för AI-säkerhet',
+				firstName,
+				'Kul att du har valt att engagera dig – tack för det! Här kommer konkreta sätt att göra skillnad, oavsett om du vill göra en enstaka insats eller ta ett större steg.',
+				[
+					{ type: 'heading', text: '🌟 Ta nästa steg: Bli mer involverad' },
+					{ type: 'paragraph', text: 'Vill du göra ännu mer? Då är du välkommen att:' },
+					{
+						type: 'list',
+						items: [
+							...swedenWhatsApp(chapter),
+							`Delta på ett intro- eller månadsmöte – perfekt för att lära känna våra projekt och gemenskapen.${swedenCalendarSentence(chapter)}`,
+							`Besök vår hemsida under fliken [Agera](${SWEDEN_ACTION_PAGE}) för mer information om hur du kan bidra.`
+						]
+					}
+				]
+			),
+		volunteer: (firstName, chapter) =>
+			swedenContent(
+				'PauseAI Sverige - Volontär/lead inom PauseAI',
+				firstName,
+				'Kul att du har valt att engagera dig – tack för det! Här kommer konkreta sätt att göra skillnad och information om fortsatt kontakt.',
+				[
+					{ type: 'heading', text: '🌟 Bli mer involverad i vårt arbete' },
+					{ type: 'paragraph', text: 'Fortsatt engagemang:' },
+					{
+						type: 'list',
+						items: [
+							...swedenWhatsApp(chapter),
+							`Välkommen till intro- och månadsmöte – Du kommer bli inbjuden till ett intromöte och våra månadsmöten.${swedenCalendarSentence(chapter)}`,
+							`Pågående projekt: vi har några projekt som pågår och andra som ligger i startgroparna. Du hittar fler av våra [gemensamma projekt](${SWEDEN_PROJECTS_SHEET}) med övriga AI-safety sfären i Sverige här. Registrera dig gärna på [Catalyse](${CATALYSE_PROJECTS}) för att se PauseAI specifika projekt.`
+						]
+					}
+				]
+			)
+	}
 }
 
-/** The override for a Members `country` value and group, or null for the shared copy.
- *  Countries are matched as the live script matches them, with `includes`. */
+/** The override for a Members `country` value and intent bucket, or null for the shared
+ *  copy. Countries are matched as the live script matches them, with `includes`. */
 export function getChapterOverride(
 	country: string | undefined,
-	group: IntentGroup
+	bucket: IntentBucket
 ): ResolvedOverride | null {
 	const override = country?.includes('United Kingdom')
 		? uk
@@ -337,17 +416,17 @@ export function getChapterOverride(
 			: country?.includes('Sweden') && SWEDISH_COPY_APPROVED
 				? sweden
 				: null
-	const content = override?.content[group]
+	const content = override?.content[bucket]
 	return override && content ? { name: override.name, language: override.language, content } : null
 }
+
+const BUCKETS: IntentBucket[] = ['none', 'act-now', 'volunteer']
 
 /** The chapter whose own email a country gets, and who it covers, or null when the country
  *  gets the shared copy. Labels the preview page's country picker. */
 export function describeChapterOverride(country: string): ChapterOverrideSummary | null {
-	const volunteer = getChapterOverride(country, 'volunteer')
-	const nonVolunteer = getChapterOverride(country, 'non-volunteer')
-	const name = (volunteer ?? nonVolunteer)?.name
+	const covered = BUCKETS.filter((bucket) => getChapterOverride(country, bucket))
+	const name = covered.length ? getChapterOverride(country, covered[0])?.name : null
 	if (!name) return null
-	if (volunteer && nonVolunteer) return { name, scope: 'all' }
-	return { name, scope: volunteer ? 'volunteer' : 'non-volunteer' }
+	return { name, scope: covered.length === BUCKETS.length ? 'all' : covered }
 }

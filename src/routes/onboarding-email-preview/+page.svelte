@@ -98,15 +98,22 @@
 		volunteer: 'the welcome email for people who want to volunteer'
 	}
 
-	const AUDIENCE: Record<Exclude<OverrideSummary['scope'], 'all'>, string> = {
-		volunteer: 'volunteers',
-		'non-volunteer': 'non-volunteers'
+	const AUDIENCE: Record<Resolved['bucket'], string> = {
+		none: 'signups with no intent',
+		'act-now': 'people who want to act now',
+		volunteer: 'volunteers'
+	}
+
+	function audienceOf(scope: Exclude<OverrideSummary['scope'], 'all'>): string {
+		return new Intl.ListFormat('en', { type: 'conjunction' }).format(
+			scope.map((bucket) => AUDIENCE[bucket])
+		)
 	}
 
 	function overrideNote(override: OverrideSummary): string {
 		return override.scope === 'all'
 			? `${override.name} writes its own`
-			: `${override.name} writes its own, for ${AUDIENCE[override.scope]}`
+			: `${override.name} writes its own, for ${audienceOf(override.scope)}`
 	}
 
 	// Past this many the intro sentence turns into a list, so it names the first few and counts
@@ -119,7 +126,7 @@
 		const names = data.options.countries
 			.flatMap(({ override }) => (override ? [override] : []))
 			.sort((a, b) => Number(a.scope !== 'all') - Number(b.scope !== 'all'))
-			.map((o) => (o.scope === 'all' ? o.name : `${o.name} for ${AUDIENCE[o.scope]}`))
+			.map((o) => (o.scope === 'all' ? o.name : `${o.name} for ${audienceOf(o.scope)}`))
 		const shown =
 			names.length > MAX_NAMED_OWN_EMAIL_CHAPTERS
 				? [
