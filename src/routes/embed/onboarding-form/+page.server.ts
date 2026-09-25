@@ -12,7 +12,7 @@
 // work is the document alone, which is how it came to need correcting.
 import { fail } from '@sveltejs/kit'
 import type { FieldSet } from 'airtable'
-import type { Actions } from './$types'
+import type { Actions, PageServerLoad } from './$types'
 import type { NationalGroupsApiResponse } from '$api/national-groups/+server.js'
 import { createRecord, updateRecord } from '$lib/airtable'
 import { isOnboardingLive } from '$lib/server/onboarding'
@@ -36,6 +36,24 @@ import {
 } from '$lib/components/onboarding/options'
 
 export const prerender = false
+
+// Every query param +page.svelte reads. They change the server-rendered HTML,
+// so each one must be in the CDN cache key below; keep the two lists in sync.
+// Any other param is ignored by the page and must not fragment the cache.
+const CACHE_VARY_PARAMS = ['locale', 'country', 'city', 'source', 'languages', 'bg']
+
+// The embed is rendered on demand (a Netlify function), so an uncached hit pays
+// a cold start (~4s seen). The HTML holds nothing per-visitor (mode, Turnstile
+// and the referrer source are all resolved client-side), so let Netlify's
+// durable cache serve it. Browsers still revalidate, and a deploy clears the
+// cache. The form POST is not affected.
+export const load: PageServerLoad = ({ setHeaders }) => {
+	setHeaders({
+		'cache-control': 'public, max-age=0, must-revalidate',
+		'netlify-cdn-cache-control': 'public, durable, s-maxage=300, stale-while-revalidate=86400',
+		'netlify-vary': `query=${CACHE_VARY_PARAMS.join('|')}`
+	})
+}
 
 // Write target per the Plan of Action: base "PauseAI Volunteers & Actions",
 // table "Members".
