@@ -9,6 +9,9 @@
 		getMessages
 	} from '$lib/components/onboarding/i18n.svelte'
 
+	// Query params read here (locale, country, city, source, languages, bg) are
+	// listed in CACHE_VARY_PARAMS in +page.server.ts for the CDN cache key. Add
+	// any new one there too.
 	$effect(() => {
 		const locale = page.url.searchParams.get('locale')
 		if (locale && isOnboardingLocale(locale)) setOnboardingLocale(locale)
