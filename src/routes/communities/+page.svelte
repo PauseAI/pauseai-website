@@ -10,7 +10,7 @@
 	import workerUrl from 'maplibre-gl/dist/maplibre-gl-worker.mjs?worker&url'
 	import { isMapboxURL, transformMapboxUrl } from 'maplibregl-mapbox-request-transformer'
 	import { onDestroy, onMount } from 'svelte'
-	import { communities, communitiesMeta } from './communities'
+	import { communities, communitiesMeta, GLOBAL_DISCORD_URL } from './communities'
 	import { MAPBOX_KEY } from './constants'
 	import { HERO_ORANGE } from '$lib/colors'
 	import escape from 'escape-html'
@@ -52,6 +52,12 @@
 			console.error('Error fetching events:', error)
 		}
 		return []
+	}
+
+	// Luma events carry a slug (`/api/calendar` builds `https://lu.ma/<slug>`);
+	// events from other calendars (currently Google) carry an absolute URL.
+	function eventLink(event: CalendarResponse['entries'][number]['event']): string {
+		return event.url.startsWith('https://') ? event.url : `https://lu.ma/${event.url}`
 	}
 
 	async function fetchUserLocation() {
@@ -131,9 +137,7 @@
 				})
 					.setPopup(
 						new Popup({ offset: [0, -15] }).setHTML(
-							`<h3><a href="${community.link || 'https://discord.gg/CR5u5BTBwy'}">${
-								community.name
-							}</a></h3>`
+							`<h3><a href="${community.link || GLOBAL_DISCORD_URL}">${community.name}</a></h3>`
 						)
 					)
 					.setLngLat([community.lon, community.lat])
@@ -152,7 +156,7 @@
 						.setLngLat([event.geo_longitude!, event.geo_latitude!])
 						.setPopup(
 							new Popup({ offset: [0, -15] }).setHTML(
-								`<h3><a href="${escape(`https://lu.ma/${event.url}`)}">${escape(event.name)}</a></h3>` +
+								`<h3><a href="${escape(eventLink(event))}">${escape(event.name)}</a></h3>` +
 									`<p>${new Intl.DateTimeFormat('en', { day: 'numeric', month: 'long' }).format(new Date(event.start_at))}</p>`
 							)
 						)
