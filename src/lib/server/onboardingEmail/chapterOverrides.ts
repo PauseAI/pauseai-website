@@ -1,5 +1,5 @@
 import type { EmailBlock, EmailContent } from './blocks.js'
-import { GLOBAL_SOCIALS, VIDEO_URL } from './brand.js'
+import { GLOBAL_DISCORD_URL, GLOBAL_SOCIALS, VIDEO_URL, WELCOME_CALLS_URL } from './brand.js'
 import type {
 	ChapterBlockData,
 	ChapterLink,
@@ -269,8 +269,8 @@ const canada: ChapterOverride = {
 }
 
 // Ported from the two welcome emails PauseAI Sverige's chapter lead sent on 2026-09-25, one
-// for Act now and one for Volunteer/Lead, wording kept as written. Signups with no intent get
-// the shared copy, as the chapter asked. The WhatsApp and calendar links come from the
+// for Act now and one for Volunteer/Lead, wording kept as written. The WhatsApp and calendar
+// links in all three Swedish emails come from the
 // chapter's Airtable row, so keeping them current is an Airtable edit, and a sentence is
 // dropped when its link is missing rather than shipping a dead one. The calendar must stay
 // the public Luma page: the chapter's own draft linked Luma's admin view, which members
@@ -360,10 +360,53 @@ function swedenContent(
 	}
 }
 
+const SWEDEN_PETITION = 'https://www.mittskifte.org/petitions/ta-riskerna-med-ai-pa-allvar'
+
+/** The chapter's earlier, shorter welcome, kept for signups with no intent until the chapter
+ *  writes one for them. */
+const swedenWelcome: ChapterContent = (firstName, chapter) => {
+	const calendar = chapterLink(chapter, 'Events')
+	const whatsapp = chapterLink(chapter, 'WhatsApp')
+	const facebook = chapterLink(chapter, 'Facebook')
+
+	const body: EmailBlock[] = []
+	if (calendar) {
+		body.push({
+			type: 'paragraph',
+			text: `I [vår kalender](${calendar}) kan du hitta nästa intromöte.`
+		})
+	}
+	const channels = [
+		whatsapp && `Övrig kommunikation sker främst via [WhatsApp](${whatsapp}).`,
+		facebook && `Vi har även en [Facebook-grupp](${facebook}).`
+	].filter(Boolean)
+	if (channels.length) body.push({ type: 'paragraph', text: channels.join(' ') })
+	body.push({
+		type: 'paragraph',
+		text: `Skriv gärna på [vår namninsamling](${SWEDEN_PETITION}) och kika på [vår hemsida](${SWEDEN_ACTION_PAGE}) för att få fler tips på vad du kan göra.`
+	})
+	// A chapter's own email replaces the shared next steps, so its readers hear about PauseAI
+	// Global only if the chapter says so. Theirs to keep or drop, like the rest of this copy.
+	body.push({
+		type: 'paragraph',
+		text: `Du är också välkommen till PauseAI Globals [välkomstmöten](${WELCOME_CALLS_URL}) för nya volontärer och till deras [Discord-server](${GLOBAL_DISCORD_URL}). Båda är på engelska.`
+	})
+
+	return {
+		subject: `Välkommen till PauseAI Sverige, ${firstName}!`,
+		greeting: [
+			{ type: 'heading', level: 1, text: `Hej ${firstName} och välkommen till PauseAI Sverige!` }
+		],
+		body,
+		signoff: [{ type: 'signoff', lines: ['Mvh', 'Carl, PauseAI Sverige'] }]
+	}
+}
+
 const sweden: ChapterOverride = {
 	name: 'PauseAI Sverige',
 	language: 'sv',
 	content: {
+		none: swedenWelcome,
 		'act-now': (firstName, chapter) =>
 			swedenContent(
 				'PauseAI Sverige - Så här kan du engagera dig för AI-säkerhet',

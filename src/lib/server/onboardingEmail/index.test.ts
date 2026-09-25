@@ -212,9 +212,11 @@ describe('renderOnboardingEmail', () => {
 		expect(actNow.text).not.toContain('Catalyse')
 	})
 
-	it('gives Swedish signups with no intent the shared copy', async () => {
+	it("gives Swedish signups with no intent the chapter's shorter welcome", async () => {
 		const email = await render('Sweden', 'None')
-		expect(email.subject).toBe('Thanks for signing up to PauseAI')
+		expect(email.subject).toBe('Välkommen till PauseAI Sverige, Alex!')
+		expect(email.text).toContain('Bekräfta din e-postadress')
+		expect(email.text).toContain('Mvh')
 	})
 
 	it('drops a Swedish sentence whose link the chapter row lacks', async () => {
