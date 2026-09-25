@@ -222,11 +222,13 @@ describe('renderOnboardingEmail', () => {
 		expect(email.text).not.toContain('*')
 	})
 
-	it("gives Swedish signups with no intent the chapter's shorter welcome", async () => {
+	it('gives Swedish signups with no intent their own email, with its own newsletter line', async () => {
 		const email = await render('Sweden', 'None')
-		expect(email.subject).toBe('Välkommen till PauseAI Sverige, Alex!')
+		expect(email.subject).toBe('Tack för att du har registrerat dig hos PauseAI')
 		expect(email.text).toContain('Bekräfta din e-postadress')
-		expect(email.text).toContain('Mvh')
+		expect(email.text).toContain('Oavsett kommer vi ibland skicka viktiga meddelanden till dig.')
+		expect(email.text).not.toContain('Om du har valt att prenumerera')
+		expect(email.html).toContain('href="https://chat.whatsapp.com/example/**x**"')
 	})
 
 	it('drops a Swedish sentence whose link the chapter row lacks', async () => {

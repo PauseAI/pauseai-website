@@ -27,6 +27,9 @@ export type EmailContent = {
 	body: EmailBlock[]
 	/** The closing line(s) and the sign-off. */
 	signoff: EmailBlock[]
+	/** Replaces the fixed newsletter line, for a chapter that states the same promise in its own
+	 *  words: news if they opted in, and occasional important messages either way. */
+	newsletter?: string
 	/** The sender's own accounts. Drawn as icons in the footer, under the rule, the way
 	 *  the MailerSend templates do it. */
 	socials?: ChapterLink[]
@@ -52,8 +55,8 @@ export function groupOf(bucket: IntentBucket): IntentGroup {
 	return bucket === 'volunteer' ? 'volunteer' : 'non-volunteer'
 }
 
-/** The skeleton: greeting, confirm link, body, newsletter line, sign-off. The two fixed
- *  lines sit at fixed positions so no content, shared or a chapter's, can leave them out. */
+/** The skeleton: greeting, confirm link, body, newsletter line, sign-off. No content can leave
+ *  out either fixed line; it may only reword the newsletter one. */
 export function composeBlocks(
 	content: EmailContent,
 	fixed: FixedCopy,
@@ -73,7 +76,9 @@ export function composeBlocks(
 		...content.body,
 		{
 			type: 'paragraph',
-			text: ownWords ? fixed.newsletterInOwnWords : fixed.newsletter(bucket, subscribed)
+			text:
+				content.newsletter ??
+				(ownWords ? fixed.newsletterInOwnWords : fixed.newsletter(bucket, subscribed))
 		},
 		...content.signoff
 	]

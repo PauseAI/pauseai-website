@@ -1,5 +1,5 @@
 import type { EmailBlock, EmailContent } from './blocks.js'
-import { GLOBAL_DISCORD_URL, GLOBAL_SOCIALS, VIDEO_URL, WELCOME_CALLS_URL } from './brand.js'
+import { GLOBAL_SOCIALS, VIDEO_URL } from './brand.js'
 import type {
 	ChapterBlockData,
 	ChapterLink,
@@ -268,14 +268,15 @@ const canada: ChapterOverride = {
 	}
 }
 
-// PauseAI Sverige's own emails, one per intent, wording kept as the chapter lead wrote it.
+// PauseAI Sverige's own emails, one per intent, wording kept as the chapter lead wrote it apart
+// from clear typos.
 // The WhatsApp and calendar links come from the chapter's Airtable row, so keeping them
 // current is an Airtable edit, and a sentence is dropped when its link is missing rather than
 // shipping a dead one. The calendar must stay the public Luma page: the chapter's own draft
 // linked Luma's admin view, which members cannot open.
 //
-// The chapter's own words. The two lines the skeleton adds around them are our Swedish and
-// nobody fluent has read them yet, which beats the alternative for these readers: the
+// The chapter's own words. The lines the skeleton adds around them are our Swedish and nobody
+// fluent has read them yet, which beats the alternative for these readers: the
 // English email. Flip this back if the chapter would rather it waited.
 const SWEDISH_COPY_APPROVED = true
 
@@ -287,18 +288,18 @@ const SWEDEN_ACTION_PAGE = 'https://pauseai.se/action'
 const SWEDEN_PROJECTS_SHEET =
 	'https://docs.google.com/spreadsheets/d/1fy6qmMSBkxa2p-H0jix24kO0HmCbPuV3Bn2Hu3UALrA/edit?usp=sharing'
 const CATALYSE_PROJECTS = 'https://catalyse.up.railway.app/projects'
-const SWEDEN_PETITION = 'https://www.mittskifte.org/petitions/ta-riskerna-med-ai-pa-allvar'
+const SWEDEN_PROPOSAL = 'https://pauseai.se/proposal'
 
 function swedenOneOffActions(): EmailBlock[] {
 	return [
-		{ type: 'heading', text: '📌 Enkel engagemang: Punktinsatser' },
+		{ type: 'heading', text: '📌 Enkelt engagemang: Punktinsatser' },
 		{ type: 'paragraph', text: '**1️⃣ Skicka mejl till politiker**' },
 		{
 			type: 'list',
 			items: [
 				`Använd våra [kontaktuppgifter, mall och tips för att skicka mejl](${SWEDEN_CONTACTS_DOC}).`,
 				{
-					text: `Du kan även använd en **mejlbyggare** (t.ex. [Jonas Von Essens verktyg](${SWEDEN_EMAIL_BUILDER})) för att skapa personliga mejl.`,
+					text: `Du kan även använda en **mejlbyggare** (t.ex. [Jonas Von Essens verktyg](${SWEDEN_EMAIL_BUILDER})) för att skapa personliga mejl.`,
 					items: ['Vår Mejlbyggare är tyvärr under ombyggnation']
 				},
 				'**Tips:** Personifiera mejlmallar – även några meningar gör stor skillnad.'
@@ -398,43 +399,32 @@ const SWEDEN_VOLUNTEER: SwedenCopy = {
 	last: `**Pågående projekt:** vi har några projekt som pågår och andra som ligger i startgroparna. Du hittar fler av våra [gemensamma projekt](${SWEDEN_PROJECTS_SHEET}) med övriga AI-safety sfären i Sverige här. Registrera dig gärna på [Catalyse](${CATALYSE_PROJECTS}) för att se PauseAI specifika projekt.`
 }
 
-/** The chapter's earlier, shorter welcome, kept for signups with no intent until the chapter
- *  writes one for them. */
-const swedenWelcome: ChapterContent = (firstName, chapter) => {
-	const calendar = chapterLink(chapter, 'Events')
+/** The chapter's translation of the shared no-intent email, newsletter line included. */
+const swedenNoIntent: ChapterContent = (firstName, chapter) => {
 	const whatsapp = chapterLink(chapter, 'WhatsApp')
-	const facebook = chapterLink(chapter, 'Facebook')
-
-	const body: EmailBlock[] = []
-	if (calendar) {
+	const body: EmailBlock[] = [
+		{
+			type: 'paragraph',
+			text: `Tack för att du anmält dig.\nVi bygger en global rörelse som kräver en paus i utvecklingen av avancerade AI-system tills de kan göras säkra och demokratiskt styrda. Du kan läsa mer om vad vi efterfrågar i [vårt förslag](${SWEDEN_PROPOSAL}).`
+		}
+	]
+	if (whatsapp) {
 		body.push({
 			type: 'paragraph',
-			text: `I [vår kalender](${calendar}) kan du hitta nästa intromöte.`
+			text: `Det finns en PauseAI-grupp i Sverige. Du är välkommen att ansluta dig till dem:\n[WhatsApp](${whatsapp})`
 		})
 	}
-	const channels = [
-		whatsapp && `Övrig kommunikation sker främst via [WhatsApp](${whatsapp}).`,
-		facebook && `Vi har även en [Facebook-grupp](${facebook}).`
-	].filter(Boolean)
-	if (channels.length) body.push({ type: 'paragraph', text: channels.join(' ') })
-	body.push({
-		type: 'paragraph',
-		text: `Skriv gärna på [vår namninsamling](${SWEDEN_PETITION}) och kika på [vår hemsida](${SWEDEN_ACTION_PAGE}) för att få fler tips på vad du kan göra.`
-	})
-	// A chapter's own email replaces the shared next steps, so its readers hear about PauseAI
-	// Global only if the chapter says so. Theirs to keep or drop, like the rest of this copy.
-	body.push({
-		type: 'paragraph',
-		text: `Du är också välkommen till PauseAI Globals [välkomstmöten](${WELCOME_CALLS_URL}) för nya volontärer och till deras [Discord-server](${GLOBAL_DISCORD_URL}). Båda är på engelska.`
-	})
 
 	return {
-		subject: `Välkommen till PauseAI Sverige, ${firstName}!`,
-		greeting: [
-			{ type: 'heading', level: 1, text: `Hej ${firstName} och välkommen till PauseAI Sverige!` }
-		],
+		subject: 'Tack för att du har registrerat dig hos PauseAI',
+		greeting: [{ type: 'heading', level: 1, text: `Hej ${firstName}!` }],
 		body,
-		signoff: [{ type: 'signoff', lines: ['Mvh', 'Carl, PauseAI Sverige'] }]
+		newsletter:
+			'Om du har valt att få information, kommer vi att hålla dig uppdaterad om viktiga nyheter, kampanjuppdateringar och möjligheter att ta en mer aktiv roll i denna rörelse, inklusive lokala möjligheter där det finns ett aktivt kapitel nära dig. Oavsett kommer vi ibland skicka viktiga meddelanden till dig.',
+		signoff: [
+			{ type: 'paragraph', text: 'Vi är glada att du är med oss och ser fram emot att höras.' },
+			{ type: 'signoff', lines: ['*Vänliga hälsningar*', '*Carl Stylin PauseAI Sverige*'] }
+		]
 	}
 }
 
@@ -442,7 +432,7 @@ const sweden: ChapterOverride = {
 	name: 'PauseAI Sverige',
 	language: 'sv',
 	content: {
-		none: swedenWelcome,
+		none: swedenNoIntent,
 		'act-now': (firstName, chapter) => swedenContent(SWEDEN_ACT_NOW, firstName, chapter),
 		volunteer: (firstName, chapter) => swedenContent(SWEDEN_VOLUNTEER, firstName, chapter)
 	}
