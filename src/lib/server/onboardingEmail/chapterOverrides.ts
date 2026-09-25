@@ -8,9 +8,9 @@ import type {
 } from './types.js'
 
 // Chapters that send their own email instead of the shared copy. An override supplies the
-// subject, greeting, body and sign-off; composeBlocks() still adds the fixed lines, in the
-// override's language, so the override cannot leave out the confirm link or what we promise
-// to send. Written by us from the chapter's own text and reviewed by the chapter. Changes
+// subject, greeting, body and sign-off; composeBlocks() still adds the confirm link and the
+// newsletter line, in the override's language, so the override cannot leave out either. It may
+// word the newsletter line itself, which must still say what we promise to send. Written by us from the chapter's own text and reviewed by the chapter. Changes
 // are expected to be rare: chapters editing their own text is planned for the CRM.
 
 type ChapterOverride = {
@@ -268,14 +268,16 @@ const canada: ChapterOverride = {
 	}
 }
 
-// PauseAI Sverige's own emails, one per intent, wording kept as the chapter lead wrote it.
+// PauseAI Sverige's own emails, one per intent, wording kept as the chapter lead wrote it apart
+// from clear typos.
 // The WhatsApp and calendar links come from the chapter's Airtable row, so keeping them
 // current is an Airtable edit, and a sentence is dropped when its link is missing rather than
 // shipping a dead one. The calendar must stay the public Luma page: the chapter's own draft
 // linked Luma's admin view, which members cannot open.
 //
-// The chapter's own words. The two lines the skeleton adds around them are our Swedish and
-// nobody fluent has read them yet, which beats the alternative for these readers: the
+// The chapter's own words. The lines the skeleton adds around them are our Swedish (only the
+// confirm line in the no-intent email, which words its own newsletter line) and nobody fluent
+// has read them yet, which beats the alternative for these readers: the
 // English email. Flip this back if the chapter would rather it waited.
 const SWEDISH_COPY_APPROVED = true
 
@@ -291,14 +293,14 @@ const SWEDEN_PROPOSAL = 'https://pauseai.se/proposal'
 
 function swedenOneOffActions(): EmailBlock[] {
 	return [
-		{ type: 'heading', text: '📌 Enkel engagemang: Punktinsatser' },
+		{ type: 'heading', text: '📌 Enkelt engagemang: Punktinsatser' },
 		{ type: 'paragraph', text: '**1️⃣ Skicka mejl till politiker**' },
 		{
 			type: 'list',
 			items: [
 				`Använd våra [kontaktuppgifter, mall och tips för att skicka mejl](${SWEDEN_CONTACTS_DOC}).`,
 				{
-					text: `Du kan även använd en **mejlbyggare** (t.ex. [Jonas Von Essens verktyg](${SWEDEN_EMAIL_BUILDER})) för att skapa personliga mejl.`,
+					text: `Du kan även använda en **mejlbyggare** (t.ex. [Jonas Von Essens verktyg](${SWEDEN_EMAIL_BUILDER})) för att skapa personliga mejl.`,
 					items: ['Vår Mejlbyggare är tyvärr under ombyggnation']
 				},
 				'**Tips:** Personifiera mejlmallar – även några meningar gör stor skillnad.'
@@ -411,7 +413,7 @@ const swedenNoIntent: ChapterContent = (firstName, chapter) => {
 	if (whatsapp) {
 		body.push({
 			type: 'paragraph',
-			text: `Det finns ett PauseAI-grupp i Sverige. Du är välkommen att ansluta dig till dem:\n[WhatsApp](${whatsapp})`
+			text: `Det finns en PauseAI-grupp i Sverige. Du är välkommen att ansluta dig till dem:\n[WhatsApp](${whatsapp})`
 		})
 	}
 
