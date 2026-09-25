@@ -49,8 +49,7 @@ const CACHE_VARY_PARAMS = ['locale', 'country', 'city', 'source', 'languages', '
 // cache. The form POST is not affected.
 export const load: PageServerLoad = ({ setHeaders }) => {
 	setHeaders({
-		'cache-control': 'public, max-age=0, must-revalidate',
-		'netlify-cdn-cache-control': 'public, durable, s-maxage=300, stale-while-revalidate=86400',
+		'cache-control': 'public, max-age=0, s-maxage=300, stale-while-revalidate=86400',
 		'netlify-vary': `query=${CACHE_VARY_PARAMS.join('|')}`
 	})
 }
