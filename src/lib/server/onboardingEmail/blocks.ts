@@ -27,6 +27,9 @@ export type EmailContent = {
 	body: EmailBlock[]
 	/** The closing line(s) and the sign-off. */
 	signoff: EmailBlock[]
+	/** Replaces the fixed newsletter line, for a chapter that states the same promise in its own
+	 *  words: news if they opted in, and occasional important messages either way. */
+	newsletter?: string
 	/** The sender's own accounts. Drawn as icons in the footer, under the rule, the way
 	 *  the MailerSend templates do it. */
 	socials?: ChapterLink[]
@@ -73,7 +76,9 @@ export function composeBlocks(
 		...content.body,
 		{
 			type: 'paragraph',
-			text: ownWords ? fixed.newsletterInOwnWords : fixed.newsletter(bucket, subscribed)
+			text:
+				content.newsletter ??
+				(ownWords ? fixed.newsletterInOwnWords : fixed.newsletter(bucket, subscribed))
 		},
 		...content.signoff
 	]
