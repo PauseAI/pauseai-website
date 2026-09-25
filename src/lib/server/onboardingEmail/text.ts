@@ -1,6 +1,6 @@
 import { ADDRESS_LINE } from './fixed.js'
 import { stripEmphasis } from './markdown.js'
-import type { EmailBlock } from './blocks.js'
+import { listItemParts, type EmailBlock } from './blocks.js'
 import type { ChapterLink } from './types.js'
 
 /** Renders blocks + footer to plain text, matching the `[label](url)` markdown-link
@@ -18,10 +18,12 @@ export function renderText(blocks: EmailBlock[], socials: ChapterLink[] = []): s
 				parts.push(
 					block.items
 						.map((item, i) => {
-							const text = stripEmphasis(typeof item === 'string' ? item : item.text)
-							const line = block.ordered ? `${i + 1}. ${text}` : `- ${text}`
-							if (typeof item === 'string') return line
-							return [line, ...item.items.map((sub) => `  - ${stripEmphasis(sub)}`)].join('\n')
+							const { text, items } = listItemParts(item)
+							const marker = block.ordered ? `${i + 1}.` : '-'
+							return [
+								`${marker} ${stripEmphasis(text)}`,
+								...items.map((sub) => `  - ${stripEmphasis(sub)}`)
+							].join('\n')
 						})
 						.join('\n')
 				)

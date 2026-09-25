@@ -1,5 +1,5 @@
 import type { OnboardingEmailLanguage } from './types.js'
-import type { EmailBlock } from './blocks.js'
+import { listItemParts, type EmailBlock } from './blocks.js'
 import type { ChapterLink } from './types.js'
 import { ADDRESS_LINE } from './fixed.js'
 import { escapeHtml, mdLineToHtml } from './markdown.js'
@@ -52,14 +52,13 @@ function renderBlock(block: EmailBlock): string {
 				`<li style="margin: ${margin}; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; font-size: 16px; line-height: 1.6; color: ${TEXT};">${content}</li>`
 			const items = block.items
 				.map((item) => {
-					if (typeof item === 'string') return li(mdLineToHtml(item, ACCENT), '0 0 6px 0')
-					const sub = item.items
-						.map((subItem) => li(mdLineToHtml(subItem, ACCENT), '4px 0 0 0'))
-						.join('')
-					return li(
-						`${mdLineToHtml(item.text, ACCENT)}<ul style="margin: 0; padding-left: 20px; list-style-type: circle;">${sub}</ul>`,
-						'0 0 6px 0'
-					)
+					const { text, items: sub } = listItemParts(item)
+					const nested = sub.length
+						? `<ul style="margin: 0; padding-left: 20px; list-style-type: circle;">${sub
+								.map((subItem) => li(mdLineToHtml(subItem, ACCENT), '4px 0 0 0'))
+								.join('')}</ul>`
+						: ''
+					return li(`${mdLineToHtml(text, ACCENT)}${nested}`, '0 0 6px 0')
 				})
 				.join('')
 			const tag = block.ordered ? 'ol' : 'ul'

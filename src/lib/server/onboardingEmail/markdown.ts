@@ -8,7 +8,7 @@ const LINK_PATTERN = /\[([^\]]+)\]\(([^)]+)\)/g
 const BOLD_PATTERN = /\*\*([^*]+)\*\*/g
 // Runs after the bold pass, so only single asterisks are left for it to pair.
 const ITALIC_PATTERN = /\*([^*\n]+)\*/g
-// Marks an anchor parked during the bold pass. Private-use character: it cannot appear in
+// Marks an anchor parked during the emphasis passes. Private-use character: it cannot appear in
 // copy, and escapeHtml has already run by the time one is written.
 const ANCHOR_MARK = '\uE000'
 const ANCHOR_PATTERN = /\uE000(\d+)\uE000/g
@@ -43,8 +43,8 @@ export function escapeHtml(text: string): string {
  */
 export function mdLineToHtml(text: string, linkColor?: string): string {
 	const anchors: string[] = []
-	// Anchors are parked while the bold pass runs: a chapter's URL is free text and one
-	// containing `**` would otherwise have a <strong> written into its href.
+	// Anchors are parked while the emphasis passes run: a chapter's URL is free text and one
+	// containing `*` would otherwise have a <strong> or <em> written into its href.
 	const parked = escapeHtml(text).replace(LINK_PATTERN, (match, label: string, url: string) => {
 		// Chapter links come from a free-text Airtable field and are spliced into this copy, so
 		// a value can arrive carrying its own markdown. Anything that is not a plain web or mail

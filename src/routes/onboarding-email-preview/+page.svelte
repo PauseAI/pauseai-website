@@ -90,6 +90,7 @@
 	] as const
 
 	const languageNames = new Intl.DisplayNames('en', { type: 'language' })
+	const andList = new Intl.ListFormat('en', { type: 'conjunction' })
 	const languageName = (code: string) => languageNames.of(code) ?? code
 
 	const EMAIL_FOR: Record<Resolved['bucket'], string> = {
@@ -105,9 +106,7 @@
 	}
 
 	function audienceOf(scope: Exclude<OverrideSummary['scope'], 'all'>): string {
-		return new Intl.ListFormat('en', { type: 'conjunction' }).format(
-			scope.map((bucket) => AUDIENCE[bucket])
-		)
+		return andList.format(scope.map((bucket) => AUDIENCE[bucket]))
 	}
 
 	function overrideNote(override: OverrideSummary): string {
@@ -134,7 +133,7 @@
 						`${names.length - (MAX_NAMED_OWN_EMAIL_CHAPTERS - 1)} others`
 					]
 				: names
-		return new Intl.ListFormat('en', { type: 'conjunction' }).format(shown)
+		return andList.format(shown)
 	})
 
 	// A bookmarked country, or the default one when the chapter list failed to load, still
