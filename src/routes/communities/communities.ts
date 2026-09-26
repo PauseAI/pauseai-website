@@ -35,7 +35,6 @@ export const communitiesMeta: StrictPost = {
 export const GLOBAL_DISCORD_URL = 'https://discord.gg/CR5u5BTBwy'
 
 const LINK_PLACEHOLDERS = {
-	$$DISCORD_US$$: 'https://discord.gg/TmpmYejE3e',
 	$$DISCORD_GERMANY$$: 'https://discord.gg/VuVVyJQ37M',
 	$$DISCORD_FRANCE$$: 'https://discord.gg/vyXGd7AeGc',
 	$$WHATSAPP_ITALY$$: 'https://chat.whatsapp.com/Cue9aeK6kpJFoDxT3xV9Zx',
