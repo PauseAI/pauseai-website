@@ -76,12 +76,6 @@ const UK_EVENTS = [
 		title: 'Mass lobby day in Parliament.',
 		text: "Having an actual conversation with your MP is probably the single best way to improve AI policy. So we're going to Parliament to meet with MPs and talk about this problem.",
 		url: UK_LOBBY_DAY_URL
-	},
-	{
-		when: 'Saturday 26th September',
-		title: 'Flyering and tabling.',
-		text: "What would you expect to see if the world were in severe peril? You would expect to see people on the street warning you about it. Let's be those people.",
-		url: 'https://luma.com/pauseai-c9wb?tk=U5PkA7'
 	}
 ]
 
