@@ -25,11 +25,11 @@
 	</li>
 	<li>
 		<h3>
-			<Link href="https://microcommit.io/onboarding?org=135fcd8d-8116-44af-b885-14df992f9a8c">
-				{msgs.onboarding_action_microcommit_title}
+			<Link href="https://catalyse.up.railway.app">
+				{msgs.onboarding_action_catalyse_title}
 			</Link>
 		</h3>
-		<p>{msgs.onboarding_action_microcommit_sub}</p>
+		<p>{msgs.onboarding_action_catalyse_sub}</p>
 	</li>
 	<li>
 		<h3>{msgs.onboarding_action_petitions_title}</h3>
