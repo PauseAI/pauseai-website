@@ -15,6 +15,7 @@
 
 	interface MPContactStatus {
 		responded: boolean
+		signed: boolean
 	}
 
 	let postcode = $state('')
@@ -165,7 +166,12 @@
 				</div>
 			</Card>
 
-			{#if contactStatus?.responded}
+			{#if contactStatus?.signed}
+				<div class="contact-status">
+					<span class="status-icon">ℹ️</span>
+					<strong>Already signed!</strong> This MP has already signed the Frontier AI letter.
+				</div>
+			{:else if contactStatus?.responded}
 				<div class="contact-status">
 					<span class="status-icon">ℹ️</span>
 					<strong>Already responded!</strong> This MP has already contacted us about the letter.
