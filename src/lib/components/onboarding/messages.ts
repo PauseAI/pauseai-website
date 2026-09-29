@@ -176,8 +176,8 @@ export interface OnboardingMessages {
 	onboarding_action_lobby_sub: string
 	onboarding_action_talk_title: string
 	onboarding_action_talk_sub: string
-	onboarding_action_microcommit_title: string
-	onboarding_action_microcommit_sub: string
+	onboarding_action_catalyse_title: string
+	onboarding_action_catalyse_sub: string
 	onboarding_action_petitions_title: string
 	onboarding_action_petitions_sub: string
 	onboarding_action_donate_title: string
@@ -395,9 +395,9 @@ const en: OnboardingMessages = {
 	onboarding_action_talk_title: 'Talk to someone in your life about AI safety',
 	onboarding_action_talk_sub:
 		'A friend, neighbour, colleague, or family member. Our <a target="_blank" rel="noopener noreferrer" href="/counterarguments">counterarguments guide</a> can help you answer tough questions and encourage others to act.',
-	onboarding_action_microcommit_title: 'Microcommit — weekly bite-sized actions',
-	onboarding_action_microcommit_sub:
-		'Pick from a list of small ongoing actions and track your contribution over time.',
+	onboarding_action_catalyse_title: 'Catalyse — find a volunteer project',
+	onboarding_action_catalyse_sub:
+		'Browse volunteer projects and join one that matches your skills and time.',
 	onboarding_action_petitions_title: 'Sign the petitions',
 	onboarding_action_petitions_sub:
 		'Add your name alongside thousands of others calling for safer AI.',
@@ -626,9 +626,9 @@ const de: OnboardingMessages = {
 	onboarding_action_talk_title: 'Mit jemandem in deinem Umfeld über KI-Sicherheit sprechen',
 	onboarding_action_talk_sub:
 		'Ein Freund, Nachbar, Kollege oder Familienmitglied. Unser <a target="_blank" rel="noopener noreferrer" href="/counterarguments">Leitfaden für Gegenargumente</a> hilft dir, schwierige Fragen zu beantworten und andere zum Handeln zu motivieren.',
-	onboarding_action_microcommit_title: 'Mikroengagement – wöchentlich kleine Aktionen',
-	onboarding_action_microcommit_sub:
-		'Wähle aus einer Liste kleiner fortlaufender Aktionen und verfolge deinen Beitrag über Zeit.',
+	onboarding_action_catalyse_title: 'Catalyse — finde ein Freiwilligenprojekt',
+	onboarding_action_catalyse_sub:
+		'Durchstöbere Freiwilligenprojekte und finde eines, das zu deinen Fähigkeiten und deiner Zeit passt.',
 	onboarding_action_petitions_title: 'Petitionen unterzeichnen',
 	onboarding_action_petitions_sub:
 		'Füge deinen Namen zu Tausenden hinzu, die für eine sicherere KI eintreten.',
@@ -858,9 +858,9 @@ const fr: OnboardingMessages = {
 	onboarding_action_talk_title: "Parle à quelqu'un de ton entourage de la sécurité de l'IA",
 	onboarding_action_talk_sub:
 		'Un ami, un voisin, un collègue ou un membre de la famille. Notre <a target="_blank" rel="noopener noreferrer" href="/counterarguments">guide des contre-arguments</a> peut t\'aider à répondre aux questions difficiles et à encourager les autres à agir.',
-	onboarding_action_microcommit_title: 'Micro-engagement — actions hebdomadaires de courte durée',
-	onboarding_action_microcommit_sub:
-		'Choisis parmi une liste de petites actions continues et suis ta contribution au fil du temps.',
+	onboarding_action_catalyse_title: 'Catalyse — trouve un projet de bénévolat',
+	onboarding_action_catalyse_sub:
+		'Parcours les projets de bénévolat et rejoins-en un adapté à tes compétences et à ton temps disponible.',
 	onboarding_action_petitions_title: 'Signe les pétitions',
 	onboarding_action_petitions_sub:
 		"Ajoute ton nom à ceux de milliers d'autres personnes appelant à une IA plus sûre.",
@@ -1086,9 +1086,9 @@ const es: OnboardingMessages = {
 	onboarding_action_talk_title: 'Habla de la seguridad de la IA con alguien de tu entorno',
 	onboarding_action_talk_sub:
 		'Una amistad, un vecino, un compañero de trabajo o un familiar. Nuestra <a target="_blank" rel="noopener noreferrer" href="/counterarguments">guía de contraargumentos</a> te ayudará a responder preguntas difíciles y a animar a otras personas a actuar.',
-	onboarding_action_microcommit_title: 'Microcommit: pequeñas acciones semanales',
-	onboarding_action_microcommit_sub:
-		'Elige de una lista de pequeñas acciones continuas y sigue tu contribución a lo largo del tiempo.',
+	onboarding_action_catalyse_title: 'Catalyse: encuentra un proyecto de voluntariado',
+	onboarding_action_catalyse_sub:
+		'Explora proyectos de voluntariado y únete a uno que se ajuste a tus habilidades y tu tiempo.',
 	onboarding_action_petitions_title: 'Firma las peticiones',
 	onboarding_action_petitions_sub:
 		'Suma tu nombre al de miles de personas que piden una IA más segura.',
