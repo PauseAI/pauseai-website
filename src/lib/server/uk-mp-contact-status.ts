@@ -7,10 +7,12 @@ const UK_PARLIAMENTARIANS_TABLE_ID = 'tblH3ks9wqQHLpYx3'
 
 export interface UKMPContactStatus {
 	responded: boolean
+	signed: boolean
 }
 
 type UKParliamentarianFields = {
 	'Responded Frontier AI Letter'?: boolean | null
+	'Signed Frontier AI Letter'?: boolean | null
 }
 
 /**
@@ -20,7 +22,8 @@ type UKParliamentarianFields = {
 export async function ukCheckMPContactHistory(mpEmail: string): Promise<UKMPContactStatus> {
 	// Default response for when lookup fails or no API key
 	const defaultResponse: UKMPContactStatus = {
-		responded: false
+		responded: false,
+		signed: false
 	}
 
 	// Return default if no API key (dev environment)
@@ -63,11 +66,13 @@ export async function ukCheckMPContactHistory(mpEmail: string): Promise<UKMPCont
 		}
 
 		const responded = Boolean(data.records[0].fields['Responded Frontier AI Letter'])
+		const signed = Boolean(data.records[0].fields['Signed Frontier AI Letter'])
 
-		console.log(`MP lookup success: ${mpEmail} - responded: ${responded}`)
+		console.log(`MP lookup success: ${mpEmail} - responded: ${responded}, signed: ${signed}`)
 
 		return {
-			responded: responded
+			responded,
+			signed
 		}
 	} catch (error) {
 		console.error('Failed to check MP contact history:', error)
