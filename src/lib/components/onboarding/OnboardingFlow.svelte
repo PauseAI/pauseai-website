@@ -145,11 +145,11 @@
 	// /subscribe flow hands off, it's seeded with the record already created there.
 	// Also kept in sessionStorage, for a remount: see signupResume.ts.
 	let recordId = $state(initialRecordId)
-	// The address the id was last posted with. The id is only ever posted with
-	// it: after Back, another address gets a row of its own instead of
-	// overwriting this one (so does a corrected typo). Unset for the /subscribe
-	// continuation until its first post; it has no Back to step 1.
-	let recordEmail: string | null = null
+	// The address an id picked up from sessionStorage was picked up for. That id
+	// is only ever posted with it: after Back, another address gets a row of its
+	// own instead of overwriting the earlier signup. An id created in this mount
+	// isn't bound, so fixing a typo in the email after Back corrects that row.
+	let pickedUpFor: string | null = null
 	// What the row holds for Intent, which the browse form must not lower.
 	let rowIntent: Intent | null = null
 	// From picking the id up out of sessionStorage until a post succeeds. The
@@ -387,7 +387,7 @@
 		// A stub-mode id (a preview before going live) names no Airtable row.
 		if (!saved || (onboardingLive && saved.recordId.startsWith('stub-'))) return null
 		recordId = saved.recordId
-		recordEmail = email
+		pickedUpFor = email
 		rowIntent = saved.intent
 		resumed = true
 		// The update rewrites Email subscription from the post, so the form must
@@ -399,9 +399,9 @@
 	// Another address starts a signup of its own: nothing kept for the previous
 	// one carries over, the opt-in least of all.
 	function startOverUnlessFor(email: string): boolean {
-		if (!recordId || recordEmail === null || sameEmail(recordEmail, email)) return false
+		if (!recordId || pickedUpFor === null || sameEmail(pickedUpFor, email)) return false
 		recordId = ''
-		recordEmail = null
+		pickedUpFor = null
 		rowIntent = null
 		resumed = false
 		keepInformed = initialKeepInformed
@@ -463,7 +463,6 @@
 						// this only fires on a real create.
 						if (!recordId) onSignup?.()
 						recordId = result.data.recordId
-						recordEmail = email
 						rowIntent = postedIntent(formData)
 						resumed = false
 						saveSignupFromPost(formData, recordId)

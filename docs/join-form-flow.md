@@ -154,11 +154,10 @@ it holds for the two fields every update rewrites from the post,
 - `OnboardingFlow` picks it up when step 1 continues (or, for the browse form,
   when it submits) **only for the same email**, ignoring case and surrounding
   spaces.
-- Every id, picked up or created in this mount, is only ever posted with the
-  email it was last posted with. Another email after Back starts a row of its
-  own, and drops the opt-in and intent restored for the previous one. A
-  corrected typo also starts a new row: overwriting someone else's row on a
-  shared device is the worse failure.
+- A picked-up id is only ever posted with the email it was picked up for.
+  Another email after Back starts a row of its own, and drops the opt-in and
+  intent restored for the previous one. An id created in this mount is not
+  bound, as before: fixing a typo in the email after Back corrects that row.
 - It restores `keepInformed` and preselects the stored intent, so the update
   doesn't clear the subscription (see the hazard below) or reset the intent. The
   browse form, which always posts `Act now`, never lowers a Volunteer or Lead
