@@ -60,22 +60,28 @@ const UK_SOCIALS: ChapterLink[] = [
 	{ label: 'Facebook', url: 'https://www.facebook.com/people/Pause-AI-UK/61587358827177/' }
 ]
 
-// TIME-SENSITIVE. The chapter's next events, in the order the chapter lists them (biggest
-// first). Nothing here checks the date, so each one has to be removed once it has happened.
+// TIME-SENSITIVE. The chapter's next events, in date order. Nothing here checks the date,
+// so each one has to be removed once it has happened.
 // The Luma links carry the `tk` keys the chapter's own emails use.
 const UK_LOBBY_DAY_URL = 'https://luma.com/pauseai-0g9r?tk=PTH5F0'
 const UK_EVENTS = [
 	{
-		when: 'Saturday 5th December',
-		title: 'The march.',
-		text: "We are putting on the biggest ever demonstration for AI safety. We need it to grab the world's attention.",
-		url: 'https://luma.com/pauseai-dec26?tk=UEvEYj'
+		when: 'Saturday 10th October',
+		title: 'Tabling and flyering for the march.',
+		text: "We've got a big new protest coming up! It's time to start spreading the word. At the last flyering session we got over 60 sign-ups! This time, we have figured out the formula for success. We will all meet for a training session at the beginning to learn this new technique and reconvene at the end to give prizes to the best team. Following our recipe, every single person will be able to get at least 10 sign-ups for the march. Guaranteed or your money back! 😜",
+		url: 'https://luma.com/4o2cnm0q'
 	},
 	{
 		when: 'Tuesday 20th October',
 		title: 'Mass lobby day in Parliament.',
 		text: "Having an actual conversation with your MP is probably the single best way to improve AI policy. So we're going to Parliament to meet with MPs and talk about this problem.",
 		url: UK_LOBBY_DAY_URL
+	},
+	{
+		when: 'Saturday 21st November',
+		title: 'March Against AI Extinction.',
+		text: "We are putting on the biggest ever demonstration for AI safety. We need it to grab the world's attention.",
+		url: 'https://luma.com/pauseai-nov26?tk=UEvEYj'
 	}
 ]
 
