@@ -68,7 +68,7 @@ const UK_EVENTS = [
 	{
 		when: 'Saturday 10th October',
 		title: 'Tabling and flyering for the march.',
-		text: "It's time to start spreading the word about the march. Last time we got over 60 sign-ups, and now we've figured out the formula: we'll start with a training session, then head out in teams, with prizes for the best team at the end. Everyone should come away with at least 10 sign-ups for the march.",
+		text: "We've got a big new protest coming up! It's time to start spreading the word. At the last flyering session we got over 60 sign-ups! This time, we have figured out the formula for success. We will all meet for a training session at the beginning to learn this new technique and reconvene at the end to give prizes to the best team. Following our recipe, every single person will be able to get at least 10 sign-ups for the march. Guaranteed or your money back! 😜",
 		url: 'https://luma.com/4o2cnm0q'
 	},
 	{
