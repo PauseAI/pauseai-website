@@ -66,10 +66,10 @@ const UK_SOCIALS: ChapterLink[] = [
 const UK_LOBBY_DAY_URL = 'https://luma.com/pauseai-0g9r?tk=PTH5F0'
 const UK_EVENTS = [
 	{
-		when: 'Saturday 5th December',
-		title: 'The march.',
+		when: 'Saturday 21st November',
+		title: 'March Against AI Extinction.',
 		text: "We are putting on the biggest ever demonstration for AI safety. We need it to grab the world's attention.",
-		url: 'https://luma.com/pauseai-dec26?tk=UEvEYj'
+		url: 'https://luma.com/pauseai-nov26?tk=UEvEYj'
 	},
 	{
 		when: 'Tuesday 20th October',
