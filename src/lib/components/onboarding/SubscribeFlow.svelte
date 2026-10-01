@@ -18,6 +18,7 @@
 	import LinkWithoutIcon from '$lib/components/LinkWithoutIcon.svelte'
 	import Turnstile from '$lib/components/Turnstile.svelte'
 	import OnboardingFlow from './OnboardingFlow.svelte'
+	import { saveSignupFromPost } from './signupResume'
 	import { turnstileSiteKey } from '$lib/turnstile'
 	import { COUNTRIES } from './options'
 
@@ -105,13 +106,27 @@
 
 	const ERROR_MESSAGE = 'Something went wrong. Please try again.'
 
-	const submit: SubmitFunction = () => {
+	// Saves the created row for OnboardingFlow, so /join in this tab continues it.
+	// Never resumes one itself: this form always posts intent None, which would
+	// undo what someone chose on /join.
+	const submit: SubmitFunction = ({ formData, cancel }) => {
+		// Same guard as OnboardingFlow's submitWith.
+		if (submitting) {
+			cancel()
+			return
+		}
 		submitting = true
 		return ({ result }) => {
 			submitting = false
+			// The token is spent whatever the outcome; clear it so a retry waits for
+			// the fresh widget instead of reposting it.
+			turnstileToken = ''
 			turnstileNonce += 1
 			if (result.type === 'success' && result.data?.success) {
-				if (typeof result.data.recordId === 'string') recordId = result.data.recordId
+				if (typeof result.data.recordId === 'string') {
+					recordId = result.data.recordId
+					saveSignupFromPost(formData, recordId)
+				}
 				phase = 'thanks'
 			} else if (result.type === 'failure') {
 				toast.error(String(result.data?.message ?? ERROR_MESSAGE))
