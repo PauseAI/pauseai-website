@@ -60,16 +60,16 @@ const UK_SOCIALS: ChapterLink[] = [
 	{ label: 'Facebook', url: 'https://www.facebook.com/people/Pause-AI-UK/61587358827177/' }
 ]
 
-// TIME-SENSITIVE. The chapter's next events, in the order the chapter lists them (biggest
-// first). Nothing here checks the date, so each one has to be removed once it has happened.
+// TIME-SENSITIVE. The chapter's next events, in date order. Nothing here checks the date,
+// so each one has to be removed once it has happened.
 // The Luma links carry the `tk` keys the chapter's own emails use.
 const UK_LOBBY_DAY_URL = 'https://luma.com/pauseai-0g9r?tk=PTH5F0'
 const UK_EVENTS = [
 	{
-		when: 'Saturday 21st November',
-		title: 'March Against AI Extinction.',
-		text: "We are putting on the biggest ever demonstration for AI safety. We need it to grab the world's attention.",
-		url: 'https://luma.com/pauseai-nov26?tk=UEvEYj'
+		when: 'Saturday 10th October',
+		title: 'Tabling and flyering for the march.',
+		text: "It's time to start spreading the word about the march. Last time we got over 60 sign-ups, and now we've figured out the formula: we'll start with a training session, then head out in teams, with prizes for the best team at the end. Everyone should come away with at least 10 sign-ups for the march.",
+		url: 'https://luma.com/4o2cnm0q'
 	},
 	{
 		when: 'Tuesday 20th October',
@@ -78,10 +78,10 @@ const UK_EVENTS = [
 		url: UK_LOBBY_DAY_URL
 	},
 	{
-		when: 'Saturday 10th October',
-		title: 'Tabling and flyering for the march.',
-		text: "What would you expect to see if the world were in severe peril? You would expect to see people on the street warning you about it. Let's be those people.",
-		url: 'https://luma.com/4o2cnm0q'
+		when: 'Saturday 21st November',
+		title: 'March Against AI Extinction.',
+		text: "We are putting on the biggest ever demonstration for AI safety. We need it to grab the world's attention.",
+		url: 'https://luma.com/pauseai-nov26?tk=UEvEYj'
 	}
 ]
 
