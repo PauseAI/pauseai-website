@@ -1,5 +1,11 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
-import { loadSignup, sameEmail, saveSignup, saveSignupFromPost } from './signupResume.js'
+import {
+	forgetSignup,
+	loadSignup,
+	sameEmail,
+	saveSignup,
+	saveSignupFromPost
+} from './signupResume.js'
 
 function memoryStorage(): Storage {
 	const items = new Map<string, string>()
@@ -42,10 +48,12 @@ describe('signupResume', () => {
 		expect(loadSignup('ada@example.org', DAY + 1)).toBeNull()
 	})
 
-	it('keeps only the latest save', () => {
+	it('keeps only the latest save, until forgotten', () => {
 		saveSignup('ada@example.org', { recordId: 'rec1', keepInformed: false, intent: 'None' }, 0)
 		saveSignup('ada@example.org', { recordId: 'rec2', keepInformed: true, intent: 'Act now' }, 0)
 		expect(loadSignup('ada@example.org', 0)?.recordId).toBe('rec2')
+		forgetSignup()
+		expect(loadSignup('ada@example.org', 0)).toBeNull()
 	})
 
 	it('defaults the intent of an entry saved without one to None', () => {

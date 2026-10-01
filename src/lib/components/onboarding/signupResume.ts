@@ -65,6 +65,14 @@ export function saveSignupFromPost(formData: FormData, recordId: string): void {
 	})
 }
 
+export function forgetSignup(): void {
+	try {
+		storage()?.removeItem(STORAGE_KEY)
+	} catch {
+		// Nothing to clear.
+	}
+}
+
 // Only for the same address: someone else signing up in the same tab must get
 // their own row, not overwrite the first person's.
 export function loadSignup(email: string, now = Date.now()): SavedSignup | null {

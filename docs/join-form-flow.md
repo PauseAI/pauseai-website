@@ -170,10 +170,11 @@ it holds for the two fields every update rewrites from the post,
   announced when it was created.
 - `SubscribeFlow` saves but never resumes: it always posts `intent=None`, which
   would undo an intent chosen on `/join`.
-- A failed update keeps the stored id. `updateRecord` reports an outage and a
-  missing row alike, and dropping the id on an outage would make the retry
-  create a duplicate. A row deleted within the 24 hours therefore keeps
-  failing in that tab.
+- A failed update keeps the stored id, so an outage's retry does not create a
+  duplicate. Only when Airtable reports the row gone (`ROW_DOES_NOT_EXIST`, for a
+  deleted row too) does the action answer 410, and the form then drops the id
+  and its stored copy and returns to step 1, so the next pass collects consent
+  and creates a row.
 
 It does not cover another tab or device, or a chapter site's iframe, whose
 storage the browser keeps apart from pauseai.info's. Nor a create whose response

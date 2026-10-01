@@ -22,6 +22,7 @@
 	import Stepper from './Stepper.svelte'
 	import { getMessages } from './i18n.svelte'
 	import {
+		forgetSignup,
 		loadSignup,
 		posted,
 		postedIntent,
@@ -469,6 +470,20 @@
 					}
 					onSuccess(result.data, startValue)
 				} else if (result.type === 'failure') {
+					// 410: the row behind recordId no longer exists. Any other failure,
+					// an outage included, keeps the id, or the retry would duplicate.
+					// Back to step 1, because a new row needs the step-2 consent, which
+					// the volunteer form doesn't post. The browse form posts its own and
+					// can just retry. (The /subscribe continuation's id is seconds old
+					// and never resumed, so it doesn't get here.)
+					if (result.status === 410) {
+						forgetSignup()
+						recordId = ''
+						pickedUpFor = null
+						rowIntent = null
+						resumed = false
+						if (mode === 'contact' && !isContinuation) step = 1
+					}
 					toast.error(String(result.data?.message ?? msgs.onboarding_error_generic))
 				} else {
 					toast.error(msgs.onboarding_error_unexpected)

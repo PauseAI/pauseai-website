@@ -338,7 +338,14 @@ export const actions: Actions = {
 			let recordId: string | undefined = existingRecordId || undefined
 			if (recordId) {
 				const updated = await updateRecord(AIRTABLE_BASE_ID, MEMBERS_TABLE_ID, recordId, fields)
-				if (!updated) {
+				// The row was deleted since the browser got its id. A status of its own,
+				// so the form drops the id and its next submission creates a row.
+				if (updated === 'missing') {
+					return fail(410, {
+						message: 'We could not find your earlier signup. Please go through the form again.'
+					})
+				}
+				if (updated !== 'updated') {
 					return fail(502, { message: 'Sorry, we could not save your details. Please try again.' })
 				}
 			} else {

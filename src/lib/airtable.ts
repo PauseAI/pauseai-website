@@ -125,17 +125,19 @@ export async function createRecord(
  * @param tableId The Airtable Table ID
  * @param recordId The id of the record to update
  * @param fields The fields to update on the record
+ * @returns 'missing' when no record has that id (never existed, or deleted),
+ * which a caller can act on, unlike an outage ('failed')
  */
 export async function updateRecord(
 	baseId: string,
 	tableId: string,
 	recordId: string,
 	fields: FieldSet
-): Promise<boolean> {
+): Promise<'updated' | 'missing' | 'failed'> {
 	const apiKey = getWriteApiKey()
 	if (!apiKey) {
 		console.warn(`⚠️ Airtable API key not configured. Skipping record update.`)
-		return false
+		return 'failed'
 	}
 
 	try {
@@ -143,8 +145,14 @@ export async function updateRecord(
 		const table = base(tableId)
 		await table.update([{ id: recordId, fields }], { typecast: true })
 		console.log(`Successfully updated record ${recordId} in Airtable table ${tableId}`)
-		return true
+		return 'updated'
 	} catch (error) {
+		// Airtable answers 422 ROW_DOES_NOT_EXIST for an id that never existed and
+		// for a deleted one alike. Not an outage, so not reported.
+		if ((error as { error?: unknown } | null)?.error === 'ROW_DOES_NOT_EXIST') {
+			console.warn(`Airtable record ${recordId} in ${tableId} does not exist`)
+			return 'missing'
+		}
 		console.error(`Error updating Airtable record ${recordId} in ${tableId}:`, error)
 		// Report to Sentry even though we swallow the error: the caller surfaces
 		// a generic "could not save" message via `fail()`, which never reaches
@@ -152,6 +160,6 @@ export async function updateRecord(
 		await reportError(error, { tableId, recordId, operation: 'updateRecord' })
 		// We don't throw here to avoid failing the whole request if Airtable is down;
 		// the caller decides whether to surface the failure to the user.
-		return false
+		return 'failed'
 	}
 }
