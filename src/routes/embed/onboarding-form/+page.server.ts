@@ -178,6 +178,11 @@ export const actions: Actions = {
 		// this one updates it instead of creating a duplicate: /join step 2 then the
 		// volunteer form, or /subscribe then its "do more" hand-off.
 		const existingRecordId = getString(data, 'record_id')
+		// A form that picked the record up again after a remount (signupResume.ts)
+		// marks its posts until one succeeds. For the person that post is this
+		// form's signup, so consent, chapter sharing and the Substack opt-in are
+		// handled as on a create, though the write is an update.
+		const isSignup = !existingRecordId || data.get('resumed') === '1'
 		// The volunteer detail fields are only present on the step-3 form post.
 		const hasVolunteerDetails = data.get('volunteer_details') === 'on'
 		// The /subscribe newsletter form. It requires the same four fields as /join,
@@ -220,26 +225,27 @@ export const actions: Actions = {
 		if (!isIntent(intent)) {
 			return fail(400, { message: 'Please choose what brings you here.' })
 		}
-		// Updates (volunteer step 3) carry an existing record id and already
-		// consented at step 2; require consent only when creating a record.
-		if (!existingRecordId && !gdprAgreed) {
+		// Other updates (the volunteer step, the /subscribe continuation) already
+		// consented at the signup; require consent only there.
+		if (isSignup && !gdprAgreed) {
 			return fail(400, { message: 'Please agree to the data processing consent to continue.' })
 		}
 
 		// Chapter sharing:
-		//  - /join create bundles it into the single privacy checkbox -> true
-		//  - /subscribe create shares only when they tick the local-updates box
-		//  - an update (the /subscribe "do more" hand-off, or the volunteer step)
-		//    leaves the signup-time choice alone, except Volunteer/Lead, whose
+		//  - a /join signup bundles it into the single privacy checkbox -> true
+		//  - a /subscribe signup shares only when they tick the local-updates box
+		//  - any other update (the /subscribe "do more" hand-off, or the volunteer
+		//    step) leaves the signup-time choice alone, except Volunteer/Lead, whose
 		//    local involvement means they hear from a chapter regardless
 		let chapterShare: boolean | undefined
-		if (existingRecordId) {
-			if (intent === 'Volunteer' || intent === 'Lead') chapterShare = true
+		if (isSignup) {
+			chapterShare = isSubscribeForm ? wantsChapter : true
+		} else if (intent === 'Volunteer' || intent === 'Lead') {
+			chapterShare = true
+		} else if (isSubscribeForm) {
 			// The subscribe "do more" step reposts the signup-time choice, so backing
 			// out of Volunteer/Lead restores it rather than leaving the escalation.
-			else if (isSubscribeForm) chapterShare = wantsChapter
-		} else {
-			chapterShare = isSubscribeForm ? wantsChapter : true
+			chapterShare = wantsChapter
 		}
 
 		const fields: FieldSet = {
@@ -332,7 +338,14 @@ export const actions: Actions = {
 			let recordId: string | undefined = existingRecordId || undefined
 			if (recordId) {
 				const updated = await updateRecord(AIRTABLE_BASE_ID, MEMBERS_TABLE_ID, recordId, fields)
-				if (!updated) {
+				// The row was deleted since the browser got its id. A status of its own,
+				// so the form drops the id and its next submission creates a row.
+				if (updated === 'missing') {
+					return fail(410, {
+						message: 'We could not find your earlier signup. Please go through the form again.'
+					})
+				}
+				if (updated !== 'updated') {
 					return fail(502, { message: 'Sorry, we could not save your details. Please try again.' })
 				}
 			} else {
@@ -342,11 +355,11 @@ export const actions: Actions = {
 				if (!recordId) {
 					return fail(502, { message: 'Sorry, we could not save your details. Please try again.' })
 				}
-				// Subscription happens on the create only, which for /subscribe is its own
-				// signup rather than a step 2. No update re-subscribes.
-				if (newsletter) {
-					await subscribeToSubstackNewsletter(email)
-				}
+			}
+			// Only on the signup, which for /subscribe is its own form rather than a
+			// step 2. No other update re-subscribes.
+			if (newsletter && isSignup) {
+				await subscribeToSubstackNewsletter(email)
 			}
 			return { success: true, recordId }
 		}
@@ -367,7 +380,7 @@ export const actions: Actions = {
 				mode,
 				updatesRecordId: existingRecordId || null,
 				chapterMatch: chapter,
-				wouldSubscribeToSubstackNewsletter: newsletter && !existingRecordId,
+				wouldSubscribeToSubstackNewsletter: newsletter && isSignup,
 				stubbed: 'No Airtable write or Substack subscription was performed.'
 			}
 		})

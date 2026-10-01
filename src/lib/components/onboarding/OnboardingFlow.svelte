@@ -21,6 +21,15 @@
 	import ActionCards from './ActionCards.svelte'
 	import Stepper from './Stepper.svelte'
 	import { getMessages } from './i18n.svelte'
+	import {
+		forgetSignup,
+		loadSignup,
+		posted,
+		postedIntent,
+		sameEmail,
+		saveSignupFromPost,
+		type SavedSignup
+	} from './signupResume'
 	import { turnstileSiteKey } from '$lib/turnstile'
 	import { hasUniversities, isKnownUniversity, universityOptions } from '$lib/data/universities'
 	import {
@@ -135,7 +144,18 @@
 	// Airtable record id from the step-2 submission; later submissions send it
 	// back so the server updates the record instead of creating another. When the
 	// /subscribe flow hands off, it's seeded with the record already created there.
+	// Also kept in sessionStorage, for a remount: see signupResume.ts.
 	let recordId = $state(initialRecordId)
+	// The address an id picked up from sessionStorage was picked up for. That id
+	// is only ever posted with it: after Back, another address gets a row of its
+	// own instead of overwriting the earlier signup. An id created in this mount
+	// isn't bound, so fixing a typo in the email after Back corrects that row.
+	let pickedUpFor: string | null = null
+	// What the row holds for Intent, which the browse form must not lower.
+	let rowIntent: Intent | null = null
+	// From picking the id up out of sessionStorage until a post succeeds. The
+	// server (resumed=1) then treats the post as this form's signup.
+	let resumed = false
 	// Never pre-checked on /join: marketing consent must be freely given, for
 	// Volunteers/Leads too (operational volunteer comms ride legitimate interest).
 	let keepInformed = $state(initialKeepInformed)
@@ -360,8 +380,41 @@
 		else list.push(value)
 	}
 
+	const intentKey = (value: Intent): IntentKey | null =>
+		(Object.keys(INTENT_VALUES) as IntentKey[]).find((key) => INTENT_VALUES[key] === value) ?? null
+
+	function resume(email: string): SavedSignup | null {
+		const saved = loadSignup(email)
+		// A stub-mode id (a preview before going live) names no Airtable row.
+		if (!saved || (onboardingLive && saved.recordId.startsWith('stub-'))) return null
+		recordId = saved.recordId
+		pickedUpFor = email
+		rowIntent = saved.intent
+		resumed = true
+		// The update rewrites Email subscription from the post, so the form must
+		// start from what the row holds, not from the unticked default.
+		keepInformed = saved.keepInformed
+		return saved
+	}
+
+	// Another address starts a signup of its own: nothing kept for the previous
+	// one carries over, the opt-in least of all.
+	function startOverUnlessFor(email: string): boolean {
+		if (!recordId || pickedUpFor === null || sameEmail(pickedUpFor, email)) return false
+		recordId = ''
+		pickedUpFor = null
+		rowIntent = null
+		resumed = false
+		keepInformed = initialKeepInformed
+		return true
+	}
+
 	function continueToIntent(event: SubmitEvent) {
 		event.preventDefault()
+		if (startOverUnlessFor(basics.email)) intent = null
+		const saved = recordId ? null : resume(basics.email)
+		// Intent is rewritten from the post too; preselect what the row holds.
+		if (saved) intent = intentKey(saved.intent) ?? intent
 		step = 2
 	}
 
@@ -369,7 +422,26 @@
 		onStart: () => T,
 		onSuccess: (data: Record<string, unknown> | undefined, startValue: T) => void
 	): SubmitFunction {
-		return () => {
+		return ({ formData, cancel }) => {
+			// The disabled button only lands on the next render; a second submit
+			// before then would post without the id the first one is about to return.
+			if (submitting) {
+				cancel()
+				return
+			}
+			const email = posted(formData, 'email')
+			startOverUnlessFor(email)
+			// The browse form collects its own email, so it can only resume here. It
+			// always posts Act now, which must not lower a Volunteer or Lead row.
+			if (posted(formData, 'mode') === 'browse') {
+				if (!recordId) resume(email)
+				if (rowIntent === INTENT_VALUES.volunteer || rowIntent === INTENT_VALUES.lead) {
+					formData.set('intent', rowIntent)
+				}
+			}
+			// The only place record_id is posted, so every form gets the checks above.
+			if (recordId) formData.set('record_id', recordId)
+			if (resumed) formData.set('resumed', '1')
 			submitting = true
 			// Run the start callback synchronously, inside the user gesture,
 			// so callers can do things that require a gesture (e.g. opening a
@@ -392,9 +464,26 @@
 						// this only fires on a real create.
 						if (!recordId) onSignup?.()
 						recordId = result.data.recordId
+						rowIntent = postedIntent(formData)
+						resumed = false
+						saveSignupFromPost(formData, recordId)
 					}
 					onSuccess(result.data, startValue)
 				} else if (result.type === 'failure') {
+					// 410: the row behind recordId no longer exists. Any other failure,
+					// an outage included, keeps the id, or the retry would duplicate.
+					// Back to step 1, because a new row needs the step-2 consent, which
+					// the volunteer form doesn't post. The browse form posts its own and
+					// can just retry. (The /subscribe continuation's id is seconds old
+					// and never resumed, so it doesn't get here.)
+					if (result.status === 410) {
+						forgetSignup()
+						recordId = ''
+						pickedUpFor = null
+						rowIntent = null
+						resumed = false
+						if (mode === 'contact' && !isContinuation) step = 1
+					}
 					toast.error(String(result.data?.message ?? msgs.onboarding_error_generic))
 				} else {
 					toast.error(msgs.onboarding_error_unexpected)
@@ -646,9 +735,6 @@
 				{@render hiddenBasics()}
 				{@render honeypotField('ob-nickname-2')}
 				<input type="hidden" name="mode" value="contact" />
-				{#if recordId}
-					<input type="hidden" name="record_id" value={recordId} />
-				{/if}
 				<input type="hidden" name="intent" value={intent ? INTENT_VALUES[intent] : 'None'} />
 				<!-- The server writes Email subscription from this post every time, so a
 				     post without this input clears the flag. Both forms that can update
@@ -825,6 +911,7 @@
 								<input
 									type="text"
 									id="loop-name"
+									name="full_name"
 									required
 									placeholder={msgs.onboarding_placeholder_full_name}
 									autocomplete="name"
@@ -836,6 +923,7 @@
 								<input
 									type="email"
 									id="loop-email"
+									name="email"
 									required
 									placeholder={msgs.onboarding_placeholder_email}
 									autocomplete="email"
@@ -856,6 +944,7 @@
 								<input
 									type="text"
 									id="loop-city"
+									name="city"
 									required
 									placeholder={msgs.onboarding_placeholder_city}
 									autocomplete="address-level2"
@@ -929,9 +1018,6 @@
 				<input type="hidden" name="mode" value="contact" />
 				<input type="hidden" name="intent" value="Volunteer" />
 				<input type="hidden" name="volunteer_details" value="on" />
-				{#if recordId}
-					<input type="hidden" name="record_id" value={recordId} />
-				{/if}
 				<!-- The server writes Email subscription from this post every time, so a
 				     post without this input clears the flag. Both forms that can update
 				     the record have to carry it. -->
