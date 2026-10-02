@@ -8,7 +8,7 @@ export type BaseLanguage = 'en' | 'es'
 
 /** Every language an email can go out in: the shared copy's, plus those only a chapter
  *  override is written in. Each needs its fixed lines in fixed.ts. */
-export type OnboardingEmailLanguage = BaseLanguage | 'sv'
+export type OnboardingEmailLanguage = BaseLanguage | 'sv' | 'de'
 
 /** HTML presentation style. `rich` (default) is the branded card layout in
  *  html.ts; `plain` is the stripped-down single-column layout in htmlPlain.ts,
