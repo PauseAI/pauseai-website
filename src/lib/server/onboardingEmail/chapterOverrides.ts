@@ -514,9 +514,10 @@ function germanyContent(firstName: string, body: EmailBlock[]): EmailContent {
 		body,
 		signoff: [
 			{ type: 'paragraph', text: 'Fragen? Schreib uns an germany@pauseai.info.' },
+			{ type: 'signoff', lines: ['Viele Grüße', 'PauseAI Deutschland'] },
 			{
 				type: 'paragraph',
-				text: 'PauseAI Deutschland\n[Impressum](https://pause-ai.de/impressum)  ·  [Datenschutz](https://pause-ai.de/datenschutz)'
+				text: '[Impressum](https://pause-ai.de/impressum)  ·  [Datenschutz](https://pause-ai.de/datenschutz)'
 			},
 			{
 				type: 'paragraph',
