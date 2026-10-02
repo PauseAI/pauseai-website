@@ -71,7 +71,7 @@ export function composeBlocks(
 	return [
 		...content.greeting,
 		{ type: 'rule' },
-		{ type: 'paragraph', text: fixed.confirm(verificationLink) },
+		...fixed.confirm(verificationLink),
 		{ type: 'rule' },
 		...content.body,
 		{

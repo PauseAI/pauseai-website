@@ -113,7 +113,10 @@ export const load: PageServerLoad = async ({ url }) => {
 		// The lines composeBlocks() adds to a chapter's own email, quoted in the page's advice so
 		// a chapter translating them works from the wording that is actually sent.
 		fixedLines: {
-			confirm: plainLinks(FIXED_COPY.en.confirm('#')),
+			confirm: FIXED_COPY.en
+				.confirm('#')
+				.map((block) => (block.type === 'paragraph' ? plainLinks(block.text) : ''))
+				.join(' '),
 			newsletter: FIXED_COPY.en.newsletterInOwnWords
 		},
 		resolved,

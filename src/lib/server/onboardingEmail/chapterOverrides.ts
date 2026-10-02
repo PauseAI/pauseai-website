@@ -438,11 +438,144 @@ const sweden: ChapterOverride = {
 	}
 }
 
+// PauseAI Deutschland's own emails, one per intent, wording kept as the chapter wrote it. The
+// confirm line and the newsletter line are theirs too, and are the `de` entry in fixed.ts.
+// Every link is fixed here rather than drawn from the National Groups row, so keeping the
+// Discord and WhatsApp invites current is an edit to this file.
+const GERMANY_SITE = 'https://www.pause-ai.de'
+
+const GERMANY_ENGAGED =
+	'Wir freuen uns, dass Du Dich für eine menschliche Zukunft engagieren willst.'
+const GERMANY_ACTIONS_TEXT =
+	'Das effektivste Mittel, um für mehr Aufklärung zu sorgen, ist eine Mail an Deinen Abgeordneten. Auf unserer Webseite gibt es dafür ein spezielles Tool und es gibt noch viele andere Möglichkeiten, direkt aktiv zu werden.'
+const GERMANY_ONBOARDING_CALL_TEXT =
+	'Buch Dir am besten hier einen Termin. Dort können wir gemeinsam besprechen, was wir als PauseAI gerade alles machen, wie Du am besten mithelfen kannst und Du kannst Fragen stellen.'
+
+/** A titled item with its button, the unit the "Außerdem" list is made of. */
+function germanyItem(title: string, text: string, label: string, url: string): EmailBlock[] {
+	return [
+		{ type: 'paragraph', text: `**${title}**\n${text}` },
+		{ type: 'button', text: label, url }
+	]
+}
+
+const GERMANY_ACTIONS_BUTTON: EmailBlock = {
+	type: 'button',
+	text: 'WAS DU TUN KANNST',
+	url: `${GERMANY_SITE}/#was-du-tun-kannst`
+}
+
+const GERMANY_ONBOARDING_CALL_BUTTON: EmailBlock = {
+	type: 'button',
+	text: 'TERMIN AUSSUCHEN',
+	url: `${GERMANY_SITE}/mitmachen`
+}
+
+/** The community items every German email lists, in the chapter's order. */
+const GERMANY_COMMUNITY: EmailBlock[] = [
+	...germanyItem(
+		'Unsere Discord-Community',
+		'Wir kommunizieren und arbeiten hauptsächlich über Discord. Komm rein und sag Hallo.',
+		'DISCORD BEITRETEN',
+		'https://discord.gg/VuVVyJQ37M'
+	),
+	...germanyItem(
+		'Lokalgruppen',
+		'Werde Teil einer Lokalgruppe in Deiner Nähe. Gemeinsam organisieren wir Infoabende, Stammtische und Aktionen vor Ort.',
+		'LOKALGRUPPEN FINDEN',
+		`${GERMANY_SITE}/lokalgruppen`
+	),
+	...germanyItem(
+		'Unsere WhatsApp-Community',
+		'Tritt unserer Gruppe bei, um Dich mit anderen auszutauschen und Neuigkeiten mitzubekommen.',
+		'ZUR WHATSAPP-GRUPPE',
+		'https://chat.whatsapp.com/C7p9cdH41IE1MQwPHQLWCX?mode=ems_share_t'
+	),
+	...germanyItem(
+		'Wöchentliches virtuelles Treffen',
+		'Jeden Donnerstag ein Thema rund um KI. Jeder ist willkommen.',
+		'ZU DEN VERANSTALTUNGEN',
+		'https://lu.ma/pauseai_de'
+	)
+]
+
+const GERMANY_NON_VOLUNTEER_REST: EmailBlock[] = [
+	GERMANY_ACTIONS_BUTTON,
+	{ type: 'heading', text: 'Außerdem' },
+	{ type: 'paragraph', text: `**Onboarding-Call**\n${GERMANY_ONBOARDING_CALL_TEXT}` },
+	GERMANY_ONBOARDING_CALL_BUTTON,
+	...GERMANY_COMMUNITY
+]
+
+function germanyContent(firstName: string, body: EmailBlock[]): EmailContent {
+	const welcome = `Willkommen bei PauseAI Deutschland, ${firstName}!`
+	return {
+		subject: welcome,
+		greeting: [
+			{
+				type: 'paragraph',
+				text: `*Based in Berlin and English-speaking? [Click here](${GERMANY_SITE}/berlin).*`
+			},
+			{ type: 'heading', level: 1, text: welcome }
+		],
+		body,
+		signoff: [
+			{ type: 'paragraph', text: 'Fragen? Schreib uns an germany@pauseai.info.' },
+			{
+				type: 'paragraph',
+				text: 'PauseAI Deutschland\n[Impressum](https://pause-ai.de/impressum)  ·  [Datenschutz](https://pause-ai.de/datenschutz)'
+			},
+			{
+				type: 'paragraph',
+				text: 'Falls Du Dich nicht angemeldet hast, kannst Du diese Mail ignorieren.'
+			}
+		]
+	}
+}
+
+const germany: ChapterOverride = {
+	name: 'PauseAI Deutschland',
+	language: 'de',
+	content: {
+		none: (firstName) =>
+			germanyContent(firstName, [
+				{ type: 'heading', text: 'Danke' },
+				{
+					type: 'paragraph',
+					text: 'Wir freuen uns, dass Du Interesse an PauseAI hast und auf dem Laufenden bleiben willst.\nWir werden Dich in Zukunft auf große Aktionen und Events hinweisen.'
+				},
+				{ type: 'heading', text: 'Wenn Du aktiv werden willst' },
+				{ type: 'paragraph', text: GERMANY_ACTIONS_TEXT },
+				...GERMANY_NON_VOLUNTEER_REST
+			]),
+		'act-now': (firstName) =>
+			germanyContent(firstName, [
+				{ type: 'heading', text: 'Sofort loslegen' },
+				{ type: 'paragraph', text: `${GERMANY_ENGAGED}\n${GERMANY_ACTIONS_TEXT}` },
+				...GERMANY_NON_VOLUNTEER_REST
+			]),
+		volunteer: (firstName) =>
+			germanyContent(firstName, [
+				{ type: 'heading', text: 'Nächster Schritt: Call zum Kennenlernen' },
+				{ type: 'paragraph', text: `${GERMANY_ENGAGED} ${GERMANY_ONBOARDING_CALL_TEXT}` },
+				GERMANY_ONBOARDING_CALL_BUTTON,
+				{ type: 'heading', text: 'Außerdem' },
+				...GERMANY_COMMUNITY,
+				{
+					type: 'paragraph',
+					text: '**Auf eigene Faust**\nDu willst lieber selbst loslegen? Es gibt viele Möglichkeiten, direkt aktiv zu werden.'
+				},
+				GERMANY_ACTIONS_BUTTON
+			])
+	}
+}
+
 /** Countries are matched as the live script matches them, with `includes`. */
 function chapterFor(country: string | undefined): ChapterOverride | null {
 	if (country?.includes('United Kingdom')) return uk
 	if (country?.includes('Canada')) return canada
 	if (country?.includes('Sweden') && SWEDISH_COPY_APPROVED) return sweden
+	if (country?.includes('Germany')) return germany
 	return null
 }
 

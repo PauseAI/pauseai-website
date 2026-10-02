@@ -1,3 +1,4 @@
+import type { EmailBlock } from './blocks.js'
 import type { IntentBucket, OnboardingEmailLanguage } from './types.js'
 
 // The lines every onboarding email carries, whoever wrote the rest of it. composeBlocks()
@@ -8,8 +9,9 @@ import type { IntentBucket, OnboardingEmailLanguage } from './types.js'
 // A language only a chapter override is written in still needs an entry here.
 
 export type FixedCopy = {
-	/** The verification link and the "ignore this" line, straight after the greeting. */
-	confirm: (verificationLink: string) => string
+	/** What goes straight after the greeting: the verification link, as a link in a line or as
+	 *  a button under one, and normally the "ignore this" line. */
+	confirm: (verificationLink: string) => EmailBlock[]
 	/** What we will send them, just before the sign-off. Varies with the bucket in English
 	 *  because Irina's copy does; one line serves every bucket elsewhere. `subscribed` is the
 	 *  Members record's own "Email subscription" checkbox, forwarded by the Airtable automation
@@ -35,9 +37,15 @@ const ACT_NOW_SUBSCRIBED =
 const VOLUNTEER_SUBSCRIBED =
 	"You'll receive the PauseAI monthly update on upcoming actions and events. We may also occasionally send you a critical alert."
 
+function line(text: string): EmailBlock[] {
+	return [{ type: 'paragraph', text }]
+}
+
 const en: FixedCopy = {
 	confirm: (link) =>
-		`To confirm your email address, click [this link](${link}). If you didn't sign up, you can ignore this message.`,
+		line(
+			`To confirm your email address, click [this link](${link}). If you didn't sign up, you can ignore this message.`
+		),
 	newsletter: (bucket, subscribed) => {
 		if (subscribed === undefined) {
 			switch (bucket) {
@@ -67,7 +75,9 @@ const en: FixedCopy = {
 // sentence is new and needs a fluent reader.
 const es: FixedCopy = {
 	confirm: (link) =>
-		`Para verificar tu dirección de email, haz clic en [este link](${link}). Si no solicitaste unirte, puedes ignorar este mensaje.`,
+		line(
+			`Para verificar tu dirección de email, haz clic en [este link](${link}). Si no solicitaste unirte, puedes ignorar este mensaje.`
+		),
 	newsletter: (_bucket, subscribed) => {
 		if (subscribed === undefined)
 			return 'Si te suscribiste a nuestra lista de correo, recibirás el boletín mensual de PauseAI que te mantendrá al día sobre las próximas acciones y eventos. En cualquier caso, es posible que ocasionalmente te enviemos una alerta crítica.'
@@ -84,7 +94,9 @@ const es: FixedCopy = {
 // alternative, which is these readers getting the English email.
 const sv: FixedCopy = {
 	confirm: (link) =>
-		`Bekräfta din e-postadress genom att klicka på [den här länken](${link}). Om du inte har anmält dig kan du bortse från det här meddelandet.`,
+		line(
+			`Bekräfta din e-postadress genom att klicka på [den här länken](${link}). Om du inte har anmält dig kan du bortse från det här meddelandet.`
+		),
 	newsletter: (_bucket, subscribed) => {
 		if (subscribed === undefined)
 			return 'Om du har valt att prenumerera håller vi dig uppdaterad om nyheter, kampanjer och sätt att engagera dig. Även om du inte prenumererar kan vi ibland skicka ett viktigt och brådskande meddelande.'
@@ -96,4 +108,18 @@ const sv: FixedCopy = {
 		'Om du har valt att prenumerera håller vi dig uppdaterad. Även om du inte prenumererar kan vi ibland skicka ett viktigt och brådskande meddelande.'
 }
 
-export const FIXED_COPY: Record<OnboardingEmailLanguage, FixedCopy> = { en, es, sv }
+// PauseAI Deutschland's own wording, not ours. Their emails end on the "ignore this" sentence,
+// so it is in their sign-off in chapterOverrides.ts rather than here: another German-language
+// chapter would have to carry it too.
+const DE_NEWSLETTER =
+	'**Newsletter**\nWenn Du bei der Anmeldung den Newsletter gewählt hast, bekommst Du etwa einmal im Monat Neuigkeiten zu KI-Risiken und unseren Aktionen. In dringenden Fällen schreiben wir Dir auch ohne Newsletter.'
+const de: FixedCopy = {
+	confirm: (link) => [
+		...line('Bitte bestätige zuerst Deine E-Mail-Adresse:'),
+		{ type: 'button', text: 'E-MAIL BESTÄTIGEN', url: link }
+	],
+	newsletter: () => DE_NEWSLETTER,
+	newsletterInOwnWords: DE_NEWSLETTER
+}
+
+export const FIXED_COPY: Record<OnboardingEmailLanguage, FixedCopy> = { en, es, sv, de }

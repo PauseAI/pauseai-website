@@ -3,8 +3,8 @@ import type { ChapterBlockData } from './types.js'
 
 // Stands in for the live National Groups table: one chapter with links, one without.
 const CHAPTERS: Record<string, ChapterBlockData> = {
-	germany: {
-		name: 'Germany',
+	netherlands: {
+		name: 'Netherlands',
 		links: [{ label: 'WhatsApp', url: 'https://chat.whatsapp.com/example' }]
 	},
 	belgium: { name: 'Belgium', links: [] },
@@ -35,7 +35,20 @@ const { renderOnboardingEmail } = await import('./index.js')
 
 const RECORD_ID = 'recTest1234567890'
 const INTENTS = ['None', 'Keep informed', 'Act now', 'Volunteer', 'Lead', '', 'Something new']
-const COUNTRIES = ['', 'Germany', 'Belgium', 'Spain', 'Mexico', 'United Kingdom', 'United States']
+const COUNTRIES = [
+	'',
+	'Netherlands',
+	'Belgium',
+	'Spain',
+	'Mexico',
+	'United Kingdom',
+	'United States',
+	'Sweden',
+	'Germany'
+]
+// The promise of an occasional message whatever they opted in to, in each language it is made in.
+const ALERT_PROMISE =
+	/critical alert|alerta crítica|viktigt och brådskande meddelande|viktiga meddelanden|In dringenden Fällen/
 
 function render(country: string, intent: string, firstName = 'Alex') {
 	return renderOnboardingEmail({ firstName, country, intent, airtable_id: RECORD_ID })
@@ -71,19 +84,19 @@ describe('renderOnboardingEmail', () => {
 				const where = `${country || '(none)'} / ${intent || '(empty)'}`
 				expect(email.html, where).toContain(`verificationKey=${RECORD_ID}`)
 				expect(email.text, where).toContain(`verificationKey=${RECORD_ID}`)
-				expect(email.text, where).toMatch(/critical alert|alerta crítica/)
+				expect(email.text, where).toMatch(ALERT_PROMISE)
 			}
 		}
 	})
 
 	it('promises chapter contact to volunteers only', async () => {
-		const volunteer = await render('Germany', 'Volunteer')
-		expect(volunteer.text).toContain('PauseAI Germany will be in touch')
+		const volunteer = await render('Netherlands', 'Volunteer')
+		expect(volunteer.text).toContain('PauseAI Netherlands will be in touch')
 		expect(volunteer.text).toContain('https://chat.whatsapp.com/example')
 
-		const nonVolunteer = await render('Germany', 'Act now')
+		const nonVolunteer = await render('Netherlands', 'Act now')
 		expect(nonVolunteer.text).not.toContain('will be in touch')
-		expect(nonVolunteer.text).toContain("There's a PauseAI chapter in Germany.")
+		expect(nonVolunteer.text).toContain("There's a PauseAI chapter in Netherlands.")
 		expect(nonVolunteer.text).toContain('https://chat.whatsapp.com/example')
 
 		const noChapter = await render('', 'Lead')
@@ -237,6 +250,37 @@ describe('renderOnboardingEmail', () => {
 		const email = await render('Sweden', 'Act now')
 		expect(email.text).toContain('Whatsapp community')
 		expect(email.text).not.toContain('Kalendern')
+	})
+
+	it('sends PauseAI Deutschland their own email, in German, one per intent', async () => {
+		const none = await render('Germany', 'None')
+		expect(none.text).toContain('Wenn Du aktiv werden willst')
+		const actNow = await render('Germany', 'Act now')
+		expect(actNow.text).toContain('Sofort loslegen')
+		const volunteers = [await render('Germany', 'Volunteer'), await render('Germany', 'Lead')]
+		for (const volunteer of volunteers) {
+			expect(volunteer.text).toContain('Nächster Schritt: Call zum Kennenlernen')
+			expect(volunteer.text).toContain('Auf eigene Faust')
+		}
+		for (const email of [none, actNow, ...volunteers]) {
+			expect(email.subject).toBe('Willkommen bei PauseAI Deutschland, Alex!')
+			expect(email.html).toContain('<html lang="de">')
+			expect(email.text).toContain('In dringenden Fällen schreiben wir Dir auch ohne Newsletter.')
+			expect(email.text).toContain('kannst Du diese Mail ignorieren.')
+			expect(email.text).not.toMatch(/critical alert|If you opted in/)
+		}
+	})
+
+	it('puts the German verification link on a button under the confirm line', async () => {
+		const email = await render('Germany', 'Act now')
+		expect(email.text).toMatch(
+			new RegExp(
+				`Bitte bestätige zuerst Deine E-Mail-Adresse:\\s+\\[E-MAIL BESTÄTIGEN\\]\\(\\S+verificationKey=${RECORD_ID}\\)`
+			)
+		)
+		expect(email.html).toMatch(
+			new RegExp(`verificationKey=${RECORD_ID}"[^>]*>E-MAIL BESTÄTIGEN</a>`)
+		)
 	})
 
 	it("does not let a signup's name render as a link", async () => {
