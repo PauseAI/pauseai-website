@@ -7,16 +7,30 @@ description: What the Australian chapter of PauseAI has been doing and needs hel
 Metrics since we founded: 📧147 AI decisionmaker emails, meetings with 👥22 of them, 📅20 events with 231 attendees.
 Tell us [what you did](mailto:australia@pauseai.info?subject=Aussie%20Did%20a%20Thing), or [what you have cooking](mailto:australia@pauseai.info?subject=Things%20Cooking) so we can support you!
 
+### 2026 September
+- 📧# AI decisionmaker emails, meetings with 👥# of them, 📅# events with ## attendees.
+- We held [Australia's largest protest on AI x-risk](https://www.instagram.com/p/DdL2EPxE4Zk/?img_index=1).
+
+<div style="display:flex; flex-wrap:wrap; gap:0.5rem; max-width:90%; margin:1rem auto;">
+<div style="flex:1; min-width:200px;">
+
+![20260908_Protest0_Cropped.JPG](/australia/20260908_Protest0_Cropped.JPG)
+
+</div>
+</div>
+
+- We drafted questions for Senate Estimates about AI loss of control.
+- We presented at the [AI Safety ANZ panel on the Joint Select Committee on AI](https://luma.com/b2tipeah?tk=xwvWYj).
+- Huxley organised the first meeting of our Brisbane group.
+- We flyered outside BSides conference in Canberra.
+- we had a stall at the Kambah Sustainability Festival. Of the 20 people who chatted with us, 7 had heard of AI x-risk and were concerned, 13 had not heard and quickly became concerned. We also got invited to another 3 events!
+
+
 ### 2026 August
 
-Cooking
-- Sunyal is attending Government Cyber Security Showcase Western Australia 2026 as a representative of PauseAI
-- We are [staging an AI race](https://luma.com/4jqbp20b) for the Australia AI Summit
-- We are preparing a submission to the consultation on [Artificial intelligence and data centres](https://www.aph.gov.au/Parliamentary_Business/Committees/Senate/Environment_and_Communications/AIdatacentres48P) (due 1 September, make sure to submit your own!)
-
-Done
 - 📧8 AI decisionmaker emails, meetings with 👥2 of them, 📅4 events with 45 attendees.
-- ⭐Our correspondence for Quarterly Essay 102: The God We Made got accepted! Look out for it in the next edition.
+- We made a submission to the consultation on [Artificial intelligence and data centres](https://www.aph.gov.au/Parliamentary_Business/Committees/Senate/Environment_and_Communications/AIdatacentres48P)
+- ⭐Our correspondence for [Quarterly Essay 102: The God We Made](https://www.quarterlyessay.com.au/qe/102/genesis/3397) got accepted! Look out for it in [issue 103](https://www.quarterlyessay.com.au/qe/103/time-of-monsters/3426).
 
 ### 2026 July
 
