@@ -542,7 +542,7 @@ const germany: ChapterOverride = {
 				{ type: 'heading', text: 'Danke' },
 				{
 					type: 'paragraph',
-					text: 'Wir freuen uns, dass Du Interesse an PauseAI hast und auf dem Laufenden bleiben willst.\nWir werden Dich in Zukunft auf große Aktionen und Events hinweisen.'
+					text: 'Wir freuen uns, dass Du Interesse an PauseAI hast und auf dem Laufenden bleiben willst.\nWenn Du bei der Anmeldung den Newsletter gewählt hast, werden wir Dich in Zukunft auf große Aktionen und Events hinweisen.'
 				},
 				{ type: 'heading', text: 'Wenn Du aktiv werden willst' },
 				{ type: 'paragraph', text: GERMANY_ACTIONS_TEXT },
