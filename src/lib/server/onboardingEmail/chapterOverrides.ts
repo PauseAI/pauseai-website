@@ -451,59 +451,52 @@ const GERMANY_ACTIONS_TEXT =
 const GERMANY_ONBOARDING_CALL_TEXT =
 	'Buch Dir am besten hier einen Termin. Dort können wir gemeinsam besprechen, was wir als PauseAI gerade alles machen, wie Du am besten mithelfen kannst und Du kannst Fragen stellen.'
 
-/** A titled item with its button, the unit the "Außerdem" list is made of. */
-function germanyItem(title: string, text: string, label: string, url: string): EmailBlock[] {
-	return [
-		{ type: 'paragraph', text: `**${title}**\n${text}` },
-		{ type: 'button', text: label, url }
-	]
-}
+const GERMANY_ACTIONS_URL = `${GERMANY_SITE}/#was-du-tun-kannst`
+const GERMANY_ONBOARDING_CALL_URL = `${GERMANY_SITE}/mitmachen`
 
-const GERMANY_ACTIONS_BUTTON: EmailBlock = {
-	type: 'button',
-	text: 'WAS DU TUN KANNST',
-	url: `${GERMANY_SITE}/#was-du-tun-kannst`
-}
-
-const GERMANY_ONBOARDING_CALL_BUTTON: EmailBlock = {
-	type: 'button',
-	text: 'TERMIN AUSSUCHEN',
-	url: `${GERMANY_SITE}/mitmachen`
+/** One of the "Außerdem" items: a bold title, the text, and its link on a line of its own. Only
+ *  each email's main step is a button, so the confirm button is not lost among a row of them. */
+function germanyItem(title: string, text: string, label: string, url: string): EmailBlock {
+	return { type: 'paragraph', text: `**${title}**\n${text}\n[${label}](${url})` }
 }
 
 /** The community items every German email lists, in the chapter's order. */
 const GERMANY_COMMUNITY: EmailBlock[] = [
-	...germanyItem(
+	germanyItem(
 		'Unsere Discord-Community',
 		'Wir kommunizieren und arbeiten hauptsächlich über Discord. Komm rein und sag Hallo.',
-		'DISCORD BEITRETEN',
+		'Discord beitreten',
 		'https://discord.gg/VuVVyJQ37M'
 	),
-	...germanyItem(
+	germanyItem(
 		'Lokalgruppen',
 		'Werde Teil einer Lokalgruppe in Deiner Nähe. Gemeinsam organisieren wir Infoabende, Stammtische und Aktionen vor Ort.',
-		'LOKALGRUPPEN FINDEN',
+		'Lokalgruppen finden',
 		`${GERMANY_SITE}/lokalgruppen`
 	),
-	...germanyItem(
+	germanyItem(
 		'Unsere WhatsApp-Community',
 		'Tritt unserer Gruppe bei, um Dich mit anderen auszutauschen und Neuigkeiten mitzubekommen.',
-		'ZUR WHATSAPP-GRUPPE',
+		'Zur WhatsApp-Gruppe',
 		'https://chat.whatsapp.com/C7p9cdH41IE1MQwPHQLWCX?mode=ems_share_t'
 	),
-	...germanyItem(
+	germanyItem(
 		'Wöchentliches virtuelles Treffen',
 		'Jeden Donnerstag ein Thema rund um KI. Jeder ist willkommen.',
-		'ZU DEN VERANSTALTUNGEN',
+		'Zu den Veranstaltungen',
 		'https://lu.ma/pauseai_de'
 	)
 ]
 
 const GERMANY_NON_VOLUNTEER_REST: EmailBlock[] = [
-	GERMANY_ACTIONS_BUTTON,
+	{ type: 'button', text: 'WAS DU TUN KANNST', url: GERMANY_ACTIONS_URL },
 	{ type: 'heading', text: 'Außerdem' },
-	{ type: 'paragraph', text: `**Onboarding-Call**\n${GERMANY_ONBOARDING_CALL_TEXT}` },
-	GERMANY_ONBOARDING_CALL_BUTTON,
+	germanyItem(
+		'Onboarding-Call',
+		GERMANY_ONBOARDING_CALL_TEXT,
+		'Termin aussuchen',
+		GERMANY_ONBOARDING_CALL_URL
+	),
 	...GERMANY_COMMUNITY
 ]
 
@@ -558,14 +551,15 @@ const germany: ChapterOverride = {
 			germanyContent(firstName, [
 				{ type: 'heading', text: 'Nächster Schritt: Call zum Kennenlernen' },
 				{ type: 'paragraph', text: `${GERMANY_ENGAGED} ${GERMANY_ONBOARDING_CALL_TEXT}` },
-				GERMANY_ONBOARDING_CALL_BUTTON,
+				{ type: 'button', text: 'TERMIN AUSSUCHEN', url: GERMANY_ONBOARDING_CALL_URL },
 				{ type: 'heading', text: 'Außerdem' },
 				...GERMANY_COMMUNITY,
-				{
-					type: 'paragraph',
-					text: '**Auf eigene Faust**\nDu willst lieber selbst loslegen? Es gibt viele Möglichkeiten, direkt aktiv zu werden.'
-				},
-				GERMANY_ACTIONS_BUTTON
+				germanyItem(
+					'Auf eigene Faust',
+					'Du willst lieber selbst loslegen? Es gibt viele Möglichkeiten, direkt aktiv zu werden.',
+					'Was Du tun kannst',
+					GERMANY_ACTIONS_URL
+				)
 			])
 	}
 }
