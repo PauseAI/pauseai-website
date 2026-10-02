@@ -517,7 +517,7 @@ function germanyContent(firstName: string, body: EmailBlock[]): EmailContent {
 			{ type: 'signoff', lines: ['Viele Grüße', 'PauseAI Deutschland'] },
 			{
 				type: 'paragraph',
-				text: '[Impressum](https://pause-ai.de/impressum)'
+				text: '[Impressum](https://pause-ai.de/impressum)  ·  [Datenschutz](https://pause-ai.de/datenschutz)'
 			},
 			{
 				type: 'paragraph',
