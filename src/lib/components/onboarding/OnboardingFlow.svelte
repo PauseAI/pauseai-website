@@ -474,7 +474,9 @@
 						// this only fires on a real create.
 						if (!recordId) onSignup?.()
 						recordId = result.data.recordId
-						recordToken = typeof result.data.recordToken === 'string' ? result.data.recordToken : ''
+						// Only a create or a proven update returns one; otherwise the
+						// token this tab holds is still the one for this row.
+						if (typeof result.data.recordToken === 'string') recordToken = result.data.recordToken
 						rowIntent = postedIntent(formData)
 						resumed = false
 						saveSignupFromPost(formData, recordId, recordToken)

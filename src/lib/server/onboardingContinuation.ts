@@ -102,22 +102,26 @@ export async function issueContinuationToken(
 	return secret ? mintToken(secret, recordId, now) : undefined
 }
 
-// Whether an update to `recordId` may go ahead. Until ONBOARDING_CONTINUATION_ENFORCE
-// is "1" a bad token is only reported, because a session that started before
-// tokens existed holds an id without one for as long as the browser keeps it.
-export async function mayContinue(
+// What an update to `recordId` may do: 'proven' when its token is valid,
+// 'allowed' when it goes ahead without one, 'refused' otherwise. Until
+// ONBOARDING_CONTINUATION_ENFORCE is "1" a bad token is only reported, because a
+// session that started before tokens existed holds an id without one for as long
+// as the browser keeps it. Only a 'proven' update may be handed a fresh token:
+// minting for an 'allowed' one would give anyone holding a bare id a token that
+// keeps working once enforcement is on.
+export async function checkContinuation(
 	recordId: string,
 	token: string,
 	now = Date.now()
-): Promise<boolean> {
+): Promise<'proven' | 'allowed' | 'refused'> {
 	const secret = getSecret()
-	if (!secret) return true
+	if (!secret) return 'allowed'
 	const verdict = await verifyToken(secret, recordId, token, now)
-	if (verdict === 'valid') return true
+	if (verdict === 'valid') return 'proven'
 	const enforced = env.ONBOARDING_CONTINUATION_ENFORCE === '1'
 	// Never the token or the secret: either would let the reader forge or replay.
 	const context = { check: 'onboarding-continuation', verdict, enforced, recordId }
 	console.warn('[onboarding] update without a valid continuation token', context)
 	await reportError(new Error(`Onboarding continuation token ${verdict}`), context)
-	return !enforced
+	return enforced ? 'refused' : 'allowed'
 }

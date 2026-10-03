@@ -155,8 +155,11 @@ minting (`SIGNUP_MAX_AGE_MS` in `signupResume.ts`, so it lasts as long as the
 stored copy), and `<signature>` is the unpadded base64url HMAC-SHA256, keyed by
 `ONBOARDING_CONTINUATION_SECRET`, of
 `onboarding-continuation:v1:<recordId>:<expiry>`. The action mints one with the
-id on a create and again on every successful update, so a flow in progress never
-runs out, as the stored copy's age is reset on every post.
+id on a create, and a fresh one on every update whose posted token was valid, so
+a flow in progress never runs out, as the stored copy's age is reset on every
+post. An update that went through without a valid token gets none back, and the
+form keeps whatever token it held: handing one out there would give anyone
+holding a bare id a genuine token that keeps working once enforcement is on.
 
 On every update the action checks the posted token against the posted
 `record_id`. What a missing, malformed, expired or wrong token does depends on
@@ -165,7 +168,8 @@ On every update the action checks the posted token against the posted
 - not `1`: the update goes ahead, and the action reports it to Sentry
   (`Onboarding continuation token <verdict>`, with the record id, never the
   token). This is the rollout state: a session that began before tokens existed
-  holds an id without one for up to 24 hours.
+  holds an id without one for up to 24 hours, and never gains one, so once
+  enforcement is on its next update gets the 410 and it starts again.
 - `1`: the update is refused with the same 410 as a deleted row, so the form
   forgets the id and returns to step 1. It never creates a row instead, which
   would bring back the duplicates the id exists to prevent.
@@ -175,8 +179,9 @@ nothing, whatever the switch says, and logs that once per cold start: a missing
 secret must not break the volunteer step for everyone. The secret is only needed
 where the form writes (Production); deploy previews run in stub mode without it.
 
-Rollout: set the secret, deploy, watch the reports fall to zero, then after 24
-hours set `ONBOARDING_CONTINUATION_ENFORCE=1` and redeploy.
+Rollout: set the secret, deploy, watch the reports fall off as sessions from
+before the deploy expire, then after 24 hours set
+`ONBOARDING_CONTINUATION_ENFORCE=1` and redeploy.
 
 What the token does not cover: `/api/verify`, which ticks `Verified email` for
 whoever opens a link carrying the record id; the Stripe `client_reference_id`;

@@ -52,7 +52,7 @@ describe('onboarding submit: continuation token', () => {
 		vi.spyOn(console, 'warn').mockImplementation(() => {})
 	})
 
-	it('returns a token with the id a create hands out, and accepts it on the update', async () => {
+	it('returns a token with a create, and a fresh one with an update that posts it', async () => {
 		const created = await submit(signup)
 		expect(created).toMatchObject({ success: true, recordId: 'recAda' })
 		expect(created.recordToken).toMatch(/^v1\./)
@@ -65,12 +65,22 @@ describe('onboarding submit: continuation token', () => {
 		expect(reportError).not.toHaveBeenCalled()
 	})
 
-	it('reports an update without a token but still writes it while not enforcing', async () => {
+	it('writes and reports an update without a valid token while not enforcing, issuing none', async () => {
+		for (const token of [undefined, 'v1.9999999999.' + 'A'.repeat(43)]) {
+			const updated = await submit(update(token))
+			expect(updated).toMatchObject({ success: true, recordId: 'recAda' })
+			expect(updated.recordToken).toBeUndefined()
+		}
+		expect(updateRecord).toHaveBeenCalledTimes(2)
+		expect(reportError).toHaveBeenCalledTimes(2)
+	})
+
+	it('issues no token on an update when the secret is missing', async () => {
+		delete env.ONBOARDING_CONTINUATION_SECRET
+		vi.spyOn(console, 'error').mockImplementation(() => {})
 		const updated = await submit(update())
 		expect(updated).toMatchObject({ success: true, recordId: 'recAda' })
-		expect(updated.recordToken).toMatch(/^v1\./)
-		expect(updateRecord).toHaveBeenCalledOnce()
-		expect(reportError).toHaveBeenCalledOnce()
+		expect(updated.recordToken).toBeUndefined()
 	})
 
 	it('refuses an update with a missing or forged token as gone when enforcing, creating nothing', async () => {

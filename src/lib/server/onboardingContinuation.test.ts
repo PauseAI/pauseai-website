@@ -6,7 +6,7 @@ const reportError = vi.fn<(error: unknown, context?: Record<string, unknown>) =>
 vi.mock('$env/dynamic/private', () => ({ env }))
 vi.mock('$lib/server/sentry', () => ({ reportError }))
 
-const { issueContinuationToken, mayContinue, mintToken, verifyToken } =
+const { checkContinuation, issueContinuationToken, mintToken, verifyToken } =
 	await import('./onboardingContinuation.js')
 
 const SECRET = 'test-secret'
@@ -75,7 +75,7 @@ describe('verifyToken', () => {
 	})
 })
 
-describe('issueContinuationToken and mayContinue', () => {
+describe('issueContinuationToken and checkContinuation', () => {
 	beforeEach(() => {
 		for (const key of Object.keys(env)) delete env[key]
 		reportError.mockClear()
@@ -86,8 +86,8 @@ describe('issueContinuationToken and mayContinue', () => {
 	it('issues nothing and lets every update through without a secret, even when enforcing', async () => {
 		env.ONBOARDING_CONTINUATION_ENFORCE = '1'
 		expect(await issueContinuationToken('rec1', NOW)).toBeUndefined()
-		expect(await mayContinue('rec1', '', NOW)).toBe(true)
-		expect(await mayContinue('rec1', 'garbage', NOW)).toBe(true)
+		expect(await checkContinuation('rec1', '', NOW)).toBe('allowed')
+		expect(await checkContinuation('rec1', 'garbage', NOW)).toBe('allowed')
 		expect(reportError).not.toHaveBeenCalled()
 	})
 
@@ -96,14 +96,14 @@ describe('issueContinuationToken and mayContinue', () => {
 		env.ONBOARDING_CONTINUATION_ENFORCE = '1'
 		const token = await issueContinuationToken('rec1', NOW)
 		expect(token).toBeDefined()
-		expect(await mayContinue('rec1', token ?? '', NOW)).toBe(true)
+		expect(await checkContinuation('rec1', token ?? '', NOW)).toBe('proven')
 		expect(reportError).not.toHaveBeenCalled()
 	})
 
 	it('reports but allows a bad token while not enforcing', async () => {
 		env.ONBOARDING_CONTINUATION_SECRET = SECRET
 		env.ONBOARDING_CONTINUATION_ENFORCE = 'true'
-		expect(await mayContinue('rec1', '', NOW)).toBe(true)
+		expect(await checkContinuation('rec1', '', NOW)).toBe('allowed')
 		expect(reportError).toHaveBeenCalledOnce()
 		const [error, context] = reportError.mock.calls[0]
 		expect(String(error)).toContain('Onboarding continuation token missing')
@@ -119,7 +119,7 @@ describe('issueContinuationToken and mayContinue', () => {
 		env.ONBOARDING_CONTINUATION_SECRET = SECRET
 		env.ONBOARDING_CONTINUATION_ENFORCE = '1'
 		const token = await mintToken(SECRET, 'rec2', NOW)
-		expect(await mayContinue('rec1', token, NOW)).toBe(false)
+		expect(await checkContinuation('rec1', token, NOW)).toBe('refused')
 		const reported = JSON.stringify(reportError.mock.calls[0][1])
 		expect(reported).toContain('"verdict":"invalid"')
 		expect(reported).not.toContain(token)

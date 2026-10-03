@@ -16,7 +16,7 @@ import type { Actions, PageServerLoad } from './$types'
 import type { NationalGroupsApiResponse } from '$api/national-groups/+server.js'
 import { createRecord, updateRecord } from '$lib/airtable'
 import { isOnboardingLive } from '$lib/server/onboarding'
-import { issueContinuationToken, mayContinue } from '$lib/server/onboardingContinuation'
+import { checkContinuation, issueContinuationToken } from '$lib/server/onboardingContinuation'
 import { recordStubSubmission } from '$lib/server/onboarding-stub'
 import { subscribeToSubstackNewsletter } from '$lib/server/substack'
 import { checkNotSpam } from '$lib/server/turnstile-verify'
@@ -341,14 +341,18 @@ export const actions: Actions = {
 			}
 		}
 
+		const continuation = existingRecordId
+			? await checkContinuation(existingRecordId, getString(data, 'record_token'))
+			: null
 		// Refused as if the row were gone, never by creating one, which would bring
 		// back the duplicates the id exists to prevent.
-		if (
-			existingRecordId &&
-			!(await mayContinue(existingRecordId, getString(data, 'record_token')))
-		) {
-			return rowGone()
-		}
+		if (continuation === 'refused') return rowGone()
+		// A create, or an update that proved itself. Re-issued on such an update so
+		// a flow in progress outlives the first token, as the browser's saved copy
+		// is refreshed on every post. Any other update gets none back, and the form
+		// keeps what it had.
+		const issueToken = (recordId: string) =>
+			!continuation || continuation === 'proven' ? issueContinuationToken(recordId) : undefined
 
 		if (live) {
 			let recordId: string | undefined = existingRecordId || undefined
@@ -372,9 +376,7 @@ export const actions: Actions = {
 			if (newsletter && isSignup) {
 				await subscribeToSubstackNewsletter(email)
 			}
-			// Re-issued on every update too, so a flow in progress outlives the first
-			// token the way the browser's saved copy is refreshed on every post.
-			return { success: true, recordId, recordToken: await issueContinuationToken(recordId) }
+			return { success: true, recordId, recordToken: await issueToken(recordId) }
 		}
 
 		// Recorded only for stub inspection, so it is resolved here rather than on
@@ -402,7 +404,7 @@ export const actions: Actions = {
 		return {
 			success: true,
 			recordId,
-			recordToken: await issueContinuationToken(recordId),
+			recordToken: await issueToken(recordId),
 			submission
 		}
 	}
