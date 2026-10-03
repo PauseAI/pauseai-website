@@ -49,45 +49,73 @@
 	}
 </script>
 
-{#if label}
-	<svelte:element this={`h${level - 1}`} class="section-label">{label}</svelte:element>
-{/if}
-<div
-	class="chapter-question"
-	role="radiogroup"
-	aria-required="true"
-	aria-labelledby="{id}-heading"
-	aria-describedby="{id}-body"
->
-	<svelte:element this={`h${level}`} id="{id}-heading" class="chapter-heading"
-		>{question.heading}</svelte:element
-	>
-	<p id="{id}-body">{question.body}</p>
-	<div class="chapter-options">
-		{#each options as option, index (option.value)}
-			<button
-				type="button"
-				class="chapter-option"
-				class:selected={answer === option.value}
-				role="radio"
-				aria-checked={answer === option.value}
-				tabindex={answer === option.value || (!answer && index === 0) ? 0 : -1}
-				bind:this={buttons[index]}
-				onclick={() => (answer = option.value)}
-				onkeydown={(event) => onKeydown(event, index)}
+<!-- Keyed on the heading so a new variant (another country) reveals itself too.
+     Focus is never moved here: the question sits in the reading order where it
+     appears, after the fields the person has just filled in. -->
+{#key question.heading}
+	<div class="reveal">
+		{#if label}
+			<svelte:element this={`h${level - 1}`} class="section-label">{label}</svelte:element>
+		{/if}
+		<div
+			class="chapter-question"
+			role="radiogroup"
+			aria-required="true"
+			aria-labelledby="{id}-heading"
+			aria-describedby="{id}-body"
+		>
+			<svelte:element this={`h${level}`} id="{id}-heading" class="chapter-heading"
+				>{question.heading}</svelte:element
 			>
-				<span class="radio-box" aria-hidden="true"><span class="radio-dot"></span></span>
-				<span>{option.text}</span>
-			</button>
-		{/each}
+			<p id="{id}-body">{question.body}</p>
+			<div class="chapter-options">
+				{#each options as option, index (option.value)}
+					<button
+						type="button"
+						class="chapter-option"
+						class:selected={answer === option.value}
+						role="radio"
+						aria-checked={answer === option.value}
+						tabindex={answer === option.value || (!answer && index === 0) ? 0 : -1}
+						bind:this={buttons[index]}
+						onclick={() => (answer = option.value)}
+						onkeydown={(event) => onKeydown(event, index)}
+					>
+						<span class="radio-box" aria-hidden="true"><span class="radio-dot"></span></span>
+						<span>{option.text}</span>
+					</button>
+				{/each}
+			</div>
+		</div>
 	</div>
-</div>
+{/key}
 {#if answer && postAnswer}
 	<input type="hidden" name="chapter_share" value={answer} />
 	<input type="hidden" name="chapter_share_wording" value={chapterShareWording(question, answer)} />
 {/if}
 
 <style>
+	.reveal {
+		animation: reveal 0.25s ease-out;
+	}
+
+	@keyframes reveal {
+		from {
+			opacity: 0;
+			transform: translateY(-0.4rem);
+		}
+		to {
+			opacity: 1;
+			transform: none;
+		}
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.reveal {
+			animation: none;
+		}
+	}
+
 	/* As OnboardingFlow's section labels. */
 	.section-label {
 		font-family: var(--font-body);

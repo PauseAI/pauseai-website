@@ -233,18 +233,6 @@
 				/>
 			</div>
 
-			{#if chapterQ}
-				<ChapterShareQuestion
-					question={chapterQ}
-					level={2}
-					bind:answer={
-						() => chapterAnswer,
-						(answer: ChapterAnswer | null) =>
-							(chapterChoice = answer ? { country: fields.country, answer } : null)
-					}
-				/>
-			{/if}
-
 			<div class="field">
 				<label class="field-label" for="sub-city">City *</label>
 				<input
@@ -257,6 +245,18 @@
 					bind:value={fields.city}
 				/>
 			</div>
+
+			{#if chapterQ}
+				<ChapterShareQuestion
+					question={chapterQ}
+					level={2}
+					bind:answer={
+						() => chapterAnswer,
+						(answer: ChapterAnswer | null) =>
+							(chapterChoice = answer ? { country: fields.country, answer } : null)
+					}
+				/>
+			{/if}
 
 			<label class="opt-in">
 				<input type="checkbox" name="newsletter" bind:checked={fields.wantsSubstack} />

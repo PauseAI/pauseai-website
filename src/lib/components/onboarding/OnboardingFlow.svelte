@@ -783,9 +783,6 @@
 					<label class="field-label" for="ob-country">{msgs.onboarding_field_country}</label>
 					{@render countrySelect('ob-country')}
 				</div>
-				<!-- Asked here, where the country is picked, so step 2 stays short; step 2
-				     posts the answer and its wording with the create. -->
-				{@render chapterQuestionField(false, 3, msgs.onboarding_chapter_section_label)}
 				<div class="field">
 					<label class="field-label" for="ob-city">{msgs.onboarding_field_city}</label>
 					<input
@@ -815,6 +812,9 @@
 				{#if hasUniversities(basics.country)}
 					{@render universityField('ob-university')}
 				{/if}
+				<!-- Asked on step 1, after its fields, so step 2 stays short; step 2 posts
+				     the answer and its wording with the create. -->
+				{@render chapterQuestionField(false, 3, msgs.onboarding_chapter_section_label)}
 				<!-- Step 1 gates on native validation (pattern, optional), like the
 				     name/email/city fields above it, so the browser can explain an
 				     invalid postcode on submit. The chapter question has no native

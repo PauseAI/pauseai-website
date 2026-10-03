@@ -328,7 +328,7 @@ allowlists, and the live/stub switch only need to be maintained in one place.
 ```mermaid
 stateDiagram-v2
     [*] --> Step1
-    Step1: Step 1 — Basic info<br/>(name, email, country, chapter question,<br/>city, optional UK postcode and university<br/>when country = United Kingdom)
+    Step1: Step 1 — Basic info<br/>(name, email, country, city,<br/>optional UK postcode and university<br/>when country = United Kingdom,<br/>then the chapter question)
     Step1 --> Step2: Continue (client-side, mode=contact)
     Step1 --> Browse: "I just want to take action now" (mode=browse)
     Browse: Browse mode<br/>(act-now, no signup)<br/>includes ActionCards
@@ -475,10 +475,14 @@ language shown. A No is stored with its wording too, as evidence of what was
 declined. Both are written together, in the same Airtable call as the rest of
 the row, and only from an explicit answer.
 
-Every form that creates a row asks the same question, with no default, right
-after the country field: step 1 of `/join`, the browse signup card, and
-`/subscribe` (whose Yes also covers chapter email, since nothing else on that
-form names the chapter as a sender). `ChapterShareQuestion.svelte` renders it
+Every form that creates a row asks the same question, with no default, after
+its other fields and directly above its submit button, once a country from the
+list is picked: step 1 of `/join`, the browse signup card, and `/subscribe`
+(whose Yes also covers chapter email, since nothing else on that form names the
+chapter as a sender). It fades and slides in when it appears or its variant
+changes with the country, with no animation under `prefers-reduced-motion`.
+Focus is never moved into it; it appears in the reading order after the fields
+just filled in. `ChapterShareQuestion.svelte` renders it
 and `chapterShare.ts` builds its text. The form that shows it posts
 `chapter_share` (`yes` or `no`) and `chapter_share_wording`, except on `/join`:
 step 1 posts nothing, so step 2, which creates the row, posts the step-1 answer
