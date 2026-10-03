@@ -7,11 +7,9 @@
 // site keeps its own copy.
 
 import { INTENTS, type Intent } from './options'
+import { SIGNUP_MAX_AGE_MS } from './signupMaxAge'
 
 const STORAGE_KEY = 'pauseai-onboarding-signup'
-// Also the lifetime of the server's continuation token, so a resumed id still
-// carries a token the server accepts.
-export const SIGNUP_MAX_AGE_MS = 24 * 60 * 60 * 1000
 
 export type SavedSignup = {
 	recordId: string
@@ -72,6 +70,18 @@ export function saveSignupFromPost(
 		keepInformed: posted(formData, 'keep_informed') === 'on',
 		intent: postedIntent(formData)
 	})
+}
+
+// Where the form goes after a 410, which drops the id: the next post creates a
+// row, and that needs the privacy consent again. The browse form posts its own
+// and can retry; the contact flow collects it on step 1-2; a /subscribe
+// continuation hides it, so it hands back to the subscribe form.
+export function afterRecordGone(
+	mode: 'contact' | 'browse',
+	isContinuation: boolean
+): 'retry' | 'step-1' | 'signup-form' {
+	if (mode === 'browse') return 'retry'
+	return isContinuation ? 'signup-form' : 'step-1'
 }
 
 export function forgetSignup(): void {

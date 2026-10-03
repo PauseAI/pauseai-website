@@ -347,12 +347,9 @@ export const actions: Actions = {
 		// Refused as if the row were gone, never by creating one, which would bring
 		// back the duplicates the id exists to prevent.
 		if (continuation === 'refused') return rowGone()
-		// A create, or an update that proved itself. Re-issued on such an update so
-		// a flow in progress outlives the first token, as the browser's saved copy
-		// is refreshed on every post. Any other update gets none back, and the form
-		// keeps what it had.
+		// Which posts earn a token: see checkContinuation.
 		const issueToken = (recordId: string) =>
-			!continuation || continuation === 'proven' ? issueContinuationToken(recordId) : undefined
+			continuation !== 'allowed' ? issueContinuationToken(recordId) : undefined
 
 		if (live) {
 			let recordId: string | undefined = existingRecordId || undefined

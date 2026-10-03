@@ -22,6 +22,7 @@
 	import Stepper from './Stepper.svelte'
 	import { getMessages } from './i18n.svelte'
 	import {
+		afterRecordGone,
 		forgetSignup,
 		loadSignup,
 		posted,
@@ -69,7 +70,8 @@
 		initialKeepInformed = false,
 		initialChapterShare = false,
 		initialSource = '',
-		onSignup
+		onSignup,
+		onRecordGone
 	}: {
 		initialEmail?: string
 		initialCountry?: string
@@ -97,6 +99,10 @@
 		// Not called for updates to an existing record (the volunteer step, or a
 		// /subscribe continuation) nor for silently dropped spam submissions.
 		onSignup?: () => void
+		// Required with initialRecordId: called when the server refuses to update
+		// that row (410), so the host returns to the form that collects consent,
+		// since this one hides it and the next post must create a row.
+		onRecordGone?: () => void
 	} = $props()
 
 	// Starts true so an unanswered request keeps the anti-spam check required.
@@ -409,13 +415,17 @@
 	// one carries over, the opt-in least of all.
 	function startOverUnlessFor(email: string): boolean {
 		if (!recordId || pickedUpFor === null || sameEmail(pickedUpFor, email)) return false
+		dropRecord()
+		keepInformed = initialKeepInformed
+		return true
+	}
+
+	function dropRecord() {
 		recordId = ''
 		recordToken = ''
 		pickedUpFor = null
 		rowIntent = null
 		resumed = false
-		keepInformed = initialKeepInformed
-		return true
 	}
 
 	function continueToIntent(event: SubmitEvent) {
@@ -472,11 +482,14 @@
 					if (typeof result.data?.recordId === 'string') {
 						// A spam drop also reports success but carries no recordId, so
 						// this only fires on a real create.
-						if (!recordId) onSignup?.()
+						const created = !recordId
+						if (created) onSignup?.()
 						recordId = result.data.recordId
-						// Only a create or a proven update returns one; otherwise the
-						// token this tab holds is still the one for this row.
-						if (typeof result.data.recordToken === 'string') recordToken = result.data.recordToken
+						// An update that didn't prove itself gets no token back; the one
+						// this tab holds is still the one for this row.
+						const token: unknown = result.data.recordToken
+						if (typeof token === 'string') recordToken = token
+						else if (created) recordToken = ''
 						rowIntent = postedIntent(formData)
 						resumed = false
 						saveSignupFromPost(formData, recordId, recordToken)
@@ -486,18 +499,12 @@
 					// 410: the row behind recordId no longer exists, or the post carried
 					// no valid continuation token for it. Any other failure, an outage
 					// included, keeps the id, or the retry would duplicate.
-					// Back to step 1, because a new row needs the step-2 consent, which
-					// the volunteer form doesn't post. The browse form posts its own and
-					// can just retry. (The /subscribe continuation's id is seconds old
-					// and never resumed, so it doesn't get here.)
 					if (result.status === 410) {
 						forgetSignup()
-						recordId = ''
-						recordToken = ''
-						pickedUpFor = null
-						rowIntent = null
-						resumed = false
-						if (mode === 'contact' && !isContinuation) step = 1
+						dropRecord()
+						const next = afterRecordGone(mode, isContinuation)
+						if (next === 'step-1') step = 1
+						else if (next === 'signup-form') onRecordGone?.()
 					}
 					toast.error(String(result.data?.message ?? msgs.onboarding_error_generic))
 				} else {

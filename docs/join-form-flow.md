@@ -150,38 +150,46 @@ intent, opt-ins and chapter-sharing answer. `record_token` is the proof that the
 browser posting `record_id` was handed it by the action.
 
 `src/lib/server/onboardingContinuation.ts` mints and checks it. The token is
-`v1.<expiry>.<signature>`: `<expiry>` is a Unix time in seconds, 24 hours after
-minting (`SIGNUP_MAX_AGE_MS` in `signupResume.ts`, so it lasts as long as the
-stored copy), and `<signature>` is the unpadded base64url HMAC-SHA256, keyed by
+`v1.<expiry>.<signature>`: `<expiry>` is a Unix time in seconds, 25 hours after
+minting (the stored copy's 24 hours, `SIGNUP_MAX_AGE_MS` in `signupMaxAge.ts`,
+plus an hour, so a resume near the end of that window still carries a live
+token), and `<signature>` is the unpadded base64url HMAC-SHA256, keyed by
 `ONBOARDING_CONTINUATION_SECRET`, of
 `onboarding-continuation:v1:<recordId>:<expiry>`. The action mints one with the
 id on a create, and a fresh one on every update whose posted token was valid, so
 a flow in progress never runs out, as the stored copy's age is reset on every
-post. An update that went through without a valid token gets none back, and the
-form keeps whatever token it held: handing one out there would give anyone
-holding a bare id a genuine token that keeps working once enforcement is on.
+post. The holder keeps the row writable for as long as it posts at least once
+every 24 hours. An update that went through without a valid token gets none
+back, and the form keeps whatever token it held: handing one out there would
+give anyone holding a bare id a genuine token that keeps working once
+enforcement is on.
 
 On every update the action checks the posted token against the posted
 `record_id`. What a missing, malformed, expired or wrong token does depends on
 `ONBOARDING_CONTINUATION_ENFORCE`:
 
-- not `1`: the update goes ahead, and the action reports it to Sentry
+- not `true`: the update goes ahead, and the action reports it to Sentry
   (`Onboarding continuation token <verdict>`, with the record id, never the
   token). This is the rollout state: a session that began before tokens existed
   holds an id without one for up to 24 hours, and never gains one, so once
   enforcement is on its next update gets the 410 and it starts again.
-- `1`: the update is refused with the same 410 as a deleted row, so the form
-  forgets the id and returns to step 1. It never creates a row instead, which
-  would bring back the duplicates the id exists to prevent.
+- `true` (the same convention as `ONBOARDING_LIVE`): the update is refused with
+  the same 410 as a deleted row, so the form forgets the id and goes back to
+  where consent is collected (see the 410 under "Resuming after a remount"). It
+  never creates a row instead, which would bring back the duplicates the id
+  exists to prevent.
 
 Without `ONBOARDING_CONTINUATION_SECRET` the action mints no token and checks
 nothing, whatever the switch says, and logs that once per cold start: a missing
 secret must not break the volunteer step for everyone. The secret is only needed
 where the form writes (Production); deploy previews run in stub mode without it.
+Make it 32 random bytes (`openssl rand -base64 32`). Rotating it invalidates
+every token in flight, so under enforcement every flow in progress gets the 410
+and starts again: rotate it only when it may have leaked.
 
 Rollout: set the secret, deploy, watch the reports fall off as sessions from
 before the deploy expire, then after 24 hours set
-`ONBOARDING_CONTINUATION_ENFORCE=1` and redeploy.
+`ONBOARDING_CONTINUATION_ENFORCE=true` and redeploy.
 
 What the token does not cover: `/api/verify`, which ticks `Verified email` for
 whoever opens a link carrying the record id; the Stripe `client_reference_id`;
@@ -223,8 +231,13 @@ post, `Email subscription` and `Intent`.
   duplicate. Only when Airtable reports the row gone (`ROW_DOES_NOT_EXIST`, for a
   deleted row too), or once enforcement is on, the post carries no valid
   continuation token, does the action answer 410, and the form then drops the
-  id, its token and their stored copy and returns to step 1, so the next pass
-  collects consent and creates a row.
+  id, its token and their stored copy and goes back to where consent is
+  collected, since the next pass creates a row (`afterRecordGone` in
+  `signupResume.ts`): the browse form posts its own and just retries, the
+  contact flow returns to step 1, and the `/subscribe` continuation, which hides
+  consent, calls `onRecordGone` so `SubscribeFlow` shows its signup form again
+  with the details kept. That last case is reachable: the thanks page left open
+  past the token's expiry, or a row created while the secret was unset.
 
 It does not cover another tab or device, or a chapter site's iframe, whose
 storage the browser keeps apart from pauseai.info's. Nor a create whose response
@@ -357,6 +370,8 @@ question, "what do you want to do", rather than a signup:
   beyond the GDPR consent is required, so this is a different submit gate, not
   just a different layout.
 - The two hidden inputs described under "Chapter sharing" are added.
+- A 410 cannot go back to step 1, which would post without consent, so it calls
+  `onRecordGone` and `SubscribeFlow` returns to its own form.
 
 So the `Step2 --> Step1: Back` edge and the opt-in-only submit path in the
 diagram do not exist in this mode.

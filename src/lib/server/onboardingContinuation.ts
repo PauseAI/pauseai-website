@@ -5,12 +5,14 @@
 // "Continuation token", describes the rollout switch.
 
 import { env } from '$env/dynamic/private'
-import { SIGNUP_MAX_AGE_MS } from '$lib/components/onboarding/signupResume'
+import { SIGNUP_MAX_AGE_MS } from '$lib/components/onboarding/signupMaxAge'
+import { isContinuationEnforced } from '$lib/server/onboarding'
 import { reportError } from '$lib/server/sentry'
 
 const VERSION = 'v1'
-// Matches how long the browser keeps the id for a resume.
-const TTL_SECONDS = SIGNUP_MAX_AGE_MS / 1000
+// An hour beyond the browser's copy: the token is minted, and its expiry floored
+// to the second, before the browser stamps that copy.
+export const TOKEN_TTL_SECONDS = SIGNUP_MAX_AGE_MS / 1000 + 60 * 60
 // HMAC-SHA256 is 32 bytes: 43 base64url characters, unpadded.
 const SIGNATURE = /^[A-Za-z0-9_-]{43}$/
 
@@ -39,7 +41,7 @@ function fromBase64Url(value: string): Uint8Array<ArrayBuffer> {
 }
 
 export async function mintToken(secret: string, recordId: string, now: number): Promise<string> {
-	const expiry = String(Math.floor(now / 1000) + TTL_SECONDS)
+	const expiry = String(Math.floor(now / 1000) + TOKEN_TTL_SECONDS)
 	const signature = await crypto.subtle.sign(
 		'HMAC',
 		await hmacKey(secret, 'sign'),
@@ -81,10 +83,9 @@ function getSecret(): string | undefined {
 	if (secret) return secret
 	if (!reportedNoSecret) {
 		reportedNoSecret = true
-		const ignored =
-			env.ONBOARDING_CONTINUATION_ENFORCE === '1'
-				? ' ONBOARDING_CONTINUATION_ENFORCE=1 is ignored until it is set.'
-				: ''
+		const ignored = isContinuationEnforced()
+			? ' ONBOARDING_CONTINUATION_ENFORCE=true is ignored until it is set.'
+			: ''
 		console.error(
 			`[onboarding] ONBOARDING_CONTINUATION_SECRET is not set: no continuation tokens are issued or checked, so any record id can be updated.${ignored}`
 		)
@@ -104,7 +105,7 @@ export async function issueContinuationToken(
 
 // What an update to `recordId` may do: 'proven' when its token is valid,
 // 'allowed' when it goes ahead without one, 'refused' otherwise. Until
-// ONBOARDING_CONTINUATION_ENFORCE is "1" a bad token is only reported, because a
+// ONBOARDING_CONTINUATION_ENFORCE is "true" a bad token is only reported, because a
 // session that started before tokens existed holds an id without one for as long
 // as the browser keeps it. Only a 'proven' update may be handed a fresh token:
 // minting for an 'allowed' one would give anyone holding a bare id a token that
@@ -118,7 +119,7 @@ export async function checkContinuation(
 	if (!secret) return 'allowed'
 	const verdict = await verifyToken(secret, recordId, token, now)
 	if (verdict === 'valid') return 'proven'
-	const enforced = env.ONBOARDING_CONTINUATION_ENFORCE === '1'
+	const enforced = isContinuationEnforced()
 	// Never the token or the secret: either would let the reader forge or replay.
 	const context = { check: 'onboarding-continuation', verdict, enforced, recordId }
 	console.warn('[onboarding] update without a valid continuation token', context)

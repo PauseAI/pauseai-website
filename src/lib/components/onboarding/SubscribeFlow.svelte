@@ -276,6 +276,12 @@
 		initialCity={fields.city}
 		initialKeepInformed={true}
 		initialChapterShare={fields.wantsChapter}
+		onRecordGone={() => {
+			// Back to the signup, details kept, to create a row with fresh consent.
+			phase = 'form'
+			recordId = ''
+			recordToken = ''
+		}}
 	/>
 {/if}
 

@@ -108,8 +108,8 @@ The active mode is logged to the browser console on load.
 
 Two more env vars guard updates to a row created earlier in the flow (see "Continuation token" in [`docs/join-form-flow.md`](./join-form-flow.md)):
 
-- `ONBOARDING_CONTINUATION_SECRET`: the HMAC key for continuation tokens. Set it wherever the form is live. Without it no token is issued or checked.
-- `ONBOARDING_CONTINUATION_ENFORCE`: `1` refuses an update without a valid token; anything else only reports it.
+- `ONBOARDING_CONTINUATION_SECRET`: the HMAC key for continuation tokens, 32 random bytes (`openssl rand -base64 32`). Set it wherever the form is live. Without it no token is issued or checked. Rotating it sends every flow in progress back to the start once enforcement is on.
+- `ONBOARDING_CONTINUATION_ENFORCE`: `true` refuses an update without a valid token; anything else only reports it.
 
 ## Related
 

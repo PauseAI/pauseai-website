@@ -1,5 +1,7 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
+import { SIGNUP_MAX_AGE_MS } from './signupMaxAge.js'
 import {
+	afterRecordGone,
 	forgetSignup,
 	loadSignup,
 	sameEmail,
@@ -20,8 +22,6 @@ function memoryStorage(): Storage {
 		setItem: (key, value) => void items.set(key, value)
 	}
 }
-
-const DAY = 24 * 60 * 60 * 1000
 
 describe('signupResume', () => {
 	beforeEach(() => vi.stubGlobal('sessionStorage', memoryStorage()))
@@ -57,8 +57,8 @@ describe('signupResume', () => {
 			{ recordId: 'rec1', recordToken: 'tok1', keepInformed: false, intent: 'None' },
 			0
 		)
-		expect(loadSignup('ada@example.org', DAY)).not.toBeNull()
-		expect(loadSignup('ada@example.org', DAY + 1)).toBeNull()
+		expect(loadSignup('ada@example.org', SIGNUP_MAX_AGE_MS)).not.toBeNull()
+		expect(loadSignup('ada@example.org', SIGNUP_MAX_AGE_MS + 1)).toBeNull()
 	})
 
 	it('keeps only the latest save, until forgotten', () => {
@@ -94,6 +94,13 @@ describe('signupResume', () => {
 			JSON.stringify({ recordId: 'rec1', email: 'ada@example.org', keepInformed: true, savedAt: 0 })
 		)
 		expect(loadSignup('ada@example.org', 0)?.recordToken).toBe('')
+	})
+
+	it('sends a 410 back to wherever consent is collected again', () => {
+		expect(afterRecordGone('browse', false)).toBe('retry')
+		expect(afterRecordGone('contact', false)).toBe('step-1')
+		// The /subscribe continuation hides the consent, so its retry could only 400.
+		expect(afterRecordGone('contact', true)).toBe('signup-form')
 	})
 
 	it('compares addresses ignoring case and spaces', () => {
