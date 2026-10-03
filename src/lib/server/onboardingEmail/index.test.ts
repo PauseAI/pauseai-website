@@ -1,5 +1,5 @@
-import { describe, expect, it, vi } from 'vitest'
-import type { ChapterBlockData } from './types.js'
+import { afterEach, describe, expect, it, vi } from 'vitest'
+import type { ChapterBlockData, OnboardingEmailParams } from './types.js'
 
 // Stands in for the live National Groups table: one chapter with links, one without.
 const CHAPTERS: Record<string, ChapterBlockData> = {
@@ -55,46 +55,18 @@ const COUNTRIES = [
 const ALERT_PROMISE =
 	/critical alert|alerta crítica|viktigt och brådskande meddelande|viktiga meddelanden|In dringenden Fällen/
 
-function render(country: string, intent: string, firstName = 'Alex') {
-	return renderOnboardingEmail({
-		firstName,
-		country,
-		intent,
-		airtable_id: RECORD_ID,
-		chapterShare: true
-	})
-}
+const BASE = { firstName: 'Alex', airtable_id: RECORD_ID, chapterShare: true }
 
-function renderWithShare(country: string, intent: string, chapterShare: boolean) {
-	return renderOnboardingEmail({
-		firstName: 'Alex',
-		country,
-		intent,
-		chapterShare,
-		airtable_id: RECORD_ID
-	})
+function render(country: string, intent: string, options: Partial<OnboardingEmailParams> = {}) {
+	return renderOnboardingEmail({ ...BASE, country, intent, ...options })
 }
 
 function renderSpeaking(country: string, intent: string, languages: string[]) {
-	return renderOnboardingEmail({
-		firstName: 'Alex',
-		country,
-		intent,
-		languages,
-		airtable_id: RECORD_ID,
-		chapterShare: true
-	})
+	return renderOnboardingEmail({ ...BASE, country, intent, languages })
 }
 
 function renderSubscribed(country: string, intent: string, subscribed: boolean | undefined) {
-	return renderOnboardingEmail({
-		firstName: 'Alex',
-		country,
-		intent,
-		subscribed,
-		airtable_id: RECORD_ID,
-		chapterShare: true
-	})
+	return renderOnboardingEmail({ ...BASE, country, intent, subscribed })
 }
 
 describe('renderOnboardingEmail', () => {
@@ -307,7 +279,7 @@ describe('renderOnboardingEmail', () => {
 	})
 
 	it("does not let a signup's name render as a link", async () => {
-		const email = await render('', 'None', '[Verify here](https://example.com)')
+		const email = await render('', 'None', { firstName: '[Verify here](https://example.com)' })
 		expect(email.html).not.toContain('href="https://example.com"')
 	})
 
@@ -326,11 +298,10 @@ describe('renderOnboardingEmail', () => {
 		it("gives the shared copy from PauseAI Global instead of a chapter's own email", async () => {
 			for (const [country, intent, chapterSubject] of CHAPTER_EMAILS) {
 				const where = `${country} / ${intent}`
-				const shared = await renderWithShare(country, intent, true)
+				const shared = await render(country, intent)
 				expect(shared.subject, where).toBe(chapterSubject)
-				expect(shared.from, where).toBeUndefined()
 
-				const declined = await renderWithShare(country, intent, false)
+				const declined = await render(country, intent, { chapterShare: false })
 				expect(declined.subject, where).toBe(
 					intent === 'Volunteer' ? 'Welcome to PauseAI, Alex!' : 'Thanks for signing up to PauseAI'
 				)
@@ -341,35 +312,36 @@ describe('renderOnboardingEmail', () => {
 
 		it('says the onboarding team will be in touch, not the chapter', async () => {
 			for (const country of ['United Kingdom', 'Canada', 'Germany', 'Netherlands', 'Belgium']) {
-				const declined = await renderWithShare(country, 'Volunteer', false)
+				const declined = await render(country, 'Volunteer', { chapterShare: false })
 				expect(declined.text, country).toContain('Our onboarding team will be in touch.')
 				expect(declined.text, country).not.toContain('will be in touch to invite you')
 			}
 			// The chapter's public links promise nothing, so they stay.
-			const netherlands = await renderWithShare('Netherlands', 'Volunteer', false)
+			const netherlands = await render('Netherlands', 'Volunteer', { chapterShare: false })
 			expect(netherlands.text).toContain("There's a PauseAI chapter in Netherlands.")
 			expect(netherlands.text).toContain('https://chat.whatsapp.com/example')
 
-			expect((await renderWithShare('Netherlands', 'Volunteer', true)).text).toContain(
+			expect((await render('Netherlands', 'Volunteer')).text).toContain(
 				'PauseAI Netherlands will be in touch'
 			)
 		})
 
-		it('keeps the public chapter links for a non-volunteer', async () => {
-			for (const country of ['Netherlands', 'Canada']) {
-				const shared = await renderWithShare(country, 'Act now', true)
-				const declined = await renderWithShare(country, 'Act now', false)
-				expect(declined.text, country).toBe(shared.text)
-				expect(declined.html, country).toBe(shared.html)
-				expect(declined.from, country).toEqual(GLOBAL_SENDER)
-			}
-		})
-
-		it('changes nothing but the sender where there is no chapter', async () => {
-			for (const intent of ['None', 'Act now', 'Volunteer']) {
-				const shared = await renderWithShare('', intent, true)
-				const declined = await renderWithShare('', intent, false)
-				expect({ ...declined, from: undefined }, intent).toEqual(shared)
+		// The public chapter links promise no contact, and the Spanish email names no chapter.
+		it('changes nothing but the sender where the email promises no chapter contact', async () => {
+			const cases: [string, string, Partial<OnboardingEmailParams>?][] = [
+				['Netherlands', 'Act now'],
+				['Canada', 'Act now'],
+				['', 'None'],
+				['', 'Act now'],
+				['', 'Volunteer'],
+				['Mexico', 'Volunteer', { languages: ['Spanish'] }]
+			]
+			for (const [country, intent, options] of cases) {
+				const where = `${country || '(none)'} / ${intent}`
+				const shared = await render(country, intent, options)
+				const declined = await render(country, intent, { ...options, chapterShare: false })
+				expect(declined.from, where).toEqual(GLOBAL_SENDER)
+				expect({ ...declined, from: undefined }, where).toEqual(shared)
 			}
 		})
 	})
@@ -379,7 +351,7 @@ describe('renderOnboardingEmail', () => {
 	it('returns only the email for a signup who agreed to chapter sharing', async () => {
 		for (const country of COUNTRIES) {
 			for (const intent of INTENTS) {
-				expect(Object.keys(await renderWithShare(country, intent, true)).sort()).toEqual([
+				expect(Object.keys(await render(country, intent)).sort()).toEqual([
 					'html',
 					'subject',
 					'text'
@@ -390,6 +362,10 @@ describe('renderOnboardingEmail', () => {
 })
 
 describe('chapterShareFromRequest', () => {
+	afterEach(() => {
+		vi.restoreAllMocks()
+	})
+
 	it('takes only true as agreement', () => {
 		expect(chapterShareFromRequest({ gdpr_chapter_share: true })).toBe(true)
 		for (const value of [false, null, undefined, 'true', 1, [true]]) {
@@ -405,6 +381,5 @@ describe('chapterShareFromRequest', () => {
 		chapterShareFromRequest({ gdpr_chapter_share: false })
 		chapterShareFromRequest({ gdpr_chapter_share: null })
 		expect(warn).not.toHaveBeenCalled()
-		warn.mockRestore()
 	})
 })

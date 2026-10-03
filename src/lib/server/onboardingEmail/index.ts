@@ -36,7 +36,8 @@ export type OnboardingEmailResolution = {
 	chapterShare: boolean
 }
 
-// The global sender the Airtable script already uses for every country but the UK.
+// Returned explicitly, since without a `from` the Airtable script sends a UK signup's email from
+// PauseAI UK. It is the sender the script already uses for every other country.
 const GLOBAL_SENDER = { email: 'info@pauseai.info', name: 'PauseAI' }
 
 /**
@@ -105,11 +106,11 @@ export async function renderOnboardingEmail(
 	const verificationLink = `${url}/verify?table=join&${verificationParameter}=${params.airtable_id}`
 
 	const { resolution, override } = await resolve(params)
-	const { bucket, language, chapter } = resolution
+	const { bucket, language, chapter, chapterShare } = resolution
 	const firstName = stripMarkdown(params.firstName)
 	const content = override
 		? override.content(firstName, chapter)
-		: baseContent(language === 'es' ? 'es' : 'en', bucket, chapter, params.chapterShare, firstName)
+		: baseContent(language === 'es' ? 'es' : 'en', bucket, chapter, chapterShare, firstName)
 	const fixed = FIXED_COPY[language]
 	const blocks = composeBlocks(
 		content,
@@ -130,7 +131,6 @@ export async function renderOnboardingEmail(
 		subject: content.subject,
 		html,
 		text: renderText(blocks, content.socials),
-		// Left to the script otherwise, which sends a UK signup's email from PauseAI UK.
-		...(params.chapterShare ? {} : { from: GLOBAL_SENDER })
+		...(chapterShare ? {} : { from: GLOBAL_SENDER })
 	}
 }

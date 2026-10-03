@@ -25,8 +25,8 @@ function greeting(firstName: string): EmailBlock[] {
 	return [{ type: 'heading', level: 1, text: `Welcome to PauseAI, ${firstName}!` }]
 }
 
-// Only points at the chapter's public links and promises no follow-up, so it is also what a
-// signup gets who did not agree to chapter sharing. Left out when the chapter has no links.
+// Points at the chapter's public links and promises no follow-up. Left out when the chapter
+// has no links to show.
 function chapterLinksBlock(chapter: ChapterBlockData | null): EmailBlock[] {
 	if (!chapter || chapter.links.length === 0) return []
 	return [

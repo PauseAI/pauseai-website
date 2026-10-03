@@ -70,7 +70,7 @@ export const load: PageServerLoad = async ({ url }) => {
 	const htmlStyle: OnboardingEmailHtmlStyle | undefined =
 		styleParam === 'plain' || styleParam === 'rich' ? styleParam : undefined
 
-	// Shared unless asked otherwise, so a link without the parameter shows what it always has.
+	// Defaults to shared so existing preview links keep rendering the agreeing signup's email.
 	const chapterShare = params.get('chapterShare') !== 'no'
 
 	const renderParams = {

@@ -147,7 +147,17 @@
 		data.form.country !== '' && !data.options.countries.some((c) => c.name === data.form.country)
 	)
 
-	const summary = $derived.by(() => {
+	// A declining signup from a country whose chapter writes its own email for their intent.
+	const skippedOwnEmail = $derived.by(() => {
+		const { chapterShare, bucket } = data.resolved
+		const own = data.options.countries.find((c) => c.name === data.form.country)?.override
+		if (chapterShare || !own || (own.scope !== 'all' && !own.scope.includes(bucket))) return ''
+		return ` ${own.name}'s own email is not used, because the signup did not agree to chapter sharing.`
+	})
+
+	const summary = $derived(describeEmail() + skippedOwnEmail)
+
+	function describeEmail(): string {
 		const { override, chapter, chapterShare, bucket, group, language } = data.resolved
 		const inLanguage = `in ${languageName(language)}`
 		if (override) return `This is ${override}'s own email, written by the chapter, ${inLanguage}.`
@@ -165,16 +175,16 @@
 		}
 		const hasLinks = chapter.links.length > 0
 		const links = "the chapter's links, the same ones as on pauseai.info/national-groups"
-		if (group === 'volunteer' && !chapterShare) {
-			return `${opening} It says our onboarding team will be in touch, not PauseAI ${chapter.name}, which is not told about this signup${hasLinks ? `, and lists ${links}` : ''}.`
-		}
 		if (group === 'volunteer') {
-			return `${opening} It says PauseAI ${chapter.name} will be in touch${hasLinks ? `, and lists ${links}` : ''}.`
+			const contact = chapterShare
+				? `PauseAI ${chapter.name} will be in touch`
+				: `our onboarding team will be in touch, not PauseAI ${chapter.name}, which is not told about this signup`
+			return `${opening} It says ${contact}${hasLinks ? `, and lists ${links}` : ''}.`
 		}
 		return hasLinks
 			? `${opening} It includes a short part about PauseAI in ${chapter.name}, with ${links}.`
 			: `${opening} It has no chapter part, because PauseAI ${chapter.name} has no links on pauseai.info/national-groups.`
-	})
+	}
 </script>
 
 <svelte:head>
