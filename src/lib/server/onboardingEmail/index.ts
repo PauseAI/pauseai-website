@@ -1,4 +1,5 @@
 import { url, verificationParameter } from '$lib/config.js'
+import { reportError } from '$lib/server/sentry'
 import { baseContent } from './copy.js'
 import { composeBlocks, groupOf, resolveIntentBucket } from './blocks.js'
 import { getChapterForOnboardingEmail } from './chapter.js'
@@ -45,11 +46,13 @@ const GLOBAL_SENDER = { email: 'info@pauseai.info', name: 'PauseAI' }
  * render request. Only `true` counts as shared: a broken mapping must not tell someone their
  * chapter will contact them when the chapter will never hear of them.
  */
-export function chapterShareFromRequest(body: Record<string, unknown>): boolean {
+export async function chapterShareFromRequest(body: Record<string, unknown>): Promise<boolean> {
 	if (!('gdpr_chapter_share' in body)) {
-		console.warn(
+		const message =
 			'Render request has no gdpr_chapter_share: treating it as not shared. Check the input mapping in the Airtable automation.'
-		)
+		console.warn(message)
+		// Key names only: the values are the signup's personal data.
+		await reportError(new Error(message), { receivedKeys: Object.keys(body).sort() })
 	}
 	return body.gdpr_chapter_share === true
 }

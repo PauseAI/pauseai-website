@@ -31,6 +31,9 @@ const CHAPTERS: Record<string, ChapterBlockData> = {
 	}
 }
 
+const { reportError } = vi.hoisted(() => ({ reportError: vi.fn() }))
+vi.mock('$lib/server/sentry', () => ({ reportError }))
+
 vi.mock('./chapter.js', () => ({
 	getChapterForOnboardingEmail: (country: string | undefined) =>
 		Promise.resolve(CHAPTERS[(country ?? '').trim().toLowerCase()] ?? null)
@@ -364,22 +367,32 @@ describe('renderOnboardingEmail', () => {
 describe('chapterShareFromRequest', () => {
 	afterEach(() => {
 		vi.restoreAllMocks()
+		reportError.mockClear()
 	})
 
-	it('takes only true as agreement', () => {
-		expect(chapterShareFromRequest({ gdpr_chapter_share: true })).toBe(true)
+	it('takes only true as agreement', async () => {
+		expect(await chapterShareFromRequest({ gdpr_chapter_share: true })).toBe(true)
 		for (const value of [false, null, undefined, 'true', 1, [true]]) {
-			expect(chapterShareFromRequest({ gdpr_chapter_share: value }), String(value)).toBe(false)
+			expect(await chapterShareFromRequest({ gdpr_chapter_share: value }), String(value)).toBe(
+				false
+			)
 		}
 	})
 
-	it('logs a request that does not carry the key at all', () => {
-		const warn = vi.spyOn(console, 'warn').mockImplementation(() => {})
-		expect(chapterShareFromRequest({ first_name: 'Alex' })).toBe(false)
-		expect(warn).toHaveBeenCalledTimes(1)
-		warn.mockClear()
-		chapterShareFromRequest({ gdpr_chapter_share: false })
-		chapterShareFromRequest({ gdpr_chapter_share: null })
-		expect(warn).not.toHaveBeenCalled()
+	it('reports a request that does not carry the key at all, without its values', async () => {
+		vi.spyOn(console, 'warn').mockImplementation(() => {})
+		const body = { first_name: 'Alex', airtable_id: RECORD_ID, country: 'United Kingdom' }
+		expect(await chapterShareFromRequest(body)).toBe(false)
+		expect(reportError).toHaveBeenCalledTimes(1)
+		const payload = JSON.stringify(reportError.mock.calls[0], (_key, value: unknown) =>
+			value instanceof Error ? value.message : value
+		)
+		expect(payload).toContain('gdpr_chapter_share')
+		for (const value of Object.values(body)) expect(payload).not.toContain(value)
+
+		reportError.mockClear()
+		await chapterShareFromRequest({ gdpr_chapter_share: false })
+		await chapterShareFromRequest({ gdpr_chapter_share: null })
+		expect(reportError).not.toHaveBeenCalled()
 	})
 })

@@ -69,7 +69,7 @@ export const POST: RequestHandler = async ({ request }) => {
 			airtable_id: body.airtable_id,
 			subscribed:
 				typeof body.email_subscription === 'boolean' ? body.email_subscription : undefined,
-			chapterShare: chapterShareFromRequest(body)
+			chapterShare: await chapterShareFromRequest(body)
 		})
 		return json(rendered)
 	} catch (error) {
