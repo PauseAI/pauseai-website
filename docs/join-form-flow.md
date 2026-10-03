@@ -133,11 +133,55 @@ own. SvelteKit's form actions are addressed by URL, so a form rendered on
 `/join` can post to `/embed/onboarding-form?/submit` without any special
 wiring.
 
-The action returns `{ success: true, recordId }` in live mode and
-`{ success: true, recordId, submission }` in stub mode. Both components store
-that `recordId`; `OnboardingFlow`'s `submitWith` adds it to every later post as
-`record_id`, which is what makes that submission an update instead of a
-duplicate.
+The action returns `{ success: true, recordId, recordToken }` in live mode and
+`{ success: true, recordId, recordToken, submission }` in stub mode. Both
+components store that `recordId` and `recordToken`; `OnboardingFlow`'s
+`submitWith` adds them to every later post as `record_id` and `record_token`,
+which is what makes that submission an update instead of a duplicate. The
+`/subscribe` hand-off passes both as props (`initialRecordId`,
+`initialRecordToken`), never in a URL.
+
+### Continuation token
+
+A record id is not secret: it is in the verification link, the Stripe
+`client_reference_id`, and the action's response. So the id alone must not let
+someone update a row, or anyone holding one could overwrite that person's email,
+intent, opt-ins and chapter-sharing answer. `record_token` is the proof that the
+browser posting `record_id` was handed it by the action.
+
+`src/lib/server/onboardingContinuation.ts` mints and checks it. The token is
+`v1.<expiry>.<signature>`: `<expiry>` is a Unix time in seconds, 24 hours after
+minting (`SIGNUP_MAX_AGE_MS` in `signupResume.ts`, so it lasts as long as the
+stored copy), and `<signature>` is the unpadded base64url HMAC-SHA256, keyed by
+`ONBOARDING_CONTINUATION_SECRET`, of
+`onboarding-continuation:v1:<recordId>:<expiry>`. The action mints one with the
+id on a create and again on every successful update, so a flow in progress never
+runs out, as the stored copy's age is reset on every post.
+
+On every update the action checks the posted token against the posted
+`record_id`. What a missing, malformed, expired or wrong token does depends on
+`ONBOARDING_CONTINUATION_ENFORCE`:
+
+- not `1`: the update goes ahead, and the action reports it to Sentry
+  (`Onboarding continuation token <verdict>`, with the record id, never the
+  token). This is the rollout state: a session that began before tokens existed
+  holds an id without one for up to 24 hours.
+- `1`: the update is refused with the same 410 as a deleted row, so the form
+  forgets the id and returns to step 1. It never creates a row instead, which
+  would bring back the duplicates the id exists to prevent.
+
+Without `ONBOARDING_CONTINUATION_SECRET` the action mints no token and checks
+nothing, whatever the switch says, and logs that once per cold start: a missing
+secret must not break the volunteer step for everyone. The secret is only needed
+where the form writes (Production); deploy previews run in stub mode without it.
+
+Rollout: set the secret, deploy, watch the reports fall to zero, then after 24
+hours set `ONBOARDING_CONTINUATION_ENFORCE=1` and redeploy.
+
+What the token does not cover: `/api/verify`, which ticks `Verified email` for
+whoever opens a link carrying the record id; the Stripe `client_reference_id`;
+and a create whose response never arrived (no token reached the browser, so its
+retry creates a row, as before).
 
 ### Resuming after a remount
 
@@ -146,9 +190,9 @@ the only thing that stops a second row, and every fresh mount loses it: moving
 to another page and back (the layout keys pages on their pathname), a reload,
 the language switcher's reload, a reloaded iframe, or `/subscribe` followed by
 the site's own "Join" link. `signupResume.ts` therefore also keeps the row in
-`sessionStorage` for 24 hours: its id, the email it was posted with, and what
-it holds for the two fields every update rewrites from the post,
-`Email subscription` and `Intent`.
+`sessionStorage` for 24 hours: its id and continuation token, the email it was
+posted with, and what it holds for the two fields every update rewrites from the
+post, `Email subscription` and `Intent`.
 
 - Both components save it after every successful post that returns an id.
 - `OnboardingFlow` picks it up when step 1 continues (or, for the browse form,
@@ -172,9 +216,10 @@ it holds for the two fields every update rewrites from the post,
   would undo an intent chosen on `/join`.
 - A failed update keeps the stored id, so an outage's retry does not create a
   duplicate. Only when Airtable reports the row gone (`ROW_DOES_NOT_EXIST`, for a
-  deleted row too) does the action answer 410, and the form then drops the id
-  and its stored copy and returns to step 1, so the next pass collects consent
-  and creates a row.
+  deleted row too), or once enforcement is on, the post carries no valid
+  continuation token, does the action answer 410, and the form then drops the
+  id, its token and their stored copy and returns to step 1, so the next pass
+  collects consent and creates a row.
 
 It does not cover another tab or device, or a chapter site's iframe, whose
 storage the browser keeps apart from pauseai.info's. Nor a create whose response
@@ -314,6 +359,7 @@ diagram do not exist in this mode.
 ## Create versus update
 
 A post carrying `record_id` is an **update**; anything else is a **create**.
+An update is gated on `record_token` (see "Continuation token" above).
 This is the axis most of the action's behaviour turns on, and its rules
 otherwise scatter across the write and the validation, so they are collected
 here.

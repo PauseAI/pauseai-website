@@ -106,6 +106,11 @@ The form's submit behavior depends on the `ONBOARDING_LIVE` env var:
 
 The active mode is logged to the browser console on load.
 
+Two more env vars guard updates to a row created earlier in the flow (see "Continuation token" in [`docs/join-form-flow.md`](./join-form-flow.md)):
+
+- `ONBOARDING_CONTINUATION_SECRET`: the HMAC key for continuation tokens. Set it wherever the form is live. Without it no token is issued or checked.
+- `ONBOARDING_CONTINUATION_ENFORCE`: `1` refuses an update without a valid token; anything else only reports it.
+
 ## Related
 
 - Flow contract (step machine, validation, live/stub mode, data written):

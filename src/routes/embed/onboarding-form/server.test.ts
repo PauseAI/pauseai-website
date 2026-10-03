@@ -1,0 +1,89 @@
+import { beforeEach, describe, expect, it, vi } from 'vitest'
+
+const env: Record<string, string | undefined> = {}
+const createRecord = vi.fn<(...args: unknown[]) => Promise<string | undefined>>()
+const updateRecord = vi.fn<(...args: unknown[]) => Promise<'updated' | 'missing' | 'failed'>>()
+const reportError = vi.fn<(error: unknown, context?: Record<string, unknown>) => Promise<void>>()
+
+vi.mock('$env/dynamic/private', () => ({ env }))
+vi.mock('$lib/airtable', () => ({ createRecord, updateRecord }))
+vi.mock('$lib/server/onboarding', () => ({ isOnboardingLive: () => true }))
+vi.mock('$lib/server/turnstile-verify', () => ({
+	checkNotSpam: () => Promise.resolve({ drop: false })
+}))
+vi.mock('$lib/server/substack', () => ({ subscribeToSubstackNewsletter: vi.fn() }))
+vi.mock('$lib/server/sentry', () => ({ reportError }))
+
+const { actions } = await import('./+page.server.js')
+
+type Result = { status?: number; data?: Record<string, unknown> } & Record<string, unknown>
+
+async function submit(fields: Record<string, string>): Promise<Result> {
+	const body = new FormData()
+	for (const [name, value] of Object.entries(fields)) body.set(name, value)
+	const url = new URL('https://pauseai.info/embed/onboarding-form?/submit')
+	const request = new Request(url, { method: 'POST', body })
+	return (await actions.submit({ request, url, fetch } as never)) as Result
+}
+
+const signup = {
+	full_name: 'Ada Lovelace',
+	email: 'ada@example.org',
+	country: 'United Kingdom',
+	city: 'London',
+	intent: 'None',
+	agree_gdpr: 'on'
+}
+
+const update = (recordToken?: string) => ({
+	email: 'ada@example.org',
+	intent: 'Act now',
+	record_id: 'recAda',
+	...(recordToken === undefined ? {} : { record_token: recordToken })
+})
+
+describe('onboarding submit: continuation token', () => {
+	beforeEach(() => {
+		for (const key of Object.keys(env)) delete env[key]
+		env.ONBOARDING_CONTINUATION_SECRET = 'test-secret'
+		createRecord.mockReset().mockResolvedValue('recAda')
+		updateRecord.mockReset().mockResolvedValue('updated')
+		reportError.mockClear()
+		vi.spyOn(console, 'warn').mockImplementation(() => {})
+	})
+
+	it('returns a token with the id a create hands out, and accepts it on the update', async () => {
+		const created = await submit(signup)
+		expect(created).toMatchObject({ success: true, recordId: 'recAda' })
+		expect(created.recordToken).toMatch(/^v1\./)
+
+		env.ONBOARDING_CONTINUATION_ENFORCE = '1'
+		const updated = await submit(update(String(created.recordToken)))
+		expect(updated).toMatchObject({ success: true, recordId: 'recAda' })
+		expect(updated.recordToken).toMatch(/^v1\./)
+		expect(updateRecord).toHaveBeenCalledOnce()
+		expect(reportError).not.toHaveBeenCalled()
+	})
+
+	it('reports an update without a token but still writes it while not enforcing', async () => {
+		const updated = await submit(update())
+		expect(updated).toMatchObject({ success: true, recordId: 'recAda' })
+		expect(updated.recordToken).toMatch(/^v1\./)
+		expect(updateRecord).toHaveBeenCalledOnce()
+		expect(reportError).toHaveBeenCalledOnce()
+	})
+
+	it('refuses an update with a missing or forged token as gone when enforcing, creating nothing', async () => {
+		env.ONBOARDING_CONTINUATION_ENFORCE = '1'
+		const created = await submit(signup)
+		createRecord.mockClear()
+		for (const token of [undefined, 'v1.9999999999.' + 'A'.repeat(43)]) {
+			const refused = await submit(update(token))
+			expect(refused.status).toBe(410)
+		}
+		const otherRow = await submit({ ...update(String(created.recordToken)), record_id: 'recGrace' })
+		expect(otherRow.status).toBe(410)
+		expect(updateRecord).not.toHaveBeenCalled()
+		expect(createRecord).not.toHaveBeenCalled()
+	})
+})

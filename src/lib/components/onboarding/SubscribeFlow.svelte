@@ -62,6 +62,7 @@
 	})
 	let fields = $state({ ...blankFields(), email: initialEmail, country: initialCountry })
 	let recordId = $state('')
+	let recordToken = $state('')
 
 	// Bot protection: the shared submit action verifies this token server-side and
 	// 403s without it. Bumped after each submission because tokens are single-use.
@@ -78,6 +79,7 @@
 		if (!nav.from || nav.from.url.pathname !== nav.to?.url.pathname) return
 		phase = 'form'
 		recordId = ''
+		recordToken = ''
 		fields = blankFields()
 	})
 
@@ -125,7 +127,8 @@
 			if (result.type === 'success' && result.data?.success) {
 				if (typeof result.data.recordId === 'string') {
 					recordId = result.data.recordId
-					saveSignupFromPost(formData, recordId)
+					recordToken = typeof result.data.recordToken === 'string' ? result.data.recordToken : ''
+					saveSignupFromPost(formData, recordId, recordToken)
 				}
 				phase = 'thanks'
 			} else if (result.type === 'failure') {
@@ -266,6 +269,7 @@
 	<OnboardingFlow
 		startStep={2}
 		initialRecordId={recordId}
+		initialRecordToken={recordToken}
 		initialFullName={fields.fullName}
 		initialEmail={fields.email}
 		initialCountry={fields.country}
