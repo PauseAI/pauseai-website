@@ -45,6 +45,19 @@ export function chapterAnswerFor(
 		: null
 }
 
+// The answer a picked-up row holds counts only while the form's email is still the
+// one it was picked up for: another email starts a row of its own (see
+// startOverUnlessFor in OnboardingFlow), which must be asked.
+export function heldChapterAnswer(
+	held: SavedChapterAnswer | null,
+	pickedUpFor: string | null,
+	email: string,
+	country: string
+): ChapterAnswer | null {
+	if (pickedUpFor === null || !sameEmail(pickedUpFor, email)) return null
+	return chapterAnswerFor(held, country)
+}
+
 function isSavedChapterAnswer(value: unknown): value is SavedChapterAnswer {
 	if (typeof value !== 'object' || value === null) return false
 	const { answer, country } = value as Record<string, unknown>

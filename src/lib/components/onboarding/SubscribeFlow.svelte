@@ -236,6 +236,7 @@
 			{#if chapterQ}
 				<ChapterShareQuestion
 					question={chapterQ}
+					level={2}
 					bind:answer={
 						() => chapterAnswer,
 						(answer: ChapterAnswer | null) =>

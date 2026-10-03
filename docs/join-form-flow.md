@@ -232,7 +232,9 @@ that country.
   answered for another country, is asked again, and the update writes the new
   answer and wording. Step 1 and the browse form, which pick the row up only
   when they submit, read the stored row as soon as the email is typed to decide
-  whether to show the question. `onSignup`
+  whether to show the question. A picked-up row's answer counts only while the
+  email is the one it was picked up for: after Back and another email, which
+  gets a row of its own, the question shows again. `onSignup`
   (the embed's `onboarding_signup_complete` message) does not fire again: the row was
   announced when it was created.
 - `SubscribeFlow` saves but never resumes: it always posts `intent=None`, which
@@ -362,7 +364,9 @@ stateDiagram-v2
 
 Step 1 asks the chapter question once a country from the list is picked (see
 "Chapter sharing"); Continue stays disabled until it is answered, the one gate on
-step 1 that is not native validation. Step 2 shows the two email opt-ins above
+step 1 that is not native validation, with a line under it saying why (or that
+the question is still loading). `continueToIntent` refuses to advance without
+the answer too, since step 2 creates the row and cannot ask for it. Step 2 shows the two email opt-ins above
 the intent cards, with a
 critical-alert disclosure under the opt-ins (`aria-describedby` on both, so
 screen readers reach it). On `/join`, neither the opt-ins nor an intent is
@@ -552,9 +556,12 @@ an update is in "Create versus update" above.
   browse signup hardcodes `Act now`; `/subscribe` hardcodes `None`. No form emits
   `Keep informed` any more, but it stays in `INTENTS` so a post carrying it is still
   accepted rather than rejected.
-- A chapter answer (`chapter_share` of `yes` or `no`, with a non-empty
+- A chapter answer (`chapter_share` of `yes` or `no`, with a
   `chapter_share_wording`) is required on a create outside the United States,
-  else 400. For the United States any posted answer is ignored and both fields
+  else 400. Whenever an answer is posted, its wording must end with
+  `[chosen] ` and an option the form offers for that answer, in any locale and
+  either form, with any chapter name (`wordingMatchesAnswer` in
+  `chapterShare.ts`), else the same 400. The rest of the wording is not checked. For the United States any posted answer is ignored and both fields
   are cleared. See "Chapter sharing".
 - GDPR consent (`agree_gdpr`) required **only on the create path** — step-3
   volunteer updates are exempt because consent was captured at step 2.

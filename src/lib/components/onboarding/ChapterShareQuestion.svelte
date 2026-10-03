@@ -12,13 +12,17 @@
 		question,
 		answer = $bindable(),
 		postAnswer = true,
-		label = ''
+		label = '',
+		level = 3
 	}: {
 		question: ChapterQuestion
 		answer: ChapterAnswer | null
 		postAnswer?: boolean
-		// Section heading above the box, where the form has section headings.
+		// Section heading above the box, where the form has section headings; it is
+		// one level above the question's.
 		label?: string
+		// The question heading's level, to fit the host page's outline.
+		level?: 2 | 3 | 4
 	} = $props()
 
 	const id = $props.id()
@@ -46,7 +50,7 @@
 </script>
 
 {#if label}
-	<p class="section-label">{label}</p>
+	<svelte:element this={`h${level - 1}`} class="section-label">{label}</svelte:element>
 {/if}
 <div
 	class="chapter-question"
@@ -55,7 +59,9 @@
 	aria-labelledby="{id}-heading"
 	aria-describedby="{id}-body"
 >
-	<h3 id="{id}-heading">{question.heading}</h3>
+	<svelte:element this={`h${level}`} id="{id}-heading" class="chapter-heading"
+		>{question.heading}</svelte:element
+	>
 	<p id="{id}-body">{question.body}</p>
 	<div class="chapter-options">
 		{#each options as option, index (option.value)}
@@ -84,6 +90,7 @@
 <style>
 	/* As OnboardingFlow's section labels. */
 	.section-label {
+		font-family: var(--font-body);
 		font-weight: bold;
 		font-size: 0.9rem;
 		text-transform: uppercase;
@@ -99,7 +106,7 @@
 		background-color: var(--bg);
 	}
 
-	h3 {
+	.chapter-heading {
 		margin: 0 0 0.4rem;
 		font-size: 1.05rem;
 		line-height: 1.35;

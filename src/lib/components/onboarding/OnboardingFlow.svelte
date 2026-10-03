@@ -35,6 +35,7 @@
 		afterRecordGone,
 		chapterAnswerFor,
 		forgetSignup,
+		heldChapterAnswer,
 		loadSignup as loadSavedSignup,
 		posted,
 		postedIntent,
@@ -179,7 +180,7 @@
 	// is only ever posted with it: after Back, another address gets a row of its
 	// own instead of overwriting the earlier signup. An id created in this mount
 	// isn't bound, so fixing a typo in the email after Back corrects that row.
-	let pickedUpFor: string | null = null
+	let pickedUpFor = $state<string | null>(null)
 	// What the row holds for Intent, which the browse form must not lower.
 	let rowIntent: Intent | null = null
 	// From picking the id up out of sessionStorage until a post succeeds. The
@@ -376,7 +377,10 @@
 	// this country has to be known first, to leave the question out.
 	const pendingPickup = $derived.by(() => (!recordId ? savedFor(basics.email) : null))
 	const rowAnswer = $derived(
-		chapterAnswerFor(rowChapterAnswer ?? pendingPickup?.chapterAnswer ?? null, basics.country)
+		isContinuation
+			? chapterAnswerFor(rowChapterAnswer, basics.country)
+			: (heldChapterAnswer(rowChapterAnswer, pickedUpFor, basics.email, basics.country) ??
+					chapterAnswerFor(pendingPickup?.chapterAnswer ?? null, basics.country))
 	)
 	// Asked once a country from the list is picked, as on /subscribe.
 	const askChapter = $derived(
@@ -483,16 +487,17 @@
 		rowIntent = null
 		resumed = false
 		rowChapterAnswer = null
-		// The next post creates a row, so a re-shown question starts unanswered.
-		chapterChoice = null
 	}
 
 	function continueToIntent(event: SubmitEvent) {
 		event.preventDefault()
+		// Step 2 creates the row with the step-1 answer, and cannot ask for it.
+		if (chapterAnswerMissing) return
 		if (startOverUnlessFor(basics.email)) intent = null
 		const saved = recordId ? null : resume(basics.email)
 		// Intent is rewritten from the post too; preselect what the row holds.
 		if (saved) intent = intentKey(saved.intent) ?? intent
+		if (chapterAnswerMissing) return
 		step = 2
 	}
 
@@ -561,6 +566,8 @@
 					if (result.status === 410) {
 						forgetSignup()
 						dropRecord()
+						// The next post creates a row, so a re-shown question starts unanswered.
+						chapterChoice = null
 						const next = afterRecordGone(mode, isContinuation)
 						if (next === 'step-1') step = 1
 						else if (next === 'signup-form') onRecordGone?.()
@@ -684,12 +691,13 @@
 	{/if}
 {/snippet}
 
-{#snippet chapterQuestionField(postAnswer: boolean, label = '')}
+{#snippet chapterQuestionField(postAnswer: boolean, level: 3 | 4, label = '')}
 	{#if chapterQ}
 		<ChapterShareQuestion
 			question={chapterQ}
 			{postAnswer}
 			{label}
+			{level}
 			bind:answer={
 				() => answerForCountry,
 				(answer: ChapterAnswer | null) =>
@@ -777,7 +785,7 @@
 				</div>
 				<!-- Asked here, where the country is picked, so step 2 stays short; step 2
 				     posts the answer and its wording with the create. -->
-				{@render chapterQuestionField(false, msgs.onboarding_chapter_section_label)}
+				{@render chapterQuestionField(false, 3, msgs.onboarding_chapter_section_label)}
 				<div class="field">
 					<label class="field-label" for="ob-city">{msgs.onboarding_field_city}</label>
 					<input
@@ -811,9 +819,18 @@
 				     name/email/city fields above it, so the browser can explain an
 				     invalid postcode on submit. The chapter question has no native
 				     control, so Continue waits for its answer instead. -->
-				<button type="submit" class="primary" disabled={chapterAnswerMissing}
+				<button
+					type="submit"
+					class="primary"
+					disabled={chapterAnswerMissing}
+					aria-describedby={chapterAnswerMissing ? 'ob-chapter-pending' : undefined}
 					>{msgs.onboarding_btn_continue}</button
 				>
+				{#if chapterAnswerMissing}
+					<p class="helper centered" id="ob-chapter-pending">
+						{chapterQ ? msgs.onboarding_chapter_answer_needed : msgs.onboarding_chapter_loading}
+					</p>
+				{/if}
 				<div class="browse-option">
 					<button type="button" class="secondary" onclick={startBrowse}>
 						{msgs.onboarding_btn_browse}
@@ -1075,7 +1092,7 @@
 							{#if hasUniversities(basics.country)}
 								{@render universityField('loop-university')}
 							{/if}
-							{@render chapterQuestionField(true)}
+							{@render chapterQuestionField(true, 4)}
 							{@render gdprConsentField()}
 							{#if onboardingLive && onboardingModeKnown}
 								{#key turnstileNonce}

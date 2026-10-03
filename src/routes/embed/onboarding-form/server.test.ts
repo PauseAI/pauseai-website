@@ -26,6 +26,10 @@ async function submit(fields: Record<string, string>): Promise<Result> {
 	return (await actions.submit({ request, url, fetch } as never)) as Result
 }
 
+const WORDING_YES_DE =
+	'Share your details with PauseAI Deutschland?\nIf you say yes, we share your signup details with PauseAI Deutschland.\n[chosen] Yes, share my details with PauseAI Deutschland'
+const WORDING_YES_PT =
+	'Share your details with a PauseAI chapter in Portugal when one starts?\nNothing is shared until a chapter starts in Portugal.\n[chosen] Yes, share my details with the chapter when it starts'
 const WORDING_UK =
 	'Share your details with PauseAI United Kingdom?\nPauseAI United Kingdom runs local events and actions.\n[chosen] No, only PauseAI Global'
 
@@ -214,12 +218,40 @@ describe('onboarding submit: chapter sharing', () => {
 		expect(createRecord).not.toHaveBeenCalled()
 	})
 
+	it('refuses a wording that does not end with an option offered for the answer', async () => {
+		for (const [answer, wording] of [
+			['yes', WORDING_UK],
+			['no', WORDING_YES_DE],
+			['no', 'No, only PauseAI Global'],
+			['yes', `${WORDING_YES_DE}\nextra line`]
+		]) {
+			const refused = await submit({
+				...signup,
+				chapter_share: answer,
+				chapter_share_wording: wording
+			})
+			expect(refused.status, wording).toBe(400)
+			expect(refused.data?.message).toBe(CHAPTER_ANSWER_MISSING)
+		}
+		expect(createRecord).not.toHaveBeenCalled()
+	})
+
+	it('accepts a wording shown in another language', async () => {
+		const created = await submit({
+			...signup,
+			chapter_share: 'no',
+			chapter_share_wording:
+				'Deine Daten mit PauseAI UK teilen?\nText.\n[chosen] Nein, nur PauseAI Global'
+		})
+		expect(created).toMatchObject({ success: true })
+	})
+
 	it('writes the box and the wording from a Yes or a No, in the same create', async () => {
-		await submit({ ...signup, chapter_share: 'yes', chapter_share_wording: 'Yes wording' })
+		await submit({ ...signup, chapter_share: 'yes', chapter_share_wording: WORDING_YES_DE })
 		expect(createRecord).toHaveBeenCalledOnce()
 		expect(writtenFields(createRecord)).toMatchObject({
 			'GDPR chapter share permission': true,
-			'GDPR chapter share wording': 'Yes wording'
+			'GDPR chapter share wording': WORDING_YES_DE
 		})
 
 		await submit(signup)
@@ -232,7 +264,7 @@ describe('onboarding submit: chapter sharing', () => {
 	it('clears the chapter fields for a US signup, even if an answer is posted', async () => {
 		const extras: Record<string, string>[] = [
 			{},
-			{ chapter_share: 'yes', chapter_share_wording: 'Yes wording' }
+			{ chapter_share: 'yes', chapter_share_wording: WORDING_YES_DE }
 		]
 		for (const extra of extras) {
 			const created = await submit({ ...usSignup, ...extra })
@@ -247,7 +279,7 @@ describe('onboarding submit: chapter sharing', () => {
 			country: 'Germany',
 			city: 'Berlin',
 			chapter_share: 'yes',
-			chapter_share_wording: 'Share your details with PauseAI Deutschland?'
+			chapter_share_wording: WORDING_YES_DE
 		}
 		const created = await submit(germany)
 		expect(writtenFields(createRecord)['GDPR chapter share permission']).toBe(true)
@@ -306,11 +338,11 @@ describe('onboarding submit: chapter sharing', () => {
 			resumed: '1',
 			agree_gdpr: 'on',
 			chapter_share: 'yes',
-			chapter_share_wording: 'Portugal wording'
+			chapter_share_wording: WORDING_YES_PT
 		})
 		expect(writtenFields(updateRecord)).toMatchObject({
 			'GDPR chapter share permission': true,
-			'GDPR chapter share wording': 'Portugal wording'
+			'GDPR chapter share wording': WORDING_YES_PT
 		})
 	})
 

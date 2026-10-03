@@ -1,8 +1,10 @@
 // The chapter-sharing question on /join, the browse signup and /subscribe, and the
 // copy that depends on its answer. Rules: docs/join-form-flow.md, "Chapter sharing".
 import type { NationalGroupsApiResponse } from '$api/national-groups/+server.js'
-import type { OnboardingMessages } from './messages'
+import { onboardingMessages, type OnboardingMessages } from './messages'
 import { asksChapterQuestion, type ChapterAnswer } from './options'
+
+const CHOSEN_PREFIX = '[chosen] '
 
 export type ChapterQuestion = { heading: string; body: string; yes: string; no: string }
 
@@ -61,7 +63,33 @@ export function chapterQuestion(
 // option they picked, in the language it was shown in. Laid out as in the mock-up
 // the wording was agreed on.
 export function chapterShareWording(question: ChapterQuestion, answer: ChapterAnswer): string {
-	return `${question.heading}\n${question.body}\n[chosen] ${answer === 'yes' ? question.yes : question.no}`
+	return `${question.heading}\n${question.body}\n${CHOSEN_PREFIX}${answer === 'yes' ? question.yes : question.no}`
+}
+
+// The option lines a wording may end with, per answer: every locale, both forms,
+// with any chapter name. The server checks the posted wording against these, so a
+// stored wording always ends with an option the form offers for the stored answer.
+const ANY_CHAPTER = '\u0000'
+const escapeRegExp = (text: string) => text.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
+const chosenLine = (option: string) =>
+	new RegExp(
+		`^${escapeRegExp(`${CHOSEN_PREFIX}${option}`).replace(escapeRegExp(ANY_CHAPTER), '.+')}$`
+	)
+const CHOSEN_LINES: Record<ChapterAnswer, RegExp[]> = {
+	yes: Object.values(onboardingMessages).flatMap((msgs) =>
+		[
+			msgs.onboarding_chapter_yes(ANY_CHAPTER),
+			msgs.onboarding_chapter_subscribe_yes(ANY_CHAPTER),
+			msgs.onboarding_chapter_none_yes,
+			msgs.onboarding_chapter_none_subscribe_yes
+		].map(chosenLine)
+	),
+	no: Object.values(onboardingMessages).map((msgs) => chosenLine(msgs.onboarding_chapter_no))
+}
+
+export function wordingMatchesAnswer(wording: string, answer: ChapterAnswer): boolean {
+	const lastLine = wording.split('\n').at(-1) ?? ''
+	return CHOSEN_LINES[answer].some((pattern) => pattern.test(lastLine))
 }
 
 // The answer the copy below the question follows. Where the question is not asked

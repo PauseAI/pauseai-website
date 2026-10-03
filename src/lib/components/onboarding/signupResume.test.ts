@@ -3,6 +3,7 @@ import { SIGNUP_MAX_AGE_MS } from './signupMaxAge.js'
 import {
 	afterRecordGone,
 	chapterAnswerFor,
+	heldChapterAnswer,
 	forgetSignup,
 	loadSignup,
 	sameEmail,
@@ -203,6 +204,17 @@ describe('signupResume', () => {
 		// Coming back and picking France asks again.
 		expect(chapterAnswerFor(saved, 'France')).toBeNull()
 		expect(chapterAnswerFor(null, 'Germany')).toBeNull()
+	})
+
+	it("counts a picked-up row's answer only while the email is the one it was picked up for", () => {
+		const held = { answer: 'yes' as const, country: 'Germany' }
+		expect(heldChapterAnswer(held, 'Ada@example.org', ' ada@example.org', 'Germany')).toBe('yes')
+		// Back to step 1 and another email: that email gets a row of its own, so it is asked.
+		expect(heldChapterAnswer(held, 'ada@example.org', 'grace@example.org', 'Germany')).toBeNull()
+		// Nothing picked up (a row created in this mount, or none).
+		expect(heldChapterAnswer(held, null, 'ada@example.org', 'Germany')).toBeNull()
+		// Same email, another country: asked again.
+		expect(heldChapterAnswer(held, 'ada@example.org', 'ada@example.org', 'France')).toBeNull()
 	})
 
 	it('drops the saved answer once a post lands in the United States', () => {

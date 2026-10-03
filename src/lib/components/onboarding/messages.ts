@@ -9,6 +9,8 @@
 // The question's text is stored on the person's record as what they were shown, so
 // a change here changes what new records hold.
 interface ChapterShareMessages {
+	onboarding_chapter_answer_needed: string
+	onboarding_chapter_loading: string
 	onboarding_chapter_section_label: string
 	onboarding_chapter_heading: (chapter: string) => string
 	onboarding_chapter_body: (chapter: string) => string
@@ -35,6 +37,8 @@ interface ChapterShareMessages {
 const PRIVACY_EMAIL = 'privacy@pauseai.info'
 
 const chapterShareEn: ChapterShareMessages = {
+	onboarding_chapter_answer_needed: 'Answer the chapter question above to continue.',
+	onboarding_chapter_loading: 'Loading the chapter question…',
 	onboarding_chapter_section_label: 'Your local chapter',
 	onboarding_chapter_heading: (chapter) => `Share your details with ${chapter}?`,
 	onboarding_chapter_body: (chapter) =>
@@ -81,10 +85,13 @@ const chapterShareEn: ChapterShareMessages = {
 // Machine translations awaiting a native speaker's check. The country name stays in
 // English, as the form's country list is English.
 const chapterShareDe: ChapterShareMessages = {
+	onboarding_chapter_answer_needed:
+		'Beantworte oben die Frage zur lokalen Gruppe, um fortzufahren.',
+	onboarding_chapter_loading: 'Die Frage zur lokalen Gruppe wird geladen…',
 	onboarding_chapter_section_label: 'Deine lokale Gruppe',
 	onboarding_chapter_heading: (chapter) => `Deine Daten mit ${chapter} teilen?`,
 	onboarding_chapter_body: (chapter) =>
-		`Wenn du Ja sagst, teilen wir deine Anmeldedaten mit ${chapter}, die eine von PauseAI Global getrennte Organisation sein kann. Du kannst deine Meinung jederzeit ändern, indem du an ${PRIVACY_EMAIL} schreibst.`,
+		`Wenn du Ja sagst, teilen wir deine Anmeldeangaben mit ${chapter}, die eine von PauseAI Global getrennte Organisation sein kann. Du kannst deine Meinung jederzeit ändern, indem du an ${PRIVACY_EMAIL} schreibst.`,
 	onboarding_chapter_yes: (chapter) => `Ja, meine Daten mit ${chapter} teilen`,
 	onboarding_chapter_subscribe_heading: (chapter) => `Auch von ${chapter} hören?`,
 	onboarding_chapter_subscribe_yes: (chapter) =>
@@ -92,7 +99,7 @@ const chapterShareDe: ChapterShareMessages = {
 	onboarding_chapter_none_heading: (country) =>
 		`Deine Daten mit einer PauseAI-Gruppe in ${country} teilen, sobald eine gegründet wird?`,
 	onboarding_chapter_none_body: (country) =>
-		`Bis eine Gruppe in ${country} gegründet wird, wird nichts geteilt. Sie würde dann deine Anmeldedaten erhalten und kann eine von PauseAI Global getrennte Organisation sein. Du kannst deine Meinung jederzeit ändern, indem du an ${PRIVACY_EMAIL} schreibst.`,
+		`Bis eine Gruppe in ${country} gegründet wird, wird nichts geteilt. Sie würde dann deine Anmeldeangaben erhalten und kann eine von PauseAI Global getrennte Organisation sein. Du kannst deine Meinung jederzeit ändern, indem du an ${PRIVACY_EMAIL} schreibst.`,
 	onboarding_chapter_none_yes: 'Ja, meine Daten mit der Gruppe teilen, sobald sie gegründet wird',
 	onboarding_chapter_none_subscribe_heading: (country) =>
 		`Von einer PauseAI-Gruppe in ${country} hören, sobald eine gegründet wird?`,
@@ -128,6 +135,9 @@ const chapterShareDe: ChapterShareMessages = {
 }
 
 const chapterShareFr: ChapterShareMessages = {
+	onboarding_chapter_answer_needed:
+		'Réponds à la question sur le groupe local ci-dessus pour continuer.',
+	onboarding_chapter_loading: 'Chargement de la question sur le groupe local…',
 	onboarding_chapter_section_label: 'Ton groupe local',
 	onboarding_chapter_heading: (chapter) => `Partager tes données avec ${chapter} ?`,
 	onboarding_chapter_body: (chapter) =>
@@ -175,6 +185,9 @@ const chapterShareFr: ChapterShareMessages = {
 }
 
 const chapterShareEs: ChapterShareMessages = {
+	onboarding_chapter_answer_needed:
+		'Responde arriba a la pregunta sobre el grupo local para continuar.',
+	onboarding_chapter_loading: 'Cargando la pregunta sobre el grupo local…',
 	onboarding_chapter_section_label: 'Tu grupo local',
 	onboarding_chapter_heading: (chapter) => `¿Compartir tus datos con ${chapter}?`,
 	onboarding_chapter_body: (chapter) =>

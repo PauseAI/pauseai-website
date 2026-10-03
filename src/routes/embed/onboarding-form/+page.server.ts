@@ -21,6 +21,7 @@ import { recordStubSubmission } from '$lib/server/onboarding-stub'
 import { subscribeToSubstackNewsletter } from '$lib/server/substack'
 import { checkNotSpam } from '$lib/server/turnstile-verify'
 import { hasUniversities, isKnownUniversity } from '$lib/data/universities'
+import { wordingMatchesAnswer } from '$lib/components/onboarding/chapterShare'
 import {
 	COUNTRIES,
 	DISCOVERY_OPTIONS,
@@ -202,7 +203,8 @@ export const actions: Actions = {
 		const isSubscribeForm = data.get('subscribe_form') === '1'
 		// The chapter-sharing answer and the text shown with it, posted only by a form
 		// that showed the question.
-		const chapterAnswer = getString(data, 'chapter_share')
+		const postedAnswer = getString(data, 'chapter_share')
+		const chapterAnswer = isChapterAnswer(postedAnswer) ? postedAnswer : null
 		// Multipart encoding turns the wording's line breaks into CRLF; stored as LF.
 		const chapterWording = getString(data, 'chapter_share_wording').replace(/\r\n?/g, '\n')
 
@@ -254,8 +256,14 @@ export const actions: Actions = {
 		// there clears both fields, so a row whose country was changed to the US after
 		// answering for another country keeps no answer that named that country's
 		// chapter.
-		const writesChapterAnswer = asksChapterQuestion(country) && isChapterAnswer(chapterAnswer)
-		if (writesChapterAnswer && (!chapterWording || chapterWording.length > MAX_WORDING_LENGTH)) {
+		const writesChapterAnswer = asksChapterQuestion(country) && chapterAnswer !== null
+		// The wording comes from the browser, so only its shape is checked: it must end
+		// with an option the form offers for the posted answer.
+		if (
+			writesChapterAnswer &&
+			(chapterWording.length > MAX_WORDING_LENGTH ||
+				!wordingMatchesAnswer(chapterWording, chapterAnswer))
+		) {
 			return fail(400, { message: CHAPTER_ANSWER_MISSING })
 		}
 		if (!existingRecordId && asksChapterQuestion(country) && !writesChapterAnswer) {
