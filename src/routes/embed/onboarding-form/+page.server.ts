@@ -65,10 +65,12 @@ const MEMBERS_TABLE_ID = 'tblL1icZBhTV1gQ9o'
 
 const STORED_LANGUAGES = LANGUAGES.map((l) => l.stored)
 
-// The form drops its id and returns to step 1 on this status, so the next pass
-// collects consent again and creates a row.
-const rowGone = () =>
-	fail(410, { message: 'We could not find your earlier signup. Please go through the form again.' })
+// On a 410 the form drops its id and token and returns to a step that collects
+// consent again (step 1, the /subscribe form, or a browse retry), so the next
+// post creates a row.
+const rowGone = (message: string) => fail(410, { message })
+const ROW_MISSING = 'We could not find your earlier signup. Please go through the form again.'
+const SESSION_EXPIRED = 'Your signup session has expired. Please fill in the form again.'
 
 function getString(formData: FormData, field: string): string {
 	const value = formData.get(field)
@@ -346,7 +348,7 @@ export const actions: Actions = {
 			: null
 		// Refused as if the row were gone, never by creating one, which would bring
 		// back the duplicates the id exists to prevent.
-		if (continuation === 'refused') return rowGone()
+		if (continuation === 'refused') return rowGone(SESSION_EXPIRED)
 		// Which posts earn a token: see checkContinuation.
 		const issueToken = (recordId: string) =>
 			continuation !== 'allowed' ? issueContinuationToken(recordId) : undefined
@@ -356,7 +358,7 @@ export const actions: Actions = {
 			if (recordId) {
 				const updated = await updateRecord(AIRTABLE_BASE_ID, MEMBERS_TABLE_ID, recordId, fields)
 				// The row was deleted since the browser got its id.
-				if (updated === 'missing') return rowGone()
+				if (updated === 'missing') return rowGone(ROW_MISSING)
 				if (updated !== 'updated') {
 					return fail(502, { message: 'Sorry, we could not save your details. Please try again.' })
 				}

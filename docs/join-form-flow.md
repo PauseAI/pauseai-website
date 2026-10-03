@@ -174,10 +174,12 @@ On every update the action checks the posted token against the posted
   holds an id without one for up to 24 hours, and never gains one, so once
   enforcement is on its next update gets the 410 and it starts again.
 - `true` (the same convention as `ONBOARDING_LIVE`): the update is refused with
-  the same 410 as a deleted row, so the form forgets the id and goes back to
-  where consent is collected (see the 410 under "Resuming after a remount"). It
-  never creates a row instead, which would bring back the duplicates the id
-  exists to prevent.
+  the same 410 status as a deleted row, so the form forgets the id and goes back
+  to where consent is collected (see the 410 under "Resuming after a remount").
+  Only the message differs: "Your signup session has expired. Please fill in the
+  form again." rather than the deleted row's "We could not find your earlier
+  signup. Please go through the form again." It never creates a row instead,
+  which would bring back the duplicates the id exists to prevent.
 
 Without `ONBOARDING_CONTINUATION_SECRET` the action mints no token and checks
 nothing, whatever the switch says, and logs that once per cold start: a missing

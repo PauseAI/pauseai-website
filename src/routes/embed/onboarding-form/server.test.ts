@@ -35,6 +35,8 @@ const signup = {
 	agree_gdpr: 'on'
 }
 
+const SESSION_EXPIRED = 'Your signup session has expired. Please fill in the form again.'
+
 const update = (recordToken?: string) => ({
 	email: 'ada@example.org',
 	intent: 'Act now',
@@ -92,9 +94,11 @@ describe('onboarding submit: continuation token', () => {
 		for (const token of [undefined, 'v1.9999999999.' + 'A'.repeat(43)]) {
 			const refused = await submit(update(token))
 			expect(refused.status).toBe(410)
+			expect(refused.data?.message).toBe(SESSION_EXPIRED)
 		}
 		const otherRow = await submit({ ...update(String(created.recordToken)), record_id: 'recGrace' })
 		expect(otherRow.status).toBe(410)
+		expect(otherRow.data?.message).toBe(SESSION_EXPIRED)
 		expect(updateRecord).not.toHaveBeenCalled()
 		expect(createRecord).not.toHaveBeenCalled()
 	})
@@ -107,6 +111,7 @@ describe('onboarding submit: continuation token', () => {
 		vi.setSystemTime(Date.now() + TOKEN_TTL_SECONDS * 1000)
 		const refused = await submit(update(String(created.recordToken)))
 		expect(refused.status).toBe(410)
+		expect(refused.data?.message).toBe(SESSION_EXPIRED)
 		expect(updateRecord).not.toHaveBeenCalled()
 		expect(reportError.mock.calls[0][1]).toMatchObject({ verdict: 'expired' })
 	})
@@ -115,6 +120,7 @@ describe('onboarding submit: continuation token', () => {
 		env.ONBOARDING_CONTINUATION_ENFORCE = 'true'
 		const refused = await submit({ ...signup, ...update('garbage'), resumed: '1' })
 		expect(refused.status).toBe(410)
+		expect(refused.data?.message).toBe(SESSION_EXPIRED)
 		expect(updateRecord).not.toHaveBeenCalled()
 		expect(createRecord).not.toHaveBeenCalled()
 	})
@@ -135,7 +141,18 @@ describe('onboarding submit: continuation token', () => {
 		expect(updated.recordToken).toMatch(/^v1\./)
 		const refused = await submit({ ...stubUpdate, record_token: 'garbage' })
 		expect(refused.status).toBe(410)
+		expect(refused.data?.message).toBe(SESSION_EXPIRED)
 		expect(createRecord).not.toHaveBeenCalled()
 		expect(updateRecord).not.toHaveBeenCalled()
+	})
+
+	it('keeps its own message for a row that is gone', async () => {
+		updateRecord.mockResolvedValue('missing')
+		const created = await submit(signup)
+		const gone = await submit(update(String(created.recordToken)))
+		expect(gone.status).toBe(410)
+		expect(gone.data?.message).toBe(
+			'We could not find your earlier signup. Please go through the form again.'
+		)
 	})
 })
