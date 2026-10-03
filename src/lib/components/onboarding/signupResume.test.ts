@@ -2,6 +2,7 @@ import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 import { SIGNUP_MAX_AGE_MS } from './signupMaxAge.js'
 import {
 	afterRecordGone,
+	chapterAnswerFor,
 	forgetSignup,
 	loadSignup,
 	sameEmail,
@@ -35,7 +36,7 @@ describe('signupResume', () => {
 				recordToken: 'tok1',
 				keepInformed: true,
 				intent: 'Act now',
-				chapterAnswer: 'yes'
+				chapterAnswer: { answer: 'yes', country: 'Germany' }
 			},
 			0
 		)
@@ -44,7 +45,7 @@ describe('signupResume', () => {
 			recordToken: 'tok1',
 			keepInformed: true,
 			intent: 'Act now',
-			chapterAnswer: 'yes'
+			chapterAnswer: { answer: 'yes', country: 'Germany' }
 		})
 	})
 
@@ -56,7 +57,7 @@ describe('signupResume', () => {
 				recordToken: 'tok1',
 				keepInformed: true,
 				intent: 'Act now',
-				chapterAnswer: 'yes'
+				chapterAnswer: { answer: 'yes', country: 'Germany' }
 			},
 			0
 		)
@@ -99,7 +100,7 @@ describe('signupResume', () => {
 				recordToken: 'tok2',
 				keepInformed: true,
 				intent: 'Act now',
-				chapterAnswer: 'yes'
+				chapterAnswer: { answer: 'yes', country: 'Germany' }
 			},
 			0
 		)
@@ -168,19 +169,66 @@ describe('signupResume', () => {
 		const formData = new FormData()
 		formData.set('email', 'ada@example.org')
 		formData.set('intent', 'None')
+		formData.set('country', 'Germany')
 		formData.set('chapter_share', 'no')
 		saveSignupFromPost(formData, 'rec1', 'tok1')
-		expect(loadSignup('ada@example.org')?.chapterAnswer).toBe('no')
+		expect(loadSignup('ada@example.org')?.chapterAnswer).toEqual({
+			answer: 'no',
+			country: 'Germany'
+		})
 
 		// The /subscribe "do more" step, which does not ask again.
 		formData.delete('chapter_share')
 		formData.set('intent', 'Volunteer')
 		saveSignupFromPost(formData, 'rec1', 'tok2')
-		expect(loadSignup('ada@example.org')?.chapterAnswer).toBe('no')
+		expect(loadSignup('ada@example.org')?.chapterAnswer).toEqual({
+			answer: 'no',
+			country: 'Germany'
+		})
 
 		// Another row starts without one.
 		saveSignupFromPost(formData, 'rec2', 'tok3')
 		expect(loadSignup('ada@example.org')?.chapterAnswer).toBeNull()
+	})
+
+	it('counts a saved answer only for the country it was given for', () => {
+		const formData = new FormData()
+		formData.set('email', 'ada@example.org')
+		formData.set('intent', 'None')
+		formData.set('country', 'Germany')
+		formData.set('chapter_share', 'yes')
+		saveSignupFromPost(formData, 'rec1', 'tok1')
+		const saved = loadSignup('ada@example.org')?.chapterAnswer ?? null
+		expect(chapterAnswerFor(saved, ' germany ')).toBe('yes')
+		// Coming back and picking France asks again.
+		expect(chapterAnswerFor(saved, 'France')).toBeNull()
+		expect(chapterAnswerFor(null, 'Germany')).toBeNull()
+	})
+
+	it('drops the saved answer once a post lands in the United States', () => {
+		const formData = new FormData()
+		formData.set('email', 'ada@example.org')
+		formData.set('intent', 'None')
+		formData.set('country', 'Germany')
+		formData.set('chapter_share', 'yes')
+		saveSignupFromPost(formData, 'rec1', 'tok1')
+		formData.delete('chapter_share')
+		formData.set('country', 'United States')
+		saveSignupFromPost(formData, 'rec1', 'tok2')
+		expect(loadSignup('ada@example.org')?.chapterAnswer).toBeNull()
+	})
+
+	it('ignores an answer saved without its country', () => {
+		sessionStorage.setItem(
+			'pauseai-onboarding-signup',
+			JSON.stringify({
+				recordId: 'rec1',
+				email: 'ada@example.org',
+				chapterAnswer: 'yes',
+				savedAt: 0
+			})
+		)
+		expect(loadSignup('ada@example.org', 0)?.chapterAnswer).toBeNull()
 	})
 
 	it('loads an entry saved before the chapter question with no answer', () => {

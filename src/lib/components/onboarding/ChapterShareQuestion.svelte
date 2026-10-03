@@ -23,6 +23,23 @@
 		{ value: 'yes' as const, text: question.yes },
 		{ value: 'no' as const, text: question.no }
 	])
+	let buttons: HTMLButtonElement[] = $state([])
+
+	// Radio-group keyboard pattern: one tab stop, arrow keys move and select.
+	function onKeydown(event: KeyboardEvent, index: number) {
+		const steps: Record<string, number> = {
+			ArrowRight: 1,
+			ArrowDown: 1,
+			ArrowLeft: -1,
+			ArrowUp: -1
+		}
+		const step = steps[event.key]
+		if (!step) return
+		event.preventDefault()
+		const next = (index + step + options.length) % options.length
+		answer = options[next].value
+		buttons[next]?.focus()
+	}
 </script>
 
 {#if label}
@@ -31,20 +48,24 @@
 <div
 	class="chapter-question"
 	role="radiogroup"
+	aria-required="true"
 	aria-labelledby="{id}-heading"
 	aria-describedby="{id}-body"
 >
 	<h3 id="{id}-heading">{question.heading}</h3>
 	<p id="{id}-body">{question.body}</p>
 	<div class="chapter-options">
-		{#each options as option (option.value)}
+		{#each options as option, index (option.value)}
 			<button
 				type="button"
 				class="chapter-option"
 				class:selected={answer === option.value}
 				role="radio"
 				aria-checked={answer === option.value}
+				tabindex={answer === option.value || (!answer && index === 0) ? 0 : -1}
+				bind:this={buttons[index]}
 				onclick={() => (answer = option.value)}
+				onkeydown={(event) => onKeydown(event, index)}
 			>
 				<span class="radio-box" aria-hidden="true"><span class="radio-dot"></span></span>
 				<span>{option.text}</span>

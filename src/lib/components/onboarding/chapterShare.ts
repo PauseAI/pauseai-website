@@ -105,16 +105,21 @@ export function keepInformedConfirmation(
 		: msgs.onboarding_confirm_keep_informed_not_shared
 }
 
-// The countries with a chapter, fetched once per page load. A failed lookup counts
-// as no chapters, as the lead path's copy already does.
+// The countries with a chapter, fetched once per page load. A failed or slow lookup
+// counts as no chapters, as the lead path's copy already does: the question waits
+// for it, so a hung request must not leave Submit disabled.
+const CHAPTER_LOOKUP_TIMEOUT_MS = 5000
 let chapterCountriesPromise: Promise<string[]> | null = null
 
 export function loadChapterCountries(): Promise<string[]> {
-	chapterCountriesPromise ??= fetch('/api/national-groups')
-		.then((response) =>
-			response.ok ? (response.json() as Promise<NationalGroupsApiResponse>) : []
-		)
-		.then((groups) => groups.map((group) => group.name))
-		.catch(() => [])
+	chapterCountriesPromise ??= Promise.race([
+		fetch('/api/national-groups')
+			.then((response) =>
+				response.ok ? (response.json() as Promise<NationalGroupsApiResponse>) : []
+			)
+			.then((groups) => groups.map((group) => group.name))
+			.catch(() => []),
+		new Promise<string[]>((resolve) => setTimeout(() => resolve([]), CHAPTER_LOOKUP_TIMEOUT_MS))
+	])
 	return chapterCountriesPromise
 }

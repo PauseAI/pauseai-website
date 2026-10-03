@@ -32,12 +32,14 @@
 	} from './chapterShare'
 	import {
 		afterRecordGone,
+		chapterAnswerFor,
 		forgetSignup,
 		loadSignup as loadSavedSignup,
 		posted,
 		postedIntent,
 		sameEmail,
 		saveSignupFromPost,
+		type SavedChapterAnswer,
 		type SavedSignup
 	} from './signupResume'
 	import { turnstileSiteKey } from '$lib/turnstile'
@@ -190,9 +192,12 @@
 	// for: another country is another question, so it is asked again.
 	let chapterChoice = $state<{ country: string; answer: ChapterAnswer } | null>(null)
 	// The answer the row already holds from an earlier form (the /subscribe signup
-	// a continuation follows, or a resumed row). The question is never asked over it,
-	// and nothing is posted for it, so it stands.
-	let rowChapterAnswer = $state<ChapterAnswer | null>(initialChapterAnswer)
+	// a continuation follows, or a resumed row), with the country it was given for.
+	// For that country the question is not asked again and nothing is posted, so it
+	// stands; for another country it is asked again.
+	let rowChapterAnswer = $state<SavedChapterAnswer | null>(
+		initialChapterAnswer ? { answer: initialChapterAnswer, country: initialCountry } : null
+	)
 	// Countries with a chapter; null until loaded, and the question waits for it.
 	let chapterCountries = $state<string[] | null>(null)
 	let submitting = $state(false)
@@ -370,7 +375,9 @@
 	const browsePickup = $derived.by(() =>
 		mode === 'browse' && !recordId ? savedFor(basics.email) : null
 	)
-	const rowAnswer = $derived(rowChapterAnswer ?? browsePickup?.chapterAnswer ?? null)
+	const rowAnswer = $derived(
+		chapterAnswerFor(rowChapterAnswer ?? browsePickup?.chapterAnswer ?? null, basics.country)
+	)
 	const askChapter = $derived(
 		!isContinuation && rowAnswer === null && asksChapterQuestion(basics.country)
 	)
@@ -458,7 +465,6 @@
 		if (!recordId || pickedUpFor === null || sameEmail(pickedUpFor, email)) return false
 		dropRecord()
 		keepInformed = initialKeepInformed
-		chapterChoice = null
 		return true
 	}
 
@@ -469,6 +475,8 @@
 		rowIntent = null
 		resumed = false
 		rowChapterAnswer = null
+		// The next post creates a row, so a re-shown question starts unanswered.
+		chapterChoice = null
 	}
 
 	function continueToIntent(event: SubmitEvent) {

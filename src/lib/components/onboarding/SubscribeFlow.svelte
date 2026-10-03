@@ -304,8 +304,10 @@
 		initialKeepInformed={true}
 		initialChapterAnswer={asksChapterQuestion(fields.country) ? chapterAnswer : null}
 		onRecordGone={() => {
-			// Back to the signup, details kept, to create a row with fresh consent.
+			// Back to the signup, details kept, to create a row with fresh consent and
+			// a chapter answer given again.
 			phase = 'form'
+			chapterChoice = null
 			recordId = ''
 			recordToken = ''
 		}}

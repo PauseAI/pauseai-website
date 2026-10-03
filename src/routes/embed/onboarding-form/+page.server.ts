@@ -250,9 +250,10 @@ export const actions: Actions = {
 		// shown. A create outside the US must carry one: the CRM reads an unticked box
 		// on a row with this form's Signup source as a No. An update without one leaves
 		// the row's answer alone (the /subscribe "do more" step, a resumed row that has
-		// one). The United States is not asked, and any post landing there clears both
-		// fields, so a row whose country was changed to the US after answering for
-		// another country keeps no answer that named that country's chapter.
+		// one for this country). The United States is not asked, and any post landing
+		// there clears both fields, so a row whose country was changed to the US after
+		// answering for another country keeps no answer that named that country's
+		// chapter.
 		const writesChapterAnswer = asksChapterQuestion(country) && isChapterAnswer(chapterAnswer)
 		if (writesChapterAnswer && (!chapterWording || chapterWording.length > MAX_WORDING_LENGTH)) {
 			return fail(400, { message: CHAPTER_ANSWER_MISSING })
