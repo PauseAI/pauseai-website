@@ -2,6 +2,8 @@ export const prerender = false
 
 import { AIRTABLE_WRITE_API_KEY } from '$env/static/private'
 import { verificationParameter } from '$lib/config.js'
+import { memberRowToVerify } from '$lib/server/mergedMemberRow'
+import { reportError } from '$lib/server/sentry'
 import Airtable from 'airtable'
 import { StatusCodes } from 'http-status-codes'
 import type { RequestHandler } from './$types'
@@ -16,7 +18,8 @@ const VERIFICATION_TABLES = new Map([
 			baseId: 'appWPTGqZmUcs3NWu',
 			tableId: 'tblL1icZBhTV1gQ9o',
 			keyFieldName: 'Airtable ID',
-			verifiedFieldName: 'Verified email'
+			verifiedFieldName: 'Verified email',
+			followsMergedInto: true
 		}
 	],
 	[
@@ -25,7 +28,8 @@ const VERIFICATION_TABLES = new Map([
 			baseId: 'appWPTGqZmUcs3NWu',
 			tableId: 'tbl2emfOWNWoVz1kW',
 			keyFieldName: 'airtable_id',
-			verifiedFieldName: 'email_verified'
+			verifiedFieldName: 'email_verified',
+			followsMergedInto: false
 		}
 	]
 ])
@@ -60,6 +64,28 @@ export const GET: RequestHandler = async ({ url }) => {
 		})
 		.firstPage()
 	if (!records.length) return new Response('Record not found', { status: StatusCodes.NOT_FOUND })
-	await records[0].patchUpdate(Object.fromEntries([[tableConfig.verifiedFieldName, true]]))
+
+	let recordId = records[0].id
+	if (tableConfig.followsMergedInto) {
+		try {
+			const target = await memberRowToVerify(records[0], (id) => table.find(id))
+			recordId = target.id
+			if (target.dataError) {
+				await reportError(new Error(`Email verification: ${target.dataError}`), {
+					tableId: tableConfig.tableId,
+					recordId: records[0].id
+				})
+			}
+		} catch (error) {
+			// The click still verifies the row it named when the surviving row cannot be read.
+			console.error('Error following "Merged into":', error)
+			await reportError(error, {
+				tableId: tableConfig.tableId,
+				recordId: records[0].id,
+				operation: 'followMergedInto'
+			})
+		}
+	}
+	await table.update(recordId, Object.fromEntries([[tableConfig.verifiedFieldName, true]]))
 	return new Response('OK', { status: StatusCodes.OK })
 }
