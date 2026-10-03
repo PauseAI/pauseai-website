@@ -27,12 +27,13 @@ import {
 	INTENTS,
 	LANGUAGES,
 	MOTIVATIONS,
-	SIGNUP_SOURCE,
-	SUBSCRIBE_SIGNUP_SOURCE,
 	SKILLS,
 	WEEKLY_HOURS,
+	asksChapterQuestion,
+	isChapterAnswer,
 	isValidUKPostcode,
 	normaliseUKPostcode,
+	signupSource,
 	type Intent
 } from '$lib/components/onboarding/options'
 
@@ -71,6 +72,10 @@ const STORED_LANGUAGES = LANGUAGES.map((l) => l.stored)
 const rowGone = (message: string) => fail(410, { message })
 const ROW_MISSING = 'We could not find your earlier signup. Please go through the form again.'
 const SESSION_EXPIRED = 'Your signup session has expired. Please fill in the form again.'
+const CHAPTER_ANSWER_MISSING =
+	'Please answer whether to share your details with a PauseAI chapter. If you cannot see the question, reload the page.'
+// Far above the longest wording any locale renders; only stops a bloated post.
+const MAX_WORDING_LENGTH = 2000
 
 function getString(formData: FormData, field: string): string {
 	const value = formData.get(field)
@@ -178,9 +183,8 @@ export const actions: Actions = {
 		const mode = getString(data, 'mode') === 'browse' ? 'browse' : 'contact'
 		const newsletter = data.get('newsletter') === 'on'
 		const keepInformed = data.get('keep_informed') === 'on'
-		// GDPR consent gates every record-creating submission. /join bundles it with
-		// local-chapter sharing in one checkbox; /subscribe asks the two separately.
-		// Updates carry no checkbox, so the check below exempts them.
+		// GDPR consent gates every record-creating submission. Updates carry no
+		// checkbox, so the check below exempts them.
 		const gdprAgreed = data.get('agree_gdpr') === 'on'
 		// Set when an earlier submission already created the person's record, so
 		// this one updates it instead of creating a duplicate: /join step 2 then the
@@ -189,16 +193,18 @@ export const actions: Actions = {
 		const existingRecordId = getString(data, 'record_id')
 		// A form that picked the record up again after a remount (signupResume.ts)
 		// marks its posts until one succeeds. For the person that post is this
-		// form's signup, so consent, chapter sharing and the Substack opt-in are
-		// handled as on a create, though the write is an update.
+		// form's signup, so consent and the Substack opt-in are handled as on a
+		// create, though the write is an update.
 		const isSignup = !existingRecordId || data.get('resumed') === '1'
 		// The volunteer detail fields are only present on the step-3 form post.
 		const hasVolunteerDetails = data.get('volunteer_details') === 'on'
-		// The /subscribe newsletter form. It requires the same four fields as /join,
-		// but decouples chapter sharing from the privacy consent: the /join form
-		// bundles the two, this one shares only on an explicit local-chapter tick.
+		// The /subscribe newsletter form, which stamps its own Signup source.
 		const isSubscribeForm = data.get('subscribe_form') === '1'
-		const wantsChapter = data.get('chapter_share') === 'on'
+		// The chapter-sharing answer and the text shown with it, posted only by a form
+		// that showed the question.
+		const chapterAnswer = getString(data, 'chapter_share')
+		// Multipart encoding turns the wording's line breaks into CRLF; stored as LF.
+		const chapterWording = getString(data, 'chapter_share_wording').replace(/\r\n?/g, '\n')
 
 		// Creates (both forms) require all four fields; an update (the volunteer
 		// step, or the subscribe "do more" hand-off) patches an existing record and
@@ -240,21 +246,20 @@ export const actions: Actions = {
 			return fail(400, { message: 'Please agree to the data processing consent to continue.' })
 		}
 
-		// Chapter sharing:
-		//  - a /join signup bundles it into the single privacy checkbox -> true
-		//  - a /subscribe signup shares only when they tick the local-updates box
-		//  - any other update (the /subscribe "do more" hand-off, or the volunteer
-		//    step) leaves the signup-time choice alone, except Volunteer/Lead, whose
-		//    local involvement means they hear from a chapter regardless
-		let chapterShare: boolean | undefined
-		if (isSignup) {
-			chapterShare = isSubscribeForm ? wantsChapter : true
-		} else if (intent === 'Volunteer' || intent === 'Lead') {
-			chapterShare = true
-		} else if (isSubscribeForm) {
-			// The subscribe "do more" step reposts the signup-time choice, so backing
-			// out of Volunteer/Lead restores it rather than leaving the escalation.
-			chapterShare = wantsChapter
+		// Chapter sharing is written only from an explicit answer, with the wording
+		// shown. A create outside the US must carry one: the CRM reads an unticked box
+		// on a row with this form's Signup source as a No. An update without one leaves
+		// the row's answer alone (the /subscribe "do more" step, a resumed row that has
+		// one for this country). The United States is not asked, and any post landing
+		// there clears both fields, so a row whose country was changed to the US after
+		// answering for another country keeps no answer that named that country's
+		// chapter.
+		const writesChapterAnswer = asksChapterQuestion(country) && isChapterAnswer(chapterAnswer)
+		if (writesChapterAnswer && (!chapterWording || chapterWording.length > MAX_WORDING_LENGTH)) {
+			return fail(400, { message: CHAPTER_ANSWER_MISSING })
+		}
+		if (!existingRecordId && asksChapterQuestion(country) && !writesChapterAnswer) {
+			return fail(400, { message: CHAPTER_ANSWER_MISSING })
 		}
 
 		const fields: FieldSet = {
@@ -279,7 +284,7 @@ export const actions: Actions = {
 		// helper constrains the result to a short host/path slug. Both fields are
 		// free text, so no option needs to exist for a new value.
 		if (!existingRecordId) {
-			fields['Signup source'] = isSubscribeForm ? SUBSCRIBE_SIGNUP_SOURCE : SIGNUP_SOURCE
+			fields['Signup source'] = signupSource(isSubscribeForm ? 'subscribe' : 'join', country)
 			const sourcePage = resolveSourcePage(data, request, url)
 			if (sourcePage) fields['Source page'] = sourcePage
 		}
@@ -295,8 +300,12 @@ export const actions: Actions = {
 		if (isUK && ukPostcode) fields['Zip code'] = ukPostcode
 		// Like the postcode, only set when non-empty so a partial repost can't blank it.
 		if (hasUniversities(country) && university) fields.University = university
-		if (chapterShare !== undefined) {
-			fields['GDPR chapter share permission'] = chapterShare
+		if (writesChapterAnswer) {
+			fields['GDPR chapter share permission'] = chapterAnswer === 'yes'
+			fields['GDPR chapter share wording'] = chapterWording
+		} else if (!asksChapterQuestion(country)) {
+			fields['GDPR chapter share permission'] = false
+			fields['GDPR chapter share wording'] = ''
 		}
 
 		if (intent === 'Volunteer' && hasVolunteerDetails) {

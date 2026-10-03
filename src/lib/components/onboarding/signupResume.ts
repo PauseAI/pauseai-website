@@ -6,7 +6,13 @@
 // sessionStorage is per tab and per top-level site, so an iframe on a chapter
 // site keeps its own copy.
 
-import { INTENTS, type Intent } from './options'
+import {
+	INTENTS,
+	asksChapterQuestion,
+	isChapterAnswer,
+	type ChapterAnswer,
+	type Intent
+} from './options'
 import { SIGNUP_MAX_AGE_MS } from './signupMaxAge'
 
 const STORAGE_KEY = 'pauseai-onboarding-signup'
@@ -20,6 +26,29 @@ export type SavedSignup = {
 	// its unticked, unselected defaults.
 	keepInformed: boolean
 	intent: Intent
+	// The chapter-sharing answer the row holds and the country it was given for, so
+	// a resumed form does not ask again for that country; null when it holds none (a
+	// US signup, or a row from before the question).
+	chapterAnswer: SavedChapterAnswer | null
+}
+
+export type SavedChapterAnswer = { answer: ChapterAnswer; country: string }
+
+// The saved answer only counts for the country it was given for: another country
+// has another chapter, so the question is asked again.
+export function chapterAnswerFor(
+	saved: SavedChapterAnswer | null,
+	country: string
+): ChapterAnswer | null {
+	return saved && saved.country.trim().toLowerCase() === country.trim().toLowerCase()
+		? saved.answer
+		: null
+}
+
+function isSavedChapterAnswer(value: unknown): value is SavedChapterAnswer {
+	if (typeof value !== 'object' || value === null) return false
+	const { answer, country } = value as Record<string, unknown>
+	return isChapterAnswer(answer) && typeof country === 'string'
 }
 
 type Stored = SavedSignup & { email: string; savedAt: number }
@@ -59,17 +88,41 @@ export function postedIntent(formData: FormData): Intent {
 }
 
 // After a post that returned `recordId`: what that post wrote is what the row holds.
+// A post without a chapter answer left the row's alone, so the saved one is kept,
+// except in the United States, where the server clears it.
 export function saveSignupFromPost(
 	formData: FormData,
 	recordId: string,
 	recordToken: string
 ): void {
+	const answer = posted(formData, 'chapter_share')
+	const country = posted(formData, 'country')
 	saveSignup(posted(formData, 'email'), {
 		recordId,
 		recordToken,
 		keepInformed: posted(formData, 'keep_informed') === 'on',
-		intent: postedIntent(formData)
+		intent: postedIntent(formData),
+		chapterAnswer: !asksChapterQuestion(country)
+			? null
+			: isChapterAnswer(answer)
+				? { answer, country }
+				: savedChapterAnswer(recordId)
 	})
+}
+
+function savedChapterAnswer(recordId: string): SavedChapterAnswer | null {
+	const stored = readStored()
+	return stored.recordId === recordId && isSavedChapterAnswer(stored.chapterAnswer)
+		? stored.chapterAnswer
+		: null
+}
+
+function readStored(): Partial<Stored> {
+	try {
+		return (JSON.parse(storage()?.getItem(STORAGE_KEY) ?? 'null') as Partial<Stored> | null) ?? {}
+	} catch {
+		return {}
+	}
 }
 
 // Where the form goes after a 410, which drops the id: the next post creates a
@@ -96,12 +149,7 @@ export function forgetSignup(): void {
 // their own row, not overwrite the first person's.
 export function loadSignup(email: string, now = Date.now()): SavedSignup | null {
 	if (!email.trim()) return null
-	let stored: Partial<Stored>
-	try {
-		stored = (JSON.parse(storage()?.getItem(STORAGE_KEY) ?? 'null') as Partial<Stored> | null) ?? {}
-	} catch {
-		return null
-	}
+	const stored = readStored()
 	if (
 		typeof stored.recordId !== 'string' ||
 		!stored.recordId ||
@@ -115,6 +163,7 @@ export function loadSignup(email: string, now = Date.now()): SavedSignup | null 
 		recordId: stored.recordId,
 		recordToken: typeof stored.recordToken === 'string' ? stored.recordToken : '',
 		keepInformed: stored.keepInformed === true,
-		intent: isIntent(stored.intent) ? stored.intent : 'None'
+		intent: isIntent(stored.intent) ? stored.intent : 'None',
+		chapterAnswer: isSavedChapterAnswer(stored.chapterAnswer) ? stored.chapterAnswer : null
 	}
 }

@@ -72,9 +72,11 @@ Country/city/languages are things a chapter can reasonably know in advance about
 
 Two fields, written once at record creation and never on an update:
 
-- **`Signup source`** — a stable flow literal: `June 2026 onboarding flow`, or
-  `June 2026 subscribe form` from `/subscribe`. Match it exactly in views and
-  automations; it never carries a where-from suffix.
+- **`Signup source`** — a stable flow literal: `October 2026 onboarding flow`,
+  or `October 2026 subscribe form` from `/subscribe`, each with ` (US)` appended
+  for a United States signup (see "Signup source" in `docs/join-form-flow.md`).
+  Match it exactly in views and automations; it never carries a where-from
+  suffix.
 - **`Source page`** — the host/path the signup came from (`example.org/join`),
   or empty. Resolved server-side, first match wins:
 
