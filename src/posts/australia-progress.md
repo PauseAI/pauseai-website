@@ -8,7 +8,7 @@ Metrics since we founded: 📧147 AI decisionmaker emails, meetings with 👥22 
 Tell us [what you did](mailto:australia@pauseai.info?subject=Aussie%20Did%20a%20Thing), or [what you have cooking](mailto:australia@pauseai.info?subject=Things%20Cooking) so we can support you!
 
 ### 2026 September
-- 📧# AI decisionmaker emails, meetings with 👥# of them, 📅# events with ## attendees.
+- 📧9 AI decisionmaker emails, meetings with 👥5 of them, 📅7 events with 73 attendees.
 - We held [Australia's largest protest on AI x-risk](https://www.instagram.com/p/DdL2EPxE4Zk/?img_index=1).
 
 <div style="display:flex; flex-wrap:wrap; gap:0.5rem; max-width:90%; margin:1rem auto;">
@@ -20,11 +20,11 @@ Tell us [what you did](mailto:australia@pauseai.info?subject=Aussie%20Did%20a%20
 </div>
 
 - We drafted questions for Senate Estimates about AI loss of control.
-- We presented at the [AI Safety ANZ panel on the Joint Select Committee on AI](https://luma.com/b2tipeah?tk=xwvWYj).
+- We presented at the [AI Safety ANZ panel on the Joint Select Committee on AI](https://luma.com/b2tipeah?tk=xwvWYj) and ran a submission-writing workshop for it.
 - Huxley organised the first meeting of our Brisbane group.
 - We flyered outside BSides conference in Canberra.
-- we had a stall at the Kambah Sustainability Festival. Of the 20 people who chatted with us, 7 had heard of AI x-risk and were concerned, 13 had not heard and quickly became concerned. We also got invited to another 3 events!
-
+- We had a stall at the Kambah Sustainability Festival. Of the 20 people who chatted with us, 7 had heard of AI x-risk and were concerned, 13 had not heard and quickly became concerned. We got 2 radio interviews and got invited to another 3 events!
+- We were [interviewed by RTRFM 92.1](https://rtrfm.com.au/story/pauseai-australia-encourages-public-submissions-to-parliamentary-committee/) about the Joint Select Committee on AI, and explicitly warned about AI x-risk.
 
 ### 2026 August
 
