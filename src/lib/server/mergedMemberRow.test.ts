@@ -35,6 +35,13 @@ describe('memberRowToVerify', () => {
 		expect(await memberRowToVerify(merged(), findRow)).toEqual({ id: 'recSurvivor' })
 	})
 
+	it("normalises the named row's email as well as the survivor's", async () => {
+		const findRow = finder(survivor({ 'Verified email': true }))
+		expect(await memberRowToVerify(merged({ Email: ' ADA@example.ORG ' }), findRow)).toEqual({
+			id: 'recSurvivor'
+		})
+	})
+
 	it('follows to an unverified survivor that holds no contact details', async () => {
 		const findRow = finder(survivor({ 'Discord Username': ' ', Phone: '' }))
 		expect(await memberRowToVerify(merged(), findRow)).toEqual({ id: 'recSurvivor' })
