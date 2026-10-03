@@ -70,10 +70,14 @@ export const load: PageServerLoad = async ({ url }) => {
 	const htmlStyle: OnboardingEmailHtmlStyle | undefined =
 		styleParam === 'plain' || styleParam === 'rich' ? styleParam : undefined
 
+	// Shared unless asked otherwise, so a link without the parameter shows what it always has.
+	const chapterShare = params.get('chapterShare') !== 'no'
+
 	const renderParams = {
 		firstName,
 		country,
 		intent,
+		chapterShare,
 		languageOverride: language,
 		htmlStyle,
 		airtable_id: 'previewRecordId123'
@@ -101,6 +105,7 @@ export const load: PageServerLoad = async ({ url }) => {
 			languageLock,
 			country,
 			intent: INTENT_CHOICES.includes(intent) ? intent : 'None',
+			chapterShare: chapterShare ? 'yes' : 'no',
 			style: htmlStyle ?? 'auto'
 		},
 		options: {

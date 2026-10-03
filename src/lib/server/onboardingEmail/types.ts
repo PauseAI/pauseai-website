@@ -33,6 +33,10 @@ export type OnboardingEmailParams = {
 	 *  `email_subscription`. Only the shared email's newsletter line depends on it; undefined
 	 *  keeps that line's hedged "if you opted in" wording rather than guessing. */
 	subscribed?: boolean
+	/** Whether the signup agreed to their details going to their chapter (Airtable
+	 *  `GDPR chapter share permission`). Without it the chapter is not told about them, so the
+	 *  email may not come from the chapter or say the chapter will be in touch. */
+	chapterShare: boolean
 	/** Testing/preview only: force the shared copy's language, skipping the country +
 	 *  languages detection in resolveOnboardingEmailLanguage. The production render
 	 *  endpoint never sets this. */
@@ -49,6 +53,9 @@ export type RenderedOnboardingEmail = {
 	subject: string
 	html: string
 	text: string
+	/** Set only when the sender the Airtable script picks by country would be wrong. The script
+	 *  sends from it as given, so it must be an address on a domain verified in MailerSend. */
+	from?: { email: string; name: string }
 }
 
 /** The three versions the copy varies over, matching the live templates. Anything

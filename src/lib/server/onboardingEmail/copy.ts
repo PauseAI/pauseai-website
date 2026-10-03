@@ -25,8 +25,8 @@ function greeting(firstName: string): EmailBlock[] {
 	return [{ type: 'heading', level: 1, text: `Welcome to PauseAI, ${firstName}!` }]
 }
 
-// Non-volunteers get no personal follow-up, so the block only points at the chapter's public
-// links and promises nothing. It is left out when the chapter has no links to show.
+// Only points at the chapter's public links and promises no follow-up, so it is also what a
+// signup gets who did not agree to chapter sharing. Left out when the chapter has no links.
 function chapterLinksBlock(chapter: ChapterBlockData | null): EmailBlock[] {
 	if (!chapter || chapter.links.length === 0) return []
 	return [
@@ -69,10 +69,18 @@ function enNonVolunteer(
 	}
 }
 
-// Picking Volunteer or Lead includes consent to share details with the chapter, so where there
-// is one it is the chapter that follows up.
-function volunteerContactBlock(chapter: ChapterBlockData | null): EmailBlock[] {
-	if (!chapter) return [{ type: 'paragraph', text: 'Our onboarding team will be in touch.' }]
+// The chapter follows up only when the signup agreed to their details going to it; otherwise the
+// chapter is never told about them, and it is the global onboarding team that follows up.
+function volunteerContactBlock(
+	chapter: ChapterBlockData | null,
+	chapterShare: boolean
+): EmailBlock[] {
+	if (!chapter || !chapterShare) {
+		return [
+			{ type: 'paragraph', text: 'Our onboarding team will be in touch.' },
+			...chapterLinksBlock(chapter)
+		]
+	}
 	const blocks: EmailBlock[] = [
 		{
 			type: 'paragraph',
@@ -83,7 +91,11 @@ function volunteerContactBlock(chapter: ChapterBlockData | null): EmailBlock[] {
 	return blocks
 }
 
-function enVolunteer(chapter: ChapterBlockData | null, firstName: string): EmailContent {
+function enVolunteer(
+	chapter: ChapterBlockData | null,
+	chapterShare: boolean,
+	firstName: string
+): EmailContent {
 	return {
 		subject: `Welcome to PauseAI, ${firstName}!`,
 		greeting: greeting(firstName),
@@ -104,7 +116,7 @@ function enVolunteer(chapter: ChapterBlockData | null, firstName: string): Email
 				type: 'paragraph',
 				text: `Please join us on our global [Discord server](${GLOBAL_DISCORD_URL}).`
 			},
-			...volunteerContactBlock(chapter),
+			...volunteerContactBlock(chapter, chapterShare),
 			{ type: 'heading', text: 'How We Create Change' },
 			{ type: 'paragraph', text: 'At PauseAI, we believe in the power of collective action.' },
 			{
@@ -217,8 +229,9 @@ export function baseContent(
 	language: BaseLanguage,
 	bucket: IntentBucket,
 	chapter: ChapterBlockData | null,
+	chapterShare: boolean,
 	firstName: string
 ): EmailContent {
 	if (bucket !== 'volunteer') return enNonVolunteer(bucket, chapter, firstName)
-	return language === 'es' ? esVolunteer(firstName) : enVolunteer(chapter, firstName)
+	return language === 'es' ? esVolunteer(firstName) : enVolunteer(chapter, chapterShare, firstName)
 }

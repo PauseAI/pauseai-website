@@ -23,6 +23,11 @@ const CHAPTERS: Record<string, ChapterBlockData> = {
 	canada: {
 		name: 'Canada',
 		links: [{ label: 'Events', url: 'https://luma.com/calendar/cal-tsYv79s4aTQC16Q' }]
+	},
+	germany: { name: 'Germany', links: [{ label: 'Website', url: 'https://www.pause-ai.de' }] },
+	'united kingdom': {
+		name: 'United Kingdom',
+		links: [{ label: 'Website', url: 'https://pauseai.uk' }]
 	}
 }
 
@@ -31,7 +36,7 @@ vi.mock('./chapter.js', () => ({
 		Promise.resolve(CHAPTERS[(country ?? '').trim().toLowerCase()] ?? null)
 }))
 
-const { renderOnboardingEmail } = await import('./index.js')
+const { chapterShareFromRequest, renderOnboardingEmail } = await import('./index.js')
 
 const RECORD_ID = 'recTest1234567890'
 const INTENTS = ['None', 'Keep informed', 'Act now', 'Volunteer', 'Lead', '', 'Something new']
@@ -51,7 +56,23 @@ const ALERT_PROMISE =
 	/critical alert|alerta crítica|viktigt och brådskande meddelande|viktiga meddelanden|In dringenden Fällen/
 
 function render(country: string, intent: string, firstName = 'Alex') {
-	return renderOnboardingEmail({ firstName, country, intent, airtable_id: RECORD_ID })
+	return renderOnboardingEmail({
+		firstName,
+		country,
+		intent,
+		airtable_id: RECORD_ID,
+		chapterShare: true
+	})
+}
+
+function renderWithShare(country: string, intent: string, chapterShare: boolean) {
+	return renderOnboardingEmail({
+		firstName: 'Alex',
+		country,
+		intent,
+		chapterShare,
+		airtable_id: RECORD_ID
+	})
 }
 
 function renderSpeaking(country: string, intent: string, languages: string[]) {
@@ -60,7 +81,8 @@ function renderSpeaking(country: string, intent: string, languages: string[]) {
 		country,
 		intent,
 		languages,
-		airtable_id: RECORD_ID
+		airtable_id: RECORD_ID,
+		chapterShare: true
 	})
 }
 
@@ -70,7 +92,8 @@ function renderSubscribed(country: string, intent: string, subscribed: boolean |
 		country,
 		intent,
 		subscribed,
-		airtable_id: RECORD_ID
+		airtable_id: RECORD_ID,
+		chapterShare: true
 	})
 }
 
@@ -286,5 +309,102 @@ describe('renderOnboardingEmail', () => {
 	it("does not let a signup's name render as a link", async () => {
 		const email = await render('', 'None', '[Verify here](https://example.com)')
 		expect(email.html).not.toContain('href="https://example.com"')
+	})
+
+	describe('for a signup who did not agree to chapter sharing', () => {
+		const GLOBAL_SENDER = { email: 'info@pauseai.info', name: 'PauseAI' }
+		const CHAPTER_EMAILS = [
+			['United Kingdom', 'None', 'Welcome to PauseAI UK Alex!'],
+			['United Kingdom', 'Volunteer', 'Welcome to PauseAI UK Alex!'],
+			['Canada', 'Volunteer', 'Welcome to PauseAI Canada Alex!'],
+			['Germany', 'None', 'Willkommen bei PauseAI Deutschland, Alex!'],
+			['Germany', 'Volunteer', 'Willkommen bei PauseAI Deutschland, Alex!'],
+			['Sweden', 'None', 'Tack för att du har registrerat dig hos PauseAI'],
+			['Sweden', 'Volunteer', 'PauseAI Sverige - Volontär/lead inom PauseAI']
+		]
+
+		it("gives the shared copy from PauseAI Global instead of a chapter's own email", async () => {
+			for (const [country, intent, chapterSubject] of CHAPTER_EMAILS) {
+				const where = `${country} / ${intent}`
+				const shared = await renderWithShare(country, intent, true)
+				expect(shared.subject, where).toBe(chapterSubject)
+				expect(shared.from, where).toBeUndefined()
+
+				const declined = await renderWithShare(country, intent, false)
+				expect(declined.subject, where).toBe(
+					intent === 'Volunteer' ? 'Welcome to PauseAI, Alex!' : 'Thanks for signing up to PauseAI'
+				)
+				expect(declined.from, where).toEqual(GLOBAL_SENDER)
+				expect(declined.text, where).toContain('Maxime and The PauseAI Global Team')
+			}
+		})
+
+		it('says the onboarding team will be in touch, not the chapter', async () => {
+			for (const country of ['United Kingdom', 'Canada', 'Germany', 'Netherlands', 'Belgium']) {
+				const declined = await renderWithShare(country, 'Volunteer', false)
+				expect(declined.text, country).toContain('Our onboarding team will be in touch.')
+				expect(declined.text, country).not.toContain('will be in touch to invite you')
+			}
+			// The chapter's public links promise nothing, so they stay.
+			const netherlands = await renderWithShare('Netherlands', 'Volunteer', false)
+			expect(netherlands.text).toContain("There's a PauseAI chapter in Netherlands.")
+			expect(netherlands.text).toContain('https://chat.whatsapp.com/example')
+
+			expect((await renderWithShare('Netherlands', 'Volunteer', true)).text).toContain(
+				'PauseAI Netherlands will be in touch'
+			)
+		})
+
+		it('keeps the public chapter links for a non-volunteer', async () => {
+			for (const country of ['Netherlands', 'Canada']) {
+				const shared = await renderWithShare(country, 'Act now', true)
+				const declined = await renderWithShare(country, 'Act now', false)
+				expect(declined.text, country).toBe(shared.text)
+				expect(declined.html, country).toBe(shared.html)
+				expect(declined.from, country).toEqual(GLOBAL_SENDER)
+			}
+		})
+
+		it('changes nothing but the sender where there is no chapter', async () => {
+			for (const intent of ['None', 'Act now', 'Volunteer']) {
+				const shared = await renderWithShare('', intent, true)
+				const declined = await renderWithShare('', intent, false)
+				expect({ ...declined, from: undefined }, intent).toEqual(shared)
+			}
+		})
+	})
+
+	// The endpoint returns the rendered email as it is, so an extra key would change the JSON the
+	// Airtable script reads for every signup who agreed.
+	it('returns only the email for a signup who agreed to chapter sharing', async () => {
+		for (const country of COUNTRIES) {
+			for (const intent of INTENTS) {
+				expect(Object.keys(await renderWithShare(country, intent, true)).sort()).toEqual([
+					'html',
+					'subject',
+					'text'
+				])
+			}
+		}
+	})
+})
+
+describe('chapterShareFromRequest', () => {
+	it('takes only true as agreement', () => {
+		expect(chapterShareFromRequest({ gdpr_chapter_share: true })).toBe(true)
+		for (const value of [false, null, undefined, 'true', 1, [true]]) {
+			expect(chapterShareFromRequest({ gdpr_chapter_share: value }), String(value)).toBe(false)
+		}
+	})
+
+	it('logs a request that does not carry the key at all', () => {
+		const warn = vi.spyOn(console, 'warn').mockImplementation(() => {})
+		expect(chapterShareFromRequest({ first_name: 'Alex' })).toBe(false)
+		expect(warn).toHaveBeenCalledTimes(1)
+		warn.mockClear()
+		chapterShareFromRequest({ gdpr_chapter_share: false })
+		chapterShareFromRequest({ gdpr_chapter_share: null })
+		expect(warn).not.toHaveBeenCalled()
+		warn.mockRestore()
 	})
 })

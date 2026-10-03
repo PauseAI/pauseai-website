@@ -1,7 +1,10 @@
 export const prerender = false
 
 import { env } from '$env/dynamic/private'
-import { renderOnboardingEmail } from '$lib/server/onboardingEmail/index.js'
+import {
+	chapterShareFromRequest,
+	renderOnboardingEmail
+} from '$lib/server/onboardingEmail/index.js'
 import { json } from '@sveltejs/kit'
 import { StatusCodes } from 'http-status-codes'
 import type { RequestHandler } from './$types'
@@ -20,6 +23,7 @@ type RequestBody = {
 	languages?: unknown
 	airtable_id?: unknown
 	email_subscription?: unknown
+	gdpr_chapter_share?: unknown
 }
 
 function isNonEmptyString(value: unknown): value is string {
@@ -63,7 +67,9 @@ export const POST: RequestHandler = async ({ request }) => {
 			intent: typeof body.intent === 'string' ? body.intent : undefined,
 			languages,
 			airtable_id: body.airtable_id,
-			subscribed: typeof body.email_subscription === 'boolean' ? body.email_subscription : undefined
+			subscribed:
+				typeof body.email_subscription === 'boolean' ? body.email_subscription : undefined,
+			chapterShare: chapterShareFromRequest(body)
 		})
 		return json(rendered)
 	} catch (error) {
