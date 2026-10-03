@@ -1,0 +1,154 @@
+<!--
+	The chapter-sharing yes/no, with no default. Posts `chapter_share` and the text
+	shown as `chapter_share_wording` once answered; the host form keeps its submit
+	disabled until then. Rules: docs/join-form-flow.md, "Chapter sharing".
+-->
+<script lang="ts">
+	import { chapterShareWording, type ChapterQuestion } from './chapterShare'
+	import type { ChapterAnswer } from './options'
+
+	let {
+		question,
+		answer = $bindable(),
+		label = ''
+	}: {
+		question: ChapterQuestion
+		answer: ChapterAnswer | null
+		// Section heading above the box; omitted where the form has none.
+		label?: string
+	} = $props()
+
+	const id = $props.id()
+	const options = $derived([
+		{ value: 'yes' as const, text: question.yes },
+		{ value: 'no' as const, text: question.no }
+	])
+</script>
+
+{#if label}
+	<p class="section-label">{label}</p>
+{/if}
+<div
+	class="chapter-question"
+	role="radiogroup"
+	aria-labelledby="{id}-heading"
+	aria-describedby="{id}-body"
+>
+	<h3 id="{id}-heading">{question.heading}</h3>
+	<p id="{id}-body">{question.body}</p>
+	<div class="chapter-options">
+		{#each options as option (option.value)}
+			<button
+				type="button"
+				class="chapter-option"
+				class:selected={answer === option.value}
+				role="radio"
+				aria-checked={answer === option.value}
+				onclick={() => (answer = option.value)}
+			>
+				<span class="radio-box" aria-hidden="true"><span class="radio-dot"></span></span>
+				<span>{option.text}</span>
+			</button>
+		{/each}
+	</div>
+</div>
+{#if answer}
+	<input type="hidden" name="chapter_share" value={answer} />
+	<input type="hidden" name="chapter_share_wording" value={chapterShareWording(question, answer)} />
+{/if}
+
+<style>
+	/* As OnboardingFlow's section labels. */
+	.section-label {
+		font-weight: bold;
+		font-size: 0.9rem;
+		text-transform: uppercase;
+		letter-spacing: 0.05em;
+		opacity: 0.7;
+		margin: 0.75rem 0 0.5rem 0;
+	}
+
+	.chapter-question {
+		border: 1px solid var(--brand-subtle);
+		border-radius: 16px;
+		padding: 1rem;
+		background-color: var(--bg);
+	}
+
+	h3 {
+		margin: 0 0 0.4rem;
+		font-size: 1.05rem;
+		line-height: 1.35;
+	}
+
+	p {
+		margin: 0 0 0.75rem;
+		font-size: 0.9rem;
+		opacity: 0.85;
+	}
+
+	.chapter-options {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		gap: 0.75rem;
+	}
+
+	@media (max-width: 600px) {
+		.chapter-options {
+			grid-template-columns: 1fr;
+		}
+	}
+
+	.chapter-option {
+		display: flex;
+		align-items: center;
+		gap: 0.6rem;
+		padding: 0.8rem 1rem;
+		background-color: var(--bg);
+		border: 2px solid var(--brand-subtle);
+		border-radius: 16px;
+		cursor: pointer;
+		text-align: left;
+		font-family: var(--font-body);
+		font-weight: 700;
+		font-size: 0.95rem;
+		color: var(--text);
+		transition: border-color 0.15s;
+	}
+
+	.chapter-option:hover {
+		border-color: var(--brand);
+	}
+
+	.chapter-option.selected {
+		border-color: var(--brand);
+		outline: 2px solid var(--brand);
+	}
+
+	.radio-box {
+		display: inline-flex;
+		flex-shrink: 0;
+		align-items: center;
+		justify-content: center;
+		width: 1.3rem;
+		height: 1.3rem;
+		border: 2px solid var(--brand-subtle);
+		border-radius: 50%;
+		background-color: var(--bg);
+	}
+
+	.radio-dot {
+		width: 0.6rem;
+		height: 0.6rem;
+		border-radius: 50%;
+	}
+
+	.selected .radio-box {
+		border-color: var(--brand);
+		background-color: var(--brand);
+	}
+
+	.selected .radio-dot {
+		background-color: var(--bg);
+	}
+</style>
