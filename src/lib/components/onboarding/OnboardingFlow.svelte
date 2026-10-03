@@ -22,6 +22,7 @@
 	import Stepper from './Stepper.svelte'
 	import { getMessages } from './i18n.svelte'
 	import {
+		afterRecordGone,
 		forgetSignup,
 		loadSignup,
 		posted,
@@ -64,11 +65,13 @@
 		initialFullName = '',
 		initialLanguages = [] as string[],
 		initialRecordId = '',
+		initialRecordToken = '',
 		startStep = 1,
 		initialKeepInformed = false,
 		initialChapterShare = false,
 		initialSource = '',
-		onSignup
+		onSignup,
+		onRecordGone
 	}: {
 		initialEmail?: string
 		initialCountry?: string
@@ -84,6 +87,9 @@
 		// the intent step, so this submission updates that record instead of
 		// creating a duplicate, and pre-sets the newsletter opt-in they already made.
 		initialRecordId?: string
+		// The token the server issued with that id. A prop, like the id, so it never
+		// reaches a URL.
+		initialRecordToken?: string
 		startStep?: 1 | 2
 		initialKeepInformed?: boolean
 		// The chapter-updates choice made on the subscribe form, reposted so backing
@@ -93,6 +99,10 @@
 		// Not called for updates to an existing record (the volunteer step, or a
 		// /subscribe continuation) nor for silently dropped spam submissions.
 		onSignup?: () => void
+		// Required with initialRecordId: called when the server refuses to update
+		// that row (410), so the host returns to the form that collects consent,
+		// since this one hides it and the next post must create a row.
+		onRecordGone?: () => void
 	} = $props()
 
 	// Starts true so an unanswered request keeps the anti-spam check required.
@@ -146,6 +156,9 @@
 	// /subscribe flow hands off, it's seeded with the record already created there.
 	// Also kept in sessionStorage, for a remount: see signupResume.ts.
 	let recordId = $state(initialRecordId)
+	// Issued by the server with recordId and posted beside it as proof this tab
+	// may update that row. Cleared wherever recordId is.
+	let recordToken = initialRecordToken
 	// The address an id picked up from sessionStorage was picked up for. That id
 	// is only ever posted with it: after Back, another address gets a row of its
 	// own instead of overwriting the earlier signup. An id created in this mount
@@ -388,6 +401,7 @@
 		// A stub-mode id (a preview before going live) names no Airtable row.
 		if (!saved || (onboardingLive && saved.recordId.startsWith('stub-'))) return null
 		recordId = saved.recordId
+		recordToken = saved.recordToken
 		pickedUpFor = email
 		rowIntent = saved.intent
 		resumed = true
@@ -401,12 +415,17 @@
 	// one carries over, the opt-in least of all.
 	function startOverUnlessFor(email: string): boolean {
 		if (!recordId || pickedUpFor === null || sameEmail(pickedUpFor, email)) return false
+		dropRecord()
+		keepInformed = initialKeepInformed
+		return true
+	}
+
+	function dropRecord() {
 		recordId = ''
+		recordToken = ''
 		pickedUpFor = null
 		rowIntent = null
 		resumed = false
-		keepInformed = initialKeepInformed
-		return true
 	}
 
 	function continueToIntent(event: SubmitEvent) {
@@ -441,6 +460,7 @@
 			}
 			// The only place record_id is posted, so every form gets the checks above.
 			if (recordId) formData.set('record_id', recordId)
+			if (recordId && recordToken) formData.set('record_token', recordToken)
 			if (resumed) formData.set('resumed', '1')
 			submitting = true
 			// Run the start callback synchronously, inside the user gesture,
@@ -462,27 +482,29 @@
 					if (typeof result.data?.recordId === 'string') {
 						// A spam drop also reports success but carries no recordId, so
 						// this only fires on a real create.
-						if (!recordId) onSignup?.()
+						const created = !recordId
+						if (created) onSignup?.()
 						recordId = result.data.recordId
+						// An update that didn't prove itself gets no token back; the one
+						// this tab holds is still the one for this row.
+						const token: unknown = result.data.recordToken
+						if (typeof token === 'string') recordToken = token
+						else if (created) recordToken = ''
 						rowIntent = postedIntent(formData)
 						resumed = false
-						saveSignupFromPost(formData, recordId)
+						saveSignupFromPost(formData, recordId, recordToken)
 					}
 					onSuccess(result.data, startValue)
 				} else if (result.type === 'failure') {
-					// 410: the row behind recordId no longer exists. Any other failure,
-					// an outage included, keeps the id, or the retry would duplicate.
-					// Back to step 1, because a new row needs the step-2 consent, which
-					// the volunteer form doesn't post. The browse form posts its own and
-					// can just retry. (The /subscribe continuation's id is seconds old
-					// and never resumed, so it doesn't get here.)
+					// 410: the row behind recordId no longer exists, or the post carried
+					// no valid continuation token for it. Any other failure, an outage
+					// included, keeps the id, or the retry would duplicate.
 					if (result.status === 410) {
 						forgetSignup()
-						recordId = ''
-						pickedUpFor = null
-						rowIntent = null
-						resumed = false
-						if (mode === 'contact' && !isContinuation) step = 1
+						dropRecord()
+						const next = afterRecordGone(mode, isContinuation)
+						if (next === 'step-1') step = 1
+						else if (next === 'signup-form') onRecordGone?.()
 					}
 					toast.error(String(result.data?.message ?? msgs.onboarding_error_generic))
 				} else {

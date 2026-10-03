@@ -16,6 +16,7 @@ import type { Actions, PageServerLoad } from './$types'
 import type { NationalGroupsApiResponse } from '$api/national-groups/+server.js'
 import { createRecord, updateRecord } from '$lib/airtable'
 import { isOnboardingLive } from '$lib/server/onboarding'
+import { checkContinuation, issueContinuationToken } from '$lib/server/onboardingContinuation'
 import { recordStubSubmission } from '$lib/server/onboarding-stub'
 import { subscribeToSubstackNewsletter } from '$lib/server/substack'
 import { checkNotSpam } from '$lib/server/turnstile-verify'
@@ -63,6 +64,13 @@ const AIRTABLE_BASE_ID = 'appWPTGqZmUcs3NWu'
 const MEMBERS_TABLE_ID = 'tblL1icZBhTV1gQ9o'
 
 const STORED_LANGUAGES = LANGUAGES.map((l) => l.stored)
+
+// On a 410 the form drops its id and token and returns to a step that collects
+// consent again (step 1, the /subscribe form, or a browse retry), so the next
+// post creates a row.
+const rowGone = (message: string) => fail(410, { message })
+const ROW_MISSING = 'We could not find your earlier signup. Please go through the form again.'
+const SESSION_EXPIRED = 'Your signup session has expired. Please fill in the form again.'
 
 function getString(formData: FormData, field: string): string {
 	const value = formData.get(field)
@@ -177,6 +185,7 @@ export const actions: Actions = {
 		// Set when an earlier submission already created the person's record, so
 		// this one updates it instead of creating a duplicate: /join step 2 then the
 		// volunteer form, or /subscribe then its "do more" hand-off.
+		// Not secret, so an update is gated on the `record_token` minted with it.
 		const existingRecordId = getString(data, 'record_id')
 		// A form that picked the record up again after a remount (signupResume.ts)
 		// marks its posts until one succeeds. For the person that post is this
@@ -334,17 +343,22 @@ export const actions: Actions = {
 			}
 		}
 
+		const continuation = existingRecordId
+			? await checkContinuation(existingRecordId, getString(data, 'record_token'))
+			: null
+		// Refused as if the row were gone, never by creating one, which would bring
+		// back the duplicates the id exists to prevent.
+		if (continuation === 'refused') return rowGone(SESSION_EXPIRED)
+		// Which posts earn a token: see checkContinuation.
+		const issueToken = (recordId: string) =>
+			continuation !== 'allowed' ? issueContinuationToken(recordId) : undefined
+
 		if (live) {
 			let recordId: string | undefined = existingRecordId || undefined
 			if (recordId) {
 				const updated = await updateRecord(AIRTABLE_BASE_ID, MEMBERS_TABLE_ID, recordId, fields)
-				// The row was deleted since the browser got its id. A status of its own,
-				// so the form drops the id and its next submission creates a row.
-				if (updated === 'missing') {
-					return fail(410, {
-						message: 'We could not find your earlier signup. Please go through the form again.'
-					})
-				}
+				// The row was deleted since the browser got its id.
+				if (updated === 'missing') return rowGone(ROW_MISSING)
 				if (updated !== 'updated') {
 					return fail(502, { message: 'Sorry, we could not save your details. Please try again.' })
 				}
@@ -361,7 +375,7 @@ export const actions: Actions = {
 			if (newsletter && isSignup) {
 				await subscribeToSubstackNewsletter(email)
 			}
-			return { success: true, recordId }
+			return { success: true, recordId, recordToken: await issueToken(recordId) }
 		}
 
 		// Recorded only for stub inspection, so it is resolved here rather than on
@@ -385,9 +399,11 @@ export const actions: Actions = {
 			}
 		})
 
+		const recordId = existingRecordId || `stub-${submission.id}`
 		return {
 			success: true,
-			recordId: existingRecordId || `stub-${submission.id}`,
+			recordId,
+			recordToken: await issueToken(recordId),
 			submission
 		}
 	}

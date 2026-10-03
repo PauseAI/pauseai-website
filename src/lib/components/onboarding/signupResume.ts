@@ -7,12 +7,14 @@
 // site keeps its own copy.
 
 import { INTENTS, type Intent } from './options'
+import { SIGNUP_MAX_AGE_MS } from './signupMaxAge'
 
 const STORAGE_KEY = 'pauseai-onboarding-signup'
-const MAX_AGE_MS = 24 * 60 * 60 * 1000
 
 export type SavedSignup = {
 	recordId: string
+	// The server's proof that this tab may update the row; '' when it issued none.
+	recordToken: string
 	// What the row holds for the two fields every update rewrites from the post
 	// (`Email subscription`, `Intent`), so a resumed form reposts them instead of
 	// its unticked, unselected defaults.
@@ -57,12 +59,29 @@ export function postedIntent(formData: FormData): Intent {
 }
 
 // After a post that returned `recordId`: what that post wrote is what the row holds.
-export function saveSignupFromPost(formData: FormData, recordId: string): void {
+export function saveSignupFromPost(
+	formData: FormData,
+	recordId: string,
+	recordToken: string
+): void {
 	saveSignup(posted(formData, 'email'), {
 		recordId,
+		recordToken,
 		keepInformed: posted(formData, 'keep_informed') === 'on',
 		intent: postedIntent(formData)
 	})
+}
+
+// Where the form goes after a 410, which drops the id: the next post creates a
+// row, and that needs the privacy consent again. The browse form posts its own
+// and can retry; the contact flow collects it on step 1-2; a /subscribe
+// continuation hides it, so it hands back to the subscribe form.
+export function afterRecordGone(
+	mode: 'contact' | 'browse',
+	isContinuation: boolean
+): 'retry' | 'step-1' | 'signup-form' {
+	if (mode === 'browse') return 'retry'
+	return isContinuation ? 'signup-form' : 'step-1'
 }
 
 export function forgetSignup(): void {
@@ -88,12 +107,13 @@ export function loadSignup(email: string, now = Date.now()): SavedSignup | null 
 		!stored.recordId ||
 		stored.email !== normalise(email) ||
 		typeof stored.savedAt !== 'number' ||
-		now - stored.savedAt > MAX_AGE_MS
+		now - stored.savedAt > SIGNUP_MAX_AGE_MS
 	) {
 		return null
 	}
 	return {
 		recordId: stored.recordId,
+		recordToken: typeof stored.recordToken === 'string' ? stored.recordToken : '',
 		keepInformed: stored.keepInformed === true,
 		intent: isIntent(stored.intent) ? stored.intent : 'None'
 	}
