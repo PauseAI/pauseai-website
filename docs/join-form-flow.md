@@ -230,8 +230,9 @@ that country.
   country now selected; otherwise the earlier answer stands and the post carries
   none. A row with no answer (a US row, or one from before the question), or one
   answered for another country, is asked again, and the update writes the new
-  answer and wording. The browse form, which picks the row up only when it
-  submits, reads the stored row as soon as the email is typed to decide the same. `onSignup`
+  answer and wording. Step 1 and the browse form, which pick the row up only
+  when they submit, read the stored row as soon as the email is typed to decide
+  whether to show the question. `onSignup`
   (the embed's `onboarding_signup_complete` message) does not fire again: the row was
   announced when it was created.
 - `SubscribeFlow` saves but never resumes: it always posts `intent=None`, which
@@ -325,7 +326,7 @@ allowlists, and the live/stub switch only need to be maintained in one place.
 ```mermaid
 stateDiagram-v2
     [*] --> Step1
-    Step1: Step 1 — Basic info<br/>(name, email, country, city,<br/>optional UK postcode and university<br/>when country = United Kingdom)
+    Step1: Step 1 — Basic info<br/>(name, email, country, chapter question,<br/>city, optional UK postcode and university<br/>when country = United Kingdom)
     Step1 --> Step2: Continue (client-side, mode=contact)
     Step1 --> Browse: "I just want to take action now" (mode=browse)
     Browse: Browse mode<br/>(act-now, no signup)<br/>includes ActionCards
@@ -359,7 +360,10 @@ stateDiagram-v2
     Browse --> [*]
 ```
 
-Step 2 shows the two email opt-ins above the intent cards, with a
+Step 1 asks the chapter question once a country from the list is picked (see
+"Chapter sharing"); Continue stays disabled until it is answered, the one gate on
+step 1 that is not native validation. Step 2 shows the two email opt-ins above
+the intent cards, with a
 critical-alert disclosure under the opt-ins (`aria-describedby` on both, so
 screen readers reach it). On `/join`, neither the opt-ins nor an intent is
 required: a submission carrying only the GDPR consent is valid and lands on
@@ -467,25 +471,28 @@ language shown. A No is stored with its wording too, as evidence of what was
 declined. Both are written together, in the same Airtable call as the rest of
 the row, and only from an explicit answer.
 
-Every form that creates a row asks the same question, with no default: step 2
-of `/join` (above the opt-ins, so the Keep me informed, Volunteer and Lead copy
-below it can say who will be in touch), the browse signup card, and
-`/subscribe` (below the city, with a Yes that also covers chapter email, since
-nothing else on that form names the chapter as a sender). `ChapterShareQuestion.svelte`
-renders it and posts `chapter_share` (`yes` or `no`) and `chapter_share_wording`
-while it is shown; `chapterShare.ts` builds its text. Where the country has a
+Every form that creates a row asks the same question, with no default, right
+after the country field: step 1 of `/join`, the browse signup card, and
+`/subscribe` (whose Yes also covers chapter email, since nothing else on that
+form names the chapter as a sender). `ChapterShareQuestion.svelte` renders it
+and `chapterShare.ts` builds its text. The form that shows it posts
+`chapter_share` (`yes` or `no`) and `chapter_share_wording`, except on `/join`:
+step 1 posts nothing, so step 2, which creates the row, posts the step-1 answer
+and the wording shown with it as hidden inputs. Step 2's Keep me informed,
+Volunteer and Lead copy and the nudge follow that answer. An answer belongs to
+the country it was given for: changing the country asks again. Where the country has a
 chapter (it is in `/api/national-groups`) the question names it: "PauseAI <country>",
 or the chapter's own name from `CHAPTER_DISPLAY_NAMES` in `chapterShare.ts`
 (the National Chapters table holds no display name); elsewhere it asks about a chapter "when one starts". It
 waits for that lookup, and a failed lookup, or one taking over five seconds,
 counts as no chapter.
 
-| case                                                                                                                                 | what is written                                                                                                                                                                                                     |
-| ------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| create outside the United States                                                                                                     | the box from the answer (ticked for Yes) and the wording; a create without an answer is refused with a 400                                                                                                          |
-| any post with country United States (create or update)                                                                               | the box unticked and the wording empty: the question is not shown there, as PauseAI US is not a chapter, and a row whose country changed to the US after answering keeps no answer naming another country's chapter |
-| update that showed the question (Back and resubmit, or a resumed row with no answer for this country yet)                            | the box and the wording from the answer                                                                                                                                                                             |
-| update that did not (the volunteer step, the `/subscribe` "do more" step, a resumed row that already has an answer for this country) | neither field, so the earlier answer stands                                                                                                                                                                         |
+| case                                                                                                                                  | what is written                                                                                                                                                                                                     |
+| ------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| create outside the United States                                                                                                      | the box from the answer (ticked for Yes) and the wording; a create without an answer is refused with a 400                                                                                                          |
+| any post with country United States (create or update)                                                                                | the box unticked and the wording empty: the question is not shown there, as PauseAI US is not a chapter, and a row whose country changed to the US after answering keeps no answer naming another country's chapter |
+| update that carries an answer (Back to step 1 and resubmit, or a resumed row with no answer for this country yet)                     | the box and the wording from the answer                                                                                                                                                                             |
+| update that does not (the volunteer step, the `/subscribe` "do more" step, a resumed row that already has an answer for this country) | neither field, so the earlier answer stands                                                                                                                                                                         |
 
 The server cannot see whether a resumed row has an answer, so it requires one
 only on a create. That is enough for what the CRM relies on: outside the US, an

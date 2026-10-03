@@ -1,7 +1,8 @@
 <!--
-	The chapter-sharing yes/no, with no default. Posts `chapter_share` and the text
-	shown as `chapter_share_wording` once answered; the host form keeps its submit
-	disabled until then. Rules: docs/join-form-flow.md, "Chapter sharing".
+	The chapter-sharing yes/no, with no default. Once answered it posts
+	`chapter_share` and the text shown as `chapter_share_wording`, unless the host
+	posts them from another form (/join step 1 is client-only; step 2 posts them).
+	The host keeps its submit disabled until it is answered. Rules: docs/join-form-flow.md, "Chapter sharing".
 -->
 <script lang="ts">
 	import { chapterShareWording, type ChapterQuestion } from './chapterShare'
@@ -10,11 +11,13 @@
 	let {
 		question,
 		answer = $bindable(),
+		postAnswer = true,
 		label = ''
 	}: {
 		question: ChapterQuestion
 		answer: ChapterAnswer | null
-		// Section heading above the box; omitted where the form has none.
+		postAnswer?: boolean
+		// Section heading above the box, where the form has section headings.
 		label?: string
 	} = $props()
 
@@ -73,7 +76,7 @@
 		{/each}
 	</div>
 </div>
-{#if answer}
+{#if answer && postAnswer}
 	<input type="hidden" name="chapter_share" value={answer} />
 	<input type="hidden" name="chapter_share_wording" value={chapterShareWording(question, answer)} />
 {/if}

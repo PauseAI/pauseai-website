@@ -18,7 +18,7 @@ describe('chapterQuestion', () => {
 		const question = chapterQuestion(en, 'join', 'Germany', 'PauseAI Germany')
 		expect(question).toEqual({
 			heading: 'Share your details with PauseAI Germany?',
-			body: 'PauseAI Germany runs local events and actions, and may be a separate organisation from PauseAI Global. If you say yes, we give it the details you give us when you sign up. You can change your mind at any time by emailing privacy@pauseai.info.',
+			body: 'If you say yes, we give PauseAI Germany the details you give us when you sign up; it may be a separate organisation from PauseAI Global. You can change your mind at any time by emailing privacy@pauseai.info.',
 			yes: 'Yes, share my details with PauseAI Germany',
 			no: 'No, only PauseAI Global'
 		})

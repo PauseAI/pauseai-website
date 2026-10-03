@@ -24,6 +24,7 @@
 	import {
 		chapterName,
 		chapterQuestion,
+		chapterShareWording,
 		effectiveAnswer,
 		inTouch,
 		keepInformedConfirmation,
@@ -370,16 +371,19 @@
 
 	const chapter = $derived(chapterName(basics.country, chapterCountries ?? []))
 
-	// The browse form picks a saved row up only when it submits, so whether that row
-	// already has an answer has to be known before then, to leave the question out.
-	const browsePickup = $derived.by(() =>
-		mode === 'browse' && !recordId ? savedFor(basics.email) : null
-	)
+	// Step 1 and the browse form pick a saved row up only when they submit, but the
+	// question is asked before then, so whether that row already has an answer for
+	// this country has to be known first, to leave the question out.
+	const pendingPickup = $derived.by(() => (!recordId ? savedFor(basics.email) : null))
 	const rowAnswer = $derived(
-		chapterAnswerFor(rowChapterAnswer ?? browsePickup?.chapterAnswer ?? null, basics.country)
+		chapterAnswerFor(rowChapterAnswer ?? pendingPickup?.chapterAnswer ?? null, basics.country)
 	)
+	// Asked once a country from the list is picked, as on /subscribe.
 	const askChapter = $derived(
-		!isContinuation && rowAnswer === null && asksChapterQuestion(basics.country)
+		!isContinuation &&
+			rowAnswer === null &&
+			COUNTRIES.includes(basics.country) &&
+			asksChapterQuestion(basics.country)
 	)
 	const chapterQ = $derived(
 		askChapter && chapterCountries !== null
@@ -390,6 +394,10 @@
 		chapterChoice?.country === basics.country ? chapterChoice.answer : null
 	)
 	const chapterAnswerMissing = $derived(askChapter && !answerForCountry)
+	// Posted by step 2, which creates the row, from the answer given on step 1.
+	const chapterWording = $derived(
+		chapterQ && answerForCountry ? chapterShareWording(chapterQ, answerForCountry) : ''
+	)
 	// What the copy below the question follows.
 	const shownAnswer = $derived(
 		effectiveAnswer(basics.country, askChapter ? answerForCountry : rowAnswer)
@@ -676,6 +684,21 @@
 	{/if}
 {/snippet}
 
+{#snippet chapterQuestionField(postAnswer: boolean, label = '')}
+	{#if chapterQ}
+		<ChapterShareQuestion
+			question={chapterQ}
+			{postAnswer}
+			{label}
+			bind:answer={
+				() => answerForCountry,
+				(answer: ChapterAnswer | null) =>
+					(chapterChoice = answer ? { country: basics.country, answer } : null)
+			}
+		/>
+	{/if}
+{/snippet}
+
 {#snippet gdprConsentField()}
 	<label class="agreement">
 		<input type="checkbox" name="agree_gdpr" required bind:checked={gdprConsent} />
@@ -752,6 +775,9 @@
 					<label class="field-label" for="ob-country">{msgs.onboarding_field_country}</label>
 					{@render countrySelect('ob-country')}
 				</div>
+				<!-- Asked here, where the country is picked, so step 2 stays short; step 2
+				     posts the answer and its wording with the create. -->
+				{@render chapterQuestionField(false, msgs.onboarding_chapter_section_label)}
 				<div class="field">
 					<label class="field-label" for="ob-city">{msgs.onboarding_field_city}</label>
 					<input
@@ -781,10 +807,13 @@
 				{#if hasUniversities(basics.country)}
 					{@render universityField('ob-university')}
 				{/if}
-				<!-- Step 1 gates entirely on native validation (pattern, optional),
-				     like the name/email/city fields above it — no disabled button, so
-				     the browser can explain an invalid postcode on submit. -->
-				<button type="submit" class="primary">{msgs.onboarding_btn_continue}</button>
+				<!-- Step 1 gates on native validation (pattern, optional), like the
+				     name/email/city fields above it, so the browser can explain an
+				     invalid postcode on submit. The chapter question has no native
+				     control, so Continue waits for its answer instead. -->
+				<button type="submit" class="primary" disabled={chapterAnswerMissing}
+					>{msgs.onboarding_btn_continue}</button
+				>
 				<div class="browse-option">
 					<button type="button" class="secondary" onclick={startBrowse}>
 						{msgs.onboarding_btn_browse}
@@ -816,19 +845,11 @@
 				{/if}
 				<h2>{msgs.onboarding_step2_heading}</h2>
 				{#if !isContinuation}
-					<!-- Opens step 2 so the copy below can say who will be in touch. It
-					     posts the answer only while shown; a post without one leaves the
-					     row's answer alone. -->
-					{#if chapterQ}
-						<ChapterShareQuestion
-							question={chapterQ}
-							label={msgs.onboarding_chapter_section_label}
-							bind:answer={
-								() => answerForCountry,
-								(answer: ChapterAnswer | null) =>
-									(chapterChoice = answer ? { country: basics.country, answer } : null)
-							}
-						/>
+					<!-- The answer given on step 1, posted only while the question is
+					     asked there; a post without one leaves the row's answer alone. -->
+					{#if chapterQ && answerForCountry}
+						<input type="hidden" name="chapter_share" value={answerForCountry} />
+						<input type="hidden" name="chapter_share_wording" value={chapterWording} />
 					{/if}
 					<p class="section-label" id="optins-heading">{msgs.onboarding_optins_heading}</p>
 					<div class="intent-grid" role="group" aria-labelledby="optins-heading">
@@ -1054,16 +1075,7 @@
 							{#if hasUniversities(basics.country)}
 								{@render universityField('loop-university')}
 							{/if}
-							{#if chapterQ}
-								<ChapterShareQuestion
-									question={chapterQ}
-									bind:answer={
-										() => answerForCountry,
-										(answer: ChapterAnswer | null) =>
-											(chapterChoice = answer ? { country: basics.country, answer } : null)
-									}
-								/>
-							{/if}
+							{@render chapterQuestionField(true)}
 							{@render gdprConsentField()}
 							{#if onboardingLive && onboardingModeKnown}
 								{#key turnstileNonce}
