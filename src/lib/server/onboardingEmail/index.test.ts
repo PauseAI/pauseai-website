@@ -1,5 +1,5 @@
-import { describe, expect, it, vi } from 'vitest'
-import type { ChapterBlockData } from './types.js'
+import { afterEach, describe, expect, it, vi } from 'vitest'
+import type { ChapterBlockData, OnboardingEmailParams } from './types.js'
 
 // Stands in for the live National Groups table: one chapter with links, one without.
 const CHAPTERS: Record<string, ChapterBlockData> = {
@@ -23,15 +23,23 @@ const CHAPTERS: Record<string, ChapterBlockData> = {
 	canada: {
 		name: 'Canada',
 		links: [{ label: 'Events', url: 'https://luma.com/calendar/cal-tsYv79s4aTQC16Q' }]
+	},
+	germany: { name: 'Germany', links: [{ label: 'Website', url: 'https://www.pause-ai.de' }] },
+	'united kingdom': {
+		name: 'United Kingdom',
+		links: [{ label: 'Website', url: 'https://pauseai.uk' }]
 	}
 }
+
+const { reportError } = vi.hoisted(() => ({ reportError: vi.fn() }))
+vi.mock('$lib/server/sentry', () => ({ reportError }))
 
 vi.mock('./chapter.js', () => ({
 	getChapterForOnboardingEmail: (country: string | undefined) =>
 		Promise.resolve(CHAPTERS[(country ?? '').trim().toLowerCase()] ?? null)
 }))
 
-const { renderOnboardingEmail } = await import('./index.js')
+const { chapterShareFromRequest, renderOnboardingEmail } = await import('./index.js')
 
 const RECORD_ID = 'recTest1234567890'
 const INTENTS = ['None', 'Keep informed', 'Act now', 'Volunteer', 'Lead', '', 'Something new']
@@ -50,28 +58,18 @@ const COUNTRIES = [
 const ALERT_PROMISE =
 	/critical alert|alerta crítica|viktigt och brådskande meddelande|viktiga meddelanden|In dringenden Fällen/
 
-function render(country: string, intent: string, firstName = 'Alex') {
-	return renderOnboardingEmail({ firstName, country, intent, airtable_id: RECORD_ID })
+const BASE = { firstName: 'Alex', airtable_id: RECORD_ID, chapterShare: true }
+
+function render(country: string, intent: string, options: Partial<OnboardingEmailParams> = {}) {
+	return renderOnboardingEmail({ ...BASE, country, intent, ...options })
 }
 
 function renderSpeaking(country: string, intent: string, languages: string[]) {
-	return renderOnboardingEmail({
-		firstName: 'Alex',
-		country,
-		intent,
-		languages,
-		airtable_id: RECORD_ID
-	})
+	return renderOnboardingEmail({ ...BASE, country, intent, languages })
 }
 
 function renderSubscribed(country: string, intent: string, subscribed: boolean | undefined) {
-	return renderOnboardingEmail({
-		firstName: 'Alex',
-		country,
-		intent,
-		subscribed,
-		airtable_id: RECORD_ID
-	})
+	return renderOnboardingEmail({ ...BASE, country, intent, subscribed })
 }
 
 describe('renderOnboardingEmail', () => {
@@ -284,7 +282,117 @@ describe('renderOnboardingEmail', () => {
 	})
 
 	it("does not let a signup's name render as a link", async () => {
-		const email = await render('', 'None', '[Verify here](https://example.com)')
+		const email = await render('', 'None', { firstName: '[Verify here](https://example.com)' })
 		expect(email.html).not.toContain('href="https://example.com"')
+	})
+
+	describe('for a signup who did not agree to chapter sharing', () => {
+		const GLOBAL_SENDER = { email: 'info@pauseai.info', name: 'PauseAI' }
+		const CHAPTER_EMAILS = [
+			['United Kingdom', 'None', 'Welcome to PauseAI UK Alex!'],
+			['United Kingdom', 'Volunteer', 'Welcome to PauseAI UK Alex!'],
+			['Canada', 'Volunteer', 'Welcome to PauseAI Canada Alex!'],
+			['Germany', 'None', 'Willkommen bei PauseAI Deutschland, Alex!'],
+			['Germany', 'Volunteer', 'Willkommen bei PauseAI Deutschland, Alex!'],
+			['Sweden', 'None', 'Tack för att du har registrerat dig hos PauseAI'],
+			['Sweden', 'Volunteer', 'PauseAI Sverige - Volontär/lead inom PauseAI']
+		]
+
+		it("gives the shared copy from PauseAI Global instead of a chapter's own email", async () => {
+			for (const [country, intent, chapterSubject] of CHAPTER_EMAILS) {
+				const where = `${country} / ${intent}`
+				const shared = await render(country, intent)
+				expect(shared.subject, where).toBe(chapterSubject)
+
+				const declined = await render(country, intent, { chapterShare: false })
+				expect(declined.subject, where).toBe(
+					intent === 'Volunteer' ? 'Welcome to PauseAI, Alex!' : 'Thanks for signing up to PauseAI'
+				)
+				expect(declined.from, where).toEqual(GLOBAL_SENDER)
+				expect(declined.text, where).toContain('Maxime and The PauseAI Global Team')
+			}
+		})
+
+		it('says the onboarding team will be in touch, not the chapter', async () => {
+			for (const country of ['United Kingdom', 'Canada', 'Germany', 'Netherlands', 'Belgium']) {
+				const declined = await render(country, 'Volunteer', { chapterShare: false })
+				expect(declined.text, country).toContain('Our onboarding team will be in touch.')
+				expect(declined.text, country).not.toContain('will be in touch to invite you')
+			}
+			// The chapter's public links promise nothing, so they stay.
+			const netherlands = await render('Netherlands', 'Volunteer', { chapterShare: false })
+			expect(netherlands.text).toContain("There's a PauseAI chapter in Netherlands.")
+			expect(netherlands.text).toContain('https://chat.whatsapp.com/example')
+
+			expect((await render('Netherlands', 'Volunteer')).text).toContain(
+				'PauseAI Netherlands will be in touch'
+			)
+		})
+
+		// The public chapter links promise no contact, and the Spanish email names no chapter.
+		it('changes nothing but the sender where the email promises no chapter contact', async () => {
+			const cases: [string, string, Partial<OnboardingEmailParams>?][] = [
+				['Netherlands', 'Act now'],
+				['Canada', 'Act now'],
+				['', 'None'],
+				['', 'Act now'],
+				['', 'Volunteer'],
+				['Mexico', 'Volunteer', { languages: ['Spanish'] }]
+			]
+			for (const [country, intent, options] of cases) {
+				const where = `${country || '(none)'} / ${intent}`
+				const shared = await render(country, intent, options)
+				const declined = await render(country, intent, { ...options, chapterShare: false })
+				expect(declined.from, where).toEqual(GLOBAL_SENDER)
+				expect({ ...declined, from: undefined }, where).toEqual(shared)
+			}
+		})
+	})
+
+	// The endpoint returns the rendered email as it is, so an extra key would change the JSON the
+	// Airtable script reads for every signup who agreed.
+	it('returns only the email for a signup who agreed to chapter sharing', async () => {
+		for (const country of COUNTRIES) {
+			for (const intent of INTENTS) {
+				expect(Object.keys(await render(country, intent)).sort()).toEqual([
+					'html',
+					'subject',
+					'text'
+				])
+			}
+		}
+	})
+})
+
+describe('chapterShareFromRequest', () => {
+	afterEach(() => {
+		vi.restoreAllMocks()
+		reportError.mockClear()
+	})
+
+	it('takes only true as agreement', async () => {
+		expect(await chapterShareFromRequest({ gdpr_chapter_share: true })).toBe(true)
+		for (const value of [false, null, undefined, 'true', 1, [true]]) {
+			expect(await chapterShareFromRequest({ gdpr_chapter_share: value }), String(value)).toBe(
+				false
+			)
+		}
+	})
+
+	it('reports a request that does not carry the key at all, without its values', async () => {
+		vi.spyOn(console, 'warn').mockImplementation(() => {})
+		const body = { first_name: 'Alex', airtable_id: RECORD_ID, country: 'United Kingdom' }
+		expect(await chapterShareFromRequest(body)).toBe(false)
+		expect(reportError).toHaveBeenCalledTimes(1)
+		const payload = JSON.stringify(reportError.mock.calls[0], (_key, value: unknown) =>
+			value instanceof Error ? value.message : value
+		)
+		expect(payload).toContain('gdpr_chapter_share')
+		for (const value of Object.values(body)) expect(payload).not.toContain(value)
+
+		reportError.mockClear()
+		await chapterShareFromRequest({ gdpr_chapter_share: false })
+		await chapterShareFromRequest({ gdpr_chapter_share: null })
+		expect(reportError).not.toHaveBeenCalled()
 	})
 })

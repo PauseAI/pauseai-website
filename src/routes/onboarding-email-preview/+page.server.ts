@@ -70,10 +70,14 @@ export const load: PageServerLoad = async ({ url }) => {
 	const htmlStyle: OnboardingEmailHtmlStyle | undefined =
 		styleParam === 'plain' || styleParam === 'rich' ? styleParam : undefined
 
+	// Defaults to shared so existing preview links keep rendering the agreeing signup's email.
+	const chapterShare = params.get('chapterShare') !== 'no'
+
 	const renderParams = {
 		firstName,
 		country,
 		intent,
+		chapterShare,
 		languageOverride: language,
 		htmlStyle,
 		airtable_id: 'previewRecordId123'
@@ -101,6 +105,7 @@ export const load: PageServerLoad = async ({ url }) => {
 			languageLock,
 			country,
 			intent: INTENT_CHOICES.includes(intent) ? intent : 'None',
+			chapterShare: chapterShare ? 'yes' : 'no',
 			style: htmlStyle ?? 'auto'
 		},
 		options: {

@@ -78,6 +78,11 @@
 		es: 'Español'
 	}
 
+	const CHAPTER_SHARE_OPTIONS = [
+		{ value: 'yes', label: 'Yes' },
+		{ value: 'no', label: 'No' }
+	]
+
 	const STYLE_OPTIONS = [
 		{ value: 'auto', label: 'As actually sent' },
 		{ value: 'rich', label: 'Branded card' },
@@ -142,8 +147,18 @@
 		data.form.country !== '' && !data.options.countries.some((c) => c.name === data.form.country)
 	)
 
-	const summary = $derived.by(() => {
-		const { override, chapter, bucket, group, language } = data.resolved
+	// A declining signup from a country whose chapter writes its own email for their intent.
+	const skippedOwnEmail = $derived.by(() => {
+		const { chapterShare, bucket } = data.resolved
+		const own = data.options.countries.find((c) => c.name === data.form.country)?.override
+		if (chapterShare || !own || (own.scope !== 'all' && !own.scope.includes(bucket))) return ''
+		return ` ${own.name}'s own email is not used, because the signup did not agree to chapter sharing.`
+	})
+
+	const summary = $derived(describeEmail() + skippedOwnEmail)
+
+	function describeEmail(): string {
+		const { override, chapter, chapterShare, bucket, group, language } = data.resolved
 		const inLanguage = `in ${languageName(language)}`
 		if (override) return `This is ${override}'s own email, written by the chapter, ${inLanguage}.`
 
@@ -161,12 +176,15 @@
 		const hasLinks = chapter.links.length > 0
 		const links = "the chapter's links, the same ones as on pauseai.info/national-groups"
 		if (group === 'volunteer') {
-			return `${opening} It says PauseAI ${chapter.name} will be in touch${hasLinks ? `, and lists ${links}` : ''}.`
+			const contact = chapterShare
+				? `PauseAI ${chapter.name} will be in touch`
+				: `our onboarding team will be in touch, not PauseAI ${chapter.name}, which is not told about this signup`
+			return `${opening} It says ${contact}${hasLinks ? `, and lists ${links}` : ''}.`
 		}
 		return hasLinks
 			? `${opening} It includes a short part about PauseAI in ${chapter.name}, with ${links}.`
 			: `${opening} It has no chapter part, because PauseAI ${chapter.name} has no links on pauseai.info/national-groups.`
-	})
+	}
 </script>
 
 <svelte:head>
@@ -339,6 +357,16 @@
 					speak Spanish on the sign-up form or live in a Spanish-speaking country, and English
 					otherwise.
 				{/if}
+			</span>
+		</div>
+
+		<span class="field-label" id="chapterShare-label">Shared with chapter</span>
+		<div>
+			{@render radioGroup('chapterShare', CHAPTER_SHARE_OPTIONS, data.form.chapterShare)}
+			<span class="hint" id="chapterShare-hint">
+				Whether they agreed to their details going to their local chapter. If not, the chapter isn't
+				told about them, so they get the shared email from PauseAI Global, which doesn't say the
+				chapter will be in touch.
 			</span>
 		</div>
 

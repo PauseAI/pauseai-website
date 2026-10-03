@@ -1,4 +1,5 @@
 import { url, verificationParameter } from '$lib/config.js'
+import { reportError } from '$lib/server/sentry'
 import { baseContent } from './copy.js'
 import { composeBlocks, groupOf, resolveIntentBucket } from './blocks.js'
 import { getChapterForOnboardingEmail } from './chapter.js'
@@ -33,6 +34,27 @@ export type OnboardingEmailResolution = {
 	override: string | null
 	/** The chapter's live row, which an override's own copy can draw links from. */
 	chapter: ChapterBlockData | null
+	chapterShare: boolean
+}
+
+// Returned explicitly, since without a `from` the Airtable script sends a UK signup's email from
+// PauseAI UK. It is the sender the script already uses for every other country.
+const GLOBAL_SENDER = { email: 'info@pauseai.info', name: 'PauseAI' }
+
+/**
+ * Reads `gdpr_chapter_share`, which the Airtable script forwards from the Members checkbox, off a
+ * render request. Only `true` counts as shared: a broken mapping must not tell someone their
+ * chapter will contact them when the chapter will never hear of them.
+ */
+export async function chapterShareFromRequest(body: Record<string, unknown>): Promise<boolean> {
+	if (!('gdpr_chapter_share' in body)) {
+		const message =
+			'Render request has no gdpr_chapter_share: treating it as not shared. Check the input mapping in the Airtable automation.'
+		console.warn(message)
+		// Key names only: the values are the signup's personal data.
+		await reportError(new Error(message), { receivedKeys: Object.keys(body).sort() })
+	}
+	return body.gdpr_chapter_share === true
 }
 
 /** Which version of the email a signup gets. Exported for the preview pages. */
@@ -49,7 +71,8 @@ async function resolve(
 ): Promise<{ resolution: OnboardingEmailResolution; override: ResolvedOverride | null }> {
 	const bucket = resolveIntentBucket(params.intent)
 	const group = groupOf(bucket)
-	const override = getChapterOverride(params.country, bucket)
+	// A chapter's own email speaks for the chapter, which only hears of signups who agreed.
+	const override = params.chapterShare ? getChapterOverride(params.country, bucket) : null
 	const detected =
 		params.languageOverride ?? resolveOnboardingEmailLanguage(params.country, params.languages)
 
@@ -66,7 +89,8 @@ async function resolve(
 			// Only English has a non-volunteer version, so Spanish non-volunteers get it, as today.
 			language: override ? override.language : group === 'volunteer' ? detected : 'en',
 			override: override?.name ?? null,
-			chapter
+			chapter,
+			chapterShare: params.chapterShare
 		},
 		override
 	}
@@ -85,11 +109,11 @@ export async function renderOnboardingEmail(
 	const verificationLink = `${url}/verify?table=join&${verificationParameter}=${params.airtable_id}`
 
 	const { resolution, override } = await resolve(params)
-	const { bucket, language, chapter } = resolution
+	const { bucket, language, chapter, chapterShare } = resolution
 	const firstName = stripMarkdown(params.firstName)
 	const content = override
 		? override.content(firstName, chapter)
-		: baseContent(language === 'es' ? 'es' : 'en', bucket, chapter, firstName)
+		: baseContent(language === 'es' ? 'es' : 'en', bucket, chapter, chapterShare, firstName)
 	const fixed = FIXED_COPY[language]
 	const blocks = composeBlocks(
 		content,
@@ -109,6 +133,7 @@ export async function renderOnboardingEmail(
 	return {
 		subject: content.subject,
 		html,
-		text: renderText(blocks, content.socials)
+		text: renderText(blocks, content.socials),
+		...(chapterShare ? {} : { from: GLOBAL_SENDER })
 	}
 }
