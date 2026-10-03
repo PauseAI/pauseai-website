@@ -440,8 +440,8 @@ Target: base `appWPTGqZmUcs3NWu`, table `tblL1icZBhTV1gQ9o` ("Members").
 **Step 2 / browse signup / subscribe form (create):** `Full name`, `Email`,
 `Country`, `City`, `Intent`, `Signup source`, `Source page` (when resolved),
 `Email subscription` (keep_informed), `Data privacy policy agreed`,
-`GDPR chapter share permission` and `GDPR chapter share wording` (outside the
-United States), plus `Zip code` when `country` is
+`GDPR chapter share permission` and `GDPR chapter share wording` (cleared to
+unticked and empty in the United States), plus `Zip code` when `country` is
 `United Kingdom` and a postcode was entered (the optional step-1 UK postcode —
 see "Validation rules" — carried in the `zip_code` field, sharing it with the US
 volunteer ZIP below) and
@@ -471,16 +471,17 @@ below it can say who will be in touch), the browse signup card, and
 nothing else on that form names the chapter as a sender). `ChapterShareQuestion.svelte`
 renders it and posts `chapter_share` (`yes` or `no`) and `chapter_share_wording`
 while it is shown; `chapterShare.ts` builds its text. Where the country has a
-chapter (it is in `/api/national-groups`) the question names it as
-"PauseAI <country>"; elsewhere it asks about a chapter "when one starts". It
+chapter (it is in `/api/national-groups`) the question names it: "PauseAI <country>",
+or the chapter's own name from `CHAPTER_DISPLAY_NAMES` in `chapterShare.ts`
+(the National Chapters table holds no display name); elsewhere it asks about a chapter "when one starts". It
 waits for that lookup, and a failed lookup counts as no chapter.
 
-| case                                                                                                                | what is written                                                                                            |
-| ------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- |
-| create outside the United States                                                                                    | the box from the answer (ticked for Yes) and the wording; a create without an answer is refused with a 400 |
-| create in the United States                                                                                         | neither field: the question is not shown there, as PauseAI US is not a chapter                             |
-| update that showed the question (Back and resubmit, or a resumed row with no answer yet)                            | the box and the wording from the answer                                                                    |
-| update that did not (the volunteer step, the `/subscribe` "do more" step, a resumed row that already has an answer) | neither field, so the earlier answer stands                                                                |
+| case                                                                                                                | what is written                                                                                                                                                                                                     |
+| ------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| create outside the United States                                                                                    | the box from the answer (ticked for Yes) and the wording; a create without an answer is refused with a 400                                                                                                          |
+| any post with country United States (create or update)                                                              | the box unticked and the wording empty: the question is not shown there, as PauseAI US is not a chapter, and a row whose country changed to the US after answering keeps no answer naming another country's chapter |
+| update that showed the question (Back and resubmit, or a resumed row with no answer yet)                            | the box and the wording from the answer                                                                                                                                                                             |
+| update that did not (the volunteer step, the `/subscribe` "do more" step, a resumed row that already has an answer) | neither field, so the earlier answer stands                                                                                                                                                                         |
 
 The server cannot see whether a resumed row has an answer, so it requires one
 only on a create. That is enough for what the CRM relies on: outside the US, an
@@ -542,7 +543,8 @@ an update is in "Create versus update" above.
   accepted rather than rejected.
 - A chapter answer (`chapter_share` of `yes` or `no`, with a non-empty
   `chapter_share_wording`) is required on a create outside the United States,
-  else 400. Ignored for the United States. See "Chapter sharing".
+  else 400. For the United States any posted answer is ignored and both fields
+  are cleared. See "Chapter sharing".
 - GDPR consent (`agree_gdpr`) required **only on the create path** — step-3
   volunteer updates are exempt because consent was captured at step 2.
   `/subscribe` posts it as a hidden field, since signing up on that form is

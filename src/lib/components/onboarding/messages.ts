@@ -78,6 +78,149 @@ const chapterShareEn: ChapterShareMessages = {
 		"You'll get global campaign updates and ways to help."
 }
 
+// Machine translations awaiting a native speaker's check. The country name stays in
+// English, as the form's country list is English.
+const chapterShareDe: ChapterShareMessages = {
+	onboarding_chapter_section_label: 'Deine lokale Gruppe',
+	onboarding_chapter_heading: (chapter) => `Deine Daten mit ${chapter} teilen?`,
+	onboarding_chapter_body: (chapter) =>
+		`${chapter} organisiert lokale Veranstaltungen und Aktionen und kann eine von PauseAI Global getrennte Organisation sein. Wenn du Ja sagst, geben wir ihr die Daten weiter, die du uns bei der Anmeldung gibst. Du kannst deine Meinung jederzeit ändern, indem du an ${PRIVACY_EMAIL} schreibst.`,
+	onboarding_chapter_yes: (chapter) => `Ja, meine Daten mit ${chapter} teilen`,
+	onboarding_chapter_subscribe_heading: (chapter) => `Auch von ${chapter} hören?`,
+	onboarding_chapter_subscribe_yes: (chapter) =>
+		`Ja, meine Daten mit ${chapter} teilen, damit sie mir lokale Neuigkeiten per E-Mail schicken kann`,
+	onboarding_chapter_none_heading: (country) =>
+		`Deine Daten mit einer PauseAI-Gruppe in ${country} teilen, sobald eine gegründet wird?`,
+	onboarding_chapter_none_body: (country) =>
+		`In ${country} gibt es noch keine Gruppe. Bis eine gegründet wird, wird nichts geteilt. Gruppen können von PauseAI Global getrennte Organisationen sein. Sie erhalten die Daten, die du uns bei der Anmeldung gibst. Du kannst deine Meinung jederzeit ändern, indem du an ${PRIVACY_EMAIL} schreibst.`,
+	onboarding_chapter_none_yes: 'Ja, meine Daten mit der Gruppe teilen, sobald sie gegründet wird',
+	onboarding_chapter_none_subscribe_heading: (country) =>
+		`Von einer PauseAI-Gruppe in ${country} hören, sobald eine gegründet wird?`,
+	onboarding_chapter_none_subscribe_yes:
+		'Ja, meine Daten mit der Gruppe teilen, sobald sie gegründet wird, damit sie mir lokale Neuigkeiten per E-Mail schicken kann',
+	onboarding_chapter_no: 'Nein, nur PauseAI Global',
+	onboarding_keep_informed_sub_shared: (chapter) =>
+		chapter
+			? `Updates zu globalen Kampagnen sowie Neuigkeiten und Mitmach-Möglichkeiten von ${chapter}.`
+			: 'Updates zu globalen Kampagnen sowie Neuigkeiten und Mitmach-Möglichkeiten von deiner Gruppe, sobald es eine gibt.',
+	onboarding_keep_informed_sub_unanswered: (chapter) =>
+		chapter
+			? `Updates zu globalen Kampagnen sowie Neuigkeiten und Mitmach-Möglichkeiten von ${chapter}, wenn du deine Daten mit ihr teilst.`
+			: 'Updates zu globalen Kampagnen sowie Neuigkeiten und Mitmach-Möglichkeiten von deiner Gruppe, sobald es eine gibt, wenn du deine Daten mit ihr teilst.',
+	onboarding_keep_informed_sub_not_shared:
+		'Updates zu globalen Kampagnen und Mitmach-Möglichkeiten.',
+	onboarding_in_touch_shared: (chapter) =>
+		chapter
+			? `${chapter} meldet sich per E-Mail bei dir.`
+			: 'PauseAI Global meldet sich per E-Mail bei dir, und deine Gruppe ebenfalls, sobald es eine gibt.',
+	onboarding_in_touch_unanswered: 'Wir melden uns per E-Mail bei dir.',
+	onboarding_in_touch_not_shared: 'PauseAI Global meldet sich per E-Mail bei dir.',
+	onboarding_chapter_nudge: (chapter) =>
+		chapter
+			? `Für Veranstaltungen und Kampagnen von ${chapter} und PauseAI Global kreuze „Auf dem Laufenden bleiben“ an.`
+			: 'Für Veranstaltungen und Kampagnen von PauseAI Global und, sobald es eine gibt, von deiner Gruppe kreuze „Auf dem Laufenden bleiben“ an.',
+	onboarding_confirm_keep_informed_shared: (chapter) =>
+		chapter
+			? `Du erhältst Updates zu globalen Kampagnen sowie Neuigkeiten und Mitmach-Möglichkeiten von ${chapter}.`
+			: 'Du erhältst Updates zu globalen Kampagnen sowie Neuigkeiten und Mitmach-Möglichkeiten von deiner Gruppe, sobald es eine gibt.',
+	onboarding_confirm_keep_informed_not_shared:
+		'Du erhältst Updates zu globalen Kampagnen und Mitmach-Möglichkeiten.'
+}
+
+const chapterShareFr: ChapterShareMessages = {
+	onboarding_chapter_section_label: 'Ton groupe local',
+	onboarding_chapter_heading: (chapter) => `Partager tes coordonnées avec ${chapter} ?`,
+	onboarding_chapter_body: (chapter) =>
+		`${chapter} organise des événements et des actions locales, et peut être une organisation distincte de PauseAI Global. Si tu réponds oui, nous lui transmettons les informations que tu nous donnes lors de ton inscription. Tu peux changer d'avis à tout moment en écrivant à ${PRIVACY_EMAIL}.`,
+	onboarding_chapter_yes: (chapter) => `Oui, partager mes coordonnées avec ${chapter}`,
+	onboarding_chapter_subscribe_heading: (chapter) => `Recevoir aussi des nouvelles de ${chapter} ?`,
+	onboarding_chapter_subscribe_yes: (chapter) =>
+		`Oui, partager mes coordonnées avec ${chapter} pour qu'il puisse m'envoyer des nouvelles locales par e-mail`,
+	onboarding_chapter_none_heading: (country) =>
+		`Partager tes coordonnées avec un groupe PauseAI pour ${country} dès qu'il sera créé ?`,
+	onboarding_chapter_none_body: (country) =>
+		`Il n'y a pas encore de groupe pour ${country}. Rien n'est partagé tant qu'aucun groupe n'est créé. Les groupes peuvent être des organisations distinctes de PauseAI Global. Ils reçoivent les informations que tu nous donnes lors de ton inscription. Tu peux changer d'avis à tout moment en écrivant à ${PRIVACY_EMAIL}.`,
+	onboarding_chapter_none_yes: 'Oui, partager mes coordonnées avec le groupe dès sa création',
+	onboarding_chapter_none_subscribe_heading: (country) =>
+		`Recevoir des nouvelles d'un groupe PauseAI pour ${country} dès qu'il sera créé ?`,
+	onboarding_chapter_none_subscribe_yes:
+		"Oui, partager mes coordonnées avec le groupe dès sa création, pour qu'il puisse m'envoyer des nouvelles locales par e-mail",
+	onboarding_chapter_no: 'Non, seulement PauseAI Global',
+	onboarding_keep_informed_sub_shared: (chapter) =>
+		chapter
+			? `Les actualités des campagnes mondiales, ainsi que les nouvelles et les occasions d'agir de ${chapter}.`
+			: "Les actualités des campagnes mondiales, ainsi que les nouvelles et les occasions d'agir de ton groupe dès qu'il existera.",
+	onboarding_keep_informed_sub_unanswered: (chapter) =>
+		chapter
+			? `Les actualités des campagnes mondiales, ainsi que les nouvelles et les occasions d'agir de ${chapter} si tu partages tes coordonnées avec lui.`
+			: "Les actualités des campagnes mondiales, ainsi que les nouvelles et les occasions d'agir de ton groupe dès qu'il existera, si tu partages tes coordonnées avec lui.",
+	onboarding_keep_informed_sub_not_shared:
+		"Les actualités des campagnes mondiales et des occasions d'agir.",
+	onboarding_in_touch_shared: (chapter) =>
+		chapter
+			? `${chapter} te contactera par e-mail.`
+			: "PauseAI Global te contactera par e-mail, et ton groupe aussi dès qu'il existera.",
+	onboarding_in_touch_unanswered: 'Nous te contacterons par e-mail.',
+	onboarding_in_touch_not_shared: 'PauseAI Global te contactera par e-mail.',
+	onboarding_chapter_nudge: (chapter) =>
+		chapter
+			? `Pour les événements et les campagnes de ${chapter} et de PauseAI Global, coche « Me tenir informé·e ».`
+			: "Pour les événements et les campagnes de PauseAI Global, et de ton groupe dès qu'il existera, coche « Me tenir informé·e ».",
+	onboarding_confirm_keep_informed_shared: (chapter) =>
+		chapter
+			? `Tu recevras les actualités des campagnes mondiales, ainsi que les nouvelles et les occasions d'agir de ${chapter}.`
+			: "Tu recevras les actualités des campagnes mondiales, ainsi que les nouvelles et les occasions d'agir de ton groupe dès qu'il existera.",
+	onboarding_confirm_keep_informed_not_shared:
+		"Tu recevras les actualités des campagnes mondiales et des occasions d'agir."
+}
+
+const chapterShareEs: ChapterShareMessages = {
+	onboarding_chapter_section_label: 'Tu grupo local',
+	onboarding_chapter_heading: (chapter) => `¿Compartir tus datos con ${chapter}?`,
+	onboarding_chapter_body: (chapter) =>
+		`${chapter} organiza eventos y acciones locales, y puede ser una organización distinta de PauseAI Global. Si dices que sí, le damos los datos que nos facilitas al inscribirte. Puedes cambiar de opinión en cualquier momento escribiendo a ${PRIVACY_EMAIL}.`,
+	onboarding_chapter_yes: (chapter) => `Sí, compartir mis datos con ${chapter}`,
+	onboarding_chapter_subscribe_heading: (chapter) => `¿Recibir también noticias de ${chapter}?`,
+	onboarding_chapter_subscribe_yes: (chapter) =>
+		`Sí, compartir mis datos con ${chapter} para que pueda enviarme noticias locales por correo electrónico`,
+	onboarding_chapter_none_heading: (country) =>
+		`¿Compartir tus datos con un grupo de PauseAI en ${country} cuando se cree uno?`,
+	onboarding_chapter_none_body: (country) =>
+		`Todavía no hay ningún grupo en ${country}. No se comparte nada hasta que se cree uno. Los grupos pueden ser organizaciones distintas de PauseAI Global. Reciben los datos que nos facilitas al inscribirte. Puedes cambiar de opinión en cualquier momento escribiendo a ${PRIVACY_EMAIL}.`,
+	onboarding_chapter_none_yes: 'Sí, compartir mis datos con el grupo cuando se cree',
+	onboarding_chapter_none_subscribe_heading: (country) =>
+		`¿Recibir noticias de un grupo de PauseAI en ${country} cuando se cree uno?`,
+	onboarding_chapter_none_subscribe_yes:
+		'Sí, compartir mis datos con el grupo cuando se cree, para que pueda enviarme noticias locales por correo electrónico',
+	onboarding_chapter_no: 'No, solo PauseAI Global',
+	onboarding_keep_informed_sub_shared: (chapter) =>
+		chapter
+			? `Novedades de las campañas globales, además de noticias y formas de ayudar de ${chapter}.`
+			: 'Novedades de las campañas globales, además de noticias y formas de ayudar de tu grupo cuando exista uno.',
+	onboarding_keep_informed_sub_unanswered: (chapter) =>
+		chapter
+			? `Novedades de las campañas globales, además de noticias y formas de ayudar de ${chapter} si compartes tus datos con él.`
+			: 'Novedades de las campañas globales, además de noticias y formas de ayudar de tu grupo cuando exista uno, si compartes tus datos con él.',
+	onboarding_keep_informed_sub_not_shared: 'Novedades de las campañas globales y formas de ayudar.',
+	onboarding_in_touch_shared: (chapter) =>
+		chapter
+			? `${chapter} se pondrá en contacto contigo por correo electrónico.`
+			: 'PauseAI Global se pondrá en contacto contigo por correo electrónico, y tu grupo también cuando exista uno.',
+	onboarding_in_touch_unanswered: 'Nos pondremos en contacto contigo por correo electrónico.',
+	onboarding_in_touch_not_shared:
+		'PauseAI Global se pondrá en contacto contigo por correo electrónico.',
+	onboarding_chapter_nudge: (chapter) =>
+		chapter
+			? `Para recibir eventos y campañas de ${chapter} y de PauseAI Global, marca «Mantenme informado/a».`
+			: 'Para recibir eventos y campañas de PauseAI Global, y de tu grupo cuando exista uno, marca «Mantenme informado/a».',
+	onboarding_confirm_keep_informed_shared: (chapter) =>
+		chapter
+			? `Recibirás novedades de las campañas globales, además de noticias y formas de ayudar de ${chapter}.`
+			: 'Recibirás novedades de las campañas globales, además de noticias y formas de ayudar de tu grupo cuando exista uno.',
+	onboarding_confirm_keep_informed_not_shared:
+		'Recibirás novedades de las campañas globales y formas de ayudar.'
+}
+
 export interface OnboardingMessages extends ChapterShareMessages {
 	onboarding_page_title: string
 	onboarding_page_description: string
@@ -473,8 +616,7 @@ const en: OnboardingMessages = {
 }
 
 const de: OnboardingMessages = {
-	// Not translated yet: the chapter question and the copy that follows it show in English.
-	...chapterShareEn,
+	...chapterShareDe,
 	onboarding_page_title: 'Mitmachen',
 	onboarding_page_description:
 		'Finde den wirkungsvollsten Weg, um bei der Pause der KI-Entwicklung zu helfen.',
@@ -697,8 +839,7 @@ const de: OnboardingMessages = {
 }
 
 const fr: OnboardingMessages = {
-	// Not translated yet: the chapter question and the copy that follows it show in English.
-	...chapterShareEn,
+	...chapterShareFr,
 	onboarding_page_title: 'Participer',
 	onboarding_page_description:
 		"Trouve le moyen le plus efficace pour toi d'aider à mettre en pause le développement de l'IA surhumaine.",
@@ -922,8 +1063,7 @@ const fr: OnboardingMessages = {
 }
 
 const es: OnboardingMessages = {
-	// Not translated yet: the chapter question and the copy that follows it show in English.
-	...chapterShareEn,
+	...chapterShareEs,
 	onboarding_page_title: 'Participa',
 	onboarding_page_description:
 		'Encuentra la forma de mayor impacto para ayudar a pausar el desarrollo de la IA sobrehumana.',

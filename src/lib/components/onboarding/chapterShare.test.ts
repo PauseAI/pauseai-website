@@ -13,15 +13,36 @@ const en = onboardingMessages.en
 
 describe('chapterQuestion', () => {
 	it('names the chapter where the country has one', () => {
-		expect(chapterName('Germany', ['germany', 'France'])).toBe('PauseAI Germany')
-		expect(chapterName('Portugal', ['germany', 'France'])).toBeNull()
-		const question = chapterQuestion(en, 'join', 'Germany', chapterName('Germany', ['Germany']))
+		expect(chapterName('France', ['Germany', 'france'])).toBe('PauseAI France')
+		expect(chapterName('Portugal', ['Germany', 'France'])).toBeNull()
+		const question = chapterQuestion(en, 'join', 'Germany', 'PauseAI Germany')
 		expect(question).toEqual({
 			heading: 'Share your details with PauseAI Germany?',
 			body: 'PauseAI Germany runs local events and actions, and may be a separate organisation from PauseAI Global. If you say yes, we give it the details you give us when you sign up. You can change your mind at any time by emailing privacy@pauseai.info.',
 			yes: 'Yes, share my details with PauseAI Germany',
 			no: 'No, only PauseAI Global'
 		})
+	})
+
+	it("uses a chapter's own name where it is not PauseAI <country>", () => {
+		const chapters = ['Germany', 'Sweden', 'United Kingdom']
+		expect(chapterName('United Kingdom', chapters)).toBe('PauseAI UK')
+		expect(chapterName('Germany', chapters)).toBe('PauseAI Deutschland')
+		expect(chapterName('Sweden', chapters)).toBe('PauseAI Sverige')
+	})
+
+	it('renders in every locale, with the chapter and country filled in', () => {
+		for (const [locale, msgs] of Object.entries(onboardingMessages)) {
+			for (const form of ['join', 'subscribe'] as const) {
+				const withChapter = chapterQuestion(msgs, form, 'Germany', 'PauseAI Deutschland')!
+				expect(withChapter.heading, locale).toContain('PauseAI Deutschland')
+				expect(withChapter.yes, locale).toContain('PauseAI Deutschland')
+				const without = chapterQuestion(msgs, form, 'Portugal', null)!
+				expect(without.heading, locale).toContain('Portugal')
+				expect(without.body, locale).toContain('Portugal')
+			}
+		}
+		expect(onboardingMessages.de.onboarding_chapter_no).toBe('Nein, nur PauseAI Global')
 	})
 
 	it('asks about a future chapter where the country has none', () => {

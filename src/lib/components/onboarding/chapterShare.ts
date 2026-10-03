@@ -6,12 +6,23 @@ import { asksChapterQuestion, type ChapterAnswer } from './options'
 
 export type ChapterQuestion = { heading: string; body: string; yes: string; no: string }
 
+// The National Chapters table names a chapter only by its country, so a chapter
+// whose own name is not "PauseAI <country>" is listed here, keyed by that country.
+// Add one when a chapter goes by another name: the name is part of the wording
+// stored on each record, so it must be the one the chapter uses.
+const CHAPTER_DISPLAY_NAMES: Record<string, string> = {
+	Germany: 'PauseAI Deutschland',
+	Sweden: 'PauseAI Sverige',
+	'United Kingdom': 'PauseAI UK'
+}
+
 // `chapter` is the chapter's name where the country has one, or null where it has
-// none yet. The name is not stored anywhere: it is "PauseAI <country>", as the
-// national-groups list names groups by country.
+// none yet.
 export function chapterName(country: string, chapterCountries: string[]): string | null {
-	const match = chapterCountries.find((name) => name.toLowerCase() === country.trim().toLowerCase())
-	return match ? `PauseAI ${country.trim()}` : null
+	const trimmed = country.trim()
+	const match = chapterCountries.find((name) => name.toLowerCase() === trimmed.toLowerCase())
+	if (!match) return null
+	return CHAPTER_DISPLAY_NAMES[match] ?? `PauseAI ${trimmed}`
 }
 
 // /subscribe's Yes also covers email, since nothing else on that form names the

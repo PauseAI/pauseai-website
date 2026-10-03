@@ -181,6 +181,7 @@ function writtenFields(mock: typeof createRecord | typeof updateRecord): Record<
 }
 
 const CHAPTER_FIELDS = ['GDPR chapter share permission', 'GDPR chapter share wording']
+const CLEARED = { 'GDPR chapter share permission': false, 'GDPR chapter share wording': '' }
 
 describe('onboarding submit: chapter sharing', () => {
 	beforeEach(() => {
@@ -228,7 +229,7 @@ describe('onboarding submit: chapter sharing', () => {
 		})
 	})
 
-	it('writes no chapter fields for a US signup, even if an answer is posted', async () => {
+	it('clears the chapter fields for a US signup, even if an answer is posted', async () => {
 		const extras: Record<string, string>[] = [
 			{},
 			{ chapter_share: 'yes', chapter_share_wording: 'Yes wording' }
@@ -236,9 +237,30 @@ describe('onboarding submit: chapter sharing', () => {
 		for (const extra of extras) {
 			const created = await submit({ ...usSignup, ...extra })
 			expect(created).toMatchObject({ success: true })
-			const fields = writtenFields(createRecord)
-			for (const field of CHAPTER_FIELDS) expect(fields).not.toHaveProperty(field)
+			expect(writtenFields(createRecord)).toMatchObject(CLEARED)
 		}
+	})
+
+	it('clears an answer given for Germany when the signup is resubmitted as US', async () => {
+		const germany = {
+			...signup,
+			country: 'Germany',
+			city: 'Berlin',
+			chapter_share: 'yes',
+			chapter_share_wording: 'Share your details with PauseAI Deutschland?'
+		}
+		const created = await submit(germany)
+		expect(writtenFields(createRecord)['GDPR chapter share permission']).toBe(true)
+		const unasked: Record<string, string> = { ...germany }
+		delete unasked.chapter_share
+		delete unasked.chapter_share_wording
+		await submit({
+			...unasked,
+			...update(String(created.recordToken)),
+			country: 'United States',
+			city: 'Boston'
+		})
+		expect(writtenFields(updateRecord)).toMatchObject({ Country: 'United States', ...CLEARED })
 	})
 
 	it('no longer forces sharing on for Volunteer or Lead', async () => {
