@@ -68,6 +68,8 @@ export const load: PageServerLoad = async ({ url }) => {
 		firstName,
 		country,
 		intent,
+		// /onboarding-email-preview shows the email of a signup who declined chapter sharing.
+		chapterShare: true,
 		languageOverride: language,
 		htmlStyle,
 		airtable_id: PREVIEW_RECORD_ID
