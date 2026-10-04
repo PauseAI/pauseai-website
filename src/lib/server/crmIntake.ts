@@ -17,6 +17,23 @@ export const TIMEOUT_MS = 3000
 // The CRM's refusal codes are lowercase words; anything else is not a refusal
 // this side can name, so it is an error.
 const REASON = /^[a-z_]{1,40}$/
+// CRM_Core_Error::createErrorId: 12 letters or digits in dashed groups of four.
+// API4 puts it in `error_id` when it shows the real message, and otherwise only
+// inside its masked message, "... (Error ID: <id>)".
+const ERROR_ID = /^[A-Za-z0-9]{4}-[A-Za-z0-9]{4}-[A-Za-z0-9]{4}$/
+const MASKED_ERROR_ID = /\(Error ID: ([^)]*)\)/
+
+// Only the id the CRM log holds, never the message text, which a CRM error could
+// fill with whatever the request carried.
+function errorIdOf(body: { error_id?: unknown; error_message?: unknown } | null) {
+	const candidate =
+		typeof body?.error_id === 'string'
+			? body.error_id
+			: typeof body?.error_message === 'string'
+				? MASKED_ERROR_ID.exec(body.error_message)?.[1]
+				: undefined
+	return candidate && ERROR_ID.test(candidate) ? candidate : undefined
+}
 
 type Cause = 'not_configured' | 'http' | 'timeout' | 'network' | 'unexpected_response'
 
@@ -27,7 +44,7 @@ type Result =
 			outcome: 'error'
 			cause: Cause
 			httpStatus?: number
-			errorMessage?: string
+			errorId?: string
 			errorName?: string
 	  }
 
@@ -57,17 +74,16 @@ export async function submitToCrm(record: WrittenRecord, token: string): Promise
 		})
 		const body = (await response.json().catch(() => null)) as {
 			values?: { status?: unknown; reason?: unknown }[]
+			error_id?: unknown
 			error_message?: unknown
 		} | null
 		if (signal.aborted) return { outcome: 'error', cause: 'timeout' }
 		if (!response.ok) {
-			// API4 masks the message, but it carries the error id the CRM log holds.
-			const message = body?.error_message
 			return {
 				outcome: 'error',
 				cause: 'http',
 				httpStatus: response.status,
-				errorMessage: typeof message === 'string' ? message.slice(0, 200) : undefined
+				errorId: errorIdOf(body)
 			}
 		}
 		const row = body?.values?.[0]

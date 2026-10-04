@@ -68,12 +68,21 @@ describe('submitToCrm', () => {
 	})
 
 	it('calls an HTTP error, a malformed answer or an unknown refusal an error', async () => {
-		answer({ error_code: 0, error_message: 'Sorry an error occurred (id 12)', status: 500 }, 500)
+		// API4's masked answer, as CRM_Api4_Page_AJAX writes it.
+		answer(
+			{
+				error_code: '1',
+				error_message:
+					'Sorry an error occurred and your request was not completed. (Error ID: aB3d-EfGh-1234)',
+				status: 500
+			},
+			500
+		)
 		expect(await submitToCrm(RECORD, '')).toEqual({
 			outcome: 'error',
 			cause: 'http',
 			httpStatus: 500,
-			errorMessage: 'Sorry an error occurred (id 12)'
+			errorId: 'aB3d-EfGh-1234'
 		})
 		for (const body of [
 			{ values: [] },
@@ -92,6 +101,32 @@ describe('submitToCrm', () => {
 			cause: 'network',
 			errorName: 'TypeError'
 		})
+	})
+
+	it('forwards no error text, only an error id of the shape the CRM mints', async () => {
+		const echoed = `Invalid value ada@example.org for token ${TOKEN} (Error ID: ${TOKEN})`
+		for (const body of [
+			{ error_code: 0, error_message: echoed, status: 400 },
+			{ error_id: 'ada@example.org', error_message: echoed, status: 400 }
+		]) {
+			answer(body, 400)
+			expect(await submitToCrm(RECORD, TOKEN)).toEqual({
+				outcome: 'error',
+				cause: 'http',
+				httpStatus: 400
+			})
+		}
+		// The unmasked shape, which carries the id in its own field.
+		answer({ error_id: 'Zx12-ab34-CD56', error_message: echoed, status: 500 }, 500)
+		expect(await submitToCrm(RECORD, TOKEN)).toMatchObject({ errorId: 'Zx12-ab34-CD56' })
+
+		const warn = vi.spyOn(console, 'warn').mockImplementation(() => {})
+		answer({ error_code: 0, error_message: echoed, status: 400 }, 400)
+		expect(await reportToCrm(RECORD, TOKEN)).toBe('error')
+		const reported = JSON.stringify([reportError.mock.calls, warn.mock.calls])
+		for (const leaked of ['ada@example.org', TOKEN, 'Invalid value']) {
+			expect(reported).not.toContain(leaked)
+		}
 	})
 
 	// AbortSignal.timeout aborts with a DOMException named TimeoutError.
