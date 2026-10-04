@@ -287,7 +287,8 @@
 	</div>
 {:else if phase === 'thanks'}
 	<div class="subscribe-card thanks">
-		<h2>Thanks for signing up!</h2>
+		<h2>{msgs.onboarding_check_inbox_title}</h2>
+		<p>Thanks for signing up! {msgs.onboarding_check_inbox_body}</p>
 		<p>
 			Are you interested in doing more? Whether you have five minutes or five hours a week, there's
 			a place for you.

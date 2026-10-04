@@ -267,14 +267,13 @@ export interface OnboardingMessages extends ChapterShareMessages {
 	onboarding_btn_submitting: string
 	onboarding_btn_back: string
 	onboarding_confirm_newsletter: string
-	onboarding_confirm_a_title: string
-	onboarding_confirm_b_title: string
+	onboarding_check_inbox_title: string
+	onboarding_check_inbox_body: string
 	onboarding_confirm_b_sub: string
 	onboarding_confirm_volunteer_title: string
 	onboarding_confirm_volunteer_sub: string
 	onboarding_browse_header_title: string
 	onboarding_browse_header_sub: string
-	onboarding_browse_signed_up: string
 	onboarding_browse_keep_informed_title: string
 	onboarding_btn_sign_me_up: string
 	onboarding_btn_signing_up: string
@@ -288,7 +287,7 @@ export interface OnboardingMessages extends ChapterShareMessages {
 	onboarding_step_about: string
 	onboarding_step_intent: string
 	onboarding_step_volunteer_form: string
-	onboarding_step_confirmed: string
+	onboarding_step_check_inbox: string
 	onboarding_step_next_steps: string
 	onboarding_volunteer_title: string
 	onboarding_volunteer_intro: string
@@ -453,15 +452,15 @@ const en: OnboardingMessages = {
 	onboarding_btn_back: '← Back',
 	onboarding_confirm_newsletter:
 		"You're subscribed to our Substack: AI news from the PauseAI team's perspective, delivered by email.",
-	onboarding_confirm_a_title: "You're in.",
-	onboarding_confirm_b_title: "You're in, thanks for joining us.",
-	onboarding_confirm_b_sub: "You're all set. Here are a few ways to make a difference today.",
+	onboarding_check_inbox_title: 'Check your inbox',
+	onboarding_check_inbox_body:
+		"We've sent you an email. Click the link in it to confirm your address. If it's not there, check your spam folder.",
+	onboarding_confirm_b_sub: 'Here are a few ways to make a difference today.',
 	onboarding_confirm_volunteer_title: 'Welcome to the team.',
 	onboarding_confirm_volunteer_sub: "You're on the volunteer list. We'll be in touch soon.",
 	onboarding_browse_header_title: 'Take action right now.',
 	onboarding_browse_header_sub:
 		'Below are some actions you can take right now. The best way to stay informed about new opportunities is to sign up below.',
-	onboarding_browse_signed_up: "✓ You're in.",
 	onboarding_browse_keep_informed_title: 'Keep me informed',
 	onboarding_btn_sign_me_up: 'Sign me up →',
 	onboarding_btn_signing_up: 'Signing up...',
@@ -477,7 +476,7 @@ const en: OnboardingMessages = {
 	onboarding_step_about: 'About you',
 	onboarding_step_intent: 'Intent',
 	onboarding_step_volunteer_form: 'Volunteer form',
-	onboarding_step_confirmed: 'Confirmed',
+	onboarding_step_check_inbox: 'Check your inbox',
 	onboarding_step_next_steps: 'Next steps',
 	onboarding_volunteer_title: 'Sign up to volunteer',
 	onboarding_volunteer_intro: 'Tell us a bit about yourself so we can find a role that fits.',
@@ -667,17 +666,16 @@ const de: OnboardingMessages = {
 	onboarding_btn_back: '← Zurück',
 	onboarding_confirm_newsletter:
 		'Du hast unseren Substack abonniert: KI-Nachrichten aus der Perspektive des PauseAI-Teams, per E-Mail.',
-	onboarding_confirm_a_title: 'Du bist dabei.',
-	onboarding_confirm_b_title: 'Du bist dabei – danke, dass du dich uns anschließt.',
-	onboarding_confirm_b_sub:
-		'Alles ist bereit. Hier sind einige Möglichkeiten, heute etwas zu bewirken.',
+	onboarding_check_inbox_title: 'Schau in dein Postfach',
+	onboarding_check_inbox_body:
+		'Wir haben dir eine E-Mail geschickt. Klicke auf den Link darin, um deine Adresse zu bestätigen. Falls du sie nicht findest, schau im Spam-Ordner nach.',
+	onboarding_confirm_b_sub: 'Hier sind einige Möglichkeiten, heute etwas zu bewirken.',
 	onboarding_confirm_volunteer_title: 'Willkommen im Team.',
 	onboarding_confirm_volunteer_sub:
 		'Du stehst auf der Freiwilligenliste. Wir melden uns bald bei dir.',
 	onboarding_browse_header_title: 'Jetzt handeln.',
 	onboarding_browse_header_sub:
 		'Im Folgenden findest du Aktionen, die du sofort ergreifen kannst. Am besten bleibst du über neue Möglichkeiten informiert, indem du dich unten anmeldest.',
-	onboarding_browse_signed_up: '✓ Du bist dabei.',
 	onboarding_browse_keep_informed_title: 'Auf dem Laufenden bleiben',
 	onboarding_btn_sign_me_up: 'Anmelden →',
 	onboarding_btn_signing_up: 'Wird angemeldet...',
@@ -693,7 +691,7 @@ const de: OnboardingMessages = {
 	onboarding_step_about: 'Über dich',
 	onboarding_step_intent: 'Absicht',
 	onboarding_step_volunteer_form: 'Freiwilligenformular',
-	onboarding_step_confirmed: 'Bestätigt',
+	onboarding_step_check_inbox: 'Postfach checken',
 	onboarding_step_next_steps: 'Nächste Schritte',
 	onboarding_volunteer_title: 'Als Freiwillige/r anmelden',
 	onboarding_volunteer_intro:
@@ -891,17 +889,16 @@ const fr: OnboardingMessages = {
 	onboarding_btn_back: '← Retour',
 	onboarding_confirm_newsletter:
 		"Tu es abonné·e à notre Substack : l'actualité de l'IA vue par l'équipe PauseAI, par e-mail.",
-	onboarding_confirm_a_title: "C'est fait.",
-	onboarding_confirm_b_title: "C'est fait, merci de nous rejoindre.",
-	onboarding_confirm_b_sub:
-		"Tout est prêt. Voici quelques moyens de faire la différence dès aujourd'hui.",
+	onboarding_check_inbox_title: 'Vérifie ta boîte mail',
+	onboarding_check_inbox_body:
+		"Nous t'avons envoyé un e-mail. Clique sur le lien qu'il contient pour confirmer ton adresse. Si tu ne le trouves pas, jette un œil dans tes spams.",
+	onboarding_confirm_b_sub: "Voici quelques moyens de faire la différence dès aujourd'hui.",
 	onboarding_confirm_volunteer_title: "Bienvenue dans l'équipe.",
 	onboarding_confirm_volunteer_sub:
 		'Tu es sur la liste des bénévoles. Nous te contacterons bientôt.',
 	onboarding_browse_header_title: 'Agis dès maintenant.',
 	onboarding_browse_header_sub:
 		"Voici quelques actions que tu peux entreprendre dès maintenant. Le meilleur moyen de rester informé·e des nouvelles opportunités est de t'inscrire ci-dessous.",
-	onboarding_browse_signed_up: "✓ C'est fait.",
 	onboarding_browse_keep_informed_title: 'Me tenir informé·e',
 	onboarding_btn_sign_me_up: "M'inscrire →",
 	onboarding_btn_signing_up: 'Inscription en cours...',
@@ -917,7 +914,7 @@ const fr: OnboardingMessages = {
 	onboarding_step_about: 'À propos de toi',
 	onboarding_step_intent: 'Intention',
 	onboarding_step_volunteer_form: 'Formulaire de bénévolat',
-	onboarding_step_confirmed: 'Confirmé',
+	onboarding_step_check_inbox: 'Vérifie ta boîte mail',
 	onboarding_step_next_steps: 'Prochaines étapes',
 	onboarding_volunteer_title: "S'inscrire comme bénévole",
 	onboarding_volunteer_intro:
@@ -1115,16 +1112,16 @@ const es: OnboardingMessages = {
 	onboarding_btn_back: '← Atrás',
 	onboarding_confirm_newsletter:
 		'Te has suscrito a nuestro Substack: noticias sobre IA desde la perspectiva del equipo de PauseAI, directamente en tu correo.',
-	onboarding_confirm_a_title: '¡Ya estás dentro!',
-	onboarding_confirm_b_title: '¡Ya estás dentro! Gracias por unirte.',
-	onboarding_confirm_b_sub: 'Todo listo. Aquí tienes algunas formas de marcar la diferencia hoy.',
+	onboarding_check_inbox_title: 'Revisa tu correo',
+	onboarding_check_inbox_body:
+		'Te hemos enviado un correo. Haz clic en el enlace que contiene para confirmar tu dirección. Si no lo encuentras, mira en la carpeta de spam.',
+	onboarding_confirm_b_sub: 'Aquí tienes algunas formas de marcar la diferencia hoy.',
 	onboarding_confirm_volunteer_title: 'Te damos la bienvenida al equipo.',
 	onboarding_confirm_volunteer_sub:
 		'Ya estás en la lista de voluntariado. Nos pondremos en contacto contigo pronto.',
 	onboarding_browse_header_title: 'Pasa a la acción ahora mismo.',
 	onboarding_browse_header_sub:
 		'Aquí tienes algunas acciones que puedes hacer ahora mismo. La mejor forma de enterarte de nuevas oportunidades es inscribirte abajo.',
-	onboarding_browse_signed_up: '✓ Ya estás dentro.',
 	onboarding_browse_keep_informed_title: 'Mantenme informado/a',
 	onboarding_btn_sign_me_up: 'Inscríbeme →',
 	onboarding_btn_signing_up: 'Inscribiendo...',
@@ -1140,7 +1137,7 @@ const es: OnboardingMessages = {
 	onboarding_step_about: 'Sobre ti',
 	onboarding_step_intent: 'Intención',
 	onboarding_step_volunteer_form: 'Formulario de voluntariado',
-	onboarding_step_confirmed: 'Confirmado',
+	onboarding_step_check_inbox: 'Revisa tu correo',
 	onboarding_step_next_steps: 'Siguientes pasos',
 	onboarding_volunteer_title: 'Inscríbete como voluntario/a',
 	onboarding_volunteer_intro:

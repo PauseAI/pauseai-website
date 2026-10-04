@@ -357,7 +357,7 @@
 						msgs.onboarding_step_about,
 						msgs.onboarding_step_intent,
 						msgs.onboarding_step_volunteer_form,
-						msgs.onboarding_step_confirmed
+						msgs.onboarding_step_check_inbox
 					]
 				: intent === 'lead'
 					? [
@@ -368,7 +368,7 @@
 					: [
 							msgs.onboarding_step_about,
 							msgs.onboarding_step_intent,
-							msgs.onboarding_step_confirmed
+							msgs.onboarding_step_check_inbox
 						]
 		// The /subscribe continuation begins after the subscribe form, so it never
 		// showed an "About you" step — drop it and start the stepper at Intent.
@@ -683,6 +683,14 @@
 	{/each}
 {/snippet}
 
+<!-- Every path that renders this has created a row with an email, and creating one sends
+     the verification email. -->
+{#snippet checkInbox()}
+	<div class="checkmark" aria-hidden="true">✉</div>
+	<h2>{msgs.onboarding_check_inbox_title}</h2>
+	<p>{msgs.onboarding_check_inbox_body}</p>
+{/snippet}
+
 {#snippet checkboxConfirmations()}
 	<!-- Not on the /subscribe continuation: those opt-ins were made and confirmed
 	     on the subscribe form. -->
@@ -989,11 +997,7 @@
 		{:else if step === 3 && !intent}
 			<!-- Path A: confirmation -->
 			<div class="confirmation">
-				<div class="checkmark">✓</div>
-				{#if !isContinuation}
-					<!-- As on path B: the continuation already thanked them for signing up. -->
-					<h2>{msgs.onboarding_confirm_a_title}</h2>
-				{/if}
+				{@render checkInbox()}
 				{@render checkboxConfirmations()}
 				{@render nextStepBlock()}
 				{@render confirmationFooter()}
@@ -1002,12 +1006,7 @@
 			<!-- Path B: act now (contact confirmation or browse landing) -->
 			{#if mode === 'contact'}
 				<div class="confirmation">
-					<div class="checkmark">✓</div>
-					{#if !isContinuation}
-						<!-- The continuation already thanked them for signing up; don't
-						     thank them for joining a second time. -->
-						<h2>{msgs.onboarding_confirm_b_title}</h2>
-					{/if}
+					{@render checkInbox()}
 					<p>{msgs.onboarding_confirm_b_sub}</p>
 					{@render checkboxConfirmations()}
 				</div>
@@ -1020,7 +1019,8 @@
 				</div>
 				{#if browseSignedUp}
 					<div class="inline-confirmation">
-						{msgs.onboarding_browse_signed_up}
+						<strong class="inline-confirmation-title">✉ {msgs.onboarding_check_inbox_title}</strong>
+						{msgs.onboarding_check_inbox_body}
 						{keepInformedConfirmation(msgs, shownAnswer, chapter)}
 					</div>
 				{:else}
@@ -1409,9 +1409,11 @@
 		{:else if step === 4 && intent === 'volunteer'}
 			<!-- Path C: confirmation -->
 			<div class="confirmation">
-				<div class="checkmark">✓</div>
-				<h2>{msgs.onboarding_confirm_volunteer_title}</h2>
-				<p>{msgs.onboarding_confirm_volunteer_sub}</p>
+				{@render checkInbox()}
+				<p>
+					<strong>{msgs.onboarding_confirm_volunteer_title}</strong>
+					{msgs.onboarding_confirm_volunteer_sub}
+				</p>
 				{@render checkboxConfirmations()}
 				{@render nextStepBlock()}
 				{@render confirmationFooter()}
@@ -1960,6 +1962,11 @@
 		margin: 1rem 0 1.5rem 0;
 		background-color: var(--bg);
 		font-weight: 500;
+	}
+
+	.inline-confirmation-title {
+		display: block;
+		margin-bottom: 0.25rem;
 	}
 
 	.role-meta {
