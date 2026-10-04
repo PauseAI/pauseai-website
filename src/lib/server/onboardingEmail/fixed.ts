@@ -71,7 +71,7 @@ const en: FixedCopy = {
 		"If you opted in, we'll keep you posted. Either way, we may occasionally send you a critical alert."
 }
 
-// From the live Spanish template, which only serves volunteers. The critical alert
+// From the live Spanish template, which serves volunteers and no-intent signups. The critical alert
 // sentence is new and needs a fluent reader.
 const es: FixedCopy = {
 	confirm: (link) =>

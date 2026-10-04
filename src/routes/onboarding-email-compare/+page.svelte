@@ -34,7 +34,20 @@
 		{ value: 'None', label: 'None' },
 		{ value: 'Act now', label: 'Act now' }
 	]
-	const intentChoices = $derived(data.newInputs.intent === 'Volunteer' ? [] : NON_VOLUNTEER_CHOICES)
+	// The Spanish template was sent to volunteers, but the new render has a Spanish version for
+	// every intent, so it gets all three. The other volunteer template offers no choice.
+	const SPANISH_CHOICES = [
+		{ value: 'Volunteer', label: 'Volunteer' },
+		{ value: 'None', label: 'None' },
+		{ value: 'Act now', label: 'Act now' }
+	]
+	const intentChoices = $derived(
+		data.resolved.language === 'es'
+			? SPANISH_CHOICES
+			: data.newInputs.intent === 'Volunteer'
+				? []
+				: NON_VOLUNTEER_CHOICES
+	)
 
 	const LANGUAGE_LABELS: Record<string, string> = {
 		en: 'English',

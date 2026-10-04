@@ -86,8 +86,7 @@ async function resolve(
 		resolution: {
 			bucket,
 			group,
-			// Only English has a non-volunteer version, so Spanish non-volunteers get it, as today.
-			language: override ? override.language : group === 'volunteer' ? detected : 'en',
+			language: override ? override.language : detected,
 			override: override?.name ?? null,
 			chapter,
 			chapterShare: params.chapterShare

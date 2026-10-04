@@ -12,7 +12,8 @@ import type { BaseLanguage, ChapterBlockData, IntentBucket } from './types.js'
 // The shared copy, ported from what the live MailerSend templates send so that the switch to
 // this renderer changes as little as possible:
 //  - no intent / Act now: Irina's confirmation copy (templates 7dnvo4dyjd345r86 and
-//    ynrw7gy8z1n42k8e), English only, as today
+//    ynrw7gy8z1n42k8e), English only, as today; except no intent in Spanish, which gets
+//    esNone below, cut down from the Spanish template
 //  - Volunteer and Lead, English: the Global volunteer template (3z0vkloo5v1l7qrx), with its
 //    "Chapter Lead of your country" paragraph replaced by the chapter block
 //  - Volunteer and Lead, Spanish: the Spanish template (o65qngkj1mjlwr12) as it is
@@ -156,6 +157,45 @@ function enVolunteer(
 	}
 }
 
+const ES_INTRO =
+	'Estamos encantados de que te unas a nuestra creciente red global de voluntarios. Tu decisión de apoyarnos demuestra que compartes nuestro compromiso de garantizar que la inteligencia artificial se desarrolle de forma pausada y segura, beneficiando a todos en lugar de quedar a merced de los caprichos de empresas con fines de lucro en una carrera imprudente hacia una IA más inteligente que la humana. Mira nuestro vídeo a continuación para obtener un resumen de la posición de PauseAI:'
+
+// The Spanish no-intent and Act now emails: the intro, the video and the closing, with no
+// community or chapter sections. Their newsletter line is the shared Spanish one from fixed.ts.
+function esShortWelcome(firstName: string, body: EmailBlock[]): EmailContent {
+	return {
+		subject: `¡Bienvenido a PauseAI, ${firstName}!`,
+		greeting: [{ type: 'heading', level: 1, text: `¡Bienvenido a PauseAI, ${firstName}!` }],
+		body,
+		signoff: [
+			{
+				type: 'paragraph',
+				text: '¡Bienvenido a bordo! Juntos, podemos tomar medidas para prevenir los impactos catastróficos del desarrollo de la Inteligencia Artificial.'
+			},
+			{ type: 'signoff', lines: ['Saludos cordiales,', 'Maxime y el equipo de PauseAI Global'] }
+		],
+		socials: GLOBAL_SOCIALS
+	}
+}
+
+function esNone(firstName: string): EmailContent {
+	return esShortWelcome(firstName, [
+		{ type: 'paragraph', text: ES_INTRO },
+		{ type: 'button', text: 'Video Introductorio', url: VIDEO_URL }
+	])
+}
+
+function esActNow(firstName: string): EmailContent {
+	return esShortWelcome(firstName, [
+		{
+			type: 'paragraph',
+			text: `Si estás buscando un paso a seguir ahora mismo, consulta nuestra página de [Acción](${ACTION_PAGE_URL}).`
+		},
+		{ type: 'paragraph', text: ES_INTRO },
+		{ type: 'button', text: 'Video Introductorio', url: VIDEO_URL }
+	])
+}
+
 // No chapter block: this email already describes PauseAI en Español, the community every
 // Spanish-speaking country shares, and a chapter block would single out Spain.
 function esVolunteer(firstName: string): EmailContent {
@@ -163,10 +203,7 @@ function esVolunteer(firstName: string): EmailContent {
 		subject: `¡Bienvenido a PauseAI, ${firstName}!`,
 		greeting: [{ type: 'heading', level: 1, text: `¡Bienvenido a PauseAI, ${firstName}!` }],
 		body: [
-			{
-				type: 'paragraph',
-				text: 'Estamos encantados de que te unas a nuestra creciente red global de voluntarios. Tu decisión de apoyarnos demuestra que compartes nuestro compromiso de garantizar que la inteligencia artificial se desarrolle de forma pausada y segura, beneficiando a todos en lugar de quedar a merced de los caprichos de empresas con fines de lucro en una carrera imprudente hacia una IA más inteligente que la humana. Mira nuestro vídeo a continuación para obtener un resumen de la posición de PauseAI:'
-			},
+			{ type: 'paragraph', text: ES_INTRO },
 			{ type: 'button', text: 'Video Introductorio', url: VIDEO_URL },
 			{ type: 'heading', text: 'Primeros pasos para involucrarse en las comunidades' },
 			{ type: 'paragraph', text: '**PauseAI en Español**' },
@@ -232,6 +269,11 @@ export function baseContent(
 	chapterShare: boolean,
 	firstName: string
 ): EmailContent {
+	if (language === 'es') {
+		if (bucket === 'volunteer') return esVolunteer(firstName)
+		if (bucket === 'none') return esNone(firstName)
+		if (bucket === 'act-now') return esActNow(firstName)
+	}
 	if (bucket !== 'volunteer') return enNonVolunteer(bucket, chapter, firstName)
-	return language === 'es' ? esVolunteer(firstName) : enVolunteer(chapter, chapterShare, firstName)
+	return enVolunteer(chapter, chapterShare, firstName)
 }
