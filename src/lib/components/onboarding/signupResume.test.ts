@@ -146,7 +146,7 @@ describe('signupResume', () => {
 		formData.set('email', 'Ada@example.org')
 		formData.set('keep_informed', 'on')
 		formData.set('intent', 'Lead')
-		saveSignupFromPost(formData, 'rec1', 'tok1')
+		saveSignupFromPost(formData, 'rec1', 'tok1', null)
 		expect(loadSignup('ada@example.org')).toEqual({
 			recordId: 'rec1',
 			recordToken: 'tok1',
@@ -156,7 +156,7 @@ describe('signupResume', () => {
 		})
 		formData.set('intent', 'Overlord')
 		formData.delete('keep_informed')
-		saveSignupFromPost(formData, 'rec1', 'tok1')
+		saveSignupFromPost(formData, 'rec1', 'tok1', null)
 		expect(loadSignup('ada@example.org')).toEqual({
 			recordId: 'rec1',
 			recordToken: 'tok1',
@@ -166,30 +166,37 @@ describe('signupResume', () => {
 		})
 	})
 
-	it('keeps the saved chapter answer for the same row when a post carries none', () => {
+	it('keeps the answer the row held when a post carries none', () => {
 		const formData = new FormData()
 		formData.set('email', 'ada@example.org')
 		formData.set('intent', 'None')
 		formData.set('country', 'Germany')
 		formData.set('chapter_share', 'no')
-		saveSignupFromPost(formData, 'rec1', 'tok1')
-		expect(loadSignup('ada@example.org')?.chapterAnswer).toEqual({
-			answer: 'no',
-			country: 'Germany'
-		})
+		const held = saveSignupFromPost(formData, 'rec1', 'tok1', null)
+		expect(held).toEqual({ answer: 'no', country: 'Germany' })
+		expect(loadSignup('ada@example.org')?.chapterAnswer).toEqual(held)
 
 		// The /subscribe "do more" step, which does not ask again.
 		formData.delete('chapter_share')
 		formData.set('intent', 'Volunteer')
-		saveSignupFromPost(formData, 'rec1', 'tok2')
-		expect(loadSignup('ada@example.org')?.chapterAnswer).toEqual({
-			answer: 'no',
-			country: 'Germany'
-		})
+		expect(saveSignupFromPost(formData, 'rec1', 'tok2', held)).toEqual(held)
+		expect(loadSignup('ada@example.org')?.chapterAnswer).toEqual(held)
+	})
 
-		// Another row starts without one.
-		saveSignupFromPost(formData, 'rec2', 'tok3')
-		expect(loadSignup('ada@example.org')?.chapterAnswer).toBeNull()
+	it('returns the answer a post wrote, so a picked-up row is asked again for its old country', () => {
+		const formData = new FormData()
+		formData.set('email', 'ada@example.org')
+		formData.set('intent', 'Volunteer')
+		formData.set('country', 'France')
+		formData.set('chapter_share', 'yes')
+		// Picked up holding a No for Germany, then answered Yes for France.
+		const pickedUp = { answer: 'no' as const, country: 'Germany' }
+		const held = saveSignupFromPost(formData, 'rec1', 'tok1', pickedUp)
+		expect(held).toEqual({ answer: 'yes', country: 'France' })
+		expect(loadSignup('ada@example.org')?.chapterAnswer).toEqual(held)
+		// Back to step 1 and Germany again: the row no longer holds Germany's answer.
+		expect(heldChapterAnswer(held, 'ada@example.org', 'ada@example.org', 'Germany')).toBeNull()
+		expect(heldChapterAnswer(held, 'ada@example.org', 'ada@example.org', 'France')).toBe('yes')
 	})
 
 	it('counts a saved answer only for the country it was given for', () => {
@@ -198,7 +205,7 @@ describe('signupResume', () => {
 		formData.set('intent', 'None')
 		formData.set('country', 'Germany')
 		formData.set('chapter_share', 'yes')
-		saveSignupFromPost(formData, 'rec1', 'tok1')
+		saveSignupFromPost(formData, 'rec1', 'tok1', null)
 		const saved = loadSignup('ada@example.org')?.chapterAnswer ?? null
 		expect(chapterAnswerFor(saved, ' germany ')).toBe('yes')
 		// Coming back and picking France asks again.
@@ -217,16 +224,13 @@ describe('signupResume', () => {
 		expect(heldChapterAnswer(held, 'ada@example.org', 'ada@example.org', 'France')).toBeNull()
 	})
 
-	it('drops the saved answer once a post lands in the United States', () => {
+	it('drops the answer once a post lands in the United States', () => {
 		const formData = new FormData()
 		formData.set('email', 'ada@example.org')
 		formData.set('intent', 'None')
-		formData.set('country', 'Germany')
-		formData.set('chapter_share', 'yes')
-		saveSignupFromPost(formData, 'rec1', 'tok1')
-		formData.delete('chapter_share')
 		formData.set('country', 'United States')
-		saveSignupFromPost(formData, 'rec1', 'tok2')
+		const held = { answer: 'yes' as const, country: 'Germany' }
+		expect(saveSignupFromPost(formData, 'rec1', 'tok2', held)).toBeNull()
 		expect(loadSignup('ada@example.org')?.chapterAnswer).toBeNull()
 	})
 

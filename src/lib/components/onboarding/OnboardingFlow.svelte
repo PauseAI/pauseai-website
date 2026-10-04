@@ -556,7 +556,7 @@
 						else if (created) recordToken = ''
 						rowIntent = postedIntent(formData)
 						resumed = false
-						saveSignupFromPost(formData, recordId, recordToken)
+						rowChapterAnswer = saveSignupFromPost(formData, recordId, recordToken, rowChapterAnswer)
 					}
 					onSuccess(result.data, startValue)
 				} else if (result.type === 'failure') {

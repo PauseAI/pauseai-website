@@ -101,33 +101,31 @@ export function postedIntent(formData: FormData): Intent {
 }
 
 // After a post that returned `recordId`: what that post wrote is what the row holds.
-// A post without a chapter answer left the row's alone, so the saved one is kept,
-// except in the United States, where the server clears it.
+// A post without a chapter answer left the row's alone, so `held`, the answer the
+// row held before it, stands, except in the United States, where the server clears
+// it. Returns the answer the row now holds, which the form must take as its own:
+// asking again or not for a country follows it.
 export function saveSignupFromPost(
 	formData: FormData,
 	recordId: string,
-	recordToken: string
-): void {
+	recordToken: string,
+	held: SavedChapterAnswer | null
+): SavedChapterAnswer | null {
 	const answer = posted(formData, 'chapter_share')
 	const country = posted(formData, 'country')
+	const chapterAnswer = !asksChapterQuestion(country)
+		? null
+		: isChapterAnswer(answer)
+			? { answer, country }
+			: held
 	saveSignup(posted(formData, 'email'), {
 		recordId,
 		recordToken,
 		keepInformed: posted(formData, 'keep_informed') === 'on',
 		intent: postedIntent(formData),
-		chapterAnswer: !asksChapterQuestion(country)
-			? null
-			: isChapterAnswer(answer)
-				? { answer, country }
-				: savedChapterAnswer(recordId)
+		chapterAnswer
 	})
-}
-
-function savedChapterAnswer(recordId: string): SavedChapterAnswer | null {
-	const stored = readStored()
-	return stored.recordId === recordId && isSavedChapterAnswer(stored.chapterAnswer)
-		? stored.chapterAnswer
-		: null
+	return chapterAnswer
 }
 
 function readStored(): Partial<Stored> {

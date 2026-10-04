@@ -152,7 +152,8 @@
 				if (typeof result.data.recordId === 'string') {
 					recordId = result.data.recordId
 					recordToken = typeof result.data.recordToken === 'string' ? result.data.recordToken : ''
-					saveSignupFromPost(formData, recordId, recordToken)
+					// Always a create, so the row held no answer before it.
+					saveSignupFromPost(formData, recordId, recordToken, null)
 				}
 				phase = 'thanks'
 			} else if (result.type === 'failure') {
