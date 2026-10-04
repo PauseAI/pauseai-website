@@ -1,5 +1,5 @@
 import { url } from '$lib/config.js'
-import { verificationLink } from '$lib/server/emailVerification'
+import { mintVerificationToken, verificationLink } from '$lib/server/emailVerification'
 import { reportError } from '$lib/server/sentry'
 import { baseContent } from './copy.js'
 import { composeBlocks, groupOf, resolveIntentBucket } from './blocks.js'
@@ -125,12 +125,19 @@ export async function renderOnboardingEmail(
 
 /**
  * The v2 render (docs/onboarding-email-v2-contract.md): the caller has already decided the
- * routing, language and verification link, so this reads nothing and decides none of them.
- * Copy and chapter override follow `routing`, never the member's country.
+ * routing and language, so this reads nothing and decides neither. Copy and chapter override
+ * follow `routing`, never the member's country. The verification link is always signed, with
+ * `secret`, over the record id and the address being mailed.
  */
-export function renderOnboardingEmailV2(
-	params: OnboardingEmailV2Params
-): RenderedOnboardingEmailV2 {
+export async function renderOnboardingEmailV2(
+	params: OnboardingEmailV2Params,
+	secret: string,
+	now = Date.now()
+): Promise<RenderedOnboardingEmailV2> {
+	const link = verificationLink(
+		params.recordId.replace(/^rec/, ''),
+		await mintVerificationToken(secret, params.recordId, params.toEmail, now)
+	)
 	const bucket = resolveIntentBucket(params.intent)
 	const routed = params.routing.kind === 'chapter' ? params.routing : null
 	const override = routed ? getChapterOverride(routed.country, bucket) : null
@@ -147,13 +154,7 @@ export function renderOnboardingEmailV2(
 		chapter,
 		chapterShare: routed !== null
 	}
-	const email = compose(
-		resolution,
-		override,
-		params.firstName,
-		params.verificationLink,
-		params.keepInformed
-	)
+	const email = compose(resolution, override, params.firstName, link, params.keepInformed)
 	return { ...email, language, chapterOverride: resolution.override }
 }
 

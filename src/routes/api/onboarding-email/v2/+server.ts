@@ -13,7 +13,12 @@ import type { RequestHandler } from './$types'
 // reply-to.
 
 type ErrorCode =
-	'unauthorized' | 'invalid_json' | 'unsupported_version' | 'invalid_request' | 'render_failed'
+	| 'unauthorized'
+	| 'invalid_json'
+	| 'unsupported_version'
+	| 'invalid_request'
+	| 'verification_unavailable'
+	| 'render_failed'
 
 function error(status: number, code: ErrorCode, message: string): Response {
 	return json({ error: { code, message } }, { status })
@@ -47,9 +52,23 @@ export const POST: RequestHandler = async ({ request }) => {
 
 	const parsed = parseV2Request(body)
 	if (!parsed.ok) return error(StatusCodes.BAD_REQUEST, parsed.error.code, parsed.error.message)
+	// Every v2 link is signed: without the secret there is no link to give.
+	const verificationSecret = env.EMAIL_VERIFICATION_SECRET
+	if (!verificationSecret) {
+		console.error('[verification] EMAIL_VERIFICATION_SECRET is not set: refusing v2 renders')
+		await reportError(new Error('EMAIL_VERIFICATION_SECRET is not set'), {
+			route: 'onboarding-email/v2'
+		})
+		return error(
+			StatusCodes.SERVICE_UNAVAILABLE,
+			'verification_unavailable',
+			'Verification links cannot be signed'
+		)
+	}
+
 	let rendered
 	try {
-		rendered = renderOnboardingEmailV2(parsed.params)
+		rendered = await renderOnboardingEmailV2(parsed.params, verificationSecret)
 	} catch (cause) {
 		console.error('Failed to render onboarding email (v2):', cause)
 		await reportError(cause, { route: 'onboarding-email/v2' })

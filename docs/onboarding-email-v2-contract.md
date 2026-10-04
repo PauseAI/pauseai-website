@@ -2,7 +2,7 @@
 
 The website renders the onboarding welcome email for a caller that sends it. This document is the contract for version 2, which the CRM calls. Version 1 (`POST /api/onboarding-email`, used by the Airtable welcome automation in `airtable-mailersend-emails.js`) is unchanged and is not described here.
 
-The renderer only renders. It never sends mail, and it never chooses a recipient, a sender or a reply-to: the caller decides all of those. It reads nothing either: no Airtable record, no chapter table, no other network call. Everything the email depends on is in the request.
+The renderer only renders. It never sends mail, and it never chooses a recipient, a sender or a reply-to: the caller decides all of those. It reads nothing either: no Airtable record, no chapter table, no other network call. Everything the email depends on is in the request, except the verification link, which the website builds and signs itself (see "Verification link").
 
 ## Endpoint
 
@@ -20,16 +20,17 @@ To rotate: set the new value on the website, deploy, then update the CRM. Reques
 
 `Content-Type: application/json`
 
-| field               | type            | required | meaning                                                                                                                                                    |
-| ------------------- | --------------- | -------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `version`           | number          | yes      | Must be `2`.                                                                                                                                               |
-| `first_name`        | string          | yes      | The member's first name, 1 to 200 characters. Markdown characters (`[`, `]`, `*`) are removed before it is used.                                           |
-| `language`          | string or null  | no       | A language tag such as `en`, `es`, `es-MX` or `es_ES`. See "Languages".                                                                                    |
-| `country`           | string or null  | no       | The member's country name, e.g. `Mexico`. Used only to pick the language when `language` is absent. It never selects a chapter.                            |
-| `intent`            | string or null  | no       | The member's intent as the join form records it: `Act now`, `Volunteer` or `Lead`. Anything else, or none, gets the email for a member who gave no intent. |
-| `keep_informed`     | boolean or null | no       | The member's Keep me informed answer. `true` and `false` each state what we will send; null or absent keeps the hedged "if you opted in" wording.          |
-| `routing`           | object          | yes      | Where the CRM routed the member. See "Routing".                                                                                                            |
-| `verification_link` | string          | yes      | The link the member clicks to confirm their address. Embedded exactly as given. See "Verification link".                                                   |
+| field           | type            | required | meaning                                                                                                                                                    |
+| --------------- | --------------- | -------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `version`       | number          | yes      | Must be `2`.                                                                                                                                               |
+| `first_name`    | string          | yes      | The member's first name, 1 to 200 characters. Markdown characters (`[`, `]`, `*`) are removed before it is used.                                           |
+| `language`      | string or null  | no       | A language tag such as `en`, `es`, `es-MX` or `es_ES`. See "Languages".                                                                                    |
+| `country`       | string or null  | no       | The member's country name, e.g. `Mexico`. Used only to pick the language when `language` is absent. It never selects a chapter.                            |
+| `intent`        | string or null  | no       | The member's intent as the join form records it: `Act now`, `Volunteer` or `Lead`. Anything else, or none, gets the email for a member who gave no intent. |
+| `keep_informed` | boolean or null | no       | The member's Keep me informed answer. `true` and `false` each state what we will send; null or absent keeps the hedged "if you opted in" wording.          |
+| `routing`       | object          | yes      | Where the CRM routed the member. See "Routing".                                                                                                            |
+| `record_id`     | string          | yes      | The member's Members row, as its full Airtable record id: `rec` followed by 14 letters or digits. See "Verification link".                                 |
+| `to_email`      | string          | yes      | The address the CRM is sending this email to, at most 254 characters. Used only to sign the verification link. See "Verification link".                    |
 
 Any other field is refused (`invalid_request`), so a new field needs a new contract version. Strings are trimmed; an empty string counts as absent for the optional fields.
 
@@ -87,17 +88,17 @@ The response's `language` field says which language the email went out in.
 
 ### Verification link
 
-The link must be the site's own join verification link, in the canonical form a URL parser writes back (no surrounding whitespace, lowercase scheme and host):
+The website builds the verification link and signs it; the CRM holds no verification secret. The link is
 
-- origin `https://pauseai.info`, path `/verify`, no fragment and no user information;
-- query parameters `table`, `verificationKey` and optionally `token`, each at most once and no others;
-- `table=join`;
-- `verificationKey` an Airtable record id (`rec` followed by 14 letters or digits);
-- `token`, when present, 1 to 512 characters from `A-Z a-z 0-9 . _ ~ -`.
+`https://pauseai.info/verify?table=join&verificationKey=<record id without rec>&token=<token>`
 
-Example: `https://pauseai.info/verify?table=join&verificationKey=recAbCdEfGhIjKlMn`
+where the token is minted with the website's `EMAIL_VERIFICATION_SECRET` over `record_id` and the normalised `to_email`, and expires 90 days after the render. `/api/verify` accepts it only for that row while the row's `Email` still normalises to the same address. The token format, the normalisation and the verifier are described in `docs/join-form-flow.md`, "Email verification link".
 
-The link is embedded verbatim in both bodies: as the target of a link in the HTML body (HTML-escaped, so `&` appears as `&amp;`) and as plain text in the text body. Every variant the renderer can produce carries it in both; the website's test suite renders each combination of language, routing (global, a chapter without its own email, and every chapter's own email), intent and Keep me informed answer and checks for it.
+`to_email` is never rendered into the email, never returned and never treated as a recipient: the caller still chooses every recipient itself. It must be the address the email is sent to, or the link will not verify.
+
+Every v2 link is signed. While `EMAIL_VERIFICATION_SECRET` is unset on the website, every otherwise valid request is refused with `503 verification_unavailable`; v2 never returns an email with an unsigned link.
+
+The link appears in both bodies: as the target of a link in the HTML body (HTML-escaped, so `&` appears as `&amp;`) and as plain text in the text body. Every variant the renderer can produce carries it in both; the website's test suite renders each combination of language, routing (global, a chapter without its own email, and every chapter's own email), intent and Keep me informed answer and checks for it, and checks that the token verifies for the given row and address only.
 
 ## Response
 
@@ -138,15 +139,16 @@ Every error is JSON with a code the caller can branch on and a message for logs:
 }
 ```
 
-| status | code                  | meaning                                                                     | retry? |
-| ------ | --------------------- | --------------------------------------------------------------------------- | ------ |
-| 400    | `invalid_json`        | The body is not JSON.                                                       | no     |
-| 400    | `unsupported_version` | `version` is missing or not `2`.                                            | no     |
-| 400    | `invalid_request`     | A field is missing, malformed or unknown. The message names the field.      | no     |
-| 401    | `unauthorized`        | The bearer secret is missing or wrong, or the website has none configured.  | no     |
-| 405    | (no JSON body)        | A method other than `POST`.                                                 | no     |
-| 500    | `render_failed`       | Rendering failed on the website.                                            | yes    |
-| other  | (any body)            | A platform error before the handler ran, e.g. `502` or `504` from the host. | yes    |
+| status | code                       | meaning                                                                         | retry? |
+| ------ | -------------------------- | ------------------------------------------------------------------------------- | ------ |
+| 400    | `invalid_json`             | The body is not JSON.                                                           | no     |
+| 400    | `unsupported_version`      | `version` is missing or not `2`.                                                | no     |
+| 400    | `invalid_request`          | A field is missing, malformed or unknown. The message names the field.          | no     |
+| 401    | `unauthorized`             | The bearer secret is missing or wrong, or the website has none configured.      | no     |
+| 405    | (no JSON body)             | A method other than `POST`.                                                     | no     |
+| 500    | `render_failed`            | Rendering failed on the website.                                                | yes    |
+| 503    | `verification_unavailable` | The website cannot sign verification links (`EMAIL_VERIFICATION_SECRET` unset). | later  |
+| other  | (any body)                 | A platform error before the handler ran, e.g. `502` or `504` from the host.     | yes    |
 
 Messages never contain the request's values.
 
@@ -154,7 +156,7 @@ Messages never contain the request's values.
 
 The renderer does no network I/O, so a render normally answers in well under a second; a cold start adds latency. Use a client timeout of 10 seconds.
 
-A render has no side effects, so it is safe to retry on a timeout, a connection error, a `5xx` or a non-JSON response. A `4xx` will not succeed on retry: fix the request. When the render cannot be obtained, the caller sends its own fallback email.
+A render has no side effects, so it is safe to retry on a timeout, a connection error, a `5xx` or a non-JSON response. Each render mints a fresh token, so the link differs between attempts; send the email from the response you use. A `4xx` will not succeed on retry: fix the request. When the render cannot be obtained, the caller sends its own fallback email.
 
 Before sending, the caller should check that `subject`, `html` and `text` are non-empty strings and `version` is `2`.
 
@@ -163,4 +165,5 @@ Before sending, the caller should check that `subject`, `html` and `text` are no
 - Route: `src/routes/api/onboarding-email/v2/+server.ts`
 - Request validation: `src/lib/server/onboardingEmail/v2Request.ts`
 - Rendering: `renderOnboardingEmailV2` in `src/lib/server/onboardingEmail/index.ts`, which shares the copy, chapter overrides and layout with v1
+- Link signing: `mintVerificationToken` and `verificationLink` in `src/lib/server/emailVerification.ts`
 - Tests: `src/lib/server/onboardingEmail/v2.test.ts`, `src/routes/api/onboarding-email/v2/server.test.ts`

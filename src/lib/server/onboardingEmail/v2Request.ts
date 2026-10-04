@@ -1,4 +1,4 @@
-import { url as siteUrl, verificationParameter } from '$lib/config.js'
+import { normaliseEmail } from '$lib/server/emailVerification'
 import { CHAPTER_LINK_LABELS, webLink } from './chapter.js'
 import { resolveOnboardingEmailLanguage } from './language.js'
 import { stripMarkdown } from './markdown.js'
@@ -26,7 +26,8 @@ const TOP_LEVEL_FIELDS = new Set([
 	'intent',
 	'keep_informed',
 	'routing',
-	'verification_link'
+	'record_id',
+	'to_email'
 ])
 const CHAPTER_FIELDS = new Set(['kind', 'chapter_id', 'name', 'country', 'links'])
 const SUPPORTED_LANGUAGES: readonly BaseLanguage[] = ['en', 'es']
@@ -34,7 +35,10 @@ const MAX_TEXT = 200
 const MAX_LINKS = CHAPTER_LINK_LABELS.length
 const MAX_URL = 2048
 const RECORD_ID = /^rec[A-Za-z0-9]{14}$/
-const TOKEN = /^[A-Za-z0-9._~-]{1,512}$/
+// One @ with something either side and no whitespace: enough to refuse a value that is not an
+// address, without second-guessing the CRM's own validation.
+const EMAIL = /^[^\s@]+@[^\s@]+$/
+const MAX_EMAIL = 254
 
 class InvalidRequest extends Error {}
 
@@ -117,36 +121,17 @@ function parseRouting(value: unknown): OnboardingRouting {
 	}
 }
 
-/**
- * The link must be the site's own join verification link, written exactly as the URL parser
- * writes it back, so what is embedded is what was checked.
- */
-function parseVerificationLink(value: unknown): string {
-	const field = 'verification_link'
-	if (typeof value !== 'string' || value.length > MAX_URL) invalid(field, 'must be a string')
-	let link: URL
-	try {
-		link = new URL(value)
-	} catch {
-		invalid(field, 'must be an absolute URL')
+function parseRecordId(value: unknown): string {
+	if (typeof value !== 'string' || !RECORD_ID.test(value)) {
+		invalid('record_id', 'must be an Airtable record id (rec followed by 14 letters or digits)')
 	}
-	if (link.href !== value) invalid(field, 'must be in canonical form')
-	if (link.origin !== new URL(siteUrl).origin || link.pathname !== '/verify') {
-		invalid(field, `must be ${siteUrl}/verify`)
+	return value
+}
+
+function parseToEmail(value: unknown): string {
+	if (typeof value !== 'string' || value.length > MAX_EMAIL || !EMAIL.test(normaliseEmail(value))) {
+		invalid('to_email', 'must be an email address')
 	}
-	if (link.username || link.password || link.hash)
-		invalid(field, 'must have no credentials or fragment')
-	const keys = [...link.searchParams.keys()]
-	const allowed = new Set(['table', verificationParameter, 'token'])
-	if (keys.some((key) => !allowed.has(key)) || new Set(keys).size !== keys.length) {
-		invalid(field, `may carry only table, ${verificationParameter} and token, once each`)
-	}
-	if (link.searchParams.get('table') !== 'join') invalid(field, 'must have table=join')
-	if (!RECORD_ID.test(link.searchParams.get(verificationParameter) ?? '')) {
-		invalid(field, `must have a record id in ${verificationParameter}`)
-	}
-	const token = link.searchParams.get('token')
-	if (token !== null && !TOKEN.test(token)) invalid(field, 'has a malformed token')
 	return value
 }
 
@@ -178,7 +163,8 @@ export function parseV2Request(body: unknown): Parsed {
 				intent: optionalText(body.intent, 'intent'),
 				keepInformed: typeof body.keep_informed === 'boolean' ? body.keep_informed : undefined,
 				routing: parseRouting(body.routing),
-				verificationLink: parseVerificationLink(body.verification_link)
+				recordId: parseRecordId(body.record_id),
+				toEmail: parseToEmail(body.to_email)
 			}
 		}
 	} catch (error) {

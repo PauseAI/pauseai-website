@@ -111,8 +111,11 @@ export type OnboardingEmailV2Params = {
 	/** The member's Keep me informed answer. Undefined keeps the hedged newsletter line. */
 	keepInformed?: boolean
 	routing: OnboardingRouting
-	/** Embedded as given. */
-	verificationLink: string
+	/** The Members row the link verifies, as `rec…`. */
+	recordId: string
+	/** The address the caller is mailing. The link's token is signed over it; it is never
+	 *  rendered or returned. */
+	toEmail: string
 }
 
 export type RenderedOnboardingEmailV2 = {

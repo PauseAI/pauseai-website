@@ -1,4 +1,3 @@
-import { url } from '$lib/config.js'
 import { beforeEach, describe, expect, it, vi } from 'vitest'
 
 const env: Record<string, string | undefined> = {}
@@ -6,9 +5,12 @@ vi.mock('$env/dynamic/private', () => ({ env }))
 vi.mock('$lib/server/sentry', () => ({ reportError: vi.fn() }))
 
 const { POST } = await import('./+server.js')
+const { verifyVerificationToken } = await import('$lib/server/emailVerification')
 
 const SECRET = 'test-v2-secret'
-const LINK = `${url}/verify?table=join&verificationKey=recTest1234567890`
+const RECORD_ID = 'recTest1234567890'
+const TO_EMAIL = 'alex@example.org'
+const VERIFICATION_SECRET = 'verification-secret'
 const BODY = {
 	version: 2,
 	first_name: 'Alex',
@@ -16,7 +18,8 @@ const BODY = {
 	intent: 'Volunteer',
 	keep_informed: true,
 	routing: { kind: 'chapter', chapter_id: 12, name: 'PauseAI Netherlands', country: 'Netherlands' },
-	verification_link: LINK
+	record_id: RECORD_ID,
+	to_email: TO_EMAIL
 }
 
 function post(body: unknown, authorization: string | null = `Bearer ${SECRET}`) {
@@ -39,6 +42,7 @@ const refusal = async (response: Response) => ((await response.json()) as Refusa
 beforeEach(() => {
 	env.ONBOARDING_RENDER_V2_SECRET = SECRET
 	env.ONBOARDING_EMAIL_RENDER_SECRET = 'the-v1-secret'
+	env.EMAIL_VERIFICATION_SECRET = VERIFICATION_SECRET
 })
 
 describe('POST /api/onboarding-email/v2', () => {
@@ -48,7 +52,12 @@ describe('POST /api/onboarding-email/v2', () => {
 		const json = await rendered(response)
 		expect(json).toMatchObject({ version: 2, language: 'en', chapter_override: null })
 		expect(json.subject).toBe('Welcome to PauseAI, Alex!')
-		expect(json.text).toContain(LINK)
+		expect(json.text).toContain('verificationKey=Test1234567890&token=')
+		const token = /[?&]token=(v1\.\d+\.[A-Za-z0-9_-]{43})/.exec(json.text)?.[1] ?? ''
+		expect(
+			await verifyVerificationToken(VERIFICATION_SECRET, RECORD_ID, TO_EMAIL, token, Date.now())
+		).toBe('valid')
+		expect(JSON.stringify(json)).not.toContain(TO_EMAIL)
 		expect(json.text).toContain('PauseAI Netherlands will be in touch')
 		expect(json).not.toHaveProperty('from')
 	})
@@ -70,6 +79,13 @@ describe('POST /api/onboarding-email/v2', () => {
 		expect((await post(BODY, 'Bearer undefined')).status).toBe(401)
 	})
 
+	it('refuses to render while links cannot be signed', async () => {
+		env.EMAIL_VERIFICATION_SECRET = undefined
+		const response = await post(BODY)
+		expect(response.status).toBe(503)
+		expect((await refusal(response)).code).toBe('verification_unavailable')
+	})
+
 	it('refuses a body that is not JSON', async () => {
 		const response = await post('{not json')
 		expect(response.status).toBe(400)
@@ -83,10 +99,10 @@ describe('POST /api/onboarding-email/v2', () => {
 	})
 
 	it('names the field it refuses', async () => {
-		const response = await post({ ...BODY, verification_link: 'https://example.org/verify' })
+		const response = await post({ ...BODY, record_id: 'Test1234567890' })
 		expect(response.status).toBe(400)
 		const error = await refusal(response)
 		expect(error.code).toBe('invalid_request')
-		expect(error.message).toContain('verification_link')
+		expect(error.message).toContain('record_id')
 	})
 })
