@@ -96,7 +96,8 @@ no intent until the person picks one in the "Get involved" continuation.
 `SubscribeFlow` is a three-phase machine rather than a step counter:
 
 - `form` — the signup itself.
-- `thanks` — confirmation, with a "Get involved" button.
+- `thanks` — asks them to check their inbox for the verification email, with a
+  "Get involved" button.
 - `more` — renders `OnboardingFlow` seeded from the row that was just created,
   so choosing to do more **updates** that record rather than creating a second
   one. The seed is `startStep={2}`, `initialRecordId={recordId}`,
@@ -370,6 +371,12 @@ stateDiagram-v2
     Step4 --> [*]
     Browse --> [*]
 ```
+
+Every screen that follows a created row (steps 3 and 4 above, the browse
+form's inline confirmation, and the `/subscribe` thanks screen) leads with
+"Check your inbox" and asks the person to click the link in the verification
+email that creating the row sends. Browse mode shows it only after its inline
+signup, since browsing alone submits no email.
 
 Step 1 asks the chapter question once a country from the list is picked (see
 "Chapter sharing"); Continue stays disabled until it is answered, the one gate on
