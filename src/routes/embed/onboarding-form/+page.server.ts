@@ -13,19 +13,15 @@
 import { fail } from '@sveltejs/kit'
 import type { FieldSet } from 'airtable'
 import type { Actions, PageServerLoad } from './$types'
-import type { NationalGroupsApiResponse } from '$api/national-groups/+server.js'
 import { createRecord, getRecord, updateRecord } from '$lib/airtable'
+import { getNationalGroups } from '$lib/server/nationalGroups'
 import { isOnboardingLive } from '$lib/server/onboarding'
 import { checkContinuation, issueContinuationToken } from '$lib/server/onboardingContinuation'
 import { recordStubSubmission } from '$lib/server/onboarding-stub'
 import { subscribeToSubstackNewsletter } from '$lib/server/substack'
 import { checkNotSpam } from '$lib/server/turnstile-verify'
 import { hasUniversities, isKnownUniversity } from '$lib/data/universities'
-import {
-	chapterName,
-	possibleWordings,
-	type ChapterForm
-} from '$lib/components/onboarding/chapterShare'
+import { chapterName, possibleWordings } from '$lib/components/onboarding/chapterShare'
 import {
 	COUNTRIES,
 	DISCOVERY_OPTIONS,
@@ -39,7 +35,6 @@ import {
 	isValidUKPostcode,
 	normaliseUKPostcode,
 	signupSource,
-	type ChapterAnswer,
 	type Intent
 } from '$lib/components/onboarding/options'
 
@@ -80,6 +75,10 @@ const ROW_MISSING = 'We could not find your earlier signup. Please go through th
 const SESSION_EXPIRED = 'Your signup session has expired. Please fill in the form again.'
 const CHAPTER_ANSWER_MISSING =
 	'Please answer whether to share your details with a PauseAI chapter. If you cannot see the question, reload the page.'
+// `chapterAnswerMissing` sends the form back to the question (OnboardingFlow), which
+// a resumed row or the /subscribe continuation may not be showing.
+const chapterAnswerMissing = () =>
+	fail(400, { message: CHAPTER_ANSWER_MISSING, chapterAnswerMissing: true })
 const CHAPTER_LOOKUP_FAILED =
 	'Sorry, we could not check your answer to the chapter question. Please try again.'
 // Far above the longest wording any locale renders; only stops a bloated post.
@@ -147,23 +146,8 @@ function resolveSourcePage(data: FormData, request: Request, selfUrl: URL): stri
 	return cleanSource(`${ref.host}${ref.pathname}`)
 }
 
-// The list the forms ask the chapter question from (loadChapterCountries in
-// chapterShare.ts); null when it could not be read.
-async function fetchNationalGroups(
-	customFetch: typeof fetch
-): Promise<NationalGroupsApiResponse | null> {
-	try {
-		const response = await customFetch('/api/national-groups')
-		if (!response.ok) return null
-		return (await response.json()) as NationalGroupsApiResponse
-	} catch (error) {
-		console.error('Chapter lookup failed:', error)
-		return null
-	}
-}
-
 export const actions: Actions = {
-	submit: async ({ request, fetch, url }) => {
+	submit: async ({ request, url }) => {
 		const data = await request.formData()
 
 		// Honeypot
@@ -347,18 +331,17 @@ export const actions: Actions = {
 		const issueToken = (recordId: string) =>
 			continuation !== 'allowed' ? issueContinuationToken(recordId) : undefined
 
-		// Read once, and only if a chapter check needs it.
-		let nationalGroups: Promise<NationalGroupsApiResponse | null> | undefined
-		const loadNationalGroups = () => (nationalGroups ??= fetchNationalGroups(fetch))
-
 		// Chapter sharing (docs/join-form-flow.md, "Chapter sharing"). The country an
 		// answer is for is the posted one, else the row's. The US is not asked, so a
 		// post landing there clears both fields. Elsewhere the post must carry an
 		// answer unless the row already holds one for that country: the CRM reads an
-		// unticked box on a row with this form's Signup source as a No. A stub update
-		// has no row to read and writes nothing, so it is let through.
+		// unticked box on a row with this form's Signup source as a No. A posted
+		// wording must be one the form renders; a stored one was checked when posted,
+		// so it stands as long as the row's country does, through copy changes.
+		const postedAnswerDecides = !!country && (!asksChapterQuestion(country) || !!chapterAnswer)
+		// A stub update has no row to read and writes nothing, so it is let through.
 		let storedRow: FieldSet | null = null
-		if (existingRecordId && live) {
+		if (existingRecordId && live && !postedAnswerDecides) {
 			const row = await getRecord(AIRTABLE_BASE_ID, MEMBERS_TABLE_ID, existingRecordId)
 			if (row === 'missing') return rowGone(ROW_MISSING)
 			if (row === 'failed') {
@@ -366,41 +349,36 @@ export const actions: Actions = {
 			}
 			storedRow = row
 		}
-		const storedCountry = typeof storedRow?.Country === 'string' ? storedRow.Country : ''
+		const storedCountry = typeof storedRow?.Country === 'string' ? storedRow.Country.trim() : ''
 		const chapterCountry = country || storedCountry
-		// Undefined when the chapter list could not be read.
-		const offeredWordings = async (forms: readonly ChapterForm[], answer: ChapterAnswer) => {
-			const groups = await loadNationalGroups()
-			if (!groups) return undefined
-			const chapter = chapterName(
-				chapterCountry,
-				groups.map((group) => group.name)
-			)
-			return possibleWordings(forms, chapterCountry, chapter, answer)
-		}
 		if (chapterCountry && !asksChapterQuestion(chapterCountry)) {
 			fields['GDPR chapter share permission'] = false
 			fields['GDPR chapter share wording'] = ''
 		} else if (chapterCountry && chapterAnswer !== null) {
-			const offered =
-				chapterWording.length > MAX_WORDING_LENGTH
-					? []
-					: await offeredWordings([isSubscribeForm ? 'subscribe' : 'join'], chapterAnswer)
-			if (!offered) return fail(502, { message: CHAPTER_LOOKUP_FAILED })
-			if (!offered.includes(chapterWording)) return fail(400, { message: CHAPTER_ANSWER_MISSING })
+			const groups = await getNationalGroups()
+			if (!groups) return fail(502, { message: CHAPTER_LOOKUP_FAILED })
+			const chapter = chapterName(
+				chapterCountry,
+				groups.map((group) => group.name)
+			)
+			const offered = possibleWordings(
+				[isSubscribeForm ? 'subscribe' : 'join'],
+				chapterCountry,
+				chapter,
+				chapterAnswer
+			)
+			if (chapterWording.length > MAX_WORDING_LENGTH || !offered.includes(chapterWording)) {
+				return chapterAnswerMissing()
+			}
 			fields['GDPR chapter share permission'] = chapterAnswer === 'yes'
 			fields['GDPR chapter share wording'] = chapterWording
 		} else if (chapterCountry && (storedRow || !existingRecordId)) {
-			// Either form's: the /subscribe continuation and a resumed /join both keep an
-			// answer given on the other form.
-			const stored = storedRow?.['GDPR chapter share wording']
-			const storedWording = typeof stored === 'string' ? stored : ''
-			const storedAnswer = storedRow?.['GDPR chapter share permission'] === true ? 'yes' : 'no'
-			const offered = storedWording
-				? await offeredWordings(['join', 'subscribe'], storedAnswer)
-				: []
-			if (!offered) return fail(502, { message: CHAPTER_LOOKUP_FAILED })
-			if (!offered.includes(storedWording)) return fail(400, { message: CHAPTER_ANSWER_MISSING })
+			const storedWording = storedRow?.['GDPR chapter share wording']
+			const answered =
+				typeof storedWording === 'string' &&
+				storedWording.trim() !== '' &&
+				storedCountry.toLowerCase() === chapterCountry.toLowerCase()
+			if (!answered) return chapterAnswerMissing()
 		}
 
 		if (live) {
@@ -432,7 +410,7 @@ export const actions: Actions = {
 		// every submit. The live branch has no use for it: the Airtable automations
 		// run their own country-to-chapter lookup, and decide who hears about the
 		// signup from the chapter-share field written above.
-		const chapterMatch = (await loadNationalGroups())?.find(
+		const chapterMatch = (await getNationalGroups())?.find(
 			(group) => group.name.toLowerCase() === country.toLowerCase()
 		)
 		const chapter = chapterMatch ? { name: chapterMatch.name, leader: chapterMatch.leader } : null

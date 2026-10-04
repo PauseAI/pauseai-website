@@ -14,6 +14,11 @@ vi.mock('$lib/server/turnstile-verify', () => ({
 }))
 vi.mock('$lib/server/substack', () => ({ subscribeToSubstackNewsletter: vi.fn() }))
 vi.mock('$lib/server/sentry', () => ({ reportError }))
+// The National Chapters list the action reads (null: never read on this instance).
+let nationalGroups: { name: string; leader: string }[] | null
+vi.mock('$lib/server/nationalGroups', () => ({
+	getNationalGroups: () => Promise.resolve(nationalGroups)
+}))
 
 const { actions } = await import('./+page.server.js')
 const { TOKEN_TTL_SECONDS } = await import('$lib/server/onboardingContinuation')
@@ -24,12 +29,6 @@ const { onboardingMessages } = await import('$lib/components/onboarding/messages
 type Result = { status?: number; data?: Record<string, unknown> } & Record<string, unknown>
 
 // What /api/national-groups answers, which both the forms and the action read.
-let nationalGroups: Response | Error
-const nationalGroupsFetch = vi.fn(() =>
-	nationalGroups instanceof Error
-		? Promise.reject(nationalGroups)
-		: Promise.resolve(nationalGroups.clone())
-)
 const CHAPTERS = ['France', 'Germany', 'United Kingdom'].map((name) => ({ name, leader: 'Lead' }))
 
 async function submit(fields: Record<string, string>): Promise<Result> {
@@ -37,7 +36,7 @@ async function submit(fields: Record<string, string>): Promise<Result> {
 	for (const [name, value] of Object.entries(fields)) body.set(name, value)
 	const url = new URL('https://pauseai.info/embed/onboarding-form?/submit')
 	const request = new Request(url, { method: 'POST', body })
-	return (await actions.submit({ request, url, fetch: nationalGroupsFetch } as never)) as Result
+	return (await actions.submit({ request, url, fetch } as never)) as Result
 }
 
 // The wording the form renders, built the way the form builds it.
@@ -94,7 +93,7 @@ describe('onboarding submit: continuation token', () => {
 		createRecord.mockReset().mockResolvedValue('recAda')
 		updateRecord.mockReset().mockResolvedValue('updated')
 		getRecord.mockReset().mockResolvedValue(UK_ROW)
-		nationalGroups = Response.json(CHAPTERS)
+		nationalGroups = CHAPTERS
 		reportError.mockClear()
 		vi.spyOn(console, 'warn').mockImplementation(() => {})
 	})
@@ -230,7 +229,7 @@ describe('onboarding submit: chapter sharing', () => {
 		createRecord.mockReset().mockResolvedValue('recAda')
 		updateRecord.mockReset().mockResolvedValue('updated')
 		getRecord.mockReset().mockResolvedValue(UK_ROW)
-		nationalGroups = Response.json(CHAPTERS)
+		nationalGroups = CHAPTERS
 		reportError.mockClear()
 		vi.spyOn(console, 'warn').mockImplementation(() => {})
 	})
@@ -306,13 +305,10 @@ describe('onboarding submit: chapter sharing', () => {
 		}
 	})
 
-	it('asks to try again when the chapter list cannot be read, writing nothing', async () => {
-		vi.spyOn(console, 'error').mockImplementation(() => {})
-		for (const failure of [new Error('down'), new Response('', { status: 500 })]) {
-			nationalGroups = failure
-			const refused = await submit(signup)
-			expect(refused.status).toBe(502)
-		}
+	it('asks to try again when the chapter list has never been read, writing nothing', async () => {
+		nationalGroups = null
+		const refused = await submit(signup)
+		expect(refused.status).toBe(502)
 		expect(createRecord).not.toHaveBeenCalled()
 	})
 
@@ -428,25 +424,58 @@ describe('onboarding submit: chapter sharing', () => {
 			// A row from before the question.
 			row('France', false, ''),
 			// Germany's Yes, now in France.
-			row('Germany', true, WORDING_YES_DE),
-			// France's country with Germany's wording.
-			row('France', true, WORDING_YES_DE),
-			// A stored Yes whose wording is a No.
-			row('France', true, wording('join', 'France', 'PauseAI France', 'no')),
-			// A wording that only ends like the form's.
-			row('France', false, 'Something else\n[chosen] No, only PauseAI Global')
+			row('Germany', true, WORDING_YES_DE)
 		]
 		for (const stored of unasked) {
 			getRecord.mockResolvedValueOnce(stored)
 			const refused = await submit(resumedFrance)
 			expect(refused.status, JSON.stringify(stored)).toBe(400)
-			expect(refused.data?.message).toBe(CHAPTER_ANSWER_MISSING)
+			// Sends the form back to the question.
+			expect(refused.data).toEqual({ message: CHAPTER_ANSWER_MISSING, chapterAnswerMissing: true })
 		}
 		// The volunteer step after the country was changed without an answer.
 		getRecord.mockResolvedValueOnce(row('Germany', true, WORDING_YES_DE))
 		const volunteer = await submit({ ...update(token), country: 'France', intent: 'Volunteer' })
 		expect(volunteer.status).toBe(400)
 		expect(updateRecord).not.toHaveBeenCalled()
+	})
+
+	it("keeps a stored answer for the row's own country through copy and chapter changes", async () => {
+		const created = await submit(signup)
+		const token = String(created.recordToken)
+		const stillAnswered = [
+			// Copy edited since, or edited by staff.
+			row('France', false, 'Share your details with PauseAI France?\nOlder copy.\n[chosen] No'),
+			// A chapter renamed or deactivated since.
+			row('France', true, wording('join', 'France', 'PauseAI Ancien', 'yes')),
+			// The country's case differs.
+			row('france', true, wording('join', 'France', 'PauseAI France', 'yes'))
+		]
+		for (const stored of stillAnswered) {
+			getRecord.mockResolvedValueOnce(stored)
+			const updated = await submit({ ...update(token), country: 'France', intent: 'Volunteer' })
+			expect(updated, JSON.stringify(stored)).toMatchObject({ success: true })
+			const fields = writtenFields(updateRecord)
+			for (const field of CHAPTER_FIELDS) expect(fields).not.toHaveProperty(field)
+		}
+		// No chapter list needed to keep one.
+		nationalGroups = null
+		getRecord.mockResolvedValueOnce(stillAnswered[0])
+		expect(await submit({ ...update(token), country: 'France' })).toMatchObject({ success: true })
+	})
+
+	it('reads the row only when the post leaves the answer to it', async () => {
+		const created = await submit(signup)
+		const token = String(created.recordToken)
+		// The post's country and answer decide: no read.
+		await submit({ ...update(token), ...signup, resumed: '1' })
+		await submit({ ...update(token), country: 'United States' })
+		expect(getRecord).not.toHaveBeenCalled()
+		// Without an answer, or without a country, the row decides.
+		await submit({ ...update(token), country: 'United Kingdom' })
+		await submit(update(token))
+		expect(getRecord).toHaveBeenCalledTimes(2)
+		expect(updateRecord).toHaveBeenCalledTimes(4)
 	})
 
 	it("checks an update that posts no country against the row's country", async () => {

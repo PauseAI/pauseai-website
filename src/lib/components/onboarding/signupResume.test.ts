@@ -1,7 +1,9 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 import { SIGNUP_MAX_AGE_MS } from './signupMaxAge.js'
 import {
+	afterChapterAnswerMissing,
 	afterRecordGone,
+	forgetChapterAnswer,
 	chapterAnswerFor,
 	heldChapterAnswer,
 	forgetSignup,
@@ -134,6 +136,29 @@ describe('signupResume', () => {
 		expect(afterRecordGone('contact', false)).toBe('step-1')
 		// The /subscribe continuation hides the consent, so its retry could only 400.
 		expect(afterRecordGone('contact', true)).toBe('signup-form')
+	})
+
+	it('sends a missing chapter answer back to wherever the question can be shown', () => {
+		expect(afterChapterAnswerMissing('browse', false)).toBe('stay')
+		expect(afterChapterAnswerMissing('contact', false)).toBe('step-1')
+		// The /subscribe continuation has no step 1; it asks on its intent step.
+		expect(afterChapterAnswerMissing('contact', true)).toBe('step-2')
+	})
+
+	it('forgets only the stored chapter answer, keeping the row', () => {
+		const saved = {
+			recordId: 'rec1',
+			recordToken: 'tok1',
+			keepInformed: true,
+			intent: 'Act now' as const,
+			chapterAnswer: { answer: 'yes' as const, country: 'Germany' }
+		}
+		saveSignup('ada@example.org', saved)
+		forgetChapterAnswer()
+		expect(loadSignup('ada@example.org')).toEqual({ ...saved, chapterAnswer: null })
+		forgetSignup()
+		forgetChapterAnswer()
+		expect(loadSignup('ada@example.org')).toBeNull()
 	})
 
 	it('compares addresses ignoring case and spaces', () => {

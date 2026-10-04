@@ -232,8 +232,13 @@ that country.
   answered for another country, is asked again, and the update writes the new
   answer and wording. The form takes the answer each successful post leaves on
   the row as the one it holds, so after answering for another country, Back and
-  the first country asks again; the server checks the same thing against the
-  row itself (see "Chapter sharing"). Step 1 and the browse form, which pick the row up only
+  the first country asks again. The server checks the same thing against the
+  row itself (see "Chapter sharing"), and where the two disagree its 400
+  carries `chapterAnswerMissing`: the form then drops the answer it holds, in
+  memory and in `sessionStorage` (`forgetChapterAnswer`), and goes back to the
+  question (`afterChapterAnswerMissing`): step 1, the browse form where it is,
+  or the `/subscribe` continuation's intent step, which shows the question only
+  then. Step 1 and the browse form, which pick the row up only
   when they submit, read the stored row as soon as the email is typed to decide
   whether to show the question. A picked-up row's answer counts only while the
   email is the one it was picked up for: after Back and another email, which
@@ -296,10 +301,10 @@ isn't available at render time.
 
 ### Supporting API routes
 
-| Route                      | File                                        | Purpose                                                                                                                                                                                                                                      |
-| -------------------------- | ------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `GET /api/onboarding-mode` | `src/routes/api/onboarding-mode/+server.ts` | Returns `{ live: boolean }` so the prerendered form can discover the runtime mode.                                                                                                                                                           |
-| `GET /api/national-groups` | `src/routes/api/national-groups/+server.ts` | Returns the list of national groups. Used by the components (whether the country has a chapter, for the chapter question and the lead-role copy) and the submit action (to rebuild the chapter question's wording, and for stub inspection). |
+| Route                      | File                                        | Purpose                                                                                                                                                                                                                                                                                                                                                |
+| -------------------------- | ------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `GET /api/onboarding-mode` | `src/routes/api/onboarding-mode/+server.ts` | Returns `{ live: boolean }` so the prerendered form can discover the runtime mode.                                                                                                                                                                                                                                                                     |
+| `GET /api/national-groups` | `src/routes/api/national-groups/+server.ts` | Returns the list of national groups. Used by the components (whether the country has a chapter, for the chapter question and the lead-role copy) and the submit action (to rebuild the chapter question's wording, and for stub inspection), which reads the same 10-minute cache in `src/lib/server/nationalGroups.ts` rather than calling the route. |
 
 ### How a submission travels
 
@@ -387,7 +392,9 @@ question, "what do you want to do", rather than a signup:
 - The keep-informed and Substack opt-in cards are hidden, as are the chapter
   question and the GDPR consent checkbox, because all were answered on the
   subscribe form. The post carries no chapter answer, so the server leaves the
-  one from `/subscribe` alone; the Volunteer and Lead copy follows it.
+  one from `/subscribe` alone; the Volunteer and Lead copy follows it. Only if
+  the server answers that the row holds no answer for its country does step 2
+  show the question and require it (see "Resuming after a remount").
 - Picking an intent becomes **required** to submit. On a fresh visit nothing
   beyond the GDPR consent is required, so this is a different submit gate, not
   just a different layout.
@@ -496,12 +503,18 @@ chapter (it is in `/api/national-groups`) the question names it: "PauseAI <count
 or the chapter's own name from `CHAPTER_DISPLAY_NAMES` in `chapterShare.ts`
 (the National Chapters table holds no display name); elsewhere it asks about a chapter "when one starts". It
 waits for that lookup, and a failed lookup, or one taking over five seconds,
-counts as no chapter.
+counts as no chapter. The forms get that list through the CDN, which may
+serve it up to an hour old (the route's `max-age`), while the action checks
+against its own copy, at most 10 minutes old. So for up to an hour after a
+chapter is deactivated or added, a form can show a wording the action refuses
+with a 400; the form then asks again, but shows the same wording until its copy
+of the list is refreshed.
 
 The country an answer is for is the posted `country`, or, on an update that
-posts none, the one the row holds. On an update the action reads the row from
-Airtable first (after the continuation token check), to know that country and
-the answer the row holds.
+posts none, the one the row holds. An update whose post leaves the answer to the
+row (no answer posted for a non-US country, or no country posted) reads the row
+from Airtable first, after the continuation token check, to know that country
+and whether the row holds an answer for it.
 
 | case                                                                                                                                  | what is written                                                                                                                                                                                                     |
 | ------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -510,12 +523,14 @@ the answer the row holds.
 | update that carries an answer (Back to step 1 and resubmit, or a resumed row with no answer for this country yet)                     | the box and the wording from the answer                                                                                                                                                                             |
 | update that does not (the volunteer step, the `/subscribe` "do more" step, a resumed row that already has an answer for this country) | neither field, so the earlier answer stands, if the row holds one for this country; otherwise refused with a 400                                                                                                    |
 
-The row holds an answer for a country when its stored wording is one the forms
-render for that country and for the stored box (a Yes wording with the box
-ticked, a No wording without), in any locale and from either form, since the
-`/subscribe` continuation and a resumed `/join` both keep an answer given on the
-other form. A row with no wording (a US row, or one from before the question),
-or one answered for another country, has none. So outside the US an unticked box
+The row holds an answer for a country when its stored wording is non-empty and
+its stored `Country` is that country (ignoring case). The wording is not checked
+again: it was checked against the form's exact text when it was posted, and a
+later copy edit, chapter rename or deactivation, or a staff edit of the row must
+not turn a given answer into a missing one, which a volunteer step or the
+`/subscribe` continuation could not answer without being sent back to the
+question. A row with no wording (a US row, or one from before the question), or
+whose country is another, has none. So outside the US an unticked box
 on a row created by this form (by `Signup source`) is a No, not a question never
 asked, whichever post last changed the row's country. In stub mode there is no
 row to read, so an update without an answer is let through, as it writes
@@ -584,8 +599,12 @@ an update is in "Create versus update" above.
   variant when `subscribe_form=1`, `/join`'s otherwise, in any locale, naming
   the chapter the action finds for the country in `/api/national-groups` (with
   `chapterName`, as the forms do) or as the no-chapter variant, which the forms
-  show when their own lookup fails. If the action cannot read that list it
-  answers 502 and asks for a retry. For the United States any posted answer is
+  show when their own lookup fails. The action reads that list through
+  `getNationalGroups` in `src/lib/server/nationalGroups.ts`, the cache
+  `/api/national-groups` serves from too: one Airtable read per server instance
+  every 10 minutes, given up after 5 seconds, and on a failed read the last good
+  list (reported to Sentry). Only when no read has ever succeeded on that
+  instance does the action answer 502 and ask for a retry. For the United States any posted answer is
   ignored and both fields are cleared. See "Chapter sharing".
 - GDPR consent (`agree_gdpr`) required **only on the create path** — step-3
   volunteer updates are exempt because consent was captured at step 2.

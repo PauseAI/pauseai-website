@@ -41,6 +41,8 @@
 		postedIntent,
 		sameEmail,
 		saveSignupFromPost,
+		afterChapterAnswerMissing,
+		forgetChapterAnswer,
 		type SavedChapterAnswer,
 		type SavedSignup
 	} from './signupResume'
@@ -200,6 +202,9 @@
 	let rowChapterAnswer = $state<SavedChapterAnswer | null>(
 		initialChapterAnswer ? { answer: initialChapterAnswer, country: initialCountry } : null
 	)
+	// Set when the server finds no answer for the row's country, so a /subscribe
+	// continuation, which otherwise never asks, shows the question.
+	let reaskChapter = $state(false)
 	// Countries with a chapter; null until loaded, and the question waits for it.
 	let chapterCountries = $state<string[] | null>(null)
 	let submitting = $state(false)
@@ -384,7 +389,7 @@
 	)
 	// Asked once a country from the list is picked, as on /subscribe.
 	const askChapter = $derived(
-		!isContinuation &&
+		(!isContinuation || reaskChapter) &&
 			rowAnswer === null &&
 			COUNTRIES.includes(basics.country) &&
 			asksChapterQuestion(basics.country)
@@ -563,6 +568,14 @@
 					// 410: the row behind recordId no longer exists, or the post carried
 					// no valid continuation token for it. Any other failure, an outage
 					// included, keeps the id, or the retry would duplicate.
+					if (result.status === 400 && result.data?.chapterAnswerMissing === true) {
+						rowChapterAnswer = null
+						chapterChoice = null
+						forgetChapterAnswer()
+						reaskChapter = true
+						const next = afterChapterAnswerMissing(mode, isContinuation)
+						if (next !== 'stay') step = next === 'step-1' ? 1 : 2
+					}
 					if (result.status === 410) {
 						forgetSignup()
 						dropRecord()
@@ -945,7 +958,10 @@
 				{#if showKeepInformedNudge}
 					<p class="nudge">{msgs.onboarding_chapter_nudge(chapter)}</p>
 				{/if}
-				{#if !isContinuation}
+				{#if isContinuation}
+					<!-- Only after the server found no answer for the row's country. -->
+					{@render chapterQuestionField(true, 3, msgs.onboarding_chapter_section_label)}
+				{:else}
 					{@render gdprConsentField()}
 				{/if}
 				{#if onboardingLive && onboardingModeKnown}
@@ -956,7 +972,7 @@
 				<button
 					type="submit"
 					class="primary"
-					disabled={(isContinuation ? !intent : !gdprConsent || chapterAnswerMissing) || !canSubmit}
+					disabled={(isContinuation ? !intent : !gdprConsent) || chapterAnswerMissing || !canSubmit}
 				>
 					{submitting
 						? msgs.onboarding_btn_submitting

@@ -148,6 +148,30 @@ export function afterRecordGone(
 	return isContinuation ? 'signup-form' : 'step-1'
 }
 
+// Where the form goes when the server finds no chapter answer for the row's country
+// (the row's answer is for another country, or it holds none): back to the question.
+// The browse form shows it itself; the contact flow asks it on step 1; a /subscribe
+// continuation, which has no step 1, asks it on its intent step.
+export function afterChapterAnswerMissing(
+	mode: 'contact' | 'browse',
+	isContinuation: boolean
+): 'stay' | 'step-1' | 'step-2' {
+	if (mode === 'browse') return 'stay'
+	return isContinuation ? 'step-2' : 'step-1'
+}
+
+// Drops the stored answer, keeping the row: the server says it does not hold one for
+// the country posted, so a remount must ask again.
+export function forgetChapterAnswer(): void {
+	const stored = readStored()
+	if (typeof stored.recordId !== 'string') return
+	try {
+		storage()?.setItem(STORAGE_KEY, JSON.stringify({ ...stored, chapterAnswer: null }))
+	} catch {
+		// Best-effort, as saveSignup.
+	}
+}
+
 export function forgetSignup(): void {
 	try {
 		storage()?.removeItem(STORAGE_KEY)
