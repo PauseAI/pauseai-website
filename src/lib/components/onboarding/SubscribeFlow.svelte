@@ -18,6 +18,7 @@
 	import LinkWithoutIcon from '$lib/components/LinkWithoutIcon.svelte'
 	import Turnstile from '$lib/components/Turnstile.svelte'
 	import ChapterShareQuestion from './ChapterShareQuestion.svelte'
+	import CheckInbox from './CheckInbox.svelte'
 	import OnboardingFlow from './OnboardingFlow.svelte'
 	import { chapterName, chapterQuestion, loadChapterCountries } from './chapterShare'
 	import { getMessages } from './i18n.svelte'
@@ -287,8 +288,7 @@
 	</div>
 {:else if phase === 'thanks'}
 	<div class="subscribe-card thanks">
-		<h2>{msgs.onboarding_check_inbox_title}</h2>
-		<p>Thanks for signing up! {msgs.onboarding_check_inbox_body}</p>
+		<CheckInbox {msgs} leadIn="Thanks for signing up!" />
 		<p>
 			Are you interested in doing more? Whether you have five minutes or five hours a week, there's
 			a place for you.
@@ -477,11 +477,6 @@
 
 	.thanks {
 		text-align: center;
-	}
-
-	.thanks h2 {
-		font-family: var(--font-heading);
-		margin: 0 0 0.75rem;
 	}
 
 	.thanks p {

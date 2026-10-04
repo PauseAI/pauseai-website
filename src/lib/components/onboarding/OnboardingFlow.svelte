@@ -20,6 +20,7 @@
 	import ActionCards from './ActionCards.svelte'
 	import ChapterShareQuestion from './ChapterShareQuestion.svelte'
 	import Stepper from './Stepper.svelte'
+	import CheckInbox from './CheckInbox.svelte'
 	import { getMessages } from './i18n.svelte'
 	import {
 		chapterName,
@@ -683,14 +684,6 @@
 	{/each}
 {/snippet}
 
-<!-- Every path that renders this has created a row with an email, and creating one sends
-     the verification email. -->
-{#snippet checkInbox()}
-	<div class="checkmark" aria-hidden="true">✉</div>
-	<h2>{msgs.onboarding_check_inbox_title}</h2>
-	<p>{msgs.onboarding_check_inbox_body}</p>
-{/snippet}
-
 {#snippet checkboxConfirmations()}
 	<!-- Not on the /subscribe continuation: those opt-ins were made and confirmed
 	     on the subscribe form. -->
@@ -997,7 +990,7 @@
 		{:else if step === 3 && !intent}
 			<!-- Path A: confirmation -->
 			<div class="confirmation">
-				{@render checkInbox()}
+				<CheckInbox {msgs} />
 				{@render checkboxConfirmations()}
 				{@render nextStepBlock()}
 				{@render confirmationFooter()}
@@ -1006,7 +999,7 @@
 			<!-- Path B: act now (contact confirmation or browse landing) -->
 			{#if mode === 'contact'}
 				<div class="confirmation">
-					{@render checkInbox()}
+					<CheckInbox {msgs} />
 					<p>{msgs.onboarding_confirm_b_sub}</p>
 					{@render checkboxConfirmations()}
 				</div>
@@ -1019,9 +1012,8 @@
 				</div>
 				{#if browseSignedUp}
 					<div class="inline-confirmation">
-						<strong class="inline-confirmation-title">✉ {msgs.onboarding_check_inbox_title}</strong>
-						{msgs.onboarding_check_inbox_body}
-						{keepInformedConfirmation(msgs, shownAnswer, chapter)}
+						<CheckInbox {msgs} />
+						<p>{keepInformedConfirmation(msgs, shownAnswer, chapter)}</p>
 					</div>
 				{:else}
 					<div class="keep-informed">
@@ -1352,8 +1344,8 @@
 			</form>
 		{:else if step === 3 && intent === 'lead'}
 			<!-- Path D: lead -->
-			<div class="confirmation lead-check-inbox">
-				{@render checkInbox()}
+			<div class="lead-check-inbox">
+				<CheckInbox {msgs} />
 			</div>
 			<h2>{msgs.onboarding_lead_title(leadRole)}</h2>
 			<p class="role-meta"><em>{msgs.onboarding_lead_meta}</em></p>
@@ -1412,7 +1404,7 @@
 		{:else if step === 4 && intent === 'volunteer'}
 			<!-- Path C: confirmation -->
 			<div class="confirmation">
-				{@render checkInbox()}
+				<CheckInbox {msgs} />
 				<p>
 					<strong>{msgs.onboarding_confirm_volunteer_title}</strong>
 					{msgs.onboarding_confirm_volunteer_sub}
@@ -1854,20 +1846,6 @@
 		margin-bottom: 2rem;
 	}
 
-	.checkmark {
-		width: 3.5rem;
-		height: 3.5rem;
-		border-radius: 50%;
-		background-color: var(--brand);
-		color: var(--bg);
-		font-size: 2rem;
-		font-weight: bold;
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		margin: 0 auto 1rem auto;
-	}
-
 	.confirmation-footer {
 		margin-top: 2rem;
 		display: flex;
@@ -1965,15 +1943,15 @@
 	.inline-confirmation {
 		border: 2px solid var(--brand);
 		border-radius: 16px;
-		padding: 1rem 1.25rem;
+		padding: 1.5rem 1.25rem;
 		margin: 1rem 0 1.5rem 0;
 		background-color: var(--bg);
-		font-weight: 500;
+		text-align: center;
 	}
 
-	.inline-confirmation-title {
-		display: block;
-		margin-bottom: 0.25rem;
+	.inline-confirmation p {
+		max-width: 32rem;
+		margin: 0 auto;
 	}
 
 	.role-meta {
