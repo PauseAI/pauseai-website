@@ -319,6 +319,7 @@ flowchart LR
     Action -- "ONBOARDING_LIVE=true" --> Airtable["Airtable Members table"]
     Action -- "ONBOARDING_LIVE != true" --> Stub["recordStubSubmission()<br/>/embed/onboarding-form/stub"]
     Action -- "newsletter + create" --> Substack["Substack subscription"]
+    Action -- "written row, after the response<br/>(CRM_INTAKE_ENABLED=true)" --> CRM["CiviCRM member intake"]
     Action -- "{ success, recordId }" --> Flow
     Flow -- "become_paying_member" --> Stripe["Stripe donation page<br/>(new tab)"]
     Stripe -- "success URL" --> Close["/close<br/>(closes the tab)"]
@@ -658,6 +659,15 @@ context in Netlify, as it is today (production reports `live: true`, deploy
 previews `live: false`). Set site-wide it would also make previews live, which
 both brings the untestable-preview problem back and lets a preview run write
 real Airtable and Substack data.
+
+## CRM intake
+
+After every Airtable write the action makes, create or update, the action reports the row to CiviCRM's member intake (`PauseaiMemberIntake.submit`), so the CRM learns of a signup at once rather than at its nightly import. That covers the step-2 create, the browse signup, the step-3 volunteer update, `/subscribe` and its continuation. The code is `src/lib/server/crmIntake.ts`; the contract (request, token rule, outcome codes) is pauseai-civicrm's [`docs/intake-endpoint-plan.md`](https://github.com/PauseAI/pauseai-civicrm/blob/main/docs/intake-endpoint-plan.md), and a renamed outcome code there needs a change here.
+
+- **What is sent.** The record exactly as Airtable answered the write (`id`, `createdTime`, `fields`), which is why `createRecord` and `updateRecord` return it: the whole row every time, not only what the post changed. With it goes the continuation token the post carried (`record_token`), or `""` on a create. The server never mints one for the CRM: the CRM judges the browser's token itself, so an update the website let through without a valid token (`ONBOARDING_CONTINUATION_ENFORCE` not `true`) is refused there.
+- **Never in the way of the signup.** The call is made only after Airtable accepted the write, and handed to the edge function's `context.waitUntil`, so the response does not wait for it; on the Node dev server, which has no platform context, it simply runs on. It gives up after 3 seconds. Whatever it returns, the user's response is the same.
+- **Outcomes.** `ok`; `refused:<reason>` with the CRM's code (`token_required`, `merged`, ...); `error` for anything else (an HTTP error or an answer that is neither, a timeout, a network failure, missing configuration). Refusals go to Sentry as warnings and errors as errors, one issue per outcome code, carrying the record id, the outcome and its cause (for an HTTP error, only the status), never a field value, the token, the key or the CRM's error text, which could echo what the request carried. Nothing is retried: the next step of the form or the CRM's nightly import sends the row again. Calls are idempotent but not order-safe: each writes the whole row and carries no row version, so two quick updates to the same row can land in the CRM out of order, which the nightly import repairs; and a create delayed past the update that follows it is refused `token_required`, one spurious Sentry warning.
+- **Switching it on.** Stub mode never calls the CRM. In live mode the call needs `CRM_INTAKE_ENABLED=true` (anything else is off, the default), `CRM_INTAKE_URL` (the CRM's base URL, e.g. `https://crm.pauseai.info`) and `CRM_INTAKE_KEY` (the CRM's member intake API account key), all three in Netlify's **Production** context only, like `ONBOARDING_LIVE`. With the flag on and either of the others missing, every write reports `error` (cause `not_configured`). The CRM refuses an update without a valid token, so turn it on only once `ONBOARDING_CONTINUATION_ENFORCE=true`, and only once the CRM has the same `ONBOARDING_CONTINUATION_SECRET`.
 
 ## Lead path (no submission)
 

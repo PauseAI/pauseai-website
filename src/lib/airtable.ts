@@ -15,6 +15,16 @@ export type AirtableRecord<T> = {
 	fields: T
 }
 
+// A record as Airtable answered a write: the whole stored row, not only the
+// fields the write sent. CRM intake forwards it as is.
+export type WrittenRecord = AirtableRecord<FieldSet> & { createdTime: string }
+
+const toWrittenRecord = (record: Airtable.Record<FieldSet>): WrittenRecord => ({
+	id: record.id,
+	createdTime: (record._rawJson as { createdTime: string }).createdTime,
+	fields: record.fields
+})
+
 export type AirtableListResponse<T> = {
 	records: AirtableRecord<T>[]
 }
@@ -87,13 +97,13 @@ export async function fetchAllPages<T extends Record<string, unknown>>(
  * @param baseId The Airtable Base ID
  * @param tableId The Airtable Table ID
  * @param fields The fields to create the record with
- * @returns The created record's id, or undefined if the write failed
+ * @returns The created record, or undefined if the write failed
  */
 export async function createRecord(
 	baseId: string,
 	tableId: string,
 	fields: FieldSet
-): Promise<string | undefined> {
+): Promise<WrittenRecord | undefined> {
 	const apiKey = getWriteApiKey()
 	if (!apiKey) {
 		console.warn(`⚠️ Airtable API key not configured. Skipping record creation.`)
@@ -107,7 +117,7 @@ export async function createRecord(
 		// options; callers are expected to validate values before writing.
 		const records = await table.create([{ fields }], { typecast: true })
 		console.log(`Successfully created record in Airtable table ${tableId}`)
-		return records[0]?.id
+		return records[0] && toWrittenRecord(records[0])
 	} catch (error) {
 		console.error(`Error creating Airtable record in ${tableId}:`, error)
 		// Report to Sentry even though we swallow the error: the caller surfaces
@@ -156,15 +166,15 @@ export async function getRecord(
  * @param tableId The Airtable Table ID
  * @param recordId The id of the record to update
  * @param fields The fields to update on the record
- * @returns 'missing' when no record has that id (never existed, or deleted),
- * which a caller can act on, unlike an outage ('failed')
+ * @returns The updated record, or 'missing' when no record has that id (never
+ * existed, or deleted), which a caller can act on, unlike an outage ('failed')
  */
 export async function updateRecord(
 	baseId: string,
 	tableId: string,
 	recordId: string,
 	fields: FieldSet
-): Promise<'updated' | 'missing' | 'failed'> {
+): Promise<WrittenRecord | 'missing' | 'failed'> {
 	const apiKey = getWriteApiKey()
 	if (!apiKey) {
 		console.warn(`⚠️ Airtable API key not configured. Skipping record update.`)
@@ -174,9 +184,9 @@ export async function updateRecord(
 	try {
 		const base = new Airtable({ apiKey }).base(baseId)
 		const table = base(tableId)
-		await table.update([{ id: recordId, fields }], { typecast: true })
+		const records = await table.update([{ id: recordId, fields }], { typecast: true })
 		console.log(`Successfully updated record ${recordId} in Airtable table ${tableId}`)
-		return 'updated'
+		return toWrittenRecord(records[0])
 	} catch (error) {
 		// Airtable answers 422 ROW_DOES_NOT_EXIST for an id that never existed and
 		// for a deleted one alike. Not an outage, so not reported.
