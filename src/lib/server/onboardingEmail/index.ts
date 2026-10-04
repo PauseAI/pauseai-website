@@ -1,4 +1,5 @@
-import { url, verificationParameter } from '$lib/config.js'
+import { url } from '$lib/config.js'
+import { verificationLink } from '$lib/server/emailVerification'
 import { reportError } from '$lib/server/sentry'
 import { baseContent } from './copy.js'
 import { composeBlocks, groupOf, resolveIntentBucket } from './blocks.js'
@@ -108,14 +109,14 @@ export async function renderOnboardingEmail(
 	if (!params.airtable_id) {
 		throw new Error('airtable_id is required to build the verification link')
 	}
-	const verificationLink = `${url}/verify?table=join&${verificationParameter}=${params.airtable_id}`
+	const link = params.verificationLink ?? verificationLink(params.airtable_id)
 
 	const { resolution, override } = await resolve(params)
 	const email = compose(
 		resolution,
 		override,
 		params.firstName,
-		verificationLink,
+		link,
 		params.subscribed,
 		params.htmlStyle
 	)
@@ -160,7 +161,7 @@ function compose(
 	resolution: OnboardingEmailResolution,
 	override: ResolvedOverride | null,
 	rawFirstName: string,
-	verificationLink: string,
+	link: string,
 	subscribed: boolean | undefined,
 	htmlStyleOverride?: OnboardingEmailHtmlStyle
 ): { subject: string; html: string; text: string } {
@@ -170,14 +171,7 @@ function compose(
 		? override.content(firstName, chapter)
 		: baseContent(language === 'es' ? 'es' : 'en', bucket, chapter, chapterShare, firstName)
 	const fixed = FIXED_COPY[language]
-	const blocks = composeBlocks(
-		content,
-		fixed,
-		bucket,
-		verificationLink,
-		override !== null,
-		subscribed
-	)
+	const blocks = composeBlocks(content, fixed, bucket, link, override !== null, subscribed)
 
 	const htmlStyle = htmlStyleOverride ?? content.htmlStyle ?? 'rich'
 	const html =

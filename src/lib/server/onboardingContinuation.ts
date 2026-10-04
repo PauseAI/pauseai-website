@@ -1,79 +1,30 @@
 // A signed, expiring token that proves the browser posting a `record_id` was
-// handed that id by the submit action, so an update can't be aimed at someone
-// else's Members row by knowing its id (ids appear in the verification link and
-// the Stripe reference, so they are not secret). docs/join-form-flow.md,
+// handed that id by the submit action. docs/join-form-flow.md,
 // "Continuation token", describes the rollout switch.
 
 import { env } from '$env/dynamic/private'
 import { SIGNUP_MAX_AGE_MS } from '$lib/components/onboarding/signupMaxAge'
 import { isContinuationEnforced } from '$lib/server/onboarding'
 import { reportError } from '$lib/server/sentry'
+import { checkToken, signToken, type TokenVerdict } from '$lib/server/signedToken'
 
-const VERSION = 'v1'
 // An hour beyond the browser's copy: the token is minted, and its expiry floored
 // to the second, before the browser stamps that copy.
 export const TOKEN_TTL_SECONDS = SIGNUP_MAX_AGE_MS / 1000 + 60 * 60
-// HMAC-SHA256 is 32 bytes: 43 base64url characters, unpadded.
-const SIGNATURE = /^[A-Za-z0-9_-]{43}$/
 
-type TokenVerdict = 'valid' | 'missing' | 'malformed' | 'expired' | 'invalid'
+const prefix = (recordId: string) => `onboarding-continuation:v1:${recordId}`
 
-const encoder = new TextEncoder()
-
-const payload = (recordId: string, expiry: string) =>
-	encoder.encode(`onboarding-continuation:${VERSION}:${recordId}:${expiry}`)
-
-const hmacKey = (secret: string, usage: 'sign' | 'verify') =>
-	crypto.subtle.importKey('raw', encoder.encode(secret), { name: 'HMAC', hash: 'SHA-256' }, false, [
-		usage
-	])
-
-function toBase64Url(bytes: ArrayBuffer): string {
-	return btoa(String.fromCharCode(...new Uint8Array(bytes)))
-		.replace(/\+/g, '-')
-		.replace(/\//g, '_')
-		.replace(/=+$/, '')
+export function mintToken(secret: string, recordId: string, now: number): Promise<string> {
+	return signToken(secret, prefix(recordId), Math.floor(now / 1000) + TOKEN_TTL_SECONDS)
 }
 
-function fromBase64Url(value: string): Uint8Array<ArrayBuffer> {
-	const binary = atob(value.replace(/-/g, '+').replace(/_/g, '/') + '=')
-	return Uint8Array.from(binary, (char) => char.charCodeAt(0))
-}
-
-export async function mintToken(secret: string, recordId: string, now: number): Promise<string> {
-	const expiry = String(Math.floor(now / 1000) + TOKEN_TTL_SECONDS)
-	const signature = await crypto.subtle.sign(
-		'HMAC',
-		await hmacKey(secret, 'sign'),
-		payload(recordId, expiry)
-	)
-	return `${VERSION}.${expiry}.${toBase64Url(signature)}`
-}
-
-export async function verifyToken(
+export function verifyToken(
 	secret: string,
 	recordId: string,
 	token: string,
 	now: number
 ): Promise<TokenVerdict> {
-	if (!token) return 'missing'
-	const [version, expiry, signature, ...rest] = token.split('.')
-	if (
-		version !== VERSION ||
-		!/^\d{1,12}$/.test(expiry ?? '') ||
-		!SIGNATURE.test(signature ?? '') ||
-		rest.length
-	) {
-		return 'malformed'
-	}
-	const genuine = await crypto.subtle.verify(
-		'HMAC',
-		await hmacKey(secret, 'verify'),
-		fromBase64Url(signature),
-		payload(recordId, expiry)
-	)
-	if (!genuine) return 'invalid'
-	return Number(expiry) * 1000 <= now ? 'expired' : 'valid'
+	return checkToken(secret, prefix(recordId), token, now)
 }
 
 let reportedNoSecret = false
@@ -107,9 +58,8 @@ export async function issueContinuationToken(
 // 'allowed' when it goes ahead without one, 'refused' otherwise. Until
 // ONBOARDING_CONTINUATION_ENFORCE is "true" a bad token is only reported, because a
 // session that started before tokens existed holds an id without one for as long
-// as the browser keeps it. Only a 'proven' update may be handed a fresh token:
-// minting for an 'allowed' one would give anyone holding a bare id a token that
-// keeps working once enforcement is on.
+// as the browser keeps it. Only a 'proven' update may be handed a fresh token,
+// so a token is only ever issued at a create or in exchange for a valid one.
 export async function checkContinuation(
 	recordId: string,
 	token: string,

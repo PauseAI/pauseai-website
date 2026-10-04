@@ -47,6 +47,9 @@ export type OnboardingEmailParams = {
 	htmlStyle?: OnboardingEmailHtmlStyle
 	/** Used to build the verification link. */
 	airtable_id: string
+	/** The signed link the render endpoint mints. The preview pages leave it out and get the
+	 *  unsigned link built from `airtable_id`. */
+	verificationLink?: string
 }
 
 export type RenderedOnboardingEmail = {
