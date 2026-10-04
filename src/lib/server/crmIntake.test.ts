@@ -94,20 +94,38 @@ describe('submitToCrm', () => {
 		})
 	})
 
-	it('gives up when its timeout signal fires', async () => {
+	// AbortSignal.timeout aborts with a DOMException named TimeoutError.
+	const stubTimeout = () => {
 		const timeout = new AbortController()
-		const timeoutSpy = vi.spyOn(AbortSignal, 'timeout').mockReturnValue(timeout.signal)
+		const spy = vi.spyOn(AbortSignal, 'timeout').mockReturnValue(timeout.signal)
+		const fire = () => timeout.abort(new DOMException('', 'TimeoutError'))
+		return { signal: timeout.signal, spy, fire }
+	}
+
+	it('gives up when its timeout signal fires', async () => {
+		const timeout = stubTimeout()
 		fetchMock.mockImplementation(
 			(_url, init) =>
 				new Promise((_resolve, reject) =>
-					init?.signal?.addEventListener('abort', () => reject(new DOMException('', 'AbortError')))
+					init?.signal?.addEventListener('abort', () => reject(init.signal!.reason as Error))
 				)
 		)
 		const pending = submitToCrm(RECORD, '')
-		expect(timeoutSpy).toHaveBeenCalledWith(TIMEOUT_MS)
+		expect(timeout.spy).toHaveBeenCalledWith(TIMEOUT_MS)
 		expect(fetchMock.mock.calls[0][1]?.signal).toBe(timeout.signal)
-		timeout.abort()
-		expect(await pending).toEqual({ outcome: 'error', cause: 'timeout', errorName: 'AbortError' })
+		timeout.fire()
+		expect(await pending).toEqual({ outcome: 'error', cause: 'timeout', errorName: 'TimeoutError' })
+	})
+
+	it('counts a timeout while reading the answer as a timeout', async () => {
+		const timeout = stubTimeout()
+		const response = new Response('{}')
+		vi.spyOn(response, 'json').mockImplementation(() => {
+			timeout.fire()
+			return Promise.reject(timeout.signal.reason as Error)
+		})
+		fetchMock.mockResolvedValue(response)
+		expect(await submitToCrm(RECORD, '')).toEqual({ outcome: 'error', cause: 'timeout' })
 	})
 
 	it('does not call without a URL or key', async () => {
@@ -161,6 +179,15 @@ describe('reportToCrm', () => {
 })
 
 describe('queueCrmIntake', () => {
+	it('calls only when CRM_INTAKE_ENABLED is exactly "true"', async () => {
+		for (const value of ['', 'false', '1']) {
+			env.CRM_INTAKE_ENABLED = value
+			queueCrmIntake(undefined, RECORD, '')
+		}
+		await new Promise((resolve) => setTimeout(resolve, 0))
+		expect(fetchMock).not.toHaveBeenCalled()
+	})
+
 	it('still runs without a platform (the Node dev server)', async () => {
 		queueCrmIntake(undefined, RECORD, '')
 		await vi.waitFor(() => expect(fetchMock).toHaveBeenCalledOnce())
