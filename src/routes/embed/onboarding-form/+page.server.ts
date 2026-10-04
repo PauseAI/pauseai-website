@@ -14,6 +14,7 @@ import { fail } from '@sveltejs/kit'
 import type { FieldSet } from 'airtable'
 import type { Actions, PageServerLoad } from './$types'
 import { createRecord, getRecord, updateRecord } from '$lib/airtable'
+import { queueCrmIntake } from '$lib/server/crmIntake'
 import { getNationalGroups } from '$lib/server/nationalGroups'
 import { isOnboardingLive } from '$lib/server/onboarding'
 import { checkContinuation, issueContinuationToken } from '$lib/server/onboardingContinuation'
@@ -145,7 +146,7 @@ function resolveSourcePage(data: FormData, request: Request, selfUrl: URL): stri
 }
 
 export const actions: Actions = {
-	submit: async ({ request, url }) => {
+	submit: async ({ request, url, platform }) => {
 		const data = await request.formData()
 
 		// Honeypot
@@ -373,22 +374,22 @@ export const actions: Actions = {
 		}
 
 		if (live) {
-			let recordId: string | undefined = existingRecordId || undefined
-			if (recordId) {
-				const updated = await updateRecord(AIRTABLE_BASE_ID, MEMBERS_TABLE_ID, recordId, fields)
-				// The row was deleted since the browser got its id.
-				if (updated === 'missing') return rowGone(ROW_MISSING)
-				if (updated !== 'updated') {
-					return fail(502, { message: 'Sorry, we could not save your details. Please try again.' })
-				}
-			} else {
-				recordId = await createRecord(AIRTABLE_BASE_ID, MEMBERS_TABLE_ID, fields)
-				// A failed write returns undefined; surface it instead of telling
-				// the user they're signed up when no record was created.
-				if (!recordId) {
-					return fail(502, { message: 'Sorry, we could not save your details. Please try again.' })
-				}
+			const written = existingRecordId
+				? await updateRecord(AIRTABLE_BASE_ID, MEMBERS_TABLE_ID, existingRecordId, fields)
+				: await createRecord(AIRTABLE_BASE_ID, MEMBERS_TABLE_ID, fields)
+			// The row was deleted since the browser got its id.
+			if (written === 'missing') return rowGone(ROW_MISSING)
+			// A failed write; surface it instead of telling the user they're signed up
+			// when no record was written.
+			if (!written || written === 'failed') {
+				return fail(502, { message: 'Sorry, we could not save your details. Please try again.' })
 			}
+			const recordId = written.id
+			// Only after Airtable has the row, since the CRM keys the contact on its id.
+			// Runs after the response and never changes it (docs/join-form-flow.md,
+			// "CRM intake"). The CRM checks the token the browser posted, so the server
+			// never vouches for an id itself; a create has none.
+			queueCrmIntake(platform, written, existingRecordId ? getString(data, 'record_token') : '')
 			// Only on the signup, which for /subscribe is its own form rather than a
 			// step 2. No other update re-subscribes.
 			if (newsletter && isSignup) {

@@ -1,11 +1,13 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 
 const env: Record<string, string | undefined> = {}
-const createRecord = vi.fn<(...args: unknown[]) => Promise<string | undefined>>()
-const updateRecord = vi.fn<(...args: unknown[]) => Promise<'updated' | 'missing' | 'failed'>>()
+type Written = { id: string; createdTime: string; fields: Record<string, unknown> }
+const createRecord = vi.fn<(...args: unknown[]) => Promise<Written | undefined>>()
+const updateRecord = vi.fn<(...args: unknown[]) => Promise<Written | 'missing' | 'failed'>>()
 const getRecord =
 	vi.fn<(...args: unknown[]) => Promise<Record<string, unknown> | 'missing' | 'failed'>>()
-const reportError = vi.fn<(error: unknown, context?: Record<string, unknown>) => Promise<void>>()
+const reportError =
+	vi.fn<(error: unknown, context?: Record<string, unknown>, options?: unknown) => Promise<void>>()
 
 vi.mock('$env/dynamic/private', () => ({ env }))
 vi.mock('$lib/airtable', () => ({ createRecord, getRecord, updateRecord }))
@@ -13,7 +15,7 @@ vi.mock('$lib/server/turnstile-verify', () => ({
 	checkNotSpam: () => Promise.resolve({ drop: false })
 }))
 vi.mock('$lib/server/substack', () => ({ subscribeToSubstackNewsletter: vi.fn() }))
-vi.mock('$lib/server/sentry', () => ({ reportError }))
+vi.mock('$lib/server/sentry', () => ({ reportError, flushReports: () => Promise.resolve() }))
 // The National Chapters list the action reads (null: never read on this instance).
 let nationalGroups: { name: string; leader: string }[] | null
 vi.mock('$lib/server/nationalGroups', () => ({
@@ -26,17 +28,37 @@ const { chapterQuestion, chapterShareWording } =
 	await import('$lib/components/onboarding/chapterShare')
 const { onboardingMessages } = await import('$lib/components/onboarding/messages')
 
+// What Airtable answers a write with: the whole row, so an update returns more
+// than it sent.
+const written = (id: string, fields: Record<string, unknown> = {}): Written => ({
+	id,
+	createdTime: '2026-10-04T12:00:00.000Z',
+	fields: { Email: 'ada@example.org', ...fields }
+})
+const mockWrites = () => {
+	createRecord
+		.mockReset()
+		.mockImplementation((_base, _table, fields) =>
+			Promise.resolve(written('recAda', fields as Record<string, unknown>))
+		)
+	updateRecord
+		.mockReset()
+		.mockImplementation((_base, _table, id, fields) =>
+			Promise.resolve(written(id as string, fields as Record<string, unknown>))
+		)
+}
+
 type Result = { status?: number; data?: Record<string, unknown> } & Record<string, unknown>
 
 // What /api/national-groups answers, which both the forms and the action read.
 const CHAPTERS = ['France', 'Germany', 'United Kingdom'].map((name) => ({ name, leader: 'Lead' }))
 
-async function submit(fields: Record<string, string>): Promise<Result> {
+async function submit(fields: Record<string, string>, platform?: unknown): Promise<Result> {
 	const body = new FormData()
 	for (const [name, value] of Object.entries(fields)) body.set(name, value)
 	const url = new URL('https://pauseai.info/embed/onboarding-form?/submit')
 	const request = new Request(url, { method: 'POST', body })
-	return (await actions.submit({ request, url, fetch } as never)) as Result
+	return (await actions.submit({ request, url, fetch, platform } as never)) as Result
 }
 
 // The wording the form renders, built the way the form builds it.
@@ -90,8 +112,7 @@ describe('onboarding submit: continuation token', () => {
 		for (const key of Object.keys(env)) delete env[key]
 		env.ONBOARDING_LIVE = 'true'
 		env.ONBOARDING_CONTINUATION_SECRET = 'test-secret'
-		createRecord.mockReset().mockResolvedValue('recAda')
-		updateRecord.mockReset().mockResolvedValue('updated')
+		mockWrites()
 		getRecord.mockReset().mockResolvedValue(UK_ROW)
 		nationalGroups = CHAPTERS
 		reportError.mockClear()
@@ -226,8 +247,7 @@ describe('onboarding submit: chapter sharing', () => {
 		for (const key of Object.keys(env)) delete env[key]
 		env.ONBOARDING_LIVE = 'true'
 		env.ONBOARDING_CONTINUATION_SECRET = 'test-secret'
-		createRecord.mockReset().mockResolvedValue('recAda')
-		updateRecord.mockReset().mockResolvedValue('updated')
+		mockWrites()
 		getRecord.mockReset().mockResolvedValue(UK_ROW)
 		nationalGroups = CHAPTERS
 		reportError.mockClear()
@@ -573,5 +593,131 @@ describe('onboarding submit: chapter sharing', () => {
 		const created = await submit(signup)
 		await submit({ ...update(String(created.recordToken)), subscribe_form: '1' })
 		expect(writtenFields(updateRecord)).not.toHaveProperty('Signup source')
+	})
+})
+
+describe('onboarding submit: CRM intake', () => {
+	const crmFetch = vi.fn<typeof fetch>()
+	const waitUntil = vi.fn<(promise: Promise<unknown>) => void>()
+	const platform = { context: { waitUntil } }
+	// What each queued CRM call posted, once every one has settled.
+	const crmCalls = async () => {
+		await Promise.all(waitUntil.mock.calls.map(([promise]) => promise))
+		return crmFetch.mock.calls.map(
+			([, init]) => JSON.parse((init!.body as URLSearchParams).get('params')!) as unknown
+		)
+	}
+	const crmAnswers = (body: unknown, status = 200) =>
+		crmFetch.mockImplementation(() =>
+			Promise.resolve(new Response(JSON.stringify(body), { status }))
+		)
+
+	beforeEach(() => {
+		for (const key of Object.keys(env)) delete env[key]
+		env.ONBOARDING_LIVE = 'true'
+		env.ONBOARDING_CONTINUATION_SECRET = 'test-secret'
+		env.ONBOARDING_CONTINUATION_ENFORCE = 'true'
+		env.CRM_INTAKE_ENABLED = 'true'
+		env.CRM_INTAKE_URL = 'https://crm.example.org'
+		env.CRM_INTAKE_KEY = 'test-key'
+		mockWrites()
+		getRecord.mockReset().mockResolvedValue(UK_ROW)
+		nationalGroups = CHAPTERS
+		reportError.mockClear()
+		waitUntil.mockReset()
+		crmAnswers({ values: [{ status: 'ok', contact_id: 1 }] })
+		vi.stubGlobal('fetch', crmFetch)
+		vi.spyOn(console, 'log').mockImplementation(() => {})
+		vi.spyOn(console, 'warn').mockImplementation(() => {})
+	})
+	afterEach(() => vi.unstubAllGlobals())
+
+	it('sends the written record on a create without a token, and the posted token on each update', async () => {
+		const created = await submit(signup, platform)
+		const token = String(created.recordToken)
+		await submit(update(token), platform)
+		await submit({ ...update(token), intent: 'Volunteer' }, platform)
+
+		expect(waitUntil).toHaveBeenCalledTimes(3)
+		const calls = await crmCalls()
+		const result = (mock: typeof createRecord | typeof updateRecord, call: number) =>
+			mock.mock.results[call].value as Promise<Written>
+		const [create, update1, update2] = await Promise.all([
+			result(createRecord, 0),
+			result(updateRecord, 0),
+			result(updateRecord, 1)
+		])
+		expect(calls).toEqual([
+			{ record: create, token: '' },
+			{ record: update1, token },
+			{ record: update2, token }
+		])
+		// The whole row Airtable answered with, not only the fields the post wrote.
+		expect(calls[1]).toMatchObject({
+			record: { id: 'recAda', fields: { Email: 'ada@example.org' } }
+		})
+	})
+
+	it('sends the /subscribe create and its continuation', async () => {
+		const created = await submit(
+			{
+				...signup,
+				subscribe_form: '1',
+				intent: 'Keep informed',
+				chapter_share_wording: wording('subscribe', 'United Kingdom', 'PauseAI UK', 'no')
+			},
+			platform
+		)
+		expect(created).toMatchObject({ success: true })
+		await submit({ ...update(String(created.recordToken)), subscribe_form: '1' }, platform)
+		expect((await crmCalls()).map((call) => (call as { token: string }).token)).toEqual([
+			'',
+			created.recordToken
+		])
+	})
+
+	it('makes no call while the flag is off, in stub mode, or when Airtable failed', async () => {
+		delete env.CRM_INTAKE_ENABLED
+		await submit(signup, platform)
+
+		env.CRM_INTAKE_ENABLED = 'true'
+		delete env.ONBOARDING_LIVE
+		await submit(signup, platform)
+
+		env.ONBOARDING_LIVE = 'true'
+		vi.spyOn(console, 'error').mockImplementation(() => {})
+		createRecord.mockResolvedValueOnce(undefined)
+		expect(await submit(signup, platform)).toMatchObject({ status: 502 })
+		updateRecord.mockResolvedValueOnce('failed')
+		const token = String((await submit(signup)).recordToken)
+		crmFetch.mockClear()
+		waitUntil.mockClear()
+		expect(await submit(update(token), platform)).toMatchObject({ status: 502 })
+
+		expect(waitUntil).not.toHaveBeenCalled()
+		expect(crmFetch).not.toHaveBeenCalled()
+	})
+
+	it('answers the signup the same whatever the CRM does, without waiting for it', async () => {
+		const strip = (result: Result) => ({ ...result, recordToken: typeof result.recordToken })
+		delete env.CRM_INTAKE_ENABLED
+		const expected = strip(await submit(signup, platform))
+		env.CRM_INTAKE_ENABLED = 'true'
+
+		const outcomes: (() => void)[] = [
+			() => crmAnswers({ values: [{ status: 'refused', reason: 'token_required' }] }),
+			() => crmAnswers({ error_code: 0, error_message: 'Sorry', status: 500 }, 500),
+			() => crmFetch.mockImplementation(() => Promise.reject(new TypeError('fetch failed'))),
+			// Never answers: the action must not wait for it.
+			() => crmFetch.mockImplementation(() => new Promise(() => {}))
+		]
+		for (const outcome of outcomes) {
+			outcome()
+			expect(strip(await submit(signup, platform))).toEqual(expected)
+		}
+		expect(reportError).not.toHaveBeenCalledWith(
+			expect.anything(),
+			expect.objectContaining({ check: 'onboarding-continuation' })
+		)
 	})
 })

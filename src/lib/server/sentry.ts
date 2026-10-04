@@ -21,15 +21,30 @@ declare const Deno: unknown
  */
 export async function reportError(
 	error: unknown,
-	context?: Record<string, unknown>
+	context?: Record<string, unknown>,
+	options: { fingerprint?: string[]; level?: 'error' | 'warning' } = {}
 ): Promise<void> {
 	try {
 		// Only the Netlify Deno edge runtime has `Deno`; skip elsewhere so the
 		// Node dev server and prerender build don't pull `@sentry/deno`.
 		if (typeof Deno === 'undefined') return
 		const { captureException } = await import('@sentry/deno')
-		captureException(error, context ? { extra: context } : undefined)
+		captureException(error, { extra: context, ...options })
 	} catch (e) {
 		console.error('[Sentry Server lib] reportError failed:', e)
+	}
+}
+
+/**
+ * Sends queued reports. Work running after the response (`waitUntil`) calls it
+ * before it settles, since the edge runtime may stop once it does. Never throws.
+ */
+export async function flushReports(timeoutMs = 2000): Promise<void> {
+	try {
+		if (typeof Deno === 'undefined') return
+		const { flush } = await import('@sentry/deno')
+		await flush(timeoutMs)
+	} catch (e) {
+		console.error('[Sentry Server lib] flushReports failed:', e)
 	}
 }
