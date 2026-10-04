@@ -21,7 +21,7 @@ import { recordStubSubmission } from '$lib/server/onboarding-stub'
 import { subscribeToSubstackNewsletter } from '$lib/server/substack'
 import { checkNotSpam } from '$lib/server/turnstile-verify'
 import { hasUniversities, isKnownUniversity } from '$lib/data/universities'
-import { chapterName, possibleWordings } from '$lib/components/onboarding/chapterShare'
+import { possibleWordings } from '$lib/components/onboarding/chapterShare'
 import {
 	COUNTRIES,
 	DISCOVERY_OPTIONS,
@@ -79,8 +79,6 @@ const CHAPTER_ANSWER_MISSING =
 // a resumed row or the /subscribe continuation may not be showing.
 const chapterAnswerMissing = () =>
 	fail(400, { message: CHAPTER_ANSWER_MISSING, chapterAnswerMissing: true })
-const CHAPTER_LOOKUP_FAILED =
-	'Sorry, we could not check your answer to the chapter question. Please try again.'
 // Far above the longest wording any locale renders; only stops a bloated post.
 const MAX_WORDING_LENGTH = 2000
 
@@ -355,16 +353,9 @@ export const actions: Actions = {
 			fields['GDPR chapter share permission'] = false
 			fields['GDPR chapter share wording'] = ''
 		} else if (chapterCountry && chapterAnswer !== null) {
-			const groups = await getNationalGroups()
-			if (!groups) return fail(502, { message: CHAPTER_LOOKUP_FAILED })
-			const chapter = chapterName(
-				chapterCountry,
-				groups.map((group) => group.name)
-			)
 			const offered = possibleWordings(
 				[isSubscribeForm ? 'subscribe' : 'join'],
 				chapterCountry,
-				chapter,
 				chapterAnswer
 			)
 			if (chapterWording.length > MAX_WORDING_LENGTH || !offered.includes(chapterWording)) {

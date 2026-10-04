@@ -301,10 +301,10 @@ isn't available at render time.
 
 ### Supporting API routes
 
-| Route                      | File                                        | Purpose                                                                                                                                                                                                                                                                                                                                                |
-| -------------------------- | ------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `GET /api/onboarding-mode` | `src/routes/api/onboarding-mode/+server.ts` | Returns `{ live: boolean }` so the prerendered form can discover the runtime mode.                                                                                                                                                                                                                                                                     |
-| `GET /api/national-groups` | `src/routes/api/national-groups/+server.ts` | Returns the list of national groups. Used by the components (whether the country has a chapter, for the chapter question and the lead-role copy) and the submit action (to rebuild the chapter question's wording, and for stub inspection), which reads the same 10-minute cache in `src/lib/server/nationalGroups.ts` rather than calling the route. |
+| Route                      | File                                        | Purpose                                                                                                                                                                                                                                                                                                                                                                                                                                     |
+| -------------------------- | ------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `GET /api/onboarding-mode` | `src/routes/api/onboarding-mode/+server.ts` | Returns `{ live: boolean }` so the prerendered form can discover the runtime mode.                                                                                                                                                                                                                                                                                                                                                          |
+| `GET /api/national-groups` | `src/routes/api/national-groups/+server.ts` | Returns the list of national groups. Used by the components (whether the country has a chapter, for the chapter question and the lead-role copy) and the submit action (stub inspection only). Both read a cache in `src/lib/server/nationalGroups.ts`: one Airtable read per server instance every 10 minutes, given up after 5 seconds, and after a failed read (reported to Sentry) the last good list for a minute before trying again. |
 
 ### How a submission travels
 
@@ -504,11 +504,10 @@ or the chapter's own name from `CHAPTER_DISPLAY_NAMES` in `chapterShare.ts`
 (the National Chapters table holds no display name); elsewhere it asks about a chapter "when one starts". It
 waits for that lookup, and a failed lookup, or one taking over five seconds,
 counts as no chapter. The forms get that list through the CDN, which may
-serve it up to an hour old (the route's `max-age`), while the action checks
-against its own copy, at most 10 minutes old. So for up to an hour after a
-chapter is deactivated or added, a form can show a wording the action refuses
-with a 400; the form then asks again, but shows the same wording until its copy
-of the list is refreshed.
+serve it up to an hour old (the route's `max-age`). The action does not use the
+list to check a wording (see "Validation rules"), so a form on an older list is
+never refused for it; for up to that hour after a chapter is deactivated, a form
+may still name it, and the stored wording records that faithfully.
 
 The country an answer is for is the posted `country`, or, on an update that
 posts none, the one the row holds. An update whose post leaves the answer to the
@@ -530,7 +529,9 @@ later copy edit, chapter rename or deactivation, or a staff edit of the row must
 not turn a given answer into a missing one, which a volunteer step or the
 `/subscribe` continuation could not answer without being sent back to the
 question. A row with no wording (a US row, or one from before the question), or
-whose country is another, has none. So outside the US an unticked box
+whose country is another, has none. Since only the country is compared, a staff
+edit of a row's `Country` alone, leaving its wording, makes the row count as
+answered for the new country. So outside the US an unticked box
 on a row created by this form (by `Signup source`) is a No, not a question never
 asked, whichever post last changed the row's country. In stub mode there is no
 row to read, so an update without an answer is let through, as it writes
@@ -596,15 +597,11 @@ an update is in "Create versus update" above.
   and on an update unless the row already holds an answer for the country, else 400. Whenever an answer is posted, its wording, line endings normalised to LF,
   must be exactly one the posting form renders for that country and answer
   (`possibleWordings` in `chapterShare.ts`), else the same 400: `/subscribe`'s
-  variant when `subscribe_form=1`, `/join`'s otherwise, in any locale, naming
-  the chapter the action finds for the country in `/api/national-groups` (with
-  `chapterName`, as the forms do) or as the no-chapter variant, which the forms
-  show when their own lookup fails. The action reads that list through
-  `getNationalGroups` in `src/lib/server/nationalGroups.ts`, the cache
-  `/api/national-groups` serves from too: one Airtable read per server instance
-  every 10 minutes, given up after 5 seconds, and on a failed read the last good
-  list (reported to Sentry). Only when no read has ever succeeded on that
-  instance does the action answer 502 and ask for a retry. For the United States any posted answer is
+  variant when `subscribe_form=1`, `/join`'s otherwise, in any locale, either
+  naming the chapter as the forms do when their list has one for the country
+  (`chapterName`, so "PauseAI <country>" or the `CHAPTER_DISPLAY_NAMES` entry)
+  or as the no-chapter variant. The chapter list is not consulted, so the action
+  and a form holding different copies of it cannot disagree. For the United States any posted answer is
   ignored and both fields are cleared. See "Chapter sharing".
 - GDPR consent (`agree_gdpr`) required **only on the create path** — step-3
   volunteer updates are exempt because consent was captured at step 2.

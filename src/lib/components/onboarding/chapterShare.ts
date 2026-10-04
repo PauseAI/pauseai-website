@@ -68,17 +68,17 @@ export function chapterShareWording(question: ChapterQuestion, answer: ChapterAn
 	return `${question.heading}\n${question.body}\n${CHOSEN_PREFIX}${answer === 'yes' ? question.yes : question.no}`
 }
 
-// Every wording a form shows for `country` and stores with `answer`: each locale,
-// with the chapter's name, or as the none-yet variant, which the forms also show
-// when their chapter lookup fails. The server stores a posted wording only if it
-// is one of these, and lets a stored one stand only while it still is.
+// Every wording a form can show for `country` and store with `answer`, in each
+// locale: naming the chapter as the form would if its list has one for `country`,
+// or as the none-yet variant. Independent of any chapter list, so a form and the
+// server holding different copies of it cannot disagree. The server stores a
+// posted wording only if it is one of these.
 export function possibleWordings(
 	forms: readonly ChapterForm[],
 	country: string,
-	chapter: string | null,
 	answer: ChapterAnswer
 ): string[] {
-	const names = chapter ? [chapter, null] : [null]
+	const names = [chapterName(country, [country]), null]
 	return Object.values(onboardingMessages).flatMap((msgs) =>
 		forms.flatMap((form) =>
 			names.flatMap((name) => {

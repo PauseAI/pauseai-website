@@ -305,11 +305,31 @@ describe('onboarding submit: chapter sharing', () => {
 		}
 	})
 
-	it('asks to try again when the chapter list has never been read, writing nothing', async () => {
-		nationalGroups = null
-		const refused = await submit(signup)
-		expect(refused.status).toBe(502)
-		expect(createRecord).not.toHaveBeenCalled()
+	it('checks a posted wording without the chapter list, so a form on an older list is not refused', async () => {
+		// The form's list had a chapter for Italy; the server's has none, or none at all.
+		for (const groups of [CHAPTERS, null]) {
+			nationalGroups = groups
+			for (const answer of ['yes', 'no'] as const) {
+				const posted = wording('join', 'Italy', 'PauseAI Italy', answer)
+				const created = await submit({
+					...signup,
+					country: 'Italy',
+					city: 'Rome',
+					chapter_share: answer,
+					chapter_share_wording: posted
+				})
+				expect(created).toMatchObject({ success: true })
+				expect(writtenFields(createRecord)['GDPR chapter share wording']).toBe(posted)
+			}
+		}
+		// And the other way round: Germany is listed, the form showed no chapter.
+		const created = await submit({
+			...signup,
+			country: 'Germany',
+			chapter_share: 'yes',
+			chapter_share_wording: wording('join', 'Germany', null, 'yes')
+		})
+		expect(created).toMatchObject({ success: true })
 	})
 
 	it('writes the box and the wording from a Yes or a No, in the same create', async () => {
