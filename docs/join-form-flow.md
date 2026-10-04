@@ -512,11 +512,13 @@ chapter mail and is never pre-ticked; after a Yes with Volunteer or Lead picked
 and Keep me informed unticked, step 2 points at it. Volunteer and Lead "will be
 in touch by email" means one-to-one follow-up about their request.
 
-The values the CRM and Airtable match by name have to move with the
-`Signup source` values: the CRM's `OPTIN_FORM_SOURCES` lists all four, its
-`CHAPTER_SHARE_AUTHORITATIVE_SOURCES` the two non-US ones, and in Airtable the
-roster formula `Excluded from chapter roster` and the "Subscriber becomes
-Volunteer/Lead" trigger name them.
+The CRM matches the `Signup source` values by name, so a new value needs its
+lists changed in the same release: `OPTIN_FORM_SOURCES` lists all four,
+`CHAPTER_SHARE_AUTHORITATIVE_SOURCES` the two non-US ones. Airtable does not list
+them. The roster formula `Excluded from chapter roster` reads the stored wording,
+which the form writes only when it asked, and the "Subscriber becomes
+Volunteer/Lead" trigger matches the phrase "subscribe form", which every /subscribe
+value must keep.
 
 This field is not only stored. The Airtable automations on the Members table
 read it to decide whether a signup is handed to their national chapter's leader

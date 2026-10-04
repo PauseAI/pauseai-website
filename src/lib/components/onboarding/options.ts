@@ -11,12 +11,13 @@ export const INTENTS = ['None', 'Keep informed', 'Act now', 'Volunteer', 'Lead']
 export type Intent = (typeof INTENTS)[number]
 export type IntentKey = 'act-now' | 'volunteer' | 'lead'
 
-// `Signup source`, stamped on a create. The CRM and Airtable match these by name:
-// the CRM's OPTIN_FORM_SOURCES lists all four, its CHAPTER_SHARE_AUTHORITATIVE_SOURCES
-// the two non-US ones (an unticked chapter-share box from them is a recorded No), and
-// the Airtable roster formula and "Subscriber becomes Volunteer/Lead" trigger name
-// them too. A new value needs all of those changed in the same release. A US signup
-// gets its own value because it is not asked the chapter question.
+// `Signup source`, stamped on a create. The CRM matches these by name: its
+// OPTIN_FORM_SOURCES lists all four and its CHAPTER_SHARE_AUTHORITATIVE_SOURCES the two
+// non-US ones (an unticked chapter-share box from them is a recorded No), so a new value
+// needs both changed in the same release. Airtable's "Subscriber becomes Volunteer/Lead"
+// automation matches every /subscribe source by the phrase "subscribe form", so a
+// /subscribe value must keep it. A US signup gets its own value because it is not asked
+// the chapter question.
 const SIGNUP_SOURCE = 'October 2026 onboarding flow'
 const SUBSCRIBE_SIGNUP_SOURCE = 'October 2026 subscribe form'
 const US_SOURCE_SUFFIX = ' (US)'
