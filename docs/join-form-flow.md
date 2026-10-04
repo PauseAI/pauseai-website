@@ -560,9 +560,10 @@ the form writes only where it showed the question and clears where it is hidden
 rules the row follows is `Form version`. A version at least the CRM's
 `CRM_PauseaiCore_MemberRow::CURRENT_FORM_VERSION` (2) gets the current rules: the
 newsletter only on Keep me informed, the chapter answer and the memberships
-written at signup by intake, and a chapter only on a recorded Yes; a row without
-one gets the legacy rules. So a new form or a new `Signup source` label needs no
-CRM change. Bump `FORM_VERSION`, together with the CRM's constant, only when the
+written at signup by intake, and a chapter only on a recorded Yes. A row without
+one gets the legacy rules, except one carrying an October 2026 label, which
+predates the field and counts as version 2 (a closed list in the CRM). So a new
+form or a new `Signup source` label needs no CRM change. Bump `FORM_VERSION`, together with the CRM's constant, only when the
 rules a new row follows change. The Members field `Form version` (number,
 integer) must exist before a deploy that writes it, since Airtable refuses a
 write naming an unknown field. Airtable does not list the sources either. The

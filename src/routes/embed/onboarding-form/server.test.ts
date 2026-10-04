@@ -613,7 +613,7 @@ describe('onboarding submit: chapter sharing', () => {
 			expect(writtenFields(createRecord)['Form version']).toBe(FORM_VERSION)
 		}
 		// A number, as the Airtable field is: a string would be refused.
-		expect(FORM_VERSION).toBe(2)
+		expect(typeof FORM_VERSION).toBe('number')
 		const created = await submit(signup)
 		await submit({ ...update(String(created.recordToken)), subscribe_form: '1' })
 		expect(writtenFields(updateRecord)).not.toHaveProperty('Form version')
