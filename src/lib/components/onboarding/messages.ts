@@ -691,7 +691,7 @@ const de: OnboardingMessages = {
 	onboarding_step_about: 'Über dich',
 	onboarding_step_intent: 'Absicht',
 	onboarding_step_volunteer_form: 'Freiwilligenformular',
-	onboarding_step_check_inbox: 'Postfach checken',
+	onboarding_step_check_inbox: 'Postfach prüfen',
 	onboarding_step_next_steps: 'Nächste Schritte',
 	onboarding_volunteer_title: 'Als Freiwillige/r anmelden',
 	onboarding_volunteer_intro:
