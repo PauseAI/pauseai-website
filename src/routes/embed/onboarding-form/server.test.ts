@@ -627,7 +627,6 @@ describe('onboarding submit: CRM intake', () => {
 		waitUntil.mockReset()
 		crmAnswers({ values: [{ status: 'ok', contact_id: 1 }] })
 		vi.stubGlobal('fetch', crmFetch)
-		vi.spyOn(console, 'log').mockImplementation(() => {})
 		vi.spyOn(console, 'warn').mockImplementation(() => {})
 	})
 	afterEach(() => vi.unstubAllGlobals())

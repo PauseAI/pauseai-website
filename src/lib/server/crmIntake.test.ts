@@ -35,7 +35,6 @@ beforeEach(() => {
 	vi.stubGlobal('fetch', fetchMock)
 	reportError.mockReset().mockResolvedValue()
 	flushReports.mockReset().mockResolvedValue()
-	vi.spyOn(console, 'log').mockImplementation(() => {})
 	vi.spyOn(console, 'warn').mockImplementation(() => {})
 })
 afterEach(() => {
@@ -67,32 +66,24 @@ describe('submitToCrm', () => {
 		expect(await submitToCrm(RECORD, '')).toEqual({ outcome: 'refused:token_required' })
 	})
 
-	it('calls an HTTP error, a malformed answer or an unknown refusal an error', async () => {
-		// API4's masked answer, as CRM_Api4_Page_AJAX writes it.
-		answer(
-			{
-				error_code: '1',
-				error_message:
-					'Sorry an error occurred and your request was not completed. (Error ID: aB3d-EfGh-1234)',
-				status: 500
-			},
-			500
-		)
+	it('passes a refusal code on as the CRM sends it', async () => {
+		answerRow({ status: 'refused', reason: 'some_new_code' })
+		expect(await submitToCrm(RECORD, '')).toEqual({ outcome: 'refused:some_new_code' })
+	})
+
+	it('calls an HTTP error or an answer of the wrong shape an http error', async () => {
+		answer({ error_code: '1', error_message: 'Sorry an error occurred', status: 500 }, 500)
 		expect(await submitToCrm(RECORD, '')).toEqual({
 			outcome: 'error',
 			cause: 'http',
-			httpStatus: 500,
-			errorId: 'aB3d-EfGh-1234'
+			httpStatus: 500
 		})
-		for (const body of [
-			{ values: [] },
-			{ values: [{ status: 'refused', reason: 'Not a code!' }] },
-			'not json'
-		]) {
+		for (const body of [{ values: [] }, { values: [{ status: 'pending' }] }, 'not json']) {
 			answer(body)
 			expect(await submitToCrm(RECORD, '')).toEqual({
 				outcome: 'error',
-				cause: 'unexpected_response'
+				cause: 'http',
+				httpStatus: 200
 			})
 		}
 		fetchMock.mockImplementation(() => Promise.reject(new TypeError('fetch failed')))
@@ -103,24 +94,9 @@ describe('submitToCrm', () => {
 		})
 	})
 
-	it('forwards no error text, only an error id of the shape the CRM mints', async () => {
-		const echoed = `Invalid value ada@example.org for token ${TOKEN} (Error ID: ${TOKEN})`
-		for (const body of [
-			{ error_code: 0, error_message: echoed, status: 400 },
-			{ error_id: 'ada@example.org', error_message: echoed, status: 400 }
-		]) {
-			answer(body, 400)
-			expect(await submitToCrm(RECORD, TOKEN)).toEqual({
-				outcome: 'error',
-				cause: 'http',
-				httpStatus: 400
-			})
-		}
-		// The unmasked shape, which carries the id in its own field.
-		answer({ error_id: 'Zx12-ab34-CD56', error_message: echoed, status: 500 }, 500)
-		expect(await submitToCrm(RECORD, TOKEN)).toMatchObject({ errorId: 'Zx12-ab34-CD56' })
-
+	it('reports no error body text, which could echo what the request carried', async () => {
 		const warn = vi.spyOn(console, 'warn').mockImplementation(() => {})
+		const echoed = `Invalid value ada@example.org for token ${TOKEN}`
 		answer({ error_code: 0, error_message: echoed, status: 400 }, 400)
 		expect(await reportToCrm(RECORD, TOKEN)).toBe('error')
 		const reported = JSON.stringify([reportError.mock.calls, warn.mock.calls])

@@ -14,28 +14,7 @@ import { flushReports, reportError } from '$lib/server/sentry'
 
 const PATH = '/civicrm/ajax/api4/PauseaiMemberIntake/submit'
 export const TIMEOUT_MS = 3000
-// The CRM's refusal codes are lowercase words; anything else is not a refusal
-// this side can name, so it is an error.
-const REASON = /^[a-z_]{1,40}$/
-// CRM_Core_Error::createErrorId: 12 letters or digits in dashed groups of four.
-// API4 puts it in `error_id` when it shows the real message, and otherwise only
-// inside its masked message, "... (Error ID: <id>)".
-const ERROR_ID = /^[A-Za-z0-9]{4}-[A-Za-z0-9]{4}-[A-Za-z0-9]{4}$/
-const MASKED_ERROR_ID = /\(Error ID: ([^)]*)\)/
-
-// Only the id the CRM log holds, never the message text, which a CRM error could
-// fill with whatever the request carried.
-function errorIdOf(body: { error_id?: unknown; error_message?: unknown } | null) {
-	const candidate =
-		typeof body?.error_id === 'string'
-			? body.error_id
-			: typeof body?.error_message === 'string'
-				? MASKED_ERROR_ID.exec(body.error_message)?.[1]
-				: undefined
-	return candidate && ERROR_ID.test(candidate) ? candidate : undefined
-}
-
-type Cause = 'not_configured' | 'http' | 'timeout' | 'network' | 'unexpected_response'
+type Cause = 'not_configured' | 'http' | 'timeout' | 'network'
 
 type Result =
 	| { outcome: 'ok' }
@@ -44,7 +23,6 @@ type Result =
 			outcome: 'error'
 			cause: Cause
 			httpStatus?: number
-			errorId?: string
 			errorName?: string
 	  }
 
@@ -72,26 +50,17 @@ export async function submitToCrm(record: WrittenRecord, token: string): Promise
 			body: new URLSearchParams({ params: JSON.stringify({ record, token }) }),
 			signal
 		})
+		// Only the status: an error body's text could echo what the request carried.
+		const httpError = { outcome: 'error', cause: 'http', httpStatus: response.status } as const
+		if (!response.ok) return httpError
 		const body = (await response.json().catch(() => null)) as {
 			values?: { status?: unknown; reason?: unknown }[]
-			error_id?: unknown
-			error_message?: unknown
 		} | null
 		if (signal.aborted) return { outcome: 'error', cause: 'timeout' }
-		if (!response.ok) {
-			return {
-				outcome: 'error',
-				cause: 'http',
-				httpStatus: response.status,
-				errorId: errorIdOf(body)
-			}
-		}
 		const row = body?.values?.[0]
 		if (row?.status === 'ok') return { outcome: 'ok' }
-		if (row?.status === 'refused' && typeof row.reason === 'string' && REASON.test(row.reason)) {
-			return { outcome: `refused:${row.reason}` }
-		}
-		return { outcome: 'error', cause: 'unexpected_response' }
+		if (row?.status === 'refused') return { outcome: `refused:${String(row.reason)}` }
+		return httpError
 	} catch (error) {
 		return {
 			outcome: 'error',
@@ -108,11 +77,8 @@ export async function submitToCrm(record: WrittenRecord, token: string): Promise
  */
 export async function reportToCrm(record: WrittenRecord, token: string): Promise<Outcome> {
 	const result = await submitToCrm(record, token)
+	if (result.outcome === 'ok') return result.outcome
 	const details = { check: 'crm-intake', recordId: record.id, ...result }
-	if (result.outcome === 'ok') {
-		console.log('[crm-intake] ok', details)
-		return result.outcome
-	}
 	console.warn('[crm-intake] not accepted', details)
 	await reportError(new Error(`CRM intake ${result.outcome}`), details, {
 		fingerprint: ['crm-intake', result.outcome],
