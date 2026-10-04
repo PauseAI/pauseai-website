@@ -234,8 +234,10 @@
 		</p>
 		<p>
 			The chapter part lists your chapter's links, the same ones as on pauseai.info/national-groups.
-			To change them, send the new ones to PauseAI Global at
-			<a href="mailto:jakub.fidler@pauseai.info">jakub.fidler@pauseai.info</a>.
+			<strong
+				>To change them, send the new ones to PauseAI Global at
+				<a href="mailto:jakub.fidler@pauseai.info">jakub.fidler@pauseai.info</a>.</strong
+			>
 		</p>
 		<p class="muted">
 			Nothing here is sent to anyone, and no signup is created. It shows the same wording the real
@@ -275,9 +277,11 @@
 			> below.
 		</p>
 		<p>
-			Send your text and your chapter's links to PauseAI Global at
-			<a href="mailto:jakub.fidler@pauseai.info">jakub.fidler@pauseai.info</a>, and we will set it
-			up.
+			<strong
+				>Send your text and your chapter's links to PauseAI Global at
+				<a href="mailto:jakub.fidler@pauseai.info">jakub.fidler@pauseai.info</a>, and we will set it
+				up.</strong
+			>
 		</p>
 	</section>
 
