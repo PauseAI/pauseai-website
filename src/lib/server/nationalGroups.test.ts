@@ -38,6 +38,7 @@ describe('getNationalGroups', () => {
 	it('serves the last good list when a read fails, and null when there was none', async () => {
 		fetchAllPages.mockRejectedValueOnce(new Error('down'))
 		expect(await getNationalGroups()).toBeNull()
+		vi.advanceTimersByTime(60 * 1000)
 		fetchAllPages.mockResolvedValueOnce(records('Germany'))
 		expect(names(await getNationalGroups())).toEqual(['Germany'])
 		vi.advanceTimersByTime(10 * 60 * 1000)
@@ -45,6 +46,32 @@ describe('getNationalGroups', () => {
 		expect(names(await getNationalGroups())).toEqual(['Germany'])
 		expect(reportError).toHaveBeenCalledTimes(2)
 		expect(reportError.mock.calls[1][1]).toMatchObject({ servedStale: true })
+	})
+
+	it('waits a minute after a failed read before trying again, serving the last good list', async () => {
+		fetchAllPages.mockResolvedValueOnce(records('Germany'))
+		await getNationalGroups()
+		vi.advanceTimersByTime(10 * 60 * 1000)
+		fetchAllPages.mockRejectedValue(new Error('down'))
+		for (let call = 0; call < 3; call++) {
+			expect(names(await getNationalGroups())).toEqual(['Germany'])
+		}
+		expect(fetchAllPages).toHaveBeenCalledTimes(2)
+		expect(reportError).toHaveBeenCalledOnce()
+		vi.advanceTimersByTime(60 * 1000 - 1)
+		await getNationalGroups()
+		expect(fetchAllPages).toHaveBeenCalledTimes(2)
+		vi.advanceTimersByTime(1)
+		fetchAllPages.mockResolvedValue(records('France'))
+		expect(names(await getNationalGroups())).toEqual(['France'])
+		expect(fetchAllPages).toHaveBeenCalledTimes(3)
+	})
+
+	it('waits a minute after a failed first read too, serving nothing', async () => {
+		fetchAllPages.mockRejectedValue(new Error('down'))
+		expect(await getNationalGroups()).toBeNull()
+		expect(await getNationalGroups()).toBeNull()
+		expect(fetchAllPages).toHaveBeenCalledOnce()
 	})
 
 	it('stops waiting for a read after five seconds', async () => {

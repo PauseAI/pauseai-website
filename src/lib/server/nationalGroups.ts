@@ -1,12 +1,15 @@
 // The National Chapters list, read from Airtable at most once per TTL per server
-// instance and shared by /api/national-groups and the onboarding submit action,
-// which checks the chapter question's wording against it on every non-US signup.
-// Airtable allows 5 requests a second per base, shared with the nightly sync.
+// instance: /api/national-groups is fetched by every onboarding form mount (the CDN
+// absorbs most of those), and Airtable allows 5 requests a second per base, shared
+// with the onboarding writes and the nightly sync.
 import type { AirtableNationalGroup, NationalGroup } from '$lib/types.js'
 import { fetchAllPages, type AirtableRecord } from '$lib/airtable.js'
 import { reportError } from '$lib/server/sentry'
 
 const TTL_MS = 10 * 60 * 1000
+// After a failed read, the last good list (or none) is served this long before
+// trying again, so an outage costs one read and one Sentry event a minute.
+const RETRY_AFTER_FAILURE_MS = 60 * 1000
 // The SDK call cannot be aborted; past this the caller stops waiting for it.
 const TIMEOUT_MS = 5000
 
@@ -93,6 +96,7 @@ function recordToNationalGroup(record: AirtableRecord<AirtableNationalGroup>): N
 }
 
 let cached: { groups: NationalGroup[]; readAt: number } | null = null
+let failedAt: number | null = null
 let pending: Promise<NationalGroup[] | null> | null = null
 
 async function readGroups(): Promise<NationalGroup[]> {
@@ -123,8 +127,10 @@ async function refresh(): Promise<NationalGroup[] | null> {
 			})
 		])
 		cached = { groups, readAt: Date.now() }
+		failedAt = null
 		return groups
 	} catch (error) {
+		failedAt = Date.now()
 		console.error('Reading national groups failed:', error)
 		await reportError(error, { operation: 'getNationalGroups', servedStale: cached !== null })
 		// The last good list, however old, rather than none.
@@ -134,14 +140,19 @@ async function refresh(): Promise<NationalGroup[] | null> {
 	}
 }
 
-// Null only when no read has ever succeeded on this instance.
+// Null only when no read has ever succeeded on this instance. The first caller after
+// the TTL waits for the read (up to TIMEOUT_MS) rather than refreshing in the
+// background, since Edge Functions may not keep a promise alive past the response.
 export async function getNationalGroups(): Promise<NationalGroup[] | null> {
-	if (cached && Date.now() - cached.readAt < TTL_MS) return cached.groups
+	const now = Date.now()
+	if (cached && now - cached.readAt < TTL_MS) return cached.groups
+	if (failedAt !== null && now - failedAt < RETRY_AFTER_FAILURE_MS) return cached?.groups ?? null
 	pending ??= refresh().finally(() => (pending = null))
 	return pending
 }
 
 export function resetNationalGroupsCacheForTests(): void {
 	cached = null
+	failedAt = null
 	pending = null
 }
