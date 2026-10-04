@@ -91,7 +91,7 @@ const chapterShareDe: ChapterShareMessages = {
 	onboarding_chapter_section_label: 'Deine lokale Gruppe',
 	onboarding_chapter_heading: (chapter) => `Deine Daten mit ${chapter} teilen?`,
 	onboarding_chapter_body: (chapter) =>
-		`Wenn du Ja sagst, teilen wir deine Anmeldeangaben mit ${chapter}, die eine von PauseAI Global getrennte Organisation sein kann. Du kannst deine Meinung jederzeit ändern, indem du an ${PRIVACY_EMAIL} schreibst.`,
+		`Wenn du zustimmst, teilen wir deine Anmeldeangaben mit ${chapter}, die eine von PauseAI Global getrennte Organisation sein kann. Du kannst deine Meinung jederzeit ändern, indem du an ${PRIVACY_EMAIL} schreibst.`,
 	onboarding_chapter_yes: (chapter) => `Ja, meine Daten mit ${chapter} teilen`,
 	onboarding_chapter_subscribe_heading: (chapter) => `Auch von ${chapter} hören?`,
 	onboarding_chapter_subscribe_yes: (chapter) =>
@@ -99,7 +99,7 @@ const chapterShareDe: ChapterShareMessages = {
 	onboarding_chapter_none_heading: (country) =>
 		`Deine Daten mit einer PauseAI-Gruppe in ${country} teilen, sobald eine gegründet wird?`,
 	onboarding_chapter_none_body: (country) =>
-		`Wenn du Ja sagst und eine Gruppe in ${country} gegründet wird, teilen wir deine Anmeldeangaben mit ihr. Sie kann eine von PauseAI Global getrennte Organisation sein. Du kannst deine Meinung jederzeit ändern, indem du an ${PRIVACY_EMAIL} schreibst.`,
+		`Wenn du zustimmst und eine Gruppe in ${country} gegründet wird, teilen wir deine Anmeldeangaben mit ihr. Sie kann eine von PauseAI Global getrennte Organisation sein. Du kannst deine Meinung jederzeit ändern, indem du an ${PRIVACY_EMAIL} schreibst.`,
 	onboarding_chapter_none_yes: 'Ja, meine Daten mit der Gruppe teilen, sobald sie gegründet wird',
 	onboarding_chapter_none_subscribe_heading: (country) =>
 		`Von einer PauseAI-Gruppe in ${country} hören, sobald eine gegründet wird?`,
