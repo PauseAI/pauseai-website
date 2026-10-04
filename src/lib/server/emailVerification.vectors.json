@@ -1,0 +1,49 @@
+{
+	"description": "Shared test vectors for the email verification token (pauseai-website src/lib/server/emailVerification.ts). A PHP implementation must reproduce every normalisedEmail, emailHash, payload and token byte for byte. Normalisation: strip leading/trailing ASCII whitespace (space, tab, LF, VT, FF, CR), lowercase A-Z only. emailHash: lowercase hex SHA-256 of the UTF-8 normalised address. token: v1.<expiry>.<sig>, sig = unpadded base64url HMAC-SHA256 keyed by the UTF-8 secret over payload. expiry = floor(nowMs / 1000) + ttlSeconds.",
+	"secret": "test-secret-do-not-use",
+	"nowMs": 1800000000000,
+	"ttlSeconds": 7776000,
+	"expiry": 1807776000,
+	"cases": [
+		{
+			"recordId": "recAbCdEf01234567",
+			"email": "ada@example.org",
+			"normalisedEmail": "ada@example.org",
+			"emailHash": "cfe00dde46ef942601ffafb9e2825e802858b460e586b8305b344c1eb826357d",
+			"payload": "email-verification:v1:recAbCdEf01234567:cfe00dde46ef942601ffafb9e2825e802858b460e586b8305b344c1eb826357d:1807776000",
+			"token": "v1.1807776000.mp2rOCD3GkXqu1Og1cYYVWR-9JtNVw_kntp8FPSinb0"
+		},
+		{
+			"recordId": "recAbCdEf01234567",
+			"email": "  Ada.Lovelace@Example.ORG \t\n",
+			"normalisedEmail": "ada.lovelace@example.org",
+			"emailHash": "7799473ff091b38137e0698047364e040446fe7cb3209e8321d5a865127853d0",
+			"payload": "email-verification:v1:recAbCdEf01234567:7799473ff091b38137e0698047364e040446fe7cb3209e8321d5a865127853d0:1807776000",
+			"token": "v1.1807776000.J4qLjJk0BRv_ZQzM_yuKV6-B18rKmwsb3RdR-SVkCTo"
+		},
+		{
+			"recordId": "recZz9Yy8Xx7Ww6Vv",
+			"email": "Ada+PauseAI@Example.org",
+			"normalisedEmail": "ada+pauseai@example.org",
+			"emailHash": "4979f14564ef0daf3bd0c2512e5c339e75c092aa088ab172da9cb9e9a75e8096",
+			"payload": "email-verification:v1:recZz9Yy8Xx7Ww6Vv:4979f14564ef0daf3bd0c2512e5c339e75c092aa088ab172da9cb9e9a75e8096:1807776000",
+			"token": "v1.1807776000.Oa6R6myeoYybamoVyF6jNAP6sYkOmvfwpcN9Q6wDhHg"
+		},
+		{
+			"recordId": "recZz9Yy8Xx7Ww6Vv",
+			"email": "ÄDA@Bücher.example",
+			"normalisedEmail": "Äda@bücher.example",
+			"emailHash": "e9ea96bdb42e7b30c1eef744ea26aa0adda69fa0cd661c15ecb346cb296821f0",
+			"payload": "email-verification:v1:recZz9Yy8Xx7Ww6Vv:e9ea96bdb42e7b30c1eef744ea26aa0adda69fa0cd661c15ecb346cb296821f0:1807776000",
+			"token": "v1.1807776000.1bY4swr0GBaO7a1xAj4gn3ldG3CCfr92EGKMAyo6x8A"
+		},
+		{
+			"recordId": "recZz9Yy8Xx7Ww6Vv",
+			"email": " ada@example.org",
+			"normalisedEmail": " ada@example.org",
+			"emailHash": "c8670ed88562d22824678a1d13fc53a6c743f4c6aa450b9e8559047d486a40c9",
+			"payload": "email-verification:v1:recZz9Yy8Xx7Ww6Vv:c8670ed88562d22824678a1d13fc53a6c743f4c6aa450b9e8559047d486a40c9:1807776000",
+			"token": "v1.1807776000.Vdgeey6ADB_2Ceqg6Jpzkbf9GI56_TWB-s34tYyAEVI"
+		}
+	]
+}

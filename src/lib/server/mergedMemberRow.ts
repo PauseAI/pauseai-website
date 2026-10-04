@@ -1,3 +1,5 @@
+import { normaliseEmail } from '$lib/server/emailVerification'
+
 export type MemberRow = { id: string; fields: Record<string, unknown> }
 
 const MERGED_INTO = 'Merged into'
@@ -14,7 +16,7 @@ function isBlank(value: unknown): boolean {
 
 function normalizedEmail(row: MemberRow): string {
 	const email = row.fields[EMAIL]
-	return typeof email === 'string' ? email.trim().toLowerCase() : ''
+	return typeof email === 'string' ? normaliseEmail(email) : ''
 }
 
 /**
@@ -39,7 +41,8 @@ export async function memberRowToVerify(
 		return { id: row.id, dataError: '"Merged into" names a row that is itself merged' }
 	}
 
-	// The click proves ownership of this row's address only.
+	// The click proves ownership of this row's address only, compared as the token's hash
+	// compares it.
 	const email = normalizedEmail(row)
 	if (!email || email !== normalizedEmail(survivor)) return { id: row.id }
 
