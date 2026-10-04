@@ -1,9 +1,9 @@
 <!--
 	SubscribeFlow — the lightweight newsletter entry at /subscribe.
 
-	A single-step signup (global newsletter) with an optional local-chapter opt-in
-	and an optional Substack opt-in. On success it offers to go further: rather
-	than linking out to /join (which would create a second, duplicate record), it
+	A single-step signup (global newsletter) with the chapter-sharing question
+	(chapterShare.ts) and an optional Substack opt-in. On success it offers to go
+	further: rather than linking out to /join (which would create a second, duplicate record), it
 	hands off to OnboardingFlow seeded at the intent step with the record already
 	created here, so continuing updates that same record.
 -->
@@ -17,10 +17,13 @@
 	import Combobox from '$lib/components/Combobox.svelte'
 	import LinkWithoutIcon from '$lib/components/LinkWithoutIcon.svelte'
 	import Turnstile from '$lib/components/Turnstile.svelte'
+	import ChapterShareQuestion from './ChapterShareQuestion.svelte'
 	import OnboardingFlow from './OnboardingFlow.svelte'
+	import { chapterName, chapterQuestion, loadChapterCountries } from './chapterShare'
+	import { getMessages } from './i18n.svelte'
 	import { saveSignupFromPost } from './signupResume'
 	import { turnstileSiteKey } from '$lib/turnstile'
-	import { COUNTRIES } from './options'
+	import { COUNTRIES, asksChapterQuestion, type ChapterAnswer } from './options'
 
 	let {
 		initialEmail = '',
@@ -38,6 +41,7 @@
 	// "could not load" error before it's removed again.
 	let onboardingModeKnown = $state(false)
 	onMount(async () => {
+		void loadChapterCountries().then((countries) => (chapterCountries = countries))
 		try {
 			const response = await fetch('/api/onboarding-mode')
 			if (!response.ok) return
@@ -57,10 +61,27 @@
 		email: '',
 		country: '',
 		city: '',
-		wantsChapter: false,
 		wantsSubstack: false
 	})
 	let fields = $state({ ...blankFields(), email: initialEmail, country: initialCountry })
+	// The chapter-sharing answer with the country it was given for, as on /join:
+	// another country is another question.
+	let chapterChoice = $state<{ country: string; answer: ChapterAnswer } | null>(null)
+	let chapterCountries = $state<string[] | null>(null)
+	const msgs = $derived(getMessages())
+	const chapterQ = $derived(
+		fields.country && COUNTRIES.includes(fields.country) && chapterCountries !== null
+			? chapterQuestion(
+					msgs,
+					'subscribe',
+					fields.country,
+					chapterName(fields.country, chapterCountries)
+				)
+			: null
+	)
+	const chapterAnswer = $derived(
+		chapterChoice?.country === fields.country ? chapterChoice.answer : null
+	)
 	let recordId = $state('')
 	let recordToken = $state('')
 
@@ -81,6 +102,7 @@
 		recordId = ''
 		recordToken = ''
 		fields = blankFields()
+		chapterChoice = null
 	})
 
 	// A newsletter signup elsewhere (e.g. the homepage box) hands off here via
@@ -100,6 +122,8 @@
 			!!fields.email.trim() &&
 			!!fields.country.trim() &&
 			!!fields.city.trim() &&
+			// Required wherever it is asked, and it waits for the chapter lookup.
+			(!asksChapterQuestion(fields.country) || !!chapterAnswer) &&
 			// No widget to wait for without a configured site key (e.g. local dev).
 			// Required only when the submission writes, matching the server — otherwise
 			// the widget's failure on a deploy preview would leave this disabled.
@@ -128,7 +152,8 @@
 				if (typeof result.data.recordId === 'string') {
 					recordId = result.data.recordId
 					recordToken = typeof result.data.recordToken === 'string' ? result.data.recordToken : ''
-					saveSignupFromPost(formData, recordId, recordToken)
+					// Always a create, so the row held no answer before it.
+					saveSignupFromPost(formData, recordId, recordToken, null)
 				}
 				phase = 'thanks'
 			} else if (result.type === 'failure') {
@@ -158,8 +183,7 @@
 		<form method="POST" action="/embed/onboarding-form?/submit" use:enhance={submit}>
 			<!-- Fixed for the newsletter entry: global newsletter opt-in, and the
 			     privacy-policy consent is the act of signing up (see the microcopy
-			     below). subscribe_form=1 tells the server to share with a chapter
-			     only when the local-chapter box is ticked. -->
+			     below). subscribe_form=1 picks this form's Signup source. -->
 			<input type="hidden" name="subscribe_form" value="1" />
 			<input type="hidden" name="mode" value="contact" />
 			<input type="hidden" name="intent" value="None" />
@@ -223,12 +247,17 @@
 				/>
 			</div>
 
-			<label class="opt-in">
-				<input type="checkbox" name="chapter_share" bind:checked={fields.wantsChapter} />
-				<span>
-					<span class="opt-in-label">Also send me updates from my local chapter</span>
-				</span>
-			</label>
+			{#if chapterQ}
+				<ChapterShareQuestion
+					question={chapterQ}
+					level={2}
+					bind:answer={
+						() => chapterAnswer,
+						(answer: ChapterAnswer | null) =>
+							(chapterChoice = answer ? { country: fields.country, answer } : null)
+					}
+				/>
+			{/if}
 
 			<label class="opt-in">
 				<input type="checkbox" name="newsletter" bind:checked={fields.wantsSubstack} />
@@ -250,8 +279,8 @@
 				</button>
 				<p class="submit-disclaimer">
 					By signing up you agree to our
-					<LinkWithoutIcon href="/privacy">Privacy Policy</LinkWithoutIcon>. We'll only use your
-					details to keep you updated on PauseAI, and you can unsubscribe anytime.
+					<LinkWithoutIcon href="/privacy">Privacy Policy</LinkWithoutIcon>. We'll use your details
+					to keep you updated on PauseAI, and you can unsubscribe anytime.
 				</p>
 			</div>
 		</form>
@@ -275,10 +304,12 @@
 		initialCountry={fields.country}
 		initialCity={fields.city}
 		initialKeepInformed={true}
-		initialChapterShare={fields.wantsChapter}
+		initialChapterAnswer={asksChapterQuestion(fields.country) ? chapterAnswer : null}
 		onRecordGone={() => {
-			// Back to the signup, details kept, to create a row with fresh consent.
+			// Back to the signup, details kept, to create a row with fresh consent and
+			// a chapter answer given again.
 			phase = 'form'
+			chapterChoice = null
 			recordId = ''
 			recordToken = ''
 		}}

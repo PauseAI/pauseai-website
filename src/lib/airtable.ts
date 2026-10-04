@@ -120,6 +120,37 @@ export async function createRecord(
 }
 
 /**
+ * Reads one record's fields, with the write key (`/api/verify` reads the Members
+ * table with it too)
+ * @returns 'missing' when no record has that id (never existed, or deleted),
+ * which a caller can act on, unlike an outage ('failed')
+ */
+export async function getRecord(
+	baseId: string,
+	tableId: string,
+	recordId: string
+): Promise<FieldSet | 'missing' | 'failed'> {
+	const apiKey = getWriteApiKey()
+	if (!apiKey) {
+		console.warn(`⚠️ Airtable API key not configured. Skipping record read.`)
+		return 'failed'
+	}
+
+	try {
+		const record = await new Airtable({ apiKey }).base(baseId)(tableId).find(recordId)
+		return record.fields
+	} catch (error) {
+		if ((error as { error?: unknown } | null)?.error === 'NOT_FOUND') {
+			console.warn(`Airtable record ${recordId} in ${tableId} does not exist`)
+			return 'missing'
+		}
+		console.error(`Error reading Airtable record ${recordId} in ${tableId}:`, error)
+		await reportError(error, { tableId, recordId, operation: 'getRecord' })
+		return 'failed'
+	}
+}
+
+/**
  * Updates an existing record in Airtable
  * @param baseId The Airtable Base ID
  * @param tableId The Airtable Table ID

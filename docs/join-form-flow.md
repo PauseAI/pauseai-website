@@ -85,8 +85,9 @@ The embed wrapper does five things the `/join` route does not:
 
 This route exists so someone who only wants the newsletter can finish in one
 screen instead of walking the multi-step join flow. It asks for the same four
-basics (name, email, country, city) plus two opt-ins. Four of its hidden inputs
-carry meaning: `subscribe_form=1` is the discriminator, `agree_gdpr=on` records
+basics (name, email, country, city), the chapter-sharing question (see "Chapter
+sharing") and the Substack opt-in. Four of its hidden inputs
+carry meaning: `subscribe_form=1` picks its `Signup source`, `agree_gdpr=on` records
 that signing up here is itself the consent, `keep_informed=on` is posted
 unconditionally so every completed submission subscribes, and
 `intent=None` is fixed, because the form never asks about intent: the row records
@@ -99,8 +100,8 @@ no intent until the person picks one in the "Get involved" continuation.
 - `more` — renders `OnboardingFlow` seeded from the row that was just created,
   so choosing to do more **updates** that record rather than creating a second
   one. The seed is `startStep={2}`, `initialRecordId={recordId}`,
-  `initialKeepInformed={true}` and `initialChapterShare={fields.wantsChapter}`,
-  plus the four basics.
+  `initialKeepInformed={true}` and `initialChapterAnswer` (the answer given on
+  the form, null where it was not asked), plus the four basics.
 
 Navigating to `/subscribe` while already on it resets the machine to `form` and
 clears every field, so a second visitor on a shared device does not see the
@@ -207,7 +208,9 @@ the language switcher's reload, a reloaded iframe, or `/subscribe` followed by
 the site's own "Join" link. `signupResume.ts` therefore also keeps the row in
 `sessionStorage` for 24 hours: its id and continuation token, the email it was
 posted with, and what it holds for the two fields every update rewrites from the
-post, `Email subscription` and `Intent`.
+post, `Email subscription` and `Intent`, plus the chapter-sharing answer the row
+holds and the country it was given for, so a resumed form does not ask again for
+that country.
 
 - Both components save it after every successful post that returns an id.
 - `OnboardingFlow` picks it up when step 1 continues (or, for the browse form,
@@ -222,9 +225,24 @@ post, `Email subscription` and `Intent`.
   browse form, which always posts `Act now`, never lowers a Volunteer or Lead
   the row holds. A stored `stub-` id is ignored in live mode.
 - Its posts carry `resumed=1` until one succeeds. The action then treats the
-  post as this form's signup: consent is required, chapter sharing is written as
-  on a create (so `/subscribe` with sharing declined, then `/join`, shares
-  through `/join`'s bundled consent), and a Substack opt-in counts. `onSignup`
+  post as this form's signup: consent is required and a Substack opt-in counts.
+  The chapter question is shown unless the stored row has an answer for the
+  country now selected; otherwise the earlier answer stands and the post carries
+  none. A row with no answer (a US row, or one from before the question), or one
+  answered for another country, is asked again, and the update writes the new
+  answer and wording. The form takes the answer each successful post leaves on
+  the row as the one it holds, so after answering for another country, Back and
+  the first country asks again. The server checks the same thing against the
+  row itself (see "Chapter sharing"), and where the two disagree its 400
+  carries `chapterAnswerMissing`: the form then drops the answer it holds, in
+  memory and in `sessionStorage` (`forgetChapterAnswer`), and goes back to the
+  question (`afterChapterAnswerMissing`): step 1, the browse form where it is,
+  or the `/subscribe` continuation's intent step, which shows the question only
+  then. Step 1 and the browse form, which pick the row up only
+  when they submit, read the stored row as soon as the email is typed to decide
+  whether to show the question. A picked-up row's answer counts only while the
+  email is the one it was picked up for: after Back and another email, which
+  gets a row of its own, the question shows again. `onSignup`
   (the embed's `onboarding_signup_complete` message) does not fire again: the row was
   announced when it was created.
 - `SubscribeFlow` saves but never resumes: it always posts `intent=None`, which
@@ -283,10 +301,10 @@ isn't available at render time.
 
 ### Supporting API routes
 
-| Route                      | File                                        | Purpose                                                                                                              |
-| -------------------------- | ------------------------------------------- | -------------------------------------------------------------------------------------------------------------------- |
-| `GET /api/onboarding-mode` | `src/routes/api/onboarding-mode/+server.ts` | Returns `{ live: boolean }` so the prerendered form can discover the runtime mode.                                   |
-| `GET /api/national-groups` | `src/routes/api/national-groups/+server.ts` | Returns the list of national groups. Used by the component (lead-role copy) and the submit action (chapter routing). |
+| Route                      | File                                        | Purpose                                                                                                                                                                                                                                                                                                                                                                                                                                     |
+| -------------------------- | ------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `GET /api/onboarding-mode` | `src/routes/api/onboarding-mode/+server.ts` | Returns `{ live: boolean }` so the prerendered form can discover the runtime mode.                                                                                                                                                                                                                                                                                                                                                          |
+| `GET /api/national-groups` | `src/routes/api/national-groups/+server.ts` | Returns the list of national groups. Used by the components (whether the country has a chapter, for the chapter question and the lead-role copy) and the submit action (stub inspection only). Both read a cache in `src/lib/server/nationalGroups.ts`: one Airtable read per server instance every 10 minutes, given up after 5 seconds, and after a failed read (reported to Sentry) the last good list for a minute before trying again. |
 
 ### How a submission travels
 
@@ -318,7 +336,7 @@ allowlists, and the live/stub switch only need to be maintained in one place.
 ```mermaid
 stateDiagram-v2
     [*] --> Step1
-    Step1: Step 1 — Basic info<br/>(name, email, country, city,<br/>optional UK postcode and university<br/>when country = United Kingdom)
+    Step1: Step 1 — Basic info<br/>(name, email, country, city,<br/>optional UK postcode and university<br/>when country = United Kingdom,<br/>then the chapter question)
     Step1 --> Step2: Continue (client-side, mode=contact)
     Step1 --> Browse: "I just want to take action now" (mode=browse)
     Browse: Browse mode<br/>(act-now, no signup)<br/>includes ActionCards
@@ -352,7 +370,12 @@ stateDiagram-v2
     Browse --> [*]
 ```
 
-Step 2 shows the two email opt-ins above the intent cards, with a
+Step 1 asks the chapter question once a country from the list is picked (see
+"Chapter sharing"); Continue stays disabled until it is answered, the one gate on
+step 1 that is not native validation, with a line under it saying why (or that
+the question is still loading). `continueToIntent` refuses to advance without
+the answer too, since step 2 creates the row and cannot ask for it. Step 2 shows the two email opt-ins above
+the intent cards, with a
 critical-alert disclosure under the opt-ins (`aria-describedby` on both, so
 screen readers reach it). On `/join`, neither the opt-ins nor an intent is
 required: a submission carrying only the GDPR consent is valid and lands on
@@ -366,12 +389,15 @@ mounted by the `/subscribe` hand-off it runs in **continuation mode**, which
 has already given their details and consent, so step 2 becomes a single
 question, "what do you want to do", rather than a signup:
 
-- The keep-informed and Substack opt-in cards are hidden, as is the GDPR
-  consent checkbox, because both were answered on the subscribe form.
+- The keep-informed and Substack opt-in cards are hidden, as are the chapter
+  question and the GDPR consent checkbox, because all were answered on the
+  subscribe form. The post carries no chapter answer, so the server leaves the
+  one from `/subscribe` alone; the Volunteer and Lead copy follows it. Only if
+  the server answers that the row holds no answer for its country does step 2
+  show the question and require it (see "Resuming after a remount").
 - Picking an intent becomes **required** to submit. On a fresh visit nothing
   beyond the GDPR consent is required, so this is a different submit gate, not
   just a different layout.
-- The two hidden inputs described under "Chapter sharing" are added.
 - A 410 cannot go back to step 1, which would post without consent, so it calls
   `onRecordGone` and `SubscribeFlow` returns to its own form.
 
@@ -391,11 +417,15 @@ On an update:
 - The required-field presence check is skipped, so it cannot re-demand what the
   create already collected. The `email` regex and the `intent` enum still run,
   so an update carrying neither is rejected anyway.
-- `Signup source` is never rewritten. It is provenance, stamped once at create:
-  `June 2026 subscribe form` for `/subscribe`, `June 2026 onboarding flow`
-  otherwise. It stays a stable literal — no suffix — so views and automations can
-  match it exactly. Without the "create only" rule the volunteer step, which
-  carries no subscribe marker, would rewrite a subscribe row as a join row.
+- `Signup source` is never rewritten. It is provenance, stamped once at create
+  by `signupSource` in `options.ts`: `October 2026 subscribe form` for
+  `/subscribe`, `October 2026 onboarding flow` otherwise, each with ` (US)`
+  appended when the country is `United States`, which is not asked the chapter
+  question. Rows created before the question keep their `June 2026 …` values.
+  The values are matched by name in the CRM and in Airtable (see "Chapter
+  sharing"), so a new one needs those changed in the same release. Without the
+  "create only" rule the volunteer step, which carries no subscribe marker,
+  would rewrite a subscribe row as a join row.
 - `Source page` is written next to it, also create-only, recording where the
   signup came from. `resolveSourcePage` takes the first of: the hidden `source`
   field (an embed's `?source=`, or the host page URL the embed wrapper read from
@@ -421,8 +451,8 @@ clears that person's subscription flag, with no error and no other symptom.
 Both inputs carry a comment saying so.
 
 Which form posted is carried by `subscribe_form=1`, set only by `/subscribe`.
-The action reads it for exactly two decisions: which `Signup source` to stamp
-on a create, and how to treat chapter sharing.
+The action reads it for one decision: which `Signup source` to stamp on a
+create.
 
 ## Data written to Airtable
 
@@ -431,7 +461,8 @@ Target: base `appWPTGqZmUcs3NWu`, table `tblL1icZBhTV1gQ9o` ("Members").
 **Step 2 / browse signup / subscribe form (create):** `Full name`, `Email`,
 `Country`, `City`, `Intent`, `Signup source`, `Source page` (when resolved),
 `Email subscription` (keep_informed), `Data privacy policy agreed`,
-`GDPR chapter share permission`, plus `Zip code` when `country` is
+`GDPR chapter share permission` and `GDPR chapter share wording` (cleared to
+unticked and empty in the United States), plus `Zip code` when `country` is
 `United Kingdom` and a postcode was entered (the optional step-1 UK postcode —
 see "Validation rules" — carried in the `zip_code` field, sharing it with the US
 volunteer ZIP below) and
@@ -446,31 +477,85 @@ second one to keep in sync, which is how it came to be missing a field.
 
 ### Chapter sharing
 
-`GDPR chapter share permission` records whether the person agreed to be
-connected with their local PauseAI chapter. **The two forms capture that
-agreement differently, which is the single most important difference between
-them:**
+`GDPR chapter share permission` records whether the person agreed to their
+details being shared with the PauseAI chapter in their country, and
+`GDPR chapter share wording` the text they were shown when they answered: the
+heading, the explanation and the option they picked (`[chosen] …`), in the
+language shown. A No is stored with its wording too, as evidence of what was
+declined. Both are written together, in the same Airtable call as the rest of
+the row, and only from an explicit answer.
 
-|              | how it is captured                                                                    | resulting value       |
-| ------------ | ------------------------------------------------------------------------------------- | --------------------- |
-| `/join`      | bundled into the required privacy checkbox, whose copy names chapter sharing outright | `true` on every row   |
-| `/subscribe` | a separate, optional "Also send me updates from my local chapter" tick                | `true` only if ticked |
+Every form that creates a row asks the same question, with no default, after
+its other fields and directly above its submit button, once a country from the
+list is picked: step 1 of `/join`, the browse signup card, and `/subscribe`
+(whose Yes also covers chapter email, since nothing else on that form names the
+chapter as a sender). It fades and slides in when it appears or its variant
+changes with the country, with no animation under `prefers-reduced-motion`.
+Focus is never moved into it; it appears in the reading order after the fields
+just filled in. `ChapterShareQuestion.svelte` renders it
+and `chapterShare.ts` builds its text. The form that shows it posts
+`chapter_share` (`yes` or `no`) and `chapter_share_wording`, except on `/join`:
+step 1 posts nothing, so step 2, which creates the row, posts the step-1 answer
+and the wording shown with it as hidden inputs. Step 2's Keep me informed,
+Volunteer and Lead copy and the nudge follow that answer. An answer belongs to
+the country it was given for: changing the country asks again. Where the country has a
+chapter (it is in `/api/national-groups`) the question names it: "PauseAI <country>",
+or the chapter's own name from `CHAPTER_DISPLAY_NAMES` in `chapterShare.ts`
+(the National Chapters table holds no display name); elsewhere it asks about a chapter "when one starts". It
+waits for that lookup, and a failed lookup, or one taking over five seconds,
+counts as no chapter. The forms get that list through the CDN, which may
+serve it up to an hour old (the route's `max-age`). The action does not use the
+list to check a wording (see "Validation rules"), so a form on an older list is
+never refused for it; for up to that hour after a chapter is deactivated, a form
+may still name it, and the stored wording records that faithfully.
 
-On an update the signup-time choice is left alone, with one exception: an intent
-of `Volunteer` or `Lead` sets it to `true`, because organising locally means
-hearing from a chapter regardless. So that backing out of `Volunteer` restores
-the original answer rather than leaving the escalation in place, the hand-off
-reposts the signup-time choice. Note where that lives: it is a pair of hidden
-inputs on **`OnboardingFlow`'s step-2 form**, guarded by `isContinuation`, not
-anything in `SubscribeFlow`. The step-3 volunteer form carries neither, which is
-harmless only because it always posts `intent=Volunteer` and so takes the
-escalation branch anyway.
+The country an answer is for is the posted `country`, or, on an update that
+posts none, the one the row holds. An update whose post leaves the answer to the
+row (no answer posted for a non-US country, or no country posted) reads the row
+from Airtable first, after the continuation token check, to know that country
+and whether the row holds an answer for it.
+
+| case                                                                                                                                  | what is written                                                                                                                                                                                                     |
+| ------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| create outside the United States                                                                                                      | the box from the answer (ticked for Yes) and the wording; a create without an answer is refused with a 400                                                                                                          |
+| any post whose country is United States (create or update)                                                                            | the box unticked and the wording empty: the question is not shown there, as PauseAI US is not a chapter, and a row whose country changed to the US after answering keeps no answer naming another country's chapter |
+| update that carries an answer (Back to step 1 and resubmit, or a resumed row with no answer for this country yet)                     | the box and the wording from the answer                                                                                                                                                                             |
+| update that does not (the volunteer step, the `/subscribe` "do more" step, a resumed row that already has an answer for this country) | neither field, so the earlier answer stands, if the row holds one for this country; otherwise refused with a 400                                                                                                    |
+
+The row holds an answer for a country when its stored wording is non-empty and
+its stored `Country` is that country (ignoring case). The wording is not checked
+again: it was checked against the form's exact text when it was posted, and a
+later copy edit, chapter rename or deactivation, or a staff edit of the row must
+not turn a given answer into a missing one, which a volunteer step or the
+`/subscribe` continuation could not answer without being sent back to the
+question. A row with no wording (a US row, or one from before the question), or
+whose country is another, has none. Since only the country is compared, a staff
+edit of a row's `Country` alone, leaving its wording, makes the row count as
+answered for the new country. So outside the US an unticked box
+on a row created by this form (by `Signup source`) is a No, not a question never
+asked, whichever post last changed the row's country. In stub mode there is no
+row to read, so an update without an answer is let through, as it writes
+nothing.
+
+The answer is not a mail permission. Keep me informed is the only source of
+chapter mail and is never pre-ticked; after a Yes with Volunteer or Lead picked
+and Keep me informed unticked, step 2 points at it. Volunteer and Lead "will be
+in touch by email" means one-to-one follow-up about their request.
+
+The CRM matches the `Signup source` values by name, so a new value needs its
+lists changed in the same release: `OPTIN_FORM_SOURCES` lists all four,
+`CHAPTER_SHARE_AUTHORITATIVE_SOURCES` the two non-US ones. Airtable does not list
+them. The roster formula `Excluded from chapter roster` reads the stored wording,
+which the form writes only when it asked, and the "Subscriber becomes
+Volunteer/Lead" trigger matches the phrase "subscribe form", which every /subscribe
+value must keep.
 
 This field is not only stored. The Airtable automations on the Members table
 read it to decide whether a signup is handed to their national chapter's leader
 or to the global onboarding address, and whether a US signup is copied into the
-sheet shared with PauseAI US. Leaving it unticked is therefore a real routing
-decision, not a preference flag.
+sheet shared with PauseAI US, which no longer happens now that US signups are
+not asked. Leaving it unticked is therefore a real routing decision, not a
+preference flag.
 
 Those automations live in Airtable, not in this repository, so nothing here can
 prove that behaviour. Read them in the base's automation editor if you need the
@@ -507,6 +592,17 @@ an update is in "Create versus update" above.
   browse signup hardcodes `Act now`; `/subscribe` hardcodes `None`. No form emits
   `Keep informed` any more, but it stays in `INTENTS` so a post carrying it is still
   accepted rather than rejected.
+- A chapter answer (`chapter_share` of `yes` or `no`, with a
+  `chapter_share_wording`) is required on a create outside the United States,
+  and on an update unless the row already holds an answer for the country, else 400. Whenever an answer is posted, its wording, line endings normalised to LF,
+  must be exactly one the posting form renders for that country and answer
+  (`possibleWordings` in `chapterShare.ts`), else the same 400: `/subscribe`'s
+  variant when `subscribe_form=1`, `/join`'s otherwise, in any locale, either
+  naming the chapter as the forms do when their list has one for the country
+  (`chapterName`, so "PauseAI <country>" or the `CHAPTER_DISPLAY_NAMES` entry)
+  or as the no-chapter variant. The chapter list is not consulted, so the action
+  and a form holding different copies of it cannot disagree. For the United States any posted answer is
+  ignored and both fields are cleared. See "Chapter sharing".
 - GDPR consent (`agree_gdpr`) required **only on the create path** — step-3
   volunteer updates are exempt because consent was captured at step 2.
   `/subscribe` posts it as a hidden field, since signing up on that form is

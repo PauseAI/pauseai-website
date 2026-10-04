@@ -3,7 +3,238 @@
 // requires the private l10n cage (PauseAI/paraglide) to compile translations
 // into the runtime. Until that access is available, translations live here and
 // are reviewable/shippable via normal PRs.
-export interface OnboardingMessages {
+
+// The chapter-sharing question (chapterShare.ts) and the copy that follows its
+// answer. `chapter` is the chapter's name, or null where the country has none yet.
+// The question's text is stored on the person's record as what they were shown, so
+// a change here changes what new records hold.
+interface ChapterShareMessages {
+	onboarding_chapter_answer_needed: string
+	onboarding_chapter_loading: string
+	onboarding_chapter_section_label: string
+	onboarding_chapter_heading: (chapter: string) => string
+	onboarding_chapter_body: (chapter: string) => string
+	onboarding_chapter_yes: (chapter: string) => string
+	onboarding_chapter_subscribe_heading: (chapter: string) => string
+	onboarding_chapter_subscribe_yes: (chapter: string) => string
+	onboarding_chapter_none_heading: (country: string) => string
+	onboarding_chapter_none_body: (country: string) => string
+	onboarding_chapter_none_yes: string
+	onboarding_chapter_none_subscribe_heading: (country: string) => string
+	onboarding_chapter_none_subscribe_yes: string
+	onboarding_chapter_no: string
+	onboarding_keep_informed_sub_shared: (chapter: string | null) => string
+	onboarding_keep_informed_sub_unanswered: (chapter: string | null) => string
+	onboarding_keep_informed_sub_not_shared: string
+	onboarding_in_touch_shared: (chapter: string | null) => string
+	onboarding_in_touch_unanswered: string
+	onboarding_in_touch_not_shared: string
+	onboarding_chapter_nudge: (chapter: string | null) => string
+	onboarding_confirm_keep_informed_shared: (chapter: string | null) => string
+	onboarding_confirm_keep_informed_not_shared: string
+}
+
+const PRIVACY_EMAIL = 'privacy@pauseai.info'
+
+const chapterShareEn: ChapterShareMessages = {
+	onboarding_chapter_answer_needed: 'Answer the chapter question above to continue.',
+	onboarding_chapter_loading: 'Loading the chapter question…',
+	onboarding_chapter_section_label: 'Your local chapter',
+	onboarding_chapter_heading: (chapter) => `Share your details with ${chapter}?`,
+	onboarding_chapter_body: (chapter) =>
+		`If you say yes, we share your signup details with ${chapter}, which may be a separate organisation from PauseAI Global. You can change your mind at any time by emailing ${PRIVACY_EMAIL}.`,
+	onboarding_chapter_yes: (chapter) => `Yes, share my details with ${chapter}`,
+	onboarding_chapter_subscribe_heading: (chapter) => `Hear from ${chapter} too?`,
+	onboarding_chapter_subscribe_yes: (chapter) =>
+		`Yes, share my details with ${chapter} so it can email me local news`,
+	onboarding_chapter_none_heading: (country) =>
+		`Share your details with a PauseAI chapter in ${country} when one starts?`,
+	onboarding_chapter_none_body: (country) =>
+		`If you say yes and a chapter starts in ${country}, we share your signup details with it. It may be a separate organisation from PauseAI Global. You can change your mind at any time by emailing ${PRIVACY_EMAIL}.`,
+	onboarding_chapter_none_yes: 'Yes, share my details with the chapter when it starts',
+	onboarding_chapter_none_subscribe_heading: (country) =>
+		`Hear from a PauseAI chapter in ${country} when one starts?`,
+	onboarding_chapter_none_subscribe_yes:
+		'Yes, share my details with the chapter when it starts, so it can email me local news',
+	onboarding_chapter_no: 'No, only PauseAI Global',
+	onboarding_keep_informed_sub_shared: (chapter) =>
+		chapter
+			? `Global campaign updates, plus news and ways to help from ${chapter}.`
+			: 'Global campaign updates, plus news and ways to help from your chapter once one starts.',
+	onboarding_keep_informed_sub_unanswered: (chapter) =>
+		`Global campaign updates, plus news and ways to help from ${chapter ?? 'your chapter once one starts'} if you share your details with it.`,
+	onboarding_keep_informed_sub_not_shared: 'Global campaign updates and ways to help.',
+	onboarding_in_touch_shared: (chapter) =>
+		chapter
+			? `${chapter} will be in touch by email.`
+			: 'PauseAI Global will be in touch by email, and your chapter will be too once one starts.',
+	onboarding_in_touch_unanswered: "We'll be in touch by email.",
+	onboarding_in_touch_not_shared: 'PauseAI Global will be in touch by email.',
+	onboarding_chapter_nudge: (chapter) =>
+		chapter
+			? `For events and campaigns from ${chapter} and PauseAI Global, tick Keep me informed.`
+			: 'For events and campaigns from PauseAI Global, and your chapter once one starts, tick Keep me informed.',
+	onboarding_confirm_keep_informed_shared: (chapter) =>
+		chapter
+			? `You'll get global campaign updates, plus news and ways to help from ${chapter}.`
+			: "You'll get global campaign updates, plus news and ways to help from your chapter once one starts.",
+	onboarding_confirm_keep_informed_not_shared:
+		"You'll get global campaign updates and ways to help."
+}
+
+// Machine translations awaiting a native speaker's check. The country name stays in
+// English, as the form's country list is English.
+const chapterShareDe: ChapterShareMessages = {
+	onboarding_chapter_answer_needed:
+		'Beantworte oben die Frage zur lokalen Gruppe, um fortzufahren.',
+	onboarding_chapter_loading: 'Die Frage zur lokalen Gruppe wird geladen…',
+	onboarding_chapter_section_label: 'Deine lokale Gruppe',
+	onboarding_chapter_heading: (chapter) => `Deine Daten mit ${chapter} teilen?`,
+	onboarding_chapter_body: (chapter) =>
+		`Wenn du zustimmst, teilen wir deine Anmeldeangaben mit ${chapter}. Dabei kann es sich um eine von PauseAI Global getrennte Organisation handeln. Du kannst deine Meinung jederzeit ändern, indem du eine E-Mail an ${PRIVACY_EMAIL} schreibst.`,
+	onboarding_chapter_yes: (chapter) => `Ja, meine Daten mit ${chapter} teilen`,
+	onboarding_chapter_subscribe_heading: (chapter) => `Auch Nachrichten von ${chapter} erhalten?`,
+	onboarding_chapter_subscribe_yes: (chapter) =>
+		`Ja, meine Daten mit ${chapter} teilen, damit mir die Gruppe lokale Neuigkeiten per E-Mail schicken kann`,
+	onboarding_chapter_none_heading: (country) =>
+		`Deine Daten mit einer PauseAI-Gruppe in ${country} teilen, sobald eine gegründet wird?`,
+	onboarding_chapter_none_body: (country) =>
+		`Wenn du zustimmst und eine Gruppe in ${country} gegründet wird, teilen wir deine Anmeldeangaben mit ihr. Sie kann eine von PauseAI Global getrennte Organisation sein. Du kannst deine Meinung jederzeit ändern, indem du an ${PRIVACY_EMAIL} schreibst.`,
+	onboarding_chapter_none_yes: 'Ja, meine Daten mit der Gruppe teilen, sobald sie gegründet wird',
+	onboarding_chapter_none_subscribe_heading: (country) =>
+		`Nachrichten von einer PauseAI-Gruppe in ${country} erhalten, sobald eine gegründet wird?`,
+	onboarding_chapter_none_subscribe_yes:
+		'Ja, meine Daten mit der Gruppe teilen, sobald sie gegründet wird, damit sie mir lokale Neuigkeiten per E-Mail schicken kann',
+	onboarding_chapter_no: 'Nein, nur PauseAI Global',
+	onboarding_keep_informed_sub_shared: (chapter) =>
+		chapter
+			? `Updates zu globalen Kampagnen sowie Neuigkeiten und Mitmach-Möglichkeiten von ${chapter}.`
+			: 'Updates zu globalen Kampagnen sowie Neuigkeiten und Mitmach-Möglichkeiten von deiner Gruppe, sobald es eine gibt.',
+	onboarding_keep_informed_sub_unanswered: (chapter) =>
+		chapter
+			? `Updates zu globalen Kampagnen sowie Neuigkeiten und Mitmach-Möglichkeiten von ${chapter}, wenn du deine Daten mit der Gruppe teilst.`
+			: 'Updates zu globalen Kampagnen. Wenn du deine Daten mit deiner Gruppe teilst, erhältst du außerdem Neuigkeiten und Mitmach-Möglichkeiten von ihr, sobald sie gegründet wird.',
+	onboarding_keep_informed_sub_not_shared:
+		'Updates zu globalen Kampagnen und Mitmach-Möglichkeiten.',
+	onboarding_in_touch_shared: (chapter) =>
+		chapter
+			? `${chapter} meldet sich per E-Mail bei dir.`
+			: 'PauseAI Global meldet sich per E-Mail bei dir, und deine Gruppe ebenfalls, sobald es eine gibt.',
+	onboarding_in_touch_unanswered: 'Wir melden uns per E-Mail bei dir.',
+	onboarding_in_touch_not_shared: 'PauseAI Global meldet sich per E-Mail bei dir.',
+	onboarding_chapter_nudge: (chapter) =>
+		chapter
+			? `Für Veranstaltungen und Kampagnen von ${chapter} und PauseAI Global kreuze „Auf dem Laufenden bleiben“ an.`
+			: 'Für Veranstaltungen und Kampagnen von PauseAI Global und, sobald es eine gibt, von deiner Gruppe kreuze „Auf dem Laufenden bleiben“ an.',
+	onboarding_confirm_keep_informed_shared: (chapter) =>
+		chapter
+			? `Du erhältst Updates zu globalen Kampagnen sowie Neuigkeiten und Mitmach-Möglichkeiten von ${chapter}.`
+			: 'Du erhältst Updates zu globalen Kampagnen sowie Neuigkeiten und Mitmach-Möglichkeiten von deiner Gruppe, sobald es eine gibt.',
+	onboarding_confirm_keep_informed_not_shared:
+		'Du erhältst Updates zu globalen Kampagnen und Mitmach-Möglichkeiten.'
+}
+
+const chapterShareFr: ChapterShareMessages = {
+	onboarding_chapter_answer_needed:
+		'Réponds à la question sur le groupe local ci-dessus pour continuer.',
+	onboarding_chapter_loading: 'Chargement de la question sur le groupe local…',
+	onboarding_chapter_section_label: 'Ton groupe local',
+	onboarding_chapter_heading: (chapter) => `Partager tes données avec ${chapter} ?`,
+	onboarding_chapter_body: (chapter) =>
+		`Si tu réponds oui, nous partageons tes données d'inscription avec ${chapter}, qui peut être une organisation distincte de PauseAI Global. Tu peux changer d'avis à tout moment en écrivant à ${PRIVACY_EMAIL}.`,
+	onboarding_chapter_yes: (chapter) => `Oui, partager mes données avec ${chapter}`,
+	onboarding_chapter_subscribe_heading: (chapter) => `Recevoir aussi des nouvelles de ${chapter} ?`,
+	onboarding_chapter_subscribe_yes: (chapter) =>
+		`Oui, partager mes données avec ${chapter} pour qu'il puisse m'envoyer des nouvelles locales par e-mail`,
+	onboarding_chapter_none_heading: (country) =>
+		`Partager tes données avec un groupe PauseAI dans le pays sélectionné (${country}) dès qu'il sera créé ?`,
+	onboarding_chapter_none_body: (country) =>
+		`Si tu réponds oui et qu'un groupe est créé dans le pays sélectionné (${country}), nous partageons tes données d'inscription avec lui. Il peut être une organisation distincte de PauseAI Global. Tu peux changer d'avis à tout moment en écrivant à ${PRIVACY_EMAIL}.`,
+	onboarding_chapter_none_yes: 'Oui, partager mes données avec le groupe dès sa création',
+	onboarding_chapter_none_subscribe_heading: (country) =>
+		`Recevoir des nouvelles d'un groupe PauseAI dans le pays sélectionné (${country}) dès qu'il sera créé ?`,
+	onboarding_chapter_none_subscribe_yes:
+		"Oui, partager mes données avec le groupe dès sa création, pour qu'il puisse m'envoyer des nouvelles locales par e-mail",
+	onboarding_chapter_no: 'Non, seulement PauseAI Global',
+	onboarding_keep_informed_sub_shared: (chapter) =>
+		chapter
+			? `Les actualités des campagnes mondiales, ainsi que des nouvelles de ${chapter} et des possibilités d'action proposées par ce groupe.`
+			: "Les actualités des campagnes mondiales, ainsi que des nouvelles de ton groupe et des possibilités d'action proposées par celui-ci dès sa création.",
+	onboarding_keep_informed_sub_unanswered: (chapter) =>
+		chapter
+			? `Les actualités des campagnes mondiales. Si tu partages tes données avec ${chapter}, tu recevras aussi des nouvelles de ce groupe et des possibilités d'action qu'il propose.`
+			: "Les actualités des campagnes mondiales. Si tu partages tes données avec ton groupe, tu recevras aussi, dès sa création, des nouvelles de celui-ci et des possibilités d'action qu'il propose.",
+	onboarding_keep_informed_sub_not_shared:
+		"Les actualités des campagnes mondiales et des occasions d'agir.",
+	onboarding_in_touch_shared: (chapter) =>
+		chapter
+			? `${chapter} te contactera par e-mail.`
+			: "PauseAI Global te contactera par e-mail, et ton groupe aussi dès qu'il existera.",
+	onboarding_in_touch_unanswered: 'Nous te contacterons par e-mail.',
+	onboarding_in_touch_not_shared: 'PauseAI Global te contactera par e-mail.',
+	onboarding_chapter_nudge: (chapter) =>
+		chapter
+			? `Pour les événements et les campagnes de ${chapter} et de PauseAI Global, coche « Me tenir informé·e ».`
+			: "Pour les événements et les campagnes de PauseAI Global, et de ton groupe dès qu'il existera, coche « Me tenir informé·e ».",
+	onboarding_confirm_keep_informed_shared: (chapter) =>
+		chapter
+			? `Tu recevras les actualités des campagnes mondiales, ainsi que des nouvelles de ${chapter} et des possibilités d'action proposées par ce groupe.`
+			: "Tu recevras les actualités des campagnes mondiales, ainsi que des nouvelles de ton groupe et des possibilités d'action proposées par celui-ci dès sa création.",
+	onboarding_confirm_keep_informed_not_shared:
+		"Tu recevras les actualités des campagnes mondiales et des occasions d'agir."
+}
+
+const chapterShareEs: ChapterShareMessages = {
+	onboarding_chapter_answer_needed:
+		'Responde arriba a la pregunta sobre el grupo local para continuar.',
+	onboarding_chapter_loading: 'Cargando la pregunta sobre el grupo local…',
+	onboarding_chapter_section_label: 'Tu grupo local',
+	onboarding_chapter_heading: (chapter) => `¿Compartir tus datos con ${chapter}?`,
+	onboarding_chapter_body: (chapter) =>
+		`Si dices que sí, compartimos tus datos de inscripción con ${chapter}, que puede ser una organización distinta de PauseAI Global. Puedes cambiar de opinión en cualquier momento escribiendo a ${PRIVACY_EMAIL}.`,
+	onboarding_chapter_yes: (chapter) => `Sí, compartir mis datos con ${chapter}`,
+	onboarding_chapter_subscribe_heading: (chapter) => `¿Recibir también noticias de ${chapter}?`,
+	onboarding_chapter_subscribe_yes: (chapter) =>
+		`Sí, compartir mis datos con ${chapter} para que pueda enviarme noticias locales por correo electrónico`,
+	onboarding_chapter_none_heading: (country) =>
+		`¿Compartir tus datos con un grupo de PauseAI en ${country} cuando se cree uno?`,
+	onboarding_chapter_none_body: (country) =>
+		`Si dices que sí y se crea un grupo en ${country}, compartimos tus datos de inscripción con él. Puede ser una organización distinta de PauseAI Global. Puedes cambiar de opinión en cualquier momento escribiendo a ${PRIVACY_EMAIL}.`,
+	onboarding_chapter_none_yes: 'Sí, compartir mis datos con el grupo cuando se cree',
+	onboarding_chapter_none_subscribe_heading: (country) =>
+		`¿Recibir noticias de un grupo de PauseAI en ${country} cuando se cree uno?`,
+	onboarding_chapter_none_subscribe_yes:
+		'Sí, compartir mis datos con el grupo cuando se cree, para que pueda enviarme noticias locales por correo electrónico',
+	onboarding_chapter_no: 'No, solo PauseAI Global',
+	onboarding_keep_informed_sub_shared: (chapter) =>
+		chapter
+			? `Novedades de las campañas globales, además de noticias de ${chapter} y propuestas de este grupo para que puedas ayudar.`
+			: 'Novedades de las campañas globales, además de noticias de tu grupo y propuestas de este para que puedas ayudar, cuando se cree.',
+	onboarding_keep_informed_sub_unanswered: (chapter) =>
+		chapter
+			? `Novedades de las campañas globales. Si compartes tus datos con ${chapter}, recibirás también noticias de este grupo y propuestas para que puedas ayudar.`
+			: 'Novedades de las campañas globales. Si compartes tus datos con tu grupo, recibirás también, cuando se cree, noticias de este y propuestas para que puedas ayudar.',
+	onboarding_keep_informed_sub_not_shared: 'Novedades de las campañas globales y formas de ayudar.',
+	onboarding_in_touch_shared: (chapter) =>
+		chapter
+			? `${chapter} se pondrá en contacto contigo por correo electrónico.`
+			: 'PauseAI Global se pondrá en contacto contigo por correo electrónico, y tu grupo también cuando exista uno.',
+	onboarding_in_touch_unanswered: 'Nos pondremos en contacto contigo por correo electrónico.',
+	onboarding_in_touch_not_shared:
+		'PauseAI Global se pondrá en contacto contigo por correo electrónico.',
+	onboarding_chapter_nudge: (chapter) =>
+		chapter
+			? `Para recibir información sobre los eventos y las campañas de ${chapter} y de PauseAI Global, marca «Mantenme informado/a».`
+			: 'Para recibir información sobre los eventos y las campañas de PauseAI Global y, cuando se cree, de tu grupo, marca «Mantenme informado/a».',
+	onboarding_confirm_keep_informed_shared: (chapter) =>
+		chapter
+			? `Recibirás novedades de las campañas globales, además de noticias de ${chapter} y propuestas de este grupo para que puedas ayudar.`
+			: 'Recibirás novedades de las campañas globales, además de noticias de tu grupo y propuestas de este para que puedas ayudar, cuando se cree.',
+	onboarding_confirm_keep_informed_not_shared:
+		'Recibirás novedades de las campañas globales y formas de ayudar.'
+}
+
+export interface OnboardingMessages extends ChapterShareMessages {
 	onboarding_page_title: string
 	onboarding_page_description: string
 	onboarding_browse_banner: string
@@ -22,7 +253,6 @@ export interface OnboardingMessages {
 	onboarding_optins_heading: string
 	onboarding_email_critical_notice: string
 	onboarding_intent_keep_informed_label: string
-	onboarding_intent_keep_informed_sub: string
 	onboarding_intent_newsletter_label: string
 	onboarding_intent_newsletter_sub: string
 	onboarding_intent_more_optional: string
@@ -36,7 +266,6 @@ export interface OnboardingMessages {
 	onboarding_btn_submit: string
 	onboarding_btn_submitting: string
 	onboarding_btn_back: string
-	onboarding_confirm_keep_informed: string
 	onboarding_confirm_newsletter: string
 	onboarding_confirm_a_title: string
 	onboarding_confirm_b_title: string
@@ -47,7 +276,6 @@ export interface OnboardingMessages {
 	onboarding_browse_header_sub: string
 	onboarding_browse_signed_up: string
 	onboarding_browse_keep_informed_title: string
-	onboarding_browse_keep_informed_sub: string
 	onboarding_btn_sign_me_up: string
 	onboarding_btn_signing_up: string
 	onboarding_section_ways_to_help: string
@@ -187,6 +415,7 @@ export interface OnboardingMessages {
 }
 
 const en: OnboardingMessages = {
+	...chapterShareEn,
 	onboarding_page_title: 'Get involved',
 	onboarding_page_description:
 		'Find the highest-impact way for you to help pause the development of superhuman AI.',
@@ -208,26 +437,20 @@ const en: OnboardingMessages = {
 	onboarding_email_critical_notice:
 		'We may occasionally send you a critical alert, even if you don\'t opt into any of these. You can unsubscribe from any list at any time. See our <a target="_blank" rel="noopener noreferrer" href="/privacy">privacy policy</a>.',
 	onboarding_intent_keep_informed_label: 'Keep me informed',
-	onboarding_intent_keep_informed_sub:
-		'Get global campaign updates, plus news and ways to help from your local chapter.',
 	onboarding_intent_newsletter_label: 'Subscribe to our Substack',
 	onboarding_intent_newsletter_sub: "AI news from the PauseAI team's perspective.",
 	onboarding_intent_more_optional: 'Want to do more? (optional)',
 	onboarding_intent_act_now_label: 'I just want to take action now',
 	onboarding_intent_act_now_sub: 'Show me what I can do today.',
 	onboarding_intent_volunteer_label: 'I want to volunteer regularly',
-	onboarding_intent_volunteer_sub:
-		'Help me find a role that fits. Your local chapter will be in touch.',
+	onboarding_intent_volunteer_sub: 'Help me find a role that fits.',
 	onboarding_intent_lead_label: 'I want to lead',
-	onboarding_intent_lead_sub:
-		"I'm ready to organize in my country or region. Your local chapter will be in touch.",
+	onboarding_intent_lead_sub: "I'm ready to organize in my country or region.",
 	onboarding_gdpr_consent:
-		'I agree to the <a target="_blank" rel="noopener noreferrer" href="/privacy">Privacy Policy</a>. I understand my details will be shared with my local PauseAI chapter (which may be a separate entity to PauseAI Global) for local coordination.&nbsp;*',
+		'I agree to the <a target="_blank" rel="noopener noreferrer" href="/privacy">Privacy Policy</a>.&nbsp;*',
 	onboarding_btn_submit: 'Submit →',
 	onboarding_btn_submitting: 'Submitting...',
 	onboarding_btn_back: '← Back',
-	onboarding_confirm_keep_informed:
-		"You'll get global campaign updates, plus news and ways to help from your local chapter.",
 	onboarding_confirm_newsletter:
 		"You're subscribed to our Substack: AI news from the PauseAI team's perspective, delivered by email.",
 	onboarding_confirm_a_title: "You're in.",
@@ -238,11 +461,8 @@ const en: OnboardingMessages = {
 	onboarding_browse_header_title: 'Take action right now.',
 	onboarding_browse_header_sub:
 		'Below are some actions you can take right now. The best way to stay informed about new opportunities is to sign up below.',
-	onboarding_browse_signed_up:
-		"✓ You're in. You'll get global campaign updates, plus news and ways to help from your local chapter.",
+	onboarding_browse_signed_up: "✓ You're in.",
 	onboarding_browse_keep_informed_title: 'Keep me informed',
-	onboarding_browse_keep_informed_sub:
-		'Get global campaign updates, plus news and ways to help from your local chapter.',
 	onboarding_btn_sign_me_up: 'Sign me up →',
 	onboarding_btn_signing_up: 'Signing up...',
 	onboarding_section_ways_to_help: 'A few ways to help today',
@@ -409,6 +629,7 @@ const en: OnboardingMessages = {
 }
 
 const de: OnboardingMessages = {
+	...chapterShareDe,
 	onboarding_page_title: 'Mitmachen',
 	onboarding_page_description:
 		'Finde den wirkungsvollsten Weg, um bei der Pause der KI-Entwicklung zu helfen.',
@@ -430,26 +651,20 @@ const de: OnboardingMessages = {
 	onboarding_email_critical_notice:
 		'Wir können dir gelegentlich eine kritische Warnung schicken, auch wenn du keine dieser Optionen ankreuzt. Du kannst dich jederzeit von jeder Liste abmelden. Siehe unsere <a target="_blank" rel="noopener noreferrer" href="/privacy">Datenschutzrichtlinie</a>.',
 	onboarding_intent_keep_informed_label: 'Auf dem Laufenden bleiben',
-	onboarding_intent_keep_informed_sub:
-		'Erhalte Updates zu globalen Kampagnen sowie Neuigkeiten und Mitmach-Möglichkeiten aus deiner lokalen Gruppe.',
 	onboarding_intent_newsletter_label: 'Unseren Substack abonnieren',
 	onboarding_intent_newsletter_sub: 'KI-Nachrichten aus der Perspektive des PauseAI-Teams.',
 	onboarding_intent_more_optional: 'Möchtest du mehr tun? (optional)',
 	onboarding_intent_act_now_label: 'Ich möchte jetzt handeln',
 	onboarding_intent_act_now_sub: 'Zeig mir, was ich heute tun kann.',
 	onboarding_intent_volunteer_label: 'Ich möchte regelmäßig freiwillig tätig sein',
-	onboarding_intent_volunteer_sub:
-		'Hilf mir, eine passende Rolle zu finden. Deine lokale Gruppe meldet sich bei dir.',
+	onboarding_intent_volunteer_sub: 'Hilf mir, eine passende Rolle zu finden.',
 	onboarding_intent_lead_label: 'Ich möchte leiten',
-	onboarding_intent_lead_sub:
-		'Ich bin bereit, in meinem Land oder meiner Region zu organisieren. Deine lokale Gruppe meldet sich bei dir.',
+	onboarding_intent_lead_sub: 'Ich bin bereit, in meinem Land oder meiner Region zu organisieren.',
 	onboarding_gdpr_consent:
-		'Ich stimme der <a target="_blank" rel="noopener noreferrer" href="/privacy">Datenschutzrichtlinie</a> zu. Mir ist bewusst, dass meine Daten zur lokalen Koordination an meine lokale PauseAI-Gruppe weitergegeben werden (die eine von PauseAI Global getrennte Einheit sein kann).&nbsp;*',
+		'Ich stimme der <a target="_blank" rel="noopener noreferrer" href="/privacy">Datenschutzrichtlinie</a> zu.&nbsp;*',
 	onboarding_btn_submit: 'Absenden →',
 	onboarding_btn_submitting: 'Wird abgesendet...',
 	onboarding_btn_back: '← Zurück',
-	onboarding_confirm_keep_informed:
-		'Du erhältst Updates zu globalen Kampagnen sowie Neuigkeiten und Mitmach-Möglichkeiten aus deiner lokalen Gruppe.',
 	onboarding_confirm_newsletter:
 		'Du hast unseren Substack abonniert: KI-Nachrichten aus der Perspektive des PauseAI-Teams, per E-Mail.',
 	onboarding_confirm_a_title: 'Du bist dabei.',
@@ -462,11 +677,8 @@ const de: OnboardingMessages = {
 	onboarding_browse_header_title: 'Jetzt handeln.',
 	onboarding_browse_header_sub:
 		'Im Folgenden findest du Aktionen, die du sofort ergreifen kannst. Am besten bleibst du über neue Möglichkeiten informiert, indem du dich unten anmeldest.',
-	onboarding_browse_signed_up:
-		'✓ Du bist dabei. Du erhältst Updates zu globalen Kampagnen sowie Neuigkeiten und Mitmach-Möglichkeiten aus deiner lokalen Gruppe.',
+	onboarding_browse_signed_up: '✓ Du bist dabei.',
 	onboarding_browse_keep_informed_title: 'Auf dem Laufenden bleiben',
-	onboarding_browse_keep_informed_sub:
-		'Erhalte Updates zu globalen Kampagnen sowie Neuigkeiten und Mitmach-Möglichkeiten aus deiner lokalen Gruppe.',
 	onboarding_btn_sign_me_up: 'Anmelden →',
 	onboarding_btn_signing_up: 'Wird angemeldet...',
 	onboarding_section_ways_to_help: 'Einige Möglichkeiten zu helfen',
@@ -640,6 +852,7 @@ const de: OnboardingMessages = {
 }
 
 const fr: OnboardingMessages = {
+	...chapterShareFr,
 	onboarding_page_title: 'Participer',
 	onboarding_page_description:
 		"Trouve le moyen le plus efficace pour toi d'aider à mettre en pause le développement de l'IA surhumaine.",
@@ -662,26 +875,20 @@ const fr: OnboardingMessages = {
 	onboarding_email_critical_notice:
 		'Nous pouvons occasionnellement t\'envoyer une alerte critique, même si tu ne coches aucune de ces options. Tu peux te désinscrire de n\'importe quelle liste à tout moment. Voir notre <a target="_blank" rel="noopener noreferrer" href="/privacy">politique de confidentialité</a>.',
 	onboarding_intent_keep_informed_label: 'Me tenir informé·e',
-	onboarding_intent_keep_informed_sub:
-		"Reçois les actualités des campagnes mondiales, ainsi que les nouvelles et les occasions d'agir de ton groupe local.",
 	onboarding_intent_newsletter_label: "S'abonner à notre Substack",
 	onboarding_intent_newsletter_sub: "L'actualité de l'IA vue par l'équipe PauseAI.",
 	onboarding_intent_more_optional: 'Tu veux en faire plus ? (facultatif)',
 	onboarding_intent_act_now_label: 'Je veux juste agir maintenant',
 	onboarding_intent_act_now_sub: "Montre-moi ce que je peux faire aujourd'hui.",
 	onboarding_intent_volunteer_label: 'Je veux être bénévole régulièrement',
-	onboarding_intent_volunteer_sub:
-		'Aide-moi à trouver un rôle qui me correspond. Ton groupe local te contactera.',
+	onboarding_intent_volunteer_sub: 'Aide-moi à trouver un rôle qui me correspond.',
 	onboarding_intent_lead_label: 'Je veux prendre la tête',
-	onboarding_intent_lead_sub:
-		'Je suis prêt·e à organiser dans mon pays ou ma région. Ton groupe local te contactera.',
+	onboarding_intent_lead_sub: 'Je suis prêt·e à organiser dans mon pays ou ma région.',
 	onboarding_gdpr_consent:
-		'J\'accepte la <a target="_blank" rel="noopener noreferrer" href="/privacy">Politique de confidentialité</a>. Je comprends que mes données seront partagées avec mon groupe PauseAI local (qui peut être une entité distincte de PauseAI Global) à des fins de coordination locale.&nbsp;*',
+		'J\'accepte la <a target="_blank" rel="noopener noreferrer" href="/privacy">Politique de confidentialité</a>.&nbsp;*',
 	onboarding_btn_submit: 'Envoyer →',
 	onboarding_btn_submitting: 'Envoi en cours...',
 	onboarding_btn_back: '← Retour',
-	onboarding_confirm_keep_informed:
-		"Tu recevras les actualités des campagnes mondiales, ainsi que les nouvelles et les occasions d'agir de ton groupe local.",
 	onboarding_confirm_newsletter:
 		"Tu es abonné·e à notre Substack : l'actualité de l'IA vue par l'équipe PauseAI, par e-mail.",
 	onboarding_confirm_a_title: "C'est fait.",
@@ -694,11 +901,8 @@ const fr: OnboardingMessages = {
 	onboarding_browse_header_title: 'Agis dès maintenant.',
 	onboarding_browse_header_sub:
 		"Voici quelques actions que tu peux entreprendre dès maintenant. Le meilleur moyen de rester informé·e des nouvelles opportunités est de t'inscrire ci-dessous.",
-	onboarding_browse_signed_up:
-		"✓ C'est fait. Tu recevras les actualités des campagnes mondiales, ainsi que les nouvelles et les occasions d'agir de ton groupe local.",
+	onboarding_browse_signed_up: "✓ C'est fait.",
 	onboarding_browse_keep_informed_title: 'Me tenir informé·e',
-	onboarding_browse_keep_informed_sub:
-		"Reçois les actualités des campagnes mondiales, ainsi que les nouvelles et les occasions d'agir de ton groupe local.",
 	onboarding_btn_sign_me_up: "M'inscrire →",
 	onboarding_btn_signing_up: 'Inscription en cours...',
 	onboarding_section_ways_to_help: "Quelques moyens d'aider dès aujourd'hui",
@@ -872,6 +1076,7 @@ const fr: OnboardingMessages = {
 }
 
 const es: OnboardingMessages = {
+	...chapterShareEs,
 	onboarding_page_title: 'Participa',
 	onboarding_page_description:
 		'Encuentra la forma de mayor impacto para ayudar a pausar el desarrollo de la IA sobrehumana.',
@@ -894,26 +1099,20 @@ const es: OnboardingMessages = {
 	onboarding_email_critical_notice:
 		'Puede que en ocasiones te enviemos un aviso importante, aunque no te suscribas a ninguna de estas opciones. Puedes darte de baja de cualquier lista en cualquier momento. Consulta nuestra <a target="_blank" rel="noopener noreferrer" href="/privacy">política de privacidad</a>.',
 	onboarding_intent_keep_informed_label: 'Mantenme informado/a',
-	onboarding_intent_keep_informed_sub:
-		'Recibe novedades de las campañas globales, además de noticias y formas de ayudar de tu grupo local.',
 	onboarding_intent_newsletter_label: 'Suscríbete a nuestro Substack',
 	onboarding_intent_newsletter_sub: 'Noticias sobre IA desde la perspectiva del equipo de PauseAI.',
 	onboarding_intent_more_optional: '¿Quieres hacer más? (opcional)',
 	onboarding_intent_act_now_label: 'Solo quiero pasar a la acción ya',
 	onboarding_intent_act_now_sub: 'Muéstrame qué puedo hacer hoy.',
 	onboarding_intent_volunteer_label: 'Quiero colaborar como voluntario/a de forma regular',
-	onboarding_intent_volunteer_sub:
-		'Quiero encontrar un papel que encaje conmigo. Tu grupo local se pondrá en contacto contigo.',
+	onboarding_intent_volunteer_sub: 'Quiero encontrar un papel que encaje conmigo.',
 	onboarding_intent_lead_label: 'Quiero liderar',
-	onboarding_intent_lead_sub:
-		'Estoy listo/a para organizar en mi país o región. Tu grupo local se pondrá en contacto contigo.',
+	onboarding_intent_lead_sub: 'Estoy listo/a para organizar en mi país o región.',
 	onboarding_gdpr_consent:
-		'Acepto la <a target="_blank" rel="noopener noreferrer" href="/privacy">política de privacidad</a>. Entiendo que mis datos se compartirán con mi grupo local de PauseAI (que puede ser una entidad distinta de PauseAI Global) para la coordinación local.&nbsp;*',
+		'Acepto la <a target="_blank" rel="noopener noreferrer" href="/privacy">política de privacidad</a>.&nbsp;*',
 	onboarding_btn_submit: 'Enviar →',
 	onboarding_btn_submitting: 'Enviando...',
 	onboarding_btn_back: '← Atrás',
-	onboarding_confirm_keep_informed:
-		'Recibirás novedades de las campañas globales, además de noticias y formas de ayudar de tu grupo local.',
 	onboarding_confirm_newsletter:
 		'Te has suscrito a nuestro Substack: noticias sobre IA desde la perspectiva del equipo de PauseAI, directamente en tu correo.',
 	onboarding_confirm_a_title: '¡Ya estás dentro!',
@@ -925,11 +1124,8 @@ const es: OnboardingMessages = {
 	onboarding_browse_header_title: 'Pasa a la acción ahora mismo.',
 	onboarding_browse_header_sub:
 		'Aquí tienes algunas acciones que puedes hacer ahora mismo. La mejor forma de enterarte de nuevas oportunidades es inscribirte abajo.',
-	onboarding_browse_signed_up:
-		'✓ Ya estás dentro. Recibirás novedades de las campañas globales, además de noticias y formas de ayudar de tu grupo local.',
+	onboarding_browse_signed_up: '✓ Ya estás dentro.',
 	onboarding_browse_keep_informed_title: 'Mantenme informado/a',
-	onboarding_browse_keep_informed_sub:
-		'Recibe novedades de las campañas globales, además de noticias y formas de ayudar de tu grupo local.',
 	onboarding_btn_sign_me_up: 'Inscríbeme →',
 	onboarding_btn_signing_up: 'Inscribiendo...',
 	onboarding_section_ways_to_help: 'Algunas formas de ayudar hoy',

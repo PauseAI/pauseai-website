@@ -11,14 +11,33 @@ export const INTENTS = ['None', 'Keep informed', 'Act now', 'Volunteer', 'Lead']
 export type Intent = (typeof INTENTS)[number]
 export type IntentKey = 'act-now' | 'volunteer' | 'lead'
 
-export const SIGNUP_SOURCE = 'June 2026 onboarding flow'
+// `Signup source`, stamped on a create. The CRM matches these by name: its
+// OPTIN_FORM_SOURCES lists all four and its CHAPTER_SHARE_AUTHORITATIVE_SOURCES the two
+// non-US ones (an unticked chapter-share box from them is a recorded No), so a new value
+// needs both changed in the same release. Airtable's "Subscriber becomes Volunteer/Lead"
+// automation matches every /subscribe source by the phrase "subscribe form", so a
+// /subscribe value must keep it. A US signup gets its own value because it is not asked
+// the chapter question.
+const SIGNUP_SOURCE = 'October 2026 onboarding flow'
+const SUBSCRIBE_SIGNUP_SOURCE = 'October 2026 subscribe form'
+const US_SOURCE_SUFFIX = ' (US)'
 
-// The /subscribe newsletter form, told apart from /join because the two ask for
-// chapter consent differently and nothing else in the row says which form wrote
-// it. The CRM's OPTIN_FORM_SOURCES should list this too: it also classifies on a
-// non-empty Intent, so the newsletter opt-in gate holds either way, but a source
-// it doesn't know trips the import's drift canary.
-export const SUBSCRIBE_SIGNUP_SOURCE = 'June 2026 subscribe form'
+export function signupSource(form: 'join' | 'subscribe', country: string): string {
+	const source = form === 'subscribe' ? SUBSCRIBE_SIGNUP_SOURCE : SIGNUP_SOURCE
+	return asksChapterQuestion(country) ? source : source + US_SOURCE_SUFFIX
+}
+
+export type ChapterAnswer = 'yes' | 'no'
+
+export function isChapterAnswer(value: unknown): value is ChapterAnswer {
+	return value === 'yes' || value === 'no'
+}
+
+// PauseAI US is a separate organisation, not a chapter, so a US signup is not asked
+// and no chapter answer is written for it.
+export function asksChapterQuestion(country: string): boolean {
+	return country !== 'United States'
+}
 
 // Full 196-country list from the Tally form.
 export const COUNTRIES = [

@@ -13,26 +13,28 @@
 import { fail } from '@sveltejs/kit'
 import type { FieldSet } from 'airtable'
 import type { Actions, PageServerLoad } from './$types'
-import type { NationalGroupsApiResponse } from '$api/national-groups/+server.js'
-import { createRecord, updateRecord } from '$lib/airtable'
+import { createRecord, getRecord, updateRecord } from '$lib/airtable'
+import { getNationalGroups } from '$lib/server/nationalGroups'
 import { isOnboardingLive } from '$lib/server/onboarding'
 import { checkContinuation, issueContinuationToken } from '$lib/server/onboardingContinuation'
 import { recordStubSubmission } from '$lib/server/onboarding-stub'
 import { subscribeToSubstackNewsletter } from '$lib/server/substack'
 import { checkNotSpam } from '$lib/server/turnstile-verify'
 import { hasUniversities, isKnownUniversity } from '$lib/data/universities'
+import { possibleWordings } from '$lib/components/onboarding/chapterShare'
 import {
 	COUNTRIES,
 	DISCOVERY_OPTIONS,
 	INTENTS,
 	LANGUAGES,
 	MOTIVATIONS,
-	SIGNUP_SOURCE,
-	SUBSCRIBE_SIGNUP_SOURCE,
 	SKILLS,
 	WEEKLY_HOURS,
+	asksChapterQuestion,
+	isChapterAnswer,
 	isValidUKPostcode,
 	normaliseUKPostcode,
+	signupSource,
 	type Intent
 } from '$lib/components/onboarding/options'
 
@@ -71,6 +73,14 @@ const STORED_LANGUAGES = LANGUAGES.map((l) => l.stored)
 const rowGone = (message: string) => fail(410, { message })
 const ROW_MISSING = 'We could not find your earlier signup. Please go through the form again.'
 const SESSION_EXPIRED = 'Your signup session has expired. Please fill in the form again.'
+const CHAPTER_ANSWER_MISSING =
+	'Please answer whether to share your details with a PauseAI chapter. If you cannot see the question, reload the page.'
+// `chapterAnswerMissing` sends the form back to the question (OnboardingFlow), which
+// a resumed row or the /subscribe continuation may not be showing.
+const chapterAnswerMissing = () =>
+	fail(400, { message: CHAPTER_ANSWER_MISSING, chapterAnswerMissing: true })
+// Far above the longest wording any locale renders; only stops a bloated post.
+const MAX_WORDING_LENGTH = 2000
 
 function getString(formData: FormData, field: string): string {
 	const value = formData.get(field)
@@ -134,24 +144,8 @@ function resolveSourcePage(data: FormData, request: Request, selfUrl: URL): stri
 	return cleanSource(`${ref.host}${ref.pathname}`)
 }
 
-async function lookupChapter(
-	customFetch: typeof fetch,
-	country: string
-): Promise<{ name: string; leader: string } | null> {
-	try {
-		const response = await customFetch('/api/national-groups')
-		if (!response.ok) return null
-		const groups = (await response.json()) as NationalGroupsApiResponse
-		const match = groups.find((group) => group.name.toLowerCase() === country.toLowerCase())
-		return match ? { name: match.name, leader: match.leader } : null
-	} catch (error) {
-		console.error('Chapter lookup failed:', error)
-		return null
-	}
-}
-
 export const actions: Actions = {
-	submit: async ({ request, fetch, url }) => {
+	submit: async ({ request, url }) => {
 		const data = await request.formData()
 
 		// Honeypot
@@ -178,9 +172,8 @@ export const actions: Actions = {
 		const mode = getString(data, 'mode') === 'browse' ? 'browse' : 'contact'
 		const newsletter = data.get('newsletter') === 'on'
 		const keepInformed = data.get('keep_informed') === 'on'
-		// GDPR consent gates every record-creating submission. /join bundles it with
-		// local-chapter sharing in one checkbox; /subscribe asks the two separately.
-		// Updates carry no checkbox, so the check below exempts them.
+		// GDPR consent gates every record-creating submission. Updates carry no
+		// checkbox, so the check below exempts them.
 		const gdprAgreed = data.get('agree_gdpr') === 'on'
 		// Set when an earlier submission already created the person's record, so
 		// this one updates it instead of creating a duplicate: /join step 2 then the
@@ -189,16 +182,19 @@ export const actions: Actions = {
 		const existingRecordId = getString(data, 'record_id')
 		// A form that picked the record up again after a remount (signupResume.ts)
 		// marks its posts until one succeeds. For the person that post is this
-		// form's signup, so consent, chapter sharing and the Substack opt-in are
-		// handled as on a create, though the write is an update.
+		// form's signup, so consent and the Substack opt-in are handled as on a
+		// create, though the write is an update.
 		const isSignup = !existingRecordId || data.get('resumed') === '1'
 		// The volunteer detail fields are only present on the step-3 form post.
 		const hasVolunteerDetails = data.get('volunteer_details') === 'on'
-		// The /subscribe newsletter form. It requires the same four fields as /join,
-		// but decouples chapter sharing from the privacy consent: the /join form
-		// bundles the two, this one shares only on an explicit local-chapter tick.
+		// The /subscribe newsletter form, which stamps its own Signup source.
 		const isSubscribeForm = data.get('subscribe_form') === '1'
-		const wantsChapter = data.get('chapter_share') === 'on'
+		// The chapter-sharing answer and the text shown with it, posted only by a form
+		// that showed the question.
+		const postedAnswer = getString(data, 'chapter_share')
+		const chapterAnswer = isChapterAnswer(postedAnswer) ? postedAnswer : null
+		// Multipart encoding turns the wording's line breaks into CRLF; stored as LF.
+		const chapterWording = getString(data, 'chapter_share_wording').replace(/\r\n?/g, '\n')
 
 		// Creates (both forms) require all four fields; an update (the volunteer
 		// step, or the subscribe "do more" hand-off) patches an existing record and
@@ -240,23 +236,6 @@ export const actions: Actions = {
 			return fail(400, { message: 'Please agree to the data processing consent to continue.' })
 		}
 
-		// Chapter sharing:
-		//  - a /join signup bundles it into the single privacy checkbox -> true
-		//  - a /subscribe signup shares only when they tick the local-updates box
-		//  - any other update (the /subscribe "do more" hand-off, or the volunteer
-		//    step) leaves the signup-time choice alone, except Volunteer/Lead, whose
-		//    local involvement means they hear from a chapter regardless
-		let chapterShare: boolean | undefined
-		if (isSignup) {
-			chapterShare = isSubscribeForm ? wantsChapter : true
-		} else if (intent === 'Volunteer' || intent === 'Lead') {
-			chapterShare = true
-		} else if (isSubscribeForm) {
-			// The subscribe "do more" step reposts the signup-time choice, so backing
-			// out of Volunteer/Lead restores it rather than leaving the escalation.
-			chapterShare = wantsChapter
-		}
-
 		const fields: FieldSet = {
 			Email: email,
 			Intent: intent,
@@ -279,7 +258,7 @@ export const actions: Actions = {
 		// helper constrains the result to a short host/path slug. Both fields are
 		// free text, so no option needs to exist for a new value.
 		if (!existingRecordId) {
-			fields['Signup source'] = isSubscribeForm ? SUBSCRIBE_SIGNUP_SOURCE : SIGNUP_SOURCE
+			fields['Signup source'] = signupSource(isSubscribeForm ? 'subscribe' : 'join', country)
 			const sourcePage = resolveSourcePage(data, request, url)
 			if (sourcePage) fields['Source page'] = sourcePage
 		}
@@ -295,9 +274,6 @@ export const actions: Actions = {
 		if (isUK && ukPostcode) fields['Zip code'] = ukPostcode
 		// Like the postcode, only set when non-empty so a partial repost can't blank it.
 		if (hasUniversities(country) && university) fields.University = university
-		if (chapterShare !== undefined) {
-			fields['GDPR chapter share permission'] = chapterShare
-		}
 
 		if (intent === 'Volunteer' && hasVolunteerDetails) {
 			const languages = getStrings(data, 'languages').filter((l) => STORED_LANGUAGES.includes(l))
@@ -353,6 +329,49 @@ export const actions: Actions = {
 		const issueToken = (recordId: string) =>
 			continuation !== 'allowed' ? issueContinuationToken(recordId) : undefined
 
+		// Chapter sharing (docs/join-form-flow.md, "Chapter sharing"). The country an
+		// answer is for is the posted one, else the row's. The US is not asked, so a
+		// post landing there clears both fields. Elsewhere the post must carry an
+		// answer unless the row already holds one for that country: the CRM reads an
+		// unticked box on a row with this form's Signup source as a No. A posted
+		// wording must be one the form renders; a stored one was checked when posted,
+		// so it stands as long as the row's country does, through copy changes.
+		const postedAnswerDecides = !!country && (!asksChapterQuestion(country) || !!chapterAnswer)
+		// A stub update has no row to read and writes nothing, so it is let through.
+		let storedRow: FieldSet | null = null
+		if (existingRecordId && live && !postedAnswerDecides) {
+			const row = await getRecord(AIRTABLE_BASE_ID, MEMBERS_TABLE_ID, existingRecordId)
+			if (row === 'missing') return rowGone(ROW_MISSING)
+			if (row === 'failed') {
+				return fail(502, { message: 'Sorry, we could not save your details. Please try again.' })
+			}
+			storedRow = row
+		}
+		const storedCountry = typeof storedRow?.Country === 'string' ? storedRow.Country.trim() : ''
+		const chapterCountry = country || storedCountry
+		if (chapterCountry && !asksChapterQuestion(chapterCountry)) {
+			fields['GDPR chapter share permission'] = false
+			fields['GDPR chapter share wording'] = ''
+		} else if (chapterCountry && chapterAnswer !== null) {
+			const offered = possibleWordings(
+				[isSubscribeForm ? 'subscribe' : 'join'],
+				chapterCountry,
+				chapterAnswer
+			)
+			if (chapterWording.length > MAX_WORDING_LENGTH || !offered.includes(chapterWording)) {
+				return chapterAnswerMissing()
+			}
+			fields['GDPR chapter share permission'] = chapterAnswer === 'yes'
+			fields['GDPR chapter share wording'] = chapterWording
+		} else if (chapterCountry && (storedRow || !existingRecordId)) {
+			const storedWording = storedRow?.['GDPR chapter share wording']
+			const answered =
+				typeof storedWording === 'string' &&
+				storedWording.trim() !== '' &&
+				storedCountry.toLowerCase() === chapterCountry.toLowerCase()
+			if (!answered) return chapterAnswerMissing()
+		}
+
 		if (live) {
 			let recordId: string | undefined = existingRecordId || undefined
 			if (recordId) {
@@ -382,7 +401,10 @@ export const actions: Actions = {
 		// every submit. The live branch has no use for it: the Airtable automations
 		// run their own country-to-chapter lookup, and decide who hears about the
 		// signup from the chapter-share field written above.
-		const chapter = await lookupChapter(fetch, country)
+		const chapterMatch = (await getNationalGroups())?.find(
+			(group) => group.name.toLowerCase() === country.toLowerCase()
+		)
+		const chapter = chapterMatch ? { name: chapterMatch.name, leader: chapterMatch.leader } : null
 		const submission = recordStubSubmission({
 			airtable: {
 				baseId: AIRTABLE_BASE_ID,
