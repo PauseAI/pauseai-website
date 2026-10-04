@@ -15,8 +15,11 @@ import type {
 	IntentBucket,
 	IntentGroup,
 	OnboardingEmailLanguage,
+	OnboardingEmailHtmlStyle,
 	OnboardingEmailParams,
-	RenderedOnboardingEmail
+	OnboardingEmailV2Params,
+	RenderedOnboardingEmail,
+	RenderedOnboardingEmailV2
 } from './types.js'
 
 export type {
@@ -108,8 +111,61 @@ export async function renderOnboardingEmail(
 	const verificationLink = `${url}/verify?table=join&${verificationParameter}=${params.airtable_id}`
 
 	const { resolution, override } = await resolve(params)
+	const email = compose(
+		resolution,
+		override,
+		params.firstName,
+		verificationLink,
+		params.subscribed,
+		params.htmlStyle
+	)
+	return { ...email, ...(resolution.chapterShare ? {} : { from: GLOBAL_SENDER }) }
+}
+
+/**
+ * The v2 render (docs/onboarding-email-v2-contract.md): the caller has already decided the
+ * routing, language and verification link, so this reads nothing and decides none of them.
+ * Copy and chapter override follow `routing`, never the member's country.
+ */
+export function renderOnboardingEmailV2(
+	params: OnboardingEmailV2Params
+): RenderedOnboardingEmailV2 {
+	const bucket = resolveIntentBucket(params.intent)
+	const routed = params.routing.kind === 'chapter' ? params.routing : null
+	const override = routed ? getChapterOverride(routed.country, bucket) : null
+	const chapter: ChapterBlockData | null =
+		routed && (override || params.language !== 'es')
+			? { name: routed.country, displayName: routed.name, links: routed.links }
+			: null
+	const language = override ? override.language : params.language
+	const resolution: OnboardingEmailResolution = {
+		bucket,
+		group: groupOf(bucket),
+		language,
+		override: override?.name ?? null,
+		chapter,
+		chapterShare: routed !== null
+	}
+	const email = compose(
+		resolution,
+		override,
+		params.firstName,
+		params.verificationLink,
+		params.keepInformed
+	)
+	return { ...email, language, chapterOverride: resolution.override }
+}
+
+function compose(
+	resolution: OnboardingEmailResolution,
+	override: ResolvedOverride | null,
+	rawFirstName: string,
+	verificationLink: string,
+	subscribed: boolean | undefined,
+	htmlStyleOverride?: OnboardingEmailHtmlStyle
+): { subject: string; html: string; text: string } {
 	const { bucket, language, chapter, chapterShare } = resolution
-	const firstName = stripMarkdown(params.firstName)
+	const firstName = stripMarkdown(rawFirstName)
 	const content = override
 		? override.content(firstName, chapter)
 		: baseContent(language === 'es' ? 'es' : 'en', bucket, chapter, chapterShare, firstName)
@@ -120,19 +176,14 @@ export async function renderOnboardingEmail(
 		bucket,
 		verificationLink,
 		override !== null,
-		params.subscribed
+		subscribed
 	)
 
-	const htmlStyle = params.htmlStyle ?? content.htmlStyle ?? 'rich'
+	const htmlStyle = htmlStyleOverride ?? content.htmlStyle ?? 'rich'
 	const html =
 		htmlStyle === 'plain'
 			? renderHtmlPlain(blocks, language, url, content.socials)
 			: renderHtml(blocks, language, url, content.socials)
 
-	return {
-		subject: content.subject,
-		html,
-		text: renderText(blocks, content.socials),
-		...(chapterShare ? {} : { from: GLOBAL_SENDER })
-	}
+	return { subject: content.subject, html, text: renderText(blocks, content.socials) }
 }

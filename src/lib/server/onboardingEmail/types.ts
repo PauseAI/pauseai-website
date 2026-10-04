@@ -76,6 +76,48 @@ export type ChapterLink = {
 export type ChapterBlockData = {
 	/** Chapter/country display name, e.g. "France". */
 	name: string
+	/** The chapter's own name, e.g. "Pause IA", where the copy names who will be in touch.
+	 *  Unset, the copy says "PauseAI <name>". */
+	displayName?: string
 	/** The chapter's public links, in a fixed display order. May be empty. */
 	links: ChapterLink[]
+}
+
+/** Where the CRM routed the signup. The v2 render takes it as decided and never re-derives it
+ *  from the member's country or consent. */
+export type OnboardingRouting =
+	| { kind: 'global' }
+	| {
+			kind: 'chapter'
+			/** The chapter's id in the CRM. Not shown in the email. */
+			chapterId: number
+			/** The chapter's own name, e.g. "PauseAI UK". */
+			name: string
+			/** The country the chapter is filed under. Selects the chapter's own email, if it has one. */
+			country: string
+			/** The chapter's public links, labelled as in CHAPTER_LINK_LABELS. */
+			links: ChapterLink[]
+	  }
+
+/** Input to the v2 render, validated by v2Request.ts. */
+export type OnboardingEmailV2Params = {
+	firstName: string
+	/** Already resolved to a language the shared copy exists in. */
+	language: BaseLanguage
+	intent?: string
+	/** The member's Keep me informed answer. Undefined keeps the hedged newsletter line. */
+	keepInformed?: boolean
+	routing: OnboardingRouting
+	/** Embedded as given. */
+	verificationLink: string
+}
+
+export type RenderedOnboardingEmailV2 = {
+	subject: string
+	html: string
+	text: string
+	/** The language the email went out in, which a chapter's own email decides. */
+	language: OnboardingEmailLanguage
+	/** The chapter's own email in use, or null for the shared copy. */
+	chapterOverride: string | null
 }

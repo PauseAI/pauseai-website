@@ -25,6 +25,9 @@ const LINK_FIELDS: { field: keyof AirtableNationalGroup; label: string }[] = [
 	{ field: 'linktree', label: 'Linktree' }
 ]
 
+/** The labels a chapter link can carry. Chapter overrides look links up by label. */
+export const CHAPTER_LINK_LABELS: readonly string[] = LINK_FIELDS.map(({ label }) => label)
+
 // Without the field list Airtable returns every column of every row, including an
 // attachment column whose signed URLs are a kilobyte a record, on every send.
 const QUERY = {
@@ -42,7 +45,7 @@ function normalizeCountry(country: string): string {
  * chapter's real link typed without the https, and silently losing it is worse than adding it.
  * Anything else, including a javascript: or mailto: value, is dropped rather than put in an href.
  */
-function webLink(value: unknown): string {
+export function webLink(value: unknown): string {
 	const trimmed = typeof value === 'string' ? value.trim() : ''
 	const url = /^https?:\/\//i.test(trimmed)
 		? trimmed
