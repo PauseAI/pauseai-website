@@ -320,8 +320,9 @@ export const actions: Actions = {
 			}
 		}
 
+		const postedToken = getString(data, 'record_token')
 		const continuation = existingRecordId
-			? await checkContinuation(existingRecordId, getString(data, 'record_token'))
+			? await checkContinuation(existingRecordId, postedToken)
 			: null
 		// Refused as if the row were gone, never by creating one, which would bring
 		// back the duplicates the id exists to prevent.
@@ -386,10 +387,9 @@ export const actions: Actions = {
 			}
 			const recordId = written.id
 			// Only after Airtable has the row, since the CRM keys the contact on its id.
-			// Runs after the response and never changes it (docs/join-form-flow.md,
-			// "CRM intake"). The CRM checks the token the browser posted, so the server
-			// never vouches for an id itself; a create has none.
-			queueCrmIntake(platform, written, existingRecordId ? getString(data, 'record_token') : '')
+			// The CRM checks the token the browser posted, so the server never vouches
+			// for an id itself; a create has none.
+			queueCrmIntake(platform, written, existingRecordId ? postedToken : '')
 			// Only on the signup, which for /subscribe is its own form rather than a
 			// step 2. No other update re-subscribes.
 			if (newsletter && isSignup) {

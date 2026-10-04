@@ -1,7 +1,7 @@
+import type { WrittenRecord as Written } from '$lib/airtable'
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 
 const env: Record<string, string | undefined> = {}
-type Written = { id: string; createdTime: string; fields: Record<string, unknown> }
 const createRecord = vi.fn<(...args: unknown[]) => Promise<Written | undefined>>()
 const updateRecord = vi.fn<(...args: unknown[]) => Promise<Written | 'missing' | 'failed'>>()
 const getRecord =
@@ -30,7 +30,7 @@ const { onboardingMessages } = await import('$lib/components/onboarding/messages
 
 // What Airtable answers a write with: the whole row, so an update returns more
 // than it sent.
-const written = (id: string, fields: Record<string, unknown> = {}): Written => ({
+const written = (id: string, fields: Written['fields'] = {}): Written => ({
 	id,
 	createdTime: '2026-10-04T12:00:00.000Z',
 	fields: { Email: 'ada@example.org', ...fields }
@@ -39,12 +39,12 @@ const mockWrites = () => {
 	createRecord
 		.mockReset()
 		.mockImplementation((_base, _table, fields) =>
-			Promise.resolve(written('recAda', fields as Record<string, unknown>))
+			Promise.resolve(written('recAda', fields as Written['fields']))
 		)
 	updateRecord
 		.mockReset()
 		.mockImplementation((_base, _table, id, fields) =>
-			Promise.resolve(written(id as string, fields as Record<string, unknown>))
+			Promise.resolve(written(id as string, fields as Written['fields']))
 		)
 }
 

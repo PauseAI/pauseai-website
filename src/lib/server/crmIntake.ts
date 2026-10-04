@@ -18,100 +18,93 @@ export const TIMEOUT_MS = 3000
 // this side can name, so it is an error.
 const REASON = /^[a-z_]{1,40}$/
 
-export type Outcome = 'ok' | `refused:${string}` | 'error'
+type Cause = 'not_configured' | 'http' | 'timeout' | 'network' | 'unexpected_response'
 
-type Result = { outcome: Outcome; context: Record<string, unknown> }
+type Result =
+	| { outcome: 'ok' }
+	| { outcome: `refused:${string}` }
+	| {
+			outcome: 'error'
+			cause: Cause
+			httpStatus?: number
+			errorMessage?: string
+			errorName?: string
+	  }
+
+export type Outcome = Result['outcome']
 
 const isCrmIntakeEnabled = () => env.CRM_INTAKE_ENABLED === 'true'
 
 /** Never rejects: a failure is the `error` outcome, with what caused it. */
-export async function submitToCrm(
-	record: WrittenRecord,
-	token: string,
-	fetchImpl: typeof fetch = fetch
-): Promise<Result> {
+export async function submitToCrm(record: WrittenRecord, token: string): Promise<Result> {
 	const base = env.CRM_INTAKE_URL?.replace(/\/+$/, '')
 	const key = env.CRM_INTAKE_KEY
-	if (!base || !key) return { outcome: 'error', context: { cause: 'not_configured' } }
+	if (!base || !key) return { outcome: 'error', cause: 'not_configured' }
 
-	const controller = new AbortController()
-	const timer = setTimeout(() => controller.abort(), TIMEOUT_MS)
+	const signal = AbortSignal.timeout(TIMEOUT_MS)
 	try {
-		const response = await fetchImpl(base + PATH, {
+		const response = await fetch(base + PATH, {
 			method: 'POST',
 			headers: {
-				// The only header CiviCRM accepts an API key in.
+				// The CRM accepts an API key only in X-Civi-Auth; its Authorization
+				// header takes JWTs only (authx settings).
 				'X-Civi-Auth': `Bearer ${key}`,
 				'X-Requested-With': 'XMLHttpRequest',
 				'Content-Type': 'application/x-www-form-urlencoded'
 			},
 			body: new URLSearchParams({ params: JSON.stringify({ record, token }) }),
-			signal: controller.signal
+			signal
 		})
 		const body = (await response.json().catch(() => null)) as {
 			values?: { status?: unknown; reason?: unknown }[]
-			error_code?: unknown
 			error_message?: unknown
 		} | null
-		if (controller.signal.aborted) return { outcome: 'error', context: { cause: 'timeout' } }
+		if (signal.aborted) return { outcome: 'error', cause: 'timeout' }
 		if (!response.ok) {
 			// API4 masks the message, but it carries the error id the CRM log holds.
 			const message = body?.error_message
 			return {
 				outcome: 'error',
-				context: {
-					cause: 'http',
-					httpStatus: response.status,
-					errorMessage: typeof message === 'string' ? message.slice(0, 200) : undefined
-				}
+				cause: 'http',
+				httpStatus: response.status,
+				errorMessage: typeof message === 'string' ? message.slice(0, 200) : undefined
 			}
 		}
 		const row = body?.values?.[0]
-		if (row?.status === 'ok') return { outcome: 'ok', context: {} }
+		if (row?.status === 'ok') return { outcome: 'ok' }
 		if (row?.status === 'refused' && typeof row.reason === 'string' && REASON.test(row.reason)) {
-			return { outcome: `refused:${row.reason}`, context: {} }
+			return { outcome: `refused:${row.reason}` }
 		}
-		return { outcome: 'error', context: { cause: 'unexpected_response' } }
+		return { outcome: 'error', cause: 'unexpected_response' }
 	} catch (error) {
-		const cause = controller.signal.aborted ? 'timeout' : 'network'
-		return { outcome: 'error', context: { cause, errorName: (error as Error)?.name } }
-	} finally {
-		clearTimeout(timer)
+		return {
+			outcome: 'error',
+			cause: signal.aborted ? 'timeout' : 'network',
+			errorName: (error as Error)?.name
+		}
 	}
 }
 
 /**
  * Submits the record and reports anything but `ok`. Refusals and errors go to
- * Sentry as separate issues, one per refusal code, carrying the record id and
+ * Sentry as separate issues, one per outcome code, carrying the record id and
  * the outcome: never a field value (personal data) or the key. Never rejects.
  */
-export async function reportToCrm(
-	record: WrittenRecord,
-	token: string,
-	fetchImpl: typeof fetch = fetch
-): Promise<Outcome> {
-	try {
-		const { outcome, context } = await submitToCrm(record, token, fetchImpl)
-		const details = { check: 'crm-intake', recordId: record.id, outcome, ...context }
-		if (outcome === 'ok') {
-			console.log('[crm-intake] ok', details)
-			return outcome
-		}
-		const refused = outcome !== 'error'
-		console.warn('[crm-intake] not accepted', details)
-		await reportError(new Error(`CRM intake ${outcome}`), details, {
-			fingerprint: ['crm-intake', outcome],
-			level: refused ? 'warning' : 'error'
-		})
-		await flushReports()
-		return outcome
-	} catch (error) {
-		console.error('[crm-intake] reporting failed', error)
-		return 'error'
+export async function reportToCrm(record: WrittenRecord, token: string): Promise<Outcome> {
+	const result = await submitToCrm(record, token)
+	const details = { check: 'crm-intake', recordId: record.id, ...result }
+	if (result.outcome === 'ok') {
+		console.log('[crm-intake] ok', details)
+		return result.outcome
 	}
+	console.warn('[crm-intake] not accepted', details)
+	await reportError(new Error(`CRM intake ${result.outcome}`), details, {
+		fingerprint: ['crm-intake', result.outcome],
+		level: result.outcome === 'error' ? 'error' : 'warning'
+	})
+	await flushReports()
+	return result.outcome
 }
-
-type WaitUntil = { context?: { waitUntil?: (promise: Promise<unknown>) => void } }
 
 /**
  * Sends the record to the CRM after the response, when the flag is on. On
@@ -120,11 +113,12 @@ type WaitUntil = { context?: { waitUntil?: (promise: Promise<unknown>) => void }
  * `token` is the continuation token the post carried: empty on a create.
  */
 export function queueCrmIntake(
-	platform: WaitUntil | undefined,
+	platform: App.Platform | undefined,
 	record: WrittenRecord,
 	token: string
 ): void {
 	if (!isCrmIntakeEnabled()) return
+	// Started before the optional chain, which would skip it without a platform.
 	const pending = reportToCrm(record, token)
-	platform?.context?.waitUntil?.(pending)
+	platform?.context.waitUntil(pending)
 }

@@ -17,11 +17,7 @@ export type AirtableRecord<T> = {
 
 // A record as Airtable answered a write: the whole stored row, not only the
 // fields the write sent. CRM intake forwards it as is.
-export type WrittenRecord = {
-	id: string
-	createdTime: string
-	fields: FieldSet
-}
+export type WrittenRecord = AirtableRecord<FieldSet> & { createdTime: string }
 
 const toWrittenRecord = (record: Airtable.Record<FieldSet>): WrittenRecord => ({
 	id: record.id,
