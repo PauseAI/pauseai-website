@@ -3,10 +3,12 @@ import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 const env: Record<string, string | undefined> = {}
 const createRecord = vi.fn<(...args: unknown[]) => Promise<string | undefined>>()
 const updateRecord = vi.fn<(...args: unknown[]) => Promise<'updated' | 'missing' | 'failed'>>()
+const getRecord =
+	vi.fn<(...args: unknown[]) => Promise<Record<string, unknown> | 'missing' | 'failed'>>()
 const reportError = vi.fn<(error: unknown, context?: Record<string, unknown>) => Promise<void>>()
 
 vi.mock('$env/dynamic/private', () => ({ env }))
-vi.mock('$lib/airtable', () => ({ createRecord, updateRecord }))
+vi.mock('$lib/airtable', () => ({ createRecord, getRecord, updateRecord }))
 vi.mock('$lib/server/turnstile-verify', () => ({
 	checkNotSpam: () => Promise.resolve({ drop: false })
 }))
@@ -15,23 +17,54 @@ vi.mock('$lib/server/sentry', () => ({ reportError }))
 
 const { actions } = await import('./+page.server.js')
 const { TOKEN_TTL_SECONDS } = await import('$lib/server/onboardingContinuation')
+const { chapterQuestion, chapterShareWording } =
+	await import('$lib/components/onboarding/chapterShare')
+const { onboardingMessages } = await import('$lib/components/onboarding/messages')
 
 type Result = { status?: number; data?: Record<string, unknown> } & Record<string, unknown>
+
+// What /api/national-groups answers, which both the forms and the action read.
+let nationalGroups: Response | Error
+const nationalGroupsFetch = vi.fn(() =>
+	nationalGroups instanceof Error
+		? Promise.reject(nationalGroups)
+		: Promise.resolve(nationalGroups.clone())
+)
+const CHAPTERS = ['France', 'Germany', 'United Kingdom'].map((name) => ({ name, leader: 'Lead' }))
 
 async function submit(fields: Record<string, string>): Promise<Result> {
 	const body = new FormData()
 	for (const [name, value] of Object.entries(fields)) body.set(name, value)
 	const url = new URL('https://pauseai.info/embed/onboarding-form?/submit')
 	const request = new Request(url, { method: 'POST', body })
-	return (await actions.submit({ request, url, fetch } as never)) as Result
+	return (await actions.submit({ request, url, fetch: nationalGroupsFetch } as never)) as Result
 }
 
-const WORDING_YES_DE =
-	'Share your details with PauseAI Deutschland?\nIf you say yes, we share your signup details with PauseAI Deutschland.\n[chosen] Yes, share my details with PauseAI Deutschland'
-const WORDING_YES_PT =
-	'Share your details with a PauseAI chapter in Portugal when one starts?\nIf you say yes and a chapter starts in Portugal, we share your signup details with it.\n[chosen] Yes, share my details with the chapter when it starts'
-const WORDING_UK =
-	'Share your details with PauseAI United Kingdom?\nPauseAI United Kingdom runs local events and actions.\n[chosen] No, only PauseAI Global'
+// The wording the form renders, built the way the form builds it.
+function wording(
+	form: 'join' | 'subscribe',
+	country: string,
+	chapter: string | null,
+	answer: 'yes' | 'no',
+	locale = 'en'
+): string {
+	return chapterShareWording(
+		chapterQuestion(onboardingMessages[locale], form, country, chapter)!,
+		answer
+	)
+}
+
+const WORDING_YES_DE = wording('join', 'Germany', 'PauseAI Deutschland', 'yes')
+const WORDING_YES_PT = wording('join', 'Portugal', null, 'yes')
+const WORDING_UK = wording('join', 'United Kingdom', 'PauseAI UK', 'no')
+
+// A stored Members row's chapter fields, as getRecord returns them.
+const row = (Country: string, permission: boolean, chapterWording: string) => ({
+	Country,
+	'GDPR chapter share permission': permission,
+	'GDPR chapter share wording': chapterWording
+})
+const UK_ROW = row('United Kingdom', false, WORDING_UK)
 
 const signup = {
 	full_name: 'Ada Lovelace',
@@ -60,6 +93,8 @@ describe('onboarding submit: continuation token', () => {
 		env.ONBOARDING_CONTINUATION_SECRET = 'test-secret'
 		createRecord.mockReset().mockResolvedValue('recAda')
 		updateRecord.mockReset().mockResolvedValue('updated')
+		getRecord.mockReset().mockResolvedValue(UK_ROW)
+		nationalGroups = Response.json(CHAPTERS)
 		reportError.mockClear()
 		vi.spyOn(console, 'warn').mockImplementation(() => {})
 	})
@@ -194,6 +229,8 @@ describe('onboarding submit: chapter sharing', () => {
 		env.ONBOARDING_CONTINUATION_SECRET = 'test-secret'
 		createRecord.mockReset().mockResolvedValue('recAda')
 		updateRecord.mockReset().mockResolvedValue('updated')
+		getRecord.mockReset().mockResolvedValue(UK_ROW)
+		nationalGroups = Response.json(CHAPTERS)
 		reportError.mockClear()
 		vi.spyOn(console, 'warn').mockImplementation(() => {})
 	})
@@ -218,36 +255,74 @@ describe('onboarding submit: chapter sharing', () => {
 		expect(createRecord).not.toHaveBeenCalled()
 	})
 
-	it('refuses a wording that does not end with an option offered for the answer', async () => {
-		for (const [answer, wording] of [
-			['yes', WORDING_UK],
-			['no', WORDING_YES_DE],
-			['no', 'No, only PauseAI Global'],
-			['yes', `${WORDING_YES_DE}\nextra line`]
-		]) {
+	it('refuses a wording other than the one the form renders for the answer and country', async () => {
+		const germany = { ...signup, country: 'Germany', city: 'Berlin' }
+		for (const [fields, answer, posted] of [
+			[signup, 'yes', WORDING_UK],
+			[signup, 'no', WORDING_YES_DE],
+			[signup, 'no', 'No, only PauseAI Global'],
+			[germany, 'yes', `${WORDING_YES_DE}\nextra line`],
+			// Another country's wording.
+			[signup, 'yes', WORDING_YES_DE],
+			// A fabricated question ending in an option the form offers.
+			[
+				germany,
+				'yes',
+				'Can we sell your details?\nWe will.\n[chosen] Yes, share my details with PauseAI Deutschland'
+			],
+			[signup, 'no', 'Anything at all\n[chosen] No, only PauseAI Global'],
+			// Another chapter's name in an otherwise real wording.
+			[germany, 'yes', wording('join', 'Germany', 'PauseAI Evil', 'yes')],
+			// /subscribe's wording posted by /join.
+			[germany, 'yes', wording('subscribe', 'Germany', 'PauseAI Deutschland', 'yes')]
+		] as const) {
 			const refused = await submit({
-				...signup,
+				...fields,
 				chapter_share: answer,
-				chapter_share_wording: wording
+				chapter_share_wording: posted
 			})
-			expect(refused.status, wording).toBe(400)
+			expect(refused.status, posted).toBe(400)
 			expect(refused.data?.message).toBe(CHAPTER_ANSWER_MISSING)
 		}
 		expect(createRecord).not.toHaveBeenCalled()
 	})
 
-	it('accepts a wording shown in another language', async () => {
-		const created = await submit({
-			...signup,
-			chapter_share: 'no',
-			chapter_share_wording:
-				'Deine Daten mit PauseAI UK teilen?\nText.\n[chosen] Nein, nur PauseAI Global'
-		})
-		expect(created).toMatchObject({ success: true })
+	it('accepts the wording in any locale, with CRLF line breaks, or as the no-chapter variant', async () => {
+		for (const posted of [
+			wording('join', 'United Kingdom', 'PauseAI UK', 'no', 'de'),
+			WORDING_UK.replace(/\n/g, '\r\n'),
+			// Shown when the form's own chapter lookup failed.
+			wording('join', 'United Kingdom', null, 'no', 'fr')
+		]) {
+			const created = await submit({
+				...signup,
+				chapter_share: 'no',
+				chapter_share_wording: posted
+			})
+			expect(created).toMatchObject({ success: true })
+			expect(writtenFields(createRecord)['GDPR chapter share wording']).toBe(
+				posted.replace(/\r\n/g, '\n')
+			)
+		}
+	})
+
+	it('asks to try again when the chapter list cannot be read, writing nothing', async () => {
+		vi.spyOn(console, 'error').mockImplementation(() => {})
+		for (const failure of [new Error('down'), new Response('', { status: 500 })]) {
+			nationalGroups = failure
+			const refused = await submit(signup)
+			expect(refused.status).toBe(502)
+		}
+		expect(createRecord).not.toHaveBeenCalled()
 	})
 
 	it('writes the box and the wording from a Yes or a No, in the same create', async () => {
-		await submit({ ...signup, chapter_share: 'yes', chapter_share_wording: WORDING_YES_DE })
+		await submit({
+			...signup,
+			country: 'Germany',
+			chapter_share: 'yes',
+			chapter_share_wording: WORDING_YES_DE
+		})
 		expect(createRecord).toHaveBeenCalledOnce()
 		expect(writtenFields(createRecord)).toMatchObject({
 			'GDPR chapter share permission': true,
@@ -313,21 +388,101 @@ describe('onboarding submit: chapter sharing', () => {
 		}
 	})
 
-	it('posts no chapter fields on an update without an answer: the do-more step and a resumed row', async () => {
+	it('posts no chapter fields on an update without an answer for a row answered for that country', async () => {
 		const created = await submit(signup)
 		const token = String(created.recordToken)
-		// The /subscribe "do more" step.
+		// The /subscribe "do more" step: /join's form, a /subscribe answer.
+		getRecord.mockResolvedValueOnce(
+			row('Germany', true, wording('subscribe', 'Germany', 'PauseAI Deutschland', 'yes'))
+		)
 		await submit({ ...update(token), intent: 'Volunteer', country: 'Germany' })
-		// A /join resume of a row that already has an answer.
+		// A /join resume of a row that already has an answer, in another language.
+		getRecord.mockResolvedValueOnce(
+			row('United Kingdom', false, wording('join', 'United Kingdom', 'PauseAI UK', 'no', 'es'))
+		)
 		const unasked: Record<string, string> = { ...signup }
 		delete unasked.chapter_share
 		delete unasked.chapter_share_wording
 		await submit({ ...unasked, ...update(token), resumed: '1' })
-		expect(updateRecord).toHaveBeenCalledTimes(2)
+		// An update posting no country, for the row's own.
+		await submit(update(token))
+		expect(updateRecord).toHaveBeenCalledTimes(3)
 		for (const call of updateRecord.mock.calls) {
 			const fields = call[call.length - 1] as Record<string, unknown>
 			for (const field of CHAPTER_FIELDS) expect(fields).not.toHaveProperty(field)
 		}
+	})
+
+	it('refuses an update without an answer for a country the row was not asked about', async () => {
+		const created = await submit(signup)
+		const token = String(created.recordToken)
+		const resumedFrance = {
+			...update(token),
+			country: 'France',
+			resumed: '1',
+			agree_gdpr: 'on'
+		}
+		const unasked = [
+			// A US row, never asked, resumed for France.
+			row('United States', false, ''),
+			// A row from before the question.
+			row('France', false, ''),
+			// Germany's Yes, now in France.
+			row('Germany', true, WORDING_YES_DE),
+			// France's country with Germany's wording.
+			row('France', true, WORDING_YES_DE),
+			// A stored Yes whose wording is a No.
+			row('France', true, wording('join', 'France', 'PauseAI France', 'no')),
+			// A wording that only ends like the form's.
+			row('France', false, 'Something else\n[chosen] No, only PauseAI Global')
+		]
+		for (const stored of unasked) {
+			getRecord.mockResolvedValueOnce(stored)
+			const refused = await submit(resumedFrance)
+			expect(refused.status, JSON.stringify(stored)).toBe(400)
+			expect(refused.data?.message).toBe(CHAPTER_ANSWER_MISSING)
+		}
+		// The volunteer step after the country was changed without an answer.
+		getRecord.mockResolvedValueOnce(row('Germany', true, WORDING_YES_DE))
+		const volunteer = await submit({ ...update(token), country: 'France', intent: 'Volunteer' })
+		expect(volunteer.status).toBe(400)
+		expect(updateRecord).not.toHaveBeenCalled()
+	})
+
+	it("checks an update that posts no country against the row's country", async () => {
+		const created = await submit(signup)
+		const token = String(created.recordToken)
+		// A US row: any posted answer is dropped and both fields cleared.
+		getRecord.mockResolvedValueOnce(row('United States', false, ''))
+		await submit({ ...update(token), chapter_share: 'yes', chapter_share_wording: WORDING_YES_DE })
+		expect(writtenFields(updateRecord)).toMatchObject(CLEARED)
+		expect(writtenFields(updateRecord)).not.toHaveProperty('Country')
+		// A Germany row: the answer must be Germany's.
+		getRecord.mockResolvedValueOnce(row('Germany', false, ''))
+		const refused = await submit({
+			...update(token),
+			chapter_share: 'yes',
+			chapter_share_wording: WORDING_UK
+		})
+		expect(refused.status).toBe(400)
+		getRecord.mockResolvedValueOnce(row('Germany', false, ''))
+		await submit({ ...update(token), chapter_share: 'yes', chapter_share_wording: WORDING_YES_DE })
+		expect(writtenFields(updateRecord)).toMatchObject({
+			'GDPR chapter share permission': true,
+			'GDPR chapter share wording': WORDING_YES_DE
+		})
+		expect(updateRecord).toHaveBeenCalledTimes(2)
+	})
+
+	it('treats a row it cannot read as gone, or as an outage', async () => {
+		const created = await submit(signup)
+		getRecord.mockResolvedValueOnce('missing')
+		const gone = await submit(update(String(created.recordToken)))
+		expect(gone.status).toBe(410)
+		getRecord.mockResolvedValueOnce('failed')
+		const failed = await submit(update(String(created.recordToken)))
+		expect(failed.status).toBe(502)
+		expect(updateRecord).not.toHaveBeenCalled()
 	})
 
 	it('writes an answer posted on an update that showed the question', async () => {
@@ -350,7 +505,14 @@ describe('onboarding submit: chapter sharing', () => {
 		const cases: [Record<string, string>, string][] = [
 			[signup, 'October 2026 onboarding flow'],
 			[{ ...signup, mode: 'browse', intent: 'Act now' }, 'October 2026 onboarding flow'],
-			[{ ...signup, subscribe_form: '1' }, 'October 2026 subscribe form'],
+			[
+				{
+					...signup,
+					subscribe_form: '1',
+					chapter_share_wording: wording('subscribe', 'United Kingdom', 'PauseAI UK', 'no')
+				},
+				'October 2026 subscribe form'
+			],
 			[usSignup, 'October 2026 onboarding flow (US)'],
 			[{ ...usSignup, mode: 'browse', intent: 'Act now' }, 'October 2026 onboarding flow (US)'],
 			[{ ...usSignup, subscribe_form: '1' }, 'October 2026 subscribe form (US)']

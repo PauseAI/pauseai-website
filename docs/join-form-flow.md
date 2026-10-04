@@ -230,7 +230,10 @@ that country.
   country now selected; otherwise the earlier answer stands and the post carries
   none. A row with no answer (a US row, or one from before the question), or one
   answered for another country, is asked again, and the update writes the new
-  answer and wording. Step 1 and the browse form, which pick the row up only
+  answer and wording. The form takes the answer each successful post leaves on
+  the row as the one it holds, so after answering for another country, Back and
+  the first country asks again; the server checks the same thing against the
+  row itself (see "Chapter sharing"). Step 1 and the browse form, which pick the row up only
   when they submit, read the stored row as soon as the email is typed to decide
   whether to show the question. A picked-up row's answer counts only while the
   email is the one it was picked up for: after Back and another email, which
@@ -293,10 +296,10 @@ isn't available at render time.
 
 ### Supporting API routes
 
-| Route                      | File                                        | Purpose                                                                                                                                                                                        |
-| -------------------------- | ------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `GET /api/onboarding-mode` | `src/routes/api/onboarding-mode/+server.ts` | Returns `{ live: boolean }` so the prerendered form can discover the runtime mode.                                                                                                             |
-| `GET /api/national-groups` | `src/routes/api/national-groups/+server.ts` | Returns the list of national groups. Used by the components (whether the country has a chapter, for the chapter question and the lead-role copy) and the submit action (stub inspection only). |
+| Route                      | File                                        | Purpose                                                                                                                                                                                                                                      |
+| -------------------------- | ------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `GET /api/onboarding-mode` | `src/routes/api/onboarding-mode/+server.ts` | Returns `{ live: boolean }` so the prerendered form can discover the runtime mode.                                                                                                                                                           |
+| `GET /api/national-groups` | `src/routes/api/national-groups/+server.ts` | Returns the list of national groups. Used by the components (whether the country has a chapter, for the chapter question and the lead-role copy) and the submit action (to rebuild the chapter question's wording, and for stub inspection). |
 
 ### How a submission travels
 
@@ -495,17 +498,28 @@ or the chapter's own name from `CHAPTER_DISPLAY_NAMES` in `chapterShare.ts`
 waits for that lookup, and a failed lookup, or one taking over five seconds,
 counts as no chapter.
 
+The country an answer is for is the posted `country`, or, on an update that
+posts none, the one the row holds. On an update the action reads the row from
+Airtable first (after the continuation token check), to know that country and
+the answer the row holds.
+
 | case                                                                                                                                  | what is written                                                                                                                                                                                                     |
 | ------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | create outside the United States                                                                                                      | the box from the answer (ticked for Yes) and the wording; a create without an answer is refused with a 400                                                                                                          |
-| any post with country United States (create or update)                                                                                | the box unticked and the wording empty: the question is not shown there, as PauseAI US is not a chapter, and a row whose country changed to the US after answering keeps no answer naming another country's chapter |
+| any post whose country is United States (create or update)                                                                            | the box unticked and the wording empty: the question is not shown there, as PauseAI US is not a chapter, and a row whose country changed to the US after answering keeps no answer naming another country's chapter |
 | update that carries an answer (Back to step 1 and resubmit, or a resumed row with no answer for this country yet)                     | the box and the wording from the answer                                                                                                                                                                             |
-| update that does not (the volunteer step, the `/subscribe` "do more" step, a resumed row that already has an answer for this country) | neither field, so the earlier answer stands                                                                                                                                                                         |
+| update that does not (the volunteer step, the `/subscribe` "do more" step, a resumed row that already has an answer for this country) | neither field, so the earlier answer stands, if the row holds one for this country; otherwise refused with a 400                                                                                                    |
 
-The server cannot see whether a resumed row has an answer, so it requires one
-only on a create. That is enough for what the CRM relies on: outside the US, an
-unticked box on a row created by this form (by `Signup source`) is a No, not a
-question never asked.
+The row holds an answer for a country when its stored wording is one the forms
+render for that country and for the stored box (a Yes wording with the box
+ticked, a No wording without), in any locale and from either form, since the
+`/subscribe` continuation and a resumed `/join` both keep an answer given on the
+other form. A row with no wording (a US row, or one from before the question),
+or one answered for another country, has none. So outside the US an unticked box
+on a row created by this form (by `Signup source`) is a No, not a question never
+asked, whichever post last changed the row's country. In stub mode there is no
+row to read, so an update without an answer is let through, as it writes
+nothing.
 
 The answer is not a mail permission. Keep me informed is the only source of
 chapter mail and is never pre-ticked; after a Yes with Volunteer or Lead picked
@@ -564,11 +578,15 @@ an update is in "Create versus update" above.
   accepted rather than rejected.
 - A chapter answer (`chapter_share` of `yes` or `no`, with a
   `chapter_share_wording`) is required on a create outside the United States,
-  else 400. Whenever an answer is posted, its wording must end with
-  `[chosen] ` and an option the form offers for that answer, in any locale and
-  either form, with any chapter name (`wordingMatchesAnswer` in
-  `chapterShare.ts`), else the same 400. The rest of the wording is not checked. For the United States any posted answer is ignored and both fields
-  are cleared. See "Chapter sharing".
+  and on an update unless the row already holds an answer for the country, else 400. Whenever an answer is posted, its wording, line endings normalised to LF,
+  must be exactly one the posting form renders for that country and answer
+  (`possibleWordings` in `chapterShare.ts`), else the same 400: `/subscribe`'s
+  variant when `subscribe_form=1`, `/join`'s otherwise, in any locale, naming
+  the chapter the action finds for the country in `/api/national-groups` (with
+  `chapterName`, as the forms do) or as the no-chapter variant, which the forms
+  show when their own lookup fails. If the action cannot read that list it
+  answers 502 and asks for a retry. For the United States any posted answer is
+  ignored and both fields are cleared. See "Chapter sharing".
 - GDPR consent (`agree_gdpr`) required **only on the create path** — step-3
   volunteer updates are exempt because consent was captured at step 2.
   `/subscribe` posts it as a hidden field, since signing up on that form is

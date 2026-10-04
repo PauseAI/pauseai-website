@@ -6,6 +6,8 @@ import { asksChapterQuestion, type ChapterAnswer } from './options'
 
 const CHOSEN_PREFIX = '[chosen] '
 
+export type ChapterForm = 'join' | 'subscribe'
+
 export type ChapterQuestion = { heading: string; body: string; yes: string; no: string }
 
 // The National Chapters table names a chapter only by its country, so a chapter
@@ -31,7 +33,7 @@ export function chapterName(country: string, chapterCountries: string[]): string
 // chapter as a sender; /join leaves chapter mail to Keep me informed.
 export function chapterQuestion(
 	msgs: OnboardingMessages,
-	form: 'join' | 'subscribe',
+	form: ChapterForm,
 	country: string,
 	chapter: string | null
 ): ChapterQuestion | null {
@@ -66,30 +68,25 @@ export function chapterShareWording(question: ChapterQuestion, answer: ChapterAn
 	return `${question.heading}\n${question.body}\n${CHOSEN_PREFIX}${answer === 'yes' ? question.yes : question.no}`
 }
 
-// The option lines a wording may end with, per answer: every locale, both forms,
-// with any chapter name. The server checks the posted wording against these, so a
-// stored wording always ends with an option the form offers for the stored answer.
-const ANY_CHAPTER = '\u0000'
-const escapeRegExp = (text: string) => text.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
-const chosenLine = (option: string) =>
-	new RegExp(
-		`^${escapeRegExp(`${CHOSEN_PREFIX}${option}`).replace(escapeRegExp(ANY_CHAPTER), '.+')}$`
+// Every wording a form shows for `country` and stores with `answer`: each locale,
+// with the chapter's name, or as the none-yet variant, which the forms also show
+// when their chapter lookup fails. The server stores a posted wording only if it
+// is one of these, and lets a stored one stand only while it still is.
+export function possibleWordings(
+	forms: readonly ChapterForm[],
+	country: string,
+	chapter: string | null,
+	answer: ChapterAnswer
+): string[] {
+	const names = chapter ? [chapter, null] : [null]
+	return Object.values(onboardingMessages).flatMap((msgs) =>
+		forms.flatMap((form) =>
+			names.flatMap((name) => {
+				const question = chapterQuestion(msgs, form, country, name)
+				return question ? [chapterShareWording(question, answer)] : []
+			})
+		)
 	)
-const CHOSEN_LINES: Record<ChapterAnswer, RegExp[]> = {
-	yes: Object.values(onboardingMessages).flatMap((msgs) =>
-		[
-			msgs.onboarding_chapter_yes(ANY_CHAPTER),
-			msgs.onboarding_chapter_subscribe_yes(ANY_CHAPTER),
-			msgs.onboarding_chapter_none_yes,
-			msgs.onboarding_chapter_none_subscribe_yes
-		].map(chosenLine)
-	),
-	no: Object.values(onboardingMessages).map((msgs) => chosenLine(msgs.onboarding_chapter_no))
-}
-
-export function wordingMatchesAnswer(wording: string, answer: ChapterAnswer): boolean {
-	const lastLine = wording.split('\n').at(-1) ?? ''
-	return CHOSEN_LINES[answer].some((pattern) => pattern.test(lastLine))
 }
 
 // The answer the copy below the question follows. Where the question is not asked
