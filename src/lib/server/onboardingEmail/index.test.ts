@@ -163,9 +163,15 @@ describe('renderOnboardingEmail', () => {
 			const volunteer = await render(country, 'Volunteer')
 			expect(volunteer.subject).toContain('Bienvenido')
 			expect(volunteer.text).not.toContain('PauseAI Spain')
-			const nonVolunteer = await render(country, 'None')
-			expect(nonVolunteer.subject).toBe('Thanks for signing up to PauseAI')
-			expect(nonVolunteer.text).not.toContain('PauseAI chapter in')
+			const none = await render(country, 'None')
+			expect(none.subject).toContain('Bienvenido')
+			expect(none.text).not.toContain('PauseAI chapter in')
+			expect(none.text).toContain('Si te suscribiste a nuestra lista de correo')
+			expect(none.text).not.toContain('Primeros pasos')
+			const actNow = await render(country, 'Act now')
+			expect(actNow.subject).toContain('Bienvenido')
+			expect(actNow.text).toContain('Si estás buscando un paso a seguir ahora mismo')
+			expect(actNow.text).toContain('https://pauseai.info/action')
 		}
 	})
 
