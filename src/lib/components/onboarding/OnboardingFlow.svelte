@@ -20,6 +20,7 @@
 	import ActionCards from './ActionCards.svelte'
 	import ChapterShareQuestion from './ChapterShareQuestion.svelte'
 	import Stepper from './Stepper.svelte'
+	import CheckInbox from './CheckInbox.svelte'
 	import { getMessages } from './i18n.svelte'
 	import {
 		chapterName,
@@ -357,7 +358,7 @@
 						msgs.onboarding_step_about,
 						msgs.onboarding_step_intent,
 						msgs.onboarding_step_volunteer_form,
-						msgs.onboarding_step_confirmed
+						msgs.onboarding_step_check_inbox
 					]
 				: intent === 'lead'
 					? [
@@ -368,7 +369,7 @@
 					: [
 							msgs.onboarding_step_about,
 							msgs.onboarding_step_intent,
-							msgs.onboarding_step_confirmed
+							msgs.onboarding_step_check_inbox
 						]
 		// The /subscribe continuation begins after the subscribe form, so it never
 		// showed an "About you" step — drop it and start the stepper at Intent.
@@ -989,11 +990,7 @@
 		{:else if step === 3 && !intent}
 			<!-- Path A: confirmation -->
 			<div class="confirmation">
-				<div class="checkmark">✓</div>
-				{#if !isContinuation}
-					<!-- As on path B: the continuation already thanked them for signing up. -->
-					<h2>{msgs.onboarding_confirm_a_title}</h2>
-				{/if}
+				<CheckInbox {msgs} />
 				{@render checkboxConfirmations()}
 				{@render nextStepBlock()}
 				{@render confirmationFooter()}
@@ -1002,12 +999,7 @@
 			<!-- Path B: act now (contact confirmation or browse landing) -->
 			{#if mode === 'contact'}
 				<div class="confirmation">
-					<div class="checkmark">✓</div>
-					{#if !isContinuation}
-						<!-- The continuation already thanked them for signing up; don't
-						     thank them for joining a second time. -->
-						<h2>{msgs.onboarding_confirm_b_title}</h2>
-					{/if}
+					<CheckInbox {msgs} />
 					<p>{msgs.onboarding_confirm_b_sub}</p>
 					{@render checkboxConfirmations()}
 				</div>
@@ -1020,8 +1012,8 @@
 				</div>
 				{#if browseSignedUp}
 					<div class="inline-confirmation">
-						{msgs.onboarding_browse_signed_up}
-						{keepInformedConfirmation(msgs, shownAnswer, chapter)}
+						<CheckInbox {msgs} />
+						<p>{keepInformedConfirmation(msgs, shownAnswer, chapter)}</p>
 					</div>
 				{:else}
 					<div class="keep-informed">
@@ -1352,6 +1344,9 @@
 			</form>
 		{:else if step === 3 && intent === 'lead'}
 			<!-- Path D: lead -->
+			<div class="lead-check-inbox">
+				<CheckInbox {msgs} />
+			</div>
 			<h2>{msgs.onboarding_lead_title(leadRole)}</h2>
 			<p class="role-meta"><em>{msgs.onboarding_lead_meta}</em></p>
 			{@render checkboxConfirmations()}
@@ -1409,9 +1404,11 @@
 		{:else if step === 4 && intent === 'volunteer'}
 			<!-- Path C: confirmation -->
 			<div class="confirmation">
-				<div class="checkmark">✓</div>
-				<h2>{msgs.onboarding_confirm_volunteer_title}</h2>
-				<p>{msgs.onboarding_confirm_volunteer_sub}</p>
+				<CheckInbox {msgs} />
+				<p>
+					<strong>{msgs.onboarding_confirm_volunteer_title}</strong>
+					{msgs.onboarding_confirm_volunteer_sub}
+				</p>
 				{@render checkboxConfirmations()}
 				{@render nextStepBlock()}
 				{@render confirmationFooter()}
@@ -1845,18 +1842,8 @@
 		margin-right: auto;
 	}
 
-	.checkmark {
-		width: 3.5rem;
-		height: 3.5rem;
-		border-radius: 50%;
-		background-color: var(--brand);
-		color: var(--bg);
-		font-size: 2rem;
-		font-weight: bold;
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		margin: 0 auto 1rem auto;
+	.lead-check-inbox {
+		margin-bottom: 2rem;
 	}
 
 	.confirmation-footer {
@@ -1956,10 +1943,15 @@
 	.inline-confirmation {
 		border: 2px solid var(--brand);
 		border-radius: 16px;
-		padding: 1rem 1.25rem;
+		padding: 1.5rem 1.25rem;
 		margin: 1rem 0 1.5rem 0;
 		background-color: var(--bg);
-		font-weight: 500;
+		text-align: center;
+	}
+
+	.inline-confirmation p {
+		max-width: 32rem;
+		margin: 0 auto;
 	}
 
 	.role-meta {
