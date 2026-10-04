@@ -29,7 +29,7 @@ async function submit(fields: Record<string, string>): Promise<Result> {
 const WORDING_YES_DE =
 	'Share your details with PauseAI Deutschland?\nIf you say yes, we share your signup details with PauseAI Deutschland.\n[chosen] Yes, share my details with PauseAI Deutschland'
 const WORDING_YES_PT =
-	'Share your details with a PauseAI chapter in Portugal when one starts?\nNothing is shared until a chapter starts in Portugal.\n[chosen] Yes, share my details with the chapter when it starts'
+	'Share your details with a PauseAI chapter in Portugal when one starts?\nIf you say yes and a chapter starts in Portugal, we share your signup details with it.\n[chosen] Yes, share my details with the chapter when it starts'
 const WORDING_UK =
 	'Share your details with PauseAI United Kingdom?\nPauseAI United Kingdom runs local events and actions.\n[chosen] No, only PauseAI Global'
 
