@@ -1352,6 +1352,9 @@
 			</form>
 		{:else if step === 3 && intent === 'lead'}
 			<!-- Path D: lead -->
+			<div class="confirmation lead-check-inbox">
+				{@render checkInbox()}
+			</div>
 			<h2>{msgs.onboarding_lead_title(leadRole)}</h2>
 			<p class="role-meta"><em>{msgs.onboarding_lead_meta}</em></p>
 			{@render checkboxConfirmations()}
@@ -1845,6 +1848,10 @@
 		max-width: 32rem;
 		margin-left: auto;
 		margin-right: auto;
+	}
+
+	.lead-check-inbox {
+		margin-bottom: 2rem;
 	}
 
 	.checkmark {
