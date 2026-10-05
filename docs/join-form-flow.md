@@ -430,10 +430,13 @@ On an update:
   `/subscribe`, `October 2026 onboarding flow` otherwise, each with ` (US)`
   appended when the country is `United States`, which is not asked the chapter
   question. Rows created before the question keep their `June 2026 …` values.
-  The values are matched by name in the CRM and in Airtable (see "Chapter
-  sharing"), so a new one needs those changed in the same release. Without the
-  "create only" rule the volunteer step, which carries no subscribe marker,
-  would rewrite a subscribe row as a join row.
+  It is a label: the CRM does not match it (see "Chapter sharing" for what
+  Airtable does). Without the "create only" rule the volunteer step, which
+  carries no subscribe marker, would rewrite a subscribe row as a join row.
+- `Form version` is written next to it, also create-only: the number
+  `FORM_VERSION` in `options.ts` (2), on every row either form creates. It names
+  the rules the CRM applies to the row (see "Chapter sharing"), so an update must
+  not move it.
 - `Source page` is written next to it, also create-only, recording where the
   signup came from. `resolveSourcePage` takes the first of: the hidden `source`
   field (an embed's `?source=`, or the host page URL the embed wrapper read from
@@ -467,7 +470,7 @@ create.
 Target: base `appWPTGqZmUcs3NWu`, table `tblL1icZBhTV1gQ9o` ("Members").
 
 **Step 2 / browse signup / subscribe form (create):** `Full name`, `Email`,
-`Country`, `City`, `Intent`, `Signup source`, `Source page` (when resolved),
+`Country`, `City`, `Intent`, `Signup source`, `Form version`, `Source page` (when resolved),
 `Email subscription` (keep_informed), `Data privacy policy agreed`,
 `GDPR chapter share permission` and `GDPR chapter share wording` (cleared to
 unticked and empty in the United States), plus `Zip code` when `country` is
@@ -540,8 +543,8 @@ question. A row with no wording (a US row, or one from before the question), or
 whose country is another, has none. Since only the country is compared, a staff
 edit of a row's `Country` alone, leaving its wording, makes the row count as
 answered for the new country. So outside the US an unticked box
-on a row created by this form (by `Signup source`) is a No, not a question never
-asked, whichever post last changed the row's country. In stub mode there is no
+on a row created by this form is a No (it carries the wording), not a question
+never asked, whichever post last changed the row's country. In stub mode there is no
 row to read, so an update without an answer is let through, as it writes
 nothing.
 
@@ -550,13 +553,24 @@ chapter mail and is never pre-ticked; after a Yes with Volunteer or Lead picked
 and Keep me informed unticked, step 2 points at it. Volunteer and Lead "will be
 in touch by email" means one-to-one follow-up about their request.
 
-The CRM matches the `Signup source` values by name, so a new value needs its
-lists changed in the same release: `OPTIN_FORM_SOURCES` lists all four,
-`CHAPTER_SHARE_AUTHORITATIVE_SOURCES` the two non-US ones. Airtable does not list
-them. The roster formula `Excluded from chapter roster` reads the stored wording,
-which the form writes only when it asked, and the "Subscriber becomes
-Volunteer/Lead" trigger matches the phrase "subscribe form", which every /subscribe
-value must keep.
+The CRM matches no `Signup source` value. It reads two recorded facts instead:
+whether the question was asked is the stored `GDPR chapter share wording`, which
+the form writes only where it showed the question and clears where it is hidden
+(an unticked box with a wording is a No, without one never asked), and which
+rules the row follows is `Form version`. A version at least the CRM's
+`CRM_PauseaiCore_MemberRow::CURRENT_FORM_VERSION` (2) gets the current rules: the
+newsletter only on Keep me informed, the chapter answer and the memberships
+written at signup by intake, and a chapter only on a recorded Yes. A row without
+one gets the legacy rules, except one carrying an October 2026 label, which
+predates the field and counts as version 2 (a closed list in the CRM). So a new
+form or a new `Signup source` label needs no CRM change. Bump `FORM_VERSION`, together with the CRM's constant, only when the
+rules a new row follows change. The Members field `Form version` (number,
+integer) must exist before a deploy that writes it, since Airtable refuses a
+write naming an unknown field. Airtable does not list the sources either. The
+roster formula `Excluded from chapter roster` reads the stored wording, which the
+form writes only when it asked, and the "Subscriber becomes Volunteer/Lead"
+trigger matches the phrase "subscribe form", which every /subscribe value must
+keep.
 
 This field is not only stored. The Airtable automations on the Members table
 read it to decide whether a signup is handed to their national chapter's leader

@@ -11,10 +11,16 @@ export const INTENTS = ['None', 'Keep informed', 'Act now', 'Volunteer', 'Lead']
 export type Intent = (typeof INTENTS)[number]
 export type IntentKey = 'act-now' | 'volunteer' | 'lead'
 
-// `Signup source`, stamped on a create. The CRM matches these by name: its
-// OPTIN_FORM_SOURCES lists all four and its CHAPTER_SHARE_AUTHORITATIVE_SOURCES the two
-// non-US ones (an unticked chapter-share box from them is a recorded No), so a new value
-// needs both changed in the same release. Airtable's "Subscriber becomes Volunteer/Lead"
+// `Form version`, stamped on a create next to `Signup source`: which rules the CRM
+// applies to the row (the newsletter only on Keep me informed, the chapter answer and
+// memberships written at signup, a chapter only on a recorded Yes). Bump it together
+// with the CRM's CRM_PauseaiCore_MemberRow::CURRENT_FORM_VERSION, and only when the rules
+// a new row follows change; a new form, label or wording needs no bump.
+export const FORM_VERSION = 2
+
+// `Signup source`, stamped on a create: a label for people and Airtable, which the CRM
+// does not match (it reads FORM_VERSION, and the stored chapter-share wording for
+// whether the question was asked). Airtable's "Subscriber becomes Volunteer/Lead"
 // automation matches every /subscribe source by the phrase "subscribe form", so a
 // /subscribe value must keep it. A US signup gets its own value because it is not asked
 // the chapter question.

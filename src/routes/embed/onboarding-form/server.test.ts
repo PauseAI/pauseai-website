@@ -26,6 +26,7 @@ const { actions } = await import('./+page.server.js')
 const { TOKEN_TTL_SECONDS } = await import('$lib/server/onboardingContinuation')
 const { chapterQuestion, chapterShareWording } =
 	await import('$lib/components/onboarding/chapterShare')
+const { FORM_VERSION } = await import('$lib/components/onboarding/options')
 const { onboardingMessages } = await import('$lib/components/onboarding/messages')
 
 // What Airtable answers a write with: the whole row, so an update returns more
@@ -593,6 +594,29 @@ describe('onboarding submit: chapter sharing', () => {
 		const created = await submit(signup)
 		await submit({ ...update(String(created.recordToken)), subscribe_form: '1' })
 		expect(writtenFields(updateRecord)).not.toHaveProperty('Signup source')
+	})
+
+	it('stamps the Form version on every create, and never on an update', async () => {
+		const creates: Record<string, string>[] = [
+			signup,
+			{ ...signup, mode: 'browse', intent: 'Act now' },
+			{
+				...signup,
+				subscribe_form: '1',
+				chapter_share_wording: wording('subscribe', 'United Kingdom', 'PauseAI UK', 'no')
+			},
+			usSignup,
+			{ ...usSignup, subscribe_form: '1' }
+		]
+		for (const fields of creates) {
+			await submit(fields)
+			expect(writtenFields(createRecord)['Form version']).toBe(FORM_VERSION)
+		}
+		// A number, as the Airtable field is: a string would be refused.
+		expect(typeof FORM_VERSION).toBe('number')
+		const created = await submit(signup)
+		await submit({ ...update(String(created.recordToken)), subscribe_form: '1' })
+		expect(writtenFields(updateRecord)).not.toHaveProperty('Form version')
 	})
 })
 
