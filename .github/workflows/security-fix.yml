@@ -1,0 +1,90 @@
+name: Security fixes
+
+on:
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: 'audit --fix mode'
+        type: choice
+        required: false
+        default: update
+        options:
+          - update
+          - overrides
+  schedule:
+    - cron: '0 6 * * *'
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  audit-fix:
+    name: Audit & fix vulnerabilities
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v6
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version-file: '.nvmrc'
+          cache: 'pnpm'
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Audit and fix
+        run: pnpm audit --fix=${{ inputs.mode || 'update' }}
+
+      - name: Reinstall with fixed lockfile
+        run: pnpm install
+
+      - name: Report remaining vulnerabilities
+        # audit --fix=update only fixes what in-range updates can fix;
+        # advisories whose patched version is outside declared ranges stay
+        # by design, so this is informational rather than a failure gate
+        run: |
+          intro="This PR was automatically created by the **Security fixes** workflow (${{ github.server_url }}/${{ github.repository }}/blob/main/.github/workflows/security-fix.yml)."
+          if ! pnpm audit --ignore-registry-errors > "$RUNNER_TEMP/audit.txt" 2>&1; then
+            {
+              echo "pr_body<<PAUSEAI_AUDIT_EOF"
+              echo "$intro"
+              echo
+              echo "## Remaining vulnerabilities"
+              echo
+              echo "Not fixable by in-range updates — needs a manifest bump, an \`overrides\` dispatch, or an \`audit.ignore\` entry."
+              echo
+              cat "$RUNNER_TEMP/audit.txt"
+              echo "PAUSEAI_AUDIT_EOF"
+            } >> "$GITHUB_ENV"
+            {
+              echo "### Remaining vulnerabilities"
+              echo
+              cat "$RUNNER_TEMP/audit.txt"
+            } >> "$GITHUB_STEP_SUMMARY"
+          else
+            {
+              echo "pr_body<<PAUSEAI_AUDIT_EOF"
+              echo "$intro"
+              echo
+              echo "No known vulnerabilities remain."
+              echo "PAUSEAI_AUDIT_EOF"
+            } >> "$GITHUB_ENV"
+            echo "No known vulnerabilities remain." >> "$GITHUB_STEP_SUMMARY"
+          fi
+
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v8
+        with:
+          commit-message: 'fix: update dependencies for security advisories'
+          title: Security updates
+          body: ${{ env.pr_body }}
+          branch: security/pnpm-audit-fix
+          base: main
+          delete-branch: true
+          labels: dependencies
