@@ -16,7 +16,7 @@ import type { Actions, PageServerLoad } from './$types'
 import { createRecord, getRecord, updateRecord } from '$lib/airtable'
 import { queueCrmIntake } from '$lib/server/crmIntake'
 import { getNationalGroups } from '$lib/server/nationalGroups'
-import { isOnboardingLive } from '$lib/server/onboarding'
+import { isOnboardingLive, isSignupMailOwnerCrm } from '$lib/server/onboarding'
 import { checkContinuation, issueContinuationToken } from '$lib/server/onboardingContinuation'
 import { recordStubSubmission } from '$lib/server/onboarding-stub'
 import { subscribeToSubstackNewsletter } from '$lib/server/substack'
@@ -264,6 +264,10 @@ export const actions: Actions = {
 		if (!existingRecordId) {
 			fields['Signup source'] = signupSource(isSubscribeForm ? 'subscribe' : 'join', country)
 			fields['Form version'] = FORM_VERSION
+			// Which system sends this row's signup mail; unset, Airtable's automations do.
+			// Create-only, so a row's owner is fixed when it is created and no later post
+			// can hand it from one system to the other.
+			if (isSignupMailOwnerCrm()) fields['Signup mail owner'] = 'CiviCRM'
 			const sourcePage = resolveSourcePage(data, request, url)
 			if (sourcePage) fields['Source page'] = sourcePage
 		}
