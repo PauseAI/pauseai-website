@@ -119,6 +119,10 @@ Three more report each written row to the CRM (see "CRM intake" in [`docs/join-f
 - `CRM_INTAKE_URL`: the CRM's base URL, e.g. `https://crm.pauseai.info`.
 - `CRM_INTAKE_KEY`: the API key of the CRM's member intake account. A secret: it is sent only in the `X-Civi-Auth` header and never logged or reported.
 
+One more decides which system sends a new row's signup emails (see "Signup emails sent by" in [`docs/join-form-flow.md`](./join-form-flow.md)), also Production only:
+
+- `SIGNUP_EMAILS_SENT_BY_CRM`: `true` writes `Signup emails sent by` = `CiviCRM` on each row the form creates; anything else writes nothing, and Airtable's automations send.
+
 ## Related
 
 - Flow contract (step machine, validation, live/stub mode, data written):
