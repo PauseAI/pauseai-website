@@ -620,8 +620,8 @@ describe('onboarding submit: chapter sharing', () => {
 	})
 })
 
-describe('onboarding submit: signup mail owner', () => {
-	const OWNER = 'Signup mail owner'
+describe('onboarding submit: signup emails sent by', () => {
+	const SENT_BY = 'Signup emails sent by'
 	const subscribeSignup = {
 		...signup,
 		subscribe_form: '1',
@@ -650,19 +650,19 @@ describe('onboarding submit: signup mail owner', () => {
 	// volunteer step), the /subscribe continuation, and a resumed signup.
 	async function updateAll(token: string) {
 		await submit(update(token))
-		expect(writtenFields(updateRecord)).not.toHaveProperty(OWNER)
+		expect(writtenFields(updateRecord)).not.toHaveProperty(SENT_BY)
 		await submit({ ...update(token), subscribe_form: '1' })
-		expect(writtenFields(updateRecord)).not.toHaveProperty(OWNER)
+		expect(writtenFields(updateRecord)).not.toHaveProperty(SENT_BY)
 		await submit({ ...signup, ...update(token), resumed: '1' })
-		expect(writtenFields(updateRecord)).not.toHaveProperty(OWNER)
+		expect(writtenFields(updateRecord)).not.toHaveProperty(SENT_BY)
 		expect(updateRecord).toHaveBeenCalledTimes(3)
 	}
 
-	it('marks every create as CiviCRM-owned while the flag is on, and no update', async () => {
-		env.SIGNUP_MAIL_OWNER_CRM = 'true'
+	it('marks every create as sent by CiviCRM while the flag is on, and no update', async () => {
+		env.SIGNUP_EMAILS_SENT_BY_CRM = 'true'
 		for (const fields of creates) {
 			await submit(fields)
-			expect(writtenFields(createRecord)[OWNER]).toBe('CiviCRM')
+			expect(writtenFields(createRecord)[SENT_BY]).toBe('CiviCRM')
 		}
 		const created = await submit(subscribeSignup)
 		await updateAll(String(created.recordToken))
@@ -670,11 +670,11 @@ describe('onboarding submit: signup mail owner', () => {
 
 	it('writes nothing unless the flag is exactly "true"', async () => {
 		for (const value of [undefined, '', '1', 'false', 'TRUE', ' true']) {
-			if (value === undefined) delete env.SIGNUP_MAIL_OWNER_CRM
-			else env.SIGNUP_MAIL_OWNER_CRM = value
+			if (value === undefined) delete env.SIGNUP_EMAILS_SENT_BY_CRM
+			else env.SIGNUP_EMAILS_SENT_BY_CRM = value
 			for (const fields of creates) {
 				await submit(fields)
-				expect(writtenFields(createRecord)).not.toHaveProperty(OWNER)
+				expect(writtenFields(createRecord)).not.toHaveProperty(SENT_BY)
 			}
 		}
 		const created = await submit(signup)
@@ -683,12 +683,12 @@ describe('onboarding submit: signup mail owner', () => {
 
 	it('records the field in a stub submission', async () => {
 		delete env.ONBOARDING_LIVE
-		env.SIGNUP_MAIL_OWNER_CRM = 'true'
+		env.SIGNUP_EMAILS_SENT_BY_CRM = 'true'
 		const created = await submit(signup)
 		expect(createRecord).not.toHaveBeenCalled()
-		expect(created.submission).toMatchObject({ fields: { [OWNER]: 'CiviCRM' } })
+		expect(created.submission).toMatchObject({ fields: { [SENT_BY]: 'CiviCRM' } })
 		const updated = await submit(update(String(created.recordToken)))
-		expect((updated.submission as { fields: object }).fields).not.toHaveProperty(OWNER)
+		expect((updated.submission as { fields: object }).fields).not.toHaveProperty(SENT_BY)
 	})
 })
 

@@ -11,7 +11,7 @@ export const isOnboardingLive = () => env.ONBOARDING_LIVE === 'true'
 // is unset: see onboardingContinuation.ts.
 export const isContinuationEnforced = () => env.ONBOARDING_CONTINUATION_ENFORCE === 'true'
 
-// Whether rows the form creates are marked as CiviCRM's to send the signup mail for
-// (docs/join-form-flow.md, "Signup mail owner"). The Members field must exist before
+// Whether rows the form creates are marked as CiviCRM's to send the signup emails for
+// (docs/join-form-flow.md, "Signup emails sent by"). The Members field must exist before
 // this is turned on, since Airtable refuses a write naming an unknown field.
-export const isSignupMailOwnerCrm = () => env.SIGNUP_MAIL_OWNER_CRM === 'true'
+export const isSignupEmailsSentByCrm = () => env.SIGNUP_EMAILS_SENT_BY_CRM === 'true'

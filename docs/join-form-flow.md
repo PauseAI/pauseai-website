@@ -437,9 +437,9 @@ On an update:
   `FORM_VERSION` in `options.ts` (2), on every row either form creates. It names
   the rules the CRM applies to the row (see "Chapter sharing"), so an update must
   not move it.
-- `Signup mail owner` is written next to it while `SIGNUP_MAIL_OWNER_CRM` is
-  `true`, also create-only, so a row's owner is fixed when it is created (see
-  "Signup mail owner").
+- `Signup emails sent by` is written next to it while `SIGNUP_EMAILS_SENT_BY_CRM` is
+  `true`, also create-only, so a row's sender is fixed when it is created (see
+  "Signup emails sent by").
 - `Source page` is written next to it, also create-only, recording where the
   signup came from. `resolveSourcePage` takes the first of: the hidden `source`
   field (an embed's `?source=`, or the host page URL the embed wrapper read from
@@ -473,8 +473,8 @@ create.
 Target: base `appWPTGqZmUcs3NWu`, table `tblL1icZBhTV1gQ9o` ("Members").
 
 **Step 2 / browse signup / subscribe form (create):** `Full name`, `Email`,
-`Country`, `City`, `Intent`, `Signup source`, `Form version`, `Signup mail owner`
-(while `SIGNUP_MAIL_OWNER_CRM` is `true`), `Source page` (when resolved),
+`Country`, `City`, `Intent`, `Signup source`, `Form version`, `Signup emails sent by`
+(while `SIGNUP_EMAILS_SENT_BY_CRM` is `true`), `Source page` (when resolved),
 `Email subscription` (keep_informed), `Data privacy policy agreed`,
 `GDPR chapter share permission` and `GDPR chapter share wording` (cleared to
 unticked and empty in the United States), plus `Zip code` when `country` is
@@ -694,14 +694,14 @@ After every Airtable write the action makes, create or update, the action report
 - **Outcomes.** `ok`; `refused:<reason>` with the CRM's code (`token_required`, `merged`, ...); `error` for anything else (an HTTP error or an answer that is neither, a timeout, a network failure, missing configuration). Refusals go to Sentry as warnings and errors as errors, one issue per outcome code, carrying the record id, the outcome and its cause (for an HTTP error, only the status), never a field value, the token, the key or the CRM's error text, which could echo what the request carried. Nothing is retried: the next step of the form or the CRM's nightly import sends the row again. Calls are idempotent but not order-safe: each writes the whole row and carries no row version, so two quick updates to the same row can land in the CRM out of order, which the nightly import repairs; and a create delayed past the update that follows it is refused `token_required`, one spurious Sentry warning.
 - **Switching it on.** Stub mode never calls the CRM. In live mode the call needs `CRM_INTAKE_ENABLED=true` (anything else is off, the default), `CRM_INTAKE_URL` (the CRM's base URL, e.g. `https://crm.pauseai.info`) and `CRM_INTAKE_KEY` (the CRM's member intake API account key), all three in Netlify's **Production** context only, like `ONBOARDING_LIVE`. With the flag on and either of the others missing, every write reports `error` (cause `not_configured`). The CRM refuses an update without a valid token, so turn it on only once `ONBOARDING_CONTINUATION_ENFORCE=true`, and only once the CRM has the same `ONBOARDING_CONTINUATION_SECRET`.
 
-## Signup mail owner
+## Signup emails sent by
 
-The mail a new signup triggers (the welcome with its verification link, and the alerts to onboarders) is sent either by Airtable's automations or by CiviCRM. The Members field `Signup mail owner` (single select) records which: `CiviCRM` marks the row as CiviCRM's, and an empty field leaves it with Airtable. This form writes it; nothing else on the website does.
+The mail a new signup triggers (the welcome with its verification link, and the alerts to onboarders) is sent either by Airtable's automations or by CiviCRM. The Members field `Signup emails sent by` (single select) records which: `CiviCRM` marks the row as CiviCRM's, and an empty field leaves it with Airtable. This form writes it; nothing else on the website does.
 
-- **What is written.** While `SIGNUP_MAIL_OWNER_CRM` is exactly `true` (anything else is off, the default), every row either form creates gets `Signup mail owner` = `CiviCRM`, next to `Signup source` and `Form version`. With the flag off the form writes nothing to the field. In stub mode the field is only recorded in the stub submission, like the rest of the row.
-- **Fixed at creation.** The field is never written on an update: not the volunteer step, the `/subscribe` continuation, or a resumed post. So a row's owner is decided once, by the flag's value when the row was created, and no later post can move it. Turning the flag off therefore only changes who owns rows created from then on; rows already marked stay CiviCRM's. Rows created any other way (staff entries in Airtable) are never marked and stay Airtable's.
+- **What is written.** While `SIGNUP_EMAILS_SENT_BY_CRM` is exactly `true` (anything else is off, the default), every row either form creates gets `Signup emails sent by` = `CiviCRM`, next to `Signup source` and `Form version`. With the flag off the form writes nothing to the field. In stub mode the field is only recorded in the stub submission, like the rest of the row.
+- **Fixed at creation.** The field is never written on an update: not the volunteer step, the `/subscribe` continuation, or a resumed post. So a row's sender is decided once, by the flag's value when the row was created, and no later post can move it. Turning the flag off therefore only changes who sends for rows created from then on; rows already marked stay CiviCRM's. Rows created any other way (staff entries in Airtable) are never marked and stay Airtable's.
 - **Before turning it on.** The Members field must exist, with the option `CiviCRM`, since Airtable refuses a write naming an unknown field. With the flag off nothing is written, so a deploy is safe before the field exists. Set the flag in Netlify's **Production** context only, like `ONBOARDING_LIVE`.
-- **Turning it on is the cutover step** that hands new signups to CiviCRM. It comes last: CiviCRM's sending for marked rows is switched on first, then marking. Airtable's automations leave marked rows to CiviCRM, so a row marked before CiviCRM sends would get its signup mail from neither.
+- **Turning it on is the cutover step** that hands new signups to CiviCRM. It comes last: CiviCRM's sending for marked rows is switched on first, then marking. Airtable's automations leave marked rows to CiviCRM, so a row marked before CiviCRM sends would get its signup emails from neither.
 
 ## Lead path (no submission)
 
