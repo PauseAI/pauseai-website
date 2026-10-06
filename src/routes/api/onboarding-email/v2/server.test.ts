@@ -116,6 +116,16 @@ describe('POST /api/onboarding-email/v2', () => {
 		expect(await rendered(response)).toMatchObject({ language: 'es' })
 	})
 
+	it('renders the unsubscribe line only when given a link on the CRM', async () => {
+		const unsubscribe_url = 'https://crm.pauseai.info/civicrm/mailing/optout?cid=1&cs=abc'
+		const json = await rendered(await post({ ...BODY, unsubscribe_url }))
+		expect(json.text).toContain(`[Unsubscribe from all PauseAI emails](${unsubscribe_url})`)
+		expect((await rendered(await post(BODY))).text).not.toContain('Unsubscribe')
+		const response = await post({ ...BODY, unsubscribe_url: 'https://example.org/optout' })
+		expect(response.status).toBe(400)
+		expect((await refusal(response)).message).toContain('unsubscribe_url')
+	})
+
 	it('names the field it refuses', async () => {
 		const response = await post({ ...BODY, record_id: 'Test1234567890' })
 		expect(response.status).toBe(400)

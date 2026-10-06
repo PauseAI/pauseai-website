@@ -178,7 +178,15 @@ export async function renderOnboardingEmailV2(
 				links: await chapterLinks(routed, params)
 			}
 	})
-	const email = compose(resolution, override, params.firstName, link, params.keepInformed)
+	const email = compose(
+		resolution,
+		override,
+		params.firstName,
+		link,
+		params.keepInformed,
+		undefined,
+		params.unsubscribeUrl
+	)
 	return { ...email, language: resolution.language, chapterOverride: resolution.override }
 }
 
@@ -205,7 +213,8 @@ function compose(
 	rawFirstName: string,
 	link: string,
 	subscribed: boolean | undefined,
-	htmlStyleOverride?: OnboardingEmailHtmlStyle
+	htmlStyleOverride?: OnboardingEmailHtmlStyle,
+	unsubscribeUrl?: string
 ): { subject: string; html: string; text: string } {
 	const { bucket, language, chapter, chapterShare } = resolution
 	const firstName = stripMarkdown(rawFirstName)
@@ -215,11 +224,13 @@ function compose(
 	const fixed = FIXED_COPY[language]
 	const blocks = composeBlocks(content, fixed, bucket, link, override !== null, subscribed)
 
+	const unsubscribe = unsubscribeUrl ? { ...fixed.unsubscribe, url: unsubscribeUrl } : undefined
+
 	const htmlStyle = htmlStyleOverride ?? content.htmlStyle ?? 'rich'
 	const html =
 		htmlStyle === 'plain'
-			? renderHtmlPlain(blocks, language, url, content.socials)
-			: renderHtml(blocks, language, url, content.socials)
+			? renderHtmlPlain(blocks, language, url, content.socials, unsubscribe)
+			: renderHtml(blocks, language, url, content.socials, unsubscribe)
 
-	return { subject: content.subject, html, text: renderText(blocks, content.socials) }
+	return { subject: content.subject, html, text: renderText(blocks, content.socials, unsubscribe) }
 }

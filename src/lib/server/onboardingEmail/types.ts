@@ -86,6 +86,9 @@ export type ChapterBlockData = {
 	links: ChapterLink[]
 }
 
+/** The footer line a v2 caller can ask for: the question, then the link. */
+export type UnsubscribeLine = { question: string; linkText: string; url: string }
+
 /** Where the CRM routed the signup. The v2 render takes it as decided and never re-derives it
  *  from the member's country or consent. */
 export type OnboardingRouting =
@@ -115,6 +118,8 @@ export type OnboardingEmailV2Params = {
 	/** The address the caller is mailing. The link's token is signed over it; it is never
 	 *  rendered or returned. */
 	toEmail: string
+	/** The CRM's opt-out link for this member. Rendered in the footer when set; never fetched. */
+	unsubscribeUrl?: string
 }
 
 export type RenderedOnboardingEmailV2 = {

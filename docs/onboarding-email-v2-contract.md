@@ -20,19 +20,20 @@ To rotate: set the new value on the website, deploy, then update the CRM. Reques
 
 `Content-Type: application/json`
 
-| field           | type            | required | meaning                                                                                                                                                       |
-| --------------- | --------------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `version`       | number          | yes      | Must be `2`.                                                                                                                                                  |
-| `first_name`    | string          | yes      | The member's first name, 1 to 200 characters. Markdown characters (`[`, `]`, `*`) are removed before it is used.                                              |
-| `languages`     | array or null   | no       | The member's recorded languages, as strings as Airtable's Members `Languages` field holds them, e.g. `["English", "Español"]`. May be empty. See "Languages". |
-| `language`      | string or null  | no       | A language tag such as `en`, `es`, `es-MX` or `es_ES`. Used only when `languages` is absent. See "Languages".                                                 |
-| `country_code`  | string or null  | no       | The member's country as an ISO 3166-1 alpha-2 code, e.g. `MX` (any case). See "Countries". Used only to pick the language. It never selects a chapter.        |
-| `country`       | string or null  | no       | The member's country as the website spells it, e.g. `Mexico`. Used only when `country_code` is absent. Kept for compatibility; send `country_code`.           |
-| `intent`        | string or null  | no       | The member's intent as the join form records it: `Act now`, `Volunteer` or `Lead`. Anything else, or none, gets the email for a member who gave no intent.    |
-| `keep_informed` | boolean or null | no       | The member's Keep me informed answer. `true` and `false` each state what we will send; null or absent keeps the hedged "if you opted in" wording.             |
-| `routing`       | object          | yes      | Where the CRM routed the member. See "Routing".                                                                                                               |
-| `record_id`     | string          | yes      | The member's Members row, as its full Airtable record id: `rec` followed by 14 letters or digits. See "Verification link".                                    |
-| `to_email`      | string          | yes      | The address the CRM is sending this email to, at most 254 characters. Used only to sign the verification link. See "Verification link".                       |
+| field             | type            | required | meaning                                                                                                                                                                                                                 |
+| ----------------- | --------------- | -------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `version`         | number          | yes      | Must be `2`.                                                                                                                                                                                                            |
+| `first_name`      | string          | yes      | The member's first name, 1 to 200 characters. Markdown characters (`[`, `]`, `*`) are removed before it is used.                                                                                                        |
+| `languages`       | array or null   | no       | The member's recorded languages, as strings as Airtable's Members `Languages` field holds them, e.g. `["English", "Español"]`. May be empty. See "Languages".                                                           |
+| `language`        | string or null  | no       | A language tag such as `en`, `es`, `es-MX` or `es_ES`. Used only when `languages` is absent. See "Languages".                                                                                                           |
+| `country_code`    | string or null  | no       | The member's country as an ISO 3166-1 alpha-2 code, e.g. `MX` (any case). See "Countries". Used only to pick the language. It never selects a chapter.                                                                  |
+| `country`         | string or null  | no       | The member's country as the website spells it, e.g. `Mexico`. Used only when `country_code` is absent. Kept for compatibility; send `country_code`.                                                                     |
+| `intent`          | string or null  | no       | The member's intent as the join form records it: `Act now`, `Volunteer` or `Lead`. Anything else, or none, gets the email for a member who gave no intent.                                                              |
+| `keep_informed`   | boolean or null | no       | The member's Keep me informed answer. `true` and `false` each state what we will send; null or absent keeps the hedged "if you opted in" wording.                                                                       |
+| `routing`         | object          | yes      | Where the CRM routed the member. See "Routing".                                                                                                                                                                         |
+| `record_id`       | string          | yes      | The member's Members row, as its full Airtable record id: `rec` followed by 14 letters or digits. See "Verification link".                                                                                              |
+| `to_email`        | string          | yes      | The address the CRM is sending this email to, at most 254 characters. Used only to sign the verification link. See "Verification link".                                                                                 |
+| `unsubscribe_url` | string or null  | no       | The member's opt-out link from the CRM, a full opt-out from all PauseAI email: an absolute `https` URL on `crm.pauseai.info` (no other host, no port, no credentials, at most 2048 characters). See "Unsubscribe line". |
 
 Any other field is refused (`invalid_request`), so a new field needs a new contract version. Strings are trimmed; an empty string counts as absent for the optional fields.
 
@@ -94,6 +95,7 @@ v2 is an adapter into v1's rendering: the same intent buckets, language resolver
 - Member facts come from the request, not from a Members record.
 - Language: v2 also accepts a language tag in `language` when `languages` is absent, which v1 has no equivalent of (see "Languages").
 - The verification link is always signed, over `to_email`.
+- v2 adds the unsubscribe line when given `unsubscribe_url`; v1 has none.
 - v2 returns no sender and no fields for onboarders: the caller chooses every address.
 
 ### Languages
@@ -107,6 +109,12 @@ The shared copy is written in English (`en`) and Spanish (`es`).
 - Spanish shared copy has no chapter block: it describes PauseAI en Español, which every Spanish-speaking country shares.
 
 The response's `language` field says which language the email went out in.
+
+### Unsubscribe line
+
+When `unsubscribe_url` is given, the footer of both bodies carries one line above the postal address: a question and a link to that URL, in the language the email is written in. In English: "Don't want emails from us? [Unsubscribe from all PauseAI emails](url)." Spanish, Swedish (Sweden's own email) and German (Germany's own email) carry the same line in their language. The plain text body writes the link as `[label](url)`, as it writes every link; `(` and `)` in the URL are percent-encoded so that form cannot end early, and the HTML body escapes the URL.
+
+The website never fetches the URL and does not check what it does: it only checks its shape and host. Absent, null or empty, no line is rendered and the footer is as without it. A value that is not an `https` URL on `crm.pauseai.info` is refused with `400 invalid_request` naming `unsubscribe_url`. v1 never renders this line.
 
 ### Verification link
 

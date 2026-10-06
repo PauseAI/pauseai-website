@@ -50,6 +50,9 @@ vi.mock('$lib/airtable.js', async (importOriginal) => ({
 }))
 
 const { renderOnboardingEmail, renderOnboardingEmailV2 } = await import('./index.js')
+const { FIXED_COPY } = await import('./fixed.js')
+
+const escapeRegExp = (value: string) => value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
 const { parseV2Request } = await import('./v2Request.js')
 const { mintVerificationToken, verificationLink, verifyVerificationToken } =
 	await import('$lib/server/emailVerification')
@@ -268,6 +271,40 @@ describe('renderOnboardingEmailV2', () => {
 		)
 	})
 
+	it('carries the unsubscribe line in both bodies of every variant when given a link', async () => {
+		const unsubscribeUrl = 'https://crm.pauseai.info/civicrm/mailing/optout?cid=1&cs=abc'
+		const questions = new Set<string>()
+		for (const language of ['en', 'es'] as const) {
+			for (const routing of ROUTINGS) {
+				for (const intent of ['Volunteer', 'None']) {
+					const email = await render({ language, routing, intent, unsubscribeUrl })
+					const where = `${language} / ${routing.kind === 'chapter' ? routing.country : 'global'} / ${intent}`
+					const { question, linkText } = FIXED_COPY[email.language].unsubscribe
+					questions.add(question)
+					expect(email.text, where).toContain(`${question} [${linkText}](${unsubscribeUrl}).`)
+					expect(email.html, where).toContain(escapeHtml(question))
+					expect(email.html, where).toMatch(
+						new RegExp(
+							`<a href="${escapeRegExp(escapeHtml(unsubscribeUrl))}"[^>]*>${escapeRegExp(escapeHtml(linkText))}</a>`
+						)
+					)
+				}
+			}
+		}
+		// English, Spanish, and the overrides' Swedish and German.
+		expect(questions.size).toBe(4)
+	})
+
+	it('leaves the unsubscribe line out when given no link', async () => {
+		for (const routing of ROUTINGS) {
+			const email = await render({ routing, intent: 'Volunteer' })
+			for (const { question } of Object.values(FIXED_COPY).map((copy) => copy.unsubscribe)) {
+				expect(email.text).not.toContain(question)
+				expect(email.html).not.toContain(escapeHtml(question))
+			}
+		}
+	})
+
 	it('returns no sender', async () => {
 		expect(await render()).not.toHaveProperty('from')
 		expect(await render({ routing: chapter('United Kingdom') })).not.toHaveProperty('from')
@@ -370,6 +407,7 @@ describe('v1 and v2 parity', () => {
 					expect(v2.subject, where).toBe(v1.subject)
 					expect(v2.text, where).toBe(v1.text)
 					expect(v2.html, where).toBe(v1.html)
+					expect(v1.text, where).not.toContain(FIXED_COPY[v2.language].unsubscribe.question)
 				}
 			}
 		}
@@ -465,6 +503,32 @@ describe('parseV2Request', () => {
 			routing: { kind: 'chapter', chapter_id: 1, name: 'X', country_code: 'ZZ' }
 		})
 		expect(unknown.message).toContain('routing.country_code')
+	})
+
+	it('accepts an unsubscribe link on the CRM and encodes brackets in it', () => {
+		const result = parse({
+			unsubscribe_url: 'https://crm.pauseai.info/civicrm/mailing/optout?cid=1&cs=a(b)'
+		})
+		expect(result.ok && result.params.unsubscribeUrl).toBe(
+			'https://crm.pauseai.info/civicrm/mailing/optout?cid=1&cs=a%28b%29'
+		)
+		const absent = parse({ unsubscribe_url: null })
+		expect(absent.ok && absent.params.unsubscribeUrl).toBeUndefined()
+	})
+
+	it.each([
+		['not https', 'http://crm.pauseai.info/optout'],
+		['another host', 'https://example.org/optout'],
+		['a host that starts like the CRM', 'https://crm.pauseai.info.example.org/optout'],
+		['a port', 'https://crm.pauseai.info:8443/optout'],
+		['credentials', 'https://user:pw@crm.pauseai.info/optout'],
+		['not a URL', 'optout'],
+		['a script', 'javascript:alert(1)'],
+		['a non-string', 42]
+	])('refuses an unsubscribe link that is %s', (_name, unsubscribe_url) => {
+		const error = errorOf({ unsubscribe_url })
+		expect(error.code).toBe('invalid_request')
+		expect(error.message).toContain('unsubscribe_url')
 	})
 
 	it('prefers languages to language', () => {

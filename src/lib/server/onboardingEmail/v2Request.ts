@@ -24,7 +24,8 @@ const TOP_LEVEL_FIELDS = new Set([
 	'keep_informed',
 	'routing',
 	'record_id',
-	'to_email'
+	'to_email',
+	'unsubscribe_url'
 ])
 // `links` is accepted and ignored: the website reads the chapter's links itself.
 const CHAPTER_FIELDS = new Set(['kind', 'chapter_id', 'name', 'country', 'country_code', 'links'])
@@ -160,6 +161,36 @@ function parseToEmail(value: unknown): string {
 	return value
 }
 
+// The CRM that sends v2 requests; an unsubscribe link must point at it.
+const CRM_HOST = 'crm.pauseai.info'
+const MAX_URL = 2048
+
+/** An https URL on the CRM's host, never fetched. Brackets are encoded so the plain text
+ *  body's `[label](url)` link cannot end early. */
+function parseUnsubscribeUrl(value: unknown): string | undefined {
+	if (value === undefined || value === null || value === '') return undefined
+	const problem = `must be an https URL on ${CRM_HOST}`
+	if (typeof value !== 'string' || value.length > MAX_URL || /\s/.test(value)) {
+		invalid('unsubscribe_url', problem)
+	}
+	let parsed: URL
+	try {
+		parsed = new URL(value)
+	} catch {
+		invalid('unsubscribe_url', problem)
+	}
+	if (
+		parsed.protocol !== 'https:' ||
+		parsed.hostname !== CRM_HOST ||
+		parsed.port !== '' ||
+		parsed.username !== '' ||
+		parsed.password !== ''
+	) {
+		invalid('unsubscribe_url', problem)
+	}
+	return parsed.href.replaceAll('(', '%28').replaceAll(')', '%29')
+}
+
 export function parseV2Request(body: unknown): Parsed {
 	if (!isObject(body)) {
 		return { ok: false, error: { code: 'invalid_request', message: 'Body must be a JSON object' } }
@@ -193,7 +224,8 @@ export function parseV2Request(body: unknown): Parsed {
 				keepInformed: typeof body.keep_informed === 'boolean' ? body.keep_informed : undefined,
 				routing: parseRouting(body.routing),
 				recordId: parseRecordId(body.record_id),
-				toEmail: parseToEmail(body.to_email)
+				toEmail: parseToEmail(body.to_email),
+				unsubscribeUrl: parseUnsubscribeUrl(body.unsubscribe_url)
 			}
 		}
 	} catch (error) {
