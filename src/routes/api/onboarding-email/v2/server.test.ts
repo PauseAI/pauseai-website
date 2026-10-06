@@ -25,10 +25,10 @@ const BODY = {
 	version: 2,
 	first_name: 'Alex',
 	languages: ['English'],
-	country: 'Netherlands',
+	country_code: 'NL',
 	intent: 'Volunteer',
 	keep_informed: true,
-	routing: { kind: 'chapter', chapter_id: 12, name: 'PauseAI Netherlands', country: 'Netherlands' },
+	routing: { kind: 'chapter', chapter_id: 12, name: 'PauseAI Netherlands', country_code: 'NL' },
 	record_id: RECORD_ID,
 	to_email: TO_EMAIL
 }

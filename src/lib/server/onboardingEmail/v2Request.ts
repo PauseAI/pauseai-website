@@ -1,3 +1,4 @@
+import { COUNTRY_BY_ISO_CODE } from '$lib/server/countryCodes'
 import { normaliseEmail } from '$lib/server/emailVerification'
 import { resolveOnboardingEmailLanguage } from './language.js'
 import { stripMarkdown } from './markdown.js'
@@ -18,6 +19,7 @@ const TOP_LEVEL_FIELDS = new Set([
 	'language',
 	'languages',
 	'country',
+	'country_code',
 	'intent',
 	'keep_informed',
 	'routing',
@@ -25,7 +27,7 @@ const TOP_LEVEL_FIELDS = new Set([
 	'to_email'
 ])
 // `links` is accepted and ignored: the website reads the chapter's links itself.
-const CHAPTER_FIELDS = new Set(['kind', 'chapter_id', 'name', 'country', 'links'])
+const CHAPTER_FIELDS = new Set(['kind', 'chapter_id', 'name', 'country', 'country_code', 'links'])
 const SUPPORTED_LANGUAGES: readonly BaseLanguage[] = ['en', 'es']
 const MAX_TEXT = 200
 const MAX_LANGUAGES = 50
@@ -94,6 +96,36 @@ function resolveLanguage(
 	return resolveOnboardingEmailLanguage(country, languages)
 }
 
+const ISO_CODE = /^[A-Za-z]{2}$/
+
+/** An ISO 3166-1 alpha-2 code, as the website spells that country; undefined for a code the
+ *  table does not know. */
+function countryFromCode(value: unknown, field: string): string | undefined {
+	if (typeof value !== 'string' || !ISO_CODE.test(value.trim())) {
+		invalid(field, 'must be an ISO 3166-1 alpha-2 code')
+	}
+	return COUNTRY_BY_ISO_CODE[value.trim().toUpperCase()]
+}
+
+const hasCountryCode = (body: Record<string, unknown>) =>
+	body.country_code !== undefined && body.country_code !== null && body.country_code !== ''
+
+/** `country_code` when sent, else the `country` name. */
+function parseCountry(body: Record<string, unknown>, prefix = ''): string | undefined {
+	return hasCountryCode(body)
+		? countryFromCode(body.country_code, `${prefix}country_code`)
+		: optionalText(body.country, `${prefix}country`)
+}
+
+// A chapter needs a country: it selects the chapter's own email and its National Groups row.
+function routedCountry(routing: Record<string, unknown>): string {
+	const country = parseCountry(routing, 'routing.')
+	if (country !== undefined) return country
+	if (hasCountryCode(routing))
+		invalid('routing.country_code', 'is not a country code the website knows')
+	return invalid('routing.country', 'must be a non-empty string')
+}
+
 function parseRouting(value: unknown): OnboardingRouting {
 	if (!isObject(value)) invalid('routing', 'must be an object')
 	if (value.kind === 'global') {
@@ -110,7 +142,7 @@ function parseRouting(value: unknown): OnboardingRouting {
 		kind: 'chapter',
 		chapterId,
 		name: stripMarkdown(requiredText(value.name, 'routing.name')),
-		country: requiredText(value.country, 'routing.country')
+		country: routedCountry(value)
 	}
 }
 
@@ -140,7 +172,7 @@ export function parseV2Request(body: unknown): Parsed {
 	}
 	try {
 		rejectUnknown(body, TOP_LEVEL_FIELDS)
-		const country = optionalText(body.country, 'country')
+		const country = parseCountry(body)
 		if (
 			body.keep_informed !== undefined &&
 			body.keep_informed !== null &&

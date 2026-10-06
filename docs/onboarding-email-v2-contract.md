@@ -26,7 +26,8 @@ To rotate: set the new value on the website, deploy, then update the CRM. Reques
 | `first_name`    | string          | yes      | The member's first name, 1 to 200 characters. Markdown characters (`[`, `]`, `*`) are removed before it is used.                                              |
 | `languages`     | array or null   | no       | The member's recorded languages, as strings as Airtable's Members `Languages` field holds them, e.g. `["English", "Español"]`. May be empty. See "Languages". |
 | `language`      | string or null  | no       | A language tag such as `en`, `es`, `es-MX` or `es_ES`. Used only when `languages` is absent. See "Languages".                                                 |
-| `country`       | string or null  | no       | The member's country name, e.g. `Mexico`. Used only to pick the language. It never selects a chapter.                                                         |
+| `country_code`  | string or null  | no       | The member's country as an ISO 3166-1 alpha-2 code, e.g. `MX` (any case). See "Countries". Used only to pick the language. It never selects a chapter.        |
+| `country`       | string or null  | no       | The member's country as the website spells it, e.g. `Mexico`. Used only when `country_code` is absent. Kept for compatibility; send `country_code`.           |
 | `intent`        | string or null  | no       | The member's intent as the join form records it: `Act now`, `Volunteer` or `Lead`. Anything else, or none, gets the email for a member who gave no intent.    |
 | `keep_informed` | boolean or null | no       | The member's Keep me informed answer. `true` and `false` each state what we will send; null or absent keeps the hedged "if you opted in" wording.             |
 | `routing`       | object          | yes      | Where the CRM routed the member. See "Routing".                                                                                                               |
@@ -52,17 +53,24 @@ Chapter:
 	"kind": "chapter",
 	"chapter_id": 1234,
 	"name": "PauseAI UK",
-	"country": "United Kingdom"
+	"country_code": "GB"
 }
 ```
 
-| field        | type             | required | meaning                                                                                                                                                                                                                                       |
-| ------------ | ---------------- | -------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `chapter_id` | positive integer | yes      | The chapter's id in the CRM. Not shown in the email.                                                                                                                                                                                          |
-| `name`       | string           | yes      | The chapter's own name, used where the email says who will be in touch ("**Pause IA** will be in touch").                                                                                                                                     |
-| `country`    | string           | yes      | The country the chapter is filed under. It selects the chapter's own email where one exists (currently United Kingdom, Canada, Sweden and Germany), names the country in the shared copy, and keys the chapter's links (see "Chapter links"). |
+| field          | type             | required       | meaning                                                                                                                                                                                                                                                                                                                                                 |
+| -------------- | ---------------- | -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `chapter_id`   | positive integer | yes            | The chapter's id in the CRM. Not shown in the email.                                                                                                                                                                                                                                                                                                    |
+| `name`         | string           | yes            | The chapter's own name, used where the email says who will be in touch ("**Pause IA** will be in touch").                                                                                                                                                                                                                                               |
+| `country_code` | string           | one of the two | The country the chapter is filed under, as an ISO 3166-1 alpha-2 code (see "Countries"). A code the website does not know is refused (`invalid_request`).                                                                                                                                                                                               |
+| `country`      | string           | one of the two | The same country as the website spells it, used only when `country_code` is absent. Below, `routing.country` means the country from either field. It selects the chapter's own email where one exists (currently United Kingdom, Canada, Sweden and Germany), names the country in the shared copy, and keys the chapter's links (see "Chapter links"). |
 
 A `links` field on a chapter routing is accepted and ignored: the website reads the links itself.
+
+### Countries
+
+Countries travel as ISO 3166-1 alpha-2 codes because the CRM's country names differ from the website's (the CRM has `Tanzania, United Republic of` where the website, its join form, Airtable and the National Groups table have `Tanzania`). The website maps each code to its own spelling with a table it owns, `src/lib/server/countryCodes.ts`: every country the join form offers maps to the form's spelling (`GB`: United Kingdom, `US`: United States, `TZ`: Tanzania, `CD`: DR Congo), and other codes map to the ISO short name. The table holds every ISO 3166-1 code, plus `XK` for Kosovo. The resolved name then feeds the same language rule and chapter lookup as v1.
+
+A code must be two letters (`invalid_request` otherwise). At the top level, a well-formed code the table does not know counts as no country. In a chapter routing it is refused, since a chapter needs a country.
 
 ### Chapter links
 

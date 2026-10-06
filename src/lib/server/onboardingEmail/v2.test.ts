@@ -277,41 +277,60 @@ describe('renderOnboardingEmailV2', () => {
 // The same member, as the Airtable automation asks v1 for them and as the CRM asks v2.
 type Member = {
 	country: string
+	/** What the CRM sends for the same country. */
+	countryCode: string
 	languages: string[]
 	chapterShare: boolean
 	routing: Record<string, unknown>
 }
 
-const routedTo = (country: string) => ({
+const routedTo = (country: string, countryCode: string) => ({
 	kind: 'chapter',
 	chapter_id: 7,
 	// v1 names a chapter "PauseAI <country>"; v2 takes the CRM's name for it.
 	name: `PauseAI ${country}`,
-	country
+	country_code: countryCode
 })
 
 const MEMBERS: Record<string, Member> = {
 	'United Kingdom': {
 		country: 'United Kingdom',
+		countryCode: 'GB',
 		languages: ['English'],
 		chapterShare: true,
-		routing: routedTo('United Kingdom')
+		routing: routedTo('United Kingdom', 'GB')
 	},
-	Sweden: { country: 'Sweden', languages: [], chapterShare: true, routing: routedTo('Sweden') },
+	Sweden: {
+		country: 'Sweden',
+		countryCode: 'SE',
+		languages: [],
+		chapterShare: true,
+		routing: routedTo('Sweden', 'SE')
+	},
 	'Canada, French': {
 		country: 'Canada',
+		countryCode: 'CA',
 		languages: ['French', 'English'],
 		chapterShare: true,
-		routing: routedTo('Canada')
+		routing: routedTo('Canada', 'CA')
 	},
 	'Netherlands, Spanish': {
 		country: 'Netherlands',
+		countryCode: 'NL',
 		languages: ['Spanish'],
 		chapterShare: true,
-		routing: routedTo('Netherlands')
+		routing: routedTo('Netherlands', 'NL')
+	},
+	'Mexico, no chapter': {
+		country: 'Mexico',
+		countryCode: 'mx',
+		languages: [],
+		chapterShare: false,
+		routing: { kind: 'global' }
 	},
 	'no chapter': {
 		country: 'Japan',
+		countryCode: 'JP',
 		languages: [],
 		chapterShare: false,
 		routing: { kind: 'global' }
@@ -321,7 +340,7 @@ const MEMBERS: Record<string, Member> = {
 describe('v1 and v2 parity', () => {
 	it.each(Object.entries(MEMBERS))(
 		'render the same email for %s',
-		async (_name, { country, languages, chapterShare, routing }) => {
+		async (_name, { country, countryCode, languages, chapterShare, routing }) => {
 			for (const intent of ['Volunteer', 'Act now', 'None']) {
 				for (const keepInformed of KEEP_INFORMED) {
 					const v1 = await renderOnboardingEmail({
@@ -338,7 +357,7 @@ describe('v1 and v2 parity', () => {
 						version: 2,
 						first_name: 'Alex',
 						languages,
-						country,
+						country_code: countryCode,
 						intent,
 						keep_informed: keepInformed ?? null,
 						routing,
@@ -425,6 +444,29 @@ describe('parseV2Request', () => {
 		}
 	})
 
+	it('takes the country from country_code, before country', () => {
+		const tanzania = parse({ language: undefined, country: undefined, country_code: 'TZ' })
+		expect(tanzania.ok && tanzania.params.language).toBe('en')
+		const mexico = parse({ language: undefined, country: 'Netherlands', country_code: 'mx' })
+		expect(mexico.ok && mexico.params.language).toBe('es')
+	})
+
+	it('treats a well-formed code the website does not know as no country', () => {
+		const result = parse({ language: undefined, country: undefined, country_code: 'ZZ' })
+		expect(result.ok && result.params.language).toBe('en')
+	})
+
+	it('resolves a chapter routing by its country code', () => {
+		const result = parse({
+			routing: { kind: 'chapter', chapter_id: 1, name: 'X', country_code: 'GB' }
+		})
+		expect(result.ok && result.params.routing).toMatchObject({ country: 'United Kingdom' })
+		const unknown = errorOf({
+			routing: { kind: 'chapter', chapter_id: 1, name: 'X', country_code: 'ZZ' }
+		})
+		expect(unknown.message).toContain('routing.country_code')
+	})
+
 	it('prefers languages to language', () => {
 		const result = parse({ language: 'es', languages: ['English'] })
 		expect(result.ok && result.params.language).toBe('en')
@@ -457,6 +499,8 @@ describe('parseV2Request', () => {
 		['an unknown routing kind', { routing: { kind: 'country' } }],
 		['a chapter without an id', { routing: { kind: 'chapter', name: 'X', country: 'Y' } }],
 		['languages that are not an array', { languages: 'Spanish' }],
+		['a country code that is not two letters', { country_code: 'GBR' }],
+		['a chapter without a country', { routing: { kind: 'chapter', chapter_id: 1, name: 'X' } }],
 		['languages that are not strings', { languages: [3] }]
 	])('refuses %s', (_name, overrides) => {
 		expect(errorOf(overrides).code).toBe('invalid_request')
