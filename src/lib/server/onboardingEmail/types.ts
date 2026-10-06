@@ -96,10 +96,9 @@ export type OnboardingRouting =
 			chapterId: number
 			/** The chapter's own name, e.g. "PauseAI UK". */
 			name: string
-			/** The country the chapter is filed under. Selects the chapter's own email, if it has one. */
+			/** The country the chapter is filed under. Selects the chapter's own email, if it has
+			 *  one, and the National Groups row its links are read from. */
 			country: string
-			/** The chapter's public links, labelled as in CHAPTER_LINK_LABELS. */
-			links: ChapterLink[]
 	  }
 
 /** Input to the v2 render, validated by v2Request.ts. */

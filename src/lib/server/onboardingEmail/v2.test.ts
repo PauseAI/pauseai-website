@@ -3,10 +3,53 @@ import { CHAPTER_OVERRIDE_COUNTRIES } from './chapterOverrides.js'
 import { escapeHtml } from './markdown.js'
 import type { OnboardingEmailV2Params, OnboardingRouting } from './types.js'
 
-vi.mock('$env/dynamic/private', () => ({ env: {} }))
-vi.mock('$lib/server/sentry', () => ({ reportError: vi.fn() }))
+// Stands in for the live National Groups table, which v1 and v2 both read chapter links from.
+const NATIONAL_GROUPS = [
+	{
+		id: 'recCanada',
+		fields: {
+			country: 'Canada',
+			website: 'https://pauseai.ca/',
+			luma: 'https://luma.com/pauseai-canada',
+			discord: 'https://discord.gg/canada'
+		}
+	},
+	{
+		id: 'recSweden',
+		fields: {
+			country: 'Sweden',
+			website: 'pauseai.se',
+			whatsapp: 'https://chat.whatsapp.com/sweden',
+			luma: 'https://luma.com/pauseai-sweden'
+		}
+	},
+	{
+		id: 'recUnitedKingdom',
+		fields: { country: 'United Kingdom', website: 'https://pauseai.uk/' }
+	},
+	{
+		id: 'recNetherlands',
+		fields: {
+			country: 'Netherlands',
+			website: 'https://pauseai.nl/',
+			whatsapp: 'https://chat.whatsapp.com/example',
+			luma: 'https://luma.com/example'
+		}
+	}
+]
 
-const { renderOnboardingEmailV2 } = await import('./index.js')
+const { fetchAllPages, reportError } = vi.hoisted(() => ({
+	fetchAllPages: vi.fn(),
+	reportError: vi.fn()
+}))
+vi.mock('$env/dynamic/private', () => ({ env: {} }))
+vi.mock('$lib/server/sentry', () => ({ reportError }))
+vi.mock('$lib/airtable.js', async (importOriginal) => ({
+	...(await importOriginal<Record<string, unknown>>()),
+	fetchAllPages
+}))
+
+const { renderOnboardingEmail, renderOnboardingEmailV2 } = await import('./index.js')
 const { parseV2Request } = await import('./v2Request.js')
 const { mintVerificationToken, verificationLink, verifyVerificationToken } =
 	await import('$lib/server/emailVerification')
@@ -24,17 +67,7 @@ const INTENTS = ['None', 'Keep informed', 'Act now', 'Volunteer', 'Lead', '']
 const KEEP_INFORMED = [true, false, undefined]
 
 function chapter(country: string, name = `PauseAI ${country}`): OnboardingRouting {
-	return {
-		kind: 'chapter',
-		chapterId: 7,
-		name,
-		country,
-		links: [
-			{ label: 'Website', url: 'https://example.org/' },
-			{ label: 'WhatsApp', url: 'https://chat.whatsapp.com/example' },
-			{ label: 'Events', url: 'https://luma.com/example' }
-		]
-	}
+	return { kind: 'chapter', chapterId: 7, name, country }
 }
 
 const ROUTINGS: OnboardingRouting[] = [
@@ -63,9 +96,17 @@ function tokenOf(text: string): string {
 	return /[?&]token=(v1\.\d+\.[A-Za-z0-9_-]{43})/.exec(text)?.[1] ?? ''
 }
 
+// Every https URL in a body other than the verification link: the chapter's links.
+function chapterUrls(text: string): string[] {
+	return [...text.matchAll(/https:\/\/[^\s)\]"<>]+/g)]
+		.map(([found]) => found)
+		.filter((found) => !found.startsWith('https://pauseai.info/'))
+		.sort()
+}
+
 beforeEach(() => {
-	// v2 reads nothing: any network call fails the test.
-	vi.spyOn(globalThis, 'fetch').mockRejectedValue(new Error('v2 must not fetch'))
+	fetchAllPages.mockReset().mockResolvedValue(NATIONAL_GROUPS)
+	reportError.mockReset().mockResolvedValue(undefined)
 })
 
 afterEach(() => {
@@ -90,7 +131,48 @@ describe('renderOnboardingEmailV2', () => {
 			}
 		}
 		expect(variants).toBe(2 * ROUTINGS.length * INTENTS.length * KEEP_INFORMED.length)
-		expect(globalThis.fetch).not.toHaveBeenCalled()
+	})
+
+	it('shows the same chapter links v1 shows for the same chapter', async () => {
+		for (const country of ['Canada', 'Sweden', 'Netherlands']) {
+			for (const intent of ['Volunteer', 'Act now', 'None']) {
+				const v1 = await renderOnboardingEmail({
+					firstName: 'Alex',
+					country,
+					intent,
+					chapterShare: true,
+					airtable_id: 'Test1234567890',
+					verificationLink: LINK
+				})
+				const v2 = await render({ routing: chapter(country), intent })
+				const where = `${country} / ${intent}`
+				expect(chapterUrls(v2.text), where).toEqual(chapterUrls(v1.text))
+				expect(chapterUrls(v2.html), where).toEqual(chapterUrls(v1.html))
+			}
+		}
+		// The rows' links do reach the emails, so the comparison above is not of two empty lists.
+		const sweden = await render({ routing: chapter('Sweden'), intent: 'Volunteer' })
+		expect(sweden.text).toContain('https://chat.whatsapp.com/sweden')
+		const canada = await render({ routing: chapter('Canada'), intent: 'Volunteer' })
+		expect(canada.text).toContain('https://luma.com/pauseai-canada')
+	})
+
+	it('reads no chapter links for a member routed to global onboarding', async () => {
+		await render({ intent: 'Volunteer', routing: { kind: 'global' } })
+		expect(fetchAllPages).not.toHaveBeenCalled()
+	})
+
+	it('renders without chapter links when National Groups cannot be read', async () => {
+		vi.spyOn(console, 'error').mockImplementation(() => {})
+		fetchAllPages.mockRejectedValue(new Error('Airtable is down'))
+		const email = await render({ intent: 'Volunteer', routing: chapter('Netherlands') })
+		expect(email.text).toContain('PauseAI Netherlands will be in touch')
+		expect(email.text).not.toContain('https://chat.whatsapp.com/example')
+		expect(email.text).toContain(LINK)
+		expect(reportError).toHaveBeenCalledOnce()
+		const [, context] = reportError.mock.calls[0] as [unknown, Record<string, unknown>]
+		expect(context).toMatchObject({ recordId: RECORD_ID })
+		expect(JSON.stringify(context).toLowerCase()).not.toContain('alex')
 	})
 
 	it('signs a token that verifies for that row and address only', async () => {
@@ -192,6 +274,89 @@ describe('renderOnboardingEmailV2', () => {
 	})
 })
 
+// The same member, as the Airtable automation asks v1 for them and as the CRM asks v2.
+type Member = {
+	country: string
+	languages: string[]
+	chapterShare: boolean
+	routing: Record<string, unknown>
+}
+
+const routedTo = (country: string) => ({
+	kind: 'chapter',
+	chapter_id: 7,
+	// v1 names a chapter "PauseAI <country>"; v2 takes the CRM's name for it.
+	name: `PauseAI ${country}`,
+	country
+})
+
+const MEMBERS: Record<string, Member> = {
+	'United Kingdom': {
+		country: 'United Kingdom',
+		languages: ['English'],
+		chapterShare: true,
+		routing: routedTo('United Kingdom')
+	},
+	Sweden: { country: 'Sweden', languages: [], chapterShare: true, routing: routedTo('Sweden') },
+	'Canada, French': {
+		country: 'Canada',
+		languages: ['French', 'English'],
+		chapterShare: true,
+		routing: routedTo('Canada')
+	},
+	'Netherlands, Spanish': {
+		country: 'Netherlands',
+		languages: ['Spanish'],
+		chapterShare: true,
+		routing: routedTo('Netherlands')
+	},
+	'no chapter': {
+		country: 'Japan',
+		languages: [],
+		chapterShare: false,
+		routing: { kind: 'global' }
+	}
+}
+
+describe('v1 and v2 parity', () => {
+	it.each(Object.entries(MEMBERS))(
+		'render the same email for %s',
+		async (_name, { country, languages, chapterShare, routing }) => {
+			for (const intent of ['Volunteer', 'Act now', 'None']) {
+				for (const keepInformed of KEEP_INFORMED) {
+					const v1 = await renderOnboardingEmail({
+						firstName: 'Alex',
+						country,
+						languages,
+						intent,
+						subscribed: keepInformed,
+						chapterShare,
+						airtable_id: 'Test1234567890',
+						verificationLink: LINK
+					})
+					const parsed = parseV2Request({
+						version: 2,
+						first_name: 'Alex',
+						languages,
+						country,
+						intent,
+						keep_informed: keepInformed ?? null,
+						routing,
+						record_id: RECORD_ID,
+						to_email: TO_EMAIL
+					})
+					if (!parsed.ok) throw new Error(parsed.error.message)
+					const v2 = await renderOnboardingEmailV2(parsed.params, SECRET, NOW)
+					const where = `${intent} / ${keepInformed}`
+					expect(v2.subject, where).toBe(v1.subject)
+					expect(v2.text, where).toBe(v1.text)
+					expect(v2.html, where).toBe(v1.html)
+				}
+			}
+		}
+	)
+})
+
 describe('parseV2Request', () => {
 	const valid = {
 		version: 2,
@@ -246,6 +411,43 @@ describe('parseV2Request', () => {
 		expect(given.ok && given.params.language).toBe('en')
 	})
 
+	it('resolves the language from languages with the rule v1 uses', () => {
+		for (const [languages, country, expected] of [
+			[['Spanish'], 'Netherlands', 'es'],
+			[['English', 'Español'], 'Netherlands', 'es'],
+			[['English'], 'Netherlands', 'en'],
+			[[], 'Netherlands', 'en'],
+			[[], 'Mexico', 'es'],
+			[['English'], 'Mexico', 'es']
+		] as const) {
+			const result = parse({ language: undefined, languages, country })
+			expect(result.ok && result.params.language, `${languages.join()} / ${country}`).toBe(expected)
+		}
+	})
+
+	it('prefers languages to language', () => {
+		const result = parse({ language: 'es', languages: ['English'] })
+		expect(result.ok && result.params.language).toBe('en')
+	})
+
+	it('ignores chapter links sent by the caller', () => {
+		const result = parse({
+			routing: {
+				kind: 'chapter',
+				chapter_id: 1,
+				name: 'X',
+				country: 'Y',
+				links: [{ label: 'Website', url: 'javascript:alert(1)' }]
+			}
+		})
+		expect(result.ok && result.params.routing).toEqual({
+			kind: 'chapter',
+			chapterId: 1,
+			name: 'X',
+			country: 'Y'
+		})
+	})
+
 	it.each([
 		['missing first name', { first_name: '' }],
 		['non-string intent', { intent: 3 }],
@@ -254,30 +456,8 @@ describe('parseV2Request', () => {
 		['no routing', { routing: undefined }],
 		['an unknown routing kind', { routing: { kind: 'country' } }],
 		['a chapter without an id', { routing: { kind: 'chapter', name: 'X', country: 'Y' } }],
-		[
-			'a chapter link with an unknown label',
-			{
-				routing: {
-					kind: 'chapter',
-					chapter_id: 1,
-					name: 'X',
-					country: 'Y',
-					links: [{ label: 'Blog', url: 'https://example.org' }]
-				}
-			}
-		],
-		[
-			'a chapter link that is not https',
-			{
-				routing: {
-					kind: 'chapter',
-					chapter_id: 1,
-					name: 'X',
-					country: 'Y',
-					links: [{ label: 'Website', url: 'javascript:alert(1)' }]
-				}
-			}
-		]
+		['languages that are not an array', { languages: 'Spanish' }],
+		['languages that are not strings', { languages: [3] }]
 	])('refuses %s', (_name, overrides) => {
 		expect(errorOf(overrides).code).toBe('invalid_request')
 	})

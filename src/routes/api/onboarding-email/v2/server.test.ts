@@ -3,6 +3,16 @@ import { beforeEach, describe, expect, it, vi } from 'vitest'
 const env: Record<string, string | undefined> = {}
 vi.mock('$env/dynamic/private', () => ({ env }))
 vi.mock('$lib/server/sentry', () => ({ reportError: vi.fn() }))
+vi.mock('$lib/airtable.js', async (importOriginal) => ({
+	...(await importOriginal<Record<string, unknown>>()),
+	fetchAllPages: () =>
+		Promise.resolve([
+			{
+				id: 'recNetherlands',
+				fields: { country: 'Netherlands', whatsapp: 'https://chat.whatsapp.com/example' }
+			}
+		])
+}))
 
 const { POST } = await import('./+server.js')
 const { verifyVerificationToken } = await import('$lib/server/emailVerification')
@@ -14,7 +24,8 @@ const VERIFICATION_SECRET = 'verification-secret'
 const BODY = {
 	version: 2,
 	first_name: 'Alex',
-	language: 'en',
+	languages: ['English'],
+	country: 'Netherlands',
 	intent: 'Volunteer',
 	keep_informed: true,
 	routing: { kind: 'chapter', chapter_id: 12, name: 'PauseAI Netherlands', country: 'Netherlands' },
@@ -59,6 +70,7 @@ describe('POST /api/onboarding-email/v2', () => {
 		).toBe('valid')
 		expect(JSON.stringify(json)).not.toContain(TO_EMAIL)
 		expect(json.text).toContain('PauseAI Netherlands will be in touch')
+		expect(json.text).toContain('https://chat.whatsapp.com/example')
 		expect(json).not.toHaveProperty('from')
 	})
 
@@ -96,6 +108,12 @@ describe('POST /api/onboarding-email/v2', () => {
 		const response = await post({ ...BODY, version: 1 })
 		expect(response.status).toBe(400)
 		expect((await refusal(response)).code).toBe('unsupported_version')
+	})
+
+	it('resolves the language from languages', async () => {
+		const response = await post({ ...BODY, languages: ['Spanish'] })
+		expect(response.status).toBe(200)
+		expect(await rendered(response)).toMatchObject({ language: 'es' })
 	})
 
 	it('names the field it refuses', async () => {
