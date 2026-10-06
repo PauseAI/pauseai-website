@@ -16,11 +16,12 @@ export const LINK_TTL_SECONDS = 90 * 24 * 60 * 60
 
 // A link without a token is what every welcome carried before this date, and what the
 // Airtable sender's template fallback still sends. Such a link is accepted for a row
-// the sender marked `Sent emails` while the row is younger than a signed link's
-// lifetime, and for any such row until that long after this date. Set once, to the
-// day signed links were deployed; never move it later.
+// the sender marked `Sent emails` while the row is younger than LEGACY_WINDOW_DAYS,
+// and for any such row until that long after this date. Set once, to the day signed
+// links were deployed; never move it later.
 export const LEGACY_LINK_CUTOVER = Date.parse('2026-10-05T00:00:00Z')
-const LEGACY_WINDOW_MS = LINK_TTL_SECONDS * 1000
+export const LEGACY_WINDOW_DAYS = 30
+const LEGACY_WINDOW_MS = LEGACY_WINDOW_DAYS * 24 * 60 * 60 * 1000
 
 /** PHP: strtolower(trim($email, " \t\n\v\f\r")) (strtolower is ASCII-only from PHP 8.2). */
 export function normaliseEmail(email: string): string {

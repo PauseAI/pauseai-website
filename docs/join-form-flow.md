@@ -205,7 +205,7 @@ The token is `v1.<expiry>.<signature>`, the continuation token's shape with its 
 **Checking.** `/verify` takes the link's query out of the address bar and posts it to `/api/verify` in the request body, keeping it out of the API's request URLs (`redactLinkCredentials` in `src/lib/sentry.ts` also strips such a query from client and server Sentry reports). For `table=join`, `/api/verify` then:
 
 - with a token and the secret set: checks the token against the row the key names and that row's `Email` now. Expired, tampered, for another row, or minted for an address the row no longer has: refused.
-- without a token, or while the secret is unset: accepts the link only when the row has `Sent emails` ticked (the Airtable sender's record that it mailed a link) and either the row is under 90 days old or the click is within 90 days of `LEGACY_LINK_CUTOVER`, the day signed links were deployed. Otherwise refused.
+- without a token, or while the secret is unset: accepts the link only when the row has `Sent emails` ticked (the Airtable sender's record that it mailed a link) and either the row is under 30 days old or the click is within 30 days of `LEGACY_LINK_CUTOVER`, the day signed links were deployed. Otherwise refused.
 
 Unsigned links are a transition measure for mail sent before this change and by the Airtable sender's template fallback; they stop being accepted once signup mail moves to the CRM.
 

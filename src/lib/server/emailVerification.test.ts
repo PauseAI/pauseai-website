@@ -12,6 +12,7 @@ vi.mock('$lib/airtable', () => ({ getRecord }))
 
 const {
 	LEGACY_LINK_CUTOVER,
+	LEGACY_WINDOW_DAYS,
 	LINK_TTL_SECONDS,
 	acceptsUnsignedLink,
 	emailHash,
@@ -134,16 +135,20 @@ describe('acceptsUnsignedLink', () => {
 		createdTime,
 		fields: sent ? { 'Sent emails': true } : {}
 	})
-	const afterCutoverWindow = LEGACY_LINK_CUTOVER + 91 * DAY_MS
+	const afterCutoverWindow = LEGACY_LINK_CUTOVER + 31 * DAY_MS
 
-	it('accepts any mailed row within 90 days of the cutover', () => {
-		const clicked = LEGACY_LINK_CUTOVER + 89 * DAY_MS
+	it('has a 30-day window', () => {
+		expect(LEGACY_WINDOW_DAYS).toBe(30)
+	})
+
+	it('accepts any mailed row within 30 days of the cutover', () => {
+		const clicked = LEGACY_LINK_CUTOVER + 29 * DAY_MS
 		expect(acceptsUnsignedLink(row('2024-01-01T00:00:00.000Z'), clicked)).toBe(true)
 	})
 
-	it('after that, accepts a mailed row only while it is under 90 days old', () => {
-		const recent = new Date(afterCutoverWindow - 89 * DAY_MS).toISOString()
-		const old = new Date(afterCutoverWindow - 91 * DAY_MS).toISOString()
+	it('after that, accepts a mailed row only while it is under 30 days old', () => {
+		const recent = new Date(afterCutoverWindow - 29 * DAY_MS).toISOString()
+		const old = new Date(afterCutoverWindow - 31 * DAY_MS).toISOString()
 		expect(acceptsUnsignedLink(row(recent), afterCutoverWindow)).toBe(true)
 		expect(acceptsUnsignedLink(row(old), afterCutoverWindow)).toBe(false)
 		expect(acceptsUnsignedLink({ fields: { 'Sent emails': true } }, afterCutoverWindow)).toBe(false)
