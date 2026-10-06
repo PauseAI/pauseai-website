@@ -176,7 +176,7 @@ describe('POST /api/verify: signed links', () => {
 })
 
 describe('POST /api/verify: unsigned links', () => {
-	it('accepts one for a mailed row under 90 days old', async () => {
+	it('accepts one for a mailed row under 30 days old', async () => {
 		selected = [member('recPlain')]
 		expect((await link()).status).toBe(200)
 		expect(update).toHaveBeenCalledExactlyOnceWith('recPlain', { 'Verified email': true })
@@ -184,8 +184,8 @@ describe('POST /api/verify: unsigned links', () => {
 		expect(find).not.toHaveBeenCalled()
 	})
 
-	it('accepts one for an old mailed row within 90 days of the cutover', async () => {
-		vi.setSystemTime(LEGACY_LINK_CUTOVER + 30 * DAY_MS)
+	it('accepts one for an old mailed row within 30 days of the cutover', async () => {
+		vi.setSystemTime(LEGACY_LINK_CUTOVER + 20 * DAY_MS)
 		selected = [member('recPlain', {}, '2025-01-01T00:00:00.000Z')]
 		expect((await link()).status).toBe(200)
 	})
