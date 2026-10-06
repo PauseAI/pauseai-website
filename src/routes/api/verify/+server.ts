@@ -5,6 +5,7 @@ import { verificationParameter } from '$lib/config.js'
 import {
 	acceptsUnsignedLink,
 	getVerificationSecret,
+	normaliseEmail,
 	verifyVerificationToken
 } from '$lib/server/emailVerification'
 import { MEMBERS_BASE_ID, MEMBERS_TABLE_ID } from '$lib/server/members'
@@ -45,6 +46,9 @@ const VERIFICATION_TABLES = new Map([
 // /verify answers this with an explanation of how to get a new link, not an error.
 const linkExpired = () => json({ outcome: 'expired' }, { status: StatusCodes.GONE })
 
+const rowEmail = (fields: Record<string, unknown>) =>
+	typeof fields.Email === 'string' ? fields.Email : ''
+
 // The link's parameters arrive form-encoded in the body, never in this URL, so a live
 // link stays out of request logs and error reports.
 export const POST: RequestHandler = async ({ request }) => {
@@ -81,6 +85,8 @@ export const POST: RequestHandler = async ({ request }) => {
 	const named = records[0]
 
 	let recordId = named.id
+	// The address a valid token was checked against, when the link carried one.
+	let signedEmail: string | undefined
 	if (tableConfig.isMembers) {
 		const now = Date.now()
 		const token = params.get(TOKEN_PARAMETER) ?? ''
@@ -89,12 +95,13 @@ export const POST: RequestHandler = async ({ request }) => {
 		if (token && secret) {
 			// Against the row's address now: a link mailed to an address the row no longer
 			// has must not verify the new one.
-			const email = typeof named.fields.Email === 'string' ? named.fields.Email : ''
+			const email = rowEmail(named.fields)
 			const verdict = await verifyVerificationToken(secret, named.id, email, token, now)
 			if (verdict !== 'valid') {
 				console.warn('[verification] refused a signed link', { recordId: named.id, verdict })
 				return linkExpired()
 			}
+			signedEmail = email
 		} else {
 			const createdTime = (named._rawJson as { createdTime?: string } | undefined)?.createdTime
 			if (!acceptsUnsignedLink({ createdTime, fields: named.fields }, now)) {
@@ -123,5 +130,17 @@ export const POST: RequestHandler = async ({ request }) => {
 		}
 	}
 	await table.update(recordId, Object.fromEntries([[tableConfig.verifiedFieldName, true]]))
+
+	// Airtable has no conditional update, and the onboarding form can change a row's address
+	// (clearing its verification) between the read above and this write. So the address is
+	// re-checked after writing, and the tick undone if it is no longer the one the token signed.
+	if (signedEmail !== undefined) {
+		const written = await table.find(recordId)
+		if (normaliseEmail(rowEmail(written.fields)) !== normaliseEmail(signedEmail)) {
+			await table.update(recordId, Object.fromEntries([[tableConfig.verifiedFieldName, false]]))
+			console.warn('[verification] address changed while verifying', { recordId })
+			return linkExpired()
+		}
+	}
 	return new Response('OK', { status: StatusCodes.OK })
 }

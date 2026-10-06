@@ -211,7 +211,7 @@ Unsigned links are a transition measure for mail sent before this change and by 
 
 Refused answers 410 `{ outcome: 'expired' }`, and `/verify` explains that links last 90 days and only for the address they were sent to, with a mailto to info@pauseai.info for a new link. A "send me a new link" button needs a sender that can mail one (CiviCRM, pauseai-civicrm#668) and is a later step. An accepted link then follows `Merged into` with the safeguards in `mergedMemberRow.ts`, unchanged, and ticks the result. `table=statement` (signatory verification) is unchanged.
 
-**Bound to the address.** An update from the form that changes the row's normalised `Email` writes `Verified email: false` in the same Airtable write, so the tick does not carry over to the new address. Every live update therefore reads the row first.
+**Bound to the address.** An update from the form that changes the row's normalised `Email` writes `Verified email: false` in the same Airtable write, so the tick does not carry over to the new address. Every live update therefore reads the row first. After ticking a row for a signed link, `/api/verify` reads the row again and, if its normalised `Email` is no longer the address the token was checked against, writes `Verified email: false` and answers the same 410 refusal, since Airtable has no conditional write to make the check and the tick one step.
 
 **Secret.** `EMAIL_VERIFICATION_SECRET`, 32 random bytes (`openssl rand -base64 32`), in Netlify's Production context; separate from `ONBOARDING_CONTINUATION_SECRET`. Unset, the site logs it once per cold start, renders unsigned links and judges every link by the unsigned rule above, so nothing breaks. Rotating it invalidates every signed link in delivered mail: rotate only when needed.
 
