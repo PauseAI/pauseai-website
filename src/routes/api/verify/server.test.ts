@@ -82,7 +82,11 @@ beforeEach(() => {
 	vi.setSystemTime(NOW)
 	selected = []
 	tableIds.length = 0
-	find.mockReset()
+	// A re-read returns the row as the select found it unless a test says otherwise.
+	find.mockReset().mockImplementation((id) => {
+		const row = selected.find((candidate) => candidate.id === id)
+		return row ? Promise.resolve(row) : Promise.reject(new Error('NOT_FOUND'))
+	})
 	update.mockReset().mockResolvedValue()
 	reportError.mockReset().mockResolvedValue()
 	vi.spyOn(console, 'error').mockImplementation(() => {})
@@ -118,6 +122,41 @@ describe('POST /api/verify: signed links', () => {
 		expect(update).not.toHaveBeenCalled()
 	})
 
+	it('undoes the tick when the address changes between the read and the write', async () => {
+		selected = [member('recPlain')]
+		find.mockResolvedValue(member('recPlain', { Email: 'grace@example.org' }))
+		const token = await tokenFor('recPlain', 'ada@example.org')
+		const response = await link(`&token=${token}`)
+		expect(response.status).toBe(410)
+		expect(await response.json()).toEqual({ outcome: 'expired' })
+		expect(find).toHaveBeenCalledExactlyOnceWith('recPlain')
+		expect(update.mock.calls).toEqual([
+			['recPlain', { 'Verified email': true }],
+			['recPlain', { 'Verified email': false }]
+		])
+	})
+
+	it('keeps the tick when the re-read address differs only in case and spacing', async () => {
+		selected = [member('recPlain')]
+		find.mockResolvedValue(member('recPlain', { Email: ' Ada@Example.org ' }))
+		const token = await tokenFor('recPlain', 'ada@example.org')
+		expect((await link(`&token=${token}`)).status).toBe(200)
+		expect(update).toHaveBeenCalledExactlyOnceWith('recPlain', { 'Verified email': true })
+	})
+
+	it('undoes the tick on a survivor whose address changes after it was chosen', async () => {
+		selected = [merged()]
+		find
+			.mockResolvedValueOnce(survivor({ 'Verified email': true }))
+			.mockResolvedValueOnce(survivor({ Email: 'grace@example.org' }))
+		const token = await tokenFor('recMerged', 'ada@example.org')
+		expect((await link(`&token=${token}`)).status).toBe(410)
+		expect(update.mock.calls).toEqual([
+			['recSurvivor', { 'Verified email': true }],
+			['recSurvivor', { 'Verified email': false }]
+		])
+	})
+
 	it('refuses a bad token even on a row an unsigned link would verify', async () => {
 		selected = [member('recPlain')]
 		const token = tampered(await tokenFor('recPlain', 'ada@example.org'))
@@ -141,6 +180,8 @@ describe('POST /api/verify: unsigned links', () => {
 		selected = [member('recPlain')]
 		expect((await link()).status).toBe(200)
 		expect(update).toHaveBeenCalledExactlyOnceWith('recPlain', { 'Verified email': true })
+		// Nothing binds an unsigned link to an address, so there is nothing to re-check.
+		expect(find).not.toHaveBeenCalled()
 	})
 
 	it('accepts one for an old mailed row within 90 days of the cutover', async () => {
@@ -167,7 +208,7 @@ describe('POST /api/verify: merged rows', () => {
 		const token = await tokenFor('recMerged', 'ada@example.org')
 		const response = await link(`&token=${token}`)
 		expect(response.status).toBe(200)
-		expect(find).toHaveBeenCalledExactlyOnceWith('recSurvivor')
+		expect(find.mock.calls).toEqual([['recSurvivor'], ['recSurvivor']])
 		expect(update).toHaveBeenCalledExactlyOnceWith('recSurvivor', { 'Verified email': true })
 		expect(reportError).not.toHaveBeenCalled()
 	})
