@@ -16,7 +16,7 @@ import type { Actions, PageServerLoad } from './$types'
 import { createRecord, getRecord, updateRecord } from '$lib/airtable'
 import { queueCrmIntake } from '$lib/server/crmIntake'
 import { getNationalGroups } from '$lib/server/nationalGroups'
-import { isOnboardingLive } from '$lib/server/onboarding'
+import { isOnboardingLive, isSignupEmailsSentByCrm } from '$lib/server/onboarding'
 import { checkContinuation, issueContinuationToken } from '$lib/server/onboardingContinuation'
 import { normaliseEmail } from '$lib/server/emailVerification'
 import { MEMBERS_BASE_ID, MEMBERS_TABLE_ID } from '$lib/server/members'
@@ -33,6 +33,7 @@ import {
 	MOTIVATIONS,
 	SKILLS,
 	WEEKLY_HOURS,
+	FORM_VERSION,
 	asksChapterQuestion,
 	isChapterAnswer,
 	isValidUKPostcode,
@@ -248,7 +249,9 @@ export const actions: Actions = {
 		// never on an update, or the volunteer step (which carries no subscribe marker)
 		// would rewrite a /subscribe row as a /join one. Kept a stable literal so
 		// views/automations can still match it exactly; the where-from detail goes in
-		// `Source page` alongside it, never folded into this value.
+		// `Source page` alongside it, never folded into this value. `Form version`
+		// (FORM_VERSION) is create-only for the same reason: it names the rules the
+		// CRM applies to the row, which a later step must not move.
 		//
 		// `Source page` is either an embed's explicit ?source= or the first-party
 		// page it was posted from — see resolveSourcePage. Both inputs are
@@ -257,6 +260,11 @@ export const actions: Actions = {
 		// free text, so no option needs to exist for a new value.
 		if (!existingRecordId) {
 			fields['Signup source'] = signupSource(isSubscribeForm ? 'subscribe' : 'join', country)
+			fields['Form version'] = FORM_VERSION
+			// Which system sends this row's signup emails; unset, Airtable's automations do.
+			// Create-only, so a row's sender is fixed when it is created and no later post
+			// can hand it from one system to the other.
+			if (isSignupEmailsSentByCrm()) fields['Signup emails sent by'] = 'CiviCRM'
 			const sourcePage = resolveSourcePage(data, request, url)
 			if (sourcePage) fields['Source page'] = sourcePage
 		}
@@ -332,9 +340,9 @@ export const actions: Actions = {
 		// answer is for is the posted one, else the row's. The US is not asked, so a
 		// post landing there clears both fields. Elsewhere the post must carry an
 		// answer unless the row already holds one for that country: the CRM reads an
-		// unticked box on a row with this form's Signup source as a No. A posted
-		// wording must be one the form renders; a stored one was checked when posted,
-		// so it stands as long as the row's country does, through copy changes.
+		// unticked box with a wording as a No, and one without as never asked. A
+		// posted wording must be one the form renders; a stored one was checked when
+		// posted, so it stands as long as the row's country does, through copy changes.
 		// A live update reads the row, for this and for its address below. A stub update
 		// has no row to read and writes nothing, so it is let through.
 		let storedRow: FieldSet | null = null

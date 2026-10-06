@@ -26,6 +26,7 @@ const { actions } = await import('./+page.server.js')
 const { TOKEN_TTL_SECONDS } = await import('$lib/server/onboardingContinuation')
 const { chapterQuestion, chapterShareWording } =
 	await import('$lib/components/onboarding/chapterShare')
+const { FORM_VERSION } = await import('$lib/components/onboarding/options')
 const { onboardingMessages } = await import('$lib/components/onboarding/messages')
 
 // What Airtable answers a write with: the whole row, so an update returns more
@@ -592,6 +593,101 @@ describe('onboarding submit: chapter sharing', () => {
 		const created = await submit(signup)
 		await submit({ ...update(String(created.recordToken)), subscribe_form: '1' })
 		expect(writtenFields(updateRecord)).not.toHaveProperty('Signup source')
+	})
+
+	it('stamps the Form version on every create, and never on an update', async () => {
+		const creates: Record<string, string>[] = [
+			signup,
+			{ ...signup, mode: 'browse', intent: 'Act now' },
+			{
+				...signup,
+				subscribe_form: '1',
+				chapter_share_wording: wording('subscribe', 'United Kingdom', 'PauseAI UK', 'no')
+			},
+			usSignup,
+			{ ...usSignup, subscribe_form: '1' }
+		]
+		for (const fields of creates) {
+			await submit(fields)
+			expect(writtenFields(createRecord)['Form version']).toBe(FORM_VERSION)
+		}
+		// A number, as the Airtable field is: a string would be refused.
+		expect(typeof FORM_VERSION).toBe('number')
+		const created = await submit(signup)
+		await submit({ ...update(String(created.recordToken)), subscribe_form: '1' })
+		expect(writtenFields(updateRecord)).not.toHaveProperty('Form version')
+	})
+})
+
+describe('onboarding submit: signup emails sent by', () => {
+	const SENT_BY = 'Signup emails sent by'
+	const subscribeSignup = {
+		...signup,
+		subscribe_form: '1',
+		chapter_share_wording: wording('subscribe', 'United Kingdom', 'PauseAI UK', 'no')
+	}
+	const creates: Record<string, string>[] = [
+		signup,
+		{ ...signup, mode: 'browse', intent: 'Act now' },
+		subscribeSignup,
+		usSignup,
+		{ ...usSignup, subscribe_form: '1' }
+	]
+
+	beforeEach(() => {
+		for (const key of Object.keys(env)) delete env[key]
+		env.ONBOARDING_LIVE = 'true'
+		env.ONBOARDING_CONTINUATION_SECRET = 'test-secret'
+		mockWrites()
+		getRecord.mockReset().mockResolvedValue(UK_ROW)
+		nationalGroups = CHAPTERS
+		reportError.mockClear()
+		vi.spyOn(console, 'warn').mockImplementation(() => {})
+	})
+
+	// The updates a row can receive after its create: a plain update (as the
+	// volunteer step), the /subscribe continuation, and a resumed signup.
+	async function updateAll(token: string) {
+		await submit(update(token))
+		expect(writtenFields(updateRecord)).not.toHaveProperty(SENT_BY)
+		await submit({ ...update(token), subscribe_form: '1' })
+		expect(writtenFields(updateRecord)).not.toHaveProperty(SENT_BY)
+		await submit({ ...signup, ...update(token), resumed: '1' })
+		expect(writtenFields(updateRecord)).not.toHaveProperty(SENT_BY)
+		expect(updateRecord).toHaveBeenCalledTimes(3)
+	}
+
+	it('marks every create as sent by CiviCRM while the flag is on, and no update', async () => {
+		env.SIGNUP_EMAILS_SENT_BY_CRM = 'true'
+		for (const fields of creates) {
+			await submit(fields)
+			expect(writtenFields(createRecord)[SENT_BY]).toBe('CiviCRM')
+		}
+		const created = await submit(subscribeSignup)
+		await updateAll(String(created.recordToken))
+	})
+
+	it('writes nothing unless the flag is exactly "true"', async () => {
+		for (const value of [undefined, '', '1', 'false', 'TRUE', ' true']) {
+			if (value === undefined) delete env.SIGNUP_EMAILS_SENT_BY_CRM
+			else env.SIGNUP_EMAILS_SENT_BY_CRM = value
+			for (const fields of creates) {
+				await submit(fields)
+				expect(writtenFields(createRecord)).not.toHaveProperty(SENT_BY)
+			}
+		}
+		const created = await submit(signup)
+		await updateAll(String(created.recordToken))
+	})
+
+	it('records the field in a stub submission', async () => {
+		delete env.ONBOARDING_LIVE
+		env.SIGNUP_EMAILS_SENT_BY_CRM = 'true'
+		const created = await submit(signup)
+		expect(createRecord).not.toHaveBeenCalled()
+		expect(created.submission).toMatchObject({ fields: { [SENT_BY]: 'CiviCRM' } })
+		const updated = await submit(update(String(created.recordToken)))
+		expect((updated.submission as { fields: object }).fields).not.toHaveProperty(SENT_BY)
 	})
 })
 
