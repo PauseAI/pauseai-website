@@ -3,6 +3,7 @@
 	import { page } from '$app/state'
 	import OnboardingFlow from '$lib/components/onboarding/OnboardingFlow.svelte'
 	import PostMeta from '$lib/components/PostMeta.svelte'
+	import { reportEmbedHeight } from '$lib/embedHeight'
 	import {
 		isOnboardingLocale,
 		setOnboardingLocale,
@@ -47,9 +48,10 @@
 	// When iframed, report the rendered height to the host page so it can
 	// resize the iframe ({ height: number } via postMessage). '*' target is
 	// fine — the height is not sensitive and the host validates event.origin.
-	// The ResizeObserver covers step changes, validation errors, and window
-	// resizes without hooking each individually.
+	// reportEmbedHeight covers step changes, validation errors, window resizes and
+	// content that grows while the embed is still off-screen.
 	let embedded = $state(false)
+	let wrap: HTMLDivElement | undefined = $state()
 
 	onMount(() => {
 		embedded = window.self !== window.top
@@ -76,18 +78,15 @@
 			}
 		}
 
-		const sendHeight = () => {
-			window.parent.postMessage({ height: Math.ceil(document.documentElement.scrollHeight) }, '*')
-		}
-
-		const observer = new ResizeObserver(sendHeight)
+		// Measure the form's own wrapper, not the document: html/body are height:100%
+		// (global styles), so they always match the iframe and never report growth.
+		let stop: (() => void) | undefined
 		// `embedded` drops the wrapper's min-height; measure after that applies.
 		void tick().then(() => {
-			sendHeight()
-			observer.observe(document.documentElement)
-			observer.observe(document.body)
+			if (!wrap) return
+			stop = reportEmbedHeight(wrap, (height) => window.parent.postMessage({ height }, '*'))
 		})
-		return () => observer.disconnect()
+		return () => stop?.()
 	})
 
 	// Tell the host page a signup completed, so it can fire its own conversion
@@ -115,7 +114,12 @@
 
 <PostMeta {title} {description} />
 
-<div class="embed-wrap" class:embedded style:background-color={background || undefined}>
+<div
+	bind:this={wrap}
+	class="embed-wrap"
+	class:embedded
+	style:background-color={background || undefined}
+>
 	<OnboardingFlow
 		{initialCountry}
 		{initialCity}
