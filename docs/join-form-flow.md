@@ -445,10 +445,16 @@ On an update:
   `/subscribe`, `October 2026 onboarding flow` otherwise, each with ` (US)`
   appended when the country is `United States`, which is not asked the chapter
   question. Rows created before the question keep their `June 2026 …` values.
-  The values are matched by name in the CRM and in Airtable (see "Chapter
-  sharing"), so a new one needs those changed in the same release. Without the
-  "create only" rule the volunteer step, which carries no subscribe marker,
-  would rewrite a subscribe row as a join row.
+  It is a label: the CRM does not match it (see "Chapter sharing" for what
+  Airtable does). Without the "create only" rule the volunteer step, which
+  carries no subscribe marker, would rewrite a subscribe row as a join row.
+- `Form version` is written next to it, also create-only: the number
+  `FORM_VERSION` in `options.ts` (2), on every row either form creates. It names
+  the rules the CRM applies to the row (see "Chapter sharing"), so an update must
+  not move it.
+- `Signup emails sent by` is written next to it while `SIGNUP_EMAILS_SENT_BY_CRM` is
+  `true`, also create-only, so a row's sender is fixed when it is created (see
+  "Signup emails sent by").
 - `Source page` is written next to it, also create-only, recording where the
   signup came from. `resolveSourcePage` takes the first of: the hidden `source`
   field (an embed's `?source=`, or the host page URL the embed wrapper read from
@@ -482,7 +488,8 @@ create.
 Target: base `appWPTGqZmUcs3NWu`, table `tblL1icZBhTV1gQ9o` ("Members").
 
 **Step 2 / browse signup / subscribe form (create):** `Full name`, `Email`,
-`Country`, `City`, `Intent`, `Signup source`, `Source page` (when resolved),
+`Country`, `City`, `Intent`, `Signup source`, `Form version`, `Signup emails sent by`
+(while `SIGNUP_EMAILS_SENT_BY_CRM` is `true`), `Source page` (when resolved),
 `Email subscription` (keep_informed), `Data privacy policy agreed`,
 `GDPR chapter share permission` and `GDPR chapter share wording` (cleared to
 unticked and empty in the United States), plus `Zip code` when `country` is
@@ -555,8 +562,8 @@ question. A row with no wording (a US row, or one from before the question), or
 whose country is another, has none. Since only the country is compared, a staff
 edit of a row's `Country` alone, leaving its wording, makes the row count as
 answered for the new country. So outside the US an unticked box
-on a row created by this form (by `Signup source`) is a No, not a question never
-asked, whichever post last changed the row's country. In stub mode there is no
+on a row created by this form is a No (it carries the wording), not a question
+never asked, whichever post last changed the row's country. In stub mode there is no
 row to read, so an update without an answer is let through, as it writes
 nothing.
 
@@ -565,13 +572,24 @@ chapter mail and is never pre-ticked; after a Yes with Volunteer or Lead picked
 and Keep me informed unticked, step 2 points at it. Volunteer and Lead "will be
 in touch by email" means one-to-one follow-up about their request.
 
-The CRM matches the `Signup source` values by name, so a new value needs its
-lists changed in the same release: `OPTIN_FORM_SOURCES` lists all four,
-`CHAPTER_SHARE_AUTHORITATIVE_SOURCES` the two non-US ones. Airtable does not list
-them. The roster formula `Excluded from chapter roster` reads the stored wording,
-which the form writes only when it asked, and the "Subscriber becomes
-Volunteer/Lead" trigger matches the phrase "subscribe form", which every /subscribe
-value must keep.
+The CRM matches no `Signup source` value. It reads two recorded facts instead:
+whether the question was asked is the stored `GDPR chapter share wording`, which
+the form writes only where it showed the question and clears where it is hidden
+(an unticked box with a wording is a No, without one never asked), and which
+rules the row follows is `Form version`. A version at least the CRM's
+`CRM_PauseaiCore_MemberRow::CURRENT_FORM_VERSION` (2) gets the current rules: the
+newsletter only on Keep me informed, the chapter answer and the memberships
+written at signup by intake, and a chapter only on a recorded Yes. A row without
+one gets the legacy rules, except one carrying an October 2026 label, which
+predates the field and counts as version 2 (a closed list in the CRM). So a new
+form or a new `Signup source` label needs no CRM change. Bump `FORM_VERSION`, together with the CRM's constant, only when the
+rules a new row follows change. The Members field `Form version` (number,
+integer) must exist before a deploy that writes it, since Airtable refuses a
+write naming an unknown field. Airtable does not list the sources either. The
+roster formula `Excluded from chapter roster` reads the stored wording, which the
+form writes only when it asked, and the "Subscriber becomes Volunteer/Lead"
+trigger matches the phrase "subscribe form", which every /subscribe value must
+keep.
 
 This field is not only stored. The Airtable automations on the Members table
 read it to decide whether a signup is handed to their national chapter's leader
@@ -690,6 +708,15 @@ After every Airtable write the action makes, create or update, the action report
 - **Never in the way of the signup.** The call is made only after Airtable accepted the write, and handed to the edge function's `context.waitUntil`, so the response does not wait for it; on the Node dev server, which has no platform context, it simply runs on. It gives up after 3 seconds. Whatever it returns, the user's response is the same.
 - **Outcomes.** `ok`; `refused:<reason>` with the CRM's code (`token_required`, `merged`, ...); `error` for anything else (an HTTP error or an answer that is neither, a timeout, a network failure, missing configuration). Refusals go to Sentry as warnings and errors as errors, one issue per outcome code, carrying the record id, the outcome and its cause (for an HTTP error, only the status), never a field value, the token, the key or the CRM's error text, which could echo what the request carried. Nothing is retried: the next step of the form or the CRM's nightly import sends the row again. Calls are idempotent but not order-safe: each writes the whole row and carries no row version, so two quick updates to the same row can land in the CRM out of order, which the nightly import repairs; and a create delayed past the update that follows it is refused `token_required`, one spurious Sentry warning.
 - **Switching it on.** Stub mode never calls the CRM. In live mode the call needs `CRM_INTAKE_ENABLED=true` (anything else is off, the default), `CRM_INTAKE_URL` (the CRM's base URL, e.g. `https://crm.pauseai.info`) and `CRM_INTAKE_KEY` (the CRM's member intake API account key), all three in Netlify's **Production** context only, like `ONBOARDING_LIVE`. With the flag on and either of the others missing, every write reports `error` (cause `not_configured`). The CRM refuses an update without a valid token, so turn it on only once `ONBOARDING_CONTINUATION_ENFORCE=true`, and only once the CRM has the same `ONBOARDING_CONTINUATION_SECRET`.
+
+## Signup emails sent by
+
+The mail a new signup triggers (the welcome with its verification link, and the alerts to onboarders) is sent either by Airtable's automations or by CiviCRM. The Members field `Signup emails sent by` (single select) records which: `CiviCRM` marks the row as CiviCRM's, and an empty field leaves it with Airtable. This form writes it; nothing else on the website does.
+
+- **What is written.** While `SIGNUP_EMAILS_SENT_BY_CRM` is exactly `true` (anything else is off, the default), every row either form creates gets `Signup emails sent by` = `CiviCRM`, next to `Signup source` and `Form version`. With the flag off the form writes nothing to the field. In stub mode the field is only recorded in the stub submission, like the rest of the row.
+- **Fixed at creation.** The field is never written on an update: not the volunteer step, the `/subscribe` continuation, or a resumed post. So a row's sender is decided once, by the flag's value when the row was created, and no later post can move it. Turning the flag off therefore only changes who sends for rows created from then on; rows already marked stay CiviCRM's. Rows created any other way (staff entries in Airtable) are never marked and stay Airtable's.
+- **Before turning it on.** The Members field must exist, with the option `CiviCRM`, since Airtable refuses a write naming an unknown field. With the flag off nothing is written, so a deploy is safe before the field exists. Set the flag in Netlify's **Production** context only, like `ONBOARDING_LIVE`.
+- **Turning it on is the cutover step** that hands new signups to CiviCRM. It comes last: CiviCRM's sending for marked rows is switched on first, then marking. Airtable's automations leave marked rows to CiviCRM, so a row marked before CiviCRM sends would get its signup emails from neither.
 
 ## Lead path (no submission)
 
