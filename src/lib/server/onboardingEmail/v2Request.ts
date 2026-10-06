@@ -1,3 +1,4 @@
+import { env } from '$env/dynamic/private'
 import { COUNTRY_BY_ISO_CODE } from '$lib/server/countryCodes'
 import { normaliseEmail } from '$lib/server/emailVerification'
 import { resolveOnboardingEmailLanguage } from './language.js'
@@ -161,15 +162,25 @@ function parseToEmail(value: unknown): string {
 	return value
 }
 
-// The CRM that sends v2 requests; an unsubscribe link must point at it.
-const CRM_HOST = 'crm.pauseai.info'
 const MAX_URL = 2048
+
+// The CRM's host (with any port), from the base URL member intake already calls. Unset or
+// unreadable, there is no CRM to point an unsubscribe link at.
+function crmHost(): string | undefined {
+	try {
+		return env.CRM_INTAKE_URL ? new URL(env.CRM_INTAKE_URL).host : undefined
+	} catch {
+		return undefined
+	}
+}
 
 /** An https URL on the CRM's host, never fetched. Brackets are encoded so the plain text
  *  body's `[label](url)` link cannot end early. */
 function parseUnsubscribeUrl(value: unknown): string | undefined {
 	if (value === undefined || value === null || value === '') return undefined
-	const problem = `must be an https URL on ${CRM_HOST}`
+	const host = crmHost()
+	if (!host) invalid('unsubscribe_url', 'cannot be accepted: the website has no CRM_INTAKE_URL')
+	const problem = `must be an https URL on ${host}`
 	if (typeof value !== 'string' || value.length > MAX_URL || /\s/.test(value)) {
 		invalid('unsubscribe_url', problem)
 	}
@@ -181,8 +192,7 @@ function parseUnsubscribeUrl(value: unknown): string | undefined {
 	}
 	if (
 		parsed.protocol !== 'https:' ||
-		parsed.hostname !== CRM_HOST ||
-		parsed.port !== '' ||
+		parsed.host !== host ||
 		parsed.username !== '' ||
 		parsed.password !== ''
 	) {

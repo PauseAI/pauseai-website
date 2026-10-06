@@ -54,6 +54,7 @@ beforeEach(() => {
 	env.ONBOARDING_RENDER_V2_SECRET = SECRET
 	env.ONBOARDING_EMAIL_RENDER_SECRET = 'the-v1-secret'
 	env.EMAIL_VERIFICATION_SECRET = VERIFICATION_SECRET
+	env.CRM_INTAKE_URL = 'https://crm.pauseai.info'
 })
 
 describe('POST /api/onboarding-email/v2', () => {

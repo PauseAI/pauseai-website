@@ -95,7 +95,7 @@ const es: FixedCopy = {
 		'Si te suscribiste, te mantendremos al día. En cualquier caso, es posible que ocasionalmente te enviemos una alerta crítica.',
 	unsubscribe: {
 		question: '¿No quieres recibir nuestros correos?',
-		linkText: 'Darte de baja de todos los correos de PauseAI'
+		linkText: 'Date de baja de todos los correos de PauseAI'
 	}
 }
 

@@ -38,11 +38,11 @@ const NATIONAL_GROUPS = [
 	}
 ]
 
-const { fetchAllPages, reportError } = vi.hoisted(() => ({
-	fetchAllPages: vi.fn(),
-	reportError: vi.fn()
-}))
-vi.mock('$env/dynamic/private', () => ({ env: {} }))
+const { env, fetchAllPages, reportError } = vi.hoisted(() => {
+	const env: Record<string, string | undefined> = {}
+	return { env, fetchAllPages: vi.fn(), reportError: vi.fn() }
+})
+vi.mock('$env/dynamic/private', () => ({ env }))
 vi.mock('$lib/server/sentry', () => ({ reportError }))
 vi.mock('$lib/airtable.js', async (importOriginal) => ({
 	...(await importOriginal<Record<string, unknown>>()),
@@ -108,6 +108,7 @@ function chapterUrls(text: string): string[] {
 }
 
 beforeEach(() => {
+	env.CRM_INTAKE_URL = 'https://crm.pauseai.info/'
 	fetchAllPages.mockReset().mockResolvedValue(NATIONAL_GROUPS)
 	reportError.mockReset().mockResolvedValue(undefined)
 })
@@ -514,6 +515,28 @@ describe('parseV2Request', () => {
 		)
 		const absent = parse({ unsubscribe_url: null })
 		expect(absent.ok && absent.params.unsubscribeUrl).toBeUndefined()
+	})
+
+	it('takes the CRM host from CRM_INTAKE_URL, port included', () => {
+		env.CRM_INTAKE_URL = 'https://localhost:8443'
+		const local = parse({ unsubscribe_url: 'https://localhost:8443/civicrm/mailing/optout?cid=1' })
+		expect(local.ok && local.params.unsubscribeUrl).toBe(
+			'https://localhost:8443/civicrm/mailing/optout?cid=1'
+		)
+		expect(errorOf({ unsubscribe_url: 'https://crm.pauseai.info/optout' }).code).toBe(
+			'invalid_request'
+		)
+	})
+
+	it('refuses every unsubscribe link while CRM_INTAKE_URL is unset', () => {
+		for (const unset of [undefined, '', 'not a url']) {
+			env.CRM_INTAKE_URL = unset
+			const error = errorOf({ unsubscribe_url: 'https://crm.pauseai.info/optout' })
+			expect(error.code).toBe('invalid_request')
+			expect(error.message).toContain('unsubscribe_url')
+		}
+		const absent = parse({ unsubscribe_url: undefined })
+		expect(absent.ok).toBe(true)
 	})
 
 	it.each([
