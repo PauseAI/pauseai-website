@@ -1,6 +1,7 @@
 export const prerender = false
 
 import { env } from '$env/dynamic/private'
+import { signedVerificationLink } from '$lib/server/emailVerification'
 import {
 	chapterShareFromRequest,
 	renderOnboardingEmail
@@ -55,6 +56,11 @@ export const POST: RequestHandler = async ({ request }) => {
 		})
 	}
 
+	// It goes into an Airtable read for the signed link, and real ids are alphanumeric.
+	if (!/^[A-Za-z0-9]+$/.test(body.airtable_id)) {
+		return new Response('"airtable_id" must be alphanumeric', { status: StatusCodes.BAD_REQUEST })
+	}
+
 	const languages =
 		Array.isArray(body.languages) || typeof body.languages === 'string'
 			? (body.languages as string[] | string)
@@ -67,6 +73,8 @@ export const POST: RequestHandler = async ({ request }) => {
 			intent: typeof body.intent === 'string' ? body.intent : undefined,
 			languages,
 			airtable_id: body.airtable_id,
+			// `airtable_id` is the Members `Airtable ID` formula: the record id without its `rec`.
+			verificationLink: await signedVerificationLink(`rec${body.airtable_id}`),
 			subscribed:
 				typeof body.email_subscription === 'boolean' ? body.email_subscription : undefined,
 			chapterShare: await chapterShareFromRequest(body)

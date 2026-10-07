@@ -145,10 +145,7 @@ which is what makes that submission an update instead of a duplicate. The
 
 ### Continuation token
 
-A record id is not secret: it is in the verification link, the Stripe
-`client_reference_id`, and the action's response. So the id alone must not let
-someone update a row, or anyone holding one could overwrite that person's email,
-intent, opt-ins and chapter-sharing answer. `record_token` is the proof that the
+An update needs more than a record id: `record_token` is the proof that the
 browser posting `record_id` was handed it by the action.
 
 `src/lib/server/onboardingContinuation.ts` mints and checks it. The token is
@@ -162,9 +159,8 @@ id on a create, and a fresh one on every update whose posted token was valid, so
 a flow in progress never runs out, as the stored copy's age is reset on every
 post. The holder keeps the row writable for as long as it posts at least once
 every 24 hours. An update that went through without a valid token gets none
-back, and the form keeps whatever token it held: handing one out there would
-give anyone holding a bare id a genuine token that keeps working once
-enforcement is on.
+back, and the form keeps whatever token it held: a token is only ever issued
+at a create or in exchange for a valid one.
 
 On every update the action checks the posted token against the posted
 `record_id`. What a missing, malformed, expired or wrong token does depends on
@@ -195,10 +191,29 @@ Rollout: set the secret, deploy, watch the reports fall off as sessions from
 before the deploy expire, then after 24 hours set
 `ONBOARDING_CONTINUATION_ENFORCE=true` and redeploy.
 
-What the token does not cover: `/api/verify`, which ticks `Verified email` for
-whoever opens a link carrying the record id; the Stripe `client_reference_id`;
-and a create whose response never arrived (no token reached the browser, so its
-retry creates a row, as before).
+The verification link has its own token (next section). A create whose response
+never arrived gets no token, so its retry creates a row, as before.
+
+### Email verification link
+
+The welcome email's link ticks the Members row's `Verified email`. It is `https://pauseai.info/verify?table=join&verificationKey=<key>&token=<token>`, where `<key>` is the row's `Airtable ID` formula (the record id without its `rec`) and `<token>` ties the link to the row's current address. `src/lib/server/emailVerification.ts` mints and checks it.
+
+The token is `v1.<expiry>.<signature>`, the continuation token's shape with its own payload and secret: `<expiry>` is a Unix time in seconds, 90 days after minting, and `<signature>` is the unpadded base64url HMAC-SHA256, keyed by the UTF-8 bytes of `EMAIL_VERIFICATION_SECRET`, of `email-verification:v1:<recordId>:<emailHash>:<expiry>`. `<recordId>` is the full record id (`rec…`). `<emailHash>` is the lowercase hex SHA-256 of the UTF-8 bytes of the normalised `Email`: leading and trailing ASCII whitespace (space, tab, LF, VT, FF, CR) stripped, A to Z lowercased, nothing else changed (no Unicode case folding or normalisation); in PHP, `strtolower(trim($email, " \t\n\v\f\r"))` from PHP 8.2. CiviCRM is to mint the same tokens once the welcome moves there, so `src/lib/server/emailVerification.vectors.json` holds test vectors (inputs, normalised address, hash, payload, token) that both implementations must reproduce; change it together with any change to the format.
+
+**Minting.** `/api/onboarding-email` reads the row's current `Email` from Airtable and signs the link it renders into the welcome, so every composed welcome carries a signed link. The Airtable sender's request is unchanged, and the link still contains the key it checks both bodies for. Without the secret, or when the row cannot be read or has no `Email` (reported to Sentry with the record id), the welcome gets the unsigned link instead. A missing secret is reported to Sentry once per cold start where `ONBOARDING_LIVE` is on. The sender's template fallback always sends the unsigned link.
+
+**Checking.** `/verify` takes the link's query out of the address bar and posts it to `/api/verify` in the request body, keeping it out of the API's request URLs (`redactLinkCredentials` in `src/lib/sentry.ts` also strips such a query from client and server Sentry reports). For `table=join`, `/api/verify` then:
+
+- with a token and the secret set: checks the token against the row the key names and that row's `Email` now. Expired, tampered, for another row, or minted for an address the row no longer has: refused.
+- without a token, or while the secret is unset: accepts the link only when the row has `Sent emails` ticked (the Airtable sender's record that it mailed a link) and either the row is under 30 days old or the click is within 30 days of `LEGACY_LINK_CUTOVER`, the day signed links were deployed. Otherwise refused.
+
+Unsigned links are a transition measure for mail sent before this change and by the Airtable sender's template fallback; they stop being accepted once signup mail moves to the CRM.
+
+Refused answers 410 `{ outcome: 'expired' }`, and `/verify` explains that links last 90 days and only for the address they were sent to, with a mailto to info@pauseai.info for a new link. A "send me a new link" button needs a sender that can mail one (CiviCRM, pauseai-civicrm#668) and is a later step. An accepted link then follows `Merged into` with the safeguards in `mergedMemberRow.ts`, unchanged, and ticks the result. `table=statement` (signatory verification) is unchanged.
+
+**Bound to the address.** An update from the form that changes the row's normalised `Email` writes `Verified email: false` in the same Airtable write, so the tick does not carry over to the new address. Every live update therefore reads the row first. After ticking a row for a signed link, `/api/verify` reads the row again and, if its normalised `Email` is no longer the address the token was checked against, writes `Verified email: false` and answers the same 410 refusal, since Airtable has no conditional write to make the check and the tick one step.
+
+**Secret.** `EMAIL_VERIFICATION_SECRET`, 32 random bytes (`openssl rand -base64 32`), in Netlify's Production context; separate from `ONBOARDING_CONTINUATION_SECRET`. Unset, the site logs it once per cold start, renders unsigned links and judges every link by the unsigned rule above, so nothing breaks. Rotating it invalidates every signed link in delivered mail: rotate only when needed.
 
 ### Resuming after a remount
 
@@ -452,7 +467,7 @@ On an update:
   a non-empty value, so a partial post cannot blank what the create collected.
 
 That last guard covers those three fields and no others. `Email`, `Intent` and
-`Email subscription` are taken from the post on every call, and
+`Email subscription` are taken from the post on every call (an `Email` that changes also unticks `Verified email`; see "Email verification link"), and
 `Data privacy policy agreed` is hard-coded to `true` on every call whether or
 not the post carries `agree_gdpr`.
 

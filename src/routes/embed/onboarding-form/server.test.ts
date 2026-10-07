@@ -82,6 +82,7 @@ const WORDING_UK = wording('join', 'United Kingdom', 'PauseAI UK', 'no')
 
 // A stored Members row's chapter fields, as getRecord returns them.
 const row = (Country: string, permission: boolean, chapterWording: string) => ({
+	Email: 'ada@example.org',
 	Country,
 	'GDPR chapter share permission': permission,
 	'GDPR chapter share wording': chapterWording
@@ -505,17 +506,15 @@ describe('onboarding submit: chapter sharing', () => {
 		expect(await submit({ ...update(token), country: 'France' })).toMatchObject({ success: true })
 	})
 
-	it('reads the row only when the post leaves the answer to it', async () => {
+	it('reads the row once per update, and none on a create', async () => {
 		const created = await submit(signup)
 		const token = String(created.recordToken)
-		// The post's country and answer decide: no read.
+		expect(getRecord).not.toHaveBeenCalled()
 		await submit({ ...update(token), ...signup, resumed: '1' })
 		await submit({ ...update(token), country: 'United States' })
-		expect(getRecord).not.toHaveBeenCalled()
-		// Without an answer, or without a country, the row decides.
 		await submit({ ...update(token), country: 'United Kingdom' })
 		await submit(update(token))
-		expect(getRecord).toHaveBeenCalledTimes(2)
+		expect(getRecord).toHaveBeenCalledTimes(4)
 		expect(updateRecord).toHaveBeenCalledTimes(4)
 	})
 
@@ -814,5 +813,46 @@ describe('onboarding submit: CRM intake', () => {
 			expect.anything(),
 			expect.objectContaining({ check: 'onboarding-continuation' })
 		)
+	})
+})
+
+describe('onboarding submit: verified address', () => {
+	beforeEach(() => {
+		for (const key of Object.keys(env)) delete env[key]
+		env.ONBOARDING_LIVE = 'true'
+		env.ONBOARDING_CONTINUATION_SECRET = 'test-secret'
+		mockWrites()
+		getRecord.mockReset().mockResolvedValue({ ...UK_ROW, 'Verified email': true })
+		nationalGroups = CHAPTERS
+		reportError.mockClear()
+		vi.spyOn(console, 'warn').mockImplementation(() => {})
+	})
+
+	const writtenFields = () => updateRecord.mock.lastCall?.[3] as Record<string, unknown>
+
+	it('unticks Verified email in the same write when an update changes the address', async () => {
+		const token = String((await submit(signup)).recordToken)
+		await submit({ ...update(token), email: 'grace@example.org' })
+		expect(updateRecord).toHaveBeenCalledOnce()
+		expect(writtenFields()).toMatchObject({ Email: 'grace@example.org', 'Verified email': false })
+	})
+
+	it('leaves it alone when the address only differs in case or padding', async () => {
+		const token = String((await submit(signup)).recordToken)
+		await submit({ ...update(token), email: ' ADA@Example.org ' })
+		expect(writtenFields()).not.toHaveProperty('Verified email')
+	})
+
+	it('never writes it on a create', async () => {
+		await submit(signup)
+		expect(createRecord.mock.lastCall?.[2]).not.toHaveProperty('Verified email')
+	})
+
+	it('refuses the update rather than guess when the row cannot be read', async () => {
+		const token = String((await submit(signup)).recordToken)
+		getRecord.mockResolvedValueOnce('failed')
+		const result = await submit({ ...update(token), email: 'grace@example.org' })
+		expect(result).toMatchObject({ status: 502 })
+		expect(updateRecord).not.toHaveBeenCalled()
 	})
 })

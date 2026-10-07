@@ -18,6 +18,8 @@ import { queueCrmIntake } from '$lib/server/crmIntake'
 import { getNationalGroups } from '$lib/server/nationalGroups'
 import { isOnboardingLive, isSignupEmailsSentByCrm } from '$lib/server/onboarding'
 import { checkContinuation, issueContinuationToken } from '$lib/server/onboardingContinuation'
+import { normaliseEmail } from '$lib/server/emailVerification'
+import { MEMBERS_BASE_ID, MEMBERS_TABLE_ID } from '$lib/server/members'
 import { recordStubSubmission } from '$lib/server/onboarding-stub'
 import { subscribeToSubstackNewsletter } from '$lib/server/substack'
 import { checkNotSpam } from '$lib/server/turnstile-verify'
@@ -61,11 +63,6 @@ export const load: PageServerLoad = ({ setHeaders }) => {
 		'netlify-vary': `query=${CACHE_VARY_PARAMS.join('|')}`
 	})
 }
-
-// Write target per the Plan of Action: base "PauseAI Volunteers & Actions",
-// table "Members".
-const AIRTABLE_BASE_ID = 'appWPTGqZmUcs3NWu'
-const MEMBERS_TABLE_ID = 'tblL1icZBhTV1gQ9o'
 
 const STORED_LANGUAGES = LANGUAGES.map((l) => l.stored)
 
@@ -346,11 +343,11 @@ export const actions: Actions = {
 		// unticked box with a wording as a No, and one without as never asked. A
 		// posted wording must be one the form renders; a stored one was checked when
 		// posted, so it stands as long as the row's country does, through copy changes.
-		const postedAnswerDecides = !!country && (!asksChapterQuestion(country) || !!chapterAnswer)
-		// A stub update has no row to read and writes nothing, so it is let through.
+		// A live update reads the row, for this and for its address below. A stub update
+		// has no row to read and writes nothing, so it is let through.
 		let storedRow: FieldSet | null = null
-		if (existingRecordId && live && !postedAnswerDecides) {
-			const row = await getRecord(AIRTABLE_BASE_ID, MEMBERS_TABLE_ID, existingRecordId)
+		if (existingRecordId && live) {
+			const row = await getRecord(MEMBERS_BASE_ID, MEMBERS_TABLE_ID, existingRecordId)
 			if (row === 'missing') return rowGone(ROW_MISSING)
 			if (row === 'failed') {
 				return fail(502, { message: 'Sorry, we could not save your details. Please try again.' })
@@ -382,10 +379,17 @@ export const actions: Actions = {
 			if (!answered) return chapterAnswerMissing()
 		}
 
+		// Verification vouches for one address (docs/join-form-flow.md, "Email verification
+		// link"), so an update that changes it unticks `Verified email` in the same write.
+		const storedEmail = typeof storedRow?.Email === 'string' ? storedRow.Email : ''
+		if (storedRow && normaliseEmail(storedEmail) !== normaliseEmail(email)) {
+			fields['Verified email'] = false
+		}
+
 		if (live) {
 			const written = existingRecordId
-				? await updateRecord(AIRTABLE_BASE_ID, MEMBERS_TABLE_ID, existingRecordId, fields)
-				: await createRecord(AIRTABLE_BASE_ID, MEMBERS_TABLE_ID, fields)
+				? await updateRecord(MEMBERS_BASE_ID, MEMBERS_TABLE_ID, existingRecordId, fields)
+				: await createRecord(MEMBERS_BASE_ID, MEMBERS_TABLE_ID, fields)
 			// The row was deleted since the browser got its id.
 			if (written === 'missing') return rowGone(ROW_MISSING)
 			// A failed write; surface it instead of telling the user they're signed up
@@ -416,7 +420,7 @@ export const actions: Actions = {
 		const chapter = chapterMatch ? { name: chapterMatch.name, leader: chapterMatch.leader } : null
 		const submission = recordStubSubmission({
 			airtable: {
-				baseId: AIRTABLE_BASE_ID,
+				baseId: MEMBERS_BASE_ID,
 				tableId: MEMBERS_TABLE_ID,
 				tableName: 'Members'
 			},
