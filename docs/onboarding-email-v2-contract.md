@@ -12,7 +12,7 @@ v2 has its own route rather than sharing v1's, so the two validate and authentic
 
 ## Authentication
 
-`Authorization: Bearer <secret>`, where the secret is the `ONBOARDING_RENDER_V2_SECRET` environment variable on the website. It is separate from v1's `ONBOARDING_EMAIL_RENDER_SECRET`, so the CRM's secret and the Airtable automation's rotate independently. While the variable is unset, every request is refused with `401`.
+`Authorization: Bearer <secret>`, where the secret is the `ONBOARDING_EMAIL_RENDER_V2_SECRET` environment variable on the website. It is separate from v1's `ONBOARDING_EMAIL_RENDER_SECRET`, so the CRM's secret and the Airtable automation's rotate independently. While the variable is unset, every request is refused with `401`.
 
 To rotate: set the new value on the website, deploy, then update the CRM. Requests with the old value are refused with `401` from the deploy until the CRM is updated; the CRM retries a `401` (see "Timeouts and retries"), so welcomes wait through that window and go out once both sides match.
 

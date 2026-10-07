@@ -51,7 +51,7 @@ const rendered = async (response: Response) => (await response.json()) as Render
 const refusal = async (response: Response) => ((await response.json()) as Refusal).error
 
 beforeEach(() => {
-	env.ONBOARDING_RENDER_V2_SECRET = SECRET
+	env.ONBOARDING_EMAIL_RENDER_V2_SECRET = SECRET
 	env.ONBOARDING_EMAIL_RENDER_SECRET = 'the-v1-secret'
 	env.EMAIL_VERIFICATION_SECRET = VERIFICATION_SECRET
 	env.CRM_INTAKE_URL = 'https://crm.pauseai.info'
@@ -87,7 +87,7 @@ describe('POST /api/onboarding-email/v2', () => {
 	})
 
 	it('refuses everything while its secret is unset', async () => {
-		env.ONBOARDING_RENDER_V2_SECRET = undefined
+		env.ONBOARDING_EMAIL_RENDER_V2_SECRET = undefined
 		expect((await post(BODY, 'Bearer ')).status).toBe(401)
 		expect((await post(BODY, 'Bearer undefined')).status).toBe(401)
 	})

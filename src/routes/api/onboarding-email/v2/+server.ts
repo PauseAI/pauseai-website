@@ -38,7 +38,7 @@ async function authorized(header: string, secret: string): Promise<boolean> {
 
 export const POST: RequestHandler = async ({ request }) => {
 	// Separate from v1's ONBOARDING_EMAIL_RENDER_SECRET so each caller's secret rotates alone.
-	const secret = env.ONBOARDING_RENDER_V2_SECRET
+	const secret = env.ONBOARDING_EMAIL_RENDER_V2_SECRET
 	if (!secret || !(await authorized(request.headers.get('authorization') ?? '', secret))) {
 		return error(StatusCodes.UNAUTHORIZED, 'unauthorized', 'Missing or wrong bearer secret')
 	}
