@@ -565,13 +565,21 @@ const germany: ChapterOverride = {
 	}
 }
 
-/** Countries are matched as the live script matches them, with `includes`. */
+// In match order. Countries are matched as the live script matches them, with `includes`.
+const OVERRIDES: [country: string, override: ChapterOverride | null][] = [
+	['United Kingdom', uk],
+	['Canada', canada],
+	['Sweden', SWEDISH_COPY_APPROVED ? sweden : null],
+	['Germany', germany]
+]
+
+/** The countries whose chapter's own email is in use. Exported for tests that cover every one. */
+export const CHAPTER_OVERRIDE_COUNTRIES: readonly string[] = OVERRIDES.filter(
+	([, override]) => override
+).map(([country]) => country)
+
 function chapterFor(country: string | undefined): ChapterOverride | null {
-	if (country?.includes('United Kingdom')) return uk
-	if (country?.includes('Canada')) return canada
-	if (country?.includes('Sweden') && SWEDISH_COPY_APPROVED) return sweden
-	if (country?.includes('Germany')) return germany
-	return null
+	return OVERRIDES.find(([name]) => country?.includes(name))?.[1] ?? null
 }
 
 /** The override for a Members `country` value and intent bucket, or null for the shared copy. */

@@ -1,11 +1,15 @@
 import { ADDRESS_LINE } from './fixed.js'
 import { stripEmphasis } from './markdown.js'
 import { listItemParts, type EmailBlock } from './blocks.js'
-import type { ChapterLink } from './types.js'
+import type { ChapterLink, UnsubscribeLine } from './types.js'
 
 /** Renders blocks + footer to plain text, matching the `[label](url)` markdown-link
  *  style already used in the existing templates' `plain_text` fields. */
-export function renderText(blocks: EmailBlock[], socials: ChapterLink[] = []): string {
+export function renderText(
+	blocks: EmailBlock[],
+	socials: ChapterLink[] = [],
+	unsubscribe?: UnsubscribeLine
+): string {
 	const parts: string[] = []
 
 	for (const block of blocks) {
@@ -43,6 +47,9 @@ export function renderText(blocks: EmailBlock[], socials: ChapterLink[] = []): s
 	}
 
 	if (socials.length) parts.push(socials.map((item) => `[${item.label}](${item.url})`).join('\t'))
+	if (unsubscribe) {
+		parts.push(`${unsubscribe.question} [${unsubscribe.linkText}](${unsubscribe.url}).`)
+	}
 	parts.push(ADDRESS_LINE)
 
 	return parts.join('\n\n')

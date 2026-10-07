@@ -85,7 +85,7 @@ function volunteerContactBlock(
 	const blocks: EmailBlock[] = [
 		{
 			type: 'paragraph',
-			text: `**PauseAI ${chapter.name}** will be in touch to invite you to meet your local community at meetings and events.`
+			text: `**${chapter.displayName ?? `PauseAI ${chapter.name}`}** will be in touch to invite you to meet your local community at meetings and events.`
 		}
 	]
 	if (chapter.links.length > 0) blocks.push({ type: 'links', items: chapter.links })

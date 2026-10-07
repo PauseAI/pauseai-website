@@ -22,6 +22,8 @@ export type FixedCopy = {
 	/** The same promise inside an email a chapter wrote, where our full sentence reads as
 	 *  boilerplate bolted onto somebody else's note. */
 	newsletterInOwnWords: string
+	/** The footer's unsubscribe line, shown only when the caller gives an unsubscribe link. */
+	unsubscribe: { question: string; linkText: string }
 }
 
 /** The same in every language: it is a postal address, and it has to stay usable as one.
@@ -68,7 +70,11 @@ const en: FixedCopy = {
 		}
 	},
 	newsletterInOwnWords:
-		"If you opted in, we'll keep you posted. Either way, we may occasionally send you a critical alert."
+		"If you opted in, we'll keep you posted. Either way, we may occasionally send you a critical alert.",
+	unsubscribe: {
+		question: "Don't want emails from us?",
+		linkText: 'Unsubscribe from all PauseAI emails'
+	}
 }
 
 // From the live Spanish template, which serves volunteers and no-intent signups. The critical alert
@@ -86,7 +92,11 @@ const es: FixedCopy = {
 			: 'No te suscribiste a nuestra lista de correo, así que no la recibirás — pero es posible que ocasionalmente te enviemos una alerta crítica.'
 	},
 	newsletterInOwnWords:
-		'Si te suscribiste, te mantendremos al día. En cualquier caso, es posible que ocasionalmente te enviemos una alerta crítica.'
+		'Si te suscribiste, te mantendremos al día. En cualquier caso, es posible que ocasionalmente te enviemos una alerta crítica.',
+	unsubscribe: {
+		question: '¿No quieres recibir nuestros correos?',
+		linkText: 'Date de baja de todos los correos de PauseAI'
+	}
 }
 
 // Ours, not the chapter's: the two lines the skeleton adds around their own words. Machine
@@ -105,7 +115,11 @@ const sv: FixedCopy = {
 			: 'Du har inte valt att prenumerera, så vi håller dig inte uppdaterad — men vi kan ibland skicka ett viktigt och brådskande meddelande.'
 	},
 	newsletterInOwnWords:
-		'Om du har valt att prenumerera håller vi dig uppdaterad. Även om du inte prenumererar kan vi ibland skicka ett viktigt och brådskande meddelande.'
+		'Om du har valt att prenumerera håller vi dig uppdaterad. Även om du inte prenumererar kan vi ibland skicka ett viktigt och brådskande meddelande.',
+	unsubscribe: {
+		question: 'Vill du inte få mejl från oss?',
+		linkText: 'Avregistrera dig från alla mejl från PauseAI'
+	}
 }
 
 // PauseAI Deutschland's own wording, not ours. Their emails end on the "ignore this" sentence,
@@ -119,7 +133,11 @@ const de: FixedCopy = {
 		{ type: 'button', text: 'E-MAIL BESTÄTIGEN', url: link }
 	],
 	newsletter: () => DE_NEWSLETTER,
-	newsletterInOwnWords: DE_NEWSLETTER
+	newsletterInOwnWords: DE_NEWSLETTER,
+	unsubscribe: {
+		question: 'Du möchtest keine E-Mails von uns?',
+		linkText: 'Von allen PauseAI-E-Mails abmelden'
+	}
 }
 
 export const FIXED_COPY: Record<OnboardingEmailLanguage, FixedCopy> = { en, es, sv, de }

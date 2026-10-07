@@ -1,6 +1,7 @@
 import { listItemParts, type EmailBlock } from './blocks.js'
-import type { ChapterLink, OnboardingEmailLanguage } from './types.js'
+import type { ChapterLink, OnboardingEmailLanguage, UnsubscribeLine } from './types.js'
 import { ADDRESS_LINE } from './fixed.js'
+import { unsubscribeHtml } from './html.js'
 import { escapeHtml, mdLineToHtml } from './markdown.js'
 
 // A deliberately plain alternative to html.ts: no card, no colours, no column and no
@@ -56,9 +57,11 @@ export function renderHtmlPlain(
 	blocks: EmailBlock[],
 	language: OnboardingEmailLanguage,
 	assetBaseUrl: string,
-	socials: ChapterLink[] = []
+	socials: ChapterLink[] = [],
+	unsubscribe?: UnsubscribeLine
 ): string {
 	const body = blocks.map(renderBlock).join('\n')
+	const unsubscribeRow = unsubscribe ? `<p>${unsubscribeHtml(unsubscribe)}</p>\n` : ''
 	const socialRow = socials.length ? `<p>${linkRow(socials)}</p>` : ''
 	const logo = `<p><img src="${assetBaseUrl}/pauseai-logo-email.png" width="180" alt="PauseAI" style="display: block; width: 180px; max-width: 60%; height: auto; border: 0;"></p>`
 
@@ -74,7 +77,7 @@ export function renderHtmlPlain(
 ${body}
 ${logo}
 ${socialRow}
-<p>${escapeHtml(ADDRESS_LINE)}</p>
+${unsubscribeRow}<p>${escapeHtml(ADDRESS_LINE)}</p>
 </div>
 </body>
 </html>`

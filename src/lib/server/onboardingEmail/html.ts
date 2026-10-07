@@ -1,6 +1,6 @@
 import type { OnboardingEmailLanguage } from './types.js'
 import { listItemParts, type EmailBlock } from './blocks.js'
-import type { ChapterLink } from './types.js'
+import type { ChapterLink, UnsubscribeLine } from './types.js'
 import { ADDRESS_LINE } from './fixed.js'
 import { escapeHtml, mdLineToHtml } from './markdown.js'
 
@@ -14,6 +14,16 @@ const BORDER = '#e5e5e5'
 const RULE = '#d1d3d3'
 const BODY_BG = '#f6f6f6'
 const CARD_BG = '#ffffff'
+const FOOTER_TEXT = `font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; font-size: 12px; line-height: 1.6; color: ${MUTED};`
+
+/** The unsubscribe line's question and link, escaped, for either HTML wrapper. */
+export function unsubscribeHtml(
+	{ question, linkText, url }: UnsubscribeLine,
+	linkStyle = ''
+): string {
+	const style = linkStyle ? ` style="${linkStyle}"` : ''
+	return `${escapeHtml(question)} <a href="${escapeHtml(url)}"${style}>${escapeHtml(linkText)}</a>.`
+}
 
 // static/email-social/<name>.png, the same icons the MailerSend templates carry. A label
 // with no icon of its own falls back to its text, so nothing disappears.
@@ -96,9 +106,13 @@ export function renderHtml(
 	blocks: EmailBlock[],
 	language: OnboardingEmailLanguage,
 	assetBaseUrl: string,
-	socials: ChapterLink[] = []
+	socials: ChapterLink[] = [],
+	unsubscribe?: UnsubscribeLine
 ): string {
 	const rows = blocks.map(renderBlock).join('')
+	const unsubscribeRow = unsubscribe
+		? `<tr><td align="center" style="padding: 4px 0; ${FOOTER_TEXT}">${unsubscribeHtml(unsubscribe, `color: ${MUTED}; text-decoration: underline;`)}</td></tr>\n`
+		: ''
 	const socialRow = socials.length
 		? `<tr><td align="center" style="padding: 0 0 12px 0; line-height: 1;">${socials
 				.map((item) => {
@@ -142,8 +156,8 @@ ${rows}
 <td style="padding: 20px 32px 28px 32px; border-top: 1px solid ${BORDER};">
 <table role="presentation" width="100%" cellpadding="0" cellspacing="0">
 ${socialRow}
-<tr>
-<td align="center" style="padding: 4px 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; font-size: 12px; line-height: 1.6; color: ${MUTED};">${escapeHtml(ADDRESS_LINE)}</td>
+${unsubscribeRow}<tr>
+<td align="center" style="padding: 4px 0; ${FOOTER_TEXT}">${escapeHtml(ADDRESS_LINE)}</td>
 </tr>
 </table>
 </td>
