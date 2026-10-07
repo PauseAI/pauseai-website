@@ -118,7 +118,7 @@ const sv: FixedCopy = {
 		'Om du har valt att prenumerera håller vi dig uppdaterad. Även om du inte prenumererar kan vi ibland skicka ett viktigt och brådskande meddelande.',
 	unsubscribe: {
 		question: 'Vill du inte få mejl från oss?',
-		linkText: 'Avsluta alla mejl från PauseAI'
+		linkText: 'Avregistrera dig från alla mejl från PauseAI'
 	}
 }
 
@@ -136,7 +136,7 @@ const de: FixedCopy = {
 	newsletterInOwnWords: DE_NEWSLETTER,
 	unsubscribe: {
 		question: 'Du möchtest keine E-Mails von uns?',
-		linkText: 'Von allen E-Mails von PauseAI abmelden'
+		linkText: 'Von allen PauseAI-E-Mails abmelden'
 	}
 }
 
