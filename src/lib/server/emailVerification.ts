@@ -19,7 +19,7 @@ export const LINK_TTL_SECONDS = 90 * 24 * 60 * 60
 // the sender marked `Sent emails` while the row is younger than LEGACY_WINDOW_DAYS,
 // and for any such row until that long after this date. Set once, to the day signed
 // links were deployed; never move it later.
-export const LEGACY_LINK_CUTOVER = Date.parse('2026-10-05T00:00:00Z')
+export const LEGACY_LINK_CUTOVER = Date.parse('2026-10-07T00:00:00Z')
 export const LEGACY_WINDOW_DAYS = 30
 const LEGACY_WINDOW_MS = LEGACY_WINDOW_DAYS * 24 * 60 * 60 * 1000
 
