@@ -39,7 +39,11 @@ jobs:
         run: pnpm install --frozen-lockfile
 
       - name: Audit and fix
+        # pnpm audit exits non-zero when advisories remain, which is expected
+        # when they can't be fixed in range; the report step below documents
+        # them and the PR is still created, so don't gate the job here.
         run: pnpm audit --fix=${{ inputs.mode || 'update' }}
+        continue-on-error: true
 
       - name: Reinstall with fixed lockfile
         run: pnpm install
