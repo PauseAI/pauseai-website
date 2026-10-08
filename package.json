@@ -71,7 +71,7 @@
 		"remark-heading-id": "^1.0.1",
 		"remove-markdown": "^0.7.1",
 		"schema-dts": "^2.1.0",
-		"simple-git": "^3.36.0",
+		"simple-git": "^4.0.0",
 		"stylelint": "^17.16.0",
 		"svelte": "^5.57.1",
 		"svelte-check": "^4.7.6",
