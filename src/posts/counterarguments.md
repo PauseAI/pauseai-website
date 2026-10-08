@@ -18,7 +18,7 @@ But it's not just AI companies saying it’s an existential threat.
 - [86%](https://wiki.aiimpacts.org/ai_timelines/predictions_of_human-level_ai_timelines/ai_timeline_surveys/2023_expert_survey_on_progress_in_ai) of AI scientists believe that we could lose control over AI.
 - The top 3 most cited AI researchers (prof. Yoshua Bengio, prof. Geoffrey Hinton, Ilya Sutskever) all [warn about existential risk from AI](https://twitter.com/PauseAI/status/1734641804245455017).
 
-Read more about [x-risk](/xrisk)
+Read more about [x-risk](/xrisk), and why the warnings [are not just hype](/hype).
 
 ## Lose control? AI is just a piece of software, it's designed by humans
 
