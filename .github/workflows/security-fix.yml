@@ -63,7 +63,11 @@ jobs:
               echo
               echo "Not fixable by in-range updates — needs a manifest bump, an \`overrides\` dispatch, or an \`audit.ignore\` entry."
               echo
+              # pnpm audit prints a rendered CLI table, so fence the whole
+              # report as a code block to keep the PR body markdown intact
+              echo '```'
               cat "$RUNNER_TEMP/audit.txt"
+              echo '```'
               echo "PAUSEAI_AUDIT_EOF"
             } >> "$GITHUB_ENV"
             {
