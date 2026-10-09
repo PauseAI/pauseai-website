@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { onMount, tick } from 'svelte'
+	import { dev } from '$app/environment'
 	import { page } from '$app/state'
 	import OnboardingFlow from '$lib/components/onboarding/OnboardingFlow.svelte'
 	import PostMeta from '$lib/components/PostMeta.svelte'
@@ -9,6 +10,7 @@
 		setOnboardingLocale,
 		getMessages
 	} from '$lib/components/onboarding/i18n.svelte'
+	import { loadChapterSiteCountry } from '$lib/components/onboarding/chapterShare'
 
 	// Query params read here (locale, country, city, source, languages, bg) are
 	// listed in CACHE_VARY_PARAMS in +page.server.ts for the CDN cache key. Add
@@ -53,6 +55,26 @@
 	let embedded = $state(false)
 	let wrap: HTMLDivElement | undefined = $state()
 
+	// Set when the referrer host matches a chapter's own website, so the
+	// chapter question can drop the "separate organisation" disclosure that
+	// makes sense on the global site but reads as a double confirmation when
+	// the visitor is already on that chapter's page. See chapterShare.ts.
+	let chapterSiteCountry = $state<string | null>(null)
+
+	// DEV-only override for local testing, since a real cross-origin referrer
+	// can't be faked without actually serving a test page from a chapter's own
+	// domain: ?dev_chapter_site=Germany forces the detected chapter straight to
+	// a country name, skipping the referrer match in onMount below. `dev` is a
+	// build-time constant, so this block is stripped from production bundles —
+	// it never runs on pauseai.info.
+	let devChapterSite: string | null = null
+	if (dev) {
+		$effect(() => {
+			devChapterSite = page.url.searchParams.get('dev_chapter_site')
+			if (devChapterSite) chapterSiteCountry = devChapterSite
+		})
+	}
+
 	onMount(() => {
 		embedded = window.self !== window.top
 		if (!embedded) return
@@ -72,6 +94,11 @@
 					ref.host === window.location.host && ref.pathname.startsWith('/embed/onboarding-form')
 				if (!isSelfEmbed) {
 					referrerSource = `${ref.host}${ref.pathname}`.replace(/\/+$/, '')
+					if (!devChapterSite) {
+						void loadChapterSiteCountry(ref.hostname).then((country) => {
+							chapterSiteCountry = country
+						})
+					}
 				}
 			} catch {
 				// Unparseable referrer — leave attribution to ?source= or nothing.
@@ -125,6 +152,7 @@
 		{initialCity}
 		{initialLanguages}
 		{initialSource}
+		{chapterSiteCountry}
 		onSignup={reportSignup}
 	/>
 </div>
