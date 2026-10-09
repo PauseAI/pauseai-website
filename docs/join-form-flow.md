@@ -539,6 +539,23 @@ list to check a wording (see "Validation rules"), so a form on an older list is
 never refused for it; for up to that hour after a chapter is deactivated, a form
 may still name it, and the stored wording records that faithfully.
 
+The embed replaces this question, and the separate Privacy Policy checkbox
+(`agree_gdpr`), with a single checkbox when it detects it's iframed on that
+same chapter's own site: `/embed/onboarding-form/+page.svelte` matches
+`document.referrer`'s host against each national group's `website` field
+(`loadChapterSiteCountry`), and when that detected country is the one the
+visitor picked, `OnboardingFlow.svelte`'s `isChapterSiteQuestion` is true. The
+checkbox ("Share my details with PauseAI UK and PauseAI Global") has no
+heading or body — just itself — and covers both consents at once: checking it
+sets `gdprConsent` and the chapter answer (always `yes`) together, unchecking
+clears both. There is no "chapter only" option here, only both-or-neither, and
+`chapterShareWording` drops the (now empty) heading/body lines so the stored
+evidence is just the checkbox's own text (`chapterShare.ts`, `'chapter-site'`
+form). Step 1's `chapterSiteConsentField` never actually posts — its form is
+intercepted client-side — so step 2 mirrors its answer into a hidden
+`agree_gdpr` input alongside the existing `chapter_share`/`chapter_share_wording`
+ones, and skips the normal Privacy Policy checkbox entirely in this mode.
+
 The country an answer is for is the posted `country`, or, on an update that
 posts none, the one the row holds. An update whose post leaves the answer to the
 row (no answer posted for a non-US country, or no country posted) reads the row

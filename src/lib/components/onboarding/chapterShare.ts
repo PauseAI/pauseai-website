@@ -6,7 +6,16 @@ import { asksChapterQuestion, type ChapterAnswer } from './options'
 
 const CHOSEN_PREFIX = '[chosen] '
 
-export type ChapterForm = 'join' | 'subscribe'
+// 'chapter-site' replaces 'join' while embedded on that same chapter's own
+// site (detected by matching the iframe's referrer host against the chapter's
+// website field, OnboardingFlow.svelte's isChapterSiteQuestion). There the
+// question is a single checkbox, not a yes/no choice: it also stands in for
+// the Privacy Policy consent otherwise asked separately, and there's no
+// "chapter only" opt-out — checked shares with both, unchecked shares with
+// neither (blocks the signup entirely, same as declining the checkbox
+// elsewhere). Its `heading`/`body` are empty: nothing is shown above the
+// checkbox, and chapterShareWording skips them in the stored evidence.
+export type ChapterForm = 'join' | 'subscribe' | 'chapter-site'
 
 export type ChapterQuestion = { heading: string; body: string; yes: string; no: string }
 
@@ -40,6 +49,14 @@ export function chapterQuestion(
 	if (!asksChapterQuestion(country)) return null
 	const subscribe = form === 'subscribe'
 	if (chapter) {
+		if (form === 'chapter-site') {
+			return {
+				heading: '',
+				body: '',
+				yes: msgs.onboarding_chapter_site_label(chapter),
+				no: msgs.onboarding_chapter_no
+			}
+		}
 		return {
 			heading: subscribe
 				? msgs.onboarding_chapter_subscribe_heading(chapter)
@@ -63,9 +80,11 @@ export function chapterQuestion(
 
 // What `GDPR chapter share wording` stores: the text the person saw, with the
 // option they picked, in the language it was shown in. Laid out as in the mock-up
-// the wording was agreed on.
+// the wording was agreed on. Empty heading/body (chapter-site's single checkbox,
+// which shows neither) are left out rather than stored as blank lines.
 export function chapterShareWording(question: ChapterQuestion, answer: ChapterAnswer): string {
-	return `${question.heading}\n${question.body}\n${CHOSEN_PREFIX}${answer === 'yes' ? question.yes : question.no}`
+	const chosen = `${CHOSEN_PREFIX}${answer === 'yes' ? question.yes : question.no}`
+	return [question.heading, question.body, chosen].filter(Boolean).join('\n')
 }
 
 // Every wording a form can show for `country` and store with `answer`, in each
@@ -130,21 +149,48 @@ export function keepInformedConfirmation(
 		: msgs.onboarding_confirm_keep_informed_not_shared
 }
 
-// The countries with a chapter, fetched once per page load. A failed or slow lookup
+// The national groups list, fetched once per page load. A failed or slow lookup
 // counts as no chapters, as the lead path's copy already does: the question waits
 // for it, so a hung request must not leave Submit disabled.
 const CHAPTER_LOOKUP_TIMEOUT_MS = 5000
-let chapterCountriesPromise: Promise<string[]> | null = null
+let nationalGroupsPromise: Promise<NationalGroupsApiResponse> | null = null
 
-export function loadChapterCountries(): Promise<string[]> {
-	chapterCountriesPromise ??= Promise.race([
+function loadNationalGroups(): Promise<NationalGroupsApiResponse> {
+	nationalGroupsPromise ??= Promise.race([
 		fetch('/api/national-groups')
 			.then((response) =>
 				response.ok ? (response.json() as Promise<NationalGroupsApiResponse>) : []
 			)
-			.then((groups) => groups.map((group) => group.name))
 			.catch(() => []),
-		new Promise<string[]>((resolve) => setTimeout(() => resolve([]), CHAPTER_LOOKUP_TIMEOUT_MS))
+		new Promise<NationalGroupsApiResponse>((resolve) =>
+			setTimeout(() => resolve([]), CHAPTER_LOOKUP_TIMEOUT_MS)
+		)
 	])
-	return chapterCountriesPromise
+	return nationalGroupsPromise
+}
+
+export function loadChapterCountries(): Promise<string[]> {
+	return loadNationalGroups().then((groups) => groups.map((group) => group.name))
+}
+
+function hostOf(url: string): string | null {
+	try {
+		return new URL(/^https?:\/\//i.test(url) ? url : `https://${url}`).hostname
+			.replace(/^www\./, '')
+			.toLowerCase()
+	} catch {
+		return null
+	}
+}
+
+// The chapter, if any, whose own website matches `host` — the iframe's
+// referrer host when the embed is on a chapter's own site. Null for the
+// global site, an unknown host, or a chapter with no website on record.
+export function loadChapterSiteCountry(host: string): Promise<string | null> {
+	const cleanHost = host.replace(/^www\./, '').toLowerCase()
+	if (!cleanHost) return Promise.resolve(null)
+	return loadNationalGroups().then((groups) => {
+		const match = groups.find((group) => group.website && hostOf(group.website) === cleanHost)
+		return match?.name ?? null
+	})
 }

@@ -360,8 +360,11 @@ export const actions: Actions = {
 			fields['GDPR chapter share permission'] = false
 			fields['GDPR chapter share wording'] = ''
 		} else if (chapterCountry && chapterAnswer !== null) {
+			// 'chapter-site' is 'join' with softer wording shown while embedded on
+			// that chapter's own site (chapterShare.ts) — either may legitimately
+			// be what the visitor saw, and the post doesn't say which.
 			const offered = possibleWordings(
-				[isSubscribeForm ? 'subscribe' : 'join'],
+				isSubscribeForm ? ['subscribe'] : ['join', 'chapter-site'],
 				chapterCountry,
 				chapterAnswer
 			)

@@ -15,6 +15,15 @@ interface ChapterShareMessages {
 	onboarding_chapter_heading: (chapter: string) => string
 	onboarding_chapter_body: (chapter: string) => string
 	onboarding_chapter_yes: (chapter: string) => string
+	// The label on the single checkbox shown instead of the chapter question
+	// and the separate Privacy Policy checkbox when the embed is detected on
+	// that same chapter's own site (chapterShare.ts, 'chapter-site'): one
+	// checkbox covers both consents, with no "chapter only" opt-out there.
+	onboarding_chapter_site_label: (chapter: string) => string
+	// Shown under step 1's Continue when chapterSiteConsentField's checkbox is
+	// unchecked, in place of onboarding_chapter_answer_needed ("checkbox", not
+	// "question").
+	onboarding_chapter_site_consent_needed: string
 	onboarding_chapter_subscribe_heading: (chapter: string) => string
 	onboarding_chapter_subscribe_yes: (chapter: string) => string
 	onboarding_chapter_none_heading: (country: string) => string
@@ -44,6 +53,8 @@ const chapterShareEn: ChapterShareMessages = {
 	onboarding_chapter_body: (chapter) =>
 		`If you say yes, we share your signup details with ${chapter}, which may be a separate organisation from PauseAI Global. You can change your mind at any time by emailing ${PRIVACY_EMAIL}.`,
 	onboarding_chapter_yes: (chapter) => `Yes, share my details with ${chapter}`,
+	onboarding_chapter_site_label: (chapter) => `Share my details with ${chapter} and PauseAI Global`,
+	onboarding_chapter_site_consent_needed: 'Please provide consent to continue.',
 	onboarding_chapter_subscribe_heading: (chapter) => `Hear from ${chapter} too?`,
 	onboarding_chapter_subscribe_yes: (chapter) =>
 		`Yes, share my details with ${chapter} so it can email me local news`,
@@ -93,6 +104,9 @@ const chapterShareDe: ChapterShareMessages = {
 	onboarding_chapter_body: (chapter) =>
 		`Wenn du zustimmst, teilen wir deine Anmeldeangaben mit ${chapter}. Dabei kann es sich um eine von PauseAI Global getrennte Organisation handeln. Du kannst deine Meinung jederzeit ändern, indem du eine E-Mail an ${PRIVACY_EMAIL} schreibst.`,
 	onboarding_chapter_yes: (chapter) => `Ja, meine Daten mit ${chapter} teilen`,
+	onboarding_chapter_site_label: (chapter) =>
+		`Meine Daten mit ${chapter} und PauseAI Global teilen`,
+	onboarding_chapter_site_consent_needed: 'Bitte stimme zu, um fortzufahren.',
 	onboarding_chapter_subscribe_heading: (chapter) => `Auch Nachrichten von ${chapter} erhalten?`,
 	onboarding_chapter_subscribe_yes: (chapter) =>
 		`Ja, meine Daten mit ${chapter} teilen, damit mir die Gruppe lokale Neuigkeiten per E-Mail schicken kann`,
@@ -143,6 +157,9 @@ const chapterShareFr: ChapterShareMessages = {
 	onboarding_chapter_body: (chapter) =>
 		`Si tu réponds oui, nous partageons tes données d'inscription avec ${chapter}, qui peut être une organisation distincte de PauseAI Global. Tu peux changer d'avis à tout moment en écrivant à ${PRIVACY_EMAIL}.`,
 	onboarding_chapter_yes: (chapter) => `Oui, partager mes données avec ${chapter}`,
+	onboarding_chapter_site_label: (chapter) =>
+		`Partager mes données avec ${chapter} et PauseAI Global`,
+	onboarding_chapter_site_consent_needed: 'Merci de donner ton consentement pour continuer.',
 	onboarding_chapter_subscribe_heading: (chapter) => `Recevoir aussi des nouvelles de ${chapter} ?`,
 	onboarding_chapter_subscribe_yes: (chapter) =>
 		`Oui, partager mes données avec ${chapter} pour qu'il puisse m'envoyer des nouvelles locales par e-mail`,
@@ -193,6 +210,8 @@ const chapterShareEs: ChapterShareMessages = {
 	onboarding_chapter_body: (chapter) =>
 		`Si dices que sí, compartimos tus datos de inscripción con ${chapter}, que puede ser una organización distinta de PauseAI Global. Puedes cambiar de opinión en cualquier momento escribiendo a ${PRIVACY_EMAIL}.`,
 	onboarding_chapter_yes: (chapter) => `Sí, compartir mis datos con ${chapter}`,
+	onboarding_chapter_site_label: (chapter) => `Compartir mis datos con ${chapter} y PauseAI Global`,
+	onboarding_chapter_site_consent_needed: 'Por favor, da tu consentimiento para continuar.',
 	onboarding_chapter_subscribe_heading: (chapter) => `¿Recibir también noticias de ${chapter}?`,
 	onboarding_chapter_subscribe_yes: (chapter) =>
 		`Sí, compartir mis datos con ${chapter} para que pueda enviarme noticias locales por correo electrónico`,

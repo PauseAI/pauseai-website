@@ -33,10 +33,14 @@ describe('chapterQuestion', () => {
 
 	it('renders in every locale, with the chapter and country filled in', () => {
 		for (const [locale, msgs] of Object.entries(onboardingMessages)) {
-			for (const form of ['join', 'subscribe'] as const) {
+			for (const form of ['join', 'subscribe', 'chapter-site'] as const) {
 				const withChapter = chapterQuestion(msgs, form, 'Germany', 'PauseAI Deutschland')!
-				expect(withChapter.heading, locale).toContain('PauseAI Deutschland')
 				expect(withChapter.yes, locale).toContain('PauseAI Deutschland')
+				// chapter-site's heading/body are intentionally blank (single
+				// checkbox, no explanation) — only its label names the chapter.
+				if (form !== 'chapter-site') {
+					expect(withChapter.heading, locale).toContain('PauseAI Deutschland')
+				}
 				const without = chapterQuestion(msgs, form, 'Portugal', null)!
 				expect(without.heading, locale).toContain('Portugal')
 				expect(without.body, locale).toContain('Portugal')
@@ -51,6 +55,21 @@ describe('chapterQuestion', () => {
 			'Share your details with a PauseAI chapter in Portugal when one starts?'
 		)
 		expect(question?.yes).toBe('Yes, share my details with the chapter when it starts')
+	})
+
+	it('uses the chapter-site variant: a single checkbox, no heading or body', () => {
+		const question = chapterQuestion(en, 'chapter-site', 'Germany', 'PauseAI Germany')!
+		expect(question).toMatchObject({
+			heading: '',
+			body: '',
+			yes: 'Share my details with PauseAI Germany and PauseAI Global',
+			no: 'No, only PauseAI Global'
+		})
+		// Its stored wording is just the checkbox's own text — no blank lines
+		// from the empty heading/body.
+		expect(chapterShareWording(question, 'yes')).toBe(
+			'[chosen] Share my details with PauseAI Germany and PauseAI Global'
+		)
 	})
 
 	it("uses /subscribe's variant, whose Yes covers email", () => {

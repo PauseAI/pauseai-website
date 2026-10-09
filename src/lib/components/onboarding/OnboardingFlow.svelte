@@ -88,6 +88,7 @@
 		initialKeepInformed = false,
 		initialChapterAnswer = null,
 		initialSource = '',
+		chapterSiteCountry = null,
 		onSignup,
 		onRecordGone
 	}: {
@@ -114,6 +115,12 @@
 		// continuation follows in its copy and never asks again. Null where it was
 		// not asked (the United States).
 		initialChapterAnswer?: ChapterAnswer | null
+		// The chapter whose own site this embed was detected on (matched by the
+		// iframe's referrer host, see /embed/onboarding-form/+page.svelte). Only
+		// softens the chapter question's wording when it equals basics.country —
+		// visiting PauseAI Germany's site and then picking France still asks the
+		// regular question.
+		chapterSiteCountry?: string | null
 		// Called once per new signup, when the server confirms it created a record.
 		// Not called for updates to an existing record (the volunteer step, or a
 		// /subscribe continuation) nor for silently dropped spam submissions.
@@ -397,9 +404,18 @@
 	)
 	const chapterQ = $derived(
 		askChapter && chapterCountries !== null
-			? chapterQuestion(msgs, 'join', basics.country, chapter)
+			? chapterQuestion(
+					msgs,
+					chapterSiteCountry === basics.country ? 'chapter-site' : 'join',
+					basics.country,
+					chapter
+				)
 			: null
 	)
+	// True while the chapter question doubles as the Privacy Policy consent too
+	// (the 'chapter-site' wording in chapterShare.ts): answering it on step 1
+	// covers both, so step 2 neither asks again nor shows the checkbox.
+	const isChapterSiteQuestion = $derived(!!chapterQ && chapterSiteCountry === basics.country)
 	const answerForCountry = $derived(
 		chapterChoice?.country === basics.country ? chapterChoice.answer : null
 	)
@@ -721,6 +737,33 @@
 	{/if}
 {/snippet}
 
+<!-- On a chapter's own site, this single checkbox replaces both the chapter
+     question above and gdprConsentField below: it's the only consent gate,
+     covering Privacy Policy agreement and chapter sharing together (always
+     "yes" when checked — there's no partial opt-out here, see chapterShare.ts
+     'chapter-site'). Unchecked leaves chapterChoice unset, so the existing
+     chapterAnswerMissing gating blocks Continue/Submit exactly as it already
+     does for the regular chapter question. -->
+{#snippet chapterSiteConsentField()}
+	{#if chapterQ}
+		<label class="agreement">
+			<input
+				type="checkbox"
+				name="agree_gdpr"
+				required
+				checked={gdprConsent}
+				onchange={(event) => {
+					const checked = event.currentTarget.checked
+					chapterChoice = checked ? { country: basics.country, answer: 'yes' } : null
+					gdprConsent = checked
+				}}
+			/>
+			<span class="checkbox-box" aria-hidden="true"></span>
+			<span>{chapterQ.yes}</span>
+		</label>
+	{/if}
+{/snippet}
+
 {#snippet gdprConsentField()}
 	<label class="agreement">
 		<input type="checkbox" name="agree_gdpr" required bind:checked={gdprConsent} />
@@ -828,7 +871,11 @@
 				{/if}
 				<!-- Asked on step 1, after its fields, so step 2 stays short; step 2 posts
 				     the answer and its wording with the create. -->
-				{@render chapterQuestionField(false, 3, msgs.onboarding_chapter_section_label)}
+				{#if isChapterSiteQuestion}
+					{@render chapterSiteConsentField()}
+				{:else}
+					{@render chapterQuestionField(false, 3, msgs.onboarding_chapter_section_label)}
+				{/if}
 				<!-- Step 1 gates on native validation (pattern, optional), like the
 				     name/email/city fields above it, so the browser can explain an
 				     invalid postcode on submit. The chapter question has no native
@@ -842,7 +889,11 @@
 				>
 				{#if chapterAnswerMissing}
 					<p class="helper centered" id="ob-chapter-pending">
-						{chapterQ ? msgs.onboarding_chapter_answer_needed : msgs.onboarding_chapter_loading}
+						{!chapterQ
+							? msgs.onboarding_chapter_loading
+							: isChapterSiteQuestion
+								? msgs.onboarding_chapter_site_consent_needed
+								: msgs.onboarding_chapter_answer_needed}
 					</p>
 				{/if}
 				<div class="browse-option">
@@ -881,6 +932,12 @@
 					{#if chapterQ && answerForCountry}
 						<input type="hidden" name="chapter_share" value={answerForCountry} />
 						<input type="hidden" name="chapter_share_wording" value={chapterWording} />
+					{/if}
+					<!-- Step 1's chapterSiteConsentField checkbox lives in a form that
+					     never actually submits (continueToIntent prevents it); mirror its
+					     answer here, in the form that does. -->
+					{#if isChapterSiteQuestion && gdprConsent}
+						<input type="hidden" name="agree_gdpr" value="on" />
 					{/if}
 					<p class="section-label" id="optins-heading">{msgs.onboarding_optins_heading}</p>
 					<div class="intent-grid" role="group" aria-labelledby="optins-heading">
@@ -962,7 +1019,8 @@
 				{#if isContinuation}
 					<!-- Only after the server found no answer for the row's country. -->
 					{@render chapterQuestionField(true, 3, msgs.onboarding_chapter_section_label)}
-				{:else}
+				{:else if !isChapterSiteQuestion}
+					<!-- Already asked, and already covered this consent, on step 1. -->
 					{@render gdprConsentField()}
 				{/if}
 				{#if onboardingLive && onboardingModeKnown}
@@ -1100,8 +1158,12 @@
 							{#if hasUniversities(basics.country)}
 								{@render universityField('loop-university')}
 							{/if}
-							{@render chapterQuestionField(true, 4)}
-							{@render gdprConsentField()}
+							{#if isChapterSiteQuestion}
+								{@render chapterSiteConsentField()}
+							{:else}
+								{@render chapterQuestionField(true, 4)}
+								{@render gdprConsentField()}
+							{/if}
 							{#if onboardingLive && onboardingModeKnown}
 								{#key turnstileNonce}
 									<Turnstile bind:token={turnstileToken} />
