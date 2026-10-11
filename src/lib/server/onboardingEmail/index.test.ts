@@ -202,7 +202,7 @@ describe('renderOnboardingEmail', () => {
 		const email = await render('United Kingdom', 'Volunteer')
 		expect(email.html).toContain('<br><a href="https://luma.com/pauseai-nov26?tk=UEvEYj"')
 		expect(email.text).toContain(
-			'3. Saturday 21st November: March Against AI Extinction. We are putting on'
+			'2. Saturday 21st November: March Against AI Extinction. We are putting on'
 		)
 		expect(email.text).toContain('\nJoseph Miller\nDirector of PauseAI UK')
 	})
