@@ -100,12 +100,12 @@ describe('chapterShareWording', () => {
 
 describe('copy that follows the answer', () => {
 	it('says who will be in touch', () => {
-		expect(inTouch(en, null, 'PauseAI Germany')).toBe("We'll be in touch by email.")
-		expect(inTouch(en, 'yes', 'PauseAI Germany')).toBe('PauseAI Germany will be in touch by email.')
+		expect(inTouch(en, null, 'PauseAI Germany')).toBe("We'll email you about it.")
+		expect(inTouch(en, 'yes', 'PauseAI Germany')).toBe('PauseAI Germany will email you about it.')
 		expect(inTouch(en, 'yes', null)).toBe(
-			'PauseAI Global will be in touch by email, and your chapter will be too once one starts.'
+			'PauseAI Global will email you about it, and your chapter will too once one starts.'
 		)
-		expect(inTouch(en, 'no', 'PauseAI Germany')).toBe('PauseAI Global will be in touch by email.')
+		expect(inTouch(en, 'no', 'PauseAI Germany')).toBe('PauseAI Global will email you about it.')
 	})
 
 	it('says what Keep me informed brings', () => {

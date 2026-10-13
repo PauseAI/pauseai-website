@@ -77,10 +77,10 @@ const chapterShareEn: ChapterShareMessages = {
 	onboarding_keep_informed_sub_not_shared: 'Global campaign updates and ways to help.',
 	onboarding_in_touch_shared: (chapter) =>
 		chapter
-			? `${chapter} will be in touch by email.`
-			: 'PauseAI Global will be in touch by email, and your chapter will be too once one starts.',
-	onboarding_in_touch_unanswered: "We'll be in touch by email.",
-	onboarding_in_touch_not_shared: 'PauseAI Global will be in touch by email.',
+			? `${chapter} will email you about it.`
+			: 'PauseAI Global will email you about it, and your chapter will too once one starts.',
+	onboarding_in_touch_unanswered: "We'll email you about it.",
+	onboarding_in_touch_not_shared: 'PauseAI Global will email you about it.',
 	onboarding_chapter_nudge: (chapter) =>
 		chapter
 			? `For events and campaigns from ${chapter} and PauseAI Global, tick Keep me informed.`
