@@ -34,4 +34,5 @@ CLAUDE.md
 .env.sentry-build-plugin
 
 .prettierignore
-.playwright-mcp/orca.yaml
+.playwright-mcp/
+orca.yaml
