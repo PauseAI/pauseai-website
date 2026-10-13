@@ -132,10 +132,10 @@ const chapterShareDe: ChapterShareMessages = {
 		'Updates zu globalen Kampagnen und Mitmach-Möglichkeiten.',
 	onboarding_in_touch_shared: (chapter) =>
 		chapter
-			? `${chapter} meldet sich per E-Mail bei dir.`
-			: 'PauseAI Global meldet sich per E-Mail bei dir, und deine Gruppe ebenfalls, sobald es eine gibt.',
-	onboarding_in_touch_unanswered: 'Wir melden uns per E-Mail bei dir.',
-	onboarding_in_touch_not_shared: 'PauseAI Global meldet sich per E-Mail bei dir.',
+			? `${chapter} schreibt dir dazu eine E-Mail.`
+			: 'PauseAI Global schreibt dir dazu eine E-Mail, und deine Gruppe ebenfalls, sobald es eine gibt.',
+	onboarding_in_touch_unanswered: 'Wir schreiben dir dazu eine E-Mail.',
+	onboarding_in_touch_not_shared: 'PauseAI Global schreibt dir dazu eine E-Mail.',
 	onboarding_chapter_nudge: (chapter) =>
 		chapter
 			? `Für Veranstaltungen und Kampagnen von ${chapter} und PauseAI Global kreuze „Auf dem Laufenden bleiben“ an.`
@@ -185,10 +185,10 @@ const chapterShareFr: ChapterShareMessages = {
 		"Les actualités des campagnes mondiales et des occasions d'agir.",
 	onboarding_in_touch_shared: (chapter) =>
 		chapter
-			? `${chapter} te contactera par e-mail.`
-			: "PauseAI Global te contactera par e-mail, et ton groupe aussi dès qu'il existera.",
-	onboarding_in_touch_unanswered: 'Nous te contacterons par e-mail.',
-	onboarding_in_touch_not_shared: 'PauseAI Global te contactera par e-mail.',
+			? `${chapter} t'écrira à ce sujet par e-mail.`
+			: "PauseAI Global t'écrira à ce sujet par e-mail, et ton groupe aussi dès qu'il existera.",
+	onboarding_in_touch_unanswered: "Nous t'écrirons à ce sujet par e-mail.",
+	onboarding_in_touch_not_shared: "PauseAI Global t'écrira à ce sujet par e-mail.",
 	onboarding_chapter_nudge: (chapter) =>
 		chapter
 			? `Pour les événements et les campagnes de ${chapter} et de PauseAI Global, coche « Me tenir informé·e ».`
@@ -236,11 +236,10 @@ const chapterShareEs: ChapterShareMessages = {
 	onboarding_keep_informed_sub_not_shared: 'Novedades de las campañas globales y formas de ayudar.',
 	onboarding_in_touch_shared: (chapter) =>
 		chapter
-			? `${chapter} se pondrá en contacto contigo por correo electrónico.`
-			: 'PauseAI Global se pondrá en contacto contigo por correo electrónico, y tu grupo también cuando exista uno.',
-	onboarding_in_touch_unanswered: 'Nos pondremos en contacto contigo por correo electrónico.',
-	onboarding_in_touch_not_shared:
-		'PauseAI Global se pondrá en contacto contigo por correo electrónico.',
+			? `${chapter} te escribirá por correo electrónico sobre ello.`
+			: 'PauseAI Global te escribirá por correo electrónico sobre ello, y tu grupo también cuando exista uno.',
+	onboarding_in_touch_unanswered: 'Te escribiremos por correo electrónico sobre ello.',
+	onboarding_in_touch_not_shared: 'PauseAI Global te escribirá por correo electrónico sobre ello.',
 	onboarding_chapter_nudge: (chapter) =>
 		chapter
 			? `Para recibir información sobre los eventos y las campañas de ${chapter} y de PauseAI Global, marca «Mantenme informado/a».`
