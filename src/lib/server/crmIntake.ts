@@ -13,7 +13,9 @@ import type { WrittenRecord } from '$lib/airtable'
 import { flushReports, reportError } from '$lib/server/sentry'
 
 const PATH = '/civicrm/ajax/api4/PauseaiMemberIntake/submit'
-export const TIMEOUT_MS = 3000
+// The CRM can take about 6 seconds to answer and completes the write even after
+// the caller aborts, so a shorter wait reports timeouts for writes that succeeded.
+export const TIMEOUT_MS = 10_000
 type Cause = 'not_configured' | 'http' | 'timeout' | 'network'
 
 type Result =
