@@ -8,6 +8,7 @@ Metrics since we founded: 📧147 AI decisionmaker emails, meetings with 👥22 
 Tell us [what you did](mailto:australia@pauseai.info?subject=Aussie%20Did%20a%20Thing), or [what you have cooking](mailto:australia@pauseai.info?subject=Things%20Cooking) so we can support you!
 
 ### 2026 September
+
 - 📧9 AI decisionmaker emails, meetings with 👥5 of them, 📅7 events with 73 attendees.
 - We held [Australia's largest protest on AI x-risk](https://www.instagram.com/p/DdL2EPxE4Zk/?img_index=1).
 
