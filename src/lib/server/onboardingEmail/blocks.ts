@@ -1,0 +1,85 @@
+import type { FixedCopy } from './fixed.js'
+import type { ChapterLink, IntentBucket, IntentGroup, OnboardingEmailHtmlStyle } from './types.js'
+
+/** A list item, optionally with one level of unordered sub-items under it. */
+export type ListItem = string | { text: string; items: string[] }
+
+export function listItemParts(item: ListItem): { text: string; items: string[] } {
+	return typeof item === 'string' ? { text: item, items: [] } : item
+}
+
+export type EmailBlock =
+	| { type: 'heading'; text: string; level?: 1 | 2 }
+	| { type: 'paragraph'; text: string }
+	| { type: 'list'; items: ListItem[]; ordered?: boolean }
+	| { type: 'links'; items: ChapterLink[] }
+	| { type: 'button'; text: string; url: string }
+	/** The closing line and signature, set as one block so the gap above it is wider
+	 *  than the gaps inside it. */
+	| { type: 'signoff'; lines: string[] }
+	/** A horizontal rule in the rich layout; the plain one ignores it. */
+	| { type: 'rule' }
+
+/** Everything an email supplies itself. composeBlocks() adds the fixed lines around it. */
+export type EmailContent = {
+	subject: string
+	greeting: EmailBlock[]
+	body: EmailBlock[]
+	/** The closing line(s) and the sign-off. */
+	signoff: EmailBlock[]
+	/** Replaces the fixed newsletter line, for a chapter that states the same promise in its own
+	 *  words: news if they opted in, and occasional important messages either way. */
+	newsletter?: string
+	/** The sender's own accounts. Drawn as icons in the footer, under the rule, the way
+	 *  the MailerSend templates do it. */
+	socials?: ChapterLink[]
+	/** Unset means `rich`. */
+	htmlStyle?: OnboardingEmailHtmlStyle
+}
+
+/** Maps the raw Airtable `Intent` value onto the three versions the copy varies over.
+ *  Every uncertain case gets `none`, matching the live script's fallback. */
+export function resolveIntentBucket(intent: string | undefined): IntentBucket {
+	switch ((intent ?? '').trim()) {
+		case 'Act now':
+			return 'act-now'
+		case 'Volunteer':
+		case 'Lead':
+			return 'volunteer'
+		default:
+			return 'none'
+	}
+}
+
+export function groupOf(bucket: IntentBucket): IntentGroup {
+	return bucket === 'volunteer' ? 'volunteer' : 'non-volunteer'
+}
+
+/** The skeleton: greeting, confirm link, body, newsletter line, sign-off. No content can leave
+ *  out either fixed line; it may only reword the newsletter one. */
+export function composeBlocks(
+	content: EmailContent,
+	fixed: FixedCopy,
+	bucket: IntentBucket,
+	verificationLink: string,
+	/** True for an email a chapter wrote, which gets the shorter promise. */
+	ownWords = false,
+	/** The Members record's own "Email subscription" checkbox. Only the shared email's line
+	 *  depends on it; undefined keeps that line's hedged "if you opted in" wording. */
+	subscribed?: boolean
+): EmailBlock[] {
+	return [
+		...content.greeting,
+		{ type: 'rule' },
+		...fixed.confirm(verificationLink),
+		{ type: 'rule' },
+		...content.body,
+		{
+			type: 'paragraph',
+			text:
+				content.newsletter ??
+				(ownWords ? fixed.newsletterInOwnWords : fixed.newsletter(bucket, subscribed))
+		},
+		...content.signoff
+	]
+}

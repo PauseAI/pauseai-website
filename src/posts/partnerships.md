@@ -1,6 +1,7 @@
 ---
 title: Partnership Opportunities with PauseAI
-description: Invitation link to PauseAI's Discord server
+description: How organizations, researchers, media, and policymakers can partner
+  with PauseAI's volunteer network
 ---
 
 PauseAI is dedicated to preventing AI catastrophes through grassroots activism, policy advocacy, and public engagement.

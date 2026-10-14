@@ -60,6 +60,7 @@ The Advisory Council is a group of experienced, high-contribution volunteers who
 - **[Donate](/donate)** — Support the movement financially.
 - **[Microgrants](/microgrants)** — Apply for funding for your PauseAI-related project or event.
 - **[Vacancies](/vacancies)** — See open positions.
+- **[Join the Operations Team](/join-operations)** — Help build and maintain the website and our wider tech stack.
 - **[Google Calendar](https://calendar.google.com/calendar/u/0?cid=Y19mNWE4YWYyMDZlNjM1ODc2NjVjNmU4MzAzOTgzZmVmYWYzYTBjNjE0NGRiMGFhNDljOTcwZWZhNTEwYTNkODY3QGdyb3VwLmNhbGVuZGFyLmdvb2dsZS5jb20)** — PauseAI events calendar.
 - **[Anonymous feedback](https://pauseai.info/contact-us?tab=feedback)** — Share critical thoughts with us while remaining anonymous.
 
@@ -72,7 +73,7 @@ The Advisory Council is a group of experienced, high-contribution volunteers who
 - [Learn about AI safety](/learn)
 - [PauseAI in the media](/press)
 - [Email builder](/email-builder)
-- [US Lobby guide](/us-lobby-guide)
+- [US Lobby guide](/us-lobby-guide), [taking action in the US](/us-take-action)
 - [Writing press releases](/writing-press-releases)
 
 ## Strategy

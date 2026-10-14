@@ -35,3 +35,4 @@ CLAUDE.md
 
 .prettierignore
 .playwright-mcp/
+orca.yaml

@@ -1,5 +1,6 @@
 <script lang="ts">
-	type Option = { label: string; value: string }
+	/** `aliases` are extra strings the typeahead matches (e.g. an abbreviation) but never shows. */
+	type Option = { label: string; value: string; aliases?: string[] }
 
 	let {
 		id,
@@ -62,11 +63,13 @@
 		// Empty query, or the query is just the current selection (user
 		// reopened the list): show the full list.
 		if (!q || (!multiple && query === labelFor(single))) return items
-		const starts = items.filter((i) => i.label.toLowerCase().startsWith(q))
-		const contains = items.filter(
+		const aliased = items.filter((i) => i.aliases?.some((a) => a.toLowerCase() === q))
+		const rest = items.filter((i) => !aliased.includes(i))
+		const starts = rest.filter((i) => i.label.toLowerCase().startsWith(q))
+		const contains = rest.filter(
 			(i) => !i.label.toLowerCase().startsWith(q) && i.label.toLowerCase().includes(q)
 		)
-		return [...starts, ...contains]
+		return [...aliased, ...starts, ...contains]
 	})
 
 	$effect(() => {
@@ -77,7 +80,12 @@
 
 	function exactMatch(text: string) {
 		const t = text.trim().toLowerCase()
-		return items.find((i) => i.label.toLowerCase() === t || i.value.toLowerCase() === t)
+		return items.find(
+			(i) =>
+				i.label.toLowerCase() === t ||
+				i.value.toLowerCase() === t ||
+				i.aliases?.some((a) => a.toLowerCase() === t)
+		)
 	}
 
 	function openList() {
@@ -327,7 +335,7 @@
 		background-color: var(--bg);
 		border: 1px solid var(--brand-subtle);
 		border-radius: 12px;
-		box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
+		box-shadow: 0 6px 20px rgba(var(--black-rgb), 0.12);
 	}
 
 	.option {

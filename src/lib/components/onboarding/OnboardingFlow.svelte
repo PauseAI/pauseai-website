@@ -11,7 +11,6 @@
 	import { onMount } from 'svelte'
 	import { enhance } from '$app/forms'
 	import type { SubmitFunction } from '@sveltejs/kit'
-	import type { NationalGroupsApiResponse } from '$api/national-groups/+server.js'
 	import type { OnboardingModeApiResponse } from '$api/onboarding-mode/+server.js'
 	import { toast } from 'svelte-french-toast'
 	import LinkWithoutIcon from '$lib/components/LinkWithoutIcon.svelte'
@@ -19,19 +18,51 @@
 	import Combobox from '$lib/components/Combobox.svelte'
 	import Turnstile from '$lib/components/Turnstile.svelte'
 	import ActionCards from './ActionCards.svelte'
+	import ChapterShareQuestion from './ChapterShareQuestion.svelte'
 	import Stepper from './Stepper.svelte'
+	import CheckInbox from './CheckInbox.svelte'
 	import { getMessages } from './i18n.svelte'
+	import {
+		chapterName,
+		chapterQuestion,
+		chapterShareWording,
+		effectiveAnswer,
+		inTouch,
+		keepInformedConfirmation,
+		keepInformedSub,
+		loadChapterCountries
+	} from './chapterShare'
+	import {
+		afterRecordGone,
+		chapterAnswerFor,
+		forgetSignup,
+		heldChapterAnswer,
+		loadSignup as loadSavedSignup,
+		posted,
+		postedIntent,
+		sameEmail,
+		saveSignupFromPost,
+		afterChapterAnswerMissing,
+		forgetChapterAnswer,
+		type SavedChapterAnswer,
+		type SavedSignup
+	} from './signupResume'
 	import { turnstileSiteKey } from '$lib/turnstile'
+	import { hasUniversities, isKnownUniversity, universityOptions } from '$lib/data/universities'
 	import {
 		COUNTRIES,
 		COUNTRY_DIAL_CODES,
 		DISCOVERY_SPECIFY_TRIGGERS,
 		LANGUAGES,
+		UK_POSTCODE_PATTERN,
+		asksChapterQuestion,
+		isValidUKPostcode,
 		getDiscoveryOptions,
 		getMotivations,
 		getSkills,
 		getWeeklyHours,
 		getIntentOptions,
+		type ChapterAnswer,
 		type Intent,
 		type IntentKey
 	} from './options'
@@ -52,25 +83,52 @@
 		initialFullName = '',
 		initialLanguages = [] as string[],
 		initialRecordId = '',
+		initialRecordToken = '',
 		startStep = 1,
 		initialKeepInformed = false,
-		initialChapterShare = false
+		initialChapterAnswer = null,
+		initialSource = '',
+		chapterSiteCountry = null,
+		onSignup,
+		onRecordGone
 	}: {
 		initialEmail?: string
 		initialCountry?: string
 		initialCity?: string
 		initialFullName?: string
 		initialLanguages?: string[]
+		// Per-embed attribution from /embed/onboarding-form?source=. Posted as a
+		// hidden `source` on the create forms; the server sanitises it and writes
+		// it to the `Source page` field. Ignored on updates (create-only field).
+		initialSource?: string
 		// The /subscribe flow creates the record up front and then hands off here
 		// to let people go further. It seeds the created record id and starts at
 		// the intent step, so this submission updates that record instead of
 		// creating a duplicate, and pre-sets the newsletter opt-in they already made.
 		initialRecordId?: string
+		// The token the server issued with that id. A prop, like the id, so it never
+		// reaches a URL.
+		initialRecordToken?: string
 		startStep?: 1 | 2
 		initialKeepInformed?: boolean
-		// The chapter-updates choice made on the subscribe form, reposted so backing
-		// out of Volunteer/Lead restores it instead of leaving the escalation.
-		initialChapterShare?: boolean
+		// The chapter-sharing answer given on the subscribe form, which the
+		// continuation follows in its copy and never asks again. Null where it was
+		// not asked (the United States).
+		initialChapterAnswer?: ChapterAnswer | null
+		// The chapter whose own site this embed was detected on (matched by the
+		// iframe's referrer host, see /embed/onboarding-form/+page.svelte). Only
+		// softens the chapter question's wording when it equals basics.country —
+		// visiting PauseAI Germany's site and then picking France still asks the
+		// regular question.
+		chapterSiteCountry?: string | null
+		// Called once per new signup, when the server confirms it created a record.
+		// Not called for updates to an existing record (the volunteer step, or a
+		// /subscribe continuation) nor for silently dropped spam submissions.
+		onSignup?: () => void
+		// Required with initialRecordId: called when the server refuses to update
+		// that row (410), so the host returns to the form that collects consent,
+		// since this one hides it and the next post must create a row.
+		onRecordGone?: () => void
 	} = $props()
 
 	// Starts true so an unanswered request keeps the anti-spam check required.
@@ -83,6 +141,7 @@
 	// pages embedding the form can be prerendered (e.g. /join), so the runtime
 	// env isn't available at render time, ask the server instead.
 	onMount(async () => {
+		void loadChapterCountries().then((countries) => (chapterCountries = countries))
 		try {
 			const response = await fetch('/api/onboarding-mode')
 			if (!response.ok) return
@@ -122,10 +181,40 @@
 	// Airtable record id from the step-2 submission; later submissions send it
 	// back so the server updates the record instead of creating another. When the
 	// /subscribe flow hands off, it's seeded with the record already created there.
+	// Also kept in sessionStorage, for a remount: see signupResume.ts.
 	let recordId = $state(initialRecordId)
+	// Issued by the server with recordId and posted beside it as proof this tab
+	// may update that row. Cleared wherever recordId is.
+	let recordToken = initialRecordToken
+	// The address an id picked up from sessionStorage was picked up for. That id
+	// is only ever posted with it: after Back, another address gets a row of its
+	// own instead of overwriting the earlier signup. An id created in this mount
+	// isn't bound, so fixing a typo in the email after Back corrects that row.
+	let pickedUpFor = $state<string | null>(null)
+	// What the row holds for Intent, which the browse form must not lower.
+	let rowIntent: Intent | null = null
+	// From picking the id up out of sessionStorage until a post succeeds. The
+	// server (resumed=1) then treats the post as this form's signup.
+	let resumed = false
 	// Never pre-checked on /join: marketing consent must be freely given, for
 	// Volunteers/Leads too (operational volunteer comms ride legitimate interest).
+	// It is the only chapter mail permission: the chapter answer below is not one.
 	let keepInformed = $state(initialKeepInformed)
+	// The chapter-sharing answer given on this form, with the country it was given
+	// for: another country is another question, so it is asked again.
+	let chapterChoice = $state<{ country: string; answer: ChapterAnswer } | null>(null)
+	// The answer the row already holds from an earlier form (the /subscribe signup
+	// a continuation follows, or a resumed row), with the country it was given for.
+	// For that country the question is not asked again and nothing is posted, so it
+	// stands; for another country it is asked again.
+	let rowChapterAnswer = $state<SavedChapterAnswer | null>(
+		initialChapterAnswer ? { answer: initialChapterAnswer, country: initialCountry } : null
+	)
+	// Set when the server finds no answer for the row's country, so a /subscribe
+	// continuation, which otherwise never asks, shows the question.
+	let reaskChapter = $state(false)
+	// Countries with a chapter; null until loaded, and the question waits for it.
+	let chapterCountries = $state<string[] | null>(null)
 	let submitting = $state(false)
 	let browseSignedUp = $state(false)
 	let honeypot = $state('')
@@ -149,8 +238,39 @@
 		email: initialEmail,
 		country: initialCountry,
 		city: initialCity,
+		// UK only: the full postcode, collected on step 1 (and the browse signup)
+		// for every "United Kingdom" signup and posted as `zip_code` — the same
+		// field the US volunteer ZIP uses. Empty and unvalidated for every other
+		// country.
+		postcode: '',
+		// Optional, for students. Only for a country with a list in
+		// $lib/data/universities; holds the plain university name.
+		university: '',
 		newsletter: false
 	})
+
+	const universities = $derived(universityOptions(basics.country))
+
+	// Drops a choice that no longer belongs to the selected country.
+	$effect(() => {
+		if (basics.university && !isKnownUniversity(basics.country, basics.university)) {
+			basics.university = ''
+		}
+	})
+
+	// Blocks the step-1 / browse submit when a UK signup has typed a postcode
+	// that isn't a valid one. Optional field, so an empty value passes; the
+	// `pattern` attribute on the input enforces the same format check natively
+	// (browsers skip `pattern` on an empty, non-required value too).
+	const ukPostcodeValid = $derived(
+		basics.country !== 'United Kingdom' ||
+			basics.postcode.trim() === '' ||
+			isValidUKPostcode(basics.postcode)
+	)
+
+	// `pattern` attribute form of UK_POSTCODE_PATTERN: HTML anchors the match
+	// itself, so strip the leading ^ and trailing $.
+	const ukPostcodeInputPattern = UK_POSTCODE_PATTERN.source.replace(/^\^/, '').replace(/\$$/, '')
 
 	// A newsletter signup elsewhere (e.g. the homepage box) can hand off here
 	// via ?subscribe-email=...; that email arrives after mount. Apply it once into
@@ -205,9 +325,7 @@
 	const isContinuation = $derived(startStep === 2 && !!initialRecordId)
 
 	// GDPR data-processing consent gating every record-creating submission
-	// (step 2 + browse). On /join this checkbox also carries chapter sharing:
-	// the server writes share permission on every /join create. /subscribe asks
-	// for chapter sharing as its own checkbox instead.
+	// (step 2 + browse). Chapter sharing is its own question, below.
 	// Stays false so it never pre-checks a visible consent box; the continuation
 	// already consented on the subscribe form and is exempted at the submit gate.
 	let gdprConsent = $state(false)
@@ -247,7 +365,7 @@
 						msgs.onboarding_step_about,
 						msgs.onboarding_step_intent,
 						msgs.onboarding_step_volunteer_form,
-						msgs.onboarding_step_confirmed
+						msgs.onboarding_step_check_inbox
 					]
 				: intent === 'lead'
 					? [
@@ -258,37 +376,71 @@
 					: [
 							msgs.onboarding_step_about,
 							msgs.onboarding_step_intent,
-							msgs.onboarding_step_confirmed
+							msgs.onboarding_step_check_inbox
 						]
 		// The /subscribe continuation begins after the subscribe form, so it never
 		// showed an "About you" step — drop it and start the stepper at Intent.
 		return isContinuation ? labels.slice(1) : labels
 	})
 
-	// Lead path: if the country already has a chapter, offer regional/city
-	// leadership instead of founding a national group. Fetched lazily when the
-	// lead intent is picked; on failure we fall back to the national copy.
-	let nationalGroupNames: string[] | null = $state(null)
+	const chapter = $derived(chapterName(basics.country, chapterCountries ?? []))
 
-	$effect(() => {
-		if (intent === 'lead' && nationalGroupNames === null) {
-			nationalGroupNames = []
-			fetch('/api/national-groups')
-				.then((response) =>
-					response.ok ? (response.json() as Promise<NationalGroupsApiResponse>) : []
-				)
-				.then((groups) => {
-					nationalGroupNames = groups.map((group) => group.name)
-				})
-				.catch(() => {})
-		}
-	})
-
-	const countryHasChapter = $derived(
-		(nationalGroupNames ?? ([] as string[])).some(
-			(name) => name.toLowerCase() === basics.country.trim().toLowerCase()
-		)
+	// Step 1 and the browse form pick a saved row up only when they submit, but the
+	// question is asked before then, so whether that row already has an answer for
+	// this country has to be known first, to leave the question out.
+	const pendingPickup = $derived.by(() => (!recordId ? savedFor(basics.email) : null))
+	const rowAnswer = $derived(
+		isContinuation
+			? chapterAnswerFor(rowChapterAnswer, basics.country)
+			: (heldChapterAnswer(rowChapterAnswer, pickedUpFor, basics.email, basics.country) ??
+					chapterAnswerFor(pendingPickup?.chapterAnswer ?? null, basics.country))
 	)
+	// Asked once a country from the list is picked, as on /subscribe.
+	const askChapter = $derived(
+		(!isContinuation || reaskChapter) &&
+			rowAnswer === null &&
+			COUNTRIES.includes(basics.country) &&
+			asksChapterQuestion(basics.country)
+	)
+	const chapterQ = $derived(
+		askChapter && chapterCountries !== null
+			? chapterQuestion(
+					msgs,
+					chapterSiteCountry === basics.country ? 'chapter-site' : 'join',
+					basics.country,
+					chapter
+				)
+			: null
+	)
+	// True while the chapter question doubles as the Privacy Policy consent too
+	// (the 'chapter-site' wording in chapterShare.ts): answering it on step 1
+	// covers both, so step 2 neither asks again nor shows the checkbox.
+	const isChapterSiteQuestion = $derived(!!chapterQ && chapterSiteCountry === basics.country)
+	const answerForCountry = $derived(
+		chapterChoice?.country === basics.country ? chapterChoice.answer : null
+	)
+	const chapterAnswerMissing = $derived(askChapter && !answerForCountry)
+	// Posted by step 2, which creates the row, from the answer given on step 1.
+	const chapterWording = $derived(
+		chapterQ && answerForCountry ? chapterShareWording(chapterQ, answerForCountry) : ''
+	)
+	// What the copy below the question follows.
+	const shownAnswer = $derived(
+		effectiveAnswer(basics.country, askChapter ? answerForCountry : rowAnswer)
+	)
+	const intentSub = (key: IntentKey, sub: string) =>
+		key === 'volunteer' || key === 'lead' ? `${sub} ${inTouch(msgs, shownAnswer, chapter)}` : sub
+	const showKeepInformedNudge = $derived(
+		!isContinuation &&
+			shownAnswer === 'yes' &&
+			!keepInformed &&
+			(intent === 'volunteer' || intent === 'lead')
+	)
+
+	// Lead path: if the country already has a chapter, offer regional/city
+	// leadership instead of founding a national group. On a failed lookup it falls
+	// back to the national copy.
+	const countryHasChapter = $derived(chapter !== null)
 
 	const leadRole = $derived(countryHasChapter ? 'Regional Group Lead' : 'National Group Lead')
 
@@ -316,8 +468,58 @@
 		else list.push(value)
 	}
 
+	const intentKey = (value: Intent): IntentKey | null =>
+		(Object.keys(INTENT_VALUES) as IntentKey[]).find((key) => INTENT_VALUES[key] === value) ?? null
+
+	function savedFor(email: string): SavedSignup | null {
+		const saved = loadSavedSignup(email)
+		// A stub-mode id (a preview before going live) names no Airtable row.
+		if (!saved || (onboardingLive && saved.recordId.startsWith('stub-'))) return null
+		return saved
+	}
+
+	function resume(email: string): SavedSignup | null {
+		const saved = savedFor(email)
+		if (!saved) return null
+		recordId = saved.recordId
+		recordToken = saved.recordToken
+		pickedUpFor = email
+		rowIntent = saved.intent
+		resumed = true
+		// The update rewrites Email subscription from the post, so the form must
+		// start from what the row holds, not from the unticked default.
+		keepInformed = saved.keepInformed
+		rowChapterAnswer = saved.chapterAnswer
+		return saved
+	}
+
+	// Another address starts a signup of its own: nothing kept for the previous
+	// one carries over, the opt-in least of all.
+	function startOverUnlessFor(email: string): boolean {
+		if (!recordId || pickedUpFor === null || sameEmail(pickedUpFor, email)) return false
+		dropRecord()
+		keepInformed = initialKeepInformed
+		return true
+	}
+
+	function dropRecord() {
+		recordId = ''
+		recordToken = ''
+		pickedUpFor = null
+		rowIntent = null
+		resumed = false
+		rowChapterAnswer = null
+	}
+
 	function continueToIntent(event: SubmitEvent) {
 		event.preventDefault()
+		// Step 2 creates the row with the step-1 answer, and cannot ask for it.
+		if (chapterAnswerMissing) return
+		if (startOverUnlessFor(basics.email)) intent = null
+		const saved = recordId ? null : resume(basics.email)
+		// Intent is rewritten from the post too; preselect what the row holds.
+		if (saved) intent = intentKey(saved.intent) ?? intent
+		if (chapterAnswerMissing) return
 		step = 2
 	}
 
@@ -325,7 +527,27 @@
 		onStart: () => T,
 		onSuccess: (data: Record<string, unknown> | undefined, startValue: T) => void
 	): SubmitFunction {
-		return () => {
+		return ({ formData, cancel }) => {
+			// The disabled button only lands on the next render; a second submit
+			// before then would post without the id the first one is about to return.
+			if (submitting) {
+				cancel()
+				return
+			}
+			const email = posted(formData, 'email')
+			startOverUnlessFor(email)
+			// The browse form collects its own email, so it can only resume here. It
+			// always posts Act now, which must not lower a Volunteer or Lead row.
+			if (posted(formData, 'mode') === 'browse') {
+				if (!recordId) resume(email)
+				if (rowIntent === INTENT_VALUES.volunteer || rowIntent === INTENT_VALUES.lead) {
+					formData.set('intent', rowIntent)
+				}
+			}
+			// The only place record_id is posted, so every form gets the checks above.
+			if (recordId) formData.set('record_id', recordId)
+			if (recordId && recordToken) formData.set('record_token', recordToken)
+			if (resumed) formData.set('resumed', '1')
 			submitting = true
 			// Run the start callback synchronously, inside the user gesture,
 			// so callers can do things that require a gesture (e.g. opening a
@@ -344,10 +566,42 @@
 					// Remember the created record so later submissions in the
 					// same flow update it rather than create a duplicate.
 					if (typeof result.data?.recordId === 'string') {
+						// A spam drop also reports success but carries no recordId, so
+						// this only fires on a real create.
+						const created = !recordId
+						if (created) onSignup?.()
 						recordId = result.data.recordId
+						// An update that didn't prove itself gets no token back; the one
+						// this tab holds is still the one for this row.
+						const token: unknown = result.data.recordToken
+						if (typeof token === 'string') recordToken = token
+						else if (created) recordToken = ''
+						rowIntent = postedIntent(formData)
+						resumed = false
+						rowChapterAnswer = saveSignupFromPost(formData, recordId, recordToken, rowChapterAnswer)
 					}
 					onSuccess(result.data, startValue)
 				} else if (result.type === 'failure') {
+					// 410: the row behind recordId no longer exists, or the post carried
+					// no valid continuation token for it. Any other failure, an outage
+					// included, keeps the id, or the retry would duplicate.
+					if (result.status === 400 && result.data?.chapterAnswerMissing === true) {
+						rowChapterAnswer = null
+						chapterChoice = null
+						forgetChapterAnswer()
+						reaskChapter = true
+						const next = afterChapterAnswerMissing(mode, isContinuation)
+						if (next !== 'stay') step = next === 'step-1' ? 1 : 2
+					}
+					if (result.status === 410) {
+						forgetSignup()
+						dropRecord()
+						// The next post creates a row, so a re-shown question starts unanswered.
+						chapterChoice = null
+						const next = afterRecordGone(mode, isContinuation)
+						if (next === 'step-1') step = 1
+						else if (next === 'signup-form') onRecordGone?.()
+					}
 					toast.error(String(result.data?.message ?? msgs.onboarding_error_generic))
 				} else {
 					toast.error(msgs.onboarding_error_unexpected)
@@ -382,13 +636,40 @@
 	/>
 {/snippet}
 
+{#snippet universityField(id: string)}
+	<div class="field">
+		<label class="field-label" for={id}>{msgs.onboarding_field_university}</label>
+		<Combobox
+			{id}
+			name="university"
+			options={universities}
+			placeholder={msgs.onboarding_placeholder_university}
+			bind:value={basics.university}
+		/>
+		<p class="helper">{msgs.onboarding_helper_university}</p>
+	</div>
+{/snippet}
+
 {#snippet hiddenBasics()}
 	<input type="hidden" name="full_name" value={basics.fullName} />
 	<input type="hidden" name="email" value={basics.email} />
 	<input type="hidden" name="country" value={basics.country} />
 	<input type="hidden" name="city" value={basics.city} />
+	<!-- UK postcode rides the same `zip_code` field as the US volunteer ZIP. Only
+	     posted for a UK signup; the server ignores it for any other country. -->
+	{#if basics.country === 'United Kingdom' && basics.postcode.trim()}
+		<input type="hidden" name="zip_code" value={basics.postcode.trim()} />
+	{/if}
+	{#if basics.university}
+		<input type="hidden" name="university" value={basics.university} />
+	{/if}
 	{#if basics.newsletter}
 		<input type="hidden" name="newsletter" value="on" />
+	{/if}
+	<!-- Per-embed attribution. The server writes it to `Source page` on a create
+	     and ignores it on an update, so it is safe on every form that renders this. -->
+	{#if initialSource}
+		<input type="hidden" name="source" value={initialSource} />
 	{/if}
 {/snippet}
 
@@ -421,14 +702,13 @@
 
 {#snippet checkboxConfirmations()}
 	<!-- Not on the /subscribe continuation: those opt-ins were made and confirmed
-	     on the subscribe form, and this copy would restate them wrongly — it claims
-	     chapter contact, which there depends on a checkbox they may have declined. -->
+	     on the subscribe form. -->
 	{#if !isContinuation && (keepInformed || basics.newsletter)}
 		<ul class="signup-confirmations">
 			{#if keepInformed}
 				<li>
 					<span class="confirm-tick" aria-hidden="true">✓</span>
-					{msgs.onboarding_confirm_keep_informed}
+					{keepInformedConfirmation(msgs, shownAnswer, chapter)}
 				</li>
 			{/if}
 			{#if basics.newsletter}
@@ -438,6 +718,49 @@
 				</li>
 			{/if}
 		</ul>
+	{/if}
+{/snippet}
+
+{#snippet chapterQuestionField(postAnswer: boolean, level: 3 | 4, label = '')}
+	{#if chapterQ}
+		<ChapterShareQuestion
+			question={chapterQ}
+			{postAnswer}
+			{label}
+			{level}
+			bind:answer={
+				() => answerForCountry,
+				(answer: ChapterAnswer | null) =>
+					(chapterChoice = answer ? { country: basics.country, answer } : null)
+			}
+		/>
+	{/if}
+{/snippet}
+
+<!-- On a chapter's own site, this single checkbox replaces both the chapter
+     question above and gdprConsentField below: it's the only consent gate,
+     covering Privacy Policy agreement and chapter sharing together (always
+     "yes" when checked — there's no partial opt-out here, see chapterShare.ts
+     'chapter-site'). Unchecked leaves chapterChoice unset, so the existing
+     chapterAnswerMissing gating blocks Continue/Submit exactly as it already
+     does for the regular chapter question. -->
+{#snippet chapterSiteConsentField()}
+	{#if chapterQ}
+		<label class="agreement">
+			<input
+				type="checkbox"
+				name="agree_gdpr"
+				required
+				checked={gdprConsent}
+				onchange={(event) => {
+					const checked = event.currentTarget.checked
+					chapterChoice = checked ? { country: basics.country, answer: 'yes' } : null
+					gdprConsent = checked
+				}}
+			/>
+			<span class="checkbox-box" aria-hidden="true"></span>
+			<span>{chapterQ.yes}</span>
+		</label>
 	{/if}
 {/snippet}
 
@@ -528,7 +851,51 @@
 						bind:value={basics.city}
 					/>
 				</div>
-				<button type="submit" class="primary">{msgs.onboarding_btn_continue}</button>
+				{#if basics.country === 'United Kingdom'}
+					<div class="field">
+						<label class="field-label" for="ob-postcode">{msgs.onboarding_field_uk_postcode}</label>
+						<input
+							type="text"
+							id="ob-postcode"
+							pattern={ukPostcodeInputPattern}
+							placeholder={msgs.onboarding_placeholder_uk_postcode}
+							autocomplete="postal-code"
+							autocapitalize="characters"
+							bind:value={basics.postcode}
+						/>
+						<p class="helper">{msgs.onboarding_helper_uk_postcode}</p>
+					</div>
+				{/if}
+				{#if hasUniversities(basics.country)}
+					{@render universityField('ob-university')}
+				{/if}
+				<!-- Asked on step 1, after its fields, so step 2 stays short; step 2 posts
+				     the answer and its wording with the create. -->
+				{#if isChapterSiteQuestion}
+					{@render chapterSiteConsentField()}
+				{:else}
+					{@render chapterQuestionField(false, 3, msgs.onboarding_chapter_section_label)}
+				{/if}
+				<!-- Step 1 gates on native validation (pattern, optional), like the
+				     name/email/city fields above it, so the browser can explain an
+				     invalid postcode on submit. The chapter question has no native
+				     control, so Continue waits for its answer instead. -->
+				<button
+					type="submit"
+					class="primary"
+					disabled={chapterAnswerMissing}
+					aria-describedby={chapterAnswerMissing ? 'ob-chapter-pending' : undefined}
+					>{msgs.onboarding_btn_continue}</button
+				>
+				{#if chapterAnswerMissing}
+					<p class="helper centered" id="ob-chapter-pending">
+						{!chapterQ
+							? msgs.onboarding_chapter_loading
+							: isChapterSiteQuestion
+								? msgs.onboarding_chapter_site_consent_needed
+								: msgs.onboarding_chapter_answer_needed}
+					</p>
+				{/if}
 				<div class="browse-option">
 					<button type="button" class="secondary" onclick={startBrowse}>
 						{msgs.onboarding_btn_browse}
@@ -551,30 +918,27 @@
 				{@render hiddenBasics()}
 				{@render honeypotField('ob-nickname-2')}
 				<input type="hidden" name="mode" value="contact" />
-				{#if recordId}
-					<input type="hidden" name="record_id" value={recordId} />
-				{/if}
-				<input
-					type="hidden"
-					name="intent"
-					value={intent ? INTENT_VALUES[intent] : isContinuation ? 'Keep informed' : 'None'}
-				/>
+				<input type="hidden" name="intent" value={intent ? INTENT_VALUES[intent] : 'None'} />
 				<!-- The server writes Email subscription from this post every time, so a
 				     post without this input clears the flag. Both forms that can update
 				     the record have to carry it. -->
 				{#if keepInformed}
 					<input type="hidden" name="keep_informed" value="on" />
 				{/if}
-				{#if isContinuation}
-					<!-- Tells the server this update knows the signup-time chapter choice,
-					     so it restores it when the intent no longer escalates. -->
-					<input type="hidden" name="subscribe_form" value="1" />
-					{#if initialChapterShare}
-						<input type="hidden" name="chapter_share" value="on" />
-					{/if}
-				{/if}
 				<h2>{msgs.onboarding_step2_heading}</h2>
 				{#if !isContinuation}
+					<!-- The answer given on step 1, posted only while the question is
+					     asked there; a post without one leaves the row's answer alone. -->
+					{#if chapterQ && answerForCountry}
+						<input type="hidden" name="chapter_share" value={answerForCountry} />
+						<input type="hidden" name="chapter_share_wording" value={chapterWording} />
+					{/if}
+					<!-- Step 1's chapterSiteConsentField checkbox lives in a form that
+					     never actually submits (continueToIntent prevents it); mirror its
+					     answer here, in the form that does. -->
+					{#if isChapterSiteQuestion && gdprConsent}
+						<input type="hidden" name="agree_gdpr" value="on" />
+					{/if}
 					<p class="section-label" id="optins-heading">{msgs.onboarding_optins_heading}</p>
 					<div class="intent-grid" role="group" aria-labelledby="optins-heading">
 						<button
@@ -594,7 +958,7 @@
 							</span>
 							<span class="intent-label">{msgs.onboarding_intent_keep_informed_label}</span>
 							<span class="intent-sub">
-								{msgs.onboarding_intent_keep_informed_sub}
+								{keepInformedSub(msgs, shownAnswer, chapter)}
 							</span>
 						</button>
 						<button
@@ -645,11 +1009,18 @@
 								{option.icon}
 							</span>
 							<span class="intent-label">{option.label}</span>
-							<span class="intent-sub">{option.sub}</span>
+							<span class="intent-sub">{intentSub(option.key, option.sub)}</span>
 						</button>
 					{/each}
 				</div>
-				{#if !isContinuation}
+				{#if showKeepInformedNudge}
+					<p class="nudge">{msgs.onboarding_chapter_nudge(chapter)}</p>
+				{/if}
+				{#if isContinuation}
+					<!-- Only after the server found no answer for the row's country. -->
+					{@render chapterQuestionField(true, 3, msgs.onboarding_chapter_section_label)}
+				{:else if !isChapterSiteQuestion}
+					<!-- Already asked, and already covered this consent, on step 1. -->
 					{@render gdprConsentField()}
 				{/if}
 				{#if onboardingLive && onboardingModeKnown}
@@ -660,7 +1031,7 @@
 				<button
 					type="submit"
 					class="primary"
-					disabled={(isContinuation ? !intent : !gdprConsent) || !canSubmit}
+					disabled={(isContinuation ? !intent : !gdprConsent) || chapterAnswerMissing || !canSubmit}
 				>
 					{submitting
 						? msgs.onboarding_btn_submitting
@@ -677,11 +1048,7 @@
 		{:else if step === 3 && !intent}
 			<!-- Path A: confirmation -->
 			<div class="confirmation">
-				<div class="checkmark">✓</div>
-				{#if !isContinuation}
-					<!-- As on path B: the continuation already thanked them for signing up. -->
-					<h2>{msgs.onboarding_confirm_a_title}</h2>
-				{/if}
+				<CheckInbox {msgs} />
 				{@render checkboxConfirmations()}
 				{@render nextStepBlock()}
 				{@render confirmationFooter()}
@@ -690,12 +1057,7 @@
 			<!-- Path B: act now (contact confirmation or browse landing) -->
 			{#if mode === 'contact'}
 				<div class="confirmation">
-					<div class="checkmark">✓</div>
-					{#if !isContinuation}
-						<!-- The continuation already thanked them for signing up; don't
-						     thank them for joining a second time. -->
-						<h2>{msgs.onboarding_confirm_b_title}</h2>
-					{/if}
+					<CheckInbox {msgs} />
 					<p>{msgs.onboarding_confirm_b_sub}</p>
 					{@render checkboxConfirmations()}
 				</div>
@@ -708,12 +1070,13 @@
 				</div>
 				{#if browseSignedUp}
 					<div class="inline-confirmation">
-						{msgs.onboarding_browse_signed_up}
+						<CheckInbox {msgs} />
+						<p>{keepInformedConfirmation(msgs, shownAnswer, chapter)}</p>
 					</div>
 				{:else}
 					<div class="keep-informed">
 						<h3>{msgs.onboarding_browse_keep_informed_title}</h3>
-						<p>{msgs.onboarding_browse_keep_informed_sub}</p>
+						<p>{keepInformedSub(msgs, shownAnswer, chapter)}</p>
 						<form
 							method="POST"
 							action="/embed/onboarding-form?/submit"
@@ -726,11 +1089,15 @@
 							<input type="hidden" name="mode" value="browse" />
 							<input type="hidden" name="intent" value="Act now" />
 							<input type="hidden" name="keep_informed" value="on" />
+							{#if initialSource}
+								<input type="hidden" name="source" value={initialSource} />
+							{/if}
 							<div class="field">
 								<label class="field-label" for="loop-name">{msgs.onboarding_field_full_name}</label>
 								<input
 									type="text"
 									id="loop-name"
+									name="full_name"
 									required
 									placeholder={msgs.onboarding_placeholder_full_name}
 									autocomplete="name"
@@ -742,6 +1109,7 @@
 								<input
 									type="email"
 									id="loop-email"
+									name="email"
 									required
 									placeholder={msgs.onboarding_placeholder_email}
 									autocomplete="email"
@@ -762,19 +1130,50 @@
 								<input
 									type="text"
 									id="loop-city"
+									name="city"
 									required
 									placeholder={msgs.onboarding_placeholder_city}
 									autocomplete="address-level2"
 									bind:value={basics.city}
 								/>
 							</div>
-							{@render gdprConsentField()}
+							{#if basics.country === 'United Kingdom'}
+								<div class="field">
+									<label class="field-label" for="loop-postcode"
+										>{msgs.onboarding_field_uk_postcode}</label
+									>
+									<input
+										type="text"
+										id="loop-postcode"
+										name="zip_code"
+										pattern={ukPostcodeInputPattern}
+										placeholder={msgs.onboarding_placeholder_uk_postcode}
+										autocomplete="postal-code"
+										autocapitalize="characters"
+										bind:value={basics.postcode}
+									/>
+									<p class="helper">{msgs.onboarding_helper_uk_postcode}</p>
+								</div>
+							{/if}
+							{#if hasUniversities(basics.country)}
+								{@render universityField('loop-university')}
+							{/if}
+							{#if isChapterSiteQuestion}
+								{@render chapterSiteConsentField()}
+							{:else}
+								{@render chapterQuestionField(true, 4)}
+								{@render gdprConsentField()}
+							{/if}
 							{#if onboardingLive && onboardingModeKnown}
 								{#key turnstileNonce}
 									<Turnstile bind:token={turnstileToken} />
 								{/key}
 							{/if}
-							<button type="submit" class="primary" disabled={!gdprConsent || !canSubmit}>
+							<button
+								type="submit"
+								class="primary"
+								disabled={!gdprConsent || chapterAnswerMissing || !ukPostcodeValid || !canSubmit}
+							>
 								{submitting ? msgs.onboarding_btn_signing_up : msgs.onboarding_btn_sign_me_up}
 							</button>
 						</form>
@@ -810,9 +1209,6 @@
 				<input type="hidden" name="mode" value="contact" />
 				<input type="hidden" name="intent" value="Volunteer" />
 				<input type="hidden" name="volunteer_details" value="on" />
-				{#if recordId}
-					<input type="hidden" name="record_id" value={recordId} />
-				{/if}
 				<!-- The server writes Email subscription from this post every time, so a
 				     post without this input clears the flag. Both forms that can update
 				     the record have to carry it. -->
@@ -1010,6 +1406,9 @@
 			</form>
 		{:else if step === 3 && intent === 'lead'}
 			<!-- Path D: lead -->
+			<div class="lead-check-inbox">
+				<CheckInbox {msgs} />
+			</div>
 			<h2>{msgs.onboarding_lead_title(leadRole)}</h2>
 			<p class="role-meta"><em>{msgs.onboarding_lead_meta}</em></p>
 			{@render checkboxConfirmations()}
@@ -1067,9 +1466,11 @@
 		{:else if step === 4 && intent === 'volunteer'}
 			<!-- Path C: confirmation -->
 			<div class="confirmation">
-				<div class="checkmark">✓</div>
-				<h2>{msgs.onboarding_confirm_volunteer_title}</h2>
-				<p>{msgs.onboarding_confirm_volunteer_sub}</p>
+				<CheckInbox {msgs} />
+				<p>
+					<strong>{msgs.onboarding_confirm_volunteer_title}</strong>
+					{msgs.onboarding_confirm_volunteer_sub}
+				</p>
 				{@render checkboxConfirmations()}
 				{@render nextStepBlock()}
 				{@render confirmationFooter()}
@@ -1104,7 +1505,7 @@
 		background-color: var(--bg-subtle);
 		padding: 2rem;
 		border-radius: 32px;
-		box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+		box-shadow: 0 4px 20px rgba(var(--black-rgb), 0.1);
 		width: 100%;
 		box-sizing: border-box;
 	}
@@ -1503,18 +1904,8 @@
 		margin-right: auto;
 	}
 
-	.checkmark {
-		width: 3.5rem;
-		height: 3.5rem;
-		border-radius: 50%;
-		background-color: var(--brand);
-		color: var(--bg);
-		font-size: 2rem;
-		font-weight: bold;
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		margin: 0 auto 1rem auto;
+	.lead-check-inbox {
+		margin-bottom: 2rem;
 	}
 
 	.confirmation-footer {
@@ -1536,7 +1927,7 @@
 
 	.confirmation-footer :global(.discord-button) {
 		display: inline-block;
-		background-color: #5865f2;
+		background-color: var(--discord-blue);
 		color: white;
 		font-weight: bold;
 		padding: 0.8rem 2rem;
@@ -1602,17 +1993,31 @@
 		font-weight: 700;
 	}
 
+	.nudge {
+		margin: 0;
+		padding: 0.75rem 1rem;
+		border-radius: 12px;
+		background-color: var(--bg);
+		border-left: 4px solid var(--brand);
+		font-size: 0.95rem;
+	}
+
 	.inline-confirmation {
 		border: 2px solid var(--brand);
 		border-radius: 16px;
-		padding: 1rem 1.25rem;
+		padding: 1.5rem 1.25rem;
 		margin: 1rem 0 1.5rem 0;
 		background-color: var(--bg);
-		font-weight: 500;
+		text-align: center;
+	}
+
+	.inline-confirmation p {
+		max-width: 32rem;
+		margin: 0 auto;
 	}
 
 	.role-meta {
-		margin-top: -0.5rem;
+		margin-top: 0.5rem;
 	}
 
 	.role-description h3 {

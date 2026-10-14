@@ -5,6 +5,7 @@
 	import Banner from '$lib/components/Banner.svelte'
 	import Hero from '$lib/components/Hero.svelte'
 	import Link from '$lib/components/Link.svelte'
+	import LinkWithoutIcon from '$lib/components/LinkWithoutIcon.svelte'
 	import NearbyEvent from '$lib/components/NearbyEvent.svelte'
 	import PreloadFonts from '$lib/components/PreloadFonts.svelte'
 	import SearchModal from '$lib/components/SearchModal.svelte'
@@ -12,10 +13,10 @@
 	import { searchOpen } from '$lib/stores/searchModal'
 	import { deLocalizeHref } from '$lib/paraglide/runtime'
 	import type { BannerRule } from '$lib/types'
-	import '@fontsource/roboto-slab/300.css'
+	import '@fontsource/roboto-slab/400.css'
 	import '@fontsource/roboto-slab/500.css'
 	import '@fontsource/roboto-slab/700.css'
-	import robotoSlabLatin300 from '@fontsource/roboto-slab/files/roboto-slab-latin-300-normal.woff2'
+	import robotoSlabLatin400 from '@fontsource/roboto-slab/files/roboto-slab-latin-400-normal.woff2'
 	import '@fontsource/saira-condensed/700.css'
 	import sairaCondensedLatin700 from '@fontsource/saira-condensed/files/saira-condensed-latin-700-normal.woff2'
 	import { ProgressBar } from '@prgm/sveltekit-progress-bar'
@@ -65,6 +66,11 @@
 			id: 'pausecon-london-2026',
 			countries: null,
 			dateRange: [null, '2026-08-21']
+		},
+		{
+			id: 'dc-protest-2026-09-19',
+			countries: null,
+			dateRange: [null, '2026-09-19']
 		}
 	]
 	const campaignBannerRules: BannerRule[] = []
@@ -144,7 +150,7 @@
 	{@html `<${'script'}>${sanitizeScript(bannerSelection)}</script>`}
 </svelte:head>
 
-<PreloadFonts urls={[robotoSlabLatin300, sairaCondensedLatin700]} />
+<PreloadFonts urls={[robotoSlabLatin400, sairaCondensedLatin700]} />
 
 <h2 style="width: 0; height: 0; margin: 0; padding: 0; visibility: hidden;" data-pagefind-ignore>
 	Top
@@ -199,6 +205,13 @@
 		<Banner contrast={hero} id="pausecon-london-2026" rules={mainBannerRules}>
 			<strong>PauseCon London 2026</strong>: Apply now to join our September organising conference.
 			<strong><Link href="https://luma.com/4be2eqz9">Apply here!</Link></strong>
+		</Banner>
+
+		<Banner contrast={hero} id="dc-protest-2026-09-19" rules={mainBannerRules}>
+			<strong>Protest in Washington DC, Saturday 19 Sept</strong> by
+			<LinkWithoutIcon href="https://peopleforapause.org/">People for a Pause</LinkWithoutIcon>:
+			tell Trump and Xi to make an AI pause deal. Bring friends, or forward to someone in DC.
+			<strong><Link href="https://luma.com/ucnncf7s">Sign up!</Link></strong>
 		</Banner>
 
 		{#if hero}

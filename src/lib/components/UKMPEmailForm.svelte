@@ -3,6 +3,8 @@
 	import { micromark } from 'micromark'
 	import LoadingSpinner from './LoadingSpinner.svelte'
 	import Link from '$lib/components/Link.svelte'
+	import Turnstile from '$lib/components/Turnstile.svelte'
+	import { turnstileSiteKey } from '$lib/turnstile'
 	import { slide } from 'svelte/transition'
 
 	interface Props {
@@ -22,15 +24,15 @@
 	let senderName = $derived(userName)
 	let senderEmail = $state('')
 	let subject = $state(`Request to co-sign letter on frontier AI risks`)
-	let message = $derived(`Dear ${mp.salutation},
+	let message = $derived(`Dear ${mp.salutation}
 
-Would you be willing to sign this open letter supporting legislation to protect British people from the harms of frontier AI?
+I’m a resident of ${mp.constituency} and a supporter of **PauseAI**, a civic movement focused on averting the risks of superhuman AI. I am very concerned that AI development is racing ahead without adequate protection for the public.
 
-I’m a resident of ${mp.constituency} and a supporter of **PauseAI**, a civic movement focused on averting the risks of advanced AI. I am very concerned that AI development is racing ahead without adequate protection for the public.
+AI now poses an extremely serious risk to our national security. Parliamentarians in the United Kingdom, and politicians around the globe are moving to answer the call from AI developers, Nobel Laureates and concerned citizens to regulate AI immediately.
 
-**The UK has no specific legal standards for AI.** No regulator oversees frontier AI development. And UK law does not reliably hold developers liable for damage or deaths caused by their models, even when the danger is predictable, preventable and uniquely enabled by AI.
+**The UK has no specific legal standards for frontier AI safety.** No regulator oversees frontier AI development. And UK law does not reliably hold developers liable for damage or deaths caused by their models, even when the danger is predictable, preventable and uniquely enabled by AI.
 
-To ensure our safety, I believe that we need frontier AI legislation as soon as possible. Please could we arrange a short meeting to discuss this important matter?
+Please could you add your name to PauseAI's open letter (attached) in support of frontier AI legislation? And could we arrange a short meeting to discuss this important matter?
 
 Thank you for your consideration,
 
@@ -44,6 +46,18 @@ ${userPostcode.toUpperCase()}`)
 	let submitStatus: 'idle' | 'success' | 'error' = $state('idle')
 	let errorMessage = $state('')
 	let confirmingSend = $state(false)
+	let honeypot = $state('')
+	let turnstileToken = $state('')
+	// Opt-in, so unchecked by default; the server stores it on the Airtable email record.
+	let contactConsent = $state(false)
+
+	// Bumped after each submission to remount the widget: Turnstile tokens are
+	// single-use, so a resubmit with the same token would be rejected.
+	let turnstileNonce = $state(0)
+
+	// Without a configured site key (e.g. local development) there is no widget
+	// to wait for, and the server decides whether to accept the submission.
+	const canSubmit = $derived(!isSubmitting && (!turnstileSiteKey || turnstileToken !== ''))
 
 	let htmlPreview = $derived(micromark(message))
 
@@ -178,7 +192,10 @@ ${userPostcode.toUpperCase()}`)
 					senderPostcode: userPostcode,
 					recipient: mp.email,
 					subject: subject.trim(),
-					message: message.trim()
+					message: message.trim(),
+					nickname: honeypot,
+					turnstileToken,
+					contactConsent
 				})
 			})
 
@@ -198,6 +215,10 @@ ${userPostcode.toUpperCase()}`)
 			console.error('Email submission error:', error)
 		} finally {
 			isSubmitting = false
+
+			// The token has now been spent (or rejected) either way — get a fresh one.
+			turnstileToken = ''
+			turnstileNonce += 1
 		}
 	}
 </script>
@@ -214,6 +235,18 @@ ${userPostcode.toUpperCase()}`)
 				onsubmit?.(e)
 			}}
 		>
+			<div class="form-group honey">
+				<label for="mp-nickname">Nickname</label>
+				<input
+					type="text"
+					id="mp-nickname"
+					name="nickname"
+					tabindex="-1"
+					autocomplete="off"
+					bind:value={honeypot}
+				/>
+			</div>
+
 			<div class="form-group">
 				<label for="sender-email">Your email</label>
 				<input
@@ -328,9 +361,19 @@ ${userPostcode.toUpperCase()}`)
 				</div>
 			{/if}
 
+			<div class="consent-group">
+				<label class="consent">
+					<input type="checkbox" name="contact_consent" bind:checked={contactConsent} />
+					<span>Tell me about events where I can talk to my MP and ways to help PauseAI</span>
+				</label>
+			</div>
+
 			{#if confirmingSend}
 				<div class="confirm-box" in:slide={{ duration: 250 }}>
 					<p class="confirm-prompt">Send this email to <strong>{mp.name}</strong>?</p>
+					{#key turnstileNonce}
+						<Turnstile bind:token={turnstileToken} />
+					{/key}
 					<div class="confirm-actions">
 						<button
 							type="button"
@@ -343,7 +386,7 @@ ${userPostcode.toUpperCase()}`)
 						<button
 							type="button"
 							class="submit-button confirm-button"
-							disabled={isSubmitting}
+							disabled={!canSubmit}
 							onclick={handleSubmit}
 						>
 							{#if isSubmitting}
@@ -389,6 +432,17 @@ ${userPostcode.toUpperCase()}`)
 		padding-top: 1.5rem;
 	}
 
+	.honey {
+		display: none;
+		opacity: 0;
+		position: absolute;
+		left: -9999px;
+		height: 0;
+		width: 0;
+		overflow: hidden;
+		z-index: -1;
+	}
+
 	label {
 		font-weight: 500;
 		color: var(--text);
@@ -410,19 +464,45 @@ ${userPostcode.toUpperCase()}`)
 	input::placeholder,
 	textarea::placeholder {
 		color: var(--text-muted);
-		opacity: 0.2;
 	}
 
 	input:focus,
 	textarea:focus {
 		outline: none;
 		border-color: var(--brand);
-		box-shadow: 0 0 0 2px rgba(0, 122, 204, 0.1);
+		box-shadow: 0 0 0 2px rgba(var(--focus-glow-rgb), 0.1);
 	}
 
 	textarea {
 		resize: vertical;
 		font-family: inherit;
+	}
+
+	/* A row, not the column the global form label rule and the width: 100% input rule
+	   above would make of it. */
+	/* Spaced like a form group above; the send button below carries its own 1rem top margin. */
+	.consent-group {
+		width: 100%;
+		padding-top: 1.5rem;
+	}
+
+	.consent {
+		display: flex;
+		flex-direction: row;
+		align-items: flex-start;
+		gap: 0.6rem;
+		font-weight: normal;
+		font-size: 0.95rem;
+		cursor: pointer;
+	}
+
+	.consent input[type='checkbox'] {
+		width: 1.2rem;
+		height: 1.2rem;
+		flex-shrink: 0;
+		margin: 0.15rem 0 0;
+		padding: 0;
+		accent-color: var(--brand);
 	}
 
 	.markdown-toolbar {
@@ -475,7 +555,7 @@ ${userPostcode.toUpperCase()}`)
 	.email-tips ul {
 		margin: 0;
 		padding-left: 1.5rem;
-		color: var(--text-muted);
+		color: var(--text-subtle);
 		list-style-type: disc;
 	}
 
@@ -582,7 +662,7 @@ ${userPostcode.toUpperCase()}`)
 		border-color: var(--brand);
 		background: var(--bg-subtle);
 		transform: translateY(-2px);
-		box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+		box-shadow: 0 4px 12px rgba(var(--black-rgb), 0.1);
 	}
 
 	* :global(.pdf-thumbnail img) {
@@ -590,7 +670,7 @@ ${userPostcode.toUpperCase()}`)
 		height: auto;
 		border-radius: 4px;
 		margin-bottom: 0.5rem;
-		box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+		box-shadow: 0 2px 8px rgba(var(--black-rgb), 0.1);
 	}
 
 	.pdf-info {
@@ -608,7 +688,7 @@ ${userPostcode.toUpperCase()}`)
 	.pdf-subtitle {
 		display: block;
 		font-size: 0.7rem;
-		color: var(--text-muted);
+		color: var(--text-subtle);
 	}
 
 	.submit-button {
@@ -707,21 +787,21 @@ ${userPostcode.toUpperCase()}`)
 	}
 
 	.success-message {
-		background: var(--success-bg, #d4edda);
-		color: var(--success-text, #155724);
+		background: var(--success-bg);
+		color: var(--success-text);
 		padding: 1rem;
 		border-radius: 4px;
-		border: 1px solid var(--success-border, #c3e6cb);
+		border: 1px solid var(--success-border);
 		margin-top: 1rem;
 		margin-bottom: 1rem;
 	}
 
 	.error-message {
-		background: var(--error-bg, #f8d7da);
-		color: var(--error-text, #721c24);
+		background: var(--error-bg);
+		color: var(--error-text);
 		padding: 0.75rem;
 		border-radius: 4px;
-		border: 1px solid var(--error-border, #f5c6cb);
+		border: 1px solid var(--error-border);
 		margin-top: 1rem;
 	}
 </style>

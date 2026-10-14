@@ -66,7 +66,7 @@
 <style>
 	.tabs-container {
 		border-radius: 8px;
-		box-shadow: 0px 5px 20px 0px rgb(0, 0, 0, 0.1);
+		box-shadow: 0px 5px 20px 0px rgb(var(--black-rgb), 0.1);
 		background-color: var(--bg-secondary);
 		overflow: hidden;
 		margin: var(--spacing-md) 0;
@@ -133,7 +133,7 @@
 	}
 
 	.tab-button:hover {
-		background-color: rgba(255, 255, 255, 0.1);
+		background-color: rgba(var(--white-rgb), 0.1);
 	}
 
 	.tab-button.active {

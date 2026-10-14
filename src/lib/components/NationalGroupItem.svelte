@@ -133,7 +133,6 @@
 		overflow: hidden;
 		cursor: pointer;
 		transition: background-color 0.2s;
-		border: 1px solid var(--border);
 	}
 
 	.national-group:hover {

@@ -20,8 +20,8 @@
 		<div class="image placeholder">
 			<svg viewBox="0 0 300 400" xmlns="http://www.w3.org/2000/svg">
 				<rect width="300" height="400" fill="transparent" />
-				<circle cx="150" cy="140" r="70" fill="#333" />
-				<ellipse cx="150" cy="300" rx="130" ry="70" fill="#333" />
+				<circle cx="150" cy="140" r="70" fill="var(--grey-500)" />
+				<ellipse cx="150" cy="300" rx="130" ry="70" fill="var(--grey-500)" />
 			</svg>
 		</div>
 	{/if}

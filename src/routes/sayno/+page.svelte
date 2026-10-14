@@ -18,6 +18,7 @@
 		returningUidMessage
 	} from './selfieStore'
 	import { detectAndStoreCollagenUid, hasCollagenUid } from '$lib/collagen'
+	import { HERO_ORANGE } from '$lib/colors'
 	// Static env: dynamic public env in client code blocks prerendered pages'
 	// hydration on a runtime /_app/env.js fetch (see hooks.client.ts).
 	import * as publicEnv from '$env/static/public'
@@ -131,15 +132,15 @@
 						palette: {
 							window: '#FFFFFF',
 							windowBorder: '#E0E0E0',
-							tabIcon: '#ff9416', // PauseAI orange
+							tabIcon: HERO_ORANGE, // PauseAI orange
 							menuIcons: '#5A616A',
 							textDark: '#000000',
 							textLight: '#FFFFFF',
-							link: '#ff9416', // PauseAI orange
-							action: '#ff9416', // PauseAI orange
+							link: HERO_ORANGE, // PauseAI orange
+							action: HERO_ORANGE, // PauseAI orange
 							inactiveTabIcon: '#90A0B3',
 							error: '#F44235',
-							inProgress: '#ff9416', // PauseAI orange
+							inProgress: HERO_ORANGE, // PauseAI orange
 							complete: '#20B832',
 							sourceBg: '#FFF4E6' // Light orange tint
 						},

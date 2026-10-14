@@ -138,7 +138,7 @@
 		background-size: cover;
 		aspect-ratio: 2 / 1;
 		box-sizing: border-box;
-		color: hsl(0, 0%, 15%);
+		color: var(--grey-600);
 	}
 
 	.quote-content {

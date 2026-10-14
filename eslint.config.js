@@ -167,6 +167,10 @@ export default defineConfig(
 	globalIgnores([
 		// TODO remove when done
 		'src/routes/api/write',
-		'src/routes/write'
+		'src/routes/write',
+		// Airtable automation script: runs in Airtable's script runtime (input.config(),
+		// input.secret() globals), not in this repo's build. Kept here as source of truth
+		// but not covered by tsconfig.check.json, so typed linting can't parse it.
+		'airtable-mailersend-emails.js'
 	])
 )

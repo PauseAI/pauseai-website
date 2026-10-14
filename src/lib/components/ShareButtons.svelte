@@ -79,8 +79,8 @@
 	}
 
 	.share-button:hover {
-		background-color: var(--brand-dark, #d65d0e);
-		border-color: var(--brand-dark, #d65d0e);
+		background-color: var(--brand-dark);
+		border-color: var(--brand-dark);
 		transform: translateY(-2px);
 	}
 

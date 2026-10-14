@@ -17,7 +17,7 @@
 	const FORMAT = new Intl.DateTimeFormat('en', { day: 'numeric', month: 'long' })
 	const MAX_DISTANCE_KM = 100
 	const DISTANCE_OVERRIDES: Record<string, number> = {
-		jogj70dj: 480 // Override for specific D.C. (Capitol Hill) event to include users up to 250 miles away
+		ucnncf7s: 480 // Override for specific D.C. (White House) event to include users up to 250 miles away
 	}
 
 	let events: CalendarResponse | null = $state(null)
@@ -51,15 +51,20 @@
 		return (await response.json()) as CalendarResponse
 	}
 
+	// API consumers expect `url` to be an absolute URL when the event did not
+	// come from Luma.
+	function eventLink(event: Event): string {
+		return event.url.startsWith('https://') ? event.url : `https://lu.ma/${event.url}`
+	}
+
 	$effect(() => {
 		eventFound = !!nearbyEvent
 	})
 </script>
 
 {#if nearbyEvent}
-	<Banner {contrast}>
-		Next up in your area: <Link
-			href={'https://lu.ma/' + nearbyEvent.url + '?utm_source=local-banner'}
+	<Banner {contrast} type="nearby_event">
+		Next up in your area: <Link href={eventLink(nearbyEvent) + '?utm_source=local-banner'}
 			>{nearbyEvent.name}</Link
 		> on {FORMAT.format(new Date(nearbyEvent.start_at))}
 	</Banner>

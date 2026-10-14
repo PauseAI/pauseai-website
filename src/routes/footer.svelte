@@ -142,6 +142,10 @@
 		text-decoration: none;
 	}
 
+	.footer-links :global(.button-to-link) {
+		color: var(--text-2);
+	}
+
 	.footer-links :global(a:hover) {
 		text-decoration: underline;
 	}

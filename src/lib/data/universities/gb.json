@@ -1,0 +1,705 @@
+[
+	{
+		"name": "University of Aberdeen",
+		"id": "10007783"
+	},
+	{
+		"name": "University of Abertay Dundee",
+		"id": "10007849"
+	},
+	{
+		"name": "Aberystwyth University",
+		"id": "10007856"
+	},
+	{
+		"name": "Anglia Ruskin University",
+		"abbreviation": "ARU",
+		"id": "10000291"
+	},
+	{
+		"name": "Arts University Bournemouth",
+		"abbreviation": "AUB",
+		"id": "10000385"
+	},
+	{
+		"name": "Arts University Plymouth",
+		"id": "10005127"
+	},
+	{
+		"name": "Aston University",
+		"id": "10007759"
+	},
+	{
+		"name": "Bangor University",
+		"id": "10007857"
+	},
+	{
+		"name": "University of Bath",
+		"id": "10007850"
+	},
+	{
+		"name": "Bath Spa University",
+		"id": "10000571"
+	},
+	{
+		"name": "University of Bedfordshire",
+		"id": "10007152"
+	},
+	{
+		"name": "BIMM University",
+		"id": "10037544"
+	},
+	{
+		"name": "Birkbeck, University of London",
+		"id": "10007760"
+	},
+	{
+		"name": "University of Birmingham",
+		"id": "10006840"
+	},
+	{
+		"name": "Birmingham City University",
+		"id": "10007140"
+	},
+	{
+		"name": "Bournemouth University",
+		"id": "10000824"
+	},
+	{
+		"name": "BPP University",
+		"id": "10031982"
+	},
+	{
+		"name": "University of Bradford",
+		"id": "10007785"
+	},
+	{
+		"name": "University of Brighton",
+		"id": "10000886"
+	},
+	{
+		"name": "University of Bristol",
+		"id": "10007786"
+	},
+	{
+		"name": "Brunel University London",
+		"id": "10000961"
+	},
+	{
+		"name": "University of Buckingham",
+		"id": "10007787"
+	},
+	{
+		"name": "Buckinghamshire New University",
+		"id": "10000975"
+	},
+	{
+		"name": "University of Cambridge",
+		"id": "10007788"
+	},
+	{
+		"name": "Canterbury Christ Church University",
+		"id": "10001143"
+	},
+	{
+		"name": "Cardiff Metropolitan University",
+		"id": "10007854"
+	},
+	{
+		"name": "Cardiff University",
+		"id": "10007814"
+	},
+	{
+		"name": "University of Chester",
+		"id": "10007848"
+	},
+	{
+		"name": "University of Chichester",
+		"id": "10007137"
+	},
+	{
+		"name": "City, University of London",
+		"id": "10001478"
+	},
+	{
+		"name": "Courtauld Institute of Art",
+		"id": "10007761"
+	},
+	{
+		"name": "Coventry University",
+		"id": "10001726"
+	},
+	{
+		"name": "Cranfield University",
+		"id": "10007822"
+	},
+	{
+		"name": "University of Cumbria",
+		"id": "10007842"
+	},
+	{
+		"name": "De Montfort University",
+		"abbreviation": "DMU",
+		"id": "10001883"
+	},
+	{
+		"name": "University of Derby",
+		"id": "10007851"
+	},
+	{
+		"name": "University of Dundee",
+		"id": "10007852"
+	},
+	{
+		"name": "Durham University",
+		"id": "10007143"
+	},
+	{
+		"name": "University of East Anglia",
+		"abbreviation": "UEA",
+		"id": "10007789"
+	},
+	{
+		"name": "University of East London",
+		"abbreviation": "UEL",
+		"id": "10007144"
+	},
+	{
+		"name": "Edge Hill University",
+		"id": "10007823"
+	},
+	{
+		"name": "University of Edinburgh",
+		"abbreviation": "UoE",
+		"id": "10007790"
+	},
+	{
+		"name": "Edinburgh Napier University",
+		"abbreviation": "ENU",
+		"id": "10007772"
+	},
+	{
+		"name": "University of Essex",
+		"id": "10007791"
+	},
+	{
+		"name": "University of Exeter",
+		"id": "10007792"
+	},
+	{
+		"name": "Falmouth University",
+		"id": "10008640"
+	},
+	{
+		"name": "University of Glasgow",
+		"abbreviation": "UofG",
+		"id": "10007794"
+	},
+	{
+		"name": "Glasgow Caledonian University",
+		"abbreviation": "GCU",
+		"id": "10007762"
+	},
+	{
+		"name": "Glasgow School of Art",
+		"abbreviation": "GSA",
+		"id": "10002681"
+	},
+	{
+		"name": "University of Gloucestershire",
+		"id": "10007145"
+	},
+	{
+		"name": "Goldsmiths, University of London",
+		"id": "10002718"
+	},
+	{
+		"name": "University of Greater Manchester",
+		"id": "10006841"
+	},
+	{
+		"name": "University of Greenwich",
+		"id": "10007146"
+	},
+	{
+		"name": "Guildhall School of Music and Drama",
+		"id": "10007825"
+	},
+	{
+		"name": "Harper Adams University",
+		"id": "10040812"
+	},
+	{
+		"name": "Hartpury University and College",
+		"id": "10080810"
+	},
+	{
+		"name": "Health Sciences University",
+		"id": "10000163"
+	},
+	{
+		"name": "Heriot-Watt University",
+		"abbreviation": "HWU",
+		"id": "10007764"
+	},
+	{
+		"name": "University of Hertfordshire",
+		"id": "10007147"
+	},
+	{
+		"name": "University of Huddersfield",
+		"id": "10007148"
+	},
+	{
+		"name": "University of Hull",
+		"id": "10007149"
+	},
+	{
+		"name": "Imperial College London",
+		"abbreviation": "ICL",
+		"id": "10003270"
+	},
+	{
+		"name": "Institute of Cancer Research",
+		"abbreviation": "ICR",
+		"id": "10003324"
+	},
+	{
+		"name": "Keele University",
+		"id": "10007767"
+	},
+	{
+		"name": "University of Kent",
+		"id": "10007150"
+	},
+	{
+		"name": "King's College London",
+		"abbreviation": "KCL",
+		"id": "10003645"
+	},
+	{
+		"name": "Kingston University",
+		"id": "10003678"
+	},
+	{
+		"name": "University of Lancashire",
+		"abbreviation": "UCLan",
+		"id": "10007141"
+	},
+	{
+		"name": "Lancaster University",
+		"id": "10007768"
+	},
+	{
+		"name": "University of Law",
+		"abbreviation": "ULaw",
+		"id": "10039956"
+	},
+	{
+		"name": "University of Leeds",
+		"id": "10007795"
+	},
+	{
+		"name": "Leeds Arts University",
+		"id": "10003854"
+	},
+	{
+		"name": "Leeds Beckett University",
+		"id": "10003861"
+	},
+	{
+		"name": "Leeds Trinity University",
+		"id": "10003863"
+	},
+	{
+		"name": "University of Leicester",
+		"id": "10007796"
+	},
+	{
+		"name": "University of Lincoln",
+		"id": "10007151"
+	},
+	{
+		"name": "Lincoln Bishop University",
+		"id": "10007811"
+	},
+	{
+		"name": "University of Liverpool",
+		"id": "10006842"
+	},
+	{
+		"name": "Liverpool Hope University",
+		"id": "10003956"
+	},
+	{
+		"name": "Liverpool Institute for Performing Arts",
+		"abbreviation": "LIPA",
+		"id": "10003945"
+	},
+	{
+		"name": "Liverpool John Moores University",
+		"abbreviation": "LJMU",
+		"id": "10003957"
+	},
+	{
+		"name": "University of London",
+		"id": "10007797"
+	},
+	{
+		"name": "London Metropolitan University",
+		"id": "10004048"
+	},
+	{
+		"name": "London School of Economics and Political Science",
+		"abbreviation": "LSE",
+		"id": "10004063"
+	},
+	{
+		"name": "London School of Hygiene and Tropical Medicine",
+		"abbreviation": "LSHTM",
+		"id": "10007771"
+	},
+	{
+		"name": "London South Bank University",
+		"abbreviation": "LSBU",
+		"id": "10004078"
+	},
+	{
+		"name": "Loughborough University",
+		"id": "10004113"
+	},
+	{
+		"name": "University of Manchester",
+		"abbreviation": "UoM",
+		"id": "10007798"
+	},
+	{
+		"name": "Manchester Metropolitan University",
+		"abbreviation": "MMU",
+		"id": "10004180"
+	},
+	{
+		"name": "Middlesex University",
+		"id": "10004351"
+	},
+	{
+		"name": "Newcastle University",
+		"id": "10007799"
+	},
+	{
+		"name": "Newman University",
+		"id": "10007832"
+	},
+	{
+		"name": "University of Northampton",
+		"id": "10007138"
+	},
+	{
+		"name": "Northumbria University",
+		"id": "10001282"
+	},
+	{
+		"name": "Norwich University of the Arts",
+		"id": "10004775"
+	},
+	{
+		"name": "University of Nottingham",
+		"abbreviation": "UoN",
+		"id": "10007154"
+	},
+	{
+		"name": "Nottingham Trent University",
+		"abbreviation": "NTU",
+		"id": "10004797"
+	},
+	{
+		"name": "The Open University",
+		"abbreviation": "OU",
+		"id": "10007773"
+	},
+	{
+		"name": "University of Oxford",
+		"id": "10007774"
+	},
+	{
+		"name": "Oxford Brookes University",
+		"id": "10004930"
+	},
+	{
+		"name": "University of Plymouth",
+		"id": "10007801"
+	},
+	{
+		"name": "Plymouth Marjon University",
+		"id": "10037449"
+	},
+	{
+		"name": "University of Portsmouth",
+		"id": "10007155"
+	},
+	{
+		"name": "Queen Margaret University",
+		"abbreviation": "QMU",
+		"id": "10005337"
+	},
+	{
+		"name": "Queen Mary University of London",
+		"abbreviation": "QMUL",
+		"id": "10007775"
+	},
+	{
+		"name": "Queen's University Belfast",
+		"abbreviation": "QUB",
+		"id": "10005343"
+	},
+	{
+		"name": "Ravensbourne University London",
+		"id": "10005389"
+	},
+	{
+		"name": "University of Reading",
+		"id": "10007802"
+	},
+	{
+		"name": "Regent's University London",
+		"id": "10086591"
+	},
+	{
+		"name": "Richmond, The American International University in London",
+		"id": "10005470"
+	},
+	{
+		"name": "Robert Gordon University",
+		"abbreviation": "RGU",
+		"id": "10005500"
+	},
+	{
+		"name": "University of Roehampton",
+		"id": "10007776"
+	},
+	{
+		"name": "Rose Bruford College",
+		"id": "10005523"
+	},
+	{
+		"name": "Royal Academy of Music",
+		"abbreviation": "RAM",
+		"id": "10007835"
+	},
+	{
+		"name": "Royal Agricultural University",
+		"id": "10005545"
+	},
+	{
+		"name": "Royal Central School of Speech and Drama",
+		"id": "10007816"
+	},
+	{
+		"name": "Royal College of Art",
+		"abbreviation": "RCA",
+		"id": "10007777"
+	},
+	{
+		"name": "Royal College of Music",
+		"abbreviation": "RCM",
+		"id": "10007778"
+	},
+	{
+		"name": "Royal Conservatoire of Scotland",
+		"abbreviation": "RCS",
+		"id": "10005561"
+	},
+	{
+		"name": "Royal Holloway, University of London",
+		"abbreviation": "RHUL",
+		"id": "10005553"
+	},
+	{
+		"name": "Royal Northern College of Music",
+		"abbreviation": "RNCM",
+		"id": "10007837"
+	},
+	{
+		"name": "Royal Veterinary College",
+		"abbreviation": "RVC",
+		"id": "10007779"
+	},
+	{
+		"name": "University of Salford",
+		"id": "10007156"
+	},
+	{
+		"name": "Scotland's Rural College",
+		"abbreviation": "SRUC",
+		"id": "10005700"
+	},
+	{
+		"name": "University of Sheffield",
+		"id": "10007157"
+	},
+	{
+		"name": "Sheffield Hallam University",
+		"abbreviation": "SHU",
+		"id": "10005790"
+	},
+	{
+		"name": "SOAS, University of London",
+		"abbreviation": "SOAS",
+		"id": "10007780"
+	},
+	{
+		"name": "Solent University",
+		"id": "10006022"
+	},
+	{
+		"name": "University of South Wales",
+		"abbreviation": "USW",
+		"id": "10007793"
+	},
+	{
+		"name": "University of Southampton",
+		"id": "10007158"
+	},
+	{
+		"name": "University of St Andrews",
+		"id": "10007803"
+	},
+	{
+		"name": "St George's, University of London",
+		"abbreviation": "SGUL",
+		"id": "10007782"
+	},
+	{
+		"name": "St Mary's University, Twickenham",
+		"id": "10007843"
+	},
+	{
+		"name": "University of Staffordshire",
+		"id": "10006299"
+	},
+	{
+		"name": "University of Stirling",
+		"id": "10007804"
+	},
+	{
+		"name": "Stranmillis University College",
+		"id": "10008010"
+	},
+	{
+		"name": "University of Strathclyde",
+		"id": "10007805"
+	},
+	{
+		"name": "University of Suffolk",
+		"id": "10014001"
+	},
+	{
+		"name": "University of Sunderland",
+		"id": "10007159"
+	},
+	{
+		"name": "University of Surrey",
+		"id": "10007160"
+	},
+	{
+		"name": "University of Sussex",
+		"id": "10007806"
+	},
+	{
+		"name": "Swansea University",
+		"id": "10007855"
+	},
+	{
+		"name": "Teesside University",
+		"id": "10007161"
+	},
+	{
+		"name": "University of the Arts London",
+		"abbreviation": "UAL",
+		"id": "10007162"
+	},
+	{
+		"name": "University of the Highlands and Islands",
+		"abbreviation": "UHI",
+		"id": "10007114"
+	},
+	{
+		"name": "University of the West of England",
+		"abbreviation": "UWE",
+		"id": "10007164"
+	},
+	{
+		"name": "University of the West of Scotland",
+		"abbreviation": "UWS",
+		"id": "10007800"
+	},
+	{
+		"name": "Trinity Laban Conservatoire of Music and Dance",
+		"id": "10008017"
+	},
+	{
+		"name": "Ulster University",
+		"id": "10007807"
+	},
+	{
+		"name": "University College Birmingham",
+		"abbreviation": "UCB",
+		"id": "10000712"
+	},
+	{
+		"name": "University College London",
+		"abbreviation": "UCL",
+		"id": "10007781"
+	},
+	{
+		"name": "University for the Creative Arts",
+		"abbreviation": "UCA",
+		"id": "10006427"
+	},
+	{
+		"name": "University of Wales Trinity Saint David",
+		"abbreviation": "UWTSD",
+		"id": "10007858"
+	},
+	{
+		"name": "University of Warwick",
+		"id": "10007163"
+	},
+	{
+		"name": "University of West London",
+		"abbreviation": "UWL",
+		"id": "10006566"
+	},
+	{
+		"name": "University of Westminster",
+		"id": "10007165"
+	},
+	{
+		"name": "University of Winchester",
+		"id": "10003614"
+	},
+	{
+		"name": "University of Wolverhampton",
+		"id": "10007166"
+	},
+	{
+		"name": "University of Worcester",
+		"id": "10007139"
+	},
+	{
+		"name": "Wrexham University",
+		"id": "10007833"
+	},
+	{
+		"name": "Writtle University College",
+		"id": "10007657"
+	},
+	{
+		"name": "University of York",
+		"id": "10007167"
+	},
+	{
+		"name": "York St John University",
+		"id": "10007713"
+	}
+]

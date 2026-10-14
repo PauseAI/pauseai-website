@@ -467,10 +467,18 @@
 			<button onclick={runTest} class="button" disabled={!apiAvailable || loading}>
 				(Demo for beta)
 			</button>
-			<button onclick={copy} class="button" disabled={loading || messages.length === 0}>
+			<button
+				onclick={copy}
+				class="button button--subtle"
+				disabled={loading || messages.length === 0}
+			>
 				Copy Content
 			</button>
-			<button onclick={clear} class="button" disabled={loading || messages.length === 0}>
+			<button
+				onclick={clear}
+				class="button button--subtle"
+				disabled={loading || messages.length === 0}
+			>
 				Reset All
 			</button>
 		</div>
@@ -561,20 +569,20 @@
 	.warning-box {
 		margin: 0.5rem 0;
 		padding: 0.75rem 1.25rem;
-		background-color: #fff3cd;
-		border: 1px solid #ffeeba;
+		background-color: var(--status-warning-bg);
+		border: 1px solid var(--status-warning-border);
 		border-radius: 0.25rem;
 	}
 
 	.warning {
-		color: #856404;
+		color: var(--status-warning-text);
 		margin: 0.5rem 0;
 	}
 
 	.warning.error {
-		color: #721c24;
-		background-color: #f8d7da;
-		border-color: #f5c6cb;
+		color: var(--error-text);
+		background-color: var(--error-bg);
+		border-color: var(--error-border);
 	}
 
 	.top-buttons {
@@ -589,9 +597,16 @@
 		opacity: 0.5;
 		cursor: not-allowed;
 		pointer-events: none; /* Prevents hover effects */
-		background-color: #cccccc !important; /* Override other background colors */
-		color: #666666 !important; /* Darker text */
-		border: 1px solid #999999;
+		background-color: var(--bg-subtle) !important; /* Override other background colors */
+		color: var(--text-subtle) !important; /* Darker text */
+		border: 1px solid var(--brand-subtle);
+	}
+
+	/* Copy Content / Reset All: disabled just means "nothing to act on yet", not an
+	   error or blocked state, so skip the opacity fade above and rely on the muted
+	   bg/text/border it already sets — a subtle disabled look rather than faded out. */
+	button.button--subtle[disabled] {
+		opacity: 1;
 	}
 
 	form {
@@ -607,7 +622,7 @@
 		border: solid 1px var(--text);
 		border-radius: 10px;
 		padding: 10px;
-		font-size: var(--font-size);
+		font-size: inherit;
 		box-sizing: border-box;
 		font-family: var(--font-body);
 		max-width: 100%;
@@ -628,7 +643,7 @@
 		border: none;
 		border-radius: 10px;
 		padding: 10px;
-		font-size: var(--font-size);
+		font-size: inherit;
 		font-family: var(--font-body);
 		cursor: pointer;
 		display: flex;
@@ -717,9 +732,9 @@
 	.progress.completed {
 		animation: none;
 		background-image: none;
-		background-color: #c0ffc0; /* Light green background */
-		border-color: #c3e6cb;
-		color: #155724;
+		background-color: var(--status-success-bg-light); /* Light green background */
+		border-color: var(--success-border);
+		color: var(--success-text);
 	}
 
 	.loading {

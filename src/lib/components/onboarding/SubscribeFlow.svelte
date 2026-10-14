@@ -1,9 +1,9 @@
 <!--
 	SubscribeFlow — the lightweight newsletter entry at /subscribe.
 
-	A single-step signup (global newsletter) with an optional local-chapter opt-in
-	and an optional Substack opt-in. On success it offers to go further: rather
-	than linking out to /join (which would create a second, duplicate record), it
+	A single-step signup (global newsletter) with the chapter-sharing question
+	(chapterShare.ts) and an optional Substack opt-in. On success it offers to go
+	further: rather than linking out to /join (which would create a second, duplicate record), it
 	hands off to OnboardingFlow seeded at the intent step with the record already
 	created here, so continuing updates that same record.
 -->
@@ -17,9 +17,14 @@
 	import Combobox from '$lib/components/Combobox.svelte'
 	import LinkWithoutIcon from '$lib/components/LinkWithoutIcon.svelte'
 	import Turnstile from '$lib/components/Turnstile.svelte'
+	import ChapterShareQuestion from './ChapterShareQuestion.svelte'
+	import CheckInbox from './CheckInbox.svelte'
 	import OnboardingFlow from './OnboardingFlow.svelte'
+	import { chapterName, chapterQuestion, loadChapterCountries } from './chapterShare'
+	import { getMessages } from './i18n.svelte'
+	import { saveSignupFromPost } from './signupResume'
 	import { turnstileSiteKey } from '$lib/turnstile'
-	import { COUNTRIES } from './options'
+	import { COUNTRIES, asksChapterQuestion, type ChapterAnswer } from './options'
 
 	let {
 		initialEmail = '',
@@ -37,6 +42,7 @@
 	// "could not load" error before it's removed again.
 	let onboardingModeKnown = $state(false)
 	onMount(async () => {
+		void loadChapterCountries().then((countries) => (chapterCountries = countries))
 		try {
 			const response = await fetch('/api/onboarding-mode')
 			if (!response.ok) return
@@ -56,11 +62,29 @@
 		email: '',
 		country: '',
 		city: '',
-		wantsChapter: false,
 		wantsSubstack: false
 	})
 	let fields = $state({ ...blankFields(), email: initialEmail, country: initialCountry })
+	// The chapter-sharing answer with the country it was given for, as on /join:
+	// another country is another question.
+	let chapterChoice = $state<{ country: string; answer: ChapterAnswer } | null>(null)
+	let chapterCountries = $state<string[] | null>(null)
+	const msgs = $derived(getMessages())
+	const chapterQ = $derived(
+		fields.country && COUNTRIES.includes(fields.country) && chapterCountries !== null
+			? chapterQuestion(
+					msgs,
+					'subscribe',
+					fields.country,
+					chapterName(fields.country, chapterCountries)
+				)
+			: null
+	)
+	const chapterAnswer = $derived(
+		chapterChoice?.country === fields.country ? chapterChoice.answer : null
+	)
 	let recordId = $state('')
+	let recordToken = $state('')
 
 	// Bot protection: the shared submit action verifies this token server-side and
 	// 403s without it. Bumped after each submission because tokens are single-use.
@@ -77,7 +101,9 @@
 		if (!nav.from || nav.from.url.pathname !== nav.to?.url.pathname) return
 		phase = 'form'
 		recordId = ''
+		recordToken = ''
 		fields = blankFields()
+		chapterChoice = null
 	})
 
 	// A newsletter signup elsewhere (e.g. the homepage box) hands off here via
@@ -97,6 +123,8 @@
 			!!fields.email.trim() &&
 			!!fields.country.trim() &&
 			!!fields.city.trim() &&
+			// Required wherever it is asked, and it waits for the chapter lookup.
+			(!asksChapterQuestion(fields.country) || !!chapterAnswer) &&
 			// No widget to wait for without a configured site key (e.g. local dev).
 			// Required only when the submission writes, matching the server — otherwise
 			// the widget's failure on a deploy preview would leave this disabled.
@@ -105,13 +133,29 @@
 
 	const ERROR_MESSAGE = 'Something went wrong. Please try again.'
 
-	const submit: SubmitFunction = () => {
+	// Saves the created row for OnboardingFlow, so /join in this tab continues it.
+	// Never resumes one itself: this form always posts intent None, which would
+	// undo what someone chose on /join.
+	const submit: SubmitFunction = ({ formData, cancel }) => {
+		// Same guard as OnboardingFlow's submitWith.
+		if (submitting) {
+			cancel()
+			return
+		}
 		submitting = true
 		return ({ result }) => {
 			submitting = false
+			// The token is spent whatever the outcome; clear it so a retry waits for
+			// the fresh widget instead of reposting it.
+			turnstileToken = ''
 			turnstileNonce += 1
 			if (result.type === 'success' && result.data?.success) {
-				if (typeof result.data.recordId === 'string') recordId = result.data.recordId
+				if (typeof result.data.recordId === 'string') {
+					recordId = result.data.recordId
+					recordToken = typeof result.data.recordToken === 'string' ? result.data.recordToken : ''
+					// Always a create, so the row held no answer before it.
+					saveSignupFromPost(formData, recordId, recordToken, null)
+				}
 				phase = 'thanks'
 			} else if (result.type === 'failure') {
 				toast.error(String(result.data?.message ?? ERROR_MESSAGE))
@@ -140,11 +184,10 @@
 		<form method="POST" action="/embed/onboarding-form?/submit" use:enhance={submit}>
 			<!-- Fixed for the newsletter entry: global newsletter opt-in, and the
 			     privacy-policy consent is the act of signing up (see the microcopy
-			     below). subscribe_form=1 tells the server to share with a chapter
-			     only when the local-chapter box is ticked. -->
+			     below). subscribe_form=1 picks this form's Signup source. -->
 			<input type="hidden" name="subscribe_form" value="1" />
 			<input type="hidden" name="mode" value="contact" />
-			<input type="hidden" name="intent" value="Keep informed" />
+			<input type="hidden" name="intent" value="None" />
 			<input type="hidden" name="keep_informed" value="on" />
 			<input type="hidden" name="agree_gdpr" value="on" />
 
@@ -205,12 +248,17 @@
 				/>
 			</div>
 
-			<label class="opt-in">
-				<input type="checkbox" name="chapter_share" bind:checked={fields.wantsChapter} />
-				<span>
-					<span class="opt-in-label">Also send me updates from my local chapter</span>
-				</span>
-			</label>
+			{#if chapterQ}
+				<ChapterShareQuestion
+					question={chapterQ}
+					level={2}
+					bind:answer={
+						() => chapterAnswer,
+						(answer: ChapterAnswer | null) =>
+							(chapterChoice = answer ? { country: fields.country, answer } : null)
+					}
+				/>
+			{/if}
 
 			<label class="opt-in">
 				<input type="checkbox" name="newsletter" bind:checked={fields.wantsSubstack} />
@@ -232,15 +280,15 @@
 				</button>
 				<p class="submit-disclaimer">
 					By signing up you agree to our
-					<LinkWithoutIcon href="/privacy">Privacy Policy</LinkWithoutIcon>. We'll only use your
-					details to keep you updated on PauseAI, and you can unsubscribe anytime.
+					<LinkWithoutIcon href="/privacy">Privacy Policy</LinkWithoutIcon>. We'll use your details
+					to keep you updated on PauseAI, and you can unsubscribe anytime.
 				</p>
 			</div>
 		</form>
 	</div>
 {:else if phase === 'thanks'}
 	<div class="subscribe-card thanks">
-		<h2>Thanks for signing up!</h2>
+		<CheckInbox {msgs} leadIn="Thanks for signing up!" />
 		<p>
 			Are you interested in doing more? Whether you have five minutes or five hours a week, there's
 			a place for you.
@@ -251,12 +299,21 @@
 	<OnboardingFlow
 		startStep={2}
 		initialRecordId={recordId}
+		initialRecordToken={recordToken}
 		initialFullName={fields.fullName}
 		initialEmail={fields.email}
 		initialCountry={fields.country}
 		initialCity={fields.city}
 		initialKeepInformed={true}
-		initialChapterShare={fields.wantsChapter}
+		initialChapterAnswer={asksChapterQuestion(fields.country) ? chapterAnswer : null}
+		onRecordGone={() => {
+			// Back to the signup, details kept, to create a row with fresh consent and
+			// a chapter answer given again.
+			phase = 'form'
+			chapterChoice = null
+			recordId = ''
+			recordToken = ''
+		}}
 	/>
 {/if}
 
@@ -292,7 +349,7 @@
 		max-width: 800px;
 		margin: 0 auto;
 		padding: 2.25rem;
-		box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+		box-shadow: 0 4px 20px rgba(var(--black-rgb), 0.1);
 	}
 
 	@media (max-width: 600px) {
@@ -389,7 +446,7 @@
 
 	button.primary {
 		background-color: var(--brand);
-		color: #fff;
+		color: var(--white);
 		font-size: 1.1rem;
 		font-weight: 700;
 		font-family: var(--font-body);
@@ -420,11 +477,6 @@
 
 	.thanks {
 		text-align: center;
-	}
-
-	.thanks h2 {
-		font-family: var(--font-heading);
-		margin: 0 0 0.75rem;
 	}
 
 	.thanks p {

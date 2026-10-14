@@ -18,7 +18,7 @@ if (
 import { type Handle, type HandleServerError } from '@sveltejs/kit'
 import { env } from '$env/dynamic/public'
 import { paraglideMiddleware } from '$lib/paraglide/server.js'
-import { SENTRY_RELEASE } from '$lib/sentry'
+import { SENTRY_RELEASE, redactLinkCredentials } from '$lib/sentry'
 
 let Sentry: typeof import('@sentry/deno') | undefined
 
@@ -60,7 +60,7 @@ export const handleError: HandleServerError = ({ error, event, status, message }
 			extra: {
 				status,
 				message,
-				url: event.url?.href,
+				url: redactLinkCredentials(event.url?.href),
 				method: event.request?.method
 			}
 		})

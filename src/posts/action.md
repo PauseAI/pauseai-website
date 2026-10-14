@@ -91,6 +91,7 @@ content: `
 <li>Apply for a <a href="/volunteer-stipends">volunteer stipend</a> to support sustained involvement</li>
 <li><a href="/communities">Set up a local chapter</a> or get deeply involved in an existing one</li>
 <li>Check our <a href="/vacancies">paid</a> vacancies for open roles</li>
+<li>Join the <a href="/join-operations">Operations Team</a> to work on the website and our other tooling</li>
 </ul>
 	`
 }

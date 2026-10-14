@@ -7,9 +7,16 @@
 ```html
 <iframe
 	src="https://pauseai.info/embed/onboarding-form"
+	referrerpolicy="no-referrer-when-downgrade"
 	style="width: 100%; border: none;"
 ></iframe>
 ```
+
+`referrerpolicy="no-referrer-when-downgrade"` is **recommended**: without it a
+cross-origin iframe only passes its host origin, so signups are attributed to
+the bare domain instead of the page (see [Attribution](#attribution-signup-source--source-page)).
+It sends the full URL only between HTTPS origins, and the query string is
+dropped on our side.
 
 The page reports its rendered height to the host via `postMessage` (`{ height: number }`) so the host can resize the iframe as the form's steps change. Listen for it:
 
@@ -23,20 +30,34 @@ The page reports its rendered height to the host via `postMessage` (`{ height: n
 </script>
 ```
 
+When someone completes a new signup, the page also posts `{ event: 'onboarding_signup_complete', version: 1 }` to the host (e.g. so the host can fire a conversion tag). It carries no form data and fires once per new signup, when the server confirms the record was created. It does not fire for later updates to that record (the volunteer details step), for silently dropped spam, or on the standalone page (not iframed). Height messages are unchanged, so tell the two apart by shape:
+
+```html
+<script>
+	window.addEventListener('message', (event) => {
+		if (event.origin !== 'https://pauseai.info') return
+		if (event.data?.event === 'onboarding_signup_complete') {
+			// e.g. window.dataLayer?.push({ event: 'onboarding_signup_complete' })
+		}
+	})
+</script>
+```
+
 ## Query params
 
-| Param       | Effect                                                                                                                                                                                             |
-| ----------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `country`   | Prefills country of residence                                                                                                                                                                      |
-| `city`      | Prefills city / town of residence                                                                                                                                                                  |
-| `languages` | Prefills the volunteer form's language selector. Comma-separated, matched against the stored language values in `src/lib/components/onboarding/options.ts` (unmatched values are silently ignored) |
-| `bg`        | Sets the embed's background color, so it blends into the host page. Accepts a hex value (`bg=fff` or `bg=%23fff`) or a CSS color name (`bg=white`). Anything else is ignored                       |
+| Param       | Effect                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
+| ----------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `country`   | Prefills country of residence                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
+| `city`      | Prefills city / town of residence                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
+| `languages` | Prefills the volunteer form's language selector. Comma-separated, matched against the stored language values in `src/lib/components/onboarding/options.ts` (unmatched values are silently ignored)                                                                                                                                                                                                                                                                                                                                                                                      |
+| `bg`        | Sets the embed's background color, so it blends into the host page. Accepts a hex value (`bg=fff` or `bg=%23fff`) or a CSS color name (`bg=white`). Anything else is ignored                                                                                                                                                                                                                                                                                                                                                                                                            |
+| `source`    | Overrides the auto-detected attribution. Sanitised server-side (word chars, spaces, dashes, dots, slashes; max 80 — e.g. `pauseai.uk/join`) and written to the `Source page` field on new records. `Signup source` is unaffected — it stays the stable flow literal. Applies to new signups only, not updates. **Usually unneeded**: an embed already self-attributes from the host page URL (`document.referrer`), and first-party pages from the request `Referer`. Pass it only to force a specific label, or when the host sends `Referrer-Policy: no-referrer` (which blanks both) |
 
 Example — a French-speaking regional chapter embed:
 
 ```html
 <iframe
-	src="https://pauseai.info/embed/onboarding-form?country=France&city=Paris&languages=French,English&bg=fff"
+	src="https://pauseai.info/embed/onboarding-form?country=France&city=Paris&languages=French,English&bg=fff&source=pauseai.fr/join"
 ></iframe>
 ```
 
@@ -47,6 +68,37 @@ Country/city/languages are things a chapter can reasonably know in advance about
 - Consent checkboxes (GDPR, volunteer agreement, code of conduct, newsletter/keep-informed opt-ins) must be actively given by the visitor — prefilling them via a shareable URL would be a dark pattern. The volunteer step's "become a paying member" opt-in is also not prefillable today, though this is less deliberate than the consent-box exclusion.
 - Contact details (name, email, phone, Discord username) have no legitimate source when the same embed link is shared broadly to an unknown audience.
 
+## Attribution: `Signup source` + `Source page`
+
+Two fields, written once at record creation and never on an update:
+
+- **`Signup source`** — a stable flow literal: `October 2026 onboarding flow`,
+  or `October 2026 subscribe form` from `/subscribe`, each with ` (US)` appended
+  for a United States signup (see "Signup source" in `docs/join-form-flow.md`).
+  Match it exactly in views and automations; it never carries a where-from
+  suffix.
+- **`Source page`** — the host/path the signup came from (`example.org/join`),
+  or empty. Resolved server-side, first match wins:
+
+  1. the `source` query param, if given (sanitised);
+  2. else, for an iframe embed, the host page from `document.referrer`;
+  3. else, for a first-party page, its own path from the request `Referer`
+     (`pauseai.info/join`);
+  4. else nothing — `Source page` is left unset.
+
+**What the referrer gives you (case 2).** Under the browser default referrer
+policy, a cross-origin iframe only sees the host's **origin**, so a plain
+`<iframe src=".../embed/onboarding-form">` on `example.org/join` records
+`Source page` = `example.org` — domain, not page. Set
+`referrerpolicy="no-referrer-when-downgrade"` on the iframe tag (recommended, and
+already in the [basic embed](#basic-embed) snippet) to record the full path
+`example.org/join`. It sends the full URL only between HTTPS origins, and the
+query string is dropped on our side.
+
+`Referrer-Policy: no-referrer` on the host page blanks case 2 entirely — use
+`?source=` then. For an exact, policy-independent label, pass `?source=` and skip
+all of this.
+
 ## Mode: stub vs. live
 
 The form's submit behavior depends on the `ONBOARDING_LIVE` env var:
@@ -55,6 +107,21 @@ The form's submit behavior depends on the `ONBOARDING_LIVE` env var:
 - **Stub** (default): submissions are captured at `/embed/onboarding-form/stub` — no Airtable write, no Substack subscription. Useful for testing an embed without creating real records.
 
 The active mode is logged to the browser console on load.
+
+Two more env vars guard updates to a row created earlier in the flow (see "Continuation token" in [`docs/join-form-flow.md`](./join-form-flow.md)):
+
+- `ONBOARDING_CONTINUATION_SECRET`: the HMAC key for continuation tokens, 32 random bytes (`openssl rand -base64 32`). Set it wherever the form is live. Without it no token is issued or checked. Rotating it sends every flow in progress back to the start once enforcement is on.
+- `ONBOARDING_CONTINUATION_ENFORCE`: `true` refuses an update without a valid token; anything else only reports it.
+
+Three more report each written row to the CRM (see "CRM intake" in [`docs/join-form-flow.md`](./join-form-flow.md)). Set them in the Production context only:
+
+- `CRM_INTAKE_ENABLED`: `true` sends each row the form writes to CiviCRM's member intake after the response; anything else sends nothing. Has no effect in stub mode.
+- `CRM_INTAKE_URL`: the CRM's base URL, e.g. `https://crm.pauseai.info`.
+- `CRM_INTAKE_KEY`: the API key of the CRM's member intake account. A secret: it is sent only in the `X-Civi-Auth` header and never logged or reported.
+
+One more decides which system sends a new row's signup emails (see "Signup emails sent by" in [`docs/join-form-flow.md`](./join-form-flow.md)), also Production only:
+
+- `SIGNUP_EMAILS_SENT_BY_CRM`: `true` writes `Signup emails sent by` = `CiviCRM` on each row the form creates; anything else writes nothing, and Airtable's automations send.
 
 ## Related
 

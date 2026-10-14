@@ -1,14 +1,20 @@
 <script lang="ts">
 	import { onMount, tick } from 'svelte'
+	import { dev } from '$app/environment'
 	import { page } from '$app/state'
 	import OnboardingFlow from '$lib/components/onboarding/OnboardingFlow.svelte'
 	import PostMeta from '$lib/components/PostMeta.svelte'
+	import { reportEmbedHeight } from '$lib/embedHeight'
 	import {
 		isOnboardingLocale,
 		setOnboardingLocale,
 		getMessages
 	} from '$lib/components/onboarding/i18n.svelte'
+	import { loadChapterSiteCountry } from '$lib/components/onboarding/chapterShare'
 
+	// Query params read here (locale, country, city, source, languages, bg) are
+	// listed in CACHE_VARY_PARAMS in +page.server.ts for the CDN cache key. Add
+	// any new one there too.
 	$effect(() => {
 		const locale = page.url.searchParams.get('locale')
 		if (locale && isOnboardingLocale(locale)) setOnboardingLocale(locale)
@@ -20,6 +26,20 @@
 
 	const initialCountry = $derived(page.url.searchParams.get('country') ?? '')
 	const initialCity = $derived(page.url.searchParams.get('city') ?? '')
+	// Signup-source attribution, written to `Source page` on the server (create
+	// only; the server sanitises it again, so this is only a precedence filter):
+	//  - explicit ?source= wins — how a partner labels its embed
+	//  - otherwise, when iframed, fall back to the host page from document.referrer
+	//    (`example.org/join`), so an embed self-attributes with no param at all.
+	//    Set in onMount because document.referrer isn't available during SSR.
+	// The strip mirrors the server's accepted charset (see cleanSource): a
+	// ?source= that is all punctuation / non-Latin sanitises to nothing there, so
+	// don't let it shadow the document.referrer fallback here.
+	const explicitSource = $derived(
+		(page.url.searchParams.get('source') ?? '').replace(/[^\w \-./]/g, '').trim()
+	)
+	let referrerSource = $state('')
+	const initialSource = $derived(explicitSource || referrerSource)
 	const initialLanguages = $derived(
 		(page.url.searchParams.get('languages') ?? '')
 			.split(',')
@@ -30,27 +50,81 @@
 	// When iframed, report the rendered height to the host page so it can
 	// resize the iframe ({ height: number } via postMessage). '*' target is
 	// fine — the height is not sensitive and the host validates event.origin.
-	// The ResizeObserver covers step changes, validation errors, and window
-	// resizes without hooking each individually.
+	// reportEmbedHeight covers step changes, validation errors, window resizes and
+	// content that grows while the embed is still off-screen.
 	let embedded = $state(false)
+	let wrap: HTMLDivElement | undefined = $state()
+
+	// Set when the referrer host matches a chapter's own website, so the
+	// chapter question can drop the "separate organisation" disclosure that
+	// makes sense on the global site but reads as a double confirmation when
+	// the visitor is already on that chapter's page. See chapterShare.ts.
+	let chapterSiteCountry = $state<string | null>(null)
+
+	// DEV-only override for local testing, since a real cross-origin referrer
+	// can't be faked without actually serving a test page from a chapter's own
+	// domain: ?dev_chapter_site=Germany forces the detected chapter straight to
+	// a country name, skipping the referrer match in onMount below. `dev` is a
+	// build-time constant, so this block is stripped from production bundles —
+	// it never runs on pauseai.info.
+	let devChapterSite: string | null = null
+	if (dev) {
+		$effect(() => {
+			devChapterSite = page.url.searchParams.get('dev_chapter_site')
+			if (devChapterSite) chapterSiteCountry = devChapterSite
+		})
+	}
 
 	onMount(() => {
 		embedded = window.self !== window.top
 		if (!embedded) return
 
-		const sendHeight = () => {
-			window.parent.postMessage({ height: Math.ceil(document.documentElement.scrollHeight) }, '*')
+		// The host page's URL, for source attribution when no ?source= was given.
+		// A cross-origin parent can't be read via script, but the browser still
+		// exposes its URL here as a plain string (unless the host sends
+		// Referrer-Policy: no-referrer, in which case this is empty and the
+		// submission records no `Source page`).
+		if (document.referrer) {
+			try {
+				const ref = new URL(document.referrer)
+				// Ignore a referrer that is our own embed route (a redirect chain, or
+				// the page linking to itself) — it says nothing about the host. The
+				// host check keeps a real partner page at a similar path usable.
+				const isSelfEmbed =
+					ref.host === window.location.host && ref.pathname.startsWith('/embed/onboarding-form')
+				if (!isSelfEmbed) {
+					referrerSource = `${ref.host}${ref.pathname}`.replace(/\/+$/, '')
+					if (!devChapterSite) {
+						void loadChapterSiteCountry(ref.hostname).then((country) => {
+							chapterSiteCountry = country
+						})
+					}
+				}
+			} catch {
+				// Unparseable referrer — leave attribution to ?source= or nothing.
+			}
 		}
 
-		const observer = new ResizeObserver(sendHeight)
+		// Measure the form's own wrapper, not the document: html/body are height:100%
+		// (global styles), so they always match the iframe and never report growth.
+		let stop: (() => void) | undefined
 		// `embedded` drops the wrapper's min-height; measure after that applies.
 		void tick().then(() => {
-			sendHeight()
-			observer.observe(document.documentElement)
-			observer.observe(document.body)
+			if (!wrap) return
+			stop = reportEmbedHeight(wrap, (height) => window.parent.postMessage({ height }, '*'))
 		})
-		return () => observer.disconnect()
+		return () => stop?.()
 	})
+
+	// Tell the host page a signup completed, so it can fire its own conversion
+	// tracking (a cross-origin host can't see inside the iframe). No form data in
+	// the payload; '*' is fine for the same reason as the height message. Keyed
+	// by `event`, so it never collides with the { height } messages.
+	function reportSignup() {
+		if (window.parent !== window) {
+			window.parent.postMessage({ event: 'onboarding_signup_complete', version: 1 }, '*')
+		}
+	}
 
 	// Optional ?bg= so the embed blends into the host page — hex (with or
 	// without #) or a CSS color name. Anything else is ignored, which also
@@ -67,8 +141,20 @@
 
 <PostMeta {title} {description} />
 
-<div class="embed-wrap" class:embedded style:background-color={background || undefined}>
-	<OnboardingFlow {initialCountry} {initialCity} {initialLanguages} />
+<div
+	bind:this={wrap}
+	class="embed-wrap"
+	class:embedded
+	style:background-color={background || undefined}
+>
+	<OnboardingFlow
+		{initialCountry}
+		{initialCity}
+		{initialLanguages}
+		{initialSource}
+		{chapterSiteCountry}
+		onSignup={reportSignup}
+	/>
 </div>
 
 <style>

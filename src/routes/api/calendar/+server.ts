@@ -1,7 +1,10 @@
 import * as Calendar from '$lib/clients/luma/calendar'
+import * as GoogleCalendar from '$lib/clients/google-calendar'
+import { geocodeAll } from '$lib/geocode.js'
 import { generateCacheControlRecord } from '$lib/utils.js'
 import { json } from '@sveltejs/kit'
 import type { RequestHandler } from './$types'
+import nationalChaptersJson from '$lib/data/national-chapters.json'
 
 export type CalendarResponse = {
 	entries: {
@@ -19,14 +22,27 @@ export type Event = {
 
 export const prerender = false
 
+// The global calendar stays hardcoded; national chapter calendars are synced
+// from Airtable into national-chapters.json by scripts/sync-national-chapters.ts
+// (lumaCalendarId, resolved from each chapter's Luma page at sync time).
+const GLOBAL_CALENDAR_ID = 'cal-E1qhLPs5IvlQr8S'
 const CALENDAR_IDS = [
-	'cal-E1qhLPs5IvlQr8S', // global
-	'cal-Z327EhtiFdHuVie', // UK
-	'cal-EvzL9fKA3SCSrOq', // US
-	'cal-gnpo62PdSdau7KQ', // AU
-	'cal-tsYv79s4aTQC16Q', // CA
-	'cal-B1ELepcLXLcAqMf' // DE
+	GLOBAL_CALENDAR_ID,
+	...nationalChaptersJson.communities
+		.map((c) => c.lumaCalendarId)
+		.filter((id): id is string => id != null)
 ]
+
+// Google Calendars are pulled through their public iCal feeds (node-ical).
+// `cid` share links carry the raw calendar ID.
+const GOOGLE_CALENDAR_IDS = [
+	'24db6e4f75a3f41c70a5001e1ec9eb278705a03491db2b4c436e21bb95e578ed@group.calendar.google.com'
+]
+
+// Recurring events have to be expanded into instances for a bounded window,
+// so Google feeds are read ~one year ahead. The `days` filter below narrows
+// what is actually served; this only bounds how far expansion is meaningful.
+const GOOGLE_HORIZON_DAYS = 365
 
 export const GET: RequestHandler = async ({ url, setHeaders }) => {
 	const daysStr = url.searchParams.get('days')
@@ -54,9 +70,69 @@ export const GET: RequestHandler = async ({ url, setHeaders }) => {
 		}))
 	)
 
-	// De-duplicate by URL
+	const googleFrom = new Date()
+	const googleTo = new Date()
+	googleTo.setDate(googleTo.getDate() + GOOGLE_HORIZON_DAYS)
+
+	const googleCalendars = await Promise.all(
+		GOOGLE_CALENDAR_IDS.map(async (calendarId) => ({
+			calendarId,
+			data: await GoogleCalendar.getCalendar({ calendarId })
+		}))
+	)
+
+	for (const { calendarId, data } of googleCalendars) {
+		const vevents = Object.values(data).filter(GoogleCalendar.isVEVENT)
+		// Geocode each distinct location once, in one parallel wave — recurring
+		// occurrences share their venue, so repeat hits come from the cache.
+		const locations = new Set<string>()
+		const instanceRuns = vevents.map((vevent) => ({
+			vevent,
+			instances: GoogleCalendar.expandRecurringEvent(vevent, {
+				from: googleFrom,
+				to: googleTo
+			}).filter((instance) => instance.event.status !== 'CANCELLED')
+		}))
+		for (const { instances } of instanceRuns) {
+			for (const instance of instances) {
+				const location = GoogleCalendar.text(instance.event.location)
+				if (location) locations.add(location)
+			}
+		}
+		const coordinates = await geocodeAll([...locations])
+		for (const { instances } of instanceRuns) {
+			for (const instance of instances) {
+				const location = GoogleCalendar.text(instance.event.location)
+				const coords = location ? coordinates.get(location) : undefined
+				const uid = GoogleCalendar.text(instance.event.uid)
+				mergedEntries.push({
+					event: {
+						name: GoogleCalendar.text(instance.summary),
+						// Feeds carry no per-event URL; deep-link to the owning event's
+						// detail page, falling back to the calendar itself when the
+						// feed omits the UID.
+						url: uid
+							? GoogleCalendar.eventUrl(uid, calendarId)
+							: GoogleCalendar.calendarUrl(calendarId),
+						geo_latitude: coords?.latitude,
+						geo_longitude: coords?.longitude,
+						start_at: new Date(instance.start)
+					}
+				})
+			}
+		}
+	}
+
+	// De-duplicate by URL + start time — Google feeds repeat the calendar's
+	// subscribe URL for every event, and the same Luma event can appear via
+	// several chapter calendars.
 	const uniqueEntries = Array.from(
-		new Map(mergedEntries.map((entry) => [entry.event.url, entry])).values()
+		new Map(
+			mergedEntries.map((entry) => [
+				`${entry.event.url}|${entry.event.start_at.toISOString()}|${entry.event.name}`,
+				entry
+			])
+		).values()
 	)
 
 	let filteredEntries = uniqueEntries

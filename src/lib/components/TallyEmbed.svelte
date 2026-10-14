@@ -88,9 +88,9 @@
 		margin: 2rem 0;
 		padding: 1.5rem;
 		background-color: white;
-		border: 1px solid #e5e7eb;
+		border: 1px solid var(--border-subtle);
 		border-radius: 8px;
-		box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+		box-shadow: 0 2px 4px rgba(var(--black-rgb), 0.1);
 	}
 	.tally-form-container iframe {
 		border-radius: 4px;

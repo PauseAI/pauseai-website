@@ -3,6 +3,7 @@ title: Statement on the attack on Sam Altman's residence
 description: PauseAI unequivocally condemns the attack on Sam Altman's home and
   all forms of violence, intimidation, and harassment.
 date: 2026-04-12
+news: true
 ---
 
 On 10 April 2026, the home of OpenAI's CEO, Sam Altman was attacked with an incendiary weapon. A suspect has been arrested and is in police custody.

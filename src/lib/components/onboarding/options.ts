@@ -1,21 +1,49 @@
 // Controlled vocabularies for the onboarding pipeline form.
 import type { OnboardingMessages } from './messages'
 
-// 'None' is what /join step 2 submits when nothing is picked; /subscribe keeps
-// writing 'Keep informed'. Each value must exist as an Airtable Intent select
+// 'None' is what both forms submit when the person picked no intent: /join step 2
+// offers Act now / Volunteer / Lead, and /subscribe never asks. No form emits
+// 'Keep informed' any more; it stays listed because the server validates posted
+// intents against INTENTS (isIntent), so dropping it would start rejecting a post
+// that is still legitimate. Each value must exist as an Airtable Intent select
 // option and in the CRM's member_intent vocabulary.
 export const INTENTS = ['None', 'Keep informed', 'Act now', 'Volunteer', 'Lead'] as const
 export type Intent = (typeof INTENTS)[number]
 export type IntentKey = 'act-now' | 'volunteer' | 'lead'
 
-export const SIGNUP_SOURCE = 'June 2026 onboarding flow'
+// `Form version`, stamped on a create next to `Signup source`: which rules the CRM
+// applies to the row (the newsletter only on Keep me informed, the chapter answer and
+// memberships written at signup, a chapter only on a recorded Yes). Bump it together
+// with the CRM's CRM_PauseaiCore_MemberRow::CURRENT_FORM_VERSION, and only when the rules
+// a new row follows change; a new form, label or wording needs no bump.
+export const FORM_VERSION = 2
 
-// The /subscribe newsletter form, told apart from /join because the two ask for
-// chapter consent differently and nothing else in the row says which form wrote
-// it. The CRM's OPTIN_FORM_SOURCES should list this too: it also classifies on a
-// non-empty Intent, so the newsletter opt-in gate holds either way, but a source
-// it doesn't know trips the import's drift canary.
-export const SUBSCRIBE_SIGNUP_SOURCE = 'June 2026 subscribe form'
+// `Signup source`, stamped on a create: a label for people and Airtable, which the CRM
+// does not match (it reads FORM_VERSION, and the stored chapter-share wording for
+// whether the question was asked). Airtable's "Subscriber becomes Volunteer/Lead"
+// automation matches every /subscribe source by the phrase "subscribe form", so a
+// /subscribe value must keep it. A US signup gets its own value because it is not asked
+// the chapter question.
+const SIGNUP_SOURCE = 'October 2026 onboarding flow'
+const SUBSCRIBE_SIGNUP_SOURCE = 'October 2026 subscribe form'
+const US_SOURCE_SUFFIX = ' (US)'
+
+export function signupSource(form: 'join' | 'subscribe', country: string): string {
+	const source = form === 'subscribe' ? SUBSCRIBE_SIGNUP_SOURCE : SIGNUP_SOURCE
+	return asksChapterQuestion(country) ? source : source + US_SOURCE_SUFFIX
+}
+
+export type ChapterAnswer = 'yes' | 'no'
+
+export function isChapterAnswer(value: unknown): value is ChapterAnswer {
+	return value === 'yes' || value === 'no'
+}
+
+// PauseAI US is a separate organisation, not a chapter, so a US signup is not asked
+// and no chapter answer is written for it.
+export function asksChapterQuestion(country: string): boolean {
+	return country !== 'United States'
+}
 
 // Full 196-country list from the Tally form.
 export const COUNTRIES = [
@@ -216,6 +244,28 @@ export const COUNTRIES = [
 	'Zambia',
 	'Zimbabwe'
 ]
+
+// UK postcode, collected on step 1 for every "United Kingdom" signup and stored
+// in the same Airtable `Zip code` field the US volunteer ZIP uses. The full
+// postcode is required — the outward code alone ("SW1A") is not enough to
+// identify a parliamentary constituency, which is what downstream routing needs.
+// So the inward half (digit + two letters) is mandatory. Case-insensitive, and
+// tolerant of a missing or repeated space between the two halves.
+export const UK_POSTCODE_PATTERN = /^[A-Za-z]{1,2}\d[A-Za-z\d]?\s*\d[A-Za-z]{2}$/
+
+export function isValidUKPostcode(value: string): boolean {
+	return UK_POSTCODE_PATTERN.test(value.trim())
+}
+
+// Uppercased, with exactly one space before the inward code ("SW1A 1AA"),
+// however the visitor typed it. What we send to Airtable so rows are consistent.
+// A value too short to split is returned compacted and left for validation to
+// reject.
+export function normaliseUKPostcode(value: string): string {
+	const compact = value.trim().toUpperCase().replace(/\s+/g, '')
+	if (compact.length < 5) return compact
+	return `${compact.slice(0, -3)} ${compact.slice(-3)}`
+}
 
 // International dialing code per country, keyed by the COUNTRIES names above.
 // Used to prefill the phone field's dial code from the country of residence.

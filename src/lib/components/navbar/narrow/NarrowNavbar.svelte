@@ -147,7 +147,7 @@
 		flex-direction: column;
 		background-color: var(--bg-secondary);
 		border-radius: 5px;
-		box-shadow: 0px 5px 20px 0px rgb(0, 0, 0, 0.1);
+		box-shadow: 0px 5px 20px 0px rgb(var(--black-rgb), 0.1);
 		padding: 0.5rem;
 		/* Always readable, regardless of an inverted (transparent) header. */
 		color: var(--text);
