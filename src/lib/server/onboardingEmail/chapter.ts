@@ -17,6 +17,7 @@ const LINK_FIELDS: { field: keyof AirtableNationalGroup; label: string }[] = [
 	{ field: 'luma', label: 'Events' },
 	{ field: 'substack', label: 'Substack' },
 	{ field: 'x', label: 'X' },
+	{ field: 'bluesky', label: 'Bluesky' },
 	{ field: 'instagram', label: 'Instagram' },
 	{ field: 'tiktok', label: 'TikTok' },
 	{ field: 'facebook', label: 'Facebook' },

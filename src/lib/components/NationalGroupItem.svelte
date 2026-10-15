@@ -12,6 +12,7 @@
 	import Discord from '$lib/components/icons/discord.svelte'
 	import Linkedin from '$lib/components/icons/linkedin.svelte'
 	import X from '$lib/components/icons/x.svelte'
+	import Bluesky from '$lib/components/icons/bluesky.svelte'
 	import Substack from '$lib/components/icons/substack.svelte'
 	import Whatsapp from '$lib/components/icons/whatsapp.svelte'
 
@@ -33,6 +34,7 @@
 		instagramLink: Instagram,
 		tiktokLink: TikTok,
 		xLink: X,
+		blueskyLink: Bluesky,
 		discordLink: Discord,
 		whatsappLink: Whatsapp,
 		facebookLink: Facebook,

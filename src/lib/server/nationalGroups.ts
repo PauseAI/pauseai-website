@@ -24,6 +24,7 @@ const FALLBACK_NATIONAL_GROUPS: AirtableRecord<AirtableNationalGroup>[] = [
 			leaders_name: ['Fall McBack'],
 			website_email: 'fall.mcback@example.com',
 			x: '',
+			bluesky: '',
 			discord: '',
 			whatsapp: '',
 			website: 'http://example.com',
@@ -44,6 +45,7 @@ const FALLBACK_NATIONAL_GROUPS: AirtableRecord<AirtableNationalGroup>[] = [
 			leaders_name: ['etc'],
 			website_email: '',
 			x: '',
+			bluesky: '',
 			discord: '',
 			whatsapp: '',
 			website: '',
@@ -78,6 +80,7 @@ function recordToNationalGroup(record: AirtableRecord<AirtableNationalGroup>): N
 		// Include email if available
 		email: record.fields.website_email ? record.fields.website_email : '',
 		xLink: record.fields.x || '',
+		blueskyLink: record.fields.bluesky || '',
 		discordLink: record.fields.discord || '',
 		whatsappLink: record.fields.whatsapp || '',
 		website: record.fields.website || '',
