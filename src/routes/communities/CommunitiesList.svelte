@@ -11,6 +11,7 @@
 	import Youtube from '$lib/components/icons/youtube.svelte'
 	import TikTok from '$lib/components/icons/tiktok.svelte'
 	import Substack from '$lib/components/icons/substack.svelte'
+	import Bluesky from '$lib/components/icons/bluesky.svelte'
 	import { onMount } from 'svelte'
 	import { fetchNationalGroups } from '$lib/nationalGroups'
 	import type { NationalGroup } from '$lib/types'
@@ -149,6 +150,8 @@
 									<Instagram />
 								{:else if link.includes('twitter') || link.includes('x.com')}
 									<X />
+								{:else if link.includes('bsky.app')}
+									<Bluesky />
 								{:else if link.includes('linkedin')}
 									<Linkedin />
 								{:else if link.includes('youtube')}

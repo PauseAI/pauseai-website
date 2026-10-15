@@ -139,7 +139,8 @@ function primaryLink(group: NationalGroup): string {
 		group.youtubeLink,
 		group.linkedinLink,
 		group.substackLink,
-		group.xLink
+		group.xLink,
+		group.blueskyLink
 	]
 	for (const link of candidates) {
 		const trimmed = link?.trim()

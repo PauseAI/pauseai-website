@@ -137,6 +137,7 @@ export type AirtableNationalGroup = {
 	discord_username?: string[]
 	website_email?: string
 	x?: string
+	bluesky?: string
 	discord?: string
 	whatsapp?: string
 	website?: string
@@ -153,6 +154,7 @@ export type AirtableNationalGroup = {
 
 export type NationalGroupLink =
 	| 'xLink'
+	| 'blueskyLink'
 	| 'discordLink'
 	| 'whatsappLink'
 	| 'website'
