@@ -8,7 +8,10 @@ const BASE_URL = 'https://api.lu.ma/'
 const RETRIES = 3
 
 const client = axios.create({
-	baseURL: BASE_URL
+	baseURL: BASE_URL,
+	// Luma throttles HTTP-client user agents (axios, curl, …) to near zero,
+	// while other user agents are served normally — identify ourselves instead.
+	headers: { 'User-Agent': 'PauseAI-Website/1.0 (+https://pauseai.info)' }
 })
 
 function isRetryableLumaError(error: unknown): error is AxiosError {
