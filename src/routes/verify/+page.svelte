@@ -1,6 +1,5 @@
 <script lang="ts">
-	import { onMount } from 'svelte'
-	import { goto, replaceState } from '$app/navigation'
+	import { afterNavigate, goto, replaceState } from '$app/navigation'
 	import { page } from '$app/state'
 	import toast from 'svelte-french-toast'
 	import Link from '$lib/components/Link.svelte'
@@ -17,10 +16,17 @@
 	let errorMessage: string | undefined = $state()
 	let expired = $state(false)
 
-	onMount(async () => {
+	// replaceState needs the router started. On a direct load onMount runs while
+	// SvelteKit is still constructing the root component (in production that
+	// crashes on `root.$set`), and the first afterNavigate runs just before
+	// SvelteKit marks the router started, so wait one microtask after it.
+	afterNavigate(() => void verify())
+
+	async function verify() {
 		// Take the link's query out of the address bar, and so out of history and of
 		// anything an error report reads from the page's URL.
 		const linkParameters = page.url.search.slice(1)
+		await Promise.resolve()
 		replaceState(page.url.pathname, {})
 		try {
 			const response = await fetch('/api/verify', {
@@ -42,7 +48,7 @@
 			else errorMessage = 'Verification failed with unexpected error.'
 			throw error
 		}
-	})
+	}
 </script>
 
 {#if expired}
