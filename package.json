@@ -74,7 +74,7 @@
 		"simple-git": "^4.0.2",
 		"stylelint": "^17.16.0",
 		"svelte": "^5.57.2",
-		"svelte-check": "^4.7.6",
+		"svelte-check": "^4.7.7",
 		"tsx": "^4.23.15",
 		"typescript": "^6.0.3",
 		"typescript-eslint": "^8.71.2",
