@@ -5,7 +5,6 @@ import { communitiesMeta } from '../../communities/communities'
 import { meta as quotesMeta } from '../../quotes/meta'
 import { meta as emailBuilderMeta } from '../../email-builder/meta'
 import { meta as statementMeta } from '../../statement/meta'
-import { meta as dearSirDemisMeta } from '../../dear-sir-demis-2025/meta'
 import { meta as contactMeta } from '../../contact-us/meta'
 import type { RequestHandler } from './$types'
 
@@ -18,7 +17,6 @@ const hardCodedPages: StrictPost[] = [
 	quotesMeta,
 	emailBuilderMeta,
 	statementMeta,
-	dearSirDemisMeta,
 	contactMeta
 ]
 
