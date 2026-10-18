@@ -1,6 +1,6 @@
 <script lang="ts">
-	import { onMount } from 'svelte'
-	import { goto, replaceState } from '$app/navigation'
+	import * as Sentry from '@sentry/svelte'
+	import { afterNavigate, goto, replaceState } from '$app/navigation'
 	import { page } from '$app/state'
 	import toast from 'svelte-french-toast'
 	import Link from '$lib/components/Link.svelte'
@@ -16,12 +16,36 @@
 
 	let errorMessage: string | undefined = $state()
 	let expired = $state(false)
+	let verificationStarted = false
 
-	onMount(async () => {
+	// replaceState needs the router started. On a direct load onMount runs while
+	// SvelteKit is still constructing the root component (in production that
+	// crashes on `root.$set`), and the first afterNavigate runs just before
+	// SvelteKit marks the router started, so wait one microtask after it.
+	// afterNavigate also fires on every later navigation that keeps this page
+	// mounted, but verification must run once: by then the link parameters are
+	// gone from the URL, so a re-run would POST an empty body and fail.
+	afterNavigate(() => {
+		if (verificationStarted) return
+		verificationStarted = true
+		void verify()
+	})
+
+	async function verify() {
 		// Take the link's query out of the address bar, and so out of history and of
 		// anything an error report reads from the page's URL.
 		const linkParameters = page.url.search.slice(1)
-		replaceState(page.url.pathname, {})
+		await Promise.resolve()
+		// The strip is only hygiene: if it fails (say a SvelteKit upgrade changes
+		// the router timing this relies on), report it and carry on with the
+		// verification, which is the point of the page. redactLinkCredentials in
+		// hooks.client.ts keeps the leftover credentials out of the error report.
+		try {
+			replaceState(page.url.pathname, {})
+		} catch (error) {
+			console.error('Failed to remove the verification link from the address bar:', error)
+			Sentry.captureException(error)
+		}
 		try {
 			const response = await fetch('/api/verify', {
 				method: 'POST',
@@ -42,7 +66,7 @@
 			else errorMessage = 'Verification failed with unexpected error.'
 			throw error
 		}
-	})
+	}
 </script>
 
 {#if expired}
