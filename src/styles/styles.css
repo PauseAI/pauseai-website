@@ -81,13 +81,7 @@ html {
 	--qa-code-bg: #f6f6f6;
 	--qa-link: #a04b00;
 
-	/* Status colors. --success-bg/border/text and --error-bg/border/text were
-	   previously referenced (but never defined) in UKMPEmailForm.svelte as
-	   var(--success-bg, #d4edda) etc — always falling through to that hex,
-	   since the token didn't exist. Defined here with the exact same values,
-	   so nothing changes visually, just resolves via the token instead of the
-	   fallback now. write page's own success/error block used the identical
-	   values as plain literals (not var() at all), so it now shares these too. */
+	/* Status colors for success/error message blocks. */
 	--success-bg: #d4edda;
 	--success-border: #c3e6cb;
 	--success-text: #155724; /* same green family as --status-success-text-alt, a distinct darker shade (48pt) — not merged */
