@@ -468,6 +468,41 @@
 			"lat": 49.5925739,
 			"lon": 17.2496039,
 			"parent_name": "Czechia"
+		},
+		{
+			"link": "https://www.pause-ai.de/lokalgruppen",
+			"name": "Köln",
+			"lat": 50.94,
+			"lon": 6.96,
+			"parent_name": "Germany"
+		},
+		{
+			"link": "https://www.pause-ai.de/lokalgruppen",
+			"name": "Mannheim",
+			"lat": 49.49,
+			"lon": 8.47,
+			"parent_name": "Germany"
+		},
+		{
+			"link": "https://www.pause-ai.de/lokalgruppen",
+			"name": "Frankfurt",
+			"lat": 50.11,
+			"lon": 8.68,
+			"parent_name": "Germany"
+		},
+		{
+			"link": "https://www.pause-ai.de/lokalgruppen",
+			"name": "Saarland",
+			"lat": 49.38,
+			"lon": 6.95,
+			"parent_name": "Germany"
+		},
+		{
+			"link": "https://www.pause-ai.de/lokalgruppen",
+			"name": "Osnabrück",
+			"lat": 52.27,
+			"lon": 8.05,
+			"parent_name": "Germany"
 		}
 	]
 }
