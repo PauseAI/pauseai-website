@@ -23,24 +23,16 @@ html {
 	   token: under ~25pt reads as the same colour side by side; 40+ is the same vivid-
 	   orange family but a genuinely distinct shade. Worth a design pass later. --- */
 	--t-color-main: #f68b1e; /* Default main color - saturated orange */
-	--hero-orange: #ff9416; /* Home hero: menu band + photo-loading backdrop must match; close to --t-color-main/--brand-dark (15pt) and --brand-glow (23pt) */
+	--hero-orange: #ff9416; /* Home hero: menu band + photo-loading backdrop must match; close to --t-color-main/--brand-dark (15pt) */
 	--hero-orange-rgb: 255, 148, 22; /* RGB triplet of --hero-orange, for rgba() compositing */
 	--brand-dark: #f68b1e;
 	--brand-light: var(--t-color-main);
-	--brand-gradient-mid: #ff6600; /* dear-sir-demis-2025 gradient stop; same vivid-orange family as --brand-glow/--accent-orange, each a distinct shade (40-55pt apart) */
-	--brand-glow: #ff8c00; /* dear-sir-demis-2025 gradient midpoint; close to --hero-orange (23pt) */
 	--brand-gradient-light: hsl(
 		32,
 		80%,
 		65%
 	); /* NewsCard image-placeholder gradient end — a lighter tint of the same 32° hue as --t-color-main/--hero-orange */
-	--accent-orange: hsl(
-		20,
-		100%,
-		60%
-	); /* Banner campaign accent line; same vivid-orange family as --brand-gradient-mid/--brand-glow, distinct shade */
-	--brand-glow-rgb: 255, 138, 0; /* dear-sir-demis-2025 background washes */
-	--brand-warm-rgb: 255, 100, 0; /* dear-sir-demis-2025 background washes */
+	--accent-orange: hsl(20, 100%, 60%); /* Banner campaign accent line */
 
 	/* Fixed neutrals — always literally white/black, unlike --bg/--text which flip
 	   with color-scheme. Do not use these to "soften" pure black/white; that's a
@@ -89,13 +81,7 @@ html {
 	--qa-code-bg: #f6f6f6;
 	--qa-link: #a04b00;
 
-	/* Status colors. --success-bg/border/text and --error-bg/border/text were
-	   previously referenced (but never defined) in UKMPEmailForm.svelte as
-	   var(--success-bg, #d4edda) etc — always falling through to that hex,
-	   since the token didn't exist. Defined here with the exact same values,
-	   so nothing changes visually, just resolves via the token instead of the
-	   fallback now. write page's own success/error block used the identical
-	   values as plain literals (not var() at all), so it now shares these too. */
+	/* Status colors for success/error message blocks. */
 	--success-bg: #d4edda;
 	--success-border: #c3e6cb;
 	--success-text: #155724; /* same green family as --status-success-text-alt, a distinct darker shade (48pt) — not merged */

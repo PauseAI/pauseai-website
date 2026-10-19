@@ -17,7 +17,7 @@ const initialUserTheme = (
 ) as UserTheme
 const initialTheme = initialUserTheme === 'auto' ? getSystemTheme() : initialUserTheme
 
-export const theme = writable<Theme>(initialTheme)
+const theme = writable<Theme>(initialTheme)
 export const userTheme = writable<UserTheme>(initialUserTheme)
 
 if (typeof matchMedia !== 'undefined') {
