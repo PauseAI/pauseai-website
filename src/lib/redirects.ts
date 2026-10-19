@@ -28,7 +28,10 @@ const REDIRECTS: Record<string, string> = {
 	'/contact': '/contact-us',
 	'/summits': '/summit',
 	'/privacy-policy': '/privacy',
-	'/australia-wins': '/australia-progress' // moved
+	'/australia-wins': '/australia-progress', // moved
+	// UK MP email tool moved to PauseAI UK's own site
+	'/uk-email-mp': 'https://pauseai.uk/campaigns/',
+	'/embed/uk-email-mp': 'https://pauseai.uk/campaigns/'
 }
 
 const OUR_XRISK_INTROS_YOUTUBE_PLAYLIST =

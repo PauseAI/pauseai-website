@@ -371,7 +371,7 @@
 					Hassabis, calling for transparency in Google DeepMind's AI safety commitments.
 				</p>
 				<div class="campaign-cta">
-					<Link href="/uk-email-mp" class="cta-button">
+					<Link href="https://pauseai.uk/campaigns/" class="cta-button">
 						<span class="cta-text">Email Your MP</span>
 						<span class="cta-subtitle">Ask them to sign the letter</span>
 					</Link>
