@@ -78,7 +78,7 @@
 		"svelte-check": "^4.7.7",
 		"tsx": "^4.23.15",
 		"typescript": "^6.0.3",
-		"typescript-eslint": "^8.71.2",
+		"typescript-eslint": "^8.72.0",
 		"unist-util-visit": "^5.1.0",
 		"vite": "^8.3.4",
 		"vite-imagetools": "^12.0.1",
