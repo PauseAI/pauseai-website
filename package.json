@@ -14,6 +14,7 @@
 		"_postbuild:pagefind": "tsx scripts/create-pagefind-index.ts",
 		"_postbuild:exclude": "tsx scripts/exclude-from-edge-function.ts",
 		"_postbuild:caching": "tsx scripts/opt-in-to-caching.ts",
+		"_postbuild:redirects": "tsx scripts/copy-redirects.ts",
 		"_postbuild:l10ntamer": "tsx scripts/l10ntamer.ts",
 		"test": "vitest",
 		"preview": "vite preview",

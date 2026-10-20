@@ -10,6 +10,7 @@
 	import PreloadFonts from '$lib/components/PreloadFonts.svelte'
 	import SearchModal from '$lib/components/SearchModal.svelte'
 	import Toc from '$lib/components/Toc.svelte'
+	import { url as rootUrl } from '$lib/config'
 	import { searchOpen } from '$lib/stores/searchModal'
 	import { deLocalizeHref } from '$lib/paraglide/runtime'
 	import type { BannerRule } from '$lib/types'
@@ -148,6 +149,11 @@
 
 	<!-- eslint-disable-next-line svelte/no-at-html-tags not vulnerable against XSS -->
 	{@html `<${'script'}>${sanitizeScript(bannerSelection)}</script>`}
+
+	<!-- The site is also served on pauseai.org, so name pauseai.info as the canonical copy -->
+	{#if !page.error}
+		<link rel="canonical" href={`${rootUrl}${page.url.pathname}`} />
+	{/if}
 </svelte:head>
 
 <PreloadFonts urls={[robotoSlabLatin400, sairaCondensedLatin700]} />
