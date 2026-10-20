@@ -31,7 +31,9 @@ const REDIRECTS: Record<string, string> = {
 	'/australia-wins': '/australia-progress', // moved
 	// UK MP email tool moved to PauseAI UK's own site
 	'/uk-email-mp': 'https://pauseai.uk/campaigns/',
-	'/embed/uk-email-mp': 'https://pauseai.uk/campaigns/'
+	'/embed/uk-email-mp': 'https://pauseai.uk/campaigns/',
+	// Dear Sir Demis letter moved to PauseAI UK's own site
+	'/dear-sir-demis-2025': 'https://pauseai.uk/campaigns/dear-sir-demis-2025'
 }
 
 const OUR_XRISK_INTROS_YOUTUBE_PLAYLIST =
