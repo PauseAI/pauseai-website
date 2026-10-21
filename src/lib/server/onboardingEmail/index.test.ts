@@ -187,7 +187,7 @@ describe('renderOnboardingEmail', () => {
 			const email = await render('United Kingdom', intent)
 			expect(email.subject).toBe('Welcome to PauseAI UK Alex!')
 			expect(email.text).toContain('F0nj2RjLNeB1P1hyoDFsTz')
-			expect(email.text).toContain('Mass lobby day in Parliament')
+			expect(email.text).toContain('March Against AI Extinction')
 			expect(email.text).toContain('PS: if you have questions')
 		}
 		// Volunteers are asked to join WhatsApp up front; everyone else hears of it in the footer.
@@ -202,7 +202,7 @@ describe('renderOnboardingEmail', () => {
 		const email = await render('United Kingdom', 'Volunteer')
 		expect(email.html).toContain('<br><a href="https://luma.com/pauseai-nov26?tk=UEvEYj"')
 		expect(email.text).toContain(
-			'2. Saturday 21st November: March Against AI Extinction. We are putting on'
+			'1. Saturday 21st November: March Against AI Extinction. We are putting on'
 		)
 		expect(email.text).toContain('\nJoseph Miller\nDirector of PauseAI UK')
 	})
