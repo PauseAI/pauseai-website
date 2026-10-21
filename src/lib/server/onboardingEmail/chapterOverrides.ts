@@ -63,14 +63,7 @@ const UK_SOCIALS: ChapterLink[] = [
 // TIME-SENSITIVE. The chapter's next events, in date order. Nothing here checks the date,
 // so each one has to be removed once it has happened.
 // The Luma links carry the `tk` keys the chapter's own emails use.
-const UK_LOBBY_DAY_URL = 'https://luma.com/pauseai-0g9r?tk=PTH5F0'
 const UK_EVENTS = [
-	{
-		when: 'Tuesday 20th October',
-		title: 'Mass lobby day in Parliament.',
-		text: "Having an actual conversation with your MP is probably the single best way to improve AI policy. So we're going to Parliament to meet with MPs and talk about this problem.",
-		url: UK_LOBBY_DAY_URL
-	},
 	{
 		when: 'Saturday 21st November',
 		title: 'March Against AI Extinction.',
@@ -79,9 +72,7 @@ const UK_EVENTS = [
 	}
 ]
 
-/** The events list and the two lines after it, shared by both UK emails. The chapter's own
- *  email reached the lobby day again through a CiviCRM click-tracking redirect; the page it
- *  redirects to is linked directly. */
+/** The events list and the line after it, shared by both UK emails. */
 function ukActionBlocks(): EmailBlock[] {
 	return [
 		{
@@ -90,10 +81,6 @@ function ukActionBlocks(): EmailBlock[] {
 			items: UK_EVENTS.map(
 				(event) => `**${event.when}: ${event.title}** ${event.text}\n[RSVP here](${event.url})`
 			)
-		},
-		{
-			type: 'paragraph',
-			text: `If you can't make it to London, don't worry. [RSVP to the lobby day on Luma](${UK_LOBBY_DAY_URL}) and click the option on the sign-up form to be sent local opportunities to contact your MP.`
 		},
 		{
 			type: 'paragraph',
