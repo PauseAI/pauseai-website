@@ -58,7 +58,7 @@
 			</p>
 			<div class="actions">
 				<Button onclick={visit}>Yes, People for a Pause</Button>
-				<Button subtle onclick={dismiss}>Cancel</Button>
+				<Button subtle onclick={dismiss}>Continue to PauseAI Global</Button>
 			</div>
 		</div>
 	</div>
