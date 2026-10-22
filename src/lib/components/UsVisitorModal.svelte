@@ -76,7 +76,8 @@
 	}
 
 	.modal {
-		background-color: var(--bg-subtle);
+		background-color: var(--bg);
+		border: 2px solid var(--brand);
 		border-radius: 32px;
 		box-shadow: 0 4px 20px rgba(var(--black-rgb), 0.1);
 		padding: 2rem;
