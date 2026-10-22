@@ -264,6 +264,7 @@ export interface OnboardingMessages extends ChapterShareMessages {
 	onboarding_placeholder_country: string
 	onboarding_field_city: string
 	onboarding_placeholder_city: string
+	onboarding_us_note: string
 	onboarding_btn_continue: string
 	onboarding_btn_browse: string
 	onboarding_browse_helper: string
@@ -446,6 +447,8 @@ const en: OnboardingMessages = {
 	onboarding_placeholder_country: 'Select your country',
 	onboarding_field_city: 'City / town of residence *',
 	onboarding_placeholder_city: 'City / town',
+	onboarding_us_note:
+		'PauseAI US is a separate organisation. Head over to <a target="_blank" rel="noopener noreferrer" href="https://peopleforapause.org/get-involved">People for a Pause</a> to get involved there.',
 	onboarding_btn_continue: 'Continue →',
 	onboarding_btn_browse: '👀 I just want to take action now',
 	onboarding_browse_helper: 'Skip ahead to see the actions you can take today, no email required.',
@@ -660,6 +663,8 @@ const de: OnboardingMessages = {
 	onboarding_placeholder_country: 'Land auswählen',
 	onboarding_field_city: 'Stadt / Gemeinde *',
 	onboarding_placeholder_city: 'Stadt / Gemeinde',
+	onboarding_us_note:
+		'PauseAI US ist eine eigenständige Organisation. Besuche <a target="_blank" rel="noopener noreferrer" href="https://peopleforapause.org/get-involved">People for a Pause</a>, um dich dort zu engagieren.',
 	onboarding_btn_continue: 'Weiter →',
 	onboarding_btn_browse: '👀 Ich möchte nur jetzt handeln',
 	onboarding_browse_helper: 'Überspringe die Anmeldung und sieh, was du heute tun kannst.',
@@ -882,6 +887,8 @@ const fr: OnboardingMessages = {
 	onboarding_placeholder_country: 'Sélectionne ton pays',
 	onboarding_field_city: 'Ville / commune de résidence *',
 	onboarding_placeholder_city: 'Ville / commune',
+	onboarding_us_note:
+		'PauseAI US est une organisation distincte. Rends-toi sur <a target="_blank" rel="noopener noreferrer" href="https://peopleforapause.org/get-involved">People for a Pause</a> pour t\'impliquer là-bas.',
 	onboarding_btn_continue: 'Continuer →',
 	onboarding_btn_browse: '👀 Je veux juste agir maintenant',
 	onboarding_browse_helper:
@@ -1105,6 +1112,8 @@ const es: OnboardingMessages = {
 	onboarding_placeholder_country: 'Selecciona tu país',
 	onboarding_field_city: 'Ciudad / localidad de residencia *',
 	onboarding_placeholder_city: 'Ciudad / localidad',
+	onboarding_us_note:
+		'PauseAI US es una organización independiente. Visita <a target="_blank" rel="noopener noreferrer" href="https://peopleforapause.org/get-involved">People for a Pause</a> para involucrarte allí.',
 	onboarding_btn_continue: 'Continuar →',
 	onboarding_btn_browse: '👀 Solo quiero pasar a la acción ya',
 	onboarding_browse_helper:

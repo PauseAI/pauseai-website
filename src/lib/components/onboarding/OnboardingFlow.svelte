@@ -840,61 +840,68 @@
 					<label class="field-label" for="ob-country">{msgs.onboarding_field_country}</label>
 					{@render countrySelect('ob-country')}
 				</div>
-				<div class="field">
-					<label class="field-label" for="ob-city">{msgs.onboarding_field_city}</label>
-					<input
-						type="text"
-						id="ob-city"
-						required
-						placeholder={msgs.onboarding_placeholder_city}
-						autocomplete="address-level2"
-						bind:value={basics.city}
-					/>
-				</div>
-				{#if basics.country === 'United Kingdom'}
+				{#if basics.country === 'United States'}
+					<!-- eslint-disable-next-line svelte/no-at-html-tags -->
+					<p class="helper us-note">{@html msgs.onboarding_us_note}</p>
+				{:else}
 					<div class="field">
-						<label class="field-label" for="ob-postcode">{msgs.onboarding_field_uk_postcode}</label>
+						<label class="field-label" for="ob-city">{msgs.onboarding_field_city}</label>
 						<input
 							type="text"
-							id="ob-postcode"
-							pattern={ukPostcodeInputPattern}
-							placeholder={msgs.onboarding_placeholder_uk_postcode}
-							autocomplete="postal-code"
-							autocapitalize="characters"
-							bind:value={basics.postcode}
+							id="ob-city"
+							required
+							placeholder={msgs.onboarding_placeholder_city}
+							autocomplete="address-level2"
+							bind:value={basics.city}
 						/>
-						<p class="helper">{msgs.onboarding_helper_uk_postcode}</p>
 					</div>
-				{/if}
-				{#if hasUniversities(basics.country)}
-					{@render universityField('ob-university')}
-				{/if}
-				<!-- Asked on step 1, after its fields, so step 2 stays short; step 2 posts
-				     the answer and its wording with the create. -->
-				{#if isChapterSiteQuestion}
-					{@render chapterSiteConsentField()}
-				{:else}
-					{@render chapterQuestionField(false, 3, msgs.onboarding_chapter_section_label)}
-				{/if}
-				<!-- Step 1 gates on native validation (pattern, optional), like the
-				     name/email/city fields above it, so the browser can explain an
-				     invalid postcode on submit. The chapter question has no native
-				     control, so Continue waits for its answer instead. -->
-				<button
-					type="submit"
-					class="primary"
-					disabled={chapterAnswerMissing}
-					aria-describedby={chapterAnswerMissing ? 'ob-chapter-pending' : undefined}
-					>{msgs.onboarding_btn_continue}</button
-				>
-				{#if chapterAnswerMissing}
-					<p class="helper centered" id="ob-chapter-pending">
-						{!chapterQ
-							? msgs.onboarding_chapter_loading
-							: isChapterSiteQuestion
-								? msgs.onboarding_chapter_site_consent_needed
-								: msgs.onboarding_chapter_answer_needed}
-					</p>
+					{#if basics.country === 'United Kingdom'}
+						<div class="field">
+							<label class="field-label" for="ob-postcode"
+								>{msgs.onboarding_field_uk_postcode}</label
+							>
+							<input
+								type="text"
+								id="ob-postcode"
+								pattern={ukPostcodeInputPattern}
+								placeholder={msgs.onboarding_placeholder_uk_postcode}
+								autocomplete="postal-code"
+								autocapitalize="characters"
+								bind:value={basics.postcode}
+							/>
+							<p class="helper">{msgs.onboarding_helper_uk_postcode}</p>
+						</div>
+					{/if}
+					{#if hasUniversities(basics.country)}
+						{@render universityField('ob-university')}
+					{/if}
+					<!-- Asked on step 1, after its fields, so step 2 stays short; step 2 posts
+					     the answer and its wording with the create. -->
+					{#if isChapterSiteQuestion}
+						{@render chapterSiteConsentField()}
+					{:else}
+						{@render chapterQuestionField(false, 3, msgs.onboarding_chapter_section_label)}
+					{/if}
+					<!-- Step 1 gates on native validation (pattern, optional), like the
+					     name/email/city fields above it, so the browser can explain an
+					     invalid postcode on submit. The chapter question has no native
+					     control, so Continue waits for its answer instead. -->
+					<button
+						type="submit"
+						class="primary"
+						disabled={chapterAnswerMissing}
+						aria-describedby={chapterAnswerMissing ? 'ob-chapter-pending' : undefined}
+						>{msgs.onboarding_btn_continue}</button
+					>
+					{#if chapterAnswerMissing}
+						<p class="helper centered" id="ob-chapter-pending">
+							{!chapterQ
+								? msgs.onboarding_chapter_loading
+								: isChapterSiteQuestion
+									? msgs.onboarding_chapter_site_consent_needed
+									: msgs.onboarding_chapter_answer_needed}
+						</p>
+					{/if}
 				{/if}
 				<div class="browse-option">
 					<button type="button" class="secondary" onclick={startBrowse}>
@@ -1125,57 +1132,62 @@
 								>
 								{@render countrySelect('loop-country')}
 							</div>
-							<div class="field">
-								<label class="field-label" for="loop-city">{msgs.onboarding_field_city}</label>
-								<input
-									type="text"
-									id="loop-city"
-									name="city"
-									required
-									placeholder={msgs.onboarding_placeholder_city}
-									autocomplete="address-level2"
-									bind:value={basics.city}
-								/>
-							</div>
-							{#if basics.country === 'United Kingdom'}
+							{#if basics.country === 'United States'}
+								<!-- eslint-disable-next-line svelte/no-at-html-tags -->
+								<p class="helper us-note">{@html msgs.onboarding_us_note}</p>
+							{:else}
 								<div class="field">
-									<label class="field-label" for="loop-postcode"
-										>{msgs.onboarding_field_uk_postcode}</label
-									>
+									<label class="field-label" for="loop-city">{msgs.onboarding_field_city}</label>
 									<input
 										type="text"
-										id="loop-postcode"
-										name="zip_code"
-										pattern={ukPostcodeInputPattern}
-										placeholder={msgs.onboarding_placeholder_uk_postcode}
-										autocomplete="postal-code"
-										autocapitalize="characters"
-										bind:value={basics.postcode}
+										id="loop-city"
+										name="city"
+										required
+										placeholder={msgs.onboarding_placeholder_city}
+										autocomplete="address-level2"
+										bind:value={basics.city}
 									/>
-									<p class="helper">{msgs.onboarding_helper_uk_postcode}</p>
 								</div>
+								{#if basics.country === 'United Kingdom'}
+									<div class="field">
+										<label class="field-label" for="loop-postcode"
+											>{msgs.onboarding_field_uk_postcode}</label
+										>
+										<input
+											type="text"
+											id="loop-postcode"
+											name="zip_code"
+											pattern={ukPostcodeInputPattern}
+											placeholder={msgs.onboarding_placeholder_uk_postcode}
+											autocomplete="postal-code"
+											autocapitalize="characters"
+											bind:value={basics.postcode}
+										/>
+										<p class="helper">{msgs.onboarding_helper_uk_postcode}</p>
+									</div>
+								{/if}
+								{#if hasUniversities(basics.country)}
+									{@render universityField('loop-university')}
+								{/if}
+								{#if isChapterSiteQuestion}
+									{@render chapterSiteConsentField()}
+								{:else}
+									{@render chapterQuestionField(true, 4)}
+									{@render gdprConsentField()}
+								{/if}
+								{#if onboardingLive && onboardingModeKnown}
+									{#key turnstileNonce}
+										<Turnstile bind:token={turnstileToken} />
+									{/key}
+								{/if}
+								<button
+									type="submit"
+									class="primary"
+									disabled={!gdprConsent || chapterAnswerMissing || !ukPostcodeValid || !canSubmit}
+								>
+									{submitting ? msgs.onboarding_btn_signing_up : msgs.onboarding_btn_sign_me_up}
+								</button>
 							{/if}
-							{#if hasUniversities(basics.country)}
-								{@render universityField('loop-university')}
-							{/if}
-							{#if isChapterSiteQuestion}
-								{@render chapterSiteConsentField()}
-							{:else}
-								{@render chapterQuestionField(true, 4)}
-								{@render gdprConsentField()}
-							{/if}
-							{#if onboardingLive && onboardingModeKnown}
-								{#key turnstileNonce}
-									<Turnstile bind:token={turnstileToken} />
-								{/key}
-							{/if}
-							<button
-								type="submit"
-								class="primary"
-								disabled={!gdprConsent || chapterAnswerMissing || !ukPostcodeValid || !canSubmit}
-							>
-								{submitting ? msgs.onboarding_btn_signing_up : msgs.onboarding_btn_sign_me_up}
-							</button>
 						</form>
 					</div>
 				{/if}
@@ -1499,6 +1511,15 @@
 		padding: 0.75rem 1.25rem;
 		margin-bottom: 1.5rem;
 		font-weight: 500;
+	}
+
+	.helper.us-note {
+		border: 2px solid var(--brand);
+		border-radius: 12px;
+		margin: 0;
+		padding: 0.75rem 1.25rem;
+		font-size: 1rem;
+		opacity: 1;
 	}
 
 	.form-card {

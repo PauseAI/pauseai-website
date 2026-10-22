@@ -10,6 +10,7 @@
 	import PreloadFonts from '$lib/components/PreloadFonts.svelte'
 	import SearchModal from '$lib/components/SearchModal.svelte'
 	import Toc from '$lib/components/Toc.svelte'
+	import UsVisitorModal from '$lib/components/UsVisitorModal.svelte'
 	import { url as rootUrl } from '$lib/config'
 	import { searchOpen } from '$lib/stores/searchModal'
 	import { deLocalizeHref } from '$lib/paraglide/runtime'
@@ -78,6 +79,7 @@
 
 	let eventFound: boolean = $state(false)
 	let geoForNearbyEvent: GeoApiResponse | null = $state(null)
+	let visitorCountry: string | null = $state(null)
 	let hero = $derived(deLocalizeHref(page.url.pathname) === '/')
 	let embed = $derived(page.route.id?.startsWith('/embed/') ?? false)
 
@@ -98,6 +100,8 @@
 		const countryString = (
 			typeof geo?.country === 'object' ? geo?.country?.code : geo?.country
 		) as string
+
+		visitorCountry = countryString ?? null
 
 		if (countryString && countryString !== geoCountryCookie) {
 			document.cookie = new SetCookie({
@@ -256,6 +260,7 @@
 
 {#if !embed}
 	<SearchModal bind:open={$searchOpen} />
+	<UsVisitorModal country={visitorCountry} />
 
 	<Toaster
 		toastOptions={{
