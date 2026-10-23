@@ -342,7 +342,6 @@ export interface OnboardingMessages extends ChapterShareMessages {
 	onboarding_lead_title: (role: string) => string
 	onboarding_lead_meta: string
 	onboarding_lead_intro: string
-	onboarding_lead_us_branch: string
 	onboarding_lead_has_chapter: (country: string) => string
 	onboarding_lead_check_chapter: string
 	onboarding_lead_what_you_do_title: string
@@ -366,11 +365,7 @@ export interface OnboardingMessages extends ChapterShareMessages {
 	onboarding_lead_support: string
 	onboarding_lead_next_steps_title: string
 	onboarding_lead_next_steps: string
-	onboarding_lead_email_btn: string
-	onboarding_lead_please_mention: string
-	onboarding_lead_mention_1: string
-	onboarding_lead_mention_2: string
-	onboarding_lead_mention_3: string
+	onboarding_lead_apply_btn: string
 	onboarding_discovery_pauseai_social: string
 	onboarding_discovery_other_social: string
 	onboarding_discovery_referral: string
@@ -542,10 +537,8 @@ const en: OnboardingMessages = {
 	onboarding_lead_meta: 'Part-time volunteer role · 5–15 hours/week',
 	onboarding_lead_intro:
 		'Pause AI Global is looking for leaders around the world to run local groups that lead organising efforts in their area. This is a part-time volunteer role requiring 5-15 hours per week. Each group leader will be responsible for planning direct actions, mobilising volunteers and coordinating with the Global PauseAI team.',
-	onboarding_lead_us_branch:
-		'Since you\'re based in the <strong>United States</strong>, please apply through PauseAI US: <a target="_blank" rel="noopener noreferrer" href="https://form.asana.com/?k=RxWuTz8SYKME33V5nBvK1A&d=1208505553897008">PauseAI US application form</a>.',
 	onboarding_lead_has_chapter: (country) =>
-		`<strong>${country} already has a PauseAI chapter</strong>, so rather than founding a national group, you could lead a regional or city group within it. Find your chapter at <a target="_blank" rel="noopener noreferrer" href="/communities">pauseai.info/communities</a>, or email our Organizing Director below to talk it through.`,
+		`<strong>${country} already has a PauseAI chapter</strong>, so rather than founding a national group, you could lead a regional or city group within it. Find your chapter at <a target="_blank" rel="noopener noreferrer" href="/communities">pauseai.info/communities</a>, or apply below and we'll talk it through.`,
 	onboarding_lead_check_chapter:
 		'<strong>First, check that your country doesn\'t already have a chapter:</strong> <a target="_blank" rel="noopener noreferrer" href="/communities">pauseai.info/communities</a>.',
 	onboarding_lead_what_you_do_title: "What you'll do",
@@ -576,12 +569,8 @@ const en: OnboardingMessages = {
 		"You'll join a global network of organisers who are all figuring this out together. We meet monthly, share resources across our chat platforms and help each other troubleshoot. It's a great way to learn new skills, meet thoughtful people and be part of a fast-growing movement that's working on one of the most important issues of our time.",
 	onboarding_lead_next_steps_title: 'Next steps',
 	onboarding_lead_next_steps:
-		'If you\'d like to learn more, please contact our PauseAI Global organising director Irina Tavera at <a target="_blank" rel="noopener noreferrer" href="mailto:Irina@pauseai.info">Irina@pauseai.info</a> to schedule an informal exploratory chat.',
-	onboarding_lead_email_btn: '✉️ Email our Organizing Director',
-	onboarding_lead_please_mention: 'Please let her know the following:',
-	onboarding_lead_mention_1: 'Your name',
-	onboarding_lead_mention_2: 'Your country of residence',
-	onboarding_lead_mention_3: "A few sentences on why you'd like to become a lead",
+		'If this sounds like you, please fill in our lead application form below. Our PauseAI Global organising director Irina Tavera reviews every application and will be in touch about next steps.',
+	onboarding_lead_apply_btn: 'Apply to become a lead',
 	onboarding_discovery_pauseai_social: 'PauseAI affiliated social media',
 	onboarding_discovery_other_social: 'Non-PauseAI affiliated social media',
 	onboarding_discovery_referral: 'Friend/Family referral',
@@ -761,10 +750,8 @@ const de: OnboardingMessages = {
 	onboarding_lead_meta: 'Ehrenamtliche Teilzeitrolle · 5–15 Stunden/Woche',
 	onboarding_lead_intro:
 		'PauseAI Global sucht Leitungspersonen auf der ganzen Welt, die lokale Gruppen führen und Organisierungsmaßnahmen in ihrer Region koordinieren. Es handelt sich um eine ehrenamtliche Teilzeitrolle mit einem Aufwand von 5–15 Stunden pro Woche. Jede Gruppenleitung ist verantwortlich für die Planung von Aktionen, die Mobilisierung von Freiwilligen und die Koordination mit dem globalen PauseAI-Team.',
-	onboarding_lead_us_branch:
-		'Da du in den <strong>Vereinigten Staaten</strong> ansässig bist, bewirb dich bitte über PauseAI US: <a target="_blank" rel="noopener noreferrer" href="https://form.asana.com/?k=RxWuTz8SYKME33V5nBvK1A&d=1208505553897008">PauseAI US Bewerbungsformular</a>.',
 	onboarding_lead_has_chapter: (country) =>
-		`<strong>${country} hat bereits eine nationale PauseAI-Gruppe</strong>, daher könntest du stattdessen eine regionale oder städtische Gruppe leiten. Finde sie unter <a target="_blank" rel="noopener noreferrer" href="/communities">pauseai.info/communities</a>, oder wende dich per E-Mail an unseren Organizing Director (siehe unten), um es zu besprechen.`,
+		`<strong>${country} hat bereits eine nationale PauseAI-Gruppe</strong>, daher könntest du stattdessen eine regionale oder städtische Gruppe leiten. Finde sie unter <a target="_blank" rel="noopener noreferrer" href="/communities">pauseai.info/communities</a>, oder bewirb dich unten, dann besprechen wir es gemeinsam.`,
 	onboarding_lead_check_chapter:
 		'<strong>Überprüfe zunächst, ob dein Land bereits eine nationale Gruppe hat:</strong> <a target="_blank" rel="noopener noreferrer" href="/communities">pauseai.info/communities</a>.',
 	onboarding_lead_what_you_do_title: 'Was du tun wirst',
@@ -798,13 +785,8 @@ const de: OnboardingMessages = {
 		'Du trittst einem globalen Netzwerk von Organisator:innen bei, die gemeinsam an diesen Herausforderungen arbeiten. Wir treffen uns monatlich, teilen Ressourcen auf unseren Plattformen und helfen uns gegenseitig. Es ist eine großartige Möglichkeit, neue Fähigkeiten zu erlernen, nachdenkliche Menschen kennenzulernen und Teil einer schnell wachsenden Bewegung zu sein, die sich mit einem der wichtigsten Themen unserer Zeit befasst.',
 	onboarding_lead_next_steps_title: 'Nächste Schritte',
 	onboarding_lead_next_steps:
-		'Wenn du mehr erfahren möchtest, wende dich an Irina Tavera, die globale Organizing Director von PauseAI, unter <a target="_blank" rel="noopener noreferrer" href="mailto:Irina@pauseai.info">Irina@pauseai.info</a>, um ein informelles Gespräch zu vereinbaren.',
-	onboarding_lead_email_btn: '✉️ E-Mail an unsere Organizing Director',
-	onboarding_lead_please_mention: 'Bitte teile ihr Folgendes mit:',
-	onboarding_lead_mention_1: 'Deinen Namen',
-	onboarding_lead_mention_2: 'Dein Wohnsitzland',
-	onboarding_lead_mention_3:
-		'Ein paar Sätze darüber, warum du eine Leitungsrolle übernehmen möchtest',
+		'Wenn das zu dir passt, fülle bitte unten unser Bewerbungsformular aus. Irina Tavera, die globale Organizing Director von PauseAI, prüft jede Bewerbung und meldet sich bei dir wegen der nächsten Schritte.',
+	onboarding_lead_apply_btn: 'Als Leitung bewerben',
 	onboarding_discovery_pauseai_social: 'PauseAI Social Media',
 	onboarding_discovery_other_social: 'Andere Social Media',
 	onboarding_discovery_referral: 'Empfehlung von Freund/Familie',
@@ -985,10 +967,8 @@ const fr: OnboardingMessages = {
 	onboarding_lead_meta: 'Rôle bénévole à temps partiel · 5 à 15 heures/semaine',
 	onboarding_lead_intro:
 		"PauseAI Global recherche des responsables partout dans le monde pour diriger des groupes locaux qui mènent les efforts d'organisation dans leur région. Il s'agit d'un rôle bénévole à temps partiel nécessitant 5 à 15 heures par semaine. Chaque responsable de groupe sera chargé·e de planifier des actions directes, de mobiliser des bénévoles et de coordonner avec l'équipe PauseAI Global.",
-	onboarding_lead_us_branch:
-		'Comme tu résides aux <strong>États-Unis</strong>, merci de postuler via PauseAI US : <a target="_blank" rel="noopener noreferrer" href="https://form.asana.com/?k=RxWuTz8SYKME33V5nBvK1A&d=1208505553897008">formulaire de candidature PauseAI US</a>.',
 	onboarding_lead_has_chapter: (country) =>
-		`<strong>${country} a déjà un groupe PauseAI national</strong>, donc plutôt que d'en fonder un, tu pourrais diriger un groupe régional ou local au sein de celui-ci. Trouve-le sur <a target="_blank" rel="noopener noreferrer" href="/communities">pauseai.info/communities</a>, ou écris à notre Directrice de l'organisation ci-dessous pour en discuter.`,
+		`<strong>${country} a déjà un groupe PauseAI national</strong>, donc plutôt que d'en fonder un, tu pourrais diriger un groupe régional ou local au sein de celui-ci. Trouve-le sur <a target="_blank" rel="noopener noreferrer" href="/communities">pauseai.info/communities</a>, ou postule ci-dessous et nous en discuterons ensemble.`,
 	onboarding_lead_check_chapter:
 		'<strong>Vérifie d\'abord que ton pays n\'a pas déjà de groupe national :</strong> <a target="_blank" rel="noopener noreferrer" href="/communities">pauseai.info/communities</a>.',
 	onboarding_lead_what_you_do_title: 'Ce que tu feras',
@@ -1024,13 +1004,8 @@ const fr: OnboardingMessages = {
 		"Tu rejoindras un réseau mondial d'organisateur·rices qui apprennent tous ensemble. Nous nous réunissons chaque mois, partageons des ressources sur nos plateformes de discussion et nous entraidons pour résoudre les problèmes. C'est une excellente façon d'apprendre de nouvelles compétences, de rencontrer des personnes réfléchies et de faire partie d'un mouvement en pleine croissance qui œuvre sur l'un des enjeux les plus importants de notre époque.",
 	onboarding_lead_next_steps_title: 'Prochaines étapes',
 	onboarding_lead_next_steps:
-		'Si tu souhaites en savoir plus, contacte notre directrice de l\'organisation chez PauseAI Global, Irina Tavera, à <a target="_blank" rel="noopener noreferrer" href="mailto:Irina@pauseai.info">Irina@pauseai.info</a> pour planifier une discussion informelle.',
-	onboarding_lead_email_btn: "✉️ Écrire à notre Directrice de l'organisation",
-	onboarding_lead_please_mention: 'Merci de lui indiquer les informations suivantes :',
-	onboarding_lead_mention_1: 'Ton nom',
-	onboarding_lead_mention_2: 'Ton pays de résidence',
-	onboarding_lead_mention_3:
-		'Quelques phrases sur les raisons pour lesquelles tu souhaites devenir responsable',
+		"Si cela te correspond, remplis notre formulaire de candidature ci-dessous. Notre directrice de l'organisation chez PauseAI Global, Irina Tavera, examine chaque candidature et te recontactera pour les prochaines étapes.",
+	onboarding_lead_apply_btn: 'Postuler pour devenir responsable',
 	onboarding_discovery_pauseai_social: 'Réseaux sociaux affiliés à PauseAI',
 	onboarding_discovery_other_social: 'Réseaux sociaux non affiliés à PauseAI',
 	onboarding_discovery_referral: "Recommandation d'un ami ou de la famille",
@@ -1210,10 +1185,8 @@ const es: OnboardingMessages = {
 	onboarding_lead_meta: 'Voluntariado a tiempo parcial · 5–15 horas/semana',
 	onboarding_lead_intro:
 		'PauseAI Global busca líderes en todo el mundo para dirigir grupos locales que encabecen la organización en su zona. Es un voluntariado a tiempo parcial de 5 a 15 horas semanales. Cada líder de grupo se encargará de planificar acciones directas, movilizar a voluntarios y coordinarse con el equipo global de PauseAI.',
-	onboarding_lead_us_branch:
-		'Como resides en <strong>Estados Unidos</strong>, presenta tu solicitud a través de PauseAI US: <a target="_blank" rel="noopener noreferrer" href="https://form.asana.com/?k=RxWuTz8SYKME33V5nBvK1A&d=1208505553897008">formulario de solicitud de PauseAI US</a>.',
 	onboarding_lead_has_chapter: (country) =>
-		`<strong>${country} ya tiene un grupo nacional de PauseAI</strong>, así que, en lugar de fundar uno nuevo, podrías liderar un grupo regional o local dentro de él. Encuentra tu grupo en <a target="_blank" rel="noopener noreferrer" href="/communities">pauseai.info/communities</a>, o escribe abajo a nuestra directora de organización para hablarlo.`,
+		`<strong>${country} ya tiene un grupo nacional de PauseAI</strong>, así que, en lugar de fundar uno nuevo, podrías liderar un grupo regional o local dentro de él. Encuentra tu grupo en <a target="_blank" rel="noopener noreferrer" href="/communities">pauseai.info/communities</a>, o preséntate abajo y lo hablamos.`,
 	onboarding_lead_check_chapter:
 		'<strong>Primero, comprueba que tu país no tenga ya un grupo nacional:</strong> <a target="_blank" rel="noopener noreferrer" href="/communities">pauseai.info/communities</a>.',
 	onboarding_lead_what_you_do_title: 'Qué harás',
@@ -1247,12 +1220,8 @@ const es: OnboardingMessages = {
 		'Te unirás a una red global de personas organizadoras que van resolviendo esto juntas. Nos reunimos cada mes, compartimos recursos en nuestros canales de chat y nos ayudamos a resolver problemas. Es una gran forma de aprender nuevas habilidades, conocer a gente reflexiva y formar parte de un movimiento en rápido crecimiento que trabaja en uno de los temas más importantes de nuestro tiempo.',
 	onboarding_lead_next_steps_title: 'Siguientes pasos',
 	onboarding_lead_next_steps:
-		'Si quieres saber más, contacta con Irina Tavera, directora de organización de PauseAI Global, en <a target="_blank" rel="noopener noreferrer" href="mailto:Irina@pauseai.info">Irina@pauseai.info</a> para concertar una charla informal.',
-	onboarding_lead_email_btn: '✉️ Escribe a nuestra directora de organización',
-	onboarding_lead_please_mention: 'Indícale lo siguiente:',
-	onboarding_lead_mention_1: 'Tu nombre',
-	onboarding_lead_mention_2: 'Tu país de residencia',
-	onboarding_lead_mention_3: 'Unas líneas sobre por qué te gustaría liderar un grupo',
+		'Si encajas con este perfil, rellena abajo nuestro formulario de solicitud. Irina Tavera, directora de organización de PauseAI Global, revisa cada solicitud y se pondrá en contacto contigo sobre los siguientes pasos.',
+	onboarding_lead_apply_btn: 'Solicita liderar un grupo',
 	onboarding_discovery_pauseai_social: 'Redes sociales de PauseAI',
 	onboarding_discovery_other_social: 'Otras redes sociales',
 	onboarding_discovery_referral: 'Recomendación de amigos/familia',
