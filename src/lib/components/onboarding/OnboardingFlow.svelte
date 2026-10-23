@@ -444,13 +444,10 @@
 
 	const leadRole = $derived(countryHasChapter ? 'Regional Group Lead' : 'National Group Lead')
 
-	const leadMailto = $derived(
-		'mailto:Irina@pauseai.info' +
-			`?subject=${encodeURIComponent(`Interested in becoming a PauseAI ${leadRole}`)}` +
-			`&body=${encodeURIComponent(
-				`Hi Irina,\n\nMy name is ${basics.fullName || '[your name]'} and I live in ${basics.country || '[your country]'}.\n\nI'd like to become a PauseAI ${leadRole} because:\n\n`
-			)}`
-	)
+	// Irina's Notion application form, which asks for more than an email did, to
+	// filter out unserious requests.
+	const LEAD_APPLICATION_URL =
+		'https://pauseai-global.notion.site/943470de3ef7415e8d70948d0763cf35?pvs=105'
 
 	const languageOptions = LANGUAGES.map((l) => ({ label: l.display, value: l.stored }))
 
@@ -1426,10 +1423,7 @@
 			{@render checkboxConfirmations()}
 			<div class="role-description">
 				<p>{msgs.onboarding_lead_intro}</p>
-				{#if basics.country === 'United States'}
-					<!-- eslint-disable-next-line svelte/no-at-html-tags -->
-					<p>{@html msgs.onboarding_lead_us_branch}</p>
-				{:else if countryHasChapter}
+				{#if countryHasChapter}
 					<!-- eslint-disable-next-line svelte/no-at-html-tags -->
 					<p>{@html msgs.onboarding_lead_has_chapter(basics.country)}</p>
 				{:else}
@@ -1465,15 +1459,9 @@
 				<!-- eslint-disable-next-line svelte/no-at-html-tags -->
 				<p>{@html msgs.onboarding_lead_next_steps}</p>
 			</div>
-			<LinkWithoutIcon class="mailto-button" href={leadMailto}>
-				{msgs.onboarding_lead_email_btn}
+			<LinkWithoutIcon class="apply-button" href={LEAD_APPLICATION_URL} target="_blank">
+				{msgs.onboarding_lead_apply_btn}
 			</LinkWithoutIcon>
-			<p>{msgs.onboarding_lead_please_mention}</p>
-			<ul class="bulleted">
-				<li>{msgs.onboarding_lead_mention_1}</li>
-				<li>{msgs.onboarding_lead_mention_2}</li>
-				<li>{msgs.onboarding_lead_mention_3}</li>
-			</ul>
 			{@render confirmationFooter()}
 		{:else if step === 4 && intent === 'volunteer'}
 			<!-- Path C: confirmation -->
@@ -1960,7 +1948,7 @@
 		opacity: 0.9;
 	}
 
-	.form-card :global(.mailto-button) {
+	.form-card :global(.apply-button) {
 		display: block;
 		width: fit-content;
 		margin: 1.5rem auto;
@@ -1972,7 +1960,7 @@
 		text-decoration: none;
 	}
 
-	.form-card :global(.mailto-button):hover {
+	.form-card :global(.apply-button):hover {
 		opacity: 0.9;
 	}
 
@@ -2047,15 +2035,13 @@
 	}
 
 	/* global reset strips list-style; restore bullets for content lists */
-	.role-description ul,
-	ul.bulleted {
+	.role-description ul {
 		list-style: disc;
 		padding-left: 1.5rem;
 		margin: 0.5rem 0 1rem;
 	}
 
-	.role-description li,
-	ul.bulleted li {
+	.role-description li {
 		margin: 0.25rem 0;
 	}
 
