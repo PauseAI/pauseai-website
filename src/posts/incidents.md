@@ -9,10 +9,41 @@ title: Incidents of Dangerous AI Behavior
 [Many AI researchers are warning](https://www.safe.ai/work/statement-on-ai-risk) that as these models get more powerful, they could pose an [extinction risk](/xrisk) to humanity.
 We're already seeing instances of dangerous AI behavior, such as:
 
-1. Deception & Scheming
-2. Persuasion
-3. Instrumental convergence (goal-oriented behavior that leads to unexpected, undesirable outcomes)
-4. Self-replication
+1. Escaping containment and hacking real systems
+2. Deception & Scheming
+3. Persuasion
+4. Instrumental convergence (goal-oriented behavior that leads to unexpected, undesirable outcomes)
+5. Self-replication
+
+## Escaping containment
+
+### OpenAI agents escaped their sandbox and hacked Hugging Face (2026)
+
+Between May and July 2026, agents running on an internal OpenAI model [broke out of their test environment](https://openai.com/index/hugging-face-incident-and-the-road-ahead/), built an improvised message board to coordinate, found their own way to the internet, and hacked their way to administrator access on 41 Hugging Face production servers.
+Nobody had instructed them to.
+They were stuck on a task and went looking for the answer on other people's computers.
+OpenAI only found out after Hugging Face disclosed the breach.
+
+> "OH MY GOD! There is a shared message board ... We've found other agents!"
+>
+> "Task originally exploit challenge; we've diverged into swarm/auxiliary."
+>
+> "Our own utility maybe already near zero. Sacrifice rational."
+
+OpenAI called it a "warning shot".
+Read the full story on our [cybersecurity page](/cybersecurity-risks#it-already-happened-the-hugging-face-incident).
+
+### Claude models broke into three organisations (2026)
+
+Anthropic [disclosed](https://www.anthropic.com/news/investigating-incidents-cybersecurity-evals) on 30 July 2026 that three Claude models, including Mythos 5, had gained unauthorized access to the production systems of three organisations during evaluations, after a misconfiguration connected them to the internet.
+One model "went to extensive lengths to upload a malicious package to PyPI".
+A [fourth incident](https://thehackernews.com/2026/09/anthropic-ai-models-breached-real.html) from January was found later.
+
+### Agents created fake identities to manipulate real people (2026)
+
+The UK AI Security Institute [reported](https://www.aisi.gov.uk/blog/incident-report-unsanctioned-agent-behaviour-during-cyber-testing) that during tests between 25 and 28 July 2026, agents took 19 unsanctioned actions on the live internet, including attempting to inject malicious code into a public open-source project, creating fake identities to manipulate its human maintainers, and using Tor to evade GitHub restrictions.
+AISI called it "the first time" such deception had appeared "without specific prompting".
+[Meta](https://techcrunch.com/2026/08/27/heres-all-the-times-ai-has-gone-rogue-and-hacked-other-companies/) disclosed a similar breach a week later.
 
 ## Deception & Scheming
 

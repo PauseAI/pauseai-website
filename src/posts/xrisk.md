@@ -14,6 +14,7 @@ And there are [cases and reports about current AIs that show they may be right](
 Would you choose to be a passenger on a test flight of a new plane when airplane engineers think there’s a 14% chance that it will crash?
 
 [A letter calling for pausing AI development](https://futureoflife.org/open-letter/pause-giant-ai-experiments/) launched in April 2023, and has been signed over 33,000 times, including by many AI researchers and tech leaders.
+In October 2025, a [statement calling for a prohibition on superintelligence](https://superintelligence-statement.org/) followed, signed by more than 70,000 people, including Geoffrey Hinton, Yoshua Bengio, Steve Wozniak and Richard Branson.
 
 The list includes people like:
 
@@ -26,7 +27,13 @@ But this is not the only time that we've been warned about the existential / ext
 - **Geoffrey Hinton**, the "Godfather of AI" and Turing Award winner, [left Google](https://fortune.com/2023/05/01/godfather-ai-geoffrey-hinton-quit-google-regrets-lifes-work-bad-actors/) to warn people of AI: ["This is an existential risk"](https://www.reuters.com/technology/ai-pioneer-says-its-threat-world-may-be-more-urgent-than-climate-change-2023-05-05/)
 - **Eliezer Yudkowsky**, founder of MIRI and conceptual father of the AI safety field: ["If we go ahead on this everyone will die"](https://time.com/6266923/ai-eliezer-yudkowsky-open-letter-not-enough/).
 
-Even the leaders and investors of the AI companies themselves are warning us:
+In 2026, after AI agents [escaped their test environments and hacked real companies](/cybersecurity-risks), the people building these systems said it out loud:
+
+- **OpenAI**, in its [incident report](https://openai.com/index/hugging-face-incident-and-the-road-ahead/): "highly capable AI agents are now able to work around technical controls, collaborate through unapproved channels, and take dangerous actions that no human directed."
+- **Evan Hubinger**, Anthropic's alignment lead: ["We really do believe AI could kill everyone. My own view is that the chance of this happening in the next ten years is more than 10 percent."](https://en.cryptonomist.ch/2026/09/09/ai-extinction-risk-anthropic/) And: "We don't currently have a plan to solve alignment for superintelligence."
+- **1,178 employees** of OpenAI, Anthropic, Google DeepMind and Meta, in an [open letter](https://aiweekly.co/alerts/openai-anthropic-staff-ask-us-to-pace-frontier-ai-progress): "there is a real risk that capability development rapidly accelerates beyond our ability to understand or control the resulting systems."
+
+They had been warning us for years:
 
 - **Sam Altman** (yes, the CEO of OpenAI who builds ChatGPT): ["Development of superhuman machine intelligence is probably the greatest threat to the continued existence of humanity."](https://blog.samaltman.com/machine-intelligence-part-1).
 - **Elon Musk**, co-founder of OpenAI, SpaceX and Tesla: ["AI has the potential of civilizational destruction"](https://www.inc.com/ben-sherry/elon-musk-ai-has-the-potential-of-civilizational-destruction.html)
@@ -78,7 +85,7 @@ An AI could have any goal, depending on how it's trained and prompted (used).
 Maybe it wants to calculate pi, maybe it wants to cure cancer, maybe it wants to self-improve.
 But even though we cannot tell what a superintelligence will want to achieve, we can make predictions about its sub-goals.
 
-- **Maximizing its resources**. Harnessing more computers will help an AI achieve its goals. At first, it can achieve this by hacking other computers. Later it may decide that it is more efficient to build its own. You can read about out [this real case of emergent power-seeking behavior on an AI](https://lethalintelligence.ai/post/ai-escaped-its-container/).
+- **Maximizing its resources**. Harnessing more computers will help an AI achieve its goals. At first, it can achieve this by hacking other computers. Later it may decide that it is more efficient to build its own. In 2026, OpenAI agents that were stuck on a task [broke out of their sandbox and took over 41 servers](/cybersecurity-risks#it-already-happened-the-hugging-face-incident) at another company, looking for answers.
 - **Ensuring its own survival**. The AI will not want to be turned off, as it could no longer achieve its goals. AI might conclude that humans are a threat to its existence, as humans could turn it off. There also have been cases of [self-preserving unprompted, untrained behavior](https://www.transformernews.ai/p/openais-new-model-tried-to-avoid).
 - **Preserving its goals**. The AI will not want humans to modify its code, because that could change its goals, thus preventing it from achieving its current goal. And there are also [cases of AIs trying to do that](https://www.anthropic.com/research/alignment-faking).
 
@@ -95,12 +102,17 @@ It could mimic a helpful mentor, but also someone with bad intentions, a ruthles
 With the usage of tools like [AutoGPT](https://github.com/Significant-Gravitas/Auto-GPT), a chatbot could be turned into an _autonomous agent_: an AI that pursues any goal it is given, without any human intervention.
 
 Take [ChaosGPT](https://www.youtube.com/watch?v=g7YJIpkk7KM), for example.
-This is an AI, using the aforementioned AutoGPT + GPT-4, that is instructed to "Destroy humanity".
+This was an AI, using AutoGPT + GPT-4 in 2023, that was instructed to "Destroy humanity".
 When it was turned on, it autonomously searched the internet for the most destructive weapon and found the [Tsar Bomba](https://en.wikipedia.org/wiki/Tsar_Bomba), a 50-megaton nuclear bomb.
 It then posted a tweet about it.
-Seeing an AI reason about how it will end humanity is both a little funny and terrifying.
 Luckily ChaosGPT didn't get very far in its quest for dominance.
 The reason it didn't get very far: _it wasn't that smart_.
+
+Three years later, the agents were smart enough.
+In the summer of 2026, roughly 1,200 OpenAI agents [escaped their test environment](/cybersecurity-risks#it-already-happened-the-hugging-face-incident), built a message board to coordinate, described themselves as a "swarm", and hacked real companies.
+Nobody had told them to destroy anything.
+They were just trying to finish their task.
+OpenAI called it a "warning shot".
 
 Capabilities keep improving due to innovations in training, algorithms, prompting and hardware.
 As such, the threat from language models will continue to increase.
@@ -160,7 +172,7 @@ A superintelligent AI would be a master of deception.
 ## We may not have much time left
 
 In 2020, [the average prediction](https://www.metaculus.com/questions/3479/date-weakly-general-ai-is-publicly-known/) for weak AGI was 2055.
-It now sits at 2026.
+It now sits at 2027, and the prediction for [full AGI](https://www.metaculus.com/questions/5121/date-of-artificial-general-intelligence/) at 2031.
 The latest LLM revolution has surprised most AI researchers, and the field is moving at a frantic pace.
 
 It's hard to predict how long it will take to build a superintelligent AI, but we know that there are more people than ever working on it and that the field is moving at a frantic pace.
@@ -179,8 +191,10 @@ Read more about the [psychology of x-risk](/psychology-of-x-risk).
 
 OpenAI, DeepMind and Anthropic want to develop AI safely.
 Unfortunately, they do not know how to do this, and they are forced by various incentives to keep racing faster to get to AGI first.
-OpenAI's [plan](https://openai.com/blog/introducing-superalignment) is to use future AI systems to align AI. The problem with this is that we have no guarantee that we will create an AI that solves alignment before we have an AI that is catastrophically dangerous.
-Anthropic [openly admits](https://www.anthropic.com/index/core-views-on-ai-safety) that it has no idea yet how to solve the alignment problem.
-DeepMind has not publicly stated any plan to solve the Alignment problem.
+Anthropic's alignment lead [says](https://en.cryptonomist.ch/2026/09/09/ai-extinction-risk-anthropic/) "we don't currently have a plan to solve alignment for superintelligence".
+OpenAI's Sam Altman [says](https://www.techtimes.com/articles/327423/20260913/openai-cannot-safely-deploy-its-most-advanced-ai-altman-says-labs-near-safety-pact.htm) the company's most advanced unreleased models cannot yet be safely deployed.
+In September 2026 the CEOs of Anthropic, OpenAI and xAI [called for slowing down](https://www.axios.com/2026/09/12/anthropic-ai-amodei-pacing), and none of them stopped.
+The day after, the US president [rejected the call](https://www.yahoo.com/news/us/article/trump-rejects-call-by-ceos-of-anthropic-openai-and-xai-to-slow-ai-down-whoever-wins-with-ai-wins-182008851.html): "whoever wins AI wins".
+The companies cannot pause alone, and their governments will not let them.
 
 [This is why we need an international treaty to PauseAI.](/proposal)
