@@ -9,6 +9,12 @@ description: A list of upcoming and past protests.
 
 ## Past Protests
 
+### 2026
+
+- [21st of March, San Francisco](/stop-the-ai-race-march) (organised by People for a Pause)
+- [28th of February, London](/protest-london-feb-2026)
+- [23rd of February, European Parliament, Brussels](/brussels-ep-protest-2026)
+
 ### 2025
 
 - [13th of December, Amsterdam](/amsterdam-protest-2025-december)
