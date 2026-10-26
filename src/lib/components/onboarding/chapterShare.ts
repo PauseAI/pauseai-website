@@ -68,6 +68,14 @@ export function chapterQuestion(
 			no: msgs.onboarding_chapter_no
 		}
 	}
+	if (form === 'chapter-site') {
+		return {
+			heading: '',
+			body: '',
+			yes: msgs.onboarding_chapter_site_none_label(country),
+			no: msgs.onboarding_chapter_no
+		}
+	}
 	return {
 		heading: subscribe
 			? msgs.onboarding_chapter_none_subscribe_heading(country)
@@ -171,26 +179,4 @@ function loadNationalGroups(): Promise<NationalGroupsApiResponse> {
 
 export function loadChapterCountries(): Promise<string[]> {
 	return loadNationalGroups().then((groups) => groups.map((group) => group.name))
-}
-
-function hostOf(url: string): string | null {
-	try {
-		return new URL(/^https?:\/\//i.test(url) ? url : `https://${url}`).hostname
-			.replace(/^www\./, '')
-			.toLowerCase()
-	} catch {
-		return null
-	}
-}
-
-// The chapter, if any, whose own website matches `host` — the iframe's
-// referrer host when the embed is on a chapter's own site. Null for the
-// global site, an unknown host, or a chapter with no website on record.
-export function loadChapterSiteCountry(host: string): Promise<string | null> {
-	const cleanHost = host.replace(/^www\./, '').toLowerCase()
-	if (!cleanHost) return Promise.resolve(null)
-	return loadNationalGroups().then((groups) => {
-		const match = groups.find((group) => group.website && hostOf(group.website) === cleanHost)
-		return match?.name ?? null
-	})
 }
