@@ -40,6 +40,7 @@ import { Bomb, CirclePause, CircleQuestionMark, Cog, Earth, Footprints, MessageS
 - [AISafety.world](https://aisafety.world/tiles/). The whole AI Safety landscape with all the organizations, media outlets, forums, blogs, and other actors and resources.
 - [IncidentDatabase.ai](https://incidentdatabase.ai/). Database of incidents where AI systems caused harm.
 - [LethalIntelligence.ai](https://lethalintelligence.ai/). A collection of resources on AI risks and AI alignment.
+- [yaikes.org](https://yaikes.org/). Handpicked examples of AI incidents explained in extremely simple language.
 
 ## Substacks to follow
 
@@ -50,18 +51,18 @@ import { Bomb, CirclePause, CircleQuestionMark, Cog, Earth, Footprints, MessageS
 ## Videos
 
 <!-- Better to link to the playlist I think.
-- \[Kurzgesagt - A.I. ‐ Humanity's Final Invention?](https://www.youtube.com/watch?v=fa8k8IQ1_X0) (20 mins). The history of AI, and an introduction to the concept of superintelligence.
-- \[80k hours - Could AI wipe out humanity?](https://youtu.be/qzyEgZwfkKY) (10 mins). A great introduction to the problem, from a down-to-earth perspective.
-- \[Superintelligent AI Should Worry You...](https://www.youtube.com/watch?v=xBqU1QxCao8) (1 min). The best super short introduction.
-- \[Don't look up - The Documentary: The Case For AI As An Existential Threat](https://www.youtube.com/watch?v=U1eyUjVRir4) (17 mins). Powerful and nicely edited documentary about the dangers of AI, with many expert quotes from interviews.
-- \[Countries create AI for reasons](https://youtu.be/-9V9cIixPbM) (10 mins). Caricature of the race to a superintelligence and its dangers.
-- \[Max Tegmark | Ted Talk (2023)](https://www.youtube.com/watch?v=xUNx_PxNHrY) (15 mins). AI capabilities are improving quicker than expected.
-- \[Tristan Harris | Nobel Prize Summit 2023](https://www.youtube.com/watch?v=6lVBp2XjWsg) (15 mins). Talk in why we need to "Embrace our paleolithic brains, upgrade our medieval institutions and bind god-like technology".
-- \[Sam Harris | Can we build AI without losing control over it?](https://www.youtube.com/watch?v=8nt3edWLgIg) (15 mins). Ted talk about the crazy situation we're in.
-- \[Ilya: the AI scientist shaping the world](https://youtu.be/9iqn1HhFJ6c) (12 mins). Co-founder and former Chief Scientist at OpenAI explains how AGI will take control over everything and that's why we must teach them to care for humans.
-- \[Exploring the dangers from Artificial Intelligence](https://www.youtube.com/watch?v=sPyu_dTSma0&t=1328s) (25 mins). Summary of cybersecurity, biohazard and power-seeking AI risks.
-- \[Why this top AI guru thinks we might be in extinction level trouble | The InnerView](https://youtu.be/YZjmZFDx-pA) (26 mins). Interview with Connor Leahy on AI X-risks on television.
-- \[The AI Dilemma](https://www.youtube.com/watch?v=xoVJKj8lcNQ&t=1903s) (1hr). Presentation about the dangers of AI and the race which AI companies are stuck in.
+- \\[Kurzgesagt - A.I. ‐ Humanity's Final Invention?](https://www.youtube.com/watch?v=fa8k8IQ1_X0) (20 mins). The history of AI, and an introduction to the concept of superintelligence.
+- \\[80k hours - Could AI wipe out humanity?](https://youtu.be/qzyEgZwfkKY) (10 mins). A great introduction to the problem, from a down-to-earth perspective.
+- \\[Superintelligent AI Should Worry You...](https://www.youtube.com/watch?v=xBqU1QxCao8) (1 min). The best super short introduction.
+- \\[Don't look up - The Documentary: The Case For AI As An Existential Threat](https://www.youtube.com/watch?v=U1eyUjVRir4) (17 mins). Powerful and nicely edited documentary about the dangers of AI, with many expert quotes from interviews.
+- \\[Countries create AI for reasons](https://youtu.be/-9V9cIixPbM) (10 mins). Caricature of the race to a superintelligence and its dangers.
+- \\[Max Tegmark | Ted Talk (2023)](https://www.youtube.com/watch?v=xUNx_PxNHrY) (15 mins). AI capabilities are improving quicker than expected.
+- \\[Tristan Harris | Nobel Prize Summit 2023](https://www.youtube.com/watch?v=6lVBp2XjWsg) (15 mins). Talk in why we need to "Embrace our paleolithic brains, upgrade our medieval institutions and bind god-like technology".
+- \\[Sam Harris | Can we build AI without losing control over it?](https://www.youtube.com/watch?v=8nt3edWLgIg) (15 mins). Ted talk about the crazy situation we're in.
+- \\[Ilya: the AI scientist shaping the world](https://youtu.be/9iqn1HhFJ6c) (12 mins). Co-founder and former Chief Scientist at OpenAI explains how AGI will take control over everything and that's why we must teach them to care for humans.
+- \\[Exploring the dangers from Artificial Intelligence](https://www.youtube.com/watch?v=sPyu_dTSma0&t=1328s) (25 mins). Summary of cybersecurity, biohazard and power-seeking AI risks.
+- \\[Why this top AI guru thinks we might be in extinction level trouble | The InnerView](https://youtu.be/YZjmZFDx-pA) (26 mins). Interview with Connor Leahy on AI X-risks on television.
+- \\[The AI Dilemma](https://www.youtube.com/watch?v=xoVJKj8lcNQ&t=1903s) (1hr). Presentation about the dangers of AI and the race which AI companies are stuck in.
 -->
 
 - [PauseAI Playlist](https://www.youtube.com/playlist?list=PLI46NoubGtIJa0JVCBR-9CayxCOmU0EJt) is a YouTube playlist we compiled, featuring videos ranging from 1 minute to 1 hour in various formats and from diverse sources, and it doesn't require any prior knowledge.
@@ -102,7 +103,7 @@ If you want to read what journalists have written about PauseAI, check out the l
 
 ## Books
 
-  <!-- - \[AI: Unexplainable, Unpredictable, Uncontrollable](https://www.goodreads.com/book/show/197554072-ai) (Roman Yampolskiy, 2024)
+  <!-- - \\[AI: Unexplainable, Unpredictable, Uncontrollable](https://www.goodreads.com/book/show/197554072-ai) (Roman Yampolskiy, 2024)
   I haven't heard good things about it yet -->
 
 - [If Anyone Builds It, Everyone Dies](https://ifanyonebuildsit.com/) (Eliezer Yudkowsky & Nate Soares, 2025)
