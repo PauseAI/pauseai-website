@@ -253,131 +253,157 @@ const canada: ChapterOverride = {
 // from clear typos.
 // The WhatsApp and calendar links come from the chapter's Airtable row, so keeping them
 // current is an Airtable edit, and a sentence is dropped when its link is missing rather than
-// shipping a dead one. The calendar must stay the public Luma page: the chapter's own draft
-// linked Luma's admin view, which members cannot open.
+// shipping a dead one. The calendar must stay the public Luma page: the chapter's own drafts
+// link Luma's admin view, which members cannot open.
 //
 // The chapter's own words. The lines the skeleton adds around them are our Swedish and nobody
 // fluent has read them yet, which beats the alternative for these readers: the
 // English email. Flip this back if the chapter would rather it waited.
 const SWEDISH_COPY_APPROVED = true
 
-// Links the chapter's emails use that no National Groups field holds.
+// Links the chapter's emails use that no National Groups field holds. Instagram and Facebook
+// are the URLs the chapter wrote into its copy, fixed here rather than read from the row.
 const SWEDEN_CONTACTS_DOC =
 	'https://docs.google.com/document/d/1H9erkvaFwAmzqzx5VG28fQPUdg9UWM1__t6kP6DMReY/edit?usp=sharing'
-const SWEDEN_EMAIL_BUILDER = 'https://www.jonasvonessen.se/agera/'
+const SWEDEN_INTRO_DOC =
+	'https://docs.google.com/document/d/1Zy8Rf76gUhVI09CEqVHB84iyQTgbBx4YA9G0Jcm_S_o/edit?usp=sharing'
+const SWEDEN_EMAIL_BUILDER = 'https://pauseai.se/mejla/'
 const SWEDEN_ACTION_PAGE = 'https://pauseai.se/action'
-const SWEDEN_PROJECTS_SHEET =
-	'https://docs.google.com/spreadsheets/d/1fy6qmMSBkxa2p-H0jix24kO0HmCbPuV3Bn2Hu3UALrA/edit?usp=sharing'
-const CATALYSE_PROJECTS = 'https://catalyse.up.railway.app/projects'
 const SWEDEN_PROPOSAL = 'https://pauseai.se/proposal'
+const SWEDEN_INSTAGRAM = 'https://www.instagram.com/pauseai_sverige'
+const SWEDEN_FACEBOOK = 'https://www.facebook.com/groups/1495728531358793/user/61595598517265/'
+const PRO_HUMAN_DECLARATION = 'https://prohumandeclaration.com/en/sign/demand-ai-accountability'
 
-function swedenOneOffActions(): EmailBlock[] {
+const SWEDEN_SOCIALS = `[Instagram](${SWEDEN_INSTAGRAM}) och [Facebook](${SWEDEN_FACEBOOK})`
+const SWEDEN_INTRO_DOC_ITEM = `**Läs igenom vårt [introdokument](${SWEDEN_INTRO_DOC})** - ger dig en bra förståelse om oss och hur du kan hjälpa till.`
+const SWEDEN_EMAIL_TIP =
+	'**Tips:** Personifiera mejlmallar – även några meningar gör stor skillnad.'
+const SWEDEN_CALL_CONTACTS = `*Kontaktuppgifter och samtalstips finns i [dokumentet](${SWEDEN_CONTACTS_DOC}).*`
+const SWEDEN_PRESS_ITEMS = [
+	'Genom att tipsa om AI-riskrelaterade nyheter kan vi **öka medvetenheten** i samhället.',
+	`*Kontaktuppgifter till Sveriges 25 största redaktioner finns i vår [Google Docs](${SWEDEN_CONTACTS_DOC}).*`
+]
+const SWEDEN_SIGNATURE: EmailBlock = {
+	type: 'signoff',
+	lines: ['*Vänliga hälsningar*', '*PauseAI Sverige*']
+}
+
+function swedenAction(title: string, items: string[]): EmailBlock[] {
 	return [
-		{ type: 'heading', text: '📌 Enkelt engagemang: Punktinsatser' },
-		{ type: 'paragraph', text: '**1️⃣ Skicka mejl till politiker**' },
-		{
-			type: 'list',
-			items: [
-				`Använd våra [kontaktuppgifter, mall och tips för att skicka mejl](${SWEDEN_CONTACTS_DOC}).`,
-				{
-					text: `Du kan även använda en **mejlbyggare** (t.ex. [Jonas Von Essens verktyg](${SWEDEN_EMAIL_BUILDER})) för att skapa personliga mejl.`,
-					items: ['Vår Mejlbyggare är tyvärr under ombyggnation']
-				},
-				'**Tips:** Personifiera mejlmallar – även några meningar gör stor skillnad.'
-			]
-		},
-		{ type: 'paragraph', text: '**2️⃣ Ring politiker**' },
-		{
-			type: 'list',
-			items: [
-				'Att ringa är ofta **väldigt effektivt**, särskilt en vecka efter att du skickat ett mejl.',
-				`*Kontaktuppgifter och samtalstips finns i [dokumentet](${SWEDEN_CONTACTS_DOC}).*`
-			]
-		},
-		{ type: 'paragraph', text: '**3️⃣ Tipsa nyhetsredaktioner**' },
-		{
-			type: 'list',
-			items: [
-				'Genom att tipsa om AI-riskrelaterade nyheter kan vi **öka medvetenheten** i samhället.',
-				`*Kontaktuppgifter till Sveriges 25 största redaktioner finns i vår [Google Docs](${SWEDEN_CONTACTS_DOC}).*`
-			]
-		},
-		{ type: 'rule' }
+		{ type: 'paragraph', text: `**${title}**` },
+		{ type: 'list', items }
 	]
 }
 
-/** The parts of the two new Swedish emails that differ. */
-type SwedenCopy = {
-	subject: string
-	intro: string
-	heading: string
-	lead: string
-	/** The meeting item; the calendar sentence is appended when the row has a calendar. */
-	meeting: string
-	last: string
+function swedenSignoff(closing: string): EmailBlock[] {
+	return [
+		{ type: 'rule' },
+		{ type: 'paragraph', text: `**Tack för att du vill göra skillnad!**\n${closing}` },
+		{ type: 'rule' },
+		SWEDEN_SIGNATURE
+	]
 }
 
-function swedenContent(
-	copy: SwedenCopy,
-	firstName: string,
-	chapter: ChapterBlockData | null
-): EmailContent {
+const swedenActNow: ChapterContent = (firstName, chapter) => {
 	const whatsapp = chapterLink(chapter, 'WhatsApp')
 	const calendar = chapterLink(chapter, 'Events')
-	const items = [
-		...(whatsapp
-			? [
-					`**Gå med i vårat [Whatsapp community](${whatsapp})** – Majoriteten av samtalen sker via Whatsapp.`
-				]
-			: []),
-		calendar ? `${copy.meeting} [Kalendern](${calendar}) hittar du här.` : copy.meeting,
-		copy.last
-	]
+	const meeting =
+		'**Delta på ett intromöte** – perfekt för att lära känna våra projekt och gemenskapen.'
 	return {
-		subject: copy.subject,
+		subject: 'PauseAI Sverige - Så här kan du engagera dig för AI-säkerhet',
 		greeting: [
 			{ type: 'heading', level: 1, text: `Hej ${firstName}!` },
-			{ type: 'paragraph', text: copy.intro }
-		],
-		body: [
-			...swedenOneOffActions(),
-			{ type: 'heading', text: copy.heading },
-			{ type: 'paragraph', text: copy.lead },
-			{ type: 'list', items },
-			{ type: 'rule' }
-		],
-		signoff: [
-			{ type: 'rule' },
 			{
 				type: 'paragraph',
-				text: '**Tack för att du vill göra skillnad!**\nHör gärna av dig om du har frågor eller idéer.'
-			},
+				text: 'Kul att du har valt att engagera dig – tack för det! Här kommer konkreta sätt att göra skillnad, oavsett om du vill göra en enstaka insats eller ta ett större steg.'
+			}
+		],
+		body: [
+			{ type: 'heading', text: '📌 Enkelt engagemang: Punktinsatser' },
+			...swedenAction('1️⃣ Följ oss och skriv på upprop', [
+				`Följ oss på ${SWEDEN_SOCIALS} - där lägger vi upp nyheter och kommande event.`,
+				`Skriv på [pro human declaration](${PRO_HUMAN_DECLARATION}) - AI-bolagen måste hållas ansvariga för deras system och systemets beslut.`
+			]),
+			...swedenAction('2️⃣ Skicka mejl till politiker', [
+				`Använd våra [kontaktuppgifter, mall och tips för att skicka mejl](${SWEDEN_CONTACTS_DOC}).`,
+				`Du kan även använda vår [mejlbyggare](${SWEDEN_EMAIL_BUILDER}).`,
+				SWEDEN_EMAIL_TIP
+			]),
+			...swedenAction('3️⃣ Ring politiker', [
+				'Att ringa är ofta **väldigt effektivt**, särskilt en vecka efter att du skickat ett mejl.',
+				SWEDEN_CALL_CONTACTS
+			]),
+			...swedenAction('4️⃣ Tipsa nyhetsredaktioner', SWEDEN_PRESS_ITEMS),
 			{ type: 'rule' },
-			{ type: 'signoff', lines: ['*Vänliga hälsningar*', '*Carl Stylin PauseAI Sverige*'] }
-		]
+			{ type: 'heading', text: '🌟 Ta nästa steg: Bli mer involverad' },
+			{ type: 'paragraph', text: 'Vill du göra ännu mer? Då är du välkommen att:' },
+			{
+				type: 'list',
+				items: [
+					SWEDEN_INTRO_DOC_ITEM,
+					...(whatsapp
+						? [
+								`**Gå med i vårat [Whatsapp community](${whatsapp})** – Majoriteten av samtalen sker via Whatsapp.`
+							]
+						: []),
+					calendar ? `${meeting} [Kalendern](${calendar}) hittar du här.` : meeting,
+					`**Besök vår hemsida** under fliken **[Agera](${SWEDEN_ACTION_PAGE})** för mer information om hur du kan bidra.`
+				]
+			},
+			{ type: 'rule' }
+		],
+		signoff: swedenSignoff('Hör gärna av dig om du har frågor eller idéer.')
 	}
 }
 
-const SWEDEN_ACT_NOW: SwedenCopy = {
-	subject: 'PauseAI Sverige - Så här kan du engagera dig för AI-säkerhet',
-	intro:
-		'Kul att du har valt att engagera dig – tack för det! Här kommer konkreta sätt att göra skillnad, oavsett om du vill göra en enstaka insats eller ta ett större steg.',
-	heading: '🌟 Ta nästa steg: Bli mer involverad',
-	lead: 'Vill du göra ännu mer? Då är du välkommen att:',
-	meeting:
-		'**Delta på ett intro- eller månadsmöte** – perfekt för att lära känna våra projekt och gemenskapen.',
-	last: `**Besök vår hemsida** under fliken **[Agera](${SWEDEN_ACTION_PAGE})** för mer information om hur du kan bidra.`
-}
-
-const SWEDEN_VOLUNTEER: SwedenCopy = {
-	subject: 'PauseAI Sverige - Volontär/lead inom PauseAI',
-	intro:
-		'Kul att du har valt att engagera dig – tack för det! Här kommer konkreta sätt att göra skillnad och information om fortsatt kontakt.',
-	heading: '🌟 Bli mer involverad i vårt arbete',
-	lead: 'Fortsatt engagemang:',
-	meeting:
-		'**Välkommen till intro- och månadsmöte** – Du kommer bli inbjuden till ett intromöte och våra månadsmöten.',
-	last: `**Pågående projekt:** vi har några projekt som pågår och andra som ligger i startgroparna. Du hittar fler av våra [gemensamma projekt](${SWEDEN_PROJECTS_SHEET}) med övriga AI-safety sfären i Sverige här. Registrera dig gärna på [Catalyse](${CATALYSE_PROJECTS}) för att se PauseAI specifika projekt.`
+const swedenVolunteer: ChapterContent = (firstName, chapter) => {
+	const whatsapp = chapterLink(chapter, 'WhatsApp')
+	const calendar = chapterLink(chapter, 'Events')
+	return {
+		subject: 'PauseAI Sverige - Volunteer/Lead inom PauseAI',
+		greeting: [
+			{ type: 'heading', level: 1, text: `Hej ${firstName}!` },
+			{
+				type: 'paragraph',
+				text: 'Kul att du har valt att engagera dig – tack för det! Här kommer konkreta sätt att göra skillnad och information om fortsatt kontakt. Mer information finns att hitta på [pauseai.se](https://pauseai.se).'
+			}
+		],
+		body: [
+			{ type: 'heading', text: '🌟 Engagera dig' },
+			{ type: 'paragraph', text: 'Fortsatt engagemang:' },
+			{
+				type: 'list',
+				items: [
+					SWEDEN_INTRO_DOC_ITEM,
+					...(calendar
+						? [
+								`**Delta på intromöte** – Intromöten och andra aktiviteter hittar du i vår [kalender](${calendar}).`
+							]
+						: []),
+					...(whatsapp
+						? [
+								`**Gå med i WhatsApp** - Vår primära kommunikation sker via WhatsApp - Gå gärna med i vårt community där via [denna länk](${whatsapp}).`
+							]
+						: [])
+				]
+			},
+			{ type: 'rule' },
+			{ type: 'heading', text: '📌 Enkelt engagemang: att göra under tiden' },
+			...swedenAction('1️⃣ Skicka mejl till politiker', [
+				`Använd vår [mejlbyggare](${SWEDEN_EMAIL_BUILDER}) eller om du vill skriva mejlet själv finns kontaktuppgifter, mall och tips [här](${SWEDEN_CONTACTS_DOC}).`,
+				SWEDEN_EMAIL_TIP
+			]),
+			...swedenAction('2️⃣ Ring politiker', [
+				'Att ringa är ofta **väldigt effektivt**, särskilt för att följa upp efter att du skickat ett mejl.',
+				SWEDEN_CALL_CONTACTS
+			]),
+			...swedenAction('3️⃣ Tipsa nyhetsredaktioner', SWEDEN_PRESS_ITEMS),
+			{ type: 'rule' }
+		],
+		signoff: swedenSignoff(
+			`Hör gärna av dig om du har frågor och följ oss gärna på ${SWEDEN_SOCIALS}.`
+		)
+	}
 }
 
 /** The chapter's translation of the shared no-intent email, newsletter line included. */
@@ -386,7 +412,11 @@ const swedenNoIntent: ChapterContent = (firstName, chapter) => {
 	const body: EmailBlock[] = [
 		{
 			type: 'paragraph',
-			text: `Tack för att du anmält dig.\nVi bygger en global rörelse som kräver en paus i utvecklingen av avancerade AI-system tills de kan göras säkra och demokratiskt styrda. Du kan läsa mer om vad vi efterfrågar i [vårt förslag](${SWEDEN_PROPOSAL}).`
+			text: `Tack för att du anmält dig.\nVi bygger en global rörelse som kräver en paus i utvecklingen av avancerade AI-system tills de kan göras säkra och demokratiskt styrda. Följ oss gärna på ${SWEDEN_SOCIALS} - där lägger vi upp nyheter och kommande event.`
+		},
+		{
+			type: 'paragraph',
+			text: `Du kan läsa mer om vad vi efterfrågar i [vårt förslag](${SWEDEN_PROPOSAL}).`
 		}
 	]
 	if (whatsapp) {
@@ -404,7 +434,7 @@ const swedenNoIntent: ChapterContent = (firstName, chapter) => {
 			'Om du har valt att få information, kommer vi att hålla dig uppdaterad om viktiga nyheter, kampanjuppdateringar och möjligheter att ta en mer aktiv roll i denna rörelse, inklusive lokala möjligheter där det finns ett aktivt kapitel nära dig. Oavsett kommer vi ibland skicka viktiga meddelanden till dig.',
 		signoff: [
 			{ type: 'paragraph', text: 'Vi är glada att du är med oss och ser fram emot att höras.' },
-			{ type: 'signoff', lines: ['*Vänliga hälsningar*', '*Carl Stylin PauseAI Sverige*'] }
+			SWEDEN_SIGNATURE
 		]
 	}
 }
@@ -414,8 +444,8 @@ const sweden: ChapterOverride = {
 	language: 'sv',
 	content: {
 		none: swedenNoIntent,
-		'act-now': (firstName, chapter) => swedenContent(SWEDEN_ACT_NOW, firstName, chapter),
-		volunteer: (firstName, chapter) => swedenContent(SWEDEN_VOLUNTEER, firstName, chapter)
+		'act-now': swedenActNow,
+		volunteer: swedenVolunteer
 	}
 }
 

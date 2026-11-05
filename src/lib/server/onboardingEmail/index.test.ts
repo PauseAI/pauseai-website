@@ -219,24 +219,25 @@ describe('renderOnboardingEmail', () => {
 	it('sends PauseAI Sverige their own email, in Swedish, one per intent', async () => {
 		for (const intent of ['Volunteer', 'Lead']) {
 			const volunteer = await render('Sweden', intent)
-			expect(volunteer.subject).toBe('PauseAI Sverige - Volontär/lead inom PauseAI')
+			expect(volunteer.subject).toBe('PauseAI Sverige - Volunteer/Lead inom PauseAI')
 			expect(volunteer.text).toContain('Bekräfta din e-postadress')
-			expect(volunteer.text).toContain('Catalyse')
+			expect(volunteer.text).toContain('att göra under tiden')
+			// The fixture row has no calendar, so the meeting item goes.
+			expect(volunteer.text).not.toContain('intromöte')
 			expect(volunteer.text).toContain('Vänliga hälsningar')
 		}
 
 		const actNow = await render('Sweden', 'Act now')
 		expect(actNow.subject).toBe('PauseAI Sverige - Så här kan du engagera dig för AI-säkerhet')
 		expect(actNow.text).toContain('Ta nästa steg')
-		expect(actNow.text).not.toContain('Catalyse')
+		expect(actNow.text).toContain('pro human declaration')
+		expect(actNow.text).not.toContain('att göra under tiden')
 	})
 
-	it('renders italics and a sub-bullet, and leaves no markers in the plain text', async () => {
+	it('renders italics and bold, and leaves no markers in the plain text', async () => {
 		const email = await render('Sweden', 'Act now')
 		expect(email.html).toContain('<em>Vänliga hälsningar</em>')
-		expect(email.html).toContain('<strong>mejlbyggare</strong>')
-		expect(email.html).toMatch(/personliga mejl\.<ul[^>]*><li[^>]*>Vår Mejlbyggare/)
-		expect(email.text).toContain('för att skapa personliga mejl.\n  - Vår Mejlbyggare')
+		expect(email.html).toContain('<strong>väldigt effektivt</strong>')
 		expect(email.text).toContain('\nVänliga hälsningar\n')
 		expect(email.text).not.toContain('*')
 	})
@@ -301,7 +302,7 @@ describe('renderOnboardingEmail', () => {
 			['Germany', 'None', 'Willkommen bei PauseAI Deutschland, Alex!'],
 			['Germany', 'Volunteer', 'Willkommen bei PauseAI Deutschland, Alex!'],
 			['Sweden', 'None', 'Tack för att du har registrerat dig hos PauseAI'],
-			['Sweden', 'Volunteer', 'PauseAI Sverige - Volontär/lead inom PauseAI']
+			['Sweden', 'Volunteer', 'PauseAI Sverige - Volunteer/Lead inom PauseAI']
 		]
 
 		it("gives the shared copy from PauseAI Global instead of a chapter's own email", async () => {
