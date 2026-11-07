@@ -324,7 +324,7 @@ function swedenWhatsappItem(chapter: ChapterBlockData | null): string[] {
 	const whatsapp = chapterLink(chapter, 'WhatsApp')
 	return whatsapp
 		? [
-				`**Gå med i vårat [Whatsapp community](${whatsapp})** – Majoriteten av samtalen sker via Whatsapp.`
+				`**Gå med i vårat [WhatsApp community](${whatsapp})** – Majoriteten av samtalen sker via WhatsApp.`
 			]
 		: []
 }

@@ -255,7 +255,7 @@ describe('renderOnboardingEmail', () => {
 
 	it('drops a Swedish sentence whose link the chapter row lacks', async () => {
 		const email = await render('Sweden', 'Act now')
-		expect(email.text).toContain('Whatsapp community')
+		expect(email.text).toContain('WhatsApp community')
 		expect(email.text).not.toContain('Kalendern')
 	})
 
