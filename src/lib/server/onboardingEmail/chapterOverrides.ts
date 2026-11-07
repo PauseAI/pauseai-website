@@ -251,9 +251,9 @@ const canada: ChapterOverride = {
 
 // PauseAI Sverige's own emails, one per intent, wording kept as the chapter lead wrote it apart
 // from clear typos.
-// The WhatsApp and calendar links come from the chapter's Airtable row, so keeping them
-// current is an Airtable edit, and a sentence is dropped when its link is missing rather than
-// shipping a dead one. The calendar must stay the public Luma page: the chapter's own drafts
+// The WhatsApp, calendar, Instagram and Facebook links come from the chapter's Airtable row, so
+// keeping them current is an Airtable edit, and a sentence is dropped when its link is missing
+// rather than shipping a dead one. The calendar must stay the public Luma page: the chapter's own drafts
 // link Luma's admin view, which members cannot open.
 //
 // The chapter's own words. The lines the skeleton adds around them are our Swedish and nobody
@@ -261,8 +261,7 @@ const canada: ChapterOverride = {
 // English email. Flip this back if the chapter would rather it waited.
 const SWEDISH_COPY_APPROVED = true
 
-// Links the chapter's emails use that no National Groups field holds. Instagram and Facebook
-// are the URLs the chapter wrote into its copy, fixed here rather than read from the row.
+// Links the chapter's emails use that no National Groups field holds.
 const SWEDEN_CONTACTS_DOC =
 	'https://docs.google.com/document/d/1H9erkvaFwAmzqzx5VG28fQPUdg9UWM1__t6kP6DMReY/edit?usp=sharing'
 const SWEDEN_INTRO_DOC =
@@ -270,11 +269,8 @@ const SWEDEN_INTRO_DOC =
 const SWEDEN_EMAIL_BUILDER = 'https://pauseai.se/mejla/'
 const SWEDEN_ACTION_PAGE = 'https://pauseai.se/action'
 const SWEDEN_PROPOSAL = 'https://pauseai.se/proposal'
-const SWEDEN_INSTAGRAM = 'https://www.instagram.com/pauseai_sverige'
-const SWEDEN_FACEBOOK = 'https://www.facebook.com/pauseaisverige'
 const PRO_HUMAN_DECLARATION = 'https://prohumandeclaration.com/en/sign/demand-ai-accountability'
 
-const SWEDEN_SOCIALS = `[Instagram](${SWEDEN_INSTAGRAM}) och [Facebook](${SWEDEN_FACEBOOK})`
 const SWEDEN_INTRO_DOC_ITEM = `**Läs igenom vårt [introdokument](${SWEDEN_INTRO_DOC})** - ger dig en bra förståelse om oss och hur du kan hjälpa till.`
 const SWEDEN_EMAIL_TIP =
 	'**Tips:** Personifiera mejlmallar – även några meningar gör stor skillnad.'
@@ -293,6 +289,34 @@ function swedenAction(title: string, items: string[]): EmailBlock[] {
 		{ type: 'paragraph', text: `**${title}**` },
 		{ type: 'list', items }
 	]
+}
+
+/** "[Instagram](…) och [Facebook](…)", or just the one the row has; null when it has neither. */
+function swedenSocials(chapter: ChapterBlockData | null): string | null {
+	const links = ['Instagram', 'Facebook'].flatMap((label) => {
+		const url = chapterLink(chapter, label)
+		return url ? [`[${label}](${url})`] : []
+	})
+	return links.length ? links.join(' och ') : null
+}
+
+/** The Act now email's first action. Without Instagram or Facebook it is only the petition. */
+function swedenFollowAction(chapter: ChapterBlockData | null): EmailBlock[] {
+	const socials = swedenSocials(chapter)
+	const petition = `Skriv på [pro human declaration](${PRO_HUMAN_DECLARATION}) - AI-bolagen måste hållas ansvariga för deras system och systemets beslut.`
+	return socials
+		? swedenAction('1️⃣ Följ oss och skriv på upprop', [
+				`Följ oss på ${socials} - där lägger vi upp nyheter och kommande event.`,
+				petition
+			])
+		: swedenAction('1️⃣ Skriv på upprop', [petition])
+}
+
+function swedenVolunteerClosing(chapter: ChapterBlockData | null): string {
+	const socials = swedenSocials(chapter)
+	return socials
+		? `Hör gärna av dig om du har frågor och följ oss gärna på ${socials}.`
+		: 'Hör gärna av dig om du har frågor.'
 }
 
 /** Dropped when the chapter row has no WhatsApp link. */
@@ -332,10 +356,7 @@ const swedenActNow: ChapterContent = (firstName, chapter) => ({
 	],
 	body: [
 		{ type: 'heading', text: '📌 Enkelt engagemang: Punktinsatser' },
-		...swedenAction('1️⃣ Följ oss och skriv på upprop', [
-			`Följ oss på ${SWEDEN_SOCIALS} - där lägger vi upp nyheter och kommande event.`,
-			`Skriv på [pro human declaration](${PRO_HUMAN_DECLARATION}) - AI-bolagen måste hållas ansvariga för deras system och systemets beslut.`
-		]),
+		...swedenFollowAction(chapter),
 		...swedenAction('2️⃣ Skicka mejl till politiker', [
 			`Använd våra [kontaktuppgifter, mall och tips för att skicka mejl](${SWEDEN_CONTACTS_DOC}).`,
 			`Du kan även använda vår [mejlbyggare](${SWEDEN_EMAIL_BUILDER}).`,
@@ -392,18 +413,20 @@ const swedenVolunteer: ChapterContent = (firstName, chapter) => ({
 		...swedenAction('3️⃣ Tipsa nyhetsredaktioner', SWEDEN_PRESS_ITEMS),
 		{ type: 'rule' }
 	],
-	signoff: swedenSignoff(
-		`Hör gärna av dig om du har frågor och följ oss gärna på ${SWEDEN_SOCIALS}.`
-	)
+	signoff: swedenSignoff(swedenVolunteerClosing(chapter))
 })
 
 /** The chapter's translation of the shared no-intent email, newsletter line included. */
 const swedenNoIntent: ChapterContent = (firstName, chapter) => {
 	const whatsapp = chapterLink(chapter, 'WhatsApp')
+	const socials = swedenSocials(chapter)
+	const follow = socials
+		? ` Följ oss gärna på ${socials} - där lägger vi upp nyheter och kommande event.`
+		: ''
 	const body: EmailBlock[] = [
 		{
 			type: 'paragraph',
-			text: `Tack för att du anmält dig.\nVi bygger en global rörelse som kräver en paus i utvecklingen av avancerade AI-system tills de kan göras säkra och demokratiskt styrda. Följ oss gärna på ${SWEDEN_SOCIALS} - där lägger vi upp nyheter och kommande event.`
+			text: `Tack för att du anmält dig.\nVi bygger en global rörelse som kräver en paus i utvecklingen av avancerade AI-system tills de kan göras säkra och demokratiskt styrda.${follow}`
 		},
 		{
 			type: 'paragraph',

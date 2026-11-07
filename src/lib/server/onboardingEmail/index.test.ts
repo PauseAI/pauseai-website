@@ -17,7 +17,8 @@ const CHAPTERS: Record<string, ChapterBlockData> = {
 			{ label: 'Website', url: 'https://pauseai.se/' },
 			// Carries markdown of its own: a row value is free text, and the Swedish email splices
 			// it into a sentence rather than rendering it as a bare link.
-			{ label: 'WhatsApp', url: 'https://chat.whatsapp.com/example/**x**' }
+			{ label: 'WhatsApp', url: 'https://chat.whatsapp.com/example/**x**' },
+			{ label: 'Facebook', url: 'https://www.facebook.com/example' }
 		]
 	},
 	canada: {
@@ -256,6 +257,37 @@ describe('renderOnboardingEmail', () => {
 		const email = await render('Sweden', 'Act now')
 		expect(email.text).toContain('Whatsapp community')
 		expect(email.text).not.toContain('Kalendern')
+	})
+
+	it('links whichever of Instagram and Facebook the Swedish chapter row has', async () => {
+		const row = CHAPTERS.sweden
+		const instagram = { label: 'Instagram', url: 'https://www.instagram.com/example' }
+		const facebook = { label: 'Facebook', url: 'https://www.facebook.com/example' }
+		const both =
+			'[Instagram](https://www.instagram.com/example) och [Facebook](https://www.facebook.com/example)'
+		const linksWithout = row.links.filter((l) => l.label !== 'Instagram' && l.label !== 'Facebook')
+		try {
+			row.links = [...linksWithout, instagram, facebook]
+			expect((await render('Sweden', 'Act now')).text).toContain(`Följ oss på ${both} - där`)
+			expect((await render('Sweden', 'Volunteer')).text).toContain(`följ oss gärna på ${both}.`)
+			expect((await render('Sweden', 'None')).text).toContain(`Följ oss gärna på ${both} - där`)
+
+			row.links = [...linksWithout, facebook]
+			expect((await render('Sweden', 'Act now')).text).toContain(
+				'Följ oss på [Facebook](https://www.facebook.com/example) - där'
+			)
+
+			row.links = linksWithout
+			const actNow = (await render('Sweden', 'Act now')).text
+			expect(actNow).toContain('1️⃣ Skriv på upprop')
+			expect(actNow).not.toMatch(/följ oss/i)
+			const volunteer = (await render('Sweden', 'Volunteer')).text
+			expect(volunteer).toContain('Hör gärna av dig om du har frågor.')
+			expect(volunteer).not.toMatch(/följ oss/i)
+			expect((await render('Sweden', 'None')).text).not.toMatch(/följ oss/i)
+		} finally {
+			row.links = [...linksWithout, facebook]
+		}
 	})
 
 	it('sends PauseAI Deutschland their own email, in German, one per intent', async () => {
