@@ -17,7 +17,8 @@ const CHAPTERS: Record<string, ChapterBlockData> = {
 			{ label: 'Website', url: 'https://pauseai.se/' },
 			// Carries markdown of its own: a row value is free text, and the Swedish email splices
 			// it into a sentence rather than rendering it as a bare link.
-			{ label: 'WhatsApp', url: 'https://chat.whatsapp.com/example/**x**' }
+			{ label: 'WhatsApp', url: 'https://chat.whatsapp.com/example/**x**' },
+			{ label: 'Facebook', url: 'https://www.facebook.com/example' }
 		]
 	},
 	canada: {
@@ -221,22 +222,24 @@ describe('renderOnboardingEmail', () => {
 			const volunteer = await render('Sweden', intent)
 			expect(volunteer.subject).toBe('PauseAI Sverige - Volontär/lead inom PauseAI')
 			expect(volunteer.text).toContain('Bekräfta din e-postadress')
-			expect(volunteer.text).toContain('Catalyse')
+			expect(volunteer.text).toContain('att göra under tiden')
+			// The fixture row has no calendar, so the meeting item keeps only its first sentence.
+			expect(volunteer.text).toContain('Delta på ett intromöte')
+			expect(volunteer.text).not.toContain('Kalendern')
 			expect(volunteer.text).toContain('Vänliga hälsningar')
 		}
 
 		const actNow = await render('Sweden', 'Act now')
 		expect(actNow.subject).toBe('PauseAI Sverige - Så här kan du engagera dig för AI-säkerhet')
 		expect(actNow.text).toContain('Ta nästa steg')
-		expect(actNow.text).not.toContain('Catalyse')
+		expect(actNow.text).toContain('pro human declaration')
+		expect(actNow.text).not.toContain('att göra under tiden')
 	})
 
-	it('renders italics and a sub-bullet, and leaves no markers in the plain text', async () => {
+	it('renders italics and bold, and leaves no markers in the plain text', async () => {
 		const email = await render('Sweden', 'Act now')
 		expect(email.html).toContain('<em>Vänliga hälsningar</em>')
-		expect(email.html).toContain('<strong>mejlbyggare</strong>')
-		expect(email.html).toMatch(/personliga mejl\.<ul[^>]*><li[^>]*>Vår Mejlbyggare/)
-		expect(email.text).toContain('för att skapa personliga mejl.\n  - Vår Mejlbyggare')
+		expect(email.html).toContain('<strong>väldigt effektivt</strong>')
 		expect(email.text).toContain('\nVänliga hälsningar\n')
 		expect(email.text).not.toContain('*')
 	})
@@ -252,8 +255,39 @@ describe('renderOnboardingEmail', () => {
 
 	it('drops a Swedish sentence whose link the chapter row lacks', async () => {
 		const email = await render('Sweden', 'Act now')
-		expect(email.text).toContain('Whatsapp community')
+		expect(email.text).toContain('WhatsApp community')
 		expect(email.text).not.toContain('Kalendern')
+	})
+
+	it('links whichever of Instagram and Facebook the Swedish chapter row has', async () => {
+		const row = CHAPTERS.sweden
+		const instagram = { label: 'Instagram', url: 'https://www.instagram.com/example' }
+		const facebook = { label: 'Facebook', url: 'https://www.facebook.com/example' }
+		const both =
+			'[Instagram](https://www.instagram.com/example) och [Facebook](https://www.facebook.com/example)'
+		const linksWithout = row.links.filter((l) => l.label !== 'Instagram' && l.label !== 'Facebook')
+		try {
+			row.links = [...linksWithout, instagram, facebook]
+			expect((await render('Sweden', 'Act now')).text).toContain(`Följ oss på ${both} - där`)
+			expect((await render('Sweden', 'Volunteer')).text).toContain(`följ oss gärna på ${both}.`)
+			expect((await render('Sweden', 'None')).text).toContain(`Följ oss gärna på ${both} - där`)
+
+			row.links = [...linksWithout, facebook]
+			expect((await render('Sweden', 'Act now')).text).toContain(
+				'Följ oss på [Facebook](https://www.facebook.com/example) - där'
+			)
+
+			row.links = linksWithout
+			const actNow = (await render('Sweden', 'Act now')).text
+			expect(actNow).toContain('1️⃣ Skriv på upprop')
+			expect(actNow).not.toMatch(/följ oss/i)
+			const volunteer = (await render('Sweden', 'Volunteer')).text
+			expect(volunteer).toContain('Hör gärna av dig om du har frågor.')
+			expect(volunteer).not.toMatch(/följ oss/i)
+			expect((await render('Sweden', 'None')).text).not.toMatch(/följ oss/i)
+		} finally {
+			row.links = [...linksWithout, facebook]
+		}
 	})
 
 	it('sends PauseAI Deutschland their own email, in German, one per intent', async () => {
