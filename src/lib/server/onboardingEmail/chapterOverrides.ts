@@ -271,7 +271,7 @@ const SWEDEN_EMAIL_BUILDER = 'https://pauseai.se/mejla/'
 const SWEDEN_ACTION_PAGE = 'https://pauseai.se/action'
 const SWEDEN_PROPOSAL = 'https://pauseai.se/proposal'
 const SWEDEN_INSTAGRAM = 'https://www.instagram.com/pauseai_sverige'
-const SWEDEN_FACEBOOK = 'https://www.facebook.com/groups/1495728531358793/user/61595598517265/'
+const SWEDEN_FACEBOOK = 'https://www.facebook.com/pauseaisverige'
 const PRO_HUMAN_DECLARATION = 'https://prohumandeclaration.com/en/sign/demand-ai-accountability'
 
 const SWEDEN_SOCIALS = `[Instagram](${SWEDEN_INSTAGRAM}) och [Facebook](${SWEDEN_FACEBOOK})`
@@ -295,6 +295,23 @@ function swedenAction(title: string, items: string[]): EmailBlock[] {
 	]
 }
 
+/** Dropped when the chapter row has no WhatsApp link. */
+function swedenWhatsappItem(chapter: ChapterBlockData | null): string[] {
+	const whatsapp = chapterLink(chapter, 'WhatsApp')
+	return whatsapp
+		? [
+				`**Gå med i vårat [Whatsapp community](${whatsapp})** – Majoriteten av samtalen sker via Whatsapp.`
+			]
+		: []
+}
+
+function swedenMeetingItem(chapter: ChapterBlockData | null): string {
+	const calendar = chapterLink(chapter, 'Events')
+	const meeting =
+		'**Delta på ett intromöte** – perfekt för att lära känna våra projekt och gemenskapen.'
+	return calendar ? `${meeting} [Kalendern](${calendar}) hittar du här.` : meeting
+}
+
 function swedenSignoff(closing: string): EmailBlock[] {
 	return [
 		{ type: 'rule' },
@@ -304,107 +321,81 @@ function swedenSignoff(closing: string): EmailBlock[] {
 	]
 }
 
-const swedenActNow: ChapterContent = (firstName, chapter) => {
-	const whatsapp = chapterLink(chapter, 'WhatsApp')
-	const calendar = chapterLink(chapter, 'Events')
-	const meeting =
-		'**Delta på ett intromöte** – perfekt för att lära känna våra projekt och gemenskapen.'
-	return {
-		subject: 'PauseAI Sverige - Så här kan du engagera dig för AI-säkerhet',
-		greeting: [
-			{ type: 'heading', level: 1, text: `Hej ${firstName}!` },
-			{
-				type: 'paragraph',
-				text: 'Kul att du har valt att engagera dig – tack för det! Här kommer konkreta sätt att göra skillnad, oavsett om du vill göra en enstaka insats eller ta ett större steg.'
-			}
-		],
-		body: [
-			{ type: 'heading', text: '📌 Enkelt engagemang: Punktinsatser' },
-			...swedenAction('1️⃣ Följ oss och skriv på upprop', [
-				`Följ oss på ${SWEDEN_SOCIALS} - där lägger vi upp nyheter och kommande event.`,
-				`Skriv på [pro human declaration](${PRO_HUMAN_DECLARATION}) - AI-bolagen måste hållas ansvariga för deras system och systemets beslut.`
-			]),
-			...swedenAction('2️⃣ Skicka mejl till politiker', [
-				`Använd våra [kontaktuppgifter, mall och tips för att skicka mejl](${SWEDEN_CONTACTS_DOC}).`,
-				`Du kan även använda vår [mejlbyggare](${SWEDEN_EMAIL_BUILDER}).`,
-				SWEDEN_EMAIL_TIP
-			]),
-			...swedenAction('3️⃣ Ring politiker', [
-				'Att ringa är ofta **väldigt effektivt**, särskilt en vecka efter att du skickat ett mejl.',
-				SWEDEN_CALL_CONTACTS
-			]),
-			...swedenAction('4️⃣ Tipsa nyhetsredaktioner', SWEDEN_PRESS_ITEMS),
-			{ type: 'rule' },
-			{ type: 'heading', text: '🌟 Ta nästa steg: Bli mer involverad' },
-			{ type: 'paragraph', text: 'Vill du göra ännu mer? Då är du välkommen att:' },
-			{
-				type: 'list',
-				items: [
-					SWEDEN_INTRO_DOC_ITEM,
-					...(whatsapp
-						? [
-								`**Gå med i vårat [Whatsapp community](${whatsapp})** – Majoriteten av samtalen sker via Whatsapp.`
-							]
-						: []),
-					calendar ? `${meeting} [Kalendern](${calendar}) hittar du här.` : meeting,
-					`**Besök vår hemsida** under fliken **[Agera](${SWEDEN_ACTION_PAGE})** för mer information om hur du kan bidra.`
-				]
-			},
-			{ type: 'rule' }
-		],
-		signoff: swedenSignoff('Hör gärna av dig om du har frågor eller idéer.')
-	}
-}
+const swedenActNow: ChapterContent = (firstName, chapter) => ({
+	subject: 'PauseAI Sverige - Så här kan du engagera dig för AI-säkerhet',
+	greeting: [
+		{ type: 'heading', level: 1, text: `Hej ${firstName}!` },
+		{
+			type: 'paragraph',
+			text: 'Kul att du har valt att engagera dig – tack för det! Här kommer konkreta sätt att göra skillnad, oavsett om du vill göra en enstaka insats eller ta ett större steg.'
+		}
+	],
+	body: [
+		{ type: 'heading', text: '📌 Enkelt engagemang: Punktinsatser' },
+		...swedenAction('1️⃣ Följ oss och skriv på upprop', [
+			`Följ oss på ${SWEDEN_SOCIALS} - där lägger vi upp nyheter och kommande event.`,
+			`Skriv på [pro human declaration](${PRO_HUMAN_DECLARATION}) - AI-bolagen måste hållas ansvariga för deras system och systemets beslut.`
+		]),
+		...swedenAction('2️⃣ Skicka mejl till politiker', [
+			`Använd våra [kontaktuppgifter, mall och tips för att skicka mejl](${SWEDEN_CONTACTS_DOC}).`,
+			`Du kan även använda vår [mejlbyggare](${SWEDEN_EMAIL_BUILDER}).`,
+			SWEDEN_EMAIL_TIP
+		]),
+		...swedenAction('3️⃣ Ring politiker', [
+			'Att ringa är ofta **väldigt effektivt**, särskilt en vecka efter att du skickat ett mejl.',
+			SWEDEN_CALL_CONTACTS
+		]),
+		...swedenAction('4️⃣ Tipsa nyhetsredaktioner', SWEDEN_PRESS_ITEMS),
+		{ type: 'rule' },
+		{ type: 'heading', text: '🌟 Ta nästa steg: Bli mer involverad' },
+		{ type: 'paragraph', text: 'Vill du göra ännu mer? Då är du välkommen att:' },
+		{
+			type: 'list',
+			items: [
+				SWEDEN_INTRO_DOC_ITEM,
+				...swedenWhatsappItem(chapter),
+				swedenMeetingItem(chapter),
+				`**Besök vår hemsida** under fliken **[Agera](${SWEDEN_ACTION_PAGE})** för mer information om hur du kan bidra.`
+			]
+		},
+		{ type: 'rule' }
+	],
+	signoff: swedenSignoff('Hör gärna av dig om du har frågor eller idéer.')
+})
 
-const swedenVolunteer: ChapterContent = (firstName, chapter) => {
-	const whatsapp = chapterLink(chapter, 'WhatsApp')
-	const calendar = chapterLink(chapter, 'Events')
-	return {
-		subject: 'PauseAI Sverige - Volunteer/Lead inom PauseAI',
-		greeting: [
-			{ type: 'heading', level: 1, text: `Hej ${firstName}!` },
-			{
-				type: 'paragraph',
-				text: 'Kul att du har valt att engagera dig – tack för det! Här kommer konkreta sätt att göra skillnad och information om fortsatt kontakt. Mer information finns att hitta på [pauseai.se](https://pauseai.se).'
-			}
-		],
-		body: [
-			{ type: 'heading', text: '🌟 Engagera dig' },
-			{ type: 'paragraph', text: 'Fortsatt engagemang:' },
-			{
-				type: 'list',
-				items: [
-					SWEDEN_INTRO_DOC_ITEM,
-					...(calendar
-						? [
-								`**Delta på intromöte** – Intromöten och andra aktiviteter hittar du i vår [kalender](${calendar}).`
-							]
-						: []),
-					...(whatsapp
-						? [
-								`**Gå med i WhatsApp** - Vår primära kommunikation sker via WhatsApp - Gå gärna med i vårt community där via [denna länk](${whatsapp}).`
-							]
-						: [])
-				]
-			},
-			{ type: 'rule' },
-			{ type: 'heading', text: '📌 Enkelt engagemang: att göra under tiden' },
-			...swedenAction('1️⃣ Skicka mejl till politiker', [
-				`Använd vår [mejlbyggare](${SWEDEN_EMAIL_BUILDER}) eller om du vill skriva mejlet själv finns kontaktuppgifter, mall och tips [här](${SWEDEN_CONTACTS_DOC}).`,
-				SWEDEN_EMAIL_TIP
-			]),
-			...swedenAction('2️⃣ Ring politiker', [
-				'Att ringa är ofta **väldigt effektivt**, särskilt för att följa upp efter att du skickat ett mejl.',
-				SWEDEN_CALL_CONTACTS
-			]),
-			...swedenAction('3️⃣ Tipsa nyhetsredaktioner', SWEDEN_PRESS_ITEMS),
-			{ type: 'rule' }
-		],
-		signoff: swedenSignoff(
-			`Hör gärna av dig om du har frågor och följ oss gärna på ${SWEDEN_SOCIALS}.`
-		)
-	}
-}
+const swedenVolunteer: ChapterContent = (firstName, chapter) => ({
+	subject: 'PauseAI Sverige - Volontär/lead inom PauseAI',
+	greeting: [
+		{ type: 'heading', level: 1, text: `Hej ${firstName}!` },
+		{
+			type: 'paragraph',
+			text: 'Kul att du har valt att engagera dig – tack för det! Här kommer konkreta sätt att göra skillnad och information om fortsatt kontakt. Mer information finns att hitta på [pauseai.se](https://pauseai.se).'
+		}
+	],
+	body: [
+		{ type: 'heading', text: '🌟 Engagera dig' },
+		{ type: 'paragraph', text: 'Fortsatt engagemang:' },
+		{
+			type: 'list',
+			items: [SWEDEN_INTRO_DOC_ITEM, swedenMeetingItem(chapter), ...swedenWhatsappItem(chapter)]
+		},
+		{ type: 'rule' },
+		{ type: 'heading', text: '📌 Enkelt engagemang: att göra under tiden' },
+		...swedenAction('1️⃣ Skicka mejl till politiker', [
+			`Använd vår [mejlbyggare](${SWEDEN_EMAIL_BUILDER}) eller om du vill skriva mejlet själv finns kontaktuppgifter, mall och tips [här](${SWEDEN_CONTACTS_DOC}).`,
+			SWEDEN_EMAIL_TIP
+		]),
+		...swedenAction('2️⃣ Ring politiker', [
+			'Att ringa är ofta **väldigt effektivt**, särskilt för att följa upp efter att du skickat ett mejl.',
+			SWEDEN_CALL_CONTACTS
+		]),
+		...swedenAction('3️⃣ Tipsa nyhetsredaktioner', SWEDEN_PRESS_ITEMS),
+		{ type: 'rule' }
+	],
+	signoff: swedenSignoff(
+		`Hör gärna av dig om du har frågor och följ oss gärna på ${SWEDEN_SOCIALS}.`
+	)
+})
 
 /** The chapter's translation of the shared no-intent email, newsletter line included. */
 const swedenNoIntent: ChapterContent = (firstName, chapter) => {

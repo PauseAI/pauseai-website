@@ -219,11 +219,12 @@ describe('renderOnboardingEmail', () => {
 	it('sends PauseAI Sverige their own email, in Swedish, one per intent', async () => {
 		for (const intent of ['Volunteer', 'Lead']) {
 			const volunteer = await render('Sweden', intent)
-			expect(volunteer.subject).toBe('PauseAI Sverige - Volunteer/Lead inom PauseAI')
+			expect(volunteer.subject).toBe('PauseAI Sverige - Volontär/lead inom PauseAI')
 			expect(volunteer.text).toContain('Bekräfta din e-postadress')
 			expect(volunteer.text).toContain('att göra under tiden')
-			// The fixture row has no calendar, so the meeting item goes.
-			expect(volunteer.text).not.toContain('intromöte')
+			// The fixture row has no calendar, so the meeting item keeps only its first sentence.
+			expect(volunteer.text).toContain('Delta på ett intromöte')
+			expect(volunteer.text).not.toContain('Kalendern')
 			expect(volunteer.text).toContain('Vänliga hälsningar')
 		}
 
@@ -302,7 +303,7 @@ describe('renderOnboardingEmail', () => {
 			['Germany', 'None', 'Willkommen bei PauseAI Deutschland, Alex!'],
 			['Germany', 'Volunteer', 'Willkommen bei PauseAI Deutschland, Alex!'],
 			['Sweden', 'None', 'Tack för att du har registrerat dig hos PauseAI'],
-			['Sweden', 'Volunteer', 'PauseAI Sverige - Volunteer/Lead inom PauseAI']
+			['Sweden', 'Volunteer', 'PauseAI Sverige - Volontär/lead inom PauseAI']
 		]
 
 		it("gives the shared copy from PauseAI Global instead of a chapter's own email", async () => {
