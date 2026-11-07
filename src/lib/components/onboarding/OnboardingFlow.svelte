@@ -88,7 +88,6 @@
 		initialKeepInformed = false,
 		initialChapterAnswer = null,
 		initialSource = '',
-		chapterSiteCountry = null,
 		onSignup,
 		onRecordGone
 	}: {
@@ -115,12 +114,6 @@
 		// continuation follows in its copy and never asks again. Null where it was
 		// not asked (the United States).
 		initialChapterAnswer?: ChapterAnswer | null
-		// The chapter whose own site this embed was detected on (matched by the
-		// iframe's referrer host, see /embed/onboarding-form/+page.svelte). Only
-		// softens the chapter question's wording when it equals basics.country —
-		// visiting PauseAI Germany's site and then picking France still asks the
-		// regular question.
-		chapterSiteCountry?: string | null
 		// Called once per new signup, when the server confirms it created a record.
 		// Not called for updates to an existing record (the volunteer step, or a
 		// /subscribe continuation) nor for silently dropped spam submissions.
@@ -404,18 +397,13 @@
 	)
 	const chapterQ = $derived(
 		askChapter && chapterCountries !== null
-			? chapterQuestion(
-					msgs,
-					chapterSiteCountry === basics.country ? 'chapter-site' : 'join',
-					basics.country,
-					chapter
-				)
+			? chapterQuestion(msgs, 'chapter-site', basics.country, chapter)
 			: null
 	)
 	// True while the chapter question doubles as the Privacy Policy consent too
 	// (the 'chapter-site' wording in chapterShare.ts): answering it on step 1
 	// covers both, so step 2 neither asks again nor shows the checkbox.
-	const isChapterSiteQuestion = $derived(!!chapterQ && chapterSiteCountry === basics.country)
+	const isChapterSiteQuestion = $derived(!!chapterQ)
 	const answerForCountry = $derived(
 		chapterChoice?.country === basics.country ? chapterChoice.answer : null
 	)
@@ -758,6 +746,8 @@
 			<span class="checkbox-box" aria-hidden="true"></span>
 			<span>{chapterQ.yes}</span>
 		</label>
+		<!-- eslint-disable-next-line svelte/no-at-html-tags -->
+		<p class="helper">{@html msgs.onboarding_chapter_site_alternative}</p>
 	{/if}
 {/snippet}
 

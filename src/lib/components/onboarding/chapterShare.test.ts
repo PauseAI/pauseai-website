@@ -42,8 +42,12 @@ describe('chapterQuestion', () => {
 					expect(withChapter.heading, locale).toContain('PauseAI Deutschland')
 				}
 				const without = chapterQuestion(msgs, form, 'Portugal', null)!
-				expect(without.heading, locale).toContain('Portugal')
-				expect(without.body, locale).toContain('Portugal')
+				if (form === 'chapter-site') {
+					expect(without.yes, locale).toContain('Portugal')
+				} else {
+					expect(without.heading, locale).toContain('Portugal')
+					expect(without.body, locale).toContain('Portugal')
+				}
 			}
 		}
 		expect(onboardingMessages.de.onboarding_chapter_no).toBe('Nein, nur PauseAI Global')
