@@ -92,17 +92,28 @@ export async function fetchAllPages<T extends Record<string, unknown>>(
 	}
 }
 
+/** An error carrying only the code and status of an Airtable error, not its message. */
+function redactedAirtableError(error: unknown): Error {
+	const { error: code, statusCode } = (error ?? {}) as { error?: unknown; statusCode?: unknown }
+	const safeCode = typeof code === 'string' && /^[A-Z_]+$/.test(code) ? code : 'UNKNOWN'
+	const safeStatus = typeof statusCode === 'number' ? statusCode : 'unknown'
+	return new Error(`Airtable write failed: ${safeCode} (status ${safeStatus})`)
+}
+
 /**
  * Creates a record in Airtable
  * @param baseId The Airtable Base ID
  * @param tableId The Airtable Table ID
  * @param fields The fields to create the record with
+ * @param options.redactErrors Log and report only Airtable's error code and status. For
+ * rows holding personal data, since Airtable's error messages can quote submitted values.
  * @returns The created record, or undefined if the write failed
  */
 export async function createRecord(
 	baseId: string,
 	tableId: string,
-	fields: FieldSet
+	fields: FieldSet,
+	{ redactErrors = false }: { redactErrors?: boolean } = {}
 ): Promise<WrittenRecord | undefined> {
 	const apiKey = getWriteApiKey()
 	if (!apiKey) {
@@ -118,7 +129,8 @@ export async function createRecord(
 		const records = await table.create([{ fields }], { typecast: true })
 		console.log(`Successfully created record in Airtable table ${tableId}`)
 		return records[0] && toWrittenRecord(records[0])
-	} catch (error) {
+	} catch (caught) {
+		const error = redactErrors ? redactedAirtableError(caught) : caught
 		console.error(`Error creating Airtable record in ${tableId}:`, error)
 		// Report to Sentry even though we swallow the error: the caller surfaces
 		// a generic "could not save" message via `fail()`, which never reaches

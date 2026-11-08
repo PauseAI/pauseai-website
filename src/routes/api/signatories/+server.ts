@@ -1,6 +1,7 @@
 import type { AirtableSignatory, Signatory } from '$lib/types.js'
 import { json } from '@sveltejs/kit'
 import { fetchAllPages, type AirtableRecord } from '$lib/airtable.js'
+import { MEMBERS_BASE_ID, STATEMENT_TABLE_ID } from '$lib/server/members'
 import { generateCacheControlRecord } from '$lib/utils'
 import type { RequestHandler } from './$types'
 
@@ -40,7 +41,7 @@ function recordToSignatory(record: AirtableRecord<AirtableSignatory>): Signatory
 }
 
 export const GET: RequestHandler = async ({ fetch, setHeaders }) => {
-	const url = `https://api.airtable.com/v0/appWPTGqZmUcs3NWu/tbl2emfOWNWoVz1kW`
+	const url = `https://api.airtable.com/v0/${MEMBERS_BASE_ID}/${STATEMENT_TABLE_ID}` as const
 	setHeaders(generateCacheControlRecord({ public: true, maxAge: 60 * 60 }))
 
 	try {

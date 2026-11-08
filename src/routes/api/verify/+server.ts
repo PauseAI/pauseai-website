@@ -8,7 +8,7 @@ import {
 	normaliseEmail,
 	verifyVerificationToken
 } from '$lib/server/emailVerification'
-import { MEMBERS_BASE_ID, MEMBERS_TABLE_ID } from '$lib/server/members'
+import { MEMBERS_BASE_ID, MEMBERS_TABLE_ID, STATEMENT_TABLE_ID } from '$lib/server/members'
 import { memberRowToVerify } from '$lib/server/mergedMemberRow'
 import { reportError } from '$lib/server/sentry'
 import { json } from '@sveltejs/kit'
@@ -35,7 +35,7 @@ const VERIFICATION_TABLES = new Map([
 		'statement',
 		{
 			baseId: MEMBERS_BASE_ID,
-			tableId: 'tbl2emfOWNWoVz1kW',
+			tableId: STATEMENT_TABLE_ID,
 			keyFieldName: 'airtable_id',
 			verifiedFieldName: 'email_verified',
 			isMembers: false
