@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { enhance } from '$app/forms'
-	import type { OnboardingModeApiResponse } from '$api/onboarding-mode/+server'
+	import type { OnboardingModeApiResponse } from '$api/onboarding-mode/+server.js'
 	import Combobox from '$lib/components/Combobox.svelte'
 	import { COUNTRIES } from '$lib/components/onboarding/options'
 	import Turnstile from '$lib/components/Turnstile.svelte'

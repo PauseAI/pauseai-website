@@ -90,8 +90,7 @@ describe('POST /api/statement/sign: saving', () => {
 	})
 
 	it('accepts a missing bio and does not write the field', async () => {
-		const { bio: _bio, ...withoutBio } = VALID
-		const response = await post(withoutBio)
+		const response = await post({ ...VALID, bio: undefined })
 
 		expect(response.status).toBe(202)
 		expect(createRecord.mock.calls[0][2]).not.toHaveProperty('bio')

@@ -16,8 +16,8 @@ type Result = { status?: number; data?: Record<string, unknown> } & Record<strin
 const VALID = { name: 'Ada Lovelace', email: 'ada@example.org', country: 'France' }
 
 async function submit(fields: Record<string, string>, address = '192.0.2.1'): Promise<Result> {
-	const body = new FormData()
-	for (const [name, value] of Object.entries(fields)) body.set(name, value)
+	// Urlencoded, as use:enhance posts a form with no file inputs.
+	const body = new URLSearchParams(fields)
 	const url = new URL('https://pauseai.info/statement/sign')
 	const request = new Request(url, { method: 'POST', body })
 	return (await actions.default({

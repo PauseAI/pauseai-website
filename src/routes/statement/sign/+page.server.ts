@@ -62,8 +62,10 @@ export const actions: Actions = {
 		if (!bytes) return fail(413, { message: 'That was too long to send. Please shorten it.' })
 		let data: FormData
 		try {
-			const body = new Blob([bytes as BlobPart])
-			data = await new Response(body, { headers: request.headers }).formData()
+			const contentType = request.headers.get('content-type') ?? ''
+			data = await new Response(new Blob([bytes as BlobPart]), {
+				headers: { 'content-type': contentType }
+			}).formData()
 		} catch {
 			return fail(400, { message: 'Something went wrong. Please try again.' })
 		}

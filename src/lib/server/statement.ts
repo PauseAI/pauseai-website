@@ -16,10 +16,10 @@ import { isOnboardingLive } from '$lib/server/onboarding'
 import { takeRateLimit } from '$lib/server/rateLimit'
 
 export const MAX_NAME_LENGTH = 200
-export const MAX_EMAIL_LENGTH = 254
+const MAX_EMAIL_LENGTH = 254
 export const MAX_BIO_LENGTH = 2000
 // Roomy enough for the longest valid bio with every character escaped, plus a Turnstile token.
-export const MAX_BODY_BYTES = 32 * 1024
+const MAX_BODY_BYTES = 32 * 1024
 
 // Far above one person signing, and low enough to slow a script. Both are per edge isolate
 // (see rateLimit.ts). The overall limit is a backstop for traffic from many addresses.
@@ -46,7 +46,7 @@ export type SignResult =
 
 const asText = (value: unknown) => (typeof value === 'string' ? value.trim() : '')
 
-export function validateSignature(
+function validateSignature(
 	input: SignatureInput
 ): { ok: true; signature: Signature } | { ok: false; errors: SignatureErrors } {
 	const errors: SignatureErrors = {}

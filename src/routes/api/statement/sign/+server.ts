@@ -4,8 +4,7 @@ import {
 	readLimitedBody,
 	signStatement,
 	takeSigningRateLimit,
-	type SignatureErrors,
-	type SignatureInput
+	type SignatureErrors
 } from '$lib/server/statement'
 import { json } from '@sveltejs/kit'
 import { StatusCodes } from 'http-status-codes'
@@ -102,7 +101,7 @@ export const POST: RequestHandler = async ({ request, url, getClientAddress }) =
 		return refuse(StatusCodes.BAD_REQUEST, 'invalid_json')
 	}
 
-	const result = await signStatement(body as SignatureInput)
+	const result = await signStatement(body)
 	switch (result.status) {
 		case 'accepted':
 			return respond(StatusCodes.ACCEPTED, { ok: true, status: 'pending_verification' })
