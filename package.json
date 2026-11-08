@@ -54,7 +54,7 @@
 		"eslint-config-flat-gitignore": "^2.4.0",
 		"eslint-config-prettier": "^10.1.8",
 		"eslint-formatter-gha": "^2.0.1",
-		"eslint-plugin-svelte": "^3.24.0",
+		"eslint-plugin-svelte": "^3.24.1",
 		"fontaine": "^0.8.2",
 		"globals": "^17.14.0",
 		"globby": "^16.2.4",
