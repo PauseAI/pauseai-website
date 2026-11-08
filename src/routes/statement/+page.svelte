@@ -1,8 +1,8 @@
 <script lang="ts">
 	import PostMeta from '$lib/components/PostMeta.svelte'
-	import TallyEmbed from '$lib/components/TallyEmbed.svelte'
 	import { meta } from './meta'
 	import Signatory from './signatory.svelte'
+	import StatementForm from './StatementForm.svelte'
 	import type { PageData } from './$types'
 
 	interface Props {
@@ -52,7 +52,7 @@
 	<p>We've collected {totalCount} signatures so far— help us reach our first {nextGoal}!</p>
 </div>
 
-<TallyEmbed formId="315xdg" />
+<StatementForm />
 
 <div class="signatories-header">
 	<h2>Signatories ({totalCount})</h2>
