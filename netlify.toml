@@ -32,3 +32,10 @@ remote_images = [
   "https://substackcdn.com/.*",
   "https://substack-post-media.s3.amazonaws.com/.*",
 ]
+
+# Prerendered, so its handler cannot set headers. Lets chapter sites show the shared list
+# from the browser. Only ever holds what /statement already shows publicly, never emails.
+[[headers]]
+for = "/api/signatories"
+[headers.values]
+Access-Control-Allow-Origin = "*"
