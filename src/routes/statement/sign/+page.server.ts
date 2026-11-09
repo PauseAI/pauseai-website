@@ -90,8 +90,12 @@ export const actions: Actions = {
 			case 'dry_run':
 				return { success: true }
 			case 'invalid':
+				// No field is named when the backend refused what passed the checks here.
 				return fail(status, {
-					message: 'Please check the highlighted fields.',
+					message:
+						Object.keys(result.errors).length > 0
+							? 'Please check the highlighted fields.'
+							: 'Please check what you entered and try again.',
 					fields: fieldMessages(result.errors)
 				})
 			case 'unavailable':

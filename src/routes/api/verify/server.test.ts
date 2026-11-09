@@ -18,6 +18,12 @@ const reportError = vi.fn<(error: unknown, context?: Record<string, unknown>) =>
 vi.mock('$env/static/private', () => ({ AIRTABLE_WRITE_API_KEY: 'test-key' }))
 vi.mock('$env/dynamic/private', () => ({ env }))
 vi.mock('$lib/server/sentry', () => ({ reportError }))
+const verifyStatementInCrm =
+	vi.fn<(key: string, token: string) => Promise<'ok' | 'expired' | 'invalid' | 'failed'>>()
+vi.mock('$lib/server/statementCrm', async (importOriginal) => ({
+	...(await importOriginal<typeof import('$lib/server/statementCrm')>()),
+	verifyStatementInCrm
+}))
 vi.mock('airtable', () => ({
 	default: class {
 		base() {
@@ -93,6 +99,7 @@ beforeEach(() => {
 	})
 	update.mockReset().mockResolvedValue()
 	reportError.mockReset().mockResolvedValue()
+	verifyStatementInCrm.mockReset().mockResolvedValue('ok')
 	vi.spyOn(console, 'error').mockImplementation(() => {})
 	vi.spyOn(console, 'warn').mockImplementation(() => {})
 })
@@ -337,5 +344,81 @@ describe('POST /api/verify: input', () => {
 		expect((await verify('')).status).toBe(400)
 		expect((await verify(`${verificationParameter}=abc"`)).status).toBe(400)
 		expect((await link('&table=nope')).status).toBe(400)
+	})
+})
+
+describe('POST /api/verify: statement links in CiviCRM', () => {
+	const CONFIRMED = `&table=statement&${verificationConfirmedParameter}=true`
+	const TOKEN = 'v1.1800000000.' + 'A'.repeat(43)
+	const crmLink = (extraQuery = '') =>
+		verify(`${verificationParameter}=s12345&token=${TOKEN}${CONFIRMED}${extraQuery}`)
+
+	it.each([undefined, 'airtable', 'civicrm'])(
+		'sends an s<id> key with a token to CiviCRM with STATEMENT_BACKEND=%s',
+		async (backend) => {
+			env.STATEMENT_BACKEND = backend
+			const response = await crmLink()
+
+			expect(response.status).toBe(200)
+			expect(verifyStatementInCrm).toHaveBeenCalledExactlyOnceWith('s12345', TOKEN)
+			expect(tableIds).toEqual([])
+			expect(update).not.toHaveBeenCalled()
+		}
+	)
+
+	it('sends an old Airtable key to Airtable with the Airtable backend', async () => {
+		selected = [{ id: 'recStatement', fields: {} }]
+		const response = await link(CONFIRMED)
+
+		expect(response.status).toBe(200)
+		expect(verifyStatementInCrm).not.toHaveBeenCalled()
+		expect(update).toHaveBeenCalledExactlyOnceWith('recStatement', { email_verified: true })
+	})
+
+	it('sends an s<id> key without a token to Airtable with the Airtable backend', async () => {
+		const response = await verify(`${verificationParameter}=s12345${CONFIRMED}`)
+
+		expect(response.status).toBe(404)
+		expect(verifyStatementInCrm).not.toHaveBeenCalled()
+		expect(tableIds).toEqual(['tbl2emfOWNWoVz1kW'])
+	})
+
+	it('sends an old Airtable key to CiviCRM with the CiviCRM backend, token empty', async () => {
+		env.STATEMENT_BACKEND = 'civicrm'
+		const response = await link(CONFIRMED)
+
+		expect(response.status).toBe(200)
+		expect(verifyStatementInCrm).toHaveBeenCalledExactlyOnceWith('abc123', '')
+		expect(tableIds).toEqual([])
+	})
+
+	it.each([
+		['expired', 410],
+		['invalid', 404],
+		['failed', 502]
+	] as const)('answers %s with %i', async (outcome, status) => {
+		verifyStatementInCrm.mockResolvedValue(outcome)
+		const response = await crmLink()
+
+		expect(response.status).toBe(status)
+		if (outcome === 'expired') expect(await response.json()).toEqual({ outcome: 'expired' })
+	})
+
+	it('still needs the click before calling CiviCRM', async () => {
+		env.STATEMENT_BACKEND = 'civicrm'
+		const response = await verify(`${verificationParameter}=s12345&token=${TOKEN}&table=statement`)
+
+		expect(response.status).toBe(400)
+		expect(verifyStatementInCrm).not.toHaveBeenCalled()
+	})
+
+	it('leaves member links in Airtable with the CiviCRM backend', async () => {
+		env.STATEMENT_BACKEND = 'civicrm'
+		selected = [member('recMember')]
+		const response = await link()
+
+		expect(response.status).toBe(200)
+		expect(verifyStatementInCrm).not.toHaveBeenCalled()
+		expect(update).toHaveBeenCalledExactlyOnceWith('recMember', { 'Verified email': true })
 	})
 })

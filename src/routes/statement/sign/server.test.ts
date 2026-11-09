@@ -14,6 +14,11 @@ vi.mock('$lib/airtable', () => ({
 	hasMatchingRecord
 }))
 vi.mock('$lib/server/turnstile-verify', () => ({ verifyTurnstile }))
+const signInCrm = vi.fn<(...args: unknown[]) => Promise<'ok' | 'refused' | 'failed'>>()
+vi.mock('$lib/server/statementCrm', async (importOriginal) => ({
+	...(await importOriginal<typeof import('$lib/server/statementCrm')>()),
+	signInCrm
+}))
 
 const { actions } = await import('./+page.server.js')
 const { resetRateLimits } = await import('$lib/server/rateLimit')
@@ -47,6 +52,8 @@ async function submit(
 beforeEach(() => {
 	env.STATEMENT_SIGNING_LIVE = 'true'
 	env.ONBOARDING_LIVE = undefined
+	env.STATEMENT_BACKEND = undefined
+	signInCrm.mockReset().mockResolvedValue('ok')
 	resetRateLimits()
 	createRecord.mockReset().mockResolvedValue({ id: 'recAda', createdTime: '', fields: {} })
 	hasMatchingRecord.mockReset().mockResolvedValue(false)
@@ -185,5 +192,36 @@ describe('statement form action', () => {
 
 		expect(result.status).toBe(413)
 		expect(createRecord).not.toHaveBeenCalled()
+	})
+})
+
+describe('/statement/sign action: STATEMENT_BACKEND=civicrm', () => {
+	beforeEach(() => {
+		env.STATEMENT_BACKEND = 'civicrm'
+	})
+
+	it('thanks the signer once CiviCRM has the signature, in English', async () => {
+		expect(await submit(VALID)).toEqual({ success: true })
+		expect(signInCrm.mock.calls[0][0]).toMatchObject({ country: 'France', language: 'en' })
+		expect(createRecord).not.toHaveBeenCalled()
+	})
+
+	it('shows an error, never the thanks, when CiviCRM could not save it', async () => {
+		signInCrm.mockResolvedValue('failed')
+		const result = await submit(VALID)
+
+		expect(result.status).toBe(502)
+		expect(result.data?.message).toBe('Sorry, we could not save your signature. Please try again.')
+	})
+
+	it('asks for a check without highlighting a field when CiviCRM refuses', async () => {
+		signInCrm.mockResolvedValue('refused')
+		const result = await submit(VALID)
+
+		expect(result.status).toBe(400)
+		expect(result.data).toEqual({
+			message: 'Please check what you entered and try again.',
+			fields: {}
+		})
 	})
 })

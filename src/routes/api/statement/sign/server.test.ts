@@ -16,6 +16,11 @@ vi.mock('$lib/airtable', async (importOriginal) => ({
 	hasMatchingRecord
 }))
 vi.mock('$lib/server/turnstile-verify', () => ({ verifyTurnstile }))
+const signInCrm = vi.fn<(...args: unknown[]) => Promise<'ok' | 'refused' | 'failed'>>()
+vi.mock('$lib/server/statementCrm', async (importOriginal) => ({
+	...(await importOriginal<typeof import('$lib/server/statementCrm')>()),
+	signInCrm
+}))
 
 const { GET, OPTIONS, POST } = await import('./+server.js')
 const { resetRateLimits } = await import('$lib/server/rateLimit')
@@ -67,6 +72,8 @@ const logged = () =>
 beforeEach(() => {
 	env.STATEMENT_SIGNING_LIVE = 'true'
 	env.ONBOARDING_LIVE = undefined
+	env.STATEMENT_BACKEND = undefined
+	signInCrm.mockReset().mockResolvedValue('ok')
 	appEnvironment.dev = false
 	resetRateLimits()
 	createRecord.mockReset().mockResolvedValue({ id: 'recAda', createdTime: '', fields: {} })
@@ -676,5 +683,74 @@ describe('/api/statement/sign: CORS', () => {
 		expect(response.status).toBe(202)
 		expect(verifyTurnstile).toHaveBeenCalledOnce()
 		expect(response.headers.get('access-control-allow-origin')).toBeNull()
+	})
+})
+
+describe('POST /api/statement/sign: STATEMENT_BACKEND=civicrm', () => {
+	beforeEach(() => {
+		env.STATEMENT_BACKEND = 'civicrm'
+	})
+
+	it('signs in CiviCRM with the email language, and touches no Airtable table', async () => {
+		const response = await post({ ...VALID, language: 'es' })
+
+		expect(response.status).toBe(202)
+		expect(await response.json()).toEqual({ ok: true, status: 'pending_verification' })
+		expect(signInCrm).toHaveBeenCalledExactlyOnceWith({
+			name: 'Ada Lovelace',
+			email: SECRET_EMAIL,
+			country: 'Spain',
+			bio: 'I care about this.',
+			private: false,
+			language: 'es'
+		})
+		expect(hasMatchingRecord).not.toHaveBeenCalled()
+		expect(createRecord).not.toHaveBeenCalled()
+	})
+
+	it('defaults the email language to English', async () => {
+		await post(VALID)
+
+		expect(signInCrm.mock.calls[0][0]).toMatchObject({ language: 'en' })
+	})
+
+	it('answers a failure as a failed save, never as accepted', async () => {
+		signInCrm.mockResolvedValue('failed')
+		const response = await post(VALID)
+
+		expect(response.status).toBe(502)
+		expect(await response.json()).toEqual({ ok: false, error: 'save_failed' })
+	})
+
+	it('answers a refusal as invalid, naming no field', async () => {
+		signInCrm.mockResolvedValue('refused')
+		const response = await post(VALID)
+
+		expect(response.status).toBe(400)
+		expect(await response.json()).toEqual({ ok: false, error: 'validation_failed', fields: {} })
+	})
+
+	it('keeps validation, Turnstile and the honeypot in front of CiviCRM', async () => {
+		expect((await post({ ...VALID, name: '' })).status).toBe(400)
+		verifyTurnstile.mockResolvedValueOnce({ ok: false, message: 'no' })
+		expect((await post(VALID)).status).toBe(403)
+		expect((await post({ ...VALID, honeypot: 'bot' })).status).toBe(202)
+		expect(signInCrm).not.toHaveBeenCalled()
+	})
+
+	it('counts saves against the rate limit, but not failures', async () => {
+		signInCrm.mockResolvedValue('failed')
+		for (let i = 0; i < 31; i++) await post(VALID)
+		signInCrm.mockResolvedValue('ok')
+		for (let i = 0; i < 30; i++) expect((await post(VALID)).status).toBe(202)
+		expect((await post(VALID)).status).toBe(429)
+	})
+
+	it('still writes nothing in a dry run', async () => {
+		env.STATEMENT_SIGNING_LIVE = undefined
+		const response = await post(VALID, { site: 'http://localhost:37572' })
+
+		expect(await response.json()).toMatchObject({ dry_run: true })
+		expect(signInCrm).not.toHaveBeenCalled()
 	})
 })
