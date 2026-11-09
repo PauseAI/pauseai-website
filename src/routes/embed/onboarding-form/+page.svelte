@@ -1,10 +1,9 @@
 <script lang="ts">
-	import { onMount, tick } from 'svelte'
+	import { onMount } from 'svelte'
 	import { dev } from '$app/environment'
 	import { page } from '$app/state'
 	import OnboardingFlow from '$lib/components/onboarding/OnboardingFlow.svelte'
 	import PostMeta from '$lib/components/PostMeta.svelte'
-	import { reportEmbedHeight } from '$lib/embedHeight'
 	import {
 		isOnboardingLocale,
 		setOnboardingLocale,
@@ -47,14 +46,6 @@
 			.filter(Boolean)
 	)
 
-	// When iframed, report the rendered height to the host page so it can
-	// resize the iframe ({ height: number } via postMessage). '*' target is
-	// fine — the height is not sensitive and the host validates event.origin.
-	// reportEmbedHeight covers step changes, validation errors, window resizes and
-	// content that grows while the embed is still off-screen.
-	let embedded = $state(false)
-	let wrap: HTMLDivElement | undefined = $state()
-
 	// Set when the referrer host matches a chapter's own website, so the
 	// chapter question can drop the "separate organisation" disclosure that
 	// makes sense on the global site but reads as a double confirmation when
@@ -76,8 +67,7 @@
 	}
 
 	onMount(() => {
-		embedded = window.self !== window.top
-		if (!embedded) return
+		if (window.self === window.top) return
 
 		// The host page's URL, for source attribution when no ?source= was given.
 		// A cross-origin parent can't be read via script, but the browser still
@@ -104,22 +94,12 @@
 				// Unparseable referrer — leave attribution to ?source= or nothing.
 			}
 		}
-
-		// Measure the form's own wrapper, not the document: html/body are height:100%
-		// (global styles), so they always match the iframe and never report growth.
-		let stop: (() => void) | undefined
-		// `embedded` drops the wrapper's min-height; measure after that applies.
-		void tick().then(() => {
-			if (!wrap) return
-			stop = reportEmbedHeight(wrap, (height) => window.parent.postMessage({ height }, '*'))
-		})
-		return () => stop?.()
 	})
 
 	// Tell the host page a signup completed, so it can fire its own conversion
 	// tracking (a cross-origin host can't see inside the iframe). No form data in
 	// the payload; '*' is fine for the same reason as the height message. Keyed
-	// by `event`, so it never collides with the { height } messages.
+	// by `event`, so it never collides with the height messages (see the embed layout).
 	function reportSignup() {
 		if (window.parent !== window) {
 			window.parent.postMessage({ event: 'onboarding_signup_complete', version: 1 }, '*')
@@ -141,32 +121,19 @@
 
 <PostMeta {title} {description} />
 
-<div
-	bind:this={wrap}
-	class="embed-wrap"
-	class:embedded
-	style:background-color={background || undefined}
->
-	<OnboardingFlow
-		{initialCountry}
-		{initialCity}
-		{initialLanguages}
-		{initialSource}
-		{chapterSiteCountry}
-		onSignup={reportSignup}
-	/>
-</div>
+<svelte:head>
+	{#if background}
+		<!-- The whole document, so the layout's padding around the form takes the colour too. -->
+		<!-- eslint-disable-next-line svelte/no-at-html-tags -- `background` is a hex value or a bare colour name -->
+		{@html `<${'style'}>:root,:root body{background-color:${background}}</style>`}
+	{/if}
+</svelte:head>
 
-<style>
-	.embed-wrap {
-		padding: 1rem;
-		min-height: 100dvh;
-		box-sizing: border-box;
-	}
-
-	/* The host sizes the iframe to our reported height — a viewport-based
-	   min-height would ratchet it upward and never let it shrink. */
-	.embed-wrap.embedded {
-		min-height: 0;
-	}
-</style>
+<OnboardingFlow
+	{initialCountry}
+	{initialCity}
+	{initialLanguages}
+	{initialSource}
+	{chapterSiteCountry}
+	onSignup={reportSignup}
+/>

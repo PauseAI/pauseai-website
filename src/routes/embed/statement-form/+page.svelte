@@ -9,14 +9,4 @@
      CSRF check and Turnstile's hostname check pass whichever site frames it. -->
 <PostMeta title={meta.title} description={meta.description} />
 
-<div class="embed-wrap">
-	<StatementForm embedded />
-</div>
-
-<style>
-	/* The padding keeps the card's margins and shadow inside what the layout measures, as
-	   margins would otherwise collapse through it and leave the iframe short. */
-	.embed-wrap {
-		padding: 1rem;
-	}
-</style>
+<StatementForm embedded />
