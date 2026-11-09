@@ -1,14 +1,19 @@
 export const prerender = false
 
 import { AIRTABLE_WRITE_API_KEY } from '$env/static/private'
-import { verificationParameter } from '$lib/config.js'
+import { airtableFormulaString } from '$lib/airtable'
+import {
+	verificationConfirmedParameter,
+	verificationNeedsClick,
+	verificationParameter
+} from '$lib/config.js'
 import {
 	acceptsUnsignedLink,
 	getVerificationSecret,
 	normaliseEmail,
 	verifyVerificationToken
 } from '$lib/server/emailVerification'
-import { MEMBERS_BASE_ID, MEMBERS_TABLE_ID } from '$lib/server/members'
+import { MEMBERS_BASE_ID, MEMBERS_TABLE_ID, STATEMENT_TABLE_ID } from '$lib/server/members'
 import { memberRowToVerify } from '$lib/server/mergedMemberRow'
 import { reportError } from '$lib/server/sentry'
 import { json } from '@sveltejs/kit'
@@ -35,7 +40,7 @@ const VERIFICATION_TABLES = new Map([
 		'statement',
 		{
 			baseId: MEMBERS_BASE_ID,
-			tableId: 'tbl2emfOWNWoVz1kW',
+			tableId: STATEMENT_TABLE_ID,
 			keyFieldName: 'airtable_id',
 			verifiedFieldName: 'email_verified',
 			isMembers: false
@@ -72,13 +77,21 @@ export const POST: RequestHandler = async ({ request }) => {
 		return new Response(`Invalid table name "${tableName}"`, { status: StatusCodes.BAD_REQUEST })
 	}
 
+	// Refusing here means only the click on /verify can take effect, not a stale copy of the
+	// page that posts on load.
+	if (verificationNeedsClick(params) && params.get(verificationConfirmedParameter) !== 'true') {
+		return new Response(`Parameter "${verificationConfirmedParameter}" is required`, {
+			status: StatusCodes.BAD_REQUEST
+		})
+	}
+
 	const table = new Airtable({ apiKey: AIRTABLE_WRITE_API_KEY })
 		.base(tableConfig.baseId)
 		.table(tableConfig.tableId)
 
 	const records = await table
 		.select({
-			filterByFormula: `{${tableConfig.keyFieldName}} = "${key}"`
+			filterByFormula: `{${tableConfig.keyFieldName}} = ${airtableFormulaString(key)}`
 		})
 		.firstPage()
 	if (!records.length) return new Response('Record not found', { status: StatusCodes.NOT_FOUND })

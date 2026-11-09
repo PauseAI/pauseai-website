@@ -1,8 +1,22 @@
 import { dev } from '$app/environment'
 import { env } from '$env/dynamic/private'
+import { reportError } from '$lib/server/sentry'
 import { TURNSTILE_FIELD } from '$lib/turnstile'
 
 const TURNSTILE_VERIFY_URL = 'https://challenges.cloudflare.com/turnstile/v0/siteverify'
+
+// Cloudflare's codes for a fault on the server side, not with the person's token. Telling
+// them to retry would loop forever on our wrong secret, with nobody alerted.
+const MISCONFIGURED_CODES = ['missing-input-secret', 'invalid-input-secret']
+const CLOUDFLARE_FAULT_CODES = ['internal-error']
+const UNAVAILABLE_MESSAGE =
+	'Spam protection is unavailable. Please email contact@pauseai.info instead.'
+const RETRY_LATER_MESSAGE = 'Could not complete the anti-spam check. Please try again in a moment.'
+
+const errorCodes = (result: TurnstileVerification): string[] =>
+	Array.isArray(result['error-codes'])
+		? result['error-codes'].filter((code): code is string => typeof code === 'string')
+		: []
 
 /**
  * Cloudflare's dummy test secrets (1x…/2x…/3x… followed by zeros), which pass or fail
@@ -28,10 +42,12 @@ function getFormString(formData: FormData, field: string): string | undefined {
  * matters — the honeypot only catches bots that render the page, whereas most
  * spam POSTs directly to the form action.
  */
-async function verifyTurnstile(
+export async function verifyTurnstile(
 	token: string | undefined,
-	expectedHostname: string
-): Promise<{ ok: true } | { ok: false; message: string }> {
+	expectedHostname: string | readonly string[]
+): Promise<{ ok: true } | { ok: false; message: string; unavailable?: true }> {
+	const expectedHostnames =
+		typeof expectedHostname === 'string' ? [expectedHostname] : expectedHostname
 	const secret = env.TURNSTILE_SECRET_KEY
 
 	if (!secret) {
@@ -45,10 +61,8 @@ async function verifyTurnstile(
 		}
 		// Fail closed: a misconfigured deploy must not silently reopen the form to bots.
 		console.error('TURNSTILE_SECRET_KEY is not configured')
-		return {
-			ok: false,
-			message: 'Spam protection is unavailable. Please email contact@pauseai.info instead.'
-		}
+		await reportError(new Error('TURNSTILE_SECRET_KEY is not configured'))
+		return { ok: false, unavailable: true, message: UNAVAILABLE_MESSAGE }
 	}
 
 	// Fail closed on a *wrong* secret as well as a missing one. A test secret accepts
@@ -56,8 +70,10 @@ async function verifyTurnstile(
 	// while every health check still looked green.
 	if (!dev && TURNSTILE_TEST_SECRET.test(secret)) {
 		console.error('TURNSTILE_SECRET_KEY is a Cloudflare test key — refusing it outside dev')
+		await reportError(new Error('TURNSTILE_SECRET_KEY is a Cloudflare test key'))
 		return {
 			ok: false,
+			unavailable: true,
 			message: 'Spam protection is misconfigured. Please email contact@pauseai.info instead.'
 		}
 	}
@@ -83,9 +99,9 @@ async function verifyTurnstile(
 			// here. Only reject when Turnstile actually reports a different hostname — an
 			// absent or unexpected field must never lock out legitimate senders.
 			const hostname = typeof result.hostname === 'string' ? result.hostname : undefined
-			if (!dev && hostname && hostname !== expectedHostname) {
+			if (!dev && hostname && !expectedHostnames.includes(hostname)) {
 				console.warn(
-					`Turnstile token was issued for ${hostname}, but submitted to ${expectedHostname}`
+					`Turnstile token was issued for ${hostname}, but submitted to ${expectedHostnames.join(', ')}`
 				)
 				return {
 					ok: false,
@@ -93,6 +109,18 @@ async function verifyTurnstile(
 				}
 			}
 			return { ok: true }
+		}
+
+		const codes = isTurnstileVerification(result) ? errorCodes(result) : []
+		const misconfigured = codes.some((code) => MISCONFIGURED_CODES.includes(code))
+		if (misconfigured || codes.some((code) => CLOUDFLARE_FAULT_CODES.includes(code))) {
+			console.error('Turnstile could not check a token:', codes)
+			await reportError(new Error(`Turnstile could not check a token: ${codes.join(', ')}`))
+			return {
+				ok: false,
+				unavailable: true,
+				message: misconfigured ? UNAVAILABLE_MESSAGE : RETRY_LATER_MESSAGE
+			}
 		}
 
 		console.warn(
@@ -105,10 +133,8 @@ async function verifyTurnstile(
 		}
 	} catch (error) {
 		console.error('Turnstile verification error:', error)
-		return {
-			ok: false,
-			message: 'Could not complete the anti-spam check. Please try again in a moment.'
-		}
+		await reportError(error, { operation: 'verifyTurnstile' })
+		return { ok: false, unavailable: true, message: RETRY_LATER_MESSAGE }
 	}
 }
 

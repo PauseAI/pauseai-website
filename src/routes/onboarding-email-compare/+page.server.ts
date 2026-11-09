@@ -12,6 +12,7 @@ import {
 	renderLegacyTemplate,
 	type LegacyTemplateKey
 } from '$lib/server/onboardingEmail/legacyTemplates.js'
+import { isTestHostname } from '$lib/server/testHost'
 import { error } from '@sveltejs/kit'
 import type { PageServerLoad } from './$types'
 
@@ -22,9 +23,6 @@ import type { PageServerLoad } from './$types'
 // new copy is visible against a fixed old baseline. Same access rules: dev + Netlify
 // deploy previews only, 404 on the production domain. (Chapter/template data is
 // public, not PII.)
-function isAllowedHost(hostname: string): boolean {
-	return hostname === 'localhost' || hostname === '127.0.0.1' || hostname.endsWith('.netlify.app')
-}
 
 const DEFAULT_TEMPLATE_KEY: LegacyTemplateKey = 'DEFAULT'
 const PREVIEW_RECORD_ID = 'previewRecordId123'
@@ -37,7 +35,7 @@ function withLocalAssets(html: string, origin: string): string {
 }
 
 export const load: PageServerLoad = async ({ url }) => {
-	if (!dev && !isAllowedHost(url.hostname)) error(404, 'Not found')
+	if (!dev && !isTestHostname(url.hostname)) error(404, 'Not found')
 
 	const params = url.searchParams
 	const firstName = params.get('firstName') || 'Alex'

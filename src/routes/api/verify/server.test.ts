@@ -1,4 +1,8 @@
-import { verificationParameter } from '$lib/config.js'
+import {
+	verificationConfirmedParameter,
+	verificationNeedsClick,
+	verificationParameter
+} from '$lib/config.js'
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 
 type Row = { id: string; fields: Record<string, unknown>; _rawJson?: { createdTime: string } }
@@ -270,15 +274,61 @@ describe('POST /api/verify: merged rows', () => {
 })
 
 describe('POST /api/verify: statement table', () => {
-	it('verifies by id alone and never follows a link', async () => {
+	const CONFIRMED = `&table=statement&${verificationConfirmedParameter}=true`
+
+	it('verifies a confirmed link by id alone and never follows a link', async () => {
 		selected = [{ id: 'recStatement', fields: { 'Merged into': ['recSurvivor'] } }]
 		find.mockResolvedValue(survivor({ 'Verified email': true }))
-		const response = await link('&table=statement')
+		const response = await link(CONFIRMED)
 		expect(response.status).toBe(200)
 		expect(tableIds).toEqual(['tbl2emfOWNWoVz1kW'])
 		expect(lastFormula).toBe('{airtable_id} = "abc123"')
 		expect(find).not.toHaveBeenCalled()
 		expect(update).toHaveBeenCalledExactlyOnceWith('recStatement', { email_verified: true })
+	})
+
+	it.each([
+		['no click', '&table=statement'],
+		['anything but a click', `&table=statement&${verificationConfirmedParameter}=1`]
+	])('publishes nothing on %s, without touching the table', async (_label, query) => {
+		selected = [{ id: 'recStatement', fields: {} }]
+		const response = await link(query)
+
+		expect(response.status).toBe(400)
+		expect(tableIds).toEqual([])
+		expect(update).not.toHaveBeenCalled()
+	})
+
+	it('still accepts a link already sent, with no token or expiry, however old', async () => {
+		selected = [{ id: 'recStatement', fields: {}, _rawJson: { createdTime: OLD } }]
+		const response = await link(CONFIRMED)
+
+		expect(response.status).toBe(200)
+		expect(update).toHaveBeenCalledExactlyOnceWith('recStatement', { email_verified: true })
+	})
+})
+
+describe('verificationNeedsClick', () => {
+	it.each([
+		['table=statement&verificationKey=abc', true],
+		['verificationKey=abc&table=statement', true],
+		['table=join&verificationKey=abc', false],
+		['table=join&verificationKey=abc&token=x', false],
+		['verificationKey=abc', false],
+		['', false]
+	])('for %j is %s', (query, expected) => {
+		expect(verificationNeedsClick(query)).toBe(expected)
+	})
+})
+
+describe('POST /api/verify: member links need no click', () => {
+	it('verifies an unsigned member link with no confirmation', async () => {
+		selected = [member('recMember')]
+		find.mockResolvedValue(member('recMember'))
+		const response = await link()
+
+		expect(response.status).toBe(200)
+		expect(update).toHaveBeenCalledExactlyOnceWith('recMember', { 'Verified email': true })
 	})
 })
 

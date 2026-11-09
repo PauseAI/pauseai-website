@@ -88,6 +88,7 @@ export type Signatory = {
 
 export type AirtableSignatory = {
 	name: string
+	email?: string
 	private: boolean
 	bio?: string
 	country: string

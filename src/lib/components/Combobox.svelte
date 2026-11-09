@@ -1,6 +1,10 @@
 <script lang="ts">
-	/** `aliases` are extra strings the typeahead matches (e.g. an abbreviation) but never shows. */
-	type Option = { label: string; value: string; aliases?: string[] }
+	import {
+		exactMatch,
+		highlightAfterTyping,
+		visibleOptions,
+		type ComboboxOption as Option
+	} from './comboboxOptions'
 
 	let {
 		id,
@@ -9,6 +13,8 @@
 		multiple = false,
 		required = false,
 		placeholder = 'Select an option',
+		invalid = false,
+		describedBy = undefined,
 		value = $bindable()
 	}: {
 		id: string
@@ -18,6 +24,10 @@
 		multiple?: boolean
 		required?: boolean
 		placeholder?: string
+		/** Marks the field as failing validation. */
+		invalid?: boolean
+		/** The id of an element describing the field, such as its error message. */
+		describedBy?: string
 		/** Bind a string for single select, a string[] for multi select. Holds option values. */
 		value?: string | string[]
 	} = $props()
@@ -58,35 +68,15 @@
 		inputEl?.setCustomValidity(message)
 	})
 
-	const flat: Option[] = $derived.by(() => {
-		const q = query.trim().toLowerCase()
-		// Empty query, or the query is just the current selection (user
-		// reopened the list): show the full list.
-		if (!q || (!multiple && query === labelFor(single))) return items
-		const aliased = items.filter((i) => i.aliases?.some((a) => a.toLowerCase() === q))
-		const rest = items.filter((i) => !aliased.includes(i))
-		const starts = rest.filter((i) => i.label.toLowerCase().startsWith(q))
-		const contains = rest.filter(
-			(i) => !i.label.toLowerCase().startsWith(q) && i.label.toLowerCase().includes(q)
-		)
-		return [...aliased, ...starts, ...contains]
-	})
+	const flat: Option[] = $derived(
+		visibleOptions(items, query, multiple ? undefined : labelFor(single))
+	)
 
 	$effect(() => {
 		if (open) {
 			document.getElementById(`${id}-opt-${highlighted}`)?.scrollIntoView({ block: 'nearest' })
 		}
 	})
-
-	function exactMatch(text: string) {
-		const t = text.trim().toLowerCase()
-		return items.find(
-			(i) =>
-				i.label.toLowerCase() === t ||
-				i.value.toLowerCase() === t ||
-				i.aliases?.some((a) => a.toLowerCase() === t)
-		)
-	}
 
 	function openList() {
 		open = true
@@ -118,7 +108,9 @@
 		highlighted = 0
 		if (!multiple) {
 			// Typing invalidates the previous selection until it matches again.
-			value = exactMatch(query)?.value ?? ''
+			const typed = exactMatch(items, query)?.value ?? ''
+			value = typed
+			highlighted = highlightAfterTyping(flat, typed)
 		}
 	}
 
@@ -128,7 +120,7 @@
 			query = ''
 			return
 		}
-		const match = exactMatch(query)
+		const match = exactMatch(items, query)
 		if (match) {
 			value = match.value
 		}
@@ -174,7 +166,7 @@
 
 <div class="combobox">
 	<!-- svelte-ignore a11y_no_static_element_interactions, a11y_click_events_have_key_events -->
-	<div class="control" onclick={() => inputEl?.focus()}>
+	<div class="control" class:invalid onclick={() => inputEl?.focus()}>
 		{#if multiple}
 			{#each selected as item (item)}
 				<span class="chip">
@@ -200,6 +192,8 @@
 			required={required && !selected.length}
 			placeholder={multiple && selected.length ? '' : placeholder}
 			aria-expanded={open}
+			aria-invalid={invalid || undefined}
+			aria-describedby={describedBy}
 			aria-controls="{id}-listbox"
 			aria-activedescendant={open && flat[highlighted] ? `${id}-opt-${highlighted}` : undefined}
 			bind:value={query}
@@ -275,6 +269,10 @@
 	.control:focus-within {
 		outline: 2px solid var(--brand);
 		border-color: transparent;
+	}
+
+	.control.invalid {
+		border: 2px solid var(--lookup-error);
 	}
 
 	input[type='text'] {
