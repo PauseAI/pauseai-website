@@ -186,7 +186,8 @@ function validateSignature(
  * the signature rather than writing it, as Airtable is likely down and the person can retry
  * with what they typed, whereas a write could send a repeat email.
  *
- * Uses Airtable's own row creation time, since `date` may have been filled in by Tally.
+ * Uses Airtable's own row creation time rather than `date`. That is a formula field, so
+ * the write below must leave it out, or Airtable refuses every save.
  */
 async function saveSignature(signature: Signature): Promise<boolean> {
 	const repeat = await hasMatchingRecord(
@@ -211,8 +212,6 @@ async function saveSignature(signature: Signature): Promise<boolean> {
 			email: signature.email,
 			country: signature.country,
 			private: signature.private,
-			// Uncomment if Airtable's `date` turns out not to be computed (see PR #1261):
-			// date: new Date().toISOString(),
 			...(signature.bio ? { bio: signature.bio } : {})
 		},
 		{ redactErrors: true }
