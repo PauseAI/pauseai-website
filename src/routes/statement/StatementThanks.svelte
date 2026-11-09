@@ -13,6 +13,7 @@
 	<p class="verify">
 		Please check out your email inbox (and spam folder) to verify your email address!
 	</p>
+	<p>Once you've verified it, your signature will be added to the list.</p>
 	<!-- Shown to everyone, as saying it only to repeat signers would reveal who has signed. -->
 	<p class="note">
 		Already signed and need to change something, such as becoming anonymous? Email
