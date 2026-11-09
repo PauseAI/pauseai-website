@@ -1,15 +1,14 @@
-import { browser } from '$app/environment'
+import { getItem, setItem } from '$lib/localStorage'
 import { writable } from 'svelte/store'
 
 const KEY = 'widget-consent'
 
 const DEFAULT = 'null'
-const initialValue = browser ? (localStorage.getItem(KEY) ?? DEFAULT) : DEFAULT
+const initialValue = getItem(KEY) ?? DEFAULT
 const consent = writable<boolean | null>(JSON.parse(initialValue) as boolean | null)
 
 consent.subscribe((value) => {
-	if (!browser) return
-	localStorage.setItem(KEY, JSON.stringify(value))
+	setItem(KEY, JSON.stringify(value))
 })
 
 export default consent
