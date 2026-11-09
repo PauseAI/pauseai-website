@@ -300,10 +300,11 @@ describe('GET /api/statement/sign', () => {
 		return { response, body: await response.json() }
 	}
 
-	it('reports each mode, uncached', async () => {
+	it('reports each mode, cached briefly per origin', async () => {
 		const live = await mode(SITE)
 		expect(live.body).toEqual({ mode: 'live' })
-		expect(live.response.headers.get('cache-control')).toBe('no-store')
+		expect(live.response.headers.get('cache-control')).toBe('public, max-age=300')
+		expect(live.response.headers.get('vary')).toBe('Origin')
 
 		env.STATEMENT_SIGNING_LIVE = undefined
 		expect((await mode(SITE)).body).toEqual({ mode: 'off' })

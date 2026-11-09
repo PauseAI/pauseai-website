@@ -41,9 +41,13 @@ export type SigningModeResponse = { mode: SigningMode }
 const isAllowedOrigin = (origin: string, ownOrigin: string) =>
 	origin === ownOrigin || CHAPTER_ORIGINS.includes(origin)
 
-function responseHeaders(origin: string | null, ownOrigin: string): Record<string, string> {
+function responseHeaders(
+	origin: string | null,
+	ownOrigin: string,
+	cacheControl = 'no-store'
+): Record<string, string> {
 	return {
-		'cache-control': 'no-store',
+		'cache-control': cacheControl,
 		vary: 'Origin',
 		...(origin && isAllowedOrigin(origin, ownOrigin)
 			? {
@@ -73,10 +77,13 @@ export const OPTIONS: RequestHandler = ({ request, url }) => {
 }
 
 // Tells a form whether signing works here before anyone fills it in, and whether to show
-// Turnstile, which only runs when a signature would be written.
+// Turnstile, which only runs when a signature would be written. The mode depends only on
+// env and the hostname, which is part of the cache key, so it can be cached briefly.
 export const GET: RequestHandler = ({ request, url }) => {
 	const body: SigningModeResponse = { mode: signingMode(url.hostname) }
-	return json(body, { headers: responseHeaders(request.headers.get('origin'), url.origin) })
+	return json(body, {
+		headers: responseHeaders(request.headers.get('origin'), url.origin, 'public, max-age=300')
+	})
 }
 
 export const POST: RequestHandler = async ({ request, url, getClientAddress }) => {
