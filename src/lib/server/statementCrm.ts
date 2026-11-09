@@ -102,12 +102,12 @@ export async function signInCrm(
 	}
 
 	for (let attempt = 1; ; attempt++) {
-		const budget = Math.min(TIMEOUT_MS, deadline - Date.now())
-		const answer = await callCrm(
-			'PauseaiStatement/sign',
-			params,
-			Math.max(budget, SIGN_MIN_ATTEMPT_MS)
-		)
+		const remaining = deadline - Date.now()
+		// A retry needs a useful slice of the request's time; past the deadline nothing is sent.
+		if (remaining <= 0 || (attempt > 1 && remaining < SIGN_MIN_ATTEMPT_MS)) {
+			return finish('failed', report('sign', 'error', { cause: 'deadline', attempt }, 'error'))
+		}
+		const answer = await callCrm('PauseaiStatement/sign', params, Math.min(TIMEOUT_MS, remaining))
 		if (answer.ok) {
 			if (answer.row.status === 'ok') return 'ok'
 			if (answer.row.status === 'refused') {

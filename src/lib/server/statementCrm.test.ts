@@ -150,6 +150,19 @@ describe('signInCrm', () => {
 		expect(fetchMock).toHaveBeenCalledTimes(3)
 	})
 
+	it('sends no retry when the backoff ran late and too little time is left', async () => {
+		vi.useFakeTimers()
+		const timeouts = vi.spyOn(AbortSignal, 'timeout')
+		fetchMock.mockImplementation(networkError)
+
+		const enough = SIGN_RETRY_DELAY_MS + SIGN_MIN_ATTEMPT_MS + 500
+		const pending = sign({ deadline: Date.now() + enough })
+		vi.setSystemTime(Date.now() + 1000)
+		await vi.advanceTimersByTimeAsync(SIGN_RETRY_DELAY_MS)
+		expect(await pending).toBe('failed')
+		expect(timeouts.mock.calls).toEqual([[enough]])
+	})
+
 	it('reports after the response when the platform can wait for it', async () => {
 		fetchMock.mockImplementation(() => reply({}, 403))
 		let finishFlush = () => {}
