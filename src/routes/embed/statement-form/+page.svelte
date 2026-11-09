@@ -10,7 +10,7 @@
 <PostMeta title={meta.title} description={meta.description} />
 
 <div class="embed-wrap">
-	<StatementForm headingLevel={1} />
+	<StatementForm embedded />
 </div>
 
 <style>
@@ -18,9 +18,5 @@
 	   margins would otherwise collapse through it and leave the iframe short. */
 	.embed-wrap {
 		padding: 1rem;
-	}
-
-	.embed-wrap > :global(section.card) {
-		margin: 0 auto;
 	}
 </style>

@@ -12,13 +12,14 @@
 	import StatementThanks from './StatementThanks.svelte'
 
 	let {
-		headingLevel = 2,
+		embedded = false,
 		counter
 	}: {
-		/** The card's heading level: 1 where the card is the whole page, as in the embed. */
-		headingLevel?: 1 | 2
+		/** The card is the whole page, as in the embed: it heads the page and has no margin. */
+		embedded?: boolean
 		counter?: Snippet
 	} = $props()
+	const headingLevel = $derived(embedded ? 1 : 2)
 
 	let signed = $state(false)
 	let submitting = $state(false)
@@ -113,7 +114,7 @@
 	}
 </script>
 
-<section class="card" aria-labelledby="sign-heading">
+<section class="card" class:embedded aria-labelledby="sign-heading">
 	<svelte:element this={`h${headingLevel}`} id="sign-heading" class="heading"
 		>Sign the statement</svelte:element
 	>
@@ -268,6 +269,10 @@
 		background-color: var(--bg-subtle);
 		border-radius: 32px;
 		box-shadow: 0 4px 20px rgba(var(--black-rgb), 0.1);
+	}
+
+	.card.embedded {
+		margin: 0 auto;
 	}
 
 	@media (max-width: 600px) {
