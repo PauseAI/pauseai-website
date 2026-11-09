@@ -1,5 +1,6 @@
 import { writable, get } from 'svelte/store'
 import { browser } from '$app/environment'
+import { getItem, setItem } from '$lib/localStorage'
 
 /** What's being rendered */
 type Theme = 'light' | 'dark'
@@ -12,9 +13,7 @@ const getSystemTheme = () =>
 		? 'dark'
 		: 'light'
 
-const initialUserTheme = (
-	browser ? localStorage.getItem(userThemeKey) || 'auto' : 'auto'
-) as UserTheme
+const initialUserTheme = (getItem(userThemeKey) || 'auto') as UserTheme
 const initialTheme = initialUserTheme === 'auto' ? getSystemTheme() : initialUserTheme
 
 const theme = writable<Theme>(initialTheme)
@@ -48,7 +47,7 @@ export function toggleTheme() {
 		} else {
 			newTheme = 'auto'
 		}
-		localStorage.setItem(userThemeKey, newTheme)
+		setItem(userThemeKey, newTheme)
 		return newTheme
 	})
 }

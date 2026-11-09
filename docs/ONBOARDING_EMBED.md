@@ -6,6 +6,7 @@
 
 ```html
 <iframe
+	id="onboarding-iframe"
 	src="https://pauseai.info/embed/onboarding-form"
 	referrerpolicy="no-referrer-when-downgrade"
 	style="width: 100%; border: none;"
@@ -18,19 +19,9 @@ the bare domain instead of the page (see [Attribution](#attribution-signup-sourc
 It sends the full URL only between HTTPS origins, and the query string is
 dropped on our side.
 
-The page reports its rendered height to the host via `postMessage` (`{ height: number }`) so the host can resize the iframe as the form's steps change. Listen for it:
+The page reports its height so the host can resize the iframe as the form's steps change: see [Resizing the iframe](#resizing-the-iframe).
 
-```html
-<script>
-	window.addEventListener('message', (event) => {
-		if (typeof event.data?.height === 'number') {
-			document.getElementById('onboarding-iframe').style.height = event.data.height + 'px'
-		}
-	})
-</script>
-```
-
-When someone completes a new signup, the page also posts `{ event: 'onboarding_signup_complete', version: 1 }` to the host (e.g. so the host can fire a conversion tag). It carries no form data and fires once per new signup, when the server confirms the record was created. It does not fire for later updates to that record (the volunteer details step), for silently dropped spam, or on the standalone page (not iframed). Height messages are unchanged, so tell the two apart by shape:
+When someone completes a new signup, the page also posts `{ event: 'onboarding_signup_complete', version: 1 }` to the host (e.g. so the host can fire a conversion tag). It carries no form data and fires once per new signup, when the server confirms the record was created. It does not fire for later updates to that record (the volunteer details step), for silently dropped spam, or on the standalone page (not iframed). The height messages are unchanged, so tell the messages apart by shape:
 
 ```html
 <script>
@@ -42,6 +33,30 @@ When someone completes a new signup, the page also posts `{ event: 'onboarding_s
 	})
 </script>
 ```
+
+## Resizing the iframe
+
+Every page under `https://pauseai.info/embed/` (this form and the [statement form](./statement-signing-api.md#or-embed-our-form)) posts `{ type: 'pauseai-embed-resize', height: number }` to the host page whenever its height changes, with the height in CSS pixels. Resize the iframe to it:
+
+```html
+<script>
+	function resizePauseAIEmbed(iframe) {
+		window.addEventListener('message', (event) => {
+			if (event.origin !== 'https://pauseai.info') return
+			// Only this iframe's messages, so two embeds on one page don't resize each other.
+			if (event.source !== iframe.contentWindow) return
+			if (event.data?.type !== 'pauseai-embed-resize') return
+			const height = event.data.height
+			if (!Number.isFinite(height) || height <= 0) return
+			iframe.style.height = height + 'px'
+		})
+	}
+
+	resizePauseAIEmbed(document.getElementById('onboarding-iframe'))
+</script>
+```
+
+Call `resizePauseAIEmbed` once for each embed on the page. The onboarding form also posts a bare `{ height: number }` with the same height, which older hosts listen for; new hosts should use the typed message above.
 
 ## Query params
 

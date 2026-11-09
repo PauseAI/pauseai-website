@@ -14,6 +14,23 @@ To add a signing form:
 3. [Send the signature](#sign-post-httpspauseaiinfoapistatementsign), and [handle each response](#responses).
 4. [Test it](#test-your-form).
 
+Or skip all of that and [embed our form](#or-embed-our-form).
+
+## Or embed our form
+
+`https://pauseai.info/embed/statement-form` is the form from [/statement](https://pauseai.info/statement), with its thank-you message, and nothing else from the page around it. Put it in an iframe and it needs no setup: no origin to list, no Turnstile key, and signatures go to the same list. It is in English only, and always shows in the light theme. Show the statement's text on your own page, above the form.
+
+```html
+<iframe
+	id="statement-form"
+	src="https://pauseai.info/embed/statement-form"
+	title="Sign the PauseAI Statement"
+	style="width: 100%; border: none;"
+></iframe>
+```
+
+The page reports its height to your page whenever it changes, for example when the thank-you replaces the form. Resize the iframe to it with the listener in [Resizing the iframe](./ONBOARDING_EMBED.md#resizing-the-iframe), calling `resizePauseAIEmbed(document.getElementById('statement-form'))`.
+
 ## Before you start
 
 Ask in the PauseAI Discord for your site to be added, or send a pull request. Two things have to be set up for each hostname your form runs on, and PauseAI has to do the first:

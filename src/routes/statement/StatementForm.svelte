@@ -11,7 +11,15 @@
 	import { onMount, tick, type Snippet } from 'svelte'
 	import StatementThanks from './StatementThanks.svelte'
 
-	let { counter }: { counter?: Snippet } = $props()
+	let {
+		embedded = false,
+		counter
+	}: {
+		/** The card is the whole page, as in the embed: it heads the page and has no margin. */
+		embedded?: boolean
+		counter?: Snippet
+	} = $props()
+	const headingLevel = $derived(embedded ? 1 : 2)
 
 	let signed = $state(false)
 	let submitting = $state(false)
@@ -106,8 +114,10 @@
 	}
 </script>
 
-<section class="card" aria-labelledby="sign-heading">
-	<h2 id="sign-heading">Sign the statement</h2>
+<section class="card" class:embedded aria-labelledby="sign-heading">
+	<svelte:element this={`h${headingLevel}`} id="sign-heading" class="heading"
+		>Sign the statement</svelte:element
+	>
 	{@render counter?.()}
 
 	{#if mode === 'dry_run'}
@@ -119,7 +129,7 @@
 	<!-- Always in the page, as a live region only announces changes to one it already knows. -->
 	<div class="thanks" role="status" tabindex="-1" bind:this={thanks}>
 		{#if signed}
-			<StatementThanks />
+			<StatementThanks headingLevel={headingLevel === 1 ? 2 : 3} />
 		{/if}
 	</div>
 
@@ -261,6 +271,10 @@
 		box-shadow: 0 4px 20px rgba(var(--black-rgb), 0.1);
 	}
 
+	.card.embedded {
+		margin: 0 auto;
+	}
+
 	@media (max-width: 600px) {
 		.card {
 			padding: 1.5rem;
@@ -268,8 +282,10 @@
 		}
 	}
 
-	h2 {
+	/* An h2's size at either level, so the card looks the same wherever it is. */
+	.heading {
 		margin: 0 0 1.25rem;
+		font-size: 1.5rem;
 	}
 
 	/* Focused from code to carry on after the form goes, never reached by keyboard. */
