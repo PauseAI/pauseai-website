@@ -5,17 +5,17 @@
 	import Link from '$lib/components/Link.svelte'
 	import { COUNTRIES } from '$lib/components/onboarding/options'
 	import Turnstile from '$lib/components/Turnstile.svelte'
+	import type { SignatureField } from '$lib/server/statement'
 	import { turnstileSiteKey } from '$lib/turnstile'
 	import type { SubmitFunction } from '@sveltejs/kit'
 	import { onMount, tick } from 'svelte'
 	import StatementThanks from './StatementThanks.svelte'
 
-	let country = $state('')
-
 	let signed = $state(false)
 	let submitting = $state(false)
 	let errorMessage = $state('')
-	let fieldErrors = $state<Record<string, string>>({})
+	type FieldErrors = Partial<Record<SignatureField, string>>
+	let fieldErrors = $state<FieldErrors>({})
 
 	// Assume live until the server says otherwise, so an unanswered request keeps the
 	// anti-spam check required rather than dropping it. See OnboardingFlow.
@@ -45,19 +45,19 @@
 	let turnstileNonce = $state(0)
 	// No widget to wait for without a configured site key (e.g. local dev).
 	const needsTurnstile = $derived(mode === 'live' && !!turnstileSiteKey)
-	const canSubmit = $derived(!submitting && (!needsTurnstile || turnstileToken !== ''))
 	// Why the button is disabled, for anyone who can't see the widget working.
 	const waitingForTurnstile = $derived(!submitting && needsTurnstile && turnstileToken === '')
+	const canSubmit = $derived(!submitting && !waitingForTurnstile)
 
 	const GENERIC_ERROR = 'Something went wrong. Please try again.'
 
 	// In the order they appear on the page.
-	const FIELD_IDS: Record<string, string> = {
+	const FIELD_IDS = {
 		name: 'statement-name',
 		email: 'statement-email',
 		country: 'statement-country',
 		bio: 'statement-bio'
-	}
+	} satisfies Partial<Record<SignatureField, string>>
 	let errorSummary = $state<HTMLElement>()
 	let thanks = $state<HTMLElement>()
 
@@ -69,7 +69,8 @@
 
 	async function focusFirstError() {
 		await tick()
-		const field = Object.keys(FIELD_IDS).find((key) => fieldErrors[key])
+		const fields = Object.keys(FIELD_IDS) as (keyof typeof FIELD_IDS)[]
+		const field = fields.find((key) => fieldErrors[key])
 		const target = field ? document.getElementById(FIELD_IDS[field]) : errorSummary
 		target?.focus()
 	}
@@ -93,7 +94,7 @@
 				void focusThanks()
 			} else if (result.type === 'failure') {
 				errorMessage = String(result.data?.message ?? GENERIC_ERROR)
-				fieldErrors = (result.data?.fields as Record<string, string> | undefined) ?? {}
+				fieldErrors = (result.data?.fields as FieldErrors | undefined) ?? {}
 				void focusFirstError()
 			} else {
 				errorMessage = GENERIC_ERROR
@@ -188,7 +189,6 @@
 					placeholder="Select your country"
 					invalid={!!fieldErrors.country}
 					describedBy={fieldErrors.country ? 'statement-country-error' : undefined}
-					bind:value={country}
 				/>
 				{#if fieldErrors.country}
 					<p class="field-error" id="statement-country-error">{fieldErrors.country}</p>
