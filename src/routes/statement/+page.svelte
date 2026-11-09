@@ -109,10 +109,6 @@
 	.counter {
 		margin: -0.75rem 0 1.25rem;
 		font-size: 0.95rem;
-		color: var(--text-2);
-	}
-
-	.counter strong {
 		color: var(--text);
 	}
 	.signatories {
