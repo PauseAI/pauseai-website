@@ -1,6 +1,7 @@
 export const prerender = false
 
 import { AIRTABLE_WRITE_API_KEY } from '$env/static/private'
+import { airtableFormulaString } from '$lib/airtable'
 import { verificationConfirmedParameter, verificationParameter } from '$lib/config.js'
 import {
 	acceptsUnsignedLink,
@@ -87,7 +88,7 @@ export const POST: RequestHandler = async ({ request }) => {
 
 	const records = await table
 		.select({
-			filterByFormula: `{${tableConfig.keyFieldName}} = "${key}"`
+			filterByFormula: `{${tableConfig.keyFieldName}} = ${airtableFormulaString(key)}`
 		})
 		.firstPage()
 	if (!records.length) return new Response('Record not found', { status: StatusCodes.NOT_FOUND })
