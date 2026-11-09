@@ -31,7 +31,20 @@ Your form collects the fields in the [table below](#sign-post-httpspauseaiinfoap
 
 - **Country:** the value you send must be the English name, spelled exactly as in `COUNTRIES` in [`options.ts`](https://github.com/PauseAI/pauseai-website/blob/main/src/lib/components/onboarding/options.ts). Show translated labels if you like, but keep those names as the values, such as `<option value="Spain">España</option>`. Anything else gets a `400`.
 - **Anonymous:** send `private` as a real boolean from a checkbox, even when it's `false`.
-- **Honeypot:** add a text input that's hidden from people, and send its value as `honeypot`.
+- **Honeypot:** add a text input that's hidden from people, and send its value as `honeypot`. The example below expects it to be called `website`:
+
+  ```html
+  <input
+  	type="text"
+  	name="website"
+  	tabindex="-1"
+  	autocomplete="off"
+  	aria-hidden="true"
+  	style="position: absolute; left: -9999px"
+  />
+  ```
+
+The example also expects inputs called `name`, `email`, `country` and `bio`, and a checkbox called `private`.
 
 Then show the Turnstile widget, and keep its token to send. Its token field is called `cf-turnstile-response` in Cloudflare's own examples, but this API reads `turnstile_token`. See [Cloudflare's guide](https://developers.cloudflare.com/turnstile/get-started/client-side-rendering/) for the options.
 
@@ -111,19 +124,19 @@ async function sign(form) {
 
 The answers below are JSON with an `ok` boolean. The one exception is under the table.
 
-| Status | Body                                                   | Meaning                                                                                                                   |
-| ------ | ------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------- |
-| 202    | `{"ok":true,"status":"pending_verification"}`          | Accepted. Ask the person to check their inbox and spam folder.                                                            |
-| 400    | `{"ok":false,"error":"validation_failed","fields":{}}` | `fields` maps a field name to `required`, `invalid` or `too_long`. Your Turnstile token has not been used.                |
-| 400    | `{"ok":false,"error":"invalid_json"}`                  | The body is not a JSON object.                                                                                            |
-| 403    | `{"ok":false,"error":"origin_not_allowed"}`            | Your site's origin is not on the allowlist.                                                                               |
-| 403    | `{"ok":false,"error":"turnstile_failed"}`              | The token is missing, invalid, expired, already used, or from a hostname not listed. Reset the widget and let them retry. |
-| 413    | `{"ok":false,"error":"payload_too_large"}`             | The body is over 32 KB.                                                                                                   |
-| 415    | `{"ok":false,"error":"unsupported_media_type"}`        | The `Content-Type` is not `application/json`, and is not one of the form types below.                                     |
-| 429    | `{"ok":false,"error":"rate_limited"}`                  | Too many signatures. The `Retry-After` header gives the seconds to wait, and browsers can read it.                        |
-| 502    | `{"ok":false,"error":"save_failed"}`                   | We could not save it. Keep what the person typed and let them retry with a new token.                                     |
-| 503    | `{"ok":false,"error":"signing_unavailable"}`           | Signing is switched off, and nothing was saved. Keep what the person typed, and let them try later.                       |
-| 503    | `{"ok":false,"error":"turnstile_unavailable"}`         | We could not check the token right now, and nothing was saved. Let them retry with a new token.                           |
+| Status | Body                                                   | Meaning                                                                                                                                                |
+| ------ | ------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| 202    | `{"ok":true,"status":"pending_verification"}`          | Accepted. Ask the person to check their inbox and spam folder.                                                                                         |
+| 400    | `{"ok":false,"error":"validation_failed","fields":{}}` | `fields` maps a field name to `required`, `invalid` or `too_long`. Your Turnstile token has not been used.                                             |
+| 400    | `{"ok":false,"error":"invalid_json"}`                  | The body is not a JSON object.                                                                                                                         |
+| 403    | `{"ok":false,"error":"origin_not_allowed"}`            | Your site's origin is not on the allowlist.                                                                                                            |
+| 403    | `{"ok":false,"error":"turnstile_failed"}`              | The token is missing, invalid, expired, already used, or from a hostname not listed. Reset the widget and let them retry.                              |
+| 413    | `{"ok":false,"error":"payload_too_large"}`             | The body is over 32 KB.                                                                                                                                |
+| 415    | `{"ok":false,"error":"unsupported_media_type"}`        | The `Content-Type` is not `application/json`, and is not one of the form types below.                                                                  |
+| 429    | `{"ok":false,"error":"rate_limited"}`                  | Too many signatures. The `Retry-After` header gives the seconds to wait, and browsers can read it.                                                     |
+| 502    | `{"ok":false,"error":"save_failed"}`                   | We could not save it. Keep what the person typed and let them retry with a new token.                                                                  |
+| 503    | `{"ok":false,"error":"signing_unavailable"}`           | Signing is switched off, and nothing was saved. Keep what the person typed, and let them try later.                                                    |
+| 503    | `{"ok":false,"error":"turnstile_unavailable"}`         | We could not check the token right now, and nothing was saved. Let them retry with a new token, and if it keeps happening, offer contact@pauseai.info. |
 
 Show your own translated messages, keyed on `error` and `fields`. Responses contain no text meant for people. Don't clear the form on an error.
 
@@ -140,6 +153,8 @@ The signature is not public yet. We email the address a verification link. The p
 ### Repeat signatures
 
 If an address has already signed in the last 30 days, verified or not, we save nothing and send no email, and the answer is the same 202. A person who lost the first email can't get another by signing again until then. Older than that, signing again saves a new row and sends a new email, and the address is still listed only once. People who share an email address can't sign separately.
+
+**Signing again doesn't change anything.** Within those 30 days, a new name, bio or request to be anonymous is dropped too, and the answer is still the same 202. Tell everyone in your thank-you message, not only people who you think have signed, to email contact@pauseai.info if they need to change something.
 
 ### Calling from a server
 
