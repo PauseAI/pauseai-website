@@ -51,7 +51,11 @@ const REPEAT_WINDOW_DAYS = 30
 // does not close it: each probe needs its own solved Turnstile token.
 const REPEAT_DELAY_MS = { minimum: 150, spread: 300 }
 
-export type SignatureField = 'name' | 'email' | 'country' | 'bio' | 'private'
+// The email language a chapter can ask for. Airtable still picks it from the country and
+// this is only validated, so the contract won't change for chapters when CiviCRM takes over.
+const LANGUAGES: readonly unknown[] = ['en', 'es']
+
+export type SignatureField = 'name' | 'email' | 'country' | 'bio' | 'private' | 'language'
 export type SignatureFieldError = 'required' | 'invalid' | 'too_long'
 export type SignatureErrors = Partial<Record<SignatureField, SignatureFieldError>>
 
@@ -172,6 +176,14 @@ function validateSignature(
 	// someone who asked to stay anonymous.
 	if (input.private === undefined || input.private === null) errors.private = 'required'
 	else if (typeof input.private !== 'boolean') errors.private = 'invalid'
+
+	if (
+		input.language !== undefined &&
+		input.language !== null &&
+		!LANGUAGES.includes(input.language)
+	) {
+		errors.language = 'invalid'
+	}
 
 	if (Object.keys(errors).length > 0) return { ok: false, errors }
 	return { ok: true, signature: { name, email, country, bio, private: input.private === true } }

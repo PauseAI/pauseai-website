@@ -321,7 +321,10 @@ describe('POST /api/statement/sign: validation', () => {
 		['overlong bio', { bio: 'x'.repeat(2001) }, { bio: 'too_long' }],
 		['non-string bio', { bio: 42 }, { bio: 'invalid' }],
 		['stringly private', { private: 'true' }, { private: 'invalid' }],
-		['missing private', { private: undefined }, { private: 'required' }]
+		['missing private', { private: undefined }, { private: 'required' }],
+		['unknown language', { language: 'fr' }, { language: 'invalid' }],
+		['differently cased language', { language: 'ES' }, { language: 'invalid' }],
+		['non-string language', { language: 1 }, { language: 'invalid' }]
 	])('refuses %s, naming the field and not writing', async (_label, change, fields) => {
 		const response = await post({ ...VALID, ...change })
 
@@ -329,6 +332,16 @@ describe('POST /api/statement/sign: validation', () => {
 		expect(await response.json()).toEqual({ ok: false, error: 'validation_failed', fields })
 		expect(createRecord).not.toHaveBeenCalled()
 	})
+
+	it.each(['en', 'es', undefined, null])(
+		'accepts the language %j, and stores none',
+		async (language) => {
+			const response = await post({ ...VALID, language })
+
+			expect(response.status).toBe(202)
+			expect(createRecord.mock.calls[0][2]).not.toHaveProperty('language')
+		}
+	)
 
 	it.each([
 		'a,b@example.org',

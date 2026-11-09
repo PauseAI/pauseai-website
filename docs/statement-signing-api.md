@@ -23,7 +23,7 @@ Ask in the PauseAI Discord for your site to be added, or send a pull request. Tw
 
 You then get PauseAI's Turnstile site key, which is public. Use this key, not one from your own Cloudflare account, as our server can only check tokens from this widget.
 
-Your form should tell people how their data is used, and link to your privacy policy and [ours](https://pauseai.info/privacy). Say that the bio is published even for an anonymous signature.
+Your form should tell people how their data is used, and link to your privacy policy and [ours](https://pauseai.info/privacy). Say that the country and bio are published even for an anonymous signature, as a bio can identify someone. Our form says: "Your name is hidden, but your country and anything you write below are still published, so leave out details that could identify you."
 
 ## Build the form
 
@@ -89,6 +89,8 @@ Send JSON, with `Content-Type: application/json`. Send no other custom headers, 
 
 Other fields are ignored. The body can be up to 32 KB.
 
+An optional `language` of `en` or `es`, default `en`, says which language the person's email should be in. Anything else gets a `400`. **It's checked but has no effect yet**: Airtable picks the Spanish or English email from `country` for now, and `language` takes over when signatures move to CiviCRM. Send it from the start, and you won't need to change anything then.
+
 Tokens are single use, so reset the widget after every attempt, whatever the answer:
 
 ```js
@@ -105,6 +107,7 @@ async function sign(form) {
 				bio: form.elements.bio.value,
 				private: form.elements.private.checked,
 				turnstile_token: turnstileToken,
+				language: 'es',
 				honeypot: form.elements.website.value
 			})
 		})
@@ -148,7 +151,7 @@ A 202 does not say whether the address has signed before, and a filled honeypot 
 
 The signature is not public yet. We email the address a verification link. The page it opens asks them to click to confirm, because mail scanners open links on their own. The signature is listed once they have, and the site has next been deployed.
 
-**The email and the confirm page are in English, and on pauseai.info.** Tell people to expect that in your thank-you message, and to check their spam folder.
+**The confirm page is in English, and on pauseai.info.** The email's language [depends on `country` for now](#sign-post-httpspauseaiinfoapistatementsign). Tell people to expect that in your thank-you message, and to check their spam folder.
 
 ### Repeat signatures
 

@@ -37,7 +37,9 @@ const FIELD_MESSAGES: Record<SignatureField, Partial<Record<SignatureFieldError,
 		too_long: `Please keep this under ${MAX_BIO_LENGTH} characters.`,
 		invalid: 'Please enter this as plain text.'
 	},
-	private: { required: 'Please try again.', invalid: 'Please try again.' }
+	private: { required: 'Please try again.', invalid: 'Please try again.' },
+	// The form doesn't send one, so only a hand-made post can get this.
+	language: { invalid: 'Please try again.' }
 }
 
 const fieldMessages = (errors: SignatureErrors) =>
