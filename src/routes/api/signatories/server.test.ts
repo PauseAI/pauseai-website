@@ -3,9 +3,11 @@ import { beforeEach, describe, expect, it, vi } from 'vitest'
 const fetchAllPages = vi.fn<(...args: unknown[]) => Promise<unknown[]>>()
 
 const env: Record<string, string | undefined> = {}
+const appEnvironment = vi.hoisted(() => ({ dev: false }))
 const publicListFromCrm = vi.fn<() => Promise<unknown>>()
 
 vi.mock('$env/dynamic/private', () => ({ env }))
+vi.mock('$app/environment', () => appEnvironment)
 vi.mock('$lib/airtable.js', () => ({ fetchAllPages }))
 vi.mock('$lib/server/statementCrm', async (importOriginal) => ({
 	...(await importOriginal<typeof import('$lib/server/statementCrm')>()),
@@ -35,6 +37,7 @@ async function list() {
 
 beforeEach(() => {
 	env.STATEMENT_BACKEND = undefined
+	appEnvironment.dev = false
 	fetchAllPages.mockReset()
 	publicListFromCrm.mockReset()
 	vi.spyOn(console, 'log').mockImplementation(() => {})
@@ -210,7 +213,14 @@ describe('GET /api/signatories: STATEMENT_BACKEND=civicrm', () => {
 		expect(fetchAllPages).not.toHaveBeenCalled()
 	})
 
-	it('answers a count of 0 when CiviCRM cannot be read, so callers keep their last copy', async () => {
+	it('throws when CiviCRM cannot be read, so the build fails instead of publishing no list', async () => {
+		publicListFromCrm.mockResolvedValue(undefined)
+
+		await expect(list()).rejects.toMatchObject({ status: 503 })
+	})
+
+	it('answers placeholder rows with a count of 0 on the dev server', async () => {
+		appEnvironment.dev = true
 		publicListFromCrm.mockResolvedValue(undefined)
 
 		expect((await list()).totalCount).toBe(0)
