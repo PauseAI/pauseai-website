@@ -2,6 +2,7 @@
 	import { enhance } from '$app/forms'
 	import type { SigningModeResponse } from '$api/statement/sign/+server.js'
 	import Combobox from '$lib/components/Combobox.svelte'
+	import Link from '$lib/components/Link.svelte'
 	import { COUNTRIES } from '$lib/components/onboarding/options'
 	import Turnstile from '$lib/components/Turnstile.svelte'
 	import { turnstileSiteKey } from '$lib/turnstile'
@@ -155,7 +156,9 @@
 			</label>
 			<p class="private-note" id="statement-private-note">
 				Your name is hidden, but your country and anything you write below are still published, so
-				leave out details that could identify you.
+				leave out details that could identify you. See our
+				<!-- A new tab, as leaving the page would lose what's been typed. -->
+				<Link href="/privacy" target="_blank">privacy policy</Link>.
 			</p>
 
 			<div class="field">
