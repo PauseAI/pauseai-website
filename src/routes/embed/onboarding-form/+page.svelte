@@ -123,9 +123,9 @@
 
 <svelte:head>
 	{#if background}
-		<!-- The whole document, so the layout's padding around the form takes the colour too. -->
+		<!-- On body only: html keeps the opaque site background, so a translucent colour composites once, as before. -->
 		<!-- eslint-disable-next-line svelte/no-at-html-tags -- `background` is a hex value or a bare colour name -->
-		{@html `<${'style'}>:root,:root body{background-color:${background}}</style>`}
+		{@html `<${'style'}>:root body{background-color:${background}}</style>`}
 	{/if}
 </svelte:head>
 
