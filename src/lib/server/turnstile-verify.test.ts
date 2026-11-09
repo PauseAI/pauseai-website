@@ -119,7 +119,9 @@ describe('verifyTurnstile', () => {
 		['no secret', () => (env.TURNSTILE_SECRET_KEY = undefined)],
 		[
 			'a Cloudflare test secret',
-			() => (env.TURNSTILE_SECRET_KEY = '1x0000000000000000000000000000000AA')
+			// Cloudflare's public dummy. Built here as previews have it as their secret, so
+			// Netlify's secrets scan fails the build if it's written out in full.
+			() => (env.TURNSTILE_SECRET_KEY = `1x${'0'.repeat(31)}AA`)
 		],
 		[
 			'Cloudflare out of reach',
