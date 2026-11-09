@@ -58,11 +58,14 @@
 {#if turnstileSiteKey}
 	<div class="turnstile">
 		<div bind:this={container}></div>
-		{#if failed}
-			<p class="turnstile-error">
-				The anti-spam check could not load. Please refresh the page and try again.
-			</p>
-		{/if}
+		<!-- Always in the page, as a live region only announces changes to one it already knows. -->
+		<div role="alert">
+			{#if failed}
+				<p class="turnstile-error">
+					The anti-spam check could not load. Please refresh the page and try again.
+				</p>
+			{/if}
+		</div>
 	</div>
 {/if}
 <input type="hidden" name={TURNSTILE_FIELD} value={token} />

@@ -1,12 +1,12 @@
 <script lang="ts">
 	import { enhance } from '$app/forms'
-	import type { OnboardingModeApiResponse } from '$api/onboarding-mode/+server.js'
+	import type { SigningModeResponse } from '$api/statement/sign/+server.js'
 	import Combobox from '$lib/components/Combobox.svelte'
 	import { COUNTRIES } from '$lib/components/onboarding/options'
 	import Turnstile from '$lib/components/Turnstile.svelte'
 	import { turnstileSiteKey } from '$lib/turnstile'
 	import type { SubmitFunction } from '@sveltejs/kit'
-	import { onMount } from 'svelte'
+	import { onMount, tick } from 'svelte'
 	import StatementThanks from './StatementThanks.svelte'
 
 	let name = $state('')
@@ -22,16 +22,20 @@
 
 	// Assume live until the server says otherwise, so an unanswered request keeps the
 	// anti-spam check required rather than dropping it. See OnboardingFlow.
-	let live = $state(true)
+	let mode = $state<SigningModeResponse['mode']>('live')
 	// The widget waits for the answer, so a preview doesn't flash Turnstile's "could not
 	// load" error before it's removed again.
 	let modeKnown = $state(false)
+	const UNAVAILABLE_MESSAGE =
+		'Signing is unavailable right now. Please try again later, or email contact@pauseai.info.'
 	onMount(async () => {
 		try {
-			const response = await fetch('/api/onboarding-mode')
+			const response = await fetch('/api/statement/sign')
 			if (!response.ok) return
-			const mode = (await response.json()) as OnboardingModeApiResponse
-			live = mode.live !== false
+			const answer = (await response.json()) as SigningModeResponse
+			mode = answer.mode
+			// Say so before anyone types it all in. The server refuses regardless.
+			if (mode === 'off') errorMessage = UNAVAILABLE_MESSAGE
 		} catch {
 			// Stay on the live assumption.
 		} finally {
@@ -43,9 +47,28 @@
 	// Tokens are single-use: bumped after each post to remount the widget.
 	let turnstileNonce = $state(0)
 	// No widget to wait for without a configured site key (e.g. local dev).
-	const canSubmit = $derived(!submitting && (!turnstileSiteKey || turnstileToken !== '' || !live))
+	const needsTurnstile = $derived(mode === 'live' && !!turnstileSiteKey)
+	const canSubmit = $derived(!submitting && (!needsTurnstile || turnstileToken !== ''))
+	// Why the button is disabled, for anyone who can't see the widget working.
+	const waitingForTurnstile = $derived(!submitting && needsTurnstile && turnstileToken === '')
 
 	const GENERIC_ERROR = 'Something went wrong. Please try again.'
+
+	// In the order they appear on the page.
+	const FIELD_IDS: Record<string, string> = {
+		name: 'statement-name',
+		email: 'statement-email',
+		country: 'statement-country',
+		bio: 'statement-bio'
+	}
+	let errorSummary = $state<HTMLElement>()
+
+	async function focusFirstError() {
+		await tick()
+		const field = Object.keys(FIELD_IDS).find((key) => fieldErrors[key])
+		const target = field ? document.getElementById(FIELD_IDS[field]) : errorSummary
+		target?.focus()
+	}
 
 	// Deliberately never calls SvelteKit's update(), which would reset the form: on a failure
 	// everything the person typed stays in the fields above.
@@ -66,8 +89,10 @@
 			} else if (result.type === 'failure') {
 				errorMessage = String(result.data?.message ?? GENERIC_ERROR)
 				fieldErrors = (result.data?.fields as Record<string, string> | undefined) ?? {}
+				void focusFirstError()
 			} else {
 				errorMessage = GENERIC_ERROR
+				void focusFirstError()
 			}
 		}
 	}
@@ -75,6 +100,12 @@
 
 <section class="card" aria-labelledby="sign-heading">
 	<h2 id="sign-heading">Sign the statement</h2>
+
+	{#if mode === 'dry_run'}
+		<p class="test-notice">
+			This is a test environment. Signatures are checked here, but not saved, and no email is sent.
+		</p>
+	{/if}
 
 	{#if signed}
 		<div role="status">
@@ -143,10 +174,12 @@
 					options={COUNTRIES}
 					required
 					placeholder="Select your country"
+					invalid={!!fieldErrors.country}
+					describedBy={fieldErrors.country ? 'statement-country-error' : undefined}
 					bind:value={country}
 				/>
 				{#if fieldErrors.country}
-					<p class="field-error">{fieldErrors.country}</p>
+					<p class="field-error" id="statement-country-error">{fieldErrors.country}</p>
 				{/if}
 			</div>
 
@@ -167,17 +200,38 @@
 				{/if}
 			</div>
 
-			{#if live && modeKnown}
+			{#if mode === 'live' && modeKnown}
 				{#key turnstileNonce}
 					<Turnstile bind:token={turnstileToken} />
 				{/key}
 			{/if}
 
-			{#if errorMessage}
-				<p class="form-error" role="alert">{errorMessage}</p>
-			{/if}
+			<!-- Always in the page, as a live region only announces changes to one it already knows.
+			     The field errors are repeated for screen readers, which can't see them highlighted. -->
+			<div role="alert">
+				{#if errorMessage}
+					<p class="form-error" tabindex="-1" bind:this={errorSummary}>
+						{errorMessage}
+						{#each Object.entries(fieldErrors) as [field, fieldError] (field)}
+							<span class="visually-hidden">{fieldError}</span>
+						{/each}
+					</p>
+				{/if}
+			</div>
 
-			<button type="submit" disabled={!canSubmit}>{submitting ? 'Submitting…' : 'Submit'}</button>
+			<button
+				type="submit"
+				disabled={!canSubmit}
+				aria-describedby={waitingForTurnstile ? 'statement-submit-hint' : undefined}
+				>{submitting ? 'Submitting…' : 'Submit'}</button
+			>
+			<div role="status">
+				{#if waitingForTurnstile}
+					<p class="submit-hint" id="statement-submit-hint">
+						You can submit once the anti-spam check above has finished.
+					</p>
+				{/if}
+			</div>
 		</form>
 	{/if}
 </section>
@@ -250,6 +304,11 @@
 		border-color: transparent;
 	}
 
+	.field > input[aria-invalid='true'],
+	.field > textarea[aria-invalid='true'] {
+		border: 2px solid var(--lookup-error);
+	}
+
 	/* Honeypot: visually hidden, still reachable for the rare bot that fills it. */
 	.honey {
 		position: absolute;
@@ -286,6 +345,32 @@
 	.field-error {
 		margin-left: 0.5rem;
 		font-size: 0.9rem;
+	}
+
+	.field-error::before {
+		content: '⚠ ';
+	}
+
+	.visually-hidden {
+		position: absolute;
+		width: 1px;
+		height: 1px;
+		overflow: hidden;
+		clip-path: inset(50%);
+		white-space: nowrap;
+	}
+
+	.submit-hint,
+	.test-notice {
+		margin: 0;
+		font-size: 0.9rem;
+	}
+
+	.test-notice {
+		margin-bottom: 1rem;
+		padding: 0.7rem 1rem;
+		border-left: 4px solid var(--brand);
+		background-color: var(--bg);
 	}
 
 	.form-error {
