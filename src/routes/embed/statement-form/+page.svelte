@@ -1,4 +1,5 @@
 <script lang="ts">
+	import Link from '$lib/components/Link.svelte'
 	import PostMeta from '$lib/components/PostMeta.svelte'
 	import { meta } from '../../statement/meta'
 	import StatementForm from '../../statement/StatementForm.svelte'
@@ -12,9 +13,7 @@
 <noscript>
 	<p class="no-js">
 		Signing needs JavaScript. You can also sign at
-		<a href="https://pauseai.info/statement" target="_blank" rel="noopener"
-			>pauseai.info/statement</a
-		>.
+		<Link href="https://pauseai.info/statement" target="_blank">pauseai.info/statement</Link>.
 	</p>
 </noscript>
 

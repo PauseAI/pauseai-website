@@ -16,7 +16,7 @@ describe('/embed/statement-form', () => {
 
 	it('points visitors without JavaScript to /statement in a new tab', () => {
 		expect(body).toMatch(
-			/<noscript>[\s\S]*<a href="https:\/\/pauseai.info\/statement" target="_blank" rel="noopener"/
+			/<noscript>[\s\S]*<a href="https:\/\/pauseai.info\/statement" target="_blank"/
 		)
 	})
 
