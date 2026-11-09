@@ -9,11 +9,7 @@
 	import { onMount, tick } from 'svelte'
 	import StatementThanks from './StatementThanks.svelte'
 
-	let name = $state('')
-	let isPrivate = $state(false)
-	let email = $state('')
 	let country = $state('')
-	let bio = $state('')
 
 	let signed = $state(false)
 	let submitting = $state(false)
@@ -62,6 +58,13 @@
 		bio: 'statement-bio'
 	}
 	let errorSummary = $state<HTMLElement>()
+	let thanks = $state<HTMLElement>()
+
+	// Signing removes the form, and with it the button that had focus.
+	async function focusThanks() {
+		await tick()
+		thanks?.focus()
+	}
 
 	async function focusFirstError() {
 		await tick()
@@ -86,6 +89,7 @@
 			turnstileNonce += 1
 			if (result.type === 'success' && result.data?.success) {
 				signed = true
+				void focusThanks()
 			} else if (result.type === 'failure') {
 				errorMessage = String(result.data?.message ?? GENERIC_ERROR)
 				fieldErrors = (result.data?.fields as Record<string, string> | undefined) ?? {}
@@ -107,11 +111,14 @@
 		</p>
 	{/if}
 
-	{#if signed}
-		<div role="status">
+	<!-- Always in the page, as a live region only announces changes to one it already knows. -->
+	<div class="thanks" role="status" tabindex="-1" bind:this={thanks}>
+		{#if signed}
 			<StatementThanks />
-		</div>
-	{:else}
+		{/if}
+	</div>
+
+	{#if !signed}
 		<form method="POST" action="/statement/sign" use:enhance={submit}>
 			<!-- Honeypot: real people leave this empty. -->
 			<div class="field honey" aria-hidden="true">
@@ -136,7 +143,6 @@
 					maxlength="200"
 					aria-invalid={!!fieldErrors.name}
 					aria-describedby={fieldErrors.name ? 'statement-name-error' : undefined}
-					bind:value={name}
 				/>
 				{#if fieldErrors.name}
 					<p class="field-error" id="statement-name-error">{fieldErrors.name}</p>
@@ -144,7 +150,7 @@
 			</div>
 
 			<label class="checkbox">
-				<input type="checkbox" name="private" bind:checked={isPrivate} />
+				<input type="checkbox" name="private" />
 				<span>I want to be anonymous</span>
 			</label>
 
@@ -159,7 +165,6 @@
 					maxlength="254"
 					aria-invalid={!!fieldErrors.email}
 					aria-describedby={fieldErrors.email ? 'statement-email-error' : undefined}
-					bind:value={email}
 				/>
 				{#if fieldErrors.email}
 					<p class="field-error" id="statement-email-error">{fieldErrors.email}</p>
@@ -193,8 +198,7 @@
 					rows="4"
 					maxlength="2000"
 					aria-invalid={!!fieldErrors.bio}
-					aria-describedby={fieldErrors.bio ? 'statement-bio-error' : undefined}
-					bind:value={bio}></textarea>
+					aria-describedby={fieldErrors.bio ? 'statement-bio-error' : undefined}></textarea>
 				{#if fieldErrors.bio}
 					<p class="field-error" id="statement-bio-error">{fieldErrors.bio}</p>
 				{/if}
@@ -257,6 +261,11 @@
 
 	h2 {
 		margin: 0 0 1.25rem;
+	}
+
+	/* Focused from code to carry on after the form goes, never reached by keyboard. */
+	.thanks:focus {
+		outline: none;
 	}
 
 	form {
