@@ -5,9 +5,8 @@
 // Emails and other submitted values must never reach a log or a report.
 import { env } from '$env/dynamic/private'
 import type { Signatory } from '$lib/types'
-import { callCrm, type CrmFailure } from '$lib/server/crmIntake'
+import { callCrm, failureDetails, reportCrmProblem, type CrmFailure } from '$lib/server/crmIntake'
 import { COUNTRY_BY_ISO_CODE } from '$lib/server/countryCodes'
-import { flushReports, reportError } from '$lib/server/sentry'
 
 export type StatementBackend = 'airtable' | 'civicrm'
 
@@ -49,26 +48,17 @@ const isTransient = (failure: CrmFailure) =>
 
 const wait = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms))
 
-async function report(
+const report = (
 	action: string,
 	outcome: string,
 	details: Record<string, unknown>,
 	level: 'error' | 'warning'
-) {
-	const context = { check: 'crm-statement', action, outcome, ...details }
-	console.warn('[crm-statement] not accepted', context)
-	await reportError(new Error(`CRM statement ${action} ${outcome}`), context, {
-		fingerprint: ['crm-statement', action, outcome],
-		level
-	})
-	await flushReports()
-}
-
-const failureDetails = ({ cause, httpStatus, errorName }: CrmFailure) => ({
-	cause,
-	...(httpStatus === undefined ? {} : { httpStatus }),
-	...(errorName === undefined ? {} : { errorName })
-})
+) =>
+	reportCrmProblem(
+		`CRM statement ${action} ${outcome}`,
+		{ check: 'crm-statement', action, outcome, ...details },
+		{ fingerprint: ['crm-statement', action, outcome], level }
+	)
 
 /**
  * Writes one signature, retrying transient failures. `refused` means CiviCRM's validation

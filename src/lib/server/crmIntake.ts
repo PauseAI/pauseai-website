@@ -79,18 +79,31 @@ export async function callCrm(action: string, params: unknown): Promise<CrmAnswe
 	}
 }
 
+/** What a failure may report: its cause, never a value the request carried. */
+export const failureDetails = ({ cause, httpStatus, errorName }: CrmFailure) => ({
+	cause,
+	...(httpStatus === undefined ? {} : { httpStatus }),
+	...(errorName === undefined ? {} : { errorName })
+})
+
+/**
+ * Logs and reports an answer that was not `ok`, then sends the report. `details` must never
+ * hold a submitted value (personal data) or the key. Never rejects.
+ */
+export async function reportCrmProblem(
+	message: string,
+	details: { check: string } & Record<string, unknown>,
+	options: { fingerprint: string[]; level: 'error' | 'warning' }
+): Promise<void> {
+	console.warn(`[${details.check}] not accepted`, details)
+	await reportError(new Error(message), details, options)
+	await flushReports()
+}
+
 /** Never rejects: a failure is the `error` outcome, with what caused it. */
 export async function submitToCrm(record: WrittenRecord, token: string): Promise<Result> {
 	const answer = await callCrm('PauseaiMemberIntake/submit', { record, token })
-	if (!answer.ok) {
-		const { cause, httpStatus, errorName } = answer
-		return {
-			outcome: 'error',
-			cause,
-			...(httpStatus === undefined ? {} : { httpStatus }),
-			...(errorName === undefined ? {} : { errorName })
-		}
-	}
+	if (!answer.ok) return { outcome: 'error', ...failureDetails(answer) }
 	if (answer.row.status === 'ok') return { outcome: 'ok' }
 	if (answer.row.status === 'refused') return { outcome: `refused:${String(answer.row.reason)}` }
 	return { outcome: 'error', cause: 'http', httpStatus: 200 }
@@ -104,13 +117,14 @@ export async function submitToCrm(record: WrittenRecord, token: string): Promise
 export async function reportToCrm(record: WrittenRecord, token: string): Promise<Outcome> {
 	const result = await submitToCrm(record, token)
 	if (result.outcome === 'ok') return result.outcome
-	const details = { check: 'crm-intake', recordId: record.id, ...result }
-	console.warn('[crm-intake] not accepted', details)
-	await reportError(new Error(`CRM intake ${result.outcome}`), details, {
-		fingerprint: ['crm-intake', result.outcome],
-		level: result.outcome === 'error' ? 'error' : 'warning'
-	})
-	await flushReports()
+	await reportCrmProblem(
+		`CRM intake ${result.outcome}`,
+		{ check: 'crm-intake', recordId: record.id, ...result },
+		{
+			fingerprint: ['crm-intake', result.outcome],
+			level: result.outcome === 'error' ? 'error' : 'warning'
+		}
+	)
 	return result.outcome
 }
 
