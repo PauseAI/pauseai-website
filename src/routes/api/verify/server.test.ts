@@ -366,21 +366,19 @@ describe('POST /api/verify: statement links in CiviCRM', () => {
 		}
 	)
 
-	it('sends an old Airtable key to Airtable with the Airtable backend', async () => {
-		selected = [{ id: 'recStatement', fields: {} }]
-		const response = await link(CONFIRMED)
+	it.each([
+		['an old Airtable key', 'abc123', 200],
+		['an s<id> key without a token', 's12345', 404]
+	])('sends %s to Airtable with the Airtable backend', async (_label, key, status) => {
+		selected = key === 'abc123' ? [{ id: 'recStatement', fields: {} }] : []
+		const response = await verify(`${verificationParameter}=${key}${CONFIRMED}`)
 
-		expect(response.status).toBe(200)
-		expect(verifyStatementInCrm).not.toHaveBeenCalled()
-		expect(update).toHaveBeenCalledExactlyOnceWith('recStatement', { email_verified: true })
-	})
-
-	it('sends an s<id> key without a token to Airtable with the Airtable backend', async () => {
-		const response = await verify(`${verificationParameter}=s12345${CONFIRMED}`)
-
-		expect(response.status).toBe(404)
+		expect(response.status).toBe(status)
 		expect(verifyStatementInCrm).not.toHaveBeenCalled()
 		expect(tableIds).toEqual(['tbl2emfOWNWoVz1kW'])
+		if (status === 200) {
+			expect(update).toHaveBeenCalledExactlyOnceWith('recStatement', { email_verified: true })
+		}
 	})
 
 	it('sends an old Airtable key to CiviCRM with the CiviCRM backend, token empty', async () => {

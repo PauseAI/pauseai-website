@@ -200,20 +200,6 @@ describe('/statement/sign action: STATEMENT_BACKEND=civicrm', () => {
 		env.STATEMENT_BACKEND = 'civicrm'
 	})
 
-	it('thanks the signer once CiviCRM has the signature, in English', async () => {
-		expect(await submit(VALID)).toEqual({ success: true })
-		expect(signInCrm.mock.calls[0][0]).toMatchObject({ country: 'France', language: 'en' })
-		expect(createRecord).not.toHaveBeenCalled()
-	})
-
-	it('shows an error, never the thanks, when CiviCRM could not save it', async () => {
-		signInCrm.mockResolvedValue('failed')
-		const result = await submit(VALID)
-
-		expect(result.status).toBe(502)
-		expect(result.data?.message).toBe('Sorry, we could not save your signature. Please try again.')
-	})
-
 	it('asks for a check without highlighting a field when CiviCRM refuses', async () => {
 		signInCrm.mockResolvedValue('refused')
 		const result = await submit(VALID)

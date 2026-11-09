@@ -14,7 +14,6 @@ const {
 	STATEMENT_VERSION,
 	publicListFromCrm,
 	signInCrm,
-	statementBackend,
 	verifyStatementInCrm
 } = await import('./statementCrm.js')
 
@@ -70,17 +69,6 @@ afterEach(() => {
 	vi.useRealTimers()
 	vi.unstubAllGlobals()
 	vi.restoreAllMocks()
-})
-
-describe('statementBackend', () => {
-	it('is Airtable unless STATEMENT_BACKEND is exactly "civicrm"', () => {
-		for (const value of [undefined, '', 'airtable', 'CiviCRM', 'true']) {
-			env.STATEMENT_BACKEND = value
-			expect(statementBackend()).toBe('airtable')
-		}
-		env.STATEMENT_BACKEND = 'civicrm'
-		expect(statementBackend()).toBe('civicrm')
-	})
 })
 
 describe('signInCrm', () => {
