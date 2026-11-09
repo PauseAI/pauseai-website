@@ -11,7 +11,14 @@
 	import { onMount, tick, type Snippet } from 'svelte'
 	import StatementThanks from './StatementThanks.svelte'
 
-	let { counter }: { counter?: Snippet } = $props()
+	let {
+		headingLevel = 2,
+		counter
+	}: {
+		/** The card's heading level: 1 where the card is the whole page, as in the embed. */
+		headingLevel?: 1 | 2
+		counter?: Snippet
+	} = $props()
 
 	let signed = $state(false)
 	let submitting = $state(false)
@@ -107,7 +114,9 @@
 </script>
 
 <section class="card" aria-labelledby="sign-heading">
-	<h2 id="sign-heading">Sign the statement</h2>
+	<svelte:element this={`h${headingLevel}`} id="sign-heading" class="heading"
+		>Sign the statement</svelte:element
+	>
 	{@render counter?.()}
 
 	{#if mode === 'dry_run'}
@@ -119,7 +128,7 @@
 	<!-- Always in the page, as a live region only announces changes to one it already knows. -->
 	<div class="thanks" role="status" tabindex="-1" bind:this={thanks}>
 		{#if signed}
-			<StatementThanks />
+			<StatementThanks headingLevel={headingLevel === 1 ? 2 : 3} />
 		{/if}
 	</div>
 
@@ -268,8 +277,10 @@
 		}
 	}
 
-	h2 {
+	/* An h2's size at either level, so the card looks the same wherever it is. */
+	.heading {
 		margin: 0 0 1.25rem;
+		font-size: 1.5rem;
 	}
 
 	/* Focused from code to carry on after the form goes, never reached by keyboard. */
