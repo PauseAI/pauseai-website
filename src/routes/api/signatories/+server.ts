@@ -74,11 +74,13 @@ export const GET: RequestHandler = async ({ fetch, setHeaders }) => {
 		// Fetch all records from Airtable
 		const records = await fetchAllPages<AirtableSignatory>(fetch, url)
 
-		// Filter to only include records where email_verified is explicitly true and not a duplicate
+		// Only rows whose email_verified is explicitly true. The automation ticks `duplicate` on
+		// any later row for an address, even when it's the only verified one or asks to be
+		// anonymous, so rows with an address are left for earliestRowPerAddress to settle.
+		// Without an address there is nothing to match on, so `duplicate` still decides.
 		const verifiedRecords = records.filter((record) => {
-			const emailVerified = record.fields.email_verified
-			const duplicate = record.fields.duplicate
-			return emailVerified === true && !duplicate
+			const { email_verified: emailVerified, duplicate, email } = record.fields
+			return emailVerified === true && (!duplicate || !!email)
 		})
 
 		console.log(`Total records: ${records.length}, Verified records: ${verifiedRecords.length}`)

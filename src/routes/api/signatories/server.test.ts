@@ -40,11 +40,11 @@ describe('GET /api/signatories', () => {
 		)
 	})
 
-	it('lists only verified rows that are not duplicates', async () => {
+	it('lists only verified rows, and no duplicates among rows without an address', async () => {
 		fetchAllPages.mockResolvedValue([
 			row({ name: 'Verified', email_verified: true }),
-			row({ name: 'Unverified' }),
-			row({ name: 'Duplicate', email_verified: true, duplicate: true })
+			row({ name: 'Unverified', email: 'unverified@example.org' }),
+			row({ name: 'Duplicate', email: undefined, email_verified: true, duplicate: true })
 		])
 		const { signatories, totalCount } = await list()
 
@@ -108,6 +108,39 @@ describe('GET /api/signatories: repeat rows', () => {
 
 		expect(totalCount).toBe(1)
 		expect(signatories[0].name).toBe('Anonymous')
+	})
+
+	it('lists someone who lost the first email and re-signed, on a row ticked duplicate', async () => {
+		fetchAllPages.mockResolvedValue([
+			row({ name: 'Never verified', date: '2026-01-01' }),
+			verified('re-signed', { name: 'Re-signed', duplicate: true, date: '2026-03-01' })
+		])
+		const { signatories, totalCount } = await list()
+
+		expect(signatories.map(({ name }) => name)).toEqual(['Re-signed'])
+		expect(totalCount).toBe(1)
+	})
+
+	it('honours a request to be anonymous on a later row ticked duplicate', async () => {
+		fetchAllPages.mockResolvedValue([
+			verified('public', { date: '2026-01-01' }),
+			verified('anonymous', { private: true, duplicate: true, date: '2026-03-01' })
+		])
+		const { signatories, totalCount } = await list()
+
+		expect(totalCount).toBe(1)
+		expect(signatories[0].name).toBe('Anonymous')
+	})
+
+	it('still counts an address once when its later row is ticked duplicate', async () => {
+		fetchAllPages.mockResolvedValue([
+			verified('earliest', { name: 'Earliest', date: '2026-01-01' }),
+			verified('later', { name: 'Later', duplicate: true, date: '2026-03-01' })
+		])
+		const { signatories, totalCount } = await list()
+
+		expect(signatories.map(({ name }) => name)).toEqual(['Earliest'])
+		expect(totalCount).toBe(1)
 	})
 
 	it('keeps rows without an address, and puts rows without a date last', async () => {
