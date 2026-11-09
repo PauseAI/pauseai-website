@@ -3,7 +3,11 @@
 // Turnstile are mocked. It reaches into SvelteKit's internals for the Server class and hands
 // it a manifest of only these routes, so a SvelteKit upgrade may need this file updated.
 import { afterAll, beforeAll, beforeEach, describe, expect, it, vi } from 'vitest'
-import { Server } from '../../../../../node_modules/@sveltejs/kit/src/runtime/server/index.js'
+import type { Server as KitServer, SSRManifest } from '@sveltejs/kit'
+// @ts-expect-error -- SvelteKit's internals have no type declarations, so typed just below
+import { Server as InternalServer } from '../../../../../node_modules/@sveltejs/kit/src/runtime/server/index.js'
+
+const Server = InternalServer as typeof KitServer
 
 const env: Record<string, string | undefined> = {}
 const createRecord = vi.fn<(...args: unknown[]) => Promise<unknown>>()
@@ -80,7 +84,7 @@ const manifest = {
 	}
 }
 
-let server: Server
+let server: KitServer
 
 function send(url: string, init: RequestInit) {
 	return server.respond(new Request(url, { redirect: 'manual', ...init }), {
@@ -113,7 +117,7 @@ function postAction(origin: string | null, body: URLSearchParams = FORM) {
 beforeAll(async () => {
 	// The CSRF check only exists outside dev, and production is what this is about.
 	vi.stubGlobal('__SVELTEKIT_DEV__', false)
-	server = new Server(manifest)
+	server = new Server(manifest as unknown as SSRManifest)
 	await server.init({ env: {} })
 })
 
