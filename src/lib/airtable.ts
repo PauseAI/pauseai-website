@@ -92,12 +92,28 @@ export async function fetchAllPages<T extends Record<string, unknown>>(
 	}
 }
 
+/**
+ * A value as a double-quoted string for an Airtable formula. Everything put into a formula
+ * from outside goes through this, however it was validated, so that a change to validation
+ * cannot turn into a formula injection.
+ */
+export function airtableFormulaString(value: string): string {
+	const escaped = value
+		.replace(/\\/g, '\\\\')
+		.replace(/"/g, '\\"')
+		.replace(/\n/g, '\\n')
+		.replace(/\r/g, '\\r')
+		.replace(/\t/g, '\\t')
+		.replace(/\p{Cc}/gu, '')
+	return `"${escaped}"`
+}
+
 /** An error carrying only the code and status of an Airtable error, not its message. */
-function redactedAirtableError(error: unknown): Error {
+function redactedAirtableError(error: unknown, operation: 'read' | 'write'): Error {
 	const { error: code, statusCode } = (error ?? {}) as { error?: unknown; statusCode?: unknown }
 	const safeCode = typeof code === 'string' && /^[A-Z_]+$/.test(code) ? code : 'UNKNOWN'
 	const safeStatus = typeof statusCode === 'number' ? statusCode : 'unknown'
-	return new Error(`Airtable write failed: ${safeCode} (status ${safeStatus})`)
+	return new Error(`Airtable ${operation} failed: ${safeCode} (status ${safeStatus})`)
 }
 
 /**
@@ -130,7 +146,7 @@ export async function createRecord(
 		console.log(`Successfully created record in Airtable table ${tableId}`)
 		return records[0] && toWrittenRecord(records[0])
 	} catch (caught) {
-		const error = redactErrors ? redactedAirtableError(caught) : caught
+		const error = redactErrors ? redactedAirtableError(caught, 'write') : caught
 		console.error(`Error creating Airtable record in ${tableId}:`, error)
 		// Report to Sentry even though we swallow the error: the caller surfaces
 		// a generic "could not save" message via `fail()`, which never reaches
@@ -138,6 +154,40 @@ export async function createRecord(
 		await reportError(error, { tableId, operation: 'createRecord' })
 		// We don't throw here to avoid failing the whole request if Airtable is down
 		return undefined
+	}
+}
+
+/**
+ * Whether any record matches a formula, with the write key. For lookups by personal data:
+ * neither the formula nor Airtable's message, which can quote it, reaches a log or a report.
+ * @param formula Build it with airtableFormulaString for anything from outside
+ * @param field A field to fetch: Airtable answers with every field if none is named, and
+ * this only needs to know a row exists, so name one that isn't personal
+ * @returns 'failed' when the lookup could not be made, or the key is not configured
+ */
+export async function hasMatchingRecord(
+	baseId: string,
+	tableId: string,
+	formula: string,
+	field: string
+): Promise<boolean | 'failed'> {
+	const apiKey = getWriteApiKey()
+	if (!apiKey) {
+		console.warn(`⚠️ Airtable API key not configured. Skipping record lookup.`)
+		return 'failed'
+	}
+
+	try {
+		const records = await new Airtable({ apiKey })
+			.base(baseId)(tableId)
+			.select({ filterByFormula: formula, maxRecords: 1, fields: [field] })
+			.firstPage()
+		return records.length > 0
+	} catch (caught) {
+		const error = redactedAirtableError(caught, 'read')
+		console.error(`Error looking up Airtable record in ${tableId}:`, error)
+		await reportError(error, { tableId, operation: 'hasMatchingRecord' })
+		return 'failed'
 	}
 }
 

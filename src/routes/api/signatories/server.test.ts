@@ -61,3 +61,63 @@ describe('GET /api/signatories', () => {
 		expect(JSON.stringify(signatories)).not.toContain('Ada Lovelace')
 	})
 })
+
+describe('GET /api/signatories: repeat rows', () => {
+	const verified = (id: string, fields: Record<string, unknown>) => ({
+		...row({ email_verified: true, ...fields }),
+		id
+	})
+
+	it('lists and counts an address once, as its earliest row', async () => {
+		fetchAllPages.mockResolvedValue([
+			verified('later', { name: 'Later', date: '2026-03-01' }),
+			verified('other', { name: 'Other', email: 'other@example.org', date: '2026-02-01' }),
+			verified('earliest', { name: 'Earliest', date: '2026-01-01' })
+		])
+		const { signatories, totalCount } = await list()
+
+		expect(signatories.map(({ name }) => name)).toEqual(['Earliest', 'Other'])
+		expect(totalCount).toBe(2)
+	})
+
+	it('matches addresses regardless of case and surrounding space', async () => {
+		fetchAllPages.mockResolvedValue([
+			verified('a', { email: 'Ada@Example.org ', date: '2026-01-01' }),
+			verified('b', { email: 'ada@example.org', date: '2026-02-01' })
+		])
+
+		expect((await list()).totalCount).toBe(1)
+	})
+
+	it('ignores an unverified earlier row, so a verified later one is still listed', async () => {
+		fetchAllPages.mockResolvedValue([
+			row({ name: 'Unverified', date: '2026-01-01' }),
+			verified('later', { name: 'Later', date: '2026-02-01' })
+		])
+		const { signatories } = await list()
+
+		expect(signatories.map(({ name }) => name)).toEqual(['Later'])
+	})
+
+	it('keeps an address anonymous if any of its rows asked to be', async () => {
+		fetchAllPages.mockResolvedValue([
+			verified('public', { date: '2026-01-01' }),
+			verified('anonymous', { private: true, date: '2026-02-01' })
+		])
+		const { signatories, totalCount } = await list()
+
+		expect(totalCount).toBe(1)
+		expect(signatories[0].name).toBe('Anonymous')
+	})
+
+	it('keeps rows without an address, and puts rows without a date last', async () => {
+		fetchAllPages.mockResolvedValue([
+			verified('undated', { name: 'Undated', email: undefined, date: undefined }),
+			verified('first', { name: 'First', email: undefined, date: '2026-01-01' }),
+			verified('second', { name: 'Second', email: undefined, date: '2026-02-01' })
+		])
+		const { signatories } = await list()
+
+		expect(signatories.map(({ name }) => name)).toEqual(['First', 'Second', 'Undated'])
+	})
+})

@@ -2,23 +2,40 @@ import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 
 const env: Record<string, string | undefined> = {}
 const createRecord = vi.fn<(...args: unknown[]) => Promise<unknown>>()
-const checkNotSpam = vi.fn<(...args: unknown[]) => Promise<{ drop: boolean; message?: string }>>()
+const hasMatchingRecord = vi.fn<(...args: unknown[]) => Promise<boolean | 'failed'>>()
+const verifyTurnstile =
+	vi.fn<(...args: unknown[]) => Promise<{ ok: boolean; message?: string; unavailable?: true }>>()
 
+vi.mock('$app/environment', () => ({ dev: false }))
 vi.mock('$env/dynamic/private', () => ({ env }))
-vi.mock('$lib/airtable', () => ({ createRecord }))
-vi.mock('$lib/server/turnstile-verify', () => ({ checkNotSpam }))
+vi.mock('$lib/airtable', () => ({
+	airtableFormulaString: (value: string) => `"${value}"`,
+	createRecord,
+	hasMatchingRecord
+}))
+vi.mock('$lib/server/turnstile-verify', () => ({ verifyTurnstile }))
 
 const { actions } = await import('./+page.server.js')
 const { resetRateLimits } = await import('$lib/server/rateLimit')
 
 type Result = { status?: number; data?: Record<string, unknown> } & Record<string, unknown>
 
-const VALID = { name: 'Ada Lovelace', email: 'ada@example.org', country: 'France' }
+const VALID = {
+	name: 'Ada Lovelace',
+	email: 'ada@example.org',
+	country: 'France',
+	turnstile_token: 'a-token'
+}
+const LOCAL = 'http://localhost:37572'
 
-async function submit(fields: Record<string, string>, address = '192.0.2.1'): Promise<Result> {
+async function submit(
+	fields: Record<string, string>,
+	address = '192.0.2.1',
+	site = 'https://pauseai.info'
+): Promise<Result> {
 	// Urlencoded, as use:enhance posts a form with no file inputs.
 	const body = new URLSearchParams(fields)
-	const url = new URL('https://pauseai.info/statement/sign')
+	const url = new URL(`${site}/statement/sign`)
 	const request = new Request(url, { method: 'POST', body })
 	return (await actions.default({
 		request,
@@ -28,10 +45,12 @@ async function submit(fields: Record<string, string>, address = '192.0.2.1'): Pr
 }
 
 beforeEach(() => {
-	env.ONBOARDING_LIVE = 'true'
+	env.STATEMENT_SIGNING_LIVE = 'true'
+	env.ONBOARDING_LIVE = undefined
 	resetRateLimits()
 	createRecord.mockReset().mockResolvedValue({ id: 'recAda', createdTime: '', fields: {} })
-	checkNotSpam.mockReset().mockResolvedValue({ drop: false })
+	hasMatchingRecord.mockReset().mockResolvedValue(false)
+	verifyTurnstile.mockReset().mockResolvedValue({ ok: true })
 	vi.spyOn(console, 'log').mockImplementation(() => {})
 })
 
@@ -75,27 +94,47 @@ describe('statement form action', () => {
 		expect(createRecord).not.toHaveBeenCalled()
 	})
 
-	it('pretends success on a filled honeypot, without writing', async () => {
-		checkNotSpam.mockResolvedValue({ drop: true })
-
+	it('pretends success on a filled honeypot, without checking or writing', async () => {
 		expect(await submit({ ...VALID, nickname: 'bot' })).toEqual({ success: true })
+		expect(verifyTurnstile).not.toHaveBeenCalled()
 		expect(createRecord).not.toHaveBeenCalled()
 	})
 
-	it('catches the honeypot outside production too, where Turnstile does not run', async () => {
-		env.ONBOARDING_LIVE = undefined
+	it('catches the honeypot in a dry run too', async () => {
+		env.STATEMENT_SIGNING_LIVE = undefined
 
-		expect(await submit({ ...VALID, nickname: 'bot' })).toEqual({ success: true })
-		expect(checkNotSpam).not.toHaveBeenCalled()
+		expect(await submit({ ...VALID, nickname: 'bot' }, undefined, LOCAL)).toEqual({ success: true })
 		expect(createRecord).not.toHaveBeenCalled()
+	})
+
+	it('checks the token against this site only, not chapter hostnames', async () => {
+		await submit(VALID)
+
+		expect(verifyTurnstile).toHaveBeenCalledExactlyOnceWith('a-token', ['pauseai.info'])
 	})
 
 	it('refuses a failed anti-spam check', async () => {
-		checkNotSpam.mockResolvedValue({ drop: false, message: 'The anti-spam check failed.' })
+		verifyTurnstile.mockResolvedValue({ ok: false, message: 'The anti-spam check failed.' })
 		const result = await submit(VALID)
 
 		expect(result.status).toBe(403)
 		expect(result.data?.message).toBe('The anti-spam check failed.')
+		expect(createRecord).not.toHaveBeenCalled()
+	})
+
+	it('shows a 503 when the anti-spam check is unavailable', async () => {
+		verifyTurnstile.mockResolvedValue({ ok: false, unavailable: true, message: 'Unavailable.' })
+		const result = await submit(VALID)
+
+		expect(result.status).toBe(503)
+		expect(result.data?.message).toBe('Unavailable.')
+		expect(createRecord).not.toHaveBeenCalled()
+	})
+
+	it('says thanks for a repeat signature, without writing', async () => {
+		hasMatchingRecord.mockResolvedValue(true)
+
+		expect(await submit(VALID)).toEqual({ success: true })
 		expect(createRecord).not.toHaveBeenCalled()
 	})
 
@@ -108,20 +147,37 @@ describe('statement form action', () => {
 		expect(JSON.stringify(result)).not.toContain(VALID.email)
 	})
 
-	it('does not write outside production, or need a Turnstile token', async () => {
-		env.ONBOARDING_LIVE = undefined
+	it('shows an error on the real site when signing is off, saying nothing was saved', async () => {
+		env.STATEMENT_SIGNING_LIVE = undefined
+		env.ONBOARDING_LIVE = 'true'
+		const result = await submit(VALID)
 
-		expect(await submit(VALID)).toEqual({ success: true })
-		expect(checkNotSpam).not.toHaveBeenCalled()
+		expect(result.status).toBe(503)
+		expect(result.data?.message).toContain('nothing was saved')
+		expect(verifyTurnstile).not.toHaveBeenCalled()
 		expect(createRecord).not.toHaveBeenCalled()
 	})
 
-	it('limits repeated attempts from one address', async () => {
-		for (let attempt = 0; attempt < 10; attempt++) await submit(VALID)
+	it('says thanks in a dry run, without writing or needing a token', async () => {
+		env.STATEMENT_SIGNING_LIVE = undefined
+
+		expect(await submit(VALID, undefined, LOCAL)).toEqual({ success: true })
+		expect(verifyTurnstile).not.toHaveBeenCalled()
+		expect(createRecord).not.toHaveBeenCalled()
+	})
+
+	it('limits repeated saves from one address', async () => {
+		for (let save = 0; save < 30; save++) await submit(VALID)
 		const result = await submit(VALID)
 
 		expect(result.status).toBe(429)
-		expect(createRecord).toHaveBeenCalledTimes(10)
+		expect(createRecord).toHaveBeenCalledTimes(30)
+	})
+
+	it('does not count failed attempts against an address', async () => {
+		for (let attempt = 0; attempt < 35; attempt++) await submit({ ...VALID, name: '' })
+
+		expect(await submit(VALID)).toEqual({ success: true })
 	})
 
 	it('refuses an oversized post', async () => {

@@ -2,10 +2,12 @@ export const prerender = false
 
 import {
 	readLimitedBody,
+	signingMode,
 	signStatement,
-	takeSigningRateLimit,
-	type SignatureErrors
+	type SignatureErrors,
+	type SigningMode
 } from '$lib/server/statement'
+import { TURNSTILE_FIELD } from '$lib/turnstile'
 import { json } from '@sveltejs/kit'
 import { StatusCodes } from 'http-status-codes'
 import type { RequestHandler } from './$types'
@@ -13,21 +15,28 @@ import type { RequestHandler } from './$types'
 // Public signing endpoint for chapter sites. The contract lives in
 // docs/statement-signing-api.md, and it stays the same when signatures move out of Airtable.
 
-// Add a chapter's exact origin (scheme and host, no trailing slash) to let its pages call this.
+// Add a chapter's exact origin (scheme and host, no trailing slash) to let its pages call
+// this, and its hostname to the Turnstile widget in Cloudflare. Its hostname is then also
+// accepted on tokens, which is what binds a caller that isn't a browser.
 const CHAPTER_ORIGINS = ['https://pauseai.es']
 
 type SignError =
 	| 'origin_not_allowed'
+	| 'turnstile_failed'
+	| 'turnstile_unavailable'
 	| 'rate_limited'
 	| 'unsupported_media_type'
 	| 'payload_too_large'
 	| 'invalid_json'
 	| 'validation_failed'
 	| 'save_failed'
+	| 'signing_unavailable'
 
 export type SignResponse =
-	| { ok: true; status: 'pending_verification' }
+	| { ok: true; status: 'pending_verification'; dry_run?: true }
 	| { ok: false; error: SignError; fields?: SignatureErrors }
+
+export type SigningModeResponse = { mode: SigningMode }
 
 const isAllowedOrigin = (origin: string, ownOrigin: string) =>
 	origin === ownOrigin || CHAPTER_ORIGINS.includes(origin)
@@ -37,7 +46,10 @@ function responseHeaders(origin: string | null, ownOrigin: string): Record<strin
 		'cache-control': 'no-store',
 		vary: 'Origin',
 		...(origin && isAllowedOrigin(origin, ownOrigin)
-			? { 'access-control-allow-origin': origin }
+			? {
+					'access-control-allow-origin': origin,
+					'access-control-expose-headers': 'Retry-After'
+				}
 			: {})
 	}
 }
@@ -51,13 +63,20 @@ export const OPTIONS: RequestHandler = ({ request, url }) => {
 			...responseHeaders(origin, url.origin),
 			...(allowed
 				? {
-						'access-control-allow-methods': 'POST, OPTIONS',
+						'access-control-allow-methods': 'GET, POST, OPTIONS',
 						'access-control-allow-headers': 'Content-Type',
 						'access-control-max-age': '86400'
 					}
 				: {})
 		}
 	})
+}
+
+// Tells a form whether signing works here before anyone fills it in, and whether to show
+// Turnstile, which only runs when a signature would be written.
+export const GET: RequestHandler = ({ request, url }) => {
+	const body: SigningModeResponse = { mode: signingMode(url.hostname) }
+	return json(body, { headers: responseHeaders(request.headers.get('origin'), url.origin) })
 }
 
 export const POST: RequestHandler = async ({ request, url, getClientAddress }) => {
@@ -68,19 +87,11 @@ export const POST: RequestHandler = async ({ request, url, getClientAddress }) =
 	const refuse = (status: number, error: SignError, fields?: SignatureErrors) =>
 		respond(status, { ok: false, error, ...(fields ? { fields } : {}) })
 
-	// A browser would not show this response to the page anyway. Refusing here also stops a
-	// page on another site from sending a signature blind, without reading the answer.
+	// Stops a page on another site from sending a signature blind. Only browsers send an
+	// Origin, and anything else can leave it out or forge it, so this is not what protects
+	// the endpoint: the Turnstile token, checked below for every caller, is.
 	if (origin && !isAllowedOrigin(origin, url.origin)) {
 		return refuse(StatusCodes.FORBIDDEN, 'origin_not_allowed')
-	}
-
-	const retryAfter = takeSigningRateLimit(getClientAddress)
-	if (retryAfter !== null) {
-		return respond(
-			StatusCodes.TOO_MANY_REQUESTS,
-			{ ok: false, error: 'rate_limited' },
-			{ 'retry-after': String(retryAfter) }
-		)
 	}
 
 	const contentType = request.headers.get('content-type') ?? ''
@@ -101,12 +112,38 @@ export const POST: RequestHandler = async ({ request, url, getClientAddress }) =
 		return refuse(StatusCodes.BAD_REQUEST, 'invalid_json')
 	}
 
-	const result = await signStatement(body)
+	const result = await signStatement(body, {
+		hostname: url.hostname,
+		allowedHostnames: [
+			url.hostname,
+			...CHAPTER_ORIGINS.map((chapterOrigin) => new URL(chapterOrigin).hostname)
+		],
+		turnstileToken: (body as Record<string, unknown>)[TURNSTILE_FIELD],
+		getClientAddress
+	})
 	switch (result.status) {
 		case 'accepted':
 			return respond(StatusCodes.ACCEPTED, { ok: true, status: 'pending_verification' })
+		case 'dry_run':
+			return respond(StatusCodes.ACCEPTED, {
+				ok: true,
+				status: 'pending_verification',
+				dry_run: true
+			})
 		case 'invalid':
 			return refuse(StatusCodes.BAD_REQUEST, 'validation_failed', result.errors)
+		case 'unavailable':
+			return refuse(StatusCodes.SERVICE_UNAVAILABLE, 'signing_unavailable')
+		case 'turnstile_failed':
+			return refuse(StatusCodes.FORBIDDEN, 'turnstile_failed')
+		case 'turnstile_unavailable':
+			return refuse(StatusCodes.SERVICE_UNAVAILABLE, 'turnstile_unavailable')
+		case 'rate_limited':
+			return respond(
+				StatusCodes.TOO_MANY_REQUESTS,
+				{ ok: false, error: 'rate_limited' },
+				{ 'retry-after': String(result.retryAfter) }
+			)
 		case 'failed':
 			return refuse(StatusCodes.BAD_GATEWAY, 'save_failed')
 	}

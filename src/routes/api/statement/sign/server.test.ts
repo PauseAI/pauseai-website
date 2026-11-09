@@ -2,11 +2,22 @@ import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 
 const env: Record<string, string | undefined> = {}
 const createRecord = vi.fn<(...args: unknown[]) => Promise<unknown>>()
+const hasMatchingRecord = vi.fn<(...args: unknown[]) => Promise<boolean | 'failed'>>()
+const verifyTurnstile =
+	vi.fn<(...args: unknown[]) => Promise<{ ok: boolean; message?: string; unavailable?: true }>>()
+const appEnvironment = vi.hoisted(() => ({ dev: false }))
 
+vi.mock('$app/environment', () => appEnvironment)
 vi.mock('$env/dynamic/private', () => ({ env }))
-vi.mock('$lib/airtable', () => ({ createRecord }))
+vi.mock('$lib/airtable', async (importOriginal) => ({
+	airtableFormulaString: (await importOriginal<typeof import('$lib/airtable')>())
+		.airtableFormulaString,
+	createRecord,
+	hasMatchingRecord
+}))
+vi.mock('$lib/server/turnstile-verify', () => ({ verifyTurnstile }))
 
-const { OPTIONS, POST } = await import('./+server.js')
+const { GET, OPTIONS, POST } = await import('./+server.js')
 const { resetRateLimits } = await import('$lib/server/rateLimit')
 
 const SITE = 'https://pauseai.info'
@@ -18,7 +29,8 @@ const VALID = {
 	country: 'Spain',
 	bio: 'I care about this.',
 	private: false,
-	honeypot: ''
+	honeypot: '',
+	turnstile_token: 'a-token'
 }
 
 type PostOptions = {
@@ -26,11 +38,12 @@ type PostOptions = {
 	contentType?: string
 	address?: string
 	rawBody?: string
+	site?: string
 }
 
 function post(body: unknown, options: PostOptions = {}) {
 	const { origin = CHAPTER, contentType = 'application/json', address = '192.0.2.1' } = options
-	const url = new URL(`${SITE}/api/statement/sign`)
+	const url = new URL(`${options.site ?? SITE}/api/statement/sign`)
 	const request = new Request(url, {
 		method: 'POST',
 		headers: { 'content-type': contentType, ...(origin ? { origin } : {}) },
@@ -52,9 +65,13 @@ const logged = () =>
 		.join('\n')
 
 beforeEach(() => {
-	env.ONBOARDING_LIVE = 'true'
+	env.STATEMENT_SIGNING_LIVE = 'true'
+	env.ONBOARDING_LIVE = undefined
+	appEnvironment.dev = false
 	resetRateLimits()
 	createRecord.mockReset().mockResolvedValue({ id: 'recAda', createdTime: '', fields: {} })
+	hasMatchingRecord.mockReset().mockResolvedValue(false)
+	verifyTurnstile.mockReset().mockResolvedValue({ ok: true })
 	vi.spyOn(console, 'log').mockImplementation(() => {})
 	vi.spyOn(console, 'warn').mockImplementation(() => {})
 	vi.spyOn(console, 'error').mockImplementation(() => {})
@@ -107,24 +124,194 @@ describe('POST /api/statement/sign: saving', () => {
 			'private'
 		])
 	})
+})
 
-	it('does not write outside production', async () => {
-		env.ONBOARDING_LIVE = undefined
+describe('POST /api/statement/sign: Turnstile', () => {
+	it.each([
+		['a browser on a chapter site', CHAPTER],
+		['a server, which sends no Origin', null]
+	])('checks the token from %s, accepting chapter hostnames', async (_label, origin) => {
+		await post(VALID, { origin })
+
+		expect(verifyTurnstile).toHaveBeenCalledExactlyOnceWith('a-token', [
+			'pauseai.info',
+			'pauseai.es'
+		])
+	})
+
+	it.each([
+		['a browser on a chapter site', CHAPTER],
+		['a server, which sends no Origin', null]
+	])('refuses %s when the check fails, without writing', async (_label, origin) => {
+		verifyTurnstile.mockResolvedValue({ ok: false, message: 'failed' })
+		const response = await post(VALID, { origin })
+
+		expect(response.status).toBe(403)
+		expect(await response.json()).toEqual({ ok: false, error: 'turnstile_failed' })
+		expect(createRecord).not.toHaveBeenCalled()
+		expect(hasMatchingRecord).not.toHaveBeenCalled()
+	})
+
+	it('passes on no token at all when none, or a non-string, was sent', async () => {
+		verifyTurnstile.mockResolvedValue({ ok: false, message: 'failed' })
+
+		expect((await post({ ...VALID, turnstile_token: undefined })).status).toBe(403)
+		expect((await post({ ...VALID, turnstile_token: { a: 1 } })).status).toBe(403)
+		expect(verifyTurnstile.mock.calls.map(([token]) => token)).toEqual([undefined, undefined])
+	})
+
+	it('answers 503 when Turnstile itself is unavailable, without writing', async () => {
+		verifyTurnstile.mockResolvedValue({ ok: false, unavailable: true, message: 'down' })
 		const response = await post(VALID)
 
-		expect(response.status).toBe(202)
+		expect(response.status).toBe(503)
+		expect(await response.json()).toEqual({ ok: false, error: 'turnstile_unavailable' })
 		expect(createRecord).not.toHaveBeenCalled()
 	})
 
-	it('answers the same for a repeat signature, without looking up earlier ones', async () => {
-		const first = await (await post(VALID)).json()
-		const second = await (await post(VALID)).json()
+	it('spends no token on a signature that is invalid anyway', async () => {
+		expect((await post({ ...VALID, name: '' })).status).toBe(400)
+		expect(verifyTurnstile).not.toHaveBeenCalled()
+	})
 
-		expect(second).toEqual(first)
+	it('pretends success on a filled honeypot, without checking or writing', async () => {
+		const response = await post({ ...VALID, honeypot: 'gotcha' })
+
+		expect(response.status).toBe(202)
+		expect(await response.json()).toEqual({ ok: true, status: 'pending_verification' })
+		expect(verifyTurnstile).not.toHaveBeenCalled()
+		expect(createRecord).not.toHaveBeenCalled()
 	})
 })
 
-describe('POST /api/statement/sign: refusals', () => {
+describe('POST /api/statement/sign: repeat signatures', () => {
+	it('looks up the address case-insensitively, over a window, reading no personal field', async () => {
+		await post({ ...VALID, email: ' Ada@Example.ORG ' })
+
+		const [base, table, formula, field] = hasMatchingRecord.mock.calls[0]
+		expect(base).toBe('appWPTGqZmUcs3NWu')
+		expect(table).toBe('tbl2emfOWNWoVz1kW')
+		expect(formula).toBe(
+			`AND(LOWER(TRIM({email})) = "ada@example.org", IS_AFTER(CREATED_TIME(), DATEADD(NOW(), -30, 'days')))`
+		)
+		expect(field).toBe('email_verified')
+	})
+
+	it('escapes the address in the formula', async () => {
+		await post({ ...VALID, email: `o'brien\\x@example.org` })
+
+		expect(hasMatchingRecord.mock.calls[0][2]).toContain(`= "o'brien\\\\x@example.org"`)
+	})
+
+	it('answers a repeat exactly as a new signature, writing nothing', async () => {
+		const first = await post(VALID)
+		const firstBody = await first.text()
+
+		hasMatchingRecord.mockResolvedValue(true)
+		createRecord.mockClear()
+		const repeat = await post(VALID)
+
+		expect(repeat.status).toBe(first.status)
+		expect(await repeat.text()).toBe(firstBody)
+		expect([...repeat.headers]).toEqual([...first.headers])
+		expect(createRecord).not.toHaveBeenCalled()
+	})
+
+	it('reports a failed lookup as a failed save, writing nothing', async () => {
+		hasMatchingRecord.mockResolvedValue('failed')
+		const response = await post(VALID)
+
+		expect(response.status).toBe(502)
+		expect(await response.json()).toEqual({ ok: false, error: 'save_failed' })
+		expect(createRecord).not.toHaveBeenCalled()
+	})
+})
+
+describe('POST /api/statement/sign: when signing is not live', () => {
+	beforeEach(() => {
+		env.STATEMENT_SIGNING_LIVE = undefined
+	})
+
+	it('refuses visibly on the real site, without checking or writing', async () => {
+		const response = await post(VALID)
+
+		expect(response.status).toBe(503)
+		expect(await response.json()).toEqual({ ok: false, error: 'signing_unavailable' })
+		expect(verifyTurnstile).not.toHaveBeenCalled()
+		expect(hasMatchingRecord).not.toHaveBeenCalled()
+		expect(createRecord).not.toHaveBeenCalled()
+	})
+
+	it('refuses on an unknown hostname too, so a new domain cannot lose signatures', async () => {
+		expect((await post(VALID, { site: 'https://pauseai.example' })).status).toBe(503)
+	})
+
+	it('does not treat ONBOARDING_LIVE as turning signing on', async () => {
+		env.ONBOARDING_LIVE = 'true'
+
+		expect((await post(VALID)).status).toBe(503)
+		expect(createRecord).not.toHaveBeenCalled()
+	})
+
+	it.each([
+		'http://localhost:37572',
+		'http://127.0.0.1:4173',
+		'https://deploy-preview-1261--pauseai.netlify.app'
+	])('says it was a dry run on %s, without a token or a write', async (site) => {
+		const response = await post({ ...VALID, turnstile_token: undefined }, { site, origin: site })
+
+		expect(response.status).toBe(202)
+		expect(await response.json()).toEqual({
+			ok: true,
+			status: 'pending_verification',
+			dry_run: true
+		})
+		expect(verifyTurnstile).not.toHaveBeenCalled()
+		expect(hasMatchingRecord).not.toHaveBeenCalled()
+		expect(createRecord).not.toHaveBeenCalled()
+	})
+
+	it('treats any hostname as a dry run on a dev server, as on a tailnet URL', async () => {
+		appEnvironment.dev = true
+		const site = 'https://machine.example.ts.net:5102'
+
+		expect((await post(VALID, { site, origin: site })).status).toBe(202)
+		expect(createRecord).not.toHaveBeenCalled()
+	})
+
+	it('still validates in a dry run', async () => {
+		const site = 'http://localhost:37572'
+
+		expect((await post({ ...VALID, name: '' }, { site, origin: site })).status).toBe(400)
+	})
+
+	it('still catches the honeypot in a dry run, with no sign of a dry run', async () => {
+		const site = 'http://localhost:37572'
+		const response = await post({ ...VALID, honeypot: 'x' }, { site, origin: site })
+
+		expect(await response.json()).toEqual({ ok: true, status: 'pending_verification' })
+	})
+})
+
+describe('GET /api/statement/sign', () => {
+	const mode = async (site: string) => {
+		const url = new URL(`${site}/api/statement/sign`)
+		const response = await GET({ request: new Request(url), url } as never)
+		return { response, body: await response.json() }
+	}
+
+	it('reports each mode, uncached', async () => {
+		const live = await mode(SITE)
+		expect(live.body).toEqual({ mode: 'live' })
+		expect(live.response.headers.get('cache-control')).toBe('no-store')
+
+		env.STATEMENT_SIGNING_LIVE = undefined
+		expect((await mode(SITE)).body).toEqual({ mode: 'off' })
+		expect((await mode('http://localhost:37572')).body).toEqual({ mode: 'dry_run' })
+	})
+})
+
+describe('POST /api/statement/sign: validation', () => {
 	it.each([
 		['missing name', { name: '  ' }, { name: 'required' }],
 		['overlong name', { name: 'x'.repeat(201) }, { name: 'too_long' }],
@@ -143,14 +330,127 @@ describe('POST /api/statement/sign: refusals', () => {
 		expect(createRecord).not.toHaveBeenCalled()
 	})
 
-	it('pretends success on a filled honeypot, without writing', async () => {
-		const response = await post({ ...VALID, honeypot: 'gotcha' })
+	it.each([
+		'a,b@example.org',
+		'a;b@example.org',
+		'a<b@example.org',
+		'a>b@example.org',
+		'a"b@example.org',
+		'ada@example.org, other@example.org',
+		'Ada <ada@example.org>',
+		'ada@exam\u0000ple.org',
+		'ada\r\nbcc:@example.org',
+		'ada‮@example.org',
+		'ada@example,org.uk'
+	])('refuses the email %j', async (email) => {
+		const response = await post({ ...VALID, email })
 
-		expect(response.status).toBe(202)
-		expect(await response.json()).toEqual({ ok: true, status: 'pending_verification' })
-		expect(createRecord).not.toHaveBeenCalled()
+		expect(response.status).toBe(400)
+		expect(await response.json()).toMatchObject({ fields: { email: 'invalid' } })
 	})
 
+	it.each([
+		'ada@example.org',
+		'ada.lovelace+statement@example.org',
+		"o'brien@example.org",
+		'josé@ejemplo.es',
+		'ada@例え.jp',
+		'ada@sub.example.co.uk'
+	])('accepts the email %j', async (email) => {
+		expect((await post({ ...VALID, email })).status).toBe(202)
+	})
+
+	it.each([
+		['a null byte', 'Ada\u0000Lovelace'],
+		['a line break', 'Ada\nLovelace'],
+		['a carriage return', 'Ada\r\nBcc: x'],
+		['a tab', 'Ada\tLovelace'],
+		['a C1 control', 'Ada\u0085Lovelace'],
+		['a bidi override', 'Ada‮Lovelace'],
+		['a bidi isolate', 'Ada⁦Lovelace'],
+		['an http link', 'Visit http://evil.example now'],
+		['a scheme-relative mention', 'hxxp://evil.example'],
+		['a bare domain', 'evil.com'],
+		['a domain in words', 'Click evil.example/offer today'],
+		['a domain after punctuation', '(evil.com)'],
+		['a subdomain', 'www.evil.co.uk'],
+		['a non-Latin domain', 'пример.рф'],
+		['a full-width dot', 'evil。com'],
+		['an IP address', 'See 192.0.2.1'],
+		['a mailto link', 'mailto:ada@example.org'],
+		['an email address', 'ada@example.org'],
+		['a domain behind a title', 'dr.evil.com'],
+		['a list with a domain', 'Ada,evil.com']
+	])('refuses a name with %s', async (_label, name) => {
+		const response = await post({ ...VALID, name })
+
+		expect(response.status).toBe(400)
+		expect(await response.json()).toMatchObject({ fields: { name: 'invalid' } })
+	})
+
+	it.each([
+		'Ada Lovelace',
+		"Conan O'Brien",
+		'Mary-Jane Watson-Parker',
+		'Jean-Luc Picard',
+		'J.R.R. Tolkien',
+		'J. R. Smith',
+		'A.P.J. Abdul Kalam',
+		'S.Ramesh',
+		'Martin Luther King, Jr.',
+		'Dr. Ada Lovelace',
+		'Dr.Smith',
+		'Prof.Dr. Müller',
+		'Prof. Dr. Hans Müller',
+		'Ada Lovelace, Ph.D',
+		'Ada Lovelace, Ph.D.',
+		'José García Núñez',
+		'Ó Briain',
+		'Nguyễn Văn An',
+		'Søren Kierkegaard',
+		'Анна Каренина',
+		'محمد علي',
+		'דוד כהן',
+		'李明',
+		'佐藤 健',
+		'김민수',
+		'प्रिया शर्मा',
+		'தமிழ் செல்வன்',
+		'Αλέξανδρος',
+		'ሰላም ተስፋ',
+		'نرگس‌محمدی',
+		'محمد‏ علي'
+	])('accepts the name %j', async (name) => {
+		const response = await post({ ...VALID, name })
+
+		expect(response.status).toBe(202)
+		expect(createRecord.mock.calls[0][2]).toMatchObject({ name })
+	})
+
+	it.each([
+		['a null byte', 'Why\u0000this'],
+		['a backspace', 'Why\bthis'],
+		['a bidi override', 'Why‮this'],
+		['a bidi isolate', 'Why⁧this']
+	])('refuses a bio with %s', async (_label, bio) => {
+		const response = await post({ ...VALID, bio })
+
+		expect(response.status).toBe(400)
+		expect(await response.json()).toMatchObject({ fields: { bio: 'invalid' } })
+	})
+
+	it.each([
+		'Line one\nLine two',
+		'Tabbed\tout',
+		'See https://example.org for why',
+		'لأن هذا مهم‏',
+		'👩‍🔬 researcher'
+	])('accepts the bio %j', async (bio) => {
+		expect((await post({ ...VALID, bio })).status).toBe(202)
+	})
+})
+
+describe('POST /api/statement/sign: refusals', () => {
 	it('refuses a body that is not JSON', async () => {
 		const response = await post(null, { rawBody: '{nope' })
 
@@ -163,7 +463,7 @@ describe('POST /api/statement/sign: refusals', () => {
 	})
 
 	it('refuses other content types', async () => {
-		const response = await post(VALID, { contentType: 'text/plain' })
+		const response = await post(VALID, { contentType: 'application/xml' })
 
 		expect(response.status).toBe(415)
 		expect(createRecord).not.toHaveBeenCalled()
@@ -174,21 +474,6 @@ describe('POST /api/statement/sign: refusals', () => {
 
 		expect(response.status).toBe(413)
 		expect(createRecord).not.toHaveBeenCalled()
-	})
-
-	it('limits repeated attempts from one address, and not from another', async () => {
-		for (let attempt = 0; attempt < 10; attempt++) {
-			expect((await post(VALID)).status).toBe(202)
-		}
-		const limited = await post(VALID)
-
-		expect(limited.status).toBe(429)
-		expect(await limited.json()).toEqual({ ok: false, error: 'rate_limited' })
-		expect(Number(limited.headers.get('retry-after'))).toBeGreaterThan(0)
-		expect(limited.headers.get('access-control-allow-origin')).toBe(CHAPTER)
-		expect(createRecord).toHaveBeenCalledTimes(10)
-
-		expect((await post(VALID, { address: '192.0.2.2' })).status).toBe(202)
 	})
 
 	it('reports a failed save without echoing what was sent', async () => {
@@ -207,6 +492,11 @@ describe('POST /api/statement/sign: refusals', () => {
 		createRecord.mockResolvedValue(undefined)
 		await post(VALID)
 		await post({ ...VALID, country: 'Atlantis' })
+		hasMatchingRecord.mockResolvedValue('failed')
+		await post(VALID)
+		env.STATEMENT_SIGNING_LIVE = undefined
+		await post(VALID)
+		await post(VALID, { site: 'http://localhost:37572', origin: 'http://localhost:37572' })
 
 		expect(logged()).not.toContain(SECRET_EMAIL)
 		expect(logged()).not.toContain(VALID.name)
@@ -221,13 +511,121 @@ describe('POST /api/statement/sign: refusals', () => {
 	})
 })
 
+describe('POST /api/statement/sign: rate limits', () => {
+	const SAVE_LIMIT = 30
+
+	async function saveUpToLimit(address = '192.0.2.1') {
+		for (let save = 0; save < SAVE_LIMIT; save++) {
+			expect((await post(VALID, { address })).status).toBe(202)
+		}
+	}
+
+	it('limits saves from one address, and not from another', async () => {
+		await saveUpToLimit()
+		const limited = await post(VALID)
+
+		expect(limited.status).toBe(429)
+		expect(await limited.json()).toEqual({ ok: false, error: 'rate_limited' })
+		expect(Number(limited.headers.get('retry-after'))).toBeGreaterThan(0)
+		expect(limited.headers.get('access-control-allow-origin')).toBe(CHAPTER)
+		expect(createRecord).toHaveBeenCalledTimes(SAVE_LIMIT)
+
+		expect((await post(VALID, { address: '192.0.2.2' })).status).toBe(202)
+	})
+
+	it('counts one IPv6 /64 as one sender, and another /64 apart', async () => {
+		for (let save = 0; save < SAVE_LIMIT; save++) {
+			const address = `2001:db8:1:2::${save.toString(16)}`
+			expect((await post(VALID, { address })).status).toBe(202)
+		}
+
+		expect((await post(VALID, { address: '2001:db8:1:2:ffff::1' })).status).toBe(429)
+		expect((await post(VALID, { address: '2001:db8:1:3::1' })).status).toBe(202)
+	})
+
+	it.each([
+		['validation errors', { name: '' }, () => {}],
+		[
+			'Turnstile failures',
+			{},
+			() => verifyTurnstile.mockResolvedValue({ ok: false, message: 'failed' })
+		],
+		['failed saves', {}, () => createRecord.mockResolvedValue(undefined)],
+		['failed lookups', {}, () => hasMatchingRecord.mockResolvedValue('failed')]
+	])('does not count %s against an address', async (_label, change, arrange) => {
+		arrange()
+		for (let attempt = 0; attempt < SAVE_LIMIT + 5; attempt++) {
+			expect((await post({ ...VALID, ...change })).status).not.toBe(429)
+		}
+
+		verifyTurnstile.mockResolvedValue({ ok: true })
+		hasMatchingRecord.mockResolvedValue(false)
+		createRecord.mockResolvedValue({ id: 'recAda', createdTime: '', fields: {} })
+		expect((await post(VALID)).status).toBe(202)
+	})
+
+	it('counts a skipped repeat like a save, so the limit reveals nothing', async () => {
+		vi.spyOn(globalThis, 'setTimeout').mockImplementation(((run: () => void) => {
+			run()
+			return 0
+		}) as never)
+		hasMatchingRecord.mockResolvedValue(true)
+		await saveUpToLimit()
+
+		expect((await post(VALID)).status).toBe(429)
+	})
+
+	describe('overall limit', () => {
+		const addressOf = (index: number) => `198.51.${Math.floor(index / 250)}.${index % 250}`
+		const OVERALL_LIMIT = 120
+
+		it('applies across addresses', async () => {
+			for (let index = 0; index < OVERALL_LIMIT; index++) {
+				expect((await post(VALID, { address: addressOf(index) })).status).toBe(202)
+			}
+			const limited = await post(VALID, { address: addressOf(OVERALL_LIMIT) })
+
+			expect(limited.status).toBe(429)
+			expect(Number(limited.headers.get('retry-after'))).toBeGreaterThan(0)
+			expect(createRecord).toHaveBeenCalledTimes(OVERALL_LIMIT)
+		})
+
+		it('cannot be used up by traffic that fails Turnstile', async () => {
+			verifyTurnstile.mockResolvedValue({ ok: false, message: 'failed' })
+			for (let index = 0; index < OVERALL_LIMIT + 50; index++) {
+				expect((await post(VALID, { address: addressOf(index) })).status).toBe(403)
+			}
+
+			verifyTurnstile.mockResolvedValue({ ok: true })
+			expect((await post(VALID, { address: '203.0.113.1' })).status).toBe(202)
+		})
+
+		it('cannot be used up by traffic with nothing valid to save', async () => {
+			for (let index = 0; index < OVERALL_LIMIT + 50; index++) {
+				await post({ ...VALID, name: '' }, { address: addressOf(index) })
+			}
+
+			expect((await post(VALID, { address: '203.0.113.1' })).status).toBe(202)
+		})
+	})
+})
+
 describe('/api/statement/sign: CORS', () => {
-	it('allows a listed chapter origin to read the answer', async () => {
+	it('allows a listed chapter origin to read the answer and Retry-After', async () => {
 		const response = await post(VALID)
 
 		expect(response.headers.get('access-control-allow-origin')).toBe(CHAPTER)
+		expect(response.headers.get('access-control-expose-headers')).toBe('Retry-After')
 		expect(response.headers.get('vary')).toBe('Origin')
 		expect(response.headers.get('cache-control')).toBe('no-store')
+	})
+
+	it('exposes Retry-After on the rate limit answer itself', async () => {
+		for (let save = 0; save < 30; save++) await post(VALID)
+		const limited = await post(VALID)
+
+		expect(limited.status).toBe(429)
+		expect(limited.headers.get('access-control-expose-headers')).toBe('Retry-After')
 	})
 
 	it('answers a preflight from a listed chapter origin', async () => {
@@ -249,6 +647,7 @@ describe('/api/statement/sign: CORS', () => {
 			const response = await post(VALID, { origin })
 			expect(response.status).toBe(403)
 			expect(response.headers.get('access-control-allow-origin')).toBeNull()
+			expect(response.headers.get('access-control-expose-headers')).toBeNull()
 			expect(createRecord).not.toHaveBeenCalled()
 		}
 	)
@@ -257,10 +656,11 @@ describe('/api/statement/sign: CORS', () => {
 		expect((await post(VALID, { origin: SITE })).status).toBe(202)
 	})
 
-	it('accepts a request with no origin, sending no CORS header', async () => {
+	it('holds a request with no origin to the same token check, sending no CORS header', async () => {
 		const response = await post(VALID, { origin: null })
 
 		expect(response.status).toBe(202)
+		expect(verifyTurnstile).toHaveBeenCalledOnce()
 		expect(response.headers.get('access-control-allow-origin')).toBeNull()
 	})
 })

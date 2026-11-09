@@ -28,10 +28,12 @@ function getFormString(formData: FormData, field: string): string | undefined {
  * matters — the honeypot only catches bots that render the page, whereas most
  * spam POSTs directly to the form action.
  */
-async function verifyTurnstile(
+export async function verifyTurnstile(
 	token: string | undefined,
-	expectedHostname: string
-): Promise<{ ok: true } | { ok: false; message: string }> {
+	expectedHostname: string | readonly string[]
+): Promise<{ ok: true } | { ok: false; message: string; unavailable?: true }> {
+	const expectedHostnames =
+		typeof expectedHostname === 'string' ? [expectedHostname] : expectedHostname
 	const secret = env.TURNSTILE_SECRET_KEY
 
 	if (!secret) {
@@ -47,6 +49,7 @@ async function verifyTurnstile(
 		console.error('TURNSTILE_SECRET_KEY is not configured')
 		return {
 			ok: false,
+			unavailable: true,
 			message: 'Spam protection is unavailable. Please email contact@pauseai.info instead.'
 		}
 	}
@@ -58,6 +61,7 @@ async function verifyTurnstile(
 		console.error('TURNSTILE_SECRET_KEY is a Cloudflare test key — refusing it outside dev')
 		return {
 			ok: false,
+			unavailable: true,
 			message: 'Spam protection is misconfigured. Please email contact@pauseai.info instead.'
 		}
 	}
@@ -83,9 +87,9 @@ async function verifyTurnstile(
 			// here. Only reject when Turnstile actually reports a different hostname — an
 			// absent or unexpected field must never lock out legitimate senders.
 			const hostname = typeof result.hostname === 'string' ? result.hostname : undefined
-			if (!dev && hostname && hostname !== expectedHostname) {
+			if (!dev && hostname && !expectedHostnames.includes(hostname)) {
 				console.warn(
-					`Turnstile token was issued for ${hostname}, but submitted to ${expectedHostname}`
+					`Turnstile token was issued for ${hostname}, but submitted to ${expectedHostnames.join(', ')}`
 				)
 				return {
 					ok: false,
@@ -107,6 +111,7 @@ async function verifyTurnstile(
 		console.error('Turnstile verification error:', error)
 		return {
 			ok: false,
+			unavailable: true,
 			message: 'Could not complete the anti-spam check. Please try again in a moment.'
 		}
 	}

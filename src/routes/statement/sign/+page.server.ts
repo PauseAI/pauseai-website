@@ -3,18 +3,16 @@
 // with actions. Same split as /join posting to /embed/onboarding-form.
 //
 // Validation and saving are shared with the public endpoint: $lib/server/statement.
-import { isOnboardingLive } from '$lib/server/onboarding'
 import {
 	MAX_BIO_LENGTH,
 	MAX_NAME_LENGTH,
 	readLimitedBody,
 	signStatement,
-	takeSigningRateLimit,
 	type SignatureErrors,
 	type SignatureField,
 	type SignatureFieldError
 } from '$lib/server/statement'
-import { checkNotSpam } from '$lib/server/turnstile-verify'
+import { TURNSTILE_FIELD } from '$lib/turnstile'
 import { fail } from '@sveltejs/kit'
 import type { Actions } from './$types'
 
@@ -24,7 +22,7 @@ const FIELD_MESSAGES: Record<SignatureField, Partial<Record<SignatureFieldError,
 	name: {
 		required: 'Please enter your full name.',
 		too_long: `Please keep your name under ${MAX_NAME_LENGTH} characters.`,
-		invalid: 'Please enter your name as plain text.'
+		invalid: 'Please enter your name as plain text, without any links.'
 	},
 	email: {
 		required: 'Please enter your email address.',
@@ -54,10 +52,6 @@ export const actions: Actions = {
 	default: async ({ request, url, getClientAddress }) => {
 		// None of these failures echo what was posted. The form keeps its own state and never
 		// resets on a failure, so the person's input stays on screen.
-		if (takeSigningRateLimit(getClientAddress) !== null) {
-			return fail(429, { message: 'Too many attempts. Please wait a few minutes and try again.' })
-		}
-
 		const bytes = await readLimitedBody(request)
 		if (!bytes) return fail(413, { message: 'That was too long to send. Please shorten it.' })
 		let data: FormData
@@ -70,31 +64,43 @@ export const actions: Actions = {
 			return fail(400, { message: 'Something went wrong. Please try again.' })
 		}
 
-		// Only when the submission writes, as on the onboarding form: a deploy preview cannot
-		// produce a token, since its hostname isn't allowed by the site key.
-		if (isOnboardingLive()) {
-			const spam = await checkNotSpam(data, url.hostname)
-			if (spam.drop) return { success: true }
-			if (spam.message) return fail(403, { message: spam.message })
-		}
-
-		const result = await signStatement({
-			name: data.get('name'),
-			email: data.get('email'),
-			country: data.get('country'),
-			bio: data.get('bio'),
-			private: data.get('private') === 'on',
-			honeypot: data.get('nickname')
-		})
+		const result = await signStatement(
+			{
+				name: data.get('name'),
+				email: data.get('email'),
+				country: data.get('country'),
+				bio: data.get('bio'),
+				private: data.get('private') === 'on',
+				honeypot: data.get('nickname')
+			},
+			{
+				hostname: url.hostname,
+				allowedHostnames: [url.hostname],
+				turnstileToken: data.get(TURNSTILE_FIELD),
+				getClientAddress
+			}
+		)
 
 		switch (result.status) {
 			case 'accepted':
+			case 'dry_run':
 				return { success: true }
 			case 'invalid':
 				return fail(400, {
 					message: 'Please check the highlighted fields.',
 					fields: fieldMessages(result.errors)
 				})
+			case 'unavailable':
+				return fail(503, {
+					message:
+						'Signing is unavailable right now, and nothing was saved. Please try again later, or email contact@pauseai.info.'
+				})
+			case 'turnstile_failed':
+				return fail(403, { message: result.message })
+			case 'turnstile_unavailable':
+				return fail(503, { message: result.message })
+			case 'rate_limited':
+				return fail(429, { message: 'Too many attempts. Please wait a few minutes and try again.' })
 			case 'failed':
 				return fail(502, { message: 'Sorry, we could not save your signature. Please try again.' })
 		}
