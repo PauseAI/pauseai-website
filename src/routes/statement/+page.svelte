@@ -47,15 +47,18 @@
 	keep them under democratic control.
 </blockquote>
 
-<!-- Signatories Counter and Goal -->
-<div class="signatories-counter">
-	<p>We've collected {totalCount} signatures so far— help us reach our first {nextGoal}!</p>
-</div>
-
-<StatementForm />
+<StatementForm>
+	{#snippet counter()}
+		<p class="counter">
+			<strong>{totalCount.toLocaleString('en-US')} signatures.</strong> Help us reach {nextGoal.toLocaleString(
+				'en-US'
+			)}.
+		</p>
+	{/snippet}
+</StatementForm>
 
 <div class="signatories-header">
-	<h2>Signatories ({totalCount})</h2>
+	<h2>Signatories ({totalCount.toLocaleString('en-US')})</h2>
 	<button class="expand-all" onclick={toggleShowAll} aria-label="Expand all signatories and bios">
 		{showAll ? 'Collapse All' : 'Expand All'}
 	</button>
@@ -91,38 +94,26 @@
 
 	/* Style for the statement */
 	.statement {
-		margin: 1rem 0;
-		padding: 0.7rem 1.8rem;
+		margin: 1.5rem 0 1rem;
+		padding: 1rem 1.5rem;
 		font-weight: 500;
 		border-left: 4px solid var(--brand);
+		border-radius: 0 24px 24px 0;
 		background-color: var(--bg-subtle);
-		font-size: 1rem;
-		line-height: 1.8;
+		font-size: 1.3rem;
+		line-height: 1.5;
 		color: var(--text);
 	}
 
-	@media (min-width: 600px) {
-		.statement {
-			font-size: 1.5rem;
-		}
+	/* Rendered inside StatementForm's card, right under its heading. */
+	.counter {
+		margin: -0.75rem 0 1.25rem;
+		font-size: 0.95rem;
+		color: var(--text-2);
 	}
 
-	/* Style for the signatories counter */
-	.signatories-counter {
-		font-family: 'Arial', sans-serif;
-		margin: 2rem 0;
-		text-align: center;
-		font-size: 1.2rem;
-		/*border: 1px solid #ccc;
-		padding: 1rem;
-		background-color: #fff;
-		border-radius: 8px;
-		color: #444;*/
-	}
-
-	.signatories-counter p {
-		margin: 0;
-		font-weight: bold;
+	.counter strong {
+		color: var(--text);
 	}
 	.signatories {
 		display: grid;
