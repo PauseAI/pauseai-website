@@ -29,18 +29,7 @@ Or skip all of that and [embed our form](#or-embed-our-form).
 ></iframe>
 ```
 
-The page reports its height to your page with `postMessage` (`{ type: 'pauseai-embed-resize', height: number }`) whenever it changes, for example when the thank-you replaces the form. Resize the iframe to it:
-
-```html
-<script>
-	window.addEventListener('message', (event) => {
-		if (event.origin !== 'https://pauseai.info') return
-		if (typeof event.data?.height === 'number') {
-			document.getElementById('statement-form').style.height = event.data.height + 'px'
-		}
-	})
-</script>
-```
+The page reports its height to your page whenever it changes, for example when the thank-you replaces the form. Resize the iframe to it with the listener in [Resizing the iframe](./ONBOARDING_EMBED.md#resizing-the-iframe), calling `resizePauseAIEmbed(document.getElementById('statement-form'))`.
 
 ## Before you start
 
