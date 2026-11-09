@@ -4,6 +4,8 @@ const env: Record<string, string | undefined> = {}
 
 vi.mock('$app/environment', () => ({ dev: false }))
 vi.mock('$env/dynamic/private', () => ({ env }))
+const reportError = vi.fn()
+vi.mock('$lib/server/sentry', () => ({ reportError }))
 
 const { verifyTurnstile } = await import('./turnstile-verify')
 
@@ -18,6 +20,7 @@ function cloudflareAnswers(answer: Record<string, unknown>) {
 
 beforeEach(() => {
 	env.TURNSTILE_SECRET_KEY = '0xnot-a-test-key'
+	reportError.mockReset()
 	vi.spyOn(console, 'warn').mockImplementation(() => {})
 	vi.spyOn(console, 'error').mockImplementation(() => {})
 })
@@ -68,6 +71,48 @@ describe('verifyTurnstile', () => {
 
 		expect(result.ok).toBe(false)
 		expect(result).not.toHaveProperty('unavailable')
+		expect(reportError).not.toHaveBeenCalled()
+	})
+
+	it.each(['timeout-or-duplicate', 'invalid-input-response', 'missing-input-response'])(
+		"treats %s as the person's token, without alerting anyone",
+		async (code) => {
+			cloudflareAnswers({ success: false, 'error-codes': [code] })
+			const result = await verifyTurnstile('a-token', HOSTNAMES)
+
+			expect(result).not.toHaveProperty('unavailable')
+			expect(reportError).not.toHaveBeenCalled()
+		}
+	)
+
+	it.each(['invalid-input-secret', 'missing-input-secret', 'internal-error'])(
+		'reports %s as an outage rather than the fault of the token',
+		async (code) => {
+			cloudflareAnswers({ success: false, 'error-codes': [code] })
+
+			expect(await verifyTurnstile('a-token', HOSTNAMES)).toMatchObject({
+				ok: false,
+				unavailable: true
+			})
+			expect(reportError).toHaveBeenCalledOnce()
+		}
+	)
+
+	it('tells people not to keep retrying a wrong secret', async () => {
+		cloudflareAnswers({ success: false, 'error-codes': ['invalid-input-secret'] })
+
+		const result = await verifyTurnstile('a-token', HOSTNAMES)
+
+		expect(result.ok ? '' : result.message).toContain('contact@pauseai.info')
+	})
+
+	it('never sends the secret or the token to Sentry', async () => {
+		cloudflareAnswers({ success: false, 'error-codes': ['invalid-input-secret'] })
+		await verifyTurnstile('a-token', HOSTNAMES)
+
+		const reported = String(reportError.mock.calls[0][0])
+		expect(reported).not.toContain('0xnot-a-test-key')
+		expect(reported).not.toContain('a-token')
 	})
 
 	it.each([
@@ -91,5 +136,6 @@ describe('verifyTurnstile', () => {
 			ok: false,
 			unavailable: true
 		})
+		expect(reportError).toHaveBeenCalledOnce()
 	})
 })
