@@ -1,6 +1,6 @@
-// The website's client for CiviCRM's API as the intake API account (callCrm),
-// used here to report each Members row the onboarding form writes to CiviCRM's
-// member intake (PauseaiMemberIntake.submit), and by statementCrm.ts. The
+// callCrm calls CiviCRM's API4 as the intake API account (CRM_INTAKE_URL,
+// CRM_INTAKE_KEY). The rest of this file reports each Members row the onboarding
+// form writes to CiviCRM's member intake (PauseaiMemberIntake.submit). The
 // contract, outcome codes included, is pauseai-civicrm's
 // docs/intake-endpoint-plan.md; docs/join-form-flow.md, "CRM intake", has where
 // it runs and how to switch it on.
