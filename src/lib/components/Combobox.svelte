@@ -1,6 +1,10 @@
 <script lang="ts">
-	/** `aliases` are extra strings the typeahead matches (e.g. an abbreviation) but never shows. */
-	type Option = { label: string; value: string; aliases?: string[] }
+	import {
+		exactMatch,
+		highlightAfterTyping,
+		visibleOptions,
+		type ComboboxOption as Option
+	} from './comboboxOptions'
 
 	let {
 		id,
@@ -64,35 +68,15 @@
 		inputEl?.setCustomValidity(message)
 	})
 
-	const flat: Option[] = $derived.by(() => {
-		const q = query.trim().toLowerCase()
-		// Empty query, or the query is just the current selection (user
-		// reopened the list): show the full list.
-		if (!q || (!multiple && query === labelFor(single))) return items
-		const aliased = items.filter((i) => i.aliases?.some((a) => a.toLowerCase() === q))
-		const rest = items.filter((i) => !aliased.includes(i))
-		const starts = rest.filter((i) => i.label.toLowerCase().startsWith(q))
-		const contains = rest.filter(
-			(i) => !i.label.toLowerCase().startsWith(q) && i.label.toLowerCase().includes(q)
-		)
-		return [...aliased, ...starts, ...contains]
-	})
+	const flat: Option[] = $derived(
+		visibleOptions(items, query, multiple ? undefined : labelFor(single))
+	)
 
 	$effect(() => {
 		if (open) {
 			document.getElementById(`${id}-opt-${highlighted}`)?.scrollIntoView({ block: 'nearest' })
 		}
 	})
-
-	function exactMatch(text: string) {
-		const t = text.trim().toLowerCase()
-		return items.find(
-			(i) =>
-				i.label.toLowerCase() === t ||
-				i.value.toLowerCase() === t ||
-				i.aliases?.some((a) => a.toLowerCase() === t)
-		)
-	}
 
 	function openList() {
 		open = true
@@ -124,7 +108,9 @@
 		highlighted = 0
 		if (!multiple) {
 			// Typing invalidates the previous selection until it matches again.
-			value = exactMatch(query)?.value ?? ''
+			const typed = exactMatch(items, query)?.value ?? ''
+			value = typed
+			highlighted = highlightAfterTyping(flat, typed)
 		}
 	}
 
@@ -134,7 +120,7 @@
 			query = ''
 			return
 		}
-		const match = exactMatch(query)
+		const match = exactMatch(items, query)
 		if (match) {
 			value = match.value
 		}
