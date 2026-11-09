@@ -150,9 +150,13 @@
 			</div>
 
 			<label class="checkbox">
-				<input type="checkbox" name="private" />
+				<input type="checkbox" name="private" aria-describedby="statement-private-note" />
 				<span>I want to be anonymous</span>
 			</label>
+			<p class="private-note" id="statement-private-note">
+				Your name is hidden, but your country and anything you write below are still published, so
+				leave out details that could identify you.
+			</p>
 
 			<div class="field">
 				<label class="field-label" for="statement-email">Email *</label>
@@ -370,9 +374,16 @@
 	}
 
 	.submit-hint,
-	.test-notice {
+	.test-notice,
+	.private-note {
 		margin: 0;
 		font-size: 0.9rem;
+	}
+
+	/* Reads as part of the checkbox above, across the form's usual gap. */
+	.private-note {
+		margin-top: -0.6rem;
+		margin-left: 0.5rem;
 	}
 
 	.test-notice {
