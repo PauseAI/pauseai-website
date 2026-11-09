@@ -1,10 +1,15 @@
 <script lang="ts">
 	import Link from '$lib/components/Link.svelte'
+
+	/** The heading level that follows the page's own headings. */
+	let { headingLevel = 3 }: { headingLevel?: 2 | 3 } = $props()
 </script>
 
 <div class="panel">
 	<div class="icon" aria-hidden="true">✉</div>
-	<h3 class="toc-exclude">Thank you for your signature!</h3>
+	<svelte:element this={`h${headingLevel}`} class="toc-exclude heading"
+		>Thank you for your signature!</svelte:element
+	>
 	<p class="verify">
 		Please check out your email inbox (and spam folder) to verify your email address!
 	</p>
@@ -45,7 +50,7 @@
 		margin: 0 auto 1rem auto;
 	}
 
-	h3 {
+	.heading {
 		font-family: var(--font-heading);
 		font-size: 1.6rem;
 		margin: 0;

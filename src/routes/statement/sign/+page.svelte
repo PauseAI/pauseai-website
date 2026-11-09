@@ -15,7 +15,7 @@
 <h1>{meta.title}</h1>
 
 {#if form?.success}
-	<StatementThanks />
+	<StatementThanks headingLevel={2} />
 {:else}
 	{#if form?.message}
 		<p role="alert">{form.message}</p>
