@@ -14,6 +14,12 @@ describe('/embed/statement-form', () => {
 		expect(body).toMatch(/<form[^>]*method="POST"[^>]*action="\/statement\/sign"/)
 	})
 
+	it('points visitors without JavaScript to /statement in a new tab', () => {
+		expect(body).toMatch(
+			/<noscript>[\s\S]*<a href="https:\/\/pauseai.info\/statement" target="_blank" rel="noopener"/
+		)
+	})
+
 	it('heads the card as the page itself, as the embed has no other heading', () => {
 		expect(body).toMatch(/<h1[^>]*id="sign-heading"/)
 		expect(body).not.toMatch(/<h2[^>]*id="sign-heading"/)
