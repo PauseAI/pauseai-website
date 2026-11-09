@@ -66,13 +66,26 @@ function earliestRowPerAddress(
 	return [...byAddress.values()]
 }
 
+const SIGNATORY_FIELDS: (keyof AirtableSignatory)[] = [
+	'name',
+	'email',
+	'private',
+	'bio',
+	'country',
+	'date',
+	'email_verified',
+	'duplicate'
+]
+
 export const GET: RequestHandler = async ({ fetch, setHeaders }) => {
 	const url = `https://api.airtable.com/v0/${MEMBERS_BASE_ID}/${STATEMENT_TABLE_ID}` as const
 	setHeaders(generateCacheControlRecord({ public: true, maxAge: 60 * 60 }))
 
 	try {
-		// Fetch all records from Airtable
-		const records = await fetchAllPages<AirtableSignatory>(fetch, url)
+		const records = await fetchAllPages<AirtableSignatory>(fetch, url, [], {
+			filterByFormula: '{email_verified}',
+			fields: SIGNATORY_FIELDS
+		})
 
 		// Only rows whose email_verified is explicitly true. The automation ticks `duplicate` on
 		// any later row for an address, even when it's the only verified one or asks to be
@@ -83,7 +96,7 @@ export const GET: RequestHandler = async ({ fetch, setHeaders }) => {
 			return emailVerified === true && (!duplicate || !!email)
 		})
 
-		console.log(`Total records: ${records.length}, Verified records: ${verifiedRecords.length}`)
+		console.log(`Verified records: ${records.length}, listable: ${verifiedRecords.length}`)
 
 		const signatories = earliestRowPerAddress(verifiedRecords).map(recordToSignatory)
 

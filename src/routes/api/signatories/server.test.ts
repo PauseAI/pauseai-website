@@ -40,6 +40,20 @@ describe('GET /api/signatories', () => {
 		)
 	})
 
+	it('asks Airtable only for verified rows and the fields it reads', async () => {
+		fetchAllPages.mockResolvedValue([])
+		await list()
+
+		const params = fetchAllPages.mock.calls.at(-1)?.[3] as {
+			filterByFormula: string
+			fields: string[]
+		}
+		expect(params.filterByFormula).toBe('{email_verified}')
+		expect([...params.fields].sort()).toEqual(
+			['bio', 'country', 'date', 'duplicate', 'email', 'email_verified', 'name', 'private'].sort()
+		)
+	})
+
 	it('lists only verified rows, and no duplicates among rows without an address', async () => {
 		fetchAllPages.mockResolvedValue([
 			row({ name: 'Verified', email_verified: true }),
