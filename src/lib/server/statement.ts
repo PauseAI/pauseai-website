@@ -18,7 +18,12 @@ import {
 	recordRateLimit,
 	takeRateLimit
 } from '$lib/server/rateLimit'
-import { signInCrm, statementBackend } from '$lib/server/statementCrm'
+import {
+	SIGNATURE_LANGUAGES,
+	signInCrm,
+	statementBackend,
+	type Signature
+} from '$lib/server/statementCrm'
 import { isTestHostname } from '$lib/server/testHost'
 import { verifyTurnstile } from '$lib/server/turnstile-verify'
 import { StatusCodes } from 'http-status-codes'
@@ -50,11 +55,6 @@ const REPEAT_WINDOW_DAYS = 30
 // does not close it: each probe needs its own solved Turnstile token.
 const REPEAT_DELAY_MS = { minimum: 150, spread: 300 }
 
-// The email language a chapter can ask for. CiviCRM sends the email in it; Airtable picks
-// the language from the country instead, so with that backend it is only validated.
-const LANGUAGES: readonly unknown[] = ['en', 'es']
-type Language = 'en' | 'es'
-
 export type SignatureField = 'name' | 'email' | 'country' | 'bio' | 'private' | 'language'
 export type SignatureFieldError = 'required' | 'invalid' | 'too_long'
 export type SignatureErrors = Partial<Record<SignatureField, SignatureFieldError>>
@@ -62,14 +62,8 @@ export type SignatureErrors = Partial<Record<SignatureField, SignatureFieldError
 /** Untrusted values, from a form post or a JSON body. */
 export type SignatureInput = Partial<Record<SignatureField | 'honeypot', unknown>>
 
-type Signature = {
-	name: string
-	email: string
-	country: string
-	bio: string
-	private: boolean
-	language: Language
-}
+const isSignatureLanguage = (value: unknown): value is Signature['language'] =>
+	(SIGNATURE_LANGUAGES as readonly unknown[]).includes(value)
 
 export type SignResult =
 	| { status: 'accepted' }
@@ -188,7 +182,7 @@ function validateSignature(
 	if (
 		input.language !== undefined &&
 		input.language !== null &&
-		!LANGUAGES.includes(input.language)
+		!isSignatureLanguage(input.language)
 	) {
 		errors.language = 'invalid'
 	}
@@ -202,7 +196,7 @@ function validateSignature(
 			country,
 			bio,
 			private: input.private === true,
-			language: input.language === 'es' ? 'es' : 'en'
+			language: isSignatureLanguage(input.language) ? input.language : 'en'
 		}
 	}
 }

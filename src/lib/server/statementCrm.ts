@@ -29,14 +29,21 @@ const ISO_CODE_BY_COUNTRY = new Map(
 	Object.entries(COUNTRY_BY_ISO_CODE).map(([code, country]) => [country, code])
 )
 
-export type CrmSignature = {
+/**
+ * The email languages a signer can ask for. CiviCRM sends the email in it; Airtable picks the
+ * language from the country instead, so with that backend it is only validated.
+ */
+export const SIGNATURE_LANGUAGES = ['en', 'es'] as const
+
+/** A validated signature (statement.ts), whichever backend stores it. */
+export type Signature = {
 	name: string
 	email: string
 	/** As the form spells it, one of COUNTRIES. */
 	country: string
 	bio: string
 	private: boolean
-	language: 'en' | 'es'
+	language: (typeof SIGNATURE_LANGUAGES)[number]
 }
 
 export type CrmSignResult = 'ok' | 'refused' | 'failed'
@@ -64,7 +71,7 @@ const report = (
  * Writes one signature, retrying transient failures. `refused` means CiviCRM's validation
  * disagreed with the website's, which is checked first. Never rejects.
  */
-export async function signInCrm(signature: CrmSignature): Promise<CrmSignResult> {
+export async function signInCrm(signature: Signature): Promise<CrmSignResult> {
 	const params = {
 		name: signature.name,
 		email: signature.email,
