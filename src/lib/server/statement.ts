@@ -23,6 +23,7 @@ import {
 	recordRateLimit,
 	takeRateLimit
 } from '$lib/server/rateLimit'
+import { isTestHostname } from '$lib/server/testHost'
 import { verifyTurnstile } from '$lib/server/turnstile-verify'
 
 export const MAX_NAME_LENGTH = 200
@@ -92,12 +93,7 @@ export type SigningMode = 'live' | 'dry_run' | 'off'
  */
 export function signingMode(hostname: string): SigningMode {
 	if (env.STATEMENT_SIGNING_LIVE === 'true') return 'live'
-	const isTestHost =
-		hostname === 'localhost' ||
-		hostname === '127.0.0.1' ||
-		hostname === '[::1]' ||
-		hostname.endsWith('.netlify.app')
-	return dev || isTestHost ? 'dry_run' : 'off'
+	return dev || isTestHostname(hostname) ? 'dry_run' : 'off'
 }
 
 const asText = (value: unknown) => (typeof value === 'string' ? value.trim() : '')

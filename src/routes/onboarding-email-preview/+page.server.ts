@@ -9,6 +9,7 @@ import { GLOBAL_DISCORD_URL, WELCOME_CALLS_URL } from '$lib/server/onboardingEma
 import { FIXED_COPY } from '$lib/server/onboardingEmail/fixed.js'
 import { renderOnboardingEmail, resolveOnboardingEmail } from '$lib/server/onboardingEmail/index.js'
 import type { BaseLanguage, OnboardingEmailHtmlStyle } from '$lib/server/onboardingEmail/types.js'
+import { isTestHostname } from '$lib/server/testHost'
 import { error } from '@sveltejs/kit'
 import type { PageServerLoad } from './$types'
 
@@ -17,9 +18,6 @@ import type { PageServerLoad } from './$types'
 // shared or bookmarked. Available in dev and on Netlify deploy previews (*.netlify.app),
 // 404s on the production domain. (Chapter data is public National Groups info, not PII, so
 // this is safe to expose on preview URLs rather than adding real auth.)
-function isAllowedHost(hostname: string): boolean {
-	return hostname === 'localhost' || hostname === '127.0.0.1' || hostname.endsWith('.netlify.app')
-}
 
 // The shared copy exists in these (copy.ts). Chapter overrides bring their own language.
 const LANGUAGES: BaseLanguage[] = ['en', 'es']
@@ -45,7 +43,7 @@ function parseLanguage(value: string | null): BaseLanguage {
 }
 
 export const load: PageServerLoad = async ({ url }) => {
-	if (!dev && !isAllowedHost(url.hostname)) error(404, 'Not found')
+	if (!dev && !isTestHostname(url.hostname)) error(404, 'Not found')
 
 	const params = url.searchParams
 	const hasQuery = [...params.keys()].length > 0
