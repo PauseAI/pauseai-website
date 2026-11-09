@@ -8,8 +8,10 @@
 	import type { SignatureField } from '$lib/server/statement'
 	import { turnstileSiteKey } from '$lib/turnstile'
 	import type { SubmitFunction } from '@sveltejs/kit'
-	import { onMount, tick } from 'svelte'
+	import { onMount, tick, type Snippet } from 'svelte'
 	import StatementThanks from './StatementThanks.svelte'
+
+	let { counter }: { counter?: Snippet } = $props()
 
 	let signed = $state(false)
 	let submitting = $state(false)
@@ -106,6 +108,7 @@
 
 <section class="card" aria-labelledby="sign-heading">
 	<h2 id="sign-heading">Sign the statement</h2>
+	{@render counter?.()}
 
 	{#if mode === 'dry_run'}
 		<p class="test-notice">
