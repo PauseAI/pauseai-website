@@ -7,6 +7,7 @@ import {
 	MAX_BIO_LENGTH,
 	MAX_NAME_LENGTH,
 	readLimitedBody,
+	SIGN_RESULT_HTTP_STATUS,
 	signStatement,
 	type SignatureErrors,
 	type SignatureField,
@@ -83,28 +84,32 @@ export const actions: Actions = {
 			}
 		)
 
+		const status = SIGN_RESULT_HTTP_STATUS[result.status]
 		switch (result.status) {
 			case 'accepted':
 			case 'dry_run':
 				return { success: true }
 			case 'invalid':
-				return fail(400, {
+				return fail(status, {
 					message: 'Please check the highlighted fields.',
 					fields: fieldMessages(result.errors)
 				})
 			case 'unavailable':
-				return fail(503, {
+				return fail(status, {
 					message:
 						'Signing is unavailable right now, and nothing was saved. Please try again later, or email contact@pauseai.info.'
 				})
 			case 'turnstile_failed':
-				return fail(403, { message: result.message })
 			case 'turnstile_unavailable':
-				return fail(503, { message: result.message })
+				return fail(status, { message: result.message })
 			case 'rate_limited':
-				return fail(429, { message: 'Too many attempts. Please wait a few minutes and try again.' })
+				return fail(status, {
+					message: 'Too many attempts. Please wait a few minutes and try again.'
+				})
 			case 'failed':
-				return fail(502, { message: 'Sorry, we could not save your signature. Please try again.' })
+				return fail(status, {
+					message: 'Sorry, we could not save your signature. Please try again.'
+				})
 		}
 	}
 }

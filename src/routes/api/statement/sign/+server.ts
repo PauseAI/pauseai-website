@@ -2,6 +2,7 @@ export const prerender = false
 
 import {
 	readLimitedBody,
+	SIGN_RESULT_HTTP_STATUS,
 	signingMode,
 	signStatement,
 	type SignatureErrors,
@@ -128,30 +129,27 @@ export const POST: RequestHandler = async ({ request, url, getClientAddress }) =
 		turnstileToken: (body as Record<string, unknown>)[TURNSTILE_FIELD],
 		getClientAddress
 	})
+	const status = SIGN_RESULT_HTTP_STATUS[result.status]
 	switch (result.status) {
 		case 'accepted':
-			return respond(StatusCodes.ACCEPTED, { ok: true, status: 'pending_verification' })
+			return respond(status, { ok: true, status: 'pending_verification' })
 		case 'dry_run':
-			return respond(StatusCodes.ACCEPTED, {
-				ok: true,
-				status: 'pending_verification',
-				dry_run: true
-			})
+			return respond(status, { ok: true, status: 'pending_verification', dry_run: true })
 		case 'invalid':
-			return refuse(StatusCodes.BAD_REQUEST, 'validation_failed', result.errors)
+			return refuse(status, 'validation_failed', result.errors)
 		case 'unavailable':
-			return refuse(StatusCodes.SERVICE_UNAVAILABLE, 'signing_unavailable')
+			return refuse(status, 'signing_unavailable')
 		case 'turnstile_failed':
-			return refuse(StatusCodes.FORBIDDEN, 'turnstile_failed')
+			return refuse(status, 'turnstile_failed')
 		case 'turnstile_unavailable':
-			return refuse(StatusCodes.SERVICE_UNAVAILABLE, 'turnstile_unavailable')
+			return refuse(status, 'turnstile_unavailable')
 		case 'rate_limited':
 			return respond(
-				StatusCodes.TOO_MANY_REQUESTS,
+				status,
 				{ ok: false, error: 'rate_limited' },
 				{ 'retry-after': String(result.retryAfter) }
 			)
 		case 'failed':
-			return refuse(StatusCodes.BAD_GATEWAY, 'save_failed')
+			return refuse(status, 'save_failed')
 	}
 }

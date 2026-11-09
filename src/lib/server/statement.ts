@@ -25,6 +25,7 @@ import {
 } from '$lib/server/rateLimit'
 import { isTestHostname } from '$lib/server/testHost'
 import { verifyTurnstile } from '$lib/server/turnstile-verify'
+import { StatusCodes } from 'http-status-codes'
 
 export const MAX_NAME_LENGTH = 200
 const MAX_EMAIL_LENGTH = 254
@@ -80,6 +81,18 @@ export type SignResult =
 	| { status: 'turnstile_unavailable'; message: string }
 	| { status: 'rate_limited'; retryAfter: number }
 	| { status: 'failed' }
+
+/** The HTTP status each result is answered with, by the form action and the public endpoint. */
+export const SIGN_RESULT_HTTP_STATUS: Record<SignResult['status'], number> = {
+	accepted: StatusCodes.ACCEPTED,
+	dry_run: StatusCodes.ACCEPTED,
+	invalid: StatusCodes.BAD_REQUEST,
+	unavailable: StatusCodes.SERVICE_UNAVAILABLE,
+	turnstile_failed: StatusCodes.FORBIDDEN,
+	turnstile_unavailable: StatusCodes.SERVICE_UNAVAILABLE,
+	rate_limited: StatusCodes.TOO_MANY_REQUESTS,
+	failed: StatusCodes.BAD_GATEWAY
+}
 
 export type SigningMode = 'live' | 'dry_run' | 'off'
 
