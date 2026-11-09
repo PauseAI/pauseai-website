@@ -4,6 +4,9 @@ import { reportError } from '$lib/server/sentry'
 import { TURNSTILE_FIELD } from '$lib/turnstile'
 
 const TURNSTILE_VERIFY_URL = 'https://challenges.cloudflare.com/turnstile/v0/siteverify'
+// Leaves the rest of an edge function's response limit to the work the check guards. A
+// timeout is answered like any other failure to reach Cloudflare: unavailable, retry later.
+export const TURNSTILE_TIMEOUT_MS = 5000
 
 // Cloudflare's codes for a fault on the server side, not with the person's token. Telling
 // them to retry would loop forever on our wrong secret, with nobody alerted.
@@ -89,7 +92,8 @@ export async function verifyTurnstile(
 		const response = await fetch(TURNSTILE_VERIFY_URL, {
 			method: 'POST',
 			headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-			body: new URLSearchParams({ secret, response: token })
+			body: new URLSearchParams({ secret, response: token }),
+			signal: AbortSignal.timeout(TURNSTILE_TIMEOUT_MS)
 		})
 
 		const result: unknown = await response.json()

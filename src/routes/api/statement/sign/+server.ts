@@ -87,7 +87,7 @@ export const GET: RequestHandler = ({ request, url }) => {
 	})
 }
 
-export const POST: RequestHandler = async ({ request, url, getClientAddress }) => {
+export const POST: RequestHandler = async ({ request, url, getClientAddress, platform }) => {
 	const origin = request.headers.get('origin')
 	const headers = responseHeaders(origin, url.origin)
 	const respond = (status: number, body: SignResponse, extra: Record<string, string> = {}) =>
@@ -127,7 +127,8 @@ export const POST: RequestHandler = async ({ request, url, getClientAddress }) =
 			...CHAPTER_ORIGINS.map((chapterOrigin) => new URL(chapterOrigin).hostname)
 		],
 		turnstileToken: (body as Record<string, unknown>)[TURNSTILE_FIELD],
-		getClientAddress
+		getClientAddress,
+		platform
 	})
 	const status = SIGN_RESULT_HTTP_STATUS[result.status]
 	switch (result.status) {

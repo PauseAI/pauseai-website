@@ -9,7 +9,8 @@ vi.mock('$env/dynamic/private', () => ({ env }))
 vi.mock('$lib/server/sentry', () => ({ reportError, flushReports }))
 
 const {
-	SIGN_RETRY_DELAYS_MS,
+	SIGN_MIN_ATTEMPT_MS,
+	SIGN_RETRY_DELAY_MS,
 	STATEMENT_VERSION,
 	publicListFromCrm,
 	signInCrm,
@@ -34,6 +35,11 @@ const answerRow = (row: Record<string, unknown>) =>
 	fetchMock.mockImplementation(() => reply({ values: [row] }))
 const networkError = () => Promise.reject(new TypeError('fetch failed'))
 
+// signStatement's deadline, measured from when Turnstile has answered quickly.
+const DEADLINE_MS = 19_500
+const sign = (options: Parameters<typeof signInCrm>[1] = { deadline: Date.now() + DEADLINE_MS }) =>
+	signInCrm(SIGNATURE, options)
+
 const calledUrl = (call = 0) => fetchMock.mock.calls[call][0]
 const sentParams = (call = 0) =>
 	JSON.parse((fetchMock.mock.calls[call][1]?.body as URLSearchParams).get('params')!) as Record<
@@ -41,11 +47,11 @@ const sentParams = (call = 0) =>
 		unknown
 	>
 
-/** Runs a sign with fake timers, waiting out each retry delay, and returns its result. */
+/** Runs a sign with fake timers, waiting out the retry delay, and returns its result. */
 async function signThroughRetries() {
 	vi.useFakeTimers()
-	const pending = signInCrm(SIGNATURE)
-	for (const delay of SIGN_RETRY_DELAYS_MS) await vi.advanceTimersByTimeAsync(delay)
+	const pending = sign()
+	await vi.advanceTimersByTimeAsync(SIGN_RETRY_DELAY_MS)
 	return pending
 }
 
@@ -79,7 +85,7 @@ describe('statementBackend', () => {
 
 describe('signInCrm', () => {
 	it("sends sign's parameters, the country as its ISO code", async () => {
-		expect(await signInCrm(SIGNATURE)).toBe('ok')
+		expect(await sign()).toBe('ok')
 
 		expect(calledUrl()).toBe('https://crm.example.org/civicrm/ajax/api4/PauseaiStatement/sign')
 		const params = sentParams()
@@ -98,52 +104,80 @@ describe('signInCrm', () => {
 	})
 
 	it('mints a new submission_id for each submission', async () => {
-		await signInCrm(SIGNATURE)
-		await signInCrm(SIGNATURE)
+		await sign()
+		await sign()
 
 		expect(sentParams(0).submission_id).not.toBe(sentParams(1).submission_id)
 	})
 
-	it('retries a network error and a 5xx after about 1 s and 3 s, with the same submission_id', async () => {
+	it('retries a network error once after about 1 s, with the same submission_id', async () => {
 		fetchMock
 			.mockImplementationOnce(networkError)
-			.mockImplementationOnce(() => reply({ error_message: 'busy' }, 503))
 			.mockImplementationOnce(() => reply({ values: [{ status: 'ok' }] }))
 		vi.useFakeTimers()
-		const pending = signInCrm(SIGNATURE)
+		const pending = sign()
 
-		await vi.advanceTimersByTimeAsync(0)
+		await vi.advanceTimersByTimeAsync(SIGN_RETRY_DELAY_MS - 1)
 		expect(fetchMock).toHaveBeenCalledTimes(1)
-		await vi.advanceTimersByTimeAsync(999)
-		expect(fetchMock).toHaveBeenCalledTimes(1)
-		await vi.advanceTimersByTimeAsync(1)
-		expect(fetchMock).toHaveBeenCalledTimes(2)
-		await vi.advanceTimersByTimeAsync(2999)
-		expect(fetchMock).toHaveBeenCalledTimes(2)
 		await vi.advanceTimersByTimeAsync(1)
 
 		expect(await pending).toBe('ok')
-		expect(fetchMock).toHaveBeenCalledTimes(3)
-		const ids = [0, 1, 2].map((call) => sentParams(call).submission_id)
-		expect(new Set(ids).size).toBe(1)
+		expect(fetchMock).toHaveBeenCalledTimes(2)
+		expect(sentParams(0).submission_id).toBe(sentParams(1).submission_id)
 		expect(reportError).not.toHaveBeenCalled()
 	})
 
-	it('gives up after three attempts and reports it once, without personal data or the key', async () => {
-		fetchMock.mockImplementation(networkError)
+	it('gives up after a failed retry and reports it once, without personal data or the key', async () => {
+		fetchMock.mockImplementation(() => reply({ error_message: 'busy' }, 503))
 
 		expect(await signThroughRetries()).toBe('failed')
-		expect(fetchMock).toHaveBeenCalledTimes(3)
+		expect(fetchMock).toHaveBeenCalledTimes(2)
 		expect(reportError).toHaveBeenCalledOnce()
 		const [error, context, options] = reportError.mock.calls[0]
 		expect((error as Error).message).toBe('CRM statement sign error')
-		expect(context).toMatchObject({ cause: 'network', attempt: 3 })
+		expect(context).toMatchObject({ cause: 'http', httpStatus: 503, attempt: 2 })
 		expect(options).toEqual({ fingerprint: ['crm-statement', 'sign', 'error'], level: 'error' })
 		expect(flushReports).toHaveBeenCalled()
 		const reported = JSON.stringify([reportError.mock.calls, vi.mocked(console.warn).mock.calls])
 		for (const secret of [KEY, 'ada@example.org', 'Ada Lovelace', 'I care']) {
 			expect(reported).not.toContain(secret)
 		}
+	})
+
+	it('caps each attempt to what is left before the deadline, and skips a retry with too little', async () => {
+		vi.useFakeTimers()
+		const timeouts = vi.spyOn(AbortSignal, 'timeout')
+		fetchMock.mockImplementation(networkError)
+
+		const tooLittle = SIGN_RETRY_DELAY_MS + SIGN_MIN_ATTEMPT_MS - 500
+		expect(await sign({ deadline: Date.now() + tooLittle })).toBe('failed')
+		expect(timeouts.mock.calls).toEqual([[tooLittle]])
+
+		timeouts.mockClear()
+		const enough = SIGN_RETRY_DELAY_MS + SIGN_MIN_ATTEMPT_MS + 500
+		const pending = sign({ deadline: Date.now() + enough })
+		await vi.advanceTimersByTimeAsync(SIGN_RETRY_DELAY_MS)
+		expect(await pending).toBe('failed')
+		expect(timeouts.mock.calls).toEqual([[enough], [SIGN_MIN_ATTEMPT_MS + 500]])
+		expect(fetchMock).toHaveBeenCalledTimes(3)
+	})
+
+	it('reports after the response when the platform can wait for it', async () => {
+		fetchMock.mockImplementation(() => reply({}, 403))
+		let finishFlush = () => {}
+		flushReports.mockReturnValue(new Promise<void>((resolve) => (finishFlush = resolve)))
+		const waitUntil = vi.fn<(promise: Promise<unknown>) => void>()
+
+		const result = await sign({
+			deadline: Date.now() + DEADLINE_MS,
+			platform: { context: { waitUntil } } as unknown as App.Platform
+		})
+
+		expect(result).toBe('failed')
+		expect(waitUntil).toHaveBeenCalledOnce()
+		finishFlush()
+		await waitUntil.mock.calls[0][0]
+		expect(reportError).toHaveBeenCalledOnce()
 	})
 
 	it.each([
@@ -160,7 +194,7 @@ describe('signInCrm', () => {
 	it('does not call without a URL or key', async () => {
 		delete env.CRM_INTAKE_KEY
 
-		expect(await signInCrm(SIGNATURE)).toBe('failed')
+		expect(await sign()).toBe('failed')
 		expect(fetchMock).not.toHaveBeenCalled()
 		expect(reportError.mock.calls[0][1]).toMatchObject({ cause: 'not_configured' })
 	})

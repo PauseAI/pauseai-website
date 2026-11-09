@@ -5,7 +5,13 @@
 // Emails and other submitted values must never reach a log or a report.
 import { env } from '$env/dynamic/private'
 import type { Signatory } from '$lib/types'
-import { callCrm, failureDetails, reportCrmProblem, type CrmFailure } from '$lib/server/crmIntake'
+import {
+	TIMEOUT_MS,
+	callCrm,
+	failureDetails,
+	reportCrmProblem,
+	type CrmFailure
+} from '$lib/server/crmIntake'
 import { COUNTRY_BY_ISO_CODE } from '$lib/server/countryCodes'
 
 export type StatementBackend = 'airtable' | 'civicrm'
@@ -20,10 +26,12 @@ export const statementBackend = (): StatementBackend =>
 /** The wording people sign, stored with each signature as its consent record. */
 export const STATEMENT_VERSION = '2023-statement-v1'
 
-// Waits before the second and third attempt. Only failures that may be transient are
-// retried, and a retry carries the same submission_id, so CiviCRM keeps one signature even
-// when an attempt that timed out had written it.
-export const SIGN_RETRY_DELAYS_MS = [1000, 3000] as const
+// Only a failure that may be transient is retried, once, and the retry carries the same
+// submission_id, so CiviCRM keeps one signature even when an attempt that timed out had
+// written it. The retry runs only if the signing deadline leaves it SIGN_MIN_ATTEMPT_MS,
+// about the slowest the CRM normally answers (crmIntake.ts).
+export const SIGN_RETRY_DELAY_MS = 1000
+export const SIGN_MIN_ATTEMPT_MS = 6000
 
 const ISO_CODE_BY_COUNTRY = new Map(
 	Object.entries(COUNTRY_BY_ISO_CODE).map(([code, country]) => [country, code])
@@ -68,10 +76,15 @@ const report = (
 	)
 
 /**
- * Writes one signature, retrying transient failures. `refused` means CiviCRM's validation
- * disagreed with the website's, which is checked first. Never rejects.
+ * Writes one signature, retrying a transient failure once if `deadline` (a Date.now() time)
+ * allows, and never running an attempt past it. With a platform, failures are reported after
+ * the response. `refused` means CiviCRM's validation disagreed with the website's, which is
+ * checked first. Never rejects.
  */
-export async function signInCrm(signature: Signature): Promise<CrmSignResult> {
+export async function signInCrm(
+	signature: Signature,
+	{ deadline, platform }: { deadline: number; platform?: App.Platform }
+): Promise<CrmSignResult> {
 	const params = {
 		name: signature.name,
 		email: signature.email,
@@ -82,25 +95,38 @@ export async function signInCrm(signature: Signature): Promise<CrmSignResult> {
 		statement_version: STATEMENT_VERSION,
 		submission_id: crypto.randomUUID()
 	}
+	const finish = async (result: CrmSignResult, reporting: Promise<void>) => {
+		if (platform) platform.context.waitUntil(reporting)
+		else await reporting
+		return result
+	}
 
 	for (let attempt = 1; ; attempt++) {
-		const answer = await callCrm('PauseaiStatement/sign', params)
+		const budget = Math.min(TIMEOUT_MS, deadline - Date.now())
+		const answer = await callCrm(
+			'PauseaiStatement/sign',
+			params,
+			Math.max(budget, SIGN_MIN_ATTEMPT_MS)
+		)
 		if (answer.ok) {
 			if (answer.row.status === 'ok') return 'ok'
 			if (answer.row.status === 'refused') {
-				await report('sign', `refused:${String(answer.row.reason)}`, {}, 'warning')
-				return 'refused'
+				const outcome = `refused:${String(answer.row.reason)}`
+				return finish('refused', report('sign', outcome, {}, 'warning'))
 			}
-			await report('sign', 'error', { cause: 'http', httpStatus: 200, attempt }, 'error')
-			return 'failed'
+			const details = { cause: 'http', httpStatus: 200, attempt }
+			return finish('failed', report('sign', 'error', details, 'error'))
 		}
-		const delay = SIGN_RETRY_DELAYS_MS[attempt - 1]
-		if (delay === undefined || !isTransient(answer)) {
-			await report('sign', 'error', { ...failureDetails(answer), attempt }, 'error')
-			return 'failed'
+		const retry =
+			attempt === 1 &&
+			isTransient(answer) &&
+			deadline - Date.now() - SIGN_RETRY_DELAY_MS >= SIGN_MIN_ATTEMPT_MS
+		if (!retry) {
+			const details = { ...failureDetails(answer), attempt }
+			return finish('failed', report('sign', 'error', details, 'error'))
 		}
 		console.warn('[crm-statement] sign failed, retrying', { ...failureDetails(answer), attempt })
-		await wait(delay)
+		await wait(SIGN_RETRY_DELAY_MS)
 	}
 }
 

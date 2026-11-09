@@ -44,6 +44,11 @@ const SAVE_LIMIT = { saves: 30, windowMs: 10 * 60 * 1000 }
 // second per base.
 const OVERALL_LIMIT = { attempts: 120, windowMs: 60 * 1000 }
 
+// The signing routes run as Netlify Edge Functions, which must answer within 40 s, and
+// CiviCRM may already hold a signature whose request then got no answer. Turnstile's
+// check (TURNSTILE_TIMEOUT_MS) and the CRM's attempts (signInCrm) fit inside this.
+const SIGN_DEADLINE_MS = 20_000
+
 // A repeat within this long writes nothing and sends no email. It is also the most email
 // someone else can cause one address to receive, and how long a signer who lost the first
 // email has to wait for another. Older than this, a new row and email are allowed, and
@@ -249,6 +254,8 @@ type SignContext = {
 	allowedHostnames: readonly string[]
 	turnstileToken: unknown
 	getClientAddress: () => string
+	/** Keeps failure reports running after the response, on Netlify. */
+	platform?: App.Platform
 }
 
 function senderKey(getClientAddress: () => string): string {
@@ -269,6 +276,7 @@ export async function signStatement(
 	input: SignatureInput,
 	context: SignContext
 ): Promise<SignResult> {
+	const deadline = Date.now() + SIGN_DEADLINE_MS
 	const mode = signingMode(context.hostname)
 	if (mode === 'off') {
 		console.error('[statement] STATEMENT_SIGNING_LIVE is not set: refusing a signature')
@@ -301,7 +309,7 @@ export async function signStatement(
 	if (retryAfter !== null) return { status: 'rate_limited', retryAfter }
 
 	if (statementBackend() === 'civicrm') {
-		const saved = await signInCrm(validated.signature)
+		const saved = await signInCrm(validated.signature, { deadline, platform: context.platform })
 		// CiviCRM's refusal names no field, and the checks above are meant to catch whatever
 		// it would refuse, so this answers the request as invalid without blaming a field.
 		if (saved === 'refused') return { status: 'invalid', errors: {} }

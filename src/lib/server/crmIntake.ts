@@ -40,15 +40,19 @@ export type Outcome = Result['outcome']
 const isCrmIntakeEnabled = () => env.CRM_INTAKE_ENABLED === 'true'
 
 /**
- * Calls one API4 action (`Entity/action`) as the intake API account. Never
- * rejects: a failure is an answer with what caused it.
+ * Calls one API4 action (`Entity/action`) as the intake API account, giving up
+ * after `timeoutMs`. Never rejects: a failure is an answer with what caused it.
  */
-export async function callCrm(action: string, params: unknown): Promise<CrmAnswer> {
+export async function callCrm(
+	action: string,
+	params: unknown,
+	timeoutMs = TIMEOUT_MS
+): Promise<CrmAnswer> {
 	const base = env.CRM_INTAKE_URL?.replace(/\/+$/, '')
 	const key = env.CRM_INTAKE_KEY
 	if (!base || !key) return { ok: false, cause: 'not_configured' }
 
-	const signal = AbortSignal.timeout(TIMEOUT_MS)
+	const signal = AbortSignal.timeout(timeoutMs)
 	try {
 		const response = await fetch(base + API_PATH + action, {
 			method: 'POST',

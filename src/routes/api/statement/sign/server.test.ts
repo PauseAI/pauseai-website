@@ -691,19 +691,26 @@ describe('POST /api/statement/sign: STATEMENT_BACKEND=civicrm', () => {
 		env.STATEMENT_BACKEND = 'civicrm'
 	})
 
-	it('signs in CiviCRM with the email language, and touches no Airtable table', async () => {
+	it('signs in CiviCRM with the email language and a 20 s deadline, touching no Airtable table', async () => {
+		const sent = Date.now()
 		const response = await post({ ...VALID, language: 'es' })
 
 		expect(response.status).toBe(202)
 		expect(await response.json()).toEqual({ ok: true, status: 'pending_verification' })
-		expect(signInCrm).toHaveBeenCalledExactlyOnceWith({
-			name: 'Ada Lovelace',
-			email: SECRET_EMAIL,
-			country: 'Spain',
-			bio: 'I care about this.',
-			private: false,
-			language: 'es'
-		})
+		expect(signInCrm).toHaveBeenCalledExactlyOnceWith(
+			{
+				name: 'Ada Lovelace',
+				email: SECRET_EMAIL,
+				country: 'Spain',
+				bio: 'I care about this.',
+				private: false,
+				language: 'es'
+			},
+			{ deadline: expect.any(Number) as unknown, platform: undefined }
+		)
+		const { deadline } = signInCrm.mock.calls[0][1] as { deadline: number }
+		expect(deadline - sent).toBeGreaterThanOrEqual(20_000)
+		expect(deadline - Date.now()).toBeLessThanOrEqual(20_000)
 		expect(hasMatchingRecord).not.toHaveBeenCalled()
 		expect(createRecord).not.toHaveBeenCalled()
 	})

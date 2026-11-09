@@ -52,7 +52,7 @@ const fieldMessages = (errors: SignatureErrors) =>
 	)
 
 export const actions: Actions = {
-	default: async ({ request, url, getClientAddress }) => {
+	default: async ({ request, url, getClientAddress, platform }) => {
 		// None of these failures echo what was posted. The form keeps its own state and never
 		// resets on a failure, so the person's input stays on screen.
 		const bytes = await readLimitedBody(request)
@@ -80,7 +80,8 @@ export const actions: Actions = {
 				hostname: url.hostname,
 				allowedHostnames: [url.hostname],
 				turnstileToken: data.get(TURNSTILE_FIELD),
-				getClientAddress
+				getClientAddress,
+				platform
 			}
 		)
 
