@@ -129,18 +129,22 @@
 		gap: 1rem;
 	}
 
+	/* Matches the onboarding form's secondary button. */
 	button {
 		margin-top: 1rem;
-		padding: 0.5rem 1rem;
-		background-color: var(--brand);
-		color: white;
-		border: none;
-		border-radius: 4px;
+		padding: 0.5rem 1.5rem;
+		background: none;
+		color: var(--brand);
+		border: 2px solid var(--brand);
+		border-radius: 50px;
+		font-family: var(--font-body);
+		font-size: 1rem;
+		font-weight: bold;
 		cursor: pointer;
 	}
 
 	button:hover {
-		background-color: var(--brand-dark);
+		background-color: var(--bg);
 	}
 
 	.signatories-header {
@@ -152,17 +156,8 @@
 	}
 
 	.expand-all {
+		margin-top: 0;
 		margin-left: 1rem;
-		padding: 0.4rem 1rem;
-		background-color: var(--brand);
-		color: white;
-		border: none;
-		border-radius: 4px;
-		cursor: pointer;
-		font-size: 1rem;
 		float: right;
-	}
-	.expand-all:hover {
-		background-color: var(--brand-dark);
 	}
 </style>

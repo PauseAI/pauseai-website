@@ -401,19 +401,23 @@
 		background-color: var(--bg);
 	}
 
+	/* Matches the onboarding form's primary button. */
 	button {
 		align-self: flex-start;
-		padding: 0.6rem 1.5rem;
+		padding: 0.8rem 3rem;
 		color: white;
-		font-size: 1rem;
+		font-family: var(--font-body);
+		font-size: 1.1rem;
+		font-weight: bold;
 		background-color: var(--brand);
 		border: none;
-		border-radius: 4px;
+		border-radius: 50px;
 		cursor: pointer;
+		transition: opacity 0.2s;
 	}
 
-	button:hover {
-		background-color: var(--brand-dark);
+	button:hover:not(:disabled) {
+		opacity: 0.9;
 	}
 
 	button:disabled {
