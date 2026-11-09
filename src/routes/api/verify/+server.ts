@@ -2,7 +2,11 @@ export const prerender = false
 
 import { AIRTABLE_WRITE_API_KEY } from '$env/static/private'
 import { airtableFormulaString } from '$lib/airtable'
-import { verificationConfirmedParameter, verificationParameter } from '$lib/config.js'
+import {
+	verificationConfirmedParameter,
+	verificationNeedsClick,
+	verificationParameter
+} from '$lib/config.js'
 import {
 	acceptsUnsignedLink,
 	getVerificationSecret,
@@ -73,10 +77,9 @@ export const POST: RequestHandler = async ({ request }) => {
 		return new Response(`Invalid table name "${tableName}"`, { status: StatusCodes.BAD_REQUEST })
 	}
 
-	// Statement links have no token or expiry, so /verify asks for a click first
-	// (verificationNeedsClick). Refusing here means only that click can publish a name, not
-	// a stale copy of the page that posts on load.
-	if (!tableConfig.isMembers && params.get(verificationConfirmedParameter) !== 'true') {
+	// Refusing here means only the click on /verify can take effect, not a stale copy of the
+	// page that posts on load.
+	if (verificationNeedsClick(params) && params.get(verificationConfirmedParameter) !== 'true') {
 		return new Response(`Parameter "${verificationConfirmedParameter}" is required`, {
 			status: StatusCodes.BAD_REQUEST
 		})

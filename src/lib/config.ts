@@ -17,5 +17,5 @@ export const layoutWidth = '768px' /** 40rem in px, required for "sizes" attribu
  * links only tick a box the row's owner can see, and are checked server-side, so they
  * confirm on load as they always have.
  */
-export const verificationNeedsClick = (linkParameters: string) =>
+export const verificationNeedsClick = (linkParameters: string | URLSearchParams) =>
 	new URLSearchParams(linkParameters).get('table') === 'statement'
