@@ -2,7 +2,9 @@
 	import * as Sentry from '@sentry/svelte'
 	import { afterNavigate, goto, replaceState } from '$app/navigation'
 	import { page } from '$app/state'
+	import { verificationConfirmedParameter, verificationNeedsClick } from '$lib/config'
 	import toast from 'svelte-french-toast'
+	import Button from '$lib/components/Button.svelte'
 	import Link from '$lib/components/Link.svelte'
 	import Processing from '$lib/components/Processing.svelte'
 
@@ -17,6 +19,8 @@
 	let errorMessage: string | undefined = $state()
 	let expired = $state(false)
 	let verificationStarted = false
+	let awaitingClick = $state(false)
+	let linkParameters = ''
 
 	// replaceState needs the router started. On a direct load onMount runs while
 	// SvelteKit is still constructing the root component (in production that
@@ -28,13 +32,13 @@
 	afterNavigate(() => {
 		if (verificationStarted) return
 		verificationStarted = true
-		void verify()
+		void start()
 	})
 
-	async function verify() {
+	async function start() {
 		// Take the link's query out of the address bar, and so out of history and of
 		// anything an error report reads from the page's URL.
-		const linkParameters = page.url.search.slice(1)
+		linkParameters = page.url.search.slice(1)
 		await Promise.resolve()
 		// The strip is only hygiene: if it fails (say a SvelteKit upgrade changes
 		// the router timing this relies on), report it and carry on with the
@@ -46,11 +50,21 @@
 			console.error('Failed to remove the verification link from the address bar:', error)
 			Sentry.captureException(error)
 		}
+		if (verificationNeedsClick(linkParameters)) awaitingClick = true
+		else await verify(linkParameters)
+	}
+
+	async function confirm() {
+		awaitingClick = false
+		await verify(`${linkParameters}&${verificationConfirmedParameter}=true`)
+	}
+
+	async function verify(body: string) {
 		try {
 			const response = await fetch('/api/verify', {
 				method: 'POST',
 				headers: { 'content-type': 'application/x-www-form-urlencoded' },
-				body: linkParameters
+				body
 			})
 			if (response.ok) {
 				toast.success('Your email has been verified!')
@@ -69,7 +83,15 @@
 	}
 </script>
 
-{#if expired}
+{#if awaitingClick}
+	<h1>Confirm your signature</h1>
+	<p>
+		Please confirm that you signed the PauseAI statement with this email address. Your signature is
+		listed after you confirm, under your name unless you chose to be anonymous.
+	</p>
+	<Button onclick={confirm}>Confirm my signature</Button>
+	<p class="not-you">Didn't sign it? Just close this page, and nothing will be published.</p>
+{:else if expired}
 	<h1>This link has expired</h1>
 	<p>
 		Verification links work for 90 days, and only for the email address they were sent to. This one
@@ -86,3 +108,9 @@
 {:else}
 	<Processing {errorMessage} />
 {/if}
+
+<style>
+	.not-you {
+		margin-top: 1rem;
+	}
+</style>
