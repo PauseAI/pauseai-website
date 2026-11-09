@@ -217,8 +217,7 @@
 				{/key}
 			{/if}
 
-			<!-- Always in the page, as a live region only announces changes to one it already knows.
-			     The field errors are repeated for screen readers, which can't see them highlighted. -->
+			<!-- The field errors are repeated for screen readers, which can't see them highlighted. -->
 			<div role="alert">
 				{#if errorMessage}
 					<p class="form-error" tabindex="-1" bind:this={errorSummary}>

@@ -2,13 +2,8 @@
 // (routes/statement/sign) and the public endpoint for chapter sites
 // (routes/api/statement/sign, documented in docs/statement-signing-api.md).
 //
-// Whether a signature is listed is decided elsewhere: /api/signatories only returns rows
-// with email_verified ticked and duplicate unticked, once per address. Nothing here ticks
-// email_verified. An Airtable automation emails each new row a /verify?table=statement
-// link, and /api/verify ticks the box after the person confirms on that page.
-//
-// A repeat signature writes nothing, so sends no email, and gets the same answer as a new
-// one, so a response cannot reveal whether an address has already signed.
+// A repeat signature gets the same answer as a new one, so a response cannot reveal whether
+// an address has already signed.
 //
 // Emails and other submitted values must never reach a log or a response.
 import { dev } from '$app/environment'

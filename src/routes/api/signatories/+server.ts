@@ -87,13 +87,12 @@ export const GET: RequestHandler = async ({ fetch, setHeaders }) => {
 			fields: SIGNATORY_FIELDS
 		})
 
-		// Only rows whose email_verified is explicitly true. The automation ticks `duplicate` on
-		// any later row for an address, even when it's the only verified one or asks to be
-		// anonymous, so rows with an address are left for earliestRowPerAddress to settle.
-		// Without an address there is nothing to match on, so `duplicate` still decides.
+		// The automation's `duplicate` tick can land on an address's only verified row, so rows
+		// with an address are left to earliestRowPerAddress.
 		const verifiedRecords = records.filter((record) => {
 			const { email_verified: emailVerified, duplicate, email } = record.fields
-			return emailVerified === true && (!duplicate || !!email)
+			const listable = !duplicate || !!email
+			return emailVerified === true && listable
 		})
 
 		console.log(`Verified records: ${records.length}, listable: ${verifiedRecords.length}`)

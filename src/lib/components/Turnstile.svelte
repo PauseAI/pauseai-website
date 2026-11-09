@@ -58,7 +58,6 @@
 {#if turnstileSiteKey}
 	<div class="turnstile">
 		<div bind:this={container}></div>
-		<!-- Always in the page, as a live region only announces changes to one it already knows. -->
 		<div role="alert">
 			{#if failed}
 				<p class="turnstile-error">
