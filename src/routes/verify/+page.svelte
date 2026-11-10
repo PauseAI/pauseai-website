@@ -7,6 +7,7 @@
 	import Button from '$lib/components/Button.svelte'
 	import Link from '$lib/components/Link.svelte'
 	import Processing from '$lib/components/Processing.svelte'
+	import SignatureConfirmed from './SignatureConfirmed.svelte'
 
 	const NEW_LINK_MAIL =
 		'mailto:info@pauseai.info?subject=' +
@@ -20,6 +21,7 @@
 	let expired = $state(false)
 	let verificationStarted = false
 	let awaitingClick = $state(false)
+	let signatureConfirmed = $state(false)
 	let linkParameters = ''
 
 	// replaceState needs the router started. On a direct load onMount runs while
@@ -67,6 +69,11 @@
 				body
 			})
 			if (response.ok) {
+				// Only statement links need the click, so this is a confirmed signature.
+				if (verificationNeedsClick(linkParameters)) {
+					signatureConfirmed = true
+					return
+				}
 				toast.success('Your email has been verified!')
 				void goto('/')
 			} else if (response.status === 410) {
@@ -83,7 +90,9 @@
 	}
 </script>
 
-{#if awaitingClick}
+{#if signatureConfirmed}
+	<SignatureConfirmed />
+{:else if awaitingClick}
 	<h1>Confirm your signature</h1>
 	<p>
 		Please confirm that you signed the PauseAI statement with this email address. Your signature is

@@ -1,8 +1,12 @@
 <script lang="ts">
 	import Link from '$lib/components/Link.svelte'
 
-	/** The heading level that follows the page's own headings. */
-	let { headingLevel = 3 }: { headingLevel?: 2 | 3 } = $props()
+	let {
+		/** The heading level that follows the page's own headings. */
+		headingLevel = 3,
+		/** In the chapter-site iframe, where a link must not replace the form. */
+		embedded = false
+	}: { headingLevel?: 2 | 3; embedded?: boolean } = $props()
 </script>
 
 <div class="panel">
@@ -14,6 +18,10 @@
 		Please check out your email inbox (and spam folder) to verify your email address!
 	</p>
 	<p>Once you've verified it, your signature will be added to the list.</p>
+	<!-- Shown to everyone, as saying it only to non-members would reveal who is a member. -->
+	<p class="invite">
+		Want to do more? <Link href="/join" target={embedded ? '_blank' : null}>Join PauseAI</Link>
+	</p>
 	<!-- Shown to everyone, as saying it only to repeat signers would reveal who has signed. -->
 	<p class="note">
 		Already signed and need to change something, such as becoming anonymous? Email
@@ -65,6 +73,10 @@
 	.verify {
 		font-weight: bold;
 		font-size: 1.1rem;
+	}
+
+	.invite {
+		font-weight: bold;
 	}
 
 	.note {

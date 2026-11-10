@@ -129,7 +129,7 @@
 	<!-- Always in the page, as a live region only announces changes to one it already knows. -->
 	<div class="thanks" role="status" tabindex="-1" bind:this={thanks}>
 		{#if signed}
-			<StatementThanks headingLevel={headingLevel === 1 ? 2 : 3} />
+			<StatementThanks headingLevel={headingLevel === 1 ? 2 : 3} {embedded} />
 		{/if}
 	</div>
 
