@@ -147,7 +147,7 @@
 				/>
 			</div>
 
-			<p class="publish-note">
+			<p class="publish-note" id="statement-publish-note">
 				Signing publishes your name, country and what you write on the statement's public list of
 				signatures. See our
 				<!-- A new tab, as leaving the page would lose what's been typed. -->
@@ -250,8 +250,9 @@
 			<button
 				type="submit"
 				disabled={!canSubmit}
-				aria-describedby={waitingForTurnstile ? 'statement-submit-hint' : undefined}
-				>{submitting ? 'Submitting…' : 'Submit'}</button
+				aria-describedby={waitingForTurnstile
+					? 'statement-publish-note statement-submit-hint'
+					: 'statement-publish-note'}>{submitting ? 'Submitting…' : 'Submit'}</button
 			>
 			<div role="status">
 				{#if waitingForTurnstile}

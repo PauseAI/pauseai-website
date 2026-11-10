@@ -24,7 +24,10 @@ describe('/embed/statement-form', () => {
 		expect(body).toMatch(
 			/Signing publishes your name, country and what you write[\s\S]*id="statement-name"/
 		)
-		expect(body).toMatch(/We show "Anonymous" instead of your name/)
+		expect(body).toMatch(
+			/We show "Anonymous" instead of your name, but your country and what you write are still\s+published, so leave out details that could identify you/
+		)
+		expect(body).toMatch(/<button[^>]*aria-describedby="statement-publish-note"/)
 	})
 
 	it('heads the card as the page itself, as the embed has no other heading', () => {
