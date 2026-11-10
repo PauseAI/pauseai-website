@@ -20,6 +20,26 @@ describe('/embed/statement-form', () => {
 		)
 	})
 
+	it('says that signing publishes the signature, just before the submit button', () => {
+		expect(body).toMatch(
+			/id="statement-bio"[\s\S]*By\s+signing,\s+you\s+publish\s+your\s+name\s+\(or\s+(&quot;|")Anonymous(&quot;|"),\s+if\s+you\s+ticked\s+the\s+box\s+above\),\s+country\s+and\s+what\s+you\s+wrote[\s\S]*<button[^>]*type="submit"/
+		)
+		// The bio's anonymity hint shows only once the box is ticked.
+		expect(body).not.toMatch(/still\s+published/)
+		expect(body).toMatch(/<button[^>]*aria-describedby="statement-publish-note"/)
+	})
+
+	it('labels the submit button with what it does', () => {
+		expect(body).toMatch(/<button[^>]*type="submit"[^>]*>Sign the statement<\/button>/)
+	})
+
+	it('marks the bio as optional and keeps its prompt as a placeholder', () => {
+		expect(body).toMatch(/Why does this matter to you\?\s+<span[^>]*>\(optional\)<\/span>/)
+		expect(body).toMatch(
+			/<textarea[^>]*placeholder="Share who you are and why addressing AI risks is important to you"/
+		)
+	})
+
 	it('heads the card as the page itself, as the embed has no other heading', () => {
 		expect(body).toMatch(/<h1[^>]*id="sign-heading"/)
 		expect(body).not.toMatch(/<h2[^>]*id="sign-heading"/)

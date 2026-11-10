@@ -23,6 +23,7 @@
 
 	let signed = $state(false)
 	let submitting = $state(false)
+	let anonymous = $state(false)
 	let errorMessage = $state('')
 	type FieldErrors = Partial<Record<SignatureField, string>>
 	let fieldErrors = $state<FieldErrors>({})
@@ -129,7 +130,7 @@
 	<!-- Always in the page, as a live region only announces changes to one it already knows. -->
 	<div class="thanks" role="status" tabindex="-1" bind:this={thanks}>
 		{#if signed}
-			<StatementThanks headingLevel={headingLevel === 1 ? 2 : 3} />
+			<StatementThanks headingLevel={headingLevel === 1 ? 2 : 3} {embedded} />
 		{/if}
 	</div>
 
@@ -148,7 +149,7 @@
 			</div>
 
 			<div class="field">
-				<label class="field-label" for="statement-name">Full Name *</label>
+				<label class="field-label" for="statement-name">Full name *</label>
 				<input
 					type="text"
 					id="statement-name"
@@ -165,15 +166,9 @@
 			</div>
 
 			<label class="checkbox">
-				<input type="checkbox" name="private" aria-describedby="statement-private-note" />
+				<input type="checkbox" name="private" bind:checked={anonymous} />
 				<span>I want to be anonymous</span>
 			</label>
-			<p class="private-note" id="statement-private-note">
-				Your name is hidden, but your country and anything you write below are still published, so
-				leave out details that could identify you. See our
-				<!-- A new tab, as leaving the page would lose what's been typed. -->
-				<Link href="/privacy" target="_blank">privacy policy</Link>.
-			</p>
 
 			<div class="field">
 				<label class="field-label" for="statement-email">Email *</label>
@@ -210,15 +205,31 @@
 
 			<div class="field">
 				<label class="field-label" for="statement-bio">
-					Share with the world who you are and why addressing AI risks is important to you
+					Why does this matter to you? <span class="optional">(optional)</span>
 				</label>
+				<!-- Where the details it warns about are typed. Always in the page, as a live region
+				only announces changes to one it already knows. -->
+				<div aria-live="polite">
+					{#if anonymous}
+						<p class="bio-hint" id="statement-bio-hint">
+							You're anonymous, but this and your country are still published, so leave out details
+							that could identify you.
+						</p>
+					{/if}
+				</div>
 				<textarea
 					id="statement-bio"
 					name="bio"
 					rows="4"
+					placeholder="Share who you are and why addressing AI risks is important to you"
 					maxlength="2000"
 					aria-invalid={!!fieldErrors.bio}
-					aria-describedby={fieldErrors.bio ? 'statement-bio-error' : undefined}></textarea>
+					aria-describedby={[
+						anonymous && 'statement-bio-hint',
+						fieldErrors.bio && 'statement-bio-error'
+					]
+						.filter(Boolean)
+						.join(' ') || undefined}></textarea>
 				{#if fieldErrors.bio}
 					<p class="field-error" id="statement-bio-error">{fieldErrors.bio}</p>
 				{/if}
@@ -242,11 +253,19 @@
 				{/if}
 			</div>
 
+			<p class="publish-note" id="statement-publish-note">
+				By signing, you publish your name (or "Anonymous", if you ticked the box above), country and
+				what you wrote on the statement's public list of signatures. See our
+				<!-- A new tab, as leaving the page would lose what's been typed. -->
+				<Link href="/privacy" target="_blank">privacy policy</Link>.
+			</p>
+
 			<button
 				type="submit"
 				disabled={!canSubmit}
-				aria-describedby={waitingForTurnstile ? 'statement-submit-hint' : undefined}
-				>{submitting ? 'Submitting…' : 'Submit'}</button
+				aria-describedby={waitingForTurnstile
+					? 'statement-publish-note statement-submit-hint'
+					: 'statement-publish-note'}>{submitting ? 'Submitting…' : 'Sign the statement'}</button
 			>
 			<div role="status">
 				{#if waitingForTurnstile}
@@ -309,6 +328,8 @@
 	}
 
 	.field-label {
+		/* Override the global `form label` flex column, which would put "(optional)" on its own line. */
+		display: block;
 		margin-left: 0.5rem;
 		font-size: 0.9rem;
 		font-weight: 500;
@@ -396,15 +417,25 @@
 
 	.submit-hint,
 	.test-notice,
-	.private-note {
+	.publish-note,
+	.bio-hint {
 		margin: 0;
 		font-size: 0.9rem;
 	}
 
-	/* Reads as part of the checkbox above, across the form's usual gap. */
-	.private-note {
-		margin-top: -0.6rem;
+	.bio-hint {
 		margin-left: 0.5rem;
+	}
+
+	.optional {
+		font-weight: 400;
+	}
+
+	.publish-note {
+		padding: 0.7rem 1rem;
+		border-left: 4px solid var(--brand);
+		background-color: var(--bg);
+		border-radius: 0 12px 12px 0;
 	}
 
 	.test-notice {
