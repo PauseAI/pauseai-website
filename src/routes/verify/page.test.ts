@@ -14,11 +14,18 @@ vi.mock('$app/navigation', () => ({
 const { default: Page } = await import('./+page.svelte')
 const { default: SignatureConfirmed } = await import('./SignatureConfirmed.svelte')
 
-const JOIN_INVITE = /Want to do more\?[\s\S]*<a href="\/join"[^>]*>(<!---->)?Join PauseAI/
-
 describe('/verify', () => {
-	it('invites a confirmed signer to join PauseAI', () => {
-		expect(render(SignatureConfirmed).body).toMatch(JOIN_INVITE)
+	it('confirms without promising the signature is listed yet', () => {
+		const { body } = render(SignatureConfirmed)
+		expect(body).toMatch(/<h1[^>]*>Your signature is confirmed<\/h1>/)
+		expect(body).toMatch(/It\s+will\s+be\s+added\s+to\s+the\s+public\s+list\s+of\s+signatures/)
+	})
+
+	it('invites a confirmed signer to join PauseAI and to share the statement', () => {
+		const { body } = render(SignatureConfirmed)
+		expect(body).toMatch(/Get involved[\s\S]*<a href="\/join"[^>]*>(<!---->)?Join PauseAI/)
+		expect(body).toMatch(/Spread the word[\s\S]*<button[^>]*>Copy link<\/button>/)
+		expect(body).toMatch(/aria-live="polite"/)
 	})
 
 	it('server-renders no invite on first load', () => {

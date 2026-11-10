@@ -147,15 +147,8 @@
 				/>
 			</div>
 
-			<p class="publish-note" id="statement-publish-note">
-				Signing publishes your name (or "Anonymous", if you tick the box below), country and what
-				you write on the statement's public list of signatures. See our
-				<!-- A new tab, as leaving the page would lose what's been typed. -->
-				<Link href="/privacy" target="_blank">privacy policy</Link>.
-			</p>
-
 			<div class="field">
-				<label class="field-label" for="statement-name">Full Name *</label>
+				<label class="field-label" for="statement-name">Full name *</label>
 				<input
 					type="text"
 					id="statement-name"
@@ -215,12 +208,13 @@
 
 			<div class="field">
 				<label class="field-label" for="statement-bio">
-					Share with the world who you are and why addressing AI risks is important to you
+					Why does this matter to you? <span class="optional">(optional)</span>
 				</label>
 				<textarea
 					id="statement-bio"
 					name="bio"
 					rows="4"
+					placeholder="Share who you are and why addressing AI risks is important to you"
 					maxlength="2000"
 					aria-invalid={!!fieldErrors.bio}
 					aria-describedby={fieldErrors.bio ? 'statement-bio-error' : undefined}></textarea>
@@ -247,12 +241,19 @@
 				{/if}
 			</div>
 
+			<p class="publish-note" id="statement-publish-note">
+				By signing, you publish your name (or "Anonymous", if you ticked the box above), country and
+				what you wrote on the statement's public list of signatures. See our
+				<!-- A new tab, as leaving the page would lose what's been typed. -->
+				<Link href="/privacy" target="_blank">privacy policy</Link>.
+			</p>
+
 			<button
 				type="submit"
 				disabled={!canSubmit}
 				aria-describedby={waitingForTurnstile
 					? 'statement-publish-note statement-submit-hint'
-					: 'statement-publish-note'}>{submitting ? 'Submitting…' : 'Submit'}</button
+					: 'statement-publish-note'}>{submitting ? 'Submitting…' : 'Sign the statement'}</button
 			>
 			<div role="status">
 				{#if waitingForTurnstile}
@@ -315,6 +316,8 @@
 	}
 
 	.field-label {
+		/* Override the global `form label` flex column, which would put "(optional)" on its own line. */
+		display: block;
 		margin-left: 0.5rem;
 		font-size: 0.9rem;
 		font-weight: 500;
@@ -412,6 +415,17 @@
 	.private-note {
 		margin-top: -0.6rem;
 		margin-left: 0.5rem;
+	}
+
+	.optional {
+		font-weight: 400;
+	}
+
+	.publish-note {
+		padding: 0.7rem 1rem;
+		border-left: 4px solid var(--brand);
+		background-color: var(--bg);
+		border-radius: 0 12px 12px 0;
 	}
 
 	.test-notice {

@@ -13,19 +13,21 @@
 <div class="panel">
 	<div class="icon" aria-hidden="true">✉</div>
 	<svelte:element this={`h${headingLevel}`} class="toc-exclude heading"
-		>Thank you for your signature!</svelte:element
+		>Thank you for signing!</svelte:element
 	>
-	<p class="verify">
-		Please check out your email inbox (and spam folder) to verify your email address!
+	<p>
+		Check your inbox (and spam folder) for our email, and click its link to confirm your signature.
 	</p>
-	<p>Once you've verified it, your signature will be added to the list.</p>
-	<JoinInvite {embedded} />
 	<!-- Shown to everyone, as saying it only to repeat signers would reveal who has signed. -->
 	<p class="note">
 		Already signed and need to change something, such as becoming anonymous? Email
 		<Link href="mailto:contact@pauseai.info">contact@pauseai.info</Link>, as signing again won't
 		update it.
 	</p>
+	<div class="invite">
+		<strong>Want to do more?</strong>
+		<JoinInvite {embedded} />
+	</div>
 </div>
 
 <style>
@@ -68,9 +70,18 @@
 		margin: 1rem auto 0;
 	}
 
-	.verify {
-		font-weight: bold;
-		font-size: 1.1rem;
+	.invite {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		justify-content: space-between;
+		gap: 0.75rem 1rem;
+		max-width: 32rem;
+		margin: 1.5rem auto 0;
+		padding: 0.9rem 1.1rem;
+		text-align: left;
+		background-color: var(--bg-subtle);
+		border-radius: 14px;
 	}
 
 	.note {

@@ -8,6 +8,14 @@ vi.mock('$app/state', () => ({
 const { default: StatementThanks } = await import('./StatementThanks.svelte')
 
 describe('StatementThanks', () => {
+	it('asks the signer to confirm from the email', () => {
+		const { body } = render(StatementThanks)
+		expect(body).toMatch(/Thank you for signing!/)
+		expect(body).toMatch(
+			/Check\s+your\s+inbox\s+\(and\s+spam\s+folder\)\s+for\s+our\s+email,\s+and\s+click\s+its\s+link\s+to\s+confirm\s+your\s+signature/
+		)
+	})
+
 	it('invites every signer to join PauseAI', () => {
 		const { body } = render(StatementThanks)
 		expect(body).toMatch(/Want to do more\?[\s\S]*<a href="\/join"[^>]*>(<!---->)?Join PauseAI/)

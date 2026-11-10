@@ -20,14 +20,25 @@ describe('/embed/statement-form', () => {
 		)
 	})
 
-	it('says that signing publishes the signature, before the fields', () => {
+	it('says that signing publishes the signature, just before the submit button', () => {
 		expect(body).toMatch(
-			/Signing publishes your name \(or (&quot;|")Anonymous(&quot;|"), if you tick the box below\), country\s+and\s+what\s+you\s+write[\s\S]*id="statement-name"/
+			/id="statement-bio"[\s\S]*By\s+signing,\s+you\s+publish\s+your\s+name\s+\(or\s+(&quot;|")Anonymous(&quot;|"),\s+if\s+you\s+ticked\s+the\s+box\s+above\),\s+country\s+and\s+what\s+you\s+wrote[\s\S]*<button[^>]*type="submit"/
 		)
 		expect(body).toMatch(
 			/Your\s+country\s+and\s+what\s+you\s+write\s+are\s+still\s+published,\s+so\s+leave\s+out\s+details\s+that\s+could\s+identify\s+you/
 		)
 		expect(body).toMatch(/<button[^>]*aria-describedby="statement-publish-note"/)
+	})
+
+	it('labels the submit button with what it does', () => {
+		expect(body).toMatch(/<button[^>]*type="submit"[^>]*>Sign the statement<\/button>/)
+	})
+
+	it('marks the bio as optional and keeps its prompt as a placeholder', () => {
+		expect(body).toMatch(/Why does this matter to you\?\s+<span[^>]*>\(optional\)<\/span>/)
+		expect(body).toMatch(
+			/<textarea[^>]*placeholder="Share who you are and why addressing AI risks is important to you"/
+		)
 	})
 
 	it('heads the card as the page itself, as the embed has no other heading', () => {
