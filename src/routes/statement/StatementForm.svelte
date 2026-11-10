@@ -147,6 +147,13 @@
 				/>
 			</div>
 
+			<p class="publish-note">
+				Signing publishes your name, country and what you write on the statement's public list of
+				signatures. See our
+				<!-- A new tab, as leaving the page would lose what's been typed. -->
+				<Link href="/privacy" target="_blank">privacy policy</Link>.
+			</p>
+
 			<div class="field">
 				<label class="field-label" for="statement-name">Full Name *</label>
 				<input
@@ -169,10 +176,8 @@
 				<span>I want to be anonymous</span>
 			</label>
 			<p class="private-note" id="statement-private-note">
-				Your name is hidden, but your country and anything you write below are still published, so
-				leave out details that could identify you. See our
-				<!-- A new tab, as leaving the page would lose what's been typed. -->
-				<Link href="/privacy" target="_blank">privacy policy</Link>.
+				We show "Anonymous" instead of your name, but your country and what you write are still
+				published, so leave out details that could identify you.
 			</p>
 
 			<div class="field">
@@ -396,6 +401,7 @@
 
 	.submit-hint,
 	.test-notice,
+	.publish-note,
 	.private-note {
 		margin: 0;
 		font-size: 0.9rem;

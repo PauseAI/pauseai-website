@@ -20,6 +20,13 @@ describe('/embed/statement-form', () => {
 		)
 	})
 
+	it('says that signing publishes the signature, before the fields', () => {
+		expect(body).toMatch(
+			/Signing publishes your name, country and what you write[\s\S]*id="statement-name"/
+		)
+		expect(body).toMatch(/We show "Anonymous" instead of your name/)
+	})
+
 	it('heads the card as the page itself, as the embed has no other heading', () => {
 		expect(body).toMatch(/<h1[^>]*id="sign-heading"/)
 		expect(body).not.toMatch(/<h2[^>]*id="sign-heading"/)
