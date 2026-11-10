@@ -53,35 +53,32 @@
 			Sentry.captureException(error)
 		}
 		if (verificationNeedsClick(linkParameters)) awaitingClick = true
-		else await verify(linkParameters)
+		else if (await verify(linkParameters)) {
+			toast.success('Your email has been verified!')
+			void goto('/')
+		}
 	}
 
 	async function confirm() {
 		awaitingClick = false
-		await verify(`${linkParameters}&${verificationConfirmedParameter}=true`)
+		if (await verify(`${linkParameters}&${verificationConfirmedParameter}=true`))
+			signatureConfirmed = true
 	}
 
-	async function verify(body: string) {
+	async function verify(body: string): Promise<boolean> {
 		try {
 			const response = await fetch('/api/verify', {
 				method: 'POST',
 				headers: { 'content-type': 'application/x-www-form-urlencoded' },
 				body
 			})
-			if (response.ok) {
-				// Only statement links need the click, so this is a confirmed signature.
-				if (verificationNeedsClick(linkParameters)) {
-					signatureConfirmed = true
-					return
-				}
-				toast.success('Your email has been verified!')
-				void goto('/')
-			} else if (response.status === 410) {
+			if (response.ok) return true
+			if (response.status === 410) {
 				expired = true
-			} else {
-				const errorText = await response.text()
-				throw new Error(`Verification failed: ${errorText || response.statusText}`)
+				return false
 			}
+			const errorText = await response.text()
+			throw new Error(`Verification failed: ${errorText || response.statusText}`)
 		} catch (error) {
 			if (error instanceof Error) errorMessage = error.message
 			else errorMessage = 'Verification failed with unexpected error.'

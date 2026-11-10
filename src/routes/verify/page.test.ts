@@ -21,7 +21,7 @@ describe('/verify', () => {
 		expect(render(SignatureConfirmed).body).toMatch(JOIN_INVITE)
 	})
 
-	it('shows no invite before a verification has succeeded', () => {
+	it('server-renders no invite on first load', () => {
 		const { body } = render(Page)
 		expect(body).toMatch(/Processing your request/)
 		expect(body).not.toMatch(/href="\/join"/)

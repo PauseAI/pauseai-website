@@ -1,5 +1,5 @@
 <script lang="ts">
-	import Link from '$lib/components/Link.svelte'
+	import JoinInvite from '../statement/JoinInvite.svelte'
 
 	let heading: HTMLHeadingElement
 
@@ -9,15 +9,10 @@
 
 <h1 tabindex="-1" bind:this={heading}>Your signature is confirmed</h1>
 <p>Thank you for signing the PauseAI statement.</p>
-<!-- Shown to everyone, as saying it only to non-members would reveal who is a member. -->
-<p class="invite">Want to do more? <Link href="/join">Join PauseAI</Link></p>
+<JoinInvite />
 
 <style>
 	h1:focus {
 		outline: none;
-	}
-
-	.invite {
-		font-weight: bold;
 	}
 </style>
