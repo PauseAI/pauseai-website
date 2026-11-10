@@ -106,7 +106,7 @@ Send JSON, with `Content-Type: application/json`. Send no other custom headers, 
 
 Other fields are ignored. The body can be up to 32 KB.
 
-An optional `language` of `en` or `es`, default `en`, says which language the person's email should be in. Anything else gets a `400`. **It's checked but has no effect yet**: Airtable picks the Spanish or English email from `country` for now, and `language` takes over when signatures move to CiviCRM. Send it from the start, and you won't need to change anything then.
+An optional `language` of `en` or `es`, default `en`, says which language the person's email should be in. Anything else gets a `400`. **Until signatures move to CiviCRM it's checked but has no effect**: Airtable picks the Spanish or English email from `country`. Once they move, `language` picks it. Send it from the start, and you won't need to change anything then.
 
 Tokens are single use, so reset the widget after every attempt, whatever the answer:
 
@@ -168,11 +168,11 @@ A 202 does not say whether the address has signed before, and a filled honeypot 
 
 The signature is not public yet. We email the address a verification link. The page it opens asks them to click to confirm, because mail scanners open links on their own. The signature is listed once they have, and the site has next been deployed.
 
-**The confirm page is in English, and on pauseai.info.** The email's language [depends on `country` for now](#sign-post-httpspauseaiinfoapistatementsign). Tell people to expect that in your thank-you message, and to check their spam folder.
+**The confirm page is in English, and on pauseai.info.** The email's language [depends on `country` until signatures move to CiviCRM, and on `language` after](#sign-post-httpspauseaiinfoapistatementsign). Tell people to expect that in your thank-you message, and to check their spam folder.
 
 ### Repeat signatures
 
-If an address has already signed in the last 30 days, verified or not, we save nothing and send no email, and the answer is the same 202. A person who lost the first email can't get another by signing again until then. Older than that, signing again saves a new row and sends a new email, and the address is still listed only once. People who share an email address can't sign separately.
+If an address has already signed in the last 30 days, verified or not, we save nothing and send no email, and the answer is the same 202. A person who lost the first email can't get another by signing again until then. Older than that, signing again saves a new signature and sends a new email, and someone signing again under the same name is still listed once.
 
 **Signing again doesn't change anything.** Within those 30 days, a new name, bio or request to be anonymous is dropped too, and the answer is still the same 202. Tell everyone in your thank-you message, not only people who you think have signed, to email contact@pauseai.info if they need to change something.
 

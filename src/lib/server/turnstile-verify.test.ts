@@ -7,7 +7,7 @@ vi.mock('$env/dynamic/private', () => ({ env }))
 const reportError = vi.fn()
 vi.mock('$lib/server/sentry', () => ({ reportError }))
 
-const { verifyTurnstile } = await import('./turnstile-verify')
+const { TURNSTILE_TIMEOUT_MS, verifyTurnstile } = await import('./turnstile-verify')
 
 const HOSTNAMES = ['pauseai.info', 'pauseai.es']
 
@@ -97,6 +97,22 @@ describe('verifyTurnstile', () => {
 			expect(reportError).toHaveBeenCalledOnce()
 		}
 	)
+
+	it('gives Cloudflare TURNSTILE_TIMEOUT_MS, then answers unavailable', async () => {
+		const timeout = vi
+			.spyOn(AbortSignal, 'timeout')
+			.mockReturnValue(AbortSignal.abort(new DOMException('', 'TimeoutError')))
+		vi.stubGlobal(
+			'fetch',
+			vi.fn((_url: string, init: RequestInit) => Promise.reject(init.signal?.reason as Error))
+		)
+
+		expect(await verifyTurnstile('a-token', HOSTNAMES)).toMatchObject({
+			ok: false,
+			unavailable: true
+		})
+		expect(timeout).toHaveBeenCalledExactlyOnceWith(TURNSTILE_TIMEOUT_MS)
+	})
 
 	it('tells people not to keep retrying a wrong secret', async () => {
 		cloudflareAnswers({ success: false, 'error-codes': ['invalid-input-secret'] })

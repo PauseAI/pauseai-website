@@ -16,6 +16,7 @@ import {
 import { MEMBERS_BASE_ID, MEMBERS_TABLE_ID, STATEMENT_TABLE_ID } from '$lib/server/members'
 import { memberRowToVerify } from '$lib/server/mergedMemberRow'
 import { reportError } from '$lib/server/sentry'
+import { statementBackend, verifyStatementInCrm } from '$lib/server/statementCrm'
 import { json } from '@sveltejs/kit'
 import Airtable from 'airtable'
 import { StatusCodes } from 'http-status-codes'
@@ -51,6 +52,34 @@ const VERIFICATION_TABLES = new Map([
 // /verify answers this with an explanation of how to get a new link, not an error.
 const linkExpired = () => json({ outcome: 'expired' }, { status: StatusCodes.GONE })
 
+// The key in the statement links CiviCRM mails: its signature's activity id.
+const CRM_STATEMENT_KEY = /^s\d+$/
+
+/**
+ * A link CiviCRM mailed goes to CiviCRM whichever backend is set, so it keeps working after
+ * a rollback to Airtable. With the CiviCRM backend every statement link goes there, old
+ * Airtable ones included: CiviCRM holds the imported rows and judges those links itself.
+ */
+const verifiesInCrm = (key: string, token: string) =>
+	(CRM_STATEMENT_KEY.test(key) && token !== '') || statementBackend() === 'civicrm'
+
+async function verifyInCrm(key: string, token: string): Promise<Response> {
+	switch (await verifyStatementInCrm(key, token)) {
+		case 'ok':
+			return new Response('OK', { status: StatusCodes.OK })
+		case 'expired':
+			return linkExpired()
+		case 'invalid':
+			return new Response('This verification link is not valid', {
+				status: StatusCodes.NOT_FOUND
+			})
+		case 'failed':
+			return new Response('Verification is unavailable right now. Please try again later.', {
+				status: StatusCodes.BAD_GATEWAY
+			})
+	}
+}
+
 const rowEmail = (fields: Record<string, unknown>) =>
 	typeof fields.Email === 'string' ? fields.Email : ''
 
@@ -83,6 +112,11 @@ export const POST: RequestHandler = async ({ request }) => {
 		return new Response(`Parameter "${verificationConfirmedParameter}" is required`, {
 			status: StatusCodes.BAD_REQUEST
 		})
+	}
+
+	if (!tableConfig.isMembers) {
+		const token = params.get(TOKEN_PARAMETER) ?? ''
+		if (verifiesInCrm(key, token)) return verifyInCrm(key, token)
 	}
 
 	const table = new Airtable({ apiKey: AIRTABLE_WRITE_API_KEY })

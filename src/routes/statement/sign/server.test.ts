@@ -14,6 +14,11 @@ vi.mock('$lib/airtable', () => ({
 	hasMatchingRecord
 }))
 vi.mock('$lib/server/turnstile-verify', () => ({ verifyTurnstile }))
+const signInCrm = vi.fn<(...args: unknown[]) => Promise<'ok' | 'refused' | 'failed'>>()
+vi.mock('$lib/server/statementCrm', async (importOriginal) => ({
+	...(await importOriginal<typeof import('$lib/server/statementCrm')>()),
+	signInCrm
+}))
 
 const { actions } = await import('./+page.server.js')
 const { resetRateLimits } = await import('$lib/server/rateLimit')
@@ -47,6 +52,8 @@ async function submit(
 beforeEach(() => {
 	env.STATEMENT_SIGNING_LIVE = 'true'
 	env.ONBOARDING_LIVE = undefined
+	env.STATEMENT_BACKEND = undefined
+	signInCrm.mockReset().mockResolvedValue('ok')
 	resetRateLimits()
 	createRecord.mockReset().mockResolvedValue({ id: 'recAda', createdTime: '', fields: {} })
 	hasMatchingRecord.mockReset().mockResolvedValue(false)
@@ -185,5 +192,22 @@ describe('statement form action', () => {
 
 		expect(result.status).toBe(413)
 		expect(createRecord).not.toHaveBeenCalled()
+	})
+})
+
+describe('/statement/sign action: STATEMENT_BACKEND=civicrm', () => {
+	beforeEach(() => {
+		env.STATEMENT_BACKEND = 'civicrm'
+	})
+
+	it('asks for a check without highlighting a field when CiviCRM refuses', async () => {
+		signInCrm.mockResolvedValue('refused')
+		const result = await submit(VALID)
+
+		expect(result.status).toBe(400)
+		expect(result.data).toEqual({
+			message: 'Please check what you entered and try again.',
+			fields: {}
+		})
 	})
 })
