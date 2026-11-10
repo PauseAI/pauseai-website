@@ -12,6 +12,12 @@
 	<p class="tagline">{meta.description}</p>
 
 	<ul>
+		<li>
+			<LinkWithoutIcon href="/join" class="link-button primary">Join PauseAI</LinkWithoutIcon>
+		</li>
+		<li>
+			<LinkWithoutIcon href="/donate" class="link-button primary">Donate</LinkWithoutIcon>
+		</li>
 		{#each socials as { name, href, bioHref, icon: Icon } (name)}
 			<li>
 				<LinkWithoutIcon href={bioHref ?? href} target="_blank" class="link-button">
@@ -70,6 +76,20 @@
 		border-color: var(--brand);
 		color: var(--brand);
 		fill: var(--brand);
+	}
+
+	ul :global(.link-button.primary) {
+		justify-content: center;
+		background-color: var(--brand);
+		border-color: var(--brand);
+		color: var(--bg);
+	}
+
+	ul :global(.link-button.primary:hover),
+	ul :global(.link-button.primary:focus-visible) {
+		background-color: var(--brand-subtle);
+		border-color: var(--brand-subtle);
+		color: var(--bg);
 	}
 
 	.icon {
