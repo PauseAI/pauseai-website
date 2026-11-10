@@ -40,7 +40,7 @@ Ask in the PauseAI Discord for your site to be added, or send a pull request. Tw
 
 You then get PauseAI's Turnstile site key, which is public. Use this key, not one from your own Cloudflare account, as our server can only check tokens from this widget.
 
-Your form should tell people how their data is used, and link to your privacy policy and [ours](https://pauseai.info/privacy). Say plainly that signing publishes the signature, and that the country and bio are published even for an anonymous signature, as a bio can identify someone. Our form says, just above the submit button: "By signing, you publish your name (or "Anonymous", if you ticked the box above), country and what you wrote on the statement's public list of signatures." And under the anonymity checkbox: "Your country and what you write are still published, so leave out details that could identify you."
+Your form should tell people how their data is used, and link to your privacy policy and [ours](https://pauseai.info/privacy). Say plainly that signing publishes the signature, and that the country and bio are published even for an anonymous signature, as a bio can identify someone. Our form says, just above the submit button: "By signing, you publish your name (or "Anonymous", if you ticked the box above), country and what you wrote on the statement's public list of signatures." And under the anonymity checkbox, once it is ticked: "Your country and what you write are still published, so leave out details that could identify you."
 
 ## Build the form
 

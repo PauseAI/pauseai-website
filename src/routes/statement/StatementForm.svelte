@@ -23,6 +23,7 @@
 
 	let signed = $state(false)
 	let submitting = $state(false)
+	let anonymous = $state(false)
 	let errorMessage = $state('')
 	type FieldErrors = Partial<Record<SignatureField, string>>
 	let fieldErrors = $state<FieldErrors>({})
@@ -164,14 +165,27 @@
 				{/if}
 			</div>
 
-			<label class="checkbox">
-				<input type="checkbox" name="private" aria-describedby="statement-private-note" />
-				<span>I want to be anonymous</span>
-			</label>
-			<p class="private-note" id="statement-private-note">
-				Your country and what you write are still published, so leave out details that could
-				identify you.
-			</p>
+			<!-- One block, so the form's gap doesn't open under the checkbox while the note is hidden. -->
+			<div class="anonymity">
+				<label class="checkbox">
+					<input
+						type="checkbox"
+						name="private"
+						bind:checked={anonymous}
+						aria-describedby={anonymous ? 'statement-private-note' : undefined}
+					/>
+					<span>I want to be anonymous</span>
+				</label>
+				<!-- Always in the page, as a live region only announces changes to one it already knows. -->
+				<div aria-live="polite">
+					{#if anonymous}
+						<p class="private-note" id="statement-private-note">
+							Your country and what you write are still published, so leave out details that could
+							identify you.
+						</p>
+					{/if}
+				</div>
+			</div>
 
 			<div class="field">
 				<label class="field-label" for="statement-email">Email *</label>
@@ -411,9 +425,8 @@
 		font-size: 0.9rem;
 	}
 
-	/* Reads as part of the checkbox above, across the form's usual gap. */
 	.private-note {
-		margin-top: -0.6rem;
+		margin-top: 0.4rem;
 		margin-left: 0.5rem;
 	}
 

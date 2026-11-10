@@ -24,9 +24,8 @@ describe('/embed/statement-form', () => {
 		expect(body).toMatch(
 			/id="statement-bio"[\s\S]*By\s+signing,\s+you\s+publish\s+your\s+name\s+\(or\s+(&quot;|")Anonymous(&quot;|"),\s+if\s+you\s+ticked\s+the\s+box\s+above\),\s+country\s+and\s+what\s+you\s+wrote[\s\S]*<button[^>]*type="submit"/
 		)
-		expect(body).toMatch(
-			/Your\s+country\s+and\s+what\s+you\s+write\s+are\s+still\s+published,\s+so\s+leave\s+out\s+details\s+that\s+could\s+identify\s+you/
-		)
+		// Shown only once the anonymity box is ticked.
+		expect(body).not.toMatch(/still\s+published/)
 		expect(body).toMatch(/<button[^>]*aria-describedby="statement-publish-note"/)
 	})
 
