@@ -57,12 +57,8 @@ const config = {
 			$api: 'src/routes/api'
 		},
 		prerender: {
-			// Allows dead links to be rendered, but not a failed signatory list, which would be
-			// published as the list until the next deploy.
-			handleHttpError: ({ path, message }) => {
-				if (path.startsWith('/api/signatories')) throw new Error(message)
-				console.error(message)
-			},
+			// Allows dead links to be rendered
+			handleHttpError: 'warn',
 			// Handle missing anchor IDs by warning instead of failing
 			handleMissingId: 'warn',
 			entries: ['*'].concat(settings.locales.map((locale) => '/' + locale))

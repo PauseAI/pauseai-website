@@ -11,7 +11,9 @@ vi.mock('$lib/server/sentry', () => ({ reportError, flushReports }))
 const {
 	SIGN_MIN_ATTEMPT_MS,
 	SIGN_RETRY_DELAY_MS,
+	LIVE_LIST_URL,
 	STATEMENT_VERSION,
+	liveSignatoryList,
 	publicListFromCrm,
 	signInCrm,
 	verifyStatementInCrm
@@ -279,5 +281,50 @@ describe('publicListFromCrm', () => {
 		answerRow({ status: 'ok' })
 		expect(await publicListFromCrm()).toBeUndefined()
 		expect(reportError).toHaveBeenCalledTimes(2)
+	})
+})
+
+describe('liveSignatoryList', () => {
+	const ROW = {
+		private: false,
+		name: 'Ada Lovelace',
+		country: 'United Kingdom',
+		bio: 'Mathematician',
+		date: '2025-01-02T10:00:00.000Z'
+	}
+	const ROW_WITHOUT_BIO = {
+		private: true,
+		name: 'Anonymous',
+		country: 'Spain',
+		date: '2026-01-02T10:00:00.000Z'
+	}
+	const LIVE = { totalCount: 2, signatories: [ROW, ROW_WITHOUT_BIO] }
+	const reportedLevels = () =>
+		reportError.mock.calls.map(([, , options]) => (options as { level: string }).level)
+
+	it('fetches the live list and reports, as a warning, that it is republished', async () => {
+		fetchMock.mockImplementation(() =>
+			reply({ ...LIVE, signatories: [{ ...ROW, email: 'ada@example.org' }, ROW_WITHOUT_BIO] })
+		)
+
+		expect(await liveSignatoryList()).toEqual(LIVE)
+		expect(calledUrl()).toBe(LIVE_LIST_URL)
+		expect(reportedLevels()).toEqual(['warning'])
+		expect(JSON.stringify(reportError.mock.calls)).not.toContain('Ada')
+	})
+
+	it.each([
+		['the request fails', () => networkError()],
+		['the answer is not 200', () => reply(LIVE, 503)],
+		['the answer is not JSON', () => Promise.resolve(new Response('<html>'))],
+		['the count is 0', () => reply({ totalCount: 0, signatories: [] })],
+		['the count is not a number', () => reply({ ...LIVE, totalCount: '2' })],
+		['signatories is not a list', () => reply({ totalCount: 2, signatories: {} })],
+		['a row lacks a field', () => reply({ ...LIVE, signatories: [{ ...ROW, date: undefined }] })]
+	])('answers undefined, and reports an error, when %s', async (_, answer) => {
+		fetchMock.mockImplementation(answer)
+
+		expect(await liveSignatoryList()).toBeUndefined()
+		expect(reportedLevels()).toEqual(['error'])
 	})
 })

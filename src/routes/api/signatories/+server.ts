@@ -1,12 +1,10 @@
-import { dev } from '$app/environment'
 import type { AirtableSignatory, Signatory } from '$lib/types.js'
-import { error, json } from '@sveltejs/kit'
+import { json } from '@sveltejs/kit'
 import { fetchAllPages, type AirtableRecord } from '$lib/airtable.js'
 import { normaliseEmail } from '$lib/server/emailVerification'
 import { MEMBERS_BASE_ID, STATEMENT_TABLE_ID } from '$lib/server/members'
-import { publicListFromCrm, statementBackend } from '$lib/server/statementCrm'
+import { liveSignatoryList, publicListFromCrm, statementBackend } from '$lib/server/statementCrm'
 import { generateCacheControlRecord } from '$lib/utils'
-import { StatusCodes } from 'http-status-codes'
 import type { RequestHandler } from './$types'
 
 /**
@@ -89,12 +87,11 @@ export const GET: RequestHandler = async ({ fetch, setHeaders }) => {
 	// CiviCRM applies the listing rules itself (verified, not hidden, one row per person and
 	// name, private ones as "Anonymous") and answers in this route's shape.
 	if (statementBackend() === 'civicrm') {
-		const list = await publicListFromCrm()
-		if (list) return json(list)
-		// This answer is prerendered and published until the next deploy, so outside the dev
-		// server a failure must fail the build (svelte.config.js), not publish an empty list.
-		if (!dev) error(StatusCodes.SERVICE_UNAVAILABLE, 'The signatory list could not be read')
-		return json(failedList)
+		// This answer is prerendered and published until the next deploy. So that a CRM outage
+		// doesn't block deploys, a failure republishes the list live now, and only if that fails
+		// too, placeholder rows with a count of 0, which pauseai.es reads as "list unavailable".
+		const list = (await publicListFromCrm()) ?? (await liveSignatoryList())
+		return json(list ?? failedList)
 	}
 
 	try {

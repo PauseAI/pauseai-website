@@ -159,16 +159,63 @@ export async function publicListFromCrm(): Promise<PublicList | undefined> {
 		await report('publicList', 'error', { cause: 'http', httpStatus: 200 }, 'error')
 		return undefined
 	}
-	return {
-		totalCount,
-		signatories: (signatories as Signatory[]).map(
-			({ private: isPrivate, name, country, bio, date }) => ({
-				private: isPrivate,
-				name,
-				country,
-				bio,
-				date
-			})
-		)
+	return { totalCount, signatories: (signatories as Signatory[]).map(publicFields) }
+}
+
+const publicFields = ({ private: isPrivate, name, country, bio, date }: Signatory): Signatory => ({
+	private: isPrivate,
+	name,
+	country,
+	bio,
+	date
+})
+
+/** The list pauseai.info serves now, which /api/signatories republishes when CiviCRM fails. */
+export const LIVE_LIST_URL = 'https://pauseai.info/api/signatories'
+const LIVE_LIST_TIMEOUT_MS = 10_000
+
+// Airtable's rows leave out an empty bio.
+const isSignatory = (row: unknown): row is Signatory => {
+	if (typeof row !== 'object' || row === null) return false
+	const { private: isPrivate, name, country, bio, date } = row as Record<string, unknown>
+	return (
+		typeof isPrivate === 'boolean' &&
+		typeof name === 'string' &&
+		typeof country === 'string' &&
+		typeof date === 'string' &&
+		(bio === undefined || typeof bio === 'string')
+	)
+}
+
+/**
+ * The live list, reported as republished, or undefined (reported) when it can't be read or
+ * isn't a non-empty list. Never rejects.
+ */
+export async function liveSignatoryList(): Promise<PublicList | undefined> {
+	let details: Record<string, unknown>
+	try {
+		const response = await fetch(LIVE_LIST_URL, {
+			signal: AbortSignal.timeout(LIVE_LIST_TIMEOUT_MS)
+		})
+		if (response.ok) {
+			const body = await response.json().catch(() => ({}))
+			const { totalCount, signatories } = body as Record<string, unknown>
+			if (
+				typeof totalCount === 'number' &&
+				totalCount > 0 &&
+				Array.isArray(signatories) &&
+				signatories.every(isSignatory)
+			) {
+				await report('publicList', 'republished-live', { totalCount }, 'warning')
+				return { totalCount, signatories: signatories.map(publicFields) }
+			}
+			details = { cause: 'shape' }
+		} else {
+			details = { cause: 'http', httpStatus: response.status }
+		}
+	} catch (e) {
+		details = { cause: 'network', errorName: e instanceof Error ? e.name : typeof e }
 	}
+	await report('publicList', 'live-error', details, 'error')
+	return undefined
 }

@@ -3,15 +3,15 @@ import { beforeEach, describe, expect, it, vi } from 'vitest'
 const fetchAllPages = vi.fn<(...args: unknown[]) => Promise<unknown[]>>()
 
 const env: Record<string, string | undefined> = {}
-const appEnvironment = vi.hoisted(() => ({ dev: false }))
 const publicListFromCrm = vi.fn<() => Promise<unknown>>()
+const liveSignatoryList = vi.fn<() => Promise<unknown>>()
 
 vi.mock('$env/dynamic/private', () => ({ env }))
-vi.mock('$app/environment', () => appEnvironment)
 vi.mock('$lib/airtable.js', () => ({ fetchAllPages }))
 vi.mock('$lib/server/statementCrm', async (importOriginal) => ({
 	...(await importOriginal<typeof import('$lib/server/statementCrm')>()),
-	publicListFromCrm
+	publicListFromCrm,
+	liveSignatoryList
 }))
 
 const { GET } = await import('./+server.js')
@@ -37,9 +37,9 @@ async function list() {
 
 beforeEach(() => {
 	env.STATEMENT_BACKEND = undefined
-	appEnvironment.dev = false
 	fetchAllPages.mockReset()
 	publicListFromCrm.mockReset()
+	liveSignatoryList.mockReset()
 	vi.spyOn(console, 'log').mockImplementation(() => {})
 })
 
@@ -211,19 +211,24 @@ describe('GET /api/signatories: STATEMENT_BACKEND=civicrm', () => {
 
 		expect(await list()).toEqual(fromCrm)
 		expect(fetchAllPages).not.toHaveBeenCalled()
+		expect(liveSignatoryList).not.toHaveBeenCalled()
 	})
 
-	it('throws when CiviCRM cannot be read, so the build fails instead of publishing no list', async () => {
+	it("republishes the live list when CiviCRM can't be read", async () => {
+		const live = { totalCount: 1, signatories: [{ private: false, name: 'Ada' }] }
 		publicListFromCrm.mockResolvedValue(undefined)
+		liveSignatoryList.mockResolvedValue(live)
 
-		await expect(list()).rejects.toMatchObject({ status: 503 })
+		expect(await list()).toEqual(live)
 	})
 
-	it('answers placeholder rows with a count of 0 on the dev server', async () => {
-		appEnvironment.dev = true
+	it('answers placeholder rows with a count of 0 when neither list can be read', async () => {
 		publicListFromCrm.mockResolvedValue(undefined)
+		liveSignatoryList.mockResolvedValue(undefined)
+		const { signatories, totalCount } = await list()
 
-		expect((await list()).totalCount).toBe(0)
+		expect(totalCount).toBe(0)
+		expect(signatories.length).toBeGreaterThan(0)
 	})
 
 	it('keeps the hour-long public cache', async () => {
