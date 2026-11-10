@@ -270,7 +270,10 @@ describe('publicListFromCrm', () => {
 	})
 
 	it('keeps only the five public fields of a row', async () => {
-		answerRow({ ...LIST, signatories: [{ ...LIST.signatories[0], email: 'ada@example.org' }] })
+		answerRow({
+			totalCount: 1,
+			signatories: [{ ...LIST.signatories[0], email: 'ada@example.org' }]
+		})
 
 		expect((await publicListFromCrm())?.signatories).toEqual([LIST.signatories[0]])
 	})
@@ -281,6 +284,17 @@ describe('publicListFromCrm', () => {
 		answerRow({ status: 'ok' })
 		expect(await publicListFromCrm()).toBeUndefined()
 		expect(reportError).toHaveBeenCalledTimes(2)
+	})
+
+	it.each([
+		['a row is not an object', { totalCount: 1, signatories: [null] }],
+		['the list is empty', { totalCount: 0, signatories: [] }],
+		['the count does not match the rows', { ...LIST, totalCount: 3 }]
+	])('answers undefined, and reports, when %s', async (_, row) => {
+		answerRow(row)
+
+		expect(await publicListFromCrm()).toBeUndefined()
+		expect(reportError).toHaveBeenCalledTimes(1)
 	})
 })
 
@@ -320,7 +334,12 @@ describe('liveSignatoryList', () => {
 		['the count is 0', () => reply({ totalCount: 0, signatories: [] })],
 		['the count is not a number', () => reply({ ...LIVE, totalCount: '2' })],
 		['signatories is not a list', () => reply({ totalCount: 2, signatories: {} })],
-		['a row lacks a field', () => reply({ ...LIVE, signatories: [{ ...ROW, date: undefined }] })]
+		[
+			'a row lacks a field',
+			() => reply({ ...LIVE, signatories: [{ ...ROW, date: undefined }, ROW] })
+		],
+		['the list is empty but counted', () => reply({ totalCount: 2, signatories: [] })],
+		['the list is shorter than its count', () => reply({ ...LIVE, signatories: [ROW] })]
 	])('answers undefined, and reports an error, when %s', async (_, answer) => {
 		fetchMock.mockImplementation(answer)
 

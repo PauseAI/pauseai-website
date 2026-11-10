@@ -154,12 +154,9 @@ export async function publicListFromCrm(): Promise<PublicList | undefined> {
 		await report('publicList', 'error', failureDetails(answer), 'error')
 		return undefined
 	}
-	const { totalCount, signatories } = answer.row
-	if (typeof totalCount !== 'number' || !Array.isArray(signatories)) {
-		await report('publicList', 'error', { cause: 'http', httpStatus: 200 }, 'error')
-		return undefined
-	}
-	return { totalCount, signatories: (signatories as Signatory[]).map(publicFields) }
+	const list = asPublicList(answer.row)
+	if (!list) await report('publicList', 'error', { cause: 'shape' }, 'error')
+	return list
 }
 
 const publicFields = ({ private: isPrivate, name, country, bio, date }: Signatory): Signatory => ({
@@ -188,6 +185,25 @@ const isSignatory = (row: unknown): row is Signatory => {
 }
 
 /**
+ * A list fit to publish, keeping only the public fields: a non-empty list whose count matches
+ * its rows, as both backends answer it. Anything else is undefined, so the caller falls back
+ * to the next source instead of publishing an empty or truncated list.
+ */
+function asPublicList(body: unknown): PublicList | undefined {
+	if (typeof body !== 'object' || body === null) return undefined
+	const { totalCount, signatories } = body as Record<string, unknown>
+	if (
+		!Array.isArray(signatories) ||
+		signatories.length === 0 ||
+		totalCount !== signatories.length ||
+		!signatories.every(isSignatory)
+	) {
+		return undefined
+	}
+	return { totalCount, signatories: signatories.map(publicFields) }
+}
+
+/**
  * The live list, reported as republished, or undefined (reported) when it can't be read or
  * isn't a non-empty list. Never rejects.
  */
@@ -198,16 +214,10 @@ export async function liveSignatoryList(): Promise<PublicList | undefined> {
 			signal: AbortSignal.timeout(LIVE_LIST_TIMEOUT_MS)
 		})
 		if (response.ok) {
-			const body = await response.json().catch(() => ({}))
-			const { totalCount, signatories } = body as Record<string, unknown>
-			if (
-				typeof totalCount === 'number' &&
-				totalCount > 0 &&
-				Array.isArray(signatories) &&
-				signatories.every(isSignatory)
-			) {
-				await report('publicList', 'republished-live', { totalCount }, 'warning')
-				return { totalCount, signatories: signatories.map(publicFields) }
+			const list = asPublicList(await response.json().catch(() => undefined))
+			if (list) {
+				await report('publicList', 'republished-live', { totalCount: list.totalCount }, 'warning')
+				return list
 			}
 			details = { cause: 'shape' }
 		} else {
