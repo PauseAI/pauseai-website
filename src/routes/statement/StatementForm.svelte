@@ -148,8 +148,8 @@
 			</div>
 
 			<p class="publish-note" id="statement-publish-note">
-				Signing publishes your name, country and what you write on the statement's public list of
-				signatures. See our
+				Signing publishes your name (or "Anonymous", if you tick the box below), country and what
+				you write on the statement's public list of signatures. See our
 				<!-- A new tab, as leaving the page would lose what's been typed. -->
 				<Link href="/privacy" target="_blank">privacy policy</Link>.
 			</p>
@@ -176,8 +176,8 @@
 				<span>I want to be anonymous</span>
 			</label>
 			<p class="private-note" id="statement-private-note">
-				We show "Anonymous" instead of your name, but your country and what you write are still
-				published, so leave out details that could identify you.
+				Your country and what you write are still published, so leave out details that could
+				identify you.
 			</p>
 
 			<div class="field">

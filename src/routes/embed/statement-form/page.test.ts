@@ -22,10 +22,10 @@ describe('/embed/statement-form', () => {
 
 	it('says that signing publishes the signature, before the fields', () => {
 		expect(body).toMatch(
-			/Signing publishes your name, country and what you write[\s\S]*id="statement-name"/
+			/Signing publishes your name \(or (&quot;|")Anonymous(&quot;|"), if you tick the box below\), country\s+and\s+what\s+you\s+write[\s\S]*id="statement-name"/
 		)
 		expect(body).toMatch(
-			/We show "Anonymous" instead of your name, but your country and what you write are still\s+published, so leave out details that could identify you/
+			/Your country and what you write are still published, so leave out details that could identify\s+you/
 		)
 		expect(body).toMatch(/<button[^>]*aria-describedby="statement-publish-note"/)
 	})
