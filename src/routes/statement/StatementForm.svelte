@@ -165,27 +165,10 @@
 				{/if}
 			</div>
 
-			<!-- One block, so the form's gap doesn't open under the checkbox while the note is hidden. -->
-			<div class="anonymity">
-				<label class="checkbox">
-					<input
-						type="checkbox"
-						name="private"
-						bind:checked={anonymous}
-						aria-describedby={anonymous ? 'statement-private-note' : undefined}
-					/>
-					<span>I want to be anonymous</span>
-				</label>
-				<!-- Always in the page, as a live region only announces changes to one it already knows. -->
-				<div aria-live="polite">
-					{#if anonymous}
-						<p class="private-note" id="statement-private-note">
-							Your country and what you write are still published, so leave out details that could
-							identify you.
-						</p>
-					{/if}
-				</div>
-			</div>
+			<label class="checkbox">
+				<input type="checkbox" name="private" bind:checked={anonymous} />
+				<span>I want to be anonymous</span>
+			</label>
 
 			<div class="field">
 				<label class="field-label" for="statement-email">Email *</label>
@@ -224,6 +207,16 @@
 				<label class="field-label" for="statement-bio">
 					Why does this matter to you? <span class="optional">(optional)</span>
 				</label>
+				<!-- Where the details it warns about are typed. Always in the page, as a live region
+				only announces changes to one it already knows. -->
+				<div aria-live="polite">
+					{#if anonymous}
+						<p class="bio-hint" id="statement-bio-hint">
+							You're anonymous, but this and your country are still published, so leave out details
+							that could identify you.
+						</p>
+					{/if}
+				</div>
 				<textarea
 					id="statement-bio"
 					name="bio"
@@ -231,7 +224,12 @@
 					placeholder="Share who you are and why addressing AI risks is important to you"
 					maxlength="2000"
 					aria-invalid={!!fieldErrors.bio}
-					aria-describedby={fieldErrors.bio ? 'statement-bio-error' : undefined}></textarea>
+					aria-describedby={[
+						anonymous && 'statement-bio-hint',
+						fieldErrors.bio && 'statement-bio-error'
+					]
+						.filter(Boolean)
+						.join(' ') || undefined}></textarea>
 				{#if fieldErrors.bio}
 					<p class="field-error" id="statement-bio-error">{fieldErrors.bio}</p>
 				{/if}
@@ -420,13 +418,12 @@
 	.submit-hint,
 	.test-notice,
 	.publish-note,
-	.private-note {
+	.bio-hint {
 		margin: 0;
 		font-size: 0.9rem;
 	}
 
-	.private-note {
-		margin-top: 0.4rem;
+	.bio-hint {
 		margin-left: 0.5rem;
 	}
 
