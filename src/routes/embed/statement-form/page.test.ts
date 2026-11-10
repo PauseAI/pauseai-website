@@ -25,7 +25,7 @@ describe('/embed/statement-form', () => {
 			/Signing publishes your name \(or (&quot;|")Anonymous(&quot;|"), if you tick the box below\), country\s+and\s+what\s+you\s+write[\s\S]*id="statement-name"/
 		)
 		expect(body).toMatch(
-			/Your country and what you write are still published, so leave out details that could identify\s+you/
+			/Your\s+country\s+and\s+what\s+you\s+write\s+are\s+still\s+published,\s+so\s+leave\s+out\s+details\s+that\s+could\s+identify\s+you/
 		)
 		expect(body).toMatch(/<button[^>]*aria-describedby="statement-publish-note"/)
 	})
