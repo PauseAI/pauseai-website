@@ -88,4 +88,14 @@
 		font-size: 0.9rem;
 		color: var(--text-2);
 	}
+
+	/* After .invite, so these win. The button doesn't fit beside the question in a narrow
+	chapter-site iframe. */
+	@media (max-width: 400px) {
+		.invite {
+			flex-direction: column;
+			align-items: flex-start;
+			padding: 0.75rem;
+		}
+	}
 </style>

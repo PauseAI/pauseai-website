@@ -13,17 +13,24 @@
 <style>
 	.join :global(a) {
 		display: inline-block;
+		/* SignatureConfirmed's Copy link button matches this height. */
 		padding: 0.55rem 1.4rem;
 		color: white;
 		font-weight: bold;
 		text-decoration: none;
-		white-space: nowrap;
 		background-color: var(--brand);
+		white-space: nowrap;
 		border-radius: 50px;
 		transition: opacity 0.2s;
 	}
 
 	.join :global(a:hover) {
 		opacity: 0.9;
+	}
+
+	@media (max-width: 400px) {
+		.join :global(a) {
+			padding-inline: 0.9rem;
+		}
 	}
 </style>

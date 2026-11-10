@@ -1,25 +1,29 @@
 <script lang="ts">
+	import { tick } from 'svelte'
+	import { url } from '$lib/config'
 	import JoinInvite from '../statement/JoinInvite.svelte'
 
-	const STATEMENT_URL = 'https://pauseai.info/statement'
+	const STATEMENT_URL = `${url}/statement`
 
 	let heading: HTMLHeadingElement
 	let copied = $state(false)
 	// Shown when the clipboard can't be written (an old browser, or permission refused).
 	let copyFailed = $state(false)
-	let urlField = $state<HTMLInputElement>()
+	let urlField: HTMLInputElement | undefined
 
 	// Replaces the confirm button the person just pressed, so move focus here or it is lost.
 	$effect(() => heading.focus())
 
 	async function copyLink() {
+		// Cleared first, so a second copy is announced again.
+		copied = false
 		try {
 			await navigator.clipboard.writeText(STATEMENT_URL)
 			copied = true
 		} catch {
 			copyFailed = true
 			// Selected, so copying it by hand takes one shortcut.
-			await Promise.resolve()
+			await tick()
 			urlField?.focus()
 			urlField?.select()
 		}
@@ -88,11 +92,12 @@
 
 	.tile p {
 		margin: 0 0 1rem;
-		/* Keeps both buttons on one line when the texts wrap differently. */
+		/* Pushes the buttons to the same height in both tiles. */
 		flex-grow: 1;
 	}
 
 	.copy {
+		/* JoinInvite's padding less this border, so the two tiles' buttons match in height. */
 		padding: calc(0.55rem - 2px) 1.4rem;
 		color: var(--text);
 		font-family: var(--font-body);
