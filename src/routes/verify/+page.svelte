@@ -7,6 +7,7 @@
 	import Button from '$lib/components/Button.svelte'
 	import Link from '$lib/components/Link.svelte'
 	import Processing from '$lib/components/Processing.svelte'
+	import SignatureConfirmed from './SignatureConfirmed.svelte'
 
 	const NEW_LINK_MAIL =
 		'mailto:info@pauseai.info?subject=' +
@@ -20,6 +21,7 @@
 	let expired = $state(false)
 	let verificationStarted = false
 	let awaitingClick = $state(false)
+	let signatureConfirmed = $state(false)
 	let linkParameters = ''
 
 	// replaceState needs the router started. On a direct load onMount runs while
@@ -51,30 +53,32 @@
 			Sentry.captureException(error)
 		}
 		if (verificationNeedsClick(linkParameters)) awaitingClick = true
-		else await verify(linkParameters)
+		else if (await verify(linkParameters)) {
+			toast.success('Your email has been verified!')
+			void goto('/')
+		}
 	}
 
 	async function confirm() {
 		awaitingClick = false
-		await verify(`${linkParameters}&${verificationConfirmedParameter}=true`)
+		if (await verify(`${linkParameters}&${verificationConfirmedParameter}=true`))
+			signatureConfirmed = true
 	}
 
-	async function verify(body: string) {
+	async function verify(body: string): Promise<boolean> {
 		try {
 			const response = await fetch('/api/verify', {
 				method: 'POST',
 				headers: { 'content-type': 'application/x-www-form-urlencoded' },
 				body
 			})
-			if (response.ok) {
-				toast.success('Your email has been verified!')
-				void goto('/')
-			} else if (response.status === 410) {
+			if (response.ok) return true
+			if (response.status === 410) {
 				expired = true
-			} else {
-				const errorText = await response.text()
-				throw new Error(`Verification failed: ${errorText || response.statusText}`)
+				return false
 			}
+			const errorText = await response.text()
+			throw new Error(`Verification failed: ${errorText || response.statusText}`)
 		} catch (error) {
 			if (error instanceof Error) errorMessage = error.message
 			else errorMessage = 'Verification failed with unexpected error.'
@@ -83,7 +87,9 @@
 	}
 </script>
 
-{#if awaitingClick}
+{#if signatureConfirmed}
+	<SignatureConfirmed />
+{:else if awaitingClick}
 	<h1>Confirm your signature</h1>
 	<p>
 		Please confirm that you signed the PauseAI statement with this email address. Your signature is

@@ -18,6 +18,12 @@ import {
 	recordRateLimit,
 	takeRateLimit
 } from '$lib/server/rateLimit'
+import {
+	SIGNATURE_LANGUAGES,
+	signInCrm,
+	statementBackend,
+	type Signature
+} from '$lib/server/statementCrm'
 import { isTestHostname } from '$lib/server/testHost'
 import { verifyTurnstile } from '$lib/server/turnstile-verify'
 import { StatusCodes } from 'http-status-codes'
@@ -34,8 +40,14 @@ const MAX_BODY_BYTES = 32 * 1024
 // Counts saves per address, not attempts: mistakes and failures cost nothing, and a room
 // of people on shared Wi-Fi can all sign.
 const SAVE_LIMIT = { saves: 30, windowMs: 10 * 60 * 1000 }
-// Protects Airtable: each of these makes up to two calls, against 5 a second per base.
+// Protects the backend: with Airtable, each of these makes up to two calls, against 5 a
+// second per base.
 const OVERALL_LIMIT = { attempts: 120, windowMs: 60 * 1000 }
+
+// The signing routes run as Netlify Edge Functions, which must answer within 40 s, and
+// CiviCRM may already hold a signature whose request then got no answer. Turnstile's
+// check (TURNSTILE_TIMEOUT_MS) and the CRM's attempts (signInCrm) fit inside this.
+const SIGN_DEADLINE_MS = 20_000
 
 // A repeat within this long writes nothing and sends no email. It is also the most email
 // someone else can cause one address to receive, and how long a signer who lost the first
@@ -48,10 +60,6 @@ const REPEAT_WINDOW_DAYS = 30
 // does not close it: each probe needs its own solved Turnstile token.
 const REPEAT_DELAY_MS = { minimum: 150, spread: 300 }
 
-// The email language a chapter can ask for. Airtable still picks it from the country and
-// this is only validated, so the contract won't change for chapters when CiviCRM takes over.
-const LANGUAGES: readonly unknown[] = ['en', 'es']
-
 export type SignatureField = 'name' | 'email' | 'country' | 'bio' | 'private' | 'language'
 export type SignatureFieldError = 'required' | 'invalid' | 'too_long'
 export type SignatureErrors = Partial<Record<SignatureField, SignatureFieldError>>
@@ -59,13 +67,8 @@ export type SignatureErrors = Partial<Record<SignatureField, SignatureFieldError
 /** Untrusted values, from a form post or a JSON body. */
 export type SignatureInput = Partial<Record<SignatureField | 'honeypot', unknown>>
 
-type Signature = {
-	name: string
-	email: string
-	country: string
-	bio: string
-	private: boolean
-}
+const isSignatureLanguage = (value: unknown): value is Signature['language'] =>
+	(SIGNATURE_LANGUAGES as readonly unknown[]).includes(value)
 
 export type SignResult =
 	| { status: 'accepted' }
@@ -184,19 +187,28 @@ function validateSignature(
 	if (
 		input.language !== undefined &&
 		input.language !== null &&
-		!LANGUAGES.includes(input.language)
+		!isSignatureLanguage(input.language)
 	) {
 		errors.language = 'invalid'
 	}
 
 	if (Object.keys(errors).length > 0) return { ok: false, errors }
-	return { ok: true, signature: { name, email, country, bio, private: input.private === true } }
+	return {
+		ok: true,
+		signature: {
+			name,
+			email,
+			country,
+			bio,
+			private: input.private === true,
+			language: isSignatureLanguage(input.language) ? input.language : 'en'
+		}
+	}
 }
 
 /**
- * Stores a validated signature, unless the address signed recently, returning false if it
- * could not. The signing half of what knows signatures live in Airtable: a move to CiviCRM
- * replaces this, and also /api/signatories, /api/verify and the email automation.
+ * Stores a validated signature in Airtable, unless the address signed recently, returning
+ * false if it could not. CiviCRM's sign does the same check itself (statementCrm.ts).
  *
  * Costs one extra Airtable read per signature that gets this far. A failed lookup refuses
  * the signature rather than writing it, as Airtable is likely down and the person can retry
@@ -242,6 +254,8 @@ type SignContext = {
 	allowedHostnames: readonly string[]
 	turnstileToken: unknown
 	getClientAddress: () => string
+	/** Keeps failure reports running after the response, on Netlify. */
+	platform?: App.Platform
 }
 
 function senderKey(getClientAddress: () => string): string {
@@ -255,13 +269,14 @@ function senderKey(getClientAddress: () => string): string {
 
 /**
  * Validates and saves one signature, in order of cost, so nothing unverified reaches a
- * rate limit or Airtable. A filled honeypot gets the same answer as a real signature, so
+ * rate limit or the backend. A filled honeypot gets the same answer as a real signature, so
  * a bot does not learn it was caught.
  */
 export async function signStatement(
 	input: SignatureInput,
 	context: SignContext
 ): Promise<SignResult> {
+	const deadline = Date.now() + SIGN_DEADLINE_MS
 	const mode = signingMode(context.hostname)
 	if (mode === 'off') {
 		console.error('[statement] STATEMENT_SIGNING_LIVE is not set: refusing a signature')
@@ -293,7 +308,13 @@ export async function signStatement(
 		takeRateLimit('statement:overall', OVERALL_LIMIT.attempts, OVERALL_LIMIT.windowMs)
 	if (retryAfter !== null) return { status: 'rate_limited', retryAfter }
 
-	if (!(await saveSignature(validated.signature))) return { status: 'failed' }
+	if (statementBackend() === 'civicrm') {
+		const saved = await signInCrm(validated.signature, { deadline, platform: context.platform })
+		// CiviCRM's refusal names no field, and the checks above are meant to catch whatever
+		// it would refuse, so this answers the request as invalid without blaming a field.
+		if (saved === 'refused') return { status: 'invalid', errors: {} }
+		if (saved === 'failed') return { status: 'failed' }
+	} else if (!(await saveSignature(validated.signature))) return { status: 'failed' }
 
 	// A skipped repeat counts too, or the limit would reveal which addresses have signed.
 	recordRateLimit(sender, SAVE_LIMIT.windowMs)

@@ -2,8 +2,17 @@ import { beforeEach, describe, expect, it, vi } from 'vitest'
 
 const fetchAllPages = vi.fn<(...args: unknown[]) => Promise<unknown[]>>()
 
-vi.mock('$env/dynamic/private', () => ({ env: {} }))
+const env: Record<string, string | undefined> = {}
+const publicListFromCrm = vi.fn<() => Promise<unknown>>()
+const liveSignatoryList = vi.fn<() => Promise<unknown>>()
+
+vi.mock('$env/dynamic/private', () => ({ env }))
 vi.mock('$lib/airtable.js', () => ({ fetchAllPages }))
+vi.mock('$lib/server/statementCrm', async (importOriginal) => ({
+	...(await importOriginal<typeof import('$lib/server/statementCrm')>()),
+	publicListFromCrm,
+	liveSignatoryList
+}))
 
 const { GET } = await import('./+server.js')
 
@@ -27,6 +36,10 @@ async function list() {
 }
 
 beforeEach(() => {
+	env.STATEMENT_BACKEND = undefined
+	fetchAllPages.mockReset()
+	publicListFromCrm.mockReset()
+	liveSignatoryList.mockReset()
 	vi.spyOn(console, 'log').mockImplementation(() => {})
 })
 
@@ -166,5 +179,66 @@ describe('GET /api/signatories: repeat rows', () => {
 		const { signatories } = await list()
 
 		expect(signatories.map(({ name }) => name)).toEqual(['First', 'Second', 'Undated'])
+	})
+})
+
+describe('GET /api/signatories: STATEMENT_BACKEND=civicrm', () => {
+	beforeEach(() => {
+		env.STATEMENT_BACKEND = 'civicrm'
+	})
+
+	it("serves CiviCRM's list as it comes, reading no Airtable table", async () => {
+		const fromCrm = {
+			totalCount: 2,
+			signatories: [
+				{
+					private: false,
+					name: 'Ada',
+					country: 'France',
+					bio: 'Hi',
+					date: '2025-01-01T00:00:00.000Z'
+				},
+				{
+					private: true,
+					name: 'Anonymous',
+					country: 'Spain',
+					bio: 'Bio',
+					date: '2026-01-01T00:00:00.000Z'
+				}
+			]
+		}
+		publicListFromCrm.mockResolvedValue(fromCrm)
+
+		expect(await list()).toEqual(fromCrm)
+		expect(fetchAllPages).not.toHaveBeenCalled()
+		expect(liveSignatoryList).not.toHaveBeenCalled()
+	})
+
+	it("republishes the live list when CiviCRM can't be read", async () => {
+		const live = { totalCount: 1, signatories: [{ private: false, name: 'Ada' }] }
+		publicListFromCrm.mockResolvedValue(undefined)
+		liveSignatoryList.mockResolvedValue(live)
+
+		expect(await list()).toEqual(live)
+	})
+
+	it('answers placeholder rows with a count of 0 when neither list can be read', async () => {
+		publicListFromCrm.mockResolvedValue(undefined)
+		liveSignatoryList.mockResolvedValue(undefined)
+		const { signatories, totalCount } = await list()
+
+		expect(totalCount).toBe(0)
+		expect(signatories.length).toBeGreaterThan(0)
+	})
+
+	it('keeps the hour-long public cache', async () => {
+		publicListFromCrm.mockResolvedValue({ totalCount: 0, signatories: [] })
+		const headers: Record<string, string>[] = []
+		await GET({
+			fetch,
+			setHeaders: (value: Record<string, string>) => headers.push(value)
+		} as never)
+
+		expect(headers).toEqual([{ 'cache-control': 'public, max-age=3600' }])
 	})
 })

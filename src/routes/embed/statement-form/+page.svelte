@@ -1,8 +1,18 @@
 <script lang="ts">
+	import { page } from '$app/state'
 	import Link from '$lib/components/Link.svelte'
 	import PostMeta from '$lib/components/PostMeta.svelte'
+	import { onMount } from 'svelte'
 	import { meta } from '../../statement/meta'
 	import StatementForm from '../../statement/StatementForm.svelte'
+	import { presetCountry } from './presetCountry'
+
+	let country = $state('')
+
+	// Read after mount: the page is prerendered, so the query string isn't known on the server.
+	onMount(() => {
+		country = presetCountry(page.url.searchParams)
+	})
 </script>
 
 <!-- The iframeable /statement form for chapter sites (docs/statement-signing-api.md). It
@@ -17,7 +27,7 @@
 	</p>
 </noscript>
 
-<StatementForm embedded />
+<StatementForm embedded bind:country />
 
 <style>
 	.no-js {

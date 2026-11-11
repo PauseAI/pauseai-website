@@ -3,6 +3,7 @@ import { json } from '@sveltejs/kit'
 import { fetchAllPages, type AirtableRecord } from '$lib/airtable.js'
 import { normaliseEmail } from '$lib/server/emailVerification'
 import { MEMBERS_BASE_ID, STATEMENT_TABLE_ID } from '$lib/server/members'
+import { liveSignatoryList, publicListFromCrm, statementBackend } from '$lib/server/statementCrm'
 import { generateCacheControlRecord } from '$lib/utils'
 import type { RequestHandler } from './$types'
 
@@ -77,9 +78,21 @@ const SIGNATORY_FIELDS: (keyof AirtableSignatory)[] = [
 	'duplicate'
 ]
 
+const failedList: SignatoriesApiResponse = { signatories: fallbackSignatories, totalCount: 0 }
+
 export const GET: RequestHandler = async ({ fetch, setHeaders }) => {
 	const url = `https://api.airtable.com/v0/${MEMBERS_BASE_ID}/${STATEMENT_TABLE_ID}` as const
 	setHeaders(generateCacheControlRecord({ public: true, maxAge: 60 * 60 }))
+
+	// CiviCRM applies the listing rules itself (verified, not hidden, one row per person and
+	// name, private ones as "Anonymous") and answers in this route's shape.
+	if (statementBackend() === 'civicrm') {
+		// This answer is prerendered and published until the next deploy. So that a CRM outage
+		// doesn't block deploys, a failure republishes the list live now, and only if that fails
+		// too, placeholder rows with a count of 0, which pauseai.es reads as "list unavailable".
+		const list = (await publicListFromCrm()) ?? (await liveSignatoryList())
+		return json(list ?? failedList)
+	}
 
 	try {
 		const records = await fetchAllPages<AirtableSignatory>(fetch, url, [], {
@@ -108,10 +121,6 @@ export const GET: RequestHandler = async ({ fetch, setHeaders }) => {
 	} catch (e) {
 		console.error('Error fetching signatories:', e)
 
-		const response: SignatoriesApiResponse = {
-			signatories: fallbackSignatories,
-			totalCount: 0
-		}
-		return json(response)
+		return json(failedList)
 	}
 }
