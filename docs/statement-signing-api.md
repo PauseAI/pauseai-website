@@ -31,6 +31,8 @@ Or skip all of that and [embed our form](#or-embed-our-form).
 
 The page reports its height to your page whenever it changes, for example when the thank-you replaces the form. Resize the iframe to it with the listener in [Resizing the iframe](./ONBOARDING_EMBED.md#resizing-the-iframe), calling `resizePauseAIEmbed(document.getElementById('statement-form'))`.
 
+To preset the country, add `?country=` with its English name, exactly as in `COUNTRIES` (see [Build the form](#build-the-form)): `https://pauseai.info/embed/statement-form?country=Sweden`. The signer can still change it. Any other value leaves the country empty.
+
 ## Before you start
 
 Ask in the PauseAI Discord for your site to be added, or send a pull request. Two things have to be set up for each hostname your form runs on, and PauseAI has to do the first:
