@@ -6,6 +6,7 @@ import { meta as quotesMeta } from '../../quotes/meta'
 import { meta as emailBuilderMeta } from '../../email-builder/meta'
 import { meta as statementMeta } from '../../statement/meta'
 import { meta as contactMeta } from '../../contact-us/meta'
+import { meta as linksMeta } from '../../links/meta'
 import type { RequestHandler } from './$types'
 
 export type PostsApiResponse = DescriptivePost[]
@@ -17,7 +18,8 @@ const hardCodedPages: StrictPost[] = [
 	quotesMeta,
 	emailBuilderMeta,
 	statementMeta,
-	contactMeta
+	contactMeta,
+	linksMeta
 ]
 
 function getPosts() {
