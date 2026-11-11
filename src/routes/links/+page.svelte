@@ -2,6 +2,7 @@
 	import LinkWithoutIcon from '$lib/components/LinkWithoutIcon.svelte'
 	import PostMeta from '$lib/components/PostMeta.svelte'
 	import { socials } from '$lib/socials'
+	import { socialIcons } from '$lib/components/socialIcons'
 	import { meta } from './meta'
 </script>
 
@@ -18,11 +19,17 @@
 		<li>
 			<LinkWithoutIcon href="/donate" class="link-button primary">Donate</LinkWithoutIcon>
 		</li>
-		{#each socials as { name, href, bioHref, icon: Icon } (name)}
+		{#each socials as social (social.name)}
+			{@const Icon = socialIcons[social.name]}
 			<li>
-				<LinkWithoutIcon href={bioHref ?? href} target="_blank" class="link-button">
+				<LinkWithoutIcon
+					href={'bioHref' in social ? social.bioHref : social.href}
+					target="_blank"
+					rel="noopener"
+					class="link-button"
+				>
 					<span class="icon" aria-hidden="true"><Icon /></span>
-					<span class="label">{name}</span>
+					<span class="label">{social.name}</span>
 				</LinkWithoutIcon>
 			</li>
 		{/each}
@@ -55,8 +62,10 @@
 		gap: 0.75rem;
 	}
 
+	/* Icon, label, and an empty column as wide as the icon, so the label sits in the centre */
 	ul :global(.link-button) {
-		display: flex;
+		display: grid;
+		grid-template-columns: 1.25rem 1fr 1.25rem;
 		align-items: center;
 		gap: 0.75rem;
 		padding: 0.85rem 1rem;
@@ -78,30 +87,24 @@
 		fill: var(--brand);
 	}
 
+	/* Black on the brand orange: white on it is only about 2.3:1 */
 	ul :global(.link-button.primary) {
+		display: flex;
 		justify-content: center;
 		background-color: var(--brand);
 		border-color: var(--brand);
-		color: var(--bg);
+		color: var(--black);
 	}
 
 	ul :global(.link-button.primary:hover),
 	ul :global(.link-button.primary:focus-visible) {
-		background-color: var(--brand-subtle);
-		border-color: var(--brand-subtle);
-		color: var(--bg);
+		background-color: var(--bg);
+		color: var(--brand);
 	}
 
 	.icon {
 		display: flex;
 		width: 1.25rem;
 		height: 1.25rem;
-		flex-shrink: 0;
-	}
-
-	.label {
-		flex: 1;
-		/* Offset the icon so the label sits in the centre of the button */
-		margin-right: 2rem;
 	}
 </style>

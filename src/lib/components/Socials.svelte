@@ -1,11 +1,13 @@
 <script lang="ts">
 	import LinkWithoutIcon from '$lib/components/LinkWithoutIcon.svelte'
 	import { socials } from '$lib/socials'
+	import { socialIcons } from '$lib/components/socialIcons'
 </script>
 
 <div class="social">
-	{#each socials as { name, href, icon: Icon } (name)}
-		<LinkWithoutIcon {href} target="_blank" title={name} class="social-link">
+	{#each socials as { name, href } (name)}
+		{@const Icon = socialIcons[name]}
+		<LinkWithoutIcon {href} target="_blank" rel="noopener" title={name} class="social-link">
 			<Icon />
 		</LinkWithoutIcon>
 	{/each}
