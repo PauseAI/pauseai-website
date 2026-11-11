@@ -6,6 +6,7 @@ vi.mock('$app/state', () => ({
 }))
 
 const { default: Page } = await import('./+page.svelte')
+const { default: StatementForm } = await import('../../statement/StatementForm.svelte')
 
 describe('/embed/statement-form', () => {
 	const { body } = render(Page)
@@ -43,5 +44,17 @@ describe('/embed/statement-form', () => {
 	it('heads the card as the page itself, as the embed has no other heading', () => {
 		expect(body).toMatch(/<h1[^>]*id="sign-heading"/)
 		expect(body).not.toMatch(/<h2[^>]*id="sign-heading"/)
+	})
+
+	it('leaves the country empty on the server, as the preset is read in the browser', () => {
+		expect(body).toMatch(/<input type="hidden" name="country" value=""/)
+	})
+})
+
+describe('StatementForm country', () => {
+	// The visible text follows in the browser (Combobox fills it in an effect).
+	it('submits the country it is given', () => {
+		const { body } = render(StatementForm, { props: { country: 'Sweden' } })
+		expect(body).toMatch(/<input type="hidden" name="country" value="Sweden"/)
 	})
 })

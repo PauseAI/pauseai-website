@@ -13,11 +13,14 @@
 
 	let {
 		embedded = false,
-		counter
+		counter,
+		country = $bindable('')
 	}: {
 		/** The card is the whole page, as in the embed: it heads the page and has no margin. */
 		embedded?: boolean
 		counter?: Snippet
+		/** The selected country, so the embed can preset it. */
+		country?: string
 	} = $props()
 	const headingLevel = $derived(embedded ? 1 : 2)
 
@@ -195,6 +198,7 @@
 					options={COUNTRIES}
 					required
 					placeholder="Select your country"
+					bind:value={country}
 					invalid={!!fieldErrors.country}
 					describedBy={fieldErrors.country ? 'statement-country-error' : undefined}
 				/>
