@@ -1,7 +1,5 @@
 import type { BaseLanguage } from './types.js'
 
-// Mirrors the Spanish-speaking country list in airtable-mailersend-emails.js exactly, so
-// language routing doesn't drift between the render endpoint and the fallback templates.
 const SPANISH_COUNTRIES = new Set([
 	'Argentina',
 	'Bolivia',

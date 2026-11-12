@@ -8,7 +8,6 @@ import {
 	verificationParameter
 } from '$lib/config.js'
 import {
-	acceptsUnsignedLink,
 	getVerificationSecret,
 	normaliseEmail,
 	verifyVerificationToken
@@ -132,30 +131,27 @@ export const POST: RequestHandler = async ({ request }) => {
 	const named = records[0]
 
 	let recordId = named.id
-	// The address a valid token was checked against, when the link carried one.
+	// For a Members link, the address its token was checked against.
 	let signedEmail: string | undefined
 	if (tableConfig.isMembers) {
-		const now = Date.now()
 		const token = params.get(TOKEN_PARAMETER) ?? ''
 		const secret = getVerificationSecret()
-		// Without a secret no token can be checked, so every link is judged as unsigned.
-		if (token && secret) {
-			// Against the row's address now: a link mailed to an address the row no longer
-			// has must not verify the new one.
-			const email = rowEmail(named.fields)
-			const verdict = await verifyVerificationToken(secret, named.id, email, token, now)
-			if (verdict !== 'valid') {
-				console.warn('[verification] refused a signed link', { recordId: named.id, verdict })
-				return linkExpired()
-			}
-			signedEmail = email
-		} else {
-			const createdTime = (named._rawJson as { createdTime?: string } | undefined)?.createdTime
-			if (!acceptsUnsignedLink({ createdTime, fields: named.fields }, now)) {
-				console.warn('[verification] refused an unsigned link', { recordId: named.id })
-				return linkExpired()
-			}
+		if (!token || !secret) {
+			console.warn('[verification] refused a link it cannot check', {
+				recordId: named.id,
+				hasToken: token !== ''
+			})
+			return linkExpired()
 		}
+		// Against the row's address now: a link mailed to an address the row no longer
+		// has must not verify the new one.
+		const email = rowEmail(named.fields)
+		const verdict = await verifyVerificationToken(secret, named.id, email, token, Date.now())
+		if (verdict !== 'valid') {
+			console.warn('[verification] refused a signed link', { recordId: named.id, verdict })
+			return linkExpired()
+		}
+		signedEmail = email
 
 		try {
 			const target = await memberRowToVerify(named, (id) => table.find(id))

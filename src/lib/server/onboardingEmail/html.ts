@@ -90,11 +90,9 @@ function renderBlock(block: EmailBlock): string {
 	}
 }
 
-/** Hand-rolled table-based HTML, matching the general inline-styles/table-layout
- *  approach of the existing MailerSend exports (email-templates/*.json) rather than
- *  modern CSS, for email-client compatibility. The logo is the PauseAI icon the
- *  MailerSend templates carry; its alt text keeps the name visible where images are
- *  blocked. */
+/** Hand-rolled table-based HTML with inline styles rather than modern CSS, for
+ *  email-client compatibility. The logo's alt text keeps the name visible where images
+ *  are blocked. */
 export function renderHtml(
 	blocks: EmailBlock[],
 	language: OnboardingEmailLanguage,

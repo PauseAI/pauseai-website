@@ -1,4 +1,4 @@
-import { afterEach, describe, expect, it, vi } from 'vitest'
+import { describe, expect, it, vi } from 'vitest'
 import type { ChapterBlockData, OnboardingEmailParams } from './types.js'
 
 // Stands in for the live National Groups table: one chapter with links, one without.
@@ -40,7 +40,7 @@ vi.mock('./chapter.js', () => ({
 		Promise.resolve(CHAPTERS[(country ?? '').trim().toLowerCase()] ?? null)
 }))
 
-const { chapterShareFromRequest, renderOnboardingEmail } = await import('./index.js')
+const { renderOnboardingEmail } = await import('./index.js')
 
 const RECORD_ID = 'recTest1234567890'
 const INTENTS = ['None', 'Keep informed', 'Act now', 'Volunteer', 'Lead', '', 'Something new']
@@ -401,38 +401,5 @@ describe('renderOnboardingEmail', () => {
 				])
 			}
 		}
-	})
-})
-
-describe('chapterShareFromRequest', () => {
-	afterEach(() => {
-		vi.restoreAllMocks()
-		reportError.mockClear()
-	})
-
-	it('takes only true as agreement', async () => {
-		expect(await chapterShareFromRequest({ gdpr_chapter_share: true })).toBe(true)
-		for (const value of [false, null, undefined, 'true', 1, [true]]) {
-			expect(await chapterShareFromRequest({ gdpr_chapter_share: value }), String(value)).toBe(
-				false
-			)
-		}
-	})
-
-	it('reports a request that does not carry the key at all, without its values', async () => {
-		vi.spyOn(console, 'warn').mockImplementation(() => {})
-		const body = { first_name: 'Alex', airtable_id: RECORD_ID, country: 'United Kingdom' }
-		expect(await chapterShareFromRequest(body)).toBe(false)
-		expect(reportError).toHaveBeenCalledTimes(1)
-		const payload = JSON.stringify(reportError.mock.calls[0], (_key, value: unknown) =>
-			value instanceof Error ? value.message : value
-		)
-		expect(payload).toContain('gdpr_chapter_share')
-		for (const value of Object.values(body)) expect(payload).not.toContain(value)
-
-		reportError.mockClear()
-		await chapterShareFromRequest({ gdpr_chapter_share: false })
-		await chapterShareFromRequest({ gdpr_chapter_share: null })
-		expect(reportError).not.toHaveBeenCalled()
 	})
 })

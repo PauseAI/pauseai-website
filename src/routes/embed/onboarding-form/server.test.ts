@@ -657,8 +657,7 @@ describe('onboarding submit: signup emails sent by', () => {
 		expect(updateRecord).toHaveBeenCalledTimes(3)
 	}
 
-	it('marks every create as sent by CiviCRM while the flag is on, and no update', async () => {
-		env.SIGNUP_EMAILS_SENT_BY_CRM = 'true'
+	it('marks every create as sent by CiviCRM, and no update', async () => {
 		for (const fields of creates) {
 			await submit(fields)
 			expect(writtenFields(createRecord)[SENT_BY]).toBe('CiviCRM')
@@ -667,22 +666,8 @@ describe('onboarding submit: signup emails sent by', () => {
 		await updateAll(String(created.recordToken))
 	})
 
-	it('writes nothing unless the flag is exactly "true"', async () => {
-		for (const value of [undefined, '', '1', 'false', 'TRUE', ' true']) {
-			if (value === undefined) delete env.SIGNUP_EMAILS_SENT_BY_CRM
-			else env.SIGNUP_EMAILS_SENT_BY_CRM = value
-			for (const fields of creates) {
-				await submit(fields)
-				expect(writtenFields(createRecord)).not.toHaveProperty(SENT_BY)
-			}
-		}
-		const created = await submit(signup)
-		await updateAll(String(created.recordToken))
-	})
-
 	it('records the field in a stub submission', async () => {
 		delete env.ONBOARDING_LIVE
-		env.SIGNUP_EMAILS_SENT_BY_CRM = 'true'
 		const created = await submit(signup)
 		expect(createRecord).not.toHaveBeenCalled()
 		expect(created.submission).toMatchObject({ fields: { [SENT_BY]: 'CiviCRM' } })

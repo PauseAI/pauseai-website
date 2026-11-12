@@ -1,8 +1,6 @@
-// Minimal markdown support: `[label](url)` links, matching the style already used in the
-// existing MailerSend templates' `plain_text` fields (see email-templates/*.json),
-// `**bold**` and `*italic*`. Plain text output keeps the link syntax verbatim; HTML output
-// converts all three. A newline inside a block's text is a line break: HTML output writes a
-// <br>, plain text keeps the newline.
+// Minimal markdown support: `[label](url)` links, `**bold**` and `*italic*`. Plain text output
+// keeps the link syntax verbatim; HTML output converts all three. A newline inside a block's
+// text is a line break: HTML output writes a <br>, plain text keeps the newline.
 
 const LINK_PATTERN = /\[([^\]]+)\]\(([^)]+)\)/g
 const BOLD_PATTERN = /\*\*([^*]+)\*\*/g
