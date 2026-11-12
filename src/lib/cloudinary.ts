@@ -1,10 +1,15 @@
 // Edge-compatible Cloudinary REST API client
-import { env } from '$env/dynamic/private'
-import { json } from '@sveltejs/kit'
+import {
+	PUBLIC_CLOUDINARY_CLOUD_NAME,
+	CLOUDINARY_API_KEY,
+	CLOUDINARY_API_SECRET
+} from '$app/env/private';
 
-const CLOUD_NAME = env.PUBLIC_CLOUDINARY_CLOUD_NAME || 'dyjlw1syg'
-const API_KEY = env.CLOUDINARY_API_KEY || '779717836612829'
-const API_SECRET = env.CLOUDINARY_API_SECRET
+import { json } from '@sveltejs/kit';
+
+const CLOUD_NAME = PUBLIC_CLOUDINARY_CLOUD_NAME || 'dyjlw1syg';
+const API_KEY = CLOUDINARY_API_KEY || '779717836612829';
+const API_SECRET = CLOUDINARY_API_SECRET;
 
 // SHA1 hash using Web Crypto API (works in both Node.js 18+ and Deno)
 async function sha1(text: string): Promise<string> {
@@ -16,7 +21,7 @@ async function sha1(text: string): Promise<string> {
 	return hashHex
 }
 
-export type CloudinaryUploadResponse = {
+export type CloudinaryUploadResponse = { 
 	secure_url: string
 	public_id: string
 	[key: string]: unknown
@@ -47,8 +52,9 @@ export async function callCloudinaryAPI<T>(
 	}
 
 	// Upload/management APIs use signed form data
-	const timestamp = Math.floor(Date.now() / 1000)
-	const allParams: Record<string, unknown> = { ...params, timestamp, api_key: API_KEY }
+	const timestamp = Math.floor(Date.now() / 1000);
+
+	const allParams: Record<string, unknown> = { ...params, timestamp, api_key: API_KEY };
 
 	// Generate signature from filtered parameters
 	// Note: 'file', 'resource_type', 'api_key', and 'signature' are excluded from signature
@@ -66,8 +72,9 @@ export async function callCloudinaryAPI<T>(
 		.join('&')
 
 	// Use Web Crypto API for SHA1 hashing (works in both Node.js 18+ and Deno)
-	const signature = await sha1(paramsToSign + API_SECRET)
-	allParams.signature = signature
+	const signature = await sha1(paramsToSign + API_SECRET);
+
+	allParams.signature = signature;
 
 	// Build form data
 	const formData = new FormData()

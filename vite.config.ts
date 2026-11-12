@@ -1,18 +1,32 @@
-import { sveltekit } from '@sveltejs/kit/vite'
-import { execSync } from 'child_process'
-import dotenv from 'dotenv'
-import { FontaineTransform } from 'fontaine'
-import fs from 'fs'
-import path from 'path'
-import discardDuplicates from 'postcss-discard-duplicates'
-import { defineConfig, type Plugin } from 'vite'
-import lucidePreprocess from 'vite-plugin-lucide-preprocess'
-import { sentryVitePlugin } from '@sentry/vite-plugin'
-import { imagetools } from 'vite-imagetools'
-import { imageFormats, imageWidths, metaImageWidth, imageQuality } from './src/lib/image-config'
-import { isDev } from './src/lib/env'
-import { MARKDOWN_L10NS } from './src/lib/l10n'
-import { locales as compiledLocales } from './src/lib/paraglide/runtime.js'
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment -- not designed for strong typing
+// @ts-nocheck
+import adapterNetlify from '@sveltejs/adapter-netlify';
+
+import { vitePreprocess } from '@sveltejs/vite-plugin-svelte';
+import { mdsvex } from 'mdsvex';
+import { dirname } from 'node:path';
+import { fileURLToPath } from 'node:url';
+import rehypeSlug from 'rehype-slug';
+import remarkHeadingId from 'remark-heading-id';
+import remarkToc from 'remark-toc';
+import rehypeUnwrapImages from 'rehype-unwrap-images';
+import remarkCollectImages from './plugins/remark-collect-images.js';
+import settings from './project.inlang/settings.json' with { type: 'json' };
+import { sveltekit } from '@sveltejs/kit/vite';
+import { execSync } from 'child_process';
+import dotenv from 'dotenv';
+import { FontaineTransform } from 'fontaine';
+import fs from 'fs';
+import path from 'path';
+import discardDuplicates from 'postcss-discard-duplicates';
+import { defineConfig, type Plugin } from 'vite';
+import lucidePreprocess from 'vite-plugin-lucide-preprocess';
+import { sentryVitePlugin } from '@sentry/vite-plugin';
+import { imagetools } from 'vite-imagetools';
+import { imageFormats, imageWidths, metaImageWidth, imageQuality } from './src/lib/image-config';
+import { isDev } from './src/lib/env';
+import { MARKDOWN_L10NS } from './src/lib/l10n';
+import { locales as compiledLocales } from './src/lib/paraglide/runtime.js';
 
 /**
  * Dev-only middleware: Netlify's `/.netlify/*` routes don't exist in the
@@ -51,18 +65,43 @@ function getLocaleExcludePatterns(): RegExp[] {
 	const md = path.resolve(MARKDOWN_L10NS)
 	const reposLocales = fs.existsSync(md)
 		? fs.readdirSync(md).filter((item) => fs.statSync(path.join(md, item)).isDirectory())
-		: [] // the directory may not exist when running tests
+		: []; /* the directory may not exist when running tests */
 	//  console.debug(`📁 Locale directories found in repos: ${reposLocales.join(', ')}`)
-	const locales: readonly string[] = compiledLocales
-	const toExclude = reposLocales.filter((locale) => !locales.includes(locale))
-	//  console.debug(`🚫 Excluding locales from build: [${toExclude.join(', ')]}`)
+	const locales: readonly string[] = compiledLocales;
 
+	const toExclude = reposLocales.filter((locale) => !locales.includes(locale));
+
+	//  console.debug(`🚫 Excluding locales from build: [${toExclude.join(', ')]}`)
 	return toExclude.map((locale) => {
 		const pattern = new RegExp(`${MARKDOWN_L10NS}/${locale}/`)
 		//      console.debug(`📋 Created exclude pattern: ${pattern}`)
 		return pattern
 	})
 }
+
+// Export configuration flags for use in build scripts
+export const USE_EDGE_FUNCTIONS = true;
+
+/** @type {import('mdsvex').MdsvexOptions} */ const mdsvexOptions = {
+	extensions: ['.md'],
+	layout: {
+		_: dirname(fileURLToPath(import.meta.url)) + '/src/mdsvex.svelte'
+	},
+	remarkPlugins: [
+		remarkCollectImages,
+		[remarkToc, { tight: true }],
+		remarkHeadingId
+	],
+	rehypePlugins: [rehypeUnwrapImages, rehypeSlug]
+};
+
+/** @type {[string, ((warning: { code: string; message: string }) => boolean) | undefined][]} */ const skipWarnings = [
+	[
+		'a11y_missing_attribute',
+		(warning) => warning.message.includes('title')
+	] /* Skip warnings about missing title attributes on iframes */,
+	['a11y_no_noninteractive_tabindex'] /* Skip warnings about tabindex on non-interactive elements (like iframes) */
+];
 
 export default defineConfig(() => {
 	// Guarantees server can see .env (on e.g. hot restart)
@@ -140,11 +179,37 @@ export default defineConfig(() => {
 					'Saira Condensed': ['Arial', 'Arimo', 'Noto Sans']
 				}
 			}),
-			sveltekit(),
-			!isDev(process.env) &&
-			process.env.SENTRY_AUTH_TOKEN &&
-			process.env.SENTRY_ORG &&
-			process.env.SENTRY_PROJECT
+
+			sveltekit({
+				extensions: ['.svelte', '.md'],
+				preprocess: [vitePreprocess(), mdsvex(mdsvexOptions)],
+				adapter: adapterNetlify({ edge: USE_EDGE_FUNCTIONS }),
+				alias: { $assets: 'src/assets', $api: 'src/routes/api' },
+				prerender: {
+					// Allows dead links to be rendered
+					handleHttpError: 'warn',
+
+					// Handle missing anchor IDs by warning instead of failing
+					handleMissingId: 'warn',
+					entries: ['*'].concat(settings.locales.map((locale) => '/' + locale))
+				},
+				experimental: { remoteFunctions: true },
+				vitePlugin: {
+					onwarn: function (warning, handler) {
+						// Skip specific accessibility warnings
+						for (const [code, filter] of skipWarnings) {
+							if (warning.code === code && (!filter || filter(warning))) {
+								return;
+							}
+						}
+
+						// Call the default handler for all other warnings
+						handler(warning);
+					}
+				}
+			}),
+
+			!isDev(process.env) && process.env.SENTRY_AUTH_TOKEN && process.env.SENTRY_ORG && process.env.SENTRY_PROJECT
 				? sentryVitePlugin({
 						org: process.env.SENTRY_ORG,
 						project: process.env.SENTRY_PROJECT,

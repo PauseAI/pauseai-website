@@ -1,15 +1,16 @@
-import { fail } from '@sveltejs/kit'
-import type { Actions } from './$types'
-import { env } from '$env/dynamic/private'
-import { createRecord } from '$lib/airtable'
-import { checkNotSpam } from '$lib/server/turnstile-verify'
-import { partnershipOptions } from './partnership-options'
+import { fail } from '@sveltejs/kit';
+import type { Actions } from './$types';
+import { MAILERSEND_API_KEY } from '$app/env/private';
+import { createRecord } from '$lib/airtable';
+import { checkNotSpam } from '$lib/server/turnstile-verify';
+import { partnershipOptions } from './partnership-options';
 
 // Airtable configuration (User to fill in later)
-const CONTACT_AIRTABLE_BASE_ID = 'appWPTGqZmUcs3NWu'
-const CONTACT_AIRTABLE_TABLE_ID = 'tblPP2kM7uTheBrpw'
+const CONTACT_AIRTABLE_BASE_ID = 'appWPTGqZmUcs3NWu';
 
-export const prerender = false
+const CONTACT_AIRTABLE_TABLE_ID = 'tblPP2kM7uTheBrpw';
+
+export const prerender = false;
 
 // Configure recipient email addresses for each contact form type
 const CONTACT_RECIPIENTS = {
@@ -18,7 +19,7 @@ const CONTACT_RECIPIENTS = {
 	Feedback: 'feedback@pauseai.info'
 } as const
 
-const mailerSendApiKey = env.MAILERSEND_API_KEY
+const mailerSendApiKey = MAILERSEND_API_KEY;
 
 /**
  * Maximum characters accepted per field. The client shows softer hints, but these
@@ -37,11 +38,8 @@ const MAX_LENGTHS: Record<string, number> = {
 
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 
-type ContactFormType = keyof typeof CONTACT_RECIPIENTS
-
-type MailerSendError = {
-	message?: string
-}
+type ContactFormType = keyof typeof CONTACT_RECIPIENTS;
+type MailerSendError = { message?: string };
 
 function getFormString(formData: FormData, field: string): string | undefined {
 	const value = formData.get(field)
@@ -157,10 +155,12 @@ async function sendContactEmail(data: {
 		})
 
 		if (!response.ok) {
-			const errorData: unknown = await response.json().catch((): unknown => ({}))
-			console.error('MailerSend Error:', response.status, JSON.stringify(errorData, null, 2))
+			const errorData: unknown = await response.json().catch((): unknown => ({}));
 
-			let errorMessage = 'Failed to send email. Please try again later.'
+			console.error('MailerSend Error:', response.status, JSON.stringify(errorData, null, 2));
+
+			let errorMessage = 'Failed to send email. Please try again later.';
+
 			if (isMailerSendError(errorData) && typeof errorData.message === 'string') {
 				errorMessage = errorData.message.replace('reply to.email', 'email')
 			}
@@ -237,20 +237,21 @@ async function sendConfirmationEmail(data: { name: string; email: string; type: 
 
 export const actions: Actions = {
 	media: async ({ request, url }) => {
-		const data = await request.formData()
+		const data = await request.formData();
+		const spam = await checkNotSpam(data, url.hostname);
 
-		const spam = await checkNotSpam(data, url.hostname)
-		if (spam.drop) return { success: true }
-		if (spam.message) return fail(403, { message: spam.message })
+		if (spam.drop) return { success: true };
+		if (spam.message) return fail(403, { message: spam.message });
 
-		const oversized = findOversizedField(data)
-		if (oversized) return fail(400, { message: oversized })
+		const oversized = findOversizedField(data);
 
-		const name = getFormString(data, 'name')
-		const email = getFormString(data, 'email')
-		const subject = getFormString(data, 'subject')
-		const organization = getFormString(data, 'organization')
-		const details = getFormString(data, 'details')
+		if (oversized) return fail(400, { message: oversized });
+
+		const name = getFormString(data, 'name');
+		const email = getFormString(data, 'email');
+		const subject = getFormString(data, 'subject');
+		const organization = getFormString(data, 'organization');
+		const details = getFormString(data, 'details');
 
 		if (!name || !email || !subject || !organization || !details) {
 			return fail(400, { message: 'Missing required fields' })
@@ -278,20 +279,21 @@ export const actions: Actions = {
 		return { success: true }
 	},
 	partnerships: async ({ request, url }) => {
-		const data = await request.formData()
+		const data = await request.formData();
+		const spam = await checkNotSpam(data, url.hostname);
 
-		const spam = await checkNotSpam(data, url.hostname)
-		if (spam.drop) return { success: true }
-		if (spam.message) return fail(403, { message: spam.message })
+		if (spam.drop) return { success: true };
+		if (spam.message) return fail(403, { message: spam.message });
 
-		const oversized = findOversizedField(data)
-		if (oversized) return fail(400, { message: oversized })
+		const oversized = findOversizedField(data);
 
-		const name = getFormString(data, 'name')
-		const email = getFormString(data, 'email')
-		const organization = getFormString(data, 'organization')
-		const city_country = getFormString(data, 'city_country')
-		const message = getFormString(data, 'message')
+		if (oversized) return fail(400, { message: oversized });
+
+		const name = getFormString(data, 'name');
+		const email = getFormString(data, 'email');
+		const organization = getFormString(data, 'organization');
+		const city_country = getFormString(data, 'city_country');
+		const message = getFormString(data, 'message');
 
 		// The form offers a fixed list, so anything else was not sent by our UI.
 		const partnershipType = getFormString(data, 'partnership_type') ?? ''
@@ -343,19 +345,20 @@ export const actions: Actions = {
 		return { success: true }
 	},
 	feedback: async ({ request, url }) => {
-		const data = await request.formData()
+		const data = await request.formData();
+		const spam = await checkNotSpam(data, url.hostname);
 
-		const spam = await checkNotSpam(data, url.hostname)
-		if (spam.drop) return { success: true }
-		if (spam.message) return fail(403, { message: spam.message })
+		if (spam.drop) return { success: true };
+		if (spam.message) return fail(403, { message: spam.message });
 
-		const oversized = findOversizedField(data)
-		if (oversized) return fail(400, { message: oversized })
+		const oversized = findOversizedField(data);
 
-		const name = getFormString(data, 'name') ?? 'Anonymous'
-		const email = getFormString(data, 'email') ?? ''
-		const subject = getFormString(data, 'subject')
-		const message = getFormString(data, 'message')
+		if (oversized) return fail(400, { message: oversized });
+
+		const name = getFormString(data, 'name') ?? 'Anonymous';
+		const email = getFormString(data, 'email') ?? '';
+		const subject = getFormString(data, 'subject');
+		const message = getFormString(data, 'message');
 
 		if (!subject || !message) {
 			return fail(400, { message: 'Missing required fields' })

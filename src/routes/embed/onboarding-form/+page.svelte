@@ -1,30 +1,27 @@
 <script lang="ts">
-	import { onMount } from 'svelte'
-	import { dev } from '$app/environment'
-	import { page } from '$app/state'
-	import OnboardingFlow from '$lib/components/onboarding/OnboardingFlow.svelte'
-	import PostMeta from '$lib/components/PostMeta.svelte'
-	import {
-		isOnboardingLocale,
-		setOnboardingLocale,
-		getMessages
-	} from '$lib/components/onboarding/i18n.svelte'
-	import { loadChapterSiteCountry } from '$lib/components/onboarding/chapterShare'
+	import { onMount } from 'svelte';
+	import { dev } from '$app/env';
+	import { page } from '$app/state';
+	import OnboardingFlow from '$lib/components/onboarding/OnboardingFlow.svelte';
+	import PostMeta from '$lib/components/PostMeta.svelte';
+	import { isOnboardingLocale, setOnboardingLocale, getMessages } from '$lib/components/onboarding/i18n.svelte';
+	import { loadChapterSiteCountry } from '$lib/components/onboarding/chapterShare';
 
 	// Query params read here (locale, country, city, source, languages, bg) are
 	// listed in CACHE_VARY_PARAMS in +page.server.ts for the CDN cache key. Add
 	// any new one there too.
 	$effect(() => {
-		const locale = page.url.searchParams.get('locale')
-		if (locale && isOnboardingLocale(locale)) setOnboardingLocale(locale)
-	})
+		const locale = page.url.searchParams.get('locale');
 
-	const msgs = $derived(getMessages())
-	const title = $derived(msgs.onboarding_page_title)
-	const description = $derived(msgs.onboarding_page_description)
+		if (locale && isOnboardingLocale(locale)) setOnboardingLocale(locale);
+	});
 
-	const initialCountry = $derived(page.url.searchParams.get('country') ?? '')
-	const initialCity = $derived(page.url.searchParams.get('city') ?? '')
+	const msgs = $derived(getMessages());
+	const title = $derived(msgs.onboarding_page_title);
+	const description = $derived(msgs.onboarding_page_description);
+	const initialCountry = $derived(page.url.searchParams.get('country') ?? '');
+	const initialCity = $derived(page.url.searchParams.get('city') ?? '');
+
 	// Signup-source attribution, written to `Source page` on the server (create
 	// only; the server sanitises it again, so this is only a precedence filter):
 	//  - explicit ?source= wins — how a partner labels its embed
@@ -34,17 +31,11 @@
 	// The strip mirrors the server's accepted charset (see cleanSource): a
 	// ?source= that is all punctuation / non-Latin sanitises to nothing there, so
 	// don't let it shadow the document.referrer fallback here.
-	const explicitSource = $derived(
-		(page.url.searchParams.get('source') ?? '').replace(/[^\w \-./]/g, '').trim()
-	)
-	let referrerSource = $state('')
-	const initialSource = $derived(explicitSource || referrerSource)
-	const initialLanguages = $derived(
-		(page.url.searchParams.get('languages') ?? '')
-			.split(',')
-			.map((l) => l.trim())
-			.filter(Boolean)
-	)
+	const explicitSource = $derived((page.url.searchParams.get('source') ?? '').replace(/[^\w \-./]/g, '').trim());
+
+	let referrerSource = $state('');
+	const initialSource = $derived(explicitSource || referrerSource);
+	const initialLanguages = $derived((page.url.searchParams.get('languages') ?? '').split(',').map((l) => l.trim()).filter(Boolean));
 
 	// Set when the referrer host matches a chapter's own website, so the
 	// chapter question can drop the "separate organisation" disclosure that
@@ -110,16 +101,16 @@
 	// without #) or a CSS color name. Anything else is ignored, which also
 	// keeps arbitrary CSS out of the inline style.
 	const background = $derived.by(() => {
-		const value = page.url.searchParams.get('bg')?.trim() ?? ''
-		if (/^#?([0-9a-f]{3,4}|[0-9a-f]{6}|[0-9a-f]{8})$/i.test(value)) {
-			return value.startsWith('#') ? value : `#${value}`
+		const value = page.url.searchParams.get('bg')?.trim() ?? '';
+		if ((/^#?([0-9a-f]{3,4}|[0-9a-f]{6}|[0-9a-f]{8})$/i).test(value)) {
+			return value.startsWith('#') ? value : `#${value}`;
 		}
-		if (/^[a-z]{1,30}$/i.test(value)) return value
-		return ''
-	})
+		if ((/^[a-z]{1,30}$/i).test(value)) return value;
+		return '';
+	});
 </script>
 
-<PostMeta {title} {description} />
+<PostMeta title={title} description={description} />
 
 <svelte:head>
 	{#if background}
@@ -130,10 +121,10 @@
 </svelte:head>
 
 <OnboardingFlow
-	{initialCountry}
-	{initialCity}
-	{initialLanguages}
-	{initialSource}
-	{chapterSiteCountry}
+	initialCountry={initialCountry}
+	initialCity={initialCity}
+	initialLanguages={initialLanguages}
+	initialSource={initialSource}
+	chapterSiteCountry={chapterSiteCountry}
 	onSignup={reportSignup}
 />

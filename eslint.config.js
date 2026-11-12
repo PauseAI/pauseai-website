@@ -9,7 +9,9 @@ import globals from 'globals'
 import ts from 'typescript-eslint'
 import emptyMarkdownLinks from './plugins/eslint-empty-markdown-links.js'
 import markdownScripts from './plugins/eslint-markdown-scripts.js'
-import svelteConfig from './svelte.config.js'
+import { loadConfig } from '@sveltejs/load-config';
+
+const svelteConfig = (await loadConfig('./', { traverse: false }))?.config;
 
 // See https://typescript-eslint.io/troubleshooting/typed-linting/performance#changes-to-extrafileextensions-with-projectservice
 const EXTRA_FILE_EXTENSIONS = ['.svelte']

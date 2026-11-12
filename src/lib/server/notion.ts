@@ -1,15 +1,14 @@
-import { Client } from '@notionhq/client'
-import { env } from '$env/dynamic/private'
-import type { PageObjectResponse } from '@notionhq/client/build/src/api-endpoints'
+import { Client } from '@notionhq/client';
+import { NOTION_API_KEY } from '$app/env/private';
+import type { PageObjectResponse } from '@notionhq/client/build/src/api-endpoints';
 
 let notion: Client | null = null
 
 export function getNotionClient() {
 	if (!notion) {
-		const auth = env.NOTION_API_KEY?.trim().replace(/^["']|["']$/g, '')
-		notion = new Client({
-			auth: auth
-		})
+		const auth = NOTION_API_KEY?.trim().replace(/^["']|["']$/g, '');
+
+		notion = new Client({ auth });
 	}
 	return notion
 }

@@ -1,12 +1,3 @@
-<!--
-	SubscribeFlow — the lightweight newsletter entry at /subscribe.
-
-	A single-step signup (global newsletter) with the chapter-sharing question
-	(chapterShare.ts) and an optional Substack opt-in. On success it offers to go
-	further: rather than linking out to /join (which would create a second, duplicate record), it
-	hands off to OnboardingFlow seeded at the intent step with the record already
-	created here, so continuing updates that same record.
--->
 <script lang="ts">
 	import { onMount } from 'svelte'
 	import { enhance } from '$app/forms'
@@ -31,9 +22,10 @@
 		initialCountry = ''
 	}: { initialEmail?: string; initialCountry?: string } = $props()
 
-	type Phase = 'form' | 'thanks' | 'more'
-	let phase = $state<Phase>('form')
-	let submitting = $state(false)
+	type Phase = 'form' | 'thanks' | 'more';
+
+	let phase = $state<Phase>('form');
+	let submitting = $state(false);
 
 	// Assume live until the server says otherwise, so an unanswered request keeps
 	// the anti-spam check required rather than dropping it. See OnboardingFlow.
@@ -42,12 +34,12 @@
 	// "could not load" error before it's removed again.
 	let onboardingModeKnown = $state(false)
 	onMount(async () => {
-		void loadChapterCountries().then((countries) => (chapterCountries = countries))
+		void loadChapterCountries().then((countries) => chapterCountries = countries);
 		try {
-			const response = await fetch('/api/onboarding-mode')
-			if (!response.ok) return
-			const { live } = (await response.json()) as OnboardingModeApiResponse
-			onboardingLive = live !== false
+			const response = await fetch('/api/onboarding-mode');
+			if (!response.ok) return;
+			const { live } = await response.json() as OnboardingModeApiResponse;
+			onboardingLive = live !== false;
 		} catch {
 			// Best-effort; never break the form over it.
 		} finally {
@@ -67,29 +59,24 @@
 	let fields = $state({ ...blankFields(), email: initialEmail, country: initialCountry })
 	// The chapter-sharing answer with the country it was given for, as on /join:
 	// another country is another question.
-	let chapterChoice = $state<{ country: string; answer: ChapterAnswer } | null>(null)
-	let chapterCountries = $state<string[] | null>(null)
-	const msgs = $derived(getMessages())
-	const chapterQ = $derived(
-		fields.country && COUNTRIES.includes(fields.country) && chapterCountries !== null
-			? chapterQuestion(
-					msgs,
-					'subscribe',
-					fields.country,
-					chapterName(fields.country, chapterCountries)
-				)
-			: null
-	)
-	const chapterAnswer = $derived(
-		chapterChoice?.country === fields.country ? chapterChoice.answer : null
-	)
-	let recordId = $state('')
-	let recordToken = $state('')
+	let chapterChoice = $state<{ country: string; answer: ChapterAnswer } | null>(null);
+
+	let chapterCountries = $state<string[] | null>(null);
+	const msgs = $derived(getMessages());
+
+	const chapterQ = $derived(fields.country && COUNTRIES.includes(fields.country) && chapterCountries !== null
+		? chapterQuestion(msgs, 'subscribe', fields.country, chapterName(fields.country, chapterCountries))
+		: null);
+
+	const chapterAnswer = $derived(chapterChoice?.country === fields.country ? chapterChoice.answer : null);
+	let recordId = $state('');
+	let recordToken = $state('');
 
 	// Bot protection: the shared submit action verifies this token server-side and
 	// 403s without it. Bumped after each submission because tokens are single-use.
-	let turnstileToken = $state('')
-	let turnstileNonce = $state(0)
+	let turnstileToken = $state('');
+
+	let turnstileNonce = $state(0);
 
 	// Navigating to this page from itself — i.e. clicking "Subscribe" in the nav
 	// while already here — would otherwise leave the finished flow on screen and
@@ -98,13 +85,15 @@
 	// Only same-path navigations: arriving from elsewhere mounts this fresh, and
 	// resetting there would wipe the ?subscribe-email hand-off.
 	afterNavigate((nav) => {
-		if (!nav.from || nav.from.url.pathname !== nav.to?.url.pathname) return
-		phase = 'form'
-		recordId = ''
-		recordToken = ''
-		fields = blankFields()
-		chapterChoice = null
-	})
+		if (nav.shallow && nav.type === 'goto') return;
+		if (!nav.from || nav.from.url.pathname !== nav.to?.url.pathname) return;
+
+		phase = 'form';
+		recordId = '';
+		recordToken = '';
+		fields = blankFields();
+		chapterChoice = null;
+	});
 
 	// A newsletter signup elsewhere (e.g. the homepage box) hands off here via
 	// ?subscribe-email=...; that email arrives after mount. Apply it once into an
@@ -112,24 +101,17 @@
 	// snaps back when the visitor clears it to fix a typo.
 	let prefillApplied = $state(false)
 	$effect(() => {
-		if (prefillApplied || !initialEmail) return
-		if (!fields.email) fields.email = initialEmail
-		prefillApplied = true
-	})
+		if (prefillApplied || !initialEmail) return;
+		if (!fields.email) fields.email = initialEmail;
 
-	const canSubmit = $derived(
-		!submitting &&
-			!!fields.fullName.trim() &&
-			!!fields.email.trim() &&
-			!!fields.country.trim() &&
-			!!fields.city.trim() &&
-			// Required wherever it is asked, and it waits for the chapter lookup.
-			(!asksChapterQuestion(fields.country) || !!chapterAnswer) &&
-			// No widget to wait for without a configured site key (e.g. local dev).
-			// Required only when the submission writes, matching the server — otherwise
-			// the widget's failure on a deploy preview would leave this disabled.
-			(!turnstileSiteKey || turnstileToken !== '' || !onboardingLive)
-	)
+		prefillApplied = true;
+	});
+
+	const canSubmit = $derived(!submitting && !!fields.fullName.trim() && !!fields.email.trim() && !!fields.country.trim() && !!fields.city.trim() && (// Required wherever it is asked, and it waits for the chapter lookup.
+	!asksChapterQuestion(fields.country) || !!chapterAnswer) && (// No widget to wait for without a configured site key (e.g. local dev).
+	// Required only when the submission writes, matching the server — otherwise
+	// the widget's failure on a deploy preview would leave this disabled.
+	!turnstileSiteKey || turnstileToken !== '' || !onboardingLive));
 
 	const ERROR_MESSAGE = 'Something went wrong. Please try again.'
 
@@ -166,6 +148,15 @@
 	}
 </script>
 
+<!--
+	SubscribeFlow — the lightweight newsletter entry at /subscribe.
+
+	A single-step signup (global newsletter) with the chapter-sharing question
+	(chapterShare.ts) and an optional Substack opt-in. On success it offers to go
+	further: rather than linking out to /join (which would create a second, duplicate record), it
+	hands off to OnboardingFlow seeded at the intent step with the record already
+	created here, so continuing updates that same record.
+-->
 <!-- The page-template h1 is suppressed (showTitle: false in subscribe.md) so the
      heading can track the phase: "Subscribe" for the signup, "Get involved" once
      they choose to do more (which reuses the /join flow). -->
@@ -252,11 +243,7 @@
 				<ChapterShareQuestion
 					question={chapterQ}
 					level={2}
-					bind:answer={
-						() => chapterAnswer,
-						(answer: ChapterAnswer | null) =>
-							(chapterChoice = answer ? { country: fields.country, answer } : null)
-					}
+					bind:answer={() => chapterAnswer, (answer: ChapterAnswer | null) => chapterChoice = answer ? { country: fields.country, answer } : null}
 				/>
 			{/if}
 
@@ -288,12 +275,17 @@
 	</div>
 {:else if phase === 'thanks'}
 	<div class="subscribe-card thanks">
-		<CheckInbox {msgs} leadIn="Thanks for signing up!" />
+		<CheckInbox msgs={msgs} leadIn="Thanks for signing up!" />
 		<p>
 			Are you interested in doing more? Whether you have five minutes or five hours a week, there's
 			a place for you.
 		</p>
-		<button class="primary" type="button" onclick={() => (phase = 'more')}>Get involved</button>
+
+		<button
+			class="primary"
+			type="button"
+			onclick={() => phase = 'more'}
+		>Get involved</button>
 	</div>
 {:else}
 	<OnboardingFlow
@@ -418,7 +410,7 @@
 		cursor: pointer;
 	}
 
-	.opt-in input[type='checkbox'] {
+	.opt-in input[type="checkbox"] {
 		margin-top: 0.25rem;
 		width: 1.1rem;
 		height: 1.1rem;

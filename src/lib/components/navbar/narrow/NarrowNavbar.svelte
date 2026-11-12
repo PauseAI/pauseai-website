@@ -18,16 +18,16 @@
 		panelExtras?: import('svelte').Snippet<[() => void]>
 	}
 
-	let { items, inverted = false, panelExtras }: Props = $props()
-
-	let open = $state(false)
-
-	let logoAnimate = $derived(localizeHref(page.url.pathname) != '/')
+	let { items, inverted = false, panelExtras }: Props = $props();
+	let open = $state(false);
+	let logoAnimate = $derived(localizeHref(page.url.pathname) != '/');
 
 	// Close the panel after any navigation (link tap, back/forward, etc.).
-	afterNavigate(() => {
-		open = false
-	})
+	afterNavigate(({ shallow, type }) => {
+		if (shallow && type === 'goto') return;
+
+		open = false;
+	});
 
 	function isCurrent(item: NavItem): boolean {
 		return Boolean(
@@ -46,15 +46,14 @@
 
 <nav class:inverted-header={inverted}>
 	<div class="bar">
-		<Link href="/" class="logo">
-			<Logo animate={logoAnimate} {inverted} />
-		</Link>
+		<Link href="/" class="logo"><Logo animate={logoAnimate} inverted={inverted} /></Link>
+
 		<button
 			type="button"
 			class="reset-button hamburger"
 			aria-label="Menu"
 			aria-expanded={open}
-			onclick={() => (open = !open)}
+			onclick={() => open = !open}
 		>
 			{#if open}<X size="1.6rem" />{:else}<Menu size="1.6rem" />{/if}
 		</button>
@@ -104,9 +103,7 @@
 			{/each}
 
 			{#if panelExtras}
-				<div class="extras">
-					{@render panelExtras(() => (open = false))}
-				</div>
+				<div class="extras">{@render panelExtras(() => open = false)}</div>
 			{/if}
 		</div>
 	{/if}
@@ -179,7 +176,7 @@
 		color: var(--brand);
 	}
 
-	.panel :global(.panel-link[aria-current='page']) {
+	.panel :global(.panel-link[aria-current="page"]) {
 		color: var(--brand-subtle);
 	}
 

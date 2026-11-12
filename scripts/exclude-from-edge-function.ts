@@ -1,15 +1,18 @@
-import { readEdgeManifest, searchRenderFunction, writeEdgeManifest } from './utils/utils'
-import { USE_EDGE_FUNCTIONS } from '../svelte.config.js'
+import { readEdgeManifest, searchRenderFunction, writeEdgeManifest } from './utils/utils';
+
+// @migration-task svelte.config was removed; switch to `import { loadConfig } from '@sveltejs/load-config'` to read your config
+import { USE_EDGE_FUNCTIONS } from '../svelte.config.js';
 
 if (!USE_EDGE_FUNCTIONS) {
 	console.log('⏭️  Skipping edge function exclusion - not using edge functions')
 	process.exit(0)
 }
 
-const EXCLUDE_PATHS: `/${string}`[] = ['/pagefind/*']
+const EXCLUDE_PATHS: `/${string}`[] = ['/pagefind/*'];
+const manifest = await readEdgeManifest();
+const renderFunction = searchRenderFunction(manifest)!;
 
-const manifest = await readEdgeManifest()
-const renderFunction = searchRenderFunction(manifest)!
-if (!renderFunction.excludedPath) renderFunction.excludedPath = []
-renderFunction.excludedPath = EXCLUDE_PATHS.concat(renderFunction.excludedPath)
-await writeEdgeManifest(manifest)
+if (!renderFunction.excludedPath) renderFunction.excludedPath = [];
+
+renderFunction.excludedPath = EXCLUDE_PATHS.concat(renderFunction.excludedPath);
+await writeEdgeManifest(manifest);

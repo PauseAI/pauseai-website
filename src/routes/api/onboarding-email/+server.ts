@@ -1,14 +1,11 @@
 export const prerender = false
 
-import { env } from '$env/dynamic/private'
-import { signedVerificationLink } from '$lib/server/emailVerification'
-import {
-	chapterShareFromRequest,
-	renderOnboardingEmail
-} from '$lib/server/onboardingEmail/index.js'
-import { json } from '@sveltejs/kit'
-import { StatusCodes } from 'http-status-codes'
-import type { RequestHandler } from './$types'
+import { ONBOARDING_EMAIL_RENDER_SECRET } from '$app/env/private';
+import { signedVerificationLink } from '$lib/server/emailVerification';
+import { chapterShareFromRequest, renderOnboardingEmail } from '$lib/server/onboardingEmail/index.js';
+import { json } from '@sveltejs/kit';
+import { StatusCodes } from 'http-status-codes';
+import type { RequestHandler } from './$types';
 
 // Render-only endpoint: returns {subject, html, text} for the Airtable onboarding
 // automation to send itself via MailerSend's raw /v1/email call. This endpoint never
@@ -35,9 +32,9 @@ export const POST: RequestHandler = async ({ request }) => {
 	// Dynamic (not static) private env: the secret isn't set in every deploy
 	// environment (e.g. deploy previews), and $env/static/private fails the build
 	// when an imported member is missing rather than resolving it at runtime.
-	const secret = env.ONBOARDING_EMAIL_RENDER_SECRET
-	const authHeader = request.headers.get('authorization') ?? ''
-	const expected = `Bearer ${secret}`
+	const secret = ONBOARDING_EMAIL_RENDER_SECRET;
+	const authHeader = request.headers.get('authorization') ?? '';
+	const expected = `Bearer ${secret}`;
 	// Guard against an unset secret matching an unset header (both `Bearer `).
 	if (!secret || authHeader !== expected) {
 		return new Response('Unauthorized', { status: StatusCodes.UNAUTHORIZED })
@@ -45,7 +42,7 @@ export const POST: RequestHandler = async ({ request }) => {
 
 	let body: RequestBody
 	try {
-		body = (await request.json()) as RequestBody
+		body = await request.json() as RequestBody;
 	} catch {
 		return new Response('Invalid JSON body', { status: StatusCodes.BAD_REQUEST })
 	}
@@ -57,14 +54,11 @@ export const POST: RequestHandler = async ({ request }) => {
 	}
 
 	// It goes into an Airtable read for the signed link, and real ids are alphanumeric.
-	if (!/^[A-Za-z0-9]+$/.test(body.airtable_id)) {
-		return new Response('"airtable_id" must be alphanumeric', { status: StatusCodes.BAD_REQUEST })
+	if (!(/^[A-Za-z0-9]+$/).test(body.airtable_id)) {
+		return new Response('"airtable_id" must be alphanumeric', { status: StatusCodes.BAD_REQUEST });
 	}
 
-	const languages =
-		Array.isArray(body.languages) || typeof body.languages === 'string'
-			? (body.languages as string[] | string)
-			: undefined
+	const languages = Array.isArray(body.languages) || typeof body.languages === 'string' ? body.languages as string[] | string : undefined;
 
 	try {
 		const rendered = await renderOnboardingEmail({

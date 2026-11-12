@@ -1,5 +1,7 @@
-import { copyFile } from 'fs/promises'
-import { USE_EDGE_FUNCTIONS } from '../svelte.config.js'
+import { copyFile } from 'fs/promises';
+
+// @migration-task svelte.config was removed; switch to `import { loadConfig } from '@sveltejs/load-config'` to read your config
+import { USE_EDGE_FUNCTIONS } from '../svelte.config.js';
 
 // adapter-netlify only copies _redirects into the publish directory when it
 // generates lambda functions, so with edge functions we have to do it ourselves

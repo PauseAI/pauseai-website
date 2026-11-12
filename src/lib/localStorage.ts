@@ -1,4 +1,4 @@
-import { browser } from '$app/environment'
+import { browser } from '$app/env';
 
 // Access throws, rather than returning null, where site data is blocked: in some browsers
 // that includes every third-party iframe, so any embed of the site.

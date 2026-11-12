@@ -1,8 +1,9 @@
 // See docs/image-processing.md for the full image-processing architecture.
-import { dev } from '$app/environment'
-import { getPostMetaImageUrl, resolveImageUrl, resolvePicture } from '$lib/image.server'
-import type { ResolvedImage } from '$lib/post-pictures-context.svelte'
-import { importMarkdown } from './markdown'
+import { dev } from '$app/env';
+
+import { getPostMetaImageUrl, resolveImageUrl, resolvePicture } from '$lib/image.server';
+import type { ResolvedImage } from '$lib/post-pictures-context.svelte';
+import { importMarkdown } from './markdown';
 
 export interface PostImages {
 	/** Server-resolved banner image (frontmatter `image`), or null if absent. */

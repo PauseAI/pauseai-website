@@ -1,19 +1,18 @@
 <script lang="ts">
-	import { browser } from '$app/environment'
-	import { onNavigate } from '$app/navigation'
-	import type { PagefindModal, PagefindSearchResult } from '@pagefind/component-ui'
-	import { onMount } from 'svelte'
-	import { searchOpen } from '$lib/stores/searchModal'
+	import { browser } from '$app/env';
+	import { onNavigate } from '$app/navigation';
+	import type { PagefindModal, PagefindSearchResult } from '@pagefind/component-ui';
+	import { onMount } from 'svelte';
+	import { searchOpen } from '$lib/stores/searchModal';
 
 	interface Props {
 		open?: boolean
 	}
 
-	let { open = $bindable(false) }: Props = $props()
-
-	let theme: 'light' | 'dark' = $state('light')
-	let modalEl: PagefindModal | null = $state(null)
-	let ready = $state(false)
+	let { open = $bindable(false) }: Props = $props();
+	let theme: 'light' | 'dark' = $state('light');
+	let modalEl: PagefindModal | null = $state(null);
+	let ready = $state(false);
 
 	$effect(() => {
 		if (browser && open && modalEl && ready) {
@@ -38,12 +37,10 @@
 				searchResultsTyped.results.forEach((result) => {
 					const originalData = result.data
 					result.data = async () => {
-						const data = await originalData()
+						const data = await originalData();
+						const cleanUrl = (url: string) => url.replace(/\/index\.html(?=#|$)/, '/').replace(/\.html(?=#|$)/, '');
 
-						const cleanUrl = (url: string) =>
-							url.replace(/\/index\.html(?=#|$)/, '/').replace(/\.html(?=#|$)/, '')
-
-						data.url = cleanUrl(data.url)
+						data.url = cleanUrl(data.url);
 
 						for (const subResult of data.sub_results || []) {
 							subResult.url = cleanUrl(subResult.url)
@@ -94,21 +91,18 @@
 
 		// Theme synchronization logic for Pagefind's built-in dark mode
 		const setPagefindTheme = () => {
-			const currentTheme =
-				(document.documentElement.getAttribute('color-scheme') as 'light' | 'dark') || 'light'
-			theme = currentTheme
+			const currentTheme = document.documentElement.getAttribute('color-scheme') as 'light' | 'dark' || 'light';
+
+			theme = currentTheme;
 
 			// Component UI specifically looks for data-pf-theme for its built-in styling
 			document.documentElement.setAttribute('data-pf-theme', currentTheme)
 		}
 
-		const observer = new MutationObserver(setPagefindTheme)
-		observer.observe(document.documentElement, {
-			attributes: true,
-			attributeFilter: ['color-scheme']
-		})
+		const observer = new MutationObserver(setPagefindTheme);
 
-		setPagefindTheme()
+		observer.observe(document.documentElement, { attributes: true, attributeFilter: ['color-scheme'] });
+		setPagefindTheme();
 
 		return () => {
 			observer.disconnect()
@@ -116,7 +110,9 @@
 		}
 	})
 
-	onNavigate(() => {
+	onNavigate(({ shallow, type }) => {
+		if (shallow && type === 'goto') return;
+
 		if (modalEl) {
 			// eslint-disable-next-line @typescript-eslint/no-unsafe-call -- Can't resolve PagefindModal
 			modalEl.close()

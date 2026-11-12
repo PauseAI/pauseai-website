@@ -1,7 +1,7 @@
 export const prerender = false
 
-import { AIRTABLE_WRITE_API_KEY } from '$env/static/private'
-import { airtableFormulaString } from '$lib/airtable'
+import { AIRTABLE_WRITE_API_KEY } from '$app/env/private';
+import { airtableFormulaString } from '$lib/airtable';
 import {
 	verificationConfirmedParameter,
 	verificationNeedsClick,
@@ -12,19 +12,20 @@ import {
 	getVerificationSecret,
 	normaliseEmail,
 	verifyVerificationToken
-} from '$lib/server/emailVerification'
-import { MEMBERS_BASE_ID, MEMBERS_TABLE_ID, STATEMENT_TABLE_ID } from '$lib/server/members'
-import { memberRowToVerify } from '$lib/server/mergedMemberRow'
-import { reportError } from '$lib/server/sentry'
-import { statementBackend, verifyStatementInCrm } from '$lib/server/statementCrm'
-import { json } from '@sveltejs/kit'
-import Airtable from 'airtable'
-import { StatusCodes } from 'http-status-codes'
-import type { RequestHandler } from './$types'
+} from '$lib/server/emailVerification';
 
-const TABLE_PARAMETER = 'table'
-const TOKEN_PARAMETER = 'token'
-const DEFAULT_TABLE = 'join'
+import { MEMBERS_BASE_ID, MEMBERS_TABLE_ID, STATEMENT_TABLE_ID } from '$lib/server/members';
+import { memberRowToVerify } from '$lib/server/mergedMemberRow';
+import { reportError } from '$lib/server/sentry';
+import { statementBackend, verifyStatementInCrm } from '$lib/server/statementCrm';
+import { json } from '@sveltejs/kit';
+import Airtable from 'airtable';
+import { StatusCodes } from 'http-status-codes';
+import type { RequestHandler } from './$types';
+
+const TABLE_PARAMETER = 'table';
+const TOKEN_PARAMETER = 'token';
+const DEFAULT_TABLE = 'join';
 
 const VERIFICATION_TABLES = new Map([
 	[
@@ -60,8 +61,7 @@ const CRM_STATEMENT_KEY = /^s\d+$/
  * a rollback to Airtable. With the CiviCRM backend every statement link goes there, old
  * Airtable ones included: CiviCRM holds the imported rows and judges those links itself.
  */
-const verifiesInCrm = (key: string, token: string) =>
-	(CRM_STATEMENT_KEY.test(key) && token !== '') || statementBackend() === 'civicrm'
+const verifiesInCrm = (key: string, token: string) => CRM_STATEMENT_KEY.test(key) && token !== '' || statementBackend() === 'civicrm';
 
 async function verifyInCrm(key: string, token: string): Promise<Response> {
 	switch (await verifyStatementInCrm(key, token)) {
@@ -93,10 +93,9 @@ export const POST: RequestHandler = async ({ request }) => {
 			status: StatusCodes.BAD_REQUEST
 		})
 	}
-	if (!/^[a-zA-Z0-9]+$/.test(key)) {
-		return new Response(`Parameter "${verificationParameter}" must be alphanumeric`, {
-			status: StatusCodes.BAD_REQUEST
-		})
+
+	if (!(/^[a-zA-Z0-9]+$/).test(key)) {
+		return new Response(`Parameter "${verificationParameter}" must be alphanumeric`, { status: StatusCodes.BAD_REQUEST });
 	}
 
 	const tableName = params.get(TABLE_PARAMETER) || DEFAULT_TABLE
@@ -125,13 +124,14 @@ export const POST: RequestHandler = async ({ request }) => {
 
 	const records = await table
 		.select({
-			filterByFormula: `{${tableConfig.keyFieldName}} = ${airtableFormulaString(key)}`
-		})
-		.firstPage()
-	if (!records.length) return new Response('Record not found', { status: StatusCodes.NOT_FOUND })
-	const named = records[0]
+		filterByFormula: `{${tableConfig.keyFieldName}} = ${airtableFormulaString(key)}`
+	}).firstPage();
 
-	let recordId = named.id
+	if (!records.length) return new Response('Record not found', { status: StatusCodes.NOT_FOUND });
+
+	const named = records[0];
+	let recordId = named.id;
+
 	// The address a valid token was checked against, when the link carried one.
 	let signedEmail: string | undefined
 	if (tableConfig.isMembers) {

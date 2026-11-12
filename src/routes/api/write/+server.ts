@@ -1,10 +1,10 @@
-import { error, json } from '@sveltejs/kit'
-import { env } from '$env/dynamic/private'
-import Anthropic from '@anthropic-ai/sdk'
-import type { RequestHandler } from './$types'
+import { error, json } from '@sveltejs/kit';
+import { ANTHROPIC_API_KEY_FOR_WRITE as ANTHROPIC_API_KEY_FOR_WRITE_ENV } from '$app/env/private';
+import Anthropic from '@anthropic-ai/sdk';
+import type { RequestHandler } from './$types';
 
 // Safely access the API key, will be undefined if not set
-const ANTHROPIC_API_KEY_FOR_WRITE = env.ANTHROPIC_API_KEY_FOR_WRITE || undefined
+const ANTHROPIC_API_KEY_FOR_WRITE = ANTHROPIC_API_KEY_FOR_WRITE_ENV || undefined;
 
 // Flag to track if API is available
 const IS_API_AVAILABLE = !!ANTHROPIC_API_KEY_FOR_WRITE
@@ -44,16 +44,11 @@ export type ChatResponse = {
 	information?: string // Processed information for form fields
 }
 
-export type Message = {
-	role: 'user' | 'assistant' | 'system'
-	content: string
-}
+export type Message = { role: 'user' | 'assistant' | 'system'; content: string };
+export type WriteApiAvailabilityResponse = { apiAvailable: boolean };
 
-export type WriteApiAvailabilityResponse = {
-	apiAvailable: boolean
-}
+const System_Prompts: { [id: string]: string } = {};
 
-const System_Prompts: { [id: string]: string } = {}
 System_Prompts['Basic'] = `You are a helpful AI assistant.
 
 Note: Some fields in the information may begin with a robot emoji (🤖). This indicates the field was automatically generated during research. You can use this information normally, just ignore the emoji marker.`
@@ -278,16 +273,17 @@ function generateProgressString(state: WriteState): string {
 	}
 
 	// Remaining steps - filter out any that are in completed steps or current step
-	const completedAndCurrentSteps = [...state.completedSteps.map((s) => s.name), state.currentStep]
-	const filteredRemainingSteps = state.remainingSteps.filter(
-		(step) => !completedAndCurrentSteps.includes(step)
-	)
-	lis = lis.concat(
-		filteredRemainingSteps.map((step) => `<li class="pending">${stepDescriptions[step]}</li>`)
-	)
+	const completedAndCurrentSteps = [
+		...state.completedSteps.map((s) => s.name),
+		state.currentStep
+	];
 
-	const listItems = lis.join('')
-	const totalTime = state.completedSteps.reduce((sum, step) => sum + step.durationSec, 0)
+	const filteredRemainingSteps = state.remainingSteps.filter((step) => !completedAndCurrentSteps.includes(step));
+
+	lis = lis.concat(filteredRemainingSteps.map((step) => `<li class="pending">${stepDescriptions[step]}</li>`));
+
+	const listItems = lis.join('');
+	const totalTime = state.completedSteps.reduce((sum, step) => sum + step.durationSec, 0);
 
 	if (state.nextStep === null) {
 		// Process is complete
@@ -407,8 +403,9 @@ async function processStep(state: WriteState): Promise<WriteState> {
 		}
 	}
 
-	const currentStep = state.nextStep as StepName
-	state.currentStep = currentStep
+	const currentStep = state.nextStep as StepName;
+
+	state.currentStep = currentStep;
 
 	// Update remaining steps - remove current step from remaining
 	state.remainingSteps = state.remainingSteps.filter((step) => step !== currentStep)
@@ -427,11 +424,9 @@ async function processStep(state: WriteState): Promise<WriteState> {
 	}
 
 	// Update state with results - current step is now completed
-	state.step = currentStep
-	state.completedSteps.push({
-		name: currentStep,
-		durationSec: result.durationSec
-	})
+	state.step = currentStep;
+
+	state.completedSteps.push({ name: currentStep, durationSec: result.durationSec });
 
 	// Set next step
 	const allSteps: StepName[] = [
@@ -441,8 +436,9 @@ async function processStep(state: WriteState): Promise<WriteState> {
 		'firstEdit',
 		'toneEdit',
 		'finalEdit'
-	]
-	const currentIndex = allSteps.indexOf(currentStep)
+	];
+
+	const currentIndex = allSteps.indexOf(currentStep);
 
 	if (currentIndex !== -1 && currentIndex < allSteps.length - 1) {
 		state.nextStep = allSteps[currentIndex + 1]
@@ -472,8 +468,9 @@ export const POST: RequestHandler = async ({ fetch, request }) => {
 		const requestData = await request.json()
 
 		// Check if this is a continuation of an existing process
-		let state: WriteState
-		let stateToken = null
+		let state: WriteState;
+
+		let stateToken = null;
 
 		if (requestData.stateToken) {
 			// Continue an existing process
@@ -492,8 +489,9 @@ export const POST: RequestHandler = async ({ fetch, request }) => {
 			console.log(`${pencil} write: Starting new email generation`)
 
 			// Get the user input from the first message
-			const messages = requestData
-			const info = messages[0]?.content
+			const messages = requestData;
+
+			const info = messages[0]?.content;
 
 			if (!info || info === '') {
 				return json({

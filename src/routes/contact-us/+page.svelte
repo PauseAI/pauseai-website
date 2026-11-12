@@ -1,23 +1,21 @@
 <script lang="ts">
-	import { browser } from '$app/environment'
-	import { enhance } from '$app/forms'
-	import { toast } from 'svelte-french-toast'
-	import { page } from '$app/state'
-	import { onMount } from 'svelte'
-	import Link from '$lib/components/Link.svelte'
-	import PostMeta from '$lib/components/PostMeta.svelte'
-	import Turnstile from '$lib/components/Turnstile.svelte'
-	import { turnstileSiteKey } from '$lib/turnstile'
-	import { meta } from './meta'
-	import { partnershipOptions } from './partnership-options'
-	import type { ActionResult } from '@sveltejs/kit'
+	import { browser } from '$app/env';
+	import { enhance, type ActionResult } from '$app/forms';
+	import { toast } from 'svelte-french-toast';
+	import { page } from '$app/state';
+	import { onMount } from 'svelte';
+	import Link from '$lib/components/Link.svelte';
+	import PostMeta from '$lib/components/PostMeta.svelte';
+	import Turnstile from '$lib/components/Turnstile.svelte';
+	import { turnstileSiteKey } from '$lib/turnstile';
+	import { meta } from './meta';
+	import { partnershipOptions } from './partnership-options';
 
-	const { title, description } = meta
-
-	let activeTab: 'media' | 'partnerships' | 'feedback' = $state('partnerships')
-	let loading = $state(false)
-	let honeypot = $state('')
-	let turnstileToken = $state('')
+	const { title, description } = meta;
+	let activeTab: 'media' | 'partnerships' | 'feedback' = $state('partnerships');
+	let loading = $state(false);
+	let honeypot = $state('');
+	let turnstileToken = $state('');
 
 	// Bumped after each submission to remount the widget: Turnstile tokens are
 	// single-use, so a resubmit with the same token would be rejected.
@@ -86,7 +84,7 @@
 				try {
 					const parsed: unknown = JSON.parse(saved)
 					if (isRecord(parsed)) {
-						formData = { ...formData, ...(parsed as Partial<ContactFormState>) }
+						formData = { ...formData, ...parsed as Partial<ContactFormState> };
 					}
 				} catch (e) {
 					console.error('Failed to parse saved form data', e)
@@ -114,13 +112,17 @@
 			}
 		}
 
-		loading = true
-		return async ({ result, update }: { result: ActionResult; update: () => Promise<void> }) => {
-			loading = false
+		loading = true;
+
+		return async (
+			{ result, update }: { result: ActionResult; update: () => Promise<void> }
+		) => {
+			loading = false;
 
 			// The token has now been spent (or rejected) either way — get a fresh one.
-			turnstileToken = ''
-			turnstileNonce += 1
+			turnstileToken = '';
+
+			turnstileNonce += 1;
 
 			if (result.type === 'success') {
 				toast.success("Thank you! We've received your message.")
@@ -155,7 +157,7 @@
 	}
 </script>
 
-<PostMeta {title} {description} />
+<PostMeta title={title} description={description} />
 
 <div class="contact-page">
 	<h1>{title}</h1>
@@ -167,24 +169,20 @@
 		<button
 			class="tab-button"
 			class:active={activeTab === 'partnerships'}
-			onclick={() => (activeTab = 'partnerships')}
-		>
-			Partnerships
-		</button>
+			onclick={() => activeTab = 'partnerships'}
+		>Partnerships</button>
+
 		<button
 			class="tab-button"
 			class:active={activeTab === 'media'}
-			onclick={() => (activeTab = 'media')}
-		>
-			Press & Media
-		</button>
+			onclick={() => activeTab = 'media'}
+		>Press & Media</button>
+
 		<button
 			class="tab-button"
 			class:active={activeTab === 'feedback'}
-			onclick={() => (activeTab = 'feedback')}
-		>
-			Feedback
-		</button>
+			onclick={() => activeTab = 'feedback'}
+		>Feedback</button>
 	</div>
 
 	<div class="form-container">
@@ -563,7 +561,7 @@
 		resize: vertical;
 	}
 
-	button[type='submit'] {
+	button[type="submit"] {
 		background-color: var(--brand);
 		color: white;
 		border: none;
@@ -578,11 +576,11 @@
 		margin-top: 1rem;
 	}
 
-	button[type='submit']:hover:not(:disabled) {
+	button[type="submit"]:hover:not(:disabled) {
 		opacity: 0.9;
 	}
 
-	button[type='submit']:disabled {
+	button[type="submit"]:disabled {
 		opacity: 0.6;
 		cursor: not-allowed;
 	}

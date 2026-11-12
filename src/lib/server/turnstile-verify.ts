@@ -1,7 +1,7 @@
-import { dev } from '$app/environment'
-import { env } from '$env/dynamic/private'
-import { reportError } from '$lib/server/sentry'
-import { TURNSTILE_FIELD } from '$lib/turnstile'
+import { dev } from '$app/env';
+import { TURNSTILE_SECRET_KEY } from '$app/env/private';
+import { reportError } from '$lib/server/sentry';
+import { TURNSTILE_FIELD } from '$lib/turnstile';
 
 const TURNSTILE_VERIFY_URL = 'https://challenges.cloudflare.com/turnstile/v0/siteverify'
 // Leaves the rest of an edge function's response limit to the work the check guards. A
@@ -10,15 +10,14 @@ export const TURNSTILE_TIMEOUT_MS = 5000
 
 // Cloudflare's codes for a fault on the server side, not with the person's token. Telling
 // them to retry would loop forever on our wrong secret, with nobody alerted.
-const MISCONFIGURED_CODES = ['missing-input-secret', 'invalid-input-secret']
-const CLOUDFLARE_FAULT_CODES = ['internal-error']
-const UNAVAILABLE_MESSAGE =
-	'Spam protection is unavailable. Please email contact@pauseai.info instead.'
-const RETRY_LATER_MESSAGE = 'Could not complete the anti-spam check. Please try again in a moment.'
+const MISCONFIGURED_CODES = ['missing-input-secret', 'invalid-input-secret'];
 
-const errorCodes = (result: TurnstileVerification): string[] =>
-	Array.isArray(result['error-codes'])
-		? result['error-codes'].filter((code): code is string => typeof code === 'string')
+const CLOUDFLARE_FAULT_CODES = ['internal-error'];
+const UNAVAILABLE_MESSAGE = 'Spam protection is unavailable. Please email contact@pauseai.info instead.';
+const RETRY_LATER_MESSAGE = 'Could not complete the anti-spam check. Please try again in a moment.';
+
+const errorCodes = (result: TurnstileVerification): string[] => Array.isArray(result['error-codes'])
+	? result['error-codes'].filter((code): code is string => typeof code === 'string')
 		: []
 
 /**
@@ -48,10 +47,11 @@ function getFormString(formData: FormData, field: string): string | undefined {
 export async function verifyTurnstile(
 	token: string | undefined,
 	expectedHostname: string | readonly string[]
-): Promise<{ ok: true } | { ok: false; message: string; unavailable?: true }> {
-	const expectedHostnames =
-		typeof expectedHostname === 'string' ? [expectedHostname] : expectedHostname
-	const secret = env.TURNSTILE_SECRET_KEY
+): Promise<
+	{ ok: true } |
+	{ ok: false; message: string; unavailable?: true }> {
+	const expectedHostnames = typeof expectedHostname === 'string' ? [expectedHostname] : expectedHostname;
+	const secret = TURNSTILE_SECRET_KEY;
 
 	if (!secret) {
 		// `dev` (not isDev()) on purpose: it is compiled to a constant false in any
@@ -153,8 +153,9 @@ export async function checkNotSpam(
 	// Hidden field that only an automated form-filler completes.
 	if (getFormString(data, 'nickname')) return { drop: true }
 
-	const verification = await verifyTurnstile(getFormString(data, TURNSTILE_FIELD), expectedHostname)
-	if (!verification.ok) return { drop: false, message: verification.message }
+	const verification = await verifyTurnstile(getFormString(data, TURNSTILE_FIELD), expectedHostname);
 
-	return { drop: false }
+	if (!verification.ok) return { drop: false, message: verification.message };
+
+	return { drop: false };
 }

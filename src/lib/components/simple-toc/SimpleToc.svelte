@@ -1,8 +1,8 @@
 <script lang="ts">
-	import { browser } from '$app/environment'
-	import { onMount } from 'svelte'
-	import * as m from '$lib/paraglide/messages.js'
-	import Node from './Node.svelte'
+	import { browser } from '$app/env';
+	import { onMount } from 'svelte';
+	import * as m from '$lib/paraglide/messages.js';
+	import Node from './Node.svelte';
 
 	let heading: HTMLHeadingElement | undefined = $state()
 	let headingsBelow: Element[] | undefined = $state()

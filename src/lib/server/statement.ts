@@ -6,12 +6,12 @@
 // an address has already signed.
 //
 // Emails and other submitted values must never reach a log or a response.
-import { dev } from '$app/environment'
-import { env } from '$env/dynamic/private'
-import { airtableFormulaString, createRecord, hasMatchingRecord } from '$lib/airtable'
-import { COUNTRIES } from '$lib/components/onboarding/options'
-import { normaliseEmail } from '$lib/server/emailVerification'
-import { MEMBERS_BASE_ID, STATEMENT_TABLE_ID } from '$lib/server/members'
+import { dev } from '$app/env';
+import { STATEMENT_SIGNING_LIVE } from '$app/env/private';
+import { airtableFormulaString, createRecord, hasMatchingRecord } from '$lib/airtable';
+import { COUNTRIES } from '$lib/components/onboarding/options';
+import { normaliseEmail } from '$lib/server/emailVerification';
+import { MEMBERS_BASE_ID, STATEMENT_TABLE_ID } from '$lib/server/members';
 import {
 	peekRateLimit,
 	rateLimitKeyForAddress,
@@ -23,14 +23,18 @@ import {
 	signInCrm,
 	statementBackend,
 	type Signature
-} from '$lib/server/statementCrm'
-import { isTestHostname } from '$lib/server/testHost'
-import { verifyTurnstile } from '$lib/server/turnstile-verify'
-import { StatusCodes } from 'http-status-codes'
+} from '$lib/server/statementCrm';
 
-export const MAX_NAME_LENGTH = 200
-const MAX_EMAIL_LENGTH = 254
-export const MAX_BIO_LENGTH = 2000
+import { isTestHostname } from '$lib/server/testHost';
+import { verifyTurnstile } from '$lib/server/turnstile-verify';
+import { StatusCodes } from 'http-status-codes';
+
+export const MAX_NAME_LENGTH = 200;
+
+const MAX_EMAIL_LENGTH = 254;
+
+export const MAX_BIO_LENGTH = 2000;
+
 // Roomy enough for the longest valid bio with every character escaped, plus a Turnstile token.
 const MAX_BODY_BYTES = 32 * 1024
 
@@ -60,9 +64,16 @@ const REPEAT_WINDOW_DAYS = 30
 // does not close it: each probe needs its own solved Turnstile token.
 const REPEAT_DELAY_MS = { minimum: 150, spread: 300 }
 
-export type SignatureField = 'name' | 'email' | 'country' | 'bio' | 'private' | 'language'
-export type SignatureFieldError = 'required' | 'invalid' | 'too_long'
-export type SignatureErrors = Partial<Record<SignatureField, SignatureFieldError>>
+export type SignatureField = 
+	'name' |
+	'email' |
+	'country' |
+	'bio' |
+	'private' |
+	'language';
+
+export type SignatureFieldError = 'required' | 'invalid' | 'too_long';
+export type SignatureErrors = Partial<Record<SignatureField, SignatureFieldError>>;
 
 /** Untrusted values, from a form post or a JSON body. */
 export type SignatureInput = Partial<Record<SignatureField | 'honeypot', unknown>>
@@ -70,15 +81,15 @@ export type SignatureInput = Partial<Record<SignatureField | 'honeypot', unknown
 const isSignatureLanguage = (value: unknown): value is Signature['language'] =>
 	(SIGNATURE_LANGUAGES as readonly unknown[]).includes(value)
 
-export type SignResult =
-	| { status: 'accepted' }
-	| { status: 'dry_run' }
-	| { status: 'invalid'; errors: SignatureErrors }
-	| { status: 'unavailable' }
-	| { status: 'turnstile_failed'; message: string }
-	| { status: 'turnstile_unavailable'; message: string }
-	| { status: 'rate_limited'; retryAfter: number }
-	| { status: 'failed' }
+export type SignResult = 
+	{ status: 'accepted' } |
+	{ status: 'dry_run' } |
+	{ status: 'invalid'; errors: SignatureErrors } |
+	{ status: 'unavailable' } |
+	{ status: 'turnstile_failed'; message: string } |
+	{ status: 'turnstile_unavailable'; message: string } |
+	{ status: 'rate_limited'; retryAfter: number } |
+	{ status: 'failed' };
 
 /** The HTTP status each result is answered with, by the form action and the public endpoint. */
 export const SIGN_RESULT_HTTP_STATUS: Record<SignResult['status'], number> = {
@@ -103,24 +114,24 @@ export type SigningMode = 'live' | 'dry_run' | 'off'
  *   nothing saved would lose the signature without anyone noticing
  */
 export function signingMode(hostname: string): SigningMode {
-	if (env.STATEMENT_SIGNING_LIVE === 'true') return 'live'
-	return dev || isTestHostname(hostname) ? 'dry_run' : 'off'
+	if (STATEMENT_SIGNING_LIVE === 'true') return 'live';
+	return dev || isTestHostname(hostname) ? 'dry_run' : 'off';
 }
 
-const asText = (value: unknown) => (typeof value === 'string' ? value.trim() : '')
+const asText = (value: unknown) => typeof value === 'string' ? value.trim() : '';
+const CONTROL_CHARACTER = /\p{Cc}/u;
 
-const CONTROL_CHARACTER = /\p{Cc}/u
 // Everything \p{Cc} covers except the tab and line breaks a multi-line bio can hold.
 const CONTROL_CHARACTER_IN_TEXT = /[^\P{Cc}\t\n\r]/u
 // Overrides, embeddings and isolates, which can make text display as something else. Not
 // the left-to-right and right-to-left marks or zero-width joiners real text in Arabic,
 // Hebrew and Indic scripts uses.
-const BIDI_CONTROL = /[‪-‮⁦-⁩]/u
-const EMAIL = /^[^\s@,;<>"\p{Cc}‪-‮⁦-⁩]+@[^\s@,;<>"\p{Cc}‪-‮⁦-⁩]+\.[^\s@,;<>"\p{Cc}‪-‮⁦-⁩]+$/u
+const BIDI_CONTROL = /[‪-‮⁦-⁩]/u;
 
-const URL_SCHEME = /[a-z][a-z0-9+.-]*:\/\/|\b(?:https?|mailto|ftp):/iu
-const IP_ADDRESS = /\b\d{1,3}(?:\.\d{1,3}){3}\b/u
-const TITLE = /^(?:dr|mr|mrs|ms|mx|st|jr|sr|prof|rev)$/iu
+const EMAIL = /^[^\s@,;<>"\p{Cc}‪-‮⁦-⁩]+@[^\s@,;<>"\p{Cc}‪-‮⁦-⁩]+\.[^\s@,;<>"\p{Cc}‪-‮⁦-⁩]+$/u;
+const URL_SCHEME = /[a-z][a-z0-9+.-]*:\/\/|\b(?:https?|mailto|ftp):/iu;
+const IP_ADDRESS = /\b\d{1,3}(?:\.\d{1,3}){3}\b/u;
+const TITLE = /^(?:dr|mr|mrs|ms|mx|st|jr|sr|prof|rev)$/iu;
 
 /**
  * A word ending in two or more characters, a dot and two or more letters: example.com, or
@@ -129,18 +140,13 @@ const TITLE = /^(?:dr|mr|mrs|ms|mx|st|jr|sr|prof|rev)$/iu
  * they are let through by name, at the cost of a domain like dr.com.
  */
 function looksLikeDomain(word: string): boolean {
-	const labels = word
-		.split(/[/?#:]/)[0]
-		.replace(/^[^\p{L}\p{N}]+|[^\p{L}\p{N}]+$/gu, '')
-		.split(/[.。．｡]/u)
-	if (labels.length < 2) return false
-	const [last, secondLast] = [labels[labels.length - 1], labels[labels.length - 2]]
-	return (
-		/^\p{L}{2,}$/u.test(last) &&
-		secondLast.length >= 2 &&
-		!TITLE.test(secondLast) &&
-		!TITLE.test(last)
-	)
+	const labels = word.split(/[/?#:]/)[0].replace(/^[^\p{L}\p{N}]+|[^\p{L}\p{N}]+$/gu, '').split(/[.。．｡]/u);
+
+	if (labels.length < 2) return false;
+
+	const [last, secondLast] = [labels[labels.length - 1], labels[labels.length - 2]];
+
+	return (/^\p{L}{2,}$/u).test(last) && secondLast.length >= 2 && !TITLE.test(secondLast) && !TITLE.test(last);
 }
 
 // The name may be quoted in the verification email, where a link would make that email a
@@ -148,29 +154,26 @@ function looksLikeDomain(word: string): boolean {
 const containsUrl = (name: string) =>
 	URL_SCHEME.test(name) || IP_ADDRESS.test(name) || name.split(/[\s,;]+/).some(looksLikeDomain)
 
-function validateSignature(
-	input: SignatureInput
-): { ok: true; signature: Signature } | { ok: false; errors: SignatureErrors } {
-	const errors: SignatureErrors = {}
+function validateSignature(input: SignatureInput): 
+	{ ok: true; signature: Signature } |
+	{ ok: false; errors: SignatureErrors } {
+	const errors: SignatureErrors = {};
+	const rawName = asText(input.name);
+	const name = rawName.replace(/\s+/g, ' ');
 
-	const rawName = asText(input.name)
-	const name = rawName.replace(/\s+/g, ' ')
-	if (!name) errors.name = 'required'
-	else if (name.length > MAX_NAME_LENGTH) errors.name = 'too_long'
-	else if (CONTROL_CHARACTER.test(rawName) || BIDI_CONTROL.test(name) || containsUrl(name)) {
-		errors.name = 'invalid'
+	if (!name) errors.name = 'required'; else if (name.length > MAX_NAME_LENGTH) errors.name = 'too_long'; else if (CONTROL_CHARACTER.test(rawName) || BIDI_CONTROL.test(name) || containsUrl(name)) {
+		errors.name = 'invalid';
 	}
 
-	const email = asText(input.email)
-	if (!email) errors.email = 'required'
-	else if (email.length > MAX_EMAIL_LENGTH) errors.email = 'too_long'
-	else if (!EMAIL.test(email)) errors.email = 'invalid'
+	const email = asText(input.email);
+
+	if (!email) errors.email = 'required'; else if (email.length > MAX_EMAIL_LENGTH) errors.email = 'too_long'; else if (!EMAIL.test(email)) errors.email = 'invalid';
 
 	// Airtable's country field is a single select, and createRecord's typecast would add
 	// any new value as an option, so only names from the shared list get through.
-	const country = asText(input.country)
-	if (!country) errors.country = 'required'
-	else if (!COUNTRIES.includes(country)) errors.country = 'invalid'
+	const country = asText(input.country);
+
+	if (!country) errors.country = 'required'; else if (!COUNTRIES.includes(country)) errors.country = 'invalid';
 
 	if (input.bio !== undefined && input.bio !== null && typeof input.bio !== 'string') {
 		errors.bio = 'invalid'
@@ -240,7 +243,7 @@ async function saveSignature(signature: Signature): Promise<boolean> {
 			email: signature.email,
 			country: signature.country,
 			private: signature.private,
-			...(signature.bio ? { bio: signature.bio } : {})
+			...signature.bio ? { bio: signature.bio } : {}
 		},
 		{ redactErrors: true }
 	)
@@ -285,8 +288,9 @@ export async function signStatement(
 
 	if (input.honeypot) return { status: 'accepted' }
 
-	const validated = validateSignature(input)
-	if (!validated.ok) return { status: 'invalid', errors: validated.errors }
+	const validated = validateSignature(input);
+
+	if (!validated.ok) return { status: 'invalid', errors: validated.errors };
 
 	if (mode === 'dry_run') {
 		console.log('[statement] dry run: signature checked, not saved, and no email sent')
@@ -302,19 +306,19 @@ export async function signStatement(
 		}
 	}
 
-	const sender = senderKey(context.getClientAddress)
-	const retryAfter =
-		peekRateLimit(sender, SAVE_LIMIT.saves) ??
-		takeRateLimit('statement:overall', OVERALL_LIMIT.attempts, OVERALL_LIMIT.windowMs)
-	if (retryAfter !== null) return { status: 'rate_limited', retryAfter }
+	const sender = senderKey(context.getClientAddress);
+	const retryAfter = peekRateLimit(sender, SAVE_LIMIT.saves) ?? takeRateLimit('statement:overall', OVERALL_LIMIT.attempts, OVERALL_LIMIT.windowMs);
+
+	if (retryAfter !== null) return { status: 'rate_limited', retryAfter };
 
 	if (statementBackend() === 'civicrm') {
 		const saved = await signInCrm(validated.signature, { deadline, platform: context.platform })
 		// CiviCRM's refusal names no field, and the checks above are meant to catch whatever
 		// it would refuse, so this answers the request as invalid without blaming a field.
-		if (saved === 'refused') return { status: 'invalid', errors: {} }
-		if (saved === 'failed') return { status: 'failed' }
-	} else if (!(await saveSignature(validated.signature))) return { status: 'failed' }
+		if (saved === 'refused') return { status: 'invalid', errors: {} };
+
+		if (saved === 'failed') return { status: 'failed' };
+	} else if (!await saveSignature(validated.signature)) return { status: 'failed' };
 
 	// A skipped repeat counts too, or the limit would reveal which addresses have signed.
 	recordRateLimit(sender, SAVE_LIMIT.windowMs)
@@ -323,17 +327,22 @@ export async function signStatement(
 
 /** Reads a request body, or returns null once it passes MAX_BODY_BYTES. */
 export async function readLimitedBody(request: Request): Promise<Uint8Array | null> {
-	const declared = Number(request.headers.get('content-length'))
-	if (declared > MAX_BODY_BYTES) return null
-	if (!request.body) return new Uint8Array()
+	const declared = Number(request.headers.get('content-length'));
 
-	const reader = request.body.getReader()
-	const chunks: Uint8Array[] = []
-	let total = 0
-	for (;;) {
-		const { done, value } = await reader.read()
-		if (done) break
-		total += value.byteLength
+	if (declared > MAX_BODY_BYTES) return null;
+	if (!request.body) return new Uint8Array();
+
+	const reader = request.body.getReader();
+	const chunks: Uint8Array[] = [];
+	let total = 0;
+
+	for (; ; ) {
+		const { done, value } = await reader.read();
+
+		if (done) break;
+
+		total += value.byteLength;
+
 		if (total > MAX_BODY_BYTES) {
 			await reader.cancel()
 			return null

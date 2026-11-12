@@ -1,40 +1,40 @@
 <script lang="ts">
-	import type { GeoApiResponse } from '$api/geo/+server'
-	import { browser } from '$app/environment'
-	import { page } from '$app/state'
-	import Banner from '$lib/components/Banner.svelte'
-	import Hero from '$lib/components/Hero.svelte'
-	import Link from '$lib/components/Link.svelte'
-	import LinkWithoutIcon from '$lib/components/LinkWithoutIcon.svelte'
-	import NearbyEvent from '$lib/components/NearbyEvent.svelte'
-	import PreloadFonts from '$lib/components/PreloadFonts.svelte'
-	import SearchModal from '$lib/components/SearchModal.svelte'
-	import Toc from '$lib/components/Toc.svelte'
-	import UsVisitorModal from '$lib/components/UsVisitorModal.svelte'
-	import { url as rootUrl } from '$lib/config'
-	import { searchOpen } from '$lib/stores/searchModal'
-	import { deLocalizeHref } from '$lib/paraglide/runtime'
-	import type { BannerRule } from '$lib/types'
-	import '@fontsource/roboto-slab/400.css'
-	import '@fontsource/roboto-slab/500.css'
-	import '@fontsource/roboto-slab/700.css'
-	import robotoSlabLatin400 from '@fontsource/roboto-slab/files/roboto-slab-latin-400-normal.woff2'
-	import '@fontsource/saira-condensed/700.css'
-	import sairaCondensedLatin700 from '@fontsource/saira-condensed/files/saira-condensed-latin-700-normal.woff2'
-	import { ProgressBar } from '@prgm/sveltekit-progress-bar'
-	import { Cookie, SetCookie } from '@remix-run/headers'
-	import { onMount } from 'svelte'
-	import { Toaster } from 'svelte-french-toast'
-	import '../styles/print.css'
-	import '../styles/styles.css'
-	import Footer from './footer.svelte'
-	import Header from './header.svelte'
-	import PageTransition from './transition.svelte'
-	import bannerSelection from './banner-selection.js?raw'
-	import themeSelection from './theme-selection.js?raw'
-	import hydrationAwareClick from './hydration-aware-click.js?raw'
-	import { inDateRange } from './inDateRange'
-	import type { PageData } from './$types'
+	import type { GeoApiResponse } from '$api/geo/+server';
+	import { browser } from '$app/env';
+	import { page } from '$app/state';
+	import Banner from '$lib/components/Banner.svelte';
+	import Hero from '$lib/components/Hero.svelte';
+	import Link from '$lib/components/Link.svelte';
+	import LinkWithoutIcon from '$lib/components/LinkWithoutIcon.svelte';
+	import NearbyEvent from '$lib/components/NearbyEvent.svelte';
+	import PreloadFonts from '$lib/components/PreloadFonts.svelte';
+	import SearchModal from '$lib/components/SearchModal.svelte';
+	import Toc from '$lib/components/Toc.svelte';
+	import UsVisitorModal from '$lib/components/UsVisitorModal.svelte';
+	import { url as rootUrl } from '$lib/config';
+	import { searchOpen } from '$lib/stores/searchModal';
+	import { deLocalizeHref } from '$lib/paraglide/runtime';
+	import type { BannerRule } from '$lib/types';
+	import '@fontsource/roboto-slab/400.css';
+	import '@fontsource/roboto-slab/500.css';
+	import '@fontsource/roboto-slab/700.css';
+	import robotoSlabLatin400 from '@fontsource/roboto-slab/files/roboto-slab-latin-400-normal.woff2';
+	import '@fontsource/saira-condensed/700.css';
+	import sairaCondensedLatin700 from '@fontsource/saira-condensed/files/saira-condensed-latin-700-normal.woff2';
+	import { ProgressBar } from '@prgm/sveltekit-progress-bar';
+	import { Cookie, SetCookie } from '@remix-run/headers';
+	import { onMount } from 'svelte';
+	import { Toaster } from 'svelte-french-toast';
+	import '../styles/print.css';
+	import '../styles/styles.css';
+	import Footer from './footer.svelte';
+	import Header from './header.svelte';
+	import PageTransition from './transition.svelte';
+	import bannerSelection from './banner-selection.js?raw';
+	import themeSelection from './theme-selection.js?raw';
+	import hydrationAwareClick from './hydration-aware-click.js?raw';
+	import { inDateRange } from './inDateRange';
+	import type { PageData } from './$types';
 
 	interface Props {
 		data: PageData
@@ -74,23 +74,25 @@
 			countries: null,
 			dateRange: [null, '2026-09-19']
 		}
-	]
-	const campaignBannerRules: BannerRule[] = []
+	];
 
-	let eventFound: boolean = $state(false)
-	let geoForNearbyEvent: GeoApiResponse | null = $state(null)
-	let visitorCountry: string | null = $state(null)
-	let hero = $derived(deLocalizeHref(page.url.pathname) === '/')
-	let embed = $derived(page.route.id?.startsWith('/embed/') ?? false)
+	const campaignBannerRules: BannerRule[] = [];
+	let eventFound: boolean = $state(false);
+	let geoForNearbyEvent: GeoApiResponse | null = $state(null);
+	let visitorCountry: string | null = $state(null);
+	let hero = $derived(deLocalizeHref(page.url.pathname) === '/');
+	let embed = $derived(page.route.id?.startsWith('/embed/') ?? false);
 
 	onMount(async () => {
 		document.documentElement.removeAttribute('data-waiting')
 		document.documentElement.setAttribute('data-hydrated', 'true')
 
-		const searchString = window.location.search
-		const response = await fetch('/api/geo' + searchString)
-		if (!response.ok) return
-		const geo = (await response.json()) as GeoApiResponse
+		const searchString = window.location.search;
+		const response = await fetch('/api/geo' + searchString);
+
+		if (!response.ok) return;
+
+		const geo = await response.json() as GeoApiResponse;
 
 		// Keep geo cookie in sync with actual location.
 		// Re-run selectBanners if country changed or cookie not yet set.
@@ -128,10 +130,9 @@
 	})
 
 	function sanitizeScript(code: string) {
-		return code
-			.replaceAll(/\/\*[\s\S]*?\*\//g, '') // remove block comments
-			.replaceAll(/\/\/[^"'`\n]*?$/gm, '') // remove line comments
-			.replaceAll(/\n\s*(?=\n)/g, '') // remove empty lines
+		return code.replaceAll(/\/\*[\s\S]*?\*\//g, '').// remove block comments
+		replaceAll(/\/\/[^"'`\n]*?$/gm, '').// remove line comments
+		replaceAll(/\n\s*(?=\n)/g, ''); // remove empty lines
 	}
 </script>
 

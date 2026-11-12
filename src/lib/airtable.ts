@@ -1,10 +1,10 @@
-import { env } from '$env/dynamic/private'
-import { getDevContext, isDev } from '$lib/env.server'
-import { reportError } from '$lib/server/sentry'
-import Airtable, { type FieldSet, type Table } from 'airtable'
+import { AIRTABLE_API_KEY, AIRTABLE_WRITE_API_KEY } from '$app/env/private';
+import { getDevContext, isDev } from '$lib/env.server';
+import { reportError } from '$lib/server/sentry';
+import Airtable, { type FieldSet, type Table } from 'airtable';
 
-const getApiKey = () => env.AIRTABLE_API_KEY
-const getWriteApiKey = () => env.AIRTABLE_WRITE_API_KEY || env.AIRTABLE_API_KEY
+const getApiKey = () => AIRTABLE_API_KEY;
+const getWriteApiKey = () => AIRTABLE_WRITE_API_KEY || AIRTABLE_API_KEY;
 
 type QueryParams = Parameters<Table<FieldSet>['select']>[0]
 
@@ -35,13 +35,11 @@ export type AirtableListResponse<T> = {
  * @returns Object containing baseId and tableId, or null if URL is invalid
  */
 function extractAirtableIds(url: string): { baseId: string; tableId: string } | null {
-	const match = url.match(AIRTABLE_URL_REGEX)
-	if (!match || !match.groups) return null
+	const match = url.match(AIRTABLE_URL_REGEX);
 
-	return {
-		baseId: match.groups.baseId,
-		tableId: match.groups.tableId
-	}
+	if (!match || !match.groups) return null;
+
+	return { baseId: match.groups.baseId, tableId: match.groups.tableId };
 }
 
 /**
@@ -71,17 +69,18 @@ export async function fetchAllPages<T extends Record<string, unknown>>(
 
 	try {
 		// Try to use Airtable SDK if available
-		const ids = extractAirtableIds(url)
-		if (!ids) throw new Error('Invalid Airtable API URL: ' + url)
-		if (isDev()) console.log('Using Airtable SDK for:', url)
+		const ids = extractAirtableIds(url);
 
-		const base = new Airtable({ apiKey }).base(ids.baseId)
-		const table = base(ids.tableId)
+		if (!ids) throw new Error('Invalid Airtable API URL: ' + url);
+		if (isDev()) console.log('Using Airtable SDK for:', url);
 
-		const records = await table.select(queryParams).all()
-		return records.map((record) => ({ id: record.id, fields: record.fields as T }))
-	} catch (error) {
-		console.error('Error in fetchAllPages:', error)
+		const base = new Airtable({ apiKey }).base(ids.baseId);
+		const table = base(ids.tableId);
+		const records = await table.select(queryParams).all();
+
+		return records.map((record) => ({ id: record.id, fields: record.fields as T }));
+	} catch(error) {
+		console.error('Error in fetchAllPages:', error);
 
 		if (isDev() && fallbackData.length > 0) {
 			console.warn('⚠️ Using fallback data in development mode due to error')
@@ -110,10 +109,10 @@ export function airtableFormulaString(value: string): string {
 
 /** An error carrying only the code and status of an Airtable error, not its message. */
 function redactedAirtableError(error: unknown, operation: 'read' | 'write'): Error {
-	const { error: code, statusCode } = (error ?? {}) as { error?: unknown; statusCode?: unknown }
-	const safeCode = typeof code === 'string' && /^[A-Z_]+$/.test(code) ? code : 'UNKNOWN'
-	const safeStatus = typeof statusCode === 'number' ? statusCode : 'unknown'
-	return new Error(`Airtable ${operation} failed: ${safeCode} (status ${safeStatus})`)
+	const { error: code, statusCode } = (error ?? {}) as { error?: unknown; statusCode?: unknown };
+	const safeCode = typeof code === 'string' && (/^[A-Z_]+$/).test(code) ? code : 'UNKNOWN';
+	const safeStatus = typeof statusCode === 'number' ? statusCode : 'unknown';
+	return new Error(`Airtable ${operation} failed: ${safeCode} (status ${safeStatus})`);
 }
 
 /**

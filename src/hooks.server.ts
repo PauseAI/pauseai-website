@@ -1,3 +1,5 @@
+import type { Handle, HandleServerError } from '@sveltejs/kit/hooks';
+
 // Fix for Netlify's Deno edge runtime (not standard Deno)
 //
 // Netlify's Deno 2.3.1 provides a partial window stub (window exists but window.location
@@ -15,17 +17,16 @@ if (
 	delete (globalThis as { window?: Window }).window
 }
 
-import { type Handle, type HandleServerError } from '@sveltejs/kit'
-import { env } from '$env/dynamic/public'
-import { paraglideMiddleware } from '$lib/paraglide/server.js'
-import { SENTRY_RELEASE, redactLinkCredentials } from '$lib/sentry'
+import { PUBLIC_SENTRY_DSN } from '$app/env/public';
+import { paraglideMiddleware } from '$lib/paraglide/server.js';
+import { SENTRY_RELEASE, redactLinkCredentials } from '$lib/sentry';
 
 let Sentry: typeof import('@sentry/deno') | undefined
 
 export const init = async () => {
-	const dsn = env.PUBLIC_SENTRY_DSN
-	const release = SENTRY_RELEASE
-	const isDeno = typeof Deno !== 'undefined'
+	const dsn = PUBLIC_SENTRY_DSN;
+	const release = SENTRY_RELEASE;
+	const isDeno = typeof Deno !== 'undefined';
 
 	if (dsn && isDeno) {
 		try {
@@ -45,8 +46,8 @@ export const init = async () => {
 const handle: Handle = ({ event, resolve }) =>
 	paraglideMiddleware(event.request, ({ request: localizedRequest, locale }) => {
 		event.request = localizedRequest
-		return resolve(event, {
-			transformPageChunk: ({ html }) => html.replace('%lang%', locale)
+	return resolve(event, {
+		transformPageChunk: ({ html }) => html.replace('%lang%', locale)
 		})
 	})
 

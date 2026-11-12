@@ -9,18 +9,19 @@
 // repairs whatever this misses, so nothing here may fail or slow the signup:
 // the call runs after the response, every failure becomes an outcome, and an
 // outcome is only reported.
+import { CRM_INTAKE_ENABLED, CRM_INTAKE_URL, CRM_INTAKE_KEY } from '$app/env/private';
 
-import { env } from '$env/dynamic/private'
-import type { WrittenRecord } from '$lib/airtable'
-import { flushReports, reportError } from '$lib/server/sentry'
+import type { WrittenRecord } from '$lib/airtable';
+import { flushReports, reportError } from '$lib/server/sentry';
 
 const API_PATH = '/civicrm/ajax/api4/'
 // The CRM can take about 6 seconds to answer and completes the write even after
 // the caller aborts, so a shorter wait reports timeouts for writes that succeeded.
-export const TIMEOUT_MS = 10_000
-type Cause = 'not_configured' | 'http' | 'timeout' | 'network'
+export const TIMEOUT_MS = 10_000;
 
-export type CrmFailure = {
+type Cause = 'not_configured' | 'http' | 'timeout' | 'network';
+
+export type CrmFailure = { 
 	ok: false
 	cause: Cause
 	httpStatus?: number
@@ -30,29 +31,27 @@ export type CrmFailure = {
 /** The one row an action answers in `values`, or why there is none. */
 export type CrmAnswer = { ok: true; row: Record<string, unknown> } | CrmFailure
 
-type Result =
-	| { outcome: 'ok' }
-	| { outcome: `refused:${string}` }
-	| ({ outcome: 'error' } & Omit<CrmFailure, 'ok'>)
+type Result = 
+	{ outcome: 'ok' } |
+	{ outcome: `refused:${string}` } |
+	({ outcome: 'error' } & Omit<CrmFailure, 'ok'>);
 
 export type Outcome = Result['outcome']
 
-const isCrmIntakeEnabled = () => env.CRM_INTAKE_ENABLED === 'true'
+const isCrmIntakeEnabled = () => CRM_INTAKE_ENABLED === 'true';
 
 /**
  * Calls one API4 action (`Entity/action`) as the intake API account, giving up
  * after `timeoutMs`. Never rejects: a failure is an answer with what caused it.
  */
-export async function callCrm(
-	action: string,
-	params: unknown,
-	timeoutMs = TIMEOUT_MS
-): Promise<CrmAnswer> {
-	const base = env.CRM_INTAKE_URL?.replace(/\/+$/, '')
-	const key = env.CRM_INTAKE_KEY
-	if (!base || !key) return { ok: false, cause: 'not_configured' }
+export async function callCrm(action: string, params: unknown, timeoutMs = TIMEOUT_MS): Promise<CrmAnswer> {
+	const base = CRM_INTAKE_URL?.replace(/\/+$/, '');
+	const key = CRM_INTAKE_KEY;
 
-	const signal = AbortSignal.timeout(timeoutMs)
+	if (!base || !key) return { ok: false, cause: 'not_configured' };
+
+	const signal = AbortSignal.timeout(timeoutMs);
+
 	try {
 		const response = await fetch(base + API_PATH + action, {
 			method: 'POST',
@@ -67,14 +66,14 @@ export async function callCrm(
 			signal
 		})
 		// Only the status: an error body's text could echo what the request carried.
-		const httpError = { ok: false, cause: 'http', httpStatus: response.status } as const
-		if (!response.ok) return httpError
-		const body = (await response.json().catch(() => null)) as { values?: unknown[] } | null
-		if (signal.aborted) return { ok: false, cause: 'timeout' }
-		const row = body?.values?.[0]
-		if (typeof row !== 'object' || row === null || Array.isArray(row)) return httpError
-		return { ok: true, row: row as Record<string, unknown> }
-	} catch (error) {
+		const httpError = { ok: false, cause: 'http', httpStatus: response.status } as const;
+		if (!response.ok) return httpError;
+		const body = await response.json().catch(() => null) as { values?: unknown[] } | null;
+		if (signal.aborted) return { ok: false, cause: 'timeout' };
+		const row = body?.values?.[0];
+		if (typeof row !== 'object' || row === null || Array.isArray(row)) return httpError;
+		return { ok: true, row: row as Record<string, unknown> };
+	} catch(error) {
 		return {
 			ok: false,
 			cause: signal.aborted ? 'timeout' : 'network',
@@ -86,9 +85,9 @@ export async function callCrm(
 /** What a failure may report: its cause, never a value the request carried. */
 export const failureDetails = ({ cause, httpStatus, errorName }: CrmFailure) => ({
 	cause,
-	...(httpStatus === undefined ? {} : { httpStatus }),
-	...(errorName === undefined ? {} : { errorName })
-})
+	...httpStatus === undefined ? {} : { httpStatus },
+	...errorName === undefined ? {} : { errorName }
+});
 
 /**
  * Logs and reports an answer that was not `ok`, then sends the report. `details` must never

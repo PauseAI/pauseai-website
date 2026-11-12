@@ -1,27 +1,16 @@
-import { json } from '@sveltejs/kit'
-import { env } from '$env/dynamic/private'
-import { asError } from '$lib/utils'
-import type { RequestHandler } from './$types'
+import { json } from '@sveltejs/kit';
+import { OPENAI_KEY } from '$app/env/private';
+import { asError } from '$lib/utils';
+import type { RequestHandler } from './$types';
 
-const openaiKey = env.OPENAI_KEY
+const openaiKey = OPENAI_KEY;
 
-export type Message = {
-	role: 'user' | 'assistant' | 'system'
-	content: string
-}
+export type Message = { role: 'user' | 'assistant' | 'system'; content: string };
+export type ChatRequest = Message[];
+export type ChatResponse = { response: string };
+export type Personality = { instruction: string };
 
-export type ChatRequest = Message[]
-
-export type ChatResponse = {
-	response: string
-}
-
-export type Personality = {
-	instruction: string
-}
-
-const sharedContext =
-	'You are chatbot on the PauseAI.info website. You try to answer with relatively short messages whenever possible, unless the answer requires a longer story.'
+const sharedContext = 'You are chatbot on the PauseAI.info website. You try to answer with relatively short messages whenever possible, unless the answer requires a longer story.';
 
 const personalities = {
 	PauseBot: {
@@ -37,29 +26,19 @@ const personalities = {
 type names = keyof typeof personalities
 
 function getInstruction(name: names) {
-	const personality = personalities[name]
-	return `${sharedContext} ${personality.instruction}. Your name is ${name}`
+	const personality = personalities[name];
+
+	return `${sharedContext} ${personality.instruction}. Your name is ${name}`;
 }
 
-type OpenAiSuccessResponse = {
-	choices: Array<{
-		message?: {
-			content?: string | null
-		}
-	}>
-}
-
-type OpenAiErrorResponse = {
-	error?: {
-		message?: string
-	}
-}
+type OpenAiSuccessResponse = { choices: Array<{ message?: { content?: string | null } }> };
+type OpenAiErrorResponse = { error?: { message?: string } };
 
 export const POST: RequestHandler = async ({ fetch, request }) => {
-	const messages = (await request.json()) as ChatRequest
+	const messages = await request.json() as ChatRequest;
+	const apiUrl = 'https://api.openai.com/v1/chat/completions';
 
-	const apiUrl = 'https://api.openai.com/v1/chat/completions'
-	if (!openaiKey) throw new Error('OPENAI_KEY env not found')
+	if (!openaiKey) throw new Error('OPENAI_KEY env not found');
 
 	// Add a system message in the beginning
 	messages.unshift({
@@ -81,7 +60,7 @@ export const POST: RequestHandler = async ({ fetch, request }) => {
 		})
 	})
 
-	const data = (await response.json()) as OpenAiSuccessResponse | OpenAiErrorResponse
+	const data = await response.json() as OpenAiSuccessResponse | OpenAiErrorResponse;
 	if ('error' in data && data.error) {
 		console.error(data.error)
 		throw asError(502, data.error.message)

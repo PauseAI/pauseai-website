@@ -1,12 +1,12 @@
 // A signed, expiring token that proves the browser posting a `record_id` was
 // handed that id by the submit action. docs/join-form-flow.md,
 // "Continuation token", describes the rollout switch.
+import { ONBOARDING_CONTINUATION_SECRET } from '$app/env/private';
 
-import { env } from '$env/dynamic/private'
-import { SIGNUP_MAX_AGE_MS } from '$lib/components/onboarding/signupMaxAge'
-import { isContinuationEnforced } from '$lib/server/onboarding'
-import { reportError } from '$lib/server/sentry'
-import { checkToken, signToken, type TokenVerdict } from '$lib/server/signedToken'
+import { SIGNUP_MAX_AGE_MS } from '$lib/components/onboarding/signupMaxAge';
+import { isContinuationEnforced } from '$lib/server/onboarding';
+import { reportError } from '$lib/server/sentry';
+import { checkToken, signToken, type TokenVerdict } from '$lib/server/signedToken';
 
 // An hour beyond the browser's copy: the token is minted, and its expiry floored
 // to the second, before the browser stamps that copy.
@@ -30,8 +30,8 @@ export function verifyToken(
 let reportedNoSecret = false
 
 function getSecret(): string | undefined {
-	const secret = env.ONBOARDING_CONTINUATION_SECRET
-	if (secret) return secret
+	const secret = ONBOARDING_CONTINUATION_SECRET;
+	if (secret) return secret;
 	if (!reportedNoSecret) {
 		reportedNoSecret = true
 		const ignored = isContinuationEnforced()
