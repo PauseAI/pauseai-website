@@ -51,6 +51,7 @@ const SECRET = 'test-secret'
 const DAY_MS = 24 * 60 * 60 * 1000
 const NOW = 1_800_000_000_000
 const OLD = new Date(NOW - 100 * DAY_MS).toISOString()
+const RECENT = new Date(NOW - 10 * DAY_MS).toISOString()
 
 const verify = (query: string) =>
 	POST({
@@ -73,6 +74,12 @@ function tampered(token: string): string {
 const member = (id: string, fields: Record<string, unknown> = {}): Row => ({
 	id,
 	fields: { Email: 'ada@example.org', ...fields }
+})
+
+// A row the retired Airtable sender mailed an unsigned link for.
+const mailed = (id: string, createdTime: string): Row => ({
+	...member(id, { 'Sent emails': true }),
+	_rawJson: { createdTime }
 })
 
 const merged = (fields: Record<string, unknown> = {}): Row =>
@@ -167,21 +174,36 @@ describe('POST /api/verify: signed links', () => {
 		expect(update).not.toHaveBeenCalled()
 	})
 
-	it('refuses every link while the secret is unset', async () => {
+	it('refuses every link while the secret is unset, reading nothing', async () => {
 		const token = await tokenFor('recPlain', 'ada@example.org')
 		delete env.EMAIL_VERIFICATION_SECRET
-		selected = [member('recPlain')]
+		selected = [mailed('recPlain', RECENT)]
 		expect((await link('&token=garbage')).status).toBe(410)
 		expect((await link(`&token=${token}`)).status).toBe(410)
+		expect(tableIds).toEqual([])
 		expect(update).not.toHaveBeenCalled()
 	})
+})
 
-	it('refuses a link without a token', async () => {
-		selected = [member('recPlain')]
+describe('POST /api/verify: links without a token', () => {
+	it('refuses one for a mailed row under 30 days old, reading nothing', async () => {
+		selected = [mailed('recPlain', RECENT)]
 		const response = await link()
 		expect(response.status).toBe(410)
 		expect(await response.json()).toEqual({ outcome: 'expired' })
+		expect(tableIds).toEqual([])
 		expect(update).not.toHaveBeenCalled()
+	})
+
+	it('refuses one for a mailed row clicked within 30 days of the 2026-10-07 cutover', async () => {
+		vi.setSystemTime(Date.parse('2026-10-27T00:00:00Z'))
+		selected = [mailed('recPlain', '2026-10-01T00:00:00.000Z')]
+		expect((await link()).status).toBe(410)
+		expect(update).not.toHaveBeenCalled()
+	})
+
+	it('refuses one for a row that does not exist', async () => {
+		expect((await link()).status).toBe(410)
 	})
 })
 

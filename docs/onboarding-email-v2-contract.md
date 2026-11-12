@@ -96,7 +96,6 @@ v2 is an adapter into v1's rendering: the same intent buckets, language resolver
 - Language: v2 also accepts a language tag in `language` when `languages` is absent, which v1 has no equivalent of (see "Languages").
 - The verification link is always signed, over `to_email`.
 - v2 adds the unsubscribe line when given `unsubscribe_url`; v1 has none.
-- v2 returns no sender and no fields for onboarders: the caller chooses every address.
 
 ### Languages
 

@@ -9,14 +9,11 @@ import {
 } from './brand.js'
 import type { BaseLanguage, ChapterBlockData, IntentBucket } from './types.js'
 
-// The shared copy, ported from what the live MailerSend templates send so that the switch to
-// this renderer changes as little as possible:
-//  - no intent / Act now: Irina's confirmation copy (templates 7dnvo4dyjd345r86 and
-//    ynrw7gy8z1n42k8e), English only, as today; except no intent in Spanish, which gets
-//    esNone below, cut down from the Spanish template
-//  - Volunteer and Lead, English: the Global volunteer template (3z0vkloo5v1l7qrx), with its
-//    "Chapter Lead of your country" paragraph replaced by the chapter block
-//  - Volunteer and Lead, Spanish: the Spanish template (o65qngkj1mjlwr12) as it is
+// The shared copy:
+//  - no intent / Act now: Irina's confirmation copy, English only; except no intent in
+//    Spanish, which gets esNone below
+//  - Volunteer and Lead, English: the Global volunteer copy, with the chapter block
+//  - Volunteer and Lead, Spanish: the Spanish volunteer copy
 // The fixed lines (confirm link, newsletter line) are in fixed.ts. Markdown-style
 // `[label](url)` links and `**bold**` are converted by markdown.ts.
 

@@ -32,8 +32,7 @@ const CHAPTERS: Record<string, ChapterBlockData> = {
 	}
 }
 
-const { reportError } = vi.hoisted(() => ({ reportError: vi.fn() }))
-vi.mock('$lib/server/sentry', () => ({ reportError }))
+vi.mock('$lib/server/sentry', () => ({ reportError: vi.fn() }))
 
 vi.mock('./chapter.js', () => ({
 	getChapterForOnboardingEmail: (country: string | undefined) =>
@@ -327,7 +326,6 @@ describe('renderOnboardingEmail', () => {
 	})
 
 	describe('for a signup who did not agree to chapter sharing', () => {
-		const GLOBAL_SENDER = { email: 'info@pauseai.info', name: 'PauseAI' }
 		const CHAPTER_EMAILS = [
 			['United Kingdom', 'None', 'Welcome to PauseAI UK Alex!'],
 			['United Kingdom', 'Volunteer', 'Welcome to PauseAI UK Alex!'],
@@ -338,7 +336,7 @@ describe('renderOnboardingEmail', () => {
 			['Sweden', 'Volunteer', 'PauseAI Sverige - Volontär/lead inom PauseAI']
 		]
 
-		it("gives the shared copy from PauseAI Global instead of a chapter's own email", async () => {
+		it("gives the shared copy instead of a chapter's own email", async () => {
 			for (const [country, intent, chapterSubject] of CHAPTER_EMAILS) {
 				const where = `${country} / ${intent}`
 				const shared = await render(country, intent)
@@ -348,7 +346,6 @@ describe('renderOnboardingEmail', () => {
 				expect(declined.subject, where).toBe(
 					intent === 'Volunteer' ? 'Welcome to PauseAI, Alex!' : 'Thanks for signing up to PauseAI'
 				)
-				expect(declined.from, where).toEqual(GLOBAL_SENDER)
 				expect(declined.text, where).toContain('Maxime and The PauseAI Global Team')
 			}
 		})
@@ -370,7 +367,7 @@ describe('renderOnboardingEmail', () => {
 		})
 
 		// The public chapter links promise no contact, and the Spanish email names no chapter.
-		it('changes nothing but the sender where the email promises no chapter contact', async () => {
+		it('changes nothing where the email promises no chapter contact', async () => {
 			const cases: [string, string, Partial<OnboardingEmailParams>?][] = [
 				['Netherlands', 'Act now'],
 				['Canada', 'Act now'],
@@ -383,23 +380,8 @@ describe('renderOnboardingEmail', () => {
 				const where = `${country || '(none)'} / ${intent}`
 				const shared = await render(country, intent, options)
 				const declined = await render(country, intent, { ...options, chapterShare: false })
-				expect(declined.from, where).toEqual(GLOBAL_SENDER)
-				expect({ ...declined, from: undefined }, where).toEqual(shared)
+				expect(declined, where).toEqual(shared)
 			}
 		})
-	})
-
-	// The endpoint returns the rendered email as it is, so an extra key would change the JSON the
-	// Airtable script reads for every signup who agreed.
-	it('returns only the email for a signup who agreed to chapter sharing', async () => {
-		for (const country of COUNTRIES) {
-			for (const intent of INTENTS) {
-				expect(Object.keys(await render(country, intent)).sort()).toEqual([
-					'html',
-					'subject',
-					'text'
-				])
-			}
-		}
 	})
 })

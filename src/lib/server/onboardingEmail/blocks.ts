@@ -23,8 +23,7 @@ export type EmailContent = {
 	/** Replaces the fixed newsletter line, for a chapter that states the same promise in its own
 	 *  words: news if they opted in, and occasional important messages either way. */
 	newsletter?: string
-	/** The sender's own accounts. Drawn as icons in the footer, under the rule, the way
-	 *  the MailerSend templates do it. */
+	/** The sender's own accounts. Drawn as icons in the footer, under the rule. */
 	socials?: ChapterLink[]
 	/** Unset means `rich`. */
 	htmlStyle?: OnboardingEmailHtmlStyle

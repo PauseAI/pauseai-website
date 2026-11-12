@@ -78,7 +78,7 @@ describe('verifyVerificationToken', () => {
 })
 
 describe('verificationLink', () => {
-	it('keys the link by the id without its rec prefix and carries the token', () => {
+	it('builds the /verify link from the key and the token', () => {
 		const link = new URL(verificationLink('Ada', 'v1.1.sig'))
 		expect(link.pathname).toBe('/verify')
 		expect(link.searchParams.get('table')).toBe('join')

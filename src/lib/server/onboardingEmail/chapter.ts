@@ -87,9 +87,8 @@ export async function lookupChapterForOnboardingEmail(
 export async function getChapterForOnboardingEmail(
 	country: string | undefined
 ): Promise<ChapterBlockData | null> {
-	// Uncached and on every send, so a rate limit or an Airtable blip must not fail the render:
-	// the caller would then send the fallback template, a different email, rather than this one
-	// without its chapter block.
+	// Uncached and on every render, so a rate limit or an Airtable blip renders the email
+	// without its chapter block rather than failing it.
 	try {
 		return await lookupChapterForOnboardingEmail(country)
 	} catch (error) {

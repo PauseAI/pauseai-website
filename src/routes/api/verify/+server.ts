@@ -113,9 +113,20 @@ export const POST: RequestHandler = async ({ request }) => {
 		})
 	}
 
-	if (!tableConfig.isMembers) {
-		const token = params.get(TOKEN_PARAMETER) ?? ''
-		if (verifiesInCrm(key, token)) return verifyInCrm(key, token)
+	const token = params.get(TOKEN_PARAMETER) ?? ''
+	// Set only for a Members link, which must carry a token this secret can check.
+	let memberSecret: string | undefined
+	if (tableConfig.isMembers) {
+		memberSecret = getVerificationSecret()
+		if (!token || !memberSecret) {
+			console.warn('[verification] refused a link it cannot check', {
+				recordId: `rec${key}`,
+				hasToken: token !== ''
+			})
+			return linkExpired()
+		}
+	} else if (verifiesInCrm(key, token)) {
+		return verifyInCrm(key, token)
 	}
 
 	const table = new Airtable({ apiKey: AIRTABLE_WRITE_API_KEY })
@@ -133,20 +144,11 @@ export const POST: RequestHandler = async ({ request }) => {
 	let recordId = named.id
 	// For a Members link, the address its token was checked against.
 	let signedEmail: string | undefined
-	if (tableConfig.isMembers) {
-		const token = params.get(TOKEN_PARAMETER) ?? ''
-		const secret = getVerificationSecret()
-		if (!token || !secret) {
-			console.warn('[verification] refused a link it cannot check', {
-				recordId: named.id,
-				hasToken: token !== ''
-			})
-			return linkExpired()
-		}
+	if (memberSecret) {
 		// Against the row's address now: a link mailed to an address the row no longer
 		// has must not verify the new one.
 		const email = rowEmail(named.fields)
-		const verdict = await verifyVerificationToken(secret, named.id, email, token, Date.now())
+		const verdict = await verifyVerificationToken(memberSecret, named.id, email, token, Date.now())
 		if (verdict !== 'valid') {
 			console.warn('[verification] refused a signed link', { recordId: named.id, verdict })
 			return linkExpired()

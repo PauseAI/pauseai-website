@@ -1,8 +1,8 @@
 // The signed link in the welcome email that ticks a Members row's `Verified email`.
-// The token signs the record id and a hash of the row's current address, and expires. docs/join-form-flow.md,
-// "Email verification link", has the format, the rollout and what an unset secret does.
-// CiviCRM is to mint the same tokens, so change the format only together with
-// emailVerification.vectors.json and the PHP side.
+// The token signs the record id and a hash of the row's current address, and expires.
+// docs/join-form-flow.md, "Email verification link", has the format and what an unset
+// secret does. If CiviCRM mints links, it must produce the same tokens, so change the
+// format only together with emailVerification.vectors.json and the PHP side.
 
 import { env } from '$env/dynamic/private'
 import { url, verificationParameter } from '$lib/config.js'

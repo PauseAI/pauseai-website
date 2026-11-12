@@ -413,9 +413,8 @@ export const actions: Actions = {
 		}
 
 		// Recorded only for stub inspection, so it is resolved here rather than on
-		// every submit. The live branch has no use for it: the Airtable automations
-		// run their own country-to-chapter lookup, and decide who hears about the
-		// signup from the chapter-share field written above.
+		// every submit. The live branch has no use for it: CiviCRM routes the signup
+		// to a chapter itself.
 		const chapterMatch = (await getNationalGroups())?.find(
 			(group) => group.name.toLowerCase() === country.toLowerCase()
 		)

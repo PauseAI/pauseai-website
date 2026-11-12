@@ -198,16 +198,16 @@ never arrived gets no token, so its retry creates a row, as before.
 
 The welcome email's link ticks the Members row's `Verified email`. It is `https://pauseai.info/verify?table=join&verificationKey=<key>&token=<token>`, where `<key>` is the row's `Airtable ID` formula (the record id without its `rec`) and `<token>` ties the link to the row's current address. `src/lib/server/emailVerification.ts` mints and checks it.
 
-The token is `v1.<expiry>.<signature>`, the continuation token's shape with its own payload and secret: `<expiry>` is a Unix time in seconds, 90 days after minting, and `<signature>` is the unpadded base64url HMAC-SHA256, keyed by the UTF-8 bytes of `EMAIL_VERIFICATION_SECRET`, of `email-verification:v1:<recordId>:<emailHash>:<expiry>`. `<recordId>` is the full record id (`rec…`). `<emailHash>` is the lowercase hex SHA-256 of the UTF-8 bytes of the normalised `Email`: leading and trailing ASCII whitespace (space, tab, LF, VT, FF, CR) stripped, A to Z lowercased, nothing else changed (no Unicode case folding or normalisation); in PHP, `strtolower(trim($email, " \t\n\v\f\r"))` from PHP 8.2. CiviCRM is to mint the same tokens once the welcome moves there, so `src/lib/server/emailVerification.vectors.json` holds test vectors (inputs, normalised address, hash, payload, token) that both implementations must reproduce; change it together with any change to the format.
+The token is `v1.<expiry>.<signature>`, the continuation token's shape with its own payload and secret: `<expiry>` is a Unix time in seconds, 90 days after minting, and `<signature>` is the unpadded base64url HMAC-SHA256, keyed by the UTF-8 bytes of `EMAIL_VERIFICATION_SECRET`, of `email-verification:v1:<recordId>:<emailHash>:<expiry>`. `<recordId>` is the full record id (`rec…`). `<emailHash>` is the lowercase hex SHA-256 of the UTF-8 bytes of the normalised `Email`: leading and trailing ASCII whitespace (space, tab, LF, VT, FF, CR) stripped, A to Z lowercased, nothing else changed (no Unicode case folding or normalisation); in PHP, `strtolower(trim($email, " \t\n\v\f\r"))` from PHP 8.2. If CiviCRM mints links, it must produce the same tokens, so `src/lib/server/emailVerification.vectors.json` holds test vectors (inputs, normalised address, hash, payload, token) that both implementations must reproduce; change it together with any change to the format.
 
 **Minting.** The CRM's render, `/api/onboarding-email/v2`, signs the link over the address the CRM says it is mailing (`to_email`), and refuses to render without the secret rather than give an unsigned link (`docs/onboarding-email-v2-contract.md`).
 
 **Checking.** `/verify` takes the link's query out of the address bar and posts it to `/api/verify` in the request body, keeping it out of the API's request URLs (`redactLinkCredentials` in `src/lib/sentry.ts` also strips such a query from client and server Sentry reports). For `table=join`, `/api/verify` then:
 
 - with a token and the secret set: checks the token against the row the key names and that row's `Email` now. Expired, tampered, for another row, or minted for an address the row no longer has: refused.
-- without a token, or while the secret is unset: refused.
+- without a token, or while the secret is unset: refused before any row is read.
 
-Refused answers 410 `{ outcome: 'expired' }`, and `/verify` explains that links last 90 days and only for the address they were sent to, with a mailto to info@pauseai.info for a new link. A "send me a new link" button needs a sender that can mail one (CiviCRM, pauseai-civicrm#668) and is a later step. An accepted link then follows `Merged into` with the safeguards in `mergedMemberRow.ts`, unchanged, and ticks the result. `table=statement` (signatory verification) is unchanged.
+Refused answers 410 `{ outcome: 'expired' }`, and `/verify` explains that links last 90 days and only for the address they were sent to, with a mailto to info@pauseai.info for a new link. A "send me a new link" button needs a sender that can mail one (CiviCRM, pauseai-civicrm#668) and is a later step. An accepted link then follows `Merged into` with the safeguards in `mergedMemberRow.ts` and ticks the result.
 
 **Bound to the address.** An update from the form that changes the row's normalised `Email` writes `Verified email: false` in the same Airtable write, so the tick does not carry over to the new address. Every live update therefore reads the row first. After ticking a row for a signed link, `/api/verify` reads the row again and, if its normalised `Email` is no longer the address the token was checked against, writes `Verified email: false` and answers the same 410 refusal, since Airtable has no conditional write to make the check and the tick one step.
 
@@ -605,16 +605,7 @@ form writes only when it asked, and the "Subscriber becomes Volunteer/Lead"
 trigger matches the phrase "subscribe form", which every /subscribe value must
 keep.
 
-This field is not only stored. The Airtable automations on the Members table
-read it to decide whether a signup is handed to their national chapter's leader
-or to the global onboarding address, and whether a US signup is copied into the
-sheet shared with PauseAI US, which no longer happens now that US signups are
-not asked. Leaving it unticked is therefore a real routing decision, not a
-preference flag.
-
-Those automations live in Airtable, not in this repository, so nothing here can
-prove that behaviour. Read them in the base's automation editor if you need the
-exact conditions.
+This field is not only stored. For rows the form marks as CiviCRM's (see "Signup emails sent by"), CiviCRM reads it to route the signup: only a recorded Yes, for a chapter with an onboarding address, sends the onboarder alert to that chapter and names the chapter in the welcome; anything else goes to the global onboarding inbox. Leaving it unticked is therefore a real routing decision, not a preference flag. The Airtable automations that routed on it were retired on 2026-10-09. The routing lives in pauseai-civicrm (`CRM_PauseaiCore_SignupMail`), not in this repository.
 
 ## Validation rules
 
