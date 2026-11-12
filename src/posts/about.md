@@ -8,7 +8,7 @@ date: 2025-11-06
 	import AboutPeople from '$lib/components/about/AboutPeople.svelte'
 </script>
 
-## How We Began
+## How We Began!
 
 We were founded in Utrecht, Netherlands in May 2023 by Joep Meindertsma, who put his job on hold because he couldn't ignore the existential risks from artificial intelligence any longer. We began with our first public action, which was a protest outside [Microsoft's Brussels lobbying office](/brussels-microsoft-protest).
 
