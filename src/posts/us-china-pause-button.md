@@ -4,7 +4,7 @@ description: The US says it cannot pause because China won't. China says the US 
 ---
 
 The two countries that matter most for a [pause on superintelligence](/proposal) are the United States and China.
-Together they host [close to 90%](https://aisafetychina.substack.com/p/key-takeaways-from-the-2026-waic) of the compute used to train frontier models.
+Together they host [about 90%](https://epoch.ai/data-insights/ai-supercomputers-performance-share-by-country) of the world's AI supercomputer capacity: the US about three-quarters, China about 15% (Epoch AI, May 2025).
 Without both of them, no treaty means anything.
 With both of them, almost everything else follows.
 
@@ -24,7 +24,7 @@ Five days earlier, Treasury Secretary Bessent had said: ["We can't pause. You ca
 
 In July 2026, Xi Jinping opened the World AI Conference in Shanghai and said that China must ["constantly refine measures to forestall loss of control"](https://aisafetychina.substack.com/p/chinas-key-ai-safety-updates-at-waic) and "ensure that AI is always under human control".
 He used the phrase "loss of control" three times.
-A year earlier, his top technology official Ding Xuexiang had warned in Davos that ["if we allow this reckless competition among countries to continue, then we will see a 'gray rhino'."](https://intelligence.org/2026/07/30/promising-signals-on-ai-governance-from-china/)
+In January 2025, his top technology official Ding Xuexiang had warned in Davos that ["if we allow this reckless competition among countries to continue, then we will see a 'gray rhino'."](https://intelligence.org/2026/07/30/promising-signals-on-ai-governance-from-china/)
 
 So both sides say the race is dangerous.
 Both sides say they cannot be the one to stop.
@@ -83,7 +83,7 @@ What neither camp has worked out is a chip-based verification regime that the US
 Every advanced AI chip, American or Chinese, is made on machines from one company in one country.
 That country is not the US or China.
 It is the Netherlands, and the company is ASML.
-The Dutch government already [licenses every export](/asml-pause-button) of ASML's EUV machines, and since 2024 also their servicing, spare parts and software updates.
+Every export of ASML's EUV machines [already needs a license](/asml-pause-button), and since 2024 the Dutch government has also [required one](https://www.investing.com/news/economy-news/asml-needs-licence-to-service-some-equipment-in-china-dutch-government-says-3610146) for servicing, spare parts and software updates for the restricted machines already sold.
 
 This changes the negotiation:
 
@@ -105,7 +105,7 @@ It can produce the first three steps toward one:
 
 1. **A joint statement that loss of control of frontier AI is a shared risk**, in the same form as the November 2024 statement on nuclear weapons. Both leaders have already said this separately. Saying it together costs nothing and changes the baseline.
 2. **A commitment to negotiate verifiable limits on frontier training**, with compute as the unit of account. The [Center for American Progress](https://www.americanprogress.org/article/the-u-s-and-china-must-explore-pacing-the-frontier-during-september-ai-dialogue/) proposes an AI "red phone" and a working group on testing and restrictions as first deliverables. We agree, and we add that the working group must be told to produce a verification design, not only a dialogue.
-3. **An invitation to the supplier states.** The Netherlands, Japan, Taiwan and South Korea should be asked to bring their existing equipment licensing regimes into the negotiation as the enforcement module. This is how the [2023 trilateral understanding](/asml-pause-button#the-netherlands-already-has-the-instrument) on lithography was built, in eight months, without a treaty text.
+3. **An invitation to the supplier states.** The Netherlands and Japan, which make the critical chipmaking equipment alongside the US, should be asked to bring their existing equipment export licensing regimes into the negotiation as the enforcement module. Taiwan and South Korea, where most advanced chips are made, belong at the table too. This is how the [2023 trilateral understanding](/asml-pause-button#the-netherlands-already-has-the-instrument) on lithography was built, in eight months, without a treaty text.
 
 ## Why now
 
@@ -113,7 +113,7 @@ It can produce the first three steps toward one:
 - The UN's [Global Dialogue on AI Governance](https://www.brookings.edu/articles/a-summer-of-ai-summits-reveals-a-widening-us-china-divide/) reconvenes in New York in 2027. China has put two experts on the UN scientific panel and launched WAICO; the US launched Pax Silica. The two blocs are forming now.
 - The stand-down agreed at Busan in October 2025, under which China suspended rare-earth measures and the US suspended its Affiliates Rule, [expires in November 2026](https://www.bhfs.com/insight/expectations-for-the-trump-xi-september-meeting/).
 - Hardware governance only works while chip production is concentrated. China [started producing its own DUV machines](https://www.cnbc.com/2026/07/28/china-chipmaking-duv-tool-asml-explained.html) in 2026. [Ansari (2026)](https://arxiv.org/abs/2604.04712) and [Horowitz and Kahn](https://ai-frontiers.org/articles/nuclear-non-proliferation-is-the-wrong-framework-for-ai-governance) both call the window temporary. That is an argument for using it, not for waiting.
-- Anthropic's alignment lead now puts the chance of AI killing everyone in the next decade at [more than 10%](https://en.cryptonomist.ch/2026/09/09/ai-extinction-risk-anthropic/). OpenAI says its most advanced unreleased models [cannot yet be safely deployed](https://www.techtimes.com/articles/327423/20260913/openai-cannot-safely-deploy-its-most-advanced-ai-altman-says-labs-near-safety-pact.htm). The labs are asking for a brake. Only governments can build one.
+- Anthropic's alignment lead now puts the chance of AI killing everyone in the next decade at [more than 10%](https://en.cryptonomist.ch/2026/09/09/ai-extinction-risk-anthropic/). Sam Altman [told Fortune](https://fortune.com/2026/09/12/openai-ceo-sam-altman-safety-pact-ai-companies-risks-anthropic-dario-amodei/) he does not think OpenAI can "push much further on capabilities without making more progress on monitorability, alignment". The labs are asking for a brake. Only governments can build one.
 
 ## What you can do
 

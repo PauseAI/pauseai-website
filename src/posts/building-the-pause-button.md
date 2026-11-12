@@ -27,18 +27,18 @@ Every serious treaty proposal, from the [MIRI treaty draft](https://arxiv.org/ab
 The chip supply chain is a chain of monopolies:
 
 - **Nvidia** designs most AI chips.
-- **TSMC** fabricates about 90% of the advanced ones. Samsung and Intel are the only alternatives.
+- **TSMC** fabricates about 90% of the advanced ones. Samsung and Intel are the main alternatives, and China's SMIC makes Huawei's AI chips at 7nm.
 - **SK Hynix, Samsung and Micron** make the high-bandwidth memory every AI chip needs.
 - **ASML**, in Veldhoven in the Netherlands, is the only company in the world that makes the extreme ultraviolet (EUV) lithography machines all of the above depend on.
 
 ASML is the narrowest point.
 It shipped [48 EUV systems in 2025](https://www.asml.com/en/news/press-releases/2026/q4-2025-financial-results).
-Each costs up to $380 million, needs constant maintenance and software updates from ASML, and can be [remotely disabled](https://www.businessinsider.com/asml-tsmc-semiconductor-chip-equipment-kill-switch-china-invade-taiwan-2024-5).
+Each costs up to $380 million, needs constant maintenance and software updates from ASML, and can reportedly be [remotely disabled](https://www.businessinsider.com/asml-tsmc-semiconductor-chip-equipment-kill-switch-china-invade-taiwan-2024-5).
 Chips wear out in a few years; a fab produces for a decade.
 Whoever controls the machines controls the growth curve.
 
-The Dutch government already requires a [license for every export](/asml-pause-button#the-netherlands-already-has-the-instrument) of these machines, and since 2024 for their servicing too.
-Today that license is used for one purpose: keeping China behind.
+Exporting these machines already [requires a license](/asml-pause-button#the-netherlands-already-has-the-instrument), and the Dutch government has added its own license requirements for advanced DUV machines, including, since 2024, for servicing the restricted machines already sold.
+Today those licenses are used mainly for one purpose: keeping China behind.
 It could be used for another.
 
 ## The two pages that matter
@@ -47,7 +47,7 @@ It could be used for another.
 Not a new instrument, but new criteria: EUV machines, upgrades and maintenance only for fabs that register their AI chip output, cap capacity growth, and accept inspections.
 The page covers the layered measures, a four-phase plan, the legal basis and its gaps, and the objections.
 
-**[The US-China Pause Button](/us-china-pause-button)** is about the two countries that hold [close to 90%](https://aisafetychina.substack.com/p/key-takeaways-from-the-2026-waic) of the world's training compute.
+**[The US-China Pause Button](/us-china-pause-button)** is about the two countries that hold [about 90%](https://epoch.ai/data-insights/ai-supercomputers-performance-share-by-country) of the world's AI supercomputer capacity: the US about three-quarters, China about 15% (Epoch AI, May 2025).
 Washington says it cannot pause because Beijing won't.
 Beijing says Washington must first apply its rules to itself.
 Both are describing a verification problem, and a supplier state that is neither of them can solve it.
@@ -59,7 +59,7 @@ A complete Pause Button also needs:
 
 - **A chip registry and chain of custody**, so every AI chip has an identity and a location. Feasible now.
 - **Cloud know-your-customer rules**, so large compute rentals are traceable. Feasible now.
-- **On-chip governance**: firmware licensing, location attestation, and eventually [FlexHEGs](https://yoshuabengio.org/wp-content/uploads/2024/09/FlexHEG-Interim-Report_2024.pdf). Two to four years of research away, according to [Ansari (2026)](https://arxiv.org/abs/2604.04712).
+- **On-chip governance**: firmware licensing, location attestation, and eventually [FlexHEGs](https://yoshuabengio.org/wp-content/uploads/2024/09/FlexHEG-Interim-Report_2024.pdf). Research [estimates](https://arxiv.org/abs/2604.04712) put this at 18 months to four years of development, then about four more years to deploy widely ([Aarne et al., CNAS, 2024](https://www.cnas.org/publications/reports/secure-governable-chips)).
 - **An international agency**, modeled on the IAEA, to hold the keys, run inspections, and grant licenses for training runs. See our [proposal](/proposal).
 - **Limits on publishing algorithmic breakthroughs**, because efficiency gains shrink the compute needed. This is the hardest part, and it is covered on the [archived page](/building-the-pause-button-2025#software-governance).
 
