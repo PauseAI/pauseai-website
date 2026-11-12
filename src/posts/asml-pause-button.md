@@ -4,8 +4,8 @@ description: The Netherlands already licenses every export of ASML's EUV lithogr
 ---
 
 Nearly every advanced AI chip in the world is made on lithography machines from ASML, a single company in the Netherlands.
-The Dutch government already requires a license for every export of those machines, and since 2024 for their maintenance too.
-Today it grants or denies those licenses on one question: is the customer Chinese?
+Every export of those machines already needs a license, and since 2024 so does servicing the restricted machines already sold.
+Today, in practice, those licenses answer one question: would the machine help China's advanced chipmaking?
 It could ask a different question, and become the enforcement mechanism for a [global pause on the development of superintelligence](/proposal).
 
 This page builds on our [Building the Pause Button](/building-the-pause-button) research, the [arXiv report](https://arxiv.org/abs/2506.20530) that came out of it, and the demand we made at our [Amsterdam protest in December 2025](/amsterdam-protest-2025-december).
@@ -24,9 +24,9 @@ What we need is an international treaty, and a treaty needs something to enforce
 The AI chip supply chain is [extremely concentrated](/feasibility), and lithography is its narrowest point:
 
 - ASML is the only company in the world that makes extreme ultraviolet (EUV) lithography machines. The newest AI chips and high-bandwidth memory are made on them; the rest, including everything China produces, comes off ASML's older DUV immersion machines.
-- ASML shipped [48 EUV systems in 2025](https://www.asml.com/en/news/press-releases/2026/q4-2025-financial-results), plus eight High-NA systems. Total capacity is estimated at [80 to 85 machines per year](https://europe2031.ai/).
+- ASML shipped [48 EUV systems in 2025](https://www.asml.com/en/news/press-releases/2026/q4-2025-financial-results), High-NA systems included. Total capacity is estimated at [80 to 85 machines per year](https://europe2031.ai/).
 - Each machine costs [up to $380 million](https://www.iaps.ai/research/semiconductor-manufacturing-equipment-export-controls) and took ASML [17 years and €6 billion](https://www.iaps.ai/research/semiconductor-manufacturing-equipment-export-controls) of research to commercialize. Nobody else has one.
-- The machines need constant maintenance, software updates and field upgrades from ASML. Service and upgrades brought in [€8.2 billion in 2025](https://www.asml.com/en/news/press-releases/2026/q4-2025-financial-results), a quarter of ASML's revenue. ASML can also [remotely disable](https://www.businessinsider.com/asml-tsmc-semiconductor-chip-equipment-kill-switch-china-invade-taiwan-2024-5) its EUV machines, as it confirmed to the Dutch government in 2024 for the case of a Taiwan invasion.
+- The machines need constant maintenance, software updates and field upgrades from ASML. Service and upgrades brought in [€8.2 billion in 2025](https://www.asml.com/en/news/press-releases/2026/q4-2025-financial-results), a quarter of ASML's revenue. According to [Bloomberg's 2024 reporting](https://www.businessinsider.com/asml-tsmc-semiconductor-chip-equipment-kill-switch-china-invade-taiwan-2024-5), citing unnamed sources, ASML can also remotely disable its EUV machines and has assured Dutch officials of this for the case of a Taiwan invasion. ASML declined to comment.
 
 Chips wear out in a few years, but a fab produces for a decade or more, which is why the [MIRI treaty draft](https://arxiv.org/abs/2511.10783) treats chip manufacturing equipment more strictly than chips themselves.
 And because the machines need ASML for the rest of their working life, a Dutch licensing decision reaches machines that were sold years ago.
@@ -35,12 +35,14 @@ And because the machines need ASML for the rest of their working life, a Dutch l
 
 The Dutch government does not need to invent anything.
 
-Since 1 September 2023, the [Regeling geavanceerde productieapparatuur voor halfgeleiders](https://sanctionsnews.bakermckenzie.com/the-netherlands-to-introduce-supplemental-export-controls-for-advanced-semiconductor-production-equipment/) (Regulation on Advanced Semiconductor Manufacturing Equipment) requires a national license for the export of EUV and advanced DUV immersion systems to any destination outside the EU.
+EUV machines already need an export license under the [EU dual-use list](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=celex%3A32021R0821).
+On top of that, since 1 September 2023 the [Regeling geavanceerde productieapparatuur voor halfgeleiders](https://sanctionsnews.bakermckenzie.com/the-netherlands-to-introduce-supplemental-export-controls-for-advanced-semiconductor-production-equipment/) (Regulation on Advanced Semiconductor Manufacturing Equipment) requires a national license for the export of advanced DUV immersion systems to any destination outside the EU.
 It was [expanded in September 2024](https://www.rijksoverheid.nl/actueel/nieuws/2024/09/06/nederland-uitbreiding-exportcontrolemaatregel-geavanceerde-productieapparatuur-halfgeleiders) and [again in April 2025](https://ecustoms.sgs.com/2025/02/12/aanscherping-exportcontrole-op-geavanceerde-productieapparatuur-voor-halfgeleiders-per-1-april-2025/).
+In September 2024 the government [confirmed](https://www.investing.com/news/economy-news/asml-needs-licence-to-service-some-equipment-in-china-dutch-government-says-3610146) that servicing, spare parts and software updates for the restricted machines already sold need a license too.
 The Minister for Foreign Trade decides on each license, case by case.
 The legal basis is [Article 9 of EU Regulation 2021/821](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=celex%3A32021R0821), which lets member states impose national controls for reasons of public security.
 
-Today the licensing criteria are simple: China is denied, everyone else is approved.
+Today the criteria come down, in practice, to whether a tool would help China's advanced chipmaking.
 Our proposal is to change the criteria, not the instrument.
 
 ## What to enforce through ASML
@@ -64,7 +66,7 @@ All four can be verified with data that ASML and the fab already collect.
 These are contractual, enforced by the fab under threat of losing supply.
 
 5. **Chain of custody.** Every transfer of AI chips is reported, and large clusters are registered by location. The [verification literature](https://arxiv.org/abs/2408.16074) lists chip location tracking as feasible with international agreement. The MIRI draft sets its cluster line at 16 H100-equivalents, which is too low for practical policy; a datacenter-scale threshold is more realistic to start with.
-6. **Governance-ready chips.** New AI chips must support firmware attestation or [licensing](https://arxiv.org/abs/2404.18308) once the technology is mature. [Ansari (2026)](https://arxiv.org/abs/2604.04712) estimates two to four years of research for on-chip metering and [FlexHEGs](https://yoshuabengio.org/wp-content/uploads/2024/09/FlexHEG-Interim-Report_2024.pdf). This is a requirement for future designs, not for today.
+6. **Governance-ready chips.** New AI chips must support firmware attestation or [licensing](https://arxiv.org/abs/2404.18308) once the technology is mature. [Ansari (2026)](https://arxiv.org/abs/2604.04712), drawing on [Aarne et al. (CNAS, 2024)](https://www.cnas.org/publications/reports/secure-governable-chips), puts on-chip mechanisms at 18 months to four years of development, then about four more years to deploy widely; [FlexHEGs](https://yoshuabengio.org/wp-content/uploads/2024/09/FlexHEG-Interim-Report_2024.pdf) could take several years more. This is a requirement for future designs, not for today.
 7. **Acceptance of training thresholds.** Buyers above the cluster threshold commit to no training runs above the international compute limit without approval, and accept verification through energy monitoring and inspections.
 
 ### What ASML cannot enforce
@@ -150,15 +152,15 @@ What exists:
 
 What is missing, according to a [CSIS analysis](https://www.csis.org/analysis/understanding-us-allies-current-legal-authority-implement-ai-and-semiconductor-export) of allied export control powers:
 
-| Gap                                                  | Consequence                               | Required step                                                                        |
-| ---------------------------------------------------- | ----------------------------------------- | ------------------------------------------------------------------------------------ |
-| No control over services and maintenance             | Phase 1 cannot reach the installed base   | National license requirement for service and software updates, as the MATCH Act does |
-| No end-user list                                     | No targeted denial per fab or lab         | National list of buyers with mandatory conditions                                    |
-| No extraterritorial reach                            | Flow-down conditions are contractual only | Conditions written into the license, tied to loss of service                         |
-| "AI safety" as a public security ground never tested | Legal risk                                | Frame as national security, supported by the December 2024 analysis                  |
+| Gap                                                  | Consequence                                     | Required step                                                                                                            |
+| ---------------------------------------------------- | ----------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------ |
+| Servicing licenses cover only the restricted tools   | Phase 1 cannot reach most of the installed base | National license requirement for service and software updates on all EUV and advanced DUV systems, as the MATCH Act does |
+| No end-user list                                     | No targeted denial per fab or lab               | National list of buyers with mandatory conditions                                                                        |
+| No extraterritorial reach                            | Flow-down conditions are contractual only       | Conditions written into the license, tied to loss of service                                                             |
+| "AI safety" as a public security ground never tested | Legal risk                                      | Frame as national security, supported by the December 2024 analysis                                                      |
 
 EU rules do not restrict transfers within the EU.
-That is not a problem here, because no advanced AI fab is located in the EU.
+That is a small gap for now: the EU's only high-volume EUV fab, [Intel's in Ireland](https://newsroom.intel.com/?p=2148), makes processors, not leading AI accelerators.
 
 ## Objections
 
@@ -200,7 +202,7 @@ Waiting for EU consensus means waiting until the window is shut.
 
 ## What you can do
 
-- If you are in the Netherlands, [write to your representative](/lobby-tips) and ask them to raise this in the MATCH Act debate: if the Netherlands introduces a maintenance license, it should carry AI safety criteria rather than country criteria alone.
+- If you are in the Netherlands, [write to your representative](/lobby-tips) and ask them to raise this in the MATCH Act debate: if the Netherlands extends its maintenance license, it should carry AI safety criteria rather than country criteria alone.
 - Ask the Dutch government to convene ASML, other key companies in the AI chip supply chain and their governments to initiate negotiations on an international AI treaty. The goal should be to use access to chipmaking equipment, maintenance and chips to secure participation and verifiable commitments, with a plan for bringing the US and China into the negotiations.
 - [Join PauseAI](/join) and help us build the coalition with Japan, Germany, Taiwan and South Korea.
 
