@@ -1,17 +1,17 @@
 export const prerender = true
 
-import { dev } from '$app/env';
-import type { LocaleEnvApiResponse } from '$api/locale-env/+server.js';
-import { locales } from '$lib/paraglide/runtime';
-import { handleRedirects } from '$lib/redirects';
-import { redirect } from '@sveltejs/kit';
-import type { LayoutLoad } from './$types';
+import { dev } from '$app/env'
+import type { LocaleEnvApiResponse } from '$api/locale-env/+server.js'
+import { locales } from '#lib/paraglide/runtime.js'
+import { handleRedirects } from '#lib/redirects.ts'
+import { redirect } from '@sveltejs/kit'
+import type { LayoutLoad } from './$types'
 
 export const load: LayoutLoad = async ({ url: { host, pathname }, fetch }) => {
 	handleRedirects(pathname)
 
 	if (host === 'pauseai.org') {
-		return redirect(301, 'https://pauseai.info' + pathname, { external: true });
+		return redirect(301, 'https://pauseai.info' + pathname, { external: true })
 	}
 
 	let localeAlert = null
@@ -20,8 +20,8 @@ export const load: LayoutLoad = async ({ url: { host, pathname }, fetch }) => {
 	if (dev) {
 		try {
 			// Fetch current server-side environment-calculated locales
-			const response = await fetch('/api/locale-env');
-			const serverData = await response.json() as LocaleEnvApiResponse;
+			const response = await fetch('/api/locale-env')
+			const serverData = (await response.json()) as LocaleEnvApiResponse
 			// Get client-side runtime locales
 			const runtimeLocales = Array.from(locales)
 

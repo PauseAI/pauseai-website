@@ -1,4 +1,4 @@
-import type { StrictPost } from '$lib/types'
+import type { StrictPost } from '#lib/types.ts'
 
 export const meta: StrictPost = {
 	title: 'PauseAI Statement',

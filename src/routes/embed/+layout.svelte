@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { onMount } from 'svelte'
 	import { page } from '$app/state'
-	import { reportEmbedHeight } from '$lib/embedHeight'
+	import { reportEmbedHeight } from '#lib/embedHeight.ts'
 
 	let wrapper: HTMLDivElement
 

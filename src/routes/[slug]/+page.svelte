@@ -1,8 +1,8 @@
 <script lang="ts">
-	import Image from '$lib/components/images/Image.svelte'
-	import Link from '$lib/components/Link.svelte'
-	import PostMeta from '$lib/components/PostMeta.svelte'
-	import { setPostPictures } from '$lib/post-pictures-context.svelte'
+	import Image from '#lib/components/images/Image.svelte'
+	import Link from '#lib/components/Link.svelte'
+	import PostMeta from '#lib/components/PostMeta.svelte'
+	import { setPostPictures } from '#lib/post-pictures-context.svelte.ts'
 	import type { PageData } from './$types'
 
 	interface Props {

@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { userTheme, toggleTheme } from '$lib/theme'
+	import { userTheme, toggleTheme } from '#lib/theme.ts'
 </script>
 
 <button class="button-to-link" onclick={toggleTheme} aria-label="Toggle theme"

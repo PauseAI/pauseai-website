@@ -1,4 +1,4 @@
-import { getLocale } from '$lib/paraglide/runtime'
+import { getLocale } from '#lib/paraglide/runtime.js'
 import { cssForPost } from './post-css.server'
 import { imagesForPost } from './post-images.server'
 import type { PageServerLoad } from './$types'

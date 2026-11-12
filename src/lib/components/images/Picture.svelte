@@ -1,6 +1,6 @@
 <!-- See docs/image-processing.md for the full image-processing architecture. -->
 <script lang="ts">
-	import type { LoosePicture } from '$lib/types'
+	import type { LoosePicture } from '#lib/types.ts'
 
 	interface Props {
 		/** vite-imagetools Picture object (sources + img fallback). */

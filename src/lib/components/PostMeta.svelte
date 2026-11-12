@@ -1,8 +1,8 @@
 <script lang="ts">
-	import { title as siteName, url as rootUrl } from '$lib/config'
+	import { title as siteName, url as rootUrl } from '#lib/config.ts'
 	import type { BlogPosting, WithContext } from 'schema-dts'
 	import { page } from '$app/state'
-	import { deLocalizeHref } from '$lib/paraglide/runtime'
+	import { deLocalizeHref } from '#lib/paraglide/runtime.js'
 
 	interface Props {
 		title: string

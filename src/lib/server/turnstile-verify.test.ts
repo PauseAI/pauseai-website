@@ -5,7 +5,7 @@ const env: Record<string, string | undefined> = {}
 vi.mock('$app/environment', () => ({ dev: false }))
 vi.mock('$env/dynamic/private', () => ({ env }))
 const reportError = vi.fn()
-vi.mock('$lib/server/sentry', () => ({ reportError }))
+vi.mock('#lib/server/sentry.ts', () => ({ reportError }))
 
 const { TURNSTILE_TIMEOUT_MS, verifyTurnstile } = await import('./turnstile-verify')
 

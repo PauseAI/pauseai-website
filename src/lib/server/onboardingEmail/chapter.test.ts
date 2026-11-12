@@ -17,7 +17,7 @@ const records: { fields: Record<string, unknown> }[] = [
 
 let fetchFails = false
 
-vi.mock('$lib/airtable.js', () => ({
+vi.mock('#lib/airtable.js', () => ({
 	fetchAllPages: () =>
 		fetchFails ? Promise.reject(new Error('Airtable is down')) : Promise.resolve(records)
 }))

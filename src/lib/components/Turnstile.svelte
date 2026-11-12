@@ -5,7 +5,7 @@
 		TURNSTILE_FIELD,
 		turnstileSiteKey,
 		type TurnstileApi
-	} from '$lib/turnstile'
+	} from '#lib/turnstile.ts'
 
 	// Tokens are single-use and expire after five minutes, so the parent remounts
 	// this component (via a {#key} block) after every submission.

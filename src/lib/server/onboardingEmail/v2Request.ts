@@ -1,9 +1,9 @@
-import { CRM_INTAKE_URL } from '$app/env/private';
-import { COUNTRY_BY_ISO_CODE } from '$lib/server/countryCodes';
-import { normaliseEmail } from '$lib/server/emailVerification';
-import { resolveOnboardingEmailLanguage } from './language.js';
-import { stripMarkdown } from './markdown.js';
-import type { BaseLanguage, OnboardingEmailV2Params, OnboardingRouting } from './types.js';
+import { CRM_INTAKE_URL } from '$app/env/private'
+import { COUNTRY_BY_ISO_CODE } from '#lib/server/countryCodes.ts'
+import { normaliseEmail } from '#lib/server/emailVerification.ts'
+import { resolveOnboardingEmailLanguage } from './language.js'
+import { stripMarkdown } from './markdown.js'
+import type { BaseLanguage, OnboardingEmailV2Params, OnboardingRouting } from './types.js'
 
 // Validates a v2 render request (docs/onboarding-email-v2-contract.md). Every rule here is part
 // of that contract: change the doc with it.
@@ -36,9 +36,9 @@ const MAX_LANGUAGES = 50
 const RECORD_ID = /^rec[A-Za-z0-9]{14}$/
 // One @ with something either side and no whitespace: enough to refuse a value that is not an
 // address, without second-guessing the CRM's own validation.
-const EMAIL = /^[^\s@]+@[^\s@]+$/;
+const EMAIL = /^[^\s@]+@[^\s@]+$/
 
-const MAX_EMAIL = 254;
+const MAX_EMAIL = 254
 
 class InvalidRequest extends Error {}
 
@@ -169,7 +169,7 @@ const MAX_URL = 2048
 // unreadable, there is no CRM to point an unsubscribe link at.
 function crmHost(): string | undefined {
 	try {
-		return CRM_INTAKE_URL ? new URL(CRM_INTAKE_URL).host : undefined;
+		return CRM_INTAKE_URL ? new URL(CRM_INTAKE_URL).host : undefined
 	} catch {
 		return undefined
 	}
@@ -178,12 +178,12 @@ function crmHost(): string | undefined {
 /** An https URL on the CRM's host, never fetched. Brackets are encoded so the plain text
  *  body's `[label](url)` link cannot end early. */
 function parseUnsubscribeUrl(value: unknown): string | undefined {
-	if (value === undefined || value === null || value === '') return undefined;
-	const host = crmHost();
-	if (!host) invalid('unsubscribe_url', 'cannot be accepted: the website has no CRM_INTAKE_URL');
-	const problem = `must be an https URL on ${host}`;
-	if (typeof value !== 'string' || value.length > MAX_URL || (/\s/).test(value)) {
-		invalid('unsubscribe_url', problem);
+	if (value === undefined || value === null || value === '') return undefined
+	const host = crmHost()
+	if (!host) invalid('unsubscribe_url', 'cannot be accepted: the website has no CRM_INTAKE_URL')
+	const problem = `must be an https URL on ${host}`
+	if (typeof value !== 'string' || value.length > MAX_URL || /\s/.test(value)) {
+		invalid('unsubscribe_url', problem)
 	}
 	let parsed: URL
 	try {

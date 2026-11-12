@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { page } from '$app/state'
-	import Link from '$lib/components/Link.svelte'
-	import PostMeta from '$lib/components/PostMeta.svelte'
+	import Link from '#lib/components/Link.svelte'
+	import PostMeta from '#lib/components/PostMeta.svelte'
 	import { onMount } from 'svelte'
 	import { meta } from '../../statement/meta'
 	import StatementForm from '../../statement/StatementForm.svelte'

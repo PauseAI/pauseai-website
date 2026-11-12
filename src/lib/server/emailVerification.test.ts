@@ -7,8 +7,8 @@ const getRecord =
 	vi.fn<(...args: unknown[]) => Promise<Record<string, unknown> | 'missing' | 'failed'>>()
 
 vi.mock('$env/dynamic/private', () => ({ env }))
-vi.mock('$lib/server/sentry', () => ({ reportError }))
-vi.mock('$lib/airtable', () => ({ getRecord }))
+vi.mock('#lib/server/sentry.ts', () => ({ reportError }))
+vi.mock('#lib/airtable.ts', () => ({ getRecord }))
 
 const {
 	LEGACY_LINK_CUTOVER,

@@ -2,8 +2,8 @@ import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 
 const fetchAllPages = vi.fn<(...args: unknown[]) => Promise<unknown[]>>()
 const reportError = vi.fn<(error: unknown, context?: Record<string, unknown>) => Promise<void>>()
-vi.mock('$lib/airtable.js', () => ({ fetchAllPages }))
-vi.mock('$lib/server/sentry', () => ({ reportError }))
+vi.mock('#lib/airtable.js', () => ({ fetchAllPages }))
+vi.mock('#lib/server/sentry.ts', () => ({ reportError }))
 
 const { getNationalGroups, resetNationalGroupsCacheForTests } = await import('./nationalGroups')
 

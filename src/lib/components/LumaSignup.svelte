@@ -1,5 +1,5 @@
 <script lang="ts">
-	import LinkWithoutIcon from '$lib/components/LinkWithoutIcon.svelte'
+	import LinkWithoutIcon from '#lib/components/LinkWithoutIcon.svelte'
 
 	const BASE_URL = 'https://lu.ma'
 	const EMBED_BASE_URL = 'https://embed.lu.ma'

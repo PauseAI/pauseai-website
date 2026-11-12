@@ -1,7 +1,7 @@
 <script lang="ts">
-	import type { NewsItem } from '$lib/types'
+	import type { NewsItem } from '#lib/types.ts'
 	import type { NewsApiResponse } from '$api/news/+server'
-	import NewsCard from '$lib/components/NewsCard.svelte'
+	import NewsCard from '#lib/components/NewsCard.svelte'
 	import { onMount } from 'svelte'
 
 	const pageSize = 6

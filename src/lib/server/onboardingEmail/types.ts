@@ -1,4 +1,4 @@
-import type { Intent } from '$lib/components/onboarding/options.js'
+import type { Intent } from '#lib/components/onboarding/options.js'
 
 export type { Intent }
 

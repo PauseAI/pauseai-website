@@ -185,7 +185,7 @@ source:
 
 | You have…                                            | Use                                                                       |
 | ---------------------------------------------------- | ------------------------------------------------------------------------- |
-| A bundled asset path in a server load                | `resolvePicture` / `resolveImageUrl` from `$lib/image.server`             |
+| A bundled asset path in a server load                | `resolvePicture` / `resolveImageUrl` from `#lib/image.server.ts`          |
 | A post banner / body image                           | `imagesForPost` from `routes/[slug]/post-images.server`                   |
 | A remote or arbitrary URL                            | `<NetlifyImage src={url} … />`                                            |
 | A resolved `Picture` (or a plain URL fallback)       | `<Image picture={…} src={…} />`                                           |

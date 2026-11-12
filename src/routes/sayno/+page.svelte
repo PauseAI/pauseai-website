@@ -1,9 +1,9 @@
 <script lang="ts">
 	import { onMount } from 'svelte'
 	import { page } from '$app/state'
-	import PostMeta from '$lib/components/PostMeta.svelte'
-	import Link from '$lib/components/Link.svelte'
-	import Banner from '$lib/components/Banner.svelte'
+	import PostMeta from '#lib/components/PostMeta.svelte'
+	import Link from '#lib/components/Link.svelte'
+	import Banner from '#lib/components/Banner.svelte'
 	import { Toaster } from 'svelte-french-toast'
 	import toast from 'svelte-french-toast'
 	import {
@@ -17,8 +17,8 @@
 		cloudinaryConfig,
 		returningUidMessage
 	} from './selfieStore'
-	import { detectAndStoreCollagenUid, hasCollagenUid } from '$lib/collagen'
-	import { HERO_ORANGE } from '$lib/colors'
+	import { detectAndStoreCollagenUid, hasCollagenUid } from '#lib/collagen.ts'
+	import { HERO_ORANGE } from '#lib/colors.ts'
 	// Static env: dynamic public env in client code blocks prerendered pages'
 	// hydration on a runtime /_app/env.js fetch (see hooks.client.ts).
 	import * as publicEnv from '$env/static/public'

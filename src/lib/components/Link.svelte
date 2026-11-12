@@ -2,8 +2,8 @@
 	import Link from './LinkWithoutIcon.svelte'
 	import ExternalLink from '@lucide/svelte/icons/external-link'
 	import Mail from '@lucide/svelte/icons/mail'
-	import type { LinkType } from '$lib/types'
-	import { getLinkType } from '$lib/link'
+	import type { LinkType } from '#lib/types.ts'
+	import { getLinkType } from '#lib/link.ts'
 
 	interface Props {
 		href: string

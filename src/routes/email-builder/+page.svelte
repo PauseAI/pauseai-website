@@ -1,6 +1,6 @@
 <script lang="ts">
-	import PostMeta from '$lib/components/PostMeta.svelte'
-	import Button from '$lib/components/Button.svelte'
+	import PostMeta from '#lib/components/PostMeta.svelte'
+	import Button from '#lib/components/Button.svelte'
 	// Risks
 	import Xrisk from './concerns/xrisk.svelte'
 	/* import Bio from './concerns/bio.svelte' */
@@ -13,8 +13,8 @@
 	import { meta } from './meta'
 	import * as clipboard from 'clipboard-polyfill'
 	import toast from 'svelte-french-toast'
-	import Link from '$lib/components/Link.svelte'
-	import Card from '$lib/components/Card.svelte'
+	import Link from '#lib/components/Link.svelte'
+	import Card from '#lib/components/Card.svelte'
 	import { type Component } from 'svelte'
 
 	const { title, description, date } = meta

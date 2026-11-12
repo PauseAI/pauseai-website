@@ -5,7 +5,7 @@ date: 2025-11-06
 ---
 
 <script>
-	import AboutPeople from '$lib/components/about/AboutPeople.svelte'
+	import AboutPeople from '#lib/components/about/AboutPeople.svelte'
 </script>
 
 ## How We Began

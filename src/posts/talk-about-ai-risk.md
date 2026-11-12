@@ -6,7 +6,7 @@ description: How to talk with the people in your life about risks from advanced
 ---
 
 <script>
-import ExponentialTree from '$lib/components/ExponentialTree.svelte'
+import ExponentialTree from '#lib/components/ExponentialTree.svelte'
 </script>
 
 Everyone can drive social change. Social movements that succeed do so because the people who power them understand that relationships can start decisive chain reactions that tangibly shift public opinion, seemingly out of nowhere.

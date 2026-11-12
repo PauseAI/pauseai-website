@@ -4,7 +4,7 @@ description: AI Safety should be the focus of the Paris AI Action Summit!
 ---
 
 <script>
-    import LumaSignup from '$lib/components/LumaSignup.svelte'
+    import LumaSignup from '#lib/components/LumaSignup.svelte'
 </script>
 
 ## AI Safety should be the focus of the Paris AI Action Summit!

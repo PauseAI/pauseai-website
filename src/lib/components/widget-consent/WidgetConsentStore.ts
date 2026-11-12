@@ -1,4 +1,4 @@
-import { getItem, setItem } from '$lib/localStorage'
+import { getItem, setItem } from '#lib/localStorage.ts'
 import { writable } from 'svelte/store'
 
 const KEY = 'widget-consent'

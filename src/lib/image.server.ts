@@ -3,7 +3,7 @@
 // is never bundled into the client — server load functions resolve images
 // here and pass only the resulting URLs/Picture objects to the client.
 // See docs/image-processing.md for the full architecture.
-import type { Picture } from '$lib/types'
+import type { Picture } from '#lib/types.ts'
 
 const BASE = '../assets/images'
 

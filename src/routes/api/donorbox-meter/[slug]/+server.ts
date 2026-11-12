@@ -1,5 +1,5 @@
 import type { RequestHandler } from './$types'
-import { asError } from '$lib/utils'
+import { asError } from '#lib/utils.ts'
 
 /**
  * Proxies a DonorBox goal meter, applying matching donation logic.

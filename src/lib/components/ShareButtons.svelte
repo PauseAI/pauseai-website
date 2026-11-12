@@ -8,11 +8,11 @@
 	 * If no uid provided, uses "0" as dummy UID.
 	 */
 
-	import Facebook from '$lib/components/icons/facebook.svelte'
-	import X from '$lib/components/icons/x.svelte'
-	import Whatsapp from '$lib/components/icons/whatsapp.svelte'
-	import Linkedin from '$lib/components/icons/linkedin.svelte'
-	import Reddit from '$lib/components/icons/reddit.svelte'
+	import Facebook from '#lib/components/icons/facebook.svelte'
+	import X from '#lib/components/icons/x.svelte'
+	import Whatsapp from '#lib/components/icons/whatsapp.svelte'
+	import Linkedin from '#lib/components/icons/linkedin.svelte'
+	import Reddit from '#lib/components/icons/reddit.svelte'
 
 	interface Props {
 		campaign: string // Campaign name (e.g., "sayno")

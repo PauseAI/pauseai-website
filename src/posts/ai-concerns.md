@@ -4,7 +4,7 @@ description: Share your perspective on the risks of advanced AI.
 ---
 
 <script>
-    import TallyEmbed from '$lib/components/TallyEmbed.svelte'
+    import TallyEmbed from '#lib/components/TallyEmbed.svelte'
 </script>
 
 Advanced AI will reshape work, education, security, creativity, and daily life, quickly and in ways that will be hard to reverse. It may bring real benefits, but it could also introduce serious risks, including the possibility of large-scale harm if powerful systems are deployed before they’re reliably safe and properly governed.

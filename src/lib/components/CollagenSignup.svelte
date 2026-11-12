@@ -1,10 +1,10 @@
 <script lang="ts">
 	import { onMount } from 'svelte'
 	import { page } from '$app/state'
-	import NewsletterSignup from '$lib/components/NewsletterSignup.svelte'
-	import Banner from '$lib/components/Banner.svelte'
-	import Link from '$lib/components/Link.svelte'
-	import { detectAndStoreCollagenUid } from '$lib/collagen'
+	import NewsletterSignup from '#lib/components/NewsletterSignup.svelte'
+	import Banner from '#lib/components/Banner.svelte'
+	import Link from '#lib/components/Link.svelte'
+	import { detectAndStoreCollagenUid } from '#lib/collagen.ts'
 
 	const campaign = 'sayno'
 

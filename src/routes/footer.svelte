@@ -1,10 +1,10 @@
 <script lang="ts">
-	import Link from '$lib/components/Link.svelte'
-	import Toggle from '$lib/components/Toggle.svelte'
-	import Edit from '$lib/components/Edit.svelte'
-	import WithdrawWidgetConsent from '$lib/components/widget-consent/WithdrawWidgetConsent.svelte'
-	import Socials from '$lib/components/Socials.svelte'
-	import * as m from '$lib/paraglide/messages.js'
+	import Link from '#lib/components/Link.svelte'
+	import Toggle from '#lib/components/Toggle.svelte'
+	import Edit from '#lib/components/Edit.svelte'
+	import WithdrawWidgetConsent from '#lib/components/widget-consent/WithdrawWidgetConsent.svelte'
+	import Socials from '#lib/components/Socials.svelte'
+	import * as m from '#lib/paraglide/messages.js'
 </script>
 
 <footer>

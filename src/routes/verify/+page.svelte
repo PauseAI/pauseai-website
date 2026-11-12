@@ -1,21 +1,27 @@
 <script lang="ts">
-	import * as Sentry from '@sentry/svelte';
-	import { afterNavigate, goto } from '$app/navigation';
-	import { page } from '$app/state';
-	import { verificationConfirmedParameter, verificationNeedsClick } from '$lib/config';
-	import toast from 'svelte-french-toast';
-	import Button from '$lib/components/Button.svelte';
-	import Link from '$lib/components/Link.svelte';
-	import Processing from '$lib/components/Processing.svelte';
-	import SignatureConfirmed from './SignatureConfirmed.svelte';
+	import * as Sentry from '@sentry/svelte'
+	import { afterNavigate, goto } from '$app/navigation'
+	import { page } from '$app/state'
+	import { verificationConfirmedParameter, verificationNeedsClick } from '#lib/config.ts'
+	import toast from 'svelte-french-toast'
+	import Button from '#lib/components/Button.svelte'
+	import Link from '#lib/components/Link.svelte'
+	import Processing from '#lib/components/Processing.svelte'
+	import SignatureConfirmed from './SignatureConfirmed.svelte'
 
-	const NEW_LINK_MAIL = 'mailto:info@pauseai.info?subject=' + encodeURIComponent('New email verification link') + '&body=' + encodeURIComponent('Hi, my verification link has expired. Please send me a new one. (Sent from the address I signed up with.)');
-	let errorMessage: string | undefined = $state();
-	let expired = $state(false);
-	let verificationStarted = false;
-	let awaitingClick = $state(false);
-	let signatureConfirmed = $state(false);
-	let linkParameters = '';
+	const NEW_LINK_MAIL =
+		'mailto:info@pauseai.info?subject=' +
+		encodeURIComponent('New email verification link') +
+		'&body=' +
+		encodeURIComponent(
+			'Hi, my verification link has expired. Please send me a new one. (Sent from the address I signed up with.)'
+		)
+	let errorMessage: string | undefined = $state()
+	let expired = $state(false)
+	let verificationStarted = false
+	let awaitingClick = $state(false)
+	let signatureConfirmed = $state(false)
+	let linkParameters = ''
 
 	// replaceState needs the router started. On a direct load onMount runs while
 	// SvelteKit is still constructing the root component (in production that
@@ -25,12 +31,12 @@
 	// mounted, but verification must run once: by then the link parameters are
 	// gone from the URL, so a re-run would POST an empty body and fail.
 	afterNavigate(({ shallow, type }) => {
-		if (shallow && type === 'goto') return;
-		if (verificationStarted) return;
+		if (shallow && type === 'goto') return
+		if (verificationStarted) return
 
-		verificationStarted = true;
-		void start();
-	});
+		verificationStarted = true
+		void start()
+	})
 
 	async function start() {
 		// Take the link's query out of the address bar, and so out of history and of
@@ -42,10 +48,10 @@
 		// verification, which is the point of the page. redactLinkCredentials in
 		// hooks.client.ts keeps the leftover credentials out of the error report.
 		try {
-			goto(page.url.pathname, { shallow: true, replace: true });
-		} catch(error) {
-			console.error('Failed to remove the verification link from the address bar:', error);
-			Sentry.captureException(error);
+			goto(page.url.pathname, { shallow: true, replace: true })
+		} catch (error) {
+			console.error('Failed to remove the verification link from the address bar:', error)
+			Sentry.captureException(error)
 		}
 		if (verificationNeedsClick(linkParameters)) awaitingClick = true
 		else if (await verify(linkParameters)) {
@@ -107,7 +113,7 @@
 		<Link href="mailto:privacy@pauseai.info">privacy@pauseai.info</Link>.
 	</p>
 {:else}
-	<Processing errorMessage={errorMessage} />
+	<Processing {errorMessage} />
 {/if}
 
 <style>

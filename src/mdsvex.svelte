@@ -1,6 +1,10 @@
 <script module lang="ts">
 	// eslint-disable-next-line no-restricted-imports -- reserved for mdsvex
-	import { img as MdsvexImg, a as MdsvexA, table as MdsvexTable } from '$lib/components/custom'
+	import {
+		img as MdsvexImg,
+		a as MdsvexA,
+		table as MdsvexTable
+	} from '#lib/components/custom/index.ts'
 
 	export const img = MdsvexImg
 	export const a = MdsvexA

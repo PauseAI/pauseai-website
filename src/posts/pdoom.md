@@ -5,7 +5,7 @@ date: 2023-12-18
 ---
 
 <script>
-	import Doomers from '$lib/components/Doomers.svelte'
+	import Doomers from '#lib/components/Doomers.svelte'
 </script>
 
 p(doom) is the probability of very bad outcomes (e.g. human extinction) as a result of AI. This most often refers to the likelihood of [AI taking over](/ai-takeover) from humanity, but different scenarios can also constitute "doom". For example, a large portion of the population dying due to a novel biological weapon created by AI, social collapse due to a [large-scale cyber attack](/cybersecurity-risks), or AI causing a nuclear war. Note that not everyone is using the same definition when talking about their p(doom) values. Most notably the time horizon is often not specified, which makes comparing a bit difficult.

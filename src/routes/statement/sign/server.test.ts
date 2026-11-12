@@ -8,20 +8,20 @@ const verifyTurnstile =
 
 vi.mock('$app/environment', () => ({ dev: false }))
 vi.mock('$env/dynamic/private', () => ({ env }))
-vi.mock('$lib/airtable', () => ({
+vi.mock('#lib/airtable.ts', () => ({
 	airtableFormulaString: (value: string) => `"${value}"`,
 	createRecord,
 	hasMatchingRecord
 }))
-vi.mock('$lib/server/turnstile-verify', () => ({ verifyTurnstile }))
+vi.mock('#lib/server/turnstile-verify.ts', () => ({ verifyTurnstile }))
 const signInCrm = vi.fn<(...args: unknown[]) => Promise<'ok' | 'refused' | 'failed'>>()
-vi.mock('$lib/server/statementCrm', async (importOriginal) => ({
-	...(await importOriginal<typeof import('$lib/server/statementCrm')>()),
+vi.mock('#lib/server/statementCrm.ts', async (importOriginal) => ({
+	...(await importOriginal<typeof import('#lib/server/statementCrm.ts')>()),
 	signInCrm
 }))
 
 const { actions } = await import('./+page.server.js')
-const { resetRateLimits } = await import('$lib/server/rateLimit')
+const { resetRateLimits } = await import('#lib/server/rateLimit.ts')
 
 type Result = { status?: number; data?: Record<string, unknown> } & Record<string, unknown>
 

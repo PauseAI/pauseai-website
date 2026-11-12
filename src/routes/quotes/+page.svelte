@@ -1,8 +1,8 @@
 <script lang="ts">
-	import { title } from '$lib/config'
+	import { title } from '#lib/config.ts'
 	import Quote from './Quote.svelte'
 	import { meta } from './meta'
-	import PostMeta from '$lib/components/PostMeta.svelte'
+	import PostMeta from '#lib/components/PostMeta.svelte'
 	import GithubSlugger from 'github-slugger'
 	import type { PageData } from './$types'
 

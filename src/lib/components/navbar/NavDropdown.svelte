@@ -1,8 +1,8 @@
 <script lang="ts">
 	import { page } from '$app/state'
-	import Card from '$lib/components/Card.svelte'
-	import LinkWithoutIcon from '$lib/components/LinkWithoutIcon.svelte'
-	import { localizeHref } from '$lib/paraglide/runtime'
+	import Card from '#lib/components/Card.svelte'
+	import LinkWithoutIcon from '#lib/components/LinkWithoutIcon.svelte'
+	import { localizeHref } from '#lib/paraglide/runtime.js'
 	import ChevronDown from '@lucide/svelte/icons/chevron-down'
 	import { onMount } from 'svelte'
 	import type { NavItem } from './navItems'

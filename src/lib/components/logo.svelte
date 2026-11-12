@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { HERO_ORANGE } from '$lib/colors'
+	import { HERO_ORANGE } from '#lib/colors.ts'
 
 	interface Props {
 		width?: number

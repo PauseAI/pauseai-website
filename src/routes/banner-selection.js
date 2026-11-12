@@ -5,7 +5,7 @@
 //
 // `inDateRange` is injected as a global by +layout.svelte before this script runs.
 
-/** @typedef {import('$lib/types').BannerRule} BannerRule */
+/** @typedef {import('#lib/types.ts').BannerRule} BannerRule */
 /** @type {BannerRule[]} */
 // eslint-disable-next-line no-unassigned-vars -- Injected by +layout.svelte at runtime
 var mainBannerRules

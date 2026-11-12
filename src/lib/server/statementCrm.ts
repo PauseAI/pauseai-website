@@ -3,25 +3,26 @@
 // docs/intake-endpoint-plan.md, "Statement signatures".
 //
 // Emails and other submitted values must never reach a log or a report.
-import { STATEMENT_BACKEND } from '$app/env/private';
-import type { Signatory } from '$lib/types';
+import { STATEMENT_BACKEND } from '$app/env/private'
+import type { Signatory } from '#lib/types.ts'
 import {
 	TIMEOUT_MS,
 	callCrm,
 	failureDetails,
 	reportCrmProblem,
 	type CrmFailure
-} from '$lib/server/crmIntake';
+} from '#lib/server/crmIntake.ts'
 
-import { COUNTRY_BY_ISO_CODE } from '$lib/server/countryCodes';
+import { COUNTRY_BY_ISO_CODE } from '#lib/server/countryCodes.ts'
 
-export type StatementBackend = 'airtable' | 'civicrm';
+export type StatementBackend = 'airtable' | 'civicrm'
 
 /**
  * Where signatures are written and listed from, and where /verify sends statement links
  * other than CiviCRM's own (verifyStatementInCrm). Anything but "civicrm" is Airtable.
  */
-export const statementBackend = (): StatementBackend => STATEMENT_BACKEND === 'civicrm' ? 'civicrm' : 'airtable';
+export const statementBackend = (): StatementBackend =>
+	STATEMENT_BACKEND === 'civicrm' ? 'civicrm' : 'airtable'
 
 /** The wording people sign, stored with each signature as its consent record. */
 export const STATEMENT_VERSION = '2023-statement-v1'
@@ -30,11 +31,13 @@ export const STATEMENT_VERSION = '2023-statement-v1'
 // submission_id, so CiviCRM keeps one signature even when an attempt that timed out had
 // written it. The retry runs only if the signing deadline leaves it SIGN_MIN_ATTEMPT_MS,
 // about the slowest the CRM normally answers (crmIntake.ts).
-export const SIGN_RETRY_DELAY_MS = 1000;
+export const SIGN_RETRY_DELAY_MS = 1000
 
-export const SIGN_MIN_ATTEMPT_MS = 6000;
+export const SIGN_MIN_ATTEMPT_MS = 6000
 
-const ISO_CODE_BY_COUNTRY = new Map(Object.entries(COUNTRY_BY_ISO_CODE).map(([code, country]) => [country, code]));
+const ISO_CODE_BY_COUNTRY = new Map(
+	Object.entries(COUNTRY_BY_ISO_CODE).map(([code, country]) => [country, code])
+)
 
 /**
  * The email languages a signer can ask for. CiviCRM sends the email in it; Airtable picks the
@@ -55,8 +58,11 @@ export type Signature = {
 
 export type CrmSignResult = 'ok' | 'refused' | 'failed'
 
-const isTransient = (failure: CrmFailure) => failure.cause === 'network' || failure.cause === 'timeout' || failure.cause === 'http' && (failure.httpStatus ?? 0) >= 500;
-const wait = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
+const isTransient = (failure: CrmFailure) =>
+	failure.cause === 'network' ||
+	failure.cause === 'timeout' ||
+	(failure.cause === 'http' && (failure.httpStatus ?? 0) >= 500)
+const wait = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms))
 
 const report = (
 	action: string,
@@ -91,16 +97,17 @@ export async function signInCrm(
 		submission_id: crypto.randomUUID()
 	}
 	const finish = async (result: CrmSignResult, reporting: Promise<void>) => {
-		if (platform) platform.context.waitUntil(reporting); else await reporting;
+		if (platform) platform.context.waitUntil(reporting)
+		else await reporting
 
-		return result;
-	};
+		return result
+	}
 
 	for (let attempt = 1; ; attempt++) {
 		const remaining = deadline - Date.now()
 		// A retry needs a useful slice of the request's time; past the deadline nothing is sent.
-		if (remaining <= 0 || attempt > 1 && remaining < SIGN_MIN_ATTEMPT_MS) {
-			return finish('failed', report('sign', 'error', { cause: 'deadline', attempt }, 'error'));
+		if (remaining <= 0 || (attempt > 1 && remaining < SIGN_MIN_ATTEMPT_MS)) {
+			return finish('failed', report('sign', 'error', { cause: 'deadline', attempt }, 'error'))
 		}
 		const answer = await callCrm('PauseaiStatement/sign', params, Math.min(TIMEOUT_MS, remaining))
 		if (answer.ok) {
@@ -163,18 +170,24 @@ const publicFields = ({ private: isPrivate, name, country, bio, date }: Signator
 })
 
 /** The list pauseai.info serves now, which /api/signatories republishes when CiviCRM fails. */
-export const LIVE_LIST_URL = 'https://pauseai.info/api/signatories';
+export const LIVE_LIST_URL = 'https://pauseai.info/api/signatories'
 
-const LIVE_LIST_TIMEOUT_MS = 10_000;
+const LIVE_LIST_TIMEOUT_MS = 10_000
 
 // Airtable's rows leave out an empty bio.
 const isSignatory = (row: unknown): row is Signatory => {
-	if (typeof row !== 'object' || row === null) return false;
+	if (typeof row !== 'object' || row === null) return false
 
-	const { private: isPrivate, name, country, bio, date } = row as Record<string, unknown>;
+	const { private: isPrivate, name, country, bio, date } = row as Record<string, unknown>
 
-	return typeof isPrivate === 'boolean' && typeof name === 'string' && typeof country === 'string' && typeof date === 'string' && (bio === undefined || typeof bio === 'string');
-};
+	return (
+		typeof isPrivate === 'boolean' &&
+		typeof name === 'string' &&
+		typeof country === 'string' &&
+		typeof date === 'string' &&
+		(bio === undefined || typeof bio === 'string')
+	)
+}
 
 /**
  * A list fit to publish, keeping only the public fields: a non-empty list whose count matches

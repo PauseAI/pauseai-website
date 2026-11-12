@@ -1,6 +1,6 @@
 <script>
 	import PayPal from '$assets/PayPal.svg?url'
-	import LinkWithoutIcon from '$lib/components/LinkWithoutIcon.svelte'
+	import LinkWithoutIcon from '#lib/components/LinkWithoutIcon.svelte'
 
 	const WIDTH = 256
 	const ASPECT_RATIO = 45.67 / 11.69 // from viewBox property

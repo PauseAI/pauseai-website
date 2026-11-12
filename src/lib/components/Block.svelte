@@ -1,6 +1,6 @@
 <script lang="ts">
-	import Link from '$lib/components/Link.svelte'
-	import SvelteIntersectionObserver from '$lib/components/SvelteIntersectionObserver.svelte'
+	import Link from '#lib/components/Link.svelte'
+	import SvelteIntersectionObserver from '#lib/components/SvelteIntersectionObserver.svelte'
 
 	let isIntersecting: boolean = $state(false)
 

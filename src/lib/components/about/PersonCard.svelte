@@ -1,5 +1,5 @@
 <script lang="ts">
-	import Skeleton from '$lib/components/Skeleton.svelte'
+	import Skeleton from '#lib/components/Skeleton.svelte'
 
 	interface Props {
 		image: string | undefined

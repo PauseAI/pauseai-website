@@ -1,4 +1,4 @@
-import { SIGNUP_MAX_AGE_MS } from '$lib/components/onboarding/signupMaxAge'
+import { SIGNUP_MAX_AGE_MS } from '#lib/components/onboarding/signupMaxAge.ts'
 import { createHmac } from 'node:crypto'
 import { beforeEach, describe, expect, it, vi } from 'vitest'
 
@@ -6,7 +6,7 @@ const env: Record<string, string | undefined> = {}
 const reportError = vi.fn<(error: unknown, context?: Record<string, unknown>) => Promise<void>>()
 
 vi.mock('$env/dynamic/private', () => ({ env }))
-vi.mock('$lib/server/sentry', () => ({ reportError }))
+vi.mock('#lib/server/sentry.ts', () => ({ reportError }))
 
 const { TOKEN_TTL_SECONDS, checkContinuation, issueContinuationToken, mintToken, verifyToken } =
 	await import('./onboardingContinuation.js')

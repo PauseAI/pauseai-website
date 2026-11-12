@@ -17,12 +17,12 @@ const verifyTurnstile = vi.fn<(...args: unknown[]) => Promise<{ ok: boolean; mes
 // Dev would make any hostname a dry run, and this is about production.
 vi.mock('$app/environment', () => ({ browser: false, building: false, dev: false, version: '' }))
 vi.mock('$env/dynamic/private', () => ({ env }))
-vi.mock('$lib/airtable', () => ({
+vi.mock('#lib/airtable.ts', () => ({
 	airtableFormulaString: (value: string) => `"${value}"`,
 	createRecord,
 	hasMatchingRecord
 }))
-vi.mock('$lib/server/turnstile-verify', () => ({ verifyTurnstile }))
+vi.mock('#lib/server/turnstile-verify.ts', () => ({ verifyTurnstile }))
 
 const SITE = 'https://pauseai.info'
 const CHAPTER = 'https://pauseai.es'
@@ -126,7 +126,7 @@ afterAll(() => {
 })
 
 beforeEach(async () => {
-	const { resetRateLimits } = await import('$lib/server/rateLimit')
+	const { resetRateLimits } = await import('#lib/server/rateLimit.ts')
 	resetRateLimits()
 	env.STATEMENT_SIGNING_LIVE = 'true'
 	createRecord.mockReset().mockResolvedValue({ id: 'recAda', createdTime: '', fields: {} })

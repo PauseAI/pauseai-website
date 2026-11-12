@@ -1,4 +1,4 @@
-import { normaliseEmail } from '$lib/server/emailVerification'
+import { normaliseEmail } from '#lib/server/emailVerification.ts'
 
 export type MemberRow = { id: string; fields: Record<string, unknown> }
 

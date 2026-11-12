@@ -1,10 +1,10 @@
 <script lang="ts">
 	import type { GeoApiResponse } from '$api/geo/+server'
-	import Link from '$lib/components/Link.svelte'
+	import Link from '#lib/components/Link.svelte'
 	import distance from '@turf/distance'
 	import { onMount } from 'svelte'
 	import type { CalendarResponse, Event } from '$api/calendar/+server'
-	import Banner from '$lib/components/Banner.svelte'
+	import Banner from '#lib/components/Banner.svelte'
 
 	interface Props {
 		contrast: boolean

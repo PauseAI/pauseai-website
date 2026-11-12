@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { onMount } from 'svelte'
 	import PressCoveragePanel from './PressCoveragePanel.svelte'
-	import { getPressCoverage } from '$lib/press-coverage.remote'
+	import { getPressCoverage } from '#lib/press-coverage.remote.ts'
 
 	let data: Awaited<ReturnType<typeof getPressCoverage>> = $state({
 		coverage: [],

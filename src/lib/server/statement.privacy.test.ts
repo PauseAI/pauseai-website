@@ -11,9 +11,9 @@ const reportError = vi.fn<(error: unknown, context?: Record<string, unknown>) =>
 
 vi.mock('$app/environment', () => ({ dev: false }))
 vi.mock('$env/dynamic/private', () => ({ env }))
-vi.mock('$lib/env.server', () => ({ isDev: () => false, getDevContext: () => 'test' }))
-vi.mock('$lib/server/sentry', () => ({ reportError }))
-vi.mock('$lib/server/turnstile-verify', () => ({
+vi.mock('#lib/env.server', () => ({ isDev: () => false, getDevContext: () => 'test' }))
+vi.mock('#lib/server/sentry.ts', () => ({ reportError }))
+vi.mock('#lib/server/turnstile-verify.ts', () => ({
 	verifyTurnstile: () => Promise.resolve({ ok: true })
 }))
 vi.mock('airtable', () => ({
@@ -24,8 +24,8 @@ vi.mock('airtable', () => ({
 	}
 }))
 
-const { airtableFormulaString, createRecord, hasMatchingRecord } = await import('$lib/airtable')
-const { resetRateLimits } = await import('$lib/server/rateLimit')
+const { airtableFormulaString, createRecord, hasMatchingRecord } = await import('#lib/airtable.ts')
+const { resetRateLimits } = await import('#lib/server/rateLimit.ts')
 const { signStatement } = await import('./statement')
 
 const EMAIL = 'ada.secret@example.org'

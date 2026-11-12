@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { tick } from 'svelte'
-	import { url } from '$lib/config'
+	import { url } from '#lib/config.ts'
 	import JoinInvite from '../statement/JoinInvite.svelte'
 
 	const STATEMENT_URL = `${url}/statement`

@@ -1,4 +1,4 @@
-import { url } from '$lib/config'
+import { url } from '#lib/config.ts'
 import type { PostsApiResponse } from '$api/posts/+server.js'
 import type { RequestHandler } from './$types'
 

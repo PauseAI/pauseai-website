@@ -1,6 +1,6 @@
 <script lang="ts">
-	import Image from '$lib/components/images/Image.svelte'
-	import LinkWithoutIcon from '$lib/components/LinkWithoutIcon.svelte'
+	import Image from '#lib/components/images/Image.svelte'
+	import LinkWithoutIcon from '#lib/components/LinkWithoutIcon.svelte'
 	import { domAnimation, LazyMotion, m } from 'motion-sv'
 	// SVG can't be processed by sharp/imagetools, so use a plain URL import.
 	import timeLogo from '$assets/images/press/Time_Magazine_logo.svg?url'

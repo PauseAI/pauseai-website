@@ -1,5 +1,5 @@
 <script lang="ts">
-	import PostMeta from '$lib/components/PostMeta.svelte'
+	import PostMeta from '#lib/components/PostMeta.svelte'
 	import { meta } from './meta'
 	import Signatory from './signatory.svelte'
 	import StatementForm from './StatementForm.svelte'

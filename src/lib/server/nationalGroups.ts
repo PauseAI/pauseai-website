@@ -2,9 +2,9 @@
 // instance: /api/national-groups is fetched by every onboarding form mount (the CDN
 // absorbs most of those), and Airtable allows 5 requests a second per base, shared
 // with the onboarding writes and the nightly sync.
-import type { AirtableNationalGroup, NationalGroup } from '$lib/types.js'
-import { fetchAllPages, type AirtableRecord } from '$lib/airtable.js'
-import { reportError } from '$lib/server/sentry'
+import type { AirtableNationalGroup, NationalGroup } from '#lib/types.js'
+import { fetchAllPages, type AirtableRecord } from '#lib/airtable.js'
+import { reportError } from '#lib/server/sentry.ts'
 
 const TTL_MS = 10 * 60 * 1000
 // After a failed read, the last good list (or none) is served this long before

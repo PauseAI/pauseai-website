@@ -1,6 +1,6 @@
 <script lang="ts">
-	import PostMeta from '$lib/components/PostMeta.svelte'
-	import Link from '$lib/components/Link.svelte'
+	import PostMeta from '#lib/components/PostMeta.svelte'
+	import Link from '#lib/components/Link.svelte'
 	import CommunitiesList from './CommunitiesList.svelte'
 	import type { GeoApiResponse } from '$api/geo/+server'
 	import type { CalendarResponse } from '$api/calendar/+server'
@@ -12,7 +12,7 @@
 	import { onDestroy, onMount } from 'svelte'
 	import { communities, communitiesMeta, GLOBAL_DISCORD_URL } from './communities'
 	import { MAPBOX_KEY } from './constants'
-	import { HERO_ORANGE } from '$lib/colors'
+	import { HERO_ORANGE } from '#lib/colors.ts'
 	import escape from 'escape-html'
 
 	// maplibre-gl v6 is ESM-only; the worker URL must be set explicitly under

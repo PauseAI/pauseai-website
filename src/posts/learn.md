@@ -4,9 +4,9 @@ description: Educational resources (videos, articles, books) about AI risks and 
 ---
 
 <script>
-import NewsletterSignup from '$lib/components/NewsletterSignup.svelte';
-import IconBullet from '$lib/components/IconBullet.svelte'
-import * as m from '$lib/paraglide/messages'
+import NewsletterSignup from '#lib/components/NewsletterSignup.svelte';
+import IconBullet from '#lib/components/IconBullet.svelte'
+import * as m from '#lib/paraglide/messages.js'
 import { Bomb, CirclePause, CircleQuestionMark, Cog, Earth, Footprints, MessageSquareQuote, Scale, Siren, Skull, Swords, TriangleAlert } from '@lucide/svelte';
 </script>
 

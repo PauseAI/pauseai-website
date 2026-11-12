@@ -1,7 +1,7 @@
 <script lang="ts">
-	// import { formatDate } from '$lib/utils'
-	import { title } from '$lib/config'
-	import Link from '$lib/components/Link.svelte'
+	// import { formatDate } from '#lib/utils.ts'
+	import { title } from '#lib/config.ts'
+	import Link from '#lib/components/Link.svelte'
 	import type { PageData } from './$types'
 
 	interface Props {

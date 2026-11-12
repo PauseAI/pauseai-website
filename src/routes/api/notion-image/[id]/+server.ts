@@ -1,5 +1,5 @@
-import { asError } from '$lib/utils'
-import { getNotionClient, getImageFromProps, getString } from '$lib/server/notion'
+import { asError } from '#lib/utils.ts'
+import { getNotionClient, getImageFromProps, getString } from '#lib/server/notion.ts'
 import type { RequestHandler } from './$types'
 import type { PageObjectResponse } from '@notionhq/client/build/src/api-endpoints'
 

@@ -8,7 +8,7 @@ import {
 	getImageFromProps,
 	getTitleFromProps,
 	getDateFromProps
-} from '$lib/server/notion'
+} from '#lib/server/notion.ts'
 
 export interface PressCoverage {
 	id: string

@@ -126,7 +126,7 @@ To use optimized images, first, ensure your image file (e.g., `my-image.png`) is
   ```svelte
   <script>
   	import myImage from '$assets/images/my-image.png?picture'
-  	import Image from '$lib/components/images/Image.svelte'
+  	import Image from '#lib/components/images/Image.svelte'
   </script>
 
   <Image picture={myImage} alt="A description of my image" />

@@ -4,7 +4,7 @@ description: Join PauseAI for an upcoming peaceful protest at the Melbourne Conv
 ---
 
 <script>
-    import WidgetConsent from '$lib/components/widget-consent/WidgetConsent.svelte'
+    import WidgetConsent from '#lib/components/widget-consent/WidgetConsent.svelte'
 </script>
 
 <WidgetConsent>

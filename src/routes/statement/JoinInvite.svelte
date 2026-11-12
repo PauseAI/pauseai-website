@@ -1,5 +1,5 @@
 <script lang="ts">
-	import Link from '$lib/components/Link.svelte'
+	import Link from '#lib/components/Link.svelte'
 
 	/** In the chapter-site iframe, where a link must not replace the form. */
 	let { embedded = false }: { embedded?: boolean } = $props()

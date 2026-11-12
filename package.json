@@ -122,5 +122,9 @@
 		"svelte-french-toast": "^1.2.0",
 		"svelte-toc": "^0.6.3",
 		"ua-parser-js": "^2.0.10"
+	},
+	"imports": {
+		"#lib": "./src/lib/index.js",
+		"#lib/*": "./src/lib/*"
 	}
 }

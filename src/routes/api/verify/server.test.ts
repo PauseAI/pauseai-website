@@ -2,7 +2,7 @@ import {
 	verificationConfirmedParameter,
 	verificationNeedsClick,
 	verificationParameter
-} from '$lib/config.js'
+} from '#lib/config.js'
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 
 type Row = { id: string; fields: Record<string, unknown>; _rawJson?: { createdTime: string } }
@@ -17,11 +17,11 @@ const reportError = vi.fn<(error: unknown, context?: Record<string, unknown>) =>
 
 vi.mock('$env/static/private', () => ({ AIRTABLE_WRITE_API_KEY: 'test-key' }))
 vi.mock('$env/dynamic/private', () => ({ env }))
-vi.mock('$lib/server/sentry', () => ({ reportError }))
+vi.mock('#lib/server/sentry.ts', () => ({ reportError }))
 const verifyStatementInCrm =
 	vi.fn<(key: string, token: string) => Promise<'ok' | 'expired' | 'invalid' | 'failed'>>()
-vi.mock('$lib/server/statementCrm', async (importOriginal) => ({
-	...(await importOriginal<typeof import('$lib/server/statementCrm')>()),
+vi.mock('#lib/server/statementCrm.ts', async (importOriginal) => ({
+	...(await importOriginal<typeof import('#lib/server/statementCrm.ts')>()),
 	verifyStatementInCrm
 }))
 vi.mock('airtable', () => ({
@@ -45,7 +45,8 @@ vi.mock('airtable', () => ({
 }))
 
 const { POST } = await import('./+server.js')
-const { LEGACY_LINK_CUTOVER, mintVerificationToken } = await import('$lib/server/emailVerification')
+const { LEGACY_LINK_CUTOVER, mintVerificationToken } =
+	await import('#lib/server/emailVerification.ts')
 
 const SECRET = 'test-secret'
 const DAY_MS = 24 * 60 * 60 * 1000

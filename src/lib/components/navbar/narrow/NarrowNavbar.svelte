@@ -1,10 +1,10 @@
 <script lang="ts">
 	import { page } from '$app/state'
 	import { afterNavigate } from '$app/navigation'
-	import Link from '$lib/components/Link.svelte'
-	import LinkWithoutIcon from '$lib/components/LinkWithoutIcon.svelte'
-	import Logo from '$lib/components/logo.svelte'
-	import { localizeHref } from '$lib/paraglide/runtime'
+	import Link from '#lib/components/Link.svelte'
+	import LinkWithoutIcon from '#lib/components/LinkWithoutIcon.svelte'
+	import Logo from '#lib/components/logo.svelte'
+	import { localizeHref } from '#lib/paraglide/runtime.js'
 	import Menu from '@lucide/svelte/icons/menu'
 	import Mail from '@lucide/svelte/icons/mail'
 	import X from '@lucide/svelte/icons/x'
@@ -18,16 +18,16 @@
 		panelExtras?: import('svelte').Snippet<[() => void]>
 	}
 
-	let { items, inverted = false, panelExtras }: Props = $props();
-	let open = $state(false);
-	let logoAnimate = $derived(localizeHref(page.url.pathname) != '/');
+	let { items, inverted = false, panelExtras }: Props = $props()
+	let open = $state(false)
+	let logoAnimate = $derived(localizeHref(page.url.pathname) != '/')
 
 	// Close the panel after any navigation (link tap, back/forward, etc.).
 	afterNavigate(({ shallow, type }) => {
-		if (shallow && type === 'goto') return;
+		if (shallow && type === 'goto') return
 
-		open = false;
-	});
+		open = false
+	})
 
 	function isCurrent(item: NavItem): boolean {
 		return Boolean(
@@ -46,14 +46,14 @@
 
 <nav class:inverted-header={inverted}>
 	<div class="bar">
-		<Link href="/" class="logo"><Logo animate={logoAnimate} inverted={inverted} /></Link>
+		<Link href="/" class="logo"><Logo animate={logoAnimate} {inverted} /></Link>
 
 		<button
 			type="button"
 			class="reset-button hamburger"
 			aria-label="Menu"
 			aria-expanded={open}
-			onclick={() => open = !open}
+			onclick={() => (open = !open)}
 		>
 			{#if open}<X size="1.6rem" />{:else}<Menu size="1.6rem" />{/if}
 		</button>
@@ -103,7 +103,7 @@
 			{/each}
 
 			{#if panelExtras}
-				<div class="extras">{@render panelExtras(() => open = false)}</div>
+				<div class="extras">{@render panelExtras(() => (open = false))}</div>
 			{/if}
 		</div>
 	{/if}
@@ -176,7 +176,7 @@
 		color: var(--brand);
 	}
 
-	.panel :global(.panel-link[aria-current="page"]) {
+	.panel :global(.panel-link[aria-current='page']) {
 		color: var(--brand-subtle);
 	}
 

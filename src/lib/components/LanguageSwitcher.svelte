@@ -6,18 +6,20 @@
 		deLocalizeHref,
 		setLocale,
 		type Locale
-	} from '$lib/paraglide/runtime.js';
+	} from '#lib/paraglide/runtime.js'
 
-	import { page } from '$app/state';
-	import Globe from '@lucide/svelte/icons/globe';
-	import Navlink from '$lib/components/navbar/Navlink.svelte';
-	import { building } from '$app/env';
-	import { onMount } from 'svelte';
-	import Card from '$lib/components/Card.svelte';
+	import { page } from '$app/state'
+	import Globe from '@lucide/svelte/icons/globe'
+	import Navlink from '#lib/components/navbar/Navlink.svelte'
+	import { building } from '$app/env'
+	import { onMount } from 'svelte'
+	import Card from '#lib/components/Card.svelte'
 
-	interface Props { inverted?: boolean }
+	interface Props {
+		inverted?: boolean
+	}
 
-	let { inverted = false }: Props = $props();
+	let { inverted = false }: Props = $props()
 
 	// Check if we should show the language switcher (only show when multiple locales)
 	const showSwitcher = locales.length > 1
@@ -49,12 +51,13 @@
 
 	// Get both the current locale's name for a language and its native name
 	function getDualLanguageName(locale: string): string {
-		const currentLocaleName = getLocale() === locale
-			? ''
-			: // If it's the current locale, don't repeat
-			languageNamesInEnglish.of(locale);
+		const currentLocaleName =
+			getLocale() === locale
+				? ''
+				: // If it's the current locale, don't repeat
+					languageNamesInEnglish.of(locale)
 
-		const nativeName = getNativeLanguageName(locale);
+		const nativeName = getNativeLanguageName(locale)
 
 		// If English name and native name are the same (e.g., for English itself in English context)
 		// or if we're showing the current locale, just show one name
@@ -70,11 +73,14 @@
 	// TODO: disable this once everything is confirmed to work well in production
 	function debugLocaleState() {
 		// Get current values
-		const currentLocale = getLocale();
+		const currentLocale = getLocale()
 
-		const cookieLocale = document.cookie.split('; ').find((row) => row.startsWith('PARAGLIDE_LOCALE='))?.split('=')[1];
-		const pathLocale = window.location.pathname.split('/')[1];
-		const isPathLocale = (locales as readonly string[]).includes(pathLocale);
+		const cookieLocale = document.cookie
+			.split('; ')
+			.find((row) => row.startsWith('PARAGLIDE_LOCALE='))
+			?.split('=')[1]
+		const pathLocale = window.location.pathname.split('/')[1]
+		const isPathLocale = (locales as readonly string[]).includes(pathLocale)
 
 		console.log('🔍 Locale Debug:', {
 			getLocale: currentLocale,
@@ -107,17 +113,17 @@
 
 	function handleLanguageClick(event: MouseEvent) {
 		// Get the target element and href
-		const target = event.currentTarget as HTMLAnchorElement;
+		const target = event.currentTarget as HTMLAnchorElement
 
-		const href = target.href;
-		const targetLocale = target.getAttribute('hreflang') as Locale | 'auto';
+		const href = target.href
+		const targetLocale = target.getAttribute('hreflang') as Locale | 'auto'
 
 		// Debug current state before change
-		console.log('🔍 Before click:');
+		console.log('🔍 Before click:')
 
-		const currentLocale = debugLocaleState();
+		const currentLocale = debugLocaleState()
 
-		console.log('Language click:', { from: currentLocale, to: targetLocale, href });
+		console.log('Language click:', { from: currentLocale, to: targetLocale, href })
 
 		// Close the dropdown
 		open = false
@@ -147,15 +153,15 @@
 </script>
 
 {#if showSwitcher}
-	<Navlink inverted={inverted} narrow active={open}>
+	<Navlink {inverted} narrow active={open}>
 		<button
 			class="button reset-button"
 			bind:this={button}
 			onclick={(e) => {
 				e.preventDefault()
 				open = !open
-			}}
-		><Globe size="0.9em" /> {getLocale().toUpperCase()}</button>
+			}}><Globe size="0.9em" /> {getLocale().toUpperCase()}</button
+		>
 	</Navlink>
 {/if}
 {#if (open || building) && showSwitcher}
@@ -178,7 +184,7 @@
 				{#each locales as locale}
 					{@const href = localizeHref(page.url.pathname, { locale })}
 					<a
-						href={href}
+						{href}
 						hreflang={locale}
 						aria-current={locale === getLocale() ? 'page' : undefined}
 						onclick={handleLanguageClick}
@@ -220,7 +226,7 @@
 		font-family: var(--font-heading);
 	}
 
-	a[aria-current="page"] {
+	a[aria-current='page'] {
 		color: var(--brand-subtle);
 	}
 

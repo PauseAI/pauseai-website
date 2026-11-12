@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { COUNTRIES } from '$lib/components/onboarding/options'
+import { COUNTRIES } from '#lib/components/onboarding/options.ts'
 import {
 	UNIVERSITIES_BY_COUNTRY,
 	hasUniversities,

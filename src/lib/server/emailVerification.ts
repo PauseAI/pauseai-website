@@ -3,14 +3,14 @@
 // "Email verification link", has the format, the rollout and what an unset secret does.
 // CiviCRM is to mint the same tokens, so change the format only together with
 // emailVerification.vectors.json and the PHP side.
-import { EMAIL_VERIFICATION_SECRET } from '$app/env/private';
+import { EMAIL_VERIFICATION_SECRET } from '$app/env/private'
 
-import { url, verificationParameter } from '$lib/config.js';
-import { getRecord } from '$lib/airtable';
-import { MEMBERS_BASE_ID, MEMBERS_TABLE_ID } from '$lib/server/members';
-import { isOnboardingLive } from '$lib/server/onboarding';
-import { reportError } from '$lib/server/sentry';
-import { checkToken, signToken, type TokenVerdict } from '$lib/server/signedToken';
+import { url, verificationParameter } from '#lib/config.js'
+import { getRecord } from '#lib/airtable.ts'
+import { MEMBERS_BASE_ID, MEMBERS_TABLE_ID } from '#lib/server/members.ts'
+import { isOnboardingLive } from '#lib/server/onboarding.ts'
+import { reportError } from '#lib/server/sentry.ts'
+import { checkToken, signToken, type TokenVerdict } from '#lib/server/signedToken.ts'
 
 export const LINK_TTL_SECONDS = 90 * 24 * 60 * 60
 
@@ -19,11 +19,11 @@ export const LINK_TTL_SECONDS = 90 * 24 * 60 * 60
 // the sender marked `Sent emails` while the row is younger than LEGACY_WINDOW_DAYS,
 // and for any such row until that long after this date. Set once, to the day signed
 // links were deployed; never move it later.
-export const LEGACY_LINK_CUTOVER = Date.parse('2026-10-07T00:00:00Z');
+export const LEGACY_LINK_CUTOVER = Date.parse('2026-10-07T00:00:00Z')
 
-export const LEGACY_WINDOW_DAYS = 30;
+export const LEGACY_WINDOW_DAYS = 30
 
-const LEGACY_WINDOW_MS = LEGACY_WINDOW_DAYS * 24 * 60 * 60 * 1000;
+const LEGACY_WINDOW_MS = LEGACY_WINDOW_DAYS * 24 * 60 * 60 * 1000
 
 /** PHP: strtolower(trim($email, " \t\n\v\f\r")) (strtolower is ASCII-only from PHP 8.2). */
 export function normaliseEmail(email: string): string {
@@ -71,8 +71,8 @@ export async function verifyVerificationToken(
 let reportedNoSecret = false
 
 export function getVerificationSecret(): string | undefined {
-	const secret = EMAIL_VERIFICATION_SECRET;
-	if (secret) return secret;
+	const secret = EMAIL_VERIFICATION_SECRET
+	if (secret) return secret
 	if (!reportedNoSecret) {
 		reportedNoSecret = true
 		const message =

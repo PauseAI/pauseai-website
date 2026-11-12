@@ -1,20 +1,20 @@
 <script lang="ts">
 	import type { Component, ComponentType } from 'svelte'
-	import type { NationalGroup, NationalGroupLink } from '$lib/types'
-	import { typedEntries } from '$lib/utils'
-	import LinkWithoutIcon from '$lib/components/LinkWithoutIcon.svelte'
+	import type { NationalGroup, NationalGroupLink } from '#lib/types.ts'
+	import { typedEntries } from '#lib/utils.ts'
+	import LinkWithoutIcon from '#lib/components/LinkWithoutIcon.svelte'
 
 	// Custom icons
-	import TikTok from '$lib/components/icons/tiktok.svelte'
-	import Instagram from '$lib/components/icons/instagram.svelte'
-	import Facebook from '$lib/components/icons/facebook.svelte'
-	import Youtube from '$lib/components/icons/youtube.svelte'
-	import Discord from '$lib/components/icons/discord.svelte'
-	import Linkedin from '$lib/components/icons/linkedin.svelte'
-	import X from '$lib/components/icons/x.svelte'
-	import Bluesky from '$lib/components/icons/bluesky.svelte'
-	import Substack from '$lib/components/icons/substack.svelte'
-	import Whatsapp from '$lib/components/icons/whatsapp.svelte'
+	import TikTok from '#lib/components/icons/tiktok.svelte'
+	import Instagram from '#lib/components/icons/instagram.svelte'
+	import Facebook from '#lib/components/icons/facebook.svelte'
+	import Youtube from '#lib/components/icons/youtube.svelte'
+	import Discord from '#lib/components/icons/discord.svelte'
+	import Linkedin from '#lib/components/icons/linkedin.svelte'
+	import X from '#lib/components/icons/x.svelte'
+	import Bluesky from '#lib/components/icons/bluesky.svelte'
+	import Substack from '#lib/components/icons/substack.svelte'
+	import Whatsapp from '#lib/components/icons/whatsapp.svelte'
 
 	// Lucide icons for missing ones
 	import { Globe, Link, Calendar, Mail } from '@lucide/svelte'

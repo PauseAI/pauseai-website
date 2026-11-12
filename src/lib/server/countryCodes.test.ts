@@ -1,4 +1,4 @@
-import { COUNTRIES } from '$lib/components/onboarding/options.js'
+import { COUNTRIES } from '#lib/components/onboarding/options.js'
 import { describe, expect, it } from 'vitest'
 import { COUNTRY_BY_ISO_CODE } from './countryCodes'
 

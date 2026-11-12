@@ -1,8 +1,8 @@
 <script lang="ts">
 	import { onMount } from 'svelte'
-	import type { NationalGroup } from '$lib/types'
-	import NationalGroupItem from '$lib/components/NationalGroupItem.svelte'
-	import { fetchNationalGroups } from '$lib/nationalGroups'
+	import type { NationalGroup } from '#lib/types.ts'
+	import NationalGroupItem from '#lib/components/NationalGroupItem.svelte'
+	import { fetchNationalGroups } from '#lib/nationalGroups.ts'
 
 	interface Props {
 		nationalGroups?: NationalGroup[]

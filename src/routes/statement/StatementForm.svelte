@@ -1,30 +1,33 @@
 <script lang="ts">
-	import { enhance, type SubmitFunction } from '$app/forms';
-	import type { SigningModeResponse } from '$api/statement/sign/+server.js';
-	import Combobox from '$lib/components/Combobox.svelte';
-	import Link from '$lib/components/Link.svelte';
-	import { COUNTRIES } from '$lib/components/onboarding/options';
-	import Turnstile from '$lib/components/Turnstile.svelte';
-	import type { SignatureField } from '$lib/server/statement';
-	import { turnstileSiteKey } from '$lib/turnstile';
-	import { onMount, tick, type Snippet } from 'svelte';
-	import StatementThanks from './StatementThanks.svelte';
+	import { enhance, type SubmitFunction } from '$app/forms'
+	import type { SigningModeResponse } from '$api/statement/sign/+server.js'
+	import Combobox from '#lib/components/Combobox.svelte'
+	import Link from '#lib/components/Link.svelte'
+	import { COUNTRIES } from '#lib/components/onboarding/options.ts'
+	import Turnstile from '#lib/components/Turnstile.svelte'
+	import type { SignatureField } from '#lib/server/statement.ts'
+	import { turnstileSiteKey } from '#lib/turnstile.ts'
+	import { onMount, tick, type Snippet } from 'svelte'
+	import StatementThanks from './StatementThanks.svelte'
 
-	let { embedded = false, counter, country = $bindable('')
+	let {
+		embedded = false,
+		counter,
+		country = $bindable('')
 
-	/** The card is the whole page, as in the embed: it heads the page and has no margin. */
-	/** The selected country, so the embed can preset it. */
-	 }: { embedded?: boolean; counter?: Snippet; country?: string } = $props();
+		/** The card is the whole page, as in the embed: it heads the page and has no margin. */
+		/** The selected country, so the embed can preset it. */
+	}: { embedded?: boolean; counter?: Snippet; country?: string } = $props()
 
-	const headingLevel = $derived(embedded ? 1 : 2);
-	let signed = $state(false);
-	let submitting = $state(false);
-	let anonymous = $state(false);
-	let errorMessage = $state('');
+	const headingLevel = $derived(embedded ? 1 : 2)
+	let signed = $state(false)
+	let submitting = $state(false)
+	let anonymous = $state(false)
+	let errorMessage = $state('')
 
-	type FieldErrors = Partial<Record<SignatureField, string>>;
+	type FieldErrors = Partial<Record<SignatureField, string>>
 
-	let fieldErrors = $state<FieldErrors>({});
+	let fieldErrors = $state<FieldErrors>({})
 
 	// Assume live until the server says otherwise, so an unanswered request keeps the
 	// anti-spam check required rather than dropping it. See OnboardingFlow.
@@ -36,10 +39,10 @@
 		'Signing is unavailable right now. Please try again later, or email contact@pauseai.info.'
 	onMount(async () => {
 		try {
-			const response = await fetch('/api/statement/sign');
-			if (!response.ok) return;
-			const answer = await response.json() as SigningModeResponse;
-			mode = answer.mode;
+			const response = await fetch('/api/statement/sign')
+			if (!response.ok) return
+			const answer = (await response.json()) as SigningModeResponse
+			mode = answer.mode
 			// Say so before anyone types it all in. The server refuses regardless.
 			if (mode === 'off') errorMessage = UNAVAILABLE_MESSAGE
 		} catch {
@@ -55,10 +58,10 @@
 	// No widget to wait for without a configured site key (e.g. local dev).
 	const needsTurnstile = $derived(mode === 'live' && !!turnstileSiteKey)
 	// Why the button is disabled, for anyone who can't see the widget working.
-	const waitingForTurnstile = $derived(!submitting && needsTurnstile && turnstileToken === '');
+	const waitingForTurnstile = $derived(!submitting && needsTurnstile && turnstileToken === '')
 
-	const canSubmit = $derived(!submitting && !waitingForTurnstile);
-	const GENERIC_ERROR = 'Something went wrong. Please try again.';
+	const canSubmit = $derived(!submitting && !waitingForTurnstile)
+	const GENERIC_ERROR = 'Something went wrong. Please try again.'
 
 	// In the order they appear on the page.
 	const FIELD_IDS = {
@@ -66,10 +69,10 @@
 		email: 'statement-email',
 		country: 'statement-country',
 		bio: 'statement-bio'
-	} satisfies Partial<Record<SignatureField, string>>;
+	} satisfies Partial<Record<SignatureField, string>>
 
-	let errorSummary = $state<HTMLElement>();
-	let thanks = $state<HTMLElement>();
+	let errorSummary = $state<HTMLElement>()
+	let thanks = $state<HTMLElement>()
 
 	// Signing removes the form, and with it the button that had focus.
 	async function focusThanks() {
@@ -103,9 +106,9 @@
 				signed = true
 				void focusThanks()
 			} else if (result.type === 'failure') {
-				errorMessage = String(result.data?.message ?? GENERIC_ERROR);
-				fieldErrors = result.data?.fields as FieldErrors | undefined ?? {};
-				void focusFirstError();
+				errorMessage = String(result.data?.message ?? GENERIC_ERROR)
+				fieldErrors = (result.data?.fields as FieldErrors | undefined) ?? {}
+				void focusFirstError()
 			} else {
 				errorMessage = GENERIC_ERROR
 				void focusFirstError()
@@ -129,10 +132,7 @@
 	<!-- Always in the page, as a live region only announces changes to one it already knows. -->
 	<div class="thanks" role="status" tabindex="-1" bind:this={thanks}>
 		{#if signed}
-			<StatementThanks
-				headingLevel={headingLevel === 1 ? 2 : 3}
-				embedded={embedded}
-			/>
+			<StatementThanks headingLevel={headingLevel === 1 ? 2 : 3} {embedded} />
 		{/if}
 	</div>
 
@@ -362,8 +362,8 @@
 		border-color: transparent;
 	}
 
-	.field > input[aria-invalid="true"],
-	.field > textarea[aria-invalid="true"] {
+	.field > input[aria-invalid='true'],
+	.field > textarea[aria-invalid='true'] {
 		border: 2px solid var(--lookup-error);
 	}
 

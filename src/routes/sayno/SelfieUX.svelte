@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { page } from '$app/state'
-	import Button from '$lib/components/Button.svelte'
-	import Link from '$lib/components/Link.svelte'
+	import Button from '#lib/components/Button.svelte'
+	import Link from '#lib/components/Link.svelte'
 	import {
 		currentState,
 		cameraPermissionRequested,

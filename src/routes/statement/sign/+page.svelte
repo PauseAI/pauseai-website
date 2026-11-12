@@ -1,6 +1,6 @@
 <script lang="ts">
-	import PostMeta from '$lib/components/PostMeta.svelte'
-	import Link from '$lib/components/Link.svelte'
+	import PostMeta from '#lib/components/PostMeta.svelte'
+	import Link from '#lib/components/Link.svelte'
 	import StatementThanks from '../StatementThanks.svelte'
 	import { meta } from '../meta'
 	import type { ActionData } from './$types'

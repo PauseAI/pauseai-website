@@ -1,6 +1,6 @@
 // See docs/image-processing.md for the full image-processing architecture.
 import { getContext, setContext } from 'svelte'
-import type { Picture } from '$lib/types'
+import type { Picture } from '#lib/types.ts'
 
 const KEY = 'pauseai:post-pictures'
 

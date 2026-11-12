@@ -8,7 +8,7 @@ showTitle: false
 <script>
 	import { onMount } from 'svelte'
 	import { page } from '$app/state'
-	import SubscribeFlow from '$lib/components/onboarding/SubscribeFlow.svelte'
+	import SubscribeFlow from '#lib/components/onboarding/SubscribeFlow.svelte'
 
 	let subscribeEmail = ''
 	onMount(() => {

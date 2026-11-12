@@ -33,7 +33,7 @@ const CHAPTERS: Record<string, ChapterBlockData> = {
 }
 
 const { reportError } = vi.hoisted(() => ({ reportError: vi.fn() }))
-vi.mock('$lib/server/sentry', () => ({ reportError }))
+vi.mock('#lib/server/sentry.ts', () => ({ reportError }))
 
 vi.mock('./chapter.js', () => ({
 	getChapterForOnboardingEmail: (country: string | undefined) =>

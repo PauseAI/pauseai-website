@@ -1,8 +1,8 @@
 <!-- See docs/image-processing.md for the full image-processing architecture. -->
 <script lang="ts">
 	import Picture from './Picture.svelte'
-	import type { LoosePicture } from '$lib/types'
-	import { layoutWidth } from '$lib/config'
+	import type { LoosePicture } from '#lib/types.ts'
+	import { layoutWidth } from '#lib/config.ts'
 
 	interface Props {
 		picture?: LoosePicture | null

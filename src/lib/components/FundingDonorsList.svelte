@@ -1,7 +1,7 @@
 <script lang="ts">
-	import Link from '$lib/components/Link.svelte'
-	import { getTopPublicDonors } from '$lib/funding-donors.remote'
-	import Skeleton from '$lib/components/Skeleton.svelte'
+	import Link from '#lib/components/Link.svelte'
+	import { getTopPublicDonors } from '#lib/funding-donors.remote.ts'
+	import Skeleton from '#lib/components/Skeleton.svelte'
 
 	const donorsPromise = getTopPublicDonors()
 </script>

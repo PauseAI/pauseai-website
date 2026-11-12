@@ -1,6 +1,6 @@
 <script lang="ts">
 	import type { LucideIcon } from '@lucide/svelte'
-	import MessageWithLink from '$lib/components/MessageWithLink.svelte'
+	import MessageWithLink from '#lib/components/MessageWithLink.svelte'
 
 	interface Props {
 		icon: LucideIcon

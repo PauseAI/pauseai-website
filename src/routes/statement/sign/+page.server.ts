@@ -12,8 +12,8 @@ import {
 	type SignatureErrors,
 	type SignatureField,
 	type SignatureFieldError
-} from '$lib/server/statement'
-import { TURNSTILE_FIELD } from '$lib/turnstile'
+} from '#lib/server/statement.ts'
+import { TURNSTILE_FIELD } from '#lib/turnstile.ts'
 import { fail } from '@sveltejs/kit'
 import type { Actions } from './$types'
 

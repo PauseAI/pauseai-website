@@ -1,9 +1,9 @@
 export const prerender = false
 
-import { fetchAllPages, type AirtableRecord } from '$lib/airtable'
-import { defaultTitle } from '$lib/config'
-import type { AirtablePerson, Person } from '$lib/types'
-import { generateCacheControlRecord } from '$lib/utils'
+import { fetchAllPages, type AirtableRecord } from '#lib/airtable.ts'
+import { defaultTitle } from '#lib/config.ts'
+import type { AirtablePerson, Person } from '#lib/types.ts'
+import { generateCacheControlRecord } from '#lib/utils.ts'
 import { json } from '@sveltejs/kit'
 import type { RequestHandler } from './$types'
 

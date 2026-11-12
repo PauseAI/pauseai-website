@@ -1,5 +1,5 @@
 import { json } from '@sveltejs/kit'
-import type { DescriptiveFrontmatterMeta, DescriptivePost, StrictPost } from '$lib/types'
+import type { DescriptiveFrontmatterMeta, DescriptivePost, StrictPost } from '#lib/types.ts'
 import { outcomesMeta } from '../../outcomes/meta'
 import { communitiesMeta } from '../../communities/communities'
 import { meta as quotesMeta } from '../../quotes/meta'

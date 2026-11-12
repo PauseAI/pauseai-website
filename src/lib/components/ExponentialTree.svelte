@@ -1,5 +1,5 @@
 <script lang="ts">
-	import LinkWithoutIcon from '$lib/components/LinkWithoutIcon.svelte'
+	import LinkWithoutIcon from '#lib/components/LinkWithoutIcon.svelte'
 </script>
 
 <!--

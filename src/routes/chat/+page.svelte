@@ -1,6 +1,6 @@
 <!-- FILEPATH: /Users/joep/dev/github/joepio/pauseai/src/routes/chat/+page.svelte -->
 <script lang="ts">
-	import { botName } from '$lib/config'
+	import { botName } from '#lib/config.ts'
 	import type { ChatRequest, ChatResponse, Message } from '$api/chat/+server'
 	import { onMount } from 'svelte'
 

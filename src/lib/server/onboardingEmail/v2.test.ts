@@ -43,8 +43,8 @@ const { env, fetchAllPages, reportError } = vi.hoisted(() => {
 	return { env, fetchAllPages: vi.fn(), reportError: vi.fn() }
 })
 vi.mock('$env/dynamic/private', () => ({ env }))
-vi.mock('$lib/server/sentry', () => ({ reportError }))
-vi.mock('$lib/airtable.js', async (importOriginal) => ({
+vi.mock('#lib/server/sentry.ts', () => ({ reportError }))
+vi.mock('#lib/airtable.js', async (importOriginal) => ({
 	...(await importOriginal<Record<string, unknown>>()),
 	fetchAllPages
 }))
@@ -55,7 +55,7 @@ const { FIXED_COPY } = await import('./fixed.js')
 const escapeRegExp = (value: string) => value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
 const { parseV2Request } = await import('./v2Request.js')
 const { mintVerificationToken, verificationLink, verifyVerificationToken } =
-	await import('$lib/server/emailVerification')
+	await import('#lib/server/emailVerification.ts')
 
 const SECRET = 'verification-secret'
 const NOW = Date.parse('2026-10-05T12:00:00Z')

@@ -1,7 +1,7 @@
 <script lang="ts">
-	import LinkWithoutIcon from '$lib/components/LinkWithoutIcon.svelte'
-	import { socials } from '$lib/socials'
-	import { socialIcons } from '$lib/components/socialIcons'
+	import LinkWithoutIcon from '#lib/components/LinkWithoutIcon.svelte'
+	import { socials } from '#lib/socials.ts'
+	import { socialIcons } from '#lib/components/socialIcons.ts'
 </script>
 
 <div class="social">

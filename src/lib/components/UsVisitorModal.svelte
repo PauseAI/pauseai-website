@@ -1,17 +1,17 @@
 <script lang="ts">
-	import { fade } from 'svelte/transition';
-	import { browser } from '$app/env';
-	import Backdrop from '$lib/components/Backdrop.svelte';
-	import Button from '$lib/components/Button.svelte';
-	import { setItem } from '$lib/localStorage';
+	import { fade } from 'svelte/transition'
+	import { browser } from '$app/env'
+	import Backdrop from '#lib/components/Backdrop.svelte'
+	import Button from '#lib/components/Button.svelte'
+	import { setItem } from '#lib/localStorage.ts'
 
 	interface Props {
 		country: string | null
 	}
 
-	let { country }: Props = $props();
-	const DISMISSED_KEY = 'us_visitor_modal_dismissed';
-	const PEOPLE_FOR_A_PAUSE_URL = 'https://peopleforapause.org/';
+	let { country }: Props = $props()
+	const DISMISSED_KEY = 'us_visitor_modal_dismissed'
+	const PEOPLE_FOR_A_PAUSE_URL = 'https://peopleforapause.org/'
 
 	function wasDismissed(): boolean {
 		if (!browser) return false
@@ -42,7 +42,7 @@
 </script>
 
 {#if open}
-	<Backdrop open={open} />
+	<Backdrop {open} />
 	<div
 		class="modal-wrapper"
 		transition:fade={{ duration: 150 }}

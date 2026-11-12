@@ -1,4 +1,4 @@
-import { COUNTRIES } from '$lib/components/onboarding/options'
+import { COUNTRIES } from '#lib/components/onboarding/options.ts'
 
 /** The `?country=` to preset, when it names one of the form's countries exactly. */
 export function presetCountry(params: URLSearchParams): string {

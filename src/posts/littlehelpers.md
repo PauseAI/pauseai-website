@@ -4,7 +4,7 @@ description: Help fund volunteer stipends for PauseAI advocates working to addre
 ---
 
 <script>
-	import DonorBoxEmbed from '$lib/components/DonorBoxEmbed.svelte'
+	import DonorBoxEmbed from '#lib/components/DonorBoxEmbed.svelte'
 </script>
 
 ![PauseAI volunteers wearing Santa hats](/littlehelpers-banner.webp)

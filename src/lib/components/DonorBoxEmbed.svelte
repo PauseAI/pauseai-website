@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { onMount } from 'svelte'
-	import { getLocale } from '$lib/paraglide/runtime'
+	import { getLocale } from '#lib/paraglide/runtime.js'
 
 	interface Props {
 		/** DonorBox campaign slug (required) */

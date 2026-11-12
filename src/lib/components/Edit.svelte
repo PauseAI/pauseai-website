@@ -1,8 +1,8 @@
 <script lang="ts">
-	import Link from '$lib/components/Link.svelte'
+	import Link from '#lib/components/Link.svelte'
 	import { page } from '$app/state'
-	import * as m from '$lib/paraglide/messages.js'
-	import { getLocale } from '$lib/paraglide/runtime.js'
+	import * as m from '#lib/paraglide/messages.js'
+	import { getLocale } from '#lib/paraglide/runtime.js'
 
 	const DECAP_BASE_URL = 'https://pauseai-cms.netlify.app/#/collections/posts/entries'
 	const GITHUB_BASE_URL = 'https://github.com/PauseAI/pauseai-website/edit/main/src/'

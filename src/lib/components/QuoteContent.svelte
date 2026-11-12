@@ -1,6 +1,6 @@
 <script lang="ts">
 	import Picture from './images/Picture.svelte'
-	import type { CarouselQuote } from '$lib/types'
+	import type { CarouselQuote } from '#lib/types.ts'
 
 	interface Props {
 		quote: CarouselQuote

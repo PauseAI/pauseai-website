@@ -1,7 +1,7 @@
 export const prerender = false
 
 import { json } from '@sveltejs/kit'
-import { isOnboardingLive } from '$lib/server/onboarding'
+import { isOnboardingLive } from '#lib/server/onboarding.ts'
 import type { RequestHandler } from './$types'
 
 export type OnboardingModeApiResponse = { live: boolean }

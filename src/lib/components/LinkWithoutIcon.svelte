@@ -1,10 +1,10 @@
 <script lang="ts">
-	import { page } from '$app/state';
-	import { goto } from '$app/navigation';
-	import { localizeHref, locales } from '$lib/paraglide/runtime';
-	import type { LinkType } from '$lib/types';
-	import type { Attachment } from 'svelte/attachments';
-	import { getLinkType } from '$lib/link';
+	import { page } from '$app/state'
+	import { goto } from '$app/navigation'
+	import { localizeHref, locales } from '#lib/paraglide/runtime.js'
+	import type { LinkType } from '#lib/types.ts'
+	import type { Attachment } from 'svelte/attachments'
+	import { getLinkType } from '#lib/link.ts'
 
 	interface Props {
 		href?: string | null
@@ -31,21 +31,29 @@
 	let resolvedType: LinkType = $derived(type ?? getLinkType(href))
 
 	// Localization helpers
-	const localePattern = new RegExp(`^/(${locales.join('|')})(/|$)`);
+	const localePattern = new RegExp(`^/(${locales.join('|')})(/|$)`)
 
-	const shouldLocalizeHref = (h: string): boolean => resolvedType === 'internal' && h.startsWith('/') && !h.match(localePattern) && !h.includes('#no-localize');
+	const shouldLocalizeHref = (h: string): boolean =>
+		resolvedType === 'internal' &&
+		h.startsWith('/') &&
+		!h.match(localePattern) &&
+		!h.includes('#no-localize')
 
 	const processHref = (h: string): string => {
-		const cleaned = h.replace('#no-localize', '');
+		const cleaned = h.replace('#no-localize', '')
 
-		return shouldLocalizeHref(h) ? localizeHref(cleaned) : cleaned;
-	};
+		return shouldLocalizeHref(h) ? localizeHref(cleaned) : cleaned
+	}
 
 	// Automatically open petition and action-specific tools in a new tab
-	let isPetitionLink = $derived(resolvedType === 'external' && href !== null && (href.includes('change.org') || href.includes('activoice.org')));
+	let isPetitionLink = $derived(
+		resolvedType === 'external' &&
+			href !== null &&
+			(href.includes('change.org') || href.includes('activoice.org'))
+	)
 
-	let resolvedTarget = $derived(target ?? (isPetitionLink ? '_blank' : null));
-	let resolvedRel = $derived(rel ?? (isPetitionLink ? 'noopener noreferrer' : null));
+	let resolvedTarget = $derived(target ?? (isPetitionLink ? '_blank' : null))
+	let resolvedRel = $derived(rel ?? (isPetitionLink ? 'noopener noreferrer' : null))
 
 	// Normalize and localize href
 	let resolvedHref: string | null = $derived(href ? processHref(href) : null)
@@ -55,15 +63,15 @@
 		return (node: HTMLAnchorElement) => {
 			const handleClick = (ev: MouseEvent) => {
 				if (h && h.startsWith('#')) {
-					ev.preventDefault();
-					const url = page.url;
-					url.hash = h;
-					goto(url, { shallow: true, state: page.state });
-					const targetEl = document.querySelector<HTMLElement>(h);
-					if (!targetEl) return;
-					targetEl.scrollIntoView({ behavior: 'smooth' });
-					targetEl.tabIndex = -1;
-					targetEl.focus({ preventScroll: true });
+					ev.preventDefault()
+					const url = page.url
+					url.hash = h
+					goto(url, { shallow: true, state: page.state })
+					const targetEl = document.querySelector<HTMLElement>(h)
+					if (!targetEl) return
+					targetEl.scrollIntoView({ behavior: 'smooth' })
+					targetEl.tabIndex = -1
+					targetEl.focus({ preventScroll: true })
 				}
 			}
 
@@ -81,7 +89,7 @@
 	rel={resolvedRel}
 	class={className}
 	{@attach smoothScroll(resolvedHref)}
-	onclick={onclick}
+	{onclick}
 	{...rest}
 >
 	{@render children?.()}

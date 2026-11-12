@@ -5,7 +5,7 @@ import {
 	credentialsError,
 	callCloudinaryAPI,
 	type CloudinarySimpleResponse
-} from '$lib/cloudinary'
+} from '#lib/cloudinary.ts'
 
 type RemoveSelfieRequest = {
 	public_id: string

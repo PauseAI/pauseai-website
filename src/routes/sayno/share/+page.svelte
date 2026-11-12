@@ -1,8 +1,8 @@
 <script lang="ts">
 	import { onMount } from 'svelte'
 	import { page } from '$app/state'
-	import ShareButtons from '$lib/components/ShareButtons.svelte'
-	import { getCollagenUid } from '$lib/collagen'
+	import ShareButtons from '#lib/components/ShareButtons.svelte'
+	import { getCollagenUid } from '#lib/collagen.ts'
 
 	let uid: string | null = $state(null)
 

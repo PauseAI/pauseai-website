@@ -1,4 +1,4 @@
-import type { WrittenRecord as Written } from '$lib/airtable'
+import type { WrittenRecord as Written } from '#lib/airtable.ts'
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 
 const env: Record<string, string | undefined> = {}
@@ -10,24 +10,24 @@ const reportError =
 	vi.fn<(error: unknown, context?: Record<string, unknown>, options?: unknown) => Promise<void>>()
 
 vi.mock('$env/dynamic/private', () => ({ env }))
-vi.mock('$lib/airtable', () => ({ createRecord, getRecord, updateRecord }))
-vi.mock('$lib/server/turnstile-verify', () => ({
+vi.mock('#lib/airtable.ts', () => ({ createRecord, getRecord, updateRecord }))
+vi.mock('#lib/server/turnstile-verify.ts', () => ({
 	checkNotSpam: () => Promise.resolve({ drop: false })
 }))
-vi.mock('$lib/server/substack', () => ({ subscribeToSubstackNewsletter: vi.fn() }))
-vi.mock('$lib/server/sentry', () => ({ reportError, flushReports: () => Promise.resolve() }))
+vi.mock('#lib/server/substack.ts', () => ({ subscribeToSubstackNewsletter: vi.fn() }))
+vi.mock('#lib/server/sentry.ts', () => ({ reportError, flushReports: () => Promise.resolve() }))
 // The National Chapters list the action reads (null: never read on this instance).
 let nationalGroups: { name: string; leader: string }[] | null
-vi.mock('$lib/server/nationalGroups', () => ({
+vi.mock('#lib/server/nationalGroups.ts', () => ({
 	getNationalGroups: () => Promise.resolve(nationalGroups)
 }))
 
 const { actions } = await import('./+page.server.js')
-const { TOKEN_TTL_SECONDS } = await import('$lib/server/onboardingContinuation')
+const { TOKEN_TTL_SECONDS } = await import('#lib/server/onboardingContinuation.ts')
 const { chapterQuestion, chapterShareWording } =
-	await import('$lib/components/onboarding/chapterShare')
-const { FORM_VERSION } = await import('$lib/components/onboarding/options')
-const { onboardingMessages } = await import('$lib/components/onboarding/messages')
+	await import('#lib/components/onboarding/chapterShare.ts')
+const { FORM_VERSION } = await import('#lib/components/onboarding/options.ts')
+const { onboardingMessages } = await import('#lib/components/onboarding/messages.ts')
 
 // What Airtable answers a write with: the whole row, so an update returns more
 // than it sent.

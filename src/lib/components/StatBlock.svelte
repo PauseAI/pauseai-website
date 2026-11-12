@@ -1,8 +1,8 @@
 <script lang="ts">
 	import { type Component } from 'svelte'
-	import AsyncComponent from '$lib/components/AsyncComponent.svelte'
-	import SvelteIntersectionObserver from '$lib/components/SvelteIntersectionObserver.svelte'
-	import Link from '$lib/components/Link.svelte'
+	import AsyncComponent from '#lib/components/AsyncComponent.svelte'
+	import SvelteIntersectionObserver from '#lib/components/SvelteIntersectionObserver.svelte'
+	import Link from '#lib/components/Link.svelte'
 
 	let numberFlowPromise = import('@number-flow/svelte').then(
 		(m) => m.default as unknown as Component

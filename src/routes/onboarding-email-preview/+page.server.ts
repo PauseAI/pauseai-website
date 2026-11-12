@@ -1,17 +1,17 @@
 export const prerender = false
 
-import { dev } from '$app/env';
-import { groupOf, resolveIntentBucket } from '$lib/server/onboardingEmail/blocks.js';
-import { listActiveChapterCountries } from '$lib/server/onboardingEmail/chapter.js';
-import { describeChapterOverride } from '$lib/server/onboardingEmail/chapterOverrides.js';
-import { resolveOnboardingEmailLanguage } from '$lib/server/onboardingEmail/language.js';
-import { GLOBAL_DISCORD_URL, WELCOME_CALLS_URL } from '$lib/server/onboardingEmail/brand.js';
-import { FIXED_COPY } from '$lib/server/onboardingEmail/fixed.js';
-import { renderOnboardingEmail, resolveOnboardingEmail } from '$lib/server/onboardingEmail/index.js';
-import type { BaseLanguage, OnboardingEmailHtmlStyle } from '$lib/server/onboardingEmail/types.js';
-import { isTestHostname } from '$lib/server/testHost';
-import { error } from '@sveltejs/kit';
-import type { PageServerLoad } from './$types';
+import { dev } from '$app/env'
+import { groupOf, resolveIntentBucket } from '#lib/server/onboardingEmail/blocks.js'
+import { listActiveChapterCountries } from '#lib/server/onboardingEmail/chapter.js'
+import { describeChapterOverride } from '#lib/server/onboardingEmail/chapterOverrides.js'
+import { resolveOnboardingEmailLanguage } from '#lib/server/onboardingEmail/language.js'
+import { GLOBAL_DISCORD_URL, WELCOME_CALLS_URL } from '#lib/server/onboardingEmail/brand.js'
+import { FIXED_COPY } from '#lib/server/onboardingEmail/fixed.js'
+import { renderOnboardingEmail, resolveOnboardingEmail } from '#lib/server/onboardingEmail/index.js'
+import type { BaseLanguage, OnboardingEmailHtmlStyle } from '#lib/server/onboardingEmail/types.js'
+import { isTestHostname } from '#lib/server/testHost.ts'
+import { error } from '@sveltejs/kit'
+import type { PageServerLoad } from './$types'
 
 // Deploy-preview URLs of this page are handed to chapter leads, not only developers, so the
 // page itself avoids code detail. The query string is the whole state, so a preview can be
@@ -39,17 +39,17 @@ function plainLinks(markdown: string): string {
 }
 
 function parseLanguage(value: string | null): BaseLanguage {
-	return LANGUAGES.includes(value as BaseLanguage) ? value as BaseLanguage : DEFAULTS.language;
+	return LANGUAGES.includes(value as BaseLanguage) ? (value as BaseLanguage) : DEFAULTS.language
 }
 
 export const load: PageServerLoad = async ({ url }) => {
 	if (!dev && !isTestHostname(url.hostname)) error(404, 'Not found')
 
-	const params = url.searchParams;
-	const hasQuery = [...params.keys()].length > 0;
-	const firstName = params.get('firstName')?.trim() || 'Alex';
-	const country = hasQuery ? params.get('country') ?? '' : DEFAULTS.country;
-	const intent = (hasQuery ? params.get('intent') ?? '' : DEFAULTS.intent).trim();
+	const params = url.searchParams
+	const hasQuery = [...params.keys()].length > 0
+	const firstName = params.get('firstName')?.trim() || 'Alex'
+	const country = hasQuery ? (params.get('country') ?? '') : DEFAULTS.country
+	const intent = (hasQuery ? (params.get('intent') ?? '') : DEFAULTS.intent).trim()
 
 	// A signup from a Spanish-speaking country gets Spanish whatever languages they listed, so
 	// the choice only means something for a volunteer elsewhere, where it stands in for having
@@ -64,9 +64,10 @@ export const load: PageServerLoad = async ({ url }) => {
 			: parseLanguage(params.get('language'))
 	// 'auto' (or unset) = let the email's content pick (the UK override -> plain, rest ->
 	// rich), matching the production endpoint. 'rich'/'plain' force it.
-	const styleParam = params.get('style');
+	const styleParam = params.get('style')
 
-	const htmlStyle: OnboardingEmailHtmlStyle | undefined = styleParam === 'plain' || styleParam === 'rich' ? styleParam : undefined;
+	const htmlStyle: OnboardingEmailHtmlStyle | undefined =
+		styleParam === 'plain' || styleParam === 'rich' ? styleParam : undefined
 
 	// Defaults to shared so existing preview links keep rendering the agreeing signup's email.
 	const chapterShare = params.get('chapterShare') !== 'no'
@@ -116,7 +117,10 @@ export const load: PageServerLoad = async ({ url }) => {
 		// The lines composeBlocks() adds to a chapter's own email, quoted in the page's advice so
 		// a chapter translating them works from the wording that is actually sent.
 		fixedLines: {
-			confirm: FIXED_COPY.en.confirm('#').map((block) => block.type === 'paragraph' ? plainLinks(block.text) : '').join(' '),
+			confirm: FIXED_COPY.en
+				.confirm('#')
+				.map((block) => (block.type === 'paragraph' ? plainLinks(block.text) : ''))
+				.join(' '),
 			newsletter: FIXED_COPY.en.newsletterInOwnWords
 		},
 		resolved,

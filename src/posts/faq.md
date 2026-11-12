@@ -4,7 +4,7 @@ description: Frequently asked questions about PauseAI and the risks of superinte
 ---
 
 <script>
-    import SimpleToc from '$lib/components/simple-toc/SimpleToc.svelte'
+    import SimpleToc from '#lib/components/simple-toc/SimpleToc.svelte'
 </script>
 <style>
     h2 {

@@ -1,4 +1,4 @@
-import { generateCacheControlRecord } from '$lib/utils'
+import { generateCacheControlRecord } from '#lib/utils.ts'
 import { json } from '@sveltejs/kit'
 import { StatusCodes } from 'http-status-codes'
 import type { RequestHandler } from './$types'

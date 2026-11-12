@@ -1,6 +1,6 @@
 <script lang="ts">
-	import Link from '$lib/components/Link.svelte'
-	import PostMeta from '$lib/components/PostMeta.svelte'
+	import Link from '#lib/components/Link.svelte'
+	import PostMeta from '#lib/components/PostMeta.svelte'
 	import type { PageData } from './$types'
 
 	let { data }: { data: PageData } = $props()

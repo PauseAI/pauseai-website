@@ -2,8 +2,8 @@ import { beforeEach, describe, expect, it, vi } from 'vitest'
 
 const env: Record<string, string | undefined> = {}
 vi.mock('$env/dynamic/private', () => ({ env }))
-vi.mock('$lib/server/sentry', () => ({ reportError: vi.fn() }))
-vi.mock('$lib/airtable.js', async (importOriginal) => ({
+vi.mock('#lib/server/sentry.ts', () => ({ reportError: vi.fn() }))
+vi.mock('#lib/airtable.js', async (importOriginal) => ({
 	...(await importOriginal<Record<string, unknown>>()),
 	fetchAllPages: () =>
 		Promise.resolve([
@@ -15,7 +15,7 @@ vi.mock('$lib/airtable.js', async (importOriginal) => ({
 }))
 
 const { POST } = await import('./+server.js')
-const { verifyVerificationToken } = await import('$lib/server/emailVerification')
+const { verifyVerificationToken } = await import('#lib/server/emailVerification.ts')
 
 const SECRET = 'test-v2-secret'
 const RECORD_ID = 'recTest1234567890'

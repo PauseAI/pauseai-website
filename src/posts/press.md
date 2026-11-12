@@ -5,8 +5,8 @@ date: 2024-05-15
 ---
 
 <script>
-	import PressCoveragePanelLoader from '$lib/components/PressCoveragePanelLoader.svelte'
-	import Link from '$lib/components/Link.svelte'
+	import PressCoveragePanelLoader from '#lib/components/PressCoveragePanelLoader.svelte'
+	import Link from '#lib/components/Link.svelte'
 </script>
 
 <p class="contact-clarification">

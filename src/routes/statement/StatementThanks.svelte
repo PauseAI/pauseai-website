@@ -1,5 +1,5 @@
 <script lang="ts">
-	import Link from '$lib/components/Link.svelte'
+	import Link from '#lib/components/Link.svelte'
 	import JoinInvite from './JoinInvite.svelte'
 
 	let {

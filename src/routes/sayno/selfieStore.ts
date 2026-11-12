@@ -1,13 +1,13 @@
-import { writable, get } from 'svelte/store';
-import { dev } from '$app/env';
+import { writable, get } from 'svelte/store'
+import { dev } from '$app/env'
 // Static env: dynamic public env in client code blocks prerendered pages'
 // hydration on a runtime /_app/env.js fetch (see hooks.client.ts).
 import * as publicEnv from '$env/static/public'
 
-const env = publicEnv as Record<string, string | undefined>;
+const env = publicEnv as Record<string, string | undefined>
 
-import toast from 'svelte-french-toast';
-import type { CloudinaryUploadResponse } from '$lib/cloudinary';
+import toast from 'svelte-french-toast'
+import type { CloudinaryUploadResponse } from '#lib/cloudinary.ts'
 
 // Cloudinary configuration - centralized
 export const cloudinaryConfig = {
@@ -19,31 +19,34 @@ export const cloudinaryConfig = {
 type State = 'preparing' | 'ready' | 'options' | 'done' | 'validated'
 
 // Create all the stores
-export const currentState = writable<State>('preparing');
+export const currentState = writable<State>('preparing')
 
-export const cameraPermissionRequested = writable<boolean>(false);
-export const uploadedImage = writable<string | null>(null);
-export const uploadedImageId = writable<string | null>(null);
-export const userEmail = writable<string>('');
-export const isProcessing = writable<boolean>(false);
-export const cameraAvailable = writable<boolean>(false);
-export const isCapturing = writable<boolean>(false);
-export const cameraPermissionDenied = writable<boolean>(false);
+export const cameraPermissionRequested = writable<boolean>(false)
+export const uploadedImage = writable<string | null>(null)
+export const uploadedImageId = writable<string | null>(null)
+export const userEmail = writable<string>('')
+export const isProcessing = writable<boolean>(false)
+export const cameraAvailable = writable<boolean>(false)
+export const isCapturing = writable<boolean>(false)
+export const cameraPermissionDenied = writable<boolean>(false)
 
 // Conditional intro message for returning users
 export const returningUidMessage = writable<string | null>(null)
 
 // Global references for elements and media
-let videoElement: HTMLVideoElement | null = null;
+let videoElement: HTMLVideoElement | null = null
 
-let canvasElement: HTMLCanvasElement | null = null;
+let canvasElement: HTMLCanvasElement | null = null
 
-export let stream: MediaStream | null = null;
+export let stream: MediaStream | null = null
 
-interface CloudinaryWidget { open(): void; destroy(): void }
+interface CloudinaryWidget {
+	open(): void
+	destroy(): void
+}
 
-let cloudinaryWidget: CloudinaryWidget | null = null;
-let shutterSound: () => void = () => {};
+let cloudinaryWidget: CloudinaryWidget | null = null
+let shutterSound: () => void = () => {}
 
 // Export setter functions for elements
 export function setVideoElement(el: HTMLVideoElement | null) {
@@ -196,25 +199,25 @@ export async function captureFromCamera() {
 			throw new Error('Video not ready - no dimensions')
 		}
 
-		const ctx = canvasElement.getContext('2d');
+		const ctx = canvasElement.getContext('2d')
 
-		if (!ctx) throw new Error('Canvas context not available');
+		if (!ctx) throw new Error('Canvas context not available')
 
 		// Set canvas size to match video
-		canvasElement.width = videoElement.videoWidth;
+		canvasElement.width = videoElement.videoWidth
 
-		canvasElement.height = videoElement.videoHeight;
+		canvasElement.height = videoElement.videoHeight
 
 		// Draw video frame to canvas (mirror for selfie)
-		ctx.save();
+		ctx.save()
 
-		ctx.scale(-1, 1);
-		ctx.drawImage(videoElement, -canvasElement.width, 0, canvasElement.width, canvasElement.height);
-		ctx.restore();
+		ctx.scale(-1, 1)
+		ctx.drawImage(videoElement, -canvasElement.width, 0, canvasElement.width, canvasElement.height)
+		ctx.restore()
 
 		// Convert to blob
 		const blob = await new Promise<Blob>((resolve, reject) => {
-			(canvasElement!).toBlob(
+			canvasElement!.toBlob(
 				(blob) => {
 					if (blob) resolve(blob)
 					else reject(new Error('Failed to capture image'))
@@ -231,29 +234,32 @@ export async function captureFromCamera() {
 		await new Promise((resolve) => setTimeout(resolve, 50))
 
 		// Upload to Cloudinary with unique ID
-		const timestamp = Date.now();
+		const timestamp = Date.now()
 
-		const randomStr = Math.random().toString(36).substring(2, 8);
-		const uniqueId = `selfie_${timestamp}_${randomStr}`;
-		const formData = new FormData();
+		const randomStr = Math.random().toString(36).substring(2, 8)
+		const uniqueId = `selfie_${timestamp}_${randomStr}`
+		const formData = new FormData()
 
-		formData.append('file', blob, `${uniqueId}.jpg`);
-		formData.append('upload_preset', 'selfie');
-		formData.append('public_id', uniqueId);
-		formData.append('folder', cloudinaryConfig.folder);
-		formData.append('tags', [...cloudinaryConfig.tags, 'direct_capture'].join(','));
+		formData.append('file', blob, `${uniqueId}.jpg`)
+		formData.append('upload_preset', 'selfie')
+		formData.append('public_id', uniqueId)
+		formData.append('folder', cloudinaryConfig.folder)
+		formData.append('tags', [...cloudinaryConfig.tags, 'direct_capture'].join(','))
 
-		const response = await fetch(`https://api.cloudinary.com/v1_1/${env.PUBLIC_CLOUDINARY_CLOUD_NAME || 'dyjlw1syg'}/image/upload`, { method: 'POST', body: formData });
+		const response = await fetch(
+			`https://api.cloudinary.com/v1_1/${env.PUBLIC_CLOUDINARY_CLOUD_NAME || 'dyjlw1syg'}/image/upload`,
+			{ method: 'POST', body: formData }
+		)
 
-		if (!response.ok) throw new Error('Upload failed');
+		if (!response.ok) throw new Error('Upload failed')
 
-		const result = await response.json() as CloudinaryUploadResponse;
+		const result = (await response.json()) as CloudinaryUploadResponse
 
 		// Success - update state
-		currentState.set('options');
+		currentState.set('options')
 
-		uploadedImage.set(result.secure_url);
-		uploadedImageId.set(result.public_id);
+		uploadedImage.set(result.secure_url)
+		uploadedImageId.set(result.public_id)
 
 		// Scroll to top to show thank you message
 		setTimeout(() => {
@@ -299,7 +305,7 @@ export async function finalizeSubmission() {
 				method: 'POST',
 				headers: { 'Content-Type': 'application/json' },
 				body: JSON.stringify({ public_id: imageId, email })
-			});
+			})
 
 			if (!response.ok) {
 				throw new Error('Failed to save email')
@@ -345,10 +351,10 @@ export async function removeUpload() {
 	}
 
 	// Clear local state
-	uploadedImage.set(null);
+	uploadedImage.set(null)
 
-	uploadedImageId.set(null);
-	currentState.set('ready');
+	uploadedImageId.set(null)
+	currentState.set('ready')
 
 	// Reset camera if it was used
 	if (get(cameraAvailable) && stream) {

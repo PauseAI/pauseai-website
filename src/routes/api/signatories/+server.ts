@@ -1,10 +1,10 @@
-import type { AirtableSignatory, Signatory } from '$lib/types.js'
+import type { AirtableSignatory, Signatory } from '#lib/types.js'
 import { json } from '@sveltejs/kit'
-import { fetchAllPages, type AirtableRecord } from '$lib/airtable.js'
-import { normaliseEmail } from '$lib/server/emailVerification'
-import { MEMBERS_BASE_ID, STATEMENT_TABLE_ID } from '$lib/server/members'
-import { liveSignatoryList, publicListFromCrm, statementBackend } from '$lib/server/statementCrm'
-import { generateCacheControlRecord } from '$lib/utils'
+import { fetchAllPages, type AirtableRecord } from '#lib/airtable.js'
+import { normaliseEmail } from '#lib/server/emailVerification.ts'
+import { MEMBERS_BASE_ID, STATEMENT_TABLE_ID } from '#lib/server/members.ts'
+import { liveSignatoryList, publicListFromCrm, statementBackend } from '#lib/server/statementCrm.ts'
+import { generateCacheControlRecord } from '#lib/utils.ts'
 import type { RequestHandler } from './$types'
 
 /**

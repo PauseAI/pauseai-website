@@ -3,7 +3,7 @@ import {
 	getNotionClient,
 	getString as getSharedString,
 	type NotionPropertyValue
-} from '$lib/server/notion'
+} from '#lib/server/notion.ts'
 import { env } from '$env/dynamic/private'
 
 /** 32-char Notion database id (hyphens optional). Override with NOTION_FUNDING_DONORS_DATABASE_ID in deploy env. */

@@ -1,10 +1,10 @@
 <script lang="ts">
-	import Navbar from '$lib/components/navbar/Navbar.svelte'
-	import Navlink from '$lib/components/navbar/Navlink.svelte'
-	import LanguageSwitcher from '$lib/components/LanguageSwitcher.svelte'
-	import { getNavItems } from '$lib/components/navbar/navItems'
-	import * as m from '$lib/paraglide/messages.js'
-	import { searchOpen } from '$lib/stores/searchModal'
+	import Navbar from '#lib/components/navbar/Navbar.svelte'
+	import Navlink from '#lib/components/navbar/Navlink.svelte'
+	import LanguageSwitcher from '#lib/components/LanguageSwitcher.svelte'
+	import { getNavItems } from '#lib/components/navbar/navItems.ts'
+	import * as m from '#lib/paraglide/messages.js'
+	import { searchOpen } from '#lib/stores/searchModal.ts'
 	import SearchIcon from '@lucide/svelte/icons/search'
 
 	interface Props {

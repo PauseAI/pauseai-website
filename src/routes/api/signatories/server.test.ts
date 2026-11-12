@@ -7,9 +7,9 @@ const publicListFromCrm = vi.fn<() => Promise<unknown>>()
 const liveSignatoryList = vi.fn<() => Promise<unknown>>()
 
 vi.mock('$env/dynamic/private', () => ({ env }))
-vi.mock('$lib/airtable.js', () => ({ fetchAllPages }))
-vi.mock('$lib/server/statementCrm', async (importOriginal) => ({
-	...(await importOriginal<typeof import('$lib/server/statementCrm')>()),
+vi.mock('#lib/airtable.js', () => ({ fetchAllPages }))
+vi.mock('#lib/server/statementCrm.ts', async (importOriginal) => ({
+	...(await importOriginal<typeof import('#lib/server/statementCrm.ts')>()),
 	publicListFromCrm,
 	liveSignatoryList
 }))

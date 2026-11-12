@@ -1,8 +1,8 @@
 <script lang="ts">
-	import LinkWithoutIcon from '$lib/components/LinkWithoutIcon.svelte'
-	import PostMeta from '$lib/components/PostMeta.svelte'
-	import { socials } from '$lib/socials'
-	import { socialIcons } from '$lib/components/socialIcons'
+	import LinkWithoutIcon from '#lib/components/LinkWithoutIcon.svelte'
+	import PostMeta from '#lib/components/PostMeta.svelte'
+	import { socials } from '#lib/socials.ts'
+	import { socialIcons } from '#lib/components/socialIcons.ts'
 	import { meta } from './meta'
 </script>
 

@@ -2,8 +2,8 @@
 <script lang="ts">
 	import { SvelteURLSearchParams } from 'svelte/reactivity'
 	import Picture from './Picture.svelte'
-	import type { LoosePicture } from '$lib/types'
-	import { imageQuality, imageWidths } from '$lib/image-config'
+	import type { LoosePicture } from '#lib/types.ts'
+	import { imageQuality, imageWidths } from '#lib/image-config.ts'
 
 	interface Props {
 		src: string

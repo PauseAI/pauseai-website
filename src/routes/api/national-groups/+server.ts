@@ -1,7 +1,7 @@
-import type { NationalGroup } from '$lib/types.js'
+import type { NationalGroup } from '#lib/types.js'
 import { error, json } from '@sveltejs/kit'
-import { getNationalGroups } from '$lib/server/nationalGroups'
-import { generateCacheControlRecord } from '$lib/utils'
+import { getNationalGroups } from '#lib/server/nationalGroups.ts'
+import { generateCacheControlRecord } from '#lib/utils.ts'
 import type { RequestHandler } from './$types'
 
 export type NationalGroupsApiResponse = NationalGroup[]

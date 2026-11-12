@@ -6,7 +6,7 @@ const reportError =
 const flushReports = vi.fn<() => Promise<void>>()
 
 vi.mock('$env/dynamic/private', () => ({ env }))
-vi.mock('$lib/server/sentry', () => ({ reportError, flushReports }))
+vi.mock('#lib/server/sentry.ts', () => ({ reportError, flushReports }))
 
 const {
 	SIGN_MIN_ATTEMPT_MS,

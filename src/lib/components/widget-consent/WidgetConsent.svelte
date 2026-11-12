@@ -1,8 +1,8 @@
 <script lang="ts">
-	import Button from '$lib/components/Button.svelte'
-	import Link from '$lib/components/Link.svelte'
-	import consent from '$lib/components/widget-consent/WidgetConsentStore'
-	import loadTwitter from '$lib/components/widget-consent/loadTwitter'
+	import Button from '#lib/components/Button.svelte'
+	import Link from '#lib/components/Link.svelte'
+	import consent from '#lib/components/widget-consent/WidgetConsentStore.ts'
+	import loadTwitter from '#lib/components/widget-consent/loadTwitter.js'
 	interface Props {
 		children?: import('svelte').Snippet
 	}

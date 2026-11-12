@@ -4,7 +4,7 @@ description: How can you set up a community and make an impact, locally?
 ---
 
 <script>
-  import SimpleToc from '$lib/components/simple-toc/SimpleToc.svelte'
+  import SimpleToc from '#lib/components/simple-toc/SimpleToc.svelte'
 </script>
 
 ## Why is local organizing important?

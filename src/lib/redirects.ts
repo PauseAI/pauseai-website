@@ -1,4 +1,4 @@
-import { redirectAsError } from '$lib/utils'
+import { redirectAsError } from '#lib/utils.ts'
 
 /** Permanent redirects (301) */
 const REDIRECTS: Record<string, string> = {

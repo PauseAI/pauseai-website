@@ -6,14 +6,14 @@ const getRecord =
 const reportError = vi.fn<(error: unknown, context?: Record<string, unknown>) => Promise<void>>()
 
 vi.mock('$env/dynamic/private', () => ({ env }))
-vi.mock('$lib/airtable', () => ({ getRecord }))
-vi.mock('$lib/server/sentry', () => ({ reportError }))
-vi.mock('$lib/server/onboardingEmail/chapter.js', () => ({
+vi.mock('#lib/airtable.ts', () => ({ getRecord }))
+vi.mock('#lib/server/sentry.ts', () => ({ reportError }))
+vi.mock('#lib/server/onboardingEmail/chapter.js', () => ({
 	getChapterForOnboardingEmail: () => Promise.resolve(null)
 }))
 
 const { POST } = await import('./+server.js')
-const { verifyVerificationToken } = await import('$lib/server/emailVerification')
+const { verifyVerificationToken } = await import('#lib/server/emailVerification.ts')
 
 const RENDER_SECRET = 'render-secret'
 const SECRET = 'verification-secret'

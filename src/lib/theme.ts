@@ -1,19 +1,22 @@
-import { writable, get } from 'svelte/store';
-import { browser } from '$app/env';
-import { getItem, setItem } from '$lib/localStorage';
+import { writable, get } from 'svelte/store'
+import { browser } from '$app/env'
+import { getItem, setItem } from '#lib/localStorage.ts'
 
 /** What's being rendered */
 type Theme = 'light' | 'dark'
 /** User selected status, defaults to `auto` */
-type UserTheme = Theme | 'auto';
+type UserTheme = Theme | 'auto'
 
-const userThemeKey = 'user-theme';
-const getSystemTheme = () => typeof matchMedia !== 'undefined' && matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-const initialUserTheme = (getItem(userThemeKey) || 'auto') as UserTheme;
-const initialTheme = initialUserTheme === 'auto' ? getSystemTheme() : initialUserTheme;
-const theme = writable<Theme>(initialTheme);
+const userThemeKey = 'user-theme'
+const getSystemTheme = () =>
+	typeof matchMedia !== 'undefined' && matchMedia('(prefers-color-scheme: dark)').matches
+		? 'dark'
+		: 'light'
+const initialUserTheme = (getItem(userThemeKey) || 'auto') as UserTheme
+const initialTheme = initialUserTheme === 'auto' ? getSystemTheme() : initialUserTheme
+const theme = writable<Theme>(initialTheme)
 
-export const userTheme = writable<UserTheme>(initialUserTheme);
+export const userTheme = writable<UserTheme>(initialUserTheme)
 
 if (typeof matchMedia !== 'undefined') {
 	matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (event) => {

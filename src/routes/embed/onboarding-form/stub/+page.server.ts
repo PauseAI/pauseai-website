@@ -1,4 +1,4 @@
-import { getStubSubmissions } from '$lib/server/onboarding-stub'
+import { getStubSubmissions } from '#lib/server/onboarding-stub.ts'
 import type { PageServerLoad } from './$types'
 
 export const prerender = false

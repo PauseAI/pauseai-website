@@ -1,8 +1,8 @@
 <script lang="ts">
-	import * as m from '$lib/paraglide/messages.js'
+	import * as m from '#lib/paraglide/messages.js'
 	import { tick } from 'svelte'
 	import { goto } from '$app/navigation'
-	import { localizeHref } from '$lib/paraglide/runtime'
+	import { localizeHref } from '#lib/paraglide/runtime.js'
 
 	interface Props {
 		// Localizable text

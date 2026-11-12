@@ -5,7 +5,7 @@ import {
 	credentialsError,
 	callCloudinaryAPI,
 	type CloudinarySimpleResponse
-} from '$lib/cloudinary'
+} from '#lib/cloudinary.ts'
 
 type AddEmailRequest = {
 	public_id: string

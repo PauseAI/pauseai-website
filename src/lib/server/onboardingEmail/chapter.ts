@@ -1,5 +1,5 @@
-import type { AirtableNationalGroup } from '$lib/types.js'
-import { fetchAllPages, type AirtableRecord } from '$lib/airtable.js'
+import type { AirtableNationalGroup } from '#lib/types.js'
+import { fetchAllPages, type AirtableRecord } from '#lib/airtable.js'
 import type { ChapterBlockData, ChapterLink } from './types.js'
 
 // Same base/table/filter as src/routes/api/national-groups/+server.ts.

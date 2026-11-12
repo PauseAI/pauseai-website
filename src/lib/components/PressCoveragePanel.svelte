@@ -1,7 +1,7 @@
 <script lang="ts">
-	import type { PressCoverage } from '$lib/press-coverage.remote'
-	import NewsCard from '$lib/components/NewsCard.svelte'
-	import type { NewsItem } from '$lib/types'
+	import type { PressCoverage } from '#lib/press-coverage.remote.ts'
+	import NewsCard from '#lib/components/NewsCard.svelte'
+	import type { NewsItem } from '#lib/types.ts'
 
 	interface Props {
 		coverage?: PressCoverage[]

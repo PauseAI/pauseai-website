@@ -1,6 +1,6 @@
-import { getLocale } from '$lib/paraglide/runtime'
+import { getLocale } from '#lib/paraglide/runtime.js'
 import type { PageLoad } from './$types'
-import { asError } from '$lib/utils'
+import { asError } from '#lib/utils.ts'
 import { importMarkdown } from './markdown'
 
 export const load: PageLoad = async ({ params: { slug }, depends, data: serverData }) => {

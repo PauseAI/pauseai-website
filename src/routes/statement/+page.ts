@@ -1,5 +1,5 @@
 import type { SignatoriesApiResponse } from '$api/signatories/+server.js'
-import { generateCacheControlRecord } from '$lib/utils'
+import { generateCacheControlRecord } from '#lib/utils.ts'
 import type { PageLoad } from './$types'
 
 export const prerender = true // workaround for 500 responses

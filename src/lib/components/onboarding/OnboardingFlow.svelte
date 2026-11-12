@@ -1,27 +1,18 @@
-<!--
-	OnboardingFlow — multi-step join form.
-
-	Flow documentation (step machine, validation, live/stub mode):
-	docs/join-form-flow.md
-
-	When changing steps, intents, hidden fields, or the submit contract,
-	update that document so it stays in sync with the code.
--->
 <script lang="ts">
 	import { onMount } from 'svelte'
-	import { enhance } from '$app/forms'
-	import type { SubmitFunction } from '@sveltejs/kit'
+	import { enhance, type SubmitFunction } from '$app/forms'
 	import type { OnboardingModeApiResponse } from '$api/onboarding-mode/+server.js'
 	import { toast } from 'svelte-french-toast'
-	import LinkWithoutIcon from '$lib/components/LinkWithoutIcon.svelte'
-	import Socials from '$lib/components/Socials.svelte'
-	import Combobox from '$lib/components/Combobox.svelte'
-	import Turnstile from '$lib/components/Turnstile.svelte'
+	import LinkWithoutIcon from '#lib/components/LinkWithoutIcon.svelte'
+	import Socials from '#lib/components/Socials.svelte'
+	import Combobox from '#lib/components/Combobox.svelte'
+	import Turnstile from '#lib/components/Turnstile.svelte'
 	import ActionCards from './ActionCards.svelte'
 	import ChapterShareQuestion from './ChapterShareQuestion.svelte'
 	import Stepper from './Stepper.svelte'
 	import CheckInbox from './CheckInbox.svelte'
 	import { getMessages } from './i18n.svelte'
+
 	import {
 		chapterName,
 		chapterQuestion,
@@ -47,8 +38,12 @@
 		type SavedChapterAnswer,
 		type SavedSignup
 	} from './signupResume'
-	import { turnstileSiteKey } from '$lib/turnstile'
-	import { hasUniversities, isKnownUniversity, universityOptions } from '$lib/data/universities'
+	import { turnstileSiteKey } from '#lib/turnstile.ts'
+	import {
+		hasUniversities,
+		isKnownUniversity,
+		universityOptions
+	} from '#lib/data/universities/index.ts'
 	import {
 		COUNTRIES,
 		COUNTRY_DIAL_CODES,
@@ -72,7 +67,6 @@
 		volunteer: 'Volunteer',
 		lead: 'Lead'
 	}
-
 	const msgs = $derived(getMessages())
 	const intentOptions = $derived(getIntentOptions(msgs))
 
@@ -91,43 +85,44 @@
 		chapterSiteCountry = null,
 		onSignup,
 		onRecordGone
+
+		// Per-embed attribution from /embed/onboarding-form?source=. Posted as a
+		// hidden `source` on the create forms; the server sanitises it and writes
+		// it to the `Source page` field. Ignored on updates (create-only field).
+		// The /subscribe flow creates the record up front and then hands off here
+		// to let people go further. It seeds the created record id and starts at
+		// the intent step, so this submission updates that record instead of
+		// creating a duplicate, and pre-sets the newsletter opt-in they already made.
+		// The token the server issued with that id. A prop, like the id, so it never
+		// reaches a URL.
+		// The chapter-sharing answer given on the subscribe form, which the
+		// continuation follows in its copy and never asks again. Null where it was
+		// not asked (the United States).
+		// The chapter whose own site this embed was detected on (matched by the
+		// iframe's referrer host, see /embed/onboarding-form/+page.svelte). Only
+		// softens the chapter question's wording when it equals basics.country —
+		// visiting PauseAI Germany's site and then picking France still asks the
+		// regular question.
+		// Called once per new signup, when the server confirms it created a record.
+		// Not called for updates to an existing record (the volunteer step, or a
+		// /subscribe continuation) nor for silently dropped spam submissions.
+		// Required with initialRecordId: called when the server refuses to update
+		// that row (410), so the host returns to the form that collects consent,
+		// since this one hides it and the next post must create a row.
 	}: {
 		initialEmail?: string
 		initialCountry?: string
 		initialCity?: string
 		initialFullName?: string
 		initialLanguages?: string[]
-		// Per-embed attribution from /embed/onboarding-form?source=. Posted as a
-		// hidden `source` on the create forms; the server sanitises it and writes
-		// it to the `Source page` field. Ignored on updates (create-only field).
 		initialSource?: string
-		// The /subscribe flow creates the record up front and then hands off here
-		// to let people go further. It seeds the created record id and starts at
-		// the intent step, so this submission updates that record instead of
-		// creating a duplicate, and pre-sets the newsletter opt-in they already made.
 		initialRecordId?: string
-		// The token the server issued with that id. A prop, like the id, so it never
-		// reaches a URL.
 		initialRecordToken?: string
 		startStep?: 1 | 2
 		initialKeepInformed?: boolean
-		// The chapter-sharing answer given on the subscribe form, which the
-		// continuation follows in its copy and never asks again. Null where it was
-		// not asked (the United States).
 		initialChapterAnswer?: ChapterAnswer | null
-		// The chapter whose own site this embed was detected on (matched by the
-		// iframe's referrer host, see /embed/onboarding-form/+page.svelte). Only
-		// softens the chapter question's wording when it equals basics.country —
-		// visiting PauseAI Germany's site and then picking France still asks the
-		// regular question.
 		chapterSiteCountry?: string | null
-		// Called once per new signup, when the server confirms it created a record.
-		// Not called for updates to an existing record (the volunteer step, or a
-		// /subscribe continuation) nor for silently dropped spam submissions.
 		onSignup?: () => void
-		// Required with initialRecordId: called when the server refuses to update
-		// that row (410), so the host returns to the form that collects consent,
-		// since this one hides it and the next post must create a row.
 		onRecordGone?: () => void
 	} = $props()
 
@@ -215,6 +210,7 @@
 	let reaskChapter = $state(false)
 	// Countries with a chapter; null until loaded, and the question waits for it.
 	let chapterCountries = $state<string[] | null>(null)
+
 	let submitting = $state(false)
 	let browseSignedUp = $state(false)
 	let honeypot = $state('')
@@ -280,6 +276,7 @@
 	$effect(() => {
 		if (prefillApplied || !initialEmail) return
 		if (!basics.email) basics.email = initialEmail
+
 		prefillApplied = true
 	})
 
@@ -333,10 +330,12 @@
 	// Phone: dial code prefilled from country of residence, editable in case
 	// their phone is from elsewhere. Submitted combined via a hidden input.
 	let dialCode = $state('')
+
 	let dialCodeEdited = false
 
 	$effect(() => {
 		const code = COUNTRY_DIAL_CODES[basics.country]
+
 		if (!dialCodeEdited && code) dialCode = code
 	})
 
@@ -347,7 +346,9 @@
 		if (raw.startsWith('+')) return raw.replace(/[\s().-]/g, '')
 		// National number: drop separators and the leading trunk 0.
 		const digits = raw.replace(/\D/g, '').replace(/^0+/, '')
+
 		if (!digits) return ''
+
 		return `${dialCode.trim()}${digits}`
 	})
 
@@ -389,12 +390,14 @@
 	// question is asked before then, so whether that row already has an answer for
 	// this country has to be known first, to leave the question out.
 	const pendingPickup = $derived.by(() => (!recordId ? savedFor(basics.email) : null))
+
 	const rowAnswer = $derived(
 		isContinuation
 			? chapterAnswerFor(rowChapterAnswer, basics.country)
 			: (heldChapterAnswer(rowChapterAnswer, pickedUpFor, basics.email, basics.country) ??
 					chapterAnswerFor(pendingPickup?.chapterAnswer ?? null, basics.country))
 	)
+
 	// Asked once a country from the list is picked, as on /subscribe.
 	const askChapter = $derived(
 		(!isContinuation || reaskChapter) &&
@@ -428,6 +431,7 @@
 	const shownAnswer = $derived(
 		effectiveAnswer(basics.country, askChapter ? answerForCountry : rowAnswer)
 	)
+
 	const intentSub = (key: IntentKey, sub: string) =>
 		key === 'volunteer' || key === 'lead' ? `${sub} ${inTouch(msgs, shownAnswer, chapter)}` : sub
 	const showKeepInformedNudge = $derived(
@@ -450,7 +454,6 @@
 		'https://pauseai-global.notion.site/943470de3ef7415e8d70948d0763cf35?pvs=105'
 
 	const languageOptions = LANGUAGES.map((l) => ({ label: l.display, value: l.stored }))
-
 	const showDiscoverySpecify = $derived(DISCOVERY_SPECIFY_TRIGGERS.includes(volunteer.discovery))
 
 	function startBrowse() {
@@ -607,6 +610,16 @@
 		}
 	}
 </script>
+
+<!--
+	OnboardingFlow — multi-step join form.
+
+	Flow documentation (step machine, validation, live/stub mode):
+	docs/join-form-flow.md
+
+	When changing steps, intents, hidden fields, or the submit contract,
+	update that document so it stays in sync with the code.
+-->
 
 {#snippet honeypotField(id: string)}
 	<div class="field honey">
@@ -1409,15 +1422,14 @@
 						<p class="submit-disclaimer">{msgs.onboarding_become_paying_member_disclaimer}</p>
 					{/if}
 				</div>
+
 				<button type="button" class="back" onclick={() => (step = 2)}
 					>{msgs.onboarding_btn_back}</button
 				>
 			</form>
 		{:else if step === 3 && intent === 'lead'}
 			<!-- Path D: lead -->
-			<div class="lead-check-inbox">
-				<CheckInbox {msgs} />
-			</div>
+			<div class="lead-check-inbox"><CheckInbox {msgs} /></div>
 			<h2>{msgs.onboarding_lead_title(leadRole)}</h2>
 			<p class="role-meta"><em>{msgs.onboarding_lead_meta}</em></p>
 			{@render checkboxConfirmations()}

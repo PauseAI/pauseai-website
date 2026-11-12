@@ -1,5 +1,5 @@
-import { resolveImageUrl } from '$lib/image.server'
-import { headersToRecord } from '$lib/utils'
+import { resolveImageUrl } from '#lib/image.server.ts'
+import { headersToRecord } from '#lib/utils.ts'
 import Headers from '@remix-run/headers'
 import { StatusCodes } from 'http-status-codes'
 import type { RequestHandler } from './$types'

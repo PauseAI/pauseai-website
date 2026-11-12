@@ -4,7 +4,7 @@ description: A list of our largest donors.
 ---
 
 <script>
-	import FundingDonorsList from '$lib/components/FundingDonorsList.svelte'
+	import FundingDonorsList from '#lib/components/FundingDonorsList.svelte'
 </script>
 
 _Last update: 2025-12-02_

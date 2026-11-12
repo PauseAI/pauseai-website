@@ -2,8 +2,8 @@
 	import Toc from 'svelte-toc'
 	import X from '@lucide/svelte/icons/x'
 	import List from '@lucide/svelte/icons/list'
-	import Card from '$lib/components/Card.svelte'
-	import Backdrop from '$lib/components/Backdrop.svelte'
+	import Card from '#lib/components/Card.svelte'
+	import Backdrop from '#lib/components/Backdrop.svelte'
 	import { onMount } from 'svelte'
 
 	let desktop = $state(false)

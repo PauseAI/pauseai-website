@@ -3,9 +3,9 @@
 	import Navlink from '../Navlink.svelte'
 	import NavDropdown from '../NavDropdown.svelte'
 	import MailIcon from '@lucide/svelte/icons/mail'
-	import LinkWithoutIcon from '$lib/components/LinkWithoutIcon.svelte'
+	import LinkWithoutIcon from '#lib/components/LinkWithoutIcon.svelte'
 	import { page } from '$app/state'
-	import { localizeHref } from '$lib/paraglide/runtime'
+	import { localizeHref } from '#lib/paraglide/runtime.js'
 	import type { NavItem } from '../navItems'
 
 	interface Props {

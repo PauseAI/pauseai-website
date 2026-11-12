@@ -1,8 +1,8 @@
 <script lang="ts">
-	import Image from '$lib/components/images/Image.svelte'
-	import LinkWithoutIcon from '$lib/components/LinkWithoutIcon.svelte'
-	import type { NewsItem } from '$lib/types'
-	import { formatDate } from '$lib/utils'
+	import Image from '#lib/components/images/Image.svelte'
+	import LinkWithoutIcon from '#lib/components/LinkWithoutIcon.svelte'
+	import type { NewsItem } from '#lib/types.ts'
+	import { formatDate } from '#lib/utils.ts'
 	import NetlifyImage from './images/NetlifyImage.svelte'
 	import Skeleton from './Skeleton.svelte'
 

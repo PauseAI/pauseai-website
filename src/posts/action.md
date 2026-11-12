@@ -4,7 +4,7 @@ description: Ways to help reduce AI risk.
 ---
 
 <script>
-import Tabs from '$lib/components/Tabs.svelte'
+import Tabs from '#lib/components/Tabs.svelte'
 </script>
 
 Everyone has a role to play in building a safer future. Whether you have five minutes or five days, there's something meaningful you can do right now. This page will help you find the actions that work best for you, wherever you are and whatever time you can give.

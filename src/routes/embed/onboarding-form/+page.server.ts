@@ -13,18 +13,18 @@
 import { fail } from '@sveltejs/kit'
 import type { FieldSet } from 'airtable'
 import type { Actions, PageServerLoad } from './$types'
-import { createRecord, getRecord, updateRecord } from '$lib/airtable'
-import { queueCrmIntake } from '$lib/server/crmIntake'
-import { getNationalGroups } from '$lib/server/nationalGroups'
-import { isOnboardingLive, isSignupEmailsSentByCrm } from '$lib/server/onboarding'
-import { checkContinuation, issueContinuationToken } from '$lib/server/onboardingContinuation'
-import { normaliseEmail } from '$lib/server/emailVerification'
-import { MEMBERS_BASE_ID, MEMBERS_TABLE_ID } from '$lib/server/members'
-import { recordStubSubmission } from '$lib/server/onboarding-stub'
-import { subscribeToSubstackNewsletter } from '$lib/server/substack'
-import { checkNotSpam } from '$lib/server/turnstile-verify'
-import { hasUniversities, isKnownUniversity } from '$lib/data/universities'
-import { possibleWordings } from '$lib/components/onboarding/chapterShare'
+import { createRecord, getRecord, updateRecord } from '#lib/airtable.ts'
+import { queueCrmIntake } from '#lib/server/crmIntake.ts'
+import { getNationalGroups } from '#lib/server/nationalGroups.ts'
+import { isOnboardingLive, isSignupEmailsSentByCrm } from '#lib/server/onboarding.ts'
+import { checkContinuation, issueContinuationToken } from '#lib/server/onboardingContinuation.ts'
+import { normaliseEmail } from '#lib/server/emailVerification.ts'
+import { MEMBERS_BASE_ID, MEMBERS_TABLE_ID } from '#lib/server/members.ts'
+import { recordStubSubmission } from '#lib/server/onboarding-stub.ts'
+import { subscribeToSubstackNewsletter } from '#lib/server/substack.ts'
+import { checkNotSpam } from '#lib/server/turnstile-verify.ts'
+import { hasUniversities, isKnownUniversity } from '#lib/data/universities/index.ts'
+import { possibleWordings } from '#lib/components/onboarding/chapterShare.ts'
 import {
 	COUNTRIES,
 	DISCOVERY_OPTIONS,
@@ -40,7 +40,7 @@ import {
 	normaliseUKPostcode,
 	signupSource,
 	type Intent
-} from '$lib/components/onboarding/options'
+} from '#lib/components/onboarding/options.ts'
 
 export const prerender = false
 

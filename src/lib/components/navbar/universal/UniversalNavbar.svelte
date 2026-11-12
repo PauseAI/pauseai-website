@@ -1,9 +1,9 @@
 <script lang="ts">
 	import { page } from '$app/state'
-	import Link from '$lib/components/Link.svelte'
-	import Logo from '$lib/components/logo.svelte'
-	import { emulateCqwIfNeeded } from '$lib/container-query-units'
-	import { localizeHref } from '$lib/paraglide/runtime'
+	import Link from '#lib/components/Link.svelte'
+	import Logo from '#lib/components/logo.svelte'
+	import { emulateCqwIfNeeded } from '#lib/container-query-units.ts'
+	import { localizeHref } from '#lib/paraglide/runtime.js'
 	import { onMount } from 'svelte'
 
 	interface Props {

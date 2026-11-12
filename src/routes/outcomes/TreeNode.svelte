@@ -4,7 +4,7 @@
 	import Propability from './Propability.svelte'
 	import type { TreeNodeType } from './tree'
 	import SelectButton from './SelectButton.svelte'
-	import Button from '$lib/components/Button.svelte'
+	import Button from '#lib/components/Button.svelte'
 	import { fade } from 'svelte/transition'
 
 	interface Props {

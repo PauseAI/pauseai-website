@@ -2,7 +2,7 @@ import axios from 'axios'
 import axiosRetry from 'axios-retry'
 import type { AxiosError } from 'axios'
 import snakecaseKeys from 'snakecase-keys'
-import { AxiosSequentialRetryMiddleware } from '$lib/axios-sequential-retry-middleware.js'
+import { AxiosSequentialRetryMiddleware } from '#lib/axios-sequential-retry-middleware.js'
 
 const BASE_URL = 'https://api.lu.ma/'
 const RETRIES = 3

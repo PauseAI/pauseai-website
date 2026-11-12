@@ -9,21 +9,21 @@ const appEnvironment = vi.hoisted(() => ({ dev: false }))
 
 vi.mock('$app/environment', () => appEnvironment)
 vi.mock('$env/dynamic/private', () => ({ env }))
-vi.mock('$lib/airtable', async (importOriginal) => ({
-	airtableFormulaString: (await importOriginal<typeof import('$lib/airtable')>())
+vi.mock('#lib/airtable.ts', async (importOriginal) => ({
+	airtableFormulaString: (await importOriginal<typeof import('#lib/airtable.ts')>())
 		.airtableFormulaString,
 	createRecord,
 	hasMatchingRecord
 }))
-vi.mock('$lib/server/turnstile-verify', () => ({ verifyTurnstile }))
+vi.mock('#lib/server/turnstile-verify.ts', () => ({ verifyTurnstile }))
 const signInCrm = vi.fn<(...args: unknown[]) => Promise<'ok' | 'refused' | 'failed'>>()
-vi.mock('$lib/server/statementCrm', async (importOriginal) => ({
-	...(await importOriginal<typeof import('$lib/server/statementCrm')>()),
+vi.mock('#lib/server/statementCrm.ts', async (importOriginal) => ({
+	...(await importOriginal<typeof import('#lib/server/statementCrm.ts')>()),
 	signInCrm
 }))
 
 const { GET, OPTIONS, POST } = await import('./+server.js')
-const { resetRateLimits } = await import('$lib/server/rateLimit')
+const { resetRateLimits } = await import('#lib/server/rateLimit.ts')
 
 const SITE = 'https://pauseai.info'
 const CHAPTER = 'https://pauseai.es'

@@ -1,5 +1,5 @@
-import { dev } from '$app/env';
-import type { DescriptiveFrontmatterMeta } from '$lib/types';
+import { dev } from '$app/env'
+import type { DescriptiveFrontmatterMeta } from '#lib/types.ts'
 
 export type MarkdownModule = {
 	default: import('svelte').Component
@@ -16,11 +16,11 @@ export type MarkdownModule = {
 export async function importMarkdown(locale: string, slug: string): Promise<MarkdownModule> {
 	// For English (source language), import directly from source
 	if (locale === 'en') {
-		return await import(`../../posts/${slug}.md`) as MarkdownModule;
+		return (await import(`../../posts/${slug}.md`)) as MarkdownModule
 	} else {
 		try {
-			return await import(`../../../l10n-cage/md/${locale}/${slug}.md`) as MarkdownModule;
-		} catch(error) {
+			return (await import(`../../../l10n-cage/md/${locale}/${slug}.md`)) as MarkdownModule
+		} catch (error) {
 			if (dev) {
 				return {
 					default: `## Couldn't import translation!\n(This is only tolerated in development mode.)`

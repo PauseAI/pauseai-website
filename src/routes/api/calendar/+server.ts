@@ -1,10 +1,10 @@
-import * as Calendar from '$lib/clients/luma/calendar'
-import * as GoogleCalendar from '$lib/clients/google-calendar'
-import { geocodeAll } from '$lib/geocode.js'
-import { generateCacheControlRecord } from '$lib/utils.js'
+import * as Calendar from '#lib/clients/luma/calendar.ts'
+import * as GoogleCalendar from '#lib/clients/google-calendar/index.ts'
+import { geocodeAll } from '#lib/geocode.js'
+import { generateCacheControlRecord } from '#lib/utils.js'
 import { json } from '@sveltejs/kit'
 import type { RequestHandler } from './$types'
-import nationalChaptersJson from '$lib/data/national-chapters.json'
+import nationalChaptersJson from '#lib/data/national-chapters.json'
 
 export type CalendarResponse = {
 	entries: {

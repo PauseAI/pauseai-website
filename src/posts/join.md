@@ -5,8 +5,8 @@ description: Sign up to join the PauseAI movement
 ---
 
 <script>
-    import CollagenSignup from '$lib/components/CollagenSignup.svelte'
-    import OnboardingFlow from '$lib/components/onboarding/OnboardingFlow.svelte'
+    import CollagenSignup from '#lib/components/CollagenSignup.svelte'
+    import OnboardingFlow from '#lib/components/onboarding/OnboardingFlow.svelte'
 
     let userHasUid = false
     let subscribeEmail = ''

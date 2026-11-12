@@ -4,7 +4,7 @@ description: What does it mean to be a National Group in the PauseAI network?
 ---
 
 <script context="module">
-  import NationalGroupsList from '$lib/components/NationalGroupsList.svelte';
+  import NationalGroupsList from '#lib/components/NationalGroupsList.svelte';
 </script>
 
 <NationalGroupsList />

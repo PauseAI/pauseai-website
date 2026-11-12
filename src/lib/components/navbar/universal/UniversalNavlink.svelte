@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { page } from '$app/state'
-	import LinkWithoutIcon from '$lib/components/LinkWithoutIcon.svelte'
-	import { localizeHref } from '$lib/paraglide/runtime'
+	import LinkWithoutIcon from '#lib/components/LinkWithoutIcon.svelte'
+	import { localizeHref } from '#lib/paraglide/runtime.js'
 	import clsx from 'clsx'
 
 	interface Props {

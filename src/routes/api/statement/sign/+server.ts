@@ -7,8 +7,8 @@ import {
 	signStatement,
 	type SignatureErrors,
 	type SigningMode
-} from '$lib/server/statement'
-import { TURNSTILE_FIELD } from '$lib/turnstile'
+} from '#lib/server/statement.ts'
+import { TURNSTILE_FIELD } from '#lib/turnstile.ts'
 import { json } from '@sveltejs/kit'
 import { StatusCodes } from 'http-status-codes'
 import type { RequestHandler } from './$types'
