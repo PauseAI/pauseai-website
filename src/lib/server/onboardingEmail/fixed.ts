@@ -14,10 +14,9 @@ export type FixedCopy = {
 	confirm: (verificationLink: string) => EmailBlock[]
 	/** What we will send them, just before the sign-off. Varies with the bucket in English
 	 *  because Irina's copy does; one line serves every bucket elsewhere. `subscribed` is the
-	 *  Members record's own "Email subscription" checkbox, forwarded by the Airtable automation
-	 *  as `email_subscription` — known at send time, so the line states it rather than hedging
-	 *  with "if you opted in". Undefined (a caller that doesn't pass the field, such as the
-	 *  preview pages) keeps the hedged wording rather than guessing. */
+	 *  member's Keep me informed answer (v2's `keep_informed`), so the line states it rather
+	 *  than hedging with "if you opted in". Undefined (a caller that doesn't pass it, such as
+	 *  the preview page) keeps the hedged wording rather than guessing. */
 	newsletter: (bucket: IntentBucket, subscribed: boolean | undefined) => string
 	/** The same promise inside an email a chapter wrote, where our full sentence reads as
 	 *  boilerplate bolted onto somebody else's note. */

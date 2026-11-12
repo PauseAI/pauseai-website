@@ -428,10 +428,11 @@
 	<details class="panel">
 		<summary>For developers</summary>
 		<p>
-			Uses the same renderer as <code>/api/onboarding-email</code>, which the Airtable onboarding
-			automation calls; the copy and layout live in <code>src/lib/server/onboardingEmail</code>.
-			This page is not linked from the site: it runs on <code>localhost</code> and Netlify deploy previews,
-			and 404s on the production domain. Chapter data shown is public National Groups info, not PII.
+			Uses the copy and layout of the welcome CiviCRM renders through
+			<code>/api/onboarding-email/v2</code>; both live in
+			<code>src/lib/server/onboardingEmail</code>. This page is not linked from the site: it runs on
+			<code>localhost</code> and Netlify deploy previews, and 404s on the production domain. Chapter data
+			shown is public National Groups info, not PII.
 		</p>
 		<p>
 			Resolved: <ResolvedSummary resolved={data.resolved} />
@@ -439,10 +440,6 @@
 		<p class="dev-copy">
 			<button type="button" disabled={updating} onclick={() => copyEmail('html')}>Copy HTML</button>
 			<span class="copied" role="status">{htmlStatus}</span>
-		</p>
-		<p>
-			<a href="/onboarding-email-compare">/onboarding-email-compare</a> checks a render against the pre-migration
-			MailerSend template it replaces.
 		</p>
 	</details>
 </div>

@@ -1,6 +1,6 @@
 # Onboarding email render: v2 contract
 
-The website renders the onboarding welcome email for a caller that sends it. This document is the contract for version 2, which the CRM calls. Version 1 (`POST /api/onboarding-email`, used by the Airtable welcome automation in `airtable-mailersend-emails.js`) is unchanged and is not described here.
+The website renders the onboarding welcome email for a caller that sends it. This document is the contract for version 2, which the CRM calls. Version 1 has no endpoint: in this document "v1" is its render, `renderOnboardingEmail` in `src/lib/server/onboardingEmail/index.ts`, which the preview page at `/onboarding-email-preview` uses.
 
 The renderer only renders. It never sends mail, and it never chooses a recipient, a sender or a reply-to: the caller decides all of those. Everything the email depends on is in the request, except two things the website supplies itself: the verification link, which it builds and signs (see "Verification link"), and the routed chapter's links, which it reads from the live National Groups table as v1 does (see "Chapter links"). It reads no Members record.
 
@@ -8,11 +8,11 @@ The renderer only renders. It never sends mail, and it never chooses a recipient
 
 `POST https://pauseai.info/api/onboarding-email/v2`
 
-v2 has its own route rather than sharing v1's, so the two validate and authenticate independently. The request body also carries `"version": 2`, and the response echoes it.
+The request body carries `"version": 2`, and the response echoes it.
 
 ## Authentication
 
-`Authorization: Bearer <secret>`, where the secret is the `ONBOARDING_EMAIL_RENDER_V2_SECRET` environment variable on the website. It is separate from v1's `ONBOARDING_EMAIL_RENDER_SECRET`, so the CRM's secret and the Airtable automation's rotate independently. While the variable is unset, every request is refused with `401`.
+`Authorization: Bearer <secret>`, where the secret is the `ONBOARDING_EMAIL_RENDER_V2_SECRET` environment variable on the website. While the variable is unset, every request is refused with `401`.
 
 To rotate: set the new value on the website, deploy, then update the CRM. Requests with the old value are refused with `401` from the deploy until the CRM is updated; the CRM retries a `401` (see "Timeouts and retries"), so welcomes wait through that window and go out once both sides match.
 
@@ -96,7 +96,6 @@ v2 is an adapter into v1's rendering: the same intent buckets, language resolver
 - Language: v2 also accepts a language tag in `language` when `languages` is absent, which v1 has no equivalent of (see "Languages").
 - The verification link is always signed, over `to_email`.
 - v2 adds the unsubscribe line when given `unsubscribe_url`; v1 has none.
-- v2 returns no sender and no fields for onboarders: the caller chooses every address.
 
 ### Languages
 

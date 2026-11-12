@@ -16,7 +16,7 @@ import type { Actions, PageServerLoad } from './$types'
 import { createRecord, getRecord, updateRecord } from '$lib/airtable'
 import { queueCrmIntake } from '$lib/server/crmIntake'
 import { getNationalGroups } from '$lib/server/nationalGroups'
-import { isOnboardingLive, isSignupEmailsSentByCrm } from '$lib/server/onboarding'
+import { isOnboardingLive } from '$lib/server/onboarding'
 import { checkContinuation, issueContinuationToken } from '$lib/server/onboardingContinuation'
 import { normaliseEmail } from '$lib/server/emailVerification'
 import { MEMBERS_BASE_ID, MEMBERS_TABLE_ID } from '$lib/server/members'
@@ -261,10 +261,9 @@ export const actions: Actions = {
 		if (!existingRecordId) {
 			fields['Signup source'] = signupSource(isSubscribeForm ? 'subscribe' : 'join', country)
 			fields['Form version'] = FORM_VERSION
-			// Which system sends this row's signup emails; unset, Airtable's automations do.
-			// Create-only, so a row's sender is fixed when it is created and no later post
-			// can hand it from one system to the other.
-			if (isSignupEmailsSentByCrm()) fields['Signup emails sent by'] = 'CiviCRM'
+			// CiviCRM sends the signup emails only for rows marked as its own. Create-only, so
+			// a row's sender is fixed when it is created and no later post can change it.
+			fields['Signup emails sent by'] = 'CiviCRM'
 			const sourcePage = resolveSourcePage(data, request, url)
 			if (sourcePage) fields['Source page'] = sourcePage
 		}
@@ -414,9 +413,8 @@ export const actions: Actions = {
 		}
 
 		// Recorded only for stub inspection, so it is resolved here rather than on
-		// every submit. The live branch has no use for it: the Airtable automations
-		// run their own country-to-chapter lookup, and decide who hears about the
-		// signup from the chapter-share field written above.
+		// every submit. The live branch has no use for it: CiviCRM routes the signup
+		// to a chapter itself.
 		const chapterMatch = (await getNationalGroups())?.find(
 			(group) => group.name.toLowerCase() === country.toLowerCase()
 		)

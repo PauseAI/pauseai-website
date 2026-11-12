@@ -43,27 +43,7 @@ export type OnboardingEmailResolution = {
 	chapterShare: boolean
 }
 
-// Returned explicitly, since without a `from` the Airtable script sends a UK signup's email from
-// PauseAI UK. It is the sender the script already uses for every other country.
-const GLOBAL_SENDER = { email: 'info@pauseai.info', name: 'PauseAI' }
-
-/**
- * Reads `gdpr_chapter_share`, which the Airtable script forwards from the Members checkbox, off a
- * render request. Only `true` counts as shared: a broken mapping must not tell someone their
- * chapter will contact them when the chapter will never hear of them.
- */
-export async function chapterShareFromRequest(body: Record<string, unknown>): Promise<boolean> {
-	if (!('gdpr_chapter_share' in body)) {
-		const message =
-			'Render request has no gdpr_chapter_share: treating it as not shared. Check the input mapping in the Airtable automation.'
-		console.warn(message)
-		// Key names only: the values are the signup's personal data.
-		await reportError(new Error(message), { receivedKeys: Object.keys(body).sort() })
-	}
-	return body.gdpr_chapter_share === true
-}
-
-/** Which version of the email a signup gets. Exported for the preview pages. */
+/** Which version of the email a signup gets. Exported for the preview page. */
 export async function resolveOnboardingEmail(
 	params: OnboardingEmailParams
 ): Promise<OnboardingEmailResolution> {
@@ -137,15 +117,7 @@ export async function renderOnboardingEmail(
 	const link = params.verificationLink ?? verificationLink(params.airtable_id)
 
 	const { resolution, override } = await resolve(params)
-	const email = compose(
-		resolution,
-		override,
-		params.firstName,
-		link,
-		params.subscribed,
-		params.htmlStyle
-	)
-	return { ...email, ...(resolution.chapterShare ? {} : { from: GLOBAL_SENDER }) }
+	return compose(resolution, override, params.firstName, link, params.subscribed, params.htmlStyle)
 }
 
 /**

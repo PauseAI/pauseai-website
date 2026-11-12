@@ -3,22 +3,17 @@ import vectors from './emailVerification.vectors.json'
 
 const env: Record<string, string | undefined> = {}
 const reportError = vi.fn<(error: unknown, context?: Record<string, unknown>) => Promise<void>>()
-const getRecord =
-	vi.fn<(...args: unknown[]) => Promise<Record<string, unknown> | 'missing' | 'failed'>>()
 
 vi.mock('$env/dynamic/private', () => ({ env }))
 vi.mock('$lib/server/sentry', () => ({ reportError }))
-vi.mock('$lib/airtable', () => ({ getRecord }))
 
 const {
-	LEGACY_LINK_CUTOVER,
-	LEGACY_WINDOW_DAYS,
 	LINK_TTL_SECONDS,
-	acceptsUnsignedLink,
 	emailHash,
+	getVerificationSecret,
 	mintVerificationToken,
 	normaliseEmail,
-	signedVerificationLink,
+	verificationLink,
 	verificationPayloadPrefix,
 	verifyVerificationToken
 } = await import('./emailVerification.js')
@@ -26,12 +21,10 @@ const {
 const SECRET = 'test-secret'
 const NOW = 1_800_000_000_000
 const TTL_MS = LINK_TTL_SECONDS * 1000
-const DAY_MS = 24 * 60 * 60 * 1000
 
 beforeEach(() => {
 	for (const key of Object.keys(env)) delete env[key]
 	reportError.mockReset().mockResolvedValue()
-	getRecord.mockReset()
 	vi.spyOn(console, 'error').mockImplementation(() => {})
 })
 
@@ -84,82 +77,29 @@ describe('verifyVerificationToken', () => {
 	})
 })
 
-describe('signedVerificationLink', () => {
-	it('signs over the row it reads, keyed by the id without its rec prefix', async () => {
-		env.EMAIL_VERIFICATION_SECRET = SECRET
-		getRecord.mockResolvedValue({ Email: 'Ada@Example.org' })
-		const link = new URL(await signedVerificationLink('recAda', NOW))
-		expect(getRecord).toHaveBeenCalledWith('appWPTGqZmUcs3NWu', 'tblL1icZBhTV1gQ9o', 'recAda')
+describe('verificationLink', () => {
+	it('builds the /verify link from the key and the token', () => {
+		const link = new URL(verificationLink('Ada', 'v1.1.sig'))
 		expect(link.pathname).toBe('/verify')
 		expect(link.searchParams.get('table')).toBe('join')
 		expect(link.searchParams.get('verificationKey')).toBe('Ada')
-		const token = link.searchParams.get('token') ?? ''
-		expect(await verifyVerificationToken(SECRET, 'recAda', 'ada@example.org', token, NOW)).toBe(
-			'valid'
-		)
+		expect(link.searchParams.get('token')).toBe('v1.1.sig')
 	})
+})
 
-	it('falls back to the unsigned link without a secret, reading nothing', async () => {
-		const link = new URL(await signedVerificationLink('recAda', NOW))
-		expect(link.searchParams.has('token')).toBe(false)
-		expect(link.searchParams.get('verificationKey')).toBe('Ada')
-		expect(getRecord).not.toHaveBeenCalled()
+describe('getVerificationSecret', () => {
+	it('returns the secret when set', () => {
+		env.EMAIL_VERIFICATION_SECRET = SECRET
+		expect(getVerificationSecret()).toBe(SECRET)
+		expect(reportError).not.toHaveBeenCalled()
 	})
 
 	it('reports a secret missing in production once', async () => {
 		vi.resetModules()
 		const fresh = await import('./emailVerification.js')
 		env.ONBOARDING_LIVE = 'true'
-		await fresh.signedVerificationLink('recAda', NOW)
-		await fresh.signedVerificationLink('recAda', NOW)
+		expect(fresh.getVerificationSecret()).toBeUndefined()
+		expect(fresh.getVerificationSecret()).toBeUndefined()
 		expect(reportError).toHaveBeenCalledOnce()
-	})
-
-	it('falls back to the unsigned link, reporting without it, when the row has no address', async () => {
-		env.EMAIL_VERIFICATION_SECRET = SECRET
-		for (const row of ['failed', 'missing', { Email: '  ' }] as const) {
-			getRecord.mockResolvedValueOnce(row)
-			const link = new URL(await signedVerificationLink('recAda', NOW))
-			expect(link.searchParams.has('token')).toBe(false)
-		}
-		// getRecord reports its own failed read.
-		expect(reportError).toHaveBeenCalledTimes(2)
-		for (const [, context] of reportError.mock.calls) {
-			expect(context).toEqual({ recordId: 'recAda' })
-		}
-	})
-})
-
-describe('acceptsUnsignedLink', () => {
-	const row = (createdTime: string, sent = true) => ({
-		createdTime,
-		fields: sent ? { 'Sent emails': true } : {}
-	})
-	const afterCutoverWindow = LEGACY_LINK_CUTOVER + 31 * DAY_MS
-
-	it('has a 30-day window', () => {
-		expect(LEGACY_WINDOW_DAYS).toBe(30)
-	})
-
-	it('accepts any mailed row within 30 days of the cutover', () => {
-		const clicked = LEGACY_LINK_CUTOVER + 29 * DAY_MS
-		expect(acceptsUnsignedLink(row('2024-01-01T00:00:00.000Z'), clicked)).toBe(true)
-	})
-
-	it('after that, accepts a mailed row only while it is under 30 days old', () => {
-		const recent = new Date(afterCutoverWindow - 29 * DAY_MS).toISOString()
-		const old = new Date(afterCutoverWindow - 31 * DAY_MS).toISOString()
-		expect(acceptsUnsignedLink(row(recent), afterCutoverWindow)).toBe(true)
-		expect(acceptsUnsignedLink(row(old), afterCutoverWindow)).toBe(false)
-		expect(acceptsUnsignedLink({ fields: { 'Sent emails': true } }, afterCutoverWindow)).toBe(false)
-	})
-
-	it('never accepts a row the Airtable sender has not mailed', () => {
-		expect(
-			acceptsUnsignedLink(
-				row(new Date(LEGACY_LINK_CUTOVER).toISOString(), false),
-				LEGACY_LINK_CUTOVER
-			)
-		).toBe(false)
 	})
 })

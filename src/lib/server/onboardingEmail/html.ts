@@ -4,13 +4,11 @@ import type { ChapterLink, UnsubscribeLine } from './types.js'
 import { ADDRESS_LINE } from './fixed.js'
 import { escapeHtml, mdLineToHtml } from './markdown.js'
 
-// Matches the site's brand orange (--hero-orange in src/styles/styles.css), also the
-// accent color used throughout the existing MailerSend template exports.
+// Matches the site's brand orange (--hero-orange in src/styles/styles.css).
 const ACCENT = '#ff9416'
 const TEXT = '#222222'
 const MUTED = '#6b6b6b'
 const BORDER = '#e5e5e5'
-// The rule colour the MailerSend templates use around their verification block.
 const RULE = '#d1d3d3'
 const BODY_BG = '#f6f6f6'
 const CARD_BG = '#ffffff'
@@ -25,8 +23,8 @@ export function unsubscribeHtml(
 	return `${escapeHtml(question)} <a href="${escapeHtml(url)}"${style}>${escapeHtml(linkText)}</a>.`
 }
 
-// static/email-social/<name>.png, the same icons the MailerSend templates carry. A label
-// with no icon of its own falls back to its text, so nothing disappears.
+// static/email-social/<name>.png. A label with no icon of its own falls back to its text,
+// so nothing disappears.
 const SOCIAL_ICONS = new Set([
 	'youtube',
 	'discord',
@@ -68,8 +66,7 @@ function renderBlock(block: EmailBlock): string {
 			return `<tr><td style="padding: 6px 0;"><${tag} style="margin: 0; padding-left: 20px;">${items}</${tag}></td></tr>`
 		}
 		case 'button':
-			// Table + VML wrapper is what makes a button survive Outlook, and matches the
-			// MailerSend templates' own button.
+			// Table + VML wrapper is what makes a button survive Outlook.
 			return `<tr><td align="center" style="padding: 14px 0;"><table role="presentation" cellpadding="0" cellspacing="0" border="0" align="center"><tr><td align="center" bgcolor="${ACCENT}" style="border-radius: 28px;"><a href="${escapeHtml(block.url)}" style="display: inline-block; padding: 13px 30px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; font-size: 16px; font-weight: 700; color: #ffffff; text-decoration: none; border-radius: 28px;">${escapeHtml(block.text)}</a></td></tr></table></td></tr>`
 		case 'signoff':
 			return `<tr><td style="padding: 22px 0 6px 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; font-size: 16px; line-height: 1.6; color: ${TEXT};">${block.lines.map((line) => mdLineToHtml(line, ACCENT)).join('<br>')}</td></tr>`
@@ -90,11 +87,9 @@ function renderBlock(block: EmailBlock): string {
 	}
 }
 
-/** Hand-rolled table-based HTML, matching the general inline-styles/table-layout
- *  approach of the existing MailerSend exports (email-templates/*.json) rather than
- *  modern CSS, for email-client compatibility. The logo is the PauseAI icon the
- *  MailerSend templates carry; its alt text keeps the name visible where images are
- *  blocked. */
+/** Hand-rolled table-based HTML with inline styles rather than modern CSS, for
+ *  email-client compatibility. The logo's alt text keeps the name visible where images
+ *  are blocked. */
 export function renderHtml(
 	blocks: EmailBlock[],
 	language: OnboardingEmailLanguage,

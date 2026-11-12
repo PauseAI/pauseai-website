@@ -52,7 +52,6 @@ const refusal = async (response: Response) => ((await response.json()) as Refusa
 
 beforeEach(() => {
 	env.ONBOARDING_EMAIL_RENDER_V2_SECRET = SECRET
-	env.ONBOARDING_EMAIL_RENDER_SECRET = 'the-v1-secret'
 	env.EMAIL_VERIFICATION_SECRET = VERIFICATION_SECRET
 	env.CRM_INTAKE_URL = 'https://crm.pauseai.info'
 })
@@ -78,7 +77,6 @@ describe('POST /api/onboarding-email/v2', () => {
 	it.each([
 		['no header', null],
 		['a wrong secret', 'Bearer nope'],
-		["v1's secret", 'Bearer the-v1-secret'],
 		['the secret without the scheme', SECRET]
 	])('refuses %s', async (_name, authorization) => {
 		const response = await post(BODY, authorization)

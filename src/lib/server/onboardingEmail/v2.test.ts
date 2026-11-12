@@ -312,7 +312,7 @@ describe('renderOnboardingEmailV2', () => {
 	})
 })
 
-// The same member, as the Airtable automation asks v1 for them and as the CRM asks v2.
+// The same member, as v1 renders them and as the CRM asks v2.
 type Member = {
 	country: string
 	/** What the CRM sends for the same country. */

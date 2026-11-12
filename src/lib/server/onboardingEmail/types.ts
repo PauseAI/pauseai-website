@@ -16,11 +16,7 @@ export type OnboardingEmailLanguage = BaseLanguage | 'sv' | 'de'
  *  hand-written note. Same blocks either way; only the wrapper differs. */
 export type OnboardingEmailHtmlStyle = 'rich' | 'plain'
 
-/**
- * Input to the render function. Field names mirror the Airtable automation's
- * `input.config()` fields (minus `to_email`/`reply_to_email`/`onboarding_email`,
- * which the render endpoint doesn't need since it never sends anything itself).
- */
+/** Input to v1's render, which the preview page and tests use. */
 export type OnboardingEmailParams = {
 	firstName: string
 	/** Free-text country name, as stored on the Members record. May be empty/undefined. */
@@ -29,8 +25,7 @@ export type OnboardingEmailParams = {
 	intent?: string
 	/** Airtable `Languages` multipleSelects value. */
 	languages?: string[] | string
-	/** Airtable `Email subscription` checkbox, forwarded by the automation as
-	 *  `email_subscription`. Only the shared email's newsletter line depends on it; undefined
+	/** Airtable `Email subscription` checkbox. Only the shared email's newsletter line depends on it; undefined
 	 *  keeps that line's hedged "if you opted in" wording rather than guessing. */
 	subscribed?: boolean
 	/** Whether the signup agreed to their details going to their chapter (Airtable
@@ -38,17 +33,15 @@ export type OnboardingEmailParams = {
 	 *  email may not come from the chapter or say the chapter will be in touch. */
 	chapterShare: boolean
 	/** Testing/preview only: force the shared copy's language, skipping the country +
-	 *  languages detection in resolveOnboardingEmailLanguage. The production render
-	 *  endpoint never sets this. */
+	 *  languages detection in resolveOnboardingEmailLanguage. */
 	languageOverride?: BaseLanguage
-	/** Force the HTML wrapper (see OnboardingEmailHtmlStyle). Left unset, as the
-	 *  production render endpoint does, the email's own content decides. The
-	 *  preview/compare pages set this to force one for QA. */
+	/** Force the HTML wrapper (see OnboardingEmailHtmlStyle). Left unset, the email's own
+	 *  content decides. The preview page sets this to force one for QA. */
 	htmlStyle?: OnboardingEmailHtmlStyle
 	/** Used to build the verification link. */
 	airtable_id: string
-	/** The signed link the render endpoint mints. The preview pages leave it out and get the
-	 *  unsigned link built from `airtable_id`. */
+	/** Tests pass v2's signed link here to compare the two renders. The preview page leaves it
+	 *  out and gets the unsigned link built from `airtable_id`. */
 	verificationLink?: string
 }
 
@@ -56,9 +49,6 @@ export type RenderedOnboardingEmail = {
 	subject: string
 	html: string
 	text: string
-	/** Set only when the sender the Airtable script picks by country would be wrong. The script
-	 *  sends from it as given, so it must be an address on a domain verified in MailerSend. */
-	from?: { email: string; name: string }
 }
 
 /** The three versions the copy varies over, matching the live templates. Anything
