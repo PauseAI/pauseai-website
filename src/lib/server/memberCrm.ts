@@ -65,8 +65,7 @@ const RETRY_AT_MS = [1_000, 3_000, 7_000, 15_000]
 type Outcome = 'ok' | 'error' | 'error:memberships' | `refused:${string}`
 
 /** What the form does about a signup call. */
-export type SignupResult =
-	'saved' | 'chapter_answer_missing' | 'session_expired' | 'row_gone' | 'not_saved'
+export type SignupResult = 'saved' | 'chapter_answer_missing' | 'row_gone' | 'not_saved'
 
 // CiviCRM's refusals for a signup whose contact is gone or was never a member's.
 const ROW_GONE = ['merged', 'erased', 'trashed', 'not_a_member']
@@ -85,7 +84,6 @@ const REFUSALS = new Set([
 function resultOf(outcome: Outcome): SignupResult {
 	if (outcome === 'ok' || outcome === 'error:memberships') return 'saved'
 	if (outcome === 'refused:chapter_answer_missing') return 'chapter_answer_missing'
-	if (outcome.startsWith('refused:token_')) return 'session_expired'
 	if (ROW_GONE.some((reason) => outcome === `refused:${reason}`)) return 'row_gone'
 	return 'not_saved'
 }
@@ -110,9 +108,11 @@ async function attempt(params: unknown, timeoutMs: number): Promise<Attempt> {
  * Submits a signup key's record, awaited, retrying with the same key, token and record while the
  * failure may be transient and `deadline` (a Date.now() time) leaves a retry time to finish.
  * Network errors, timeouts, 502 to 504, Cloudflare's 52x and a busy key are retried on the
- * schedule; a plain 500 once. Every outcome but `ok` is reported to Sentry with the key alone,
- * refusals as warnings and the rest as errors (the alert rule's), after the response when there
- * is a platform. Never rejects.
+ * schedule; a plain 500 once. `token` must be one this server minted or has just checked, so a
+ * token refusal means the CRM and the website disagree on the secret: `not_saved`, never an
+ * expired session the person could fix. Every outcome but `ok` is reported to Sentry with the
+ * key alone, as an error when the signup or its lists were not saved (the alert rule's) and as
+ * a warning otherwise, after the response when there is a platform. Never rejects.
  */
 export async function submitSignup(
 	record: WrittenRecord,
@@ -135,7 +135,10 @@ export async function submitSignup(
 		}
 		const remaining = deadline - Date.now()
 		if (remaining <= 0) break
-		const step = await attempt(params, Math.min(ATTEMPT_TIMEOUT_MS, remaining))
+		// A slow CRM still writes after an abort; when no retry could follow a timeout, waiting
+		// out the answer beats telling the person it failed and having them sign up again.
+		const lastChance = remaining - ATTEMPT_TIMEOUT_MS < MIN_ATTEMPT_MS
+		const step = await attempt(params, lastChance ? remaining : ATTEMPT_TIMEOUT_MS)
 		outcome = step.outcome
 		details = step.failure ? failureDetails(step.failure) : step.locked ? { cause: 'locked' } : {}
 		const retry =
@@ -145,6 +148,7 @@ export async function submitSignup(
 					(isPlainServerError(step.failure) && ++plainServerErrors === 1)))
 		if (!retry) break
 	}
+	const result = resultOf(outcome)
 	if (outcome !== 'ok') {
 		await afterResponse(
 			platform,
@@ -153,12 +157,12 @@ export async function submitSignup(
 				{ check: 'crm-signup', recordId: record.id, outcome, ...details },
 				{
 					fingerprint: ['crm-signup', outcome],
-					level: outcome.startsWith('refused:') ? 'warning' : 'error'
+					level: result === 'not_saved' || outcome === 'error:memberships' ? 'error' : 'warning'
 				}
 			)
 		)
 	}
-	return resultOf(outcome)
+	return result
 }
 
 /** Checks a signup key's verification link, which CiviCRM judges alone. Never rejects. */

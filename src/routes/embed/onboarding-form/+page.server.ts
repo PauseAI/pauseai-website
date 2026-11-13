@@ -14,16 +14,19 @@ import { fail } from '@sveltejs/kit'
 import type { FieldSet } from 'airtable'
 import type { Actions, PageServerLoad } from './$types'
 import { createRecord, getRecord, updateRecord } from '$lib/airtable'
-import { afterResponse, queueCrmIntake } from '$lib/server/crmIntake'
+import { afterResponse, queueCrmIntake, reportCrmProblem } from '$lib/server/crmIntake'
 import { getNationalGroups } from '$lib/server/nationalGroups'
 import { isOnboardingLive } from '$lib/server/onboarding'
-import { checkContinuation, issueContinuationToken } from '$lib/server/onboardingContinuation'
+import {
+	checkContinuation,
+	hasContinuationSecret,
+	issueContinuationToken
+} from '$lib/server/onboardingContinuation'
 import { normaliseEmail } from '$lib/server/emailVerification'
 import { MEMBERS_BASE_ID, MEMBERS_TABLE_ID } from '$lib/server/members'
 import { recordStubSubmission } from '$lib/server/onboarding-stub'
 import { subscribeToSubstackNewsletter } from '$lib/server/substack'
 import { isSignupKey, memberBackend, mintSignupKey, submitSignup } from '$lib/server/memberCrm'
-import { reportError } from '$lib/server/sentry'
 import { checkNotSpam } from '$lib/server/turnstile-verify'
 import { hasUniversities, isKnownUniversity } from '$lib/data/universities'
 import { possibleWordings } from '$lib/components/onboarding/chapterShare'
@@ -80,6 +83,16 @@ const ROW_MISSING = 'We could not find your earlier signup. Please go through th
 // sends again is a new signup (new key, fresh Turnstile), a continuation keeps its key and token.
 const NOT_SAVED = "We couldn't confirm your signup was saved. Please try again."
 const SESSION_EXPIRED = 'Your signup session has expired. Please fill in the form again.'
+// Every CiviCRM signup carries a continuation token, so without the secret none can be written.
+// Not a 410: the browser keeps a saved signup's key and token for when the secret is back.
+async function crmNotConfigured() {
+	await reportCrmProblem(
+		'CRM signup not configured: ONBOARDING_CONTINUATION_SECRET is unset',
+		{ check: 'crm-signup', cause: 'not_configured' },
+		{ fingerprint: ['crm-signup', 'not_configured'], level: 'error' }
+	)
+	return fail(503, { message: NOT_SAVED })
+}
 const CHAPTER_ANSWER_MISSING =
 	'Please answer whether to share your details with a PauseAI chapter. If you cannot see the question, reload the page.'
 // `chapterAnswerMissing` sends the form back to the question (OnboardingFlow), which
@@ -340,6 +353,7 @@ export const actions: Actions = {
 			}
 		}
 
+		if (toCrm && !hasContinuationSecret()) return crmNotConfigured()
 		const postedToken = getString(data, 'record_token')
 		const continuation = existingRecordId
 			? await checkContinuation(existingRecordId, postedToken)
@@ -411,19 +425,12 @@ export const actions: Actions = {
 
 		if (toCrm) {
 			const key = existingRecordId || mintSignupKey()
-			// Every call carries the token, the create's included: without the secret nothing can be
-			// written, so the form fails closed.
 			const token = existingRecordId ? postedToken : await issueContinuationToken(key)
-			if (!token) {
-				await reportError(new Error('A CiviCRM signup needs ONBOARDING_CONTINUATION_SECRET'))
-				return fail(503, { message: NOT_SAVED })
-			}
+			if (!token) return crmNotConfigured()
 			const record = { id: key, createdTime: new Date(started).toISOString(), fields }
 			switch (await submitSignup(record, token, deadline, platform)) {
 				case 'chapter_answer_missing':
 					return chapterAnswerMissing()
-				case 'session_expired':
-					return rowGone(SESSION_EXPIRED)
 				case 'row_gone':
 					return rowGone(ROW_MISSING)
 				case 'not_saved':

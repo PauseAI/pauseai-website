@@ -157,7 +157,8 @@ describe('submitSignup', () => {
 		expect(await submit()).toBe('not_saved')
 		expect(Date.now() - start).toBeLessThanOrEqual(ACTION_DEADLINE_MS)
 		expect(starts).toEqual([0, 7_500, 15_000])
-		expect(timeouts.mock.calls).toEqual([[7_500], [7_500], [7_500]])
+		// The last attempt, after which no retry could fit, waits out what is left.
+		expect(timeouts.mock.calls).toEqual([[7_500], [7_500], [10_000]])
 		const [, context, options] = reportError.mock.calls[0]
 		expect(context).toMatchObject({
 			check: 'crm-signup',
@@ -167,6 +168,24 @@ describe('submitSignup', () => {
 		})
 		expect(options).toMatchObject({ level: 'error', fingerprint: ['crm-signup', 'error'] })
 		expect(JSON.stringify(reportError.mock.calls)).not.toContain('ada@example.org')
+	})
+
+	it('waits out a slow CRM on the last attempt that fits instead of cutting it off', async () => {
+		fakeAttemptTimeouts()
+		const start = Date.now()
+		const starts: number[] = []
+		fetchMock.mockImplementation((_url, init) => {
+			starts.push(Date.now() - start)
+			return new Promise((resolve, reject) => {
+				const answer = setTimeout(() => resolve(row({ status: 'ok', contact_id: 7 })), 9_000)
+				init!.signal!.addEventListener('abort', () => {
+					clearTimeout(answer)
+					reject(init!.signal!.reason as Error)
+				})
+			})
+		})
+		expect(await submit()).toBe('saved')
+		expect(starts).toEqual([0, 7_500, 15_000])
 	})
 
 	it('retries a busy key at once, since CiviCRM already waited for its lock', async () => {
@@ -206,7 +225,7 @@ describe('submitSignup', () => {
 	it('maps refusals to what the form does', async () => {
 		const cases: [string, string][] = [
 			['chapter_answer_missing', 'chapter_answer_missing'],
-			['token_expired', 'session_expired'],
+			['token_expired', 'not_saved'],
 			['trashed', 'row_gone'],
 			['erased', 'row_gone'],
 			['invalid_record', 'not_saved']
@@ -242,11 +261,31 @@ describe('submitSignup', () => {
 		expect(fetchMock).toHaveBeenCalledOnce()
 	})
 
-	it('does not retry a refusal, and reports it as a warning', async () => {
-		fetchMock.mockImplementation(() => row({ status: 'refused', reason: 'token_invalid' }))
-		expect(await submit()).toBe('session_expired')
-		expect(fetchMock).toHaveBeenCalledOnce()
-		expect(reportError.mock.calls[0][2]).toMatchObject({ level: 'warning' })
+	it('does not retry a refusal, and reports one the form can act on as a warning', async () => {
+		for (const reason of ['trashed', 'chapter_answer_missing']) {
+			fetchMock.mockReset().mockImplementation(() => row({ status: 'refused', reason }))
+			reportError.mockClear()
+			await submit()
+			expect(fetchMock).toHaveBeenCalledOnce()
+			expect(reportError.mock.calls[0][2]).toMatchObject({ level: 'warning' })
+		}
+	})
+
+	it('reports a refusal that leaves the signup unsaved as an error, token refusals included', async () => {
+		// The token is one this server minted or checked: a refusal means the secrets disagree.
+		for (const reason of [
+			'token_invalid',
+			'token_unverifiable',
+			'token_required',
+			'invalid_record',
+			'ada@example.org'
+		]) {
+			fetchMock.mockReset().mockImplementation(() => row({ status: 'refused', reason }))
+			reportError.mockClear()
+			expect(await submit()).toBe('not_saved')
+			expect(fetchMock).toHaveBeenCalledOnce()
+			expect(reportError.mock.calls[0][2]).toMatchObject({ level: 'error' })
+		}
 	})
 
 	it('counts error:memberships as written, and reports it as an error with the key for the repair', async () => {

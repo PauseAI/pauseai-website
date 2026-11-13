@@ -23,7 +23,8 @@ vi.mock('$lib/server/memberCrm', async (original) => ({
 	...(await original<typeof import('$lib/server/memberCrm')>()),
 	submitSignup
 }))
-vi.mock('$lib/server/sentry', () => ({ reportError, flushReports: () => Promise.resolve() }))
+const flushReports = vi.fn(() => Promise.resolve())
+vi.mock('$lib/server/sentry', () => ({ reportError, flushReports }))
 // The National Chapters list the action reads (null: never read on this instance).
 let nationalGroups: { name: string; leader: string }[] | null
 vi.mock('$lib/server/nationalGroups', () => ({
@@ -946,12 +947,30 @@ describe('onboarding submit: signups in CiviCRM alone (MEMBER_BACKEND)', () => {
 		expect(submitSignup).not.toHaveBeenCalled()
 	})
 
-	it('fails closed without the continuation secret', async () => {
+	it('fails closed without the continuation secret, keeping a saved signup, and reports it', async () => {
+		const created = await submit(signup)
+		submitSignup.mockClear()
 		delete env.ONBOARDING_CONTINUATION_SECRET
 		vi.spyOn(console, 'error').mockImplementation(() => {})
-		const result = await submit(signup)
-		expect(result.status).toBe(503)
-		expect(result.data?.message).toBe(NOT_SAVED)
+		const continued = {
+			...update(String(created.recordToken)),
+			record_id: String(created.recordId)
+		}
+		for (const post of [signup, continued]) {
+			reportError.mockClear()
+			flushReports.mockClear()
+			const result = await submit(post)
+			// Not a 410, which would make the browser drop a valid saved signup.
+			expect(result.status).toBe(503)
+			expect(result.data?.message).toBe(NOT_SAVED)
+			const [error, , options] = reportError.mock.calls[0]
+			expect(String(error)).toContain('CRM signup not configured')
+			expect(options).toMatchObject({
+				level: 'error',
+				fingerprint: ['crm-signup', 'not_configured']
+			})
+			expect(flushReports).toHaveBeenCalled()
+		}
 		expect(submitSignup).not.toHaveBeenCalled()
 		expect(createRecord).not.toHaveBeenCalled()
 	})
@@ -959,7 +978,6 @@ describe('onboarding submit: signups in CiviCRM alone (MEMBER_BACKEND)', () => {
 	it('maps refusals to the outcomes the form knows', async () => {
 		const cases: [string, number, string | undefined][] = [
 			['chapter_answer_missing', 400, undefined],
-			['session_expired', 410, SESSION_EXPIRED],
 			['row_gone', 410, 'We could not find your earlier signup. Please go through the form again.'],
 			['not_saved', 502, NOT_SAVED]
 		]
@@ -1030,6 +1048,29 @@ describe('onboarding submit: signups in CiviCRM alone (MEMBER_BACKEND)', () => {
 		expect(createRecord).not.toHaveBeenCalled()
 	})
 
+	it('answers a token refusal of a create as not saved, and reports it as an error', async () => {
+		const { submitSignup: realSubmitSignup } =
+			await vi.importActual<typeof import('$lib/server/memberCrm')>('$lib/server/memberCrm')
+		submitSignup.mockImplementation(realSubmitSignup as never)
+		env.CRM_INTAKE_URL = 'https://crm.example.org'
+		env.CRM_INTAKE_KEY = 'test-key-not-real'
+		vi.stubGlobal('fetch', () =>
+			Promise.resolve(
+				new Response(
+					JSON.stringify({ values: [{ status: 'refused', reason: 'token_unverifiable' }] })
+				)
+			)
+		)
+		try {
+			const result = await submit(signup)
+			expect(result.status).toBe(502)
+			expect(result.data?.message).toBe(NOT_SAVED)
+		} finally {
+			vi.unstubAllGlobals()
+		}
+		expect(reportError.mock.calls[0][2]).toMatchObject({ level: 'error' })
+	})
+
 	it('retries only the CRM call: one Turnstile check, one Substack call, the same payload', async () => {
 		const { submitSignup: realSubmitSignup } =
 			await vi.importActual<typeof import('$lib/server/memberCrm')>('$lib/server/memberCrm')
@@ -1043,13 +1084,17 @@ describe('onboarding submit: signups in CiviCRM alone (MEMBER_BACKEND)', () => {
 			return Promise.resolve(new Response(JSON.stringify(body), { status }))
 		})
 		vi.stubGlobal('fetch', crmFetch)
-		vi.useFakeTimers()
+		vi.useFakeTimers({ toFake: ['setTimeout', 'clearTimeout', 'Date'] })
 		checkNotSpam.mockClear()
 		try {
 			let result: Result | undefined
 			const pending = submit({ ...signup, newsletter: 'on' }).then((r) => (result = r))
-			// The action awaits more than timers before each retry's wait is set.
-			while (!result) await vi.advanceTimersByTimeAsync(500)
+			// The clock moves only through the retry waits: the action's other awaits (the form
+			// data, the token's HMAC) are real work the fake clock must not run past.
+			while (!result) {
+				if (vi.getTimerCount()) await vi.advanceTimersToNextTimerAsync()
+				else await new Promise((resolve) => setImmediate(resolve))
+			}
 			expect(await pending).toMatchObject({ success: true })
 		} finally {
 			vi.useRealTimers()
