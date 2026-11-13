@@ -520,6 +520,9 @@
 		step = 2
 	}
 
+	// What the last post's failure said, shown in place until the next post.
+	let saveError = $state('')
+
 	function submitWith<T>(
 		onStart: () => T,
 		onSuccess: (data: Record<string, unknown> | undefined, startValue: T) => void
@@ -546,6 +549,7 @@
 			if (recordId && recordToken) formData.set('record_token', recordToken)
 			if (resumed) formData.set('resumed', '1')
 			submitting = true
+			saveError = ''
 			// Run the start callback synchronously, inside the user gesture,
 			// so callers can do things that require a gesture (e.g. opening a
 			// popup window before an async fetch resolves). The returned value
@@ -599,9 +603,11 @@
 						if (next === 'step-1') step = 1
 						else if (next === 'signup-form') onRecordGone?.()
 					}
-					toast.error(String(result.data?.message ?? msgs.onboarding_error_generic))
+					saveError = String(result.data?.message ?? msgs.onboarding_error_generic)
+					toast.error(saveError)
 				} else {
-					toast.error(msgs.onboarding_error_unexpected)
+					saveError = msgs.onboarding_error_unexpected
+					toast.error(saveError)
 				}
 			}
 		}
@@ -803,6 +809,9 @@
 	{/if}
 
 	<div class="form-card">
+		{#if saveError}
+			<p class="save-error" role="alert">{saveError}</p>
+		{/if}
 		{#if step === 1}
 			<!-- Step 1: basic info -->
 			<form onsubmit={continueToIntent}>
@@ -1480,6 +1489,15 @@
 </div>
 
 <style>
+	/* The last post's failure, kept in place beside the toast until the next post. */
+	.save-error {
+		margin: 0 0 1rem;
+		padding: 0.7rem 1rem;
+		border-left: 4px solid var(--brand);
+		background-color: var(--bg);
+		color: var(--text);
+	}
+
 	.onboarding-flow {
 		max-width: 800px;
 		margin: 0 auto;

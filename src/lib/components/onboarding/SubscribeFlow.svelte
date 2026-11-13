@@ -132,6 +132,8 @@
 	)
 
 	const ERROR_MESSAGE = 'Something went wrong. Please try again.'
+	// What the last post's failure said, shown in place until the next post.
+	let saveError = $state('')
 
 	// Saves the created row for OnboardingFlow, so /join in this tab continues it.
 	// Never resumes one itself: this form always posts intent None, which would
@@ -143,6 +145,7 @@
 			return
 		}
 		submitting = true
+		saveError = ''
 		return ({ result }) => {
 			submitting = false
 			// The token is spent whatever the outcome; clear it so a retry waits for
@@ -157,10 +160,10 @@
 					saveSignupFromPost(formData, recordId, recordToken, null)
 				}
 				phase = 'thanks'
-			} else if (result.type === 'failure') {
-				toast.error(String(result.data?.message ?? ERROR_MESSAGE))
 			} else {
-				toast.error(ERROR_MESSAGE)
+				saveError =
+					result.type === 'failure' ? String(result.data?.message ?? ERROR_MESSAGE) : ERROR_MESSAGE
+				toast.error(saveError)
 			}
 		}
 	}
@@ -181,6 +184,9 @@
 
 {#if phase === 'form'}
 	<div class="subscribe-card">
+		{#if saveError}
+			<p class="save-error" role="alert">{saveError}</p>
+		{/if}
 		<form method="POST" action="/embed/onboarding-form?/submit" use:enhance={submit}>
 			<!-- Fixed for the newsletter entry: global newsletter opt-in, and the
 			     privacy-policy consent is the act of signing up (see the microcopy
@@ -318,6 +324,15 @@
 {/if}
 
 <style>
+	/* The last post's failure, kept in place beside the toast until the next post. */
+	.save-error {
+		margin: 0 0 1rem;
+		padding: 0.7rem 1rem;
+		border-left: 4px solid var(--brand);
+		background-color: var(--bg);
+		color: var(--text);
+	}
+
 	/* Replaces the suppressed page-template hgroup; the global h1 rule supplies
 	   the font/size, so only spacing lives here. */
 	/* Mirrors the page template's hgroup rhythm (which subscribe.md suppresses via

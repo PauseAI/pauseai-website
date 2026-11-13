@@ -33,7 +33,8 @@ const CHAPTER_FIELDS = new Set(['kind', 'chapter_id', 'name', 'country', 'countr
 const SUPPORTED_LANGUAGES: readonly BaseLanguage[] = ['en', 'es']
 const MAX_TEXT = 200
 const MAX_LANGUAGES = 50
-const RECORD_ID = /^rec[A-Za-z0-9]{14}$/
+// An Airtable record id, or a signup key (memberCrm.ts) for a signup in CiviCRM alone.
+const RECORD_ID = /^(rec[A-Za-z0-9]{14}|mem[A-Za-z0-9]{22})$/
 // One @ with something either side and no whitespace: enough to refuse a value that is not an
 // address, without second-guessing the CRM's own validation.
 const EMAIL = /^[^\s@]+@[^\s@]+$/
@@ -150,7 +151,10 @@ function parseRouting(value: unknown): OnboardingRouting {
 
 function parseRecordId(value: unknown): string {
 	if (typeof value !== 'string' || !RECORD_ID.test(value)) {
-		invalid('record_id', 'must be an Airtable record id (rec followed by 14 letters or digits)')
+		invalid(
+			'record_id',
+			'must be an Airtable record id (rec and 14 letters or digits) or a signup key (mem and 22)'
+		)
 	}
 	return value
 }

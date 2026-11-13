@@ -179,6 +179,19 @@ describe('renderOnboardingEmailV2', () => {
 		expect(JSON.stringify(context).toLowerCase()).not.toContain('alex')
 	})
 
+	it('links a signup key whole, with a token bound to it', async () => {
+		const key = 'memAbCdEfGhIjKlMnOpQrStUv'
+		const email = await render({ recordId: key })
+		for (const body of [email.text, email.html]) {
+			expect(body).toContain(
+				`verificationKey=${key}&`.replace('&', body === email.html ? '&amp;' : '&')
+			)
+		}
+		const token = tokenOf(email.text)
+		expect(await verifyVerificationToken(SECRET, key, TO_EMAIL, token, NOW)).toBe('valid')
+		expect(await verifyVerificationToken(SECRET, RECORD_ID, TO_EMAIL, token, NOW)).toBe('invalid')
+	})
+
 	it('signs a token that verifies for that row and address only', async () => {
 		const token = tokenOf((await render()).text)
 		expect(token).toMatch(/^v1\./)
@@ -444,6 +457,11 @@ describe('parseV2Request', () => {
 		expect(result.ok && result.params.toEmail).toBe(TO_EMAIL)
 	})
 
+	it('accepts a signup key as the record id', () => {
+		const result = parse({ record_id: 'memAbCdEfGhIjKlMnOpQrStUv' })
+		expect(result.ok && result.params.recordId).toBe('memAbCdEfGhIjKlMnOpQrStUv')
+	})
+
 	it('accepts only version 2', () => {
 		expect(errorOf({ version: 1 }).code).toBe('unsupported_version')
 		expect(errorOf({ version: undefined }).code).toBe('unsupported_version')
@@ -598,6 +616,8 @@ describe('parseV2Request', () => {
 		['a record id without rec', { record_id: 'Test1234567890' }],
 		['a short record id', { record_id: 'recTest' }],
 		['a record id with other characters', { record_id: 'recTest12345678)0' }],
+		['a short signup key', { record_id: 'memAbCdEfGhIjKlMnOpQrStU' }],
+		['a signup key with an underscore', { record_id: 'mem_bCdEfGhIjKlMnOpQrStUv' }],
 		['no address', { to_email: undefined }],
 		['an address without @', { to_email: 'alex.example.org' }],
 		['an address with spaces inside', { to_email: 'alex smith@example.org' }],

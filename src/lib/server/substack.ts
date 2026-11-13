@@ -15,13 +15,11 @@ export async function subscribeToSubstackNewsletter(email: string): Promise<bool
 			// that exists, and the retry creates a second one.
 			signal: AbortSignal.timeout(5000)
 		})
-		if (!response.ok) {
-			const detail = await response.text().catch(() => '')
-			console.error('Substack subscription failed:', response.status, detail)
-		}
+		// The status only: the body could echo the address.
+		if (!response.ok) console.error('Substack subscription failed:', response.status)
 		return response.ok
 	} catch (error) {
-		console.error('Substack subscription failed:', error)
+		console.error('Substack subscription failed:', (error as Error)?.name)
 		return false
 	}
 }

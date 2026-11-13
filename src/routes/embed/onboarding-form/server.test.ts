@@ -14,7 +14,16 @@ vi.mock('$lib/airtable', () => ({ createRecord, getRecord, updateRecord }))
 vi.mock('$lib/server/turnstile-verify', () => ({
 	checkNotSpam: () => Promise.resolve({ drop: false })
 }))
-vi.mock('$lib/server/substack', () => ({ subscribeToSubstackNewsletter: vi.fn() }))
+const subscribeToSubstackNewsletter = vi.fn()
+vi.mock('$lib/server/substack', () => ({
+	SUBSTACK_TIMEOUT_MS: 5000,
+	subscribeToSubstackNewsletter
+}))
+const submitSignup = vi.fn<(...args: unknown[]) => Promise<string>>()
+vi.mock('$lib/server/memberCrm', async (original) => ({
+	...(await original<typeof import('$lib/server/memberCrm')>()),
+	submitSignup
+}))
 vi.mock('$lib/server/sentry', () => ({ reportError, flushReports: () => Promise.resolve() }))
 // The National Chapters list the action reads (null: never read on this instance).
 let nationalGroups: { name: string; leader: string }[] | null
@@ -839,5 +848,150 @@ describe('onboarding submit: verified address', () => {
 		const result = await submit({ ...update(token), email: 'grace@example.org' })
 		expect(result).toMatchObject({ status: 502 })
 		expect(updateRecord).not.toHaveBeenCalled()
+	})
+})
+
+describe('onboarding submit: signups in CiviCRM alone (MEMBER_BACKEND)', () => {
+	const SIGNUP_KEY = /^mem[A-Za-z0-9]{22}$/
+	const NOT_SAVED = "We couldn't confirm your signup was saved. Please try again."
+	const sent = (call = 0) => {
+		const [record, token, deadline] = submitSignup.mock.calls[call] as [
+			{ id: string; createdTime: string; fields: Record<string, unknown> },
+			string,
+			number
+		]
+		return { record, token, deadline }
+	}
+
+	beforeEach(() => {
+		for (const key of Object.keys(env)) delete env[key]
+		env.ONBOARDING_LIVE = 'true'
+		env.ONBOARDING_CONTINUATION_SECRET = 'test-secret'
+		env.MEMBER_BACKEND = 'civicrm'
+		mockWrites()
+		getRecord.mockReset().mockResolvedValue(UK_ROW)
+		submitSignup.mockReset().mockResolvedValue('saved')
+		subscribeToSubstackNewsletter.mockReset()
+		nationalGroups = CHAPTERS
+		reportError.mockClear()
+		vi.spyOn(console, 'warn').mockImplementation(() => {})
+	})
+
+	it('mints a key and its token on a create, awaits CiviCRM, and writes nothing to Airtable', async () => {
+		const result = await submit(signup)
+		expect(result).toMatchObject({ success: true })
+		expect(result.recordId).toMatch(SIGNUP_KEY)
+		expect(result.recordToken).toMatch(/^v1\./)
+		const { record, token, deadline } = sent()
+		expect(record.id).toBe(result.recordId)
+		expect(token).toBe(result.recordToken)
+		expect(deadline - Date.now()).toBeLessThanOrEqual(25_000)
+		expect(record.fields).toMatchObject({
+			Email: 'ada@example.org',
+			'Form version': FORM_VERSION,
+			'Signup emails sent by': 'CiviCRM',
+			'GDPR chapter share permission': false,
+			'GDPR chapter share wording': WORDING_UK
+		})
+		expect(createRecord).not.toHaveBeenCalled()
+		expect(updateRecord).not.toHaveBeenCalled()
+	})
+
+	it('mints a new key for every create', async () => {
+		const first = await submit(signup)
+		const second = await submit(signup)
+		expect(first.recordId).not.toBe(second.recordId)
+	})
+
+	it('sends a continuation with its own key and token, the create-only fields, and reads no row', async () => {
+		const created = await submit(signup)
+		submitSignup.mockClear()
+		env.MEMBER_BACKEND = ''
+		const updated = await submit({
+			...update(String(created.recordToken)),
+			record_id: String(created.recordId)
+		})
+		expect(updated).toMatchObject({ success: true, recordId: created.recordId })
+		expect(updated.recordToken).toMatch(/^v1\./)
+		const { record, token } = sent()
+		expect(record.id).toBe(created.recordId)
+		expect(token).toBe(created.recordToken)
+		expect(record.fields).toMatchObject({ 'Form version': FORM_VERSION, Intent: 'Act now' })
+		// No answer posted: CiviCRM decides against the stored one.
+		expect(record.fields).not.toHaveProperty('GDPR chapter share permission')
+		expect(getRecord).not.toHaveBeenCalled()
+		expect(updateRecord).not.toHaveBeenCalled()
+	})
+
+	it('refuses a signup key continuation without a valid token, whatever the enforce switch says', async () => {
+		const key = 'memAbCdEfGhIjKlMnOpQrStUv'
+		for (const token of [undefined, 'v1.9999999999.' + 'A'.repeat(43)]) {
+			const result = await submit({ ...update(token), record_id: key })
+			expect(result.status).toBe(410)
+			expect(result.data?.message).toBe(SESSION_EXPIRED)
+		}
+		expect(submitSignup).not.toHaveBeenCalled()
+	})
+
+	it('keeps a record id continuation on Airtable with the flag on', async () => {
+		const created = await submit({ ...signup })
+		expect(created.recordId).toMatch(SIGNUP_KEY)
+		submitSignup.mockClear()
+		env.MEMBER_BACKEND = 'airtable'
+		const fromAirtable = await submit(signup)
+		expect(fromAirtable.recordId).toBe('recAda')
+		env.MEMBER_BACKEND = 'civicrm'
+		const updated = await submit(update(String(fromAirtable.recordToken)))
+		expect(updated).toMatchObject({ success: true, recordId: 'recAda' })
+		expect(updateRecord).toHaveBeenCalledOnce()
+		expect(submitSignup).not.toHaveBeenCalled()
+	})
+
+	it('fails closed without the continuation secret', async () => {
+		delete env.ONBOARDING_CONTINUATION_SECRET
+		vi.spyOn(console, 'error').mockImplementation(() => {})
+		const result = await submit(signup)
+		expect(result.status).toBe(503)
+		expect(result.data?.message).toBe(NOT_SAVED)
+		expect(submitSignup).not.toHaveBeenCalled()
+		expect(createRecord).not.toHaveBeenCalled()
+	})
+
+	it('maps refusals to the outcomes the form knows', async () => {
+		const cases: [string, number, string | undefined][] = [
+			['chapter_answer_missing', 400, undefined],
+			['session_expired', 410, SESSION_EXPIRED],
+			['row_gone', 410, 'We could not find your earlier signup. Please go through the form again.'],
+			['not_saved', 502, NOT_SAVED]
+		]
+		for (const [outcome, status, message] of cases) {
+			submitSignup.mockResolvedValue(outcome)
+			const result = await submit(signup)
+			expect(result.status).toBe(status)
+			if (message) expect(result.data?.message).toBe(message)
+			if (outcome === 'chapter_answer_missing') expect(result.data?.chapterAnswerMissing).toBe(true)
+		}
+	})
+
+	it("answers 502 when CiviCRM could not confirm the write, and doesn't subscribe", async () => {
+		submitSignup.mockResolvedValue('not_saved')
+		const result = await submit({ ...signup, newsletter: 'on' })
+		expect(result.status).toBe(502)
+		expect(result.data?.message).toBe(NOT_SAVED)
+		expect(subscribeToSubstackNewsletter).not.toHaveBeenCalled()
+	})
+
+	it('subscribes to Substack after a saved write, after the response where there is a platform', async () => {
+		const waitUntil = vi.fn()
+		await submit({ ...signup, newsletter: 'on' }, { context: { waitUntil } })
+		expect(subscribeToSubstackNewsletter).toHaveBeenCalledWith('ada@example.org')
+		expect(waitUntil).toHaveBeenCalledOnce()
+	})
+
+	it('writes nothing in stub mode', async () => {
+		delete env.ONBOARDING_LIVE
+		const result = await submit(signup)
+		expect(String(result.recordId)).toMatch(/^stub-/)
+		expect(submitSignup).not.toHaveBeenCalled()
 	})
 })

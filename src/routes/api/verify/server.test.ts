@@ -24,6 +24,12 @@ vi.mock('$lib/server/statementCrm', async (importOriginal) => ({
 	...(await importOriginal<typeof import('$lib/server/statementCrm')>()),
 	verifyStatementInCrm
 }))
+const verifySignupInCrm =
+	vi.fn<(key: string, token: string) => Promise<'ok' | 'expired' | 'invalid' | 'failed'>>()
+vi.mock('$lib/server/memberCrm', async (importOriginal) => ({
+	...(await importOriginal<typeof import('$lib/server/memberCrm')>()),
+	verifySignupInCrm
+}))
 vi.mock('airtable', () => ({
 	default: class {
 		base() {
@@ -105,6 +111,7 @@ beforeEach(() => {
 	update.mockReset().mockResolvedValue()
 	reportError.mockReset().mockResolvedValue()
 	verifyStatementInCrm.mockReset().mockResolvedValue('ok')
+	verifySignupInCrm.mockReset().mockResolvedValue('ok')
 	vi.spyOn(console, 'error').mockImplementation(() => {})
 	vi.spyOn(console, 'warn').mockImplementation(() => {})
 })
@@ -413,5 +420,48 @@ describe('POST /api/verify: statement links in CiviCRM', () => {
 		expect(response.status).toBe(200)
 		expect(verifyStatementInCrm).not.toHaveBeenCalled()
 		expect(update).toHaveBeenCalledExactlyOnceWith('recMember', { 'Verified email': true })
+	})
+})
+
+describe('POST /api/verify: signup keys in CiviCRM', () => {
+	const KEY = 'memAbCdEfGhIjKlMnOpQrStUv'
+	const TOKEN = 'v1.1800000000.' + 'A'.repeat(43)
+	const signupLink = (query = `&token=${TOKEN}`) =>
+		verify(
+			`${verificationParameter}=${KEY}${query}&table=join&${verificationConfirmedParameter}=true`
+		)
+
+	it.each([undefined, 'airtable', 'civicrm'])(
+		'sends a signup key to CiviCRM with MEMBER_BACKEND=%s, reading no Airtable row',
+		async (backend) => {
+			env.MEMBER_BACKEND = backend
+			const response = await signupLink()
+
+			expect(response.status).toBe(200)
+			expect(verifySignupInCrm).toHaveBeenCalledExactlyOnceWith(KEY, TOKEN)
+			expect(tableIds).toEqual([])
+			expect(update).not.toHaveBeenCalled()
+		}
+	)
+
+	it.each([
+		['expired', 410],
+		['invalid', 404],
+		['failed', 502]
+	] as const)('answers %s with %i', async (outcome, status) => {
+		verifySignupInCrm.mockResolvedValue(outcome)
+		expect((await signupLink()).status).toBe(status)
+	})
+
+	it('refuses a signup key without a token as expired, calling nothing', async () => {
+		const response = await signupLink('')
+		expect(response.status).toBe(410)
+		expect(verifySignupInCrm).not.toHaveBeenCalled()
+	})
+
+	it('keeps a record id link on Airtable', async () => {
+		selected = [member('recMember')]
+		await signedLink('recMember')
+		expect(verifySignupInCrm).not.toHaveBeenCalled()
 	})
 })

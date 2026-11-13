@@ -83,6 +83,37 @@ export async function callCrm(
 	}
 }
 
+/** A failure a retry may get past: a network error, a timeout, or a 5xx. */
+export const isTransient = (failure: CrmFailure) =>
+	failure.cause === 'network' ||
+	failure.cause === 'timeout' ||
+	(failure.cause === 'http' && (failure.httpStatus ?? 0) >= 500)
+
+export const wait = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms))
+
+export type CrmVerifyResult = 'ok' | 'expired' | 'invalid' | 'failed'
+
+/**
+ * Checks a verification link CiviCRM judges alone (`Entity/verify`), reporting a failure with
+ * `report`. Never rejects.
+ */
+export async function verifyLinkInCrm(
+	action: string,
+	key: string,
+	token: string,
+	report: (details: Record<string, unknown>) => Promise<void>
+): Promise<CrmVerifyResult> {
+	const answer = await callCrm(action, { key, token })
+	if (!answer.ok) {
+		await report(failureDetails(answer))
+		return 'failed'
+	}
+	const { status } = answer.row
+	if (status === 'ok' || status === 'expired' || status === 'invalid') return status
+	await report({ cause: 'http', httpStatus: 200 })
+	return 'failed'
+}
+
 /** What a failure may report: its cause, never a value the request carried. */
 export const failureDetails = ({ cause, httpStatus, errorName }: CrmFailure) => ({
 	cause,

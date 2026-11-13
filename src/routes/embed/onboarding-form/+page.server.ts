@@ -22,6 +22,8 @@ import { normaliseEmail } from '$lib/server/emailVerification'
 import { MEMBERS_BASE_ID, MEMBERS_TABLE_ID } from '$lib/server/members'
 import { recordStubSubmission } from '$lib/server/onboarding-stub'
 import { subscribeToSubstackNewsletter } from '$lib/server/substack'
+import { isSignupKey, memberBackend, mintSignupKey, submitSignup } from '$lib/server/memberCrm'
+import { reportError } from '$lib/server/sentry'
 import { checkNotSpam } from '$lib/server/turnstile-verify'
 import { hasUniversities, isKnownUniversity } from '$lib/data/universities'
 import { possibleWordings } from '$lib/components/onboarding/chapterShare'
@@ -65,12 +67,18 @@ export const load: PageServerLoad = ({ setHeaders }) => {
 }
 
 const STORED_LANGUAGES = LANGUAGES.map((l) => l.stored)
+// The whole action's budget when it writes to CiviCRM, Turnstile (its own 5 s timeout) included
+// (pauseai-civicrm #1278, item 11). Below Netlify's limit for the response.
+const ACTION_DEADLINE_MS = 25_000
 
 // On a 410 the form drops its id and token and returns to a step that collects
 // consent again (step 1, the /subscribe form, or a browse retry), so the next
 // post creates a row.
 const rowGone = (message: string) => fail(410, { message })
 const ROW_MISSING = 'We could not find your earlier signup. Please go through the form again.'
+// CiviCRM, the only copy of a signup key's signup, did not confirm the write: a create the person
+// sends again is a new signup (new key, fresh Turnstile), a continuation keeps its key and token.
+const NOT_SAVED = "We couldn't confirm your signup was saved. Please try again."
 const SESSION_EXPIRED = 'Your signup session has expired. Please fill in the form again.'
 const CHAPTER_ANSWER_MISSING =
 	'Please answer whether to share your details with a PauseAI chapter. If you cannot see the question, reload the page.'
@@ -145,6 +153,9 @@ function resolveSourcePage(data: FormData, request: Request, selfUrl: URL): stri
 
 export const actions: Actions = {
 	submit: async ({ request, url, platform }) => {
+		// Taken before anything is awaited.
+		const started = Date.now()
+		const deadline = started + ACTION_DEADLINE_MS
 		const data = await request.formData()
 
 		// Honeypot
@@ -188,6 +199,11 @@ export const actions: Actions = {
 		const hasVolunteerDetails = data.get('volunteer_details') === 'on'
 		// The /subscribe newsletter form, which stamps its own Signup source.
 		const isSubscribeForm = data.get('subscribe_form') === '1'
+		// A signup key's continuation goes to CiviCRM alone, whatever MEMBER_BACKEND says, so a
+		// rollback leaves signups in progress working; the flag picks only where a new one goes.
+		const toCrm =
+			live &&
+			(isSignupKey(existingRecordId) || (!existingRecordId && memberBackend() === 'civicrm'))
 		// The chapter-sharing answer and the text shown with it, posted only by a form
 		// that showed the question.
 		const postedAnswer = getString(data, 'chapter_share')
@@ -258,7 +274,9 @@ export const actions: Actions = {
 		// attacker-influenced (a URL param, a spoofable-looking Referer), so the
 		// helper constrains the result to a short host/path slug. Both fields are
 		// free text, so no option needs to exist for a new value.
-		if (!existingRecordId) {
+		// CiviCRM is sent them on every post and uses them only while the contact does not exist
+		// yet, so a retried create whose first attempt never landed is still whole.
+		if (!existingRecordId || toCrm) {
 			fields['Signup source'] = signupSource(isSubscribeForm ? 'subscribe' : 'join', country)
 			fields['Form version'] = FORM_VERSION
 			// CiviCRM sends the signup emails only for rows marked as its own. Create-only, so
@@ -330,7 +348,10 @@ export const actions: Actions = {
 			: null
 		// Refused as if the row were gone, never by creating one, which would bring
 		// back the duplicates the id exists to prevent.
-		if (continuation === 'refused') return rowGone(SESSION_EXPIRED)
+		// CiviCRM refuses a signup key's call without its token whatever the enforce switch says.
+		if (continuation === 'refused' || (toCrm && existingRecordId && continuation !== 'proven')) {
+			return rowGone(SESSION_EXPIRED)
+		}
 		// Which posts earn a token: see checkContinuation.
 		const issueToken = (recordId: string) =>
 			continuation !== 'allowed' ? issueContinuationToken(recordId) : undefined
@@ -344,8 +365,10 @@ export const actions: Actions = {
 		// posted, so it stands as long as the row's country does, through copy changes.
 		// A live update reads the row, for this and for its address below. A stub update
 		// has no row to read and writes nothing, so it is let through.
+		// A signup key's stored state is CiviCRM's, which makes the same checks itself
+		// (chapter_answer_missing below, and clearing the verification on a new address).
 		let storedRow: FieldSet | null = null
-		if (existingRecordId && live) {
+		if (existingRecordId && live && !toCrm) {
 			const row = await getRecord(MEMBERS_BASE_ID, MEMBERS_TABLE_ID, existingRecordId)
 			if (row === 'missing') return rowGone(ROW_MISSING)
 			if (row === 'failed') {
@@ -386,6 +409,40 @@ export const actions: Actions = {
 		const storedEmail = typeof storedRow?.Email === 'string' ? storedRow.Email : ''
 		if (storedRow && normaliseEmail(storedEmail) !== normaliseEmail(email)) {
 			fields['Verified email'] = false
+		}
+
+		if (toCrm) {
+			const key = existingRecordId || mintSignupKey()
+			// Every call carries the token, the create's included: without the secret nothing can be
+			// written, so the form fails closed.
+			const token = existingRecordId ? postedToken : await issueContinuationToken(key)
+			if (!token) {
+				await reportError(new Error('A CiviCRM signup needs ONBOARDING_CONTINUATION_SECRET'))
+				return fail(503, { message: NOT_SAVED })
+			}
+			const record = { id: key, createdTime: new Date(started).toISOString(), fields }
+			switch (await submitSignup(record, token, deadline, platform)) {
+				case 'chapter_answer_missing':
+					return chapterAnswerMissing()
+				case 'session_expired':
+					return rowGone(SESSION_EXPIRED)
+				case 'row_gone':
+					return rowGone(ROW_MISSING)
+				case 'not_saved':
+					return fail(502, { message: NOT_SAVED })
+			}
+			// After the response where there is a platform: its outcome changes nothing here.
+			if (newsletter && isSignup) {
+				const subscribing = subscribeToSubstackNewsletter(email)
+				if (platform) platform.context.waitUntil(subscribing)
+				else await subscribing
+			}
+			// A continuation's token was proven above, so it is renewed.
+			return {
+				success: true,
+				recordId: key,
+				recordToken: existingRecordId ? await issueContinuationToken(key) : token
+			}
 		}
 
 		if (live) {
