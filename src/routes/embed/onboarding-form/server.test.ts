@@ -11,9 +11,8 @@ const reportError =
 
 vi.mock('$env/dynamic/private', () => ({ env }))
 vi.mock('$lib/airtable', () => ({ createRecord, getRecord, updateRecord }))
-vi.mock('$lib/server/turnstile-verify', () => ({
-	checkNotSpam: () => Promise.resolve({ drop: false })
-}))
+const checkNotSpam = vi.fn(() => Promise.resolve({ drop: false }))
+vi.mock('$lib/server/turnstile-verify', () => ({ checkNotSpam }))
 const subscribeToSubstackNewsletter = vi.fn()
 vi.mock('$lib/server/substack', () => ({
 	SUBSTACK_TIMEOUT_MS: 5000,
@@ -35,7 +34,7 @@ const { actions } = await import('./+page.server.js')
 const { TOKEN_TTL_SECONDS } = await import('$lib/server/onboardingContinuation')
 const { chapterQuestion, chapterShareWording } =
 	await import('$lib/components/onboarding/chapterShare')
-const { FORM_VERSION } = await import('$lib/components/onboarding/options')
+const { FORM_VERSION, signupSource } = await import('$lib/components/onboarding/options')
 const { onboardingMessages } = await import('$lib/components/onboarding/messages')
 
 // What Airtable answers a write with: the whole row, so an update returns more
@@ -993,5 +992,77 @@ describe('onboarding submit: signups in CiviCRM alone (MEMBER_BACKEND)', () => {
 		const result = await submit(signup)
 		expect(String(result.recordId)).toMatch(/^stub-/)
 		expect(submitSignup).not.toHaveBeenCalled()
+	})
+	it('waits for CiviCRM before it answers', async () => {
+		let settled = false
+		submitSignup.mockImplementation(
+			() =>
+				new Promise((resolve) =>
+					setTimeout(() => {
+						settled = true
+						resolve('not_saved')
+					}, 20)
+				)
+		)
+		const result = await submit(signup)
+		expect(settled).toBe(true)
+		expect(result.status).toBe(502)
+	})
+
+	it('creates a /subscribe signup in CiviCRM with its own Signup source', async () => {
+		const result = await submit({
+			...signup,
+			subscribe_form: '1',
+			newsletter: 'on',
+			chapter_share_wording: wording('subscribe', 'United Kingdom', 'PauseAI UK', 'no')
+		})
+		expect(result).toMatchObject({ success: true })
+		expect(result.recordId).toMatch(SIGNUP_KEY)
+		const { record, token } = sent()
+		expect(record.id).toBe(result.recordId)
+		expect(token).toBe(result.recordToken)
+		expect(record.fields).toMatchObject({
+			'Signup source': signupSource('subscribe', 'United Kingdom'),
+			'Form version': FORM_VERSION,
+			'Signup emails sent by': 'CiviCRM'
+		})
+		expect(subscribeToSubstackNewsletter).toHaveBeenCalledOnce()
+		expect(createRecord).not.toHaveBeenCalled()
+	})
+
+	it('retries only the CRM call: one Turnstile check, one Substack call, the same payload', async () => {
+		const { submitSignup: realSubmitSignup } =
+			await vi.importActual<typeof import('$lib/server/memberCrm')>('$lib/server/memberCrm')
+		submitSignup.mockImplementation(realSubmitSignup as never)
+		env.CRM_INTAKE_URL = 'https://crm.example.org'
+		env.CRM_INTAKE_KEY = 'test-key-not-real'
+		const answers = [503, 502, 200]
+		const crmFetch = vi.fn<typeof fetch>(() => {
+			const status = answers.shift()!
+			const body = status === 200 ? { values: [{ status: 'ok', contact_id: 7 }] } : {}
+			return Promise.resolve(new Response(JSON.stringify(body), { status }))
+		})
+		vi.stubGlobal('fetch', crmFetch)
+		vi.useFakeTimers()
+		checkNotSpam.mockClear()
+		try {
+			let result: Result | undefined
+			const pending = submit({ ...signup, newsletter: 'on' }).then((r) => (result = r))
+			// The action awaits more than timers before each retry's wait is set.
+			while (!result) await vi.advanceTimersByTimeAsync(500)
+			expect(await pending).toMatchObject({ success: true })
+		} finally {
+			vi.useRealTimers()
+			vi.unstubAllGlobals()
+		}
+		expect(checkNotSpam).toHaveBeenCalledOnce()
+		expect(subscribeToSubstackNewsletter).toHaveBeenCalledOnce()
+		const posted = crmFetch.mock.calls.map(([, init]) =>
+			(init!.body as URLSearchParams).get('params')
+		)
+		expect(posted).toHaveLength(3)
+		expect(new Set(posted).size).toBe(1)
+		const { record } = JSON.parse(posted[0]!) as { record: { fields: object } }
+		expect(record.fields).not.toHaveProperty('resumed')
 	})
 })

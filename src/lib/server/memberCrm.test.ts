@@ -68,7 +68,7 @@ function hangUntil(downForMs: number) {
 		starts.push(Date.now() - start)
 		if (Date.now() - start >= downForMs) return row({ status: 'ok', contact_id: 7 })
 		return new Promise((_resolve, reject) =>
-			init!.signal!.addEventListener('abort', () => reject(init!.signal!.reason))
+			init!.signal!.addEventListener('abort', () => reject(init!.signal!.reason as Error))
 		)
 	})
 	return starts
