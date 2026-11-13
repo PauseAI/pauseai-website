@@ -32,7 +32,7 @@ export type MemberBackend = 'airtable' | 'civicrm'
 export const memberBackend = (): MemberBackend =>
 	env.MEMBER_BACKEND === 'civicrm' ? 'civicrm' : 'airtable'
 
-export const SIGNUP_KEY = /^mem[A-Za-z0-9]{22}$/
+const SIGNUP_KEY = /^mem[A-Za-z0-9]{22}$/
 const BASE62 = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
 
 export const isSignupKey = (value: unknown): value is string =>

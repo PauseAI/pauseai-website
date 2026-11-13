@@ -1,6 +1,7 @@
 import { env } from '$env/dynamic/private'
 import { COUNTRY_BY_ISO_CODE } from '$lib/server/countryCodes'
 import { normaliseEmail } from '$lib/server/emailVerification'
+import { isSignupKey } from '$lib/server/memberCrm'
 import { resolveOnboardingEmailLanguage } from './language.js'
 import { stripMarkdown } from './markdown.js'
 import type { BaseLanguage, OnboardingEmailV2Params, OnboardingRouting } from './types.js'
@@ -33,8 +34,7 @@ const CHAPTER_FIELDS = new Set(['kind', 'chapter_id', 'name', 'country', 'countr
 const SUPPORTED_LANGUAGES: readonly BaseLanguage[] = ['en', 'es']
 const MAX_TEXT = 200
 const MAX_LANGUAGES = 50
-// An Airtable record id, or a signup key (memberCrm.ts) for a signup in CiviCRM alone.
-const RECORD_ID = /^(rec[A-Za-z0-9]{14}|mem[A-Za-z0-9]{22})$/
+const AIRTABLE_RECORD_ID = /^rec[A-Za-z0-9]{14}$/
 // One @ with something either side and no whitespace: enough to refuse a value that is not an
 // address, without second-guessing the CRM's own validation.
 const EMAIL = /^[^\s@]+@[^\s@]+$/
@@ -150,7 +150,7 @@ function parseRouting(value: unknown): OnboardingRouting {
 }
 
 function parseRecordId(value: unknown): string {
-	if (typeof value !== 'string' || !RECORD_ID.test(value)) {
+	if (typeof value !== 'string' || !(AIRTABLE_RECORD_ID.test(value) || isSignupKey(value))) {
 		invalid(
 			'record_id',
 			'must be an Airtable record id (rec and 14 letters or digits) or a signup key (mem and 22)'

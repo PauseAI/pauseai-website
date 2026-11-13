@@ -9,10 +9,8 @@ export async function subscribeToSubstackNewsletter(email: string): Promise<bool
 			method: 'POST',
 			headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
 			body: new URLSearchParams({ email, source: 'pauseai_website' }),
-			// The signup's response waits on this call, and it carries the new
-			// record id. A slow Substack would otherwise hold it past the
-			// function's response deadline: the browser gets an error for a row
-			// that exists, and the retry creates a second one.
+			// Bounds how long the call holds the function after the response, or
+			// the response itself where nothing runs after it (the Node dev server).
 			signal: AbortSignal.timeout(5000)
 		})
 		// The status only: the body could echo the address.

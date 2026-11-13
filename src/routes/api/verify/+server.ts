@@ -126,7 +126,8 @@ export const POST: RequestHandler = async ({ request }) => {
 		// A signup key's contact lives in CiviCRM alone, which judges the link against its address.
 		if (!token) return linkExpired()
 		return verifyInCrm(verifySignupInCrm, key, token)
-	} else if (tableConfig.isMembers) {
+	}
+	if (tableConfig.isMembers) {
 		memberSecret = getVerificationSecret()
 		if (!token || !memberSecret) {
 			console.warn('[verification] refused a link it cannot check', {

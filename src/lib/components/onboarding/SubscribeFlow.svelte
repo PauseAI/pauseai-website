@@ -19,6 +19,7 @@
 	import Turnstile from '$lib/components/Turnstile.svelte'
 	import ChapterShareQuestion from './ChapterShareQuestion.svelte'
 	import CheckInbox from './CheckInbox.svelte'
+	import SaveError from './SaveError.svelte'
 	import OnboardingFlow from './OnboardingFlow.svelte'
 	import { chapterName, chapterQuestion, loadChapterCountries } from './chapterShare'
 	import { getMessages } from './i18n.svelte'
@@ -132,7 +133,6 @@
 	)
 
 	const ERROR_MESSAGE = 'Something went wrong. Please try again.'
-	// What the last post's failure said, shown in place until the next post.
 	let saveError = $state('')
 
 	// Saves the created row for OnboardingFlow, so /join in this tab continues it.
@@ -184,9 +184,7 @@
 
 {#if phase === 'form'}
 	<div class="subscribe-card">
-		{#if saveError}
-			<p class="save-error" role="alert">{saveError}</p>
-		{/if}
+		<SaveError message={saveError} />
 		<form method="POST" action="/embed/onboarding-form?/submit" use:enhance={submit}>
 			<!-- Fixed for the newsletter entry: global newsletter opt-in, and the
 			     privacy-policy consent is the act of signing up (see the microcopy
@@ -324,15 +322,6 @@
 {/if}
 
 <style>
-	/* The last post's failure, kept in place beside the toast until the next post. */
-	.save-error {
-		margin: 0 0 1rem;
-		padding: 0.7rem 1rem;
-		border-left: 4px solid var(--brand);
-		background-color: var(--bg);
-		color: var(--text);
-	}
-
 	/* Replaces the suppressed page-template hgroup; the global h1 rule supplies
 	   the font/size, so only spacing lives here. */
 	/* Mirrors the page template's hgroup rhythm (which subscribe.md suppresses via

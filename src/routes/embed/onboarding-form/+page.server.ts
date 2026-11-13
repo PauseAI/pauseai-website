@@ -14,7 +14,7 @@ import { fail } from '@sveltejs/kit'
 import type { FieldSet } from 'airtable'
 import type { Actions, PageServerLoad } from './$types'
 import { createRecord, getRecord, updateRecord } from '$lib/airtable'
-import { queueCrmIntake } from '$lib/server/crmIntake'
+import { afterResponse, queueCrmIntake } from '$lib/server/crmIntake'
 import { getNationalGroups } from '$lib/server/nationalGroups'
 import { isOnboardingLive } from '$lib/server/onboarding'
 import { checkContinuation, issueContinuationToken } from '$lib/server/onboardingContinuation'
@@ -67,8 +67,8 @@ export const load: PageServerLoad = ({ setHeaders }) => {
 }
 
 const STORED_LANGUAGES = LANGUAGES.map((l) => l.stored)
-// The whole action's budget when it writes to CiviCRM, Turnstile (its own 5 s timeout) included
-// (pauseai-civicrm #1278, item 11). Below Netlify's limit for the response.
+// The whole action's budget when it writes to CiviCRM, Turnstile (its own 5 s timeout) included.
+// Below Netlify's limit for the response.
 const ACTION_DEADLINE_MS = 25_000
 
 // On a 410 the form drops its id and token and returns to a step that collects
@@ -199,8 +199,6 @@ export const actions: Actions = {
 		const hasVolunteerDetails = data.get('volunteer_details') === 'on'
 		// The /subscribe newsletter form, which stamps its own Signup source.
 		const isSubscribeForm = data.get('subscribe_form') === '1'
-		// A signup key's continuation goes to CiviCRM alone, whatever MEMBER_BACKEND says, so a
-		// rollback leaves signups in progress working; the flag picks only where a new one goes.
 		const toCrm =
 			live &&
 			(isSignupKey(existingRecordId) || (!existingRecordId && memberBackend() === 'civicrm'))
@@ -431,11 +429,8 @@ export const actions: Actions = {
 				case 'not_saved':
 					return fail(502, { message: NOT_SAVED })
 			}
-			// After the response where there is a platform: its outcome changes nothing here.
 			if (newsletter && isSignup) {
-				const subscribing = subscribeToSubstackNewsletter(email)
-				if (platform) platform.context.waitUntil(subscribing)
-				else await subscribing
+				await afterResponse(platform, subscribeToSubstackNewsletter(email))
 			}
 			// A continuation's token was proven above, so it is renewed.
 			return {
@@ -464,7 +459,7 @@ export const actions: Actions = {
 			// Only on the signup, which for /subscribe is its own form rather than a
 			// step 2. No other update re-subscribes.
 			if (newsletter && isSignup) {
-				await subscribeToSubstackNewsletter(email)
+				await afterResponse(platform, subscribeToSubstackNewsletter(email))
 			}
 			return { success: true, recordId, recordToken: await issueToken(recordId) }
 		}

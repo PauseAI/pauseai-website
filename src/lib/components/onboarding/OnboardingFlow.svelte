@@ -19,6 +19,7 @@
 	import Turnstile from '$lib/components/Turnstile.svelte'
 	import ActionCards from './ActionCards.svelte'
 	import ChapterShareQuestion from './ChapterShareQuestion.svelte'
+	import SaveError from './SaveError.svelte'
 	import Stepper from './Stepper.svelte'
 	import CheckInbox from './CheckInbox.svelte'
 	import { getMessages } from './i18n.svelte'
@@ -520,7 +521,6 @@
 		step = 2
 	}
 
-	// What the last post's failure said, shown in place until the next post.
 	let saveError = $state('')
 
 	function submitWith<T>(
@@ -604,11 +604,10 @@
 						else if (next === 'signup-form') onRecordGone?.()
 					}
 					saveError = String(result.data?.message ?? msgs.onboarding_error_generic)
-					toast.error(saveError)
 				} else {
 					saveError = msgs.onboarding_error_unexpected
-					toast.error(saveError)
 				}
+				if (saveError) toast.error(saveError)
 			}
 		}
 	}
@@ -809,9 +808,7 @@
 	{/if}
 
 	<div class="form-card">
-		{#if saveError}
-			<p class="save-error" role="alert">{saveError}</p>
-		{/if}
+		<SaveError message={saveError} />
 		{#if step === 1}
 			<!-- Step 1: basic info -->
 			<form onsubmit={continueToIntent}>
@@ -1489,15 +1486,6 @@
 </div>
 
 <style>
-	/* The last post's failure, kept in place beside the toast until the next post. */
-	.save-error {
-		margin: 0 0 1rem;
-		padding: 0.7rem 1rem;
-		border-left: 4px solid var(--brand);
-		background-color: var(--bg);
-		color: var(--text);
-	}
-
 	.onboarding-flow {
 		max-width: 800px;
 		margin: 0 auto;
