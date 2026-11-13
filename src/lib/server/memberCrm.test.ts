@@ -140,14 +140,14 @@ describe('submitSignup', () => {
 		fakeAttemptTimeouts()
 		const starts = hangUntil(14_000)
 		expect(await submit()).toBe('saved')
-		expect(starts).toEqual([0, 8_000, 16_000])
+		expect(starts).toEqual([0, 7_500, 15_000])
 		expect(reportError).not.toHaveBeenCalled()
 	})
 
-	it('still fits a retry after a hanging outage when Turnstile took its whole 5 s', async () => {
+	it('still fits a retry after a hanging outage when Turnstile and overhead took over 5 s', async () => {
 		fakeAttemptTimeouts()
 		hangUntil(14_000)
-		expect(await submit(ACTION_DEADLINE_MS - 5_000)).toBe('saved')
+		expect(await submit(ACTION_DEADLINE_MS - 5_100)).toBe('saved')
 	})
 
 	it('gives up within the deadline when the CRM hangs, and reports it as an error with the key', async () => {
@@ -156,8 +156,8 @@ describe('submitSignup', () => {
 		const start = Date.now()
 		expect(await submit()).toBe('not_saved')
 		expect(Date.now() - start).toBeLessThanOrEqual(ACTION_DEADLINE_MS)
-		expect(starts).toEqual([0, 8_000, 16_000])
-		expect(timeouts.mock.calls).toEqual([[8_000], [8_000], [8_000]])
+		expect(starts).toEqual([0, 7_500, 15_000])
+		expect(timeouts.mock.calls).toEqual([[7_500], [7_500], [7_500]])
 		const [, context, options] = reportError.mock.calls[0]
 		expect(context).toMatchObject({
 			check: 'crm-signup',
@@ -174,13 +174,15 @@ describe('submitSignup', () => {
 		const starts: number[] = []
 		fetchMock.mockImplementation(() => {
 			starts.push(Date.now() - start)
-			if (starts.length > 1) return row({ status: 'ok', contact_id: 7 })
+			if (starts.length <= 3) return respond({}, 503)
+			if (starts.length > 4) return row({ status: 'ok', contact_id: 7 })
 			return new Promise((resolve) => setTimeout(resolve, 5_500)).then(() =>
 				row({ status: 'error', reason: 'locked' })
 			)
 		})
 		expect(await submit()).toBe('saved')
-		expect(starts).toEqual([0, 5_500])
+		// The busy answer lands at 12.5 s, before the 15 s slot.
+		expect(starts).toEqual([0, 1_000, 3_000, 7_000, 12_500])
 	})
 
 	it('retries a plain 500 once, as CiviCRM answers a permanent fault with it too', async () => {

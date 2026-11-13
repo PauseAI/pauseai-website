@@ -52,13 +52,13 @@ export function mintSignupKey(): string {
 // Above CiviCRM's wait for a key's lock (5 s, MemberIntake::LOCK_WAIT_SECONDS) plus a normal
 // answer (about 2 s), so a call queued behind a running one is not cut off; short enough that an
 // outage of hanging calls still leaves a retry after it, since a retry repeats the same write.
-const ATTEMPT_TIMEOUT_MS = 8_000
+const ATTEMPT_TIMEOUT_MS = 7_500
 // A retry starts only if this much of the deadline is left: comfortably above how long CiviCRM
 // takes to answer a signup at production latency (1.5 to 2 s), so the attempt can finish.
 const MIN_ATTEMPT_MS = 4_000
 // When retries start, counted from the first attempt, or at once if the attempt before ran
 // past its time. An outage as long as a deploy's swap (about 14 s) is outlasted whether its
-// calls fail at once (attempts near 0, 1, 3, 7 and 15 s) or hang (near 0, 8 and 16 s).
+// calls fail at once (attempts near 0, 1, 3, 7 and 15 s) or hang (near 0, 7.5 and 15 s).
 const RETRY_AT_MS = [1_000, 3_000, 7_000, 15_000]
 
 /** As crmIntake.ts names an intake outcome; `error:memberships` means the contact is written. */
