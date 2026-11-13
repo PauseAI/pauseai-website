@@ -188,6 +188,29 @@ describe('submitSignup', () => {
 		expect(starts).toEqual([0, 7_500, 15_000])
 	})
 
+	it('waits out a slow CRM on the last retry slot even with time to spare', async () => {
+		fakeAttemptTimeouts()
+		const start = Date.now()
+		const starts: number[] = []
+		fetchMock.mockImplementation((_url, init) => {
+			starts.push(Date.now() - start)
+			if (starts.length <= 3) return respond({}, 503)
+			const [ms, answer] =
+				starts.length === 4
+					? [5_500, { status: 'error', reason: 'locked' }]
+					: [9_000, { status: 'ok', contact_id: 7 }]
+			return new Promise((resolve, reject) => {
+				const timer = setTimeout(() => resolve(row(answer)), ms)
+				init!.signal!.addEventListener('abort', () => {
+					clearTimeout(timer)
+					reject(init!.signal!.reason as Error)
+				})
+			})
+		})
+		expect(await submit()).toBe('saved')
+		expect(starts).toEqual([0, 1_000, 3_000, 7_000, 12_500])
+	})
+
 	it('retries a busy key at once, since CiviCRM already waited for its lock', async () => {
 		const start = Date.now()
 		const starts: number[] = []
@@ -225,7 +248,8 @@ describe('submitSignup', () => {
 	it('maps refusals to what the form does', async () => {
 		const cases: [string, string][] = [
 			['chapter_answer_missing', 'chapter_answer_missing'],
-			['token_expired', 'not_saved'],
+			['token_expired', 'session_expired'],
+			['token_invalid', 'not_saved'],
 			['trashed', 'row_gone'],
 			['erased', 'row_gone'],
 			['invalid_record', 'not_saved']
@@ -262,7 +286,8 @@ describe('submitSignup', () => {
 	})
 
 	it('does not retry a refusal, and reports one the form can act on as a warning', async () => {
-		for (const reason of ['trashed', 'chapter_answer_missing']) {
+		// A checked token can expire while the retries wait, so token_expired is one of them.
+		for (const reason of ['trashed', 'chapter_answer_missing', 'token_expired']) {
 			fetchMock.mockReset().mockImplementation(() => row({ status: 'refused', reason }))
 			reportError.mockClear()
 			await submit()
@@ -272,7 +297,7 @@ describe('submitSignup', () => {
 	})
 
 	it('reports a refusal that leaves the signup unsaved as an error, token refusals included', async () => {
-		// The token is one this server minted or checked: a refusal means the secrets disagree.
+		// The token is one this server minted or checked: such a refusal means the secrets disagree.
 		for (const reason of [
 			'token_invalid',
 			'token_unverifiable',

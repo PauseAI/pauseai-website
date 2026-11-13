@@ -979,6 +979,7 @@ describe('onboarding submit: signups in CiviCRM alone (MEMBER_BACKEND)', () => {
 		const cases: [string, number, string | undefined][] = [
 			['chapter_answer_missing', 400, undefined],
 			['row_gone', 410, 'We could not find your earlier signup. Please go through the form again.'],
+			['session_expired', 410, SESSION_EXPIRED],
 			['not_saved', 502, NOT_SAVED]
 		]
 		for (const [outcome, status, message] of cases) {

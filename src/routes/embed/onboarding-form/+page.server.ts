@@ -431,6 +431,8 @@ export const actions: Actions = {
 			switch (await submitSignup(record, token, deadline, platform)) {
 				case 'chapter_answer_missing':
 					return chapterAnswerMissing()
+				case 'session_expired':
+					return rowGone(SESSION_EXPIRED)
 				case 'row_gone':
 					return rowGone(ROW_MISSING)
 				case 'not_saved':

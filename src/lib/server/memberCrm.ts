@@ -65,7 +65,8 @@ const RETRY_AT_MS = [1_000, 3_000, 7_000, 15_000]
 type Outcome = 'ok' | 'error' | 'error:memberships' | `refused:${string}`
 
 /** What the form does about a signup call. */
-export type SignupResult = 'saved' | 'chapter_answer_missing' | 'row_gone' | 'not_saved'
+export type SignupResult =
+	'saved' | 'chapter_answer_missing' | 'session_expired' | 'row_gone' | 'not_saved'
 
 // CiviCRM's refusals for a signup whose contact is gone or was never a member's.
 const ROW_GONE = ['merged', 'erased', 'trashed', 'not_a_member']
@@ -84,6 +85,9 @@ const REFUSALS = new Set([
 function resultOf(outcome: Outcome): SignupResult {
 	if (outcome === 'ok' || outcome === 'error:memberships') return 'saved'
 	if (outcome === 'refused:chapter_answer_missing') return 'chapter_answer_missing'
+	// A checked token can run out while retries wait; any other token refusal is the secrets
+	// disagreeing, which the person cannot fix.
+	if (outcome === 'refused:token_expired') return 'session_expired'
 	if (ROW_GONE.some((reason) => outcome === `refused:${reason}`)) return 'row_gone'
 	return 'not_saved'
 }
@@ -108,9 +112,7 @@ async function attempt(params: unknown, timeoutMs: number): Promise<Attempt> {
  * Submits a signup key's record, awaited, retrying with the same key, token and record while the
  * failure may be transient and `deadline` (a Date.now() time) leaves a retry time to finish.
  * Network errors, timeouts, 502 to 504, Cloudflare's 52x and a busy key are retried on the
- * schedule; a plain 500 once. `token` must be one this server minted or has just checked, so a
- * token refusal means the CRM and the website disagree on the secret: `not_saved`, never an
- * expired session the person could fix. Every outcome but `ok` is reported to Sentry with the
+ * schedule; a plain 500 once. `token` must be one this server minted or has just checked. Every outcome but `ok` is reported to Sentry with the
  * key alone, as an error when the signup or its lists were not saved (the alert rule's) and as
  * a warning otherwise, after the response when there is a platform. Never rejects.
  */
@@ -125,7 +127,7 @@ export async function submitSignup(
 	let outcome: Outcome = 'error'
 	let details: Record<string, unknown> = { cause: 'deadline' }
 	let plainServerErrors = 0
-	for (const at of [0, ...RETRY_AT_MS]) {
+	for (const [index, at] of [0, ...RETRY_AT_MS].entries()) {
 		if (at) {
 			// The CRM already waited out the lock, so the retry needs no more.
 			const startAt = details.cause === 'locked' ? Date.now() : Math.max(Date.now(), first + at)
@@ -135,9 +137,11 @@ export async function submitSignup(
 		}
 		const remaining = deadline - Date.now()
 		if (remaining <= 0) break
-		// A slow CRM still writes after an abort; when no retry could follow a timeout, waiting
-		// out the answer beats telling the person it failed and having them sign up again.
-		const lastChance = remaining - ATTEMPT_TIMEOUT_MS < MIN_ATTEMPT_MS
+		// A slow CRM still writes after an abort; when no retry could follow a timeout (no time or
+		// no slot left), waiting out the answer beats telling the person it failed and having
+		// them sign up again.
+		const lastChance =
+			index === RETRY_AT_MS.length || remaining - ATTEMPT_TIMEOUT_MS < MIN_ATTEMPT_MS
 		const step = await attempt(params, lastChance ? remaining : ATTEMPT_TIMEOUT_MS)
 		outcome = step.outcome
 		details = step.failure ? failureDetails(step.failure) : step.locked ? { cause: 'locked' } : {}
