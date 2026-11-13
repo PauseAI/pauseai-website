@@ -1,6 +1,6 @@
-// Signups that live in CiviCRM alone (pauseai-civicrm #1278): PauseaiMemberIntake.submit and
-// verify for a signup key, called with the intake API account's key (crmIntake.ts). The
-// contract is pauseai-civicrm's docs/intake-endpoint-plan.md, "Signup keys".
+// Signups that live in CiviCRM alone: PauseaiMemberIntake.submit and verify for a signup key,
+// called with the intake API account's key (crmIntake.ts). The contract is pauseai-civicrm's
+// docs/intake-endpoint-plan.md, "Signup keys".
 //
 // Unlike a Members row's report (crmIntake.ts), nothing else keeps a copy of such a signup, so
 // the form awaits the call, retries what may be transient, and tells the person when it could
@@ -10,13 +10,15 @@
 import { env } from '$env/dynamic/private'
 import type { WrittenRecord } from '$lib/airtable'
 import {
-	TIMEOUT_MS,
+	afterResponse,
 	callCrm,
 	failureDetails,
+	isPlainServerError,
 	isTransient,
 	reportCrmProblem,
 	verifyLinkInCrm,
 	wait,
+	type CrmFailure,
 	type CrmVerifyResult
 } from '$lib/server/crmIntake'
 
@@ -30,7 +32,7 @@ export type MemberBackend = 'airtable' | 'civicrm'
 export const memberBackend = (): MemberBackend =>
 	env.MEMBER_BACKEND === 'civicrm' ? 'civicrm' : 'airtable'
 
-const SIGNUP_KEY = /^mem[A-Za-z0-9]{22}$/
+export const SIGNUP_KEY = /^mem[A-Za-z0-9]{22}$/
 const BASE62 = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
 
 export const isSignupKey = (value: unknown): value is string =>
@@ -47,12 +49,17 @@ export function mintSignupKey(): string {
 	return key
 }
 
+// Above CiviCRM's wait for a key's lock (5 s, MemberIntake::LOCK_WAIT_SECONDS) plus a normal
+// answer (about 2 s), so a call queued behind a running one is not cut off; short enough that an
+// outage of hanging calls still leaves a retry after it, since a retry repeats the same write.
+const ATTEMPT_TIMEOUT_MS = 8_000
 // A retry starts only if this much of the deadline is left: comfortably above how long CiviCRM
 // takes to answer a signup at production latency (1.5 to 2 s), so the attempt can finish.
 const MIN_ATTEMPT_MS = 4_000
-// Growing, so an outage of immediate failures as long as a deploy's swap (about 14 s) is
-// outlasted: attempts start near 0, 1, 3, 7 and 15 s.
-const RETRY_DELAYS_MS = [1_000, 2_000, 4_000, 8_000]
+// When retries start, counted from the first attempt, or at once if the attempt before ran
+// past its time. An outage as long as a deploy's swap (about 14 s) is outlasted whether its
+// calls fail at once (attempts near 0, 1, 3, 7 and 15 s) or hang (near 0, 8 and 16 s).
+const RETRY_AT_MS = [1_000, 3_000, 7_000, 15_000]
 
 /** As crmIntake.ts names an intake outcome; `error:memberships` means the contact is written. */
 type Outcome = 'ok' | 'error' | 'error:memberships' | `refused:${string}`
@@ -83,33 +90,29 @@ function resultOf(outcome: Outcome): SignupResult {
 	return 'not_saved'
 }
 
-/** One attempt's outcome, with what caused it when another attempt may get past it. */
-async function attempt(
-	params: unknown,
-	timeoutMs: number
-): Promise<{ outcome: Outcome; retry?: Record<string, unknown> }> {
+type Attempt = { outcome: Outcome; failure?: CrmFailure; locked?: true }
+
+async function attempt(params: unknown, timeoutMs: number): Promise<Attempt> {
 	const answer = await callCrm('PauseaiMemberIntake/submit', params, timeoutMs)
-	if (!answer.ok) {
-		return { outcome: 'error', retry: isTransient(answer) ? failureDetails(answer) : undefined }
-	}
+	if (!answer.ok) return { outcome: 'error', failure: answer }
 	const { status, reason } = answer.row
 	if (status === 'ok') return { outcome: 'ok' }
 	if (status === 'refused') {
 		return { outcome: `refused:${REFUSALS.has(String(reason)) ? String(reason) : 'unknown'}` }
 	}
 	if (status === 'error' && reason === 'memberships') return { outcome: 'error:memberships' }
-	// Another call for this key is still running; it wrote nothing.
-	if (status === 'error' && reason === 'locked') {
-		return { outcome: 'error', retry: { cause: 'locked' } }
-	}
+	// Another call for this key held its lock for CiviCRM's whole wait; this one wrote nothing.
+	if (status === 'error' && reason === 'locked') return { outcome: 'error', locked: true }
 	return { outcome: 'error' }
 }
 
 /**
  * Submits a signup key's record, awaited, retrying with the same key, token and record while the
  * failure may be transient and `deadline` (a Date.now() time) leaves a retry time to finish.
- * Every outcome but `ok` is reported to Sentry with the key alone, refusals as warnings and the
- * rest as errors (the alert rule's), after the response when there is a platform. Never rejects.
+ * Network errors, timeouts, 502 to 504, Cloudflare's 52x and a busy key are retried on the
+ * schedule; a plain 500 once. Every outcome but `ok` is reported to Sentry with the key alone,
+ * refusals as warnings and the rest as errors (the alert rule's), after the response when there
+ * is a platform. Never rejects.
  */
 export async function submitSignup(
 	record: WrittenRecord,
@@ -118,32 +121,42 @@ export async function submitSignup(
 	platform?: App.Platform
 ): Promise<SignupResult> {
 	const params = { record, token }
+	const first = Date.now()
 	let outcome: Outcome = 'error'
 	let details: Record<string, unknown> = { cause: 'deadline' }
-	for (const delay of [0, ...RETRY_DELAYS_MS]) {
-		if (delay) {
-			if (deadline - Date.now() - delay < MIN_ATTEMPT_MS) break
+	let plainServerErrors = 0
+	for (const at of [0, ...RETRY_AT_MS]) {
+		if (at) {
+			// The CRM already waited out the lock, so the retry needs no more.
+			const startAt = details.cause === 'locked' ? Date.now() : Math.max(Date.now(), first + at)
+			if (deadline - startAt < MIN_ATTEMPT_MS) break
 			console.warn('[crm-signup] submit failed, retrying', details)
-			await wait(delay)
+			await wait(startAt - Date.now())
 		}
 		const remaining = deadline - Date.now()
 		if (remaining <= 0) break
-		const step = await attempt(params, Math.min(TIMEOUT_MS, remaining))
+		const step = await attempt(params, Math.min(ATTEMPT_TIMEOUT_MS, remaining))
 		outcome = step.outcome
-		details = step.retry ?? {}
-		if (!step.retry) break
+		details = step.failure ? failureDetails(step.failure) : step.locked ? { cause: 'locked' } : {}
+		const retry =
+			step.locked ||
+			(step.failure !== undefined &&
+				(isTransient(step.failure) ||
+					(isPlainServerError(step.failure) && ++plainServerErrors === 1)))
+		if (!retry) break
 	}
 	if (outcome !== 'ok') {
-		const reporting = reportCrmProblem(
-			`CRM signup ${outcome}`,
-			{ check: 'crm-signup', recordId: record.id, outcome, ...details },
-			{
-				fingerprint: ['crm-signup', outcome],
-				level: outcome.startsWith('refused:') ? 'warning' : 'error'
-			}
+		await afterResponse(
+			platform,
+			reportCrmProblem(
+				`CRM signup ${outcome}`,
+				{ check: 'crm-signup', recordId: record.id, outcome, ...details },
+				{
+					fingerprint: ['crm-signup', outcome],
+					level: outcome.startsWith('refused:') ? 'warning' : 'error'
+				}
+			)
 		)
-		if (platform) platform.context.waitUntil(reporting)
-		else await reporting
 	}
 	return resultOf(outcome)
 }

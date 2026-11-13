@@ -51,6 +51,29 @@ async function submit(deadlineMs = ACTION_DEADLINE_MS) {
 	return pending
 }
 
+// Fake timers do not drive AbortSignal.timeout, so the attempt timeout runs on a fake timer too.
+function fakeAttemptTimeouts() {
+	return vi.spyOn(AbortSignal, 'timeout').mockImplementation((ms) => {
+		const controller = new AbortController()
+		setTimeout(() => controller.abort(new DOMException('timed out', 'TimeoutError')), ms)
+		return controller.signal
+	})
+}
+
+/** A CRM down until `downForMs` from now whose calls hang until their timeout, then fine. */
+function hangUntil(downForMs: number) {
+	const start = Date.now()
+	const starts: number[] = []
+	fetchMock.mockImplementation((_url, init) => {
+		starts.push(Date.now() - start)
+		if (Date.now() - start >= downForMs) return row({ status: 'ok', contact_id: 7 })
+		return new Promise((_resolve, reject) =>
+			init!.signal!.addEventListener('abort', () => reject(init!.signal!.reason))
+		)
+	})
+	return starts
+}
+
 describe('signup keys', () => {
 	it('mints mem and 22 base62 characters, a different one each time', () => {
 		const keys = new Set(Array.from({ length: 200 }, mintSignupKey))
@@ -113,22 +136,69 @@ describe('submitSignup', () => {
 		expect(await submit()).toBe('saved')
 	})
 
+	it('outlasts an outage as long as a deploy swap whose calls hang until they time out', async () => {
+		fakeAttemptTimeouts()
+		const starts = hangUntil(14_000)
+		expect(await submit()).toBe('saved')
+		expect(starts).toEqual([0, 8_000, 16_000])
+		expect(reportError).not.toHaveBeenCalled()
+	})
+
+	it('still fits a retry after a hanging outage when Turnstile took its whole 5 s', async () => {
+		fakeAttemptTimeouts()
+		hangUntil(14_000)
+		expect(await submit(ACTION_DEADLINE_MS - 5_000)).toBe('saved')
+	})
+
 	it('gives up within the deadline when the CRM hangs, and reports it as an error with the key', async () => {
-		// Fake timers do not drive AbortSignal.timeout, so the hang ends at the longest attempt.
-		fetchMock.mockImplementation(
-			() =>
-				new Promise((_resolve, reject) =>
-					setTimeout(() => reject(new DOMException('timeout', 'TimeoutError')), 10_000)
-				)
-		)
+		const timeouts = fakeAttemptTimeouts()
+		const starts = hangUntil(Infinity)
 		const start = Date.now()
 		expect(await submit()).toBe('not_saved')
 		expect(Date.now() - start).toBeLessThanOrEqual(ACTION_DEADLINE_MS)
-		expect(fetchMock.mock.calls.length).toBeGreaterThanOrEqual(2)
+		expect(starts).toEqual([0, 8_000, 16_000])
+		expect(timeouts.mock.calls).toEqual([[8_000], [8_000], [8_000]])
 		const [, context, options] = reportError.mock.calls[0]
-		expect(context).toMatchObject({ check: 'crm-signup', recordId: KEY, outcome: 'error' })
+		expect(context).toMatchObject({
+			check: 'crm-signup',
+			recordId: KEY,
+			outcome: 'error',
+			cause: 'timeout'
+		})
 		expect(options).toMatchObject({ level: 'error', fingerprint: ['crm-signup', 'error'] })
 		expect(JSON.stringify(reportError.mock.calls)).not.toContain('ada@example.org')
+	})
+
+	it('retries a busy key at once, since CiviCRM already waited for its lock', async () => {
+		const start = Date.now()
+		const starts: number[] = []
+		fetchMock.mockImplementation(() => {
+			starts.push(Date.now() - start)
+			if (starts.length > 1) return row({ status: 'ok', contact_id: 7 })
+			return new Promise((resolve) => setTimeout(resolve, 5_500)).then(() =>
+				row({ status: 'error', reason: 'locked' })
+			)
+		})
+		expect(await submit()).toBe('saved')
+		expect(starts).toEqual([0, 5_500])
+	})
+
+	it('retries a plain 500 once, as CiviCRM answers a permanent fault with it too', async () => {
+		fetchMock.mockImplementation(() => respond({}, 500))
+		expect(await submit()).toBe('not_saved')
+		expect(fetchMock).toHaveBeenCalledTimes(2)
+		expect(reportError.mock.calls[0][1]).toMatchObject({ cause: 'http', httpStatus: 500 })
+	})
+
+	it("retries Cloudflare's 52x on the whole schedule, and no other 5xx", async () => {
+		fetchMock.mockImplementation(() => respond({}, 522))
+		await submit()
+		expect(fetchMock).toHaveBeenCalledTimes(5)
+		for (const status of [501, 505]) {
+			fetchMock.mockReset().mockImplementation(() => respond({}, status))
+			await submit()
+			expect(fetchMock).toHaveBeenCalledOnce()
+		}
 	})
 
 	it('maps refusals to what the form does', async () => {
@@ -164,7 +234,7 @@ describe('submitSignup', () => {
 	})
 
 	it('never starts a retry it cannot finish', async () => {
-		fetchMock.mockImplementation(() => respond({}, 500))
+		fetchMock.mockImplementation(() => respond({}, 503))
 		await submit(4_900)
 		// The first attempt at 0 s; a retry would start at 1 s with less than 4 s left.
 		expect(fetchMock).toHaveBeenCalledOnce()

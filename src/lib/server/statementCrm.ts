@@ -7,8 +7,10 @@ import { env } from '$env/dynamic/private'
 import type { Signatory } from '$lib/types'
 import {
 	TIMEOUT_MS,
+	afterResponse,
 	callCrm,
 	failureDetails,
+	isPlainServerError,
 	isTransient,
 	reportCrmProblem,
 	verifyLinkInCrm,
@@ -92,8 +94,7 @@ export async function signInCrm(
 		submission_id: crypto.randomUUID()
 	}
 	const finish = async (result: CrmSignResult, reporting: Promise<void>) => {
-		if (platform) platform.context.waitUntil(reporting)
-		else await reporting
+		await afterResponse(platform, reporting)
 		return result
 	}
 
@@ -115,7 +116,7 @@ export async function signInCrm(
 		}
 		const retry =
 			attempt === 1 &&
-			isTransient(answer) &&
+			(isTransient(answer) || isPlainServerError(answer)) &&
 			deadline - Date.now() - SIGN_RETRY_DELAY_MS >= SIGN_MIN_ATTEMPT_MS
 		if (!retry) {
 			const details = { ...failureDetails(answer), attempt }
