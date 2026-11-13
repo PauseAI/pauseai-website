@@ -101,6 +101,7 @@
 	afterNavigate((nav) => {
 		if (!nav.from || nav.from.url.pathname !== nav.to?.url.pathname) return
 		phase = 'form'
+		saveError = ''
 		recordId = ''
 		recordToken = ''
 		fields = blankFields()
@@ -310,9 +311,10 @@
 		initialCity={fields.city}
 		initialKeepInformed={true}
 		initialChapterAnswer={asksChapterQuestion(fields.country) ? chapterAnswer : null}
-		onRecordGone={() => {
+		onRecordGone={(message: string) => {
 			// Back to the signup, details kept, to create a row with fresh consent and
 			// a chapter answer given again.
+			saveError = message
 			phase = 'form'
 			chapterChoice = null
 			recordId = ''
