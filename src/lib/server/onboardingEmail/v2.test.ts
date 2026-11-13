@@ -183,9 +183,7 @@ describe('renderOnboardingEmailV2', () => {
 		const key = 'memAbCdEfGhIjKlMnOpQrStUv'
 		const email = await render({ recordId: key })
 		for (const body of [email.text, email.html]) {
-			expect(body).toContain(
-				`verificationKey=${key}&`.replace('&', body === email.html ? '&amp;' : '&')
-			)
+			expect(body).toContain(`verificationKey=${key}${body === email.html ? '&amp;' : '&'}`)
 		}
 		const token = tokenOf(email.text)
 		expect(await verifyVerificationToken(SECRET, key, TO_EMAIL, token, NOW)).toBe('valid')
