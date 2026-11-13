@@ -142,6 +142,20 @@
 			"lat": 1.5333554,
 			"lon": 32.2166578,
 			"link": "mailto:waswaalex@pauseai.info"
+		},
+		{
+			"name": "Israel",
+			"lat": 30.8124247,
+			"lon": 34.8594762,
+			"link": "",
+			"country_local": "ישראל"
+		},
+		{
+			"name": "South Korea",
+			"lat": 36.638392,
+			"lon": 127.6961188,
+			"link": "",
+			"country_local": "대한민국"
 		}
 	]
 }
