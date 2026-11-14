@@ -14,7 +14,7 @@
 	import UsVisitorModal from '$lib/components/UsVisitorModal.svelte'
 	import { url as rootUrl } from '$lib/config'
 	import { searchOpen } from '$lib/stores/searchModal'
-	import { isSamePage } from '$lib/staleBuild'
+	import { fullLoadTarget } from '$lib/staleBuild'
 	import { deLocalizeHref } from '$lib/paraglide/runtime'
 	import type { BannerRule } from '$lib/types'
 	import '@fontsource/roboto-slab/400.css'
@@ -88,9 +88,12 @@
 	// Once a newer deploy is live, a client-side navigation would try chunks that are gone, and an
 	// old client talking to the new server can break without any chunk error (data shapes, remote
 	// function ids). A full load avoids both.
-	beforeNavigate(({ willUnload, from, to }) => {
-		if (!updated.current || willUnload || !to?.url) return
-		if (!from || !isSamePage(from.url, to.url)) location.href = to.url.href
+	beforeNavigate((navigation) => {
+		const target = fullLoadTarget(navigation, updated.current)
+		if (!target) return
+		// Cancelling a popstate makes the router undo it with history.go(), so let that one run.
+		if (navigation.type !== 'popstate') navigation.cancel()
+		location.href = target.href
 	})
 
 	onMount(async () => {

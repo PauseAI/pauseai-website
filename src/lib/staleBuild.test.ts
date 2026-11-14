@@ -75,3 +75,32 @@ describe('reloadOnce', () => {
 		expect(reload).not.toHaveBeenCalled()
 	})
 })
+
+describe('fullLoadTarget', async () => {
+	const { fullLoadTarget } = await import('./staleBuild')
+	const target = (href: string) => ({
+		url: new URL(href),
+		params: {},
+		route: { id: null }
+	})
+	const nav = (type: string, to = 'https://pauseai.info/faq', from = 'https://pauseai.info/') =>
+		// eslint-disable-next-line @typescript-eslint/no-explicit-any -- the fields fullLoadTarget reads
+		({ type, willUnload: false, from: target(from), to: target(to) }) as any
+
+	it.each(['link', 'form', 'popstate'])('sends a %s navigation to a full load', (type) => {
+		expect(fullLoadTarget(nav(type), true)?.href).toBe('https://pauseai.info/faq')
+	})
+
+	it('leaves goto to the router, so its state and replaceState survive', () => {
+		expect(fullLoadTarget(nav('goto'), true)).toBeNull()
+	})
+
+	it('leaves a same-page hash link alone', () => {
+		expect(fullLoadTarget(nav('link', 'https://pauseai.info/#faq'), true)).toBeNull()
+	})
+
+	it('does nothing before a newer deploy is live, or when the page unloads anyway', () => {
+		expect(fullLoadTarget(nav('link'), false)).toBeNull()
+		expect(fullLoadTarget({ ...nav('link'), willUnload: true }, true)).toBeNull()
+	})
+})
