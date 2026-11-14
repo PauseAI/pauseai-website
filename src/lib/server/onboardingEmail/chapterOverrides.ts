@@ -18,7 +18,7 @@ type ChapterOverride = {
 	name: string
 	language: OnboardingEmailLanguage
 	/** A version per intent bucket. A bucket left out gets the shared copy.
-	 *  `chapter` is the live National Groups row, so an override can use the chapter's own
+	 *  `chapter` is the chapter's live row in the chapter list, so an override can use the chapter's own
 	 *  links rather than repeating them here. */
 	content: Partial<Record<IntentBucket, ChapterContent>>
 }
@@ -44,7 +44,7 @@ function chapterLink(chapter: ChapterBlockData | null, label: string): string | 
 
 // Both UK emails are ported from the welcome emails PauseAI UK's director sent as MailerSend
 // tests on 2026-09-15, wording kept as written. Every link is fixed here at the chapter's
-// request rather than drawn from the National Groups row, which this section does not read,
+// request rather than drawn from the chapter list, which this section does not read,
 // so keeping the WhatsApp invite and the calendar current is an edit to this file.
 const UK_WHATSAPP_URL = 'https://chat.whatsapp.com/F0nj2RjLNeB1P1hyoDFsTz'
 const UK_EVENTS_CALENDAR_URL = 'https://luma.com/pauseai.uk'
@@ -261,7 +261,7 @@ const canada: ChapterOverride = {
 // English email. Flip this back if the chapter would rather it waited.
 const SWEDISH_COPY_APPROVED = true
 
-// Links the chapter's emails use that no National Groups field holds.
+// Links the chapter's emails use that the chapter list does not hold.
 const SWEDEN_CONTACTS_DOC =
 	'https://docs.google.com/document/d/1H9erkvaFwAmzqzx5VG28fQPUdg9UWM1__t6kP6DMReY/edit?usp=sharing'
 const SWEDEN_INTRO_DOC =
@@ -465,7 +465,7 @@ const sweden: ChapterOverride = {
 
 // PauseAI Deutschland's own emails, one per intent, wording kept as the chapter wrote it. The
 // confirm line and the newsletter line are theirs too, and are the `de` entry in fixed.ts.
-// Every link is fixed here rather than drawn from the National Groups row, so keeping the
+// Every link is fixed here rather than drawn from the chapter list, so keeping the
 // Discord and WhatsApp invites current is an edit to this file.
 const GERMANY_SITE = 'https://www.pause-ai.de'
 

@@ -1,4 +1,4 @@
-// callCrm calls CiviCRM's API4 as the intake API account (CRM_INTAKE_URL,
+// callCrm and callCrmRows call CiviCRM's API4 as the intake API account (CRM_INTAKE_URL,
 // CRM_INTAKE_KEY). The rest of this file reports each Members row the onboarding
 // form writes to CiviCRM's member intake (PauseaiMemberIntake.submit). The
 // contract, outcome codes included, is pauseai-civicrm's
@@ -39,15 +39,47 @@ export type Outcome = Result['outcome']
 
 const isCrmIntakeEnabled = () => env.CRM_INTAKE_ENABLED === 'true'
 
+/** Every row an action answers in `values`, or why there are none. */
+export type CrmRows = { ok: true; rows: Record<string, unknown>[] } | CrmFailure
+
+const isRow = (value: unknown): value is Record<string, unknown> =>
+	typeof value === 'object' && value !== null && !Array.isArray(value)
+
 /**
  * Calls one API4 action (`Entity/action`) as the intake API account, giving up
- * after `timeoutMs`. Never rejects: a failure is an answer with what caused it.
+ * after `timeoutMs`, and answers the row it answered. Never rejects: a failure is
+ * an answer with what caused it.
  */
 export async function callCrm(
 	action: string,
 	params: unknown,
 	timeoutMs = TIMEOUT_MS
 ): Promise<CrmAnswer> {
+	const answer = await callCrmValues(action, params, timeoutMs, (values) =>
+		isRow(values[0]) ? values[0] : undefined
+	)
+	return answer.ok ? { ok: true, row: answer.value } : answer
+}
+
+/** As callCrm, for an action that answers a list of rows. */
+export async function callCrmRows(
+	action: string,
+	params: unknown,
+	timeoutMs = TIMEOUT_MS
+): Promise<CrmRows> {
+	const answer = await callCrmValues(action, params, timeoutMs, (values) =>
+		values.every(isRow) ? values : undefined
+	)
+	return answer.ok ? { ok: true, rows: answer.value } : answer
+}
+
+/** `read` takes what the answer's `values` must hold; undefined makes it a failure. */
+async function callCrmValues<T>(
+	action: string,
+	params: unknown,
+	timeoutMs: number,
+	read: (values: unknown[]) => T | undefined
+): Promise<{ ok: true; value: T } | CrmFailure> {
 	const base = env.CRM_INTAKE_URL?.replace(/\/+$/, '')
 	const key = env.CRM_INTAKE_KEY
 	if (!base || !key) return { ok: false, cause: 'not_configured' }
@@ -69,11 +101,11 @@ export async function callCrm(
 		// Only the status: an error body's text could echo what the request carried.
 		const httpError = { ok: false, cause: 'http', httpStatus: response.status } as const
 		if (!response.ok) return httpError
-		const body = (await response.json().catch(() => null)) as { values?: unknown[] } | null
+		const body = (await response.json().catch(() => null)) as { values?: unknown } | null
 		if (signal.aborted) return { ok: false, cause: 'timeout' }
-		const row = body?.values?.[0]
-		if (typeof row !== 'object' || row === null || Array.isArray(row)) return httpError
-		return { ok: true, row: row as Record<string, unknown> }
+		const value = Array.isArray(body?.values) ? read(body.values) : undefined
+		if (value === undefined) return httpError
+		return { ok: true, value }
 	} catch (error) {
 		return {
 			ok: false,

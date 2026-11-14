@@ -3,53 +3,49 @@ import { CHAPTER_OVERRIDE_COUNTRIES } from './chapterOverrides.js'
 import { escapeHtml } from './markdown.js'
 import type { OnboardingEmailV2Params, OnboardingRouting } from './types.js'
 
-// Stands in for the live National Groups table, which v1 and v2 both read chapter links from.
-const NATIONAL_GROUPS = [
-	{
-		id: 'recCanada',
-		fields: {
+// Stands in for the CRM's chapter directory, which v1 and v2 both read chapter links from.
+const CHAPTER_DIRECTORY = {
+	ok: true,
+	rows: [
+		{
 			country: 'Canada',
 			website: 'https://pauseai.ca/',
 			luma: 'https://luma.com/pauseai-canada',
-			discord: 'https://discord.gg/canada'
-		}
-	},
-	{
-		id: 'recSweden',
-		fields: {
+			discord: 'https://discord.gg/canada',
+			leaders: []
+		},
+		{
 			country: 'Sweden',
 			website: 'pauseai.se',
 			whatsapp: 'https://chat.whatsapp.com/sweden',
-			luma: 'https://luma.com/pauseai-sweden'
-		}
-	},
-	{
-		id: 'recUnitedKingdom',
-		fields: { country: 'United Kingdom', website: 'https://pauseai.uk/' }
-	},
-	{
-		id: 'recNetherlands',
-		fields: {
+			luma: 'https://luma.com/pauseai-sweden',
+			leaders: []
+		},
+		{ country: 'United Kingdom', website: 'https://pauseai.uk/', leaders: [] },
+		{
 			country: 'Netherlands',
 			website: 'https://pauseai.nl/',
 			whatsapp: 'https://chat.whatsapp.com/example',
-			luma: 'https://luma.com/example'
+			luma: 'https://luma.com/example',
+			leaders: []
 		}
-	}
-]
+	]
+}
 
-const { env, fetchAllPages, reportError } = vi.hoisted(() => {
+const { env, callCrmRows, reportError } = vi.hoisted(() => {
 	const env: Record<string, string | undefined> = {}
-	return { env, fetchAllPages: vi.fn(), reportError: vi.fn() }
+	return { env, callCrmRows: vi.fn(), reportError: vi.fn() }
 })
 vi.mock('$env/dynamic/private', () => ({ env }))
 vi.mock('$lib/server/sentry', () => ({ reportError }))
-vi.mock('$lib/airtable.js', async (importOriginal) => ({
+vi.mock('$lib/server/crmIntake', async (importOriginal) => ({
 	...(await importOriginal<Record<string, unknown>>()),
-	fetchAllPages
+	callCrmRows
 }))
 
 const { renderOnboardingEmail, renderOnboardingEmailV2 } = await import('./index.js')
+const { CHAPTER_READ_TIMEOUT_MS } = await import('./chapter.js')
+const { resetNationalGroupsCacheForTests } = await import('$lib/server/nationalGroups')
 const { FIXED_COPY } = await import('./fixed.js')
 
 const escapeRegExp = (value: string) => value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
@@ -109,7 +105,8 @@ function chapterUrls(text: string): string[] {
 
 beforeEach(() => {
 	env.CRM_INTAKE_URL = 'https://crm.pauseai.info/'
-	fetchAllPages.mockReset().mockResolvedValue(NATIONAL_GROUPS)
+	resetNationalGroupsCacheForTests()
+	callCrmRows.mockReset().mockResolvedValue(CHAPTER_DIRECTORY)
 	reportError.mockReset().mockResolvedValue(undefined)
 })
 
@@ -163,20 +160,45 @@ describe('renderOnboardingEmailV2', () => {
 
 	it('reads no chapter links for a member routed to global onboarding', async () => {
 		await render({ intent: 'Volunteer', routing: { kind: 'global' } })
-		expect(fetchAllPages).not.toHaveBeenCalled()
+		expect(callCrmRows).not.toHaveBeenCalled()
 	})
 
-	it('renders without chapter links when National Groups cannot be read', async () => {
+	// The chapter list's own read reports its failure separately, with no record id.
+	const linksReport = () =>
+		reportError.mock.calls
+			.map(([, context]) => context as Record<string, unknown>)
+			.filter((context) => context.operation === 'onboardingEmailV2ChapterLinks')
+
+	it('renders without chapter links when the chapter list cannot be read', async () => {
 		vi.spyOn(console, 'error').mockImplementation(() => {})
-		fetchAllPages.mockRejectedValue(new Error('Airtable is down'))
+		callCrmRows.mockResolvedValue({ ok: false, cause: 'http', httpStatus: 500 })
 		const email = await render({ intent: 'Volunteer', routing: chapter('Netherlands') })
 		expect(email.text).toContain('PauseAI Netherlands will be in touch')
 		expect(email.text).not.toContain('https://chat.whatsapp.com/example')
 		expect(email.text).toContain(LINK)
-		expect(reportError).toHaveBeenCalledOnce()
-		const [, context] = reportError.mock.calls[0] as [unknown, Record<string, unknown>]
-		expect(context).toMatchObject({ recordId: RECORD_ID })
-		expect(JSON.stringify(context).toLowerCase()).not.toContain('alex')
+		const reports = linksReport()
+		expect(reports).toHaveLength(1)
+		expect(reports[0]).toMatchObject({ recordId: RECORD_ID })
+		expect(JSON.stringify(reports[0]).toLowerCase()).not.toContain('alex')
+	})
+
+	it('renders without chapter links when the chapter list is slow', async () => {
+		vi.spyOn(console, 'error').mockImplementation(() => {})
+		vi.useFakeTimers({ toFake: ['setTimeout', 'clearTimeout'] })
+		try {
+			callCrmRows.mockReturnValue(new Promise(() => {}))
+			const rendering = render({ intent: 'Volunteer', routing: chapter('Netherlands') })
+			// Signing the link first runs on real time, before the chapter read starts.
+			await vi.waitFor(() => expect(callCrmRows).toHaveBeenCalled())
+			await vi.advanceTimersByTimeAsync(CHAPTER_READ_TIMEOUT_MS)
+			const email = await rendering
+			expect(email.text).toContain('PauseAI Netherlands will be in touch')
+			expect(email.text).not.toContain('https://chat.whatsapp.com/example')
+			expect(email.text).toContain(LINK)
+			expect(linksReport()).toHaveLength(1)
+		} finally {
+			vi.useRealTimers()
+		}
 	})
 
 	it('signs a token that verifies for that row and address only', async () => {

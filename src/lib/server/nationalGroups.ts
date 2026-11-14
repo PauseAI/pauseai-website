@@ -1,100 +1,83 @@
-// The National Chapters list, read from Airtable at most once per TTL per server
-// instance: /api/national-groups is fetched by every onboarding form mount (the CDN
-// absorbs most of those), and Airtable allows 5 requests a second per base, shared
-// with the onboarding writes and the nightly sync.
-import type { AirtableNationalGroup, NationalGroup } from '$lib/types.js'
-import { fetchAllPages, type AirtableRecord } from '$lib/airtable.js'
+// The active national chapters, read from CiviCRM's chapter directory
+// (PauseaiChapterDetails.publicList, with the intake API account's key; the contract is
+// pauseai-civicrm's docs/intake-endpoint-plan.md, "The chapter directory") at most once
+// per TTL per server instance: /api/national-groups is fetched by every onboarding form
+// mount (the CDN absorbs most of those), and the onboarding emails read it on every render.
+import type { NationalGroup } from '$lib/types.js'
+import { callCrmRows, failureDetails } from '$lib/server/crmIntake'
+import { isDev } from '$lib/env.server'
 import { reportError } from '$lib/server/sentry'
 
 const TTL_MS = 10 * 60 * 1000
 // After a failed read, the last good list (or none) is served this long before
 // trying again, so an outage costs one read and one Sentry event a minute.
 const RETRY_AFTER_FAILURE_MS = 60 * 1000
-// The SDK call cannot be aborted; past this the caller stops waiting for it.
 const TIMEOUT_MS = 5000
 
-const AIRTABLE_URL = 'https://api.airtable.com/v0/appWPTGqZmUcs3NWu/tblEQJ26hxBAEkaP8'
+const NO_LINKS = {
+	xLink: '',
+	blueskyLink: '',
+	discordLink: '',
+	whatsappLink: '',
+	website: '',
+	linktreeLink: '',
+	instagramLink: '',
+	tiktokLink: '',
+	facebookLink: '',
+	youtubeLink: '',
+	linkedinLink: '',
+	lumaLink: '',
+	substackLink: ''
+}
 
-// Fallback data to use in development if Airtable fetch fails
-const FALLBACK_NATIONAL_GROUPS: AirtableRecord<AirtableNationalGroup>[] = [
+// Served in development when the CRM is not configured.
+const FALLBACK_NATIONAL_GROUPS: NationalGroup[] = [
 	{
-		id: 'fallback-stub1',
-		fields: {
-			country: '[FALLBACK DATA] Example Group 1',
-			leaders_name: ['Fall McBack'],
-			website_email: 'fall.mcback@example.com',
-			x: '',
-			bluesky: '',
-			discord: '',
-			whatsapp: '',
-			website: 'http://example.com',
-			linktree: '',
-			instagram: '',
-			tiktok: '',
-			facebook: '',
-			youtube: '',
-			linkedin: '',
-			luma: '',
-			substack: ''
-		}
+		...NO_LINKS,
+		id: '[FALLBACK DATA] Example Group 1',
+		name: '[FALLBACK DATA] Example Group 1',
+		leader: 'Fall McBack',
+		email: 'fall.mcback@example.com',
+		website: 'http://example.com',
+		public: true
 	},
 	{
-		id: 'fallback-stub2',
-		fields: {
-			country: '[FALLBACK DATA] Example Group 2',
-			leaders_name: ['etc'],
-			website_email: '',
-			x: '',
-			bluesky: '',
-			discord: '',
-			whatsapp: '',
-			website: '',
-			linktree: '',
-			instagram: '',
-			tiktok: '',
-			facebook: '',
-			youtube: '',
-			linkedin: '',
-			luma: '',
-			substack: ''
-		}
+		...NO_LINKS,
+		id: '[FALLBACK DATA] Example Group 2',
+		name: '[FALLBACK DATA] Example Group 2',
+		leader: 'etc',
+		email: '',
+		public: true
 	}
 ]
 
-/**
- * Converts an Airtable record to a NationalGroup object
- */
-function recordToNationalGroup(record: AirtableRecord<AirtableNationalGroup>): NationalGroup {
-	// Only log in development to avoid cluttering production logs
+const text = (value: unknown): string => (typeof value === 'string' ? value : '')
 
-	let leaderNames = 'No'
-	if (record.fields.leaders_name && record.fields.leaders_name.length > 0) {
-		leaderNames = record.fields.leaders_name.join(', ')
-	}
-
+/** One publicList row. The CRM has no public chapter id, so the country stands in for one. */
+function rowToNationalGroup(row: Record<string, unknown>): NationalGroup {
+	const leaders = Array.isArray(row.leaders)
+		? row.leaders.filter((leader): leader is string => typeof leader === 'string')
+		: []
 	return {
-		id: record.id || 'noId',
-		name: record.fields.country || '',
-		leader: leaderNames,
-		// The discord_username field name may vary
-		// Include email if available
-		email: record.fields.website_email ? record.fields.website_email : '',
-		xLink: record.fields.x || '',
-		blueskyLink: record.fields.bluesky || '',
-		discordLink: record.fields.discord || '',
-		whatsappLink: record.fields.whatsapp || '',
-		website: record.fields.website || '',
-		linktreeLink: record.fields.linktree || '',
-		// Add Instagram and TikTok links
-		instagramLink: record.fields.instagram || '',
-		tiktokLink: record.fields.tiktok || '',
-		facebookLink: record.fields.facebook || '',
-		youtubeLink: record.fields.youtube || '',
-		linkedinLink: record.fields.linkedin || '',
-		lumaLink: record.fields.luma || '',
-		substackLink: record.fields.substack || '',
-		public: true, // Assuming all records are public by default
-		image: record.fields.image?.[0]?.url || undefined // Use direct URL for national groups images
+		id: text(row.country),
+		name: text(row.country),
+		leader: leaders.length > 0 ? leaders.join(', ') : 'No',
+		email: text(row.website_email),
+		xLink: text(row.x),
+		blueskyLink: text(row.bluesky),
+		discordLink: text(row.discord),
+		whatsappLink: text(row.whatsapp),
+		website: text(row.website),
+		linktreeLink: text(row.linktree),
+		instagramLink: text(row.instagram),
+		tiktokLink: text(row.tiktok),
+		facebookLink: text(row.facebook),
+		youtubeLink: text(row.youtube),
+		linkedinLink: text(row.linkedin),
+		lumaLink: text(row.luma),
+		substackLink: text(row.substack),
+		public: true,
+		image: text(row.image) || undefined
 	}
 }
 
@@ -103,32 +86,21 @@ let failedAt: number | null = null
 let pending: Promise<NationalGroup[] | null> | null = null
 
 async function readGroups(): Promise<NationalGroup[]> {
-	const records = await fetchAllPages<AirtableNationalGroup>(
-		fetch,
-		AIRTABLE_URL,
-		FALLBACK_NATIONAL_GROUPS,
-		{ filterByFormula: 'NOT({inactive})' }
-	)
-	return (
-		records
-			.map(recordToNationalGroup)
-			// Sort alphabetically by name
-			.sort((a, b) => a.name.localeCompare(b.name))
-	)
+	const answer = await callCrmRows('PauseaiChapterDetails/publicList', {}, TIMEOUT_MS)
+	if (!answer.ok) {
+		if (answer.cause === 'not_configured' && isDev()) {
+			console.warn('⚠️ CRM not configured, using fallback national groups in development')
+			return FALLBACK_NATIONAL_GROUPS
+		}
+		const { cause, httpStatus } = failureDetails(answer)
+		throw new Error(`Chapter directory read failed: ${cause}${httpStatus ? ` ${httpStatus}` : ''}`)
+	}
+	return answer.rows.map(rowToNationalGroup).sort((a, b) => a.name.localeCompare(b.name))
 }
 
 async function refresh(): Promise<NationalGroup[] | null> {
-	let timer: ReturnType<typeof setTimeout> | undefined
 	try {
-		const groups = await Promise.race([
-			readGroups(),
-			new Promise<never>((_, reject) => {
-				timer = setTimeout(
-					() => reject(new Error(`National groups read took over ${TIMEOUT_MS} ms`)),
-					TIMEOUT_MS
-				)
-			})
-		])
+		const groups = await readGroups()
 		cached = { groups, readAt: Date.now() }
 		failedAt = null
 		return groups
@@ -138,8 +110,6 @@ async function refresh(): Promise<NationalGroup[] | null> {
 		await reportError(error, { operation: 'getNationalGroups', servedStale: cached !== null })
 		// The last good list, however old, rather than none.
 		return cached?.groups ?? null
-	} finally {
-		clearTimeout(timer)
 	}
 }
 

@@ -25,8 +25,14 @@
 
 	let { nationalGroup }: Props = $props()
 
-	const baseImagePath = '/images/'
-	const imageUrl = $derived(nationalGroup.image ?? `${baseImagePath}default.png`) // Directly use nationalGroup.image or default
+	const DEFAULT_IMAGE = '/images/default.png'
+	const imageUrl = $derived(nationalGroup.image ?? DEFAULT_IMAGE)
+
+	// A chapter image is hosted by the CRM, which can be down or have dropped the file.
+	function useDefaultImage(event: Event) {
+		const image = event.currentTarget as HTMLImageElement
+		if (!image.src.endsWith(DEFAULT_IMAGE)) image.src = DEFAULT_IMAGE
+	}
 
 	const iconMap: Record<NationalGroupLink, Component | ComponentType> = {
 		website: Globe,
@@ -74,7 +80,12 @@
 		</div>
 		<div class="image-name-wrapper">
 			{#if imageUrl}
-				<img src={imageUrl} alt={nationalGroup.name} class="national-group-image" />
+				<img
+					src={imageUrl}
+					alt={nationalGroup.name}
+					class="national-group-image"
+					onerror={useDefaultImage}
+				/>
 			{/if}
 			<h3 class="name">{nationalGroup.name}</h3>
 		</div>

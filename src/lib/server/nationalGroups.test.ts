@@ -1,84 +1,144 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
+import type { CrmRows } from '$lib/server/crmIntake'
 
-const fetchAllPages = vi.fn<(...args: unknown[]) => Promise<unknown[]>>()
+const callCrmRows = vi.fn<(...args: unknown[]) => Promise<CrmRows>>()
 const reportError = vi.fn<(error: unknown, context?: Record<string, unknown>) => Promise<void>>()
-vi.mock('$lib/airtable.js', () => ({ fetchAllPages }))
+let dev = false
+vi.mock('$lib/server/crmIntake', async (importOriginal) => ({
+	...(await importOriginal<Record<string, unknown>>()),
+	callCrmRows
+}))
+vi.mock('$lib/env.server', () => ({ isDev: () => dev }))
 vi.mock('$lib/server/sentry', () => ({ reportError }))
+vi.mock('$env/dynamic/private', () => ({ env: {} }))
 
 const { getNationalGroups, resetNationalGroupsCacheForTests } = await import('./nationalGroups')
 
-const records = (...countries: string[]) =>
-	countries.map((country, index) => ({ id: `rec${index}`, fields: { country } }))
+const rows = (...countries: string[]): CrmRows => ({
+	ok: true,
+	rows: countries.map((country) => ({ country, leaders: [], image: null }))
+})
+const down: CrmRows = { ok: false, cause: 'http', httpStatus: 500 }
 const names = (groups: { name: string }[] | null) => groups?.map((group) => group.name) ?? null
 
 describe('getNationalGroups', () => {
 	beforeEach(() => {
 		resetNationalGroupsCacheForTests()
-		fetchAllPages.mockReset()
+		dev = false
+		callCrmRows.mockReset()
 		reportError.mockReset().mockResolvedValue()
 		vi.spyOn(console, 'error').mockImplementation(() => {})
+		vi.spyOn(console, 'warn').mockImplementation(() => {})
 		vi.useFakeTimers()
 	})
 	afterEach(() => vi.useRealTimers())
 
-	it('reads Airtable once per ten minutes, sharing a read in flight', async () => {
-		fetchAllPages.mockResolvedValue(records('Germany', 'France'))
+	it('maps each publicList row to a national group', async () => {
+		callCrmRows.mockResolvedValue({
+			ok: true,
+			rows: [
+				{
+					country: 'United Kingdom',
+					website: 'https://pauseai.uk/',
+					website_email: null,
+					discord: 'https://discord.gg/uk',
+					luma: null,
+					leaders: ['Ada Lovelace', 'Alan Turing'],
+					image: 'https://crm.example/public/media/chapter-images/1-abc.png'
+				},
+				{ country: 'Sweden', website: null, leaders: [], image: null }
+			]
+		})
+		const [sweden, uk] = (await getNationalGroups())!
+		expect(callCrmRows).toHaveBeenCalledWith('PauseaiChapterDetails/publicList', {}, 5000)
+		expect(uk).toMatchObject({
+			id: 'United Kingdom',
+			name: 'United Kingdom',
+			leader: 'Ada Lovelace, Alan Turing',
+			email: '',
+			website: 'https://pauseai.uk/',
+			discordLink: 'https://discord.gg/uk',
+			lumaLink: '',
+			public: true,
+			image: 'https://crm.example/public/media/chapter-images/1-abc.png'
+		})
+		expect(sweden).toMatchObject({ name: 'Sweden', leader: 'No', website: '', email: '' })
+		expect(sweden.image).toBeUndefined()
+	})
+
+	it('reads the CRM once per ten minutes, sharing a read in flight', async () => {
+		callCrmRows.mockResolvedValue(rows('Germany', 'France'))
 		const [first, second] = await Promise.all([getNationalGroups(), getNationalGroups()])
 		expect(names(first)).toEqual(['France', 'Germany'])
 		expect(second).toBe(first)
 		vi.advanceTimersByTime(10 * 60 * 1000 - 1)
 		await getNationalGroups()
-		expect(fetchAllPages).toHaveBeenCalledOnce()
+		expect(callCrmRows).toHaveBeenCalledOnce()
 		vi.advanceTimersByTime(1)
-		fetchAllPages.mockResolvedValue(records('Italy'))
+		callCrmRows.mockResolvedValue(rows('Italy'))
 		expect(names(await getNationalGroups())).toEqual(['Italy'])
-		expect(fetchAllPages).toHaveBeenCalledTimes(2)
+		expect(callCrmRows).toHaveBeenCalledTimes(2)
 	})
 
 	it('serves the last good list when a read fails, and null when there was none', async () => {
-		fetchAllPages.mockRejectedValueOnce(new Error('down'))
+		callCrmRows.mockResolvedValueOnce(down)
 		expect(await getNationalGroups()).toBeNull()
 		vi.advanceTimersByTime(60 * 1000)
-		fetchAllPages.mockResolvedValueOnce(records('Germany'))
+		callCrmRows.mockResolvedValueOnce(rows('Germany'))
 		expect(names(await getNationalGroups())).toEqual(['Germany'])
 		vi.advanceTimersByTime(10 * 60 * 1000)
-		fetchAllPages.mockRejectedValueOnce(new Error('down'))
+		callCrmRows.mockResolvedValueOnce(down)
 		expect(names(await getNationalGroups())).toEqual(['Germany'])
 		expect(reportError).toHaveBeenCalledTimes(2)
 		expect(reportError.mock.calls[1][1]).toMatchObject({ servedStale: true })
 	})
 
 	it('waits a minute after a failed read before trying again, serving the last good list', async () => {
-		fetchAllPages.mockResolvedValueOnce(records('Germany'))
+		callCrmRows.mockResolvedValueOnce(rows('Germany'))
 		await getNationalGroups()
 		vi.advanceTimersByTime(10 * 60 * 1000)
-		fetchAllPages.mockRejectedValue(new Error('down'))
+		callCrmRows.mockResolvedValue({ ok: false, cause: 'timeout' })
 		for (let call = 0; call < 3; call++) {
 			expect(names(await getNationalGroups())).toEqual(['Germany'])
 		}
-		expect(fetchAllPages).toHaveBeenCalledTimes(2)
+		expect(callCrmRows).toHaveBeenCalledTimes(2)
 		expect(reportError).toHaveBeenCalledOnce()
 		vi.advanceTimersByTime(60 * 1000 - 1)
 		await getNationalGroups()
-		expect(fetchAllPages).toHaveBeenCalledTimes(2)
+		expect(callCrmRows).toHaveBeenCalledTimes(2)
 		vi.advanceTimersByTime(1)
-		fetchAllPages.mockResolvedValue(records('France'))
+		callCrmRows.mockResolvedValue(rows('France'))
 		expect(names(await getNationalGroups())).toEqual(['France'])
-		expect(fetchAllPages).toHaveBeenCalledTimes(3)
+		expect(callCrmRows).toHaveBeenCalledTimes(3)
 	})
 
 	it('waits a minute after a failed first read too, serving nothing', async () => {
-		fetchAllPages.mockRejectedValue(new Error('down'))
+		callCrmRows.mockResolvedValue(down)
 		expect(await getNationalGroups()).toBeNull()
 		expect(await getNationalGroups()).toBeNull()
-		expect(fetchAllPages).toHaveBeenCalledOnce()
+		expect(callCrmRows).toHaveBeenCalledOnce()
 	})
 
-	it('stops waiting for a read after five seconds', async () => {
-		fetchAllPages.mockReturnValue(new Promise(() => {}))
-		const groups = getNationalGroups()
-		await vi.advanceTimersByTimeAsync(5000)
-		expect(await groups).toBeNull()
+	it('treats a CRM that is not configured as a failure in production', async () => {
+		callCrmRows.mockResolvedValue({ ok: false, cause: 'not_configured' })
+		expect(await getNationalGroups()).toBeNull()
+		expect(reportError).toHaveBeenCalledOnce()
+	})
+
+	it('serves example groups in development when the CRM is not configured', async () => {
+		dev = true
+		callCrmRows.mockResolvedValue({ ok: false, cause: 'not_configured' })
+		expect(names(await getNationalGroups())).toEqual([
+			'[FALLBACK DATA] Example Group 1',
+			'[FALLBACK DATA] Example Group 2'
+		])
+		expect(reportError).not.toHaveBeenCalled()
+	})
+
+	it('treats any other failure as a failure in development too', async () => {
+		dev = true
+		callCrmRows.mockResolvedValue(down)
+		expect(await getNationalGroups()).toBeNull()
 		expect(reportError).toHaveBeenCalledOnce()
 	})
 })

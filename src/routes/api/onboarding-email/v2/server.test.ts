@@ -3,15 +3,13 @@ import { beforeEach, describe, expect, it, vi } from 'vitest'
 const env: Record<string, string | undefined> = {}
 vi.mock('$env/dynamic/private', () => ({ env }))
 vi.mock('$lib/server/sentry', () => ({ reportError: vi.fn() }))
-vi.mock('$lib/airtable.js', async (importOriginal) => ({
+vi.mock('$lib/server/crmIntake', async (importOriginal) => ({
 	...(await importOriginal<Record<string, unknown>>()),
-	fetchAllPages: () =>
-		Promise.resolve([
-			{
-				id: 'recNetherlands',
-				fields: { country: 'Netherlands', whatsapp: 'https://chat.whatsapp.com/example' }
-			}
-		])
+	callCrmRows: () =>
+		Promise.resolve({
+			ok: true,
+			rows: [{ country: 'Netherlands', whatsapp: 'https://chat.whatsapp.com/example', leaders: [] }]
+		})
 }))
 
 const { POST } = await import('./+server.js')

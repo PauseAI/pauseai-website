@@ -90,7 +90,7 @@ export type OnboardingRouting =
 			/** The chapter's own name, e.g. "PauseAI UK". */
 			name: string
 			/** The country the chapter is filed under. Selects the chapter's own email, if it has
-			 *  one, and the National Groups row its links are read from. */
+			 *  one, and the chapter-list row its links are read from. */
 			country: string
 	  }
 
