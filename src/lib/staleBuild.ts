@@ -20,16 +20,16 @@ export function isSamePage(a: URL | Location, b: URL | Location): boolean {
 }
 
 /**
- * Where to send a navigation as a full page load once a newer deploy is live, or null to leave it
- * to the router. Only user navigations: a `goto` must keep its `state` and `replaceState`, which a
- * full load drops, and the router already falls back to a full load if its chunks are gone.
+ * Where to send a back or forward navigation as a full page load once a newer deploy is live, or
+ * null to leave it to the router. Links and forms get SvelteKit's reload option instead, and a
+ * `goto` stays with the router: it must keep its `state` and `replaceState`, which a full load
+ * drops, and the router already falls back to a full load if its chunks are gone.
  */
 export function fullLoadTarget(
-	{ type, willUnload, from, to }: Pick<BeforeNavigate, 'type' | 'willUnload' | 'from' | 'to'>,
+	{ type, from, to }: Pick<BeforeNavigate, 'type' | 'from' | 'to'>,
 	isUpdated: boolean
 ): URL | null {
-	if (!isUpdated || willUnload || !to?.url) return null
-	if (type !== 'link' && type !== 'form' && type !== 'popstate') return null
+	if (!isUpdated || type !== 'popstate' || !to?.url) return null
 	if (from && isSamePage(from.url, to.url)) return null
 	return to.url
 }

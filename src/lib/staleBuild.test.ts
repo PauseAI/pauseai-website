@@ -87,20 +87,23 @@ describe('fullLoadTarget', async () => {
 		// eslint-disable-next-line @typescript-eslint/no-explicit-any -- the fields fullLoadTarget reads
 		({ type, willUnload: false, from: target(from), to: target(to) }) as any
 
-	it.each(['link', 'form', 'popstate'])('sends a %s navigation to a full load', (type) => {
-		expect(fullLoadTarget(nav(type), true)?.href).toBe('https://pauseai.info/faq')
+	it('sends back and forward to a full load', () => {
+		expect(fullLoadTarget(nav('popstate'), true)?.href).toBe('https://pauseai.info/faq')
+	})
+
+	it.each(['link', 'form'])('leaves a %s navigation to the reload option', (type) => {
+		expect(fullLoadTarget(nav(type), true)).toBeNull()
 	})
 
 	it('leaves goto to the router, so its state and replaceState survive', () => {
 		expect(fullLoadTarget(nav('goto'), true)).toBeNull()
 	})
 
-	it('leaves a same-page hash link alone', () => {
-		expect(fullLoadTarget(nav('link', 'https://pauseai.info/#faq'), true)).toBeNull()
+	it('leaves a back or forward between hash entries of one page alone', () => {
+		expect(fullLoadTarget(nav('popstate', 'https://pauseai.info/#faq'), true)).toBeNull()
 	})
 
-	it('does nothing before a newer deploy is live, or when the page unloads anyway', () => {
-		expect(fullLoadTarget(nav('link'), false)).toBeNull()
-		expect(fullLoadTarget({ ...nav('link'), willUnload: true }, true)).toBeNull()
+	it('does nothing before a newer deploy is live', () => {
+		expect(fullLoadTarget(nav('popstate'), false)).toBeNull()
 	})
 })
