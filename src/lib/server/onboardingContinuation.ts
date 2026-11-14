@@ -44,6 +44,8 @@ function getSecret(): string | undefined {
 	return undefined
 }
 
+export const hasContinuationSecret = () => Boolean(env.ONBOARDING_CONTINUATION_SECRET)
+
 // Undefined without a secret, so the form still works; the update check then
 // lets everything through.
 export async function issueContinuationToken(

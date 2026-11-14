@@ -83,6 +83,60 @@ export async function callCrm(
 	}
 }
 
+/**
+ * A failure a retry is likely to get past: a network error, a timeout, a 502, 503 or 504, or
+ * Cloudflare's 52x for an origin it could not reach.
+ */
+export const isTransient = ({ cause, httpStatus = 0 }: CrmFailure) =>
+	cause === 'network' ||
+	cause === 'timeout' ||
+	(cause === 'http' &&
+		([502, 503, 504].includes(httpStatus) || (httpStatus >= 520 && httpStatus <= 529)))
+
+/**
+ * A plain 500, worth one retry at most: CiviCRM answers every exception it throws with it, a
+ * permanent configuration fault as much as a passing database error.
+ */
+export const isPlainServerError = ({ cause, httpStatus }: CrmFailure) =>
+	cause === 'http' && httpStatus === 500
+
+export const wait = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms))
+
+/**
+ * Lets `pending` finish after the response where the platform can keep the function alive for
+ * it, and awaits it otherwise (the Node dev server).
+ */
+export async function afterResponse(
+	platform: App.Platform | undefined,
+	pending: Promise<unknown>
+): Promise<void> {
+	if (platform) platform.context.waitUntil(pending)
+	else await pending
+}
+
+export type CrmVerifyResult = 'ok' | 'expired' | 'invalid' | 'failed'
+
+/**
+ * Checks a verification link CiviCRM judges alone (`Entity/verify`), reporting a failure with
+ * `report`. Never rejects.
+ */
+export async function verifyLinkInCrm(
+	action: string,
+	key: string,
+	token: string,
+	report: (details: Record<string, unknown>) => Promise<void>
+): Promise<CrmVerifyResult> {
+	const answer = await callCrm(action, { key, token })
+	if (!answer.ok) {
+		await report(failureDetails(answer))
+		return 'failed'
+	}
+	const { status } = answer.row
+	if (status === 'ok' || status === 'expired' || status === 'invalid') return status
+	await report({ cause: 'http', httpStatus: 200 })
+	return 'failed'
+}
+
 /** What a failure may report: its cause, never a value the request carried. */
 export const failureDetails = ({ cause, httpStatus, errorName }: CrmFailure) => ({
 	cause,
@@ -100,7 +154,8 @@ export async function reportCrmProblem(
 	options: { fingerprint: string[]; level: 'error' | 'warning' }
 ): Promise<void> {
 	console.warn(`[${details.check}] not accepted`, details)
-	await reportError(new Error(message), details, options)
+	// Sentry alert rules match on the `check` tag.
+	await reportError(new Error(message), details, { ...options, tags: { check: details.check } })
 	await flushReports()
 }
 

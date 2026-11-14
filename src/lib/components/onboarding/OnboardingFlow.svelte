@@ -19,6 +19,7 @@
 	import Turnstile from '$lib/components/Turnstile.svelte'
 	import ActionCards from './ActionCards.svelte'
 	import ChapterShareQuestion from './ChapterShareQuestion.svelte'
+	import SaveError from './SaveError.svelte'
 	import Stepper from './Stepper.svelte'
 	import CheckInbox from './CheckInbox.svelte'
 	import { getMessages } from './i18n.svelte'
@@ -127,8 +128,9 @@
 		onSignup?: () => void
 		// Required with initialRecordId: called when the server refuses to update
 		// that row (410), so the host returns to the form that collects consent,
-		// since this one hides it and the next post must create a row.
-		onRecordGone?: () => void
+		// since this one hides it and the next post must create a row. Gets the
+		// refusal's message, for the host to show, since this form goes away.
+		onRecordGone?: (message: string) => void
 	} = $props()
 
 	// Starts true so an unanswered request keeps the anti-spam check required.
@@ -456,7 +458,7 @@
 	function startBrowse() {
 		mode = 'browse'
 		intent = 'act-now'
-		step = 3
+		goToStep(3)
 	}
 
 	function toggleIn(list: string[], value: string) {
@@ -517,7 +519,15 @@
 		// Intent is rewritten from the post too; preselect what the row holds.
 		if (saved) intent = intentKey(saved.intent) ?? intent
 		if (chapterAnswerMissing) return
-		step = 2
+		goToStep(2)
+	}
+
+	let saveError = $state('')
+
+	// A step the person moves to leaves the last post's failure behind.
+	function goToStep(next: typeof step) {
+		saveError = ''
+		step = next
 	}
 
 	function submitWith<T>(
@@ -546,6 +556,7 @@
 			if (recordId && recordToken) formData.set('record_token', recordToken)
 			if (resumed) formData.set('resumed', '1')
 			submitting = true
+			saveError = ''
 			// Run the start callback synchronously, inside the user gesture,
 			// so callers can do things that require a gesture (e.g. opening a
 			// popup window before an async fetch resolves). The returned value
@@ -590,6 +601,7 @@
 						const next = afterChapterAnswerMissing(mode, isContinuation)
 						if (next !== 'stay') step = next === 'step-1' ? 1 : 2
 					}
+					saveError = String(result.data?.message ?? msgs.onboarding_error_generic)
 					if (result.status === 410) {
 						forgetSignup()
 						dropRecord()
@@ -597,12 +609,12 @@
 						chapterChoice = null
 						const next = afterRecordGone(mode, isContinuation)
 						if (next === 'step-1') step = 1
-						else if (next === 'signup-form') onRecordGone?.()
+						else if (next === 'signup-form') onRecordGone?.(saveError)
 					}
-					toast.error(String(result.data?.message ?? msgs.onboarding_error_generic))
 				} else {
-					toast.error(msgs.onboarding_error_unexpected)
+					saveError = msgs.onboarding_error_unexpected
 				}
+				if (saveError) toast.error(saveError)
 			}
 		}
 	}
@@ -803,6 +815,7 @@
 	{/if}
 
 	<div class="form-card">
+		<SaveError message={saveError} />
 		{#if step === 1}
 			<!-- Step 1: basic info -->
 			<form onsubmit={continueToIntent}>
@@ -1044,7 +1057,7 @@
 							: msgs.onboarding_btn_submit}
 				</button>
 				{#if !isContinuation}
-					<button type="button" class="back" onclick={() => (step = 1)}
+					<button type="button" class="back" onclick={() => goToStep(1)}
 						>{msgs.onboarding_btn_back}</button
 					>
 				{/if}
@@ -1409,7 +1422,7 @@
 						<p class="submit-disclaimer">{msgs.onboarding_become_paying_member_disclaimer}</p>
 					{/if}
 				</div>
-				<button type="button" class="back" onclick={() => (step = 2)}
+				<button type="button" class="back" onclick={() => goToStep(2)}
 					>{msgs.onboarding_btn_back}</button
 				>
 			</form>

@@ -11,11 +11,20 @@ const reportError =
 
 vi.mock('$env/dynamic/private', () => ({ env }))
 vi.mock('$lib/airtable', () => ({ createRecord, getRecord, updateRecord }))
-vi.mock('$lib/server/turnstile-verify', () => ({
-	checkNotSpam: () => Promise.resolve({ drop: false })
+const checkNotSpam = vi.fn(() => Promise.resolve({ drop: false }))
+vi.mock('$lib/server/turnstile-verify', () => ({ checkNotSpam }))
+const subscribeToSubstackNewsletter = vi.fn()
+vi.mock('$lib/server/substack', () => ({
+	SUBSTACK_TIMEOUT_MS: 5000,
+	subscribeToSubstackNewsletter
 }))
-vi.mock('$lib/server/substack', () => ({ subscribeToSubstackNewsletter: vi.fn() }))
-vi.mock('$lib/server/sentry', () => ({ reportError, flushReports: () => Promise.resolve() }))
+const submitSignup = vi.fn<(...args: unknown[]) => Promise<string>>()
+vi.mock('$lib/server/memberCrm', async (original) => ({
+	...(await original<typeof import('$lib/server/memberCrm')>()),
+	submitSignup
+}))
+const flushReports = vi.fn(() => Promise.resolve())
+vi.mock('$lib/server/sentry', () => ({ reportError, flushReports }))
 // The National Chapters list the action reads (null: never read on this instance).
 let nationalGroups: { name: string; leader: string }[] | null
 vi.mock('$lib/server/nationalGroups', () => ({
@@ -26,7 +35,7 @@ const { actions } = await import('./+page.server.js')
 const { TOKEN_TTL_SECONDS } = await import('$lib/server/onboardingContinuation')
 const { chapterQuestion, chapterShareWording } =
 	await import('$lib/components/onboarding/chapterShare')
-const { FORM_VERSION } = await import('$lib/components/onboarding/options')
+const { FORM_VERSION, signupSource } = await import('$lib/components/onboarding/options')
 const { onboardingMessages } = await import('$lib/components/onboarding/messages')
 
 // What Airtable answers a write with: the whole row, so an update returns more
@@ -839,5 +848,267 @@ describe('onboarding submit: verified address', () => {
 		const result = await submit({ ...update(token), email: 'grace@example.org' })
 		expect(result).toMatchObject({ status: 502 })
 		expect(updateRecord).not.toHaveBeenCalled()
+	})
+})
+
+describe('onboarding submit: signups in CiviCRM alone (SIGNUP_BACKEND)', () => {
+	const SIGNUP_KEY = /^mem[A-Za-z0-9]{22}$/
+	const NOT_SAVED = "We couldn't confirm your signup was saved. Please try again."
+	const sent = (call = 0) => {
+		const [record, token, deadline] = submitSignup.mock.calls[call] as [
+			{ id: string; createdTime: string; fields: Record<string, unknown> },
+			string,
+			number
+		]
+		return { record, token, deadline }
+	}
+
+	beforeEach(() => {
+		for (const key of Object.keys(env)) delete env[key]
+		env.ONBOARDING_LIVE = 'true'
+		env.ONBOARDING_CONTINUATION_SECRET = 'test-secret'
+		env.SIGNUP_BACKEND = 'civicrm'
+		mockWrites()
+		getRecord.mockReset().mockResolvedValue(UK_ROW)
+		submitSignup.mockReset().mockResolvedValue('saved')
+		subscribeToSubstackNewsletter.mockReset()
+		nationalGroups = CHAPTERS
+		reportError.mockClear()
+		vi.spyOn(console, 'warn').mockImplementation(() => {})
+	})
+
+	it('mints a key and its token on a create, awaits CiviCRM, and writes nothing to Airtable', async () => {
+		const result = await submit(signup)
+		expect(result).toMatchObject({ success: true })
+		expect(result.recordId).toMatch(SIGNUP_KEY)
+		expect(result.recordToken).toMatch(/^v1\./)
+		const { record, token, deadline } = sent()
+		expect(record.id).toBe(result.recordId)
+		expect(token).toBe(result.recordToken)
+		expect(deadline - Date.now()).toBeLessThanOrEqual(25_000)
+		expect(record.fields).toMatchObject({
+			Email: 'ada@example.org',
+			'Form version': FORM_VERSION,
+			'Signup emails sent by': 'CiviCRM',
+			'GDPR chapter share permission': false,
+			'GDPR chapter share wording': WORDING_UK
+		})
+		expect(createRecord).not.toHaveBeenCalled()
+		expect(updateRecord).not.toHaveBeenCalled()
+	})
+
+	it('mints a new key for every create', async () => {
+		const first = await submit(signup)
+		const second = await submit(signup)
+		expect(first.recordId).not.toBe(second.recordId)
+	})
+
+	it('sends a continuation with its own key and token, the create-only fields, and reads no row', async () => {
+		const created = await submit(signup)
+		submitSignup.mockClear()
+		env.SIGNUP_BACKEND = ''
+		const updated = await submit({
+			...update(String(created.recordToken)),
+			record_id: String(created.recordId)
+		})
+		expect(updated).toMatchObject({ success: true, recordId: created.recordId })
+		expect(updated.recordToken).toMatch(/^v1\./)
+		const { record, token } = sent()
+		expect(record.id).toBe(created.recordId)
+		expect(token).toBe(created.recordToken)
+		expect(record.fields).toMatchObject({ 'Form version': FORM_VERSION, Intent: 'Act now' })
+		// No answer posted: CiviCRM decides against the stored one.
+		expect(record.fields).not.toHaveProperty('GDPR chapter share permission')
+		expect(getRecord).not.toHaveBeenCalled()
+		expect(updateRecord).not.toHaveBeenCalled()
+	})
+
+	it('refuses a signup key continuation without a valid token, whatever the enforce switch says', async () => {
+		const key = 'memAbCdEfGhIjKlMnOpQrStUv'
+		for (const token of [undefined, 'v1.9999999999.' + 'A'.repeat(43)]) {
+			const result = await submit({ ...update(token), record_id: key })
+			expect(result.status).toBe(410)
+			expect(result.data?.message).toBe(SESSION_EXPIRED)
+		}
+		expect(submitSignup).not.toHaveBeenCalled()
+	})
+
+	it('keeps a record id continuation on Airtable with the flag on', async () => {
+		const created = await submit({ ...signup })
+		expect(created.recordId).toMatch(SIGNUP_KEY)
+		submitSignup.mockClear()
+		env.SIGNUP_BACKEND = 'airtable'
+		const fromAirtable = await submit(signup)
+		expect(fromAirtable.recordId).toBe('recAda')
+		env.SIGNUP_BACKEND = 'civicrm'
+		const updated = await submit(update(String(fromAirtable.recordToken)))
+		expect(updated).toMatchObject({ success: true, recordId: 'recAda' })
+		expect(updateRecord).toHaveBeenCalledOnce()
+		expect(submitSignup).not.toHaveBeenCalled()
+	})
+
+	it('fails closed without the continuation secret, keeping a saved signup, and reports it', async () => {
+		const created = await submit(signup)
+		submitSignup.mockClear()
+		delete env.ONBOARDING_CONTINUATION_SECRET
+		vi.spyOn(console, 'error').mockImplementation(() => {})
+		const continued = {
+			...update(String(created.recordToken)),
+			record_id: String(created.recordId)
+		}
+		for (const post of [signup, continued]) {
+			reportError.mockClear()
+			flushReports.mockClear()
+			const result = await submit(post)
+			// Not a 410, which would make the browser drop a valid saved signup.
+			expect(result.status).toBe(503)
+			expect(result.data?.message).toBe(NOT_SAVED)
+			const [error, , options] = reportError.mock.calls[0]
+			expect(String(error)).toContain('CRM signup not configured')
+			expect(options).toMatchObject({
+				level: 'error',
+				fingerprint: ['crm-signup', 'not_configured']
+			})
+			expect(flushReports).toHaveBeenCalled()
+		}
+		expect(submitSignup).not.toHaveBeenCalled()
+		expect(createRecord).not.toHaveBeenCalled()
+	})
+
+	it('maps refusals to the outcomes the form knows', async () => {
+		const cases: [string, number, string | undefined][] = [
+			['chapter_answer_missing', 400, undefined],
+			['row_gone', 410, 'We could not find your earlier signup. Please go through the form again.'],
+			['session_expired', 410, SESSION_EXPIRED],
+			['not_saved', 502, NOT_SAVED]
+		]
+		for (const [outcome, status, message] of cases) {
+			submitSignup.mockResolvedValue(outcome)
+			const result = await submit(signup)
+			expect(result.status).toBe(status)
+			if (message) expect(result.data?.message).toBe(message)
+			if (outcome === 'chapter_answer_missing') expect(result.data?.chapterAnswerMissing).toBe(true)
+		}
+	})
+
+	it("answers 502 when CiviCRM could not confirm the write, and doesn't subscribe", async () => {
+		submitSignup.mockResolvedValue('not_saved')
+		const result = await submit({ ...signup, newsletter: 'on' })
+		expect(result.status).toBe(502)
+		expect(result.data?.message).toBe(NOT_SAVED)
+		expect(subscribeToSubstackNewsletter).not.toHaveBeenCalled()
+	})
+
+	it('subscribes to Substack after a saved write, after the response where there is a platform', async () => {
+		const waitUntil = vi.fn()
+		await submit({ ...signup, newsletter: 'on' }, { context: { waitUntil } })
+		expect(subscribeToSubstackNewsletter).toHaveBeenCalledWith('ada@example.org')
+		expect(waitUntil).toHaveBeenCalledOnce()
+	})
+
+	it('writes nothing in stub mode', async () => {
+		delete env.ONBOARDING_LIVE
+		const result = await submit(signup)
+		expect(String(result.recordId)).toMatch(/^stub-/)
+		expect(submitSignup).not.toHaveBeenCalled()
+	})
+	it('waits for CiviCRM before it answers', async () => {
+		let settled = false
+		submitSignup.mockImplementation(
+			() =>
+				new Promise((resolve) =>
+					setTimeout(() => {
+						settled = true
+						resolve('not_saved')
+					}, 20)
+				)
+		)
+		const result = await submit(signup)
+		expect(settled).toBe(true)
+		expect(result.status).toBe(502)
+	})
+
+	it('creates a /subscribe signup in CiviCRM with its own Signup source', async () => {
+		const result = await submit({
+			...signup,
+			subscribe_form: '1',
+			newsletter: 'on',
+			chapter_share_wording: wording('subscribe', 'United Kingdom', 'PauseAI UK', 'no')
+		})
+		expect(result).toMatchObject({ success: true })
+		expect(result.recordId).toMatch(SIGNUP_KEY)
+		const { record, token } = sent()
+		expect(record.id).toBe(result.recordId)
+		expect(token).toBe(result.recordToken)
+		expect(record.fields).toMatchObject({
+			'Signup source': signupSource('subscribe', 'United Kingdom'),
+			'Form version': FORM_VERSION,
+			'Signup emails sent by': 'CiviCRM'
+		})
+		expect(subscribeToSubstackNewsletter).toHaveBeenCalledOnce()
+		expect(createRecord).not.toHaveBeenCalled()
+	})
+
+	it('answers a token refusal of a create as not saved, and reports it as an error', async () => {
+		const { submitSignup: realSubmitSignup } =
+			await vi.importActual<typeof import('$lib/server/memberCrm')>('$lib/server/memberCrm')
+		submitSignup.mockImplementation(realSubmitSignup as never)
+		env.CRM_INTAKE_URL = 'https://crm.example.org'
+		env.CRM_INTAKE_KEY = 'test-key-not-real'
+		vi.stubGlobal('fetch', () =>
+			Promise.resolve(
+				new Response(
+					JSON.stringify({ values: [{ status: 'refused', reason: 'token_unverifiable' }] })
+				)
+			)
+		)
+		try {
+			const result = await submit(signup)
+			expect(result.status).toBe(502)
+			expect(result.data?.message).toBe(NOT_SAVED)
+		} finally {
+			vi.unstubAllGlobals()
+		}
+		expect(reportError.mock.calls[0][2]).toMatchObject({ level: 'error' })
+	})
+
+	it('retries only the CRM call: one Turnstile check, one Substack call, the same payload', async () => {
+		const { submitSignup: realSubmitSignup } =
+			await vi.importActual<typeof import('$lib/server/memberCrm')>('$lib/server/memberCrm')
+		submitSignup.mockImplementation(realSubmitSignup as never)
+		env.CRM_INTAKE_URL = 'https://crm.example.org'
+		env.CRM_INTAKE_KEY = 'test-key-not-real'
+		const answers = [503, 502, 200]
+		const crmFetch = vi.fn<typeof fetch>(() => {
+			const status = answers.shift()!
+			const body = status === 200 ? { values: [{ status: 'ok', contact_id: 7 }] } : {}
+			return Promise.resolve(new Response(JSON.stringify(body), { status }))
+		})
+		vi.stubGlobal('fetch', crmFetch)
+		vi.useFakeTimers({ toFake: ['setTimeout', 'clearTimeout', 'Date'] })
+		checkNotSpam.mockClear()
+		try {
+			let result: Result | undefined
+			const pending = submit({ ...signup, newsletter: 'on' }).then((r) => (result = r))
+			// The clock moves only through the retry waits: the action's other awaits (the form
+			// data, the token's HMAC) are real work the fake clock must not run past.
+			while (!result) {
+				if (vi.getTimerCount()) await vi.advanceTimersToNextTimerAsync()
+				else await new Promise((resolve) => setImmediate(resolve))
+			}
+			expect(await pending).toMatchObject({ success: true })
+		} finally {
+			vi.useRealTimers()
+			vi.unstubAllGlobals()
+		}
+		expect(checkNotSpam).toHaveBeenCalledOnce()
+		expect(subscribeToSubstackNewsletter).toHaveBeenCalledOnce()
+		const posted = crmFetch.mock.calls.map(([, init]) =>
+			(init!.body as URLSearchParams).get('params')
+		)
+		expect(posted).toHaveLength(3)
+		expect(new Set(posted).size).toBe(1)
+		const { record } = JSON.parse(posted[0]!) as { record: { fields: object } }
+		expect(record.fields).not.toHaveProperty('resumed')
 	})
 })

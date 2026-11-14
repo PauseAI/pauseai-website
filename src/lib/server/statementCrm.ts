@@ -7,10 +7,15 @@ import { env } from '$env/dynamic/private'
 import type { Signatory } from '$lib/types'
 import {
 	TIMEOUT_MS,
+	afterResponse,
 	callCrm,
 	failureDetails,
+	isPlainServerError,
+	isTransient,
 	reportCrmProblem,
-	type CrmFailure
+	verifyLinkInCrm,
+	wait,
+	type CrmVerifyResult
 } from '$lib/server/crmIntake'
 import { COUNTRY_BY_ISO_CODE } from '$lib/server/countryCodes'
 
@@ -56,13 +61,6 @@ export type Signature = {
 
 export type CrmSignResult = 'ok' | 'refused' | 'failed'
 
-const isTransient = (failure: CrmFailure) =>
-	failure.cause === 'network' ||
-	failure.cause === 'timeout' ||
-	(failure.cause === 'http' && (failure.httpStatus ?? 0) >= 500)
-
-const wait = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms))
-
 const report = (
 	action: string,
 	outcome: string,
@@ -96,8 +94,7 @@ export async function signInCrm(
 		submission_id: crypto.randomUUID()
 	}
 	const finish = async (result: CrmSignResult, reporting: Promise<void>) => {
-		if (platform) platform.context.waitUntil(reporting)
-		else await reporting
+		await afterResponse(platform, reporting)
 		return result
 	}
 
@@ -119,7 +116,7 @@ export async function signInCrm(
 		}
 		const retry =
 			attempt === 1 &&
-			isTransient(answer) &&
+			(isTransient(answer) || isPlainServerError(answer)) &&
 			deadline - Date.now() - SIGN_RETRY_DELAY_MS >= SIGN_MIN_ATTEMPT_MS
 		if (!retry) {
 			const details = { ...failureDetails(answer), attempt }
@@ -130,20 +127,11 @@ export async function signInCrm(
 	}
 }
 
-export type CrmVerifyResult = 'ok' | 'expired' | 'invalid' | 'failed'
-
 /** Checks a statement link's key and token, which CiviCRM judges alone. Never rejects. */
-export async function verifyStatementInCrm(key: string, token: string): Promise<CrmVerifyResult> {
-	const answer = await callCrm('PauseaiStatement/verify', { key, token })
-	if (!answer.ok) {
-		await report('verify', 'error', failureDetails(answer), 'error')
-		return 'failed'
-	}
-	const { status } = answer.row
-	if (status === 'ok' || status === 'expired' || status === 'invalid') return status
-	await report('verify', 'error', { cause: 'http', httpStatus: 200 }, 'error')
-	return 'failed'
-}
+export const verifyStatementInCrm = (key: string, token: string): Promise<CrmVerifyResult> =>
+	verifyLinkInCrm('PauseaiStatement/verify', key, token, (details) =>
+		report('verify', 'error', details, 'error')
+	)
 
 export type PublicList = { totalCount: number; signatories: Signatory[] }
 

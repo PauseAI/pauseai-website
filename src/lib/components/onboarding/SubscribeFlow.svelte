@@ -19,6 +19,7 @@
 	import Turnstile from '$lib/components/Turnstile.svelte'
 	import ChapterShareQuestion from './ChapterShareQuestion.svelte'
 	import CheckInbox from './CheckInbox.svelte'
+	import SaveError from './SaveError.svelte'
 	import OnboardingFlow from './OnboardingFlow.svelte'
 	import { chapterName, chapterQuestion, loadChapterCountries } from './chapterShare'
 	import { getMessages } from './i18n.svelte'
@@ -100,6 +101,7 @@
 	afterNavigate((nav) => {
 		if (!nav.from || nav.from.url.pathname !== nav.to?.url.pathname) return
 		phase = 'form'
+		saveError = ''
 		recordId = ''
 		recordToken = ''
 		fields = blankFields()
@@ -132,6 +134,7 @@
 	)
 
 	const ERROR_MESSAGE = 'Something went wrong. Please try again.'
+	let saveError = $state('')
 
 	// Saves the created row for OnboardingFlow, so /join in this tab continues it.
 	// Never resumes one itself: this form always posts intent None, which would
@@ -143,6 +146,7 @@
 			return
 		}
 		submitting = true
+		saveError = ''
 		return ({ result }) => {
 			submitting = false
 			// The token is spent whatever the outcome; clear it so a retry waits for
@@ -157,10 +161,10 @@
 					saveSignupFromPost(formData, recordId, recordToken, null)
 				}
 				phase = 'thanks'
-			} else if (result.type === 'failure') {
-				toast.error(String(result.data?.message ?? ERROR_MESSAGE))
 			} else {
-				toast.error(ERROR_MESSAGE)
+				saveError =
+					result.type === 'failure' ? String(result.data?.message ?? ERROR_MESSAGE) : ERROR_MESSAGE
+				toast.error(saveError)
 			}
 		}
 	}
@@ -181,6 +185,7 @@
 
 {#if phase === 'form'}
 	<div class="subscribe-card">
+		<SaveError message={saveError} />
 		<form method="POST" action="/embed/onboarding-form?/submit" use:enhance={submit}>
 			<!-- Fixed for the newsletter entry: global newsletter opt-in, and the
 			     privacy-policy consent is the act of signing up (see the microcopy
@@ -306,9 +311,10 @@
 		initialCity={fields.city}
 		initialKeepInformed={true}
 		initialChapterAnswer={asksChapterQuestion(fields.country) ? chapterAnswer : null}
-		onRecordGone={() => {
+		onRecordGone={(message: string) => {
 			// Back to the signup, details kept, to create a row with fresh consent and
 			// a chapter answer given again.
+			saveError = message
 			phase = 'form'
 			chapterChoice = null
 			recordId = ''
