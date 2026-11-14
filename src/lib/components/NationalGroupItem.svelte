@@ -2,6 +2,7 @@
 	import type { Component, ComponentType } from 'svelte'
 	import type { NationalGroup, NationalGroupLink } from '$lib/types'
 	import { typedEntries } from '$lib/utils'
+	import { DEFAULT_CHAPTER_IMAGE, useDefaultChapterImage } from '$lib/chapterImage'
 	import LinkWithoutIcon from '$lib/components/LinkWithoutIcon.svelte'
 
 	// Custom icons
@@ -25,14 +26,7 @@
 
 	let { nationalGroup }: Props = $props()
 
-	const DEFAULT_IMAGE = '/images/default.png'
-	const imageUrl = $derived(nationalGroup.image ?? DEFAULT_IMAGE)
-
-	// A chapter image is hosted by the CRM, which can be down or have dropped the file.
-	function useDefaultImage(event: Event) {
-		const image = event.currentTarget as HTMLImageElement
-		if (!image.src.endsWith(DEFAULT_IMAGE)) image.src = DEFAULT_IMAGE
-	}
+	const imageUrl = $derived(nationalGroup.image ?? DEFAULT_CHAPTER_IMAGE)
 
 	const iconMap: Record<NationalGroupLink, Component | ComponentType> = {
 		website: Globe,
@@ -79,14 +73,12 @@
 			</svg>
 		</div>
 		<div class="image-name-wrapper">
-			{#if imageUrl}
-				<img
-					src={imageUrl}
-					alt={nationalGroup.name}
-					class="national-group-image"
-					onerror={useDefaultImage}
-				/>
-			{/if}
+			<img
+				src={imageUrl}
+				alt={nationalGroup.name}
+				class="national-group-image"
+				onerror={useDefaultChapterImage}
+			/>
 			<h3 class="name">{nationalGroup.name}</h3>
 		</div>
 	</div>

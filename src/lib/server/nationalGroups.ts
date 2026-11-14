@@ -5,7 +5,7 @@
 // mount (the CDN absorbs most of those), and the onboarding emails read it on every render.
 import type { NationalGroup } from '$lib/types.js'
 import { callCrmRows, failureDetails } from '$lib/server/crmIntake'
-import { isDev } from '$lib/env.server'
+import { dev } from '$app/environment'
 import { reportError } from '$lib/server/sentry'
 
 const TTL_MS = 10 * 60 * 1000
@@ -85,18 +85,26 @@ let cached: { groups: NationalGroup[]; readAt: number } | null = null
 let failedAt: number | null = null
 let pending: Promise<NationalGroup[] | null> | null = null
 
+/** A failed read, with what may be reported about it. */
+class ReadFailure extends Error {
+	constructor(readonly details: Record<string, unknown>) {
+		super(`Chapter directory read failed: ${String(details.cause)}`)
+	}
+}
+
 async function readGroups(): Promise<NationalGroup[]> {
 	const answer = await callCrmRows('PauseaiChapterDetails/publicList', {}, TIMEOUT_MS)
 	if (!answer.ok) {
-		if (answer.cause === 'not_configured' && isDev()) {
+		// `dev` is compiled to false in any build, so a deployed site missing the CRM's
+		// settings fails rather than caching example chapters.
+		if (answer.cause === 'not_configured' && dev) {
 			console.warn('⚠️ CRM not configured, using fallback national groups in development')
 			return FALLBACK_NATIONAL_GROUPS
 		}
-		const { cause, httpStatus } = failureDetails(answer)
-		throw new Error(`Chapter directory read failed: ${cause}${httpStatus ? ` ${httpStatus}` : ''}`)
+		throw new ReadFailure(failureDetails(answer))
 	}
 	// Every page that offers a chapter would drop it, so the last good list is served instead.
-	if (answer.rows.length === 0) throw new Error('Chapter directory read failed: empty list')
+	if (answer.rows.length === 0) throw new ReadFailure({ cause: 'empty' })
 	return answer.rows.map(rowToNationalGroup).sort((a, b) => a.name.localeCompare(b.name))
 }
 
@@ -109,7 +117,11 @@ async function refresh(): Promise<NationalGroup[] | null> {
 	} catch (error) {
 		failedAt = Date.now()
 		console.error('Reading national groups failed:', error)
-		await reportError(error, { operation: 'getNationalGroups', servedStale: cached !== null })
+		await reportError(error, {
+			operation: 'getNationalGroups',
+			servedStale: cached !== null,
+			...(error instanceof ReadFailure ? error.details : {})
+		})
 		// The last good list, however old, rather than none.
 		return cached?.groups ?? null
 	}

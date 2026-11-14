@@ -47,8 +47,8 @@ const isRow = (value: unknown): value is Record<string, unknown> =>
 
 /**
  * Calls one API4 action (`Entity/action`) as the intake API account, giving up
- * after `timeoutMs`, and answers the row it answered. Never rejects: a failure is
- * an answer with what caused it.
+ * after `timeoutMs`, and answers the first row of `values`. Never rejects: a failure
+ * is an answer with what caused it.
  */
 export async function callCrm(
 	action: string,

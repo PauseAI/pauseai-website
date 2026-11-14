@@ -1,18 +1,21 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 import type { CrmRows } from '$lib/server/crmIntake'
 
-const callCrmRows = vi.fn<(...args: unknown[]) => Promise<CrmRows>>()
+const callCrmRows =
+	vi.fn<(action: string, params: unknown, timeoutMs?: number) => Promise<CrmRows>>()
 const reportError = vi.fn<(error: unknown, context?: Record<string, unknown>) => Promise<void>>()
-let dev = false
+const appEnvironment = vi.hoisted(() => ({ dev: false }))
 vi.mock('$lib/server/crmIntake', async (importOriginal) => ({
 	...(await importOriginal<Record<string, unknown>>()),
 	callCrmRows
 }))
-vi.mock('$lib/env.server', () => ({ isDev: () => dev }))
+vi.mock('$app/environment', () => appEnvironment)
 vi.mock('$lib/server/sentry', () => ({ reportError }))
+// No CRM settings, and no CI: what a deployed runtime missing its settings may look like.
 vi.mock('$env/dynamic/private', () => ({ env: {} }))
 
 const { getNationalGroups, resetNationalGroupsCacheForTests } = await import('./nationalGroups')
+const crm = await vi.importActual<typeof import('$lib/server/crmIntake')>('$lib/server/crmIntake')
 
 const rows = (...countries: string[]): CrmRows => ({
 	ok: true,
@@ -24,7 +27,7 @@ const names = (groups: { name: string }[] | null) => groups?.map((group) => grou
 describe('getNationalGroups', () => {
 	beforeEach(() => {
 		resetNationalGroupsCacheForTests()
-		dev = false
+		appEnvironment.dev = false
 		callCrmRows.mockReset()
 		reportError.mockReset().mockResolvedValue()
 		vi.spyOn(console, 'error').mockImplementation(() => {})
@@ -129,15 +132,22 @@ describe('getNationalGroups', () => {
 		expect(callCrmRows).toHaveBeenCalledOnce()
 	})
 
-	it('treats a CRM that is not configured as a failure in production', async () => {
-		callCrmRows.mockResolvedValue({ ok: false, cause: 'not_configured' })
+	it('treats a CRM that is not configured as a failure outside development', async () => {
+		callCrmRows.mockImplementation(crm.callCrmRows)
 		expect(await getNationalGroups()).toBeNull()
 		expect(reportError).toHaveBeenCalledOnce()
+		expect(reportError.mock.calls[0][1]).toMatchObject({ cause: 'not_configured' })
+	})
+
+	it('reports what caused a failed read', async () => {
+		callCrmRows.mockResolvedValue({ ok: false, cause: 'network', errorName: 'TypeError' })
+		await getNationalGroups()
+		expect(reportError.mock.calls[0][1]).toMatchObject({ cause: 'network', errorName: 'TypeError' })
 	})
 
 	it('serves example groups in development when the CRM is not configured', async () => {
-		dev = true
-		callCrmRows.mockResolvedValue({ ok: false, cause: 'not_configured' })
+		appEnvironment.dev = true
+		callCrmRows.mockImplementation(crm.callCrmRows)
 		expect(names(await getNationalGroups())).toEqual([
 			'[FALLBACK DATA] Example Group 1',
 			'[FALLBACK DATA] Example Group 2'
@@ -146,7 +156,7 @@ describe('getNationalGroups', () => {
 	})
 
 	it('treats any other failure as a failure in development too', async () => {
-		dev = true
+		appEnvironment.dev = true
 		callCrmRows.mockResolvedValue(down)
 		expect(await getNationalGroups()).toBeNull()
 		expect(reportError).toHaveBeenCalledOnce()

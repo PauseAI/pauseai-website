@@ -3,13 +3,9 @@ import { beforeEach, describe, expect, it, vi } from 'vitest'
 const env: Record<string, string | undefined> = {}
 vi.mock('$env/dynamic/private', () => ({ env }))
 vi.mock('$lib/server/sentry', () => ({ reportError: vi.fn() }))
-vi.mock('$lib/server/crmIntake', async (importOriginal) => ({
-	...(await importOriginal<Record<string, unknown>>()),
-	callCrmRows: () =>
-		Promise.resolve({
-			ok: true,
-			rows: [{ country: 'Netherlands', whatsapp: 'https://chat.whatsapp.com/example', leaders: [] }]
-		})
+vi.mock('$lib/server/nationalGroups', () => ({
+	getNationalGroups: () =>
+		Promise.resolve([{ name: 'Netherlands', whatsappLink: 'https://chat.whatsapp.com/example' }])
 }))
 
 const { POST } = await import('./+server.js')

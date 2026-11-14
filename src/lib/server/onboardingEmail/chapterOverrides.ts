@@ -18,8 +18,8 @@ type ChapterOverride = {
 	name: string
 	language: OnboardingEmailLanguage
 	/** A version per intent bucket. A bucket left out gets the shared copy.
-	 *  `chapter` is the chapter's live row in the chapter list, so an override can use the chapter's own
-	 *  links rather than repeating them here. */
+	 *  `chapter` is the chapter's live row in the chapter list, so an override can use the
+	 *  chapter's own links rather than repeating them here. */
 	content: Partial<Record<IntentBucket, ChapterContent>>
 }
 
@@ -37,7 +37,7 @@ export type ResolvedOverride = {
 	content: ChapterContent
 }
 
-/** A link from the chapter's Airtable row, by the label chapter.ts gives it. */
+/** A link from the chapter's row in the CRM's chapter list, by the label chapter.ts gives it. */
 function chapterLink(chapter: ChapterBlockData | null, label: string): string | null {
 	return chapter?.links.find((link) => link.label === label)?.url ?? null
 }
@@ -251,10 +251,11 @@ const canada: ChapterOverride = {
 
 // PauseAI Sverige's own emails, one per intent, wording kept as the chapter lead wrote it apart
 // from clear typos.
-// The WhatsApp, calendar, Instagram and Facebook links come from the chapter's Airtable row, so
-// keeping them current is an Airtable edit, and a sentence is dropped when its link is missing
-// rather than shipping a dead one. The calendar must stay the public Luma page: the chapter's own drafts
-// link Luma's admin view, which members cannot open.
+// The WhatsApp, calendar, Instagram and Facebook links come from the chapter's row in the CRM's
+// chapter list, so keeping them current is a CRM edit, on the chapter's Chapter details page, and
+// a sentence is dropped when its link is missing rather than shipping a dead one. The calendar
+// must stay the public Luma page: the chapter's own drafts link Luma's admin view, which members
+// cannot open.
 //
 // The chapter's own words. The lines the skeleton adds around them are our Swedish and nobody
 // fluent has read them yet, which beats the alternative for these readers: the

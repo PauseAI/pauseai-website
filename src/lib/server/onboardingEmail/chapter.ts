@@ -1,6 +1,6 @@
 import type { NationalGroup, NationalGroupLink } from '$lib/types.js'
 import { getNationalGroups } from '$lib/server/nationalGroups'
-import type { ChapterBlockData, ChapterLink } from './types.js'
+import type { ChapterBlockData, ChapterLink, WaitUntil } from './types.js'
 
 // The CRM gives the v2 welcome render 10 seconds (pauseai-civicrm's SignupMail::RENDER_URL),
 // so a slow chapter list must give up well inside that and never fail the render.
@@ -26,6 +26,11 @@ const LINK_FIELDS: { field: NationalGroupLink; label: string }[] = [
 	{ field: 'linkedinLink', label: 'LinkedIn' },
 	{ field: 'linktreeLink', label: 'Linktree' }
 ]
+
+/** The platform's waitUntil, or undefined without one (the Node dev server). */
+export function platformWaitUntil(platform: App.Platform | undefined): WaitUntil | undefined {
+	return platform && ((promise) => platform.context.waitUntil(promise))
+}
 
 function normalizeCountry(country: string): string {
 	return country.trim().toLowerCase()
@@ -60,19 +65,21 @@ function groupToChapterBlock(group: NationalGroup): ChapterBlockData {
 
 /**
  * The cached chapter list (src/lib/server/nationalGroups.ts). Throws when no list can be
- * read, or none arrives within CHAPTER_READ_TIMEOUT_MS; a read cut short runs on and fills
- * the cache for the next email.
+ * read, or none arrives within CHAPTER_READ_TIMEOUT_MS. A read cut short runs on to fill the
+ * cache for the next email, handed to `waitUntil` so the runtime keeps it alive past the
+ * response.
  */
-async function readChapters(): Promise<NationalGroup[]> {
+async function readChapters(waitUntil?: WaitUntil): Promise<NationalGroup[]> {
 	let timer: ReturnType<typeof setTimeout> | undefined
+	const read = getNationalGroups()
 	try {
 		const groups = await Promise.race([
-			getNationalGroups(),
+			read,
 			new Promise<never>((_, reject) => {
-				timer = setTimeout(
-					() => reject(new Error(`Chapter list read took over ${CHAPTER_READ_TIMEOUT_MS} ms`)),
-					CHAPTER_READ_TIMEOUT_MS
-				)
+				timer = setTimeout(() => {
+					waitUntil?.(read)
+					reject(new Error(`Chapter list read took over ${CHAPTER_READ_TIMEOUT_MS} ms`))
+				}, CHAPTER_READ_TIMEOUT_MS)
 			})
 		])
 		if (!groups) throw new Error('The chapter list could not be read')
@@ -88,12 +95,13 @@ async function readChapters(): Promise<NationalGroup[]> {
  * there is no chapter to point the reader at. Throws when the chapter list cannot be read.
  */
 export async function lookupChapterForOnboardingEmail(
-	country: string | undefined
+	country: string | undefined,
+	waitUntil?: WaitUntil
 ): Promise<ChapterBlockData | null> {
 	const cleanCountry = normalizeCountry(country ?? '')
 	if (!cleanCountry || NOT_ONBOARDED_BY_GLOBAL.has(cleanCountry)) return null
 
-	const match = (await readChapters()).find(
+	const match = (await readChapters(waitUntil)).find(
 		(group) => normalizeCountry(group.name) === cleanCountry
 	)
 	return match ? groupToChapterBlock(match) : null
@@ -101,11 +109,12 @@ export async function lookupChapterForOnboardingEmail(
 
 /** As lookupChapterForOnboardingEmail, but null when the chapter list cannot be read. */
 export async function getChapterForOnboardingEmail(
-	country: string | undefined
+	country: string | undefined,
+	waitUntil?: WaitUntil
 ): Promise<ChapterBlockData | null> {
 	// A CRM outage renders the email without its chapter block rather than failing it.
 	try {
-		return await lookupChapterForOnboardingEmail(country)
+		return await lookupChapterForOnboardingEmail(country, waitUntil)
 	} catch (error) {
 		console.error('Chapter lookup failed, rendering without a chapter:', error)
 		return null
@@ -117,10 +126,10 @@ export async function getChapterForOnboardingEmail(
  * for the onboarding-email preview tool's country picker; the render path itself matches
  * free-text, not this list.
  */
-export async function listActiveChapterCountries(): Promise<string[]> {
+export async function listActiveChapterCountries(waitUntil?: WaitUntil): Promise<string[]> {
 	let groups: NationalGroup[]
 	try {
-		groups = await readChapters()
+		groups = await readChapters(waitUntil)
 	} catch (error) {
 		console.error('Chapter lookup failed, listing no countries:', error)
 		return []

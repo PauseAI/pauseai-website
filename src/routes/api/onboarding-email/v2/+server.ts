@@ -1,6 +1,7 @@
 export const prerender = false
 
 import { env } from '$env/dynamic/private'
+import { platformWaitUntil } from '$lib/server/onboardingEmail/chapter.js'
 import { renderOnboardingEmailV2 } from '$lib/server/onboardingEmail/index.js'
 import { CONTRACT_VERSION, parseV2Request } from '$lib/server/onboardingEmail/v2Request.js'
 import { reportError } from '$lib/server/sentry'
@@ -36,7 +37,7 @@ async function authorized(header: string, secret: string): Promise<boolean> {
 	return difference === 0
 }
 
-export const POST: RequestHandler = async ({ request }) => {
+export const POST: RequestHandler = async ({ request, platform }) => {
 	const secret = env.ONBOARDING_EMAIL_RENDER_V2_SECRET
 	if (!secret || !(await authorized(request.headers.get('authorization') ?? '', secret))) {
 		return error(StatusCodes.UNAUTHORIZED, 'unauthorized', 'Missing or wrong bearer secret')
@@ -67,7 +68,10 @@ export const POST: RequestHandler = async ({ request }) => {
 
 	let rendered
 	try {
-		rendered = await renderOnboardingEmailV2(parsed.params, verificationSecret)
+		rendered = await renderOnboardingEmailV2(
+			{ ...parsed.params, waitUntil: platformWaitUntil(platform) },
+			verificationSecret
+		)
 	} catch (cause) {
 		console.error('Failed to render onboarding email (v2):', cause)
 		await reportError(cause, { route: 'onboarding-email/v2' })

@@ -70,7 +70,7 @@ async function resolve(params: OnboardingEmailParams) {
 			params.languageOverride ?? resolveOnboardingEmailLanguage(params.country, params.languages),
 		chapterCountry: params.country,
 		chapterShare: params.chapterShare,
-		readChapter: () => getChapterForOnboardingEmail(params.country)
+		readChapter: () => getChapterForOnboardingEmail(params.country, params.waitUntil)
 	})
 }
 
@@ -168,7 +168,7 @@ async function chapterLinks(
 	params: OnboardingEmailV2Params
 ): Promise<ChapterLink[]> {
 	try {
-		return (await lookupChapterForOnboardingEmail(routed.country))?.links ?? []
+		return (await lookupChapterForOnboardingEmail(routed.country, params.waitUntil))?.links ?? []
 	} catch (error) {
 		console.error('Chapter lookup failed, rendering without chapter links:', error)
 		await reportError(error, {

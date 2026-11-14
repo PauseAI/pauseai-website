@@ -10,6 +10,9 @@ export type BaseLanguage = 'en' | 'es'
  *  override is written in. Each needs its fixed lines in fixed.ts. */
 export type OnboardingEmailLanguage = BaseLanguage | 'sv' | 'de'
 
+/** Keeps work alive past the response: Netlify's `platform.context.waitUntil`. */
+export type WaitUntil = (promise: Promise<unknown>) => void
+
 /** HTML presentation style. `rich` (default) is the branded card layout in
  *  html.ts; `plain` is the stripped-down single-column layout in htmlPlain.ts,
  *  modelled on the PauseAI UK MailerLite template, so it reads closer to a
@@ -43,6 +46,8 @@ export type OnboardingEmailParams = {
 	/** Tests pass v2's signed link here to compare the two renders. The preview page leaves it
 	 *  out and gets the unsigned link built from `airtable_id`. */
 	verificationLink?: string
+	/** Where a chapter list read cut short is handed, when there is a platform. */
+	waitUntil?: WaitUntil
 }
 
 export type RenderedOnboardingEmail = {
@@ -110,6 +115,9 @@ export type OnboardingEmailV2Params = {
 	toEmail: string
 	/** The CRM's opt-out link for this member. Rendered in the footer when set; never fetched. */
 	unsubscribeUrl?: string
+	/** Where a chapter list read cut short is handed, when there is a platform. Set by the
+	 *  route, not the request. */
+	waitUntil?: WaitUntil
 }
 
 export type RenderedOnboardingEmailV2 = {

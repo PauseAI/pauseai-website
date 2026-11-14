@@ -66,6 +66,21 @@ describe('getChapterForOnboardingEmail', () => {
 		expect(vi.getTimerCount()).toBe(0)
 	})
 
+	it('hands a read cut short to waitUntil, and only then', async () => {
+		const waitUntil = vi.fn()
+		await lookupChapterForOnboardingEmail('Sweden', waitUntil)
+		expect(waitUntil).not.toHaveBeenCalled()
+
+		vi.useFakeTimers()
+		const read = new Promise<null>(() => {})
+		getNationalGroups.mockReturnValue(read)
+		const lookup = lookupChapterForOnboardingEmail('Sweden', waitUntil)
+		lookup.catch(() => {})
+		await vi.advanceTimersByTimeAsync(CHAPTER_READ_TIMEOUT_MS)
+		await expect(lookup).rejects.toThrow()
+		expect(waitUntil).toHaveBeenCalledExactlyOnceWith(read)
+	})
+
 	it('has no chapter for a country PauseAI Global does not onboard', async () => {
 		expect(await getChapterForOnboardingEmail('United States')).toBeNull()
 		expect(getNationalGroups).not.toHaveBeenCalled()
