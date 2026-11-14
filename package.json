@@ -67,7 +67,7 @@
 		"p-queue": "^9.3.5",
 		"postcss-discard-duplicates": "^9.0.7",
 		"postcss-html": "^2.0.0",
-		"prettier": "^3.9.10",
+		"prettier": "^3.10.1",
 		"prettier-plugin-svelte": "^4.1.1",
 		"remark-heading-id": "^1.0.1",
 		"remove-markdown": "^0.7.1",
