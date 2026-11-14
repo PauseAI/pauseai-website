@@ -1,7 +1,8 @@
 <script lang="ts">
 	import type { GeoApiResponse } from '$api/geo/+server'
 	import { browser } from '$app/environment'
-	import { page } from '$app/state'
+	import { beforeNavigate } from '$app/navigation'
+	import { page, updated } from '$app/state'
 	import Banner from '$lib/components/Banner.svelte'
 	import Hero from '$lib/components/Hero.svelte'
 	import Link from '$lib/components/Link.svelte'
@@ -82,6 +83,21 @@
 	let visitorCountry: string | null = $state(null)
 	let hero = $derived(deLocalizeHref(page.url.pathname) === '/')
 	let embed = $derived(page.route.id?.startsWith('/embed/') ?? false)
+
+	// Once a newer deploy is live, a client-side navigation would try chunks that are gone, and an
+	// old client talking to the new server can break without any chunk error (data shapes, remote
+	// function ids). So links and GET forms switch to full loads (SvelteKit's reload option, which
+	// also stops their preloads), and back and forward reload below. A goto stays with the router: it
+	// must keep its state and replaceState, and the router already does a full load if its chunks are
+	// gone. Enhanced POST forms submit through the old client regardless.
+	$effect(() => {
+		if (updated.current) document.body.dataset.sveltekitReload = ''
+	})
+	beforeNavigate(({ type }) => {
+		// The address bar already shows the target, so reload it: assigning a URL with a hash would only
+		// scroll. Not cancelled: SvelteKit undoes a cancelled popstate with history.go().
+		if (updated.current && type === 'popstate') location.reload()
+	})
 
 	onMount(async () => {
 		document.documentElement.removeAttribute('data-waiting')
