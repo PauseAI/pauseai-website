@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { onNavigate } from '$app/navigation'
 	import type { PagefindModal, PagefindSearchResult } from '@pagefind/component-ui'
-	import { onMount, tick } from 'svelte'
+	import { onMount } from 'svelte'
 	import { searchOpen } from '$lib/stores/searchModal'
 
 	interface Props {
@@ -13,7 +13,6 @@
 	let theme: 'light' | 'dark' = $state('light')
 	let modalEl: PagefindModal | null = $state(null)
 	let ready = $state(false)
-	let defined = $state(false)
 
 	$effect(() => {
 		if (open && modalEl && ready) {
@@ -59,15 +58,9 @@
 			// @ts-expect-error -- The package doesn't provide types for the CSS.
 			await import('@pagefind/component-ui/css')
 
-			// WebKit (Safari, every iOS browser) never upgrades a custom element Svelte cloned before
-			// customElements.define ran, so <pagefind-modal> renders only from here; tick() lets bind:this set modalEl.
-			defined = true
-			await tick()
-
-			if (modalEl) {
-				// eslint-disable-next-line @typescript-eslint/no-unsafe-call -- Can't resolve PagefindModal
-				modalEl.register(instance)
-			}
+			// WebKit (Safari, every iOS browser) does not upgrade a custom element Svelte cloned before
+			// customElements.define ran, so <pagefind-modal> renders only from here. On connecting it
+			// registers itself with the 'default' instance configured above.
 			ready = true
 		}
 		void init()
@@ -129,7 +122,7 @@
 	})
 </script>
 
-{#if defined}
+{#if ready}
 	<pagefind-modal bind:this={modalEl} reset-on-close data-pf-theme={theme}></pagefind-modal>
 {/if}
 
