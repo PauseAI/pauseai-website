@@ -68,10 +68,11 @@ describe('getChapterForOnboardingEmail', () => {
 		expect(vi.getTimerCount()).toBe(0)
 	})
 
-	it('hands a read cut short, and the sending of its report, to waitUntil, and only then', async () => {
+	it('hands every read, and the sending of its report, to waitUntil', async () => {
 		const waitUntil = vi.fn<(promise: Promise<unknown>) => void>()
 		await lookupChapterForOnboardingEmail('Sweden', waitUntil)
-		expect(waitUntil).not.toHaveBeenCalled()
+		expect(waitUntil).toHaveBeenCalledOnce()
+		waitUntil.mockClear()
 
 		vi.useFakeTimers()
 		let finishRead: (groups: null) => void = () => {}

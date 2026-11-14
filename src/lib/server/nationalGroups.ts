@@ -12,7 +12,7 @@ const TTL_MS = 10 * 60 * 1000
 // After a failed read, the last good list (or none) is served this long before
 // trying again, so an outage costs one read a minute.
 const RETRY_AFTER_FAILURE_MS = 60 * 1000
-// While reads keep failing, Sentry hears about it at most this often.
+// The first failed read of an outage is reported at once, then at most this often.
 const REPORT_FAILING_EVERY_MS = 60 * 60 * 1000
 const TIMEOUT_MS = 5000
 
@@ -84,10 +84,7 @@ function rowToNationalGroup(row: Record<string, unknown>): NationalGroup {
 }
 
 let cached: { groups: NationalGroup[]; readAt: number } | null = null
-let failedAt: number | null = null
-// When the current run of failed reads began, and when it was last reported.
-let failingSince: number | null = null
-let failureReportedAt: number | null = null
+let outage: { since: number; lastFailedAt: number; reportedAt: number } | null = null
 let pending: Promise<NationalGroup[] | null> | null = null
 let reportsSent: Promise<void> = Promise.resolve()
 
@@ -120,7 +117,11 @@ async function readGroups(): Promise<NationalGroup[]> {
 	return answer.rows.map(rowToNationalGroup).sort((a, b) => a.name.localeCompare(b.name))
 }
 
-const minutesSince = (since: number, now: number) => Math.round((now - since) / 60_000)
+const outageFields = (since: number, now: number) => ({
+	operation: 'getNationalGroups',
+	failingSince: new Date(since).toISOString(),
+	failingForMinutes: Math.round((now - since) / 60_000)
+})
 
 async function refresh(): Promise<NationalGroup[] | null> {
 	let groups: NationalGroup[]
@@ -128,16 +129,14 @@ async function refresh(): Promise<NationalGroup[] | null> {
 		groups = await readGroups()
 	} catch (error) {
 		const now = Date.now()
-		failedAt = now
-		failingSince ??= now
+		outage ??= { since: now, lastFailedAt: now, reportedAt: -Infinity }
+		outage.lastFailedAt = now
 		console.error('Reading national groups failed:', error)
-		if (failureReportedAt === null || now - failureReportedAt >= REPORT_FAILING_EVERY_MS) {
-			failureReportedAt = now
+		if (now - outage.reportedAt >= REPORT_FAILING_EVERY_MS) {
+			outage.reportedAt = now
 			await reportError(error, {
-				operation: 'getNationalGroups',
+				...outageFields(outage.since, now),
 				servedStale: cached !== null,
-				failingSince: new Date(failingSince).toISOString(),
-				failingForMinutes: minutesSince(failingSince, now),
 				...(error instanceof ReadFailure ? error.details : {})
 			})
 			// Not awaited: a caller waiting on the list should not also wait on Sentry.
@@ -148,18 +147,11 @@ async function refresh(): Promise<NationalGroup[] | null> {
 	}
 	const now = Date.now()
 	cached = { groups, readAt: now }
-	if (failingSince !== null && failureReportedAt !== null) {
-		const downForMinutes = minutesSince(failingSince, now)
-		await reportMessage(`Chapter directory reads recovered after ${downForMinutes} min`, {
-			operation: 'getNationalGroups',
-			failingSince: new Date(failingSince).toISOString(),
-			downForMinutes
-		})
+	if (outage) {
+		await reportMessage('Chapter directory reads recovered', outageFields(outage.since, now))
 		reportsSent = flushReports()
+		outage = null
 	}
-	failedAt = null
-	failingSince = null
-	failureReportedAt = null
 	return groups
 }
 
@@ -169,16 +161,14 @@ async function refresh(): Promise<NationalGroup[] | null> {
 export async function getNationalGroups(): Promise<NationalGroup[] | null> {
 	const now = Date.now()
 	if (cached && now - cached.readAt < TTL_MS) return cached.groups
-	if (failedAt !== null && now - failedAt < RETRY_AFTER_FAILURE_MS) return cached?.groups ?? null
+	if (outage && now - outage.lastFailedAt < RETRY_AFTER_FAILURE_MS) return cached?.groups ?? null
 	pending ??= refresh().finally(() => (pending = null))
 	return pending
 }
 
 export function resetNationalGroupsCacheForTests(): void {
 	cached = null
-	failedAt = null
-	failingSince = null
-	failureReportedAt = null
+	outage = null
 	pending = null
 	reportsSent = Promise.resolve()
 }

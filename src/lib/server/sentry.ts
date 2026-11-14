@@ -40,13 +40,12 @@ export async function reportError(
  */
 export async function reportMessage(
 	message: string,
-	context?: Record<string, unknown>,
-	level: 'info' | 'warning' = 'info'
+	context?: Record<string, unknown>
 ): Promise<void> {
 	try {
 		if (typeof Deno === 'undefined') return
 		const { captureMessage } = await import('@sentry/deno')
-		captureMessage(message, { extra: context, level })
+		captureMessage(message, { extra: context, level: 'info' })
 	} catch (e) {
 		console.error('[Sentry Server lib] reportMessage failed:', e)
 	}
