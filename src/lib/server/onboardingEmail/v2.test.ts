@@ -32,15 +32,15 @@ const CHAPTER_DIRECTORY = {
 	]
 }
 
-const { env, callCrmRows, reportError } = vi.hoisted(() => {
+const { env, callCrmRows, reportError, flushReports } = vi.hoisted(() => {
 	const env: Record<string, string | undefined> = {}
-	return { env, callCrmRows: vi.fn(), reportError: vi.fn() }
+	return { env, callCrmRows: vi.fn(), reportError: vi.fn(), flushReports: vi.fn() }
 })
 vi.mock('$env/dynamic/private', () => ({ env }))
 vi.mock('$lib/server/sentry', () => ({
 	reportError,
 	reportMessage: () => Promise.resolve(),
-	flushReports: () => Promise.resolve()
+	flushReports
 }))
 vi.mock('$lib/server/crmIntake', async (importOriginal) => ({
 	...(await importOriginal<Record<string, unknown>>()),
@@ -112,6 +112,7 @@ beforeEach(() => {
 	resetNationalGroupsCacheForTests()
 	callCrmRows.mockReset().mockResolvedValue(CHAPTER_DIRECTORY)
 	reportError.mockReset().mockResolvedValue(undefined)
+	flushReports.mockReset().mockResolvedValue(undefined)
 })
 
 afterEach(() => {
@@ -183,6 +184,8 @@ describe('renderOnboardingEmailV2', () => {
 		const reports = linksReport()
 		expect(reports).toHaveLength(1)
 		expect(reports[0]).toMatchObject({ recordId: RECORD_ID })
+		// One flush for the chapter list's own report, one for this one.
+		expect(flushReports).toHaveBeenCalledTimes(2)
 		expect(JSON.stringify(reports[0]).toLowerCase()).not.toContain('alex')
 	})
 
