@@ -108,7 +108,7 @@ function chapterUrls(text: string): string[] {
 }
 
 beforeEach(() => {
-	env.CRM_INTAKE_URL = 'https://crm.pauseai.info/'
+	env.CRM_URL = 'https://crm.pauseai.info/'
 	resetNationalGroupsCacheForTests()
 	callCrmRows.mockReset().mockResolvedValue(CHAPTER_DIRECTORY)
 	reportError.mockReset().mockResolvedValue(undefined)
@@ -546,8 +546,8 @@ describe('parseV2Request', () => {
 		expect(absent.ok && absent.params.unsubscribeUrl).toBeUndefined()
 	})
 
-	it('takes the CRM host from CRM_INTAKE_URL, port included', () => {
-		env.CRM_INTAKE_URL = 'https://localhost:8443'
+	it('takes the CRM host from CRM_URL, port included', () => {
+		env.CRM_URL = 'https://localhost:8443'
 		const local = parse({ unsubscribe_url: 'https://localhost:8443/civicrm/mailing/optout?cid=1' })
 		expect(local.ok && local.params.unsubscribeUrl).toBe(
 			'https://localhost:8443/civicrm/mailing/optout?cid=1'
@@ -557,9 +557,9 @@ describe('parseV2Request', () => {
 		)
 	})
 
-	it('refuses every unsubscribe link while CRM_INTAKE_URL is unset', () => {
+	it('refuses every unsubscribe link while CRM_URL is unset', () => {
 		for (const unset of [undefined, '', 'not a url']) {
-			env.CRM_INTAKE_URL = unset
+			env.CRM_URL = unset
 			const error = errorOf({ unsubscribe_url: 'https://crm.pauseai.info/optout' })
 			expect(error.code).toBe('invalid_request')
 			expect(error.message).toContain('unsubscribe_url')

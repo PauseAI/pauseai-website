@@ -700,8 +700,8 @@ describe('onboarding submit: CRM intake', () => {
 		env.ONBOARDING_CONTINUATION_SECRET = 'test-secret'
 		env.ONBOARDING_CONTINUATION_ENFORCE = 'true'
 		env.CRM_INTAKE_ENABLED = 'true'
-		env.CRM_INTAKE_URL = 'https://crm.example.org'
-		env.CRM_INTAKE_KEY = 'test-key'
+		env.CRM_URL = 'https://crm.example.org'
+		env.CRM_KEY = 'test-key'
 		mockWrites()
 		getRecord.mockReset().mockResolvedValue(UK_ROW)
 		nationalGroups = CHAPTERS
