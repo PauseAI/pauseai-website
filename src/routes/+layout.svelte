@@ -1,7 +1,8 @@
 <script lang="ts">
 	import type { GeoApiResponse } from '$api/geo/+server'
 	import { browser } from '$app/environment'
-	import { page } from '$app/state'
+	import { beforeNavigate } from '$app/navigation'
+	import { page, updated } from '$app/state'
 	import Banner from '$lib/components/Banner.svelte'
 	import Hero from '$lib/components/Hero.svelte'
 	import Link from '$lib/components/Link.svelte'
@@ -82,6 +83,13 @@
 	let visitorCountry: string | null = $state(null)
 	let hero = $derived(deLocalizeHref(page.url.pathname) === '/')
 	let embed = $derived(page.route.id?.startsWith('/embed/') ?? false)
+
+	// After a deploy the old chunks are gone, so a client-side navigation from this tab would fail.
+	beforeNavigate(({ willUnload, to }) => {
+		if (!updated.current || willUnload || !to?.url) return
+		const samePage = to.url.pathname === location.pathname && to.url.search === location.search
+		if (!samePage) location.href = to.url.href
+	})
 
 	onMount(async () => {
 		document.documentElement.removeAttribute('data-waiting')
