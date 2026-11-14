@@ -1,6 +1,6 @@
 import { url } from '$lib/config.js'
 import { mintVerificationToken, verificationLink } from '$lib/server/emailVerification'
-import { reportError } from '$lib/server/sentry'
+import { flushReports, reportError } from '$lib/server/sentry'
 import { baseContent } from './copy.js'
 import { composeBlocks, groupOf, resolveIntentBucket } from './blocks.js'
 import { getChapterForOnboardingEmail, lookupChapterForOnboardingEmail } from './chapter.js'
@@ -175,6 +175,10 @@ async function chapterLinks(
 			operation: 'onboardingEmailV2ChapterLinks',
 			recordId: params.recordId
 		})
+		// Nothing else sends this report: the chapter read may succeed after the deadline.
+		const sent = flushReports()
+		if (params.waitUntil) params.waitUntil(sent)
+		else await sent
 		return []
 	}
 }
