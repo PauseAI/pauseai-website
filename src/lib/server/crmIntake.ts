@@ -154,7 +154,8 @@ export async function reportCrmProblem(
 	options: { fingerprint: string[]; level: 'error' | 'warning' }
 ): Promise<void> {
 	console.warn(`[${details.check}] not accepted`, details)
-	await reportError(new Error(message), details, options)
+	// Sentry alert rules match on the `check` tag.
+	await reportError(new Error(message), details, { ...options, tags: { check: details.check } })
 	await flushReports()
 }
 

@@ -166,7 +166,11 @@ describe('submitSignup', () => {
 			outcome: 'error',
 			cause: 'timeout'
 		})
-		expect(options).toMatchObject({ level: 'error', fingerprint: ['crm-signup', 'error'] })
+		expect(options).toMatchObject({
+			level: 'error',
+			fingerprint: ['crm-signup', 'error'],
+			tags: { check: 'crm-signup' }
+		})
 		expect(JSON.stringify(reportError.mock.calls)).not.toContain('ada@example.org')
 	})
 

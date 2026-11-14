@@ -126,7 +126,11 @@ describe('signInCrm', () => {
 		const [error, context, options] = reportError.mock.calls[0]
 		expect((error as Error).message).toBe('CRM statement sign error')
 		expect(context).toMatchObject({ cause: 'http', httpStatus: 503, attempt: 2 })
-		expect(options).toEqual({ fingerprint: ['crm-statement', 'sign', 'error'], level: 'error' })
+		expect(options).toEqual({
+			fingerprint: ['crm-statement', 'sign', 'error'],
+			level: 'error',
+			tags: { check: 'crm-statement' }
+		})
 		expect(flushReports).toHaveBeenCalled()
 		const reported = JSON.stringify([reportError.mock.calls, vi.mocked(console.warn).mock.calls])
 		for (const secret of [KEY, 'ada@example.org', 'Ada Lovelace', 'I care']) {
@@ -209,7 +213,8 @@ describe('signInCrm', () => {
 		expect(fetchMock).toHaveBeenCalledOnce()
 		expect(reportError.mock.calls[0][2]).toEqual({
 			fingerprint: ['crm-statement', 'sign', 'refused:invalid_request'],
-			level: 'warning'
+			level: 'warning',
+			tags: { check: 'crm-statement' }
 		})
 	})
 })

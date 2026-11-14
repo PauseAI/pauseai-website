@@ -169,7 +169,8 @@ describe('reportToCrm', () => {
 			})
 			expect(options).toEqual({
 				fingerprint: ['crm-intake', `refused:${reason}`],
-				level: 'warning'
+				level: 'warning',
+				tags: { check: 'crm-intake' }
 			})
 		}
 		expect(flushReports).toHaveBeenCalledTimes(2)
@@ -179,7 +180,11 @@ describe('reportToCrm', () => {
 		fetchMock.mockImplementation(() => Promise.reject(new TypeError('fetch failed')))
 		expect(await reportToCrm(RECORD, TOKEN)).toBe('error')
 		const [, context, options] = reportError.mock.calls[0]
-		expect(options).toEqual({ fingerprint: ['crm-intake', 'error'], level: 'error' })
+		expect(options).toEqual({
+			fingerprint: ['crm-intake', 'error'],
+			level: 'error',
+			tags: { check: 'crm-intake' }
+		})
 		expect(context).toMatchObject({ outcome: 'error', cause: 'network' })
 		const reported = JSON.stringify(reportError.mock.calls)
 		expect(reported).toContain(RECORD.id)
