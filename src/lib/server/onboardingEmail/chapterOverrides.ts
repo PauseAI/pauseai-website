@@ -18,8 +18,8 @@ type ChapterOverride = {
 	name: string
 	language: OnboardingEmailLanguage
 	/** A version per intent bucket. A bucket left out gets the shared copy.
-	 *  `chapter` is the live National Groups row, so an override can use the chapter's own
-	 *  links rather than repeating them here. */
+	 *  `chapter` is the chapter's live row in the chapter list, so an override can use the
+	 *  chapter's own links rather than repeating them here. */
 	content: Partial<Record<IntentBucket, ChapterContent>>
 }
 
@@ -37,14 +37,14 @@ export type ResolvedOverride = {
 	content: ChapterContent
 }
 
-/** A link from the chapter's Airtable row, by the label chapter.ts gives it. */
+/** A link from the chapter's row in the CRM's chapter list, by the label chapter.ts gives it. */
 function chapterLink(chapter: ChapterBlockData | null, label: string): string | null {
 	return chapter?.links.find((link) => link.label === label)?.url ?? null
 }
 
 // Both UK emails are ported from the welcome emails PauseAI UK's director sent as MailerSend
 // tests on 2026-09-15, wording kept as written. Every link is fixed here at the chapter's
-// request rather than drawn from the National Groups row, which this section does not read,
+// request rather than drawn from the chapter list, which this section does not read,
 // so keeping the WhatsApp invite and the calendar current is an edit to this file.
 const UK_WHATSAPP_URL = 'https://chat.whatsapp.com/F0nj2RjLNeB1P1hyoDFsTz'
 const UK_EVENTS_CALENDAR_URL = 'https://luma.com/pauseai.uk'
@@ -251,17 +251,18 @@ const canada: ChapterOverride = {
 
 // PauseAI Sverige's own emails, one per intent, wording kept as the chapter lead wrote it apart
 // from clear typos.
-// The WhatsApp, calendar, Instagram and Facebook links come from the chapter's Airtable row, so
-// keeping them current is an Airtable edit, and a sentence is dropped when its link is missing
-// rather than shipping a dead one. The calendar must stay the public Luma page: the chapter's own drafts
-// link Luma's admin view, which members cannot open.
+// The WhatsApp, calendar, Instagram and Facebook links come from the chapter's row in the CRM's
+// chapter list, so keeping them current is a CRM edit, on the chapter's Chapter details page, and
+// a sentence is dropped when its link is missing rather than shipping a dead one. The calendar
+// must stay the public Luma page: the chapter's own drafts link Luma's admin view, which members
+// cannot open.
 //
 // The chapter's own words. The lines the skeleton adds around them are our Swedish and nobody
 // fluent has read them yet, which beats the alternative for these readers: the
 // English email. Flip this back if the chapter would rather it waited.
 const SWEDISH_COPY_APPROVED = true
 
-// Links the chapter's emails use that no National Groups field holds.
+// Links the chapter's emails use that the chapter list does not hold.
 const SWEDEN_CONTACTS_DOC =
 	'https://docs.google.com/document/d/1H9erkvaFwAmzqzx5VG28fQPUdg9UWM1__t6kP6DMReY/edit?usp=sharing'
 const SWEDEN_INTRO_DOC =
@@ -465,7 +466,7 @@ const sweden: ChapterOverride = {
 
 // PauseAI Deutschland's own emails, one per intent, wording kept as the chapter wrote it. The
 // confirm line and the newsletter line are theirs too, and are the `de` entry in fixed.ts.
-// Every link is fixed here rather than drawn from the National Groups row, so keeping the
+// Every link is fixed here rather than drawn from the chapter list, so keeping the
 // Discord and WhatsApp invites current is an edit to this file.
 const GERMANY_SITE = 'https://www.pause-ai.de'
 

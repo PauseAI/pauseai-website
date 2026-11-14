@@ -1,6 +1,6 @@
 import { url } from '$lib/config.js'
 import { mintVerificationToken, verificationLink } from '$lib/server/emailVerification'
-import { reportError } from '$lib/server/sentry'
+import { flushReports, reportError } from '$lib/server/sentry'
 import { baseContent } from './copy.js'
 import { composeBlocks, groupOf, resolveIntentBucket } from './blocks.js'
 import { getChapterForOnboardingEmail, lookupChapterForOnboardingEmail } from './chapter.js'
@@ -70,7 +70,7 @@ async function resolve(params: OnboardingEmailParams) {
 			params.languageOverride ?? resolveOnboardingEmailLanguage(params.country, params.languages),
 		chapterCountry: params.country,
 		chapterShare: params.chapterShare,
-		readChapter: () => getChapterForOnboardingEmail(params.country)
+		readChapter: () => getChapterForOnboardingEmail(params.country, params.waitUntil)
 	})
 }
 
@@ -123,7 +123,7 @@ export async function renderOnboardingEmail(
 /**
  * The v2 render (docs/onboarding-email-v2-contract.md): the caller has already decided the
  * routing, so this decides none of it. Copy and chapter override follow `routing`, never the
- * member's country; the routed chapter's links are read from National Groups as v1 reads them.
+ * member's country; the routed chapter's links are read from the chapter list as v1 reads them.
  * The verification link is always signed, with `secret`, over the record id and the address
  * being mailed.
  */
@@ -137,7 +137,7 @@ export async function renderOnboardingEmailV2(
 		await mintVerificationToken(secret, params.recordId, params.toEmail, now)
 	)
 	const routed = params.routing.kind === 'chapter' ? params.routing : null
-	// Routed by the CRM, a chapter is named even when its National Groups row cannot be read.
+	// Routed by the CRM, a chapter is named even when the chapter list cannot be read.
 	const { resolution, override } = await resolveAudience({
 		intent: params.intent,
 		language: params.language,
@@ -168,13 +168,17 @@ async function chapterLinks(
 	params: OnboardingEmailV2Params
 ): Promise<ChapterLink[]> {
 	try {
-		return (await lookupChapterForOnboardingEmail(routed.country))?.links ?? []
+		return (await lookupChapterForOnboardingEmail(routed.country, params.waitUntil))?.links ?? []
 	} catch (error) {
-		console.error('National Groups lookup failed, rendering without chapter links:', error)
+		console.error('Chapter lookup failed, rendering without chapter links:', error)
 		await reportError(error, {
 			operation: 'onboardingEmailV2ChapterLinks',
 			recordId: params.recordId
 		})
+		// Nothing else sends this report: the chapter read may succeed after the deadline.
+		const sent = flushReports()
+		if (params.waitUntil) params.waitUntil(sent)
+		else await sent
 		return []
 	}
 }

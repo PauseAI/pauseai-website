@@ -36,6 +36,22 @@ export async function reportError(
 }
 
 /**
+ * Reports a message that is not an error, such as a recovery. Never throws.
+ */
+export async function reportMessage(
+	message: string,
+	context?: Record<string, unknown>
+): Promise<void> {
+	try {
+		if (typeof Deno === 'undefined') return
+		const { captureMessage } = await import('@sentry/deno')
+		captureMessage(message, { extra: context, level: 'info' })
+	} catch (e) {
+		console.error('[Sentry Server lib] reportMessage failed:', e)
+	}
+}
+
+/**
  * Sends queued reports. Work running after the response (`waitUntil`) calls it
  * before it settles, since the edge runtime may stop once it does. Never throws.
  */
