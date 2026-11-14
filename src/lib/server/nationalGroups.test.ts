@@ -93,6 +93,16 @@ describe('getNationalGroups', () => {
 		expect(reportError.mock.calls[1][1]).toMatchObject({ servedStale: true })
 	})
 
+	it('treats an empty list as a failed read, serving the last good list', async () => {
+		callCrmRows.mockResolvedValueOnce(rows('Germany'))
+		await getNationalGroups()
+		vi.advanceTimersByTime(10 * 60 * 1000)
+		callCrmRows.mockResolvedValueOnce(rows())
+		expect(names(await getNationalGroups())).toEqual(['Germany'])
+		expect(reportError).toHaveBeenCalledOnce()
+		expect(reportError.mock.calls[0][1]).toMatchObject({ servedStale: true })
+	})
+
 	it('waits a minute after a failed read before trying again, serving the last good list', async () => {
 		callCrmRows.mockResolvedValueOnce(rows('Germany'))
 		await getNationalGroups()

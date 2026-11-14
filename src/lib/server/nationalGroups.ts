@@ -95,6 +95,8 @@ async function readGroups(): Promise<NationalGroup[]> {
 		const { cause, httpStatus } = failureDetails(answer)
 		throw new Error(`Chapter directory read failed: ${cause}${httpStatus ? ` ${httpStatus}` : ''}`)
 	}
+	// Every page that offers a chapter would drop it, so the last good list is served instead.
+	if (answer.rows.length === 0) throw new Error('Chapter directory read failed: empty list')
 	return answer.rows.map(rowToNationalGroup).sort((a, b) => a.name.localeCompare(b.name))
 }
 
