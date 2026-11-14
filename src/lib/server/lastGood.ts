@@ -2,11 +2,12 @@
 // instance which has never read the list can still serve it while the CRM is down. Store
 // only what the site already serves publicly.
 import { getStore, type Store } from '@netlify/blobs'
-import { env } from '$env/dynamic/private'
-import { reportError } from '$lib/server/sentry'
+import { crmBaseUrl } from '$lib/server/crmIntake'
+import { flushReports, reportError } from '$lib/server/sentry'
+import { withTimeout } from '$lib/server/withTimeout'
 
-// What this instance last wrote or read, per key, so an unchanged list costs no write.
-const lastSeen = new Map<string, string>()
+// Work kept alive past the response waits for this write, so a hung one must not hold it open.
+const WRITE_TIMEOUT_MS = 5000
 
 /**
  * The store and this list's key in it, or null where Netlify provides no Blobs context
@@ -14,16 +15,12 @@ const lastSeen = new Map<string, string>()
  * so the store is opened on each call rather than once per module.
  */
 function open(name: string): { store: Store; key: string } | null {
-	let crmHost: string
-	try {
-		crmHost = new URL(env.CRM_INTAKE_URL ?? '').host
-	} catch {
-		return null
-	}
+	const base = crmBaseUrl()
+	if (!base) return null
 	try {
 		// Site-wide stores are shared by every deploy context, so a deploy preview reading
 		// another CRM keeps its own copy instead of replacing production's.
-		return { store: getStore('last-good-lists'), key: `${crmHost}/${name}` }
+		return { store: getStore('last-good-lists'), key: `${base}/${name}` }
 	} catch (error) {
 		if ((error as Error)?.name !== 'MissingBlobsEnvironmentError') {
 			void reportError(error, { operation: 'lastGood.open', name })
@@ -32,49 +29,38 @@ function open(name: string): { store: Store; key: string } | null {
 	}
 }
 
-/** Stores `value` as `name`'s last good copy, unless this instance already holds it. Never rejects. */
+/** Stores `value` as `name`'s last good copy, and sends the report if that fails. Never rejects. */
 export async function saveLastGood(name: string, value: unknown): Promise<void> {
 	const opened = open(name)
 	if (!opened) return
-	const serialized = JSON.stringify(value)
-	if (lastSeen.get(opened.key) === serialized) return
 	try {
-		await opened.store.set(opened.key, serialized)
-		lastSeen.set(opened.key, serialized)
+		await withTimeout(
+			opened.store.set(opened.key, JSON.stringify(value)),
+			WRITE_TIMEOUT_MS,
+			`Writing the stored copy took over ${WRITE_TIMEOUT_MS} ms`
+		)
 	} catch (error) {
 		await reportError(error, { operation: 'lastGood.save', name })
+		await flushReports()
 	}
 }
 
 /**
  * `name`'s last good copy, unvalidated, or undefined when there is none or it doesn't
- * arrive within `timeoutMs`. Never rejects.
+ * arrive within `timeoutMs`. A failure is reported but not sent. Never rejects.
  */
 export async function readLastGood(name: string, timeoutMs: number): Promise<unknown> {
 	const opened = open(name)
 	if (!opened) return undefined
-	let timer: ReturnType<typeof setTimeout> | undefined
 	try {
-		const serialized = await Promise.race([
+		const serialized = await withTimeout(
 			opened.store.get(opened.key, { type: 'text' }),
-			new Promise<never>((_, reject) => {
-				timer = setTimeout(
-					() => reject(new Error(`Reading the stored copy took over ${timeoutMs} ms`)),
-					timeoutMs
-				)
-			})
-		])
-		if (serialized === null) return undefined
-		lastSeen.set(opened.key, serialized)
-		return JSON.parse(serialized)
+			timeoutMs,
+			`Reading the stored copy took over ${timeoutMs} ms`
+		)
+		return serialized === null ? undefined : JSON.parse(serialized)
 	} catch (error) {
 		await reportError(error, { operation: 'lastGood.read', name })
 		return undefined
-	} finally {
-		clearTimeout(timer)
 	}
-}
-
-export function resetLastGoodForTests(): void {
-	lastSeen.clear()
 }

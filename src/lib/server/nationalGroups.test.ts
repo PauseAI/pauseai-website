@@ -19,43 +19,17 @@ const readLastGood = vi.fn<(name: string, timeoutMs: number) => Promise<unknown>
 const saveLastGood = vi.fn<(name: string, value: unknown) => Promise<void>>()
 vi.mock('$lib/server/lastGood', () => ({ readLastGood, saveLastGood }))
 
-const { getNationalGroups, nationalGroupsAfterWork, resetNationalGroupsCacheForTests } =
+const { getNationalGroups, nationalGroupsBackgroundWork, resetNationalGroupsCacheForTests } =
 	await import('./nationalGroups')
 const crm = await vi.importActual<typeof import('$lib/server/crmIntake')>('$lib/server/crmIntake')
 
-const rows = (...countries: string[]): CrmRows => ({
-	ok: true,
-	rows: countries.map((country) => ({ country, leaders: [], image: null }))
-})
+const rows = (...countries: string[]) =>
+	({
+		ok: true,
+		rows: countries.map((country) => ({ country, leaders: [], image: null }))
+	}) satisfies CrmRows
 const down: CrmRows = { ok: false, cause: 'http', httpStatus: 500 }
 const names = (groups: { name: string }[] | null) => groups?.map((group) => group.name) ?? null
-const NO_LINKS_ROW = Object.fromEntries(
-	[
-		'xLink',
-		'blueskyLink',
-		'discordLink',
-		'whatsappLink',
-		'website',
-		'linktreeLink',
-		'instagramLink',
-		'tiktokLink',
-		'facebookLink',
-		'youtubeLink',
-		'linkedinLink',
-		'lumaLink',
-		'substackLink'
-	].map((link) => [link, ''])
-)
-/** A chapter row as a good read stores it. */
-async function storedGroup(country: string) {
-	callCrmRows.mockResolvedValueOnce(rows(country))
-	const [group] = (await getNationalGroups())!
-	resetNationalGroupsCacheForTests()
-	callCrmRows.mockReset()
-	saveLastGood.mockClear()
-	return JSON.parse(JSON.stringify(group)) as Record<string, unknown>
-}
-
 describe('getNationalGroups', () => {
 	beforeEach(() => {
 		resetNationalGroupsCacheForTests()
@@ -188,7 +162,7 @@ describe('getNationalGroups', () => {
 		expect(await getNationalGroups()).toBeNull()
 		expect(flushReports).toHaveBeenCalledOnce()
 		expect(sent).toBe(false)
-		const reportsSent = nationalGroupsAfterWork()
+		const reportsSent = nationalGroupsBackgroundWork()
 		send()
 		await reportsSent
 		expect(sent).toBe(true)
@@ -263,24 +237,21 @@ describe('getNationalGroups', () => {
 		let write: () => void = () => {}
 		saveLastGood.mockReturnValue(new Promise<void>((resolve) => (write = resolve)))
 		callCrmRows.mockResolvedValue(rows('Germany'))
-		const groups = await getNationalGroups()
-		expect(saveLastGood).toHaveBeenCalledExactlyOnceWith('chapters', groups)
+		await getNationalGroups()
+		expect(saveLastGood).toHaveBeenCalledExactlyOnceWith('chapters', rows('Germany').rows)
 		let settled = false
-		void nationalGroupsAfterWork().then(() => (settled = true))
+		void nationalGroupsBackgroundWork().then(() => (settled = true))
 		await Promise.resolve()
 		expect(settled).toBe(false)
 		write()
-		await nationalGroupsAfterWork()
+		await nationalGroupsBackgroundWork()
 		expect(settled).toBe(true)
 	})
 
 	it('serves the stored list on a cold instance while the CRM is down', async () => {
-		const stored = [{ ...(await storedGroup('Germany')), extra: 'never served' }]
-		readLastGood.mockResolvedValue(stored)
+		readLastGood.mockResolvedValue(rows('Germany').rows)
 		callCrmRows.mockResolvedValue(down)
-		const groups = await getNationalGroups()
-		expect(names(groups)).toEqual(['Germany'])
-		expect(groups![0]).not.toHaveProperty('extra')
+		expect(names(await getNationalGroups())).toEqual(['Germany'])
 		expect(readLastGood).toHaveBeenCalledExactlyOnceWith('chapters', 1000)
 		expect(reportError.mock.calls[0][1]).toMatchObject({
 			servedStale: false,
@@ -298,6 +269,42 @@ describe('getNationalGroups', () => {
 		expect(names(await getNationalGroups())).toEqual(['France'])
 	})
 
+	it('shares the stored copy with a caller that arrives while it is being read', async () => {
+		let finishStoredRead: (value: unknown) => void = () => {}
+		readLastGood.mockReturnValue(new Promise((resolve) => (finishStoredRead = resolve)))
+		callCrmRows.mockResolvedValue(down)
+		const first = getNationalGroups()
+		await vi.advanceTimersByTimeAsync(0)
+		expect(readLastGood).toHaveBeenCalledOnce()
+		const second = getNationalGroups()
+		finishStoredRead(rows('Germany').rows)
+		expect((await Promise.all([first, second])).map(names)).toEqual([['Germany'], ['Germany']])
+		expect(callCrmRows).toHaveBeenCalledOnce()
+	})
+
+	it('sends what the stored-copy read reported, on every failed read that makes one', async () => {
+		callCrmRows.mockResolvedValue(down)
+		await getNationalGroups()
+		vi.advanceTimersByTime(60 * 1000)
+		await getNationalGroups()
+		expect(reportError).toHaveBeenCalledOnce()
+		expect(readLastGood).toHaveBeenCalledTimes(2)
+		expect(flushReports).toHaveBeenCalledTimes(2)
+		expect(flushReports.mock.invocationCallOrder[1]).toBeGreaterThan(
+			readLastGood.mock.invocationCallOrder[1]
+		)
+	})
+
+	it("keeps each refresh's work apart, so a write still running holds no later refresh", async () => {
+		saveLastGood.mockReturnValueOnce(new Promise(() => {}))
+		callCrmRows.mockResolvedValue(rows('Germany'))
+		await getNationalGroups()
+		vi.advanceTimersByTime(10 * 60 * 1000)
+		await getNationalGroups()
+		expect(saveLastGood).toHaveBeenCalledTimes(2)
+		await expect(nationalGroupsBackgroundWork()).resolves.toBeUndefined()
+	})
+
 	it('does not read the stored list when this instance has its own', async () => {
 		callCrmRows.mockResolvedValueOnce(rows('Germany'))
 		await getNationalGroups()
@@ -311,11 +318,7 @@ describe('getNationalGroups', () => {
 	it.each([
 		['not a list', { name: 'Germany' }],
 		['an empty list', []],
-		['a row without a name', [{ id: 'Germany', leader: 'No', public: true }]],
-		[
-			'a row with a link that is not text',
-			[{ ...NO_LINKS_ROW, name: 'X', id: 'X', leader: 'No', public: true, xLink: 1 }]
-		]
+		['a list with a row that is not an object', [{ country: 'France' }, 'Germany']]
 	])(
 		'ignores a stored copy that is %s, and tries it again on the next failure',
 		async (_, stored) => {

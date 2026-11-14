@@ -1,5 +1,6 @@
 import type { NationalGroup, NationalGroupLink } from '$lib/types.js'
-import { getNationalGroups, nationalGroupsAfterWork } from '$lib/server/nationalGroups'
+import { getNationalGroups, nationalGroupsBackgroundWork } from '$lib/server/nationalGroups'
+import { withTimeout } from '$lib/server/withTimeout'
 import type { ChapterBlockData, ChapterLink, WaitUntil } from './types.js'
 
 // The CRM gives the v2 welcome render 10 seconds (pauseai-civicrm's SignupMail::RENDER_URL),
@@ -65,33 +66,24 @@ function groupToChapterBlock(group: NationalGroup): ChapterBlockData {
 
 /**
  * The cached chapter list (src/lib/server/nationalGroups.ts). Throws when no list can be
- * read, or none arrives within CHAPTER_READ_TIMEOUT_MS. The read, and any work it starts
- * (reports, the stored-copy write), are handed to `waitUntil`, so the runtime keeps both alive past the
- * response: a read cut short still fills the cache for the next email.
+ * read, or none arrives within CHAPTER_READ_TIMEOUT_MS. The read, and any work it starts,
+ * are handed to `waitUntil`, so the runtime keeps them alive past the response: a read cut
+ * short still fills the cache for the next email.
  */
 async function readChapters(waitUntil?: WaitUntil): Promise<NationalGroup[]> {
-	let timer: ReturnType<typeof setTimeout> | undefined
 	const read = getNationalGroups()
 	try {
-		waitUntil?.(read.then(nationalGroupsAfterWork))
+		waitUntil?.(read.then(nationalGroupsBackgroundWork))
 	} catch (error) {
 		console.warn('Could not keep the chapter list read alive:', (error as Error)?.name)
 	}
-	try {
-		const groups = await Promise.race([
-			read,
-			new Promise<never>((_, reject) => {
-				timer = setTimeout(
-					() => reject(new Error(`Chapter list read took over ${CHAPTER_READ_TIMEOUT_MS} ms`)),
-					CHAPTER_READ_TIMEOUT_MS
-				)
-			})
-		])
-		if (!groups) throw new Error('The chapter list could not be read')
-		return groups
-	} finally {
-		clearTimeout(timer)
-	}
+	const groups = await withTimeout(
+		read,
+		CHAPTER_READ_TIMEOUT_MS,
+		`Chapter list read took over ${CHAPTER_READ_TIMEOUT_MS} ms`
+	)
+	if (!groups) throw new Error('The chapter list could not be read')
+	return groups
 }
 
 /**

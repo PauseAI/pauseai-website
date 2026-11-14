@@ -7,11 +7,12 @@ const blobs = vi.hoisted(() => ({
 }))
 vi.mock('@netlify/blobs', () => ({ getStore: blobs.getStore }))
 const reportError = vi.fn<(error: unknown, context?: Record<string, unknown>) => Promise<void>>()
-vi.mock('$lib/server/sentry', () => ({ reportError }))
+const flushReports = vi.fn<() => Promise<void>>()
+vi.mock('$lib/server/sentry', () => ({ reportError, flushReports }))
 const env = vi.hoisted((): Record<string, string | undefined> => ({}))
 vi.mock('$env/dynamic/private', () => ({ env }))
 
-const { readLastGood, resetLastGoodForTests, saveLastGood } = await import('./lastGood')
+const { readLastGood, saveLastGood } = await import('./lastGood')
 
 const missingEnvironment = () => {
 	const error = new Error('The environment has not been configured to use Netlify Blobs.')
@@ -21,12 +22,12 @@ const missingEnvironment = () => {
 
 describe('lastGood', () => {
 	beforeEach(() => {
-		resetLastGoodForTests()
 		env.CRM_INTAKE_URL = 'https://crm.example.org'
 		blobs.get.mockReset().mockResolvedValue(null)
 		blobs.set.mockReset().mockResolvedValue()
 		blobs.getStore.mockReset().mockReturnValue({ get: blobs.get, set: blobs.set })
 		reportError.mockReset().mockResolvedValue()
+		flushReports.mockReset().mockResolvedValue()
 	})
 	afterEach(() => vi.useRealTimers())
 
@@ -39,42 +40,57 @@ describe('lastGood', () => {
 		expect(reportError).not.toHaveBeenCalled()
 	})
 
-	it('writes only when the list changes', async () => {
+	it('writes every good list', async () => {
 		await saveLastGood('chapters', ['Germany'])
 		await saveLastGood('chapters', ['Germany'])
-		expect(blobs.set).toHaveBeenCalledExactlyOnceWith('crm.example.org/chapters', '["Germany"]')
-		await saveLastGood('chapters', ['Germany', 'France'])
-		expect(blobs.set).toHaveBeenCalledTimes(2)
+		expect(blobs.set.mock.calls).toEqual([
+			['https://crm.example.org/chapters', '["Germany"]'],
+			['https://crm.example.org/chapters', '["Germany"]']
+		])
 	})
 
-	it('does not write back a list it has just read', async () => {
-		blobs.get.mockResolvedValue('["Germany"]')
-		expect(await readLastGood('chapters', 1000)).toEqual(['Germany'])
-		await saveLastGood('chapters', ['Germany'])
-		expect(blobs.set).not.toHaveBeenCalled()
-	})
-
-	it('writes again after a failed write, and reports the failure', async () => {
+	it('reports a failed write, then sends the report', async () => {
 		blobs.set.mockRejectedValueOnce(new Error('503'))
 		await expect(saveLastGood('chapters', ['Germany'])).resolves.toBeUndefined()
 		expect(reportError).toHaveBeenCalledOnce()
-		await saveLastGood('chapters', ['Germany'])
-		expect(blobs.set).toHaveBeenCalledTimes(2)
+		expect(flushReports).toHaveBeenCalledOnce()
+		expect(flushReports.mock.invocationCallOrder[0]).toBeGreaterThan(
+			reportError.mock.invocationCallOrder[0]
+		)
 	})
 
-	it('keeps each CRM host apart, and has no copy without one', async () => {
+	it('cuts a hung write off at its time limit, then reports it and sends the report', async () => {
+		vi.useFakeTimers()
+		blobs.set.mockReturnValue(new Promise(() => {}))
+		const save = saveLastGood('chapters', ['Germany'])
+		await vi.advanceTimersByTimeAsync(5000)
+		await expect(save).resolves.toBeUndefined()
+		expect(reportError).toHaveBeenCalledOnce()
+		expect(flushReports).toHaveBeenCalledOnce()
+	})
+
+	it('keeps each CRM base URL apart, path included, and has no copy without one', async () => {
+		env.CRM_INTAKE_URL = 'https://crm.example.org/production/'
 		await saveLastGood('chapters', ['Germany'])
-		env.CRM_INTAKE_URL = 'https://staging.example.org'
+		env.CRM_INTAKE_URL = 'https://crm.example.org/staging'
 		await saveLastGood('chapters', ['Germany'])
 		expect(blobs.set.mock.calls.map(([key]) => key)).toEqual([
-			'crm.example.org/chapters',
-			'staging.example.org/chapters'
+			'https://crm.example.org/production/chapters',
+			'https://crm.example.org/staging/chapters'
 		])
 		env.CRM_INTAKE_URL = undefined
 		await saveLastGood('chapters', ['France'])
 		expect(await readLastGood('chapters', 1000)).toBeUndefined()
 		expect(blobs.set).toHaveBeenCalledTimes(2)
 		expect(blobs.get).not.toHaveBeenCalled()
+	})
+
+	it('reads the copy stored under its key', async () => {
+		blobs.get.mockResolvedValue('["Germany"]')
+		expect(await readLastGood('chapters', 1000)).toEqual(['Germany'])
+		expect(blobs.get).toHaveBeenCalledExactlyOnceWith('https://crm.example.org/chapters', {
+			type: 'text'
+		})
 	})
 
 	it('cuts a slow read off at its timeout and reports it', async () => {
@@ -92,5 +108,6 @@ describe('lastGood', () => {
 		blobs.get.mockResolvedValueOnce('not json')
 		expect(await readLastGood('chapters', 1000)).toBeUndefined()
 		expect(reportError).toHaveBeenCalledTimes(2)
+		expect(flushReports).not.toHaveBeenCalled()
 	})
 })

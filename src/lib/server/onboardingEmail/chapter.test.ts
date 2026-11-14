@@ -15,8 +15,8 @@ const groups = [
 ]
 
 const getNationalGroups = vi.fn<() => Promise<unknown[] | null>>()
-const nationalGroupsAfterWork = vi.fn<() => Promise<void>>()
-vi.mock('$lib/server/nationalGroups', () => ({ getNationalGroups, nationalGroupsAfterWork }))
+const nationalGroupsBackgroundWork = vi.fn<() => Promise<void>>()
+vi.mock('$lib/server/nationalGroups', () => ({ getNationalGroups, nationalGroupsBackgroundWork }))
 
 const {
 	CHAPTER_READ_TIMEOUT_MS,
@@ -27,7 +27,7 @@ const {
 
 beforeEach(() => {
 	getNationalGroups.mockReset().mockResolvedValue(groups)
-	nationalGroupsAfterWork.mockReset().mockResolvedValue()
+	nationalGroupsBackgroundWork.mockReset().mockResolvedValue()
 	vi.spyOn(console, 'error').mockImplementation(() => {})
 })
 
@@ -78,7 +78,7 @@ describe('getChapterForOnboardingEmail', () => {
 		let finishRead: (groups: null) => void = () => {}
 		getNationalGroups.mockReturnValue(new Promise((resolve) => (finishRead = resolve)))
 		let sendReports: () => void = () => {}
-		nationalGroupsAfterWork.mockReturnValue(new Promise((resolve) => (sendReports = resolve)))
+		nationalGroupsBackgroundWork.mockReturnValue(new Promise((resolve) => (sendReports = resolve)))
 		const lookup = lookupChapterForOnboardingEmail('Sweden', waitUntil)
 		lookup.catch(() => {})
 		await vi.advanceTimersByTimeAsync(CHAPTER_READ_TIMEOUT_MS)

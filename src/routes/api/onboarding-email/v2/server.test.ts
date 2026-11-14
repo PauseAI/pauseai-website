@@ -6,7 +6,7 @@ vi.mock('$lib/server/sentry', () => ({ reportError: vi.fn() }))
 vi.mock('$lib/server/nationalGroups', () => ({
 	getNationalGroups: () =>
 		Promise.resolve([{ name: 'Netherlands', whatsappLink: 'https://chat.whatsapp.com/example' }]),
-	nationalGroupsAfterWork: () => Promise.resolve()
+	nationalGroupsBackgroundWork: () => Promise.resolve()
 }))
 
 const { POST } = await import('./+server.js')
