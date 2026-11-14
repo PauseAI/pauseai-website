@@ -40,6 +40,14 @@ export function getDevContext(env: EnvContext): string {
 }
 
 /**
+ * Sentry environment from Netlify's build-time CONTEXT (production, deploy-preview,
+ * branch-deploy, dev). The "CRM signup not saved" alert rule filters on `production`.
+ */
+export function sentryEnvironment(context: string | undefined): string {
+	return context || 'development'
+}
+
+/**
  * Derive locale from branch name for l10n-xx branches (e.g. l10n-es → "es")
  */
 function branchLocale(env: EnvContext): string | undefined {
