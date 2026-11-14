@@ -2,11 +2,16 @@
 	import * as Sentry from '@sentry/svelte'
 	import { afterNavigate, goto, replaceState } from '$app/navigation'
 	import { page } from '$app/state'
-	import { verificationConfirmedParameter, verificationNeedsClick } from '$lib/config'
+	import {
+		verificationConfirmedParameter,
+		verificationNeedsClick,
+		verificationParameter
+	} from '$lib/config'
 	import toast from 'svelte-french-toast'
 	import Button from '$lib/components/Button.svelte'
 	import Link from '$lib/components/Link.svelte'
 	import Processing from '$lib/components/Processing.svelte'
+	import LinkMissing from './LinkMissing.svelte'
 	import SignatureConfirmed from './SignatureConfirmed.svelte'
 
 	const NEW_LINK_MAIL =
@@ -19,6 +24,8 @@
 
 	let errorMessage: string | undefined = $state()
 	let expired = $state(false)
+	let notFound = $state(false)
+	let linkMissing = $state(false)
 	let verificationStarted = false
 	let awaitingClick = $state(false)
 	let signatureConfirmed = $state(false)
@@ -52,7 +59,9 @@
 			console.error('Failed to remove the verification link from the address bar:', error)
 			Sentry.captureException(error)
 		}
-		if (verificationNeedsClick(linkParameters)) awaitingClick = true
+		// The strip above means a reload, a restored tab or Back lands here with no query.
+		if (!new URLSearchParams(linkParameters).get(verificationParameter)) linkMissing = true
+		else if (verificationNeedsClick(linkParameters)) awaitingClick = true
 		else if (await verify(linkParameters)) {
 			toast.success('Your email has been verified!')
 			void goto('/')
@@ -65,6 +74,7 @@
 			signatureConfirmed = true
 	}
 
+	// Never throws: callers don't handle rejections, so a failure must end up on the page.
 	async function verify(body: string): Promise<boolean> {
 		try {
 			const response = await fetch('/api/verify', {
@@ -73,17 +83,14 @@
 				body
 			})
 			if (response.ok) return true
-			if (response.status === 410) {
-				expired = true
-				return false
-			}
-			const errorText = await response.text()
-			throw new Error(`Verification failed: ${errorText || response.statusText}`)
+			if (response.status === 410) expired = true
+			else if (response.status === 404) notFound = true
+			else errorMessage = `Verification failed: ${(await response.text()) || response.statusText}`
 		} catch (error) {
-			if (error instanceof Error) errorMessage = error.message
-			else errorMessage = 'Verification failed with unexpected error.'
-			throw error
+			Sentry.captureException(error)
+			errorMessage = 'Verification failed. Please check your connection and try again.'
 		}
+		return false
 	}
 </script>
 
@@ -97,6 +104,18 @@
 	</p>
 	<Button onclick={confirm}>Confirm my signature</Button>
 	<p class="not-you">Didn't sign it? Just close this page, and nothing will be published.</p>
+{:else if linkMissing}
+	<LinkMissing />
+{:else if notFound}
+	<h1>This link is not valid</h1>
+	<p>
+		We could not match this link to a signup. Only part of it may have been copied, or the signup
+		may no longer exist.
+	</p>
+	<p>
+		Try opening the link from your email again. If that does not work,
+		<Link href="mailto:info@pauseai.info">email us at info@pauseai.info</Link> and we will help.
+	</p>
 {:else if expired}
 	<h1>This link has expired</h1>
 	<p>
