@@ -4,12 +4,36 @@ import type { HandleClientError } from '@sveltejs/kit'
 // makes prerendered pages block hydration on a runtime fetch of /_app/env.js
 // from the SSR function — one 502 and the page loses all JS.
 import * as publicEnv from '$env/static/public'
+import { navigating } from '$app/state'
 import { SENTRY_RELEASE, redactLinkCredentials } from '$lib/sentry'
-import { isChunkLoadError, isStaleBuild, reloadOnce, wasReloadRefused } from '$lib/staleBuild'
+import { isChunkLoadError, isStaleBuild, reloadOnce } from '$lib/staleBuild'
+
+const GENERIC_ERROR = { message: 'An unexpected error occurred.' }
 
 let dsn: string | undefined
 
+// SvelteKit preloads a link's route when the pointer rests on or presses the link. A failure there
+// needs no reload: following the link makes the router see the new deploy and do a full load.
+const LINK_PRELOAD_WINDOW_MS = 10_000
+let lastPointerOnLink = -Infinity
+
+function notePointerOnLink(event: PointerEvent) {
+	if (event.target instanceof Element && event.target.closest('a[href]')) {
+		lastPointerOnLink = performance.now()
+	}
+}
+
+function reloadOnStaleImport({ payload }: VitePreloadErrorEvent) {
+	if (navigating.to || !isChunkLoadError(payload)) return
+	if (performance.now() - lastPointerOnLink < LINK_PRELOAD_WINDOW_MS) return
+	void isStaleBuild().then((stale) => stale && reloadOnce())
+}
+
 export const init = () => {
+	window.addEventListener('vite:preloadError', reloadOnStaleImport)
+	for (const type of ['pointermove', 'pointerdown'] as const) {
+		window.addEventListener(type, notePointerOnLink, { capture: true, passive: true })
+	}
 	dsn = (publicEnv as Record<string, string | undefined>).PUBLIC_SENTRY_DSN
 	const release = SENTRY_RELEASE
 
@@ -30,17 +54,7 @@ export const init = () => {
 					}
 					return breadcrumb
 				},
-				async beforeSend(event, hint) {
-					// A tab on a replaced deploy fails to import the chunks that deploy removed, also
-					// outside navigation (eager node imports, lazy components). Navigation recovers with
-					// a full load (router, root layout, handleError); these rejections are no bug.
-					if (
-						isChunkLoadError(hint.originalException) &&
-						(await isStaleBuild()) &&
-						!wasReloadRefused()
-					) {
-						return null
-					}
+				beforeSend(event) {
 					if (event.request?.url) event.request.url = redactLinkCredentials(event.request.url)
 					return event
 				}
@@ -52,12 +66,12 @@ export const init = () => {
 }
 
 export const handleError: HandleClientError = async ({ error, event, status, message }) => {
-	if (isChunkLoadError(error) && (await isStaleBuild())) {
-		// The current URL means hydration of a page from a replaced deploy, so reload it. Another URL
-		// is a link preload; the router does a full load once that link is followed.
-		if (event.url.href !== location.href || reloadOnce()) {
-			return { message: 'An unexpected error occurred.' }
-		}
+	// Navigation failures never get here on a replaced deploy: the router checks for one first and
+	// does a full load. So the current page means its hydration failed; another URL is a link preload.
+	const isCurrentPage =
+		event.url.pathname === location.pathname && event.url.search === location.search
+	if (isChunkLoadError(error) && isCurrentPage && (await isStaleBuild()) && reloadOnce()) {
+		return GENERIC_ERROR
 	}
 	if (dsn) {
 		Sentry.captureException(error, {
@@ -69,5 +83,5 @@ export const handleError: HandleClientError = async ({ error, event, status, mes
 			}
 		})
 	}
-	return { message: 'An unexpected error occurred.' }
+	return GENERIC_ERROR
 }

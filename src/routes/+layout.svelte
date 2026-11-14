@@ -84,10 +84,12 @@
 	let hero = $derived(deLocalizeHref(page.url.pathname) === '/')
 	let embed = $derived(page.route.id?.startsWith('/embed/') ?? false)
 
-	// After a deploy the old chunks are gone, so a client-side navigation from this tab would fail.
-	beforeNavigate(({ willUnload, to }) => {
+	// Once a newer deploy is live, a client-side navigation would try chunks that are gone, and an
+	// old client talking to the new server can break without any chunk error (data shapes, remote
+	// function ids). A full load avoids both.
+	beforeNavigate(({ willUnload, from, to }) => {
 		if (!updated.current || willUnload || !to?.url) return
-		const samePage = to.url.pathname === location.pathname && to.url.search === location.search
+		const samePage = from?.url.pathname === to.url.pathname && from.url.search === to.url.search
 		if (!samePage) location.href = to.url.href
 	})
 
