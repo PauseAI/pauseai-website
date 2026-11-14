@@ -1,5 +1,5 @@
 // Statement signatures in CiviCRM: PauseaiStatement.sign, verify and publicList, called with
-// the intake API account's key (crmIntake.ts). The contract is pauseai-civicrm's
+// the website API account's key (crmIntake.ts). The contract is pauseai-civicrm's
 // docs/intake-endpoint-plan.md, "Statement signatures".
 //
 // Emails and other submitted values must never reach a log or a report.

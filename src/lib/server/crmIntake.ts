@@ -1,4 +1,4 @@
-// callCrm and callCrmRows call CiviCRM's API4 as the intake API account (CRM_URL,
+// callCrm and callCrmRows call CiviCRM's API4 as the website API account (CRM_URL,
 // CRM_KEY). The rest of this file reports each Members row the onboarding
 // form writes to CiviCRM's member intake (PauseaiMemberIntake.submit). The
 // contract, outcome codes included, is pauseai-civicrm's
@@ -49,7 +49,7 @@ export const isRow = (value: unknown): value is Record<string, unknown> =>
 export const crmBaseUrl = (): string | undefined => env.CRM_URL?.replace(/\/+$/, '') || undefined
 
 /**
- * Calls one API4 action (`Entity/action`) as the intake API account, giving up
+ * Calls one API4 action (`Entity/action`) as the website API account, giving up
  * after `timeoutMs`, and answers the first row of `values`. Never rejects: a failure
  * is an answer with what caused it.
  */

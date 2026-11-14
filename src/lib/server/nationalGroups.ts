@@ -1,5 +1,5 @@
 // The active national chapters, read from CiviCRM's chapter directory
-// (PauseaiChapterDetails.publicList, with the intake API account's key; the contract is
+// (PauseaiChapterDetails.publicList, with the website API account's key; the contract is
 // pauseai-civicrm's docs/intake-endpoint-plan.md, "The chapter directory") at most once
 // per TTL per server instance: /api/national-groups is fetched by every onboarding form
 // mount (the CDN absorbs most of those), and the onboarding emails read it on every render.

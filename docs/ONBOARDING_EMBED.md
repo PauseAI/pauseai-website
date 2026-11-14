@@ -132,7 +132,7 @@ Three more report each written row to the CRM (see "CRM intake" in [`docs/join-f
 
 - `CRM_INTAKE_ENABLED`: `true` sends each row the form writes to CiviCRM's member intake after the response; anything else sends nothing. Has no effect in stub mode.
 - `CRM_URL`: the CRM's base URL, e.g. `https://crm.pauseai.info`.
-- `CRM_KEY`: the API key of the CRM's member intake account. A secret: it is sent only in the `X-Civi-Auth` header and never logged or reported.
+- `CRM_KEY`: the API key of the CRM's website API account. A secret: it is sent only in the `X-Civi-Auth` header and never logged or reported.
 
 ## Related
 
