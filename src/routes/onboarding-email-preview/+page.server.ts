@@ -2,7 +2,10 @@ export const prerender = false
 
 import { dev } from '$app/environment'
 import { groupOf, resolveIntentBucket } from '$lib/server/onboardingEmail/blocks.js'
-import { listActiveChapterCountries } from '$lib/server/onboardingEmail/chapter.js'
+import {
+	listActiveChapterCountries,
+	platformWaitUntil
+} from '$lib/server/onboardingEmail/chapter.js'
 import { describeChapterOverride } from '$lib/server/onboardingEmail/chapterOverrides.js'
 import { resolveOnboardingEmailLanguage } from '$lib/server/onboardingEmail/language.js'
 import { GLOBAL_DISCORD_URL, WELCOME_CALLS_URL } from '$lib/server/onboardingEmail/brand.js'
@@ -42,7 +45,7 @@ function parseLanguage(value: string | null): BaseLanguage {
 	return LANGUAGES.includes(value as BaseLanguage) ? (value as BaseLanguage) : DEFAULTS.language
 }
 
-export const load: PageServerLoad = async ({ url }) => {
+export const load: PageServerLoad = async ({ url, platform }) => {
 	if (!dev && !isTestHostname(url.hostname)) error(404, 'Not found')
 
 	const params = url.searchParams
@@ -78,11 +81,12 @@ export const load: PageServerLoad = async ({ url }) => {
 		chapterShare,
 		languageOverride: language,
 		htmlStyle,
-		airtable_id: 'previewRecordId123'
+		airtable_id: 'previewRecordId123',
+		waitUntil: platformWaitUntil(platform)
 	}
 	const [rendered, countryNames, resolved] = await Promise.all([
 		renderOnboardingEmail(renderParams),
-		listActiveChapterCountries(),
+		listActiveChapterCountries(renderParams.waitUntil),
 		resolveOnboardingEmail(renderParams)
 	])
 

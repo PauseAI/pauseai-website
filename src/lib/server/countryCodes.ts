@@ -1,6 +1,6 @@
 // ISO 3166-1 alpha-2 code -> the country's name as this website spells it: the spelling in the
 // onboarding form's COUNTRIES (src/lib/components/onboarding/options.ts) for every country the form
-// lists, which is what Airtable rows and the National Groups table hold, and the ISO short name
+// lists, which is what Airtable rows and the CRM's chapter directory hold, and the ISO short name
 // otherwise. Generated from Debian iso-codes 4.16.0 (iso_3166-1.json), with the form's spellings
 // matched by hand where ISO names the country differently. Kosovo (XK) is not in ISO 3166-1 but is
 // in common use, so it is added. countryCodes.test.ts fails when a form country has no code here.

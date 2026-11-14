@@ -91,6 +91,7 @@
 		"@fontsource/saira-condensed": "^5.3.0",
 		"@glidejs/glide": "~3.7.1",
 		"@lucide/svelte": "^1.70.0",
+		"@netlify/blobs": "^11.1.9",
 		"@notionhq/client": "^2.3.0",
 		"@number-flow/svelte": "^0.4.2",
 		"@pagefind/component-ui": "^1.6.0",

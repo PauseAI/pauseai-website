@@ -1,4 +1,4 @@
-import { env } from '$env/dynamic/private'
+import { crmBaseUrl } from '$lib/server/crmIntake'
 import { COUNTRY_BY_ISO_CODE } from '$lib/server/countryCodes'
 import { normaliseEmail } from '$lib/server/emailVerification'
 import { resolveOnboardingEmailLanguage } from './language.js'
@@ -119,7 +119,7 @@ function parseCountry(body: Record<string, unknown>, prefix = ''): string | unde
 		: optionalText(body.country, `${prefix}country`)
 }
 
-// A chapter needs a country: it selects the chapter's own email and its National Groups row.
+// A chapter needs a country: it selects the chapter's own email and its row in the chapter list.
 function routedCountry(routing: Record<string, unknown>): string {
 	const country = parseCountry(routing, 'routing.')
 	if (country !== undefined) return country
@@ -168,7 +168,8 @@ const MAX_URL = 2048
 // unreadable, there is no CRM to point an unsubscribe link at.
 function crmHost(): string | undefined {
 	try {
-		return env.CRM_INTAKE_URL ? new URL(env.CRM_INTAKE_URL).host : undefined
+		const base = crmBaseUrl()
+		return base ? new URL(base).host : undefined
 	} catch {
 		return undefined
 	}

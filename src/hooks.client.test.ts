@@ -36,8 +36,7 @@ describe('handleError on a chunk-load error from a replaced deploy', () => {
 		const hooks = await import('./hooks.client')
 		hooks.init()
 		const event = { url: new URL(href), params: {}, route: { id: null } }
-		// eslint-disable-next-line @typescript-eslint/no-explicit-any -- a minimal NavigationEvent
-		return hooks.handleError({ error, event: event as any, status: 500, message: 'Internal Error' })
+		return hooks.handleError({ error, event, status: 500, message: 'Internal Error' })
 	}
 
 	it('reloads a page whose hydration failed, without reporting', async () => {
