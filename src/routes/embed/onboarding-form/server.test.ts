@@ -18,8 +18,10 @@ vi.mock('$lib/server/substack', () => ({ subscribeToSubstackNewsletter: vi.fn() 
 vi.mock('$lib/server/sentry', () => ({ reportError, flushReports: () => Promise.resolve() }))
 // The National Chapters list the action reads (null: never read on this instance).
 let nationalGroups: { name: string; leader: string }[] | null
+const nationalGroupsWork = Promise.resolve()
 vi.mock('$lib/server/nationalGroups', () => ({
-	getNationalGroups: () => Promise.resolve(nationalGroups)
+	getNationalGroups: () => Promise.resolve(nationalGroups),
+	nationalGroupsBackgroundWork: () => nationalGroupsWork
 }))
 
 const { actions } = await import('./+page.server.js')
@@ -839,5 +841,16 @@ describe('onboarding submit: verified address', () => {
 		const result = await submit({ ...update(token), email: 'grace@example.org' })
 		expect(result).toMatchObject({ status: 502 })
 		expect(updateRecord).not.toHaveBeenCalled()
+	})
+})
+
+describe('onboarding submit: stub mode', () => {
+	it("keeps the chapter list read's work alive past the response", async () => {
+		for (const key of Object.keys(env)) delete env[key]
+		env.ONBOARDING_CONTINUATION_SECRET = 'test-secret'
+		nationalGroups = CHAPTERS
+		const waitUntil = vi.fn<(promise: Promise<unknown>) => void>()
+		expect(await submit(signup, { context: { waitUntil } })).toMatchObject({ success: true })
+		expect(waitUntil).toHaveBeenCalledExactlyOnceWith(nationalGroupsWork)
 	})
 })

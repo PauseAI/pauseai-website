@@ -42,8 +42,12 @@ const isCrmIntakeEnabled = () => env.CRM_INTAKE_ENABLED === 'true'
 /** Every row an action answers in `values`, or why there are none. */
 export type CrmRows = { ok: true; rows: Record<string, unknown>[] } | CrmFailure
 
-const isRow = (value: unknown): value is Record<string, unknown> =>
+export const isRow = (value: unknown): value is Record<string, unknown> =>
 	typeof value === 'object' && value !== null && !Array.isArray(value)
+
+/** CRM_INTAKE_URL without its trailing slashes, or undefined when unset. */
+export const crmBaseUrl = (): string | undefined =>
+	env.CRM_INTAKE_URL?.replace(/\/+$/, '') || undefined
 
 /**
  * Calls one API4 action (`Entity/action`) as the intake API account, giving up
@@ -80,7 +84,7 @@ async function callCrmValues<T>(
 	timeoutMs: number,
 	read: (values: unknown[]) => T | undefined
 ): Promise<{ ok: true; value: T } | CrmFailure> {
-	const base = env.CRM_INTAKE_URL?.replace(/\/+$/, '')
+	const base = crmBaseUrl()
 	const key = env.CRM_INTAKE_KEY
 	if (!base || !key) return { ok: false, cause: 'not_configured' }
 
