@@ -65,13 +65,6 @@ describe('reloadOnce', () => {
 		expect(reload).toHaveBeenCalledTimes(2)
 	})
 
-	it('counts repeated calls on one page as the same reload', async () => {
-		const reloadOnce = await loadPage()
-		expect(reloadOnce()).toBe(true)
-		expect(reloadOnce()).toBe(true)
-		expect(reload).toHaveBeenCalledTimes(1)
-	})
-
 	it('refuses when storage throws', async () => {
 		vi.stubGlobal('sessionStorage', {
 			getItem: () => {

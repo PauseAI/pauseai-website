@@ -14,6 +14,7 @@
 	import UsVisitorModal from '$lib/components/UsVisitorModal.svelte'
 	import { url as rootUrl } from '$lib/config'
 	import { searchOpen } from '$lib/stores/searchModal'
+	import { isSamePage } from '$lib/staleBuild'
 	import { deLocalizeHref } from '$lib/paraglide/runtime'
 	import type { BannerRule } from '$lib/types'
 	import '@fontsource/roboto-slab/400.css'
@@ -89,8 +90,7 @@
 	// function ids). A full load avoids both.
 	beforeNavigate(({ willUnload, from, to }) => {
 		if (!updated.current || willUnload || !to?.url) return
-		const samePage = from?.url.pathname === to.url.pathname && from.url.search === to.url.search
-		if (!samePage) location.href = to.url.href
+		if (!from || !isSamePage(from.url, to.url)) location.href = to.url.href
 	})
 
 	onMount(async () => {
