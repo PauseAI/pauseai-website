@@ -15,8 +15,11 @@ const flushReports = vi.fn<() => Promise<void>>()
 vi.mock('$lib/server/sentry', () => ({ reportError, reportMessage, flushReports }))
 // No CRM settings, and no CI: what a deployed runtime missing its settings may look like.
 vi.mock('$env/dynamic/private', () => ({ env: {} }))
+const readLastGood = vi.fn<(name: string, timeoutMs: number) => Promise<unknown>>()
+const saveLastGood = vi.fn<(name: string, value: unknown) => Promise<void>>()
+vi.mock('$lib/server/lastGood', () => ({ readLastGood, saveLastGood }))
 
-const { getNationalGroups, nationalGroupsReportsSent, resetNationalGroupsCacheForTests } =
+const { getNationalGroups, nationalGroupsAfterWork, resetNationalGroupsCacheForTests } =
 	await import('./nationalGroups')
 const crm = await vi.importActual<typeof import('$lib/server/crmIntake')>('$lib/server/crmIntake')
 
@@ -26,6 +29,32 @@ const rows = (...countries: string[]): CrmRows => ({
 })
 const down: CrmRows = { ok: false, cause: 'http', httpStatus: 500 }
 const names = (groups: { name: string }[] | null) => groups?.map((group) => group.name) ?? null
+const NO_LINKS_ROW = Object.fromEntries(
+	[
+		'xLink',
+		'blueskyLink',
+		'discordLink',
+		'whatsappLink',
+		'website',
+		'linktreeLink',
+		'instagramLink',
+		'tiktokLink',
+		'facebookLink',
+		'youtubeLink',
+		'linkedinLink',
+		'lumaLink',
+		'substackLink'
+	].map((link) => [link, ''])
+)
+/** A chapter row as a good read stores it. */
+async function storedGroup(country: string) {
+	callCrmRows.mockResolvedValueOnce(rows(country))
+	const [group] = (await getNationalGroups())!
+	resetNationalGroupsCacheForTests()
+	callCrmRows.mockReset()
+	saveLastGood.mockClear()
+	return JSON.parse(JSON.stringify(group)) as Record<string, unknown>
+}
 
 describe('getNationalGroups', () => {
 	beforeEach(() => {
@@ -35,6 +64,8 @@ describe('getNationalGroups', () => {
 		reportError.mockReset().mockResolvedValue()
 		reportMessage.mockReset().mockResolvedValue()
 		flushReports.mockReset().mockResolvedValue()
+		readLastGood.mockReset().mockResolvedValue(undefined)
+		saveLastGood.mockReset().mockResolvedValue()
 		vi.spyOn(console, 'error').mockImplementation(() => {})
 		vi.spyOn(console, 'warn').mockImplementation(() => {})
 		vi.useFakeTimers()
@@ -157,7 +188,7 @@ describe('getNationalGroups', () => {
 		expect(await getNationalGroups()).toBeNull()
 		expect(flushReports).toHaveBeenCalledOnce()
 		expect(sent).toBe(false)
-		const reportsSent = nationalGroupsReportsSent()
+		const reportsSent = nationalGroupsAfterWork()
 		send()
 		await reportsSent
 		expect(sent).toBe(true)
@@ -227,6 +258,76 @@ describe('getNationalGroups', () => {
 			failingForMinutes: 0
 		})
 	})
+
+	it('stores each good list, keeping the write alive past the read', async () => {
+		let write: () => void = () => {}
+		saveLastGood.mockReturnValue(new Promise<void>((resolve) => (write = resolve)))
+		callCrmRows.mockResolvedValue(rows('Germany'))
+		const groups = await getNationalGroups()
+		expect(saveLastGood).toHaveBeenCalledExactlyOnceWith('chapters', groups)
+		let settled = false
+		void nationalGroupsAfterWork().then(() => (settled = true))
+		await Promise.resolve()
+		expect(settled).toBe(false)
+		write()
+		await nationalGroupsAfterWork()
+		expect(settled).toBe(true)
+	})
+
+	it('serves the stored list on a cold instance while the CRM is down', async () => {
+		const stored = [{ ...(await storedGroup('Germany')), extra: 'never served' }]
+		readLastGood.mockResolvedValue(stored)
+		callCrmRows.mockResolvedValue(down)
+		const groups = await getNationalGroups()
+		expect(names(groups)).toEqual(['Germany'])
+		expect(groups![0]).not.toHaveProperty('extra')
+		expect(readLastGood).toHaveBeenCalledExactlyOnceWith('chapters', 1000)
+		expect(reportError.mock.calls[0][1]).toMatchObject({
+			servedStale: false,
+			servedStoredCopy: true
+		})
+
+		expect(names(await getNationalGroups())).toEqual(['Germany'])
+		vi.advanceTimersByTime(60 * 1000)
+		expect(names(await getNationalGroups())).toEqual(['Germany'])
+		expect(callCrmRows).toHaveBeenCalledTimes(2)
+		expect(readLastGood).toHaveBeenCalledOnce()
+
+		vi.advanceTimersByTime(60 * 1000)
+		callCrmRows.mockResolvedValue(rows('France'))
+		expect(names(await getNationalGroups())).toEqual(['France'])
+	})
+
+	it('does not read the stored list when this instance has its own', async () => {
+		callCrmRows.mockResolvedValueOnce(rows('Germany'))
+		await getNationalGroups()
+		vi.advanceTimersByTime(10 * 60 * 1000)
+		callCrmRows.mockResolvedValue(down)
+		expect(names(await getNationalGroups())).toEqual(['Germany'])
+		expect(readLastGood).not.toHaveBeenCalled()
+		expect(reportError.mock.calls[0][1]).toMatchObject({ servedStoredCopy: false })
+	})
+
+	it.each([
+		['not a list', { name: 'Germany' }],
+		['an empty list', []],
+		['a row without a name', [{ id: 'Germany', leader: 'No', public: true }]],
+		[
+			'a row with a link that is not text',
+			[{ ...NO_LINKS_ROW, name: 'X', id: 'X', leader: 'No', public: true, xLink: 1 }]
+		]
+	])(
+		'ignores a stored copy that is %s, and tries it again on the next failure',
+		async (_, stored) => {
+			readLastGood.mockResolvedValue(stored)
+			callCrmRows.mockResolvedValue(down)
+			expect(await getNationalGroups()).toBeNull()
+			expect(reportError.mock.calls[0][1]).toMatchObject({ servedStoredCopy: false })
+			vi.advanceTimersByTime(60 * 1000)
+			await getNationalGroups()
+			expect(readLastGood).toHaveBeenCalledTimes(2)
+		}
+	)
 
 	it('serves example groups in development when the CRM is not configured', async () => {
 		appEnvironment.dev = true

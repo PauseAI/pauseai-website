@@ -1,5 +1,5 @@
 import type { NationalGroup, NationalGroupLink } from '$lib/types.js'
-import { getNationalGroups, nationalGroupsReportsSent } from '$lib/server/nationalGroups'
+import { getNationalGroups, nationalGroupsAfterWork } from '$lib/server/nationalGroups'
 import type { ChapterBlockData, ChapterLink, WaitUntil } from './types.js'
 
 // The CRM gives the v2 welcome render 10 seconds (pauseai-civicrm's SignupMail::RENDER_URL),
@@ -65,15 +65,15 @@ function groupToChapterBlock(group: NationalGroup): ChapterBlockData {
 
 /**
  * The cached chapter list (src/lib/server/nationalGroups.ts). Throws when no list can be
- * read, or none arrives within CHAPTER_READ_TIMEOUT_MS. The read, and the sending of any
- * report it makes, are handed to `waitUntil`, so the runtime keeps both alive past the
+ * read, or none arrives within CHAPTER_READ_TIMEOUT_MS. The read, and any work it starts
+ * (reports, the stored-copy write), are handed to `waitUntil`, so the runtime keeps both alive past the
  * response: a read cut short still fills the cache for the next email.
  */
 async function readChapters(waitUntil?: WaitUntil): Promise<NationalGroup[]> {
 	let timer: ReturnType<typeof setTimeout> | undefined
 	const read = getNationalGroups()
 	try {
-		waitUntil?.(read.then(nationalGroupsReportsSent))
+		waitUntil?.(read.then(nationalGroupsAfterWork))
 	} catch (error) {
 		console.warn('Could not keep the chapter list read alive:', (error as Error)?.name)
 	}

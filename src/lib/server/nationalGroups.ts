@@ -7,6 +7,7 @@ import type { NationalGroup } from '$lib/types.js'
 import { callCrmRows, failureDetails } from '$lib/server/crmIntake'
 import { dev } from '$app/environment'
 import { flushReports, reportError, reportMessage } from '$lib/server/sentry'
+import { readLastGood, saveLastGood } from '$lib/server/lastGood'
 
 const TTL_MS = 10 * 60 * 1000
 // After a failed read, the last good list (or none) is served this long before
@@ -15,6 +16,10 @@ const RETRY_AFTER_FAILURE_MS = 60 * 1000
 // The first failed read of an outage is reported at once, then at most this often.
 const REPORT_FAILING_EVERY_MS = 60 * 60 * 1000
 const TIMEOUT_MS = 5000
+// The welcome render waits CHAPTER_READ_TIMEOUT_MS (onboardingEmail/chapter.ts) for the
+// whole read, so after a fast CRM failure the stored copy must still arrive inside that.
+const STORED_COPY_TIMEOUT_MS = 1000
+const STORED_COPY = 'chapters'
 
 const NO_LINKS = {
 	xLink: '',
@@ -83,16 +88,62 @@ function rowToNationalGroup(row: Record<string, unknown>): NationalGroup {
 	}
 }
 
+const textOrUndefined = (value: unknown): value is string | undefined =>
+	value === undefined || typeof value === 'string'
+
+const LINK_KEYS = Object.keys(NO_LINKS) as (keyof typeof NO_LINKS)[]
+
+/** The stored copy as the chapter rows it was saved as, or null if it isn't a non-empty list of them. */
+function asStoredGroups(value: unknown): NationalGroup[] | null {
+	if (!Array.isArray(value) || value.length === 0) return null
+	const groups: NationalGroup[] = []
+	for (const item of value) {
+		if (typeof item !== 'object' || item === null) return null
+		const row = item as Record<string, unknown>
+		if (
+			typeof row.id !== 'string' ||
+			typeof row.name !== 'string' ||
+			typeof row.leader !== 'string' ||
+			row.public !== true ||
+			!textOrUndefined(row.email) ||
+			!textOrUndefined(row.image) ||
+			!LINK_KEYS.every((key) => typeof row[key] === 'string')
+		) {
+			return null
+		}
+		const links = Object.fromEntries(LINK_KEYS.map((key) => [key, row[key]])) as typeof NO_LINKS
+		groups.push({
+			...links,
+			id: row.id,
+			name: row.name,
+			leader: row.leader,
+			email: row.email,
+			public: true,
+			image: row.image
+		})
+	}
+	return groups
+}
+
 let cached: { groups: NationalGroup[]; readAt: number } | null = null
+// Served only while no read has succeeded on this instance.
+let stored: NationalGroup[] | null = null
 let outage: { since: number; lastFailedAt: number; reportedAt: number } | null = null
 let pending: Promise<NationalGroup[] | null> | null = null
-let reportsSent: Promise<void> = Promise.resolve()
+let afterWork: Promise<void> = Promise.resolve()
+
+const keepAlive = (work: Promise<void>) => {
+	afterWork = Promise.all([afterWork, work]).then(() => {})
+}
 
 /**
- * Settles once the last report about a read has been sent. Work kept alive past the
- * response waits for it after the read, since the edge runtime may stop once that work settles.
+ * Settles once the reports and the stored-copy write a read started are done. Work kept alive
+ * past the response waits for it after the read, since the edge runtime may stop once that
+ * work settles.
  */
-export const nationalGroupsReportsSent = (): Promise<void> => reportsSent
+export const nationalGroupsAfterWork = (): Promise<void> => afterWork
+
+const lastGoodGroups = () => cached?.groups ?? stored
 
 /** A failed read, with what may be reported about it. */
 class ReadFailure extends Error {
@@ -132,24 +183,30 @@ async function refresh(): Promise<NationalGroup[] | null> {
 		outage ??= { since: now, lastFailedAt: now, reportedAt: -Infinity }
 		outage.lastFailedAt = now
 		console.error('Reading national groups failed:', error)
+		if (!lastGoodGroups()) {
+			stored = asStoredGroups(await readLastGood(STORED_COPY, STORED_COPY_TIMEOUT_MS))
+		}
 		if (now - outage.reportedAt >= REPORT_FAILING_EVERY_MS) {
 			outage.reportedAt = now
 			await reportError(error, {
 				...outageFields(outage.since, now),
 				servedStale: cached !== null,
+				servedStoredCopy: cached === null && stored !== null,
 				...(error instanceof ReadFailure ? error.details : {})
 			})
 			// Not awaited: a caller waiting on the list should not also wait on Sentry.
-			reportsSent = flushReports()
+			keepAlive(flushReports())
 		}
 		// The last good list, however old, rather than none.
-		return cached?.groups ?? null
+		return lastGoodGroups()
 	}
 	const now = Date.now()
 	cached = { groups, readAt: now }
+	// Not awaited, like the reports.
+	keepAlive(saveLastGood(STORED_COPY, groups))
 	if (outage) {
 		await reportMessage('Chapter directory reads recovered', outageFields(outage.since, now))
-		reportsSent = flushReports()
+		keepAlive(flushReports())
 		outage = null
 	}
 	return groups
@@ -161,14 +218,15 @@ async function refresh(): Promise<NationalGroup[] | null> {
 export async function getNationalGroups(): Promise<NationalGroup[] | null> {
 	const now = Date.now()
 	if (cached && now - cached.readAt < TTL_MS) return cached.groups
-	if (outage && now - outage.lastFailedAt < RETRY_AFTER_FAILURE_MS) return cached?.groups ?? null
+	if (outage && now - outage.lastFailedAt < RETRY_AFTER_FAILURE_MS) return lastGoodGroups()
 	pending ??= refresh().finally(() => (pending = null))
 	return pending
 }
 
 export function resetNationalGroupsCacheForTests(): void {
 	cached = null
+	stored = null
 	outage = null
 	pending = null
-	reportsSent = Promise.resolve()
+	afterWork = Promise.resolve()
 }
