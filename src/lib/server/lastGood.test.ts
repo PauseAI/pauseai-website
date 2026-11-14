@@ -22,7 +22,7 @@ const missingEnvironment = () => {
 
 describe('lastGood', () => {
 	beforeEach(() => {
-		env.CRM_INTAKE_URL = 'https://crm.example.org'
+		env.CRM_URL = 'https://crm.example.org'
 		blobs.get.mockReset().mockResolvedValue(null)
 		blobs.set.mockReset().mockResolvedValue()
 		blobs.getStore.mockReset().mockReturnValue({ get: blobs.get, set: blobs.set })
@@ -84,15 +84,15 @@ describe('lastGood', () => {
 	})
 
 	it('keeps each CRM base URL apart, path included, and has no copy without one', async () => {
-		env.CRM_INTAKE_URL = 'https://crm.example.org/production/'
+		env.CRM_URL = 'https://crm.example.org/production/'
 		await saveLastGood('chapters', ['Germany'])
-		env.CRM_INTAKE_URL = 'https://crm.example.org/staging'
+		env.CRM_URL = 'https://crm.example.org/staging'
 		await saveLastGood('chapters', ['Germany'])
 		expect(blobs.set.mock.calls.map(([key]) => key)).toEqual([
 			'https://crm.example.org/production/chapters',
 			'https://crm.example.org/staging/chapters'
 		])
-		env.CRM_INTAKE_URL = undefined
+		env.CRM_URL = undefined
 		await saveLastGood('chapters', ['France'])
 		expect(await readLastGood('chapters', 1000)).toBeUndefined()
 		expect(blobs.set).toHaveBeenCalledTimes(2)

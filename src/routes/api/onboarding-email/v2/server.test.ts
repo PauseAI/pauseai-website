@@ -49,7 +49,7 @@ const refusal = async (response: Response) => ((await response.json()) as Refusa
 beforeEach(() => {
 	env.ONBOARDING_EMAIL_RENDER_V2_SECRET = SECRET
 	env.EMAIL_VERIFICATION_SECRET = VERIFICATION_SECRET
-	env.CRM_INTAKE_URL = 'https://crm.pauseai.info'
+	env.CRM_URL = 'https://crm.pauseai.info'
 })
 
 describe('POST /api/onboarding-email/v2', () => {

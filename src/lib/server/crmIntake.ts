@@ -1,5 +1,5 @@
-// callCrm and callCrmRows call CiviCRM's API4 as the intake API account (CRM_INTAKE_URL,
-// CRM_INTAKE_KEY). The rest of this file reports each Members row the onboarding
+// callCrm and callCrmRows call CiviCRM's API4 as the intake API account (CRM_URL,
+// CRM_KEY). The rest of this file reports each Members row the onboarding
 // form writes to CiviCRM's member intake (PauseaiMemberIntake.submit). The
 // contract, outcome codes included, is pauseai-civicrm's
 // docs/intake-endpoint-plan.md; docs/join-form-flow.md, "CRM intake", has where
@@ -45,9 +45,8 @@ export type CrmRows = { ok: true; rows: Record<string, unknown>[] } | CrmFailure
 export const isRow = (value: unknown): value is Record<string, unknown> =>
 	typeof value === 'object' && value !== null && !Array.isArray(value)
 
-/** CRM_INTAKE_URL without its trailing slashes, or undefined when unset. */
-export const crmBaseUrl = (): string | undefined =>
-	env.CRM_INTAKE_URL?.replace(/\/+$/, '') || undefined
+/** CRM_URL without its trailing slashes, or undefined when unset. */
+export const crmBaseUrl = (): string | undefined => env.CRM_URL?.replace(/\/+$/, '') || undefined
 
 /**
  * Calls one API4 action (`Entity/action`) as the intake API account, giving up
@@ -85,7 +84,7 @@ async function callCrmValues<T>(
 	read: (values: unknown[]) => T | undefined
 ): Promise<{ ok: true; value: T } | CrmFailure> {
 	const base = crmBaseUrl()
-	const key = env.CRM_INTAKE_KEY
+	const key = env.CRM_KEY
 	if (!base || !key) return { ok: false, cause: 'not_configured' }
 
 	const signal = AbortSignal.timeout(timeoutMs)
