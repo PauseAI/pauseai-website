@@ -3,7 +3,7 @@ import { afterEach, describe, expect, it, vi } from 'vitest'
 
 const page = vi.hoisted(() => ({ url: new URL('https://pauseai.info/verify') }))
 const afterNavigate = vi.hoisted(() => vi.fn<(callback: () => void) => void>())
-const sentry = vi.hoisted(() => ({ captureException: vi.fn() }))
+const sentry = vi.hoisted(() => ({ captureException: vi.fn(), captureMessage: vi.fn() }))
 
 vi.mock('$app/state', () => ({ page }))
 vi.mock('@sentry/svelte', () => sentry)
@@ -16,7 +16,7 @@ vi.mock('$app/navigation', () => ({
 
 const { default: Page } = await import('./+page.svelte')
 const { default: SignatureConfirmed } = await import('./SignatureConfirmed.svelte')
-const { default: LinkMissing } = await import('./LinkMissing.svelte')
+const { default: LinkProblem } = await import('./LinkProblem.svelte')
 
 /** Runs the page's start-up for `search` as a client navigation would, and lets it settle. */
 async function openPage(search: string) {
@@ -26,21 +26,8 @@ async function openPage(search: string) {
 	void render(Page).body
 	const [start] = afterNavigate.mock.calls[0]
 	start()
-	for (let i = 0; i < 5; i++) await new Promise((resolve) => setTimeout(resolve, 0))
-}
-
-/** Collects unhandled rejections raised while `run` executes. */
-async function unhandledRejections(run: () => Promise<void>) {
-	const rejections: unknown[] = []
-	const listener = (reason: unknown) => rejections.push(reason)
-	process.on('unhandledRejection', listener)
-	try {
-		await run()
-		await new Promise((resolve) => setTimeout(resolve, 10))
-	} finally {
-		process.off('unhandledRejection', listener)
-	}
-	return rejections
+	// A timer runs only once the microtasks of the mocked fetch chain have drained.
+	await new Promise((resolve) => setTimeout(resolve, 0))
 }
 
 describe('/verify', () => {
@@ -63,18 +50,24 @@ describe('/verify', () => {
 		expect(body).not.toMatch(/href="\/join"/)
 	})
 
-	it('explains a missing link instead of the raw API error', () => {
-		const { body } = render(LinkMissing)
-		expect(body).toMatch(/<h1[^>]*>No verification link found<\/h1>/)
-		expect(body).toMatch(/If you already confirmed your email, there is nothing more to do/)
+	it.each([
+		['missing', /No verification link found/, /opened without a verification link/],
+		['notFound', /This link is not valid/, /could not match this link to a signup/]
+	] as const)('explains a link problem (%s)', (reason, heading, explanation) => {
+		const { body } = render(LinkProblem, { props: { reason } })
+		expect(body).toMatch(heading)
+		expect(body).toMatch(explanation)
+		expect(body).toMatch(/open the link from your email again/)
 		expect(body).toMatch(/href="mailto:info@pauseai.info"/)
 	})
 })
 
+// Vitest fails the run on an unhandled rejection, so every test here also checks there is none.
 describe('/verify start-up', () => {
 	afterEach(() => {
 		vi.unstubAllGlobals()
 		sentry.captureException.mockClear()
+		sentry.captureMessage.mockClear()
 	})
 
 	it.each(['', '?table=statement'])(
@@ -87,18 +80,33 @@ describe('/verify start-up', () => {
 		}
 	)
 
-	it('shows a refused link without an unhandled rejection or a Sentry report', async () => {
-		const fetch = vi.fn().mockResolvedValue(new Response('Parameter "x" is wrong', { status: 400 }))
-		vi.stubGlobal('fetch', fetch)
-		expect(await unhandledRejections(() => openPage('?verificationKey=abc'))).toEqual([])
-		expect(fetch).toHaveBeenCalledOnce()
+	it.each([400, 404])(
+		'handles a %i without an unhandled rejection or a Sentry report',
+		async (status) => {
+			const fetch = vi.fn().mockResolvedValue(new Response('Record not found', { status }))
+			vi.stubGlobal('fetch', fetch)
+			await openPage('?verificationKey=abc')
+			expect(fetch).toHaveBeenCalledOnce()
+			expect(sentry.captureException).not.toHaveBeenCalled()
+			expect(sentry.captureMessage).not.toHaveBeenCalled()
+		}
+	)
+
+	it('reports a gateway error to Sentry once, without an unhandled rejection', async () => {
+		vi.stubGlobal('fetch', vi.fn().mockResolvedValue(new Response('', { status: 502 })))
+		await openPage('?verificationKey=abc')
+		expect(sentry.captureMessage).toHaveBeenCalledOnce()
+		expect(sentry.captureMessage).toHaveBeenCalledWith(
+			expect.stringContaining('502'),
+			expect.objectContaining({ fingerprint: ['verify', 'http', '502'] })
+		)
 		expect(sentry.captureException).not.toHaveBeenCalled()
 	})
 
 	it('reports a failed request to Sentry once, without an unhandled rejection', async () => {
 		const error = new TypeError('Failed to fetch')
 		vi.stubGlobal('fetch', vi.fn().mockRejectedValue(error))
-		expect(await unhandledRejections(() => openPage('?verificationKey=abc'))).toEqual([])
+		await openPage('?verificationKey=abc')
 		expect(sentry.captureException).toHaveBeenCalledOnce()
 		expect(sentry.captureException).toHaveBeenCalledWith(error)
 	})
