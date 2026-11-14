@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { browser } from '$app/environment'
 	import { onNavigate } from '$app/navigation'
 	import type { PagefindModal, PagefindSearchResult } from '@pagefind/component-ui'
 	import { onMount, tick } from 'svelte'
@@ -17,7 +16,7 @@
 	let defined = $state(false)
 
 	$effect(() => {
-		if (browser && open && modalEl && ready) {
+		if (open && modalEl && ready) {
 			// eslint-disable-next-line @typescript-eslint/no-unsafe-call -- PagefindModal type cannot be resolved
 			modalEl.open()
 			open = false
@@ -60,9 +59,8 @@
 			// @ts-expect-error -- The package doesn't provide types for the CSS.
 			await import('@pagefind/component-ui/css')
 
-			// WebKit (Safari and every iOS browser) never upgrades a custom element that Svelte
-			// cloned from its template before customElements.define ran, leaving a plain HTMLElement
-			// without register/open/close. Render <pagefind-modal> only once it is defined.
+			// WebKit (Safari, every iOS browser) never upgrades a custom element Svelte cloned before
+			// customElements.define ran, so <pagefind-modal> renders only from here; tick() lets bind:this set modalEl.
 			defined = true
 			await tick()
 
