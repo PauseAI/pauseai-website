@@ -2,7 +2,8 @@ import { beforeEach, describe, expect, it, vi } from 'vitest'
 
 const env: Record<string, string | undefined> = {}
 vi.mock('$env/dynamic/private', () => ({ env }))
-vi.mock('$lib/server/sentry', () => ({ reportError: vi.fn() }))
+const flushReports = vi.hoisted(() => vi.fn(() => Promise.resolve()))
+vi.mock('$lib/server/sentry', () => ({ reportError: vi.fn(), flushReports }))
 vi.mock('$lib/server/nationalGroups', () => ({
 	getNationalGroups: () =>
 		Promise.resolve([{ name: 'Netherlands', whatsappLink: 'https://chat.whatsapp.com/example' }]),
@@ -90,6 +91,7 @@ describe('POST /api/onboarding-email/v2', () => {
 		const response = await post(BODY)
 		expect(response.status).toBe(503)
 		expect((await refusal(response)).code).toBe('verification_unavailable')
+		expect(flushReports).toHaveBeenCalled()
 	})
 
 	it('refuses a body that is not JSON', async () => {
