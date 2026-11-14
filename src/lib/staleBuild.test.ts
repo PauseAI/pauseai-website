@@ -75,35 +75,3 @@ describe('reloadOnce', () => {
 		expect(reload).not.toHaveBeenCalled()
 	})
 })
-
-describe('fullLoadTarget', async () => {
-	const { fullLoadTarget } = await import('./staleBuild')
-	const target = (href: string) => ({
-		url: new URL(href),
-		params: {},
-		route: { id: null }
-	})
-	const nav = (type: string, to = 'https://pauseai.info/faq', from = 'https://pauseai.info/') =>
-		// eslint-disable-next-line @typescript-eslint/no-explicit-any -- the fields fullLoadTarget reads
-		({ type, willUnload: false, from: target(from), to: target(to) }) as any
-
-	it('sends back and forward to a full load', () => {
-		expect(fullLoadTarget(nav('popstate'), true)?.href).toBe('https://pauseai.info/faq')
-	})
-
-	it.each(['link', 'form'])('leaves a %s navigation to the reload option', (type) => {
-		expect(fullLoadTarget(nav(type), true)).toBeNull()
-	})
-
-	it('leaves goto to the router, so its state and replaceState survive', () => {
-		expect(fullLoadTarget(nav('goto'), true)).toBeNull()
-	})
-
-	it('leaves a back or forward between hash entries of one page alone', () => {
-		expect(fullLoadTarget(nav('popstate', 'https://pauseai.info/#faq'), true)).toBeNull()
-	})
-
-	it('does nothing before a newer deploy is live', () => {
-		expect(fullLoadTarget(nav('popstate'), false)).toBeNull()
-	})
-})

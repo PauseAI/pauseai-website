@@ -1,5 +1,4 @@
 import { updated } from '$app/state'
-import type { BeforeNavigate } from '@sveltejs/kit'
 
 // Chrome, Safari and Firefox wording for a failed dynamic import, then Vite's CSS preload error.
 const CHUNK_LOAD_ERROR =
@@ -17,21 +16,6 @@ export async function isStaleBuild(): Promise<boolean> {
 /** Same path and query; the hash does not change the page. */
 export function isSamePage(a: URL | Location, b: URL | Location): boolean {
 	return a.pathname === b.pathname && a.search === b.search
-}
-
-/**
- * Where to send a back or forward navigation as a full page load once a newer deploy is live, or
- * null to leave it to the router. Links and forms get SvelteKit's reload option instead, and a
- * `goto` stays with the router: it must keep its `state` and `replaceState`, which a full load
- * drops, and the router already falls back to a full load if its chunks are gone.
- */
-export function fullLoadTarget(
-	{ type, from, to }: Pick<BeforeNavigate, 'type' | 'from' | 'to'>,
-	isUpdated: boolean
-): URL | null {
-	if (!isUpdated || type !== 'popstate' || !to?.url) return null
-	if (from && isSamePage(from.url, to.url)) return null
-	return to.url
 }
 
 // A reload only helps if it fetches fresh HTML. If a cache keeps serving the old page, every load
