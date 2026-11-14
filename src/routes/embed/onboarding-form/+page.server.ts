@@ -26,7 +26,7 @@ import { normaliseEmail } from '$lib/server/emailVerification'
 import { MEMBERS_BASE_ID, MEMBERS_TABLE_ID } from '$lib/server/members'
 import { recordStubSubmission } from '$lib/server/onboarding-stub'
 import { subscribeToSubstackNewsletter } from '$lib/server/substack'
-import { isSignupKey, memberBackend, mintSignupKey, submitSignup } from '$lib/server/memberCrm'
+import { isSignupKey, signupBackend, mintSignupKey, submitSignup } from '$lib/server/memberCrm'
 import { checkNotSpam } from '$lib/server/turnstile-verify'
 import { hasUniversities, isKnownUniversity } from '$lib/data/universities'
 import { possibleWordings } from '$lib/components/onboarding/chapterShare'
@@ -214,7 +214,7 @@ export const actions: Actions = {
 		const isSubscribeForm = data.get('subscribe_form') === '1'
 		const toCrm =
 			live &&
-			(isSignupKey(existingRecordId) || (!existingRecordId && memberBackend() === 'civicrm'))
+			(isSignupKey(existingRecordId) || (!existingRecordId && signupBackend() === 'civicrm'))
 		// The chapter-sharing answer and the text shown with it, posted only by a form
 		// that showed the question.
 		const postedAnswer = getString(data, 'chapter_share')

@@ -851,7 +851,7 @@ describe('onboarding submit: verified address', () => {
 	})
 })
 
-describe('onboarding submit: signups in CiviCRM alone (MEMBER_BACKEND)', () => {
+describe('onboarding submit: signups in CiviCRM alone (SIGNUP_BACKEND)', () => {
 	const SIGNUP_KEY = /^mem[A-Za-z0-9]{22}$/
 	const NOT_SAVED = "We couldn't confirm your signup was saved. Please try again."
 	const sent = (call = 0) => {
@@ -867,7 +867,7 @@ describe('onboarding submit: signups in CiviCRM alone (MEMBER_BACKEND)', () => {
 		for (const key of Object.keys(env)) delete env[key]
 		env.ONBOARDING_LIVE = 'true'
 		env.ONBOARDING_CONTINUATION_SECRET = 'test-secret'
-		env.MEMBER_BACKEND = 'civicrm'
+		env.SIGNUP_BACKEND = 'civicrm'
 		mockWrites()
 		getRecord.mockReset().mockResolvedValue(UK_ROW)
 		submitSignup.mockReset().mockResolvedValue('saved')
@@ -906,7 +906,7 @@ describe('onboarding submit: signups in CiviCRM alone (MEMBER_BACKEND)', () => {
 	it('sends a continuation with its own key and token, the create-only fields, and reads no row', async () => {
 		const created = await submit(signup)
 		submitSignup.mockClear()
-		env.MEMBER_BACKEND = ''
+		env.SIGNUP_BACKEND = ''
 		const updated = await submit({
 			...update(String(created.recordToken)),
 			record_id: String(created.recordId)
@@ -937,10 +937,10 @@ describe('onboarding submit: signups in CiviCRM alone (MEMBER_BACKEND)', () => {
 		const created = await submit({ ...signup })
 		expect(created.recordId).toMatch(SIGNUP_KEY)
 		submitSignup.mockClear()
-		env.MEMBER_BACKEND = 'airtable'
+		env.SIGNUP_BACKEND = 'airtable'
 		const fromAirtable = await submit(signup)
 		expect(fromAirtable.recordId).toBe('recAda')
-		env.MEMBER_BACKEND = 'civicrm'
+		env.SIGNUP_BACKEND = 'civicrm'
 		const updated = await submit(update(String(fromAirtable.recordToken)))
 		expect(updated).toMatchObject({ success: true, recordId: 'recAda' })
 		expect(updateRecord).toHaveBeenCalledOnce()

@@ -432,9 +432,9 @@ describe('POST /api/verify: signup keys in CiviCRM', () => {
 		)
 
 	it.each([undefined, 'airtable', 'civicrm'])(
-		'sends a signup key to CiviCRM with MEMBER_BACKEND=%s, reading no Airtable row',
+		'sends a signup key to CiviCRM with SIGNUP_BACKEND=%s, reading no Airtable row',
 		async (backend) => {
-			env.MEMBER_BACKEND = backend
+			env.SIGNUP_BACKEND = backend
 			const response = await signupLink()
 
 			expect(response.status).toBe(200)

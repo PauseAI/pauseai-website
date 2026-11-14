@@ -22,15 +22,15 @@ import {
 	type CrmVerifyResult
 } from '$lib/server/crmIntake'
 
-export type MemberBackend = 'airtable' | 'civicrm'
+export type SignupBackend = 'airtable' | 'civicrm'
 
 /**
  * Where a NEW signup is written: "civicrm" makes it a signup key's, anything else an Airtable
  * row's. A post continuing a signup goes where its id says (isSignupKey), whatever this says, so
  * flipping it back leaves signups in progress working.
  */
-export const memberBackend = (): MemberBackend =>
-	env.MEMBER_BACKEND === 'civicrm' ? 'civicrm' : 'airtable'
+export const signupBackend = (): SignupBackend =>
+	env.SIGNUP_BACKEND === 'civicrm' ? 'civicrm' : 'airtable'
 
 const SIGNUP_KEY = /^mem[A-Za-z0-9]{22}$/
 const BASE62 = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'

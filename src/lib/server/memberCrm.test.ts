@@ -9,7 +9,7 @@ vi.mock('$env/dynamic/private', () => ({ env }))
 vi.mock('$lib/server/sentry', () => ({ reportError, flushReports }))
 
 const ACTION_DEADLINE_MS = 25_000
-const { isSignupKey, memberBackend, mintSignupKey, submitSignup, verifySignupInCrm } =
+const { isSignupKey, signupBackend, mintSignupKey, submitSignup, verifySignupInCrm } =
 	await import('./memberCrm.js')
 
 const KEY = 'memAbCdEfGhIjKlMnOpQrStUv'
@@ -95,12 +95,12 @@ describe('signup keys', () => {
 		}
 	})
 
-	it('writes new signups to CiviCRM only when MEMBER_BACKEND is exactly civicrm', () => {
-		expect(memberBackend()).toBe('airtable')
-		env.MEMBER_BACKEND = 'CiviCRM'
-		expect(memberBackend()).toBe('airtable')
-		env.MEMBER_BACKEND = 'civicrm'
-		expect(memberBackend()).toBe('civicrm')
+	it('writes new signups to CiviCRM only when SIGNUP_BACKEND is exactly civicrm', () => {
+		expect(signupBackend()).toBe('airtable')
+		env.SIGNUP_BACKEND = 'CiviCRM'
+		expect(signupBackend()).toBe('airtable')
+		env.SIGNUP_BACKEND = 'civicrm'
+		expect(signupBackend()).toBe('civicrm')
 	})
 })
 
