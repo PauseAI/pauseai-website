@@ -15,7 +15,8 @@ const groups = [
 ]
 
 const getNationalGroups = vi.fn<() => Promise<unknown[] | null>>()
-vi.mock('$lib/server/nationalGroups', () => ({ getNationalGroups }))
+const nationalGroupsReportsSent = vi.fn<() => Promise<void>>()
+vi.mock('$lib/server/nationalGroups', () => ({ getNationalGroups, nationalGroupsReportsSent }))
 
 const {
 	CHAPTER_READ_TIMEOUT_MS,
@@ -26,6 +27,7 @@ const {
 
 beforeEach(() => {
 	getNationalGroups.mockReset().mockResolvedValue(groups)
+	nationalGroupsReportsSent.mockReset().mockResolvedValue()
 	vi.spyOn(console, 'error').mockImplementation(() => {})
 })
 
@@ -66,19 +68,44 @@ describe('getChapterForOnboardingEmail', () => {
 		expect(vi.getTimerCount()).toBe(0)
 	})
 
-	it('hands a read cut short to waitUntil, and only then', async () => {
-		const waitUntil = vi.fn()
+	it('hands a read cut short, and the sending of its report, to waitUntil, and only then', async () => {
+		const waitUntil = vi.fn<(promise: Promise<unknown>) => void>()
 		await lookupChapterForOnboardingEmail('Sweden', waitUntil)
 		expect(waitUntil).not.toHaveBeenCalled()
 
 		vi.useFakeTimers()
-		const read = new Promise<null>(() => {})
-		getNationalGroups.mockReturnValue(read)
+		let finishRead: (groups: null) => void = () => {}
+		getNationalGroups.mockReturnValue(new Promise((resolve) => (finishRead = resolve)))
+		let sendReports: () => void = () => {}
+		nationalGroupsReportsSent.mockReturnValue(new Promise((resolve) => (sendReports = resolve)))
 		const lookup = lookupChapterForOnboardingEmail('Sweden', waitUntil)
 		lookup.catch(() => {})
 		await vi.advanceTimersByTimeAsync(CHAPTER_READ_TIMEOUT_MS)
 		await expect(lookup).rejects.toThrow()
-		expect(waitUntil).toHaveBeenCalledExactlyOnceWith(read)
+		expect(waitUntil).toHaveBeenCalledOnce()
+
+		const settled = vi.fn()
+		void waitUntil.mock.calls[0][0].then(settled)
+		finishRead(null)
+		await vi.advanceTimersByTimeAsync(0)
+		expect(settled).not.toHaveBeenCalled()
+		sendReports()
+		await vi.advanceTimersByTimeAsync(0)
+		expect(settled).toHaveBeenCalledOnce()
+	})
+
+	it('still gives up on time when waitUntil throws', async () => {
+		vi.spyOn(console, 'warn').mockImplementation(() => {})
+		vi.useFakeTimers()
+		getNationalGroups.mockReturnValue(new Promise(() => {}))
+		const lookup = lookupChapterForOnboardingEmail('Sweden', () => {
+			throw new TypeError('no context')
+		})
+		const settled = vi.fn()
+		lookup.then(settled, settled)
+		await vi.advanceTimersByTimeAsync(CHAPTER_READ_TIMEOUT_MS)
+		await expect(lookup).rejects.toThrow(`${CHAPTER_READ_TIMEOUT_MS} ms`)
+		expect(console.warn).toHaveBeenCalledWith(expect.any(String), 'TypeError')
 	})
 
 	it('has no chapter for a country PauseAI Global does not onboard', async () => {

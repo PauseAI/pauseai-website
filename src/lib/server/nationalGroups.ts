@@ -6,7 +6,7 @@
 import type { NationalGroup } from '$lib/types.js'
 import { callCrmRows, failureDetails } from '$lib/server/crmIntake'
 import { dev } from '$app/environment'
-import { reportError } from '$lib/server/sentry'
+import { flushReports, reportError } from '$lib/server/sentry'
 
 const TTL_MS = 10 * 60 * 1000
 // After a failed read, the last good list (or none) is served this long before
@@ -84,6 +84,13 @@ function rowToNationalGroup(row: Record<string, unknown>): NationalGroup {
 let cached: { groups: NationalGroup[]; readAt: number } | null = null
 let failedAt: number | null = null
 let pending: Promise<NationalGroup[] | null> | null = null
+let reportsSent: Promise<void> = Promise.resolve()
+
+/**
+ * Settles once the last failed read's report has been sent. Work kept alive past the
+ * response waits for it after the read, since the edge runtime may stop once that work settles.
+ */
+export const nationalGroupsReportsSent = (): Promise<void> => reportsSent
 
 /** A failed read, with what may be reported about it. */
 class ReadFailure extends Error {
@@ -122,6 +129,8 @@ async function refresh(): Promise<NationalGroup[] | null> {
 			servedStale: cached !== null,
 			...(error instanceof ReadFailure ? error.details : {})
 		})
+		// Not awaited: a caller waiting on the list should not also wait on Sentry.
+		reportsSent = flushReports()
 		// The last good list, however old, rather than none.
 		return cached?.groups ?? null
 	}
@@ -142,4 +151,5 @@ export function resetNationalGroupsCacheForTests(): void {
 	cached = null
 	failedAt = null
 	pending = null
+	reportsSent = Promise.resolve()
 }

@@ -10,11 +10,13 @@ vi.mock('$lib/server/crmIntake', async (importOriginal) => ({
 	callCrmRows
 }))
 vi.mock('$app/environment', () => appEnvironment)
-vi.mock('$lib/server/sentry', () => ({ reportError }))
+const flushReports = vi.fn<() => Promise<void>>()
+vi.mock('$lib/server/sentry', () => ({ reportError, flushReports }))
 // No CRM settings, and no CI: what a deployed runtime missing its settings may look like.
 vi.mock('$env/dynamic/private', () => ({ env: {} }))
 
-const { getNationalGroups, resetNationalGroupsCacheForTests } = await import('./nationalGroups')
+const { getNationalGroups, nationalGroupsReportsSent, resetNationalGroupsCacheForTests } =
+	await import('./nationalGroups')
 const crm = await vi.importActual<typeof import('$lib/server/crmIntake')>('$lib/server/crmIntake')
 
 const rows = (...countries: string[]): CrmRows => ({
@@ -30,6 +32,7 @@ describe('getNationalGroups', () => {
 		appEnvironment.dev = false
 		callCrmRows.mockReset()
 		reportError.mockReset().mockResolvedValue()
+		flushReports.mockReset().mockResolvedValue()
 		vi.spyOn(console, 'error').mockImplementation(() => {})
 		vi.spyOn(console, 'warn').mockImplementation(() => {})
 		vi.useFakeTimers()
@@ -137,6 +140,30 @@ describe('getNationalGroups', () => {
 		expect(await getNationalGroups()).toBeNull()
 		expect(reportError).toHaveBeenCalledOnce()
 		expect(reportError.mock.calls[0][1]).toMatchObject({ cause: 'not_configured' })
+	})
+
+	it('sends a failed read report without the read waiting for it', async () => {
+		let sent = false
+		let send: () => void = () => {}
+		flushReports.mockReturnValue(
+			new Promise<void>((resolve) => (send = resolve)).then(() => {
+				sent = true
+			})
+		)
+		callCrmRows.mockResolvedValue(down)
+		expect(await getNationalGroups()).toBeNull()
+		expect(flushReports).toHaveBeenCalledOnce()
+		expect(sent).toBe(false)
+		const reportsSent = nationalGroupsReportsSent()
+		send()
+		await reportsSent
+		expect(sent).toBe(true)
+	})
+
+	it('sends no report after a good read', async () => {
+		callCrmRows.mockResolvedValue(rows('Germany'))
+		await getNationalGroups()
+		expect(flushReports).not.toHaveBeenCalled()
 	})
 
 	it('reports what caused a failed read', async () => {
