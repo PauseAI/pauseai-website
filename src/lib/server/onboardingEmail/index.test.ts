@@ -1,7 +1,7 @@
 import { describe, expect, it, vi } from 'vitest'
 import type { ChapterBlockData, OnboardingEmailParams } from './types.js'
 
-// Stands in for the live National Groups table: one chapter with links, one without.
+// Stands in for the live chapter list: one chapter with links, one without.
 const CHAPTERS: Record<string, ChapterBlockData> = {
 	netherlands: {
 		name: 'Netherlands',

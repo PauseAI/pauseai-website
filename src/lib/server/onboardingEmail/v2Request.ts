@@ -119,7 +119,7 @@ function parseCountry(body: Record<string, unknown>, prefix = ''): string | unde
 		: optionalText(body.country, `${prefix}country`)
 }
 
-// A chapter needs a country: it selects the chapter's own email and its National Groups row.
+// A chapter needs a country: it selects the chapter's own email and its row in the chapter list.
 function routedCountry(routing: Record<string, unknown>): string {
 	const country = parseCountry(routing, 'routing.')
 	if (country !== undefined) return country

@@ -1,36 +1,35 @@
-import type { AirtableNationalGroup } from '$lib/types.js'
-import { fetchAllPages, type AirtableRecord } from '$lib/airtable.js'
-import type { ChapterBlockData, ChapterLink } from './types.js'
+import type { NationalGroup, NationalGroupLink } from '$lib/types.js'
+import { getNationalGroups, nationalGroupsReportsSent } from '$lib/server/nationalGroups'
+import type { ChapterBlockData, ChapterLink, WaitUntil } from './types.js'
 
-// Same base/table/filter as src/routes/api/national-groups/+server.ts.
-const AIRTABLE_URL = 'https://api.airtable.com/v0/appWPTGqZmUcs3NWu/tblEQJ26hxBAEkaP8'
+// The CRM gives the v2 welcome render 10 seconds (pauseai-civicrm's SignupMail::RENDER_URL),
+// so a slow chapter list must give up well inside that and never fail the render.
+export const CHAPTER_READ_TIMEOUT_MS = 3000
 
 // PauseAI US is a separate organisation that onboards its own members, so its signups are
 // treated like a country without a chapter.
 const NOT_ONBOARDED_BY_GLOBAL = new Set(['united states'])
 
 // Field -> display label, in the fixed order links should render.
-const LINK_FIELDS: { field: keyof AirtableNationalGroup; label: string }[] = [
+const LINK_FIELDS: { field: NationalGroupLink; label: string }[] = [
 	{ field: 'website', label: 'Website' },
-	{ field: 'discord', label: 'Discord' },
-	{ field: 'whatsapp', label: 'WhatsApp' },
-	{ field: 'luma', label: 'Events' },
-	{ field: 'substack', label: 'Substack' },
-	{ field: 'x', label: 'X' },
-	{ field: 'bluesky', label: 'Bluesky' },
-	{ field: 'instagram', label: 'Instagram' },
-	{ field: 'tiktok', label: 'TikTok' },
-	{ field: 'facebook', label: 'Facebook' },
-	{ field: 'youtube', label: 'YouTube' },
-	{ field: 'linkedin', label: 'LinkedIn' },
-	{ field: 'linktree', label: 'Linktree' }
+	{ field: 'discordLink', label: 'Discord' },
+	{ field: 'whatsappLink', label: 'WhatsApp' },
+	{ field: 'lumaLink', label: 'Events' },
+	{ field: 'substackLink', label: 'Substack' },
+	{ field: 'xLink', label: 'X' },
+	{ field: 'blueskyLink', label: 'Bluesky' },
+	{ field: 'instagramLink', label: 'Instagram' },
+	{ field: 'tiktokLink', label: 'TikTok' },
+	{ field: 'facebookLink', label: 'Facebook' },
+	{ field: 'youtubeLink', label: 'YouTube' },
+	{ field: 'linkedinLink', label: 'LinkedIn' },
+	{ field: 'linktreeLink', label: 'Linktree' }
 ]
 
-// Without the field list Airtable returns every column of every row, including an
-// attachment column whose signed URLs are a kilobyte a record, on every send.
-const QUERY = {
-	filterByFormula: 'NOT({inactive})',
-	fields: ['country', ...LINK_FIELDS.map(({ field }) => field as string)]
+/** The platform's waitUntil, or undefined without one (the Node dev server). */
+export function platformWaitUntil(platform: App.Platform | undefined): WaitUntil | undefined {
+	return platform && ((promise) => platform.context.waitUntil(promise))
 }
 
 function normalizeCountry(country: string): string {
@@ -55,64 +54,94 @@ function webLink(value: unknown): string {
 	return url.replaceAll('(', '%28').replaceAll(')', '%29')
 }
 
-function recordToChapterBlock(record: AirtableRecord<AirtableNationalGroup>): ChapterBlockData {
+function groupToChapterBlock(group: NationalGroup): ChapterBlockData {
 	const links: ChapterLink[] = LINK_FIELDS.map(({ field, label }) => ({
 		label,
-		url: webLink(record.fields[field])
+		url: webLink(group[field])
 	})).filter((link) => link.url.length > 0)
 
-	return { name: (record.fields.country ?? '').trim(), links }
+	return { name: group.name.trim(), links }
 }
 
 /**
- * Looks up the live National Groups record matching `country` (exact, case-insensitive
- * match against the record's own free-text `country` field, the same key
- * src/routes/api/national-groups/+server.ts exposes as `NationalGroup.name`). Null when
- * there is no chapter to point the reader at. Throws when the table cannot be read.
+ * The cached chapter list (src/lib/server/nationalGroups.ts). Throws when no list can be
+ * read, or none arrives within CHAPTER_READ_TIMEOUT_MS. The read, and the sending of any
+ * report it makes, are handed to `waitUntil`, so the runtime keeps both alive past the
+ * response: a read cut short still fills the cache for the next email.
+ */
+async function readChapters(waitUntil?: WaitUntil): Promise<NationalGroup[]> {
+	let timer: ReturnType<typeof setTimeout> | undefined
+	const read = getNationalGroups()
+	try {
+		waitUntil?.(read.then(nationalGroupsReportsSent))
+	} catch (error) {
+		console.warn('Could not keep the chapter list read alive:', (error as Error)?.name)
+	}
+	try {
+		const groups = await Promise.race([
+			read,
+			new Promise<never>((_, reject) => {
+				timer = setTimeout(
+					() => reject(new Error(`Chapter list read took over ${CHAPTER_READ_TIMEOUT_MS} ms`)),
+					CHAPTER_READ_TIMEOUT_MS
+				)
+			})
+		])
+		if (!groups) throw new Error('The chapter list could not be read')
+		return groups
+	} finally {
+		clearTimeout(timer)
+	}
+}
+
+/**
+ * Looks up the active chapter matching `country` (exact, case-insensitive match against the
+ * chapter's country, which /api/national-groups exposes as `NationalGroup.name`). Null when
+ * there is no chapter to point the reader at. Throws when the chapter list cannot be read.
  */
 export async function lookupChapterForOnboardingEmail(
-	country: string | undefined
+	country: string | undefined,
+	waitUntil?: WaitUntil
 ): Promise<ChapterBlockData | null> {
 	const cleanCountry = normalizeCountry(country ?? '')
 	if (!cleanCountry || NOT_ONBOARDED_BY_GLOBAL.has(cleanCountry)) return null
 
-	const records = await fetchAllPages<AirtableNationalGroup>(fetch, AIRTABLE_URL, [], QUERY)
-	const match = records.find(
-		(record) => normalizeCountry(record.fields.country ?? '') === cleanCountry
+	const match = (await readChapters(waitUntil)).find(
+		(group) => normalizeCountry(group.name) === cleanCountry
 	)
-	return match ? recordToChapterBlock(match) : null
+	return match ? groupToChapterBlock(match) : null
 }
 
-/** As lookupChapterForOnboardingEmail, but null when the table cannot be read. */
+/** As lookupChapterForOnboardingEmail, but null when the chapter list cannot be read. */
 export async function getChapterForOnboardingEmail(
-	country: string | undefined
+	country: string | undefined,
+	waitUntil?: WaitUntil
 ): Promise<ChapterBlockData | null> {
-	// Uncached and on every render, so a rate limit or an Airtable blip renders the email
-	// without its chapter block rather than failing it.
+	// A CRM outage renders the email without its chapter block rather than failing it.
 	try {
-		return await lookupChapterForOnboardingEmail(country)
+		return await lookupChapterForOnboardingEmail(country, waitUntil)
 	} catch (error) {
-		console.error('National Groups lookup failed, rendering without a chapter:', error)
+		console.error('Chapter lookup failed, rendering without a chapter:', error)
 		return null
 	}
 }
 
 /**
- * The `country` values that currently resolve to a chapter block (active National Groups
- * records), sorted. Exposed for the onboarding-email preview tool's country picker; the
- * render path itself matches free-text, not this list.
+ * The countries that currently resolve to a chapter block (active chapters), sorted. Exposed
+ * for the onboarding-email preview tool's country picker; the render path itself matches
+ * free-text, not this list.
  */
-export async function listActiveChapterCountries(): Promise<string[]> {
-	let records: readonly AirtableRecord<AirtableNationalGroup>[]
+export async function listActiveChapterCountries(waitUntil?: WaitUntil): Promise<string[]> {
+	let groups: NationalGroup[]
 	try {
-		records = await fetchAllPages<AirtableNationalGroup>(fetch, AIRTABLE_URL, [], QUERY)
+		groups = await readChapters(waitUntil)
 	} catch (error) {
-		console.error('National Groups lookup failed, listing no countries:', error)
+		console.error('Chapter lookup failed, listing no countries:', error)
 		return []
 	}
 
-	return records
-		.map((record) => (record.fields.country ?? '').trim())
+	return groups
+		.map((group) => group.name.trim())
 		.filter(
 			(country) => country.length > 0 && !NOT_ONBOARDED_BY_GLOBAL.has(normalizeCountry(country))
 		)

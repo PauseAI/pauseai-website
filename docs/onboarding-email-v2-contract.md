@@ -2,7 +2,7 @@
 
 The website renders the onboarding welcome email for a caller that sends it. This document is the contract for version 2, which the CRM calls. Version 1 has no endpoint: in this document "v1" is its render, `renderOnboardingEmail` in `src/lib/server/onboardingEmail/index.ts`, which the preview page at `/onboarding-email-preview` uses.
 
-The renderer only renders. It never sends mail, and it never chooses a recipient, a sender or a reply-to: the caller decides all of those. Everything the email depends on is in the request, except two things the website supplies itself: the verification link, which it builds and signs (see "Verification link"), and the routed chapter's links, which it reads from the live National Groups table as v1 does (see "Chapter links"). It reads no Members record.
+The renderer only renders. It never sends mail, and it never chooses a recipient, a sender or a reply-to: the caller decides all of those. Everything the email depends on is in the request, except two things the website supplies itself: the verification link, which it builds and signs (see "Verification link"), and the routed chapter's links, which it reads from the chapter list (CiviCRM's chapter directory, cached by the website) as v1 does (see "Chapter links"). It reads no Members record.
 
 ## Endpoint
 
@@ -69,15 +69,15 @@ A `links` field on a chapter routing is accepted and ignored: the website reads 
 
 ### Countries
 
-Countries travel as ISO 3166-1 alpha-2 codes because the CRM's country names differ from the website's (the CRM has `Tanzania, United Republic of` where the website, its join form, Airtable and the National Groups table have `Tanzania`). The website maps each code to its own spelling with a table it owns, `src/lib/server/countryCodes.ts`: every country the join form offers maps to the form's spelling (`GB`: United Kingdom, `US`: United States, `TZ`: Tanzania, `CD`: DR Congo), and other codes map to the ISO short name. The table holds every ISO 3166-1 code, plus `XK` for Kosovo. The resolved name then feeds the same language rule and chapter lookup as v1.
+Countries travel as ISO 3166-1 alpha-2 codes because the CRM's country names differ from the website's (the CRM has `Tanzania, United Republic of` where the website, its join form, Airtable and the chapter directory have `Tanzania`). The website maps each code to its own spelling with a table it owns, `src/lib/server/countryCodes.ts`: every country the join form offers maps to the form's spelling (`GB`: United Kingdom, `US`: United States, `TZ`: Tanzania, `CD`: DR Congo), and other codes map to the ISO short name. The table holds every ISO 3166-1 code, plus `XK` for Kosovo. The resolved name then feeds the same language rule and chapter lookup as v1.
 
 A code must be two letters (`invalid_request` otherwise). At the top level, a well-formed code the table does not know counts as no country. In a chapter routing it is refused, since a chapter needs a country.
 
 ### Chapter links
 
-The website looks up the routed chapter's public links (Website, Discord, WhatsApp, Events, Substack, X, Instagram, TikTok, Facebook, YouTube, LinkedIn, Linktree) in the live National Groups table, the same source and the same lookup v1 uses: the active row whose `country` matches `routing.country` (exact, ignoring case and surrounding spaces), with the same link cleaning. So v1 and v2 show the same chapter block for the same chapter. The table holds one row per country and has no chapter name, so `routing.name` plays no part in the lookup. A `routing.country` of United States gets no links, as v1 shows no chapter for it. The lookup happens only when the email shows a chapter block: never for `global` routing, and not for Spanish shared copy.
+The website looks up the routed chapter's public links (Website, Discord, WhatsApp, Events, Substack, X, Instagram, TikTok, Facebook, YouTube, LinkedIn, Linktree) in the chapter list, the same source and the same lookup v1 uses: the active chapter whose `country` matches `routing.country` (exact, ignoring case and surrounding spaces), with the same link cleaning. So v1 and v2 show the same chapter block for the same chapter. The list holds one row per country, and the website reads no chapter name from it, so `routing.name` plays no part in the lookup. A `routing.country` of United States gets no links, as v1 shows no chapter for it. The lookup happens only when the email shows a chapter block: never for `global` routing, and not for Spanish shared copy.
 
-If the table cannot be read, the email is rendered without chapter links and the failure is reported to the website's error tracking with the record id only; the render does not fail. A chapter with no row, or a row without a given link, likewise renders without it.
+If the chapter list cannot be read within 3 seconds (`CHAPTER_READ_TIMEOUT_MS`, well inside the CRM's 10-second render budget), the email is rendered without chapter links and the failure is reported to the website's error tracking with the record id only; the render does not fail. A chapter with no row, or a row without a given link, likewise renders without it.
 
 Links are shown in the shared copy's chapter block, and some chapters' own emails take a link by its label (Canada: `Website`, `Events`; Sweden: `WhatsApp`, `Events`). A missing link drops the sentence or row that would carry it; it is never an error.
 
@@ -88,9 +88,9 @@ What routing changes in the shared copy:
 
 ### Relation to v1
 
-v2 is an adapter into v1's rendering: the same intent buckets, language resolver, chapter overrides, chapter block and National Groups lookup, and the same composer. Given the same member, the two render the same subject, HTML and text apart from the verification link; the website's tests check this for representative members. They differ only where intended:
+v2 is an adapter into v1's rendering: the same intent buckets, language resolver, chapter overrides, chapter block and chapter lookup, and the same composer. Given the same member, the two render the same subject, HTML and text apart from the verification link; the website's tests check this for representative members. They differ only where intended:
 
-- Routing: v1 picks the chapter from the member's country and the chapter-sharing answer, and also shows the chapter block to members who did not agree to sharing. v2 follows `routing`: a member routed to global onboarding sees no chapter, and a member routed to a chapter is told it will be in touch even when its National Groups row cannot be read.
+- Routing: v1 picks the chapter from the member's country and the chapter-sharing answer, and also shows the chapter block to members who did not agree to sharing. v2 follows `routing`: a member routed to global onboarding sees no chapter, and a member routed to a chapter is told it will be in touch even when the chapter list cannot be read.
 - Chapter name: v1 calls a chapter "PauseAI <country>"; v2 uses `routing.name`.
 - Member facts come from the request, not from a Members record.
 - Language: v2 also accepts a language tag in `language` when `languages` is absent, which v1 has no equivalent of (see "Languages").

@@ -1,28 +1,40 @@
-import { describe, expect, it, vi } from 'vitest'
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 
-const records: { fields: Record<string, unknown> }[] = [
+const groups = [
 	{
-		fields: {
-			country: 'Sweden',
-			website: 'pauseai.se',
-			whatsapp: 'https://chat.whatsapp.com/x(y)z',
-			// A URL is free text: it can carry markdown of its own, or characters that a naive
-			// string replacement would read as instructions.
-			luma: "https://luma.com/**a**$'b",
-			discord: 'javascript:alert(1)',
-			facebook: ' https://www.facebook.com/groups/1/ '
-		}
-	}
+		name: 'Sweden',
+		website: 'pauseai.se',
+		whatsappLink: 'https://chat.whatsapp.com/x(y)z',
+		// A URL is free text: it can carry markdown of its own, or characters that a naive
+		// string replacement would read as instructions.
+		lumaLink: "https://luma.com/**a**$'b",
+		discordLink: 'javascript:alert(1)',
+		facebookLink: ' https://www.facebook.com/groups/1/ '
+	},
+	{ name: 'United States', website: 'https://pauseai-us.org/' }
 ]
 
-let fetchFails = false
+const getNationalGroups = vi.fn<() => Promise<unknown[] | null>>()
+const nationalGroupsReportsSent = vi.fn<() => Promise<void>>()
+vi.mock('$lib/server/nationalGroups', () => ({ getNationalGroups, nationalGroupsReportsSent }))
 
-vi.mock('$lib/airtable.js', () => ({
-	fetchAllPages: () =>
-		fetchFails ? Promise.reject(new Error('Airtable is down')) : Promise.resolve(records)
-}))
+const {
+	CHAPTER_READ_TIMEOUT_MS,
+	getChapterForOnboardingEmail,
+	listActiveChapterCountries,
+	lookupChapterForOnboardingEmail
+} = await import('./chapter.js')
 
-const { getChapterForOnboardingEmail } = await import('./chapter.js')
+beforeEach(() => {
+	getNationalGroups.mockReset().mockResolvedValue(groups)
+	nationalGroupsReportsSent.mockReset().mockResolvedValue()
+	vi.spyOn(console, 'error').mockImplementation(() => {})
+})
+
+afterEach(() => {
+	vi.useRealTimers()
+	vi.restoreAllMocks()
+})
 
 describe('getChapterForOnboardingEmail', () => {
 	it('takes the links a row has and leaves out what is not a web link', async () => {
@@ -37,16 +49,76 @@ describe('getChapterForOnboardingEmail', () => {
 		expect(byLabel.Discord).toBeUndefined()
 	})
 
-	it('renders without a chapter rather than failing the send when Airtable is down', async () => {
-		fetchFails = true
-		try {
-			expect(await getChapterForOnboardingEmail('Sweden')).toBeNull()
-		} finally {
-			fetchFails = false
-		}
+	it('renders without a chapter rather than failing the send when no list can be read', async () => {
+		getNationalGroups.mockResolvedValue(null)
+		expect(await getChapterForOnboardingEmail('Sweden')).toBeNull()
+		await expect(lookupChapterForOnboardingEmail('Sweden')).rejects.toThrow()
+	})
+
+	it('gives up on a slow chapter list, leaving its read running', async () => {
+		vi.useFakeTimers()
+		getNationalGroups.mockReturnValue(new Promise(() => {}))
+		const lookup = lookupChapterForOnboardingEmail('Sweden')
+		const settled = vi.fn()
+		lookup.then(settled, settled)
+		await vi.advanceTimersByTimeAsync(CHAPTER_READ_TIMEOUT_MS - 1)
+		expect(settled).not.toHaveBeenCalled()
+		await vi.advanceTimersByTimeAsync(1)
+		await expect(lookup).rejects.toThrow(`${CHAPTER_READ_TIMEOUT_MS} ms`)
+		expect(vi.getTimerCount()).toBe(0)
+	})
+
+	it('hands every read, and the sending of its report, to waitUntil', async () => {
+		const waitUntil = vi.fn<(promise: Promise<unknown>) => void>()
+		await lookupChapterForOnboardingEmail('Sweden', waitUntil)
+		expect(waitUntil).toHaveBeenCalledOnce()
+		waitUntil.mockClear()
+
+		vi.useFakeTimers()
+		let finishRead: (groups: null) => void = () => {}
+		getNationalGroups.mockReturnValue(new Promise((resolve) => (finishRead = resolve)))
+		let sendReports: () => void = () => {}
+		nationalGroupsReportsSent.mockReturnValue(new Promise((resolve) => (sendReports = resolve)))
+		const lookup = lookupChapterForOnboardingEmail('Sweden', waitUntil)
+		lookup.catch(() => {})
+		await vi.advanceTimersByTimeAsync(CHAPTER_READ_TIMEOUT_MS)
+		await expect(lookup).rejects.toThrow()
+		expect(waitUntil).toHaveBeenCalledOnce()
+
+		const settled = vi.fn()
+		void waitUntil.mock.calls[0][0].then(settled)
+		finishRead(null)
+		await vi.advanceTimersByTimeAsync(0)
+		expect(settled).not.toHaveBeenCalled()
+		sendReports()
+		await vi.advanceTimersByTimeAsync(0)
+		expect(settled).toHaveBeenCalledOnce()
+	})
+
+	it('still gives up on time when waitUntil throws', async () => {
+		vi.spyOn(console, 'warn').mockImplementation(() => {})
+		vi.useFakeTimers()
+		getNationalGroups.mockReturnValue(new Promise(() => {}))
+		const lookup = lookupChapterForOnboardingEmail('Sweden', () => {
+			throw new TypeError('no context')
+		})
+		const settled = vi.fn()
+		lookup.then(settled, settled)
+		await vi.advanceTimersByTimeAsync(CHAPTER_READ_TIMEOUT_MS)
+		await expect(lookup).rejects.toThrow(`${CHAPTER_READ_TIMEOUT_MS} ms`)
+		expect(console.warn).toHaveBeenCalledWith(expect.any(String), 'TypeError')
 	})
 
 	it('has no chapter for a country PauseAI Global does not onboard', async () => {
 		expect(await getChapterForOnboardingEmail('United States')).toBeNull()
+		expect(getNationalGroups).not.toHaveBeenCalled()
+	})
+})
+
+describe('listActiveChapterCountries', () => {
+	it('lists the chapters PauseAI Global onboards, and none when no list can be read', async () => {
+		expect(await listActiveChapterCountries()).toEqual(['Sweden'])
+		getNationalGroups.mockResolvedValue(null)
+		expect(await listActiveChapterCountries()).toEqual([])
 	})
 })
