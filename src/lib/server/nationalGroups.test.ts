@@ -10,8 +10,9 @@ vi.mock('$lib/server/crmIntake', async (importOriginal) => ({
 	callCrmRows
 }))
 vi.mock('$app/environment', () => appEnvironment)
+const reportMessage = vi.fn<(message: string, context?: Record<string, unknown>) => Promise<void>>()
 const flushReports = vi.fn<() => Promise<void>>()
-vi.mock('$lib/server/sentry', () => ({ reportError, flushReports }))
+vi.mock('$lib/server/sentry', () => ({ reportError, reportMessage, flushReports }))
 // No CRM settings, and no CI: what a deployed runtime missing its settings may look like.
 vi.mock('$env/dynamic/private', () => ({ env: {} }))
 
@@ -32,6 +33,7 @@ describe('getNationalGroups', () => {
 		appEnvironment.dev = false
 		callCrmRows.mockReset()
 		reportError.mockReset().mockResolvedValue()
+		reportMessage.mockReset().mockResolvedValue()
 		flushReports.mockReset().mockResolvedValue()
 		vi.spyOn(console, 'error').mockImplementation(() => {})
 		vi.spyOn(console, 'warn').mockImplementation(() => {})
@@ -170,6 +172,69 @@ describe('getNationalGroups', () => {
 		callCrmRows.mockResolvedValue({ ok: false, cause: 'network', errorName: 'TypeError' })
 		await getNationalGroups()
 		expect(reportError.mock.calls[0][1]).toMatchObject({ cause: 'network', errorName: 'TypeError' })
+	})
+
+	it('reports an outage once, then hourly with how long it has lasted, then its recovery', async () => {
+		const minute = 60 * 1000
+		callCrmRows.mockResolvedValueOnce(rows('Germany'))
+		await getNationalGroups()
+		vi.advanceTimersByTime(10 * minute)
+		const failingSince = new Date(Date.now()).toISOString()
+		callCrmRows.mockResolvedValue(down)
+		await getNationalGroups()
+		expect(reportError).toHaveBeenCalledOnce()
+		expect(reportError.mock.calls[0][1]).toMatchObject({
+			operation: 'getNationalGroups',
+			servedStale: true,
+			cause: 'http',
+			failingSince,
+			failingForMinutes: 0
+		})
+		expect(flushReports).toHaveBeenCalledOnce()
+
+		for (let retry = 1; retry < 60; retry++) {
+			vi.advanceTimersByTime(minute)
+			await getNationalGroups()
+		}
+		expect(callCrmRows).toHaveBeenCalledTimes(61)
+		expect(console.error).toHaveBeenCalledTimes(60)
+		expect(reportError).toHaveBeenCalledOnce()
+		expect(flushReports).toHaveBeenCalledOnce()
+
+		vi.advanceTimersByTime(minute)
+		await getNationalGroups()
+		expect(reportError).toHaveBeenCalledTimes(2)
+		expect(reportError.mock.calls[1][1]).toMatchObject({ failingSince, failingForMinutes: 60 })
+		expect(flushReports).toHaveBeenCalledTimes(2)
+
+		vi.advanceTimersByTime(minute)
+		callCrmRows.mockResolvedValue(rows('France'))
+		expect(names(await getNationalGroups())).toEqual(['France'])
+		expect(reportMessage).toHaveBeenCalledOnce()
+		expect(reportMessage.mock.calls[0][0]).toBe('Chapter directory reads recovered after 61 min')
+		expect(reportMessage.mock.calls[0][1]).toMatchObject({ failingSince, downForMinutes: 61 })
+		expect(flushReports).toHaveBeenCalledTimes(3)
+
+		vi.advanceTimersByTime(10 * minute)
+		await getNationalGroups()
+		expect(reportMessage).toHaveBeenCalledOnce()
+		expect(flushReports).toHaveBeenCalledTimes(3)
+
+		vi.advanceTimersByTime(10 * minute)
+		callCrmRows.mockResolvedValue(down)
+		await getNationalGroups()
+		expect(reportError).toHaveBeenCalledTimes(3)
+		expect(reportError.mock.calls[2][1]).toMatchObject({
+			failingSince: new Date(Date.now()).toISOString(),
+			failingForMinutes: 0
+		})
+	})
+
+	it('reports the first failed read an instance ever makes', async () => {
+		callCrmRows.mockResolvedValue(down)
+		await getNationalGroups()
+		expect(reportError).toHaveBeenCalledOnce()
+		expect(reportError.mock.calls[0][1]).toMatchObject({ servedStale: false })
 	})
 
 	it('serves example groups in development when the CRM is not configured', async () => {

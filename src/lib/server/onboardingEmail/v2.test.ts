@@ -37,7 +37,11 @@ const { env, callCrmRows, reportError } = vi.hoisted(() => {
 	return { env, callCrmRows: vi.fn(), reportError: vi.fn() }
 })
 vi.mock('$env/dynamic/private', () => ({ env }))
-vi.mock('$lib/server/sentry', () => ({ reportError, flushReports: () => Promise.resolve() }))
+vi.mock('$lib/server/sentry', () => ({
+	reportError,
+	reportMessage: () => Promise.resolve(),
+	flushReports: () => Promise.resolve()
+}))
 vi.mock('$lib/server/crmIntake', async (importOriginal) => ({
 	...(await importOriginal<Record<string, unknown>>()),
 	callCrmRows
