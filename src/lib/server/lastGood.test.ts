@@ -40,6 +40,20 @@ describe('lastGood', () => {
 		expect(reportError).not.toHaveBeenCalled()
 	})
 
+	it('reports and sends any other failure to open the store', async () => {
+		blobs.getStore.mockImplementation(() => {
+			throw new TypeError('bad context')
+		})
+		await saveLastGood('chapters', ['Germany'])
+		expect(reportError).toHaveBeenCalledWith(
+			expect.any(TypeError),
+			expect.objectContaining({ operation: 'lastGood.save' })
+		)
+		expect(flushReports).toHaveBeenCalledOnce()
+		await expect(readLastGood('chapters', 1000)).resolves.toBeUndefined()
+		expect(reportError).toHaveBeenCalledTimes(2)
+	})
+
 	it('writes every good list', async () => {
 		await saveLastGood('chapters', ['Germany'])
 		await saveLastGood('chapters', ['Germany'])
