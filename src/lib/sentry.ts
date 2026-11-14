@@ -1,5 +1,7 @@
 // eslint-disable-next-line no-restricted-syntax
 export const SENTRY_RELEASE = import.meta.env.SENTRY_RELEASE as string | undefined
+// eslint-disable-next-line no-restricted-syntax
+export const SENTRY_ENVIRONMENT = import.meta.env.SENTRY_ENVIRONMENT as string
 
 // A verification link's query is reported redacted.
 const LINK_CREDENTIAL = /[?&](?:verificationKey|token)=/

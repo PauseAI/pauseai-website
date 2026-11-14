@@ -4,7 +4,7 @@ import type { HandleClientError } from '@sveltejs/kit'
 // makes prerendered pages block hydration on a runtime fetch of /_app/env.js
 // from the SSR function — one 502 and the page loses all JS.
 import * as publicEnv from '$env/static/public'
-import { SENTRY_RELEASE, redactLinkCredentials } from '$lib/sentry'
+import { SENTRY_ENVIRONMENT, SENTRY_RELEASE, redactLinkCredentials } from '$lib/sentry'
 
 let dsn: string | undefined
 
@@ -17,6 +17,7 @@ export const init = () => {
 			Sentry.init({
 				dsn,
 				release,
+				environment: SENTRY_ENVIRONMENT,
 				tracesSampleRate: 0,
 				// /verify takes its link out of the address bar, which the history breadcrumb
 				// records as `from`.
