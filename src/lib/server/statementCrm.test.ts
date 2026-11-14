@@ -58,8 +58,8 @@ async function signThroughRetries() {
 
 beforeEach(() => {
 	for (const key of Object.keys(env)) delete env[key]
-	env.CRM_INTAKE_URL = 'https://crm.example.org'
-	env.CRM_INTAKE_KEY = KEY
+	env.CRM_URL = 'https://crm.example.org'
+	env.CRM_KEY = KEY
 	fetchMock.mockReset()
 	answerRow({ status: 'ok' })
 	vi.stubGlobal('fetch', fetchMock)
@@ -195,7 +195,7 @@ describe('signInCrm', () => {
 	})
 
 	it('does not call without a URL or key', async () => {
-		delete env.CRM_INTAKE_KEY
+		delete env.CRM_KEY
 
 		expect(await sign()).toBe('failed')
 		expect(fetchMock).not.toHaveBeenCalled()

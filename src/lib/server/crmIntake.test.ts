@@ -28,8 +28,8 @@ const answerRow = (row: Record<string, unknown>) => answer({ values: [row] })
 beforeEach(() => {
 	for (const key of Object.keys(env)) delete env[key]
 	env.CRM_INTAKE_ENABLED = 'true'
-	env.CRM_INTAKE_URL = 'https://crm.example.org/'
-	env.CRM_INTAKE_KEY = KEY
+	env.CRM_URL = 'https://crm.example.org/'
+	env.CRM_KEY = KEY
 	fetchMock.mockReset()
 	answerRow({ status: 'ok', contact_id: 7 })
 	vi.stubGlobal('fetch', fetchMock)
@@ -140,7 +140,7 @@ describe('submitToCrm', () => {
 	})
 
 	it('does not call without a URL or key', async () => {
-		for (const missing of ['CRM_INTAKE_URL', 'CRM_INTAKE_KEY']) {
+		for (const missing of ['CRM_URL', 'CRM_KEY']) {
 			const saved = env[missing]
 			delete env[missing]
 			expect(await submitToCrm(RECORD, '')).toEqual({ outcome: 'error', cause: 'not_configured' })

@@ -180,7 +180,7 @@ function crmHost(): string | undefined {
 function parseUnsubscribeUrl(value: unknown): string | undefined {
 	if (value === undefined || value === null || value === '') return undefined
 	const host = crmHost()
-	if (!host) invalid('unsubscribe_url', 'cannot be accepted: the website has no CRM_INTAKE_URL')
+	if (!host) invalid('unsubscribe_url', 'cannot be accepted: the website has no CRM_URL')
 	const problem = `must be an https URL on ${host}`
 	if (typeof value !== 'string' || value.length > MAX_URL || /\s/.test(value)) {
 		invalid('unsubscribe_url', problem)
