@@ -169,6 +169,7 @@
 		<Card>
 			<div class="list">
 				<!-- Add Auto-detect option at the top -->
+				<!-- eslint-disable-next-line svelte/no-restricted-html-elements -- links to the unlocalized path on purpose; Link would localize it to the current language -->
 				<a
 					href={deLocalizeHref(page.url.pathname)}
 					hreflang="auto"
@@ -183,6 +184,7 @@
 
 				{#each locales as locale}
 					{@const href = localizeHref(page.url.pathname, { locale })}
+					<!-- eslint-disable-next-line svelte/no-restricted-html-elements -- href targets this locale; Link would re-localize it to the current language -->
 					<a
 						{href}
 						hreflang={locale}
