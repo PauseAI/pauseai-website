@@ -42,6 +42,8 @@ See our [roadmap](/roadmap) for more details.
 
 ## How to donate to PauseAI
 
+Want a tax deduction? See [tax-deductible donations](/tax-deductible-donations) for the options in your country.
+
 ### IBAN Bank transfer (no fees)
 
 This is **probably the cheapest way** to transfer money to us.
