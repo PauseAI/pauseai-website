@@ -4,7 +4,9 @@
  * `pnpm sync:national-chapters`), so the tools never keep a list of their own.
  */
 import nationalChaptersJson from '$lib/data/national-chapters.json'
+import { inBrandFonts } from './canvasFonts'
 import { displayLink } from './qrCaption'
+import { getTemplate } from './templates'
 
 export interface Chapter {
 	/** Empty for PauseAI as a whole. Otherwise the chapter's country, in English, as the chapter list names it. */
@@ -43,7 +45,10 @@ export const CHAPTERS: Chapter[] = (nationalChaptersJson.communities as ChapterE
 		label: country_local && country_local !== name ? `${name} (${country_local})` : name,
 		country: name,
 		link,
-		shortName: SHORT_NAMES[name] ?? country_local ?? name,
+		// The local name, unless it's in a script the brand fonts don't have (日本), which would be drawn in
+		// whatever font the device has.
+		shortName:
+			SHORT_NAMES[name] ?? (country_local && inBrandFonts(country_local) ? country_local : name),
 		lumaCalendarId
 	}))
 	.sort((a, b) => a.label.localeCompare(b.label, 'en'))
@@ -84,13 +89,16 @@ export function chapterName(chapter: Chapter): string {
 
 /**
  * Field defaults that depend on the chapter: the Announcement's button, the web address and the Quote's role. The rest of a
- * layout's defaults are the same everywhere. A button that would be too long for its field (28 characters) says
+ * layout's defaults are the same everywhere. A button that would be too long for its field says
  * "Join PauseAI".
  */
 export function chapterFieldDefaults(chapter: Chapter, templateId: string): Record<string, string> {
 	const join = `Join ${chapterName(chapter)}`
+	const ctaMax = getTemplate(templateId).fields.find((f) => f.key === 'cta')?.maxLength ?? Infinity
 	return {
-		...(templateId === 'announcement' ? { cta: join.length <= 28 ? join : 'Join PauseAI' } : {}),
+		...(templateId === 'announcement'
+			? { cta: join.length <= ctaMax ? join : 'Join PauseAI' }
+			: {}),
 		url: templateId === 'event' ? eventsLink(chapter) : printableLink(chapter),
 		...(templateId === 'quote' ? { role: `${chapterName(chapter)} volunteer` } : {})
 	}

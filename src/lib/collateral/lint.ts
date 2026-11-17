@@ -149,7 +149,7 @@ export class LintCollector {
  * optionally with a path. The domain list keeps "e.g." or "3.5" from matching.
  */
 const LINK =
-	/\b(?:https?:\/\/\S+|www\.\S+|[a-z0-9-]+(?:\.[a-z0-9-]+)*\.(?:com|org|net|uk|io|ai|cc|me|ly|ma|gg|info|link|app|dev|eu|to|co|de|fr|nl|es|it|pl|ca|au|cz|ro|rs|se|ch|be|at|dk|no|fi|ie|pt|br|nz|za|ke)(?:\/\S*)?)(?=[\s,;)!?]|\.?$)/i
+	/\b(?:https?:\/\/\S+|www\.\S+|[a-z0-9-]+(?:\.[a-z0-9-]+)*\.(?:com|org|net|uk|io|ai|cc|me|ly|ma|gg|info|link|app|dev|eu|to|co|de|fr|nl|es|it|pl|ca|au|cz|ro|rs|se|ch|be|at|dk|no|fi|ie|pt|br|nz|za|ke)(?:\/\S*)?)(?=[\s,;)!?]|\.(?:\s|$)|$)/i
 
 /** The first link found in `text`, without trailing punctuation, or null. */
 export function findLink(text: string): string | null {

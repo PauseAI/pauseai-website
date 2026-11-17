@@ -92,6 +92,16 @@ export function subsetCovers(subset: Subset, text: string): boolean {
 	return false
 }
 
+/** Whether every letter of `text` is in one of the subsets the brand fonts come in. */
+export function inBrandFonts(text: string): boolean {
+	const all = Object.values(PARSED).flat()
+	for (const ch of text) {
+		const cp = ch.codePointAt(0)!
+		if (!all.some(([lo, hi]) => cp >= lo && cp <= hi)) return false
+	}
+	return true
+}
+
 /** The subsets `text` needs, Latin first. */
 export function subsetsFor(text: string): Subset[] {
 	return (Object.keys(UNICODE_RANGES) as Subset[]).filter((subset) => subsetCovers(subset, text))

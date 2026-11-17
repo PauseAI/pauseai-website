@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { onMount } from 'svelte'
+	import { onMount, untrack } from 'svelte'
 	import ControlsSection from '$lib/components/tools/ControlsSection.svelte'
 	import Studio from '$lib/components/tools/Studio.svelte'
 	import ToolButton from '$lib/components/tools/ToolButton.svelte'
@@ -90,7 +90,6 @@
 	const values = $derived(designValues(design))
 	const logo = $derived(logos[theme.logoSrc] ?? null)
 	const fontsReady = $derived(fontsLoaded !== null)
-	const ready = $derived(!busy && Boolean(logo) && fontsReady)
 
 	/** Every piece of text the design draws, to know which font subsets it needs. */
 	const designText = $derived(
@@ -101,6 +100,13 @@
 		].join(' ')
 	)
 	const fontKey = $derived(subsetsFor(designText).join(','))
+	// Downloads wait for the fonts the current text needs, so a new script is never drawn in a fallback font.
+	const ready = $derived(
+		!busy &&
+			Boolean(logo) &&
+			fontsReady &&
+			subsetsFor(designText).every((s) => fontsLoaded!.split(',').includes(s))
+	)
 
 	onMount(() => {
 		let cancelled = false
@@ -263,7 +269,14 @@
 			maxSide: PREVIEW_MAX_SIDE,
 			lint: true
 		})
-		if (!sameIssues(issues, found)) issues = found
+		// Read without tracking, or a new list of issues would draw the preview again.
+		if (
+			!sameIssues(
+				untrack(() => issues),
+				found
+			)
+		)
+			issues = found
 	})
 
 	// Drag to move the photo, pinch or scroll to zoom it.
@@ -393,6 +406,21 @@
 			: `Opened ${file.name}, but an image in it could not be loaded.`
 	}
 
+	// Undo restores everything from before Start again, so it's only offered until the next change, which it would
+	// otherwise throw away.
+	let afterReset: { design: DesignState; headlineScale: number; photoViewState: unknown } | null =
+		null
+	$effect(() => {
+		const changed =
+			design !== afterReset?.design ||
+			headlineScale !== afterReset.headlineScale ||
+			photoViewState !== afterReset.photoViewState
+		if (!changed || !untrack(() => undoReset)) return
+		undoReset = null
+		afterReset = null
+		if (untrack(() => message) === RESET_MESSAGE) message = null
+	})
+
 	function onReset() {
 		const before = { design, photoViewState, headlineScale }
 		const t = template
@@ -403,6 +431,7 @@
 			partnerLogos: []
 		}
 		headlineScale = 1
+		afterReset = { design, headlineScale, photoViewState }
 		message = RESET_MESSAGE
 		undoReset = () => {
 			design = before.design

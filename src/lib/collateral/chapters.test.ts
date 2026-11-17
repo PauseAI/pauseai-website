@@ -77,3 +77,10 @@ describe('chapter field defaults', () => {
 		}
 	})
 })
+
+describe('short names', () => {
+	it("uses the English name when the local one is in a script the brand fonts don't have", () => {
+		expect(getChapter('Japan').shortName).toBe('Japan')
+		expect(getChapter('Serbia').shortName).toBe('Srbija')
+	})
+})

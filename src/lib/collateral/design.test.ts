@@ -157,3 +157,9 @@ describe("chapters' Luma calendars", () => {
 		expect(isLumaEventLink('lu.ma/pauseai-c9wb')).toBe(true)
 	})
 })
+
+describe('links in running text', () => {
+	it('finds a link followed by a full stop mid-sentence', () => {
+		expect(findLink('Sign up at pauseai.info. See you there!')).toBe('pauseai.info')
+	})
+})

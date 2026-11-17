@@ -8,7 +8,8 @@ import {
 } from './eventText'
 import { aspectClass, layoutMarginUnits, type AspectClass } from './formats'
 import { isLumaEventLink, type LintCollector } from './lint'
-import { normaliseUrl, QR_GAP_UNITS, qrPlan, qrTarget, usableQrCodes, type QrCode } from './qr'
+import { QR_GAP_UNITS, qrPlan, qrTarget, usableQrCodes, type QrCode } from './qr'
+import { displayLink } from './qrCaption'
 import { pauseBars, QR_INK, qrShape } from './qrShape'
 import { BODY_FAMILY, HEADLINE_FAMILY } from './canvasFonts'
 import { BRAND_ORANGE, CREAM, LOGO_ASPECT, type Theme } from './themes'
@@ -519,7 +520,9 @@ function qrLayout(a: DrawArgs, g: Geometry): QrLayout | null {
 /** Flags codes that repeat each other, or that all open somewhere other than the web address printed on the design. */
 function lintQrTargets(a: DrawArgs, codes: QrCode[]) {
 	if (!a.lint) return
-	const targets = codes.map((c) => normaliseUrl(c.url).toLowerCase().replace(/\/+$/, ''))
+	// Compared as printed, so http://, https:// and www. don't make the same site look like another.
+	const key = (url: string) => displayLink(url).toLowerCase()
+	const targets = codes.map((c) => key(c.url))
 	if (new Set(targets).size < targets.length) {
 		a.lint.add({
 			id: 'qr-duplicate',
@@ -529,10 +532,10 @@ function lintQrTargets(a: DrawArgs, codes: QrCode[]) {
 		})
 	}
 	const shownUrl = a.values.url?.trim()
-	const printed = shownUrl ? normaliseUrl(shownUrl).toLowerCase().replace(/\/+$/, '') : ''
+	const printed = shownUrl ? key(shownUrl) : ''
 	// An events page lists every event, so printing it while a code opens one event is intended: PauseAI's, or a
 	// chapter's own site once one of its events was imported.
-	const hub = printed === normaliseUrl(EVENTS_PAGE_URL) || codes.some((c) => isLumaEventLink(c.url))
+	const hub = printed === key(EVENTS_PAGE_URL) || codes.some((c) => isLumaEventLink(c.url))
 	if (printed && !hub && !targets.includes(printed)) {
 		a.lint.add({
 			id: 'qr-mismatch',
