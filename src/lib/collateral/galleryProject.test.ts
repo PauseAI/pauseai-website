@@ -23,7 +23,7 @@ const project: GalleryProject = {
 
 const withVisible = (visible: unknown) => {
 	const o = JSON.parse(serializeGalleryProject(project)) as {
-		slides: { photoSettings: { visible: number } }[]
+		slides: { photoSettings: { visible: unknown } }[]
 	}
 	o.slides[0].photoSettings.visible = visible
 	return parseGalleryProject(JSON.stringify(o))
