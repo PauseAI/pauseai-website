@@ -172,25 +172,40 @@
 		}
 	}
 
-	// Puts a saved or restored project on screen. Returns false if an image could not be loaded.
-	async function applyProject(project: Project): Promise<boolean> {
-		const { design: loaded, ok } = await designFromData(project)
+	/** Puts a saved or restored project on screen, its images already loaded. */
+	function showProject(project: Project, loaded: DesignState) {
 		design = loaded
 		formatId = project.formatId
 		headlineScale = project.headlineScale
 		screenQr = project.screenQr
 		const { zoom, focalX, focalY } = project.photoSettings
 		photoViewState = { photo: loaded.photo?.drawable ?? null, view: { zoom, focalX, focalY } }
+	}
+
+	// Opens a project file. Returns false if an image in it could not be loaded.
+	async function applyProject(project: Project): Promise<boolean> {
+		const { design: loaded, ok } = await designFromData(project)
+		showProject(project, loaded)
 		return ok
 	}
 
-	// Restore the last session once, in the browser.
+	// Restore the last session once, in the browser. Its photo may take a moment to load, so if the volunteer has
+	// already started on a new design by then, theirs is kept.
 	onMount(() => {
+		const untouched = () =>
+			design === start.design &&
+			formatId === start.formatId &&
+			headlineScale === start.headlineScale &&
+			screenQr === start.screenQr
+		const start = { design, formatId, headlineScale, screenQr }
 		void (async () => {
 			try {
 				const raw = localStorage.getItem(STORAGE_KEY)
 				const result = raw ? parseProject(raw) : null
-				if (result?.ok) await applyProject(result.project)
+				if (result?.ok) {
+					const loaded = await designFromData(result.project)
+					if (untouched()) showProject(result.project, loaded.design)
+				}
 			} catch {
 				// Storage can be blocked (private windows etc). The tool works without it.
 			}
@@ -198,15 +213,23 @@
 		})()
 	})
 
-	// Autosave. Uploaded photos are not kept (too big for browser storage), library photos and partner logos are.
+	// Autosave, a moment after the last change rather than on every keystroke. Uploaded photos are not kept (too big
+	// for browser storage); library photos are, and partner logos when there is room for them.
 	$effect(() => {
 		if (!restored) return
-		const project = serializeProject(currentProject(false))
-		try {
-			localStorage.setItem(STORAGE_KEY, project)
-		} catch {
-			// Ignore, see above.
-		}
+		const project = currentProject(false)
+		const timer = setTimeout(() => {
+			try {
+				localStorage.setItem(STORAGE_KEY, serializeProject(project))
+			} catch {
+				try {
+					localStorage.setItem(STORAGE_KEY, serializeProject({ ...project, partnerLogos: [] }))
+				} catch {
+					// Storage can be blocked or full. The tool works without it.
+				}
+			}
+		}, 400)
+		return () => clearTimeout(timer)
 	})
 
 	function renderOptions(bleed: boolean): RenderOptions {

@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest'
 import {
 	eventFieldValues,
+	eventLink,
 	formatClock,
 	formatDay,
 	formatPickedDate,
@@ -138,5 +139,25 @@ describe('date and time pickers', () => {
 	it('formats a picked time', () => {
 		expect(formatPickedTime('18:30')).toBe('6:30pm')
 		expect(formatPickedTime('nope')).toBe('')
+	})
+})
+
+describe('Luma quirks', () => {
+	it('links to the event when Luma gives its whole address rather than its slug', () => {
+		expect(
+			eventLink({
+				id: 'https://lu.ma/abc123',
+				name: 'x',
+				startAt: '2026-10-01T18:00:00Z',
+				venue: ''
+			})
+		).toBe('lu.ma/abc123')
+	})
+
+	it('leaves the venue blank, not "Online", for an in-person event whose address is for guests only', () => {
+		const [event] = toCalendarEvents([
+			{ url: 'a', name: 'Pub', start_at: '2026-10-01T18:00:00Z', location_type: 'offline' }
+		])
+		expect(event.venue).toBe('')
 	})
 })

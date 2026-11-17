@@ -21,11 +21,10 @@ import type { Theme } from './themes'
  */
 export async function loadFonts(text = ''): Promise<void> {
 	declareCanvasFonts()
-	const loads = FONT_FACES.flatMap(({ family, weight }) =>
-		facesFor(family, weight, text).map(() =>
-			document.fonts.load(`${weight} 40px "${family}"`, `${text}A`)
-		)
-	)
+	// One load per face covers every subset of it that the text needs.
+	const loads = FONT_FACES.filter(
+		({ family, weight }) => facesFor(family, weight, text).length
+	).map(({ family, weight }) => document.fonts.load(`${weight} 40px "${family}"`, `${text}A`))
 	await Promise.all(loads)
 }
 
@@ -46,6 +45,8 @@ export function loadImage(src: string): Promise<Drawable> {
 	if (!cached) {
 		cached = decodeImage(src)
 		imageCache.set(src, cached)
+		// A failed load (a network blip, say) is not kept, so the next try loads it again.
+		cached.catch(() => imageCache.delete(src))
 	}
 	return cached
 }

@@ -233,7 +233,9 @@ function lumaEventId(url: string): string | null {
 	const parts = hostAndPath(url)
 	if (!parts || !['lu.ma', 'luma.com'].includes(parts.host) || parts.path.length !== 1) return null
 	const id = parts.path[0].toLowerCase()
-	return READABLE_LUMA_PATHS.includes(id) ? null : id
+	// Chapters' calendars are named after them (luma.com/pauseai-de, luma.com/pauseaimtl): words, not a code.
+	if (READABLE_LUMA_PATHS.includes(id) || /^pause-?ai[a-z-]*$/.test(id)) return null
+	return id
 }
 
 /** A Luma event's own page, e.g. lu.ma/eoohwufh or lu.ma/pauseai-c9wb, as opposed to our calendar. */

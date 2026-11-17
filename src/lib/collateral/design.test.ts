@@ -149,3 +149,11 @@ describe('unreadable links', () => {
 		])
 	})
 })
+
+describe("chapters' Luma calendars", () => {
+	it('reads as words, not as an event code', () => {
+		expect(isLumaEventLink('luma.com/pauseaimtl')).toBe(false)
+		expect(isLumaEventLink('lu.ma/pauseai-de')).toBe(false)
+		expect(isLumaEventLink('lu.ma/pauseai-c9wb')).toBe(true)
+	})
+})

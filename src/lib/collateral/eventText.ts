@@ -6,6 +6,8 @@ export interface LumaEvent {
 	end_at?: string | Date
 	timezone?: string | null
 	geo_address_info?: { address?: string; city?: string } | null
+	/** "offline" for an event in person, even when Luma keeps its address for guests only. */
+	location_type?: string
 }
 
 /** An upcoming event from a chapter's (or PauseAI's) Luma calendar, trimmed to what the collateral tools need. Plain data for the client. */
@@ -36,7 +38,7 @@ export function toCalendarEvents(events: LumaEvent[]): CalendarEvent[] {
 			endAt: e.end_at ? new Date(e.end_at).toISOString() : undefined,
 			timezone: e.timezone ?? undefined,
 			// In person but with nowhere to say (a guests-only venue, without a town): left for the user to fill in.
-			venue: venue || (geo ? '' : 'Online'),
+			venue: venue || (geo || e.location_type === 'offline' ? '' : 'Online'),
 			city: geo?.city || undefined
 		}
 	})
@@ -109,7 +111,8 @@ export const EVENTS_PAGE_URL = 'pauseai.info/events'
 
 /** The event's own page. Luma's ids are random codes, so this goes in a QR code rather than being printed. */
 export function eventLink(ev: CalendarEvent): string {
-	return `lu.ma/${ev.id}`
+	// Luma usually gives the page's slug, but may give its whole address.
+	return /^https?:\/\//i.test(ev.id) ? ev.id.replace(/^https?:\/\//i, '') : `lu.ma/${ev.id}`
 }
 
 /**

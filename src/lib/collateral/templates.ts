@@ -7,7 +7,7 @@ import {
 	formatPickedTimeRange
 } from './eventText'
 import { aspectClass, layoutMarginUnits, type AspectClass } from './formats'
-import type { LintCollector } from './lint'
+import { isLumaEventLink, type LintCollector } from './lint'
 import { normaliseUrl, QR_GAP_UNITS, qrPlan, qrTarget, usableQrCodes, type QrCode } from './qr'
 import { pauseBars, QR_INK, qrShape } from './qrShape'
 import { BODY_FAMILY, HEADLINE_FAMILY } from './canvasFonts'
@@ -530,8 +530,9 @@ function lintQrTargets(a: DrawArgs, codes: QrCode[]) {
 	}
 	const shownUrl = a.values.url?.trim()
 	const printed = shownUrl ? normaliseUrl(shownUrl).toLowerCase().replace(/\/+$/, '') : ''
-	// Our events page lists every event, so printing it while a code opens one event is intended.
-	const hub = printed === normaliseUrl(EVENTS_PAGE_URL)
+	// An events page lists every event, so printing it while a code opens one event is intended: PauseAI's, or a
+	// chapter's own site once one of its events was imported.
+	const hub = printed === normaliseUrl(EVENTS_PAGE_URL) || codes.some((c) => isLumaEventLink(c.url))
 	if (printed && !hub && !targets.includes(printed)) {
 		a.lint.add({
 			id: 'qr-mismatch',
