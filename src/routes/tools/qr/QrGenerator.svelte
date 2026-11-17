@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { onMount } from 'svelte'
+	import Link from '$lib/components/Link.svelte'
 	import ControlsSection from '$lib/components/tools/ControlsSection.svelte'
 	import Studio from '$lib/components/tools/Studio.svelte'
 	import ToolButton from '$lib/components/tools/ToolButton.svelte'
@@ -285,7 +286,7 @@
 		</div>
 		{#if previewImage}
 			<p class="meta">
-				Opens <a href={target} target="_blank" rel="noopener noreferrer">{target}</a>
+				Opens <Link href={target}>{target}</Link>
 			</p>
 		{/if}
 	{/snippet}

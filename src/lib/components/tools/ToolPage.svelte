@@ -1,4 +1,5 @@
 <script lang="ts">
+	import LinkWithoutIcon from '$lib/components/LinkWithoutIcon.svelte'
 	import PostMeta from '$lib/components/PostMeta.svelte'
 	import type { Snippet } from 'svelte'
 
@@ -16,21 +17,23 @@
 
 <PostMeta {title} {description} />
 
-<a href="/tools" class="back">← All tools</a>
+<p class="back"><LinkWithoutIcon href="/tools">← All tools</LinkWithoutIcon></p>
 <h1>{title}</h1>
 <p class="lede">{@render lede()}</p>
 {@render children()}
 
 <style>
 	.back {
-		display: inline-block;
-		margin-bottom: 1rem;
+		margin: 0 0 1rem;
 		font-size: 0.875rem;
 		font-weight: 700;
+	}
+
+	.back :global(a) {
 		text-decoration: none;
 	}
 
-	.back:hover {
+	.back :global(a:hover) {
 		text-decoration: underline;
 	}
 

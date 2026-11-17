@@ -1,4 +1,5 @@
 <script lang="ts">
+	import LinkWithoutIcon from '$lib/components/LinkWithoutIcon.svelte'
 	import PostMeta from '$lib/components/PostMeta.svelte'
 
 	interface Tool {
@@ -31,11 +32,11 @@
 <ul class="tools" role="list">
 	{#each TOOLS as tool (tool.href)}
 		<li>
-			<a href={tool.href} class="card">
+			<LinkWithoutIcon href={tool.href} class="card">
 				<h2>{tool.title}</h2>
 				<p>{tool.description}</p>
 				<span class="cta">Open →</span>
-			</a>
+			</LinkWithoutIcon>
 		</li>
 	{/each}
 </ul>
@@ -59,7 +60,7 @@
 		padding: 0;
 	}
 
-	.card {
+	.tools :global(.card) {
 		display: flex;
 		flex-direction: column;
 		gap: 0.75rem;
@@ -71,16 +72,16 @@
 		text-decoration: none;
 	}
 
-	.card:hover {
+	.tools :global(.card:hover) {
 		background-color: var(--bg-subtle);
 		color: var(--text);
 	}
 
-	.card h2 {
+	.tools :global(.card h2) {
 		margin: 0;
 	}
 
-	.card p {
+	.tools :global(.card p) {
 		flex: 1;
 		margin: 0;
 	}
