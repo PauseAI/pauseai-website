@@ -43,7 +43,7 @@ describe('serializePackProject / parsePackProject', () => {
 	})
 
 	it('drops unknown and repeated formats, and keeps the format list order', () => {
-		const o = JSON.parse(serializePackProject(pack))
+		const o = JSON.parse(serializePackProject(pack)) as Record<string, unknown>
 		o.outputs = [
 			{ formatId: 'story' },
 			{ formatId: 'nope' },
@@ -55,7 +55,7 @@ describe('serializePackProject / parsePackProject', () => {
 	})
 
 	it("clamps each output's crop and title nudge", () => {
-		const o = JSON.parse(serializePackProject(pack))
+		const o = JSON.parse(serializePackProject(pack)) as Record<string, unknown>
 		o.outputs = [
 			{ formatId: 'a5', photoView: { zoom: 50, focalX: 2, focalY: 'x' }, headlineScale: 0.1 }
 		]

@@ -22,7 +22,8 @@ export class StudioAssets {
 	constructor(text: () => string) {
 		onMount(() => {
 			let cancelled = false
-			for (const src of new Set(THEMES.map((t) => t.logoSrc))) {
+			const sources = THEMES.map((t) => t.logoSrc)
+			for (const src of sources.filter((s, i) => sources.indexOf(s) === i)) {
 				loadImage(src)
 					.then((img) => {
 						if (!cancelled) this.logos = { ...this.logos, [src]: img }
@@ -45,7 +46,8 @@ export class StudioAssets {
 			void loadFonts(current)
 				.catch(() => undefined)
 				.then(() => {
-					if (!cancelled) this.fontsLoaded = [...new Set([...loaded, ...needed])].join(',')
+					if (!cancelled)
+						this.fontsLoaded = [...loaded, ...needed.filter((s) => !loaded.includes(s))].join(',')
 				})
 			return () => {
 				cancelled = true
@@ -68,6 +70,8 @@ export function photoGestures(opts: {
 	view: () => PhotoView
 	setView: (update: (v: PhotoView) => PhotoView) => void
 }) {
+	// Not state: only the gesture handlers read it.
+	// eslint-disable-next-line svelte/prefer-svelte-reactivity
 	const pointers = new Map<number, { x: number; y: number }>()
 	let pinch: { dist: number; zoom: number } | null = null
 

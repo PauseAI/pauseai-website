@@ -341,7 +341,7 @@
 			template: CAPTION_TEMPLATE,
 			theme: getTheme(slide.themeId),
 			values: { caption: slide.caption },
-			logo: logo!,
+			logo,
 			photo: slide.photo?.drawable ?? null,
 			photoSettings: slide.photoSettings,
 			qrCodes: [],
@@ -351,6 +351,8 @@
 	}
 
 	function togglePlatform(id: PlatformId) {
+		// A new set each time: platforms is replaced, not changed in place.
+		// eslint-disable-next-line svelte/prefer-svelte-reactivity
 		const next = new Set(platforms)
 		if (next.has(id)) next.delete(id)
 		else next.add(id)
@@ -364,15 +366,15 @@
 		try {
 			const groups: PlatformExportGroup[] = []
 			// Instagram and LinkedIn share a crop, so each slide is drawn and encoded once per crop.
-			const rendered = new Map<string, { canvases: HTMLCanvasElement[]; blobs: Blob[] }>()
+			const rendered: Record<string, { canvases: HTMLCanvasElement[]; blobs: Blob[] }> = {}
 			for (const variant of CAROUSEL_PLATFORMS) {
 				if (!platforms.has(variant.platform)) continue
-				let all = rendered.get(variant.formatId)
+				let all = rendered[variant.formatId]
 				if (!all) {
 					const fmt = getFormat(variant.formatId)
 					const canvases = slides.map((s) => renderSlideCanvas(s, fmt))
 					all = { canvases, blobs: await Promise.all(canvases.map(canvasToPngBlob)) }
-					rendered.set(variant.formatId, all)
+					rendered[variant.formatId] = all
 				}
 				const canvases = all.canvases.slice(0, variant.maxSlides)
 				const blobs = all.blobs.slice(0, variant.maxSlides)
@@ -577,7 +579,7 @@
 			<p class="tool-hint">Each slide can have its own colour.</p>
 			<StylePicker
 				themeId={activeTheme.id}
-				onTheme={(themeId) => updateSlide(activeSlide.id, { themeId })}
+				onTheme={(themeId: string) => updateSlide(activeSlide.id, { themeId })}
 			/>
 		</ControlsSection>
 
@@ -624,7 +626,7 @@
 					</p>
 					<CropControls
 						view={photoSettings}
-						onChange={(patch) =>
+						onChange={(patch: Partial<PhotoView>) =>
 							updateSlide(activeSlide.id, (s) => ({
 								photoSettings: { ...s.photoSettings, ...patch }
 							}))}

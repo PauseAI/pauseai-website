@@ -22,7 +22,9 @@ const project: GalleryProject = {
 }
 
 const withVisible = (visible: unknown) => {
-	const o = JSON.parse(serializeGalleryProject(project))
+	const o = JSON.parse(serializeGalleryProject(project)) as {
+		slides: { photoSettings: { visible: number } }[]
+	}
 	o.slides[0].photoSettings.visible = visible
 	return parseGalleryProject(JSON.stringify(o))
 }
@@ -44,7 +46,7 @@ describe('gallery projects', () => {
 	})
 
 	it('ignores the single format that older files could pick for the whole gallery', () => {
-		const o = JSON.parse(serializeGalleryProject(project))
+		const o = JSON.parse(serializeGalleryProject(project)) as Record<string, unknown>
 		Object.assign(o, { formatId: 'a5', customFormat: true })
 		expect(parseGalleryProject(JSON.stringify(o))).toEqual({ ok: true, project })
 	})

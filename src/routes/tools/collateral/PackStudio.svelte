@@ -102,7 +102,7 @@
 	const activeView = $derived(active ? viewFor(active.id) : DEFAULT_PHOTO_VIEW)
 	// Only the preview and crop controls call this, and they are only shown for an active format.
 	function setActiveView(fn: (v: PhotoView) => PhotoView) {
-		const id = active!.id
+		const id = active.id
 		const views = viewsState.photo === currentPhoto ? viewsState.views : {}
 		viewsState = {
 			photo: currentPhoto,
@@ -200,7 +200,7 @@
 			theme,
 			values,
 			country: designCountry(design),
-			logo: logo!,
+			logo,
 			photo: currentPhoto,
 			photoSettings: viewFor(formatId),
 			qrCodes: designQrCodes(design),
@@ -353,7 +353,7 @@
 							issues={ownIssues[f.id]}
 							active={f.id === active?.id}
 							onSelect={() => (activeId = f.id)}
-							onIssues={(found) => onIssues(f.id, found)}
+							onIssues={(found: LintIssue[]) => onIssues(f.id, found)}
 						/>
 					{/each}
 				</div>
@@ -415,7 +415,7 @@
 			{design}
 			{update}
 			firstSection={1}
-			onMessage={(m) => (message = m)}
+			onMessage={(m: string | null) => (message = m)}
 		/>
 
 		<ControlsSection heading="8. Formats">
@@ -479,7 +479,7 @@
 				<Checks issues={activeIssues} title={`Checks for ${active.label}`} />
 				<TitleSizeControl
 					value={headlineScales[id] ?? 1}
-					onChange={(v) => (headlineScales = { ...headlineScales, [id]: v })}
+					onChange={(v: number) => (headlineScales = { ...headlineScales, [id]: v })}
 					flagged={activeIssues.some((i) => TITLE_ISSUES.includes(i.id))}
 				/>
 				{#if designQrCodes(design).length > 0}
@@ -504,7 +504,7 @@
 				{#if design.photo}
 					<CropControls
 						view={activeView}
-						onChange={(patch) => setActiveView((v) => ({ ...v, ...patch }))}
+						onChange={(patch: Partial<PhotoView>) => setActiveView((v) => ({ ...v, ...patch }))}
 					/>
 				{/if}
 			</ControlsSection>
