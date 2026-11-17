@@ -274,7 +274,10 @@
 </ControlsSection>
 
 <ControlsSection heading={`${n(2)}. Style`}>
-	<StylePicker themeId={design.themeId} onTheme={(themeId) => update((d) => ({ ...d, themeId }))} />
+	<StylePicker
+		themeId={design.themeId}
+		onTheme={(themeId: string) => update((d) => ({ ...d, themeId }))}
+	/>
 </ControlsSection>
 
 <ControlsSection heading={`${n(3)}. Text`}>

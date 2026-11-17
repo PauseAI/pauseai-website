@@ -88,7 +88,7 @@ describe('lintLinksInText', () => {
 			expect.objectContaining({
 				id: 'link-in-venue',
 				level: 'warn',
-				message: expect.stringContaining('Venue contains a link (www.tiny.cc/mszoom)')
+				message: expect.stringContaining('Venue contains a link (www.tiny.cc/mszoom)') as string
 			})
 		])
 	})

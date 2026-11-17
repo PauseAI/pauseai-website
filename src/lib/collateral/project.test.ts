@@ -26,7 +26,7 @@ const project: Project = {
 }
 
 function withEdit(edit: (o: Record<string, unknown>) => void): string {
-	const o = JSON.parse(serializeProject(project))
+	const o = JSON.parse(serializeProject(project)) as Record<string, unknown>
 	edit(o)
 	return JSON.stringify(o)
 }
@@ -38,7 +38,10 @@ describe('serializeProject / parseProject', () => {
 	})
 
 	it('marks the file with the app name, version and save time', () => {
-		const o = JSON.parse(serializeProject(project, new Date('2026-09-21T10:00:00Z')))
+		const o = JSON.parse(serializeProject(project, new Date('2026-09-21T10:00:00Z'))) as Record<
+			string,
+			unknown
+		>
 		expect(o).toMatchObject({
 			app: 'pauseai-collateral',
 			version: 1,
@@ -69,7 +72,7 @@ describe('parseProject rejects bad files', () => {
 
 	it('rejects files from a newer version', () => {
 		const result = parseProject(withEdit((o) => (o.version = 99)))
-		expect(result).toMatchObject({ ok: false, error: expect.stringMatching(/newer/) })
+		expect(result).toMatchObject({ ok: false, error: expect.stringMatching(/newer/) as string })
 	})
 })
 

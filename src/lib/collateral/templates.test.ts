@@ -1,11 +1,7 @@
-import { existsSync } from 'fs'
-import { join } from 'path'
 import { describe, expect, it } from 'vitest'
 import { CANVAS_FONTS } from './canvasFonts'
 import { CAPTION_FONTS } from './qrCaption'
 import { defaultValues, FONT_FACES, TEMPLATES } from './templates'
-
-const root = process.cwd()
 
 describe.each(TEMPLATES)('template $id', (template) => {
 	it('has unique field keys', () => {

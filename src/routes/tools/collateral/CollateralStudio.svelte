@@ -239,7 +239,7 @@
 			theme,
 			values,
 			country: designCountry(design),
-			logo: logo!,
+			logo,
 			photo: design.photo?.drawable ?? null,
 			photoSettings: photoView,
 			qrCodes: designQrCodes(design),
@@ -267,6 +267,8 @@
 	})
 
 	// Drag to move the photo, pinch or scroll to zoom it.
+	// Not state: only the gesture handlers read it.
+	// eslint-disable-next-line svelte/prefer-svelte-reactivity
 	const pointers = new Map<number, { x: number; y: number }>()
 	let pinch: { dist: number; zoom: number } | null = null
 
@@ -532,19 +534,19 @@
 			{update}
 			firstSection={2}
 			onQrAdded={() => (screenQr = true)}
-			onMessage={(m) => (message = m)}
+			onMessage={(m: string | null) => (message = m)}
 		>
 			{#snippet headlineExtras()}
 				<TitleSizeControl
 					value={headlineScale}
-					onChange={(v) => (headlineScale = v)}
+					onChange={(v: number) => (headlineScale = v)}
 					flagged={titleFlagged}
 				/>
 			{/snippet}
 			{#snippet photoExtras()}
 				<CropControls
 					view={photoView}
-					onChange={(patch) => setPhotoView((v) => ({ ...v, ...patch }))}
+					onChange={(patch: Partial<PhotoView>) => setPhotoView((v) => ({ ...v, ...patch }))}
 				/>
 			{/snippet}
 			{#snippet qrNote()}

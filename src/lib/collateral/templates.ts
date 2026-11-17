@@ -11,7 +11,7 @@ import { isLumaEventLink, type LintCollector } from './lint'
 import { normaliseUrl, QR_GAP_UNITS, qrPlan, qrTarget, usableQrCodes, type QrCode } from './qr'
 import { pauseBars, QR_INK, qrShape } from './qrShape'
 import { BODY_FAMILY, HEADLINE_FAMILY } from './canvasFonts'
-import { BRAND_ORANGE, CREAM, INK, LOGO_ASPECT, type Theme } from './themes'
+import { BRAND_ORANGE, CREAM, LOGO_ASPECT, type Theme } from './themes'
 import { coverRect, fitText, type FitResult, type Measure } from './text'
 
 /** Headlines in the site's heading face, body text in its body face (see canvasFonts.ts). */
@@ -201,7 +201,7 @@ function noteTextForLint(
 	lint.noteTextBox(
 		text,
 		rect,
-		hexToRgb(String(ctx.fillStyle)),
+		hexToRgb(typeof ctx.fillStyle === 'string' ? ctx.fillStyle : ''),
 		size >= LARGE_TEXT_UNITS * u,
 		HALO_COVERAGE
 	)
