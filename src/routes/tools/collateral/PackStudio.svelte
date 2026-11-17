@@ -132,8 +132,8 @@
 		}
 	}
 
-	async function applyProject(project: PackProject): Promise<boolean> {
-		const { design: loaded, ok } = await designFromData(project)
+	/** Puts a saved or restored pack on screen, its images already loaded. */
+	function showProject(project: PackProject, loaded: DesignState) {
 		design = loaded
 		selected = project.outputs.map((o) => o.formatId)
 		headlineScales = Object.fromEntries(project.outputs.map((o) => [o.formatId, o.headlineScale]))
@@ -142,15 +142,32 @@
 			photo: loaded.photo?.drawable ?? null,
 			views: Object.fromEntries(project.outputs.map((o) => [o.formatId, o.photoView]))
 		}
+	}
+
+	// Opens a pack file. Returns false if an image in it could not be loaded.
+	async function applyProject(project: PackProject): Promise<boolean> {
+		const { design: loaded, ok } = await designFromData(project)
+		showProject(project, loaded)
 		return ok
 	}
 
+	// Restore the last session once. If the volunteer has already started on a new pack while its photo loaded,
+	// theirs is kept.
 	onMount(() => {
+		const start = { design, selected, headlineScales, screenQrs }
+		const untouched = () =>
+			design === start.design &&
+			selected === start.selected &&
+			headlineScales === start.headlineScales &&
+			screenQrs === start.screenQrs
 		void (async () => {
 			try {
 				const raw = localStorage.getItem(STORAGE_KEY)
 				const result = raw ? parsePackProject(raw) : null
-				if (result?.ok) await applyProject(result.project)
+				if (result?.ok) {
+					const loaded = await designFromData(result.project)
+					if (untouched()) showProject(result.project, loaded.design)
+				}
 			} catch {
 				// Storage can be blocked (private windows etc). The tool works without it.
 			}
@@ -159,14 +176,22 @@
 	})
 
 	// Autosave. Uploaded photos are not kept (too big for browser storage), library photos and partner logos are.
+	// Saved a moment after the last change rather than on every keystroke.
 	$effect(() => {
 		if (!restored) return
-		const project = serializePackProject(currentProject(false))
-		try {
-			localStorage.setItem(STORAGE_KEY, project)
-		} catch {
-			// Ignore, see above.
-		}
+		const project = currentProject(false)
+		const timer = setTimeout(() => {
+			try {
+				localStorage.setItem(STORAGE_KEY, serializePackProject(project))
+			} catch {
+				try {
+					localStorage.setItem(STORAGE_KEY, serializePackProject({ ...project, partnerLogos: [] }))
+				} catch {
+					// Storage can be blocked or full. The tool works without it.
+				}
+			}
+		}, 400)
+		return () => clearTimeout(timer)
 	})
 
 	function optionsFor(formatId: string): Omit<RenderOptions, 'format'> {
@@ -322,6 +347,7 @@
 				<div class="grid" role="group" aria-label="Formats in the pack. Pick one to adjust it.">
 					{#each formats as f (f.id)}
 						<PackThumb
+							fontsLoaded={assets.fontsLoaded}
 							format={f}
 							options={optionsFor(f.id)}
 							issues={ownIssues[f.id]}
@@ -384,7 +410,13 @@
 	{/snippet}
 
 	{#snippet controls()}
-		<DesignControls {design} {update} firstSection={1} onMessage={(m) => (message = m)} />
+		<DesignControls
+			idPrefix="pack"
+			{design}
+			{update}
+			firstSection={1}
+			onMessage={(m) => (message = m)}
+		/>
 
 		<ControlsSection heading="8. Formats">
 			<p class="tool-hint">

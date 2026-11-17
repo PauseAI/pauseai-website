@@ -146,10 +146,9 @@
 		}
 	}
 
-	// Puts a saved or restored gallery on screen. Returns false if any photo could not be loaded.
-	async function applyProject(project: GalleryProject): Promise<boolean> {
-		platforms = new Set(project.platforms)
-		let allOk = true
+	/** Loads a saved gallery's photos. `ok` is false if any could not be loaded. */
+	async function loadGallery(project: GalleryProject): Promise<{ slides: Slide[]; ok: boolean }> {
+		let ok = true
 		const loaded = await Promise.all(
 			project.slides.map(async (s): Promise<Slide> => {
 				const base = {
@@ -173,39 +172,66 @@
 					const drawable = await loadDataUrl(ref.dataUrl)
 					return { ...base, photo: { drawable, name: ref.name, source: { kind: 'upload' } } }
 				} catch {
-					allOk = false
+					ok = false
 					return { ...base, photo: null }
 				}
 			})
 		)
-		slides = loaded.length >= MIN_SLIDES ? loaded : [...loaded, newSlide()]
-		activeIndex = 0
-		return allOk
+		// A gallery always has at least MIN_SLIDES slides.
+		while (loaded.length < MIN_SLIDES) loaded.push(newSlide())
+		return { slides: loaded, ok }
 	}
 
+	function showGallery(project: GalleryProject, loaded: Slide[]) {
+		platforms = new Set(project.platforms)
+		slides = loaded
+		activeIndex = 0
+	}
+
+	// Opens a gallery file. Returns false if any photo could not be loaded.
+	async function applyProject(project: GalleryProject): Promise<boolean> {
+		const { slides: loaded, ok } = await loadGallery(project)
+		showGallery(project, loaded)
+		return ok
+	}
+
+	// Restore the last session once, or start from the example. If the volunteer has already started while its
+	// photos loaded, their slides are kept.
 	onMount(() => {
+		const start = { slides, platforms }
+		const untouched = () => slides === start.slides && platforms === start.platforms
 		void (async () => {
+			let result: ReturnType<typeof parseGalleryProject> | null = null
 			try {
 				const raw = localStorage.getItem(STORAGE_KEY)
-				const result = raw ? parseGalleryProject(raw) : null
-				if (result?.ok) await applyProject(result.project)
-				else slides = await exampleSlides()
+				result = raw ? parseGalleryProject(raw) : null
 			} catch {
 				// Storage can be blocked (private windows etc). The tool works without it.
+			}
+			if (result?.ok) {
+				const { slides: loaded } = await loadGallery(result.project)
+				if (untouched()) showGallery(result.project, loaded)
+			} else {
+				const example = await exampleSlides()
+				if (untouched()) slides = example
 			}
 			restored = true
 		})()
 	})
 
-	// Autosave. Uploaded photos are not kept (too big for browser storage), library photos are.
+	// Autosave, a moment after the last change. Uploaded photos are not kept (too big for browser storage), library
+	// photos are.
 	$effect(() => {
 		if (!restored) return
-		const project = serializeGalleryProject(currentProject(false))
-		try {
-			localStorage.setItem(STORAGE_KEY, project)
-		} catch {
-			// Ignore, see above.
-		}
+		const project = currentProject(false)
+		const timer = setTimeout(() => {
+			try {
+				localStorage.setItem(STORAGE_KEY, serializeGalleryProject(project))
+			} catch {
+				// Storage can be blocked or full. The tool works without it.
+			}
+		}, 400)
+		return () => clearTimeout(timer)
 	})
 
 	// Live preview of the active slide, redrawn on every change.
@@ -245,19 +271,13 @@
 	async function onPhotos(files: File[]) {
 		if (files.length === 0) return
 		message = null
+		const results = await Promise.allSettled(files.map((file) => fileToDrawable(file)))
 		const loaded: SlidePhoto[] = []
-		let failed = 0
-		for (const file of files) {
-			try {
-				loaded.push({
-					drawable: await fileToDrawable(file),
-					name: file.name,
-					source: { kind: 'upload' }
-				})
-			} catch {
-				failed += 1
-			}
-		}
+		results.forEach((r, i) => {
+			if (r.status === 'fulfilled')
+				loaded.push({ drawable: r.value, name: files[i].name, source: { kind: 'upload' } })
+		})
+		const failed = results.length - loaded.length
 		const withPhoto = (s: Slide, p: SlidePhoto): Slide => ({
 			...s,
 			photo: p,
@@ -343,11 +363,19 @@
 		message = null
 		try {
 			const groups: PlatformExportGroup[] = []
+			// Instagram and LinkedIn share a crop, so each slide is drawn and encoded once per crop.
+			const rendered = new Map<string, { canvases: HTMLCanvasElement[]; blobs: Blob[] }>()
 			for (const variant of CAROUSEL_PLATFORMS) {
 				if (!platforms.has(variant.platform)) continue
-				const fmt = getFormat(variant.formatId)
-				const canvases = slides.slice(0, variant.maxSlides).map((s) => renderSlideCanvas(s, fmt))
-				const blobs = await Promise.all(canvases.map(canvasToPngBlob))
+				let all = rendered.get(variant.formatId)
+				if (!all) {
+					const fmt = getFormat(variant.formatId)
+					const canvases = slides.map((s) => renderSlideCanvas(s, fmt))
+					all = { canvases, blobs: await Promise.all(canvases.map(canvasToPngBlob)) }
+					rendered.set(variant.formatId, all)
+				}
+				const canvases = all.canvases.slice(0, variant.maxSlides)
+				const blobs = all.blobs.slice(0, variant.maxSlides)
 				groups.push({ folder: variant.platform, kind: 'images', pngBlobs: blobs })
 				if (variant.export === 'both') {
 					groups.push({
@@ -436,6 +464,7 @@
 				<div class="filmstrip" role="group" aria-label="All slides">
 					{#each slides as s, i (s.id)}
 						<SlideThumb
+							fontsLoaded={assets.fontsLoaded}
 							slide={s}
 							format={effectiveFormat}
 							{logo}

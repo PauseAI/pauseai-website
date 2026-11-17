@@ -43,6 +43,8 @@
 	} from './designState'
 
 	interface Props {
+		/** Starts the ids of its fields, unique to each studio, as every studio stays on the page. */
+		idPrefix: string
 		design: DesignState
 		update: (fn: (d: DesignState) => DesignState) => void
 		/** Number of the first section here, since the studio puts its own sections before. */
@@ -59,6 +61,7 @@
 	}
 
 	let {
+		idPrefix,
 		design,
 		update,
 		firstSection,
@@ -209,9 +212,9 @@
 </script>
 
 <ControlsSection heading={`${n(0)}. Country`}>
-	<label class="tool-label" for="collateral-chapter">Which PauseAI is it for?</label>
+	<label class="tool-label" for="{idPrefix}-chapter">Which PauseAI is it for?</label>
 	<select
-		id="collateral-chapter"
+		id="{idPrefix}-chapter"
 		class="tool-select"
 		value={design.chapterId}
 		onchange={(e) => {
@@ -252,11 +255,11 @@
 	<!-- Right under the Event card, which is last in the list. Kept outside the radio group, which may only hold its options. -->
 	{#if events.length > 0}
 		<div class="event-import" class:active={template.id === 'event'}>
-			<label class="tool-label" for="collateral-import-event"
+			<label class="tool-label" for="{idPrefix}-import-event"
 				>Start from one of {eventsFrom}'s events</label
 			>
 			<select
-				id="collateral-import-event"
+				id="{idPrefix}-import-event"
 				class="tool-select"
 				value=""
 				onchange={(e) => {
@@ -283,7 +286,7 @@
 
 <ControlsSection heading={`${n(3)}. Text`}>
 	{#each template.fields as field (field.key)}
-		{@const id = `collateral-${template.id}-${field.key}`}
+		{@const id = `${idPrefix}-${template.id}-${field.key}`}
 		{@const value = values[field.key]}
 		<div class="tool-field">
 			<label class="tool-label" for={id}
@@ -379,7 +382,7 @@
 				<label class="tool-checkbox">
 					<input
 						type="radio"
-						name="collateral-qr-size"
+						name="{idPrefix}-qr-size"
 						checked={design.qrSize === s.id}
 						onchange={() => update((d) => ({ ...d, qrSize: s.id }))}
 					/>

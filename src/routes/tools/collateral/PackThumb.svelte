@@ -4,6 +4,8 @@
 	import { renderCollateral, type RenderOptions } from '$lib/collateral/render'
 
 	interface Props {
+		/** The font subsets loaded so far: drawn again when more load. */
+		fontsLoaded: string | null
 		format: Format
 		options: Omit<RenderOptions, 'format'>
 		/** This format's own checks, for its badge. */
@@ -16,10 +18,11 @@
 
 	const THUMB_MAX_SIDE = 320
 
-	let { format, options, issues, active, onSelect, onIssues }: Props = $props()
+	let { fontsLoaded, format, options, issues, active, onSelect, onIssues }: Props = $props()
 	let canvas: HTMLCanvasElement
 
 	$effect(() => {
+		void fontsLoaded
 		onIssues(
 			renderCollateral(canvas, { ...options, format, maxSide: THUMB_MAX_SIDE, lint: true }).issues
 		)

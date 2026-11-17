@@ -28,13 +28,10 @@
 	{/each}
 </div>
 <p class="hint">{MODES.find((m) => m.id === mode)?.hint}</p>
-{#if mode === 'single'}
-	<CollateralStudio />
-{:else if mode === 'pack'}
-	<PackStudio />
-{:else}
-	<GalleryStudio />
-{/if}
+<!-- All three stay mounted, so switching back keeps uploaded photos, which autosave leaves out. -->
+<div hidden={mode !== 'single'}><CollateralStudio /></div>
+<div hidden={mode !== 'pack'}><PackStudio /></div>
+<div hidden={mode !== 'gallery'}><GalleryStudio /></div>
 
 <style>
 	.modes {

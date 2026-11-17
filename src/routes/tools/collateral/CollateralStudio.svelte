@@ -462,6 +462,7 @@
 		</ControlsSection>
 
 		<DesignControls
+			idPrefix="collateral"
 			{design}
 			{update}
 			firstSection={2}

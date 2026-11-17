@@ -109,14 +109,10 @@ export async function downloadFilesZip(
 	download(await zip.generateAsync({ type: 'blob' }), filename)
 }
 
-export interface PlatformExportGroup {
-	/** Top-level folder this group's files land in inside the bundle. */
-	folder: string
-	kind: 'images' | 'pdf'
-	pngBlobs?: Blob[]
-	pdfBytes?: Uint8Array
-	pdfName?: string
-}
+/** One platform's files in a bundle, in its own top-level folder. */
+export type PlatformExportGroup = { folder: string } & (
+	{ kind: 'images'; pngBlobs: Blob[] } | { kind: 'pdf'; pdfBytes: Uint8Array; pdfName: string }
+)
 
 /** Zips several platforms' exports into one archive, one folder per platform, so a multi-platform export lands as a single download. */
 export async function downloadPlatformBundleZip(
@@ -126,9 +122,9 @@ export async function downloadPlatformBundleZip(
 	const zip = await newZip()
 	for (const g of groups) {
 		if (g.kind === 'images') {
-			g.pngBlobs!.forEach((blob, i) => zip.file(`${g.folder}/${i + 1}.png`, blob))
+			g.pngBlobs.forEach((blob, i) => zip.file(`${g.folder}/${i + 1}.png`, blob))
 		} else {
-			zip.file(`${g.folder}/${g.pdfName}`, g.pdfBytes!)
+			zip.file(`${g.folder}/${g.pdfName}`, g.pdfBytes)
 		}
 	}
 	download(await zip.generateAsync({ type: 'blob' }), filename)

@@ -6,6 +6,8 @@
 	import { getTheme } from '$lib/collateral/themes'
 
 	interface Props {
+		/** The font subsets loaded so far: drawn again when more load. */
+		fontsLoaded: string | null
 		slide: Slide
 		format: Format
 		logo: Drawable
@@ -17,10 +19,11 @@
 	const THUMB_MAX_SIDE = 160
 	const CAPTION_TEMPLATE = getTemplate('caption')
 
-	let { slide, format, logo, index, active, onSelect }: Props = $props()
+	let { fontsLoaded, slide, format, logo, index, active, onSelect }: Props = $props()
 	let canvas: HTMLCanvasElement
 
 	$effect(() => {
+		void fontsLoaded
 		renderCollateral(canvas, {
 			format,
 			template: CAPTION_TEMPLATE,
