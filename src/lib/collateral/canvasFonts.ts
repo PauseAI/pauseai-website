@@ -13,8 +13,18 @@ import robotoSlabLatin500 from '@fontsource/roboto-slab/files/roboto-slab-latin-
 import robotoSlabLatinExt500 from '@fontsource/roboto-slab/files/roboto-slab-latin-ext-500-normal.woff2'
 import robotoSlabCyrillic500 from '@fontsource/roboto-slab/files/roboto-slab-cyrillic-500-normal.woff2'
 import robotoSlabGreek500 from '@fontsource/roboto-slab/files/roboto-slab-greek-500-normal.woff2'
+import robotoSlabLatin600 from '@fontsource/roboto-slab/files/roboto-slab-latin-600-normal.woff2'
+import robotoSlabLatinExt600 from '@fontsource/roboto-slab/files/roboto-slab-latin-ext-600-normal.woff2'
+import robotoSlabCyrillic600 from '@fontsource/roboto-slab/files/roboto-slab-cyrillic-600-normal.woff2'
+import robotoSlabGreek600 from '@fontsource/roboto-slab/files/roboto-slab-greek-600-normal.woff2'
+import robotoSlabLatin700 from '@fontsource/roboto-slab/files/roboto-slab-latin-700-normal.woff2'
+import robotoSlabLatinExt700 from '@fontsource/roboto-slab/files/roboto-slab-latin-ext-700-normal.woff2'
 import robotoSlabCyrillic700 from '@fontsource/roboto-slab/files/roboto-slab-cyrillic-700-normal.woff2'
 import robotoSlabGreek700 from '@fontsource/roboto-slab/files/roboto-slab-greek-700-normal.woff2'
+import robotoSlabLatin800 from '@fontsource/roboto-slab/files/roboto-slab-latin-800-normal.woff2'
+import robotoSlabLatinExt800 from '@fontsource/roboto-slab/files/roboto-slab-latin-ext-800-normal.woff2'
+import robotoSlabCyrillic800 from '@fontsource/roboto-slab/files/roboto-slab-cyrillic-800-normal.woff2'
+import robotoSlabGreek800 from '@fontsource/roboto-slab/files/roboto-slab-greek-800-normal.woff2'
 
 /** Unicode ranges of the @fontsource subsets, copied from their CSS. */
 export const UNICODE_RANGES = {
@@ -45,9 +55,18 @@ export const CANVAS_FONTS: CanvasFace[] = [
 	{ family: BODY_FAMILY, weight: '500', subset: 'latin-ext', file: robotoSlabLatinExt500 },
 	{ family: BODY_FAMILY, weight: '500', subset: 'cyrillic', file: robotoSlabCyrillic500 },
 	{ family: BODY_FAMILY, weight: '500', subset: 'greek', file: robotoSlabGreek500 },
-	// For headline letters Saira Condensed doesn't have.
+	{ family: BODY_FAMILY, weight: '600', subset: 'latin', file: robotoSlabLatin600 },
+	{ family: BODY_FAMILY, weight: '600', subset: 'latin-ext', file: robotoSlabLatinExt600 },
+	{ family: BODY_FAMILY, weight: '600', subset: 'cyrillic', file: robotoSlabCyrillic600 },
+	{ family: BODY_FAMILY, weight: '600', subset: 'greek', file: robotoSlabGreek600 },
+	{ family: BODY_FAMILY, weight: '700', subset: 'latin', file: robotoSlabLatin700 },
+	{ family: BODY_FAMILY, weight: '700', subset: 'latin-ext', file: robotoSlabLatinExt700 },
 	{ family: BODY_FAMILY, weight: '700', subset: 'cyrillic', file: robotoSlabCyrillic700 },
-	{ family: BODY_FAMILY, weight: '700', subset: 'greek', file: robotoSlabGreek700 }
+	{ family: BODY_FAMILY, weight: '700', subset: 'greek', file: robotoSlabGreek700 },
+	{ family: BODY_FAMILY, weight: '800', subset: 'latin', file: robotoSlabLatin800 },
+	{ family: BODY_FAMILY, weight: '800', subset: 'latin-ext', file: robotoSlabLatinExt800 },
+	{ family: BODY_FAMILY, weight: '800', subset: 'cyrillic', file: robotoSlabCyrillic800 },
+	{ family: BODY_FAMILY, weight: '800', subset: 'greek', file: robotoSlabGreek800 }
 ]
 
 /** Parses a CSS unicode-range list into inclusive code point ranges. */
@@ -71,6 +90,11 @@ export function subsetCovers(subset: Subset, text: string): boolean {
 		if (PARSED[subset].some(([lo, hi]) => cp >= lo && cp <= hi)) return true
 	}
 	return false
+}
+
+/** The subsets `text` needs, Latin first. */
+export function subsetsFor(text: string): Subset[] {
+	return (Object.keys(UNICODE_RANGES) as Subset[]).filter((subset) => subsetCovers(subset, text))
 }
 
 /** The faces of `family` at `weight` that `text` needs. */

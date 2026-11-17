@@ -130,10 +130,27 @@ export const FORMATS: Format[] = [
 	{ id: 'a6', label: 'A6 handout', group: 'Print', kind: 'print', widthMm: 105, heightMm: 148 },
 	{ id: 'a5', label: 'A5 flyer', group: 'Print', kind: 'print', widthMm: 148, heightMm: 210 },
 	{ id: 'a4', label: 'A4 poster', group: 'Print', kind: 'print', widthMm: 210, heightMm: 297 },
-	{ id: 'a3', label: 'A3 poster', group: 'Print', kind: 'print', widthMm: 297, heightMm: 420 }
+	{ id: 'a3', label: 'A3 poster', group: 'Print', kind: 'print', widthMm: 297, heightMm: 420 },
+	// US and Canadian paper sizes, where A sizes are hard to get printed.
+	{
+		id: 'letter',
+		label: 'US Letter flyer',
+		group: 'Print',
+		kind: 'print',
+		widthMm: 215.9,
+		heightMm: 279.4
+	},
+	{
+		id: 'tabloid',
+		label: 'US Tabloid poster',
+		group: 'Print',
+		kind: 'print',
+		widthMm: 279.4,
+		heightMm: 431.8
+	}
 ]
 
-const DEFAULT_FORMAT_ID = 'ig-square'
+export const DEFAULT_FORMAT_ID = 'ig-square'
 
 export function getFormat(id: string): Format {
 	return FORMATS.find((f) => f.id === id) ?? FORMATS.find((f) => f.id === DEFAULT_FORMAT_ID)!
@@ -195,4 +212,17 @@ export function aspectClass(width: number, height: number): AspectClass {
 /** Outer margin of a layout, in design units (1000 units = the square root of the trim area). */
 export function layoutMarginUnits(cls: AspectClass): number {
 	return cls === 'banner' ? 44 : cls === 'landscape' ? 60 : 72
+}
+
+export const FORMAT_GROUPS: FormatGroup[] = ['Social', 'Events', 'Slides', 'Print']
+
+export function formatDimensionLabel(format: Format): string {
+	if (format.kind === 'print') return `${format.widthMm} × ${format.heightMm} mm`
+	const size = `${format.width} × ${format.height} px`
+	return format.shownAtPx ? `${size} · shown ~${format.shownAtPx} px` : size
+}
+
+/** Inline style for a preview canvas: the size the platform shows it at, when the format says. */
+export function previewStyle(format: Format): { width: number } | undefined {
+	return format.kind === 'digital' && format.shownAtPx ? { width: format.shownAtPx } : undefined
 }

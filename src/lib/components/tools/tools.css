@@ -30,6 +30,7 @@
 	border-radius: 8px;
 	background-color: var(--bg);
 	color: var(--text);
+	font-family: inherit;
 	font-size: 1rem;
 }
 
@@ -80,5 +81,39 @@
 .tool-status {
 	flex-basis: 100%;
 	margin: 0;
+	font-size: 0.875rem;
+}
+
+/* A closed-by-default group of extra controls. */
+.tool-details {
+	margin-top: 0.75rem;
+}
+
+.tool-details summary {
+	font-size: 0.875rem;
+	font-weight: 700;
+	cursor: pointer;
+}
+
+/* A button that reads as a link, for small actions like Remove. */
+.tool-link {
+	margin-left: 0.5rem;
+	padding: 0;
+	border: none;
+	background: none;
+	color: var(--brand-subtle);
+	font: inherit;
+	text-decoration: underline;
+	cursor: pointer;
+}
+
+.tool-link:hover {
+	color: var(--brand);
+}
+
+.tool-file {
+	display: block;
+	max-width: 100%;
+	margin-top: 0.5rem;
 	font-size: 0.875rem;
 }

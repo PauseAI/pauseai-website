@@ -14,7 +14,8 @@
 	let { pinned = true, preview, controls }: Props = $props()
 </script>
 
-<!-- A studio: the preview column, then the form column. -->
+<!-- A studio: the preview column, then the form column. In a pinned studio the preview's first element is the
+     preview itself. -->
 <div class="studio" class:pinned>
 	<div class="preview">{@render preview()}</div>
 	<div class="controls">{@render controls()}</div>
@@ -48,13 +49,25 @@
 		}
 	}
 
+	/* On phones the preview column's parts join the page's one column: the preview itself stays pinned at the top
+	   while typing, and what sits under it on wide screens (checks, downloads) moves after the form, where a
+	   volunteer finishes. */
 	@media (max-width: 899px) {
 		.pinned .preview {
+			display: contents;
+		}
+
+		.pinned .preview > :global(:first-child) {
 			position: sticky;
 			top: 0;
 			z-index: 5;
 			padding: 0.5rem 0;
 			background-color: var(--bg);
+			box-shadow: 0 0 0 12px var(--bg);
+		}
+
+		.pinned .preview > :global(:not(:first-child)) {
+			order: 1;
 		}
 	}
 </style>

@@ -22,12 +22,11 @@ export type Event = {
 
 export const prerender = false
 
-// The global calendar stays hardcoded; national chapter calendars are synced
+// The global calendar stays hardcoded (in $lib/clients/luma/calendar); national chapter calendars are synced
 // from Airtable into national-chapters.json by scripts/sync-national-chapters.ts
 // (lumaCalendarId, resolved from each chapter's Luma page at sync time).
-const GLOBAL_CALENDAR_ID = 'cal-E1qhLPs5IvlQr8S'
 const CALENDAR_IDS = [
-	GLOBAL_CALENDAR_ID,
+	Calendar.GLOBAL_CALENDAR_ID,
 	...nationalChaptersJson.communities
 		.map((c) => c.lumaCalendarId)
 		.filter((id): id is string => id != null)

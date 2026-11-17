@@ -20,7 +20,7 @@ export interface QrCaption {
 export type CaptionKind = 'label' | 'link'
 
 /** The label is set like a headline, the link like body text. Both families are canvas fonts (canvasFonts.ts). */
-const CAPTION_FONTS: Record<CaptionKind, { family: string; weight: string }> = {
+export const CAPTION_FONTS: Record<CaptionKind, { family: string; weight: string }> = {
 	label: { family: HEADLINE_FAMILY, weight: '700' },
 	link: { family: BODY_FAMILY, weight: '500' }
 }
