@@ -18,7 +18,7 @@
 		type CalendarEvent
 	} from '$lib/collateral/eventText'
 	import { isLumaEventLink } from '$lib/collateral/lint'
-	import { LIBRARY_PHOTOS, type LibraryPhoto } from '$lib/collateral/photos'
+	import type { LibraryPhoto } from '$lib/collateral/photos'
 	import { QR_LABEL_MAX, QR_URL_MAX } from '$lib/collateral/project'
 	import { MAX_QR_CODES, normaliseUrl, type QrCode } from '$lib/collateral/qr'
 	import {
@@ -29,6 +29,7 @@
 	} from '$lib/collateral/render'
 	import { getTemplate } from '$lib/collateral/templates'
 	import CharCount from './CharCount.svelte'
+	import PhotoLibrary from './PhotoLibrary.svelte'
 	import StylePicker from './StylePicker.svelte'
 	import {
 		DESIGN_TEMPLATES,
@@ -392,19 +393,7 @@
 </ControlsSection>
 
 <ControlsSection heading={`${n(5)}. Photo (optional)`}>
-	<div class="photos">
-		{#each LIBRARY_PHOTOS as item (item.id)}
-			<button
-				type="button"
-				class="photo"
-				aria-label={item.label}
-				aria-pressed={currentLibraryId === item.id}
-				title={item.label}
-				onclick={() => onLibraryPhoto(item)}
-				style:background-image={`url(${item.thumb})`}
-			></button>
-		{/each}
-	</div>
+	<PhotoLibrary currentId={currentLibraryId} onPick={onLibraryPhoto} />
 	<p class="tool-hint">Or upload your own:</p>
 	<input
 		class="tool-file"
@@ -483,14 +472,12 @@
 		color: var(--text-2);
 	}
 
-	.choice[aria-checked='true'],
-	.photo[aria-pressed='true'] {
+	.choice[aria-checked='true'] {
 		border-color: var(--brand);
 		box-shadow: 0 0 0 2px var(--brand);
 	}
 
 	.choice:focus-visible,
-	.photo:focus-visible,
 	.qr-remove:focus-visible {
 		outline: 2px solid var(--text);
 		outline-offset: 2px;
@@ -543,23 +530,5 @@
 
 	.qr-size .tool-label {
 		margin: 0;
-	}
-
-	.photos {
-		display: grid;
-		grid-template-columns: repeat(3, 1fr);
-		gap: 0.5rem;
-		margin-bottom: 0.5rem;
-	}
-
-	.photo {
-		aspect-ratio: 4 / 3;
-		padding: 0;
-		border: 1px solid var(--grey-300);
-		border-radius: 6px;
-		background-color: var(--bg-subtle);
-		background-position: center;
-		background-size: cover;
-		cursor: pointer;
 	}
 </style>

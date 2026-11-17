@@ -45,7 +45,7 @@ async function canvasToPngBytes(canvas: HTMLCanvasElement): Promise<ArrayBuffer>
 }
 
 /** Builds a multi-page PDF at trim size plus bleed, one page per canvas, with TrimBox/BleedBox set so print shops can find the trim. */
-async function pdfBytesForPrint(
+export async function pdfBytesForPrint(
 	canvases: HTMLCanvasElement[],
 	format: { widthMm: number; heightMm: number },
 	bleedMm: number
@@ -78,4 +78,58 @@ export async function downloadCanvasPdf(
 ): Promise<void> {
 	const bytes = await pdfBytesForPrint([canvas], format, bleedMm)
 	download(new Blob([bytes as BlobPart], { type: 'application/pdf' }), filename)
+}
+
+/** Builds a multi-page PDF for a digital (pixel-sized) format, one page per canvas at 1px = 1pt. No bleed/trim — for sharing, not print. */
+export async function pdfBytesDigital(canvases: HTMLCanvasElement[]): Promise<Uint8Array> {
+	const { PDFDocument } = await import('pdf-lib')
+	const pdf = await PDFDocument.create()
+	for (const canvas of canvases) {
+		const page = pdf.addPage([canvas.width, canvas.height])
+		const image = await pdf.embedPng(await canvasToPngBytes(canvas))
+		page.drawImage(image, { x: 0, y: 0, width: canvas.width, height: canvas.height })
+	}
+	pdf.setTitle('PauseAI collateral')
+	return pdf.save()
+}
+
+/** JSZip, loaded on demand so the editor page stays light. */
+async function newZip() {
+	const { default: JSZip } = await import('jszip')
+	return new JSZip()
+}
+
+/** Zips named files into one download, e.g. a campaign pack's PNGs and print PDFs. */
+export async function downloadFilesZip(
+	files: { name: string; data: Blob | Uint8Array }[],
+	filename: string
+): Promise<void> {
+	const zip = await newZip()
+	for (const f of files) zip.file(f.name, f.data)
+	download(await zip.generateAsync({ type: 'blob' }), filename)
+}
+
+export interface PlatformExportGroup {
+	/** Top-level folder this group's files land in inside the bundle. */
+	folder: string
+	kind: 'images' | 'pdf'
+	pngBlobs?: Blob[]
+	pdfBytes?: Uint8Array
+	pdfName?: string
+}
+
+/** Zips several platforms' exports into one archive, one folder per platform, so a multi-platform export lands as a single download. */
+export async function downloadPlatformBundleZip(
+	groups: PlatformExportGroup[],
+	filename: string
+): Promise<void> {
+	const zip = await newZip()
+	for (const g of groups) {
+		if (g.kind === 'images') {
+			g.pngBlobs!.forEach((blob, i) => zip.file(`${g.folder}/${i + 1}.png`, blob))
+		} else {
+			zip.file(`${g.folder}/${g.pdfName}`, g.pdfBytes!)
+		}
+	}
+	download(await zip.generateAsync({ type: 'blob' }), filename)
 }
