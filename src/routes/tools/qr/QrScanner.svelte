@@ -131,7 +131,11 @@
 		return null
 	}
 
-	function findInRegion(jsQr: JsQr, image: HTMLImageElement, region: Region): string | null {
+	async function findInRegion(
+		jsQr: JsQr,
+		image: HTMLImageElement,
+		region: Region
+	): Promise<string | null> {
 		const canvas = document.createElement('canvas')
 		for (const r of [pad(region, 0.1), region]) {
 			for (const size of [REGION_MAX, REGION_SMALL]) {
@@ -140,6 +144,8 @@
 					thorough: true
 				})
 				if (text) return text
+				// Each try can take a second on a phone, so let the page paint in between.
+				await yieldToBrowser()
 			}
 		}
 		return null
@@ -172,6 +178,7 @@
 	let dialog: HTMLDialogElement
 	let video = $state<HTMLVideoElement>()
 	let fileInput: HTMLInputElement
+	let dialogFileInput = $state<HTMLInputElement>()
 	let image = $state<HTMLImageElement>()
 	let dragStart: { x: number; y: number } | null = null
 
@@ -313,7 +320,8 @@
 	}
 
 	function onPointerDown(e: PointerEvent & { currentTarget: HTMLDivElement }) {
-		if (!image) return
+		// Not while the last box is still being searched.
+		if (!image || busy) return
 		const p = pointAt(e, image)
 		e.currentTarget.setPointerCapture(e.pointerId)
 		dragStart = p
@@ -340,10 +348,17 @@
 			box = null
 			return
 		}
-		const jsQr = await loadJsQr()
-		const text = findInRegion(jsQr, image, box)
-		if (text) found(text)
-		else modalMessage = 'No code in that box. Try drawing it again, a little bigger than the code.'
+		busy = true
+		modalMessage = 'Looking for the code…'
+		try {
+			const jsQr = await loadJsQr()
+			const text = await findInRegion(jsQr, image, box)
+			if (text) found(text)
+			else
+				modalMessage = 'No code in that box. Try drawing it again, a little bigger than the code.'
+		} finally {
+			busy = false
+		}
 	}
 </script>
 
@@ -415,7 +430,9 @@
 		{/if}
 		<div class="actions dialog-actions">
 			{#if open && modalMessage}
-				<ToolButton size="small" onclick={() => fileInput.click()} pending={busy}>
+				<!-- Its own file input: the one outside is inert while the dialog is open. -->
+				<input bind:this={dialogFileInput} type="file" accept="image/*" hidden onchange={onPhoto} />
+				<ToolButton size="small" onclick={() => dialogFileInput?.click()} pending={busy}>
 					Use a photo instead
 				</ToolButton>
 			{/if}

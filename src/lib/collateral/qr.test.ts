@@ -16,6 +16,7 @@ import {
 	qrMinScreenPx,
 	qrPlan,
 	qrTarget,
+	qrTooLong,
 	usableQrCodes
 } from './qr'
 
@@ -249,5 +250,40 @@ describe('qrPlan size preference', () => {
 		expect(plan('m').size).toBeGreaterThanOrEqual(
 			qrMinScreenPx(qrMatrix('https://pauseai.uk').length)
 		)
+	})
+})
+
+describe('non-ASCII addresses', () => {
+	it('encodes them as UTF-8, as phones read them', async () => {
+		const qrcode = (await import('qrcode-generator')).default
+		const utf8 = Array.from(new TextEncoder().encode('https://pauseai.de/über'), (b) =>
+			String.fromCharCode(b)
+		).join('')
+		const qr = qrcode(0, 'H')
+		qr.addData(utf8)
+		qr.make()
+		const expected = Array.from({ length: qr.getModuleCount() }, (_, r) =>
+			Array.from({ length: qr.getModuleCount() }, (_, c) => qr.isDark(r, c))
+		)
+		expect(qrMatrix('https://pauseai.de/über')).toEqual(expected)
+		// Not the library's own encoding, which drops each character's high byte.
+		const naive = qrcode(0, 'H')
+		naive.addData('https://pauseai.de/über')
+		naive.make()
+		expect(qrMatrix('https://pauseai.de/über').length === naive.getModuleCount()).toBe(true)
+		expect(
+			qrMatrix('https://pauseai.de/über').some((row, r) =>
+				row.some((dark, c) => dark !== naive.isDark(r, c))
+			)
+		).toBe(true)
+	})
+
+	it('accepts internationalised top-level domains', () => {
+		expect(isWebAddress('пауза.рф')).toBe(true)
+	})
+
+	it('counts bytes, not characters, against what a code holds', () => {
+		expect(qrTooLong(`https://pauseai.uk/${'a'.repeat(189)}`)).toBe(false)
+		expect(qrTooLong(`https://pauseai.info/${'п'.repeat(150)}`)).toBe(true)
 	})
 })

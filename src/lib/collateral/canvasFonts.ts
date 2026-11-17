@@ -13,6 +13,8 @@ import robotoSlabLatin500 from '@fontsource/roboto-slab/files/roboto-slab-latin-
 import robotoSlabLatinExt500 from '@fontsource/roboto-slab/files/roboto-slab-latin-ext-500-normal.woff2'
 import robotoSlabCyrillic500 from '@fontsource/roboto-slab/files/roboto-slab-cyrillic-500-normal.woff2'
 import robotoSlabGreek500 from '@fontsource/roboto-slab/files/roboto-slab-greek-500-normal.woff2'
+import robotoSlabCyrillic700 from '@fontsource/roboto-slab/files/roboto-slab-cyrillic-700-normal.woff2'
+import robotoSlabGreek700 from '@fontsource/roboto-slab/files/roboto-slab-greek-700-normal.woff2'
 
 /** Unicode ranges of the @fontsource subsets, copied from their CSS. */
 export const UNICODE_RANGES = {
@@ -42,7 +44,10 @@ export const CANVAS_FONTS: CanvasFace[] = [
 	{ family: BODY_FAMILY, weight: '500', subset: 'latin', file: robotoSlabLatin500 },
 	{ family: BODY_FAMILY, weight: '500', subset: 'latin-ext', file: robotoSlabLatinExt500 },
 	{ family: BODY_FAMILY, weight: '500', subset: 'cyrillic', file: robotoSlabCyrillic500 },
-	{ family: BODY_FAMILY, weight: '500', subset: 'greek', file: robotoSlabGreek500 }
+	{ family: BODY_FAMILY, weight: '500', subset: 'greek', file: robotoSlabGreek500 },
+	// For headline letters Saira Condensed doesn't have.
+	{ family: BODY_FAMILY, weight: '700', subset: 'cyrillic', file: robotoSlabCyrillic700 },
+	{ family: BODY_FAMILY, weight: '700', subset: 'greek', file: robotoSlabGreek700 }
 ]
 
 /** Parses a CSS unicode-range list into inclusive code point ranges. */

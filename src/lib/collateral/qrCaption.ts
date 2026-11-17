@@ -6,7 +6,7 @@ import {
 	UNICODE_RANGES,
 	type CanvasFace
 } from './canvasFonts'
-import { fitText } from './text'
+import { wrapLines } from './text'
 
 /**
  * Text printed under a standalone QR code: an optional label, like "Join PauseAI", and optionally the link the
@@ -29,7 +29,10 @@ const CAPTION_FONTS: Record<CaptionKind, { family: string; weight: string }> = {
 export function captionFont(kind: CaptionKind, fontSize: number): string {
 	const { family, weight } = CAPTION_FONTS[kind]
 	const fallback =
-		kind === 'label' ? '"Saira Condensed", Impact, sans-serif' : '"Roboto Slab", Georgia, serif'
+		kind === 'label'
+			? // Saira Condensed has no Cyrillic or Greek letters, so those come from Roboto Slab.
+				`"${BODY_FAMILY}", "Saira Condensed", Impact, sans-serif`
+			: '"Roboto Slab", Georgia, serif'
 	return `${weight} ${fontSize}px "${family}", ${fallback}`
 }
 
@@ -94,14 +97,23 @@ export function captionLayout(
 		maxLines: number
 	) => {
 		const lineHeight = 1.2
-		const fit = fitText((t, f) => measure(kind, t, f), text, {
-			maxWidth,
-			maxHeight: maxFont * lineHeight * maxLines,
-			maxFont,
-			minFont,
-			lineHeight
-		})
-		overflow ||= fit.overflow
+		const m = (t: string, f: number) => measure(kind, t, f)
+		// The largest size, down to minFont, at which the text wraps to at most maxLines lines that each fit.
+		let size = maxFont
+		let wrapped = wrapLines(m, text.trim(), size, maxWidth)
+		const fits = () =>
+			wrapped.length <= maxLines && Math.max(0, ...wrapped.map((l) => m(l, size))) <= maxWidth
+		while (!fits() && size > minFont) {
+			size = Math.max(minFont, Math.floor(size * 0.96))
+			wrapped = wrapLines(m, text.trim(), size, maxWidth)
+		}
+		const fit = {
+			fontSize: size,
+			lines: wrapped,
+			lineHeightPx: size * lineHeight,
+			height: wrapped.length * size * lineHeight
+		}
+		overflow ||= !fits()
 		fit.lines.forEach((line, i) => {
 			lines.push({
 				kind,
@@ -149,7 +161,15 @@ export function captionFaces(caption: QrCaption): CanvasFace[] {
 		.filter((kind) => caption[kind].trim())
 		.flatMap((kind) => {
 			const { family, weight } = CAPTION_FONTS[kind]
-			return facesFor(family, weight, caption[kind])
+			const faces = facesFor(family, weight, caption[kind])
+			// The label's Cyrillic and Greek letters come from Roboto Slab (see captionFont).
+			if (kind === 'label')
+				faces.push(
+					...facesFor(BODY_FAMILY, weight, caption[kind]).filter(
+						(f) => f.subset === 'cyrillic' || f.subset === 'greek'
+					)
+				)
+			return faces
 		})
 }
 

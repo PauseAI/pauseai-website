@@ -7,7 +7,7 @@
 	import { declareCanvasFonts } from '$lib/collateral/canvasFonts'
 	import { CHAPTER_CHOICES, getChapter, GLOBAL_LINK } from '$lib/collateral/chapters'
 	import { canvasToPngBlob, downloadCanvasPng, downloadText } from '$lib/collateral/export'
-	import { isQrLink, qrFilenameStem, qrMinPrintMm, qrTarget } from '$lib/collateral/qr'
+	import { isQrLink, qrFilenameStem, qrMinPrintMm, qrTarget, qrTooLong } from '$lib/collateral/qr'
 	import {
 		captionFaces,
 		captionFont,
@@ -95,6 +95,8 @@
 	let busy = $state(false)
 	let message = $state<string | null>(null)
 	let scanned = $state<string | null>(null)
+	// A scanned web address too long to put in a code with the pause symbol.
+	let scannedTooLong = $state(false)
 	// A browser feature, so unknown until the page runs in one.
 	let handoff = $state<Handoff>(null)
 
@@ -110,15 +112,22 @@
 	function onScan(text: string) {
 		const trimmed = text.trim()
 		// A longer address makes a code too dense for the pause symbol, or too long to make at all.
-		if (isQrLink(trimmed) && trimmed.length <= MAX_URL) {
+		scannedTooLong = false
+		if (!isQrLink(trimmed)) {
+			scanned = trimmed
+		} else if (trimmed.length > MAX_URL || qrTooLong(qrTarget(trimmed, track))) {
+			// A longer address makes a code too dense for the pause symbol, or too long to make at all.
+			scanned = null
+			scannedTooLong = true
+		} else {
 			url = trimmed
 			scanned = null
-		} else {
-			scanned = trimmed
 		}
 	}
 
-	const valid = $derived(isQrLink(url))
+	// Accented and non-Latin letters take more room in a code, so a typed address can be too long to hold.
+	const tooLong = $derived(isQrLink(url) && qrTooLong(qrTarget(url, track)))
+	const valid = $derived(isQrLink(url) && !tooLong)
 	const target = $derived(valid ? qrTarget(url, track) : '')
 	const stem = $derived(`pauseai-qr-${qrFilenameStem(url)}`)
 	const caption: QrCaption = $derived({
@@ -316,14 +325,27 @@
 					bind:value={url}
 					aria-invalid={invalid || undefined}
 					aria-describedby={invalid ? 'qr-url-error' : undefined}
-					oninput={() => (scanned = null)}
+					oninput={() => {
+						scanned = null
+						scannedTooLong = false
+					}}
 				/>
-				{#if invalid}
+				{#if tooLong}
+					<p id="qr-url-error" class="tool-error">
+						That address is too long for a QR code with the pause symbol. Try a shorter link.
+					</p>
+				{:else if invalid}
 					<p id="qr-url-error" class="tool-error">
 						That does not look like a web address. Try something like pauseai.info/join.
 					</p>
 				{/if}
 				<QrScanner onResult={onScan} />
+				{#if scannedTooLong}
+					<p class="tool-error" role="status">
+						That code holds a web address too long to fit in a code with the pause symbol. Try a
+						shorter link.
+					</p>
+				{/if}
 				{#if scanned !== null}
 					<p class="tool-error" role="status">
 						That code does not hold a web address{#if scanned}. It says: <q

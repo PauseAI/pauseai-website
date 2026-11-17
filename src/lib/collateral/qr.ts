@@ -49,7 +49,8 @@ export function isWebAddress(input: string): boolean {
 	try {
 		const { hostname, username } = new URL(normaliseUrl(trimmed))
 		// A user name means something like "mailto:someone@example.com" was read as a login.
-		return !username && /^[a-z0-9-]+(\.[a-z0-9-]+)*\.[a-z]{2,}$/i.test(hostname)
+		// The top-level domain is letters, or an internationalised one in its xn-- form (.рф is xn--p1ai).
+		return !username && /^[a-z0-9-]+(\.[a-z0-9-]+)*\.([a-z]{2,}|xn--[a-z0-9-]+)$/i.test(hostname)
 	} catch {
 		return false
 	}
@@ -70,6 +71,17 @@ export function qrTarget(input: string, track: boolean): string {
 	// const [base, hash] = url.split("#");
 	// const sep = base.includes("?") ? "&" : "?";
 	// return `${base}${sep}utm_source=collateral&utm_medium=qr${hash ? `#${hash}` : ""}`;
+}
+
+/**
+ * The most a code holds, in bytes: a 200-character address, as typed into the tools, with https:// added. Codes
+ * denser than that can stop scanning with the pause symbol in the middle (see LOGO_RADIUS in qrShape.ts).
+ */
+export const QR_MAX_BYTES = 208
+
+/** Whether `target` is more than a code can hold with the pause symbol. Accented and non-Latin letters take more. */
+export function qrTooLong(target: string): boolean {
+	return new TextEncoder().encode(target).length > QR_MAX_BYTES
 }
 
 /** A safe download name for a code, e.g. "pauseai-info-join". */
@@ -197,8 +209,11 @@ export function qrPlan(opts: {
 
 /** Dark-module matrix. Uses the highest error correction so a logo can sit in the middle. */
 export function qrMatrix(text: string): boolean[][] {
+	// UTF-8, as phones read it. The library keeps only each character's low byte, so "ü" or "п" in an address
+	// would open somewhere else: hand it the UTF-8 bytes, one per character.
+	const bytes = Array.from(new TextEncoder().encode(text), (b) => String.fromCharCode(b)).join('')
 	const qr = qrcode(0, 'H')
-	qr.addData(text)
+	qr.addData(bytes)
 	qr.make()
 	const n = qr.getModuleCount()
 	return Array.from({ length: n }, (_, r) => Array.from({ length: n }, (_, c) => qr.isDark(r, c)))

@@ -60,3 +60,10 @@ describe('captionFaces', () => {
 		])
 	})
 })
+
+describe('caption faces for other scripts', () => {
+	it("takes a Cyrillic label's letters from Roboto Slab, as Saira Condensed has none", () => {
+		const faces = captionFaces({ label: 'Придружи се', link: '' })
+		expect(faces.map((f) => [f.family, f.subset])).toContainEqual([BODY_FAMILY, 'cyrillic'])
+	})
+})

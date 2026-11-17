@@ -92,3 +92,17 @@ describe('qrSvg with a caption', () => {
 		).toBe(qrSvg(shape, { background: '#FFFFFF' }))
 	})
 })
+
+describe('label lines', () => {
+	it('keeps the label to two lines, shrinking it rather than wrapping to a third', () => {
+		const layout = captionLayout(
+			1000,
+			{ label: 'Join the PauseAI movement in your town', link: '' },
+			measure
+		)
+		const label = layout.lines.filter((l) => l.kind === 'label')
+		expect(label).toHaveLength(2)
+		expect(label[0].fontSize).toBeLessThan(85)
+		expect(layout.overflow).toBe(false)
+	})
+})
