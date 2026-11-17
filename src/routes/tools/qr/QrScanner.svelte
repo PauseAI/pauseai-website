@@ -205,10 +205,15 @@
 					})
 				])
 				stream = media
-				if (stopped || !video) return
+				// Closed while the permission prompt or camera was starting: let the camera go straight away.
+				if (stopped || !video) {
+					media.getTracks().forEach((t) => t.stop())
+					return
+				}
 				const v = video
 				v.srcObject = media
 				await v.play()
+				if (stopped) return
 
 				let last = 0
 				// Closing cancels the next frame, so a tick never runs after it.
@@ -278,8 +283,13 @@
 		busy = true
 		try {
 			const [jsQr, bitmap] = await Promise.all([loadJsQr(), createImageBitmap(file)])
-			const text = await findInPhoto(jsQr, bitmap)
-			bitmap.close()
+			let text: string | null
+			try {
+				text = await findInPhoto(jsQr, bitmap)
+			} finally {
+				// A big photo's pixels are a lot of memory on a phone, so let them go even when decoding fails.
+				bitmap.close()
+			}
 			if (text) {
 				found(text)
 				return
@@ -339,8 +349,10 @@
 
 <div class="scan">
 	<div class="actions">
+		<!-- Not while a photo is being searched, so its result can't arrive in the middle of a camera scan. -->
 		<ToolButton
 			size="small"
+			disabled={busy}
 			onclick={() => {
 				message = null
 				open = true

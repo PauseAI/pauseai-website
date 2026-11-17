@@ -34,16 +34,18 @@
 		return measureCtx.measureText(text).width
 	}
 
-	/** Loads the caption's fonts into the page, for measuring and the PNG, and returns them inlined, for the SVG. */
-	async function loadCaptionFonts(caption: QrCaption): Promise<string> {
+	/** Loads the caption's fonts into the page, for measuring and drawing the PNG. */
+	async function loadPageFonts(caption: QrCaption): Promise<void> {
 		declareCanvasFonts()
 		const text = `${caption.label}${caption.link}`
-		const [css] = await Promise.all([
-			captionFontCss(caption),
-			...captionFaces(caption).map((f) =>
-				document.fonts.load(`${f.weight} 40px "${f.family}"`, text)
-			)
-		])
+		await Promise.all(
+			captionFaces(caption).map((f) => document.fonts.load(`${f.weight} 40px "${f.family}"`, text))
+		)
+	}
+
+	/** Loads the caption's fonts into the page, and returns them inlined, for the SVG. */
+	async function loadCaptionFonts(caption: QrCaption): Promise<string> {
+		const [css] = await Promise.all([captionFontCss(caption), loadPageFonts(caption)])
 		return css
 	}
 
@@ -60,17 +62,24 @@
 		})
 	}
 
-	/** How this browser can hand the PNG over besides downloading it: the share sheet on phones, the clipboard elsewhere. */
+	/**
+	 * How this browser can hand the PNG over besides downloading it: the share sheet on phones and tablets, the
+	 * clipboard elsewhere. Desktop Chrome and Safari can share files too, but people there want to paste.
+	 */
 	type Handoff = 'share' | 'copy' | null
 
 	function detectHandoff(): Handoff {
 		const probe = new File([''], 'qr.png', { type: 'image/png' })
-		if (typeof navigator.canShare === 'function' && navigator.canShare({ files: [probe] }))
+		const touch = window.matchMedia('(pointer: coarse)').matches
+		if (touch && typeof navigator.canShare === 'function' && navigator.canShare({ files: [probe] }))
 			return 'share'
 		if (typeof ClipboardItem !== 'undefined' && typeof navigator.clipboard?.write === 'function')
 			return 'copy'
 		return null
 	}
+
+	/** The longest address the tool takes. Always fits in a code with the pause symbol (qr-capacity.test.ts). */
+	const MAX_URL = 200
 
 	let chapterId = $state('')
 	let url = $state(displayLink(GLOBAL_LINK))
@@ -99,7 +108,8 @@
 
 	function onScan(text: string) {
 		const trimmed = text.trim()
-		if (isQrLink(trimmed)) {
+		// A longer address makes a code too dense for the pause symbol, or too long to make at all.
+		if (isQrLink(trimmed) && trimmed.length <= MAX_URL) {
 			url = trimmed
 			scanned = null
 		} else {
@@ -142,11 +152,13 @@
 
 	// The preview is the same SVG that gets downloaded.
 	// The web address is capped at 200 characters, which always fits in a code, even with the pause symbol.
+	// The code itself only changes with the address and the symbol, not as the caption is typed.
+	const previewShape = $derived(target ? qrShape(target, 1000, logo) : null)
 	const previewImage = $derived.by(() => {
-		if (!target) return null
+		const shape = previewShape
+		if (!shape) return null
 		// Measurements change once the fonts have loaded.
 		void fontCss
-		const shape = qrShape(target, 1000, logo)
 		const layout = captionLayout(1000, caption, measureCaption)
 		const svg = qrSvg(shape, {
 			background: PANEL,
@@ -158,7 +170,8 @@
 	})
 
 	async function pngCanvas(): Promise<HTMLCanvasElement> {
-		if (hasCaption) await loadCaptionFonts(caption)
+		// Without the fonts (offline, say) the caption is drawn in a fallback font rather than not at all.
+		if (hasCaption) await loadPageFonts(caption).catch(() => undefined)
 		const layout = captionLayout(PNG_SIZE, caption, measureCaption)
 		const svg = qrSvg(qrShape(target, PNG_SIZE, logo), { background: PANEL, roundedPanel: false })
 		const image = await loadImage(svgDataUrl(svg))
@@ -211,19 +224,36 @@
 		}
 	}
 
+	/** The last PNG made for sharing, and what it shows, so a second tap can share it straight away. */
+	let shareReady: { key: string; file: File } | null = null
+
 	async function onShare() {
+		busy = true
 		message = null
+		const key = JSON.stringify([target, logo, caption])
 		try {
-			const blob = await canvasToPngBlob(await pngCanvas())
-			await navigator.share({ files: [new File([blob], `${stem}.png`, { type: 'image/png' })] })
+			let file = shareReady?.key === key ? shareReady.file : null
+			if (!file) {
+				const blob = await canvasToPngBlob(await pngCanvas())
+				file = new File([blob], `${stem}.png`, { type: 'image/png' })
+				shareReady = { key, file }
+			}
+			await navigator.share({ files: [file] })
 		} catch (e) {
+			const name = e instanceof DOMException ? e.name : ''
 			// Closing the share sheet is not an error.
-			if (!(e instanceof DOMException && e.name === 'AbortError'))
-				message = 'Could not share the image. Download it instead.'
+			if (name === 'AbortError') return
+			// Making the image took long enough that the browser no longer counts the tap. It's ready now.
+			if (name === 'NotAllowedError' && shareReady?.key === key)
+				message = 'The image is ready. Tap Share again.'
+			else message = 'Could not share the image. Download it instead.'
+		} finally {
+			busy = false
 		}
 	}
 
 	async function onCopy() {
+		busy = true
 		message = null
 		try {
 			// Safari only allows the write if the promise for the image is handed over straight away.
@@ -232,6 +262,8 @@
 			message = 'Copied. Paste it into your document or message.'
 		} catch {
 			message = 'Could not copy the image. Download it instead.'
+		} finally {
+			busy = false
 		}
 	}
 
@@ -278,7 +310,7 @@
 					type="text"
 					inputmode="url"
 					autocomplete="off"
-					maxlength="200"
+					maxlength={MAX_URL}
 					placeholder="e.g. pauseai.info/join"
 					bind:value={url}
 					aria-invalid={invalid || undefined}
@@ -339,10 +371,12 @@
 				</ToolButton>
 				<ToolButton onclick={onDownloadSvg} disabled={!previewImage}>Download SVG</ToolButton>
 				{#if handoff === 'share'}
-					<ToolButton onclick={onShare} disabled={!previewImage}>Share</ToolButton>
+					<ToolButton onclick={onShare} disabled={!previewImage} pending={busy}>Share</ToolButton>
 				{/if}
 				{#if handoff === 'copy'}
-					<ToolButton onclick={onCopy} disabled={!previewImage}>Copy image</ToolButton>
+					<ToolButton onclick={onCopy} disabled={!previewImage} pending={busy}
+						>Copy image</ToolButton
+					>
 				{/if}
 				{#if message}
 					<p class="tool-status" role="status">{message}</p>
