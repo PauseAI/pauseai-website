@@ -12,6 +12,11 @@
 	]
 
 	let mode = $state<Mode>('single')
+	// Each mode is set up the first time it's opened, then kept, so switching back keeps its uploaded photos.
+	let opened = $state<Mode[]>(['single'])
+	$effect(() => {
+		if (!opened.includes(mode)) opened = [...opened, mode]
+	})
 </script>
 
 <div class="modes" role="radiogroup" aria-label="Post type">
@@ -28,10 +33,13 @@
 	{/each}
 </div>
 <p class="hint">{MODES.find((m) => m.id === mode)?.hint}</p>
-<!-- All three stay mounted, so switching back keeps uploaded photos, which autosave leaves out. -->
 <div hidden={mode !== 'single'}><CollateralStudio /></div>
-<div hidden={mode !== 'pack'}><PackStudio /></div>
-<div hidden={mode !== 'gallery'}><GalleryStudio /></div>
+{#if opened.includes('pack')}
+	<div hidden={mode !== 'pack'}><PackStudio /></div>
+{/if}
+{#if opened.includes('gallery')}
+	<div hidden={mode !== 'gallery'}><GalleryStudio /></div>
+{/if}
 
 <style>
 	.modes {

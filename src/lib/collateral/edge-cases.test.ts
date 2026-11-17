@@ -74,6 +74,10 @@ describe('saved gallery projects', () => {
 			project: { platforms: ALL_PLATFORM_IDS }
 		})
 	})
+
+	it('keeps a choice of no platforms', () => {
+		expect(parseGalleryProject(ok({ platforms: [] }))).toMatchObject({ project: { platforms: [] } })
+	})
 })
 
 describe('saved campaign packs', () => {

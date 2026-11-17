@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { untrack } from 'svelte'
 	import type { Format } from '$lib/collateral/formats'
 	import type { LintIssue } from '$lib/collateral/lint'
 	import { renderCollateral, type RenderOptions } from '$lib/collateral/render'
@@ -21,11 +22,33 @@
 	let { fontsLoaded, format, options, issues, active, onSelect, onIssues }: Props = $props()
 	let canvas: HTMLCanvasElement
 
-	$effect(() => {
-		void fontsLoaded
-		onIssues(
-			renderCollateral(canvas, { ...options, format, maxSide: THUMB_MAX_SIDE, lint: true }).issues
+	// What it was last drawn with. A crop or title size changed on another format rebuilds every thumbnail's
+	// options, but each part is the same object as before unless it changed, so most need no redraw.
+	let last: {
+		options: Omit<RenderOptions, 'format'>
+		format: Format
+		fonts: string | null
+	} | null = null
+	const same = (a: Omit<RenderOptions, 'format'>, b: Omit<RenderOptions, 'format'>) =>
+		(Object.keys(a) as (keyof typeof a)[]).every((k) =>
+			k === 'partnerLogos'
+				? a.partnerLogos?.length === b.partnerLogos?.length &&
+					(a.partnerLogos ?? []).every((l, i) => l === b.partnerLogos?.[i])
+				: a[k] === b[k]
 		)
+
+	$effect(() => {
+		const fonts = fontsLoaded
+		if (last && last.format === format && last.fonts === fonts && same(last.options, options))
+			return
+		last = { options, format, fonts }
+		const { issues } = renderCollateral(canvas, {
+			...options,
+			format,
+			maxSide: THUMB_MAX_SIDE,
+			lint: true
+		})
+		untrack(() => onIssues(issues))
 	})
 
 	const warnings = $derived(issues.filter((i) => i.level === 'warn').length)

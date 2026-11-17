@@ -1,22 +1,16 @@
 <script lang="ts">
-	import { onMount } from 'svelte'
+	import { onMount, untrack } from 'svelte'
 	import ControlsSection from '$lib/components/tools/ControlsSection.svelte'
 	import Studio from '$lib/components/tools/Studio.svelte'
 	import ToolButton from '$lib/components/tools/ToolButton.svelte'
 	import {
 		canvasToPngBlob,
-		downloadPlatformBundleZip,
+		downloadFilesZip,
 		downloadText,
 		exportFilename,
-		pdfBytesDigital,
-		type PlatformExportGroup
+		pdfBytesDigital
 	} from '$lib/collateral/export'
-	import {
-		DEFAULT_FORMAT_ID,
-		formatDimensionLabel,
-		getFormat,
-		type Format
-	} from '$lib/collateral/formats'
+	import { DEFAULT_FORMAT_ID, formatDimensionLabel, getFormat } from '$lib/collateral/formats'
 	import {
 		CAPTION_MAX,
 		DEFAULT_SLIDE_PHOTO_SETTINGS,
@@ -25,6 +19,7 @@
 		MIN_SLIDES,
 		newSlide,
 		newSlideId,
+		slideRenderOptions,
 		type Slide,
 		type SlidePhoto
 	} from '$lib/collateral/gallery'
@@ -45,7 +40,6 @@
 		loadImage,
 		renderCollateral
 	} from '$lib/collateral/render'
-	import { getTemplate } from '$lib/collateral/templates'
 	import { DEFAULT_THEME_ID, getTheme } from '$lib/collateral/themes'
 	import CharCount from './CharCount.svelte'
 	import CropControls from './CropControls.svelte'
@@ -56,7 +50,6 @@
 	import { count } from './count'
 	import { photoGestures, StudioAssets } from './studio.svelte'
 
-	const CAPTION_TEMPLATE = getTemplate('caption')
 	const STORAGE_KEY = 'pauseai-collateral-gallery-v1'
 	const PREVIEW_MAX_SIDE = 1400
 	const MAX_PROJECT_FILE_BYTES = 12_000_000 * MAX_SLIDES
@@ -238,15 +231,7 @@
 	$effect(() => {
 		if (!canvas || !logo || !assets.fontsLoaded) return
 		renderCollateral(canvas, {
-			format: effectiveFormat,
-			template: CAPTION_TEMPLATE,
-			theme: activeTheme,
-			values: { caption: activeSlide.caption },
-			logo,
-			photo: photo?.drawable ?? null,
-			photoSettings,
-			qrCodes: [],
-			trackQr: false,
+			...slideRenderOptions(activeSlide, effectiveFormat, logo),
 			maxSide: PREVIEW_MAX_SIDE
 		})
 	})
@@ -271,6 +256,8 @@
 	async function onPhotos(files: File[]) {
 		if (files.length === 0) return
 		message = null
+		// Where the photos go is decided by the slide showing when they were picked.
+		const startIndex = activeIndex
 		const results = await Promise.allSettled(files.map((file) => fileToDrawable(file)))
 		const loaded: SlidePhoto[] = []
 		results.forEach((r, i) => {
@@ -285,7 +272,7 @@
 		})
 		const queue = [...loaded]
 		const next = slides.map((s, i) => {
-			const takes = i === activeIndex || (i > activeIndex && !s.photo)
+			const takes = i === startIndex || (i > startIndex && !s.photo)
 			return takes && queue.length ? withPhoto(s, queue.shift()!) : s
 		})
 		while (queue.length && next.length < MAX_SLIDES)
@@ -304,9 +291,11 @@
 
 	async function onLibraryPhoto(item: LibraryPhoto) {
 		message = null
+		// The slide that was showing when the photo was picked, even if another is picked while it loads.
+		const slideId = activeSlide.id
 		try {
 			const drawable = await loadImage(item.src)
-			updateSlide(activeSlide.id, {
+			updateSlide(slideId, {
 				photo: { drawable, name: item.label, source: { kind: 'library', id: item.id } },
 				photoSettings: { ...DEFAULT_SLIDE_PHOTO_SETTINGS }
 			})
@@ -334,22 +323,6 @@
 		activeIndex = target
 	}
 
-	function renderSlideCanvas(slide: Slide, fmt: Format): HTMLCanvasElement {
-		const c = document.createElement('canvas')
-		renderCollateral(c, {
-			format: fmt,
-			template: CAPTION_TEMPLATE,
-			theme: getTheme(slide.themeId),
-			values: { caption: slide.caption },
-			logo,
-			photo: slide.photo?.drawable ?? null,
-			photoSettings: slide.photoSettings,
-			qrCodes: [],
-			trackQr: false
-		})
-		return c
-	}
-
 	function togglePlatform(id: PlatformId) {
 		// A new set each time: platforms is replaced, not changed in place.
 		// eslint-disable-next-line svelte/prefer-svelte-reactivity
@@ -364,31 +337,35 @@
 		busy = true
 		message = null
 		try {
-			const groups: PlatformExportGroup[] = []
-			// Instagram and LinkedIn share a crop, so each slide is drawn and encoded once per crop.
-			const rendered: Record<string, { canvases: HTMLCanvasElement[]; blobs: Blob[] }> = {}
+			const files: { name: string; data: Blob | Uint8Array }[] = []
+			// Instagram and LinkedIn share a crop, so each slide is drawn once per crop. One canvas at a time, encoded
+			// straight away, so a phone never holds every full-size slide at once.
+			const pngs: Record<string, { png: Blob; width: number; height: number }[]> = {}
 			for (const variant of CAROUSEL_PLATFORMS) {
 				if (!platforms.has(variant.platform)) continue
-				let all = rendered[variant.formatId]
+				let all = pngs[variant.formatId]
 				if (!all) {
 					const fmt = getFormat(variant.formatId)
-					const canvases = slides.map((s) => renderSlideCanvas(s, fmt))
-					all = { canvases, blobs: await Promise.all(canvases.map(canvasToPngBlob)) }
-					rendered[variant.formatId] = all
+					all = []
+					for (const slide of slides) {
+						const c = document.createElement('canvas')
+						renderCollateral(c, slideRenderOptions(slide, fmt, logo))
+						all.push({ png: await canvasToPngBlob(c), width: c.width, height: c.height })
+					}
+					pngs[variant.formatId] = all
 				}
-				const canvases = all.canvases.slice(0, variant.maxSlides)
-				const blobs = all.blobs.slice(0, variant.maxSlides)
-				groups.push({ folder: variant.platform, kind: 'images', pngBlobs: blobs })
+				const used = all.slice(0, variant.maxSlides)
+				used.forEach((p, i) =>
+					files.push({ name: `${variant.platform}/${i + 1}.png`, data: p.png })
+				)
 				if (variant.export === 'both') {
-					groups.push({
-						folder: variant.platform,
-						kind: 'pdf',
-						pdfBytes: await pdfBytesDigital(canvases),
-						pdfName: exportFilename([variant.platform, 'carousel'], 'pdf')
+					files.push({
+						name: `${variant.platform}/${exportFilename([variant.platform, 'carousel'], 'pdf')}`,
+						data: await pdfBytesDigital(used)
 					})
 				}
 			}
-			await downloadPlatformBundleZip(groups, exportFilename(['gallery', 'platforms'], 'zip'))
+			await downloadFilesZip(files, exportFilename(['gallery', 'platforms'], 'zip'))
 		} catch {
 			message = 'Could not create the export. Try again, or with fewer slides.'
 		} finally {
@@ -428,11 +405,22 @@
 			: `Opened ${file.name}, but some photos could not be loaded.`
 	}
 
+	// Undo restores the slides from before the reset, so it's only offered until the next change.
+	let afterReset: { slides: Slide[]; platforms: Set<PlatformId> } | null = null
+	$effect(() => {
+		const changed = slides !== afterReset?.slides || platforms !== afterReset.platforms
+		if (!changed || !untrack(() => undoReset)) return
+		undoReset = null
+		afterReset = null
+		if (untrack(() => message) === RESET_MESSAGE) message = null
+	})
+
 	async function onReset() {
 		const before = { slides, activeIndex, platforms }
 		slides = await exampleSlides()
 		activeIndex = 0
 		platforms = new Set(ALL_PLATFORM_IDS)
+		afterReset = { slides, platforms }
 		message = RESET_MESSAGE
 		undoReset = () => {
 			slides = before.slides

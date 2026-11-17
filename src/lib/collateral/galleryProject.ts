@@ -76,7 +76,12 @@ export function parseGalleryProject(text: string): GalleryParseResult {
 		ok: true,
 		project: {
 			slides,
-			platforms: rawPlatforms.length > 0 ? rawPlatforms : ALL_PLATFORM_IDS
+			// An empty list is a choice (nothing ticked), so it stays. Missing, or only platforms the tool no longer
+			// offers, means all of them.
+			platforms:
+				Array.isArray(raw.platforms) && (raw.platforms.length === 0 || rawPlatforms.length > 0)
+					? rawPlatforms
+					: ALL_PLATFORM_IDS
 		}
 	}
 }

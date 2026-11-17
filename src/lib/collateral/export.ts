@@ -80,14 +80,16 @@ export async function downloadCanvasPdf(
 	download(new Blob([bytes as BlobPart], { type: 'application/pdf' }), filename)
 }
 
-/** Builds a multi-page PDF for a digital (pixel-sized) format, one page per canvas at 1px = 1pt. No bleed/trim — for sharing, not print. */
-export async function pdfBytesDigital(canvases: HTMLCanvasElement[]): Promise<Uint8Array> {
+/** Builds a multi-page PDF for a digital (pixel-sized) format, one page per PNG at 1px = 1pt. No bleed/trim — for sharing, not print. */
+export async function pdfBytesDigital(
+	images: { png: Blob; width: number; height: number }[]
+): Promise<Uint8Array> {
 	const { PDFDocument } = await import('pdf-lib')
 	const pdf = await PDFDocument.create()
-	for (const canvas of canvases) {
-		const page = pdf.addPage([canvas.width, canvas.height])
-		const image = await pdf.embedPng(await canvasToPngBytes(canvas))
-		page.drawImage(image, { x: 0, y: 0, width: canvas.width, height: canvas.height })
+	for (const { png, width, height } of images) {
+		const page = pdf.addPage([width, height])
+		const image = await pdf.embedPng(await png.arrayBuffer())
+		page.drawImage(image, { x: 0, y: 0, width, height })
 	}
 	pdf.setTitle('PauseAI collateral')
 	return pdf.save()
@@ -106,26 +108,5 @@ export async function downloadFilesZip(
 ): Promise<void> {
 	const zip = await newZip()
 	for (const f of files) zip.file(f.name, f.data)
-	download(await zip.generateAsync({ type: 'blob' }), filename)
-}
-
-/** One platform's files in a bundle, in its own top-level folder. */
-export type PlatformExportGroup = { folder: string } & (
-	{ kind: 'images'; pngBlobs: Blob[] } | { kind: 'pdf'; pdfBytes: Uint8Array; pdfName: string }
-)
-
-/** Zips several platforms' exports into one archive, one folder per platform, so a multi-platform export lands as a single download. */
-export async function downloadPlatformBundleZip(
-	groups: PlatformExportGroup[],
-	filename: string
-): Promise<void> {
-	const zip = await newZip()
-	for (const g of groups) {
-		if (g.kind === 'images') {
-			g.pngBlobs.forEach((blob, i) => zip.file(`${g.folder}/${i + 1}.png`, blob))
-		} else {
-			zip.file(`${g.folder}/${g.pdfName}`, g.pdfBytes)
-		}
-	}
 	download(await zip.generateAsync({ type: 'blob' }), filename)
 }

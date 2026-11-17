@@ -1,9 +1,8 @@
 <script lang="ts">
 	import type { Format } from '$lib/collateral/formats'
-	import type { Slide } from '$lib/collateral/gallery'
+	import { slideRenderOptions, type Slide } from '$lib/collateral/gallery'
 	import { renderCollateral } from '$lib/collateral/render'
-	import { getTemplate, type Drawable } from '$lib/collateral/templates'
-	import { getTheme } from '$lib/collateral/themes'
+	import type { Drawable } from '$lib/collateral/templates'
 
 	interface Props {
 		/** The font subsets loaded so far: drawn again when more load. */
@@ -17,7 +16,6 @@
 	}
 
 	const THUMB_MAX_SIDE = 160
-	const CAPTION_TEMPLATE = getTemplate('caption')
 
 	let { fontsLoaded, slide, format, logo, index, active, onSelect }: Props = $props()
 	let canvas: HTMLCanvasElement
@@ -25,15 +23,7 @@
 	$effect(() => {
 		void fontsLoaded
 		renderCollateral(canvas, {
-			format,
-			template: CAPTION_TEMPLATE,
-			theme: getTheme(slide.themeId),
-			values: { caption: slide.caption },
-			logo,
-			photo: slide.photo?.drawable ?? null,
-			photoSettings: slide.photoSettings,
-			qrCodes: [],
-			trackQr: false,
+			...slideRenderOptions(slide, format, logo),
 			maxSide: THUMB_MAX_SIDE
 		})
 	})

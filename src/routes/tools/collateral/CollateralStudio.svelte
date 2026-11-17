@@ -23,7 +23,7 @@
 		type PrintFormat
 	} from '$lib/collateral/formats'
 	import { sameIssues, type LintIssue } from '$lib/collateral/lint'
-	import type { PhotoView } from '$lib/collateral/photoTransform'
+	import { DEFAULT_PHOTO_VIEW, type PhotoView } from '$lib/collateral/photoTransform'
 	import { parseProject, serializeProject, type Project } from '$lib/collateral/project'
 	import { qrPlan, usableQrCodes } from '$lib/collateral/qr'
 	import { renderCollateral, type RenderOptions } from '$lib/collateral/render'
@@ -51,7 +51,6 @@
 	const STORAGE_KEY = 'pauseai-collateral-v1'
 	const PREVIEW_MAX_SIDE = 1400
 	const MAX_PROJECT_FILE_BYTES = 12_000_000
-	const DEFAULT_VIEW: PhotoView = { zoom: 1, focalX: 0.5, focalY: 0.5 }
 	/** Checks that mean the title size nudge may help. */
 	const TITLE_ISSUES = ['text-overflow', 'title-small']
 
@@ -60,7 +59,7 @@
 	// A crop belongs to the photo it was set on, so a new photo starts centred and unzoomed.
 	let photoViewState = $state.raw<{ photo: Drawable | null; view: PhotoView }>({
 		photo: null,
-		view: DEFAULT_VIEW
+		view: DEFAULT_PHOTO_VIEW
 	})
 	let headlineScale = $state(1)
 	// QR codes on a screen format (social posts), where they are left out unless asked for.
@@ -115,11 +114,11 @@
 
 	const currentPhoto = $derived(design.photo?.drawable ?? null)
 	const photoView = $derived(
-		photoViewState.photo === currentPhoto ? photoViewState.view : DEFAULT_VIEW
+		photoViewState.photo === currentPhoto ? photoViewState.view : DEFAULT_PHOTO_VIEW
 	)
 	function setPhotoView(fn: (v: PhotoView) => PhotoView) {
 		const photo = currentPhoto
-		const current = photoViewState.photo === photo ? photoViewState.view : DEFAULT_VIEW
+		const current = photoViewState.photo === photo ? photoViewState.view : DEFAULT_PHOTO_VIEW
 		photoViewState = { photo, view: fn(current) }
 	}
 

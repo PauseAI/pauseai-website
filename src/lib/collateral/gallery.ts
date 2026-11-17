@@ -1,6 +1,9 @@
 import { tintVisible } from './design'
-import { DEFAULT_THEME_ID } from './themes'
-import type { Drawable, PhotoSettings } from './templates'
+import type { Format } from './formats'
+import { DEFAULT_PHOTO_VIEW } from './photoTransform'
+import type { RenderOptions } from './render'
+import { getTemplate, type Drawable, type PhotoSettings } from './templates'
+import { DEFAULT_THEME_ID, getTheme } from './themes'
 
 export const MIN_SLIDES = 2
 export const MAX_SLIDES = 10
@@ -13,9 +16,7 @@ export const CAPTION_MAX = 200
 export const SLIDE_PHOTO_VISIBLE = tintVisible('medium')
 
 export const DEFAULT_SLIDE_PHOTO_SETTINGS: PhotoSettings = {
-	zoom: 1,
-	focalX: 0.5,
-	focalY: 0.5,
+	...DEFAULT_PHOTO_VIEW,
 	visible: SLIDE_PHOTO_VISIBLE
 }
 
@@ -54,5 +55,25 @@ export function newSlide(): Slide {
 		photoSettings: { ...DEFAULT_SLIDE_PHOTO_SETTINGS },
 		caption: '',
 		themeId: DEFAULT_THEME_ID
+	}
+}
+
+const CAPTION_TEMPLATE = getTemplate('caption')
+
+/**
+ * How a slide is drawn, the same for the preview, the filmstrip and the downloads. The caption layout never draws
+ * the logo, so any style's logo does: it only satisfies the render API.
+ */
+export function slideRenderOptions(slide: Slide, format: Format, logo: Drawable): RenderOptions {
+	return {
+		format,
+		template: CAPTION_TEMPLATE,
+		theme: getTheme(slide.themeId),
+		values: { caption: slide.caption },
+		logo,
+		photo: slide.photo?.drawable ?? null,
+		photoSettings: slide.photoSettings,
+		qrCodes: [],
+		trackQr: false
 	}
 }

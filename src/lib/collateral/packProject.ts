@@ -1,6 +1,6 @@
 import { clampHeadlineScale } from './design'
 import { FORMATS } from './formats'
-import type { PhotoView } from './photoTransform'
+import { DEFAULT_PHOTO_VIEW, type PhotoView } from './photoTransform'
 import { isRecord, parseDesignData, parsePhotoView, type DesignData } from './project'
 
 const PACK_PROJECT_APP = 'pauseai-collateral-pack'
@@ -31,8 +31,6 @@ export interface PackProject extends DesignData {
 	/** The ticked formats, in the order of the format list. */
 	outputs: PackOutput[]
 }
-
-export const DEFAULT_PHOTO_VIEW: PhotoView = { zoom: 1, focalX: 0.5, focalY: 0.5 }
 
 export function newPackOutput(formatId: string): PackOutput {
 	return { formatId, photoView: { ...DEFAULT_PHOTO_VIEW }, headlineScale: 1, screenQr: false }

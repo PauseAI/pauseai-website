@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { onMount } from 'svelte'
+	import { onMount, untrack } from 'svelte'
 	import ControlsSection from '$lib/components/tools/ControlsSection.svelte'
 	import Studio from '$lib/components/tools/Studio.svelte'
 	import ToolButton from '$lib/components/tools/ToolButton.svelte'
@@ -20,12 +20,11 @@
 	import { sameIssues, splitByScope, type LintIssue } from '$lib/collateral/lint'
 	import {
 		DEFAULT_PACK_FORMAT_IDS,
-		DEFAULT_PHOTO_VIEW,
 		parsePackProject,
 		serializePackProject,
 		type PackProject
 	} from '$lib/collateral/packProject'
-	import type { PhotoView } from '$lib/collateral/photoTransform'
+	import { DEFAULT_PHOTO_VIEW, type PhotoView } from '$lib/collateral/photoTransform'
 	import { renderCollateral, type RenderOptions } from '$lib/collateral/render'
 	import { LOGO_COVER_TITLE_CHARS, type Drawable } from '$lib/collateral/templates'
 	import { CLEAR_PHOTO_LOGO_SRC, getTheme } from '$lib/collateral/themes'
@@ -226,8 +225,10 @@
 	})
 
 	function onIssues(id: string, found: LintIssue[]) {
-		if (issuesById[id] && sameIssues(issuesById[id], found)) return
-		issuesById = { ...issuesById, [id]: found }
+		// Read without tracking, or every thumbnail's drawing would depend on every other's checks.
+		const current = untrack(() => issuesById)
+		if (current[id] && sameIssues(current[id], found)) return
+		issuesById = { ...current, [id]: found }
 	}
 
 	function toggleFormat(id: string) {
@@ -290,6 +291,25 @@
 			: `Opened ${file.name}, but an image in it could not be loaded.`
 	}
 
+	// Undo restores everything from before Start again, so it's only offered until the next change.
+	let afterReset: {
+		design: DesignState
+		selected: string[]
+		headlineScales: unknown
+		viewsState: unknown
+	} | null = null
+	$effect(() => {
+		const changed =
+			design !== afterReset?.design ||
+			selected !== afterReset.selected ||
+			headlineScales !== afterReset.headlineScales ||
+			viewsState !== afterReset.viewsState
+		if (!changed || !untrack(() => undoReset)) return
+		undoReset = null
+		afterReset = null
+		if (untrack(() => message) === RESET_MESSAGE) message = null
+	})
+
 	function onReset() {
 		const before = { design, selected, headlineScales, viewsState }
 		const t = template
@@ -300,6 +320,7 @@
 			partnerLogos: []
 		}
 		headlineScales = {}
+		afterReset = { design, selected, headlineScales, viewsState }
 		message = RESET_MESSAGE
 		undoReset = () => {
 			design = before.design
