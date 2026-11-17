@@ -77,7 +77,7 @@ export function qrTarget(input: string, track: boolean): string {
  * The most a code holds, in bytes: a 200-character address, as typed into the tools, with https:// added. Codes
  * denser than that can stop scanning with the pause symbol in the middle (see LOGO_RADIUS in qrShape.ts).
  */
-export const QR_MAX_BYTES = 208
+const QR_MAX_BYTES = 208
 
 /** Whether `target` is more than a code can hold with the pause symbol. Accented and non-Latin letters take more. */
 export function qrTooLong(target: string): boolean {
