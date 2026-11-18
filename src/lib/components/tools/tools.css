@@ -1,5 +1,14 @@
 /* Form pieces shared by the volunteer tools (/tools). Loaded by the tools layout only. */
 
+/* The site doesn't load reset.css, so boxes size by their content by default. The tools set widths and heights on
+   padded boxes (cards, inputs, panels), which only add up with border-box sizing. */
+.tools-root,
+.tools-root *,
+.tools-root *::before,
+.tools-root *::after {
+	box-sizing: border-box;
+}
+
 .tool-label {
 	display: block;
 	margin: 0 0 0.375rem;

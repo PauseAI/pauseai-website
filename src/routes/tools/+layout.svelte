@@ -10,7 +10,7 @@
 	<meta name="robots" content="noindex, nofollow" />
 </svelte:head>
 
-<div class="tools">
+<div class="tools tools-root">
 	{@render children()}
 </div>
 
