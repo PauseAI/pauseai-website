@@ -30,7 +30,7 @@ export const BRAND_ORANGE = '#FF9416'
 /** The same hue as the logo orange, darkened until it reads as text on cream (WCAG AA). */
 const ORANGE_TEXT = '#A65A00'
 export const INK = '#1A1612'
-const CREAM = '#FDF8F3'
+export const CREAM = '#FDF8F3'
 
 const LOGO_DIR = '/images/logos/collateral'
 
@@ -73,7 +73,10 @@ export const THEMES: Theme[] = [
 	}
 ]
 
-const DEFAULT_THEME_ID: ThemeId = 'orange'
+export const DEFAULT_THEME_ID: ThemeId = 'orange'
+
+/** The logo drawn straight onto an untinted photo: light lettering, which reads on most photos with a shadow behind it. */
+export const CLEAR_PHOTO_LOGO_SRC = `${LOGO_DIR}/logo-color-on-dark.svg`
 
 /** Styles that were retired, and the style that now looks the same. Clear was Cream with no colour over the photo. */
 const RETIRED_THEMES: Record<string, ThemeId> = { clear: 'cream' }
@@ -82,6 +85,9 @@ export function getTheme(id: string): Theme {
 	const current = RETIRED_THEMES[id] ?? id
 	return THEMES.find((t) => t.id === current) ?? THEMES.find((t) => t.id === DEFAULT_THEME_ID)!
 }
+
+/** Width over height of the PauseAI logo (viewBox of $lib/components/logo.svelte). */
+export const LOGO_ASPECT = 243 / 66
 
 /** WCAG contrast ratio between two "#rrggbb" colours. */
 export function contrastRatio(a: string, b: string): number {

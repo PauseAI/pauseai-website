@@ -115,6 +115,7 @@
 		"motion-sv": "^0.1.13",
 		"node-ical": "^0.27.3",
 		"pagefind": "^1.6.0",
+		"pdf-lib": "^1.17.1",
 		"pure-rand": "^8.4.2",
 		"qrcode-generator": "^2.0.4",
 		"rehype-slug": "^6.0.0",

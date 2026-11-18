@@ -129,7 +129,7 @@ export const QR_MAX_SHARE_MULTI = 0.26
 /** Quiet padding inside the white panel, as a share of its size, on each side. */
 export const QR_PANEL_PAD = 0.07
 /** Gap between side-by-side codes, in design units. */
-const QR_GAP_UNITS = 24
+export const QR_GAP_UNITS = 24
 
 export interface QrPlan {
 	ok: boolean

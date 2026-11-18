@@ -49,4 +49,11 @@ declare global {
 		const value: Picture
 		export default value
 	}
+
+	// vite-imagetools directives ending in `&url` (e.g. `?w=360&format=webp&url`) —
+	// returns the processed image's URL.
+	declare module '*&url' {
+		const src: string
+		export default src
+	}
 }
