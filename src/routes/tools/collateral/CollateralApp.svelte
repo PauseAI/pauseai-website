@@ -5,10 +5,21 @@
 
 	type Mode = 'single' | 'pack' | 'gallery'
 
-	const MODES: { id: Mode; label: string; hint: string }[] = [
-		{ id: 'single', label: 'Single image', hint: 'One design, one format.' },
-		{ id: 'pack', label: 'Campaign pack', hint: 'One design, every format an event needs.' },
-		{ id: 'gallery', label: 'Gallery / carousel', hint: 'Photo slides for a carousel post.' }
+	/** `short` is shown on phones, where the full labels don't fit in one row. */
+	const MODES: { id: Mode; label: string; short: string; hint: string }[] = [
+		{ id: 'single', label: 'Single image', short: 'Single', hint: 'One design, one format.' },
+		{
+			id: 'pack',
+			label: 'Campaign pack',
+			short: 'Pack',
+			hint: 'One design, every format an event needs.'
+		},
+		{
+			id: 'gallery',
+			label: 'Gallery / carousel',
+			short: 'Gallery',
+			hint: 'Photo slides for a carousel post.'
+		}
 	]
 
 	let mode = $state<Mode>('single')
@@ -19,16 +30,20 @@
 	})
 </script>
 
+<!-- A segmented control: always one row of equal segments, with shorter labels on phones. Screen readers hear the
+     full name from aria-label. -->
 <div class="modes" role="radiogroup" aria-label="Post type">
 	{#each MODES as m (m.id)}
 		<button
 			type="button"
 			role="radio"
 			aria-checked={mode === m.id}
+			aria-label={m.label}
 			title={m.hint}
 			onclick={() => (mode = m.id)}
 		>
-			{m.label}
+			<span class="long" aria-hidden="true">{m.label}</span>
+			<span class="short" aria-hidden="true">{m.short}</span>
 		</button>
 	{/each}
 </div>
@@ -43,22 +58,26 @@
 
 <style>
 	.modes {
-		display: inline-flex;
-		flex-wrap: wrap;
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
 		gap: 0.25rem;
+		width: 100%;
+		max-width: 34rem;
 		padding: 0.25rem;
 		border: 1px solid var(--grey-300);
 		border-radius: 999px;
 	}
 
 	button {
-		padding: 0.4rem 1rem;
+		min-width: 0;
+		padding: 0.4rem 0.5rem;
 		border: none;
 		border-radius: 999px;
 		background: none;
 		color: var(--text);
 		font: inherit;
 		font-weight: 700;
+		white-space: nowrap;
 		cursor: pointer;
 	}
 
@@ -70,6 +89,20 @@
 	button:focus-visible {
 		outline: 2px solid var(--text);
 		outline-offset: 2px;
+	}
+
+	.short {
+		display: none;
+	}
+
+	@media (max-width: 480px) {
+		.long {
+			display: none;
+		}
+
+		.short {
+			display: inline;
+		}
 	}
 
 	.hint {
