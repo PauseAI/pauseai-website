@@ -68,14 +68,15 @@ export function serializeProject(project: Project, now = new Date()): string {
 
 export type ParseResult = { ok: true; project: Project } | { ok: false; error: string }
 
-const isRecord = (v: unknown): v is Record<string, unknown> =>
+export const isRecord = (v: unknown): v is Record<string, unknown> =>
 	typeof v === 'object' && v !== null && !Array.isArray(v)
-const str = (v: unknown, max: number): string => (typeof v === 'string' ? v.slice(0, max) : '')
+export const str = (v: unknown, max: number): string =>
+	typeof v === 'string' ? v.slice(0, max) : ''
 const num = (v: unknown, lo: number, hi: number, fallback: number): number =>
 	typeof v === 'number' && Number.isFinite(v) ? Math.min(hi, Math.max(lo, v)) : fallback
 
 /** Validates a photo reference from untrusted saved JSON, shared by single-image and gallery projects. */
-function parseProjectPhoto(raw: unknown): ProjectPhoto | null {
+export function parseProjectPhoto(raw: unknown): ProjectPhoto | null {
 	if (!isRecord(raw)) return null
 	if (raw.kind === 'library' && LIBRARY_PHOTOS.some((p) => p.id === raw.id)) {
 		return { kind: 'library', id: raw.id as string }
@@ -93,7 +94,7 @@ function parseProjectPhoto(raw: unknown): ProjectPhoto | null {
 }
 
 /** Validates a saved photo zoom and position, shared by every kind of project. Older files also hold `visible`, which is ignored. */
-function parsePhotoView(raw: unknown): PhotoView {
+export function parsePhotoView(raw: unknown): PhotoView {
 	const ps = isRecord(raw) ? raw : {}
 	return {
 		zoom: num(ps.zoom, 1, MAX_ZOOM, 1),
@@ -143,7 +144,7 @@ function fitsKind(kind: FieldDef['kind'], value: string): boolean {
  * Validates the design fields of a saved file from untrusted JSON. Fields added after a file was saved get their
  * defaults. Settings the tool no longer offers (alignment, colour strength, small QR codes) are dropped.
  */
-function parseDesignData(raw: Record<string, unknown>): DesignData {
+export function parseDesignData(raw: Record<string, unknown>): DesignData {
 	const values: Record<string, Values> = {}
 	const rawValues = isRecord(raw.values) ? raw.values : {}
 	for (const template of TEMPLATES) {

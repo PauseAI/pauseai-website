@@ -7,16 +7,18 @@
 		 * tool's small preview isn't pinned.
 		 */
 		pinned?: boolean
+		/** On phones, pin the preview's first element above the form. Off for previews too tall to pin. */
+		pinOnPhones?: boolean
 		preview: Snippet
 		controls: Snippet
 	}
 
-	let { pinned = true, preview, controls }: Props = $props()
+	let { pinned = true, pinOnPhones = true, preview, controls }: Props = $props()
 </script>
 
 <!-- A studio: the preview column, then the form column. In a pinned studio the preview's first element is the
      preview itself. -->
-<div class="studio" class:pinned>
+<div class="studio" class:pinned class:pin-phones={pinned && pinOnPhones}>
 	<div class="preview">{@render preview()}</div>
 	<div class="controls">{@render controls()}</div>
 </div>
@@ -57,7 +59,7 @@
 			display: contents;
 		}
 
-		.pinned .preview > :global(:first-child) {
+		.pin-phones .preview > :global(:first-child) {
 			position: sticky;
 			top: 0;
 			z-index: 5;

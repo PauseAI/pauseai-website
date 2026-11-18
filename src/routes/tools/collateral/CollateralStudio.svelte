@@ -1,9 +1,10 @@
 <script lang="ts">
 	import { onMount, untrack } from 'svelte'
+	import { photoGestures, StudioAssets } from './studio.svelte'
+	import { subsetsFor } from '$lib/collateral/canvasFonts'
 	import ControlsSection from '$lib/components/tools/ControlsSection.svelte'
 	import Studio from '$lib/components/tools/Studio.svelte'
 	import ToolButton from '$lib/components/tools/ToolButton.svelte'
-	import { subsetsFor } from '$lib/collateral/canvasFonts'
 	import {
 		downloadCanvasPdf,
 		downloadCanvasPng,
@@ -22,17 +23,12 @@
 		type PrintFormat
 	} from '$lib/collateral/formats'
 	import { sameIssues, type LintIssue } from '$lib/collateral/lint'
-	import { panPhoto, zoomPhoto, type PhotoView } from '$lib/collateral/photoTransform'
+	import { DEFAULT_PHOTO_VIEW, type PhotoView } from '$lib/collateral/photoTransform'
 	import { parseProject, serializeProject, type Project } from '$lib/collateral/project'
 	import { qrPlan, usableQrCodes } from '$lib/collateral/qr'
-	import {
-		loadFonts,
-		loadImage,
-		renderCollateral,
-		type RenderOptions
-	} from '$lib/collateral/render'
+	import { renderCollateral, type RenderOptions } from '$lib/collateral/render'
 	import { LOGO_COVER_TITLE_CHARS, type Drawable } from '$lib/collateral/templates'
-	import { CLEAR_PHOTO_LOGO_SRC, getTheme, THEMES } from '$lib/collateral/themes'
+	import { CLEAR_PHOTO_LOGO_SRC, getTheme } from '$lib/collateral/themes'
 	import Checks from './Checks.svelte'
 	import CropControls from './CropControls.svelte'
 	import DesignControls from './DesignControls.svelte'
@@ -55,7 +51,6 @@
 	const STORAGE_KEY = 'pauseai-collateral-v1'
 	const PREVIEW_MAX_SIDE = 1400
 	const MAX_PROJECT_FILE_BYTES = 12_000_000
-	const DEFAULT_VIEW: PhotoView = { zoom: 1, focalX: 0.5, focalY: 0.5 }
 	/** Checks that mean the title size nudge may help. */
 	const TITLE_ISSUES = ['text-overflow', 'title-small']
 
@@ -64,7 +59,7 @@
 	// A crop belongs to the photo it was set on, so a new photo starts centred and unzoomed.
 	let photoViewState = $state.raw<{ photo: Drawable | null; view: PhotoView }>({
 		photo: null,
-		view: DEFAULT_VIEW
+		view: DEFAULT_PHOTO_VIEW
 	})
 	let headlineScale = $state(1)
 	// QR codes on a screen format (social posts), where they are left out unless asked for.
@@ -78,18 +73,15 @@
 	let undoReset = $state.raw<(() => void) | null>(null)
 	let canvas = $state<HTMLCanvasElement>()
 
-	// Canvas fonts and every style's logo variant, loaded once, so switching styles is instant.
-	let logos = $state.raw<Record<string, Drawable>>({})
-	let assetError = $state<string | null>(null)
-	/** The font subsets loaded so far, as a key. A design in another script loads more, then redraws. */
-	let fontsLoaded = $state<string | null>(null)
+	// Logos and fonts, for the design's text (designText, below).
+	const assets = new StudioAssets(() => designText)
 
 	const format = $derived(getFormat(formatId))
 	const template = $derived(designTemplate(design))
 	const theme = $derived(getTheme(design.themeId))
 	const values = $derived(designValues(design))
-	const logo = $derived(logos[theme.logoSrc] ?? null)
-	const fontsReady = $derived(fontsLoaded !== null)
+	const logo = $derived(assets.logos[theme.logoSrc] ?? null)
+	const fontsReady = $derived(assets.fontsReady)
 
 	/** Every piece of text the design draws, to know which font subsets it needs. */
 	const designText = $derived(
@@ -99,47 +91,13 @@
 			...designQrCodes(design).map((c) => c.label)
 		].join(' ')
 	)
-	const fontKey = $derived(subsetsFor(designText).join(','))
 	// Downloads wait for the fonts the current text needs, so a new script is never drawn in a fallback font.
 	const ready = $derived(
 		!busy &&
 			Boolean(logo) &&
 			fontsReady &&
-			subsetsFor(designText).every((s) => fontsLoaded!.split(',').includes(s))
+			subsetsFor(designText).every((s) => (assets.fontsLoaded ?? '').split(',').includes(s))
 	)
-
-	onMount(() => {
-		let cancelled = false
-		for (const src of new Set(THEMES.map((t) => t.logoSrc))) {
-			loadImage(src)
-				.then((img) => {
-					if (!cancelled) logos = { ...logos, [src]: img }
-				})
-				.catch(() => {
-					if (!cancelled) assetError = 'Could not load the logo.'
-				})
-		}
-		return () => {
-			cancelled = true
-		}
-	})
-
-	$effect(() => {
-		const needed = fontKey.split(',')
-		const text = designText
-		if (fontsLoaded !== null && needed.every((s) => fontsLoaded!.split(',').includes(s))) return
-		let cancelled = false
-		void loadFonts(text)
-			.catch(() => undefined)
-			.then(() => {
-				if (cancelled) return
-				const loaded = new Set([...(fontsLoaded?.split(',') ?? []), ...needed])
-				fontsLoaded = [...loaded].join(',')
-			})
-		return () => {
-			cancelled = true
-		}
-	})
 
 	// Why QR codes are hidden or trimmed on this format, shown beside the codes.
 	const qrReason = $derived.by(() => {
@@ -156,11 +114,11 @@
 
 	const currentPhoto = $derived(design.photo?.drawable ?? null)
 	const photoView = $derived(
-		photoViewState.photo === currentPhoto ? photoViewState.view : DEFAULT_VIEW
+		photoViewState.photo === currentPhoto ? photoViewState.view : DEFAULT_PHOTO_VIEW
 	)
 	function setPhotoView(fn: (v: PhotoView) => PhotoView) {
 		const photo = currentPhoto
-		const current = photoViewState.photo === photo ? photoViewState.view : DEFAULT_VIEW
+		const current = photoViewState.photo === photo ? photoViewState.view : DEFAULT_PHOTO_VIEW
 		photoViewState = { photo, view: fn(current) }
 	}
 
@@ -253,7 +211,7 @@
 			qrSize: design.qrSize,
 			photoClear: design.photoClear,
 			coverTitle: design.coverTitle,
-			clearPhotoLogo: logos[CLEAR_PHOTO_LOGO_SRC],
+			clearPhotoLogo: assets.logos[CLEAR_PHOTO_LOGO_SRC],
 			screenQr,
 			headlineScale,
 			partnerLogos: design.partnerLogos.map((l) => l.drawable),
@@ -263,7 +221,7 @@
 
 	// Live preview and its checks, redrawn whenever anything it draws changes, and again once more fonts load.
 	$effect(() => {
-		if (!logo || !fontsLoaded || !canvas) return
+		if (!logo || !assets.fontsLoaded || !canvas) return
 		const { issues: found } = renderCollateral(canvas, {
 			...renderOptions(false),
 			maxSide: PREVIEW_MAX_SIDE,
@@ -280,65 +238,12 @@
 	})
 
 	// Drag to move the photo, pinch or scroll to zoom it.
-	// Not state: only the gesture handlers read it.
-	// eslint-disable-next-line svelte/prefer-svelte-reactivity
-	const pointers = new Map<number, { x: number; y: number }>()
-	let pinch: { dist: number; zoom: number } | null = null
-
-	$effect(() => {
-		const c = canvas
-		const photo = currentPhoto
-		if (!c || !photo) return
-		const img = { w: photo.width, h: photo.height }
-		const onWheel = (e: WheelEvent) => {
-			e.preventDefault()
-			const rect = c.getBoundingClientRect()
-			const k = c.width / rect.width
-			const anchor = { x: (e.clientX - rect.left) * k, y: (e.clientY - rect.top) * k }
-			const dy = e.deltaMode === 1 ? e.deltaY * 16 : e.deltaY
-			const factor = Math.exp(-dy * (e.ctrlKey ? 0.01 : 0.0015))
-			setPhotoView((v) => zoomPhoto(img, { w: c.width, h: c.height }, v, v.zoom * factor, anchor))
-		}
-		// Needs a non-passive listener to stop the page scrolling.
-		c.addEventListener('wheel', onWheel, { passive: false })
-		return () => c.removeEventListener('wheel', onWheel)
+	const gestures = photoGestures({
+		canvas: () => canvas,
+		photo: () => currentPhoto,
+		view: () => photoView,
+		setView: setPhotoView
 	})
-
-	function onPointerDown(e: PointerEvent & { currentTarget: HTMLCanvasElement }) {
-		if (!currentPhoto) return
-		e.currentTarget.setPointerCapture(e.pointerId)
-		pointers.set(e.pointerId, { x: e.clientX, y: e.clientY })
-		if (pointers.size === 2) {
-			const [a, b] = [...pointers.values()]
-			pinch = { dist: Math.hypot(a.x - b.x, a.y - b.y) || 1, zoom: photoView.zoom }
-		}
-	}
-
-	function onPointerMove(e: PointerEvent & { currentTarget: HTMLCanvasElement }) {
-		const c = e.currentTarget
-		const prev = pointers.get(e.pointerId)
-		const photo = currentPhoto
-		if (!photo || !prev) return
-		const next = { x: e.clientX, y: e.clientY }
-		pointers.set(e.pointerId, next)
-		const img = { w: photo.width, h: photo.height }
-		const box = { w: c.width, h: c.height }
-		const rect = c.getBoundingClientRect()
-		const k = c.width / rect.width
-		if (pointers.size === 1) {
-			setPhotoView((v) => panPhoto(img, box, v, (next.x - prev.x) * k, (next.y - prev.y) * k))
-		} else if (pointers.size === 2 && pinch) {
-			const [a, b] = [...pointers.values()]
-			const mid = { x: ((a.x + b.x) / 2 - rect.left) * k, y: ((a.y + b.y) / 2 - rect.top) * k }
-			const zoom = (pinch.zoom * Math.hypot(a.x - b.x, a.y - b.y)) / pinch.dist
-			setPhotoView((v) => zoomPhoto(img, box, v, zoom, mid))
-		}
-	}
-
-	function onPointerEnd(e: PointerEvent) {
-		pointers.delete(e.pointerId)
-		pinch = null
-	}
 
 	// The download buttons are disabled until the logo and fonts have loaded.
 	async function onDownloadPng() {
@@ -443,7 +348,7 @@
 	}
 
 	const titleFlagged = $derived(issues.some((i) => TITLE_ISSUES.includes(i.id)))
-	const shown = $derived(message ?? assetError)
+	const shown = $derived(message ?? assets.error)
 	const canvasWidth = $derived(previewStyle(format)?.width)
 </script>
 
@@ -456,10 +361,7 @@
 				hidden={!(logo && fontsReady)}
 				class:draggable={Boolean(design.photo)}
 				style:width={canvasWidth ? `${canvasWidth}px` : undefined}
-				onpointerdown={onPointerDown}
-				onpointermove={onPointerMove}
-				onpointerup={onPointerEnd}
-				onpointercancel={onPointerEnd}
+				{...gestures}
 			></canvas>
 			{#if !(logo && fontsReady)}
 				<p class="loading">Loading…</p>
@@ -559,6 +461,7 @@
 		</ControlsSection>
 
 		<DesignControls
+			idPrefix="collateral"
 			{design}
 			{update}
 			firstSection={2}

@@ -18,7 +18,7 @@
 		type CalendarEvent
 	} from '$lib/collateral/eventText'
 	import { isLumaEventLink } from '$lib/collateral/lint'
-	import { LIBRARY_PHOTOS, type LibraryPhoto } from '$lib/collateral/photos'
+	import type { LibraryPhoto } from '$lib/collateral/photos'
 	import { QR_LABEL_MAX, QR_URL_MAX } from '$lib/collateral/project'
 	import { MAX_QR_CODES, normaliseUrl, type QrCode } from '$lib/collateral/qr'
 	import {
@@ -29,6 +29,7 @@
 	} from '$lib/collateral/render'
 	import { getTemplate } from '$lib/collateral/templates'
 	import CharCount from './CharCount.svelte'
+	import PhotoLibrary from './PhotoLibrary.svelte'
 	import StylePicker from './StylePicker.svelte'
 	import {
 		DESIGN_TEMPLATES,
@@ -42,6 +43,8 @@
 	} from './designState'
 
 	interface Props {
+		/** Starts the ids of its fields, unique to each studio, as every studio stays on the page. */
+		idPrefix: string
 		design: DesignState
 		update: (fn: (d: DesignState) => DesignState) => void
 		/** Number of the first section here, since the studio puts its own sections before. */
@@ -58,6 +61,7 @@
 	}
 
 	let {
+		idPrefix,
 		design,
 		update,
 		firstSection,
@@ -208,9 +212,9 @@
 </script>
 
 <ControlsSection heading={`${n(0)}. Country`}>
-	<label class="tool-label" for="collateral-chapter">Which PauseAI is it for?</label>
+	<label class="tool-label" for="{idPrefix}-chapter">Which PauseAI is it for?</label>
 	<select
-		id="collateral-chapter"
+		id="{idPrefix}-chapter"
 		class="tool-select"
 		value={design.chapterId}
 		onchange={(e) => {
@@ -251,11 +255,11 @@
 	<!-- Right under the Event card, which is last in the list. Kept outside the radio group, which may only hold its options. -->
 	{#if events.length > 0}
 		<div class="event-import" class:active={template.id === 'event'}>
-			<label class="tool-label" for="collateral-import-event"
+			<label class="tool-label" for="{idPrefix}-import-event"
 				>Start from one of {eventsFrom}'s events</label
 			>
 			<select
-				id="collateral-import-event"
+				id="{idPrefix}-import-event"
 				class="tool-select"
 				value=""
 				onchange={(e) => {
@@ -282,7 +286,7 @@
 
 <ControlsSection heading={`${n(3)}. Text`}>
 	{#each template.fields as field (field.key)}
-		{@const id = `collateral-${template.id}-${field.key}`}
+		{@const id = `${idPrefix}-${template.id}-${field.key}`}
 		{@const value = values[field.key]}
 		<div class="tool-field">
 			<label class="tool-label" for={id}
@@ -378,7 +382,7 @@
 				<label class="tool-checkbox">
 					<input
 						type="radio"
-						name="collateral-qr-size"
+						name="{idPrefix}-qr-size"
 						checked={design.qrSize === s.id}
 						onchange={() => update((d) => ({ ...d, qrSize: s.id }))}
 					/>
@@ -392,19 +396,7 @@
 </ControlsSection>
 
 <ControlsSection heading={`${n(5)}. Photo (optional)`}>
-	<div class="photos">
-		{#each LIBRARY_PHOTOS as item (item.id)}
-			<button
-				type="button"
-				class="photo"
-				aria-label={item.label}
-				aria-pressed={currentLibraryId === item.id}
-				title={item.label}
-				onclick={() => onLibraryPhoto(item)}
-				style:background-image={`url(${item.thumb})`}
-			></button>
-		{/each}
-	</div>
+	<PhotoLibrary currentId={currentLibraryId} onPick={onLibraryPhoto} />
 	<p class="tool-hint">Or upload your own:</p>
 	<input
 		class="tool-file"
@@ -483,14 +475,12 @@
 		color: var(--text-2);
 	}
 
-	.choice[aria-checked='true'],
-	.photo[aria-pressed='true'] {
+	.choice[aria-checked='true'] {
 		border-color: var(--brand);
 		box-shadow: 0 0 0 2px var(--brand);
 	}
 
 	.choice:focus-visible,
-	.photo:focus-visible,
 	.qr-remove:focus-visible {
 		outline: 2px solid var(--text);
 		outline-offset: 2px;
@@ -543,23 +533,5 @@
 
 	.qr-size .tool-label {
 		margin: 0;
-	}
-
-	.photos {
-		display: grid;
-		grid-template-columns: repeat(3, 1fr);
-		gap: 0.5rem;
-		margin-bottom: 0.5rem;
-	}
-
-	.photo {
-		aspect-ratio: 4 / 3;
-		padding: 0;
-		border: 1px solid var(--grey-300);
-		border-radius: 6px;
-		background-color: var(--bg-subtle);
-		background-position: center;
-		background-size: cover;
-		cursor: pointer;
 	}
 </style>

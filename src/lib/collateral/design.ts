@@ -10,6 +10,11 @@ export const PHOTO_TINTS: { id: PhotoTint; visible: number }[] = [
 	{ id: 'strong', visible: 0.25 }
 ]
 
+/** The PhotoSettings.visible value a tint step draws with. */
+export function tintVisible(tint: PhotoTint): number {
+	return (PHOTO_TINTS.find((t) => t.id === tint) ?? PHOTO_TINTS[0]).visible
+}
+
 /** Preferred QR size. Codes never go below the size phones can scan, and each layout caps how big they get. */
 export type QrSize = 'm' | 'l'
 

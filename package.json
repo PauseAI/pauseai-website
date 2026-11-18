@@ -110,6 +110,7 @@
 		"html-to-image": "^1.11.13",
 		"http-status-codes": "^2.3.0",
 		"jsqr": "^1.4.0",
+		"jszip": "^3.10.2",
 		"maplibre-gl": "^6.16.0",
 		"maplibregl-mapbox-request-transformer": "^0.0.3",
 		"motion-sv": "^0.1.13",

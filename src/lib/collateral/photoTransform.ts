@@ -14,6 +14,9 @@ export interface PhotoView {
 	focalY: number
 }
 
+/** A photo centred and not zoomed: where every crop starts. */
+export const DEFAULT_PHOTO_VIEW: PhotoView = { zoom: 1, focalX: 0.5, focalY: 0.5 }
+
 const clamp = (v: number, lo: number, hi: number) => Math.min(hi, Math.max(lo, v))
 
 /** Move the photo by (dx, dy) canvas px, like dragging it with a finger. */
