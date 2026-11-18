@@ -288,7 +288,8 @@
 		}}
 	/>
 
-	{#if !['/', '/communities', '/outcomes', '/pdoom', '/quotes'].includes(deLocalizeHref(page.url.pathname))}
+	<!-- The volunteer tools (/tools) are apps, not articles, so they have no contents list. -->
+	{#if !['/', '/communities', '/outcomes', '/pdoom', '/quotes'].includes(deLocalizeHref(page.url.pathname)) && !/^\/tools(\/|$)/.test(deLocalizeHref(page.url.pathname))}
 		<Toc />
 	{/if}
 
