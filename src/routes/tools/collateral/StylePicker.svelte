@@ -4,7 +4,8 @@
 	let { themeId, onTheme }: { themeId: string; onTheme: (id: string) => void } = $props()
 </script>
 
-<!-- The style swatches. How strongly the colour covers a photo is picked automatically, so there is nothing else to set. -->
+<!-- The style swatches, each a chip in its colours. How strongly the colour covers a photo is picked automatically,
+     so there is nothing else to set. -->
 <div class="swatches" role="radiogroup" aria-label="Style">
 	{#each THEMES as t (t.id)}
 		<button
@@ -15,7 +16,7 @@
 			onclick={() => onTheme(t.id)}
 		>
 			<span class="chip" style:background-color={t.bg} aria-hidden="true">
-				<i style:background-color={t.accent}></i>
+				<i class="accent" style:background-color={t.accent}></i>
 			</span>
 			{t.label}
 		</button>
@@ -24,21 +25,23 @@
 
 <style>
 	.swatches {
-		display: flex;
-		flex-wrap: wrap;
-		gap: 0.5rem;
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+		gap: 8px;
 	}
 
 	.swatch {
-		display: flex;
-		align-items: center;
-		gap: 0.5rem;
-		padding: 0.375rem 0.75rem 0.375rem 0.375rem;
+		display: grid;
+		gap: 8px;
+		justify-items: center;
+		padding: 10px 8px;
 		border: 1px solid var(--grey-300);
-		border-radius: 999px;
+		border-radius: 8px;
 		background-color: var(--bg);
 		color: var(--text);
 		font: inherit;
+		font-size: 14px;
+		font-weight: 600;
 		cursor: pointer;
 	}
 
@@ -48,24 +51,24 @@
 	}
 
 	.swatch:focus-visible {
-		outline: 2px solid var(--text);
+		outline: 2px solid var(--brand);
 		outline-offset: 2px;
 	}
 
 	.chip {
-		position: relative;
-		width: 1.75rem;
-		height: 1.75rem;
+		display: flex;
+		align-items: flex-end;
+		width: 100%;
+		height: 56px;
+		padding: 8px;
 		border: 1px solid var(--grey-300);
-		border-radius: 50%;
+		border-radius: 6px;
 	}
 
-	.chip i {
-		position: absolute;
-		right: 0.25rem;
-		bottom: 0.25rem;
-		width: 0.5rem;
-		height: 0.5rem;
-		border-radius: 50%;
+	.accent {
+		display: block;
+		width: 40%;
+		height: 10px;
+		border-radius: 999px;
 	}
 </style>
