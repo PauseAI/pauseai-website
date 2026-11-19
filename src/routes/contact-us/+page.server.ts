@@ -1,387 +1,164 @@
-import { fail } from '@sveltejs/kit'
+import { fail, type Action } from '@sveltejs/kit'
 import type { Actions } from './$types'
-import { env } from '$env/dynamic/private'
-import { createRecord } from '$lib/airtable'
+import { CRM_REQUEST_DEADLINE_MS } from '$lib/server/crmIntake'
+import {
+	CONTACT_INBOXES,
+	sendContactToCrm,
+	type ContactRequest,
+	type ContactType
+} from '$lib/server/contactCrm'
 import { checkNotSpam } from '$lib/server/turnstile-verify'
 import { partnershipOptions } from './partnership-options'
 
-// Airtable configuration (User to fill in later)
-const CONTACT_AIRTABLE_BASE_ID = 'appWPTGqZmUcs3NWu'
-const CONTACT_AIRTABLE_TABLE_ID = 'tblPP2kM7uTheBrpw'
-
 export const prerender = false
 
-// Configure recipient email addresses for each contact form type
-const CONTACT_RECIPIENTS = {
-	Media: 'press@pauseai.info',
-	Partnerships: 'partnerships@pauseai.info',
-	Feedback: 'feedback@pauseai.info'
+/** Each free-text field, the most characters it takes, and what a message calls it. */
+const FIELDS = {
+	name: { max: 100, label: 'name' },
+	email: { max: 254, label: 'email' },
+	subject: { max: 200, label: 'subject' },
+	organization: { max: 200, label: 'organization' },
+	city_country: { max: 200, label: 'city and country' },
+	other_partnership_type: { max: 200, label: 'partnership type' },
+	message: { max: 5000, label: 'message' },
+	details: { max: 5000, label: 'message' }
 } as const
 
-const mailerSendApiKey = env.MAILERSEND_API_KEY
+type Field = keyof typeof FIELDS
+
+// The fields a message may break lines in. CiviCRM refuses any other control character, and
+// any at all in the one-line fields, since those go into the email's headers.
+const MULTILINE_FIELDS: ReadonlySet<Field> = new Set(['message', 'details'])
+const CONTROL_CHARACTER = /\p{Cc}/u
+const CONTROL_CHARACTER_IN_TEXT = /[^\P{Cc}\t\n]/u
+
+// The CRM's addr-spec (ChapterMailConfig::parseAddrSpec): plain ASCII, dot-atom local part, and
+// a domain of letters, digits and hyphens with a TLD of two or more letters.
+const ADDR_SPEC =
+	/^[A-Za-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[A-Za-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[A-Za-z0-9](?:[A-Za-z0-9-]*[A-Za-z0-9])?\.)+[A-Za-z]{2,}$/
+const NON_ASCII = /\P{ASCII}/u
 
 /**
- * Maximum characters accepted per field. The client shows softer hints, but these
- * are the limits that count: bots POST straight to the action and never run our JS.
+ * The submitted text fields: one-line fields trimmed, a message's line breaks made `\n`, as
+ * CiviCRM reads them. Missing fields are empty.
  */
-const MAX_LENGTHS: Record<string, number> = {
-	name: 100,
-	email: 254,
-	subject: 200,
-	organization: 200,
-	city_country: 200,
-	message: 5000,
-	details: 5000,
-	other_partnership_type: 200
+type Form = Record<Field, string> & { partnership_type: string }
+
+function readForm(data: FormData): Form {
+	const text = (field: string) => {
+		const value = data.get(field)
+		return typeof value === 'string' ? value : ''
+	}
+	const form = { partnership_type: text('partnership_type') } as Form
+	for (const field of Object.keys(FIELDS) as Field[]) {
+		const value = text(field)
+		form[field] = MULTILINE_FIELDS.has(field) ? value.replace(/\r\n?/g, '\n') : value.trim()
+	}
+	return form
 }
 
-const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
-
-type ContactFormType = keyof typeof CONTACT_RECIPIENTS
-
-type MailerSendError = {
-	message?: string
+/** The first field that is too long or holds a character CiviCRM refuses, as a message. */
+function findBadField(form: Form): string | undefined {
+	for (const field of Object.keys(FIELDS) as Field[]) {
+		const { max, label } = FIELDS[field]
+		const value = form[field]
+		if (value.length > max) {
+			return `The ${label} field is too long (maximum ${max} characters).`
+		}
+		if (MULTILINE_FIELDS.has(field)) {
+			if (CONTROL_CHARACTER_IN_TEXT.test(value)) {
+				return `The ${label} contains invisible control characters we can't send. Please remove them (line breaks and tabs are fine).`
+			}
+		} else if (CONTROL_CHARACTER.test(value)) {
+			return `The ${label} field can't contain line breaks or invisible control characters.`
+		}
+	}
+	return undefined
 }
 
-function getFormString(formData: FormData, field: string): string | undefined {
-	const value = formData.get(field)
-	return typeof value === 'string' ? value : undefined
-}
-
-function isMailerSendError(value: unknown): value is MailerSendError {
-	return typeof value === 'object' && value !== null
-}
-
-function escapeHtml(value: string): string {
-	return value
-		.replace(/&/g, '&amp;')
-		.replace(/</g, '&lt;')
-		.replace(/>/g, '&gt;')
-		.replace(/"/g, '&quot;')
-		.replace(/'/g, '&#39;')
+function findBadEmail(email: string, inbox: string): string | undefined {
+	if (NON_ASCII.test(email)) {
+		return `Please use a plain email address, without accents or non-Latin letters, or email us at ${inbox}.`
+	}
+	if (!ADDR_SPEC.test(email)) return 'Please enter a valid email address.'
+	return undefined
 }
 
 function countWords(value: string): number {
 	return value.trim().split(/\s+/).filter(Boolean).length
 }
 
-/** Returns an error message if any submitted field exceeds its cap. */
-function findOversizedField(formData: FormData): string | undefined {
-	for (const [field, max] of Object.entries(MAX_LENGTHS)) {
-		const value = getFormString(formData, field)
-		if (value && value.length > max) {
-			return `The ${field.replace(/_/g, ' ')} field is too long (maximum ${max} characters).`
+const MISSING = 'Missing required fields'
+
+/**
+ * One form's action: the checks every form shares, then `fields` (the form's own rules, which
+ * answer an error message or what to send), then the CRM.
+ */
+function contactAction(
+	type: ContactType,
+	fields: (form: Form) => Omit<ContactRequest, 'type'> | string
+): Action {
+	const inbox = CONTACT_INBOXES[type]
+	return async ({ request, url, platform }) => {
+		const deadline = Date.now() + CRM_REQUEST_DEADLINE_MS
+		const data = await request.formData()
+
+		const spam = await checkNotSpam(data, url.hostname)
+		if (spam.drop) return { success: true }
+		if (spam.message) return fail(403, { message: spam.message })
+
+		const form = readForm(data)
+		const bad = findBadField(form)
+		if (bad) return fail(400, { message: bad })
+
+		const enquiry = fields(form)
+		if (typeof enquiry === 'string') return fail(400, { message: enquiry })
+		// Required by the forms that need one; optional feedback's must be valid if given.
+		const badEmail = enquiry.email ? findBadEmail(enquiry.email, inbox) : undefined
+		if (badEmail) return fail(400, { message: badEmail })
+
+		const result = await sendContactToCrm(
+			{ type, ...enquiry },
+			{ deadline, hostname: url.hostname, platform }
+		)
+		if (result === 'ok') return { success: true }
+		if (result === 'refused') {
+			return fail(400, {
+				message: `We couldn't accept your message as entered. Please check your details, or email us at ${inbox}.`
+			})
 		}
-	}
-	return undefined
-}
-
-async function sendContactEmail(data: {
-	name: string
-	email: string
-	subject: string
-	message: string
-	type: ContactFormType
-	organization?: string
-	city_country?: string
-}) {
-	if (!mailerSendApiKey) {
-		console.error('MAILERSEND_API_KEY is not configured')
-		return {
-			success: false,
-			message: 'Email service is not configured. Please contact the administrator.'
-		}
-	}
-
-	const recipientEmail = CONTACT_RECIPIENTS[data.type]
-
-	// Everything interpolated below is attacker-controlled, so it is escaped:
-	// unescaped input let spammers inject live links into the team's inbox.
-	let htmlContent = `
-		<p><strong>Name:</strong> ${escapeHtml(data.name)}</p>
-		<p><strong>Email:</strong> ${escapeHtml(data.email)}</p>
-		<p><strong>Subject:</strong> ${escapeHtml(data.subject)}</p>
-	`
-
-	if (data.organization) {
-		htmlContent += `<p><strong>Organization:</strong> ${escapeHtml(data.organization)}</p>`
-	}
-
-	if (data.city_country) {
-		htmlContent += `<p><strong>City, Country:</strong> ${escapeHtml(data.city_country)}</p>`
-	}
-
-	htmlContent += `<p><strong>Message:</strong></p><p>${escapeHtml(data.message).replace(/\n/g, '<br>')}</p>`
-
-	const textContent = `Name: ${data.name}\nEmail: ${data.email}\nSubject: ${data.subject}${data.organization ? `\nOrganization: ${data.organization}` : ''}${data.city_country ? `\nCity, Country: ${data.city_country}` : ''}\n\nMessage:\n${data.message}`
-
-	// Build the request body for MailerSend API
-	const emailBody: {
-		from: { email: string; name: string }
-		to: { email: string; name: string }[]
-		subject: string
-		html: string
-		text: string
-		reply_to?: { email: string; name: string }
-	} = {
-		from: {
-			email: 'info@pauseai.info',
-			name: `PauseAI ${data.type} Form`
-		},
-		to: [
-			{
-				email: recipientEmail,
-				name: 'PauseAI Team'
-			}
-		],
-		subject: `[${data.type} Form]: ${data.subject}`,
-		html: htmlContent,
-		text: textContent
-	}
-
-	if (data.email) {
-		emailBody.reply_to = {
-			email: data.email,
-			name: data.name
-		}
-	}
-
-	try {
-		const response = await fetch('https://api.mailersend.com/v1/email', {
-			method: 'POST',
-			headers: {
-				'Content-Type': 'application/json',
-				Authorization: `Bearer ${mailerSendApiKey}`
-			},
-			body: JSON.stringify(emailBody)
+		return fail(503, {
+			message: `Sorry, we couldn't send your message. Please email us at ${inbox} instead.`
 		})
-
-		if (!response.ok) {
-			const errorData: unknown = await response.json().catch((): unknown => ({}))
-			console.error('MailerSend Error:', response.status, JSON.stringify(errorData, null, 2))
-
-			let errorMessage = 'Failed to send email. Please try again later.'
-			if (isMailerSendError(errorData) && typeof errorData.message === 'string') {
-				errorMessage = errorData.message.replace('reply to.email', 'email')
-			}
-
-			return { success: false, message: errorMessage }
-		}
-
-		// Save to Airtable - sending full content in the Message field
-		await createRecord(CONTACT_AIRTABLE_BASE_ID, CONTACT_AIRTABLE_TABLE_ID, {
-			Message: textContent,
-			Type: data.type
-		})
-
-		return { success: true }
-	} catch (error: unknown) {
-		console.error('MailerSend Error:', error)
-
-		let errorMessage = 'Failed to send email. Please try again later.'
-		if (error instanceof Error && error.message) {
-			errorMessage = error.message
-		}
-
-		return { success: false, message: errorMessage }
-	}
-}
-
-async function sendConfirmationEmail(data: { name: string; email: string; type: ContactFormType }) {
-	if (!mailerSendApiKey || !data.email) return
-
-	const teamEmail = CONTACT_RECIPIENTS[data.type]
-
-	const emailBody = {
-		from: {
-			email: teamEmail,
-			name: 'PauseAI Team'
-		},
-		reply_to: {
-			email: teamEmail,
-			name: 'PauseAI Team'
-		},
-		to: [
-			{
-				email: data.email,
-				name: data.name
-			}
-		],
-		subject: 'Thank you for contacting PauseAI',
-		html: `
-			<p>Hello,</p>
-			<p>Thank you for your interest — we appreciate you reaching out.</p>
-			<p>We’ve received your inquiry, and a member of our team will respond promptly.</p>
-			<p>We are a small team, therefore we aim to get back to you within 3 – 4 business days.</p>
-			<p>Thanks again for your patience and interest.</p>
-			<br>
-			<p>Best regards,</p>
-			<p>Pause AI team</p>
-		`,
-		text: `Hello,\n\nThank you for your interest — we appreciate you reaching out.\n\nWe’ve received your inquiry, and a member of our team will respond promptly.\n\nWe are a small team, therefore we aim to get back to you within 3 – 4 business days.\n\nThanks again for your patience and interest.\n\n\nBest regards,\n\nPause AI team`
-	}
-
-	try {
-		await fetch('https://api.mailersend.com/v1/email', {
-			method: 'POST',
-			headers: {
-				'Content-Type': 'application/json',
-				Authorization: `Bearer ${mailerSendApiKey}`
-			},
-			body: JSON.stringify(emailBody)
-		})
-	} catch (error) {
-		console.error('Failed to send confirmation email:', error)
 	}
 }
 
 export const actions: Actions = {
-	media: async ({ request, url }) => {
-		const data = await request.formData()
-
-		const spam = await checkNotSpam(data, url.hostname)
-		if (spam.drop) return { success: true }
-		if (spam.message) return fail(403, { message: spam.message })
-
-		const oversized = findOversizedField(data)
-		if (oversized) return fail(400, { message: oversized })
-
-		const name = getFormString(data, 'name')
-		const email = getFormString(data, 'email')
-		const subject = getFormString(data, 'subject')
-		const organization = getFormString(data, 'organization')
-		const details = getFormString(data, 'details')
-
-		if (!name || !email || !subject || !organization || !details) {
-			return fail(400, { message: 'Missing required fields' })
-		}
-
-		if (!EMAIL_PATTERN.test(email)) {
-			return fail(400, { message: 'Please enter a valid email address.' })
-		}
-
-		const result = await sendContactEmail({
-			name,
-			email,
-			subject,
-			message: details,
-			organization,
-			type: 'Media'
-		})
-
-		if (!result.success) {
-			return fail(500, { message: result.message })
-		}
-
-		await sendConfirmationEmail({ name, email, type: 'Media' })
-
-		return { success: true }
-	},
-	partnerships: async ({ request, url }) => {
-		const data = await request.formData()
-
-		const spam = await checkNotSpam(data, url.hostname)
-		if (spam.drop) return { success: true }
-		if (spam.message) return fail(403, { message: spam.message })
-
-		const oversized = findOversizedField(data)
-		if (oversized) return fail(400, { message: oversized })
-
-		const name = getFormString(data, 'name')
-		const email = getFormString(data, 'email')
-		const organization = getFormString(data, 'organization')
-		const city_country = getFormString(data, 'city_country')
-		const message = getFormString(data, 'message')
-
+	media: contactAction('Media', ({ name, email, subject, organization, details }) => {
+		if (!name || !email || !subject || !organization || !details.trim()) return MISSING
+		return { name, email, subject, message: details, organization }
+	}),
+	partnerships: contactAction('Partnerships', (form) => {
+		const { name, email, organization, city_country, message } = form
 		// The form offers a fixed list, so anything else was not sent by our UI.
-		const partnershipType = getFormString(data, 'partnership_type') ?? ''
-		if (!partnershipOptions.includes(partnershipType)) {
-			return fail(400, { message: 'Please choose how you would like to partner with us.' })
+		if (!partnershipOptions.includes(form.partnership_type)) {
+			return 'Please choose how you would like to partner with us.'
 		}
-
-		let subject = partnershipType
-		if (partnershipType === 'Other') {
-			const otherType = getFormString(data, 'other_partnership_type')
-			if (!otherType) {
-				return fail(400, { message: 'Please describe the type of partnership.' })
-			}
-			if (countWords(otherType) > 10) {
-				return fail(400, { message: 'Other partnership type must be 10 words or less.' })
-			}
+		let subject = form.partnership_type
+		if (subject === 'Other') {
+			const otherType = form.other_partnership_type
+			if (!otherType) return 'Please describe the type of partnership.'
+			if (countWords(otherType) > 10) return 'Other partnership type must be 10 words or less.'
 			subject = `Other: ${otherType}`
 		}
-
-		if (!name || !email || !city_country || !message) {
-			return fail(400, { message: 'Missing required fields' })
-		}
-
-		if (!EMAIL_PATTERN.test(email)) {
-			return fail(400, { message: 'Please enter a valid email address.' })
-		}
-
+		if (!name || !email || !city_country || !message.trim()) return MISSING
 		const messageWords = countWords(message)
-		if (messageWords > 200) {
-			return fail(400, { message: `Message must be 200 words or less. (Sent: ${messageWords})` })
-		}
-
-		const result = await sendContactEmail({
-			name,
-			email,
-			organization,
-			city_country,
-			subject,
-			message,
-			type: 'Partnerships'
-		})
-
-		if (!result.success) {
-			return fail(500, { message: result.message })
-		}
-
-		await sendConfirmationEmail({ name, email, type: 'Partnerships' })
-
-		return { success: true }
-	},
-	feedback: async ({ request, url }) => {
-		const data = await request.formData()
-
-		const spam = await checkNotSpam(data, url.hostname)
-		if (spam.drop) return { success: true }
-		if (spam.message) return fail(403, { message: spam.message })
-
-		const oversized = findOversizedField(data)
-		if (oversized) return fail(400, { message: oversized })
-
-		const name = getFormString(data, 'name') ?? 'Anonymous'
-		const email = getFormString(data, 'email') ?? ''
-		const subject = getFormString(data, 'subject')
-		const message = getFormString(data, 'message')
-
-		if (!subject || !message) {
-			return fail(400, { message: 'Missing required fields' })
-		}
-
-		// Email is optional here, but must look real if given.
-		if (email && !EMAIL_PATTERN.test(email)) {
-			return fail(400, { message: 'Please enter a valid email address.' })
-		}
-
-		const result = await sendContactEmail({
-			name,
-			email,
-			subject,
-			message,
-			type: 'Feedback'
-		})
-
-		if (!result.success) {
-			return fail(500, { message: result.message })
-		}
-
-		if (email) {
-			await sendConfirmationEmail({ name, email, type: 'Feedback' })
-		}
-
-		return { success: true }
-	}
+		if (messageWords > 200) return `Message must be 200 words or less. (Sent: ${messageWords})`
+		return { name, email, subject, message, organization, city_country }
+	}),
+	// Name and email are optional: the CRM names a sender without a name "Anonymous".
+	feedback: contactAction('Feedback', ({ name, email, subject, message }) => {
+		if (!subject || !message.trim()) return MISSING
+		return { name, email, subject, message }
+	})
 }

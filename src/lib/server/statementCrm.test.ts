@@ -9,8 +9,6 @@ vi.mock('$env/dynamic/private', () => ({ env }))
 vi.mock('$lib/server/sentry', () => ({ reportError, flushReports }))
 
 const {
-	SIGN_MIN_ATTEMPT_MS,
-	SIGN_RETRY_DELAY_MS,
 	LIVE_LIST_URL,
 	STATEMENT_VERSION,
 	liveSignatoryList,
@@ -18,6 +16,7 @@ const {
 	signInCrm,
 	verifyStatementInCrm
 } = await import('./statementCrm.js')
+const { CRM_MIN_ATTEMPT_MS, CRM_RETRY_DELAY_MS } = await import('./crmIntake.js')
 
 const KEY = 'test-key-not-real'
 const SIGNATURE = {
@@ -52,7 +51,7 @@ const sentParams = (call = 0) =>
 async function signThroughRetries() {
 	vi.useFakeTimers()
 	const pending = sign()
-	await vi.advanceTimersByTimeAsync(SIGN_RETRY_DELAY_MS)
+	await vi.advanceTimersByTimeAsync(CRM_RETRY_DELAY_MS)
 	return pending
 }
 
@@ -107,7 +106,7 @@ describe('signInCrm', () => {
 		vi.useFakeTimers()
 		const pending = sign()
 
-		await vi.advanceTimersByTimeAsync(SIGN_RETRY_DELAY_MS - 1)
+		await vi.advanceTimersByTimeAsync(CRM_RETRY_DELAY_MS - 1)
 		expect(fetchMock).toHaveBeenCalledTimes(1)
 		await vi.advanceTimersByTimeAsync(1)
 
@@ -139,16 +138,16 @@ describe('signInCrm', () => {
 		const timeouts = vi.spyOn(AbortSignal, 'timeout')
 		fetchMock.mockImplementation(networkError)
 
-		const tooLittle = SIGN_RETRY_DELAY_MS + SIGN_MIN_ATTEMPT_MS - 500
+		const tooLittle = CRM_RETRY_DELAY_MS + CRM_MIN_ATTEMPT_MS - 500
 		expect(await sign({ deadline: Date.now() + tooLittle })).toBe('failed')
 		expect(timeouts.mock.calls).toEqual([[tooLittle]])
 
 		timeouts.mockClear()
-		const enough = SIGN_RETRY_DELAY_MS + SIGN_MIN_ATTEMPT_MS + 500
+		const enough = CRM_RETRY_DELAY_MS + CRM_MIN_ATTEMPT_MS + 500
 		const pending = sign({ deadline: Date.now() + enough })
-		await vi.advanceTimersByTimeAsync(SIGN_RETRY_DELAY_MS)
+		await vi.advanceTimersByTimeAsync(CRM_RETRY_DELAY_MS)
 		expect(await pending).toBe('failed')
-		expect(timeouts.mock.calls).toEqual([[enough], [SIGN_MIN_ATTEMPT_MS + 500]])
+		expect(timeouts.mock.calls).toEqual([[enough], [CRM_MIN_ATTEMPT_MS + 500]])
 		expect(fetchMock).toHaveBeenCalledTimes(3)
 	})
 
@@ -157,10 +156,10 @@ describe('signInCrm', () => {
 		const timeouts = vi.spyOn(AbortSignal, 'timeout')
 		fetchMock.mockImplementation(networkError)
 
-		const enough = SIGN_RETRY_DELAY_MS + SIGN_MIN_ATTEMPT_MS + 500
+		const enough = CRM_RETRY_DELAY_MS + CRM_MIN_ATTEMPT_MS + 500
 		const pending = sign({ deadline: Date.now() + enough })
 		vi.setSystemTime(Date.now() + 1000)
-		await vi.advanceTimersByTimeAsync(SIGN_RETRY_DELAY_MS)
+		await vi.advanceTimersByTimeAsync(CRM_RETRY_DELAY_MS)
 		expect(await pending).toBe('failed')
 		expect(timeouts.mock.calls).toEqual([[enough]])
 	})

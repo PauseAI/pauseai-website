@@ -123,7 +123,13 @@
 			turnstileNonce += 1
 
 			if (result.type === 'success') {
-				toast.success("Thank you! We've received your message.")
+				const canReply = activeTab !== 'feedback' || formData.feedback.email.trim() !== ''
+				toast.success(
+					canReply
+						? "Thank you! We've received your message and will reply within 3 to 4 business days."
+						: "Thank you! We've received your message.",
+					{ duration: 6000 }
+				)
 
 				// Clear the data for the successfully submitted tab
 				if (activeTab === 'media') {
@@ -146,7 +152,8 @@
 			} else if (result.type === 'failure') {
 				console.error('Submission failed:', result)
 				const data: Record<string, unknown> | undefined = result.data
-				toast.error(String(data?.message) || 'Failed to send message.')
+				// Long enough to note the inbox a failure names.
+				toast.error(String(data?.message) || 'Failed to send message.', { duration: 10000 })
 			} else {
 				console.error('Unexpected result:', result)
 				toast.error('An unexpected error occurred.')
