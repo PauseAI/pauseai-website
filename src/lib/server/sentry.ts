@@ -22,7 +22,11 @@ declare const Deno: unknown
 export async function reportError(
 	error: unknown,
 	context?: Record<string, unknown>,
-	options: { fingerprint?: string[]; level?: 'error' | 'warning' } = {}
+	options: {
+		fingerprint?: string[]
+		level?: 'error' | 'warning'
+		tags?: Record<string, string>
+	} = {}
 ): Promise<void> {
 	try {
 		// Only the Netlify Deno edge runtime has `Deno`; skip elsewhere so the
