@@ -9,8 +9,6 @@ vi.mock('$env/dynamic/private', () => ({ env }))
 vi.mock('$lib/server/sentry', () => ({ reportError, flushReports }))
 
 const {
-	SIGN_MIN_ATTEMPT_MS,
-	SIGN_RETRY_DELAY_MS,
 	LIVE_LIST_URL,
 	STATEMENT_VERSION,
 	liveSignatoryList,
@@ -18,6 +16,8 @@ const {
 	signInCrm,
 	verifyStatementInCrm
 } = await import('./statementCrm.js')
+const { CRM_MIN_ATTEMPT_MS: SIGN_MIN_ATTEMPT_MS, CRM_RETRY_DELAY_MS: SIGN_RETRY_DELAY_MS } =
+	await import('./crmIntake.js')
 
 const KEY = 'test-key-not-real'
 const SIGNATURE = {

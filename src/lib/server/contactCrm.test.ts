@@ -9,8 +9,9 @@ vi.mock('$app/environment', () => ({ dev: false }))
 vi.mock('$env/dynamic/private', () => ({ env }))
 vi.mock('$lib/server/sentry', () => ({ reportError, flushReports }))
 
-const { CONTACT_MIN_ATTEMPT_MS, CONTACT_RETRY_DELAY_MS, sendContactToCrm } =
-	await import('./contactCrm.js')
+const { sendContactToCrm } = await import('./contactCrm.js')
+const { CRM_MIN_ATTEMPT_MS: CONTACT_MIN_ATTEMPT_MS, CRM_RETRY_DELAY_MS: CONTACT_RETRY_DELAY_MS } =
+	await import('./crmIntake.js')
 
 const KEY = 'test-key-not-real'
 const REQUEST = {
@@ -161,7 +162,28 @@ describe('sendContactToCrm', () => {
 		answerRow({ status: 'error', reason: 'send_failed' })
 
 		expect(await sendThroughRetries()).toBe('failed')
-		expect(reportError.mock.calls[0][1]).toMatchObject({ cause: 'send_failed', attempt: 2 })
+		expect(reportError.mock.calls[0][1]).toMatchObject({
+			cause: 'crm_error',
+			reason: 'send_failed',
+			attempt: 2
+		})
+	})
+
+	it("reports another error's reason code without retrying, and never free text", async () => {
+		answerRow({ status: 'error', reason: 'mailer_down' })
+		expect(await send()).toBe('failed')
+		expect(fetchMock).toHaveBeenCalledOnce()
+		expect(reportError.mock.calls[0][1]).toMatchObject({
+			cause: 'crm_error',
+			reason: 'mailer_down',
+			attempt: 1
+		})
+
+		reportError.mockClear()
+		answerRow({ status: 'error', reason: 'Could not send to ada@example.org' })
+		expect(await send()).toBe('failed')
+		expect(reportError.mock.calls[0][1]).toMatchObject({ cause: 'crm_error', reason: 'unknown' })
+		expectNothingSubmittedReported()
 	})
 
 	it('does not retry a 4xx or an answer of unknown shape', async () => {
@@ -201,17 +223,44 @@ describe('sendContactToCrm', () => {
 		expect(reportError.mock.calls[0][1]).toMatchObject({ cause: 'deadline', attempt: 1 })
 	})
 
-	it('without the CRM settings, answers ok on a test host and fails on the real site', async () => {
-		delete env.CRM_KEY
+	describe('without the CRM settings', () => {
+		const inContext = (context: string) =>
+			({ context: { deploy: { context }, waitUntil: () => {} } }) as unknown as App.Platform
 
-		expect(await send({ hostname: 'localhost' })).toBe('ok')
-		expect(await send({ hostname: 'deploy-preview-1--pauseai.netlify.app' })).toBe('ok')
-		expect(reportError).not.toHaveBeenCalled()
+		beforeEach(() => {
+			delete env.CRM_KEY
+		})
 
-		expect(await send({ hostname: 'pauseai.info' })).toBe('failed')
-		expect(fetchMock).not.toHaveBeenCalled()
-		expect(reportError).toHaveBeenCalledOnce()
-		expect(reportError.mock.calls[0][1]).toMatchObject({ cause: 'not_configured', attempt: 1 })
+		it.each([
+			['a local server', 'localhost', undefined],
+			['a deploy preview', 'deploy-preview-12--pauseai.netlify.app', inContext('deploy-preview')],
+			['a branch deploy', 'some-branch--pauseai.netlify.app', inContext('branch-deploy')],
+			['a deploy preview without a context', 'deploy-preview-12--pauseai.netlify.app', undefined]
+		])('sends nothing and answers ok on %s', async (_, hostname, platform) => {
+			expect(await send({ hostname, platform })).toBe('ok')
+			expect(fetchMock).not.toHaveBeenCalled()
+			expect(reportError).not.toHaveBeenCalled()
+		})
+
+		it.each([
+			['the real site', 'pauseai.info', inContext('production')],
+			['the netlify.app alias', 'pauseai.netlify.app', inContext('production')],
+			[
+				'an immutable deploy URL',
+				'6745f0c1a2b3c4d5e6f70809--pauseai.netlify.app',
+				inContext('production')
+			],
+			['the netlify.app alias without a context', 'pauseai.netlify.app', undefined],
+			['a branch-like address without a context', 'some-branch--pauseai.netlify.app', undefined]
+		])('fails and reports on %s', async (_, hostname, platform) => {
+			const waitUntil = vi.fn<(promise: Promise<unknown>) => void>()
+			if (platform) platform.context.waitUntil = waitUntil
+			expect(await send({ hostname, platform })).toBe('failed')
+			await waitUntil.mock.calls[0]?.[0]
+			expect(fetchMock).not.toHaveBeenCalled()
+			expect(reportError).toHaveBeenCalledOnce()
+			expect(reportError.mock.calls[0][1]).toMatchObject({ cause: 'not_configured', attempt: 1 })
+		})
 	})
 
 	it('reports after the response when the platform can wait for it', async () => {

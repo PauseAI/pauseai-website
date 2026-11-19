@@ -18,7 +18,18 @@ const API_PATH = '/civicrm/ajax/api4/'
 // The CRM can take about 6 seconds to answer and completes the write even after
 // the caller aborts, so a shorter wait reports timeouts for writes that succeeded.
 export const TIMEOUT_MS = 10_000
-type Cause = 'not_configured' | 'http' | 'timeout' | 'network'
+type Cause = 'not_configured' | 'http' | 'timeout' | 'network' | 'deadline'
+
+// The form routes run as Netlify Edge Functions, which must answer within 40 s, and CiviCRM
+// may already hold a write whose request then got no answer. Turnstile's check
+// (TURNSTILE_TIMEOUT_MS) and the CRM's attempts (callCrmUntil) fit inside this, measured from
+// the request's start.
+export const CRM_REQUEST_DEADLINE_MS = 20_000
+
+// callCrmUntil retries once, and only if the deadline leaves the retry CRM_MIN_ATTEMPT_MS,
+// about the slowest the CRM normally answers.
+export const CRM_RETRY_DELAY_MS = 1000
+export const CRM_MIN_ATTEMPT_MS = 6000
 
 export type CrmFailure = {
 	ok: false
@@ -137,6 +148,67 @@ export async function reportCrmProblem(
 	console.warn(`[${details.check}] not accepted`, details)
 	await reportError(new Error(message), details, options)
 	await flushReports()
+}
+
+const isTransientFailure = (failure: CrmFailure) =>
+	failure.cause === 'network' ||
+	failure.cause === 'timeout' ||
+	(failure.cause === 'http' && (failure.httpStatus ?? 0) >= 500)
+
+const wait = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms))
+
+/**
+ * Calls an action as callCrm does, retrying once after CRM_RETRY_DELAY_MS when the failure may
+ * be transient or `retryRow` names a cause for the row answered, if `deadline` (a Date.now()
+ * time) allows. No attempt runs past the deadline; once it has passed, the answer is a
+ * `deadline` failure. Answers the last attempt's answer and number. Never rejects.
+ */
+export async function callCrmUntil(
+	action: string,
+	params: unknown,
+	{
+		deadline,
+		check,
+		retryRow
+	}: {
+		deadline: number
+		/** Names the call in the retry's log line. */
+		check: string
+		retryRow?: (row: Record<string, unknown>) => string | undefined
+	}
+): Promise<{ answer: CrmAnswer; attempt: number }> {
+	for (let attempt = 1; ; attempt++) {
+		const remaining = deadline - Date.now()
+		if (remaining <= 0 || (attempt > 1 && remaining < CRM_MIN_ATTEMPT_MS)) {
+			return { answer: { ok: false, cause: 'deadline' }, attempt }
+		}
+		const answer = await callCrm(action, params, Math.min(TIMEOUT_MS, remaining))
+		const retryCause = answer.ok
+			? retryRow?.(answer.row)
+			: isTransientFailure(answer)
+				? answer.cause
+				: undefined
+		const retry =
+			attempt === 1 &&
+			retryCause !== undefined &&
+			deadline - Date.now() - CRM_RETRY_DELAY_MS >= CRM_MIN_ATTEMPT_MS
+		if (!retry) return { answer, attempt }
+		const details = answer.ok ? { cause: retryCause } : failureDetails(answer)
+		console.warn(`[${check}] ${action} failed, retrying`, { ...details, attempt })
+		await wait(CRM_RETRY_DELAY_MS)
+	}
+}
+
+/**
+ * Hands `work` to the platform to finish after the response, or awaits it where there is no
+ * platform (the Node dev server, tests).
+ */
+export async function afterResponse(
+	platform: App.Platform | undefined,
+	work: Promise<unknown>
+): Promise<void> {
+	if (platform) platform.context.waitUntil(work)
+	else await work
 }
 
 /** Never rejects: a failure is the `error` outcome, with what caused it. */

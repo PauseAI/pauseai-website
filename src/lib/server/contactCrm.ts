@@ -5,13 +5,12 @@
 // Submitted values must never reach a log or a report.
 import { dev } from '$app/environment'
 import {
-	TIMEOUT_MS,
-	callCrm,
+	afterResponse,
+	callCrmUntil,
 	failureDetails,
-	reportCrmProblem,
-	type CrmFailure
+	reportCrmProblem
 } from '$lib/server/crmIntake'
-import { isTestHostname } from '$lib/server/testHost'
+import { isNonProductionDeploy } from '$lib/server/testHost'
 
 /** Each enquiry type, spelled as the CRM takes it, and the inbox it reaches. */
 export const CONTACT_INBOXES = {
@@ -32,24 +31,12 @@ export type ContactRequest = {
 	city_country?: string
 }
 
-// The actions run as Netlify Edge Functions, which must answer within 40 s, and Turnstile's
-// check (TURNSTILE_TIMEOUT_MS) comes first, so the deadline is measured from the request's start.
-export const CONTACT_DEADLINE_MS = 20_000
-
-// Only a failure that may be transient is retried, once. There is no idempotency key, so a
-// retry after a timed-out attempt that did send delivers a second notification. The retry runs
-// only if the deadline leaves it CONTACT_MIN_ATTEMPT_MS, about the slowest the CRM normally answers.
-export const CONTACT_RETRY_DELAY_MS = 1000
-export const CONTACT_MIN_ATTEMPT_MS = 6000
-
 export type ContactSendResult = 'ok' | 'refused' | 'failed'
 
-const isTransient = (failure: CrmFailure) =>
-	failure.cause === 'network' ||
-	failure.cause === 'timeout' ||
-	(failure.cause === 'http' && (failure.httpStatus ?? 0) >= 500)
-
-const wait = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms))
+// The CRM's reasons are codes; anything else is reported as unknown, so a report can never
+// carry free text.
+const asReasonCode = (reason: unknown) =>
+	typeof reason === 'string' && /^[a-z_]{1,64}$/.test(reason) ? reason : 'unknown'
 
 const report = (
 	type: ContactType,
@@ -65,55 +52,43 @@ const report = (
 
 /**
  * Sends one enquiry to the team, retrying a transient failure (the CRM's `send_failed` among
- * them) once if `deadline` (a Date.now() time) allows, and never running an attempt past it.
- * With a platform, failures are reported after the response. Without the CRM's settings, a dev
- * server or deploy preview sends nothing and answers `ok`. Never rejects.
+ * them) once if `deadline` (a Date.now() time) allows. There is no idempotency key, so a retry
+ * after a timed-out attempt that did send delivers a second notification. With a platform,
+ * failures are reported after the response. Without the CRM's settings, a dev server, deploy
+ * preview or branch deploy sends nothing and answers `ok`. Never rejects.
  */
 export async function sendContactToCrm(
 	request: ContactRequest,
 	{ deadline, hostname, platform }: { deadline: number; hostname: string; platform?: App.Platform }
 ): Promise<ContactSendResult> {
 	const finish = async (result: ContactSendResult, reporting: Promise<void>) => {
-		if (platform) platform.context.waitUntil(reporting)
-		else await reporting
+		await afterResponse(platform, reporting)
 		return result
 	}
 
-	for (let attempt = 1; ; attempt++) {
-		const remaining = deadline - Date.now()
-		if (remaining <= 0 || (attempt > 1 && remaining < CONTACT_MIN_ATTEMPT_MS)) {
-			return finish(
-				'failed',
-				report(request.type, 'error', { cause: 'deadline', attempt }, 'error')
-			)
+	const { answer, attempt } = await callCrmUntil('PauseaiContactUs/send', request, {
+		deadline,
+		check: 'contact-us',
+		retryRow: (row) =>
+			row.status === 'error' && row.reason === 'send_failed' ? 'send_failed' : undefined
+	})
+	if (!answer.ok) {
+		if (answer.cause === 'not_configured' && (dev || isNonProductionDeploy(hostname, platform))) {
+			console.warn('[contact-us] CRM_URL or CRM_KEY is not set: nothing sent')
+			return 'ok'
 		}
-		const answer = await callCrm('PauseaiContactUs/send', request, Math.min(TIMEOUT_MS, remaining))
-		let failure: Record<string, unknown>
-		let transient: boolean
-		if (answer.ok) {
-			const { status, reason } = answer.row
-			if (status === 'ok') return 'ok'
-			if (status === 'refused') {
-				return finish('refused', report(request.type, `refused:${String(reason)}`, {}, 'warning'))
-			}
-			transient = status === 'error' && reason === 'send_failed'
-			failure = transient
-				? { cause: 'send_failed', attempt }
-				: { cause: 'http', httpStatus: 200, attempt }
-		} else {
-			if (answer.cause === 'not_configured' && (dev || isTestHostname(hostname))) {
-				console.warn('[contact-us] CRM_URL or CRM_KEY is not set: nothing sent')
-				return 'ok'
-			}
-			transient = isTransient(answer)
-			failure = { ...failureDetails(answer), attempt }
-		}
-		const retry =
-			attempt === 1 &&
-			transient &&
-			deadline - Date.now() - CONTACT_RETRY_DELAY_MS >= CONTACT_MIN_ATTEMPT_MS
-		if (!retry) return finish('failed', report(request.type, 'error', failure, 'error'))
-		console.warn('[contact-us] send failed, retrying', failure)
-		await wait(CONTACT_RETRY_DELAY_MS)
+		const details = { ...failureDetails(answer), attempt }
+		return finish('failed', report(request.type, 'error', details, 'error'))
 	}
+	const { status, reason } = answer.row
+	if (status === 'ok') return 'ok'
+	if (status === 'refused') {
+		const outcome = `refused:${asReasonCode(reason)}`
+		return finish('refused', report(request.type, outcome, {}, 'warning'))
+	}
+	const details =
+		status === 'error'
+			? { cause: 'crm_error', reason: asReasonCode(reason), attempt }
+			: { cause: 'http', httpStatus: 200, attempt }
+	return finish('failed', report(request.type, 'error', details, 'error'))
 }
