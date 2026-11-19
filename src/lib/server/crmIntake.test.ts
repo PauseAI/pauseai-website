@@ -150,6 +150,72 @@ describe('submitToCrm', () => {
 	})
 })
 
+describe('Cloudflare Access service token', () => {
+	const ID = 'test-client-id.access'
+	const SECRET = 'test-client-secret-not-real'
+	const sentHeaders = () => fetchMock.mock.calls[0][1]?.headers as Record<string, string>
+
+	beforeEach(() => {
+		env.CRM_URL = 'https://crm.pauseai.info/'
+		env.CF_ACCESS_CLIENT_ID = ID
+		env.CF_ACCESS_CLIENT_SECRET = SECRET
+	})
+
+	it('sends both headers to the production CRM when both are set, with redirects off', async () => {
+		expect(await submitToCrm(RECORD, '')).toEqual({ outcome: 'ok' })
+		expect(sentHeaders()).toMatchObject({
+			'X-Civi-Auth': `Bearer ${KEY}`,
+			'CF-Access-Client-Id': ID,
+			'CF-Access-Client-Secret': SECRET
+		})
+		expect(fetchMock.mock.calls[0][1]?.redirect).toBe('manual')
+	})
+
+	it('sends neither header when either is unset', async () => {
+		for (const missing of ['CF_ACCESS_CLIENT_ID', 'CF_ACCESS_CLIENT_SECRET']) {
+			fetchMock.mockClear()
+			const saved = env[missing]
+			delete env[missing]
+			await submitToCrm(RECORD, '')
+			expect(Object.keys(sentHeaders()).filter((name) => name.startsWith('CF-'))).toEqual([])
+			env[missing] = saved
+		}
+	})
+
+	it('sends neither header to another origin', async () => {
+		for (const url of [
+			'https://crm.example.org',
+			'http://crm.pauseai.info',
+			'https://crm.pauseai.info:8443',
+			'https://crm.pauseai.info.example.org'
+		]) {
+			fetchMock.mockClear()
+			env.CRM_URL = url
+			await submitToCrm(RECORD, '')
+			expect(Object.keys(sentHeaders()).filter((name) => name.startsWith('CF-'))).toEqual([])
+		}
+	})
+
+	it('treats a redirect as an error and reports no credential', async () => {
+		for (const status of [301, 302, 307]) {
+			fetchMock.mockResolvedValueOnce(
+				new Response(null, { status, headers: { Location: 'https://elsewhere.example.org/' } })
+			)
+			expect(await submitToCrm(RECORD, '')).toEqual({
+				outcome: 'error',
+				cause: 'redirect',
+				httpStatus: status
+			})
+		}
+		const warn = vi.spyOn(console, 'warn').mockImplementation(() => {})
+		fetchMock.mockResolvedValueOnce(new Response(null, { status: 302 }))
+		expect(await reportToCrm(RECORD, TOKEN)).toBe('error')
+		const reported = JSON.stringify([reportError.mock.calls, warn.mock.calls])
+		expect(reported).toContain('redirect')
+		for (const secret of [KEY, ID, SECRET]) expect(reported).not.toContain(secret)
+	})
+})
+
 describe('reportToCrm', () => {
 	it('reports nothing on ok', async () => {
 		expect(await reportToCrm(RECORD, '')).toBe('ok')

@@ -18,7 +18,7 @@ const API_PATH = '/civicrm/ajax/api4/'
 // The CRM can take about 6 seconds to answer and completes the write even after
 // the caller aborts, so a shorter wait reports timeouts for writes that succeeded.
 export const TIMEOUT_MS = 10_000
-type Cause = 'not_configured' | 'http' | 'timeout' | 'network'
+type Cause = 'not_configured' | 'http' | 'redirect' | 'timeout' | 'network'
 
 export type CrmFailure = {
 	ok: false
@@ -47,6 +47,21 @@ export const isRow = (value: unknown): value is Record<string, unknown> =>
 
 /** CRM_URL without its trailing slashes, or undefined when unset. */
 export const crmBaseUrl = (): string | undefined => env.CRM_URL?.replace(/\/+$/, '') || undefined
+
+// Only the production CRM sits behind Cloudflare Access; the service token goes nowhere else.
+const CF_ACCESS_ORIGIN = 'https://crm.pauseai.info'
+
+/**
+ * The Cloudflare Access service-token headers for a request to `url`: both when
+ * CF_ACCESS_CLIENT_ID and CF_ACCESS_CLIENT_SECRET are set and `url` is on the
+ * production CRM, otherwise none.
+ */
+function cfAccessHeaders(url: string): Record<string, string> {
+	const id = env.CF_ACCESS_CLIENT_ID
+	const secret = env.CF_ACCESS_CLIENT_SECRET
+	if (!id || !secret || new URL(url).origin !== CF_ACCESS_ORIGIN) return {}
+	return { 'CF-Access-Client-Id': id, 'CF-Access-Client-Secret': secret }
+}
 
 /**
  * Calls one API4 action (`Entity/action`) as the website API account, giving up
@@ -89,18 +104,25 @@ async function callCrmValues<T>(
 
 	const signal = AbortSignal.timeout(timeoutMs)
 	try {
-		const response = await fetch(base + API_PATH + action, {
+		const url = base + API_PATH + action
+		const response = await fetch(url, {
 			method: 'POST',
 			headers: {
 				// The CRM accepts an API key only in X-Civi-Auth; its Authorization
 				// header takes JWTs only (authx settings).
 				'X-Civi-Auth': `Bearer ${key}`,
 				'X-Requested-With': 'XMLHttpRequest',
-				'Content-Type': 'application/x-www-form-urlencoded'
+				'Content-Type': 'application/x-www-form-urlencoded',
+				...cfAccessHeaders(url)
 			},
 			body: new URLSearchParams({ params: JSON.stringify(params) }),
+			// fetch would carry the key and the service token on to wherever a redirect points.
+			redirect: 'manual',
 			signal
 		})
+		// A browser-style runtime answers a manual redirect as status 0 of type opaqueredirect.
+		if (response.type === 'opaqueredirect' || (response.status >= 300 && response.status < 400))
+			return { ok: false, cause: 'redirect', httpStatus: response.status }
 		// Only the status: an error body's text could echo what the request carried.
 		const httpError = { ok: false, cause: 'http', httpStatus: response.status } as const
 		if (!response.ok) return httpError
