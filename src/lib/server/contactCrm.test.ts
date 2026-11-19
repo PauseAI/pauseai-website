@@ -113,7 +113,8 @@ describe('sendContactToCrm', () => {
 		})
 		expect(options).toEqual({
 			fingerprint: ['contact-us', 'refused:invalid_request'],
-			level: 'warning'
+			level: 'warning',
+			tags: { check: 'contact-us' }
 		})
 		expectNothingSubmittedReported()
 	})
@@ -151,7 +152,11 @@ describe('sendContactToCrm', () => {
 			errorName: 'TypeError',
 			attempt: 2
 		})
-		expect(options).toEqual({ fingerprint: ['contact-us', 'error'], level: 'error' })
+		expect(options).toEqual({
+			fingerprint: ['contact-us', 'error'],
+			level: 'error',
+			tags: { check: 'contact-us' }
+		})
 		expect(flushReports).toHaveBeenCalled()
 		expect(console.warn).toHaveBeenCalled()
 		expectNothingSubmittedReported()
