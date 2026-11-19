@@ -17,7 +17,7 @@ export function isNonProductionDeploy(
 	platform: App.Platform | undefined
 ): boolean {
 	if (LOCAL_HOSTNAMES.has(hostname)) return true
-	const deploy = platform?.context.deploy as { context?: string; published?: boolean } | undefined
+	const deploy = platform?.context.deploy as Partial<App.Platform['context']['deploy']> | undefined
 	// A published preview or branch deploy keeps its original context while serving the live site.
 	if (deploy?.published) return false
 	if (deploy?.context) return NON_PRODUCTION_CONTEXTS.has(deploy.context)
