@@ -1,24 +1,15 @@
 import { fail } from '@sveltejs/kit'
 import type { Actions } from './$types'
-import { env } from '$env/dynamic/private'
-import { createRecord } from '$lib/airtable'
+import {
+	CONTACT_DEADLINE_MS,
+	CONTACT_INBOXES,
+	sendContactToCrm,
+	type ContactRequest
+} from '$lib/server/contactCrm'
 import { checkNotSpam } from '$lib/server/turnstile-verify'
 import { partnershipOptions } from './partnership-options'
 
-// Airtable configuration (User to fill in later)
-const CONTACT_AIRTABLE_BASE_ID = 'appWPTGqZmUcs3NWu'
-const CONTACT_AIRTABLE_TABLE_ID = 'tblPP2kM7uTheBrpw'
-
 export const prerender = false
-
-// Configure recipient email addresses for each contact form type
-const CONTACT_RECIPIENTS = {
-	Media: 'press@pauseai.info',
-	Partnerships: 'partnerships@pauseai.info',
-	Feedback: 'feedback@pauseai.info'
-} as const
-
-const mailerSendApiKey = env.MAILERSEND_API_KEY
 
 /**
  * Maximum characters accepted per field. The client shows softer hints, but these
@@ -37,28 +28,9 @@ const MAX_LENGTHS: Record<string, number> = {
 
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 
-type ContactFormType = keyof typeof CONTACT_RECIPIENTS
-
-type MailerSendError = {
-	message?: string
-}
-
 function getFormString(formData: FormData, field: string): string | undefined {
 	const value = formData.get(field)
 	return typeof value === 'string' ? value : undefined
-}
-
-function isMailerSendError(value: unknown): value is MailerSendError {
-	return typeof value === 'object' && value !== null
-}
-
-function escapeHtml(value: string): string {
-	return value
-		.replace(/&/g, '&amp;')
-		.replace(/</g, '&lt;')
-		.replace(/>/g, '&gt;')
-		.replace(/"/g, '&quot;')
-		.replace(/'/g, '&#39;')
 }
 
 function countWords(value: string): number {
@@ -76,167 +48,27 @@ function findOversizedField(formData: FormData): string | undefined {
 	return undefined
 }
 
-async function sendContactEmail(data: {
-	name: string
-	email: string
-	subject: string
-	message: string
-	type: ContactFormType
-	organization?: string
-	city_country?: string
-}) {
-	if (!mailerSendApiKey) {
-		console.error('MAILERSEND_API_KEY is not configured')
-		return {
-			success: false,
-			message: 'Email service is not configured. Please contact the administrator.'
-		}
-	}
-
-	const recipientEmail = CONTACT_RECIPIENTS[data.type]
-
-	// Everything interpolated below is attacker-controlled, so it is escaped:
-	// unescaped input let spammers inject live links into the team's inbox.
-	let htmlContent = `
-		<p><strong>Name:</strong> ${escapeHtml(data.name)}</p>
-		<p><strong>Email:</strong> ${escapeHtml(data.email)}</p>
-		<p><strong>Subject:</strong> ${escapeHtml(data.subject)}</p>
-	`
-
-	if (data.organization) {
-		htmlContent += `<p><strong>Organization:</strong> ${escapeHtml(data.organization)}</p>`
-	}
-
-	if (data.city_country) {
-		htmlContent += `<p><strong>City, Country:</strong> ${escapeHtml(data.city_country)}</p>`
-	}
-
-	htmlContent += `<p><strong>Message:</strong></p><p>${escapeHtml(data.message).replace(/\n/g, '<br>')}</p>`
-
-	const textContent = `Name: ${data.name}\nEmail: ${data.email}\nSubject: ${data.subject}${data.organization ? `\nOrganization: ${data.organization}` : ''}${data.city_country ? `\nCity, Country: ${data.city_country}` : ''}\n\nMessage:\n${data.message}`
-
-	// Build the request body for MailerSend API
-	const emailBody: {
-		from: { email: string; name: string }
-		to: { email: string; name: string }[]
-		subject: string
-		html: string
-		text: string
-		reply_to?: { email: string; name: string }
-	} = {
-		from: {
-			email: 'info@pauseai.info',
-			name: `PauseAI ${data.type} Form`
-		},
-		to: [
-			{
-				email: recipientEmail,
-				name: 'PauseAI Team'
-			}
-		],
-		subject: `[${data.type} Form]: ${data.subject}`,
-		html: htmlContent,
-		text: textContent
-	}
-
-	if (data.email) {
-		emailBody.reply_to = {
-			email: data.email,
-			name: data.name
-		}
-	}
-
-	try {
-		const response = await fetch('https://api.mailersend.com/v1/email', {
-			method: 'POST',
-			headers: {
-				'Content-Type': 'application/json',
-				Authorization: `Bearer ${mailerSendApiKey}`
-			},
-			body: JSON.stringify(emailBody)
+/** Sends the enquiry, answering a failure with the inbox to write to instead. */
+async function send(
+	request: ContactRequest,
+	{ deadline, url, platform }: { deadline: number; url: URL; platform?: App.Platform }
+) {
+	const result = await sendContactToCrm(request, { deadline, hostname: url.hostname, platform })
+	if (result === 'ok') return { success: true }
+	const inbox = CONTACT_INBOXES[request.type]
+	if (result === 'refused') {
+		return fail(400, {
+			message: `We couldn't accept your message as entered. Please check your details, or email us at ${inbox}.`
 		})
-
-		if (!response.ok) {
-			const errorData: unknown = await response.json().catch((): unknown => ({}))
-			console.error('MailerSend Error:', response.status, JSON.stringify(errorData, null, 2))
-
-			let errorMessage = 'Failed to send email. Please try again later.'
-			if (isMailerSendError(errorData) && typeof errorData.message === 'string') {
-				errorMessage = errorData.message.replace('reply to.email', 'email')
-			}
-
-			return { success: false, message: errorMessage }
-		}
-
-		// Save to Airtable - sending full content in the Message field
-		await createRecord(CONTACT_AIRTABLE_BASE_ID, CONTACT_AIRTABLE_TABLE_ID, {
-			Message: textContent,
-			Type: data.type
-		})
-
-		return { success: true }
-	} catch (error: unknown) {
-		console.error('MailerSend Error:', error)
-
-		let errorMessage = 'Failed to send email. Please try again later.'
-		if (error instanceof Error && error.message) {
-			errorMessage = error.message
-		}
-
-		return { success: false, message: errorMessage }
 	}
-}
-
-async function sendConfirmationEmail(data: { name: string; email: string; type: ContactFormType }) {
-	if (!mailerSendApiKey || !data.email) return
-
-	const teamEmail = CONTACT_RECIPIENTS[data.type]
-
-	const emailBody = {
-		from: {
-			email: teamEmail,
-			name: 'PauseAI Team'
-		},
-		reply_to: {
-			email: teamEmail,
-			name: 'PauseAI Team'
-		},
-		to: [
-			{
-				email: data.email,
-				name: data.name
-			}
-		],
-		subject: 'Thank you for contacting PauseAI',
-		html: `
-			<p>Hello,</p>
-			<p>Thank you for your interest — we appreciate you reaching out.</p>
-			<p>We’ve received your inquiry, and a member of our team will respond promptly.</p>
-			<p>We are a small team, therefore we aim to get back to you within 3 – 4 business days.</p>
-			<p>Thanks again for your patience and interest.</p>
-			<br>
-			<p>Best regards,</p>
-			<p>Pause AI team</p>
-		`,
-		text: `Hello,\n\nThank you for your interest — we appreciate you reaching out.\n\nWe’ve received your inquiry, and a member of our team will respond promptly.\n\nWe are a small team, therefore we aim to get back to you within 3 – 4 business days.\n\nThanks again for your patience and interest.\n\n\nBest regards,\n\nPause AI team`
-	}
-
-	try {
-		await fetch('https://api.mailersend.com/v1/email', {
-			method: 'POST',
-			headers: {
-				'Content-Type': 'application/json',
-				Authorization: `Bearer ${mailerSendApiKey}`
-			},
-			body: JSON.stringify(emailBody)
-		})
-	} catch (error) {
-		console.error('Failed to send confirmation email:', error)
-	}
+	return fail(503, {
+		message: `Sorry, we couldn't send your message. Please email us at ${inbox} instead.`
+	})
 }
 
 export const actions: Actions = {
-	media: async ({ request, url }) => {
+	media: async ({ request, url, platform }) => {
+		const deadline = Date.now() + CONTACT_DEADLINE_MS
 		const data = await request.formData()
 
 		const spam = await checkNotSpam(data, url.hostname)
@@ -260,24 +92,13 @@ export const actions: Actions = {
 			return fail(400, { message: 'Please enter a valid email address.' })
 		}
 
-		const result = await sendContactEmail({
-			name,
-			email,
-			subject,
-			message: details,
-			organization,
-			type: 'Media'
-		})
-
-		if (!result.success) {
-			return fail(500, { message: result.message })
-		}
-
-		await sendConfirmationEmail({ name, email, type: 'Media' })
-
-		return { success: true }
+		return send(
+			{ type: 'Media', name, email, subject, message: details, organization },
+			{ deadline, url, platform }
+		)
 	},
-	partnerships: async ({ request, url }) => {
+	partnerships: async ({ request, url, platform }) => {
+		const deadline = Date.now() + CONTACT_DEADLINE_MS
 		const data = await request.formData()
 
 		const spam = await checkNotSpam(data, url.hostname)
@@ -324,25 +145,21 @@ export const actions: Actions = {
 			return fail(400, { message: `Message must be 200 words or less. (Sent: ${messageWords})` })
 		}
 
-		const result = await sendContactEmail({
-			name,
-			email,
-			organization,
-			city_country,
-			subject,
-			message,
-			type: 'Partnerships'
-		})
-
-		if (!result.success) {
-			return fail(500, { message: result.message })
-		}
-
-		await sendConfirmationEmail({ name, email, type: 'Partnerships' })
-
-		return { success: true }
+		return send(
+			{
+				type: 'Partnerships',
+				name,
+				email,
+				subject,
+				message,
+				organization: organization ?? '',
+				city_country
+			},
+			{ deadline, url, platform }
+		)
 	},
-	feedback: async ({ request, url }) => {
+	feedback: async ({ request, url, platform }) => {
+		const deadline = Date.now() + CONTACT_DEADLINE_MS
 		const data = await request.formData()
 
 		const spam = await checkNotSpam(data, url.hostname)
@@ -352,7 +169,8 @@ export const actions: Actions = {
 		const oversized = findOversizedField(data)
 		if (oversized) return fail(400, { message: oversized })
 
-		const name = getFormString(data, 'name') ?? 'Anonymous'
+		// Both optional: the CRM names a sender without a name "Anonymous".
+		const name = getFormString(data, 'name') ?? ''
 		const email = getFormString(data, 'email') ?? ''
 		const subject = getFormString(data, 'subject')
 		const message = getFormString(data, 'message')
@@ -366,22 +184,6 @@ export const actions: Actions = {
 			return fail(400, { message: 'Please enter a valid email address.' })
 		}
 
-		const result = await sendContactEmail({
-			name,
-			email,
-			subject,
-			message,
-			type: 'Feedback'
-		})
-
-		if (!result.success) {
-			return fail(500, { message: result.message })
-		}
-
-		if (email) {
-			await sendConfirmationEmail({ name, email, type: 'Feedback' })
-		}
-
-		return { success: true }
+		return send({ type: 'Feedback', name, email, subject, message }, { deadline, url, platform })
 	}
 }
