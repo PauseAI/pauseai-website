@@ -196,6 +196,35 @@ describe('Cloudflare Access service token', () => {
 		}
 	})
 
+	it('sends both headers when CRM_URL names the production CRM with :443 or in capitals', async () => {
+		for (const url of ['https://crm.pauseai.info:443', 'https://CRM.pauseai.info/']) {
+			fetchMock.mockClear()
+			env.CRM_URL = url
+			await submitToCrm(RECORD, '')
+			expect(Object.keys(sentHeaders()).filter((name) => name.startsWith('CF-'))).toEqual([
+				'CF-Access-Client-Id',
+				'CF-Access-Client-Secret'
+			])
+		}
+	})
+
+	it('reports a fetch error that quotes a malformed header by its name only', async () => {
+		const leaked = 'leaked-value'
+		env.CF_ACCESS_CLIENT_SECRET = `${leaked}\nX-Injected: 1`
+		fetchMock.mockImplementation((_url, init) =>
+			Promise.reject(
+				new TypeError(
+					`Headers.append: "${(init?.headers as Record<string, string>)['CF-Access-Client-Secret']}" is an invalid header value`
+				)
+			)
+		)
+		const warn = vi.spyOn(console, 'warn').mockImplementation(() => {})
+		expect(await reportToCrm(RECORD, TOKEN)).toBe('error')
+		const reported = JSON.stringify([reportError.mock.calls, warn.mock.calls])
+		expect(reported).toContain('TypeError')
+		expect(reported).not.toContain(leaked)
+	})
+
 	it('treats a redirect as an error and reports no credential', async () => {
 		for (const status of [301, 302, 307]) {
 			fetchMock.mockResolvedValueOnce(
