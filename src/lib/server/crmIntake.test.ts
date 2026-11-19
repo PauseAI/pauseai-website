@@ -154,6 +154,7 @@ describe('Cloudflare Access service token', () => {
 	const ID = 'test-client-id.access'
 	const SECRET = 'test-client-secret-not-real'
 	const sentHeaders = () => fetchMock.mock.calls[0][1]?.headers as Record<string, string>
+	const cfHeaderNames = () => Object.keys(sentHeaders()).filter((name) => name.startsWith('CF-'))
 
 	beforeEach(() => {
 		env.CRM_URL = 'https://crm.pauseai.info/'
@@ -171,16 +172,14 @@ describe('Cloudflare Access service token', () => {
 		expect(fetchMock.mock.calls[0][1]?.redirect).toBe('manual')
 	})
 
-	it('sends neither header when either is unset', async () => {
-		for (const missing of ['CF_ACCESS_CLIENT_ID', 'CF_ACCESS_CLIENT_SECRET']) {
-			fetchMock.mockClear()
-			const saved = env[missing]
+	it.each(['CF_ACCESS_CLIENT_ID', 'CF_ACCESS_CLIENT_SECRET'])(
+		'sends neither header when %s is unset',
+		async (missing) => {
 			delete env[missing]
 			await submitToCrm(RECORD, '')
-			expect(Object.keys(sentHeaders()).filter((name) => name.startsWith('CF-'))).toEqual([])
-			env[missing] = saved
+			expect(cfHeaderNames()).toEqual([])
 		}
-	})
+	)
 
 	it('sends neither header to another origin', async () => {
 		for (const url of [
@@ -192,7 +191,7 @@ describe('Cloudflare Access service token', () => {
 			fetchMock.mockClear()
 			env.CRM_URL = url
 			await submitToCrm(RECORD, '')
-			expect(Object.keys(sentHeaders()).filter((name) => name.startsWith('CF-'))).toEqual([])
+			expect(cfHeaderNames()).toEqual([])
 		}
 	})
 
@@ -201,10 +200,7 @@ describe('Cloudflare Access service token', () => {
 			fetchMock.mockClear()
 			env.CRM_URL = url
 			await submitToCrm(RECORD, '')
-			expect(Object.keys(sentHeaders()).filter((name) => name.startsWith('CF-'))).toEqual([
-				'CF-Access-Client-Id',
-				'CF-Access-Client-Secret'
-			])
+			expect(cfHeaderNames()).toEqual(['CF-Access-Client-Id', 'CF-Access-Client-Secret'])
 		}
 	})
 
