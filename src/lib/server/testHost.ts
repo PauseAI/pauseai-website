@@ -17,8 +17,10 @@ export function isNonProductionDeploy(
 	platform: App.Platform | undefined
 ): boolean {
 	if (LOCAL_HOSTNAMES.has(hostname)) return true
-	const context = (platform?.context.deploy as { context?: string } | undefined)?.context
-	if (context) return NON_PRODUCTION_CONTEXTS.has(context)
+	const deploy = platform?.context.deploy as { context?: string; published?: boolean } | undefined
+	// A published preview or branch deploy keeps its original context while serving the live site.
+	if (deploy?.published) return false
+	if (deploy?.context) return NON_PRODUCTION_CONTEXTS.has(deploy.context)
 	// A branch deploy's `<branch>--` prefix reads like an immutable production deploy's
 	// `<deploy id>--`, so without a context only a deploy preview's address is trusted.
 	return /^deploy-preview-\d+--[a-z0-9-]+\.netlify\.app$/.test(hostname)

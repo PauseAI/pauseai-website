@@ -10,8 +10,7 @@ vi.mock('$env/dynamic/private', () => ({ env }))
 vi.mock('$lib/server/sentry', () => ({ reportError, flushReports }))
 
 const { sendContactToCrm } = await import('./contactCrm.js')
-const { CRM_MIN_ATTEMPT_MS: CONTACT_MIN_ATTEMPT_MS, CRM_RETRY_DELAY_MS: CONTACT_RETRY_DELAY_MS } =
-	await import('./crmIntake.js')
+const { CRM_MIN_ATTEMPT_MS, CRM_RETRY_DELAY_MS } = await import('./crmIntake.js')
 
 const KEY = 'test-key-not-real'
 const REQUEST = {
@@ -61,7 +60,7 @@ const sentParams = (call = 0) =>
 async function sendThroughRetries() {
 	vi.useFakeTimers()
 	const pending = send()
-	await vi.advanceTimersByTimeAsync(CONTACT_RETRY_DELAY_MS)
+	await vi.advanceTimersByTimeAsync(CRM_RETRY_DELAY_MS)
 	return pending
 }
 
@@ -126,7 +125,7 @@ describe('sendContactToCrm', () => {
 		vi.useFakeTimers()
 		const pending = send()
 
-		await vi.advanceTimersByTimeAsync(CONTACT_RETRY_DELAY_MS - 1)
+		await vi.advanceTimersByTimeAsync(CRM_RETRY_DELAY_MS - 1)
 		expect(fetchMock).toHaveBeenCalledTimes(1)
 		await vi.advanceTimersByTimeAsync(1)
 
@@ -205,16 +204,16 @@ describe('sendContactToCrm', () => {
 		const timeouts = vi.spyOn(AbortSignal, 'timeout')
 		fetchMock.mockImplementation(networkError)
 
-		const tooLittle = CONTACT_RETRY_DELAY_MS + CONTACT_MIN_ATTEMPT_MS - 500
+		const tooLittle = CRM_RETRY_DELAY_MS + CRM_MIN_ATTEMPT_MS - 500
 		expect(await send({ deadline: Date.now() + tooLittle })).toBe('failed')
 		expect(timeouts.mock.calls).toEqual([[tooLittle]])
 
 		timeouts.mockClear()
-		const enough = CONTACT_RETRY_DELAY_MS + CONTACT_MIN_ATTEMPT_MS + 500
+		const enough = CRM_RETRY_DELAY_MS + CRM_MIN_ATTEMPT_MS + 500
 		const pending = send({ deadline: Date.now() + enough })
-		await vi.advanceTimersByTimeAsync(CONTACT_RETRY_DELAY_MS)
+		await vi.advanceTimersByTimeAsync(CRM_RETRY_DELAY_MS)
 		expect(await pending).toBe('failed')
-		expect(timeouts.mock.calls).toEqual([[enough], [CONTACT_MIN_ATTEMPT_MS + 500]])
+		expect(timeouts.mock.calls).toEqual([[enough], [CRM_MIN_ATTEMPT_MS + 500]])
 	})
 
 	it('sends nothing once the deadline has passed', async () => {
@@ -224,8 +223,10 @@ describe('sendContactToCrm', () => {
 	})
 
 	describe('without the CRM settings', () => {
-		const inContext = (context: string) =>
-			({ context: { deploy: { context }, waitUntil: () => {} } }) as unknown as App.Platform
+		const inContext = (context: string, published = false) =>
+			({
+				context: { deploy: { context, published }, waitUntil: () => {} }
+			}) as unknown as App.Platform
 
 		beforeEach(() => {
 			delete env.CRM_KEY
@@ -251,7 +252,8 @@ describe('sendContactToCrm', () => {
 				inContext('production')
 			],
 			['the netlify.app alias without a context', 'pauseai.netlify.app', undefined],
-			['a branch-like address without a context', 'some-branch--pauseai.netlify.app', undefined]
+			['a branch-like address without a context', 'some-branch--pauseai.netlify.app', undefined],
+			['a published deploy preview', 'pauseai.info', inContext('deploy-preview', true)]
 		])('fails and reports on %s', async (_, hostname, platform) => {
 			const waitUntil = vi.fn<(promise: Promise<unknown>) => void>()
 			if (platform) platform.context.waitUntil = waitUntil
