@@ -152,6 +152,32 @@ export const FORMATS: Format[] = [
 
 export const DEFAULT_FORMAT_ID = 'ig-square'
 
+/** Business card sizes. Kept apart from FORMATS, as only the business card designs fit them. */
+export const CARD_FORMATS: PrintFormat[] = [
+	{
+		id: 'card-eu',
+		label: 'UK / EU business card',
+		group: 'Print',
+		kind: 'print',
+		widthMm: 85,
+		heightMm: 55
+	},
+	{
+		id: 'card-us',
+		label: 'US / Canada business card (3.5 × 2 in)',
+		group: 'Print',
+		kind: 'print',
+		widthMm: 88.9,
+		heightMm: 50.8
+	}
+]
+
+export const DEFAULT_CARD_FORMAT_ID = 'card-eu'
+
+export function getCardFormat(id: string): PrintFormat {
+	return CARD_FORMATS.find((f) => f.id === id) ?? CARD_FORMATS[0]
+}
+
 export function getFormat(id: string): Format {
 	return FORMATS.find((f) => f.id === id) ?? FORMATS.find((f) => f.id === DEFAULT_FORMAT_ID)!
 }

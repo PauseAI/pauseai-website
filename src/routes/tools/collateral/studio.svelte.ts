@@ -19,7 +19,8 @@ export class StudioAssets {
 	/** The font subsets loaded so far, comma-separated, or null before the first load finishes. */
 	fontsLoaded = $state<string | null>(null)
 
-	constructor(text: () => string) {
+	/** `faces` are the font faces to load, when not the layouts' usual ones (business cards add light weights). */
+	constructor(text: () => string, faces?: { family: string; weight: string }[]) {
 		onMount(() => {
 			let cancelled = false
 			const sources = THEMES.map((t) => t.logoSrc)
@@ -43,7 +44,7 @@ export class StudioAssets {
 			const loaded = this.fontsLoaded?.split(',') ?? []
 			if (this.fontsLoaded !== null && needed.every((s) => loaded.includes(s))) return
 			let cancelled = false
-			void loadFonts(current)
+			void loadFonts(current, faces)
 				.catch(() => undefined)
 				.then(() => {
 					if (!cancelled)

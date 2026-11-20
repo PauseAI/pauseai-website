@@ -69,14 +69,17 @@ export async function pdfBytesForPrint(
 	return pdf.save()
 }
 
-/** One-page PDF at trim size plus bleed, with TrimBox/BleedBox set so print shops can find the trim. */
+/**
+ * PDF at trim size plus bleed, one page per canvas (a business card's front and back), with TrimBox/BleedBox set so
+ * print shops can find the trim.
+ */
 export async function downloadCanvasPdf(
-	canvas: HTMLCanvasElement,
+	canvas: HTMLCanvasElement | HTMLCanvasElement[],
 	format: { widthMm: number; heightMm: number },
 	bleedMm: number,
 	filename: string
 ): Promise<void> {
-	const bytes = await pdfBytesForPrint([canvas], format, bleedMm)
+	const bytes = await pdfBytesForPrint(Array.isArray(canvas) ? canvas : [canvas], format, bleedMm)
 	download(new Blob([bytes as BlobPart], { type: 'application/pdf' }), filename)
 }
 

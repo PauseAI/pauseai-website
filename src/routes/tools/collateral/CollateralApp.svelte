@@ -1,9 +1,10 @@
 <script lang="ts">
 	import CollateralStudio from './CollateralStudio.svelte'
 	import GalleryStudio from './GalleryStudio.svelte'
+	import BusinessCardStudio from './BusinessCardStudio.svelte'
 	import PackStudio from './PackStudio.svelte'
 
-	type Mode = 'single' | 'pack' | 'gallery'
+	type Mode = 'single' | 'pack' | 'gallery' | 'cards'
 
 	/** `short` is shown on phones, where the full labels don't fit in one row. */
 	const MODES: { id: Mode; label: string; short: string; hint: string }[] = [
@@ -19,6 +20,12 @@
 			label: 'Gallery / carousel',
 			short: 'Gallery',
 			hint: 'Photo slides for a carousel post.'
+		},
+		{
+			id: 'cards',
+			label: 'Business cards',
+			short: 'Cards',
+			hint: 'Print-ready business cards, front and back.'
 		}
 	]
 
@@ -55,14 +62,17 @@
 {#if opened.includes('gallery')}
 	<div hidden={mode !== 'gallery'}><GalleryStudio /></div>
 {/if}
+{#if opened.includes('cards')}
+	<div hidden={mode !== 'cards'}><BusinessCardStudio /></div>
+{/if}
 
 <style>
 	.modes {
 		display: grid;
-		grid-template-columns: repeat(3, 1fr);
+		grid-template-columns: repeat(4, 1fr);
 		gap: 0.25rem;
 		width: 100%;
-		max-width: 34rem;
+		max-width: 44rem;
 		padding: 0.25rem;
 		border: 1px solid var(--grey-300);
 		border-radius: 999px;
@@ -95,7 +105,7 @@
 		display: none;
 	}
 
-	@media (max-width: 480px) {
+	@media (max-width: 640px) {
 		.long {
 			display: none;
 		}

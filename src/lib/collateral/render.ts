@@ -19,12 +19,12 @@ import type { Theme } from './themes'
  * Loads the layouts' fonts before drawing, as a canvas draws text in a fallback font while its face is still loading.
  * Pass the design's text, so the subsets it needs (accented, Cyrillic or Greek letters) load too, not only Latin.
  */
-export async function loadFonts(text = ''): Promise<void> {
+export async function loadFonts(text = '', faces = FONT_FACES): Promise<void> {
 	declareCanvasFonts()
 	// One load per face covers every subset of it that the text needs.
-	const loads = FONT_FACES.filter(
-		({ family, weight }) => facesFor(family, weight, text).length
-	).map(({ family, weight }) => document.fonts.load(`${weight} 40px "${family}"`, `${text}A`))
+	const loads = faces
+		.filter(({ family, weight }) => facesFor(family, weight, text).length)
+		.map(({ family, weight }) => document.fonts.load(`${weight} 40px "${family}"`, `${text}A`))
 	await Promise.all(loads)
 }
 

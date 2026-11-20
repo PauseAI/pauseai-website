@@ -7,8 +7,14 @@
  *
  * Browser only: added to the page by declareCanvasFonts when a tool first needs them.
  */
+import sairaLatin300 from '@fontsource/saira-condensed/files/saira-condensed-latin-300-normal.woff2'
+import sairaLatinExt300 from '@fontsource/saira-condensed/files/saira-condensed-latin-ext-300-normal.woff2'
 import sairaLatin700 from '@fontsource/saira-condensed/files/saira-condensed-latin-700-normal.woff2'
 import sairaLatinExt700 from '@fontsource/saira-condensed/files/saira-condensed-latin-ext-700-normal.woff2'
+import robotoSlabLatin300 from '@fontsource/roboto-slab/files/roboto-slab-latin-300-normal.woff2'
+import robotoSlabLatinExt300 from '@fontsource/roboto-slab/files/roboto-slab-latin-ext-300-normal.woff2'
+import robotoSlabCyrillic300 from '@fontsource/roboto-slab/files/roboto-slab-cyrillic-300-normal.woff2'
+import robotoSlabGreek300 from '@fontsource/roboto-slab/files/roboto-slab-greek-300-normal.woff2'
 import robotoSlabLatin500 from '@fontsource/roboto-slab/files/roboto-slab-latin-500-normal.woff2'
 import robotoSlabLatinExt500 from '@fontsource/roboto-slab/files/roboto-slab-latin-ext-500-normal.woff2'
 import robotoSlabCyrillic500 from '@fontsource/roboto-slab/files/roboto-slab-cyrillic-500-normal.woff2'
@@ -49,6 +55,13 @@ export const HEADLINE_FAMILY = 'PAI Saira Condensed'
 export const BODY_FAMILY = 'PAI Roboto Slab'
 
 export const CANVAS_FONTS: CanvasFace[] = [
+	// The light weights are for business cards only (see cardFonts.ts), so the other designs never load them.
+	{ family: HEADLINE_FAMILY, weight: '300', subset: 'latin', file: sairaLatin300 },
+	{ family: HEADLINE_FAMILY, weight: '300', subset: 'latin-ext', file: sairaLatinExt300 },
+	{ family: BODY_FAMILY, weight: '300', subset: 'latin', file: robotoSlabLatin300 },
+	{ family: BODY_FAMILY, weight: '300', subset: 'latin-ext', file: robotoSlabLatinExt300 },
+	{ family: BODY_FAMILY, weight: '300', subset: 'cyrillic', file: robotoSlabCyrillic300 },
+	{ family: BODY_FAMILY, weight: '300', subset: 'greek', file: robotoSlabGreek300 },
 	{ family: HEADLINE_FAMILY, weight: '700', subset: 'latin', file: sairaLatin700 },
 	{ family: HEADLINE_FAMILY, weight: '700', subset: 'latin-ext', file: sairaLatinExt700 },
 	{ family: BODY_FAMILY, weight: '500', subset: 'latin', file: robotoSlabLatin500 },

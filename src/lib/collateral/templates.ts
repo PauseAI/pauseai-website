@@ -17,8 +17,8 @@ import { coverRect, fitText, type FitResult, type Measure } from './text'
 
 /** Headlines in the site's heading face, body text in its body face (see canvasFonts.ts). */
 // Saira Condensed has no Cyrillic or Greek letters, so those come from Roboto Slab, which has.
-const DISPLAY_FONT = `"${HEADLINE_FAMILY}", "${BODY_FAMILY}", "Saira Condensed", Impact, sans-serif`
-const BODY_FONT = `"${BODY_FAMILY}", "Roboto Slab", Georgia, serif`
+export const DISPLAY_FONT = `"${HEADLINE_FAMILY}", "${BODY_FAMILY}", "Saira Condensed", Impact, sans-serif`
+export const BODY_FONT = `"${BODY_FAMILY}", "Roboto Slab", Georgia, serif`
 /** The faces the layouts draw with, for loading before drawing. */
 export const FONT_FACES: { family: string; weight: string }[] = [
 	{ family: HEADLINE_FAMILY, weight: '700' },
@@ -433,8 +433,13 @@ function roundRect(
 }
 
 /** Scannable QR on a light panel: round dots, ring-and-square corner marks, the pause symbol in the middle. */
-function drawQr(a: DrawArgs, target: string, x: number, y: number, size: number) {
-	const { ctx } = a
+export function drawQr(
+	ctx: CanvasRenderingContext2D,
+	target: string,
+	x: number,
+	y: number,
+	size: number
+) {
 	const shape = qrShape(target, size, true)
 
 	ctx.fillStyle = '#FFFFFF'
@@ -551,7 +556,7 @@ function drawQrBlock(a: DrawArgs, q: QrLayout, x: number, y: number) {
 	const measure = measurer(ctx, 700, BODY_FONT)
 	q.codes.forEach((code, i) => {
 		const px = x + i * (q.size + q.gap)
-		drawQr(a, qrTarget(code.url, a.trackQr), px, y, q.size)
+		drawQr(ctx, qrTarget(code.url, a.trackQr), px, y, q.size)
 		const label = code.label.trim()
 		if (!label) return
 		let size = q.labelFont
