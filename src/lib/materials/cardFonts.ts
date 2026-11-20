@@ -9,7 +9,9 @@ import { BODY_FONT, DISPLAY_FONT } from './templates'
 export const CARD_FONT_FACES: { family: string; weight: string }[] = [
 	{ family: HEADLINE_FAMILY, weight: '700' },
 	{ family: HEADLINE_FAMILY, weight: '300' },
-	{ family: BODY_FAMILY, weight: '300' }
+	{ family: BODY_FAMILY, weight: '300' },
+	// Saira Condensed has no Cyrillic or Greek, so bold text in those scripts falls back to Roboto Slab's bold.
+	{ family: BODY_FAMILY, weight: '700' }
 ]
 
 const CSS: Record<CardFont, { weight: number; stack: string }> = {

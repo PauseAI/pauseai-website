@@ -5,7 +5,7 @@ import { handleRedirects } from './redirects'
 /** Where `path` redirects to, and how, or null when it doesn't. */
 function redirectOf(path: string, search = ''): { status: number; location: string } | null {
 	try {
-		handleRedirects(path, search)
+		handleRedirects(path, () => search)
 		return null
 	} catch (e) {
 		if (!isRedirect(e)) throw e
@@ -28,6 +28,16 @@ describe('handleRedirects', () => {
 			status: 301,
 			location: '/tools/materials/anything/else?a=1&b=2'
 		})
+	})
+
+	it("doesn't read the query string unless a section redirect matches, as prerendered pages can't", () => {
+		const search = () => {
+			throw new Error('read the query string')
+		}
+		expect(() => handleRedirects('/tools/materials', search)).not.toThrow()
+		expect(() => handleRedirects('/selfie', search)).toThrow(
+			expect.objectContaining({ status: 301 })
+		)
 	})
 
 	it('leaves other paths alone, including ones that only start the same way', () => {

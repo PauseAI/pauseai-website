@@ -53,13 +53,17 @@ const SECTION_REDIRECTS: Record<string, string> = {
 	'/tools/collateral': '/tools/materials'
 }
 
-export function handleRedirects(path: string, search = '') {
+/**
+ * `search` is read only when a section redirect matches: prerendered pages may not read the query string, and those
+ * old paths are never prerendered.
+ */
+export function handleRedirects(path: string, search: () => string = () => '') {
 	const permanent = REDIRECTS[path]
 	if (permanent) throw redirectAsError(301, permanent)
 
 	for (const [from, to] of Object.entries(SECTION_REDIRECTS)) {
 		if (path === from || path.startsWith(`${from}/`))
-			throw redirectAsError(301, `${to}${path.slice(from.length)}${search}`)
+			throw redirectAsError(301, `${to}${path.slice(from.length)}${search()}`)
 	}
 
 	const temporary = TEMPORARY_REDIRECTS[path]

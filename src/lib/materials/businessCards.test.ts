@@ -16,8 +16,8 @@ import {
 	type CardItem,
 	type CardMeasure
 } from './businessCards'
-import { CARD_FONT_FACES } from './cardFonts'
-import { CANVAS_FONTS } from './canvasFonts'
+import { CARD_FONT_FACES, cardFontCss } from './cardFonts'
+import { BODY_FAMILY, CANVAS_FONTS, HEADLINE_FAMILY } from './canvasFonts'
 import { getChapter, GLOBAL_CHAPTER, printableLink } from './chapters'
 import { CARD_FORMATS, getCardFormat, renderSize } from './formats'
 import type { Values } from './templates'
@@ -278,6 +278,42 @@ describe.each(CARD_FORMATS.map((f) => f.id))('cards on %s', (formatId) => {
 		}
 	})
 
+	it('keeps a slogan of many lines inside the card, leaving out what does not fit and saying so', () => {
+		const slogan = Array.from({ length: 40 }, (_, i) => `Line ${i}`).join('\n')
+		const { items, issues } = layoutCardFace('logo', box, { ...FILLED, slogan }, measure)
+		for (const item of items) {
+			const e = extent(item)
+			if (e) expect(e.y1, item.kind).toBeLessThanOrEqual(safe.bottom + 0.5)
+			if (item.kind === 'text') expect(item.size).toBeGreaterThanOrEqual(minFont - 0.01)
+		}
+		expect(issues.map((i) => i.id)).toContain('card-long-slogan')
+	})
+
+	it('prints a line for a blank email or name on an otherwise filled Personal card', () => {
+		const noEmail = layoutCardFace('personal', box, { ...FILLED, email: '' }, measure).items
+		expect(noEmail.filter((i) => i.kind === 'rule')).toHaveLength(1)
+		expect(noEmail).toContainEqual(expect.objectContaining({ text: 'Joep' }))
+		const noName = layoutCardFace(
+			'personal',
+			box,
+			{ ...FILLED, firstName: '', lastName: '' },
+			measure
+		).items
+		expect(noName.filter((i) => i.kind === 'rule')).toHaveLength(1)
+		expect(noName).toContainEqual(expect.objectContaining({ text: 'joep@pauseai.info' }))
+		// A blank title is just left out.
+		const noTitle = layoutCardFace('personal', box, { ...FILLED, title: '' }, measure).items
+		expect(noTitle.some((i) => i.kind === 'rule')).toBe(false)
+	})
+
+	it('warns about a QR link that is not a web address, or too long to scan', () => {
+		const ids = (qr: string) =>
+			layoutCardFace('connect', box, { ...FILLED, qr }, measure).issues.map((i) => i.id)
+		expect(ids('pauseai info')).toContain('card-qr-link')
+		expect(ids(`pauseai.info/${'ж'.repeat(120)}`)).toContain('card-qr-long')
+		expect(ids('pauseai.uk/join')).toEqual([])
+	})
+
 	it('prints the slogan in capitals, a line each', () => {
 		const { items } = layoutCardFace('logo', box, FILLED, measure)
 		const texts = items.flatMap((i) => (i.kind === 'text' ? [i.text] : []))
@@ -301,6 +337,17 @@ describe.each(CARD_FORMATS.map((f) => f.id))('cards on %s', (formatId) => {
 })
 
 describe('card fonts', () => {
+	// Canvas text in a face that isn't loaded yet is drawn in a system font, or not at all.
+	it.each(['display', 'displayLight', 'bodyLight'] as const)(
+		'loads every brand face %s text can be drawn in, including the fallback for Cyrillic and Greek',
+		(font) => {
+			const css = cardFontCss(font, 10)
+			const weight = css.split(' ')[0]
+			for (const family of [HEADLINE_FAMILY, BODY_FAMILY].filter((f) => css.includes(`"${f}"`)))
+				expect(CARD_FONT_FACES).toContainEqual({ family, weight })
+		}
+	)
+
 	it.each(CARD_FONT_FACES)('$family $weight is a canvas font', ({ family, weight }) => {
 		expect(CANVAS_FONTS).toContainEqual(
 			expect.objectContaining({ family, weight, subset: 'latin' })

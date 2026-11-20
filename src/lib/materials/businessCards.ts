@@ -13,7 +13,7 @@
 import { getChapter, printableLink, type Chapter } from './chapters'
 import { CARD_FORMATS, DEFAULT_CARD_FORMAT_ID, type PrintFormat, type RenderSize } from './formats'
 import type { LintIssue } from './lint'
-import { normaliseUrl } from './qr'
+import { isQrLink, normaliseUrl, qrTarget, qrTooLong } from './qr'
 import type { FieldDef, Values } from './templates'
 import { BRAND_ORANGE, INK, LOGO_ASPECT } from './themes'
 
@@ -408,6 +408,19 @@ function layoutConnect(f: Frame, values: Values): CardItem[] {
 
 	const qr = values.qr?.trim() ?? ''
 	if (qr && normaliseUrl(qr)) {
+		if (!isQrLink(qr)) {
+			f.issues.push({
+				id: 'card-qr-link',
+				level: 'warn',
+				message: `"${qr}" doesn't look like a web address, so the QR code may go nowhere.`
+			})
+		} else if (qrTooLong(qrTarget(qr, false))) {
+			f.issues.push({
+				id: 'card-qr-long',
+				level: 'warn',
+				message: 'The QR code link is too long to scan reliably. Use a shorter link.'
+			})
+		}
 		const areaLeft = panelX + 10 * s
 		const areaTop = headerBottom + 10 * s
 		const size = Math.min(safe.right - areaLeft, safe.bottom - areaTop)
@@ -511,15 +524,24 @@ function layoutLogo(f: Frame, values: Values): CardItem[] {
 	const logoH = logoW / LOGO_ASPECT
 
 	const slogan = (values.slogan ?? '').trim().toUpperCase()
-	const sloganLines = slogan
+	const LINE = 1.15
+	const gap = 21 * s
+	// Under the logo, the slogan has the rest of the safe area's height. Lines beyond what fits at the smallest size
+	// are left out.
+	const sloganRoom = safe.bottom - safe.top - logoH - gap
+	const allLines = slogan
 		.split('\n')
 		.map((l) => l.trim())
 		.filter(Boolean)
 		.map((l): Segment[] => [{ text: l, font: 'display', fill: INK }])
-	const size = fitLines(f, sloganLines, maxWidth, 20 * s)
-	if (sloganLines.some((l) => overflows(f, l, size, maxWidth))) tooLong(f, 'slogan')
-	const LINE = 1.15
-	const gap = 21 * s
+	const sloganLines = allLines.slice(0, Math.max(0, Math.floor(sloganRoom / (f.minFont * LINE))))
+	const byHeight = sloganLines.length ? sloganRoom / (sloganLines.length * LINE) : Infinity
+	const size = Math.max(f.minFont, Math.min(fitLines(f, sloganLines, maxWidth, 20 * s), byHeight))
+	if (
+		sloganLines.length < allLines.length ||
+		sloganLines.some((l) => overflows(f, l, size, maxWidth))
+	)
+		tooLong(f, 'slogan')
 	const sloganH = sloganLines.length ? gap + sloganLines.length * size * LINE : 0
 	const groupH = logoH + sloganH
 	// Figma puts the logo 88.7 px down; a slogan of more lines pushes the group up, never past the safe area.
@@ -587,8 +609,12 @@ function layoutPersonal(f: Frame, values: Values): CardItem[] {
 	const { local, domain } = emailParts(email)
 	const info: Segment[][] = []
 	if (title) info.push([{ text: title, font: 'bodyLight', fill: WHITE }])
-	if (email)
-		info.push([{ text: local ? `${local}${domain}` : email, font: 'bodyLight', fill: WHITE }])
+	// A blank email (or name, below) prints a line to write it on, as the form promises. A blank title is left out.
+	info.push(
+		email
+			? [{ text: local ? `${local}${domain}` : email, font: 'bodyLight', fill: WHITE }]
+			: [{ blank: 9, fill: WHITE }]
+	)
 	let infoSize = fitLines(f, info, maxWidth, infoMax)
 	// A long title wraps onto a second line before it shrinks a long way.
 	if (title && infoSize < infoMax * 0.8) {
@@ -613,13 +639,15 @@ function layoutPersonal(f: Frame, values: Values): CardItem[] {
 	info.forEach((line, i) => emitLine(f, items, line, x, infoTop + i * infoLh, infoSize, maxWidth))
 
 	// The name: first name bold, last name light, on one line, or two when that would shrink it a long way.
-	if (first || last) {
+	{
 		const firstSeg: Segment = { text: first, font: 'display', fill: WHITE }
 		const lastSeg: Segment = { text: last, font: 'displayLight', fill: WHITE }
 		const oneLine: Segment[][] = [
 			first && last
 				? [firstSeg, { text: ' ', font: 'displayLight', fill: WHITE }, lastSeg]
-				: [first ? firstSeg : lastSeg]
+				: first || last
+					? [first ? firstSeg : lastSeg]
+					: [{ blank: 5, fill: WHITE }]
 		]
 		const twoLines: Segment[][] = [[firstSeg], [lastSeg]]
 		const nameBottom = info.length
