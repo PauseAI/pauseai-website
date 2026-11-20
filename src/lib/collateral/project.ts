@@ -112,10 +112,10 @@ export function parseProject(text: string): ParseResult {
 	try {
 		raw = JSON.parse(text)
 	} catch {
-		return { ok: false, error: 'That file is not a saved collateral project.' }
+		return { ok: false, error: 'That file is not a saved materials project.' }
 	}
 	if (!isRecord(raw) || raw.app !== PROJECT_APP) {
-		return { ok: false, error: 'That file is not a saved collateral project.' }
+		return { ok: false, error: 'That file is not a saved materials project.' }
 	}
 	if (typeof raw.version !== 'number' || raw.version > PROJECT_VERSION) {
 		return { ok: false, error: 'This project was saved by a newer version of the tool.' }

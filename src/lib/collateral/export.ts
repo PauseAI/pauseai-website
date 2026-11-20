@@ -65,7 +65,7 @@ export async function pdfBytesForPrint(
 		page.setTrimBox(bleed, bleed, trimW, trimH)
 		page.setBleedBox(0, 0, pageW, pageH)
 	}
-	pdf.setTitle('PauseAI collateral')
+	pdf.setTitle('PauseAI materials')
 	return pdf.save()
 }
 
@@ -94,7 +94,7 @@ export async function pdfBytesDigital(
 		const image = await pdf.embedPng(await png.arrayBuffer())
 		page.drawImage(image, { x: 0, y: 0, width, height })
 	}
-	pdf.setTitle('PauseAI collateral')
+	pdf.setTitle('PauseAI materials')
 	return pdf.save()
 }
 

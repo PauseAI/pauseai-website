@@ -5,7 +5,7 @@
 </script>
 
 <ToolPage
-	title="Collateral maker"
+	title="Materials maker"
 	description="Make on-brand PauseAI flyers, posters, business cards, event covers and social posts."
 >
 	{#snippet lede()}
