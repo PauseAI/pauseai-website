@@ -10,7 +10,7 @@ export interface LumaEvent {
 	location_type?: string
 }
 
-/** An upcoming event from a chapter's (or PauseAI's) Luma calendar, trimmed to what the collateral tools need. Plain data for the client. */
+/** An upcoming event from a chapter's (or PauseAI's) Luma calendar, trimmed to what the materials tools need. Plain data for the client. */
 export interface CalendarEvent {
 	/** Luma's short id, used as the React key and in the link. */
 	id: string

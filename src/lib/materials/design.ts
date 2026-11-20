@@ -1,6 +1,6 @@
 /**
  * How strongly the style's colour covers a photo, lightest first. Designs pick the lightest step their text reads
- * on (see renderCollateral), so nobody has to choose. There is deliberately no untinted step: text straight on a
+ * on (see renderDesign), so nobody has to choose. There is deliberately no untinted step: text straight on a
  * photo needed an outline to read, which did not look good.
  */
 export type PhotoTint = 'medium' | 'strong'

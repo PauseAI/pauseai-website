@@ -1,8 +1,8 @@
 <script lang="ts">
 	import { untrack } from 'svelte'
-	import type { Format } from '$lib/collateral/formats'
-	import type { LintIssue } from '$lib/collateral/lint'
-	import { renderCollateral, type RenderOptions } from '$lib/collateral/render'
+	import type { Format } from '$lib/materials/formats'
+	import type { LintIssue } from '$lib/materials/lint'
+	import { renderDesign, type RenderOptions } from '$lib/materials/render'
 
 	interface Props {
 		/** The font subsets loaded so far: drawn again when more load. */
@@ -42,7 +42,7 @@
 		if (last && last.format === format && last.fonts === fonts && same(last.options, options))
 			return
 		last = { options, format, fonts }
-		const { issues } = renderCollateral(canvas, {
+		const { issues } = renderDesign(canvas, {
 			...options,
 			format,
 			maxSide: THUMB_MAX_SIDE,

@@ -1,13 +1,13 @@
 /**
- * What every collateral studio needs: the logos and canvas fonts loaded before drawing, and dragging, pinching and
+ * What every materials studio needs: the logos and canvas fonts loaded before drawing, and dragging, pinching and
  * scrolling a photo on the preview canvas. Create these while a component is being set up, as they register effects.
  */
 import { onMount } from 'svelte'
-import { subsetsFor } from '$lib/collateral/canvasFonts'
-import { panPhoto, zoomPhoto, type PhotoView } from '$lib/collateral/photoTransform'
-import { loadFonts, loadImage } from '$lib/collateral/render'
-import type { Drawable } from '$lib/collateral/templates'
-import { THEMES } from '$lib/collateral/themes'
+import { subsetsFor } from '$lib/materials/canvasFonts'
+import { panPhoto, zoomPhoto, type PhotoView } from '$lib/materials/photoTransform'
+import { loadFonts, loadImage } from '$lib/materials/render'
+import type { Drawable } from '$lib/materials/templates'
+import { THEMES } from '$lib/materials/themes'
 
 /**
  * Every style's logo variant, loaded once so switching styles is instant, and the canvas fonts for the design's

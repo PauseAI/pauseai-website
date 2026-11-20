@@ -4,7 +4,7 @@
 		HEADLINE_SCALE_MAX,
 		HEADLINE_SCALE_MIN,
 		HEADLINE_SCALE_STEP
-	} from '$lib/collateral/design'
+	} from '$lib/materials/design'
 
 	interface Props {
 		value: number

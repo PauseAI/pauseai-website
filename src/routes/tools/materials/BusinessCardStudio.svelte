@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { onMount, untrack } from 'svelte'
 	import { StudioAssets } from './studio.svelte'
-	import { subsetsFor } from '$lib/collateral/canvasFonts'
+	import { subsetsFor } from '$lib/materials/canvasFonts'
 	import ControlsSection from '$lib/components/tools/ControlsSection.svelte'
 	import Studio from '$lib/components/tools/Studio.svelte'
 	import ToolButton from '$lib/components/tools/ToolButton.svelte'
@@ -14,21 +14,21 @@
 		parseCardSave,
 		SAFE_MM,
 		type CardFace
-	} from '$lib/collateral/businessCards'
-	import { CARD_FONT_FACES } from '$lib/collateral/cardFonts'
-	import { cardPreviewCanvas, renderCardFace } from '$lib/collateral/cardRender'
-	import { CHAPTER_CHOICES, chapterName, getChapter } from '$lib/collateral/chapters'
-	import { downloadCanvasPdf, downloadCanvasPng, exportFilename } from '$lib/collateral/export'
+	} from '$lib/materials/businessCards'
+	import { CARD_FONT_FACES } from '$lib/materials/cardFonts'
+	import { cardPreviewCanvas, renderCardFace } from '$lib/materials/cardRender'
+	import { CHAPTER_CHOICES, chapterName, getChapter } from '$lib/materials/chapters'
+	import { downloadCanvasPdf, downloadCanvasPng, exportFilename } from '$lib/materials/export'
 	import {
 		BLEED_MM,
 		CARD_FORMATS,
 		DEFAULT_CARD_FORMAT_ID,
 		formatDimensionLabel,
 		getCardFormat
-	} from '$lib/collateral/formats'
-	import { sameIssues, type LintIssue } from '$lib/collateral/lint'
-	import type { Values } from '$lib/collateral/templates'
-	import { getTheme } from '$lib/collateral/themes'
+	} from '$lib/materials/formats'
+	import { sameIssues, type LintIssue } from '$lib/materials/lint'
+	import type { Values } from '$lib/materials/templates'
+	import { getTheme } from '$lib/materials/themes'
 	import Checks from './Checks.svelte'
 	import CharCount from './CharCount.svelte'
 

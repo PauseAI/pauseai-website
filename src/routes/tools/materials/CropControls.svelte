@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { MAX_ZOOM, type PhotoView } from '$lib/collateral/photoTransform'
+	import { MAX_ZOOM, type PhotoView } from '$lib/materials/photoTransform'
 
 	interface Props {
 		view: PhotoView

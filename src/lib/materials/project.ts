@@ -8,6 +8,7 @@ import { TEMPLATES, getTemplate, type FieldDef, type Values } from './templates'
 import { getChapter } from './chapters'
 import { getTheme } from './themes'
 
+// Keeps the tool's old name (and so do the pack, gallery and browser storage keys), so earlier saves still open.
 const PROJECT_APP = 'pauseai-collateral'
 const PROJECT_VERSION = 1
 export const QR_LABEL_MAX = 32

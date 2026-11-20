@@ -1,7 +1,7 @@
 <script lang="ts">
 	import Link from '$lib/components/Link.svelte'
 	import ToolPage from '$lib/components/tools/ToolPage.svelte'
-	import CollateralApp from './CollateralApp.svelte'
+	import MaterialsApp from './MaterialsApp.svelte'
 </script>
 
 <ToolPage
@@ -14,5 +14,5 @@
 			>QR code generator</Link
 		>.
 	{/snippet}
-	<CollateralApp />
+	<MaterialsApp />
 </ToolPage>

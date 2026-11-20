@@ -24,7 +24,7 @@ export interface Theme {
 	onPhoto?: { muted?: string; accentText?: string }
 }
 
-// The orange in the logo ($lib/components/logo.svelte, via HERO_ORANGE in $lib/colors). Every orange in the collateral tools comes from here,
+// The orange in the logo ($lib/components/logo.svelte, via HERO_ORANGE in $lib/colors). Every orange in the materials tools comes from here,
 // except the darker shade below that is used for small text.
 export const BRAND_ORANGE = '#FF9416'
 /** The same hue as the logo orange, darkened until it reads as text on cream (WCAG AA). */

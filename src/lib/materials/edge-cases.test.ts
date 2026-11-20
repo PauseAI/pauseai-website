@@ -1,4 +1,4 @@
-// Edge cases of the collateral tool's smaller modules: unusual input,
+// Edge cases of the materials tool's smaller modules: unusual input,
 // fallbacks and the less common branches their own test files don't reach.
 import { describe, expect, it } from 'vitest'
 import { tintVisible } from './design'

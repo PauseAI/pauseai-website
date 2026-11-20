@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { onMount, untrack } from 'svelte'
 	import { photoGestures, StudioAssets } from './studio.svelte'
-	import { subsetsFor } from '$lib/collateral/canvasFonts'
+	import { subsetsFor } from '$lib/materials/canvasFonts'
 	import ControlsSection from '$lib/components/tools/ControlsSection.svelte'
 	import Studio from '$lib/components/tools/Studio.svelte'
 	import ToolButton from '$lib/components/tools/ToolButton.svelte'
@@ -10,7 +10,7 @@
 		downloadCanvasPng,
 		downloadText,
 		exportFilename
-	} from '$lib/collateral/export'
+	} from '$lib/materials/export'
 	import {
 		BLEED_MM,
 		DEFAULT_FORMAT_ID,
@@ -21,14 +21,14 @@
 		previewStyle,
 		renderSize,
 		type PrintFormat
-	} from '$lib/collateral/formats'
-	import { sameIssues, type LintIssue } from '$lib/collateral/lint'
-	import { DEFAULT_PHOTO_VIEW, type PhotoView } from '$lib/collateral/photoTransform'
-	import { parseProject, serializeProject, type Project } from '$lib/collateral/project'
-	import { qrPlan, usableQrCodes } from '$lib/collateral/qr'
-	import { renderCollateral, type RenderOptions } from '$lib/collateral/render'
-	import { LOGO_COVER_TITLE_CHARS, type Drawable } from '$lib/collateral/templates'
-	import { CLEAR_PHOTO_LOGO_SRC, getTheme } from '$lib/collateral/themes'
+	} from '$lib/materials/formats'
+	import { sameIssues, type LintIssue } from '$lib/materials/lint'
+	import { DEFAULT_PHOTO_VIEW, type PhotoView } from '$lib/materials/photoTransform'
+	import { parseProject, serializeProject, type Project } from '$lib/materials/project'
+	import { qrPlan, usableQrCodes } from '$lib/materials/qr'
+	import { renderDesign, type RenderOptions } from '$lib/materials/render'
+	import { LOGO_COVER_TITLE_CHARS, type Drawable } from '$lib/materials/templates'
+	import { CLEAR_PHOTO_LOGO_SRC, getTheme } from '$lib/materials/themes'
 	import Checks from './Checks.svelte'
 	import CropControls from './CropControls.svelte'
 	import DesignControls from './DesignControls.svelte'
@@ -222,7 +222,7 @@
 	// Live preview and its checks, redrawn whenever anything it draws changes, and again once more fonts load.
 	$effect(() => {
 		if (!logo || !assets.fontsLoaded || !canvas) return
-		const { issues: found } = renderCollateral(canvas, {
+		const { issues: found } = renderDesign(canvas, {
 			...renderOptions(false),
 			maxSide: PREVIEW_MAX_SIDE,
 			lint: true
@@ -251,7 +251,7 @@
 		message = null
 		try {
 			const c = document.createElement('canvas')
-			renderCollateral(c, renderOptions(false))
+			renderDesign(c, renderOptions(false))
 			await downloadCanvasPng(c, exportFilename([template.id, format.id, theme.id], 'png'))
 		} catch {
 			message = 'Could not create the image. Try a smaller format.'
@@ -265,7 +265,7 @@
 		message = null
 		try {
 			const c = document.createElement('canvas')
-			renderCollateral(c, renderOptions(true))
+			renderDesign(c, renderOptions(true))
 			await downloadCanvasPdf(
 				c,
 				print,
@@ -412,8 +412,8 @@
 
 	{#snippet controls()}
 		<ControlsSection heading="1. Format">
-			<label class="tool-label" for="collateral-format">Where will it be used?</label>
-			<select id="collateral-format" class="tool-select" bind:value={formatId}>
+			<label class="tool-label" for="materials-format">Where will it be used?</label>
+			<select id="materials-format" class="tool-select" bind:value={formatId}>
 				{#each FORMAT_GROUPS as group (group)}
 					<optgroup label={group}>
 						{#each FORMATS.filter((f) => f.group === group) as f (f.id)}
@@ -461,7 +461,7 @@
 		</ControlsSection>
 
 		<DesignControls
-			idPrefix="collateral"
+			idPrefix="materials"
 			{design}
 			{update}
 			firstSection={2}

@@ -1,8 +1,8 @@
-import type { QrSize } from '$lib/collateral/design'
-import { LIBRARY_PHOTOS } from '$lib/collateral/photos'
-import type { DesignData, PartnerLogoData, ProjectPhoto } from '$lib/collateral/project'
-import type { QrCode } from '$lib/collateral/qr'
-import { drawableToJpegDataUrl, loadDataUrl, loadImage } from '$lib/collateral/render'
+import type { QrSize } from '$lib/materials/design'
+import { LIBRARY_PHOTOS } from '$lib/materials/photos'
+import type { DesignData, PartnerLogoData, ProjectPhoto } from '$lib/materials/project'
+import type { QrCode } from '$lib/materials/qr'
+import { drawableToJpegDataUrl, loadDataUrl, loadImage } from '$lib/materials/render'
 import {
 	DEFAULT_TEMPLATE_ID,
 	defaultValues,
@@ -11,9 +11,9 @@ import {
 	type Drawable,
 	type Template,
 	type Values
-} from '$lib/collateral/templates'
-import { DEFAULT_THEME_ID } from '$lib/collateral/themes'
-import { chapterFieldDefaults, getChapter } from '$lib/collateral/chapters'
+} from '$lib/materials/templates'
+import { DEFAULT_THEME_ID } from '$lib/materials/themes'
+import { chapterFieldDefaults, getChapter } from '$lib/materials/chapters'
 
 // Caption is a gallery slide (photo-forward, no logo), so single designs offer the other layouts.
 const HIDDEN_TEMPLATE_IDS = ['caption']

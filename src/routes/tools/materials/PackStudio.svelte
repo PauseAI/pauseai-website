@@ -9,25 +9,25 @@
 		downloadText,
 		exportFilename,
 		pdfBytesForPrint
-	} from '$lib/collateral/export'
+	} from '$lib/materials/export'
 	import {
 		BLEED_MM,
 		FORMAT_GROUPS,
 		FORMATS,
 		formatDimensionLabel,
 		previewStyle
-	} from '$lib/collateral/formats'
-	import { sameIssues, splitByScope, type LintIssue } from '$lib/collateral/lint'
+	} from '$lib/materials/formats'
+	import { sameIssues, splitByScope, type LintIssue } from '$lib/materials/lint'
 	import {
 		DEFAULT_PACK_FORMAT_IDS,
 		parsePackProject,
 		serializePackProject,
 		type PackProject
-	} from '$lib/collateral/packProject'
-	import { DEFAULT_PHOTO_VIEW, type PhotoView } from '$lib/collateral/photoTransform'
-	import { renderCollateral, type RenderOptions } from '$lib/collateral/render'
-	import { LOGO_COVER_TITLE_CHARS, type Drawable } from '$lib/collateral/templates'
-	import { CLEAR_PHOTO_LOGO_SRC, getTheme } from '$lib/collateral/themes'
+	} from '$lib/materials/packProject'
+	import { DEFAULT_PHOTO_VIEW, type PhotoView } from '$lib/materials/photoTransform'
+	import { renderDesign, type RenderOptions } from '$lib/materials/render'
+	import { LOGO_COVER_TITLE_CHARS, type Drawable } from '$lib/materials/templates'
+	import { CLEAR_PHOTO_LOGO_SRC, getTheme } from '$lib/materials/themes'
 	import Checks from './Checks.svelte'
 	import CropControls from './CropControls.svelte'
 	import DesignControls from './DesignControls.svelte'
@@ -217,7 +217,7 @@
 	// The large preview of the format being adjusted. Its checks come from the thumbnails.
 	$effect(() => {
 		if (!canvas || !logo || !assets.fontsLoaded || !active) return
-		renderCollateral(canvas, {
+		renderDesign(canvas, {
 			...optionsFor(active.id),
 			format: active,
 			maxSide: PREVIEW_MAX_SIDE
@@ -244,10 +244,10 @@
 			// One format at a time, so only one big canvas is in memory.
 			for (const f of formats) {
 				const c = document.createElement('canvas')
-				renderCollateral(c, { ...optionsFor(f.id), format: f })
+				renderDesign(c, { ...optionsFor(f.id), format: f })
 				files.push({ name: `${f.id}.png`, data: await canvasToPngBlob(c) })
 				if (f.kind === 'print') {
-					renderCollateral(c, { ...optionsFor(f.id), format: f, bleed: true })
+					renderDesign(c, { ...optionsFor(f.id), format: f, bleed: true })
 					files.push({ name: `${f.id}-print.pdf`, data: await pdfBytesForPrint([c], f, BLEED_MM) })
 				}
 			}

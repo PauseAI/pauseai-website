@@ -128,7 +128,7 @@ export class LintCollector {
 			this.add({
 				id: 'contrast',
 				level: 'warn',
-				// The colour over the photo is already the strongest that helps (see renderCollateral), so the fix is the photo or style.
+				// The colour over the photo is already the strongest that helps (see renderDesign), so the fix is the photo or style.
 				message: `“${snippet(failure.sample.text)}” may be hard to read. Try adjusting the image so the text sits on a plainer part, or try a different image or style.`
 			})
 			return

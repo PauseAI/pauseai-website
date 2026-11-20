@@ -1,8 +1,8 @@
 <script lang="ts">
-	import type { Format } from '$lib/collateral/formats'
-	import { slideRenderOptions, type Slide } from '$lib/collateral/gallery'
-	import { renderCollateral } from '$lib/collateral/render'
-	import type { Drawable } from '$lib/collateral/templates'
+	import type { Format } from '$lib/materials/formats'
+	import { slideRenderOptions, type Slide } from '$lib/materials/gallery'
+	import { renderDesign } from '$lib/materials/render'
+	import type { Drawable } from '$lib/materials/templates'
 
 	interface Props {
 		/** The font subsets loaded so far: drawn again when more load. */
@@ -22,7 +22,7 @@
 
 	$effect(() => {
 		void fontsLoaded
-		renderCollateral(canvas, {
+		renderDesign(canvas, {
 			...slideRenderOptions(slide, format, logo),
 			maxSide: THUMB_MAX_SIDE
 		})

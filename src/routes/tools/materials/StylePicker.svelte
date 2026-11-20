@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { THEMES } from '$lib/collateral/themes'
+	import { THEMES } from '$lib/materials/themes'
 
 	let { themeId, onTheme }: { themeId: string; onTheme: (id: string) => void } = $props()
 </script>

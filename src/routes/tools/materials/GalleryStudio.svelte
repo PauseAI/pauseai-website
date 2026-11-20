@@ -9,8 +9,8 @@
 		downloadText,
 		exportFilename,
 		pdfBytesDigital
-	} from '$lib/collateral/export'
-	import { DEFAULT_FORMAT_ID, formatDimensionLabel, getFormat } from '$lib/collateral/formats'
+	} from '$lib/materials/export'
+	import { DEFAULT_FORMAT_ID, formatDimensionLabel, getFormat } from '$lib/materials/formats'
 	import {
 		CAPTION_MAX,
 		DEFAULT_SLIDE_PHOTO_SETTINGS,
@@ -22,25 +22,25 @@
 		slideRenderOptions,
 		type Slide,
 		type SlidePhoto
-	} from '$lib/collateral/gallery'
+	} from '$lib/materials/gallery'
 	import {
 		parseGalleryProject,
 		serializeGalleryProject,
 		type GalleryProject,
 		type GallerySlideData
-	} from '$lib/collateral/galleryProject'
-	import { LIBRARY_PHOTOS, type LibraryPhoto } from '$lib/collateral/photos'
-	import type { PhotoView } from '$lib/collateral/photoTransform'
-	import { ALL_PLATFORM_IDS, CAROUSEL_PLATFORMS, type PlatformId } from '$lib/collateral/platforms'
-	import type { ProjectPhoto } from '$lib/collateral/project'
+	} from '$lib/materials/galleryProject'
+	import { LIBRARY_PHOTOS, type LibraryPhoto } from '$lib/materials/photos'
+	import type { PhotoView } from '$lib/materials/photoTransform'
+	import { ALL_PLATFORM_IDS, CAROUSEL_PLATFORMS, type PlatformId } from '$lib/materials/platforms'
+	import type { ProjectPhoto } from '$lib/materials/project'
 	import {
 		drawableToJpegDataUrl,
 		fileToDrawable,
 		loadDataUrl,
 		loadImage,
-		renderCollateral
-	} from '$lib/collateral/render'
-	import { DEFAULT_THEME_ID, getTheme } from '$lib/collateral/themes'
+		renderDesign
+	} from '$lib/materials/render'
+	import { DEFAULT_THEME_ID, getTheme } from '$lib/materials/themes'
 	import CharCount from './CharCount.svelte'
 	import CropControls from './CropControls.svelte'
 	import PhotoLibrary from './PhotoLibrary.svelte'
@@ -230,7 +230,7 @@
 	// Live preview of the active slide, redrawn on every change.
 	$effect(() => {
 		if (!canvas || !logo || !assets.fontsLoaded) return
-		renderCollateral(canvas, {
+		renderDesign(canvas, {
 			...slideRenderOptions(activeSlide, effectiveFormat, logo),
 			maxSide: PREVIEW_MAX_SIDE
 		})
@@ -349,7 +349,7 @@
 					all = []
 					for (const slide of slides) {
 						const c = document.createElement('canvas')
-						renderCollateral(c, slideRenderOptions(slide, fmt, logo))
+						renderDesign(c, slideRenderOptions(slide, fmt, logo))
 						all.push({ png: await canvasToPngBlob(c), width: c.width, height: c.height })
 					}
 					pngs[variant.formatId] = all

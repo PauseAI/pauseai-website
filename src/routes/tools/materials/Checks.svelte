@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { LintIssue } from '$lib/collateral/lint'
+	import type { LintIssue } from '$lib/materials/lint'
 
 	let { issues, title = 'Checks' }: { issues: LintIssue[]; title?: string } = $props()
 </script>

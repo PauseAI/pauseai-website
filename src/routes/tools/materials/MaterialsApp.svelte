@@ -1,5 +1,5 @@
 <script lang="ts">
-	import CollateralStudio from './CollateralStudio.svelte'
+	import MaterialsStudio from './MaterialsStudio.svelte'
 	import GalleryStudio from './GalleryStudio.svelte'
 	import BusinessCardStudio from './BusinessCardStudio.svelte'
 	import PackStudio from './PackStudio.svelte'
@@ -55,7 +55,7 @@
 	{/each}
 </div>
 <p class="hint">{MODES.find((m) => m.id === mode)?.hint}</p>
-<div hidden={mode !== 'single'}><CollateralStudio /></div>
+<div hidden={mode !== 'single'}><MaterialsStudio /></div>
 {#if opened.includes('pack')}
 	<div hidden={mode !== 'pack'}><PackStudio /></div>
 {/if}

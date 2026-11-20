@@ -1,4 +1,4 @@
-/** Browser only: draws the collateral into canvases. */
+/** Browser only: draws the designs into canvases. */
 import { declareCanvasFonts, facesFor } from './canvasFonts'
 import { PHOTO_TINTS, type QrSize } from './design'
 import { renderSize, showsQrCodes, type Format } from './formats'
@@ -151,8 +151,8 @@ function isLogoCover(format: Format): boolean {
 	return format.kind === 'digital' && !!format.logoCover
 }
 
-/** Draws the collateral into `canvas`, sizing the canvas to match. Returns the final pixel size, and any problems when asked. */
-export function renderCollateral(
+/** Draws the design into `canvas`, sizing the canvas to match. Returns the final pixel size, and any problems when asked. */
+export function renderDesign(
 	canvas: HTMLCanvasElement,
 	requested: RenderOptions
 ): { width: number; height: number; issues: LintIssue[] } {

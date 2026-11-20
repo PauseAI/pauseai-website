@@ -9,25 +9,25 @@
 		eventsLink,
 		getChapter,
 		printableLink
-	} from '$lib/collateral/chapters'
-	import { MAX_PARTNER_LOGOS, QR_SIZES } from '$lib/collateral/design'
+	} from '$lib/materials/chapters'
+	import { MAX_PARTNER_LOGOS, QR_SIZES } from '$lib/materials/design'
 	import {
 		eventDayLabel,
 		eventFieldValues,
 		eventLink,
 		type CalendarEvent
-	} from '$lib/collateral/eventText'
-	import { isLumaEventLink } from '$lib/collateral/lint'
-	import type { LibraryPhoto } from '$lib/collateral/photos'
-	import { QR_LABEL_MAX, QR_URL_MAX } from '$lib/collateral/project'
-	import { MAX_QR_CODES, normaliseUrl, type QrCode } from '$lib/collateral/qr'
+	} from '$lib/materials/eventText'
+	import { isLumaEventLink } from '$lib/materials/lint'
+	import type { LibraryPhoto } from '$lib/materials/photos'
+	import { QR_LABEL_MAX, QR_URL_MAX } from '$lib/materials/project'
+	import { MAX_QR_CODES, normaliseUrl, type QrCode } from '$lib/materials/qr'
 	import {
 		drawableToPngDataUrl,
 		fileToDrawable,
 		loadDataUrl,
 		loadImage
-	} from '$lib/collateral/render'
-	import { getTemplate } from '$lib/collateral/templates'
+	} from '$lib/materials/render'
+	import { getTemplate } from '$lib/materials/templates'
 	import CharCount from './CharCount.svelte'
 	import PhotoLibrary from './PhotoLibrary.svelte'
 	import StylePicker from './StylePicker.svelte'
@@ -390,7 +390,7 @@
 				</label>
 			{/each}
 		</div>
-		<!-- UTM tagging is switched off until we have a way to read the results. See qrTarget in $lib/collateral/qr.ts. -->
+		<!-- UTM tagging is switched off until we have a way to read the results. See qrTarget in $lib/materials/qr.ts. -->
 		{@render qrNote?.()}
 	{/if}
 </ControlsSection>

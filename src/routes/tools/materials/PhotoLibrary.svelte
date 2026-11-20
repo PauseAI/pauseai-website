@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { LIBRARY_PHOTOS, type LibraryPhoto } from '$lib/collateral/photos'
+	import { LIBRARY_PHOTOS, type LibraryPhoto } from '$lib/materials/photos'
 
 	interface Props {
 		/** The library photo in use, if one is. */

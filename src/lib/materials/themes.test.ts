@@ -41,7 +41,7 @@ describe('theme logos', () => {
 describe('brand orange', () => {
 	const read = (file: string) => readFileSync(join(process.cwd(), file), 'utf8').toUpperCase()
 
-	// The collateral tools take their orange from the logo, so they must not drift apart.
+	// The materials tools take their orange from the logo, so they must not drift apart.
 	it('is the orange used in the site logo', () => {
 		expect(HERO_ORANGE.toUpperCase()).toBe(BRAND_ORANGE.toUpperCase())
 		expect(read('static/images/logos/collateral/logo-color-on-light.svg')).toContain(
