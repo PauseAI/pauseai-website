@@ -48,7 +48,6 @@ export function renderCardFace(
 function paint(ctx: CanvasRenderingContext2D, item: CardItem, logo: Drawable) {
 	switch (item.kind) {
 		case 'rect':
-		case 'rule':
 			ctx.fillStyle = item.fill
 			ctx.fillRect(item.x, item.y, item.w, item.h)
 			return

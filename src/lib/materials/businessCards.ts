@@ -2,11 +2,11 @@
  * The PauseAI business card, after the PauseAI design Figma. Both sides are orange:
  *
  * - Side 1: the volunteer's name (first name bold) and title over a large faded pause mark, with the small logo.
- * - Side 2: the logo and "Email me at ___@pauseai.info to connect in the ___ area", beside a black "Join our global
- *   community" heading over a QR code to join.
+ * - Side 2: the logo and "Email me at <address> to connect in the <area> area" (or just "to connect"), beside a
+ *   black "Join our global community" heading over a QR code to join.
  *
- * The email prints on side 2 only, in its sentence, so it never appears twice. Blank details print as lines, so a
- * stack of cards can be filled in by hand.
+ * The email, any address the volunteer types, prints on side 2 only, in its sentence, so it never appears twice. The
+ * first name and email are required before download (cardMissing); the title and area are optional.
  *
  * The layout is worked out here without a canvas (text is measured through an injected function), so tests can check
  * that everything stays inside the crop-safe area whatever is typed. cardRender.ts paints it.
@@ -39,17 +39,13 @@ export const CARD_SIDES: { face: CardFace; label: string }[] = [
 	{ face: 'connect', label: 'Side 2' }
 ]
 
-const PAUSEAI_EMAIL_DOMAIN = '@pauseai.info'
-
-const BLANK_HINT = 'Leave blank to print a line to write on.'
-
 export const CARD_FIELDS: FieldDef[] = [
 	{
 		key: 'firstName',
 		label: 'First name',
 		kind: 'text',
 		maxLength: 30,
-		hint: BLANK_HINT,
+		hint: 'Required',
 		default: ''
 	},
 	{ key: 'lastName', label: 'Last name', kind: 'text', maxLength: 40, default: '' },
@@ -58,15 +54,15 @@ export const CARD_FIELDS: FieldDef[] = [
 		label: 'Title or role',
 		kind: 'text',
 		maxLength: 60,
-		hint: 'Optional, e.g. Volunteer. A card with no name or title prints a line for each.',
+		hint: 'Optional, e.g. Volunteer',
 		default: ''
 	},
 	{
 		key: 'email',
 		label: 'Email',
 		kind: 'text',
-		maxLength: 60,
-		hint: `The part before ${PAUSEAI_EMAIL_DOMAIN} is enough. ${BLANK_HINT}`,
+		maxLength: 80,
+		hint: 'Required. Your full address, e.g. name@pauseai.fr',
 		default: ''
 	},
 	{
@@ -74,7 +70,7 @@ export const CARD_FIELDS: FieldDef[] = [
 		label: 'Area',
 		kind: 'text',
 		maxLength: 40,
-		hint: `As in "to connect in the London area". ${BLANK_HINT}`,
+		hint: 'Optional. "to connect in the London area", or just "to connect" when left blank',
 		default: ''
 	},
 	{
@@ -132,15 +128,28 @@ export function parseCardSave(raw: string | null): CardSave {
 	}
 }
 
-/**
- * An email split for printing: what goes before the @ (empty prints a line to write on) and the rest. Just a name
- * ("joep") is taken to be a PauseAI address.
- */
+/** An email split before the @, where a long address breaks onto a second line. */
 export function emailParts(email: string): { local: string; domain: string } {
 	const trimmed = email.trim()
-	const at = trimmed.indexOf('@')
-	if (at < 0) return { local: trimmed, domain: PAUSEAI_EMAIL_DOMAIN }
+	const at = trimmed.lastIndexOf('@')
+	if (at <= 0) return { local: trimmed, domain: '' }
 	return { local: trimmed.slice(0, at), domain: trimmed.slice(at) }
+}
+
+/** Whether `email` looks like an email address: something, an @, and a domain with a dot. Any domain will do. */
+export function isEmail(email: string): boolean {
+	return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim())
+}
+
+/** What still needs filling in before the card can be downloaded, as a sentence, or null when nothing does. */
+export function cardMissing(values: Values): string | null {
+	const missing: string[] = []
+	if (!values.firstName?.trim()) missing.push('your first name')
+	const email = values.email?.trim() ?? ''
+	if (!email) missing.push('your email address')
+	else if (!isEmail(email)) missing.push('a full email address, like name@pauseai.info')
+	if (!missing.length) return null
+	return `To download, add ${missing.join(' and ')}.`
 }
 
 // ---------------------------------------------------------------------------
@@ -158,8 +167,6 @@ export const TEXT_DESCENT = 0.24
 
 export type CardItem =
 	| { kind: 'rect'; x: number; y: number; w: number; h: number; fill: string }
-	/** A line to write on. */
-	| { kind: 'rule'; x: number; y: number; w: number; h: number; fill: string }
 	/** Left-aligned text on an alphabetic baseline. `maxWidth` squeezes text that is still too long at the smallest size. */
 	| {
 			kind: 'text'
@@ -266,15 +273,11 @@ function tooLong(f: Frame, what: string) {
 	})
 }
 
-/** A piece of a line: text, or a line to write on of width `blank` (at size 1). */
-type Segment = { text: string; font: CardFont; fill: string } | { blank: number; fill: string }
-
-function segmentWidth(f: Frame, seg: Segment, size: number): number {
-	return 'blank' in seg ? seg.blank * size : f.m(seg.text, size, seg.font)
-}
+/** A run of text in one font and colour; a line is one or more of them. */
+type Segment = { text: string; font: CardFont; fill: string }
 
 function lineWidth(f: Frame, line: Segment[], size: number): number {
-	return line.reduce((w, seg) => w + segmentWidth(f, seg, size), 0)
+	return line.reduce((w, seg) => w + f.m(seg.text, size, seg.font), 0)
 }
 
 /** Largest size, up to `max`, at which every line fits `maxWidth`. Not below the smallest card text. */
@@ -305,28 +308,20 @@ function emitLine(
 	const squeeze = natural > maxWidth ? maxWidth / natural : 1
 	let cx = x
 	for (const seg of line) {
-		const w = segmentWidth(f, seg, size) * squeeze
-		if ('blank' in seg) {
-			const h = Math.max(1, size * 0.08)
-			items.push({ kind: 'rule', x: cx, y: baseline + size * 0.06, w, h, fill: seg.fill })
-		} else {
-			items.push({
-				kind: 'text',
-				text: seg.text,
-				x: cx,
-				y: baseline,
-				size,
-				font: seg.font,
-				fill: seg.fill,
-				...(squeeze < 1 ? { maxWidth: w } : {})
-			})
-		}
+		const w = f.m(seg.text, size, seg.font) * squeeze
+		items.push({
+			kind: 'text',
+			text: seg.text,
+			x: cx,
+			y: baseline,
+			size,
+			font: seg.font,
+			fill: seg.fill,
+			...(squeeze < 1 ? { maxWidth: w } : {})
+		})
 		cx += w
 	}
 }
-
-// Figma: the blank before "@pauseai.info" and before "area" is 82 px wide at 24 px text.
-const BLANK_EM = 82 / 24
 
 /** The orange side of Connect: logo and "Email me at…" on the left, a black heading over the QR code on the right. */
 function layoutConnect(f: Frame, values: Values): CardItem[] {
@@ -400,17 +395,20 @@ function layoutConnect(f: Frame, values: Values): CardItem[] {
 	const text = (t: string, fill = WHITE): Segment => ({ text: t, font: 'display', fill })
 	const { local, domain } = emailParts(values.email ?? '')
 	const area = values.area?.trim() ?? ''
-	// The email line is ink, the rest white, as in Figma.
-	const localSeg: Segment = local ? text(local, INK) : { blank: BLANK_EM, fill: INK }
-	const domainSeg = text(domain, INK)
-	// Each detail prints on one line, or breaks before the @ (or before "area") when that keeps it much bigger.
-	const emailChoices: Segment[][][] = local
-		? [[[localSeg, domainSeg]], [[localSeg], [domainSeg]]]
-		: [[[localSeg, domainSeg]]]
+	// The email line is ink, the rest white, as in Figma. Each detail prints on one line, or breaks before the @ (or
+	// before "area") when that keeps it much bigger. Without an area the sentence ends "to connect".
+	const emailChoices: Segment[][][] = !local
+		? [[]]
+		: domain
+			? [[[text(local + domain, INK)]], [[text(local, INK)], [text(domain, INK)]]]
+			: [[[text(local, INK)]]]
 	const areaChoices: Segment[][][] = area
 		? [[[text(`${area} area`)]], [[text(area)], [text('area')]]]
-		: [[[{ blank: BLANK_EM, fill: WHITE }, text(' area')]]]
-	const fixed: Segment[][] = [[text('Email me at')], [text('to connect in the')]]
+		: [[]]
+	const fixed: Segment[][] = [
+		[text('Email me at')],
+		[text(area ? 'to connect in the' : 'to connect')]
+	]
 
 	const top = logoY + logoH + 8 * s
 	const room = safe.bottom - top
@@ -421,7 +419,7 @@ function layoutConnect(f: Frame, values: Values): CardItem[] {
 	const pick = (choices: Segment[][][], max: number) => {
 		const [one, broken] = choices.map((lines) => ({
 			lines,
-			size: fitLines(f, lines, maxWidth, max)
+			size: lines.length ? fitLines(f, lines, maxWidth, max) : max
 		}))
 		return broken &&
 			one.size < max * 0.8 &&
@@ -492,23 +490,13 @@ function layoutName(f: Frame, values: Values): CardItem[] {
 	const first = values.firstName?.trim() ?? ''
 	const last = values.lastName?.trim() ?? ''
 	const title = values.title?.trim() ?? ''
-	const blankCard = !first && !last && !title
 
 	const nameMax = 46 * s
 	const infoMax = 20 * s
 	const anchor = logoY - 31 * s
 
-	if (blankCard) {
-		// Lines to write the name and title on, where the text would be.
-		const rule = (baseline: number, w: number) =>
-			items.push({ kind: 'rule', x, y: baseline, w, h: Math.max(1, 1.6 * s), fill: WHITE })
-		rule(anchor, maxWidth * 0.7)
-		rule(anchor - infoMax * 1.6 - 20 * s, maxWidth * 0.85)
-		return items
-	}
-
-	// The title, just above the logo. It is optional, so a blank one is left out; a blank name prints a line (below).
-	// The email is on side 2 only, in its sentence, so it never prints twice.
+	// The title, just above the logo. It is optional, so a blank one is left out. The email is on side 2 only, in its
+	// sentence, so it never prints twice.
 	const info: Segment[][] = title ? [[{ text: title, font: 'bodyLight', fill: WHITE }]] : []
 	let infoSize = fitLines(f, info, maxWidth, infoMax)
 	// A long title wraps onto a second line before it shrinks a long way.
@@ -533,15 +521,14 @@ function layoutName(f: Frame, values: Values): CardItem[] {
 	info.forEach((line, i) => emitLine(f, items, line, x, infoTop + i * infoLh, infoSize, maxWidth))
 
 	// The name: first name bold, last name light, on one line, or two when that would shrink it a long way.
-	{
+	// The name is required before download (see cardMissing), so while it is still empty the preview leaves it out.
+	if (first || last) {
 		const firstSeg: Segment = { text: first, font: 'display', fill: WHITE }
 		const lastSeg: Segment = { text: last, font: 'displayLight', fill: WHITE }
 		const oneLine: Segment[][] = [
 			first && last
 				? [firstSeg, { text: ' ', font: 'displayLight', fill: WHITE }, lastSeg]
-				: first || last
-					? [first ? firstSeg : lastSeg]
-					: [{ blank: 5, fill: WHITE }]
+				: [first ? firstSeg : lastSeg]
 		]
 		const twoLines: Segment[][] = [[firstSeg], [lastSeg]]
 		const nameBottom = info.length

@@ -9,6 +9,7 @@
 		CARD_FIELDS,
 		CARD_SIDES,
 		cardDefaults,
+		cardMissing,
 		parseCardSave,
 		SAFE_MM,
 		type CardFace
@@ -52,8 +53,11 @@
 	const assets = new StudioAssets(() => designText, CARD_FONT_FACES)
 	// The orange style's logo: white circle, black PAUSE.
 	const logo: Drawable | null = $derived(assets.logos[getTheme('orange').logoSrc] ?? null)
+	// The first name and email are required: the downloads wait for them, and say what is missing.
+	const missing = $derived(cardMissing(values))
 	const ready = $derived(
 		!busy &&
+			!missing &&
 			Boolean(logo) &&
 			subsetsFor(designText).every((s) => (assets.fontsLoaded ?? '').split(',').includes(s))
 	)
@@ -171,6 +175,9 @@
 		</p>
 		<div class="actions">
 			<Checks {issues} />
+			{#if missing}
+				<p class="missing" role="status">{missing}</p>
+			{/if}
 			<ToolButton
 				variant="primary"
 				onclick={onDownloadPdf}
@@ -287,6 +294,13 @@
 		margin: 0.75rem 0 0;
 		font-size: 0.875rem;
 		color: var(--text-2);
+		text-align: center;
+	}
+
+	.missing {
+		flex-basis: 100%;
+		margin: 0;
+		font-weight: 700;
 		text-align: center;
 	}
 

@@ -4,7 +4,9 @@ import {
 	CARD_SIDES,
 	cardBox,
 	cardDefaults,
+	cardMissing,
 	emailParts,
+	isEmail,
 	layoutCardFace,
 	MIN_CARD_PT,
 	parseCardSave,
@@ -65,8 +67,6 @@ function extent(item: CardItem): { x0: number; y0: number; x1: number; y1: numbe
 				y1: item.y + item.size * TEXT_DESCENT
 			}
 		}
-		case 'rule':
-			return { x0: item.x, x1: item.x + item.w, y0: item.y, y1: item.y + item.h }
 		case 'logo':
 			return { x0: item.x, x1: item.x + item.w, y0: item.y, y1: item.y + item.h }
 		case 'qr':
@@ -127,19 +127,46 @@ describe('card fields', () => {
 		expect(cardDefaults(uk).qr).toBe(printableLink(uk))
 	})
 
-	it('start with the details blank, so the cards print lines to write on', () => {
+	it('start with the details blank', () => {
 		expect(EMPTY).toMatchObject({ firstName: '', lastName: '', title: '', email: '', area: '' })
 	})
 })
 
 describe('emailParts', () => {
 	it.each([
-		['', { local: '', domain: '@pauseai.info' }],
-		['joep', { local: 'joep', domain: '@pauseai.info' }],
+		['', { local: '', domain: '' }],
+		['joep', { local: 'joep', domain: '' }],
 		['  joep@pauseai.info ', { local: 'joep', domain: '@pauseai.info' }],
-		['sam@pauseai.uk', { local: 'sam', domain: '@pauseai.uk' }]
+		['sam@pause-ai.de', { local: 'sam', domain: '@pause-ai.de' }]
 	])('splits %j', (email, parts) => {
 		expect(emailParts(email)).toEqual(parts)
+	})
+})
+
+describe('isEmail', () => {
+	it.each(['joep@pauseai.info', 'anne@pauseai.fr', 'sam@pause-ai.de', 'me.too+cards@gmail.com'])(
+		'accepts %s, whatever the domain',
+		(email) => expect(isEmail(email)).toBe(true)
+	)
+
+	it.each(['', 'joep', 'joep@', '@pauseai.info', 'joep@pauseai', 'jo ep@pauseai.info'])(
+		'rejects %j',
+		(email) => expect(isEmail(email)).toBe(false)
+	)
+})
+
+describe('cardMissing', () => {
+	it('asks for the first name and email before download', () => {
+		expect(cardMissing(EMPTY)).toBe('To download, add your first name and your email address.')
+		expect(cardMissing({ ...FILLED, firstName: ' ' })).toBe('To download, add your first name.')
+		expect(cardMissing({ ...FILLED, email: 'joep' })).toBe(
+			'To download, add a full email address, like name@pauseai.info.'
+		)
+	})
+
+	it('lets a card with a name and email download, title and area being optional', () => {
+		expect(cardMissing(FILLED)).toBeNull()
+		expect(cardMissing({ ...FILLED, lastName: '', title: '', area: '' })).toBeNull()
 	})
 })
 
@@ -195,16 +222,48 @@ describe.each(CARD_FORMATS.map((f) => f.id))('cards on %s', (formatId) => {
 		})
 	})
 
-	it('leaves lines to write on in the Connect blanks, and fills them when given', () => {
-		const blank = layoutCardFace('connect', box, EMPTY, measure).items
-		expect(blank.filter((i) => i.kind === 'rule')).toHaveLength(2)
-		expect(blank.some((i) => i.kind === 'text' && i.text === '@pauseai.info')).toBe(true)
-		expect(blank.some((i) => i.kind === 'text' && i.text === ' area')).toBe(true)
+	it('prints the full email the volunteer typed, on any domain, with no fixed suffix', () => {
+		const texts = (values: Values) =>
+			layoutCardFace('connect', box, values, measure).items.flatMap((i) =>
+				i.kind === 'text' ? [i.text] : []
+			)
+		expect(texts(FILLED)).toEqual(
+			expect.arrayContaining([
+				'Email me at',
+				'joep@pauseai.info',
+				'to connect in the',
+				'Utrecht area'
+			])
+		)
+		const fr = texts({ ...FILLED, email: 'anne@pauseai.fr' })
+		expect(fr).toContain('anne@pauseai.fr')
+		expect(fr.join(' ')).not.toContain('pauseai.info')
+	})
 
-		const filled = layoutCardFace('connect', box, FILLED, measure).items
-		expect(filled.filter((i) => i.kind === 'rule')).toHaveLength(0)
-		const texts = filled.flatMap((i) => (i.kind === 'text' ? [i.text] : []))
-		expect(texts).toEqual(expect.arrayContaining(['joep', '@pauseai.info', 'Utrecht area']))
+	it('ends the sentence "to connect" when there is no area', () => {
+		const texts = layoutCardFace('connect', box, { ...FILLED, area: '' }, measure).items.flatMap(
+			(i) => (i.kind === 'text' ? [i.text] : [])
+		)
+		expect(texts).toContain('to connect')
+		expect(texts.join(' ')).not.toContain('area')
+	})
+
+	it.each([
+		'firstname.lastname@pauseai.info',
+		'christopher.montgomery-wellington@pause-ai.de',
+		'a.very.long.personal.address.for.cards@some-long-provider-name.example.org'
+	])('fits the long address %s inside the card', (email) => {
+		const { items } = layoutCardFace('connect', box, { ...FILLED, email }, measure)
+		const printed = items.flatMap((i) => (i.kind === 'text' ? [i.text] : [])).join('')
+		expect(printed).toContain(email)
+		for (const item of items) {
+			const e = extent(item)
+			if (!e) continue
+			expect(e.x0).toBeGreaterThanOrEqual(safe.left - 0.5)
+			expect(e.x1).toBeLessThanOrEqual(safe.right + 0.5)
+			expect(e.y1).toBeLessThanOrEqual(safe.bottom + 0.5)
+			if (item.kind === 'text') expect(item.size).toBeGreaterThanOrEqual(minFont - 0.01)
+		}
 	})
 
 	it('shrinks a long email on its own, not the whole Connect card', () => {
@@ -216,7 +275,7 @@ describe.each(CARD_FORMATS.map((f) => f.id))('cards on %s', (formatId) => {
 		}
 		const long = { ...FILLED, email: LONG.email }
 		expect(sizeOf(long, 'Email me at')).toBeCloseTo(sizeOf(FILLED, 'Email me at'))
-		expect(sizeOf(long, '@pauseai.info')).toBeLessThan(sizeOf(FILLED, '@pauseai.info'))
+		expect(sizeOf(long, '@pauseai.info')).toBeLessThan(sizeOf(FILLED, 'joep@pauseai.info'))
 	})
 
 	it('breaks an email too long for one line before the @', () => {
@@ -249,7 +308,6 @@ describe.each(CARD_FORMATS.map((f) => f.id))('cards on %s', (formatId) => {
 		expect(items).toContainEqual(
 			expect.objectContaining({ text: 'Founder & President', font: 'bodyLight' })
 		)
-		expect(items.some((i) => i.kind === 'rule')).toBe(false)
 	})
 
 	it('prints the email once, on side 2, so it never repeats', () => {
@@ -258,13 +316,13 @@ describe.each(CARD_FORMATS.map((f) => f.id))('cards on %s', (formatId) => {
 				i.kind === 'text' ? [i.text] : []
 			)
 		expect(texts('name').some((t) => t.includes('@'))).toBe(false)
-		expect(texts('connect')).toContain('@pauseai.info')
+		expect(texts('connect')).toContain('joep@pauseai.info')
 	})
 
-	it('prints lines for the name and title on a blank side 1', () => {
+	it('leaves the name out of the preview until it is typed, with no lines to write on', () => {
 		const { items } = layoutCardFace('name', box, EMPTY, measure)
-		expect(items.filter((i) => i.kind === 'rule')).toHaveLength(2)
 		expect(items.some((i) => i.kind === 'text')).toBe(false)
+		expect(items.map((i) => i.kind)).toEqual(['rect', 'mark', 'logo'])
 	})
 
 	it('breaks a long name onto two lines rather than shrinking it a long way', () => {
@@ -292,18 +350,11 @@ describe.each(CARD_FORMATS.map((f) => f.id))('cards on %s', (formatId) => {
 		}
 	})
 
-	it('prints a line for a blank name on an otherwise filled side 1', () => {
-		const noName = layoutCardFace(
-			'name',
-			box,
-			{ ...FILLED, firstName: '', lastName: '' },
-			measure
-		).items
-		expect(noName.filter((i) => i.kind === 'rule')).toHaveLength(1)
-		expect(noName).toContainEqual(expect.objectContaining({ text: 'Founder & President' }))
-		// A blank title is just left out.
-		const noTitle = layoutCardFace('name', box, { ...FILLED, title: '' }, measure).items
-		expect(noTitle.some((i) => i.kind === 'rule')).toBe(false)
+	it('leaves out a blank title', () => {
+		const texts = layoutCardFace('name', box, { ...FILLED, title: '' }, measure).items.flatMap(
+			(i) => (i.kind === 'text' ? [i.text] : [])
+		)
+		expect(texts).toEqual(['Joep', ' ', 'Meindertsma'])
 	})
 
 	it('warns about a QR link that is not a web address, or too long to scan', () => {
