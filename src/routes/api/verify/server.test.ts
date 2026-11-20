@@ -24,6 +24,12 @@ vi.mock('$lib/server/statementCrm', async (importOriginal) => ({
 	...(await importOriginal<typeof import('$lib/server/statementCrm')>()),
 	verifyStatementInCrm
 }))
+const verifyMemberLinkInCrm =
+	vi.fn<(key: string, token: string) => Promise<'ok' | 'expired' | 'invalid' | 'failed'>>()
+vi.mock('$lib/server/memberLinkCrm', async (importOriginal) => ({
+	...(await importOriginal<typeof import('$lib/server/memberLinkCrm')>()),
+	verifyMemberLinkInCrm
+}))
 vi.mock('airtable', () => ({
 	default: class {
 		base() {
@@ -105,6 +111,7 @@ beforeEach(() => {
 	update.mockReset().mockResolvedValue()
 	reportError.mockReset().mockResolvedValue()
 	verifyStatementInCrm.mockReset().mockResolvedValue('ok')
+	verifyMemberLinkInCrm.mockReset().mockResolvedValue('ok')
 	vi.spyOn(console, 'error').mockImplementation(() => {})
 	vi.spyOn(console, 'warn').mockImplementation(() => {})
 })
@@ -413,5 +420,112 @@ describe('POST /api/verify: statement links in CiviCRM', () => {
 		expect(response.status).toBe(200)
 		expect(verifyStatementInCrm).not.toHaveBeenCalled()
 		expect(update).toHaveBeenCalledExactlyOnceWith('recMember', { 'Verified email': true })
+	})
+})
+
+describe('POST /api/verify: record-id member links in CiviCRM', () => {
+	const KEY = 'AbCdEf12345678'
+	const TOKEN = 'v1.1800000000.' + 'A'.repeat(43)
+	const memberLink = (key = KEY, query = `&token=${TOKEN}`) =>
+		verify(`${verificationParameter}=${key}${query}&table=join`)
+
+	beforeEach(() => {
+		env.MEMBER_LINK_BACKEND = 'civicrm'
+	})
+
+	it('sends the key as the link carries it to CiviCRM, reading no Airtable row', async () => {
+		const response = await memberLink()
+
+		expect(response.status).toBe(200)
+		expect(verifyMemberLinkInCrm).toHaveBeenCalledExactlyOnceWith(KEY, TOKEN)
+		expect(tableIds).toEqual([])
+		expect(update).not.toHaveBeenCalled()
+	})
+
+	it('sends a link without the table parameter to CiviCRM', async () => {
+		const response = await verify(`${verificationParameter}=${KEY}&token=${TOKEN}`)
+
+		expect(response.status).toBe(200)
+		expect(verifyMemberLinkInCrm).toHaveBeenCalledExactlyOnceWith(KEY, TOKEN)
+	})
+
+	it.each([
+		['ok', 200],
+		['expired', 410],
+		['invalid', 410],
+		['failed', 502]
+	] as const)('answers %s with %i', async (outcome, status) => {
+		verifyMemberLinkInCrm.mockResolvedValue(outcome)
+		const response = await memberLink()
+
+		expect(response.status).toBe(status)
+		if (status === 410) expect(await response.json()).toEqual({ outcome: 'expired' })
+	})
+
+	it("sends the link while the website's secret is unset", async () => {
+		delete env.EMAIL_VERIFICATION_SECRET
+		const response = await memberLink()
+
+		expect(response.status).toBe(200)
+		expect(verifyMemberLinkInCrm).toHaveBeenCalledExactlyOnceWith(KEY, TOKEN)
+	})
+
+	it.each([
+		['no token', ''],
+		['an empty token', '&token=']
+	])('refuses a link with %s as expired, calling nothing', async (_label, query) => {
+		const response = await memberLink(KEY, query)
+
+		expect(response.status).toBe(410)
+		expect(await response.json()).toEqual({ outcome: 'expired' })
+		expect(verifyMemberLinkInCrm).not.toHaveBeenCalled()
+		expect(tableIds).toEqual([])
+	})
+
+	it.each(['AbCdEf1234567', 'AbCdEf123456789', 'recAbCdEf12345678'])(
+		'answers 404 for the key %s, calling nothing',
+		async (key) => {
+			const response = await memberLink(key)
+
+			expect(response.status).toBe(404)
+			expect(verifyMemberLinkInCrm).not.toHaveBeenCalled()
+			expect(tableIds).toEqual([])
+		}
+	)
+
+	it.each([undefined, 'airtable', 'anything else'])(
+		'keeps member links on Airtable with MEMBER_LINK_BACKEND=%s',
+		async (backend) => {
+			env.MEMBER_LINK_BACKEND = backend
+			selected = [member('recMember')]
+			const response = await signedLink('recMember')
+
+			expect(response.status).toBe(200)
+			expect(verifyMemberLinkInCrm).not.toHaveBeenCalled()
+			expect(update).toHaveBeenCalledExactlyOnceWith('recMember', { 'Verified email': true })
+		}
+	)
+
+	describe('leaves statement links as they were', () => {
+		const CONFIRMED = `&table=statement&${verificationConfirmedParameter}=true`
+
+		it('verifies an old Airtable statement link in Airtable', async () => {
+			selected = [{ id: 'recStatement', fields: {} }]
+			const response = await link(CONFIRMED)
+
+			expect(response.status).toBe(200)
+			expect(verifyMemberLinkInCrm).not.toHaveBeenCalled()
+			expect(verifyStatementInCrm).not.toHaveBeenCalled()
+			expect(update).toHaveBeenCalledExactlyOnceWith('recStatement', { email_verified: true })
+		})
+
+		it("answers CiviCRM's invalid for an s<id> link with 404", async () => {
+			verifyStatementInCrm.mockResolvedValue('invalid')
+			const response = await verify(`${verificationParameter}=s12345&token=${TOKEN}${CONFIRMED}`)
+
+			expect(response.status).toBe(404)
+			expect(verifyStatementInCrm).toHaveBeenCalledExactlyOnceWith('s12345', TOKEN)
+			expect(verifyMemberLinkInCrm).not.toHaveBeenCalled()
+		})
 	})
 })

@@ -213,6 +213,8 @@ Refused answers 410 `{ outcome: 'expired' }`, and `/verify` explains that links 
 
 **Secret.** `EMAIL_VERIFICATION_SECRET`, 32 random bytes (`openssl rand -base64 32`), in Netlify's Production context; separate from `ONBOARDING_CONTINUATION_SECRET`. Unset, the site logs it once per cold start (and reports it to Sentry where `ONBOARDING_LIVE` is on), the v2 render refuses every request and `/api/verify` refuses every Members link. Rotating it invalidates every signed link in delivered mail: rotate only when needed.
 
+**Checking in CiviCRM.** `MEMBER_LINK_BACKEND` decides where `/api/verify` sends a `table=join` link: `airtable` (the default, also when unset) runs the checks above; `civicrm` sends every such link to CiviCRM's `PauseaiMemberIntake.verify` (`src/lib/server/memberLinkCrm.ts`) with `CRM_URL` and `CRM_KEY`, whether or not `EMAIL_VERIFICATION_SECRET` is set on the website. CiviCRM finds the contact the nightly import made from the row and checks the token against that contact's primary email. A link without a token answers 410 and a key that is not 14 letters or digits answers 404, both without calling CiviCRM. CiviCRM's `ok` answers 200, `expired` and `invalid` the 410 refusal above, and a failed call 502. It is set in Netlify's Production context only, when Airtable stops taking writes and not before, since the nightly duplicate merge reads `Verified email` from Airtable alone. Deploy previews stay on `airtable`. Switch and roll back by changing it and redeploying; a rollback only helps while Airtable still takes writes.
+
 ### Resuming after a remount
 
 The server never matches a signup by email, so the id in component state is
