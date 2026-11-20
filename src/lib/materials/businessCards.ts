@@ -1,11 +1,12 @@
 /**
- * Business cards, after the PauseAI design Figma: two designs, each a front and a back.
+ * The PauseAI business card, after the PauseAI design Figma. Both sides are orange:
  *
- * - Connect: an orange side with "Email me at ___@pauseai.info to connect in the ___ area" beside a QR code to
- *   join, and a white side with the big logo and the slogan.
- * - Personal: the same white side, and an orange side with the volunteer's name, title and email.
+ * - Side 1: the volunteer's name (first name bold) and title over a large faded pause mark, with the small logo.
+ * - Side 2: the logo and "Email me at ___@pauseai.info to connect in the ___ area", beside a black "Join our global
+ *   community" heading over a QR code to join.
  *
- * Blank details print as lines, so a stack of cards can be filled in by hand.
+ * The email prints on side 2 only, in its sentence, so it never appears twice. Blank details print as lines, so a
+ * stack of cards can be filled in by hand.
  *
  * The layout is worked out here without a canvas (text is measured through an injected function), so tests can check
  * that everything stays inside the crop-safe area whatever is typed. cardRender.ts paints it.
@@ -29,43 +30,14 @@ const PT_TO_MM = 25.4 / 72
 const FIGMA_W = 490
 const FIGMA_H = 280
 
-export type CardFace = 'connect' | 'logo' | 'personal'
+/** `name` is side 1 (name and title), `connect` side 2 (email, area and QR code). */
+export type CardFace = 'name' | 'connect'
 
-export interface CardDesign {
-	id: 'connect' | 'personal'
-	label: string
-	description: string
-	front: CardFace
-	back: CardFace
-	/** The fields this design prints, in the order the form shows them. */
-	fieldKeys: string[]
-}
-
-export const CARD_DESIGNS: CardDesign[] = [
-	{
-		id: 'connect',
-		label: 'Connect',
-		description:
-			'Orange, with your email, your area and a QR code to join. The back has the logo and slogan.',
-		front: 'connect',
-		back: 'logo',
-		fieldKeys: ['email', 'area', 'qrHeading', 'qr', 'slogan']
-	},
-	{
-		id: 'personal',
-		label: 'Personal',
-		description: 'The logo and slogan on the front, your name, title and email on an orange back.',
-		front: 'logo',
-		back: 'personal',
-		fieldKeys: ['firstName', 'lastName', 'title', 'email', 'slogan']
-	}
+/** The card's sides, in print order. */
+export const CARD_SIDES: { face: CardFace; label: string }[] = [
+	{ face: 'name', label: 'Side 1' },
+	{ face: 'connect', label: 'Side 2' }
 ]
-
-export const DEFAULT_CARD_DESIGN_ID = 'connect'
-
-export function getCardDesign(id: string): CardDesign {
-	return CARD_DESIGNS.find((d) => d.id === id) ?? CARD_DESIGNS[0]
-}
 
 const PAUSEAI_EMAIL_DOMAIN = '@pauseai.info'
 
@@ -112,21 +84,8 @@ export const CARD_FIELDS: FieldDef[] = [
 		maxLength: 40,
 		default: 'Join our global community'
 	},
-	{ key: 'qr', label: 'QR code link', kind: 'text', maxLength: 200, default: '' },
-	{
-		key: 'slogan',
-		label: 'Slogan',
-		kind: 'textarea',
-		maxLength: 80,
-		hint: 'Printed in capitals under the logo.',
-		default: 'Don’t allow companies\nto gamble with our future'
-	}
+	{ key: 'qr', label: 'QR code link', kind: 'text', maxLength: 200, default: '' }
 ]
-
-/** The fields `design` prints, in form order. */
-export function cardFieldsFor(design: CardDesign): FieldDef[] {
-	return design.fieldKeys.map((key) => CARD_FIELDS.find((f) => f.key === key)!)
-}
 
 /** Every card field's default for `chapter`: the QR code opens the chapter's link, as on the other designs. */
 export function cardDefaults(chapter: Chapter): Values {
@@ -137,7 +96,6 @@ export function cardDefaults(chapter: Chapter): Values {
 
 /** What the business card tool keeps in the browser between visits: only what the volunteer chose or typed. */
 export interface CardSave {
-	designId: string
 	formatId: string
 	chapterId: string
 	/** Typed values only; the rest come from cardDefaults, so a change of country still updates the QR link. */
@@ -164,11 +122,6 @@ export function parseCardSave(raw: string | null): CardSave {
 				)
 			: {}
 	return {
-		designId: known(
-			o.designId,
-			CARD_DESIGNS.map((d) => d.id),
-			DEFAULT_CARD_DESIGN_ID
-		),
 		formatId: known(
 			o.formatId,
 			CARD_FORMATS.map((f) => f.id),
@@ -218,8 +171,8 @@ export type CardItem =
 			fill: string
 			maxWidth?: number
 	  }
-	/** `onWhite` is the full-colour logo, `light` the white circle with black PAUSE that reads on orange. */
-	| { kind: 'logo'; variant: 'light' | 'onWhite'; x: number; y: number; w: number; h: number }
+	/** The logo for orange: white circle, black PAUSE. */
+	| { kind: 'logo'; x: number; y: number; w: number; h: number }
 	| { kind: 'qr'; url: string; x: number; y: number; size: number }
 	/** The big faded pause mark: a circle with the two bars cut out. */
 	| {
@@ -301,12 +254,7 @@ export function layoutCardFace(
 	measure: CardMeasure
 ): CardLayout {
 	const f = frame(box, measure)
-	const items =
-		face === 'connect'
-			? layoutConnect(f, values)
-			: face === 'personal'
-				? layoutPersonal(f, values)
-				: layoutLogo(f, values)
+	const items = face === 'connect' ? layoutConnect(f, values) : layoutName(f, values)
 	return { items, issues: f.issues }
 }
 
@@ -447,7 +395,7 @@ function layoutConnect(f: Frame, values: Values): CardItem[] {
 	const logoW = Math.min(178 * s, maxWidth)
 	const logoH = logoW / LOGO_ASPECT
 	const logoY = Math.max(safe.top, f.top + 23 * s)
-	items.push({ kind: 'logo', variant: 'light', x: cx - logoW / 2, y: logoY, w: logoW, h: logoH })
+	items.push({ kind: 'logo', x: cx - logoW / 2, y: logoY, w: logoW, h: logoH })
 
 	const text = (t: string, fill = WHITE): Segment => ({ text: t, font: 'display', fill })
 	const { local, domain } = emailParts(values.email ?? '')
@@ -514,51 +462,8 @@ function layoutConnect(f: Frame, values: Values): CardItem[] {
 	return items
 }
 
-/** The white side: the big logo, and the slogan in capitals under it. */
-function layoutLogo(f: Frame, values: Values): CardItem[] {
-	const { s, safe, box } = f
-	const items: CardItem[] = [{ kind: 'rect', x: 0, y: 0, w: box.width, h: box.height, fill: WHITE }]
-	const cx = (f.left + f.right) / 2
-	const maxWidth = safe.right - safe.left
-	const logoW = Math.min(356 * s, maxWidth - 20 * s)
-	const logoH = logoW / LOGO_ASPECT
-
-	const slogan = (values.slogan ?? '').trim().toUpperCase()
-	const LINE = 1.15
-	const gap = 21 * s
-	// Under the logo, the slogan has the rest of the safe area's height. Lines beyond what fits at the smallest size
-	// are left out.
-	const sloganRoom = safe.bottom - safe.top - logoH - gap
-	const allLines = slogan
-		.split('\n')
-		.map((l) => l.trim())
-		.filter(Boolean)
-		.map((l): Segment[] => [{ text: l, font: 'display', fill: INK }])
-	const sloganLines = allLines.slice(0, Math.max(0, Math.floor(sloganRoom / (f.minFont * LINE))))
-	const byHeight = sloganLines.length ? sloganRoom / (sloganLines.length * LINE) : Infinity
-	const size = Math.max(f.minFont, Math.min(fitLines(f, sloganLines, maxWidth, 20 * s), byHeight))
-	if (
-		sloganLines.length < allLines.length ||
-		sloganLines.some((l) => overflows(f, l, size, maxWidth))
-	)
-		tooLong(f, 'slogan')
-	const sloganH = sloganLines.length ? gap + sloganLines.length * size * LINE : 0
-	const groupH = logoH + sloganH
-	// Figma puts the logo 88.7 px down; a slogan of more lines pushes the group up, never past the safe area.
-	let logoY = sloganLines.length ? f.top + 88.7 * s : (f.top + f.bottom - logoH) / 2
-	if (logoY + groupH > safe.bottom) logoY = Math.max(safe.top, safe.bottom - groupH)
-	items.push({ kind: 'logo', variant: 'onWhite', x: cx - logoW / 2, y: logoY, w: logoW, h: logoH })
-
-	sloganLines.forEach((line, i) => {
-		const w = Math.min(maxWidth, lineWidth(f, line, size))
-		const baseline = logoY + logoH + gap + i * size * LINE + size * TEXT_ASCENT
-		emitLine(f, items, line, cx - w / 2, baseline, size, maxWidth)
-	})
-	return items
-}
-
-/** The orange side of Personal: the faded pause mark, name, title and email, and the small logo. */
-function layoutPersonal(f: Frame, values: Values): CardItem[] {
+/** Side 1: the faded pause mark, name and title, and the small logo. */
+function layoutName(f: Frame, values: Values): CardItem[] {
 	const { s, safe, box } = f
 	const items: CardItem[] = [
 		{ kind: 'rect', x: 0, y: 0, w: box.width, h: box.height, fill: BRAND_ORANGE },
@@ -582,39 +487,29 @@ function layoutPersonal(f: Frame, values: Values): CardItem[] {
 	const logoH = 28.7 * s
 	const logoW = logoH * LOGO_ASPECT
 	const logoY = Math.min(f.top + 226.8 * s, safe.bottom - logoH)
-	items.push({ kind: 'logo', variant: 'light', x, y: logoY, w: logoW, h: logoH })
+	items.push({ kind: 'logo', x, y: logoY, w: logoW, h: logoH })
 
 	const first = values.firstName?.trim() ?? ''
 	const last = values.lastName?.trim() ?? ''
 	const title = values.title?.trim() ?? ''
-	const email = values.email?.trim() ?? ''
-	const blankCard = !first && !last && !title && !email
+	const blankCard = !first && !last && !title
 
 	const nameMax = 46 * s
 	const infoMax = 20 * s
 	const anchor = logoY - 31 * s
 
 	if (blankCard) {
-		// Lines to write the name, title and email on, where the text would be.
+		// Lines to write the name and title on, where the text would be.
 		const rule = (baseline: number, w: number) =>
 			items.push({ kind: 'rule', x, y: baseline, w, h: Math.max(1, 1.6 * s), fill: WHITE })
-		const lineGap = infoMax * 1.6
 		rule(anchor, maxWidth * 0.7)
-		rule(anchor - lineGap, maxWidth * 0.7)
-		rule(anchor - 2 * lineGap - 20 * s, maxWidth * 0.85)
+		rule(anchor - infoMax * 1.6 - 20 * s, maxWidth * 0.85)
 		return items
 	}
 
-	// Title and email, one size for both, stacked up from just above the logo.
-	const { local, domain } = emailParts(email)
-	const info: Segment[][] = []
-	if (title) info.push([{ text: title, font: 'bodyLight', fill: WHITE }])
-	// A blank email (or name, below) prints a line to write it on, as the form promises. A blank title is left out.
-	info.push(
-		email
-			? [{ text: local ? `${local}${domain}` : email, font: 'bodyLight', fill: WHITE }]
-			: [{ blank: 9, fill: WHITE }]
-	)
+	// The title, just above the logo. It is optional, so a blank one is left out; a blank name prints a line (below).
+	// The email is on side 2 only, in its sentence, so it never prints twice.
+	const info: Segment[][] = title ? [[{ text: title, font: 'bodyLight', fill: WHITE }]] : []
 	let infoSize = fitLines(f, info, maxWidth, infoMax)
 	// A long title wraps onto a second line before it shrinks a long way.
 	if (title && infoSize < infoMax * 0.8) {
@@ -623,17 +518,16 @@ function layoutPersonal(f: Frame, values: Values): CardItem[] {
 		if (words.length > 1) {
 			const wrapped = [
 				[{ text: words.slice(0, mid).join(' '), font: 'bodyLight', fill: WHITE }],
-				[{ text: words.slice(mid).join(' '), font: 'bodyLight', fill: WHITE }],
-				...info.slice(1)
+				[{ text: words.slice(mid).join(' '), font: 'bodyLight', fill: WHITE }]
 			] as Segment[][]
 			const wrappedSize = fitLines(f, wrapped, maxWidth, infoMax)
 			if (wrappedSize > infoSize) {
-				info.splice(0, 1, ...wrapped.slice(0, 2))
+				info.splice(0, 1, ...wrapped)
 				infoSize = wrappedSize
 			}
 		}
 	}
-	if (info.some((l) => overflows(f, l, infoSize, maxWidth))) tooLong(f, 'title or email')
+	if (info.some((l) => overflows(f, l, infoSize, maxWidth))) tooLong(f, 'title')
 	const infoLh = infoSize * 1.35
 	const infoTop = anchor - (info.length - 1) * infoLh
 	info.forEach((line, i) => emitLine(f, items, line, x, infoTop + i * infoLh, infoSize, maxWidth))

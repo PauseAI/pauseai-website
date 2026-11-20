@@ -1,10 +1,9 @@
 import { describe, expect, it } from 'vitest'
 import {
-	CARD_DESIGNS,
 	CARD_FIELDS,
+	CARD_SIDES,
 	cardBox,
 	cardDefaults,
-	cardFieldsFor,
 	emailParts,
 	layoutCardFace,
 	MIN_CARD_PT,
@@ -26,7 +25,7 @@ import type { Values } from './templates'
 const WIDTH: Record<string, number> = { display: 0.45, displayLight: 0.42, bodyLight: 0.55 }
 const measure: CardMeasure = (text, size, font) => text.length * size * WIDTH[font]
 
-const FACES: CardFace[] = ['connect', 'logo', 'personal']
+const FACES: CardFace[] = CARD_SIDES.map((side) => side.face)
 
 const LONG: Values = {
 	firstName: 'Maximiliana-Alexandra',
@@ -35,8 +34,7 @@ const LONG: Values = {
 	email: 'maximiliana.vanderbilt-wolfeschlegelsteinhausen@pauseai.info',
 	area: 'Greater Manchester and the North West of England',
 	qrHeading: 'Join our global community today please',
-	qr: 'https://pauseai.info/join',
-	slogan: 'Don’t allow companies to gamble with our future, or with our children’s future either'
+	qr: 'https://pauseai.info/join'
 }
 
 const FILLED: Values = {
@@ -111,8 +109,8 @@ describe('card fields', () => {
 			if (f.maxLength) expect(f.default.length).toBeLessThanOrEqual(f.maxLength)
 	})
 
-	it('are listed for every design', () => {
-		for (const d of CARD_DESIGNS) expect(cardFieldsFor(d).every(Boolean)).toBe(true)
+	it('print side 1 (name) then side 2 (connect)', () => {
+		expect(FACES).toEqual(['name', 'connect'])
 	})
 
 	it("default the QR code to the chapter's link, as the other designs do", () => {
@@ -235,25 +233,34 @@ describe.each(CARD_FORMATS.map((f) => f.id))('cards on %s', (formatId) => {
 	})
 
 	it('prints the name with the first name bold and the last name light', () => {
-		const { items } = layoutCardFace('personal', box, FILLED, measure)
+		const { items } = layoutCardFace('name', box, FILLED, measure)
 		expect(items).toContainEqual(expect.objectContaining({ text: 'Joep', font: 'display' }))
 		expect(items).toContainEqual(
 			expect.objectContaining({ text: 'Meindertsma', font: 'displayLight' })
 		)
 		expect(items).toContainEqual(
-			expect.objectContaining({ text: 'joep@pauseai.info', font: 'bodyLight' })
+			expect.objectContaining({ text: 'Founder & President', font: 'bodyLight' })
 		)
 		expect(items.some((i) => i.kind === 'rule')).toBe(false)
 	})
 
-	it('prints lines for the name, title and email on a blank Personal card', () => {
-		const { items } = layoutCardFace('personal', box, EMPTY, measure)
-		expect(items.filter((i) => i.kind === 'rule')).toHaveLength(3)
+	it('prints the email once, on side 2, so it never repeats', () => {
+		const texts = (face: CardFace) =>
+			layoutCardFace(face, box, FILLED, measure).items.flatMap((i) =>
+				i.kind === 'text' ? [i.text] : []
+			)
+		expect(texts('name').some((t) => t.includes('@'))).toBe(false)
+		expect(texts('connect')).toContain('@pauseai.info')
+	})
+
+	it('prints lines for the name and title on a blank side 1', () => {
+		const { items } = layoutCardFace('name', box, EMPTY, measure)
+		expect(items.filter((i) => i.kind === 'rule')).toHaveLength(2)
 		expect(items.some((i) => i.kind === 'text')).toBe(false)
 	})
 
 	it('breaks a long name onto two lines rather than shrinking it a long way', () => {
-		const { items } = layoutCardFace('personal', box, LONG, measure)
+		const { items } = layoutCardFace('name', box, LONG, measure)
 		const first = items.find((i) => i.kind === 'text' && i.text === LONG.firstName)
 		const last = items.find((i) => i.kind === 'text' && i.text === LONG.lastName)
 		expect(first?.kind === 'text' && last?.kind === 'text' && last.y > first.y).toBe(true)
@@ -263,8 +270,7 @@ describe.each(CARD_FORMATS.map((f) => f.id))('cards on %s', (formatId) => {
 		const { issues } = layoutCardFace('connect', box, LONG, measure)
 		expect(issues.some((i) => i.id.startsWith('card-long'))).toBe(true)
 		expect(layoutCardFace('connect', box, FILLED, measure).issues).toEqual([])
-		expect(layoutCardFace('personal', box, FILLED, measure).issues).toEqual([])
-		expect(layoutCardFace('logo', box, FILLED, measure).issues).toEqual([])
+		expect(layoutCardFace('name', box, FILLED, measure).issues).toEqual([])
 	})
 
 	it("doesn't squeeze text that fits, though browsers measure tiny text roughly", () => {
@@ -278,31 +284,17 @@ describe.each(CARD_FORMATS.map((f) => f.id))('cards on %s', (formatId) => {
 		}
 	})
 
-	it('keeps a slogan of many lines inside the card, leaving out what does not fit and saying so', () => {
-		const slogan = Array.from({ length: 40 }, (_, i) => `Line ${i}`).join('\n')
-		const { items, issues } = layoutCardFace('logo', box, { ...FILLED, slogan }, measure)
-		for (const item of items) {
-			const e = extent(item)
-			if (e) expect(e.y1, item.kind).toBeLessThanOrEqual(safe.bottom + 0.5)
-			if (item.kind === 'text') expect(item.size).toBeGreaterThanOrEqual(minFont - 0.01)
-		}
-		expect(issues.map((i) => i.id)).toContain('card-long-slogan')
-	})
-
-	it('prints a line for a blank email or name on an otherwise filled Personal card', () => {
-		const noEmail = layoutCardFace('personal', box, { ...FILLED, email: '' }, measure).items
-		expect(noEmail.filter((i) => i.kind === 'rule')).toHaveLength(1)
-		expect(noEmail).toContainEqual(expect.objectContaining({ text: 'Joep' }))
+	it('prints a line for a blank name on an otherwise filled side 1', () => {
 		const noName = layoutCardFace(
-			'personal',
+			'name',
 			box,
 			{ ...FILLED, firstName: '', lastName: '' },
 			measure
 		).items
 		expect(noName.filter((i) => i.kind === 'rule')).toHaveLength(1)
-		expect(noName).toContainEqual(expect.objectContaining({ text: 'joep@pauseai.info' }))
+		expect(noName).toContainEqual(expect.objectContaining({ text: 'Founder & President' }))
 		// A blank title is just left out.
-		const noTitle = layoutCardFace('personal', box, { ...FILLED, title: '' }, measure).items
+		const noTitle = layoutCardFace('name', box, { ...FILLED, title: '' }, measure).items
 		expect(noTitle.some((i) => i.kind === 'rule')).toBe(false)
 	})
 
@@ -314,23 +306,10 @@ describe.each(CARD_FORMATS.map((f) => f.id))('cards on %s', (formatId) => {
 		expect(ids('pauseai.uk/join')).toEqual([])
 	})
 
-	it('prints the slogan in capitals, a line each', () => {
-		const { items } = layoutCardFace('logo', box, FILLED, measure)
-		const texts = items.flatMap((i) => (i.kind === 'text' ? [i.text] : []))
-		expect(texts).toEqual(['DON’T ALLOW COMPANIES', 'TO GAMBLE WITH OUR FUTURE'])
-	})
-
-	it('centres the logo when there is no slogan', () => {
-		const { items } = layoutCardFace('logo', box, { ...FILLED, slogan: '' }, measure)
-		const logo = items.find((i) => i.kind === 'logo')
-		if (logo?.kind !== 'logo') throw new Error('no logo')
-		expect(logo.y + logo.h / 2).toBeCloseTo(box.height / 2, 0)
-	})
-
 	it('lays the preview out the same way at a smaller scale', () => {
 		const format = getCardFormat(formatId)
 		const small = cardBox(format, renderSize(format, { bleed: false }), 0.5)
-		const { items } = layoutCardFace('personal', small, FILLED, measure)
+		const { items } = layoutCardFace('name', small, FILLED, measure)
 		const name = items.find((i) => i.kind === 'text' && i.text === 'Joep')
 		expect(name?.kind === 'text' && name.x).toBeGreaterThanOrEqual(SAFE_MM * small.pxPerMm)
 	})
@@ -357,7 +336,7 @@ describe('card fonts', () => {
 
 describe('parseCardSave', () => {
 	it('starts afresh from nothing, or from a broken save', () => {
-		const fresh = { designId: 'connect', formatId: 'card-eu', chapterId: '', edited: {} }
+		const fresh = { formatId: 'card-eu', chapterId: '', edited: {} }
 		expect(parseCardSave(null)).toEqual(fresh)
 		expect(parseCardSave('{')).toEqual(fresh)
 		expect(parseCardSave('[1]')).toEqual(fresh)
@@ -371,16 +350,14 @@ describe('parseCardSave', () => {
 			edited: { firstName: 'Sam', email: 7, nonsense: 'x' }
 		})
 		expect(parseCardSave(raw)).toEqual({
-			designId: 'personal',
 			formatId: 'card-us',
 			chapterId: 'United Kingdom',
 			edited: { firstName: 'Sam' }
 		})
-		expect(
-			parseCardSave(JSON.stringify({ designId: 'gone', chapterId: 'Atlantis' }))
-		).toMatchObject({
-			designId: 'connect',
-			chapterId: ''
+		expect(parseCardSave(JSON.stringify({ formatId: 'gone', chapterId: 'Atlantis' }))).toEqual({
+			formatId: 'card-eu',
+			chapterId: '',
+			edited: {}
 		})
 	})
 })

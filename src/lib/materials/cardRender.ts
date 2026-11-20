@@ -16,8 +16,8 @@ export interface CardRenderOptions {
 	format: PrintFormat
 	face: CardFace
 	values: Values
-	/** The logo that reads on orange (white circle, black PAUSE) and the full-colour one for white. */
-	logos: { light: Drawable; onWhite: Drawable }
+	/** The logo that reads on orange: white circle, black PAUSE. */
+	logo: Drawable
 	/** Include the 3 mm bleed, for the print PDF. */
 	bleed?: boolean
 	/** Scale down so the longest side is at most this many px. Used for the live preview. */
@@ -41,11 +41,11 @@ export function renderCardFace(
 		return ctx.measureText(text).width
 	}
 	const { items, issues } = layoutCardFace(opts.face, box, opts.values, measure)
-	for (const item of items) paint(ctx, item, opts.logos)
+	for (const item of items) paint(ctx, item, opts.logo)
 	return { issues }
 }
 
-function paint(ctx: CanvasRenderingContext2D, item: CardItem, logos: CardRenderOptions['logos']) {
+function paint(ctx: CanvasRenderingContext2D, item: CardItem, logo: Drawable) {
 	switch (item.kind) {
 		case 'rect':
 		case 'rule':
@@ -61,7 +61,7 @@ function paint(ctx: CanvasRenderingContext2D, item: CardItem, logos: CardRenderO
 			else ctx.fillText(item.text, item.x, item.y, item.maxWidth)
 			return
 		case 'logo':
-			ctx.drawImage(logos[item.variant].source, item.x, item.y, item.w, item.h)
+			ctx.drawImage(logo.source, item.x, item.y, item.w, item.h)
 			return
 		case 'qr':
 			drawQr(ctx, qrTarget(item.url, false), item.x, item.y, item.size)
@@ -82,7 +82,7 @@ function paint(ctx: CanvasRenderingContext2D, item: CardItem, logos: CardRenderO
 	}
 }
 
-/** Front and back side by side on one image, for sharing a preview of the cards. */
+/** Both sides next to each other on one image, for sharing a preview of the card. */
 export function cardPreviewCanvas(
 	front: HTMLCanvasElement,
 	back: HTMLCanvasElement

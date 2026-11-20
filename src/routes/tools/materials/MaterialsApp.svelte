@@ -25,7 +25,7 @@
 			id: 'cards',
 			label: 'Business cards',
 			short: 'Cards',
-			hint: 'Print-ready business cards, front and back.'
+			hint: 'Print-ready business cards, both sides.'
 		}
 	]
 
