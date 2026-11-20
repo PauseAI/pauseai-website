@@ -113,6 +113,14 @@ describe('card fields', () => {
 		expect(FACES).toEqual(['name', 'connect'])
 	})
 
+	// A field no side reads would sit in the form doing nothing.
+	it.each(CARD_FIELDS.map((f) => f.key))('prints the %s field on one of the sides', (key) => {
+		const box = boxFor('card-eu')
+		const out = (values: Values) =>
+			JSON.stringify(FACES.map((face) => layoutCardFace(face, box, values, measure).items))
+		expect(out({ ...FILLED, [key]: `${FILLED[key] || 'x'}changed` })).not.toEqual(out(FILLED))
+	})
+
 	it("default the QR code to the chapter's link, as the other designs do", () => {
 		expect(cardDefaults(GLOBAL_CHAPTER).qr).toBe('pauseai.info/join')
 		const uk = getChapter('United Kingdom')

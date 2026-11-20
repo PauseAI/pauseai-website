@@ -84,18 +84,18 @@ function paint(ctx: CanvasRenderingContext2D, item: CardItem, logo: Drawable) {
 
 /** Both sides next to each other on one image, for sharing a preview of the card. */
 export function cardPreviewCanvas(
-	front: HTMLCanvasElement,
-	back: HTMLCanvasElement
+	one: HTMLCanvasElement,
+	two: HTMLCanvasElement
 ): HTMLCanvasElement {
-	const gap = Math.round(front.height * 0.08)
+	const gap = Math.round(one.height * 0.08)
 	const canvas = document.createElement('canvas')
-	canvas.width = front.width + back.width + gap * 3
-	canvas.height = Math.max(front.height, back.height) + gap * 2
+	canvas.width = one.width + two.width + gap * 3
+	canvas.height = Math.max(one.height, two.height) + gap * 2
 	const ctx = canvas.getContext('2d')
 	if (!ctx) throw new Error('Canvas is not supported in this browser')
 	ctx.fillStyle = '#E8E4DF'
 	ctx.fillRect(0, 0, canvas.width, canvas.height)
-	ctx.drawImage(front, gap, gap)
-	ctx.drawImage(back, front.width + gap * 2, gap)
+	ctx.drawImage(one, gap, gap)
+	ctx.drawImage(two, one.width + gap * 2, gap)
 	return canvas
 }

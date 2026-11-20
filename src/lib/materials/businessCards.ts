@@ -58,7 +58,7 @@ export const CARD_FIELDS: FieldDef[] = [
 		label: 'Title or role',
 		kind: 'text',
 		maxLength: 60,
-		hint: 'Optional, e.g. Volunteer',
+		hint: 'Optional, e.g. Volunteer. A card with no name or title prints a line for each.',
 		default: ''
 	},
 	{

@@ -70,7 +70,7 @@ export async function pdfBytesForPrint(
 }
 
 /**
- * PDF at trim size plus bleed, one page per canvas (a business card's front and back), with TrimBox/BleedBox set so
+ * PDF at trim size plus bleed, one page per canvas (a business card's two sides), with TrimBox/BleedBox set so
  * print shops can find the trim.
  */
 export async function downloadCanvasPdf(

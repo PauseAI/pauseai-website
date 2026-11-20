@@ -85,7 +85,7 @@
 
 	// Live preview of both sides, redrawn whenever anything changes, and again once more fonts load.
 	$effect(() => {
-		if (!logo || !assets.fontsLoaded || canvases.length < CARD_SIDES.length) return
+		if (!logo || !assets.fontsLoaded || CARD_SIDES.some((_, i) => !canvases[i])) return
 		const found: LintIssue[] = []
 		CARD_SIDES.forEach(({ face }, i) => {
 			const { issues: faceIssues } = renderCardFace(canvases[i], {
