@@ -71,13 +71,9 @@ const linkNotValid = () =>
 // its "rec".
 const RECORD_ID_KEY = /^[A-Za-z0-9]{14}$/
 
-async function verifyInCrm(
-	verify: (key: string, token: string) => Promise<CrmVerifyResult>,
-	key: string,
-	token: string,
-	refused: () => Response = linkNotValid
-): Promise<Response> {
-	switch (await verify(key, token)) {
+/** The answer to a link CiviCRM judged; `refused` is the answer to its `invalid`. */
+function crmVerifyResponse(result: CrmVerifyResult, refused: () => Response): Response {
+	switch (result) {
 		case 'ok':
 			return new Response('OK', { status: StatusCodes.OK })
 		case 'expired':
@@ -133,7 +129,7 @@ export const POST: RequestHandler = async ({ request }) => {
 		if (!RECORD_ID_KEY.test(key)) return linkNotValid()
 		// A refused member link most often went to an address the contact no longer has, which
 		// the expired page explains.
-		return verifyInCrm(verifyMemberLinkInCrm, key, token, linkExpired)
+		return crmVerifyResponse(await verifyMemberLinkInCrm(key, token), linkExpired)
 	}
 	if (tableConfig.isMembers) {
 		memberSecret = getVerificationSecret()
@@ -145,7 +141,7 @@ export const POST: RequestHandler = async ({ request }) => {
 			return linkExpired()
 		}
 	} else if (verifiesInCrm(key, token)) {
-		return verifyInCrm(verifyStatementInCrm, key, token)
+		return crmVerifyResponse(await verifyStatementInCrm(key, token), linkNotValid)
 	}
 
 	const table = new Airtable({ apiKey: AIRTABLE_WRITE_API_KEY })

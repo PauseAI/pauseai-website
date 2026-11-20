@@ -54,6 +54,8 @@ const { POST } = await import('./+server.js')
 const { mintVerificationToken } = await import('$lib/server/emailVerification')
 
 const SECRET = 'test-secret'
+// A well-formed token for the links CiviCRM judges; the tests mock that judgement.
+const TOKEN = 'v1.1800000000.' + 'A'.repeat(43)
 const DAY_MS = 24 * 60 * 60 * 1000
 const NOW = 1_800_000_000_000
 const OLD = new Date(NOW - 100 * DAY_MS).toISOString()
@@ -351,7 +353,6 @@ describe('POST /api/verify: input', () => {
 
 describe('POST /api/verify: statement links in CiviCRM', () => {
 	const CONFIRMED = `&table=statement&${verificationConfirmedParameter}=true`
-	const TOKEN = 'v1.1800000000.' + 'A'.repeat(43)
 	const crmLink = (extraQuery = '') =>
 		verify(`${verificationParameter}=s12345&token=${TOKEN}${CONFIRMED}${extraQuery}`)
 
@@ -425,7 +426,6 @@ describe('POST /api/verify: statement links in CiviCRM', () => {
 
 describe('POST /api/verify: record-id member links in CiviCRM', () => {
 	const KEY = 'AbCdEf12345678'
-	const TOKEN = 'v1.1800000000.' + 'A'.repeat(43)
 	const memberLink = (key = KEY, query = `&token=${TOKEN}`) =>
 		verify(`${verificationParameter}=${key}${query}&table=join`)
 
