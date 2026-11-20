@@ -44,9 +44,23 @@ const TEMPORARY_REDIRECTS: Record<string, string> = {
 	'/cy': OUR_XRISK_INTROS_YOUTUBE_PLAYLIST
 }
 
-export function handleRedirects(path: string) {
+/**
+ * Permanent redirects (301) for a whole section: the path itself and everything under it, keeping the rest of the
+ * path and the query string, so old links and printed QR codes keep working.
+ */
+const SECTION_REDIRECTS: Record<string, string> = {
+	// "Collateral" was hard to spell
+	'/tools/collateral': '/tools/materials'
+}
+
+export function handleRedirects(path: string, search = '') {
 	const permanent = REDIRECTS[path]
 	if (permanent) throw redirectAsError(301, permanent)
+
+	for (const [from, to] of Object.entries(SECTION_REDIRECTS)) {
+		if (path === from || path.startsWith(`${from}/`))
+			throw redirectAsError(301, `${to}${path.slice(from.length)}${search}`)
+	}
 
 	const temporary = TEMPORARY_REDIRECTS[path]
 	if (temporary) throw redirectAsError(302, temporary)
