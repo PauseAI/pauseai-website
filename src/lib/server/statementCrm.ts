@@ -10,7 +10,9 @@ import {
 	callCrm,
 	callCrmUntil,
 	failureDetails,
-	reportCrmProblem
+	reportCrmProblem,
+	verifyLinkInCrm,
+	type CrmVerifyResult
 } from '$lib/server/crmIntake'
 import { COUNTRY_BY_ISO_CODE } from '$lib/server/countryCodes'
 
@@ -105,20 +107,11 @@ export async function signInCrm(
 	return finish('failed', report('sign', 'error', details, 'error'))
 }
 
-export type CrmVerifyResult = 'ok' | 'expired' | 'invalid' | 'failed'
-
 /** Checks a statement link's key and token, which CiviCRM judges alone. Never rejects. */
-export async function verifyStatementInCrm(key: string, token: string): Promise<CrmVerifyResult> {
-	const answer = await callCrm('PauseaiStatement/verify', { key, token })
-	if (!answer.ok) {
-		await report('verify', 'error', failureDetails(answer), 'error')
-		return 'failed'
-	}
-	const { status } = answer.row
-	if (status === 'ok' || status === 'expired' || status === 'invalid') return status
-	await report('verify', 'error', { cause: 'http', httpStatus: 200 }, 'error')
-	return 'failed'
-}
+export const verifyStatementInCrm = (key: string, token: string): Promise<CrmVerifyResult> =>
+	verifyLinkInCrm('PauseaiStatement/verify', key, token, (details) =>
+		report('verify', 'error', details, 'error')
+	)
 
 export type PublicList = { totalCount: number; signatories: Signatory[] }
 

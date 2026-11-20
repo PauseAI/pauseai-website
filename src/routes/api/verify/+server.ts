@@ -16,6 +16,7 @@ import { MEMBERS_BASE_ID, MEMBERS_TABLE_ID, STATEMENT_TABLE_ID } from '$lib/serv
 import { memberRowToVerify } from '$lib/server/mergedMemberRow'
 import { reportError } from '$lib/server/sentry'
 import { statementBackend, verifyStatementInCrm } from '$lib/server/statementCrm'
+import type { CrmVerifyResult } from '$lib/server/crmIntake'
 import { json } from '@sveltejs/kit'
 import Airtable from 'airtable'
 import { StatusCodes } from 'http-status-codes'
@@ -62,8 +63,12 @@ const CRM_STATEMENT_KEY = /^s\d+$/
 const verifiesInCrm = (key: string, token: string) =>
 	(CRM_STATEMENT_KEY.test(key) && token !== '') || statementBackend() === 'civicrm'
 
-async function verifyInCrm(key: string, token: string): Promise<Response> {
-	switch (await verifyStatementInCrm(key, token)) {
+async function verifyInCrm(
+	verify: (key: string, token: string) => Promise<CrmVerifyResult>,
+	key: string,
+	token: string
+): Promise<Response> {
+	switch (await verify(key, token)) {
 		case 'ok':
 			return new Response('OK', { status: StatusCodes.OK })
 		case 'expired':
@@ -126,7 +131,7 @@ export const POST: RequestHandler = async ({ request }) => {
 			return linkExpired()
 		}
 	} else if (verifiesInCrm(key, token)) {
-		return verifyInCrm(key, token)
+		return verifyInCrm(verifyStatementInCrm, key, token)
 	}
 
 	const table = new Airtable({ apiKey: AIRTABLE_WRITE_API_KEY })
