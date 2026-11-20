@@ -7,8 +7,9 @@ import { handleRedirects } from '$lib/redirects'
 import { redirect } from '@sveltejs/kit'
 import type { LayoutLoad } from './$types'
 
-export const load: LayoutLoad = async ({ url: { host, pathname }, fetch }) => {
-	handleRedirects(pathname)
+export const load: LayoutLoad = async ({ url, fetch }) => {
+	const { host, pathname } = url
+	handleRedirects(pathname, () => url.search)
 
 	if (host === 'pauseai.org') {
 		return redirect(301, 'https://pauseai.info' + pathname)

@@ -4,10 +4,10 @@
 	import ControlsSection from '$lib/components/tools/ControlsSection.svelte'
 	import Studio from '$lib/components/tools/Studio.svelte'
 	import ToolButton from '$lib/components/tools/ToolButton.svelte'
-	import { declareCanvasFonts } from '$lib/collateral/canvasFonts'
-	import { CHAPTER_CHOICES, getChapter, GLOBAL_LINK } from '$lib/collateral/chapters'
-	import { canvasToPngBlob, downloadCanvasPng, downloadText } from '$lib/collateral/export'
-	import { isQrLink, qrFilenameStem, qrMinPrintMm, qrTarget, qrTooLong } from '$lib/collateral/qr'
+	import { declareCanvasFonts } from '$lib/materials/canvasFonts'
+	import { CHAPTER_CHOICES, getChapter, GLOBAL_LINK } from '$lib/materials/chapters'
+	import { canvasToPngBlob, downloadCanvasPng, downloadText } from '$lib/materials/export'
+	import { isQrLink, qrFilenameStem, qrMinPrintMm, qrTarget, qrTooLong } from '$lib/materials/qr'
 	import {
 		captionFaces,
 		captionFont,
@@ -16,9 +16,9 @@
 		displayLink,
 		type CaptionMeasure,
 		type QrCaption
-	} from '$lib/collateral/qrCaption'
-	import { qrShape, qrSvg } from '$lib/collateral/qrShape'
-	import { INK } from '$lib/collateral/themes'
+	} from '$lib/materials/qrCaption'
+	import { qrShape, qrSvg } from '$lib/materials/qrShape'
+	import { INK } from '$lib/materials/themes'
 	import QrScanner from './QrScanner.svelte'
 
 	/** Big enough for print and slides. The SVG covers anything larger. */
@@ -84,7 +84,7 @@
 
 	let chapterId = $state('')
 	let url = $state(displayLink(GLOBAL_LINK))
-	// UTM tagging is switched off for now, see qrTarget in $lib/collateral/qr.ts.
+	// UTM tagging is switched off for now, see qrTarget in $lib/materials/qr.ts.
 	const track = false
 	let logo = $state(true)
 	let showLink = $state(false)

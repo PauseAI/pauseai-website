@@ -10,10 +10,10 @@
 
 	const TOOLS: Tool[] = [
 		{
-			href: '/tools/collateral',
-			title: 'Collateral maker',
+			href: '/tools/materials',
+			title: 'Materials maker',
 			description:
-				'Make PauseAI branded flyers, posters, event and social media images, for PauseAI or your national group. Pick a format and a style, add your text, photo and QR codes, then download a PNG, plus a print-ready PDF for flyers and posters.'
+				'Make PauseAI branded flyers, posters, business cards, event and social media images, for PauseAI or your national group. Pick a format and a style, add your text, photo and QR codes, then download a PNG, plus a print-ready PDF for flyers, posters and business cards.'
 		},
 		{
 			href: '/tools/qr',

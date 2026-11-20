@@ -1,6 +1,6 @@
 import * as Calendar from '$lib/clients/luma/calendar'
-import { getChapter } from '$lib/collateral/chapters'
-import { toCalendarEvents, type CalendarEvent } from '$lib/collateral/eventText'
+import { getChapter } from '$lib/materials/chapters'
+import { toCalendarEvents, type CalendarEvent } from '$lib/materials/eventText'
 import { json } from '@sveltejs/kit'
 import type { RequestHandler } from './$types'
 
@@ -9,7 +9,7 @@ export type ToolsEventsResponse = CalendarEvent[]
 export const prerender = false
 
 /**
- * Upcoming events for the collateral maker's "start from one of our events": the chosen chapter's Luma calendar, or
+ * Upcoming events for the materials maker's "start from one of our events": the chosen chapter's Luma calendar, or
  * PauseAI's own when no chapter (or one without a calendar) is chosen. `?chapter=` takes a chapter's English name.
  */
 export const GET: RequestHandler = async ({ url, setHeaders }) => {
@@ -20,7 +20,7 @@ export const GET: RequestHandler = async ({ url, setHeaders }) => {
 		setHeaders({ 'cache-control': 'public, max-age=900' })
 		return json(toCalendarEvents(items.entries.map((e) => e.event)) satisfies ToolsEventsResponse)
 	} catch (error) {
-		console.error('Could not load events for the collateral maker:', error)
+		console.error('Could not load events for the materials maker:', error)
 		// The tool works without events: the option to start from one is just not offered.
 		return json([] satisfies ToolsEventsResponse)
 	}
