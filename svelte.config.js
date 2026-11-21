@@ -33,6 +33,15 @@ const skipWarnings = [
 	['a11y_no_noninteractive_tabindex'] // Skip warnings about tabindex on non-interactive elements (like iframes)
 ]
 
+// Each locale's homepage, as extra prerender entries. The base locale has no URL prefix unless
+// routing is 'prefix-all-locales', so '/' already covers it, and prerendering '/en' as well
+// would emit a duplicate homepage that the search index picks up.
+const prefixesBaseLocale =
+	settings['plugin.paraglide-js-adapter']?.routing?.strategy === 'prefix-all-locales'
+const localeHomepages = settings.locales
+	.filter((locale) => prefixesBaseLocale || locale !== settings.baseLocale)
+	.map((locale) => '/' + locale)
+
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
 	extensions: ['.svelte', '.md'],
@@ -61,7 +70,7 @@ const config = {
 			handleHttpError: 'warn',
 			// Handle missing anchor IDs by warning instead of failing
 			handleMissingId: 'warn',
-			entries: ['*'].concat(settings.locales.map((locale) => '/' + locale))
+			entries: ['*'].concat(localeHomepages)
 		},
 		experimental: {
 			remoteFunctions: true
