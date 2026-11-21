@@ -65,10 +65,10 @@ const UK_SOCIALS: ChapterLink[] = [
 // The Luma links carry the `tk` keys the chapter's own emails use.
 const UK_EVENTS = [
 	{
-		when: 'Saturday 21st November',
-		title: 'March Against AI Extinction.',
-		text: "We are putting on the biggest ever demonstration for AI safety. We need it to grab the world's attention.",
-		url: 'https://luma.com/pauseai-nov26?tk=UEvEYj'
+		when: 'Saturday 10th April',
+		title: 'March Against AI Extinction 2027.',
+		text: 'AI companies are racing straight to self-improving superintelligent AI and gambling with our lives. Why do we have to wait for something to go terribly wrong before the government decides to act? In 2027 PauseAI is stepping up its game. If we all march together, the world will pay attention. This will be the new biggest ever march for AI safety.',
+		url: 'https://luma.com/pauseai-april-27'
 	}
 ]
 
