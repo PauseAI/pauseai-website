@@ -46,14 +46,15 @@ That's it! By default, all commands run in English-only mode for maximum speed. 
 | `pnpm check:watch`     | Watch and check SvelteKit code changes              |
 | `pnpm lint`            | Check code style                                    |
 | `pnpm format`          | Auto-fix code style                                 |
-| `pnpm prepare`         | Set up Git hooks (runs automatically after install) |
+| `pnpm prepare`         | Set up Git hooks, Paraglide, SvelteKit (on install) |
 | `pnpm sync`            | Sync SvelteKit generated files                      |
 
 ## Environment Setup - for l10n and some dynamic pages
 
 To make some development choices, including seeing dynamic pages or l10ns locally, you'll have to set up your development environment.
 
-- But **no `.env` is needed** for basic development
+- But **no `.env` is needed** for basic development (`pnpm dev`, `pnpm test`)
+- **Type checking and linting** (`pnpm check`, `pnpm lint`) need a `.env` to exist, even with every key empty, because some server code imports env vars statically. Copy the template as below, then run `pnpm sync`
 - **Dynamic content** (teams, chat, geo, email validation, write features) needs API keys but has fallbacks
 - **Multiple locales** needs `PARAGLIDE_LOCALES` set, while **developing the l10n system itself** usually also needs an OpenRouter API key
 
