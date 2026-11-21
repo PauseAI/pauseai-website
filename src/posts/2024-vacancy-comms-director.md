@@ -10,7 +10,7 @@ Do you want to make an impact and work on the most important issue on Earth?
 ## About PauseAI
 
 PauseAI is a young, international non-profit organization with the goal of preventing the creation of AI that is (much) more intelligent than humanity.
-A staggering [86% of AI scientists](https://wiki.aiimpacts.org/ai_timelines/predictions_of_human-level_ai_timelines/ai_timeline_surveys/2023_expert_survey_on_progress_in_ai) believe that if we reach this point, there is a chance we could lose control.
+In a 2023 survey, [at least half of the AI researchers asked](https://wiki.aiimpacts.org/ai_timelines/predictions_of_human-level_ai_timelines/ai_timeline_surveys/2023_expert_survey_on_progress_in_ai) put a 10% or higher chance on humanity's inability to control future advanced AI causing human extinction or similarly severe disempowerment.
 The [three biggest AI scientists](https://twitter.com/PauseAI/status/1734641804245455017) have long been warning us: this could mean the end of humanity.
 
 PauseAI started in April 2023 and has since grown to 2000 members, over 100 registered volunteers, and dozens of [local groups](/communities) across the world.

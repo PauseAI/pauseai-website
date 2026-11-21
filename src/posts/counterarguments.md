@@ -15,7 +15,7 @@ But it could also be [dangerous](/risks), including [existential risks](/xrisk).
 But it's not just AI companies saying it’s an existential threat.
 
 - Hundreds of AI scientists signed [this statement](https://www.safe.ai/work/statement-on-ai-risk): "Mitigating the risk of extinction from AI should be a global priority alongside other societal-scale risks such as pandemics and nuclear war."
-- [86%](https://wiki.aiimpacts.org/ai_timelines/predictions_of_human-level_ai_timelines/ai_timeline_surveys/2023_expert_survey_on_progress_in_ai) of AI scientists believe that we could lose control over AI.
+- [At least half](https://wiki.aiimpacts.org/ai_timelines/predictions_of_human-level_ai_timelines/ai_timeline_surveys/2023_expert_survey_on_progress_in_ai) of the AI researchers asked in a 2023 survey put a 10% or higher chance on humanity's inability to control future advanced AI causing human extinction or similarly severe disempowerment.
 - The top 3 most cited AI researchers (prof. Yoshua Bengio, prof. Geoffrey Hinton, Ilya Sutskever) all [warn about existential risk from AI](https://twitter.com/PauseAI/status/1734641804245455017).
 
 Read more about [x-risk](/xrisk)
