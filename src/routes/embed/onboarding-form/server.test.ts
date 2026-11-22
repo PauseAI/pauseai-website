@@ -340,7 +340,7 @@ describe('onboarding submit: chapter sharing', () => {
 	})
 
 	it("accepts the chapter-site checkbox's label, and its earlier one from a form loaded before it changed", async () => {
-		for (const locale of ['en', 'de', 'fr', 'es']) {
+		for (const locale of Object.keys(onboardingMessages)) {
 			for (const posted of [
 				wording('chapter-site', 'United Kingdom', 'PauseAI UK', 'yes', locale),
 				`[chosen] ${retiredChapterSiteLabels[locale][0]('PauseAI UK')}`
@@ -367,6 +367,23 @@ describe('onboarding submit: chapter sharing', () => {
 			chapter_share_wording: '[chosen] Share my details with PauseAI Evil and PauseAI Global'
 		})
 		expect(refused.status).toBe(400)
+	})
+
+	it('accepts the earlier chapter-site labels word for word, as a form loaded before the change posts them', async () => {
+		for (const posted of [
+			'[chosen] Share my details with PauseAI UK and PauseAI Global',
+			'[chosen] Meine Daten mit PauseAI UK und PauseAI Global teilen',
+			'[chosen] Partager mes données avec PauseAI UK et PauseAI Global',
+			'[chosen] Compartir mis datos con PauseAI UK y PauseAI Global'
+		]) {
+			const created = await submit({
+				...signup,
+				chapter_share: 'yes',
+				chapter_share_wording: posted
+			})
+			expect(created, posted).toMatchObject({ success: true })
+			expect(writtenFields(createRecord)['GDPR chapter share wording']).toBe(posted)
+		}
 	})
 
 	it('checks a posted wording without the chapter list, so a form on an older list is not refused', async () => {

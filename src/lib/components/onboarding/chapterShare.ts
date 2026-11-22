@@ -105,13 +105,13 @@ export function possibleWordings(
 			names.flatMap((name) => {
 				const question = chapterQuestion(msgs, form, country, name)
 				if (!question) return []
-				const shown = [question]
-				if (form === 'chapter-site' && name) {
-					for (const label of retiredChapterSiteLabels[locale] ?? []) {
-						shown.push({ ...question, yes: label(name) })
-					}
-				}
-				return shown.map((variant) => chapterShareWording(variant, answer))
+				const retired =
+					form === 'chapter-site' && name
+						? (retiredChapterSiteLabels[locale] ?? []).map((label) => label(name))
+						: []
+				return [question.yes, ...retired].map((yes) =>
+					chapterShareWording({ ...question, yes }, answer)
+				)
 			})
 		)
 	)

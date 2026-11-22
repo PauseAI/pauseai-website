@@ -15,17 +15,11 @@ interface ChapterShareMessages {
 	onboarding_chapter_heading: (chapter: string) => string
 	onboarding_chapter_body: (chapter: string) => string
 	onboarding_chapter_yes: (chapter: string) => string
-	// The label on the single checkbox shown instead of the chapter question
-	// and the separate Privacy Policy checkbox when the embed is detected on
-	// that same chapter's own site (chapterShare.ts, 'chapter-site'). Ticking it
-	// lets the chapter's organisers see the person's details; the Privacy Policy
-	// is linked under it (onboarding_chapter_site_alternative), not agreed to by
-	// the tick. When this label changes, add the old one to
-	// retiredChapterSiteLabels below.
+	// The chapter-site checkbox's label (chapterShare.ts, 'chapter-site'). When
+	// it changes, add the old one to retiredChapterSiteLabels below.
 	onboarding_chapter_site_label: (chapter: string) => string
-	// HTML, directly under that checkbox: the Privacy Policy link, and /subscribe
-	// as the alternative for someone who only wants the newsletter. Both open in
-	// a new tab, since the form is iframed on the chapter's site.
+	// HTML, under that checkbox. Its links open in a new tab, since the form is
+	// iframed on the chapter's site.
 	onboarding_chapter_site_alternative: string
 	// Shown under step 1's Continue when chapterSiteConsentField's checkbox is
 	// unchecked, in place of onboarding_chapter_answer_needed ("checkbox", not
