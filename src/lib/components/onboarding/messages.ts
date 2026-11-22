@@ -68,7 +68,7 @@ const chapterShareEn: ChapterShareMessages = {
 	onboarding_chapter_site_label: (chapter) =>
 		`Let ${chapter}'s organisers see my details and contact me about local events and campaigns`,
 	onboarding_chapter_site_alternative: `<a target="_blank" rel="noopener noreferrer" href="/privacy">Privacy Policy</a> · Only want PauseAI Global's newsletter? <a target="_blank" rel="noopener noreferrer" href="/subscribe">Subscribe instead</a>.`,
-	onboarding_chapter_site_consent_needed: 'Please provide consent to continue.',
+	onboarding_chapter_site_consent_needed: 'Tick the box above to continue.',
 	onboarding_chapter_subscribe_heading: (chapter) => `Hear from ${chapter} too?`,
 	onboarding_chapter_subscribe_yes: (chapter) =>
 		`Yes, share my details with ${chapter} so it can email me local news`,
@@ -122,7 +122,7 @@ const chapterShareDe: ChapterShareMessages = {
 		`Dem Orga-Team von ${chapter} erlauben, meine Daten zu sehen und mich zu lokalen Veranstaltungen und Kampagnen zu kontaktieren`,
 	onboarding_chapter_site_alternative:
 		'<a target="_blank" rel="noopener noreferrer" href="/privacy">Datenschutzrichtlinie</a> · Du möchtest nur den Newsletter von PauseAI Global? <a target="_blank" rel="noopener noreferrer" href="/subscribe">Stattdessen abonnieren</a>.',
-	onboarding_chapter_site_consent_needed: 'Bitte stimme zu, um fortzufahren.',
+	onboarding_chapter_site_consent_needed: 'Setze das Häkchen oben, um fortzufahren.',
 	onboarding_chapter_subscribe_heading: (chapter) => `Auch Nachrichten von ${chapter} erhalten?`,
 	onboarding_chapter_subscribe_yes: (chapter) =>
 		`Ja, meine Daten mit ${chapter} teilen, damit mir die Gruppe lokale Neuigkeiten per E-Mail schicken kann`,
@@ -176,7 +176,7 @@ const chapterShareFr: ChapterShareMessages = {
 	onboarding_chapter_site_label: (chapter) =>
 		`Permettre à l'équipe organisatrice de ${chapter} de voir mes données et de me contacter au sujet des événements et campagnes locaux`,
 	onboarding_chapter_site_alternative: `<a target="_blank" rel="noopener noreferrer" href="/privacy">Politique de confidentialité</a> · Tu veux seulement la newsletter de PauseAI Global ? <a target="_blank" rel="noopener noreferrer" href="/subscribe">Abonne-toi plutôt</a>.`,
-	onboarding_chapter_site_consent_needed: 'Merci de donner ton consentement pour continuer.',
+	onboarding_chapter_site_consent_needed: 'Coche la case ci-dessus pour continuer.',
 	onboarding_chapter_subscribe_heading: (chapter) => `Recevoir aussi des nouvelles de ${chapter} ?`,
 	onboarding_chapter_subscribe_yes: (chapter) =>
 		`Oui, partager mes données avec ${chapter} pour qu'il puisse m'envoyer des nouvelles locales par e-mail`,
@@ -231,7 +231,7 @@ const chapterShareEs: ChapterShareMessages = {
 		`Permitir que el equipo organizador de ${chapter} vea mis datos y me contacte sobre eventos y campañas locales`,
 	onboarding_chapter_site_alternative:
 		'<a target="_blank" rel="noopener noreferrer" href="/privacy">Política de privacidad</a> · ¿Solo quieres el boletín de PauseAI Global? <a target="_blank" rel="noopener noreferrer" href="/subscribe">Suscríbete en su lugar</a>.',
-	onboarding_chapter_site_consent_needed: 'Por favor, da tu consentimiento para continuar.',
+	onboarding_chapter_site_consent_needed: 'Marca la casilla de arriba para continuar.',
 	onboarding_chapter_subscribe_heading: (chapter) => `¿Recibir también noticias de ${chapter}?`,
 	onboarding_chapter_subscribe_yes: (chapter) =>
 		`Sí, compartir mis datos con ${chapter} para que pueda enviarme noticias locales por correo electrónico`,
