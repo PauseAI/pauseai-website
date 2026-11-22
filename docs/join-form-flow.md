@@ -548,7 +548,7 @@ visitor picked, `OnboardingFlow.svelte`'s `isChapterSiteQuestion` is true. The
 checkbox ("Let PauseAI UK's organisers see my details and contact me about
 local events and campaigns") is required, starts unticked, and has no heading
 or body. Ticking it means one thing: the chapter's organisers may see the
-person's details and contact them. The Privacy Policy is not agreed to by the tick; it is linked on the
+person's details and contact them about local events and campaigns. The Privacy Policy is not agreed to by the tick; it is linked on the
 line directly under the checkbox, "Privacy Policy · Only want PauseAI Global's
 newsletter? Subscribe instead.", whose two links open `/privacy` and
 `/subscribe` in a new tab, since the form is iframed on the chapter's site
