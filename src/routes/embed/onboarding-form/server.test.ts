@@ -37,7 +37,8 @@ const { TOKEN_TTL_SECONDS } = await import('$lib/server/onboardingContinuation')
 const { chapterQuestion, chapterShareWording } =
 	await import('$lib/components/onboarding/chapterShare')
 const { FORM_VERSION, signupSource } = await import('$lib/components/onboarding/options')
-const { onboardingMessages } = await import('$lib/components/onboarding/messages')
+const { onboardingMessages, retiredChapterSiteLabels } =
+	await import('$lib/components/onboarding/messages')
 
 // What Airtable answers a write with: the whole row, so an update returns more
 // than it sent.
@@ -74,7 +75,7 @@ async function submit(fields: Record<string, string>, platform?: unknown): Promi
 
 // The wording the form renders, built the way the form builds it.
 function wording(
-	form: 'join' | 'subscribe',
+	form: 'join' | 'subscribe' | 'chapter-site',
 	country: string,
 	chapter: string | null,
 	answer: 'yes' | 'no',
@@ -336,6 +337,36 @@ describe('onboarding submit: chapter sharing', () => {
 				posted.replace(/\r\n/g, '\n')
 			)
 		}
+	})
+
+	it("accepts the chapter-site checkbox's label, and its earlier one from a form loaded before it changed", async () => {
+		for (const locale of ['en', 'de', 'fr', 'es']) {
+			for (const posted of [
+				wording('chapter-site', 'United Kingdom', 'PauseAI UK', 'yes', locale),
+				`[chosen] ${retiredChapterSiteLabels[locale][0]('PauseAI UK')}`
+			]) {
+				const created = await submit({
+					...signup,
+					chapter_share: 'yes',
+					chapter_share_wording: posted
+				})
+				expect(created, posted).toMatchObject({ success: true })
+				const fields = writtenFields(createRecord)
+				expect(fields['GDPR chapter share wording']).toBe(posted)
+				expect(fields['GDPR chapter share permission']).toBe(true)
+				expect(fields['Data privacy policy agreed']).toBe(true)
+			}
+		}
+		expect(wording('chapter-site', 'United Kingdom', 'PauseAI UK', 'yes')).toBe(
+			"[chosen] Let PauseAI UK's organisers see my details, to coordinate local volunteering"
+		)
+		// The earlier label naming another chapter is still refused.
+		const refused = await submit({
+			...signup,
+			chapter_share: 'yes',
+			chapter_share_wording: '[chosen] Share my details with PauseAI Evil and PauseAI Global'
+		})
+		expect(refused.status).toBe(400)
 	})
 
 	it('checks a posted wording without the chapter list, so a form on an older list is not refused', async () => {

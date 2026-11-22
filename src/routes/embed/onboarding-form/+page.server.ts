@@ -269,8 +269,9 @@ export const actions: Actions = {
 			// Taken from the post on every call, updates included, so an update that
 			// omits keep_informed clears it. The forms repost it from state.
 			'Email subscription': keepInformed,
-			// Signing up is itself the privacy-policy consent: the /join checkbox
-			// and the /subscribe microcopy both link it.
+			// Signing up is itself the privacy-policy consent: the /join checkbox,
+			// the line under the chapter-site checkbox and the /subscribe microcopy
+			// all link it.
 			'Data privacy policy agreed': true
 		}
 		// Which form produced the row — provenance, so it's written once at create and

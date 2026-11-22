@@ -418,9 +418,10 @@
 				)
 			: null
 	)
-	// True while the chapter question doubles as the Privacy Policy consent too
-	// (the 'chapter-site' wording in chapterShare.ts): answering it on step 1
-	// covers both, so step 2 neither asks again nor shows the checkbox.
+	// True while the chapter question is the chapter-site checkbox (the
+	// 'chapter-site' wording in chapterShare.ts), which replaces the Privacy
+	// Policy checkbox with a link: ticking it on step 1 also sets agree_gdpr, so
+	// step 2 neither asks again nor shows the checkbox.
 	const isChapterSiteQuestion = $derived(!!chapterQ && chapterSiteCountry === basics.country)
 	const answerForCountry = $derived(
 		chapterChoice?.country === basics.country ? chapterChoice.answer : null
@@ -766,10 +767,11 @@
 {/snippet}
 
 <!-- On a chapter's own site, this single checkbox replaces both the chapter
-     question above and gdprConsentField below: it's the only consent gate,
-     covering Privacy Policy agreement and chapter sharing together (always
-     "yes" when checked — there's no partial opt-out here, see chapterShare.ts
-     'chapter-site'). Unchecked leaves chapterChoice unset, so the existing
+     question above and gdprConsentField below. Ticking it lets the chapter's
+     organisers see the person's details (always "yes", see chapterShare.ts
+     'chapter-site'); the Privacy Policy is the link under it, and it still
+     sets gdprConsent, which posts agree_gdpr as the record that the policy was
+     shown. Unchecked leaves chapterChoice unset, so the existing
      chapterAnswerMissing gating blocks Continue/Submit exactly as it already
      does for the regular chapter question. -->
 {#snippet chapterSiteConsentField()}
@@ -795,6 +797,8 @@
 			<input type="hidden" name="chapter_share" value={answerForCountry} />
 			<input type="hidden" name="chapter_share_wording" value={chapterWording} />
 		{/if}
+		<!-- eslint-disable-next-line svelte/no-at-html-tags -->
+		<p class="helper">{@html msgs.onboarding_chapter_site_alternative}</p>
 	{/if}
 {/snippet}
 

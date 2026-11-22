@@ -545,13 +545,21 @@ same chapter's own site: `/embed/onboarding-form/+page.svelte` matches
 `document.referrer`'s host against each national group's `website` field
 (`loadChapterSiteCountry`), and when that detected country is the one the
 visitor picked, `OnboardingFlow.svelte`'s `isChapterSiteQuestion` is true. The
-checkbox ("Share my details with PauseAI UK and PauseAI Global") has no
-heading or body — just itself — and covers both consents at once: checking it
-sets `gdprConsent` and the chapter answer (always `yes`) together, unchecking
-clears both. There is no "chapter only" option here, only both-or-neither, and
-`chapterShareWording` drops the (now empty) heading/body lines so the stored
+checkbox ("Let PauseAI UK's organisers see my details, to coordinate local
+volunteering") is required, starts unticked, and has no heading or body. Ticking
+it means one thing: the chapter's organisers may see the person's details. The
+Privacy Policy is not agreed to by the tick; it is linked on the line directly
+under the checkbox, "Privacy Policy · Only want PauseAI Global's newsletter?
+Subscribe instead.", whose two links open `/privacy` and `/subscribe` in a new
+tab, since the form is iframed on the chapter's site
+(`onboarding_chapter_site_alternative`). Checking it still sets `gdprConsent` and
+the chapter answer (always `yes`) together, unchecking clears both, so the post
+carries `agree_gdpr` as on any create, recording that the policy was shown and
+linked. `chapterShareWording` drops the (empty) heading/body lines so the stored
 evidence is just the checkbox's own text (`chapterShare.ts`, `'chapter-site'`
-form). Step 1's `chapterSiteConsentField` never actually posts — its form is
+form). When the label changes, the old one goes in `retiredChapterSiteLabels`
+(`messages.ts`), which the action keeps accepting, so a form loaded before the
+change still submits. Step 1's `chapterSiteConsentField` never actually posts — its form is
 intercepted client-side — so step 2 mirrors its answer into a hidden
 `agree_gdpr` input alongside the existing `chapter_share`/`chapter_share_wording`
 ones, and skips the normal Privacy Policy checkbox entirely in this mode.
@@ -649,7 +657,8 @@ an update is in "Create versus update" above.
   variant when `subscribe_form=1`, `/join`'s otherwise, in any locale, either
   naming the chapter as the forms do when their list has one for the country
   (`chapterName`, so "PauseAI <country>" or the `CHAPTER_DISPLAY_NAMES` entry)
-  or as the no-chapter variant. The chapter list is not consulted, so the action
+  or as the no-chapter variant. `/join`'s set includes the chapter-site
+  checkbox's wording, current and retired (`retiredChapterSiteLabels`). The chapter list is not consulted, so the action
   and a form holding different copies of it cannot disagree. For the United States any posted answer is
   ignored and both fields are cleared. See "Chapter sharing".
 - GDPR consent (`agree_gdpr`) required **only on the create path** — step-3
