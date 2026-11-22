@@ -64,13 +64,13 @@ describe('chapterQuestion', () => {
 		expect(question).toMatchObject({
 			heading: '',
 			body: '',
-			yes: "Let PauseAI Germany's organisers see my details, to coordinate local volunteering",
+			yes: "Let PauseAI Germany's organisers see my details and contact me about local events and campaigns",
 			no: 'No, only PauseAI Global'
 		})
 		// Its stored wording is just the checkbox's own text — no blank lines
 		// from the empty heading/body.
 		expect(chapterShareWording(question, 'yes')).toBe(
-			"[chosen] Let PauseAI Germany's organisers see my details, to coordinate local volunteering"
+			"[chosen] Let PauseAI Germany's organisers see my details and contact me about local events and campaigns"
 		)
 	})
 

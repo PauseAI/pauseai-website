@@ -545,10 +545,10 @@ same chapter's own site: `/embed/onboarding-form/+page.svelte` matches
 `document.referrer`'s host against each national group's `website` field
 (`loadChapterSiteCountry`), and when that detected country is the one the
 visitor picked, `OnboardingFlow.svelte`'s `isChapterSiteQuestion` is true. The
-checkbox ("Let PauseAI UK's organisers see my details, to coordinate local
-volunteering") is required, starts unticked, and has no heading or body.
-Ticking it means one thing: the chapter's organisers may see the person's
-details. The Privacy Policy is not agreed to by the tick; it is linked on the
+checkbox ("Let PauseAI UK's organisers see my details and contact me about
+local events and campaigns") is required, starts unticked, and has no heading
+or body. Ticking it means one thing: the chapter's organisers may see the
+person's details and contact them. The Privacy Policy is not agreed to by the tick; it is linked on the
 line directly under the checkbox, "Privacy Policy · Only want PauseAI Global's
 newsletter? Subscribe instead.", whose two links open `/privacy` and
 `/subscribe` in a new tab, since the form is iframed on the chapter's site

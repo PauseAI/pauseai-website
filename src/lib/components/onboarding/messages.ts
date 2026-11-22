@@ -66,7 +66,7 @@ const chapterShareEn: ChapterShareMessages = {
 		`If you say yes, we share your signup details with ${chapter}, which may be a separate organisation from PauseAI Global. You can change your mind at any time by emailing ${PRIVACY_EMAIL}.`,
 	onboarding_chapter_yes: (chapter) => `Yes, share my details with ${chapter}`,
 	onboarding_chapter_site_label: (chapter) =>
-		`Let ${chapter}'s organisers see my details, to coordinate local volunteering`,
+		`Let ${chapter}'s organisers see my details and contact me about local events and campaigns`,
 	onboarding_chapter_site_alternative: `<a target="_blank" rel="noopener noreferrer" href="/privacy">Privacy Policy</a> · Only want PauseAI Global's newsletter? <a target="_blank" rel="noopener noreferrer" href="/subscribe">Subscribe instead</a>.`,
 	onboarding_chapter_site_consent_needed: 'Please provide consent to continue.',
 	onboarding_chapter_subscribe_heading: (chapter) => `Hear from ${chapter} too?`,
@@ -119,7 +119,7 @@ const chapterShareDe: ChapterShareMessages = {
 		`Wenn du zustimmst, teilen wir deine Anmeldeangaben mit ${chapter}. Dabei kann es sich um eine von PauseAI Global getrennte Organisation handeln. Du kannst deine Meinung jederzeit ändern, indem du eine E-Mail an ${PRIVACY_EMAIL} schreibst.`,
 	onboarding_chapter_yes: (chapter) => `Ja, meine Daten mit ${chapter} teilen`,
 	onboarding_chapter_site_label: (chapter) =>
-		`Dem Orga-Team von ${chapter} erlauben, meine Daten zu sehen, um ehrenamtliches Engagement vor Ort zu koordinieren`,
+		`Dem Orga-Team von ${chapter} erlauben, meine Daten zu sehen und mich zu lokalen Veranstaltungen und Kampagnen zu kontaktieren`,
 	onboarding_chapter_site_alternative:
 		'<a target="_blank" rel="noopener noreferrer" href="/privacy">Datenschutzrichtlinie</a> · Du möchtest nur den Newsletter von PauseAI Global? <a target="_blank" rel="noopener noreferrer" href="/subscribe">Stattdessen abonnieren</a>.',
 	onboarding_chapter_site_consent_needed: 'Bitte stimme zu, um fortzufahren.',
@@ -174,7 +174,7 @@ const chapterShareFr: ChapterShareMessages = {
 		`Si tu réponds oui, nous partageons tes données d'inscription avec ${chapter}, qui peut être une organisation distincte de PauseAI Global. Tu peux changer d'avis à tout moment en écrivant à ${PRIVACY_EMAIL}.`,
 	onboarding_chapter_yes: (chapter) => `Oui, partager mes données avec ${chapter}`,
 	onboarding_chapter_site_label: (chapter) =>
-		`Permettre à l'équipe organisatrice de ${chapter} de voir mes données, pour coordonner le bénévolat local`,
+		`Permettre à l'équipe organisatrice de ${chapter} de voir mes données et de me contacter au sujet des événements et campagnes locaux`,
 	onboarding_chapter_site_alternative: `<a target="_blank" rel="noopener noreferrer" href="/privacy">Politique de confidentialité</a> · Tu veux seulement la newsletter de PauseAI Global ? <a target="_blank" rel="noopener noreferrer" href="/subscribe">Abonne-toi plutôt</a>.`,
 	onboarding_chapter_site_consent_needed: 'Merci de donner ton consentement pour continuer.',
 	onboarding_chapter_subscribe_heading: (chapter) => `Recevoir aussi des nouvelles de ${chapter} ?`,
@@ -228,7 +228,7 @@ const chapterShareEs: ChapterShareMessages = {
 		`Si dices que sí, compartimos tus datos de inscripción con ${chapter}, que puede ser una organización distinta de PauseAI Global. Puedes cambiar de opinión en cualquier momento escribiendo a ${PRIVACY_EMAIL}.`,
 	onboarding_chapter_yes: (chapter) => `Sí, compartir mis datos con ${chapter}`,
 	onboarding_chapter_site_label: (chapter) =>
-		`Permitir que el equipo organizador de ${chapter} vea mis datos, para coordinar el voluntariado local`,
+		`Permitir que el equipo organizador de ${chapter} vea mis datos y me contacte sobre eventos y campañas locales`,
 	onboarding_chapter_site_alternative:
 		'<a target="_blank" rel="noopener noreferrer" href="/privacy">Política de privacidad</a> · ¿Solo quieres el boletín de PauseAI Global? <a target="_blank" rel="noopener noreferrer" href="/subscribe">Suscríbete en su lugar</a>.',
 	onboarding_chapter_site_consent_needed: 'Por favor, da tu consentimiento para continuar.',

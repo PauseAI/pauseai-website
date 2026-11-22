@@ -358,7 +358,7 @@ describe('onboarding submit: chapter sharing', () => {
 			}
 		}
 		expect(wording('chapter-site', 'United Kingdom', 'PauseAI UK', 'yes')).toBe(
-			"[chosen] Let PauseAI UK's organisers see my details, to coordinate local volunteering"
+			"[chosen] Let PauseAI UK's organisers see my details and contact me about local events and campaigns"
 		)
 		// The earlier label naming another chapter is still refused.
 		const refused = await submit({
