@@ -758,6 +758,12 @@
 			<span class="checkbox-box" aria-hidden="true"></span>
 			<span>{chapterQ.yes}</span>
 		</label>
+		<!-- What the browse form posts, as ChapterShareQuestion does for the regular
+		     question; on step 1 the form never submits and step 2 mirrors them. -->
+		{#if answerForCountry}
+			<input type="hidden" name="chapter_share" value={answerForCountry} />
+			<input type="hidden" name="chapter_share_wording" value={chapterWording} />
+		{/if}
 	{/if}
 {/snippet}
 
