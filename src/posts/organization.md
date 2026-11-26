@@ -101,4 +101,4 @@ Find us on [Discord](https://discord.gg/2XXWXvErfA), [Twitter/X](https://twitter
 
 [Figma community template](https://www.figma.com/design/iQ4PHQTi1vAVmT9Lckazqt/PauseAI-designs---editable) for creating PauseAI materials. Brand color: **#FF9416**. Fonts: Saira Condensed (700), Montserrat Black, Roboto Slab (300, 700).
 
-[Media Google Drive folder](https://drive.google.com/drive/folders/1bQ_MZ8giK-Mee4ABkO0BgcFInaXruNpa?usp=sharing) for logos, flyers, and posters.
+[Media Google Drive folder](https://drive.google.com/drive/folders/1zpBbJ6WOEjqtuPJWC1eEXTsh7R6xJ118?usp=sharing) for logos, flyers, and posters.
