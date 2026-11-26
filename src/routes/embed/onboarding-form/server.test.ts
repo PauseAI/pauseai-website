@@ -15,7 +15,6 @@ const checkNotSpam = vi.fn(() => Promise.resolve({ drop: false }))
 vi.mock('$lib/server/turnstile-verify', () => ({ checkNotSpam }))
 const subscribeToSubstackNewsletter = vi.fn()
 vi.mock('$lib/server/substack', () => ({
-	SUBSTACK_TIMEOUT_MS: 5000,
 	subscribeToSubstackNewsletter
 }))
 const submitSignup = vi.fn<(...args: unknown[]) => Promise<string>>()
@@ -988,7 +987,12 @@ describe('onboarding submit: signups in CiviCRM alone (SIGNUP_BACKEND)', () => {
 		expect(createRecord).not.toHaveBeenCalled()
 	})
 
-	it('maps refusals to the outcomes the form knows', async () => {
+	it('maps refusals of a continuation to the outcomes the form knows', async () => {
+		const created = await submit(signup)
+		const continued = {
+			...update(String(created.recordToken)),
+			record_id: String(created.recordId)
+		}
 		const cases: [string, number, string | undefined][] = [
 			['chapter_answer_missing', 400, undefined],
 			['row_gone', 410, 'We could not find your earlier signup. Please go through the form again.'],
@@ -997,11 +1001,56 @@ describe('onboarding submit: signups in CiviCRM alone (SIGNUP_BACKEND)', () => {
 		]
 		for (const [outcome, status, message] of cases) {
 			submitSignup.mockResolvedValue(outcome)
-			const result = await submit(signup)
+			const result = await submit(continued)
 			expect(result.status).toBe(status)
 			if (message) expect(result.data?.message).toBe(message)
 			if (outcome === 'chapter_answer_missing') expect(result.data?.chapterAnswerMissing).toBe(true)
+			// A continuation's failure hands back no key: the form already holds its own.
+			expect(result.data).not.toHaveProperty('recordId')
 		}
+	})
+
+	it.each(['row_gone', 'session_expired'])(
+		"answers a create's %s as not saved, not as an earlier signup lost, with no key to reuse",
+		async (outcome) => {
+			submitSignup.mockResolvedValue(outcome)
+			const result = await submit(signup)
+			expect(result.status).toBe(502)
+			expect(result.data?.message).toBe(NOT_SAVED)
+			expect(result.data).not.toHaveProperty('recordId')
+		}
+	)
+
+	it("hands an unconfirmed create's key and token back, and its resend reuses them", async () => {
+		submitSignup.mockResolvedValue('not_saved')
+		const failed = await submit({ ...signup, newsletter: 'on' })
+		expect(failed.status).toBe(502)
+		const { record, token } = sent()
+		expect(failed.data?.recordId).toBe(record.id)
+		expect(failed.data?.recordToken).toBe(token)
+
+		// The form resends the same signup under them, marked as its signup (resumed).
+		submitSignup.mockReset().mockResolvedValue('saved')
+		const resent = await submit({
+			...signup,
+			newsletter: 'on',
+			record_id: String(failed.data?.recordId),
+			record_token: String(failed.data?.recordToken),
+			resumed: '1'
+		})
+		expect(resent).toMatchObject({ success: true, recordId: record.id })
+		expect(resent.recordToken).toMatch(/^v1\./)
+		const again = sent()
+		expect(again.record.id).toBe(record.id)
+		expect(again.token).toBe(token)
+		expect(again.record.fields).toMatchObject({
+			Email: 'ada@example.org',
+			'Form version': FORM_VERSION,
+			'Signup emails sent by': 'CiviCRM'
+		})
+		// Still the person's signup: the opt-in is honoured on the resend.
+		expect(subscribeToSubstackNewsletter).toHaveBeenCalledOnce()
+		expect(createRecord).not.toHaveBeenCalled()
 	})
 
 	it("answers 502 when CiviCRM could not confirm the write, and doesn't subscribe", async () => {

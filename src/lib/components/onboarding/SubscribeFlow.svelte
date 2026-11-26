@@ -145,6 +145,13 @@
 			cancel()
 			return
 		}
+		// A create CiviCRM did not confirm is resent under the key and token its 502 handed back,
+		// as this form's signup (resumed), so a create that landed after all is not made twice.
+		if (recordId) {
+			formData.set('record_id', recordId)
+			if (recordToken) formData.set('record_token', recordToken)
+			formData.set('resumed', '1')
+		}
 		submitting = true
 		saveError = ''
 		return ({ result }) => {
@@ -163,7 +170,18 @@
 				phase = 'thanks'
 			} else {
 				saveError =
-					result.type === 'failure' ? String(result.data?.message ?? ERROR_MESSAGE) : ERROR_MESSAGE
+					result.type === 'failure' ? String(result.data?.message || ERROR_MESSAGE) : ERROR_MESSAGE
+				if (result.type === 'failure') {
+					const kept = result.data?.recordId
+					const keptToken = result.data?.recordToken
+					if (result.status === 410) {
+						recordId = ''
+						recordToken = ''
+					} else if (!recordId && typeof kept === 'string' && typeof keptToken === 'string') {
+						recordId = kept
+						recordToken = keptToken
+					}
+				}
 				toast.error(saveError)
 			}
 		}

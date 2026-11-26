@@ -80,8 +80,8 @@ const ACTION_DEADLINE_MS = 25_000
 // post creates a row.
 const rowGone = (message: string) => fail(410, { message })
 const ROW_MISSING = 'We could not find your earlier signup. Please go through the form again.'
-// CiviCRM, the only copy of a signup key's signup, did not confirm the write: a create the person
-// sends again is a new signup (new key, fresh Turnstile), a continuation keeps its key and token.
+// CiviCRM, the only copy of a signup key's signup, did not confirm the write. The form sends it
+// again under the same key and token, a create's included (they come back with its 502).
 const NOT_SAVED = "We couldn't confirm your signup was saved. Please try again."
 const SESSION_EXPIRED = 'Your signup session has expired. Please fill in the form again.'
 // Every CiviCRM signup carries a continuation token, so without the secret none can be written.
@@ -432,12 +432,22 @@ export const actions: Actions = {
 			switch (await submitSignup(record, token, deadline, platform)) {
 				case 'chapter_answer_missing':
 					return chapterAnswerMissing()
+				// A create has no earlier signup to have lost or to have run out: a refusal of its
+				// fresh key and token is a fault, and the person's next try mints new ones.
 				case 'session_expired':
-					return rowGone(SESSION_EXPIRED)
+					return existingRecordId ? rowGone(SESSION_EXPIRED) : fail(502, { message: NOT_SAVED })
 				case 'row_gone':
-					return rowGone(ROW_MISSING)
+					return existingRecordId ? rowGone(ROW_MISSING) : fail(502, { message: NOT_SAVED })
+				// An unconfirmed create may still have landed (a slow CRM writes after the abort), so
+				// its key and token go back with the 502: the form resends the create under them,
+				// which CiviCRM completes or repeats, instead of minting a second contact.
 				case 'not_saved':
-					return fail(502, { message: NOT_SAVED })
+					return fail(
+						502,
+						existingRecordId
+							? { message: NOT_SAVED }
+							: { message: NOT_SAVED, recordId: key, recordToken: token }
+					)
 			}
 			if (newsletter && isSignup) {
 				await afterResponse(platform, subscribeToSubstackNewsletter(email))

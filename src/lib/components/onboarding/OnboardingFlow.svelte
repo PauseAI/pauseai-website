@@ -198,6 +198,10 @@
 	// From picking the id up out of sessionStorage until a post succeeds. The
 	// server (resumed=1) then treats the post as this form's signup.
 	let resumed = false
+	// Set when a create's 502 handed back the key and token of a signup CiviCRM did not confirm,
+	// which may still have landed: the next post resends it under them (resumed, so it stays
+	// this form's signup) and counts as the create when it succeeds.
+	let unconfirmedCreate = false
 	// Never pre-checked on /join: marketing consent must be freely given, for
 	// Volunteers/Leads too (operational volunteer comms ride legitimate interest).
 	// It is the only chapter mail permission: the chapter answer below is not one.
@@ -507,6 +511,7 @@
 		pickedUpFor = null
 		rowIntent = null
 		resumed = false
+		unconfirmedCreate = false
 		rowChapterAnswer = null
 	}
 
@@ -576,7 +581,8 @@
 					if (typeof result.data?.recordId === 'string') {
 						// A spam drop also reports success but carries no recordId, so
 						// this only fires on a real create.
-						const created = !recordId
+						const created = !recordId || unconfirmedCreate
+						unconfirmedCreate = false
 						if (created) onSignup?.()
 						recordId = result.data.recordId
 						// An update that didn't prove itself gets no token back; the one
@@ -601,7 +607,20 @@
 						const next = afterChapterAnswerMissing(mode, isContinuation)
 						if (next !== 'stay') step = next === 'step-1' ? 1 : 2
 					}
-					saveError = String(result.data?.message ?? msgs.onboarding_error_generic)
+					saveError = String(result.data?.message || msgs.onboarding_error_generic)
+					const kept = result.data?.recordId
+					const keptToken = result.data?.recordToken
+					if (
+						result.status !== 410 &&
+						!recordId &&
+						typeof kept === 'string' &&
+						typeof keptToken === 'string'
+					) {
+						recordId = kept
+						recordToken = keptToken
+						resumed = true
+						unconfirmedCreate = true
+					}
 					if (result.status === 410) {
 						forgetSignup()
 						dropRecord()
