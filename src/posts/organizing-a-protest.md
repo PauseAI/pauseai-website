@@ -96,7 +96,7 @@ Keep them informed of the protest, make them part of the process.
 
 ### Design and print signs / flyers / banners / props
 
-Use our [Figma design template](https://www.figma.com/design/iQ4PHQTi1vAVmT9Lckazqt/PauseAI-designs---editable) or check the [media folder](https://drive.google.com/drive/folders/1zpBbJ6WOEjqtuPJWC1eEXTsh7R6xJ118?usp=sharing) to make your own flyers / banners / posters.
+Make your own flyers / banners / posters with our [materials maker](/tools/materials) or our [Figma design template](https://www.figma.com/design/iQ4PHQTi1vAVmT9Lckazqt/PauseAI-designs---editable), and find photos in our [image Drive folder](https://drive.google.com/drive/folders/1zpBbJ6WOEjqtuPJWC1eEXTsh7R6xJ118?usp=sharing).
 We have a <a href="/PauseAI_flyer.pdf" target="_blank">flyer</a> that you can [print out and hand out to people](/flyering).
 Also check out the [Discord thread](https://discord.com/channels/1100491867675709580/1138484822117974191) where we discuss protest materials.
 We can reimburse printing costs, so keep the receipts!
