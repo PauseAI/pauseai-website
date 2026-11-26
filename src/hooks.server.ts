@@ -18,7 +18,7 @@ if (
 import { type Handle, type HandleServerError } from '@sveltejs/kit'
 import { env } from '$env/dynamic/public'
 import { paraglideMiddleware } from '$lib/paraglide/server.js'
-import { SENTRY_RELEASE, redactLinkCredentials } from '$lib/sentry'
+import { SENTRY_ENVIRONMENT, SENTRY_RELEASE, redactLinkCredentials } from '$lib/sentry'
 
 let Sentry: typeof import('@sentry/deno') | undefined
 
@@ -33,6 +33,7 @@ export const init = async () => {
 			Sentry.init({
 				dsn,
 				release,
+				environment: SENTRY_ENVIRONMENT,
 				tracesSampleRate: 0,
 				enableLogs: true
 			})

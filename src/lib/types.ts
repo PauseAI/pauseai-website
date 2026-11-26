@@ -132,27 +132,6 @@ export type NationalGroup = {
 	public: boolean
 } & Record<NationalGroupLink, string | undefined>
 
-export type AirtableNationalGroup = {
-	country?: string
-	leaders_name?: string[]
-	discord_username?: string[]
-	website_email?: string
-	x?: string
-	bluesky?: string
-	discord?: string
-	whatsapp?: string
-	website?: string
-	linktree?: string
-	instagram?: string
-	tiktok?: string
-	facebook?: string
-	youtube?: string
-	linkedin?: string
-	luma?: string
-	substack?: string
-	image?: { url: string }[]
-}
-
 export type NationalGroupLink =
 	| 'xLink'
 	| 'blueskyLink'

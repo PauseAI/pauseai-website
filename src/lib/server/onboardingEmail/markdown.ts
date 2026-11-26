@@ -44,9 +44,9 @@ export function mdLineToHtml(text: string, linkColor?: string): string {
 	// Anchors are parked while the emphasis passes run: a chapter's URL is free text and one
 	// containing `*` would otherwise have a <strong> or <em> written into its href.
 	const parked = escapeHtml(text).replace(LINK_PATTERN, (match, label: string, url: string) => {
-		// Chapter links come from a free-text Airtable field and are spliced into this copy, so
-		// a value can arrive carrying its own markdown. Anything that is not a plain web or mail
-		// link is left as text rather than written into an href.
+		// Chapter links come from a free-text field in the CRM's chapter list and are spliced into
+		// this copy, so a value can arrive carrying its own markdown. Anything that is not a plain
+		// web or mail link is left as text rather than written into an href.
 		if (!/^(https?:|mailto:)/i.test(url)) return match
 		const style = linkColor ? ` style="color: ${linkColor}; text-decoration: underline;"` : ''
 		anchors.push(`<a href="${url}"${style}>${label}</a>`)

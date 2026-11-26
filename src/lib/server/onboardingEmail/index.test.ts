@@ -1,7 +1,7 @@
 import { describe, expect, it, vi } from 'vitest'
 import type { ChapterBlockData, OnboardingEmailParams } from './types.js'
 
-// Stands in for the live National Groups table: one chapter with links, one without.
+// Stands in for the live chapter list: one chapter with links, one without.
 const CHAPTERS: Record<string, ChapterBlockData> = {
 	netherlands: {
 		name: 'Netherlands',
@@ -200,9 +200,9 @@ describe('renderOnboardingEmail', () => {
 
 	it('keeps a two-line list item on two lines, without bold markers in the text', async () => {
 		const email = await render('United Kingdom', 'Volunteer')
-		expect(email.html).toContain('<br><a href="https://luma.com/pauseai-nov26?tk=UEvEYj"')
+		expect(email.html).toContain('<br><a href="https://luma.com/pauseai-april-27"')
 		expect(email.text).toContain(
-			'1. Saturday 21st November: March Against AI Extinction. We are putting on'
+			'1. Saturday 10th April: March Against AI Extinction 2027. AI companies are racing'
 		)
 		expect(email.text).toContain('\nJoseph Miller\nDirector of PauseAI UK')
 	})

@@ -14,6 +14,7 @@
 	import Bluesky from '$lib/components/icons/bluesky.svelte'
 	import { onMount } from 'svelte'
 	import { fetchNationalGroups } from '$lib/nationalGroups'
+	import { DEFAULT_CHAPTER_IMAGE, useDefaultChapterImage } from '$lib/chapterImage'
 	import type { NationalGroup } from '$lib/types'
 	import { SvelteSet } from 'svelte/reactivity'
 
@@ -95,7 +96,7 @@
 			{@const group = nationalGroups.find(
 				(g) => g.name.toLowerCase() === nationality.toLowerCase()
 			)}
-			{@const imageUrl = group?.image || '/images/default.png'}
+			{@const imageUrl = group?.image || DEFAULT_CHAPTER_IMAGE}
 			{@const nationalChapter = nationalChapters.find((c) => c.name === nationality)}
 			<div class="country-card">
 				<button
@@ -127,7 +128,12 @@
 					</div>
 
 					<div class="image-name-wrapper">
-						<img src={imageUrl} alt={nationality} class="country-image" />
+						<img
+							src={imageUrl}
+							alt={nationality}
+							class="country-image"
+							onerror={useDefaultChapterImage}
+						/>
 						<span class="country-name">
 							{nationalChapter?.country_local || nationality}
 						</span>

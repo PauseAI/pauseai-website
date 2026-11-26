@@ -1,5 +1,5 @@
 // Signups that live in CiviCRM alone: PauseaiMemberIntake.submit and verify for a signup key,
-// called with the intake API account's key (crmIntake.ts). The contract is pauseai-civicrm's
+// called with the website API account's key (crmIntake.ts). The contract is pauseai-civicrm's
 // docs/intake-endpoint-plan.md, "Signup keys".
 //
 // Unlike a Members row's report (crmIntake.ts), nothing else keeps a copy of such a signup, so
@@ -13,8 +13,6 @@ import {
 	afterResponse,
 	callCrm,
 	failureDetails,
-	isPlainServerError,
-	isTransient,
 	reportCrmProblem,
 	verifyLinkInCrm,
 	wait,
@@ -48,6 +46,24 @@ export function mintSignupKey(): string {
 	}
 	return key
 }
+
+/**
+ * A failure a retry is likely to get past: a network error, a timeout, a 502, 503 or 504, or
+ * Cloudflare's 52x for an origin it could not reach. Narrower than callCrmUntil's (crmIntake.ts),
+ * since this schedule retries up to four times.
+ */
+const isTransient = ({ cause, httpStatus = 0 }: CrmFailure) =>
+	cause === 'network' ||
+	cause === 'timeout' ||
+	(cause === 'http' &&
+		([502, 503, 504].includes(httpStatus) || (httpStatus >= 520 && httpStatus <= 529)))
+
+/**
+ * A plain 500, worth one retry at most: CiviCRM answers every exception it throws with it, a
+ * permanent configuration fault as much as a passing database error.
+ */
+const isPlainServerError = ({ cause, httpStatus }: CrmFailure) =>
+	cause === 'http' && httpStatus === 500
 
 // Above CiviCRM's wait for a key's lock (5 s, MemberIntake::LOCK_WAIT_SECONDS) plus a normal
 // answer (about 2 s), so a call queued behind a running one is not cut off; short enough that an

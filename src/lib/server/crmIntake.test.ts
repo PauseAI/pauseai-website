@@ -28,8 +28,8 @@ const answerRow = (row: Record<string, unknown>) => answer({ values: [row] })
 beforeEach(() => {
 	for (const key of Object.keys(env)) delete env[key]
 	env.CRM_INTAKE_ENABLED = 'true'
-	env.CRM_INTAKE_URL = 'https://crm.example.org/'
-	env.CRM_INTAKE_KEY = KEY
+	env.CRM_URL = 'https://crm.example.org/'
+	env.CRM_KEY = KEY
 	fetchMock.mockReset()
 	answerRow({ status: 'ok', contact_id: 7 })
 	vi.stubGlobal('fetch', fetchMock)
@@ -140,13 +140,104 @@ describe('submitToCrm', () => {
 	})
 
 	it('does not call without a URL or key', async () => {
-		for (const missing of ['CRM_INTAKE_URL', 'CRM_INTAKE_KEY']) {
+		for (const missing of ['CRM_URL', 'CRM_KEY']) {
 			const saved = env[missing]
 			delete env[missing]
 			expect(await submitToCrm(RECORD, '')).toEqual({ outcome: 'error', cause: 'not_configured' })
 			env[missing] = saved
 		}
 		expect(fetchMock).not.toHaveBeenCalled()
+	})
+})
+
+describe('Cloudflare Access service token', () => {
+	const ID = 'test-client-id.access'
+	const SECRET = 'test-client-secret-not-real'
+	const sentHeaders = () => fetchMock.mock.calls[0][1]?.headers as Record<string, string>
+	const cfHeaderNames = () => Object.keys(sentHeaders()).filter((name) => name.startsWith('CF-'))
+
+	beforeEach(() => {
+		env.CRM_URL = 'https://crm.pauseai.info/'
+		env.CF_ACCESS_CLIENT_ID = ID
+		env.CF_ACCESS_CLIENT_SECRET = SECRET
+	})
+
+	it('sends both headers to the production CRM when both are set, with redirects off', async () => {
+		expect(await submitToCrm(RECORD, '')).toEqual({ outcome: 'ok' })
+		expect(sentHeaders()).toMatchObject({
+			'X-Civi-Auth': `Bearer ${KEY}`,
+			'CF-Access-Client-Id': ID,
+			'CF-Access-Client-Secret': SECRET
+		})
+		expect(fetchMock.mock.calls[0][1]?.redirect).toBe('manual')
+	})
+
+	it.each(['CF_ACCESS_CLIENT_ID', 'CF_ACCESS_CLIENT_SECRET'])(
+		'sends neither header when %s is unset',
+		async (missing) => {
+			delete env[missing]
+			await submitToCrm(RECORD, '')
+			expect(cfHeaderNames()).toEqual([])
+		}
+	)
+
+	it('sends neither header to another origin', async () => {
+		for (const url of [
+			'https://crm.example.org',
+			'http://crm.pauseai.info',
+			'https://crm.pauseai.info:8443',
+			'https://crm.pauseai.info.example.org'
+		]) {
+			fetchMock.mockClear()
+			env.CRM_URL = url
+			await submitToCrm(RECORD, '')
+			expect(cfHeaderNames()).toEqual([])
+		}
+	})
+
+	it('sends both headers when CRM_URL names the production CRM with :443 or in capitals', async () => {
+		for (const url of ['https://crm.pauseai.info:443', 'https://CRM.pauseai.info/']) {
+			fetchMock.mockClear()
+			env.CRM_URL = url
+			await submitToCrm(RECORD, '')
+			expect(cfHeaderNames()).toEqual(['CF-Access-Client-Id', 'CF-Access-Client-Secret'])
+		}
+	})
+
+	it('reports a fetch error that quotes a malformed header by its name only', async () => {
+		const leaked = 'leaked-value'
+		env.CF_ACCESS_CLIENT_SECRET = `${leaked}\nX-Injected: 1`
+		fetchMock.mockImplementation((_url, init) =>
+			Promise.reject(
+				new TypeError(
+					`Headers.append: "${(init?.headers as Record<string, string>)['CF-Access-Client-Secret']}" is an invalid header value`
+				)
+			)
+		)
+		const warn = vi.spyOn(console, 'warn').mockImplementation(() => {})
+		expect(await reportToCrm(RECORD, TOKEN)).toBe('error')
+		const reported = JSON.stringify([reportError.mock.calls, warn.mock.calls])
+		expect(reported).toContain('TypeError')
+		expect(reported).not.toContain(leaked)
+	})
+
+	it('treats a redirect as an error and reports no credential', async () => {
+		for (const status of [301, 302, 307]) {
+			fetchMock.mockResolvedValueOnce(
+				new Response(null, { status, headers: { Location: 'https://elsewhere.example.org/' } })
+			)
+			expect(await submitToCrm(RECORD, '')).toEqual({
+				outcome: 'error',
+				cause: 'redirect',
+				httpStatus: status
+			})
+		}
+		const warn = vi.spyOn(console, 'warn').mockImplementation(() => {})
+		fetchMock.mockResolvedValueOnce(new Response(null, { status: 302 }))
+		expect(await reportToCrm(RECORD, TOKEN)).toBe('error')
+		const reported = JSON.stringify([reportError.mock.calls, warn.mock.calls])
+		expect(reported).toContain('redirect')
+		for (const secret of [KEY, ID, SECRET]) expect(reported).not.toContain(secret)
 	})
 })
 

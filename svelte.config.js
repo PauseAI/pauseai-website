@@ -65,6 +65,10 @@ const config = {
 		},
 		experimental: {
 			remoteFunctions: true
+		},
+		version: {
+			// Lets `updated` notice a deploy while a tab stays open, see the root layout.
+			pollInterval: 5 * 60 * 1000
 		}
 	}
 }

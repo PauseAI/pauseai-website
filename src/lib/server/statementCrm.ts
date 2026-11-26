@@ -1,20 +1,17 @@
 // Statement signatures in CiviCRM: PauseaiStatement.sign, verify and publicList, called with
-// the intake API account's key (crmIntake.ts). The contract is pauseai-civicrm's
+// the website API account's key (crmIntake.ts). The contract is pauseai-civicrm's
 // docs/intake-endpoint-plan.md, "Statement signatures".
 //
 // Emails and other submitted values must never reach a log or a report.
 import { env } from '$env/dynamic/private'
 import type { Signatory } from '$lib/types'
 import {
-	TIMEOUT_MS,
 	afterResponse,
 	callCrm,
+	callCrmUntil,
 	failureDetails,
-	isPlainServerError,
-	isTransient,
 	reportCrmProblem,
 	verifyLinkInCrm,
-	wait,
 	type CrmVerifyResult
 } from '$lib/server/crmIntake'
 import { COUNTRY_BY_ISO_CODE } from '$lib/server/countryCodes'
@@ -30,13 +27,6 @@ export const statementBackend = (): StatementBackend =>
 
 /** The wording people sign, stored with each signature as its consent record. */
 export const STATEMENT_VERSION = '2023-statement-v1'
-
-// Only a failure that may be transient is retried, once, and the retry carries the same
-// submission_id, so CiviCRM keeps one signature even when an attempt that timed out had
-// written it. The retry runs only if the signing deadline leaves it SIGN_MIN_ATTEMPT_MS,
-// about the slowest the CRM normally answers (crmIntake.ts).
-export const SIGN_RETRY_DELAY_MS = 1000
-export const SIGN_MIN_ATTEMPT_MS = 6000
 
 const ISO_CODE_BY_COUNTRY = new Map(
 	Object.entries(COUNTRY_BY_ISO_CODE).map(([code, country]) => [country, code])
@@ -98,33 +88,23 @@ export async function signInCrm(
 		return result
 	}
 
-	for (let attempt = 1; ; attempt++) {
-		const remaining = deadline - Date.now()
-		// A retry needs a useful slice of the request's time; past the deadline nothing is sent.
-		if (remaining <= 0 || (attempt > 1 && remaining < SIGN_MIN_ATTEMPT_MS)) {
-			return finish('failed', report('sign', 'error', { cause: 'deadline', attempt }, 'error'))
-		}
-		const answer = await callCrm('PauseaiStatement/sign', params, Math.min(TIMEOUT_MS, remaining))
-		if (answer.ok) {
-			if (answer.row.status === 'ok') return 'ok'
-			if (answer.row.status === 'refused') {
-				const outcome = `refused:${String(answer.row.reason)}`
-				return finish('refused', report('sign', outcome, {}, 'warning'))
-			}
-			const details = { cause: 'http', httpStatus: 200, attempt }
-			return finish('failed', report('sign', 'error', details, 'error'))
-		}
-		const retry =
-			attempt === 1 &&
-			(isTransient(answer) || isPlainServerError(answer)) &&
-			deadline - Date.now() - SIGN_RETRY_DELAY_MS >= SIGN_MIN_ATTEMPT_MS
-		if (!retry) {
-			const details = { ...failureDetails(answer), attempt }
-			return finish('failed', report('sign', 'error', details, 'error'))
-		}
-		console.warn('[crm-statement] sign failed, retrying', { ...failureDetails(answer), attempt })
-		await wait(SIGN_RETRY_DELAY_MS)
+	// The retry carries the same submission_id, so CiviCRM keeps one signature even when an
+	// attempt that timed out had written it.
+	const { answer, attempt } = await callCrmUntil('PauseaiStatement/sign', params, {
+		deadline,
+		check: 'crm-statement'
+	})
+	if (!answer.ok) {
+		const details = { ...failureDetails(answer), attempt }
+		return finish('failed', report('sign', 'error', details, 'error'))
 	}
+	if (answer.row.status === 'ok') return 'ok'
+	if (answer.row.status === 'refused') {
+		const outcome = `refused:${String(answer.row.reason)}`
+		return finish('refused', report('sign', outcome, {}, 'warning'))
+	}
+	const details = { cause: 'http', httpStatus: 200, attempt }
+	return finish('failed', report('sign', 'error', details, 'error'))
 }
 
 /** Checks a statement link's key and token, which CiviCRM judges alone. Never rejects. */

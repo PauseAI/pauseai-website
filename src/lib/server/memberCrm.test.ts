@@ -29,8 +29,8 @@ const sentParams = (call: number): unknown =>
 
 beforeEach(() => {
 	for (const key of Object.keys(env)) delete env[key]
-	env.CRM_INTAKE_URL = 'https://crm.example.org'
-	env.CRM_INTAKE_KEY = 'test-key-not-real'
+	env.CRM_URL = 'https://crm.example.org'
+	env.CRM_KEY = 'test-key-not-real'
 	fetchMock.mockReset()
 	vi.stubGlobal('fetch', fetchMock)
 	reportError.mockReset().mockResolvedValue()
@@ -334,7 +334,7 @@ describe('submitSignup', () => {
 		fetchMock.mockImplementation(() => respond({}, 400))
 		expect(await submit()).toBe('not_saved')
 		expect(fetchMock).toHaveBeenCalledOnce()
-		delete env.CRM_INTAKE_KEY
+		delete env.CRM_KEY
 		fetchMock.mockClear()
 		expect(await submit()).toBe('not_saved')
 		expect(fetchMock).not.toHaveBeenCalled()

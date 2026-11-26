@@ -1,9 +1,10 @@
 export const prerender = false
 
 import { env } from '$env/dynamic/private'
+import { platformWaitUntil } from '$lib/server/onboardingEmail/chapter.js'
 import { renderOnboardingEmailV2 } from '$lib/server/onboardingEmail/index.js'
 import { CONTRACT_VERSION, parseV2Request } from '$lib/server/onboardingEmail/v2Request.js'
-import { reportError } from '$lib/server/sentry'
+import { flushReports, reportError } from '$lib/server/sentry'
 import { json } from '@sveltejs/kit'
 import { StatusCodes } from 'http-status-codes'
 import type { RequestHandler } from './$types'
@@ -36,7 +37,15 @@ async function authorized(header: string, secret: string): Promise<boolean> {
 	return difference === 0
 }
 
-export const POST: RequestHandler = async ({ request }) => {
+/** These refusals return a response, so no error hook sends their reports. */
+async function sendReports(platform: App.Platform | undefined): Promise<void> {
+	const sent = flushReports()
+	const waitUntil = platformWaitUntil(platform)
+	if (waitUntil) waitUntil(sent)
+	else await sent
+}
+
+export const POST: RequestHandler = async ({ request, platform }) => {
 	const secret = env.ONBOARDING_EMAIL_RENDER_V2_SECRET
 	if (!secret || !(await authorized(request.headers.get('authorization') ?? '', secret))) {
 		return error(StatusCodes.UNAUTHORIZED, 'unauthorized', 'Missing or wrong bearer secret')
@@ -58,6 +67,7 @@ export const POST: RequestHandler = async ({ request }) => {
 		await reportError(new Error('EMAIL_VERIFICATION_SECRET is not set'), {
 			route: 'onboarding-email/v2'
 		})
+		await sendReports(platform)
 		return error(
 			StatusCodes.SERVICE_UNAVAILABLE,
 			'verification_unavailable',
@@ -67,10 +77,14 @@ export const POST: RequestHandler = async ({ request }) => {
 
 	let rendered
 	try {
-		rendered = await renderOnboardingEmailV2(parsed.params, verificationSecret)
+		rendered = await renderOnboardingEmailV2(
+			{ ...parsed.params, waitUntil: platformWaitUntil(platform) },
+			verificationSecret
+		)
 	} catch (cause) {
 		console.error('Failed to render onboarding email (v2):', cause)
 		await reportError(cause, { route: 'onboarding-email/v2' })
+		await sendReports(platform)
 		return error(StatusCodes.INTERNAL_SERVER_ERROR, 'render_failed', 'Rendering failed')
 	}
 

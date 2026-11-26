@@ -10,6 +10,7 @@ import { dev } from '$app/environment'
 import { env } from '$env/dynamic/private'
 import { airtableFormulaString, createRecord, hasMatchingRecord } from '$lib/airtable'
 import { COUNTRIES } from '$lib/components/onboarding/options'
+import { CRM_REQUEST_DEADLINE_MS } from '$lib/server/crmIntake'
 import { normaliseEmail } from '$lib/server/emailVerification'
 import { MEMBERS_BASE_ID, STATEMENT_TABLE_ID } from '$lib/server/members'
 import {
@@ -43,11 +44,6 @@ const SAVE_LIMIT = { saves: 30, windowMs: 10 * 60 * 1000 }
 // Protects the backend: with Airtable, each of these makes up to two calls, against 5 a
 // second per base.
 const OVERALL_LIMIT = { attempts: 120, windowMs: 60 * 1000 }
-
-// The signing routes run as Netlify Edge Functions, which must answer within 40 s, and
-// CiviCRM may already hold a signature whose request then got no answer. Turnstile's
-// check (TURNSTILE_TIMEOUT_MS) and the CRM's attempts (signInCrm) fit inside this.
-const SIGN_DEADLINE_MS = 20_000
 
 // A repeat within this long writes nothing and sends no email. It is also the most email
 // someone else can cause one address to receive, and how long a signer who lost the first
@@ -276,7 +272,7 @@ export async function signStatement(
 	input: SignatureInput,
 	context: SignContext
 ): Promise<SignResult> {
-	const deadline = Date.now() + SIGN_DEADLINE_MS
+	const deadline = Date.now() + CRM_REQUEST_DEADLINE_MS
 	const mode = signingMode(context.hostname)
 	if (mode === 'off') {
 		console.error('[statement] STATEMENT_SIGNING_LIVE is not set: refusing a signature')

@@ -13,6 +13,7 @@ import {
 	verifyVerificationToken
 } from '$lib/server/emailVerification'
 import { MEMBERS_BASE_ID, MEMBERS_TABLE_ID, STATEMENT_TABLE_ID } from '$lib/server/members'
+import { memberLinkBackend, verifyMemberLinkInCrm } from '$lib/server/memberLinkCrm'
 import { memberRowToVerify } from '$lib/server/mergedMemberRow'
 import { reportError } from '$lib/server/sentry'
 import { statementBackend, verifyStatementInCrm } from '$lib/server/statementCrm'
@@ -64,20 +65,22 @@ const CRM_STATEMENT_KEY = /^s\d+$/
 const verifiesInCrm = (key: string, token: string) =>
 	(CRM_STATEMENT_KEY.test(key) && token !== '') || statementBackend() === 'civicrm'
 
-async function verifyInCrm(
-	verify: (key: string, token: string) => Promise<CrmVerifyResult>,
-	key: string,
-	token: string
-): Promise<Response> {
-	switch (await verify(key, token)) {
+const linkNotValid = () =>
+	new Response('This verification link is not valid', { status: StatusCodes.NOT_FOUND })
+
+// The key in the Members links mailed before signups moved to CiviCRM: the record id without
+// its "rec".
+const RECORD_ID_KEY = /^[A-Za-z0-9]{14}$/
+
+/** The answer to a link CiviCRM judged; `refused` is the answer to its `invalid`. */
+function crmVerifyResponse(result: CrmVerifyResult, refused: () => Response): Response {
+	switch (result) {
 		case 'ok':
 			return new Response('OK', { status: StatusCodes.OK })
 		case 'expired':
 			return linkExpired()
 		case 'invalid':
-			return new Response('This verification link is not valid', {
-				status: StatusCodes.NOT_FOUND
-			})
+			return refused()
 		case 'failed':
 			return new Response('Verification is unavailable right now. Please try again later.', {
 				status: StatusCodes.BAD_GATEWAY
@@ -123,9 +126,18 @@ export const POST: RequestHandler = async ({ request }) => {
 	// Set only for a Members link, which must carry a token this secret can check.
 	let memberSecret: string | undefined
 	if (tableConfig.isMembers && isSignupKey(key)) {
-		// A signup key's contact lives in CiviCRM alone, which judges the link against its address.
+		// A signup key's contact lives in CiviCRM alone, whatever MEMBER_LINK_BACKEND says. As for
+		// a record-id link, a refusal most often means the link went to an address the contact no
+		// longer has, which the expired page explains.
 		if (!token) return linkExpired()
-		return verifyInCrm(verifySignupInCrm, key, token)
+		return crmVerifyResponse(await verifySignupInCrm(key, token), linkExpired)
+	}
+	if (tableConfig.isMembers && memberLinkBackend() === 'civicrm') {
+		if (!token) return linkExpired()
+		if (!RECORD_ID_KEY.test(key)) return linkNotValid()
+		// A refused member link most often went to an address the contact no longer has, which
+		// the expired page explains.
+		return crmVerifyResponse(await verifyMemberLinkInCrm(key, token), linkExpired)
 	}
 	if (tableConfig.isMembers) {
 		memberSecret = getVerificationSecret()
@@ -137,7 +149,7 @@ export const POST: RequestHandler = async ({ request }) => {
 			return linkExpired()
 		}
 	} else if (verifiesInCrm(key, token)) {
-		return verifyInCrm(verifyStatementInCrm, key, token)
+		return crmVerifyResponse(await verifyStatementInCrm(key, token), linkNotValid)
 	}
 
 	const table = new Airtable({ apiKey: AIRTABLE_WRITE_API_KEY })

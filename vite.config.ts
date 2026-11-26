@@ -10,7 +10,7 @@ import lucidePreprocess from 'vite-plugin-lucide-preprocess'
 import { sentryVitePlugin } from '@sentry/vite-plugin'
 import { imagetools } from 'vite-imagetools'
 import { imageFormats, imageWidths, metaImageWidth, imageQuality } from './src/lib/image-config'
-import { isDev } from './src/lib/env'
+import { isDev, sentryEnvironment } from './src/lib/env'
 import { MARKDOWN_L10NS } from './src/lib/l10n'
 import { locales as compiledLocales } from './src/lib/paraglide/runtime.js'
 
@@ -70,7 +70,8 @@ export default defineConfig(() => {
 
 	return {
 		define: {
-			'import.meta.env.SENTRY_RELEASE': JSON.stringify(getSentryRelease())
+			'import.meta.env.SENTRY_RELEASE': JSON.stringify(getSentryRelease()),
+			'import.meta.env.SENTRY_ENVIRONMENT': JSON.stringify(sentryEnvironment(process.env.CONTEXT))
 		},
 
 		server: {

@@ -15,7 +15,8 @@ import type { FieldSet } from 'airtable'
 import type { Actions, PageServerLoad } from './$types'
 import { createRecord, getRecord, updateRecord } from '$lib/airtable'
 import { afterResponse, queueCrmIntake, reportCrmProblem } from '$lib/server/crmIntake'
-import { getNationalGroups } from '$lib/server/nationalGroups'
+import { getNationalGroups, nationalGroupsBackgroundWork } from '$lib/server/nationalGroups'
+import { platformWaitUntil } from '$lib/server/onboardingEmail/chapter.js'
 import { isOnboardingLive } from '$lib/server/onboarding'
 import {
 	checkContinuation,
@@ -476,9 +477,9 @@ export const actions: Actions = {
 		// Recorded only for stub inspection, so it is resolved here rather than on
 		// every submit. The live branch has no use for it: CiviCRM routes the signup
 		// to a chapter itself.
-		const chapterMatch = (await getNationalGroups())?.find(
-			(group) => group.name.toLowerCase() === country.toLowerCase()
-		)
+		const groups = await getNationalGroups()
+		platformWaitUntil(platform)?.(nationalGroupsBackgroundWork())
+		const chapterMatch = groups?.find((group) => group.name.toLowerCase() === country.toLowerCase())
 		const chapter = chapterMatch ? { name: chapterMatch.name, leader: chapterMatch.leader } : null
 		const submission = recordStubSubmission({
 			airtable: {

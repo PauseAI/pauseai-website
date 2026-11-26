@@ -2,16 +2,12 @@ import { beforeEach, describe, expect, it, vi } from 'vitest'
 
 const env: Record<string, string | undefined> = {}
 vi.mock('$env/dynamic/private', () => ({ env }))
-vi.mock('$lib/server/sentry', () => ({ reportError: vi.fn() }))
-vi.mock('$lib/airtable.js', async (importOriginal) => ({
-	...(await importOriginal<Record<string, unknown>>()),
-	fetchAllPages: () =>
-		Promise.resolve([
-			{
-				id: 'recNetherlands',
-				fields: { country: 'Netherlands', whatsapp: 'https://chat.whatsapp.com/example' }
-			}
-		])
+const flushReports = vi.hoisted(() => vi.fn(() => Promise.resolve()))
+vi.mock('$lib/server/sentry', () => ({ reportError: vi.fn(), flushReports }))
+vi.mock('$lib/server/nationalGroups', () => ({
+	getNationalGroups: () =>
+		Promise.resolve([{ name: 'Netherlands', whatsappLink: 'https://chat.whatsapp.com/example' }]),
+	nationalGroupsBackgroundWork: () => Promise.resolve()
 }))
 
 const { POST } = await import('./+server.js')
@@ -53,7 +49,7 @@ const refusal = async (response: Response) => ((await response.json()) as Refusa
 beforeEach(() => {
 	env.ONBOARDING_EMAIL_RENDER_V2_SECRET = SECRET
 	env.EMAIL_VERIFICATION_SECRET = VERIFICATION_SECRET
-	env.CRM_INTAKE_URL = 'https://crm.pauseai.info'
+	env.CRM_URL = 'https://crm.pauseai.info'
 })
 
 describe('POST /api/onboarding-email/v2', () => {
@@ -95,6 +91,7 @@ describe('POST /api/onboarding-email/v2', () => {
 		const response = await post(BODY)
 		expect(response.status).toBe(503)
 		expect((await refusal(response)).code).toBe('verification_unavailable')
+		expect(flushReports).toHaveBeenCalled()
 	})
 
 	it('refuses a body that is not JSON', async () => {

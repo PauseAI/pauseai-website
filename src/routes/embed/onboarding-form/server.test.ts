@@ -27,8 +27,10 @@ const flushReports = vi.fn(() => Promise.resolve())
 vi.mock('$lib/server/sentry', () => ({ reportError, flushReports }))
 // The National Chapters list the action reads (null: never read on this instance).
 let nationalGroups: { name: string; leader: string }[] | null
+const nationalGroupsWork = Promise.resolve()
 vi.mock('$lib/server/nationalGroups', () => ({
-	getNationalGroups: () => Promise.resolve(nationalGroups)
+	getNationalGroups: () => Promise.resolve(nationalGroups),
+	nationalGroupsBackgroundWork: () => nationalGroupsWork
 }))
 
 const { actions } = await import('./+page.server.js')
@@ -707,8 +709,8 @@ describe('onboarding submit: CRM intake', () => {
 		env.ONBOARDING_CONTINUATION_SECRET = 'test-secret'
 		env.ONBOARDING_CONTINUATION_ENFORCE = 'true'
 		env.CRM_INTAKE_ENABLED = 'true'
-		env.CRM_INTAKE_URL = 'https://crm.example.org'
-		env.CRM_INTAKE_KEY = 'test-key'
+		env.CRM_URL = 'https://crm.example.org'
+		env.CRM_KEY = 'test-key'
 		mockWrites()
 		getRecord.mockReset().mockResolvedValue(UK_ROW)
 		nationalGroups = CHAPTERS
@@ -897,6 +899,17 @@ describe('onboarding submit: signups in CiviCRM alone (SIGNUP_BACKEND)', () => {
 		expect(updateRecord).not.toHaveBeenCalled()
 	})
 
+	it.each([undefined, '', 'airtable', 'CiviCRM'])(
+		'creates the signup in Airtable alone with SIGNUP_BACKEND=%s',
+		async (backend) => {
+			env.SIGNUP_BACKEND = backend
+			const result = await submit(signup)
+			expect(result).toMatchObject({ success: true, recordId: 'recAda' })
+			expect(createRecord).toHaveBeenCalledOnce()
+			expect(submitSignup).not.toHaveBeenCalled()
+		}
+	)
+
 	it('mints a new key for every create', async () => {
 		const first = await submit(signup)
 		const second = await submit(signup)
@@ -1053,8 +1066,8 @@ describe('onboarding submit: signups in CiviCRM alone (SIGNUP_BACKEND)', () => {
 		const { submitSignup: realSubmitSignup } =
 			await vi.importActual<typeof import('$lib/server/memberCrm')>('$lib/server/memberCrm')
 		submitSignup.mockImplementation(realSubmitSignup as never)
-		env.CRM_INTAKE_URL = 'https://crm.example.org'
-		env.CRM_INTAKE_KEY = 'test-key-not-real'
+		env.CRM_URL = 'https://crm.example.org'
+		env.CRM_KEY = 'test-key-not-real'
 		vi.stubGlobal('fetch', () =>
 			Promise.resolve(
 				new Response(
@@ -1076,8 +1089,8 @@ describe('onboarding submit: signups in CiviCRM alone (SIGNUP_BACKEND)', () => {
 		const { submitSignup: realSubmitSignup } =
 			await vi.importActual<typeof import('$lib/server/memberCrm')>('$lib/server/memberCrm')
 		submitSignup.mockImplementation(realSubmitSignup as never)
-		env.CRM_INTAKE_URL = 'https://crm.example.org'
-		env.CRM_INTAKE_KEY = 'test-key-not-real'
+		env.CRM_URL = 'https://crm.example.org'
+		env.CRM_KEY = 'test-key-not-real'
 		const answers = [503, 502, 200]
 		const crmFetch = vi.fn<typeof fetch>(() => {
 			const status = answers.shift()!
@@ -1110,5 +1123,16 @@ describe('onboarding submit: signups in CiviCRM alone (SIGNUP_BACKEND)', () => {
 		expect(new Set(posted).size).toBe(1)
 		const { record } = JSON.parse(posted[0]!) as { record: { fields: object } }
 		expect(record.fields).not.toHaveProperty('resumed')
+	})
+})
+
+describe('onboarding submit: stub mode', () => {
+	it("keeps the chapter list read's work alive past the response", async () => {
+		for (const key of Object.keys(env)) delete env[key]
+		env.ONBOARDING_CONTINUATION_SECRET = 'test-secret'
+		nationalGroups = CHAPTERS
+		const waitUntil = vi.fn<(promise: Promise<unknown>) => void>()
+		expect(await submit(signup, { context: { waitUntil } })).toMatchObject({ success: true })
+		expect(waitUntil).toHaveBeenCalledExactlyOnceWith(nationalGroupsWork)
 	})
 })

@@ -1,5 +1,5 @@
-// callCrm calls CiviCRM's API4 as the intake API account (CRM_INTAKE_URL,
-// CRM_INTAKE_KEY). The rest of this file reports each Members row the onboarding
+// callCrm and callCrmRows call CiviCRM's API4 as the website API account (CRM_URL,
+// CRM_KEY). The rest of this file reports each Members row the onboarding
 // form writes to CiviCRM's member intake (PauseaiMemberIntake.submit). The
 // contract, outcome codes included, is pauseai-civicrm's
 // docs/intake-endpoint-plan.md; docs/join-form-flow.md, "CRM intake", has where
@@ -18,7 +18,18 @@ const API_PATH = '/civicrm/ajax/api4/'
 // The CRM can take about 6 seconds to answer and completes the write even after
 // the caller aborts, so a shorter wait reports timeouts for writes that succeeded.
 export const TIMEOUT_MS = 10_000
-type Cause = 'not_configured' | 'http' | 'timeout' | 'network'
+type Cause = 'not_configured' | 'http' | 'redirect' | 'timeout' | 'network' | 'deadline'
+
+// The form routes run as Netlify Edge Functions, which must answer within 40 s, and CiviCRM
+// may already hold a write whose request then got no answer. Turnstile's check
+// (TURNSTILE_TIMEOUT_MS) and the CRM's attempts (callCrmUntil) fit inside this, measured from
+// the request's start.
+export const CRM_REQUEST_DEADLINE_MS = 20_000
+
+// callCrmUntil retries once, and only if the deadline leaves the retry CRM_MIN_ATTEMPT_MS,
+// about the slowest the CRM normally answers.
+export const CRM_RETRY_DELAY_MS = 1000
+export const CRM_MIN_ATTEMPT_MS = 6000
 
 export type CrmFailure = {
 	ok: false
@@ -39,41 +50,98 @@ export type Outcome = Result['outcome']
 
 const isCrmIntakeEnabled = () => env.CRM_INTAKE_ENABLED === 'true'
 
+/** Every row an action answers in `values`, or why there are none. */
+export type CrmRows = { ok: true; rows: Record<string, unknown>[] } | CrmFailure
+
+export const isRow = (value: unknown): value is Record<string, unknown> =>
+	typeof value === 'object' && value !== null && !Array.isArray(value)
+
+/** CRM_URL without its trailing slashes, or undefined when unset. */
+export const crmBaseUrl = (): string | undefined => env.CRM_URL?.replace(/\/+$/, '') || undefined
+
+// Only the production CRM sits behind Cloudflare Access; the service token goes nowhere else.
+const CF_ACCESS_ORIGIN = 'https://crm.pauseai.info'
+
 /**
- * Calls one API4 action (`Entity/action`) as the intake API account, giving up
- * after `timeoutMs`. Never rejects: a failure is an answer with what caused it.
+ * The Cloudflare Access service-token headers for a request to `url`: both when
+ * CF_ACCESS_CLIENT_ID and CF_ACCESS_CLIENT_SECRET are set and `url` is on the
+ * production CRM, otherwise none.
+ */
+function cfAccessHeaders(url: string): Record<string, string> {
+	const id = env.CF_ACCESS_CLIENT_ID
+	const secret = env.CF_ACCESS_CLIENT_SECRET
+	if (!id || !secret || new URL(url).origin !== CF_ACCESS_ORIGIN) return {}
+	return { 'CF-Access-Client-Id': id, 'CF-Access-Client-Secret': secret }
+}
+
+/**
+ * Calls one API4 action (`Entity/action`) as the website API account, giving up
+ * after `timeoutMs`, and answers the first row of `values`. Never rejects: a failure
+ * is an answer with what caused it.
  */
 export async function callCrm(
 	action: string,
 	params: unknown,
 	timeoutMs = TIMEOUT_MS
 ): Promise<CrmAnswer> {
-	const base = env.CRM_INTAKE_URL?.replace(/\/+$/, '')
-	const key = env.CRM_INTAKE_KEY
+	const answer = await callCrmValues(action, params, timeoutMs, (values) =>
+		isRow(values[0]) ? values[0] : undefined
+	)
+	return answer.ok ? { ok: true, row: answer.value } : answer
+}
+
+/** As callCrm, for an action that answers a list of rows. */
+export async function callCrmRows(
+	action: string,
+	params: unknown,
+	timeoutMs = TIMEOUT_MS
+): Promise<CrmRows> {
+	const answer = await callCrmValues(action, params, timeoutMs, (values) =>
+		values.every(isRow) ? values : undefined
+	)
+	return answer.ok ? { ok: true, rows: answer.value } : answer
+}
+
+/** `read` takes what the answer's `values` must hold; undefined makes it a failure. */
+async function callCrmValues<T>(
+	action: string,
+	params: unknown,
+	timeoutMs: number,
+	read: (values: unknown[]) => T | undefined
+): Promise<{ ok: true; value: T } | CrmFailure> {
+	const base = crmBaseUrl()
+	const key = env.CRM_KEY
 	if (!base || !key) return { ok: false, cause: 'not_configured' }
 
 	const signal = AbortSignal.timeout(timeoutMs)
 	try {
-		const response = await fetch(base + API_PATH + action, {
+		const url = base + API_PATH + action
+		const response = await fetch(url, {
 			method: 'POST',
 			headers: {
 				// The CRM accepts an API key only in X-Civi-Auth; its Authorization
 				// header takes JWTs only (authx settings).
 				'X-Civi-Auth': `Bearer ${key}`,
 				'X-Requested-With': 'XMLHttpRequest',
-				'Content-Type': 'application/x-www-form-urlencoded'
+				'Content-Type': 'application/x-www-form-urlencoded',
+				...cfAccessHeaders(url)
 			},
 			body: new URLSearchParams({ params: JSON.stringify(params) }),
+			// fetch would carry the key and the service token on to wherever a redirect points.
+			redirect: 'manual',
 			signal
 		})
+		// A browser-style runtime answers a manual redirect as status 0 of type opaqueredirect.
+		if (response.type === 'opaqueredirect' || (response.status >= 300 && response.status < 400))
+			return { ok: false, cause: 'redirect', httpStatus: response.status }
 		// Only the status: an error body's text could echo what the request carried.
 		const httpError = { ok: false, cause: 'http', httpStatus: response.status } as const
 		if (!response.ok) return httpError
-		const body = (await response.json().catch(() => null)) as { values?: unknown[] } | null
+		const body = (await response.json().catch(() => null)) as { values?: unknown } | null
 		if (signal.aborted) return { ok: false, cause: 'timeout' }
-		const row = body?.values?.[0]
-		if (typeof row !== 'object' || row === null || Array.isArray(row)) return httpError
-		return { ok: true, row: row as Record<string, unknown> }
+		const value = Array.isArray(body?.values) ? read(body.values) : undefined
+		if (value === undefined) return httpError
+		return { ok: true, value }
 	} catch (error) {
 		return {
 			ok: false,
@@ -81,37 +149,6 @@ export async function callCrm(
 			errorName: (error as Error)?.name
 		}
 	}
-}
-
-/**
- * A failure a retry is likely to get past: a network error, a timeout, a 502, 503 or 504, or
- * Cloudflare's 52x for an origin it could not reach.
- */
-export const isTransient = ({ cause, httpStatus = 0 }: CrmFailure) =>
-	cause === 'network' ||
-	cause === 'timeout' ||
-	(cause === 'http' &&
-		([502, 503, 504].includes(httpStatus) || (httpStatus >= 520 && httpStatus <= 529)))
-
-/**
- * A plain 500, worth one retry at most: CiviCRM answers every exception it throws with it, a
- * permanent configuration fault as much as a passing database error.
- */
-export const isPlainServerError = ({ cause, httpStatus }: CrmFailure) =>
-	cause === 'http' && httpStatus === 500
-
-export const wait = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms))
-
-/**
- * Lets `pending` finish after the response where the platform can keep the function alive for
- * it, and awaits it otherwise (the Node dev server).
- */
-export async function afterResponse(
-	platform: App.Platform | undefined,
-	pending: Promise<unknown>
-): Promise<void> {
-	if (platform) platform.context.waitUntil(pending)
-	else await pending
 }
 
 export type CrmVerifyResult = 'ok' | 'expired' | 'invalid' | 'failed'
@@ -157,6 +194,67 @@ export async function reportCrmProblem(
 	// Sentry alert rules match on the `check` tag.
 	await reportError(new Error(message), details, { ...options, tags: { check: details.check } })
 	await flushReports()
+}
+
+const isTransientFailure = (failure: CrmFailure) =>
+	failure.cause === 'network' ||
+	failure.cause === 'timeout' ||
+	(failure.cause === 'http' && (failure.httpStatus ?? 0) >= 500)
+
+export const wait = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms))
+
+/**
+ * Calls an action as callCrm does, retrying once after CRM_RETRY_DELAY_MS when the failure may
+ * be transient or `retryRow` names a cause for the row answered, if `deadline` (a Date.now()
+ * time) allows. No attempt runs past the deadline; once it has passed, the answer is a
+ * `deadline` failure. Answers the last attempt's answer and number. Never rejects.
+ */
+export async function callCrmUntil(
+	action: string,
+	params: unknown,
+	{
+		deadline,
+		check,
+		retryRow
+	}: {
+		deadline: number
+		/** Names the call in the retry's log line. */
+		check: string
+		retryRow?: (row: Record<string, unknown>) => string | undefined
+	}
+): Promise<{ answer: CrmAnswer; attempt: number }> {
+	for (let attempt = 1; ; attempt++) {
+		const remaining = deadline - Date.now()
+		if (remaining <= 0 || (attempt > 1 && remaining < CRM_MIN_ATTEMPT_MS)) {
+			return { answer: { ok: false, cause: 'deadline' }, attempt }
+		}
+		const answer = await callCrm(action, params, Math.min(TIMEOUT_MS, remaining))
+		const retryCause = answer.ok
+			? retryRow?.(answer.row)
+			: isTransientFailure(answer)
+				? answer.cause
+				: undefined
+		const retry =
+			attempt === 1 &&
+			retryCause !== undefined &&
+			deadline - Date.now() - CRM_RETRY_DELAY_MS >= CRM_MIN_ATTEMPT_MS
+		if (!retry) return { answer, attempt }
+		const details = answer.ok ? { cause: retryCause } : failureDetails(answer)
+		console.warn(`[${check}] ${action} failed, retrying`, { ...details, attempt })
+		await wait(CRM_RETRY_DELAY_MS)
+	}
+}
+
+/**
+ * Hands `work` to the platform to finish after the response, or awaits it where there is no
+ * platform (the Node dev server, tests).
+ */
+export async function afterResponse(
+	platform: App.Platform | undefined,
+	work: Promise<unknown>
+): Promise<void> {
+	if (platform) platform.context.waitUntil(work)
+	else await work
 }
 
 /** Never rejects: a failure is the `error` outcome, with what caused it. */

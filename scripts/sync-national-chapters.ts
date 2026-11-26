@@ -1,7 +1,7 @@
 /**
  * Syncs src/lib/data/national-chapters.json with the national groups
- * served by https://pauseai.info/api/national-groups (backed by the Airtable
- * "National groups" table).
+ * served by https://pauseai.info/api/national-groups (backed by CiviCRM's
+ * chapter directory).
  *
  * Behavior:
  * - Chapters already present in the JSON are preserved verbatim: their
@@ -9,7 +9,7 @@
  *   neither, so they are never regenerated.
  * - Chapters whose link changed are updated. Changes are non-invasive: only
  *   outdated values are touched, never the ordering of existing entries.
- * - When a group has a Luma page (the `luma` field in Airtable), the page is
+ * - When a group has a Luma page (the API's `lumaLink`), the page is
  *   fetched to resolve its calendar API ID (cal-…), stored as lumaCalendarId —
  *   the ID that /api/calendar needs to pull the chapter's events via Luma's
  *   get-items API. The Luma URL itself is not stored. A failed resolution
@@ -47,7 +47,7 @@ const TARGET_FILE = fileURLToPath(
 )
 
 /**
- * Airtable country name → chapter name to keep in national-chapters.json.
+ * API country name → chapter name to keep in national-chapters.json.
  * Local groups in pauseai-communities.json match their national chapter via
  * `parent_name.includes(chapter.name)`, so a rename here would silently
  * orphan them; pin those names instead.
@@ -72,7 +72,7 @@ const NOMINATIM_MIN_INTERVAL_MS = 1000
 
 // Inferred from the JSON so the type can't drift from the data it describes.
 // lumaCalendarId is omitted from the inferred union before being re-added as
-// optional: chapters only carry it when the Airtable group has a Luma page,
+// optional: chapters only carry it when the group has a Luma page,
 // and intersecting the union directly would freeze it to `undefined` on the
 // members that lack the key.
 type InferredChapter = (typeof nationalChaptersJson.communities)[number]
@@ -150,16 +150,16 @@ function primaryLink(group: NationalGroup): string {
 }
 
 /**
- * The Luma page URL stored on the group in Airtable, normalized, but only if
+ * The Luma page URL stored on the group, normalized, but only if
  * it points at a Luma page (lu.ma / luma.com). Anything else — event-specific
  * URLs, typos, other platforms pasted into the wrong column — is dropped
- * rather than resolved. The scheme is optional in Airtable (e.g.
+ * rather than resolved. The scheme is optional in the stored value (e.g.
  * "luma.com/pauseai-ch" was observed) and added if missing.
  */
 function lumaCalendarLink(group: NationalGroup): string | undefined {
 	const link = group.lumaLink?.trim()
 	if (!link) return undefined
-	// Scheme is optional in Airtable ("luma.com/pauseai-ch" was observed);
+	// The scheme is optional ("luma.com/pauseai-ch" was observed);
 	// default to https so the URL check below can match.
 	const normalized = /^https?:\/\//.test(link)
 		? link.replace(/^http:\/\//, 'https://')

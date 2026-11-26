@@ -128,11 +128,12 @@ Two more env vars guard updates to a row created earlier in the flow (see "Conti
 - `ONBOARDING_CONTINUATION_SECRET`: the HMAC key for continuation tokens, 32 random bytes (`openssl rand -base64 32`). Set it wherever the form is live. Without it no token is issued or checked. Rotating it sends every flow in progress back to the start once enforcement is on.
 - `ONBOARDING_CONTINUATION_ENFORCE`: `true` refuses an update without a valid token; anything else only reports it.
 
-Three more report each written row to the CRM (see "CRM intake" in [`docs/join-form-flow.md`](./join-form-flow.md)). Set them in the Production context only:
+Three more report each written row to the CRM, and two more get those calls past Cloudflare Access (see "CRM intake" in [`docs/join-form-flow.md`](./join-form-flow.md)). Set them in the Production context only:
 
 - `CRM_INTAKE_ENABLED`: `true` sends each row the form writes to CiviCRM's member intake after the response; anything else sends nothing. Has no effect in stub mode.
-- `CRM_INTAKE_URL`: the CRM's base URL, e.g. `https://crm.pauseai.info`.
-- `CRM_INTAKE_KEY`: the API key of the CRM's member intake account. A secret: it is sent only in the `X-Civi-Auth` header and never logged or reported.
+- `CRM_URL`: the CRM's base URL, e.g. `https://crm.pauseai.info`.
+- `CRM_KEY`: the API key of the CRM's website API account. A secret: it is sent only in the `X-Civi-Auth` header and never logged or reported.
+- `CF_ACCESS_CLIENT_ID` and `CF_ACCESS_CLIENT_SECRET`: the website API account's Cloudflare Access service token, which the CRM API needs once it sits behind Cloudflare Access. Set both or neither. They are sent as `CF-Access-Client-Id` and `CF-Access-Client-Secret`, only when `CRM_URL` is `https://crm.pauseai.info`, and never logged or reported. `CF_ACCESS_CLIENT_SECRET` is a secret like `CRM_KEY`.
 
 ## Related
 

@@ -19,7 +19,7 @@ export type ChapterForm = 'join' | 'subscribe' | 'chapter-site'
 
 export type ChapterQuestion = { heading: string; body: string; yes: string; no: string }
 
-// The National Chapters table names a chapter only by its country, so a chapter
+// The chapter list names a chapter only by its country, so a chapter
 // whose own name is not "PauseAI <country>" is listed here, keyed by that country.
 // Add one when a chapter goes by another name: the name is part of the wording
 // stored on each record, so it must be the one the chapter uses.
