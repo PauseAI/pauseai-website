@@ -172,8 +172,8 @@
 				saveError =
 					result.type === 'failure' ? String(result.data?.message || ERROR_MESSAGE) : ERROR_MESSAGE
 				if (result.type === 'failure') {
-					const kept = result.data?.recordId
-					const keptToken = result.data?.recordToken
+					const kept: unknown = result.data?.recordId
+					const keptToken: unknown = result.data?.recordToken
 					if (result.status === 410) {
 						recordId = ''
 						recordToken = ''

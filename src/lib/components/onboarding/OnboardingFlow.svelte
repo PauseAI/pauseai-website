@@ -608,8 +608,8 @@
 						if (next !== 'stay') step = next === 'step-1' ? 1 : 2
 					}
 					saveError = String(result.data?.message || msgs.onboarding_error_generic)
-					const kept = result.data?.recordId
-					const keptToken = result.data?.recordToken
+					const kept: unknown = result.data?.recordId
+					const keptToken: unknown = result.data?.recordToken
 					if (
 						result.status !== 410 &&
 						!recordId &&
