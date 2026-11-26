@@ -753,7 +753,7 @@ When checked, the volunteer form opens the Stripe payment link in a new tab
 with two query params, mirroring the legacy Tally form's `/submitted` contract:
 
 - `prefilled_email` — the volunteer's email.
-- `client_reference_id` — the Airtable record id, replacing Tally's submission id.
+- `client_reference_id` — the signup's id, replacing Tally's submission id: the Airtable record id, or the signup key for a signup in CiviCRM alone (`SIGNUP_BACKEND`). CiviCRM's paying-member sync resolves either.
 
 The popup is opened synchronously during the submit gesture (so iOS Safari
 and Chrome on iOS allow it), then navigated to the final Stripe URL once the

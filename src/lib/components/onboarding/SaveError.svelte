@@ -1,6 +1,6 @@
 <script lang="ts">
 	/** The last post's failure, kept in place beside the toast until the next post. */
-	export let message: string
+	let { message }: { message: string } = $props()
 </script>
 
 {#if message}
