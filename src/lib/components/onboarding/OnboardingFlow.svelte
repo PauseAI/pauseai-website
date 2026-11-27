@@ -778,6 +778,7 @@
 				type="checkbox"
 				name="agree_gdpr"
 				required
+				aria-describedby="chapter-site-body"
 				checked={answerForCountry === 'yes'}
 				onchange={(event) => {
 					chapterChoice = event.currentTarget.checked
@@ -788,6 +789,7 @@
 			<span class="checkbox-box" aria-hidden="true"></span>
 			<span>{chapterQ.yes}</span>
 		</label>
+		<p class="helper" id="chapter-site-body">{chapterQ.body}</p>
 		<!-- What the browse form posts, as ChapterShareQuestion does for the regular
 		     question; on step 1 the form never submits and step 2 mirrors them. -->
 		{#if answerForCountry}
