@@ -108,13 +108,25 @@ describe('possibleWordings', () => {
 		for (const [locale, msgs] of Object.entries(onboardingMessages)) {
 			const question = chapterQuestion(msgs, 'chapter-site', 'United Kingdom', 'PauseAI UK')!
 			expect(offered, locale).toContain(chapterShareWording(question, 'yes'))
-			for (const retired of retiredChapterWordings[locale]['chapter-site'] ?? []) {
+			const retiredForLocale = retiredChapterWordings[locale]?.['chapter-site'] ?? []
+			// Every locale shipped the earlier label, so each must keep one.
+			expect(retiredForLocale.length, locale).toBeGreaterThan(0)
+			for (const retired of retiredForLocale) {
 				expect(offered, locale).toContain(
 					chapterShareWording({ ...retired('PauseAI UK'), no: question.no }, 'yes')
 				)
 			}
 		}
 		expect(offered).toContain('[chosen] Share my details with PauseAI UK and PauseAI Global')
+		// The checkbox can't post a No, so no chapter-site wording is accepted with one.
+		const offeredNo = possibleWordings(['join', 'chapter-site'], 'United Kingdom', 'no')
+		expect(offeredNo).not.toContain('[chosen] No, only PauseAI Global')
+		expect(offeredNo).not.toContain(
+			chapterShareWording(
+				chapterQuestion(en, 'chapter-site', 'United Kingdom', 'PauseAI UK')!,
+				'no'
+			)
+		)
 		// Retired labels belong to the chapter-site form only.
 		expect(possibleWordings(['join'], 'United Kingdom', 'yes')).not.toContain(
 			'[chosen] Share my details with PauseAI UK and PauseAI Global'

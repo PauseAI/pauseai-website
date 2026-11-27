@@ -557,7 +557,7 @@ Join PauseAI Global only.", whose two links open `/privacy` and `/join` in a new
 tab, since the form is iframed on the chapter's site
 (`onboarding_chapter_site_alternative`). `/join` is the alternative because it
 offers everything the chapter site does with the chapter question answerable
-No; that alternative is what makes the required tick freely given. Ticking it sets the chapter answer
+No, so the alternative is a full signup without chapter sharing. Ticking it sets the chapter answer
 (always `yes`) and unticking clears it; that answer, not `gdprConsent`, is what
 `consentGiven` follows in this mode, so the post carries `agree_gdpr` as on any
 create, recording that the policy was shown and linked, and a tick here never

@@ -103,6 +103,8 @@ export function possibleWordings(
 	return Object.entries(onboardingMessages).flatMap(([locale, msgs]) =>
 		forms.flatMap((form) =>
 			names.flatMap((name) => {
+				// The chapter-site checkbox can only be ticked, so it never posts a No.
+				if (form === 'chapter-site' && answer === 'no') return []
 				const question = chapterQuestion(msgs, form, country, name)
 				if (!question) return []
 				const retired = name
