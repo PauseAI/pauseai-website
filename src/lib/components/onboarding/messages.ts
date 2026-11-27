@@ -185,7 +185,7 @@ const chapterShareEn: ChapterShareMessages = {
 	onboarding_chapter_section_label: 'Your local chapter',
 	onboarding_chapter_heading: (chapter) => `Share your details with ${chapter}?`,
 	onboarding_chapter_body: (chapter) =>
-		`If you say yes, ${chapter}'s organisers will use your details to organise PauseAI locally. ${chapter} may be a separate organisation from PauseAI Global. You can change your mind at any time by emailing ${PRIVACY_EMAIL}.`,
+		`If you say yes, ${chapter}'s organisers will use your details to coordinate PauseAI's local activities. ${chapter} may be a separate organisation from PauseAI Global. You can change your mind at any time by emailing ${PRIVACY_EMAIL}.`,
 	onboarding_chapter_yes: (chapter) => `Yes, share my details with ${chapter}`,
 	onboarding_chapter_site_label: (chapter) => `Share my details with ${chapter}`,
 	onboarding_chapter_site_body: (chapter) =>
