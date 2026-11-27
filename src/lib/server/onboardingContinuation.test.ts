@@ -91,4 +91,12 @@ describe('issueContinuationToken and checkContinuation', () => {
 		expect(reported).not.toContain(token)
 		expect(reported).not.toContain(SECRET)
 	})
+
+	it('refuses and reports as refused a bad token for a signup key, whatever the switch says', async () => {
+		env.ONBOARDING_CONTINUATION_SECRET = SECRET
+		delete env.ONBOARDING_CONTINUATION_ENFORCE
+		const key = 'memAbCdEfGhIjKlMnOpQrStUv'
+		expect(await checkContinuation(key, '', NOW)).toBe('refused')
+		expect(reportError.mock.calls[0][1]).toMatchObject({ enforced: true, recordId: key })
+	})
 })

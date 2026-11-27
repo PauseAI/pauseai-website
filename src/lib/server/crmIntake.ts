@@ -201,7 +201,7 @@ const isTransientFailure = (failure: CrmFailure) =>
 	failure.cause === 'timeout' ||
 	(failure.cause === 'http' && (failure.httpStatus ?? 0) >= 500)
 
-const wait = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms))
+export const wait = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms))
 
 /**
  * Calls an action as callCrm does, retrying once after CRM_RETRY_DELAY_MS when the failure may

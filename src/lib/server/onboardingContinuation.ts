@@ -5,6 +5,7 @@
 import { env } from '$env/dynamic/private'
 import { SIGNUP_MAX_AGE_MS } from '$lib/components/onboarding/signupMaxAge'
 import { isContinuationEnforced } from '$lib/server/onboarding'
+import { isSignupKey } from '$lib/server/memberCrm'
 import { reportError } from '$lib/server/sentry'
 import { checkToken, signToken, type TokenVerdict } from '$lib/server/signedToken'
 
@@ -44,6 +45,8 @@ function getSecret(): string | undefined {
 	return undefined
 }
 
+export const hasContinuationSecret = () => Boolean(env.ONBOARDING_CONTINUATION_SECRET)
+
 // Undefined without a secret, so the form still works; the update check then
 // lets everything through.
 export async function issueContinuationToken(
@@ -69,7 +72,9 @@ export async function checkContinuation(
 	if (!secret) return 'allowed'
 	const verdict = await verifyToken(secret, recordId, token, now)
 	if (verdict === 'valid') return 'proven'
-	const enforced = isContinuationEnforced()
+	// A signup key's CiviCRM call needs a valid token whatever the switch says, so the report
+	// says it was refused.
+	const enforced = isSignupKey(recordId) || isContinuationEnforced()
 	// Never the token or the secret: either would let the reader forge or replay.
 	const context = { check: 'onboarding-continuation', verdict, enforced, recordId }
 	console.warn('[onboarding] update without a valid continuation token', context)

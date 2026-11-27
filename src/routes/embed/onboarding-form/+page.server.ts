@@ -14,15 +14,20 @@ import { fail } from '@sveltejs/kit'
 import type { FieldSet } from 'airtable'
 import type { Actions, PageServerLoad } from './$types'
 import { createRecord, getRecord, updateRecord } from '$lib/airtable'
-import { queueCrmIntake } from '$lib/server/crmIntake'
+import { afterResponse, queueCrmIntake, reportCrmProblem } from '$lib/server/crmIntake'
 import { getNationalGroups, nationalGroupsBackgroundWork } from '$lib/server/nationalGroups'
 import { platformWaitUntil } from '$lib/server/onboardingEmail/chapter.js'
 import { isOnboardingLive } from '$lib/server/onboarding'
-import { checkContinuation, issueContinuationToken } from '$lib/server/onboardingContinuation'
+import {
+	checkContinuation,
+	hasContinuationSecret,
+	issueContinuationToken
+} from '$lib/server/onboardingContinuation'
 import { normaliseEmail } from '$lib/server/emailVerification'
 import { MEMBERS_BASE_ID, MEMBERS_TABLE_ID } from '$lib/server/members'
 import { recordStubSubmission } from '$lib/server/onboarding-stub'
 import { subscribeToSubstackNewsletter } from '$lib/server/substack'
+import { isSignupKey, signupBackend, mintSignupKey, submitSignup } from '$lib/server/memberCrm'
 import { checkNotSpam } from '$lib/server/turnstile-verify'
 import { hasUniversities, isKnownUniversity } from '$lib/data/universities'
 import { possibleWordings } from '$lib/components/onboarding/chapterShare'
@@ -66,13 +71,29 @@ export const load: PageServerLoad = ({ setHeaders }) => {
 }
 
 const STORED_LANGUAGES = LANGUAGES.map((l) => l.stored)
+// The whole action's budget when it writes to CiviCRM, Turnstile (its own 5 s timeout) included.
+// Below Netlify's limit for the response.
+const ACTION_DEADLINE_MS = 25_000
 
 // On a 410 the form drops its id and token and returns to a step that collects
 // consent again (step 1, the /subscribe form, or a browse retry), so the next
 // post creates a row.
 const rowGone = (message: string) => fail(410, { message })
 const ROW_MISSING = 'We could not find your earlier signup. Please go through the form again.'
+// CiviCRM, the only copy of a signup key's signup, did not confirm the write. The form sends it
+// again under the same key and token, a create's included (they come back with its 502).
+const NOT_SAVED = "We couldn't confirm your signup was saved. Please try again."
 const SESSION_EXPIRED = 'Your signup session has expired. Please fill in the form again.'
+// Every CiviCRM signup carries a continuation token, so without the secret none can be written.
+// Not a 410: the browser keeps a saved signup's key and token for when the secret is back.
+async function crmNotConfigured() {
+	await reportCrmProblem(
+		'CRM signup not configured: ONBOARDING_CONTINUATION_SECRET is unset',
+		{ check: 'crm-signup', cause: 'not_configured' },
+		{ fingerprint: ['crm-signup', 'not_configured'], level: 'error' }
+	)
+	return fail(503, { message: NOT_SAVED })
+}
 const CHAPTER_ANSWER_MISSING =
 	'Please answer whether to share your details with a PauseAI chapter. If you cannot see the question, reload the page.'
 // `chapterAnswerMissing` sends the form back to the question (OnboardingFlow), which
@@ -146,6 +167,9 @@ function resolveSourcePage(data: FormData, request: Request, selfUrl: URL): stri
 
 export const actions: Actions = {
 	submit: async ({ request, url, platform }) => {
+		// Taken before anything is awaited.
+		const started = Date.now()
+		const deadline = started + ACTION_DEADLINE_MS
 		const data = await request.formData()
 
 		// Honeypot
@@ -189,6 +213,9 @@ export const actions: Actions = {
 		const hasVolunteerDetails = data.get('volunteer_details') === 'on'
 		// The /subscribe newsletter form, which stamps its own Signup source.
 		const isSubscribeForm = data.get('subscribe_form') === '1'
+		const toCrm =
+			live &&
+			(isSignupKey(existingRecordId) || (!existingRecordId && signupBackend() === 'civicrm'))
 		// The chapter-sharing answer and the text shown with it, posted only by a form
 		// that showed the question.
 		const postedAnswer = getString(data, 'chapter_share')
@@ -259,7 +286,9 @@ export const actions: Actions = {
 		// attacker-influenced (a URL param, a spoofable-looking Referer), so the
 		// helper constrains the result to a short host/path slug. Both fields are
 		// free text, so no option needs to exist for a new value.
-		if (!existingRecordId) {
+		// CiviCRM is sent them on every post and uses them only while the contact does not exist
+		// yet, so a retried create whose first attempt never landed is still whole.
+		if (!existingRecordId || toCrm) {
 			fields['Signup source'] = signupSource(isSubscribeForm ? 'subscribe' : 'join', country)
 			fields['Form version'] = FORM_VERSION
 			// CiviCRM sends the signup emails only for rows marked as its own. Create-only, so
@@ -325,13 +354,17 @@ export const actions: Actions = {
 			}
 		}
 
+		if (toCrm && !hasContinuationSecret()) return crmNotConfigured()
 		const postedToken = getString(data, 'record_token')
 		const continuation = existingRecordId
 			? await checkContinuation(existingRecordId, postedToken)
 			: null
 		// Refused as if the row were gone, never by creating one, which would bring
 		// back the duplicates the id exists to prevent.
-		if (continuation === 'refused') return rowGone(SESSION_EXPIRED)
+		// CiviCRM refuses a signup key's call without its token whatever the enforce switch says.
+		if (continuation === 'refused' || (toCrm && existingRecordId && continuation !== 'proven')) {
+			return rowGone(SESSION_EXPIRED)
+		}
 		// Which posts earn a token: see checkContinuation.
 		const issueToken = (recordId: string) =>
 			continuation !== 'allowed' ? issueContinuationToken(recordId) : undefined
@@ -345,8 +378,10 @@ export const actions: Actions = {
 		// posted, so it stands as long as the row's country does, through copy changes.
 		// A live update reads the row, for this and for its address below. A stub update
 		// has no row to read and writes nothing, so it is let through.
+		// A signup key's stored state is CiviCRM's, which makes the same checks itself
+		// (chapter_answer_missing below, and clearing the verification on a new address).
 		let storedRow: FieldSet | null = null
-		if (existingRecordId && live) {
+		if (existingRecordId && live && !toCrm) {
 			const row = await getRecord(MEMBERS_BASE_ID, MEMBERS_TABLE_ID, existingRecordId)
 			if (row === 'missing') return rowGone(ROW_MISSING)
 			if (row === 'failed') {
@@ -389,6 +424,42 @@ export const actions: Actions = {
 			fields['Verified email'] = false
 		}
 
+		if (toCrm) {
+			const key = existingRecordId || mintSignupKey()
+			const token = existingRecordId ? postedToken : await issueContinuationToken(key)
+			if (!token) return crmNotConfigured()
+			const record = { id: key, createdTime: new Date(started).toISOString(), fields }
+			switch (await submitSignup(record, token, deadline, platform)) {
+				case 'chapter_answer_missing':
+					return chapterAnswerMissing()
+				// A create has no earlier signup to have lost or to have run out: a refusal of its
+				// fresh key and token is a fault, and the person's next try mints new ones.
+				case 'session_expired':
+					return existingRecordId ? rowGone(SESSION_EXPIRED) : fail(502, { message: NOT_SAVED })
+				case 'row_gone':
+					return existingRecordId ? rowGone(ROW_MISSING) : fail(502, { message: NOT_SAVED })
+				// An unconfirmed create may still have landed (a slow CRM writes after the abort), so
+				// its key and token go back with the 502: the form resends the create under them,
+				// which CiviCRM completes or repeats, instead of minting a second contact.
+				case 'not_saved':
+					return fail(
+						502,
+						existingRecordId
+							? { message: NOT_SAVED }
+							: { message: NOT_SAVED, recordId: key, recordToken: token }
+					)
+			}
+			if (newsletter && isSignup) {
+				await afterResponse(platform, subscribeToSubstackNewsletter(email))
+			}
+			// A continuation's token was proven above, so it is renewed.
+			return {
+				success: true,
+				recordId: key,
+				recordToken: existingRecordId ? await issueContinuationToken(key) : token
+			}
+		}
+
 		if (live) {
 			const written = existingRecordId
 				? await updateRecord(MEMBERS_BASE_ID, MEMBERS_TABLE_ID, existingRecordId, fields)
@@ -408,7 +479,7 @@ export const actions: Actions = {
 			// Only on the signup, which for /subscribe is its own form rather than a
 			// step 2. No other update re-subscribes.
 			if (newsletter && isSignup) {
-				await subscribeToSubstackNewsletter(email)
+				await afterResponse(platform, subscribeToSubstackNewsletter(email))
 			}
 			return { success: true, recordId, recordToken: await issueToken(recordId) }
 		}

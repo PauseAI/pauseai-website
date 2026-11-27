@@ -17,6 +17,7 @@ import { memberLinkBackend, verifyMemberLinkInCrm } from '$lib/server/memberLink
 import { memberRowToVerify } from '$lib/server/mergedMemberRow'
 import { reportError } from '$lib/server/sentry'
 import { statementBackend, verifyStatementInCrm } from '$lib/server/statementCrm'
+import { isSignupKey, verifySignupInCrm } from '$lib/server/memberCrm'
 import type { CrmVerifyResult } from '$lib/server/crmIntake'
 import { json } from '@sveltejs/kit'
 import Airtable from 'airtable'
@@ -124,6 +125,13 @@ export const POST: RequestHandler = async ({ request }) => {
 	const token = params.get(TOKEN_PARAMETER) ?? ''
 	// Set only for a Members link, which must carry a token this secret can check.
 	let memberSecret: string | undefined
+	if (tableConfig.isMembers && isSignupKey(key)) {
+		// A signup key's contact lives in CiviCRM alone, whatever MEMBER_LINK_BACKEND says. As for
+		// a record-id link, a refusal most often means the link went to an address the contact no
+		// longer has, which the expired page explains.
+		if (!token) return linkExpired()
+		return crmVerifyResponse(await verifySignupInCrm(key, token), linkExpired)
+	}
 	if (tableConfig.isMembers && memberLinkBackend() === 'civicrm') {
 		if (!token) return linkExpired()
 		if (!RECORD_ID_KEY.test(key)) return linkNotValid()
