@@ -47,6 +47,7 @@ describe('chapterQuestion', () => {
 			}
 		}
 		expect(onboardingMessages.de.onboarding_chapter_no).toBe('Nein, nur PauseAI Global')
+		expect(onboardingMessages.it.onboarding_chapter_no).toBe('No, solo PauseAI Global')
 	})
 
 	it('asks about a future chapter where the country has none', () => {

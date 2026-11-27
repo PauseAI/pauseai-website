@@ -323,7 +323,8 @@ describe('onboarding submit: chapter sharing', () => {
 			wording('join', 'United Kingdom', 'PauseAI UK', 'no', 'de'),
 			WORDING_UK.replace(/\n/g, '\r\n'),
 			// Shown when the form's own chapter lookup failed.
-			wording('join', 'United Kingdom', null, 'no', 'fr')
+			wording('join', 'United Kingdom', null, 'no', 'fr'),
+			wording('join', 'United Kingdom', 'PauseAI UK', 'no', 'it')
 		]) {
 			const created = await submit({
 				...signup,

@@ -66,7 +66,8 @@ The embed wrapper does five things the `/join` route does not:
    _Create versus update_ for the full resolution order.
 1. **Locale** — reads `?locale=` and calls `setOnboardingLocale()` from
    `src/lib/components/onboarding/i18n.svelte.ts` so partner sites can render
-   the form in a supported language.
+   the form in a supported language (`en`, `de`, `fr`, `es`, `it`; anything
+   else shows English).
 1. **Background color** — reads `?bg=` (hex with or without `#`, or a CSS color
    name) and applies it as `style:background-color` on the wrapper so the embed
    blends into the host page.

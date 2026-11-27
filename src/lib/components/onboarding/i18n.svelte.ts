@@ -9,11 +9,12 @@ export type OnboardingLocale = keyof typeof onboardingMessages
 let locale = $state<OnboardingLocale>('en')
 
 export function setOnboardingLocale(l: string) {
-	if (l in onboardingMessages) locale = l
+	if (isOnboardingLocale(l)) locale = l
 }
 
 export function isOnboardingLocale(s: string): s is OnboardingLocale {
-	return s in onboardingMessages
+	// Own keys only: `in` would also accept inherited names such as 'constructor'.
+	return Object.hasOwn(onboardingMessages, s)
 }
 
 export function getMessages(): OnboardingMessages {
