@@ -387,6 +387,23 @@ describe('onboarding submit: chapter sharing', () => {
 		}
 	})
 
+	it("accepts the chapter question's earlier explanation word for word, as a form loaded before the change posts it", async () => {
+		for (const [extra, posted] of [
+			[
+				{},
+				'Share your details with PauseAI UK?\nIf you say yes, we share your signup details with PauseAI UK, which may be a separate organisation from PauseAI Global. You can change your mind at any time by emailing privacy@pauseai.info.\n[chosen] No, only PauseAI Global'
+			],
+			[
+				{ subscribe_form: '1' },
+				'Hear from PauseAI UK too?\nIf you say yes, we share your signup details with PauseAI UK, which may be a separate organisation from PauseAI Global. You can change your mind at any time by emailing privacy@pauseai.info.\n[chosen] No, only PauseAI Global'
+			]
+		] as const) {
+			const created = await submit({ ...signup, ...extra, chapter_share_wording: posted })
+			expect(created, posted).toMatchObject({ success: true })
+			expect(writtenFields(createRecord)['GDPR chapter share wording']).toBe(posted)
+		}
+	})
+
 	it('checks a posted wording without the chapter list, so a form on an older list is not refused', async () => {
 		// The form's list had a chapter for Italy; the server's has none, or none at all.
 		for (const groups of [CHAPTERS, null]) {

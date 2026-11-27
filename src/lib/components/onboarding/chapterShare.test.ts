@@ -19,7 +19,7 @@ describe('chapterQuestion', () => {
 		const question = chapterQuestion(en, 'join', 'Germany', 'PauseAI Germany')
 		expect(question).toEqual({
 			heading: 'Share your details with PauseAI Germany?',
-			body: 'If you say yes, we share your signup details with PauseAI Germany, which may be a separate organisation from PauseAI Global. You can change your mind at any time by emailing privacy@pauseai.info.',
+			body: 'If you say yes, we share your signup details with PauseAI Germany. Its organisers will see them and use them to organise PauseAI locally. PauseAI Germany may be a separate organisation from PauseAI Global. You can change your mind at any time by emailing privacy@pauseai.info.',
 			yes: 'Yes, share my details with PauseAI Germany',
 			no: 'No, only PauseAI Global'
 		})
@@ -130,6 +130,23 @@ describe('possibleWordings', () => {
 		// Retired labels belong to the chapter-site form only.
 		expect(possibleWordings(['join'], 'United Kingdom', 'yes')).not.toContain(
 			'[chosen] Share my details with PauseAI UK and PauseAI Global'
+		)
+	})
+
+	it("accepts the chapter question's earlier explanation on /join and /subscribe, with either answer", () => {
+		for (const answer of ['yes', 'no'] as const) {
+			const chosen =
+				answer === 'yes' ? 'Yes, share my details with PauseAI UK' : 'No, only PauseAI Global'
+			expect(possibleWordings(['join', 'chapter-site'], 'United Kingdom', answer)).toContain(
+				`Share your details with PauseAI UK?\nIf you say yes, we share your signup details with PauseAI UK, which may be a separate organisation from PauseAI Global. You can change your mind at any time by emailing privacy@pauseai.info.\n[chosen] ${chosen}`
+			)
+		}
+		expect(possibleWordings(['subscribe'], 'United Kingdom', 'yes')).toContain(
+			'Hear from PauseAI UK too?\nIf you say yes, we share your signup details with PauseAI UK, which may be a separate organisation from PauseAI Global. You can change your mind at any time by emailing privacy@pauseai.info.\n[chosen] Yes, share my details with PauseAI UK so it can email me local news'
+		)
+		// Each form's own earlier wording only.
+		expect(possibleWordings(['subscribe'], 'United Kingdom', 'yes')).not.toContain(
+			'Share your details with PauseAI UK?\nIf you say yes, we share your signup details with PauseAI UK, which may be a separate organisation from PauseAI Global. You can change your mind at any time by emailing privacy@pauseai.info.\n[chosen] Yes, share my details with PauseAI UK'
 		)
 	})
 })
