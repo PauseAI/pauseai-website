@@ -547,15 +547,17 @@ same chapter's own site: `/embed/onboarding-form/+page.svelte` matches
 visitor picked, `OnboardingFlow.svelte`'s `isChapterSiteQuestion` is true. The
 checkbox ("Share my details with PauseAI UK") is required, starts unticked, and
 has no heading. The line under it says what the tick means: "PauseAI UK's
-organisers will see your details and use them to organise PauseAI locally.
+organisers will use your details to organise PauseAI locally.
 PauseAI UK may be a separate organisation from PauseAI Global. You can change
 your mind at any time by emailing privacy@pauseai.info."
 (`onboarding_chapter_site_body`). It promises no email, since chapter mail has
 its own opt-in. The Privacy Policy is not agreed to by the tick; it is linked
-on the next line, "Privacy Policy · Only want PauseAI Global's
-newsletter? Subscribe instead.", whose two links open `/privacy` and
-`/subscribe` in a new tab, since the form is iframed on the chapter's site
-(`onboarding_chapter_site_alternative`). Ticking it sets the chapter answer
+on the next line, "Privacy Policy · Don't want PauseAI UK to see your details?
+Join PauseAI Global only.", whose two links open `/privacy` and `/join` in a new
+tab, since the form is iframed on the chapter's site
+(`onboarding_chapter_site_alternative`). `/join` is the alternative because it
+offers everything the chapter site does with the chapter question answerable
+No; that alternative is what makes the required tick freely given. Ticking it sets the chapter answer
 (always `yes`) and unticking clears it; that answer, not `gdprConsent`, is what
 `consentGiven` follows in this mode, so the post carries `agree_gdpr` as on any
 create, recording that the policy was shown and linked, and a tick here never

@@ -797,7 +797,7 @@
 			<input type="hidden" name="chapter_share_wording" value={chapterWording} />
 		{/if}
 		<!-- eslint-disable-next-line svelte/no-at-html-tags -->
-		<p class="helper">{@html msgs.onboarding_chapter_site_alternative}</p>
+		<p class="helper">{@html msgs.onboarding_chapter_site_alternative(chapter ?? '')}</p>
 	{/if}
 {/snippet}
 
