@@ -69,7 +69,7 @@ _Focus: Create materials, set up platforms_
 ### **Create Materials**
 
 - **Logo**: Use the [PauseAI Figma template](https://www.figma.com/design/iQ4PHQTi1vAVmT9Lckazqt/PauseAI-designs---editable) (includes country examples)
-- **Flyers**: Adapt from Figma or [public Drive templates](https://drive.google.com/drive/folders/1bQ_MZ8giK-Mee4ABkO0BgcFInaXruNpa)
+- **Flyers**: Make them with our [materials maker](/tools/materials) or adapt from Figma; find photos in our [image Drive folder](https://drive.google.com/drive/folders/1zpBbJ6WOEjqtuPJWC1eEXTsh7R6xJ118?usp=sharing)
 - **Website**: Choose one approach:
 
   - Page on pauseai.info (e.g., [PauseAI Australia](https://pauseai.info/australia))
