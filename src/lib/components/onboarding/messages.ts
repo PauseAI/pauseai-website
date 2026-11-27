@@ -155,6 +155,20 @@ export const retiredChapterWordings: Record<
 		]
 	},
 	it: {
+		join: [
+			(chapter) => ({
+				heading: `Condividere i tuoi dati con ${chapter}?`,
+				body: `Se rispondi sì, condividiamo i tuoi dati di iscrizione con ${chapter}, che può essere un'organizzazione distinta da PauseAI Global. Puoi cambiare idea in qualsiasi momento scrivendo a privacy@pauseai.info.`,
+				yes: `Sì, condividi i miei dati con ${chapter}`
+			})
+		],
+		subscribe: [
+			(chapter) => ({
+				heading: `Ricevere notizie anche da ${chapter}?`,
+				body: `Se rispondi sì, condividiamo i tuoi dati di iscrizione con ${chapter}, che può essere un'organizzazione distinta da PauseAI Global. Puoi cambiare idea in qualsiasi momento scrivendo a privacy@pauseai.info.`,
+				yes: `Sì, condividi i miei dati con ${chapter} così che possa inviarmi notizie locali via e-mail`
+			})
+		],
 		'chapter-site': [
 			(chapter) => ({
 				heading: '',
@@ -393,7 +407,7 @@ const chapterShareIt: ChapterShareMessages = {
 	onboarding_chapter_section_label: 'Il tuo gruppo locale',
 	onboarding_chapter_heading: (chapter) => `Condividere i tuoi dati con ${chapter}?`,
 	onboarding_chapter_body: (chapter) =>
-		`Se rispondi sì, condividiamo i tuoi dati di iscrizione con ${chapter}, che può essere un'organizzazione distinta da PauseAI Global. Puoi cambiare idea in qualsiasi momento scrivendo a ${PRIVACY_EMAIL}.`,
+		`Se rispondi sì, il team organizzativo di ${chapter} userà i tuoi dati per organizzare PauseAI a livello locale. ${chapter} può essere un'organizzazione distinta da PauseAI Global. Puoi cambiare idea in qualsiasi momento scrivendo a ${PRIVACY_EMAIL}.`,
 	onboarding_chapter_yes: (chapter) => `Sì, condividi i miei dati con ${chapter}`,
 	onboarding_chapter_site_label: (chapter) => `Condividi i miei dati con ${chapter}`,
 	onboarding_chapter_site_body: (chapter) =>
