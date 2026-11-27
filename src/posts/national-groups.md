@@ -34,7 +34,7 @@ _Focus: Connect with Global, define your vision, assign roles_
 
 ### **Connect with PauseAI Global**
 
-**Email maxime@pauseai.info** to express interest in starting a chapter.
+[Join PauseAI](/join) and choose **I want to lead** when it asks what brings you here.
 
 We will:
 
