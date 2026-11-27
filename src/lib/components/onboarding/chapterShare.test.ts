@@ -133,6 +133,26 @@ describe('possibleWordings', () => {
 		)
 	})
 
+	it('keeps an earlier /join and /subscribe wording in every locale, accepted with either answer', () => {
+		for (const [locale, msgs] of Object.entries(onboardingMessages)) {
+			for (const form of ['join', 'subscribe'] as const) {
+				const retired = retiredChapterWordings[locale]?.[form] ?? []
+				expect(retired.length, `${locale} ${form}`).toBeGreaterThan(0)
+				for (const answer of ['yes', 'no'] as const) {
+					const offered = possibleWordings([form], 'United Kingdom', answer)
+					for (const wording of retired) {
+						expect(offered, `${locale} ${form} ${answer}`).toContain(
+							chapterShareWording(
+								{ ...wording('PauseAI UK'), no: msgs.onboarding_chapter_no },
+								answer
+							)
+						)
+					}
+				}
+			}
+		}
+	})
+
 	it("accepts the chapter question's earlier explanation on /join and /subscribe, with either answer", () => {
 		for (const answer of ['yes', 'no'] as const) {
 			const chosen =
