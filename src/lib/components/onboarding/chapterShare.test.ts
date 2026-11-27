@@ -91,6 +91,7 @@ describe('chapterQuestion', () => {
 	it("uses /subscribe's variant, whose Yes covers email", () => {
 		expect(chapterQuestion(en, 'subscribe', 'Germany', 'PauseAI Germany')).toMatchObject({
 			heading: 'Hear from PauseAI Germany too?',
+			body: "If you say yes, PauseAI Germany's organisers will use your details to coordinate PauseAI's local activities and email you local news. PauseAI Germany may be a separate organisation from PauseAI Global. You can change your mind at any time by emailing privacy@pauseai.info.",
 			yes: 'Yes, share my details with PauseAI Germany so it can email me local news'
 		})
 	})
