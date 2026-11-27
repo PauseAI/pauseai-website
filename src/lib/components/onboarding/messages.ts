@@ -1362,7 +1362,7 @@ const it: OnboardingMessages = {
 	onboarding_btn_browse: '👀 Voglio solo agire subito',
 	onboarding_browse_helper: 'Passa direttamente alle azioni che puoi fare oggi, senza e-mail.',
 	onboarding_step2_heading: 'Cosa ti porta qui?',
-	onboarding_optins_heading: 'Vuoi ricevere nostre notizie?',
+	onboarding_optins_heading: 'Vuoi ricevere le nostre notizie?',
 	onboarding_email_critical_notice:
 		'Occasionalmente potremmo inviarti un avviso importante, anche se non selezioni nessuna di queste opzioni. Puoi annullare l\'iscrizione da qualsiasi lista in qualsiasi momento. Consulta la nostra <a target="_blank" rel="noopener noreferrer" href="/privacy">informativa sulla privacy</a>.',
 	onboarding_intent_keep_informed_label: 'Tienimi informato/a',
@@ -1426,7 +1426,7 @@ const it: OnboardingMessages = {
 		'Se non hai un account Discord, ti invitiamo a <a target="_blank" rel="noopener noreferrer" href="https://discord.com/register">crearne uno qui</a>.',
 	onboarding_field_phone: 'Numero di telefono',
 	onboarding_placeholder_dial_code: '+39',
-	onboarding_placeholder_phone: '312 345 6789',
+	onboarding_placeholder_phone: '300 000 0000',
 	onboarding_field_languages: 'Quali lingue parli? *',
 	onboarding_placeholder_languages: 'Seleziona le lingue',
 	onboarding_field_discovery: 'Come hai conosciuto PauseAI?',
@@ -1453,9 +1453,9 @@ const it: OnboardingMessages = {
 	onboarding_lead_intro:
 		'PauseAI Global cerca leader in tutto il mondo per guidare gruppi locali che coordinino le attività di organizzazione nella loro zona. Si tratta di un ruolo di volontariato part-time che richiede 5-15 ore a settimana. Ogni responsabile di gruppo si occuperà di pianificare azioni dirette, mobilitare volontari e coordinarsi con il team di PauseAI Global.',
 	onboarding_lead_has_chapter: (country) =>
-		`<strong>${country} ha già una sezione di PauseAI</strong>, quindi invece di fondare un gruppo nazionale potresti guidare un gruppo regionale o cittadino al suo interno. Trova la tua sezione su <a target="_blank" rel="noopener noreferrer" href="/communities">pauseai.info/communities</a>, oppure candidati qui sotto e ne parleremo insieme.`,
+		`<strong>${country} ha già un gruppo PauseAI nazionale</strong>, quindi invece di fondare un gruppo nazionale potresti guidare un gruppo regionale o cittadino al suo interno. Trova il tuo gruppo su <a target="_blank" rel="noopener noreferrer" href="/communities">pauseai.info/communities</a>, oppure candidati qui sotto e ne parleremo insieme.`,
 	onboarding_lead_check_chapter:
-		'<strong>Per prima cosa, verifica che il tuo paese non abbia già una sezione:</strong> <a target="_blank" rel="noopener noreferrer" href="/communities">pauseai.info/communities</a>.',
+		'<strong>Per prima cosa, verifica che il tuo paese non abbia già un gruppo nazionale:</strong> <a target="_blank" rel="noopener noreferrer" href="/communities">pauseai.info/communities</a>.',
 	onboarding_lead_what_you_do_title: 'Cosa farai',
 	onboarding_lead_do_1:
 		'Reclutare volontari e far crescere il tuo gruppo locale, accogliendo nuove persone e organizzando eventi insieme.',
