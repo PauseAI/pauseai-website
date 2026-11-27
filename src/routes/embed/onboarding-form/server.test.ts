@@ -374,7 +374,8 @@ describe('onboarding submit: chapter sharing', () => {
 			'[chosen] Share my details with PauseAI UK and PauseAI Global',
 			'[chosen] Meine Daten mit PauseAI UK und PauseAI Global teilen',
 			'[chosen] Partager mes données avec PauseAI UK et PauseAI Global',
-			'[chosen] Compartir mis datos con PauseAI UK y PauseAI Global'
+			'[chosen] Compartir mis datos con PauseAI UK y PauseAI Global',
+			'[chosen] Condividi i miei dati con PauseAI UK e PauseAI Global'
 		]) {
 			const created = await submit({
 				...signup,
