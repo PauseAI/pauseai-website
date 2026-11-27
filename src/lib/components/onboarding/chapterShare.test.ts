@@ -19,7 +19,7 @@ describe('chapterQuestion', () => {
 		const question = chapterQuestion(en, 'join', 'Germany', 'PauseAI Germany')
 		expect(question).toEqual({
 			heading: 'Share your details with PauseAI Germany?',
-			body: 'If you say yes, we share your signup details with PauseAI Germany, which may be a separate organisation from PauseAI Global. You can change your mind at any time by emailing privacy@pauseai.info.',
+			body: "If you say yes, PauseAI Germany's organisers will use your details to coordinate PauseAI's local activities. PauseAI Germany may be a separate organisation from PauseAI Global. You can change your mind at any time by emailing privacy@pauseai.info.",
 			yes: 'Yes, share my details with PauseAI Germany',
 			no: 'No, only PauseAI Global'
 		})
@@ -91,6 +91,7 @@ describe('chapterQuestion', () => {
 	it("uses /subscribe's variant, whose Yes covers email", () => {
 		expect(chapterQuestion(en, 'subscribe', 'Germany', 'PauseAI Germany')).toMatchObject({
 			heading: 'Hear from PauseAI Germany too?',
+			body: "If you say yes, PauseAI Germany's organisers will use your details to coordinate PauseAI's local activities and email you local news. PauseAI Germany may be a separate organisation from PauseAI Global. You can change your mind at any time by emailing privacy@pauseai.info.",
 			yes: 'Yes, share my details with PauseAI Germany so it can email me local news'
 		})
 	})
@@ -130,6 +131,43 @@ describe('possibleWordings', () => {
 		// Retired labels belong to the chapter-site form only.
 		expect(possibleWordings(['join'], 'United Kingdom', 'yes')).not.toContain(
 			'[chosen] Share my details with PauseAI UK and PauseAI Global'
+		)
+	})
+
+	it('keeps an earlier /join and /subscribe wording in every locale, accepted with either answer', () => {
+		for (const [locale, msgs] of Object.entries(onboardingMessages)) {
+			for (const form of ['join', 'subscribe'] as const) {
+				const retired = retiredChapterWordings[locale]?.[form] ?? []
+				expect(retired.length, `${locale} ${form}`).toBeGreaterThan(0)
+				for (const answer of ['yes', 'no'] as const) {
+					const offered = possibleWordings([form], 'United Kingdom', answer)
+					for (const wording of retired) {
+						expect(offered, `${locale} ${form} ${answer}`).toContain(
+							chapterShareWording(
+								{ ...wording('PauseAI UK'), no: msgs.onboarding_chapter_no },
+								answer
+							)
+						)
+					}
+				}
+			}
+		}
+	})
+
+	it("accepts the chapter question's earlier explanation on /join and /subscribe, with either answer", () => {
+		for (const answer of ['yes', 'no'] as const) {
+			const chosen =
+				answer === 'yes' ? 'Yes, share my details with PauseAI UK' : 'No, only PauseAI Global'
+			expect(possibleWordings(['join', 'chapter-site'], 'United Kingdom', answer)).toContain(
+				`Share your details with PauseAI UK?\nIf you say yes, we share your signup details with PauseAI UK, which may be a separate organisation from PauseAI Global. You can change your mind at any time by emailing privacy@pauseai.info.\n[chosen] ${chosen}`
+			)
+		}
+		expect(possibleWordings(['subscribe'], 'United Kingdom', 'yes')).toContain(
+			'Hear from PauseAI UK too?\nIf you say yes, we share your signup details with PauseAI UK, which may be a separate organisation from PauseAI Global. You can change your mind at any time by emailing privacy@pauseai.info.\n[chosen] Yes, share my details with PauseAI UK so it can email me local news'
+		)
+		// Each form's own earlier wording only.
+		expect(possibleWordings(['subscribe'], 'United Kingdom', 'yes')).not.toContain(
+			'Share your details with PauseAI UK?\nIf you say yes, we share your signup details with PauseAI UK, which may be a separate organisation from PauseAI Global. You can change your mind at any time by emailing privacy@pauseai.info.\n[chosen] Yes, share my details with PauseAI UK'
 		)
 	})
 })

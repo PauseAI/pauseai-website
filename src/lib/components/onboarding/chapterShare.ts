@@ -62,7 +62,9 @@ export function chapterQuestion(
 			heading: subscribe
 				? msgs.onboarding_chapter_subscribe_heading(chapter)
 				: msgs.onboarding_chapter_heading(chapter),
-			body: msgs.onboarding_chapter_body(chapter),
+			body: subscribe
+				? msgs.onboarding_chapter_subscribe_body(chapter)
+				: msgs.onboarding_chapter_body(chapter),
 			yes: subscribe
 				? msgs.onboarding_chapter_subscribe_yes(chapter)
 				: msgs.onboarding_chapter_yes(chapter),
