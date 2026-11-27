@@ -1,7 +1,7 @@
 // The chapter-sharing question on /join, the browse signup and /subscribe, and the
 // copy that depends on its answer. Rules: docs/join-form-flow.md, "Chapter sharing".
 import type { NationalGroupsApiResponse } from '$api/national-groups/+server.js'
-import { onboardingMessages, type OnboardingMessages } from './messages'
+import { onboardingMessages, retiredChapterWordings, type OnboardingMessages } from './messages'
 import { asksChapterQuestion, type ChapterAnswer } from './options'
 
 const CHOSEN_PREFIX = '[chosen] '
@@ -9,12 +9,13 @@ const CHOSEN_PREFIX = '[chosen] '
 // 'chapter-site' replaces 'join' while embedded on that same chapter's own
 // site (detected by matching the iframe's referrer host against the chapter's
 // website field, OnboardingFlow.svelte's isChapterSiteQuestion). There the
-// question is a single checkbox, not a yes/no choice: it also stands in for
-// the Privacy Policy consent otherwise asked separately, and there's no
-// "chapter only" opt-out — checked shares with both, unchecked shares with
-// neither (blocks the signup entirely, same as declining the checkbox
-// elsewhere). Its `heading`/`body` are empty: nothing is shown above the
-// checkbox, and chapterShareWording skips them in the stored evidence.
+// question is a single required checkbox, not a yes/no choice: ticking it
+// lets the chapter's organisers see the person's details (answer `yes`), and
+// the Privacy Policy, otherwise a checkbox of its own, is a link under it
+// beside /subscribe as the alternative. Unticked blocks the signup, as
+// declining the Privacy Policy checkbox does elsewhere. Its `heading` is empty
+// (nothing is shown above the checkbox, and chapterShareWording skips it in the
+// stored evidence); its `body` is the line under the checkbox.
 export type ChapterForm = 'join' | 'subscribe' | 'chapter-site'
 
 export type ChapterQuestion = { heading: string; body: string; yes: string; no: string }
@@ -52,7 +53,7 @@ export function chapterQuestion(
 		if (form === 'chapter-site') {
 			return {
 				heading: '',
-				body: '',
+				body: msgs.onboarding_chapter_site_body(chapter),
 				yes: msgs.onboarding_chapter_site_label(chapter),
 				no: msgs.onboarding_chapter_no
 			}
@@ -80,8 +81,8 @@ export function chapterQuestion(
 
 // What `GDPR chapter share wording` stores: the text the person saw, with the
 // option they picked, in the language it was shown in. Laid out as in the mock-up
-// the wording was agreed on. Empty heading/body (chapter-site's single checkbox,
-// which shows neither) are left out rather than stored as blank lines.
+// the wording was agreed on. An empty heading or body (chapter-site's checkbox
+// has no heading) is left out rather than stored as a blank line.
 export function chapterShareWording(question: ChapterQuestion, answer: ChapterAnswer): string {
 	const chosen = `${CHOSEN_PREFIX}${answer === 'yes' ? question.yes : question.no}`
 	return [question.heading, question.body, chosen].filter(Boolean).join('\n')
@@ -89,20 +90,30 @@ export function chapterShareWording(question: ChapterQuestion, answer: ChapterAn
 
 // Every wording a form can show for `country` and store with `answer`, in each
 // locale: naming the chapter as the form would if its list has one for `country`,
-// or as the none-yet variant. Independent of any chapter list, so a form and the
-// server holding different copies of it cannot disagree. The server stores a
-// posted wording only if it is one of these.
+// or as the none-yet variant, plus its retired wordings (retiredChapterWordings).
+// Independent of any chapter list, so a form and the server holding different
+// copies of it cannot disagree. The server stores a posted wording only if it is
+// one of these.
 export function possibleWordings(
 	forms: readonly ChapterForm[],
 	country: string,
 	answer: ChapterAnswer
 ): string[] {
 	const names = [chapterName(country, [country]), null]
-	return Object.values(onboardingMessages).flatMap((msgs) =>
+	return Object.entries(onboardingMessages).flatMap(([locale, msgs]) =>
 		forms.flatMap((form) =>
 			names.flatMap((name) => {
+				// The chapter-site checkbox can only be ticked, so it never posts a No.
+				if (form === 'chapter-site' && answer === 'no') return []
 				const question = chapterQuestion(msgs, form, country, name)
-				return question ? [chapterShareWording(question, answer)] : []
+				if (!question) return []
+				const retired = name
+					? (retiredChapterWordings[locale]?.[form] ?? []).map((wording) => ({
+							...wording(name),
+							no: question.no
+						}))
+					: []
+				return [question, ...retired].map((shown) => chapterShareWording(shown, answer))
 			})
 		)
 	)

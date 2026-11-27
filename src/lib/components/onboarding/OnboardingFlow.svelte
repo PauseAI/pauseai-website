@@ -418,13 +418,16 @@
 				)
 			: null
 	)
-	// True while the chapter question doubles as the Privacy Policy consent too
-	// (the 'chapter-site' wording in chapterShare.ts): answering it on step 1
-	// covers both, so step 2 neither asks again nor shows the checkbox.
+	// The chapter-site checkbox (chapterShare.ts, 'chapter-site') is asked on
+	// step 1, so step 2 shows no Privacy Policy checkbox while it is.
 	const isChapterSiteQuestion = $derived(!!chapterQ && chapterSiteCountry === basics.country)
 	const answerForCountry = $derived(
 		chapterChoice?.country === basics.country ? chapterChoice.answer : null
 	)
+	// What posts agree_gdpr. The chapter-site checkbox keeps its tick in
+	// chapterChoice, not gdprConsent, so a tick there never shows the Privacy
+	// Policy checkbox ticked after a switch to a country that asks it.
+	const consentGiven = $derived(isChapterSiteQuestion ? answerForCountry === 'yes' : gdprConsent)
 	const chapterAnswerMissing = $derived(askChapter && !answerForCountry)
 	// Posted by step 2, which creates the row, from the answer given on step 1.
 	const chapterWording = $derived(
@@ -765,13 +768,9 @@
 	{/if}
 {/snippet}
 
-<!-- On a chapter's own site, this single checkbox replaces both the chapter
-     question above and gdprConsentField below: it's the only consent gate,
-     covering Privacy Policy agreement and chapter sharing together (always
-     "yes" when checked — there's no partial opt-out here, see chapterShare.ts
-     'chapter-site'). Unchecked leaves chapterChoice unset, so the existing
-     chapterAnswerMissing gating blocks Continue/Submit exactly as it already
-     does for the regular chapter question. -->
+<!-- Replaces chapterQuestionField and gdprConsentField on a chapter's own site.
+     Unchecked leaves chapterChoice unset, so chapterAnswerMissing blocks
+     Continue/Submit. -->
 {#snippet chapterSiteConsentField()}
 	{#if chapterQ}
 		<label class="agreement">
@@ -779,22 +778,26 @@
 				type="checkbox"
 				name="agree_gdpr"
 				required
-				checked={gdprConsent}
+				aria-describedby="chapter-site-body"
+				checked={answerForCountry === 'yes'}
 				onchange={(event) => {
-					const checked = event.currentTarget.checked
-					chapterChoice = checked ? { country: basics.country, answer: 'yes' } : null
-					gdprConsent = checked
+					chapterChoice = event.currentTarget.checked
+						? { country: basics.country, answer: 'yes' }
+						: null
 				}}
 			/>
 			<span class="checkbox-box" aria-hidden="true"></span>
 			<span>{chapterQ.yes}</span>
 		</label>
+		<p class="helper" id="chapter-site-body">{chapterQ.body}</p>
 		<!-- What the browse form posts, as ChapterShareQuestion does for the regular
 		     question; on step 1 the form never submits and step 2 mirrors them. -->
 		{#if answerForCountry}
 			<input type="hidden" name="chapter_share" value={answerForCountry} />
 			<input type="hidden" name="chapter_share_wording" value={chapterWording} />
 		{/if}
+		<!-- eslint-disable-next-line svelte/no-at-html-tags -->
+		<p class="helper">{@html msgs.onboarding_chapter_site_alternative(chapter ?? '')}</p>
 	{/if}
 {/snippet}
 
@@ -978,7 +981,7 @@
 					<!-- Step 1's chapterSiteConsentField checkbox lives in a form that
 					     never actually submits (continueToIntent prevents it); mirror its
 					     answer here, in the form that does. -->
-					{#if isChapterSiteQuestion && gdprConsent}
+					{#if isChapterSiteQuestion && consentGiven}
 						<input type="hidden" name="agree_gdpr" value="on" />
 					{/if}
 					<p class="section-label" id="optins-heading">{msgs.onboarding_optins_heading}</p>
@@ -1062,7 +1065,7 @@
 					<!-- Only after the server found no answer for the row's country. -->
 					{@render chapterQuestionField(true, 3, msgs.onboarding_chapter_section_label)}
 				{:else if !isChapterSiteQuestion}
-					<!-- Already asked, and already covered this consent, on step 1. -->
+					<!-- The chapter-site checkbox on step 1 takes its place. -->
 					{@render gdprConsentField()}
 				{/if}
 				{#if onboardingLive && onboardingModeKnown}
@@ -1073,7 +1076,9 @@
 				<button
 					type="submit"
 					class="primary"
-					disabled={(isContinuation ? !intent : !gdprConsent) || chapterAnswerMissing || !canSubmit}
+					disabled={(isContinuation ? !intent : !consentGiven) ||
+						chapterAnswerMissing ||
+						!canSubmit}
 				>
 					{submitting
 						? msgs.onboarding_btn_submitting
@@ -1218,7 +1223,7 @@
 								<button
 									type="submit"
 									class="primary"
-									disabled={!gdprConsent || chapterAnswerMissing || !ukPostcodeValid || !canSubmit}
+									disabled={!consentGiven || chapterAnswerMissing || !ukPostcodeValid || !canSubmit}
 								>
 									{submitting ? msgs.onboarding_btn_signing_up : msgs.onboarding_btn_sign_me_up}
 								</button>

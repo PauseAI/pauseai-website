@@ -5,9 +5,10 @@ import {
 	chapterShareWording,
 	effectiveAnswer,
 	inTouch,
-	keepInformedSub
+	keepInformedSub,
+	possibleWordings
 } from './chapterShare.js'
-import { onboardingMessages } from './messages.js'
+import { onboardingMessages, retiredChapterWordings } from './messages.js'
 
 const en = onboardingMessages.en
 
@@ -36,8 +37,8 @@ describe('chapterQuestion', () => {
 			for (const form of ['join', 'subscribe', 'chapter-site'] as const) {
 				const withChapter = chapterQuestion(msgs, form, 'Germany', 'PauseAI Deutschland')!
 				expect(withChapter.yes, locale).toContain('PauseAI Deutschland')
-				// chapter-site's heading/body are intentionally blank (single
-				// checkbox, no explanation) — only its label names the chapter.
+				expect(withChapter.body, locale).toContain('PauseAI Deutschland')
+				// chapter-site's checkbox has no heading.
 				if (form !== 'chapter-site') {
 					expect(withChapter.heading, locale).toContain('PauseAI Deutschland')
 				}
@@ -58,18 +59,32 @@ describe('chapterQuestion', () => {
 		expect(question?.yes).toBe('Yes, share my details with the chapter when it starts')
 	})
 
-	it('uses the chapter-site variant: a single checkbox, no heading or body', () => {
+	it('uses the chapter-site variant: a single checkbox with a line under it, no heading', () => {
 		const question = chapterQuestion(en, 'chapter-site', 'Germany', 'PauseAI Germany')!
 		expect(question).toMatchObject({
 			heading: '',
-			body: '',
-			yes: 'Share my details with PauseAI Germany and PauseAI Global',
+			body: "PauseAI Germany's organisers will use your details to coordinate PauseAI's local activities. PauseAI Germany may be a separate organisation from PauseAI Global. You can change your mind at any time by emailing privacy@pauseai.info.",
+			yes: 'Share my details with PauseAI Germany',
 			no: 'No, only PauseAI Global'
 		})
-		// Its stored wording is just the checkbox's own text — no blank lines
-		// from the empty heading/body.
+		// No blank line for the empty heading.
 		expect(chapterShareWording(question, 'yes')).toBe(
-			'[chosen] Share my details with PauseAI Germany and PauseAI Global'
+			"PauseAI Germany's organisers will use your details to coordinate PauseAI's local activities. PauseAI Germany may be a separate organisation from PauseAI Global. You can change your mind at any time by emailing privacy@pauseai.info.\n[chosen] Share my details with PauseAI Germany"
+		)
+	})
+
+	it('links the Privacy Policy and /join under the chapter-site checkbox, in a new tab', () => {
+		for (const [locale, msgs] of Object.entries(onboardingMessages)) {
+			const line = msgs.onboarding_chapter_site_alternative('PauseAI UK')
+			expect(line, locale).toContain('PauseAI UK')
+			for (const href of ['/privacy', '/join']) {
+				expect(line, locale).toContain(
+					`<a target="_blank" rel="noopener noreferrer" href="${href}">`
+				)
+			}
+		}
+		expect(en.onboarding_chapter_site_alternative('PauseAI UK')).toBe(
+			'<a target="_blank" rel="noopener noreferrer" href="/privacy">Privacy Policy</a> · Don\'t want PauseAI UK to see your details? <a target="_blank" rel="noopener noreferrer" href="/join">Join PauseAI Global only</a>.'
 		)
 	})
 
@@ -84,6 +99,38 @@ describe('chapterQuestion', () => {
 		expect(chapterQuestion(en, 'join', 'United States', null)).toBeNull()
 		expect(effectiveAnswer('United States', null)).toBe('no')
 		expect(effectiveAnswer('Portugal', null)).toBeNull()
+	})
+})
+
+describe('possibleWordings', () => {
+	it("accepts the chapter-site checkbox's current and retired wordings, in every locale", () => {
+		const offered = possibleWordings(['join', 'chapter-site'], 'United Kingdom', 'yes')
+		for (const [locale, msgs] of Object.entries(onboardingMessages)) {
+			const question = chapterQuestion(msgs, 'chapter-site', 'United Kingdom', 'PauseAI UK')!
+			expect(offered, locale).toContain(chapterShareWording(question, 'yes'))
+			const retiredForLocale = retiredChapterWordings[locale]?.['chapter-site'] ?? []
+			// Every locale shipped the earlier label, so each must keep one.
+			expect(retiredForLocale.length, locale).toBeGreaterThan(0)
+			for (const retired of retiredForLocale) {
+				expect(offered, locale).toContain(
+					chapterShareWording({ ...retired('PauseAI UK'), no: question.no }, 'yes')
+				)
+			}
+		}
+		expect(offered).toContain('[chosen] Share my details with PauseAI UK and PauseAI Global')
+		// The checkbox can't post a No, so no chapter-site wording is accepted with one.
+		const offeredNo = possibleWordings(['join', 'chapter-site'], 'United Kingdom', 'no')
+		expect(offeredNo).not.toContain('[chosen] No, only PauseAI Global')
+		expect(offeredNo).not.toContain(
+			chapterShareWording(
+				chapterQuestion(en, 'chapter-site', 'United Kingdom', 'PauseAI UK')!,
+				'no'
+			)
+		)
+		// Retired labels belong to the chapter-site form only.
+		expect(possibleWordings(['join'], 'United Kingdom', 'yes')).not.toContain(
+			'[chosen] Share my details with PauseAI UK and PauseAI Global'
+		)
 	})
 })
 

@@ -37,7 +37,8 @@ const { TOKEN_TTL_SECONDS } = await import('$lib/server/onboardingContinuation')
 const { chapterQuestion, chapterShareWording } =
 	await import('$lib/components/onboarding/chapterShare')
 const { FORM_VERSION, signupSource } = await import('$lib/components/onboarding/options')
-const { onboardingMessages } = await import('$lib/components/onboarding/messages')
+const { onboardingMessages, retiredChapterWordings } =
+	await import('$lib/components/onboarding/messages')
 
 // What Airtable answers a write with: the whole row, so an update returns more
 // than it sent.
@@ -74,7 +75,7 @@ async function submit(fields: Record<string, string>, platform?: unknown): Promi
 
 // The wording the form renders, built the way the form builds it.
 function wording(
-	form: 'join' | 'subscribe',
+	form: 'join' | 'subscribe' | 'chapter-site',
 	country: string,
 	chapter: string | null,
 	answer: 'yes' | 'no',
@@ -335,6 +336,54 @@ describe('onboarding submit: chapter sharing', () => {
 			expect(writtenFields(createRecord)['GDPR chapter share wording']).toBe(
 				posted.replace(/\r\n/g, '\n')
 			)
+		}
+	})
+
+	it("accepts the chapter-site checkbox's label, and its earlier one from a form loaded before it changed", async () => {
+		for (const locale of Object.keys(onboardingMessages)) {
+			for (const posted of [
+				wording('chapter-site', 'United Kingdom', 'PauseAI UK', 'yes', locale),
+				`[chosen] ${retiredChapterWordings[locale]['chapter-site']![0]('PauseAI UK').yes}`
+			]) {
+				const created = await submit({
+					...signup,
+					chapter_share: 'yes',
+					chapter_share_wording: posted
+				})
+				expect(created, posted).toMatchObject({ success: true })
+				const fields = writtenFields(createRecord)
+				expect(fields['GDPR chapter share wording']).toBe(posted)
+				expect(fields['GDPR chapter share permission']).toBe(true)
+				expect(fields['Data privacy policy agreed']).toBe(true)
+			}
+		}
+		expect(wording('chapter-site', 'United Kingdom', 'PauseAI UK', 'yes')).toBe(
+			"PauseAI UK's organisers will use your details to coordinate PauseAI's local activities. PauseAI UK may be a separate organisation from PauseAI Global. You can change your mind at any time by emailing privacy@pauseai.info.\n[chosen] Share my details with PauseAI UK"
+		)
+		// The earlier label naming another chapter is still refused.
+		const refused = await submit({
+			...signup,
+			chapter_share: 'yes',
+			chapter_share_wording: '[chosen] Share my details with PauseAI Evil and PauseAI Global'
+		})
+		expect(refused.status).toBe(400)
+	})
+
+	it('accepts the earlier chapter-site labels word for word, as a form loaded before the change posts them', async () => {
+		for (const posted of [
+			'[chosen] Share my details with PauseAI UK and PauseAI Global',
+			'[chosen] Meine Daten mit PauseAI UK und PauseAI Global teilen',
+			'[chosen] Partager mes données avec PauseAI UK et PauseAI Global',
+			'[chosen] Compartir mis datos con PauseAI UK y PauseAI Global',
+			'[chosen] Condividi i miei dati con PauseAI UK e PauseAI Global'
+		]) {
+			const created = await submit({
+				...signup,
+				chapter_share: 'yes',
+				chapter_share_wording: posted
+			})
+			expect(created, posted).toMatchObject({ success: true })
+			expect(writtenFields(createRecord)['GDPR chapter share wording']).toBe(posted)
 		}
 	})
 
