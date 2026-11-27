@@ -63,13 +63,13 @@ describe('chapterQuestion', () => {
 		const question = chapterQuestion(en, 'chapter-site', 'Germany', 'PauseAI Germany')!
 		expect(question).toMatchObject({
 			heading: '',
-			body: "PauseAI Germany's organisers will use your details to organise PauseAI locally. PauseAI Germany may be a separate organisation from PauseAI Global. You can change your mind at any time by emailing privacy@pauseai.info.",
+			body: "PauseAI Germany's organisers will use your details to coordinate PauseAI's local activities. PauseAI Germany may be a separate organisation from PauseAI Global. You can change your mind at any time by emailing privacy@pauseai.info.",
 			yes: 'Share my details with PauseAI Germany',
 			no: 'No, only PauseAI Global'
 		})
 		// No blank line for the empty heading.
 		expect(chapterShareWording(question, 'yes')).toBe(
-			"PauseAI Germany's organisers will use your details to organise PauseAI locally. PauseAI Germany may be a separate organisation from PauseAI Global. You can change your mind at any time by emailing privacy@pauseai.info.\n[chosen] Share my details with PauseAI Germany"
+			"PauseAI Germany's organisers will use your details to coordinate PauseAI's local activities. PauseAI Germany may be a separate organisation from PauseAI Global. You can change your mind at any time by emailing privacy@pauseai.info.\n[chosen] Share my details with PauseAI Germany"
 		)
 	})
 

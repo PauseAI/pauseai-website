@@ -547,7 +547,7 @@ same chapter's own site: `/embed/onboarding-form/+page.svelte` matches
 visitor picked, `OnboardingFlow.svelte`'s `isChapterSiteQuestion` is true. The
 checkbox ("Share my details with PauseAI UK") is required, starts unticked, and
 has no heading. The line under it says what the tick means: "PauseAI UK's
-organisers will use your details to organise PauseAI locally.
+organisers will use your details to coordinate PauseAI's local activities.
 PauseAI UK may be a separate organisation from PauseAI Global. You can change
 your mind at any time by emailing privacy@pauseai.info."
 (`onboarding_chapter_site_body`). It promises no email, since chapter mail has

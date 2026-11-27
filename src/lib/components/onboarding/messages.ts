@@ -119,7 +119,7 @@ const chapterShareEn: ChapterShareMessages = {
 	onboarding_chapter_yes: (chapter) => `Yes, share my details with ${chapter}`,
 	onboarding_chapter_site_label: (chapter) => `Share my details with ${chapter}`,
 	onboarding_chapter_site_body: (chapter) =>
-		`${chapter}'s organisers will use your details to organise PauseAI locally. ${chapter} may be a separate organisation from PauseAI Global. You can change your mind at any time by emailing ${PRIVACY_EMAIL}.`,
+		`${chapter}'s organisers will use your details to coordinate PauseAI's local activities. ${chapter} may be a separate organisation from PauseAI Global. You can change your mind at any time by emailing ${PRIVACY_EMAIL}.`,
 	onboarding_chapter_site_alternative: (chapter) =>
 		`<a target="_blank" rel="noopener noreferrer" href="/privacy">Privacy Policy</a> · Don't want ${chapter} to see your details? <a target="_blank" rel="noopener noreferrer" href="/join">Join PauseAI Global only</a>.`,
 	onboarding_chapter_site_consent_needed: 'Tick the box above to continue.',
