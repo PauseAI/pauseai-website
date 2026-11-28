@@ -28,7 +28,7 @@
 		"_lint:stylelint": "stylelint \"src/**/*.{css,svelte}\"",
 		"_lint:prettier": "tsx scripts/generate-prettier-ignore.ts && prettier --check .",
 		"format": "tsx scripts/generate-prettier-ignore.ts && prettier --write --ignore-unknown",
-		"prepare": "lefthook install",
+		"prepare": "lefthook install && tsx scripts/inlang-settings.ts && svelte-kit sync",
 		"sync": "svelte-kit sync",
 		"sync:national-chapters": "tsx scripts/sync-national-chapters.ts"
 	},
