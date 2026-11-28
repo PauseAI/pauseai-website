@@ -115,7 +115,7 @@
 			"name": "Ghana",
 			"lat": 8.0300284,
 			"lon": -1.0800271,
-			"link": "mailto:ewura@pauseai.info"
+			"link": "mailto:tivai.seyenam@pauseai.info"
 		},
 		{
 			"name": "Ireland",
@@ -142,6 +142,33 @@
 			"lat": 1.5333554,
 			"lon": 32.2166578,
 			"link": "mailto:waswaalex@pauseai.info"
+		},
+		{
+			"name": "Austria",
+			"lat": 47.59397,
+			"lon": 14.12456,
+			"link": "mailto:benjamin.legerer@pauseai.info",
+			"country_local": "Österreich"
+		},
+		{
+			"name": "India",
+			"lat": 22.3511148,
+			"lon": 78.6677428,
+			"link": "mailto:shweta.bhardwaj@pauseai.info"
+		},
+		{
+			"name": "Israel",
+			"lat": 30.8124247,
+			"lon": 34.8594762,
+			"link": "mailto:matan.goldstein@pauseai.info",
+			"country_local": "ישראל"
+		},
+		{
+			"name": "South Korea",
+			"lat": 36.638392,
+			"lon": 127.6961188,
+			"link": "mailto:raysun@pauseai.info",
+			"country_local": "대한민국"
 		}
 	]
 }
