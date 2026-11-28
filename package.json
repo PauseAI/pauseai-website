@@ -52,7 +52,7 @@
 		"dotenv": "^17.4.2",
 		"eslint": "^10.15.0",
 		"eslint-config-flat-gitignore": "^2.4.0",
-		"eslint-config-prettier": "^10.1.8",
+		"eslint-config-prettier": "^10.1.9",
 		"eslint-formatter-gha": "^2.0.1",
 		"eslint-plugin-svelte": "^3.24.1",
 		"fontaine": "^0.8.2",
