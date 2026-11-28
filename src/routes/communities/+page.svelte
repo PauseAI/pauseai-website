@@ -12,6 +12,7 @@
 	import { onDestroy, onMount } from 'svelte'
 	import { communities, communitiesMeta, GLOBAL_DISCORD_URL } from './communities'
 	import { MAPBOX_KEY } from './constants'
+	import { sharedLocationOffsets } from './shared-location-offsets'
 	import { HERO_ORANGE } from '$lib/colors'
 	import escape from 'escape-html'
 
@@ -23,6 +24,8 @@
 	const { GeolocateControl, Map, Marker, Popup } = maplibregl
 
 	const LOCATED_ZOOM = 4
+	// The width of maplibre's default marker, so markers at the same location sit edge to edge
+	const SHARED_LOCATION_SPACING_PX = 27
 	const STYLE_URL =
 		'https://api.mapbox.com/styles/v1/mapbox/outdoors-v11?access_token=' + MAPBOX_KEY
 
@@ -125,8 +128,9 @@
 		})
 
 		map.on('load', () => {
-			communities.map((community) => {
-				new Marker({
+			const sideOffsets = sharedLocationOffsets(communities, SHARED_LOCATION_SPACING_PX)
+			communities.map((community, i) => {
+				const marker = new Marker({
 					color:
 						community.type === 'adjacent'
 							? 'rgba(0,0,0,.5)'
@@ -135,8 +139,13 @@
 								: HERO_ORANGE,
 					opacityWhenCovered: '0'
 				})
+				// Move sideways only, keeping maplibre's default vertical offset that puts the pin's tip
+				// on the location
+				const { x, y } = marker.getOffset()
+				marker
+					.setOffset([x + sideOffsets[i], y])
 					.setPopup(
-						new Popup({ offset: [0, -15] }).setHTML(
+						new Popup({ offset: [sideOffsets[i], -15] }).setHTML(
 							`<h3><a href="${community.link || GLOBAL_DISCORD_URL}">${community.name}</a></h3>`
 						)
 					)
