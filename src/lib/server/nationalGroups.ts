@@ -146,7 +146,7 @@ async function readAndRecord(work: Promise<void>[]): Promise<NationalGroup[] | n
 	const now = Date.now()
 	const groups = toGroups(rows)
 	cached = { groups, readAt: now }
-	// Stored without the rows' `leaders`, so the copy holds only fields the site serves.
+	// Stored without the rows' `leaders` (lead names), which the site doesn't serve.
 	work.push(saveLastGood(STORED_COPY, rows.map(withoutLeaders)))
 	if (outage) {
 		await reportMessage('Chapter directory reads recovered', outageFields(outage.since, now))
