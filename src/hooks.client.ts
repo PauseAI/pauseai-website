@@ -5,14 +5,24 @@ import type { HandleClientError } from '@sveltejs/kit'
 // from the SSR function — one 502 and the page loses all JS.
 import * as publicEnv from '$env/static/public'
 import { SENTRY_ENVIRONMENT, SENTRY_RELEASE, redactLinkCredentials } from '$lib/sentry'
+import { isEmbedPath } from '$lib/embed'
+import { deLocalizeHref } from '$lib/paraglide/runtime'
 import { isChunkLoadError, isSamePage, isStaleBuild, reloadOnce } from '$lib/staleBuild'
 
 const GENERIC_ERROR = { message: 'An unexpected error occurred.' }
 
 let dsn: string | undefined
 
+// A site embedding one of our /embed/ pages can add ?sentry=off to the iframe URL so its
+// visitors' browsers send nothing to Sentry (docs/ONBOARDING_EMBED.md).
+const sentryOptedOut = () =>
+	isEmbedPath(deLocalizeHref(location.pathname)) &&
+	new URLSearchParams(location.search).get('sentry') === 'off'
+
 export const init = () => {
-	dsn = (publicEnv as Record<string, string | undefined>).PUBLIC_SENTRY_DSN
+	dsn = sentryOptedOut()
+		? undefined
+		: (publicEnv as Record<string, string | undefined>).PUBLIC_SENTRY_DSN
 	const release = SENTRY_RELEASE
 
 	if (dsn) {
