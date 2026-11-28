@@ -491,7 +491,7 @@ export const actions: Actions = {
 		const groups = await getNationalGroups()
 		platformWaitUntil(platform)?.(nationalGroupsBackgroundWork())
 		const chapterMatch = groups?.find((group) => group.name.toLowerCase() === country.toLowerCase())
-		const chapter = chapterMatch ? { name: chapterMatch.name, leader: chapterMatch.leader } : null
+		const chapter = chapterMatch ? { name: chapterMatch.name } : null
 		const submission = recordStubSubmission({
 			airtable: {
 				baseId: MEMBERS_BASE_ID,

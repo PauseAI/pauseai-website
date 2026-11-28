@@ -25,7 +25,7 @@ vi.mock('$lib/server/memberCrm', async (original) => ({
 const flushReports = vi.fn(() => Promise.resolve())
 vi.mock('$lib/server/sentry', () => ({ reportError, flushReports }))
 // The National Chapters list the action reads (null: never read on this instance).
-let nationalGroups: { name: string; leader: string }[] | null
+let nationalGroups: { name: string }[] | null
 const nationalGroupsWork = Promise.resolve()
 vi.mock('$lib/server/nationalGroups', () => ({
 	getNationalGroups: () => Promise.resolve(nationalGroups),
@@ -63,7 +63,7 @@ const mockWrites = () => {
 type Result = { status?: number; data?: Record<string, unknown> } & Record<string, unknown>
 
 // What /api/national-groups answers, which both the forms and the action read.
-const CHAPTERS = ['France', 'Germany', 'United Kingdom'].map((name) => ({ name, leader: 'Lead' }))
+const CHAPTERS = ['France', 'Germany', 'United Kingdom'].map((name) => ({ name }))
 
 async function submit(fields: Record<string, string>, platform?: unknown): Promise<Result> {
 	const body = new FormData()
@@ -1250,5 +1250,15 @@ describe('onboarding submit: stub mode', () => {
 		const waitUntil = vi.fn<(promise: Promise<unknown>) => void>()
 		expect(await submit(signup, { context: { waitUntil } })).toMatchObject({ success: true })
 		expect(waitUntil).toHaveBeenCalledExactlyOnceWith(nationalGroupsWork)
+	})
+
+	it("records the matched chapter by name only, never a lead's name", async () => {
+		for (const key of Object.keys(env)) delete env[key]
+		env.ONBOARDING_CONTINUATION_SECRET = 'test-secret'
+		// A group carrying an extra field, as an older list might.
+		nationalGroups = [{ name: 'United Kingdom', leader: 'Grace Hopper' } as { name: string }]
+		const result = await submit(signup)
+		const meta = (result.submission as { meta: { chapterMatch: unknown } }).meta
+		expect(meta.chapterMatch).toEqual({ name: 'United Kingdom' })
 	})
 })
