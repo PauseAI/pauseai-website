@@ -43,11 +43,27 @@ export const init = async () => {
 	}
 }
 
+// Pages under /embed/ are iframed by other organisations' sites (e.g. a chapter's join form),
+// which shouldn't have Google Tag Manager, and the analytics tags it loads, put on their
+// visitors. app.html's GTM snippets sit between these comment markers; this removes them.
+// If the markers are renamed this stops matching and embeds get GTM again: hooks.server.test.ts
+// checks app.html against it.
+const GTM_BLOCK =
+	/<!-- Google Tag Manager( \(noscript\))? -->[\s\S]*?<!-- End Google Tag Manager\1 -->/g
+
+export const isEmbedRoute = (routeId: string | null) => routeId?.startsWith('/embed/') ?? false
+
+export const stripGtm = (html: string) => html.replace(GTM_BLOCK, '')
+
 const handle: Handle = ({ event, resolve }) =>
 	paraglideMiddleware(event.request, ({ request: localizedRequest, locale }) => {
 		event.request = localizedRequest
+		const embed = isEmbedRoute(event.route.id)
 		return resolve(event, {
-			transformPageChunk: ({ html }) => html.replace('%lang%', locale)
+			transformPageChunk: ({ html }) => {
+				const page = html.replace('%lang%', locale)
+				return embed ? stripGtm(page) : page
+			}
 		})
 	})
 
