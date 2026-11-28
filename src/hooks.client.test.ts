@@ -2,10 +2,11 @@ import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 
 const updated = vi.hoisted(() => ({ current: false, check: vi.fn() }))
 const captureException = vi.hoisted(() => vi.fn())
+const sentryInit = vi.hoisted(() => vi.fn())
 
 vi.mock('$app/state', () => ({ updated }))
 vi.mock('$env/static/public', () => ({ PUBLIC_SENTRY_DSN: 'https://key@o1.ingest.sentry.io/1' }))
-vi.mock('@sentry/svelte', () => ({ init: vi.fn(), captureException }))
+vi.mock('@sentry/svelte', () => ({ init: sentryInit, captureException }))
 
 const chunkError = () =>
 	new TypeError(
@@ -63,5 +64,49 @@ describe('handleError on a chunk-load error from a replaced deploy', () => {
 		await handle('https://pauseai.info/communities')
 		expect(reload).not.toHaveBeenCalled()
 		expect(captureException).toHaveBeenCalledTimes(1)
+	})
+})
+
+describe('?sentry=off on an embed', () => {
+	beforeEach(() => {
+		vi.resetModules()
+		sentryInit.mockClear()
+		captureException.mockClear()
+		updated.check.mockResolvedValue(false)
+	})
+
+	afterEach(() => vi.unstubAllGlobals())
+
+	const load = async (pathname: string, search: string) => {
+		vi.stubGlobal('location', { pathname, search, reload: vi.fn() })
+		const hooks = await import('./hooks.client')
+		hooks.init()
+		await hooks.handleError({
+			error: new Error('boom'),
+			event: {
+				url: new URL(pathname + search, 'https://pauseai.info'),
+				params: {},
+				route: { id: null }
+			},
+			status: 500,
+			message: 'Internal Error'
+		})
+	}
+
+	it('skips Sentry entirely, including error reports', async () => {
+		await load('/embed/onboarding-form', '?locale=de&country=Switzerland&sentry=off')
+		expect(sentryInit).not.toHaveBeenCalled()
+		expect(captureException).not.toHaveBeenCalled()
+	})
+
+	it('keeps Sentry on embeds by default', async () => {
+		await load('/embed/onboarding-form', '?locale=de&country=Switzerland')
+		expect(sentryInit).toHaveBeenCalledTimes(1)
+		expect(captureException).toHaveBeenCalledTimes(1)
+	})
+
+	it('is ignored outside /embed/', async () => {
+		await load('/join', '?sentry=off')
+		expect(sentryInit).toHaveBeenCalledTimes(1)
 	})
 })
