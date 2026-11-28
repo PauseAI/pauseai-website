@@ -25,24 +25,22 @@ const STORED_COPY = 'chapters'
 const FALLBACK_ROWS: Record<string, unknown>[] = [
 	{
 		country: '[FALLBACK DATA] Example Group 1',
-		leaders: ['Fall McBack'],
 		website_email: 'fall.mcback@example.com',
 		website: 'http://example.com'
 	},
-	{ country: '[FALLBACK DATA] Example Group 2', leaders: ['etc'] }
+	{ country: '[FALLBACK DATA] Example Group 2' }
 ]
 
 const text = (value: unknown): string => (typeof value === 'string' ? value : '')
 
-/** One publicList row. The CRM has no public chapter id, so the country stands in for one. */
+/**
+ * One publicList row. The CRM has no public chapter id, so the country stands in for one.
+ * The row's `leaders` (people's names) is not served: we don't name chapter leads publicly.
+ */
 function rowToNationalGroup(row: Record<string, unknown>): NationalGroup {
-	const leaders = Array.isArray(row.leaders)
-		? row.leaders.filter((leader): leader is string => typeof leader === 'string')
-		: []
 	return {
 		id: text(row.country),
 		name: text(row.country),
-		leader: leaders.length > 0 ? leaders.join(', ') : 'No',
 		email: text(row.website_email),
 		xLink: text(row.x),
 		blueskyLink: text(row.bluesky),
@@ -61,6 +59,8 @@ function rowToNationalGroup(row: Record<string, unknown>): NationalGroup {
 		image: text(row.image) || undefined
 	}
 }
+
+const withoutLeaders = ({ leaders: _leaders, ...row }: Record<string, unknown>) => row
 
 const toGroups = (rows: Record<string, unknown>[]): NationalGroup[] =>
 	rows.map(rowToNationalGroup).sort((a, b) => a.name.localeCompare(b.name))
@@ -146,8 +146,8 @@ async function readAndRecord(work: Promise<void>[]): Promise<NationalGroup[] | n
 	const now = Date.now()
 	const groups = toGroups(rows)
 	cached = { groups, readAt: now }
-	// The CRM's publicList rows hold only fields the site serves.
-	work.push(saveLastGood(STORED_COPY, rows))
+	// Stored without the rows' `leaders`, so the copy holds only fields the site serves.
+	work.push(saveLastGood(STORED_COPY, rows.map(withoutLeaders)))
 	if (outage) {
 		await reportMessage('Chapter directory reads recovered', outageFields(outage.since, now))
 		work.push(flushReports())

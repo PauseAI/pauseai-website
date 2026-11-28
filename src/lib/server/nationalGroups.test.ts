@@ -67,7 +67,6 @@ describe('getNationalGroups', () => {
 		expect(uk).toMatchObject({
 			id: 'United Kingdom',
 			name: 'United Kingdom',
-			leader: 'Ada Lovelace, Alan Turing',
 			email: '',
 			website: 'https://pauseai.uk/',
 			discordLink: 'https://discord.gg/uk',
@@ -75,7 +74,11 @@ describe('getNationalGroups', () => {
 			public: true,
 			image: 'https://crm.example/public/media/chapter-images/1-abc.png'
 		})
-		expect(sweden).toMatchObject({ name: 'Sweden', leader: 'No', website: '', email: '' })
+		expect(sweden).toMatchObject({ name: 'Sweden', website: '', email: '' })
+		// We don't name chapter leads publicly.
+		expect(uk).not.toHaveProperty('leader')
+		expect(sweden).not.toHaveProperty('leader')
+		expect(JSON.stringify([uk, sweden])).not.toContain('Ada Lovelace')
 		expect(sweden.image).toBeUndefined()
 	})
 
@@ -238,7 +241,9 @@ describe('getNationalGroups', () => {
 		saveLastGood.mockReturnValue(new Promise<void>((resolve) => (write = resolve)))
 		callCrmRows.mockResolvedValue(rows('Germany'))
 		await getNationalGroups()
-		expect(saveLastGood).toHaveBeenCalledExactlyOnceWith('chapters', rows('Germany').rows)
+		expect(saveLastGood).toHaveBeenCalledExactlyOnceWith('chapters', [
+			{ country: 'Germany', image: null }
+		])
 		let settled = false
 		void nationalGroupsBackgroundWork().then(() => (settled = true))
 		await Promise.resolve()
@@ -246,6 +251,17 @@ describe('getNationalGroups', () => {
 		write()
 		await nationalGroupsBackgroundWork()
 		expect(settled).toBe(true)
+	})
+
+	it('keeps no lead names in the stored copy', async () => {
+		callCrmRows.mockResolvedValue({
+			ok: true,
+			rows: [{ country: 'Germany', leaders: ['Ada Lovelace'], website: 'https://pauseai.de/' }]
+		})
+		await getNationalGroups()
+		expect(saveLastGood).toHaveBeenCalledExactlyOnceWith('chapters', [
+			{ country: 'Germany', website: 'https://pauseai.de/' }
+		])
 	})
 
 	it('serves the stored list on a cold instance while the CRM is down', async () => {

@@ -124,7 +124,6 @@ export type Person = {
 
 export type NationalGroup = {
 	name: string
-	leader: string
 	email?: string
 	description?: string
 	image?: string

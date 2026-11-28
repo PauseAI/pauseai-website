@@ -104,24 +104,15 @@
 				</div>
 			{/if}
 
-			{#if nationalGroup.leader !== 'No'}
+			{#if nationalGroup.email}
 				<div class="section">
-					{#if nationalGroup.email}
-						<LinkWithoutIcon href="mailto:{nationalGroup.email}" class="section-title link">
-							<Mail
-								size={16}
-								style="margin-right: 0.25rem; display: inline-block; vertical-align: middle;"
-							/>
-							Leaders:
-						</LinkWithoutIcon>
-					{:else}
-						<span class="section-title">Leaders</span>
-					{/if}
-					<div class="list">
-						{#each nationalGroup.leader.split(', ') as leader}
-							<span>{leader}</span>
-						{/each}
-					</div>
+					<LinkWithoutIcon href="mailto:{nationalGroup.email}" class="section-title link">
+						<Mail
+							size={16}
+							style="margin-right: 0.25rem; display: inline-block; vertical-align: middle;"
+						/>
+						Email
+					</LinkWithoutIcon>
 				</div>
 			{/if}
 		</div>
@@ -205,16 +196,6 @@
 		gap: 0.25rem;
 	}
 
-	.section-title {
-		font-weight: 600;
-		font-size: 0.9rem;
-		/* Default color for non-links */
-		color: var(--text-2);
-		display: flex;
-		align-items: center;
-	}
-
-	/* Override color for links */
 	:global(a.section-title) {
 		color: var(--brand) !important;
 		text-decoration: none;
@@ -222,13 +203,6 @@
 
 	:global(a.section-title:hover) {
 		text-decoration: underline;
-	}
-
-	.list {
-		display: flex;
-		flex-direction: column;
-		gap: 0.25rem;
-		font-size: 0.95rem;
 	}
 
 	.list-row {
