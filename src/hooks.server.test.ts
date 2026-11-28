@@ -22,12 +22,12 @@ async function render(routeId: string | null) {
 	}
 	await handle({
 		event: event as never,
-		resolve: (async (
+		resolve: ((
 			_event: unknown,
 			opts?: { transformPageChunk?: (input: { html: string; done: boolean }) => string }
 		) => {
 			out = opts?.transformPageChunk?.({ html: appHtml, done: true }) ?? appHtml
-			return new Response(out)
+			return Promise.resolve(new Response(out))
 		}) as never
 	})
 	return out
