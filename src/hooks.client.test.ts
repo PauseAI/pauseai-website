@@ -110,3 +110,26 @@ describe('?sentry=off on an embed', () => {
 		expect(sentryInit).toHaveBeenCalledTimes(1)
 	})
 })
+
+describe('beforeSend', () => {
+	beforeEach(() => {
+		vi.resetModules()
+		sentryInit.mockClear()
+		vi.stubGlobal('location', { pathname: '/join', search: '', reload: vi.fn() })
+	})
+
+	afterEach(() => vi.unstubAllGlobals())
+
+	it('sends an empty location and a redacted verification link', async () => {
+		const hooks = await import('./hooks.client')
+		hooks.init()
+		type Event = { request: { url: string }; user: object }
+		const { beforeSend } = sentryInit.mock.calls[0][0] as { beforeSend: (event: Event) => Event }
+		const event = beforeSend({
+			request: { url: 'https://pauseai.info/verify?verificationKey=secret' },
+			user: { id: 'abc' }
+		})
+		expect(event.user).toEqual({ id: 'abc', geo: {} })
+		expect(event.request.url).toBe('https://pauseai.info/verify?[redacted]')
+	})
+})

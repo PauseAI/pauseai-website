@@ -20,7 +20,12 @@ import { env } from '$env/dynamic/public'
 import { paraglideMiddleware } from '$lib/paraglide/server.js'
 import { deLocalizeUrl } from '$lib/paraglide/runtime'
 import { isEmbedPath } from '$lib/embed'
-import { SENTRY_ENVIRONMENT, SENTRY_RELEASE, redactLinkCredentials } from '$lib/sentry'
+import {
+	SENTRY_ENVIRONMENT,
+	SENTRY_RELEASE,
+	dropLocation,
+	redactLinkCredentials
+} from '$lib/sentry'
 
 let Sentry: typeof import('@sentry/deno') | undefined
 
@@ -37,7 +42,11 @@ export const init = async () => {
 				release,
 				environment: SENTRY_ENVIRONMENT,
 				tracesSampleRate: 0,
-				enableLogs: true
+				enableLogs: true,
+				beforeSend(event) {
+					dropLocation(event)
+					return event
+				}
 			})
 		} catch (e) {
 			console.error('[Sentry Server] Failed to initialize:', e)

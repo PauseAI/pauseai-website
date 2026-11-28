@@ -4,7 +4,12 @@ import type { HandleClientError } from '@sveltejs/kit'
 // makes prerendered pages block hydration on a runtime fetch of /_app/env.js
 // from the SSR function — one 502 and the page loses all JS.
 import * as publicEnv from '$env/static/public'
-import { SENTRY_ENVIRONMENT, SENTRY_RELEASE, redactLinkCredentials } from '$lib/sentry'
+import {
+	SENTRY_ENVIRONMENT,
+	SENTRY_RELEASE,
+	dropLocation,
+	redactLinkCredentials
+} from '$lib/sentry'
 import { isEmbedPath } from '$lib/embed'
 import { deLocalizeHref } from '$lib/paraglide/runtime'
 import { isChunkLoadError, isSamePage, isStaleBuild, reloadOnce } from '$lib/staleBuild'
@@ -45,6 +50,7 @@ export const init = () => {
 				},
 				beforeSend(event) {
 					if (event.request?.url) event.request.url = redactLinkCredentials(event.request.url)
+					dropLocation(event)
 					return event
 				}
 			})
