@@ -16,6 +16,7 @@
 	import { searchOpen } from '$lib/stores/searchModal'
 	import { deLocalizeHref } from '$lib/paraglide/runtime'
 	import type { BannerRule } from '$lib/types'
+	import { isEmbedPath } from '$lib/embed'
 	import '@fontsource/roboto-slab/400.css'
 	import '@fontsource/roboto-slab/500.css'
 	import '@fontsource/roboto-slab/700.css'
@@ -82,7 +83,7 @@
 	let geoForNearbyEvent: GeoApiResponse | null = $state(null)
 	let visitorCountry: string | null = $state(null)
 	let hero = $derived(deLocalizeHref(page.url.pathname) === '/')
-	let embed = $derived(page.route.id?.startsWith('/embed/') ?? false)
+	let embed = $derived(isEmbedPath(page.route.id))
 
 	// Once a newer deploy is live, a client-side navigation would try chunks that are gone, and an
 	// old client talking to the new server can break without any chunk error (data shapes, remote

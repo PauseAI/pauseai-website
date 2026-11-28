@@ -18,6 +18,8 @@ if (
 import { type Handle, type HandleServerError } from '@sveltejs/kit'
 import { env } from '$env/dynamic/public'
 import { paraglideMiddleware } from '$lib/paraglide/server.js'
+import { deLocalizeUrl } from '$lib/paraglide/runtime'
+import { isEmbedPath } from '$lib/embed'
 import { SENTRY_ENVIRONMENT, SENTRY_RELEASE, redactLinkCredentials } from '$lib/sentry'
 
 let Sentry: typeof import('@sentry/deno') | undefined
@@ -43,26 +45,22 @@ export const init = async () => {
 	}
 }
 
-// Pages under /embed/ are iframed by other organisations' sites (e.g. a chapter's join form),
-// which shouldn't have Google Tag Manager, and the analytics tags it loads, put on their
+// Embeds shouldn't put Google Tag Manager, and the analytics tags it loads, on another site's
 // visitors. app.html's GTM snippets sit between these comment markers; this removes them.
 // If the markers are renamed this stops matching and embeds get GTM again: hooks.server.test.ts
 // checks app.html against it.
 const GTM_BLOCK =
 	/<!-- Google Tag Manager( \(noscript\))? -->[\s\S]*?<!-- End Google Tag Manager\1 -->/g
 
-export const isEmbedRoute = (routeId: string | null) => routeId?.startsWith('/embed/') ?? false
-
-export const stripGtm = (html: string) => html.replace(GTM_BLOCK, '')
-
 const handle: Handle = ({ event, resolve }) =>
 	paraglideMiddleware(event.request, ({ request: localizedRequest, locale }) => {
 		event.request = localizedRequest
-		const embed = isEmbedRoute(event.route.id)
+		// By path, not route id: an unknown /embed/ URL has no route but still renders in the iframe.
+		const embed = isEmbedPath(deLocalizeUrl(event.url).pathname)
 		return resolve(event, {
 			transformPageChunk: ({ html }) => {
 				const page = html.replace('%lang%', locale)
-				return embed ? stripGtm(page) : page
+				return embed ? page.replace(GTM_BLOCK, '') : page
 			}
 		})
 	})
