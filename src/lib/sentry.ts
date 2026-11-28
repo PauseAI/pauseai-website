@@ -11,3 +11,9 @@ export function redactLinkCredentials(href: string | undefined): string | undefi
 export function redactLinkCredentials(href: string | undefined): string | undefined {
 	return href && LINK_CREDENTIAL.test(href) ? `${href.split('?')[0]}?[redacted]` : href
 }
+
+// Sentry's ingest stores a location looked up from the connecting address as `user.geo`,
+// unless the event already carries one: an empty object leaves it empty.
+export function dropLocation(event: { user?: { geo?: object } }) {
+	event.user = { ...event.user, geo: {} }
+}
